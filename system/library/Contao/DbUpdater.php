@@ -277,6 +277,9 @@ class DbUpdater extends \Controller
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
 		);
 
+		// Create the DCA extracts (will also create the DCA cache)
+		\DcaExtractor::createAllExtracts();
+
 		// Other version 3.0 updates
 		$this->Database->query("ALTER TABLE `tl_module` ADD `numberOfItems` smallint(5) unsigned NOT NULL default '0'");
 		$this->Database->query("UPDATE `tl_module` SET `numberOfItems`=`rss_numberOfItems` WHERE `rss_numberOfItems`>0");
@@ -381,25 +384,29 @@ class DbUpdater extends \Controller
 	 */
 	public function updateFileTreeFields()
 	{
-		# FIXME: scan for fileTree fields
+		$arrFields = array();
+
+		// Find all fileTree fields
+		foreach (scan(TL_ROOT . '/system/cache/dca') as $strFile)
+		{
+			if ($strFile != '.htaccess')
+			{
+				$strTable = str_replace('.php', '', $strFile);
+				$this->loadDataContainer($strTable);
+
+				foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $strField=>$arrField)
+				{
+					if ($arrField['inputType'] == 'fileTree')
+					{
+						$key = $arrField['eval']['multiple'] ? 'multiple' : 'single';
+						$arrFields[$key][] = $strTable . '.' . $strField;
+					}
+				}
+			}
+		}
 
 		// Update the existing singleSRC entries
-		$arrSingleSRC = array
-		(
-			'tl_content.singleSRC',
-			'tl_form_field.uploadFolder',
-			'tl_form_field.singleSRC',
-			'tl_member.homeDir',
-			'tl_module.singleSRC',
-			'tl_module.reg_homeDir',
-			'tl_theme.templates',
-			'tl_theme.screenshot',
-			'tl_calendar_events.singleSRC',
-			'tl_faq.singleSRC',
-			'tl_news.singleSRC'
-		);
-
-		foreach ($arrSingleSRC as $val)
+		foreach ($arrFields['single'] as $val)
 		{
 			list($table, $field) = explode('.', $val);
 			$objRow = $this->Database->query("SELECT id, $field FROM $table WHERE $field!=''");
@@ -414,20 +421,7 @@ class DbUpdater extends \Controller
 		}
 
 		// Update the existing multiSRC entries
-		$arrMultiSRC = array
-		(
-			'tl_content.multiSRC',
-			'tl_module.multiSRC',
-			'tl_theme.folders',
-			'tl_user.filemounts',
-			'tl_user_group.filemounts',
-			'tl_calendar_events.enclosure',
-			'tl_faq.enclosure',
-			'tl_news.enclosure',
-			'tl_newsletter.files'
-		);
-
-		foreach ($arrMultiSRC as $val)
+		foreach ($arrFields['multiple'] as $val)
 		{
 			list($table, $field) = explode('.', $val);
 			$objRow = $this->Database->query("SELECT id, $field FROM $table WHERE $field!=''");
