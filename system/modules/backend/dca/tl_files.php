@@ -38,6 +38,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Folder',
+		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
 			array('tl_files', 'checkPermission'),

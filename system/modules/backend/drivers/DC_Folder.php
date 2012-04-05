@@ -75,6 +75,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	protected $arrMessages = array();
 
+	/**
+	 * True if a new version has to be created
+	 * @param boolean
+	 */
+	protected $blnCreateNewVersion = false;
+
 
 	/**
 	 * Initialize the object
@@ -201,6 +207,10 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			case 'extension':
 				return $this->strExtension;
+				break;
+
+			case 'createNewVersion':
+				return $this->blnCreateNewVersion;
 				break;
 
 			default:
@@ -998,6 +1008,55 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->redirect('contao/main.php?act=error');
 		}
 
+		// Get the DB entry
+		$objFile = \FilesModel::findByPath($this->intId);
+		$this->objActiveRecord = $objFile;
+
+		$this->blnCreateNewVersion = false;
+
+		// Change version
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && $this->Input->post('FORM_SUBMIT') == 'tl_version' && $this->Input->post('version') != '')
+		{
+			$objData = $this->Database->prepare("SELECT * FROM tl_version WHERE fromTable=? AND pid=? AND version=?")
+									  ->limit(1)
+									  ->execute($this->strTable, $objFile->id, $this->Input->post('version'));
+
+			if ($objData->numRows)
+			{
+				$data = deserialize($objData->data);
+
+				if (is_array($data))
+				{
+					$this->Database->prepare("UPDATE " . $objData->fromTable . " %s WHERE id=?")
+								   ->set($data)
+								   ->execute($objFile->id);
+
+					$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=?")
+								   ->execute($objFile->id);
+
+					$this->Database->prepare("UPDATE tl_version SET active=1 WHERE pid=? AND version=?")
+								   ->execute($objFile->id, $this->Input->post('version'));
+
+					$this->log('Version '.$this->Input->post('version').' of record "'.$this->strTable.'.id='.$objFile->id.'" has been restored', 'DC_Table edit()', TL_GENERAL);
+
+					// Trigger the onrestore_callback
+					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback']))
+					{
+						foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback'] as $callback)
+						{
+							if (is_array($callback))
+							{
+								$this->import($callback[0]);
+								$this->$callback[0]->$callback[1]($objFile->id, $this->strTable, $data, $this->Input->post('version'));
+							}
+						}
+					}
+				}
+			}
+
+			$this->reload();
+		}
+
 		// Build an array from boxes and rows (do not show excluded fields)
 		$this->strPalette = $this->getPalette();
 		$boxes = trimsplit(';', $this->strPalette);
@@ -1027,12 +1086,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Render boxes
 			$class = 'tl_tbox';
 			$blnIsFirst = true;
-
-			# FIXME: add versioning
-
-			// Get the DB entry
-			$objFile = \FilesModel::findByPath($this->intId);
-			$this->objActiveRecord = $objFile;
 
 			foreach ($boxes as $v)
 			{
@@ -1110,6 +1163,42 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 		}
 
+		$version = '';
+
+		// Check versions
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
+		{
+			$objVersion = $this->Database->prepare("SELECT tstamp, version, username, active FROM tl_version WHERE fromTable=? AND pid=? ORDER BY version DESC")
+									     ->execute($this->strTable, $objFile->id);
+
+			if ($objVersion->numRows > 1)
+			{
+				$versions = '';
+
+				while ($objVersion->next())
+				{
+					$versions .= '
+  <option value="'.$objVersion->version.'"'.($objVersion->active ? ' selected="selected"' : '').'>'.$GLOBALS['TL_LANG']['MSC']['version'].' '.$objVersion->version.' ('.$this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objVersion->tstamp).') '.$objVersion->username.'</option>';
+				}
+
+				$version = '
+<div class="tl_version_panel">
+
+<form action="'.ampersand($this->Environment->request, true).'" id="tl_version" class="tl_form" method="post">
+<div class="tl_formbody">
+<input type="hidden" name="FORM_SUBMIT" value="tl_version">
+<input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
+<select name="version" class="tl_select">'.$versions.'
+</select> 
+<input type="submit" name="showVersion" id="showVersion" class="tl_submit" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['restore']).'">
+</div>
+</form>
+
+</div>
+';
+			}
+		}
+
 		// Add some buttons and end the form
 		$return .= '
 </div>
@@ -1125,7 +1214,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 </form>';
 
 		// Begin the form (-> DO NOT CHANGE THIS ORDER -> this way the onsubmit attribute of the form can be changed by a field)
-		$return = '
+		$return = $version . '
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
@@ -1141,7 +1230,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Reload the page to prevent _POST variables from being sent twice
 		if ($this->Input->post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
 		{
-			// Call onsubmit_callback
+			// Trigger the onsubmit_callback
 			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback']))
 			{
 				foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback'] as $callback)
@@ -1151,7 +1240,29 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				}
 			}
 
-			// Reload
+			// Save the current version
+			if ($this->blnCreateNewVersion && $this->Input->post('SUBMIT_TYPE') != 'auto')
+			{
+				$this->createNewVersion($this->strTable, $objFile->id);
+
+				// Call the onversion_callback
+				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($this->strTable, $objFile->id, $this);
+					}
+				}
+
+				$this->log('A new version of record "'.$this->strTable.'.id='.$objFile->id.'" has been created', 'DC_Table edit()', TL_GENERAL);
+			}
+
+			// Set the current timestamp (-> DO NOT CHANGE THE ORDER version - timestamp)
+			$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
+						   ->execute(time(), $objFile->id);
+
+			// Redirect
 			if ($this->Input->post('saveNclose'))
 			{
 				$this->resetMessages();
@@ -1215,18 +1326,19 @@ window.addEvent(\'domready\', function() {
 			{
 				$this->intId = md5($id);
 				$this->strPalette = trimsplit('[;,]', $this->getPalette());
+				$this->blnCreateNewVersion = false;
+
+				// Get the DB entry
+				$objFile = \FilesModel::findByPath($id);
+				$this->objActiveRecord = $objFile;
+
+				$this->createInitialVersion($this->strTable, $objFile->id);
 
 				$return .= '
 <div class="'.$class.'">';
 
 				$class = 'tl_box';
 				$formFields = array();
-
-				# FIXME: add versioning
-
-				// Get the DB entry
-				$objFile = \FilesModel::findByPath($id);
-				$this->objActiveRecord = $objFile;
 
 				foreach ($this->strPalette as $v)
 				{
@@ -1283,6 +1395,42 @@ window.addEvent(\'domready\', function() {
 				$return .= '
   <input type="hidden" name="FORM_FIELDS_'.$this->intId.'[]" value="'.specialchars(implode(',', $formFields)).'">
 </div>';
+
+				// Save record
+				if ($this->Input->post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
+				{
+					// Call onsubmit_callback
+					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback']))
+					{
+						foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback'] as $callback)
+						{
+							$this->import($callback[0]);
+							$this->$callback[0]->$callback[1]($this);
+						}
+					}
+
+					// Create a new version
+					if ($this->blnCreateNewVersion && $this->Input->post('SUBMIT_TYPE') != 'auto')
+					{
+						$this->createNewVersion($this->strTable, $objFile->id);
+
+						// Call the onversion_callback
+						if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
+						{
+							foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
+							{
+								$this->import($callback[0]);
+								$this->$callback[0]->$callback[1]($this->strTable, $objFile->id, $this);
+							}
+						}
+
+						$this->log('A new version of record "'.$this->strTable.'.id='.$objFile->id.'" has been created', 'DC_Table editAll()', TL_GENERAL);
+					}
+
+					// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
+					$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
+								   ->execute(time(), $objFile->id);
+				}
 			}
 
 			// Add the form
@@ -1795,6 +1943,11 @@ window.addEvent(\'domready\', function() {
 
 				$this->objActiveRecord->{$this->strField} = $varValue;
 				$this->objActiveRecord->save();
+
+				if (!$arrData['eval']['submitOnChange'])
+				{
+					$this->blnCreateNewVersion = true;
+				}
 
 				$this->varValue = deserialize($varValue);
 			}

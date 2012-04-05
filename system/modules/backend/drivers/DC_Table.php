@@ -1600,7 +1600,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		$this->blnCreateNewVersion = false;
 
 		// Change version
-		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && $this->Input->post('FORM_SUBMIT') == 'tl_version' && strlen($this->Input->post('version')))
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && $this->Input->post('FORM_SUBMIT') == 'tl_version' && $this->Input->post('version') != '')
 		{
 			$objData = $this->Database->prepare("SELECT * FROM tl_version WHERE fromTable=? AND pid=? AND version=?")
 									  ->limit(1)
