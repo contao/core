@@ -443,6 +443,33 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$objFile->path = $destination;
 		$objFile->save();
 
+		// Update all child records
+		if ($objFile->type == 'folder')
+		{
+			$objFiles = \FilesCollection::findMultipleByBasepath($this->intId.'/');
+
+			if ($objFiles !== null)
+			{
+				while ($objFiles->next())
+				{
+					$objFiles->path = preg_replace('@^'.$this->intId.'/@', $destination.'/', $objFiles->path);
+					$objFiles->save();
+				}
+			}
+		}
+
+		// Update the MD5 hash of the parent folders
+		foreach (array(dirname($this->intId), dirname($destination)) as $strPath)
+		{
+			if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
+			{
+				$objModel = \FilesModel::findByPath($strPath);
+				$objFolder = new \Folder($objModel->path);
+				$objModel->hash = $objFolder->hash;
+				$objModel->save();
+			}
+		}
+
 		// Add a log entry
 		$this->log('File or folder "'.$this->intId.'" has been moved to "'.$destination.'"', 'DC_Folder cut()', TL_FILES);
 
@@ -628,6 +655,17 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$objNewFile->save();
 		}
 
+		$strPath = dirname($destination);
+
+		// Update the MD5 hash of the parent folder
+		if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
+		{
+			$objModel = \FilesModel::findByPath($strPath);
+			$objFolder = new \Folder($objModel->path);
+			$objModel->hash = $objFolder->hash;
+			$objModel->save();
+		}
+
 		// Do not reload on recursive calls
 		if (!$noReload)
 		{
@@ -749,6 +787,17 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$objFile->delete();
 		}
 
+		$strPath = dirname($source);
+
+		// Update the MD5 hash of the parent folder
+		if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
+		{
+			$objModel = \FilesModel::findByPath($strPath);
+			$objFolder = new \Folder($objModel->path);
+			$objModel->hash = $objFolder->hash;
+			$objModel->save();
+		}
+
 		// Do not reload on recursive calls
 		if (!$noReload)
 		{
@@ -848,8 +897,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 			else
 			{
-				$objFolder = \FilesModel::findByPath($strFolder);
-				$pid = $objFolder->id;
+				$objModel = \FilesModel::findByPath($strFolder);
+				$pid = $objModel->id;
 			}
 
 			// Generate the DB entries
@@ -873,6 +922,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]($arrUploaded);
 				}
+			}
+
+			// Update the hash of the target folder
+			if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+			{
+				$objModel = \FilesModel::findByPath($strFolder);
+				$objFolder = new \Folder($objModel->path);
+				$objModel->hash = $objFolder->hash;
+				$objModel->save();
 			}
 
 			// Redirect or reload
@@ -969,6 +1027,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Render boxes
 			$class = 'tl_tbox';
 			$blnIsFirst = true;
+
+			# FIXME: add versioning
 
 			// Get the DB entry
 			$objFile = \FilesModel::findByPath($this->intId);
@@ -1162,6 +1222,12 @@ window.addEvent(\'domready\', function() {
 				$class = 'tl_box';
 				$formFields = array();
 
+				# FIXME: add versioning
+
+				// Get the DB entry
+				$objFile = \FilesModel::findByPath($id);
+				$this->objActiveRecord = $objFile;
+
 				foreach ($this->strPalette as $v)
 				{
 					// Check whether field is excluded
@@ -1179,17 +1245,24 @@ window.addEvent(\'domready\', function() {
 					$this->strInputName = $v.'_'.$this->intId;
 					$formFields[] = $v.'_'.$this->intId;
 
-					// Load current value
-					$pathinfo = pathinfo(urldecode($id));
-
-					$this->strPath = $pathinfo['dirname'];
-					$this->strExtension = ($pathinfo['extension'] != '') ? '.'.$pathinfo['extension'] : '';
-					$this->varValue = basename($pathinfo['basename'], $this->strExtension);
-
-					// Fix Unix system files like .htaccess
-					if (strncmp($this->varValue, '.', 1) === 0)
+					// Load the current value
+					if ($v == 'name')
 					{
-						$this->strExtension = '';
+						$pathinfo = pathinfo(urldecode($id));
+
+						$this->strPath = $pathinfo['dirname'];
+						$this->strExtension = ($pathinfo['extension'] != '') ? '.'.$pathinfo['extension'] : '';
+						$this->varValue = basename($pathinfo['basename'], $this->strExtension);
+
+						// Fix Unix system files like .htaccess
+						if (strncmp($this->varValue, '.', 1) === 0)
+						{
+							$this->strExtension = '';
+						}
+					}
+					else
+					{
+						$this->varValue = $objFile->$v;
 					}
 
 					// Call load_callback
@@ -1529,7 +1602,7 @@ window.addEvent(\'domready\', function() {
 
 		$arrData = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField];
 
-		// Files
+		// File names
 		if ($this->strField == 'name')
 		{
 			if (!file_exists(TL_ROOT . '/' . $this->strPath . '/' . $this->varValue . $this->strExtension) || !$this->isMounted($this->strPath . '/' . $this->varValue . $this->strExtension) || $this->varValue == $varValue)
@@ -1573,6 +1646,7 @@ window.addEvent(\'domready\', function() {
 				$objFile->type   = 'folder';
 				$objFile->path   = $this->strPath . '/' . $varValue;
 				$objFile->name   = $varValue;
+				$objFile->hash   = md5('');
 				$objFile->save();
 				$this->objActiveRecord = $objFile;
 
@@ -1589,10 +1663,36 @@ window.addEvent(\'domready\', function() {
 				$objFile->path = $this->strPath . '/' . $varValue . $this->strExtension;
 				$objFile->name = $varValue . $this->strExtension;
 				$objFile->save();
+
 				$this->objActiveRecord = $objFile;
 
 				// Add a log entry
 				$this->log('File or folder "'.$this->strPath.'/'.$this->varValue.$this->strExtension.'" has been renamed to "'.$this->strPath.'/'.$varValue.$this->strExtension.'"', 'DC_Folder save()', TL_FILES);
+			}
+
+			// Also update all child records
+			if ($objFile->type == 'folder')
+			{
+				$strPath = $this->strPath . '/' . $this->varValue . '/';
+				$objFiles = \FilesCollection::findMultipleByBasepath($strPath);
+
+				if ($objFiles !== null)
+				{
+					while ($objFiles->next())
+					{
+						$objFiles->path = preg_replace('@^'.$strPath.'@', $this->strPath.'/'.$varValue.'/', $objFiles->path);
+						$objFiles->save();
+					}
+				}
+			}
+
+			// Also update the MD5 hash of the parent folder
+			if ($objFile->pid > 0)
+			{
+				$objModel = \FilesModel::findByPk($objFile->pid);
+				$objFolder = new \Folder($objModel->path);
+				$objModel->hash = $objFolder->hash;
+				$objModel->save();
 			}
 
 			// Set the new value so the input field can show it

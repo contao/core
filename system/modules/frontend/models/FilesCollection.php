@@ -67,4 +67,16 @@ class FilesCollection extends \Model_Collection
 		$t = static::$strTable;
 		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, array('order'=>\Database::getInstance()->findInSet("$t.id", $arrIds)));
 	}
+
+
+	/**
+	 * Find multiple files with the same base path
+	 * @param array
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findMultipleByBasepath($strPath)
+	{
+		$t = static::$strTable;
+		return static::findBy(array("$t.path LIKE ?"), $strPath . '%');
+	}
 }
