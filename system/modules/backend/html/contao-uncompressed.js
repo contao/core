@@ -1568,6 +1568,61 @@ var Backend =
 	},
 
 	/**
+	 * Meta wizard
+	 * @param object
+	 * @param string
+	 */
+	metaWizard: function(el, ul) {
+		var opt = el.getParent('div').getElement('select');
+
+		if (opt.value == '') {
+			return; // No language given
+		}
+
+		var li = $(ul).getLast('li').clone();
+		var span = li.getElement('span');
+		var img = span.getElement('img');
+
+		// Update the language text
+		span.set('text', opt.options[opt.selectedIndex].text + ' ');
+		img.inject(span, 'bottom');
+
+		// Update the name, label and ID attributes
+		li.getElements('input').each(function(inp) {
+			inp.value = '';
+			inp.name = inp.name.replace(/\[[a-z]{2}\]/, '['+opt.value+']');
+			var lbl = inp.getPrevious('label');
+			var i = parseInt(lbl.get('for').replace(/ctrl_[^_]+_/, ''));
+			lbl.set('for', lbl.get('for').replace(i, i+1));
+			inp.id = lbl.get('for');
+		});
+
+		// Update the class name
+		li.className = (li.className == 'even') ? 'odd' : 'even';
+		li.inject($(ul), 'bottom');
+
+		// Disable the "add language" button
+		el.getParent('div').getElement('input[type="button"]').setProperty('disabled', true);
+
+		// Remove the option from the select menu and update chosen
+		opt.removeChild(opt.options[opt.selectedIndex]);
+		opt.fireEvent('liszt:updated');
+	},
+
+	/**
+	 * Toggle the "add language" button
+	 * @param object
+	 */
+	toggleAddLanguageButton: function(el) {
+		var inp = el.getParent('div').getElement('input[type="button"]');
+		if (el.value != '') {
+			inp.removeProperty('disabled');
+		} else {
+			inp.setProperty('disabled', true);
+		}
+	},
+
+	/**
 	 * Update the "edit module" links in the module wizard
 	 * @param object
 	 */
