@@ -990,8 +990,15 @@ label.tl_change_selected {
 .tl_metawizard_new .tl_select {
 	width:inherit;
 }
+.firefox .tl_metawizard_new .chzn-container {
+	top:1px;
+}
 .tl_metawizard_new .tl_submit {
 	margin-top:0;
+}
+.webkit .tl_metawizard_new .tl_submit {
+	padding-top:4px;
+	padding-bottom:4px;
 }
 
 /* Ajax box */
