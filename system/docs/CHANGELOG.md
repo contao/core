@@ -5,6 +5,9 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+Added a log rotate job to the Automator.
+
+### New
 Added a meta wizard to manage file meta information with a GUI.
 
 ### Improved

@@ -274,4 +274,40 @@ class Automator extends \Backend
 		// Add log entry
 		$this->log('Checked for Contao updates', 'Automator checkForUpdates()', TL_CRON);
 	}
+
+
+	/**
+	 * Rotate the log files
+	 * @return void
+	 */
+	public function rotateLogs()
+	{
+		$arrFiles = preg_grep('/\.log$/', scan(TL_ROOT . '/system/logs'));
+
+		foreach ($arrFiles as $strFile)
+		{
+			// Delete the oldest file
+			if (file_exists(TL_ROOT . '/system/logs/' . $strFile . '.9'))
+			{
+				$objFile = new \File('system/logs/' . $strFile . '.9');
+				$objFile->delete();
+			}
+
+			// Rotate the files (e.g. error.log.4 becomes error.log.5)
+			for ($i=8; $i>0; $i--)
+			{
+				$strGzName = 'system/logs/' . $strFile . '.' . $i;
+
+				if (file_exists(TL_ROOT . '/' . $strGzName))
+				{
+					$objFile = new \File($strGzName);
+					$objFile->renameTo('system/logs/' . $strFile . '.' . ($i+1));
+				}
+			}
+
+			// Add .1 to the latest file
+			$objFile = new \File('system/logs/' . $strFile);
+			$objFile->renameTo('system/logs/' . $strFile . '.1');
+		}
+	}
 }
