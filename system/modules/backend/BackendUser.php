@@ -377,9 +377,25 @@ class BackendUser extends \User
 		{
 			$this->pagemounts = array();
 		}
+		else
+		{
+			$this->filemounts = array_filter($this->filemounts);
+		}
+
 		if (!is_array($this->filemounts))
 		{
 			$this->filemounts = array();
+		}
+		else
+		{	
+			$this->filemounts = array_filter($this->filemounts);
+		}
+
+		// Convert the numeric file mounts into paths
+		if (!$this->isAdmin)
+		{
+			$objFiles = \FilesCollection::findMultipleByIds($this->filemounts);
+			$this->filemounts = $objFiles->fetchEach('path');
 		}
 	}
 

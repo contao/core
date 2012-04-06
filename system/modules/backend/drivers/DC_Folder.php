@@ -290,7 +290,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			for ($i=0; $i<count($this->arrFilemounts); $i++)
 			{
-				if (is_dir(TL_ROOT . '/' . $this->arrFilemounts[$i]))
+				if ($this->arrFilemounts[$i] != '' && is_dir(TL_ROOT . '/' . $this->arrFilemounts[$i]))
 				{
 					$return .= $this->generateTree(TL_ROOT . '/' . $this->arrFilemounts[$i], 0, true, false, ($blnClipboard ? $arrClipboard : false));
 				}
