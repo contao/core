@@ -39,7 +39,14 @@ $GLOBALS['TL_DCA']['tl_extension'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'enableVersioning'            => true
+		'enableVersioning'            => true,
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary'
+			)
+		)
 	),
 
 	// List
@@ -121,12 +128,21 @@ $GLOBALS['TL_DCA']['tl_extension'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'title' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['title'],
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'folder' => array
 		(
@@ -137,94 +153,109 @@ $GLOBALS['TL_DCA']['tl_extension'] = array
 			'save_callback' => array
 			(
 				array('tl_extension', 'checkFolder')
-			)
+			),
+			'sql'                     => "varchar(48) NOT NULL default ''"
 		),
 		'author' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['author'],
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'copyright' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['copyright'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'package' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['package'],
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'license' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['license'],
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'addBeMod' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['addBeMod'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'beClasses' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['beClasses'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255)
+			'eval'                    => array('maxlength'=>255),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'beTables' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['beTables'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'beTemplates' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['beTemplates'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'addFeMod' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['addFeMod'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'feClasses' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['feClasses'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255)
+			'eval'                    => array('maxlength'=>255),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'feTables' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['feTables'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'feTemplates' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['feTemplates'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'addLanguage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['addLanguage'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'languages' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['languages'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255)
+			'eval'                    => array('maxlength'=>255),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		)
 	)
 );
