@@ -1,0 +1,88 @@
+/**
+ * Contao Open Source CMS
+ * Copyright (C) 2005-2012 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 3 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
+ *
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    System
+ * @license    LGPL
+ */
+
+/* Body */
+body {
+	background:#fff;
+	padding:12px;
+}
+
+/* Elements */
+h2 {
+	margin:0;
+	padding:3px 6px 4px;
+	font-size:11px;
+	background:#eee;
+	border-bottom:1px solid #ddd;
+}
+.formbody {
+	margin:12px 0 18px;
+	text-align:right;
+}
+.formbody .tl_submit {
+	margin-top:0;
+}
+.webkit .formbody .tl_submit {
+	padding-top:4px;
+	padding-bottom:4px;
+	margin-top:1px;
+}
+
+/* Diff */
+#diff .change {
+	margin-bottom:13px;
+	border:1px solid #ddd;
+	font-family:Monaco, monospace;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+}
+#diff .replace.left,#diff .delete.left {
+	background: #fdd;
+}
+#diff .replace.right,#diff .insert.right {
+	background: #dfd;
+}
+#diff .replace ins {
+	color:#060;
+	background: #bfb;
+}
+#diff .replace del {
+	color:#a00;
+	background: #fbb;
+}
+#diff ins,#diff del {
+	text-decoration: none;
+}
+#diff dl {
+	margin:0;
+	padding:0;
+}
+#diff dt,#diff dd {
+	margin:0;
+	padding:2px 6px 1px;
+}

@@ -475,3 +475,4 @@ $GLOBALS['TL_LANG']['MSC']['changeSelection']   = 'Auswahl ändern';
 $GLOBALS['TL_LANG']['MSC']['currentlySelected'] = 'Ausgewählt';
 $GLOBALS['TL_LANG']['MSC']['selectNode']        = 'Nur diesen Knoten anzeigen';
 $GLOBALS['TL_LANG']['MSC']['selectAllNodes']    = 'Alle Knoten anzeigen';
+$GLOBALS['TL_LANG']['MSC']['showDifferences']   = 'Unterschiede anzeigen';

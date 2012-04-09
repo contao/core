@@ -5,6 +5,9 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+Added a diff view to examine the changes between two versions of a record.
+
+### New
 Added a log rotate job to the Automator.
 
 ### New

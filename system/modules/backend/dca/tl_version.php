@@ -42,7 +42,8 @@ $GLOBALS['TL_DCA']['tl_version'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index'
+				'pid' => 'index',
+				'fromTable' => 'index'
 			)
 		)
 	),

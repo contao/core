@@ -1190,7 +1190,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
 <select name="version" class="tl_select">'.$versions.'
 </select> 
-<input type="submit" name="showVersion" id="showVersion" class="tl_submit" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['restore']).'">
+<input type="submit" name="showVersion" id="showVersion" class="tl_submit" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['restore']).'"> 
+<a href="contao/diff.php?table='.$this->strTable.'&amp;pid='.$objFile->id.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']).'" onclick="Backend.openModalIframe({\'width\':860,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']).'\',\'url\':this.href});return false">'.$this->generateImage('diff.gif').'</a>
 </div>
 </form>
 

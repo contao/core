@@ -88,6 +88,7 @@ TemplateLoader::addFiles(array
 (
 	'be_changelog'     => 'system/modules/backend/templates',
 	'be_confirm'       => 'system/modules/backend/templates',
+	'be_diff'          => 'system/modules/backend/templates',
 	'be_error'         => 'system/modules/backend/templates',
 	'be_files'         => 'system/modules/backend/templates',
 	'be_help'          => 'system/modules/backend/templates',

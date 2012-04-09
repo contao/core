@@ -474,3 +474,4 @@ $GLOBALS['TL_LANG']['MSC']['changeSelection']   = 'Change selection';
 $GLOBALS['TL_LANG']['MSC']['currentlySelected'] = 'Selected';
 $GLOBALS['TL_LANG']['MSC']['selectNode']        = 'Only show this node';
 $GLOBALS['TL_LANG']['MSC']['selectAllNodes']    = 'Show all nodes';
+$GLOBALS['TL_LANG']['MSC']['showDifferences']   = 'Show differences';
