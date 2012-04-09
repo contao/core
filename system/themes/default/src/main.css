@@ -770,7 +770,7 @@ label.tl_change_selected {
 	margin:18px;
 }
 #tl_soverview table {
-	width:690px;
+	width:705px;
 }
 #tl_soverview .headline {
 	padding-bottom:6px;
@@ -795,43 +795,43 @@ label.tl_change_selected {
 #tl_messages,#tl_shortcuts {
 	margin-bottom:24px;
 }
-#tl_messages h2,#tl_shortcuts h2 {
+#tl_messages h2,#tl_shortcuts h2,#tl_versions h2 {
 	margin:18px 0 6px;
 	padding:2px 6px 3px;
 	border:1px solid #e9e9e9;
 	border-width:1px 0;
 	background:#f6f6f6;
 }
-#tl_shortcuts p {
+#tl_shortcuts p,#tl_versions p {
 	padding-left:6px;
 	padding-right:6px;
 }
 #tl_shortcuts p a {
 	text-decoration:underline;
 }
-#tl_moverview {
+#tl_versions {
 	margin-top:24px;
 }
-#tl_moverview h2 {
-	margin:18px 0 0;
-	padding:2px 6px 3px;
-	border-top:1px solid #e9e9e9;
+#tl_versions th {
 	background:#f6f6f6;
-}
-#tl_moverview .tl_module_desc {
-	padding:8px 6px;
+	padding:2px 3px 3px;
 	border-top:1px solid #e9e9e9;
-	background:#fff;
 }
-#tl_moverview .tl_module_desc h3 {
-	margin:0 0 1px;
-	padding:0;
+#tl_versions th,#tl_versions td {
+	border-bottom:1px solid #e9e9e9;
 }
-#tl_moverview p {
-	padding-left:20px;
+#tl_versions td {
+	padding:1px 3px;
 }
-#tl_moverview .tl_module_desc p {
-	margin-bottom:0;
+#tl_versions td img {
+	position:relative;
+	top:1px;
+}
+#tl_versions td:first-child {
+	white-space:nowrap;
+}
+#tl_versions td:last-child {
+	width:16px;
 }
 
 /* CHMOD table */

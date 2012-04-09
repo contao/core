@@ -134,6 +134,22 @@ abstract class Database_Result
 
 
 	/**
+	 * Check whether a variable exists
+	 * @param mixed
+	 * @return boolean
+	 */
+	public function __isset($strKey)
+	{
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
+		return isset($this->arrCache[$this->intIndex][$strKey]);
+	}
+
+
+	/**
 	 * Return a result parameter or a particular field of the current row
 	 *
 	 * Supported parameters:

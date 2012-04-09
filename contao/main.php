@@ -153,8 +153,32 @@ class Main extends Backend
 			}
 		}
 
+		$this->import('String');
+
+		$count = 0;
+		$arrVersions = array();
+
+		// Get the latest 30 versions
+		$objVersions = $this->Database->prepare("SELECT pid, tstamp, version, fromTable, username, description FROM tl_version WHERE version>1" . (!$this->User->isAdmin ? " AND userid=?" : "") . " ORDER BY tstamp DESC")
+									  ->limit(30)
+									  ->execute($this->User->id);
+
+		while ($objVersions->next())
+		{
+			$arrRow = $objVersions->row();
+
+			// Add some parameters
+			$arrRow['class'] = ($count++%2 == 0) ? 'even' : 'odd';
+			$arrRow['href'] = 'contao/diff.php?table='.$objVersions->fromTable.'&amp;pid='.$objVersions->pid.'&amp;from='.($objVersions->version-1).'&amp;to='.$objVersions->version;
+			$arrRow['link'] = '<a href="contao/diff.php?table='.$objVersions->fromTable.'&amp;pid='.$objVersions->pid.'&amp;from='.($objVersions->version-1).'&amp;to='.$objVersions->version.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']).'" onclick="Backend.openModalIframe({\'width\':860,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']).'\',\'url\':this.href});return false">'.$this->generateImage('diff.gif').'</a>';
+			$arrRow['date'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objVersions->tstamp);
+			$arrRow['description'] = $this->String->substr($arrRow['description'], 32);
+
+			$arrVersions[] = $arrRow;
+		}
+
 		$objTemplate->messages = $this->getMessages(false, true) . "\n" . implode("\n", $arrMessages);
-		$objTemplate->arrGroups = $this->User->navigation(true);
+		$objTemplate->versions = $arrVersions;
  		$objTemplate->welcome = sprintf($GLOBALS['TL_LANG']['MSC']['welcomeTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
 		$objTemplate->systemMessages = $GLOBALS['TL_LANG']['MSC']['systemMessages'];
 		$objTemplate->shortcuts = $GLOBALS['TL_LANG']['MSC']['shortcuts'][0];

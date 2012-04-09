@@ -2864,11 +2864,26 @@ abstract class Controller extends \System
 			$intVersion = $objVersion->version + 1;
 		}
 
+		$strDescription = '';
+
+		if (isset($objRecord->title))
+		{
+			$strDescription = $objRecord->title;
+		}
+		elseif (isset($objRecord->headline))
+		{
+			$strDescription = $objRecord->headline;
+		}
+		elseif (isset($objRecord->name))
+		{
+			$strDescription = $objRecord->name;
+		}
+
 		$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=? AND fromTable=?")
 					   ->execute($intId, $strTable);
 
-		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, active, data) VALUES (?, ?, ?, ?, ?, 1, ?)")
-					   ->execute($intId, time(), $intVersion, $strTable, $this->User->username, serialize($objRecord->row()));
+		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?)")
+					   ->execute($intId, time(), $intVersion, $strTable, $this->User->username, $this->User->id, $strDescription, serialize($objRecord->row()));
 	}
 	
 

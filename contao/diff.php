@@ -86,8 +86,8 @@ class DiffController extends Backend
 		}
 		else
 		{
-			$objVersions = $this->Database->prepare("SELECT * FROM tl_version WHERE pid=? AND fromTable=?" . (!$this->User->isAdmin ? " AND username=?" : "") . " ORDER BY version DESC")
-										  ->execute($this->Input->get('pid'), $this->Input->get('table'), $this->User->username);
+			$objVersions = $this->Database->prepare("SELECT * FROM tl_version WHERE pid=? AND fromTable=?" . (!$this->User->isAdmin ? " AND userid=?" : "") . " ORDER BY version DESC")
+										  ->execute($this->Input->get('pid'), $this->Input->get('table'), $this->User->id);
 
 			if ($objVersions->numRows < 1)
 			{
@@ -159,6 +159,23 @@ class DiffController extends Backend
 							$from[$k] = $this->implode($tmp);
 						}
 						unset($tmp);
+
+						// Convert date fields
+						if ($arrFields[$k]['eval']['rgxp'] == 'date')
+						{
+							$to[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $to[$k] ?: '');
+							$from[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $from[$k] ?: '');
+						}
+						elseif ($arrFields[$k]['eval']['rgxp'] == 'time')
+						{
+							$to[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $to[$k] ?: '');
+							$from[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $from[$k] ?: '');
+						}
+						elseif ($arrFields[$k]['eval']['rgxp'] == 'datim')
+						{
+							$to[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $to[$k] ?: '');
+							$from[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $from[$k] ?: '');
+						}
 
 						// Convert strings into arrays
 						if (!is_array($to[$k]))

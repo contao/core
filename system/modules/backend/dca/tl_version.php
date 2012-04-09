@@ -71,9 +71,17 @@ $GLOBALS['TL_DCA']['tl_version'] = array
 		(
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
+		'userid' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'username' => array
 		(
 			'sql'                     => "varchar(64) NOT NULL default ''"
+		),
+		'description' => array
+		(
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'active' => array
 		(
