@@ -423,7 +423,7 @@ class BackendUser extends \User
 
 		foreach ($GLOBALS['BE_MOD'] as $strGroupName=>$arrGroupModules)
 		{
-			if (!empty($arrGroupModules) && ($strGroupName == 'profile' || $this->hasAccess(array_keys($arrGroupModules), 'modules')))
+			if (!empty($arrGroupModules) && ($strGroupName == 'system' || $this->hasAccess(array_keys($arrGroupModules), 'modules')))
 			{
 				$arrModules[$strGroupName]['icon'] = 'modMinus.gif';
 				$arrModules[$strGroupName]['title'] = specialchars($GLOBALS['TL_LANG']['MSC']['collapseNode']);
@@ -436,33 +436,33 @@ class BackendUser extends \User
 					$arrModules[$strGroupName]['modules'] = false;
 					$arrModules[$strGroupName]['icon'] = 'modPlus.gif';
 					$arrModules[$strGroupName]['title'] = specialchars($GLOBALS['TL_LANG']['MSC']['expandNode']);
-
-					continue;
 				}
-
-				foreach ($arrGroupModules as $strModuleName=>$arrModuleConfig)
+				else
 				{
-					// Exclude inactive modules
-					if ($blnCheckInactiveModules && in_array($strModuleName, $arrInactiveModules))
+					foreach ($arrGroupModules as $strModuleName=>$arrModuleConfig)
 					{
-						continue;
-					}
-
-					// Check access
-					if ($strGroupName == 'profile' || $this->hasAccess($strModuleName, 'modules'))
-					{
-						$arrModules[$strGroupName]['modules'][$strModuleName] = $arrModuleConfig;
-						$arrModules[$strGroupName]['modules'][$strModuleName]['title'] = specialchars($GLOBALS['TL_LANG']['MOD'][$strModuleName][1]);
-						$arrModules[$strGroupName]['modules'][$strModuleName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strModuleName]) ? $GLOBALS['TL_LANG']['MOD'][$strModuleName][0] : $GLOBALS['TL_LANG']['MOD'][$strModuleName]) != false) ? $label : $strModuleName;
-						$arrModules[$strGroupName]['modules'][$strModuleName]['icon'] = ($arrModuleConfig['icon'] != '') ? sprintf(' style="background-image:url(\'%s%s\')"', TL_SCRIPT_URL, $arrModuleConfig['icon']) : '';
-						$arrModules[$strGroupName]['modules'][$strModuleName]['class'] = 'navigation ' . $strModuleName;
-						$arrModules[$strGroupName]['modules'][$strModuleName]['href']  = $this->Environment->script . '?do=' . $strModuleName;
-
-						// Mark the active module and its group
-						if ($this->Input->get('do') == $strModuleName)
+						// Exclude inactive modules
+						if ($blnCheckInactiveModules && in_array($strModuleName, $arrInactiveModules))
 						{
-							$arrModules[$strGroupName]['class'] = ' trail';
-							$arrModules[$strGroupName]['modules'][$strModuleName]['class'] .= ' active';
+							continue;
+						}
+
+						// Check access
+						if ($strModuleName == 'undo' || $this->hasAccess($strModuleName, 'modules'))
+						{
+							$arrModules[$strGroupName]['modules'][$strModuleName] = $arrModuleConfig;
+							$arrModules[$strGroupName]['modules'][$strModuleName]['title'] = specialchars($GLOBALS['TL_LANG']['MOD'][$strModuleName][1]);
+							$arrModules[$strGroupName]['modules'][$strModuleName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strModuleName]) ? $GLOBALS['TL_LANG']['MOD'][$strModuleName][0] : $GLOBALS['TL_LANG']['MOD'][$strModuleName]) != false) ? $label : $strModuleName;
+							$arrModules[$strGroupName]['modules'][$strModuleName]['icon'] = ($arrModuleConfig['icon'] != '') ? sprintf(' style="background-image:url(\'%s%s\')"', TL_SCRIPT_URL, $arrModuleConfig['icon']) : '';
+							$arrModules[$strGroupName]['modules'][$strModuleName]['class'] = 'navigation ' . $strModuleName;
+							$arrModules[$strGroupName]['modules'][$strModuleName]['href']  = $this->Environment->script . '?do=' . $strModuleName;
+
+							// Mark the active module and its group
+							if ($this->Input->get('do') == $strModuleName)
+							{
+								$arrModules[$strGroupName]['class'] = ' trail';
+								$arrModules[$strGroupName]['modules'][$strModuleName]['class'] .= ' active';
+							}
 						}
 					}
 				}

@@ -108,20 +108,10 @@ $GLOBALS['BE_MOD'] = array
 		'maintenance' => array
 		(
 			'callback' => 'ModuleMaintenance'
-		)
-	),
-
-	// User modules
-	'profile' => array
-	(
+		),
 		'undo' => array
 		(
 			'tables' => array('tl_undo')
-		),
-		'login' => array
-		(
-			'tables' => array('tl_user'),
-			'callback' => 'ModuleUser'
 		)
 	)
 );

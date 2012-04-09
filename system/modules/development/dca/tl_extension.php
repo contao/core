@@ -1,0 +1,260 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * Copyright (C) 2005-2011 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 3 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
+ *
+ * PHP version 5
+ * @copyright  Leo Feyer 2005-2011
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Development
+ * @license    LGPL
+ * @filesource
+ */
+
+
+/**
+ * Table tl_extension
+ */
+$GLOBALS['TL_DCA']['tl_extension'] = array
+(
+
+	// Config
+	'config' => array
+	(
+		'dataContainer'               => 'Table',
+		'enableVersioning'            => true
+	),
+
+	// List
+	'list' => array
+	(
+		'sorting' => array
+		(
+			'mode'                    => 2,
+			'fields'                  => array('title'),
+			'flag'                    => 1,
+			'panelLayout'             => 'search,limit'
+		),
+		'label' => array
+		(
+			'fields'                  => array('title', 'folder'),
+			'format'                  => '%s <span style="color:#b3b3b3; padding-left:3px;">[%s]</span>'
+		),
+		'global_operations' => array
+		(
+			'all' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
+				'href'                => 'act=select',
+				'class'               => 'header_edit_all',
+				'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
+			)
+		),
+		'operations' => array
+		(
+			'edit' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_extension']['edit'],
+				'href'                => 'act=edit',
+				'icon'                => 'edit.gif'
+			),
+			'copy' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_extension']['copy'],
+				'href'                => 'act=copy',
+				'icon'                => 'copy.gif'
+			),
+			'delete' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_extension']['delete'],
+				'href'                => 'act=delete',
+				'icon'                => 'delete.gif',
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+			),
+			'show' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_extension']['show'],
+				'href'                => 'act=show',
+				'icon'                => 'show.gif'
+			),
+			'create' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_extension']['create'],
+				'href'                => 'key=create',
+				'icon'                => 'system/modules/development/html/apply.gif'
+			)
+		)
+	),
+
+	// Palettes
+	'palettes' => array
+	(
+		'__selector__'                => array('addBeMod', 'addFeMod', 'addLanguage'),
+		'default'                     => '{title_legend},title,folder;{license_legend},author,copyright,package,license;{backend_legend},addBeMod;{frontend_legend},addFeMod;{language_legend},addLanguage'
+	),
+
+	// Subpalettes
+	'subpalettes' => array
+	(
+		'addBeMod'                    => 'beClasses,beTables,beTemplates',
+		'addFeMod'                    => 'feClasses,feTables,feTemplates',
+		'addLanguage'                 => 'languages',
+	),
+
+	// Fields
+	'fields' => array
+	(
+		'title' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['title'],
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'tl_class'=>'w50')
+		),
+		'folder' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['folder'],
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>48, 'decodeEntities'=>true, 'nospace'=>true, 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_extension', 'checkFolder')
+			)
+		),
+		'author' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['author'],
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+		),
+		'copyright' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['copyright'],
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+		),
+		'package' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['package'],
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true, 'tl_class'=>'w50')
+		),
+		'license' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['license'],
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true, 'tl_class'=>'w50')
+		),
+		'addBeMod' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['addBeMod'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true)
+		),
+		'beClasses' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['beClasses'],
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255)
+		),
+		'beTables' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['beTables'],
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+		),
+		'beTemplates' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['beTemplates'],
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+		),
+		'addFeMod' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['addFeMod'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true)
+		),
+		'feClasses' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['feClasses'],
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255)
+		),
+		'feTables' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['feTables'],
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+		),
+		'feTemplates' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['feTemplates'],
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+		),
+		'addLanguage' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['addLanguage'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true)
+		),
+		'languages' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_extension']['languages'],
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255)
+		)
+	)
+);
+
+
+/**
+ * Class tl_extension
+ *
+ * Provide miscellaneous methods that are used by the data configuration array.
+ * @copyright  Leo Feyer 2005-2011
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Controller
+ */
+class tl_extension extends Backend
+{
+
+	/**
+	 * Check whether a module exists already
+	 * @param string
+	 * @param \DataContainer
+	 * @return string
+	 * @throws \Exception
+	 */
+	public function checkFolder($strFolder, \DataContainer $dc)
+	{
+		if ($strFolder != $dc->activeRecord->folder && is_dir(TL_ROOT . '/system/modules/' . $strFolder))
+		{
+			throw new \Exception(sprintf($GLOBALS['TL_LANG']['tl_extension']['unique'], $strFolder));
+		}
+
+		return $strFolder;
+	}
+}

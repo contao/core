@@ -1,8 +1,8 @@
-<?php
+<?php echo '<?php'; ?>
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2011 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -10,46 +10,41 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5.3
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Repository
- * @license    LGPL
+ * @copyright  <?php echo $this->copyright; ?> 
+ * @author     <?php echo $this->author; ?> 
+ * @package    <?php echo $this->package; ?> 
+ * @license    <?php echo $this->license; ?> 
  */
 
 
 /**
- * Contao Repository :: Configuration file
- *
- * @copyright  Peter Koch 2008-2010
- * @author     Peter Koch, IBK Software AG
- * @license    See accompaning file LICENSE.txt
+ * Fields
  */
+$GLOBALS['TL_LANG']['<?php echo $this->table; ?>'][''] = array('', '');
 
 
 /**
- * Back end modules
+ * Reference
  */
-$GLOBALS['BE_MOD']['system']['repository_catalog'] = array
-(
-	'callback'   => 'RepositoryCatalog',
-	'icon'       => RepositoryBackendTheme::image('catalog16'),
-	'stylesheet' => RepositoryBackendTheme::file('backend.css')
-);
+$GLOBALS['TL_LANG']['<?php echo $this->table; ?>'][''] = '';
 
-$GLOBALS['BE_MOD']['system']['repository_manager'] = array
-(
-	'callback'   => 'RepositoryManager',
-	'icon'       => RepositoryBackendTheme::image('install16'),
-	'stylesheet' => RepositoryBackendTheme::file('backend.css')
-);
+
+/**
+ * Buttons
+ */
+$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['new']    = array('', '');
+$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['edit']   = array('', '');
+$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['copy']   = array('', '');
+$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['delete'] = array('', '');
+$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['show']   = array('', '');

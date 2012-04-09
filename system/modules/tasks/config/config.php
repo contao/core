@@ -31,7 +31,7 @@
 /**
  * Back end modules
  */
-$GLOBALS['BE_MOD']['profile']['tasks'] = array
+$GLOBALS['BE_MOD']['system']['tasks'] = array
 (
 	'callback' => 'ModuleTasks',
 	'icon'     => 'system/modules/tasks/html/icon.gif',

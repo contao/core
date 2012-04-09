@@ -51,6 +51,5 @@ $GLOBALS['TL_LANG']['MOD']['files']       = array('File manager', 'Manage files 
 $GLOBALS['TL_LANG']['MOD']['log']         = array('System log', 'Browse the system log and analyze the activity on the website');
 $GLOBALS['TL_LANG']['MOD']['settings']    = array('Settings', 'Check and optimize the Contao configuration');
 $GLOBALS['TL_LANG']['MOD']['maintenance'] = array('Maintenance', 'Maintain or update Contao');
-$GLOBALS['TL_LANG']['MOD']['profile']     = 'User functions';
-$GLOBALS['TL_LANG']['MOD']['undo']        = array('Undo', 'Restore deleted records');
+$GLOBALS['TL_LANG']['MOD']['undo']        = array('Restore', 'Restore deleted records');
 $GLOBALS['TL_LANG']['MOD']['login']       = array('Personal data', 'Change your personal data or set a new password');

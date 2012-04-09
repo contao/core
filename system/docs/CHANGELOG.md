@@ -5,6 +5,10 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+Re-added the developer's module to the core, since it has to be adjusted upon
+almost every update. Will move the task center to the ER in exchange.
+
+### New
 Added a diff view to examine the changes between two versions of a record.
 
 ### New

@@ -137,7 +137,7 @@ abstract class Backend extends \Controller
 		$this->import('BackendUser', 'User');
 
 		// Check whether the current user has access to the current module
-		if (!isset($GLOBALS['BE_MOD']['profile'][$module]) && !$this->User->isAdmin && !$this->User->hasAccess($module, 'modules'))
+		if ($module != 'undo' && !$this->User->isAdmin && !$this->User->hasAccess($module, 'modules'))
 		{
 			$this->log('Back end module "' . $module . '" was not allowed for user "' . $this->User->username . '"', 'Backend getBackendModule()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
@@ -196,7 +196,7 @@ abstract class Backend extends \Controller
 		// Redirect if the current table does not belong to the current module
 		if ($strTable != '')
 		{
-			if (!in_array($strTable, (array) $arrModule['tables']))
+			if (!in_array($strTable, (array)$arrModule['tables']))
 			{
 				$this->log('Table "' . $strTable . '" is not allowed in module "' . $module . '"', 'Backend getBackendModule()', TL_ERROR);
 				$this->redirect('contao/main.php?act=error');
