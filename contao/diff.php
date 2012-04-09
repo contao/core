@@ -86,8 +86,8 @@ class DiffController extends Backend
 		}
 		else
 		{
-			$objVersions = $this->Database->prepare("SELECT * FROM tl_version WHERE pid=? AND fromTable=? ORDER BY version DESC")
-										  ->execute($this->Input->get('pid'), $this->Input->get('table'));
+			$objVersions = $this->Database->prepare("SELECT * FROM tl_version WHERE pid=? AND fromTable=?" . (!$this->User->isAdmin ? " AND username=?" : "") . " ORDER BY version DESC")
+										  ->execute($this->Input->get('pid'), $this->Input->get('table'), $this->User->username);
 
 			if ($objVersions->numRows < 1)
 			{
