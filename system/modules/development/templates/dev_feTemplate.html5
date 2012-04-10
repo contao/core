@@ -1,0 +1,10 @@
+
+<div class="{{ echo $this->class; }} block"{{ echo $this->cssID; }}{{ if ($this->style): }} style="{{ echo $this->style; }}"{{ endif; }}>
+{{ if ($this->headline): }}
+
+<{{ echo $this->hl; }}>{{ echo $this->headline; }}</{{ echo $this->hl; }}>
+{{ endif; }}
+
+
+
+</div>

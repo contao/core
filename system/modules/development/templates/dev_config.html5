@@ -1,4 +1,4 @@
-<?php echo '<?php'; ?>
+<?php echo '<?php'; ?> 
 
 /**
  * Contao Open Source CMS
@@ -68,8 +68,8 @@
  *   (
  *       'group_1' => array
  *       (
- *           'module_1' => 'Contentlass',
- *           'module_2' => 'Contentlass'
+ *           'module_1' => 'ContentClass',
+ *           'module_2' => 'ContentClass'
  *       )
  *   );
  * 
@@ -88,8 +88,8 @@
  *   (
  *       'group_1' => array
  *       (
- *           'cte_1' => 'Contentlass',
- *           'cte_2' => 'Contentlass'
+ *           'cte_1' => 'ContentClass',
+ *           'cte_2' => 'ContentClass'
  *       )
  *   );
  * 

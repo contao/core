@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{ echo $this->language; }}">
+<head>
+<meta charset="{{ echo $this->charset; }}">
+<title>{{ echo $this->title; }} - Contao Open Source CMS {{ echo VERSION; }}</title>
+<base href="{{ echo $this->base; }}">
+<link rel="stylesheet" href="{{
+  $objCombiner = new Combiner();
+  $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
+  $objCombiner->add('system/themes/'. $this->theme .'/main.css');
+  echo $objCombiner->getCombinedFile();
+}}" media="all">
+<!--[if IE]><link rel="stylesheet" href="{{ echo TL_SCRIPT_URL; }}system/themes/{{ echo $this->theme; }}/iefixes.css"><![endif]-->
+<script>{{ echo $this->getLocaleString(); }}</script>
+<script src="{{
+  $objCombiner = new Combiner();
+  $objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS);
+  $objCombiner->add('plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS);
+  echo $objCombiner->getCombinedFile();
+}}"></script>
+<script>{{ echo $this->getDateString(); }}</script>
+{{ echo $this->javascripts; }}
+<!--[if lt IE 9]><script src="{{ echo TL_PLUGINS_URL; }}plugins/html5shim/html5-{{ echo HTML5SHIM; }}.js"></script><![endif]-->
+</head>
+<body class="__ua__">
+
+<div id="container">
+<div id="main">
+
+
+
+</div>
+</div>
+
+</body>
+</html>

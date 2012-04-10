@@ -46,9 +46,9 @@ $GLOBALS['TL_LANG']['tl_calendar_feed']['description'] = array('Feed-Beschreibun
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_calendar_feed']['title_legend']    = 'Titel und Sprache';
-$GLOBALS['TL_LANG']['tl_calendar_feed']['archives_legend'] = 'Kalender';
-$GLOBALS['TL_LANG']['tl_calendar_feed']['config_legend']   = 'Feed-Einstellungen';
+$GLOBALS['TL_LANG']['tl_calendar_feed']['title_legend']     = 'Titel und Sprache';
+$GLOBALS['TL_LANG']['tl_calendar_feed']['calendars_legend'] = 'Kalender';
+$GLOBALS['TL_LANG']['tl_calendar_feed']['config_legend']    = 'Feed-Einstellungen';
 
 
 /**

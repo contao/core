@@ -33,9 +33,9 @@
  */
 ClassLoader::addClasses(array
 (
-	'ModuleAutoload'  => 'system/modules/development/ModuleAutoload.php',
-	'ModuleExtension' => 'system/modules/development/ModuleExtension.php',
-	'ModuleLabels'    => 'system/modules/development/ModuleLabels.php',
+	'Contao\\ModuleAutoload'  => 'system/modules/development/ModuleAutoload.php',
+	'Contao\\ModuleExtension' => 'system/modules/development/ModuleExtension.php',
+	'Contao\\ModuleLabels'    => 'system/modules/development/ModuleLabels.php',
 ));
 
 
@@ -44,16 +44,17 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'dev_autoload'  => 'system/modules/development/templates',
-	'dev_beClass'   => 'system/modules/development/templates',
-	'dev_config'    => 'system/modules/development/templates',
-	'dev_database'  => 'system/modules/development/templates',
-	'dev_dca'       => 'system/modules/development/templates',
-	'dev_default'   => 'system/modules/development/templates',
-	'dev_extension' => 'system/modules/development/templates',
-	'dev_feClass'   => 'system/modules/development/templates',
-	'dev_htaccess'  => 'system/modules/development/templates',
-	'dev_labels'    => 'system/modules/development/templates',
-	'dev_modules'   => 'system/modules/development/templates',
-	'dev_table'     => 'system/modules/development/templates',
+	'dev_autoload'   => 'system/modules/development/templates',
+	'dev_beClass'    => 'system/modules/development/templates',
+	'dev_beTemplate' => 'system/modules/development/templates',
+	'dev_config'     => 'system/modules/development/templates',
+	'dev_dca'        => 'system/modules/development/templates',
+	'dev_default'    => 'system/modules/development/templates',
+	'dev_extension'  => 'system/modules/development/templates',
+	'dev_feClass'    => 'system/modules/development/templates',
+	'dev_feTemplate' => 'system/modules/development/templates',
+	'dev_htaccess'   => 'system/modules/development/templates',
+	'dev_labels'     => 'system/modules/development/templates',
+	'dev_modules'    => 'system/modules/development/templates',
+	'dev_table'      => 'system/modules/development/templates',
 ));

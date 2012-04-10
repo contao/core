@@ -1,4 +1,4 @@
-<?php echo '<?php'; ?>
+<?php echo '<?php'; ?> 
 
 /**
  * Contao Open Source CMS
@@ -23,7 +23,7 @@
  * PHP version 5.3
  * @copyright  <?php echo $this->copyright; ?> 
  * @author     <?php echo $this->author; ?> 
- * @package    Language
+ * @package    <?php echo $this->package; ?>
  * @license    <?php echo $this->license; ?> 
  */
 

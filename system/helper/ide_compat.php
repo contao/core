@@ -43,6 +43,7 @@ class Controller extends Contao\Controller {}
 abstract class Database extends Contao\Database {}
 class Date extends Contao\Date {}
 class DbInstaller extends Contao\DbInstaller {}
+class DbUpdater extends Contao\DbUpdater {}
 class DcaExtractor extends Contao\DcaExtractor {}
 class Email extends Contao\Email {}
 class Encryption extends Contao\Encryption {}
@@ -112,6 +113,7 @@ class KeyValueWizard extends Contao\KeyValueWizard {}
 class ListWizard extends Contao\ListWizard {}
 class LiveUpdate extends Contao\LiveUpdate {}
 class Messages extends Contao\Messages {}
+class MetaWizard extends Contao\MetaWizard {}
 class ModuleMaintenance extends Contao\ModuleMaintenance {}
 class ModuleUser extends Contao\ModuleUser {}
 class ModuleWizard extends Contao\ModuleWizard {}
@@ -156,6 +158,11 @@ class ContentComments extends Contao\ContentComments {}
 class ModuleComments extends Contao\ModuleComments {}
 class CommentsCollection extends Contao\CommentsCollection {}
 class CommentsModel extends Contao\CommentsModel {}
+
+// development
+class ModuleAutoload extends Contao\ModuleAutoload {}
+class ModuleExtension extends Contao\ModuleExtension {}
+class ModuleLabels extends Contao\ModuleLabels {}
 
 // faq
 class ModuleFaq extends Contao\ModuleFaq {}

@@ -24,8 +24,8 @@
 
 <fieldset class="tl_checkbox_container">
   <legend><?php echo $this->options; ?></legend>
-  <input type="hidden" value="" name="override"><input type="checkbox" name="override" id="opt_override" value="1" class="tl_checkbox" onfocus="Backend.getScrollOffset()"> <label for="opt_override"><?php echo $this->override; ?></label><br>
-  <input type="hidden" value="" name="ide_compat"><input type="checkbox" name="ide_compat" id="opt_ide_compat" value="1" class="tl_checkbox" onfocus="Backend.getScrollOffset()"> <label for="opt_ide_compat"><?php echo $this->ide_compat; ?></label>
+  <input type="hidden" name="override" value=""><input type="checkbox" name="override" id="opt_override" value="1" class="tl_checkbox" onfocus="Backend.getScrollOffset()"> <label for="opt_override"><?php echo $this->override; ?></label><br>
+  <input type="hidden" name="ide_compat" value=""><input type="checkbox" name="ide_compat" id="opt_ide_compat" value="1" class="tl_checkbox" onfocus="Backend.getScrollOffset()"> <label for="opt_ide_compat"><?php echo $this->ide_compat; ?></label>
 </fieldset>
 
 <div style="margin-top:2em">
@@ -36,7 +36,7 @@
 </div>
 
 <div class="tl_submit_container">
-  <input type="submit" name="submit" class="tl_submit" value="<?php echo $this->submitButton; ?>">
+  <input type="submit" class="tl_submit" value="<?php echo $this->submitButton; ?>">
 </div>
 
 </form>
