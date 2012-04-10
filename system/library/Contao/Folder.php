@@ -230,7 +230,7 @@ class Folder extends \System
 
 		foreach (scan(TL_ROOT . '/' . $this->strFolder) as $strFile)
 		{
-			if (strncmp($strFile, '.', 1) === 0)
+			if ($strFile == '.svn' || $strFile == '.DS_Store')
 			{
 				continue;
 			}
