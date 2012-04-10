@@ -158,9 +158,9 @@ class Main extends Backend
 		$count = 0;
 		$arrVersions = array();
 
-		// Get the latest 30 versions
-		$objVersions = $this->Database->prepare("SELECT pid, tstamp, version, fromTable, username, description FROM tl_version WHERE version>1" . (!$this->User->isAdmin ? " AND userid=?" : "") . " ORDER BY tstamp DESC")
-									  ->limit(30)
+		// Get the latest versions
+		$objVersions = $this->Database->prepare("SELECT pid, tstamp, version, fromTable, username, userid, description FROM tl_version WHERE version>1" . (!$this->User->isAdmin ? " AND userid=?" : "") . " ORDER BY tstamp DESC")
+									  ->limit(100)
 									  ->execute($this->User->id);
 
 		while ($objVersions->next())
@@ -168,17 +168,46 @@ class Main extends Backend
 			$arrRow = $objVersions->row();
 
 			// Add some parameters
-			$arrRow['class'] = ($count++%2 == 0) ? 'even' : 'odd';
-			$arrRow['href'] = 'contao/diff.php?table='.$objVersions->fromTable.'&amp;pid='.$objVersions->pid.'&amp;from='.($objVersions->version-1).'&amp;to='.$objVersions->version;
-			$arrRow['link'] = '<a href="contao/diff.php?table='.$objVersions->fromTable.'&amp;pid='.$objVersions->pid.'&amp;from='.($objVersions->version-1).'&amp;to='.$objVersions->version.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']).'" onclick="Backend.openModalIframe({\'width\':860,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']).'\',\'url\':this.href});return false">'.$this->generateImage('diff.gif').'</a>';
+			$arrRow['from'] = 1;
+			$arrRow['to'] = $objVersions->version;
 			$arrRow['date'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objVersions->tstamp);
 			$arrRow['description'] = $this->String->substr($arrRow['description'], 32);
 
 			$arrVersions[] = $arrRow;
 		}
 
+		$intIndex = 0;
+		$strFromTable = $intPid = $intUserid = null;
+
+		// Only show the latest version each user has created
+		foreach ($arrVersions as $k=>$v)
+		{
+			if ($strFromTable != $v['fromTable'] || $intPid != $v['pid'] || $intUserid != $v['userid'])
+			{
+				$intIndex = $k;
+				$strFromTable = $v['fromTable'];
+				$intPid = $v['pid'];
+				$intUserid = $v['userid'];
+			}
+			else
+			{
+				// Override the from version
+				$arrVersions[$intIndex]['from'] = $v['version'];
+				unset($arrVersions[$k]);
+			}
+		}
+
+		$arrVersions = array_values($arrVersions);
+
+		// Add the "even" and "odd" classes
+		foreach ($arrVersions as $k=>$v)
+		{
+			$arrVersions[$k]['class'] = ($k%2 == 0) ? 'even' : 'odd';
+		}
+
 		$objTemplate->messages = $this->getMessages(false, true) . "\n" . implode("\n", $arrMessages);
 		$objTemplate->versions = $arrVersions;
+		$objTemplate->showDifferences = specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']);
  		$objTemplate->welcome = sprintf($GLOBALS['TL_LANG']['MSC']['welcomeTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
 		$objTemplate->systemMessages = $GLOBALS['TL_LANG']['MSC']['systemMessages'];
 		$objTemplate->shortcuts = $GLOBALS['TL_LANG']['MSC']['shortcuts'][0];

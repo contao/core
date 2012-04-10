@@ -2870,13 +2870,17 @@ abstract class Controller extends \System
 		{
 			$strDescription = $objRecord->title;
 		}
+		elseif (isset($objRecord->name))
+		{
+			$strDescription = $objRecord->name;
+		}
 		elseif (isset($objRecord->headline))
 		{
 			$strDescription = $objRecord->headline;
 		}
-		elseif (isset($objRecord->name))
+		elseif (isset($objRecord->selector))
 		{
-			$strDescription = $objRecord->name;
+			$strDescription = $objRecord->selector;
 		}
 
 		$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=? AND fromTable=?")

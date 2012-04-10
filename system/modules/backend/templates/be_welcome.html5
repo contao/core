@@ -37,7 +37,7 @@
   <td><?php echo $version['pid']; ?></td>
   <td><?php echo $version['description'] ?: '-'; ?></td>
   <td><?php echo $version['version']; ?></td>
-  <td><?php echo $version['link']; ?></td>
+  <td><a href="contao/diff.php?table=<?php echo $version['fromTable']; ?>&amp;pid=<?php echo $version['pid']; ?>&amp;from=<?php echo $version['from']; ?>&amp;to=<?php echo $version['to']; ?>" title="<?php echo $this->showDifferences; ?>" onclick="Backend.openModalIframe({'width':860,'title':'<?php echo $this->showDifferences; ?>','url':this.href});return false"><?php echo $this->generateImage('diff.gif'); ?></a></td>
 </tr>
 <?php endforeach; ?>
 </tbody>
