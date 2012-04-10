@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Development
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleAutoload
  *
  * Back end module "autoload files".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleAutoload extends BackendModule
+class ModuleAutoload extends \BackendModule
 {
 
 	/**
@@ -177,7 +182,7 @@ class ModuleAutoload extends BackendModule
 
 					$strPackage = ucfirst($strModule);
 
-					$objFile = new File('system/modules/' . $strModule . '/config/autoload.php');
+					$objFile = new \File('system/modules/' . $strModule . '/config/autoload.php');
 					$objFile->write(
 <<<EOT
 <?php
@@ -305,7 +310,7 @@ EOT
 			// IDE compatibility
 			if ($this->Input->post('ide_compat'))
 			{
-				$objFile = new File('system/helper/ide_compat.php');
+				$objFile = new \File('system/helper/ide_compat.php');
 				$objFile->write(
 <<<EOT
 <?php
@@ -423,7 +428,7 @@ EOT
 		$this->Template->modules = $arrModules;
 
 		$this->Template->messages = $this->getMessages();
-		$this->Template->href = $this->getReferer(ENCODE_AMPERSANDS);
+		$this->Template->href = $this->getReferer(true);
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']);
 		$this->Template->button = $GLOBALS['TL_LANG']['MSC']['backBT'];
 		$this->Template->headline = $GLOBALS['TL_LANG']['tl_merge']['headline'];

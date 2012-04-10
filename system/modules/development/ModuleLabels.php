@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Development
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleLabels
  *
  * Back end module "missing labels".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleLabels extends BackendModule
+class ModuleLabels extends \BackendModule
 {
 
 	/**
@@ -77,7 +82,7 @@ class ModuleLabels extends BackendModule
 		$this->Template->button = $GLOBALS['TL_LANG']['MSC']['backBT'];
 		$this->Template->selectAll = $GLOBALS['TL_LANG']['MSC']['selectAll'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']);
-		$this->Template->href = ($this->Input->post('FORM_SUBMIT') == 'tl_labels') ? $this->Environment->request : $this->getReferer(ENCODE_AMPERSANDS);
+		$this->Template->href = ($this->Input->post('FORM_SUBMIT') == 'tl_labels') ? $this->Environment->request : $this->getReferer(true);
 		$this->Template->action = ampersand($this->Environment->request);
 		$this->Template->warning = $GLOBALS['TL_LANG']['tl_labels']['warning'];
 		$this->Template->error = $GLOBALS['TL_LANG']['tl_labels']['error'];

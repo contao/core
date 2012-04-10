@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -38,7 +38,11 @@ $GLOBALS['TL_DCA']['<?php echo $this->table; ?>'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'enableVersioning'            => true
+		'enableVersioning'            => true,
+		'sql' => array
+		(
+			'keys' => array()
+		)
 	),
 
 	// List
@@ -111,12 +115,21 @@ $GLOBALS['TL_DCA']['<?php echo $this->table; ?>'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['<?php echo $this->table; ?>'][''],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		)
 	)
 );
