@@ -1,9 +1,9 @@
 
-<div class="{{ echo $this->class; }} block"{{ echo $this->cssID; }}{{ if ($this->style): }} style="{{ echo $this->style; }}"{{ endif; }}>
-{{ if ($this->headline): }}
+<div class="<?php echo '<?php echo $this->class; ?>'; ?> block"<?php echo '<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>'; ?>>
+<?php echo '<?php if ($this->headline): ?>'; ?>
 
-<{{ echo $this->hl; }}>{{ echo $this->headline; }}</{{ echo $this->hl; }}>
-{{ endif; }}
+<<?php echo '<?php echo $this->hl; ?>'; ?>><?php echo '<?php echo $this->headline; ?>'; ?></<?php echo '<?php echo $this->hl; ?>'; ?>>
+<?php echo '<?php endif; ?>'; ?>
 
 
 

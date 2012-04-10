@@ -242,9 +242,14 @@ class tl_theme extends Backend
 	 */
 	public function addPreviewImage($row, $label)
 	{
-		if ($row['screenshot'] != '' && file_exists(TL_ROOT . '/' . $row['screenshot']))
+		if ($row['screenshot'] != '')
 		{
-			$label = '<img src="' . TL_FILES_URL . $this->getImage($row['screenshot'], 160, 120) . '" width="160" height="120" alt="" class="theme_preview">' . $label;
+			$objFile = \FilesModel::findByPk($row['screenshot']);
+
+			if ($objFile !== null)
+			{
+				$label = '<img src="' . TL_FILES_URL . $this->getImage($objFile->path, 160, 120) . '" width="160" height="120" alt="" class="theme_preview">' . $label;
+			}
 		}
 
 		return $label;

@@ -150,9 +150,8 @@ class ModuleExtension extends BackendModule
 				foreach ($arrTemplates as $strTemplate)
 				{
 					$tplTemplate = $this->newTemplate('dev_beTemplate', $objModule);
-					$strContent = str_replace(array('{{', '}}'), array('<?php', '?>'), $tplTemplate->parse());
 					$objTemplate = new \File('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.html5');
-					$objTemplate->write($strContent);
+					$objTemplate->write($tplTemplate->parse());
 					$objTemplate->close();
 				}
 			}
@@ -179,14 +178,10 @@ class ModuleExtension extends BackendModule
 				foreach ($arrTemplates as $strTemplate)
 				{
 					$tplTemplate = $this->newTemplate('dev_feTemplate', $objModule);
-					$strContent = str_replace(array('{{', '}}'), array('<?php', '?>'), $tplTemplate->parse());
-
-					foreach (array('.html5', '.xhtml') as $ext)
-					{
-						$objTemplate = new \File('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . $ext);
-						$objTemplate->write($strContent);
-						$objTemplate->close();
-					}
+					$objTemplate = new \File('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.html5');
+					$objTemplate->write($tplTemplate->parse());
+					$objTemplate->close();
+					$objTemplate->copyTo('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.xhtml');
 				}
 			}
 

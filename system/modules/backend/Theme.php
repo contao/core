@@ -55,35 +55,38 @@ class Theme extends \Backend
 		{
 			$source = $this->Input->post('source', true);
 
-			// Check the file names
-			if (!$source || !is_array($source))
+			if ($source == '')
 			{
 				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
 			$arrFiles = array();
+			$objFiles = \FilesCollection::findMultipleByIds(trimsplit(',', $source));
 
 			// Skip invalid entries
-			foreach ($source as $strZipFile)
+			if ($objFiles !== null)
 			{
-				// Skip folders
-				if (is_dir(TL_ROOT . '/' . $strZipFile))
+				while ($objFiles->next())
 				{
-					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], basename($strZipFile)));
-					continue;
+					// Skip folders
+					if (is_dir(TL_ROOT . '/' . $objFiles->path))
+					{
+						$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], $objFiles->name));
+						continue;
+					}
+
+					$objFile = new \File($objFiles->path);
+
+					// Skip anything but .cto files
+					if ($objFile->extension != 'cto')
+					{
+						$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
+						continue;
+					}
+
+					$arrFiles[] = $objFiles->path;
 				}
-
-				$objFile = new \File($strZipFile);
-
-				// Skip anything but .cto files
-				if ($objFile->extension != 'cto')
-				{
-					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
-					continue;
-				}
-
-				$arrFiles[] = $strZipFile;
 			}
 
 			// Check wether there are any files left
@@ -107,11 +110,10 @@ class Theme extends \Backend
 			if ($this->Input->post('confirm') == 1)
 			{
 				$this->extractThemeFiles($arrFiles, $arrDbFields);
-				return '';
 			}
 			else
 			{
-				return $this->compareThemeFiles($arrFiles, $arrDbFields);
+				return $this->compareThemeFiles($arrFiles, $arrDbFields, $source);
 			}
 		}
 
@@ -153,9 +155,10 @@ class Theme extends \Backend
 	 * whether there are custom layout sections 
 	 * @param array
 	 * @param array
+	 * @param string
 	 * @return string
 	 */
-	protected function compareThemeFiles($arrFiles, $arrDbFields)
+	protected function compareThemeFiles($arrFiles, $arrDbFields, $source)
 	{
 		$return = '
 <div id="tl_buttons">
@@ -168,13 +171,8 @@ class Theme extends \Backend
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_theme_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
+<input type="hidden" name="source" value="'.$source.'">
 <input type="hidden" name="confirm" value="1">';
-
-		// Add the hidden fields
-		foreach ($arrFiles as $strFile)
-		{
-			$return .= "\n" . '<input type="hidden" name="source[]" value="'.$strFile.'">';
-		}
 
 		$count = 0;
 
@@ -393,7 +391,7 @@ class Theme extends \Backend
 					// Override the files directory
 					if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files' && strncmp($objArchive->file_name, 'files/', 6) === 0)
 					{
-						$strFileName = str_replace('files/', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $objArchive->file_name);
+						$strFileName = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $objArchive->file_name);
 					}
 
 					$objFile = new \File($strFileName);
@@ -415,18 +413,107 @@ class Theme extends \Backend
 
 			$arrMapper = array();
 			$tables = $xml->getElementsByTagName('table');
+			$arrNewFolders = array();
+
+			// Extract the folder names from the XML file
+			for ($i=0; $i<$tables->length; $i++)
+			{
+				if ($tables->item($i)->getAttribute('name') == 'tl_theme')
+				{
+					$fields = $tables->item($i)->childNodes->item(0)->childNodes;
+
+					for ($k=0; $k<$fields->length; $k++)
+					{
+						if ($fields->item($k)->getAttribute('name') == 'folders')
+						{
+							$arrNewFolders = deserialize($fields->item($k)->nodeValue);
+							break;
+						}
+					}
+
+					break;
+				}
+			}
+
+			// Sync the new folder(s)
+			if (is_array($arrNewFolders) && !empty($arrNewFolders))
+			{
+				foreach ($arrNewFolders as $strFolder)
+				{
+					if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files')
+					{
+						$strFolder = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $strFolder);
+					}
+
+					// Index the parent folders
+					$strTmp = $strFolder;
+					$intNextPid = null;
+					$arrParents = array();
+
+					while ($strTmp != '' && $strTmp != $GLOBALS['TL_CONFIG']['uploadPath'])
+					{
+						$arrParents[] = $strTmp;
+						$strTmp = dirname($strTmp);
+					}
+
+					foreach (array_reverse($arrParents) as $strParent)
+					{
+						$objParent = \FilesModel::findByPath($strParent);
+
+						if ($objParent === null)
+						{
+							if ($intNextPid === null)
+							{
+								if (dirname($strParent) == $GLOBALS['TL_CONFIG']['uploadPath'])
+								{
+									$intNextPid = 0;
+								}
+								else
+								{
+									$objPid = \FilesModel::findByPath(dirname($strParent));
+									$intNextPid = $objPid->id;
+								}
+							}
+
+							$objFolder = new \Folder($strParent);
+
+							$objModel = new \FilesModel();
+							$objModel->pid    = $intNextPid;
+							$objModel->tstamp = time();
+							$objModel->name   = basename($strParent);
+							$objModel->type   = 'folder';
+							$objModel->path   = $strParent;
+							$objModel->hash   = $objFolder->hash;
+							$objModel->found  = 1;
+							$objModel->save();
+
+							$intNextPid = $objModel->id;
+						}
+					}
+
+					$this->syncNewFolder($strFolder, $intNextPid);
+				}
+			}
 
 			// Lock the tables
 			$arrLocks = array
 			(
-				'tl_theme'       => 'WRITE',
+				'tl_files'       => 'WRITE',
+				'tl_layout'      => 'WRITE',
+				'tl_module'      => 'WRITE',
 				'tl_style_sheet' => 'WRITE',
 				'tl_style'       => 'WRITE',
-				'tl_module'      => 'WRITE',
-				'tl_layout'      => 'WRITE'
+				'tl_theme'       => 'WRITE',
 			);
 
 			$this->Database->lockTables($arrLocks);
+
+			// Get the current auto_increment values
+			$tl_theme = $this->Database->getNextId('tl_theme');
+			$tl_style_sheet = $this->Database->getNextId('tl_style_sheet');
+			$tl_style = $this->Database->getNextId('tl_style');
+			$tl_module = $this->Database->getNextId('tl_module');
+			$tl_layout = $this->Database->getNextId('tl_layout');
 
 			// Loop through the tables
 			for ($i=0; $i<$tables->length; $i++)
@@ -452,8 +539,14 @@ class Theme extends \Backend
 						$value = $fields->item($k)->nodeValue;
 						$name = $fields->item($k)->getAttribute('name');
 
+						// Skip NULL values
+						if ($value == 'NULL')
+						{
+							continue;
+						}
+
 						// Increment the ID
-						if ($name == 'id')
+						elseif ($name == 'id')
 						{
 							$id = ${$table}++;
 							$arrMapper[$table][$value] = $id;
@@ -471,6 +564,12 @@ class Theme extends \Backend
 							{
 								$value = $arrMapper['tl_theme'][$value];
 							}
+						}
+
+						// Handle fallback fields
+						elseif ($name == 'fallback')
+						{
+							$value = '';
 						}
 
 						// Adjust the style sheet IDs of the page layout
@@ -508,7 +607,7 @@ class Theme extends \Backend
 							}
 						}
 
-						// Adjust the names
+						// Adjust duplicate theme and style sheet names
 						elseif (($table == 'tl_theme' || $table == 'tl_style_sheet') && $name == 'name')
 						{
 							$objCount = $this->Database->prepare("SELECT COUNT(*) AS count FROM ". $table ." WHERE name=?")
@@ -521,20 +620,8 @@ class Theme extends \Backend
 							}
 						}
 
-						// Handle fallback fields
-						elseif ($name == 'fallback')
-						{
-							$value = '';
-						}
-
-						// Skip NULL values
-						elseif ($value == 'NULL')
-						{
-							continue;
-						}
-
-						// Adjust the file paths in style sheets and modules
-						elseif ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files' && strpos($value, 'files') !== false)
+						// Adjust the file paths in style sheets
+						elseif ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files' && ($table == 'tl_style_sheet' || $table == 'tl_style') && strpos($value, 'files') !== false)
 						{
 							$tmp = deserialize($value);
 
@@ -542,14 +629,47 @@ class Theme extends \Backend
 							{
 								foreach ($tmp as $kk=>$vv)
 								{
-									$tmp[$kk] = str_replace('files/', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $vv);
+									$tmp[$kk] = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $vv);
 								}
 
 								$value = serialize($tmp);
 							}
 							else
 							{
-								$value = str_replace('files/', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $value);
+								$value = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $value);
+							}
+						}
+
+						// Replace the file paths in singleSRC fields with their tl_files ID
+						elseif (($table == 'tl_theme' && $name == 'screenshot') || ($table == 'tl_module' && $name == 'singleSRC') || ($table == 'tl_module' && $name == 'reg_homeDir'))
+						{
+							if ($value != '')
+							{
+								$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE path=?")
+														  ->limit(1)
+														  ->executeUncached($value);
+
+								$value = $objFile->id;
+							}
+						}
+
+						// Replace the file paths in multiSRC fields with their tl_files ID
+						elseif (($table == 'tl_theme' && $name == 'folders') || ($table == 'tl_module' && $name == 'multiSRC'))
+						{
+							$tmp = deserialize($value);
+
+							if (is_array($tmp))
+							{
+								foreach ($tmp as $kk=>$vv)
+								{
+									$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE path=?")
+															  ->limit(1)
+															  ->executeUncached($vv);
+
+									$tmp[$kk] = $objFile->id;
+								}
+
+								$value = serialize($tmp);
 							}
 						}
 
@@ -609,6 +729,30 @@ class Theme extends \Backend
 		$strName = strtolower(str_replace(' ', '_', $strName));
 		$strName = preg_replace('/[^A-Za-z0-9\._-]/', '', $strName);
 		$strName = basename($strName);
+
+		// Replace the numeric folder IDs
+		$arrFolders = deserialize($objTheme->folders);
+
+		if (is_array($arrFolders) && !empty($arrFolders))
+		{
+			$objFolders = \FilesCollection::findMultipleByIds($arrFolders);
+
+			if ($objFolders !== null)
+			{
+				$objTheme->folders = serialize($objFolders->fetchEach('path'));
+			}
+		}
+
+		// Replace the numeric screenshot ID
+		if ($objTheme->screenshot != '')
+		{
+			$objFile = \FilesModel::findByPk($objTheme->screenshot);
+
+			if ($objFile !== null)
+			{
+				$objTheme->screenshot = $objFile->path;
+			}
+		}
 
 		// Create a new XML document
 		$xml = new \DOMDocument('1.0', 'UTF-8');
@@ -900,6 +1044,78 @@ class Theme extends \Backend
 			if (preg_match('/\.(' . implode('|', $arrAllowed) . ')$/', $strFile) && strncmp($strFile, 'be_', 3) !== 0 && strncmp($strFile, 'nl_', 3) !== 0)
 			{
 				$objArchive->addFile($strFolder .'/'. $strFile);
+			}
+		}
+	}
+
+
+	/**
+	 * Recursively synchronize the new folder
+	 * @param string
+	 * @param integer
+	 * @return void
+	 */
+	protected function syncNewFolder($strPath, $intPid=0)
+	{
+		$arrFiles = array();
+		$arrFolders = array();
+		$arrScan = scan(TL_ROOT . '/' . $strPath);
+
+		// Separate files from folders
+		foreach ($arrScan as $strFile)
+		{
+			if (is_dir(TL_ROOT . '/' . $strPath . '/' . $strFile))
+			{
+				$arrFolders[] = $strPath . '/' . $strFile;
+			}
+			else
+			{
+				$arrFiles[] = $strPath . '/' . $strFile;
+			}
+		}
+
+		// Folders
+		foreach ($arrFolders as $strFolder)
+		{
+			$objFolder = new \Folder($strFolder);
+			$objModel = \FilesModel::findByPath($strFolder);
+
+			// Create the entry if it does not yet exist
+			if ($objModel === null)
+			{
+				$objModel = new \FilesModel();
+				$objModel->pid    = $intPid;
+				$objModel->tstamp = time();
+				$objModel->name   = basename($strFolder);
+				$objModel->type   = 'folder';
+				$objModel->path   = $strFolder;
+				$objModel->hash   = $objFolder->hash;
+				$objModel->found  = 1;
+				$objModel->save();
+			}
+
+			$this->syncNewFolder($strFolder, $objModel->id);
+		}
+
+		// Files
+		foreach ($arrFiles as $strFile)
+		{
+			$objFile = new \File($strFile);
+			$objModel = \FilesModel::findByPath($strFile);
+
+			// Create the entry if it does not yet exist
+			if ($objModel === null)
+			{
+				$objModel = new \FilesModel();
+				$objModel->pid       = $intPid;
+				$objModel->tstamp    = time();
+				$objModel->name      = basename($strFile);
+				$objModel->type      = 'file';
+				$objModel->path      = $strFile;
+				$objModel->extension = $objFile->extension;
+				$objModel->hash      = $objFile->hash;
+				$objModel->found     = 1;
+				$objModel->save();
 			}
 		}
 	}

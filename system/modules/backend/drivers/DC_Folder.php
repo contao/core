@@ -607,6 +607,11 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			foreach ($files as $file)
 			{
+				if ($file == '.svn' || $file == '.DS_Store')
+				{
+					continue;
+				}
+
 				if (is_dir(TL_ROOT . '/' . $source .'/'. $file))
 				{
 					$this->copy($source . '/' . $file, $destination . '/' . $file);
@@ -775,19 +780,25 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->Files->delete($source . '/' . $file);
 
 					// Find the corresponding DB entries
-					$objFile = \FilesModel::findByPath($source . '/' . $file);
-					$objFile->delete();
+					if ($file != '.DS_Store')
+					{
+						$objFile = \FilesModel::findByPath($source . '/' . $file);
+						$objFile->delete();
+					}
 				}
 			}
 
 			$this->Files->rmdir($source);
 
 			// Find the corresponding DB entries
-			$objFile = \FilesModel::findByPath($source);
-			$objFile->delete();
+			if ($source != '.svn')
+			{
+				$objFile = \FilesModel::findByPath($source);
+				$objFile->delete();
+			}
 		}
 
-		// Delete file
+		// Delete a file
 		else
 		{
 			$this->Files->delete($source);
@@ -2101,7 +2112,7 @@ window.addEvent(\'domready\', function() {
 		// Separate files from folders
 		foreach ($arrScan as $strFile)
 		{
-			if (strncmp($strFile, '.', 1) === 0)
+			if ($strFile == '.svn' || $strFile == '.DS_Store')
 			{
 				continue;
 			}
@@ -2272,21 +2283,25 @@ window.addEvent(\'domready\', function() {
 		{
 			foreach (scan($path) as $v)
 			{
-				if (!is_dir($path . '/' . $v) && $v != '.DS_Store')
+				if ($v == '.svn' || $v == '.DS_Store')
+				{
+					continue;
+				}
+
+				if (is_file($path . '/' . $v))
 				{
 					$files[] = $path . '/' . $v;
-					continue;
 				}
-
-				if ($v == '__new__')
+				else
 				{
-					$this->Files->rmdir(str_replace(TL_ROOT.'/', '', $path) . '/' . $v);
-					continue;
-				}
-
-				if (substr($v, 0, 1) != '.')
-				{
-					$folders[] = $path . '/' . $v;
+					if ($v == '__new__')
+					{
+						$this->Files->rmdir(str_replace(TL_ROOT.'/', '', $path) . '/' . $v);
+					}
+					else
+					{
+						$folders[] = $path . '/' . $v;
+					}
 				}
 			}
 

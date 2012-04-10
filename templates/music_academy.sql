@@ -3368,7 +3368,7 @@ INSERT INTO `tl_task_status` (`id`, `pid`, `tstamp`, `assignedTo`, `status`, `pr
 -- Daten für Tabelle `tl_theme`
 --
 
-INSERT INTO `tl_theme` (`id`, `tstamp`, `name`, `author`, `folders`, `templates`, `screenshot`, `vars`) VALUES(1, 1272111434, 'Music Academy', 'Leo Feyer', 0x613a313a7b693a303b4e3b7d, '', '19', NULL);
+INSERT INTO `tl_theme` (`id`, `tstamp`, `name`, `author`, `folders`, `templates`, `screenshot`, `vars`) VALUES(1, 1334067974, 'Music Academy', 'Leo Feyer', 0x613a313a7b693a303b693a313b7d, '', '19', 'a:0:{}');
 
 --
 -- Daten für Tabelle `tl_user`

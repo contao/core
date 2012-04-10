@@ -480,3 +480,4 @@ $GLOBALS['TL_LANG']['MSC']['table']             = 'Tabelle';
 $GLOBALS['TL_LANG']['MSC']['description']       = 'Beschreibung';
 $GLOBALS['TL_LANG']['MSC']['noVersions']        = 'Zur Zeit sind keine Versionen vorhanden.';
 $GLOBALS['TL_LANG']['MSC']['latestChanges']     = 'Zuletzt bearbeitet';
+$GLOBALS['TL_LANG']['MSC']['identicalVersions'] = 'Die beiden ausgewählten Versionen sind identisch.';

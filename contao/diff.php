@@ -194,6 +194,12 @@ class DiffController extends Backend
 			}
 		}
 
+		// Identical versions
+		if ($strBuffer == '')
+		{
+			$strBuffer = '<p>'.$GLOBALS['TL_LANG']['MSC']['identicalVersions'].'</p>';
+		}
+
 		$this->Template = new BackendTemplate('be_diff');
 
 		// Template variables
