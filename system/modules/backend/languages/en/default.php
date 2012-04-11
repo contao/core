@@ -480,4 +480,4 @@ $GLOBALS['TL_LANG']['MSC']['description']       = 'Description';
 $GLOBALS['TL_LANG']['MSC']['noVersions']        = 'Currently there are no versions.';
 $GLOBALS['TL_LANG']['MSC']['latestChanges']     = 'Latest changes';
 $GLOBALS['TL_LANG']['MSC']['identicalVersions'] = 'The two selected versions are identical.';
-$GLOBALS['TL_LANG']['MSC']['selectNewPosition'] = 'Next, please choose the position of the new element';
+$GLOBALS['TL_LANG']['MSC']['selectNewPosition'] = 'Next, please choose the (new) position of the element';

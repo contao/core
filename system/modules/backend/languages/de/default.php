@@ -481,4 +481,4 @@ $GLOBALS['TL_LANG']['MSC']['description']       = 'Beschreibung';
 $GLOBALS['TL_LANG']['MSC']['noVersions']        = 'Zur Zeit sind keine Versionen vorhanden.';
 $GLOBALS['TL_LANG']['MSC']['latestChanges']     = 'Zuletzt bearbeitet';
 $GLOBALS['TL_LANG']['MSC']['identicalVersions'] = 'Die beiden ausgewählten Versionen sind identisch.';
-$GLOBALS['TL_LANG']['MSC']['selectNewPosition'] = 'Legen Sie als Nächstes die Position des neuen Elements fest';
+$GLOBALS['TL_LANG']['MSC']['selectNewPosition'] = 'Legen Sie als Nächstes die (neue) Position des Elements fest';

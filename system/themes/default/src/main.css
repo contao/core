@@ -571,6 +571,7 @@ h2.sub_headline_index {
 	margin:0 0 12px;
 }
 .tl_content pre {
+	margin-top:3px;
 	margin-bottom:3px;
 	word-break:break-word;
 }
@@ -741,11 +742,6 @@ label.tl_change_selected {
 }
 #tl_breadcrumb li img {
 	vertical-align:-5px;
-}
-
-/* Paste */
-.parent_view.paste {
-	margin-top:44px;
 }
 
 /* Picker */

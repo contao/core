@@ -3045,10 +3045,10 @@ window.addEvent(\'domready\', function() {
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">' : '').($blnClipboard ? '
 
 <div id="paste_hint">
-  <p class="tree_view">'.$GLOBALS['TL_LANG']['MSC']['selectNewPosition'].'</p>
+  <p>'.$GLOBALS['TL_LANG']['MSC']['selectNewPosition'].'</p>
 </div>' : '').'
 
-<div class="tl_listing_container tree_view'. ($blnClipboard ? ' paste' : '') .'" id="tl_listing">'.(isset($GLOBALS['TL_DCA'][$table]['list']['sorting']['breadcrumb']) ? $GLOBALS['TL_DCA'][$table]['list']['sorting']['breadcrumb'] : '').(($this->Input->get('act') == 'select') ? '
+<div class="tl_listing_container tree_view" id="tl_listing">'.(isset($GLOBALS['TL_DCA'][$table]['list']['sorting']['breadcrumb']) ? $GLOBALS['TL_DCA'][$table]['list']['sorting']['breadcrumb'] : '').(($this->Input->get('act') == 'select') ? '
 
 <div class="tl_select_trigger">
 <label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox">
@@ -3480,10 +3480,10 @@ window.addEvent(\'domready\', function() {
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">' : '').($blnClipboard ? '
 
 <div id="paste_hint">
-  <p class="parent_view">'.$GLOBALS['TL_LANG']['MSC']['selectNewPosition'].'</p>
+  <p>'.$GLOBALS['TL_LANG']['MSC']['selectNewPosition'].'</p>
 </div>' : '').'
 
-<div class="tl_listing_container parent_view'. ($blnClipboard ? ' paste' : '') .'">
+<div class="tl_listing_container parent_view">
 
 <div class="tl_header" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)">';
 

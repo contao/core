@@ -81,6 +81,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	protected $blnCreateNewVersion = false;
 
+	/**
+	 * Database assisted
+	 * @param boolean
+	 */
+	protected $blnIsDbAssisted = false;
+
 
 	/**
 	 * Initialize the object
@@ -164,6 +170,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		$this->strTable = $strTable;
+		$this->blnIsDbAssisted = $GLOBALS['TL_DCA'][$strTable]['config']['databaseAssisted'];
 
 		// Check for valid file types
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['validFileTypes'])
@@ -213,6 +220,10 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				return $this->blnCreateNewVersion;
 				break;
 
+			case 'isDbAssisted':
+				return $this->blnIsDbAssisted;
+				break;
+
 			default:
 				return parent::__get($strKey);
 				break;
@@ -258,7 +269,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				$session['filetree'] = $this->getMD5Folders($GLOBALS['TL_CONFIG']['uploadPath']);
 			}
-
 			// Collapse tree
 			else
 			{
@@ -278,6 +288,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$blnClipboard = true;
 			$arrClipboard = $arrClipboard[$this->strTable];
 		}
+
+		// Load the fonts to display the paste hint
+		$GLOBALS['TL_CONFIG']['loadGoogleFonts'] = $blnClipboard;
 
 		$this->import('Files');
 
@@ -316,14 +329,18 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Build the tree
 		$return = '
 <div id="tl_buttons">'.(($this->Input->get('act') == 'select') ? '
-<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : '') . (($this->Input->get('act') != 'select' && $this->Input->get('act') != 'paste') ? '
+<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : '') . (($this->Input->get('act') != 'select' && !$blnClipboard) ? '
 <a href="'.$this->addToUrl($hrfNew).'" class="'.$clsNew.'" title="'.specialchars($ttlNew).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$lblNew.'</a>' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? ' &nbsp; :: &nbsp; <a href="'.$this->addToUrl('&amp;act=paste&amp;mode=move').'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['move'][1]).'" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['move'][0].'</a>' : '') . $this->generateGlobalButtons(true) : '') . ($blnClipboard ? '<a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="x">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a>' : '') . '
 </div>' . (($this->Input->get('act') == 'select') ? '
 
 <form action="'.ampersand($this->Environment->request, true).'" id="tl_select" class="tl_form" method="post">
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_select">
-<input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">' : '').'
+<input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">' : '').($blnClipboard ? '
+
+<div id="paste_hint">
+  <p>'.$GLOBALS['TL_LANG']['MSC']['selectNewPosition'].'</p>
+</div>' : '').'
 
 <div class="tl_listing_container tree_view" id="tl_listing">'.(isset($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['breadcrumb']) ? $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['breadcrumb'] : '').(($this->Input->get('act') == 'select') ? '
 
@@ -436,47 +453,50 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$this->Files->rename($this->intId, $destination);
 
 		// Find the corresponding DB entries
-		$objFile = \FilesModel::findByPath($this->intId);
-
-		// Set the parent ID
-		if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+		if ($this->blnIsDbAssisted)
 		{
-			$objFile->pid = 0;
-		}
-		else
-		{
-			$objFolder = \FilesModel::findByPath($strFolder);
-			$objFile->pid = $objFolder->id;
-		}
+			$objFile = \FilesModel::findByPath($this->intId);
 
-		// Update the database
-		$objFile->path = $destination;
-		$objFile->save();
-
-		// Update all child records
-		if ($objFile->type == 'folder')
-		{
-			$objFiles = \FilesCollection::findMultipleByBasepath($this->intId.'/');
-
-			if ($objFiles !== null)
+			// Set the parent ID
+			if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
 			{
-				while ($objFiles->next())
+				$objFile->pid = 0;
+			}
+			else
+			{
+				$objFolder = \FilesModel::findByPath($strFolder);
+				$objFile->pid = $objFolder->id;
+			}
+
+			// Update the database
+			$objFile->path = $destination;
+			$objFile->save();
+
+			// Update all child records
+			if ($objFile->type == 'folder')
+			{
+				$objFiles = \FilesCollection::findMultipleByBasepath($this->intId.'/');
+
+				if ($objFiles !== null)
 				{
-					$objFiles->path = preg_replace('@^'.$this->intId.'/@', $destination.'/', $objFiles->path);
-					$objFiles->save();
+					while ($objFiles->next())
+					{
+						$objFiles->path = preg_replace('@^'.$this->intId.'/@', $destination.'/', $objFiles->path);
+						$objFiles->save();
+					}
 				}
 			}
-		}
 
-		// Update the MD5 hash of the parent folders
-		foreach (array(dirname($this->intId), dirname($destination)) as $strPath)
-		{
-			if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
+			// Update the MD5 hash of the parent folders
+			foreach (array(dirname($this->intId), dirname($destination)) as $strPath)
 			{
-				$objModel = \FilesModel::findByPath($strPath);
-				$objFolder = new \Folder($objModel->path);
-				$objModel->hash = $objFolder->hash;
-				$objModel->save();
+				if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
+				{
+					$objModel = \FilesModel::findByPath($strPath);
+					$objFolder = new \Folder($objModel->path);
+					$objModel->hash = $objFolder->hash;
+					$objModel->save();
+				}
 			}
 		}
 
@@ -583,24 +603,27 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$strFolder = dirname($destination);
 
 			// Find the corresponding DB entries
-			$objFolder = \FilesModel::findByPath($source);
-			$objNewFolder = clone $objFolder;
-
-			// Set the parent ID
-			if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+			if ($this->blnIsDbAssisted)
 			{
-				$objNewFolder->pid = 0;
-			}
-			else
-			{
-				$objFolder = \FilesModel::findByPath($strFolder);
-				$objNewFolder->pid = $objFolder->id;
-			}
+				$objFolder = \FilesModel::findByPath($source);
+				$objNewFolder = clone $objFolder;
 
-			// Update the database
-			$objNewFolder->tstamp = time();
-			$objNewFolder->path = $destination;
-			$objNewFolder->save();
+				// Set the parent ID
+				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+				{
+					$objNewFolder->pid = 0;
+				}
+				else
+				{
+					$objFolder = \FilesModel::findByPath($strFolder);
+					$objNewFolder->pid = $objFolder->id;
+				}
+
+				// Update the database
+				$objNewFolder->tstamp = time();
+				$objNewFolder->path = $destination;
+				$objNewFolder->save();
+			}
 
 			// Files
 			$files = scan(TL_ROOT . '/' . $source);
@@ -621,14 +644,17 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->Files->copy($source . '/' . $file, $destination . '/' . $file);
 
 					// Find the corresponding DB entries
-					$objFile = \FilesModel::findByPath($source . '/' . $file);
-					$objNewFile = clone $objFile;
+					if ($this->blnIsDbAssisted)
+					{
+						$objFile = \FilesModel::findByPath($source . '/' . $file);
+						$objNewFile = clone $objFile;
 
-					// Update the database
-					$objNewFile->pid = $objNewFolder->id;
-					$objNewFile->tstamp = time();
-					$objNewFile->path = $destination . '/' . $file;
-					$objNewFile->save();
+						// Update the database
+						$objNewFile->pid = $objNewFolder->id;
+						$objNewFile->tstamp = time();
+						$objNewFile->path = $destination . '/' . $file;
+						$objNewFile->save();
+					}
 				}
 			}
 		}
@@ -650,35 +676,38 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$strFolder = dirname($destination);
 
 			// Find the corresponding DB entries
-			$objFile = \FilesModel::findByPath($source);
-			$objNewFile = clone $objFile;
-
-			// Set the parent ID
-			if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+			if ($this->blnIsDbAssisted)
 			{
-				$objNewFile->pid = 0;
+				$objFile = \FilesModel::findByPath($source);
+				$objNewFile = clone $objFile;
+
+				// Set the parent ID
+				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+				{
+					$objNewFile->pid = 0;
+				}
+				else
+				{
+					$objFolder = \FilesModel::findByPath($strFolder);
+					$objNewFile->pid = $objFolder->id;
+				}
+
+				// Update the database
+				$objNewFile->tstamp = time();
+				$objNewFile->path = $destination;
+				$objNewFile->save();
 			}
-			else
+
+			$strPath = dirname($destination);
+
+			// Update the MD5 hash of the parent folder
+			if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
 			{
-				$objFolder = \FilesModel::findByPath($strFolder);
-				$objNewFile->pid = $objFolder->id;
+				$objModel = \FilesModel::findByPath($strPath);
+				$objFolder = new \Folder($objModel->path);
+				$objModel->hash = $objFolder->hash;
+				$objModel->save();
 			}
-
-			// Update the database
-			$objNewFile->tstamp = time();
-			$objNewFile->path = $destination;
-			$objNewFile->save();
-		}
-
-		$strPath = dirname($destination);
-
-		// Update the MD5 hash of the parent folder
-		if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
-		{
-			$objModel = \FilesModel::findByPath($strPath);
-			$objFolder = new \Folder($objModel->path);
-			$objModel->hash = $objFolder->hash;
-			$objModel->save();
 		}
 
 		// Do not reload on recursive calls
@@ -780,7 +809,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->Files->delete($source . '/' . $file);
 
 					// Find the corresponding DB entries
-					if ($file != '.DS_Store')
+					if ($this->blnIsDbAssisted && $file != '.DS_Store')
 					{
 						$objFile = \FilesModel::findByPath($source . '/' . $file);
 						$objFile->delete();
@@ -791,7 +820,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->Files->rmdir($source);
 
 			// Find the corresponding DB entries
-			if ($source != '.svn')
+			if ($this->blnIsDbAssisted && $source != '.svn')
 			{
 				$objFile = \FilesModel::findByPath($source);
 				$objFile->delete();
@@ -804,19 +833,25 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->Files->delete($source);
 
 			// Find the corresponding DB entries
-			$objFile = \FilesModel::findByPath($source);
-			$objFile->delete();
+			if ($this->blnIsDbAssisted)
+			{
+				$objFile = \FilesModel::findByPath($source);
+				$objFile->delete();
+			}
 		}
 
-		$strPath = dirname($source);
-
 		// Update the MD5 hash of the parent folder
-		if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
+		if ($this->blnIsDbAssisted)
 		{
-			$objModel = \FilesModel::findByPath($strPath);
-			$objFolder = new \Folder($objModel->path);
-			$objModel->hash = $objFolder->hash;
-			$objModel->save();
+			$strPath = dirname($source);
+
+			if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
+			{
+				$objModel = \FilesModel::findByPath($strPath);
+				$objFolder = new \Folder($objModel->path);
+				$objModel->hash = $objFolder->hash;
+				$objModel->save();
+			}
 		}
 
 		// Do not reload on recursive calls
@@ -911,28 +946,31 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			$arrUploaded = $objUploader->uploadTo($strFolder, 'files');
 
-			// Get the parent ID
-			if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				$pid = 0;
-			}
-			else
-			{
-				$objModel = \FilesModel::findByPath($strFolder);
-				$pid = $objModel->id;
-			}
-
 			// Generate the DB entries
-			foreach ($arrUploaded as $strFile)
+			if ($this->blnIsDbAssisted)
 			{
-				$objFile = new \FilesModel();
-				$objFile->pid    = $pid;
-				$objFile->tstamp = time();
-				$objFile->type   = 'file';
-				$objFile->path   = $strFile;
-				$objFile->hash   = md5_file(TL_ROOT . '/' . $strFile);
-				$objFile->name   = basename($strFile);
-				$objFile->save();
+				// Get the parent ID
+				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+				{
+					$pid = 0;
+				}
+				else
+				{
+					$objModel = \FilesModel::findByPath($strFolder);
+					$pid = $objModel->id;
+				}
+
+				foreach ($arrUploaded as $strFile)
+				{
+					$objFile = new \FilesModel();
+					$objFile->pid    = $pid;
+					$objFile->tstamp = time();
+					$objFile->type   = 'file';
+					$objFile->path   = $strFile;
+					$objFile->hash   = md5_file(TL_ROOT . '/' . $strFile);
+					$objFile->name   = basename($strFile);
+					$objFile->save();
+				}
 			}
 
 			// HOOK: post upload callback
@@ -946,19 +984,21 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			// Update the hash of the target folder
-			if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+			if ($this->blnIsDbAssisted)
 			{
-				$objModel = \FilesModel::findByPath($strFolder);
-				$objFolder = new \Folder($objModel->path);
-				$objModel->hash = $objFolder->hash;
-				$objModel->save();
+				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+				{
+					$objModel = \FilesModel::findByPath($strFolder);
+					$objFolder = new \Folder($objModel->path);
+					$objModel->hash = $objFolder->hash;
+					$objModel->save();
+				}
 			}
 
 			// Redirect or reload
 			if (!$objUploader->hasError())
 			{
 				// Do not purge the html folder (see #2898)
-
 				if ($this->Input->post('uploadNback') && !$objUploader->hasResized())
 				{
 					$this->resetMessages();
@@ -1020,8 +1060,11 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Get the DB entry
-		$objFile = \FilesModel::findByPath($this->intId);
-		$this->objActiveRecord = $objFile;
+		if ($this->blnIsDbAssisted)
+		{
+			$objFile = \FilesModel::findByPath($this->intId);
+			$this->objActiveRecord = $objFile;
+		}
 
 		$this->blnCreateNewVersion = false;
 
@@ -1271,8 +1314,11 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			// Set the current timestamp (-> DO NOT CHANGE THE ORDER version - timestamp)
-			$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
-						   ->execute(time(), $objFile->id);
+			if ($this->blnIsDbAssisted)
+			{
+				$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
+							   ->execute(time(), $objFile->id);
+			}
 
 			// Redirect
 			if ($this->Input->post('saveNclose'))
@@ -1282,7 +1328,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				$this->redirect($this->getReferer());
 			}
 
-			$this->redirect($this->addToUrl('id='.$this->urlEncode($this->objActiveRecord->path)));
+			// Reload
+			if ($this->blnIsDbAssisted)
+			{
+				$this->redirect($this->addToUrl('id='.$this->urlEncode($this->objActiveRecord->path)));
+			}
+			else
+			{
+				$this->redirect($this->addToUrl('id='.$this->urlEncode($this->strPath.'/'.$this->varValue).$this->strExtension));
+			}
 		}
 
 		// Set the focus if there is an error
@@ -1341,8 +1395,11 @@ window.addEvent(\'domready\', function() {
 				$this->blnCreateNewVersion = false;
 
 				// Get the DB entry
-				$objFile = \FilesModel::findByPath($id);
-				$this->objActiveRecord = $objFile;
+				if ($this->blnIsDbAssisted)
+				{
+					$objFile = \FilesModel::findByPath($id);
+					$this->objActiveRecord = $objFile;
+				}
 
 				$this->createInitialVersion($this->strTable, $objFile->id);
 
@@ -1408,7 +1465,7 @@ window.addEvent(\'domready\', function() {
   <input type="hidden" name="FORM_FIELDS_'.$this->intId.'[]" value="'.specialchars(implode(',', $formFields)).'">
 </div>';
 
-				// Save record
+				// Save the record
 				if ($this->Input->post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
 				{
 					// Call onsubmit_callback
@@ -1440,8 +1497,11 @@ window.addEvent(\'domready\', function() {
 					}
 
 					// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
-					$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
-								   ->execute(time(), $objFile->id);
+					if ($this->blnIsDbAssisted)
+					{
+						$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
+									   ->execute(time(), $objFile->id);
+					}
 				}
 			}
 
@@ -1605,9 +1665,12 @@ window.addEvent(\'domready\', function() {
 				$objFile->close();
 
 				// Update the md5 hash
-				$objMeta = \FilesModel::findByPath($objFile->value);
-				$objMeta->hash = md5_file(TL_ROOT . '/' . $objFile->value);
-				$objMeta->save();
+				if ($this->blnIsDbAssisted)
+				{
+					$objMeta = \FilesModel::findByPath($objFile->value);
+					$objMeta->hash = md5_file(TL_ROOT . '/' . $objFile->value);
+					$objMeta->save();
+				}
 			}
 
 			if ($this->Input->post('saveNclose'))
@@ -1735,7 +1798,6 @@ window.addEvent(\'domready\', function() {
 			$this->log('The protection from folder "'.$this->intId.'" has been removed', 'DC_Folder protect()', TL_FILES);
 			$this->redirect($this->getReferer());
 		}
-
 		// Protect the folder
 		else
 		{
@@ -1785,74 +1847,77 @@ window.addEvent(\'domready\', function() {
 
 			$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
 
-			// Get the parent ID
-			if ($this->strPath == $GLOBALS['TL_CONFIG']['uploadPath'])
+			// Update the database
+			if ($this->blnIsDbAssisted)
 			{
-				$pid = 0;
-			}
-			else
-			{
-				$objFolder = \FilesModel::findByPath($this->strPath);
-				$pid = $objFolder->id;
-			}
-
-			// New folders
-			if (stristr($this->intId, '__new__') == true)
-			{
-				// Create the DB entry
-				$objFile = new \FilesModel();
-				$objFile->pid    = $pid;
-				$objFile->tstamp = time();
-				$objFile->type   = 'folder';
-				$objFile->path   = $this->strPath . '/' . $varValue;
-				$objFile->name   = $varValue;
-				$objFile->hash   = md5('');
-				$objFile->save();
-				$this->objActiveRecord = $objFile;
-
-				// Add a log entry
-				$this->log('Folder "'.$this->strPath.'/'.$varValue.$this->strExtension.'" has been created', 'DC_Folder save()', TL_FILES);
-			}
-			else
-			{
-				// Find the corresponding DB entry
-				$objFile = \FilesModel::findByPath($this->strPath . '/' . $this->varValue . $this->strExtension);
-
-				// Update the data
-				$objFile->pid  = $pid;
-				$objFile->path = $this->strPath . '/' . $varValue . $this->strExtension;
-				$objFile->name = $varValue . $this->strExtension;
-				$objFile->save();
-
-				$this->objActiveRecord = $objFile;
-
-				// Add a log entry
-				$this->log('File or folder "'.$this->strPath.'/'.$this->varValue.$this->strExtension.'" has been renamed to "'.$this->strPath.'/'.$varValue.$this->strExtension.'"', 'DC_Folder save()', TL_FILES);
-			}
-
-			// Also update all child records
-			if ($objFile->type == 'folder')
-			{
-				$strPath = $this->strPath . '/' . $this->varValue . '/';
-				$objFiles = \FilesCollection::findMultipleByBasepath($strPath);
-
-				if ($objFiles !== null)
+				// Get the parent ID
+				if ($this->strPath == $GLOBALS['TL_CONFIG']['uploadPath'])
 				{
-					while ($objFiles->next())
+					$pid = 0;
+				}
+				else
+				{
+					$objFolder = \FilesModel::findByPath($this->strPath);
+					$pid = $objFolder->id;
+				}
+
+				// New folders
+				if (stristr($this->intId, '__new__') == true)
+				{
+					// Create the DB entry
+					$objFile = new \FilesModel();
+					$objFile->pid    = $pid;
+					$objFile->tstamp = time();
+					$objFile->type   = 'folder';
+					$objFile->path   = $this->strPath . '/' . $varValue;
+					$objFile->name   = $varValue;
+					$objFile->hash   = md5('');
+					$objFile->save();
+					$this->objActiveRecord = $objFile;
+
+					// Add a log entry
+					$this->log('Folder "'.$this->strPath.'/'.$varValue.$this->strExtension.'" has been created', 'DC_Folder save()', TL_FILES);
+				}
+				else
+				{
+					// Find the corresponding DB entry
+					$objFile = \FilesModel::findByPath($this->strPath . '/' . $this->varValue . $this->strExtension);
+
+					// Update the data
+					$objFile->pid  = $pid;
+					$objFile->path = $this->strPath . '/' . $varValue . $this->strExtension;
+					$objFile->name = $varValue . $this->strExtension;
+					$objFile->save();
+					$this->objActiveRecord = $objFile;
+
+					// Add a log entry
+					$this->log('File or folder "'.$this->strPath.'/'.$this->varValue.$this->strExtension.'" has been renamed to "'.$this->strPath.'/'.$varValue.$this->strExtension.'"', 'DC_Folder save()', TL_FILES);
+				}
+
+				// Also update all child records
+				if ($objFile->type == 'folder')
+				{
+					$strPath = $this->strPath . '/' . $this->varValue . '/';
+					$objFiles = \FilesCollection::findMultipleByBasepath($strPath);
+	
+					if ($objFiles !== null)
 					{
-						$objFiles->path = preg_replace('@^'.$strPath.'@', $this->strPath.'/'.$varValue.'/', $objFiles->path);
-						$objFiles->save();
+						while ($objFiles->next())
+						{
+							$objFiles->path = preg_replace('@^'.$strPath.'@', $this->strPath.'/'.$varValue.'/', $objFiles->path);
+							$objFiles->save();
+						}
 					}
 				}
-			}
 
-			// Also update the MD5 hash of the parent folder
-			if ($objFile->pid > 0)
-			{
-				$objModel = \FilesModel::findByPk($objFile->pid);
-				$objFolder = new \Folder($objModel->path);
-				$objModel->hash = $objFolder->hash;
-				$objModel->save();
+				// Also update the MD5 hash of the parent folder
+				if ($objFile->pid > 0)
+				{
+					$objModel = \FilesModel::findByPk($objFile->pid);
+					$objFolder = new \Folder($objModel->path);
+					$objModel->hash = $objFolder->hash;
+					$objModel->save();
+				}
 			}
 
 			// Set the new value so the input field can show it
@@ -1869,7 +1934,7 @@ window.addEvent(\'domready\', function() {
 
 			$this->varValue = $varValue;
 		}
-		else
+		elseif ($this->blnIsDbAssisted)
 		{
 			// Convert date formats into timestamps
 			if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
@@ -1973,6 +2038,11 @@ window.addEvent(\'domready\', function() {
 	 */
 	public function sync()
 	{
+		if (!$this->blnIsDbAssisted)
+		{
+			return;
+		}
+
 		$this->arrMessages = array();
 
 		// Reset the "found" flag
@@ -2105,6 +2175,11 @@ window.addEvent(\'domready\', function() {
 	 */
 	protected function execSync($strPath, $intPid=0)
 	{
+		if (!$this->blnIsDbAssisted)
+		{
+			return;
+		}
+
 		$arrFiles = array();
 		$arrFolders = array();
 		$arrScan = scan(TL_ROOT . '/' . $strPath);
@@ -2519,6 +2594,7 @@ window.addEvent(\'domready\', function() {
 		// Check whether the file is within the files directory
 		if (!preg_match('/^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/').'/i', $strFile))
 		{
+dump($strFile);exit;
 			$this->log('File or folder "'.$strFile.'" is not within the files directory', 'DC_Folder isValid()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}

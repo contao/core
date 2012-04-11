@@ -249,7 +249,7 @@ class StyleSheets extends \Backend
 
 		// Selector
 		$arrSelector = trimsplit(',', $this->String->decodeEntities($row['selector']));
-		$return .= implode(($blnWriteToFile ? ',' : ",\n"), $arrSelector) . ($blnWriteToFile ? ($blnDebug ? ' ' : '') : "\n") . '{';
+		$return .= implode(($blnWriteToFile ? ',' : ', '), $arrSelector) . (($blnWriteToFile && !$blnDebug) ? '' : ' ') . '{';
 
 		// Size
 		if ($row['size'])

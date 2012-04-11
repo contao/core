@@ -37,15 +37,12 @@
 	font-size:15px;
 	color:#838990;
 }
-#paste_hint .parent_view {
+#paste_hint p {
 	top:10px;
-	right:29px;
+	right:30px;
 	padding:0 36px 20px 0;
-	background:url("images/arrow_cr.png") bottom right no-repeat;
+	background:url("images/arrow.png") bottom right no-repeat;
 }
-#paste_hint .tree_view {
-	top:4px;
-	right:48px;
-	padding:0 32px 28px 0;
-	background:url("images/arrow_br.png") bottom right no-repeat;
+.tl_listing_container {
+	margin-top:44px !important;
 }
