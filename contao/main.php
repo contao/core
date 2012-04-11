@@ -254,6 +254,7 @@ class Main extends Backend
 		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
 		$this->Template->coreOnlyMode = $GLOBALS['TL_LANG']['MSC']['coreOnlyMode'];
 		$this->Template->isCoreOnlyMode = $GLOBALS['TL_CONFIG']['coreOnlyMode'];
+		$this->Template->loadFonts = $GLOBALS['TL_CONFIG']['loadGoogleFonts'];
 
 		// Front end preview links
 		if (CURRENT_ID != '')

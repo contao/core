@@ -1,0 +1,2 @@
+/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */
+@import url("http://fonts.googleapis.com/css?family=Architects+Daughter");#paste_hint{position:relative}#paste_hint p{position:absolute;font-family:"Architects Daughter",cursive;font-size:15px;color:#838990}#paste_hint .parent_view{top:10px;right:29px;padding:0 36px 20px 0;background:url("images/arrow_cr.png") bottom right no-repeat}#paste_hint .tree_view{top:4px;right:48px;padding:0 32px 28px 0;background:url("images/arrow_br.png") bottom right no-repeat}

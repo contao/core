@@ -743,6 +743,11 @@ label.tl_change_selected {
 	vertical-align:-5px;
 }
 
+/* Paste */
+.parent_view.paste {
+	margin-top:44px;
+}
+
 /* Picker */
 .selector_container ul {
 	margin:0 0 9px;

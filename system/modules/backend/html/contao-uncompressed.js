@@ -1017,18 +1017,7 @@ var Backend =
 	 * @param string
 	 */
 	blink: function() {
-		var remove = null;
-
-		$$('img.blink').each(function(el) {
-			if (remove == null) {
-				remove = el.hasClass('opacity');
-			}
-			if (remove) {
-				el.removeClass('opacity');
-			} else {
-				el.addClass('opacity');
-			}
-		});
+		// Keep for backwards compatibility
 	},
 
 	/**
@@ -1653,9 +1642,6 @@ window.addEvent('domready', function() {
 	if (Elements.chosen != undefined) {
 		$$('select.tl_chosen').chosen();
 	}
-
-	//Backend.hideTreeBody();
-	Backend.blink.periodical(600);
 
 	// Remove line wraps from textareas
 	$$('textarea.monospace').each(function(el) {
