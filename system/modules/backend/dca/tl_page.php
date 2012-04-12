@@ -1326,10 +1326,16 @@ class tl_page extends Backend
 	 * @param \DataContainer
 	 * @param string
 	 * @param boolean
+	 * @param boolean
 	 * @return string
 	 */
-	public function addIcon($row, $label, \DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false)
+	public function addIcon($row, $label, \DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false)
 	{
+		if ($blnProtected)
+		{
+			$row['protected'] = true;
+		}
+
 		$image = $this->getPageStatusIcon((object)$row);
 
 		// Return the image only
