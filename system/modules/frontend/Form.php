@@ -222,7 +222,7 @@ class Form extends \Hybrid
 		}
 
 		// Add a warning to the page title
-		if ($doNotSubmit)
+		if ($doNotSubmit && !$this->Environment->isAjax)
 		{
 			global $objPage;
 			$title = $objPage->pageTitle ?: $objPage->title;
