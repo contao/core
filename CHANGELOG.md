@@ -5,6 +5,9 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly check the permission to edit tasks (see #4140).
+
+### Fixed
 Check the uploader class before instantiation (see #4086).
 
 ### Fixed
