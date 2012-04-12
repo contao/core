@@ -5,6 +5,10 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Add the admin e-mail address of a website root page to the page object so it can
+be used in the form generator (see #4115).
+
+### Fixed
 Add a "protected" icon to subpages of a protected page (see #4123).
 
 ### Fixed
