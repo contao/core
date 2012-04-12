@@ -617,6 +617,7 @@ abstract class Controller extends \System
 			$objPage->dateFormat = $objParentPage->dateFormat;
 			$objPage->timeFormat = $objParentPage->timeFormat;
 			$objPage->datimFormat = $objParentPage->datimFormat;
+			$objPage->adminEmail = $objParentPage->adminEmail;
 
 			// Store whether the root page has been published
 			$time = time();
