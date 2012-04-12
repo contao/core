@@ -472,7 +472,6 @@ abstract class Widget extends Controller
 	public function getAttributes($arrStrip=array())
 	{
 		$blnIsXhtml = false;
-		$arrAttributes = $this->arrAttributes;
 
 		// Remove HTML5 attributes in XHTML code
 		if (TL_MODE == 'FE')
@@ -506,7 +505,11 @@ abstract class Widget extends Controller
 			{
 				if (TL_MODE == 'FE') // see #3878
 				{
-					$strAttributes .=  $blnIsXhtml ? ' ' . $k . '="' . $v . '"' : ' ' . $k;
+					$strAttributes .= $blnIsXhtml ? ' ' . $k . '="' . $v . '"' : ' ' . $k;
+				}
+				elseif ($k == 'disabled' || $k == 'readonly') // see #4131
+				{
+					$strAttributes .= ' ' . $k;
 				}
 			}
 			else

@@ -5,6 +5,9 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Allow "disabled" and "readonly" attributes in the back end (see #4131).
+
+### Fixed
 Add a log entry if a new version is created by toggling the visibility of an
 element via Ajax (see #4163).
 
