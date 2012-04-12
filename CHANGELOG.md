@@ -5,6 +5,9 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly sort content element and module types in the help wizard (see #4156).
+
+### Fixed
 Add the admin e-mail address of a website root page to the page object so it can
 be used in the form generator (see #4115).
 

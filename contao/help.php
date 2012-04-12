@@ -80,10 +80,49 @@ class Help extends Backend
 		$this->loadDataContainer($table);
 
 		$this->Template = new BackendTemplate('be_help');
+		$this->Template->rows = array();
+		$this->Template->explanation = '';
+
 		$arrData = $GLOBALS['TL_DCA'][$table]['fields'][$field];
 
-		// Add reference
-		if (!empty($arrData['reference']))
+		// Front end modules
+		if ($table == 'tl_module' && $field == 'type')
+		{
+			$rows = array();
+
+			foreach (array_keys($GLOBALS['FE_MOD']) as $group)
+			{
+				$rows[] = array('colspan', $arrData['reference'][$group]);
+
+				foreach ($GLOBALS['FE_MOD'][$group] as $module=>$class)
+				{
+					$rows[] = $arrData['reference'][$module];
+				}
+			}
+
+			$this->Template->rows = $rows;
+		}
+
+		// Content elements
+		if ($table == 'tl_content' && $field == 'type')
+		{
+			$rows = array();
+
+			foreach (array_keys($GLOBALS['TL_CTE']) as $group)
+			{
+				$rows[] = array('colspan', $arrData['reference'][$group]);
+
+				foreach ($GLOBALS['TL_CTE'][$group] as $element=>$class)
+				{
+					$rows[] = $arrData['reference'][$element];
+				}
+			}
+
+			$this->Template->rows = $rows;
+		}
+
+		// Add the reference
+		elseif (!empty($arrData['reference']))
 		{
 			$rows = array();
 			$options = is_array($arrData['options']) ? $arrData['options'] : array_keys($arrData['reference']);
@@ -115,7 +154,7 @@ class Help extends Backend
 			$this->Template->rows = $rows;
 		}
 
-		// Add explanation
+		// Add an explanation
 		if (isset($arrData['explanation']))
 		{
 			$this->loadLanguageFile('explain');
