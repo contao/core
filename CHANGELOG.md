@@ -5,6 +5,9 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Re-added the version 2.9.2 update code in the install tool template (see #4165).
+
+### Fixed
 Correctly check the permission to edit tasks (see #4140).
 
 ### Fixed
