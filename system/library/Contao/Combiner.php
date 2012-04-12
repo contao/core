@@ -107,13 +107,20 @@ class Combiner extends \System
 		// Check the source file
 		if (!file_exists(TL_ROOT . '/' . $strFile))
 		{
-			$this->import('StyleSheets');
-			$this->StyleSheets->updateStyleSheets();
-
-			// Retry
-			if (!file_exists(TL_ROOT . '/' . $strFile))
+			if ($this->strMode == self::JS)
 			{
 				throw new \Exception("File $strFile does not exist");
+			}
+			else
+			{
+				$this->import('StyleSheets');
+				$this->StyleSheets->updateStyleSheets();
+
+				// Retry
+				if (!file_exists(TL_ROOT . '/' . $strFile))
+				{
+					throw new \Exception("File $strFile does not exist");
+				}
 			}
 		}
 
