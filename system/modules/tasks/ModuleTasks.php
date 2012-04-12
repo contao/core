@@ -73,6 +73,19 @@ class ModuleTasks extends \BackendModule
 		$this->import('BackendUser', 'User');
 		$this->loadLanguageFile('tl_task');
 
+		// Check the request token (see #4007)
+		if (isset($_GET['act']))
+		{
+			$this->import('RequestToken');
+
+			if (!isset($_GET['rt']) || !$this->RequestToken->validate($this->Input->get('rt')))
+			{
+				$this->Session->set('INVALID_TOKEN_URL', $this->Environment->request);
+				$this->redirect('contao/confirm.php');
+			}
+		}
+
+		// Dispatch
 		switch ($this->Input->get('act'))
 		{
 			case 'create':
@@ -311,6 +324,13 @@ class ModuleTasks extends \BackendModule
 		}
 
 		// Check if the user is allowed to edit the task
+		if (!$this->User->isAdmin && $objTask->createdBy != $this->User->id)
+		{
+			$this->log('Not enough permissions to edit task ID "' . $this->Input->get('id') . '"', 'ModuleTask editTask()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
+		// Advanced options
 		$this->blnAdvanced = ($this->User->isAdmin || $objTask->createdBy == $this->User->id);
 		$this->Template->advanced = $this->blnAdvanced;
 

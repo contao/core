@@ -67,5 +67,6 @@
 </div>
 
 <script>
-window.addEvent('domready', function() { new TableSort('taskcenter'); });
+window.addEvent('domready', function() {
+  new TableSort('taskcenter'); });
 </script>
