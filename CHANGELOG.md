@@ -5,6 +5,10 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Add a log entry if a new version is created by toggling the visibility of an
+element via Ajax (see #4163).
+
+### Fixed
 Re-added the version 2.9.2 update code in the install tool template (see #4165).
 
 ### Fixed

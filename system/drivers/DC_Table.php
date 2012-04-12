@@ -5031,56 +5031,6 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			}
 		}
 	}
-
-
-	/**
-	 * Get the parent records of an entry and return them as string
-	 * which can be used in a log message
-	 * @param string
-	 * @param integer
-	 * @return string
-	 */
-	protected function getParentRecords($strTable, $intId)
-	{
-		// No parent table
-		if (!isset($GLOBALS['TL_DCA'][$strTable]['config']['ptable']))
-		{
-			return '';
-		}
-
-		$arrParent = array();
-
-		do
-		{
-			// Get the pid
-			$objParent = $this->Database->prepare("SELECT pid FROM " . $strTable . " WHERE id=?")
-										->limit(1)
-										->execute($intId);
-
-			if ($objParent->numRows < 1)
-			{
-				break;
-			}
-
-			// Store the parent table information
-			$strTable = $GLOBALS['TL_DCA'][$strTable]['config']['ptable'];
-			$intId = $objParent->pid;
-
-			// Add the log entry
-			$arrParent[] = $strTable .'.id=' . $intId;
-
-			// Load the data container of the parent table
-			$this->loadDataContainer($strTable);
-		}
-		while ($intId && isset($GLOBALS['TL_DCA'][$strTable]['config']['ptable']));
-
-		if (empty($arrParent))
-		{
-			return '';
-		}
-
-		return ' (parent records: ' . implode(', ', $arrParent) . ')';
-	}
 }
 
 ?>

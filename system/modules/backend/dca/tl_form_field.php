@@ -647,6 +647,7 @@ class tl_form_field extends Backend
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_form_field', $intId);
+		$this->log('A new version of record "tl_form_field.id='.$intId.'" has been created'.$this->getParentRecords('tl_form_field', $intId), 'tl_form_field toggleVisibility()', TL_GENERAL);
 	}
 }
 

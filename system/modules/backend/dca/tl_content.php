@@ -1283,6 +1283,7 @@ class tl_content extends Backend
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_content', $intId);
+		$this->log('A new version of record "tl_content.id='.$intId.'" has been created'.$this->getParentRecords('tl_content', $intId), 'tl_content toggleVisibility()', TL_GENERAL);
 	}
 }
 
