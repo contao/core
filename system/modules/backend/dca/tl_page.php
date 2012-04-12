@@ -1225,9 +1225,10 @@ class tl_page extends Backend
 	 * @param DataContainer
 	 * @param string
 	 * @param boolean
+	 * @param boolean
 	 * @return string
 	 */
-	public function addIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false)
+	public function addIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false)
 	{
 		$sub = 0;
 		$image = ''.$row['type'].'.gif';
@@ -1245,7 +1246,7 @@ class tl_page extends Backend
 		}
 
 		// Page protected
-		if ($row['protected'] && !in_array($row['type'], array('root', 'error_403', 'error_404')))
+		if (($blnProtected || $row['protected']) && !in_array($row['type'], array('root', 'error_403', 'error_404')))
 		{
 			$sub += 4;
 		}

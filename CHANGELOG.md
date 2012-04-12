@@ -5,6 +5,9 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Add a "protected" icon to subpages of a protected page (see #4123).
+
+### Fixed
 Allow "disabled" and "readonly" attributes in the back end (see #4131).
 
 ### Fixed
