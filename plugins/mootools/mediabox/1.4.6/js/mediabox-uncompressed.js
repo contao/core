@@ -150,6 +150,9 @@ var Mediabox;
 				vmColor: 'ffffff'			// Custom controller colors, hex value minus the # sign, defult is 5ca0b5
 			};
 
+			// PATCH: extend the options (see #4149)
+			options = Object.merge(options, _options);
+
 			prevLink.set('html', options.buttonText[0]);
 			nextLink.set('html', options.buttonText[1]);
 			closeLink.set('html', options.buttonText[2]);
