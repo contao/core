@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Also add the classes "float_above" and "float_below" to image containers (which
+now can only have the classes "float_left" and "float_right") (see #4157). 
+
 ### Improved
 Do not generate links to previous and next months in the calendar if they do not
 contain any events (see #4160).

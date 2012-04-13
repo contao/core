@@ -3367,7 +3367,7 @@ abstract class Controller extends \System
 		}
 
 		// Float image
-		if (in_array($arrItem['floating'], array('left', 'right')))
+		if ($arrItem['floating'] != '')
 		{
 			$objTemplate->floatClass = ' float_' . $arrItem['floating'];
 			$objTemplate->float = ' float:' . $arrItem['floating'] . ';';
