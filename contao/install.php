@@ -869,6 +869,14 @@ class InstallTool extends Backend
 			return;
 		}
 
+		$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_user");
+
+		// Still a fresh installation
+		if ($objRow->count < 1)
+		{
+			return;
+		}
+
 		// Step 1: database structure
 		if (!$this->Database->tableExists('tl_files'))
 		{
@@ -883,41 +891,39 @@ class InstallTool extends Backend
 			$this->Template->is30Update = true;
 			$this->outputAndExit();
 		}
-		else
+
+		$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_files");
+
+		// Step 2: scan the upload folder
+		if ($objRow->count < 1)
 		{
-			$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_files");
-
-			// Step 2: scan the upload folder
-			if ($objRow->count < 1)
+			if ($this->Input->post('FORM_SUBMIT') == 'tl_30update')
 			{
-				if ($this->Input->post('FORM_SUBMIT') == 'tl_30update')
-				{
-					$this->import('DbUpdater');
-					$this->DbUpdater->scanUploadFolder();
-					$this->Config->update("\$GLOBALS['TL_CONFIG']['checkFileTree']", true);
-					$this->reload();
-				}
-
-				$this->Template->step = 2;
-				$this->Template->is30Update = true;
-				$this->outputAndExit();
+				$this->import('DbUpdater');
+				$this->DbUpdater->scanUploadFolder();
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['checkFileTree']", true);
+				$this->reload();
 			}
 
-			// Step 3: update the database fields
-			elseif ($GLOBALS['TL_CONFIG']['checkFileTree'])
-			{
-				if ($this->Input->post('FORM_SUBMIT') == 'tl_30update')
-				{
-					$this->import('DbUpdater');
-					$this->DbUpdater->updateFileTreeFields();
-					$this->Config->update("\$GLOBALS['TL_CONFIG']['checkFileTree']", false);
-					$this->reload();
-				}
+			$this->Template->step = 2;
+			$this->Template->is30Update = true;
+			$this->outputAndExit();
+		}
 
-				$this->Template->step = 3;
-				$this->Template->is30Update = true;
-				$this->outputAndExit();
+		// Step 3: update the database fields
+		elseif ($GLOBALS['TL_CONFIG']['checkFileTree'])
+		{
+			if ($this->Input->post('FORM_SUBMIT') == 'tl_30update')
+			{
+				$this->import('DbUpdater');
+				$this->DbUpdater->updateFileTreeFields();
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['checkFileTree']", false);
+				$this->reload();
 			}
+
+			$this->Template->step = 3;
+			$this->Template->is30Update = true;
+			$this->outputAndExit();
 		}
 	}
 }
