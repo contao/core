@@ -257,7 +257,7 @@ class DcaExtractor extends \DbInstaller
 	protected function createExtract()
 	{
 		// Load the DataContainer
-		if (!isset($GLOBALS['TL_DCA'][$this->strTable]))
+		if (!isset($GLOBALS['loadDataContainer'][$this->strTable]))
 		{
 			$this->loadDataContainer($this->strTable);
 		}
