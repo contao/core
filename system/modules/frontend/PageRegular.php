@@ -84,7 +84,7 @@ class PageRegular extends \Frontend
 		$arrModuleIds = array_map(function($arr) { return $arr['mod']; }, $arrModules);
 		$objModules = \ModuleCollection::findMultipleByIds($arrModuleIds);
 
-		if ($objModules !== null)
+		if ($objModules !== null || $arrModules[0]['mod'] == 0) // see #4137
 		{
 			foreach ($arrModules as $arrModule)
 			{

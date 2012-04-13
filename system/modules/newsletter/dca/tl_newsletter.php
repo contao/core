@@ -183,7 +183,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			(
 				array('tl_newsletter', 'convertRelativeLinks')
 			),
-			'sql'                     => "text NULL"
+			'sql'                     => "mediumtext NULL"
 		),
 		'text' => array
 		(
@@ -192,7 +192,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'search'                  => true,
 			'inputType'               => 'textarea',
 			'eval'                    => array('decodeEntities'=>true),
-			'sql'                     => "text NULL"
+			'sql'                     => "mediumtext NULL"
 		),
 		'addFile' => array
 		(

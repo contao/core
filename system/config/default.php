@@ -197,7 +197,7 @@ $GLOBALS['TL_CONFIG']['encryptionCipher'] = 'rijndael-256';
  * Please enter how many upload fields you want to show in the back end.
  */
 $GLOBALS['TL_CONFIG']['uploadPath']     = 'files';
-$GLOBALS['TL_CONFIG']['uploadTypes']    = 'jpg,jpeg,gif,png,ico,csv,doc,docx,xls,xlsx,ppt,pptx,odt,ods,odp,pdf,mp3,mp4,m4a,m4v,webm,ogg,wma,wmv,ram,rm,mov,fla,flv,swf,css,html,htm,txt,zip,cto';
+$GLOBALS['TL_CONFIG']['uploadTypes']    = 'jpg,jpeg,gif,png,ico,csv,doc,docx,xls,xlsx,ppt,pptx,odt,ods,odp,pdf,mp3,mp4,m4a,m4v,webm,ogg,wma,wmv,ram,rm,mov,fla,flv,swf,css,html,htm,txt,zip,rar,7z,cto';
 $GLOBALS['TL_CONFIG']['maxFileSize']    = 2048000;
 $GLOBALS['TL_CONFIG']['imageWidth']     = 800;
 $GLOBALS['TL_CONFIG']['imageHeight']    = 600;
@@ -301,7 +301,7 @@ $GLOBALS['TL_CONFIG']['defaultChmod']         = array('u1', 'u2', 'u3', 'u4', 'u
 $GLOBALS['TL_CONFIG']['validImageTypes']      = 'jpg,jpeg,gif,png,tif,tiff,bmp';
 $GLOBALS['TL_CONFIG']['editableFiles']        = 'htm,html,css,js,txt,log,xml';
 $GLOBALS['TL_CONFIG']['templateFiles']        = 'tpl,html5,xhtml';
-$GLOBALS['TL_CONFIG']['allowedDownload']      = 'jpg,jpeg,gif,png,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov';
+$GLOBALS['TL_CONFIG']['allowedDownload']      = 'jpg,jpeg,gif,png,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov,zip,rar,7z';
 $GLOBALS['TL_CONFIG']['installPassword']      = '4d19f112e30930cbe278de966e9b2d907568d1c8';
 $GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'http://www.inetrobots.com/liveupdate/';
 $GLOBALS['TL_CONFIG']['repository_wsdl']      = 'http://www.contao.org/services/repository.wsdl';

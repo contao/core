@@ -650,7 +650,7 @@ var AjaxRequest =
 			'html': message,
 			'styles': {
 				'display': 'block',
-				'top': (scroll.y + 18) + 'px'
+				'top': (scroll.y + 100) + 'px'
 			}
 		})
 	},
