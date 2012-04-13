@@ -323,12 +323,18 @@ class tl_style_sheet extends Backend
 	{
 		$media = deserialize($row['media']);
 
-		if (!is_array($media) || empty($media))
+		if ($row['mediaQuery'] != '')
+		{
+			return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">['. $row['mediaQuery'] .']</span>' . "</div>\n";
+		}
+		elseif (is_array($media) && !empty($media))
+		{
+			return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">['. implode(', ', $media) .']</span>' . "</div>\n";
+		}
+		else
 		{
 			return '<div style="float:left">'. $row['name'] ."</div>\n";
 		}
-
-		return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">['. implode(', ', $media) .']</span>' . "</div>\n";
 	}
 
 

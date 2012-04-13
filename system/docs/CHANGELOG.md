@@ -5,6 +5,9 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Improved
+Show the media query in the style sheet overview (see #4042).
+
+### Improved
 Prevent administrators from disabling their own account (see #4102).
 
 ### Changed
