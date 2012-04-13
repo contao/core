@@ -169,24 +169,6 @@ class PageRegular extends \Frontend
 		$this->createFooterScripts($objPage, $objLayout);
 		$this->createHeaderScripts($objPage, $objLayout);
 
-		// Add an invisible character to empty sections (IE fix)
-		if ($this->Template->header == '' && $objLayout->header)
-		{
-			$this->Template->header = '&nbsp;';
-		}
-		if ($this->Template->left == '' && ($objLayout->cols == '2cll' || $objLayout->cols == '3cl'))
-		{
-			$this->Template->left = '&nbsp;';
-		}
-		if ($this->Template->right == '' && ($objLayout->cols == '2clr' || $objLayout->cols == '3cl'))
-		{
-			$this->Template->right = '&nbsp;';
-		}
-		if ($this->Template->footer == '' && $objLayout->footer)
-		{
-			$this->Template->footer = '&nbsp;';
-		}
-
 		// Print the template to the screen
 		$this->Template->output();
 	}

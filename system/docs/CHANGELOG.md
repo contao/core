@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+Removed the IE6 layout fix which added an non-breaking space to every activated
+column (see #23).
+
 ### New
 Also add the classes "float_above" and "float_below" to image containers (which
 now can only have the classes "float_left" and "float_right") (see #4157). 
