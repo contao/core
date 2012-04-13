@@ -5,6 +5,10 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Improved
+Do not generate links to previous and next months in the calendar if they do not
+contain any events (see #4160).
+
+### Improved
 Added a better hint when choosing the position of a new element (tree view).
 
 ### New

@@ -77,4 +77,21 @@ class CalendarEventsModel extends \Model
 
 		return static::findBy($arrColumns, array($intId, $varAlias));
 	}
+
+
+	/**
+	 * Find the first and last event in one or more calendars
+	 * @param array
+	 * @return \Contao\Model
+	 */
+	public static function findBoundaries($arrPids)
+	{
+		if (!is_array($arrPids) || empty($arrPids))
+		{
+			return null;
+		}
+
+		$objMinMax = Database::getInstance()->query("SELECT MIN(startTime) AS dateFrom, MAX(endTime) AS dateTo, MAX(repeatEnd) AS repeatUntil FROM tl_calendar_events WHERE pid IN(". implode(',', array_map('intval', $arrPids)) .")");
+		return new static($objMinMax);
+	}
 }

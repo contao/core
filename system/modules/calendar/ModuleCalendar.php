@@ -117,24 +117,28 @@ class ModuleCalendar extends \Events
 		{
 			$this->Date = new \Date($this->Input->get('month'), 'Ym');
 		}
-
 		// Respond to day
 		elseif ($this->Input->get('day'))
 		{
 			$this->Date = new \Date($this->Input->get('day'), 'Ymd');
 		}
-
 		// Fallback to today
 		else
 		{
 			$this->Date = new \Date();
 		}
 
-		$intYear = date('Y', $this->Date->tstamp);
-		$intMonth = date('m', $this->Date->tstamp);
+		// Find the boundaries
+		$objMinMax = \CalendarEventsModel::findBoundaries($this->cal_calendar);
+		$intLeftBoundary = date('Ym', $objMinMax->dateFrom);
+		$intRightBoundary = date('Ym', max($objMinMax->dateTo, $objMinMax->repeatUntil));
 
+		// Instantiate the template
 		$objTemplate = new \FrontendTemplate(($this->cal_ctemplate ? $this->cal_ctemplate : 'cal_default'));
 
+		// Store year and month
+		$intYear = date('Y', $this->Date->tstamp);
+		$intMonth = date('m', $this->Date->tstamp);
 		$objTemplate->intYear = $intYear;
 		$objTemplate->intMonth = $intMonth;
 
@@ -142,11 +146,16 @@ class ModuleCalendar extends \Events
 		$prevMonth = ($intMonth == 1) ? 12 : ($intMonth - 1);
 		$prevYear = ($intMonth == 1) ? ($intYear - 1) : $intYear;
 		$lblPrevious = $GLOBALS['TL_LANG']['MONTHS'][($prevMonth - 1)] . ' ' . $prevYear;
+		$intPrevYm = intval($prevYear . str_pad($prevMonth, 2, 0, STR_PAD_LEFT));
 
-		$objTemplate->prevHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . $this->Input->get('id') . '&amp;' : '?') . 'month=' . $prevYear . str_pad($prevMonth, 2, 0, STR_PAD_LEFT);
-		$objTemplate->prevTitle = specialchars($lblPrevious);
-		$objTemplate->prevLink = $GLOBALS['TL_LANG']['MSC']['cal_previous'] . ' ' . $lblPrevious;
-		$objTemplate->prevLabel = $GLOBALS['TL_LANG']['MSC']['cal_previous'];
+		// Only generate a link if there are events (see #4160)
+		if ($intPrevYm >= $intLeftBoundary)
+		{
+			$objTemplate->prevHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . $this->Input->get('id') . '&amp;' : '?') . 'month=' . $intPrevYm;
+			$objTemplate->prevTitle = specialchars($lblPrevious);
+			$objTemplate->prevLink = $GLOBALS['TL_LANG']['MSC']['cal_previous'] . ' ' . $lblPrevious;
+			$objTemplate->prevLabel = $GLOBALS['TL_LANG']['MSC']['cal_previous'];
+		}
 
 		// Current month
 		$objTemplate->current = $GLOBALS['TL_LANG']['MONTHS'][(date('m', $this->Date->tstamp) - 1)] .  ' ' . date('Y', $this->Date->tstamp);
@@ -155,13 +164,18 @@ class ModuleCalendar extends \Events
 		$nextMonth = ($intMonth == 12) ? 1 : ($intMonth + 1);
 		$nextYear = ($intMonth == 12) ? ($intYear + 1) : $intYear;
 		$lblNext = $GLOBALS['TL_LANG']['MONTHS'][($nextMonth - 1)] . ' ' . $nextYear;
+		$intNextYm = $nextYear . str_pad($nextMonth, 2, 0, STR_PAD_LEFT);
 
-		$objTemplate->nextHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . $this->Input->get('id') . '&amp;' : '?') . 'month=' . $nextYear . str_pad($nextMonth, 2, 0, STR_PAD_LEFT);
-		$objTemplate->nextTitle = specialchars($lblNext);
-		$objTemplate->nextLink = $lblNext . ' ' . $GLOBALS['TL_LANG']['MSC']['cal_next'];
-		$objTemplate->nextLabel = $GLOBALS['TL_LANG']['MSC']['cal_next'];
+		// Only generate a link if there are events (see #4160)
+		if ($intNextYm <= $intRightBoundary)
+		{
+			$objTemplate->nextHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . $this->Input->get('id') . '&amp;' : '?') . 'month=' . $intNextYm;
+			$objTemplate->nextTitle = specialchars($lblNext);
+			$objTemplate->nextLink = $lblNext . ' ' . $GLOBALS['TL_LANG']['MSC']['cal_next'];
+			$objTemplate->nextLabel = $GLOBALS['TL_LANG']['MSC']['cal_next'];
+		}
 
-		// Set week start day
+		// Set the week start day
 		if (!$this->cal_startDay)
 		{
 			$this->cal_startDay = 0;
