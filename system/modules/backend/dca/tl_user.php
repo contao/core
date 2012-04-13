@@ -276,7 +276,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'eval'                    => array('submitOnChange'=>true),
 			'save_callback' => array
 			(
-				array('tl_user', 'checkAdmin')
+				array('tl_user', 'checkAdminStatus')
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
@@ -387,6 +387,10 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'filter'                  => true,
 			'flag'                    => 2,
 			'inputType'               => 'checkbox',
+			'save_callback' => array
+			(
+				array('tl_user', 'checkAdminDisable')
+			),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'start' => array
@@ -700,14 +704,28 @@ class tl_user extends Backend
 	 * @param \DataContainer
 	 * @return mixed
 	 */
-	public function checkAdmin($varValue, \DataContainer $dc)
+	public function checkAdminStatus($varValue, \DataContainer $dc)
 	{
-		if (!$varValue)
+		if ($varValue == '' && $this->User->id == $dc->id)
 		{
-			if ($this->User->id == $dc->id)
-			{
-				$varValue = 1;
-			}
+			$varValue = 1;
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Prevent administrators from disabling their own account
+	 * @param mixed
+	 * @param \DataContainer
+	 * @return mixed
+	 */
+	public function checkAdminDisable($varValue, \DataContainer $dc)
+	{
+		if ($varValue == 1 && $this->User->id == $dc->id)
+		{
+			$varValue = '';
 		}
 
 		return $varValue;

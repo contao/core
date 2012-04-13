@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Improved
+Prevent administrators from disabling their own account (see #4102).
+
 ### Changed
 Removed the IE6 layout fix which added an non-breaking space to every activated
 column (see #23).
