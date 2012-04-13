@@ -258,12 +258,13 @@ abstract class Model_Collection extends \System
 
 	/**
 	 * Reset the model
-	 * @return void
+	 * @return \Contao\Model_Collection
 	 */
 	public function reset()
 	{
 		$this->intIndex = -1;
 		$this->blnDone = false;
+		return $this;
 	}
 
 
@@ -294,7 +295,7 @@ abstract class Model_Collection extends \System
 	/**
 	 * Lazy load related records
 	 * @param string
-	 * @return void
+	 * @return \Contao\Model_Collection
 	 */
 	public function getRelated($key)
 	{
@@ -304,6 +305,7 @@ abstract class Model_Collection extends \System
 		}
 
 		$this->arrModels[$this->intIndex]->getRelated($key);
+		return $this;
 	}
 
 
@@ -462,7 +464,7 @@ abstract class Model_Collection extends \System
 
 	/**
 	 * Save the current model
-	 * @return void
+	 * @return \Contao\Model_Collection
 	 */
 	public function save()
 	{
@@ -472,12 +474,13 @@ abstract class Model_Collection extends \System
 		}
 
 		$this->arrModels[$this->intIndex]->save();
+		return $this;
 	}
 
 
 	/**
-	 * Delete the current model
-	 * @return void
+	 * Delete the current model and return the number of affected rows
+	 * @return integer
 	 */
 	public function delete()
 	{
@@ -486,6 +489,6 @@ abstract class Model_Collection extends \System
 			$this->first();
 		}
 
-		$this->arrModels[$this->intIndex]->delete();
+		return $this->arrModels[$this->intIndex]->delete();
 	}
 }

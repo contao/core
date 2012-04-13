@@ -315,14 +315,14 @@ abstract class Model extends \System
 	/**
 	 * Lazy load related records
 	 * @param string
-	 * @return void
+	 * @return \Contao\Model
 	 * @throws \Exception
 	 */
 	public function getRelated($key)
 	{
 		if (!isset($this->$key))
 		{
-			return;
+			return $this;
 		}
 
 		// Load the DCA extract
@@ -338,7 +338,7 @@ abstract class Model extends \System
 		// Return if the relation has been loaded eagerly
 		if ($arrRelations[$key]['type'] == 'eager')
 		{
-			return;
+			return $this;
 		}
 
 		// Get the class name without suffix (second parameter)
@@ -376,13 +376,15 @@ abstract class Model extends \System
 				$this->$key = $set;
 			}
 		}
+
+		return $this;
 	}
 
 
 	/**
 	 * Save the current record and return the number of affected rows or the last insert ID
 	 * @param boolean
-	 * @return void
+	 * @return \Contao\Model
 	 */
 	public function save($blnForceInsert=false)
 	{
@@ -405,6 +407,8 @@ abstract class Model extends \System
 				$this->id = $stmt->insertId;
 			}
 		}
+
+		return $this;
 	}
 
 
