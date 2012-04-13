@@ -337,7 +337,6 @@ class DbInstaller extends \Controller
 					$return[$table]['TABLE_OPTIONS'] = $subpatterns[1];
 					$table = '';
 				}
-
 				// Add the fields
 				elseif ($table != '')
 				{

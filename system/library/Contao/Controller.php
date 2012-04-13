@@ -2426,7 +2426,7 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Generate an URL from a tl_page record depending on the current rewriteURL setting and return it
+	 * Generate an URL depending on the current rewriteURL setting and return it
 	 * @param array
 	 * @param string
 	 * @param string

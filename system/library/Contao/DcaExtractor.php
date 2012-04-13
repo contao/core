@@ -204,11 +204,13 @@ class DcaExtractor extends \DbInstaller
 	{
 		$return = array();
 
+		// Fields
 		foreach ($this->arrFields as $k=>$v)
 		{
 			$return['TABLE_FIELDS'][$k] = '`' . $k . '` ' . $v;
 		}
 
+		// Keys
 		foreach ($this->arrKeys as $k=>$v)
 		{
 			if ($v == 'primary')
@@ -226,6 +228,21 @@ class DcaExtractor extends \DbInstaller
 			}
 
 			$return['TABLE_CREATE_DEFINITIONS'][$k] = $v;
+		}
+
+		$return['TABLE_OPTIONS'] = '';
+
+		// Options
+		foreach ($this->arrMeta as $k=>$v)
+		{
+			if ($k == 'engine')
+			{
+				$return['TABLE_OPTIONS'] .= ' ENGINE=' . $v;
+			}
+			elseif ($k == 'charset')
+			{
+				$return['TABLE_OPTIONS'] .= ' DEFAULT CHARSET=' . $v;
+			}
 		}
 
 		return $return;
