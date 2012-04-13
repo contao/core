@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+The color picker can now be activated in the data container (see #3874).
+
 ### Improved
 Added an `addMultiple()` method to the Combiner (see #3814).
 

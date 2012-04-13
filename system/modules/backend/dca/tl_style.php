@@ -386,11 +386,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bgcolor'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
-			'wizard' => array
-			(
-				array('tl_style', 'colorPicker')
-			),
+			'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'colorpicker'=>true, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'bgimage' => array
@@ -432,11 +428,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['shadowcolor'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
-			'wizard' => array
-			(
-				array('tl_style', 'colorPicker')
-			),
+			'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'colorpicker'=>true, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'gradientAngle' => array
@@ -480,11 +472,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bordercolor'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
-			'wizard' => array
-			(
-				array('tl_style', 'colorPicker')
-			),
+			'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'colorpicker'=>true, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'borderradius' => array
@@ -537,11 +525,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['fontcolor'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
-			'wizard' => array
-			(
-				array('tl_style', 'colorPicker')
-			),
+			'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'colorpicker'=>true, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'lineheight' => array
@@ -701,27 +685,6 @@ class tl_style extends Backend
 		}
 
 		return '';
-	}
-
-
-	/**
-	 * Return the color picker wizard
-	 * @param \DataContainer
-	 * @return string
-	 */
-	public function colorPicker(\DataContainer $dc)
-	{
-		return ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" id="moo_'.$dc->field.'"') . '
-  <script>
-  new MooRainbow("moo_'.$dc->field.'", {
-    id:"ctrl_' . $dc->field . '_0",
-    startColor:((cl = $("ctrl_' . $dc->field . '_0").value.hexToRgb(true)) ? cl : [255, 0, 0]),
-    imgPath:"plugins/mootools/colorpicker/images/",
-    onComplete: function(color) {
-      $("ctrl_' . $dc->field . '_0").value = color.hex.replace("#", "");
-    }
-  });
-  </script>';
 	}
 
 

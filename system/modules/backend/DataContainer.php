@@ -332,10 +332,11 @@ class DataContainer extends \Backend
 		}
 
 		$datepicker = '';
+		$colorpicker = '';
 		$wizard = '';
 		$strHelpClass = '';
 
-		// Datepicker
+		// Date picker
 		if ($arrData['eval']['datepicker'])
 		{
 			$rgxp = $arrData['eval']['rgxp'];
@@ -368,6 +369,24 @@ class DataContainer extends \Backend
       useFadeInOut:!Browser.ie,
       startDay:' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
       titleFormat:"' . $GLOBALS['TL_LANG']['MSC']['titleFormat'] . '"
+    });
+  });
+  </script>';
+		}
+
+		// Color picker
+		if ($arrData['eval']['colorpicker'])
+		{
+			$colorpicker = ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" id="moo_' . $this->strField . '"') . '
+  <script>
+  window.addEvent("domready", function() {
+    new MooRainbow("moo_' . $this->strField . '", {
+      id:"ctrl_' . $this->strField . '_0",
+      startColor:((cl = $("ctrl_' . $this->strField . '_0").value.hexToRgb(true)) ? cl : [255, 0, 0]),
+      imgPath:"plugins/mootools/colorpicker/images/",
+      onComplete: function(color) {
+        $("ctrl_' . $this->strField . '_0").value = color.hex.replace("#", "");
+      }
     });
   });
   </script>';
@@ -430,7 +449,7 @@ class DataContainer extends \Backend
 		}
 
 		return '
-<div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $datepicker . $updateMode . (!$objWidget->hasErrors() ? $this->help($strHelpClass) : '') . '
+<div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $datepicker . $colorpicker . $updateMode . (!$objWidget->hasErrors() ? $this->help($strHelpClass) : '') . '
 </div>';
 	}
 
