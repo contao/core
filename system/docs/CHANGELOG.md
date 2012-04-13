@@ -5,6 +5,9 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Improved
+Added an `addMultiple()` method to the Combiner (see #3814).
+
+### Improved
 Added `$arrFile` as fourth parameter of the "getCombinedFile"-hook (see #3945).
 
 ### Improved

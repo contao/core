@@ -144,6 +144,22 @@ class Combiner extends \System
 
 
 	/**
+	 * Add multiple files from an array
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @return void
+	 */
+	public function addMultiple(Array $arrFiles, $strVersion=null, $strMedia='screen')
+	{
+		foreach ($arrFiles as $strFile)
+		{
+			$this->add($strFile, $strVersion, $strMedia);
+		}
+	}
+
+
+	/**
 	 * Return true if there are files
 	 * @return boolean
 	 */
