@@ -84,11 +84,13 @@ var Stylect =
 				div.removeClass('focused');
 			}).setStyle('opacity', 0);
 
+			Browser.webkit = (Browser.chrome || Browser.safari || navigator.userAgent.match(/(?:webkit|khtml)/i));
+
 			// Browser-specific adjustments
-			if (Browser.Engine.webkit) {
+			if (Browser.webkit) {
 				el.setStyle('margin-bottom', '4px');
 			}
-			if (Browser.Engine.webkit || Browser.Engine.trident) {
+			if (Browser.webkit || Browser.ie) {
 				div.setStyle('width', div.getStyle('width').toInt()-4);
 			}
 		});

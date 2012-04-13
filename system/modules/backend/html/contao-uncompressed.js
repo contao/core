@@ -708,8 +708,8 @@ var Backend =
 	 */
 	openWindow: function(el, width, height) {
 		el.blur();
-		width = Browser.Engine.trident ? (width + 40) : (width + 17);
-		height = Browser.Engine.trident ? (height + 30) : (height + 17);
+		width = Browser.ie ? (width + 40) : (width + 17);
+		height = Browser.ie ? (height + 30) : (height + 17);
 		Backend.popupWindow = window.open(el.href, '', 'width='+width+',height='+height+',modal=yes,left=100,top=50,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');
 	},
 
@@ -1002,7 +1002,7 @@ var Backend =
 		var status = (textarea.getProperty('wrap') == 'off') ? 'soft' : 'off';
 		textarea.setProperty('wrap', status);
 
-		if (!Browser.Engine.trident) {
+		if (!Browser.ie) {
 			var v = textarea.value;
 			var n = textarea.clone();
 			n.setProperty('wrap', status);

@@ -166,4 +166,3 @@ Tips.Contao = new Class(
 		this.tip.setStyles(obj);
 	}
 });
-
