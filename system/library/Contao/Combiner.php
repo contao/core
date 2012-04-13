@@ -188,7 +188,7 @@ class Combiner extends \System
 				foreach ($GLOBALS['TL_HOOKS']['getCombinedFile'] as $callback)
 				{
 					$this->import($callback[0]);
-					$content = $this->$callback[0]->$callback[1]($content, $strKey, $this->strMode);
+					$content = $this->$callback[0]->$callback[1]($content, $strKey, $this->strMode, $arrFile);
 				}
 			}
 
