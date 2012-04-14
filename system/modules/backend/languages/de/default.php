@@ -220,6 +220,15 @@ $GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
 
 
 /**
+ * Confirmation
+ */
+$GLOBALS['TL_LANG']['CONFIRM']['do']    = 'Modul';
+$GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Betroffene Tabelle';
+$GLOBALS['TL_LANG']['CONFIRM']['act']   = 'Aktion';
+$GLOBALS['TL_LANG']['CONFIRM']['id']    = 'Betroffener Datensatz';
+
+
+/**
  * Datepicker
  */
 $GLOBALS['TL_LANG']['DP']['select_a_time']       = 'Uhrzeit auswählen';

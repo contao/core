@@ -84,11 +84,61 @@ class Confirm extends Backend
 
 		// Prepare the URL
 		$url = preg_replace('/(\?|&)rt=[^&]*/', '', $this->Session->get('INVALID_TOKEN_URL'));
-		$this->Template->href = $url . ((strpos($url, '?') !== false) ? '&rt=' : '?rt=') . REQUEST_TOKEN;
+		$this->Template->href = ampersand($url . ((strpos($url, '?') !== false) ? '&rt=' : '?rt=') . REQUEST_TOKEN);
+
+		$vars = array();
+		list(, $request) = explode('?', $url, 2);
+
+		// Extract the arguments
+		foreach (explode('&', $request) as $arg)
+		{
+			list($key, $value) = explode('=', $arg, 2);
+			$vars[$key] = $value;
+		}
+
+		$arrInfo = array();
+
+		// Provide more information about the link (see #4007)
+		foreach ($vars as $k=>$v)
+		{
+			switch ($k)
+			{
+				default:
+					$arrInfo[$k] = $v;
+					break;
+
+				case 'do':
+					$arrInfo['do'] = $GLOBALS['TL_LANG']['MOD'][$v][0];
+					break;
+
+				case 'id':
+					$arrInfo['id'] = 'ID ' . $v;
+					break;
+			}
+		}
+
+		// Use the first table if none is given
+		if (!isset($arrInfo['table']))
+		{
+			foreach ($GLOBALS['BE_MOD'] as $category=>$modules)
+			{
+				if (isset($GLOBALS['BE_MOD'][$category][$arrInfo['do']]))
+				{
+					$arrInfo['table'] = $GLOBALS['BE_MOD'][$category][$arrInfo['do']]['tables'][0];
+					break;
+				}
+			}
+		}
+
+		// Override the action label
+		$this->loadLanguageFile($arrInfo['table']);
+		$arrInfo['act'] = $GLOBALS['TL_LANG'][$arrInfo['table']][$arrInfo['act']][0];
 
 		// Template variables
 		$this->Template->confirm = true;
-		$this->Template->link = specialchars($this->Session->get('INVALID_TOKEN_URL'));
+		$this->Template->link = specialchars($url);
+		$this->Template->info = $arrInfo;
+		$this->Template->labels = $GLOBALS['TL_LANG']['CONFIRM'];
 		$this->Template->h2 = $GLOBALS['TL_LANG']['MSC']['invalidTokenUrl'];
 		$this->Template->explain = $GLOBALS['TL_LANG']['ERR']['invalidTokenUrl'];
 		$this->Template->cancel = $GLOBALS['TL_LANG']['MSC']['cancelBT'];

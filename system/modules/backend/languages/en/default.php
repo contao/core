@@ -219,6 +219,15 @@ $GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
 
 
 /**
+ * Confirmation
+ */
+$GLOBALS['TL_LANG']['CONFIRM']['do']    = 'Module';
+$GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Affected table';
+$GLOBALS['TL_LANG']['CONFIRM']['act']   = 'Action';
+$GLOBALS['TL_LANG']['CONFIRM']['id']    = 'Affected record';
+
+
+/**
  * Datepicker
  */
 $GLOBALS['TL_LANG']['DP']['select_a_time']       = 'Select a time';
