@@ -68,7 +68,7 @@ class Comments extends Frontend
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
 
 			// Do not index or cache the page if the page number is outside the range
-			if ($page < 1 || $page > ceil($total/$objConfig->perPage))
+			if ($page < 1 || $page > max(ceil($total/$objConfig->perPage), 1))
 			{
 				global $objPage;
 				$objPage->noSearch = 1;
@@ -89,6 +89,8 @@ class Comments extends Frontend
 			$objPagination = new Pagination($objTotal->count, $objConfig->perPage);
 			$objTemplate->pagination = $objPagination->generate("\n  ");
 		}
+
+		$objTemplate->allowComments = true;
 
 		// Get all published comments
 		$objCommentsStmt = $this->Database->prepare("SELECT c.*, u.name as authorName FROM tl_comments c LEFT JOIN tl_user u ON c.author=u.id WHERE c.source=? AND c.parent=?" . (!BE_USER_LOGGED_IN ? " AND c.published=1" : "") . " ORDER BY c.date" . (($objConfig->order == 'descending') ? " DESC" : ""));

@@ -5,6 +5,10 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+The comments module does no longer throw an error if there are no comments and
+the number of comments per page is greater 0 (see #4064).
+
+### Fixed
 Correctly sort content element and module types in the help wizard (see #4156).
 
 ### Fixed
