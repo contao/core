@@ -13,7 +13,7 @@
 <?php if ($this->confirm): ?>
 
 <p class="confirm"><?php echo $this->confirm; ?></p>
-<?php else: ?>
+<?php elseif ($this->allowComments): ?>
 
 <form action="<?php echo $this->action; ?>" id="<?php echo $this->formId; ?>" method="post">
 <div class="formbody">

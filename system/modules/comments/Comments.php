@@ -76,7 +76,7 @@ class Comments extends \Frontend
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
 
 			// Do not index or cache the page if the page number is outside the range
-			if ($page < 1 || $page > ceil($total/$objConfig->perPage))
+			if ($page < 1 || $page > max(ceil($total/$objConfig->perPage), 1))
 			{
 				global $objPage;
 				$objPage->noSearch = 1;
@@ -96,6 +96,8 @@ class Comments extends \Frontend
 			$objPagination = new \Pagination($total, $objConfig->perPage);
 			$objTemplate->pagination = $objPagination->generate("\n  ");
 		}
+
+		$objTemplate->allowComments = true;
 
 		// Get all published comments
 		if ($limit)
