@@ -11,7 +11,7 @@ Thumbs.db
 nbproject/
 
 # Contao
-.htaccess
+/.htaccess
 *.xml
 files/*
 assets/css/*
