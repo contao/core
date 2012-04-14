@@ -122,9 +122,9 @@ class Confirm extends Backend
 		{
 			foreach ($GLOBALS['BE_MOD'] as $category=>$modules)
 			{
-				if (isset($GLOBALS['BE_MOD'][$category][$arrInfo['do']]))
+				if (isset($GLOBALS['BE_MOD'][$category][$vars['do']]))
 				{
-					$arrInfo['table'] = $GLOBALS['BE_MOD'][$category][$arrInfo['do']]['tables'][0];
+					$arrInfo['table'] = $GLOBALS['BE_MOD'][$category][$vars['do']]['tables'][0];
 					break;
 				}
 			}
