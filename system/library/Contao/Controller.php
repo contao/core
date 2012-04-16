@@ -544,6 +544,7 @@ abstract class Controller extends \System
 		$alias = $objPage->alias;
 		$name = $objPage->title;
 		$title = $objPage->pageTitle ?: $objPage->title;
+		$folderUrl = basename($objPage->alias);
 		$palias = '';
 		$pname = '';
 		$ptitle = '';
@@ -574,6 +575,7 @@ abstract class Controller extends \System
 					$alias = $objParentPage->alias;
 					$name = $objParentPage->title;
 					$title = $objParentPage->pageTitle ?: $objParentPage->title;
+					$folderUrl = basename($alias) . '/' . $folderUrl;
 					$trail[] = $objParentPage->pid;
 				}
 
@@ -602,6 +604,7 @@ abstract class Controller extends \System
 		$objPage->parentAlias = $palias;
 		$objPage->parentTitle = $pname;
 		$objPage->parentPageTitle = $ptitle;
+		$objPage->folderUrl = $folderUrl;
 
 		// Set the root ID and title
 		if ($objParentPage !== null && $objParentPage->type == 'root')

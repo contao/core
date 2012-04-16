@@ -161,6 +161,15 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		)
 	),
 
+	// Edit
+	'edit' => array
+	(
+		'buttons_callback' => array
+		(
+			array('tl_page', 'addAliasButton')
+		)
+	),
+
 	// Palettes
 	'palettes' => array
 	(
@@ -1558,6 +1567,38 @@ class tl_page extends Backend
 		}
 
 		return ($row['type'] == 'regular' || $row['type'] == 'error_403' || $row['type'] == 'error_404') ? '<a href="' . $this->addToUrl($href.'&amp;node='.$row['id']) . '" title="'.specialchars($title).'">'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+	}
+
+
+	/**
+	 * Automatically generate the folder URL aliases
+	 * @return string
+	 */
+	public function addAliasButton()
+	{
+		if ($this->Input->post('FORM_SUBMIT') == 'tl_select' && isset($_POST['alias']))
+		{
+			$session = $this->Session->getData();
+
+			$ids = $session['CURRENT']['IDS'];
+			$ids = $this->eliminateNestedPages($ids);
+			$ids = $this->getChildRecords($ids, 'tl_page');
+
+			foreach ($ids as $id)
+			{
+				$objPage = $this->getPageDetails($id);
+
+				if ($objPage !== null)
+				{
+					$this->Database->prepare("UPDATE tl_page SET alias=? WHERE id=?")
+								   ->execute($objPage->folderUrl, $id);
+				}
+			}
+
+			$this->redirect($this->getReferer());
+		}
+
+		return '<input type="submit" name="alias" id="alias" class="tl_submit" accesskey="a" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['aliasSelected']).'"> ';
 	}
 
 

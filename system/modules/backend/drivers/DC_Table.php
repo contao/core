@@ -3084,9 +3084,21 @@ window.addEvent(\'domready\', function() {
 
 </div>';
 
-		// Close form
+		// Close the form
 		if ($this->Input->get('act') == 'select')
 		{
+			$callbacks = '';
+
+			// Call the buttons_callback
+			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
+			{
+				foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
+				{
+					$this->import($callback[0]);
+					$callbacks .= $this->$callback[0]->$callback[1]($this);
+				}
+			}
+
 			$return .= '
 
 <div class="tl_formbody_submit" style="text-align:right">
@@ -3096,7 +3108,7 @@ window.addEvent(\'domready\', function() {
   <input type="submit" name="cut" id="cut" class="tl_submit" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'"> 
   <input type="submit" name="copy" id="copy" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'"> ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
   <input type="submit" name="override" id="override" class="tl_submit" accesskey="v" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['overrideSelected']).'"> 
-  <input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'"> ' : '') . '
+  <input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'"> ' : '') . $callbacks . '
 </div>
 
 </div>
@@ -3811,6 +3823,18 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		// Close form
 		if ($this->Input->get('act') == 'select')
 		{
+			$callbacks = '';
+
+			// Call the buttons_callback
+			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
+			{
+				foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
+				{
+					$this->import($callback[0]);
+					$callbacks .= $this->$callback[0]->$callback[1]($this);
+				}
+			}
+
 			$return .= '
 
 <div class="tl_formbody_submit" style="text-align:right">
@@ -3820,7 +3844,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
   <input type="submit" name="cut" id="cut" class="tl_submit" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'"> 
   <input type="submit" name="copy" id="copy" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'"> ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
   <input type="submit" name="override" id="override" class="tl_submit" accesskey="v" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['overrideSelected']).'"> 
-  <input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'"> ' : '') . '
+  <input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'"> ' : '') . $callbacks . '
 </div>
 
 </div>
@@ -4181,6 +4205,18 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			// Close the form
 			if ($this->Input->get('act') == 'select')
 			{
+				$callbacks = '';
+
+				// Call the buttons_callback
+				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
+					{
+						$this->import($callback[0]);
+						$callbacks .= $this->$callback[0]->$callback[1]($this);
+					}
+				}
+
 				$return .= '
 
 <div class="tl_formbody_submit" style="text-align:right">
@@ -4188,7 +4224,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 <div class="tl_submit_container">' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'] ? '
   <input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\')" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'"> ' : '') . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
   <input type="submit" name="override" id="override" class="tl_submit" accesskey="v" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['overrideSelected']).'"> 
-  <input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'"> ' : '') . '
+  <input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'"> ' : '') . $callbacks . '
 </div>
 
 </div>

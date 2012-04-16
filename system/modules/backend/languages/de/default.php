@@ -346,7 +346,7 @@ $GLOBALS['TL_LANG']['MSC']['move_down']     = array('Nach unten', 'Den Eintrag e
 $GLOBALS['TL_LANG']['MSC']['staticFiles']   = array('Datei-URL', 'Die Datei-URL gilt für das <em>files</em>-Verzeichnis sowie alle Vorschaubilder (Page-Speed-Optimierung).');
 $GLOBALS['TL_LANG']['MSC']['staticSystem']  = array('Skript-URL', 'Die Skript-URL gilt für alle JavaScript- und CSS-Dateien inklusive eingebundener Hintergrundbilder (Page-Speed-Optimierung).');
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'] = array('Plugins-URL', 'Die Plugins-URL gilt für alle Ressourcen im <em>plugins</em>-Verzeichnis (Page-Speed-Optimierung).');
-$GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Backend-Tastaturkürzel', 'Wie Sie Ihren Arbeitsablauf durch die Verwendung von <a href="http://www.contao.org/de/keyboard-shortcuts.html" target="_blank">Tastaturkürzeln</a> beschleunigen.');
+$GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Backend-Tastaturkürzel', 'Wie Sie Ihren Arbeitsablauf durch die Verwendung von <a href="http://www.contao.org/de/keyboard-shortcuts.html" title="Übersicht der Tastaturkürzel auf contao.org" target="_blank">Tastaturkürzeln</a> beschleunigen.');
 $GLOBALS['TL_LANG']['MSC']['toggleAll']     = array('Alle umschalten', 'Alle Knoten öffnen bzw. schließen');
 
 
@@ -440,6 +440,7 @@ $GLOBALS['TL_LANG']['MSC']['editSelected']      = 'Bearbeiten';
 $GLOBALS['TL_LANG']['MSC']['overrideSelected']  = 'Überschreiben';
 $GLOBALS['TL_LANG']['MSC']['moveSelected']      = 'Verschieben';
 $GLOBALS['TL_LANG']['MSC']['copySelected']      = 'Kopieren';
+$GLOBALS['TL_LANG']['MSC']['aliasSelected']     = 'Aliase generieren';
 $GLOBALS['TL_LANG']['MSC']['changeSelected']    = 'Auswahl ändern';
 $GLOBALS['TL_LANG']['MSC']['resetSelected']     = 'Auswahl aufheben';
 $GLOBALS['TL_LANG']['MSC']['fileManager']       = 'Dateimanager in einem Popup-Fenster öffnen';

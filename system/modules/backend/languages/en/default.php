@@ -345,7 +345,7 @@ $GLOBALS['TL_LANG']['MSC']['move_down']     = array('Move down', 'Move the item 
 $GLOBALS['TL_LANG']['MSC']['staticFiles']   = array('Files URL', 'The files URL applies to the <em>files</em> directory and all image thumbnails (page speed optimization).');
 $GLOBALS['TL_LANG']['MSC']['staticSystem']  = array('Script URL', 'The script URL applies to all JavaScript and CSS files including embedded background images (page speed optimization).');
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'] = array('Plugins URL', 'The plugins URL applies to all resources in the <em>plugins</em> directory (page speed optimization).');
-$GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Back end keyboard shortcuts', 'Learn more about speeding up your workflow by using <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">keyboard shortcuts</a>.');
+$GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Back end keyboard shortcuts', 'Learn more about speeding up your workflow by using <a href="http://www.contao.org/keyboard-shortcuts.html" title="Keyboard shortcuts overview on contao.org" target="_blank">keyboard shortcuts</a>.');
 $GLOBALS['TL_LANG']['MSC']['toggleAll']     = array('Toggle all', 'Expand or collapse all nodes');
 
 
@@ -439,6 +439,7 @@ $GLOBALS['TL_LANG']['MSC']['editSelected']      = 'Edit';
 $GLOBALS['TL_LANG']['MSC']['overrideSelected']  = 'Override';
 $GLOBALS['TL_LANG']['MSC']['moveSelected']      = 'Move';
 $GLOBALS['TL_LANG']['MSC']['copySelected']      = 'Copy';
+$GLOBALS['TL_LANG']['MSC']['aliasSelected']     = 'Generate aliases';
 $GLOBALS['TL_LANG']['MSC']['changeSelected']    = 'Change selection';
 $GLOBALS['TL_LANG']['MSC']['resetSelected']     = 'Reset selection';
 $GLOBALS['TL_LANG']['MSC']['fileManager']       = 'Open file manager in a popup window';
