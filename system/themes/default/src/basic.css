@@ -350,10 +350,10 @@ a.tl_submit {
 a.tl_submit:hover {
 	color:#666966;
 }
-.firefox .tl_submit {
+.firefox input.tl_submit {
 	padding:2px 12px 2px 13px;
 }
-.opera .tl_submit {
+.opera input.tl_submit {
 	padding:4px 12px 4px 13px;
 }
 .tl_submit:focus,.tl_submit:hover {
