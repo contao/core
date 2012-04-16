@@ -4519,7 +4519,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			$this->limit = ($session['filter'][$filter]['limit'] != '') ? (($session['filter'][$filter]['limit'] == 'all') ? null : $session['filter'][$filter]['limit']) : '0,' . $GLOBALS['TL_CONFIG']['resultsPerPage'];
 			$query = "SELECT COUNT(*) AS count FROM " . $this->strTable;
 
-			if (is_array($this->root))
+			if (is_array($this->root) && !empty($this->root))
 			{
 				$this->procedure[] = 'id IN(' . implode(',', $this->root) . ')';
 			}
