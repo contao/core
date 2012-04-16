@@ -164,5 +164,11 @@ Tips.Contao = new Class(
 
 		this.fireEvent('bound', bounds);
 		this.tip.setStyles(obj);
+	},
+
+	hide: function(element) {
+		if (!this.tip) document.id(this);
+		this.fireEvent('hide', [this.tip, element]);
+		this.tip.destroy();
 	}
 });
