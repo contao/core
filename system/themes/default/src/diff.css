@@ -64,7 +64,9 @@ h2 {
 #diff .change {
 	margin-bottom:13px;
 	border:1px solid #ddd;
-	font-family:Monaco, monospace;
+	background:#fcfcfc;
+	font-family:Courier,monospace;
+	font-size:12px;
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
 	border-radius:3px;
