@@ -111,6 +111,7 @@ class FileManager extends Backend
 		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
 		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
+		$this->Template->loadFonts = $GLOBALS['TL_CONFIG']['loadGoogleFonts'];
 
 		$this->Template->output();
 	}
