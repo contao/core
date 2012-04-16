@@ -26,12 +26,15 @@
  */
 
 /* Body */
-html,body,form,pre,figure {
+html,body,form,pre,figure,ul,li {
 	margin:0;
 	padding:0;
 }
 img {
 	border:0;
+}
+ul,li {
+	list-style:none;
 }
 
 /* Font family */
@@ -105,11 +108,6 @@ p {
 }
 
 /* Sortable lists */
-ul.sortable,ul.sortable li {
-	margin:0;
-	padding:0;
-	list-style-type:none;
-}
 ul.sortable li {
 	cursor:move;
 }

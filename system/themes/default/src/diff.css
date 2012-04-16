@@ -44,12 +44,20 @@ h2 {
 	text-align:right;
 }
 .formbody .tl_submit {
-	margin-top:0;
+	margin-top:1px;
+	vertical-align:top;
 }
-.webkit .formbody .tl_submit {
+.webkit .formbody .tl_submit,.opera .formbody .tl_submit {
 	padding-top:4px;
 	padding-bottom:4px;
-	margin-top:1px;
+}
+.opera .tl_metawizard_new .tl_submit {
+	padding-top:3px;
+	padding-bottom:3px;
+}
+.formbody .arrow {
+	position:relative;
+	top:2px;
 }
 
 /* Diff */

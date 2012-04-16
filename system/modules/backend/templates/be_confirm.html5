@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
-  $objCombiner->add('system/themes/'. $this->theme .'/login.css');
   $objCombiner->add('system/themes/'. $this->theme .'/confirm.css');
   echo $objCombiner->getCombinedFile();
 ?>" media="all">
