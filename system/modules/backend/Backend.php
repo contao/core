@@ -143,7 +143,13 @@ abstract class Backend extends \Controller
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$strTable = $this->Input->get('table') ? $this->Input->get('table') : $arrModule['tables'][0];
+		// Dynamically add the "personal data" module (see #4193)
+		if ($this->Input->get('do') == 'login')
+		{
+			$arrModule = array('tables'=>array('tl_user'), 'callback'=>'ModuleUser');
+		}
+
+		$strTable = $this->Input->get('table') ?: $arrModule['tables'][0];
 		$id = (!$this->Input->get('act') && $this->Input->get('id')) ? $this->Input->get('id') : $this->Session->get('CURRENT_ID');
 
 		// Store the current ID in the current session
