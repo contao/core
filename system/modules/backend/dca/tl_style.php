@@ -393,7 +393,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bgimage'],
 			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50 wizard'),
+			'eval'                    => array('files'=>true, 'paths'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes'], 'tl_class'=>'w50 wizard'),
 			'wizard' => array
 			(
 				array('tl_style', 'filePicker')
@@ -604,7 +604,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['liststyleimage'],
 			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50 wizard'),
+			'eval'                    => array('files'=>true, 'paths'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes'], 'tl_class'=>'w50 wizard'),
 			'wizard' => array
 			(
 				array('tl_style', 'filePicker')
@@ -695,8 +695,7 @@ class tl_style extends Backend
 	 */
 	public function filePicker(\DataContainer $dc)
 	{
-		$strField = 'ctrl_' . $dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '');
-		return ' ' . $this->generateImage('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'style="vertical-align:top;cursor:pointer" onclick="Backend.pickFile(\'' . $strField . '\')"');
+		return ' <a href="contao/file.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.$dc->value.'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['files'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 

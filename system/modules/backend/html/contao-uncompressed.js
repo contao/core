@@ -422,7 +422,6 @@ var AjaxRequest =
 				el.checked = 'checked';
 
 				AjaxRequest.hideBox();
-				Backend.hideTreeBody();
 				Backend.addInteractiveHelp();
 				Backend.addColorPicker();
 
@@ -807,7 +806,10 @@ var Backend =
                 }
 			}
 			if (opt.tag) {
-				$(opt.tag).value = '{{link_url::' + val.join(',') + '}}';
+				$(opt.tag).value = val.join(',');
+				if (opt.url.match(/page\.php/)) {
+					$(opt.tag).value = '{{link_url::' + $(opt.tag).value + '}}';
+				}
 				opt.self.set('href', opt.self.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
 			} else {
 				$('ctrl_'+opt.id).value = val.join(',');
@@ -1001,15 +1003,6 @@ var Backend =
 		var textarea = $(id);
 		var status = (textarea.getProperty('wrap') == 'off') ? 'soft' : 'off';
 		textarea.setProperty('wrap', status);
-
-		if (!Browser.ie) {
-			var v = textarea.value;
-			var n = textarea.clone();
-			n.setProperty('wrap', status);
-			n.setProperty('id', $(id).getProperty('id'));
-			n.value = v;
-			n.replaces(textarea);
-		}
 	},
 
 	/**
@@ -1030,6 +1023,7 @@ var Backend =
 	/**
 	 * Open the page picker wizard in a modal window
 	 * @param string
+	 * @deprecated
 	 */
 	pickPage: function(id) {
 		var width = 320;
@@ -1046,6 +1040,7 @@ var Backend =
 	 * Open the file picker wizard in a modal window
 	 * @param string
 	 * @param string
+	 * @deprecated
 	 */
 	pickFile: function(id, filter) {
 		var width = 320;
