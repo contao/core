@@ -796,7 +796,7 @@ var Backend =
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
 			var val = [], tls = [];
             var par = opt.id.replace(/_[0-9]+$/, '') + '_parent'; // Strip the "edit multiple" suffixes
-			var inp = window.frames.pages_frame.document.getElementById(par).getElementsByTagName('input');
+			var inp = window.frames[0].document.getElementById(par).getElementsByTagName('input');
 			for (var i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
                 if (!inp[i].id.match(/^reset_/)) {
@@ -821,7 +821,7 @@ var Backend =
 		});
 		M.show({
 			'title': opt.title,
-			'contents': '<iframe src="' + opt.url + '" name="pages_frame" width="100%" height="' + opt.height + '" frameborder="0"></iframe>',
+			'contents': '<iframe src="' + opt.url + '" width="100%" height="' + opt.height + '" frameborder="0"></iframe>',
 			'model': 'modal'
 		});
 	},
