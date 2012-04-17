@@ -153,7 +153,7 @@ class ModuleFaqPage extends Module
 			$arrFaq[$objFaq->pid['id']]['headline'] = $objFaq->category;
 		}
 
-		$arrFaq = array_values($arrFaq);
+		$arrFaq = array_values(array_filter($arrFaq));
 		$limit_i = count($arrFaq) - 1;
 
 		// Add classes first, last, even and odd
