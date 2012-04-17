@@ -5,6 +5,9 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly handle empty FAQ categories in the front end modules (see #4084).
+
+### Fixed
 The comments module does no longer throw an error if there are no comments and
 the number of comments per page is greater 0 (see #4064).
 

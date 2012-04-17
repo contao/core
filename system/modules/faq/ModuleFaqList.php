@@ -116,7 +116,7 @@ class ModuleFaqList extends Module
 			$arrFaq[$objFaq->pid]['headline'] = $objFaq->headline;
 		}
 
-		$arrFaq = array_values($arrFaq);
+		$arrFaq = array_values(array_filter($arrFaq));
 
 		$cat_count = 0;
 		$cat_limit = count($arrFaq);
