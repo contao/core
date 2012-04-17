@@ -135,12 +135,15 @@ class Main extends Backend
 	protected function welcomeScreen()
 	{
 		$this->loadLanguageFile('explain');
+
 		$objTemplate = new BackendTemplate('be_welcome');
-		$arrMessages = array();
+		$objTemplate->messages = $this->getMessages(false, true);
 
 		// HOOK: add custom messages
 		if (isset($GLOBALS['TL_HOOKS']['getSystemMessages']) && is_array($GLOBALS['TL_HOOKS']['getSystemMessages']))
 		{
+			$arrMessages = array();
+
 			foreach ($GLOBALS['TL_HOOKS']['getSystemMessages'] as $callback)
 			{
 				$this->import($callback[0]);
@@ -150,6 +153,11 @@ class Main extends Backend
 				{
 					$arrMessages[] = $strBuffer;
 				}
+			}
+
+			if (!empty($arrMessages))
+			{
+				$objTemplate->messages .= "\n" . implode("\n", $arrMessages);
 			}
 		}
 
@@ -205,7 +213,6 @@ class Main extends Backend
 			$arrVersions[$k]['class'] = ($k%2 == 0) ? 'even' : 'odd';
 		}
 
-		$objTemplate->messages = $this->getMessages(false, true) . "\n" . implode("\n", $arrMessages);
 		$objTemplate->versions = $arrVersions;
 		$objTemplate->showDifferences = specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']);
  		$objTemplate->welcome = sprintf($GLOBALS['TL_LANG']['MSC']['welcomeTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);

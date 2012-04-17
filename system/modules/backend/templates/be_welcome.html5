@@ -2,11 +2,13 @@
 <h1 id="tl_welcome"><?php echo $this->welcome; ?></h1>
 
 <div id="tl_soverview">
+<?php if (!empty($this->messages)): ?>
 
 <div id="tl_messages">
 <h2><?php echo $this->systemMessages; ?></h2>
 <?php echo $this->messages; ?> 
 </div>
+<?php endif; ?>
 
 <div id="tl_shortcuts">
 <h2><?php echo $this->shortcuts; ?></h2>
