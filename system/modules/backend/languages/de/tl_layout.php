@@ -33,9 +33,12 @@
  */
 $GLOBALS['TL_LANG']['tl_layout']['name']          = array('Titel', 'Bitte geben Sie den Layout-Titel ein.');
 $GLOBALS['TL_LANG']['tl_layout']['fallback']      = array('Standardlayout', 'Das Layout als Standardlayout verwenden.');
-$GLOBALS['TL_LANG']['tl_layout']['header']        = array('Kopfzeile einfügen', 'Fügt dem Layout eine Kopfzeile hinzu.');
+$GLOBALS['TL_LANG']['tl_layout']['rows']          = array('Reihen', 'Bitte wählen Sie die Anzahl an Reihen.');
+$GLOBALS['TL_LANG']['tl_layout']['1rw']           = array('Nur die Hauptreihe', 'Es wird nur eine Reihe angezeigt.');
+$GLOBALS['TL_LANG']['tl_layout']['2rwh']          = array('Kopfzeile und Hauptreihe', 'Eine Kopfzeile oberhalb der Hauptreihe anzeigen.');
+$GLOBALS['TL_LANG']['tl_layout']['2rwf']          = array('Hauptreihe und Fußzeile', 'Eine Fußzeile unterhalb der Hauptreihe anzeigen.');
+$GLOBALS['TL_LANG']['tl_layout']['3rw']           = array('Kopfzeile, Hauptreihe und Fußzeile', 'Eine Kopfzeile oberhalb und eine Fußzeile unterhalb der Hauptreihe anzeigen.');
 $GLOBALS['TL_LANG']['tl_layout']['headerHeight']  = array('Höhe der Kopfzeile', 'Bitte geben Sie die Höhe der Kopfzeile ein.');
-$GLOBALS['TL_LANG']['tl_layout']['footer']        = array('Fußzeile einfügen', 'Fügt dem Layout eine Fußzeile hinzu.');
 $GLOBALS['TL_LANG']['tl_layout']['footerHeight']  = array('Höhe der Fußzeile', 'Bitte geben Sie die Höhe der Fußzeile ein.');
 $GLOBALS['TL_LANG']['tl_layout']['cols']          = array('Spalten', 'Bitte wählen Sie die Anzahl an Spalten.');
 $GLOBALS['TL_LANG']['tl_layout']['1cl']           = array('Nur die Hauptspalte', 'Es wird nur eine Spalte angezeigt.');
@@ -59,10 +62,13 @@ $GLOBALS['TL_LANG']['tl_layout']['doctype']       = array('Ausgabeformat', 'Hier
 $GLOBALS['TL_LANG']['tl_layout']['cssClass']      = array('Body-Klasse', 'Hier können Sie dem Body-Tag individuelle Klassen hinzufügen.');
 $GLOBALS['TL_LANG']['tl_layout']['onload']        = array('Body onload', 'Hier können Sie dem Body-Tag ein Onload-Attribut hinzufügen.');
 $GLOBALS['TL_LANG']['tl_layout']['head']          = array('Zusätzliche &lt;head&gt;-Tags', 'Hier können Sie dem Head-Bereich der Seite individuelle Tags hinzufügen.');
-$GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('MooTools-Quelle', 'Hier können Sie auswählen, von wo die MooTools-Skripte geladen werden.');
+$GLOBALS['TL_LANG']['tl_layout']['addJQuery']     = array('jQuery laden', 'Dem Layout die jQuery-Bibliothek hinzufügen.');
 $GLOBALS['TL_LANG']['tl_layout']['jSource']       = array('jQuery-Quelle', 'Hier können Sie auswählen, von wo das jQuery-Skript geladen wird.');
-$GLOBALS['TL_LANG']['tl_layout']['mootools']      = array('MooTools-Templates', 'Hier können Sie eines oder mehrere MooTools-Templates auswählen.');
 $GLOBALS['TL_LANG']['tl_layout']['jquery']        = array('jQuery-Templates', 'Hier können Sie eines oder mehrere jQuery-Templates auswählen.');
+$GLOBALS['TL_LANG']['tl_layout']['addMooTools']   = array('MooTools laden', 'Dem Layout die MooTools-Bibliothek hinzufügen.');
+$GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('MooTools-Quelle', 'Hier können Sie auswählen, von wo die MooTools-Skripte geladen werden.');
+$GLOBALS['TL_LANG']['tl_layout']['mootools']      = array('MooTools-Templates', 'Hier können Sie eines oder mehrere MooTools-Templates auswählen.');
+$GLOBALS['TL_LANG']['tl_layout']['analytics']     = array('Analytics-Template', 'Hier können Sie dem Layout ein Analytics-Template (z.B. für Google-Analytics oder Piwik) hinzufügen. Beachten Sie, dass Sie diese Templates anpassen und Ihre Analytics-ID hinzufügen müssen, bevor Sie sie verwenden können!');
 $GLOBALS['TL_LANG']['tl_layout']['script']        = array('Eigener JavaScript-Code', 'Der JavaScript-Code wird am Ende der Seite eingefügt.');
 $GLOBALS['TL_LANG']['tl_layout']['static']        = array('Statisches Layout', 'Ein statisches Layout mit fester Breite und Ausrichtung erstellen.');
 $GLOBALS['TL_LANG']['tl_layout']['width']         = array('Gesamtbreite', 'Die Gesamtbreite wird dem Wrapper-Element zugewiesen.');
@@ -72,9 +78,9 @@ $GLOBALS['TL_LANG']['tl_layout']['align']         = array('Ausrichtung', 'Bitte 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_layout']['title_legend']    = 'Titel und Standard';
-$GLOBALS['TL_LANG']['tl_layout']['header_legend']   = 'Kopf- und Fußzeile';
-$GLOBALS['TL_LANG']['tl_layout']['column_legend']   = 'Spaltenkonfiguration';
+$GLOBALS['TL_LANG']['tl_layout']['title_legend']    = 'Titel';
+$GLOBALS['TL_LANG']['tl_layout']['header_legend']   = 'Reihen';
+$GLOBALS['TL_LANG']['tl_layout']['column_legend']   = 'Spalten';
 $GLOBALS['TL_LANG']['tl_layout']['sections_legend'] = 'Eigene Layoutbereiche';
 $GLOBALS['TL_LANG']['tl_layout']['style_legend']    = 'Stylesheets';
 $GLOBALS['TL_LANG']['tl_layout']['feed_legend']     = 'RSS/Atom-Feeds';
@@ -82,25 +88,29 @@ $GLOBALS['TL_LANG']['tl_layout']['modules_legend']  = 'Frontend-Module';
 $GLOBALS['TL_LANG']['tl_layout']['expert_legend']   = 'Experten-Einstellungen';
 $GLOBALS['TL_LANG']['tl_layout']['script_legend']   = 'Skript-Einstellungen';
 $GLOBALS['TL_LANG']['tl_layout']['static_legend']   = 'Statisches Layout';
-$GLOBALS['TL_LANG']['tl_layout']['moo_local']       = 'MooTools - lokale Datei';
-$GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'MooTools - googleapis.com';
-$GLOBALS['TL_LANG']['tl_layout']['moo_fallback']    = 'MooTools - googleapis.com mit lokalem Fallback';
+$GLOBALS['TL_LANG']['tl_layout']['jquery_legend']   = 'jQuery';
+$GLOBALS['TL_LANG']['tl_layout']['mootools_legend'] = 'MooTools';
 $GLOBALS['TL_LANG']['tl_layout']['j_local']         = 'jQuery - Lokale Datei';
 $GLOBALS['TL_LANG']['tl_layout']['j_googleapis']    = 'jQuery - googleapis.com';
 $GLOBALS['TL_LANG']['tl_layout']['j_fallback']      = 'jQuery - googleapis.com mit lokalem Fallback';
+$GLOBALS['TL_LANG']['tl_layout']['moo_local']       = 'MooTools - lokale Datei';
+$GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'MooTools - googleapis.com';
+$GLOBALS['TL_LANG']['tl_layout']['moo_fallback']    = 'MooTools - googleapis.com mit lokalem Fallback';
 
 
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_layout']['html5']        = 'HTML';
-$GLOBALS['TL_LANG']['tl_layout']['xhtml_strict'] = 'XHTML Strict';
-$GLOBALS['TL_LANG']['tl_layout']['xhtml_trans']  = 'XHTML Transitional';
-$GLOBALS['TL_LANG']['tl_layout']['before']       = 'Unterhalb der Kopfzeile';
-$GLOBALS['TL_LANG']['tl_layout']['main']         = 'In der Hauptspalte';
-$GLOBALS['TL_LANG']['tl_layout']['after']        = 'Oberhalb der Fußzeile';
-$GLOBALS['TL_LANG']['tl_layout']['edit_styles']  = 'Die Stylesheets bearbeiten';
-$GLOBALS['TL_LANG']['tl_layout']['edit_module']  = 'Das Modul bearbeiten';
+$GLOBALS['TL_LANG']['tl_layout']['html5']            = 'HTML';
+$GLOBALS['TL_LANG']['tl_layout']['xhtml_strict']     = 'XHTML Strict';
+$GLOBALS['TL_LANG']['tl_layout']['xhtml_trans']      = 'XHTML Transitional';
+$GLOBALS['TL_LANG']['tl_layout']['before']           = 'Unterhalb der Kopfzeile';
+$GLOBALS['TL_LANG']['tl_layout']['main']             = 'In der Hauptspalte';
+$GLOBALS['TL_LANG']['tl_layout']['after']            = 'Oberhalb der Fußzeile';
+$GLOBALS['TL_LANG']['tl_layout']['edit_styles']      = 'Die Stylesheets bearbeiten';
+$GLOBALS['TL_LANG']['tl_layout']['edit_module']      = 'Das Modul bearbeiten';
+$GLOBALS['TL_LANG']['tl_layout']['analytics_google'] = 'Google-Analytics';
+$GLOBALS['TL_LANG']['tl_layout']['analytics_piwik']  = 'Piwik';
 
 
 /**

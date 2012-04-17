@@ -2699,13 +2699,16 @@ abstract class Controller extends \System
 		$arrNew['activeRecord'] = $arrData['activeRecord'];
 
 		// Internet Explorer does not support onchange for checkboxes and radio buttons
-		if ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard' || $arrData['inputType'] == 'radio' || $arrData['inputType'] == 'radioTable')
+		if ($arrData['eval']['submitOnChange'])
 		{
-			$arrNew['onclick'] = $arrData['eval']['submitOnChange'] ? "Backend.autoSubmit('".$strTable."')" : '';
-		}
-		else
-		{
-			$arrNew['onchange'] = $arrData['eval']['submitOnChange'] ? "Backend.autoSubmit('".$strTable."')" : '';
+			if ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard' || $arrData['inputType'] == 'radio' || $arrData['inputType'] == 'radioTable')
+			{
+				$arrNew['onclick'] = trim($arrNew['onclick'] . " Backend.autoSubmit('".$strTable."')");
+			}
+			else
+			{
+				$arrNew['onchange'] = trim($arrNew['onchange'] . " Backend.autoSubmit('".$strTable."')");
+			}
 		}
 
 		$arrNew['allowHtml'] = ($arrData['eval']['allowHtml'] || strlen($arrData['eval']['rte']) || $arrData['eval']['preserveTags']) ? true : false;

@@ -284,6 +284,13 @@ class DbUpdater extends \Controller
 		$this->Database->query("ALTER TABLE `tl_module` ADD `numberOfItems` smallint(5) unsigned NOT NULL default '0'");
 		$this->Database->query("UPDATE `tl_module` SET `numberOfItems`=`rss_numberOfItems` WHERE `rss_numberOfItems`>0");
 		$this->Database->query("UPDATE `tl_module` SET `numberOfItems`=`news_numberOfItems` WHERE `news_numberOfItems`>0");
+		$this->Database->query("UPDATE `tl_layout` SET `addMooTools`=1 WHERE `mooSource`!=''");
+
+		// Set the new "rows" field
+		$this->Database->query("UPDATE `tl_layout` SET `rows`='1rw' WHERE `header`='' AND `footer`=''");
+		$this->Database->query("UPDATE `tl_layout` SET `rows`='2rwh' WHERE `header`!='' AND `footer`=''");
+		$this->Database->query("UPDATE `tl_layout` SET `rows`='2rwf' WHERE `header`='' AND `footer`!=''");
+		$this->Database->query("UPDATE `tl_layout` SET `rows`='3rw' WHERE `header`!='' AND `footer`!=''");
 	}
 
 

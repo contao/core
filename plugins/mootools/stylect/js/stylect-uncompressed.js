@@ -54,13 +54,17 @@ var Stylect =
 
 			// Create the div element
 			var div = new Element('div', {
-				'id': el.get('id') + '_styled',
 				'class': 'styled_select',
 				'html': '<span>' + label + '</span><b><i></i></b>',
 				'styles': {
 					'width': tw - ((Browser.safari || Browser.chrome) ? 6 : 8)
 				}
 			}).inject(el, 'before');
+
+			// Mark disabled elements
+			if (el.disabled) {
+				div.addClass('disabled');
+			}
 
 			// Fix right-aligned elements (e.g. Safari and Opera)
 			if (div.getPosition().x != el.getPosition().x) {

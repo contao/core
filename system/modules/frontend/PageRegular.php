@@ -99,7 +99,7 @@ class PageRegular extends \Frontend
 				if (in_array($arrModule['col'], $arrSections))
 				{
 					// Filter active sections (see #3273)
-					if ($arrModule['col'] == 'header' && !$objLayout->header)
+					if ($arrModule['col'] == 'header' && $objLayout->rows != '2rwh' && $objLayout->rows != '3rw')
 					{
 						continue;
 					}
@@ -111,7 +111,7 @@ class PageRegular extends \Frontend
 					{
 						continue;
 					}
-					if ($arrModule['col'] == 'footer' && !$objLayout->footer)
+					if ($arrModule['col'] == 'footer' && $objLayout->rows != '2rwf' && $objLayout->rows != '3rw')
 					{
 						continue;
 					}
@@ -228,17 +228,17 @@ class PageRegular extends \Frontend
 			{
 				$arrSize = deserialize($objLayout->width);
 				$arrMargin = array('left'=>'0 auto 0 0', 'center'=>'0 auto', 'right'=>'0 0 0 auto');
-				$strFramework .= sprintf('#wrapper{width:%s;margin:%s;}', $arrSize['value'] . $arrSize['unit'], $arrMargin[$objLayout->align]) . "\n";
+				$strFramework .= sprintf('#wrapper{width:%s;margin:%s}', $arrSize['value'] . $arrSize['unit'], $arrMargin[$objLayout->align]);
 			}
 
 			// Header
-			if ($objLayout->header)
+			if ($objLayout->rows == '2rwh' || $objLayout->rows == '3rw')
 			{
 				$arrSize = deserialize($objLayout->headerHeight);
 
 				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 				{
-					$strFramework .= sprintf('#header{height:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+					$strFramework .= sprintf('#header{height:%s}', $arrSize['value'] . $arrSize['unit']);
 				}
 			}
 
@@ -251,7 +251,7 @@ class PageRegular extends \Frontend
 
 				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 				{
-					$strFramework .= sprintf('#left{width:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+					$strFramework .= sprintf('#left{width:%s}', $arrSize['value'] . $arrSize['unit']);
 					$strMain .= sprintf('margin-left:%s;', $arrSize['value'] . $arrSize['unit']);
 				}
 			}
@@ -263,7 +263,7 @@ class PageRegular extends \Frontend
 
 				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 				{
-					$strFramework .= sprintf('#right{width:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+					$strFramework .= sprintf('#right{width:%s}', $arrSize['value'] . $arrSize['unit']);
 					$strMain .= sprintf('margin-right:%s;', $arrSize['value'] . $arrSize['unit']);
 				}
 			}
@@ -271,35 +271,35 @@ class PageRegular extends \Frontend
 			// Main column
 			if ($strMain != '')
 			{
-				$strFramework .= sprintf('#main{%s}', $strMain) . "\n";
+				$strFramework .= sprintf('#main{%s}', substr($strMain, 0, -1));
 			}
 
 			// Footer
-			if ($objLayout->footer)
+			if ($objLayout->rows == '2rwf' || $objLayout->rows == '3rw')
 			{
 				$arrSize = deserialize($objLayout->footerHeight);
 
 				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 				{
-					$strFramework .= sprintf('#footer{height:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+					$strFramework .= sprintf('#footer{height:%s}', $arrSize['value'] . $arrSize['unit']);
 				}
 			}
 
-			// Add layout specific CSS
+			// Add the layout specific CSS
 			if ($strFramework != '')
 			{
 				if ($objPage->outputFormat == 'xhtml')
 				{
 					$this->Template->framework .= '<style type="text/css" media="screen">' . "\n";
 					$this->Template->framework .= '/* <![CDATA[ */' . "\n";
-					$this->Template->framework .= $strFramework;
+					$this->Template->framework .= $strFramework . "\n";
 					$this->Template->framework .= '/* ]]> */' . "\n";
 					$this->Template->framework .= '</style>' . "\n";
 				}
 				else
 				{
 					$this->Template->framework .= '<style media="screen">' . "\n";
-					$this->Template->framework .= $strFramework;
+					$this->Template->framework .= $strFramework . "\n";
 					$this->Template->framework .= '</style>' . "\n";
 				}
 			}
@@ -308,7 +308,7 @@ class PageRegular extends \Frontend
 		$this->Template->mooScripts = '';
 
 		// jQuery scripts
-		if ($objLayout->jSource != '')
+		if ($objLayout->addJQuery)
 		{
 			if ($objLayout->jSource == 'j_googleapis' || $objLayout->jSource == 'j_fallback')
 			{
@@ -328,7 +328,7 @@ class PageRegular extends \Frontend
 		}
 
 		// MooTools scripts
-		if ($objLayout->mooSource != '')
+		if ($objLayout->addMooTools)
 		{
 			if ($objLayout->mooSource == 'moo_googleapis' || $objLayout->mooSource == 'moo_fallback')
 			{
@@ -356,14 +356,14 @@ class PageRegular extends \Frontend
 			}
 		}
 
-		// Initialize sections
+		// Initialize the sections
 		$this->Template->header = '';
 		$this->Template->left = '';
 		$this->Template->main = '';
 		$this->Template->right = '';
 		$this->Template->footer = '';
 
-		// Initialize custom layout sections
+		// Initialize the custom layout sections
 		$this->Template->sections = array();
 		$this->Template->sPosition = $objLayout->sPosition;
 
@@ -600,57 +600,50 @@ class PageRegular extends \Frontend
 		$strScripts = '';
 
 		// jQuery
-		$arrJquery = deserialize($objLayout->jquery, true);
-
-		foreach ($arrJquery as $strTemplate)
+		if ($objLayout->addJQuery)
 		{
-			if ($strTemplate == '')
+			$arrJquery = deserialize($objLayout->jquery, true);
+
+			foreach ($arrJquery as $strTemplate)
 			{
-				continue;
+				if ($strTemplate != '')
+				{
+					$objTemplate = new \FrontendTemplate($strTemplate);
+					$strScripts .= $objTemplate->parse();
+				}
 			}
 
-			$objTemplate = new \FrontendTemplate($strTemplate);
-			$strScripts .= $objTemplate->parse();
-		}
-
-		// Add the internal jQuery scripts
-		if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
-		{
-			foreach (array_unique($GLOBALS['TL_JQUERY']) as $script)
+			// Add the internal jQuery scripts
+			if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
 			{
-				$strScripts .= "\n" . trim($script) . "\n";
+				foreach (array_unique($GLOBALS['TL_JQUERY']) as $script)
+				{
+					$strScripts .= "\n" . trim($script) . "\n";
+				}
 			}
 		}
 
 		// MooTools
-		$arrMootools = deserialize($objLayout->mootools, true);
-
-		foreach ($arrMootools as $strTemplate)
+		if ($objLayout->addMooTools)
 		{
-			if ($strTemplate == '')
+			$arrMootools = deserialize($objLayout->mootools, true);
+
+			foreach ($arrMootools as $strTemplate)
 			{
-				continue;
+				if ($strTemplate != '')
+				{
+					$objTemplate = new \FrontendTemplate($strTemplate);
+					$strScripts .= $objTemplate->parse();
+				}
 			}
 
-			$objTemplate = new \FrontendTemplate($strTemplate);
-
-			// Backwards compatibility
-			try
+			// Add the internal MooTools scripts
+			if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
 			{
-				$strScripts .= $objTemplate->parse();
-			}
-			catch (\Exception $e)
-			{
-				$this->log($e->getMessage(), 'PageRegular createFooterScripts()', TL_ERROR);
-			}
-		}
-
-		// Add the internal MooTools scripts
-		if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
-		{
-			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
-			{
-				$strScripts .= "\n" . trim($script) . "\n";
+				foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
+				{
+					$strScripts .= "\n" . trim($script) . "\n";
+				}
 			}
 		}
 
@@ -658,6 +651,13 @@ class PageRegular extends \Frontend
 		if ($objLayout->script != '')
 		{
 			$strScripts .= "\n" . trim($objLayout->script) . "\n";
+		}
+
+		// Add the analytics script
+		if ($objLayout->analytics != '')
+		{
+			$objTemplate = new \FrontendTemplate($objLayout->analytics);
+			$strScripts .= $objTemplate->parse();
 		}
 
 		$this->Template->mootools = $strScripts;

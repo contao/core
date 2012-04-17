@@ -137,6 +137,8 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
+	'analytics_google'    => 'system/modules/frontend/templates',
+	'analytics_piwik'     => 'system/modules/frontend/templates',
 	'ce_accordion'        => 'system/modules/frontend/templates',
 	'ce_accordion_start'  => 'system/modules/frontend/templates',
 	'ce_accordion_stop'   => 'system/modules/frontend/templates',
@@ -170,9 +172,7 @@ TemplateLoader::addFiles(array
 	'form_xml'            => 'system/modules/frontend/templates',
 	'gallery_default'     => 'system/modules/frontend/templates',
 	'j_accordion'         => 'system/modules/frontend/templates',
-	'j_analytics'         => 'system/modules/frontend/templates',
 	'j_colorbox'          => 'system/modules/frontend/templates',
-	'j_piwik'             => 'system/modules/frontend/templates',
 	'mail_default'        => 'system/modules/frontend/templates',
 	'member_default'      => 'system/modules/frontend/templates',
 	'member_grouped'      => 'system/modules/frontend/templates',
@@ -200,10 +200,8 @@ TemplateLoader::addFiles(array
 	'mod_search_simple'   => 'system/modules/frontend/templates',
 	'mod_sitemap'         => 'system/modules/frontend/templates',
 	'moo_accordion'       => 'system/modules/frontend/templates',
-	'moo_analytics'       => 'system/modules/frontend/templates',
 	'moo_chosen'          => 'system/modules/frontend/templates',
 	'moo_mediabox'        => 'system/modules/frontend/templates',
-	'moo_piwik'           => 'system/modules/frontend/templates',
 	'moo_slimbox'         => 'system/modules/frontend/templates',
 	'nav_default'         => 'system/modules/frontend/templates',
 	'pagination'          => 'system/modules/frontend/templates',

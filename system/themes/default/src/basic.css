@@ -210,6 +210,11 @@ fieldset.checkbox_container,fieldset.radio_container {
 .tl_text:focus,.tl_text_2:focus,.tl_text_3:focus,.tl_text_4:focus,.tl_textarea:focus,.tl_text_unit:focus,.tl_text_trbl:focus,.tl_text_interval:focus {
 	background-color:#ebfdd7;
 }
+.tl_text[disabled],.tl_text_2[disabled],.tl_text_3[disabled],.tl_text_4[disabled],.tl_textarea[disabled],.tl_text_unit[disabled],.tl_text_trbl[disabled],.tl_text_interval[disabled] {
+	color:#bbb;
+	background-color:#f9f9f9;
+	border:1px solid #c8c8c8;
+}
 pre,.tl_textarea.monospace {
 	font-family:Courier,monospace;
 	font-size:12px;
@@ -245,6 +250,11 @@ pre,.tl_textarea.monospace {
 }
 .mac .tl_select,.mac .tl_mselect,.mac .tl_select_column,.mac .tl_select_unit,.mac .tl_select_interval {
 	padding:2px 1px;
+}
+.tl_select[disabled],.tl_mselect[disabled],.tl_select_column[disabled],.tl_select_unit[disabled],.tl_select_interval[disabled] {
+	color:#bbb;
+	background-color:#f9f9f9;
+	border:1px solid #c8c8c8;
 }
 
 /* Checkboxes */
@@ -393,6 +403,9 @@ a.tl_submit:hover {
 }
 .m12 {
 	margin:12px 0;
+}
+.webkit .m12 {
+	margin:13px 0 11px;
 }
 .cbx {
 	height:48px;

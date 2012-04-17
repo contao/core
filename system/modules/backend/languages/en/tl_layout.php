@@ -33,9 +33,12 @@
  */
 $GLOBALS['TL_LANG']['tl_layout']['name']          = array('Title', 'Please enter the layout title.');
 $GLOBALS['TL_LANG']['tl_layout']['fallback']      = array('Default layout', 'Make the layout the default layout.');
-$GLOBALS['TL_LANG']['tl_layout']['header']        = array('Add page header', 'Add a header section to the page layout.');
+$GLOBALS['TL_LANG']['tl_layout']['rows']          = array('Rows', 'Please choose the number of rows.');
+$GLOBALS['TL_LANG']['tl_layout']['1rw']           = array('Main row only', 'Show only one row.');
+$GLOBALS['TL_LANG']['tl_layout']['2rwh']          = array('Header and main row', 'Show a header above the main row.');
+$GLOBALS['TL_LANG']['tl_layout']['2rwf']          = array('Main row and footer', 'Show a footer below the main row.');
+$GLOBALS['TL_LANG']['tl_layout']['3rw']           = array('Header, main row and footer', 'Show a header above and a footer below the main row.');
 $GLOBALS['TL_LANG']['tl_layout']['headerHeight']  = array('Header height', 'Please enter the height of the page header.');
-$GLOBALS['TL_LANG']['tl_layout']['footer']        = array('Add page footer', 'Add a footer section to the page layout.');
 $GLOBALS['TL_LANG']['tl_layout']['footerHeight']  = array('Footer height', 'Please enter the height of the page footer.');
 $GLOBALS['TL_LANG']['tl_layout']['cols']          = array('Columns', 'Please choose the number of columns.');
 $GLOBALS['TL_LANG']['tl_layout']['1cl']           = array('Main column only', 'Show only one column.');
@@ -59,10 +62,13 @@ $GLOBALS['TL_LANG']['tl_layout']['doctype']       = array('Output format', 'Here
 $GLOBALS['TL_LANG']['tl_layout']['cssClass']      = array('Body class', 'Here you can add custom classes to the body tag.');
 $GLOBALS['TL_LANG']['tl_layout']['onload']        = array('Body onload', 'Here you can add a body onload attribute.');
 $GLOBALS['TL_LANG']['tl_layout']['head']          = array('Additional &lt;head&gt; tags', 'Here you can add individual tags to the head section of the page.');
-$GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('MooTools source', 'Here you can select from where to load the MooTools scripts.');
+$GLOBALS['TL_LANG']['tl_layout']['addJQuery']     = array('Include jQuery', 'Include the jQuery library in the layout.');
 $GLOBALS['TL_LANG']['tl_layout']['jSource']       = array('jQuery source', 'Here you can select from where to load the jQuery script.');
-$GLOBALS['TL_LANG']['tl_layout']['mootools']      = array('MooTools templates', 'Here you can select one or more MooTools templates.');
 $GLOBALS['TL_LANG']['tl_layout']['jquery']        = array('jQuery templates', 'Here you can select one or more jQuery templates.');
+$GLOBALS['TL_LANG']['tl_layout']['addMooTools']   = array('Include MooTools', 'Include the MooTools library in the layout.');
+$GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('MooTools source', 'Here you can select from where to load the MooTools scripts.');
+$GLOBALS['TL_LANG']['tl_layout']['mootools']      = array('MooTools templates', 'Here you can select one or more MooTools templates.');
+$GLOBALS['TL_LANG']['tl_layout']['analytics']     = array('Analytics template', 'Here you can add an analytics template (e.g. for Google Analytics or Piwik) to the layout. Note that you have to adjust those templates and add your analytics ID before you can use them!');
 $GLOBALS['TL_LANG']['tl_layout']['script']        = array('Custom JavaScript code', 'The JavaScript code which will be inserted at the bottom of the page.');
 $GLOBALS['TL_LANG']['tl_layout']['static']        = array('Static layout', 'Create a static layout with a fixed width and alignment.');
 $GLOBALS['TL_LANG']['tl_layout']['width']         = array('Overall width', 'The overall width will be applied to the wrapper element.');
@@ -72,9 +78,9 @@ $GLOBALS['TL_LANG']['tl_layout']['align']         = array('Alignment', 'Please s
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_layout']['title_legend']    = 'Title and default';
-$GLOBALS['TL_LANG']['tl_layout']['header_legend']   = 'Header and footer';
-$GLOBALS['TL_LANG']['tl_layout']['column_legend']   = 'Column settings';
+$GLOBALS['TL_LANG']['tl_layout']['title_legend']    = 'Title';
+$GLOBALS['TL_LANG']['tl_layout']['header_legend']   = 'Rows';
+$GLOBALS['TL_LANG']['tl_layout']['column_legend']   = 'Columns';
 $GLOBALS['TL_LANG']['tl_layout']['sections_legend'] = 'Custom sections';
 $GLOBALS['TL_LANG']['tl_layout']['style_legend']    = 'Style sheets';
 $GLOBALS['TL_LANG']['tl_layout']['feed_legend']     = 'RSS/Atom feeds';
@@ -82,25 +88,29 @@ $GLOBALS['TL_LANG']['tl_layout']['modules_legend']  = 'Front end modules';
 $GLOBALS['TL_LANG']['tl_layout']['expert_legend']   = 'Expert settings';
 $GLOBALS['TL_LANG']['tl_layout']['script_legend']   = 'Script settings';
 $GLOBALS['TL_LANG']['tl_layout']['static_legend']   = 'Static layout';
-$GLOBALS['TL_LANG']['tl_layout']['moo_local']       = 'MooTools - local file';
-$GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'MooTools - googleapis.com';
-$GLOBALS['TL_LANG']['tl_layout']['moo_fallback']    = 'MooTools - googleapis.com with local fallback';
+$GLOBALS['TL_LANG']['tl_layout']['jquery_legend']   = 'jQuery';
+$GLOBALS['TL_LANG']['tl_layout']['mootools_legend'] = 'MooTools';
 $GLOBALS['TL_LANG']['tl_layout']['j_local']         = 'jQuery - local file';
 $GLOBALS['TL_LANG']['tl_layout']['j_googleapis']    = 'jQuery - googleapis.com';
 $GLOBALS['TL_LANG']['tl_layout']['j_fallback']      = 'jQuery - googleapis.com with local fallback';
+$GLOBALS['TL_LANG']['tl_layout']['moo_local']       = 'MooTools - local file';
+$GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'MooTools - googleapis.com';
+$GLOBALS['TL_LANG']['tl_layout']['moo_fallback']    = 'MooTools - googleapis.com with local fallback';
 
 
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_layout']['html5']        = 'HTML';
-$GLOBALS['TL_LANG']['tl_layout']['xhtml_strict'] = 'XHTML Strict';
-$GLOBALS['TL_LANG']['tl_layout']['xhtml_trans']  = 'XHTML Transitional';
-$GLOBALS['TL_LANG']['tl_layout']['before']       = 'After the page header';
-$GLOBALS['TL_LANG']['tl_layout']['main']         = 'Inside the main column';
-$GLOBALS['TL_LANG']['tl_layout']['after']        = 'Before the page footer';
-$GLOBALS['TL_LANG']['tl_layout']['edit_styles']  = 'Edit the style sheets';
-$GLOBALS['TL_LANG']['tl_layout']['edit_module']  = 'Edit the module';
+$GLOBALS['TL_LANG']['tl_layout']['html5']            = 'HTML';
+$GLOBALS['TL_LANG']['tl_layout']['xhtml_strict']     = 'XHTML Strict';
+$GLOBALS['TL_LANG']['tl_layout']['xhtml_trans']      = 'XHTML Transitional';
+$GLOBALS['TL_LANG']['tl_layout']['before']           = 'After the page header';
+$GLOBALS['TL_LANG']['tl_layout']['main']             = 'Inside the main column';
+$GLOBALS['TL_LANG']['tl_layout']['after']            = 'Before the page footer';
+$GLOBALS['TL_LANG']['tl_layout']['edit_styles']      = 'Edit the style sheets';
+$GLOBALS['TL_LANG']['tl_layout']['edit_module']      = 'Edit the module';
+$GLOBALS['TL_LANG']['tl_layout']['analytics_google'] = 'Google Analytics';
+$GLOBALS['TL_LANG']['tl_layout']['analytics_piwik']  = 'Piwik';
 
 
 /**

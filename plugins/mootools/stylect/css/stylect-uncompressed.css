@@ -19,6 +19,11 @@
 .styled_select.focused {
 	background-color:#ebfdd7;
 }
+.styled_select.disabled {
+	color:#bbb;
+	background-color:#f9f9f9;
+	border:1px solid #c8c8c8;
+}
 .firefox .styled_select {
 	line-height:21px;
 }
