@@ -136,17 +136,17 @@ abstract class Backend extends \Controller
 
 		$this->import('BackendUser', 'User');
 
-		// Check whether the current user has access to the current module
-		if ($module != 'undo' && !$this->User->isAdmin && !$this->User->hasAccess($module, 'modules'))
-		{
-			$this->log('Back end module "' . $module . '" was not allowed for user "' . $this->User->username . '"', 'Backend getBackendModule()', TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
-		}
-
 		// Dynamically add the "personal data" module (see #4193)
 		if ($this->Input->get('do') == 'login')
 		{
 			$arrModule = array('tables'=>array('tl_user'), 'callback'=>'ModuleUser');
+		}
+
+		// Check whether the current user has access to the current module
+		elseif ($module != 'undo' && !$this->User->isAdmin && !$this->User->hasAccess($module, 'modules'))
+		{
+			$this->log('Back end module "' . $module . '" was not allowed for user "' . $this->User->username . '"', 'Backend getBackendModule()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$strTable = $this->Input->get('table') ?: $arrModule['tables'][0];
