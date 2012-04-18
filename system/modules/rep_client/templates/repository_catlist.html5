@@ -147,7 +147,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 </tr>
 <tr class="info">
   <th><?php echo property_exists($ext, 'votes') ? $text['totrating'] : '&nbsp;'; ?></th>
-  <td class="nowrap"><?php if (property_exists($ext, 'votes')): ?><div class="ratebarframe"><div class="ratebar" style="width:<?php echo $ext->rating*10.0; ?>%"></div></div> <div class="ratebartext"><?php echo sprintf($text['ratingfmt'], $ext->rating, $ext->votes); ?></div><?php endif; ?></td>
+  <td class="nowrap"><?php if (property_exists($ext, 'votes')): ?><div class="ratebarframe"><div class="ratebar" style="width:<?php echo number_format($ext->rating*10.0,12,'.',','); ?>%"></div></div> <div class="ratebartext"><?php echo sprintf($text['ratingfmt'], $ext->rating, $ext->votes); ?></div><?php endif; ?></td>
   <th><?php echo $text['popularity'][0]; ?></th>
   <td class="nowrap"><?php echo sprintf($text['popularity'][1], (int)$ext->downloads, (int)$ext->installs); ?></td>
 </tr>
