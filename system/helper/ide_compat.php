@@ -297,7 +297,3 @@ class NewsletterChannelModel extends Contao\NewsletterChannelModel {}
 class NewsletterCollection extends Contao\NewsletterCollection {}
 class NewsletterModel extends Contao\NewsletterModel {}
 class NewsletterRecipientsModel extends Contao\NewsletterRecipientsModel {}
-
-// tasks
-class ModuleTasks extends Contao\ModuleTasks {}
-class TaskMessages extends Contao\TaskMessages {}

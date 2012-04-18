@@ -126,40 +126,31 @@ class ClassLoader
 
 
 	/**
-	 * Add a new namespace (prepend it to override a core class)
+	 * Add a new namespace
 	 * @param string
-	 * @param boolean
 	 * @return void
 	 */
-	public static function addNamespace($name, $prepend=false)
+	public static function addNamespace($name)
 	{
 		if (in_array($name, self::$namespaces))
 		{
 			return;
 		}
 
-		if ($prepend)
-		{
-			array_unshift(self::$namespaces, $name);
-		}
-		else
-		{
-			array_push(self::$namespaces, $name);
-		}
+		array_unshift(self::$namespaces, $name);
 	}
 
 
 	/**
-	 * Add new namespaces (prepend it to override a core class)
+	 * Add a new namespace
 	 * @param array
-	 * @param boolean
 	 * @return void
 	 */
-	public static function addNamespaces($names, $prepend=false)
+	public static function addNamespaces($names)
 	{
 		foreach ($names as $name)
 		{
-			self::addNamespace($name, $prepend);
+			self::addNamespace($name);
 		}
 	}
 
