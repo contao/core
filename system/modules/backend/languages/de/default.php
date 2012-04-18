@@ -422,6 +422,7 @@ $GLOBALS['TL_LANG']['MSC']['fileCreated']       = 'Erstellt am';
 $GLOBALS['TL_LANG']['MSC']['fileModified']      = 'Zuletzt geändert am';
 $GLOBALS['TL_LANG']['MSC']['fileAccessed']      = 'Letzter Zugriff am';
 $GLOBALS['TL_LANG']['MSC']['fileDownload']      = 'Herunterladen';
+$GLOBALS['TL_LANG']['MSC']['fileDownloadTitle'] = 'Diese Datei herunterladen';
 $GLOBALS['TL_LANG']['MSC']['fileImageSize']     = 'Breite/Höhe in Pixeln';
 $GLOBALS['TL_LANG']['MSC']['filePath']          = 'Relativer Pfad';
 $GLOBALS['TL_LANG']['MSC']['version']           = 'Version';
