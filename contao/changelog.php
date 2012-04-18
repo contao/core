@@ -71,6 +71,7 @@ class Changelog extends Backend
 	public function run()
 	{
 		$strBuffer = file_get_contents(TL_ROOT . '/system/docs/CHANGELOG.md');
+		$strBuffer = str_replace("\r", '', $strBuffer); // see #4190
 
 		$strBuffer = preg_replace(
 			array(
