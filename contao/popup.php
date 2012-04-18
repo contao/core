@@ -174,6 +174,7 @@ class Popup extends Backend
 		$this->Template->label_atime = $GLOBALS['TL_LANG']['MSC']['fileAccessed'];
 		$this->Template->label_path = $GLOBALS['TL_LANG']['MSC']['filePath'];
 		$this->Template->download = specialchars($GLOBALS['TL_LANG']['MSC']['fileDownload']);
+		$this->Template->downloadTitle = specialchars($GLOBALS['TL_LANG']['MSC']['fileDownloadTitle']);
 
 		$this->Template->output();
 	}

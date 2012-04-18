@@ -11,6 +11,14 @@
   echo $objCombiner->getCombinedFile();
 ?>" media="all">
 <!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
+<script src="<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS);
+  $objCombiner->add('plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS);
+  $objCombiner->add('plugins/mootools/mootao/Mootao.js');
+  $objCombiner->add('system/modules/backend/html/contao.js');
+  echo $objCombiner->getCombinedFile();
+?>"></script>
 </head>
 <body class="__ua__ popup">
 
