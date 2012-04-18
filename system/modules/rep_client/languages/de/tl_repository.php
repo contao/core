@@ -92,6 +92,8 @@ $GLOBALS['TL_LANG']['tl_repository']['updatehint']         = 'Status auswählen,
 $GLOBALS['TL_LANG']['tl_repository']['updatingext']        = 'Aktualisierung %s %s Build %s';
 $GLOBALS['TL_LANG']['tl_repository']['validate']           = 'Reparieren';
 $GLOBALS['TL_LANG']['tl_repository']['validatingext']      = 'Prüfung/Reparatur %s %s Build %s';
+$GLOBALS['TL_LANG']['tl_repository']['approvedForLabel']   = 'Freigegeben für';
+$GLOBALS['TL_LANG']['tl_repository']['approvedForText']    = 'Contao %s bis %s';
 
 
 /**

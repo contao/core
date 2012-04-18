@@ -120,7 +120,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 
 <table class="extension">
 <tr class="title">
-  <th colspan="4"><span class="leftblock">[<a href="<?php echo $ext->viewLink; ?>" title="<?php echo $text['showdetails']; ?>"><?php echo $ext->name; ?></a>] <?php echo $ext->title; ?></span> <span class="rightblock"><?php echo $theme->createListButton('info', $ext->viewLink, $text['showdetails']); ?></span></th>
+  <th colspan="4"><span class="leftblock">[<a href="<?php echo $ext->viewLink; ?>" title="<?php echo $text['showdetails']; ?>"><?php echo $ext->name; ?></a>] <?php echo $ext->title; ?></span> <span class="rightblock"><?php echo $theme->createListButton('info', $ext->viewLink, $text['showdetails']); ?> <?php echo $theme->createListButton('install16', $ext->installLink, $text['install']); ?></span></th>
 </tr>
 <?php if ($ext->teaser!=''): ?>
 <tr class="description">
@@ -136,14 +136,14 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 <tr class="info">
   <th><?php echo $text['releasedate'][0]; ?></th>
   <td><?php echo $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $ext->releasedate); ?></td>
-  <th><?php echo $text['license'][0]; ?></th>
-  <td><?php echo $ext->license; ?></td>
+  <th><?php echo $text['approvedForLabel']; ?></th>
+  <td><?php printf($text['approvedForText'], Repository::formatShortCoreVersion($ext->coreminversion), Repository::formatShortCoreVersion($ext->coremaxversion)); ?></td>
 </tr>
 <tr class="info">
   <th><?php echo $text['author']; ?></th>
   <td><?php echo $ext->author; ?></td>
-  <th><?php echo $text['category'][0]; ?></th>
-  <td><?php echo $category_options[$ext->category]; ?></td>
+  <th><?php echo $text['license'][0]; ?></th>
+  <td><?php echo $ext->license; ?></td>
 </tr>
 <tr class="info">
   <th><?php echo property_exists($ext, 'votes') ? $text['totrating'] : '&nbsp;'; ?></th>

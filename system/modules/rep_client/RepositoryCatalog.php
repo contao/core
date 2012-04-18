@@ -150,6 +150,7 @@ class RepositoryCatalog extends RepositoryBackendModule
 		$totrecs = 0;
 		foreach ($rep->extensions as &$ext) {
 			$ext->viewLink = $this->createUrl(array('view' => $ext->name.'.'.$ext->version.'.'.$ext->language));
+			$ext->installLink = $this->createPageUrl('repository_manager',array('install'=>$ext->name.'.'.$ext->version));
 			$totrecs = $ext->totrecs;
 		} // foreach
 

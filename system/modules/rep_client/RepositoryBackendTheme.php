@@ -90,7 +90,7 @@ class RepositoryBackendTheme
 		if ($alt=='') $alt = 'icon';
 		$img = self::image($file);
 		$size = getimagesize(TL_ROOT.'/'.$img);
-		return '<img'.((substr($img, -4) == '.png') ? ' class="pngfix"' : '').' src="'.$img.'" '.$size[3].' alt="'.specialchars($alt).'"'.(strlen($attributes) ? ' '.$attributes : '').'>';
+		return '<img'.((substr($img, -4) == '.png') ? ' class="pngfix"' : '').' src="'.$img.'" '.$size[3].' alt="'.specialchars($alt).'"'.(($attributes != '') ? ' '.$attributes : '').'>';
 	} // createImage
 
 	/**
@@ -106,7 +106,7 @@ class RepositoryBackendTheme
 	{
 		$target = $popup ? ' target="_blank"' : '';
 		$onclick = ($confirm!='') ? ' onclick="if(!confirm(\''.$confirm.'\'))return false"' : '';
-		return '<a href="'.$link.'" title="'.$text.'"'.$target.$onclick.'>'.$this->createImage($file,$text,'title="'.$text.'"').'</a>';
+		return '<a href="'.$link.'" title="'.$text.'"'.$target.$onclick.'>'.$this->createImage($file,$text).'</a>';
 	} // createListButton
 
 	public function createMainButton($file, $link, $text, $confirm='')
@@ -114,7 +114,7 @@ class RepositoryBackendTheme
 		$onclick = ($confirm=='')
 						? ''
 						: ' onclick="if(!confirm(\''.$confirm.'\'))return false"';
-		return '<a href="'.$link.'" title="'.$text.'"'.$onclick.'>'.$this->createImage($file,$text,'title="'.$text.'"').' '.$text.'</a>';
+		return '<a href="'.$link.'" title="'.$text.'"'.$onclick.'>'.$this->createImage($file,$text).' '.$text.'</a>';
 	} // createMainButton
 
 } // class RepositoryTheme

@@ -750,6 +750,17 @@ label.tl_change_selected {
 .selector_container img {
 	vertical-align:top;
 }
+ul.sgallery {
+	overflow:hidden;
+}
+ul.sgallery li {
+	float:left;
+	margin-right:0;
+}
+ul.sgallery .gimage {
+	margin:2px;
+	border:1px solid #808080;
+}
 
 /* Welcome screen */
 #tl_welcome {
