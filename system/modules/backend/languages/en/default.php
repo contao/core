@@ -421,6 +421,7 @@ $GLOBALS['TL_LANG']['MSC']['fileCreated']       = 'Created';
 $GLOBALS['TL_LANG']['MSC']['fileModified']      = 'Last modified';
 $GLOBALS['TL_LANG']['MSC']['fileAccessed']      = 'Last accessed';
 $GLOBALS['TL_LANG']['MSC']['fileDownload']      = 'Download';
+$GLOBALS['TL_LANG']['MSC']['fileDownloadTitle'] = 'Download this file';
 $GLOBALS['TL_LANG']['MSC']['fileImageSize']     = 'Width/height in pixel';
 $GLOBALS['TL_LANG']['MSC']['filePath']          = 'Relative path';
 $GLOBALS['TL_LANG']['MSC']['version']           = 'Version';
