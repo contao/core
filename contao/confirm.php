@@ -130,9 +130,31 @@ class Confirm extends Backend
 			}
 		}
 
-		// Override the action label
 		$this->loadLanguageFile($arrInfo['table']);
-		$arrInfo['act'] = $GLOBALS['TL_LANG'][$arrInfo['table']][$arrInfo['act']][0];
+
+		// Override the action label
+		if (isset($arrInfo['clipboard']))
+		{
+			$arrInfo['act'] = $GLOBALS['TL_LANG']['MSC']['clearClipboard'];
+			unset($arrInfo['mode']);
+			unset($arrInfo['clipboard']);
+		}
+		elseif (isset($arrInfo['mode']))
+		{
+			if ($arrInfo['mode'] == 'create')
+			{
+				$arrInfo['act'] = $GLOBALS['TL_LANG'][$arrInfo['table']]['new'][0];
+			}
+			elseif ($arrInfo['mode'] == 'cut' || $arrInfo['mode'] == 'copy')
+			{
+				$arrInfo['act'] = $GLOBALS['TL_LANG'][$arrInfo['table']][$arrInfo['mode']][0];
+			}
+			unset($arrInfo['mode']);
+		}
+		else
+		{
+			$arrInfo['act'] = $GLOBALS['TL_LANG'][$arrInfo['table']][$arrInfo['act']][0];
+		}
 
 		// Template variables
 		$this->Template->confirm = true;
