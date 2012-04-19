@@ -135,7 +135,7 @@ class News extends \Frontend
 		}
 
 		// Parse the items
-		if ($objArticle === null)
+		if ($objArticle !== null)
 		{
 			$arrUrls = array();
 
@@ -151,7 +151,7 @@ class News extends \Frontend
 				}
 
 				$strUrl = $arrUrls[$jumpTo];
-				$objItem = new FeedItem();
+				$objItem = new \FeedItem();
 
 				$objItem->title = $objArticle->headline;
 				$objItem->link = (($objArticle->source == 'external') ? '' : $strLink) . $this->getLink($objArticle, $strUrl);
@@ -191,7 +191,7 @@ class News extends \Frontend
 		}
 
 		// Create the file
-		$objRss = new File('share/' . $strFile . '.xml');
+		$objRss = new \File('share/' . $strFile . '.xml');
 		$objRss->write($this->replaceInsertTags($objFeed->$strType()));
 		$objRss->close();
 	}
