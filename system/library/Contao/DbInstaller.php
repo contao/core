@@ -120,7 +120,7 @@ class DbInstaller extends \Controller
 		$return = array();
 
 		$sql_current = $this->getFromDb();
-		$sql_target = array_merge($this->getFromDca(), $this->getFromFile());
+		$sql_target = $this->getFromDca() + $this->getFromFile();
 
 		// Create tables
 		foreach (array_diff(array_keys($sql_target), array_keys($sql_current)) as $table)

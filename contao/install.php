@@ -232,6 +232,15 @@ class InstallTool extends Backend
 			$_SESSION['sql_commands'] = array();
 			$this->reload();
 		}
+		// Clear the internal cache
+		else
+		{
+			foreach (array('dca', 'language', 'sql') as $folder)
+			{
+				$objFolder = new \Folder('system/cache/' . $folder);
+				$objFolder->delete();
+			}
+		}
 
 		$this->handleRunOnce();
 		$this->import('DbInstaller');

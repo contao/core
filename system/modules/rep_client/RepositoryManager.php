@@ -425,6 +425,11 @@ class RepositoryManager extends RepositoryBackendModule
 				} // foreach
 			} // if
 			$_SESSION['sql_commands'] = array();
+		} else {
+			foreach (array('dca', 'language', 'sql') as $folder) {
+				$objFolder = new \Folder('system/cache/' . $folder);
+				$objFolder->delete();
+			} // foreach
 		} // if
 		$this->handleRunOnce(); // PATCH
 		$this->import('DbInstaller');
