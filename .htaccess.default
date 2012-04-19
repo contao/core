@@ -146,9 +146,9 @@ FileETag None
 
   ##
   # Do not rewrite requests for static files or folders such as style sheets,
-  # images, movies or text documents. Do not add the URL suffix here!
+  # images, movies or text documents.
   ##
-  <FilesMatch "\.(png|gif|jpe?g|html?|js|css|ico|php|xml|csv|txt|gz|swf|flv|eot|woff|svg|ttf)$">
+  <FilesMatch "\.(html?|php|js|css|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|eot|woff|svg|ttf|pdf|gz)$">
     RewriteEngine Off
   </FilesMatch>
 
