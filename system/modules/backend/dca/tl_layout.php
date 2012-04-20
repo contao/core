@@ -116,7 +116,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('rows', 'cols', 'addJQuery', 'addMooTools', 'static'),
-		'default'                     => '{title_legend},name,fallback;{header_legend},rows;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,skipTinymce,external;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,skipFramework,doctype,webfonts,cssClass,onload,head;{jquery_legend},addJQuery;{mootools_legend},addMooTools;{script_legend},analytics,script;{static_legend},static'
+		'default'                     => '{title_legend},name;{header_legend},rows;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,skipTinymce,external;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,skipFramework,doctype,webfonts,cssClass,onload,head;{jquery_legend},addJQuery;{mootools_legend},addMooTools;{script_legend},analytics,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -158,16 +158,8 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'search'                  => true,
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
 			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'fallback' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['fallback'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('fallback'=>true, 'tl_class'=>'w50 m12'),
-			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'rows' => array
 		(
@@ -688,12 +680,7 @@ class tl_layout extends Backend
 	 */
 	public function listLayout($row)
 	{
-		if (!$row['fallback'])
-		{
-			return '<div style="float:left">'. $row['name'] ."</div>\n";
-		}
-
-		return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px">['. $GLOBALS['TL_LANG']['MSC']['fallback'] .']</span>' . "</div>\n";
+		return '<div style="float:left">'. $row['name'] ."</div>\n";
 	}
 
 

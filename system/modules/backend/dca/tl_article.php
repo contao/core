@@ -597,12 +597,10 @@ class tl_article extends Backend
 			$objPage = $this->getPageDetails($dc->activeRecord->pid);
 
 			// Get the layout settings
-			$objLayout = $this->Database->prepare("SELECT * FROM tl_layout WHERE id=? OR fallback=1 ORDER BY fallback")
-										->limit(1)
-										->execute($objPage->layout);
+			$objLayout = \LayoutModel::findByPk($objPage->layout);
 
 			// No layout specified
-			if ($objLayout->numRows < 1)
+			if ($objLayout === null)
 			{
 				return array('main');
 			}

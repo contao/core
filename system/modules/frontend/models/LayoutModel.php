@@ -50,16 +50,4 @@ class LayoutModel extends \Model
 	 * @var string
 	 */
 	protected static $strTable = 'tl_layout';
-
-
-	/**
-	 * Find a layout by its ID or fallback status
-	 * @param integer
-	 * @return \Contao\Model|null
-	 */
-	public static function findByIdOrFallback($varId)
-	{
-		$t = static::$strTable;
-		return static::findBy(array("($t.id=? OR $t.fallback=1)"), $varId, array('order'=>"$t.id DESC"));
-	}
 }

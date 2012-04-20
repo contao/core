@@ -181,9 +181,9 @@ class PageRegular extends \Frontend
 	 */
 	protected function getPageLayout($intId)
 	{
-		$objLayout = \LayoutModel::findByIdOrFallback($intId);
+		$objLayout = \LayoutModel::findByPk($intId);
 
-		// Die if there is no layout at all
+		// Die if there is no layout
 		if ($objLayout === null)
 		{
 			header('HTTP/1.1 501 Not Implemented');
