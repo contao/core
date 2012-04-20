@@ -4266,7 +4266,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					
 					// call the panelLayout_callbacck
 					default:
-						$arrCallback = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout_callback'][$strSubPanelKey];
+						$arrCallback = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panel_callback'][$strSubPanelKey];
 						if (is_array($arrCallback))
 						{
 							$this->import($arrCallback[0]);
