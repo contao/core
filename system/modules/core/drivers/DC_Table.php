@@ -4300,7 +4300,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					case 'sort':
 						$arrPanels[$k][$kk] = $this->{$strSubPanelKey . 'Menu'}();
 					
-					// call the panelLayout_callbacck
+					// call the panel_callback
 					default:
 						$arrCallback = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panel_callback'][$strSubPanelKey];
 						if (is_array($arrCallback))
