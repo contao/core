@@ -181,7 +181,9 @@ class PageRegular extends \Frontend
 	 */
 	protected function getPageLayout($objPage)
 	{
-		$intId = ($objPage->mobileLayout && $this->Environment->agent->mobile) ? $objPage->mobileLayout : $objPage->layout;
+		$blnMobile = ($objPage->mobileLayout && $this->Environment->agent->mobile);
+		$intId = $blnMobile ? $objPage->mobileLayout : $objPage->layout;
+
 		$objLayout = \LayoutModel::findByPk($intId);
 
 		// Die if there is no layout
@@ -192,6 +194,7 @@ class PageRegular extends \Frontend
 			die('No layout specified');
 		}
 
+		$objLayout->isMobile = $blnMobile;
 		return $objLayout;
 	}
 
@@ -370,6 +373,7 @@ class PageRegular extends \Frontend
 
 		// Default settings
 		$this->Template->layout = $objLayout;
+		$this->Template->mobile = $objLayout->isMobile;
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->base = $this->Environment->base;
