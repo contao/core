@@ -4288,27 +4288,26 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		$arrPanels = $this->preparePanelArray();
 
 		// prepare the default panels
-		$arrDefaultPanels = array('filter', 'search', 'limit', 'sort');
 		foreach ($arrPanels as $k => $arrSubPanels)
 		{
-			foreach ($arrSubPanels as $strSubPanelKey => $strSubPanelHtml)
+			foreach ($arrSubPanels as $kk => $strSubPanelKey)
 			{
-				if (in_array($strSubPanelKey, $arrDefaultPanels))
+				switch ($strSubPanelKey)
 				{
-					$arrPanels[$k][$strSubPanelKey] = $this->{$strSubPanelKey . 'Menu'}();
-				}
-			}
-		}
-
-		// call the panelLayout_callbacck
-		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout_callback']))
-		{
-			foreach ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout_callback'] as $callback)
-			{
-				if (is_array($callback))
-				{
-					$this->import($callback[0]);
-					$arrPanels = $this->$callback[0]->$callback[1]($arrPanels, $this);
+					case 'filter':
+					case 'search':
+					case 'limit':
+					case 'sort':
+						$arrPanels[$k][$kk] = $this->{$strSubPanelKey . 'Menu'}();
+					
+					// call the panelLayout_callbacck
+					default:
+						$arrCallback = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout_callback'][$strSubPanelKey];
+						if (is_array($arrCallback))
+						{
+							$this->import($arrCallback[0]);
+							$arrPanels[$k][$kk] = $this->$arrCallback[0]->$arrCallback[1]($this);
+						}
 				}
 			}
 		}
@@ -4383,7 +4382,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					continue;
 				}
 
-				$arrReturn[$intPanelKey][$strSubPanel] = '';
+				$arrReturn[$intPanelKey][$intSubPanelKey] = $strSubPanel;
 			}
 		}
 		
