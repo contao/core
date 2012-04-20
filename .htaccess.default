@@ -148,7 +148,7 @@ FileETag None
   # Do not rewrite requests for static files or folders such as style sheets,
   # images, movies or text documents. Do not add the URL suffix here!
   ##
-  <FilesMatch "\.(png|gif|jpe?g|html?|js|css|ico|php|xml|csv|txt|gz|swf|flv|eot|woff|svg|ttf)$">
+  <FilesMatch "\.(htm|php|js|css|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|eot|woff|svg|ttf|pdf|gz)$">
     RewriteEngine Off
   </FilesMatch>
 
@@ -165,7 +165,6 @@ FileETag None
   # line to prevent URLs that point to folders from being rewritten (see #4031).
   #
   #   RewriteCond %{REQUEST_FILENAME} !-d
-  #   RewriteRule .* index.php [L]
   #
   # If you are using mod_cache, it is recommended to use the RewriteRule below,
   # which adds the query string to the internal URL:
@@ -174,6 +173,7 @@ FileETag None
   #
   # Note that not all environments support mod_rewrite and mod_cache.
   ##
+  RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule .*\.html$ index.php [L]
 
   ##
