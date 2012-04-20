@@ -4,6 +4,12 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+New approach to handle mobile devices: instead of redirecting to another website
+root page, you can now define a separate layout for mobile pages. This allows us
+to re-use the existing site structure and content and to leave out (or include)
+certain modules, scripts and style sheets if a visitor uses a mobile device.
+
 ### Improved
 Better page layout edit screen: row icons, separate analytics templates, jQuery
 and MooTools configuration in subpalettes.

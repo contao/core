@@ -63,7 +63,7 @@ class PageRegular extends \Frontend
 		$this->setStaticUrl('TL_PLUGINS_URL', $objPage->staticPlugins);
 
 		// Get the page layout
-		$objLayout = $this->getPageLayout($objPage->layout);
+		$objLayout = $this->getPageLayout($objPage);
 		$objPage->template = $objLayout->template ?: 'fe_page';
 		$objPage->templateGroup = $objLayout->pid['templates'];
 
@@ -176,11 +176,12 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Get a page layout and return it as database result object
-	 * @param integer
+	 * @param \Contao\Model
 	 * @return \Contao\Model
 	 */
-	protected function getPageLayout($intId)
+	protected function getPageLayout($objPage)
 	{
+		$intId = ($objPage->mobileLayout && $this->Environment->agent->mobile) ? $objPage->mobileLayout : $objPage->layout;
 		$objLayout = \LayoutModel::findByPk($intId);
 
 		// Die if there is no layout

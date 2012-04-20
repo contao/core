@@ -254,9 +254,6 @@ abstract class Frontend extends \Controller
 				$this->log('No root page found (host "' . $host . '", language "'. $this->Input->get('language') .'"', 'Frontend getRootPageFromUrl()', TL_ERROR);
 				die('No root page found');
 			}
-
-			// Prefer a mobile website if the visitor uses a mobile device
-			$this->redirectToMobile($objRootPage);
 		}
 
 		// No language given
@@ -275,9 +272,6 @@ abstract class Frontend extends \Controller
 				die('No root page found');
 			}
 
-			// Prefer a mobile website if the visitor uses a mobile device
-			$this->redirectToMobile($objRootPage);
-
 			// Redirect to the language root (e.g. en/)
 			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'] && $this->Environment->request == '')
 			{
@@ -286,27 +280,6 @@ abstract class Frontend extends \Controller
 		}
 
 		return $objRootPage;
-	}
-
-
-	/**
-	 * Redirect to another root page if the visitor uses a mobile device
-	 * @param object
-	 * @return void
-	 */
-	protected function redirectToMobile($objRootPage)
-	{
-		if (!$objRootPage->mobile || $objRootPage->jumpTo < 1 || !$this->Environment->agent->mobile)
-		{
-			return;
-		}
-
-		$objMobilePage = \PageModel::findPublishedById($objRootPage->jumpTo);
-
-		if ($objMobilePage !== null && $objMobilePage->dns != '')
-		{
-			$this->redirect(($this->Environment->ssl ? 'https://' : 'http://') . $objMobilePage->dns . TL_PATH);
-		}
 	}
 
 

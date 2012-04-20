@@ -537,6 +537,7 @@ abstract class Controller extends \System
 		$objPage->protected = (boolean) $objPage->protected;
 		$objPage->groups = $objPage->protected ? deserialize($objPage->groups) : false;
 		$objPage->layout = $objPage->includeLayout ? $objPage->layout : false;
+		$objPage->mobileLayout = $objPage->includeLayout ? $objPage->mobileLayout : false;
 		$objPage->cache = $objPage->includeCache ? $objPage->cache : false;
 
 		$pid = $objPage->pid;
@@ -584,12 +585,17 @@ abstract class Controller extends \System
 					$objPage->cache = $objParentPage->cache;
 				}
 
-				if (!$objPage->layout && $objParentPage->includeLayout)
+				if ($objPage->layout === false && $objParentPage->includeLayout)
 				{
 					$objPage->layout = $objParentPage->layout;
 				}
 
-				if (!$objPage->protected && $objParentPage->protected)
+				if ($objPage->mobileLayout === false && $objParentPage->includeLayout)
+				{
+					$objPage->mobileLayout = $objParentPage->mobileLayout;
+				}
+
+				if ($objPage->protected === false && $objParentPage->protected)
 				{
 					$objPage->protected = true;
 					$objPage->groups = deserialize($objParentPage->groups);

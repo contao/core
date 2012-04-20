@@ -1655,6 +1655,11 @@ window.addEvent('load', function() {
 
 // Re-apply the interactive help upon Ajax changes
 window.addEvent('ajax_change', function() {
+	// Chosen
+	if (Elements.chosen != undefined) {
+		$$('select.tl_chosen').chosen();
+	}
+
 	Backend.addInteractiveHelp();
 });
 

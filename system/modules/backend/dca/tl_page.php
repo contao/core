@@ -173,12 +173,12 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('type', 'autoforward', 'mobile', 'protected', 'createSitemap', 'includeLayout', 'includeCache', 'includeChmod'),
+		'__selector__'                => array('type', 'autoforward', 'protected', 'createSitemap', 'includeLayout', 'includeCache', 'includeChmod'),
 		'default'                     => '{title_legend},title,alias,type;followup,start,stop',
 		'regular'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{search_legend},noSearch;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'forward'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,jumpTo;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'redirect'                    => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,url,target;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
-		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle;{dns_legend},dns,staticFiles,staticSystem,staticPlugins,language,fallback;{mobile_legend},mobile;{global_legend:hide},dateFormat,timeFormat,datimFormat,adminEmail;{sitemap_legend:hide},createSitemap;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
+		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle;{dns_legend},dns,staticFiles,staticSystem,staticPlugins,language,fallback;{global_legend:hide},dateFormat,timeFormat,datimFormat,adminEmail;{sitemap_legend:hide},createSitemap;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
 		'error_403'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop',
 		'error_404'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop'
 	),
@@ -187,10 +187,9 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 	'subpalettes' => array
 	(
 		'autoforward'                 => 'redirect,jumpTo',
-		'mobile'                      => 'jumpTo',
 		'protected'                   => 'groups',
 		'createSitemap'               => 'sitemapName,useSSL',
-		'includeLayout'               => 'layout',
+		'includeLayout'               => 'layout,mobileLayout',
 		'includeCache'                => 'cache',
 		'includeChmod'                => 'cuser,cgroup,chmod'
 	),
@@ -345,14 +344,6 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'mobile' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['mobile'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true),
-			'sql'                     => "char(1) NOT NULL default ''"
-		),
 		'staticFiles' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['staticFiles'],
@@ -501,7 +492,18 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_layout.name',
 			'options_callback'        => array('tl_page', 'getPageLayouts'),
-			'eval'                    => array('chosen'=>true),
+			'eval'                    => array('chosen'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
+		),
+		'mobileLayout' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['mobileLayout'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'foreignKey'              => 'tl_layout.name',
+			'options_callback'        => array('tl_page', 'getPageLayouts'),
+			'eval'                    => array('includeBlankOption'=>true, 'chosen'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
 		),
