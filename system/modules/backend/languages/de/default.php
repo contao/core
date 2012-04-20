@@ -231,6 +231,8 @@ $GLOBALS['TL_LANG']['CONFIRM']['id']    = 'Betroffener Datensatz';
 /**
  * Datepicker
  */
+$GLOBALS['TL_LANG']['DP']['datepicker']          = 'Datumswähler (benötigt JavaScript)';
+$GLOBALS['TL_LANG']['DP']['datepickerTitle']     = 'Den Datumswähler aufrufen';
 $GLOBALS['TL_LANG']['DP']['select_a_time']       = 'Uhrzeit auswählen';
 $GLOBALS['TL_LANG']['DP']['use_mouse_wheel']     = 'Ändern Sie die Werte mit Hilfe des Mausrads';
 $GLOBALS['TL_LANG']['DP']['time_confirm_button'] = 'OK';
@@ -396,8 +398,11 @@ $GLOBALS['TL_LANG']['MSC']['fallback']          = 'Standard';
 $GLOBALS['TL_LANG']['MSC']['view']              = 'In einem neuen Fenster öffnen';
 $GLOBALS['TL_LANG']['MSC']['fullsize']          = 'Großansicht des Bildes in einem neuen Fenster öffnen';
 $GLOBALS['TL_LANG']['MSC']['colorpicker']       = 'Farbwähler (benötigt JavaScript)';
+$GLOBALS['TL_LANG']['MSC']['colorpickerTitle']  = 'Den Farbwähler aufrufen';
 $GLOBALS['TL_LANG']['MSC']['pagepicker']        = 'Seitenwähler (benötigt JavaScript)';
+$GLOBALS['TL_LANG']['MSC']['pagepickerTitle']   = 'Den Seitenwähler aufrufen';
 $GLOBALS['TL_LANG']['MSC']['filepicker']        = 'Dateiwähler (benötigt JavaScript)';
+$GLOBALS['TL_LANG']['MSC']['filepickerTitle']   = 'Den Dateiwähler aufrufen';
 $GLOBALS['TL_LANG']['MSC']['ppHeadline']        = 'Contao-Seiten';
 $GLOBALS['TL_LANG']['MSC']['fpHeadline']        = 'Contao-Dateien';
 $GLOBALS['TL_LANG']['MSC']['yes']               = 'ja';

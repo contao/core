@@ -230,6 +230,8 @@ $GLOBALS['TL_LANG']['CONFIRM']['id']    = 'Affected record';
 /**
  * Datepicker
  */
+$GLOBALS['TL_LANG']['DP']['datepicker']          = 'Date picker (requires JavaScript)';
+$GLOBALS['TL_LANG']['DP']['datepickerTitle']     = 'Open the date picker';
 $GLOBALS['TL_LANG']['DP']['select_a_time']       = 'Select a time';
 $GLOBALS['TL_LANG']['DP']['use_mouse_wheel']     = 'Use the mouse wheel to quickly change value';
 $GLOBALS['TL_LANG']['DP']['time_confirm_button'] = 'OK';
@@ -395,8 +397,11 @@ $GLOBALS['TL_LANG']['MSC']['fallback']          = 'default';
 $GLOBALS['TL_LANG']['MSC']['view']              = 'View in a new window';
 $GLOBALS['TL_LANG']['MSC']['fullsize']          = 'Open full size image in a new window';
 $GLOBALS['TL_LANG']['MSC']['colorpicker']       = 'Color picker (requires JavaScript)';
+$GLOBALS['TL_LANG']['MSC']['colorpickerTitle']  = 'Open the color picker';
 $GLOBALS['TL_LANG']['MSC']['pagepicker']        = 'Page picker (requires JavaScript)';
+$GLOBALS['TL_LANG']['MSC']['pagepickerTitle']   = 'Open the page picker';
 $GLOBALS['TL_LANG']['MSC']['filepicker']        = 'File picker (requires JavaScript)';
+$GLOBALS['TL_LANG']['MSC']['filepickerTitle']   = 'Open the file picker';
 $GLOBALS['TL_LANG']['MSC']['ppHeadline']        = 'Contao pages';
 $GLOBALS['TL_LANG']['MSC']['fpHeadline']        = 'Contao files';
 $GLOBALS['TL_LANG']['MSC']['yes']               = 'yes';

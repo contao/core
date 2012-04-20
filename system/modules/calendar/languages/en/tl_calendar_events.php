@@ -42,6 +42,7 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['endDate']      = array('End date', 'L
 $GLOBALS['TL_LANG']['tl_calendar_events']['teaser']       = array('Event teaser', 'The event teaser can be shown in an event list instead of the full article. A "read more …" link will be added automatically.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['details']      = array('Event text', 'Here you can enter the event text.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['addImage']     = array('Add an image', 'Add an image to the event.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['size']         = array('Image width and height', 'Here you can set the image dimensions and the resize mode.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['recurring']    = array('Repeat event', 'Create a recurring event.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['repeatEach']   = array('Interval', 'Here you can set the recurrence interval.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['recurrences']  = array('Recurrences', 'Set to 0 for unlimited recurrences.');

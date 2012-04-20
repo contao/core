@@ -32,6 +32,8 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_user_group']['name']       = array('Title', 'Please enter the group title.');
+$GLOBALS['TL_LANG']['tl_user_group']['modules']    = array('Back end modules', 'Here you can grant access to one or more back end modules.');
+$GLOBALS['TL_LANG']['tl_user_group']['alpty']      = array('Allowed page types', 'Here you can select the page types you want to allow.');
 $GLOBALS['TL_LANG']['tl_user_group']['alexf']      = array('Allowed fields', 'Here you can choose which fields will be editable.');
 $GLOBALS['TL_LANG']['tl_user_group']['disable']    = array('Deactivate', 'Temporarily disable the group.');
 $GLOBALS['TL_LANG']['tl_user_group']['start']      = array('Activate on', 'Automatically activate the group on this day.');
