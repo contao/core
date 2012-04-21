@@ -87,8 +87,6 @@ class ModuleExtension extends BackendModule
 				return;
 			}
 
-			$arrTables = trimsplit(',', $objModule->beTables);
-
 			// config/.htaccess
 			$tplHtaccess = new \BackendTemplate('dev_htaccess');
 			$objHtaccess = new \File('system/modules/' . $objModule->folder . '/config/.htaccess');
@@ -133,6 +131,8 @@ class ModuleExtension extends BackendModule
 					$objClass->close();
 				}
 
+				$arrTables = trimsplit(',', $objModule->beTables);
+
 				// Data container files
 				foreach ($arrTables as $strTable)
 				{
@@ -170,6 +170,30 @@ class ModuleExtension extends BackendModule
 					$objClass = new \File('system/modules/' . $objModule->folder . '/' . $strClass . '.php');
 					$objClass->write($tplClass->parse());
 					$objClass->close();
+				}
+
+				$arrTables = trimsplit(',', $objModule->feTables);
+
+				// Models
+				foreach ($arrTables as $strTable)
+				{
+					$strModel = $this->convertTableNameToModelClass($strTable, true);
+
+					$tplTable = $this->newTemplate('dev_model', $objModule);
+					$tplTable->table = $strTable;
+					$tplTable->class = $strModel . 'Model';
+
+					$objTable = new \File('system/modules/' . $objModule->folder . '/models/' . $strModel . 'Model.php');
+					$objTable->write($tplTable->parse());
+					$objTable->close();
+
+					$tplTable = $this->newTemplate('dev_collection', $objModule);
+					$tplTable->table = $strTable;
+					$tplTable->class = $strModel . 'Collection';
+
+					$objTable = new \File('system/modules/' . $objModule->folder . '/models/' . $strModel . 'Collection.php');
+					$objTable->write($tplTable->parse());
+					$objTable->close();
 				}
 
 				$arrTemplates = trimsplit(',', $objModule->feTemplates);

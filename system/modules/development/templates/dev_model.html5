@@ -29,23 +29,25 @@
 
 
 /**
- * Fields
+ * Namespace
  */
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['title'] = array('Title', 'Please enter the title.');
+namespace <?php echo $this->package; ?>;
 
 
 /**
- * Legends
+ * Class <?php echo $this->class; ?> 
+ *
+ * @copyright  <?php echo $this->copyright; ?> 
+ * @author     <?php echo $this->author; ?> 
+ * @package    Controller
  */
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['title_legend'] = 'Title';
+class <?php echo $this->class; ?> extends \Model
+{
 
+	/**
+	 * Name of the table
+	 * @var string
+	 */
+	protected static $strTable = '<?php echo $this->table; ?>';
 
-/**
- * Buttons
- */
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['new']    = array('New ', 'Create a new ');
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['show']   = array(' details', 'Show the details of  ID %s');
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['edit']   = array('Edit ', 'Edit  ID %s');
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['cut']    = array('Move ', 'Move  ID %s');
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['copy']   = array('Duplicate ', 'Duplicate  ID %s');
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['delete'] = array('Delete ', 'Delete  ID %s');
+}

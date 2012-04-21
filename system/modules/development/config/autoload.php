@@ -47,6 +47,7 @@ TemplateLoader::addFiles(array
 	'dev_autoload'   => 'system/modules/development/templates',
 	'dev_beClass'    => 'system/modules/development/templates',
 	'dev_beTemplate' => 'system/modules/development/templates',
+	'dev_collection' => 'system/modules/development/templates',
 	'dev_config'     => 'system/modules/development/templates',
 	'dev_dca'        => 'system/modules/development/templates',
 	'dev_default'    => 'system/modules/development/templates',
@@ -55,6 +56,7 @@ TemplateLoader::addFiles(array
 	'dev_feTemplate' => 'system/modules/development/templates',
 	'dev_htaccess'   => 'system/modules/development/templates',
 	'dev_labels'     => 'system/modules/development/templates',
+	'dev_model'      => 'system/modules/development/templates',
 	'dev_modules'    => 'system/modules/development/templates',
 	'dev_table'      => 'system/modules/development/templates',
 ));

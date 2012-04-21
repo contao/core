@@ -293,8 +293,7 @@ $GLOBALS['TL_HOOKS'] = array
 
 
 /**
- * Store the auto_item keywords so they can be ignored
- * when rebuilding the URLs for the search index
+ * Ignore the auto_item keywords when rebuilding the search index URLs
  */
 $GLOBALS['TL_AUTO_ITEM'] = array('items', 'events');
 

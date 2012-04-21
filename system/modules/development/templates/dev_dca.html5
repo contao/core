@@ -88,7 +88,7 @@ $GLOBALS['TL_DCA']['<?php echo $this->table; ?>'] = array
 				'label'               => &$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
 			),
 			'show' => array
 			(
@@ -99,11 +99,17 @@ $GLOBALS['TL_DCA']['<?php echo $this->table; ?>'] = array
 		)
 	),
 
+	// Edit
+	'edit' => array
+	(
+		'buttons_callback' => array()
+	),
+
 	// Palettes
 	'palettes' => array
 	(
 		'__selector__'                => array(''),
-		'default'                     => ''
+		'default'                     => '{title_legend},title;'
 	),
 
 	// Subpalettes
@@ -123,9 +129,9 @@ $GLOBALS['TL_DCA']['<?php echo $this->table; ?>'] = array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
-		'' => array
+		'title' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['<?php echo $this->table; ?>'][''],
+			'label'                   => &$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['title'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
