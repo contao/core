@@ -228,6 +228,10 @@ class Automator extends \Backend
 		$objFolder = new \Folder('system/tmp');
 		$objFolder->purge();
 
+		// Restore the .htaccess file
+		$objFile = new \File('system/logs/.htaccess');
+		$objFile->copyTo('system/tmp/.htaccess');
+
 		// Add a log entry
 		$this->log('Purged the temp folder', 'Automator purgeTempFolder()', TL_CRON);
 	}
