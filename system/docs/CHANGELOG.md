@@ -4,6 +4,22 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Just to mention it: There is a new DCA option which allows you to add custom
+buttons to the edit screen (next to "save", "save and close" etc.):
+
+```
+$GLOBALS['TL_DCA']['tl_page']['edit'] => array
+(
+  'buttons_callback' => array
+  (
+    array('tl_page', 'addAliasButton')
+  )
+);
+```
+
+You can see the example in the system/modules/backend/dca/tl_page.php file.
+
 ### Improved
 Much better "purge data" maintenance job, which can be extended and uses the
 Automator to get things done, so every job can also be triggered via cron.
