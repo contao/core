@@ -395,7 +395,7 @@ abstract class Database_Statement
 			return;
 		}
 
-		$arrData[] = $this->strQuery;
+		$arrData[] = specialchars($this->strQuery);
 
 		if ($objResult === null || strncasecmp($this->strQuery, 'SELECT', 6) !== 0)
 		{
