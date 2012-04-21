@@ -41,11 +41,12 @@ $GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'] = array('Frontend-Benutzer
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['index']    = array('Suchindex löschen', 'Leert die Tabellen <em>tl_seach</em> und <em>tl_search_index</em>. Anschließend muss der Suchindex neu aufgebaut werden (siehe oben).');
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['undo']     = array('Papierkorb leeren', 'Leert die Tabelle <em>tl_undo</em>, in der die gelöschten Datensätze gespeichert werden. Die Daten werden hierdurch endgültig gelöscht.');
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['versions'] = array('Versionen löschen', 'Leert die Tabelle <em>tl_version</em>, in der die Versionen eines Datensatzes gespeichert werden. Die Daten werden hierdurch endgültig gelöscht.');
-$GLOBALS['TL_LANG']['tl_maintenance_jobs']['images']   = array('Bildercache leeren', 'Löscht die automatisch erstellen Bilder und leert anschließend den Seitencache, damit keine Links auf gelöschte Ressourcen zurück bleiben.');
+$GLOBALS['TL_LANG']['tl_maintenance_jobs']['images']   = array('Bildercache leeren', 'Löscht die automatisch erstellen Bilder und leert anschließend den Seitencache, damit keine ungültigen Links zurück bleiben.');
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['scripts']  = array('Skriptcache leeren', 'Löscht die automatisch erstellen .css- und .js-Dateien, schreibt die internen Stylesheets neu und leert anschließend den Seitencache.');
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['pages']    = array('Seitencache leeren', 'Löscht die gespeicherten Versionen der Frontend-Seiten.');
-$GLOBALS['TL_LANG']['tl_maintenance_jobs']['internal'] = array('Internen Cache leeren', 'Löscht die gespeicherten Versionen der DCA- und Sprachdateien. Der interne Cache kann in den Backend-Einstellungen dauerhaft deaktiviert werden.');
-$GLOBALS['TL_LANG']['tl_maintenance_jobs']['xml']      = array('XML-Dateien neu schreiben', 'Schreibt die XML-Dateien (Sitemaps und Feeds) neu und leert anschließend den Seitencache, damit keine Links auf gelöschte Ressourcen zurück bleiben.');
+$GLOBALS['TL_LANG']['tl_maintenance_jobs']['internal'] = array('Internen Cache leeren', 'Löscht die gespeicherten DCA- und Sprachdateien. Der interne Cache kann in den Backend-Einstellungen dauerhaft deaktiviert werden.');
+$GLOBALS['TL_LANG']['tl_maintenance_jobs']['temp']     = array('Temp-Order leeren', 'Löscht die temporären Dateien.');
+$GLOBALS['TL_LANG']['tl_maintenance_jobs']['xml']      = array('XML-Dateien neu schreiben', 'Schreibt die XML-Dateien (Sitemaps und Feeds) neu und leert anschließend den Seitencache, damit keine ungültigen Links zurück bleiben.');
 
 
 /**
