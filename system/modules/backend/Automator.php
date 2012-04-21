@@ -219,6 +219,21 @@ class Automator extends \Backend
 
 
 	/**
+	 * Purge the temp folder
+	 * @return void
+	 */
+	public function purgeTempFolder()
+	{
+		// Purge the folder
+		$objFolder = new \Folder('system/tmp');
+		$objFolder->purge();
+
+		// Add a log entry
+		$this->log('Purged the temp folder', 'Automator purgeTempFolder()', TL_CRON);
+	}
+
+
+	/**
 	 * Regenerate the XML files
 	 * @return void
 	 */

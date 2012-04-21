@@ -83,10 +83,10 @@ $GLOBALS['TL_LANG']['tl_user']['session_legend']    = 'Cache leeren';
  */
 $GLOBALS['TL_LANG']['tl_user']['sessionLabel']  = 'Session-Daten';
 $GLOBALS['TL_LANG']['tl_user']['htmlLabel']     = 'Bildercache';
-$GLOBALS['TL_LANG']['tl_user']['tempLabel']     = 'Temporärer Ordner';
+$GLOBALS['TL_LANG']['tl_user']['tempLabel']     = 'Seitencache';
 $GLOBALS['TL_LANG']['tl_user']['sessionPurged'] = 'Die Session-Daten wurden gelöscht';
 $GLOBALS['TL_LANG']['tl_user']['htmlPurged']    = 'Der Bildercache wurde geleert';
-$GLOBALS['TL_LANG']['tl_user']['tempPurged']    = 'Der temporäre Ordner wurde geleert';
+$GLOBALS['TL_LANG']['tl_user']['tempPurged']    = 'Der Seitencache wurde geleert';
 $GLOBALS['TL_LANG']['tl_user']['FileUpload']    = 'Standard-Uploader';
 
 

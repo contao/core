@@ -651,15 +651,15 @@ class tl_user extends Backend
 					$this->addConfirmationMessage($GLOBALS['TL_LANG']['tl_user']['sessionPurged']);
 				}
 
-				if (in_array('purge_html', $arrPurge))
+				if (in_array('purge_images', $arrPurge))
 				{
-					$this->Automator->purgeHtmlFolder();
+					$this->Automator->purgeImageCache();
 					$this->addConfirmationMessage($GLOBALS['TL_LANG']['tl_user']['htmlPurged']);
 				}
 
-				if (in_array('purge_temp', $arrPurge))
+				if (in_array('purge_pages', $arrPurge))
 				{
-					$this->Automator->purgeTempFolder();
+					$this->Automator->purgePageCache();
 					$this->addConfirmationMessage($GLOBALS['TL_LANG']['tl_user']['tempPurged']);
 				}
 			}
@@ -671,8 +671,8 @@ class tl_user extends Backend
     <legend>'.$GLOBALS['TL_LANG']['tl_user']['session'][0].'</legend>
     <input type="checkbox" id="check_all_purge" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this, \'ctrl_purge\')"> <label for="check_all_purge" style="color:#a6a6a6"><em>'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</em></label><br>
     <input type="checkbox" name="purge[]" id="opt_purge_0" class="tl_checkbox" value="purge_session" onfocus="Backend.getScrollOffset()"> <label for="opt_purge_0">'.$GLOBALS['TL_LANG']['tl_user']['sessionLabel'].'</label><br>
-    <input type="checkbox" name="purge[]" id="opt_purge_1" class="tl_checkbox" value="purge_html" onfocus="Backend.getScrollOffset()"> <label for="opt_purge_1">'.$GLOBALS['TL_LANG']['tl_user']['htmlLabel'].'</label><br>
-    <input type="checkbox" name="purge[]" id="opt_purge_2" class="tl_checkbox" value="purge_temp" onfocus="Backend.getScrollOffset()"> <label for="opt_purge_2">'.$GLOBALS['TL_LANG']['tl_user']['tempLabel'].'</label>
+    <input type="checkbox" name="purge[]" id="opt_purge_1" class="tl_checkbox" value="purge_images" onfocus="Backend.getScrollOffset()"> <label for="opt_purge_1">'.$GLOBALS['TL_LANG']['tl_user']['htmlLabel'].'</label><br>
+    <input type="checkbox" name="purge[]" id="opt_purge_2" class="tl_checkbox" value="purge_pages" onfocus="Backend.getScrollOffset()"> <label for="opt_purge_2">'.$GLOBALS['TL_LANG']['tl_user']['tempLabel'].'</label>
   </fieldset>'.$dc->help().'
 </div>';
 	}

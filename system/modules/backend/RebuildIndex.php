@@ -113,15 +113,11 @@ class RebuildIndex extends \Backend implements \executable
 			$this->import('Search');
 
 			// Truncate the search tables
-			$this->Database->execute("TRUNCATE TABLE tl_search");
-			$this->Database->execute("TRUNCATE TABLE tl_search_index");
+			$this->import('Automator');
+			$this->Automator->purgeSearchTables();
 
 			// Hide unpublished elements
 			$this->setCookie('FE_PREVIEW', 0, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
-
-			// Purge the temporary directory
-			$this->import('Automator');
-			$this->Automator->purgeTempFolder();
 
 			// Calculate the hash
 			$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . 'FE_USER_AUTH');

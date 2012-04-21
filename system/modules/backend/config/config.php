@@ -255,14 +255,13 @@ $GLOBALS['TL_CRON'] = array
 (
 	'monthly' => array
 	(
-		array('Automator', 'purgeHtmlFolder'),
-		array('Automator', 'purgeScriptsFolder'),
+		array('Automator', 'purgeImageCache'),
 		array('Automator', 'purgeTempFolder'),
 	),
 	'weekly' => array
 	(
 		array('Automator', 'generateSitemap'),
-		array('StyleSheets', 'updateStyleSheets')
+		array('Automator', 'purgeScriptCache')
 	),
 	'daily' => array
 	(

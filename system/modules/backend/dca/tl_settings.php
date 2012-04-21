@@ -658,9 +658,7 @@ class tl_settings extends Backend
 			$GLOBALS['TL_CONFIG']['debugMode'] = $varValue;
 
 			$this->import('Automator');
-			$this->Automator->purgeTempFolder();
-			$this->Automator->purgeScriptsFolder();
-			$this->Automator->purgeHtmlFolder();
+			$this->Automator->purgeScriptCache();
 		}
 
 		return $varValue;

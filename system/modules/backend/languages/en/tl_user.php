@@ -83,10 +83,10 @@ $GLOBALS['TL_LANG']['tl_user']['session_legend']    = 'Clear cache';
  */
 $GLOBALS['TL_LANG']['tl_user']['sessionLabel']  = 'Session data';
 $GLOBALS['TL_LANG']['tl_user']['htmlLabel']     = 'Image cache';
-$GLOBALS['TL_LANG']['tl_user']['tempLabel']     = 'Temporary folder';
+$GLOBALS['TL_LANG']['tl_user']['tempLabel']     = 'Page cache';
 $GLOBALS['TL_LANG']['tl_user']['sessionPurged'] = 'The session data has been purged';
 $GLOBALS['TL_LANG']['tl_user']['htmlPurged']    = 'The image cache has been purged';
-$GLOBALS['TL_LANG']['tl_user']['tempPurged']    = 'The temporary folder has been purged';
+$GLOBALS['TL_LANG']['tl_user']['tempPurged']    = 'The page cache has been purged';
 $GLOBALS['TL_LANG']['tl_user']['FileUpload']    = 'Default uploader';
 
 
