@@ -167,7 +167,7 @@ class PurgeData extends \Backend implements \executable
 					$total = count(scan(TL_ROOT . '/' . $folder));
 
 					// Do not count the index.html files in the assets folders
-					if (strncmp($folder, 'assets/', 7) === 0)
+					if (strncmp($folder, 'assets/', 7) === 0 || $folder == 'system/tmp')
 					{
 						$total -= 1;
 					}
