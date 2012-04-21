@@ -410,6 +410,7 @@ $GLOBALS['TL_LANG']['MSC']['date']              = 'Datum';
 $GLOBALS['TL_LANG']['MSC']['tstamp']            = 'Änderungsdatum';
 $GLOBALS['TL_LANG']['MSC']['entry']             = '%s Eintrag';
 $GLOBALS['TL_LANG']['MSC']['entries']           = '%s Einträge';
+$GLOBALS['TL_LANG']['MSC']['files']             = '%s Datei(en)';
 $GLOBALS['TL_LANG']['MSC']['left']              = 'linksbündig';
 $GLOBALS['TL_LANG']['MSC']['center']            = 'zentriert';
 $GLOBALS['TL_LANG']['MSC']['right']             = 'rechtsbündig';

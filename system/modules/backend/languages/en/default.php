@@ -409,6 +409,7 @@ $GLOBALS['TL_LANG']['MSC']['date']              = 'Date';
 $GLOBALS['TL_LANG']['MSC']['tstamp']            = 'Revision date';
 $GLOBALS['TL_LANG']['MSC']['entry']             = '%s entry';
 $GLOBALS['TL_LANG']['MSC']['entries']           = '%s entries';
+$GLOBALS['TL_LANG']['MSC']['files']             = '%s file(s)';
 $GLOBALS['TL_LANG']['MSC']['left']              = 'left';
 $GLOBALS['TL_LANG']['MSC']['center']            = 'center';
 $GLOBALS['TL_LANG']['MSC']['right']             = 'right';

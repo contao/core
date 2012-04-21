@@ -46,7 +46,207 @@ class Automator extends \Backend
 {
 
 	/**
-	 * Generate Google XML sitemaps
+	 * Check for new Contao versions
+	 * @return void
+	 */
+	public function checkForUpdates()
+	{
+		if (!is_numeric(BUILD))
+		{
+			return;
+		}
+
+		$objRequest = new \Request();
+		$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . (LONG_TERM_SUPPORT ? 'lts-version.txt' : 'version.txt'));
+
+		if (!$objRequest->hasError())
+		{
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['latestVersion']", $objRequest->response);
+			$GLOBALS['TL_CONFIG']['latestVersion'] = $objRequest->response;
+		}
+
+		// Add a log entry
+		$this->log('Checked for Contao updates', 'Automator checkForUpdates()', TL_CRON);
+	}
+
+
+	/**
+	 * Purge the search tables
+	 * @return void
+	 */
+	public function purgeSearchTables()
+	{
+		// Truncate the tables
+		$this->Database->execute("TRUNCATE TABLE tl_search");
+		$this->Database->execute("TRUNCATE TABLE tl_search_index");
+
+		// Purge the cache folder
+		$objFolder = new \Folder('system/cache/search');
+		$objFolder->purge();
+
+		// Add a log entry
+		$this->log('Purged the search tables', 'Automator purgeSearchTables()', TL_CRON);
+	}
+
+
+	/**
+	 * Purge the undo table
+	 * @return void
+	 */
+	public function purgeUndoTable()
+	{
+		// Truncate the table
+		$this->Database->execute("TRUNCATE TABLE tl_undo");
+
+		// Add a log entry
+		$this->log('Purged the undo table', 'Automator purgeUndoTable()', TL_CRON);
+	}
+
+
+	/**
+	 * Purge the version table
+	 * @return void
+	 */
+	public function purgeVersionTable()
+	{
+		// Truncate the table
+		$this->Database->execute("TRUNCATE TABLE tl_version");
+
+		// Add a log entry
+		$this->log('Purged the undo table', 'Automator purgeVersionTable()', TL_CRON);
+	}
+
+
+	/**
+	 * Purge the image cache
+	 * @return void
+	 */
+	public function purgeImageCache()
+	{
+		// Walk through the subfolders
+		foreach (scan(TL_ROOT . '/assets/images') as $dir)
+		{
+			if ($dir != 'index.html')
+			{
+				// Purge the folder
+				$objFolder = new \Folder('assets/images/' . $dir);
+				$objFolder->purge();
+
+				// Restore the index.html file
+				$objFile = new \File('assets/contao/index.html');
+				$objFile->copyTo('assets/images/' . $dir . '/index.html');
+			}
+		}
+
+		// Also empty the page cache so there are no links to deleted images
+		$this->purgePageCache();
+
+		// Add a log entry
+		$this->log('Purged the image cache', 'Automator purgeImageCache()', TL_CRON);
+	}
+
+
+	/**
+	 * Purge the script cache
+	 * @return void
+	 */
+	public function purgeScriptCache()
+	{
+		// assets/js and assets/css
+		foreach (array('assets/js', 'assets/css') as $dir)
+		{
+			// Purge the folder
+			$objFolder = new \Folder($dir);
+			$objFolder->purge();
+
+			// Restore the index.html file
+			$objFile = new \File('assets/contao/index.html');
+			$objFile->copyTo($dir . '/index.html');
+		}
+
+		// Recreate the internal style sheets
+		$this->import('StyleSheets');
+		$this->StyleSheets->updateStylesheets();
+
+		// Also empty the page cache so there are no links to deleted scripts
+		$this->purgePageCache();
+
+		// Add a log entry
+		$this->log('Purged the script cache', 'Automator purgeScriptCache()', TL_CRON);
+	}
+
+
+	/**
+	 * Purge the page cache
+	 * @return void
+	 */
+	public function purgePageCache()
+	{
+		// Purge the folder
+		$objFolder = new \Folder('system/cache/html');
+		$objFolder->purge();
+
+		// Add a log entry
+		$this->log('Purged the page cache', 'Automator purgePageCache()', TL_CRON);
+	}
+
+
+	/**
+	 * Purge the internal cache
+	 * @return void
+	 */
+	public function purgeInternalCache()
+	{
+		// system/cache/dca and system/cache/sql
+		foreach (array('system/cache/dca', 'system/cache/sql') as $dir)
+		{
+			// Purge the folder
+			$objFolder = new \Folder($dir);
+			$objFolder->purge();
+		}
+
+		// Walk through the language subfolders
+		foreach (scan(TL_ROOT . '/system/cache/language') as $dir)
+		{
+			// Remove the folder
+			$objFolder = new \Folder('system/cache/language/' . $dir);
+			$objFolder->delete();
+		}
+
+		// Add a log entry
+		$this->log('Purged the internal cache', 'Automator purgeInternalCache()', TL_CRON);
+	}
+
+
+	/**
+	 * Regenerate the XML files
+	 * @return void
+	 */
+	public function generateXmlFiles()
+	{
+		// Sitemaps
+		$this->generateSitemap();
+
+		// HOOK: add custom jobs
+		if (isset($GLOBALS['TL_HOOKS']['generateXmlFiles']) && is_array($GLOBALS['TL_HOOKS']['generateXmlFiles']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['generateXmlFiles'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]();
+			}
+		}
+
+		// Also empty the page cache so there are no links to deleted files
+		$this->purgePageCache();
+
+		// Add a log entry
+		$this->log('Regenerated the XML files', 'Automator generateXmlFiles()', TL_CRON);
+	}
+
+
+	/**
+	 * Generate the Google XML sitemaps
 	 * @param integer
 	 * @return void
 	 */
@@ -148,131 +348,6 @@ class Automator extends \Backend
 			// Add log entry
 			$this->log('Generated sitemap "' . $objRoot->sitemapName . '.xml"', 'Automator generateSitemap()', TL_CRON);
 		}
-	}
-
-
-	/**
-	 * Purge the thumbnail directory (assets/images)
-	 * @return void
-	 */
-	public function purgeHtmlFolder()
-	{
-		$arrHtml = scan(TL_ROOT . '/assets/images', true);
-
-		// Remove the files
-		if (is_array($arrHtml))
-		{
-			foreach ($arrHtml as $strFile)
-			{
-				if ($strFile != 'index.html' && !is_dir(TL_ROOT . '/assets/images/' . $strFile))
-				{
-					@unlink(TL_ROOT . '/assets/images/' . $strFile);
-				}
-			}
-		}
-
-		// Add log entry
-		$this->log('Purged the thumbnail directory', 'Automator purgeHtmlFolder()', TL_CRON);
-	}
-
-
-	/**
-	 * Purge the script directories (assets/js and asset/css)
-	 * @return void
-	 */
-	public function purgeScriptsFolder()
-	{
-		$arrScripts = scan(TL_ROOT . '/assets/js', true);
-
-		// Remove the JavaScript files
-		if (is_array($arrScripts))
-		{
-			foreach ($arrScripts as $strFile)
-			{
-				if ($strFile != 'index.html' && !is_dir(TL_ROOT . '/system/scripts/' . $strFile))
-				{
-					unlink(TL_ROOT . '/assets/js/' . $strFile);
-				}
-			}
-		}
-
-		$arrScripts = scan(TL_ROOT . '/assets/css', true);
-
-		// Remove the CSS files
-		if (is_array($arrScripts))
-		{
-			foreach ($arrScripts as $strFile)
-			{
-				if ($strFile != 'index.html' && !is_dir(TL_ROOT . '/system/scripts/' . $strFile))
-				{
-					unlink(TL_ROOT . '/assets/css/' . $strFile);
-				}
-			}
-		}
-
-		// Generate the style sheets (see #2400)
-		$this->import('StyleSheets');
-		$this->StyleSheets->updateStyleSheets();
-
-		// Add log entry
-		$this->log('Purged the scripts directories', 'Automator purgeScriptsFolder()', TL_CRON);
-	}
-
-
-	/**
-	 * Purge the temporary directory
-	 * @return void
-	 */
-	public function purgeTempFolder()
-	{
-		$arrTmp = scan(TL_ROOT . '/system/tmp', true);
-
-		// Remove files
-		if (is_array($arrTmp))
-		{
-			foreach ($arrTmp as $strFile)
-			{
-				if ($strFile != '.htaccess' && !is_dir(TL_ROOT . '/system/tmp/' . $strFile))
-				{
-					@unlink(TL_ROOT . '/system/tmp/' . $strFile);
-				}
-			}
-		}
-
-		// Check for .htaccess
-		if (!file_exists(TL_ROOT . '/system/tmp/.htaccess'))
-		{
-			$objFolder = new \Folder('system/tmp');
-			$objFolder->protect();
-		}
-
-		// Add log entry
-		$this->log('Purged the temporary directory', 'Automator purgeTempFolder()', TL_CRON);
-	}
-
-
-	/**
-	 * Check for new Contao versions
-	 * @return void
-	 */
-	public function checkForUpdates()
-	{
-		if (!is_numeric(BUILD))
-		{
-			return;
-		}
-
-		$objRequest = new \Request();
-		$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . (LONG_TERM_SUPPORT ? 'lts-version.txt' : 'version.txt'));
-
-		if (!$objRequest->hasError())
-		{
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['latestVersion']", $objRequest->response);
-			$GLOBALS['TL_CONFIG']['latestVersion'] = $objRequest->response;
-		}
-
-		// Add log entry
-		$this->log('Checked for Contao updates', 'Automator checkForUpdates()', TL_CRON);
 	}
 
 

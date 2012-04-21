@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Improved
+Much better "purge data" maintenance job, which can be extended and uses the
+Automator to get things done, so every job can also be triggered via cron.
+
 ### Changed
 New approach to handle mobile devices: instead of redirecting to another website
 root page, you can now define a separate layout for mobile pages. This allows us

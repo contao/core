@@ -61,14 +61,14 @@ class PurgeData extends \Backend implements \executable
 	 */
 	public function run()
 	{
-		$arrCacheTables = array();
+		$arrJobs = array();
 		$objTemplate = new \BackendTemplate('be_purge_data');
 		$objTemplate->isActive = $this->isActive();
 
 		// Confirmation message
 		if ($_SESSION['CLEAR_CACHE_CONFIRM'] != '')
 		{
-			$objTemplate->cacheMessage = sprintf('<p class="tl_confirm">%s</p>' . "\n", $_SESSION['CLEAR_CACHE_CONFIRM']);
+			$objTemplate->message = sprintf('<p class="tl_confirm">%s</p>' . "\n", $_SESSION['CLEAR_CACHE_CONFIRM']);
 			$_SESSION['CLEAR_CACHE_CONFIRM'] = '';
 		}
 
@@ -77,84 +77,27 @@ class PurgeData extends \Backend implements \executable
 		{
 			foreach ($_SESSION['TL_ERROR'] as $message)
 			{
-				$objTemplate->cacheMessage .= sprintf('<p class="tl_error">%s</p>' . "\n", $message);
+				$objTemplate->message .= sprintf('<p class="tl_error">%s</p>' . "\n", $message);
 			}
 
 			$_SESSION['TL_ERROR'] = array();
 		}
 
-		// Purge the resources
+		// Run the jobs
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_purge')
 		{
-			$tables = deserialize($this->Input->post('tables'));
+			$purge = $this->Input->post('purge');
 
-			if (!is_array($tables))
+			if (is_array($purge) && !empty($purge))
 			{
-				$this->reload();
-			}
-
-			$this->import('Automator');
-			$this->import('StyleSheets');
-
-			foreach ($tables as $table)
-			{
-				// HTML folder
-				if ($table == 'html_folder')
+				foreach ($purge as $group=>$jobs)
 				{
-					$this->Automator->purgeHtmlFolder();
-				}
-				// Script folders
-				elseif ($table == 'scripts_folder')
-				{
-					$this->Automator->purgeScriptsFolder();
-				}
-				// Temporary folder
-				elseif ($table == 'temp_folder')
-				{
-					$this->Automator->purgeTempFolder();
-				}
-				// CSS files
-				elseif ($table == 'css_files')
-				{
-					$this->StyleSheets->updateStyleSheets();
-				}
-				// XML files
-				elseif ($table == 'xml_files')
-				{
-					// HOOK: use the googlesitemap module
-					if (in_array('googlesitemap', $this->Config->getActiveModules()))
+					foreach ($jobs as $job)
 					{
-						$this->import('GoogleSitemap');
-						$this->GoogleSitemap->generateSitemap();
+						list($class, $method) = $GLOBALS['TL_PURGE'][$group][$job]['callback'];
+						$this->import($class);
+						$this->$class->$method();
 					}
-					else
-					{
-						$this->Automator->generateSitemap();
-					}
-# FIXME: use a general hook instead
-					// HOOK: recreate news feeds
-					if (in_array('news', $this->Config->getActiveModules()))
-					{
-						$this->import('News');
-						$this->News->generateFeeds();
-					}
-
-					// HOOK: recreate calendar feeds
-					if (in_array('calendar', $this->Config->getActiveModules()))
-					{
-						$this->import('Calendar');
-						$this->Calendar->generateFeeds();
-					}
-				}
-				// Files
-				elseif ($table == 'scan_files')
-				{
-					$this->Automator->scanUploadFolder();
-				}
-				// Database table
-				else
-				{
-					$this->Database->execute("TRUNCATE TABLE " . $table);
 				}
 			}
 
@@ -162,43 +105,97 @@ class PurgeData extends \Backend implements \executable
 			$this->reload();
 		}
 
-		// Get all cachable tables from TL_CACHE
-		foreach ($GLOBALS['TL_CACHE'] as $k=>$v)
+		// Tables
+		foreach ($GLOBALS['TL_PURGE']['tables'] as $key=>$config)
 		{
-			$objCount = $this->Database->execute("SELECT COUNT(*) AS count FROM " . $v);
-
-			$arrCacheTables[] = array
+			$arrJobs[$key] = array
 			(
-				'id' => 'cache_' . $k,
-				'value' => specialchars($v),
-				'name' => $v,
-				'entries' => sprintf($GLOBALS['TL_LANG']['MSC']['entries'], $objCount->count),
-				'size' => $this->getReadableSize($this->Database->getSizeOf($v))
+				'id' => 'purge_' . $key,
+				'title' => $GLOBALS['TL_LANG']['tl_maintenance_jobs'][$key][0],
+				'description' => $GLOBALS['TL_LANG']['tl_maintenance_jobs'][$key][1],
+				'group' => 'tables',
+				'affected' => ''
+			);
+
+			// Get the current table size
+			foreach ($config['affected'] as $table)
+			{
+				$objCount = $this->Database->execute("SELECT COUNT(*) AS count FROM " . $table);
+				$arrJobs[$key]['affected'] .= '<br>' . $table . ': <span>' . sprintf($GLOBALS['TL_LANG']['MSC']['entries'], $objCount->count) . ', ' . $this->getReadableSize($this->Database->getSizeOf($table), 0) . '</span>';
+			}
+		}
+
+		// Folders
+		foreach ($GLOBALS['TL_PURGE']['folders'] as $key=>$config)
+		{
+			$arrJobs[$key] = array
+			(
+				'id' => 'purge_' . $key,
+				'title' => $GLOBALS['TL_LANG']['tl_maintenance_jobs'][$key][0],
+				'description' => $GLOBALS['TL_LANG']['tl_maintenance_jobs'][$key][1],
+				'group' => 'folders',
+				'affected' => ''
+			);
+
+			// Get the current folder size
+			foreach ($config['affected'] as $folder)
+			{
+				// Has subfolders
+				if ($folder == 'assets/images' || $folder == 'system/cache/html' || $folder == 'system/cache/language')
+				{
+					$total = 0;
+
+					foreach (scan(TL_ROOT . '/' . $folder) as $dir)
+					{
+						if ($dir != 'index.html')
+						{
+							$total += count(scan(TL_ROOT . '/' . $folder . '/' . $dir));
+						}
+
+					}
+
+					// Do not count the index.html files in the images subfolders
+					if ($folder == 'assets/images')
+					{
+						$total -= 16;
+					}
+
+					$arrJobs[$key]['affected'] .= '<br>' . $folder . ': <span>' . sprintf($GLOBALS['TL_LANG']['MSC']['files'], $total) . '</span>';
+				}
+				else
+				{
+					$total = count(scan(TL_ROOT . '/' . $folder));
+
+					// Do not count the index.html files in the assets folders
+					if (strncmp($folder, 'assets/', 7) === 0)
+					{
+						$total -= 1;
+					}
+
+					$arrJobs[$key]['affected'] .= '<br>' . $folder . ': <span>' . sprintf($GLOBALS['TL_LANG']['MSC']['files'], $total) . '</span>';
+				}
+			}
+		}
+
+		// Custom
+		foreach ($GLOBALS['TL_PURGE']['custom'] as $key=>$job)
+		{
+			$arrJobs[$key] = array
+			(
+				'id' => 'purge_' . $key,
+				'title' => $GLOBALS['TL_LANG']['tl_maintenance_jobs'][$key][0],
+				'description' => $GLOBALS['TL_LANG']['tl_maintenance_jobs'][$key][1],
+				'group' => 'custom'
 			);
 		}
 
+		$objTemplate->jobs = $arrJobs;
 		$objTemplate->action = ampersand($this->Environment->request);
-		$objTemplate->selectAll = $GLOBALS['TL_LANG']['MSC']['selectAll'];
-		$objTemplate->cacheHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['clearCache'];
-		$objTemplate->cacheLabel = $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][0];
-
-		// HTML folder
-		$objTemplate->cacheHtml = $GLOBALS['TL_LANG']['tl_maintenance']['clearHtml'];
-		$objTemplate->htmlEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/assets/images')) - 1));
-
-		// Script folders
-		$objTemplate->cacheScripts = $GLOBALS['TL_LANG']['tl_maintenance']['clearScripts'];
-		$objTemplate->scriptEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/assets/js')) + count(scan(TL_ROOT . '/assets/css')) - 3));
-
-		// Temporary directory
-		$objTemplate->cacheTmp = $GLOBALS['TL_LANG']['tl_maintenance']['clearTemp'];
-		$objTemplate->cacheEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/tmp')) - 1));
-
-		$objTemplate->cacheXml = $GLOBALS['TL_LANG']['tl_maintenance']['clearXml'];
-		$objTemplate->cacheCss = $GLOBALS['TL_LANG']['tl_maintenance']['clearCss'];
-		$objTemplate->cacheHelp = ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1])) ? $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1] : '';
-		$objTemplate->cacheSubmit = specialchars($GLOBALS['TL_LANG']['tl_maintenance']['clearCache']);
-		$objTemplate->cacheTables = $arrCacheTables;
+		$objTemplate->headline = $GLOBALS['TL_LANG']['tl_maintenance']['clearCache'];
+		$objTemplate->job = $GLOBALS['TL_LANG']['tl_maintenance']['job'];
+		$objTemplate->description = $GLOBALS['TL_LANG']['tl_maintenance']['description'];
+		$objTemplate->submit = specialchars($GLOBALS['TL_LANG']['tl_maintenance']['clearCache']);
+		$objTemplate->help = ($GLOBALS['TL_CONFIG']['showHelp'] && ($GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1] != '')) ? $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1] : '';
 
 		return $objTemplate->parse();
 	}

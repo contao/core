@@ -381,7 +381,7 @@ h2.sub_headline_index {
 .maintenance_inactive {
 	margin-top:48px;
 }
-#tl_maintenance_cache {
+#tl_buttons+.maintenance_inactive {
 	margin-top:0;
 }
 #search {
@@ -1260,4 +1260,38 @@ fieldset.collapsed div {
 }
 fieldset.collapsed > legend {
 	background:url("images/palCollapsed.gif") left center no-repeat;
+}
+
+/* Maintenance */
+#tl_maintenance_cache th {
+	background:#f6f6f6;
+	padding:2px 3px 3px;
+	border-top:1px solid #e9e9e9;
+}
+#tl_maintenance_cache th,#tl_maintenance_cache td {
+	border-bottom:1px solid #e9e9e9;
+}
+#tl_maintenance_cache th {
+	padding:3px 6px;
+}
+#tl_maintenance_cache td {
+	padding:6px 6px 7px;
+}
+#tl_maintenance_cache tr:nth-child(even) td {
+	background:#fcfcfc;
+}
+#tl_maintenance_cache td span {
+	color:#999;
+}
+#tl_maintenance_cache td:first-child {
+	width:16px;
+}
+#tl_maintenance_cache .nw {
+	white-space:nowrap;
+}
+#tl_maintenance_cache .tl_checkbox_container label {
+	margin:0;
+	padding-left:0;
+	font-weight:bold;
+	display:inline;
 }

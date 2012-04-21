@@ -168,21 +168,65 @@ $GLOBALS['TL_PTY'] = array
  */
 $GLOBALS['TL_MAINTENANCE'] = array
 (
-	'PurgeData',
 	'LiveUpdate',
-	'RebuildIndex'
+	'RebuildIndex',
+	'PurgeData'
 );
 
 
 /**
- * Cache tables
+ * Purge jobs
  */
-$GLOBALS['TL_CACHE'] = array
+$GLOBALS['TL_PURGE'] = array
 (
-	'tl_undo',
-	'tl_version',
-	'tl_search',
-	'tl_search_index'
+	'tables' => array
+	(
+		'index' => array
+		(
+			'callback' => array('Automator', 'purgeSearchTables'),
+			'affected' => array('tl_search', 'tl_search_index')
+		),
+		'undo' => array
+		(
+			'callback' => array('Automator', 'purgeUndoTable'),
+			'affected' => array('tl_undo')
+		),
+		'versions' => array
+		(
+			'callback' => array('Automator', 'purgeVersionTable'),
+			'affected' => array('tl_version')
+		)
+	),
+	'folders' => array
+	(
+		'images' => array
+		(
+			'callback' => array('Automator', 'purgeImageCache'),
+			'affected' => array('assets/images')
+		),
+		'scripts' => array
+		(
+			'callback' => array('Automator', 'purgeScriptCache'),
+			'affected' => array('assets/js', 'assets/css')
+		),
+		'pages' => array
+		(
+			'callback' => array('Automator', 'purgePageCache'),
+			'affected' => array('system/cache/html')
+		),
+		'internal' => array
+		(
+			'callback' => array('Automator', 'purgeInternalCache'),
+			'affected' => array('system/cache/dca', 'system/cache/language', 'system/cache/sql')
+		)
+	),
+	'custom' => array
+	(
+		'xml' => array
+		(
+			'callback' => array('Automator', 'generateXmlFiles')
+		)
+	)
 );
 
 

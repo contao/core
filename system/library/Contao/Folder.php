@@ -136,9 +136,20 @@ class Folder extends \System
 	 * Empty the folder
 	 * @return void
 	 */
-	public function clear()
+	public function purge()
 	{
 		$this->Files->rrdir($this->strFolder, true);
+	}
+
+
+	/**
+	 * Backwards compatibility
+	 * @return void
+	 * @deprecated
+	 */
+	public function clear()
+	{
+		$this->purge();
 	}
 
 

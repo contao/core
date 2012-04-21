@@ -67,6 +67,7 @@ $GLOBALS['TL_CRON']['daily'][] = array('Calendar', 'generateFeeds');
  */
 $GLOBALS['TL_HOOKS']['removeOldFeeds'][] = array('Calendar', 'purgeOldFeeds');
 $GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Calendar', 'getSearchablePages');
+$GLOBALS['TL_HOOKS']['generateXmlFiles'][] = array('Calendar', 'generateFeeds');
 
 
 /**
