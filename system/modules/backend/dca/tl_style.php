@@ -695,7 +695,7 @@ class tl_style extends Backend
 	 */
 	public function filePicker(\DataContainer $dc)
 	{
-		return ' <a href="contao/file.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.$dc->value.'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['files'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'title="' . $GLOBALS['TL_LANG']['MSC']['filepickerTitle'] . '" style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="contao/file.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.$dc->value.'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['files'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['filepickerTitle']) . '" style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
