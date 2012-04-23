@@ -52,6 +52,12 @@ abstract class Model_Collection extends \System
 	protected static $strTable;
 
 	/**
+	 * Database result
+	 * @var \Contao\Database_Result
+	 */
+	private $objResult;
+
+	/**
 	 * Current index
 	 * @var integer
 	 */
@@ -71,17 +77,13 @@ abstract class Model_Collection extends \System
 
 
 	/**
-	 * Optionally take a result set
+	 * Store the database result
 	 * @param \Database_Result
 	 */
-	public function __construct(\Database_Result $objResult=null)
+	public function __construct(\Database_Result $objResult)
 	{
 		parent::__construct();
-
-		if ($objResult !== null)
-		{
-			$this->setData($objResult);
-		} 
+		$this->objResult = $objResult;
 	}
 
 
@@ -140,28 +142,42 @@ abstract class Model_Collection extends \System
 
 
 	/**
-	 * Set the current record from a Database_Result
-	 * @param \Database_Result
-	 * @return void
-	 */
-	public function setData(\Database_Result $objResult)
-	{
-		$strClass = $this->getModelClassFromTable(static::$strTable);
-
-		while ($objResult->next())
-		{
-			$this->arrModels[] = new $strClass($objResult);
-		}
-	}
-
-
-	/**
-	 * Return the number of rows (models)
+	 * Return the number of rows
 	 * @return integer
 	 */
 	public function count()
 	{
-		return count($this->arrModels);
+		return $this->objResult->numRows;
+	}
+
+
+	/**
+	 * Return the current row
+	 * @return array
+	 */
+	public function row()
+	{
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
+		return $this->arrModels[$this->intIndex]->row();
+	}
+
+
+	/**
+	 * Return the current model
+	 * @return \Contao\Model
+	 */
+	public function current()
+	{
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
+		return $this->arrModels[$this->intIndex];
 	}
 
 
@@ -171,6 +187,11 @@ abstract class Model_Collection extends \System
 	 */
 	public function first()
 	{
+		if (empty($this->arrModels))
+		{
+			$this->fetchNext();
+		}
+
 		$this->intIndex = 0;
 		return $this;
 	}
@@ -182,7 +203,7 @@ abstract class Model_Collection extends \System
 	 */
 	public function prev()
 	{
-		if ($this->intIndex == 0)
+		if ($this->intIndex < 1)
 		{
 			return false;
 		}
@@ -203,13 +224,16 @@ abstract class Model_Collection extends \System
 			return false;
 		}
 
-		if (!isset($this->arrModels[++$this->intIndex]))
+		if (!isset($this->arrModels[$this->intIndex + 1]))
 		{
-			--$this->intIndex;
-			$this->blnDone = true;
-			return false;
+			if ($this->fetchNext() == false)
+			{
+				$this->blnDone = true;
+				return false;
+			}
 		}
 
+		++$this->intIndex;
 		return $this;
 	}
 
@@ -220,39 +244,14 @@ abstract class Model_Collection extends \System
 	 */
 	public function last()
 	{
+		if (!$this->blnDone)
+		{
+			while ($this->next());
+		}
+
 		$this->blnDone = true;
 		$this->intIndex = count($this->arrModels) - 1;
 		return $this;
-	}
-
-
-	/**
-	 * Return the current model
-	 * @return \Contao\Model
-	 */
-	public function current()
-	{
-		if ($this->intIndex < 0)
-		{
-			$this->first();
-		}
-
-		return $this->arrModels[$this->intIndex];
-	}
-
-
-	/**
-	 * Return the current row
-	 * @return array
-	 */
-	public function row()
-	{
-		if ($this->intIndex < 0)
-		{
-			$this->first();
-		}
-
-		return $this->arrModels[$this->intIndex]->row();
 	}
 
 
@@ -276,6 +275,11 @@ abstract class Model_Collection extends \System
 	 */
 	public function fetchEach($strKey)
 	{
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
 		if (!isset($this->arrModels[0]->$strKey))
 		{
 			throw new \Exception("Unknown field $strKey");
@@ -293,18 +297,67 @@ abstract class Model_Collection extends \System
 
 
 	/**
-	 * Lazy load related records
-	 * @param string
-	 * @return \Contao\Model_Collection
+	 * Fetch the next result row and create the model
+	 * @return boolean
 	 */
-	public function getRelated($strKey)
+	protected function fetchNext()
 	{
-		if ($this->intIndex < 0)
+		if ($this->objResult->next() == false)
 		{
-			$this->first();
+			return false;
 		}
 
-		return $this->arrModels[$this->intIndex]->getRelated($strKey);
+		$strClass = $this->getModelClassFromTable(static::$strTable);
+		$this->arrModels[$this->intIndex + 1] = new $strClass($this->objResult);
+
+		return true;
+	}
+
+
+	/**
+	 * Find records by one or more conditions
+	 * @param mixed
+	 * @param mixed
+	 * @param array
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findBy($strColumn, $varValue, Array $arrOptions=array())
+	{
+		$arrOptions = array_merge($arrOptions, array
+		(
+			'column' => $strColumn,
+			'value'  => $varValue
+		));
+
+		return static::find($arrOptions);
+	}
+
+
+	/**
+	 * Find all records and return the model
+	 * @param array
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findAll(Array $arrOptions=array())
+	{
+		return static::find($arrOptions);
+	}
+
+
+	/**
+	 * Magic method to call $this->findByPid() instead of $this->findBy('pid')
+	 * @param string
+	 * @param array
+	 * @return mixed|null
+	 */
+	public static function __callStatic($name, $args)
+	{
+		if (strncmp($name, 'findBy', 6) !== 0)
+		{
+			return null;
+		}
+
+		return call_user_func('static::findBy', lcfirst(substr($name, 6)), array_shift($args), $args);
 	}
 
 
@@ -355,52 +408,24 @@ abstract class Model_Collection extends \System
 
 
 	/**
-	 * Find records by one or more conditions
-	 * @param mixed
-	 * @param mixed
-	 * @param array
-	 * @return \Contao\Model_Collection|null
+	 * Modify the statement before it is executed
+	 * @param \Database_Statement
+	 * @return \Contao\Database_Statement
 	 */
-	public static function findBy($strColumn, $varValue, Array $arrOptions=array())
+	protected static function preFind(\Database_Statement $objStatement)
 	{
-		$arrOptions = array_merge($arrOptions, array
-		(
-			'column' => $strColumn,
-			'value'  => $varValue
-		));
-
-		return static::find($arrOptions);
+		return $objStatement;
 	}
 
 
 	/**
-	 * Magic method to call $this->findByPid() instead of $this->findBy('pid')
-	 * @param string
-	 * @param array
-	 * @return mixed|null
+	 * Modify the result set before the model is created
+	 * @param \Database_Result
+	 * @return \Contao\Database_Result
 	 */
-	public static function __callStatic($name, $args)
+	protected static function postFind(\Database_Result $objResult)
 	{
-		if (strncmp($name, 'findBy', 6) !== 0)
-		{
-			return null;
-		}
-
-		$strColumn = lcfirst(substr($name, 6));
-		$varValue = array_shift($args);
-
-		return call_user_func('static::findBy', $strColumn, $varValue, $args);
-	}
-
-
-	/**
-	 * Find all records and return the model
-	 * @param array
-	 * @return \Contao\Model_Collection|null
-	 */
-	public static function findAll(Array $arrOptions=array())
-	{
-		return static::find($arrOptions);
+		return $objResult;
 	}
 
 
@@ -440,28 +465,6 @@ abstract class Model_Collection extends \System
 
 
 	/**
-	 * Modify the statement before it is executed
-	 * @param \Database_Statement
-	 * @return \Contao\Database_Statement
-	 */
-	protected static function preFind(\Database_Statement $objStatement)
-	{
-		return $objStatement;
-	}
-
-
-	/**
-	 * Modify the result set before the model is created
-	 * @param \Database_Result
-	 * @return \Contao\Database_Result
-	 */
-	protected static function postFind(\Database_Result $objResult)
-	{
-		return $objResult;
-	}
-
-
-	/**
 	 * Save the current model
 	 * @return \Contao\Model_Collection
 	 */
@@ -489,5 +492,21 @@ abstract class Model_Collection extends \System
 		}
 
 		return $this->arrModels[$this->intIndex]->delete();
+	}
+
+
+	/**
+	 * Lazy load related records
+	 * @param string
+	 * @return \Contao\Model_Collection
+	 */
+	public function getRelated($strKey)
+	{
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
+		return $this->arrModels[$this->intIndex]->getRelated($strKey);
 	}
 }

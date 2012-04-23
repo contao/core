@@ -77,7 +77,7 @@ abstract class Model extends \System
 
 
 	/**
-	 * Load the relations and optionally take a result set
+	 * Load the relations and optionally process a result set
 	 * @param \Database_Result
 	 */
 	public function __construct(\Database_Result $objResult=null)
@@ -89,8 +89,28 @@ abstract class Model extends \System
 
 		if ($objResult !== null)
 		{
-			$this->setData($objResult);
-		} 
+			$this->arrData = $objResult->row();
+
+			// Look for joined fields
+			foreach ($this->arrData as $k=>$v)
+			{
+				if (strpos($k, '__') !== false)
+				{
+					list($key, $field) = explode('__', $k);
+
+					// Create the related model
+					if (!isset($this->arrRelated[$key]))
+					{
+						$table = $this->arrRelations[$key]['table'];
+						$strClass = $this->getModelClassFromTable($table);
+						$this->arrRelated[$key] = new $strClass();
+					}
+
+					$this->arrRelated[$key]->$field = $v;
+					unset($this->arrData[$k]);
+				}
+			}
+		}
 	}
 
 
@@ -139,37 +159,6 @@ abstract class Model extends \System
 
 
 	/**
-	 * Set the current record from a Database_Result
-	 * @param \Database_Result
-	 * @return void
-	 */
-	public function setData(\Database_Result $objResult)
-	{
-		$this->arrData = $objResult->row();
-
-		// Look for joined fields
-		foreach ($this->arrData as $k=>$v)
-		{
-			if (strpos($k, '__') !== false)
-			{
-				list($key, $field) = explode('__', $k);
-
-				// Create the related model
-				if (!isset($this->arrRelated[$key]))
-				{
-					$table = $this->arrRelations[$key]['table'];
-					$strClass = $this->getModelClassFromTable($table);
-					$this->arrRelated[$key] = new $strClass();
-				}
-
-				$this->arrRelated[$key]->$field = $v;
-				unset($this->arrData[$k]);
-			}
-		}
-	}
-
-
-	/**
 	 * Be compatible with the Database_Result interface
 	 * @return integer
 	 */
@@ -197,36 +186,6 @@ abstract class Model extends \System
 	public function setRow(Array $arrData)
 	{
 		$this->arrData = $arrData;
-	}
-
-
-	/**
-	 * Find a record and return the model
-	 * @param array
-	 * @return \Contao\Model|null
-	 */
-	protected static function find(Array $arrOptions)
-	{
-		if (static::$strTable == '')
-		{
-			return null;
-		}
-
-		$arrOptions['table'] = static::$strTable;
-		$strQuery = \Model_QueryBuilder::find($arrOptions);
-
-		$objStatement = \Database::getInstance()->prepare($strQuery)->limit(1);
-		$objStatement = static::preFind($objStatement);
-
-		$objResult = $objStatement->execute($arrOptions['value']);
-
-		if ($objResult->numRows < 1)
-		{
-			return null;
-		}
-
-		$objResult = static::postFind($objResult);
-		return new static($objResult);
 	}
 
 
@@ -300,10 +259,37 @@ abstract class Model extends \System
 			return null;
 		}
 
-		$strColumn = lcfirst(substr($name, 6));
-		$varValue = array_shift($args);
+		return call_user_func('static::findBy', lcfirst(substr($name, 6)), array_shift($args), $args);
+	}
 
-		return call_user_func('static::findBy', $strColumn, $varValue, $args);
+
+	/**
+	 * Find a record and return the model
+	 * @param array
+	 * @return \Contao\Model|null
+	 */
+	protected static function find(Array $arrOptions)
+	{
+		if (static::$strTable == '')
+		{
+			return null;
+		}
+
+		$arrOptions['table'] = static::$strTable;
+		$strQuery = \Model_QueryBuilder::find($arrOptions);
+
+		$objStatement = \Database::getInstance()->prepare($strQuery)->limit(1);
+		$objStatement = static::preFind($objStatement);
+
+		$objResult = $objStatement->execute($arrOptions['value']);
+
+		if ($objResult->numRows < 1)
+		{
+			return null;
+		}
+
+		$objResult = static::postFind($objResult);
+		return new static($objResult);
 	}
 
 
@@ -326,49 +312,6 @@ abstract class Model extends \System
 	protected static function postFind(\Database_Result $objResult)
 	{
 		return $objResult;
-	}
-
-
-	/**
-	 * Lazy load related records
-	 * @param string
-	 * @return \Contao\Model
-	 * @throws \Exception
-	 */
-	public function getRelated($strKey)
-	{
-		// The related model has been loaded before
-		if (isset($this->arrRelated[$strKey]))
-		{
-			return $this->arrRelated[$strKey];
-		}
-
-		// The field or relation does not exist
-		if (!isset($this->$strKey) || !isset($this->arrRelations[$strKey]))
-		{
-			throw new \Exception("Field $strKey does not seem to be related");
-		}
-
-		$arrRelation = $this->arrRelations[$strKey];
-		$strName = $this->getModelClassFromTable($arrRelation['table'], true);
-
-		// Load the related record(s)
-		if ($arrRelation['type'] == 'hasOne' || $arrRelation['type'] == 'belongsTo')
-		{
-			$strClass = $strName . 'Model';
-			$objModel = $strClass::findBy($arrRelation['field'], $this->$strKey);
-			$this->arrRelated[$strKey] = $objModel;
-		}
-		elseif ($arrRelation['type'] == 'hasMany' || $arrRelation['type'] == 'belongsToMany')
-		{
-			$arrValues = deserialize($this->$strKey, true);
-			$strField = $arrRelation['table'] . '.' . $arrRelation['field'];
-			$strClass = $strName . 'Collection'; 
-			$objCollection = $strClass::findBy(array($strField . " IN('" . implode("','", $arrValues) . "')"), null, array('order'=>\Database::getInstance()->findInSet($strField, $arrValues)));
-			$this->arrRelated[$strKey] = $objCollection;
-		}
-
-		return $this->arrRelated[$strKey];
 	}
 
 
@@ -420,6 +363,51 @@ abstract class Model extends \System
 	 */
 	public function delete()
 	{
-		return \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")->execute($this->{static::$strPk})->affectedRows;
+		return \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+									   ->execute($this->{static::$strPk})
+									   ->affectedRows;
+	}
+
+
+	/**
+	 * Lazy load related records
+	 * @param string
+	 * @return \Contao\Model
+	 * @throws \Exception
+	 */
+	public function getRelated($strKey)
+	{
+		// The related model has been loaded before
+		if (isset($this->arrRelated[$strKey]))
+		{
+			return $this->arrRelated[$strKey];
+		}
+
+		// The field or relation does not exist
+		if (!isset($this->$strKey) || !isset($this->arrRelations[$strKey]))
+		{
+			throw new \Exception("Field $strKey does not seem to be related");
+		}
+
+		$arrRelation = $this->arrRelations[$strKey];
+		$strName = $this->getModelClassFromTable($arrRelation['table'], true);
+
+		// Load the related record(s)
+		if ($arrRelation['type'] == 'hasOne' || $arrRelation['type'] == 'belongsTo')
+		{
+			$strClass = $strName . 'Model';
+			$objModel = $strClass::findBy($arrRelation['field'], $this->$strKey);
+			$this->arrRelated[$strKey] = $objModel;
+		}
+		elseif ($arrRelation['type'] == 'hasMany' || $arrRelation['type'] == 'belongsToMany')
+		{
+			$arrValues = deserialize($this->$strKey, true);
+			$strField = $arrRelation['table'] . '.' . $arrRelation['field'];
+			$strClass = $strName . 'Collection'; 
+			$objCollection = $strClass::findBy(array($strField . " IN('" . implode("','", $arrValues) . "')"), null, array('order'=>\Database::getInstance()->findInSet($strField, $arrValues)));
+			$this->arrRelated[$strKey] = $objCollection;
+		}
+
+		return $this->arrRelated[$strKey];
 	}
 }

@@ -312,6 +312,22 @@ abstract class Database_Result
 
 
 	/**
+	 * Go to the previous row of the current result
+	 * @return \Contao\Database_Result|boolean
+	 */
+	public function prev()
+	{
+		if ($this->intIndex == 0)
+		{
+			return false;
+		}
+
+		--$this->intIndex;
+		return $this;
+	}
+
+
+	/**
 	 * Go to the next row of the current result
 	 * @return \Contao\Database_Result|boolean
 	 */
@@ -343,22 +359,6 @@ abstract class Database_Result
 
 
 	/**
-	 * Go to the previous row of the current result
-	 * @return \Contao\Database_Result|boolean
-	 */
-	public function prev()
-	{
-		if ($this->intIndex == 0)
-		{
-			return false;
-		}
-
-		--$this->intIndex;
-		return $this;
-	}
-
-
-	/**
 	 * Go to the last row of the current result
 	 * @return \Contao\Database_Result|boolean
 	 */
@@ -373,6 +373,16 @@ abstract class Database_Result
 		$this->intIndex = $this->intRowIndex = count($this->arrCache) - 1;
 
 		return $this;
+	}
+
+
+	/**
+	 * Return the number of rows in the result set
+	 * @return integer
+	 */
+	public function count()
+	{
+		return $this->num_rows();
 	}
 
 

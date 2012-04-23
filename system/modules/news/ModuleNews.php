@@ -225,7 +225,7 @@ abstract class ModuleNews extends \Module
 	 */
 	protected function parseArticles($objArticles, $blnAddArchive=false)
 	{
-		$limit = ($objArticles instanceof \Database_Result) ? $objArticles->numRows : $objArticles->count();
+		$limit = $objArticles->count();
 
 		if ($limit < 1)
 		{
