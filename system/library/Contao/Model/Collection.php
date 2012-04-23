@@ -274,18 +274,18 @@ abstract class Model_Collection extends \System
 	 * @return array
 	 * @throws \Exception
 	 */
-	public function fetchEach($key)
+	public function fetchEach($strKey)
 	{
-		if (!isset($this->arrModels[0]->$key))
+		if (!isset($this->arrModels[0]->$strKey))
 		{
-			throw new \Exception("Unknown field $key");
+			throw new \Exception("Unknown field $strKey");
 		}
 
 		$return = array();
 
 		foreach ($this->arrModels as $objModel)
 		{
-			$return[] = $objModel->$key;
+			$return[] = $objModel->$strKey;
 		}
 
 		return $return;
@@ -297,15 +297,14 @@ abstract class Model_Collection extends \System
 	 * @param string
 	 * @return \Contao\Model_Collection
 	 */
-	public function getRelated($key)
+	public function getRelated($strKey)
 	{
 		if ($this->intIndex < 0)
 		{
 			$this->first();
 		}
 
-		$this->arrModels[$this->intIndex]->getRelated($key);
-		return $this;
+		return $this->arrModels[$this->intIndex]->getRelated($strKey);
 	}
 
 

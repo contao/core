@@ -92,14 +92,11 @@ class ModuleCalendar extends \Events
 		}
 
 		$this->strUrl = preg_replace('/\?.*$/i', '', $this->Environment->request);
+		$this->strLink = $this->strUrl;
 
-		if ($this->jumpTo['id'] > 0)
+		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
 		{
-			$this->strLink = $this->generateFrontendUrl($this->jumpTo);
-		}
-		else
-		{
-			$this->strLink = $this->strUrl;
+			$this->strLink = $this->generateFrontendUrl($objTarget->row());
 		}
 
 		return parent::generate();

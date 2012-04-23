@@ -228,9 +228,9 @@ class ModuleUnsubscribe extends \Module
 		$objEmail->sendTo($varInput);
 
 		// Redirect to the jumpTo page
-		if ($this->jumpTo['id'])
+		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
 		{
-			$this->redirect($this->generateFrontendUrl($this->jumpTo));
+			$this->redirect($this->generateFrontendUrl($objTarget->row()));
 		}
 
 		$_SESSION['UNSUBSCRIBE_CONFIRM'] = $GLOBALS['TL_LANG']['MSC']['nl_removed'];

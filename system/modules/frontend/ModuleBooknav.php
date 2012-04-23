@@ -95,9 +95,7 @@ class ModuleBooknav extends \Module
 	protected function compile()
 	{
 		// Get the root page
-		$this->objModel->getRelated('rootPage');
-
-		if ($this->objModel->rootPage['id'] === null)
+		if (($objTarget = $this->objModel->getRelated('rootPage')) === null)
 		{
 			return;
 		}
@@ -112,13 +110,13 @@ class ModuleBooknav extends \Module
 		}
 
 		// Get all book pages
-		$this->arrPages[$this->objModel->rootPage['id']] = $this->objModel->rootPage;
-		$this->getBookPages($this->objModel->rootPage, $groups, time());
+		$this->arrPages[$objTarget->id] = $objTarget;
+		$this->getBookPages($objTarget->id, $groups, time());
 
 		global $objPage;
 
 		// Upper page
-		if ($objPage->id != $this->objModel->rootPage['id'])
+		if ($objPage->id != $objTarget->id)
 		{
 			$intKey = $objPage->pid;
 

@@ -146,20 +146,24 @@ class Comments extends \Frontend
 				$objPartial->addReply = false;
 
 				// Reply
-				if ($objComments->addReply && $objComments->reply != '' && $objComments->author['name'] != '')
+				if ($objComments->addReply && $objComments->reply != '')
 				{
-					$objPartial->addReply = true;
-					$objPartial->rby = $GLOBALS['TL_LANG']['MSC']['reply_by'];
-					$objPartial->reply = $this->replaceInsertTags($objComments->reply);
+					if (($objAuthor = $objComments->getRelated('author')) !== null)
+					{
+						$objPartial->addReply = true;
+						$objPartial->rby = $GLOBALS['TL_LANG']['MSC']['reply_by'];
+						$objPartial->reply = $this->replaceInsertTags($objComments->reply);
+						$objPartial->author = $objAuthor;
 
-					// Clean the RTE output
-					if ($objPage->outputFormat == 'xhtml')
-					{
-						$objPartial->reply = $this->String->toXhtml($objPartial->reply);
-					}
-					else
-					{
-						$objPartial->reply = $this->String->toHtml5($objPartial->reply);
+						// Clean the RTE output
+						if ($objPage->outputFormat == 'xhtml')
+						{
+							$objPartial->reply = $this->String->toXhtml($objPartial->reply);
+						}
+						else
+						{
+							$objPartial->reply = $this->String->toHtml5($objPartial->reply);
+						}
 					}
 				}
 

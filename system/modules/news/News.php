@@ -141,7 +141,7 @@ class News extends \Frontend
 
 			while ($objArticle->next())
 			{
-				$jumpTo = $objArticle->pid['jumpTo'];
+				$jumpTo = $objArticle->getRelated('pid')->jumpTo;
 
 				// Get the jumpTo URL
 				if (!isset($arrUrls[$jumpTo]))
@@ -224,32 +224,32 @@ class News extends \Frontend
 			while ($objArchive->next())
 			{
 				// Skip news archives without target page
-				if ($objArchive->jumpTo['id'] < 1)
+				if (!$objArchive->jumpTo)
 				{
 					continue;
 				}
 
 				// Skip news archives outside the root nodes
-				if (!empty($arrRoot) && !in_array($objArchive->jumpTo['id'], $arrRoot))
+				if (!empty($arrRoot) && !in_array($objArchive->jumpTo, $arrRoot))
 				{
 					continue;
 				}
 
 				// Get the URL of the jumpTo page
-				if (!isset($arrProcessed[$objArchive->jumpTo['id']]))
+				if (!isset($arrProcessed[$objArchive->jumpTo]))
 				{
 					$domain = $this->Environment->base;
-					$objParent = $this->getPageDetails($objArchive->jumpTo['id']);
+					$objParent = $this->getPageDetails($objArchive->jumpTo);
 
 					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objArchive->jumpTo['id']] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
+					$arrProcessed[$objArchive->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 
-				$strUrl = $arrProcessed[$objArchive->jumpTo['id']];
+				$strUrl = $arrProcessed[$objArchive->jumpTo];
 
 				// Get the items
 				$objArticle = \NewsCollection::findPublishedDefaultByPid($objArchive->id);
@@ -285,19 +285,15 @@ class News extends \Frontend
 
 			// Link to an internal page
 			case 'internal':
-				$objItem->getRelated('jumpTo');
-
-				if ($objItem->jumpTo['id'] > 0)
+				if (($objTarget = $objItem->getRelated('jumpTo')) !== null)
 				{
-					return $this->generateFrontendUrl($objItem->jumpTo);
+					return $this->generateFrontendUrl($objTarget->row());
 				}
 				break;
 
 			// Link to an article
 			case 'article':
-				$objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true));
-
-				if ($objArticle !== null)
+				if (($objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true))) !== null)
 				{
 					return ampersand($this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}

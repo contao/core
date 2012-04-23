@@ -152,16 +152,16 @@ class ModuleFaqList extends \Module
 	 */
 	protected function generateFaqLink($objFaq)
 	{
-		$jumpTo = intval($objFaq->pid['jumpTo']);
+		$jumpTo = intval($objFaq->getRelated('pid')->jumpTo);
 
 		// Get the URL from the jumpTo page of the category
 		if (!isset($this->arrTargets[$jumpTo]))
 		{
 			$this->arrTargets[$jumpTo] = ampersand($this->Environment->request, true);
 
-			if ($objFaq->pid['jumpTo'])
+			if ($jumpTo > 0)
 			{
-				$objTarget = \PageModel::findByPk($objFaq->pid['jumpTo']);
+				$objTarget = \PageModel::findByPk($jumpTo);
 
 				if ($objTarget !== null)
 				{
@@ -170,6 +170,6 @@ class ModuleFaqList extends \Module
 			}
 		}
 
-		return sprintf($this->arrTargets[$jumpTo], (($objFaq->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objFaq->alias : $objFaq->id));
+		return sprintf($this->arrTargets[$jumpTo], ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
 	}
 }

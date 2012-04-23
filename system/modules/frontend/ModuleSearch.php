@@ -115,14 +115,9 @@ class ModuleSearch extends \Module
 		$objFormTemplate->action = $this->getIndexFreeRequest();
 
 		// Redirect page
-		if ($this->jumpTo > 0)
+		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
 		{
-			$this->objModel->getRelated('jumpTo');
-
-			if ($this->objModel->jumpTo['id'] !== null)
-			{
-				$objFormTemplate->action = $this->generateFrontendUrl($this->objModel->jumpTo);
-			}
+			$objFormTemplate->action = $this->generateFrontendUrl($objTarget->row());
 		}
 
 		$this->Template->form = $objFormTemplate->parse();
@@ -130,7 +125,7 @@ class ModuleSearch extends \Module
 		$this->Template->results = '';
 
 		// Execute the search if there are keywords
-		if ($strKeywords != '' && $strKeywords != '*' && !$this->jumpTo['id'])
+		if ($strKeywords != '' && $strKeywords != '*' && !$this->jumpTo)
 		{
 			// Reference page
 			if ($this->rootPage > 0)

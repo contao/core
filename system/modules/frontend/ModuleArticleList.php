@@ -98,12 +98,10 @@ class ModuleArticleList extends \Module
 		// Show the articles of a different page
 		if ($this->defineRoot && $this->rootPage > 0)
 		{
-			$this->objModel->getRelated('rootPage');
-
-			if ($this->objModel->rootPage['id'] !== null)
+			if (($objTarget = $this->objModel->getRelated('rootPage')) !== null)
 			{
-				$id = $this->objModel->rootPage['id'];
-				$this->Template->request = $this->generateFrontendUrl($this->objModel->rootPage);
+				$id = $objTarget->id;
+				$this->Template->request = $this->generateFrontendUrl($objTarget->row());
 			}
 		}
 

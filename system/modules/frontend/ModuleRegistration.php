@@ -526,11 +526,9 @@ class ModuleRegistration extends \Module
 		$this->log('User account ID ' . $objMember->id . ' (' . $objMember->email . ') has been activated', 'ModuleRegistration activateAccount()', TL_ACCESS);
 
 		// Redirect to the jumpTo page
-		$this->objModel->getRelated('reg_jumpTo');
-
-		if ($this->objModel->reg_jumpTo['id'])
+		if (($objTarget = $this->objModel->getRelated('reg_jumpTo')) !== null)
 		{
-			$this->redirect($this->generateFrontendUrl($this->objModel->reg_jumpTo));
+			$this->redirect($this->generateFrontendUrl($objTarget->row()));
 		}
 
 		// Confirm activation

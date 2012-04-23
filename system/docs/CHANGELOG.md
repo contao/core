@@ -172,12 +172,11 @@ Added lazy and eager loading of related records to the Model class. Usage:
 ```
 $objArticle = ArticleModel::findByPk(5);
 
-// The author will be eager loaded
-echo $objArticle->author['name']; // Kevin Jones
+// The author will be eager loaded (no additional DB query)
+echo $objArticle->getRelated('author')->name; // Kevin Jones
 
-// The parent page can be lazy loaded
-$objArticle->getRelated('pid');
-echo $objArticle->pid['title']; // Music Academy
+// The parent page will be lazy loaded if it is requested
+echo $objArticle->getRelated('pid')->title; // Music Academy
 ```
 
 Relations are defined in the DCA files.

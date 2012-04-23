@@ -245,9 +245,9 @@ class Form extends \Hybrid
 		$this->Template->action = $this->getIndexFreeRequest();
 
 		// Get the target URL
-		if ($this->method == 'GET' && $this->objModel->jumpTo['id'])
+		if ($this->method == 'GET' && $this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
 		{
-			$this->Template->action = $this->generateFrontendUrl($this->objModel->jumpTo);
+			$this->Template->action = $this->generateFrontendUrl($objTarget->row());
 		}
 
 		return $this->Template->parse();
@@ -478,7 +478,7 @@ class Form extends \Hybrid
 			$this->log('Form "' . $this->title . '" has been submitted by ' . $this->Environment->ip . '.', 'Form processFormData()', TL_FORMS);
 		}
 
-		$this->jumpToOrReload($this->objModel->jumpTo);
+		$this->jumpToOrReload($this->jumpTo);
 	}
 
 

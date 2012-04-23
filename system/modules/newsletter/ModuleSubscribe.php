@@ -179,15 +179,15 @@ class ModuleSubscribe extends \Module
 		// Update the subscriptions
 		while ($objRecipient->next())
 		{
-			$objRecipient->getRelated('pid');
+			$objChannel = $objRecipient->getRelated('pid');
 
 			$arrAdd[] = $objRecipient->id;
-			$arrChannels[] = $objRecipient->pid['title'];
-			$arrCids[] = $objRecipient->pid['id'];
+			$arrChannels[] = $objChannel->title;
+			$arrCids[] = $objChannel->id;
 
 			$objRecipient->active = 1;
 			$objRecipient->token = '';
-			$objRecipient->pid = $objRecipient->pid['id'];
+			$objRecipient->pid = $objChannel->id;
 			$objRecipient->save();
 		}
 
@@ -305,9 +305,9 @@ class ModuleSubscribe extends \Module
 		$objEmail->sendTo($varInput);
 
 		// Redirect to the jumpTo page
-		if ($this->jumpTo['id'])
+		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
 		{
-			$this->redirect($this->generateFrontendUrl($this->jumpTo));
+			$this->redirect($this->generateFrontendUrl($objTarget->row()));
 		}
 
 		$_SESSION['SUBSCRIBE_CONFIRM'] = $GLOBALS['TL_LANG']['MSC']['nl_confirm'];

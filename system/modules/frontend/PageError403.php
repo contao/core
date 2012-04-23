@@ -77,7 +77,7 @@ class PageError403 extends \Frontend
 		}
 
 		// Generate the error page
-		if (!$obj403->autoforward || $obj403->jumpTo < 1)
+		if (!$obj403->autoforward || !$obj403->jumpTo)
 		{
 			global $objPage;
 

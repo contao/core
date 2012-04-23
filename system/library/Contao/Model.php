@@ -63,14 +63,29 @@ abstract class Model extends \System
 	 */
 	protected $arrData = array();
 
+	/**
+	 * Relations
+	 * @var array
+	 */
+	protected $arrRelations = array();
 
 	/**
-	 * Optionally take a result set
+	 * Related
+	 * @var array
+	 */
+	protected $arrRelated = array();
+
+
+	/**
+	 * Load the relations and optionally take a result set
 	 * @param \Database_Result
 	 */
 	public function __construct(\Database_Result $objResult=null)
 	{
 		parent::__construct();
+
+		$objRelations = new \DcaExtractor(static::$strTable);
+		$this->arrRelations = $objRelations->getRelations();
 
 		if ($objResult !== null)
 		{
@@ -132,20 +147,22 @@ abstract class Model extends \System
 	{
 		$this->arrData = $objResult->row();
 
-		// Look for joined fields and make them an array
+		// Look for joined fields
 		foreach ($this->arrData as $k=>$v)
 		{
-			// E.g. author__id becomes author['id']
 			if (strpos($k, '__') !== false)
 			{
 				list($key, $field) = explode('__', $k);
 
-				if (!is_array($this->arrData[$key]))
+				// Create the related model
+				if (!isset($this->arrRelated[$key]))
 				{
-					$this->arrData[$key] = array();
+					$table = $this->arrRelations[$key]['table'];
+					$strClass = $this->getModelClassFromTable($table);
+					$this->arrRelated[$key] = new $strClass();
 				}
 
-				$this->arrData[$key][$field] = $v;
+				$this->arrRelated[$key]->$field = $v;
 				unset($this->arrData[$k]);
 			}
 		}
@@ -318,66 +335,40 @@ abstract class Model extends \System
 	 * @return \Contao\Model
 	 * @throws \Exception
 	 */
-	public function getRelated($key)
+	public function getRelated($strKey)
 	{
-		if (!isset($this->$key))
+		// The related model has been loaded before
+		if (isset($this->arrRelated[$strKey]))
 		{
-			return $this;
+			return $this->arrRelated[$strKey];
 		}
 
-		// Load the DCA extract
-		$objRelated = new \DcaExtractor(static::$strTable);
-		$arrRelations = $objRelated->getRelations();
-
-		// No relations defined
-		if (empty($arrRelations) || !isset($arrRelations[$key]))
+		// The field or relation does not exist
+		if (!isset($this->$strKey) || !isset($this->arrRelations[$strKey]))
 		{
-			throw new \Exception("Field $key does not seem to be related");
+			throw new \Exception("Field $strKey does not seem to be related");
 		}
 
-		// Return if the relation has been loaded eagerly
-		if ($arrRelations[$key]['type'] == 'eager')
-		{
-			return $this;
-		}
-
-		// Get the class name without suffix (second parameter)
-		$strName = $this->getModelClassFromTable($arrRelations[$key]['table'], true);
+		$arrRelation = $this->arrRelations[$strKey];
+		$strName = $this->getModelClassFromTable($arrRelation['table'], true);
 
 		// Load the related record(s)
-		if ($arrRelations[$key]['type'] == 'hasOne' || $arrRelations[$key]['type'] == 'belongsTo')
+		if ($arrRelation['type'] == 'hasOne' || $arrRelation['type'] == 'belongsTo')
 		{
 			$strClass = $strName . 'Model';
-			$objModel = $strClass::findBy($arrRelations[$key]['field'], $this->$key);
-
-			if ($objModel !== null)
-			{
-				$this->$key = $objModel->row();
-			}
+			$objModel = $strClass::findBy($arrRelation['field'], $this->$strKey);
+			$this->arrRelated[$strKey] = $objModel;
 		}
-		elseif ($arrRelations[$key]['type'] == 'hasMany' || $arrRelations[$key]['type'] == 'belongsToMany')
+		elseif ($arrRelation['type'] == 'hasMany' || $arrRelation['type'] == 'belongsToMany')
 		{
-			$arrValues = deserialize($this->$key, true);
-			$arrColumns = array($arrRelations[$key]['field'] . " IN('" . implode("','", $arrValues) . "')");
-			$strOrder = \Database::getInstance()->findInSet($arrRelations[$key]['field'], $arrValues);
-
+			$arrValues = deserialize($this->$strKey, true);
+			$strField = $arrRelation['table'] . '.' . $arrRelation['field'];
 			$strClass = $strName . 'Collection'; 
-			$objModel = $strClass::findBy($arrColumns, null, $strOrder);
-
-			if ($objModel !== null)
-			{
-				$set = array();
-
-				while ($objModel->next())
-				{
-					$set[] = $objModel->row();
-				}
-
-				$this->$key = $set;
-			}
+			$objCollection = $strClass::findBy(array($strField . " IN('" . implode("','", $arrValues) . "')"), null, array('order'=>\Database::getInstance()->findInSet($strField, $arrValues)));
+			$this->arrRelated[$strKey] = $objCollection;
 		}
 
-		return $this;
+		return $this->arrRelated[$strKey];
 	}
 
 

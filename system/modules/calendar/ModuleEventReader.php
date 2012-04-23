@@ -257,7 +257,8 @@ class ModuleEventReader extends \Events
 			return;
 		}
 
-		$this->Template->allowComments = $objEvent->pid['allowComments'];
+		$objCalendar = $objEvent->getRelated('pid');
+		$this->Template->allowComments = $objCalendar->allowComments;
 
 		// Adjust the comments headline level
 		$intHl = min(intval(str_replace('h', '', $this->hl)), 5);
@@ -267,26 +268,29 @@ class ModuleEventReader extends \Events
 		$arrNotifies = array();
 
 		// Notify the system administrator
-		if ($objEvent->pid['notify'] != 'notify_author')
+		if ($objCalendar->notify != 'notify_author')
 		{
 			$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
 		}
 
 		// Notify the author
-		if ($objEvent->pid['notify'] != 'notify_admin' && $objEvent->author['email'] != '')
+		if ($objCalendar->notify != 'notify_admin')
 		{
-			$arrNotifies[] = $objEvent->author['email'];
+			if (($objAuthor = $objEvent->getRelated('author')) !== null && $objAuthor->email != '')
+			{
+				$arrNotifies[] = $objAuthor->email;
+			}
 		}
 
 		$objConfig = new \stdClass();
 
-		$objConfig->perPage = $objEvent->pid['perPage'];
-		$objConfig->order = $objEvent->pid['sortOrder'];
+		$objConfig->perPage = $objCalendar->perPage;
+		$objConfig->order = $objCalendar->sortOrder;
 		$objConfig->template = $this->com_template;
-		$objConfig->requireLogin = $objEvent->pid['requireLogin'];
-		$objConfig->disableCaptcha = $objEvent->pid['disableCaptcha'];
-		$objConfig->bbcode = $objEvent->pid['bbcode'];
-		$objConfig->moderate = $objEvent->pid['moderate'];
+		$objConfig->requireLogin = $objCalendar->requireLogin;
+		$objConfig->disableCaptcha = $objCalendar->disableCaptcha;
+		$objConfig->bbcode = $objCalendar->bbcode;
+		$objConfig->moderate = $objCalendar->moderate;
 
 		$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_calendar_events', $objEvent->id, $arrNotifies);
 	}

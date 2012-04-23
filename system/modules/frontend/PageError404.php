@@ -80,7 +80,7 @@ class PageError404 extends \Frontend
 		}
 
 		// Generate the error page
-		if (!$obj404->autoforward || $obj404->jumpTo < 1)
+		if (!$obj404->autoforward || !$obj404->jumpTo)
 		{
 			global $objPage;
 

@@ -143,7 +143,7 @@ class Calendar extends \Frontend
 		{
 			while ($objArticle->next())
 			{
-				$jumpTo = $objArticle->pid['jumpTo'];
+				$jumpTo = $objArticle->getRelated('pid')->jumpTo;
 
 				// Get the jumpTo URL
 				if (!isset($arrUrls[$jumpTo]))
@@ -261,32 +261,32 @@ class Calendar extends \Frontend
 			while ($objCalendar->next())
 			{
 				// Skip calendars without target page
-				if ($objCalendar->jumpTo['id'] < 1)
+				if (!$objCalendar->jumpTo)
 				{
 					continue;
 				}
 
 				// Skip calendars outside the root nodes
-				if (!empty($arrRoot) && !in_array($objCalendar->jumpTo['id'], $arrRoot))
+				if (!empty($arrRoot) && !in_array($objCalendar->jumpTo, $arrRoot))
 				{
 					continue;
 				}
 
 				// Get the URL of the jumpTo page
-				if (!isset($arrProcessed[$objCalendar->jumpTo['id']]))
+				if (!isset($arrProcessed[$objCalendar->jumpTo]))
 				{
 					$domain = $this->Environment->base;
-					$objParent = $this->getPageDetails($objCalendar->jumpTo['id']);
+					$objParent = $this->getPageDetails($objCalendar->jumpTo);
 
 					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objCalendar->jumpTo['id']] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
+					$arrProcessed[$objCalendar->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
 				}
 
-				$strUrl = $arrProcessed[$objCalendar->jumpTo['id']];
+				$strUrl = $arrProcessed[$objCalendar->jumpTo];
 
 				// Get the items
 				$objEvents = \CalendarEventsCollection::findPublishedDefaultByPid($objCalendar->id);
@@ -358,18 +358,14 @@ class Calendar extends \Frontend
 				break;
 
 			case 'internal':
-				$objEvent->getRelated('jumpTo');
-
-				if ($objEvent->jumpTo['id'] > 0)
+				if (($objTarget = $objEvent->getRelated('jumpTo')) !== null)
 				{
-					$link = $strLink . $this->generateFrontendUrl($objEvent->jumpTo);
+					$link = $strLink . $this->generateFrontendUrl($objTarget->row());
 				}
 				break;
 
 			case 'article':
-				$objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true));
-
-				if ($objArticle !== null)
+				if (($objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true))) !== null)
 				{
 					return ampersand($this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}

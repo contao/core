@@ -114,12 +114,17 @@ class ModuleEventMenu extends \ModuleCalendar
 
 		// Sort data
 		($this->cal_order == 'ascending') ? ksort($arrData) : krsort($arrData);
-		$arrItems = array();
 
-		// Get the current "jumpTo" page
-		$strUrl = $this->generateFrontendUrl($this->jumpTo);
+		$arrItems = array();
 		$count = 0;
 		$limit = count($arrData);
+		$strUrl = $this->Environment->request;
+
+		// Get the current "jumpTo" page
+		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
+		{
+			$strUrl = $this->generateFrontendUrl($objTarget->row());
+		}
 
 		// Prepare navigation
 		foreach ($arrData as $intYear=>$intCount)
@@ -167,10 +172,15 @@ class ModuleEventMenu extends \ModuleCalendar
 		}
 
 		($this->cal_order == 'ascending') ? ksort($arrData) : krsort($arrData);
+
 		$arrItems = array();
+		$strUrl = $this->Environment->request;
 
 		// Get the current "jumpTo" page
-		$strUrl = $this->generateFrontendUrl($this->jumpTo, '/month/%s');
+		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
+		{
+			$strUrl = $this->generateFrontendUrl($objTarget->row(), '/month/%s');
+		}
 
 		// Prepare the navigation
 		foreach ($arrData as $intYear=>$arrMonth)

@@ -257,7 +257,7 @@ abstract class Module extends \Frontend
 						break;
 
 					case 'forward':
-						if ($objSubpages->jumpTo > 0)
+						if ($objSubpages->jumpTo)
 						{
 							$objNext = \PageModel::findPublishedById($objSubpages->jumpTo);
 						}

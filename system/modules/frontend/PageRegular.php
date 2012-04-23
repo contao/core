@@ -65,7 +65,7 @@ class PageRegular extends \Frontend
 		// Get the page layout
 		$objLayout = $this->getPageLayout($objPage);
 		$objPage->template = $objLayout->template ?: 'fe_page';
-		$objPage->templateGroup = $objLayout->pid['templates'];
+		$objPage->templateGroup = $objLayout->getRelated('pid')->templates;
 
 		// Store the output format
 		list($strFormat, $strVariant) = explode('_', $objLayout->doctype);

@@ -132,12 +132,17 @@ class ModuleNewsMenu extends \ModuleNews
 
 		// Sort the data
 		($this->news_order == 'ascending') ? ksort($arrData) : krsort($arrData);
-		$arrItems = array();
 
-		// Get the current "jumpTo" page
-		$strUrl = $this->generateFrontendUrl($this->jumpTo);
+		$arrItems = array();
 		$count = 0;
 		$limit = count($arrData);
+		$strUrl = $this->Environment->request;
+
+		// Get the current "jumpTo" page
+		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
+		{
+			$strUrl = $this->generateFrontendUrl($objTarget->row());
+		}
 
 		// Prepare the navigation
 		foreach ($arrData as $intYear=>$intCount)
@@ -183,10 +188,15 @@ class ModuleNewsMenu extends \ModuleNews
 		}
 
 		($this->news_order == 'ascending') ? ksort($arrData) : krsort($arrData);
+
+		$strUrl = '';
 		$arrItems = array();
 
 		// Get the current "jumpTo" page
-		$strUrl = $this->generateFrontendUrl($this->jumpTo);
+		if (($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
+		{
+			$strUrl = $this->generateFrontendUrl($objTarget->row());
+		}
 
 		// Prepare the navigation
 		foreach ($arrData as $intYear=>$arrMonth)
@@ -236,9 +246,13 @@ class ModuleNewsMenu extends \ModuleNews
 
 		// Sort the data
 		krsort($arrData);
+		$strUrl = $this->Environment->request;
 
 		// Get the current "jumpTo" page
-		$strUrl = $this->generateFrontendUrl($this->jumpTo);
+		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
+		{
+			$strUrl = $this->generateFrontendUrl($objTarget->row());
+		}
 
 		$this->Date = $this->Input->get('day') ? new \Date($this->Input->get('day'), 'Ymd') : new \Date();
 

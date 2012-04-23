@@ -860,32 +860,32 @@ class Newsletter extends \Backend
 			while ($objNewsletter->next())
 			{
 				// Skip channels without target page
-				if ($objNewsletter->jumpTo['id'] < 1)
+				if (!$objNewsletter->jumpTo)
 				{
 					continue;
 				}
 
 				// Skip channels outside the root nodes
-				if (!empty($arrRoot) && !in_array($objNewsletter->jumpTo['id'], $arrRoot))
+				if (!empty($arrRoot) && !in_array($objNewsletter->jumpTo, $arrRoot))
 				{
 					continue;
 				}
 
 				// Get the URL of the jumpTo page
-				if (!isset($arrProcessed[$objNewsletter->jumpTo['id']]))
+				if (!isset($arrProcessed[$objNewsletter->jumpTo]))
 				{
 					$domain = $this->Environment->base;
-					$objParent = $this->getPageDetails($objNewsletter->jumpTo['id']);
+					$objParent = $this->getPageDetails($objNewsletter->jumpTo);
 
 					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objNewsletter->jumpTo['id']] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
+					$arrProcessed[$objNewsletter->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 
-				$strUrl = $arrProcessed[$objNewsletter->jumpTo['id']];
+				$strUrl = $arrProcessed[$objNewsletter->jumpTo];
 
 				// Get the items
 				$objItem = \NewsletterCollection::findSentByPid($objNewsletter->id);

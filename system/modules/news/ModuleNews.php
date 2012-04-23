@@ -270,9 +270,9 @@ abstract class ModuleNews extends \Module
 					break;
 
 				case 'author':
-					if ($objArticle->author['name'] != '')
+					if (($objAuthor = $objArticle->getRelated('author')) !== null)
 					{
-						$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objArticle->author['name'];
+						$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objAuthor->name;
 					}
 					break;
 
@@ -329,11 +329,9 @@ abstract class ModuleNews extends \Module
 
 			// Link to an internal page
 			case 'internal':
-				$objItem->getRelated('jumpTo');
-
-				if ($objItem->jumpTo['id'] > 0)
+				if (($objTarget = $objItem->getRelated('jumpTo')) !== null)
 				{
-					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objItem->jumpTo));
+					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objTarget->row()));
 				}
 				break;
 
@@ -351,7 +349,7 @@ abstract class ModuleNews extends \Module
 		// Link to the default page
 		if (self::$arrUrlCache[$strCacheKey] === null)
 		{
-			$objPage = \PageModel::findByPk($objItem->pid['jumpTo']);
+			$objPage = \PageModel::findByPk($objItem->getRelated('pid')->jumpTo);
 
 			if ($objPage === null)
 			{

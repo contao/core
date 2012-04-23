@@ -150,7 +150,8 @@ class ModuleNewsReader extends \ModuleNews
 			return;
 		}
 
-		$this->Template->allowComments = $objArticle->pid['allowComments'];
+		$objArchive = $objArticle->getRelated('pid');
+		$this->Template->allowComments = $objArchive->allowComments;
 
 		// Adjust the comments headline level
 		$intHl = min(intval(str_replace('h', '', $this->hl)), 5);
@@ -160,15 +161,18 @@ class ModuleNewsReader extends \ModuleNews
 		$arrNotifies = array();
 
 		// Notify the system administrator
-		if ($objArticle->pid['notify'] != 'notify_author')
+		if ($objArchive->notify != 'notify_author')
 		{
 			$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
 		}
 
 		// Notify the author
-		if ($objArticle->pid['notify'] != 'notify_admin' && $objArticle->author['email'] != '')
+		if ($objArchive->notify != 'notify_admin')
 		{
-			$arrNotifies[] = $objArticle->author['email'];
+			if (($objAuthor = $objArticle->getRelated('author')) !== null && $objAuthor->email != '')
+			{
+				$arrNotifies[] = $objAuthor->email;
+			}
 		}
 
 		$objConfig = new \stdClass();

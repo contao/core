@@ -72,32 +72,32 @@ class ModuleFaq extends \Frontend
 			while ($objFaq->next())
 			{
 				// Skip FAQs without target page
-				if ($objFaq->jumpTo['id'] < 1)
+				if (!$objFaq->jumpTo)
 				{
 					continue;
 				}
 
 				// Skip FAQs outside the root nodes
-				if (!empty($arrRoot) && !in_array($objFaq->jumpTo['id'], $arrRoot))
+				if (!empty($arrRoot) && !in_array($objFaq->jumpTo, $arrRoot))
 				{
 					continue;
 				}
 
 				// Get the URL of the jumpTo page
-				if (!isset($arrProcessed[$objFaq->jumpTo['id']]))
+				if (!isset($arrProcessed[$objFaq->jumpTo]))
 				{
 					$domain = $this->Environment->base;
-					$objParent = $this->getPageDetails($objFaq->jumpTo['id']);
+					$objParent = $this->getPageDetails($objFaq->jumpTo);
 
 					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objFaq->jumpTo['id']] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
+					$arrProcessed[$objFaq->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 
-				$strUrl = $arrProcessed[$objFaq->jumpTo['id']];
+				$strUrl = $arrProcessed[$objFaq->jumpTo];
 
 				// Get the items
 				$objItems = \FaqCollection::findByPid($objFaq->id, array('order'=>'sorting'));

@@ -175,7 +175,7 @@ class ModuleFaqReader extends \Module
 			$this->addEnclosuresToTemplate($this->Template, $objFaq->row());
 		}
 
-		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($objPage->dateFormat, $objFaq->tstamp), $objFaq->author['name']);
+		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($objPage->dateFormat, $objFaq->tstamp), $objFaq->getRelated('author')->name);
 
 		// HOOK: comments extension required
 		if ($objFaq->noComments || !in_array('comments', $this->Config->getActiveModules()))
@@ -184,8 +184,10 @@ class ModuleFaqReader extends \Module
 			return;
 		}
 
+		$objCategory = $objFaq->getRelated('pid');
+
 		// Check whether comments are allowed
-		if (!$objFaq->pid['allowComments'])
+		if (!$objCategory->allowComments)
 		{
 			$this->Template->allowComments = false;
 			return;
@@ -201,15 +203,18 @@ class ModuleFaqReader extends \Module
 		$arrNotifies = array();
 
 		// Notify the system administrator
-		if ($objFaq->pid['notify'] != 'notify_author')
+		if ($objCategory->notify != 'notify_author')
 		{
 			$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
 		}
 
 		// Notify the author
-		if ($objFaq->pid['notify'] != 'notify_admin' && $objFaq->author['email'] != '')
+		if ($objCategory->notify != 'notify_admin')
 		{
-			$arrNotifies[] = $objFaq->author['email'];
+			if (($objAuthor = $objFaq->getRelated('author')) !== null && $objAuthor->email != '')
+			{
+				$arrNotifies[] = $objAuthor->email;
+			}
 		}
 
 		$objConfig = new \stdClass();

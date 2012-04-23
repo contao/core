@@ -146,11 +146,11 @@ class ModuleFaqPage extends Module
 				$this->addEnclosuresToTemplate($objTemp, $objFaq->row());
 			}
 
-			$objTemp->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($objPage->dateFormat, $objFaq->tstamp), $objFaq->author['name']);
+			$objTemp->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($objPage->dateFormat, $objFaq->tstamp), $objFaq->getRelated('author')->name);
 
 			// Order by PID
-			$arrFaq[$objFaq->pid['id']]['items'][] = $objTemp;
-			$arrFaq[$objFaq->pid['id']]['headline'] = $objFaq->category;
+			$arrFaq[$objFaq->pid]['items'][] = $objTemp;
+			$arrFaq[$objFaq->pid]['headline'] = $objFaq->category;
 		}
 
 		$arrFaq = array_values(array_filter($arrFaq));

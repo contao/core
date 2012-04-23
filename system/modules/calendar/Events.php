@@ -136,9 +136,9 @@ abstract class Events extends \Module
 			$objCalendar = \CalendarModel::findByPk($id);
 
 			// Get the current "jumpTo" page
-			if ($objCalendar !== null && $objCalendar->jumpTo['id'] != '')
+			if ($objCalendar !== null && $objCalendar->jumpTo && ($objTarget = $objCalendar->getRelated('jumpTo')) !== null)
 			{
-				$strUrl = $this->generateFrontendUrl($objCalendar->jumpTo, ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'));
+				$strUrl = $this->generateFrontendUrl($objTarget->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'));
 			}
 
 			// Get the events of the current period
@@ -379,11 +379,9 @@ abstract class Events extends \Module
 
 			// Link to an internal page
 			case 'internal':
-				$objEvent->getRelated('jumpTo');
-
-				if ($objEvent->jumpTo['id'] > 0)
+				if (($objTarget = $objEvent->getRelated('jumpTo')) !== null)
 				{
-					return ampersand($this->generateFrontendUrl($objEvent->jumpTo));
+					return ampersand($this->generateFrontendUrl($objTarget->row()));
 				}
 				break;
 

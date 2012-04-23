@@ -1602,11 +1602,9 @@ abstract class Controller extends \System
 								break;
 
 							case 'forward':
-								$objNextPage->getRelated('jumpTo');
-
-								if ($objNextPage->jumpTo['id'])
+								if (($objTarget = $objNextPage->getRelated('jumpTo')) !== null)
 								{
-									$strUrl = $this->generateFrontendUrl($objNextPage->jumpTo);
+									$strUrl = $this->generateFrontendUrl($objTarget->row());
 									break;
 								}
 								elseif (($objTarget = \PageModel::findFirstPublishedRegularByPid($objNextPage->id)) !== null)
@@ -1788,8 +1786,7 @@ abstract class Controller extends \System
 					}
 					elseif ($objNews->source == 'internal')
 					{
-						$objNews->getRelated('jumpTo');
-						$strUrl = $this->generateFrontendUrl($objNews->jumpTo);
+						$strUrl = $this->generateFrontendUrl($objNews->getRelated('jumpTo')->row());
 					}
 					elseif ($objNews->source == 'article')
 					{
@@ -1840,8 +1837,7 @@ abstract class Controller extends \System
 					}
 					elseif ($objEvent->source == 'internal')
 					{
-						$objEvent->getRelated('jumpTo');
-						$strUrl = $this->generateFrontendUrl($objEvent->jumpTo);
+						$strUrl = $this->generateFrontendUrl($objEvent->getRelated('jumpTo')->row());
 					}
 					elseif ($objEvent->source == 'article')
 					{
@@ -2446,7 +2442,7 @@ abstract class Controller extends \System
 	 * @param string
 	 * @return string
 	 */
-	protected function generateFrontendUrl($arrRow, $strParams=null, $strForceLang=null)
+	protected function generateFrontendUrl(Array $arrRow, $strParams=null, $strForceLang=null)
 	{
 		if (!$GLOBALS['TL_CONFIG']['disableAlias'])
 		{

@@ -99,26 +99,26 @@ class ModuleNewsletterList extends \Module
 		{
 			while ($objNewsletter->next())
 			{
-				if (!$objNewsletter->pid['jumpTo'])
+				if (($objTarget = $objNewsletter->getRelated('pid')) === null || !$objTarget->jumpTo)
 				{
 					continue;
 				}
 
-				if (!isset($arrJumpTo[$objNewsletter->pid['jumpTo']]))
+				if (!isset($arrJumpTo[$objTarget->jumpTo]))
 				{
-					$objJumpTo = \PageModel::findPublishedById($objNewsletter->jumpTo);
+					$objJumpTo = \PageModel::findPublishedById($objTarget->jumpTo);
 	
 					if ($objJumpTo !== null)
 					{
-						$arrJumpTo[$objNewsletter->jumpTo] = $this->generateFrontendUrl($objJumpTo->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
+						$arrJumpTo[$objTarget->jumpTo] = $this->generateFrontendUrl($objJumpTo->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
 					}
 					else
 					{
-						$arrJumpTo[$objNewsletter->jumpTo] = null;
+						$arrJumpTo[$objTarget->jumpTo] = null;
 					}
 				}
 
-				$strUrl = $arrJumpTo[$objNewsletter->jumpTo];
+				$strUrl = $arrJumpTo[$objTarget->jumpTo];
 
 				if ($strUrl === null)
 				{
