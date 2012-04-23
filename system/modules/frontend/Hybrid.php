@@ -95,7 +95,7 @@ abstract class Hybrid extends \Frontend
 			return;
 		}
 
-		$strModelClass = $this->convertTableNameToModelClass($this->strTable);
+		$strModelClass = $this->getModelClassFromTable($this->strTable);
 
 		// Load the model
 		if ($this->classFileExists($strModelClass))

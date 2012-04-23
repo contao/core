@@ -177,7 +177,7 @@ class ModuleExtension extends BackendModule
 				// Models
 				foreach ($arrTables as $strTable)
 				{
-					$strModel = $this->convertTableNameToModelClass($strTable, true);
+					$strModel = $this->getModelClassFromTable($strTable, true);
 
 					$tplTable = $this->newTemplate('dev_model', $objModule);
 					$tplTable->table = $strTable;

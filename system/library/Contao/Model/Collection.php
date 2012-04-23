@@ -146,7 +146,7 @@ abstract class Model_Collection extends \System
 	 */
 	public function setData(\Database_Result $objResult)
 	{
-		$strClass = $this->convertTableNameToModelClass(static::$strTable);
+		$strClass = $this->getModelClassFromTable(static::$strTable);
 
 		while ($objResult->next())
 		{

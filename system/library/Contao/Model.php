@@ -342,7 +342,7 @@ abstract class Model extends \System
 		}
 
 		// Get the class name without suffix (second parameter)
-		$strName = $this->convertTableNameToModelClass($arrRelations[$key]['table'], true);
+		$strName = $this->getModelClassFromTable($arrRelations[$key]['table'], true);
 
 		// Load the related record(s)
 		if ($arrRelations[$key]['type'] == 'hasOne' || $arrRelations[$key]['type'] == 'belongsTo')

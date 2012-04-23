@@ -1004,7 +1004,7 @@ abstract class System
 	 * @param boolean
 	 * @return string
 	 */
-	protected function convertTableNameToModelClass($strTable, $blnNoSuffix=false)
+	protected function getModelClassFromTable($strTable, $blnNoSuffix=false)
 	{
 		$arrChunks = explode('_', $strTable);
 

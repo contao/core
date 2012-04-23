@@ -580,22 +580,27 @@ abstract class Controller extends \System
 					$trail[] = $objParentPage->pid;
 				}
 
-				if ($objPage->cache === false && $objParentPage->includeCache)
+				// Cache
+				if ($objParentPage->includeCache && $objPage->cache === false)
 				{
 					$objPage->cache = $objParentPage->cache;
 				}
 
-				if ($objPage->layout === false && $objParentPage->includeLayout)
+				// Layout
+				if ($objParentPage->includeLayout)
 				{
-					$objPage->layout = $objParentPage->layout;
+					if ($objPage->layout === false)
+					{
+						$objPage->layout = $objParentPage->layout;
+					}
+					if ($objPage->mobileLayout === false)
+					{
+						$objPage->mobileLayout = $objParentPage->mobileLayout;
+					}
 				}
 
-				if ($objPage->mobileLayout === false && $objParentPage->includeLayout)
-				{
-					$objPage->mobileLayout = $objParentPage->mobileLayout;
-				}
-
-				if ($objPage->protected === false && $objParentPage->protected)
+				// Protection
+				if ($objParentPage->protected && $objPage->protected === false)
 				{
 					$objPage->protected = true;
 					$objPage->groups = deserialize($objParentPage->groups);
