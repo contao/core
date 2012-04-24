@@ -40,6 +40,7 @@ $GLOBALS['TL_LANG']['tl_news']['subheadline']  = array('Subheadline', 'Here you 
 $GLOBALS['TL_LANG']['tl_news']['teaser']       = array('News teaser', 'The news teaser can be shown in a news list instead of the full article. A "read more …" link will be added automatically.');
 $GLOBALS['TL_LANG']['tl_news']['text']         = array('News text', 'Here you can enter the news text.');
 $GLOBALS['TL_LANG']['tl_news']['addImage']     = array('Add an image', 'Add an image to the news item.');
+$GLOBALS['TL_LANG']['tl_news']['size']         = array('Image width and height', 'Here you can set the image dimensions and the resize mode.');
 $GLOBALS['TL_LANG']['tl_news']['addEnclosure'] = array('Add enclosures', 'Add one or more downloadable files to the news item.');
 $GLOBALS['TL_LANG']['tl_news']['enclosure']    = array('Enclosures', 'Please choose the files you want to attach.');
 $GLOBALS['TL_LANG']['tl_news']['source']       = array('Redirect target', 'Here you can override the default redirect target.');

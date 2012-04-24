@@ -45,6 +45,7 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['recurring']    = array('Event wiederh
 $GLOBALS['TL_LANG']['tl_calendar_events']['repeatEach']   = array('Intervall', 'Hier können Sie das Wiederholungsintervall festlegen.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['recurrences']  = array('Wiederholungen', 'Geben Sie 0 ein, um das Event unbefristet zu wiederholen.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['addImage']     = array('Ein Bild hinzufügen', 'Dem Event ein Bild hinzufügen.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['size']         = array('Bildbreite und Bildhöhe', 'Hier können Sie die Abmessungen des Bildes und den Skalierungsmodus festlegen.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['addEnclosure'] = array('Anlagen hinzufügen', 'Dem Event eine oder mehrere Dateien als Download hinzufügen.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['enclosure']    = array('Anlagen', 'Bitte wählen Sie die Dateien aus, die Sie hinzufügen möchten.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['source']       = array('Weiterleitungsziel', 'Hier können Sie die Standard-Weiterleitung überschreiben.');

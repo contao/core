@@ -40,6 +40,7 @@ $GLOBALS['TL_LANG']['tl_news']['subheadline']  = array('Unterüberschrift', 'Hie
 $GLOBALS['TL_LANG']['tl_news']['teaser']       = array('Teasertext', 'Der Teasertext kann in einer Nachrichtenliste anstatt des Nachrichtentextes angezeigt werden. Ein "Weiterlesen …"-Link wird automatisch hinzugefügt.');
 $GLOBALS['TL_LANG']['tl_news']['text']         = array('Nachrichtentext', 'Hier können Sie den Nachrichtentext eingeben.');
 $GLOBALS['TL_LANG']['tl_news']['addImage']     = array('Ein Bild hinzufügen', 'Dem Beitrag ein Bild hinzufügen.');
+$GLOBALS['TL_LANG']['tl_news']['size']         = array('Bildbreite und Bildhöhe', 'Hier können Sie die Abmessungen des Bildes und den Skalierungsmodus festlegen.');
 $GLOBALS['TL_LANG']['tl_news']['addEnclosure'] = array('Anlagen hinzufügen', 'Dem Beitrag eine oder mehrere Dateien als Download hinzufügen.');
 $GLOBALS['TL_LANG']['tl_news']['enclosure']    = array('Anlagen', 'Bitte wählen Sie die Dateien aus, die Sie hinzufügen möchten.');
 $GLOBALS['TL_LANG']['tl_news']['source']       = array('Weiterleitungsziel', 'Hier können Sie die Standard-Weiterleitung überschreiben.');
