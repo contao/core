@@ -31,23 +31,23 @@
 /**
  * Back end modules
  */
-$GLOBALS['BE_MOD']['development'] = array
+$GLOBALS['BE_MOD']['devtools'] = array
 (
 	'extension' => array
 	(
 		'tables'     => array('tl_extension'),
 		'create'     => array('ModuleExtension', 'generate'),
-		'icon'       => 'system/modules/development/html/extension.gif'
+		'icon'       => 'system/modules/devtools/html/extension.gif'
 	),
 	'labels' => array
 	(
 		'callback'   => 'ModuleLabels',
-		'icon'       => 'system/modules/development/html/labels.gif',
-		'stylesheet' => 'system/modules/development/html/labels.css'
+		'icon'       => 'system/modules/devtools/html/labels.gif',
+		'stylesheet' => 'system/modules/devtools/html/labels.css'
 	),
 	'autoload' => array
 	(
 		'callback'   => 'ModuleAutoload',
-		'icon'       => 'system/modules/development/html/autoload.gif'
+		'icon'       => 'system/modules/devtools/html/autoload.gif'
 	)
 );

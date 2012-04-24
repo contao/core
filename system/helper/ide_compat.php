@@ -236,7 +236,7 @@ class TextStore extends Contao\TextStore {}
 class TimePeriod extends Contao\TimePeriod {}
 class TrblField extends Contao\TrblField {}
 
-// development
+// devtools
 class ModuleAutoload extends Contao\ModuleAutoload {}
 class ModuleExtension extends Contao\ModuleExtension {}
 class ModuleLabels extends Contao\ModuleLabels {}

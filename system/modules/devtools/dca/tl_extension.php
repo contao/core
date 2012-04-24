@@ -104,7 +104,7 @@ $GLOBALS['TL_DCA']['tl_extension'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_extension']['create'],
 				'href'                => 'key=create',
-				'icon'                => 'system/modules/development/html/apply.gif'
+				'icon'                => 'system/modules/devtools/html/apply.gif'
 			)
 		)
 	),

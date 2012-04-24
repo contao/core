@@ -31,7 +31,7 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['development'] = 'Developer tools';
-$GLOBALS['TL_LANG']['MOD']['extension']   = array('Extension creator', 'Create custom Contao extensions');
-$GLOBALS['TL_LANG']['MOD']['labels']      = array('Missing labels', 'Find missing labels in a language pack');
-$GLOBALS['TL_LANG']['MOD']['autoload']    = array('Autoload creator', 'Automatically create the "config/autoload.php" files');
+$GLOBALS['TL_LANG']['MOD']['devtools']  = 'Developer tools';
+$GLOBALS['TL_LANG']['MOD']['extension'] = array('Extension creator', 'Create custom Contao extensions');
+$GLOBALS['TL_LANG']['MOD']['labels']    = array('Missing labels', 'Find missing labels in a language pack');
+$GLOBALS['TL_LANG']['MOD']['autoload']  = array('Autoload creator', 'Automatically create the "config/autoload.php" files');
