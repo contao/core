@@ -69,8 +69,8 @@ class Comments extends \Frontend
 		if ($objConfig->perPage > 0)
 		{
 			// Get the total number of comments
-			$objTotal = \CommentsModel::countPublishedBySourceAndParent($strSource, $intParent);
-			$total = $gtotal = $objTotal->count;
+			$intTotal = \CommentsModel::countPublishedBySourceAndParent($strSource, $intParent);
+			$total = $gtotal = $intTotal;
 
 			// Get the current page
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;

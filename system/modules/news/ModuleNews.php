@@ -281,9 +281,9 @@ abstract class ModuleNews extends \Module
 					{
 						break;
 					}
-					$objComments = \CommentsModel::countPublishedBySourceAndParent('tl_news', $objArticle->id);
-					$return['ccount'] = $objComments->count;
-					$return['comments'] = sprintf($GLOBALS['TL_LANG']['MSC']['commentCount'], $objComments->count);
+					$intTotal = \CommentsModel::countPublishedBySourceAndParent('tl_news', $objArticle->id);
+					$return['ccount'] = $intTotal;
+					$return['comments'] = sprintf($GLOBALS['TL_LANG']['MSC']['commentCount'], $intTotal);
 					break;
 			}
 		}

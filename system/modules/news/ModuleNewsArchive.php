@@ -168,11 +168,11 @@ class ModuleNewsArchive extends \ModuleNews
 		if ($this->perPage > 0)
 		{
 			// Get the total number of items
-			$objTotal = \NewsModel::countPublishedFromToByPids($intBegin, $intEnd, $this->news_archives);
+			$intTotal = \NewsModel::countPublishedFromToByPids($intBegin, $intEnd, $this->news_archives);
 
-			if ($objTotal !== null)
+			if ($intTotal > 0)
 			{
-				$total = $objTotal->count;
+				$total = $intTotal;
 
 				// Get the current page
 				$page = $this->Input->get('page') ? $this->Input->get('page') : 1;

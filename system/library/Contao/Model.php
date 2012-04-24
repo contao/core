@@ -96,7 +96,7 @@ abstract class Model extends \System
 			{
 				if (strpos($k, '__') !== false)
 				{
-					list($key, $field) = explode('__', $k);
+					list($key, $field) = explode('__', $k, 2);
 
 					// Create the related model
 					if (!isset($this->arrRelated[$key]))
@@ -379,7 +379,7 @@ abstract class Model extends \System
 		}
 		elseif (strncmp($name, 'findOneBy', 9) === 0)
 		{
-			return call_user_func('static::findOneBy', lcfirst(substr($name, 6)), array_shift($args), $args);
+			return call_user_func('static::findOneBy', lcfirst(substr($name, 9)), array_shift($args), $args);
 		}
 
 		return null;
@@ -458,13 +458,13 @@ abstract class Model extends \System
 	 * Return the number of records matching certain criteria
 	 * @param mixed
 	 * @param mixed
-	 * @return \Contao\Model
+	 * @return integer
 	 */
 	public static function countBy($strColumn=null, $varValue=null)
 	{
 		if (static::$strTable == '')
 		{
-			return null;
+			return 0;
 		}
 
 		$strQuery = \Model_QueryBuilder::count(array
@@ -474,14 +474,13 @@ abstract class Model extends \System
 			'value'  => $varValue
 		));
 
-		$objResult = \Database::getInstance()->prepare($strQuery)->execute($varValue);
-		return new static($objResult);
+		return \Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
 	}
 
 
 	/**
 	 * Return the total number of rows
-	 * @return \Contao\Model
+	 * @return integer
 	 */
 	public static function countAll()
 	{

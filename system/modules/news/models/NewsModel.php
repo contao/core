@@ -127,13 +127,13 @@ class NewsModel extends \Model
 	 * Count published news items by their parent ID
 	 * @param array
 	 * @param boolean
-	 * @return \Contao\Model|null
+	 * @return integer
 	 */
 	public static function countPublishedByPids($arrPids, $blnFeatured=null)
 	{
 		if (!is_array($arrPids) || empty($arrPids))
 		{
-			return null;
+			return 0;
 		}
 
 		$t = static::$strTable;
@@ -243,7 +243,7 @@ class NewsModel extends \Model
 	 * @param integer
 	 * @param integer
 	 * @param array
-	 * @return \Contao\Model|null
+	 * @return integer
 	 */
 	public static function countPublishedFromToByPids($intFrom, $intTo, $arrPids)
 	{

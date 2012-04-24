@@ -115,15 +115,15 @@ class ModuleNewsList extends \ModuleNews
 		}
 
 		// Get the total number of items
-		$objTotal = \NewsModel::countPublishedByPids($this->news_archives, $blnFeatured);
+		$intTotal = \NewsModel::countPublishedByPids($this->news_archives, $blnFeatured);
 
-		if ($objTotal === null)
+		if ($intTotal < 1)
 		{
 			$this->Template->articles = array();
 			return;
 		}
 
-		$total = $objTotal->count - $skipFirst;
+		$total = $intTotal - $skipFirst;
 
 		// Split the results
 		if ($this->perPage > 0 && (!isset($limit) || $this->numberOfItems > $this->perPage))

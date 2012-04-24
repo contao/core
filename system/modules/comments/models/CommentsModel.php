@@ -86,7 +86,7 @@ class CommentsModel extends \Model
 	 * Count published comments by their source table and parent ID
 	 * @param string
 	 * @param integer
-	 * @return \Contao\Model|null
+	 * @return integer
 	 */
 	public static function countPublishedBySourceAndParent($strSource, $intParent)
 	{
