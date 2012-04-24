@@ -178,6 +178,7 @@ class Help extends Backend
 		$this->Template->headline = $arrData['label'][0] ?: $field;
 		$this->Template->helpWizard = $GLOBALS['TL_LANG']['MSC']['helpWizard'];
 
+		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
 	}
 }

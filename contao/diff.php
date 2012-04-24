@@ -219,6 +219,7 @@ class DiffController extends Backend
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->action = ampersand($this->Environment->request);
 
+		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
 	}
 

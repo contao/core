@@ -123,6 +123,7 @@ class Changelog extends Backend
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 
+		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
 	}
 }

@@ -88,6 +88,7 @@ class Preview extends Backend
 			$this->Template->url = $this->Environment->base;
 		}
 
+		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
 	}
 }

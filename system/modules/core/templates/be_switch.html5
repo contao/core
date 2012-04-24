@@ -12,6 +12,7 @@
   echo $objCombiner->getCombinedFile();
 ?>" media="all">
 <!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
+<?php echo $this->stylesheets; ?>
 <script><?php echo $this->getLocaleString(); ?></script>
 <script src="<?php
   $objCombiner = new Combiner();
@@ -22,6 +23,9 @@
   $objCombiner->add('system/modules/core/html/contao.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>
+<script><?php echo $this->getDateString(); ?></script>
+<?php echo $this->javascripts; ?>
+<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5-<?php echo HTML5SHIM; ?>.js"></script><![endif]-->
 </head>
 <body class="__ua__">
 

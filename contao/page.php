@@ -123,6 +123,7 @@ class PagePicker extends Backend
 		$this->Template->action = ampersand($this->Environment->request);
 		$this->Template->value = $this->Session->get('page_selector_search');
 
+		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
 	}
 }

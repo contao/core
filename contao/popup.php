@@ -176,6 +176,7 @@ class Popup extends Backend
 		$this->Template->download = specialchars($GLOBALS['TL_LANG']['MSC']['fileDownload']);
 		$this->Template->downloadTitle = specialchars($GLOBALS['TL_LANG']['MSC']['fileDownloadTitle']);
 
+		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
 	}
 }

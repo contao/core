@@ -175,6 +175,7 @@ class PreviewSwitch extends Backend
 		$this->Template->action = ampersand($this->Environment->request);
 		$this->Template->isAdmin = $this->User->isAdmin;
 
+		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
 	}
 }

@@ -113,6 +113,7 @@ class FileManager extends Backend
 		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
 		$this->Template->loadFonts = $GLOBALS['TL_CONFIG']['loadGoogleFonts'];
 
+		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
 	}
 }

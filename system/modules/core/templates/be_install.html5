@@ -16,6 +16,8 @@
 <script src="<?php echo TL_SCRIPT_URL; ?>plugins/mootools/mootao/Mootao.js"></script>
 <script src="<?php echo TL_SCRIPT_URL; ?>system/modules/core/html/contao.js"></script>
 <script src="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/hover.js"></script>
+<script><?php echo $this->getDateString(); ?></script>
+<?php echo $this->javascripts; ?>
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5-<?php echo HTML5SHIM; ?>.js"></script><![endif]-->
 </head>
 <body class="__ua__">
