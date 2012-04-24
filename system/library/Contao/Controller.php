@@ -2468,7 +2468,14 @@ abstract class Controller extends \System
 			// Correctly handle the "index" alias (see #3961)
 			if ($arrRow['alias'] == 'index')
 			{
-				$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage . (($strParams != '') ? $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'] : '');
+				if ($strParams == '')
+				{
+					$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage;
+				}
+				else
+				{
+					$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . substr($strLanguage, 0, -1) . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];
+				}
 			}
 			else
 			{
