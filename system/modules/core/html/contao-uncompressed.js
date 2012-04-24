@@ -1653,13 +1653,13 @@ window.addEvent('load', function() {
 	Backend.limitPreviewHeight();
 });
 
-// Re-apply the interactive help upon Ajax changes
+// Re-apply the interactive help and Chosen upon Ajax changes
 window.addEvent('ajax_change', function() {
-	// Chosen
 	if (Elements.chosen != undefined) {
-		$$('select.tl_chosen').chosen();
+		$$('select.tl_chosen').filter(function(el) {
+			return el.getStyle('display') != 'none';
+		}).chosen();
 	}
-
 	Backend.addInteractiveHelp();
 });
 
