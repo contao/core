@@ -168,7 +168,7 @@ else
 {
 	foreach ($objEnvironment->httpAcceptLanguage as $v)
 	{
-		if (is_dir(TL_ROOT . '/system/modules/backend/languages/' . $v))
+		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . $v))
 		{
 			$GLOBALS['TL_LANGUAGE'] = $v;
 			$_SESSION['TL_LANGUAGE'] = $v;
@@ -211,9 +211,9 @@ if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !defined('BYPASS_
 			{
 				include TL_ROOT . '/templates/be_referer.html5';
 			}
-			elseif (file_exists(TL_ROOT . '/system/modules/backend/templates/be_referer.html5'))
+			elseif (file_exists(TL_ROOT . '/system/modules/core/templates/be_referer.html5'))
 			{
-				include TL_ROOT . '/system/modules/backend/templates/be_referer.html5';
+				include TL_ROOT . '/system/modules/core/templates/be_referer.html5';
 			}
 			else
 			{

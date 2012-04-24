@@ -700,7 +700,7 @@ abstract class Controller extends \System
 		}
 
 		asort($arrAux);
-		$arrBackendLanguages = scan(TL_ROOT . '/system/modules/backend/languages');
+		$arrBackendLanguages = scan(TL_ROOT . '/system/modules/core/languages');
 
 		foreach (array_keys($arrAux) as $strKey)
 		{
@@ -1177,7 +1177,7 @@ abstract class Controller extends \System
 		$this->loadLanguageFile('languages');
 
 		$return = array();
-		$langs = scan(TL_ROOT . '/system/modules/backend/languages');
+		$langs = scan(TL_ROOT . '/system/modules/core/languages');
 		array_unshift($langs, $GLOBALS['TL_LANGUAGE']);
 
 		foreach ($langs as $lang)

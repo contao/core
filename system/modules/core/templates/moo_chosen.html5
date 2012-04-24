@@ -1,0 +1,23 @@
+<?php
+
+// CSS files
+$objCombiner = new Combiner();
+$objCombiner->add('plugins/mootools/chosen/chosen.css');
+$objCombiner->add('plugins/mootools/stylect/css/stylect.css');
+$GLOBALS['TL_CSS'][] = $objCombiner->getCombinedFile();
+
+// JavaScript files
+$objCombiner = new Combiner();
+$objCombiner->add('plugins/mootools/chosen/chosen.js');
+$objCombiner->add('plugins/mootools/stylect/js/stylect.js');
+
+?>
+
+<script src="<?php echo $objCombiner->getCombinedFile(); ?>"></script>
+<script>
+(function($) {
+  window.addEvent('domready', function() {
+    $$('select.tl_chosen').chosen();
+  });
+})(document.id);
+</script>

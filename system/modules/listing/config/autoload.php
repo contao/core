@@ -33,7 +33,8 @@
  */
 ClassLoader::addClasses(array
 (
-	'Contao\\ModuleListing' => 'system/modules/listing/ModuleListing.php',
+	// Modules
+	'Contao\\ModuleListing' => 'system/modules/listing/modules/ModuleListing.php',
 ));
 
 

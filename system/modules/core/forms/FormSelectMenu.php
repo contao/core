@@ -1,0 +1,249 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * Copyright (C) 2005-2012 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 3 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
+ *
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Frontend
+ * @license    LGPL
+ */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
+ * Class FormSelectMenu
+ *
+ * Form field "select menu".
+ * @copyright  Leo Feyer 2005-2012
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Controller
+ */
+class FormSelectMenu extends \Widget
+{
+
+	/**
+	 * Submit user input
+	 * @var boolean
+	 */
+	protected $blnSubmitInput = true;
+
+	/**
+	 * Template
+	 * @var string
+	 */
+	protected $strTemplate = 'form_widget';
+
+	/**
+	 * Options
+	 * @var array
+	 */
+	protected $arrOptions = array();
+
+
+	/**
+	 * Add specific attributes
+	 * @param string
+	 * @param mixed
+	 * @return void
+	 */
+	public function __set($strKey, $varValue)
+	{
+		switch ($strKey)
+		{
+			case 'mandatory':
+				if ($varValue)
+				{
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					unset($this->arrAttributes['required']);
+				}
+				parent::__set($strKey, $varValue);
+				break;
+
+			case 'mSize':
+				if ($this->multiple)
+				{
+					$this->arrAttributes['size'] = $varValue;
+				}
+				break;
+
+			case 'multiple':
+				if ($varValue != '')
+				{
+					$this->arrAttributes['multiple'] = 'multiple';
+				}
+				break;
+
+			case 'options':
+				$this->arrOptions = deserialize($varValue);
+				break;
+
+			case 'rgxp':
+				// Ignore
+				break;
+
+			default:
+				parent::__set($strKey, $varValue);
+				break;
+		}
+	}
+
+
+	/**
+	 * Check options if the field is mandatory
+	 * @return void
+	 */
+	public function validate()
+	{
+		$mandatory = $this->mandatory;
+		$options = deserialize($this->getPost($this->strName));
+
+		// Check if there is at least one value
+		if ($mandatory && is_array($options))
+		{
+			foreach ($options as $option)
+			{
+				if (strlen($option))
+				{
+					$this->mandatory = false;
+					break;
+				}
+			}
+		}
+
+		$varInput = $this->validator($options);
+
+		// Add class "error"
+		if ($this->hasErrors())
+		{
+			$this->class = 'error';
+		}
+		else
+		{
+			$this->varValue = $varInput;
+		}
+
+		// Reset the property
+		if ($mandatory)
+		{
+			$this->mandatory = true;
+		}
+	}
+
+
+	/**
+	 * Return a parameter
+	 * @param string
+	 * @return mixed
+	 */
+	public function __get($strKey)
+	{
+		switch ($strKey)
+		{
+			case 'options':
+				return $this->arrOptions;
+				break;
+
+			default:
+				return parent::__get($strKey);
+				break;
+		}
+	}
+
+
+	/**
+	 * Generate the widget and return it as string
+	 * @return string
+	 */
+	public function generate()
+	{
+		$strOptions = '';
+		$strClass = 'select';
+		$blnHasGroups = false;
+
+		if ($this->multiple)
+		{
+			$this->strName .= '[]';
+			$strClass = 'multiselect';
+		}
+
+		// Make sure there are no multiple options in single mode
+		elseif (is_array($this->varValue))
+		{
+			$this->varValue = $this->varValue[0];
+		}
+
+		// Add empty option (XHTML) if there are none
+		if (empty($this->arrOptions))
+		{
+			$this->arrOptions = array(array('value'=>'', 'label'=>'-'));
+		}
+
+		foreach ($this->arrOptions as $arrOption)
+		{
+			if ($arrOption['group'])
+			{
+				if ($blnHasGroups)
+				{
+					$strOptions .= '</optgroup>';
+				}
+
+				$strOptions .= sprintf('<optgroup label="%s">',
+										specialchars($arrOption['label']));
+
+				$blnHasGroups = true;
+				continue;
+			}
+
+			$strOptions .= sprintf('<option value="%s"%s>%s</option>',
+									$arrOption['value'],
+									$this->isSelected($arrOption),
+									$arrOption['label']);
+		}
+
+		if ($blnHasGroups)
+		{
+			$strOptions .= '</optgroup>';
+		}
+
+		// Chosen
+		if ($this->chosen)
+		{
+			$strClass .= ' tl_chosen';
+		}
+
+		return sprintf('<select name="%s" id="ctrl_%s" class="%s%s"%s>%s</select>',
+						$this->strName,
+						$this->strId,
+						$strClass,
+						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						$this->getAttributes(),
+						$strOptions) . $this->addSubmit();
+	}
+}

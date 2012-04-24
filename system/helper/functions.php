@@ -148,9 +148,9 @@ function show_help_message()
 	{
 		include TL_ROOT . '/templates/be_error.html5';
 	}
-	elseif (file_exists(TL_ROOT . '/system/modules/backend/templates/be_error.html5'))
+	elseif (file_exists(TL_ROOT . '/system/modules/core/templates/be_error.html5'))
 	{
-		include TL_ROOT . '/system/modules/backend/templates/be_error.html5';
+		include TL_ROOT . '/system/modules/core/templates/be_error.html5';
 	}
 	else
 	{

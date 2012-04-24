@@ -93,82 +93,46 @@ class Database_Sybase_Result extends Contao\Database_Sybase_Result {}
 class Database_Sybase_Statement extends Contao\Database_Sybase_Statement {}
 class Database_Sybase extends Contao\Database_Sybase {}
 
-// backend
+// calendar
+class Calendar extends Contao\Calendar {}
+abstract class Events extends Contao\Events {}
+class CalendarEventsModel extends Contao\CalendarEventsModel {}
+class CalendarFeedModel extends Contao\CalendarFeedModel {}
+class CalendarModel extends Contao\CalendarModel {}
+class ModuleCalendar extends Contao\ModuleCalendar {}
+class ModuleEventMenu extends Contao\ModuleEventMenu {}
+class ModuleEventReader extends Contao\ModuleEventReader {}
+class ModuleEventlist extends Contao\ModuleEventlist {}
+
+// comments
+class Comments extends Contao\Comments {}
+class ContentComments extends Contao\ContentComments {}
+class CommentsModel extends Contao\CommentsModel {}
+class ModuleComments extends Contao\ModuleComments {}
+
+// core
 class Ajax extends Contao\Ajax {}
 class Automator extends Contao\Automator {}
 class Backend extends Contao\Backend {}
 abstract class BackendModule extends Contao\BackendModule {}
 class BackendTemplate extends Contao\BackendTemplate {}
 class BackendUser extends Contao\BackendUser {}
-class CheckBox extends Contao\CheckBox {}
-class CheckBoxWizard extends Contao\CheckBoxWizard {}
-class ChmodTable extends Contao\ChmodTable {}
 class DataContainer extends Contao\DataContainer {}
-class FileSelector extends Contao\FileSelector {}
-class FileTree extends Contao\FileTree {}
 class FileUpload extends Contao\FileUpload {}
-class ImageSize extends Contao\ImageSize {}
-class InputUnit extends Contao\InputUnit {}
-class KeyValueWizard extends Contao\KeyValueWizard {}
-class ListWizard extends Contao\ListWizard {}
+class Frontend extends Contao\Frontend {}
+class FrontendTemplate extends Contao\FrontendTemplate {}
+class FrontendUser extends Contao\FrontendUser {}
+abstract class Hybrid extends Contao\Hybrid {}
 class LiveUpdate extends Contao\LiveUpdate {}
 class Messages extends Contao\Messages {}
-class MetaWizard extends Contao\MetaWizard {}
-class ModuleMaintenance extends Contao\ModuleMaintenance {}
-class ModuleUser extends Contao\ModuleUser {}
-class ModuleWizard extends Contao\ModuleWizard {}
-class OptionWizard extends Contao\OptionWizard {}
-class PageSelector extends Contao\PageSelector {}
-class PageTree extends Contao\PageTree {}
-class Password extends Contao\Password {}
+class Pagination extends Contao\Pagination {}
 class PurgeData extends Contao\PurgeData {}
-class RadioButton extends Contao\RadioButton {}
-class RadioTable extends Contao\RadioTable {}
 class RebuildIndex extends Contao\RebuildIndex {}
-class SelectMenu extends Contao\SelectMenu {}
 class StyleSheets extends Contao\StyleSheets {}
-class TableWizard extends Contao\TableWizard {}
-class TextArea extends Contao\TextArea {}
-class TextField extends Contao\TextField {}
-class TextStore extends Contao\TextStore {}
 class Theme extends Contao\Theme {}
-class TimePeriod extends Contao\TimePeriod {}
-class TrblField extends Contao\TrblField {}
 class DC_File extends Contao\DC_File {}
 class DC_Folder extends Contao\DC_Folder {}
 class DC_Table extends Contao\DC_Table {}
-
-// calendar
-class Calendar extends Contao\Calendar {}
-abstract class Events extends Contao\Events {}
-class ModuleCalendar extends Contao\ModuleCalendar {}
-class ModuleEventMenu extends Contao\ModuleEventMenu {}
-class ModuleEventReader extends Contao\ModuleEventReader {}
-class ModuleEventlist extends Contao\ModuleEventlist {}
-class CalendarEventsModel extends Contao\CalendarEventsModel {}
-class CalendarFeedModel extends Contao\CalendarFeedModel {}
-class CalendarModel extends Contao\CalendarModel {}
-
-// comments
-class Comments extends Contao\Comments {}
-class ContentComments extends Contao\ContentComments {}
-class ModuleComments extends Contao\ModuleComments {}
-class CommentsModel extends Contao\CommentsModel {}
-
-// development
-class ModuleAutoload extends Contao\ModuleAutoload {}
-class ModuleExtension extends Contao\ModuleExtension {}
-class ModuleLabels extends Contao\ModuleLabels {}
-
-// faq
-class ModuleFaq extends Contao\ModuleFaq {}
-class ModuleFaqList extends Contao\ModuleFaqList {}
-class ModuleFaqPage extends Contao\ModuleFaqPage {}
-class ModuleFaqReader extends Contao\ModuleFaqReader {}
-class FaqCategoryModel extends Contao\FaqCategoryModel {}
-class FaqModel extends Contao\FaqModel {}
-
-// frontend
 class ContentAccordion extends Contao\ContentAccordion {}
 class ContentAlias extends Contao\ContentAlias {}
 class ContentArticle extends Contao\ContentArticle {}
@@ -202,38 +166,6 @@ class FormSelectMenu extends Contao\FormSelectMenu {}
 class FormSubmit extends Contao\FormSubmit {}
 class FormTextArea extends Contao\FormTextArea {}
 class FormTextField extends Contao\FormTextField {}
-class Frontend extends Contao\Frontend {}
-class FrontendTemplate extends Contao\FrontendTemplate {}
-class FrontendUser extends Contao\FrontendUser {}
-abstract class Hybrid extends Contao\Hybrid {}
-abstract class Module extends Contao\Module {}
-class ModuleArticle extends Contao\ModuleArticle {}
-class ModuleArticleList extends Contao\ModuleArticleList {}
-class ModuleArticlenav extends Contao\ModuleArticlenav {}
-class ModuleBooknav extends Contao\ModuleBooknav {}
-class ModuleBreadcrumb extends Contao\ModuleBreadcrumb {}
-class ModuleCloseAccount extends Contao\ModuleCloseAccount {}
-class ModuleCustomnav extends Contao\ModuleCustomnav {}
-class ModuleFlash extends Contao\ModuleFlash {}
-class ModuleHtml extends Contao\ModuleHtml {}
-class ModuleLogin extends Contao\ModuleLogin {}
-class ModuleLogout extends Contao\ModuleLogout {}
-class ModuleNavigation extends Contao\ModuleNavigation {}
-class ModulePersonalData extends Contao\ModulePersonalData {}
-class ModuleQuicklink extends Contao\ModuleQuicklink {}
-class ModuleQuicknav extends Contao\ModuleQuicknav {}
-class ModuleRandomImage extends Contao\ModuleRandomImage {}
-class ModuleRegistration extends Contao\ModuleRegistration {}
-class ModuleRssReader extends Contao\ModuleRssReader {}
-class ModuleSearch extends Contao\ModuleSearch {}
-class ModuleSitemap extends Contao\ModuleSitemap {}
-class PageError403 extends Contao\PageError403 {}
-class PageError404 extends Contao\PageError404 {}
-class PageForward extends Contao\PageForward {}
-class PageRedirect extends Contao\PageRedirect {}
-class PageRegular extends Contao\PageRegular {}
-class PageRoot extends Contao\PageRoot {}
-class Pagination extends Contao\Pagination {}
 class ArticleModel extends Contao\ArticleModel {}
 class ContentModel extends Contao\ContentModel {}
 class FilesModel extends Contao\FilesModel {}
@@ -249,27 +181,94 @@ class StyleModel extends Contao\StyleModel {}
 class StyleSheetModel extends Contao\StyleSheetModel {}
 class ThemeModel extends Contao\ThemeModel {}
 class UserModel extends Contao\UserModel {}
+abstract class Module extends Contao\Module {}
+class ModuleArticle extends Contao\ModuleArticle {}
+class ModuleArticleList extends Contao\ModuleArticleList {}
+class ModuleArticlenav extends Contao\ModuleArticlenav {}
+class ModuleBooknav extends Contao\ModuleBooknav {}
+class ModuleBreadcrumb extends Contao\ModuleBreadcrumb {}
+class ModuleCloseAccount extends Contao\ModuleCloseAccount {}
+class ModuleCustomnav extends Contao\ModuleCustomnav {}
+class ModuleFlash extends Contao\ModuleFlash {}
+class ModuleHtml extends Contao\ModuleHtml {}
+class ModuleLogin extends Contao\ModuleLogin {}
+class ModuleLogout extends Contao\ModuleLogout {}
+class ModuleMaintenance extends Contao\ModuleMaintenance {}
+class ModuleNavigation extends Contao\ModuleNavigation {}
+class ModulePassword extends Contao\ModulePassword {}
+class ModulePersonalData extends Contao\ModulePersonalData {}
+class ModuleQuicklink extends Contao\ModuleQuicklink {}
+class ModuleQuicknav extends Contao\ModuleQuicknav {}
+class ModuleRandomImage extends Contao\ModuleRandomImage {}
+class ModuleRegistration extends Contao\ModuleRegistration {}
+class ModuleRssReader extends Contao\ModuleRssReader {}
+class ModuleSearch extends Contao\ModuleSearch {}
+class ModuleSitemap extends Contao\ModuleSitemap {}
+class ModuleUser extends Contao\ModuleUser {}
+class ModuleWizard extends Contao\ModuleWizard {}
+class PageError403 extends Contao\PageError403 {}
+class PageError404 extends Contao\PageError404 {}
+class PageForward extends Contao\PageForward {}
+class PageRedirect extends Contao\PageRedirect {}
+class PageRegular extends Contao\PageRegular {}
+class PageRoot extends Contao\PageRoot {}
+class CheckBox extends Contao\CheckBox {}
+class CheckBoxWizard extends Contao\CheckBoxWizard {}
+class ChmodTable extends Contao\ChmodTable {}
+class FileSelector extends Contao\FileSelector {}
+class FileTree extends Contao\FileTree {}
+class ImageSize extends Contao\ImageSize {}
+class InputUnit extends Contao\InputUnit {}
+class KeyValueWizard extends Contao\KeyValueWizard {}
+class ListWizard extends Contao\ListWizard {}
+class MetaWizard extends Contao\MetaWizard {}
+class OptionWizard extends Contao\OptionWizard {}
+class PageSelector extends Contao\PageSelector {}
+class PageTree extends Contao\PageTree {}
+class Password extends Contao\Password {}
+class RadioButton extends Contao\RadioButton {}
+class RadioTable extends Contao\RadioTable {}
+class SelectMenu extends Contao\SelectMenu {}
+class TableWizard extends Contao\TableWizard {}
+class TextArea extends Contao\TextArea {}
+class TextField extends Contao\TextField {}
+class TextStore extends Contao\TextStore {}
+class TimePeriod extends Contao\TimePeriod {}
+class TrblField extends Contao\TrblField {}
+
+// development
+class ModuleAutoload extends Contao\ModuleAutoload {}
+class ModuleExtension extends Contao\ModuleExtension {}
+class ModuleLabels extends Contao\ModuleLabels {}
+
+// faq
+class FaqCategoryModel extends Contao\FaqCategoryModel {}
+class FaqModel extends Contao\FaqModel {}
+class ModuleFaq extends Contao\ModuleFaq {}
+class ModuleFaqList extends Contao\ModuleFaqList {}
+class ModuleFaqPage extends Contao\ModuleFaqPage {}
+class ModuleFaqReader extends Contao\ModuleFaqReader {}
 
 // listing
 class ModuleListing extends Contao\ModuleListing {}
 
 // news
+class News extends Contao\News {}
+class NewsArchiveModel extends Contao\NewsArchiveModel {}
+class NewsFeedModel extends Contao\NewsFeedModel {}
+class NewsModel extends Contao\NewsModel {}
 abstract class ModuleNews extends Contao\ModuleNews {}
 class ModuleNewsArchive extends Contao\ModuleNewsArchive {}
 class ModuleNewsList extends Contao\ModuleNewsList {}
 class ModuleNewsMenu extends Contao\ModuleNewsMenu {}
 class ModuleNewsReader extends Contao\ModuleNewsReader {}
-class News extends Contao\News {}
-class NewsArchiveModel extends Contao\NewsArchiveModel {}
-class NewsFeedModel extends Contao\NewsFeedModel {}
-class NewsModel extends Contao\NewsModel {}
 
 // newsletter
-class ModuleNewsletterList extends Contao\ModuleNewsletterList {}
-class ModuleNewsletterReader extends Contao\ModuleNewsletterReader {}
-class ModuleSubscribe extends Contao\ModuleSubscribe {}
-class ModuleUnsubscribe extends Contao\ModuleUnsubscribe {}
 class Newsletter extends Contao\Newsletter {}
 class NewsletterChannelModel extends Contao\NewsletterChannelModel {}
 class NewsletterModel extends Contao\NewsletterModel {}
 class NewsletterRecipientsModel extends Contao\NewsletterRecipientsModel {}
+class ModuleNewsletterList extends Contao\ModuleNewsletterList {}
+class ModuleNewsletterReader extends Contao\ModuleNewsletterReader {}
+class ModuleSubscribe extends Contao\ModuleSubscribe {}
+class ModuleUnsubscribe extends Contao\ModuleUnsubscribe {}

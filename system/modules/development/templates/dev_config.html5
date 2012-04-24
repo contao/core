@@ -51,7 +51,7 @@
  * );
  * 
  * Not all of the keys mentioned above (like "tables", "key", "callback" etc.)
- * have to be set. Take a look at the system/modules/backend/config/config.php
+ * have to be set. Take a look at the system/modules/core/config/config.php
  * file to see how back end modules are configured.
  */
 
@@ -174,7 +174,7 @@
  *    'RebuildSearchIndex'
  * );
  * 
- * Take a look at the system/modules/backend/PurgeData.php file to see how
+ * Take a look at the system/modules/core/PurgeData.php file to see how
  * maintenance modules are set up. The class "ClearCache" has to be stored in a
  * file named "ClearCache.php" in your module folder.
  */

@@ -53,3 +53,33 @@ $GLOBALS['TL_LANG']['MOD']['settings']    = array('Settings', 'Check and optimiz
 $GLOBALS['TL_LANG']['MOD']['maintenance'] = array('Maintenance', 'Maintain or update Contao');
 $GLOBALS['TL_LANG']['MOD']['undo']        = array('Restore', 'Restore deleted records');
 $GLOBALS['TL_LANG']['MOD']['login']       = array('Personal data', 'Change your personal data or set a new password');
+
+
+/**
+ * Front end modules
+ */
+$GLOBALS['TL_LANG']['FMD']['navigationMenu'] = 'Navigation';
+$GLOBALS['TL_LANG']['FMD']['navigation']     = array('Navigation menu', 'Generates a navigation menu from the site structure');
+$GLOBALS['TL_LANG']['FMD']['customnav']      = array('Custom navigation', 'Generates a custom navigation menu');
+$GLOBALS['TL_LANG']['FMD']['breadcrumb']     = array('Breadcrumb navigation', 'Generates a breadcrumb navigation menu');
+$GLOBALS['TL_LANG']['FMD']['quicknav']       = array('Quick navigation', 'Generates a drop-down menu from the site structure');
+$GLOBALS['TL_LANG']['FMD']['quicklink']      = array('Quick link', 'Generates a custom drop-down menu');
+$GLOBALS['TL_LANG']['FMD']['booknav']        = array('Book navigation', 'Generates a book navigation menu');
+$GLOBALS['TL_LANG']['FMD']['articlenav']     = array('Article navigation', 'Generates a pagination menu to navigate articles');
+$GLOBALS['TL_LANG']['FMD']['sitemap']        = array('Sitemap', 'Generates a list of all pages in the site structure');
+$GLOBALS['TL_LANG']['FMD']['user']           = 'User';
+$GLOBALS['TL_LANG']['FMD']['login']          = array('Login form', 'Generates a login form');
+$GLOBALS['TL_LANG']['FMD']['logout']         = array('Automatic logout', 'Automatically logs out a user');
+$GLOBALS['TL_LANG']['FMD']['personalData']   = array('Personal data', 'Generates a form to edit a user\'s personal data');
+$GLOBALS['TL_LANG']['FMD']['registration']   = array('Registration', 'Generates a user registration form');
+$GLOBALS['TL_LANG']['FMD']['lostPassword']   = array('Lost password', 'Generates a form to request a new password');
+$GLOBALS['TL_LANG']['FMD']['closeAccount']   = array('Close account', 'Generates a form to delete a member account');
+$GLOBALS['TL_LANG']['FMD']['application']    = 'Applications';
+$GLOBALS['TL_LANG']['FMD']['form']           = array('Form', 'Adds a form to the page');
+$GLOBALS['TL_LANG']['FMD']['search']         = array('Search engine', 'Adds a search form to the page');
+$GLOBALS['TL_LANG']['FMD']['articleList']    = array('Article list', 'Generates a list of articles of a column');
+$GLOBALS['TL_LANG']['FMD']['miscellaneous']  = 'Miscellaneous';
+$GLOBALS['TL_LANG']['FMD']['flash']          = array('Flash movie', 'Embeds a Flash movie into the page');
+$GLOBALS['TL_LANG']['FMD']['randomImage']    = array('Random image', 'Adds a random image to the page');
+$GLOBALS['TL_LANG']['FMD']['html']           = array('Custom HTML', 'Allows you to add custom HTML code');
+$GLOBALS['TL_LANG']['FMD']['rss_reader']     = array('RSS reader', 'Adds an RSS feed to the page');

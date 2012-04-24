@@ -265,7 +265,7 @@ class Config
 
 
 	/**
-	 * Return all active modules (starting with "backend" and "frontend") as array
+	 * Return all active modules (starting with "core") as array
 	 * @param boolean
 	 * @return array
 	 */
@@ -276,12 +276,12 @@ class Config
 			return (array) $this->arrCache['activeModules']; // (array) = PHP 5.1.2 fix
 		}
 
-		$arrActiveModules = array('backend', 'frontend');
+		$arrActiveModules = array('core');
 
 		// Load only core modules in safe mode
 		if ($GLOBALS['TL_CONFIG']['coreOnlyMode'])
 		{
-			$arrAllModules = array('backend', 'calendar', 'comments', 'faq', 'frontend', 'listing', 'news', 'newsletter', 'registration', 'rep_base', 'rep_client', 'rss_reader', 'tasks', 'tpl_editor');
+			$arrAllModules = array('core', 'calendar', 'comments', 'faq', 'listing', 'news', 'newsletter', 'rep_base', 'rep_client');
 		}
 		else
 		{
@@ -295,7 +295,7 @@ class Config
 				continue;
 			}
 
-			if ($strModule == 'backend' || $strModule == 'frontend' || !is_dir(TL_ROOT . '/system/modules/' . $strModule))
+			if ($strModule == 'core' || !is_dir(TL_ROOT . '/system/modules/' . $strModule))
 			{
 				continue;
 			}

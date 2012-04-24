@@ -1,0 +1,56 @@
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function($) {
+  window.addEvent('domready', function() {
+    new Accordion($$('div.toggler'), $$('div.accordion'), {
+      opacity: false,
+      alwaysHide: true,
+      onActive: function(tog, el) {
+        el.setProperty('aria-hidden', 'false');
+        tog.addClass('active');
+        tog.getNext('div').fade('in');
+        tog.setProperty('aria-expanded', 'true');
+        return false;
+      },
+      onBackground: function(tog, el) {
+        el.setProperty('aria-hidden', 'true');
+        tog.removeClass('active');
+        tog.getNext('div').fade('out');
+        tog.setProperty('aria-expanded', 'false');
+        return false;
+      }
+    });
+    $$('div.toggler').each(function(el) {
+      el.setProperty('role', 'tab');
+      el.setProperty('tabindex', 0);
+      el.addEvents({
+        'keypress': function(event) {
+          if (event.code == 13) {
+            this.fireEvent('click');
+          }
+        },
+        'focus': function() {
+          this.addClass('hover');
+        },
+        'blur': function() {
+          this.removeClass('hover');
+        },
+        'mouseenter': function() {
+          this.addClass('hover');
+        },
+        'mouseleave': function() {
+          this.removeClass('hover');
+        }
+      });
+    });
+    $$('div.ce_accordion').each(function(el) {
+      el.setProperty('role', 'tablist');
+    });
+    $$('div.accordion').each(function(el) {
+      el.setProperty('role', 'tabpanel');
+    });
+  });
+})(document.id);
+/* ]]> */
+</script>

@@ -33,6 +33,7 @@
  */
 ClassLoader::addClasses(array
 (
+	// Rep_client
 	'RepositoryBackendModule' => 'system/modules/rep_client/RepositoryBackendModule.php',
 	'RepositoryBackendTheme'  => 'system/modules/rep_client/RepositoryBackendTheme.php',
 	'RepositoryCatalog'       => 'system/modules/rep_client/RepositoryCatalog.php',

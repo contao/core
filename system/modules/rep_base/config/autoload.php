@@ -33,6 +33,7 @@
  */
 ClassLoader::addClasses(array
 (
+	// Rep_base
 	'Repository'         => 'system/modules/rep_base/Repository.php',
 	'RepositorySettings' => 'system/modules/rep_base/RepositorySettings.php',
 ));

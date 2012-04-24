@@ -118,7 +118,89 @@ $GLOBALS['BE_MOD'] = array
 
 
 /**
- * Form fields
+ * Front end modules
+ */
+$GLOBALS['FE_MOD'] = array
+(
+	'navigationMenu' => array
+	(
+		'navigation'     => 'ModuleNavigation',
+		'customnav'      => 'ModuleCustomnav',
+		'breadcrumb'     => 'ModuleBreadcrumb',
+		'quicknav'       => 'ModuleQuicknav',
+		'quicklink'      => 'ModuleQuicklink',
+		'booknav'        => 'ModuleBooknav',
+		'articlenav'     => 'ModuleArticlenav',
+		'sitemap'        => 'ModuleSitemap'
+	),
+	'user' => array
+	(
+		'login'          => 'ModuleLogin',
+		'logout'         => 'ModuleLogout',
+		'personalData'   => 'ModulePersonalData',
+		'registration'   => 'ModuleRegistration',
+		'lostPassword'   => 'ModulePassword',
+		'closeAccount'   => 'ModuleCloseAccount'
+	),
+	'application' => array
+	(
+		'form'           => 'Form',
+		'search'         => 'ModuleSearch'
+	),
+	'miscellaneous' => array
+	(
+		'flash'          => 'ModuleFlash',
+		'articleList'    => 'ModuleArticleList',
+		'randomImage'    => 'ModuleRandomImage',
+		'html'           => 'ModuleHtml',
+		'rss_reader'     => 'ModuleRssReader'
+	)
+);
+
+
+/**
+ * Content elements
+ */
+$GLOBALS['TL_CTE'] = array
+(
+	'texts' => array
+	(
+		'headline'  => 'ContentHeadline',
+		'text'      => 'ContentText',
+		'html'      => 'ContentHtml',
+		'list'      => 'ContentList',
+		'table'     => 'ContentTable',
+		'accordion' => 'ContentAccordion',
+		'code'      => 'ContentCode'
+	),
+	'links' => array
+	(
+		'hyperlink' => 'ContentHyperlink',
+		'toplink'   => 'ContentToplink'
+	),
+	'images' => array
+	(
+		'image'     => 'ContentImage',
+		'gallery'   => 'ContentGallery'
+	),
+	'files' => array
+	(
+		'download'  => 'ContentDownload',
+		'downloads' => 'ContentDownloads'
+	),
+	'includes' => array
+	(
+		'article'   => 'ContentArticle',
+		'alias'     => 'ContentAlias',
+		'form'      => 'Form',
+		'module'    => 'ContentModule',
+		'teaser'    => 'ContentTeaser'
+	)
+);
+
+
+/**
+ * Back end form fields
  */
 $GLOBALS['BE_FFL'] = array
 (
@@ -146,6 +228,28 @@ $GLOBALS['BE_FFL'] = array
 	'imageSize'      => 'ImageSize',
 	'timePeriod'     => 'TimePeriod',
 	'metaWizard'     => 'MetaWizard'
+);
+
+
+/**
+ * Front end form fields
+ */
+$GLOBALS['TL_FFL'] = array
+(
+	'headline'    => 'FormHeadline',
+	'explanation' => 'FormExplanation',
+	'html'        => 'FormHtml',
+	'fieldset'    => 'FormFieldset',
+	'text'        => 'FormTextField',
+	'password'    => 'FormPassword',
+	'textarea'    => 'FormTextArea',
+	'select'      => 'FormSelectMenu',
+	'radio'       => 'FormRadioButton',
+	'checkbox'    => 'FormCheckBox',
+	'upload'      => 'FormFileUpload',
+	'hidden'      => 'FormHidden',
+	'captcha'     => 'FormCaptcha',
+	'submit'      => 'FormSubmit'
 );
 
 

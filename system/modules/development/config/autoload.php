@@ -33,9 +33,10 @@
  */
 ClassLoader::addClasses(array
 (
-	'Contao\\ModuleAutoload'  => 'system/modules/development/ModuleAutoload.php',
-	'Contao\\ModuleExtension' => 'system/modules/development/ModuleExtension.php',
-	'Contao\\ModuleLabels'    => 'system/modules/development/ModuleLabels.php',
+	// Modules
+	'Contao\\ModuleAutoload'  => 'system/modules/development/modules/ModuleAutoload.php',
+	'Contao\\ModuleExtension' => 'system/modules/development/modules/ModuleExtension.php',
+	'Contao\\ModuleLabels'    => 'system/modules/development/modules/ModuleLabels.php',
 ));
 
 

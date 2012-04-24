@@ -3,8 +3,8 @@ Disallow: /contao/
 Disallow: /plugins/
 Disallow: /system/
 Disallow: /templates/
+Disallow: /share/index.php
 Disallow: /flash.php
-Disallow: /share.php
 Disallow: /README.md
 Allow: /assets/
 Allow: /plugins/*.js
