@@ -281,7 +281,7 @@ class Config
 		// Load only core modules in safe mode
 		if ($GLOBALS['TL_CONFIG']['coreOnlyMode'])
 		{
-			$arrAllModules = array('core', 'calendar', 'comments', 'faq', 'listing', 'news', 'newsletter', 'rep_base', 'rep_client');
+			$arrAllModules = array('core', 'calendar', 'comments', 'faq', 'listing', 'news', 'newsletter', 'repository');
 		}
 		else
 		{

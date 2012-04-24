@@ -260,7 +260,7 @@ class tl_templates extends Backend
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
 			// Continue if there is no templates folder
-			if ($strModule == 'rep_client' || !is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
+			if ($strModule == 'repository' || !is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
 			{
 				continue;
 			}

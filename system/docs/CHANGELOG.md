@@ -5,6 +5,9 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Merged the "rep_base" and "rep_client" modules into one "repository" module.
+
+### Changed
 Merged the "backend" and "frontend" modules into one "core" module and added
 support for subfolders to structure the different types of classes: "classes",
 "drivers", "elements", "forms", "models", "modules", "pages" and "widgets".

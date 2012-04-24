@@ -42,7 +42,7 @@
  */
 class RepositoryBackendTheme
 {
-	const themepath = 'system/modules/rep_client/themes/';
+	const themepath = 'system/modules/repository/themes/';
 
 	/**
 	 * Get a theme file.
