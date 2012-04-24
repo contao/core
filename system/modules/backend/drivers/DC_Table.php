@@ -4247,15 +4247,33 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		{
 			return '';
 		}
+		
+		// prepare the panel array
+		$arrPanels = $this->preparePanelArray();
 
-		$filter = $this->filterMenu();
-		$search = $this->searchMenu();
-		$limit = $this->limitMenu();
-		$sort = $this->sortMenu();
-
-		if ($filter == '' && $search == '' && $limit == '' && $sort == '')
+		// prepare the default panels
+		foreach ($arrPanels as $k => $arrSubPanels)
 		{
-			return '';
+			foreach ($arrSubPanels as $kk => $strSubPanelKey)
+			{
+				switch ($strSubPanelKey)
+				{
+					case 'filter':
+					case 'search':
+					case 'limit':
+					case 'sort':
+						$arrPanels[$k][$kk] = $this->{$strSubPanelKey . 'Menu'}();
+					
+					// call the panel_callback
+					default:
+						$arrCallback = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panel_callback'][$strSubPanelKey];
+						if (is_array($arrCallback))
+						{
+							$this->import($arrCallback[0]);
+							$arrPanels[$k][$kk] = $this->$arrCallback[0]->$arrCallback[1]($this);
+						}
+				}
+			}
 		}
 
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters')
@@ -4264,42 +4282,27 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		}
 
 		$return = '';
-		$panelLayout = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout'];
-		$arrPanels = trimsplit(';', $panelLayout);
 		$intLast = count($arrPanels) - 1;
 
 		for ($i=0; $i<count($arrPanels); $i++)
 		{
-			$panels = '';
-			$submit = '';
-			$arrSubPanels = trimsplit(',', $arrPanels[$i]);
-
-			foreach ($arrSubPanels as $strSubPanel)
-			{
-				if ($$strSubPanel != '')
-				{
-					$panels = $$strSubPanel . $panels;
-				}
-			}
-
+			$return .= '<div class="tl_panel">';
+	
 			if ($i == $intLast)
 			{
-				$submit = '
-
+				$return .= '
 <div class="tl_submit_panel tl_subpanel">
 <input type="image" name="filter" id="filter" src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/reload.gif" class="tl_img_submit" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['applyTitle']) . '" alt="' . specialchars($GLOBALS['TL_LANG']['MSC']['apply']) . '">
 </div>';
 			}
-
-			if ($panels != '')
+			
+			foreach ($arrPanels[$i] as $strSubPanelHtml)
 			{
-				$return .= '
-<div class="tl_panel">'.$submit.$panels.'
-
-<div class="clear"></div>
-
-</div>';
+				$return .= $strSubPanelHtml;
 			}
+
+			
+			$return .= '<div class="clear"></div></div>';
 		}
 
 		$return = '
@@ -4313,6 +4316,41 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 ';
 
 		return $return;
+	}
+
+
+	/**
+	 * Prepare the panel array
+	 * @return array
+	 */
+	protected function preparePanelArray()
+	{
+		$arrReturn = array();
+		$arrPanels = trimsplit(';', $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout']);
+
+		foreach ($arrPanels as $intPanelKey => $strPanel)
+		{
+			// prevent empty panels
+			if ($strPanel == '')
+			{
+				continue;
+			}
+			
+			$arrSubPanels = trimsplit(',', $strPanel);
+			
+			foreach ($arrSubPanels as $intSubPanelKey => $strSubPanel)
+			{
+				// prevent empty subpanels
+				if ($strSubPanel == '')
+				{
+					continue;
+				}
+
+				$arrReturn[$intPanelKey][$intSubPanelKey] = $strSubPanel;
+			}
+		}
+		
+		return $arrReturn;
 	}
 
 
