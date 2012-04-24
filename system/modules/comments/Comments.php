@@ -69,7 +69,7 @@ class Comments extends \Frontend
 		if ($objConfig->perPage > 0)
 		{
 			// Get the total number of comments
-			$objTotal = \CommentsCollection::countPublishedBySourceAndParent($strSource, $intParent);
+			$objTotal = \CommentsModel::countPublishedBySourceAndParent($strSource, $intParent);
 			$total = $gtotal = $objTotal->count;
 
 			// Get the current page
@@ -102,11 +102,11 @@ class Comments extends \Frontend
 		// Get all published comments
 		if ($limit)
 		{
-			$objComments = \CommentsCollection::findPublishedBySourceAndParent($strSource, $intParent, $limit, $offset);
+			$objComments = \CommentsModel::findPublishedBySourceAndParent($strSource, $intParent, $limit, $offset);
 		}
 		else
 		{
-			$objComments = \CommentsCollection::findPublishedBySourceAndParent($strSource, $intParent);
+			$objComments = \CommentsModel::findPublishedBySourceAndParent($strSource, $intParent);
 		}
 
 		if ($objComments !== null && ($total = $objComments->count()) > 0)

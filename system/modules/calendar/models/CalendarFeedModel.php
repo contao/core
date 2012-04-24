@@ -60,6 +60,23 @@ class CalendarFeedModel extends \Model
 	public static function findByCalendar($intId)
 	{
 		$t = static::$strTable;
-		return static::findBy(array("$t.calendars LIKE '%\"" . intval($intId) . "\"%'"), null);
+		return static::findOneBy(array("$t.calendars LIKE '%\"" . intval($intId) . "\"%'"), null);
+	}
+
+
+	/**
+	 * Find calendar feeds by their IDs
+	 * @param array
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findByIds($arrIds)
+	{
+		if (!is_array($arrIds) || empty($arrIds))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null);
 	}
 }

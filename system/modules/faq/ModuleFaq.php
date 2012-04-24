@@ -64,7 +64,7 @@ class ModuleFaq extends \Frontend
 		$arrProcessed = array();
 
 		// Get all categories
-		$objFaq = \FaqCategoryCollection::findAll();
+		$objFaq = \FaqCategoryModel::findAll();
 
 		// Walk through each category
 		if ($objFaq !== null)
@@ -100,7 +100,7 @@ class ModuleFaq extends \Frontend
 				$strUrl = $arrProcessed[$objFaq->jumpTo];
 
 				// Get the items
-				$objItems = \FaqCollection::findByPid($objFaq->id, array('order'=>'sorting'));
+				$objItems = \FaqModel::findByPid($objFaq->id, array('order'=>'sorting'));
 
 				if ($objItems !== null)
 				{

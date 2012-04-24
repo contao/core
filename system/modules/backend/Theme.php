@@ -62,7 +62,7 @@ class Theme extends \Backend
 			}
 
 			$arrFiles = array();
-			$objFiles = \FilesCollection::findMultipleByIds(trimsplit(',', $source));
+			$objFiles = \FilesModel::findMultipleByIds(trimsplit(',', $source));
 
 			// Skip invalid entries
 			if ($objFiles !== null)
@@ -735,7 +735,7 @@ class Theme extends \Backend
 
 		if (is_array($arrFolders) && !empty($arrFolders))
 		{
-			$objFolders = \FilesCollection::findMultipleByIds($arrFolders);
+			$objFolders = \FilesModel::findMultipleByIds($arrFolders);
 
 			if ($objFolders !== null)
 			{

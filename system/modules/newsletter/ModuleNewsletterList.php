@@ -93,7 +93,7 @@ class ModuleNewsletterList extends \Module
 		$arrJumpTo = array();
 		$arrNewsletter = array();
 
-		$objNewsletter = \NewsletterCollection::findSentByPids($this->nl_channels);
+		$objNewsletter = \NewsletterModel::findSentByPids($this->nl_channels);
 
 		if ($objNewsletter !== null)
 		{

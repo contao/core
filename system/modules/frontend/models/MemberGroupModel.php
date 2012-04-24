@@ -68,7 +68,7 @@ class MemberGroupModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.disable=''";
 		}
 
-		return static::findBy($arrColumns, $intId);
+		return static::findOneBy($arrColumns, $intId);
 	}
 
 
@@ -98,5 +98,19 @@ class MemberGroupModel extends \Model
 		}
 
 		return new static($objResult);
+	}
+
+
+	/**
+	 * Find all active groups
+	 * @param string
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findAllActive()
+	{
+		$time = time();
+		$t = static::$strTable;
+
+		return static::findBy(array("$t.disable='' AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time)"), null);
 	}
 }

@@ -89,7 +89,7 @@ class ModuleBreadcrumb extends \Module
 		$items = array();
 
 		// Get all pages up to the root page
-		$objPages = \PageCollection::findParentsById($objPage->pid);
+		$objPages = \PageModel::findParentsById($objPage->pid);
 
 		if ($objPages !== null)
 		{

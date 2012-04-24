@@ -106,7 +106,7 @@ class ModuleArticleList extends \Module
 		}
 
 		// Get published articles
-		$objArticles = \ArticleCollection::findPublishedByPidAndColumn($id, $this->inColumn);
+		$objArticles = \ArticleModel::findPublishedByPidAndColumn($id, $this->inColumn);
 
 		if ($objArticles === null)
 		{

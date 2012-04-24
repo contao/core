@@ -74,6 +74,23 @@ class FaqModel extends \Model
 			$arrColumns[] = "$t.published=1";
 		}
 
-		return static::findBy($arrColumns, array($intId, $varAlias));
+		return static::findOneBy($arrColumns, array($intId, $varAlias));
+	}
+
+
+	/**
+	 * Find all published FAQs by their parent IDs
+	 * @param array
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findPublishedByPids($arrPids)
+	{
+		if (!is_array($arrPids) || empty($arrPids))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		return static::findBy(array("$t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")"), null, array('order'=>"$t.pid, $t.sorting"));
 	}
 }

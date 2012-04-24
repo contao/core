@@ -357,6 +357,11 @@ EOT
 				// library/Contao
 				foreach (scan(TL_ROOT . '/system/library/Contao') as $strFile)
 				{
+					if (strncmp($strFile, '.', 1) === 0)
+					{
+						continue;
+					}
+
 					if (is_file(TL_ROOT . '/system/library/Contao/' . $strFile))
 					{
 						$arrLibrary[] = basename($strFile, '.php');
@@ -376,6 +381,11 @@ EOT
 				// library/Contao/Database
 				foreach (scan(TL_ROOT . '/system/library/Contao/Database') as $strFile)
 				{
+					if (strncmp($strFile, '.', 1) === 0)
+					{
+						continue;
+					}
+
 					if (is_file(TL_ROOT . '/system/library/Contao/Database/' . $strFile))
 					{
 						$arrLibrary[] = 'Database_' . basename($strFile, '.php');

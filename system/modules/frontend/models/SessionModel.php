@@ -61,6 +61,6 @@ class SessionModel extends \Model
 	public static function findByHashAndName($strHash, $strName)
 	{
 		$t = static::$strTable;
-		return static::findBy(array("$t.hash=?", "$t.name=?"), array($strHash, $strName));
+		return static::findOneBy(array("$t.hash=?", "$t.name=?"), array($strHash, $strName));
 	}
 }

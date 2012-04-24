@@ -103,7 +103,7 @@ class Index extends Frontend
 		}
 
 		// Get the current page object(s)
-		$objPage = \PageCollection::findPublishedByIdOrAlias($pageId);
+		$objPage = \PageModel::findPublishedByIdOrAlias($pageId);
 
 		// Check the URL and language of each page if there are multiple results
 		if ($objPage !== null && $objPage->count() > 1)

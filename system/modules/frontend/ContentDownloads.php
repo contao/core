@@ -92,7 +92,7 @@ class ContentDownloads extends \ContentElement
 		}
 
 		// Get the file entries from the database
-		$this->objFiles = \FilesCollection::findMultipleByIds($this->multiSRC);
+		$this->objFiles = \FilesModel::findMultipleByIds($this->multiSRC);
 
 		if ($this->objFiles === null)
 		{
@@ -192,7 +192,7 @@ class ContentDownloads extends \ContentElement
 			// Folders
 			else
 			{
-				$objSubfiles = \FilesCollection::findByPid($objFiles->id);
+				$objSubfiles = \FilesModel::findByPid($objFiles->id);
 
 				if ($objSubfiles === null)
 				{

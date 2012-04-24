@@ -85,7 +85,7 @@ class News extends \Frontend
 	public function generateFeeds()
 	{
 		$this->removeOldFeeds();
-		$objFeed = \NewsFeedCollection::findAll();
+		$objFeed = \NewsFeedModel::findAll();
 
 		if ($objFeed !== null)
 		{
@@ -127,11 +127,11 @@ class News extends \Frontend
 		// Get the items
 		if ($arrFeed['maxItems'] > 0)
 		{
-			$objArticle = \NewsCollection::findPublishedByPids($arrArchives, null, $arrFeed['maxItems']);
+			$objArticle = \NewsModel::findPublishedByPids($arrArchives, null, $arrFeed['maxItems']);
 		}
 		else
 		{
-			$objArticle = \NewsCollection::findPublishedByPids($arrArchives);
+			$objArticle = \NewsModel::findPublishedByPids($arrArchives);
 		}
 
 		// Parse the items
@@ -216,7 +216,7 @@ class News extends \Frontend
 		$arrProcessed = array();
 
 		// Get all news archives
-		$objArchive = \NewsArchiveCollection::findByProtected('');
+		$objArchive = \NewsArchiveModel::findByProtected('');
 
 		// Walk through each archive
 		if ($objArchive !== null)
@@ -252,7 +252,7 @@ class News extends \Frontend
 				$strUrl = $arrProcessed[$objArchive->jumpTo];
 
 				// Get the items
-				$objArticle = \NewsCollection::findPublishedDefaultByPid($objArchive->id);
+				$objArticle = \NewsModel::findPublishedDefaultByPid($objArchive->id);
 
 				if ($objArticle !== null)
 				{
@@ -312,7 +312,7 @@ class News extends \Frontend
 	public function purgeOldFeeds()
 	{
 		$arrFeeds = array();
-		$objFeeds = \NewsFeedCollection::findAll();
+		$objFeeds = \NewsFeedModel::findAll();
 
 		if ($objFeeds !== null)
 		{

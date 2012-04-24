@@ -77,4 +77,190 @@ class NewsModel extends \Model
 
 		return static::findBy($arrColumns, array($intId, $varAlias));
 	}
+
+
+	/**
+	 * Find published news items by their parent ID
+	 * @param array
+	 * @param boolean
+	 * @param integer
+	 * @param integer
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findPublishedByPids($arrPids, $blnFeatured=null, $intLimit=0, $intOffset=0)
+	{
+		if (!is_array($arrPids) || empty($arrPids))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")");
+
+		if ($blnFeatured === true)
+		{
+			$arrColumns[] = "$t.featured=1";
+		}
+		elseif ($blnFeatured === false)
+		{
+			$arrColumns[] = "$t.featured=''";
+		}
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		$arrOptions = array
+		(
+			'order'  => "$t.date DESC",
+			'limit'  => $intLimit,
+			'offset' => $intOffset
+		);
+
+		return static::findBy($arrColumns, null, $arrOptions);
+	}
+
+
+	/**
+	 * Count published news items by their parent ID
+	 * @param array
+	 * @param boolean
+	 * @return \Contao\Model|null
+	 */
+	public static function countPublishedByPids($arrPids, $blnFeatured=null)
+	{
+		if (!is_array($arrPids) || empty($arrPids))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")");
+
+		if ($blnFeatured === true)
+		{
+			$arrColumns[] = "$t.featured=1";
+		}
+		elseif ($blnFeatured === false)
+		{
+			$arrColumns[] = "$t.featured=''";
+		}
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		return static::countBy($arrColumns, null);
+	}
+
+
+	/**
+	 * Find published news items with the default redirect target by their parent ID
+	 * @param integer
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findPublishedDefaultByPid($intPid)
+	{
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid=? AND $t.source='default'");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		return static::findBy($arrColumns, $intPid, array('order'=>"$t.date DESC"));
+	}
+
+
+	/**
+	 * Find published news items by their parent ID
+	 * @param integer
+	 * @param integer
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findPublishedByPid($intId, $intLimit=0)
+	{
+		$time = time();
+		$t = static::$strTable;
+
+		$arrColumns = array("$t.pid=? AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1");
+
+		if ($intLimit > 0)
+		{
+			return static::findBy($arrColumns, $intId, array('order'=>"$t.date DESC", 'limit'=>$intLimit));
+		}
+		else
+		{
+			return static::findBy($arrColumns, $intId, array('order'=>"$t.date DESC"));
+		}
+	}
+
+
+	/**
+	 * Find all published news items of a certain period of time by their parent ID
+	 * @param integer
+	 * @param integer
+	 * @param array
+	 * @param integer
+	 * @param integer
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findPublishedFromToByPids($intFrom, $intTo, $arrPids, $intLimit=0, $intOffset=0)
+	{
+		if (!is_array($arrPids) || empty($arrPids))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		$arrColumns = array("$t.date>=? AND $t.date<=? AND $t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")");
+		
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		$arrOptions = array
+		(
+			'order'  => "$t.date DESC",
+			'limit'  => $intLimit,
+			'offset' => $intOffset
+		);
+
+		return static::findBy($arrColumns, array($intFrom, $intTo), $arrOptions);
+	}
+
+
+	/**
+	 * Count all published news items of a certain period of time by their parent ID
+	 * @param integer
+	 * @param integer
+	 * @param array
+	 * @return \Contao\Model|null
+	 */
+	public static function countPublishedFromToByPids($intFrom, $intTo, $arrPids)
+	{
+		if (!is_array($arrPids) || empty($arrPids))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		$arrColumns = array("$t.date>=? AND $t.date<=? AND $t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")");
+		
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		return static::countBy($arrColumns, array($intFrom, $intTo));
+	}
 }

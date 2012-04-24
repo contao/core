@@ -559,7 +559,7 @@ class tl_layout extends Backend
 	 */
 	public function getNewsfeeds()
 	{
-		$objFeed = \NewsFeedCollection::findAll();
+		$objFeed = \NewsFeedModel::findAll();
 
 		if ($objFeed === null)
 		{
@@ -583,7 +583,7 @@ class tl_layout extends Backend
 	 */
 	public function getCalendarfeeds()
 	{
-		$objFeed = \CalendarFeedCollection::findAll();
+		$objFeed = \CalendarFeedModel::findAll();
 
 		if ($objFeed === null)
 		{

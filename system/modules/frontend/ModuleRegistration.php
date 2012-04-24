@@ -396,7 +396,7 @@ class ModuleRegistration extends \Module
 						// Replace the wildcard
 						if (!empty($arrData['newsletter']))
 						{
-							$objChannels = \NewsletterChannelCollection::findByIds($arrData['newsletter']);
+							$objChannels = \NewsletterChannelModel::findByIds($arrData['newsletter']);
 
 							if ($objChannels !== null)
 							{

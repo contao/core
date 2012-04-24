@@ -430,11 +430,11 @@ class tl_news_feed extends Backend
 	{
 		if ($this->User->isAdmin)
 		{
-			$objArchive = \NewsArchiveCollection::findAll();
+			$objArchive = \NewsArchiveModel::findAll();
 		}
 		else
 		{
-			$objArchive = \NewsArchiveCollection::findMultipleByIds($this->User->news);
+			$objArchive = \NewsArchiveModel::findMultipleByIds($this->User->news);
 		}
 
 		$return = array();

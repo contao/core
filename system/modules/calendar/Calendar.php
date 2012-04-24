@@ -92,7 +92,7 @@ class Calendar extends \Frontend
 	public function generateFeeds()
 	{
 		$this->removeOldFeeds();
-		$objCalendar = \CalendarFeedCollection::findAll();
+		$objCalendar = \CalendarFeedModel::findAll();
 
 		if ($objCalendar !== null)
 		{
@@ -136,7 +136,7 @@ class Calendar extends \Frontend
 		$time = time();
 
 		// Get the upcoming events
-		$objArticle = \CalendarEventsCollection::findUpcomingByPids($arrCalendars, $arrFeed['maxItems']);
+		$objArticle = \CalendarEventsModel::findUpcomingByPids($arrCalendars, $arrFeed['maxItems']);
 
 		// Parse the items
 		if ($objArticle !== null)
@@ -253,7 +253,7 @@ class Calendar extends \Frontend
 		$arrProcessed = array();
 
 		// Get all calendars
-		$objCalendar = \CalendarCollection::findByProtected('');
+		$objCalendar = \CalendarModel::findByProtected('');
 
 		// Walk through each calendar
 		if ($objCalendar !== null)
@@ -289,7 +289,7 @@ class Calendar extends \Frontend
 				$strUrl = $arrProcessed[$objCalendar->jumpTo];
 
 				// Get the items
-				$objEvents = \CalendarEventsCollection::findPublishedDefaultByPid($objCalendar->id);
+				$objEvents = \CalendarEventsModel::findPublishedDefaultByPid($objCalendar->id);
 
 				if ($objEvents !== null)
 				{
@@ -470,7 +470,7 @@ class Calendar extends \Frontend
 	public function purgeOldFeeds()
 	{
 		$arrFeeds = array();
-		$objFeeds = \CalendarFeedCollection::findAll();
+		$objFeeds = \CalendarFeedModel::findAll();
 
 		if ($objFeeds !== null)
 		{

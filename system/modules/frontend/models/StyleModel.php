@@ -35,38 +35,20 @@ namespace Contao;
 
 
 /**
- * Class FormFieldCollection
+ * Class StyleModel
  *
- * Provide methods to handle multiple models.
+ * Provide methods to find and save format definitions.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class FormFieldCollection extends \Model_Collection
+class StyleModel extends \Model
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_form_field';
+	protected static $strTable = 'tl_style';
 
-
-	/**
-	 * Find published form fields by their parent ID
-	 * @param integer
-	 * @return \Contao\Model_Collection|null
-	 */
-	public static function findPublishedByPid($intPid)
-	{
-		$t = static::$strTable;
-		$arrColumns = array("$t.pid=?");
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$arrColumns[] = "$t.invisible=''";
-		}
-
-		return static::findBy($arrColumns, $intPid, array('order'=>"$t.sorting"));
-	}
 }

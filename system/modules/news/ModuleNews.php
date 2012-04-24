@@ -65,7 +65,7 @@ abstract class ModuleNews extends \Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objArchive = \NewsArchiveCollection::findMultipleByIds($arrArchives);
+		$objArchive = \NewsArchiveModel::findMultipleByIds($arrArchives);
 		$arrArchives = array();
 
 		while ($objArchive->next())
@@ -281,7 +281,7 @@ abstract class ModuleNews extends \Module
 					{
 						break;
 					}
-					$objComments = \CommentsCollection::countPublishedBySourceAndParent('tl_news', $objArticle->id);
+					$objComments = \CommentsModel::countPublishedBySourceAndParent('tl_news', $objArticle->id);
 					$return['ccount'] = $objComments->count;
 					$return['comments'] = sprintf($GLOBALS['TL_LANG']['MSC']['commentCount'], $objComments->count);
 					break;

@@ -195,7 +195,7 @@ abstract class Controller extends \System
 			// Show all articles
 			else
 			{
-				$objArticles = \ArticleCollection::findPublishedByPidAndColumn($objPage->id, $strColumn);
+				$objArticles = \ArticleModel::findPublishedByPidAndColumn($objPage->id, $strColumn);
 
 				if ($objArticles === null)
 				{
@@ -552,7 +552,7 @@ abstract class Controller extends \System
 		$trail = array($intId, $pid);
 
 		// Load all parent pages
-		$objParentPage = \PageCollection::findParentsById($pid);
+		$objParentPage = \PageModel::findParentsById($pid);
 
 		// Inherit settings
 		if ($objParentPage !== null)
@@ -3455,7 +3455,7 @@ abstract class Controller extends \System
 			return;
 		}
 
-		$objFiles = \FilesCollection::findMultipleByIds($arrEnclosures);
+		$objFiles = \FilesModel::findMultipleByIds($arrEnclosures);
 
 		if ($objFiles === null)
 		{

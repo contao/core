@@ -83,7 +83,7 @@ abstract class Events extends \Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objCalendar = \CalendarCollection::findMultipleByIds($arrCalendars);
+		$objCalendar = \CalendarModel::findMultipleByIds($arrCalendars);
 		$arrCalendars = array();
 
 		if ($objCalendar !== null)
@@ -142,7 +142,7 @@ abstract class Events extends \Module
 			}
 
 			// Get the events of the current period
-			$objEvents = \CalendarEventsCollection::findCurrentByPid($id, $intStart, $intEnd);
+			$objEvents = \CalendarEventsModel::findCurrentByPid($id, $intStart, $intEnd);
 
 			if ($objEvents === null)
 			{

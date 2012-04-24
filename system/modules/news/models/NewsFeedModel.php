@@ -62,4 +62,21 @@ class NewsFeedModel extends \Model
 		$t = static::$strTable;
 		return static::findBy(array("$t.archives LIKE '%\"" . intval($intId) . "\"%'"), null);
 	}
+
+
+	/**
+	 * Find news feeds by their IDs
+	 * @param array
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findByIds($arrIds)
+	{
+		if (!is_array($arrIds) || empty($arrIds))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null);
+	}
 }

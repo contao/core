@@ -430,11 +430,11 @@ class tl_calendar_feed extends Backend
 	{
 		if ($this->User->isAdmin)
 		{
-			$objCalendar = \CalendarCollection::findAll();
+			$objCalendar = \CalendarModel::findAll();
 		}
 		else
 		{
-			$objCalendar = \CalendarCollection::findMultipleByIds($this->User->calendars);
+			$objCalendar = \CalendarModel::findMultipleByIds($this->User->calendars);
 		}
 
 		$return = array();

@@ -115,7 +115,7 @@ class ModuleNewsList extends \ModuleNews
 		}
 
 		// Get the total number of items
-		$objTotal = \NewsCollection::countPublishedByPids($this->news_archives, $blnFeatured);
+		$objTotal = \NewsModel::countPublishedByPids($this->news_archives, $blnFeatured);
 
 		if ($objTotal === null)
 		{
@@ -167,11 +167,11 @@ class ModuleNewsList extends \ModuleNews
 		// Get the items
 		if (isset($limit))
 		{
-			$objArticles = \NewsCollection::findPublishedByPids($this->news_archives, $blnFeatured, $limit, $offset);
+			$objArticles = \NewsModel::findPublishedByPids($this->news_archives, $blnFeatured, $limit, $offset);
 		}
 		else
 		{
-			$objArticles = \NewsCollection::findPublishedByPids($this->news_archives, $blnFeatured);
+			$objArticles = \NewsModel::findPublishedByPids($this->news_archives, $blnFeatured);
 		}
 
 		// No items found

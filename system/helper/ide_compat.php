@@ -145,10 +145,7 @@ class ModuleCalendar extends Contao\ModuleCalendar {}
 class ModuleEventMenu extends Contao\ModuleEventMenu {}
 class ModuleEventReader extends Contao\ModuleEventReader {}
 class ModuleEventlist extends Contao\ModuleEventlist {}
-class CalendarCollection extends Contao\CalendarCollection {}
-class CalendarEventsCollection extends Contao\CalendarEventsCollection {}
 class CalendarEventsModel extends Contao\CalendarEventsModel {}
-class CalendarFeedCollection extends Contao\CalendarFeedCollection {}
 class CalendarFeedModel extends Contao\CalendarFeedModel {}
 class CalendarModel extends Contao\CalendarModel {}
 
@@ -156,7 +153,6 @@ class CalendarModel extends Contao\CalendarModel {}
 class Comments extends Contao\Comments {}
 class ContentComments extends Contao\ContentComments {}
 class ModuleComments extends Contao\ModuleComments {}
-class CommentsCollection extends Contao\CommentsCollection {}
 class CommentsModel extends Contao\CommentsModel {}
 
 // development
@@ -169,9 +165,7 @@ class ModuleFaq extends Contao\ModuleFaq {}
 class ModuleFaqList extends Contao\ModuleFaqList {}
 class ModuleFaqPage extends Contao\ModuleFaqPage {}
 class ModuleFaqReader extends Contao\ModuleFaqReader {}
-class FaqCategoryCollection extends Contao\FaqCategoryCollection {}
 class FaqCategoryModel extends Contao\FaqCategoryModel {}
-class FaqCollection extends Contao\FaqCollection {}
 class FaqModel extends Contao\FaqModel {}
 
 // frontend
@@ -240,33 +234,20 @@ class PageRedirect extends Contao\PageRedirect {}
 class PageRegular extends Contao\PageRegular {}
 class PageRoot extends Contao\PageRoot {}
 class Pagination extends Contao\Pagination {}
-class ArticleCollection extends Contao\ArticleCollection {}
 class ArticleModel extends Contao\ArticleModel {}
-class ContentCollection extends Contao\ContentCollection {}
 class ContentModel extends Contao\ContentModel {}
-class FilesCollection extends Contao\FilesCollection {}
 class FilesModel extends Contao\FilesModel {}
-class FormCollection extends Contao\FormCollection {}
-class FormFieldCollection extends Contao\FormFieldCollection {}
 class FormFieldModel extends Contao\FormFieldModel {}
 class FormModel extends Contao\FormModel {}
-class LayoutCollection extends Contao\LayoutCollection {}
 class LayoutModel extends Contao\LayoutModel {}
-class MemberCollection extends Contao\MemberCollection {}
-class MemberGroupCollection extends Contao\MemberGroupCollection {}
 class MemberGroupModel extends Contao\MemberGroupModel {}
 class MemberModel extends Contao\MemberModel {}
-class ModuleCollection extends Contao\ModuleCollection {}
 class ModuleModel extends Contao\ModuleModel {}
-class PageCollection extends Contao\PageCollection {}
 class PageModel extends Contao\PageModel {}
-class SessionCollection extends Contao\SessionCollection {}
 class SessionModel extends Contao\SessionModel {}
-class StyleSheetCollection extends Contao\StyleSheetCollection {}
+class StyleModel extends Contao\StyleModel {}
 class StyleSheetModel extends Contao\StyleSheetModel {}
-class ThemeCollection extends Contao\ThemeCollection {}
 class ThemeModel extends Contao\ThemeModel {}
-class UserCollection extends Contao\UserCollection {}
 class UserModel extends Contao\UserModel {}
 
 // listing
@@ -279,10 +260,7 @@ class ModuleNewsList extends Contao\ModuleNewsList {}
 class ModuleNewsMenu extends Contao\ModuleNewsMenu {}
 class ModuleNewsReader extends Contao\ModuleNewsReader {}
 class News extends Contao\News {}
-class NewsArchiveCollection extends Contao\NewsArchiveCollection {}
 class NewsArchiveModel extends Contao\NewsArchiveModel {}
-class NewsCollection extends Contao\NewsCollection {}
-class NewsFeedCollection extends Contao\NewsFeedCollection {}
 class NewsFeedModel extends Contao\NewsFeedModel {}
 class NewsModel extends Contao\NewsModel {}
 
@@ -292,8 +270,6 @@ class ModuleNewsletterReader extends Contao\ModuleNewsletterReader {}
 class ModuleSubscribe extends Contao\ModuleSubscribe {}
 class ModuleUnsubscribe extends Contao\ModuleUnsubscribe {}
 class Newsletter extends Contao\Newsletter {}
-class NewsletterChannelCollection extends Contao\NewsletterChannelCollection {}
 class NewsletterChannelModel extends Contao\NewsletterChannelModel {}
-class NewsletterCollection extends Contao\NewsletterCollection {}
 class NewsletterModel extends Contao\NewsletterModel {}
 class NewsletterRecipientsModel extends Contao\NewsletterRecipientsModel {}

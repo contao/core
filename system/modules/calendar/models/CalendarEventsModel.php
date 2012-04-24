@@ -75,7 +75,7 @@ class CalendarEventsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findBy($arrColumns, array($intId, $varAlias));
+		return static::findOneBy($arrColumns, array($intId, $varAlias));
 	}
 
 
@@ -94,4 +94,78 @@ class CalendarEventsModel extends \Model
 		$objMinMax = Database::getInstance()->query("SELECT MIN(startTime) AS dateFrom, MAX(endTime) AS dateTo, MAX(repeatEnd) AS repeatUntil FROM tl_calendar_events WHERE pid IN(". implode(',', array_map('intval', $arrPids)) .")");
 		return new static($objMinMax);
 	}
-}
+
+
+	/**
+	 * Find events of the current period by their parent ID
+	 * @param integer
+	 * @param integer
+	 * @param integer
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findCurrentByPid($intPid, $intStart, $intEnd)
+	{
+		$t = static::$strTable;
+		$intStart = intval($intStart);
+		$intEnd = intval($intEnd);
+
+		$arrColumns = array("$t.pid=? AND (($t.startTime>=$intStart AND $t.startTime<=$intEnd) OR ($t.endTime>=$intStart AND $t.endTime<=$intEnd) OR ($t.startTime<=$intStart AND $t.endTime>=$intEnd) OR ($t.recurring=1 AND ($t.recurrences=0 OR $t.repeatEnd>=$intStart) AND $t.startTime<=$intEnd))");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		return static::findBy($arrColumns, $intPid, array('order'=>"$t.startTime"));
+	}
+
+
+	/**
+	 * Find published events with the default redirect target by their parent ID
+	 * @param integer
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findPublishedDefaultByPid($intPid)
+	{
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid=? AND $t.source='default'");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		return static::findBy($arrColumns, $intPid, array('order'=>"$t.startTime DESC"));
+	}
+
+
+	/**
+	 * Find upcoming events by their parent IDs
+	 * @param array
+	 * @param integer
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findUpcomingByPids($arrIds, $intLimit=0)
+	{
+		if (!is_array($arrIds) || empty($arrIds))
+		{
+			return null;
+		}
+
+		$time = time();
+		$t = static::$strTable;
+
+		// Get upcoming events using endTime instead of startTime (see #3917)
+		$arrColumns = array("($t.endTime>=$time OR ($t.recurring=1 AND ($t.recurrences=0 OR $t.repeatEnd>=$time))) AND $t.pid IN(" . implode(',', array_map('intval', $arrIds)) . ") AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1");
+
+		if ($intLimit > 0)
+		{
+			return static::findBy($arrColumns, null, array('order'=>"$t.startTime", 'limit'=>$intLimit));
+		}
+		else
+		{
+			return static::findBy($arrColumns, null, array('order'=>"$t.startTime"));
+		}
+	}}

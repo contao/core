@@ -127,7 +127,7 @@ class ModuleQuicknav extends \Module
 		}
 
 		// Get all active subpages
-		$objSubpages = \PageCollection::findPublishedRegularWithoutGuestsByPid($pid);
+		$objSubpages = \PageModel::findPublishedRegularWithoutGuestsByPid($pid);
 
 		if ($objSubpages === null)
 		{

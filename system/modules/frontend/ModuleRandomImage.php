@@ -78,7 +78,7 @@ class ModuleRandomImage extends \Module
 		}
 
 		// Get the file entries from the database
-		$this->objFiles = \FilesCollection::findMultipleByIds($this->multiSRC);
+		$this->objFiles = \FilesModel::findMultipleByIds($this->multiSRC);
 
 		if ($this->objFiles === null)
 		{
@@ -142,7 +142,7 @@ class ModuleRandomImage extends \Module
 			// Folders
 			else
 			{
-				$objSubfiles = \FilesCollection::findByPid($objFiles->id);
+				$objSubfiles = \FilesModel::findByPid($objFiles->id);
 
 				if ($objSubfiles === null)
 				{

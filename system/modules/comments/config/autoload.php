@@ -33,13 +33,12 @@
  */
 ClassLoader::addClasses(array
 (
-	'Contao\\Comments'           => 'system/modules/comments/Comments.php',
-	'Contao\\ContentComments'    => 'system/modules/comments/ContentComments.php',
-	'Contao\\ModuleComments'     => 'system/modules/comments/ModuleComments.php',
+	'Contao\\Comments'        => 'system/modules/comments/Comments.php',
+	'Contao\\ContentComments' => 'system/modules/comments/ContentComments.php',
+	'Contao\\ModuleComments'  => 'system/modules/comments/ModuleComments.php',
 
 	// Models
-	'Contao\\CommentsCollection' => 'system/modules/comments/models/CommentsCollection.php',
-	'Contao\\CommentsModel'      => 'system/modules/comments/models/CommentsModel.php',
+	'Contao\\CommentsModel'   => 'system/modules/comments/models/CommentsModel.php',
 ));
 
 

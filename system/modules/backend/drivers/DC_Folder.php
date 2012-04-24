@@ -487,7 +487,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Update all child records
 			if ($objFile->type == 'folder')
 			{
-				$objFiles = \FilesCollection::findMultipleByBasepath($this->intId.'/');
+				$objFiles = \FilesModel::findMultipleByBasepath($this->intId.'/');
 
 				if ($objFiles !== null)
 				{
@@ -1910,7 +1910,7 @@ window.addEvent(\'domready\', function() {
 				if ($objFile->type == 'folder')
 				{
 					$strPath = $this->strPath . '/' . $this->varValue . '/';
-					$objFiles = \FilesCollection::findMultipleByBasepath($strPath);
+					$objFiles = \FilesModel::findMultipleByBasepath($strPath);
 	
 					if ($objFiles !== null)
 					{
@@ -2064,7 +2064,7 @@ window.addEvent(\'domready\', function() {
 		$this->execSync($GLOBALS['TL_CONFIG']['uploadPath']);
 
 		// Check for left-over entries in the DB
-		$objFiles = \FilesCollection::findByFound('');
+		$objFiles = \FilesModel::findByFound('');
 
 		if ($objFiles !== null)
 		{
@@ -2101,7 +2101,7 @@ window.addEvent(\'domready\', function() {
 					$objFolder->save();
 
 					// Update the PID of the child records
-					$objChildren = \FilesCollection::findByPid($objFound->id);
+					$objChildren = \FilesModel::findByPid($objFound->id);
 
 					if ($objChildren !== null)
 					{

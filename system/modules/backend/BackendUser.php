@@ -394,7 +394,7 @@ class BackendUser extends \User
 		// Convert the numeric file mounts into paths
 		if (!$this->isAdmin && !empty($this->filemounts))
 		{
-			$objFiles = \FilesCollection::findMultipleByIds($this->filemounts);
+			$objFiles = \FilesModel::findMultipleByIds($this->filemounts);
 
 			if ($objFiles !== null)
 			{

@@ -159,16 +159,6 @@ abstract class Model extends \System
 
 
 	/**
-	 * Be compatible with the Database_Result interface
-	 * @return integer
-	 */
-	public function count()
-	{
-		return 1;
-	}
-
-
-	/**
 	 * Return the current record as associative array
 	 * @return array
 	 */
@@ -181,137 +171,12 @@ abstract class Model extends \System
 	/**
 	 * Set the current record from an array
 	 * @param array
-	 * @return void
+	 * @return \Contao\Model
 	 */
 	public function setRow(Array $arrData)
 	{
 		$this->arrData = $arrData;
-	}
-
-
-	/**
-	 * Find a record by one or more conditions
-	 * @param mixed
-	 * @param mixed
-	 * @param array
-	 * @return \Contao\Model|null
-	 */
-	public static function findBy($strColumn, $varValue, Array $arrOptions=array())
-	{
-		$arrOptions = array_merge($arrOptions, array
-		(
-			'column' => $strColumn,
-			'value'  => $varValue
-		));
-
-		return static::find($arrOptions);
-	}
-
-
-	/**
-	 * Find a record by its primary key
-	 * @param mixed
-	 * @param array
-	 * @return \Contao\Model|null
-	 */
-	public static function findByPk($varValue, Array $arrOptions=array())
-	{
-		$arrOptions = array_merge($arrOptions, array
-		(
-			'column' => static::$strPk,
-			'value'  => $varValue
-		));
-
-		return static::find($arrOptions);
-	}
-
-
-	/**
-	 * Find a record by its ID or alias
-	 * @param mixed
-	 * @param array
-	 * @return \Contao\Model|null
-	 */
-	public static function findByIdOrAlias($varId, Array $arrOptions=array())
-	{
-		$t = static::$strTable;
-
-		$arrOptions = array_merge($arrOptions, array
-		(
-			'column' => array("($t.id=? OR $t.alias=?)"),
-			'value'  => array((is_numeric($varId) ? $varId : 0), $varId)
-		));
-
-		return static::find($arrOptions);
-	}
-
-
-	/**
-	 * Magic method to call $this->findByName() instead of $this->findBy('name')
-	 * @param string
-	 * @param array
-	 * @return mixed|null
-	 */
-	public static function __callStatic($name, $args)
-	{
-		if (strncmp($name, 'findBy', 6) !== 0)
-		{
-			return null;
-		}
-
-		return call_user_func('static::findBy', lcfirst(substr($name, 6)), array_shift($args), $args);
-	}
-
-
-	/**
-	 * Find a record and return the model
-	 * @param array
-	 * @return \Contao\Model|null
-	 */
-	protected static function find(Array $arrOptions)
-	{
-		if (static::$strTable == '')
-		{
-			return null;
-		}
-
-		$arrOptions['table'] = static::$strTable;
-		$strQuery = \Model_QueryBuilder::find($arrOptions);
-
-		$objStatement = \Database::getInstance()->prepare($strQuery)->limit(1);
-		$objStatement = static::preFind($objStatement);
-
-		$objResult = $objStatement->execute($arrOptions['value']);
-
-		if ($objResult->numRows < 1)
-		{
-			return null;
-		}
-
-		$objResult = static::postFind($objResult);
-		return new static($objResult);
-	}
-
-
-	/**
-	 * Modify the statement before it is executed
-	 * @param \Database_Statement
-	 * @return \Database_Statement
-	 */
-	protected static function preFind(\Database_Statement $objStatement)
-	{
-		return $objStatement;
-	}
-
-
-	/**
-	 * Modify the result set before the model is created
-	 * @param \Database_Result
-	 * @return \Database_Result
-	 */
-	protected static function postFind(\Database_Result $objResult)
-	{
-		return $objResult;
+		return $this;
 	}
 
 
@@ -372,7 +237,7 @@ abstract class Model extends \System
 	/**
 	 * Lazy load related records
 	 * @param string
-	 * @return \Contao\Model
+	 * @return \Contao\Model|\Contao\Model_Collection
 	 * @throws \Exception
 	 */
 	public function getRelated($strKey)
@@ -390,24 +255,236 @@ abstract class Model extends \System
 		}
 
 		$arrRelation = $this->arrRelations[$strKey];
-		$strName = $this->getModelClassFromTable($arrRelation['table'], true);
+		$strClass = $this->getModelClassFromTable($arrRelation['table']);
 
 		// Load the related record(s)
 		if ($arrRelation['type'] == 'hasOne' || $arrRelation['type'] == 'belongsTo')
 		{
-			$strClass = $strName . 'Model';
-			$objModel = $strClass::findBy($arrRelation['field'], $this->$strKey);
+			$objModel = $strClass::findOneBy($arrRelation['field'], $this->$strKey);
 			$this->arrRelated[$strKey] = $objModel;
 		}
 		elseif ($arrRelation['type'] == 'hasMany' || $arrRelation['type'] == 'belongsToMany')
 		{
 			$arrValues = deserialize($this->$strKey, true);
 			$strField = $arrRelation['table'] . '.' . $arrRelation['field'];
-			$strClass = $strName . 'Collection'; 
-			$objCollection = $strClass::findBy(array($strField . " IN('" . implode("','", $arrValues) . "')"), null, array('order'=>\Database::getInstance()->findInSet($strField, $arrValues)));
-			$this->arrRelated[$strKey] = $objCollection;
+			$objModel = $strClass::findBy(array($strField . " IN('" . implode("','", $arrValues) . "')"), null, array('order'=>\Database::getInstance()->findInSet($strField, $arrValues)));
+			$this->arrRelated[$strKey] = $objModel;
 		}
 
 		return $this->arrRelated[$strKey];
+	}
+
+
+	/**
+	 * Find a single record by its primary key
+	 * @param mixed
+	 * @param array
+	 * @return \Contao\Model|null
+	 */
+	public static function findByPk($varValue, Array $arrOptions=array())
+	{
+		$arrOptions = array_merge($arrOptions, array
+		(
+			'limit'  => 1,
+			'column' => static::$strPk,
+			'value'  => $varValue
+		));
+
+		return static::find($arrOptions);
+	}
+
+
+	/**
+	 * Find a single record by its ID or alias
+	 * @param mixed
+	 * @param array
+	 * @return \Contao\Model|null
+	 */
+	public static function findByIdOrAlias($varId, Array $arrOptions=array())
+	{
+		$t = static::$strTable;
+
+		$arrOptions = array_merge($arrOptions, array
+		(
+			'limit'  => 1,
+			'column' => array("($t.id=? OR $t.alias=?)"),
+			'value'  => array((is_numeric($varId) ? $varId : 0), $varId)
+		));
+
+		return static::find($arrOptions);
+	}
+
+
+	/**
+	 * Find a single record by various criteria
+	 * @param mixed
+	 * @param mixed
+	 * @param array
+	 * @return \Contao\Model|null
+	 */
+	public static function findOneBy($strColumn, $varValue, Array $arrOptions=array())
+	{
+		$arrOptions = array_merge($arrOptions, array
+		(
+			'limit'  => 1,
+			'column' => $strColumn,
+			'value'  => $varValue
+		));
+
+		return static::find($arrOptions);
+	}
+
+
+	/**
+	 * Find records by various criteria
+	 * @param mixed
+	 * @param mixed
+	 * @param array
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findBy($strColumn, $varValue, Array $arrOptions=array())
+	{
+		$arrOptions = array_merge($arrOptions, array
+		(
+			'column' => $strColumn,
+			'value'  => $varValue
+		));
+
+		return static::find($arrOptions);
+	}
+
+
+	/**
+	 * Find all records
+	 * @param array
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findAll(Array $arrOptions=array())
+	{
+		return static::find($arrOptions);
+	}
+
+
+	/**
+	 * Magic method to call $this->findByName() instead of $this->findBy('name')
+	 * @param string
+	 * @param array
+	 * @return mixed|null
+	 */
+	public static function __callStatic($name, $args)
+	{
+		if (strncmp($name, 'findBy', 6) === 0)
+		{
+			return call_user_func('static::findBy', lcfirst(substr($name, 6)), array_shift($args), $args);
+		}
+		elseif (strncmp($name, 'findOneBy', 9) === 0)
+		{
+			return call_user_func('static::findOneBy', lcfirst(substr($name, 6)), array_shift($args), $args);
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Find records and return the model or model collection
+	 * @param array
+	 * @return \Contao\Model|\Contao\Model_Collection|null
+	 */
+	protected static function find(Array $arrOptions)
+	{
+		if (static::$strTable == '')
+		{
+			return null;
+		}
+
+		$arrOptions['table'] = static::$strTable;
+		$strQuery = \Model_QueryBuilder::find($arrOptions);
+
+		$objStatement = \Database::getInstance()->prepare($strQuery);
+
+		// Defaults for limit and offset
+		if (!isset($arrOptions['limit']))
+		{
+			$arrOptions['limit'] = 0;
+		}
+		if (!isset($arrOptions['offset']))
+		{
+			$arrOptions['offset'] = 0;
+		}
+
+		// Limit
+		if ($arrOptions['limit'] > 0 || $arrOptions['offset'] > 0)
+		{
+			$objStatement->limit($arrOptions['limit'], $arrOptions['offset']);
+		}
+
+		$objStatement = static::preFind($objStatement);
+		$objResult = $objStatement->execute($arrOptions['value']);
+
+		if ($objResult->numRows < 1)
+		{
+			return null;
+		}
+
+		$objResult = static::postFind($objResult);
+		return ($arrOptions['limit'] == 1) ? new static($objResult) : new \Model_Collection($objResult, static::$strTable);
+	}
+
+
+	/**
+	 * Modify the statement before it is executed
+	 * @param \Database_Statement
+	 * @return \Database_Statement
+	 */
+	protected static function preFind(\Database_Statement $objStatement)
+	{
+		return $objStatement;
+	}
+
+
+	/**
+	 * Modify the result set before the model is created
+	 * @param \Database_Result
+	 * @return \Database_Result
+	 */
+	protected static function postFind(\Database_Result $objResult)
+	{
+		return $objResult;
+	}
+
+
+	/**
+	 * Return the number of records matching certain criteria
+	 * @param mixed
+	 * @param mixed
+	 * @return \Contao\Model
+	 */
+	public static function countBy($strColumn=null, $varValue=null)
+	{
+		if (static::$strTable == '')
+		{
+			return null;
+		}
+
+		$strQuery = \Model_QueryBuilder::count(array
+		(
+			'table'  => static::$strTable,
+			'column' => $strColumn,
+			'value'  => $varValue
+		));
+
+		$objResult = \Database::getInstance()->prepare($strQuery)->execute($varValue);
+		return new static($objResult);
+	}
+
+
+	/**
+	 * Return the total number of rows
+	 * @return \Contao\Model
+	 */
+	public static function countAll()
+	{
+		return static::countBy();
 	}
 }

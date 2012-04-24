@@ -339,7 +339,7 @@ class FrontendUser extends \User
 		}
 
 		// Skip inactive groups
-		if (($objGroups = \MemberGroupCollection::findAllActive()) !== null)
+		if (($objGroups = \MemberGroupModel::findAllActive()) !== null)
 		{
 			$this->groups = array_intersect($this->groups, $objGroups->fetchEach('id'));
 		}

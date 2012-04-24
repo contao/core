@@ -51,4 +51,20 @@ class NewsArchiveModel extends \Model
 	 */
 	protected static $strTable = 'tl_news_archive';
 
+
+	/**
+	 * Find multiple news archives by their IDs
+	 * @param array
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findMultipleByIds($arrIds)
+	{
+		if (!is_array($arrIds) || empty($arrIds))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, array('order'=>\Database::getInstance()->findInSet("$t.id", $arrIds)));
+	}
 }

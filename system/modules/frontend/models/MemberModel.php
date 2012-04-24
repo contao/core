@@ -70,6 +70,6 @@ class MemberModel extends \Model
 			$arrColumns[] = "$t.username=?";
 		}
 
-		return static::findBy($arrColumns, array($strEmail, $strUsername));
+		return static::findOneBy($arrColumns, array($strEmail, $strUsername));
 	}
 }

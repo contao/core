@@ -1001,10 +1001,9 @@ abstract class System
 	/**
 	 * Compile a Model class name from a table name (e.g. tl_form_field becomes FormFieldModel)
 	 * @param string
-	 * @param boolean
 	 * @return string
 	 */
-	protected function getModelClassFromTable($strTable, $blnNoSuffix=false)
+	protected function getModelClassFromTable($strTable)
 	{
 		$arrChunks = explode('_', $strTable);
 
@@ -1013,6 +1012,6 @@ abstract class System
 			array_shift($arrChunks);
 		}
 
-		return implode('', array_map('ucfirst', $arrChunks)) . (!$blnNoSuffix ? 'Model' : '');
+		return implode('', array_map('ucfirst', $arrChunks)) . 'Model';
 	}
 }

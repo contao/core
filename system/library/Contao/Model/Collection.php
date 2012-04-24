@@ -42,32 +42,32 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-abstract class Model_Collection extends \System
+class Model_Collection extends \System
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable;
+	protected $strTable;
 
 	/**
 	 * Database result
 	 * @var \Contao\Database_Result
 	 */
-	private $objResult;
+	protected $objResult;
 
 	/**
 	 * Current index
 	 * @var integer
 	 */
-	private $intIndex = -1;
+	protected $intIndex = -1;
 
 	/**
 	 * End indicator
 	 * @var boolean
 	 */
-	private $blnDone = false;
+	protected $blnDone = false;
 
 	/**
 	 * Models array
@@ -79,11 +79,13 @@ abstract class Model_Collection extends \System
 	/**
 	 * Store the database result
 	 * @param \Database_Result
+	 * @param string
 	 */
-	public function __construct(\Database_Result $objResult)
+	public function __construct(\Database_Result $objResult, $strTable)
 	{
 		parent::__construct();
 		$this->objResult = $objResult;
+		$this->strTable = $strTable;
 	}
 
 
@@ -142,16 +144,6 @@ abstract class Model_Collection extends \System
 
 
 	/**
-	 * Return the number of rows
-	 * @return integer
-	 */
-	public function count()
-	{
-		return $this->objResult->numRows;
-	}
-
-
-	/**
 	 * Return the current row
 	 * @return array
 	 */
@@ -167,17 +159,76 @@ abstract class Model_Collection extends \System
 
 
 	/**
-	 * Return the current model
-	 * @return \Contao\Model
+	 * Set the current record from an array
+	 * @param array
+	 * @return \Contao\Model_Collection
 	 */
-	public function current()
+	public function setRow(Array $arrData)
 	{
 		if ($this->intIndex < 0)
 		{
 			$this->first();
 		}
 
-		return $this->arrModels[$this->intIndex];
+		$this->arrModels[$this->intIndex]->setRow($arrData);
+		return $this;
+	}
+
+
+	/**
+	 * Save the current model
+	 * @return \Contao\Model_Collection
+	 */
+	public function save()
+	{
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
+		$this->arrModels[$this->intIndex]->save();
+		return $this;
+	}
+
+
+	/**
+	 * Delete the current model and return the number of affected rows
+	 * @return integer
+	 */
+	public function delete()
+	{
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
+		return $this->arrModels[$this->intIndex]->delete();
+	}
+
+
+	/**
+	 * Lazy load related records
+	 * @param string
+	 * @return \Contao\Model|\Contao\Model_Collection
+	 */
+	public function getRelated($strKey)
+	{
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
+		return $this->arrModels[$this->intIndex]->getRelated($strKey);
+	}
+
+
+	/**
+	 * Return the number of rows
+	 * @return integer
+	 */
+	public function count()
+	{
+		return $this->objResult->numRows;
 	}
 
 
@@ -214,8 +265,23 @@ abstract class Model_Collection extends \System
 
 
 	/**
+	 * Return the current model
+	 * @return \Contao\Model
+	 */
+	public function current()
+	{
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
+		return $this->arrModels[$this->intIndex];
+	}
+
+
+	/**
 	 * Go to the next row
-	 * @return \Contao\Model_Collection
+	 * @return \Contao\Model_Collection|boolean
 	 */
 	public function next()
 	{
@@ -307,206 +373,9 @@ abstract class Model_Collection extends \System
 			return false;
 		}
 
-		$strClass = $this->getModelClassFromTable(static::$strTable);
+		$strClass = $this->getModelClassFromTable($this->strTable);
 		$this->arrModels[$this->intIndex + 1] = new $strClass($this->objResult);
 
 		return true;
-	}
-
-
-	/**
-	 * Find records by one or more conditions
-	 * @param mixed
-	 * @param mixed
-	 * @param array
-	 * @return \Contao\Model_Collection|null
-	 */
-	public static function findBy($strColumn, $varValue, Array $arrOptions=array())
-	{
-		$arrOptions = array_merge($arrOptions, array
-		(
-			'column' => $strColumn,
-			'value'  => $varValue
-		));
-
-		return static::find($arrOptions);
-	}
-
-
-	/**
-	 * Find all records and return the model
-	 * @param array
-	 * @return \Contao\Model_Collection|null
-	 */
-	public static function findAll(Array $arrOptions=array())
-	{
-		return static::find($arrOptions);
-	}
-
-
-	/**
-	 * Magic method to call $this->findByPid() instead of $this->findBy('pid')
-	 * @param string
-	 * @param array
-	 * @return mixed|null
-	 */
-	public static function __callStatic($name, $args)
-	{
-		if (strncmp($name, 'findBy', 6) !== 0)
-		{
-			return null;
-		}
-
-		return call_user_func('static::findBy', lcfirst(substr($name, 6)), array_shift($args), $args);
-	}
-
-
-	/**
-	 * Find records and return the model collection
-	 * @param array
-	 * @return \Contao\Model_Collection|null
-	 */
-	protected static function find(Array $arrOptions)
-	{
-		if (static::$strTable == '')
-		{
-			return null;
-		}
-
-		$arrOptions['table'] = static::$strTable;
-		$strQuery = \Model_QueryBuilder::find($arrOptions);
-
-		$objStatement = \Database::getInstance()->prepare($strQuery);
-
-		// Defaults for limit and offset
-		if (!isset($arrOptions['limit']))
-		{
-			$arrOptions['limit'] = 0;
-		}
-		if (!isset($arrOptions['offset']))
-		{
-			$arrOptions['offset'] = 0;
-		}
-
-		// Limit
-		if ($arrOptions['limit'] > 0 || $arrOptions['offset'] > 0)
-		{
-			$objStatement->limit($arrOptions['limit'], $arrOptions['offset']);
-		}
-
-		$objStatement = static::preFind($objStatement);
-		$objResult = $objStatement->execute($arrOptions['value']);
-
-		if ($objResult->numRows < 1)
-		{
-			return null;
-		}
-
-		$objResult = static::postFind($objResult);
-		return new static($objResult);
-	}
-
-
-	/**
-	 * Modify the statement before it is executed
-	 * @param \Database_Statement
-	 * @return \Contao\Database_Statement
-	 */
-	protected static function preFind(\Database_Statement $objStatement)
-	{
-		return $objStatement;
-	}
-
-
-	/**
-	 * Modify the result set before the model is created
-	 * @param \Database_Result
-	 * @return \Contao\Database_Result
-	 */
-	protected static function postFind(\Database_Result $objResult)
-	{
-		return $objResult;
-	}
-
-
-	/**
-	 * Find records by one or more conditions and return the number of rows
-	 * @param mixed
-	 * @param mixed
-	 * @return integer
-	 */
-	public static function countBy($strColumn, $varValue)
-	{
-		if (static::$strTable == '')
-		{
-			return null;
-		}
-
-		$strQuery = \Model_QueryBuilder::count(array
-		(
-			'table'  => static::$strTable,
-			'column' => $strColumn,
-			'value'  => $varValue
-		));
-
-		$objResult = \Database::getInstance()->prepare($strQuery)->execute($varValue);
-		return new static($objResult);
-	}
-
-
-	/**
-	 * Find all records and return the number of rows
-	 * @return integer
-	 */
-	public static function countAll()
-	{
-		return static::countBy(null, null);
-	}
-
-
-	/**
-	 * Save the current model
-	 * @return \Contao\Model_Collection
-	 */
-	public function save()
-	{
-		if ($this->intIndex < 0)
-		{
-			$this->first();
-		}
-
-		$this->arrModels[$this->intIndex]->save();
-		return $this;
-	}
-
-
-	/**
-	 * Delete the current model and return the number of affected rows
-	 * @return integer
-	 */
-	public function delete()
-	{
-		if ($this->intIndex < 0)
-		{
-			$this->first();
-		}
-
-		return $this->arrModels[$this->intIndex]->delete();
-	}
-
-
-	/**
-	 * Lazy load related records
-	 * @param string
-	 * @return \Contao\Model_Collection
-	 */
-	public function getRelated($strKey)
-	{
-		if ($this->intIndex < 0)
-		{
-			$this->first();
-		}
-
-		return $this->arrModels[$this->intIndex]->getRelated($strKey);
 	}
 }

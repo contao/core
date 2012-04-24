@@ -51,4 +51,53 @@ class CommentsModel extends \Model
 	 */
 	protected static $strTable = 'tl_comments';
 
+
+	/**
+	 * Find published comments by their source table and parent ID
+	 * @param string
+	 * @param integer
+	 * @param boolean
+	 * @param integer
+	 * @param integer
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findPublishedBySourceAndParent($strSource, $intParent, $lbnDesc=false, $intLimit=0, $intOffset=0)
+	{
+		$t = static::$strTable;
+		$arrColumns = array("$t.source=? AND $t.parent=?");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$arrColumns[] = "$t.published=1";
+		}
+
+		$arrOptions = array
+		(
+			'order'  => ($lbnDesc ? "$t.date DESC" : "$t.date"),
+			'limit'  => $intLimit,
+			'offset' => $intOffset
+		);
+
+		return static::findBy($arrColumns, array($strSource, $intParent), $arrOptions);
+	}
+
+
+	/**
+	 * Count published comments by their source table and parent ID
+	 * @param string
+	 * @param integer
+	 * @return \Contao\Model|null
+	 */
+	public static function countPublishedBySourceAndParent($strSource, $intParent)
+	{
+		$t = static::$strTable;
+		$arrColumns = array("$t.source=? AND $t.parent=?");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$arrColumns[] = "$t.published=1";
+		}
+
+		return static::countBy($arrColumns, array($strSource, $intParent));
+	}
 }

@@ -177,21 +177,13 @@ class ModuleExtension extends BackendModule
 				// Models
 				foreach ($arrTables as $strTable)
 				{
-					$strModel = $this->getModelClassFromTable($strTable, true);
+					$strModel = $this->getModelClassFromTable($strTable);
 
 					$tplTable = $this->newTemplate('dev_model', $objModule);
 					$tplTable->table = $strTable;
 					$tplTable->class = $strModel . 'Model';
 
 					$objTable = new \File('system/modules/' . $objModule->folder . '/models/' . $strModel . 'Model.php');
-					$objTable->write($tplTable->parse());
-					$objTable->close();
-
-					$tplTable = $this->newTemplate('dev_collection', $objModule);
-					$tplTable->table = $strTable;
-					$tplTable->class = $strModel . 'Collection';
-
-					$objTable = new \File('system/modules/' . $objModule->folder . '/models/' . $strModel . 'Collection.php');
 					$objTable->write($tplTable->parse());
 					$objTable->close();
 				}

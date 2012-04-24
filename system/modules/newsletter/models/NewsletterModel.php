@@ -57,7 +57,7 @@ class NewsletterModel extends \Model
 	 * @param integer
 	 * @param string
 	 * @param array
-	 * @return \Contao\Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findSentByParentAndIdOrAlias($intId, $varAlias, $arrPids)
 	{
@@ -75,5 +75,48 @@ class NewsletterModel extends \Model
 		}
 
 		return static::findBy($arrColumns, array($intId, $varAlias));
+	}
+
+
+	/**
+	 * Find sent newsletters by their parent ID
+	 * @param integer
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findSentByPid($intPid)
+	{
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid=?");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$arrColumns[] = "$t.sent=1";
+		}
+
+		return static::findBy($arrColumns, $intPid, array('order'=>"$t.date DESC"));
+	}
+
+
+	/**
+	 * Find sent newsletters by multiple parent IDs
+	 * @param array
+	 * @return \Contao\Model_Collection|null
+	 */
+	public static function findSentByPids($arrPids)
+	{
+		if (!is_array($arrPids) || empty($arrPids))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$arrColumns[] = "$t.sent=1";
+		}
+
+		return static::findBy($arrColumns, null, array('order'=>"$t.date DESC"));
 	}
 }
