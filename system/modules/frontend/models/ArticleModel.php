@@ -58,7 +58,7 @@ class ArticleModel extends \Model
 	 * @param integer
 	 * @return \Contao\Model|null
 	 */
-	public static function findByIdOrAliasAndColumn($varId, $intPid)
+	public static function findByIdOrAliasAndPid($varId, $intPid)
 	{
 		$t = static::$strTable;
 		$arrColumns = array("($t.id=? OR $t.alias=?)");

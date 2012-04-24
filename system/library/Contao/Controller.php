@@ -311,7 +311,7 @@ abstract class Controller extends \System
 				return '';
 			}
 
-			$objRow = \ArticleModel::findByIdOrAliasAndColumn($varId, (!$blnIsInsertTag ? $objPage->id : null));
+			$objRow = \ArticleModel::findByIdOrAliasAndPid($varId, (!$blnIsInsertTag ? $objPage->id : null));
 		}
 
 		// Return if the article does not exist
