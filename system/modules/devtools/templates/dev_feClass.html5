@@ -41,7 +41,7 @@ namespace <?php echo $this->package; ?>;
  * @author     <?php echo $this->author; ?> 
  * @package    Controller
  */
-class <?php echo $this->class; ?> extends \Module
+class <?php echo $this->class; ?> extends \<?php echo $this->extends; ?> 
 {
 
 	/**

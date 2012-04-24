@@ -100,14 +100,17 @@ class ModuleAutoload extends \BackendModule
 
 					$arrFiles = scan(TL_ROOT . '/system/modules/' . $strModule);
 
-					// Support certain subfolders
-					foreach (array('classes', 'drivers', 'elements', 'forms', 'models', 'modules', 'pages', 'widgets') as $strCategory)
+					// Support subfolders
+					foreach ($arrFiles as $strFolder)
 					{
-						if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/' . $strCategory))
+						if ($strFolder != 'config' && $strFolder != 'dca' && $strFolder != 'html' && $strFolder != 'languages' && $strFolder != 'templates')
 						{
-							$files = scan(TL_ROOT . '/system/modules/' . $strModule . '/' . $strCategory);
-							$files = array_map(function($val) use ($strCategory) { return $strCategory . '/' . $val; }, $files);
-							$arrFiles = array_merge($arrFiles, $files);
+							if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFolder))
+							{
+								$files = scan(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFolder);
+								$files = array_map(function($val) use ($strFolder) { return $strFolder . '/' . $val; }, $files);
+								$arrFiles = array_merge($arrFiles, $files);
+							}
 						}
 					}
 

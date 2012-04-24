@@ -87,9 +87,9 @@ class ModuleExtension extends BackendModule
 				return;
 			}
 
-			// config/.htaccess
+			// .htaccess
 			$tplHtaccess = new \BackendTemplate('dev_htaccess');
-			$objHtaccess = new \File('system/modules/' . $objModule->folder . '/config/.htaccess');
+			$objHtaccess = new \File('system/modules/' . $objModule->folder . '/.htaccess');
 			$objHtaccess->write($tplHtaccess->parse());
 			$objHtaccess->close();
 
@@ -98,22 +98,6 @@ class ModuleExtension extends BackendModule
 			$objConfig = new \File('system/modules/' . $objModule->folder . '/config/config.php');
 			$objConfig->write($tplConfig->parse());
 			$objConfig->close();
-
-			// dca/.htaccess
-			if ($objModule->beTables || $objModule->feTables)
-			{
-				$objHtaccess = new \File('system/modules/' . $objModule->folder . '/dca/.htaccess');
-				$objHtaccess->write($tplHtaccess->parse());
-				$objHtaccess->close();
-			}
-
-			// templates/.htaccess
-			if ($objModule->beTemplates || $objModule->feTemplates)
-			{
-				$objHtaccess = new \File('system/modules/' . $objModule->folder . '/templates/.htaccess');
-				$objHtaccess->write($tplHtaccess->parse());
-				$objHtaccess->close();
-			}
 
 			// Back end
 			if ($objModule->addBeMod)
@@ -126,7 +110,7 @@ class ModuleExtension extends BackendModule
 					$tplClass = $this->newTemplate('dev_beClass', $objModule);
 					$tplClass->class = $strClass;
 
-					$objClass = new \File('system/modules/' . $objModule->folder . '/' . $strClass . '.php');
+					$objClass = new \File('system/modules/' . $objModule->folder . '/' . $this->guessSubfolder($strClass) . '/' . $strClass . '.php');
 					$objClass->write($tplClass->parse());
 					$objClass->close();
 				}
@@ -166,8 +150,9 @@ class ModuleExtension extends BackendModule
 				{
 					$tplClass = $this->newTemplate('dev_feClass', $objModule);
 					$tplClass->class = $strClass;
+					$tplClass->extends = $this->guessParentClass($strClass);
 
-					$objClass = new \File('system/modules/' . $objModule->folder . '/' . $strClass . '.php');
+					$objClass = new \File('system/modules/' . $objModule->folder . '/' . $this->guessSubfolder($strClass) . '/' . $strClass . '.php');
 					$objClass->write($tplClass->parse());
 					$objClass->close();
 				}
@@ -181,7 +166,7 @@ class ModuleExtension extends BackendModule
 
 					$tplTable = $this->newTemplate('dev_model', $objModule);
 					$tplTable->table = $strTable;
-					$tplTable->class = $strModel . 'Model';
+					$tplTable->class = $strModel;
 
 					$objTable = new \File('system/modules/' . $objModule->folder . '/models/' . $strModel . 'Model.php');
 					$objTable->write($tplTable->parse());
@@ -273,5 +258,65 @@ class ModuleExtension extends BackendModule
 		$objTemplate->license = $objModule->license;
 
 		return $objTemplate;
+	}
+
+
+	/**
+	 * Try to guess the subfolder of a class depending on its name
+	 * @param string
+	 * @return string
+	 */
+	protected function guessSubfolder($strClassName)
+	{
+		if (strncmp($strClassName, 'DC_', 3) === 0)
+		{
+			return 'drivers';
+		}
+		elseif (strncmp($strClassName, 'Content', 7) === 0)
+		{
+			return 'elements';
+		}
+		elseif (strncmp($strClassName, 'Form', 4) === 0)
+		{
+			return 'forms';
+		}
+		elseif (strncmp($strClassName, 'Module', 6) === 0)
+		{
+			return 'modules';
+		}
+		elseif (strncmp($strClassName, 'Page', 4) === 0)
+		{
+			return 'pages';
+		}
+		else
+		{
+			return 'classes';
+		}
+	}
+
+
+	/**
+	 * Try to guess the parent class of a class depending on its name
+	 * @param string
+	 * @return string
+	 */
+	protected function guessParentClass($strClassName)
+	{
+		if (strncmp($strClassName, 'Content', 7) === 0)
+		{
+			return 'ContentElement';
+		}
+		elseif (strncmp($strClassName, 'Form', 4) === 0)
+		{
+			return 'Widget';
+		}
+		elseif (strncmp($strClassName, 'Page', 4) === 0)
+		{
+			return 'Frontend';
+		}
+		else
+		{
+			return 'Module';
+		}
 	}
 }
