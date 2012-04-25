@@ -789,16 +789,11 @@ abstract class System
 	 * Encode an internationalized domain name
 	 * @param string
 	 * @return string
+	 * @deprecated
 	 */
 	protected function idnaEncode($strDomain)
 	{
-		if (!class_exists('idna_convert', false))
-		{
-			require_once TL_ROOT . '/system/library/IDNA/idna_convert.class.php';
-		}
-
-		$objIdn = new \idna_convert();
-		return $objIdn->encode($strDomain);
+		return \Idna::encode($strDomain);
 	}
 
 
@@ -806,16 +801,11 @@ abstract class System
 	 * Decode an internationalized domain name
 	 * @param string
 	 * @return string
+	 * @deprecated
 	 */
 	protected function idnaDecode($strDomain)
 	{
-		if (!class_exists('idna_convert', false))
-		{
-			require_once TL_ROOT . '/system/library/IDNA/idna_convert.class.php';
-		}
-
-		$objIdn = new \idna_convert();
-		return $objIdn->decode($strDomain);
+		return \Idna::decode($strDomain);
 	}
 
 
@@ -823,16 +813,11 @@ abstract class System
 	 * Encode an e-mail address
 	 * @param string
 	 * @return string
+	 * @deprecated
 	 */
 	protected function idnaEncodeEmail($strEmail)
 	{
-		if ($strEmail == '')
-		{
-			return '';
-		}
-
-		list($strLocal, $strHost) = explode('@', $strEmail);
-		return $strLocal .'@'. $this->idnaEncode($strHost);
+		return \Idna::encodeEmail($strEmail);
 	}
 
 
@@ -840,89 +825,11 @@ abstract class System
 	 * Encode an URL
 	 * @param string
 	 * @return string
+	 * @deprecated
 	 */
 	protected function idnaEncodeUrl($strUrl)
 	{
-		if ($strUrl == '')
-		{
-			return '';
-		}
-
-		// Empty anchor (see #3555)
-		if ($strUrl == '#')
-		{
-			return $strUrl;
-		}
-
-		// E-mail address
-		if (strncasecmp($strUrl, 'mailto:', 7) === 0)
-		{
-			return $this->idnaEncodeEmail($strUrl);
-		}
-
-		$blnSchemeAdded = false;
-		$arrUrl = parse_url($strUrl);
-
-		// Add the scheme to ensure that parse_url works correctly
-		if (!isset($arrUrl['scheme']) && strncmp($strUrl, '{{', 2) !== 0)
-		{
-			$blnSchemeAdded = true;
-			$arrUrl = parse_url('http://' . $strUrl);
-		}
-
-		// Scheme
-		if (isset($arrUrl['scheme']))
-		{
-			// Remove the scheme if it has been added above (see #3792)
-			if ($blnSchemeAdded)
-			{
-				unset($arrUrl['scheme']);
-			}
-			else
-			{
-				$arrUrl['scheme'] .= '://';
-			}
-		}
-
-		// User
-		if (isset($arrUrl['user']))
-		{
-			$arrUrl['user'] .= isset($arrUrl['pass']) ? ':' : '@';
-		}
-
-		// Password
-		if (isset($arrUrl['pass']))
-		{
-			$arrUrl['pass'] .= '@';
-		}
-
-		// Host
-		if (isset($arrUrl['host']))
-		{
-			$arrUrl['host'] = $this->idnaEncode($arrUrl['host']);
-		}
-
-		// Port
-		if (isset($arrUrl['port']))
-		{
-			$arrUrl['port'] = ':' . $arrUrl['port'];
-		}
-
-		// Path does not have to be altered
-
-		// Query
-		if (isset($arrUrl['query']))
-		{
-			$arrUrl['query'] = '?' . $arrUrl['query'];
-		}
-
-		// Anchor
-		if (isset($arrUrl['fragment']))
-		{
-			$arrUrl['fragment'] = '#' . $arrUrl['fragment'];
-		}
-
-		return $arrUrl['scheme'] . $arrUrl['user'] . $arrUrl['pass'] . $arrUrl['host'] . $arrUrl['port'] . $arrUrl['path'] . $arrUrl['query'] . $arrUrl['fragment']; 
+		return \Idna::encodeUrl($strUrl);
 	}
 
 
@@ -930,10 +837,11 @@ abstract class System
 	 * Validate an e-mail address
 	 * @param string
 	 * @return boolean
+	 * @deprecated
 	 */
 	protected function isValidEmailAddress($strEmail)
 	{
-		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $strEmail);
+		return \Validator::isEmail($strEmail);
 	}
 
 

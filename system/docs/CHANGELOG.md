@@ -5,6 +5,10 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+Added the classes `Validator` and `Idna` to encapsulate validation and IDNA
+domain name encoding in static methods.
+
+### New
 Added support for minutely cron jobs (see #3895).
 
 ### Changed

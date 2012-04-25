@@ -669,7 +669,7 @@ abstract class Widget extends Controller
 
 				// Numeric characters (including full stop [.] minus [-] and space [ ])
 				case 'digit':
-					if (!preg_match('/^[\d \.-]*$/', $varInput))
+					if (!\Validator::isNumeric($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['digit'], $this->strLabel));
 					}
@@ -677,43 +677,23 @@ abstract class Widget extends Controller
 
 				// Alphabetic characters (including full stop [.] minus [-] and space [ ])
 				case 'alpha':
-					if (function_exists('mb_eregi'))
+					if (!\Validator::isAlphabetic($varInput))
 					{
-						if (!mb_eregi('^[[:alpha:] \.-]*$', $varInput))
-						{
-							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alpha'], $this->strLabel));
-						}
-					}
-					else
-					{
-						if (!preg_match('/^[\pL \.-]*$/u', $varInput))
-						{
-							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alpha'], $this->strLabel));
-						}
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alpha'], $this->strLabel));
 					}
 					break;
 
 				// Alphanumeric characters (including full stop [.] minus [-], underscore [_] and space [ ])
 				case 'alnum':
-					if (function_exists('mb_eregi'))
+					if (!\Validator::isAlphanumeric($varInput))
 					{
-						if (!mb_eregi('^[[:alnum:] \._-]*$', $varInput))
-						{
-							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alnum'], $this->strLabel));
-						}
-					}
-					else
-					{
-						if (!preg_match('/^[\pN\pL \._-]*$/u', $varInput))
-						{
-							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alnum'], $this->strLabel));
-						}
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alnum'], $this->strLabel));
 					}
 					break;
 
 				// Do not allow any characters that are usually encoded by class Input [=<>()#/])
 				case 'extnd':
-					if (preg_match('/[#\(\)\/<=>]/', html_entity_decode($varInput)))
+					if (!\Validator::isExtendedAlphanumeric(html_entity_decode($varInput)))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['extnd'], $this->strLabel));
 					}
@@ -756,9 +736,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid e-mail address
 				case 'email':
-					$varInput = $this->idnaEncodeEmail($varInput);
-
-					if (!$this->isValidEmailAddress($varInput))
+					if (!\Validator::isEmail($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['email'], $this->strLabel));
 					}
@@ -774,9 +752,9 @@ abstract class Widget extends Controller
 
 					foreach ($arrEmails as $strEmail)
 					{
-						$strEmail = $this->idnaEncodeEmail($strEmail);
+						$strEmail = Idna::encodeEmail($strEmail);
 
-						if (!$this->isValidEmailAddress($strEmail))
+						if (!\Validator::isEmail($strEmail))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['emails'], $this->strLabel));
 							break;
@@ -786,9 +764,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid URL
 				case 'url':
-					$varInput = $this->idnaEncodeUrl($varInput);
-
-					if (!preg_match('/^[a-zA-Z0-9\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]*$/', $varInput))
+					if (!\Validator::isUrl($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['url'], $this->strLabel));
 					}
@@ -796,7 +772,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid alias
 				case 'alias':
-					if (!preg_match('/^[\pN\pL\._-]*$/', $varInput))
+					if (!\Validator::isAlias($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alias'], $this->strLabel));
 					}
@@ -804,7 +780,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid folder URL alias
 				case 'folderalias':
-					if (!preg_match('/^[\pN\pL\/\._-]*$/', $varInput))
+					if (!\Validator::isFolderAlias($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['folderalias'], $this->strLabel));
 					}
@@ -812,7 +788,7 @@ abstract class Widget extends Controller
 
 				// Phone numbers (numeric characters, space [ ], plus [+], minus [-], parentheses [()] and slash [/])
 				case 'phone':
-					if (!preg_match('/^(\+|\()?(\d+[ \+\(\)\/-]*)+$/', html_entity_decode($varInput)))
+					if (!\Validator::isPhone(html_entity_decode($varInput)))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['phone'], $this->strLabel));
 					}
@@ -820,7 +796,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a percent value
 				case 'prcnt':
-					if (!is_numeric($varInput) || $varInput < 0 || $varInput > 100)
+					if (!\Validator::isPercent($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['prcnt'], $this->strLabel));
 					}

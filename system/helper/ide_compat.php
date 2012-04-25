@@ -56,6 +56,7 @@ class Files_Ftp extends Contao\Files_Ftp {}
 class Files_Php extends Contao\Files_Php {}
 abstract class Files extends Contao\Files {}
 class Folder extends Contao\Folder {}
+class Idna extends Contao\Idna {}
 class Input extends Contao\Input {}
 class Model_Collection extends Contao\Model_Collection {}
 class Model_QueryBuilder extends Contao\Model_QueryBuilder {}
@@ -69,6 +70,7 @@ class System extends Contao\System {}
 class Template extends Contao\Template {}
 class TemplateLoader extends Contao\TemplateLoader {}
 abstract class User extends Contao\User {}
+class Validator extends Contao\Validator {}
 abstract class Widget extends Contao\Widget {}
 class ZipReader extends Contao\ZipReader {}
 class ZipWriter extends Contao\ZipWriter {}
