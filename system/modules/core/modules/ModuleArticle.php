@@ -226,6 +226,7 @@ class ModuleArticle extends \Module
 				$this->Template->pdfButton = in_array('pdf', $options);
 				$this->Template->facebookButton = in_array('facebook', $options);
 				$this->Template->twitterButton = in_array('twitter', $options);
+				$this->Template->gplusButton = in_array('gplus', $options);
 			}
 		}
 
@@ -243,6 +244,7 @@ class ModuleArticle extends \Module
 			$this->Template->pdfTitle = specialchars($GLOBALS['TL_LANG']['MSC']['printAsPdf']);
 			$this->Template->facebookTitle = specialchars($GLOBALS['TL_LANG']['MSC']['facebookShare']);
 			$this->Template->twitterTitle = specialchars($GLOBALS['TL_LANG']['MSC']['twitterShare']);
+			$this->Template->glpusTitle = specialchars($GLOBALS['TL_LANG']['MSC']['gplusShare']);
 		}
 	}
 }

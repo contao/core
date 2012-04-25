@@ -264,7 +264,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['printable'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'options'                 => array('print', 'pdf', 'facebook', 'twitter'),
+			'options'                 => array('print', 'pdf', 'facebook', 'twitter', 'gplus'),
 			'eval'                    => array('multiple'=>true),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_article'],
 			'sql'                     => "varchar(255) NOT NULL default ''"

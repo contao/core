@@ -200,7 +200,7 @@ abstract class System
 		}
 		if ($this->Environment->remoteAddr)
 		{
-			$strIp = $this->anonymizeIp($this->Environment->remoteAddr);
+			$strIp = $this->anonymizeIp($this->Environment->ip);
 		}
 
 		$this->Database->prepare("INSERT INTO tl_log (tstamp, source, action, username, text, func, ip, browser) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")

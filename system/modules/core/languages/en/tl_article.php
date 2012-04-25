@@ -60,6 +60,7 @@ $GLOBALS['TL_LANG']['tl_article']['print']          = 'Print the page';
 $GLOBALS['TL_LANG']['tl_article']['pdf']            = 'Export as PDF';
 $GLOBALS['TL_LANG']['tl_article']['facebook']       = 'Share on Facebook';
 $GLOBALS['TL_LANG']['tl_article']['twitter']        = 'Share on Twitter';
+$GLOBALS['TL_LANG']['tl_article']['gplus']          = 'Share on Google+';
 
 
 /**

@@ -38,9 +38,9 @@ $GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'] = array('Front end user', 
 /**
  * Jobs
  */
-$GLOBALS['TL_LANG']['tl_maintenance_jobs']['index']    = array('Purge the search index', 'Truncates the tables <em>tl_seach</em> and <em>tl_search_index</em>. Afterwards, you have to rebuild the search index (see above).');
-$GLOBALS['TL_LANG']['tl_maintenance_jobs']['undo']     = array('Purge the undo table', 'Truncates the <em>tl_undo</em> table which stores the deleted records. This job permanently deletes theses records.');
-$GLOBALS['TL_LANG']['tl_maintenance_jobs']['versions'] = array('Purge the version table', 'Truncates the <em>tl_version</em> table which stores the previous versions of a record. This job permanently deletes theses records.');
+$GLOBALS['TL_LANG']['tl_maintenance_jobs']['index']    = array('Purge the search index', 'Truncates the tables <em>tl_search</em> and <em>tl_search_index</em>. Afterwards, you have to rebuild the search index (see above).');
+$GLOBALS['TL_LANG']['tl_maintenance_jobs']['undo']     = array('Purge the undo table', 'Truncates the <em>tl_undo</em> table which stores the deleted records. This job permanently deletes these records.');
+$GLOBALS['TL_LANG']['tl_maintenance_jobs']['versions'] = array('Purge the version table', 'Truncates the <em>tl_version</em> table which stores the previous versions of a record. This job permanently deletes these records.');
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['images']   = array('Purge the image cache', 'Removes the automatically generated images and then purges the page cache, so there are no links to deleted ressources.');
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['scripts']  = array('Purge the script cache', 'Removes the automatically generated .css and .js files, recreates the internal style sheets and then purges the page cache.');
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['pages']    = array('Purge the page cache', 'Removes the cached versions of the front end pages.');

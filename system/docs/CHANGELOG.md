@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added the new "Share on Google+" button to the article header.
+
 ### Changed
 Merged the "rep_base" and "rep_client" modules into one "repository" module.
 

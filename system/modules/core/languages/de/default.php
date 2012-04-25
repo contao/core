@@ -567,6 +567,7 @@ $GLOBALS['TL_LANG']['MSC']['printPage']         = 'Diese Seite drucken';
 $GLOBALS['TL_LANG']['MSC']['printAsPdf']        = 'Artikel als PDF drucken';
 $GLOBALS['TL_LANG']['MSC']['facebookShare']     = 'Auf Facebook teilen';
 $GLOBALS['TL_LANG']['MSC']['twitterShare']      = 'Auf Twitter teilen';
+$GLOBALS['TL_LANG']['MSC']['gplusShare']        = 'Auf Google+ teilen';
 $GLOBALS['TL_LANG']['MSC']['pleaseWait']        = 'Bitte warten Sie';
 $GLOBALS['TL_LANG']['MSC']['loading']           = 'Laden …';
 $GLOBALS['TL_LANG']['MSC']['more']              = 'Weiterlesen …';
