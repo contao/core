@@ -71,10 +71,11 @@ class CronJob extends Frontend
 			return;
 		}
 
-		$intMonthly = date('Ym');
-		$intWeekly  = date('YW');
-		$intDaily   = date('Ymd');
-		$intHourly  = date('YmdH');
+		$intMonthly  = date('Ym');
+		$intWeekly   = date('YW');
+		$intDaily    = date('Ymd');
+		$intHourly   = date('YmdH');
+		$intMinutely = date('YmdHi');
 
 		// Monthly jobs
 		if (!empty($GLOBALS['TL_CRON']['monthly']) && $GLOBALS['TL_CONFIG']['cron_monthly'] != $intMonthly)
@@ -134,6 +135,21 @@ class CronJob extends Frontend
 
 			$this->log('Hourly cron jobs complete', 'CronJobs run()', TL_CRON);
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_hourly']", $intHourly);
+		}
+
+		// Minutely jobs
+		elseif (!empty($GLOBALS['TL_CRON']['minutely']) && $GLOBALS['TL_CONFIG']['cron_minutely'] != $intMinutely)
+		{
+			$this->log('Running minutely cron jobs', 'CronJobs run()', TL_CRON);
+
+			foreach ($GLOBALS['TL_CRON']['minutely'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]();
+			}
+
+			$this->log('Minutely cron jobs complete', 'CronJobs run()', TL_CRON);
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_minutely']", $intMinutely);
 		}
 	}
 

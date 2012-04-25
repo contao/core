@@ -377,7 +377,8 @@ $GLOBALS['TL_CRON'] = array
 		array('Automator', 'rotateLogs'),
 		array('Automator', 'checkForUpdates')
 	),
-	'hourly' => array()
+	'hourly' => array(),
+	'minutely' => array()
 );
 
 
