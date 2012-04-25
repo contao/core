@@ -179,9 +179,12 @@ class ModuleNewsList extends \ModuleNews
 		{
 			$this->Template = new \FrontendTemplate('mod_newsarchive_empty');
 		}
+		else
+		{
+			$this->Template->articles = $this->parseArticles($objArticles);
+		}
 
 		$this->Template->archives = $this->news_archives;
-		$this->Template->articles = $this->parseArticles($objArticles);
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyList'];
 	}
 }

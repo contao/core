@@ -214,9 +214,12 @@ class ModuleNewsArchive extends \ModuleNews
 		{
 			$this->Template = new \FrontendTemplate('mod_newsarchive_empty');
 		}
+		else
+		{
+			$this->Template->articles = $this->parseArticles($objArticles);
+		}
 
 		$this->Template->headline = trim($this->headline);
-		$this->Template->articles = $this->parseArticles($objArticles);
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['empty'];
 	}
