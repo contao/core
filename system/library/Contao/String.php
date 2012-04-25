@@ -61,7 +61,7 @@ class String
 	/**
 	 * Prevent cloning of the object (Singleton)
 	 */
-	final private function __clone() {}
+	final public function __clone() {}
 
 
 	/**

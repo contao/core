@@ -126,7 +126,7 @@ abstract class User extends \System
 	 * Prevent cloning of the object (Singleton)
 	 * @return mixed|void
 	 */
-	final private function __clone() {}
+	final public function __clone() {}
 
 
 	/**
