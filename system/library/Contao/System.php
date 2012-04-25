@@ -733,11 +733,11 @@ abstract class System
 	 * @param boolean
 	 * @return void
 	 */
-	protected function setCookie($strName, $varValue, $intExpires, $strPath='/', $strDomain=null, $blnSecure=false)
+	protected function setCookie($strName, $varValue, $intExpires, $strPath=null, $strDomain=null, $blnSecure=false)
 	{
-		if ($strPath == '')
+		if ($strPath === null)
 		{
-			$strPath = '/';
+			$strPath = $GLOBALS['TL_CONFIG']['websitePath'];
 		}
 
 		$objCookie = new \stdClass();
