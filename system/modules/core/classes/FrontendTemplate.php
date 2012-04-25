@@ -164,11 +164,11 @@ class FrontendTemplate extends \Template
 			$strBuffer = $this->replaceInsertTags($strBuffer, true);
 			$intCache = intval($objPage->cache) + time();
 			$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
-			$strCacheKey = md5($strCacheKey);
+			$strMd5CacheKey = md5($strCacheKey);
 
 			// Create the cache file
-			$objFile = new \File('system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html');
-			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strCacheKey . " */ ?>\n");
+			$objFile = new \File('system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html');
+			$objFile->write('<?php' . " /* $strCacheKey */ \$expire = $intCache; \$content = '{$this->strContentType}'; ?>\n");
 
 			/**
 			 * Copyright notice
