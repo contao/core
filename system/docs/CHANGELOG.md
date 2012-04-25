@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+Moved the "getCountries" hook to the end of the `getCountries()` method so it
+passes the sorted array instead of the raw one (see #3823).
+
 ### New
 Added the new "Share on Google+" button to the article header.
 
