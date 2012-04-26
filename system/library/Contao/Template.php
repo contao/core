@@ -304,7 +304,7 @@ abstract class Template extends Controller
 		// Debug information
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
 		{
-			$strDebug = '<div id="debug" class="' . $this->Input->cookie('CONTAO_CONSOLE') . '">' . "\n"
+			$strDebug = '<div id="debug" class="' . \Input::cookie('CONTAO_CONSOLE') . '">' . "\n"
 				. '<p><span class="info">Contao debug information</span> <span class="time">Execution time: ' . $this->getFormattedNumber(microtime(true) - TL_START, 4) . ' seconds</span> <span class="memory">Memory usage: ' . $this->getReadableSize(memory_get_peak_usage()) . '</span> <span class="db">Database queries: ' . count($GLOBALS['TL_DEBUG']['database_queries']) . '</span> <span id="tog">&nbsp;</span></p>' . "\n"
 				. '<div><pre>' . "\n";
 

@@ -95,9 +95,9 @@ class ContentTable extends \ContentElement
 					$co = 'TS_TABLE_' . $this->id;
 					$so = ($this->sortOrder == 'descending') ? 'desc' : 'asc';
 
-					if (!strlen($this->Input->cookie($co)))
+					if (\Input::cookie($co) == '')
 					{
-						setcookie($co, $i . '|' . $so, 0, '/');
+						setcookie($co, $i . '|' . $so, 0, '/'); # FIXME: use setCookie()?
 					}
 				}
 

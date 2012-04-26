@@ -103,7 +103,7 @@ class FileManager extends Backend
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->pageOffset = $this->Input->cookie('BE_PAGE_OFFSET');
+		$this->Template->pageOffset = \Input::cookie('BE_PAGE_OFFSET');
 		$this->Template->error = ($this->Input->get('act') == 'error') ? $GLOBALS['TL_LANG']['ERR']['general'] : '';
 		$this->Template->skipNavigation = $GLOBALS['TL_LANG']['MSC']['skipNavigation'];
 		$this->Template->request = ampersand(\Environment::get('request'));

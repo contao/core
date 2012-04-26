@@ -78,7 +78,7 @@ class BackendUser extends \User
 		parent::__construct();
 
 		$this->strIp = \Environment::get('ip');
-		$this->strHash = $this->Input->cookie($this->strCookie);
+		$this->strHash = \Input::cookie($this->strCookie);
 	}
 
 

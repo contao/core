@@ -138,7 +138,7 @@ class RebuildIndex extends \Backend implements \executable
 			{
 				// Unset the cookies
 				$this->setCookie('FE_USER_AUTH', $strHash, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
-				$this->setCookie('FE_AUTO_LOGIN', $this->Input->cookie('FE_AUTO_LOGIN'), ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
+				$this->setCookie('FE_AUTO_LOGIN', \Input::cookie('FE_AUTO_LOGIN'), ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
 			}
 
 			$strBuffer = '';

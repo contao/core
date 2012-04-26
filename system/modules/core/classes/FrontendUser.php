@@ -96,7 +96,7 @@ class FrontendUser extends \User
 		parent::__construct();
 
 		$this->strIp = \Environment::get('ip');
-		$this->strHash = $this->Input->cookie($this->strCookie);
+		$this->strHash = \Input::cookie($this->strCookie);
 	}
 
 
@@ -178,13 +178,13 @@ class FrontendUser extends \User
 		}
 
 		// Check whether auto login is active
-		if ($GLOBALS['TL_CONFIG']['autologin'] < 1 || $this->Input->cookie('FE_AUTO_LOGIN') == '')
+		if ($GLOBALS['TL_CONFIG']['autologin'] < 1 || \Input::cookie('FE_AUTO_LOGIN') == '')
 		{
 			return false;
 		}
 
 		// Try to find the user by his auto login cookie
-		if ($this->findBy('autologin', $this->Input->cookie('FE_AUTO_LOGIN')) == false)
+		if ($this->findBy('autologin', \Input::cookie('FE_AUTO_LOGIN')) == false)
 		{
 			return false;
 		}

@@ -509,7 +509,7 @@ abstract class User extends \System
 	public function logout()
 	{
 		// Return if the user has been logged out already
-		if (!$this->Input->cookie($this->strCookie))
+		if (!\Input::cookie($this->strCookie))
 		{
 			return false;
 		}

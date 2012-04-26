@@ -422,7 +422,7 @@ abstract class Frontend extends \Controller
 		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . $strCookie);
 
 		// Validate the cookie hash
-		if ($this->Input->cookie($strCookie) == $hash)
+		if (\Input::cookie($strCookie) == $hash)
 		{
 			// Try to find the session
 			$objSession = \SessionModel::findByHashAndName($hash, $strCookie);
@@ -436,7 +436,7 @@ abstract class Frontend extends \Controller
 					$_SESSION['DISABLE_CACHE'] = true;
 
 					// Always return false if we are not in preview mode (show hidden elements)
-					if (!$this->Input->cookie('FE_PREVIEW'))
+					if (!\Input::cookie('FE_PREVIEW'))
 					{
 						$_SESSION['TL_USER_LOGGED_IN'] = false;
 						return false;

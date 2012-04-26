@@ -142,7 +142,7 @@ class InstallTool extends Backend
 			$this->setAuthCookie();
 		}
 		// Login required
-		elseif (!$this->Input->cookie('TL_INSTALL_AUTH') || $_SESSION['TL_INSTALL_AUTH'] == '' || $this->Input->cookie('TL_INSTALL_AUTH') != $_SESSION['TL_INSTALL_AUTH'] || $_SESSION['TL_INSTALL_EXPIRE'] < time())
+		elseif (!\Input::cookie('TL_INSTALL_AUTH') || $_SESSION['TL_INSTALL_AUTH'] == '' || \Input::cookie('TL_INSTALL_AUTH') != $_SESSION['TL_INSTALL_AUTH'] || $_SESSION['TL_INSTALL_EXPIRE'] < time())
 		{
 			$this->Template->login = true;
 			$this->outputAndExit();
@@ -754,7 +754,7 @@ class InstallTool extends Backend
 		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->pageOffset = $this->Input->cookie('BE_PAGE_OFFSET');
+		$this->Template->pageOffset = \Input::cookie('BE_PAGE_OFFSET');
 		$this->Template->action = ampersand(\Environment::get('request'));
 		$this->Template->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
 		$this->Template->title = $GLOBALS['TL_LANG']['tl_install']['installTool'][0];
