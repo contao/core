@@ -52,6 +52,12 @@ abstract class System
 	protected $Cache;
 
 	/**
+	 * Config object
+	 * @var Cache
+	 */
+	protected $Config;
+
+	/**
 	 * Database object
 	 * @var Database
 	 */
@@ -74,6 +80,12 @@ abstract class System
 	 * @var Search
 	 */
 	protected $Search;
+
+	/**
+	 * Session object
+	 * @var Search
+	 */
+	protected $Session;
 
 	/**
 	 * String object
@@ -131,20 +143,24 @@ abstract class System
 
 
 	/**
-	 * Protect the constructor by default
+	 * Import the Config and Session instances
 	 */
-	protected function __construct() {}
+	protected function __construct()
+	{
+		$this->import('Config');
+		$this->import('Session');
+	}
 
 
 	/**
-	 * Lazy load the four default libraries (which are now static) and only
-	 * include them as object property if an old module requires it
+	 * Lazy load the Input and Environment libraries (which are now static) and
+	 * only include them as object property if an old module requires it
 	 * @param string
 	 * @return mixed|null
 	 */
 	public function __get($strKey)
 	{
-		if ($strKey == 'Config' || $strKey == 'Input' || $strKey == 'Environment' || $strKey == 'Session')
+		if ($strKey == 'Input' || $strKey == 'Environment')
 		{
 			if (!isset($this->arrObjects[$strKey]))
 			{
