@@ -82,10 +82,8 @@ class RebuildIndex extends \Backend implements \executable
 		// Rebuild the index
 		if ($this->Input->get('act') == 'index')
 		{
-			$this->import('RequestToken');
-
 			// Check the request token (see #4007)
-			if (!isset($_GET['rt']) || !$this->RequestToken->validate($this->Input->get('rt')))
+			if (!isset($_GET['rt']) || !\RequestToken::validate($this->Input->get('rt')))
 			{
 				$this->Session->set('INVALID_TOKEN_URL', $this->Environment->request);
 				$this->redirect('contao/confirm.php');
@@ -109,8 +107,6 @@ class RebuildIndex extends \Backend implements \executable
 				$_SESSION['REBUILD_INDEX_ERROR'] = $GLOBALS['TL_LANG']['tl_maintenance']['noSearchable'];
 				$this->redirect($this->getReferer());
 			}
-
-			$this->import('Search');
 
 			// Truncate the search tables
 			$this->import('Automator');

@@ -55,24 +55,15 @@ class Encryption
 	 * Mcrypt resource
 	 * @var resource
 	 */
-	protected $resTd;
+	protected static $resTd;
 
 
 	/**
 	 * Initialize the encryption module
-	 * @throws \Exception
 	 */
 	protected function __construct()
 	{
-		if (($this->resTd = mcrypt_module_open($GLOBALS['TL_CONFIG']['encryptionCipher'], '', $GLOBALS['TL_CONFIG']['encryptionMode'], '')) == false)
-		{
-			throw new \Exception('Error initializing encryption module');
-		}
-
-		if ($GLOBALS['TL_CONFIG']['encryptionKey'] == '')
-		{
-			throw new \Exception('Encryption key not set');
-		}
+		static::initialize();
 	}
 
 
@@ -86,6 +77,7 @@ class Encryption
 	/**
 	 * Return the current object instance (Singleton)
 	 * @return \Contao\Encryption
+	 * @deprecated
 	 */
 	public static function getInstance()
 	{
@@ -104,14 +96,19 @@ class Encryption
 	 * @param string
 	 * @return string
 	 */
-	public function encrypt($varValue, $strKey=null)
+	public static function encrypt($varValue, $strKey=null)
 	{
+		if (static::$resTd === null)
+		{
+			static::initialize();
+		}
+
 		// Recursively encrypt arrays
 		if (is_array($varValue))
 		{
 			foreach ($varValue as $k=>$v)
 			{
-				$varValue[$k] = $this->encrypt($v);
+				$varValue[$k] = static::encrypt($v);
 			}
 
 			return $varValue;
@@ -127,11 +124,11 @@ class Encryption
 			$strKey = $GLOBALS['TL_CONFIG']['encryptionKey'];
 		}
 
-		$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($this->resTd), MCRYPT_RAND);
-		mcrypt_generic_init($this->resTd, md5($strKey), $iv);
-		$strEncrypted = mcrypt_generic($this->resTd, $varValue);
+		$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size(static::$resTd), MCRYPT_RAND);
+		mcrypt_generic_init(static::$resTd, md5($strKey), $iv);
+		$strEncrypted = mcrypt_generic(static::$resTd, $varValue);
 		$strEncrypted = base64_encode($iv.$strEncrypted);
-		mcrypt_generic_deinit($this->resTd);
+		mcrypt_generic_deinit(static::$resTd);
 
 		return $strEncrypted;
 	}
@@ -143,14 +140,14 @@ class Encryption
 	 * @param string
 	 * @return string
 	 */
-	public function decrypt($varValue, $strKey=null)
+	public static function decrypt($varValue, $strKey=null)
 	{
 		// Recursively decrypt arrays
 		if (is_array($varValue))
 		{
 			foreach ($varValue as $k=>$v)
 			{
-				$varValue[$k] = $this->decrypt($v);
+				$varValue[$k] = static::decrypt($v);
 			}
 
 			return $varValue;
@@ -162,7 +159,7 @@ class Encryption
 		}
 
 		$varValue = base64_decode($varValue);
-		$ivsize = mcrypt_enc_get_iv_size($this->resTd);
+		$ivsize = mcrypt_enc_get_iv_size(static::$resTd);
 		$iv = substr($varValue, 0, $ivsize);
 		$varValue = substr($varValue, $ivsize);
 
@@ -176,10 +173,29 @@ class Encryption
 			$strKey = $GLOBALS['TL_CONFIG']['encryptionKey'];
 		}
 
-		mcrypt_generic_init($this->resTd, md5($strKey), $iv);
-		$strDecrypted = mdecrypt_generic($this->resTd, $varValue);
-		mcrypt_generic_deinit($this->resTd);
+		mcrypt_generic_init(static::$resTd, md5($strKey), $iv);
+		$strDecrypted = mdecrypt_generic(static::$resTd, $varValue);
+		mcrypt_generic_deinit(static::$resTd);
 
 		return $strDecrypted;
+	}
+
+
+	/**
+	 * Initialize the encryption module
+	 * @return void
+	 * @throws \Exception
+	 */
+	protected static function initialize()
+	{
+		if ((self::$resTd = mcrypt_module_open($GLOBALS['TL_CONFIG']['encryptionCipher'], '', $GLOBALS['TL_CONFIG']['encryptionMode'], '')) == false)
+		{
+			throw new \Exception('Error initializing encryption module');
+		}
+
+		if ($GLOBALS['TL_CONFIG']['encryptionKey'] == '')
+		{
+			throw new \Exception('Encryption key not set');
+		}
 	}
 }

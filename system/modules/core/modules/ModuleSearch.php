@@ -81,8 +81,6 @@ class ModuleSearch extends \Module
 	 */
 	protected function compile()
 	{
-		$this->import('Search');
-
 		// Trigger the search module from a custom form
 		if (!$_GET['keywords'] && $this->Input->post('FORM_SUBMIT') == 'tl_search')
 		{
@@ -174,7 +172,7 @@ class ModuleSearch extends \Module
 			{
 				try
 				{
-					$objSearch = $this->Search->searchFor($strKeywords, ($this->Input->get('query_type') == 'or'), $arrPages, 0, 0, $this->fuzzy);
+					$objSearch = \Search::searchFor($strKeywords, ($this->Input->get('query_type') == 'or'), $arrPages, 0, 0, $this->fuzzy);
 					$arrResult = $objSearch->fetchAllAssoc();
 				}
 				catch (\Exception $e)

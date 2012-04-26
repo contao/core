@@ -349,13 +349,12 @@ class tl_comments extends Backend
 			return true;
 		}
 
-		$this->import('Cache');
 		$strKey = __METHOD__ . '-' . $strSource . '-' . $intParent;
 
 		// Load cached result
-		if (isset($this->Cache->$strKey))
+		if (\Cache::has($strKey))
 		{
-			return $this->Cache->$strKey;
+			return \Cache::get($strKey);
 		}
 
 		// Get the pagemounts
@@ -370,7 +369,7 @@ class tl_comments extends Backend
 		$pagemounts = array_unique($pagemounts);
 
 		// Order deny,allow
-		$this->Cache->$strKey = false;
+		\Cache::set($strKey, false);
 
 		switch ($strSource)
 		{
@@ -382,7 +381,7 @@ class tl_comments extends Backend
 				// Check whether the page is mounted and the user is allowed to edit its articles
 				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(4, $objPage->row()))
 				{
-					$this->Cache->$strKey = true;
+					\Cache::set($strKey, true);
 				}
 				break;
 
@@ -394,7 +393,7 @@ class tl_comments extends Backend
 				// Check whether the page is mounted and the user is allowed to edit it
 				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(1, $objPage->row()))
 				{
-					$this->Cache->$strKey = true;
+					\Cache::set($strKey, true);
 				}
 				break;
 
@@ -409,7 +408,7 @@ class tl_comments extends Backend
 					// Check the access to the news archive
 					if ($objArchive->numRows > 0 && $this->User->hasAccess($objArchive->pid, 'news'))
 					{
-						$this->Cache->$strKey = true;
+						\Cache::set($strKey, true);
 					}
 				}
 				break;
@@ -425,7 +424,7 @@ class tl_comments extends Backend
 					// Check the access to the calendar
 					if ($objCalendar->numRows > 0 && $this->User->hasAccess($objCalendar->pid, 'calendars'))
 					{
-						$this->Cache->$strKey = true;
+						\Cache::set($strKey, true);
 					}
 				}
 				break;
@@ -434,7 +433,7 @@ class tl_comments extends Backend
 				// Check the access to the FAQ module
 				if ($this->User->hasAccess('faq', 'modules'))
 				{
-					$this->Cache->$strKey = true;
+					\Cache::set($strKey, true);
 				}
 				break;
 
@@ -448,7 +447,7 @@ class tl_comments extends Backend
 
 						if ($this->$callback[0]->$callback[1]($intParent, $strSource) === true)
 						{
-							$this->Cache->$strKey = true;
+							\Cache::set($strKey, true);
 							break;
 						}
 					}
@@ -456,7 +455,7 @@ class tl_comments extends Backend
 				break;
 		}
 
-		return $this->Cache->$strKey;
+		return \Cache::get($strKey);
 	}
 
 

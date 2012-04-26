@@ -99,9 +99,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Check the request token (see #4007)
 		if (isset($_GET['act']))
 		{
-			$this->import('RequestToken');
-
-			if (!isset($_GET['rt']) || !$this->RequestToken->validate($this->Input->get('rt')))
+			if (!isset($_GET['rt']) || !\RequestToken::validate($this->Input->get('rt')))
 			{
 				$this->Session->set('INVALID_TOKEN_URL', $this->Environment->request);
 				$this->redirect('contao/confirm.php');

@@ -501,13 +501,11 @@ abstract class Controller extends \System
 		{
 			$objPage = $intId;
 			$intId = $objPage->id;
-
-			$this->import('Cache');
 			$strKey = __METHOD__ . '-' . $objPage->id;
 
-			if (isset($this->Cache->$strKey))
+			if (\Cache::has($strKey))
 			{
-				return $this->Cache->$strKey;
+				return \Cache::get($strKey);
 			}
 		}
 		else
@@ -517,12 +515,11 @@ abstract class Controller extends \System
 				return null;
 			}
 
-			$this->import('Cache');
 			$strKey = __METHOD__ . '-' . $intId;
 
-			if (isset($this->Cache->$strKey))
+			if (\Cache::has($strKey))
 			{
-				return $this->Cache->$strKey;
+				return \Cache::get($strKey);
 			}
 
 			$objPage = \PageModel::findByPk($intId);
@@ -664,7 +661,7 @@ abstract class Controller extends \System
 			$objPage->cache = 0;
 		}
 
-		$this->Cache->$strKey = $objPage;
+		\Cache::set($strKey, $objPage);
 		return $objPage;
 	}
 

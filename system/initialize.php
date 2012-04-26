@@ -93,12 +93,16 @@ require_once TL_ROOT . '/system/library/Swiftmailer/classes/Swift.php';
 
 
 /**
- * Load the basic classes
+ * Get the Config instance
  */
-$objConfig = Config::getInstance();
-$objEnvironment = Environment::getInstance();
-$objInput = Input::getInstance();
-$objToken = RequestToken::getInstance();
+$objConfig = \Config::getInstance();
+
+
+/**
+ * Initialize the Input and RequestToken class
+ */
+\Input::initialize();
+\RequestToken::initialize();
 
 
 /**
@@ -120,7 +124,7 @@ error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']
  */
 if ($GLOBALS['TL_CONFIG']['websitePath'] === null)
 {
-	$path = preg_replace('/\/contao\/[^\/]*$/i', '', $objEnvironment->requestUri);
+	$path = preg_replace('/\/contao\/[^\/]*$/i', '', \Environment::get('requestUri'));
 	$path = preg_replace('/\/$/i', '', $path);
 
 	try
@@ -156,9 +160,9 @@ if (USE_MBSTRING && function_exists('mb_regex_encoding'))
 /**
  * Set the default language
  */
-if ($objInput->post('language'))
+if (\Input::post('language'))
 {
-	$GLOBALS['TL_LANGUAGE'] = $objInput->post('language');
+	$GLOBALS['TL_LANGUAGE'] = \Input::post('language');
 }
 elseif (isset($_SESSION['TL_LANGUAGE']))
 {
@@ -166,7 +170,7 @@ elseif (isset($_SESSION['TL_LANGUAGE']))
 }
 else
 {
-	foreach ($objEnvironment->httpAcceptLanguage as $v)
+	foreach (\Environment::get('httpAcceptLanguage') as $v)
 	{
 		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . $v))
 		{
@@ -195,12 +199,12 @@ if (file_exists(TL_ROOT . '/system/config/initconfig.php'))
 if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !defined('BYPASS_TOKEN_CHECK'))
 {
 	// Exit if the token cannot be validated
-	if (!$objToken->validate($objInput->post('REQUEST_TOKEN')))
+	if (!\RequestToken::validate(\Input::post('REQUEST_TOKEN')))
 	{
 		// Force JavaScript redirect upon Ajax requests (IE requires absolute link)
-		if ($objEnvironment->isAjaxRequest)
+		if (\Environment::get('isAjaxRequest'))
 		{
-			echo '<script>location.replace("' . $objEnvironment->base . 'contao/index.php")</script>';
+			echo '<script>location.replace("' . \Environment::get('base') . 'contao/index.php")</script>';
 		}
 		else
 		{

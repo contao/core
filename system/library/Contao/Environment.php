@@ -55,7 +55,7 @@ class Environment
 	 * Cache array
 	 * @var array
 	 */
-	protected $arrCache = array();
+	protected static $arrCache = array();
 
 
 	/**
@@ -76,10 +76,11 @@ class Environment
 	 * @param string
 	 * @param mixed
 	 * @return void
+	 * @deprecated
 	 */
 	public function __set($strKey, $varValue)
 	{
-		$this->arrCache[$strKey] = $varValue;
+		static::set($strKey, $varValue);
 	}
 
 
@@ -87,33 +88,18 @@ class Environment
 	 * Return an environment parameter
 	 * @param string
 	 * @return string
+	 * @deprecated
 	 */
 	public function __get($strKey)
 	{
-		if (isset($this->arrCache[$strKey]))
-		{
-			return $this->arrCache[$strKey];
-		}
-
-		if (in_array($strKey, get_class_methods($this)))
-		{
-			$this->arrCache[$strKey] = $this->$strKey();
-		}
-		else
-		{
-			$arrChunks = preg_split('/([A-Z][a-z]*)/', $strKey, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
-			$strServerKey = strtoupper(implode('_', $arrChunks));
-
-			$this->arrCache[$strKey] = $_SERVER[$strServerKey];
-		}
-
-		return $this->arrCache[$strKey];
+		return static::get($strKey);
 	}
 
 
 	/**
 	 * Return the current object instance (Singleton)
 	 * @return \Contao\Environment
+	 * @deprecated
 	 */
 	public static function getInstance()
 	{
@@ -127,10 +113,49 @@ class Environment
 
 
 	/**
+	 * Set an environment parameter
+	 * @param string
+	 * @param mixed
+	 * @return void
+	 */
+	public static function set($strKey, $varValue)
+	{
+		static::$arrCache[$strKey] = $varValue;
+	}
+
+
+	/**
+	 * Return an environment parameter
+	 * @param string
+	 * @return string
+	 */
+	public static function get($strKey)
+	{
+		if (isset(static::$arrCache[$strKey]))
+		{
+			return static::$arrCache[$strKey];
+		}
+
+		if (in_array($strKey, get_class_methods('\\Environment')))
+		{
+			static::$arrCache[$strKey] = static::$strKey();
+		}
+		else
+		{
+			$arrChunks = preg_split('/([A-Z][a-z]*)/', $strKey, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+			$strServerKey = strtoupper(implode('_', $arrChunks));
+			static::$arrCache[$strKey] = $_SERVER[$strServerKey];
+		}
+
+		return static::$arrCache[$strKey];
+	}
+
+
+	/**
 	 * Return the absolute path to the script (e.g. /home/www/html/website/index.php)
 	 * @return string
 	 */
-	protected function scriptFilename()
+	protected static function scriptFilename()
 	{
 		return str_replace('//', '/', str_replace('\\', '/', (PHP_SAPI == 'cgi' || PHP_SAPI == 'isapi' || PHP_SAPI == 'cgi-fcgi' || PHP_SAPI == 'fpm-fcgi') && ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) ? ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) : ($_SERVER['ORIG_SCRIPT_FILENAME'] ? $_SERVER['ORIG_SCRIPT_FILENAME'] : $_SERVER['SCRIPT_FILENAME'])));
 	}
@@ -140,7 +165,7 @@ class Environment
 	 * Return the relative path to the script (e.g. /website/index.php)
 	 * @return string
 	 */
-	protected function scriptName()
+	protected static function scriptName()
 	{
 		return (PHP_SAPI == 'cgi' || PHP_SAPI == 'isapi' || PHP_SAPI == 'cgi-fcgi' || PHP_SAPI == 'fpm-fcgi') && ($_SERVER['ORIG_PATH_INFO'] ? $_SERVER['ORIG_PATH_INFO'] : $_SERVER['PATH_INFO']) ? ($_SERVER['ORIG_PATH_INFO'] ? $_SERVER['ORIG_PATH_INFO'] : $_SERVER['PATH_INFO']) : ($_SERVER['ORIG_SCRIPT_NAME'] ? $_SERVER['ORIG_SCRIPT_NAME'] : $_SERVER['SCRIPT_NAME']);
 	}
@@ -150,9 +175,9 @@ class Environment
 	 * Alias for scriptName()
 	 * @return string
 	 */
-	protected function phpSelf()
+	protected static function phpSelf()
 	{
-		return $this->scriptName;
+		return static::scriptName();
 	}
 
 
@@ -163,24 +188,26 @@ class Environment
 	 * and mod-rewrite rules might return an incorrect DOCUMENT_ROOT.
 	 * @return string
 	 */
-	protected function documentRoot()
+	protected static function documentRoot()
 	{
 		$strDocumentRoot = '';
 		$arrUriSegments = array();
+		$scriptName = static::get('scriptName');
+		$scriptFileName = static::get('scriptFileName');
 
 		// Fallback to DOCUMENT_ROOT if SCRIPT_FILENAME and SCRIPT_NAME point to different files
-		if (basename($this->scriptName) != basename($this->scriptFilename))
+		if (basename($scriptName) != basename($scriptFileName))
 		{
 			return str_replace('//', '/', str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT'])));
 		}
 
-		if (substr($this->scriptFilename, 0, 1) == '/')
+		if (substr($scriptFileName, 0, 1) == '/')
 		{
 			$strDocumentRoot = '/';
 		}
 
-		$arrSnSegments = explode('/', strrev($this->scriptName));
-		$arrSfnSegments = explode('/', strrev($this->scriptFilename));
+		$arrSnSegments = explode('/', strrev($scriptName));
+		$arrSfnSegments = explode('/', strrev($scriptFileName));
 
 		foreach ($arrSfnSegments as $k=>$v)
 		{
@@ -194,7 +221,7 @@ class Environment
 
 		if (strlen($strDocumentRoot) < 2)
 		{
-			$strDocumentRoot = substr($this->scriptFilename, 0, -(strlen($strDocumentRoot) + 1));
+			$strDocumentRoot = substr($scriptFileName, 0, -(strlen($strDocumentRoot) + 1));
 		}
 
 		return str_replace('//', '/', str_replace('\\', '/', realpath($strDocumentRoot)));
@@ -205,7 +232,7 @@ class Environment
 	 * Return the request URI [path]?[query] (e.g. /contao/index.php?id=2)
 	 * @return string
 	 */
-	protected function requestUri()
+	protected static function requestUri()
 	{
 		if (!empty($_SERVER['REQUEST_URI']))
 		{
@@ -213,7 +240,7 @@ class Environment
 		}
 		else
 		{
-			return '/' . preg_replace('/^\//i', '', $this->scriptName) . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
+			return '/' . preg_replace('/^\//i', '', static::get('scriptName')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
 		}
 	}
 
@@ -222,7 +249,7 @@ class Environment
 	 * Return the first eight user languages as array
 	 * @return array
 	 */
-	protected function httpAcceptLanguage()
+	protected static function httpAcceptLanguage()
 	{
 		$arrAccepted = array();
 		$arrLanguages = explode(',', strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']));
@@ -245,7 +272,7 @@ class Environment
 	 * Return accepted encoding types as array
 	 * @return array
 	 */
-	protected function httpAcceptEncoding()
+	protected static function httpAcceptEncoding()
 	{
 		return array_values(array_unique(explode(',', strtolower($_SERVER['HTTP_ACCEPT_ENCODING']))));
 	}
@@ -255,7 +282,7 @@ class Environment
 	 * Return the user agent as string
 	 * @return string
 	 */
-	protected function httpUserAgent()
+	protected static function httpUserAgent()
 	{
 		$ua = strip_tags($_SERVER['HTTP_USER_AGENT']);
 		$ua = preg_replace('/javascript|vbscri?pt|script|applet|alert|document|write|cookie/i', '', $ua);
@@ -268,7 +295,7 @@ class Environment
 	 * Return the HTTP Host
 	 * @return string
 	 */
-	protected function httpHost()
+	protected static function httpHost()
 	{
 		$host = $_SERVER['HTTP_HOST'];
 
@@ -290,7 +317,7 @@ class Environment
 	 * Return the HTTP X-Forwarded-Host
 	 * @return string
 	 */
-	protected function httpXForwardedHost()
+	protected static function httpXForwardedHost()
 	{
 		return preg_replace('/[^A-Za-z0-9\[\]\.:-]/', '', $_SERVER['HTTP_X_FORWARDED_HOST']);
 	}
@@ -300,7 +327,7 @@ class Environment
 	 * Return true if the current page was requested via an SSL connection
 	 * @return boolean
 	 */
-	protected function ssl()
+	protected static function ssl()
 	{
 		return ($_SERVER['SSL_SESSION_ID'] || $_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1);
 	}
@@ -310,12 +337,12 @@ class Environment
 	 * Return the current URL without path or query string
 	 * @return string
 	 */
-	protected function url()
+	protected static function url()
 	{
-		$xhost = $this->httpXForwardedHost;
-		$protocol = $this->ssl ? 'https://' : 'http://';
+		$xhost = static::get('httpXForwardedHost');
+		$protocol = static::get('ssl') ? 'https://' : 'http://';
 
-		return $protocol . (!empty($xhost) ? $xhost . '/' : '') . $this->httpHost;
+		return $protocol . (!empty($xhost) ? $xhost . '/' : '') . static::get('httpHost');
 	}
 
 
@@ -323,7 +350,7 @@ class Environment
 	 * Return the real REMOTE_ADDR even if a proxy server is used
 	 * @return string
 	 */
-	protected function ip()
+	protected static function ip()
 	{
 		if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']) && preg_match('/^[A-Fa-f0-9, \.\:]+$/', $_SERVER['HTTP_X_FORWARDED_FOR']))
 		{
@@ -338,7 +365,7 @@ class Environment
 	 * Return the SERVER_ADDR
 	 * @return string
 	 */
-	protected function server()
+	protected static function server()
 	{
 		$strServer = !empty($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : $_SERVER['LOCAL_ADDR'];
 
@@ -356,7 +383,7 @@ class Environment
 	 * Return the relative path to the base directory (e.g. /path)
 	 * @return string
 	 */
-	protected function path()
+	protected static function path()
 	{
 		return TL_PATH;
 	}
@@ -366,9 +393,9 @@ class Environment
 	 * Return the relativ path to the script (e.g. index.php)
 	 * @return string
 	 */
-	protected function script()
+	protected static function script()
 	{
-		return preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', $this->scriptName);
+		return preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', static::get('scriptName'));
 	}
 
 
@@ -376,9 +403,9 @@ class Environment
 	 * Return the relativ path to the script and include the request (e.g. index.php?id=2)
 	 * @return string
 	 */
-	protected function request()
+	protected static function request()
 	{
-		$strRequest = preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', $this->requestUri);
+		$strRequest = preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', static::get('requestUri'));
 
 		// From version 2.9, do not fallback to $this->script
 		// anymore if the request string is empty (see #1844).
@@ -395,9 +422,9 @@ class Environment
 	 * Return the current URL and path that can be used in a <base> tag
 	 * @return string
 	 */
-	protected function base()
+	protected static function base()
 	{
-		return $this->url . TL_PATH . '/';
+		return static::get('url') . TL_PATH . '/';
 	}
 
 
@@ -405,9 +432,9 @@ class Environment
 	 * Return the current host name
 	 * @return string
 	 */
-	protected function host()
+	protected static function host()
 	{
-		return $this->httpXForwardedHost ?: $this->httpHost;
+		return static::get('httpXForwardedHost') ?: static::get('httpHost');
 	}
 
 
@@ -415,7 +442,7 @@ class Environment
 	 * Return true on Ajax requests
 	 * @return boolean
 	 */
-	protected function isAjaxRequest()
+	protected static function isAjaxRequest()
 	{
 		return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest');
 	}
@@ -425,9 +452,9 @@ class Environment
 	 * Return the operating system and the browser name and version
 	 * @return array
 	 */
-	protected function agent()
+	protected static function agent()
 	{
-		$ua = $this->httpUserAgent;
+		$ua = static::get('httpUserAgent');
 
 		$return = new \stdClass();
 		$return->string = $ua;

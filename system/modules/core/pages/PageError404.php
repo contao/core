@@ -65,8 +65,7 @@ class PageError404 extends \Frontend
 		}
 
 		// Check the search index (see #3761)
-		$this->import('Search');
-		$this->Search->removeEntry($this->Environment->request);
+		\Search::removeEntry($this->Environment->request);
 
 		// Look for an 404 page
 		$objRootPage = $this->getRootPageFromUrl();

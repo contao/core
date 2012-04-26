@@ -55,13 +55,13 @@ class Input
 	 * Cache array
 	 * @var array
 	 */
-	protected $arrCache = array();
+	protected static $arrCache = array();
 
 	/**
 	 * Magic quotes
 	 * @var boolean
 	 */
-	protected $blnMagicQuotes;
+	protected static $blnMagicQuotes;
 
 
 	/**
@@ -69,12 +69,7 @@ class Input
 	 */
 	protected function __construct()
 	{
-		$_GET    = $this->cleanKey($_GET);
-		$_POST   = $this->cleanKey($_POST);
-		$_COOKIE = $this->cleanKey($_COOKIE);
-
-		// Only check magic quotes once (see #3438)
-		$this->blnMagicQuotes = function_exists('get_magic_quotes_gpc') && @get_magic_quotes_gpc();
+		static::initialize();
 	}
 
 
@@ -88,6 +83,7 @@ class Input
 	/**
 	 * Return the current object instance (Singleton)
 	 * @return \Contao\Input
+	 * @deprecated
 	 */
 	public static function getInstance()
 	{
@@ -101,12 +97,27 @@ class Input
 
 
 	/**
+	 * Clean the global GCP arrays
+	 * @return void
+	 */
+	public static function initialize()
+	{
+		$_GET    = static::cleanKey($_GET);
+		$_POST   = static::cleanKey($_POST);
+		$_COOKIE = static::cleanKey($_COOKIE);
+
+		// Only check magic quotes once (see #3438)
+		static::$blnMagicQuotes = function_exists('get_magic_quotes_gpc') && @get_magic_quotes_gpc();
+	}
+
+
+	/**
 	 * Return a $_GET parameter
 	 * @param string
 	 * @param boolean
 	 * @return mixed
 	 */
-	public function get($strKey, $blnDecodeEntities=false)
+	public static function get($strKey, $blnDecodeEntities=false)
 	{
 		if (!isset($_GET[$strKey]))
 		{
@@ -115,24 +126,24 @@ class Input
 
 		$strCacheKey = $blnDecodeEntities ? 'getDecoded' : 'getEncoded';
 
-		if (!isset($this->arrCache[$strCacheKey][$strKey]))
+		if (!isset(static::$arrCache[$strCacheKey][$strKey]))
 		{
 			$varValue = $_GET[$strKey];
 
-			$varValue = $this->stripSlashes($varValue);
-			$varValue = $this->decodeEntities($varValue);
-			$varValue = $this->xssClean($varValue, true);
-			$varValue = $this->stripTags($varValue);
+			$varValue = static::stripSlashes($varValue);
+			$varValue = static::decodeEntities($varValue);
+			$varValue = static::xssClean($varValue, true);
+			$varValue = static::stripTags($varValue);
 
 			if (!$blnDecodeEntities)
 			{
-				$varValue = $this->encodeSpecialChars($varValue);
+				$varValue = static::encodeSpecialChars($varValue);
 			}
 
-			$this->arrCache[$strCacheKey][$strKey] = $varValue;
+			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
 
-		return $this->arrCache[$strCacheKey][$strKey];
+		return static::$arrCache[$strCacheKey][$strKey];
 	}
 
 
@@ -142,33 +153,33 @@ class Input
 	 * @param boolean
 	 * @return mixed
 	 */
-	public function post($strKey, $blnDecodeEntities=false)
+	public static function post($strKey, $blnDecodeEntities=false)
 	{
 		$strCacheKey = $blnDecodeEntities ? 'postDecoded' : 'postEncoded';
 
-		if (!isset($this->arrCache[$strCacheKey][$strKey]))
+		if (!isset(static::$arrCache[$strCacheKey][$strKey]))
 		{
-			$varValue = $this->findPost($strKey);
+			$varValue = static::findPost($strKey);
 
 			if ($varValue === null)
 			{
 				return $varValue;
 			}
 
-			$varValue = $this->stripSlashes($varValue);
-			$varValue = $this->decodeEntities($varValue);
-			$varValue = $this->xssClean($varValue, true);
-			$varValue = $this->stripTags($varValue);
+			$varValue = static::stripSlashes($varValue);
+			$varValue = static::decodeEntities($varValue);
+			$varValue = static::xssClean($varValue, true);
+			$varValue = static::stripTags($varValue);
 
 			if (!$blnDecodeEntities)
 			{
-				$varValue = $this->encodeSpecialChars($varValue);
+				$varValue = static::encodeSpecialChars($varValue);
 			}
 
-			$this->arrCache[$strCacheKey][$strKey] = $varValue;
+			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
 
-		return $this->arrCache[$strCacheKey][$strKey];
+		return static::$arrCache[$strCacheKey][$strKey];
 	}
 
 
@@ -178,33 +189,33 @@ class Input
 	 * @param boolean
 	 * @return mixed
 	 */
-	public function postHtml($strKey, $blnDecodeEntities=false)
+	public static function postHtml($strKey, $blnDecodeEntities=false)
 	{
 		$strCacheKey = $blnDecodeEntities ? 'postHtmlDecoded' : 'postHtmlEncoded';
 
-		if (!isset($this->arrCache[$strCacheKey][$strKey]))
+		if (!isset(static::$arrCache[$strCacheKey][$strKey]))
 		{
-			$varValue = $this->findPost($strKey);
+			$varValue = static::findPost($strKey);
 
 			if ($varValue === null)
 			{
 				return $varValue;
 			}
 
-			$varValue = $this->stripSlashes($varValue);
-			$varValue = $this->decodeEntities($varValue);
-			$varValue = $this->xssClean($varValue);
-			$varValue = $this->stripTags($varValue, $GLOBALS['TL_CONFIG']['allowedTags']);
+			$varValue = static::stripSlashes($varValue);
+			$varValue = static::decodeEntities($varValue);
+			$varValue = static::xssClean($varValue);
+			$varValue = static::stripTags($varValue, $GLOBALS['TL_CONFIG']['allowedTags']);
 
 			if (!$blnDecodeEntities)
 			{
-				$varValue = $this->encodeSpecialChars($varValue);
+				$varValue = static::encodeSpecialChars($varValue);
 			}
 
-			$this->arrCache[$strCacheKey][$strKey] = $varValue;
+			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
 
-		return $this->arrCache[$strCacheKey][$strKey];
+		return static::$arrCache[$strCacheKey][$strKey];
 	}
 
 
@@ -213,27 +224,27 @@ class Input
 	 * @param string
 	 * @return mixed
 	 */
-	public function postRaw($strKey)
+	public static function postRaw($strKey)
 	{
 		$strCacheKey = 'postRaw';
 
-		if (!isset($this->arrCache[$strCacheKey][$strKey]))
+		if (!isset(static::$arrCache[$strCacheKey][$strKey]))
 		{
-			$varValue = $this->findPost($strKey);
+			$varValue = static::findPost($strKey);
 
 			if ($varValue === null)
 			{
 				return $varValue;
 			}
 
-			$varValue = $this->stripSlashes($varValue);
-			$varValue = $this->preserveBasicEntities($varValue);
-			$varValue = $this->xssClean($varValue);
+			$varValue = static::stripSlashes($varValue);
+			$varValue = static::preserveBasicEntities($varValue);
+			$varValue = static::xssClean($varValue);
 
-			$this->arrCache[$strCacheKey][$strKey] = $varValue;
+			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
 
-		return $this->arrCache[$strCacheKey][$strKey];
+		return static::$arrCache[$strCacheKey][$strKey];
 	}
 
 
@@ -243,7 +254,7 @@ class Input
 	 * @param boolean
 	 * @return mixed
 	 */
-	public function cookie($strKey, $blnDecodeEntities=false)
+	public static function cookie($strKey, $blnDecodeEntities=false)
 	{
 		if (!isset($_COOKIE[$strKey]))
 		{
@@ -252,24 +263,24 @@ class Input
 
 		$strCacheKey = $blnDecodeEntities ? 'cookieDecoded' : 'cookieEncoded';
 
-		if (!isset($this->arrCache[$strCacheKey][$strKey]))
+		if (!isset(static::$arrCache[$strCacheKey][$strKey]))
 		{
 			$varValue = $_COOKIE[$strKey];
 
-			$varValue = $this->stripSlashes($varValue);
-			$varValue = $this->decodeEntities($varValue);
-			$varValue = $this->xssClean($varValue, true);
-			$varValue = $this->stripTags($varValue);
+			$varValue = static::stripSlashes($varValue);
+			$varValue = static::decodeEntities($varValue);
+			$varValue = static::xssClean($varValue, true);
+			$varValue = static::stripTags($varValue);
 
 			if (!$blnDecodeEntities)
 			{
-				$varValue = $this->encodeSpecialChars($varValue);
+				$varValue = static::encodeSpecialChars($varValue);
 			}
 
-			$this->arrCache[$strCacheKey][$strKey] = $varValue;
+			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
 
-		return $this->arrCache[$strCacheKey][$strKey];
+		return static::$arrCache[$strCacheKey][$strKey];
 	}
 
 
@@ -279,12 +290,12 @@ class Input
 	 * @param mixed
 	 * @return void
 	 */
-	public function setGet($strKey, $varValue)
+	public static function setGet($strKey, $varValue)
 	{
-		$strKey = $this->cleanKey($strKey);
+		$strKey = static::cleanKey($strKey);
 
-		unset($this->arrCache['getEncoded'][$strKey]);
-		unset($this->arrCache['getDecoded'][$strKey]);
+		unset(static::$arrCache['getEncoded'][$strKey]);
+		unset(static::$arrCache['getDecoded'][$strKey]);
 
 		if ($varValue === null)
 		{
@@ -303,13 +314,13 @@ class Input
 	 * @param mixed
 	 * @return void
 	 */
-	public function setPost($strKey, $varValue)
+	public static function setPost($strKey, $varValue)
 	{
-		$strKey = $this->cleanKey($strKey);
+		$strKey = static::cleanKey($strKey);
 
-		unset($this->arrCache['postEncoded'][$strKey]);
-		unset($this->arrCache['postDecoded'][$strKey]);
-		unset($this->arrCache['postRaw'][$strKey]);
+		unset(static::$arrCache['postEncoded'][$strKey]);
+		unset(static::$arrCache['postDecoded'][$strKey]);
+		unset(static::$arrCache['postRaw'][$strKey]);
 
 		if ($varValue === null)
 		{
@@ -328,12 +339,12 @@ class Input
 	 * @param mixed
 	 * @return void
 	 */
-	public function setCookie($strKey, $varValue)
+	public static function setCookie($strKey, $varValue)
 	{
-		$strKey = $this->cleanKey($strKey);
+		$strKey = static::cleanKey($strKey);
 
-		unset($this->arrCache['cookieEncoded'][$strKey]);
-		unset($this->arrCache['cookieDecoded'][$strKey]);
+		unset(static::$arrCache['cookieEncoded'][$strKey]);
+		unset(static::$arrCache['cookieDecoded'][$strKey]);
 
 		if ($varValue === null)
 		{
@@ -350,9 +361,9 @@ class Input
 	 * Reset the internal cache
 	 * @return void
 	 */
-	public function resetCache()
+	public static function resetCache()
 	{
-		$this->arrCache = array();
+		static::$arrCache = array();
 	}
 
 
@@ -361,7 +372,7 @@ class Input
 	 * @param mixed
 	 * @return mixed
 	 */
-	protected function cleanKey($varValue)
+	protected static function cleanKey($varValue)
 	{
 		// Recursively clean arrays
 		if (is_array($varValue))
@@ -370,11 +381,11 @@ class Input
 
 			foreach ($varValue as $k=>$v)
 			{
-				$k = $this->cleanKey($k);
+				$k = static::cleanKey($k);
 
 				if (is_array($v))
 				{
-					$v = $this->cleanKey($v);
+					$v = static::cleanKey($v);
 				}
 
 				$return[$k] = $v;
@@ -383,10 +394,10 @@ class Input
 			return $return;
 		}
 
-		$varValue = $this->stripSlashes($varValue);
-		$varValue = $this->decodeEntities($varValue);
-		$varValue = $this->xssClean($varValue, true);
-		$varValue = $this->stripTags($varValue);
+		$varValue = static::stripSlashes($varValue);
+		$varValue = static::decodeEntities($varValue);
+		$varValue = static::xssClean($varValue, true);
+		$varValue = static::stripTags($varValue);
 
 		return $varValue;
 	}
@@ -397,9 +408,9 @@ class Input
 	 * @param mixed
 	 * @return mixed
 	 */
-	protected function stripSlashes($varValue)
+	protected static function stripSlashes($varValue)
 	{
-		if ($varValue == '' || !$this->blnMagicQuotes)
+		if ($varValue == '' || !static::$blnMagicQuotes)
 		{
 			return $varValue;
 		}
@@ -409,7 +420,7 @@ class Input
 		{
 			foreach ($varValue as $k=>$v)
 			{
-				$varValue[$k] = $this->stripSlashes($v);
+				$varValue[$k] = static::stripSlashes($v);
 			}
 
 			return $varValue;
@@ -425,7 +436,7 @@ class Input
 	 * @param string
 	 * @return mixed
 	 */
-	protected function stripTags($varValue, $strAllowedTags='')
+	protected static function stripTags($varValue, $strAllowedTags='')
 	{
 		if ($varValue === null || $varValue == '')
 		{
@@ -437,7 +448,7 @@ class Input
 		{
 			foreach ($varValue as $k=>$v)
 			{
-				$varValue[$k] = $this->stripTags($v, $strAllowedTags);
+				$varValue[$k] = static::stripTags($v, $strAllowedTags);
 			}
 
 			return $varValue;
@@ -457,7 +468,7 @@ class Input
 	 * @param boolean
 	 * @return mixed
 	 */
-	protected function xssClean($varValue, $blnStrictMode=false)
+	protected static function xssClean($varValue, $blnStrictMode=false)
 	{
 		if ($varValue === null || $varValue == '')
 		{
@@ -469,7 +480,7 @@ class Input
 		{
 			foreach ($varValue as $k=>$v)
 			{
-				$varValue[$k] = $this->xssClean($v);
+				$varValue[$k] = static::xssClean($v);
 			}
 
 			return $varValue;
@@ -566,7 +577,7 @@ class Input
 	 * @param mixed
 	 * @return mixed
 	 */
-	protected function decodeEntities($varValue)
+	protected static function decodeEntities($varValue)
 	{
 		if ($varValue === null || $varValue == '')
 		{
@@ -578,14 +589,14 @@ class Input
 		{
 			foreach ($varValue as $k=>$v)
 			{
-				$varValue[$k] = $this->decodeEntities($v);
+				$varValue[$k] = static::decodeEntities($v);
 			}
 
 			return $varValue;
 		}
 
 		// Preserve basic entities
-		$varValue = $this->preserveBasicEntities($varValue);
+		$varValue = static::preserveBasicEntities($varValue);
 		$varValue = html_entity_decode($varValue, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet']);
 
 		return $varValue;
@@ -597,7 +608,7 @@ class Input
 	 * @param mixed
 	 * @return mixed
 	 */
-	protected function preserveBasicEntities($varValue)
+	protected static function preserveBasicEntities($varValue)
 	{
 		if ($varValue === null || $varValue == '')
 		{
@@ -609,7 +620,7 @@ class Input
 		{
 			foreach ($varValue as $k=>$v)
 			{
-				$varValue[$k] = $this->preserveBasicEntities($v);
+				$varValue[$k] = static::preserveBasicEntities($v);
 			}
 
 			return $varValue;
@@ -631,7 +642,7 @@ class Input
 	 * @param mixed
 	 * @return mixed
 	 */
-	protected function encodeSpecialChars($varValue)
+	protected static function encodeSpecialChars($varValue)
 	{
 		if ($varValue === null || $varValue == '')
 		{
@@ -643,7 +654,7 @@ class Input
 		{
 			foreach ($varValue as $k=>$v)
 			{
-				$varValue[$k] = $this->encodeSpecialChars($v);
+				$varValue[$k] = static::encodeSpecialChars($v);
 			}
 
 			return $varValue;
@@ -661,7 +672,7 @@ class Input
 	 * @param string
 	 * @return mixed
 	 */
-	protected function findPost($strKey)
+	protected static function findPost($strKey)
 	{
 		if (isset($_POST[$strKey]))
 		{

@@ -5,6 +5,11 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Made the `Cache`, `Encryption`, `Environment`, `Input`, `RequestToken` and
+`Search` classes static, again leaving the Singleton routines untouched for
+for backwards compatibility.
+
+### Changed
 Made the `String` methods static and left the Singleton routines so the class
 can still be used in object context (I actually wonder that PHP supports it, but
 it does) (see #3898).

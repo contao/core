@@ -62,6 +62,7 @@ class Search extends \System
 	/**
 	 * Return the current object instance (Singleton)
 	 * @return \Contao\Search
+	 * @deprecated
 	 */
 	public static function getInstance()
 	{
@@ -79,9 +80,9 @@ class Search extends \System
 	 * @param array
 	 * @return boolean
 	 */
-	public function indexPage($arrData)
+	public static function indexPage($arrData)
 	{
-		$this->import('Database');
+		$objDatabase = \Database::getInstance();
 
 		$arrSet['url'] = $arrData['url'];
 		$arrSet['title'] = $arrData['title'];
@@ -130,9 +131,9 @@ class Search extends \System
 		$arrSet['checksum'] = md5(strip_tags($strContent));
 
 		// Return if the page is indexed and up to date
-		$objIndex = $this->Database->prepare("SELECT id, checksum FROM tl_search WHERE url=? AND pid=?")
-								   ->limit(1)
-								   ->execute($arrSet['url'], $arrSet['pid']);
+		$objIndex = $objDatabase->prepare("SELECT id, checksum FROM tl_search WHERE url=? AND pid=?")
+								->limit(1)
+								->execute($arrSet['url'], $arrSet['pid']);
 
 		if ($objIndex->numRows && $objIndex->checksum == $arrSet['checksum'])
 		{
@@ -181,9 +182,9 @@ class Search extends \System
 		// Update an existing old entry
 		if ($objIndex->numRows)
 		{
-			$this->Database->prepare("UPDATE tl_search %s WHERE id=?")
-						   ->set($arrSet)
-						   ->execute($objIndex->id);
+			$objDatabase->prepare("UPDATE tl_search %s WHERE id=?")
+						->set($arrSet)
+						->execute($objIndex->id);
 
 			$intInsertId = $objIndex->id;
 		}
@@ -192,9 +193,9 @@ class Search extends \System
 		else
 		{
 			// Check for a duplicate record with the same checksum
-			$objDuplicates = $this->Database->prepare("SELECT id, url FROM tl_search WHERE pid=? AND checksum=?")
-											->limit(1)
-											->execute($arrSet['pid'], $arrSet['checksum']);
+			$objDuplicates = $objDatabase->prepare("SELECT id, url FROM tl_search WHERE pid=? AND checksum=?")
+										 ->limit(1)
+										 ->execute($arrSet['pid'], $arrSet['checksum']);
 
 			// Keep the existing record
 			if ($objDuplicates->numRows)
@@ -202,8 +203,8 @@ class Search extends \System
 				// Update the URL if the new URL is shorter
 				if (substr_count($arrSet['url'], '/') < substr_count($objDuplicates->url, '/') || preg_match('/page=[0-9]*$/', $objDuplicates->url))
 				{
-					$this->Database->prepare("UPDATE tl_search SET url=? WHERE id=?")
-								   ->execute($arrSet['url'], $objDuplicates->id);
+					$objDatabase->prepare("UPDATE tl_search SET url=? WHERE id=?")
+								->execute($arrSet['url'], $objDuplicates->id);
 				}
 
 				return false;
@@ -212,9 +213,9 @@ class Search extends \System
 			// Insert the new record if there is no duplicate
 			else
 			{
-				$objInsertStmt = $this->Database->prepare("INSERT INTO tl_search %s")
-												->set($arrSet)
-												->execute();
+				$objInsertStmt = $objDatabase->prepare("INSERT INTO tl_search %s")
+											 ->set($arrSet)
+											 ->execute();
 
 				$intInsertId = $objInsertStmt->insertId;
 			}
@@ -268,8 +269,8 @@ class Search extends \System
 		}
 
 		// Remove existing index
-		$this->Database->prepare("DELETE FROM tl_search_index WHERE pid=?")
-					   ->execute($intInsertId);
+		$objDatabase->prepare("DELETE FROM tl_search_index WHERE pid=?")
+					->execute($intInsertId);
 
 		// Create new index
 		$arrKeys = array();
@@ -285,8 +286,8 @@ class Search extends \System
 		}
 
 		// Insert values
-		$this->Database->prepare("INSERT INTO tl_search_index (pid, word, relevance, language) VALUES " . implode(", ", $arrKeys))
-					   ->execute($arrValues);
+		$objDatabase->prepare("INSERT INTO tl_search_index (pid, word, relevance, language) VALUES " . implode(", ", $arrKeys))
+					->execute($arrValues);
 
 		return true;
 	}
@@ -303,11 +304,9 @@ class Search extends \System
 	 * @return \Contao\Database_Result
 	 * @throws \Exception
 	 */
-	public function searchFor($strKeywords, $blnOrSearch=false, $arrPid=array(), $intRows=0, $intOffset=0, $blnFuzzy=false)
+	public static function searchFor($strKeywords, $blnOrSearch=false, $arrPid=array(), $intRows=0, $intOffset=0, $blnFuzzy=false)
 	{
-		$this->import('Database');
-
-		// Clean keywords
+		// Clean the keywords
 		$strKeywords = utf8_strtolower($strKeywords);
 		$strKeywords = \String::decodeEntities($strKeywords);
 
@@ -510,7 +509,7 @@ class Search extends \System
 		$strQuery .= " ORDER BY relevance DESC";
 
 		// Return result
-		$objResultStmt = $this->Database->prepare($strQuery);
+		$objResultStmt = \Database::getInstance()->prepare($strQuery);
 
 		if ($intRows > 0)
 		{
@@ -526,21 +525,21 @@ class Search extends \System
 	 * @param string
 	 * @return void
 	 */
-	public function removeEntry($strUrl)
+	public static function removeEntry($strUrl)
 	{
-		$this->import('Database');
+		$objDatabase = \Database::getInstance();
 
-		$objSearch = $this->Database->prepare("SELECT * FROM tl_search WHERE url=?")
-									->limit(1)
-									->execute($strUrl);
+		$objSearch = $objDatabase->prepare("SELECT * FROM tl_search WHERE url=?")
+								 ->limit(1)
+								 ->execute($strUrl);
 
 		if ($objSearch->numRows)
 		{
-			$this->Database->prepare("DELETE FROM tl_search WHERE id=?")
-						   ->execute($objSearch->id);
+			$objDatabase->prepare("DELETE FROM tl_search WHERE id=?")
+						->execute($objSearch->id);
 
-			$this->Database->prepare("DELETE FROM tl_search_index WHERE pid=?")
-						   ->execute($objSearch->id);
+			$objDatabase->prepare("DELETE FROM tl_search_index WHERE pid=?")
+						->execute($objSearch->id);
 		}
 	}
 }

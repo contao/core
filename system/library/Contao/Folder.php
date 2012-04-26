@@ -71,10 +71,8 @@ class Folder extends \System
 			throw new \Exception(sprintf('File "%s" is not a directory', $strFolder));
 		}
 
-		$this->strFolder = $strFolder;
-
 		$this->import('Files');
-		$this->import('Cache');
+		$this->strFolder = $strFolder;
 
 		// Create folder if it does not exist
 		if (!is_dir(TL_ROOT . '/' . $this->strFolder))
@@ -100,16 +98,16 @@ class Folder extends \System
 	{
 		$strCacheKey = __METHOD__ . '-' . $this->strFolder . '-' . $strKey;
 
-		if (!isset($this->Cache->$strCacheKey))
+		if (!\Cache::has($strCacheKey))
 		{
 			switch ($strKey)
 			{
 				case 'hash':
-					$this->Cache->$strCacheKey = $this->getHash();
+					\Cache::set($strCacheKey, $this->getHash());
 					break;
 
 				case 'value':
-					$this->Cache->$strCacheKey = $this->strFolder;
+					\Cache::set($strCacheKey, $this->strFolder);
 					break;
 
 				default:
@@ -118,7 +116,7 @@ class Folder extends \System
 			}
 		}
 
-		return $this->Cache->$strCacheKey;
+		return \Cache::get($strCacheKey);
 	}
 
 

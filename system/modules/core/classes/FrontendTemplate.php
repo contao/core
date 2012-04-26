@@ -221,8 +221,6 @@ class FrontendTemplate extends \Template
 			// Index protected pages if enabled
 			if ($GLOBALS['TL_CONFIG']['indexProtected'] || (!FE_USER_LOGGED_IN && !$objPage->protected))
 			{
-				$this->import('Search');
-
 				$arrData = array
 				(
 					'url' => $strUrl,
@@ -234,7 +232,7 @@ class FrontendTemplate extends \Template
 					'language' => $objPage->language
 				);
 
-				$this->Search->indexPage($arrData);
+				\Search::indexPage($arrData);
 			}
 		}
 

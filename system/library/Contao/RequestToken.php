@@ -55,7 +55,7 @@ class RequestToken extends \System
 	 * Token
 	 * @var string
 	 */
-	protected $strToken;
+	protected static $strToken;
 
 
 	/**
@@ -63,27 +63,7 @@ class RequestToken extends \System
 	 */
 	protected function __construct()
 	{
-		$this->strToken = @$_SESSION['REQUEST_TOKEN'];
-
-		// Backwards compatibility
-		if (is_array($this->strToken))
-		{
-			$this->strToken = null;
-			unset($_SESSION['REQUEST_TOKEN']);
-		}
-
-		// Generate a new token
-		if ($this->strToken == '')
-		{
-			$this->strToken = md5(uniqid(mt_rand(), true));
-			$_SESSION['REQUEST_TOKEN'] = $this->strToken;
-		}
-
-		// Set the REQUEST_TOKEN constant
-		if (!defined('REQUEST_TOKEN'))
-		{
-			define('REQUEST_TOKEN', $this->strToken);
-		}
+		static::setup();
 	}
 
 
@@ -97,6 +77,7 @@ class RequestToken extends \System
 	/**
 	 * Return the current object instance (Singleton)
 	 * @return \Contao\RequestToken
+	 * @deprecated
 	 */
 	public static function getInstance()
 	{
@@ -110,12 +91,42 @@ class RequestToken extends \System
 
 
 	/**
+	 * Read the token from the session or generate a new one
+	 * @return void
+	 */
+	public static function initialize()
+	{
+		static::$strToken = @$_SESSION['REQUEST_TOKEN'];
+
+		// Backwards compatibility
+		if (is_array(static::$strToken))
+		{
+			static::$strToken = null;
+			unset($_SESSION['REQUEST_TOKEN']);
+		}
+
+		// Generate a new token
+		if (static::$strToken == '')
+		{
+			static::$strToken = md5(uniqid(mt_rand(), true));
+			$_SESSION['REQUEST_TOKEN'] = static::$strToken;
+		}
+
+		// Set the REQUEST_TOKEN constant
+		if (!defined('REQUEST_TOKEN'))
+		{
+			define('REQUEST_TOKEN', static::$strToken);
+		}
+	}
+
+
+	/**
 	 * Return the token
 	 * @return string
 	 */
-	public function get()
+	public static function get()
 	{
-		return $this->strToken;
+		return static::$strToken;
 	}
 
 
@@ -124,8 +135,8 @@ class RequestToken extends \System
 	 * @param string
 	 * @return boolean
 	 */
-	public function validate($strToken)
+	public static function validate($strToken)
 	{
-		return ($strToken != '' && $this->strToken != '' && $strToken == $this->strToken);
+		return ($strToken != '' && static::$strToken != '' && $strToken == static::$strToken);
 	}
 }

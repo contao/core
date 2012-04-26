@@ -55,7 +55,7 @@ class Cache extends \System
 	 * Data
 	 * @var array
 	 */
-	protected $arrData = array();
+	protected static $arrData = array();
 
 
 	/**
@@ -75,10 +75,11 @@ class Cache extends \System
 	 * Check whether a variable is set
 	 * @param string
 	 * @return boolean
+	 * @deprecated
 	 */
 	public function __isset($strKey)
 	{
-		return isset($this->arrData[$strKey]);
+		return static::has($strKey);
 	}
 
 
@@ -86,10 +87,11 @@ class Cache extends \System
 	 * Return a variable
 	 * @param string
 	 * @return mixed
+	 * @deprecated
 	 */
 	public function __get($strKey)
 	{
-		return $this->arrData[$strKey];
+		return static::get($strKey);
 	}
 
 
@@ -98,10 +100,11 @@ class Cache extends \System
 	 * @param string
 	 * @param mixed
 	 * @return void
+	 * @deprecated
 	 */
 	public function __set($strKey, $varValue)
 	{
-		$this->arrData[$strKey] = $varValue;
+		static::set($strKey, $varValue);
 	}
 
 
@@ -109,16 +112,18 @@ class Cache extends \System
 	 * Unset an entry
 	 * @param string
 	 * @return void
+	 * @deprecated
 	 */
 	public function __unset($strKey)
 	{
-		unset($this->arrData[$strKey]);
+		static::remove($strKey);
 	}
 
 
 	/**
 	 * Instantiate a new cache object and return it (Factory)
 	 * @return \Contao\Cache
+	 * @deprecated
 	 */
 	public static function getInstance()
 	{
@@ -128,5 +133,50 @@ class Cache extends \System
 		}
 
 		return static::$objInstance;
+	}
+
+
+	/**
+	 * Check whether a variable is set
+	 * @param string
+	 * @return boolean
+	 */
+	public static function has($strKey)
+	{
+		return isset(static::$arrData[$strKey]);
+	}
+
+
+	/**
+	 * Return a variable
+	 * @param string
+	 * @return mixed
+	 */
+	public static function get($strKey)
+	{
+		return static::$arrData[$strKey];
+	}
+
+
+	/**
+	 * Set a variable
+	 * @param string
+	 * @param mixed
+	 * @return void
+	 */
+	public static function set($strKey, $varValue)
+	{
+		static::$arrData[$strKey] = $varValue;
+	}
+
+
+	/**
+	 * Remove an entry
+	 * @param string
+	 * @return void
+	 */
+	public function remove($strKey)
+	{
+		unset(static::$arrData[$strKey]);
 	}
 }

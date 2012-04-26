@@ -89,10 +89,8 @@ class File extends \System
 			throw new \Exception(sprintf('Directory "%s" is not a file', $strFile));
 		}
 
-		$this->strFile = $strFile;
-
 		$this->import('Files');
-		$this->import('Cache');
+		$this->strFile = $strFile;
 
 		// Create the file if it does not exist
 		if (!file_exists(TL_ROOT . '/' . $this->strFile))
@@ -139,13 +137,13 @@ class File extends \System
 	{
 		$strCacheKey = __METHOD__ . '-' . $this->strFile . '-' . $strKey;
 
-		if (!isset($this->Cache->$strCacheKey))
+		if (!\Cache::has($strCacheKey))
 		{
 			switch ($strKey)
 			{
 				case 'size':
 				case 'filesize':
-					$this->Cache->$strCacheKey = filesize(TL_ROOT . '/' . $this->strFile);
+					\Cache::set($strCacheKey, filesize(TL_ROOT . '/' . $this->strFile));
 					break;
 
 				case 'dirname':
@@ -154,7 +152,7 @@ class File extends \System
 					{
 						$this->arrPathinfo = pathinfo(TL_ROOT . '/' . $this->strFile);
 					}
-					$this->Cache->$strCacheKey = $this->arrPathinfo[$strKey];
+					\Cache::set($strCacheKey, $this->arrPathinfo[$strKey]);
 					break;
 
 				case 'extension':
@@ -162,39 +160,39 @@ class File extends \System
 					{
 						$this->arrPathinfo = pathinfo(TL_ROOT . '/' . $this->strFile);
 					}
-					$this->Cache->$strCacheKey = strtolower($this->arrPathinfo['extension']);
+					\Cache::set($strCacheKey, strtolower($this->arrPathinfo['extension']));
 					break;
 
 				case 'filename':
-					$this->Cache->$strCacheKey = basename($this->basename, '.'.$this->extension);
+					\Cache::set($strCacheKey, basename($this->basename, '.'.$this->extension));
 					break;
 
 				case 'mime':
-					$this->Cache->$strCacheKey = $this->getMimeType();
+					\Cache::set($strCacheKey, $this->getMimeType());
 					break;
 
 				case 'hash':
-					$this->Cache->$strCacheKey = $this->getHash();
+					\Cache::set($strCacheKey, $this->getHash());
 					break;
 
 				case 'ctime':
-					$this->Cache->$strCacheKey = filectime(TL_ROOT . '/' . $this->strFile);
+					\Cache::set($strCacheKey, filectime(TL_ROOT . '/' . $this->strFile));
 					break;
 
 				case 'mtime':
-					$this->Cache->$strCacheKey = filemtime(TL_ROOT . '/' . $this->strFile);
+					\Cache::set($strCacheKey, filemtime(TL_ROOT . '/' . $this->strFile));
 					break;
 
 				case 'atime':
-					$this->Cache->$strCacheKey = fileatime(TL_ROOT . '/' . $this->strFile);
+					\Cache::set($strCacheKey, fileatime(TL_ROOT . '/' . $this->strFile));
 					break;
 
 				case 'icon':
-					$this->Cache->$strCacheKey = $this->getIcon();
+					\Cache::set($strCacheKey, $this->getIcon());
 					break;
 
 				case 'value':
-					$this->Cache->$strCacheKey = $this->strFile;
+					\Cache::set($strCacheKey, $this->strFile);
 					break;
 
 				case 'width':
@@ -202,7 +200,7 @@ class File extends \System
 					{
 						$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
 					}
-					$this->Cache->$strCacheKey = $this->arrImageSize[0];
+					\Cache::set($strCacheKey, $this->arrImageSize[0]);
 					break;
 
 				case 'height':
@@ -210,11 +208,11 @@ class File extends \System
 					{
 						$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
 					}
-					$this->Cache->$strCacheKey = $this->arrImageSize[1];
+					\Cache::set($strCacheKey, $this->arrImageSize[1]);
 					break;
 
 				case 'isGdImage':
-					$this->Cache->$strCacheKey = in_array($this->extension, array('gif', 'jpg', 'jpeg', 'png'));
+					\Cache::set($strCacheKey, in_array($this->extension, array('gif', 'jpg', 'jpeg', 'png')));
 					break;
 
 				case 'handle':
@@ -231,7 +229,7 @@ class File extends \System
 			}
 		}
 
-		return $this->Cache->$strCacheKey;
+		return \Cache::get($strCacheKey);
 	}
 
 

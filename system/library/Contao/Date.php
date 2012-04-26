@@ -86,7 +86,6 @@ class Date extends \System
 	 * Create object properties and date ranges
 	 * @param integer
 	 * @param string
-	 * @return void
 	 */
 	public function __construct($intTstamp=null, $strFormat=null)
 	{
