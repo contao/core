@@ -70,7 +70,7 @@ class Popup extends Backend
 		$this->User->authenticate();
 		$this->loadLanguageFile('default');
 
-		$strFile = $this->Input->get('src', true);
+		$strFile = \Input::get('src', true);
 		$strFile = base64_decode($strFile);
 		$strFile = preg_replace('@^/+@', '', rawurldecode($strFile));
 
@@ -109,7 +109,7 @@ class Popup extends Backend
 		}
 
 		// Open download dialogue
-		if ($this->Input->get('download') && $this->strFile)
+		if (\Input::get('download') && $this->strFile)
 		{
 			$objFile = new \File($this->strFile);
 

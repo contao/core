@@ -163,7 +163,7 @@ class tl_templates extends Backend
 		// Set a new node
 		if (isset($_GET['node']))
 		{
-			$this->Session->set('tl_templates_node', $this->Input->get('node', true));
+			$this->Session->set('tl_templates_node', \Input::get('node', true));
 			$this->redirect(preg_replace('/(&|\?)node=[^&]*/', '', \Environment::get('request')));
 		}
 

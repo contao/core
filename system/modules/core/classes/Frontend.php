@@ -82,7 +82,7 @@ abstract class Frontend extends \Controller
 	{
 		if ($GLOBALS['TL_CONFIG']['disableAlias'])
 		{
-			return is_numeric($this->Input->get('id')) ? $this->Input->get('id') : null;
+			return is_numeric(\Input::get('id')) ? \Input::get('id') : null;
 		}
 
 		if (\Environment::get('request') == '')
@@ -245,13 +245,13 @@ abstract class Frontend extends \Controller
 		// The language is set in the URL
 		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !empty($_GET['language']))
 		{
-			$objRootPage = \PageModel::findFirstPublishedRootByHostAndLanguage($host, $this->Input->get('language'));
+			$objRootPage = \PageModel::findFirstPublishedRootByHostAndLanguage($host, \Input::get('language'));
 
 			// No matching root page found
 			if ($objRootPage === null)
 			{
 				header('HTTP/1.1 404 Not Found');
-				$this->log('No root page found (host "' . $host . '", language "'. $this->Input->get('language') .'"', 'Frontend getRootPageFromUrl()', TL_ERROR);
+				$this->log('No root page found (host "' . $host . '", language "'. \Input::get('language') .'"', 'Frontend getRootPageFromUrl()', TL_ERROR);
 				die('No root page found');
 			}
 		}
@@ -296,7 +296,7 @@ abstract class Frontend extends \Controller
 		// Clean the $_GET values (thanks to thyon)
 		foreach (array_keys($arrGet) as $key)
 		{
-			$arrGet[$key] = $this->Input->get($key, true);
+			$arrGet[$key] = \Input::get($key, true);
 		}
 
 		$arrFragments = preg_split('/&(amp;)?/i', $strRequest);

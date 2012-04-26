@@ -90,13 +90,13 @@ class ModuleSearch extends \Module
 		}
 
 		// Remove insert tags
-		$strKeywords = trim($this->Input->get('keywords'));
+		$strKeywords = trim(\Input::get('keywords'));
 		$strKeywords = preg_replace('/\{\{[^\}]*\}\}/', '', $strKeywords);
 
 		// Overwrite the default query_type
-		if ($this->Input->get('query_type'))
+		if (\Input::get('query_type'))
 		{
-			$this->queryType = $this->Input->get('query_type');
+			$this->queryType = \Input::get('query_type');
 		}
 
 		$objFormTemplate = new \FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
@@ -109,7 +109,7 @@ class ModuleSearch extends \Module
 		$objFormTemplate->search = specialchars($GLOBALS['TL_LANG']['MSC']['searchLabel']);
 		$objFormTemplate->matchAll = specialchars($GLOBALS['TL_LANG']['MSC']['matchAll']);
 		$objFormTemplate->matchAny = specialchars($GLOBALS['TL_LANG']['MSC']['matchAny']);
-		$objFormTemplate->id = ($GLOBALS['TL_CONFIG']['disableAlias'] && $this->Input->get('id')) ? $this->Input->get('id') : false;
+		$objFormTemplate->id = ($GLOBALS['TL_CONFIG']['disableAlias'] && \Input::get('id')) ? \Input::get('id') : false;
 		$objFormTemplate->action = $this->getIndexFreeRequest();
 
 		// Redirect page
@@ -148,7 +148,7 @@ class ModuleSearch extends \Module
 			}
 
 			$arrResult = null;
-			$strChecksum = md5($strKeywords.$this->Input->get('query_type').$intRootId.$this->fuzzy);
+			$strChecksum = md5($strKeywords.\Input::get('query_type').$intRootId.$this->fuzzy);
 			$query_starttime = microtime(true);
 			$strCacheFile = 'system/cache/search/' . $strChecksum . '.json';
 
@@ -172,7 +172,7 @@ class ModuleSearch extends \Module
 			{
 				try
 				{
-					$objSearch = \Search::searchFor($strKeywords, ($this->Input->get('query_type') == 'or'), $arrPages, 0, 0, $this->fuzzy);
+					$objSearch = \Search::searchFor($strKeywords, (\Input::get('query_type') == 'or'), $arrPages, 0, 0, $this->fuzzy);
 					$arrResult = $objSearch->fetchAllAssoc();
 				}
 				catch (\Exception $e)
@@ -232,8 +232,8 @@ class ModuleSearch extends \Module
 			// Pagination
 			if ($this->perPage > 0)
 			{	
-				$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
-				$per_page = $this->Input->get('per_page') ? $this->Input->get('per_page') : $this->perPage;
+				$page = \Input::get('page') ? \Input::get('page') : 1;
+				$per_page = \Input::get('per_page') ? \Input::get('per_page') : $this->perPage;
 
 				// Do not index or cache the page if the page number is outside the range
 				if ($page < 1 || $page > ceil($count/$per_page))

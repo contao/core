@@ -87,7 +87,7 @@ class PageForward extends \Frontend
 					continue;
 				}
 
-				$strGet .= '/' . $key . '/' . $this->Input->get($key);
+				$strGet .= '/' . $key . '/' . \Input::get($key);
 			}
 		}
 

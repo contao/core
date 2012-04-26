@@ -51,7 +51,7 @@ class RebuildIndex extends \Backend implements \executable
 	 */
 	public function isActive()
 	{
-		return ($GLOBALS['TL_CONFIG']['enableSearch'] && $this->Input->get('act') == 'index');
+		return ($GLOBALS['TL_CONFIG']['enableSearch'] && \Input::get('act') == 'index');
 	}
 
 
@@ -80,10 +80,10 @@ class RebuildIndex extends \Backend implements \executable
 		}
 
 		// Rebuild the index
-		if ($this->Input->get('act') == 'index')
+		if (\Input::get('act') == 'index')
 		{
 			// Check the request token (see #4007)
-			if (!isset($_GET['rt']) || !\RequestToken::validate($this->Input->get('rt')))
+			if (!isset($_GET['rt']) || !\RequestToken::validate(\Input::get('rt')))
 			{
 				$this->Session->set('INVALID_TOKEN_URL', \Environment::get('request'));
 				$this->redirect('contao/confirm.php');
@@ -123,11 +123,11 @@ class RebuildIndex extends \Backend implements \executable
 						   ->execute(($time - $GLOBALS['TL_CONFIG']['sessionTimeout']), $strHash);
 
 			// Log in the front end user
-			if (is_numeric($this->Input->get('user')) && $this->Input->get('user') > 0)
+			if (is_numeric(\Input::get('user')) && \Input::get('user') > 0)
 			{
 				// Insert a new session
 				$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
-							   ->execute($this->Input->get('user'), $time, 'FE_USER_AUTH', session_id(), \Environment::get('ip'), $strHash);
+							   ->execute(\Input::get('user'), $time, 'FE_USER_AUTH', session_id(), \Environment::get('ip'), $strHash);
 
 				// Set the cookie
 				$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);

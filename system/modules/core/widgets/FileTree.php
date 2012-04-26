@@ -137,7 +137,7 @@ class FileTree extends \Widget
 		if ($this->strOrderField != '')
 		{
 			$this->Database->prepare("UPDATE {$this->strTable} SET {$this->strOrderField}=? WHERE id=?")
-						   ->execute(\Input::post($this->strOrderName), $this->Input->get('id'));
+						   ->execute(\Input::post($this->strOrderName), \Input::get('id'));
 		}
 
 		// Return the value as usual
@@ -293,7 +293,7 @@ class FileTree extends \Widget
 		}
 
 		$return .= '</ul>
-    <p><a href="contao/file.php?table='.$this->strTable.'&amp;field='.$this->strField.'&amp;id='.$this->Input->get('id').'&amp;value='.$strValues.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['files'][0].'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . (($this->strOrderField != '') ? '
+    <p><a href="contao/file.php?table='.$this->strTable.'&amp;field='.$this->strField.'&amp;id='.\Input::get('id').'&amp;value='.$strValues.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['files'][0].'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . (($this->strOrderField != '') ? '
     <script>Backend.makeMultiSrcSortable("sort_'.$this->strId.'", "ctrl_'.$this->strOrderId.'");</script>' : '') . '
   </div>';
 

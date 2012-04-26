@@ -63,7 +63,7 @@ class News extends \Frontend
 		$objFeed->feedName = $objFeed->alias ?: 'news' . $objFeed->id;
 
 		// Delete XML file
-		if ($this->Input->get('act') == 'delete')
+		if (\Input::get('act') == 'delete')
 		{
 			$this->import('Files');
 			$this->Files->delete($objFeed->feedName . '.xml');

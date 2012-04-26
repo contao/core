@@ -80,18 +80,18 @@ class DiffController extends Backend
 		$intTo = 0;
 		$intFrom = 0;
 
-		if (!$this->Input->get('table') || !$this->Input->get('pid'))
+		if (!\Input::get('table') || !\Input::get('pid'))
 		{
 			$strBuffer = 'Please provide the table name and PID';
 		}
 		else
 		{
 			$objVersions = $this->Database->prepare("SELECT * FROM tl_version WHERE pid=? AND fromTable=?" . (!$this->User->isAdmin ? " AND userid=?" : "") . " ORDER BY version DESC")
-										  ->execute($this->Input->get('pid'), $this->Input->get('table'), $this->User->id);
+										  ->execute(\Input::get('pid'), \Input::get('table'), $this->User->id);
 
 			if ($objVersions->numRows < 1)
 			{
-				$strBuffer = 'There are no versions of ' . $this->Input->get('table') . '.id=' . $this->Input->get('pid');
+				$strBuffer = 'There are no versions of ' . \Input::get('table') . '.id=' . \Input::get('pid');
 			}
 			else
 			{
@@ -111,10 +111,10 @@ class DiffController extends Backend
 				}
 
 				// To
-				if ($this->Input->get('to') && isset($arrVersions[$this->Input->get('to')]))
+				if (\Input::get('to') && isset($arrVersions[\Input::get('to')]))
 				{
-					$intTo = $this->Input->get('to');
-					$to = deserialize($arrVersions[$this->Input->get('to')]['data']);
+					$intTo = \Input::get('to');
+					$to = deserialize($arrVersions[\Input::get('to')]['data']);
 				}
 				else
 				{
@@ -123,10 +123,10 @@ class DiffController extends Backend
 				}
 
 				// From
-				if ($this->Input->get('from') && isset($arrVersions[$this->Input->get('from')]))
+				if (\Input::get('from') && isset($arrVersions[\Input::get('from')]))
 				{
-					$intFrom = $this->Input->get('from');
-					$from = deserialize($arrVersions[$this->Input->get('from')]['data']);
+					$intFrom = \Input::get('from');
+					$from = deserialize($arrVersions[\Input::get('from')]['data']);
 				}
 				elseif ($intIndex > 1)
 				{
@@ -134,10 +134,10 @@ class DiffController extends Backend
 					$from = deserialize($arrVersions[$intFrom]['data']);
 				}
 
-				$this->loadLanguageFile($this->Input->get('table'));
-				$this->loadDataContainer($this->Input->get('table'));
+				$this->loadLanguageFile(\Input::get('table'));
+				$this->loadDataContainer(\Input::get('table'));
 
-				$arrFields = $GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'];
+				$arrFields = $GLOBALS['TL_DCA'][\Input::get('table')]['fields'];
 
 				// Find the changed fields and highlight the changes
 				foreach ($to as $k=>$v)
@@ -210,8 +210,8 @@ class DiffController extends Backend
 		$this->Template->fromLabel = 'Von';
 		$this->Template->toLabel = 'Zu';
 		$this->Template->showLabel = specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']);
-		$this->Template->table = $this->Input->get('table');
-		$this->Template->pid = intval($this->Input->get('pid'));
+		$this->Template->table = \Input::get('table');
+		$this->Template->pid = intval(\Input::get('pid'));
 		$this->Template->theme = $this->getTheme();
 		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];

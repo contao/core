@@ -483,7 +483,7 @@ class tl_user extends Backend
 		}
 
 		// Check current action
-		switch ($this->Input->get('act'))
+		switch (\Input::get('act'))
 		{
 			case 'create':
 			case 'select':
@@ -492,9 +492,9 @@ class tl_user extends Backend
 				break;
 
 			case 'delete':
-				if ($this->Input->get('id') == $this->User->id)
+				if (\Input::get('id') == $this->User->id)
 				{
-					$this->log('Attempt to delete own account ID "'.$this->Input->get('id').'"', 'tl_user checkPermission', TL_ERROR);
+					$this->log('Attempt to delete own account ID "'.\Input::get('id').'"', 'tl_user checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// no break;
@@ -505,11 +505,11 @@ class tl_user extends Backend
 			default:
 				$objUser = $this->Database->prepare("SELECT admin FROM tl_user WHERE id=?")
 										  ->limit(1)
-										  ->execute($this->Input->get('id'));
+										  ->execute(\Input::get('id'));
 
-				if ($objUser->admin && $this->Input->get('act') != '')
+				if ($objUser->admin && \Input::get('act') != '')
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' administrator account ID "'.$this->Input->get('id').'"', 'tl_user checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.\Input::get('act').' administrator account ID "'.\Input::get('id').'"', 'tl_user checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -618,10 +618,10 @@ class tl_user extends Backend
 			return '';
 		}
 
-		if ($this->Input->get('key') == 'su' && $this->Input->get('id'))
+		if (\Input::get('key') == 'su' && \Input::get('id'))
 		{
 			$this->Database->prepare("UPDATE tl_session SET pid=? WHERE pid=?")
-						   ->execute($this->Input->get('id'), $this->User->id);
+						   ->execute(\Input::get('id'), $this->User->id);
 
 			$this->redirect('contao/main.php');
 		}
@@ -772,9 +772,9 @@ class tl_user extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen($this->Input->get('tid')))
+		if (strlen(\Input::get('tid')))
 		{
-			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 

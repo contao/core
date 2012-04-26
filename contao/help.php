@@ -73,8 +73,8 @@ class Help extends Backend
 	 */
 	public function run()
 	{
-		$table = $this->Input->get('table');
-		$field = $this->Input->get('field');
+		$table = \Input::get('table');
+		$field = \Input::get('field');
 
 		$this->loadLanguageFile($table);
 		$this->loadDataContainer($table);

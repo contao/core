@@ -164,7 +164,7 @@ class ModuleRssReader extends \Module
 		if ($this->perPage > 0)
 		{
 			// Get the current page
-			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
+			$page = \Input::get('page') ? \Input::get('page') : 1;
 
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > ceil(count($arrItems)/$this->perPage))

@@ -155,7 +155,7 @@ class ModuleArticle extends \Module
 		}
 
 		// Get section and article alias
-		list($strSection, $strArticle) = explode(':', $this->Input->get('articles'));
+		list($strSection, $strArticle) = explode(':', \Input::get('articles'));
 
 		if ($strArticle === null)
 		{

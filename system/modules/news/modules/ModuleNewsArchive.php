@@ -129,27 +129,27 @@ class ModuleNewsArchive extends \ModuleNews
 		}
 
 		// Display year
-		if ($this->Input->get('year'))
+		if (\Input::get('year'))
 		{
-			$strDate = $this->Input->get('year');
+			$strDate = \Input::get('year');
 			$objDate = new \Date($strDate, 'Y');
 			$intBegin = $objDate->yearBegin;
 			$intEnd = $objDate->yearEnd;
 			$this->headline .= ' ' . date('Y', $objDate->tstamp);
 		}
 		// Display month
-		elseif ($this->Input->get('month'))
+		elseif (\Input::get('month'))
 		{
-			$strDate = $this->Input->get('month');
+			$strDate = \Input::get('month');
 			$objDate = new \Date($strDate, 'Ym');
 			$intBegin = $objDate->monthBegin;
 			$intEnd = $objDate->monthEnd;
 			$this->headline .= ' ' . $this->parseDate('F Y', $objDate->tstamp);
 		}
 		// Display day
-		elseif ($this->Input->get('day'))
+		elseif (\Input::get('day'))
 		{
-			$strDate = $this->Input->get('day');
+			$strDate = \Input::get('day');
 			$objDate = new \Date($strDate, 'Ymd');
 			$intBegin = $objDate->dayBegin;
 			$intEnd = $objDate->dayEnd;
@@ -175,7 +175,7 @@ class ModuleNewsArchive extends \ModuleNews
 				$total = $intTotal;
 
 				// Get the current page
-				$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
+				$page = \Input::get('page') ? \Input::get('page') : 1;
 
 				// Do not index or cache the page if the page number is outside the range
 				if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))

@@ -99,7 +99,7 @@ class ContentDownloads extends \ContentElement
 			return '';
 		}
 
-		$file = $this->Input->get('file', true);
+		$file = \Input::get('file', true);
 
 		// Send the file to the browser
 		if ($file != '' && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($file)))

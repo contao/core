@@ -75,7 +75,7 @@ class RepositoryBackendModule extends BackendModule
 		$this->compiler	= $this->actions[0][2];
 		foreach ($this->actions as &$act) {
 			if ($act[0]!='') {
-				$this->parameter = $this->Input->get($act[0]);
+				$this->parameter = \Input::get($act[0]);
 				if ($this->parameter!='') {
 					$this->action = $act[0];
 					$this->strTemplate = $act[1];
@@ -162,7 +162,7 @@ class RepositoryBackendModule extends BackendModule
 	 */
 	protected function createUrl($aParams = null)
 	{
-		return $this->createPageUrl($this->Input->get('do'), $aParams);
+		return $this->createPageUrl(\Input::get('do'), $aParams);
 	} // createUrl
 
 	/**

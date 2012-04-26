@@ -72,7 +72,7 @@ class StyleSheets extends \Backend
 		}
 
 		// Delete the CSS file
-		if ($this->Input->get('act') == 'delete')
+		if (\Input::get('act') == 'delete')
 		{
 			$this->import('Files');
 			$this->Files->delete('assets/css/' . $objStyleSheet->name . '.css');
@@ -1151,7 +1151,7 @@ class StyleSheets extends \Backend
 	 */
 	public function importStyleSheet()
 	{
-		if ($this->Input->get('key') != 'import')
+		if (\Input::get('key') != 'import')
 		{
 			return '';
 		}
@@ -1190,7 +1190,7 @@ class StyleSheets extends \Backend
 
 				// Create the new style sheet
 				$objStyleSheet = $this->Database->prepare("INSERT INTO tl_style_sheet (pid, tstamp, name, media) VALUES (?, ?, ?, ?)")
-												->execute($this->Input->get('id'), time(), $strName, array('all'));
+												->execute(\Input::get('id'), time(), $strName, array('all'));
 
 				$insertId = $objStyleSheet->insertId;
 				$intSorting = 0;

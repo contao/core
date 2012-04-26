@@ -52,7 +52,7 @@ class DC_File extends \DataContainer implements \editable
 	public function __construct($strTable)
 	{
 		parent::__construct();
-		$this->intId = $this->Input->get('id');
+		$this->intId = \Input::get('id');
 
 		// Check whether the table is defined
 		if ($strTable == '' || !isset($GLOBALS['TL_DCA'][$strTable])) 
@@ -477,7 +477,7 @@ window.addEvent(\'domready\', function() {
 				// Overwrite the trigger if the page is not reloaded
 				if (\Input::post('FORM_SUBMIT') == $this->strTable)
 				{
-					$key = ($this->Input->get('act') == 'editAll') ? $name.'_'.$this->intId : $name;
+					$key = (\Input::get('act') == 'editAll') ? $name.'_'.$this->intId : $name;
 
 					if (!$GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['eval']['submitOnChange'])
 					{

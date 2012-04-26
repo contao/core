@@ -110,14 +110,14 @@ class ModuleCalendar extends \Events
 	protected function compile()
 	{
 		// Respond to month
-		if ($this->Input->get('month'))
+		if (\Input::get('month'))
 		{
-			$this->Date = new \Date($this->Input->get('month'), 'Ym');
+			$this->Date = new \Date(\Input::get('month'), 'Ym');
 		}
 		// Respond to day
-		elseif ($this->Input->get('day'))
+		elseif (\Input::get('day'))
 		{
-			$this->Date = new \Date($this->Input->get('day'), 'Ymd');
+			$this->Date = new \Date(\Input::get('day'), 'Ymd');
 		}
 		// Fallback to today
 		else
@@ -148,7 +148,7 @@ class ModuleCalendar extends \Events
 		// Only generate a link if there are events (see #4160)
 		if ($intPrevYm >= $intLeftBoundary)
 		{
-			$objTemplate->prevHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . $this->Input->get('id') . '&amp;' : '?') . 'month=' . $intPrevYm;
+			$objTemplate->prevHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . \Input::get('id') . '&amp;' : '?') . 'month=' . $intPrevYm;
 			$objTemplate->prevTitle = specialchars($lblPrevious);
 			$objTemplate->prevLink = $GLOBALS['TL_LANG']['MSC']['cal_previous'] . ' ' . $lblPrevious;
 			$objTemplate->prevLabel = $GLOBALS['TL_LANG']['MSC']['cal_previous'];
@@ -166,7 +166,7 @@ class ModuleCalendar extends \Events
 		// Only generate a link if there are events (see #4160)
 		if ($intNextYm <= $intRightBoundary)
 		{
-			$objTemplate->nextHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . $this->Input->get('id') . '&amp;' : '?') . 'month=' . $intNextYm;
+			$objTemplate->nextHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . \Input::get('id') . '&amp;' : '?') . 'month=' . $intNextYm;
 			$objTemplate->nextTitle = specialchars($lblNext);
 			$objTemplate->nextLink = $lblNext . ' ' . $GLOBALS['TL_LANG']['MSC']['cal_next'];
 			$objTemplate->nextLabel = $GLOBALS['TL_LANG']['MSC']['cal_next'];
@@ -252,7 +252,7 @@ class ModuleCalendar extends \Events
 			$strClass .= ($intKey == date('Ymd')) ? ' today' : '';
 
 			// Mark the selected day (see #1784)
-			if ($intKey == $this->Input->get('day'))
+			if ($intKey == \Input::get('day'))
 			{
 				$strClass .= ' selected';
 			}

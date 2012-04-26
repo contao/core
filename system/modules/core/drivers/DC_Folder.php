@@ -99,14 +99,14 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Check the request token (see #4007)
 		if (isset($_GET['act']))
 		{
-			if (!isset($_GET['rt']) || !\RequestToken::validate($this->Input->get('rt')))
+			if (!isset($_GET['rt']) || !\RequestToken::validate(\Input::get('rt')))
 			{
 				$this->Session->set('INVALID_TOKEN_URL', \Environment::get('request'));
 				$this->redirect('contao/confirm.php');
 			}
 		}
 
-		$this->intId = $this->Input->get('id', true);
+		$this->intId = \Input::get('id', true);
 
 		// Clear the clipboard
 		if (isset($_GET['clipboard']))
@@ -123,7 +123,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Check permission to create new folders
-		if ($this->Input->get('act') == 'paste' && $this->Input->get('mode') == 'create' && isset($GLOBALS['TL_DCA'][$strTable]['list']['new']))
+		if (\Input::get('act') == 'paste' && \Input::get('mode') == 'create' && isset($GLOBALS['TL_DCA'][$strTable]['list']['new']))
 		{
 			$this->log('Attempt to create a new folder although the method has been overwritten in the data container', 'DC_Folder __construct()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
@@ -235,9 +235,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$return = '';
 
 		// Add to clipboard
-		if ($this->Input->get('act') == 'paste')
+		if (\Input::get('act') == 'paste')
 		{
-			if ($this->Input->get('mode') != 'create' && $this->Input->get('mode') != 'move')
+			if (\Input::get('mode') != 'create' && \Input::get('mode') != 'move')
 			{
 				$this->isValid($this->intId);
 			}
@@ -247,15 +247,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$arrClipboard[$this->strTable] = array
 			(
 				'id' => $this->urlEncode($this->intId),
-				'childs' => $this->Input->get('childs'),
-				'mode' => $this->Input->get('mode')
+				'childs' => \Input::get('childs'),
+				'mode' => \Input::get('mode')
 			);
 
 			$this->Session->set('CLIPBOARD', $arrClipboard);
 		}
 
 		// Get the session data and toggle the nodes
-		if ($this->Input->get('tg') == 'all')
+		if (\Input::get('tg') == 'all')
 		{
 			$session = $this->Session->getData();
 
@@ -323,10 +323,10 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 		// Build the tree
 		$return = '
-<div id="tl_buttons">'.(($this->Input->get('act') == 'select') ? '
-<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : '') . (($this->Input->get('act') != 'select' && !$blnClipboard) ? '
+<div id="tl_buttons">'.((\Input::get('act') == 'select') ? '
+<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : '') . ((\Input::get('act') != 'select' && !$blnClipboard) ? '
 <a href="'.$this->addToUrl($hrfNew).'" class="'.$clsNew.'" title="'.specialchars($ttlNew).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$lblNew.'</a>' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? ' &nbsp; :: &nbsp; <a href="'.$this->addToUrl('&amp;act=paste&amp;mode=move').'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['move'][1]).'" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['move'][0].'</a>' : '') . $this->generateGlobalButtons(true) : '') . ($blnClipboard ? '<a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="x">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a>' : '') . '
-</div>' . (($this->Input->get('act') == 'select') ? '
+</div>' . ((\Input::get('act') == 'select') ? '
 
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post">
 <div class="tl_formbody">
@@ -337,7 +337,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
   <p>'.$GLOBALS['TL_LANG']['MSC']['selectNewPosition'].'</p>
 </div>' : '').'
 
-<div class="tl_listing_container tree_view" id="tl_listing">'.(isset($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['breadcrumb']) ? $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['breadcrumb'] : '').(($this->Input->get('act') == 'select') ? '
+<div class="tl_listing_container tree_view" id="tl_listing">'.(isset($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['breadcrumb']) ? $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['breadcrumb'] : '').((\Input::get('act') == 'select') ? '
 
 <div class="tl_select_trigger">
 <label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox">
@@ -350,7 +350,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 </div>';
 
 		// Close the form
-		if ($this->Input->get('act') == 'select')
+		if (\Input::get('act') == 'select')
 		{
 			$callbacks = '';
 
@@ -401,7 +401,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	public function create()
 	{
 		$this->import('Files');
-		$strFolder = $this->Input->get('pid', true);
+		$strFolder = \Input::get('pid', true);
 
 		if ($strFolder == '' || !file_exists(TL_ROOT . '/' . $strFolder) || !$this->isMounted($strFolder))
 		{
@@ -427,7 +427,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	public function cut($blnDoNotRedirect=false)
 	{
 		$this->isValid($this->intId);
-		$strFolder = $this->Input->get('pid', true);
+		$strFolder = \Input::get('pid', true);
 
 		if (!file_exists(TL_ROOT . '/' . $this->intId) || !$this->isMounted($this->intId))
 		{
@@ -524,7 +524,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	public function cutAll()
 	{
 		// PID is mandatory
-		if (!strlen($this->Input->get('pid', true)))
+		if (!strlen(\Input::get('pid', true)))
 		{
 			$this->redirect($this->getReferer());
 		}
@@ -553,7 +553,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	public function copy($source=null, $destination=null)
 	{
 		$noReload = ($source != '');
-		$strFolder = $this->Input->get('pid', true);
+		$strFolder = \Input::get('pid', true);
 
 		if ($source == '')
 		{
@@ -737,7 +737,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	public function copyAll()
 	{
 		// PID is mandatory
-		if (!strlen($this->Input->get('pid', true)))
+		if (!strlen(\Input::get('pid', true)))
 		{
 			$this->redirect($this->getReferer());
 		}
@@ -914,7 +914,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	public function move($blnIsAjax=false)
 	{
-		$strFolder = $this->Input->get('pid', true);
+		$strFolder = \Input::get('pid', true);
 
 		if (!file_exists(TL_ROOT . '/' . $strFolder) || !$this->isMounted($strFolder))
 		{
@@ -1384,7 +1384,7 @@ window.addEvent(\'domready\', function() {
 		$ids = $session['CURRENT']['IDS'];
 
 		// Save field selection in session
-		if (\Input::post('FORM_SUBMIT') == $this->strTable.'_all' && $this->Input->get('fields'))
+		if (\Input::post('FORM_SUBMIT') == $this->strTable.'_all' && \Input::get('fields'))
 		{
 			$session['CURRENT'][$this->strTable] = deserialize(\Input::post('all_fields'));
 			$this->Session->setData($session);
@@ -1393,7 +1393,7 @@ window.addEvent(\'domready\', function() {
 		$fields = $session['CURRENT'][$this->strTable];
 
 		// Add fields
-		if (is_array($fields) && !empty($fields) && $this->Input->get('fields'))
+		if (is_array($fields) && !empty($fields) && \Input::get('fields'))
 		{
 			$class = 'tl_tbox';
 
@@ -1931,7 +1931,7 @@ window.addEvent(\'domready\', function() {
 			}
 
 			// Set the new value so the input field can show it
-			if ($this->Input->get('act') == 'editAll')
+			if (\Input::get('act') == 'editAll')
 			{
 				$session = $this->Session->getData();
 
@@ -1966,7 +1966,7 @@ window.addEvent(\'domready\', function() {
 			}
 
 			// Handle multi-select fields in "override all" mode
-			if ($this->Input->get('act') == 'overrideAll' && ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard') && $arrData['eval']['multiple'])
+			if (\Input::get('act') == 'overrideAll' && ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard') && $arrData['eval']['multiple'])
 			{
 				if ($this->objActiveRecord !== null)
 				{
@@ -2344,9 +2344,9 @@ window.addEvent(\'domready\', function() {
 		$session = $this->Session->getData();
 
 		// Get the session data and toggle the nodes
-		if ($this->Input->get('tg'))
+		if (\Input::get('tg'))
 		{
-			$session['filetree'][$this->Input->get('tg')] = (isset($session['filetree'][$this->Input->get('tg')]) && $session['filetree'][$this->Input->get('tg')] == 1) ? 0 : 1;
+			$session['filetree'][\Input::get('tg')] = (isset($session['filetree'][\Input::get('tg')]) && $session['filetree'][\Input::get('tg')] == 1) ? 0 : 1;
 			$this->Session->setData($session);
 			$this->redirect(preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', \Environment::get('request')));
 		}
@@ -2446,7 +2446,7 @@ window.addEvent(\'domready\', function() {
 			$return .= $this->generateImage($folderImg, '').' <a href="' . $this->addToUrl('node='.$currentEncoded) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'"><strong>'.specialchars(basename($currentFolder)).'</strong></a></div> <div class="tl_right">';
 
 			// Paste buttons
-			if ($arrClipboard !== false && $this->Input->get('act') != 'select')
+			if ($arrClipboard !== false && \Input::get('act') != 'select')
 			{
 				$imagePasteInto = $this->generateImage('pasteinto.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0]);
 				$return .= (($arrClipboard['mode'] == 'cut' || $arrClipboard['mode'] == 'copy') && preg_match('/^' . preg_quote($arrClipboard['id'], '/') . '/i', $currentFolder)) ? $this->generateImage('pasteinto_.gif') : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$currentEncoded.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1]).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a> ';
@@ -2454,7 +2454,7 @@ window.addEvent(\'domready\', function() {
 			// Default buttons (do not display buttons for mounted folders)
 			elseif (!$mount)
 			{
-				$return .= ($this->Input->get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded), $this->strTable);
+				$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded), $this->strTable);
 			}
 
 			$return .= '</div><div style="clear:both"></div></li>';
@@ -2519,13 +2519,13 @@ window.addEvent(\'domready\', function() {
 			}
 
 			// Buttons
-			if ($arrClipboard !== false && $this->Input->get('act') != 'select')
+			if ($arrClipboard !== false && \Input::get('act') != 'select')
 			{
 				$_buttons = '&nbsp;';
 			}
 			else
 			{
-				$_buttons = ($this->Input->get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded), $this->strTable);
+				$_buttons = (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded), $this->strTable);
 			}
 
 			$return .= $_buttons . '</div><div style="clear:both"></div></li>';
@@ -2575,7 +2575,7 @@ window.addEvent(\'domready\', function() {
 	 */
 	protected function isValid($strFile)
 	{
-		$strFolder = $this->Input->get('pid', true);
+		$strFolder = \Input::get('pid', true);
 
 		// Check the path
 		if (strpos($strFile, '../') !== false)
@@ -2617,7 +2617,7 @@ dump($strFile);exit;
 		}
 
 		// Do not allow file operations on root folders
-		if ($this->Input->get('act') == 'edit' || $this->Input->get('act') == 'paste' || $this->Input->get('act') == 'delete')
+		if (\Input::get('act') == 'edit' || \Input::get('act') == 'paste' || \Input::get('act') == 'delete')
 		{
 			if (in_array($strFile, $this->arrFilemounts))
 			{

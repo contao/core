@@ -413,9 +413,9 @@ class BackendUser extends \User
 		$session = $this->Session->getData();
 
 		// Toggle nodes
-		if ($this->Input->get('mtg'))
+		if (\Input::get('mtg'))
 		{
-			$session['backend_modules'][$this->Input->get('mtg')] = (isset($session['backend_modules'][$this->Input->get('mtg')]) && $session['backend_modules'][$this->Input->get('mtg')] == 0) ? 1 : 0;
+			$session['backend_modules'][\Input::get('mtg')] = (isset($session['backend_modules'][\Input::get('mtg')]) && $session['backend_modules'][\Input::get('mtg')] == 0) ? 1 : 0;
 			$this->Session->setData($session);
 			$this->redirect(preg_replace('/(&(amp;)?|\?)mtg=[^& ]*/i', '', \Environment::get('request')));
 		}
@@ -460,7 +460,7 @@ class BackendUser extends \User
 							$arrModules[$strGroupName]['modules'][$strModuleName]['href']  = \Environment::get('script') . '?do=' . $strModuleName;
 
 							// Mark the active module and its group
-							if ($this->Input->get('do') == $strModuleName)
+							if (\Input::get('do') == $strModuleName)
 							{
 								$arrModules[$strGroupName]['class'] = ' trail';
 								$arrModules[$strGroupName]['modules'][$strModuleName]['class'] .= ' active';

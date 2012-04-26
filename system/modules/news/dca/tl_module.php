@@ -268,9 +268,9 @@ class tl_module_news extends Backend
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if ($this->Input->get('act') == 'overrideAll')
+		if (\Input::get('act') == 'overrideAll')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = \Input::get('id');
 		}
 
 		return $this->getTemplateGroup('news_', $intPid);

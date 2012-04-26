@@ -236,7 +236,7 @@ class ModuleExtension extends BackendModule
 		$this->Template->button = $GLOBALS['TL_LANG']['MSC']['backBT'];
 		$this->Template->message = $this->getMessages();
 		$this->Template->submit = specialchars($GLOBALS['TL_LANG']['tl_extension']['make'][0]);
-		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['tl_extension']['headline'], $this->Input->get('id'));
+		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['tl_extension']['headline'], \Input::get('id'));
 		$this->Template->explain = $GLOBALS['TL_LANG']['tl_extension']['make'][1];
 		$this->Template->label = $GLOBALS['TL_LANG']['tl_extension']['label'];
 	}

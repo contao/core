@@ -529,9 +529,9 @@ class tl_layout extends Backend
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if ($this->Input->get('act') == 'overrideAll')
+		if (\Input::get('act') == 'overrideAll')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = \Input::get('id');
 		}
 
 		$objStyleSheet = $this->Database->prepare("SELECT id, name FROM tl_style_sheet WHERE pid=?")
@@ -610,9 +610,9 @@ class tl_layout extends Backend
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if ($this->Input->get('act') == 'overrideAll')
+		if (\Input::get('act') == 'overrideAll')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = \Input::get('id');
 		}
 
 		return $this->getTemplateGroup('fe_', $intPid);
@@ -628,9 +628,9 @@ class tl_layout extends Backend
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if ($this->Input->get('act') == 'overrideAll')
+		if (\Input::get('act') == 'overrideAll')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = \Input::get('id');
 		}
 
 		return $this->getTemplateGroup('moo_', $intPid);
@@ -646,9 +646,9 @@ class tl_layout extends Backend
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if ($this->Input->get('act') == 'overrideAll')
+		if (\Input::get('act') == 'overrideAll')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = \Input::get('id');
 		}
 
 		return $this->getTemplateGroup('j_', $intPid);
@@ -664,9 +664,9 @@ class tl_layout extends Backend
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if ($this->Input->get('act') == 'overrideAll')
+		if (\Input::get('act') == 'overrideAll')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = \Input::get('id');
 		}
 
 		return $this->getTemplateGroup('analytics_', $intPid);

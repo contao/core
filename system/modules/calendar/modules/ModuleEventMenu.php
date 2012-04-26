@@ -137,7 +137,7 @@ class ModuleEventMenu extends \ModuleCalendar
 			$arrItems[$intYear]['href'] = $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'year=' . $intDate;
 			$arrItems[$intYear]['title'] = specialchars($intYear . ' (' . $quantity . ')');
 			$arrItems[$intYear]['class'] = trim(((++$count == 1) ? 'first ' : '') . (($count == $limit) ? 'last' : ''));
-			$arrItems[$intYear]['isActive'] = ($this->Input->get('year') == $intDate);
+			$arrItems[$intYear]['isActive'] = (\Input::get('year') == $intDate);
 			$arrItems[$intYear]['quantity'] = $quantity;
 		}
 
@@ -200,7 +200,7 @@ class ModuleEventMenu extends \ModuleCalendar
 				$arrItems[$intYear][$intMonth]['href'] = sprintf($strUrl, $intDate);
 				$arrItems[$intYear][$intMonth]['title'] = specialchars($GLOBALS['TL_LANG']['MONTHS'][$intMonth].' '.$intYear . ' (' . $quantity . ')');
 				$arrItems[$intYear][$intMonth]['class'] = trim(((++$count == 1) ? 'first ' : '') . (($count == $limit) ? 'last' : ''));
-				$arrItems[$intYear][$intMonth]['isActive'] = ($this->Input->get('month') == $intDate);
+				$arrItems[$intYear][$intMonth]['isActive'] = (\Input::get('month') == $intDate);
 				$arrItems[$intYear][$intMonth]['quantity'] = $quantity;
 			}
 		}

@@ -51,7 +51,7 @@ class LiveUpdate extends \Backend implements \executable
 	 */
 	public function isActive()
 	{
-		return ($this->Input->get('token') != '');
+		return (\Input::get('token') != '');
 	}
 
 
@@ -117,11 +117,11 @@ class LiveUpdate extends \Backend implements \executable
 		$objTemplate->updateServer = $GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'index.php';
 
 		// Run the update
-		if ($this->Input->get('token') != '')
+		if (\Input::get('token') != '')
 		{
 			$this->runLiveUpdate($objTemplate);
 		}
-		elseif ($this->Input->get('act') == 'runonce')
+		elseif (\Input::get('act') == 'runonce')
 		{
 			$this->handleRunOnce();
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", true);
@@ -145,13 +145,13 @@ class LiveUpdate extends \Backend implements \executable
 	 */
 	protected function runLiveUpdate(\BackendTemplate $objTemplate)
 	{
-		$archive = 'system/tmp/' . $this->Input->get('token');
+		$archive = 'system/tmp/' . \Input::get('token');
 
 		// Download the archive
 		if (!file_exists(TL_ROOT . '/' . $archive))
 		{
 			$objRequest = new \Request();
-			$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'request.php?token=' . $this->Input->get('token'));
+			$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'request.php?token=' . \Input::get('token'));
 
 			if ($objRequest->hasError())
 			{
@@ -188,7 +188,7 @@ class LiveUpdate extends \Backend implements \executable
 		$objArchive = new \ZipReader($archive);
 
 		// Table of contents
-		if ($this->Input->get('toc'))
+		if (\Input::get('toc'))
 		{
 			$arrFiles = $objArchive->getFileList();
 			array_shift($arrFiles);
@@ -210,7 +210,7 @@ class LiveUpdate extends \Backend implements \executable
 		}
 
 		// Backup
-		if ($this->Input->get('bup'))
+		if (\Input::get('bup'))
 		{
 			echo '<hgroup>'
 				  .'<h1>Contao Live Update</h1>'

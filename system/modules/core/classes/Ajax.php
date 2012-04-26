@@ -125,7 +125,7 @@ class Ajax extends \Backend
 				$this->strAjaxId = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', \Input::post('id'));
 				$this->strAjaxKey = str_replace('_' . $this->strAjaxId, '', \Input::post('id'));
 
-				if ($this->Input->get('act') == 'editAll')
+				if (\Input::get('act') == 'editAll')
 				{
 					$this->strAjaxKey = preg_replace('/(.*)_[0-9a-zA-Z]+$/i', '$1', $this->strAjaxKey);
 					$this->strAjaxName = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', \Input::post('name'));
@@ -144,7 +144,7 @@ class Ajax extends \Backend
 				$this->strAjaxId = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', \Input::post('id'));
 				$this->strAjaxKey = str_replace('_' . $this->strAjaxId, '', \Input::post('id'));
 
-				if ($this->Input->get('act') == 'editAll')
+				if (\Input::get('act') == 'editAll')
 				{
 					$this->strAjaxKey = preg_replace('/(.*)_[0-9a-zA-Z]+$/i', '$1', $this->strAjaxKey);
 					$this->strAjaxName = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', \Input::post('name'));
@@ -274,7 +274,7 @@ class Ajax extends \Backend
 			case 'toggleSubpalette':
 				if ($dc instanceof \DC_Table)
 				{
-					if ($this->Input->get('act') == 'editAll')
+					if (\Input::get('act') == 'editAll')
 					{
 						$this->strAjaxId = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', \Input::post('id'));
 						$this->Database->prepare("UPDATE " . $dc->table . " SET " . \Input::post('field') . "='" . (intval(\Input::post('state') == 1) ? 1 : '') . "' WHERE id=?")->execute($this->strAjaxId);

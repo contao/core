@@ -695,7 +695,7 @@ class tl_style extends Backend
 	 */
 	public function filePicker(\DataContainer $dc)
 	{
-		return ' <a href="contao/file.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.$dc->value.'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['files'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="contao/file.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.$dc->value.'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['files'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((\Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
@@ -734,7 +734,7 @@ class tl_style extends Backend
 	public function scheduleUpdate()
 	{
 		// Return if there is no ID 
-		if (!CURRENT_ID || $this->Input->get('act') == 'copy' || \Environment::get('isAjaxRequest'))
+		if (!CURRENT_ID || \Input::get('act') == 'copy' || \Environment::get('isAjaxRequest'))
 		{
 			return;
 		}
@@ -782,9 +782,9 @@ class tl_style extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen($this->Input->get('tid')))
+		if (strlen(\Input::get('tid')))
 		{
-			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 

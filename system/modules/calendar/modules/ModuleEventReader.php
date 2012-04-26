@@ -74,11 +74,11 @@ class ModuleEventReader extends \Events
 		// Set the item from the auto_item parameter
 		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
 		{
-			$this->Input->setGet('events', $this->Input->get('auto_item'));
+			$this->Input->setGet('events', \Input::get('auto_item'));
 		}
 
 		// Do not index or cache the page if no event has been specified
-		if (!$this->Input->get('events'))
+		if (!\Input::get('events'))
 		{
 			global $objPage;
 			$objPage->noSearch = 1;
@@ -114,7 +114,7 @@ class ModuleEventReader extends \Events
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
 		// Get the current event
-		$objEvent = \CalendarEventsModel::findPublishedByParentAndIdOrAlias((is_numeric($this->Input->get('events')) ? $this->Input->get('events') : 0), $this->Input->get('events'), $this->cal_calendar);
+		$objEvent = \CalendarEventsModel::findPublishedByParentAndIdOrAlias((is_numeric(\Input::get('events')) ? \Input::get('events') : 0), \Input::get('events'), $this->cal_calendar);
 
 		if ($objEvent === null)
 		{
@@ -124,7 +124,7 @@ class ModuleEventReader extends \Events
 
 			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
-			$this->Template->event = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('events')) . '</p>';
+			$this->Template->event = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], \Input::get('events')) . '</p>';
 			return;
 		}
 

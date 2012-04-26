@@ -82,9 +82,9 @@ class Main extends Backend
 		}
 
 		// Front end redirect
-		if ($this->Input->get('do') == 'feRedirect')
+		if (\Input::get('do') == 'feRedirect')
 		{
-			$this->redirectToFrontendPage($this->Input->get('page'), $this->Input->get('article'));
+			$this->redirectToFrontendPage(\Input::get('page'), \Input::get('article'));
 		}
 
 		$this->loadLanguageFile('default');
@@ -109,19 +109,19 @@ class Main extends Backend
 		}
 
 		// Error
-		if ($this->Input->get('act') == 'error')
+		if (\Input::get('act') == 'error')
 		{
 			$this->Template->error = $GLOBALS['TL_LANG']['ERR']['general'];
 		}
 		// Welcome screen
-		elseif (!$this->Input->get('do') && !$this->Input->get('act'))
+		elseif (!\Input::get('do') && !\Input::get('act'))
 		{
 			$this->Template->main .= $this->welcomeScreen();
 		}
 		// Open a module
-		elseif ($this->Input->get('do'))
+		elseif (\Input::get('do'))
 		{
-			$this->Template->main .= $this->getBackendModule($this->Input->get('do'));
+			$this->Template->main .= $this->getBackendModule(\Input::get('do'));
 		}
 
 		$this->output();
@@ -264,13 +264,13 @@ class Main extends Backend
 		if (CURRENT_ID != '')
 		{
 			// Pages
-			if ($this->Input->get('do') == 'page')
+			if (\Input::get('do') == 'page')
 			{
 				$this->Template->frontendFile = '?page=' . CURRENT_ID;
 			}
 
 			// Articles
-			elseif ($this->Input->get('do') == 'article')
+			elseif (\Input::get('do') == 'article')
 			{
 				$objArticle = ArticleModel::findByPk(CURRENT_ID);
 

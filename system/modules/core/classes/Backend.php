@@ -137,7 +137,7 @@ abstract class Backend extends \Controller
 		$this->import('BackendUser', 'User');
 
 		// Dynamically add the "personal data" module (see #4193)
-		if ($this->Input->get('do') == 'login')
+		if (\Input::get('do') == 'login')
 		{
 			$arrModule = array('tables'=>array('tl_user'), 'callback'=>'ModuleUser');
 		}
@@ -149,8 +149,8 @@ abstract class Backend extends \Controller
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$strTable = $this->Input->get('table') ?: $arrModule['tables'][0];
-		$id = (!$this->Input->get('act') && $this->Input->get('id')) ? $this->Input->get('id') : $this->Session->get('CURRENT_ID');
+		$strTable = \Input::get('table') ?: $arrModule['tables'][0];
+		$id = (!\Input::get('act') && \Input::get('id')) ? \Input::get('id') : $this->Session->get('CURRENT_ID');
 
 		// Store the current ID in the current session
 		if ($id != $this->Session->get('CURRENT_ID'))
@@ -159,21 +159,21 @@ abstract class Backend extends \Controller
 			$this->reload();
 		}
 
-		define('CURRENT_ID', ($this->Input->get('table') ? $id : $this->Input->get('id')));
+		define('CURRENT_ID', (\Input::get('table') ? $id : \Input::get('id')));
 		$this->Template->headline = $GLOBALS['TL_LANG']['MOD'][$module][0];
 
 		// Theme headlines
 		if ($module == 'themes')
 		{
-			if ($this->Input->get('table') == 'tl_style_sheet' || $this->Input->get('table') == 'tl_style')
+			if (\Input::get('table') == 'tl_style_sheet' || \Input::get('table') == 'tl_style')
 			{
 				$this->Template->headline .= ' - ' . $GLOBALS['TL_LANG']['MOD']['css'][0];
 			}
-			elseif ($this->Input->get('table') == 'tl_module')
+			elseif (\Input::get('table') == 'tl_module')
 			{
 				$this->Template->headline .= ' - ' . $GLOBALS['TL_LANG']['MOD']['modules'][0];
 			}
-			elseif ($this->Input->get('table') == 'tl_layout')
+			elseif (\Input::get('table') == 'tl_layout')
 			{
 				$this->Template->headline .= ' - ' . $GLOBALS['TL_LANG']['MOD']['layout'][0];
 			}
@@ -255,15 +255,15 @@ abstract class Backend extends \Controller
 			$this->Template->main .= $objCallback->generate();
 		}
 		// Custom action (if key is not defined in config.php the default action will be called)
-		elseif ($this->Input->get('key') && isset($arrModule[$this->Input->get('key')]))
+		elseif (\Input::get('key') && isset($arrModule[\Input::get('key')]))
 		{
-			$objCallback = new $arrModule[$this->Input->get('key')][0]();
-			$this->Template->main .= $objCallback->$arrModule[$this->Input->get('key')][1]($dc, $strTable, $arrModule);
+			$objCallback = new $arrModule[\Input::get('key')][0]();
+			$this->Template->main .= $objCallback->$arrModule[\Input::get('key')][1]($dc, $strTable, $arrModule);
 		}
 		// Default action
 		elseif (is_object($dc))
 		{
-			$act = $this->Input->get('act');
+			$act = \Input::get('act');
 
 			if ($act == '' || $act == 'paste' || $act == 'select')
 			{
@@ -475,7 +475,7 @@ abstract class Backend extends \Controller
 			}
 			else
 			{
-				$strOptions .= sprintf('<option value="{{link_url::%s}}"%s>%s%s</option>', $objPages->id, (('{{link_url::' . $objPages->id . '}}' == $this->Input->get('value')) ? ' selected="selected"' : ''), str_repeat(" &nbsp; &nbsp; ", $level), specialchars($objPages->title));
+				$strOptions .= sprintf('<option value="{{link_url::%s}}"%s>%s%s</option>', $objPages->id, (('{{link_url::' . $objPages->id . '}}' == \Input::get('value')) ? ' selected="selected"' : ''), str_repeat(" &nbsp; &nbsp; ", $level), specialchars($objPages->title));
 				$strOptions .= $this->doCreatePageList($objPages->id, $level);
 			}
 		}
@@ -591,7 +591,7 @@ abstract class Backend extends \Controller
 					continue;
 				}
 
-				$strFiles .= sprintf('<option value="%s"%s>%s</option>', $strFolder . '/' . $strFile, (($strFolder . '/' . $strFile == $this->Input->get('value')) ? ' selected="selected"' : ''), specialchars($strFile));
+				$strFiles .= sprintf('<option value="%s"%s>%s</option>', $strFolder . '/' . $strFile, (($strFolder . '/' . $strFile == \Input::get('value')) ? ' selected="selected"' : ''), specialchars($strFile));
 			}
 		}
 

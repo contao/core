@@ -766,7 +766,7 @@ class tl_content extends Backend
 		$pagemounts = array_unique($pagemounts);
 
 		// Check the current action
-		switch ($this->Input->get('act'))
+		switch (\Input::get('act'))
 		{
 			case 'paste':
 				// Allow
@@ -788,7 +788,7 @@ class tl_content extends Backend
 			case 'cutAll':
 			case 'copyAll':
 				// Check access to the parent element if a content element is moved
-				if (($this->Input->get('act') == 'cutAll' || $this->Input->get('act') == 'copyAll') && !$this->checkAccessToElement($this->Input->get('pid'), $pagemounts, ($this->Input->get('mode') == 2)))
+				if ((\Input::get('act') == 'cutAll' || \Input::get('act') == 'copyAll') && !$this->checkAccessToElement(\Input::get('pid'), $pagemounts, (\Input::get('mode') == 2)))
 				{
 					$this->redirect('contao/main.php?act=error');
 				}
@@ -804,7 +804,7 @@ class tl_content extends Backend
 			case 'cut':
 			case 'copy':
 				// Check access to the parent element if a content element is moved
-				if (!$this->checkAccessToElement($this->Input->get('pid'), $pagemounts, ($this->Input->get('mode') == 2)))
+				if (!$this->checkAccessToElement(\Input::get('pid'), $pagemounts, (\Input::get('mode') == 2)))
 				{
 					$this->redirect('contao/main.php?act=error');
 				}
@@ -812,7 +812,7 @@ class tl_content extends Backend
 
 			default:
 				// Check access to the content element
-				if (!$this->checkAccessToElement($this->Input->get('id'), $pagemounts))
+				if (!$this->checkAccessToElement(\Input::get('id'), $pagemounts))
 				{
 					$this->redirect('contao/main.php?act=error');
 				}
@@ -1028,12 +1028,12 @@ class tl_content extends Backend
 			}
 
 			$objAlias = $this->Database->prepare("SELECT c.id, c.pid, c.type, (CASE c.type WHEN 'module' THEN m.name WHEN 'form' THEN f.title WHEN 'table' THEN c.summary ELSE c.headline END) AS headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid LEFT JOIN tl_module m ON m.id=c.module LEFT JOIN tl_form f on f.id=c.form WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND c.id!=? ORDER BY a.title, c.sorting")
-									   ->execute($this->Input->get('id'));
+									   ->execute(\Input::get('id'));
 		}
 		else
 		{
 			$objAlias = $this->Database->prepare("SELECT c.id, c.pid, c.type, (CASE c.type WHEN 'module' THEN m.name WHEN 'form' THEN f.title WHEN 'table' THEN c.summary ELSE c.headline END) AS headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid LEFT JOIN tl_module m ON m.id=c.module LEFT JOIN tl_form f on f.id=c.form WHERE c.id!=? ORDER BY a.title, c.sorting")
-									   ->execute($this->Input->get('id'));
+									   ->execute(\Input::get('id'));
 		}
 
 		while ($objAlias->next())
@@ -1145,9 +1145,9 @@ class tl_content extends Backend
 		$intPid = $dc->activeRecord->pid;
 
 		// Override multiple
-		if ($this->Input->get('act') == 'overrideAll')
+		if (\Input::get('act') == 'overrideAll')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = \Input::get('id');
 		}
 
 		// Get the page ID
@@ -1194,9 +1194,9 @@ class tl_content extends Backend
 		$arrRoot = array();
 		$intPid = $dc->activeRecord->pid;
 
-		if ($this->Input->get('act') == 'overrideAll')
+		if (\Input::get('act') == 'overrideAll')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = \Input::get('id');
 		}
 
 		// Limit pages to the website root
@@ -1333,7 +1333,7 @@ class tl_content extends Backend
 	 */
 	public function pagePicker(\DataContainer $dc)
 	{
-		return ' <a href="contao/page.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="contao/page.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((\Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
@@ -1369,9 +1369,9 @@ class tl_content extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen($this->Input->get('tid')))
+		if (strlen(\Input::get('tid')))
 		{
-			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 
@@ -1381,7 +1381,7 @@ class tl_content extends Backend
 			return '';
 		}
 
-		$href .= '&amp;id='.$this->Input->get('id').'&amp;tid='.$row['id'].'&amp;state='.$row['invisible'];
+		$href .= '&amp;id='.\Input::get('id').'&amp;tid='.$row['id'].'&amp;state='.$row['invisible'];
 
 		if ($row['invisible'])
 		{

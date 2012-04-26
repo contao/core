@@ -250,7 +250,7 @@ class DataContainer extends \Backend
 		// Validate the field
 		if (\Input::post('FORM_SUBMIT') == $this->strTable)
 		{
-			$key = ($this->Input->get('act') == 'editAll') ? 'FORM_FIELDS_' . $this->intId : 'FORM_FIELDS';
+			$key = (\Input::get('act') == 'editAll') ? 'FORM_FIELDS_' . $this->intId : 'FORM_FIELDS';
 
 			// Calculate the current palette
 			$postPaletteFields = implode(',', \Input::post($key));
@@ -278,7 +278,7 @@ class DataContainer extends \Backend
 			}
 
 			// Adjust the names in editAll mode
-			if ($this->Input->get('act') == 'editAll')
+			if (\Input::get('act') == 'editAll')
 			{
 				foreach ($newPaletteFields as $k=>$v)
 				{
@@ -295,7 +295,7 @@ class DataContainer extends \Backend
 			$paletteFields = array_intersect($postPaletteFields, $newPaletteFields);
 
 			// Validate and save the field
-			if (in_array($this->strInputName, $paletteFields) || $this->Input->get('act') == 'overrideAll')
+			if (in_array($this->strInputName, $paletteFields) || \Input::get('act') == 'overrideAll')
 			{
 				$objWidget->validate();
 
@@ -419,7 +419,7 @@ class DataContainer extends \Backend
 		}
 
 		// No 2-column layout in "edit all" mode
-		if ($this->Input->get('act') == 'editAll' || $this->Input->get('act') == 'overrideAll')
+		if (\Input::get('act') == 'editAll' || \Input::get('act') == 'overrideAll')
 		{
 			$arrData['eval']['tl_class'] = str_replace(array('w50', 'clr', 'wizard', 'long', 'm12', 'cbx'), '', $arrData['eval']['tl_class']);
 		}
@@ -433,7 +433,7 @@ class DataContainer extends \Backend
 		}
 
 		// Handle multi-select fields in "override all" mode
-		elseif ($this->Input->get('act') == 'overrideAll' && ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard') && $arrData['eval']['multiple'])
+		elseif (\Input::get('act') == 'overrideAll' && ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard') && $arrData['eval']['multiple'])
 		{
 			$updateMode = '
 </div>
@@ -512,14 +512,14 @@ class DataContainer extends \Backend
 		{
 			if (!in_array($strKey, $arrUnset))
 			{
-				$arrKeys[$strKey] = $strKey . '=' . $this->Input->get($strKey);
+				$arrKeys[$strKey] = $strKey . '=' . \Input::get($strKey);
 			}
 		}
 
 		$strUrl = \Environment::get('script') . '?' . implode('&', $arrKeys);
 		$glue = !empty($arrKeys) ? '&' : '';
 
-		return $strUrl . $glue . ($this->Input->get('table') ? 'table='.$this->Input->get('table').'&amp;' : '').'act=edit&amp;id='.$id;
+		return $strUrl . $glue . (\Input::get('table') ? 'table='.\Input::get('table').'&amp;' : '').'act=edit&amp;id='.$id;
 	}
 
 

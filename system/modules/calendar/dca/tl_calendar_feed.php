@@ -279,7 +279,7 @@ class tl_calendar_feed extends Backend
 		}
 
 		// Check current action
-		switch ($this->Input->get('act'))
+		switch (\Input::get('act'))
 		{
 			case 'create':
 			case 'select':
@@ -288,11 +288,11 @@ class tl_calendar_feed extends Backend
 
 			case 'edit':
 				// Dynamically add the record to the user profile
-				if (!in_array($this->Input->get('id'), $root))
+				if (!in_array(\Input::get('id'), $root))
 				{
 					$arrNew = $this->Session->get('new_records');
 
-					if (is_array($arrNew['tl_calendar_feed']) && in_array($this->Input->get('id'), $arrNew['tl_calendar_feed']))
+					if (is_array($arrNew['tl_calendar_feed']) && in_array(\Input::get('id'), $arrNew['tl_calendar_feed']))
 					{
 						// Add permissions on user level
 						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
@@ -306,7 +306,7 @@ class tl_calendar_feed extends Backend
 							if (is_array($arrNewsfeedp) && in_array('create', $arrNewsfeedp))
 							{
 								$arrNewsfeeds = deserialize($objUser->calendarfeeds);
-								$arrNewsfeeds[] = $this->Input->get('id');
+								$arrNewsfeeds[] = \Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user SET calendarfeeds=? WHERE id=?")
 											   ->execute(serialize($arrNewsfeeds), $this->User->id);
@@ -325,7 +325,7 @@ class tl_calendar_feed extends Backend
 							if (is_array($arrNewsfeedp) && in_array('create', $arrNewsfeedp))
 							{
 								$arrNewsfeeds = deserialize($objGroup->calendarfeeds);
-								$arrNewsfeeds[] = $this->Input->get('id');
+								$arrNewsfeeds[] = \Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user_group SET calendarfeeds=? WHERE id=?")
 											   ->execute(serialize($arrNewsfeeds), $this->User->groups[0]);
@@ -333,7 +333,7 @@ class tl_calendar_feed extends Backend
 						}
 
 						// Add new element to the user object
-						$root[] = $this->Input->get('id');
+						$root[] = \Input::get('id');
 						$this->User->calendarfeeds = $root;
 					}
 				}
@@ -342,9 +342,9 @@ class tl_calendar_feed extends Backend
 			case 'copy':
 			case 'delete':
 			case 'show':
-				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && !$this->User->hasAccess('delete', 'calendarfeedp')))
+				if (!in_array(\Input::get('id'), $root) || (\Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'calendarfeedp')))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' calendar feed ID "'.$this->Input->get('id').'"', 'tl_calendar_feed checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.\Input::get('act').' calendar feed ID "'.\Input::get('id').'"', 'tl_calendar_feed checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -353,7 +353,7 @@ class tl_calendar_feed extends Backend
 			case 'deleteAll':
 			case 'overrideAll':
 				$session = $this->Session->getData();
-				if ($this->Input->get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'calendarfeedp'))
+				if (\Input::get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'calendarfeedp'))
 				{
 					$session['CURRENT']['IDS'] = array();
 				}
@@ -365,9 +365,9 @@ class tl_calendar_feed extends Backend
 				break;
 
 			default:
-				if (strlen($this->Input->get('act')))
+				if (strlen(\Input::get('act')))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' calendar feeds', 'tl_calendar_feed checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.\Input::get('act').' calendar feeds', 'tl_calendar_feed checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;

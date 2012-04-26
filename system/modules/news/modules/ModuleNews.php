@@ -358,9 +358,9 @@ abstract class ModuleNews extends \Module
 			}
 
 			// Add the current archive parameter (news archive)
-			if ($blnAddArchive && $this->Input->get('month') != '')
+			if ($blnAddArchive && \Input::get('month') != '')
 			{
-				self::$arrUrlCache[$strCacheKey] .= ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $this->Input->get('month');
+				self::$arrUrlCache[$strCacheKey] .= ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . \Input::get('month');
 			}
 		}
 

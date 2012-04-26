@@ -74,11 +74,11 @@ class ModuleNewsletterReader extends \Module
 		// Set the item from the auto_item parameter
 		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
 		{
-			$this->Input->setGet('items', $this->Input->get('auto_item'));
+			$this->Input->setGet('items', \Input::get('auto_item'));
 		}
 
 		// Do not index or cache the page if no news item has been specified
-		if (!$this->Input->get('items'))
+		if (!\Input::get('items'))
 		{
 			global $objPage;
 			$objPage->noSearch = 1;
@@ -113,7 +113,7 @@ class ModuleNewsletterReader extends \Module
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$objNewsletter = \NewsletterModel::findSentByParentAndIdOrAlias((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), $this->nl_channels);
+		$objNewsletter = \NewsletterModel::findSentByParentAndIdOrAlias((is_numeric(\Input::get('items')) ? \Input::get('items') : 0), \Input::get('items'), $this->nl_channels);
 
 		if ($objNewsletter === null)
 		{
@@ -123,7 +123,7 @@ class ModuleNewsletterReader extends \Module
 
 			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
-			$this->Template->content = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
+			$this->Template->content = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], \Input::get('items')) . '</p>';
 			return;
 		}
 
@@ -138,9 +138,9 @@ class ModuleNewsletterReader extends \Module
 			if (is_array($arrEnclosure))
 			{
 				// Send file to the browser
-				if ($this->Input->get('file', true) != '' && in_array($this->Input->get('file', true), $arrEnclosure))
+				if (\Input::get('file', true) != '' && in_array(\Input::get('file', true), $arrEnclosure))
 				{
-					$this->sendFileToBrowser($this->Input->get('file', true));
+					$this->sendFileToBrowser(\Input::get('file', true));
 				}
 
 				// Add download links

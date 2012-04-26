@@ -327,7 +327,7 @@ class tl_calendar extends Backend
 		}
 
 		// Check current action
-		switch ($this->Input->get('act'))
+		switch (\Input::get('act'))
 		{
 			case 'create':
 			case 'select':
@@ -336,11 +336,11 @@ class tl_calendar extends Backend
 
 			case 'edit':
 				// Dynamically add the record to the user profile
-				if (!in_array($this->Input->get('id'), $root))
+				if (!in_array(\Input::get('id'), $root))
 				{
 					$arrNew = $this->Session->get('new_records');
 
-					if (is_array($arrNew['tl_calendar']) && in_array($this->Input->get('id'), $arrNew['tl_calendar']))
+					if (is_array($arrNew['tl_calendar']) && in_array(\Input::get('id'), $arrNew['tl_calendar']))
 					{
 						// Add permissions on user level
 						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
@@ -354,7 +354,7 @@ class tl_calendar extends Backend
 							if (is_array($arrCalendarp) && in_array('create', $arrCalendarp))
 							{
 								$arrCalendars = deserialize($objUser->calendars);
-								$arrCalendars[] = $this->Input->get('id');
+								$arrCalendars[] = \Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user SET calendars=? WHERE id=?")
 											   ->execute(serialize($arrCalendars), $this->User->id);
@@ -373,7 +373,7 @@ class tl_calendar extends Backend
 							if (is_array($arrCalendarp) && in_array('create', $arrCalendarp))
 							{
 								$arrCalendars = deserialize($objGroup->calendars);
-								$arrCalendars[] = $this->Input->get('id');
+								$arrCalendars[] = \Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user_group SET calendars=? WHERE id=?")
 											   ->execute(serialize($arrCalendars), $this->User->groups[0]);
@@ -381,7 +381,7 @@ class tl_calendar extends Backend
 						}
 
 						// Add new element to the user object
-						$root[] = $this->Input->get('id');
+						$root[] = \Input::get('id');
 						$this->User->calendars = $root;
 					}
 				}
@@ -390,9 +390,9 @@ class tl_calendar extends Backend
 			case 'copy':
 			case 'delete':
 			case 'show':
-				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && !$this->User->hasAccess('delete', 'calendarp')))
+				if (!in_array(\Input::get('id'), $root) || (\Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'calendarp')))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' calendar ID "'.$this->Input->get('id').'"', 'tl_calendar checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.\Input::get('act').' calendar ID "'.\Input::get('id').'"', 'tl_calendar checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -401,7 +401,7 @@ class tl_calendar extends Backend
 			case 'deleteAll':
 			case 'overrideAll':
 				$session = $this->Session->getData();
-				if ($this->Input->get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'calendarp'))
+				if (\Input::get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'calendarp'))
 				{
 					$session['CURRENT']['IDS'] = array();
 				}
@@ -413,9 +413,9 @@ class tl_calendar extends Backend
 				break;
 
 			default:
-				if (strlen($this->Input->get('act')))
+				if (strlen(\Input::get('act')))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' calendars', 'tl_calendar checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.\Input::get('act').' calendars', 'tl_calendar checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;

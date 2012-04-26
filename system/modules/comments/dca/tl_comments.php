@@ -274,7 +274,7 @@ class tl_comments extends Backend
 	 */
 	public function checkPermission()
 	{
-		switch ($this->Input->get('act'))
+		switch (\Input::get('act'))
 		{
 			case 'select':
 			case 'show':
@@ -286,17 +286,17 @@ class tl_comments extends Backend
 			case 'toggle':
 				$objComment = $this->Database->prepare("SELECT id, parent, source FROM tl_comments WHERE id=?")
 											 ->limit(1)
-											 ->execute($this->Input->get('id'));
+											 ->execute(\Input::get('id'));
 
 				if ($objComment->numRows < 1)
 				{
-					$this->log('Comment ID ' . $this->Input->get('id') . ' does not exist', 'tl_comments checkPermission()', TL_ERROR);
+					$this->log('Comment ID ' . \Input::get('id') . ' does not exist', 'tl_comments checkPermission()', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!$this->isAllowedToEditComment($objComment->parent, $objComment->source))
 				{
-					$this->log('Not enough permissions to ' . $this->Input->get('act') . ' comment ID ' . $this->Input->get('id') . ' (parent element: ' . $objComment->source . ' ID ' . $objComment->parent . ')', 'tl_comments checkPermission()', TL_ERROR);
+					$this->log('Not enough permissions to ' . \Input::get('act') . ' comment ID ' . \Input::get('id') . ' (parent element: ' . $objComment->source . ' ID ' . $objComment->parent . ')', 'tl_comments checkPermission()', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -326,9 +326,9 @@ class tl_comments extends Backend
 				break;
 
 			default:
-				if (strlen($this->Input->get('act')))
+				if (strlen(\Input::get('act')))
 				{
-					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_comments checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.\Input::get('act').'"', 'tl_comments checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -594,9 +594,9 @@ class tl_comments extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen($this->Input->get('tid')))
+		if (strlen(\Input::get('tid')))
 		{
-			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 

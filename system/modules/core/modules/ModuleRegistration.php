@@ -110,7 +110,7 @@ class ModuleRegistration extends \Module
 		}
 
 		// Activate account
-		if ($this->Input->get('token') != '')
+		if (\Input::get('token') != '')
 		{
 			$this->activateAcount();
 			return;
@@ -485,7 +485,7 @@ class ModuleRegistration extends \Module
 		$this->Template = new \FrontendTemplate($this->strTemplate);
 
 		// Check the token
-		$objMember = \MemberModel::findByActivation($this->Input->get('token'));
+		$objMember = \MemberModel::findByActivation(\Input::get('token'));
 
 		if ($objMember === null)
 		{

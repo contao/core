@@ -110,7 +110,7 @@ class Newsletter extends \Backend
 		}
 
 		// Send newsletter
-		if ($this->Input->get('token') != '' && $this->Input->get('token') == $this->Session->get('tl_newsletter_send'))
+		if (\Input::get('token') != '' && \Input::get('token') == $this->Session->get('tl_newsletter_send'))
 		{
 			$referer = preg_replace('/&(amp;)?(start|mpc|token|recipient|preview)=[^&]*/', '', \Environment::get('request'));
 
@@ -118,13 +118,13 @@ class Newsletter extends \Backend
 			if (isset($_GET['preview']))
 			{
 				// Check the e-mail address
-				if (!$this->isValidEmailAddress($this->Input->get('recipient', true)))
+				if (!$this->isValidEmailAddress(\Input::get('recipient', true)))
 				{
 					$_SESSION['TL_PREVIEW_MAIL_ERROR'] = true;
 					$this->redirect($referer);
 				}
 
-				$arrRecipient['email'] = urldecode($this->Input->get('recipient', true));
+				$arrRecipient['email'] = urldecode(\Input::get('recipient', true));
 
 				// Send
 				$objEmail = $this->generateEmailObject($objNewsletter, $arrAttachments);
@@ -150,9 +150,9 @@ class Newsletter extends \Backend
 			$intTotal = $objTotal->count;
 
 			// Get page and timeout
-			$intTimeout = ($this->Input->get('timeout') > 0) ? $this->Input->get('timeout') : 1;
-			$intStart = $this->Input->get('start') ? $this->Input->get('start') : 0;
-			$intPages = $this->Input->get('mpc') ? $this->Input->get('mpc') : 10;
+			$intTimeout = (\Input::get('timeout') > 0) ? \Input::get('timeout') : 1;
+			$intStart = \Input::get('start') ? \Input::get('start') : 0;
+			$intPages = \Input::get('mpc') ? \Input::get('mpc') : 10;
 
 			// Get recipients
 			$objRecipients = $this->Database->prepare("SELECT *, r.email FROM tl_newsletter_recipients r LEFT JOIN tl_member m ON(r.email=m.email) WHERE r.pid=? AND r.active=1 GROUP BY r.email ORDER BY r.email")
@@ -239,10 +239,10 @@ class Newsletter extends \Backend
 '.$this->getMessages().'
 <form action="'.ampersand(\Environment::get('script'), true).'" id="tl_newsletter_send" class="tl_form" method="get">
 <div class="tl_formbody_edit tl_newsletter_send">
-<input type="hidden" name="do" value="' . $this->Input->get('do') . '">
-<input type="hidden" name="table" value="' . $this->Input->get('table') . '">
-<input type="hidden" name="key" value="' . $this->Input->get('key') . '">
-<input type="hidden" name="id" value="' . $this->Input->get('id') . '">
+<input type="hidden" name="do" value="' . \Input::get('do') . '">
+<input type="hidden" name="table" value="' . \Input::get('table') . '">
+<input type="hidden" name="key" value="' . \Input::get('key') . '">
+<input type="hidden" name="id" value="' . \Input::get('id') . '">
 <input type="hidden" name="token" value="' . $strToken . '">
 <table class="prev_header">
   <tr class="row_0">
@@ -406,7 +406,7 @@ class Newsletter extends \Backend
 	 */
 	public function importRecipients()
 	{
-		if ($this->Input->get('key') != 'import')
+		if (\Input::get('key') != 'import')
 		{
 			return '';
 		}
@@ -477,12 +477,12 @@ class Newsletter extends \Backend
 
 					// Check whether the e-mail address exists
 					$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_newsletter_recipients WHERE pid=? AND email=?")
-												   ->execute($this->Input->get('id'), $strRecipient);
+												   ->execute(\Input::get('id'), $strRecipient);
 
 					if ($objRecipient->count < 1)
 					{
 						$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=$time, email=?, active=1")
-									   ->execute($this->Input->get('id'), $strRecipient);
+									   ->execute(\Input::get('id'), $strRecipient);
 
 						++$intTotal;
 					}
@@ -703,7 +703,7 @@ class Newsletter extends \Backend
 	 */
 	public function updateAccount()
 	{
-		$intUser = $this->Input->get('id');
+		$intUser = \Input::get('id');
 
 		// Front end call
 		if (TL_MODE == 'FE')
@@ -719,7 +719,7 @@ class Newsletter extends \Backend
 		}
 
 		// Edit account
-		if (TL_MODE == 'FE' || $this->Input->get('act') == 'edit')
+		if (TL_MODE == 'FE' || \Input::get('act') == 'edit')
 		{
 			$objUser = $this->Database->prepare("SELECT email, disable FROM tl_member WHERE id=?")
 									  ->limit(1)
@@ -771,7 +771,7 @@ class Newsletter extends \Backend
 		}
 
 		// Delete account
-		elseif ($this->Input->get('act') == 'delete')
+		elseif (\Input::get('act') == 'delete')
 		{
 			$objUser = $this->Database->prepare("SELECT email FROM tl_member WHERE id=?")
 									  ->limit(1)

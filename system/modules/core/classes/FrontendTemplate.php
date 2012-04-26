@@ -96,11 +96,11 @@ class FrontendTemplate extends \Template
 			{
 				if ($GLOBALS['TL_CONFIG']['useAutoItem'] && in_array($key, $GLOBALS['TL_AUTO_ITEM']))
 				{
-					$strParams .= '/' . $this->Input->get($key);
+					$strParams .= '/' . \Input::get($key);
 				}
 				else
 				{
-					$strParams .= '/' . $key . '/' . $this->Input->get($key);
+					$strParams .= '/' . $key . '/' . \Input::get($key);
 				}
 			}
 		}
@@ -110,7 +110,7 @@ class FrontendTemplate extends \Template
 		// Add the page number
 		if (isset($_GET['page']))
 		{
-			$strUrl .= ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&page=' : '?page=') . $this->Input->get('page');
+			$strUrl .= ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&page=' : '?page=') . \Input::get('page');
 		}
 
 		$this->keywords = '';

@@ -722,7 +722,7 @@ class tl_page extends Backend
 				}
 			}
 
-			$session['CURRENT']['IDS'] = ($this->Input->get('act') == 'deleteAll') ? $delete_all : $edit_all;
+			$session['CURRENT']['IDS'] = (\Input::get('act') == 'deleteAll') ? $delete_all : $edit_all;
 		}
 
 		// Set allowed clipboard IDs
@@ -754,11 +754,11 @@ class tl_page extends Backend
 		$this->Session->setData($session);
 
 		// Check permissions to save and create new
-		if ($this->Input->get('act') == 'edit')
+		if (\Input::get('act') == 'edit')
 		{
 			$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=(SELECT pid FROM tl_page WHERE id=?)")
 									  ->limit(1)
-									  ->execute($this->Input->get('id'));
+									  ->execute(\Input::get('id'));
 
 			if ($objPage->numRows && !$this->User->isAllowed(2, $objPage->row()))
 			{
@@ -767,14 +767,14 @@ class tl_page extends Backend
 		}
 
 		// Check current action
-		if ($this->Input->get('act') && $this->Input->get('act') != 'paste')
+		if (\Input::get('act') && \Input::get('act') != 'paste')
 		{
 			$permission = 0;
-			$cid = CURRENT_ID ?: $this->Input->get('id');
+			$cid = CURRENT_ID ?: \Input::get('id');
 			$ids = ($cid != '') ? array($cid) : array();
 
 			// Set permission
-			switch ($this->Input->get('act'))
+			switch (\Input::get('act'))
 			{
 				case 'edit':
 				case 'toggle':
@@ -783,7 +783,7 @@ class tl_page extends Backend
 
 				case 'move':
 					$permission = 2;
-					$ids[] = $this->Input->get('sid');
+					$ids[] = \Input::get('sid');
 					break;
 
 				case 'create':
@@ -794,16 +794,16 @@ class tl_page extends Backend
 					$permission = 2;
 
 					// Check the parent page in "paste into" mode
-					if ($this->Input->get('mode') == 2)
+					if (\Input::get('mode') == 2)
 					{
-						$ids[] = $this->Input->get('pid');
+						$ids[] = \Input::get('pid');
 					}
 					// Check the parent's parent page in "paste after" mode
 					else
 					{
 						$objPage = $this->Database->prepare("SELECT pid FROM tl_page WHERE id=?")
 												  ->limit(1)
-												  ->execute($this->Input->get('pid'));
+												  ->execute(\Input::get('pid'));
 
 						$ids[] = $objPage->pid;
 					}
@@ -815,14 +815,14 @@ class tl_page extends Backend
 			}
 
 			// Check user permissions
-			if ($this->Input->get('act') != 'show')
+			if (\Input::get('act') != 'show')
 			{
 				$pagemounts = array();
 
 				// Get all allowed pages for the current user
 				foreach ($this->User->pagemounts as $root)
 				{
-					if ($this->Input->get('act') != 'delete')
+					if (\Input::get('act') != 'delete')
 					{
 						$pagemounts[] = $root;
 					}
@@ -834,9 +834,9 @@ class tl_page extends Backend
 				$pagemounts = array_unique($pagemounts);
 
 				// Do not allow to paste after pages on the root level (pagemounts)
-				if (($this->Input->get('act') == 'cut' || $this->Input->get('act') == 'cutAll') && $this->Input->get('mode') == 1 && in_array($this->Input->get('pid'), $this->eliminateNestedPages($this->User->pagemounts)))
+				if ((\Input::get('act') == 'cut' || \Input::get('act') == 'cutAll') && \Input::get('mode') == 1 && in_array(\Input::get('pid'), $this->eliminateNestedPages($this->User->pagemounts)))
 				{
-					$this->log('Not enough permissions to paste page ID '. $this->Input->get('id') .' after mounted page ID '. $this->Input->get('pid') .' (root level)', 'tl_page checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to paste page ID '. \Input::get('id') .' after mounted page ID '. \Input::get('pid') .' (root level)', 'tl_page checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -869,9 +869,9 @@ class tl_page extends Backend
 					}
 
 					// Check the type of the first page (not the following parent pages)
-					if ($i == 0 && $this->Input->get('act') != 'create' && !$this->User->hasAccess($objPage->type, 'alpty'))
+					if ($i == 0 && \Input::get('act') != 'create' && !$this->User->hasAccess($objPage->type, 'alpty'))
 					{
-						$this->log('Not enough permissions to  '. $this->Input->get('act') .' '. $objPage->type .' pages', 'tl_page checkPermission()', TL_ERROR);
+						$this->log('Not enough permissions to  '. \Input::get('act') .' '. $objPage->type .' pages', 'tl_page checkPermission()', TL_ERROR);
 
 						$error = true;
 						break;
@@ -881,7 +881,7 @@ class tl_page extends Backend
 				// Redirect if there is an error
 				if ($error)
 				{
-					$this->log('Not enough permissions to '. $this->Input->get('act') .' page ID '. $cid .' or paste after/into page ID '. $this->Input->get('pid'), 'tl_page checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '. \Input::get('act') .' page ID '. $cid .' or paste after/into page ID '. \Input::get('pid'), 'tl_page checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 			}
@@ -898,7 +898,7 @@ class tl_page extends Backend
 		// Set a new node
 		if (isset($_GET['node']))
 		{
-			$this->Session->set('tl_page_node', $this->Input->get('node'));
+			$this->Session->set('tl_page_node', \Input::get('node'));
 			$this->redirect(preg_replace('/&node=[^&]*/', '', \Environment::get('request')));
 		}
 
@@ -990,13 +990,13 @@ class tl_page extends Backend
 	 */
 	public function setRootType(\DataContainer $dc)
 	{
-		if ($this->Input->get('act') != 'create')
+		if (\Input::get('act') != 'create')
 		{
 			return;
 		}	
 
 		// Insert into
-		if ($this->Input->get('pid') == 0)
+		if (\Input::get('pid') == 0)
 		{
 			$GLOBALS['TL_DCA']['tl_page']['fields']['type']['default'] = 'root';
 		}
@@ -1006,7 +1006,7 @@ class tl_page extends Backend
 		{
 			$objPage = $this->Database->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
 									  ->limit(1)
-									  ->execute($this->Input->get('pid'));
+									  ->execute(\Input::get('pid'));
 
 			if ($objPage->pid == 0)
 			{
@@ -1040,7 +1040,7 @@ class tl_page extends Backend
 	 */
 	public function showFallbackWarning()
 	{
-		if ($this->Input->get('act') != '')
+		if (\Input::get('act') != '')
 		{
 			return;
 		}
@@ -1356,7 +1356,7 @@ class tl_page extends Backend
 		}
 
 		// Mark root pages
-		if ($row['type'] == 'root' || $this->Input->get('do') == 'article')
+		if ($row['type'] == 'root' || \Input::get('do') == 'article')
 		{
 			$label = '<strong>' . $label . '</strong>';
 		}
@@ -1471,11 +1471,11 @@ class tl_page extends Backend
 		}
 
 		// Prevent adding non-root pages on top-level
-		if ($this->Input->get('mode') != 'create' && $row['pid'] == 0)
+		if (\Input::get('mode') != 'create' && $row['pid'] == 0)
 		{
 			$objPage = $this->Database->prepare("SELECT * FROM " . $table . " WHERE id=?")
 									  ->limit(1)
-									  ->execute($this->Input->get('id'));
+									  ->execute(\Input::get('id'));
 
 			if ($objPage->type != 'root')
 			{
@@ -1494,7 +1494,7 @@ class tl_page extends Backend
 			// Disable "paste into" button if there is no permission 2 (move) or 1 (create) for the current page
 			if (!$disablePI)
 			{
-				if (!$this->User->isAllowed(2, $row) || ($this->Input->get('mode') == 'create' && !$this->User->isAllowed(1, $row)))
+				if (!$this->User->isAllowed(2, $row) || (\Input::get('mode') == 'create' && !$this->User->isAllowed(1, $row)))
 				{
 					$disablePI = true;
 				}
@@ -1507,7 +1507,7 @@ class tl_page extends Backend
 			// Disable "paste after" button if there is no permission 2 (move) or 1 (create) for the parent page
 			if (!$disablePA && $objPage->numRows)
 			{
-				if (!$this->User->isAllowed(2, $objPage->row()) || ($this->Input->get('mode') == 'create' && !$this->User->isAllowed(1, $objPage->row())))
+				if (!$this->User->isAllowed(2, $objPage->row()) || (\Input::get('mode') == 'create' && !$this->User->isAllowed(1, $objPage->row())))
 				{
 					$disablePA = true;
 				}
@@ -1628,9 +1628,9 @@ class tl_page extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen($this->Input->get('tid')))
+		if (strlen(\Input::get('tid')))
 		{
-			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 

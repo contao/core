@@ -107,9 +107,9 @@ class CheckBox extends \Widget
 		$state = $this->Session->get('checkbox_groups');
 
 		// Toggle the checkbox group
-		if ($this->Input->get('cbc'))
+		if (\Input::get('cbc'))
 		{
-			$state[$this->Input->get('cbc')] = (isset($state[$this->Input->get('cbc')]) && $state[$this->Input->get('cbc')] == 1) ? 0 : 1;
+			$state[\Input::get('cbc')] = (isset($state[\Input::get('cbc')]) && $state[\Input::get('cbc')] == 1) ? 0 : 1;
 			$this->Session->set('checkbox_groups', $state);
 
 			$this->redirect(preg_replace('/(&(amp;)?|\?)cbc=[^& ]*/i', '', \Environment::get('request')));

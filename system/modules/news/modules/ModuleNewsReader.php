@@ -74,11 +74,11 @@ class ModuleNewsReader extends \ModuleNews
 		// Set the item from the auto_item parameter
 		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
 		{
-			$this->Input->setGet('items', $this->Input->get('auto_item'));
+			$this->Input->setGet('items', \Input::get('auto_item'));
 		}
 
 		// Do not index or cache the page if no news item has been specified
-		if (!$this->Input->get('items'))
+		if (!\Input::get('items'))
 		{
 			global $objPage;
 			$objPage->noSearch = 1;
@@ -114,7 +114,7 @@ class ModuleNewsReader extends \ModuleNews
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
 		// Get the news item
-		$objArticle = \NewsModel::findPublishedByParentAndIdOrAlias((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), $this->news_archives);
+		$objArticle = \NewsModel::findPublishedByParentAndIdOrAlias((is_numeric(\Input::get('items')) ? \Input::get('items') : 0), \Input::get('items'), $this->news_archives);
 
 		if ($objArticle === null)
 		{
@@ -124,7 +124,7 @@ class ModuleNewsReader extends \ModuleNews
 
 			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
-			$this->Template->articles = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
+			$this->Template->articles = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], \Input::get('items')) . '</p>';
 			return;
 		}
 

@@ -101,18 +101,18 @@ class CheckBoxWizard extends \Widget
 		}
 
 		// Change the order
-		if ($this->Input->get($strCommand) && is_numeric($this->Input->get('cid')) && $this->Input->get('id') == $this->currentRecord)
+		if (\Input::get($strCommand) && is_numeric(\Input::get('cid')) && \Input::get('id') == $this->currentRecord)
 		{
 			$this->import('Database');
 
-			switch ($this->Input->get($strCommand))
+			switch (\Input::get($strCommand))
 			{
 				case 'up':
-					$this->varValue = array_move_up($this->varValue, $this->Input->get('cid'));
+					$this->varValue = array_move_up($this->varValue, \Input::get('cid'));
 					break;
 
 				case 'down':
-					$this->varValue = array_move_down($this->varValue, $this->Input->get('cid'));
+					$this->varValue = array_move_down($this->varValue, \Input::get('cid'));
 					break;
 			}
 

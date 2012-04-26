@@ -337,7 +337,7 @@ abstract class System
 		$session = $this->Session->get($key);
 
 		// Use a specific referer
-		if ($strTable != '' && isset($session[$strTable]) && $this->Input->get('act') != 'select')
+		if ($strTable != '' && isset($session[$strTable]) && \Input::get('act') != 'select')
 		{
 			$session['current'] = $session[$strTable];
 		}

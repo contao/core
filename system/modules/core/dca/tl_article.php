@@ -384,7 +384,7 @@ class tl_article extends Backend
 				}
 			}
 
-			$session['CURRENT']['IDS'] = ($this->Input->get('act') == 'deleteAll') ? $delete_all : $edit_all;
+			$session['CURRENT']['IDS'] = (\Input::get('act') == 'deleteAll') ? $delete_all : $edit_all;
 		}
 
 		// Set allowed clipboard IDs
@@ -419,17 +419,17 @@ class tl_article extends Backend
 		$this->Session->setData($session);
 
 		// Check current action
-		if ($this->Input->get('act') && $this->Input->get('act') != 'paste')
+		if (\Input::get('act') && \Input::get('act') != 'paste')
 		{
 			// Set ID of the article's page
 			$objPage = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
 									  ->limit(1)
-									  ->execute($this->Input->get('id'));
+									  ->execute(\Input::get('id'));
 
 			$ids = $objPage->numRows ? array($objPage->pid) : array();
 
 			// Set permission
-			switch ($this->Input->get('act'))
+			switch (\Input::get('act'))
 			{
 				case 'edit':
 				case 'toggle':
@@ -438,7 +438,7 @@ class tl_article extends Backend
 
 				case 'move':
 					$permission = 5;
-					$ids[] = $this->Input->get('sid');
+					$ids[] = \Input::get('sid');
 					break;
 
 				// Do not insert articles into a website root page
@@ -450,13 +450,13 @@ class tl_article extends Backend
 					$permission = 5;
 
 					// Insert into a page
-					if ($this->Input->get('mode') == 2)
+					if (\Input::get('mode') == 2)
 					{
 						$objParent = $this->Database->prepare("SELECT id, type FROM tl_page WHERE id=?")
 													->limit(1)
-													->execute($this->Input->get('pid'));
+													->execute(\Input::get('pid'));
 
-						$ids[] = $this->Input->get('pid');
+						$ids[] = \Input::get('pid');
 					}
 
 					// Insert after an article
@@ -464,14 +464,14 @@ class tl_article extends Backend
 					{
 						$objParent = $this->Database->prepare("SELECT id, type FROM tl_page WHERE id=(SELECT pid FROM tl_article WHERE id=?)")
 													->limit(1)
-													->execute($this->Input->get('pid'));
+													->execute(\Input::get('pid'));
 
 						$ids[] = $objParent->id;
 					}
 
 					if ($objParent->numRows && $objParent->type == 'root')
 					{
-						$this->log('Attempt to insert an article into website root page '.$this->Input->get('pid'), 'tl_article checkPermission()', TL_ERROR);
+						$this->log('Attempt to insert an article into website root page '.\Input::get('pid'), 'tl_article checkPermission()', TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 					break;
@@ -482,7 +482,7 @@ class tl_article extends Backend
 			}
 
 			// Check user permissions
-			if ($this->Input->get('act') != 'show')
+			if (\Input::get('act') != 'show')
 			{
 				$pagemounts = array();
 
@@ -513,7 +513,7 @@ class tl_article extends Backend
 					{
 						if (!$this->User->isAllowed($permission, $objPage->row()))
 						{
-							$this->log('Not enough permissions to '. $this->Input->get('act') .' '. (strlen($this->Input->get('id')) ? 'article ID '. $this->Input->get('id') : ' articles') .' on page ID '. $id .' or paste it/them into page ID '. $id, 'tl_article checkPermission()', TL_ERROR);
+							$this->log('Not enough permissions to '. \Input::get('act') .' '. (strlen(\Input::get('id')) ? 'article ID '. \Input::get('id') : ' articles') .' on page ID '. $id .' or paste it/them into page ID '. $id, 'tl_article checkPermission()', TL_ERROR);
 							$error = true;
 						}
 					}
@@ -638,7 +638,7 @@ class tl_article extends Backend
 		}
 
 		// Always add the custom layout sections in "override all" mode
-		if ($this->Input->get('act') == 'overrideAll')
+		if (\Input::get('act') == 'overrideAll')
 		{
 			$arrCustom = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
 		}
@@ -803,9 +803,9 @@ class tl_article extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen($this->Input->get('tid')))
+		if (strlen(\Input::get('tid')))
 		{
-			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 

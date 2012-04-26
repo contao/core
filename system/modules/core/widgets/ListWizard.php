@@ -108,26 +108,26 @@ class ListWizard extends \Widget
 		$strCommand = 'cmd_' . $this->strField;
 
 		// Change the order
-		if ($this->Input->get($strCommand) && is_numeric($this->Input->get('cid')) && $this->Input->get('id') == $this->currentRecord)
+		if (\Input::get($strCommand) && is_numeric(\Input::get('cid')) && \Input::get('id') == $this->currentRecord)
 		{
 			$this->import('Database');
 
-			switch ($this->Input->get($strCommand))
+			switch (\Input::get($strCommand))
 			{
 				case 'copy':
-					$this->varValue = array_duplicate($this->varValue, $this->Input->get('cid'));
+					$this->varValue = array_duplicate($this->varValue, \Input::get('cid'));
 					break;
 
 				case 'up':
-					$this->varValue = array_move_up($this->varValue, $this->Input->get('cid'));
+					$this->varValue = array_move_up($this->varValue, \Input::get('cid'));
 					break;
 
 				case 'down':
-					$this->varValue = array_move_down($this->varValue, $this->Input->get('cid'));
+					$this->varValue = array_move_down($this->varValue, \Input::get('cid'));
 					break;
 
 				case 'delete':
-					$this->varValue = array_delete($this->varValue, $this->Input->get('cid'));
+					$this->varValue = array_delete($this->varValue, \Input::get('cid'));
 					break;
 			}
 
@@ -173,7 +173,7 @@ class ListWizard extends \Widget
 	 */
 	public function importList(\DataContainer $dc)
 	{
-		if ($this->Input->get('key') != 'list')
+		if (\Input::get('key') != 'list')
 		{
 			return '';
 		}
@@ -228,10 +228,10 @@ class ListWizard extends \Widget
 				}
 			}
 
-			$this->createNewVersion($dc->table, $this->Input->get('id'));
+			$this->createNewVersion($dc->table, \Input::get('id'));
 
 			$this->Database->prepare("UPDATE " . $dc->table . " SET listitems=? WHERE id=?")
-						   ->execute(serialize($arrList), $this->Input->get('id'));
+						   ->execute(serialize($arrList), \Input::get('id'));
 
 			setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 			$this->redirect(str_replace('&key=list', '', \Environment::get('request')));

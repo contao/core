@@ -265,7 +265,7 @@ class tl_files extends Backend
 		// Set allowed page IDs (edit multiple)
 		if (is_array($session['CURRENT']['IDS']))
 		{
-			if ($this->Input->get('act') == 'editAll' && !$f2)
+			if (\Input::get('act') == 'editAll' && !$f2)
 			{
 				$session['CURRENT']['IDS'] = array();
 			}
@@ -310,9 +310,9 @@ class tl_files extends Backend
 		$this->Session->setData($session);
 
 		// Check current action
-		if ($this->Input->get('act') && $this->Input->get('act') != 'paste')
+		if (\Input::get('act') && \Input::get('act') != 'paste')
 		{
-			switch ($this->Input->get('act'))
+			switch (\Input::get('act'))
 			{
 				case 'move':
 					if (!$f1)
@@ -336,7 +336,7 @@ class tl_files extends Backend
 					break;
 
 				case 'delete':
-					$strFile = $this->Input->get('id', true);
+					$strFile = \Input::get('id', true);
 					if (is_dir(TL_ROOT . '/' . $strFile))
 					{
 						$files = scan(TL_ROOT . '/' . $strFile);
@@ -379,7 +379,7 @@ class tl_files extends Backend
 		// Set a new node
 		if (isset($_GET['node']))
 		{
-			$this->Session->set('tl_files_node', $this->Input->get('node', true));
+			$this->Session->set('tl_files_node', \Input::get('node', true));
 			$this->redirect(preg_replace('/(&|\?)node=[^&]*/', '', \Environment::get('request')));
 		}
 

@@ -157,9 +157,9 @@ abstract class Controller extends \System
 		if ($intId == 0)
 		{
 			// Show a particular article only
-			if ($this->Input->get('articles') && $objPage->type == 'regular')
+			if (\Input::get('articles') && $objPage->type == 'regular')
 			{
-				list($strSection, $strArticle) = explode(':', $this->Input->get('articles'));
+				list($strSection, $strArticle) = explode(':', \Input::get('articles'));
 
 				if ($strArticle === null)
 				{
@@ -321,7 +321,7 @@ abstract class Controller extends \System
 		}
 
 		// Print the article as PDF
-		if ($this->Input->get('pdf') == $objRow->id)
+		if (\Input::get('pdf') == $objRow->id)
 		{
 			// Backwards compatibility
 			if ($objRow->printable == 1)
@@ -3453,7 +3453,7 @@ abstract class Controller extends \System
 			return;
 		}
 
-		$file = $this->Input->get('file', true);
+		$file = \Input::get('file', true);
 
 		// Send the file to the browser
 		if ($file != '')

@@ -178,7 +178,7 @@ class ModuleBreadcrumb extends \Module
 				'data'     => $pages[0]
 			);
 
-			list($strSection, $strArticle) = explode(':', $this->Input->get('articles'));
+			list($strSection, $strArticle) = explode(':', \Input::get('articles'));
 
 			if ($strArticle === null)
 			{

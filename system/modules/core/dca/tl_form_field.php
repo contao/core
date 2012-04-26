@@ -466,10 +466,10 @@ class tl_form_field extends Backend
 			$root = $this->User->forms;
 		}
 
-		$id = strlen($this->Input->get('id')) ? $this->Input->get('id') : CURRENT_ID;
+		$id = strlen(\Input::get('id')) ? \Input::get('id') : CURRENT_ID;
 
 		// Check current action
-		switch ($this->Input->get('act'))
+		switch (\Input::get('act'))
 		{
 			case 'paste':
 				// Allow
@@ -477,27 +477,27 @@ class tl_form_field extends Backend
 
 			case 'create':
 			case 'select':
-				if (!strlen($this->Input->get('id')) || !in_array($this->Input->get('id'), $root))
+				if (!strlen(\Input::get('id')) || !in_array(\Input::get('id'), $root))
 				{
-					$this->log('Not enough permissions to access form ID "'.$this->Input->get('id').'"', 'tl_form_field checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access form ID "'.\Input::get('id').'"', 'tl_form_field checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
 			case 'cut':
 			case 'copy':
-				$pid = $this->Input->get('pid');
+				$pid = \Input::get('pid');
 
 				// Get form ID
-				if ($this->Input->get('mode') == 1)
+				if (\Input::get('mode') == 1)
 				{
 					$objField = $this->Database->prepare("SELECT pid FROM tl_form_field WHERE id=?")
 											   ->limit(1)
-											   ->execute($this->Input->get('pid'));
+											   ->execute(\Input::get('pid'));
 
 					if ($objField->numRows < 1)
 					{
-						$this->log('Invalid form field ID "'.$this->Input->get('pid').'"', 'tl_form_field checkPermission', TL_ERROR);
+						$this->log('Invalid form field ID "'.\Input::get('pid').'"', 'tl_form_field checkPermission', TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 
@@ -506,7 +506,7 @@ class tl_form_field extends Backend
 
 				if (!in_array($pid, $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' form field ID "'.$id.'" to form ID "'.$pid.'"', 'tl_form_field checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.\Input::get('act').' form field ID "'.$id.'" to form ID "'.$pid.'"', 'tl_form_field checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -527,7 +527,7 @@ class tl_form_field extends Backend
 
 				if (!in_array($objField->pid, $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' form field ID "'.$id.'" of form ID "'.$objField->pid.'"', 'tl_form_field checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.\Input::get('act').' form field ID "'.$id.'" of form ID "'.$objField->pid.'"', 'tl_form_field checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -558,9 +558,9 @@ class tl_form_field extends Backend
 				break;
 
 			default:
-				if (strlen($this->Input->get('act')))
+				if (strlen(\Input::get('act')))
 				{
-					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_form_field checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.\Input::get('act').'"', 'tl_form_field checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
@@ -622,9 +622,9 @@ class tl_form_field extends Backend
 		$arrFields = $GLOBALS['TL_FFL'];
 		$intPid = $dc->activeRecord->pid;
 
-		if ($this->Input->get('act') == 'overrideAll')
+		if (\Input::get('act') == 'overrideAll')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = \Input::get('id');
 		}
 
 		$objForm = $this->Database->prepare("SELECT tableless FROM tl_form WHERE id=?")
@@ -659,9 +659,9 @@ class tl_form_field extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen($this->Input->get('tid')))
+		if (strlen(\Input::get('tid')))
 		{
-			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 

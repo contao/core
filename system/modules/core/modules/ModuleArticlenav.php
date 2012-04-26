@@ -87,7 +87,7 @@ class ModuleArticlenav extends \Module
 		}
 
 		// Redirect to the first article if no article is selected
-		if (!$this->Input->get('articles'))
+		if (!\Input::get('articles'))
 		{
 			if (!$this->loadFirst)
 			{
@@ -117,7 +117,7 @@ class ModuleArticlenav extends \Module
 			$strAlias = (strlen($this->objArticles->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $this->objArticles->alias : $this->objArticles->id;
 
 			// Active article
-			if ($this->Input->get('articles') == $strAlias)
+			if (\Input::get('articles') == $strAlias)
 			{
 				$articles[] = array
 				(

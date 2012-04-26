@@ -142,7 +142,7 @@ class Index extends Frontend
 			{
 				$objNewPage = $arrLangs['*']; // Fallback language
 			}
-			elseif (($lang = $this->Input->get('language')) != '' && isset($arrLangs[$lang]))
+			elseif (($lang = \Input::get('language')) != '' && isset($arrLangs[$lang]))
 			{
 				$objNewPage = $arrLangs[$lang];
 			}
@@ -208,7 +208,7 @@ class Index extends Frontend
 		}
 
 		// Check wether the language matches the root page language
-		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $this->Input->get('language') != $objPage->rootLanguage)
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && \Input::get('language') != $objPage->rootLanguage)
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();

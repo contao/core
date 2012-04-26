@@ -84,7 +84,7 @@ class ModuleListing extends \Module
 		}
 
 		// Disable the details page
-		if ($this->Input->get('show') && $this->list_info == '')
+		if (\Input::get('show') && $this->list_info == '')
 		{
 			return '';
 		}
@@ -112,14 +112,14 @@ class ModuleListing extends \Module
 		$this->loadDataContainer($this->list_table);
 
 		// List a single record
-		if ($this->Input->get('show'))
+		if (\Input::get('show'))
 		{
-			$this->listSingleRecord($this->Input->get('show'));
+			$this->listSingleRecord(\Input::get('show'));
 			return;
 		}
 
-		$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
-		$per_page = $this->Input->get('per_page') ? $this->Input->get('per_page') : $this->perPage;
+		$page = \Input::get('page') ? \Input::get('page') : 1;
+		$per_page = \Input::get('per_page') ? \Input::get('per_page') : $this->perPage;
 
 
 		/**
@@ -136,15 +136,15 @@ class ModuleListing extends \Module
 		{
 			$this->Template->searchable = true;
 
-			if ($this->Input->get('search') && $this->Input->get('for'))
+			if (\Input::get('search') && \Input::get('for'))
 			{
-				$varKeyword = '%' . $this->Input->get('for') . '%';
-				$strWhere = (!$this->list_where ? " WHERE " : " AND ") . $this->Input->get('search') . " LIKE ?";
+				$varKeyword = '%' . \Input::get('for') . '%';
+				$strWhere = (!$this->list_where ? " WHERE " : " AND ") . \Input::get('search') . " LIKE ?";
 			}
 
 			foreach ($arrSearchFields as $field)
 			{
-				$strOptions .= '  <option value="' . $field . '"' . (($field == $this->Input->get('search')) ? ' selected="selected"' : '') . '>' . (strlen($label = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['label'][0]) ? $label : $field) . '</option>' . "\n";
+				$strOptions .= '  <option value="' . $field . '"' . (($field == \Input::get('search')) ? ' selected="selected"' : '') . '>' . (strlen($label = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['label'][0]) ? $label : $field) . '</option>' . "\n";
 			}
 		}
 
@@ -178,9 +178,9 @@ class ModuleListing extends \Module
 		$strQuery .=  $strWhere;
 
 		// Order by
-		if ($this->Input->get('order_by'))
+		if (\Input::get('order_by'))
 		{
-			$strQuery .= " ORDER BY " . $this->Input->get('order_by') . ' ' . $this->Input->get('sort');
+			$strQuery .= " ORDER BY " . \Input::get('order_by') . ' ' . \Input::get('sort');
 		}
 		elseif ($this->list_sort)
 		{
@@ -190,9 +190,9 @@ class ModuleListing extends \Module
 		$objDataStmt = $this->Database->prepare($strQuery);
 
 		// Limit
-		if ($this->Input->get('per_page'))
+		if (\Input::get('per_page'))
 		{
-			$objDataStmt->limit($this->Input->get('per_page'), (($page - 1) * $per_page));
+			$objDataStmt->limit(\Input::get('per_page'), (($page - 1) * $per_page));
 		}
 		elseif ($this->perPage)
 		{
@@ -242,10 +242,10 @@ class ModuleListing extends \Module
 			$strField = strlen($label = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$arrFields[$i]]['label'][0]) ? $label : $arrFields[$i];
 
 			// Add a CSS class to the order_by column
-			if ($this->Input->get('order_by') == $arrFields[$i])
+			if (\Input::get('order_by') == $arrFields[$i])
 			{
-				$sort = ($this->Input->get('sort') == 'asc') ? 'desc' : 'asc';
-				$class = ' sorted ' . $this->Input->get('sort');
+				$sort = (\Input::get('sort') == 'asc') ? 'desc' : 'asc';
+				$class = ' sorted ' . \Input::get('sort');
 			}
 
 			$arrTh[] = array
@@ -315,10 +315,10 @@ class ModuleListing extends \Module
 		$this->Template->per_page_label = specialchars($GLOBALS['TL_LANG']['MSC']['list_perPage']);
 		$this->Template->fields_label = $GLOBALS['TL_LANG']['MSC']['all_fields'][0];
 		$this->Template->keywords_label = $GLOBALS['TL_LANG']['MSC']['keywords'];
-		$this->Template->search = $this->Input->get('search');
-		$this->Template->for = $this->Input->get('for');
-		$this->Template->order_by = $this->Input->get('order_by');
-		$this->Template->sort = $this->Input->get('sort');
+		$this->Template->search = \Input::get('search');
+		$this->Template->for = \Input::get('for');
+		$this->Template->order_by = \Input::get('order_by');
+		$this->Template->sort = \Input::get('sort');
 		$this->Template->col_last = 'col_' . $j;
 	}
 

@@ -88,7 +88,7 @@ class ModulePassword extends \Module
 		$this->loadDataContainer('tl_member');
 
 		// Set new password
-		if (strlen($this->Input->get('token')))
+		if (strlen(\Input::get('token')))
 		{
 			$this->setNewPassword();
 			return;
@@ -199,7 +199,7 @@ class ModulePassword extends \Module
 	 */
 	protected function setNewPassword()
 	{
-		$objMember = \MemberModel::findByActivation($this->Input->get('token'));
+		$objMember = \MemberModel::findByActivation(\Input::get('token'));
 
 		if ($objMember === null || $objMember->login == '')
 		{

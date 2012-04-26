@@ -128,23 +128,23 @@ class ModuleEventlist extends \Events
 		$blnDynamicFormat = (!$this->cal_ignoreDynamic && in_array($this->cal_format, array('cal_day', 'cal_month', 'cal_year')));
 
 		// Display year
-		if ($blnDynamicFormat && $this->Input->get('year'))
+		if ($blnDynamicFormat && \Input::get('year'))
 		{
-			$this->Date = new \Date($this->Input->get('year'), 'Y');
+			$this->Date = new \Date(\Input::get('year'), 'Y');
 			$this->cal_format = 'cal_year';
 			$this->headline .= ' ' . date('Y', $this->Date->tstamp);
 		}
 		// Display month
-		elseif ($blnDynamicFormat && $this->Input->get('month'))
+		elseif ($blnDynamicFormat && \Input::get('month'))
 		{
-			$this->Date = new \Date($this->Input->get('month'), 'Ym');
+			$this->Date = new \Date(\Input::get('month'), 'Ym');
 			$this->cal_format = 'cal_month';
 			$this->headline .= ' ' . $this->parseDate('F Y', $this->Date->tstamp);
 		}
 		// Display day
-		elseif ($blnDynamicFormat && $this->Input->get('day'))
+		elseif ($blnDynamicFormat && \Input::get('day'))
 		{
-			$this->Date = new \Date($this->Input->get('day'), 'Ymd');
+			$this->Date = new \Date(\Input::get('day'), 'Ymd');
 			$this->cal_format = 'cal_day';
 			$this->headline .= ' ' . $this->parseDate($objPage->dateFormat, $this->Date->tstamp);
 		}
@@ -209,7 +209,7 @@ class ModuleEventlist extends \Events
 		// Pagination
 		if ($this->perPage > 0)
 		{
-			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
+			$page = \Input::get('page') ? \Input::get('page') : 1;
 
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))

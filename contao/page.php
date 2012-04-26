@@ -88,8 +88,8 @@ class PagePicker extends Backend
 			$this->objAjax->executePreActions();
 		}
 
-		$strTable = $this->Input->get('table');
-		$strField = $this->Input->get('field');
+		$strTable = \Input::get('table');
+		$strField = \Input::get('field');
 
 		$this->loadDataContainer($strTable);
 		$objDca = new \DC_Table($strTable);
@@ -105,7 +105,7 @@ class PagePicker extends Backend
 			'strTable' => $strTable,
 			'strField' => $strField,
 			'strName'  => $strField,
-			'varValue' => explode(',', $this->Input->get('value'))
+			'varValue' => explode(',', \Input::get('value'))
 		), $objDca);
 
 		$this->Template->main = $objPageTree->generate();

@@ -107,54 +107,54 @@ class TableWizard extends \Widget
 		$strCommand = 'cmd_' . $this->strField;
 
 		// Change the order
-		if ($this->Input->get($strCommand) && is_numeric($this->Input->get('cid')) && $this->Input->get('id') == $this->currentRecord)
+		if (\Input::get($strCommand) && is_numeric(\Input::get('cid')) && \Input::get('id') == $this->currentRecord)
 		{
 			$this->import('Database');
 
-			switch ($this->Input->get($strCommand))
+			switch (\Input::get($strCommand))
 			{
 					case 'ccopy':
 					for ($i=0; $i<count($this->varValue); $i++)
 					{
-						$this->varValue[$i] = array_duplicate($this->varValue[$i], $this->Input->get('cid'));
+						$this->varValue[$i] = array_duplicate($this->varValue[$i], \Input::get('cid'));
 					}
 					break;
 
 				case 'cmovel':
 					for ($i=0; $i<count($this->varValue); $i++)
 					{
-						$this->varValue[$i] = array_move_up($this->varValue[$i], $this->Input->get('cid'));
+						$this->varValue[$i] = array_move_up($this->varValue[$i], \Input::get('cid'));
 					}
 					break;
 
 				case 'cmover':
 					for ($i=0; $i<count($this->varValue); $i++)
 					{
-						$this->varValue[$i] = array_move_down($this->varValue[$i], $this->Input->get('cid'));
+						$this->varValue[$i] = array_move_down($this->varValue[$i], \Input::get('cid'));
 					}
 					break;
 
 				case 'cdelete':
 					for ($i=0; $i<count($this->varValue); $i++)
 					{
-						$this->varValue[$i] = array_delete($this->varValue[$i], $this->Input->get('cid'));
+						$this->varValue[$i] = array_delete($this->varValue[$i], \Input::get('cid'));
 					}
 					break;
 
 				case 'rcopy':
-					$this->varValue = array_duplicate($this->varValue, $this->Input->get('cid'));
+					$this->varValue = array_duplicate($this->varValue, \Input::get('cid'));
 					break;
 
 				case 'rup':
-					$this->varValue = array_move_up($this->varValue, $this->Input->get('cid'));
+					$this->varValue = array_move_up($this->varValue, \Input::get('cid'));
 					break;
 
 				case 'rdown':
-					$this->varValue = array_move_down($this->varValue, $this->Input->get('cid'));
+					$this->varValue = array_move_down($this->varValue, \Input::get('cid'));
 					break;
 
 				case 'rdelete':
-					$this->varValue = array_delete($this->varValue, $this->Input->get('cid'));
+					$this->varValue = array_delete($this->varValue, \Input::get('cid'));
 					break;
 			}
 
@@ -242,7 +242,7 @@ class TableWizard extends \Widget
 	 */
 	public function importTable(\DataContainer $dc)
 	{
-		if ($this->Input->get('key') != 'table')
+		if (\Input::get('key') != 'table')
 		{
 			return '';
 		}
@@ -293,10 +293,10 @@ class TableWizard extends \Widget
 				}
 			}
 
-			$this->createNewVersion($dc->table, $this->Input->get('id'));
+			$this->createNewVersion($dc->table, \Input::get('id'));
 
 			$this->Database->prepare("UPDATE " . $dc->table . " SET tableitems=? WHERE id=?")
-						   ->execute(serialize($arrTable), $this->Input->get('id'));
+						   ->execute(serialize($arrTable), \Input::get('id'));
 
 			setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 			$this->redirect(str_replace('&key=table', '', \Environment::get('request')));

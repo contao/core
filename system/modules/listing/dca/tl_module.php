@@ -154,9 +154,9 @@ class tl_module_listing extends Backend
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if ($this->Input->get('act') == 'overrideAll')
+		if (\Input::get('act') == 'overrideAll')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = \Input::get('id');
 		}
 
 		return $this->getTemplateGroup('list_', $intPid);
@@ -172,9 +172,9 @@ class tl_module_listing extends Backend
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if ($this->Input->get('act') == 'overrideAll')
+		if (\Input::get('act') == 'overrideAll')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = \Input::get('id');
 		}
 
 		return $this->getTemplateGroup('info_', $intPid);

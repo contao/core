@@ -97,7 +97,7 @@ class ModuleSubscribe extends \Module
 		}
 
 		// Activate e-mail address
-		if ($this->Input->get('token'))
+		if (\Input::get('token'))
 		{
 			$this->activateRecipient();
 			return;
@@ -163,7 +163,7 @@ class ModuleSubscribe extends \Module
 		$this->Template = new \FrontendTemplate('mod_newsletter');
 
 		// Check the token
-		$objRecipient = \NewsletterRecipientsModel::findByToken($this->Input->get('token'));
+		$objRecipient = \NewsletterRecipientsModel::findByToken(\Input::get('token'));
 
 		if ($objRecipient === null)
 		{
