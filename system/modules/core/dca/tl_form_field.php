@@ -685,8 +685,8 @@ class tl_form_field extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check permissions
-		$this->Input->setGet('id', $intId);
-		$this->Input->setGet('act', 'toggle');
+		\Input::setGet('id', $intId);
+		\Input::setGet('act', 'toggle');
 		$this->checkPermission();
 
 		$this->createInitialVersion('tl_form_field', $intId);

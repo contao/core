@@ -763,8 +763,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				$this->intId = $id;
 				$this->cut(true);
-				$this->Input->setGet('pid', $id);
-				$this->Input->setGet('mode', 1);
+				\Input::setGet('pid', $id);
+				\Input::setGet('mode', 1);
 			}
 		}
 
@@ -1039,8 +1039,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				$this->intId = $id;
 				$id = $this->copy(true);
-				$this->Input->setGet('pid', $id);
-				$this->Input->setGet('mode', 1);
+				\Input::setGet('pid', $id);
+				\Input::setGet('mode', 1);
 			}
 		}
 
@@ -4329,15 +4329,15 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			$session['search'][$this->strTable]['field'] = \Input::post('tl_field', true);
 
 			// Make sure the regular expression is valid
-			if ($this->Input->postRaw('tl_value') != '')
+			if (\Input::postRaw('tl_value') != '')
 			{
 				try
 				{
 					$this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . \Input::post('tl_field', true) . " REGEXP ?")
 								   ->limit(1)
-								   ->execute($this->Input->postRaw('tl_value'));
+								   ->execute(\Input::postRaw('tl_value'));
 
-					$session['search'][$this->strTable]['value'] = $this->Input->postRaw('tl_value');
+					$session['search'][$this->strTable]['value'] = \Input::postRaw('tl_value');
 				}
 				catch (\Exception $e) {}
 			}

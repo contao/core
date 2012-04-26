@@ -445,7 +445,7 @@ class Form extends \Hybrid
 		// Store all values in the session
 		foreach (array_keys($_POST) as $key)
 		{
-			$_SESSION['FORM_DATA'][$key] = $this->allowTags ? $this->Input->postHtml($key, true) : \Input::post($key, true);
+			$_SESSION['FORM_DATA'][$key] = $this->allowTags ? \Input::postHtml($key, true) : \Input::post($key, true);
 		}
 
 		$arrFiles = $_SESSION['FILES'];

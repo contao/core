@@ -114,16 +114,16 @@ class ModuleNewsArchive extends \ModuleNews
 			switch ($this->news_format)
 			{
 				case 'news_year':
-					$this->Input->setGet('year', date('Y'));
+					\Input::setGet('year', date('Y'));
 					break;
 
 				default:
 				case 'news_month':
-					$this->Input->setGet('month', date('Ym'));
+					\Input::setGet('month', date('Ym'));
 					break;
 
 				case 'news_day':
-					$this->Input->setGet('day', date('Ymd'));
+					\Input::setGet('day', date('Ymd'));
 					break;
 			}
 		}

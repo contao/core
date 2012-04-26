@@ -810,8 +810,8 @@ class tl_user extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check admin accounts
-		$this->Input->setGet('id', $intId);
-		$this->Input->setGet('act', 'toggle');
+		\Input::setGet('id', $intId);
+		\Input::setGet('act', 'toggle');
 		$this->checkPermission();
 
 		// Protect own account

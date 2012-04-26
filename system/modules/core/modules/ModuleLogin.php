@@ -126,7 +126,7 @@ class ModuleLogin extends \Module
 			if (isset($_POST['autologin']) && !$this->autologin)
 			{
 				unset($_POST['autologin']);
-				$this->Input->setPost('autologin', null);
+				\Input::setPost('autologin', null);
 			}
 
 			// Login and redirect

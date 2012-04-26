@@ -193,7 +193,7 @@ class RepositoryBackendModule extends BackendModule
 	 */
 	protected function filterPost($aKey, $aMode = '')
 	{
-		$v = trim($this->Input->postRaw($aKey));
+		$v = trim(\Input::postRaw($aKey));
 		if ($v == '' || $aMode=='') return $v;
 		switch ($aMode) {
 			case 'nohtml':

@@ -125,7 +125,7 @@ abstract class Frontend extends \Controller
 			// Use the matches instead of substr() (thanks to Mario Müller)
 			if (preg_match('@^([a-z]{2})/(.*)$@', $strRequest, $arrMatches))
 			{
-				$this->Input->setGet('language', $arrMatches[1]);
+				\Input::setGet('language', $arrMatches[1]);
 				$strRequest = $arrMatches[2];
 			}
 			else
@@ -201,7 +201,7 @@ abstract class Frontend extends \Controller
 				return false;
 			}
 
-			$this->Input->setGet($arrFragments[$i], $arrFragments[$i+1]);
+			\Input::setGet($arrFragments[$i], $arrFragments[$i+1]);
 		}
 
 		return $arrFragments[0] ?: null;

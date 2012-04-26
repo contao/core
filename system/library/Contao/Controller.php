@@ -2237,7 +2237,7 @@ abstract class Controller extends \System
 					}
 
 					$_GET = $arrGet;
-					$this->Input->resetCache();
+					\Input::resetCache();
 					break;
 
 				// HOOK: pass unknown tags to callback functions

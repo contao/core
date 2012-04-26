@@ -1669,9 +1669,9 @@ window.addEvent(\'domready\', function() {
 		if (\Input::post('FORM_SUBMIT') == 'tl_files')
 		{
 			// Save the file
-			if (md5($strContent) != md5($this->Input->postRaw('source')))
+			if (md5($strContent) != md5(\Input::postRaw('source')))
 			{
-				$objFile->write($this->Input->postRaw('source'));
+				$objFile->write(\Input::postRaw('source'));
 				$objFile->close();
 
 				// Update the md5 hash

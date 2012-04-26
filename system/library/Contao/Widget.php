@@ -593,7 +593,7 @@ abstract class Widget extends Controller
 
 		if (!empty($arrParts))
     	{
-			$varValue = $this->Input->$strMethod(array_shift($arrParts), $this->decodeEntities);
+			$varValue = \Input::$strMethod(array_shift($arrParts), $this->decodeEntities);
 
 			foreach($arrParts as $part)
 			{
@@ -608,7 +608,7 @@ abstract class Widget extends Controller
 			return $varValue;
     	}
 
-		return $this->Input->$strMethod($strKey, $this->decodeEntities);
+		return \Input::$strMethod($strKey, $this->decodeEntities);
 	}
 
 

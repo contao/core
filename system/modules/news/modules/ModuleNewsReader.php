@@ -74,7 +74,7 @@ class ModuleNewsReader extends \ModuleNews
 		// Set the item from the auto_item parameter
 		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
 		{
-			$this->Input->setGet('items', \Input::get('auto_item'));
+			\Input::setGet('items', \Input::get('auto_item'));
 		}
 
 		// Do not index or cache the page if no news item has been specified

@@ -74,7 +74,7 @@ class ModuleEventReader extends \Events
 		// Set the item from the auto_item parameter
 		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
 		{
-			$this->Input->setGet('events', \Input::get('auto_item'));
+			\Input::setGet('events', \Input::get('auto_item'));
 		}
 
 		// Do not index or cache the page if no event has been specified

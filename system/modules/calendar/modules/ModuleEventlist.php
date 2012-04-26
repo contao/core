@@ -110,15 +110,15 @@ class ModuleEventlist extends \Events
 			switch ($this->cal_format)
 			{
 				case 'cal_year':
-					$this->Input->setGet('year', date('Y'));
+					\Input::setGet('year', date('Y'));
 					break;
 
 				case 'cal_month':
-					$this->Input->setGet('month', date('Ym'));
+					\Input::setGet('month', date('Ym'));
 					break;
 
 				case 'cal_day':
-					$this->Input->setGet('day', date('Ymd'));
+					\Input::setGet('day', date('Ymd'));
 					break;
 			}
 
@@ -343,9 +343,9 @@ class ModuleEventlist extends \Events
 		// Clear the $_GET array (see #2445)
 		if ($blnClearInput)
 		{
-			$this->Input->setGet('year', null);
-			$this->Input->setGet('month', null);
-			$this->Input->setGet('day', null);
+			\Input::setGet('year', null);
+			\Input::setGet('month', null);
+			\Input::setGet('day', null);
 		}
 	}
 }
