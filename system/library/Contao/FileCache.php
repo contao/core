@@ -161,7 +161,12 @@ class FileCache extends \System
 	 */
 	public function __get($strKey)
 	{
-		return $this->arrCache[$strKey];
+		if (isset($this->arrCache[$strKey]))
+		{
+			return $this->arrCache[$strKey];
+		}
+
+		return parent::__get($strKey);
 	}
 
 

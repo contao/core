@@ -148,11 +148,9 @@ class DataContainer extends \Backend
 			case 'activeRecord':
 				return $this->objActiveRecord;
 				break;
-
-			default:
-				return null;
-				break;
 		}
+
+		return parent::__get($strKey);
 	}
 
 

@@ -113,18 +113,6 @@ class Environment
 
 
 	/**
-	 * Set an environment parameter
-	 * @param string
-	 * @param mixed
-	 * @return void
-	 */
-	public static function set($strKey, $varValue)
-	{
-		static::$arrCache[$strKey] = $varValue;
-	}
-
-
-	/**
 	 * Return an environment parameter
 	 * @param string
 	 * @return string
@@ -148,6 +136,18 @@ class Environment
 		}
 
 		return static::$arrCache[$strKey];
+	}
+
+
+	/**
+	 * Set an environment parameter
+	 * @param string
+	 * @param mixed
+	 * @return void
+	 */
+	public static function set($strKey, $varValue)
+	{
+		static::$arrCache[$strKey] = $varValue;
 	}
 
 

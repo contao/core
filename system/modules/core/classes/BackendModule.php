@@ -105,7 +105,7 @@ abstract class BackendModule extends \Backend
 		}
 		catch (\Exception $e)
 		{
-			return null;
+			return parent::__get($strKey);
 		}
 	}
 

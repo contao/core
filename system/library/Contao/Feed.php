@@ -94,7 +94,12 @@ class Feed extends \System
 	 */
 	public function __get($strKey)
 	{
-		return $this->arrData[$strKey];
+		if (isset($this->arrData[$strKey]))
+		{
+			return $this->arrData[$strKey];
+		}
+
+		return parent::__get($strKey);
 	}
 
 

@@ -91,7 +91,12 @@ class Cache extends \System
 	 */
 	public function __get($strKey)
 	{
-		return static::get($strKey);
+		if (static::has($strKey))
+		{
+			return static::get($strKey);
+		}
+
+		return parent::__get($strKey);
 	}
 
 

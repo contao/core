@@ -173,11 +173,11 @@ abstract class Widget extends Controller
 
 			case 'value':
 				$this->varValue = deserialize($varValue);
+
+				// Decrypt the value if it is encrypted
 				if ($this->arrConfiguration['encrypt'])
 				{
-					// Decrypt the value if it is encrypted
-					$this->import('Encryption');
-					$this->varValue = $this->Encryption->decrypt($this->varValue);
+					$this->varValue = \Encryption::decrypt($this->varValue);
 				}
 				break;
 
@@ -294,11 +294,10 @@ abstract class Widget extends Controller
 				break;
 
 			case 'value':
+				// Encrypt the value
 				if ($this->arrConfiguration['encrypt'])
 				{
-					// Encrypt the value
-					$this->import('Encryption');
-					return $this->Encryption->encrypt($this->varValue);
+					return \Encryption::encrypt($this->varValue);
 				}
 				return $this->varValue;
 				break;
@@ -320,9 +319,18 @@ abstract class Widget extends Controller
 				break;
 
 			default:
-				return isset($this->arrAttributes[$strKey]) ? $this->arrAttributes[$strKey] : $this->arrConfiguration[$strKey];
+				if (isset($this->arrAttributes[$strKey]))
+				{
+					return $this->arrAttributes[$strKey];
+				}
+				elseif (isset($this->arrConfiguration[$strKey]))
+				{
+					return $this->arrConfiguration[$strKey];
+				}
 				break;
 		}
+
+		return parent::__get($strKey);
 	}
 
 

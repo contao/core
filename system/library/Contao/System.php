@@ -52,12 +52,6 @@ abstract class System
 	protected $Cache;
 
 	/**
-	 * Configuraion object
-	 * @var Config
-	 */
-	protected $Config;
-
-	/**
 	 * Database object
 	 * @var Database
 	 */
@@ -70,34 +64,16 @@ abstract class System
 	protected $Encryption;
 
 	/**
-	 * Environment object
-	 * @var Environment
-	 */
-	protected $Environment;
-
-	/**
 	 * Files object
 	 * @var Files
 	 */
 	protected $Files;
 
 	/**
-	 * Input object
-	 * @var Input
-	 */
-	protected $Input;
-
-	/**
 	 * Search object
 	 * @var Search
 	 */
 	protected $Search;
-
-	/**
-	 * Session object
-	 * @var Session
-	 */
-	protected $Session;
 
 	/**
 	 * String object
@@ -147,16 +123,38 @@ abstract class System
 	 */
 	protected $arrCache = array(); // Backwards compatibility
 
+	/**
+	 * Default libraries
+	 * @var array
+	 */
+	protected $arrObjects = array();
+
 
 	/**
-	 * Import the default libraries
+	 * Protect the constructor by default
 	 */
-	protected function __construct()
+	protected function __construct() {}
+
+
+	/**
+	 * Lazy load the four default libraries (which are now static) and only
+	 * include them as object property if an old module requires it
+	 * @param string
+	 * @return mixed|null
+	 */
+	public function __get($strKey)
 	{
-		$this->import('Config');
-		$this->import('Input');
-		$this->import('Environment');
-		$this->import('Session');
+		if ($strKey == 'Config' || $strKey == 'Input' || $strKey == 'Environment' || $strKey == 'Session')
+		{
+			if (!isset($this->arrObjects[$strKey]))
+			{
+				$this->arrObjects[$strKey] = $strKey::getInstance();
+			}
+
+			return $this->arrObjects[$strKey];
+		}
+
+		return null;
 	}
 
 

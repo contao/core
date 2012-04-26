@@ -105,7 +105,7 @@ abstract class Database_Statement
 	 *
 	 * Throw an exception on requests for protected properties.
 	 * @param string
-	 * @return mixed
+	 * @return mixed|null
 	 */
 	public function __get($strKey)
 	{
@@ -126,11 +126,9 @@ abstract class Database_Statement
 			case 'insertId':
 				return $this->insert_id();
 				break;
-
-			default:
-				return null;
-				break;
 		}
+
+		return null;
 	}
 
 

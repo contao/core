@@ -102,16 +102,12 @@ class FormCheckBox extends \Widget
 	 */
 	public function __get($strKey)
 	{
-		switch ($strKey)
+		if ($strKey == 'options')
 		{
-			case 'options':
-				return $this->arrOptions;
-				break;
-
-			default:
-				return parent::__get($strKey);
-				break;
+			return $this->arrOptions;
 		}
+
+		return parent::__get($strKey);
 	}
 
 

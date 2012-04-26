@@ -169,11 +169,9 @@ class Date extends \System
 			case 'format':
 				return $this->strFormat;
 				break;
-
-			default:
-				return null;
-				break;
 		}
+
+		return parent::__get($strKey);
 	}
 
 

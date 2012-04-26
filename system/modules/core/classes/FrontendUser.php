@@ -159,11 +159,9 @@ class FrontendUser extends \User
 			case 'loginPage':
 				return $this->strLoginPage;
 				break;
-
-			default:
-				return parent::__get($strKey);
-				break;
 		}
+
+		return parent::__get($strKey);
 	}
 	
 

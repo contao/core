@@ -224,7 +224,7 @@ class File extends \System
 					break;
 
 				default:
-					return null;
+					return parent::__get($strKey);
 					break;
 			}
 		}

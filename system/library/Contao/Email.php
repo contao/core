@@ -300,11 +300,9 @@ class Email extends \System
 			case 'failures':
 				return $this->arrFailures;
 				break;
-
-			default:
-				return null;
-				break;
 		}
+
+		return parent::__get($strKey);
 	}
 
 

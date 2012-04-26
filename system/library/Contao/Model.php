@@ -139,11 +139,16 @@ abstract class Model extends \System
 	/**
 	 * Return an object property
 	 * @param string
-	 * @return mixed
+	 * @return mixed|null
 	 */
 	public function __get($strKey)
 	{
-		return isset($this->arrData[$strKey]) ? $this->arrData[$strKey] : null;
+		if (isset($this->arrData[$strKey]))
+		{
+			return $this->arrData[$strKey];
+		}
+
+		return null;
 	}
 
 

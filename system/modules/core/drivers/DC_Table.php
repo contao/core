@@ -286,11 +286,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			case 'createNewVersion':
 				return $this->blnCreateNewVersion;
 				break;
-
-			default:
-				return parent::__get($strKey);
-				break;
 		}
+
+		return parent::__get($strKey);
 	}
 
 
@@ -615,8 +613,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				// Encrypt the default value (see #3740)
 				if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['encrypt'])
 				{
-					$this->import('Encryption');
-					$this->set[$k] = $this->Encryption->encrypt($this->set[$k]);
+					$this->set[$k] = \Encryption::encrypt($this->set[$k]);
 				}
 			}
 		}
@@ -812,8 +809,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						// Encrypt the default value (see #3740)
 						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['encrypt'])
 						{
-							$this->import('Encryption');
-							$v = $this->Encryption->encrypt($v);
+							$v = \Encryption::encrypt($v);
 						}
 					}
 
@@ -989,8 +985,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 							// Encrypt the default value (see #3740)
 							if ($GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['encrypt'])
 							{
-								$this->import('Encryption');
-								$vv = $this->Encryption->encrypt($vv);
+								$vv = \Encryption::encrypt($vv);
 							}
 						}
 
@@ -3282,10 +3277,7 @@ window.addEvent(\'domready\', function() {
 			// Decrypt the value
 			if ($GLOBALS['TL_DCA'][$table]['fields'][$v]['eval']['encrypt'])
 			{
-				$objRow->$v = deserialize($objRow->$v);
-
-				$this->import('Encryption');
-				$objRow->$v = $this->Encryption->decrypt($objRow->$v);
+				$objRow->$v = \Encryption::decrypt(deserialize($objRow->$v));
 			}
 
 			if (strpos($v, ':') !== false)
@@ -3704,10 +3696,7 @@ window.addEvent(\'domready\', function() {
 					{
 						if ($GLOBALS['TL_DCA'][$table]['fields'][$k]['eval']['encrypt'])
 						{
-							$v = deserialize($v);
-
-							$this->import('Encryption');
-							$row[$i][$k] = $this->Encryption->decrypt($v);
+							$row[$i][$k] = \Encryption::decrypt(deserialize($v));
 						}
 					}
 
@@ -4044,10 +4033,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					// Decrypt the value
 					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['encrypt'])
 					{
-						$row[$v] = deserialize($row[$v]);
-
-						$this->import('Encryption');
-						$row[$v] = $this->Encryption->decrypt($row[$v]);
+						$row[$v] = \Encryption::decrypt(deserialize($row[$v]));
 					}
 
 					if (strpos($v, ':') !== false)

@@ -171,7 +171,7 @@ class ZipReader
 	 *
 	 * Throws an exception on requests for unknown fields.
 	 * @param string
-	 * @return mixed
+	 * @return mixed|null
 	 */
 	public function __get($strKey)
 	{
@@ -199,9 +199,10 @@ class ZipReader
 				{
 					return $this->arrFiles[$this->intIndex][$strKey];
 				}
-				return null;
 				break;
 		}
+
+		return null;
 	}
 
 

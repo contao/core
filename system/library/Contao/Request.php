@@ -133,7 +133,7 @@ class Request
 	/**
 	 * Return an object property
 	 * @param string
-	 * @return mixed
+	 * @return mixed|null
 	 */
 	public function __get($strKey)
 	{
@@ -158,11 +158,9 @@ class Request
 			case 'headers':
 				return $this->arrResponseHeaders;
 				break;
-
-			default:
-				return null;
-				break;
 		}
+
+		return null;
 	}
 
 

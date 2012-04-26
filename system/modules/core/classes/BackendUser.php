@@ -146,11 +146,9 @@ class BackendUser extends \User
 			case 'alexf':
 				return $this->alexf;
 				break;
-
-			default:
-				return parent::__get($strKey);
-				break;
 		}
+
+		return parent::__get($strKey);
 	}
 
 

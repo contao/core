@@ -220,11 +220,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			case 'isDbAssisted':
 				return $this->blnIsDbAssisted;
 				break;
-
-			default:
-				return parent::__get($strKey);
-				break;
 		}
+
+		return parent::__get($strKey);
 	}
 
 

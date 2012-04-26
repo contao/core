@@ -109,7 +109,7 @@ class Model_Collection extends \System
 	/**
 	 * Return an object property
 	 * @param string
-	 * @return mixed
+	 * @return mixed|null
 	 */
 	public function __get($strKey)
 	{
@@ -118,12 +118,12 @@ class Model_Collection extends \System
 			$this->first();
 		}
 
-		if (!isset($this->arrModels[$this->intIndex]->$strKey))
+		if (isset($this->arrModels[$this->intIndex]->$strKey))
 		{
-			return null;
+			$this->arrModels[$this->intIndex]->$strKey;
 		}
 
-		return $this->arrModels[$this->intIndex]->$strKey;
+		return null;
 	}
 
 

@@ -159,7 +159,7 @@ abstract class Database_Result
 	 *
 	 * Throw an exception on requests for unknown fields.
 	 * @param string
-	 * @return mixed
+	 * @return mixed|null
 	 */
 	public function __get($strKey)
 	{
@@ -186,13 +186,14 @@ abstract class Database_Result
 				{
 					$this->first();
 				}
-				if (!isset($this->arrCache[$this->intIndex][$strKey]))
+				if (isset($this->arrCache[$this->intIndex][$strKey]))
 				{
-					return null;
+					return $this->arrCache[$this->intIndex][$strKey];
 				}
-				return $this->arrCache[$this->intIndex][$strKey];
 				break;
 		}
+
+		return null;
 	}
 
 
