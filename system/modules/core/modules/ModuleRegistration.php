@@ -150,7 +150,7 @@ class ModuleRegistration extends \Module
 
 			$objCaptcha = new $strClass($arrCaptcha);
 
-			if ($this->Input->post('FORM_SUBMIT') == 'tl_registration')
+			if (\Input::post('FORM_SUBMIT') == 'tl_registration')
 			{
 				$objCaptcha->validate();
 
@@ -199,13 +199,13 @@ class ModuleRegistration extends \Module
 			}
 
 			// Validate input
-			if ($this->Input->post('FORM_SUBMIT') == 'tl_registration')
+			if (\Input::post('FORM_SUBMIT') == 'tl_registration')
 			{
 				$objWidget->validate();
 				$varValue = $objWidget->value;
 
 				// Check whether the password matches the username
-				if ($objWidget instanceof \FormPassword && $varValue == $this->Input->post('username'))
+				if ($objWidget instanceof \FormPassword && $varValue == \Input::post('username'))
 				{
 					$objWidget->addError($GLOBALS['TL_LANG']['ERR']['passwordName']);
 				}
@@ -284,7 +284,7 @@ class ModuleRegistration extends \Module
 		$this->Template->hasError = $doNotSubmit;
 
 		// Create new user if there are no errors
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_registration' && !$doNotSubmit)
+		if (\Input::post('FORM_SUBMIT') == 'tl_registration' && !$doNotSubmit)
 		{
 			$this->createNewUser($arrUser);
 		}

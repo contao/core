@@ -87,7 +87,7 @@ class InstallTool extends Backend
 		}
 
 		// Store the FTP login credentials
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_ftp')
+		if (\Input::post('FORM_SUBMIT') == 'tl_ftp')
 		{
 			$this->storeFtpCredentials();
 		}
@@ -117,7 +117,7 @@ class InstallTool extends Backend
 		}
 
 		// Store the license acception
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_license')
+		if (\Input::post('FORM_SUBMIT') == 'tl_license')
 		{
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['licenseAccepted']", true);
 			$this->reload();
@@ -131,7 +131,7 @@ class InstallTool extends Backend
 		}
 
 		// Authenticate the user
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_login')
+		if (\Input::post('FORM_SUBMIT') == 'tl_login')
 		{
 			$this->authenticateUser();
 		}
@@ -154,7 +154,7 @@ class InstallTool extends Backend
 		}
 
 		// Store the install tool password
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_install')
+		if (\Input::post('FORM_SUBMIT') == 'tl_install')
 		{
 			$this->storeInstallToolPassword();
 		}
@@ -169,9 +169,9 @@ class InstallTool extends Backend
 		}
 
 		// Save the encryption key
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_encryption')
+		if (\Input::post('FORM_SUBMIT') == 'tl_encryption')
 		{
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['encryptionKey']", $this->Input->post('key'));
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['encryptionKey']", \Input::post('key'));
 			$this->reload();
 		}
 
@@ -208,9 +208,9 @@ class InstallTool extends Backend
 		$this->storeCollation();
 
 		// Update the database tables
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_tables')
+		if (\Input::post('FORM_SUBMIT') == 'tl_tables')
 		{
-			$sql = deserialize($this->Input->post('sql'));
+			$sql = deserialize(\Input::post('sql'));
 
 			if (is_array($sql))
 			{
@@ -264,17 +264,17 @@ class InstallTool extends Backend
 	protected function storeFtpCredentials()
 	{
 		$GLOBALS['TL_CONFIG']['useFTP']  = true;
-		$GLOBALS['TL_CONFIG']['ftpHost'] = $this->Input->post('host');
-		$GLOBALS['TL_CONFIG']['ftpPath'] = $this->Input->post('path');
-		$GLOBALS['TL_CONFIG']['ftpUser'] = $this->Input->post('username', true);
+		$GLOBALS['TL_CONFIG']['ftpHost'] = \Input::post('host');
+		$GLOBALS['TL_CONFIG']['ftpPath'] = \Input::post('path');
+		$GLOBALS['TL_CONFIG']['ftpUser'] = \Input::post('username', true);
 
-		if ($this->Input->post('password', true) != '*****')
+		if (\Input::post('password', true) != '*****')
 		{
-			$GLOBALS['TL_CONFIG']['ftpPass'] = $this->Input->post('password', true);
+			$GLOBALS['TL_CONFIG']['ftpPass'] = \Input::post('password', true);
 		}
 
-		$GLOBALS['TL_CONFIG']['ftpSSL']  = $this->Input->post('ssl');
-		$GLOBALS['TL_CONFIG']['ftpPort'] = (float) $this->Input->post('port');
+		$GLOBALS['TL_CONFIG']['ftpSSL']  = \Input::post('ssl');
+		$GLOBALS['TL_CONFIG']['ftpPort'] = (float) \Input::post('port');
 
 		// Add a trailing slash
 		if ($GLOBALS['TL_CONFIG']['ftpPath'] != '' && substr($GLOBALS['TL_CONFIG']['ftpPath'], -1) != '/')
@@ -351,7 +351,7 @@ class InstallTool extends Backend
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPath']", $GLOBALS['TL_CONFIG']['ftpPath']);
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpUser']", $GLOBALS['TL_CONFIG']['ftpUser']);
 
-			if ($this->Input->post('password', true) != '*****')
+			if (\Input::post('password', true) != '*****')
 			{
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPass']", $GLOBALS['TL_CONFIG']['ftpPass']);
 			}
@@ -376,15 +376,15 @@ class InstallTool extends Backend
 		list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
 
 		// Password is correct but not yet salted
-		if ($strSalt == '' && $strPassword == sha1($this->Input->post('password')))
+		if ($strSalt == '' && $strPassword == sha1(\Input::post('password')))
 		{
 			$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
-			$strPassword = sha1($strSalt . $this->Input->post('password'));
+			$strPassword = sha1($strSalt . \Input::post('password'));
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword . ':' . $strSalt);
 		}
 
 		// Set the cookie
-		if ($strSalt != '' && $strPassword == sha1($strSalt . $this->Input->post('password')))
+		if ($strSalt != '' && $strPassword == sha1($strSalt . \Input::post('password')))
 		{
 			$this->setAuthCookie();
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
@@ -403,7 +403,7 @@ class InstallTool extends Backend
 	 */
 	protected function storeInstallToolPassword()
 	{
-		$strPassword = $this->Input->post('password', true);
+		$strPassword = \Input::post('password', true);
 
 		// Do not allow special characters
 		if (preg_match('/[#\(\)\/<=>]/', $strPassword))
@@ -412,7 +412,7 @@ class InstallTool extends Backend
 		}
 
 		// The passwords do not match
-		elseif ($strPassword != $this->Input->post('confirm_password', true))
+		elseif ($strPassword != \Input::post('confirm_password', true))
 		{
 			$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
 		}
@@ -488,16 +488,16 @@ class InstallTool extends Backend
 		$this->Template->database = $GLOBALS['TL_CONFIG']['dbDatabase'];
 
 		// Store the database connection parameters
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_database_login')
+		if (\Input::post('FORM_SUBMIT') == 'tl_database_login')
 		{
 			foreach (preg_grep('/^db/', array_keys($_POST)) as $strKey)
 			{
-				if ($strKey == 'dbPass' && $this->Input->post($strKey, true) == '*****')
+				if ($strKey == 'dbPass' && \Input::post($strKey, true) == '*****')
 				{
 					continue;
 				}
 
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['$strKey']", $this->Input->post($strKey, true));
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['$strKey']", \Input::post($strKey, true));
 			}
 
 			$this->reload();
@@ -525,11 +525,11 @@ class InstallTool extends Backend
 	 */
 	protected function storeCollation()
 	{
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_collation')
+		if (\Input::post('FORM_SUBMIT') == 'tl_collation')
 		{
 			$arrTables = array();
 			$strCharset = strtolower($GLOBALS['TL_CONFIG']['dbCharset']);
-			$strCollation = $this->Input->post('dbCollation');
+			$strCollation = \Input::post('dbCollation');
 
 			try
 			{
@@ -592,10 +592,10 @@ class InstallTool extends Backend
 	 */
 	protected function importExampleWebsite()
 	{
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_tutorial')
+		if (\Input::post('FORM_SUBMIT') == 'tl_tutorial')
 		{
 			$this->Template->emptySelection = true;
-			$strTemplate = basename($this->Input->post('template'));
+			$strTemplate = basename(\Input::post('template'));
 
 			// Template selected
 			if ($strTemplate != '' && file_exists(TL_ROOT . '/templates/' . $strTemplate))
@@ -655,55 +655,55 @@ class InstallTool extends Backend
 				$this->Template->adminCreated = true;
 			}
 			// Create an admin account
-			elseif ($this->Input->post('FORM_SUBMIT') == 'tl_admin')
+			elseif (\Input::post('FORM_SUBMIT') == 'tl_admin')
 			{
 				// Do not allow special characters in usernames
-				if (preg_match('/[#\(\)\/<=>]/', html_entity_decode($this->Input->post('username'))))
+				if (preg_match('/[#\(\)\/<=>]/', html_entity_decode(\Input::post('username'))))
 				{
 					$this->Template->usernameError = $GLOBALS['TL_LANG']['ERR']['extnd'];
 				}
 				// The username must not contain whitespace characters (see #4006)
-				elseif (strpos($this->Input->post('username'), ' ') !== false)
+				elseif (strpos(\Input::post('username'), ' ') !== false)
 				{
 					$this->Template->usernameError = sprintf($GLOBALS['TL_LANG']['ERR']['noSpace'], $GLOBALS['TL_LANG']['MSC']['username']);
 				}
 				// Do not allow special characters in passwords
-				elseif (preg_match('/[#\(\)\/<=>]/', html_entity_decode($this->Input->post('pass'))))
+				elseif (preg_match('/[#\(\)\/<=>]/', html_entity_decode(\Input::post('pass'))))
 				{
 					$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['extnd'];
 				}
 				// Passwords do not match
-				elseif ($this->Input->post('pass') != $this->Input->post('confirm_pass'))
+				elseif (\Input::post('pass') != \Input::post('confirm_pass'))
 				{
 					$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
 				}
 				// Password too short
-				elseif (utf8_strlen($this->Input->post('pass')) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
+				elseif (utf8_strlen(\Input::post('pass')) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
 				{
 					$this->Template->passwordError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']);
 				}
 				// Password and username are the same
-				elseif ($this->Input->post('pass') == $this->Input->post('username'))
+				elseif (\Input::post('pass') == \Input::post('username'))
 				{
 					$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['passwordName'];
 				}
 				// Save the data
-				elseif ($this->Input->post('name') != '' && $this->Input->post('email', true) != '' && $this->Input->post('username') != '')
+				elseif (\Input::post('name') != '' && \Input::post('email', true) != '' && \Input::post('username') != '')
 				{
 					$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
-					$strPassword = sha1($strSalt . $this->Input->post('pass'));
+					$strPassword = sha1($strSalt . \Input::post('pass'));
 					$time = time();
 
 					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
-						->execute($this->Input->post('name'), $this->Input->post('email', true), $this->Input->post('username'), $strPassword . ':' . $strSalt);
+						->execute(\Input::post('name'), \Input::post('email', true), \Input::post('username'), $strPassword . ':' . $strSalt);
 
-					$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", $this->Input->post('email', true));
+					$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", \Input::post('email', true));
 					$this->reload();
 				}
 
-				$this->Template->adminName = $this->Input->post('name');
-				$this->Template->adminEmail = $this->Input->post('email', true);
-				$this->Template->adminUser = $this->Input->post('username');
+				$this->Template->adminName = \Input::post('name');
+				$this->Template->adminEmail = \Input::post('email', true);
+				$this->Template->adminUser = \Input::post('username');
 			}
 		}
 		catch (Exception $e)
@@ -776,7 +776,7 @@ class InstallTool extends Backend
 	{
 		if ($this->Database->tableExists('tl_layout') && !$this->Database->fieldExists('script', 'tl_layout'))
 		{
-			if ($this->Input->post('FORM_SUBMIT') == 'tl_28update')
+			if (\Input::post('FORM_SUBMIT') == 'tl_28update')
 			{
 				$this->import('DbUpdater');
 				$this->DbUpdater->run28Update();
@@ -797,7 +797,7 @@ class InstallTool extends Backend
 	{
 		if ($this->Database->tableExists('tl_layout') && !$this->Database->tableExists('tl_theme'))
 		{
-			if ($this->Input->post('FORM_SUBMIT') == 'tl_29update')
+			if (\Input::post('FORM_SUBMIT') == 'tl_29update')
 			{
 				$this->import('DbUpdater');
 				$this->DbUpdater->run29Update();
@@ -824,7 +824,7 @@ class InstallTool extends Backend
 			{
 				if ($arrField['name'] == 'startDate' && $arrField['type'] != 'int')
 				{
-					if ($this->Input->post('FORM_SUBMIT') == 'tl_292update')
+					if (\Input::post('FORM_SUBMIT') == 'tl_292update')
 					{
 						$this->import('DbUpdater');
 						$this->DbUpdater->run292Update();
@@ -847,7 +847,7 @@ class InstallTool extends Backend
 	{
 		if ($this->Database->tableExists('tl_style') && !$this->Database->fieldExists('positioning', 'tl_style'))
 		{
-			if ($this->Input->post('FORM_SUBMIT') == 'tl_210update')
+			if (\Input::post('FORM_SUBMIT') == 'tl_210update')
 			{
 				$this->import('DbUpdater');
 				$this->DbUpdater->run210Update();
@@ -883,7 +883,7 @@ class InstallTool extends Backend
 		// Step 1: database structure
 		if (!$this->Database->tableExists('tl_files'))
 		{
-			if ($this->Input->post('FORM_SUBMIT') == 'tl_30update')
+			if (\Input::post('FORM_SUBMIT') == 'tl_30update')
 			{
 				$this->import('DbUpdater');
 				$this->DbUpdater->run300Update();
@@ -900,7 +900,7 @@ class InstallTool extends Backend
 		// Step 2: scan the upload folder
 		if ($objRow->count < 1)
 		{
-			if ($this->Input->post('FORM_SUBMIT') == 'tl_30update')
+			if (\Input::post('FORM_SUBMIT') == 'tl_30update')
 			{
 				$this->import('DbUpdater');
 				$this->DbUpdater->scanUploadFolder();
@@ -916,7 +916,7 @@ class InstallTool extends Backend
 		// Step 3: update the database fields
 		elseif ($GLOBALS['TL_CONFIG']['checkFileTree'])
 		{
-			if ($this->Input->post('FORM_SUBMIT') == 'tl_30update')
+			if (\Input::post('FORM_SUBMIT') == 'tl_30update')
 			{
 				$this->import('DbUpdater');
 				$this->DbUpdater->updateFileTreeFields();

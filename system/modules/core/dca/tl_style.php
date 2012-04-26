@@ -670,7 +670,7 @@ class tl_style extends Backend
 	public function checkCategory($varValue)
 	{
 		// Do not change the value if it has been set already
-		if (strlen($varValue) || $this->Input->post('FORM_SUBMIT') == 'tl_style')
+		if (strlen($varValue) || \Input::post('FORM_SUBMIT') == 'tl_style')
 		{
 			return $varValue;
 		}

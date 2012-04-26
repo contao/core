@@ -1578,7 +1578,7 @@ class tl_page extends Backend
 	 */
 	public function addAliasButton()
 	{
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_select' && isset($_POST['alias']))
+		if (\Input::post('FORM_SUBMIT') == 'tl_select' && isset($_POST['alias']))
 		{
 			$session = $this->Session->getData();
 

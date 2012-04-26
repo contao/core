@@ -96,10 +96,10 @@ class PreviewSwitch extends Backend
 		$time = time();
 
 		// Switch
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_switch')
+		if (\Input::post('FORM_SUBMIT') == 'tl_switch')
 		{
 			// Hide unpublished elements
-			if ($this->Input->post('unpublished') == 'hide')
+			if (\Input::post('unpublished') == 'hide')
 			{
 				$this->setCookie('FE_PREVIEW', 0, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
 				$this->Template->show = 0;
@@ -120,15 +120,15 @@ class PreviewSwitch extends Backend
 							   ->execute(($time - $GLOBALS['TL_CONFIG']['sessionTimeout']), $strHash);
 
 			   // Log in the front end user
-				if (is_numeric($this->Input->post('user')) && $this->Input->post('user') > 0)
+				if (is_numeric(\Input::post('user')) && \Input::post('user') > 0)
 				{
 					// Insert new session
 					$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
-								   ->execute($this->Input->post('user'), $time, 'FE_USER_AUTH', session_id(), \Environment::get('ip'), $strHash);
+								   ->execute(\Input::post('user'), $time, 'FE_USER_AUTH', session_id(), \Environment::get('ip'), $strHash);
 
 					// Set cookie
 					$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);
-					$this->Template->user = $this->Input->post('user');
+					$this->Template->user = \Input::post('user');
 				}
 
 				// Log out the front end user

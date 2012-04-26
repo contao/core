@@ -130,9 +130,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Set IDs and redirect
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_select')
+		if (\Input::post('FORM_SUBMIT') == 'tl_select')
 		{
-			$ids = deserialize($this->Input->post('IDS'));
+			$ids = deserialize(\Input::post('IDS'));
 
 			if (!is_array($ids) || empty($ids))
 			{
@@ -949,7 +949,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$objUploader = new $class();
 
 		// Process the uploaded files
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_upload')
+		if (\Input::post('FORM_SUBMIT') == 'tl_upload')
 		{
 			$arrUploaded = $objUploader->uploadTo($strFolder, 'files');
 
@@ -1009,7 +1009,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			if (!$objUploader->hasError())
 			{
 				// Do not purge the html folder (see #2898)
-				if ($this->Input->post('uploadNback') && !$objUploader->hasResized())
+				if (\Input::post('uploadNback') && !$objUploader->hasResized())
 				{
 					$this->resetMessages();
 					$this->redirect($this->getReferer());
@@ -1079,11 +1079,11 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$this->blnCreateNewVersion = false;
 
 		// Change version
-		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && $this->Input->post('FORM_SUBMIT') == 'tl_version' && $this->Input->post('version') != '')
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && \Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
 		{
 			$objData = $this->Database->prepare("SELECT * FROM tl_version WHERE fromTable=? AND pid=? AND version=?")
 									  ->limit(1)
-									  ->execute($this->strTable, $objFile->id, $this->Input->post('version'));
+									  ->execute($this->strTable, $objFile->id, \Input::post('version'));
 
 			if ($objData->numRows)
 			{
@@ -1099,9 +1099,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 								   ->execute($objFile->id);
 
 					$this->Database->prepare("UPDATE tl_version SET active=1 WHERE pid=? AND version=?")
-								   ->execute($objFile->id, $this->Input->post('version'));
+								   ->execute($objFile->id, \Input::post('version'));
 
-					$this->log('Version '.$this->Input->post('version').' of record "'.$this->strTable.'.id='.$objFile->id.'" has been restored', 'DC_Table edit()', TL_GENERAL);
+					$this->log('Version '.\Input::post('version').' of record "'.$this->strTable.'.id='.$objFile->id.'" has been restored', 'DC_Table edit()', TL_GENERAL);
 
 					// Trigger the onrestore_callback
 					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback']))
@@ -1111,7 +1111,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 							if (is_array($callback))
 							{
 								$this->import($callback[0]);
-								$this->$callback[0]->$callback[1]($objFile->id, $this->strTable, $data, $this->Input->post('version'));
+								$this->$callback[0]->$callback[1]($objFile->id, $this->strTable, $data, \Input::post('version'));
 							}
 						}
 					}
@@ -1186,7 +1186,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 						}
 
 						// Clear the current value if it is a new folder
-						if ($this->Input->post('FORM_SUBMIT') != 'tl_files' && $this->Input->post('FORM_SUBMIT') != 'tl_templates' && $this->varValue == '__new__')
+						if (\Input::post('FORM_SUBMIT') != 'tl_files' && \Input::post('FORM_SUBMIT') != 'tl_templates' && $this->varValue == '__new__')
 						{
 							$this->varValue = '';
 						}
@@ -1293,7 +1293,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <p class="tl_error">'.$GLOBALS['TL_LANG']['ERR']['general'].'</p>' : '').$return;
 
 		// Reload the page to prevent _POST variables from being sent twice
-		if ($this->Input->post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
+		if (\Input::post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
 		{
 			// Trigger the onsubmit_callback
 			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback']))
@@ -1306,7 +1306,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			// Save the current version
-			if ($this->blnCreateNewVersion && $this->Input->post('SUBMIT_TYPE') != 'auto')
+			if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
 			{
 				$this->createNewVersion($this->strTable, $objFile->id);
 
@@ -1331,7 +1331,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			// Redirect
-			if ($this->Input->post('saveNclose'))
+			if (\Input::post('saveNclose'))
 			{
 				$this->resetMessages();
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
@@ -1384,9 +1384,9 @@ window.addEvent(\'domready\', function() {
 		$ids = $session['CURRENT']['IDS'];
 
 		// Save field selection in session
-		if ($this->Input->post('FORM_SUBMIT') == $this->strTable.'_all' && $this->Input->get('fields'))
+		if (\Input::post('FORM_SUBMIT') == $this->strTable.'_all' && $this->Input->get('fields'))
 		{
-			$session['CURRENT'][$this->strTable] = deserialize($this->Input->post('all_fields'));
+			$session['CURRENT'][$this->strTable] = deserialize(\Input::post('all_fields'));
 			$this->Session->setData($session);
 		}
 
@@ -1476,7 +1476,7 @@ window.addEvent(\'domready\', function() {
 </div>';
 
 				// Save the record
-				if ($this->Input->post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
+				if (\Input::post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
 				{
 					// Call onsubmit_callback
 					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback']))
@@ -1489,7 +1489,7 @@ window.addEvent(\'domready\', function() {
 					}
 
 					// Create a new version
-					if ($this->blnCreateNewVersion && $this->Input->post('SUBMIT_TYPE') != 'auto')
+					if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
 					{
 						$this->createNewVersion($this->strTable, $objFile->id);
 
@@ -1552,9 +1552,9 @@ window.addEvent(\'domready\', function() {
 			}
 
 			// Reload the page to prevent _POST variables from being sent twice
-			if ($this->Input->post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
+			if (\Input::post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
 			{
-				if ($this->Input->post('saveNclose'))
+				if (\Input::post('saveNclose'))
 				{
 					setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 					$this->redirect($this->getReferer());
@@ -1666,7 +1666,7 @@ window.addEvent(\'domready\', function() {
 		$strContent = $objFile->getContent();
 
 		// Process the request
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_files')
+		if (\Input::post('FORM_SUBMIT') == 'tl_files')
 		{
 			// Save the file
 			if (md5($strContent) != md5($this->Input->postRaw('source')))
@@ -1683,7 +1683,7 @@ window.addEvent(\'domready\', function() {
 				}
 			}
 
-			if ($this->Input->post('saveNclose'))
+			if (\Input::post('saveNclose'))
 			{
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 				$this->redirect($this->getReferer());
@@ -1827,7 +1827,7 @@ window.addEvent(\'domready\', function() {
 	 */
 	protected function save($varValue)
 	{
-		if ($this->Input->post('FORM_SUBMIT') != $this->strTable)
+		if (\Input::post('FORM_SUBMIT') != $this->strTable)
 		{
 			return;
 		}
@@ -1973,7 +1973,7 @@ window.addEvent(\'domready\', function() {
 					$new = deserialize($varValue, true);
 					$old = deserialize($this->objActiveRecord->{$this->strField}, true);
 
-					switch ($this->Input->post($this->strInputName . '_update'))
+					switch (\Input::post($this->strInputName . '_update'))
 					{
 						case 'add':
 							$varValue = array_values(array_unique(array_merge($old, $new)));

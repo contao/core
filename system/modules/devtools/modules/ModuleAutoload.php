@@ -61,10 +61,10 @@ class ModuleAutoload extends \BackendModule
 		$this->loadLanguageFile('tl_autoload');
 
 		// Create the config/autoload.php file
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_autoload')
+		if (\Input::post('FORM_SUBMIT') == 'tl_autoload')
 		{
 			// Always scan all modules in ide_compat mode
-			if ($this->Input->post('ide_compat'))
+			if (\Input::post('ide_compat'))
 			{
 				$arrModules = array_filter(scan(TL_ROOT . '/system/modules'), function($e) {
 					return is_dir(TL_ROOT . '/system/modules/' . $e) ? $e : null;
@@ -72,7 +72,7 @@ class ModuleAutoload extends \BackendModule
 			}
 			else
 			{
-				$arrModules = $this->Input->post('modules');
+				$arrModules = \Input::post('modules');
 			}
 
 			$intYear = date('Y');
@@ -88,7 +88,7 @@ class ModuleAutoload extends \BackendModule
 				foreach ($arrModules as $strModule)
 				{
 					// config/autoload.php exists
-					if (!$this->Input->post('ide_compat') && !$this->Input->post('override') && file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.php'))
+					if (!\Input::post('ide_compat') && !\Input::post('override') && file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.php'))
 					{
 						$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['tl_merge']['autoloadExists'], $strModule));
 						continue;
@@ -307,7 +307,7 @@ EOT
 			}
 
 			// IDE compatibility
-			if ($this->Input->post('ide_compat'))
+			if (\Input::post('ide_compat'))
 			{
 				$objFile = new \File('system/helper/ide_compat.php');
 				$objFile->write(

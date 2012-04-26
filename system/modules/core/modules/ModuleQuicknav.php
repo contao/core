@@ -71,11 +71,11 @@ class ModuleQuicknav extends \Module
 			return $objTemplate->parse();
 		}
 
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_quicknav')
+		if (\Input::post('FORM_SUBMIT') == 'tl_quicknav')
 		{
-			if (strlen($this->Input->post('target', true)))
+			if (strlen(\Input::post('target', true)))
 			{
-				$this->redirect($this->Input->post('target', true));
+				$this->redirect(\Input::post('target', true));
 			}
 
 			$this->reload();

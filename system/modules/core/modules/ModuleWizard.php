@@ -128,9 +128,9 @@ class ModuleWizard extends \Widget
 		}
 
 		// Get the new value
-		if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
+		if (\Input::post('FORM_SUBMIT') == $this->strTable)
 		{
-			$this->varValue = $this->Input->post($this->strId);
+			$this->varValue = \Input::post($this->strId);
 		}
 
 		// Make sure there is at least an empty array
@@ -162,7 +162,7 @@ class ModuleWizard extends \Widget
 		}
 
 		// Save the value
-		if ($this->Input->get($strCommand) || $this->Input->post('FORM_SUBMIT') == $this->strTable)
+		if ($this->Input->get($strCommand) || \Input::post('FORM_SUBMIT') == $this->strTable)
 		{
 			$this->Database->prepare("UPDATE " . $this->strTable . " SET " . $this->strField . "=? WHERE id=?")
 						   ->execute(serialize($this->varValue), $this->currentRecord);

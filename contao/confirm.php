@@ -74,7 +74,7 @@ class Confirm extends Backend
 	public function run()
 	{
 		// Redirect to the back end home page
-		if ($this->Input->post('FORM_SUBMIT') == 'invalid_token_url')
+		if (\Input::post('FORM_SUBMIT') == 'invalid_token_url')
 		{
 			list($strUrl) = explode('?', $this->Session->get('INVALID_TOKEN_URL'));
 			$this->redirect($strUrl);

@@ -231,7 +231,7 @@ class FrontendUser extends \User
 		}
 
 		// Set the auto login data
-		if ($GLOBALS['TL_CONFIG']['autologin'] > 0 && $this->Input->post('autologin'))
+		if ($GLOBALS['TL_CONFIG']['autologin'] > 0 && \Input::post('autologin'))
 		{
 			$time = time();
 			$strToken = md5(uniqid(mt_rand(), true));

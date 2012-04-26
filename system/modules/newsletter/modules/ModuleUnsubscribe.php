@@ -97,7 +97,7 @@ class ModuleUnsubscribe extends \Module
 		}
 
 		// Unsubscribe
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_unsubscribe')
+		if (\Input::post('FORM_SUBMIT') == 'tl_unsubscribe')
 		{
 			$this->removeRecipient();
 		}
@@ -153,7 +153,7 @@ class ModuleUnsubscribe extends \Module
 	 */
 	protected function removeRecipient()
 	{
-		$arrChannels = $this->Input->post('channels');
+		$arrChannels = \Input::post('channels');
 		$arrChannels = array_intersect($arrChannels, $this->nl_channels); // see #3240
 
 		// Check the selection
@@ -163,7 +163,7 @@ class ModuleUnsubscribe extends \Module
 			$this->reload();
 		}
 
-		$varInput = $this->idnaEncodeEmail($this->Input->post('email', true));
+		$varInput = $this->idnaEncodeEmail(\Input::post('email', true));
 
 		// Validate e-mail address
 		if (!$this->isValidEmailAddress($varInput))

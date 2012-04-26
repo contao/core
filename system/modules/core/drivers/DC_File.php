@@ -318,7 +318,7 @@ class DC_File extends \DataContainer implements \editable
 <p class="tl_error">'.$GLOBALS['TL_LANG']['ERR']['general'].'</p>' : '').$return;
 
 		// Reload the page to prevent _POST variables from being sent twice
-		if ($this->Input->post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
+		if (\Input::post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
 		{
 			// Call onsubmit_callback
 			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback']))
@@ -331,7 +331,7 @@ class DC_File extends \DataContainer implements \editable
 			}
 
 			// Reload
-			if ($this->Input->post('saveNclose'))
+			if (\Input::post('saveNclose'))
 			{
 				$this->resetMessages();
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
@@ -364,7 +364,7 @@ window.addEvent(\'domready\', function() {
 	 */
 	protected function save($varValue)
 	{
-		if ($this->Input->post('FORM_SUBMIT') != $this->strTable)
+		if (\Input::post('FORM_SUBMIT') != $this->strTable)
 		{
 			return;
 		}
@@ -475,13 +475,13 @@ window.addEvent(\'domready\', function() {
 				$trigger = $GLOBALS['TL_CONFIG'][$name];
 
 				// Overwrite the trigger if the page is not reloaded
-				if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
+				if (\Input::post('FORM_SUBMIT') == $this->strTable)
 				{
 					$key = ($this->Input->get('act') == 'editAll') ? $name.'_'.$this->intId : $name;
 
 					if (!$GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['eval']['submitOnChange'])
 					{
-						$trigger = $this->Input->post($key);
+						$trigger = \Input::post($key);
 					}
 				}
 

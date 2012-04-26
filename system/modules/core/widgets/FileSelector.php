@@ -96,9 +96,9 @@ class FileSelector extends \Widget
 		$this->import('BackendUser', 'User');
 
 		// Store the keyword
-		if ($this->Input->post('FORM_SUBMIT') == 'item_selector')
+		if (\Input::post('FORM_SUBMIT') == 'item_selector')
 		{
-			$this->Session->set('file_selector_search', $this->Input->post('keyword'));
+			$this->Session->set('file_selector_search', \Input::post('keyword'));
 			$this->reload();
 		}
 

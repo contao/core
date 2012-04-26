@@ -255,7 +255,7 @@ class Comments extends \Frontend
 			$objWidget = new $strClass($this->prepareForWidget($arrField, $arrField['name'], $arrField['value']));
 
 			// Validate the widget
-			if ($this->Input->post('FORM_SUBMIT') == $strFormId)
+			if (\Input::post('FORM_SUBMIT') == $strFormId)
 			{
 				$objWidget->validate();
 
@@ -287,7 +287,7 @@ class Comments extends \Frontend
 		}
 
 		// Add the comment
-		if ($this->Input->post('FORM_SUBMIT') == $strFormId && !$doNotSubmit)
+		if (!$doNotSubmit && \Input::post('FORM_SUBMIT') == $strFormId)
 		{
 			$strWebsite = $arrWidgets['website']->value;
 

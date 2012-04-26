@@ -248,12 +248,12 @@ class DataContainer extends \Backend
 		$objWidget->currentRecord = $this->intId;
 
 		// Validate the field
-		if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
+		if (\Input::post('FORM_SUBMIT') == $this->strTable)
 		{
 			$key = ($this->Input->get('act') == 'editAll') ? 'FORM_FIELDS_' . $this->intId : 'FORM_FIELDS';
 
 			// Calculate the current palette
-			$postPaletteFields = implode(',', $this->Input->post($key));
+			$postPaletteFields = implode(',', \Input::post($key));
 			$postPaletteFields = array_unique(trimsplit('[,;]', $postPaletteFields));
 
 			// Compile the palette if there is none
@@ -270,7 +270,7 @@ class DataContainer extends \Backend
 				if (isset($GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__']) && in_array($this->strField, $GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__']))
 				{
 					// If the field value has changed, recompile the palette
-					if ($this->varValue != $this->Input->post($this->strInputName))
+					if ($this->varValue != \Input::post($this->strInputName))
 					{
 						$newPaletteFields = trimsplit('[,;]', $this->getPalette());
 					}

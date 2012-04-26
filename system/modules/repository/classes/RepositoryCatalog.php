@@ -71,14 +71,14 @@ class RepositoryCatalog extends RepositoryBackendModule
 		// returning from submit?
 		if ($this->filterPost('repository_action') == $rep->f_action) {
 			// get url parameters
-			$rep->f_tag 	= trim($this->Input->post('repository_tag'));
-			$rep->f_type 	= trim($this->Input->post('repository_type'));
-			$rep->f_category= trim($this->Input->post('repository_category'));
-			$rep->f_state	= trim($this->Input->post('repository_state'));
-			$rep->f_author	= trim($this->Input->post('repository_author'));
-			$rep->f_order	= trim($this->Input->post('repository_order'));
-			$rep->f_page	= trim($this->Input->post('repository_page'));
-			$rep->f_find	= trim($this->Input->post('repository_find'));
+			$rep->f_tag 	= trim(\Input::post('repository_tag'));
+			$rep->f_type 	= trim(\Input::post('repository_type'));
+			$rep->f_category= trim(\Input::post('repository_category'));
+			$rep->f_state	= trim(\Input::post('repository_state'));
+			$rep->f_author	= trim(\Input::post('repository_author'));
+			$rep->f_order	= trim(\Input::post('repository_order'));
+			$rep->f_page	= trim(\Input::post('repository_page'));
+			$rep->f_find	= trim(\Input::post('repository_find'));
 			$this->Session->set(
 				'repository_catalog_settings',
 				array(

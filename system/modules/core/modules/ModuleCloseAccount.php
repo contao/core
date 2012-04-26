@@ -102,7 +102,7 @@ class ModuleCloseAccount extends \Module
 		$objWidget->rowClass = 'row_0 row_first even';
 
 		// Validate widget
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_close_account')
+		if (\Input::post('FORM_SUBMIT') == 'tl_close_account')
 		{
 			$objWidget->validate();
 

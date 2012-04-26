@@ -51,9 +51,9 @@ class Theme extends \Backend
 	 */
 	public function importTheme()
 	{
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_theme_import')
+		if (\Input::post('FORM_SUBMIT') == 'tl_theme_import')
 		{
-			$source = $this->Input->post('source', true);
+			$source = \Input::post('source', true);
 
 			if ($source == '')
 			{
@@ -107,7 +107,7 @@ class Theme extends \Backend
 			);
 
 			// Proceed
-			if ($this->Input->post('confirm') == 1)
+			if (\Input::post('confirm') == 1)
 			{
 				$this->extractThemeFiles($arrFiles, $arrDbFields);
 			}

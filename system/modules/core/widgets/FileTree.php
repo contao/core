@@ -137,7 +137,7 @@ class FileTree extends \Widget
 		if ($this->strOrderField != '')
 		{
 			$this->Database->prepare("UPDATE {$this->strTable} SET {$this->strOrderField}=? WHERE id=?")
-						   ->execute($this->Input->post($this->strOrderName), $this->Input->get('id'));
+						   ->execute(\Input::post($this->strOrderName), $this->Input->get('id'));
 		}
 
 		// Return the value as usual

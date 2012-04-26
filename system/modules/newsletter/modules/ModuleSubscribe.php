@@ -104,7 +104,7 @@ class ModuleSubscribe extends \Module
 		}
 
 		// Subscribe
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_subscribe')
+		if (\Input::post('FORM_SUBMIT') == 'tl_subscribe')
 		{
 			$this->addRecipient();
 		}
@@ -216,7 +216,7 @@ class ModuleSubscribe extends \Module
 	 */
 	protected function addRecipient()
 	{
-		$arrChannels = $this->Input->post('channels');
+		$arrChannels = \Input::post('channels');
 
 		if (!is_array($arrChannels))
 		{
@@ -233,7 +233,7 @@ class ModuleSubscribe extends \Module
 			$this->reload();
 		}
 
-		$varInput = $this->idnaEncodeEmail($this->Input->post('email', true));
+		$varInput = $this->idnaEncodeEmail(\Input::post('email', true));
 
 		// Validate the e-mail address
 		if (!$this->isValidEmailAddress($varInput))

@@ -76,7 +76,7 @@ class ModuleExtension extends BackendModule
 	protected function compile()
 	{
 		// Create files
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_extension')
+		if (\Input::post('FORM_SUBMIT') == 'tl_extension')
 		{
 			$objModule = $this->Database->prepare("SELECT * FROM tl_extension WHERE id=?")
 							  ->limit(1)

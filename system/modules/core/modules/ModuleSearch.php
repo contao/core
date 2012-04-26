@@ -82,11 +82,11 @@ class ModuleSearch extends \Module
 	protected function compile()
 	{
 		// Trigger the search module from a custom form
-		if (!$_GET['keywords'] && $this->Input->post('FORM_SUBMIT') == 'tl_search')
+		if (!$_GET['keywords'] && \Input::post('FORM_SUBMIT') == 'tl_search')
 		{
-			$_GET['keywords'] = $this->Input->post('keywords');
-			$_GET['query_type'] = $this->Input->post('query_type');
-			$_GET['per_page'] = $this->Input->post('per_page');
+			$_GET['keywords'] = \Input::post('keywords');
+			$_GET['query_type'] = \Input::post('query_type');
+			$_GET['per_page'] = \Input::post('per_page');
 		}
 
 		// Remove insert tags

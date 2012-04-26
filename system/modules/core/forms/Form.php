@@ -164,7 +164,7 @@ class Form extends \Hybrid
 				}
 
 				// Validate the input
-				if ($this->Input->post('FORM_SUBMIT') == $formId)
+				if (\Input::post('FORM_SUBMIT') == $formId)
 				{
 					$objWidget->validate();
 
@@ -216,7 +216,7 @@ class Form extends \Hybrid
 		}
 
 		// Process the form data
-		if ($this->Input->post('FORM_SUBMIT') == $formId && !$doNotSubmit)
+		if (\Input::post('FORM_SUBMIT') == $formId && !$doNotSubmit)
 		{
 			$this->processFormData($arrSubmitted, $arrLabels);
 		}
@@ -328,14 +328,14 @@ class Form extends \Hybrid
 			$email->fromName = $GLOBALS['TL_ADMIN_NAME'];
 
 			// Get the "reply to" address
-			if (strlen($this->Input->post('email', true)))
+			if (strlen(\Input::post('email', true)))
 			{
-				$replyTo = $this->Input->post('email', true);
+				$replyTo = \Input::post('email', true);
 
 				// Add name
-				if (strlen($this->Input->post('name')))
+				if (strlen(\Input::post('name')))
 				{
-					$replyTo = '"' . $this->Input->post('name') . '" <' . $replyTo . '>';
+					$replyTo = '"' . \Input::post('name') . '" <' . $replyTo . '>';
 				}
 
 				$email->replyTo($replyTo);
@@ -350,7 +350,7 @@ class Form extends \Hybrid
 			// Send copy to sender
 			if (strlen($arrSubmitted['cc']))
 			{
-				$email->sendCc($this->Input->post('email', true));
+				$email->sendCc(\Input::post('email', true));
 				unset($_SESSION['FORM_DATA']['cc']);
 			}
 
@@ -445,7 +445,7 @@ class Form extends \Hybrid
 		// Store all values in the session
 		foreach (array_keys($_POST) as $key)
 		{
-			$_SESSION['FORM_DATA'][$key] = $this->allowTags ? $this->Input->postHtml($key, true) : $this->Input->post($key, true);
+			$_SESSION['FORM_DATA'][$key] = $this->allowTags ? $this->Input->postHtml($key, true) : \Input::post($key, true);
 		}
 
 		$arrFiles = $_SESSION['FILES'];
@@ -497,7 +497,7 @@ class Form extends \Hybrid
 	 */
 	protected function initializeSession($formId)
 	{
-		if ($this->Input->post('FORM_SUBMIT') != $formId)
+		if (\Input::post('FORM_SUBMIT') != $formId)
 		{
 			return;
 		}

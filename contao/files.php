@@ -86,7 +86,7 @@ class FileManager extends Backend
 		// Ajax request
 		if (\Environment::get('isAjaxRequest'))
 		{
-			$this->objAjax = new \Ajax($this->Input->post('action'));
+			$this->objAjax = new \Ajax(\Input::post('action'));
 			$this->objAjax->executePreActions();
 		}
 

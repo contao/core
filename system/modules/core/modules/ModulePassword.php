@@ -141,7 +141,7 @@ class ModulePassword extends \Module
 			++$row;
 
 			// Validate widget
-			if ($this->Input->post('FORM_SUBMIT') == 'tl_lost_password')
+			if (\Input::post('FORM_SUBMIT') == 'tl_lost_password')
 			{
 				$objWidget->validate();
 
@@ -158,15 +158,15 @@ class ModulePassword extends \Module
 		$this->Template->hasError = $doNotSubmit;
 
 		// Look for an account and send the password link
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_lost_password' && !$doNotSubmit)
+		if (\Input::post('FORM_SUBMIT') == 'tl_lost_password' && !$doNotSubmit)
 		{
 			if ($this->reg_skipName)
 			{
-				$objMember = \MemberModel::findActiveByEmailAndUsername($this->Input->post('email', true), null);
+				$objMember = \MemberModel::findActiveByEmailAndUsername(\Input::post('email', true), null);
 			}
 			else
 			{
-				$objMember = \MemberModel::findActiveByEmailAndUsername($this->Input->post('email', true), $this->Input->post('username'));
+				$objMember = \MemberModel::findActiveByEmailAndUsername(\Input::post('email', true), \Input::post('username'));
 			}
 
 			if ($objMember === null)
@@ -232,7 +232,7 @@ class ModulePassword extends \Module
 		$this->Template->rowLast = 'row_2 row_last even';
 
 		// Validate the field
-		if (strlen($this->Input->post('FORM_SUBMIT')) && $this->Input->post('FORM_SUBMIT') == $this->Session->get('setPasswordToken'))
+		if (strlen(\Input::post('FORM_SUBMIT')) && \Input::post('FORM_SUBMIT') == $this->Session->get('setPasswordToken'))
 		{
 			$objWidget->validate();
 

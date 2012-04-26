@@ -75,13 +75,13 @@ class ChangePassword extends Backend
 	{
 		$this->Template = new \BackendTemplate('be_password');
 
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_password')
+		if (\Input::post('FORM_SUBMIT') == 'tl_password')
 		{
-			$pw = $this->Input->post('password');
-			$cnf = $this->Input->post('confirm');
+			$pw = \Input::post('password');
+			$cnf = \Input::post('confirm');
 
 			// Do not allow special characters
-			if (preg_match('/[#\(\)\/<=>]/', html_entity_decode($this->Input->post('password'))))
+			if (preg_match('/[#\(\)\/<=>]/', html_entity_decode(\Input::post('password'))))
 			{
 				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['extnd']);
 			}

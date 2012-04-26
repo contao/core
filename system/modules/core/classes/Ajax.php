@@ -98,21 +98,21 @@ class Ajax extends \Backend
 			// Toggle navigation menu
 			case 'toggleNavigation':
 				$bemod = $this->Session->get('backend_modules');
-				$bemod[$this->Input->post('id')] = intval($this->Input->post('state'));
+				$bemod[\Input::post('id')] = intval(\Input::post('state'));
 				$this->Session->set('backend_modules', $bemod);
 				exit; break;
 
 			// Load a navigation menu group
 			case 'loadNavigation':
 				$bemod = $this->Session->get('backend_modules');
-				$bemod[$this->Input->post('id')] = intval($this->Input->post('state'));
+				$bemod[\Input::post('id')] = intval(\Input::post('state'));
 				$this->Session->set('backend_modules', $bemod);
 
 				$this->import('BackendUser', 'User');
 
 				$objTemplate = new \BackendTemplate('be_navigation');
 				$navigation = $this->User->navigation();
-				$objTemplate->modules = $navigation[$this->Input->post('id')]['modules'];
+				$objTemplate->modules = $navigation[\Input::post('id')]['modules'];
 
 				echo $objTemplate->parse();
 				exit; break;
@@ -122,17 +122,17 @@ class Ajax extends \Backend
 			case 'toggleFileManager':
 			case 'togglePagetree':
 			case 'toggleFiletree':
-				$this->strAjaxId = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', $this->Input->post('id'));
-				$this->strAjaxKey = str_replace('_' . $this->strAjaxId, '', $this->Input->post('id'));
+				$this->strAjaxId = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', \Input::post('id'));
+				$this->strAjaxKey = str_replace('_' . $this->strAjaxId, '', \Input::post('id'));
 
 				if ($this->Input->get('act') == 'editAll')
 				{
 					$this->strAjaxKey = preg_replace('/(.*)_[0-9a-zA-Z]+$/i', '$1', $this->strAjaxKey);
-					$this->strAjaxName = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', $this->Input->post('name'));
+					$this->strAjaxName = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', \Input::post('name'));
 				}
 
 				$nodes = $this->Session->get($this->strAjaxKey);
-				$nodes[$this->strAjaxId] = intval($this->Input->post('state'));
+				$nodes[$this->strAjaxId] = intval(\Input::post('state'));
 				$this->Session->set($this->strAjaxKey, $nodes);
 				exit; break;
 
@@ -141,31 +141,31 @@ class Ajax extends \Backend
 			case 'loadFileManager':
 			case 'loadPagetree':
 			case 'loadFiletree':
-				$this->strAjaxId = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', $this->Input->post('id'));
-				$this->strAjaxKey = str_replace('_' . $this->strAjaxId, '', $this->Input->post('id'));
+				$this->strAjaxId = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', \Input::post('id'));
+				$this->strAjaxKey = str_replace('_' . $this->strAjaxId, '', \Input::post('id'));
 
 				if ($this->Input->get('act') == 'editAll')
 				{
 					$this->strAjaxKey = preg_replace('/(.*)_[0-9a-zA-Z]+$/i', '$1', $this->strAjaxKey);
-					$this->strAjaxName = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', $this->Input->post('name'));
+					$this->strAjaxName = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', \Input::post('name'));
 				}
 
 				$nodes = $this->Session->get($this->strAjaxKey);
-				$nodes[$this->strAjaxId] = intval($this->Input->post('state'));
+				$nodes[$this->strAjaxId] = intval(\Input::post('state'));
 				$this->Session->set($this->strAjaxKey, $nodes);
 				break;
 
 			// Toggle the visibility of a fieldset
 			case 'toggleFieldset':
 				$fs = $this->Session->get('fieldset_states');
-				$fs[$this->Input->post('table')][$this->Input->post('id')] = intval($this->Input->post('state'));
+				$fs[\Input::post('table')][\Input::post('id')] = intval(\Input::post('state'));
 				$this->Session->set('fieldset_states', $fs);
 				exit; break;
 
 			// Check whether the temporary directory is writeable
 			case 'liveUpdate':
-				$GLOBALS['TL_CONFIG']['liveUpdateId'] = $this->Input->post('id');
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['liveUpdateId']", $this->Input->post('id'));
+				$GLOBALS['TL_CONFIG']['liveUpdateId'] = \Input::post('id');
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['liveUpdateId']", \Input::post('id'));
 
 				// Check whether the temp directory is writeable
 				try
@@ -185,7 +185,7 @@ class Ajax extends \Backend
 				}
 
 				// Empty live update ID
-				if (!strlen($this->Input->post('id')))
+				if (!strlen(\Input::post('id')))
 				{
 					$this->loadLanguageFile('tl_maintenance');
 					echo '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['emptyLuId'] . '</p>';
@@ -196,7 +196,7 @@ class Ajax extends \Backend
 			// Toggle checkbox groups
 			case 'toggleCheckboxGroup':
 				$state = $this->Session->get('checkbox_groups');
-				$state[$this->Input->post('id')] = intval($this->Input->post('state'));
+				$state[\Input::post('id')] = intval(\Input::post('state'));
 				$this->Session->set('checkbox_groups', $state);
 				break;
 
@@ -228,22 +228,22 @@ class Ajax extends \Backend
 		{
 			// Load nodes of the page structure tree
 			case 'loadStructure':
-				echo $dc->ajaxTreeView($this->strAjaxId, intval($this->Input->post('level')));
+				echo $dc->ajaxTreeView($this->strAjaxId, intval(\Input::post('level')));
 				exit; break;
 
 			// Load nodes of the file manager tree
 			case 'loadFileManager':
-				echo $dc->ajaxTreeView($this->Input->post('folder', true), intval($this->Input->post('level')));
+				echo $dc->ajaxTreeView(\Input::post('folder', true), intval(\Input::post('level')));
 				exit; break;
 
 			// Load nodes of the page tree
 			case 'loadPagetree':
 				$arrData['strTable'] = $dc->table;
 				$arrData['id'] = $this->strAjaxName ?: $dc->id;
-				$arrData['name'] = $this->Input->post('name');
+				$arrData['name'] = \Input::post('name');
 
 				$objWidget = new $GLOBALS['BE_FFL']['pageSelector']($arrData, $dc);
-				echo $objWidget->generateAjax($this->strAjaxId, $this->Input->post('field'), intval($this->Input->post('level')));
+				echo $objWidget->generateAjax($this->strAjaxId, \Input::post('field'), intval(\Input::post('level')));
 				exit; break;
 
 			// Load nodes of the file tree
@@ -251,10 +251,10 @@ class Ajax extends \Backend
 			case 'loadPagetree':
 				$arrData['strTable'] = $dc->table;
 				$arrData['id'] = $this->strAjaxName ?: $dc->id;
-				$arrData['name'] = $this->Input->post('name');
+				$arrData['name'] = \Input::post('name');
 
 				$objWidget = new $GLOBALS['BE_FFL']['fileSelector']($arrData, $dc);
-				echo $objWidget->generateAjax($this->strAjaxId, $this->Input->post('field'), intval($this->Input->post('level')));
+				echo $objWidget->generateAjax($this->strAjaxId, \Input::post('field'), intval(\Input::post('level')));
 				exit; break;
 
 			// Feature/unfeature an element
@@ -265,7 +265,7 @@ class Ajax extends \Backend
 
 					if (method_exists($dca, 'toggleFeatured'))
 					{
-						$dca->toggleFeatured($this->Input->post('id'), (($this->Input->post('state') == 1) ? true : false));
+						$dca->toggleFeatured(\Input::post('id'), ((\Input::post('state') == 1) ? true : false));
 					}
 				}
 				exit; break;
@@ -276,33 +276,33 @@ class Ajax extends \Backend
 				{
 					if ($this->Input->get('act') == 'editAll')
 					{
-						$this->strAjaxId = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', $this->Input->post('id'));
-						$this->Database->prepare("UPDATE " . $dc->table . " SET " . $this->Input->post('field') . "='" . (intval($this->Input->post('state') == 1) ? 1 : '') . "' WHERE id=?")->execute($this->strAjaxId);
+						$this->strAjaxId = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', \Input::post('id'));
+						$this->Database->prepare("UPDATE " . $dc->table . " SET " . \Input::post('field') . "='" . (intval(\Input::post('state') == 1) ? 1 : '') . "' WHERE id=?")->execute($this->strAjaxId);
 
-						if ($this->Input->post('load'))
+						if (\Input::post('load'))
 						{
-							echo $dc->editAll($this->strAjaxId, $this->Input->post('id'));
+							echo $dc->editAll($this->strAjaxId, \Input::post('id'));
 						}
 					}
 					else
 					{
-						$this->Database->prepare("UPDATE " . $dc->table . " SET " . $this->Input->post('field') . "='" . (intval($this->Input->post('state') == 1) ? 1 : '') . "' WHERE id=?")->execute($dc->id);
+						$this->Database->prepare("UPDATE " . $dc->table . " SET " . \Input::post('field') . "='" . (intval(\Input::post('state') == 1) ? 1 : '') . "' WHERE id=?")->execute($dc->id);
 
-						if ($this->Input->post('load'))
+						if (\Input::post('load'))
 						{
-							echo $dc->edit(false, $this->Input->post('id'));
+							echo $dc->edit(false, \Input::post('id'));
 						}
 					}
 				}
 				elseif ($dc instanceof \DC_File)
 				{
-					$val = (intval($this->Input->post('state') == 1) ? true : false);
-					$this->Config->update("\$GLOBALS['TL_CONFIG']['".$this->Input->post('field')."']", $val);
+					$val = (intval(\Input::post('state') == 1) ? true : false);
+					$this->Config->update("\$GLOBALS['TL_CONFIG']['".\Input::post('field')."']", $val);
 
-					if ($this->Input->post('load'))
+					if (\Input::post('load'))
 					{
-						$GLOBALS['TL_CONFIG'][$this->Input->post('field')] = $val;
-						echo $dc->edit(false, $this->Input->post('id'));
+						$GLOBALS['TL_CONFIG'][\Input::post('field')] = $val;
+						echo $dc->edit(false, \Input::post('id'));
 					}
 				}
 				exit; break;

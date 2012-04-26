@@ -225,10 +225,10 @@ class tl_templates extends Backend
 		$strError = '';
 
 		// Copy an existing template
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_create_template' && file_exists(TL_ROOT . '/system/modules/' . $this->Input->post('original')))
+		if (\Input::post('FORM_SUBMIT') == 'tl_create_template' && file_exists(TL_ROOT . '/system/modules/' . \Input::post('original')))
 		{
-			$strOriginal = $this->Input->post('original');
-			$strTarget = str_replace('../', '', $this->Input->post('target'));
+			$strOriginal = \Input::post('original');
+			$strTarget = str_replace('../', '', \Input::post('target'));
 
 			// Validate the target path
 			if (strncmp($strTarget, 'templates', 9) !== 0 || !is_dir(TL_ROOT . '/' . $strTarget))
@@ -287,7 +287,7 @@ class tl_templates extends Backend
 
 			foreach ($v as $kk=>$vv)
 			{
-				$strAllTemplates .= sprintf('<option value="%s" class="%s"%s>%s</option>', $vv, ((strpos($vv, '.html5') === false) ? 'tl_gray' : ''), (($this->Input->post('original') == $vv) ? ' selected="selected"' : ''), $kk);
+				$strAllTemplates .= sprintf('<option value="%s" class="%s"%s>%s</option>', $vv, ((strpos($vv, '.html5') === false) ? 'tl_gray' : ''), ((\Input::post('original') == $vv) ? ' selected="selected"' : ''), $kk);
 			}
 
 			$strAllTemplates .= '</optgroup>';
@@ -351,7 +351,7 @@ class tl_templates extends Backend
 			}
 
 			$strRelPath = $strFolder .'/'. $strFile;
-			$strFolders .= sprintf('<option value="%s"%s>%s%s</option>', $strRelPath, (($this->Input->post('target') == $strRelPath) ? ' selected="selected"' : ''), str_repeat(' &nbsp; ', $intLevel), basename($strRelPath));
+			$strFolders .= sprintf('<option value="%s"%s>%s%s</option>', $strRelPath, ((\Input::post('target') == $strRelPath) ? ' selected="selected"' : ''), str_repeat(' &nbsp; ', $intLevel), basename($strRelPath));
 			$strFolders .= $this->getTargetFolders($strRelPath, ($intLevel + 1));
 		}
 

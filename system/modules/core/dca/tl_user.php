@@ -637,9 +637,9 @@ class tl_user extends Backend
 	 */
 	public function sessionField(\DataContainer $dc)
 	{
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_user')
+		if (\Input::post('FORM_SUBMIT') == 'tl_user')
 		{
-			$arrPurge = $this->Input->post('purge');
+			$arrPurge = \Input::post('purge');
 
 			if (is_array($arrPurge))
 			{

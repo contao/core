@@ -248,9 +248,9 @@ class TableWizard extends \Widget
 		}
 
 		// Import CSS
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_table_import')
+		if (\Input::post('FORM_SUBMIT') == 'tl_table_import')
 		{
-			if (!$this->Input->post('source') || !is_array($this->Input->post('source')))
+			if (!\Input::post('source') || !is_array(\Input::post('source')))
 			{
 				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
@@ -259,7 +259,7 @@ class TableWizard extends \Widget
 			$this->import('Database');
 			$arrTable = array();
 
-			foreach ($this->Input->post('source') as $strCsvFile)
+			foreach (\Input::post('source') as $strCsvFile)
 			{
 				$objFile = new \File($strCsvFile);
 
@@ -270,7 +270,7 @@ class TableWizard extends \Widget
 				}
 
 				// Get separator
-				switch ($this->Input->post('separator'))
+				switch (\Input::post('separator'))
 				{
 					case 'semicolon':
 						$strSeparator = ';';

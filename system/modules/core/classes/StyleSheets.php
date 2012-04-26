@@ -1157,15 +1157,15 @@ class StyleSheets extends \Backend
 		}
 
 		// Import CSS
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_style_sheet_import')
+		if (\Input::post('FORM_SUBMIT') == 'tl_style_sheet_import')
 		{
-			if (!$this->Input->post('source') || !is_array($this->Input->post('source')))
+			if (!\Input::post('source') || !is_array(\Input::post('source')))
 			{
 				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
-			foreach ($this->Input->post('source') as $strCssFile)
+			foreach (\Input::post('source') as $strCssFile)
 			{
 				// Folders cannot be imported
 				if (is_dir(TL_ROOT . '/' . $strCssFile))

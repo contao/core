@@ -159,9 +159,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		// Set IDs and redirect
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_select')
+		if (\Input::post('FORM_SUBMIT') == 'tl_select')
 		{
-			$ids = deserialize($this->Input->post('IDS'));
+			$ids = deserialize(\Input::post('IDS'));
 
 			if (!is_array($ids) || empty($ids))
 			{
@@ -169,7 +169,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 
 			$session = $this->Session->getData();
-			$session['CURRENT']['IDS'] = deserialize($this->Input->post('IDS'));
+			$session['CURRENT']['IDS'] = deserialize(\Input::post('IDS'));
 			$this->Session->setData($session);
 
 			if (isset($_POST['edit']))
@@ -1593,11 +1593,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		$this->blnCreateNewVersion = false;
 
 		// Change version
-		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && $this->Input->post('FORM_SUBMIT') == 'tl_version' && $this->Input->post('version') != '')
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && \Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
 		{
 			$objData = $this->Database->prepare("SELECT * FROM tl_version WHERE fromTable=? AND pid=? AND version=?")
 									  ->limit(1)
-									  ->execute($this->strTable, $this->intId, $this->Input->post('version'));
+									  ->execute($this->strTable, $this->intId, \Input::post('version'));
 
 			if ($objData->numRows)
 			{
@@ -1613,9 +1613,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 								   ->execute($this->intId);
 
 					$this->Database->prepare("UPDATE tl_version SET active=1 WHERE pid=? AND version=?")
-								   ->execute($this->intId, $this->Input->post('version'));
+								   ->execute($this->intId, \Input::post('version'));
 
-					$this->log('Version '.$this->Input->post('version').' of record "'.$this->strTable.'.id='.$this->intId.'" has been restored'.$this->getParentEntries($this->strTable, $this->intId), 'DC_Table edit()', TL_GENERAL);
+					$this->log('Version '.\Input::post('version').' of record "'.$this->strTable.'.id='.$this->intId.'" has been restored'.$this->getParentEntries($this->strTable, $this->intId), 'DC_Table edit()', TL_GENERAL);
 
 					// Trigger the onrestore_callback
 					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback']))
@@ -1625,7 +1625,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 							if (is_array($callback))
 							{
 								$this->import($callback[0]);
-								$this->$callback[0]->$callback[1]($this->intId, $this->strTable, $data, $this->Input->post('version'));
+								$this->$callback[0]->$callback[1]($this->intId, $this->strTable, $data, \Input::post('version'));
 							}
 						}
 					}
@@ -1856,7 +1856,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 <p class="tl_error">'.$GLOBALS['TL_LANG']['ERR']['general'].'</p>' : '').$return;
 
 		// Reload the page to prevent _POST variables from being sent twice
-		if ($this->Input->post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
+		if (\Input::post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
 		{
 			$arrValues = $this->values;
 			array_unshift($arrValues, time());
@@ -1872,7 +1872,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 
 			// Save the current version
-			if ($this->blnCreateNewVersion && $this->Input->post('SUBMIT_TYPE') != 'auto')
+			if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
 			{
 				$this->createNewVersion($this->strTable, $this->intId);
 
@@ -2007,9 +2007,9 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Save field selection in session
-		if ($this->Input->post('FORM_SUBMIT') == $this->strTable.'_all' && $this->Input->get('fields'))
+		if (\Input::post('FORM_SUBMIT') == $this->strTable.'_all' && $this->Input->get('fields'))
 		{
-			$session['CURRENT'][$this->strTable] = deserialize($this->Input->post('all_fields'));
+			$session['CURRENT'][$this->strTable] = deserialize(\Input::post('all_fields'));
 			$this->Session->setData($session);
 		}
 
@@ -2144,7 +2144,7 @@ window.addEvent(\'domready\', function() {
 </div>';
 
 				// Save record
-				if ($this->Input->post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
+				if (\Input::post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
 				{
 					// Call onsubmit_callback
 					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback']))
@@ -2157,7 +2157,7 @@ window.addEvent(\'domready\', function() {
 					}
 
 					// Create a new version
-					if ($this->blnCreateNewVersion && $this->Input->post('SUBMIT_TYPE') != 'auto')
+					if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
 					{
 						$this->createNewVersion($this->strTable, $this->intId);
 
@@ -2217,9 +2217,9 @@ window.addEvent(\'domready\', function() {
 			}
 
 			// Reload the page to prevent _POST variables from being sent twice
-			if ($this->Input->post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
+			if (\Input::post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
 			{
-				if ($this->Input->post('saveNclose'))
+				if (\Input::post('saveNclose'))
 				{
 					setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 					$this->redirect($this->getReferer());
@@ -2326,9 +2326,9 @@ window.addEvent(\'domready\', function() {
 		$ids = $session['CURRENT']['IDS'];
 
 		// Save field selection in session
-		if ($this->Input->post('FORM_SUBMIT') == $this->strTable.'_all' && $this->Input->get('fields'))
+		if (\Input::post('FORM_SUBMIT') == $this->strTable.'_all' && $this->Input->get('fields'))
 		{
-			$session['CURRENT'][$this->strTable] = deserialize($this->Input->post('all_fields'));
+			$session['CURRENT'][$this->strTable] = deserialize(\Input::post('all_fields'));
 			$this->Session->setData($session);
 		}
 
@@ -2342,7 +2342,7 @@ window.addEvent(\'domready\', function() {
 			$this->checkForTinyMce();
 
 			// Save record
-			if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
+			if (\Input::post('FORM_SUBMIT') == $this->strTable)
 			{
 				foreach ($ids as $id)
 				{
@@ -2495,9 +2495,9 @@ window.addEvent(\'domready\', function() {
 			}
 
 			// Reload the page to prevent _POST variables from being sent twice
-			if ($this->Input->post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
+			if (\Input::post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
 			{
-				if ($this->Input->post('saveNclose'))
+				if (\Input::post('saveNclose'))
 				{
 					setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 					$this->redirect($this->getReferer());
@@ -2591,7 +2591,7 @@ window.addEvent(\'domready\', function() {
 	 */
 	protected function save($varValue)
 	{
-		if ($this->Input->post('FORM_SUBMIT') != $this->strTable)
+		if (\Input::post('FORM_SUBMIT') != $this->strTable)
 		{
 			return;
 		}
@@ -2629,7 +2629,7 @@ window.addEvent(\'domready\', function() {
 				$new = deserialize($varValue, true);
 				$old = deserialize($objCurrent->{$this->strField}, true);
 
-				switch ($this->Input->post($this->strInputName . '_update'))
+				switch (\Input::post($this->strInputName . '_update'))
 				{
 					case 'add':
 						$varValue = array_values(array_unique(array_merge($old, $new)));
@@ -2735,13 +2735,13 @@ window.addEvent(\'domready\', function() {
 					$trigger = $objFields->$name;
 
 					// Overwrite the trigger
-					if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
+					if (\Input::post('FORM_SUBMIT') == $this->strTable)
 					{
 						$key = ($this->Input->get('act') == 'editAll') ? $name.'_'.$this->intId : $name;
 
 						if (isset($_POST[$key]))
 						{
-							$trigger = $this->Input->post($key);
+							$trigger = \Input::post($key);
 						}
 					}
 
@@ -4240,7 +4240,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			return '';
 		}
 
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters')
+		if (\Input::post('FORM_SUBMIT') == 'tl_filters')
 		{
 			$this->reload();
 		}
@@ -4323,17 +4323,17 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		}
 
 		// Store search value in the current session
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters')
+		if (\Input::post('FORM_SUBMIT') == 'tl_filters')
 		{
 			$session['search'][$this->strTable]['value'] = '';
-			$session['search'][$this->strTable]['field'] = $this->Input->post('tl_field', true);
+			$session['search'][$this->strTable]['field'] = \Input::post('tl_field', true);
 
 			// Make sure the regular expression is valid
 			if ($this->Input->postRaw('tl_value') != '')
 			{
 				try
 				{
-					$this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . $this->Input->post('tl_field', true) . " REGEXP ?")
+					$this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . \Input::post('tl_field', true) . " REGEXP ?")
 								   ->limit(1)
 								   ->execute($this->Input->postRaw('tl_value'));
 
@@ -4417,9 +4417,9 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		}
 
 		// Set sorting from user input
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters')
+		if (\Input::post('FORM_SUBMIT') == 'tl_filters')
 		{
-			$session['sorting'][$this->strTable] = in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->Input->post('tl_sort')]['flag'], array(2, 4, 6, 8, 10, 12)) ? $this->Input->post('tl_sort').' DESC' : $this->Input->post('tl_sort');
+			$session['sorting'][$this->strTable] = in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][\Input::post('tl_sort')]['flag'], array(2, 4, 6, 8, 10, 12)) ? \Input::post('tl_sort').' DESC' : \Input::post('tl_sort');
 			$this->Session->setData($session);
 		}
 
@@ -4476,11 +4476,11 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		$fields = '';
 
 		// Set limit from user input
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters' || $this->Input->post('FORM_SUBMIT') == 'tl_filters_limit')
+		if (\Input::post('FORM_SUBMIT') == 'tl_filters' || \Input::post('FORM_SUBMIT') == 'tl_filters_limit')
 		{
-			if ($this->Input->post('tl_limit') != 'tl_limit')
+			if (\Input::post('tl_limit') != 'tl_limit')
 			{
-				$session['filter'][$filter]['limit'] = $this->Input->post('tl_limit');
+				$session['filter'][$filter]['limit'] = \Input::post('tl_limit');
 			}
 			else
 			{
@@ -4489,7 +4489,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 			$this->Session->setData($session);
 
-			if ($this->Input->post('FORM_SUBMIT') == 'tl_filters_limit')
+			if (\Input::post('FORM_SUBMIT') == 'tl_filters_limit')
 			{
 				$this->reload();
 			}
@@ -4613,13 +4613,13 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		}
 
 		// Set filter from user input
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters')
+		if (\Input::post('FORM_SUBMIT') == 'tl_filters')
 		{
 			foreach ($sortingFields as $field)
 			{
-				if ($this->Input->post($field, true) != 'tl_'.$field)
+				if (\Input::post($field, true) != 'tl_'.$field)
 				{
-					$session['filter'][$filter][$field] = $this->Input->post($field, true);
+					$session['filter'][$filter][$field] = \Input::post($field, true);
 				}
 				else
 				{

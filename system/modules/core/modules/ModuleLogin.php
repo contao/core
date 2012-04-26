@@ -78,10 +78,10 @@ class ModuleLogin extends \Module
 		}
 
 		// Login
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_login')
+		if (\Input::post('FORM_SUBMIT') == 'tl_login')
 		{
 			// Check whether username and password are set
-			if (!$this->Input->post('username') || !strlen(trim($this->Input->post('password'))))
+			if (!\Input::post('username') || !strlen(trim(\Input::post('password'))))
 			{
 				$_SESSION['LOGIN_ERROR'] = $GLOBALS['TL_LANG']['MSC']['emptyField'];
 				$this->reload();
@@ -104,7 +104,7 @@ class ModuleLogin extends \Module
 				}
 
 				// Overwrite the jumpTo page with an individual group setting
-				$objMember = \MemberModel::findByUsername($this->Input->post('username'));
+				$objMember = \MemberModel::findByUsername(\Input::post('username'));
 
 				if ($objMember !== null)
 				{
@@ -139,7 +139,7 @@ class ModuleLogin extends \Module
 		}
 
 		// Logout and redirect to the website root if the current page is protected
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_logout')
+		if (\Input::post('FORM_SUBMIT') == 'tl_logout')
 		{
 			global $objPage;
 
@@ -225,7 +225,7 @@ class ModuleLogin extends \Module
 		$this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
 		$this->Template->action = $this->getIndexFreeRequest();
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['login']);
-		$this->Template->value = specialchars($this->Input->post('username'));
+		$this->Template->value = specialchars(\Input::post('username'));
 		$this->Template->autologin = ($this->autologin && $GLOBALS['TL_CONFIG']['autologin'] > 0);
 		$this->Template->autoLabel = $GLOBALS['TL_LANG']['MSC']['autologin'];
 	}

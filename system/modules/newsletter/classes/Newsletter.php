@@ -412,9 +412,9 @@ class Newsletter extends \Backend
 		}
 
 		// Import CSS
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_recipients_import')
+		if (\Input::post('FORM_SUBMIT') == 'tl_recipients_import')
 		{
-			if (!$this->Input->post('source') || !is_array($this->Input->post('source')))
+			if (!\Input::post('source') || !is_array(\Input::post('source')))
 			{
 				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
@@ -424,7 +424,7 @@ class Newsletter extends \Backend
 			$intTotal = 0;
 			$intInvalid = 0;
 
-			foreach ($this->Input->post('source') as $strCsvFile)
+			foreach (\Input::post('source') as $strCsvFile)
 			{
 				$objFile = new \File($strCsvFile);
 
@@ -435,7 +435,7 @@ class Newsletter extends \Backend
 				}
 
 				// Get separator
-				switch ($this->Input->post('separator'))
+				switch (\Input::post('separator'))
 				{
 					case 'semicolon':
 						$strSeparator = ';';
@@ -727,7 +727,7 @@ class Newsletter extends \Backend
 
 			if ($objUser->numRows)
 			{
-				$strEmail = $this->Input->post('email', true);
+				$strEmail = \Input::post('email', true);
 
 				// E-mail address has changed
 				if (!empty($_POST) && $strEmail != '' && $strEmail != $objUser->email)
@@ -760,12 +760,12 @@ class Newsletter extends \Backend
 				}
 
 				// Check activation status
-				elseif (!empty($_POST) && $this->Input->post('disable') != $objUser->disable)
+				elseif (!empty($_POST) && \Input::post('disable') != $objUser->disable)
 				{
 					$this->Database->prepare("UPDATE tl_newsletter_recipients SET active=? WHERE email=?")
-								   ->execute(($this->Input->post('disable') ? '' : 1), $objUser->email);
+								   ->execute((\Input::post('disable') ? '' : 1), $objUser->email);
 
-					$objUser->disable = $this->Input->post('disable');
+					$objUser->disable = \Input::post('disable');
 				}
 			}
 		}

@@ -84,7 +84,7 @@ class PagePicker extends Backend
 		// Ajax request
 		if ($_POST && \Environment::get('isAjaxRequest'))
 		{
-			$this->objAjax = new \Ajax($this->Input->post('action'));
+			$this->objAjax = new \Ajax(\Input::post('action'));
 			$this->objAjax->executePreActions();
 		}
 

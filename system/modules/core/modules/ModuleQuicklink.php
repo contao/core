@@ -72,11 +72,11 @@ class ModuleQuicklink extends \Module
 		}
 
 		// Redirect to selected page
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_quicklink')
+		if (\Input::post('FORM_SUBMIT') == 'tl_quicklink')
 		{
-			if (strlen($this->Input->post('target', true)))
+			if (strlen(\Input::post('target', true)))
 			{
-				$this->redirect($this->Input->post('target', true));
+				$this->redirect(\Input::post('target', true));
 			}
 
 			$this->reload();
