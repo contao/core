@@ -101,7 +101,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			if (!isset($_GET['rt']) || !\RequestToken::validate($this->Input->get('rt')))
 			{
-				$this->Session->set('INVALID_TOKEN_URL', $this->Environment->request);
+				$this->Session->set('INVALID_TOKEN_URL', \Environment::get('request'));
 				$this->redirect('contao/confirm.php');
 			}
 		}
@@ -145,11 +145,11 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			if (isset($_POST['edit']))
 			{
-				$this->redirect(str_replace('act=select', 'act=editAll', $this->Environment->request));
+				$this->redirect(str_replace('act=select', 'act=editAll', \Environment::get('request')));
 			}
 			elseif (isset($_POST['delete']))
 			{
-				$this->redirect(str_replace('act=select', 'act=deleteAll', $this->Environment->request));
+				$this->redirect(str_replace('act=select', 'act=deleteAll', \Environment::get('request')));
 			}
 			elseif (isset($_POST['cut']) || isset($_POST['copy']))
 			{
@@ -271,7 +271,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			$this->Session->setData($session);
-			$this->redirect(preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', $this->Environment->request));
+			$this->redirect(preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', \Environment::get('request')));
 		}
 
 		$blnClipboard = false;
@@ -328,7 +328,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <a href="'.$this->addToUrl($hrfNew).'" class="'.$clsNew.'" title="'.specialchars($ttlNew).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$lblNew.'</a>' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? ' &nbsp; :: &nbsp; <a href="'.$this->addToUrl('&amp;act=paste&amp;mode=move').'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['move'][1]).'" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['move'][0].'</a>' : '') . $this->generateGlobalButtons(true) : '') . ($blnClipboard ? '<a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="x">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a>' : '') . '
 </div>' . (($this->Input->get('act') == 'select') ? '
 
-<form action="'.ampersand($this->Environment->request, true).'" id="tl_select" class="tl_form" method="post">
+<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post">
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_select">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">' : '').($blnClipboard ? '
@@ -1027,7 +1027,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 <h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_files']['uploadFF'], basename($strFolder)).'</h2>
 '.$this->getMessages().'
-<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').' enctype="multipart/form-data">
+<form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').' enctype="multipart/form-data">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_upload">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
@@ -1248,7 +1248,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				$version = '
 <div class="tl_version_panel">
 
-<form action="'.ampersand($this->Environment->request, true).'" id="tl_version" class="tl_form" method="post">
+<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_version" class="tl_form" method="post">
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_version">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
@@ -1286,7 +1286,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_files']['editFF'].'</h2>
 '.$this->getMessages().'
-<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
+<form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">'.($this->noReload ? '
@@ -1520,7 +1520,7 @@ window.addEvent(\'domready\', function() {
 
 <h2 class="sub_headline_all">'.sprintf($GLOBALS['TL_LANG']['MSC']['all_info'], $this->strTable).'</h2>
 
-<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post">
+<form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.$this->strTable.'">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">'.($this->noReload ? '
@@ -1590,7 +1590,7 @@ window.addEvent(\'domready\', function() {
 
 <h2 class="sub_headline_all">'.sprintf($GLOBALS['TL_LANG']['MSC']['all_info'], $this->strTable).'</h2>
 
-<form action="'.ampersand($this->Environment->request, true).'&amp;fields=1" id="'.$this->strTable.'_all" class="tl_form" method="post">
+<form action="'.ampersand(\Environment::get('request'), true).'&amp;fields=1" id="'.$this->strTable.'_all" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.$this->strTable.'_all">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">'.($blnIsError ? '
@@ -1765,7 +1765,7 @@ window.addEvent(\'domready\', function() {
 
 <h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_files']['editFile'], $objFile->basename).'</h2>
 '.$this->getMessages().'
-<form action="'.ampersand($this->Environment->request, true).'" id="tl_files" class="tl_form" method="post">
+<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_files" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_files">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
@@ -2309,7 +2309,7 @@ window.addEvent(\'domready\', function() {
 	 */
 	public function ajaxTreeView($strFolder, $level)
 	{
-		if (!$this->Environment->isAjaxRequest)
+		if (!\Environment::get('isAjaxRequest'))
 		{
 			return '';
 		}
@@ -2348,7 +2348,7 @@ window.addEvent(\'domready\', function() {
 		{
 			$session['filetree'][$this->Input->get('tg')] = (isset($session['filetree'][$this->Input->get('tg')]) && $session['filetree'][$this->Input->get('tg')] == 1) ? 0 : 1;
 			$this->Session->setData($session);
-			$this->redirect(preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', $this->Environment->request));
+			$this->redirect(preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', \Environment::get('request')));
 		}
 
 		$return = '';
@@ -2509,7 +2509,7 @@ window.addEvent(\'domready\', function() {
 			$strFileNameEncoded = utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']);
 
 			// No popup links for templates and in the popup file manager
-			if ($this->strTable == 'tl_templates' || basename($this->Environment->scriptName) == 'files.php')
+			if ($this->strTable == 'tl_templates' || basename(\Environment::get('scriptName')) == 'files.php')
 			{
 				$return .= $this->generateImage($objFile->icon).' '.$strFileNameEncoded.$thumbnail.'</div> <div class="tl_right">';
 			}

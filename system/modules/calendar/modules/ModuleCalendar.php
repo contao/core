@@ -91,7 +91,7 @@ class ModuleCalendar extends \Events
 			return '';
 		}
 
-		$this->strUrl = preg_replace('/\?.*$/i', '', $this->Environment->request);
+		$this->strUrl = preg_replace('/\?.*$/i', '', \Environment::get('request'));
 		$this->strLink = $this->strUrl;
 
 		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)

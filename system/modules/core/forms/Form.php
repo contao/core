@@ -222,7 +222,7 @@ class Form extends \Hybrid
 		}
 
 		// Add a warning to the page title
-		if ($doNotSubmit && !$this->Environment->isAjax)
+		if ($doNotSubmit && !\Environment::get('isAjax'))
 		{
 			global $objPage;
 			$title = $objPage->pageTitle ?: $objPage->title;
@@ -381,7 +381,7 @@ class Form extends \Hybrid
 					// Add a link to the uploaded file
 					if ($file['uploaded'])
 					{
-						$uploaded .= "\n" . $this->Environment->base . str_replace(TL_ROOT . '/', '', dirname($file['tmp_name'])) . '/' . rawurlencode($file['name']);
+						$uploaded .= "\n" . \Environment::get('base') . str_replace(TL_ROOT . '/', '', dirname($file['tmp_name'])) . '/' . rawurlencode($file['name']);
 						continue;
 					}
 
@@ -473,7 +473,7 @@ class Form extends \Hybrid
 		}
 		else
 		{
-			$this->log('Form "' . $this->title . '" has been submitted by ' . $this->Environment->ip . '.', 'Form processFormData()', TL_FORMS);
+			$this->log('Form "' . $this->title . '" has been submitted by ' . \Environment::get('ip') . '.', 'Form processFormData()', TL_FORMS);
 		}
 
 		$this->jumpToOrReload($this->jumpTo);

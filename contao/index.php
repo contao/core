@@ -113,12 +113,12 @@ class Index extends Backend
 
 		$this->Template->theme = $this->getTheme();
 		$this->Template->messages = $this->getMessages();
-		$this->Template->base = $this->Environment->base;
+		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->languages = $this->getBackendLanguages();
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->action = ampersand($this->Environment->request);
+		$this->Template->action = ampersand(\Environment::get('request'));
 		$this->Template->userLanguage = $GLOBALS['TL_LANG']['tl_user']['language'][0];
 		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['MSC']['loginTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
 		$this->Template->curLanguage = $this->Input->post('language') ? $this->Input->post('language') : $GLOBALS['TL_LANGUAGE'];
@@ -129,7 +129,7 @@ class Index extends Backend
 		$this->Template->username = $GLOBALS['TL_LANG']['tl_user']['username'][0];
 		$this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
 		$this->Template->feLink = $GLOBALS['TL_LANG']['MSC']['feLink'];
-		$this->Template->frontendFile = $this->Environment->base;
+		$this->Template->frontendFile = \Environment::get('base');
 		$this->Template->disableCron = $GLOBALS['TL_CONFIG']['disableCron'];
 		$this->Template->ie6warning = sprintf($GLOBALS['TL_LANG']['ERR']['ie6warning'], '<a href="http://ie6countdown.com">', '</a>');
 

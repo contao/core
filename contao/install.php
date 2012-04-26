@@ -58,11 +58,6 @@ class InstallTool extends Backend
 	 */
 	public function __construct()
 	{
-		$this->import('Config');
-		$this->import('Input');
-		$this->import('Environment');
-		$this->import('Session');
-
 		$GLOBALS['TL_CONFIG']['showHelp'] = false;
 		$GLOBALS['TL_CONFIG']['displayErrors'] = true;
 
@@ -115,7 +110,7 @@ class InstallTool extends Backend
 		}
 
 		// Set the website path
-		if ($GLOBALS['TL_CONFIG']['websitePath'] !== null && !preg_match('/^' . preg_quote(TL_PATH, '/') . '\/contao\/' . preg_quote(basename(__FILE__), '/') . '/', $this->Environment->requestUri))
+		if ($GLOBALS['TL_CONFIG']['websitePath'] !== null && !preg_match('/^' . preg_quote(TL_PATH, '/') . '\/contao\/' . preg_quote(basename(__FILE__), '/') . '/', \Environment::get('requestUri')))
 		{
 			$this->Config->delete("\$GLOBALS['TL_CONFIG']['websitePath']");
 			$this->reload();
@@ -744,7 +739,7 @@ class InstallTool extends Backend
 	protected function setAuthCookie()
 	{
 		$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
-		$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid(mt_rand(), true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
+		$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid(mt_rand(), true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . session_id());
 		$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
 	}
 
@@ -756,11 +751,11 @@ class InstallTool extends Backend
 	protected function outputAndExit()
 	{
 		$this->Template->theme = $this->getTheme();
-		$this->Template->base = $this->Environment->base;
+		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->pageOffset = $this->Input->cookie('BE_PAGE_OFFSET');
-		$this->Template->action = ampersand($this->Environment->request);
+		$this->Template->action = ampersand(\Environment::get('request'));
 		$this->Template->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
 		$this->Template->title = $GLOBALS['TL_LANG']['tl_install']['installTool'][0];
 		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];

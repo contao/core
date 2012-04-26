@@ -73,7 +73,7 @@ class Preview extends Backend
 	{
 		$this->Template = new \BackendTemplate('be_preview');
 
-		$this->Template->base = $this->Environment->base;
+		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
@@ -85,7 +85,7 @@ class Preview extends Backend
 		}
 		else
 		{
-			$this->Template->url = $this->Environment->base;
+			$this->Template->url = \Environment::get('base');
 		}
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;

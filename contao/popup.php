@@ -126,7 +126,7 @@ class Popup extends Backend
 			fclose($resFile);
 			ob_flush(); // see #3595
 
-			$this->redirect(str_replace('&download=1', '', $this->Environment->request));
+			$this->redirect(str_replace('&download=1', '', \Environment::get('request')));
 		}
 
 		$this->Template = new \BackendTemplate('be_popup');
@@ -160,11 +160,11 @@ class Popup extends Backend
 	protected function output()
 	{
 		$this->Template->theme = $this->getTheme();
-		$this->Template->base = $this->Environment->base;
+		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->href = ampersand($this->Environment->request, true) . '&amp;download=1';
+		$this->Template->href = ampersand(\Environment::get('request'), true) . '&amp;download=1';
 		$this->Template->headline = basename(utf8_convert_encoding($this->strFile, $GLOBALS['TL_CONFIG']['characterSet']));
 		$this->Template->label_imagesize = $GLOBALS['TL_LANG']['MSC']['fileImageSize'];
 		$this->Template->label_filesize = $GLOBALS['TL_LANG']['MSC']['fileSize'];

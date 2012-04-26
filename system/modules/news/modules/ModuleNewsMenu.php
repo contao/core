@@ -136,7 +136,7 @@ class ModuleNewsMenu extends \ModuleNews
 		$arrItems = array();
 		$count = 0;
 		$limit = count($arrData);
-		$strUrl = $this->Environment->request;
+		$strUrl = \Environment::get('request');
 
 		// Get the current "jumpTo" page
 		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
@@ -246,7 +246,7 @@ class ModuleNewsMenu extends \ModuleNews
 
 		// Sort the data
 		krsort($arrData);
-		$strUrl = $this->Environment->request;
+		$strUrl = \Environment::get('request');
 
 		// Get the current "jumpTo" page
 		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)

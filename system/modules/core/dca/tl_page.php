@@ -899,7 +899,7 @@ class tl_page extends Backend
 		if (isset($_GET['node']))
 		{
 			$this->Session->set('tl_page_node', $this->Input->get('node'));
-			$this->redirect(preg_replace('/&node=[^&]*/', '', $this->Environment->request));
+			$this->redirect(preg_replace('/&node=[^&]*/', '', \Environment::get('request')));
 		}
 
 		$intNode = $this->Session->get('tl_page_node');
@@ -1278,7 +1278,7 @@ class tl_page extends Backend
 	{
 		if ($varValue != '' && !preg_match('@^https?://@', $varValue))
 		{
-			$varValue = ($this->Environment->ssl ? 'https://' : 'http://') . $varValue;
+			$varValue = (\Environment::get('ssl') ? 'https://' : 'http://') . $varValue;
 		}
 
 		return $varValue;

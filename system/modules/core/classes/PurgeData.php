@@ -190,7 +190,7 @@ class PurgeData extends \Backend implements \executable
 		}
 
 		$objTemplate->jobs = $arrJobs;
-		$objTemplate->action = ampersand($this->Environment->request);
+		$objTemplate->action = ampersand(\Environment::get('request'));
 		$objTemplate->headline = $GLOBALS['TL_LANG']['tl_maintenance']['clearCache'];
 		$objTemplate->job = $GLOBALS['TL_LANG']['tl_maintenance']['job'];
 		$objTemplate->description = $GLOBALS['TL_LANG']['tl_maintenance']['description'];

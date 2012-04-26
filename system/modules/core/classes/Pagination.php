@@ -213,7 +213,7 @@ class Pagination extends \Frontend
 		}
 
 		$blnQuery = false;
-		$this->strUrl = preg_replace('/\?.*$/', '', $this->Environment->request);
+		$this->strUrl = preg_replace('/\?.*$/', '', \Environment::get('request'));
 
 		// Prepare the URL
 		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING'], -1, PREG_SPLIT_NO_EMPTY) as $fragment)

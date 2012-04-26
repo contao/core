@@ -9,7 +9,7 @@ $GoogleAnalyticsId = 'UA-XXXXX-X';
 /**
  * DO NOT EDIT ANYTHING BELOW THIS LINE UNLESS YOU KNOW WHAT YOU ARE DOING!
  */
-if ($GoogleAnalyticsId != 'UA-XXXXX-X' && !BE_USER_LOGGED_IN && sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . 'BE_USER_AUTH') != $this->Input->cookie('BE_USER_AUTH')): ?>
+if ($GoogleAnalyticsId != 'UA-XXXXX-X' && !BE_USER_LOGGED_IN && sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . 'BE_USER_AUTH') != $this->Input->cookie('BE_USER_AUTH')): ?>
 
 <script type="text/javascript">
 /* <![CDATA[ */

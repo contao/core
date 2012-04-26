@@ -441,7 +441,7 @@ EOT
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']);
 		$this->Template->button = $GLOBALS['TL_LANG']['MSC']['backBT'];
 		$this->Template->headline = $GLOBALS['TL_LANG']['tl_merge']['headline'];
-		$this->Template->action = ampersand($this->Environment->request);
+		$this->Template->action = ampersand(\Environment::get('request'));
 		$this->Template->available = $GLOBALS['TL_LANG']['tl_merge']['available'];
 		$this->Template->selectAll = $GLOBALS['TL_LANG']['MSC']['selectAll'];
 		$this->Template->override = $GLOBALS['TL_LANG']['tl_merge']['override'];

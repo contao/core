@@ -181,7 +181,7 @@ class PageSelector extends \Widget
 	 */
 	public function generateAjax($id, $strField, $level)
 	{
-		if (!$this->Environment->isAjaxRequest)
+		if (!\Environment::get('isAjaxRequest'))
 		{
 			return '';
 		}
@@ -256,7 +256,7 @@ class PageSelector extends \Widget
 		{
 			$session[$node][$this->Input->get($flag.'tg')] = (isset($session[$node][$this->Input->get($flag.'tg')]) && $session[$node][$this->Input->get($flag.'tg')] == 1) ? 0 : 1;
 			$this->Session->setData($session);
-			$this->redirect(preg_replace('/(&(amp;)?|\?)'.$flag.'tg=[^& ]*/i', '', $this->Environment->request));
+			$this->redirect(preg_replace('/(&(amp;)?|\?)'.$flag.'tg=[^& ]*/i', '', \Environment::get('request')));
 		}
 
 		$objPage = $this->Database->prepare("SELECT id, alias, type, protected, published, start, stop, hide, title FROM tl_page WHERE id=?")

@@ -78,12 +78,12 @@ class ModuleLabels extends \BackendModule
 		}
 
 		$this->Template->options = $strOptions;
-		$this->Template->base = $this->Environment->base;
+		$this->Template->base = \Environment::get('base');
 		$this->Template->button = $GLOBALS['TL_LANG']['MSC']['backBT'];
 		$this->Template->selectAll = $GLOBALS['TL_LANG']['MSC']['selectAll'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']);
-		$this->Template->href = ($this->Input->post('FORM_SUBMIT') == 'tl_labels') ? $this->Environment->request : $this->getReferer(true);
-		$this->Template->action = ampersand($this->Environment->request);
+		$this->Template->href = ($this->Input->post('FORM_SUBMIT') == 'tl_labels') ? \Environment::get('request') : $this->getReferer(true);
+		$this->Template->action = ampersand(\Environment::get('request'));
 		$this->Template->warning = $GLOBALS['TL_LANG']['tl_labels']['warning'];
 		$this->Template->error = $GLOBALS['TL_LANG']['tl_labels']['error'];
 		$this->Template->ok = $GLOBALS['TL_LANG']['tl_labels']['ok'];

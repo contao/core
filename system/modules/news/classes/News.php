@@ -114,7 +114,7 @@ class News extends \Frontend
 		}
 
 		$strType = ($arrFeed['format'] == 'atom') ? 'generateAtom' : 'generateRss';
-		$strLink = $arrFeed['feedBase'] ?: $this->Environment->base;
+		$strLink = $arrFeed['feedBase'] ?: \Environment::get('base');
 		$strFile = $arrFeed['feedName'];
 
 		$objFeed = new \Feed($strFile);
@@ -238,12 +238,12 @@ class News extends \Frontend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objArchive->jumpTo]))
 				{
-					$domain = $this->Environment->base;
+					$domain = \Environment::get('base');
 					$objParent = $this->getPageDetails($objArchive->jumpTo);
 
 					if ($objParent->domain != '')
 					{
-						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
+						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
 					$arrProcessed[$objArchive->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);

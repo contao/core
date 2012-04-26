@@ -112,7 +112,7 @@ class Newsletter extends \Backend
 		// Send newsletter
 		if ($this->Input->get('token') != '' && $this->Input->get('token') == $this->Session->get('tl_newsletter_send'))
 		{
-			$referer = preg_replace('/&(amp;)?(start|mpc|token|recipient|preview)=[^&]*/', '', $this->Environment->request);
+			$referer = preg_replace('/&(amp;)?(start|mpc|token|recipient|preview)=[^&]*/', '', \Environment::get('request'));
 
 			// Preview
 			if (isset($_GET['preview']))
@@ -207,17 +207,17 @@ class Newsletter extends \Backend
 
 				$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], $intTotal));
 
-				echo '<script>setTimeout(\'window.location="' . $this->Environment->base . $referer . '"\', 1000);</script>';
-				echo '<a href="' . $this->Environment->base . $referer . '">Please click here to proceed if you are not using JavaScript</a>';
+				echo '<script>setTimeout(\'window.location="' . \Environment::get('base') . $referer . '"\', 1000);</script>';
+				echo '<a href="' . \Environment::get('base') . $referer . '">Please click here to proceed if you are not using JavaScript</a>';
 			}
 
 			// Redirect to the next cycle
 			else
 			{
-				$url = preg_replace('/&(amp;)?(start|mpc|recipient)=[^&]*/', '', $this->Environment->request) . '&start=' . ($intStart + $intPages) . '&mpc=' . $intPages;
+				$url = preg_replace('/&(amp;)?(start|mpc|recipient)=[^&]*/', '', \Environment::get('request')) . '&start=' . ($intStart + $intPages) . '&mpc=' . $intPages;
 
-				echo '<script>setTimeout(\'window.location="' . $this->Environment->base . $url . '"\', ' . ($intTimeout * 1000) . ');</script>';
-				echo '<a href="' . $this->Environment->base . $url . '">Please click here to proceed if you are not using JavaScript</a>';
+				echo '<script>setTimeout(\'window.location="' . \Environment::get('base') . $url . '"\', ' . ($intTimeout * 1000) . ');</script>';
+				echo '<a href="' . \Environment::get('base') . $url . '">Please click here to proceed if you are not using JavaScript</a>';
 			}
 
 			echo '</div></div>';
@@ -237,7 +237,7 @@ class Newsletter extends \Backend
 
 <h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_newsletter']['send'][1], $objNewsletter->id).'</h2>
 '.$this->getMessages().'
-<form action="'.ampersand($this->Environment->script, true).'" id="tl_newsletter_send" class="tl_form" method="get">
+<form action="'.ampersand(\Environment::get('script'), true).'" id="tl_newsletter_send" class="tl_form" method="get">
 <div class="tl_formbody_edit tl_newsletter_send">
 <input type="hidden" name="do" value="' . $this->Input->get('do') . '">
 <input type="hidden" name="table" value="' . $this->Input->get('table') . '">
@@ -505,12 +505,12 @@ class Newsletter extends \Backend
 		// Return form
 		return '
 <div id="tl_buttons">
-<a href="'.ampersand(str_replace('&key=import', '', $this->Environment->request)).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
+<a href="'.ampersand(str_replace('&key=import', '', \Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'][1].'</h2>
 '.$this->getMessages().'
-<form action="'.ampersand($this->Environment->request, true).'" id="tl_recipients_import" class="tl_form" method="post">
+<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_recipients_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_recipients_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
@@ -576,7 +576,7 @@ class Newsletter extends \Backend
 			if ($objRecipient->count < 1)
 			{
 				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=$time, email=?, addedOn=$time, ip=?")
-							   ->execute($intNewsletter, $arrData['email'], $this->anonymizeIp($this->Environment->ip));
+							   ->execute($intNewsletter, $arrData['email'], $this->anonymizeIp(\Environment::get('ip')));
 			}
 		}
 	}
@@ -689,7 +689,7 @@ class Newsletter extends \Backend
 			if ($objRecipient->count < 1)
 			{
 				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=$time, email=?, active=?, addedOn=?, ip=?")
-							   ->execute($intId, $objUser->email, ($objUser->disable ? '' : 1), ($blnIsFrontend ? $time : ''), ($blnIsFrontend ? $this->anonymizeIp($this->Environment->ip) : ''));
+							   ->execute($intId, $objUser->email, ($objUser->disable ? '' : 1), ($blnIsFrontend ? $time : ''), ($blnIsFrontend ? $this->anonymizeIp(\Environment::get('ip')) : ''));
 			}
 		}
 
@@ -874,12 +874,12 @@ class Newsletter extends \Backend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objNewsletter->jumpTo]))
 				{
-					$domain = $this->Environment->base;
+					$domain = \Environment::get('base');
 					$objParent = $this->getPageDetails($objNewsletter->jumpTo);
 
 					if ($objParent->domain != '')
 					{
-						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
+						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
 					$arrProcessed[$objNewsletter->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);

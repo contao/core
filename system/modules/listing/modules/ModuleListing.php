@@ -205,7 +205,7 @@ class ModuleListing extends \Module
 		/**
 		 * Prepare the URL
 		 */
-		$strUrl = preg_replace('/\?.*$/', '', $this->Environment->request);
+		$strUrl = preg_replace('/\?.*$/', '', \Environment::get('request'));
 		$blnQuery = false;
 
 		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING']) as $fragment)

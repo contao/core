@@ -120,7 +120,7 @@ class Model_Collection extends \System
 
 		if (isset($this->arrModels[$this->intIndex]->$strKey))
 		{
-			$this->arrModels[$this->intIndex]->$strKey;
+			return $this->arrModels[$this->intIndex]->$strKey;
 		}
 
 		return null;

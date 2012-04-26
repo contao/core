@@ -78,7 +78,7 @@ class ModuleLogout extends \Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$strRedirect = $this->Environment->base;
+		$strRedirect = \Environment::get('base');
 
 		// Redirect to last page visited
 		if ($this->redirectBack && !empty($_SESSION['LAST_PAGE_VISITED']))

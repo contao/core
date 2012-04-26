@@ -68,7 +68,7 @@ class RebuildIndex extends \Backend implements \executable
 
 		$time = time();
 		$objTemplate = new \BackendTemplate('be_rebuild_index');
-		$objTemplate->action = ampersand($this->Environment->request);
+		$objTemplate->action = ampersand(\Environment::get('request'));
 		$objTemplate->indexHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['searchIndex'];
 		$objTemplate->isActive = $this->isActive();
 
@@ -85,7 +85,7 @@ class RebuildIndex extends \Backend implements \executable
 			// Check the request token (see #4007)
 			if (!isset($_GET['rt']) || !\RequestToken::validate($this->Input->get('rt')))
 			{
-				$this->Session->set('INVALID_TOKEN_URL', $this->Environment->request);
+				$this->Session->set('INVALID_TOKEN_URL', \Environment::get('request'));
 				$this->redirect('contao/confirm.php');
 			}
 
@@ -116,7 +116,7 @@ class RebuildIndex extends \Backend implements \executable
 			$this->setCookie('FE_PREVIEW', 0, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
 
 			// Calculate the hash
-			$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . 'FE_USER_AUTH');
+			$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . 'FE_USER_AUTH');
 
 			// Remove old sessions
 			$this->Database->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")
@@ -127,7 +127,7 @@ class RebuildIndex extends \Backend implements \executable
 			{
 				// Insert a new session
 				$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
-							   ->execute($this->Input->get('user'), $time, 'FE_USER_AUTH', session_id(), $this->Environment->ip, $strHash);
+							   ->execute($this->Input->get('user'), $time, 'FE_USER_AUTH', session_id(), \Environment::get('ip'), $strHash);
 
 				// Set the cookie
 				$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);

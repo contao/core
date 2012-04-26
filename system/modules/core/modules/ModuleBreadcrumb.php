@@ -110,7 +110,7 @@ class ModuleBreadcrumb extends \Module
 			(
 				'isRoot'   => true,
 				'isActive' => false,
-				'href'     => (($objFirstPage !== null) ? $this->generateFrontendUrl($objFirstPage->row()) : $this->Environment->base),
+				'href'     => (($objFirstPage !== null) ? $this->generateFrontendUrl($objFirstPage->row()) : \Environment::get('base')),
 				'title'    => specialchars($objPages->pageTitle ?: $objPages->title, true),
 				'link'     => $objPages->title,
 				'data'     => $objFirstPage->row()

@@ -433,7 +433,7 @@ class Email extends \System
 
 				$arrMatches = array();
 				preg_match_all('/(src=|url\()"([^"]+\.(jpe?g|png|gif|bmp|tiff?|swf))"/Ui', $this->strHtml, $arrMatches);
-				$strBase = Environment::getInstance()->base;
+				$strBase = \Environment::get('base');
 
 				// Check for internal images
 				foreach (array_unique($arrMatches[2]) as $url)

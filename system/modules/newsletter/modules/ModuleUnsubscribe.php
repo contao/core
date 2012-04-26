@@ -216,14 +216,14 @@ class ModuleUnsubscribe extends \Module
 		}
 
 		// Prepare the e-mail text
-		$strText = str_replace('##domain##', $this->Environment->host, $this->nl_unsubscribe);
+		$strText = str_replace('##domain##', \Environment::get('host'), $this->nl_unsubscribe);
 		$strText = str_replace(array('##channel##', '##channels##'), implode("\n", $arrChannels), $strText);
 
 		// Confirmation e-mail
 		$objEmail = new \Email();
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
-		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], $this->Environment->host);
+		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], \Environment::get('host'));
 		$objEmail->text = $strText;
 		$objEmail->sendTo($varInput);
 

@@ -86,12 +86,12 @@ class ModuleFaq extends \Frontend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objFaq->jumpTo]))
 				{
-					$domain = $this->Environment->base;
+					$domain = \Environment::get('base');
 					$objParent = $this->getPageDetails($objFaq->jumpTo);
 
 					if ($objParent->domain != '')
 					{
-						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
+						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
 					$arrProcessed[$objFaq->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);

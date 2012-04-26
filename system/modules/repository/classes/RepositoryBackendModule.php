@@ -173,7 +173,7 @@ class RepositoryBackendModule extends BackendModule
 	 */
 	protected function createPageUrl($aPage, $aParams = null)
 	{
-		$url = $this->Environment->script . '?do='.$aPage;
+		$url = \Environment::get('script') . '?do='.$aPage;
 		if (is_array($aParams)) {
 			foreach ($aParams as $key => $val)
 				if ($val!='')

@@ -179,11 +179,11 @@ class ModuleArticle extends \Module
 			// Remove the "/articles/…" part from the URL
 			if ($GLOBALS['TL_CONFIG']['disableAlias'])
 			{
-				$this->Template->backlink = preg_replace('@&(amp;)?articles=[^&]+@', '', $this->Environment->request);
+				$this->Template->backlink = preg_replace('@&(amp;)?articles=[^&]+@', '', \Environment::get('request'));
 			}
 			else
 			{
-				$this->Template->backlink = preg_replace('@/articles/[^/]+@', '', $this->Environment->request) . $GLOBALS['TL_CONFIG']['urlSuffix'];
+				$this->Template->backlink = preg_replace('@/articles/[^/]+@', '', \Environment::get('request')) . $GLOBALS['TL_CONFIG']['urlSuffix'];
 			}
 		}
 
@@ -235,7 +235,7 @@ class ModuleArticle extends \Module
 			$request = $this->getIndexFreeRequest(true);
 
 			$this->Template->print = '#';
-			$this->Template->encUrl = rawurlencode($this->Environment->base . $this->Environment->request);
+			$this->Template->encUrl = rawurlencode(\Environment::get('base') . \Environment::get('request'));
 			$this->Template->encTitle = rawurlencode($objPage->pageTitle);
 			$this->Template->href = $request . ((strpos($request, '?') !== false) ? '&amp;' : '?') . 'pdf=' . $this->id;
 

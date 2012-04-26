@@ -102,7 +102,7 @@ class Main extends Backend
 		$this->Template->main = '';
 
 		// Ajax request
-		if ($_POST && $this->Environment->isAjaxRequest)
+		if ($_POST && \Environment::get('isAjaxRequest'))
 		{
 			$this->objAjax = new \Ajax($this->Input->post('action'));
 			$this->objAjax->executePreActions();
@@ -234,7 +234,7 @@ class Main extends Backend
 		}
 
 		$this->Template->theme = $this->getTheme();
-		$this->Template->base = $this->Environment->base;
+		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
@@ -247,7 +247,7 @@ class Main extends Backend
 		$this->Template->backendModules = $GLOBALS['TL_LANG']['MSC']['backendModules'];
 		$this->Template->username = $GLOBALS['TL_LANG']['MSC']['user'] . ' ' . $GLOBALS['TL_USERNAME'];
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
-		$this->Template->request = ampersand($this->Environment->request);
+		$this->Template->request = ampersand(\Environment::get('request'));
 		$this->Template->top = $GLOBALS['TL_LANG']['MSC']['backToTop'];
 		$this->Template->modules = $this->User->navigation();
 		$this->Template->home = $GLOBALS['TL_LANG']['MSC']['home'];

@@ -164,7 +164,7 @@ class tl_templates extends Backend
 		if (isset($_GET['node']))
 		{
 			$this->Session->set('tl_templates_node', $this->Input->get('node', true));
-			$this->redirect(preg_replace('/(&|\?)node=[^&]*/', '', $this->Environment->request));
+			$this->redirect(preg_replace('/(&|\?)node=[^&]*/', '', \Environment::get('request')));
 		}
 
 		$strNode = $this->Session->get('tl_templates_node');
@@ -305,7 +305,7 @@ class tl_templates extends Backend
 <p class="tl_error">'.$strError.'</p>
 </div>' : '').'
 
-<form action="'.ampersand($this->Environment->request).'" id="tl_create_template" class="tl_form" method="post">
+<form action="'.ampersand(\Environment::get('request')).'" id="tl_create_template" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_create_template">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">

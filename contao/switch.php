@@ -72,7 +72,7 @@ class PreviewSwitch extends Backend
 	public function run()
 	{
 		$intUser = null;
-		$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . 'FE_USER_AUTH');
+		$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . 'FE_USER_AUTH');
 
 		// Get the front end user
 		if (FE_USER_LOGGED_IN)
@@ -124,7 +124,7 @@ class PreviewSwitch extends Backend
 				{
 					// Insert new session
 					$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
-								   ->execute($this->Input->post('user'), $time, 'FE_USER_AUTH', session_id(), $this->Environment->ip, $strHash);
+								   ->execute($this->Input->post('user'), $time, 'FE_USER_AUTH', session_id(), \Environment::get('ip'), $strHash);
 
 					// Set cookie
 					$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);
@@ -160,7 +160,7 @@ class PreviewSwitch extends Backend
 		// Default variables
 		$this->Template->users = $arrUser;
 		$this->Template->theme = $this->getTheme();
-		$this->Template->base = $this->Environment->base;
+		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->apply = $GLOBALS['TL_LANG']['MSC']['apply'];
 		$this->Template->reload = $GLOBALS['TL_LANG']['MSC']['reload'];
@@ -172,7 +172,7 @@ class PreviewSwitch extends Backend
 		$this->Template->fePreview = $GLOBALS['TL_LANG']['MSC']['fePreview'];
 		$this->Template->hiddenElements = $GLOBALS['TL_LANG']['MSC']['hiddenElements'];
 		$this->Template->closeSrc = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/close.gif';
-		$this->Template->action = ampersand($this->Environment->request);
+		$this->Template->action = ampersand(\Environment::get('request'));
 		$this->Template->isAdmin = $this->User->isAdmin;
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;

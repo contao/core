@@ -121,7 +121,7 @@ class Calendar extends \Frontend
 		}
 
 		$strType = ($arrFeed['format'] == 'atom') ? 'generateAtom' : 'generateRss';
-		$strLink = $arrFeed['feedBase'] ?: $this->Environment->base;
+		$strLink = $arrFeed['feedBase'] ?: \Environment::get('base');
 		$strFile = $arrFeed['feedName'];
 
 		$objFeed = new \Feed($strFile);
@@ -275,12 +275,12 @@ class Calendar extends \Frontend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objCalendar->jumpTo]))
 				{
-					$domain = $this->Environment->base;
+					$domain = \Environment::get('base');
 					$objParent = $this->getPageDetails($objCalendar->jumpTo);
 
 					if ($objParent->domain != '')
 					{
-						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
+						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
 					$arrProcessed[$objCalendar->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);

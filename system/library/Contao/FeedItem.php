@@ -122,7 +122,7 @@ class FeedItem extends \System
 
 		$this->arrData['enclosure'][] = array
 		(
-			'url' => $this->Environment->base . $strFile,
+			'url' => \Environment::get('base') . $strFile,
 			'length' => $objFile->size,
 			'type' => $objFile->mime
 		);

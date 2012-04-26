@@ -181,7 +181,7 @@ class PageRegular extends \Frontend
 	 */
 	protected function getPageLayout($objPage)
 	{
-		$blnMobile = ($objPage->mobileLayout && $this->Environment->agent->mobile);
+		$blnMobile = ($objPage->mobileLayout && \Environment::get('agent')->mobile);
 		$intId = $blnMobile ? $objPage->mobileLayout : $objPage->layout;
 
 		$objLayout = \LayoutModel::findByPk($intId);
@@ -316,7 +316,7 @@ class PageRegular extends \Frontend
 		{
 			if ($objLayout->jSource == 'j_googleapis' || $objLayout->jSource == 'j_fallback')
 			{
-				$protocol = $this->Environment->ssl ? 'https://' : 'http://';
+				$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
 				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/jquery/' . JQUERY . '/jquery.min.js"></script>' . "\n";
 
 				// Local fallback (thanks to DyaGa)
@@ -336,7 +336,7 @@ class PageRegular extends \Frontend
 		{
 			if ($objLayout->mooSource == 'moo_googleapis' || $objLayout->mooSource == 'moo_fallback')
 			{
-				$protocol = $this->Environment->ssl ? 'https://' : 'http://';
+				$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
 				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS . '/mootools-yui-compressed.js"></script>' . "\n";
 
 				// Local fallback (thanks to DyaGa)
@@ -376,7 +376,7 @@ class PageRegular extends \Frontend
 		$this->Template->mobile = $objLayout->isMobile;
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->base = $this->Environment->base;
+		$this->Template->base = \Environment::get('base');
 		$this->Template->disableCron = $GLOBALS['TL_CONFIG']['disableCron'];
 	}
 
@@ -398,7 +398,7 @@ class PageRegular extends \Frontend
 		// Google web fonts
 		if ($objLayout->webfonts != '')
 		{
-			$protocol = $this->Environment->ssl ? 'https://' : 'http://';
+			$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
 			$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') .' rel="stylesheet" href="' . $protocol . 'fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
 		}
 
@@ -542,7 +542,7 @@ class PageRegular extends \Frontend
 			{
 				while($objFeeds->next())
 				{
-					$base = $objFeeds->feedBase ?: $this->Environment->base;
+					$base = $objFeeds->feedBase ?: \Environment::get('base');
 					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
 				}
 			}
@@ -557,7 +557,7 @@ class PageRegular extends \Frontend
 			{
 				while($objFeeds->next())
 				{
-					$base = $objFeeds->feedBase ?: $this->Environment->base;
+					$base = $objFeeds->feedBase ?: \Environment::get('base');
 					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
 				}
 			}

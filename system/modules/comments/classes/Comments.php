@@ -270,7 +270,7 @@ class Comments extends \Frontend
 
 		$objTemplate->fields = $arrWidgets;
 		$objTemplate->submit = $GLOBALS['TL_LANG']['MSC']['com_submit'];
-		$objTemplate->action = ampersand($this->Environment->request);
+		$objTemplate->action = ampersand(\Environment::get('request'));
 		$objTemplate->messages = ''; // Backwards compatibility
 		$objTemplate->formId = $strFormId;
 		$objTemplate->hasError = $doNotSubmit;
@@ -325,7 +325,7 @@ class Comments extends \Frontend
 				'email' => $arrWidgets['email']->value,
 				'website' => $strWebsite,
 				'comment' => $this->convertLineFeeds($strComment),
-				'ip' => $this->anonymizeIp($this->Environment->ip),
+				'ip' => $this->anonymizeIp(\Environment::get('ip')),
 				'date' => $time,
 				'published' => ($objConfig->moderate ? '' : 1)
 			);
@@ -350,7 +350,7 @@ class Comments extends \Frontend
 
 			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
-			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_subject'], $this->Environment->host);
+			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_subject'], \Environment::get('host'));
 
 			// Convert the comment to plain text
 			$strComment = strip_tags($strComment);
@@ -361,8 +361,8 @@ class Comments extends \Frontend
 			$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_message'],
 									  $arrSet['name'] . ' (' . $arrSet['email'] . ')',
 									  $strComment,
-									  $this->Environment->base . $this->Environment->request,
-									  $this->Environment->base . 'contao/main.php?do=comments&act=edit&id=' . $insertId);
+									  \Environment::get('base') . \Environment::get('request'),
+									  \Environment::get('base') . 'contao/main.php?do=comments&act=edit&id=' . $insertId);
 
 			// Do not send notifications twice
 			if (is_array($arrNotifies))

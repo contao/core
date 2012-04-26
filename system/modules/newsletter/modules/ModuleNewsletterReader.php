@@ -163,7 +163,7 @@ class ModuleNewsletterReader extends \Module
 							$arrEnclosures[$i]['link'] = basename($arrEnclosure[$i]);
 							$arrEnclosures[$i]['filesize'] = $this->getReadableSize($objFile->filesize);
 							$arrEnclosures[$i]['title'] = ucfirst(str_replace('_', ' ', $objFile->filename));
-							$arrEnclosures[$i]['href'] = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
+							$arrEnclosures[$i]['href'] = \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
 							$arrEnclosures[$i]['enclosure'] = $arrEnclosure[$i];
 						}
 					}

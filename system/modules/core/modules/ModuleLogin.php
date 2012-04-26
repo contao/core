@@ -88,7 +88,7 @@ class ModuleLogin extends \Module
 			}
 
 			$this->import('FrontendUser', 'User');
-			$strRedirect = $this->Environment->request;
+			$strRedirect = \Environment::get('request');
 
 			// Redirect to the last page visited
 			if ($this->redirectBack && $_SESSION['LAST_PAGE_VISITED'] != '')
@@ -144,7 +144,7 @@ class ModuleLogin extends \Module
 			global $objPage;
 
 			$this->import('FrontendUser', 'User');
-			$strRedirect = $this->Environment->request;
+			$strRedirect = \Environment::get('request');
 
 			// Redirect to last page visited
 			if ($this->redirectBack && strlen($_SESSION['LAST_PAGE_VISITED']))
@@ -155,7 +155,7 @@ class ModuleLogin extends \Module
 			// Redirect home if the page is protected
 			elseif ($objPage->protected)
 			{
-				$strRedirect = $this->Environment->base;
+				$strRedirect = \Environment::get('base');
 			}
 
 			// Logout and redirect

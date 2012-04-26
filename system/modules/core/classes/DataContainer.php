@@ -516,7 +516,7 @@ class DataContainer extends \Backend
 			}
 		}
 
-		$strUrl = $this->Environment->script . '?' . implode('&', $arrKeys);
+		$strUrl = \Environment::get('script') . '?' . implode('&', $arrKeys);
 		$glue = !empty($arrKeys) ? '&' : '';
 
 		return $strUrl . $glue . ($this->Input->get('table') ? 'table='.$this->Input->get('table').'&amp;' : '').'act=edit&amp;id='.$id;

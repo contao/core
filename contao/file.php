@@ -82,7 +82,7 @@ class FilePicker extends Backend
 		$this->Template->main = '';
 
 		// Ajax request
-		if ($_POST && $this->Environment->isAjaxRequest)
+		if ($_POST && \Environment::get('isAjaxRequest'))
 		{
 			$this->objAjax = new \Ajax($this->Input->post('action'));
 			$this->objAjax->executePreActions();
@@ -95,7 +95,7 @@ class FilePicker extends Backend
 		$objDca = new \DC_Table($strTable);
 
 		// AJAX request
-		if ($_POST && $this->Environment->isAjaxRequest)
+		if ($_POST && \Environment::get('isAjaxRequest'))
 		{
 			$this->objAjax->executePostActions($objDca);
 		}
@@ -110,7 +110,7 @@ class FilePicker extends Backend
 
 		$this->Template->main = $objFileTree->generate();
 		$this->Template->theme = $this->getTheme();
-		$this->Template->base = $this->Environment->base;
+		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->headline = $GLOBALS['TL_LANG']['MSC']['ppHeadline'];
@@ -120,7 +120,7 @@ class FilePicker extends Backend
 		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
 		$this->Template->search = $GLOBALS['TL_LANG']['MSC']['search'];
-		$this->Template->action = ampersand($this->Environment->request);
+		$this->Template->action = ampersand(\Environment::get('request'));
 		$this->Template->value = $this->Session->get('file_selector_search');
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;

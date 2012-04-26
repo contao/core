@@ -104,7 +104,7 @@ class LiveUpdate extends \Backend implements \executable
 		}
 
 		// Automatically switch to SSL
-		if ($this->Environment->ssl)
+		if (\Environment::get('ssl'))
 		{
 			$GLOBALS['TL_CONFIG']['liveUpdateBase'] = str_replace('http://', 'https://', $GLOBALS['TL_CONFIG']['liveUpdateBase']);
 		}
@@ -131,7 +131,7 @@ class LiveUpdate extends \Backend implements \executable
 		$objTemplate->version = VERSION . '.' .  BUILD;
 		$objTemplate->liveUpdateId = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdateId'];
 		$objTemplate->runLiveUpdate = specialchars($GLOBALS['TL_LANG']['tl_maintenance']['runLiveUpdate']);
-		$objTemplate->referer = base64_encode($this->Environment->base . $this->Environment->request . '|' . $this->Environment->server);
+		$objTemplate->referer = base64_encode(\Environment::get('base') . \Environment::get('request') . '|' . \Environment::get('server'));
 		$objTemplate->updateHelp = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['updateHelp'], '<a href="http://luid.inetrobots.com" target="_blank">Live Update ID</a>');
 
 		return $objTemplate->parse();
@@ -201,8 +201,8 @@ class LiveUpdate extends \Backend implements \executable
 				  .'<li>' . implode('</li><li>', $arrFiles) . '</li>'
 				.'</ol>'
 				.'<p>'
-				  .'<a href="' . ampersand(str_replace('toc=1', 'toc=', $this->Environment->base . $this->Environment->request)) . '" class="button">' . $GLOBALS['TL_LANG']['MSC']['continue'] . '</a>'
-				  .'<a href="' . $this->Environment->base . 'contao/main.php?do=maintenance" class="button">' . $GLOBALS['TL_LANG']['MSC']['cancelBT'] . '</a>'
+				  .'<a href="' . ampersand(str_replace('toc=1', 'toc=', \Environment::get('base') . \Environment::get('request'))) . '" class="button">' . $GLOBALS['TL_LANG']['MSC']['continue'] . '</a>'
+				  .'<a href="' . \Environment::get('base') . 'contao/main.php?do=maintenance" class="button">' . $GLOBALS['TL_LANG']['MSC']['cancelBT'] . '</a>'
 				  .'</p>'
 				.'</div>';
 
@@ -243,8 +243,8 @@ class LiveUpdate extends \Backend implements \executable
 
 			echo '</ol>'
 				.'<p>'
-				  .'<a href="' . ampersand(str_replace('bup=1', 'bup=', $this->Environment->base . $this->Environment->request)) . '" id="continue" class="button">' . $GLOBALS['TL_LANG']['MSC']['continue'] . '</a>'
-				  .'<a href="' . $this->Environment->base . 'contao/main.php?do=maintenance" id="back" class="button">' . $GLOBALS['TL_LANG']['MSC']['cancelBT'] . '</a>'
+				  .'<a href="' . ampersand(str_replace('bup=1', 'bup=', \Environment::get('base') . \Environment::get('request'))) . '" id="continue" class="button">' . $GLOBALS['TL_LANG']['MSC']['continue'] . '</a>'
+				  .'<a href="' . \Environment::get('base') . 'contao/main.php?do=maintenance" id="back" class="button">' . $GLOBALS['TL_LANG']['MSC']['cancelBT'] . '</a>'
 				  .'</p>'
 				.'</div>';
 
@@ -288,7 +288,7 @@ class LiveUpdate extends \Backend implements \executable
 
 		echo '</ol>'
 			.'<p>'
-			  .'<a href="' . $this->Environment->base . 'contao/main.php?do=maintenance&amp;act=runonce" id="continue" class="button">' . $GLOBALS['TL_LANG']['MSC']['continue'] . '</a>'
+			  .'<a href="' . \Environment::get('base') . 'contao/main.php?do=maintenance&amp;act=runonce" id="continue" class="button">' . $GLOBALS['TL_LANG']['MSC']['continue'] . '</a>'
 			.'</p>'
 			.'</div>';
 

@@ -141,13 +141,13 @@ class FrontendTemplate extends \Template
 		if (empty($_POST) && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && !$_SESSION['DISABLE_CACHE'] && !isset($_SESSION['LOGIN_ERROR']) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'server') && intval($objPage->cache) > 0 && !$objPage->protected)
 		{
 			// If the request string is empty, use a special cache tag which considers the page language
-			if ($this->Environment->request == '' || $this->Environment->request == 'index.php')
+			if (\Environment::get('request') == '' || \Environment::get('request') == 'index.php')
 			{
-				$strCacheKey = $this->Environment->base . 'empty.' . $objPage->language;
+				$strCacheKey = \Environment::get('base') . 'empty.' . $objPage->language;
 			}
 			else
 			{
-				$strCacheKey = $this->Environment->base . $strUrl;
+				$strCacheKey = \Environment::get('base') . $strUrl;
 			}
 
 			// HOOK: add custom logic

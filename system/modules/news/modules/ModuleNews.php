@@ -350,7 +350,7 @@ abstract class ModuleNews extends \Module
 
 			if ($objPage === null)
 			{
-				self::$arrUrlCache[$strCacheKey] = ampersand($this->Environment->request, true);
+				self::$arrUrlCache[$strCacheKey] = ampersand(\Environment::get('request'), true);
 			}
 			else
 			{

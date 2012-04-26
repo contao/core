@@ -192,13 +192,13 @@ abstract class System
 		$strUa = 'N/A';
 		$strIp = '127.0.0.1';
 
-		if ($this->Environment->httpUserAgent)
+		if (\Environment::get('httpUserAgent'))
 		{
-			$strUa = $this->Environment->httpUserAgent;
+			$strUa = \Environment::get('httpUserAgent');
 		}
-		if ($this->Environment->remoteAddr)
+		if (\Environment::get('remoteAddr'))
 		{
-			$strIp = $this->anonymizeIp($this->Environment->ip);
+			$strIp = $this->anonymizeIp(\Environment::get('ip'));
 		}
 
 		$this->Database->prepare("INSERT INTO tl_log (tstamp, source, action, username, text, func, ip, browser) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")
@@ -224,7 +224,7 @@ abstract class System
 	protected function addToUrl($strRequest)
 	{
 		$strRequest = preg_replace('/^&(amp;)?/i', '', $strRequest);
-		$queries = preg_split('/&(amp;)?/i', $this->Environment->queryString);
+		$queries = preg_split('/&(amp;)?/i', \Environment::get('queryString'));
 
 		// Overwrite existing parameters
 		foreach ($queries as $k=>$v)
@@ -244,7 +244,7 @@ abstract class System
 			$href .= implode('&amp;', $queries) . '&amp;';
 		}
 
-		return $this->Environment->script . $href . str_replace(' ', '%20', $strRequest);
+		return \Environment::get('script') . $href . str_replace(' ', '%20', $strRequest);
 	}
 
 
@@ -254,10 +254,10 @@ abstract class System
 	 */
 	protected function reload()
 	{
-		$strLocation = $this->Environment->url . $this->Environment->requestUri;
+		$strLocation = \Environment::get('url') . \Environment::get('requestUri');
 
 		// Ajax request
-		if ($this->Environment->isAjaxRequest)
+		if (\Environment::get('isAjaxRequest'))
 		{
 			echo $strLocation;
 			exit;
@@ -284,7 +284,7 @@ abstract class System
 		$strLocation = str_replace('&amp;', '&', $strLocation);
 
 		// Ajax request
-		if ($this->Environment->isAjaxRequest)
+		if (\Environment::get('isAjaxRequest'))
 		{
 			echo $strLocation;
 			exit;
@@ -318,7 +318,7 @@ abstract class System
 		}
 		else
 		{
-			header('Location: ' . $this->Environment->base . $strLocation);
+			header('Location: ' . \Environment::get('base') . $strLocation);
 		}
 
 		exit;
@@ -333,7 +333,7 @@ abstract class System
 	 */
 	protected function getReferer($blnEncodeAmpersands=false, $strTable=null)
 	{
-		$key = ($this->Environment->script == 'contao/files.php') ? 'fileReferer' : 'referer';
+		$key = (\Environment::get('script') == 'contao/files.php') ? 'fileReferer' : 'referer';
 		$session = $this->Session->get($key);
 
 		// Use a specific referer
@@ -343,19 +343,19 @@ abstract class System
 		}
 
 		// Get the default referer
-		$return = preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', (($session['current'] != $this->Environment->requestUri) ? $session['current'] : $session['last']));
+		$return = preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', (($session['current'] != \Environment::get('requestUri')) ? $session['current'] : $session['last']));
 		$return = preg_replace('/^'.preg_quote(TL_PATH, '/').'\//i', '', $return);
 
 		// Fallback to the generic referer in the front end
 		if ($return == '' && TL_MODE == 'FE')
 		{
-			$return = $this->Environment->httpReferer;
+			$return = \Environment::get('httpReferer');
 		}
 
 		// Fallback to the current URL if there is no referer
 		if ($return == '')
 		{
-			$return = (TL_MODE == 'BE') ? 'contao/main.php' : $this->Environment->url;
+			$return = (TL_MODE == 'BE') ? 'contao/main.php' : \Environment::get('url');
 		}
 
 		// Do not urldecode here!
@@ -371,7 +371,7 @@ abstract class System
 	 */
 	protected function getIndexFreeRequest($blnAmpersand=true)
 	{
-		$strRequest = $this->Environment->request;
+		$strRequest = \Environment::get('request');
 
 		if ($strRequest == 'index.php')
 		{

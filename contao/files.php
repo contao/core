@@ -84,7 +84,7 @@ class FileManager extends Backend
 		$this->Template->main = '';
 
 		// Ajax request
-		if ($this->Environment->isAjaxRequest)
+		if (\Environment::get('isAjaxRequest'))
 		{
 			$this->objAjax = new \Ajax($this->Input->post('action'));
 			$this->objAjax->executePreActions();
@@ -99,14 +99,14 @@ class FileManager extends Backend
 		}
 
 		$this->Template->theme = $this->getTheme();
-		$this->Template->base = $this->Environment->base;
+		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->pageOffset = $this->Input->cookie('BE_PAGE_OFFSET');
 		$this->Template->error = ($this->Input->get('act') == 'error') ? $GLOBALS['TL_LANG']['ERR']['general'] : '';
 		$this->Template->skipNavigation = $GLOBALS['TL_LANG']['MSC']['skipNavigation'];
-		$this->Template->request = ampersand($this->Environment->request);
+		$this->Template->request = ampersand(\Environment::get('request'));
 		$this->Template->top = $GLOBALS['TL_LANG']['MSC']['backToTop'];
 		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
 		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];

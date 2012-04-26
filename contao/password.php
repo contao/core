@@ -131,11 +131,11 @@ class ChangePassword extends Backend
 
 		$this->Template->theme = $this->getTheme();
 		$this->Template->messages = $this->getMessages();
-		$this->Template->base = $this->Environment->base;
+		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->action = ampersand($this->Environment->request);
+		$this->Template->action = ampersand(\Environment::get('request'));
 		$this->Template->headline = $GLOBALS['TL_LANG']['MSC']['pw_change'];
 		$this->Template->submitButton = specialchars($GLOBALS['TL_LANG']['MSC']['continue']);
 		$this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];

@@ -244,7 +244,7 @@ abstract class Backend extends \Controller
 		}
 
 		// AJAX request
-		if ($_POST && $this->Environment->isAjaxRequest)
+		if ($_POST && \Environment::get('isAjaxRequest'))
 		{
 			$this->objAjax->executePostActions($dc);
 		}
@@ -329,7 +329,7 @@ abstract class Backend extends \Controller
 		// Fallback domain
 		if ($domain == '')
 		{
-			$domain = $this->Environment->base;
+			$domain = \Environment::get('base');
 		}
 
 		$arrPages = array();
@@ -342,11 +342,11 @@ abstract class Backend extends \Controller
 			{
 				if ($objPages->dns != '')
 				{
-					$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objPages->dns . TL_PATH . '/';
+					$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objPages->dns . TL_PATH . '/';
 				}
 				else
 				{
-					$domain = $this->Environment->base;
+					$domain = \Environment::get('base');
 				}
 
 				$strLanguage = $objPages->language;
@@ -427,7 +427,7 @@ abstract class Backend extends \Controller
 			}
 
 			// Skip websites that run under a different domain (see #2387)
-			if ($objPage->domain && $objPage->domain != $this->Environment->host)
+			if ($objPage->domain && $objPage->domain != \Environment::get('host'))
 			{
 				continue;
 			}
@@ -464,7 +464,7 @@ abstract class Backend extends \Controller
 			if ($objPages->type == 'root')
 			{
 				// Skip websites that run under a different domain
-				if ($objPages->dns && $objPages->dns != $this->Environment->host)
+				if ($objPages->dns && $objPages->dns != \Environment::get('host'))
 				{
 					continue;
 				}

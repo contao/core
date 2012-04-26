@@ -77,7 +77,7 @@ class BackendTemplate extends \Template
 		// Rich text editor configuration
 		if (is_array($GLOBALS['TL_RTE']) && !empty($GLOBALS['TL_RTE']))
 		{
-			$this->base = $this->Environment->base;
+			$this->base = \Environment::get('base');
 			$this->uploadPath = $GLOBALS['TL_CONFIG']['uploadPath'];
 
 			// Fallback to English if the user language is not supported
@@ -167,7 +167,7 @@ class BackendTemplate extends \Template
 		}
 
 		// Add the browser and OS classes (see #3074)
-		$ua = $this->Environment->agent;
+		$ua = \Environment::get('agent');
 		$strBuffer = str_replace('__ua__', $ua->class, $strBuffer);
 
 		$this->strBuffer = $strBuffer;

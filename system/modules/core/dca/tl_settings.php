@@ -714,7 +714,7 @@ class tl_settings extends Backend
 	{
 		if ($varValue != '' && !preg_match('@^https?://@', $varValue))
 		{
-			$varValue = ($this->Environment->ssl ? 'https://' : 'http://') . $varValue;
+			$varValue = (\Environment::get('ssl') ? 'https://' : 'http://') . $varValue;
 		}
 
 		return $varValue;

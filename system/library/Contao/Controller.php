@@ -2000,19 +2000,19 @@ abstract class Controller extends \System
 					switch ($elements[1])
 					{
 						case 'host':
-							$arrCache[$strTag] = $this->Environment->host;
+							$arrCache[$strTag] = \Environment::get('host');
 							break;
 
 						case 'http_host':
-							$arrCache[$strTag] = $this->Environment->httpHost;
+							$arrCache[$strTag] = \Environment::get('httpHost');
 							break;
 
 						case 'url':
-							$arrCache[$strTag] = $this->Environment->url;
+							$arrCache[$strTag] = \Environment::get('url');
 							break;
 
 						case 'path':
-							$arrCache[$strTag] = $this->Environment->base;
+							$arrCache[$strTag] = \Environment::get('base');
 							break;
 
 						case 'request':
@@ -2020,7 +2020,7 @@ abstract class Controller extends \System
 							break;
 
 						case 'ip':
-							$arrCache[$strTag] = $this->Environment->ip;
+							$arrCache[$strTag] = \Environment::get('ip');
 							break;
 
 						case 'referer':
@@ -2061,7 +2061,7 @@ abstract class Controller extends \System
 
 				// User agent
 				case 'ua':
-					$ua = $this->Environment->agent;
+					$ua = \Environment::get('agent');
 
 					if ($elements[1] != '')
 					{
@@ -2509,7 +2509,7 @@ abstract class Controller extends \System
 	{
 		if ($strBase == '')
 		{
-			$strBase = $this->Environment->base;
+			$strBase = \Environment::get('base');
 		}
 
 		$search = $blnHrefOnly ? 'href' : 'href|src';
@@ -2936,12 +2936,12 @@ abstract class Controller extends \System
 			return '';
 		}
 
-		$strDomain = $this->Environment->base;
+		$strDomain = \Environment::get('base');
 		$objPage = $this->getPageDetails($intPage);
 
 		if ($objPage->domain != '')
 		{
-			$strDomain = ($this->Environment->ssl ? 'https://' : 'http://') . $objPage->domain . TL_PATH . '/';
+			$strDomain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objPage->domain . TL_PATH . '/';
 		}
 
 		if ($varArticle !== null)
@@ -3504,7 +3504,7 @@ abstract class Controller extends \System
 					'link'      => $objFiles->name,
 					'filesize'  => $this->getReadableSize($objFile->filesize),
 					'title'     => ucfirst(str_replace('_', ' ', $objFile->filename)),
-					'href'      => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objFiles->path),
+					'href'      => \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objFiles->path),
 					'enclosure' => $objFiles->path,
 					'icon'      => TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
 					'mime'      => $objFile->mime
@@ -3535,7 +3535,7 @@ abstract class Controller extends \System
 		}
 		else
 		{
-			if ($this->Environment->ssl)
+			if (\Environment::get('ssl'))
 			{
 				$url = str_replace('http://', 'https://', $url);
 			}

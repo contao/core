@@ -65,6 +65,6 @@ class ContentToplink extends \ContentElement
 
 		$this->Template->label = $this->linkTitle;
 		$this->Template->title = specialchars($this->linkTitle);
-		$this->Template->request = ampersand($this->Environment->request, true);
+		$this->Template->request = ampersand(\Environment::get('request'), true);
 	}
 }

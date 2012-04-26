@@ -93,7 +93,7 @@ class ModuleArticleList extends \Module
 		$articles = array();
 		$id = $objPage->id;
 
-		$this->Template->request = $this->Environment->request;
+		$this->Template->request = \Environment::get('request');
 
 		// Show the articles of a different page
 		if ($this->defineRoot && $this->rootPage > 0)

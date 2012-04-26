@@ -128,7 +128,7 @@ class DC_File extends \DataContainer implements \editable
 		$return = '';
 		$ajaxId = null;
 
-		if ($this->Environment->isAjaxRequest)
+		if (\Environment::get('isAjaxRequest'))
 		{
 			$ajaxId = func_get_arg(1);
 		}
@@ -204,7 +204,7 @@ class DC_File extends \DataContainer implements \editable
 				{
 					if ($vv == '[EOF]')
 					{
-						if ($blnAjax && $this->Environment->isAjaxRequest)
+						if ($blnAjax && \Environment::get('isAjaxRequest'))
 						{
 							return $strAjax . '<input type="hidden" name="FORM_FIELDS[]" value="'.specialchars($this->strPalette).'">';
 						}
@@ -218,7 +218,7 @@ class DC_File extends \DataContainer implements \editable
 					if (preg_match('/^\[.*\]$/i', $vv))
 					{
 						$thisId = 'sub_' . substr($vv, 1, -1);
-						$blnAjax = ($ajaxId == $thisId && $this->Environment->isAjaxRequest) ? true : false;
+						$blnAjax = ($ajaxId == $thisId && \Environment::get('isAjaxRequest')) ? true : false;
 						$return .= "\n  " . '<div id="'.$thisId.'">';
 
 						continue;
@@ -308,7 +308,7 @@ class DC_File extends \DataContainer implements \editable
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG'][$this->strTable]['edit'].'</h2>
 '.$this->getMessages().'
-<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
+<form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'">

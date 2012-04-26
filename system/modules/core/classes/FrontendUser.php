@@ -95,7 +95,7 @@ class FrontendUser extends \User
 	{
 		parent::__construct();
 
-		$this->strIp = $this->Environment->ip;
+		$this->strIp = \Environment::get('ip');
 		$this->strHash = $this->Input->cookie($this->strCookie);
 	}
 
@@ -107,10 +107,10 @@ class FrontendUser extends \User
 	{
 		$session = $this->Session->getData();
 
-		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != $this->Environment->requestUri)
+		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != \Environment::get('requestUri'))
 		{
 			$session['referer']['last'] = $session['referer']['current'];
-			$session['referer']['current'] = $this->Environment->requestUri;
+			$session['referer']['current'] = \Environment::get('requestUri');
 		}
 
 		$this->Session->setData($session);

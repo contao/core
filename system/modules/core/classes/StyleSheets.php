@@ -1279,7 +1279,7 @@ class StyleSheets extends \Backend
 
 			// Redirect
 			setcookie('BE_PAGE_OFFSET', 0, 0, '/');
-			$this->redirect(str_replace('&key=import', '', $this->Environment->request));
+			$this->redirect(str_replace('&key=import', '', \Environment::get('request')));
 		}
 
 		$objTree = new \FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_style_sheet']['fields']['source'], 'source', null, 'source', 'tl_style_sheet'));
@@ -1287,12 +1287,12 @@ class StyleSheets extends \Backend
 		// Return form
 		return '
 <div id="tl_buttons">
-<a href="' .ampersand(str_replace('&key=import', '', $this->Environment->request)). '" class="header_back" title="' .specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']). '" accesskey="b">' .$GLOBALS['TL_LANG']['MSC']['backBT']. '</a>
+<a href="' .ampersand(str_replace('&key=import', '', \Environment::get('request'))). '" class="header_back" title="' .specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']). '" accesskey="b">' .$GLOBALS['TL_LANG']['MSC']['backBT']. '</a>
 </div>
 
 <h2 class="sub_headline">' .$GLOBALS['TL_LANG']['tl_style_sheet']['import'][1]. '</h2>
 ' .$this->getMessages(). '
-<form action="' .ampersand($this->Environment->request, true). '" id="tl_style_sheet_import" class="tl_form" method="post">
+<form action="' .ampersand(\Environment::get('request'), true). '" id="tl_style_sheet_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_style_sheet_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">

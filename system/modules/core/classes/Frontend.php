@@ -85,19 +85,19 @@ abstract class Frontend extends \Controller
 			return is_numeric($this->Input->get('id')) ? $this->Input->get('id') : null;
 		}
 
-		if ($this->Environment->request == '')
+		if (\Environment::get('request') == '')
 		{
 			return null;
 		}
 
 		// Get the request string without the index.php fragment
-		if ($this->Environment->request == 'index.php')
+		if (\Environment::get('request') == 'index.php')
 		{
 			$strRequest = '';
 		}
 		else
 		{
-			list($strRequest) = explode('?', str_replace('index.php/', '', $this->Environment->request), 2);
+			list($strRequest) = explode('?', str_replace('index.php/', '', \Environment::get('request')), 2);
 		}
 
 		// Remove the URL suffix if not just a language root (e.g. en/) is requested
@@ -240,7 +240,7 @@ abstract class Frontend extends \Controller
 			}
 		}
 
-		$host = $this->Environment->host;
+		$host = \Environment::get('host');
 
 		// The language is set in the URL
 		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !empty($_GET['language']))
@@ -259,7 +259,7 @@ abstract class Frontend extends \Controller
 		// No language given
 		else
 		{
-			$accept_language = $this->Environment->httpAcceptLanguage;
+			$accept_language = \Environment::get('httpAcceptLanguage');
 
 			// Find the matching root pages (thanks to Andreas Schempp)
 			$objRootPage = \PageModel::findFirstPublishedRootByHostAndLanguage($host, $accept_language);
@@ -268,12 +268,12 @@ abstract class Frontend extends \Controller
 			if ($objRootPage === null)
 			{
 				header('HTTP/1.1 404 Not Found');
-				$this->log('No root page found (host "' . $this->Environment->host . '", languages "'.implode(', ', $this->Environment->httpAcceptLanguage).'")', 'Frontend getRootPageFromUrl()', TL_ERROR);
+				$this->log('No root page found (host "' . \Environment::get('host') . '", languages "'.implode(', ', \Environment::get('httpAcceptLanguage')).'")', 'Frontend getRootPageFromUrl()', TL_ERROR);
 				die('No root page found');
 			}
 
 			// Redirect to the language root (e.g. en/)
-			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'] && $this->Environment->request == '')
+			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'] && \Environment::get('request') == '')
 			{
 				$this->redirect((!$GLOBALS['TL_CONFIG']['rewriteURL'] ? 'index.php/' : '') . $objRootPage->language . '/', 302);
 			}
@@ -419,7 +419,7 @@ abstract class Frontend extends \Controller
 	 */
 	protected function getLoginStatus($strCookie)
 	{
-		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . $strCookie);
+		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . $strCookie);
 
 		// Validate the cookie hash
 		if ($this->Input->cookie($strCookie) == $hash)
@@ -428,7 +428,7 @@ abstract class Frontend extends \Controller
 			$objSession = \SessionModel::findByHashAndName($hash, $strCookie);
 
 			// Validate the session ID and timeout
-			if ($objSession !== null && $objSession->sessionID == session_id() && ($GLOBALS['TL_CONFIG']['disableIpCheck'] || $objSession->ip == $this->Environment->ip) && ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
+			if ($objSession !== null && $objSession->sessionID == session_id() && ($GLOBALS['TL_CONFIG']['disableIpCheck'] || $objSession->ip == \Environment::get('ip')) && ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
 			{
 				// Disable the cache if a back end user is logged in
 				if (TL_MODE == 'FE' && $strCookie == 'BE_USER_AUTH')

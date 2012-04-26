@@ -124,7 +124,7 @@ class ModuleQuicklink extends \Module
 		}
 
 		$this->Template->items = $items;
-		$this->Template->request = ampersand($this->Environment->request, true);
+		$this->Template->request = ampersand(\Environment::get('request'), true);
 		$this->Template->title = $this->customLabel ?: $GLOBALS['TL_LANG']['MSC']['quicklink'];
 		$this->Template->button = specialchars($GLOBALS['TL_LANG']['MSC']['go']);
 	}

@@ -170,7 +170,7 @@ class ModuleWizard extends \Widget
 			// Reload the page
 			if (is_numeric($this->Input->get('cid')) && $this->Input->get('id') == $this->currentRecord)
 			{
-				$this->redirect(preg_replace('/&(amp;)?cid=[^&]*/i', '', preg_replace('/&(amp;)?' . preg_quote($strCommand, '/') . '=[^&]*/i', '', $this->Environment->request)));
+				$this->redirect(preg_replace('/&(amp;)?cid=[^&]*/i', '', preg_replace('/&(amp;)?' . preg_quote($strCommand, '/') . '=[^&]*/i', '', \Environment::get('request'))));
 			}
 		}
 

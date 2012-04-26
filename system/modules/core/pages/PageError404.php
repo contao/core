@@ -61,11 +61,11 @@ class PageError404 extends \Frontend
 		}
 		elseif ($pageId != 'favicon.ico' && $pageId != 'robots.txt')
 		{
-			$this->log('No active page for page ID "' . $pageId . '", host "' . $this->Environment->host . '" and languages "' . implode(', ', $this->Environment->httpAcceptLanguage) . '" (' . $this->Environment->base . $this->Environment->request . ')', 'PageError404 generate()', TL_ERROR);
+			$this->log('No active page for page ID "' . $pageId . '", host "' . \Environment::get('host') . '" and languages "' . implode(', ', \Environment::get('httpAcceptLanguage')) . '" (' . \Environment::get('base') . \Environment::get('request') . ')', 'PageError404 generate()', TL_ERROR);
 		}
 
 		// Check the search index (see #3761)
-		\Search::removeEntry($this->Environment->request);
+		\Search::removeEntry(\Environment::get('request'));
 
 		// Look for an 404 page
 		$objRootPage = $this->getRootPageFromUrl();

@@ -208,7 +208,7 @@ $GLOBALS['TL_DCA']['tl_calendar_feed'] = array
 		'feedBase' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_feed']['feedBase'],
-			'default'                 => $this->Environment->base,
+			'default'                 => \Environment::get('base'),
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
