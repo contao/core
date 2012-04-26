@@ -58,7 +58,6 @@ class InstallTool extends Backend
 	 */
 	public function __construct()
 	{
-		$this->import('String');
 		$this->import('Config');
 		$this->import('Input');
 		$this->import('Environment');
@@ -83,7 +82,7 @@ class InstallTool extends Backend
 	 */
 	public function run()
 	{
-		$this->Template = new BackendTemplate('be_install');
+		$this->Template = new \BackendTemplate('be_install');
 
 		// Lock the tool if there are too many login attempts
 		if ($GLOBALS['TL_CONFIG']['installCount'] >= 3)
@@ -730,7 +729,7 @@ class InstallTool extends Backend
 		{
 			if (!file_exists(TL_ROOT . '/system/config/' . $file . '.php'))
 			{
-				$objFile = new File('system/config/'. $file .'.php');
+				$objFile = new \File('system/config/'. $file .'.php');
 				$objFile->write('<?php' . "\n\n// Put your custom configuration here\n");
 				$objFile->close();
 			}

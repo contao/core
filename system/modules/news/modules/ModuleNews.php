@@ -102,7 +102,6 @@ abstract class ModuleNews extends \Module
 	protected function parseArticle($objArticle, $blnAddArchive=false, $strClass='')
 	{
 		global $objPage;
-		$this->import('String');
 
 		$objTemplate = new \FrontendTemplate($this->news_template);
 		$objTemplate->setData($objArticle->row());
@@ -121,14 +120,14 @@ abstract class ModuleNews extends \Module
 		{
 			if ($objPage->outputFormat == 'xhtml')
 			{
-				$objArticle->teaser = $this->String->toXhtml($objArticle->teaser);
+				$objArticle->teaser = \String::toXhtml($objArticle->teaser);
 			}
 			else
 			{
-				$objArticle->teaser = $this->String->toHtml5($objArticle->teaser);
+				$objArticle->teaser = \String::toHtml5($objArticle->teaser);
 			}
 
-			$objTemplate->teaser = $this->String->encodeEmail($objArticle->teaser);
+			$objTemplate->teaser = \String::encodeEmail($objArticle->teaser);
 		}
 
 		// Display the "read more" button for external/article links
@@ -142,14 +141,14 @@ abstract class ModuleNews extends \Module
 			// Clean the RTE output
 			if ($objPage->outputFormat == 'xhtml')
 			{
-				$objArticle->text = $this->String->toXhtml($objArticle->text);
+				$objArticle->text = \String::toXhtml($objArticle->text);
 			}
 			else
 			{
-				$objArticle->text = $this->String->toHtml5($objArticle->text);
+				$objArticle->text = \String::toHtml5($objArticle->text);
 			}
 
-			$objTemplate->text = $this->String->encodeEmail($objArticle->text);
+			$objTemplate->text = \String::encodeEmail($objArticle->text);
 		}
 
 		$arrMeta = $this->getMetaFields($objArticle);
@@ -315,11 +314,9 @@ abstract class ModuleNews extends \Module
 		{
 			// Link to external page
 			case 'external':
-				$this->import('String');
-
 				if (substr($objItem->url, 0, 7) == 'mailto:')
 				{
-					self::$arrUrlCache[$strCacheKey] = $this->String->encodeEmail($objItem->url);
+					self::$arrUrlCache[$strCacheKey] = \String::encodeEmail($objItem->url);
 				}
 				else
 				{
@@ -394,8 +391,7 @@ abstract class ModuleNews extends \Module
 		// Encode e-mail addresses
 		if (substr($objArticle->url, 0, 7) == 'mailto:')
 		{
-			$this->import('String');
-			$objArticle->url = $this->String->encodeEmail($objArticle->url);
+			$objArticle->url = \String::encodeEmail($objArticle->url);
 		}
 
 		// Ampersand URIs

@@ -71,7 +71,7 @@ class Preview extends Backend
 	 */
 	public function run()
 	{
-		$this->Template = new BackendTemplate('be_preview');
+		$this->Template = new \BackendTemplate('be_preview');
 
 		$this->Template->base = $this->Environment->base;
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];

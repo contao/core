@@ -322,7 +322,6 @@ class Calendar extends \Frontend
 		}
 
 		global $objPage;
-		$this->import('String');
 
 		// Called in the back end (see #4026)
 		if ($objPage === null)
@@ -381,11 +380,11 @@ class Calendar extends \Frontend
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$objEvent->teaser = $this->String->toXhtml($objEvent->teaser);
+			$objEvent->teaser = \String::toXhtml($objEvent->teaser);
 		}
 		else
 		{
-			$objEvent->teaser = $this->String->toHtml5($objEvent->teaser);
+			$objEvent->teaser = \String::toHtml5($objEvent->teaser);
 		}
 
 		$arrEvent = array

@@ -51,8 +51,6 @@ class StyleSheets extends \Backend
 	public function __construct()
 	{
 		parent::__construct();
-
-		$this->import('String');
 		$this->import('Files');
 	}
 
@@ -248,7 +246,7 @@ class StyleSheets extends \Backend
 		}
 
 		// Selector
-		$arrSelector = trimsplit(',', $this->String->decodeEntities($row['selector']));
+		$arrSelector = trimsplit(',', \String::decodeEntities($row['selector']));
 		$return .= implode(($blnWriteToFile ? ',' : ', '), $arrSelector) . (($blnWriteToFile && !$blnDebug) ? '' : ' ') . '{';
 
 		// Size
@@ -1012,7 +1010,7 @@ class StyleSheets extends \Backend
 		// Custom code
 		if ($row['own'] != '')
 		{
-			$own = trim($this->String->decodeEntities($row['own']));
+			$own = trim(\String::decodeEntities($row['own']));
 			$own = preg_replace('/url\("(?!data:|\/)/', 'url("' . $strGlue, $own);
 			$own = preg_split('/[\n\r]+/i', $own);
 			$return .= $lb . implode(($blnWriteToFile ? '' : $lb), $own);

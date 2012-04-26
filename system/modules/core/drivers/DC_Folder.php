@@ -108,7 +108,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 		}
 
-		$this->import('String');
 		$this->intId = $this->Input->get('id', true);
 
 		// Clear the clipboard

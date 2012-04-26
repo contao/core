@@ -1011,8 +1011,6 @@ class tl_content extends Backend
 	 */
 	public function getAlias()
 	{
-		$this->import('String');
-
 		$arrPids = array();
 		$arrAlias = array();
 
@@ -1044,14 +1042,14 @@ class tl_content extends Backend
 
 			if (isset($arrHeadline['value']))
 			{
-				$headline = $this->String->substr($arrHeadline['value'], 32);
+				$headline = \String::substr($arrHeadline['value'], 32);
 			}
 			else
 			{
-				$headline = $this->String->substr(preg_replace('/[\n\r\t]+/', ' ', $arrHeadline[0]), 32);
+				$headline = \String::substr(preg_replace('/[\n\r\t]+/', ' ', $arrHeadline[0]), 32);
 			}
 
-			$text = $this->String->substr(strip_tags(preg_replace('/[\n\r\t]+/', ' ', $objAlias->text)), 32);
+			$text = \String::substr(strip_tags(preg_replace('/[\n\r\t]+/', ' ', $objAlias->text)), 32);
 			$strText = $GLOBALS['TL_LANG']['CTE'][$objAlias->type][0] . ' (';
 
 			if ($headline != '')

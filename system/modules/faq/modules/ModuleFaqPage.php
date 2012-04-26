@@ -97,8 +97,6 @@ class ModuleFaqPage extends Module
 		}
 
 		global $objPage;
-
-		$this->import('String');
 		$arrFaq = array_fill_keys($this->faq_categories, array());
 
 		// Add FAQs
@@ -109,14 +107,14 @@ class ModuleFaqPage extends Module
 			// Clean RTE output
 			if ($objPage->outputFormat == 'xhtml')
 			{
-				$objFaq->answer = $this->String->toXhtml($objFaq->answer);
+				$objFaq->answer = \String::toXhtml($objFaq->answer);
 			}
 			else
 			{
-				$objFaq->answer = $this->String->toHtml5($objFaq->answer);
+				$objFaq->answer = \String::toHtml5($objFaq->answer);
 			}
 
-			$objTemp->answer = $this->String->encodeEmail($objFaq->answer);
+			$objTemp->answer = \String::encodeEmail($objFaq->answer);
 			$objTemp->addImage = false;
 
 			// Add an image

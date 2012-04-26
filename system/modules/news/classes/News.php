@@ -117,7 +117,7 @@ class News extends \Frontend
 		$strLink = $arrFeed['feedBase'] ?: $this->Environment->base;
 		$strFile = $arrFeed['feedName'];
 
-		$objFeed = new Feed($strFile);
+		$objFeed = new \Feed($strFile);
 		$objFeed->link = $strLink;
 		$objFeed->title = $arrFeed['title'];
 		$objFeed->description = $arrFeed['description'];

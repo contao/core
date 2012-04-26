@@ -67,6 +67,7 @@ class String
 	/**
 	 * Return the current object instance (Singleton)
 	 * @return \Contao\String
+	 * @deprecated
 	 */
 	public static function getInstance()
 	{
@@ -90,7 +91,7 @@ class String
 	 * @param string
 	 * @return string
 	 */
-	public function substr($strString, $intNumberOfChars, $strEllipsis=' …')
+	public static function substr($strString, $intNumberOfChars, $strEllipsis=' …')
 	{
 		$strString = preg_replace('/[\t\n\r]+/', ' ', $strString);
 		$strString = strip_tags($strString);
@@ -107,7 +108,7 @@ class String
 
 		foreach ($arrChunks as $strChunk)
 		{
-			$intCharCount += utf8_strlen($this->decodeEntities($strChunk));
+			$intCharCount += utf8_strlen(static::decodeEntities($strChunk));
 
 			if ($intCharCount++ <= $intNumberOfChars)
 			{
@@ -150,7 +151,7 @@ class String
 	 * @param integer
 	 * @return string
 	 */
-	public function substrHtml($strString, $intNumberOfChars)
+	public static function substrHtml($strString, $intNumberOfChars)
 	{
 		$strReturn = "";
 		$intCharCount = 0;
@@ -175,12 +176,12 @@ class String
 			}
 
 			// Get the substring of the current text
-			if (($arrChunks[$i] = $this->substr($arrChunks[$i], ($intNumberOfChars - $intCharCount), false)) == false)
+			if (($arrChunks[$i] = static::substr($arrChunks[$i], ($intNumberOfChars - $intCharCount), false)) == false)
 			{
 				break;
 			}
 
-			$intCharCount += utf8_strlen($this->decodeEntities($arrChunks[$i]));
+			$intCharCount += utf8_strlen(static::decodeEntities($arrChunks[$i]));
 
 			if ($intCharCount <= $intNumberOfChars)
 			{
@@ -256,7 +257,7 @@ class String
 	 * @param string
 	 * @return string
 	 */
-	public function decodeEntities($strString, $strQuoteStyle=ENT_COMPAT, $strCharset=null)
+	public static function decodeEntities($strString, $strQuoteStyle=ENT_COMPAT, $strCharset=null)
 	{
 		if ($strString == '')
 		{
@@ -282,7 +283,7 @@ class String
 	 * @param string
 	 * @return string
 	 */
-	public function censor($strString, $varWords, $strReplace="")
+	public static function censor($strString, $varWords, $strReplace="")
 	{
 		foreach ((array) $varWords as $strWord)
 		{
@@ -298,7 +299,7 @@ class String
 	 * @param string
 	 * @return string
 	 */
-	public function encodeEmail($strString)
+	public static function encodeEmail($strString)
 	{
 		$arrEmails = array();
 		preg_match_all('/\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,6}/i', $strString, $arrEmails);
@@ -335,7 +336,7 @@ class String
 	 * @param string
 	 * @return string
 	 */
-	public function wordWrap($strString, $strLength=75, $strBreak="\n")
+	public static function wordWrap($strString, $strLength=75, $strBreak="\n")
 	{
 		return wordwrap($strString, $strLength, $strBreak);
 	}
@@ -349,7 +350,7 @@ class String
 	 * @param string
 	 * @return string
 	 */
-	public function highlight($strString, $strPhrase, $strOpeningTag='<strong>', $strClosingTag='</strong>')
+	public static function highlight($strString, $strPhrase, $strOpeningTag='<strong>', $strClosingTag='</strong>')
 	{
 		if ($strString == '' || $strPhrase == '')
 		{
@@ -366,7 +367,7 @@ class String
 	 * @param string
 	 * @return array
 	 */
-	public function splitCsv($strString, $strDelimiter=',')
+	public static function splitCsv($strString, $strDelimiter=',')
 	{
 		$arrValues = preg_split('/'.$strDelimiter.'(?=(?:[^"]*"[^"]*")*(?![^"]*"))/', $strString);
 
@@ -384,7 +385,7 @@ class String
 	 * @param string
 	 * @return string
 	 */
-	public function toXhtml($strString)
+	public static function toXhtml($strString)
 	{
 		$arrPregReplace = array
 		(
@@ -417,7 +418,7 @@ class String
 	 * @param string
 	 * @return string
 	 */
-	public function toHtml5($strString)
+	public static function toHtml5($strString)
 	{
 		$arrPregReplace = array
 		(

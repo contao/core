@@ -80,13 +80,13 @@ class FileManager extends Backend
 	 */
 	public function run()
 	{
-		$this->Template = new BackendTemplate('be_files');
+		$this->Template = new \BackendTemplate('be_files');
 		$this->Template->main = '';
 
 		// Ajax request
 		if ($this->Environment->isAjaxRequest)
 		{
-			$this->objAjax = new Ajax($this->Input->post('action'));
+			$this->objAjax = new \Ajax($this->Input->post('action'));
 			$this->objAjax->executePreActions();
 		}
 

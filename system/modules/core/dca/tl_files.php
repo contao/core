@@ -461,7 +461,7 @@ class tl_files extends Backend
 
 		if (preg_match('/\.$/', $varValue))
 		{
-			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
+			throw new \Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}
 
 		if (is_file(TL_ROOT .'/'. $dc->path .'/'. $varValue . $dc->extension))
@@ -566,7 +566,7 @@ class tl_files extends Backend
 			return '';
 		}
 
-		$objFile = new File($strDecoded);
+		$objFile = new \File($strDecoded);
 
 		if (!in_array($objFile->extension, trimsplit(',', $GLOBALS['TL_CONFIG']['editableFiles'])))
 		{

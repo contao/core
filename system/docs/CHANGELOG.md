@@ -4,6 +4,11 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+Made the `String` methods static and left the Singleton routines so the class
+can still be used in object context (I actually wonder that PHP supports it, but
+it does) (see #3898).
+
 ### New
 Added the classes `Validator` and `Idna` to encapsulate validation and IDNA
 domain name encoding in static methods.

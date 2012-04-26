@@ -570,7 +570,7 @@ class tl_article extends Backend
 		{
 			if (!$autoAlias)
 			{
-				throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+				throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 			}
 
 			$varValue .= '-' . $dc->id;

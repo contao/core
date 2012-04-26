@@ -98,13 +98,13 @@ class Main extends Backend
 	 */
 	public function run()
 	{
-		$this->Template = new BackendTemplate('be_main');
+		$this->Template = new \BackendTemplate('be_main');
 		$this->Template->main = '';
 
 		// Ajax request
 		if ($_POST && $this->Environment->isAjaxRequest)
 		{
-			$this->objAjax = new Ajax($this->Input->post('action'));
+			$this->objAjax = new \Ajax($this->Input->post('action'));
 			$this->objAjax->executePreActions();
 		}
 
@@ -136,7 +136,7 @@ class Main extends Backend
 	{
 		$this->loadLanguageFile('explain');
 
-		$objTemplate = new BackendTemplate('be_welcome');
+		$objTemplate = new \BackendTemplate('be_welcome');
 		$objTemplate->messages = $this->getMessages(false, true);
 
 		// HOOK: add custom messages
@@ -161,9 +161,6 @@ class Main extends Backend
 			}
 		}
 
-		$this->import('String');
-
-		$count = 0;
 		$arrVersions = array();
 
 		// Get the latest versions
@@ -179,7 +176,7 @@ class Main extends Backend
 			$arrRow['from'] = 1;
 			$arrRow['to'] = $objVersions->version;
 			$arrRow['date'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objVersions->tstamp);
-			$arrRow['description'] = $this->String->substr($arrRow['description'], 32);
+			$arrRow['description'] = \String::substr($arrRow['description'], 32);
 
 			$arrVersions[] = $arrRow;
 		}

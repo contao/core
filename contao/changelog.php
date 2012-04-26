@@ -113,7 +113,7 @@ class Changelog extends Backend
 			trim($strBuffer)
 		);
 
-		$this->Template = new BackendTemplate('be_changelog');
+		$this->Template = new \BackendTemplate('be_changelog');
 
 		// Template variables
 		$this->Template->content = $strBuffer;

@@ -394,7 +394,7 @@ class tl_faq extends Backend
 		// Check whether the news alias exists
 		if ($objAlias->numRows > 1 && !$autoAlias)
 		{
-			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 		}
 
 		// Add ID to alias

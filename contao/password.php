@@ -73,7 +73,7 @@ class ChangePassword extends Backend
 	 */
 	public function run()
 	{
-		$this->Template = new BackendTemplate('be_password');
+		$this->Template = new \BackendTemplate('be_password');
 
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_password')
 		{

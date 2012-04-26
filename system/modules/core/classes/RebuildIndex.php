@@ -147,12 +147,11 @@ class RebuildIndex extends \Backend implements \executable
 
 			$strBuffer = '';
 			$rand = rand();
-			$this->import('String');
 
 			// Display the pages
 			for ($i=0; $i<count($arrPages); $i++)
 			{
-				$strBuffer .= '<img src="' . $arrPages[$i] . '#' . $rand . $i . '" alt="" class="invisible">' . $this->String->substr($arrPages[$i], 100) . "<br>\n";
+				$strBuffer .= '<img src="' . $arrPages[$i] . '#' . $rand . $i . '" alt="" class="invisible">' . \String::substr($arrPages[$i], 100) . "<br>\n";
 			}
 
 			$objTemplate->content = $strBuffer;

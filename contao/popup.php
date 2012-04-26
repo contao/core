@@ -111,7 +111,7 @@ class Popup extends Backend
 		// Open download dialogue
 		if ($this->Input->get('download') && $this->strFile)
 		{
-			$objFile = new File($this->strFile);
+			$objFile = new \File($this->strFile);
 
 			header('Content-Type: ' . $objFile->mime);
 			header('Content-Transfer-Encoding: binary');
@@ -129,8 +129,8 @@ class Popup extends Backend
 			$this->redirect(str_replace('&download=1', '', $this->Environment->request));
 		}
 
-		$this->Template = new BackendTemplate('be_popup');
-		$objFile = new File($this->strFile);
+		$this->Template = new \BackendTemplate('be_popup');
+		$objFile = new \File($this->strFile);
 
 		// Add file info
 		$this->Template->icon = $objFile->icon;

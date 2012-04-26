@@ -108,8 +108,6 @@ class ModuleListing extends \Module
 	 */
 	protected function compile()
 	{
-		$this->import('String');
-
 		$this->loadLanguageFile($this->list_table);
 		$this->loadDataContainer($this->list_table);
 
@@ -436,7 +434,7 @@ class ModuleListing extends \Module
 		// E-mail addresses
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'email')
 		{
-			$value = $this->String->encodeEmail($value);
+			$value = \String::encodeEmail($value);
 			$value = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $value . '">' . $value . '</a>';
 		}
 

@@ -206,19 +206,17 @@ class ModuleEventReader extends \Events
 		$objTemplate->recurring = $recurring;
 		$objTemplate->until = $until;
 
-		$this->import('String');
-
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$objEvent->details = $this->String->toXhtml($objEvent->details);
+			$objEvent->details = \String::toXhtml($objEvent->details);
 		}
 		else
 		{
-			$objEvent->details = $this->String->toHtml5($objEvent->details);
+			$objEvent->details = \String::toHtml5($objEvent->details);
 		}
 
-		$objTemplate->details = $this->String->encodeEmail($objEvent->details);
+		$objTemplate->details = \String::encodeEmail($objEvent->details);
 		$objTemplate->addImage = false;
 
 		// Add an image

@@ -88,7 +88,7 @@ class PreviewSwitch extends Backend
 		}
 
 		// Create the template object
-		$this->Template = new BackendTemplate('be_switch');
+		$this->Template = new \BackendTemplate('be_switch');
 		$this->Template->user = $intUser;
 		$this->Template->show = $this->Input->cookie('FE_PREVIEW');
 		$this->Template->update = false;

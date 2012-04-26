@@ -127,7 +127,6 @@ abstract class Events extends \Module
 			return array();
 		}
 
-		$this->import('String');
 		$this->arrEvents = array();
 
 		foreach ($arrCalendars as $id)
@@ -268,7 +267,7 @@ abstract class Events extends \Module
 		$arrEvent['title'] = specialchars($objEvents->title, true);
 		$arrEvent['href'] = $this->generateEventUrl($objEvents, $strUrl);
 		$arrEvent['class'] = ($objEvents->cssClass != '') ? ' ' . $objEvents->cssClass : '';
-		$arrEvent['details'] = $this->String->encodeEmail($objEvents->details);
+		$arrEvent['details'] = \String::encodeEmail($objEvents->details);
 		$arrEvent['start'] = $intStart;
 		$arrEvent['end'] = $intEnd;
 
@@ -283,11 +282,11 @@ abstract class Events extends \Module
 		{
 			if ($objPage->outputFormat == 'xhtml')
 			{
-				$arrEvent['teaser'] = $this->String->toXhtml($arrEvent['teaser']);
+				$arrEvent['teaser'] = \String::toXhtml($arrEvent['teaser']);
 			}
 			else
 			{
-				$arrEvent['teaser'] = $this->String->toHtml5($arrEvent['teaser']);
+				$arrEvent['teaser'] = \String::toHtml5($arrEvent['teaser']);
 			}
 		}
 
@@ -302,11 +301,11 @@ abstract class Events extends \Module
 		{
 			if ($objPage->outputFormat == 'xhtml')
 			{
-				$arrEvent['details'] = $this->String->toXhtml($arrEvent['details']);
+				$arrEvent['details'] = \String::toXhtml($arrEvent['details']);
 			}
 			else
 			{
-				$arrEvent['details'] = $this->String->toHtml5($arrEvent['details']);
+				$arrEvent['details'] = \String::toHtml5($arrEvent['details']);
 			}
 		}
 
@@ -365,11 +364,9 @@ abstract class Events extends \Module
 		{
 			// Link to an external page
 			case 'external':
-				$this->import('String');
-
 				if (substr($objEvent->url, 0, 7) == 'mailto:')
 				{
-					return $this->String->encodeEmail($objEvent->url);
+					return \String::encodeEmail($objEvent->url);
 				}
 				else
 				{
@@ -464,12 +461,12 @@ abstract class Events extends \Module
 				break;
 
 			case 'next_cur_month':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array($objToday->dayBegin, $objToday->monthEnd, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_cur_year':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array($objToday->dayBegin, $objToday->yearEnd, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
@@ -514,12 +511,12 @@ abstract class Events extends \Module
 				break;
 
 			case 'past_cur_month':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array($objToday->monthBegin, ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_cur_year':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array($objToday->yearBegin, ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 

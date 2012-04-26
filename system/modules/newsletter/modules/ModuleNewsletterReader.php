@@ -187,8 +187,7 @@ class ModuleNewsletterReader extends \Module
 		$strContent = $this->parseSimpleTokens($strContent, array());
 
 		// Encode e-mail addresses
-		$this->import('String');
-		$strContent = $this->String->encodeEmail($strContent);
+		$strContent = \String::encodeEmail($strContent);
 
 		$this->Template->content = $strContent;
 		$this->Template->subject = $objNewsletter->subject;

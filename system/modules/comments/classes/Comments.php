@@ -56,7 +56,6 @@ class Comments extends \Frontend
 	public function addCommentsToTemplate(\FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $arrNotifies)
 	{
 		global $objPage;
-		$this->import('String');
 
 		$limit = 0;
 		$offset = 0;
@@ -127,11 +126,11 @@ class Comments extends \Frontend
 				// Clean the RTE output
 				if ($objPage->outputFormat == 'xhtml')
 				{
-					$objComments->comment = $this->String->toXhtml($objComments->comment);
+					$objComments->comment = \String::toXhtml($objComments->comment);
 				}
 				else
 				{
-					$objComments->comment = $this->String->toHtml5($objComments->comment);
+					$objComments->comment = \String::toHtml5($objComments->comment);
 				}
 
 				$objPartial->comment = trim(str_replace(array('{{', '}}'), array('&#123;&#123;', '&#125;&#125;'), $objComments->comment));
@@ -158,11 +157,11 @@ class Comments extends \Frontend
 						// Clean the RTE output
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$objPartial->reply = $this->String->toXhtml($objPartial->reply);
+							$objPartial->reply = \String::toXhtml($objPartial->reply);
 						}
 						else
 						{
-							$objPartial->reply = $this->String->toHtml5($objPartial->reply);
+							$objPartial->reply = \String::toHtml5($objPartial->reply);
 						}
 					}
 				}
@@ -290,7 +289,6 @@ class Comments extends \Frontend
 		// Add the comment
 		if ($this->Input->post('FORM_SUBMIT') == $strFormId && !$doNotSubmit)
 		{
-			$this->import('String');
 			$strWebsite = $arrWidgets['website']->value;
 
 			// Add http:// to the website
@@ -356,7 +354,7 @@ class Comments extends \Frontend
 
 			// Convert the comment to plain text
 			$strComment = strip_tags($strComment);
-			$strComment = $this->String->decodeEntities($strComment);
+			$strComment = \String::decodeEntities($strComment);
 			$strComment = str_replace(array('[&]', '[lt]', '[gt]'), array('&', '<', '>'), $strComment);
 
 			// Add comment details
@@ -445,7 +443,7 @@ class Comments extends \Frontend
 		// Encode e-mail addresses
 		if (strpos($strComment, 'mailto:') !== false)
 		{
-			$strComment = $this->String->encodeEmail($strComment);
+			$strComment = \String::encodeEmail($strComment);
 		}
 
 		return $strComment;

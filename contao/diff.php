@@ -188,7 +188,7 @@ class DiffController extends Backend
 						}
 
 						$objDiff = new \Diff($from[$k], $to[$k]);
-						$strBuffer .= $objDiff->Render(new Diff_Renderer_Html_Contao(array('field'=>($arrFields[$k]['label'][0] ?: $k))));
+						$strBuffer .= $objDiff->Render(new \Diff_Renderer_Html_Contao(array('field'=>($arrFields[$k]['label'][0] ?: $k))));
 					}
 				}
 			}
@@ -200,7 +200,7 @@ class DiffController extends Backend
 			$strBuffer = '<p>'.$GLOBALS['TL_LANG']['MSC']['identicalVersions'].'</p>';
 		}
 
-		$this->Template = new BackendTemplate('be_diff');
+		$this->Template = new \BackendTemplate('be_diff');
 
 		// Template variables
 		$this->Template->content = $strBuffer;

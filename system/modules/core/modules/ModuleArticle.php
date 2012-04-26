@@ -84,7 +84,6 @@ class ModuleArticle extends \Module
 	protected function compile()
 	{
 		global $objPage;
-		$this->import('String');
 
 		if ($this->blnNoMarkup)
 		{
@@ -116,11 +115,11 @@ class ModuleArticle extends \Module
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$this->teaser = $this->String->toXhtml($this->teaser);
+			$this->teaser = \String::toXhtml($this->teaser);
 		}
 		else
 		{
-			$this->teaser = $this->String->toHtml5($this->teaser);
+			$this->teaser = \String::toHtml5($this->teaser);
 		}
 
 		// Show the teaser only
