@@ -291,6 +291,7 @@ $GLOBALS['TL_CONFIG']['useCE']      = true;
  * Please enter a comma separated list of allowed image types, editable files
  * and all all file types that are allowed to be downloaded.
  */
+$GLOBALS['TL_CONFIG']['loginCount']           = 3;
 $GLOBALS['TL_CONFIG']['resultsPerPage']       = 30;
 $GLOBALS['TL_CONFIG']['maxResultsPerPage']    = 500;
 $GLOBALS['TL_CONFIG']['customSections']       = '';

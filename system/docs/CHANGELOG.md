@@ -5,6 +5,9 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Made the number of login attempts configurable (see #3923).
+
+### Changed
 Themes, style sheets, newsletter recipients, list entries and table enties to be
 imported can now be directly uploaded.
 

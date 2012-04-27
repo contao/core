@@ -292,7 +292,7 @@ abstract class User extends System
 		if ($this->loginCount < 1)
 		{
 			$this->locked = $time;
-			$this->loginCount = 3;
+			$this->loginCount = $GLOBALS['TL_CONFIG']['loginCount'];
 			$this->save();
 
 			// Add a log entry
@@ -366,9 +366,9 @@ abstract class User extends System
 		$this->setUserFromDb();
 
 		// Update the record
-		$this->loginCount = 3;
 		$this->lastLogin = $this->currentLogin;
 		$this->currentLogin = $time;
+		$this->loginCount = $GLOBALS['TL_CONFIG']['loginCount'];
 		$this->save();
 
 		// Generate the session
