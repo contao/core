@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Controller, \DcaExtractor;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class DbInstaller extends \Controller
+class DbInstaller extends Controller
 {
 
 	/**
@@ -280,7 +281,7 @@ class DbInstaller extends \Controller
 
 		foreach ($arrTables as $strTable)
 		{
-			$objTable = new \DcaExtractor($strTable);
+			$objTable = new DcaExtractor($strTable);
 			$return[$strTable] = $objTable->getDbInstallerArray();
 		}
 

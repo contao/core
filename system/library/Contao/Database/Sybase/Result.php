@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Database_Result;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
-class Database_Sybase_Result extends \Database_Result
+class Database_Sybase_Result extends Database_Result
 {
 
 	/**

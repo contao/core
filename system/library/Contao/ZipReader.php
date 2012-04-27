@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Exception;
 
 
 /**
@@ -108,7 +109,7 @@ class ZipReader
 		// Check if file exists
 		if (!file_exists(TL_ROOT . '/' . $strFile))
 		{
-			throw new \Exception("Could not find file $strFile");
+			throw new Exception("Could not find file $strFile");
 		}
 
 		$this->resFile = @fopen(TL_ROOT . '/' . $strFile, 'rb');
@@ -116,7 +117,7 @@ class ZipReader
 		// Could not open file
 		if (!is_resource($this->resFile))
 		{
-			throw new \Exception("Could not open file $strFile");
+			throw new Exception("Could not open file $strFile");
 		}
 
 		$this->readCentralDirectory();
@@ -245,7 +246,7 @@ class ZipReader
 
 	/**
 	 * Go to the first file of the archive
-	 * @return \Contao\ZipReader
+	 * @return \ZipReader
 	 */
 	public function first()
 	{
@@ -256,7 +257,7 @@ class ZipReader
 
 	/**
 	 * Go to the next file of the archive
-	 * @return \Contao\ZipReader|boolean
+	 * @return \ZipReader|boolean
 	 */
 	public function next()
 	{
@@ -272,7 +273,7 @@ class ZipReader
 
 	/**
 	 * Go to the previous file of the archive
-	 * @return \Contao\ZipReader|boolean
+	 * @return \ZipReader|boolean
 	 */
 	public function prev()
 	{
@@ -288,7 +289,7 @@ class ZipReader
 
 	/**
 	 * Go to the last file of the archive
-	 * @return \Contao\ZipReader|boolean
+	 * @return \ZipReader|boolean
 	 */
 	public function last()
 	{
@@ -314,7 +315,7 @@ class ZipReader
 
 	/**
 	 * Reset the archive
-	 * @return \Contao\ZipReader
+	 * @return \ZipReader
 	 */
 	public function reset()
 	{
@@ -340,13 +341,13 @@ class ZipReader
 		// Encrypted files are not supported
 		if ($this->arrFiles[$this->intIndex]['general_purpose_bit_flag'] & 0x0001)
 		{
-			throw new \Exception("File $strName is encrypted");
+			throw new Exception("File $strName is encrypted");
 		}
 
 		// Reposition pointer
 		if (@fseek($this->resFile, $this->arrFiles[$this->intIndex]['offset_of_local_header']) !== 0)
 		{
-			throw new \Exception("Cannot reposition pointer");
+			throw new Exception("Cannot reposition pointer");
 		}
 
 		$strSignature = @fread($this->resFile, 4);
@@ -354,7 +355,7 @@ class ZipReader
 		// Not a file
 		if ($strSignature != self::FILE_SIGNATURE)
 		{
-			throw new \Exception("$strName is not a compressed file");
+			throw new Exception("$strName is not a compressed file");
 		}
 
 		// Get extra field length
@@ -389,27 +390,27 @@ class ZipReader
 			case 12:
 				if (!extension_loaded('bz2'))
 				{
-					throw new \Exception('PHP extension "bz2" required to decompress BZIP2 files');
+					throw new Exception('PHP extension "bz2" required to decompress BZIP2 files');
 				}
 				$strBuffer = bzdecompress($strBuffer);
 				break;
 
 			// Unknown
 			default:
-				throw new \Exception('Unknown compression method');
+				throw new Exception('Unknown compression method');
 				break;
 		}
 
 		// Check uncompressed data
 		if ($strBuffer === false)
 		{
-			throw new \Exception('Could not decompress data');
+			throw new Exception('Could not decompress data');
 		}
 
 		// Check uncompressed size
 		if (strlen($strBuffer) != $this->arrFiles[$this->intIndex]['uncompressed_size'])
 		{
-			throw new \Exception('Size of the uncompressed file does not match header value');
+			throw new Exception('Size of the uncompressed file does not match header value');
 		}
 
 		return $strBuffer;
@@ -444,7 +445,7 @@ class ZipReader
 		// Read archive header
 		if ($strSignature != self::CENTRAL_DIR_END)
 		{
-			throw new \Exception('Error reading central directory');
+			throw new Exception('Error reading central directory');
 		}
 
 		$arrHeader = array();

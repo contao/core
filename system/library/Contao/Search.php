@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Database, \String, \System, \Exception;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class Search extends \System
+class Search extends System
 {
 
 	/**
@@ -61,7 +62,7 @@ class Search extends \System
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return \Contao\Search
+	 * @return \Search
 	 * @deprecated
 	 */
 	public static function getInstance()
@@ -82,7 +83,7 @@ class Search extends \System
 	 */
 	public static function indexPage($arrData)
 	{
-		$objDatabase = \Database::getInstance();
+		$objDatabase = Database::getInstance();
 
 		$arrSet['url'] = $arrData['url'];
 		$arrSet['title'] = $arrData['title'];
@@ -154,13 +155,13 @@ class Search extends \System
 		// Get description
 		if (preg_match('/<meta[^>]+name="description"[^>]+content="([^"]*)"[^>]*>/i', $strHead, $tags))
 		{
-			$arrData['description'] = trim(preg_replace('/ +/', ' ', \String::decodeEntities($tags[1])));
+			$arrData['description'] = trim(preg_replace('/ +/', ' ', String::decodeEntities($tags[1])));
 		}
 
 		// Get keywords
 		if (preg_match('/<meta[^>]+name="keywords"[^>]+content="([^"]*)"[^>]*>/i', $strHead, $tags))
 		{
-			$arrData['keywords'] = trim(preg_replace('/ +/', ' ', \String::decodeEntities($tags[1])));
+			$arrData['keywords'] = trim(preg_replace('/ +/', ' ', String::decodeEntities($tags[1])));
 		}
 
 		// Read title and alt attributes
@@ -175,7 +176,7 @@ class Search extends \System
 
 		// Put everything together
 		$arrSet['text'] = $arrData['title'] . ' ' . $arrData['description'] . ' ' . $strBody . ' ' . $arrData['keywords'];
-		$arrSet['text'] = trim(preg_replace('/ +/', ' ', \String::decodeEntities($arrSet['text'])));
+		$arrSet['text'] = trim(preg_replace('/ +/', ' ', String::decodeEntities($arrSet['text'])));
 
 		$arrSet['tstamp'] = time();
 
@@ -301,14 +302,14 @@ class Search extends \System
 	 * @param integer
 	 * @param integer
 	 * @param boolean
-	 * @return \Contao\Database_Result
+	 * @return \Database_Result
 	 * @throws \Exception
 	 */
 	public static function searchFor($strKeywords, $blnOrSearch=false, $arrPid=array(), $intRows=0, $intOffset=0, $blnFuzzy=false)
 	{
 		// Clean the keywords
 		$strKeywords = utf8_strtolower($strKeywords);
-		$strKeywords = \String::decodeEntities($strKeywords);
+		$strKeywords = String::decodeEntities($strKeywords);
 
 		if (function_exists('mb_eregi_replace'))
 		{
@@ -322,7 +323,7 @@ class Search extends \System
 		// Check keyword string
 		if (!strlen($strKeywords))
 		{
-			throw new \Exception('Empty keyword string');
+			throw new Exception('Empty keyword string');
 		}
 
 		// Split keywords
@@ -509,7 +510,7 @@ class Search extends \System
 		$strQuery .= " ORDER BY relevance DESC";
 
 		// Return result
-		$objResultStmt = \Database::getInstance()->prepare($strQuery);
+		$objResultStmt = Database::getInstance()->prepare($strQuery);
 
 		if ($intRows > 0)
 		{
@@ -527,7 +528,7 @@ class Search extends \System
 	 */
 	public static function removeEntry($strUrl)
 	{
-		$objDatabase = \Database::getInstance();
+		$objDatabase = Database::getInstance();
 
 		$objSearch = $objDatabase->prepare("SELECT * FROM tl_search WHERE url=?")
 								 ->limit(1)

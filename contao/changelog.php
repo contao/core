@@ -113,12 +113,12 @@ class Changelog extends Backend
 			trim($strBuffer)
 		);
 
-		$this->Template = new \BackendTemplate('be_changelog');
+		$this->Template = new BackendTemplate('be_changelog');
 
 		// Template variables
 		$this->Template->content = $strBuffer;
 		$this->Template->theme = $this->getTheme();
-		$this->Template->base = \Environment::get('base');
+		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];

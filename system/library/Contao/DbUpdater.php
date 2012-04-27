@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Controller, \DcaExtractor, \File, \FilesModel, \Folder;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class DbUpdater extends \Controller
+class DbUpdater extends Controller
 {
 
 	/**
@@ -278,7 +279,7 @@ class DbUpdater extends \Controller
 		);
 
 		// Create the DCA extracts (will also create the DCA cache)
-		\DcaExtractor::createAllExtracts();
+		DcaExtractor::createAllExtracts();
 
 		// Add the "numberOfItems" field
 		$this->Database->query("ALTER TABLE `tl_module` ADD `numberOfItems` smallint(5) unsigned NOT NULL default '0'");
@@ -337,7 +338,7 @@ class DbUpdater extends \Controller
 		// Folders
 		foreach ($arrFolders as $strFolder)
 		{
-			$objFolder = new \Folder($strFolder);
+			$objFolder = new Folder($strFolder);
 
 			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, hash) VALUES (?, ?, ?, 'folder', ?, ?)")
 								 ->execute($pid, time(), basename($strFolder), $strFolder, $objFolder->hash)
@@ -365,7 +366,7 @@ class DbUpdater extends \Controller
 				}
 			}
 
-			$objFile = new \File($strFile);
+			$objFile = new File($strFile);
 
 			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, extension, hash) VALUES (?, ?, ?, 'file', ?, ?, ?)")
 								 ->execute($pid, time(), basename($strFile), $strFile, $objFile->extension, $objFile->hash)
@@ -426,7 +427,7 @@ class DbUpdater extends \Controller
 			{
 				if (!is_numeric($objRow->$field))
 				{
-					$objFile = \FilesModel::findByPath($objRow->$field);
+					$objFile = FilesModel::findByPath($objRow->$field);
 
 					$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
 								   ->execute($objFile->id, $objRow->id);
@@ -453,7 +454,7 @@ class DbUpdater extends \Controller
 				{
 					if (!is_numeric($v))
 					{
-						$objFile = \FilesModel::findByPath($v);
+						$objFile = FilesModel::findByPath($v);
 						$arrPaths[$k] = $objFile->id;
 					}
 				}

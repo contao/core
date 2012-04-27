@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Folder, \System, \Exception;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class ZipWriter extends \System
+class ZipWriter extends System
 {
 
 	/**
@@ -98,13 +99,13 @@ class ZipWriter extends \System
 		// Create temporary file
 		if (($this->strTemp = tempnam(TL_ROOT . '/' . self::TEMPORARY_FOLDER , 'zip')) == false)
 		{
-			throw new \Exception("Cannot create temporary file");
+			throw new Exception("Cannot create temporary file");
 		}
 
 		// Open temporary file
 		if (($this->resFile = @fopen($this->strTemp, 'wb')) == false)
 		{
-			throw new \Exception("Cannot open temporary file");
+			throw new Exception("Cannot open temporary file");
 		}
 	}
 
@@ -137,7 +138,7 @@ class ZipWriter extends \System
 	{
 		if (!file_exists(TL_ROOT . '/' . $strFile))
 		{
-			throw new \Exception("File $strFile does not exist");
+			throw new Exception("File $strFile does not exist");
 		}
 
 		$this->addString(file_get_contents(TL_ROOT . '/' . $strFile), $strName ?: $strFile, filemtime(TL_ROOT . '/' . $strFile));
@@ -249,7 +250,7 @@ class ZipWriter extends \System
 			// Create folder
 			if (!is_dir(TL_ROOT . '/' . $strFolder))
 			{
-				new \Folder($strFolder);
+				new Folder($strFolder);
 			}
 		}
 

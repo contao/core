@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Database_Result, \Exception;
 
 
 /**
@@ -86,7 +87,7 @@ abstract class Database_Statement
 	{
 		if (!is_resource($resConnection) && !is_object($resConnection))
 		{
-			throw new \Exception('Invalid connection resource');
+			throw new Exception('Invalid connection resource');
 		}
 
 		$this->resConnection = $resConnection;
@@ -135,14 +136,14 @@ abstract class Database_Statement
 	/**
 	 * Prepare a statement
 	 * @param string
-	 * @return \Contao\Database_Statement
+	 * @return \Database_Statement
 	 * @throws \Exception
 	 */
 	public function prepare($strQuery)
 	{
 		if ($strQuery == '')
 		{
-			throw new \Exception('Empty query string');
+			throw new Exception('Empty query string');
 		}
 
 		$this->resResult = NULL;
@@ -179,7 +180,7 @@ abstract class Database_Statement
 	 * $objStatement->prepare("UPDATE table %s")->set(array('id'=>'my_id'));
 	 * will be transformed into "UPDATE table SET id='my_id'".
 	 * @param array
-	 * @return \Contao\Database_Statement
+	 * @return \Database_Statement
 	 */
 	public function set($arrParams)
 	{
@@ -214,7 +215,7 @@ abstract class Database_Statement
 	 * Limit the current result to a certain number of rows and take an offset value as second argument
 	 * @param integer
 	 * @param integer
-	 * @return \Contao\Database_Statement
+	 * @return \Database_Statement
 	 */
 	public function limit($intRows, $intOffset=0)
 	{
@@ -235,8 +236,7 @@ abstract class Database_Statement
 
 	/**
 	 * Escape the parameters and execute the current statement
-	 * @return \Contao\Database_Result
-	 * @throws \Exception
+	 * @return \Database_Result
 	 */
 	public function execute()
 	{
@@ -259,7 +259,7 @@ abstract class Database_Statement
 		$objResult = $this->query();
 
 		// Cache the result objects
-		if ($objResult instanceof \Database_Result)
+		if ($objResult instanceof Database_Result)
 		{
 			self::$arrCache[$strKey] = $objResult;
 		}
@@ -270,7 +270,7 @@ abstract class Database_Statement
 
 	/**
 	 * Execute the current statement but do not cache the result
-	 * @return \Contao\Database_Result
+	 * @return \Database_Result
 	 * @throws \Exception
 	 */
 	public function executeUncached()
@@ -290,7 +290,7 @@ abstract class Database_Statement
 	/**
 	 * Execute a query and return the result object
 	 * @param string
-	 * @return \Contao\Database_Result
+	 * @return \Database_Result
 	 * @throws \Exception
 	 */
 	public function query($strQuery='')
@@ -303,13 +303,13 @@ abstract class Database_Statement
 		// Make sure there is a query string
 		if ($this->strQuery == '')
 		{
-			throw new \Exception('Empty query string');
+			throw new Exception('Empty query string');
 		}
 
 		// Execute the query
 		if (($this->resResult = $this->execute_query()) == false)
 		{
-			throw new \Exception(sprintf('Query error: %s (%s)', $this->error, $this->strQuery));
+			throw new Exception(sprintf('Query error: %s (%s)', $this->error, $this->strQuery));
 		}
 
 		// No result set available
@@ -340,7 +340,7 @@ abstract class Database_Statement
 		// Replace wildcards
 		if (($this->strQuery = @vsprintf($this->strQuery, $arrParams)) == false)
 		{
-			throw new \Exception('Too few arguments to build the query string');
+			throw new Exception('Too few arguments to build the query string');
 		}
 	}
 
@@ -384,7 +384,7 @@ abstract class Database_Statement
 
 	/**
 	 * Debug a query
-	 * @param \Contao\Database_Result
+	 * @param \Database_Result
 	 */
 	protected function debugQuery($objResult=null)
 	{

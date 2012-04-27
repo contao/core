@@ -82,7 +82,7 @@ class Input
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return \Contao\Input
+	 * @return \Input
 	 * @deprecated
 	 */
 	public static function getInstance()

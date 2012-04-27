@@ -73,13 +73,13 @@ class Help extends Backend
 	 */
 	public function run()
 	{
-		$table = \Input::get('table');
-		$field = \Input::get('field');
+		$table = Input::get('table');
+		$field = Input::get('field');
 
 		$this->loadLanguageFile($table);
 		$this->loadDataContainer($table);
 
-		$this->Template = new \BackendTemplate('be_help');
+		$this->Template = new BackendTemplate('be_help');
 		$this->Template->rows = array();
 		$this->Template->explanation = '';
 
@@ -171,7 +171,7 @@ class Help extends Backend
 		}
 
 		$this->Template->theme = $this->getTheme();
-		$this->Template->base = \Environment::get('base');
+		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];

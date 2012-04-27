@@ -34,7 +34,7 @@
  */
 define('K_TCPDF_EXTERNAL_CONFIG', true);
 define('K_PATH_MAIN', TL_ROOT . '/system/library/TCPDF/');
-define('K_PATH_URL', \Environment::get('base') . 'system/library/TCPDF/');
+define('K_PATH_URL', Environment::get('base') . 'system/library/TCPDF/');
 define('K_PATH_FONTS', K_PATH_MAIN . 'fonts/');
 define('K_PATH_CACHE', K_PATH_MAIN . 'cache/');
 define('K_PATH_URL_CACHE', K_PATH_URL . 'cache/');
@@ -43,7 +43,7 @@ define('K_BLANK_IMAGE', K_PATH_IMAGES . '_blank.png');
 define('PDF_PAGE_FORMAT', 'A4');
 define('PDF_PAGE_ORIENTATION', 'P');
 define('PDF_CREATOR', 'Contao Open Source CMS');
-define('PDF_AUTHOR', \Environment::get('url'));
+define('PDF_AUTHOR', Environment::get('url'));
 define('PDF_HEADER_TITLE', $GLOBALS['TL_CONFIG']['websiteTitle']);
 define('PDF_HEADER_STRING', '');
 define('PDF_HEADER_LOGO', '');

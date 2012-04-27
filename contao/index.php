@@ -72,16 +72,16 @@ class Index extends Backend
 			$strUrl = 'contao/main.php';
 
 			// Redirect to the last page visited
-			if (\Input::get('referer', true) != '')
+			if (Input::get('referer', true) != '')
 			{
-				$strUrl = base64_decode(\Input::get('referer', true));
+				$strUrl = base64_decode(Input::get('referer', true));
 			}
 
 			$this->redirect($strUrl);
 		}
 
 		// Reload the page if authentication fails
-		elseif (\Input::post('username') && \Input::post('password'))
+		elseif (Input::post('username') && Input::post('password'))
 		{
 			$this->reload();
 		}
@@ -103,33 +103,33 @@ class Index extends Backend
 	 */
 	public function run()
 	{
-		$this->Template = new \BackendTemplate('be_login');
+		$this->Template = new BackendTemplate('be_login');
 
 		// Show a cookie warning
-		if (\Input::get('referer', true) != '' && empty($_COOKIE))
+		if (Input::get('referer', true) != '' && empty($_COOKIE))
 		{
 			$this->Template->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
 		}
 
 		$this->Template->theme = $this->getTheme();
 		$this->Template->messages = $this->getMessages();
-		$this->Template->base = \Environment::get('base');
+		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->languages = $this->getBackendLanguages();
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->action = ampersand(\Environment::get('request'));
+		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->userLanguage = $GLOBALS['TL_LANG']['tl_user']['language'][0];
 		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['MSC']['loginTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
-		$this->Template->curLanguage = \Input::post('language') ?: $GLOBALS['TL_LANGUAGE'];
-		$this->Template->curUsername = \Input::post('username') ?: '';
-		$this->Template->uClass = ($_POST && !\Input::post('username')) ? ' class="login_error"' : '';
-		$this->Template->pClass = ($_POST && !\Input::post('password')) ? ' class="login_error"' : '';
+		$this->Template->curLanguage = Input::post('language') ?: $GLOBALS['TL_LANGUAGE'];
+		$this->Template->curUsername = Input::post('username') ?: '';
+		$this->Template->uClass = ($_POST && !Input::post('username')) ? ' class="login_error"' : '';
+		$this->Template->pClass = ($_POST && !Input::post('password')) ? ' class="login_error"' : '';
 		$this->Template->loginButton = specialchars($GLOBALS['TL_LANG']['MSC']['loginBT']);
 		$this->Template->username = $GLOBALS['TL_LANG']['tl_user']['username'][0];
 		$this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
 		$this->Template->feLink = $GLOBALS['TL_LANG']['MSC']['feLink'];
-		$this->Template->frontendFile = \Environment::get('base');
+		$this->Template->frontendFile = Environment::get('base');
 		$this->Template->disableCron = $GLOBALS['TL_CONFIG']['disableCron'];
 		$this->Template->ie6warning = sprintf($GLOBALS['TL_LANG']['ERR']['ie6warning'], '<a href="http://ie6countdown.com">', '</a>');
 

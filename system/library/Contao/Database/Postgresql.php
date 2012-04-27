@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Database, \Database_Postgresql_Statement;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
-class Database_Postgresql extends \Database
+class Database_Postgresql extends Database
 {
 
 	/**
@@ -239,10 +240,10 @@ class Database_Postgresql extends \Database
 	 * Create a Database_Statement object
 	 * @param resource
 	 * @param boolean
-	 * @return \Contao\Database_Postgresql_Statement
+	 * @return \Database_Postgresql_Statement
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
-		return new \Database_Postgresql_Statement($resConnection, $blnDisableAutocommit);
+		return new Database_Postgresql_Statement($resConnection, $blnDisableAutocommit);
 	}
 }

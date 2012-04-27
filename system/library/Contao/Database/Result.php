@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Exception;
 
 
 /**
@@ -98,7 +99,7 @@ abstract class Database_Result
 	{
 		if (!is_resource($resResult) && !is_object($resResult))
 		{
-			throw new \Exception('Invalid result resource');
+			throw new Exception('Invalid result resource');
 		}
 
 		$this->resResult = $resResult;
@@ -298,7 +299,7 @@ abstract class Database_Result
 
 	/**
 	 * Go to the first row of the current result
-	 * @return \Contao\Database_Result
+	 * @return \Database_Result
 	 */
 	public function first()
 	{
@@ -314,7 +315,7 @@ abstract class Database_Result
 
 	/**
 	 * Go to the previous row of the current result
-	 * @return \Contao\Database_Result|boolean
+	 * @return \Database_Result|boolean
 	 */
 	public function prev()
 	{
@@ -330,7 +331,7 @@ abstract class Database_Result
 
 	/**
 	 * Go to the next row of the current result
-	 * @return \Contao\Database_Result|boolean
+	 * @return \Database_Result|boolean
 	 */
 	public function next()
 	{
@@ -361,7 +362,7 @@ abstract class Database_Result
 
 	/**
 	 * Go to the last row of the current result
-	 * @return \Contao\Database_Result|boolean
+	 * @return \Database_Result|boolean
 	 */
 	public function last()
 	{
@@ -405,7 +406,7 @@ abstract class Database_Result
 
 	/**
 	 * Reset the current result
-	 * @return \Contao\Database_Result
+	 * @return \Database_Result
 	 */
 	public function reset()
 	{

@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \System, \Exception;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class Model_Collection extends \System
+class Model_Collection extends System
 {
 
 	/**
@@ -53,7 +54,7 @@ class Model_Collection extends \System
 
 	/**
 	 * Database result
-	 * @var \Contao\Database_Result
+	 * @var \Database_Result
 	 */
 	protected $objResult;
 
@@ -161,7 +162,7 @@ class Model_Collection extends \System
 	/**
 	 * Set the current record from an array
 	 * @param array
-	 * @return \Contao\Model_Collection
+	 * @return \Model_Collection
 	 */
 	public function setRow(Array $arrData)
 	{
@@ -177,7 +178,7 @@ class Model_Collection extends \System
 
 	/**
 	 * Save the current model
-	 * @return \Contao\Model_Collection
+	 * @return \Model_Collection
 	 */
 	public function save()
 	{
@@ -209,7 +210,7 @@ class Model_Collection extends \System
 	/**
 	 * Lazy load related records
 	 * @param string
-	 * @return \Contao\Model|\Contao\Model_Collection
+	 * @return \Model|\Model_Collection
 	 */
 	public function getRelated($strKey)
 	{
@@ -234,7 +235,7 @@ class Model_Collection extends \System
 
 	/**
 	 * Go to the first row
-	 * @return \Contao\Model_Collection
+	 * @return \Model_Collection
 	 */
 	public function first()
 	{
@@ -250,7 +251,7 @@ class Model_Collection extends \System
 
 	/**
 	 * Go to the previous row
-	 * @return \Contao\Model_Collection
+	 * @return \Model_Collection
 	 */
 	public function prev()
 	{
@@ -266,7 +267,7 @@ class Model_Collection extends \System
 
 	/**
 	 * Return the current model
-	 * @return \Contao\Model
+	 * @return \Model
 	 */
 	public function current()
 	{
@@ -281,7 +282,7 @@ class Model_Collection extends \System
 
 	/**
 	 * Go to the next row
-	 * @return \Contao\Model_Collection|boolean
+	 * @return \Model_Collection|boolean
 	 */
 	public function next()
 	{
@@ -306,7 +307,7 @@ class Model_Collection extends \System
 
 	/**
 	 * Go to the last row
-	 * @return \Contao\Model_Collection
+	 * @return \Model_Collection
 	 */
 	public function last()
 	{
@@ -323,7 +324,7 @@ class Model_Collection extends \System
 
 	/**
 	 * Reset the model
-	 * @return \Contao\Model_Collection
+	 * @return \Model_Collection
 	 */
 	public function reset()
 	{
@@ -348,7 +349,7 @@ class Model_Collection extends \System
 
 		if (!isset($this->arrModels[0]->$strKey))
 		{
-			throw new \Exception("Unknown field $strKey");
+			throw new Exception("Unknown field $strKey");
 		}
 
 		$return = array();

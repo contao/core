@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Cache, \File, \System, \Exception;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class Folder extends \System
+class Folder extends System
 {
 
 	/**
@@ -68,7 +69,7 @@ class Folder extends \System
 		// Check whether it is a directory
 		if (is_file(TL_ROOT . '/' . $strFolder))
 		{
-			throw new \Exception(sprintf('File "%s" is not a directory', $strFolder));
+			throw new Exception(sprintf('File "%s" is not a directory', $strFolder));
 		}
 
 		$this->import('Files');
@@ -98,16 +99,16 @@ class Folder extends \System
 	{
 		$strCacheKey = __METHOD__ . '-' . $this->strFolder . '-' . $strKey;
 
-		if (!\Cache::has($strCacheKey))
+		if (!Cache::has($strCacheKey))
 		{
 			switch ($strKey)
 			{
 				case 'hash':
-					\Cache::set($strCacheKey, $this->getHash());
+					Cache::set($strCacheKey, $this->getHash());
 					break;
 
 				case 'value':
-					\Cache::set($strCacheKey, $this->strFolder);
+					Cache::set($strCacheKey, $this->strFolder);
 					break;
 
 				default:
@@ -116,7 +117,7 @@ class Folder extends \System
 			}
 		}
 
-		return \Cache::get($strCacheKey);
+		return Cache::get($strCacheKey);
 	}
 
 
@@ -209,7 +210,7 @@ class Folder extends \System
 	{
 		if (!file_exists(TL_ROOT . '/' . $this->strFolder . '/.htaccess'))
 		{
-			$objFile = new \File($this->strFolder . '/.htaccess');
+			$objFile = new File($this->strFolder . '/.htaccess');
 			$objFile->write("order deny,allow\ndeny from all");
 			$objFile->close();
 		}

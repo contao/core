@@ -82,9 +82,9 @@ class Main extends Backend
 		}
 
 		// Front end redirect
-		if (\Input::get('do') == 'feRedirect')
+		if (Input::get('do') == 'feRedirect')
 		{
-			$this->redirectToFrontendPage(\Input::get('page'), \Input::get('article'));
+			$this->redirectToFrontendPage(Input::get('page'), Input::get('article'));
 		}
 
 		$this->loadLanguageFile('default');
@@ -98,30 +98,30 @@ class Main extends Backend
 	 */
 	public function run()
 	{
-		$this->Template = new \BackendTemplate('be_main');
+		$this->Template = new BackendTemplate('be_main');
 		$this->Template->main = '';
 
 		// Ajax request
-		if ($_POST && \Environment::get('isAjaxRequest'))
+		if ($_POST && Environment::get('isAjaxRequest'))
 		{
-			$this->objAjax = new \Ajax(\Input::post('action'));
+			$this->objAjax = new Ajax(Input::post('action'));
 			$this->objAjax->executePreActions();
 		}
 
 		// Error
-		if (\Input::get('act') == 'error')
+		if (Input::get('act') == 'error')
 		{
 			$this->Template->error = $GLOBALS['TL_LANG']['ERR']['general'];
 		}
 		// Welcome screen
-		elseif (!\Input::get('do') && !\Input::get('act'))
+		elseif (!Input::get('do') && !Input::get('act'))
 		{
 			$this->Template->main .= $this->welcomeScreen();
 		}
 		// Open a module
-		elseif (\Input::get('do'))
+		elseif (Input::get('do'))
 		{
-			$this->Template->main .= $this->getBackendModule(\Input::get('do'));
+			$this->Template->main .= $this->getBackendModule(Input::get('do'));
 		}
 
 		$this->output();
@@ -136,7 +136,7 @@ class Main extends Backend
 	{
 		$this->loadLanguageFile('explain');
 
-		$objTemplate = new \BackendTemplate('be_welcome');
+		$objTemplate = new BackendTemplate('be_welcome');
 		$objTemplate->messages = $this->getMessages(false, true);
 
 		// HOOK: add custom messages
@@ -176,7 +176,7 @@ class Main extends Backend
 			$arrRow['from'] = 1;
 			$arrRow['to'] = $objVersions->version;
 			$arrRow['date'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objVersions->tstamp);
-			$arrRow['description'] = \String::substr($arrRow['description'], 32);
+			$arrRow['description'] = String::substr($arrRow['description'], 32);
 
 			$arrVersions[] = $arrRow;
 		}
@@ -234,20 +234,20 @@ class Main extends Backend
 		}
 
 		$this->Template->theme = $this->getTheme();
-		$this->Template->base = \Environment::get('base');
+		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->account = $GLOBALS['TL_LANG']['MOD']['login'][1];
 		$this->Template->preview = $GLOBALS['TL_LANG']['MSC']['fePreview'];
 		$this->Template->previewTitle = specialchars($GLOBALS['TL_LANG']['MSC']['fePreviewTitle']);
-		$this->Template->pageOffset = \Input::cookie('BE_PAGE_OFFSET');
+		$this->Template->pageOffset = Input::cookie('BE_PAGE_OFFSET');
 		$this->Template->logout = $GLOBALS['TL_LANG']['MSC']['logoutBT'];
 		$this->Template->logoutTitle = specialchars($GLOBALS['TL_LANG']['MSC']['logoutBTTitle']);
 		$this->Template->backendModules = $GLOBALS['TL_LANG']['MSC']['backendModules'];
 		$this->Template->username = $GLOBALS['TL_LANG']['MSC']['user'] . ' ' . $GLOBALS['TL_USERNAME'];
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
-		$this->Template->request = ampersand(\Environment::get('request'));
+		$this->Template->request = ampersand(Environment::get('request'));
 		$this->Template->top = $GLOBALS['TL_LANG']['MSC']['backToTop'];
 		$this->Template->modules = $this->User->navigation();
 		$this->Template->home = $GLOBALS['TL_LANG']['MSC']['home'];
@@ -264,13 +264,13 @@ class Main extends Backend
 		if (CURRENT_ID != '')
 		{
 			// Pages
-			if (\Input::get('do') == 'page')
+			if (Input::get('do') == 'page')
 			{
 				$this->Template->frontendFile = '?page=' . CURRENT_ID;
 			}
 
 			// Articles
-			elseif (\Input::get('do') == 'article')
+			elseif (Input::get('do') == 'article')
 			{
 				$objArticle = ArticleModel::findByPk(CURRENT_ID);
 

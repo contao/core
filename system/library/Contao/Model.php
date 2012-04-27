@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Database, \DcaExtractor, \Model_Collection, \Model_QueryBuilder, \System, \Exception;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-abstract class Model extends \System
+abstract class Model extends System
 {
 
 	/**
@@ -84,7 +85,7 @@ abstract class Model extends \System
 	{
 		parent::__construct();
 
-		$objRelations = new \DcaExtractor(static::$strTable);
+		$objRelations = new DcaExtractor(static::$strTable);
 		$this->arrRelations = $objRelations->getRelations();
 
 		if ($objResult !== null)
@@ -176,7 +177,7 @@ abstract class Model extends \System
 	/**
 	 * Set the current record from an array
 	 * @param array
-	 * @return \Contao\Model
+	 * @return \Model
 	 */
 	public function setRow(Array $arrData)
 	{
@@ -188,7 +189,7 @@ abstract class Model extends \System
 	/**
 	 * Save the current record and return the number of affected rows or the last insert ID
 	 * @param boolean
-	 * @return \Contao\Model
+	 * @return \Model
 	 */
 	public function save($blnForceInsert=false)
 	{
@@ -196,15 +197,15 @@ abstract class Model extends \System
 
 		if (isset($this->{static::$strPk}) && !$blnForceInsert)
 		{
-			\Database::getInstance()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
-									->set($arrSet)
-									->execute($this->{static::$strPk});
+			Database::getInstance()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
+								   ->set($arrSet)
+								   ->execute($this->{static::$strPk});
 		}
 		else
 		{
-			$stmt = \Database::getInstance()->prepare("INSERT INTO " . static::$strTable . " %s")
-											->set($arrSet)
-											->execute();
+			$stmt = Database::getInstance()->prepare("INSERT INTO " . static::$strTable . " %s")
+										   ->set($arrSet)
+										   ->execute();
 
 			if (static::$strPk == 'id')
 			{
@@ -233,16 +234,16 @@ abstract class Model extends \System
 	 */
 	public function delete()
 	{
-		return \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-									   ->execute($this->{static::$strPk})
-									   ->affectedRows;
+		return Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+									  ->execute($this->{static::$strPk})
+									  ->affectedRows;
 	}
 
 
 	/**
 	 * Lazy load related records
 	 * @param string
-	 * @return \Contao\Model|\Contao\Model_Collection
+	 * @return \Model|\Model_Collection
 	 * @throws \Exception
 	 */
 	public function getRelated($strKey)
@@ -256,7 +257,7 @@ abstract class Model extends \System
 		// The field or relation does not exist
 		if (!isset($this->$strKey) || !isset($this->arrRelations[$strKey]))
 		{
-			throw new \Exception("Field $strKey does not seem to be related");
+			throw new Exception("Field $strKey does not seem to be related");
 		}
 
 		$arrRelation = $this->arrRelations[$strKey];
@@ -272,7 +273,7 @@ abstract class Model extends \System
 		{
 			$arrValues = deserialize($this->$strKey, true);
 			$strField = $arrRelation['table'] . '.' . $arrRelation['field'];
-			$objModel = $strClass::findBy(array($strField . " IN('" . implode("','", $arrValues) . "')"), null, array('order'=>\Database::getInstance()->findInSet($strField, $arrValues)));
+			$objModel = $strClass::findBy(array($strField . " IN('" . implode("','", $arrValues) . "')"), null, array('order'=>Database::getInstance()->findInSet($strField, $arrValues)));
 			$this->arrRelated[$strKey] = $objModel;
 		}
 
@@ -284,7 +285,7 @@ abstract class Model extends \System
 	 * Find a single record by its primary key
 	 * @param mixed
 	 * @param array
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findByPk($varValue, Array $arrOptions=array())
 	{
@@ -303,7 +304,7 @@ abstract class Model extends \System
 	 * Find a single record by its ID or alias
 	 * @param mixed
 	 * @param array
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findByIdOrAlias($varId, Array $arrOptions=array())
 	{
@@ -325,7 +326,7 @@ abstract class Model extends \System
 	 * @param mixed
 	 * @param mixed
 	 * @param array
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findOneBy($strColumn, $varValue, Array $arrOptions=array())
 	{
@@ -345,7 +346,7 @@ abstract class Model extends \System
 	 * @param mixed
 	 * @param mixed
 	 * @param array
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findBy($strColumn, $varValue, Array $arrOptions=array())
 	{
@@ -362,7 +363,7 @@ abstract class Model extends \System
 	/**
 	 * Find all records
 	 * @param array
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findAll(Array $arrOptions=array())
 	{
@@ -394,7 +395,7 @@ abstract class Model extends \System
 	/**
 	 * Find records and return the model or model collection
 	 * @param array
-	 * @return \Contao\Model|\Contao\Model_Collection|null
+	 * @return \Model|\Model_Collection|null
 	 */
 	protected static function find(Array $arrOptions)
 	{
@@ -404,9 +405,9 @@ abstract class Model extends \System
 		}
 
 		$arrOptions['table'] = static::$strTable;
-		$strQuery = \Model_QueryBuilder::find($arrOptions);
+		$strQuery = Model_QueryBuilder::find($arrOptions);
 
-		$objStatement = \Database::getInstance()->prepare($strQuery);
+		$objStatement = Database::getInstance()->prepare($strQuery);
 
 		// Defaults for limit and offset
 		if (!isset($arrOptions['limit']))
@@ -433,7 +434,7 @@ abstract class Model extends \System
 		}
 
 		$objResult = static::postFind($objResult);
-		return ($arrOptions['limit'] == 1) ? new static($objResult) : new \Model_Collection($objResult, static::$strTable);
+		return ($arrOptions['limit'] == 1) ? new static($objResult) : new Model_Collection($objResult, static::$strTable);
 	}
 
 
@@ -472,14 +473,14 @@ abstract class Model extends \System
 			return 0;
 		}
 
-		$strQuery = \Model_QueryBuilder::count(array
+		$strQuery = Model_QueryBuilder::count(array
 		(
 			'table'  => static::$strTable,
 			'column' => $strColumn,
 			'value'  => $varValue
 		));
 
-		return \Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
+		return Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
 	}
 
 

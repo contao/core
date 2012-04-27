@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Database_Statement, \Database_Oracle_Result;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
-class Database_Oracle_Statement extends \Database_Statement
+class Database_Oracle_Statement extends Database_Statement
 {
 
 	/**
@@ -174,10 +175,10 @@ class Database_Oracle_Statement extends \Database_Statement
 	 * Create a Database_Result object
 	 * @param resource
 	 * @param string
-	 * @return \Contao\Database_Oracle_Result
+	 * @return \Database_Oracle_Result
 	 */
 	protected function createResult($resResult, $strQuery)
 	{
-		return new \Database_Oracle_Result($resResult, $strQuery);
+		return new Database_Oracle_Result($resResult, $strQuery);
 	}
 }

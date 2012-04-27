@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Exception;
 
 
 /**
@@ -124,7 +125,7 @@ class Request
 				break;
 
 			default:
-				throw new \Exception(sprintf('Invalid argument "%s"', $strKey));
+				throw new Exception(sprintf('Invalid argument "%s"', $strKey));
 				break;
 		}
 	}

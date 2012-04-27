@@ -78,24 +78,24 @@ class PagePicker extends Backend
 	 */
 	public function run()
 	{
-		$this->Template = new \BackendTemplate('be_picker');
+		$this->Template = new BackendTemplate('be_picker');
 		$this->Template->main = '';
 
 		// Ajax request
-		if ($_POST && \Environment::get('isAjaxRequest'))
+		if ($_POST && Environment::get('isAjaxRequest'))
 		{
-			$this->objAjax = new \Ajax(\Input::post('action'));
+			$this->objAjax = new Ajax(Input::post('action'));
 			$this->objAjax->executePreActions();
 		}
 
-		$strTable = \Input::get('table');
-		$strField = \Input::get('field');
+		$strTable = Input::get('table');
+		$strField = Input::get('field');
 
 		$this->loadDataContainer($strTable);
-		$objDca = new \DC_Table($strTable);
+		$objDca = new DC_Table($strTable);
 
 		// AJAX request
-		if ($_POST && \Environment::get('isAjaxRequest'))
+		if ($_POST && Environment::get('isAjaxRequest'))
 		{
 			$this->objAjax->executePostActions($objDca);
 		}
@@ -105,12 +105,12 @@ class PagePicker extends Backend
 			'strTable' => $strTable,
 			'strField' => $strField,
 			'strName'  => $strField,
-			'varValue' => explode(',', \Input::get('value'))
+			'varValue' => explode(',', Input::get('value'))
 		), $objDca);
 
 		$this->Template->main = $objPageTree->generate();
 		$this->Template->theme = $this->getTheme();
-		$this->Template->base = \Environment::get('base');
+		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->headline = $GLOBALS['TL_LANG']['MSC']['ppHeadline'];
@@ -120,7 +120,7 @@ class PagePicker extends Backend
 		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
 		$this->Template->search = $GLOBALS['TL_LANG']['MSC']['search'];
-		$this->Template->action = ampersand(\Environment::get('request'));
+		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->value = $this->Session->get('page_selector_search');
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;

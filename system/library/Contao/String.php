@@ -66,7 +66,7 @@ class String
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return \Contao\String
+	 * @return \String
 	 * @deprecated
 	 */
 	public static function getInstance()

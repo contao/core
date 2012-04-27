@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \System;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class Cache extends \System
+class Cache extends System
 {
 
 	/**
@@ -127,7 +128,7 @@ class Cache extends \System
 
 	/**
 	 * Instantiate a new cache object and return it (Factory)
-	 * @return \Contao\Cache
+	 * @return \Cache
 	 * @deprecated
 	 */
 	public static function getInstance()

@@ -71,21 +71,21 @@ class Preview extends Backend
 	 */
 	public function run()
 	{
-		$this->Template = new \BackendTemplate('be_preview');
+		$this->Template = new BackendTemplate('be_preview');
 
-		$this->Template->base = \Environment::get('base');
+		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->site = \Input::get('site', true);
+		$this->Template->site = Input::get('site', true);
 
-		if (\Input::get('page'))
+		if (Input::get('page'))
 		{
-			$this->Template->url = $this->redirectToFrontendPage(\Input::get('page'), \Input::get('article'), true);
+			$this->Template->url = $this->redirectToFrontendPage(Input::get('page'), Input::get('article'), true);
 		}
 		else
 		{
-			$this->Template->url = \Environment::get('base');
+			$this->Template->url = Environment::get('base');
 		}
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;

@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Files, \Exception;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class Files_Ftp extends \Files
+class Files_Ftp extends Files
 {
 
 	/**
@@ -91,15 +92,15 @@ class Files_Ftp extends \Files
 		// Check the FTP credentials
 		if ($GLOBALS['TL_CONFIG']['ftpHost'] == '')
 		{
-			throw new \Exception('The FTP host must not be empty');
+			throw new Exception('The FTP host must not be empty');
 		}
 		elseif ($GLOBALS['TL_CONFIG']['ftpUser'] == '')
 		{
-			throw new \Exception('The FTP username must not be empty');
+			throw new Exception('The FTP username must not be empty');
 		}
 		elseif ($GLOBALS['TL_CONFIG']['ftpPass'] == '')
 		{
-			throw new \Exception('The FTP password must not be empty');
+			throw new Exception('The FTP password must not be empty');
 		}
 
 		$ftp_connect = ($GLOBALS['TL_CONFIG']['ftpSSL'] && function_exists('ftp_ssl_connect')) ? 'ftp_ssl_connect' : 'ftp_connect';
@@ -107,13 +108,13 @@ class Files_Ftp extends \Files
 		// Try to connect
 		if (($resConnection = $ftp_connect($GLOBALS['TL_CONFIG']['ftpHost'], $GLOBALS['TL_CONFIG']['ftpPort'], 5)) == false)
 		{
-			throw new \Exception('Could not connect to the FTP server');
+			throw new Exception('Could not connect to the FTP server');
 		}
 
 		// Try to login
 		elseif (ftp_login($resConnection, $GLOBALS['TL_CONFIG']['ftpUser'], $GLOBALS['TL_CONFIG']['ftpPass']) == false)
 		{
-			throw new \Exception('Authentication failed');
+			throw new Exception('Authentication failed');
 		}
 
 		// Switch to passive mode

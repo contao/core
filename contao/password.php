@@ -73,15 +73,15 @@ class ChangePassword extends Backend
 	 */
 	public function run()
 	{
-		$this->Template = new \BackendTemplate('be_password');
+		$this->Template = new BackendTemplate('be_password');
 
-		if (\Input::post('FORM_SUBMIT') == 'tl_password')
+		if (Input::post('FORM_SUBMIT') == 'tl_password')
 		{
-			$pw = \Input::post('password');
-			$cnf = \Input::post('confirm');
+			$pw = Input::post('password');
+			$cnf = Input::post('confirm');
 
 			// Do not allow special characters
-			if (preg_match('/[#\(\)\/<=>]/', html_entity_decode(\Input::post('password'))))
+			if (preg_match('/[#\(\)\/<=>]/', html_entity_decode(Input::post('password'))))
 			{
 				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['extnd']);
 			}
@@ -131,11 +131,11 @@ class ChangePassword extends Backend
 
 		$this->Template->theme = $this->getTheme();
 		$this->Template->messages = $this->getMessages();
-		$this->Template->base = \Environment::get('base');
+		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->action = ampersand(\Environment::get('request'));
+		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->headline = $GLOBALS['TL_LANG']['MSC']['pw_change'];
 		$this->Template->submitButton = specialchars($GLOBALS['TL_LANG']['MSC']['continue']);
 		$this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];

@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Exception;
 
 
 /**
@@ -80,7 +81,7 @@ abstract class Database
 
 		if (!is_resource($this->resConnection) && !is_object($this->resConnection))
 		{
-			throw new \Exception(sprintf('Could not connect to database (%s)', $this->error));
+			throw new Exception(sprintf('Could not connect to database (%s)', $this->error));
 		}
 	}
 
@@ -122,7 +123,7 @@ abstract class Database
 
 	/**
 	 * Instantiate a database driver object and return it (Factory)
-	 * @return \Contao\Database
+	 * @return \Database
 	 * @throws \Exception
 	 */
 	public static function getInstance()
@@ -140,7 +141,7 @@ abstract class Database
 	/**
 	 * Prepare a statement (return a Database_Statement object)
 	 * @param string
-	 * @return \Contao\Database_Statement
+	 * @return \Database_Statement
 	 */
 	public function prepare($strQuery)
 	{
@@ -152,7 +153,7 @@ abstract class Database
 	/**
 	 * Execute a query (return a Database_Result object)
 	 * @param string
-	 * @return \Contao\Database_Result
+	 * @return \Database_Result
 	 */
 	public function execute($strQuery)
 	{
@@ -163,7 +164,7 @@ abstract class Database
 	/**
 	 * Execute a query and do not cache the result
 	 * @param string
-	 * @return \Contao\Database_Result
+	 * @return \Database_Result
 	 */
 	public function executeUncached($strQuery)
 	{
@@ -174,7 +175,7 @@ abstract class Database
 	/**
 	 * Execute a raw query (returns a Database_Result object)
 	 * @param string
-	 * @return \Contao\Database_Result
+	 * @return \Database_Result
 	 */
 	public function query($strQuery)
 	{

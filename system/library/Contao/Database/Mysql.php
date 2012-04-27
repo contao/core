@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Database, \Database_Mysql_Statement;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
-class Database_Mysql extends \Database
+class Database_Mysql extends Database
 {
 
 	/**
@@ -326,10 +327,10 @@ class Database_Mysql extends \Database
 	 * Create a Database_Statement object
 	 * @param resource
 	 * @param boolean
-	 * @return \Contao\Database_Mysql_Statement
+	 * @return \Database_Mysql_Statement
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
-		return new \Database_Mysql_Statement($resConnection, $blnDisableAutocommit);
+		return new Database_Mysql_Statement($resConnection, $blnDisableAutocommit);
 	}
 }

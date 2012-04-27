@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Date, \Idna, \System;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class Validator extends \System
+class Validator extends System
 {
 
 	/**
@@ -110,7 +111,7 @@ class Validator extends \System
 	 */
 	public static function isDate($varValue)
 	{
-		$objDate = new \Date();
+		$objDate = new Date();
 		return preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'$~i', $varValue);
 	}
 
@@ -122,7 +123,7 @@ class Validator extends \System
 	 */
 	public static function isTime($varValue)
 	{
-		$objDate = new \Date();
+		$objDate = new Date();
 		return preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'$~i', $varValue);
 	}
 
@@ -134,7 +135,7 @@ class Validator extends \System
 	 */
 	public static function isDatim($varValue)
 	{
-		$objDate = new \Date();
+		$objDate = new Date();
 		return preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varValue);
 	}
 
@@ -146,7 +147,7 @@ class Validator extends \System
 	 */
 	public static function isEmail($varValue)
 	{
-		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', \Idna::encodeEmail($varValue));
+		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', Idna::encodeEmail($varValue));
 	}
 
 
@@ -157,7 +158,7 @@ class Validator extends \System
 	 */
 	public static function isUrl($varValue)
 	{
-		return preg_match('/^[a-zA-Z0-9\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]*$/', \Idna::encodeUrl($varValue));
+		return preg_match('/^[a-zA-Z0-9\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]*$/', Idna::encodeUrl($varValue));
 	}
 
 

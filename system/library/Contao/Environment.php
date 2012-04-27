@@ -98,7 +98,7 @@ class Environment
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return \Contao\Environment
+	 * @return \Environment
 	 * @deprecated
 	 */
 	public static function getInstance()

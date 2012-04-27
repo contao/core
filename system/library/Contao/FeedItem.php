@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Environment, \File, \System;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class FeedItem extends \System
+class FeedItem extends System
 {
 
 	/**
@@ -118,11 +119,11 @@ class FeedItem extends \System
 			return;
 		}
 
-		$objFile = new \File($strFile);
+		$objFile = new File($strFile);
 
 		$this->arrData['enclosure'][] = array
 		(
-			'url' => \Environment::get('base') . $strFile,
+			'url' => Environment::get('base') . $strFile,
 			'length' => $objFile->size,
 			'type' => $objFile->mime
 		);

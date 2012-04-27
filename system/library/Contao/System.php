@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Environment, \File, \Idna, \Input, \Validator, \Exception, \stdClass;
 
 
 /**
@@ -208,13 +209,13 @@ abstract class System
 		$strUa = 'N/A';
 		$strIp = '127.0.0.1';
 
-		if (\Environment::get('httpUserAgent'))
+		if (Environment::get('httpUserAgent'))
 		{
-			$strUa = \Environment::get('httpUserAgent');
+			$strUa = Environment::get('httpUserAgent');
 		}
-		if (\Environment::get('remoteAddr'))
+		if (Environment::get('remoteAddr'))
 		{
-			$strIp = $this->anonymizeIp(\Environment::get('ip'));
+			$strIp = $this->anonymizeIp(Environment::get('ip'));
 		}
 
 		$this->Database->prepare("INSERT INTO tl_log (tstamp, source, action, username, text, func, ip, browser) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")
@@ -240,7 +241,7 @@ abstract class System
 	protected function addToUrl($strRequest)
 	{
 		$strRequest = preg_replace('/^&(amp;)?/i', '', $strRequest);
-		$queries = preg_split('/&(amp;)?/i', \Environment::get('queryString'));
+		$queries = preg_split('/&(amp;)?/i', Environment::get('queryString'));
 
 		// Overwrite existing parameters
 		foreach ($queries as $k=>$v)
@@ -260,7 +261,7 @@ abstract class System
 			$href .= implode('&amp;', $queries) . '&amp;';
 		}
 
-		return \Environment::get('script') . $href . str_replace(' ', '%20', $strRequest);
+		return Environment::get('script') . $href . str_replace(' ', '%20', $strRequest);
 	}
 
 
@@ -270,10 +271,10 @@ abstract class System
 	 */
 	protected function reload()
 	{
-		$strLocation = \Environment::get('url') . \Environment::get('requestUri');
+		$strLocation = Environment::get('url') . Environment::get('requestUri');
 
 		// Ajax request
-		if (\Environment::get('isAjaxRequest'))
+		if (Environment::get('isAjaxRequest'))
 		{
 			echo $strLocation;
 			exit;
@@ -300,7 +301,7 @@ abstract class System
 		$strLocation = str_replace('&amp;', '&', $strLocation);
 
 		// Ajax request
-		if (\Environment::get('isAjaxRequest'))
+		if (Environment::get('isAjaxRequest'))
 		{
 			echo $strLocation;
 			exit;
@@ -334,7 +335,7 @@ abstract class System
 		}
 		else
 		{
-			header('Location: ' . \Environment::get('base') . $strLocation);
+			header('Location: ' . Environment::get('base') . $strLocation);
 		}
 
 		exit;
@@ -349,29 +350,29 @@ abstract class System
 	 */
 	protected function getReferer($blnEncodeAmpersands=false, $strTable=null)
 	{
-		$key = (\Environment::get('script') == 'contao/files.php') ? 'fileReferer' : 'referer';
+		$key = (Environment::get('script') == 'contao/files.php') ? 'fileReferer' : 'referer';
 		$session = $this->Session->get($key);
 
 		// Use a specific referer
-		if ($strTable != '' && isset($session[$strTable]) && \Input::get('act') != 'select')
+		if ($strTable != '' && isset($session[$strTable]) && Input::get('act') != 'select')
 		{
 			$session['current'] = $session[$strTable];
 		}
 
 		// Get the default referer
-		$return = preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', (($session['current'] != \Environment::get('requestUri')) ? $session['current'] : $session['last']));
+		$return = preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', (($session['current'] != Environment::get('requestUri')) ? $session['current'] : $session['last']));
 		$return = preg_replace('/^'.preg_quote(TL_PATH, '/').'\//i', '', $return);
 
 		// Fallback to the generic referer in the front end
 		if ($return == '' && TL_MODE == 'FE')
 		{
-			$return = \Environment::get('httpReferer');
+			$return = Environment::get('httpReferer');
 		}
 
 		// Fallback to the current URL if there is no referer
 		if ($return == '')
 		{
-			$return = (TL_MODE == 'BE') ? 'contao/main.php' : \Environment::get('url');
+			$return = (TL_MODE == 'BE') ? 'contao/main.php' : Environment::get('url');
 		}
 
 		// Do not urldecode here!
@@ -387,7 +388,7 @@ abstract class System
 	 */
 	protected function getIndexFreeRequest($blnAmpersand=true)
 	{
-		$strRequest = \Environment::get('request');
+		$strRequest = Environment::get('request');
 
 		if ($strRequest == 'index.php')
 		{
@@ -429,10 +430,10 @@ abstract class System
 		else
 		{
 			// Generate the cache files
-			$objCacheFallback = new \File('system/cache/language/en/' . $strName . '.php');
+			$objCacheFallback = new File('system/cache/language/en/' . $strName . '.php');
 			$objCacheFallback->write('<?php' . "\n");
 
-			$objCacheFile = new \File('system/cache/language/' . $strLanguage . '/' . $strName . '.php');
+			$objCacheFile = new File('system/cache/language/' . $strLanguage . '/' . $strName . '.php');
 			$objCacheFile->write('<?php' . "\n");
 
 			// Parse all active modules
@@ -640,7 +641,7 @@ abstract class System
 
 		if (!in_array($strType, $this->getMessageTypes()))
 		{
-			throw new \Exception("Invalid message type $strType");
+			throw new Exception("Invalid message type $strType");
 		}
 
 		if (!is_array($_SESSION[$strType]))
@@ -754,7 +755,7 @@ abstract class System
 			$strPath = $GLOBALS['TL_CONFIG']['websitePath'];
 		}
 
-		$objCookie = new \stdClass();
+		$objCookie = new stdClass();
 
 		$objCookie->strName    = $strName;
 		$objCookie->varValue   = $varValue;
@@ -807,7 +808,7 @@ abstract class System
 	 */
 	protected function idnaEncode($strDomain)
 	{
-		return \Idna::encode($strDomain);
+		return Idna::encode($strDomain);
 	}
 
 
@@ -819,7 +820,7 @@ abstract class System
 	 */
 	protected function idnaDecode($strDomain)
 	{
-		return \Idna::decode($strDomain);
+		return Idna::decode($strDomain);
 	}
 
 
@@ -831,7 +832,7 @@ abstract class System
 	 */
 	protected function idnaEncodeEmail($strEmail)
 	{
-		return \Idna::encodeEmail($strEmail);
+		return Idna::encodeEmail($strEmail);
 	}
 
 
@@ -843,7 +844,7 @@ abstract class System
 	 */
 	protected function idnaEncodeUrl($strUrl)
 	{
-		return \Idna::encodeUrl($strUrl);
+		return Idna::encodeUrl($strUrl);
 	}
 
 
@@ -855,7 +856,7 @@ abstract class System
 	 */
 	protected function isValidEmailAddress($strEmail)
 	{
-		return \Validator::isEmail($strEmail);
+		return Validator::isEmail($strEmail);
 	}
 
 

@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \DbInstaller, \File, \Exception;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class DcaExtractor extends \DbInstaller
+class DcaExtractor extends DbInstaller
 {
 
 	/**
@@ -97,7 +98,7 @@ class DcaExtractor extends \DbInstaller
 	{
 		if ($strTable == '')
 		{
-			throw new \Exception('The table name must not be empty');
+			throw new Exception('The table name must not be empty');
 		}
 
 		parent::__construct();
@@ -333,11 +334,11 @@ class DcaExtractor extends \DbInstaller
 		// Not all information could be loaded
 		if (!is_array($sql) || !is_array($fields))
 		{
-			throw new \Exception('Could not load the table information of ' . $this->strTable);
+			throw new Exception('Could not load the table information of ' . $this->strTable);
 		}
 
 		// Create the file
-		$objFile = new \File('system/cache/sql/' . $this->strTable . '.php');
+		$objFile = new File('system/cache/sql/' . $this->strTable . '.php');
 		$objFile->write("<?php\n\n");
 
 		// Meta
@@ -427,7 +428,7 @@ class DcaExtractor extends \DbInstaller
 
 				$included[] = $strFile;
 				$strTable = str_replace('.php', '', $strFile);
-				new \DcaExtractor($strTable);
+				new DcaExtractor($strTable);
 			}
 		}
 	}

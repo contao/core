@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Environment, \System;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class Feed extends \System
+class Feed extends System
 {
 
 	/**
@@ -142,7 +143,7 @@ class Feed extends \System
 		$xml .= '<language>' . $this->language . '</language>';
 		$xml .= '<pubDate>' . date('r', $this->published) . '</pubDate>';
 		$xml .= '<generator>Contao Open Source CMS</generator>';
-		$xml .= '<atom:link href="' . specialchars(\Environment::get('base') . $this->strName) . '.xml" rel="self" type="application/rss+xml" />';
+		$xml .= '<atom:link href="' . specialchars(Environment::get('base') . $this->strName) . '.xml" rel="self" type="application/rss+xml" />';
 
 		foreach ($this->arrItems as $objItem)
 		{
@@ -188,7 +189,7 @@ class Feed extends \System
 		$xml .= '<id>' . specialchars($this->link) . '</id>';
 		$xml .= '<updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $this->published)) . '</updated>';
 		$xml .= '<generator>Contao Open Source CMS</generator>';
-		$xml .= '<link href="' . specialchars(\Environment::get('base') . $this->strName) . '.xml" rel="self" />';
+		$xml .= '<link href="' . specialchars(Environment::get('base') . $this->strName) . '.xml" rel="self" />';
 
 		foreach ($this->arrItems as $objItem)
 		{

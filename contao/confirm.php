@@ -74,13 +74,13 @@ class Confirm extends Backend
 	public function run()
 	{
 		// Redirect to the back end home page
-		if (\Input::post('FORM_SUBMIT') == 'invalid_token_url')
+		if (Input::post('FORM_SUBMIT') == 'invalid_token_url')
 		{
 			list($strUrl) = explode('?', $this->Session->get('INVALID_TOKEN_URL'));
 			$this->redirect($strUrl);
 		}
 
-		$this->Template = new \BackendTemplate('be_confirm');
+		$this->Template = new BackendTemplate('be_confirm');
 
 		// Prepare the URL
 		$url = preg_replace('/(\?|&)rt=[^&]*/', '', $this->Session->get('INVALID_TOKEN_URL'));
@@ -166,7 +166,7 @@ class Confirm extends Backend
 		$this->Template->cancel = $GLOBALS['TL_LANG']['MSC']['cancelBT'];
 		$this->Template->continue = $GLOBALS['TL_LANG']['MSC']['continue'];
 		$this->Template->theme = $this->getTheme();
-		$this->Template->base = \Environment::get('base');
+		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];

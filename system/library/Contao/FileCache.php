@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \System;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class FileCache extends \System
+class FileCache extends System
 {
 
 	/**
@@ -198,7 +199,7 @@ class FileCache extends \System
 	/**
 	 * Instantiate a new file cache object and return it (Factory)
 	 * @param string
-	 * @return \Contao\FileCache
+	 * @return \FileCache
 	 */
 	public static function getInstance($strFile)
 	{

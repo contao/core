@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Database_Statement, \Database_Mssql_Result;
 
 
 /**
@@ -42,13 +43,13 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
-class Database_Mssql_Statement extends \Database_Statement
+class Database_Mssql_Statement extends Database_Statement
 {
 
 	/**
 	 * Prepare a query and return it
 	 * @param string
-	 * @return void
+	 * @return string
 	 */
 	protected function prepare_query($strQuery)
 	{
@@ -132,10 +133,10 @@ class Database_Mssql_Statement extends \Database_Statement
 	 * Create a Database_Result object
 	 * @param resource
 	 * @param string
-	 * @return \Contao\Database_Mssql_Result
+	 * @return \Database_Mssql_Result
 	 */
 	protected function createResult($resResult, $strQuery)
 	{
-		return new \Database_Mssql_Result($resResult, $strQuery);
+		return new Database_Mssql_Result($resResult, $strQuery);
 	}
 }

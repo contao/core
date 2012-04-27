@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Exception;
 
 
 /**
@@ -121,6 +122,6 @@ class TemplateLoader
 			return TL_ROOT . '/' . self::$files[$template] . '/' . $file;
 		}
 
-		throw new \Exception('Could not find template "' . $template . '"');
+		throw new Exception('Could not find template "' . $template . '"');
 	}
 }
