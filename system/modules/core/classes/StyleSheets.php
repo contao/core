@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Backend, \Environment, \File, \FileTree, \Input, \String, \Exception;
+use \Backend, \Environment, \File, \Input, \String, \Exception;
 
 
 /**
@@ -1157,16 +1157,29 @@ class StyleSheets extends Backend
 			return '';
 		}
 
+		$this->import('BackendUser', 'User');
+		$class = $this->User->uploader;
+
+		// See #4086
+		if (!$this->classFileExists($class))
+		{
+			$class = 'FileUpload';
+		}
+
+		$objUploader = new $class();
+
 		// Import CSS
 		if (Input::post('FORM_SUBMIT') == 'tl_style_sheet_import')
 		{
-			if (!Input::post('source') || !is_array(Input::post('source')))
+			$arrUploaded = $objUploader->uploadTo('system/tmp', 'files');
+
+			if (empty($arrUploaded))
 			{
 				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
-			foreach (Input::post('source') as $strCssFile)
+			foreach ($arrUploaded as $strCssFile)
 			{
 				// Folders cannot be imported
 				if (is_dir(TL_ROOT . '/' . $strCssFile))
@@ -1283,8 +1296,6 @@ class StyleSheets extends Backend
 			$this->redirect(str_replace('&key=import', '', Environment::get('request')));
 		}
 
-		$objTree = new FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_style_sheet']['fields']['source'], 'source', null, 'source', 'tl_style_sheet'));
-
 		// Return form
 		return '
 <div id="tl_buttons">
@@ -1293,14 +1304,15 @@ class StyleSheets extends Backend
 
 <h2 class="sub_headline">' .$GLOBALS['TL_LANG']['tl_style_sheet']['import'][1]. '</h2>
 ' .$this->getMessages(). '
-<form action="' .ampersand(Environment::get('request'), true). '" id="tl_style_sheet_import" class="tl_form" method="post">
+<form action="' .ampersand(Environment::get('request'), true). '" id="tl_style_sheet_import" class="tl_form" method="post" enctype="multipart/form-data">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_style_sheet_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
+<input type="hidden" name="MAX_FILE_SIZE" value="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'">
 
 <div class="tl_tbox">
-  <h3><label for="source">' .$GLOBALS['TL_LANG']['tl_style_sheet']['source'][0]. '</label> <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.openModalIframe({\'width\':765,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MSC']['filetree']).'\',\'url\':this.href});return false">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom"') . '</a></h3>' .$objTree->generate().(isset($GLOBALS['TL_LANG']['tl_style_sheet']['source'][1]) ? '
-  <p class="tl_help tl_tip">' .$GLOBALS['TL_LANG']['tl_style_sheet']['source'][1]. '</p>' : ''). '
+  <h3>'.$GLOBALS['TL_LANG']['tl_style_sheet']['source'][0].'</h3>'.$objUploader->generateMarkup().(isset($GLOBALS['TL_LANG']['tl_style_sheet']['source'][1]) ? '
+  <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['tl_style_sheet']['source'][1].'</p>' : '').'
 </div>
 
 </div>

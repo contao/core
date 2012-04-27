@@ -282,7 +282,7 @@ $GLOBALS['TL_LANG']['DP']['week']                = 'Wk';
  * CSV files
  */
 $GLOBALS['TL_LANG']['MSC']['separator'] = array('Separator', 'Please choose a field delimiter.');
-$GLOBALS['TL_LANG']['MSC']['source']    = array('Source files', 'Please choose the CSV files you want to import from the files directory.');
+$GLOBALS['TL_LANG']['MSC']['source']    = array('Source files', 'Please upload the CSV files to be imported.');
 $GLOBALS['TL_LANG']['MSC']['comma']     = 'Comma';
 $GLOBALS['TL_LANG']['MSC']['semicolon'] = 'Semicolon';
 $GLOBALS['TL_LANG']['MSC']['tabulator'] = 'Tabulator';

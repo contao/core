@@ -5,7 +5,8 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
-Themes to be imported can now be directly uploaded.
+Themes, style sheets, newsletter recipients, list entries and table enties to be
+imported can now be directly uploaded.
 
 ### Changed
 Do not instantiate the four default objects in `System::__construct()` anymore,

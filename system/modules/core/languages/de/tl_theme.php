@@ -37,7 +37,7 @@ $GLOBALS['TL_LANG']['tl_theme']['folders']    = array('Ordner', 'Bitte wählen S
 $GLOBALS['TL_LANG']['tl_theme']['templates']  = array('Templates-Ordner', 'Hier können Sie einen Templates-Ordner festlegen, der mit dem Theme zusammen exportiert wird.');
 $GLOBALS['TL_LANG']['tl_theme']['screenshot'] = array('Bildschirmfoto', 'Hier können Sie ein Bildschirmfoto des Theme auswählen.');
 $GLOBALS['TL_LANG']['tl_theme']['vars']       = array('Globale Variablen', 'Hier können Sie globale Variablen für die Stylesheets des Theme definieren (z.B. <em>$rot</em> -> <em>c00</em> oder <em>$abstand</em> -> <em>12px</em>).');
-$GLOBALS['TL_LANG']['tl_theme']['source']     = array('Quelldateien', 'Bitte wählen Sie eine oder mehrere .cto-Dateien aus der Dateiübersicht.');
+$GLOBALS['TL_LANG']['tl_theme']['source']     = array('Quelldateien', 'Hier können Sie eine oder mehrere .cto-Dateien für den Import hochladen.');
 $GLOBALS['TL_LANG']['tl_theme']['tstamp']     = array('Änderungsdatum', 'Datum und Uhrzeit der letzten Änderung');
 
 

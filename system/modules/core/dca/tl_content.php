@@ -712,11 +712,6 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
-		),
-		'source' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['source'],
-			'eval'                    => array('fieldType'=>'checkbox', 'filesOnly'=>true, 'extensions'=>'csv', 'class'=>'mandatory')
 		)
 	)
 );

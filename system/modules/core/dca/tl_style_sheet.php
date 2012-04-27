@@ -211,11 +211,6 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'inputType'               => 'keyValueWizard',
 			'exclude'                 => true,
 			'sql'                     => "text NULL"
-		),
-		'source' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['source'],
-			'eval'                    => array('fieldType'=>'checkbox', 'filesOnly'=>true, 'extensions'=>'css', 'class'=>'mandatory')
 		)
 	)
 );

@@ -203,11 +203,6 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 			'inputType'               => 'keyValueWizard',
 			'exclude'                 => true,
 			'sql'                     => "text NULL"
-		),
-		'source' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['source'],
-			'eval'                    => array('fieldType'=>'checkbox', 'filesOnly'=>true, 'extensions'=>'cto', 'class'=>'mandatory')
 		)
 	)
 );

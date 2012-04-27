@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Backend, \DataContainer, \Environment, \File, \FilesModel, \FileTree, \Folder, \Input, \ZipReader, \DOMDocument, \DOMElement, \Exception;
+use \Backend, \DataContainer, \Environment, \File, \FilesModel, \Folder, \Input, \ZipReader, \DOMDocument, \DOMElement, \Exception;
 
 
 /**

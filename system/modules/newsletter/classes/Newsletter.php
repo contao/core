@@ -412,10 +412,23 @@ class Newsletter extends Backend
 			return '';
 		}
 
+		$this->import('BackendUser', 'User');
+		$class = $this->User->uploader;
+
+		// See #4086
+		if (!$this->classFileExists($class))
+		{
+			$class = 'FileUpload';
+		}
+
+		$objUploader = new $class();
+
 		// Import CSS
 		if (Input::post('FORM_SUBMIT') == 'tl_recipients_import')
 		{
-			if (!Input::post('source') || !is_array(Input::post('source')))
+			$arrUploaded = $objUploader->uploadTo('system/tmp', 'files');
+
+			if (empty($arrUploaded))
 			{
 				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
@@ -425,7 +438,7 @@ class Newsletter extends Backend
 			$intTotal = 0;
 			$intInvalid = 0;
 
-			foreach (Input::post('source') as $strCsvFile)
+			foreach ($arrUploaded as $strCsvFile)
 			{
 				$objFile = new File($strCsvFile);
 
@@ -511,10 +524,11 @@ class Newsletter extends Backend
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'][1].'</h2>
 '.$this->getMessages().'
-<form action="'.ampersand(Environment::get('request'), true).'" id="tl_recipients_import" class="tl_form" method="post">
+<form action="'.ampersand(Environment::get('request'), true).'" id="tl_recipients_import" class="tl_form" method="post" enctype="multipart/form-data">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_recipients_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
+<input type="hidden" name="MAX_FILE_SIZE" value="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'">
 
 <div class="tl_tbox">
   <h3><label for="separator">'.$GLOBALS['TL_LANG']['MSC']['separator'][0].'</label></h3>
@@ -525,8 +539,7 @@ class Newsletter extends Backend
     <option value="linebreak">'.$GLOBALS['TL_LANG']['MSC']['linebreak'].'</option>
   </select>'.(($GLOBALS['TL_LANG']['MSC']['separator'][1] != '') ? '
   <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['MSC']['separator'][1].'</p>' : '').'
-  <h3><label for="source">'.$GLOBALS['TL_LANG']['MSC']['source'][0].'</label> <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.openModalIframe({\'width\':765,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MSC']['filetree']).'\',\'url\':this.href});return false">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom"') . '</a></h3>
-'.$objTree->generate().(($GLOBALS['TL_LANG']['MSC']['source'][1] != '') ? '
+  <h3>'.$GLOBALS['TL_LANG']['MSC']['source'][0].'</h3>'.$objUploader->generateMarkup().(isset($GLOBALS['TL_LANG']['MSC']['source'][1]) ? '
   <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['MSC']['source'][1].'</p>' : '').'
 </div>
 
