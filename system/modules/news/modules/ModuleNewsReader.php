@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendTemplate, \Input, \ModuleNews, \NewsModel;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleNewsReader extends \ModuleNews
+class ModuleNewsReader extends ModuleNews
 {
 
 	/**
@@ -60,7 +61,7 @@ class ModuleNewsReader extends \ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWS READER ###';
 			$objTemplate->title = $this->headline;
@@ -74,11 +75,11 @@ class ModuleNewsReader extends \ModuleNews
 		// Set the item from the auto_item parameter
 		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
 		{
-			\Input::setGet('items', \Input::get('auto_item'));
+			Input::setGet('items', Input::get('auto_item'));
 		}
 
 		// Do not index or cache the page if no news item has been specified
-		if (!\Input::get('items'))
+		if (!Input::get('items'))
 		{
 			global $objPage;
 			$objPage->noSearch = 1;
@@ -114,7 +115,7 @@ class ModuleNewsReader extends \ModuleNews
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
 		// Get the news item
-		$objArticle = \NewsModel::findPublishedByParentAndIdOrAlias((is_numeric(\Input::get('items')) ? \Input::get('items') : 0), \Input::get('items'), $this->news_archives);
+		$objArticle = NewsModel::findPublishedByParentAndIdOrAlias((is_numeric(Input::get('items')) ? Input::get('items') : 0), Input::get('items'), $this->news_archives);
 
 		if ($objArticle === null)
 		{
@@ -124,7 +125,7 @@ class ModuleNewsReader extends \ModuleNews
 
 			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
-			$this->Template->articles = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], \Input::get('items')) . '</p>';
+			$this->Template->articles = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], Input::get('items')) . '</p>';
 			return;
 		}
 

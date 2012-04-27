@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Model;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class CommentsModel extends \Model
+class CommentsModel extends Model
 {
 
 	/**
@@ -59,7 +60,7 @@ class CommentsModel extends \Model
 	 * @param boolean
 	 * @param integer
 	 * @param integer
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findPublishedBySourceAndParent($strSource, $intParent, $lbnDesc=false, $intLimit=0, $intOffset=0)
 	{

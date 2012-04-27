@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \FilesModel, \Widget;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FormSubmit extends \Widget
+class FormSubmit extends Widget
 {
 
 	/**
@@ -110,7 +111,7 @@ class FormSubmit extends \Widget
 				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 			}
 
-			$objModel = \FilesModel::findByPk($this->singleSRC);
+			$objModel = FilesModel::findByPk($this->singleSRC);
 
 			if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 			{

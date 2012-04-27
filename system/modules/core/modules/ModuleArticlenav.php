@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \ArticleModel, \BackendTemplate, \Input, \Module;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleArticlenav extends \Module
+class ModuleArticlenav extends Module
 {
 
 	/**
@@ -66,7 +67,7 @@ class ModuleArticlenav extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ARTICLE NAVIGATION ###';
 			$objTemplate->title = $this->headline;
@@ -78,7 +79,7 @@ class ModuleArticlenav extends \Module
 		}
 
 		global $objPage;
-		$this->objArticles = \ArticleModel::findPublishedWithTeaserByPidAndColumn($objPage->id, $this->strColumn);
+		$this->objArticles = ArticleModel::findPublishedWithTeaserByPidAndColumn($objPage->id, $this->strColumn);
 
 		// Return if there are no articles
 		if ($this->objArticles === null)
@@ -87,7 +88,7 @@ class ModuleArticlenav extends \Module
 		}
 
 		// Redirect to the first article if no article is selected
-		if (!\Input::get('articles'))
+		if (!Input::get('articles'))
 		{
 			if (!$this->loadFirst)
 			{
@@ -117,7 +118,7 @@ class ModuleArticlenav extends \Module
 			$strAlias = (strlen($this->objArticles->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $this->objArticles->alias : $this->objArticles->id;
 
 			// Active article
-			if (\Input::get('articles') == $strAlias)
+			if (Input::get('articles') == $strAlias)
 			{
 				$articles[] = array
 				(

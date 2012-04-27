@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Backend, \DataContainer, \Environment, \File, \FilesModel, \FileTree, \Folder, \Input, \ZipReader, \DOMDocument, \DOMElement, \Exception;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class Theme extends \Backend
+class Theme extends Backend
 {
 
 	/**
@@ -51,9 +52,9 @@ class Theme extends \Backend
 	 */
 	public function importTheme()
 	{
-		if (\Input::post('FORM_SUBMIT') == 'tl_theme_import')
+		if (Input::post('FORM_SUBMIT') == 'tl_theme_import')
 		{
-			$source = \Input::post('source', true);
+			$source = Input::post('source', true);
 
 			if ($source == '')
 			{
@@ -62,7 +63,7 @@ class Theme extends \Backend
 			}
 
 			$arrFiles = array();
-			$objFiles = \FilesModel::findMultipleByIds(trimsplit(',', $source));
+			$objFiles = FilesModel::findMultipleByIds(trimsplit(',', $source));
 
 			// Skip invalid entries
 			if ($objFiles !== null)
@@ -76,7 +77,7 @@ class Theme extends \Backend
 						continue;
 					}
 
-					$objFile = new \File($objFiles->path);
+					$objFile = new File($objFiles->path);
 
 					// Skip anything but .cto files
 					if ($objFile->extension != 'cto')
@@ -107,7 +108,7 @@ class Theme extends \Backend
 			);
 
 			// Proceed
-			if (\Input::post('confirm') == 1)
+			if (Input::post('confirm') == 1)
 			{
 				$this->extractThemeFiles($arrFiles, $arrDbFields);
 			}
@@ -117,17 +118,17 @@ class Theme extends \Backend
 			}
 		}
 
-		$objTree = new \FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_theme']['fields']['source'], 'source', null, 'source', 'tl_theme'));
+		$objTree = new FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_theme']['fields']['source'], 'source', null, 'source', 'tl_theme'));
 
 		// Return the form
 		return '
 <div id="tl_buttons">
-<a href="'.ampersand(str_replace('&key=importTheme', '', \Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
+<a href="'.ampersand(str_replace('&key=importTheme', '', Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_theme']['importTheme'][1].'</h2>
 '.$this->getMessages().'
-<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_theme_import" class="tl_form" method="post">
+<form action="'.ampersand(Environment::get('request'), true).'" id="tl_theme_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_theme_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
@@ -162,12 +163,12 @@ class Theme extends \Backend
 	{
 		$return = '
 <div id="tl_buttons">
-<a href="'.ampersand(str_replace('&key=importTheme', '', \Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
+<a href="'.ampersand(str_replace('&key=importTheme', '', Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_theme']['checking_theme'].'</h2>
 '.$this->getMessages().'
-<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_theme_import" class="tl_form" method="post">
+<form action="'.ampersand(Environment::get('request'), true).'" id="tl_theme_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_theme_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
@@ -186,7 +187,7 @@ class Theme extends \Backend
   <h4>'.$GLOBALS['TL_LANG']['tl_theme']['tables_fields'].'</h4>';
 
 			// Find the XML file
-			$objArchive = new \ZipReader($strFile);
+			$objArchive = new ZipReader($strFile);
 
 			// Continue if there is no XML file
 			if ($objArchive->getFile('theme.xml') === false)
@@ -196,7 +197,7 @@ class Theme extends \Backend
 			}
 
 			// Open the XML file
-			$xml = new \DOMDocument();
+			$xml = new DOMDocument();
 			$xml->preserveWhiteSpace = false;
 			$xml->loadXML($objArchive->unzip());
 			$tables = $xml->getElementsByTagName('table');
@@ -362,7 +363,7 @@ class Theme extends \Backend
 			$xml = null;
 
 			// Open the archive
-			$objArchive = new \ZipReader($strZipFile);
+			$objArchive = new ZipReader($strZipFile);
 
 			// Extract all files
 			while ($objArchive->next())
@@ -370,7 +371,7 @@ class Theme extends \Backend
 				// Load the XML file
 				if ($objArchive->file_name == 'theme.xml')
 				{
-					$xml = new \DOMDocument();
+					$xml = new DOMDocument();
 					$xml->preserveWhiteSpace = false;
 					$xml->loadXML($objArchive->unzip());
 					continue;
@@ -394,18 +395,18 @@ class Theme extends \Backend
 						$strFileName = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $objArchive->file_name);
 					}
 
-					$objFile = new \File($strFileName);
+					$objFile = new File($strFileName);
 					$objFile->write($objArchive->unzip());
 					$objFile->close();
 				}
-				catch (\Exception $e)
+				catch (Exception $e)
 				{
 					$this->addErrorMessage($e->getMessage());
 				}
 			}
 
 			// Continue if there is no XML file
-			if (!$xml instanceof \DOMDocument)
+			if (!$xml instanceof DOMDocument)
 			{
 				$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strZipFile)));
 				continue;
@@ -458,7 +459,7 @@ class Theme extends \Backend
 
 					foreach (array_reverse($arrParents) as $strParent)
 					{
-						$objParent = \FilesModel::findByPath($strParent);
+						$objParent = FilesModel::findByPath($strParent);
 
 						if ($objParent === null)
 						{
@@ -470,14 +471,14 @@ class Theme extends \Backend
 								}
 								else
 								{
-									$objPid = \FilesModel::findByPath(dirname($strParent));
+									$objPid = FilesModel::findByPath(dirname($strParent));
 									$intNextPid = $objPid->id;
 								}
 							}
 
-							$objFolder = new \Folder($strParent);
+							$objFolder = new Folder($strParent);
 
-							$objModel = new \FilesModel();
+							$objModel = new FilesModel();
 							$objModel->pid    = $intNextPid;
 							$objModel->tstamp = time();
 							$objModel->name   = basename($strParent);
@@ -703,7 +704,7 @@ class Theme extends \Backend
 
 		// Redirect
 		setcookie('BE_PAGE_OFFSET', 0, 0, '/');
-		$this->redirect(str_replace('&key=importTheme', '', \Environment::get('request')));
+		$this->redirect(str_replace('&key=importTheme', '', Environment::get('request')));
 	}
 
 
@@ -712,7 +713,7 @@ class Theme extends \Backend
 	 * @param \DataContainer
 	 * @return void
 	 */
-	public function exportTheme(\DataContainer $dc)
+	public function exportTheme(DataContainer $dc)
 	{
 		// Get the theme meta data
 		$objTheme = $this->Database->prepare("SELECT * FROM tl_theme WHERE id=?")
@@ -735,7 +736,7 @@ class Theme extends \Backend
 
 		if (is_array($arrFolders) && !empty($arrFolders))
 		{
-			$objFolders = \FilesModel::findMultipleByIds($arrFolders);
+			$objFolders = FilesModel::findMultipleByIds($arrFolders);
 
 			if ($objFolders !== null)
 			{
@@ -746,7 +747,7 @@ class Theme extends \Backend
 		// Replace the numeric screenshot ID
 		if ($objTheme->screenshot != '')
 		{
-			$objFile = \FilesModel::findByPk($objTheme->screenshot);
+			$objFile = FilesModel::findByPk($objTheme->screenshot);
 
 			if ($objFile !== null)
 			{
@@ -755,7 +756,7 @@ class Theme extends \Backend
 		}
 
 		// Create a new XML document
-		$xml = new \DOMDocument('1.0', 'UTF-8');
+		$xml = new DOMDocument('1.0', 'UTF-8');
 		$xml->formatOutput = true;
 
 		// Root element
@@ -770,7 +771,7 @@ class Theme extends \Backend
 
 		// Generate the archive
 		$strTmp = md5(uniqid(mt_rand(), true));
-		$objArchive = new \ZipWriter('system/tmp/'. $strTmp);
+		$objArchive = new ZipWriter('system/tmp/'. $strTmp);
 
 		// Add the XML document
 		$objArchive->addString($xml->saveXML(), 'theme.xml');
@@ -793,7 +794,7 @@ class Theme extends \Backend
 		$objArchive->close();
 
 		// Open the "save as …" dialogue
-		$objFile = new \File('system/tmp/'. $strTmp);
+		$objFile = new File('system/tmp/'. $strTmp);
 
 		header('Content-Type: application/octet-stream');
 		header('Content-Transfer-Encoding: binary');
@@ -818,7 +819,7 @@ class Theme extends \Backend
 	 * @param \Database_Result
 	 * @return void
 	 */
-	protected function addTableTlTheme(\DOMDocument $xml, \DOMElement $tables, \Database_Result $objTheme)
+	protected function addTableTlTheme(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -837,7 +838,7 @@ class Theme extends \Backend
 	 * @param \Database_Result
 	 * @return void
 	 */
-	protected function addTableTlStyleSheet(\DOMDocument $xml, \DOMElement $tables, \Database_Result $objTheme)
+	protected function addTableTlStyleSheet(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -884,7 +885,7 @@ class Theme extends \Backend
 	 * @param \Database_Result
 	 * @return void
 	 */
-	protected function addTableTlModule(\DOMDocument $xml, \DOMElement $tables, \Database_Result $objTheme)
+	protected function addTableTlModule(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -910,7 +911,7 @@ class Theme extends \Backend
 	 * @param \Database_Result
 	 * @return void
 	 */
-	protected function addTableTlLayout(\DOMDocument $xml, \DOMElement $tables, \Database_Result $objTheme)
+	protected function addTableTlLayout(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -936,7 +937,7 @@ class Theme extends \Backend
 	 * @param \Database_Result
 	 * @return void
 	 */
-	protected function addDataRow(\DOMDocument $xml, \DOMElement $table, \Database_Result $objData)
+	protected function addDataRow(DOMDocument $xml, DOMElement $table, Database_Result $objData)
 	{
 		$row = $xml->createElement('row');
 		$row = $table->appendChild($row);
@@ -964,7 +965,7 @@ class Theme extends \Backend
 	 * @param string
 	 * @return void
 	 */
-	protected function addFolderToArchive(\ZipWriter $objArchive, $strFolder)
+	protected function addFolderToArchive(ZipWriter $objArchive, $strFolder)
 	{
 		// Sanitize the folder name
 		$strFolder = str_replace('../', '', $strFolder);
@@ -1015,7 +1016,7 @@ class Theme extends \Backend
 	 * @param string
 	 * @return void
 	 */
-	protected function addTemplatesToArchive(\ZipWriter $objArchive, $strFolder)
+	protected function addTemplatesToArchive(ZipWriter $objArchive, $strFolder)
 	{
 		// Sanitize the folder name
 		$strFolder = str_replace('../', '', $strFolder);
@@ -1077,13 +1078,13 @@ class Theme extends \Backend
 		// Folders
 		foreach ($arrFolders as $strFolder)
 		{
-			$objFolder = new \Folder($strFolder);
-			$objModel = \FilesModel::findByPath($strFolder);
+			$objFolder = new Folder($strFolder);
+			$objModel = FilesModel::findByPath($strFolder);
 
 			// Create the entry if it does not yet exist
 			if ($objModel === null)
 			{
-				$objModel = new \FilesModel();
+				$objModel = new FilesModel();
 				$objModel->pid    = $intPid;
 				$objModel->tstamp = time();
 				$objModel->name   = basename($strFolder);
@@ -1100,13 +1101,13 @@ class Theme extends \Backend
 		// Files
 		foreach ($arrFiles as $strFile)
 		{
-			$objFile = new \File($strFile);
-			$objModel = \FilesModel::findByPath($strFile);
+			$objFile = new File($strFile);
+			$objModel = FilesModel::findByPath($strFile);
 
 			// Create the entry if it does not yet exist
 			if ($objModel === null)
 			{
-				$objModel = new \FilesModel();
+				$objModel = new FilesModel();
 				$objModel->pid       = $intPid;
 				$objModel->tstamp    = time();
 				$objModel->name      = basename($strFile);

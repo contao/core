@@ -278,11 +278,11 @@ class tl_extension extends Backend
 	 * @return string
 	 * @throws \Exception
 	 */
-	public function checkFolder($strFolder, \DataContainer $dc)
+	public function checkFolder($strFolder, DataContainer $dc)
 	{
 		if ($strFolder != $dc->activeRecord->folder && is_dir(TL_ROOT . '/system/modules/' . $strFolder))
 		{
-			throw new \Exception(sprintf($GLOBALS['TL_LANG']['tl_extension']['unique'], $strFolder));
+			throw new Exception(sprintf($GLOBALS['TL_LANG']['tl_extension']['unique'], $strFolder));
 		}
 
 		return $strFolder;

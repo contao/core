@@ -303,7 +303,7 @@ class tl_faq_category extends Backend
 		}
 
 		// Check current action
-		switch (\Input::get('act'))
+		switch (Input::get('act'))
 		{
 			case 'create':
 			case 'select':
@@ -312,11 +312,11 @@ class tl_faq_category extends Backend
 
 			case 'edit':
 				// Dynamically add the record to the user profile
-				if (!in_array(\Input::get('id'), $root))
+				if (!in_array(Input::get('id'), $root))
 				{
 					$arrNew = $this->Session->get('new_records');
 
-					if (is_array($arrNew['tl_faq_category']) && in_array(\Input::get('id'), $arrNew['tl_faq_category']))
+					if (is_array($arrNew['tl_faq_category']) && in_array(Input::get('id'), $arrNew['tl_faq_category']))
 					{
 						// Add permissions on user level
 						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
@@ -330,7 +330,7 @@ class tl_faq_category extends Backend
 							if (is_array($arrFaqp) && in_array('create', $arrFaqp))
 							{
 								$arrFaqs = deserialize($objUser->faqs);
-								$arrFaqs[] = \Input::get('id');
+								$arrFaqs[] = Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user SET faqs=? WHERE id=?")
 											   ->execute(serialize($arrFaqs), $this->User->id);
@@ -349,7 +349,7 @@ class tl_faq_category extends Backend
 							if (is_array($arrFaqp) && in_array('create', $arrFaqp))
 							{
 								$arrFaqs = deserialize($objGroup->faqs);
-								$arrFaqs[] = \Input::get('id');
+								$arrFaqs[] = Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user_group SET faqs=? WHERE id=?")
 											   ->execute(serialize($arrFaqs), $this->User->groups[0]);
@@ -357,7 +357,7 @@ class tl_faq_category extends Backend
 						}
 
 						// Add new element to the user object
-						$root[] = \Input::get('id');
+						$root[] = Input::get('id');
 						$this->User->faqs = $root;
 					}
 				}
@@ -366,9 +366,9 @@ class tl_faq_category extends Backend
 			case 'copy':
 			case 'delete':
 			case 'show':
-				if (!in_array(\Input::get('id'), $root) || (\Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'faqp')))
+				if (!in_array(Input::get('id'), $root) || (Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'faqp')))
 				{
-					$this->log('Not enough permissions to '.\Input::get('act').' FAQ category ID "'.\Input::get('id').'"', 'tl_faq_category checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' FAQ category ID "'.Input::get('id').'"', 'tl_faq_category checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -377,7 +377,7 @@ class tl_faq_category extends Backend
 			case 'deleteAll':
 			case 'overrideAll':
 				$session = $this->Session->getData();
-				if (\Input::get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'faqp'))
+				if (Input::get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'faqp'))
 				{
 					$session['CURRENT']['IDS'] = array();
 				}
@@ -389,9 +389,9 @@ class tl_faq_category extends Backend
 				break;
 
 			default:
-				if (strlen(\Input::get('act')))
+				if (strlen(Input::get('act')))
 				{
-					$this->log('Not enough permissions to '.\Input::get('act').' FAQ categories', 'tl_faq_category checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' FAQ categories', 'tl_faq_category checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;

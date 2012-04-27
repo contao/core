@@ -240,15 +240,15 @@ class tl_newsletter_recipients extends Backend
 			$root = $this->User->newsletters;
 		}
 
-		$id = strlen(\Input::get('id')) ? \Input::get('id') : CURRENT_ID;
+		$id = strlen(Input::get('id')) ? Input::get('id') : CURRENT_ID;
 
 		// Check current action
-		switch (\Input::get('act'))
+		switch (Input::get('act'))
 		{
 			case 'create':
-				if (!strlen(\Input::get('pid')) || !in_array(\Input::get('pid'), $root))
+				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create newsletters recipients in channel ID "'.\Input::get('pid').'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to create newsletters recipients in channel ID "'.Input::get('pid').'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -270,7 +270,7 @@ class tl_newsletter_recipients extends Backend
 
 				if (!in_array($objRecipient->pid, $root))
 				{
-					$this->log('Not enough permissions to '.\Input::get('act').' recipient ID "'.$id.'" of newsletter channel ID "'.$objRecipient->pid.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' recipient ID "'.$id.'" of newsletter channel ID "'.$objRecipient->pid.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -300,9 +300,9 @@ class tl_newsletter_recipients extends Backend
 				break;
 
 			default:
-				if (strlen(\Input::get('act')))
+				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.\Input::get('act').'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
@@ -322,14 +322,14 @@ class tl_newsletter_recipients extends Backend
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public function checkUniqueRecipient($varValue, \DataContainer $dc)
+	public function checkUniqueRecipient($varValue, DataContainer $dc)
 	{
 		$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_newsletter_recipients WHERE email=? AND pid=(SELECT pid FROM tl_newsletter_recipients WHERE id=?) AND id!=?")
 									   ->execute($varValue, $dc->id, $dc->id);
 
 		if ($objRecipient->count > 0)
 		{
-			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $GLOBALS['TL_LANG'][$dc->table][$dc->field][0]));
+			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $GLOBALS['TL_LANG'][$dc->table][$dc->field][0]));
 		}
 
 		return $varValue;
@@ -370,9 +370,9 @@ class tl_newsletter_recipients extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen(\Input::get('tid')))
+		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 
@@ -402,8 +402,8 @@ class tl_newsletter_recipients extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check permissions to edit
-		\Input::setGet('id', $intId);
-		\Input::setGet('act', 'toggle');
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
 		$this->checkPermission();
 
 		// Check permissions to publish

@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendTemplate, \ContentElement, \FilesModel, \FrontendTemplate, \String;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentAccordion extends \ContentElement
+class ContentAccordion extends ContentElement
 {
 
 	/**
@@ -64,13 +65,13 @@ class ContentAccordion extends \ContentElement
 			if (TL_MODE == 'FE')
 			{
 				$this->strTemplate = 'ce_accordion_start';
-				$this->Template = new \FrontendTemplate($this->strTemplate);
+				$this->Template = new FrontendTemplate($this->strTemplate);
 				$this->Template->setData($this->arrData);
 			}
 			else
 			{
 				$this->strTemplate = 'be_wildcard';
-				$this->Template = new \BackendTemplate($this->strTemplate);
+				$this->Template = new BackendTemplate($this->strTemplate);
 				$this->Template->title = $this->mooHeadline;
 			}
 		}
@@ -81,13 +82,13 @@ class ContentAccordion extends \ContentElement
 			if (TL_MODE == 'FE')
 			{
 				$this->strTemplate = 'ce_accordion_stop';
-				$this->Template = new \FrontendTemplate($this->strTemplate);
+				$this->Template = new FrontendTemplate($this->strTemplate);
 				$this->Template->setData($this->arrData);
 			}
 			else
 			{
 				$this->strTemplate = 'be_wildcard';
-				$this->Template = new \BackendTemplate($this->strTemplate);
+				$this->Template = new BackendTemplate($this->strTemplate);
 			}
 		}
 
@@ -99,14 +100,14 @@ class ContentAccordion extends \ContentElement
 			// Clean RTE output
 			if ($objPage->outputFormat == 'xhtml')
 			{
-				$this->text = \String::toXhtml($this->text);
+				$this->text = String::toXhtml($this->text);
 			}
 			else
 			{
-				$this->text = \String::toHtml5($this->text);
+				$this->text = String::toHtml5($this->text);
 			}
 
-			$this->Template->text = \String::encodeEmail($this->text);
+			$this->Template->text = String::encodeEmail($this->text);
 			$this->Template->addImage = false;
 
 			// Add an image
@@ -118,7 +119,7 @@ class ContentAccordion extends \ContentElement
 				}
 				else
 				{
-					$objModel = \FilesModel::findByPk($this->singleSRC);
+					$objModel = FilesModel::findByPk($this->singleSRC);
 
 					if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 					{

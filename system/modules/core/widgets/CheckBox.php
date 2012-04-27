@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Environment, \Input, \Widget;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class CheckBox extends \Widget
+class CheckBox extends Widget
 {
 
 	/**
@@ -107,12 +108,12 @@ class CheckBox extends \Widget
 		$state = $this->Session->get('checkbox_groups');
 
 		// Toggle the checkbox group
-		if (\Input::get('cbc'))
+		if (Input::get('cbc'))
 		{
-			$state[\Input::get('cbc')] = (isset($state[\Input::get('cbc')]) && $state[\Input::get('cbc')] == 1) ? 0 : 1;
+			$state[Input::get('cbc')] = (isset($state[Input::get('cbc')]) && $state[Input::get('cbc')] == 1) ? 0 : 1;
 			$this->Session->set('checkbox_groups', $state);
 
-			$this->redirect(preg_replace('/(&(amp;)?|\?)cbc=[^& ]*/i', '', \Environment::get('request')));
+			$this->redirect(preg_replace('/(&(amp;)?|\?)cbc=[^& ]*/i', '', Environment::get('request')));
 		}
 
 		$blnFirst = true;

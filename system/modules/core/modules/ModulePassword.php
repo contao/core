@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendTemplate, \Email, \Environment, \FrontendTemplate, \Input, \MemberModel, \Module, \Exception;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModulePassword extends \Module
+class ModulePassword extends Module
 {
 
 	/**
@@ -60,7 +61,7 @@ class ModulePassword extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### LOST PASSWORD ###';
 			$objTemplate->title = $this->headline;
@@ -88,7 +89,7 @@ class ModulePassword extends \Module
 		$this->loadDataContainer('tl_member');
 
 		// Set new password
-		if (strlen(\Input::get('token')))
+		if (strlen(Input::get('token')))
 		{
 			$this->setNewPassword();
 			return;
@@ -141,7 +142,7 @@ class ModulePassword extends \Module
 			++$row;
 
 			// Validate widget
-			if (\Input::post('FORM_SUBMIT') == 'tl_lost_password')
+			if (Input::post('FORM_SUBMIT') == 'tl_lost_password')
 			{
 				$objWidget->validate();
 
@@ -158,22 +159,22 @@ class ModulePassword extends \Module
 		$this->Template->hasError = $doNotSubmit;
 
 		// Look for an account and send the password link
-		if (\Input::post('FORM_SUBMIT') == 'tl_lost_password' && !$doNotSubmit)
+		if (Input::post('FORM_SUBMIT') == 'tl_lost_password' && !$doNotSubmit)
 		{
 			if ($this->reg_skipName)
 			{
-				$objMember = \MemberModel::findActiveByEmailAndUsername(\Input::post('email', true), null);
+				$objMember = MemberModel::findActiveByEmailAndUsername(Input::post('email', true), null);
 			}
 			else
 			{
-				$objMember = \MemberModel::findActiveByEmailAndUsername(\Input::post('email', true), \Input::post('username'));
+				$objMember = MemberModel::findActiveByEmailAndUsername(Input::post('email', true), Input::post('username'));
 			}
 
 			if ($objMember === null)
 			{
 				$this->strTemplate = 'mod_message';
 
-				$this->Template = new \FrontendTemplate($this->strTemplate);
+				$this->Template = new FrontendTemplate($this->strTemplate);
 				$this->Template->type = 'error';
 				$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountNotFound'];
 
@@ -199,13 +200,13 @@ class ModulePassword extends \Module
 	 */
 	protected function setNewPassword()
 	{
-		$objMember = \MemberModel::findByActivation(\Input::get('token'));
+		$objMember = MemberModel::findByActivation(Input::get('token'));
 
 		if ($objMember === null || $objMember->login == '')
 		{
 			$this->strTemplate = 'mod_message';
 
-			$this->Template = new \FrontendTemplate($this->strTemplate);
+			$this->Template = new FrontendTemplate($this->strTemplate);
 			$this->Template->type = 'error';
 			$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountError'];
 
@@ -232,7 +233,7 @@ class ModulePassword extends \Module
 		$this->Template->rowLast = 'row_2 row_last even';
 
 		// Validate the field
-		if (strlen(\Input::post('FORM_SUBMIT')) && \Input::post('FORM_SUBMIT') == $this->Session->get('setPasswordToken'))
+		if (strlen(Input::post('FORM_SUBMIT')) && Input::post('FORM_SUBMIT') == $this->Session->get('setPasswordToken'))
 		{
 			$objWidget->validate();
 
@@ -265,7 +266,7 @@ class ModulePassword extends \Module
 				// Confirm
 				$this->strTemplate = 'mod_message';
 
-				$this->Template = new \FrontendTemplate($this->strTemplate);
+				$this->Template = new FrontendTemplate($this->strTemplate);
 				$this->Template->type = 'confirm';
 				$this->Template->message = $GLOBALS['TL_LANG']['MSC']['newPasswordSet'];
 
@@ -295,7 +296,7 @@ class ModulePassword extends \Module
 		$confirmationId = md5(uniqid(mt_rand(), true));
 
 		// Store the confirmation ID
-		$objMember = \MemberModel::findByPk($objMember->id);
+		$objMember = MemberModel::findByPk($objMember->id);
 		$objMember->activation = $confirmationId;
 		$objMember->save();
 
@@ -309,11 +310,11 @@ class ModulePassword extends \Module
 			switch ($strKey)
 			{
 				case 'domain':
-					$strConfirmation = str_replace($strChunk, \Environment::get('host'), $strConfirmation);
+					$strConfirmation = str_replace($strChunk, Environment::get('host'), $strConfirmation);
 					break;
 
 				case 'link':
-					$strConfirmation = str_replace($strChunk, \Environment::get('base') . \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $confirmationId, $strConfirmation);
+					$strConfirmation = str_replace($strChunk, Environment::get('base') . Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $confirmationId, $strConfirmation);
 					break;
 
 				default:
@@ -321,7 +322,7 @@ class ModulePassword extends \Module
 					{
 						$strConfirmation = str_replace($strChunk, $objMember->$strKey, $strConfirmation);
 					}
-					catch (\Exception $e)
+					catch (Exception $e)
 					{
 						$strConfirmation = str_replace($strChunk, '', $strConfirmation);
 						$this->log('Invalid wildcard "' . $strKey . '" used in password request e-mail', 'ModulePassword sendPasswordLink()', TL_GENERAL, $e->getMessage());
@@ -331,11 +332,11 @@ class ModulePassword extends \Module
 		}
 
 		// Send e-mail
-		$objEmail = new \Email();
+		$objEmail = new Email();
 
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
-		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['passwordSubject'], \Environment::get('host'));
+		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['passwordSubject'], Environment::get('host'));
 		$objEmail->text = $strConfirmation;
 		$objEmail->sendTo($objMember->email);
 

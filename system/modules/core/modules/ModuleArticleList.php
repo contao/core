@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \ArticleModel, \BackendTemplate, \Environment, \Module;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleArticleList extends \Module
+class ModuleArticleList extends Module
 {
 
 	/**
@@ -60,7 +61,7 @@ class ModuleArticleList extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ARTICLE LIST ###';
 			$objTemplate->title = $this->headline;
@@ -93,7 +94,7 @@ class ModuleArticleList extends \Module
 		$articles = array();
 		$id = $objPage->id;
 
-		$this->Template->request = \Environment::get('request');
+		$this->Template->request = Environment::get('request');
 
 		// Show the articles of a different page
 		if ($this->defineRoot && $this->rootPage > 0)
@@ -106,7 +107,7 @@ class ModuleArticleList extends \Module
 		}
 
 		// Get published articles
-		$objArticles = \ArticleModel::findPublishedByPidAndColumn($id, $this->inColumn);
+		$objArticles = ArticleModel::findPublishedByPidAndColumn($id, $this->inColumn);
 
 		if ($objArticles === null)
 		{

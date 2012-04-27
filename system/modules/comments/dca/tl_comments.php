@@ -274,7 +274,7 @@ class tl_comments extends Backend
 	 */
 	public function checkPermission()
 	{
-		switch (\Input::get('act'))
+		switch (Input::get('act'))
 		{
 			case 'select':
 			case 'show':
@@ -286,17 +286,17 @@ class tl_comments extends Backend
 			case 'toggle':
 				$objComment = $this->Database->prepare("SELECT id, parent, source FROM tl_comments WHERE id=?")
 											 ->limit(1)
-											 ->execute(\Input::get('id'));
+											 ->execute(Input::get('id'));
 
 				if ($objComment->numRows < 1)
 				{
-					$this->log('Comment ID ' . \Input::get('id') . ' does not exist', 'tl_comments checkPermission()', TL_ERROR);
+					$this->log('Comment ID ' . Input::get('id') . ' does not exist', 'tl_comments checkPermission()', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!$this->isAllowedToEditComment($objComment->parent, $objComment->source))
 				{
-					$this->log('Not enough permissions to ' . \Input::get('act') . ' comment ID ' . \Input::get('id') . ' (parent element: ' . $objComment->source . ' ID ' . $objComment->parent . ')', 'tl_comments checkPermission()', TL_ERROR);
+					$this->log('Not enough permissions to ' . Input::get('act') . ' comment ID ' . Input::get('id') . ' (parent element: ' . $objComment->source . ' ID ' . $objComment->parent . ')', 'tl_comments checkPermission()', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -326,9 +326,9 @@ class tl_comments extends Backend
 				break;
 
 			default:
-				if (strlen(\Input::get('act')))
+				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.\Input::get('act').'"', 'tl_comments checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', 'tl_comments checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -352,9 +352,9 @@ class tl_comments extends Backend
 		$strKey = __METHOD__ . '-' . $strSource . '-' . $intParent;
 
 		// Load cached result
-		if (\Cache::has($strKey))
+		if (Cache::has($strKey))
 		{
-			return \Cache::get($strKey);
+			return Cache::get($strKey);
 		}
 
 		// Get the pagemounts
@@ -369,7 +369,7 @@ class tl_comments extends Backend
 		$pagemounts = array_unique($pagemounts);
 
 		// Order deny,allow
-		\Cache::set($strKey, false);
+		Cache::set($strKey, false);
 
 		switch ($strSource)
 		{
@@ -381,7 +381,7 @@ class tl_comments extends Backend
 				// Check whether the page is mounted and the user is allowed to edit its articles
 				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(4, $objPage->row()))
 				{
-					\Cache::set($strKey, true);
+					Cache::set($strKey, true);
 				}
 				break;
 
@@ -393,7 +393,7 @@ class tl_comments extends Backend
 				// Check whether the page is mounted and the user is allowed to edit it
 				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(1, $objPage->row()))
 				{
-					\Cache::set($strKey, true);
+					Cache::set($strKey, true);
 				}
 				break;
 
@@ -408,7 +408,7 @@ class tl_comments extends Backend
 					// Check the access to the news archive
 					if ($objArchive->numRows > 0 && $this->User->hasAccess($objArchive->pid, 'news'))
 					{
-						\Cache::set($strKey, true);
+						Cache::set($strKey, true);
 					}
 				}
 				break;
@@ -424,7 +424,7 @@ class tl_comments extends Backend
 					// Check the access to the calendar
 					if ($objCalendar->numRows > 0 && $this->User->hasAccess($objCalendar->pid, 'calendars'))
 					{
-						\Cache::set($strKey, true);
+						Cache::set($strKey, true);
 					}
 				}
 				break;
@@ -433,7 +433,7 @@ class tl_comments extends Backend
 				// Check the access to the FAQ module
 				if ($this->User->hasAccess('faq', 'modules'))
 				{
-					\Cache::set($strKey, true);
+					Cache::set($strKey, true);
 				}
 				break;
 
@@ -447,7 +447,7 @@ class tl_comments extends Backend
 
 						if ($this->$callback[0]->$callback[1]($intParent, $strSource) === true)
 						{
-							\Cache::set($strKey, true);
+							Cache::set($strKey, true);
 							break;
 						}
 					}
@@ -455,7 +455,7 @@ class tl_comments extends Backend
 				break;
 		}
 
-		return \Cache::get($strKey);
+		return Cache::get($strKey);
 	}
 
 
@@ -594,9 +594,9 @@ class tl_comments extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen(\Input::get('tid')))
+		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 
@@ -631,8 +631,8 @@ class tl_comments extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check permissions to edit
-		\Input::setGet('id', $intId);
-		\Input::setGet('act', 'toggle');
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
 		$this->checkPermission();
 
 		// Check permissions to publish

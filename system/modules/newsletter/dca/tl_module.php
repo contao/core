@@ -190,13 +190,13 @@ class tl_module_newsletter extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getNewsletterTemplates(\DataContainer $dc)
+	public function getNewsletterTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('nl_', $intPid);

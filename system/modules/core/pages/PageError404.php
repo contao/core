@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Environment, \Frontend, \PageModel, \Search;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PageError404 extends \Frontend
+class PageError404 extends Frontend
 {
 
 	/**
@@ -61,15 +62,15 @@ class PageError404 extends \Frontend
 		}
 		elseif ($pageId != 'favicon.ico' && $pageId != 'robots.txt')
 		{
-			$this->log('No active page for page ID "' . $pageId . '", host "' . \Environment::get('host') . '" and languages "' . implode(', ', \Environment::get('httpAcceptLanguage')) . '" (' . \Environment::get('base') . \Environment::get('request') . ')', 'PageError404 generate()', TL_ERROR);
+			$this->log('No active page for page ID "' . $pageId . '", host "' . Environment::get('host') . '" and languages "' . implode(', ', Environment::get('httpAcceptLanguage')) . '" (' . Environment::get('base') . Environment::get('request') . ')', 'PageError404 generate()', TL_ERROR);
 		}
 
 		// Check the search index (see #3761)
-		\Search::removeEntry(\Environment::get('request'));
+		Search::removeEntry(Environment::get('request'));
 
 		// Look for an 404 page
 		$objRootPage = $this->getRootPageFromUrl();
-		$obj404 = \PageModel::find404ByPid($objRootPage->id);
+		$obj404 = PageModel::find404ByPid($objRootPage->id);
 
 		// Die if there is no page at all
 		if ($obj404 === null)
@@ -93,7 +94,7 @@ class PageError404 extends \Frontend
 		}
 
 		// Forward to another page
-		$objNextPage = \PageModel::findPublishedById($obj404->jumpTo);
+		$objNextPage = PageModel::findPublishedById($obj404->jumpTo);
 
 		if ($objNextPage === null)
 		{

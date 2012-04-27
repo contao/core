@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Model;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class NewsFeedModel extends \Model
+class NewsFeedModel extends Model
 {
 
 	/**
@@ -55,7 +56,7 @@ class NewsFeedModel extends \Model
 	/**
 	 * Find all feeds which include a certain archive
 	 * @param integer
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findByArchive($intId)
 	{
@@ -67,7 +68,7 @@ class NewsFeedModel extends \Model
 	/**
 	 * Find news feeds by their IDs
 	 * @param array
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findByIds($arrIds)
 	{

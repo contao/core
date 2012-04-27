@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendTemplate, \Date, \Events, \FrontendTemplate, \Input, \Pagination;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleEventlist extends \Events
+class ModuleEventlist extends Events
 {
 
 	/**
@@ -66,7 +67,7 @@ class ModuleEventlist extends \Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### EVENT LIST ###';
 			$objTemplate->title = $this->headline;
@@ -110,15 +111,15 @@ class ModuleEventlist extends \Events
 			switch ($this->cal_format)
 			{
 				case 'cal_year':
-					\Input::setGet('year', date('Y'));
+					Input::setGet('year', date('Y'));
 					break;
 
 				case 'cal_month':
-					\Input::setGet('month', date('Ym'));
+					Input::setGet('month', date('Ym'));
 					break;
 
 				case 'cal_day':
-					\Input::setGet('day', date('Ymd'));
+					Input::setGet('day', date('Ymd'));
 					break;
 			}
 
@@ -128,30 +129,30 @@ class ModuleEventlist extends \Events
 		$blnDynamicFormat = (!$this->cal_ignoreDynamic && in_array($this->cal_format, array('cal_day', 'cal_month', 'cal_year')));
 
 		// Display year
-		if ($blnDynamicFormat && \Input::get('year'))
+		if ($blnDynamicFormat && Input::get('year'))
 		{
-			$this->Date = new \Date(\Input::get('year'), 'Y');
+			$this->Date = new Date(Input::get('year'), 'Y');
 			$this->cal_format = 'cal_year';
 			$this->headline .= ' ' . date('Y', $this->Date->tstamp);
 		}
 		// Display month
-		elseif ($blnDynamicFormat && \Input::get('month'))
+		elseif ($blnDynamicFormat && Input::get('month'))
 		{
-			$this->Date = new \Date(\Input::get('month'), 'Ym');
+			$this->Date = new Date(Input::get('month'), 'Ym');
 			$this->cal_format = 'cal_month';
 			$this->headline .= ' ' . $this->parseDate('F Y', $this->Date->tstamp);
 		}
 		// Display day
-		elseif ($blnDynamicFormat && \Input::get('day'))
+		elseif ($blnDynamicFormat && Input::get('day'))
 		{
-			$this->Date = new \Date(\Input::get('day'), 'Ymd');
+			$this->Date = new Date(Input::get('day'), 'Ymd');
 			$this->cal_format = 'cal_day';
 			$this->headline .= ' ' . $this->parseDate($objPage->dateFormat, $this->Date->tstamp);
 		}
 		// Display all events or upcoming/past events
 		else
 		{
-			$this->Date = new \Date();
+			$this->Date = new Date();
 		}
 
 		list($strBegin, $strEnd, $strEmpty) = $this->getDatesFromFormat($this->Date, $this->cal_format);
@@ -209,7 +210,7 @@ class ModuleEventlist extends \Events
 		// Pagination
 		if ($this->perPage > 0)
 		{
-			$page = \Input::get('page') ? \Input::get('page') : 1;
+			$page = Input::get('page') ? Input::get('page') : 1;
 
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))
@@ -226,7 +227,7 @@ class ModuleEventlist extends \Events
 			$offset = ($page - 1) * $this->perPage;
 			$limit = min($this->perPage + $offset, $total);
 
-			$objPagination = new \Pagination($total, $this->perPage);
+			$objPagination = new Pagination($total, $this->perPage);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -261,7 +262,7 @@ class ModuleEventlist extends \Events
 				$blnIsLastEvent = true;
 			}
 
-			$objTemplate = new \FrontendTemplate($this->cal_template);
+			$objTemplate = new FrontendTemplate($this->cal_template);
 			$objTemplate->setData($event);
 
 			// Month header
@@ -343,9 +344,9 @@ class ModuleEventlist extends \Events
 		// Clear the $_GET array (see #2445)
 		if ($blnClearInput)
 		{
-			\Input::setGet('year', null);
-			\Input::setGet('month', null);
-			\Input::setGet('day', null);
+			Input::setGet('year', null);
+			Input::setGet('month', null);
+			Input::setGet('day', null);
 		}
 	}
 }

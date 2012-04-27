@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Combiner, \ContentElement;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentCode extends \ContentElement
+class ContentCode extends ContentElement
 {
 
 	/**
@@ -122,7 +123,7 @@ class ContentCode extends \ContentElement
 			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/shCore.css';
 
 			// Add the core scripts
-			$objCombiner = new \Combiner();
+			$objCombiner = new Combiner();
 			$objCombiner->add('plugins/highlighter/XRegExp.js', HIGHLIGHTER);
 			$objCombiner->add('plugins/highlighter/shCore.js', HIGHLIGHTER);
 			$GLOBALS['TL_JAVASCRIPT'][] = $objCombiner->getCombinedFile(TL_PLUGINS_URL);

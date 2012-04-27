@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendTemplate, \Module;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleSitemap extends \Module
+class ModuleSitemap extends Module
 {
 
 	/**
@@ -60,7 +61,7 @@ class ModuleSitemap extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### SITEMAP ###';
 			$objTemplate->title = $this->headline;

@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Model;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class FaqModel extends \Model
+class FaqModel extends Model
 {
 
 	/**
@@ -57,7 +58,7 @@ class FaqModel extends \Model
 	 * @param integer
 	 * @param string
 	 * @param array
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findPublishedByParentAndIdOrAlias($intId, $varAlias, $arrPids)
 	{
@@ -81,7 +82,7 @@ class FaqModel extends \Model
 	/**
 	 * Find all published FAQs by their parent IDs
 	 * @param array
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findPublishedByPids($arrPids)
 	{

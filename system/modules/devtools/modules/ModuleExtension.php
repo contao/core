@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendModule, \BackendTemplate, \Environment, \File, \Input;
 
 
 /**
@@ -76,7 +77,7 @@ class ModuleExtension extends BackendModule
 	protected function compile()
 	{
 		// Create files
-		if (\Input::post('FORM_SUBMIT') == 'tl_extension')
+		if (Input::post('FORM_SUBMIT') == 'tl_extension')
 		{
 			$objModule = $this->Database->prepare("SELECT * FROM tl_extension WHERE id=?")
 							  ->limit(1)
@@ -88,14 +89,14 @@ class ModuleExtension extends BackendModule
 			}
 
 			// .htaccess
-			$tplHtaccess = new \BackendTemplate('dev_htaccess');
-			$objHtaccess = new \File('system/modules/' . $objModule->folder . '/.htaccess');
+			$tplHtaccess = new BackendTemplate('dev_htaccess');
+			$objHtaccess = new File('system/modules/' . $objModule->folder . '/.htaccess');
 			$objHtaccess->write($tplHtaccess->parse());
 			$objHtaccess->close();
 
 			// config/config.php
 			$tplConfig = $this->newTemplate('dev_config', $objModule);
-			$objConfig = new \File('system/modules/' . $objModule->folder . '/config/config.php');
+			$objConfig = new File('system/modules/' . $objModule->folder . '/config/config.php');
 			$objConfig->write($tplConfig->parse());
 			$objConfig->close();
 
@@ -110,7 +111,7 @@ class ModuleExtension extends BackendModule
 					$tplClass = $this->newTemplate('dev_beClass', $objModule);
 					$tplClass->class = $strClass;
 
-					$objClass = new \File('system/modules/' . $objModule->folder . '/' . $this->guessSubfolder($strClass) . '/' . $strClass . '.php');
+					$objClass = new File('system/modules/' . $objModule->folder . '/' . $this->guessSubfolder($strClass) . '/' . $strClass . '.php');
 					$objClass->write($tplClass->parse());
 					$objClass->close();
 				}
@@ -123,7 +124,7 @@ class ModuleExtension extends BackendModule
 					$tplTable = $this->newTemplate('dev_dca', $objModule);
 					$tplTable->table = $strTable;
 
-					$objTable = new \File('system/modules/' . $objModule->folder . '/dca/' . $strTable . '.php');
+					$objTable = new File('system/modules/' . $objModule->folder . '/dca/' . $strTable . '.php');
 					$objTable->write($tplTable->parse());
 					$objTable->close();
 				}
@@ -134,7 +135,7 @@ class ModuleExtension extends BackendModule
 				foreach ($arrTemplates as $strTemplate)
 				{
 					$tplTemplate = $this->newTemplate('dev_beTemplate', $objModule);
-					$objTemplate = new \File('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.html5');
+					$objTemplate = new File('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.html5');
 					$objTemplate->write($tplTemplate->parse());
 					$objTemplate->close();
 				}
@@ -152,7 +153,7 @@ class ModuleExtension extends BackendModule
 					$tplClass->class = $strClass;
 					$tplClass->extends = $this->guessParentClass($strClass);
 
-					$objClass = new \File('system/modules/' . $objModule->folder . '/' . $this->guessSubfolder($strClass) . '/' . $strClass . '.php');
+					$objClass = new File('system/modules/' . $objModule->folder . '/' . $this->guessSubfolder($strClass) . '/' . $strClass . '.php');
 					$objClass->write($tplClass->parse());
 					$objClass->close();
 				}
@@ -168,7 +169,7 @@ class ModuleExtension extends BackendModule
 					$tplTable->table = $strTable;
 					$tplTable->class = $strModel;
 
-					$objTable = new \File('system/modules/' . $objModule->folder . '/models/' . $strModel . 'Model.php');
+					$objTable = new File('system/modules/' . $objModule->folder . '/models/' . $strModel . 'Model.php');
 					$objTable->write($tplTable->parse());
 					$objTable->close();
 				}
@@ -179,7 +180,7 @@ class ModuleExtension extends BackendModule
 				foreach ($arrTemplates as $strTemplate)
 				{
 					$tplTemplate = $this->newTemplate('dev_feTemplate', $objModule);
-					$objTemplate = new \File('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.html5');
+					$objTemplate = new File('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.html5');
 					$objTemplate->write($tplTemplate->parse());
 					$objTemplate->close();
 					$objTemplate->copyTo('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.xhtml');
@@ -193,21 +194,21 @@ class ModuleExtension extends BackendModule
 
 				foreach ($arrLanguages as $strLanguage)
 				{
-					$objHtaccess = new \File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/.htaccess');
+					$objHtaccess = new File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/.htaccess');
 					$objHtaccess->write($tplHtaccess->parse());
 					$objHtaccess->close();
 
 					// languages/xx/default.php
 					$tplLanguage = $this->newTemplate('dev_default', $objModule);
 					$tplLanguage->language = $strLanguage;
-					$objLanguage = new \File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/default.php');
+					$objLanguage = new File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/default.php');
 					$objLanguage->write($tplLanguage->parse());
 					$objLanguage->close();
 
 					// languages/xx/modules.php
 					$tplLanguage = $this->newTemplate('dev_modules', $objModule);
 					$tplLanguage->language = $strLanguage;
-					$objLanguage = new \File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/modules.php');
+					$objLanguage = new File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/modules.php');
 					$objLanguage->write($tplLanguage->parse());
 					$objLanguage->close();
 
@@ -217,7 +218,7 @@ class ModuleExtension extends BackendModule
 						$tplLanguage->language = $strLanguage;
 						$tplLanguage->table = $strTable;
 
-						$objLanguage = new \File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/' . $strTable . '.php');
+						$objLanguage = new File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/' . $strTable . '.php');
 						$objLanguage->write($tplLanguage->parse());
 						$objLanguage->close();
 					}
@@ -228,15 +229,15 @@ class ModuleExtension extends BackendModule
 			$this->reload();
 		}
 
-		$this->Template->base = \Environment::get('base');
+		$this->Template->base = Environment::get('base');
 		$this->Template->href = $this->getReferer(true);
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']);
-		$this->Template->action = ampersand(\Environment::get('request'));
+		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->selectAll = $GLOBALS['TL_LANG']['MSC']['selectAll'];
 		$this->Template->button = $GLOBALS['TL_LANG']['MSC']['backBT'];
 		$this->Template->message = $this->getMessages();
 		$this->Template->submit = specialchars($GLOBALS['TL_LANG']['tl_extension']['make'][0]);
-		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['tl_extension']['headline'], \Input::get('id'));
+		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['tl_extension']['headline'], Input::get('id'));
 		$this->Template->explain = $GLOBALS['TL_LANG']['tl_extension']['make'][1];
 		$this->Template->label = $GLOBALS['TL_LANG']['tl_extension']['label'];
 	}
@@ -246,11 +247,11 @@ class ModuleExtension extends BackendModule
 	 * Return a new template object
 	 * @param string
 	 * @param \Database_Result
-	 * @return \Contao\BackendTemplate
+	 * @return \BackendTemplate
 	 */
-	protected function newTemplate($strTemplate, \Database_Result $objModule)
+	protected function newTemplate($strTemplate, Database_Result $objModule)
 	{
-		$objTemplate = new \BackendTemplate($strTemplate);
+		$objTemplate = new BackendTemplate($strTemplate);
 		$objTemplate->folder = $objModule->folder;
 		$objTemplate->author = str_replace(array('[', ']'), array('<', '>'), $objModule->author);
 		$objTemplate->copyright = $objModule->copyright;

@@ -322,10 +322,10 @@ class tl_newsletter extends Backend
 			$root = $this->User->newsletters;
 		}
 
-		$id = strlen(\Input::get('id')) ? \Input::get('id') : CURRENT_ID;
+		$id = strlen(Input::get('id')) ? Input::get('id') : CURRENT_ID;
 
 		// Check current action
-		switch (\Input::get('act'))
+		switch (Input::get('act'))
 		{
 			case 'paste':
 			case 'select':
@@ -333,18 +333,18 @@ class tl_newsletter extends Backend
 				break;
 
 			case 'create':
-				if (!strlen(\Input::get('pid')) || !in_array(\Input::get('pid'), $root))
+				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create newsletters in channel ID "'.\Input::get('pid').'"', 'tl_newsletter checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to create newsletters in channel ID "'.Input::get('pid').'"', 'tl_newsletter checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
 			case 'cut':
 			case 'copy':
-				if (!in_array(\Input::get('pid'), $root))
+				if (!in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to '.\Input::get('act').' newsletter ID "'.$id.'" to channel ID "'.\Input::get('pid').'"', 'tl_newsletter checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' newsletter ID "'.$id.'" to channel ID "'.Input::get('pid').'"', 'tl_newsletter checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -364,7 +364,7 @@ class tl_newsletter extends Backend
 
 				if (!in_array($objChannel->pid, $root))
 				{
-					$this->log('Not enough permissions to '.\Input::get('act').' newsletter ID "'.$id.'" of newsletter channel ID "'.$objChannel->pid.'"', 'tl_newsletter checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' newsletter ID "'.$id.'" of newsletter channel ID "'.$objChannel->pid.'"', 'tl_newsletter checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -395,12 +395,12 @@ class tl_newsletter extends Backend
 				break;
 
 			default:
-				if (strlen(\Input::get('act')))
+				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.\Input::get('act').'"', 'tl_newsletter checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', 'tl_newsletter checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
-				if (\Input::get('key') == 'send')
+				if (Input::get('key') == 'send')
 				{
 					$objChannel = $this->Database->prepare("SELECT pid FROM tl_newsletter WHERE id=?")
 												 ->limit(1)
@@ -462,7 +462,7 @@ class tl_newsletter extends Backend
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public function generateAlias($varValue, \DataContainer $dc)
+	public function generateAlias($varValue, DataContainer $dc)
 	{
 		$autoAlias = false;
 
@@ -479,7 +479,7 @@ class tl_newsletter extends Backend
 		// Check whether the news alias exists
 		if ($objAlias->numRows > 1 && !$autoAlias)
 		{
-			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 		}
 
 		// Add ID to alias

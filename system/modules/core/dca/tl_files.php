@@ -265,7 +265,7 @@ class tl_files extends Backend
 		// Set allowed page IDs (edit multiple)
 		if (is_array($session['CURRENT']['IDS']))
 		{
-			if (\Input::get('act') == 'editAll' && !$f2)
+			if (Input::get('act') == 'editAll' && !$f2)
 			{
 				$session['CURRENT']['IDS'] = array();
 			}
@@ -310,9 +310,9 @@ class tl_files extends Backend
 		$this->Session->setData($session);
 
 		// Check current action
-		if (\Input::get('act') && \Input::get('act') != 'paste')
+		if (Input::get('act') && Input::get('act') != 'paste')
 		{
-			switch (\Input::get('act'))
+			switch (Input::get('act'))
 			{
 				case 'move':
 					if (!$f1)
@@ -336,7 +336,7 @@ class tl_files extends Backend
 					break;
 
 				case 'delete':
-					$strFile = \Input::get('id', true);
+					$strFile = Input::get('id', true);
 					if (is_dir(TL_ROOT . '/' . $strFile))
 					{
 						$files = scan(TL_ROOT . '/' . $strFile);
@@ -379,8 +379,8 @@ class tl_files extends Backend
 		// Set a new node
 		if (isset($_GET['node']))
 		{
-			$this->Session->set('tl_files_node', \Input::get('node', true));
-			$this->redirect(preg_replace('/(&|\?)node=[^&]*/', '', \Environment::get('request')));
+			$this->Session->set('tl_files_node', Input::get('node', true));
+			$this->redirect(preg_replace('/(&|\?)node=[^&]*/', '', Environment::get('request')));
 		}
 
 		$strNode = $this->Session->get('tl_files_node');
@@ -454,19 +454,19 @@ class tl_files extends Backend
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public function checkFilename($varValue, \DataContainer $dc)
+	public function checkFilename($varValue, DataContainer $dc)
 	{
 		$varValue = utf8_romanize($varValue);
 		$varValue = str_replace('"', '', $varValue);
 
 		if (preg_match('/\.$/', $varValue))
 		{
-			throw new \Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
+			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}
 
 		if (is_file(TL_ROOT .'/'. $dc->path .'/'. $varValue . $dc->extension))
 		{
-			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['fileExists'], $dc->path .'/'. $varValue . $dc->extension));
+			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['fileExists'], $dc->path .'/'. $varValue . $dc->extension));
 		}
 
 		return $varValue;
@@ -566,7 +566,7 @@ class tl_files extends Backend
 			return '';
 		}
 
-		$objFile = new \File($strDecoded);
+		$objFile = new File($strDecoded);
 
 		if (!in_array($objFile->extension, trimsplit(',', $GLOBALS['TL_CONFIG']['editableFiles'])))
 		{

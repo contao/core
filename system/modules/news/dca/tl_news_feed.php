@@ -208,7 +208,7 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 		'feedBase' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_feed']['feedBase'],
-			'default'                 => \Environment::get('base'),
+			'default'                 => Environment::get('base'),
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -279,7 +279,7 @@ class tl_news_feed extends Backend
 		}
 
 		// Check current action
-		switch (\Input::get('act'))
+		switch (Input::get('act'))
 		{
 			case 'create':
 			case 'select':
@@ -288,11 +288,11 @@ class tl_news_feed extends Backend
 
 			case 'edit':
 				// Dynamically add the record to the user profile
-				if (!in_array(\Input::get('id'), $root))
+				if (!in_array(Input::get('id'), $root))
 				{
 					$arrNew = $this->Session->get('new_records');
 
-					if (is_array($arrNew['tl_news_feed']) && in_array(\Input::get('id'), $arrNew['tl_news_feed']))
+					if (is_array($arrNew['tl_news_feed']) && in_array(Input::get('id'), $arrNew['tl_news_feed']))
 					{
 						// Add permissions on user level
 						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
@@ -306,7 +306,7 @@ class tl_news_feed extends Backend
 							if (is_array($arrNewsfeedp) && in_array('create', $arrNewsfeedp))
 							{
 								$arrNewsfeeds = deserialize($objUser->newsfeeds);
-								$arrNewsfeeds[] = \Input::get('id');
+								$arrNewsfeeds[] = Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user SET newsfeeds=? WHERE id=?")
 											   ->execute(serialize($arrNewsfeeds), $this->User->id);
@@ -325,7 +325,7 @@ class tl_news_feed extends Backend
 							if (is_array($arrNewsfeedp) && in_array('create', $arrNewsfeedp))
 							{
 								$arrNewsfeeds = deserialize($objGroup->newsfeeds);
-								$arrNewsfeeds[] = \Input::get('id');
+								$arrNewsfeeds[] = Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user_group SET newsfeeds=? WHERE id=?")
 											   ->execute(serialize($arrNewsfeeds), $this->User->groups[0]);
@@ -333,7 +333,7 @@ class tl_news_feed extends Backend
 						}
 
 						// Add new element to the user object
-						$root[] = \Input::get('id');
+						$root[] = Input::get('id');
 						$this->User->newsfeeds = $root;
 					}
 				}
@@ -342,9 +342,9 @@ class tl_news_feed extends Backend
 			case 'copy':
 			case 'delete':
 			case 'show':
-				if (!in_array(\Input::get('id'), $root) || (\Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'newsfeedp')))
+				if (!in_array(Input::get('id'), $root) || (Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'newsfeedp')))
 				{
-					$this->log('Not enough permissions to '.\Input::get('act').' news feed ID "'.\Input::get('id').'"', 'tl_news_feed checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news feed ID "'.Input::get('id').'"', 'tl_news_feed checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -353,7 +353,7 @@ class tl_news_feed extends Backend
 			case 'deleteAll':
 			case 'overrideAll':
 				$session = $this->Session->getData();
-				if (\Input::get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'newsfeedp'))
+				if (Input::get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'newsfeedp'))
 				{
 					$session['CURRENT']['IDS'] = array();
 				}
@@ -365,9 +365,9 @@ class tl_news_feed extends Backend
 				break;
 
 			default:
-				if (strlen(\Input::get('act')))
+				if (strlen(Input::get('act')))
 				{
-					$this->log('Not enough permissions to '.\Input::get('act').' news feeds', 'tl_news_feed checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news feeds', 'tl_news_feed checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -407,7 +407,7 @@ class tl_news_feed extends Backend
 	 * @param \DataContainer
 	 * @return void
 	 */
-	public function scheduleUpdate(\DataContainer $dc)
+	public function scheduleUpdate(DataContainer $dc)
 	{
 		// Return if there is no ID 
 		if (!$dc->id)
@@ -430,11 +430,11 @@ class tl_news_feed extends Backend
 	{
 		if ($this->User->isAdmin)
 		{
-			$objArchive = \NewsArchiveModel::findAll();
+			$objArchive = NewsArchiveModel::findAll();
 		}
 		else
 		{
-			$objArchive = \NewsArchiveModel::findMultipleByIds($this->User->news);
+			$objArchive = NewsArchiveModel::findMultipleByIds($this->User->news);
 		}
 
 		$return = array();
@@ -458,7 +458,7 @@ class tl_news_feed extends Backend
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public function checkFeedAlias($varValue, \DataContainer $dc)
+	public function checkFeedAlias($varValue, DataContainer $dc)
 	{
 		// No change or empty value
 		if ($varValue == $dc->value || $varValue == '')
@@ -471,7 +471,7 @@ class tl_news_feed extends Backend
 		// Alias exists
 		if (array_search($varValue, $arrFeeds) !== false)
 		{
-			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 		}
 
 		return $varValue;

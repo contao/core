@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Frontend, \PageModel;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PageRoot extends \Frontend
+class PageRoot extends Frontend
 {
 
 	/**
@@ -53,7 +54,7 @@ class PageRoot extends \Frontend
 	 */
 	public function generate($pageId, $blnReturn=false)
 	{
-		$objNextPage = \PageModel::findFirstPublishedByPid($pageId);
+		$objNextPage = PageModel::findFirstPublishedByPid($pageId);
 
 		// No published pages yet
 		if ($objNextPage === null)

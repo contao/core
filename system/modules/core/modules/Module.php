@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Frontend, \FrontendTemplate, \Input, \Model, \Model_Collection, \ModuleSitemap, \PageModel, \String;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-abstract class Module extends \Frontend
+abstract class Module extends Frontend
 {
 
 	/**
@@ -83,7 +84,7 @@ abstract class Module extends \Frontend
 	 */
 	public function __construct($objModule, $strColumn='main')
 	{
-		if ($objModule instanceof \Model || $objModule instanceof \Model_Collection)
+		if ($objModule instanceof Model || $objModule instanceof Model_Collection)
 		{
 			$this->objModel = $objModule;
 		}
@@ -156,7 +157,7 @@ abstract class Module extends \Frontend
 			$this->arrStyle[] = 'margin-bottom:'.$this->arrData['space'][1].'px;';
 		}
 
-		$this->Template = new \FrontendTemplate($this->strTemplate);
+		$this->Template = new FrontendTemplate($this->strTemplate);
 		$this->Template->setData($this->arrData);
 
 		$this->compile();
@@ -196,7 +197,7 @@ abstract class Module extends \Frontend
 	protected function renderNavigation($pid, $level=1)
 	{
 		// Get all active subpages
-		$objSubpages = \PageModel::findPublishedSubpagesWithoutGuestsByPid($pid, $this->showHidden, $this instanceof \ModuleSitemap);
+		$objSubpages = PageModel::findPublishedSubpagesWithoutGuestsByPid($pid, $this->showHidden, $this instanceof ModuleSitemap);
 
 		if ($objSubpages === null)
 		{
@@ -219,7 +220,7 @@ abstract class Module extends \Frontend
 			$this->navigationTpl = 'nav_default';
 		}
 
-		$objTemplate = new \FrontendTemplate($this->navigationTpl);
+		$objTemplate = new FrontendTemplate($this->navigationTpl);
 
 		$objTemplate->type = get_class($this);
 		$objTemplate->level = 'level_' . $level++;
@@ -231,7 +232,7 @@ abstract class Module extends \Frontend
 		while($objSubpages->next())
 		{
 			// Skip hidden sitemap pages
-			if ($this instanceof \ModuleSitemap && $objSubpages->sitemap == 'map_never')
+			if ($this instanceof ModuleSitemap && $objSubpages->sitemap == 'map_never')
 			{
 				continue;
 			}
@@ -240,7 +241,7 @@ abstract class Module extends \Frontend
 			$_groups = deserialize($objSubpages->groups);
 
 			// Do not show protected pages unless a back end or front end user is logged in
-			if (!$objSubpages->protected || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected || ($this instanceof \ModuleSitemap && $objSubpages->sitemap == 'map_always'))
+			if (!$objSubpages->protected || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected || ($this instanceof ModuleSitemap && $objSubpages->sitemap == 'map_always'))
 			{
 				// Check whether there will be subpages
 				if ($objSubpages->subpages > 0 && (!$this->showLevel || $this->showLevel >= $level || (!$this->hardLimit && ($objPage->id == $objSubpages->id || in_array($objPage->id, $this->getChildRecords($objSubpages->id, 'tl_page'))))))
@@ -256,18 +257,18 @@ abstract class Module extends \Frontend
 
 						if (strncasecmp($href, 'mailto:', 7) === 0)
 						{
-							$href = \String::encodeEmail($href);
+							$href = String::encodeEmail($href);
 						}
 						break;
 
 					case 'forward':
 						if ($objSubpages->jumpTo)
 						{
-							$objNext = \PageModel::findPublishedById($objSubpages->jumpTo);
+							$objNext = PageModel::findPublishedById($objSubpages->jumpTo);
 						}
 						else
 						{
-							$objNext = \PageModel::findFirstPublishedRegularByPid($objSubpages->id);
+							$objNext = PageModel::findFirstPublishedRegularByPid($objSubpages->id);
 						}
 
 						if ($objNext !== null)
@@ -283,7 +284,7 @@ abstract class Module extends \Frontend
 				}
 
 				// Active page
-				if (($objPage->id == $objSubpages->id || $objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) && !$this instanceof \ModuleSitemap && !\Input::get('articles'))
+				if (($objPage->id == $objSubpages->id || $objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) && !$this instanceof ModuleSitemap && !Input::get('articles'))
 				{
 					$strClass = (($subitems != '') ? 'submenu' : '') . ($objSubpages->protected ? ' protected' : '') . (($objSubpages->cssClass != '') ? ' ' . $objSubpages->cssClass : '');
 					$row = $objSubpages->row();

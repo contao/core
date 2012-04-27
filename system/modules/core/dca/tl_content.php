@@ -766,7 +766,7 @@ class tl_content extends Backend
 		$pagemounts = array_unique($pagemounts);
 
 		// Check the current action
-		switch (\Input::get('act'))
+		switch (Input::get('act'))
 		{
 			case 'paste':
 				// Allow
@@ -788,7 +788,7 @@ class tl_content extends Backend
 			case 'cutAll':
 			case 'copyAll':
 				// Check access to the parent element if a content element is moved
-				if ((\Input::get('act') == 'cutAll' || \Input::get('act') == 'copyAll') && !$this->checkAccessToElement(\Input::get('pid'), $pagemounts, (\Input::get('mode') == 2)))
+				if ((Input::get('act') == 'cutAll' || Input::get('act') == 'copyAll') && !$this->checkAccessToElement(Input::get('pid'), $pagemounts, (Input::get('mode') == 2)))
 				{
 					$this->redirect('contao/main.php?act=error');
 				}
@@ -804,7 +804,7 @@ class tl_content extends Backend
 			case 'cut':
 			case 'copy':
 				// Check access to the parent element if a content element is moved
-				if (!$this->checkAccessToElement(\Input::get('pid'), $pagemounts, (\Input::get('mode') == 2)))
+				if (!$this->checkAccessToElement(Input::get('pid'), $pagemounts, (Input::get('mode') == 2)))
 				{
 					$this->redirect('contao/main.php?act=error');
 				}
@@ -812,7 +812,7 @@ class tl_content extends Backend
 
 			default:
 				// Check access to the content element
-				if (!$this->checkAccessToElement(\Input::get('id'), $pagemounts))
+				if (!$this->checkAccessToElement(Input::get('id'), $pagemounts))
 				{
 					$this->redirect('contao/main.php?act=error');
 				}
@@ -941,7 +941,7 @@ class tl_content extends Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function editArticleAlias(\DataContainer $dc)
+	public function editArticleAlias(DataContainer $dc)
 	{
 		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=article&amp;table=tl_content&amp;id=' . $dc->value . '&amp;rt=' . REQUEST_TOKEN . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
@@ -952,7 +952,7 @@ class tl_content extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getArticleAlias(\DataContainer $dc)
+	public function getArticleAlias(DataContainer $dc)
 	{
 		$arrPids = array();
 		$arrAlias = array();
@@ -999,9 +999,9 @@ class tl_content extends Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function editAlias(\DataContainer $dc)
+	public function editAlias(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="'.preg_replace('/id=[0-9]+/', 'id=' . $dc->value, ampersand(\Environment::get('request'))).'" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="'.preg_replace('/id=[0-9]+/', 'id=' . $dc->value, ampersand(Environment::get('request'))).'" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
 
 
@@ -1028,12 +1028,12 @@ class tl_content extends Backend
 			}
 
 			$objAlias = $this->Database->prepare("SELECT c.id, c.pid, c.type, (CASE c.type WHEN 'module' THEN m.name WHEN 'form' THEN f.title WHEN 'table' THEN c.summary ELSE c.headline END) AS headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid LEFT JOIN tl_module m ON m.id=c.module LEFT JOIN tl_form f on f.id=c.form WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND c.id!=? ORDER BY a.title, c.sorting")
-									   ->execute(\Input::get('id'));
+									   ->execute(Input::get('id'));
 		}
 		else
 		{
 			$objAlias = $this->Database->prepare("SELECT c.id, c.pid, c.type, (CASE c.type WHEN 'module' THEN m.name WHEN 'form' THEN f.title WHEN 'table' THEN c.summary ELSE c.headline END) AS headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid LEFT JOIN tl_module m ON m.id=c.module LEFT JOIN tl_form f on f.id=c.form WHERE c.id!=? ORDER BY a.title, c.sorting")
-									   ->execute(\Input::get('id'));
+									   ->execute(Input::get('id'));
 		}
 
 		while ($objAlias->next())
@@ -1042,14 +1042,14 @@ class tl_content extends Backend
 
 			if (isset($arrHeadline['value']))
 			{
-				$headline = \String::substr($arrHeadline['value'], 32);
+				$headline = String::substr($arrHeadline['value'], 32);
 			}
 			else
 			{
-				$headline = \String::substr(preg_replace('/[\n\r\t]+/', ' ', $arrHeadline[0]), 32);
+				$headline = String::substr(preg_replace('/[\n\r\t]+/', ' ', $arrHeadline[0]), 32);
 			}
 
-			$text = \String::substr(strip_tags(preg_replace('/[\n\r\t]+/', ' ', $objAlias->text)), 32);
+			$text = String::substr(strip_tags(preg_replace('/[\n\r\t]+/', ' ', $objAlias->text)), 32);
 			$strText = $GLOBALS['TL_LANG']['CTE'][$objAlias->type][0] . ' (';
 
 			if ($headline != '')
@@ -1074,7 +1074,7 @@ class tl_content extends Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function editForm(\DataContainer $dc)
+	public function editForm(DataContainer $dc)
 	{
 		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=form&amp;table=tl_form_field&amp;id=' . $dc->value . '&amp;rt=' . REQUEST_TOKEN . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
@@ -1111,7 +1111,7 @@ class tl_content extends Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function editModule(\DataContainer $dc)
+	public function editModule(DataContainer $dc)
 	{
 		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $dc->value . '&amp;rt=' . REQUEST_TOKEN . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
@@ -1140,14 +1140,14 @@ class tl_content extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getGalleryTemplates(\DataContainer $dc)
+	public function getGalleryTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
 		// Override multiple
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		// Get the page ID
@@ -1159,7 +1159,7 @@ class tl_content extends Backend
 		$objPage = $this->getPageDetails($objArticle->pid);
 
 		// Get the theme ID
-		$objLayout = \LayoutModel::findByPk($objPage->layout);
+		$objLayout = LayoutModel::findByPk($objPage->layout);
 
 		if ($objLayout === null)
 		{
@@ -1176,7 +1176,7 @@ class tl_content extends Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function editArticle(\DataContainer $dc)
+	public function editArticle(DataContainer $dc)
 	{
 		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=article&amp;table=tl_article&amp;act=edit&amp;id=' . $dc->value . '&amp;rt=' . REQUEST_TOKEN . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editarticle'][1]), $dc->value).'">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editarticle'][0], 'style="vertical-align:top"') . '</a>';
 	}
@@ -1187,16 +1187,16 @@ class tl_content extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getArticles(\DataContainer $dc)
+	public function getArticles(DataContainer $dc)
 	{
 		$arrPids = array();
 		$arrArticle = array();
 		$arrRoot = array();
 		$intPid = $dc->activeRecord->pid;
 
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		// Limit pages to the website root
@@ -1259,7 +1259,7 @@ class tl_content extends Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function setRteSyntax($varValue, \DataContainer $dc)
+	public function setRteSyntax($varValue, DataContainer $dc)
 	{
 		switch ($dc->activeRecord->highlight)
 		{
@@ -1331,9 +1331,9 @@ class tl_content extends Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function pagePicker(\DataContainer $dc)
+	public function pagePicker(DataContainer $dc)
 	{
-		return ' <a href="contao/page.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((\Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="contao/page.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
@@ -1369,9 +1369,9 @@ class tl_content extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen(\Input::get('tid')))
+		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 
@@ -1381,7 +1381,7 @@ class tl_content extends Backend
 			return '';
 		}
 
-		$href .= '&amp;id='.\Input::get('id').'&amp;tid='.$row['id'].'&amp;state='.$row['invisible'];
+		$href .= '&amp;id='.Input::get('id').'&amp;tid='.$row['id'].'&amp;state='.$row['invisible'];
 
 		if ($row['invisible'])
 		{
@@ -1401,8 +1401,8 @@ class tl_content extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check permissions to edit
-		\Input::setGet('id', $intId);
-		\Input::setGet('act', 'toggle');
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
 		$this->checkPermission();
 
 		// Check permissions to publish

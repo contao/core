@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Model;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class NewsletterModel extends \Model
+class NewsletterModel extends Model
 {
 
 	/**
@@ -57,7 +58,7 @@ class NewsletterModel extends \Model
 	 * @param integer
 	 * @param string
 	 * @param array
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findSentByParentAndIdOrAlias($intId, $varAlias, $arrPids)
 	{
@@ -81,7 +82,7 @@ class NewsletterModel extends \Model
 	/**
 	 * Find sent newsletters by their parent ID
 	 * @param integer
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findSentByPid($intPid)
 	{
@@ -100,7 +101,7 @@ class NewsletterModel extends \Model
 	/**
 	 * Find sent newsletters by multiple parent IDs
 	 * @param array
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findSentByPids($arrPids)
 	{

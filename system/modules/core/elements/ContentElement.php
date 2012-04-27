@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Frontend, \FrontendTemplate, \Model, \Model_Collection;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-abstract class ContentElement extends \Frontend
+abstract class ContentElement extends Frontend
 {
 
 	/**
@@ -82,7 +83,7 @@ abstract class ContentElement extends \Frontend
 	 */
 	public function __construct($objElement)
 	{
-		if ($objElement instanceof \Model || $objElement instanceof \Model_Collection)
+		if ($objElement instanceof Model || $objElement instanceof Model_Collection)
 		{
 			$this->objModel = $objElement;
 		}
@@ -154,7 +155,7 @@ abstract class ContentElement extends \Frontend
 			$this->arrStyle[] = 'margin-bottom:'.$this->arrData['space'][1].'px;';
 		}
 
-		$this->Template = new \FrontendTemplate($this->strTemplate);
+		$this->Template = new FrontendTemplate($this->strTemplate);
 		$this->Template->setData($this->arrData);
 
 		$this->compile();

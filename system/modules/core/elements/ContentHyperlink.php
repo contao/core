@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \ContentElement, \File, \FilesModel, \FrontendTemplate, \String;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentHyperlink extends \ContentElement
+class ContentHyperlink extends ContentElement
 {
 
 	/**
@@ -62,7 +63,7 @@ class ContentHyperlink extends \ContentElement
 
 		if (substr($this->url, 0, 7) == 'mailto:')
 		{
-			$this->url = \String::encodeEmail($this->url);
+			$this->url = String::encodeEmail($this->url);
 		}
 		else
 		{
@@ -79,14 +80,14 @@ class ContentHyperlink extends \ContentElement
 		// Use an image instead of the title
 		if ($this->useImage && $this->singleSRC != '' && is_numeric($this->singleSRC))
 		{
-			$objModel = \FilesModel::findByPk($this->singleSRC);
+			$objModel = FilesModel::findByPk($this->singleSRC);
 
 			if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 			{
-				$this->Template = new \FrontendTemplate('ce_hyperlink_image');
+				$this->Template = new FrontendTemplate('ce_hyperlink_image');
 				$this->Template->setData($this->arrData);
 
-				$objFile = new \File($objModel->path);
+				$objFile = new File($objModel->path);
 
 				if ($objFile->isGdImage)
 				{

@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendTemplate, \Date, \FormPassword, \FrontendTemplate, \Input, \MemberModel, \Module, \Exception, \uploadable;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModulePersonalData extends \Module
+class ModulePersonalData extends Module
 {
 
 	/**
@@ -60,7 +61,7 @@ class ModulePersonalData extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### PERSONAL DATA ###';
 			$objTemplate->title = $this->headline;
@@ -113,7 +114,7 @@ class ModulePersonalData extends \Module
 		// Set the template
 		if ($this->memberTpl != '')
 		{
-			$this->Template = new \FrontendTemplate($this->memberTpl);
+			$this->Template = new FrontendTemplate($this->memberTpl);
 			$this->Template->setData($this->arrData);
 		}
 
@@ -126,7 +127,7 @@ class ModulePersonalData extends \Module
 		$row = 0;
 
 		$blnModified = false;
-		$objMember = \MemberModel::findByPk($this->User->id);
+		$objMember = MemberModel::findByPk($this->User->id);
 
 		// Build the form
 		foreach ($this->editable as $field)
@@ -158,14 +159,14 @@ class ModulePersonalData extends \Module
 			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
 
 			// Increase the row count if it is a password field
-			if ($objWidget instanceof \FormPassword)
+			if ($objWidget instanceof FormPassword)
 			{
 				++$row;
 				$objWidget->rowClassConfirm = 'row_'.$row . ((($row % 2) == 0) ? ' even' : ' odd');
 			}
 
 			// Validate the form data
-			if (\Input::post('FORM_SUBMIT') == 'tl_member_' . $this->id)
+			if (Input::post('FORM_SUBMIT') == 'tl_member_' . $this->id)
 			{
 				$objWidget->validate();
 				$varValue = $objWidget->value;
@@ -176,7 +177,7 @@ class ModulePersonalData extends \Module
 				if (($rgxp == 'date' || $rgxp == 'time' || $rgxp == 'datim') && $varValue != '')
 				{
 					// Use the numeric back end format here!
-					$objDate = new \Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
+					$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
 					$varValue = $objDate->tstamp;
 				}
 
@@ -197,7 +198,7 @@ class ModulePersonalData extends \Module
 						{
 							$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
 						}
-						catch (\Exception $e)
+						catch (Exception $e)
 						{
 							$objWidget->class = 'error';
 							$objWidget->addError($e->getMessage());
@@ -221,7 +222,7 @@ class ModulePersonalData extends \Module
 					$objMember->$field = $varValue;
 
 					// HOOK: set new password callback
-					if ($objWidget instanceof \FormPassword && isset($GLOBALS['TL_HOOKS']['setNewPassword']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
+					if ($objWidget instanceof FormPassword && isset($GLOBALS['TL_HOOKS']['setNewPassword']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
 					{
 						foreach ($GLOBALS['TL_HOOKS']['setNewPassword'] as $callback)
 						{
@@ -232,7 +233,7 @@ class ModulePersonalData extends \Module
 				}
 			}
 
-			if ($objWidget instanceof \uploadable)
+			if ($objWidget instanceof uploadable)
 			{
 				$hasUpload = true;
 			}
@@ -253,7 +254,7 @@ class ModulePersonalData extends \Module
 		$this->Template->hasError = $doNotSubmit;
 
 		// Redirect or reload if there was no error
-		if (\Input::post('FORM_SUBMIT') == 'tl_member_' . $this->id && !$doNotSubmit)
+		if (Input::post('FORM_SUBMIT') == 'tl_member_' . $this->id && !$doNotSubmit)
 		{
 			// HOOK: updated personal data
 			if (isset($GLOBALS['TL_HOOKS']['updatePersonalData']) && is_array($GLOBALS['TL_HOOKS']['updatePersonalData']))

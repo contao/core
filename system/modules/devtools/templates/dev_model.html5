@@ -32,6 +32,7 @@
  * Namespace
  */
 namespace <?php echo $this->package; ?>;
+use \Model;
 
 
 /**
@@ -41,7 +42,7 @@ namespace <?php echo $this->package; ?>;
  * @author     <?php echo $this->author; ?> 
  * @package    Controller
  */
-class <?php echo $this->class; ?> extends \Model
+class <?php echo $this->class; ?> extends Model
 {
 
 	/**

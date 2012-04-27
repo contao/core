@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Widget, \uploadable;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FormFileUpload extends \Widget implements \uploadable
+class FormFileUpload extends Widget implements uploadable
 {
 
 	/**

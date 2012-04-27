@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Model;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class CalendarFeedModel extends \Model
+class CalendarFeedModel extends Model
 {
 
 	/**
@@ -55,7 +56,7 @@ class CalendarFeedModel extends \Model
 	/**
 	 * Find all feeds which include a certain calendar
 	 * @param integer
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findByCalendar($intId)
 	{
@@ -67,7 +68,7 @@ class CalendarFeedModel extends \Model
 	/**
 	 * Find calendar feeds by their IDs
 	 * @param array
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findByIds($arrIds)
 	{

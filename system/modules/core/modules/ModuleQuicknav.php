@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendTemplate, \Environment, \Input, \Module, \PageModel;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleQuicknav extends \Module
+class ModuleQuicknav extends Module
 {
 
 	/**
@@ -60,7 +61,7 @@ class ModuleQuicknav extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### QUICK NAVIGATION ###';
 			$objTemplate->title = $this->headline;
@@ -71,11 +72,11 @@ class ModuleQuicknav extends \Module
 			return $objTemplate->parse();
 		}
 
-		if (\Input::post('FORM_SUBMIT') == 'tl_quicknav')
+		if (Input::post('FORM_SUBMIT') == 'tl_quicknav')
 		{
-			if (strlen(\Input::post('target', true)))
+			if (strlen(Input::post('target', true)))
 			{
-				$this->redirect(\Input::post('target', true));
+				$this->redirect(Input::post('target', true));
 			}
 
 			$this->reload();
@@ -101,7 +102,7 @@ class ModuleQuicknav extends \Module
 		$this->Template->targetPage = $GLOBALS['TL_LANG']['MSC']['targetPage'];
 		$this->Template->button = specialchars($GLOBALS['TL_LANG']['MSC']['go']);
 		$this->Template->title = $this->customLabel ?: $GLOBALS['TL_LANG']['MSC']['quicknav'];
-		$this->Template->request = ampersand(\Environment::get('request'), true);
+		$this->Template->request = ampersand(Environment::get('request'), true);
 		$this->Template->items = $this->getQuicknavPages($this->rootPage);
 	}
 
@@ -127,7 +128,7 @@ class ModuleQuicknav extends \Module
 		}
 
 		// Get all active subpages
-		$objSubpages = \PageModel::findPublishedRegularWithoutGuestsByPid($pid);
+		$objSubpages = PageModel::findPublishedRegularWithoutGuestsByPid($pid);
 
 		if ($objSubpages === null)
 		{

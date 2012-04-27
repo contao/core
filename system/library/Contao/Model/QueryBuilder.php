@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \DcaExtractor;
 
 
 /**
@@ -52,7 +53,7 @@ class Model_QueryBuilder
 	 */
 	public static function find($arrOptions)
 	{
-		$objBase = new \DcaExtractor($arrOptions['table']);
+		$objBase = new DcaExtractor($arrOptions['table']);
 
 		if (!$objBase->hasRelations())
 		{
@@ -72,7 +73,7 @@ class Model_QueryBuilder
 					if ($arrConfig['type'] == 'hasOne' || $arrConfig['type'] == 'belongsTo')
 					{
 						++$intCount;
-						$objRelated = new \DcaExtractor($arrConfig['table']);
+						$objRelated = new DcaExtractor($arrConfig['table']);
 
 						foreach (array_keys($objRelated->getFields()) as $strField)
 						{

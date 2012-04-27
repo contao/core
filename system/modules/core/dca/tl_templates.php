@@ -163,8 +163,8 @@ class tl_templates extends Backend
 		// Set a new node
 		if (isset($_GET['node']))
 		{
-			$this->Session->set('tl_templates_node', \Input::get('node', true));
-			$this->redirect(preg_replace('/(&|\?)node=[^&]*/', '', \Environment::get('request')));
+			$this->Session->set('tl_templates_node', Input::get('node', true));
+			$this->redirect(preg_replace('/(&|\?)node=[^&]*/', '', Environment::get('request')));
 		}
 
 		$strNode = $this->Session->get('tl_templates_node');
@@ -225,10 +225,10 @@ class tl_templates extends Backend
 		$strError = '';
 
 		// Copy an existing template
-		if (\Input::post('FORM_SUBMIT') == 'tl_create_template' && file_exists(TL_ROOT . '/system/modules/' . \Input::post('original')))
+		if (Input::post('FORM_SUBMIT') == 'tl_create_template' && file_exists(TL_ROOT . '/system/modules/' . Input::post('original')))
 		{
-			$strOriginal = \Input::post('original');
-			$strTarget = str_replace('../', '', \Input::post('target'));
+			$strOriginal = Input::post('original');
+			$strTarget = str_replace('../', '', Input::post('target'));
 
 			// Validate the target path
 			if (strncmp($strTarget, 'templates', 9) !== 0 || !is_dir(TL_ROOT . '/' . $strTarget))
@@ -287,7 +287,7 @@ class tl_templates extends Backend
 
 			foreach ($v as $kk=>$vv)
 			{
-				$strAllTemplates .= sprintf('<option value="%s" class="%s"%s>%s</option>', $vv, ((strpos($vv, '.html5') === false) ? 'tl_gray' : ''), ((\Input::post('original') == $vv) ? ' selected="selected"' : ''), $kk);
+				$strAllTemplates .= sprintf('<option value="%s" class="%s"%s>%s</option>', $vv, ((strpos($vv, '.html5') === false) ? 'tl_gray' : ''), ((Input::post('original') == $vv) ? ' selected="selected"' : ''), $kk);
 			}
 
 			$strAllTemplates .= '</optgroup>';
@@ -305,7 +305,7 @@ class tl_templates extends Backend
 <p class="tl_error">'.$strError.'</p>
 </div>' : '').'
 
-<form action="'.ampersand(\Environment::get('request')).'" id="tl_create_template" class="tl_form" method="post">
+<form action="'.ampersand(Environment::get('request')).'" id="tl_create_template" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_create_template">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
@@ -351,7 +351,7 @@ class tl_templates extends Backend
 			}
 
 			$strRelPath = $strFolder .'/'. $strFile;
-			$strFolders .= sprintf('<option value="%s"%s>%s%s</option>', $strRelPath, ((\Input::post('target') == $strRelPath) ? ' selected="selected"' : ''), str_repeat(' &nbsp; ', $intLevel), basename($strRelPath));
+			$strFolders .= sprintf('<option value="%s"%s>%s%s</option>', $strRelPath, ((Input::post('target') == $strRelPath) ? ' selected="selected"' : ''), str_repeat(' &nbsp; ', $intLevel), basename($strRelPath));
 			$strFolders .= $this->getTargetFolders($strRelPath, ($intLevel + 1));
 		}
 

@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Database, \Model;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class MemberGroupModel extends \Model
+class MemberGroupModel extends Model
 {
 
 	/**
@@ -55,7 +56,7 @@ class MemberGroupModel extends \Model
 	/**
 	 * Find a published group by its ID
 	 * @param integer
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findPublishedById($intId)
 	{
@@ -75,7 +76,7 @@ class MemberGroupModel extends \Model
 	/**
 	 * Find the first active group with a published jumpTo page
 	 * @param string
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findFirstActiveWithJumpToByIds($arrIds)
 	{
@@ -85,7 +86,7 @@ class MemberGroupModel extends \Model
 		}
 
 		$time = time();
-		$objDatabase = \Database::getInstance();
+		$objDatabase = Database::getInstance();
 		$arrIds = array_map('intval', $arrIds);
 
 		$objResult = $objDatabase->prepare("SELECT p.* FROM tl_member_group g LEFT JOIN tl_page p ON g.jumpTo=p.id WHERE g.id IN(" . implode(',', $arrIds) . ") AND g.jumpTo>0 AND g.redirect=1 AND g.disable!=1 AND (g.start='' OR g.start<$time) AND (g.stop='' OR g.stop>$time) AND p.published=1 AND (p.start='' OR p.start<$time) AND (p.stop='' OR p.stop>$time) ORDER BY " . $objDatabase->findInSet('g.id', $arrIds))
@@ -104,7 +105,7 @@ class MemberGroupModel extends \Model
 	/**
 	 * Find all active groups
 	 * @param string
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findAllActive()
 	{

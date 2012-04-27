@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendTemplate, \Environment, \Input, \Module, \PageModel;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleQuicklink extends \Module
+class ModuleQuicklink extends Module
 {
 
 	/**
@@ -60,7 +61,7 @@ class ModuleQuicklink extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### QUICK LINK ###';
 			$objTemplate->title = $this->headline;
@@ -72,11 +73,11 @@ class ModuleQuicklink extends \Module
 		}
 
 		// Redirect to selected page
-		if (\Input::post('FORM_SUBMIT') == 'tl_quicklink')
+		if (Input::post('FORM_SUBMIT') == 'tl_quicklink')
 		{
-			if (strlen(\Input::post('target', true)))
+			if (strlen(Input::post('target', true)))
 			{
-				$this->redirect(\Input::post('target', true));
+				$this->redirect(Input::post('target', true));
 			}
 
 			$this->reload();
@@ -101,7 +102,7 @@ class ModuleQuicklink extends \Module
 	protected function compile()
 	{
 		// Get all active pages
-		$arrPages = \PageModel::findPublishedRegularWithoutGuestsByIds($this->pages)->getData();
+		$arrPages = PageModel::findPublishedRegularWithoutGuestsByIds($this->pages)->getData();
 
 		if (empty($arrPages))
 		{
@@ -124,7 +125,7 @@ class ModuleQuicklink extends \Module
 		}
 
 		$this->Template->items = $items;
-		$this->Template->request = ampersand(\Environment::get('request'), true);
+		$this->Template->request = ampersand(Environment::get('request'), true);
 		$this->Template->title = $this->customLabel ?: $GLOBALS['TL_LANG']['MSC']['quicklink'];
 		$this->Template->button = specialchars($GLOBALS['TL_LANG']['MSC']['go']);
 	}

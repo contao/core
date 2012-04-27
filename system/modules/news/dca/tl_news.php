@@ -519,28 +519,28 @@ class tl_news extends Backend
 			$root = $this->User->news;
 		}
 
-		$id = strlen(\Input::get('id')) ? \Input::get('id') : CURRENT_ID;
+		$id = strlen(Input::get('id')) ? Input::get('id') : CURRENT_ID;
 
 		// Check current action
-		switch (\Input::get('act'))
+		switch (Input::get('act'))
 		{
 			case 'paste':
 				// Allow
 				break;
 
 			case 'create':
-				if (!strlen(\Input::get('pid')) || !in_array(\Input::get('pid'), $root))
+				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create news items in news archive ID "'.\Input::get('pid').'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to create news items in news archive ID "'.Input::get('pid').'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
 			case 'cut':
 			case 'copy':
-				if (!in_array(\Input::get('pid'), $root))
+				if (!in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to '.\Input::get('act').' news item ID "'.$id.'" to news archive ID "'.\Input::get('pid').'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news item ID "'.$id.'" to news archive ID "'.Input::get('pid').'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -562,7 +562,7 @@ class tl_news extends Backend
 
 				if (!in_array($objArchive->pid, $root))
 				{
-					$this->log('Not enough permissions to '.\Input::get('act').' news item ID "'.$id.'" of news archive ID "'.$objArchive->pid.'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news item ID "'.$id.'" of news archive ID "'.$objArchive->pid.'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -594,9 +594,9 @@ class tl_news extends Backend
 				break;
 
 			default:
-				if (strlen(\Input::get('act')))
+				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.\Input::get('act').'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
@@ -616,7 +616,7 @@ class tl_news extends Backend
 	 * @return string
 	 * @throws \Exception
 	 */
-	public function generateAlias($varValue, \DataContainer $dc)
+	public function generateAlias($varValue, DataContainer $dc)
 	{
 		$autoAlias = false;
 
@@ -633,7 +633,7 @@ class tl_news extends Backend
 		// Check whether the news alias exists
 		if ($objAlias->numRows > 1 && !$autoAlias)
 		{
-			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 		}
 
 		// Add ID to alias
@@ -670,7 +670,7 @@ class tl_news extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getArticleAlias(\DataContainer $dc)
+	public function getArticleAlias(DataContainer $dc)
 	{
 		$arrPids = array();
 		$arrAlias = array();
@@ -716,7 +716,7 @@ class tl_news extends Backend
 	 * @param \DataContainer
 	 * @return void
 	 */
-	public function adjustTime(\DataContainer $dc)
+	public function adjustTime(DataContainer $dc)
 	{
 		// Return if there is no active record (override all)
 		if (!$dc->activeRecord)
@@ -767,7 +767,7 @@ class tl_news extends Backend
 	public function scheduleUpdate()
 	{
 		// Return if there is no ID 
-		if (!CURRENT_ID || \Input::get('act') == 'copy')
+		if (!CURRENT_ID || Input::get('act') == 'copy')
 		{
 			return;
 		}
@@ -784,9 +784,9 @@ class tl_news extends Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function pagePicker(\DataContainer $dc)
+	public function pagePicker(DataContainer $dc)
 	{
-		return ' <a href="contao/page.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((\Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="contao/page.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
@@ -802,9 +802,9 @@ class tl_news extends Backend
 	 */
 	public function iconFeatured($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen(\Input::get('fid')))
+		if (strlen(Input::get('fid')))
 		{
-			$this->toggleFeatured(\Input::get('fid'), (\Input::get('state') == 1));
+			$this->toggleFeatured(Input::get('fid'), (Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 
@@ -834,8 +834,8 @@ class tl_news extends Backend
 	public function toggleFeatured($intId, $blnVisible)
 	{
 		// Check permissions to edit
-		\Input::setGet('id', $intId);
-		\Input::setGet('act', 'feature');
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'feature');
 		$this->checkPermission();
 
 		// Check permissions to feature
@@ -877,9 +877,9 @@ class tl_news extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen(\Input::get('tid')))
+		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 
@@ -909,8 +909,8 @@ class tl_news extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check permissions to edit
-		\Input::setGet('id', $intId);
-		\Input::setGet('act', 'toggle');
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
 		$this->checkPermission();
 
 		// Check permissions to publish

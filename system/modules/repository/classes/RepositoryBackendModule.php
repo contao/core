@@ -75,7 +75,7 @@ class RepositoryBackendModule extends BackendModule
 		$this->compiler	= $this->actions[0][2];
 		foreach ($this->actions as &$act) {
 			if ($act[0]!='') {
-				$this->parameter = \Input::get($act[0]);
+				$this->parameter = Input::get($act[0]);
 				if ($this->parameter!='') {
 					$this->action = $act[0];
 					$this->strTemplate = $act[1];
@@ -162,7 +162,7 @@ class RepositoryBackendModule extends BackendModule
 	 */
 	protected function createUrl($aParams = null)
 	{
-		return $this->createPageUrl(\Input::get('do'), $aParams);
+		return $this->createPageUrl(Input::get('do'), $aParams);
 	} // createUrl
 
 	/**
@@ -173,7 +173,7 @@ class RepositoryBackendModule extends BackendModule
 	 */
 	protected function createPageUrl($aPage, $aParams = null)
 	{
-		$url = \Environment::get('script') . '?do='.$aPage;
+		$url = Environment::get('script') . '?do='.$aPage;
 		if (is_array($aParams)) {
 			foreach ($aParams as $key => $val)
 				if ($val!='')
@@ -193,7 +193,7 @@ class RepositoryBackendModule extends BackendModule
 	 */
 	protected function filterPost($aKey, $aMode = '')
 	{
-		$v = trim(\Input::postRaw($aKey));
+		$v = trim(Input::postRaw($aKey));
 		if ($v == '' || $aMode=='') return $v;
 		switch ($aMode) {
 			case 'nohtml':

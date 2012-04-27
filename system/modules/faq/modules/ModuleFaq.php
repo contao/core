@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Environment, \FaqCategoryModel, \FaqModel, \Frontend;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleFaq extends \Frontend
+class ModuleFaq extends Frontend
 {
 
 	/**
@@ -64,7 +65,7 @@ class ModuleFaq extends \Frontend
 		$arrProcessed = array();
 
 		// Get all categories
-		$objFaq = \FaqCategoryModel::findAll();
+		$objFaq = FaqCategoryModel::findAll();
 
 		// Walk through each category
 		if ($objFaq !== null)
@@ -86,12 +87,12 @@ class ModuleFaq extends \Frontend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objFaq->jumpTo]))
 				{
-					$domain = \Environment::get('base');
+					$domain = Environment::get('base');
 					$objParent = $this->getPageDetails($objFaq->jumpTo);
 
 					if ($objParent->domain != '')
 					{
-						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
+						$domain = (Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
 					$arrProcessed[$objFaq->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
@@ -100,7 +101,7 @@ class ModuleFaq extends \Frontend
 				$strUrl = $arrProcessed[$objFaq->jumpTo];
 
 				// Get the items
-				$objItems = \FaqModel::findByPid($objFaq->id, array('order'=>'sorting'));
+				$objItems = FaqModel::findByPid($objFaq->id, array('order'=>'sorting'));
 
 				if ($objItems !== null)
 				{

@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendTemplate, \FrontendTemplate, \Input, \Module, \Pagination;
 
 
 /**
@@ -53,7 +54,7 @@ if (!class_exists('idna_convert', false))
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleRssReader extends \Module
+class ModuleRssReader extends Module
 {
 
 	/**
@@ -77,7 +78,7 @@ class ModuleRssReader extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### RSS READER ###';
 			$objTemplate->title = $this->headline;
@@ -133,7 +134,7 @@ class ModuleRssReader extends \Module
 		{
 			$this->strTemplate = $this->rss_template;
 
-			$this->Template = new \FrontendTemplate($this->strTemplate);
+			$this->Template = new FrontendTemplate($this->strTemplate);
 			$this->Template->setData($this->arrData);
 		}
 
@@ -164,7 +165,7 @@ class ModuleRssReader extends \Module
 		if ($this->perPage > 0)
 		{
 			// Get the current page
-			$page = \Input::get('page') ? \Input::get('page') : 1;
+			$page = Input::get('page') ?: 1;
 
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > ceil(count($arrItems)/$this->perPage))
@@ -183,7 +184,7 @@ class ModuleRssReader extends \Module
 			$offset = (($page - 1) * $this->perPage);
 			$limit = $this->perPage + $offset;
 
-			$objPagination = new \Pagination(count($arrItems), $this->perPage);
+			$objPagination = new Pagination(count($arrItems), $this->perPage);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 

@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Environment, \File, \Input, \Search, \Template;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FrontendTemplate extends \Template
+class FrontendTemplate extends Template
 {
 
 	/**
@@ -96,11 +97,11 @@ class FrontendTemplate extends \Template
 			{
 				if ($GLOBALS['TL_CONFIG']['useAutoItem'] && in_array($key, $GLOBALS['TL_AUTO_ITEM']))
 				{
-					$strParams .= '/' . \Input::get($key);
+					$strParams .= '/' . Input::get($key);
 				}
 				else
 				{
-					$strParams .= '/' . $key . '/' . \Input::get($key);
+					$strParams .= '/' . $key . '/' . Input::get($key);
 				}
 			}
 		}
@@ -110,7 +111,7 @@ class FrontendTemplate extends \Template
 		// Add the page number
 		if (isset($_GET['page']))
 		{
-			$strUrl .= ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&page=' : '?page=') . \Input::get('page');
+			$strUrl .= ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&page=' : '?page=') . Input::get('page');
 		}
 
 		$this->keywords = '';
@@ -141,13 +142,13 @@ class FrontendTemplate extends \Template
 		if (empty($_POST) && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && !$_SESSION['DISABLE_CACHE'] && !isset($_SESSION['LOGIN_ERROR']) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'server') && intval($objPage->cache) > 0 && !$objPage->protected)
 		{
 			// If the request string is empty, use a special cache tag which considers the page language
-			if (\Environment::get('request') == '' || \Environment::get('request') == 'index.php')
+			if (Environment::get('request') == '' || Environment::get('request') == 'index.php')
 			{
-				$strCacheKey = \Environment::get('base') . 'empty.' . $objPage->language;
+				$strCacheKey = Environment::get('base') . 'empty.' . $objPage->language;
 			}
 			else
 			{
-				$strCacheKey = \Environment::get('base') . $strUrl;
+				$strCacheKey = Environment::get('base') . $strUrl;
 			}
 
 			// HOOK: add custom logic
@@ -167,7 +168,7 @@ class FrontendTemplate extends \Template
 			$strMd5CacheKey = md5($strCacheKey);
 
 			// Create the cache file
-			$objFile = new \File('system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html');
+			$objFile = new File('system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html');
 			$objFile->write('<?php' . " /* $strCacheKey */ \$expire = $intCache; \$content = '{$this->strContentType}'; ?>\n");
 
 			/**
@@ -232,7 +233,7 @@ class FrontendTemplate extends \Template
 					'language' => $objPage->language
 				);
 
-				\Search::indexPage($arrData);
+				Search::indexPage($arrData);
 			}
 		}
 

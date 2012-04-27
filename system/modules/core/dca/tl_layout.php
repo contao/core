@@ -525,13 +525,13 @@ class tl_layout extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getStyleSheets(\DataContainer $dc)
+	public function getStyleSheets(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		$objStyleSheet = $this->Database->prepare("SELECT id, name FROM tl_style_sheet WHERE pid=?")
@@ -559,7 +559,7 @@ class tl_layout extends Backend
 	 */
 	public function getNewsfeeds()
 	{
-		$objFeed = \NewsFeedModel::findAll();
+		$objFeed = NewsFeedModel::findAll();
 
 		if ($objFeed === null)
 		{
@@ -583,7 +583,7 @@ class tl_layout extends Backend
 	 */
 	public function getCalendarfeeds()
 	{
-		$objFeed = \CalendarFeedModel::findAll();
+		$objFeed = CalendarFeedModel::findAll();
 
 		if ($objFeed === null)
 		{
@@ -606,13 +606,13 @@ class tl_layout extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getPageTemplates(\DataContainer $dc)
+	public function getPageTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('fe_', $intPid);
@@ -624,13 +624,13 @@ class tl_layout extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getMooToolsTemplates(\DataContainer $dc)
+	public function getMooToolsTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('moo_', $intPid);
@@ -642,13 +642,13 @@ class tl_layout extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getJqueryTemplates(\DataContainer $dc)
+	public function getJqueryTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('j_', $intPid);
@@ -660,13 +660,13 @@ class tl_layout extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getAnalyticsTemplates(\DataContainer $dc)
+	public function getAnalyticsTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('analytics_', $intPid);
@@ -712,7 +712,7 @@ class tl_layout extends Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function styleSheetLink(\DataContainer $dc)
+	public function styleSheetLink(DataContainer $dc)
 	{
 		return ' <a href="contao/main.php?do=themes&table=tl_style_sheet&id=' . $dc->activeRecord->pid . '&amp;rt=' . REQUEST_TOKEN . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_styles']) . '"><img width="12" height="16" alt="" src="system/themes/' . $this->getTheme() . '/images/edit.gif" style="vertical-align:text-bottom"></a>';
 	}

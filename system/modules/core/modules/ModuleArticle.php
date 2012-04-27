@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \ContentModel, \Environment, \FrontendTemplate, \Input, \Module, \String;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleArticle extends \Module
+class ModuleArticle extends Module
 {
 
 	/**
@@ -87,7 +88,7 @@ class ModuleArticle extends \Module
 
 		if ($this->blnNoMarkup)
 		{
-			$this->Template = new \FrontendTemplate('mod_article_plain');
+			$this->Template = new FrontendTemplate('mod_article_plain');
 			$this->Template->setData($this->arrData);
 		}
 
@@ -115,17 +116,17 @@ class ModuleArticle extends \Module
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$this->teaser = \String::toXhtml($this->teaser);
+			$this->teaser = String::toXhtml($this->teaser);
 		}
 		else
 		{
-			$this->teaser = \String::toHtml5($this->teaser);
+			$this->teaser = String::toHtml5($this->teaser);
 		}
 
 		// Show the teaser only
 		if ($this->multiMode && $this->showTeaser)
 		{
-			$this->Template = new \FrontendTemplate('mod_article_teaser');
+			$this->Template = new FrontendTemplate('mod_article_teaser');
 			$this->Template->setData($this->arrData);
 
 			$this->cssID = array($alias, '');
@@ -155,7 +156,7 @@ class ModuleArticle extends \Module
 		}
 
 		// Get section and article alias
-		list($strSection, $strArticle) = explode(':', \Input::get('articles'));
+		list($strSection, $strArticle) = explode(':', Input::get('articles'));
 
 		if ($strArticle === null)
 		{
@@ -179,16 +180,16 @@ class ModuleArticle extends \Module
 			// Remove the "/articles/…" part from the URL
 			if ($GLOBALS['TL_CONFIG']['disableAlias'])
 			{
-				$this->Template->backlink = preg_replace('@&(amp;)?articles=[^&]+@', '', \Environment::get('request'));
+				$this->Template->backlink = preg_replace('@&(amp;)?articles=[^&]+@', '', Environment::get('request'));
 			}
 			else
 			{
-				$this->Template->backlink = preg_replace('@/articles/[^/]+@', '', \Environment::get('request')) . $GLOBALS['TL_CONFIG']['urlSuffix'];
+				$this->Template->backlink = preg_replace('@/articles/[^/]+@', '', Environment::get('request')) . $GLOBALS['TL_CONFIG']['urlSuffix'];
 			}
 		}
 
 		$arrElements = array();
-		$objCte = \ContentModel::findPublishedByPid($this->id);
+		$objCte = ContentModel::findPublishedByPid($this->id);
 
 		if ($objCte !== null)
 		{
@@ -235,7 +236,7 @@ class ModuleArticle extends \Module
 			$request = $this->getIndexFreeRequest(true);
 
 			$this->Template->print = '#';
-			$this->Template->encUrl = rawurlencode(\Environment::get('base') . \Environment::get('request'));
+			$this->Template->encUrl = rawurlencode(Environment::get('base') . Environment::get('request'));
 			$this->Template->encTitle = rawurlencode($objPage->pageTitle);
 			$this->Template->href = $request . ((strpos($request, '?') !== false) ? '&amp;' : '?') . 'pdf=' . $this->id;
 

@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendTemplate, \Date, \Environment, \FrontendTemplate, \Input, \ModuleNews, \NewsModel;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleNewsMenu extends \ModuleNews
+class ModuleNewsMenu extends ModuleNews
 {
 
 	/**
@@ -66,7 +67,7 @@ class ModuleNewsMenu extends \ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWS ARCHIVE MENU ###';
 			$objTemplate->title = $this->headline;
@@ -119,8 +120,8 @@ class ModuleNewsMenu extends \ModuleNews
 	protected function compileYearlyMenu()
 	{
 		$arrData = array();
-		$this->Template = new \FrontendTemplate('mod_newsmenu_year');
-		$objArchives = \NewsModel::findPublishedByPids($this->news_archives);
+		$this->Template = new FrontendTemplate('mod_newsmenu_year');
+		$objArchives = NewsModel::findPublishedByPids($this->news_archives);
 
 		if ($objArchives !== null)
 		{
@@ -136,7 +137,7 @@ class ModuleNewsMenu extends \ModuleNews
 		$arrItems = array();
 		$count = 0;
 		$limit = count($arrData);
-		$strUrl = \Environment::get('request');
+		$strUrl = Environment::get('request');
 
 		// Get the current "jumpTo" page
 		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
@@ -155,7 +156,7 @@ class ModuleNewsMenu extends \ModuleNews
 			$arrItems[$intYear]['href'] = $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'year=' . $intDate;
 			$arrItems[$intYear]['title'] = specialchars($intYear . ' (' . $quantity . ')');
 			$arrItems[$intYear]['class'] = trim(((++$count == 1) ? 'first ' : '') . (($count == $limit) ? 'last' : ''));
-			$arrItems[$intYear]['isActive'] = (\Input::get('year') == $intDate);
+			$arrItems[$intYear]['isActive'] = (Input::get('year') == $intDate);
 			$arrItems[$intYear]['quantity'] = $quantity;
 		}
 
@@ -171,7 +172,7 @@ class ModuleNewsMenu extends \ModuleNews
 	protected function compileMonthlyMenu()
 	{
 		$arrData = array();
-		$objArchives = \NewsModel::findPublishedByPids($this->news_archives);
+		$objArchives = NewsModel::findPublishedByPids($this->news_archives);
 
 		if ($objArchives !== null)
 		{
@@ -216,7 +217,7 @@ class ModuleNewsMenu extends \ModuleNews
 				$arrItems[$intYear][$intMonth]['href'] = $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $intDate;
 				$arrItems[$intYear][$intMonth]['title'] = specialchars($GLOBALS['TL_LANG']['MONTHS'][$intMonth].' '.$intYear . ' (' . $quantity . ')');
 				$arrItems[$intYear][$intMonth]['class'] = trim(((++$count == 1) ? 'first ' : '') . (($count == $limit) ? 'last' : ''));
-				$arrItems[$intYear][$intMonth]['isActive'] = (\Input::get('month') == $intDate);
+				$arrItems[$intYear][$intMonth]['isActive'] = (Input::get('month') == $intDate);
 				$arrItems[$intYear][$intMonth]['quantity'] = $quantity;
 			}
 		}
@@ -233,8 +234,8 @@ class ModuleNewsMenu extends \ModuleNews
 	protected function compileDailyMenu()
 	{
 		$arrData = array();
-		$this->Template = new \FrontendTemplate('mod_newsmenu_day');
-		$objArchives = \NewsModel::findPublishedByPids($this->news_archives);
+		$this->Template = new FrontendTemplate('mod_newsmenu_day');
+		$objArchives = NewsModel::findPublishedByPids($this->news_archives);
 
 		if ($objArchives !== null)
 		{
@@ -246,7 +247,7 @@ class ModuleNewsMenu extends \ModuleNews
 
 		// Sort the data
 		krsort($arrData);
-		$strUrl = \Environment::get('request');
+		$strUrl = Environment::get('request');
 
 		// Get the current "jumpTo" page
 		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
@@ -254,7 +255,7 @@ class ModuleNewsMenu extends \ModuleNews
 			$strUrl = $this->generateFrontendUrl($objTarget->row());
 		}
 
-		$this->Date = \Input::get('day') ? new \Date(\Input::get('day'), 'Ymd') : new \Date();
+		$this->Date = Input::get('day') ? new Date(Input::get('day'), 'Ymd') : new Date();
 
 		$intYear = date('Y', $this->Date->tstamp);
 		$intMonth = date('m', $this->Date->tstamp);
@@ -267,7 +268,7 @@ class ModuleNewsMenu extends \ModuleNews
 		$prevYear = ($intMonth == 1) ? ($intYear - 1) : $intYear;
 		$lblPrevious = $GLOBALS['TL_LANG']['MONTHS'][($prevMonth - 1)] . ' ' . $prevYear;
 
-		$this->Template->prevHref = $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . \Input::get('id') . '&amp;' : '?') . 'day=' . $prevYear . ((strlen($prevMonth) < 2) ? '0' : '') . $prevMonth . '01';
+		$this->Template->prevHref = $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . Input::get('id') . '&amp;' : '?') . 'day=' . $prevYear . ((strlen($prevMonth) < 2) ? '0' : '') . $prevMonth . '01';
 		$this->Template->prevTitle = specialchars($lblPrevious);
 		$this->Template->prevLink = $GLOBALS['TL_LANG']['MSC']['news_previous'] . ' ' . $lblPrevious;
 		$this->Template->prevLabel = $GLOBALS['TL_LANG']['MSC']['news_previous'];
@@ -280,7 +281,7 @@ class ModuleNewsMenu extends \ModuleNews
 		$nextYear = ($intMonth == 12) ? ($intYear + 1) : $intYear;
 		$lblNext = $GLOBALS['TL_LANG']['MONTHS'][($nextMonth - 1)] . ' ' . $nextYear;
 
-		$this->Template->nextHref = $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . \Input::get('id') . '&amp;' : '?') . 'day=' . $nextYear . ((strlen($nextMonth) < 2) ? '0' : '') . $nextMonth . '01';
+		$this->Template->nextHref = $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . Input::get('id') . '&amp;' : '?') . 'day=' . $nextYear . ((strlen($nextMonth) < 2) ? '0' : '') . $nextMonth . '01';
 		$this->Template->nextTitle = specialchars($lblNext);
 		$this->Template->nextLink = $lblNext . ' ' . $GLOBALS['TL_LANG']['MSC']['news_next'];
 		$this->Template->nextLabel = $GLOBALS['TL_LANG']['MSC']['news_next'];

@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendTemplate, \FaqModel, \FilesModel, \Module, \String;
 
 
 /**
@@ -59,7 +60,7 @@ class ModuleFaqPage extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### FAQ PAGE ###';
 			$objTemplate->title = $this->headline;
@@ -88,7 +89,7 @@ class ModuleFaqPage extends Module
 	 */
 	protected function compile()
 	{
-		$objFaq = \FaqModel::findPublishedByPids($this->faq_categories);
+		$objFaq = FaqModel::findPublishedByPids($this->faq_categories);
 
 		if ($objFaq === null)
 		{
@@ -107,14 +108,14 @@ class ModuleFaqPage extends Module
 			// Clean RTE output
 			if ($objPage->outputFormat == 'xhtml')
 			{
-				$objFaq->answer = \String::toXhtml($objFaq->answer);
+				$objFaq->answer = String::toXhtml($objFaq->answer);
 			}
 			else
 			{
-				$objFaq->answer = \String::toHtml5($objFaq->answer);
+				$objFaq->answer = String::toHtml5($objFaq->answer);
 			}
 
-			$objTemp->answer = \String::encodeEmail($objFaq->answer);
+			$objTemp->answer = String::encodeEmail($objFaq->answer);
 			$objTemp->addImage = false;
 
 			// Add an image
@@ -126,7 +127,7 @@ class ModuleFaqPage extends Module
 				}
 				else
 				{
-					$objModel = \FilesModel::findByPk($objFaq->singleSRC);
+					$objModel = FilesModel::findByPk($objFaq->singleSRC);
 
 					if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 					{

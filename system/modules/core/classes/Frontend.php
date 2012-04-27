@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Controller, \Environment, \Input, \PageModel, \SessionModel, \String;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-abstract class Frontend extends \Controller
+abstract class Frontend extends Controller
 {
 
 	/**
@@ -82,22 +83,22 @@ abstract class Frontend extends \Controller
 	{
 		if ($GLOBALS['TL_CONFIG']['disableAlias'])
 		{
-			return is_numeric(\Input::get('id')) ? \Input::get('id') : null;
+			return is_numeric(Input::get('id')) ? Input::get('id') : null;
 		}
 
-		if (\Environment::get('request') == '')
+		if (Environment::get('request') == '')
 		{
 			return null;
 		}
 
 		// Get the request string without the index.php fragment
-		if (\Environment::get('request') == 'index.php')
+		if (Environment::get('request') == 'index.php')
 		{
 			$strRequest = '';
 		}
 		else
 		{
-			list($strRequest) = explode('?', str_replace('index.php/', '', \Environment::get('request')), 2);
+			list($strRequest) = explode('?', str_replace('index.php/', '', Environment::get('request')), 2);
 		}
 
 		// Remove the URL suffix if not just a language root (e.g. en/) is requested
@@ -125,7 +126,7 @@ abstract class Frontend extends \Controller
 			// Use the matches instead of substr() (thanks to Mario Müller)
 			if (preg_match('@^([a-z]{2})/(.*)$@', $strRequest, $arrMatches))
 			{
-				\Input::setGet('language', $arrMatches[1]);
+				Input::setGet('language', $arrMatches[1]);
 				$strRequest = $arrMatches[2];
 			}
 			else
@@ -150,7 +151,7 @@ abstract class Frontend extends \Controller
 			}
 
 			// Check if there is a page with a matching alias
-			$objPage = \PageModel::findByAliases($arrOptions);
+			$objPage = PageModel::findByAliases($arrOptions);
 
 			if ($objPage !== null)
 			{
@@ -201,7 +202,7 @@ abstract class Frontend extends \Controller
 				return false;
 			}
 
-			\Input::setGet($arrFragments[$i], $arrFragments[$i+1]);
+			Input::setGet($arrFragments[$i], $arrFragments[$i+1]);
 		}
 
 		return $arrFragments[0] ?: null;
@@ -221,7 +222,7 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Try to find a root page based on language and URL
-	 * @return \Contao\Model
+	 * @return \Model
 	 */
 	protected function getRootPageFromUrl()
 	{
@@ -240,18 +241,18 @@ abstract class Frontend extends \Controller
 			}
 		}
 
-		$host = \Environment::get('host');
+		$host = Environment::get('host');
 
 		// The language is set in the URL
 		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !empty($_GET['language']))
 		{
-			$objRootPage = \PageModel::findFirstPublishedRootByHostAndLanguage($host, \Input::get('language'));
+			$objRootPage = PageModel::findFirstPublishedRootByHostAndLanguage($host, Input::get('language'));
 
 			// No matching root page found
 			if ($objRootPage === null)
 			{
 				header('HTTP/1.1 404 Not Found');
-				$this->log('No root page found (host "' . $host . '", language "'. \Input::get('language') .'"', 'Frontend getRootPageFromUrl()', TL_ERROR);
+				$this->log('No root page found (host "' . $host . '", language "'. Input::get('language') .'"', 'Frontend getRootPageFromUrl()', TL_ERROR);
 				die('No root page found');
 			}
 		}
@@ -259,21 +260,21 @@ abstract class Frontend extends \Controller
 		// No language given
 		else
 		{
-			$accept_language = \Environment::get('httpAcceptLanguage');
+			$accept_language = Environment::get('httpAcceptLanguage');
 
 			// Find the matching root pages (thanks to Andreas Schempp)
-			$objRootPage = \PageModel::findFirstPublishedRootByHostAndLanguage($host, $accept_language);
+			$objRootPage = PageModel::findFirstPublishedRootByHostAndLanguage($host, $accept_language);
 
 			// No matching root page found
 			if ($objRootPage === null)
 			{
 				header('HTTP/1.1 404 Not Found');
-				$this->log('No root page found (host "' . \Environment::get('host') . '", languages "'.implode(', ', \Environment::get('httpAcceptLanguage')).'")', 'Frontend getRootPageFromUrl()', TL_ERROR);
+				$this->log('No root page found (host "' . Environment::get('host') . '", languages "'.implode(', ', Environment::get('httpAcceptLanguage')).'")', 'Frontend getRootPageFromUrl()', TL_ERROR);
 				die('No root page found');
 			}
 
 			// Redirect to the language root (e.g. en/)
-			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'] && \Environment::get('request') == '')
+			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'] && Environment::get('request') == '')
 			{
 				$this->redirect((!$GLOBALS['TL_CONFIG']['rewriteURL'] ? 'index.php/' : '') . $objRootPage->language . '/', 302);
 			}
@@ -296,7 +297,7 @@ abstract class Frontend extends \Controller
 		// Clean the $_GET values (thanks to thyon)
 		foreach (array_keys($arrGet) as $key)
 		{
-			$arrGet[$key] = \Input::get($key, true);
+			$arrGet[$key] = Input::get($key, true);
 		}
 
 		$arrFragments = preg_split('/&(amp;)?/i', $strRequest);
@@ -399,7 +400,7 @@ abstract class Frontend extends \Controller
 			}
 			else
 			{
-				$objNextPage = \PageModel::findPublishedById($intId);
+				$objNextPage = PageModel::findPublishedById($intId);
 
 				if ($objNextPage !== null)
 				{
@@ -419,16 +420,16 @@ abstract class Frontend extends \Controller
 	 */
 	protected function getLoginStatus($strCookie)
 	{
-		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . $strCookie);
+		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? Environment::get('ip') : '') . $strCookie);
 
 		// Validate the cookie hash
-		if (\Input::cookie($strCookie) == $hash)
+		if (Input::cookie($strCookie) == $hash)
 		{
 			// Try to find the session
-			$objSession = \SessionModel::findByHashAndName($hash, $strCookie);
+			$objSession = SessionModel::findByHashAndName($hash, $strCookie);
 
 			// Validate the session ID and timeout
-			if ($objSession !== null && $objSession->sessionID == session_id() && ($GLOBALS['TL_CONFIG']['disableIpCheck'] || $objSession->ip == \Environment::get('ip')) && ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
+			if ($objSession !== null && $objSession->sessionID == session_id() && ($GLOBALS['TL_CONFIG']['disableIpCheck'] || $objSession->ip == Environment::get('ip')) && ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
 			{
 				// Disable the cache if a back end user is logged in
 				if (TL_MODE == 'FE' && $strCookie == 'BE_USER_AUTH')
@@ -436,7 +437,7 @@ abstract class Frontend extends \Controller
 					$_SESSION['DISABLE_CACHE'] = true;
 
 					// Always return false if we are not in preview mode (show hidden elements)
-					if (!\Input::cookie('FE_PREVIEW'))
+					if (!Input::cookie('FE_PREVIEW'))
 					{
 						$_SESSION['TL_USER_LOGGED_IN'] = false;
 						return false;
@@ -535,7 +536,7 @@ abstract class Frontend extends \Controller
 		$strText = $this->replaceInsertTags($strText);
 		$strText = strip_tags($strText);
 		$strText = str_replace("\n", ' ', $strText);
-		$strText = \String::substr($strText, 180);
+		$strText = String::substr($strText, 180);
 
 		return trim($strText);
 	}

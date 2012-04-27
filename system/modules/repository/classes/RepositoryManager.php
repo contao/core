@@ -49,7 +49,7 @@ class RepositoryManager extends RepositoryBackendModule
 	 */
 	public function generate()
 	{
-		if (\Input::get('update') != 'database' && !extension_loaded('soap')) {
+		if (Input::get('update') != 'database' && !extension_loaded('soap')) {
 			$this->loadLanguageFile('tl_repository');
 			$theme = new RepositoryBackendTheme();
 			return '
@@ -80,7 +80,7 @@ class RepositoryManager extends RepositoryBackendModule
 		// return from submit?
 		if ($this->filterPost('repository_action') == $rep->f_action) {
 			// nothing checked?
-			$ids0 = \Input::post('selectedids');
+			$ids0 = Input::post('selectedids');
 			if (!is_array($ids0)) { $this->redirect($rep->homeLink); return; }
 
 			// valid ids?
@@ -115,13 +115,13 @@ class RepositoryManager extends RepositoryBackendModule
 		if ($this->filterPost('repository_action') == $rep->f_action) {
 			if (isset($_POST['repository_cancelbutton'])) $this->redirect($rep->homeLink);
 			$params = array(
-				'lickey'	=> trim(\Input::post('repository_lickey')),
-				'alpha'		=> (int)\Input::post('repository_alpha') > 0,
-				'beta'		=> (int)\Input::post('repository_beta') > 0,
-				'rc'		=> (int)\Input::post('repository_rc') > 0,
-				'stable'	=> (int)\Input::post('repository_stable') > 0,
-				'delprot'	=> (int)\Input::post('repository_delprot') > 0,
-				'updprot'	=> (int)\Input::post('repository_updprot') > 0
+				'lickey'	=> trim(Input::post('repository_lickey')),
+				'alpha'		=> (int)Input::post('repository_alpha') > 0,
+				'beta'		=> (int)Input::post('repository_beta') > 0,
+				'rc'		=> (int)Input::post('repository_rc') > 0,
+				'stable'	=> (int)Input::post('repository_stable') > 0,
+				'delprot'	=> (int)Input::post('repository_delprot') > 0,
+				'updprot'	=> (int)Input::post('repository_updprot') > 0
 			);
 			$db->prepare("update `tl_repository_installs` %s where `extension`=?")
 				->set($params)
@@ -165,11 +165,11 @@ class RepositoryManager extends RepositoryBackendModule
 		if ($this->filterPost('repository_action') == $rep->f_action) {
 			if (isset($_POST['repository_cancelbutton'])) $this->redirect($rep->homeLink);
 			$ok = true;
-			$rep->f_stage = (int)\Input::post('repository_stage');
+			$rep->f_stage = (int)Input::post('repository_stage');
 
 			if ($rep->f_stage >= $rep->inst_extension) {
 				// get and check extension
-				$rep->f_extension = trim(\Input::post('repository_extension'));
+				$rep->f_extension = trim(Input::post('repository_extension'));
 				if ($rep->f_extension != '') {
 					$exts = $this->getExtensionList(array(
 						'languages' => $this->languages,
@@ -192,7 +192,7 @@ class RepositoryManager extends RepositoryBackendModule
 
 			if ($rep->f_stage >= $rep->inst_version) {
 				// get and check version
-				$rep->f_version = trim(\Input::post('repository_version'));
+				$rep->f_version = trim(Input::post('repository_version'));
 				$ok = false;
 				foreach ($exts[0]->allversions as $ver)
 					if ($ver->version == $rep->f_version) {
@@ -205,7 +205,7 @@ class RepositoryManager extends RepositoryBackendModule
 
 			if ($rep->f_stage >= $rep->inst_lickey && $rep->f_enterkey) {
 				// get license key
-				$rep->f_lickey = trim(\Input::post('repository_lickey'));
+				$rep->f_lickey = trim(Input::post('repository_lickey'));
 				if ($rep->f_lickey == '') {
 					$rep->f_lickey_msg = 'lickeyrequired';
 					$ok = false;
@@ -215,7 +215,7 @@ class RepositoryManager extends RepositoryBackendModule
 
 			if ($rep->f_stage >= $rep->inst_actions) {
 				// get enable states
-				$enableActions = \Input::post('repository_enable');
+				$enableActions = Input::post('repository_enable');
 				if (!is_array($enableActions)) $this->redirect($rep->homeLink);
 			} // if
 
@@ -416,7 +416,7 @@ class RepositoryManager extends RepositoryBackendModule
 		// return from submit?
 		if ($this->filterPost('repository_action') == $rep->f_action) {
 			if (isset($_POST['repository_cancelbutton'])) $this->redirect($rep->homeLink);
-			$sql = deserialize(\Input::post('sql'));
+			$sql = deserialize(Input::post('sql'));
 			if (is_array($sql)) {
 				foreach ($sql as $key) {
 					if (isset($_SESSION['sql_commands'][$key])) {
@@ -427,7 +427,7 @@ class RepositoryManager extends RepositoryBackendModule
 			$_SESSION['sql_commands'] = array();
 		} else {
 			foreach (array('dca', 'language', 'sql') as $folder) {
-				$objFolder = new \Folder('system/cache/' . $folder);
+				$objFolder = new Folder('system/cache/' . $folder);
 				$objFolder->delete();
 			} // foreach
 		} // if
@@ -456,8 +456,8 @@ class RepositoryManager extends RepositoryBackendModule
 		// return from submit?
 		if ($this->filterPost('repository_action') == $rep->f_action) {
 			if (isset($_POST['repository_cancelbutton'])) $this->redirect($rep->homeLink);
-			$rep->f_stage = (int)\Input::post('repository_stage');
-			$rep->f_extension = trim(\Input::post('repository_extension'));
+			$rep->f_stage = (int)Input::post('repository_stage');
+			$rep->f_extension = trim(Input::post('repository_extension'));
 
 			if ($rep->f_stage == $rep->uist_showlog)
 				$this->redirect($this->createUrl(array('update'=>'database')));

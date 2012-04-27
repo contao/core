@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Model;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class CalendarEventsModel extends \Model
+class CalendarEventsModel extends Model
 {
 
 	/**
@@ -57,7 +58,7 @@ class CalendarEventsModel extends \Model
 	 * @param integer
 	 * @param string
 	 * @param array
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findPublishedByParentAndIdOrAlias($intId, $varAlias, $arrPids)
 	{
@@ -82,7 +83,7 @@ class CalendarEventsModel extends \Model
 	/**
 	 * Find the first and last event in one or more calendars
 	 * @param array
-	 * @return \Contao\Model
+	 * @return \Model
 	 */
 	public static function findBoundaries($arrPids)
 	{
@@ -101,7 +102,7 @@ class CalendarEventsModel extends \Model
 	 * @param integer
 	 * @param integer
 	 * @param integer
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findCurrentByPid($intPid, $intStart, $intEnd)
 	{
@@ -124,7 +125,7 @@ class CalendarEventsModel extends \Model
 	/**
 	 * Find published events with the default redirect target by their parent ID
 	 * @param integer
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findPublishedDefaultByPid($intPid)
 	{
@@ -145,7 +146,7 @@ class CalendarEventsModel extends \Model
 	 * Find upcoming events by their parent IDs
 	 * @param array
 	 * @param integer
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findUpcomingByPids($arrIds, $intLimit=0)
 	{

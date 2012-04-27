@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Model;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class SessionModel extends \Model
+class SessionModel extends Model
 {
 
 	/**
@@ -56,7 +57,7 @@ class SessionModel extends \Model
 	 * Find a session by its hash and name
 	 * @param string
 	 * @param string
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findByHashAndName($strHash, $strName)
 	{

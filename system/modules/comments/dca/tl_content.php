@@ -121,13 +121,13 @@ class tl_content_comments extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getCommentsTemplates(\DataContainer $dc)
+	public function getCommentsTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		// Get the page ID
@@ -139,7 +139,7 @@ class tl_content_comments extends Backend
 		$objPage = $this->getPageDetails($objArticle->pid);
 
 		// Get the theme ID
-		$objLayout = \LayoutModel::findByPk($objPage->layout);
+		$objLayout = LayoutModel::findByPk($objPage->layout);
 
 		if ($objLayout === null)
 		{

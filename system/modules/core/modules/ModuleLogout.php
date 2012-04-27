@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendTemplate, \Environment, \Module;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleLogout extends \Module
+class ModuleLogout extends Module
 {
 
 	/**
@@ -60,7 +61,7 @@ class ModuleLogout extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### FRONTEND LOGOUT ###';
 			$objTemplate->title = $this->headline;
@@ -78,7 +79,7 @@ class ModuleLogout extends \Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$strRedirect = \Environment::get('base');
+		$strRedirect = Environment::get('base');
 
 		// Redirect to last page visited
 		if ($this->redirectBack && !empty($_SESSION['LAST_PAGE_VISITED']))

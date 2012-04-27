@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \CalendarFeedModel, \Combiner, \Environment, \Frontend, \FrontendTemplate, \LayoutModel, \ModuleModel, \NewsFeedModel, \StyleSheetModel, \Exception;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PageRegular extends \Frontend
+class PageRegular extends Frontend
 {
 
 	/**
@@ -82,7 +83,7 @@ class PageRegular extends \Frontend
 
 		// Get all modules in a single DB query
 		$arrModuleIds = array_map(function($arr) { return $arr['mod']; }, $arrModules);
-		$objModules = \ModuleModel::findMultipleByIds($arrModuleIds);
+		$objModules = ModuleModel::findMultipleByIds($arrModuleIds);
 
 		if ($objModules !== null || $arrModules[0]['mod'] == 0) // see #4137
 		{
@@ -176,15 +177,15 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Get a page layout and return it as database result object
-	 * @param \Contao\Model
-	 * @return \Contao\Model
+	 * @param \Model
+	 * @return \Model
 	 */
 	protected function getPageLayout($objPage)
 	{
-		$blnMobile = ($objPage->mobileLayout && \Environment::get('agent')->mobile);
+		$blnMobile = ($objPage->mobileLayout && Environment::get('agent')->mobile);
 		$intId = $blnMobile ? $objPage->mobileLayout : $objPage->layout;
 
-		$objLayout = \LayoutModel::findByPk($intId);
+		$objLayout = LayoutModel::findByPk($intId);
 
 		// Die if there is no layout
 		if ($objLayout === null)
@@ -207,7 +208,7 @@ class PageRegular extends \Frontend
 	 */
 	protected function createTemplate($objPage, $objLayout)
 	{
-		$this->Template = new \FrontendTemplate($objPage->template);
+		$this->Template = new FrontendTemplate($objPage->template);
 
 		// Generate the DTD
 		if ($objPage->outputFormat == 'xhtml')
@@ -316,7 +317,7 @@ class PageRegular extends \Frontend
 		{
 			if ($objLayout->jSource == 'j_googleapis' || $objLayout->jSource == 'j_fallback')
 			{
-				$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
+				$protocol = Environment::get('ssl') ? 'https://' : 'http://';
 				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/jquery/' . JQUERY . '/jquery.min.js"></script>' . "\n";
 
 				// Local fallback (thanks to DyaGa)
@@ -336,7 +337,7 @@ class PageRegular extends \Frontend
 		{
 			if ($objLayout->mooSource == 'moo_googleapis' || $objLayout->mooSource == 'moo_fallback')
 			{
-				$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
+				$protocol = Environment::get('ssl') ? 'https://' : 'http://';
 				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS . '/mootools-yui-compressed.js"></script>' . "\n";
 
 				// Local fallback (thanks to DyaGa)
@@ -350,7 +351,7 @@ class PageRegular extends \Frontend
 			}
 			else
 			{
-				$objCombiner = new \Combiner();
+				$objCombiner = new Combiner();
 
 				$objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS);
 				$objCombiner->add('plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS);
@@ -376,7 +377,7 @@ class PageRegular extends \Frontend
 		$this->Template->mobile = $objLayout->isMobile;
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->base = \Environment::get('base');
+		$this->Template->base = Environment::get('base');
 		$this->Template->disableCron = $GLOBALS['TL_CONFIG']['disableCron'];
 	}
 
@@ -398,11 +399,11 @@ class PageRegular extends \Frontend
 		// Google web fonts
 		if ($objLayout->webfonts != '')
 		{
-			$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
+			$protocol = Environment::get('ssl') ? 'https://' : 'http://';
 			$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') .' rel="stylesheet" href="' . $protocol . 'fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
 		}
 
-		$objCombiner = new \Combiner();
+		$objCombiner = new Combiner();
 
 		// Skip the Contao framework style sheet
 		if (!$objLayout->skipFramework)
@@ -437,7 +438,7 @@ class PageRegular extends \Frontend
 		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
-			$objStylesheets = \StyleSheetModel::findByIds($arrStyleSheets);
+			$objStylesheets = StyleSheetModel::findByIds($arrStyleSheets);
 
 			if ($objStylesheets !== null)
 			{
@@ -486,7 +487,7 @@ class PageRegular extends \Frontend
 				// Validate the file name
 				if (strpos($stylesheet, '..') !== false || strncmp($stylesheet, $GLOBALS['TL_CONFIG']['uploadPath'] . '/', strlen($GLOBALS['TL_CONFIG']['uploadPath']) + 1) !== 0)
 				{
-					throw new \Exception("Invalid path $stylesheet");
+					throw new Exception("Invalid path $stylesheet");
 				}
 
 				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
@@ -494,7 +495,7 @@ class PageRegular extends \Frontend
 				// Only .css files are allowed
 				if (substr($stylesheet, -4) != '.css')
 				{
-					throw new \Exception("Invalid file extension $stylesheet");
+					throw new Exception("Invalid file extension $stylesheet");
 				}
 
 				// Check whether the file exists
@@ -536,13 +537,13 @@ class PageRegular extends \Frontend
 		// Add newsfeeds
 		if (is_array($newsfeeds) && !empty($newsfeeds))
 		{
-			$objFeeds = \NewsFeedModel::findByIds($newsfeeds);
+			$objFeeds = NewsFeedModel::findByIds($newsfeeds);
 
 			if ($objFeeds !== null)
 			{
 				while($objFeeds->next())
 				{
-					$base = $objFeeds->feedBase ?: \Environment::get('base');
+					$base = $objFeeds->feedBase ?: Environment::get('base');
 					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
 				}
 			}
@@ -551,13 +552,13 @@ class PageRegular extends \Frontend
 		// Add calendarfeeds
 		if (is_array($calendarfeeds) && !empty($calendarfeeds))
 		{
-			$objFeeds = \CalendarFeedModel::findByIds($calendarfeeds);
+			$objFeeds = CalendarFeedModel::findByIds($calendarfeeds);
 
 			if ($objFeeds !== null)
 			{
 				while($objFeeds->next())
 				{
-					$base = $objFeeds->feedBase ?: \Environment::get('base');
+					$base = $objFeeds->feedBase ?: Environment::get('base');
 					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
 				}
 			}
@@ -613,7 +614,7 @@ class PageRegular extends \Frontend
 			{
 				if ($strTemplate != '')
 				{
-					$objTemplate = new \FrontendTemplate($strTemplate);
+					$objTemplate = new FrontendTemplate($strTemplate);
 					$strScripts .= $objTemplate->parse();
 				}
 			}
@@ -637,7 +638,7 @@ class PageRegular extends \Frontend
 			{
 				if ($strTemplate != '')
 				{
-					$objTemplate = new \FrontendTemplate($strTemplate);
+					$objTemplate = new FrontendTemplate($strTemplate);
 					$strScripts .= $objTemplate->parse();
 				}
 			}
@@ -661,7 +662,7 @@ class PageRegular extends \Frontend
 		// Add the analytics script
 		if ($objLayout->analytics != '')
 		{
-			$objTemplate = new \FrontendTemplate($objLayout->analytics);
+			$objTemplate = new FrontendTemplate($objLayout->analytics);
 			$strScripts .= $objTemplate->parse();
 		}
 

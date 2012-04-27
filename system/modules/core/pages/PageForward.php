@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Frontend, \Input, \PageModel;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PageForward extends \Frontend
+class PageForward extends Frontend
 {
 
 	/**
@@ -55,11 +56,11 @@ class PageForward extends \Frontend
 		// Forward to the jumpTo or first published page
 		if ($objPage->jumpTo)
 		{
-			$objNextPage = \PageModel::findPublishedById($objPage->jumpTo);
+			$objNextPage = PageModel::findPublishedById($objPage->jumpTo);
 		}
 		else
 		{
-			$objNextPage = \PageModel::findFirstPublishedRegularByPid($objPage->id);
+			$objNextPage = PageModel::findFirstPublishedRegularByPid($objPage->id);
 		}
 
 		// Forward page does not exist
@@ -87,7 +88,7 @@ class PageForward extends \Frontend
 					continue;
 				}
 
-				$strGet .= '/' . $key . '/' . \Input::get($key);
+				$strGet .= '/' . $key . '/' . Input::get($key);
 			}
 		}
 

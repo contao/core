@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Backend, \Environment, \File, \FileTree, \Input, \String, \Exception;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class StyleSheets extends \Backend
+class StyleSheets extends Backend
 {
 
 	/**
@@ -72,7 +73,7 @@ class StyleSheets extends \Backend
 		}
 
 		// Delete the CSS file
-		if (\Input::get('act') == 'delete')
+		if (Input::get('act') == 'delete')
 		{
 			$this->import('Files');
 			$this->Files->delete('assets/css/' . $objStyleSheet->name . '.css');
@@ -120,7 +121,7 @@ class StyleSheets extends \Backend
 				continue;
 			}
 
-			$objFile = new \File('assets/css/' . $file);
+			$objFile = new File('assets/css/' . $file);
 
 			// Delete the old style sheet
 			if ($objFile->extension == 'css' && !in_array($objFile->filename, $arrStyleSheets))
@@ -194,7 +195,7 @@ class StyleSheets extends \Backend
 		// Sort by key length (see #3316)
 		uksort($vars, 'length_sort_desc');
 
-		$objFile = new \File('assets/css/' . $row['name'] . '.css');
+		$objFile = new File('assets/css/' . $row['name'] . '.css');
 		$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
 
 		$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? AND invisible!=1 ORDER BY sorting")
@@ -246,7 +247,7 @@ class StyleSheets extends \Backend
 		}
 
 		// Selector
-		$arrSelector = trimsplit(',', \String::decodeEntities($row['selector']));
+		$arrSelector = trimsplit(',', String::decodeEntities($row['selector']));
 		$return .= implode(($blnWriteToFile ? ',' : ', '), $arrSelector) . (($blnWriteToFile && !$blnDebug) ? '' : ' ') . '{';
 
 		// Size
@@ -1010,7 +1011,7 @@ class StyleSheets extends \Backend
 		// Custom code
 		if ($row['own'] != '')
 		{
-			$own = trim(\String::decodeEntities($row['own']));
+			$own = trim(String::decodeEntities($row['own']));
 			$own = preg_replace('/url\("(?!data:|\/)/', 'url("' . $strGlue, $own);
 			$own = preg_split('/[\n\r]+/i', $own);
 			$return .= $lb . implode(($blnWriteToFile ? '' : $lb), $own);
@@ -1151,21 +1152,21 @@ class StyleSheets extends \Backend
 	 */
 	public function importStyleSheet()
 	{
-		if (\Input::get('key') != 'import')
+		if (Input::get('key') != 'import')
 		{
 			return '';
 		}
 
 		// Import CSS
-		if (\Input::post('FORM_SUBMIT') == 'tl_style_sheet_import')
+		if (Input::post('FORM_SUBMIT') == 'tl_style_sheet_import')
 		{
-			if (!\Input::post('source') || !is_array(\Input::post('source')))
+			if (!Input::post('source') || !is_array(Input::post('source')))
 			{
 				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
-			foreach (\Input::post('source') as $strCssFile)
+			foreach (Input::post('source') as $strCssFile)
 			{
 				// Folders cannot be imported
 				if (is_dir(TL_ROOT . '/' . $strCssFile))
@@ -1174,7 +1175,7 @@ class StyleSheets extends \Backend
 					continue;
 				}
 
-				$objFile = new \File($strCssFile);
+				$objFile = new File($strCssFile);
 
 				// Check the file extension
 				if ($objFile->extension != 'css')
@@ -1190,7 +1191,7 @@ class StyleSheets extends \Backend
 
 				// Create the new style sheet
 				$objStyleSheet = $this->Database->prepare("INSERT INTO tl_style_sheet (pid, tstamp, name, media) VALUES (?, ?, ?, ?)")
-												->execute(\Input::get('id'), time(), $strName, array('all'));
+												->execute(Input::get('id'), time(), $strName, array('all'));
 
 				$insertId = $objStyleSheet->insertId;
 				$intSorting = 0;
@@ -1199,7 +1200,7 @@ class StyleSheets extends \Backend
 
 				if (!is_numeric($insertId) || $insertId < 0)
 				{
-					throw new \Exception('Invalid insert ID');
+					throw new Exception('Invalid insert ID');
 				}
 
 				$strFile = str_replace('/**/', '[__]', $strFile);
@@ -1279,20 +1280,20 @@ class StyleSheets extends \Backend
 
 			// Redirect
 			setcookie('BE_PAGE_OFFSET', 0, 0, '/');
-			$this->redirect(str_replace('&key=import', '', \Environment::get('request')));
+			$this->redirect(str_replace('&key=import', '', Environment::get('request')));
 		}
 
-		$objTree = new \FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_style_sheet']['fields']['source'], 'source', null, 'source', 'tl_style_sheet'));
+		$objTree = new FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_style_sheet']['fields']['source'], 'source', null, 'source', 'tl_style_sheet'));
 
 		// Return form
 		return '
 <div id="tl_buttons">
-<a href="' .ampersand(str_replace('&key=import', '', \Environment::get('request'))). '" class="header_back" title="' .specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']). '" accesskey="b">' .$GLOBALS['TL_LANG']['MSC']['backBT']. '</a>
+<a href="' .ampersand(str_replace('&key=import', '', Environment::get('request'))). '" class="header_back" title="' .specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']). '" accesskey="b">' .$GLOBALS['TL_LANG']['MSC']['backBT']. '</a>
 </div>
 
 <h2 class="sub_headline">' .$GLOBALS['TL_LANG']['tl_style_sheet']['import'][1]. '</h2>
 ' .$this->getMessages(). '
-<form action="' .ampersand(\Environment::get('request'), true). '" id="tl_style_sheet_import" class="tl_form" method="post">
+<form action="' .ampersand(Environment::get('request'), true). '" id="tl_style_sheet_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_style_sheet_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">

@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Model;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class NewsletterChannelModel extends \Model
+class NewsletterChannelModel extends Model
 {
 
 	/**
@@ -55,7 +56,7 @@ class NewsletterChannelModel extends \Model
 	/**
 	 * Find multiple newsletter channels by their IDs
 	 * @param array
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findByIds($arrPids)
 	{

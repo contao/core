@@ -95,7 +95,7 @@ class Index extends Frontend
 			$objHandler->generate($pageId);
 		}
 		// Throw a 404 error if URL rewriting is active and the URL contains the index.php fragment
-		elseif ($GLOBALS['TL_CONFIG']['rewriteURL'] && strncmp(\Environment::get('request'), 'index.php/', 10) === 0)
+		elseif ($GLOBALS['TL_CONFIG']['rewriteURL'] && strncmp(Environment::get('request'), 'index.php/', 10) === 0)
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
@@ -103,7 +103,7 @@ class Index extends Frontend
 		}
 
 		// Get the current page object(s)
-		$objPage = \PageModel::findPublishedByIdOrAlias($pageId);
+		$objPage = PageModel::findPublishedByIdOrAlias($pageId);
 
 		// Check the URL and language of each page if there are multiple results
 		if ($objPage !== null && $objPage->count() > 1)
@@ -128,9 +128,9 @@ class Index extends Frontend
 			}
 
 			// Look for a root page whose domain name matches the host name
-			if (isset($arrPages[\Environment::get('host')]))
+			if (isset($arrPages[Environment::get('host')]))
 			{
-				$arrLangs = $arrPages[\Environment::get('host')];
+				$arrLangs = $arrPages[Environment::get('host')];
 			}
 			else
 			{
@@ -142,7 +142,7 @@ class Index extends Frontend
 			{
 				$objNewPage = $arrLangs['*']; // Fallback language
 			}
-			elseif (($lang = \Input::get('language')) != '' && isset($arrLangs[$lang]))
+			elseif (($lang = Input::get('language')) != '' && isset($arrLangs[$lang]))
 			{
 				$objNewPage = $arrLangs[$lang];
 			}
@@ -208,7 +208,7 @@ class Index extends Frontend
 		}
 
 		// Check wether the language matches the root page language
-		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && \Input::get('language') != $objPage->rootLanguage)
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && Input::get('language') != $objPage->rootLanguage)
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
@@ -219,11 +219,11 @@ class Index extends Frontend
 		if ($objPage->domain != '')
 		{
 			// Load an error 404 page object
-			if ($objPage->domain != \Environment::get('host'))
+			if ($objPage->domain != Environment::get('host'))
 			{
 				$this->User->authenticate();
 				$objHandler = new $GLOBALS['TL_PTY']['error_404']();
-				$objHandler->generate($objPage->id, $objPage->domain, \Environment::get('host'));
+				$objHandler->generate($objPage->id, $objPage->domain, Environment::get('host'));
 			}
 		}
 
@@ -287,7 +287,7 @@ class Index extends Frontend
 		 * empty requests at all and considering all browser languages, which
 		 * is not possible for various reasons.
 		 */
-		if (\Environment::get('request') == '' || \Environment::get('request') == 'index.php')
+		if (Environment::get('request') == '' || Environment::get('request') == 'index.php')
 		{
 			// Return if the language is added to the URL and the empty domain will be redirected
 			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'])
@@ -295,12 +295,12 @@ class Index extends Frontend
 				return;
 			}
  
-			$arrLanguage = \Environment::get('httpAcceptLanguage');
-			$strCacheKey = \Environment::get('base') .'empty.'. $arrLanguage[0];
+			$arrLanguage = Environment::get('httpAcceptLanguage');
+			$strCacheKey = Environment::get('base') .'empty.'. $arrLanguage[0];
 		}
 		else
 		{
-			$strCacheKey = \Environment::get('base') . \Environment::get('request');
+			$strCacheKey = Environment::get('base') . Environment::get('request');
 		}
 
 		// HOOK: add custom logic
@@ -345,10 +345,10 @@ class Index extends Frontend
 		$session = $this->Session->getData();
 
 		// Set the new referer
-		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != \Environment::get('requestUri'))
+		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != Environment::get('requestUri'))
 		{
 			$session['referer']['last'] = $session['referer']['current'];
-			$session['referer']['current'] = \Environment::get('requestUri');
+			$session['referer']['current'] = Environment::get('requestUri');
 		}
 
 		// Store the session data

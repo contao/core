@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Database, \DcaExtractor, \Model_Collection, \Model_QueryBuilder, \System, \Exception;
+use \Database, \Database_Statement, \Database_Result, \DcaExtractor, \Model_Collection, \Model_QueryBuilder, \System, \Exception;
 
 
 /**
@@ -81,7 +81,7 @@ abstract class Model extends System
 	 * Load the relations and optionally process a result set
 	 * @param \Database_Result
 	 */
-	public function __construct(\Database_Result $objResult=null)
+	public function __construct(Database_Result $objResult=null)
 	{
 		parent::__construct();
 
@@ -443,7 +443,7 @@ abstract class Model extends System
 	 * @param \Database_Statement
 	 * @return \Database_Statement
 	 */
-	protected static function preFind(\Database_Statement $objStatement)
+	protected static function preFind(Database_Statement $objStatement)
 	{
 		return $objStatement;
 	}
@@ -454,7 +454,7 @@ abstract class Model extends System
 	 * @param \Database_Result
 	 * @return \Database_Result
 	 */
-	protected static function postFind(\Database_Result $objResult)
+	protected static function postFind(Database_Result $objResult)
 	{
 		return $objResult;
 	}

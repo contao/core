@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Model;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class NewsletterRecipientsModel extends \Model
+class NewsletterRecipientsModel extends Model
 {
 
 	/**
@@ -56,7 +57,7 @@ class NewsletterRecipientsModel extends \Model
 	 * Find recipients by their e-mail address and parent ID
 	 * @param string
 	 * @param array
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findByEmailAndPids($strEmail, $arrPids)
 	{

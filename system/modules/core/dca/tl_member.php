@@ -460,7 +460,7 @@ class tl_member extends Backend
 	 * @param array
 	 * @return string
 	 */
-	public function addIcon($row, $label, \DataContainer $dc, $args)
+	public function addIcon($row, $label, DataContainer $dc, $args)
 	{
 		$image = 'member';
 
@@ -514,7 +514,7 @@ class tl_member extends Backend
 	 * @param \DataContainer
 	 * @return void
 	 */
-	public function storeDateAdded(\DataContainer $dc)
+	public function storeDateAdded(DataContainer $dc)
 	{
 		// Return if there is no active record (override all)
 		if (!$dc->activeRecord || $dc->activeRecord->dateAdded > 0)
@@ -549,9 +549,9 @@ class tl_member extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen(\Input::get('tid')))
+		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 

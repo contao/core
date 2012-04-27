@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Environment, \FilesModel, \Input, \User;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class BackendUser extends \User
+class BackendUser extends User
 {
 
 	/**
@@ -77,8 +78,8 @@ class BackendUser extends \User
 	{
 		parent::__construct();
 
-		$this->strIp = \Environment::get('ip');
-		$this->strHash = \Input::cookie($this->strCookie);
+		$this->strIp = Environment::get('ip');
+		$this->strHash = Input::cookie($this->strCookie);
 	}
 
 
@@ -89,19 +90,19 @@ class BackendUser extends \User
 	{
 		$session = $this->Session->getData();
 
-		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && $session['referer']['current'] != \Environment::get('requestUri'))
+		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && $session['referer']['current'] != Environment::get('requestUri'))
 		{
 			// Main script
-			if (\Environment::get('script') == 'contao/main.php')
+			if (Environment::get('script') == 'contao/main.php')
 			{
 				$session['referer']['last'] = $session['referer']['current'];
-				$session['referer']['current'] = \Environment::get('requestUri');
+				$session['referer']['current'] = Environment::get('requestUri');
 			}
 			// File manager
-			elseif (\Environment::get('script') == 'contao/files.php')
+			elseif (Environment::get('script') == 'contao/files.php')
 			{
 				$session['fileReferer']['last'] = $session['referer']['current'];
-				$session['fileReferer']['current'] = \Environment::get('requestUri');
+				$session['fileReferer']['current'] = Environment::get('requestUri');
 			}
 		}
 
@@ -159,7 +160,7 @@ class BackendUser extends \User
 	public function authenticate()
 	{
 		// Do not redirect if authentication is successful
-		if (parent::authenticate() || \Environment::get('script') == 'contao/index.php')
+		if (parent::authenticate() || Environment::get('script') == 'contao/index.php')
 		{
 			return;
 		}
@@ -167,15 +168,15 @@ class BackendUser extends \User
 		$strRedirect = 'contao/index.php';
 
 		// Redirect to the last page visited on login
-		if (\Environment::get('script') == 'contao/main.php' || \Environment::get('script') == 'contao/preview.php')
+		if (Environment::get('script') == 'contao/main.php' || Environment::get('script') == 'contao/preview.php')
 		{
-			$strRedirect .= '?referer=' . base64_encode(\Environment::get('request'));
+			$strRedirect .= '?referer=' . base64_encode(Environment::get('request'));
 		}
 
 		// Force JavaScript redirect on Ajax requests (IE requires an absolute link)
-		if (\Environment::get('isAjaxRequest'))
+		if (Environment::get('isAjaxRequest'))
 		{
-			echo json_encode(array('content' => '<script>location.replace("' . \Environment::get('base') . $strRedirect . '")</script>'));
+			echo json_encode(array('content' => '<script>location.replace("' . Environment::get('base') . $strRedirect . '")</script>'));
 			exit;
 		}
 
@@ -392,7 +393,7 @@ class BackendUser extends \User
 		// Convert the numeric file mounts into paths
 		if (!$this->isAdmin && !empty($this->filemounts))
 		{
-			$objFiles = \FilesModel::findMultipleByIds($this->filemounts);
+			$objFiles = FilesModel::findMultipleByIds($this->filemounts);
 
 			if ($objFiles !== null)
 			{
@@ -413,11 +414,11 @@ class BackendUser extends \User
 		$session = $this->Session->getData();
 
 		// Toggle nodes
-		if (\Input::get('mtg'))
+		if (Input::get('mtg'))
 		{
-			$session['backend_modules'][\Input::get('mtg')] = (isset($session['backend_modules'][\Input::get('mtg')]) && $session['backend_modules'][\Input::get('mtg')] == 0) ? 1 : 0;
+			$session['backend_modules'][Input::get('mtg')] = (isset($session['backend_modules'][Input::get('mtg')]) && $session['backend_modules'][Input::get('mtg')] == 0) ? 1 : 0;
 			$this->Session->setData($session);
-			$this->redirect(preg_replace('/(&(amp;)?|\?)mtg=[^& ]*/i', '', \Environment::get('request')));
+			$this->redirect(preg_replace('/(&(amp;)?|\?)mtg=[^& ]*/i', '', Environment::get('request')));
 		}
 
 		$arrInactiveModules = deserialize($GLOBALS['TL_CONFIG']['inactiveModules']);
@@ -457,10 +458,10 @@ class BackendUser extends \User
 							$arrModules[$strGroupName]['modules'][$strModuleName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strModuleName]) ? $GLOBALS['TL_LANG']['MOD'][$strModuleName][0] : $GLOBALS['TL_LANG']['MOD'][$strModuleName]) != false) ? $label : $strModuleName;
 							$arrModules[$strGroupName]['modules'][$strModuleName]['icon'] = ($arrModuleConfig['icon'] != '') ? sprintf(' style="background-image:url(\'%s%s\')"', TL_SCRIPT_URL, $arrModuleConfig['icon']) : '';
 							$arrModules[$strGroupName]['modules'][$strModuleName]['class'] = 'navigation ' . $strModuleName;
-							$arrModules[$strGroupName]['modules'][$strModuleName]['href']  = \Environment::get('script') . '?do=' . $strModuleName;
+							$arrModules[$strGroupName]['modules'][$strModuleName]['href']  = Environment::get('script') . '?do=' . $strModuleName;
 
 							// Mark the active module and its group
-							if (\Input::get('do') == $strModuleName)
+							if (Input::get('do') == $strModuleName)
 							{
 								$arrModules[$strGroupName]['class'] = ' trail';
 								$arrModules[$strGroupName]['modules'][$strModuleName]['class'] .= ' active';

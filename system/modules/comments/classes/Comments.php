@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \CommentsModel, \Email, \Environment, \Frontend, \FrontendTemplate, \Input, \Pagination, \String;
 
 
 /**
@@ -41,7 +42,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class Comments extends \Frontend
+class Comments extends Frontend
 {
 
 	/**
@@ -53,7 +54,7 @@ class Comments extends \Frontend
 	 * @param array
 	 * @return void
 	 */
-	public function addCommentsToTemplate(\FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $arrNotifies)
+	public function addCommentsToTemplate(FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $arrNotifies)
 	{
 		global $objPage;
 
@@ -68,11 +69,11 @@ class Comments extends \Frontend
 		if ($objConfig->perPage > 0)
 		{
 			// Get the total number of comments
-			$intTotal = \CommentsModel::countPublishedBySourceAndParent($strSource, $intParent);
+			$intTotal = CommentsModel::countPublishedBySourceAndParent($strSource, $intParent);
 			$total = $gtotal = $intTotal;
 
 			// Get the current page
-			$page = \Input::get('page') ? \Input::get('page') : 1;
+			$page = Input::get('page') ? Input::get('page') : 1;
 
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$objConfig->perPage), 1))
@@ -92,7 +93,7 @@ class Comments extends \Frontend
 			$offset = ($page - 1) * $objConfig->perPage;
  
 			// Initialize the pagination menu
-			$objPagination = new \Pagination($total, $objConfig->perPage);
+			$objPagination = new Pagination($total, $objConfig->perPage);
 			$objTemplate->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -101,11 +102,11 @@ class Comments extends \Frontend
 		// Get all published comments
 		if ($limit)
 		{
-			$objComments = \CommentsModel::findPublishedBySourceAndParent($strSource, $intParent, $limit, $offset);
+			$objComments = CommentsModel::findPublishedBySourceAndParent($strSource, $intParent, $limit, $offset);
 		}
 		else
 		{
-			$objComments = \CommentsModel::findPublishedBySourceAndParent($strSource, $intParent);
+			$objComments = CommentsModel::findPublishedBySourceAndParent($strSource, $intParent);
 		}
 
 		if ($objComments !== null && ($total = $objComments->count()) > 0)
@@ -117,7 +118,7 @@ class Comments extends \Frontend
 				$objConfig->template = 'com_default';
 			}
 
-			$objPartial = new \FrontendTemplate($objConfig->template);
+			$objPartial = new FrontendTemplate($objConfig->template);
 
 			while ($objComments->next())
 			{
@@ -126,11 +127,11 @@ class Comments extends \Frontend
 				// Clean the RTE output
 				if ($objPage->outputFormat == 'xhtml')
 				{
-					$objComments->comment = \String::toXhtml($objComments->comment);
+					$objComments->comment = String::toXhtml($objComments->comment);
 				}
 				else
 				{
-					$objComments->comment = \String::toHtml5($objComments->comment);
+					$objComments->comment = String::toHtml5($objComments->comment);
 				}
 
 				$objPartial->comment = trim(str_replace(array('{{', '}}'), array('&#123;&#123;', '&#125;&#125;'), $objComments->comment));
@@ -157,11 +158,11 @@ class Comments extends \Frontend
 						// Clean the RTE output
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$objPartial->reply = \String::toXhtml($objPartial->reply);
+							$objPartial->reply = String::toXhtml($objPartial->reply);
 						}
 						else
 						{
-							$objPartial->reply = \String::toHtml5($objPartial->reply);
+							$objPartial->reply = String::toHtml5($objPartial->reply);
 						}
 					}
 				}
@@ -255,7 +256,7 @@ class Comments extends \Frontend
 			$objWidget = new $strClass($this->prepareForWidget($arrField, $arrField['name'], $arrField['value']));
 
 			// Validate the widget
-			if (\Input::post('FORM_SUBMIT') == $strFormId)
+			if (Input::post('FORM_SUBMIT') == $strFormId)
 			{
 				$objWidget->validate();
 
@@ -270,7 +271,7 @@ class Comments extends \Frontend
 
 		$objTemplate->fields = $arrWidgets;
 		$objTemplate->submit = $GLOBALS['TL_LANG']['MSC']['com_submit'];
-		$objTemplate->action = ampersand(\Environment::get('request'));
+		$objTemplate->action = ampersand(Environment::get('request'));
 		$objTemplate->messages = ''; // Backwards compatibility
 		$objTemplate->formId = $strFormId;
 		$objTemplate->hasError = $doNotSubmit;
@@ -287,7 +288,7 @@ class Comments extends \Frontend
 		}
 
 		// Add the comment
-		if (!$doNotSubmit && \Input::post('FORM_SUBMIT') == $strFormId)
+		if (!$doNotSubmit && Input::post('FORM_SUBMIT') == $strFormId)
 		{
 			$strWebsite = $arrWidgets['website']->value;
 
@@ -325,12 +326,12 @@ class Comments extends \Frontend
 				'email' => $arrWidgets['email']->value,
 				'website' => $strWebsite,
 				'comment' => $this->convertLineFeeds($strComment),
-				'ip' => $this->anonymizeIp(\Environment::get('ip')),
+				'ip' => $this->anonymizeIp(Environment::get('ip')),
 				'date' => $time,
 				'published' => ($objConfig->moderate ? '' : 1)
 			);
 
-			$objComment = new \CommentsModel();
+			$objComment = new CommentsModel();
 			$objComment->setRow($arrSet);
 			$objComment->save();
 			$insertId = $objComment->id;
@@ -346,23 +347,23 @@ class Comments extends \Frontend
 			}
 
 			// Notification
-			$objEmail = new \Email();
+			$objEmail = new Email();
 
 			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
-			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_subject'], \Environment::get('host'));
+			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_subject'], Environment::get('host'));
 
 			// Convert the comment to plain text
 			$strComment = strip_tags($strComment);
-			$strComment = \String::decodeEntities($strComment);
+			$strComment = String::decodeEntities($strComment);
 			$strComment = str_replace(array('[&]', '[lt]', '[gt]'), array('&', '<', '>'), $strComment);
 
 			// Add comment details
 			$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_message'],
 									  $arrSet['name'] . ' (' . $arrSet['email'] . ')',
 									  $strComment,
-									  \Environment::get('base') . \Environment::get('request'),
-									  \Environment::get('base') . 'contao/main.php?do=comments&act=edit&id=' . $insertId);
+									  Environment::get('base') . Environment::get('request'),
+									  Environment::get('base') . 'contao/main.php?do=comments&act=edit&id=' . $insertId);
 
 			// Do not send notifications twice
 			if (is_array($arrNotifies))
@@ -443,7 +444,7 @@ class Comments extends \Frontend
 		// Encode e-mail addresses
 		if (strpos($strComment, 'mailto:') !== false)
 		{
-			$strComment = \String::encodeEmail($strComment);
+			$strComment = String::encodeEmail($strComment);
 		}
 
 		return $strComment;

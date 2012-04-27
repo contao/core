@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendModule, \executable, \Exception;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleMaintenance extends \BackendModule
+class ModuleMaintenance extends BackendModule
 {
 
 	/**
@@ -70,9 +71,9 @@ class ModuleMaintenance extends \BackendModule
 		{
 			$this->import($callback);
 
-			if (!$this->$callback instanceof \executable)
+			if (!$this->$callback instanceof executable)
 			{
-				throw new \Exception("$callback is not an executable class");
+				throw new Exception("$callback is not an executable class");
 			}
 
 			$buffer = $this->$callback->run();

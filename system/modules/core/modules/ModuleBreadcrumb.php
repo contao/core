@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \ArticleModel, \BackendTemplate, \Environment, \Input, \Module, \PageModel, \String;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleBreadcrumb extends \Module
+class ModuleBreadcrumb extends Module
 {
 
 	/**
@@ -60,7 +61,7 @@ class ModuleBreadcrumb extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### BREADCRUMB NAVIGATION ###';
 			$objTemplate->title = $this->headline;
@@ -89,7 +90,7 @@ class ModuleBreadcrumb extends \Module
 		$items = array();
 
 		// Get all pages up to the root page
-		$objPages = \PageModel::findParentsById($objPage->pid);
+		$objPages = PageModel::findParentsById($objPage->pid);
 
 		if ($objPages !== null)
 		{
@@ -104,13 +105,13 @@ class ModuleBreadcrumb extends \Module
 		// Get the first active regular page and display it instead of the root page
 		if ($type == 'root')
 		{
-			$objFirstPage = \PageModel::findFirstPublishedByPid($objPages->id);
+			$objFirstPage = PageModel::findFirstPublishedByPid($objPages->id);
 
 			$items[] = array
 			(
 				'isRoot'   => true,
 				'isActive' => false,
-				'href'     => (($objFirstPage !== null) ? $this->generateFrontendUrl($objFirstPage->row()) : \Environment::get('base')),
+				'href'     => (($objFirstPage !== null) ? $this->generateFrontendUrl($objFirstPage->row()) : Environment::get('base')),
 				'title'    => specialchars($objPages->pageTitle ?: $objPages->title, true),
 				'link'     => $objPages->title,
 				'data'     => $objFirstPage->row()
@@ -135,12 +136,12 @@ class ModuleBreadcrumb extends \Module
 
 					if (strncasecmp($href, 'mailto:', 7) === 0)
 					{
-						$href = \String::encodeEmail($href);
+						$href = String::encodeEmail($href);
 					}
 					break;
 
 				case 'forward':
-					$objNext = \PageModel::findPublishedById($pages[$i]['jumpTo']);
+					$objNext = PageModel::findPublishedById($pages[$i]['jumpTo']);
 
 					if ($objNext !== null)
 					{
@@ -178,7 +179,7 @@ class ModuleBreadcrumb extends \Module
 				'data'     => $pages[0]
 			);
 
-			list($strSection, $strArticle) = explode(':', \Input::get('articles'));
+			list($strSection, $strArticle) = explode(':', Input::get('articles'));
 
 			if ($strArticle === null)
 			{
@@ -186,7 +187,7 @@ class ModuleBreadcrumb extends \Module
 			}
 
 			// Get the article title
-			$objArticle = \ArticleModel::findByIdOrAlias($strArticle);
+			$objArticle = ArticleModel::findByIdOrAlias($strArticle);
 
 			if ($objArticle !== null)
 			{

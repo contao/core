@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Database, \Model, \Model_Collection;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class StyleSheetModel extends \Model
+class StyleSheetModel extends Model
 {
 
 	/**
@@ -55,7 +56,7 @@ class StyleSheetModel extends \Model
 	/**
 	 * Find multiple style sheets by their IDs
 	 * @param array
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findByIds($arrIds)
 	{
@@ -64,10 +65,10 @@ class StyleSheetModel extends \Model
 			return null;
 		}
 
-		$objDatabase = \Database::getInstance();
+		$objDatabase = Database::getInstance();
 		$arrIds = array_map('intval', $arrIds);
 
 		$objResult = $objDatabase->execute("SELECT *, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2, (SELECT COUNT(*) FROM tl_style WHERE tl_style.selector='@font-face' AND tl_style.pid=tl_style_sheet.id) AS hasFontFace FROM tl_style_sheet WHERE id IN (" . implode(',', $arrIds) . ") ORDER BY " . $objDatabase->findInSet('id', $arrIds));
-		return new \Model_Collection($objResult, 'tl_style_sheet');
+		return new Model_Collection($objResult, 'tl_style_sheet');
 	}
 }

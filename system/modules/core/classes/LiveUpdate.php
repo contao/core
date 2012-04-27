@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Backend, \BackendTemplate, \Environment, \File, \Input, \Request, \ZipReader, \ZipWriter, \Exception, \executable;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class LiveUpdate extends \Backend implements \executable
+class LiveUpdate extends Backend implements executable
 {
 
 	/**
@@ -51,7 +52,7 @@ class LiveUpdate extends \Backend implements \executable
 	 */
 	public function isActive()
 	{
-		return (\Input::get('token') != '');
+		return (Input::get('token') != '');
 	}
 
 
@@ -61,7 +62,7 @@ class LiveUpdate extends \Backend implements \executable
 	 */
 	public function run()
 	{
-		$objTemplate = new \BackendTemplate('be_live_update');
+		$objTemplate = new BackendTemplate('be_live_update');
 
 		$objTemplate->updateClass = 'tl_confirm';
 		$objTemplate->updateHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate'];
@@ -104,7 +105,7 @@ class LiveUpdate extends \Backend implements \executable
 		}
 
 		// Automatically switch to SSL
-		if (\Environment::get('ssl'))
+		if (Environment::get('ssl'))
 		{
 			$GLOBALS['TL_CONFIG']['liveUpdateBase'] = str_replace('http://', 'https://', $GLOBALS['TL_CONFIG']['liveUpdateBase']);
 		}
@@ -117,11 +118,11 @@ class LiveUpdate extends \Backend implements \executable
 		$objTemplate->updateServer = $GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'index.php';
 
 		// Run the update
-		if (\Input::get('token') != '')
+		if (Input::get('token') != '')
 		{
 			$this->runLiveUpdate($objTemplate);
 		}
-		elseif (\Input::get('act') == 'runonce')
+		elseif (Input::get('act') == 'runonce')
 		{
 			$this->handleRunOnce();
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", true);
@@ -131,7 +132,7 @@ class LiveUpdate extends \Backend implements \executable
 		$objTemplate->version = VERSION . '.' .  BUILD;
 		$objTemplate->liveUpdateId = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdateId'];
 		$objTemplate->runLiveUpdate = specialchars($GLOBALS['TL_LANG']['tl_maintenance']['runLiveUpdate']);
-		$objTemplate->referer = base64_encode(\Environment::get('base') . \Environment::get('request') . '|' . \Environment::get('server'));
+		$objTemplate->referer = base64_encode(Environment::get('base') . Environment::get('request') . '|' . Environment::get('server'));
 		$objTemplate->updateHelp = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['updateHelp'], '<a href="http://luid.inetrobots.com" target="_blank">Live Update ID</a>');
 
 		return $objTemplate->parse();
@@ -143,15 +144,15 @@ class LiveUpdate extends \Backend implements \executable
 	 * @param \BackendTemplate
 	 * @return void
 	 */
-	protected function runLiveUpdate(\BackendTemplate $objTemplate)
+	protected function runLiveUpdate(BackendTemplate $objTemplate)
 	{
-		$archive = 'system/tmp/' . \Input::get('token');
+		$archive = 'system/tmp/' . Input::get('token');
 
 		// Download the archive
 		if (!file_exists(TL_ROOT . '/' . $archive))
 		{
-			$objRequest = new \Request();
-			$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'request.php?token=' . \Input::get('token'));
+			$objRequest = new Request();
+			$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'request.php?token=' . Input::get('token'));
 
 			if ($objRequest->hasError())
 			{
@@ -160,7 +161,7 @@ class LiveUpdate extends \Backend implements \executable
 				return;
 			}
 
-			$objFile = new \File($archive);
+			$objFile = new File($archive);
 			$objFile->write($objRequest->response);
 			$objFile->close();
 		}
@@ -185,10 +186,10 @@ class LiveUpdate extends \Backend implements \executable
 			.'<body>'
 			.'<div>';
 
-		$objArchive = new \ZipReader($archive);
+		$objArchive = new ZipReader($archive);
 
 		// Table of contents
-		if (\Input::get('toc'))
+		if (Input::get('toc'))
 		{
 			$arrFiles = $objArchive->getFileList();
 			array_shift($arrFiles);
@@ -201,8 +202,8 @@ class LiveUpdate extends \Backend implements \executable
 				  .'<li>' . implode('</li><li>', $arrFiles) . '</li>'
 				.'</ol>'
 				.'<p>'
-				  .'<a href="' . ampersand(str_replace('toc=1', 'toc=', \Environment::get('base') . \Environment::get('request'))) . '" class="button">' . $GLOBALS['TL_LANG']['MSC']['continue'] . '</a>'
-				  .'<a href="' . \Environment::get('base') . 'contao/main.php?do=maintenance" class="button">' . $GLOBALS['TL_LANG']['MSC']['cancelBT'] . '</a>'
+				  .'<a href="' . ampersand(str_replace('toc=1', 'toc=', Environment::get('base') . Environment::get('request'))) . '" class="button">' . $GLOBALS['TL_LANG']['MSC']['continue'] . '</a>'
+				  .'<a href="' . Environment::get('base') . 'contao/main.php?do=maintenance" class="button">' . $GLOBALS['TL_LANG']['MSC']['cancelBT'] . '</a>'
 				  .'</p>'
 				.'</div>';
 
@@ -210,7 +211,7 @@ class LiveUpdate extends \Backend implements \executable
 		}
 
 		// Backup
-		if (\Input::get('bup'))
+		if (Input::get('bup'))
 		{
 			echo '<hgroup>'
 				  .'<h1>Contao Live Update</h1>'
@@ -219,7 +220,7 @@ class LiveUpdate extends \Backend implements \executable
 				.'<ol>';
 
 			$arrFiles = $objArchive->getFileList();
-			$objBackup = new \ZipWriter('LU' . date('YmdHi') . '.zip');
+			$objBackup = new ZipWriter('LU' . date('YmdHi') . '.zip');
 
 			foreach ($arrFiles as $strFile)
 			{
@@ -233,7 +234,7 @@ class LiveUpdate extends \Backend implements \executable
 					$objBackup->addFile($strFile);
 					echo '<li>Backed up ' . $strFile . '</li>';
 				}
-				catch (\Exception $e)
+				catch (Exception $e)
 				{
 					echo '<li>' . $e->getMessage() . ' (skipped)</li>';
 				}
@@ -243,8 +244,8 @@ class LiveUpdate extends \Backend implements \executable
 
 			echo '</ol>'
 				.'<p>'
-				  .'<a href="' . ampersand(str_replace('bup=1', 'bup=', \Environment::get('base') . \Environment::get('request'))) . '" id="continue" class="button">' . $GLOBALS['TL_LANG']['MSC']['continue'] . '</a>'
-				  .'<a href="' . \Environment::get('base') . 'contao/main.php?do=maintenance" id="back" class="button">' . $GLOBALS['TL_LANG']['MSC']['cancelBT'] . '</a>'
+				  .'<a href="' . ampersand(str_replace('bup=1', 'bup=', Environment::get('base') . Environment::get('request'))) . '" id="continue" class="button">' . $GLOBALS['TL_LANG']['MSC']['continue'] . '</a>'
+				  .'<a href="' . Environment::get('base') . 'contao/main.php?do=maintenance" id="back" class="button">' . $GLOBALS['TL_LANG']['MSC']['cancelBT'] . '</a>'
 				  .'</p>'
 				.'</div>';
 
@@ -267,13 +268,13 @@ class LiveUpdate extends \Backend implements \executable
 
 			try
 			{
-				$objFile = new \File($objArchive->file_name);
+				$objFile = new File($objArchive->file_name);
 				$objFile->write($objArchive->unzip());
 				$objFile->close();
 
 				echo '<li>Updated ' . $objArchive->file_name . '</li>';
 			}
-			catch (\Exception $e)
+			catch (Exception $e)
 			{
 				echo '<li><span style="color:#c55">Error updating ' . $objArchive->file_name . ': ' . $e->getMessage() . '</span></li>';
 			}
@@ -288,7 +289,7 @@ class LiveUpdate extends \Backend implements \executable
 
 		echo '</ol>'
 			.'<p>'
-			  .'<a href="' . \Environment::get('base') . 'contao/main.php?do=maintenance&amp;act=runonce" id="continue" class="button">' . $GLOBALS['TL_LANG']['MSC']['continue'] . '</a>'
+			  .'<a href="' . Environment::get('base') . 'contao/main.php?do=maintenance&amp;act=runonce" id="continue" class="button">' . $GLOBALS['TL_LANG']['MSC']['continue'] . '</a>'
 			.'</p>'
 			.'</div>';
 

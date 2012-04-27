@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Database, \Model, \Model_Collection;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class PageModel extends \Model
+class PageModel extends Model
 {
 
 	/**
@@ -55,7 +56,7 @@ class PageModel extends \Model
 	/**
 	 * Find a published page by its ID
 	 * @param mixed
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findPublishedById($intId)
 	{
@@ -76,12 +77,12 @@ class PageModel extends \Model
 	 * Find the first published root page by its host name and language
 	 * @param string
 	 * @param mixed
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findFirstPublishedRootByHostAndLanguage($strHost, $varLanguage)
 	{
 		$t = static::$strTable;
-		$objDatabase = \Database::getInstance();
+		$objDatabase = Database::getInstance();
 		$arrOptions = array();
 
 		if (is_array($varLanguage))
@@ -127,7 +128,7 @@ class PageModel extends \Model
 	/**
 	 * Find the first published page by its parent ID
 	 * @param integer
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findFirstPublishedByPid($intPid)
 	{
@@ -147,7 +148,7 @@ class PageModel extends \Model
 	/**
 	 * Find the first published regular page by its parent ID
 	 * @param integer
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findFirstPublishedRegularByPid($intPid)
 	{
@@ -167,7 +168,7 @@ class PageModel extends \Model
 	/**
 	 * Find an error 403 page by its parent ID
 	 * @param integer
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function find403ByPid($intPid)
 	{
@@ -187,7 +188,7 @@ class PageModel extends \Model
 	/**
 	 * Find an error 404 page by its parent ID
 	 * @param integer
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function find404ByPid($intPid)
 	{
@@ -207,7 +208,7 @@ class PageModel extends \Model
 	/**
 	 * Find a page matching a list of possible alias names
 	 * @param array
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findByAliases($arrAliases)
 	{
@@ -237,7 +238,7 @@ class PageModel extends \Model
 	/**
 	 * Find published pages by their IDs or aliases
 	 * @param mixed
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findPublishedByIdOrAlias($varId)
 	{
@@ -261,13 +262,13 @@ class PageModel extends \Model
 	 * @param integer
 	 * @param boolean
 	 * @param boolean
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findPublishedSubpagesWithoutGuestsByPid($intPid, $blnShowHidden=false, $blnIsSitemap=false)
 	{
 		$time = time();
 
-		$objSubpages = \Database::getInstance()->prepare("SELECT p1.*, (SELECT COUNT(*) FROM tl_page p2 WHERE p2.pid=p1.id AND p2.type!='root' AND p2.type!='error_403' AND p2.type!='error_404'" . (!$blnShowHidden ? ($blnIsSitemap ? " AND (p2.hide='' OR sitemap='map_always')" : " AND p2.hide=''") : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND p2.guests=''" : "") . (!BE_USER_LOGGED_IN ? " AND (p2.start='' OR p2.start<$time) AND (p2.stop='' OR p2.stop>$time) AND p2.published=1" : "") . ") AS subpages FROM tl_page p1 WHERE p1.pid=? AND p1.type!='root' AND p1.type!='error_403' AND p1.type!='error_404'" . (!$blnShowHidden ? ($blnIsSitemap ? " AND (p1.hide='' OR sitemap='map_always')" : " AND p1.hide=''") : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND p1.guests=''" : "") . (!BE_USER_LOGGED_IN ? " AND (p1.start='' OR p1.start<$time) AND (p1.stop='' OR p1.stop>$time) AND p1.published=1" : "") . " ORDER BY p1.sorting")
+		$objSubpages = Database::getInstance()->prepare("SELECT p1.*, (SELECT COUNT(*) FROM tl_page p2 WHERE p2.pid=p1.id AND p2.type!='root' AND p2.type!='error_403' AND p2.type!='error_404'" . (!$blnShowHidden ? ($blnIsSitemap ? " AND (p2.hide='' OR sitemap='map_always')" : " AND p2.hide=''") : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND p2.guests=''" : "") . (!BE_USER_LOGGED_IN ? " AND (p2.start='' OR p2.start<$time) AND (p2.stop='' OR p2.stop>$time) AND p2.published=1" : "") . ") AS subpages FROM tl_page p1 WHERE p1.pid=? AND p1.type!='root' AND p1.type!='error_403' AND p1.type!='error_404'" . (!$blnShowHidden ? ($blnIsSitemap ? " AND (p1.hide='' OR sitemap='map_always')" : " AND p1.hide=''") : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND p1.guests=''" : "") . (!BE_USER_LOGGED_IN ? " AND (p1.start='' OR p1.start<$time) AND (p1.stop='' OR p1.stop>$time) AND p1.published=1" : "") . " ORDER BY p1.sorting")
 											   ->execute($intPid);
 
 		if ($objSubpages->numRows < 1)
@@ -275,7 +276,7 @@ class PageModel extends \Model
 			return null;
 		}
 
-		return new \Model_Collection($objSubpages, 'tl_page');
+		return new Model_Collection($objSubpages, 'tl_page');
 	}
 
 
@@ -283,7 +284,7 @@ class PageModel extends \Model
 	 * Find all published regular pages by their IDs and exclude pages
 	 * which are only visible for guests
 	 * @param integer
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findPublishedRegularWithoutGuestsByIds($arrIds)
 	{
@@ -306,7 +307,7 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findBy($arrColumns, null, array('order'=>\Database::getInstance()->findInSet("$t.id", $arrIds)));
+		return static::findBy($arrColumns, null, array('order'=>Database::getInstance()->findInSet("$t.id", $arrIds)));
 	}
 
 
@@ -314,7 +315,7 @@ class PageModel extends \Model
 	 * Find all published regular pages by their parent IDs and exclude
 	 * pages which are only visible for guests
 	 * @param integer
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findPublishedRegularWithoutGuestsByPid($intId)
 	{
@@ -339,11 +340,11 @@ class PageModel extends \Model
 	/**
 	 * Find the parent records of a record
 	 * @param integer
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findParentsById($intId)
 	{
-		$objPages = \Database::getInstance()->prepare("SELECT *, @pid:=pid FROM tl_page WHERE id=?" . str_repeat(" UNION SELECT *, @pid:=pid FROM tl_page WHERE id=@pid", 9))
+		$objPages = Database::getInstance()->prepare("SELECT *, @pid:=pid FROM tl_page WHERE id=?" . str_repeat(" UNION SELECT *, @pid:=pid FROM tl_page WHERE id=@pid", 9))
 											->execute($intId);
 
 		if ($objPages->numRows < 1)
@@ -351,6 +352,6 @@ class PageModel extends \Model
 			return null;
 		}
 
-		return new \Model_Collection($objPages, 'tl_page');
+		return new Model_Collection($objPages, 'tl_page');
 	}
 }

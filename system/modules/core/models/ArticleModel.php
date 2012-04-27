@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Model;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class ArticleModel extends \Model
+class ArticleModel extends Model
 {
 
 	/**
@@ -56,7 +57,7 @@ class ArticleModel extends \Model
 	 * Find an article by its ID or alias and its column
 	 * @param mixed
 	 * @param integer
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findByIdOrAliasAndPid($varId, $intPid)
 	{
@@ -77,7 +78,7 @@ class ArticleModel extends \Model
 	/**
 	 * Find a published article by its ID
 	 * @param integer
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findPublishedById($intId)
 	{
@@ -98,7 +99,7 @@ class ArticleModel extends \Model
 	 * Find all published articles by their parent ID and column
 	 * @param integer
 	 * @param string
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findPublishedByPidAndColumn($intPid, $strColumn)
 	{
@@ -120,7 +121,7 @@ class ArticleModel extends \Model
 	 * Find all published articles with teaser by their parent ID and column
 	 * @param integer
 	 * @param string
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findPublishedWithTeaserByPidAndColumn($intPid, $strColumn)
 	{

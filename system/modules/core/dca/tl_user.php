@@ -483,7 +483,7 @@ class tl_user extends Backend
 		}
 
 		// Check current action
-		switch (\Input::get('act'))
+		switch (Input::get('act'))
 		{
 			case 'create':
 			case 'select':
@@ -492,9 +492,9 @@ class tl_user extends Backend
 				break;
 
 			case 'delete':
-				if (\Input::get('id') == $this->User->id)
+				if (Input::get('id') == $this->User->id)
 				{
-					$this->log('Attempt to delete own account ID "'.\Input::get('id').'"', 'tl_user checkPermission', TL_ERROR);
+					$this->log('Attempt to delete own account ID "'.Input::get('id').'"', 'tl_user checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// no break;
@@ -505,11 +505,11 @@ class tl_user extends Backend
 			default:
 				$objUser = $this->Database->prepare("SELECT admin FROM tl_user WHERE id=?")
 										  ->limit(1)
-										  ->execute(\Input::get('id'));
+										  ->execute(Input::get('id'));
 
-				if ($objUser->admin && \Input::get('act') != '')
+				if ($objUser->admin && Input::get('act') != '')
 				{
-					$this->log('Not enough permissions to '.\Input::get('act').' administrator account ID "'.\Input::get('id').'"', 'tl_user checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' administrator account ID "'.Input::get('id').'"', 'tl_user checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -534,7 +534,7 @@ class tl_user extends Backend
 	 * @param array
 	 * @return string
 	 */
-	public function addIcon($row, $label, \DataContainer $dc, $args)
+	public function addIcon($row, $label, DataContainer $dc, $args)
 	{
 		$image = $row['admin'] ? 'admin' :  'user';
 
@@ -618,10 +618,10 @@ class tl_user extends Backend
 			return '';
 		}
 
-		if (\Input::get('key') == 'su' && \Input::get('id'))
+		if (Input::get('key') == 'su' && Input::get('id'))
 		{
 			$this->Database->prepare("UPDATE tl_session SET pid=? WHERE pid=?")
-						   ->execute(\Input::get('id'), $this->User->id);
+						   ->execute(Input::get('id'), $this->User->id);
 
 			$this->redirect('contao/main.php');
 		}
@@ -635,11 +635,11 @@ class tl_user extends Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function sessionField(\DataContainer $dc)
+	public function sessionField(DataContainer $dc)
 	{
-		if (\Input::post('FORM_SUBMIT') == 'tl_user')
+		if (Input::post('FORM_SUBMIT') == 'tl_user')
 		{
-			$arrPurge = \Input::post('purge');
+			$arrPurge = Input::post('purge');
 
 			if (is_array($arrPurge))
 			{
@@ -704,7 +704,7 @@ class tl_user extends Backend
 	 * @param \DataContainer
 	 * @return mixed
 	 */
-	public function checkAdminStatus($varValue, \DataContainer $dc)
+	public function checkAdminStatus($varValue, DataContainer $dc)
 	{
 		if ($varValue == '' && $this->User->id == $dc->id)
 		{
@@ -721,7 +721,7 @@ class tl_user extends Backend
 	 * @param \DataContainer
 	 * @return mixed
 	 */
-	public function checkAdminDisable($varValue, \DataContainer $dc)
+	public function checkAdminDisable($varValue, DataContainer $dc)
 	{
 		if ($varValue == 1 && $this->User->id == $dc->id)
 		{
@@ -737,7 +737,7 @@ class tl_user extends Backend
 	 * @param \DataContainer
 	 * @return void
 	 */
-	public function storeDateAdded(\DataContainer $dc)
+	public function storeDateAdded(DataContainer $dc)
 	{
 		// Return if there is no active record (override all)
 		if (!$dc->activeRecord || $dc->activeRecord->dateAdded > 0)
@@ -772,9 +772,9 @@ class tl_user extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen(\Input::get('tid')))
+		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 
@@ -810,8 +810,8 @@ class tl_user extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check admin accounts
-		\Input::setGet('id', $intId);
-		\Input::setGet('act', 'toggle');
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
 		$this->checkPermission();
 
 		// Protect own account

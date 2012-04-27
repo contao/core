@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendModule, \Environment, \File, \Input;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleAutoload extends \BackendModule
+class ModuleAutoload extends BackendModule
 {
 
 	/**
@@ -61,10 +62,10 @@ class ModuleAutoload extends \BackendModule
 		$this->loadLanguageFile('tl_autoload');
 
 		// Create the config/autoload.php file
-		if (\Input::post('FORM_SUBMIT') == 'tl_autoload')
+		if (Input::post('FORM_SUBMIT') == 'tl_autoload')
 		{
 			// Always scan all modules in ide_compat mode
-			if (\Input::post('ide_compat'))
+			if (Input::post('ide_compat'))
 			{
 				$arrModules = array_filter(scan(TL_ROOT . '/system/modules'), function($e) {
 					return is_dir(TL_ROOT . '/system/modules/' . $e) ? $e : null;
@@ -72,7 +73,7 @@ class ModuleAutoload extends \BackendModule
 			}
 			else
 			{
-				$arrModules = \Input::post('modules');
+				$arrModules = Input::post('modules');
 			}
 
 			$intYear = date('Y');
@@ -88,7 +89,7 @@ class ModuleAutoload extends \BackendModule
 				foreach ($arrModules as $strModule)
 				{
 					// config/autoload.php exists
-					if (!\Input::post('ide_compat') && !\Input::post('override') && file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.php'))
+					if (!Input::post('ide_compat') && !Input::post('override') && file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.php'))
 					{
 						$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['tl_merge']['autoloadExists'], $strModule));
 						continue;
@@ -180,7 +181,7 @@ class ModuleAutoload extends \BackendModule
 
 					$strPackage = ucfirst($strModule);
 
-					$objFile = new \File('system/modules/' . $strModule . '/config/autoload.php');
+					$objFile = new File('system/modules/' . $strModule . '/config/autoload.php');
 					$objFile->write(
 <<<EOT
 <?php
@@ -307,9 +308,9 @@ EOT
 			}
 
 			// IDE compatibility
-			if (\Input::post('ide_compat'))
+			if (Input::post('ide_compat'))
 			{
-				$objFile = new \File('system/helper/ide_compat.php');
+				$objFile = new File('system/helper/ide_compat.php');
 				$objFile->write(
 <<<EOT
 <?php
@@ -441,7 +442,7 @@ EOT
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']);
 		$this->Template->button = $GLOBALS['TL_LANG']['MSC']['backBT'];
 		$this->Template->headline = $GLOBALS['TL_LANG']['tl_merge']['headline'];
-		$this->Template->action = ampersand(\Environment::get('request'));
+		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->available = $GLOBALS['TL_LANG']['tl_merge']['available'];
 		$this->Template->selectAll = $GLOBALS['TL_LANG']['MSC']['selectAll'];
 		$this->Template->override = $GLOBALS['TL_LANG']['tl_merge']['override'];

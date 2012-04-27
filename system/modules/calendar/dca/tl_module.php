@@ -237,7 +237,7 @@ class tl_module_calendar extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getFormats(\DataContainer $dc)
+	public function getFormats(DataContainer $dc)
 	{
 		if ($dc->activeRecord->type == 'eventmenu')
 		{
@@ -287,13 +287,13 @@ class tl_module_calendar extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getEventTemplates(\DataContainer $dc)
+	public function getEventTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('event_', $intPid);
@@ -305,13 +305,13 @@ class tl_module_calendar extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getCalendarTemplates(\DataContainer $dc)
+	public function getCalendarTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('cal_', $intPid);

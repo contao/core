@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackenTemplate, \Environment, \FaqModel, \Module, \PageModel;
 
 
 /**
@@ -41,7 +42,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleFaqList extends \Module
+class ModuleFaqList extends Module
 {
 
 	/**
@@ -65,7 +66,7 @@ class ModuleFaqList extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### FAQ LIST ###';
 			$objTemplate->title = $this->headline;
@@ -100,7 +101,7 @@ class ModuleFaqList extends \Module
 	 */
 	protected function compile()
 	{
-		$objFaq = \FaqModel::findPublishedByPids($this->faq_categories);
+		$objFaq = FaqModel::findPublishedByPids($this->faq_categories);
 
 		if ($objFaq === null)
 		{
@@ -157,11 +158,11 @@ class ModuleFaqList extends \Module
 		// Get the URL from the jumpTo page of the category
 		if (!isset($this->arrTargets[$jumpTo]))
 		{
-			$this->arrTargets[$jumpTo] = ampersand(\Environment::get('request'), true);
+			$this->arrTargets[$jumpTo] = ampersand(Environment::get('request'), true);
 
 			if ($jumpTo > 0)
 			{
-				$objTarget = \PageModel::findByPk($jumpTo);
+				$objTarget = PageModel::findByPk($jumpTo);
 
 				if ($objTarget !== null)
 				{

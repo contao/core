@@ -722,7 +722,7 @@ class tl_page extends Backend
 				}
 			}
 
-			$session['CURRENT']['IDS'] = (\Input::get('act') == 'deleteAll') ? $delete_all : $edit_all;
+			$session['CURRENT']['IDS'] = (Input::get('act') == 'deleteAll') ? $delete_all : $edit_all;
 		}
 
 		// Set allowed clipboard IDs
@@ -754,11 +754,11 @@ class tl_page extends Backend
 		$this->Session->setData($session);
 
 		// Check permissions to save and create new
-		if (\Input::get('act') == 'edit')
+		if (Input::get('act') == 'edit')
 		{
 			$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=(SELECT pid FROM tl_page WHERE id=?)")
 									  ->limit(1)
-									  ->execute(\Input::get('id'));
+									  ->execute(Input::get('id'));
 
 			if ($objPage->numRows && !$this->User->isAllowed(2, $objPage->row()))
 			{
@@ -767,14 +767,14 @@ class tl_page extends Backend
 		}
 
 		// Check current action
-		if (\Input::get('act') && \Input::get('act') != 'paste')
+		if (Input::get('act') && Input::get('act') != 'paste')
 		{
 			$permission = 0;
-			$cid = CURRENT_ID ?: \Input::get('id');
+			$cid = CURRENT_ID ?: Input::get('id');
 			$ids = ($cid != '') ? array($cid) : array();
 
 			// Set permission
-			switch (\Input::get('act'))
+			switch (Input::get('act'))
 			{
 				case 'edit':
 				case 'toggle':
@@ -783,7 +783,7 @@ class tl_page extends Backend
 
 				case 'move':
 					$permission = 2;
-					$ids[] = \Input::get('sid');
+					$ids[] = Input::get('sid');
 					break;
 
 				case 'create':
@@ -794,16 +794,16 @@ class tl_page extends Backend
 					$permission = 2;
 
 					// Check the parent page in "paste into" mode
-					if (\Input::get('mode') == 2)
+					if (Input::get('mode') == 2)
 					{
-						$ids[] = \Input::get('pid');
+						$ids[] = Input::get('pid');
 					}
 					// Check the parent's parent page in "paste after" mode
 					else
 					{
 						$objPage = $this->Database->prepare("SELECT pid FROM tl_page WHERE id=?")
 												  ->limit(1)
-												  ->execute(\Input::get('pid'));
+												  ->execute(Input::get('pid'));
 
 						$ids[] = $objPage->pid;
 					}
@@ -815,14 +815,14 @@ class tl_page extends Backend
 			}
 
 			// Check user permissions
-			if (\Input::get('act') != 'show')
+			if (Input::get('act') != 'show')
 			{
 				$pagemounts = array();
 
 				// Get all allowed pages for the current user
 				foreach ($this->User->pagemounts as $root)
 				{
-					if (\Input::get('act') != 'delete')
+					if (Input::get('act') != 'delete')
 					{
 						$pagemounts[] = $root;
 					}
@@ -834,9 +834,9 @@ class tl_page extends Backend
 				$pagemounts = array_unique($pagemounts);
 
 				// Do not allow to paste after pages on the root level (pagemounts)
-				if ((\Input::get('act') == 'cut' || \Input::get('act') == 'cutAll') && \Input::get('mode') == 1 && in_array(\Input::get('pid'), $this->eliminateNestedPages($this->User->pagemounts)))
+				if ((Input::get('act') == 'cut' || Input::get('act') == 'cutAll') && Input::get('mode') == 1 && in_array(Input::get('pid'), $this->eliminateNestedPages($this->User->pagemounts)))
 				{
-					$this->log('Not enough permissions to paste page ID '. \Input::get('id') .' after mounted page ID '. \Input::get('pid') .' (root level)', 'tl_page checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to paste page ID '. Input::get('id') .' after mounted page ID '. Input::get('pid') .' (root level)', 'tl_page checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -869,9 +869,9 @@ class tl_page extends Backend
 					}
 
 					// Check the type of the first page (not the following parent pages)
-					if ($i == 0 && \Input::get('act') != 'create' && !$this->User->hasAccess($objPage->type, 'alpty'))
+					if ($i == 0 && Input::get('act') != 'create' && !$this->User->hasAccess($objPage->type, 'alpty'))
 					{
-						$this->log('Not enough permissions to  '. \Input::get('act') .' '. $objPage->type .' pages', 'tl_page checkPermission()', TL_ERROR);
+						$this->log('Not enough permissions to  '. Input::get('act') .' '. $objPage->type .' pages', 'tl_page checkPermission()', TL_ERROR);
 
 						$error = true;
 						break;
@@ -881,7 +881,7 @@ class tl_page extends Backend
 				// Redirect if there is an error
 				if ($error)
 				{
-					$this->log('Not enough permissions to '. \Input::get('act') .' page ID '. $cid .' or paste after/into page ID '. \Input::get('pid'), 'tl_page checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '. Input::get('act') .' page ID '. $cid .' or paste after/into page ID '. Input::get('pid'), 'tl_page checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 			}
@@ -898,8 +898,8 @@ class tl_page extends Backend
 		// Set a new node
 		if (isset($_GET['node']))
 		{
-			$this->Session->set('tl_page_node', \Input::get('node'));
-			$this->redirect(preg_replace('/&node=[^&]*/', '', \Environment::get('request')));
+			$this->Session->set('tl_page_node', Input::get('node'));
+			$this->redirect(preg_replace('/&node=[^&]*/', '', Environment::get('request')));
 		}
 
 		$intNode = $this->Session->get('tl_page_node');
@@ -988,15 +988,15 @@ class tl_page extends Backend
 	 * @param \DataContainer
 	 * @return void
 	 */
-	public function setRootType(\DataContainer $dc)
+	public function setRootType(DataContainer $dc)
 	{
-		if (\Input::get('act') != 'create')
+		if (Input::get('act') != 'create')
 		{
 			return;
 		}	
 
 		// Insert into
-		if (\Input::get('pid') == 0)
+		if (Input::get('pid') == 0)
 		{
 			$GLOBALS['TL_DCA']['tl_page']['fields']['type']['default'] = 'root';
 		}
@@ -1006,7 +1006,7 @@ class tl_page extends Backend
 		{
 			$objPage = $this->Database->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
 									  ->limit(1)
-									  ->execute(\Input::get('pid'));
+									  ->execute(Input::get('pid'));
 
 			if ($objPage->pid == 0)
 			{
@@ -1023,11 +1023,11 @@ class tl_page extends Backend
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public function checkRootType($varValue, \DataContainer $dc)
+	public function checkRootType($varValue, DataContainer $dc)
 	{
 		if ($varValue != 'root' && $dc->activeRecord->pid == 0)
 		{
-			throw new \Exception($GLOBALS['TL_LANG']['ERR']['topLevelRoot']);
+			throw new Exception($GLOBALS['TL_LANG']['ERR']['topLevelRoot']);
 		}
 
 		return $varValue;
@@ -1040,7 +1040,7 @@ class tl_page extends Backend
 	 */
 	public function showFallbackWarning()
 	{
-		if (\Input::get('act') != '')
+		if (Input::get('act') != '')
 		{
 			return;
 		}
@@ -1058,7 +1058,7 @@ class tl_page extends Backend
 	 * @return string
 	 * @throws \Exception
 	 */
-	public function generateAlias($varValue, \DataContainer $dc)
+	public function generateAlias($varValue, DataContainer $dc)
 	{
 		$autoAlias = false;
 
@@ -1117,7 +1117,7 @@ class tl_page extends Backend
 				}
 				else
 				{
-					throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+					throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 				}
 			}
 		}
@@ -1142,7 +1142,7 @@ class tl_page extends Backend
 	 * @param \DataContainer
 	 * @return void
 	 */
-	public function generateArticle(\DataContainer $dc)
+	public function generateArticle(DataContainer $dc)
 	{
 		// Return if there is no active record (override all)
 		if (!$dc->activeRecord)
@@ -1194,7 +1194,7 @@ class tl_page extends Backend
 	 * @return void
 	 * @throws \Exception
 	 */
-	public function checkFeedAlias($varValue, \DataContainer $dc)
+	public function checkFeedAlias($varValue, DataContainer $dc)
 	{
 		// No change or empty value
 		if ($varValue == $dc->value || $varValue == '')
@@ -1207,7 +1207,7 @@ class tl_page extends Backend
 		// Alias exists
 		if (array_search($varValue, $arrFeeds) !== false)
 		{
-			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 		}
 
 		return $varValue;
@@ -1221,11 +1221,11 @@ class tl_page extends Backend
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public function checkJumpTo($varValue, \DataContainer $dc)
+	public function checkJumpTo($varValue, DataContainer $dc)
 	{
 		if ($varValue == $dc->id)
 		{
-			throw new \Exception($GLOBALS['TL_LANG']['ERR']['circularReference']);
+			throw new Exception($GLOBALS['TL_LANG']['ERR']['circularReference']);
 		}
 
 		return $varValue;
@@ -1250,7 +1250,7 @@ class tl_page extends Backend
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public function checkFallback($varValue, \DataContainer $dc)
+	public function checkFallback($varValue, DataContainer $dc)
 	{
 		if ($varValue == '')
 		{
@@ -1262,7 +1262,7 @@ class tl_page extends Backend
 
 		if ($objPage->numRows)
 		{
-			throw new \Exception($GLOBALS['TL_LANG']['ERR']['multipleFallback']);
+			throw new Exception($GLOBALS['TL_LANG']['ERR']['multipleFallback']);
 		}
 
 		return $varValue;
@@ -1278,7 +1278,7 @@ class tl_page extends Backend
 	{
 		if ($varValue != '' && !preg_match('@^https?://@', $varValue))
 		{
-			$varValue = (\Environment::get('ssl') ? 'https://' : 'http://') . $varValue;
+			$varValue = (Environment::get('ssl') ? 'https://' : 'http://') . $varValue;
 		}
 
 		return $varValue;
@@ -1290,7 +1290,7 @@ class tl_page extends Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function getPageTypes(\DataContainer $dc)
+	public function getPageTypes(DataContainer $dc)
 	{
 		$arrOptions = array();
 
@@ -1340,7 +1340,7 @@ class tl_page extends Backend
 	 * @param boolean
 	 * @return string
 	 */
-	public function addIcon($row, $label, \DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false)
+	public function addIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false)
 	{
 		if ($blnProtected)
 		{
@@ -1356,7 +1356,7 @@ class tl_page extends Backend
 		}
 
 		// Mark root pages
-		if ($row['type'] == 'root' || \Input::get('do') == 'article')
+		if ($row['type'] == 'root' || Input::get('do') == 'article')
 		{
 			$label = '<strong>' . $label . '</strong>';
 		}
@@ -1458,7 +1458,7 @@ class tl_page extends Backend
 	 * @param array
 	 * @return string
 	 */
-	public function pastePage(\DataContainer $dc, $row, $table, $cr, $arrClipboard=null)
+	public function pastePage(DataContainer $dc, $row, $table, $cr, $arrClipboard=null)
 	{
 		$disablePA = false;
 		$disablePI = false;
@@ -1471,11 +1471,11 @@ class tl_page extends Backend
 		}
 
 		// Prevent adding non-root pages on top-level
-		if (\Input::get('mode') != 'create' && $row['pid'] == 0)
+		if (Input::get('mode') != 'create' && $row['pid'] == 0)
 		{
 			$objPage = $this->Database->prepare("SELECT * FROM " . $table . " WHERE id=?")
 									  ->limit(1)
-									  ->execute(\Input::get('id'));
+									  ->execute(Input::get('id'));
 
 			if ($objPage->type != 'root')
 			{
@@ -1494,7 +1494,7 @@ class tl_page extends Backend
 			// Disable "paste into" button if there is no permission 2 (move) or 1 (create) for the current page
 			if (!$disablePI)
 			{
-				if (!$this->User->isAllowed(2, $row) || (\Input::get('mode') == 'create' && !$this->User->isAllowed(1, $row)))
+				if (!$this->User->isAllowed(2, $row) || (Input::get('mode') == 'create' && !$this->User->isAllowed(1, $row)))
 				{
 					$disablePI = true;
 				}
@@ -1507,7 +1507,7 @@ class tl_page extends Backend
 			// Disable "paste after" button if there is no permission 2 (move) or 1 (create) for the parent page
 			if (!$disablePA && $objPage->numRows)
 			{
-				if (!$this->User->isAllowed(2, $objPage->row()) || (\Input::get('mode') == 'create' && !$this->User->isAllowed(1, $objPage->row())))
+				if (!$this->User->isAllowed(2, $objPage->row()) || (Input::get('mode') == 'create' && !$this->User->isAllowed(1, $objPage->row())))
 				{
 					$disablePA = true;
 				}
@@ -1578,7 +1578,7 @@ class tl_page extends Backend
 	 */
 	public function addAliasButton()
 	{
-		if (\Input::post('FORM_SUBMIT') == 'tl_select' && isset($_POST['alias']))
+		if (Input::post('FORM_SUBMIT') == 'tl_select' && isset($_POST['alias']))
 		{
 			$session = $this->Session->getData();
 
@@ -1609,7 +1609,7 @@ class tl_page extends Backend
 	 * @param \DataContainer
 	 * @return void
 	 */
-	public function updateSitemap(\DataContainer $dc)
+	public function updateSitemap(DataContainer $dc)
 	{
 		$this->import('Automator');
 		$this->Automator->generateSitemap($dc->id);
@@ -1628,9 +1628,9 @@ class tl_page extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen(\Input::get('tid')))
+		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 
@@ -1669,8 +1669,8 @@ class tl_page extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check permissions to edit
-		\Input::setGet('id', $intId);
-		\Input::setGet('act', 'toggle');
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
 		$this->checkPermission();
 
 		// Check permissions to publish

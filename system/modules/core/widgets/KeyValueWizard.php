@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Environment, \Input, \Widget;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class KeyValueWizard extends \Widget
+class KeyValueWizard extends Widget
 {
 
 	/**
@@ -139,33 +140,33 @@ class KeyValueWizard extends \Widget
 		$strCommand = 'cmd_' . $this->strField;
 
 		// Change the order
-		if (\Input::get($strCommand) && is_numeric(\Input::get('cid')) && \Input::get('id') == $this->currentRecord)
+		if (Input::get($strCommand) && is_numeric(Input::get('cid')) && Input::get('id') == $this->currentRecord)
 		{
 			$this->import('Database');
 
-			switch (\Input::get($strCommand))
+			switch (Input::get($strCommand))
 			{
 				case 'copy':
-					array_insert($this->varValue, \Input::get('cid'), array($this->varValue[\Input::get('cid')]));
+					array_insert($this->varValue, Input::get('cid'), array($this->varValue[Input::get('cid')]));
 					break;
 
 				case 'up':
-					$this->varValue = array_move_up($this->varValue, \Input::get('cid'));
+					$this->varValue = array_move_up($this->varValue, Input::get('cid'));
 					break;
 
 				case 'down':
-					$this->varValue = array_move_down($this->varValue, \Input::get('cid'));
+					$this->varValue = array_move_down($this->varValue, Input::get('cid'));
 					break;
 
 				case 'delete':
-					$this->varValue = array_delete($this->varValue, \Input::get('cid'));
+					$this->varValue = array_delete($this->varValue, Input::get('cid'));
 					break;
 			}
 
 			$this->Database->prepare("UPDATE " . $this->strTable . " SET " . $this->strField . "=? WHERE id=?")
 						   ->execute(serialize($this->varValue), $this->currentRecord);
 
-			$this->redirect(preg_replace('/&(amp;)?cid=[^&]*/i', '', preg_replace('/&(amp;)?' . preg_quote($strCommand, '/') . '=[^&]*/i', '', \Environment::get('request'))));
+			$this->redirect(preg_replace('/&(amp;)?cid=[^&]*/i', '', preg_replace('/&(amp;)?' . preg_quote($strCommand, '/') . '=[^&]*/i', '', Environment::get('request'))));
 		}
 
 		// Make sure there is at least an empty array

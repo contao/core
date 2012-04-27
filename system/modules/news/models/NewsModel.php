@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Model;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class NewsModel extends \Model
+class NewsModel extends Model
 {
 
 	/**
@@ -57,7 +58,7 @@ class NewsModel extends \Model
 	 * @param integer
 	 * @param string
 	 * @param array
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findPublishedByParentAndIdOrAlias($intId, $varAlias, $arrPids)
 	{
@@ -85,7 +86,7 @@ class NewsModel extends \Model
 	 * @param boolean
 	 * @param integer
 	 * @param integer
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findPublishedByPids($arrPids, $blnFeatured=null, $intLimit=0, $intOffset=0)
 	{
@@ -161,7 +162,7 @@ class NewsModel extends \Model
 	/**
 	 * Find published news items with the default redirect target by their parent ID
 	 * @param integer
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findPublishedDefaultByPid($intPid)
 	{
@@ -182,7 +183,7 @@ class NewsModel extends \Model
 	 * Find published news items by their parent ID
 	 * @param integer
 	 * @param integer
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findPublishedByPid($intId, $intLimit=0)
 	{
@@ -209,7 +210,7 @@ class NewsModel extends \Model
 	 * @param array
 	 * @param integer
 	 * @param integer
-	 * @return \Contao\Model_Collection|null
+	 * @return \Model_Collection|null
 	 */
 	public static function findPublishedFromToByPids($intFrom, $intTo, $arrPids, $intLimit=0, $intOffset=0)
 	{

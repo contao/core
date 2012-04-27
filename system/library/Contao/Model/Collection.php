@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \System, \Exception;
+use \Database_Result, \System, \Exception;
 
 
 /**
@@ -82,7 +82,7 @@ class Model_Collection extends System
 	 * @param \Database_Result
 	 * @param string
 	 */
-	public function __construct(\Database_Result $objResult, $strTable)
+	public function __construct(Database_Result $objResult, $strTable)
 	{
 		parent::__construct();
 		$this->objResult = $objResult;

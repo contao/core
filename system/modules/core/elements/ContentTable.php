@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \ContentElement, \Input;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentTable extends \ContentElement
+class ContentTable extends ContentElement
 {
 
 	/**
@@ -95,7 +96,7 @@ class ContentTable extends \ContentElement
 					$co = 'TS_TABLE_' . $this->id;
 					$so = ($this->sortOrder == 'descending') ? 'desc' : 'asc';
 
-					if (\Input::cookie($co) == '')
+					if (Input::cookie($co) == '')
 					{
 						setcookie($co, $i . '|' . $so, 0, '/'); # FIXME: use setCookie()?
 					}

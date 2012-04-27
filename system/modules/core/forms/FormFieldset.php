@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \BackendTemplate, \Widget;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FormFieldset extends \Widget
+class FormFieldset extends Widget
 {
 
 	/**
@@ -71,7 +72,7 @@ class FormFieldset extends \Widget
 		// Return a wildcard in the back end
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 
 			if ($this->fsType == 'fsStart')
 			{

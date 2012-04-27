@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Model;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class MemberModel extends \Model
+class MemberModel extends Model
 {
 
 	/**
@@ -56,7 +57,7 @@ class MemberModel extends \Model
 	 * Find an active member by his/her e-mail-address and username
 	 * @param string
 	 * @param string
-	 * @return \Contao\Model|null
+	 * @return \Model|null
 	 */
 	public static function findActiveByEmailAndUsername($strEmail, $strUsername=null)
 	{

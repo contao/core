@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Widget;
 
 
 /**
@@ -43,7 +44,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class TextStore extends \Widget
+class TextStore extends Widget
 {
 
 	/**

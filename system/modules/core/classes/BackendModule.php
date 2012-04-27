@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Backend, \BackendTemplate, \DataContainer, \Exception;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-abstract class BackendModule extends \Backend
+abstract class BackendModule extends Backend
 {
 
 	/**
@@ -68,7 +69,7 @@ abstract class BackendModule extends \Backend
 	 * Initialize the object
 	 * @param \DataContainer
 	 */
-	public function __construct(\DataContainer $objDc=null)
+	public function __construct(DataContainer $objDc=null)
 	{
 		parent::__construct();
 		$this->objDc = $objDc;
@@ -103,7 +104,7 @@ abstract class BackendModule extends \Backend
 		{
 			return $this->objDc->$strKey;
 		}
-		catch (\Exception $e)
+		catch (Exception $e)
 		{
 			return parent::__get($strKey);
 		}
@@ -116,7 +117,7 @@ abstract class BackendModule extends \Backend
 	 */
 	public function generate()
 	{
-		$this->Template = new \BackendTemplate($this->strTemplate);
+		$this->Template = new BackendTemplate($this->strTemplate);
 		$this->compile();
 
 		return $this->Template->parse();

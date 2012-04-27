@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \ContentElement, \File, \FilesModel, \FrontendTemplate, \Input, \Pagination;
 
 
 /**
@@ -42,12 +43,12 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentGallery extends \ContentElement
+class ContentGallery extends ContentElement
 {
 
 	/**
 	 * Files object
-	 * @var \Contao\FilesCollection
+	 * @var \FilesModel
 	 */
 	protected $objFiles;
 
@@ -92,7 +93,7 @@ class ContentGallery extends \ContentElement
 		}
 
 		// Get the file entries from the database
-		$this->objFiles = \FilesModel::findMultipleByIds($this->multiSRC);
+		$this->objFiles = FilesModel::findMultipleByIds($this->multiSRC);
 
 		if ($this->objFiles === null)
 		{
@@ -128,7 +129,7 @@ class ContentGallery extends \ContentElement
 			// Single files
 			if ($objFiles->type == 'file')
 			{
-				$objFile = new \File($objFiles->path);
+				$objFile = new File($objFiles->path);
 
 				if (!$objFile->isGdImage)
 				{
@@ -161,7 +162,7 @@ class ContentGallery extends \ContentElement
 			// Folders
 			else
 			{
-				$objSubfiles = \FilesModel::findByPid($objFiles->id);
+				$objSubfiles = FilesModel::findByPid($objFiles->id);
 
 				if ($objSubfiles === null)
 				{
@@ -176,7 +177,7 @@ class ContentGallery extends \ContentElement
 						continue;
 					}
 
-					$objFile = new \File($objSubfiles->path);
+					$objFile = new File($objSubfiles->path);
 
 					if (!$objFile->isGdImage)
 					{
@@ -286,7 +287,7 @@ class ContentGallery extends \ContentElement
 		if ($this->perPage > 0)
 		{
 			// Get the current page
-			$page = \Input::get('page') ? \Input::get('page') : 1;
+			$page = Input::get('page') ?: 1;
 
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))
@@ -304,7 +305,7 @@ class ContentGallery extends \ContentElement
 			$offset = ($page - 1) * $this->perPage;
 			$limit = min($this->perPage + $offset, $total);
 
-			$objPagination = new \Pagination($total, $this->perPage);
+			$objPagination = new Pagination($total, $this->perPage);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -382,7 +383,7 @@ class ContentGallery extends \ContentElement
 			$strTemplate = $this->galleryTpl;
 		}
 
-		$objTemplate = new \FrontendTemplate($strTemplate);
+		$objTemplate = new FrontendTemplate($strTemplate);
 		$objTemplate->setData($this->arrData);
 
 		$objTemplate->body = $body;

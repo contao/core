@@ -563,28 +563,28 @@ class tl_calendar_events extends Backend
 			$root = $this->User->calendars;
 		}
 
-		$id = strlen(\Input::get('id')) ? \Input::get('id') : CURRENT_ID;
+		$id = strlen(Input::get('id')) ? Input::get('id') : CURRENT_ID;
 
 		// Check current action
-		switch (\Input::get('act'))
+		switch (Input::get('act'))
 		{
 			case 'paste':
 				// Allow
 				break;
 
 			case 'create':
-				if (!strlen(\Input::get('pid')) || !in_array(\Input::get('pid'), $root))
+				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create events in calendar ID "'.\Input::get('pid').'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to create events in calendar ID "'.Input::get('pid').'"', 'tl_calendar_events checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
 			case 'cut':
 			case 'copy':
-				if (!in_array(\Input::get('pid'), $root))
+				if (!in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to '.\Input::get('act').' event ID "'.$id.'" to calendar ID "'.\Input::get('pid').'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' event ID "'.$id.'" to calendar ID "'.Input::get('pid').'"', 'tl_calendar_events checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -605,7 +605,7 @@ class tl_calendar_events extends Backend
 
 				if (!in_array($objCalendar->pid, $root))
 				{
-					$this->log('Not enough permissions to '.\Input::get('act').' event ID "'.$id.'" of calendar ID "'.$objCalendar->pid.'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' event ID "'.$id.'" of calendar ID "'.$objCalendar->pid.'"', 'tl_calendar_events checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -637,9 +637,9 @@ class tl_calendar_events extends Backend
 				break;
 
 			default:
-				if (strlen(\Input::get('act')))
+				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.\Input::get('act').'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', 'tl_calendar_events checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
@@ -659,7 +659,7 @@ class tl_calendar_events extends Backend
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public function generateAlias($varValue, \DataContainer $dc)
+	public function generateAlias($varValue, DataContainer $dc)
 	{
 		$autoAlias = false;
 
@@ -676,7 +676,7 @@ class tl_calendar_events extends Backend
 		// Check whether the alias exists
 		if ($objAlias->numRows > 1 && !$autoAlias)
 		{
-			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 		}
 
 		// Add ID to alias
@@ -695,7 +695,7 @@ class tl_calendar_events extends Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function setEmptyEndTime($varValue, \DataContainer $dc)
+	public function setEmptyEndTime($varValue, DataContainer $dc)
 	{
 		if ($varValue === '')
 		{
@@ -777,7 +777,7 @@ class tl_calendar_events extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getArticleAlias(\DataContainer $dc)
+	public function getArticleAlias(DataContainer $dc)
 	{
 		$arrPids = array();
 		$arrAlias = array();
@@ -823,7 +823,7 @@ class tl_calendar_events extends Backend
 	 * @param \DataContainer
 	 * @return void
 	 */
-	public function adjustTime(\DataContainer $dc)
+	public function adjustTime(DataContainer $dc)
 	{
 		// Return if there is no active record (override all)
 		if (!$dc->activeRecord)
@@ -915,7 +915,7 @@ class tl_calendar_events extends Backend
 	public function scheduleUpdate()
 	{
 		// Return if there is no ID 
-		if (!CURRENT_ID || \Input::get('act') == 'copy')
+		if (!CURRENT_ID || Input::get('act') == 'copy')
 		{
 			return;
 		}
@@ -932,9 +932,9 @@ class tl_calendar_events extends Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function pagePicker(\DataContainer $dc)
+	public function pagePicker(DataContainer $dc)
 	{
-		return ' <a href="contao/page.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((\Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="contao/page.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
@@ -950,9 +950,9 @@ class tl_calendar_events extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen(\Input::get('tid')))
+		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(\Input::get('tid'), (\Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 
@@ -982,8 +982,8 @@ class tl_calendar_events extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check permissions to edit
-		\Input::setGet('id', $intId);
-		\Input::setGet('act', 'toggle');
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
 		$this->checkPermission();
 
 		// Check permissions to publish

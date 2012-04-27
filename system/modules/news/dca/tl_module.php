@@ -264,13 +264,13 @@ class tl_module_news extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getNewsTemplates(\DataContainer $dc)
+	public function getNewsTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('news_', $intPid);

@@ -880,13 +880,13 @@ class tl_module extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getNavigationTemplates(\DataContainer $dc)
+	public function getNavigationTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('nav_', $intPid);
@@ -898,13 +898,13 @@ class tl_module extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getMemberTemplates(\DataContainer $dc)
+	public function getMemberTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('member_', $intPid);
@@ -916,13 +916,13 @@ class tl_module extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getSearchTemplates(\DataContainer $dc)
+	public function getSearchTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('search_', $intPid);
@@ -934,13 +934,13 @@ class tl_module extends Backend
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getRssTemplates(\DataContainer $dc)
+	public function getRssTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if (\Input::get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = \Input::get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('rss_', $intPid);

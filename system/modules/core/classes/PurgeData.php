@@ -32,6 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
+use \Backend, \BackendTemplate, \Environment, \Input, \executable;
 
 
 /**
@@ -42,7 +43,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PurgeData extends \Backend implements \executable
+class PurgeData extends Backend implements executable
 {
 
 	/**
@@ -51,7 +52,7 @@ class PurgeData extends \Backend implements \executable
 	 */
 	public function isActive()
 	{
-		return (\Input::post('FORM_SUBMIT') == 'tl_purge');
+		return (Input::post('FORM_SUBMIT') == 'tl_purge');
 	}
 
 
@@ -62,7 +63,7 @@ class PurgeData extends \Backend implements \executable
 	public function run()
 	{
 		$arrJobs = array();
-		$objTemplate = new \BackendTemplate('be_purge_data');
+		$objTemplate = new BackendTemplate('be_purge_data');
 		$objTemplate->isActive = $this->isActive();
 
 		// Confirmation message
@@ -84,9 +85,9 @@ class PurgeData extends \Backend implements \executable
 		}
 
 		// Run the jobs
-		if (\Input::post('FORM_SUBMIT') == 'tl_purge')
+		if (Input::post('FORM_SUBMIT') == 'tl_purge')
 		{
-			$purge = \Input::post('purge');
+			$purge = Input::post('purge');
 
 			if (is_array($purge) && !empty($purge))
 			{
@@ -190,7 +191,7 @@ class PurgeData extends \Backend implements \executable
 		}
 
 		$objTemplate->jobs = $arrJobs;
-		$objTemplate->action = ampersand(\Environment::get('request'));
+		$objTemplate->action = ampersand(Environment::get('request'));
 		$objTemplate->headline = $GLOBALS['TL_LANG']['tl_maintenance']['clearCache'];
 		$objTemplate->job = $GLOBALS['TL_LANG']['tl_maintenance']['job'];
 		$objTemplate->description = $GLOBALS['TL_LANG']['tl_maintenance']['description'];

@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Environment, \System;
+use \Environment, \FeedItem, \System;
 
 
 /**
@@ -120,7 +120,7 @@ class Feed extends System
 	 * @param \FeedItem
 	 * @return void
 	 */
-	public function addItem(\FeedItem $objItem)
+	public function addItem(FeedItem $objItem)
 	{
 		$this->arrItems[] = $objItem;
 	}

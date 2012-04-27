@@ -594,7 +594,7 @@ class tl_settings extends Backend
 			{
 				if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
 				{
-					$objFile = new \File('system/modules/' . $strModule . '/.skip');
+					$objFile = new File('system/modules/' . $strModule . '/.skip');
 					$objFile->write('As long as this file exists, the module will be ignored.');
 					$objFile->close();
 				}
@@ -604,7 +604,7 @@ class tl_settings extends Backend
 			{
 				if (file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
 				{
-					$objFile = new \File('system/modules/' . $strModule . '/.skip');
+					$objFile = new File('system/modules/' . $strModule . '/.skip');
 					$objFile->delete();
 				}
 			}
@@ -698,7 +698,7 @@ class tl_settings extends Backend
 		}
 		elseif (preg_match('@^(assets|contao|plugins|share|system|templates)(/|$)@', $varValue))
 		{
-			throw new \Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
+			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}
 
 		return $varValue;
@@ -714,7 +714,7 @@ class tl_settings extends Backend
 	{
 		if ($varValue != '' && !preg_match('@^https?://@', $varValue))
 		{
-			$varValue = (\Environment::get('ssl') ? 'https://' : 'http://') . $varValue;
+			$varValue = (Environment::get('ssl') ? 'https://' : 'http://') . $varValue;
 		}
 
 		return $varValue;
