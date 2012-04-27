@@ -52,32 +52,41 @@ class Theme extends Backend
 	 */
 	public function importTheme()
 	{
+		$this->import('BackendUser', 'User');
+		$class = $this->User->uploader;
+
+		// See #4086
+		if (!$this->classFileExists($class))
+		{
+			$class = 'FileUpload';
+		}
+
+		$objUploader = new $class();
+
 		if (Input::post('FORM_SUBMIT') == 'tl_theme_import')
 		{
-			$source = Input::post('source', true);
-
-			if ($source == '')
+			if (!Input::post('confirm'))
 			{
-				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
-				$this->reload();
-			}
+				$arrUploaded = $objUploader->uploadTo('system/tmp', 'files');
 
-			$arrFiles = array();
-			$objFiles = FilesModel::findMultipleByIds(trimsplit(',', $source));
+				if (empty($arrUploaded))
+				{
+					$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
+					$this->reload();
+				}
 
-			// Skip invalid entries
-			if ($objFiles !== null)
-			{
-				while ($objFiles->next())
+				$arrFiles = array();
+
+				foreach ($arrUploaded as $strFile)
 				{
 					// Skip folders
-					if (is_dir(TL_ROOT . '/' . $objFiles->path))
+					if (is_dir(TL_ROOT . '/' . $strFile))
 					{
-						$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], $objFiles->name));
+						$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], basename($strFile)));
 						continue;
 					}
 
-					$objFile = new File($objFiles->path);
+					$objFile = new File($strFile);
 
 					// Skip anything but .cto files
 					if ($objFile->extension != 'cto')
@@ -86,11 +95,15 @@ class Theme extends Backend
 						continue;
 					}
 
-					$arrFiles[] = $objFiles->path;
+					$arrFiles[] = $strFile;
 				}
 			}
+			else
+			{
+				$arrFiles = explode(',', $this->Session->get('uploaded_themes'));
+			}
 
-			// Check wether there are any files left
+			// Check whether there are any files
 			if (empty($arrFiles))
 			{
 				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
@@ -114,11 +127,10 @@ class Theme extends Backend
 			}
 			else
 			{
-				return $this->compareThemeFiles($arrFiles, $arrDbFields, $source);
+				$this->Session->set('uploaded_themes', implode(',', $arrFiles));
+				return $this->compareThemeFiles($arrFiles, $arrDbFields);
 			}
 		}
-
-		$objTree = new FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_theme']['fields']['source'], 'source', null, 'source', 'tl_theme'));
 
 		// Return the form
 		return '
@@ -128,13 +140,14 @@ class Theme extends Backend
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_theme']['importTheme'][1].'</h2>
 '.$this->getMessages().'
-<form action="'.ampersand(Environment::get('request'), true).'" id="tl_theme_import" class="tl_form" method="post">
+<form action="'.ampersand(Environment::get('request'), true).'" id="tl_theme_import" class="tl_form" method="post" enctype="multipart/form-data">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_theme_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
+<input type="hidden" name="MAX_FILE_SIZE" value="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'">
 
 <div class="tl_tbox">
-  <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_theme']['source'][0].'</label> <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.openModalIframe({\'width\':765,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MSC']['filetree']).'\',\'url\':this.href});return false">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom"') . '</a></h3>'.$objTree->generate().(isset($GLOBALS['TL_LANG']['tl_theme']['source'][1]) ? '
+  <h3>'.$GLOBALS['TL_LANG']['tl_theme']['source'][0].'</h3>'.$objUploader->generateMarkup().(isset($GLOBALS['TL_LANG']['tl_theme']['source'][1]) ? '
   <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['tl_theme']['source'][1].'</p>' : '').'
 </div>
 
@@ -156,10 +169,9 @@ class Theme extends Backend
 	 * whether there are custom layout sections 
 	 * @param array
 	 * @param array
-	 * @param string
 	 * @return string
 	 */
-	protected function compareThemeFiles($arrFiles, $arrDbFields, $source)
+	protected function compareThemeFiles($arrFiles, $arrDbFields)
 	{
 		$return = '
 <div id="tl_buttons">
@@ -172,7 +184,6 @@ class Theme extends Backend
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_theme_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
-<input type="hidden" name="source" value="'.$source.'">
 <input type="hidden" name="confirm" value="1">';
 
 		$count = 0;
@@ -378,7 +389,7 @@ class Theme extends Backend
 				}
 
 				// Limit file operations to files and the templates directory
-				if (strncmp($objArchive->file_name, 'files/', 6) !== 0 && strncmp($objArchive->file_name, 'templates/', 10) !== 0)
+				if (strncmp($objArchive->file_name, 'files/', 6) !== 0 && strncmp($objArchive->file_name, 'tl_files/', 9) !== 0 && strncmp($objArchive->file_name, 'templates/', 10) !== 0)
 				{
 					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['invalidFile'], $objArchive->file_name));
 					continue;
@@ -389,10 +400,16 @@ class Theme extends Backend
 				{
 					$strFileName = $objArchive->file_name;
 
-					// Override the files directory
-					if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files' && strncmp($objArchive->file_name, 'files/', 6) === 0)
+					// Support the old "tl_files" directory
+					if (strncmp($strFileName, 'tl_files/', 9) === 0)
 					{
-						$strFileName = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $objArchive->file_name);
+						$strFileName = substr($strFileName, 3);
+					}
+
+					// Override the files directory
+					if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files' && strncmp($strFileName, 'files/', 6) === 0)
+					{
+						$strFileName = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $strFileName);
 					}
 
 					$objFile = new File($strFileName);
@@ -441,6 +458,13 @@ class Theme extends Backend
 			{
 				foreach ($arrNewFolders as $strFolder)
 				{
+					// Support the old "tl_files" folder
+					if (strncmp($strFolder, 'tl_files/', 9) === 0)
+					{
+						$strFolder = substr($strFolder, 3);
+					}
+
+					// Override the files directory
 					if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files')
 					{
 						$strFolder = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $strFolder);
@@ -451,7 +475,7 @@ class Theme extends Backend
 					$intNextPid = null;
 					$arrParents = array();
 
-					while ($strTmp != '' && $strTmp != $GLOBALS['TL_CONFIG']['uploadPath'])
+					while ($strTmp != '' && $strTmp != '.' && $strTmp != $GLOBALS['TL_CONFIG']['uploadPath'])
 					{
 						$arrParents[] = $strTmp;
 						$strTmp = dirname($strTmp);
@@ -471,6 +495,7 @@ class Theme extends Backend
 								}
 								else
 								{
+									dump($strParent);
 									$objPid = FilesModel::findByPath(dirname($strParent));
 									$intNextPid = $objPid->id;
 								}
@@ -539,6 +564,12 @@ class Theme extends Backend
 					{
 						$value = $fields->item($k)->nodeValue;
 						$name = $fields->item($k)->getAttribute('name');
+
+						// Support the old "tl_files" folder
+						if (strncmp($value, 'tl_files/', 9) === 0)
+						{
+							$value = substr($value, 3);
+						}
 
 						// Skip NULL values
 						if ($value == 'NULL')
@@ -644,8 +675,13 @@ class Theme extends Backend
 						// Replace the file paths in singleSRC fields with their tl_files ID
 						elseif (($table == 'tl_theme' && $name == 'screenshot') || ($table == 'tl_module' && $name == 'singleSRC') || ($table == 'tl_module' && $name == 'reg_homeDir'))
 						{
-							if ($value != '')
+							if ($value === null)
 							{
+								$value = ''; // the field cannot be NULL
+							}
+							elseif ($value != '')
+							{
+								// Do not use the FilesModel here – tables are locked!
 								$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE path=?")
 														  ->limit(1)
 														  ->executeUncached($value);
@@ -663,6 +699,13 @@ class Theme extends Backend
 							{
 								foreach ($tmp as $kk=>$vv)
 								{
+									// Support the old "tl_files" folder
+									if (strncmp($vv, 'tl_files/', 9) === 0)
+									{
+										$vv = substr($vv, 3);
+									}
+
+									// Do not use the FilesModel here – tables are locked!
 									$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE path=?")
 															  ->limit(1)
 															  ->executeUncached($vv);
@@ -702,8 +745,10 @@ class Theme extends Backend
 			$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));
 		}
 
-		// Redirect
 		setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+		$this->Session->remove('uploaded_themes');
+
+		// Redirect
 		$this->redirect(str_replace('&key=importTheme', '', Environment::get('request')));
 	}
 
