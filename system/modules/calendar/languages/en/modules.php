@@ -35,6 +35,12 @@ $GLOBALS['TL_LANG']['MOD']['calendar'] = array('Events', 'Manage events and disp
 
 
 /**
+ * Custom actions
+ */
+$GLOBALS['TL_LANG']['MOD']['tl_calendar_feed'] = 'Calendar feeds';
+
+
+/**
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['events']      = 'Events';

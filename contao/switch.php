@@ -165,7 +165,6 @@ class PreviewSwitch extends Backend
 		$this->Template->apply = $GLOBALS['TL_LANG']['MSC']['apply'];
 		$this->Template->reload = $GLOBALS['TL_LANG']['MSC']['reload'];
 		$this->Template->feUser = $GLOBALS['TL_LANG']['MSC']['feUser'];
-		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->lblHide = $GLOBALS['TL_LANG']['MSC']['hiddenHide'];
 		$this->Template->lblShow = $GLOBALS['TL_LANG']['MSC']['hiddenShow'];

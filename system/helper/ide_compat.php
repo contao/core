@@ -207,7 +207,6 @@ class ModuleRssReader extends Contao\ModuleRssReader {}
 class ModuleSearch extends Contao\ModuleSearch {}
 class ModuleSitemap extends Contao\ModuleSitemap {}
 class ModuleUser extends Contao\ModuleUser {}
-class ModuleWizard extends Contao\ModuleWizard {}
 class PageError403 extends Contao\PageError403 {}
 class PageError404 extends Contao\PageError404 {}
 class PageForward extends Contao\PageForward {}
@@ -224,6 +223,7 @@ class InputUnit extends Contao\InputUnit {}
 class KeyValueWizard extends Contao\KeyValueWizard {}
 class ListWizard extends Contao\ListWizard {}
 class MetaWizard extends Contao\MetaWizard {}
+class ModuleWizard extends Contao\ModuleWizard {}
 class OptionWizard extends Contao\OptionWizard {}
 class PageSelector extends Contao\PageSelector {}
 class PageTree extends Contao\PageTree {}

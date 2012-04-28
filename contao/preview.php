@@ -75,7 +75,7 @@ class Preview extends Backend
 
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
+		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['fePreview']);
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->site = Input::get('site', true);
 

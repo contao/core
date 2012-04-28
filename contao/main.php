@@ -112,16 +112,19 @@ class Main extends Backend
 		if (Input::get('act') == 'error')
 		{
 			$this->Template->error = $GLOBALS['TL_LANG']['ERR']['general'];
+			$this->Template->title = $GLOBALS['TL_LANG']['ERR']['general'];
 		}
 		// Welcome screen
 		elseif (!Input::get('do') && !Input::get('act'))
 		{
 			$this->Template->main .= $this->welcomeScreen();
+			$this->Template->title = $GLOBALS['TL_LANG']['MSC']['home'];
 		}
 		// Open a module
 		elseif (Input::get('do'))
 		{
 			$this->Template->main .= $this->getBackendModule(Input::get('do'));
+			$this->Template->title = $this->Template->headline;
 		}
 
 		$this->output();
@@ -233,10 +236,16 @@ class Main extends Backend
 			$this->Template->headline = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		}
 
+		// Default title
+		if ($this->Template->title == '')
+		{
+			$this->Template->title = $this->Template->headline;
+		}
+
 		$this->Template->theme = $this->getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
+		$this->Template->title = specialchars($this->Template->title);
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->account = $GLOBALS['TL_LANG']['MOD']['login'][1];
 		$this->Template->preview = $GLOBALS['TL_LANG']['MSC']['fePreview'];

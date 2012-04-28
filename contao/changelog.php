@@ -120,7 +120,7 @@ class Changelog extends Backend
 		$this->Template->theme = $this->getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
+		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['changelog']);
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;

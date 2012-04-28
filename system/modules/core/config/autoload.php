@@ -138,7 +138,6 @@ ClassLoader::addClasses(array
 	'Contao\\ModuleSearch'       => 'system/modules/core/modules/ModuleSearch.php',
 	'Contao\\ModuleSitemap'      => 'system/modules/core/modules/ModuleSitemap.php',
 	'Contao\\ModuleUser'         => 'system/modules/core/modules/ModuleUser.php',
-	'Contao\\ModuleWizard'       => 'system/modules/core/modules/ModuleWizard.php',
 
 	// Pages
 	'Contao\\PageError403'       => 'system/modules/core/pages/PageError403.php',
@@ -159,6 +158,7 @@ ClassLoader::addClasses(array
 	'Contao\\KeyValueWizard'     => 'system/modules/core/widgets/KeyValueWizard.php',
 	'Contao\\ListWizard'         => 'system/modules/core/widgets/ListWizard.php',
 	'Contao\\MetaWizard'         => 'system/modules/core/widgets/MetaWizard.php',
+	'Contao\\ModuleWizard'       => 'system/modules/core/widgets/ModuleWizard.php',
 	'Contao\\OptionWizard'       => 'system/modules/core/widgets/OptionWizard.php',
 	'Contao\\PageSelector'       => 'system/modules/core/widgets/PageSelector.php',
 	'Contao\\PageTree'           => 'system/modules/core/widgets/PageTree.php',

@@ -136,10 +136,8 @@ class Confirm extends Backend
 		if (isset($arrInfo['clipboard']))
 		{
 			$arrInfo['act'] = $GLOBALS['TL_LANG']['MSC']['clearClipboard'];
-			unset($arrInfo['mode']);
-			unset($arrInfo['clipboard']);
 		}
-		elseif (isset($arrInfo['mode']))
+		elseif (isset($arrInfo['mode']) && !isset($arrInfo['act']))
 		{
 			if ($arrInfo['mode'] == 'create')
 			{
@@ -149,26 +147,28 @@ class Confirm extends Backend
 			{
 				$arrInfo['act'] = $GLOBALS['TL_LANG'][$arrInfo['table']][$arrInfo['mode']][0];
 			}
-			unset($arrInfo['mode']);
 		}
 		else
 		{
 			$arrInfo['act'] = $GLOBALS['TL_LANG'][$arrInfo['table']][$arrInfo['act']][0];
 		}
 
+		unset($arrInfo['pid']);
+		unset($arrInfo['clipboard']);
+		unset($arrInfo['mode']);
+
 		// Template variables
 		$this->Template->confirm = true;
 		$this->Template->link = specialchars($url);
 		$this->Template->info = $arrInfo;
 		$this->Template->labels = $GLOBALS['TL_LANG']['CONFIRM'];
-		$this->Template->h2 = $GLOBALS['TL_LANG']['MSC']['invalidTokenUrl'];
 		$this->Template->explain = $GLOBALS['TL_LANG']['ERR']['invalidTokenUrl'];
 		$this->Template->cancel = $GLOBALS['TL_LANG']['MSC']['cancelBT'];
 		$this->Template->continue = $GLOBALS['TL_LANG']['MSC']['continue'];
 		$this->Template->theme = $this->getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
+		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['invalidTokenUrl']);
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 
 		$this->Template->output();

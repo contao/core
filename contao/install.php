@@ -58,6 +58,9 @@ class InstallTool extends Backend
 	 */
 	public function __construct()
 	{
+		$this->import('Config');
+		$this->import('Session');
+
 		$GLOBALS['TL_CONFIG']['showHelp'] = false;
 		$GLOBALS['TL_CONFIG']['displayErrors'] = true;
 
@@ -757,7 +760,7 @@ class InstallTool extends Backend
 		$this->Template->pageOffset = Input::cookie('BE_PAGE_OFFSET');
 		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
-		$this->Template->title = $GLOBALS['TL_LANG']['tl_install']['installTool'][0];
+		$this->Template->title = specialchars($GLOBALS['TL_LANG']['tl_install']['installTool'][0]);
 		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
 		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];

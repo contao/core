@@ -35,6 +35,12 @@ $GLOBALS['TL_LANG']['MOD']['newsletter'] = array('Newsletter', 'Abonnements verw
 
 
 /**
+ * Submodules
+ */
+$GLOBALS['TL_LANG']['MOD']['tl_newsletter_recipients'] = 'Abonnenten';
+
+
+/**
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['newsletter']  = 'Newsletter';

@@ -35,6 +35,12 @@ $GLOBALS['TL_LANG']['MOD']['news'] = array('Nachrichten', 'Nachrichten verwalten
 
 
 /**
+ * Submodules
+ */
+$GLOBALS['TL_LANG']['MOD']['tl_news_feed'] = 'Nachrichten-Feeds';
+
+
+/**
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['news']        = 'Nachrichten';

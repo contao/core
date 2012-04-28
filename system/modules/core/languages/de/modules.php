@@ -36,9 +36,6 @@ $GLOBALS['TL_LANG']['MOD']['article']     = array('Artikel', 'Artikel und Inhalt
 $GLOBALS['TL_LANG']['MOD']['form']        = array('Formulargenerator', 'Individuelle Formulare gestalten und deren Daten speichern oder versenden');
 $GLOBALS['TL_LANG']['MOD']['design']      = 'Layout';
 $GLOBALS['TL_LANG']['MOD']['themes']      = array('Themes', 'Frontend-Module, Stylesheets, Seitenlayouts und Templates verwalten');
-$GLOBALS['TL_LANG']['MOD']['css']         = array('Stylesheets', 'Stylesheets erstellen, um die Frontend-Ausgabe zu formatieren');
-$GLOBALS['TL_LANG']['MOD']['modules']     = array('Frontend-Module', 'Die Frontend-Module der Webseite verwalten');
-$GLOBALS['TL_LANG']['MOD']['layout']      = array('Seitenlayouts', 'Module und Stylesheets zu einem Seitenlayout kombinieren');
 $GLOBALS['TL_LANG']['MOD']['page']        = array('Seitenstruktur', 'Die Seitenstruktur der Webseite(n) erstellen');
 $GLOBALS['TL_LANG']['MOD']['tpl_editor']  = array('Templates', 'Templates im Backend bearbeiten');
 $GLOBALS['TL_LANG']['MOD']['accounts']    = 'Benutzerverwaltung';
@@ -53,6 +50,15 @@ $GLOBALS['TL_LANG']['MOD']['settings']    = array('Einstellungen', 'Die Contao-K
 $GLOBALS['TL_LANG']['MOD']['maintenance'] = array('Systemwartung', 'Contao warten oder aktualisieren');
 $GLOBALS['TL_LANG']['MOD']['undo']        = array('Wiederherstellen', 'Gelöschte Datensätze wiederherstellen');
 $GLOBALS['TL_LANG']['MOD']['login']       = array('Persönliche Daten', 'Persönliche Daten ändern oder ein neues Passwort setzen');
+
+
+/**
+ * Submodules
+ */
+$GLOBALS['TL_LANG']['MOD']['tl_style']       = 'Stylesheets';
+$GLOBALS['TL_LANG']['MOD']['tl_style_sheet'] = 'Stylesheets';
+$GLOBALS['TL_LANG']['MOD']['tl_module']      = 'Frontend-Module';
+$GLOBALS['TL_LANG']['MOD']['tl_layout']      = 'Seitenlayouts';
 
 
 /**

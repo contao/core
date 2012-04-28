@@ -31,7 +31,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_install']['installTool'] = array('Contao install tool', 'Install tool login');
+$GLOBALS['TL_LANG']['tl_install']['installTool'] = array('Installation', 'Install tool login');
 $GLOBALS['TL_LANG']['tl_install']['locked']      = array('The install tool has been locked', 'For security reasons, the install tool has been locked after a wrong password had been entered more than three times in a row. To unlock it, open the local configuration file and set <em>installCount</em> to <em>0</em>.');
 $GLOBALS['TL_LANG']['tl_install']['password']    = array('Password', 'Please enter the install tool password. The install tool password is not the same as the Contao back end password.');
 $GLOBALS['TL_LANG']['tl_install']['changePass']  = array('Install tool password', 'To additionally secure the Contao install tool, you can either rename or completely remove the <strong>contao/install.php</strong> file.');

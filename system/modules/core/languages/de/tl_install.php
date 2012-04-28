@@ -31,7 +31,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_install']['installTool'] = array('Contao-Installtool', 'Installtool-Anmeldung');
+$GLOBALS['TL_LANG']['tl_install']['installTool'] = array('Installation', 'Installtool-Anmeldung');
 $GLOBALS['TL_LANG']['tl_install']['locked']      = array('Das Installtool wurde gesperrt', 'Aus Sicherheitsgründen wurde das Installtool gesperrt, nachdem dreimal hintereinander ein falsches Passwort eingegeben wurde. Um es zu entsperren, öffnen Sie die lokale Konfigurationsdatei und setzten Sie <em>installCount</em> auf <em>0</em>.');
 $GLOBALS['TL_LANG']['tl_install']['password']    = array('Passwort', 'Bitte geben Sie das Installtool-Passwort ein. Das Installtool-Passwort ist nicht gleich dem Contao Backend-Passwort.');
 $GLOBALS['TL_LANG']['tl_install']['changePass']  = array('Installtool-Passwort', 'Um das Contao-Installtool zusätzlich abzusichern, können Sie die Datei <strong>contao/install.php</strong> nach der Installation von Contao entweder umbenennen oder komplett von Ihrem Server entfernen.');

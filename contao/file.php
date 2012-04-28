@@ -112,7 +112,7 @@ class FilePicker extends Backend
 		$this->Template->theme = $this->getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
+		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['filepicker']);
 		$this->Template->headline = $GLOBALS['TL_LANG']['MSC']['ppHeadline'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->options = $this->createPageList();

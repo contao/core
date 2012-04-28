@@ -55,11 +55,11 @@ $GLOBALS['TL_LANG']['tl_newsletter_recipients']['manually']   = 'manuell hinzuge
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['new']        = array('Abonnenten hinzufügen', 'Einen neuen Abonnenten hinzufügen');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['show']       = array('Abonnentendetails', 'Details des Abonnenten ID %s anzeigen');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['edit']       = array('Abonnenten bearbeiten', 'Abonnenten ID %s bearbeiten');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['copy']       = array('Abonnenten duplizieren', 'Abonnenten ID %s duplizieren');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['delete']     = array('Abonnenten löschen', 'Abonnenten ID %s löschen');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['new']        = array('Abonnent hinzufügen', 'Einen neuen Abonnent hinzufügen');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['show']       = array('Abonnentendetails', 'Details des Abonnent ID %s anzeigen');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['edit']       = array('Abonnent bearbeiten', 'Abonnent ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['copy']       = array('Abonnent duplizieren', 'Abonnent ID %s duplizieren');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['delete']     = array('Abonnent löschen', 'Abonnent ID %s löschen');
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['editheader'] = array('Verteiler bearbeiten', 'Die Verteiler-Einstellungen bearbeiten');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['toggle']     = array('Abonnenten aktivieren/deaktivieren', 'Abonnenten ID %s aktivieren/deaktivieren');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['toggle']     = array('Abonnent aktivieren/deaktivieren', 'Abonnent ID %s aktivieren/deaktivieren');
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['import']     = array('CSV-Import', 'Abonnenten aus einer CSV-Datei importieren');

@@ -35,6 +35,12 @@ $GLOBALS['TL_LANG']['MOD']['news'] = array('News', 'Manage news and export them 
 
 
 /**
+ * Submodules
+ */
+$GLOBALS['TL_LANG']['MOD']['tl_news_feed'] = 'News feeds';
+
+
+/**
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['news']        = 'News';

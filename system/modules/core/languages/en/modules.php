@@ -36,9 +36,6 @@ $GLOBALS['TL_LANG']['MOD']['article']     = array('Articles', 'Manage articles a
 $GLOBALS['TL_LANG']['MOD']['form']        = array('Form generator', 'Create custom forms and store or send the submitted data');
 $GLOBALS['TL_LANG']['MOD']['design']      = 'Layout';
 $GLOBALS['TL_LANG']['MOD']['themes']      = array('Themes', 'Manage front end modules, style sheets, page layouts and templates');
-$GLOBALS['TL_LANG']['MOD']['css']         = array('Style sheets', 'Create style sheets to format the front end output');
-$GLOBALS['TL_LANG']['MOD']['modules']     = array('Front end modules', 'Manage the front end modules of the website');
-$GLOBALS['TL_LANG']['MOD']['layout']      = array('Page layouts', 'Combine modules and style sheets to a page layout');
 $GLOBALS['TL_LANG']['MOD']['page']        = array('Site structure', 'Set up the site structure of your website(s)');
 $GLOBALS['TL_LANG']['MOD']['tpl_editor']  = array('Templates', 'Edit templates in the back end');
 $GLOBALS['TL_LANG']['MOD']['accounts']    = 'Account manager';
@@ -53,6 +50,15 @@ $GLOBALS['TL_LANG']['MOD']['settings']    = array('Settings', 'Check and optimiz
 $GLOBALS['TL_LANG']['MOD']['maintenance'] = array('Maintenance', 'Maintain or update Contao');
 $GLOBALS['TL_LANG']['MOD']['undo']        = array('Restore', 'Restore deleted records');
 $GLOBALS['TL_LANG']['MOD']['login']       = array('Personal data', 'Change your personal data or set a new password');
+
+
+/**
+ * Submodules
+ */
+$GLOBALS['TL_LANG']['MOD']['tl_style']       = 'Style sheets';
+$GLOBALS['TL_LANG']['MOD']['tl_style_sheet'] = 'Style sheets';
+$GLOBALS['TL_LANG']['MOD']['tl_module']      = 'Front end modules';
+$GLOBALS['TL_LANG']['MOD']['tl_layout']      = 'Page layouts';
 
 
 /**

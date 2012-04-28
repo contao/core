@@ -2,7 +2,7 @@
 <html lang="<?php echo $this->language; ?>">
 <head>
 <meta charset="<?php echo $this->charset; ?>">
-<title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
+<title>Contao Open Source CMS <?php echo VERSION; ?></title>
 <base href="<?php echo $this->base; ?>">
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();

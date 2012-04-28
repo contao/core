@@ -123,6 +123,7 @@ abstract class Backend extends Controller
 			if (isset($arrGroup[$module]))
 			{
 				$arrModule =& $arrGroup[$module];
+				break;
 			}
 		}
 
@@ -162,23 +163,6 @@ abstract class Backend extends Controller
 
 		define('CURRENT_ID', (Input::get('table') ? $id : Input::get('id')));
 		$this->Template->headline = $GLOBALS['TL_LANG']['MOD'][$module][0];
-
-		// Theme headlines
-		if ($module == 'themes')
-		{
-			if (Input::get('table') == 'tl_style_sheet' || Input::get('table') == 'tl_style')
-			{
-				$this->Template->headline .= ' - ' . $GLOBALS['TL_LANG']['MOD']['css'][0];
-			}
-			elseif (Input::get('table') == 'tl_module')
-			{
-				$this->Template->headline .= ' - ' . $GLOBALS['TL_LANG']['MOD']['modules'][0];
-			}
-			elseif (Input::get('table') == 'tl_layout')
-			{
-				$this->Template->headline .= ' - ' . $GLOBALS['TL_LANG']['MOD']['layout'][0];
-			}
-		}
 
 		// Add the module style sheet
 		if (isset($arrModule['stylesheet']))
@@ -234,14 +218,14 @@ abstract class Backend extends Controller
 			}
 
 			// Fabricate a new data container object
-			if (!strlen($GLOBALS['TL_DCA'][$strTable]['config']['dataContainer']))
+			if ($GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'] == '')
 			{
 				$this->log('Missing data container for table "' . $strTable . '"', 'Backend getBackendModule()', TL_ERROR);
 				trigger_error('Could not create a data container object', E_USER_ERROR);
 			}
 
-			$dataContainer = 'DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
-			$dc = new $dataContainer($strTable);
+			$dataContainer = '\\DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
+			$dc = new $dataContainer($strTable, $this->Template, $arrModule);
 		}
 
 		// AJAX request
@@ -249,18 +233,44 @@ abstract class Backend extends Controller
 		{
 			$this->objAjax->executePostActions($dc);
 		}
+
 		// Trigger the module callback
 		elseif ($this->classFileExists($arrModule['callback']))
 		{
 			$objCallback = new $arrModule['callback']($dc);
 			$this->Template->main .= $objCallback->generate();
 		}
+
 		// Custom action (if key is not defined in config.php the default action will be called)
 		elseif (Input::get('key') && isset($arrModule[Input::get('key')]))
 		{
 			$objCallback = new $arrModule[Input::get('key')][0]();
-			$this->Template->main .= $objCallback->$arrModule[Input::get('key')][1]($dc, $strTable, $arrModule);
+			$this->Template->main .= $objCallback->$arrModule[Input::get('key')][1]($dc);
+
+			// Add the name of the parent element
+			if (isset($_GET['table']) && in_array(Input::get('table'), $arrModule['tables']) && Input::get('table') != $arrModule['tables'][0])
+			{
+				if ($GLOBALS['TL_DCA'][$strTable]['config']['ptable'] != '')
+				{
+					$objRow = $this->Database->prepare("SELECT * FROM " . $GLOBALS['TL_DCA'][$strTable]['config']['ptable'] . " WHERE id=?")
+											 ->limit(1)
+											 ->executeUncached(CURRENT_ID);
+
+					if ($objRow->title != '')
+					{
+						$this->Template->headline .= ' » ' . $objRow->title;
+					}
+					elseif ($objRow->name != '')
+					{
+						$this->Template->headline .= ' » ' . $objRow->name;
+					}
+				}
+			}
+
+			// Add the name of the submodule
+			$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][Input::get('key')][1], Input::get('id'));
 		}
+
 		// Default action
 		elseif (is_object($dc))
 		{
@@ -297,6 +307,93 @@ abstract class Backend extends Controller
 						trigger_error('The current data container is not editable', E_USER_ERROR);
 					}
 					break;
+			}
+
+			// Correctly add the theme name in the style sheets module
+			if (strncmp(Input::get('table'), 'tl_style', 8) === 0)
+			{
+				if (Input::get('table') == 'tl_style_sheet' || !isset($_GET['act']))
+				{
+					$objRow = $this->Database->prepare("SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=?)")
+											 ->limit(1)
+											 ->executeUncached(Input::get('id'));
+
+					$this->Template->headline .= ' » ' . $objRow->name;
+					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
+
+					if (Input::get('table') == 'tl_style')
+					{
+						$objRow = $this->Database->prepare("SELECT name FROM tl_style_sheet WHERE id=?")
+												 ->limit(1)
+												 ->executeUncached(CURRENT_ID);
+
+						$this->Template->headline .= ' » ' . $objRow->name;
+					}
+				}
+				elseif (Input::get('table') == 'tl_style')
+				{
+					$objRow = $this->Database->prepare("SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=(SELECT pid FROM tl_style WHERE id=?))")
+											 ->limit(1)
+											 ->executeUncached(Input::get('id'));
+
+					$this->Template->headline .= ' » ' . $objRow->name;
+					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
+
+					$objRow = $this->Database->prepare("SELECT name FROM tl_style_sheet WHERE id=?")
+											 ->limit(1)
+											 ->executeUncached(CURRENT_ID);
+
+					$this->Template->headline .= ' » ' . $objRow->name;
+				}
+			}
+			else
+			{
+				// Add the name of the parent element
+				if (Input::get('table') && in_array(Input::get('table'), $arrModule['tables']) && Input::get('table') != $arrModule['tables'][0])
+				{
+					if ($GLOBALS['TL_DCA'][$strTable]['config']['ptable'] != '')
+					{
+						$objRow = $this->Database->prepare("SELECT * FROM " . $GLOBALS['TL_DCA'][$strTable]['config']['ptable'] . " WHERE id=?")
+												 ->limit(1)
+												 ->executeUncached(CURRENT_ID);
+
+						if ($objRow->title != '')
+						{
+							$this->Template->headline .= ' » ' . $objRow->title;
+						}
+						elseif ($objRow->name != '')
+						{
+							$this->Template->headline .= ' » ' . $objRow->name;
+						}
+					}
+				}
+
+				// Add the name of the submodule
+				if (Input::get('table') && isset($GLOBALS['TL_LANG']['MOD'][Input::get('table')]))
+				{
+					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][Input::get('table')];
+				}
+			}
+
+			// Add the current action
+			if (Input::get('act') == 'editAll')
+			{
+				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MSC']['all'][0];
+			}
+			elseif (Input::get('act') == 'overrideAll')
+			{
+				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MSC']['all_override'][0];
+			}
+			elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]))
+			{
+				if (Input::get('do') == 'files')
+				{
+					$this->Template->headline .= ' » ' . Input::get('id');
+				}
+				else
+				{
+					$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][$act][1], Input::get('id'));
+				}
 			}
 
 			return $dc->$act();

@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Improved
+Added better page titles in the back end (see #3980).
+
 ### Changed
 Made the number of login attempts configurable (see #3923).
 
