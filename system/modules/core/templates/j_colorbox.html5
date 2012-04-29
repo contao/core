@@ -8,7 +8,7 @@ $GLOBALS['TL_CSS'][] = 'plugins/jQuery/colorbox/'. COLORBOX .'/css/colorbox.css|
 <script src="<?php echo TL_PLUGINS_URL; ?>plugins/jQuery/colorbox/<?php echo COLORBOX; ?>/js/colorbox-uncompressed.js"></script>
 <script>
 jQuery.noConflict();
-(function($) { 
+(function($) {
   $(document).ready(function() {
     $('a[data-lightbox]').map(function() {
       $(this).colorbox({

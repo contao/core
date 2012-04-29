@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -266,7 +266,7 @@ class tl_comments extends Backend
 		parent::__construct();
 		$this->import('BackendUser', 'User');
 	}
-	
+
 
 	/**
 	 * Check permissions to edit table tl_comments
@@ -337,7 +337,7 @@ class tl_comments extends Backend
 
 
 	/**
-	 * Check whether the user is allowed to edit a comment 
+	 * Check whether the user is allowed to edit a comment
 	 * @param integer
 	 * @param string
 	 * @return boolean
@@ -611,7 +611,7 @@ class tl_comments extends Backend
 		if (!$row['published'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		if (!$this->User->isAdmin && !$this->isAllowedToEditComment($row['parent'], $row['source']))
 		{
@@ -643,7 +643,7 @@ class tl_comments extends Backend
 		}
 
 		$this->createInitialVersion('tl_comments', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_comments']['fields']['published']['save_callback']))
 		{

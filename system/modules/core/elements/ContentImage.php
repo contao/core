@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -68,7 +68,7 @@ class ContentImage extends ContentElement
 		{
 			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 		}
-		
+
 		$objFile = FilesModel::findByPk($this->singleSRC);
 
 		if ($objFile === null || !is_file(TL_ROOT . '/' . $objFile->path))

@@ -80,7 +80,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 function enableSelectFunctions() {
   var sel = false;
   var cbs = document.getElementsByName('selectedids[]');
-  for (var i = 0; i < cbs.length; ++i) { 
+  for (var i = 0; i < cbs.length; ++i) {
     if (cbs[i].checked) {
       sel = true;
       break;

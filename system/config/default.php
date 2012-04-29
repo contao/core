@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -52,11 +52,11 @@
  *
  * If 'displayErrors' is set to true, error messages will be printed to the
  * screen. It is recommended to disable it for live pages.
- * 
+ *
  * With option rewriteURL you can make Contao generate static URLs without
  * "index.php" (e.g. "alias.html" instead of "index.php/alias.html"). Note that
  * this feature requires Apache's mod_rewrite!
- * 
+ *
  * The relative path to the Contao directory is usually set automatically.
  * However, if you are experiencing any problems, you can change it in the
  * local configuration file.
@@ -118,14 +118,14 @@ $GLOBALS['TL_CONFIG']['disableIpCheck']      = false;
  * -------------------------------------------------------------------------
  * Database drivers start with an uppercase character. Currently supported
  * databases: MySQL, MySQLi, MSSQL, Oracle, PostgreSQL, Sybase.
- * 
+ *
  *   dbUser     = database user name
  *   dbPass     = database password
  *   dbHost     = database host (might be "localhost" or "127.0.0.1")
  *   dbDatabase = name of the database
  *   dbPort     = database port number (e.g. 3306 for MySQL)
  *   dbPconnect = set to true if you want to use persistent connections
- * 
+ *
  * Make sure that the database character set 'dbCharset' matches the character
  * set used on your HTML pages. Note that you might have to use a different
  * spelling (e.g. UTF8 instead of UTF-8 for MySQL).
@@ -147,7 +147,7 @@ $GLOBALS['TL_CONFIG']['dbCollation'] = 'utf8_general_ci';
  * -------------------------------------------------------------------------
  *
  * Here you can enable FTP for managing files and folders ("Safe Mode Hack").
- * 
+ *
  *   ftpHost = host name (e.g. domain.com or domain.com:21)
  *   ftpPath = path to installation (e.g. html/)
  *   ftpUser = FTP username
@@ -214,7 +214,7 @@ $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] = 3000;
  *
  * Here you can enable SMTP for sending mails. By default, mails are sent using
  * PHP function mail(). Please enter your SMTP parameters below.
- * 
+ *
  *   smtpHost = host name (defaults to localhost)
  *   smtpUser = SMTP username
  *   smtpPass = SMTP password
@@ -275,19 +275,19 @@ $GLOBALS['TL_CONFIG']['useCE']      = true;
  *
  * If you need custom page sections (in addition to "header", "left", "main",
  * "right" and "footer", you can define a comma separated list here.
- * 
+ *
  * If you enter a maximum image width, images and media files cannot be wider
  * than this value and will not break your page layout.
- * 
+ *
  * The default user owns all pages and items that are not assigned to a certain
  * user. Please enter the ID of the default user (database record).
- * 
+ *
  * The default group owns all pages and items that are not assigned to a group.
  * Please enter the ID of the default group (database record).
- * 
+ *
  * Default page permissions: allow everything for the owner (u1 - u6) of a page.
  * See back end module "Navigation" for more information.
- * 
+ *
  * Please enter a comma separated list of allowed image types, editable files
  * and all all file types that are allowed to be downloaded.
  */

@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -725,7 +725,7 @@ class tl_style extends Backend
 
 	/**
 	 * Schedule a style sheet update
-	 * 
+	 *
 	 * This method is triggered when a single style or multiple styles are
 	 * modified (edit/editAll), duplicated (copy/copyAll), moved (cut/cutAll)
 	 * or deleted (delete/deleteAll).
@@ -733,7 +733,7 @@ class tl_style extends Backend
 	 */
 	public function scheduleUpdate()
 	{
-		// Return if there is no ID 
+		// Return if there is no ID
 		if (!CURRENT_ID || Input::get('act') == 'copy' || Environment::get('isAjaxRequest'))
 		{
 			return;
@@ -793,7 +793,7 @@ class tl_style extends Backend
 		if ($row['invisible'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
@@ -808,7 +808,7 @@ class tl_style extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		$this->createInitialVersion('tl_style', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_style']['fields']['invisible']['save_callback']))
 		{
