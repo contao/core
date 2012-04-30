@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -95,7 +95,7 @@ function utf8_chr($dec)
 
 /**
  * Return the ASCII value of a character
- * 
+ *
  * Unicode version of ord() that handles UTF-8 characters. The function has
  * been published by R. Rajesh Jeba Anbiah on php.net.
  * @param string
@@ -192,7 +192,7 @@ function utf8_decode_entities($str)
 
 
 /**
- * Callback function for utf8_decode_entities 
+ * Callback function for utf8_decode_entities
  * @param array
  * @return string
  */
@@ -203,7 +203,7 @@ function utf8_chr_callback($matches)
 
 
 /**
- * Callback function for utf8_decode_entities 
+ * Callback function for utf8_decode_entities
  * @param array
  * @return string
  */
@@ -564,7 +564,7 @@ function utf8_ucfirst($str)
 
 /**
  * Convert a string to an array
- * 
+ *
  * Unicode version of str_split() that handles UTF-8 characters. The function
  * has been published by saeedco on php.net.
  * @param string

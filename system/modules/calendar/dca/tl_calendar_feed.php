@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -170,7 +170,7 @@ $GLOBALS['TL_DCA']['tl_calendar_feed'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'checkbox',
-			'options_callback'        => array('tl_calendar_feed', 'getAllowedCalendars'), 
+			'options_callback'        => array('tl_calendar_feed', 'getAllowedCalendars'),
 			'eval'                    => array('multiple'=>true, 'mandatory'=>true),
 			'sql'                     => "blob NULL"
 		),
@@ -401,7 +401,7 @@ class tl_calendar_feed extends Backend
 
 	/**
 	 * Schedule a calendar feed update
-	 * 
+	 *
 	 * This method is triggered when a single calendar or multiple calendars
 	 * are modified (edit/editAll).
 	 * @param \DataContainer
@@ -409,7 +409,7 @@ class tl_calendar_feed extends Backend
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{
-		// Return if there is no ID 
+		// Return if there is no ID
 		if (!$dc->id)
 		{
 			return;

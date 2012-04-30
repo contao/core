@@ -104,7 +104,7 @@ column (see #23).
 
 ### New
 Also add the classes "float_above" and "float_below" to image containers (which
-now can only have the classes "float_left" and "float_right") (see #4157). 
+now can only have the classes "float_left" and "float_right") (see #4157).
 
 ### Improved
 Do not generate links to previous and next months in the calendar if they do not

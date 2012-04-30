@@ -8,12 +8,12 @@
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation, either
 # version 3 of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
 # Lesser General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Lesser General Public
 # License along with this program. If not, please visit the Free
 # Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -117,13 +117,13 @@ FileETag None
   #   RewriteBase /contao-3.0.0
   #   RewriteBase /path/to/contao
   #
-  # Depending on your server, you might have to remove the line entirely. 
+  # Depending on your server, you might have to remove the line entirely.
   ##
   RewriteBase /
 
   ##
   # Uncomment the following lines and replace "domain.com" with your domain
-  # name to redirect requests without "www" to the correct domain. 
+  # name to redirect requests without "www" to the correct domain.
   ##
   #RewriteCond %{HTTP_HOST} ^domain\.com [NC]
   #RewriteRule (.*) http://www.domain.com/$1 [R=301,L]
@@ -168,7 +168,7 @@ FileETag None
   #
   # If you are using mod_cache, it is recommended to use the RewriteRule below,
   # which adds the query string to the internal URL:
-  # 
+  #
   #   RewriteRule (.*\.html)$ index.php/$1 [L]
   #
   # Note that not all environments support mod_rewrite and mod_cache.

@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -91,7 +91,7 @@ class Comments extends Frontend
 			// Set limit and offset
 			$limit = $objConfig->perPage;
 			$offset = ($page - 1) * $objConfig->perPage;
- 
+
 			// Initialize the pagination menu
 			$objPagination = new Pagination($total, $objConfig->perPage);
 			$objTemplate->pagination = $objPagination->generate("\n  ");
@@ -386,7 +386,7 @@ class Comments extends Frontend
 
 	/**
 	 * Replace bbcode and return the HTML string
-	 * 
+	 *
 	 * Supports the following tags:
 	 * - [b][/b] bold
 	 * - [i][/i] italic
@@ -413,7 +413,7 @@ class Comments extends Frontend
 			'@\s*\[code\](.*)\[/code\]\s*@Uis',
 			'@\[color=([^\]" ]+)\](.*)\[/color\]@Uis',
 			'@\s*\[quote\](.*)\[/quote\]\s*@Uis',
-			'@\s*\[quote=([^\]]+)\](.*)\[/quote\]\s*@Uis', 
+			'@\s*\[quote=([^\]]+)\](.*)\[/quote\]\s*@Uis',
 			'@\[img\]\s*([^\[" ]+\.(jpe?g|png|gif|bmp|tiff?|ico))\s*\[/img\]@i',
 			'@\[url\]\s*([^\[" ]+)\s*\[/url\]@i',
 			'@\[url=([^\]" ]+)\](.*)\[/url\]@Uis',

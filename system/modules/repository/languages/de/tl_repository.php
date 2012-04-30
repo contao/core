@@ -206,7 +206,7 @@ $GLOBALS['TL_LANG']['tl_repository_order_options']['author']  = 'Autor';
 /**
  * States
  */
-$GLOBALS['TL_LANG']['tl_repository_state_options']['alpha']   = 'Alpha';
-$GLOBALS['TL_LANG']['tl_repository_state_options']['beta']    = 'Beta';
-$GLOBALS['TL_LANG']['tl_repository_state_options']['rc']      = 'RC';
-$GLOBALS['TL_LANG']['tl_repository_state_options']['stable']  = 'Stabil';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['alpha']  = 'Alpha';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['beta']   = 'Beta';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['rc']     = 'RC';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['stable'] = 'Stabil';
