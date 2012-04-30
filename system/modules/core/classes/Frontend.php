@@ -186,7 +186,7 @@ abstract class Frontend extends Controller
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getPageIdFromUrl'] as $callback)
 			{
-				$arrFragments = System::importStatic($callback[0])->$callback[1]($arrFragments);
+				$arrFragments = static::importStatic($callback[0])->$callback[1]($arrFragments);
 			}
 		}
 
@@ -212,9 +212,9 @@ abstract class Frontend extends Controller
 	 * Return the root page ID (backwards compatibility)
 	 * @return integer
 	 */
-	protected function getRootIdFromUrl()
+	public static function getRootIdFromUrl()
 	{
-		$objRootPage = $this->getRootPageFromUrl();
+		$objRootPage = static::getRootPageFromUrl();
 		return $objRootPage->numRows ? $objRootPage->id : 0;
 	}
 
@@ -223,17 +223,14 @@ abstract class Frontend extends Controller
 	 * Try to find a root page based on language and URL
 	 * @return \Model
 	 */
-	protected function getRootPageFromUrl()
+	public static function getRootPageFromUrl()
 	{
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['getRootPageFromUrl']) && is_array($GLOBALS['TL_HOOKS']['getRootPageFromUrl']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getRootPageFromUrl'] as $callback)
 			{
-				$this->import($callback[0]);
-				$objRootPage = $this->$callback[0]->$callback[1]();
-
-				if (is_object($objRootPage))
+				if (is_object(($objRootPage = static::importStatic($callback[0])->$callback[1]())))
 				{
 					return $objRootPage;
 				}
@@ -251,7 +248,7 @@ abstract class Frontend extends Controller
 			if ($objRootPage === null)
 			{
 				header('HTTP/1.1 404 Not Found');
-				$this->log('No root page found (host "' . $host . '", language "'. Input::get('language') .'"', 'Frontend getRootPageFromUrl()', TL_ERROR);
+				static::log('No root page found (host "' . $host . '", language "'. Input::get('language') .'"', 'Frontend getRootPageFromUrl()', TL_ERROR);
 				die('No root page found');
 			}
 		}
@@ -268,14 +265,14 @@ abstract class Frontend extends Controller
 			if ($objRootPage === null)
 			{
 				header('HTTP/1.1 404 Not Found');
-				$this->log('No root page found (host "' . Environment::get('host') . '", languages "'.implode(', ', Environment::get('httpAcceptLanguage')).'")', 'Frontend getRootPageFromUrl()', TL_ERROR);
+				static::log('No root page found (host "' . Environment::get('host') . '", languages "'.implode(', ', Environment::get('httpAcceptLanguage')).'")', 'Frontend getRootPageFromUrl()', TL_ERROR);
 				die('No root page found');
 			}
 
 			// Redirect to the language root (e.g. en/)
 			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'] && Environment::get('request') == '')
 			{
-				$this->redirect((!$GLOBALS['TL_CONFIG']['rewriteURL'] ? 'index.php/' : '') . $objRootPage->language . '/', 302);
+				static::redirect((!$GLOBALS['TL_CONFIG']['rewriteURL'] ? 'index.php/' : '') . $objRootPage->language . '/', 302);
 			}
 		}
 

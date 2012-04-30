@@ -50,7 +50,7 @@ abstract class Controller extends System
 	 * Return the current theme as string
 	 * @return string
 	 */
-	protected function getTheme()
+	public static function getTheme()
 	{
 		$theme = $GLOBALS['TL_CONFIG']['backendTheme'];
 
@@ -70,7 +70,7 @@ abstract class Controller extends System
 	 * @return string
 	 * @throws \Exception
 	 */
-	protected function getTemplate($strTemplate, $strFormat='html5')
+	public static function getTemplate($strTemplate, $strFormat='html5')
 	{
 		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
 		array_push($arrAllowed, 'html5'); // see #3398
@@ -105,7 +105,7 @@ abstract class Controller extends System
 	 * @return array
 	 * @throws \Exception
 	 */
-	protected function getTemplateGroup($strPrefix, $intTheme=0)
+	public static function getTemplateGroup($strPrefix, $intTheme=0)
 	{
 		$strTplFolder = 'templates';
 		$arrTemplates = TemplateLoader::getPrefixedFiles($strPrefix);
@@ -671,7 +671,7 @@ abstract class Controller extends System
 	 * Return all page sections as array
 	 * @return array
 	 */
-	protected function getPageSections()
+	public static function getPageSections()
 	{
 		return array_merge(array('header', 'left', 'right', 'main', 'footer'), trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']));
 	}
@@ -733,7 +733,7 @@ abstract class Controller extends System
 	 * Return all back end themes as array
 	 * @return array
 	 */
-	public function getBackendThemes()
+	public static function getBackendThemes()
 	{
 		$arrReturn = array();
 		$arrThemes = scan(TL_ROOT . '/system/themes');
@@ -795,7 +795,7 @@ abstract class Controller extends System
 	 * Return all timezones as array
 	 * @return array
 	 */
-	protected function getTimeZones()
+	public static function getTimeZones()
 	{
 		$arrReturn = array();
 		$timezones = array();
@@ -885,7 +885,7 @@ abstract class Controller extends System
 	 * @param object
 	 * @return string
 	 */
-	protected function getPageStatusIcon($objPage)
+	public static function getPageStatusIcon($objPage)
 	{
 		$sub = 0;
 		$image = $objPage->type.'.gif';
@@ -1963,7 +1963,7 @@ abstract class Controller extends System
 	 * @param string
 	 * @return string
 	 */
-	protected function restoreBasicEntities($strBuffer)
+	public static function restoreBasicEntities($strBuffer)
 	{
 		return str_replace(array('[&]', '[&amp;]', '[lt]', '[gt]', '[nbsp]', '[-]'), array('&amp;', '&amp;', '&lt;', '&gt;', '&nbsp;', '&shy;'), $strBuffer);
 	}
@@ -1976,7 +1976,7 @@ abstract class Controller extends System
 	 * @return string
 	 * @throws \Exception
 	 */
-	protected function parseSimpleTokens($strBuffer, $arrData)
+	public static function parseSimpleTokens($strBuffer, $arrData)
 	{
 		$strReturn = '';
 
@@ -2037,11 +2037,11 @@ abstract class Controller extends System
 	 * @param string
 	 * @return string
 	 */
-	protected function generateImage($src, $alt='', $attributes='')
+	public static function generateImage($src, $alt='', $attributes='')
 	{
 		if (strpos($src, '/') === false)
 		{
-			$src = 'system/themes/' . $this->getTheme() . '/images/' . $src;
+			$src = 'system/themes/' . static::getTheme() . '/images/' . $src;
 		}
 
 		if (!file_exists(TL_ROOT .'/'. $src))
@@ -2050,7 +2050,7 @@ abstract class Controller extends System
 		}
 
 		$size = getimagesize(TL_ROOT .'/'. $src);
-		return '<img src="' . TL_FILES_URL . $this->urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
+		return '<img src="' . TL_FILES_URL . static::urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
 	}
 
 
@@ -2060,7 +2060,7 @@ abstract class Controller extends System
 	 * @param string
 	 * @return string
 	 */
-	protected function generateMargin($arrValues, $strType='margin')
+	public static function generateMargin($arrValues, $strType='margin')
 	{
 		$top = $arrValues['top'];
 		$right = $arrValues['right'];
@@ -2117,7 +2117,7 @@ abstract class Controller extends System
 	 * @param string
 	 * @return string
 	 */
-	protected function generateFrontendUrl(Array $arrRow, $strParams=null, $strForceLang=null)
+	public static function generateFrontendUrl(Array $arrRow, $strParams=null, $strForceLang=null)
 	{
 		if (!$GLOBALS['TL_CONFIG']['disableAlias'])
 		{
@@ -2179,8 +2179,7 @@ abstract class Controller extends System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['generateFrontendUrl'] as $callback)
 			{
-				$this->import($callback[0]);
-				$strUrl = $this->$callback[0]->$callback[1]($arrRow, $strParams, $strUrl);
+				$strUrl = static::importStatic($callback[0])->$callback[1]($arrRow, $strParams, $strUrl);
 			}
 		}
 
@@ -2195,7 +2194,7 @@ abstract class Controller extends System
 	 * @param boolean
 	 * @return string
 	 */
-	protected function convertRelativeUrls($strContent, $strBase='', $blnHrefOnly=false)
+	public static function convertRelativeUrls($strContent, $strBase='', $blnHrefOnly=false)
 	{
 		if ($strBase == '')
 		{
@@ -2235,7 +2234,7 @@ abstract class Controller extends System
 	 * @param string
 	 * @return void
 	 */
-	protected function sendFileToBrowser($strFile)
+	public static function sendFileToBrowser($strFile)
 	{
 		// Make sure there are no attempts to hack the file system
 		if (preg_match('@^\.+@i', $strFile) || preg_match('@\.+/@i', $strFile) || preg_match('@(://)+@i', $strFile))
@@ -2293,8 +2292,7 @@ abstract class Controller extends System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['postDownload'] as $callback)
 			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($strFile);
+				static::importStatic($callback[0])->$callback[1]($strFile);
 			}
 		}
 
@@ -2842,7 +2840,7 @@ abstract class Controller extends System
 	 * @param mixed
 	 * @return string
 	 */
-	protected function optionSelected($strName, $varValue)
+	public static function optionSelected($strName, $varValue)
 	{
 		if ($strName == '')
 		{
@@ -2871,7 +2869,7 @@ abstract class Controller extends System
 	 * @param mixed
 	 * @return string
 	 */
-	protected function optionChecked($strName, $varValue)
+	public static function optionChecked($strName, $varValue)
 	{
 		$attribute = ' checked';
 
@@ -2894,7 +2892,7 @@ abstract class Controller extends System
 	 * @param string
 	 * @return string
 	 */
-	protected function findContentElement($strName)
+	public static function findContentElement($strName)
 	{
 		foreach ($GLOBALS['TL_CTE'] as $v)
 		{
@@ -2916,7 +2914,7 @@ abstract class Controller extends System
 	 * @param string
 	 * @return string
 	 */
-	protected function findFrontendModule($strName)
+	public static function findFrontendModule($strName)
 	{
 		foreach ($GLOBALS['FE_MOD'] as $v)
 		{
@@ -3005,7 +3003,7 @@ abstract class Controller extends System
 	 * @param string
 	 * @return void
 	 */
-	protected function addImageToTemplate($objTemplate, $arrItem, $intMaxWidth=null, $strLightboxId=null)
+	public static function addImageToTemplate($objTemplate, $arrItem, $intMaxWidth=null, $strLightboxId=null)
 	{
 		global $objPage;
 
@@ -3078,7 +3076,7 @@ abstract class Controller extends System
 			{
 				if (preg_match('/\.(jpe?g|gif|png)$/', $arrItem['imageUrl']))
 				{
-					$objTemplate->href = TL_FILES_URL . $this->urlEncode($arrItem['imageUrl']);
+					$objTemplate->href = TL_FILES_URL . static::urlEncode($arrItem['imageUrl']);
 					$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 				}
 				else
@@ -3091,7 +3089,7 @@ abstract class Controller extends System
 		// Fullsize view
 		elseif ($arrItem['fullsize'] && TL_MODE == 'FE')
 		{
-			$objTemplate->href = TL_FILES_URL . $this->urlEncode($arrItem['singleSRC']);
+			$objTemplate->href = TL_FILES_URL . static::urlEncode($arrItem['singleSRC']);
 			$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 		}
 
@@ -3102,7 +3100,7 @@ abstract class Controller extends System
 		$objTemplate->linkTitle = $objTemplate->title;
 		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
 		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
-		$objTemplate->margin = $this->generateMargin(deserialize($arrItem['imagemargin']), 'padding');
+		$objTemplate->margin = static::generateMargin(deserialize($arrItem['imagemargin']), 'padding');
 		$objTemplate->caption = $arrItem['caption'];
 		$objTemplate->addImage = true;
 	}
@@ -3114,7 +3112,7 @@ abstract class Controller extends System
 	 * @param array
 	 * @return void
 	 */
-	protected function addEnclosuresToTemplate($objTemplate, $arrItem)
+	public static function addEnclosuresToTemplate($objTemplate, $arrItem)
 	{
 		$arrEnclosures = deserialize($arrItem['enclosure']);
 
@@ -3153,7 +3151,7 @@ abstract class Controller extends System
 			{
 				if ($file == $objFiles->path)
 				{
-					$this->sendFileToBrowser($file);
+					static::sendFileToBrowser($file);
 				}
 			}
 
@@ -3192,11 +3190,11 @@ abstract class Controller extends System
 				$arrEnclosures[] = array
 				(
 					'link'      => $objFiles->name,
-					'filesize'  => $this->getReadableSize($objFile->filesize),
+					'filesize'  => static::getReadableSize($objFile->filesize),
 					'title'     => ucfirst(str_replace('_', ' ', $objFile->filename)),
-					'href'      => Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objFiles->path),
+					'href'      => Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . static::urlEncode($objFiles->path),
 					'enclosure' => $objFiles->path,
-					'icon'      => TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
+					'icon'      => TL_FILES_URL . 'system/themes/' . static::getTheme() . '/images/' . $objFile->icon,
 					'mime'      => $objFile->mime
 				);
 			}
@@ -3212,7 +3210,7 @@ abstract class Controller extends System
 	 * @param string
 	 * @return void
 	 */
-	protected function setStaticUrl($name, $url)
+	public static function setStaticUrl($name, $url)
 	{
 		if (defined($name))
 		{
@@ -3240,7 +3238,7 @@ abstract class Controller extends System
 	 * @param string
 	 * @return string
 	 */
-	protected function addStaticUrlTo($script)
+	public static function addStaticUrlTo($script)
 	{
 		// The feature is not used
 		if (TL_PLUGINS_URL == '' && TL_SCRIPT_URL == '')

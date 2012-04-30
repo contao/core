@@ -142,6 +142,12 @@ abstract class System
 	 */
 	protected $arrObjects = array();
 
+	/**
+	 * Static objects
+	 * @var array
+	 */
+	protected static $arrStaticObjects = array();
+
 
 	/**
 	 * Import the Config and Session instances
@@ -198,11 +204,20 @@ abstract class System
 	/**
 	 * Instantiate a library in non-object context
 	 * @param string
+	 * @param string
+	 * @param boolean
 	 * @return object
 	 */
-	public static function importStatic($strClass)
+	public static function importStatic($strClass, $strKey=null, $blnForce=false)
 	{
-		return (in_array('getInstance', get_class_methods($strClass))) ? call_user_func(array($strClass, 'getInstance')) : new $strClass();
+		$strKey = $strKey ?: $strClass;
+
+		if ($blnForce || !isset(static::$arrStaticObjects[$strKey]))
+		{
+			static::$arrStaticObjects[$strKey] = (in_array('getInstance', get_class_methods($strClass))) ? call_user_func(array($strClass, 'getInstance')) : new $strClass();
+		}
+
+		return static::$arrStaticObjects[$strKey];
 	}
 
 
