@@ -29,6 +29,9 @@
 # @see http://developer.yahoo.com/performance/rules.html#etags
 ##
 FileETag None
+<IfModule mod_headers.c>
+  Header unset ETag
+</IfModule>
 
 ##
 # Prevent access to the Contao template files
@@ -38,76 +41,131 @@ FileETag None
   Deny from all
 </FilesMatch>
 
+##
+# Set the proper MIME types
+# @see https://github.com/h5bp/html5-boilerplate
+##
 <IfModule mod_mime.c>
-
-  ##
-  # Serve the correct content type for .htc files (CSS3 PIE)
-  # @see http://css3pie.com/documentation/known-issues/#content-type
-  ##
-  AddType text/x-component .htc
-
+  # JavaScript
+  AddType application/javascript              js jsonp
+  AddType application/json                    json
+  # Audio
+  AddType audio/ogg                           oga ogg
+  AddType audio/mp4                           m4a f4a f4b
+  # Video
+  AddType video/ogg                           ogv
+  AddType video/mp4                           mp4 m4v f4v f4p 
+  AddType video/webm                          webm
+  AddType video/x-flv                         flv
+  # SVG
+  AddType image/svg+xml                       svg svgz
+  AddEncoding gzip                            svgz
+  # Webfonts
+  AddType application/vnd.ms-fontobject       eot
+  AddType application/x-font-ttf              ttf ttc
+  AddType font/opentype                       otf
+  AddType application/x-font-woff             woff
+  # Assorted types
+  AddType image/x-icon                        ico
+  AddType image/webp                          webp
+  AddType text/cache-manifest                 appcache manifest
+  AddType text/x-component                    htc
+  AddType application/xml                     rss atom xml rdf
+  AddType application/x-web-app-manifest+json webapp
+  AddType text/x-vcard                        vcf
+  AddType application/x-shockwave-flash       swf
 </IfModule>
 
+##
+# Gzip compression
+# @see https://github.com/h5bp/html5-boilerplate
+##
 <IfModule mod_deflate.c>
-
-  ##
-  # Use mod_deflate to compress JavaScript, CSS, XML, HTML and PHP files.
-  # @see http://developer.yahoo.com/performance/rules.html#gzip
-  ##
-  <FilesMatch "\.(css|js|xml|html?|php)$">
-    SetOutputFilter DEFLATE
-  </FilesMatch>
-
+  # Current Apache versions (>= 2.2)
+  <IfModule filter_module>
+    FilterDeclare   COMPRESS
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/html
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/css
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/plain
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/xml
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/x-component
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/javascript
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/json
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/xml
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/xhtml+xml
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/rss+xml
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/atom+xml
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/vnd.ms-fontobject
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $image/svg+xml
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $image/x-icon
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/x-font-ttf
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $font/opentype
+    FilterChain     COMPRESS
+    FilterProtocol  COMPRESS  DEFLATE change=yes;byteranges=no
+  </IfModule>
+  # Legacy Apache versions
+  <IfModule !mod_filter.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/json
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE text/xml application/xml text/x-component
+    AddOutputFilterByType DEFLATE application/xhtml+xml application/rss+xml application/atom+xml
+    AddOutputFilterByType DEFLATE image/x-icon image/svg+xml application/vnd.ms-fontobject application/x-font-ttf font/opentype
+  </IfModule>
 </IfModule>
 
+##
+# Expires headers (for better cache control)
+# @see https://github.com/h5bp/html5-boilerplate
+##
+<IfModule mod_expires.c>
+  ExpiresActive on
+  ExpiresByType text/cache-manifest           "access plus 0 seconds"
+  ExpiresByType text/html                     "access plus 0 seconds"
+  # Data
+  ExpiresByType text/xml                      "access plus 0 seconds"
+  ExpiresByType application/xml               "access plus 0 seconds"
+  ExpiresByType application/json              "access plus 0 seconds"
+  # Feed
+  ExpiresByType application/rss+xml           "access plus 1 hour"
+  ExpiresByType application/atom+xml          "access plus 1 hour"
+  # Media: images, video, audio
+  ExpiresByType image/gif                     "access plus 1 month"
+  ExpiresByType image/png                     "access plus 1 month"
+  ExpiresByType image/jpg                     "access plus 1 month"
+  ExpiresByType image/jpeg                    "access plus 1 month"
+  ExpiresByType image/x-icon                  "access plus 1 month"
+  ExpiresByType video/ogg                     "access plus 1 month"
+  ExpiresByType audio/ogg                     "access plus 1 month"
+  ExpiresByType video/mp4                     "access plus 1 month"
+  ExpiresByType video/webm                    "access plus 1 month"
+  # HTC files  (css3pie)
+  ExpiresByType text/x-component              "access plus 1 month"
+  # Webfonts
+  ExpiresByType application/x-font-ttf        "access plus 1 month"
+  ExpiresByType font/opentype                 "access plus 1 month"
+  ExpiresByType application/x-font-woff       "access plus 1 month"
+  ExpiresByType image/svg+xml                 "access plus 1 month"
+  ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
+  # CSS and JavaScript
+  ExpiresByType text/css                      "access plus 1 year"
+  ExpiresByType application/javascript        "access plus 1 year"
+</IfModule>
+
+##
+# Add a Vary Accept-Encoding header for the compressed resources. If you
+# modify the file types above, make sure to change them here accordingly.
+# @see http://developer.yahoo.com/performance/rules.html#gzip
+##
 <IfModule mod_headers.c>
-
-  ##
-  # Disable ETags
-  # @see http://developer.yahoo.com/performance/rules.html#etags
-  ##
-  Header unset ETag
-
-  ##
-  # Add a Vary Accept-Encoding header for the compressed resources. If you
-  # modify the file types above, make sure to change them here accordingly.
-  # @see http://developer.yahoo.com/performance/rules.html#gzip
-  ##
   <FilesMatch "\.(js|css|xml|gz)$">
     Header append Vary Accept-Encoding
   </FilesMatch>
-
 </IfModule>
 
-<IfModule mod_expires.c>
-
-  ##
-  # Activate the module
-  ##
-  ExpiresActive On
-
-  ##
-  # Specify an expiration 30 days in the future for images, JavaScripts and
-  # CSS files. Edit or remove the lines to set up your own expiration logic.
-  # @see http://developer.yahoo.com/performance/rules.html#expires
-  ##
-  ExpiresByType image/png A2592000
-  ExpiresByType image/gif A2592000
-  ExpiresByType image/jpg A2592000
-  ExpiresByType image/jpeg A2592000
-  ExpiresByType text/javascript A2592000
-  ExpiresByType application/x-javascript A2592000
-  ExpiresByType application/javascript A2592000
-  ExpiresByType text/css A2592000
-  ExpiresByType image/x-icon A2592000
-
-</IfModule>
-
+##
+# URL rewriting
+##
 <IfModule mod_rewrite.c>
-
-  ##
-  # Activate the module
-  ##
   RewriteEngine On
 
   ##
