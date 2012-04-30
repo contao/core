@@ -66,7 +66,7 @@ abstract class Backend extends Controller
 	 * @param string
 	 * @return string
 	 */
-	protected function addToUrl($strRequest)
+	public static function addToUrl($strRequest)
 	{
 		return parent::addToUrl($strRequest . (($strRequest != '') ? '&amp;' : '') . 'rt=' . REQUEST_TOKEN);
 	}

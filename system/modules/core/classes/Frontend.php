@@ -79,7 +79,7 @@ abstract class Frontend extends Controller
 	 * Split the current request into fragments, strip the URL suffix, recreate the $_GET array and return the page ID
 	 * @return mixed
 	 */
-	protected function getPageIdFromUrl()
+	public static function getPageIdFromUrl()
 	{
 		if ($GLOBALS['TL_CONFIG']['disableAlias'])
 		{
@@ -186,8 +186,7 @@ abstract class Frontend extends Controller
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getPageIdFromUrl'] as $callback)
 			{
-				$this->import($callback[0]);
-				$arrFragments = $this->$callback[0]->$callback[1]($arrFragments);
+				$arrFragments = System::importStatic($callback[0])->$callback[1]($arrFragments);
 			}
 		}
 
@@ -290,7 +289,7 @@ abstract class Frontend extends Controller
 	 * @param boolean
 	 * @return string
 	 */
-	protected function addToUrl($strRequest, $blnIgnoreParams=false)
+	public static function addToUrl($strRequest, $blnIgnoreParams=false)
 	{
 		$arrGet = $blnIgnoreParams ? array() : $_GET;
 
@@ -355,7 +354,7 @@ abstract class Frontend extends Controller
 		// Get the page ID from URL if not set
 		if (empty($pageId))
 		{
-			$pageId = $this->getPageIdFromUrl();
+			$pageId = static::getPageIdFromUrl();
 		}
 
 		$pageLanguage = '';

@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Backend, \DataContainer, \Environment, \File, \FilesModel, \Folder, \Input, \ZipReader, \DOMDocument, \DOMElement, \Exception;
+use \Backend, \DataContainer, \Environment, \File, \FilesModel, \Folder, \Input, \Messages, \ZipReader, \DOMDocument, \DOMElement, \Exception;
 
 
 /**
@@ -71,7 +71,7 @@ class Theme extends Backend
 
 				if (empty($arrUploaded))
 				{
-					$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
+					Message::addError($GLOBALS['TL_LANG']['ERR']['all_fields']);
 					$this->reload();
 				}
 
@@ -82,7 +82,7 @@ class Theme extends Backend
 					// Skip folders
 					if (is_dir(TL_ROOT . '/' . $strFile))
 					{
-						$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], basename($strFile)));
+						Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], basename($strFile)));
 						continue;
 					}
 
@@ -91,7 +91,7 @@ class Theme extends Backend
 					// Skip anything but .cto files
 					if ($objFile->extension != 'cto')
 					{
-						$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
+						Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
 						continue;
 					}
 
@@ -106,7 +106,7 @@ class Theme extends Backend
 			// Check whether there are any files
 			if (empty($arrFiles))
 			{
-				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
+				Message::addError($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
@@ -391,7 +391,7 @@ class Theme extends Backend
 				// Limit file operations to files and the templates directory
 				if (strncmp($objArchive->file_name, 'files/', 6) !== 0 && strncmp($objArchive->file_name, 'tl_files/', 9) !== 0 && strncmp($objArchive->file_name, 'templates/', 10) !== 0)
 				{
-					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['invalidFile'], $objArchive->file_name));
+					Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidFile'], $objArchive->file_name));
 					continue;
 				}
 
@@ -418,14 +418,14 @@ class Theme extends Backend
 				}
 				catch (Exception $e)
 				{
-					$this->addErrorMessage($e->getMessage());
+					Message::addError($e->getMessage());
 				}
 			}
 
 			// Continue if there is no XML file
 			if (!$xml instanceof DOMDocument)
 			{
-				$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strZipFile)));
+				Message::addError(sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strZipFile)));
 				continue;
 			}
 
@@ -742,7 +742,7 @@ class Theme extends Backend
 			$this->StyleSheets->updateStyleSheets();
 
 			// Notify the user
-			$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));
+			Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));
 		}
 
 		setcookie('BE_PAGE_OFFSET', 0, 0, '/');

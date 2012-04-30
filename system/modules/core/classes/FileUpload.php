@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Backend, \Image, \Exception;
+use \Backend, \Image, \Messages, \Exception;
 
 
 /**
@@ -124,13 +124,13 @@ class FileUpload extends Backend
 			{
 				if ($file['error'] == 1 || $file['error'] == 2)
 				{
-					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb_readable));
+					Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb_readable));
 					$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb_readable, 'Uploader uploadTo()', TL_ERROR);
 					$this->blnHasError = true;
 				}
 				elseif ($file['error'] == 3)
 				{
-					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filepartial'], $file['name']));
+					Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filepartial'], $file['name']));
 					$this->log('File "'.$file['name'].'" was only partially uploaded' , 'Uploader uploadTo()', TL_ERROR);
 					$this->blnHasError = true;
 				}
@@ -139,7 +139,7 @@ class FileUpload extends Backend
 			// File is too big
 			elseif ($file['size'] > $maxlength_kb)
 			{
-				$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb_readable));
+				Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb_readable));
 				$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb_readable, 'Uploader uploadTo()', TL_ERROR);
 				$this->blnHasError = true;
 			}
@@ -153,7 +153,7 @@ class FileUpload extends Backend
 				// File type not allowed
 				if (!in_array(strtolower($pathinfo['extension']), $arrAllowedTypes))
 				{
-					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $pathinfo['extension']));
+					Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $pathinfo['extension']));
 					$this->log('File type "'.$pathinfo['extension'].'" is not allowed to be uploaded ('.$file['name'].')', 'Uploader uploadTo()', TL_ERROR);
 					$this->blnHasError = true;
 				}
@@ -171,7 +171,7 @@ class FileUpload extends Backend
 						// Notify the user
 						if (!$blnResized)
 						{
-							$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['MSC']['fileUploaded'], $file['name']));
+							Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['MSC']['fileUploaded'], $file['name']));
 							$this->log('File "'.$file['name'].'" uploaded successfully', 'Uploader uploadTo()', TL_FILES);
 						}
 
@@ -297,7 +297,7 @@ class FileUpload extends Backend
 		// The image is too big to be handled by the GD library
 		if ($arrImageSize[0] > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $arrImageSize[1] > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'])
 		{
-			$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['MSC']['fileExceeds'], $strName));
+			Message::addInfo(sprintf($GLOBALS['TL_LANG']['MSC']['fileExceeds'], $strName));
 			$this->log('File "'.$strName.'" uploaded successfully but was too big to be resized automatically', 'Uploader resizeUploadedImage()', TL_FILES);
 			return false;
 		}
@@ -326,7 +326,7 @@ class FileUpload extends Backend
 		if ($blnResize)
 		{
 			Image::resize($strImage, $arrImageSize[0], $arrImageSize[1]);
-			$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['MSC']['fileResized'], $strName));
+			Message::addInfo(sprintf($GLOBALS['TL_LANG']['MSC']['fileResized'], $strName));
 			$this->log('File "'.$strName.'" uploaded successfully and was scaled down to the maximum dimensions', 'Uploader resizeUploadedImage()', TL_FILES);
 			$this->blnHasResized = true;
 			return true;

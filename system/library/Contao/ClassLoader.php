@@ -78,6 +78,7 @@ class ClassLoader
 		'Contao\\Image'        => 'system/library/Contao/Image.php',
 		'Contao\\FTP'          => 'system/library/Contao/FTP.php',
 		'Contao\\Input'        => 'system/library/Contao/Input.php',
+		'Contao\\Message'      => 'system/library/Contao/Message.php',
 		'Contao\\Model'        => 'system/library/Contao/Model.php',
 		'Contao\\Request'      => 'system/library/Contao/Request.php',
 		'Contao\\RequestToken' => 'system/library/Contao/RequestToken.php',

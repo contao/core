@@ -1046,8 +1046,8 @@ class tl_page extends Backend
 		}
 
 		$this->import('Messages');
-		$this->addRawMessage($this->Messages->languageFallback());
-		$this->addRawMessage($this->Messages->topLevelRoot());
+		Message::addRaw($this->Messages->languageFallback());
+		Message::addRaw($this->Messages->topLevelRoot());
 	}
 
 

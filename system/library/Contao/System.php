@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Environment, \File, \Idna, \Input, \Validator, \Exception, \stdClass;
+use \Environment, \File, \Idna, \Input, \Messages, \Validator, \Exception, \stdClass;
 
 
 /**
@@ -224,7 +224,7 @@ abstract class System
 		}
 		if (Environment::get('remoteAddr'))
 		{
-			$strIp = System::anonymizeIp(Environment::get('ip'));
+			$strIp = static::anonymizeIp(Environment::get('ip'));
 		}
 
 		Database::getInstance()->prepare("INSERT INTO tl_log (tstamp, source, action, username, text, func, ip, browser) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")
@@ -235,7 +235,7 @@ abstract class System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['addLogEntry'] as $callback)
 			{
-				System::importStatic($callback[0])->$callback[1]($strText, $strFunction, $strAction);
+				static::importStatic($callback[0])->$callback[1]($strText, $strFunction, $strAction);
 			}
 		}
 	}
@@ -246,7 +246,7 @@ abstract class System
 	 * @param string
 	 * @return string
 	 */
-	protected function addToUrl($strRequest)
+	public static function addToUrl($strRequest)
 	{
 		$strRequest = preg_replace('/^&(amp;)?/i', '', $strRequest);
 		$queries = preg_split('/&(amp;)?/i', Environment::get('queryString'));
@@ -414,7 +414,7 @@ abstract class System
 	 * @param boolean
 	 * @return void
 	 */
-	protected function loadLanguageFile($strName, $strLanguage=false, $blnNoCache=false)
+	public static function loadLanguageFile($strName, $strLanguage=false, $blnNoCache=false)
 	{
 		if (!$strLanguage)
 		{
@@ -445,7 +445,7 @@ abstract class System
 			$objCacheFile->write('<?php' . "\n");
 
 			// Parse all active modules
-			foreach ($this->Config->getActiveModules() as $strModule)
+			foreach (Config::getInstance()->getActiveModules() as $strModule)
 			{
 				$strFallback = TL_ROOT . '/system/modules/' . $strModule . '/languages/en/' . $strName . '.php';
 
@@ -478,8 +478,7 @@ abstract class System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['loadLanguageFile'] as $callback)
 			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($strName, $strLanguage);
+				static::importStatic($callback[0])->$callback[1]($strName, $strLanguage);
 			}
 		}
 
@@ -586,10 +585,11 @@ abstract class System
 	 * Add an error message
 	 * @param string
 	 * @return void
+	 * @deprecated
 	 */
 	protected function addErrorMessage($strMessage)
 	{
-		$this->addMessage($strMessage, 'TL_ERROR');
+		Message::addError($strMessage);
 	}
 
 
@@ -597,10 +597,11 @@ abstract class System
 	 * Add a confirmation message
 	 * @param string
 	 * @return void
+	 * @deprecated
 	 */
 	protected function addConfirmationMessage($strMessage)
 	{
-		$this->addMessage($strMessage, 'TL_CONFIRM');
+		Message::addConfirmation($strMessage);
 	}
 
 
@@ -608,10 +609,11 @@ abstract class System
 	 * Add a new message
 	 * @param string
 	 * @return void
+	 * @deprecated
 	 */
 	protected function addNewMessage($strMessage)
 	{
-		$this->addMessage($strMessage, 'TL_NEW');
+		Message::addNew($strMessage);
 	}
 
 
@@ -619,10 +621,11 @@ abstract class System
 	 * Add an info message
 	 * @param string
 	 * @return void
+	 * @deprecated
 	 */
 	protected function addInfoMessage($strMessage)
 	{
-		$this->addMessage($strMessage, 'TL_INFO');
+		Message::addInfo($strMessage);
 	}
 
 
@@ -630,10 +633,11 @@ abstract class System
 	 * Add a raw message
 	 * @param string
 	 * @return void
+	 * @deprecated
 	 */
 	protected function addRawMessage($strMessage)
 	{
-		$this->addMessage($strMessage, 'TL_RAW');
+		Message::addRaw($strMessage);
 	}
 
 
@@ -642,26 +646,11 @@ abstract class System
 	 * @param string
 	 * @param string
 	 * @return void
-	 * @throws \Exception
+	 * @deprecated
 	 */
 	protected function addMessage($strMessage, $strType)
 	{
-		if ($strMessage == '')
-		{
-			return;
-		}
-
-		if (!in_array($strType, $this->getMessageTypes()))
-		{
-			throw new Exception("Invalid message type $strType");
-		}
-
-		if (!is_array($_SESSION[$strType]))
-		{
-			$_SESSION[$strType] = array();
-		}
-
-		$_SESSION[$strType][] = $strMessage;
+		Message::add($strMessage, $strType);
 	}
 
 
@@ -670,72 +659,33 @@ abstract class System
 	 * @param boolean
 	 * @param boolean
 	 * @return string
+	 * @deprecated
 	 */
 	protected function getMessages($blnDcLayout=false, $blnNoWrapper=false)
 	{
-		$strMessages = '';
-
-		// Regular messages
-		foreach ($this->getMessageTypes() as $strType)
-		{
-			if (!is_array($_SESSION[$strType]))
-			{
-				continue;
-			}
-
-			$strClass = strtolower($strType);
-			$_SESSION[$strType] = array_unique($_SESSION[$strType]);
-
-			foreach ($_SESSION[$strType] as $strMessage)
-			{
-				if ($strType == 'TL_RAW')
-				{
-					$strMessages .= $strMessage;
-				}
-				else
-				{
-					$strMessages .= sprintf('<p class="%s">%s</p>%s', $strClass, $strMessage, "\n");
-				}
-			}
-
-			if (!$_POST)
-			{
-				$_SESSION[$strType] = array();
-			}
-		}
-
-		$strMessages = trim($strMessages);
-
-		// Wrapping container
-		if (!$blnNoWrapper && $strMessages != '')
-		{
-			$strMessages = sprintf('%s<div class="tl_message">%s%s%s</div>%s', ($blnDcLayout ? "\n\n" : "\n"), "\n", $strMessages, "\n", ($blnDcLayout ? '' : "\n"));
-		}
-
-		return $strMessages;
+		return Message::generate($blnDcLayout, $blnNoWrapper);
 	}
 
 
 	/**
 	 * Reset the message system
 	 * @return void
+	 * @deprecated
 	 */
 	protected function resetMessages()
 	{
-		foreach ($this->getMessageTypes() as $strType)
-		{
-			$_SESSION[$strType] = array();
-		}
+		Message::reset();
 	} 
 
 
 	/**
 	 * Return all available message types
 	 * @return array
+	 * @deprecated
 	 */
 	protected function getMessageTypes()
 	{
-		return array('TL_ERROR', 'TL_CONFIRM', 'TL_NEW', 'TL_INFO', 'TL_RAW');
+		return Message::getTypes();
 	}
 
 
@@ -760,7 +710,7 @@ abstract class System
 	 * @param boolean
 	 * @return void
 	 */
-	protected function setCookie($strName, $varValue, $intExpires, $strPath=null, $strDomain=null, $blnSecure=false)
+	public static function setCookie($strName, $varValue, $intExpires, $strPath=null, $strDomain=null, $blnSecure=false)
 	{
 		if ($strPath === null)
 		{
@@ -781,8 +731,7 @@ abstract class System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['setCookie'] as $callback)
 			{
-				$this->import($callback[0], 'objCookie', true);
-				$objCookie = $this->objCookie->$callback[1]($objCookie);
+				$objCookie = static::importStatic($callback[0])->$callback[1]($objCookie);
 			}
 		}
 

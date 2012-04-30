@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \DataContainer, \Environment, \File, \Input, \Widget;
+use \DataContainer, \Environment, \File, \Input, \Messages, \Widget;
 
 
 /**
@@ -266,7 +266,7 @@ class TableWizard extends Widget
 
 			if (empty($arrUploaded))
 			{
-				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
+				Message::addError($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
@@ -279,7 +279,7 @@ class TableWizard extends Widget
 
 				if ($objFile->extension != 'csv')
 				{
-					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
+					Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
 					continue;
 				}
 

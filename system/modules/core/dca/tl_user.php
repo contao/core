@@ -648,19 +648,19 @@ class tl_user extends Backend
 				if (in_array('purge_session', $arrPurge))
 				{
 					$this->Session->setData(array());
-					$this->addConfirmationMessage($GLOBALS['TL_LANG']['tl_user']['sessionPurged']);
+					Message::addConfirmation($GLOBALS['TL_LANG']['tl_user']['sessionPurged']);
 				}
 
 				if (in_array('purge_images', $arrPurge))
 				{
 					$this->Automator->purgeImageCache();
-					$this->addConfirmationMessage($GLOBALS['TL_LANG']['tl_user']['htmlPurged']);
+					Message::addConfirmation($GLOBALS['TL_LANG']['tl_user']['htmlPurged']);
 				}
 
 				if (in_array('purge_pages', $arrPurge))
 				{
 					$this->Automator->purgePageCache();
-					$this->addConfirmationMessage($GLOBALS['TL_LANG']['tl_user']['tempPurged']);
+					Message::addConfirmation($GLOBALS['TL_LANG']['tl_user']['tempPurged']);
 				}
 			}
 		}

@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendModule, \BackendTemplate, \Environment, \File, \Input;
+use \BackendModule, \BackendTemplate, \Environment, \File, \Input, \Messages;
 
 
 /**
@@ -225,7 +225,7 @@ class ModuleExtension extends BackendModule
 				}
 			}
 
-			$this->addConfirmationMessage($GLOBALS['TL_LANG']['tl_extension']['confirm']);
+			Message::addConfirmation($GLOBALS['TL_LANG']['tl_extension']['confirm']);
 			$this->reload();
 		}
 

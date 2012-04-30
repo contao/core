@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \Backend, \Database_Result, \DataContainer, \Email, \Environment, \File, \FileTree, \Input, \Module, \NewsletterModel, \NewsletterChannelModel;
+use \BackendTemplate, \Backend, \Database_Result, \DataContainer, \Email, \Environment, \File, \FileTree, \Input, \Messages, \Module, \NewsletterModel, \NewsletterChannelModel;
 
 
 /**
@@ -132,7 +132,7 @@ class Newsletter extends Backend
 				$this->sendNewsletter($objEmail, $objNewsletter, $arrRecipient, $text, $html);
 
 				// Redirect
-				$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], 1));
+				Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], 1));
 				$this->redirect($referer);
 			}
 
@@ -144,7 +144,7 @@ class Newsletter extends Backend
 			if ($objTotal->count < 1)
 			{
 				$this->Session->set('tl_newsletter_send', null);
-				$this->addErrorMessage($GLOBALS['TL_LANG']['tl_newsletter']['error']);
+				Message::addError($GLOBALS['TL_LANG']['tl_newsletter']['error']);
 				$this->redirect($referer);
 			}
 
@@ -194,7 +194,7 @@ class Newsletter extends Backend
 				if (!empty($_SESSION['REJECTED_RECIPIENTS']))
 				{
 					$intRejected = count($_SESSION['REJECTED_RECIPIENTS']);
-					$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['tl_newsletter']['rejected'], $intRejected));
+					Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_newsletter']['rejected'], $intRejected));
 					$intTotal -= $intRejected;
 
 					foreach ($_SESSION['REJECTED_RECIPIENTS'] as $strRecipient)
@@ -206,7 +206,7 @@ class Newsletter extends Backend
 					}
 				}
 
-				$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], $intTotal));
+				Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], $intTotal));
 
 				echo '<script>setTimeout(\'window.location="' . Environment::get('base') . $referer . '"\', 1000);</script>';
 				echo '<a href="' . Environment::get('base') . $referer . '">Please click here to proceed if you are not using JavaScript</a>';
@@ -430,7 +430,7 @@ class Newsletter extends Backend
 
 			if (empty($arrUploaded))
 			{
-				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
+				Message::addError($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
@@ -444,7 +444,7 @@ class Newsletter extends Backend
 
 				if ($objFile->extension != 'csv')
 				{
-					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
+					Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
 					continue;
 				}
 
@@ -503,11 +503,11 @@ class Newsletter extends Backend
 				}
 			}
 
-			$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['confirm'], $intTotal));
+			Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['confirm'], $intTotal));
 
 			if ($intInvalid > 0)
 			{
-				$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['invalid'], $intInvalid));
+				Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['invalid'], $intInvalid));
 			}
 
 			setcookie('BE_PAGE_OFFSET', 0, 0, '/');

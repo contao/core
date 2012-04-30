@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Backend, \Environment, \File, \Input, \String, \Exception;
+use \Backend, \Environment, \File, \Input, \Messages, \String, \Exception;
 
 
 /**
@@ -158,7 +158,7 @@ class StyleSheets extends Backend
 		// Check whether the target file is writeable
 		if (file_exists(TL_ROOT . '/assets/css/' . $row['name'] . '.css') && !$this->Files->is_writeable('assets/css/' . $row['name'] . '.css'))
 		{
-			$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'assets/css/' . $row['name'] . '.css'));
+			Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'assets/css/' . $row['name'] . '.css'));
 			return;
 		}
 
@@ -1175,7 +1175,7 @@ class StyleSheets extends Backend
 
 			if (empty($arrUploaded))
 			{
-				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
+				Message::addError($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
@@ -1184,7 +1184,7 @@ class StyleSheets extends Backend
 				// Folders cannot be imported
 				if (is_dir(TL_ROOT . '/' . $strCssFile))
 				{
-					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], basename($strCssFile)));
+					Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], basename($strCssFile)));
 					continue;
 				}
 
@@ -1193,7 +1193,7 @@ class StyleSheets extends Backend
 				// Check the file extension
 				if ($objFile->extension != 'css')
 				{
-					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
+					Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
 					continue;
 				}
 
@@ -1283,11 +1283,11 @@ class StyleSheets extends Backend
 				// Notify the user
 				if ($strName . '.css' != basename($strCssFile))
 				{
-					$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['tl_style_sheet']['css_renamed'], basename($strCssFile), $strName . '.css'));
+					Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_style_sheet']['css_renamed'], basename($strCssFile), $strName . '.css'));
 				}
 				else
 				{
-					$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['tl_style_sheet']['css_imported'], $strName . '.css'));
+					Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_style_sheet']['css_imported'], $strName . '.css'));
 				}
 			}
 

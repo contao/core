@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \DataContainer, \Date, \Environment, \Input, \editable;
+use \DataContainer, \Date, \Environment, \Input, \Messages, \editable;
 
 
 /**
@@ -284,7 +284,7 @@ class DC_File extends DataContainer implements editable
 		// Check whether the target file is writeable
 		if (!$this->Files->is_writeable('system/config/localconfig.php'))
 		{
-			$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'system/config/localconfig.php'));
+			Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'system/config/localconfig.php'));
 		}
 
 		// Add some buttons and end the form

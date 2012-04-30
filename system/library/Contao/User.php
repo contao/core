@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Email, \Environment, \FrontendUser, \Input, \System;
+use \Email, \Environment, \FrontendUser, \Input, \Messages, \System;
 
 
 /**
@@ -273,7 +273,7 @@ abstract class User extends System
 			// Return if the user still cannot be loaded
 			if (!$blnLoaded || $this->findBy('username', Input::post('username')) == false)
 			{
-				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
+				Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 				$this->log('Could not find user "' . Input::post('username') . '"', get_class($this) . ' login()', TL_ACCESS);
 
 				return false;
@@ -357,7 +357,7 @@ abstract class User extends System
 			--$this->loginCount;
 			$this->save();
 
-			$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
+			Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 			$this->log('Invalid password submitted for username "' . $this->username . '"', get_class($this) . ' login()', TL_ACCESS);
 
 			return false;
@@ -400,14 +400,14 @@ abstract class User extends System
 		// Check whether the account is locked
 		if (($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) > $time)
 		{
-			$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) - $time) / 60)));
+			Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) - $time) / 60)));
 			return false;
 		}
 
 		// Check whether the account is disabled
 		elseif ($this->disable)
 		{
-			$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
+			Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 			$this->log('The account has been disabled', get_class($this) . ' login()', TL_ACCESS);
 			return false;
 		}
@@ -415,7 +415,7 @@ abstract class User extends System
 		// Check wether login is allowed (front end only)
 		elseif ($this instanceof FrontendUser && !$this->login)
 		{
-			$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
+			Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 			$this->log('User "' . $this->username . '" is not allowed to log in', get_class($this) . ' login()', TL_ACCESS);
 			return false;
 		}
@@ -425,14 +425,14 @@ abstract class User extends System
 		{
 			if ($this->start != '' && $this->start > $time)
 			{
-				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
+				Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 				$this->log('The account was not active yet (activation date: ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->start) . ')', get_class($this) . ' login()', TL_ACCESS);
 				return false;
 			}
 
 			if ($this->stop != '' && $this->stop < $time)
 			{
-				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
+				Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 				$this->log('The account was not active anymore (deactivation date: ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->stop) . ')', get_class($this) . ' login()', TL_ACCESS);
 				return false;
 			}

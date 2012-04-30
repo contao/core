@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendModule, \Environment, \File, \Input;
+use \BackendModule, \Environment, \File, \Input, \Messages;
 
 
 /**
@@ -80,7 +80,7 @@ class ModuleAutoload extends BackendModule
 
 			if (empty($arrModules))
 			{
-				$this->addErrorMessage($GLOBALS['TL_LANG']['tl_merge']['emptySelection']);
+				Message::adError($GLOBALS['TL_LANG']['tl_merge']['emptySelection']);
 			}
 			else
 			{
@@ -91,7 +91,7 @@ class ModuleAutoload extends BackendModule
 					// config/autoload.php exists
 					if (!Input::post('ide_compat') && !Input::post('override') && file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.php'))
 					{
-						$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['tl_merge']['autoloadExists'], $strModule));
+						Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_merge']['autoloadExists'], $strModule));
 						continue;
 					}
 
@@ -303,7 +303,7 @@ EOT
 					}
 
 					$objFile->close();
-					$this->addConfirmationMessage('Module "' . $strModule . '" has been merged');
+					Message::addConfirmation('Module "' . $strModule . '" has been merged');
 				}
 			}
 

@@ -83,22 +83,22 @@ class ChangePassword extends Backend
 			// Do not allow special characters
 			if (preg_match('/[#\(\)\/<=>]/', html_entity_decode(Input::post('password'))))
 			{
-				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['extnd']);
+				Message::addError($GLOBALS['TL_LANG']['ERR']['extnd']);
 			}
 			// Passwords do not match
 			elseif ($pw != $cnf)
 			{
-				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['passwordMatch']);
+				Message::addError($GLOBALS['TL_LANG']['ERR']['passwordMatch']);
 			}
 			// Password too short
 			elseif (utf8_strlen($pw) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
 			{
-				$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']));
+				Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']));
 			}
 			// Password and username are the same
 			elseif ($pw == $this->User->username)
 			{
-				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['passwordName']);
+				Message::addError($GLOBALS['TL_LANG']['ERR']['passwordName']);
 			}
 			// Save the data
 			else
@@ -109,7 +109,7 @@ class ChangePassword extends Backend
 				// Make sure the password has been changed
 				if ($strPassword . ':' . $strSalt == $this->User->password)
 				{
-					$this->addErrorMessage($GLOBALS['TL_LANG']['MSC']['pw_change']);
+					Message::addError($GLOBALS['TL_LANG']['MSC']['pw_change']);
 				}
 				else
 				{
@@ -121,7 +121,7 @@ class ChangePassword extends Backend
 					$objUser->password = $strPassword . ':' . $strSalt;
 					$objUser->save();
 
-					$this->addConfirmationMessage($GLOBALS['TL_LANG']['MSC']['pw_changed']);
+					Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);
 					$this->redirect('contao/main.php');
 				}
 			}
