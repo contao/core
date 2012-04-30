@@ -111,6 +111,10 @@ class Folder extends System
 					Cache::set($strCacheKey, $this->strFolder);
 					break;
 
+				case 'size':
+					Cache::set($strCacheKey, $this->getSize());
+					break;
+
 				default:
 					return parent::__get($strKey);
 					break;
@@ -251,4 +255,34 @@ class Folder extends System
 		return md5(implode('-', $arrFiles));
 	}
 
+
+	/**
+	 * Return the size of the folder
+	 * @return integer
+	 */
+	protected function getSize()
+	{
+		$intSize = 0;
+
+		foreach (scan(TL_ROOT . '/' . $this->strFolder) as $strFile)
+		{
+			if ($strFile == '.svn' || $strFile == '.DS_Store')
+			{
+				continue;
+			}
+
+			if (is_dir(TL_ROOT . '/' . $this->strFolder . '/' . $strFile))
+			{
+				$objFolder = new Folder($this->strFolder . '/' . $strFile);
+				$intSize += $objFolder->size;
+			}
+			else
+			{
+				$objFile = new File($this->strFolder . '/' . $strFile);
+				$intSize += $objFile->size;
+			}
+		}
+
+		return $intSize;
+	}
 }

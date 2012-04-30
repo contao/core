@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added `Folder->size` to the `Folder` class (see #3903).
+
 ### Improved
 Added better page titles in the back end (see #3980).
 
