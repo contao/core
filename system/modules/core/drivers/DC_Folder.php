@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \DataContainer, \Date, \Environment, \File, \FilesModel, \Folder, \Input, \RequestToken, \Exception, \listable, \editable;
+use \DataContainer, \Date, \Environment, \File, \FilesModel, \Folder, \Image, \Input, \RequestToken, \Exception, \listable, \editable;
 
 
 /**
@@ -2499,7 +2499,7 @@ window.addEvent(\'domready\', function() {
 					$_height = ($objFile->height < 50) ? $objFile->height : 50;
 					$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';
 
-					$thumbnail .= '<br><img src="' . TL_FILES_URL . $this->getImage($currentEncoded, $_width, $_height) . '" alt="" style="margin:0 0 2px -19px">';
+					$thumbnail .= '<br><img src="' . TL_FILES_URL . Image::get($currentEncoded, $_width, $_height) . '" alt="" style="margin:0 0 2px -19px">';
 				}
 			}
 			else

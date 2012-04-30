@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \ContentElement, \File, \FilesModel, \FrontendTemplate, \String;
+use \ContentElement, \File, \FilesModel, \FrontendTemplate, \Image, \String;
 
 
 /**
@@ -101,7 +101,7 @@ class ContentHyperlink extends ContentElement
 						$size[1] = floor($intMaxWidth * $objFile->height / $objFile->width);
 					}
 
-					$src = $this->getImage($objModel->path, $size[0], $size[1], $size[2]);
+					$src = Image::get($objModel->path, $size[0], $size[1], $size[2]);
 
 					if (($imgSize = @getimagesize(TL_ROOT . '/' . rawurldecode($src))) !== false)
 					{

@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \ArticleModel, \Cache, \CalendarModel, \CalendarEventsModel, \ContentModel,	\Database, \Date, \Environment, \FaqModel, \File, \FilesModel, \Form, \FormModel, \Input, \ModuleArticle, \ModuleModel, \NewsModel, \NewsArchiveModel, \PageModel, \String, \System, \TemplateLoader, \ThemeModel, \Exception;
+use \ArticleModel, \Cache, \CalendarModel, \CalendarEventsModel, \ContentModel,	\Database, \Date, \Environment, \FaqModel, \File, \FilesModel, \Form, \FormModel, \Image, \Input, \ModuleArticle, \ModuleModel, \NewsModel, \NewsArchiveModel, \PageModel, \String, \System, \TemplateLoader, \ThemeModel, \Exception;
 
 
 /**
@@ -821,10 +821,11 @@ abstract class Controller extends System
 	 * @param integer
 	 * @param string
 	 * @return boolean
+	 * @deprecated
 	 */
 	protected function resizeImage($image, $width, $height, $mode='')
 	{
-		return $this->getImage($image, $width, $height, $mode, $image) ? true : false;
+		return Image::resize($image, $width, $height, $mode);
 	}
 
 
@@ -836,322 +837,11 @@ abstract class Controller extends System
 	 * @param string
 	 * @param string
 	 * @return string|null
+	 * @deprecated
 	 */
 	protected function getImage($image, $width, $height, $mode='', $target=null)
 	{
-		if ($image == '')
-		{
-			return null;
-		}
-
-		$image = rawurldecode($image);
-
-		// Check whether the file exists
-		if (!file_exists(TL_ROOT . '/' . $image))
-		{
-			$this->log('Image "' . $image . '" could not be found', 'Controller getImage()', TL_ERROR);
-			return null;
-		}
-
-		$objFile = new File($image);
-		$arrAllowedTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['validImageTypes']));
-
-		// Check the file type
-		if (!in_array($objFile->extension, $arrAllowedTypes))
-		{
-			$this->log('Image type "' . $objFile->extension . '" was not allowed to be processed', 'Controller getImage()', TL_ERROR);
-			return null;
-		}
-
-		// No resizing required
-		if ($objFile->width == $width && $objFile->height == $height)
-		{
-			return $image;
-		}
-
-		// No mode given
-		if ($mode == '')
-		{
-			$mode = 'proportional';
-		}
-
-		// Backwards compatibility
-		if ($mode == 'crop')
-		{
-			$mode = 'center_center';
-		}
-
-		$strCacheKey = substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8);
-		$strCacheName = 'assets/images/' . substr($strCacheKey, -1) . '/' . $objFile->filename . '-' . $strCacheKey . '.' . $objFile->extension;
-
-		// Return the path of the new image if it exists already
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheName))
-		{
-			return $this->urlEncode($strCacheName);
-		}
-
-		// HOOK: add custom logic
-		if (isset($GLOBALS['TL_HOOKS']['getImage']) && is_array($GLOBALS['TL_HOOKS']['getImage']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['getImage'] as $callback)
-			{
-				$this->import($callback[0]);
-				$return = $this->$callback[0]->$callback[1]($image, $width, $height, $mode, $strCacheName, $objFile, $target);
-
-				if (is_string($return))
-				{
-					return $this->urlEncode($return);
-				}
-			}
-		}
-
-		// Return the path to the original image if the GDlib cannot handle it
-		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $objFile->height > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] || (!$width && !$height) || $width > 1200 || $height > 1200)
-		{
-			return $this->urlEncode($image);
-		}
-
-		$intPositionX = 0;
-		$intPositionY = 0;
-		$intWidth = $width;
-		$intHeight = $height;
-
-		// Mode-specific changes
-		if ($intWidth && $intHeight)
-		{
-			switch ($mode)
-			{
-				case 'proportional':
-					if ($objFile->width >= $objFile->height)
-					{
-						unset($height, $intHeight);
-					}
-					else
-					{
-						unset($width, $intWidth);
-					}
-					break;
-
-				case 'box':
-					if (round($objFile->height * $width / $objFile->width) <= $intHeight)
-					{
-						unset($height, $intHeight);
-					}
-					else
-					{
-						unset($width, $intWidth);
-					}
-					break;
-			}
-		}
-
-		// Resize width and height and crop the image if necessary
-		if ($intWidth && $intHeight)
-		{
-			if (($intWidth * $objFile->height) != ($intHeight * $objFile->width))
-			{
-				$intWidth = round($objFile->width * $height / $objFile->height);
-				$intPositionX = -intval(($intWidth - $width) / 2);
-
-				if ($intWidth < $width)
-				{
-					$intWidth = $width;
-					$intHeight = round($objFile->height * $width / $objFile->width);
-					$intPositionX = 0;
-					$intPositionY = -intval(($intHeight - $height) / 2);
-				}
-			}
-
-			// Advanced crop modes
-			switch ($mode)
-			{
-				case 'left_top':
-					$intPositionX = 0;
-					$intPositionY = 0;
-					break;
-
-				case 'center_top':
-					$intPositionX = -intval(($intWidth - $width) / 2);
-					$intPositionY = 0;
-					break;
-
-				case 'right_top':
-					$intPositionX = -intval($intWidth - $width);
-					$intPositionY = 0;
-					break;
-
-				case 'left_center':
-					$intPositionX = 0;
-					$intPositionY = -intval(($intHeight - $height) / 2);
-					break;
-
-				case 'center_center':
-					$intPositionX = -intval(($intWidth - $width) / 2);
-					$intPositionY = -intval(($intHeight - $height) / 2);
-					break;
-
-				case 'right_center':
-					$intPositionX = -intval($intWidth - $width);
-					$intPositionY = -intval(($intHeight - $height) / 2);
-					break;
-
-				case 'left_bottom':
-					$intPositionX = 0;
-					$intPositionY = -intval($intHeight - $height);
-					break;
-
-				case 'center_bottom':
-					$intPositionX = -intval(($intWidth - $width) / 2);
-					$intPositionY = -intval($intHeight - $height);
-					break;
-
-				case 'right_bottom':
-					$intPositionX = -intval($intWidth - $width);
-					$intPositionY = -intval($intHeight - $height);
-					break;
-			}
-
-			$strNewImage = imagecreatetruecolor($width, $height);
-		}
-
-		// Calculate the height if only the width is given
-		elseif ($intWidth)
-		{
-			$intHeight = round($objFile->height * $width / $objFile->width);
-			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
-		}
-
-		// Calculate the width if only the height is given
-		elseif ($intHeight)
-		{
-			$intWidth = round($objFile->width * $height / $objFile->height);
-			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
-		}
-
-		$arrGdinfo = gd_info();
-		$strGdVersion = preg_replace('/[^0-9\.]+/', '', $arrGdinfo['GD Version']);
-
-		switch ($objFile->extension)
-		{
-			case 'gif':
-				if ($arrGdinfo['GIF Read Support'])
-				{
-					$strSourceImage = imagecreatefromgif(TL_ROOT . '/' . $image);
-					$intTranspIndex = imagecolortransparent($strSourceImage);
-
-					// Handle transparency
-					if ($intTranspIndex >= 0 && $intTranspIndex < imagecolorstotal($strSourceImage))
-					{
-						$arrColor = imagecolorsforindex($strSourceImage, $intTranspIndex);
-						$intTranspIndex = imagecolorallocate($strNewImage, $arrColor['red'], $arrColor['green'], $arrColor['blue']);
-						imagefill($strNewImage, 0, 0, $intTranspIndex);
-						imagecolortransparent($strNewImage, $intTranspIndex);
-					}
-				}
-				break;
-
-			case 'jpg':
-			case 'jpeg':
-				if ($arrGdinfo['JPG Support'] || $arrGdinfo['JPEG Support'])
-				{
-					$strSourceImage = imagecreatefromjpeg(TL_ROOT . '/' . $image);
-				}
-				break;
-
-			case 'png':
-				if ($arrGdinfo['PNG Support'])
-				{
-					$strSourceImage = imagecreatefrompng(TL_ROOT . '/' . $image);
-
-					// Handle transparency (GDlib >= 2.0 required)
-					if (version_compare($strGdVersion, '2.0', '>='))
-					{
-						imagealphablending($strNewImage, false);
-						$intTranspIndex = imagecolorallocatealpha($strNewImage, 0, 0, 0, 127);
-						imagefill($strNewImage, 0, 0, $intTranspIndex);
-						imagesavealpha($strNewImage, true);
-					}
-				}
-				break;
-		}
-
-		// The new image could not be created
-		if (!$strSourceImage)
-		{
-			imagedestroy($strNewImage);
-			$this->log('Image "' . $image . '" could not be processed', 'Controller getImage()', TL_ERROR);
-			return null;
-		}
-
-		imagecopyresampled($strNewImage, $strSourceImage, $intPositionX, $intPositionY, 0, 0, $intWidth, $intHeight, $objFile->width, $objFile->height);
-
-		// Fallback to PNG if GIF ist not supported
-		if ($objFile->extension == 'gif' && !$arrGdinfo['GIF Create Support'])
-		{
-			$objFile->extension = 'png';
-		}
-
-		// Create the new image
-		switch ($objFile->extension)
-		{
-			case 'gif':
-				imagegif($strNewImage, TL_ROOT . '/' . $strCacheName);
-				break;
-
-			case 'jpg':
-			case 'jpeg':
-				imagejpeg($strNewImage, TL_ROOT . '/' . $strCacheName, (!$GLOBALS['TL_CONFIG']['jpgQuality'] ? 80 : $GLOBALS['TL_CONFIG']['jpgQuality']));
-				break;
-
-			case 'png':
-				// Optimize non-truecolor images (see #2426)
-				if (version_compare($strGdVersion, '2.0', '>=') && function_exists('imagecolormatch') && !imageistruecolor($strSourceImage))
-				{
-					// TODO: make it work with transparent images, too
-					if (imagecolortransparent($strSourceImage) == -1)
-					{
-						$intColors = imagecolorstotal($strSourceImage);
-
-						// Convert to a palette image
-						// @see http://www.php.net/manual/de/function.imagetruecolortopalette.php#44803
-						if ($intColors > 0 && $intColors < 256)
-						{
-							$wi = imagesx($strNewImage);
-							$he = imagesy($strNewImage);
-							$ch = imagecreatetruecolor($wi, $he);
-							imagecopymerge($ch, $strNewImage, 0, 0, 0, 0, $wi, $he, 100);
-							imagetruecolortopalette($strNewImage, false, $intColors);
-							imagecolormatch($ch, $strNewImage);
-							imagedestroy($ch);
-						}
-					}
-				}
-
-				imagepng($strNewImage, TL_ROOT . '/' . $strCacheName);
-				break;
-		}
-
-		// Destroy the temporary images
-		imagedestroy($strSourceImage);
-		imagedestroy($strNewImage);
-
-		// Resize the original image
-		if ($target)
-		{
-			$this->import('Files');
-			$this->Files->rename($strCacheName, $target);
-			return $this->urlEncode($target);
-		}
-
-		// Set the file permissions when the Safe Mode Hack is used
-		if ($GLOBALS['TL_CONFIG']['useFTP'])
-		{
-			$this->import('Files');
-			$this->Files->chmod($strCacheName, 0644);
-		}
-
-		// Return the path to new image
-		return $this->urlEncode($strCacheName);
+		return Image::get($image, $width, $height, $mode, $target);
 	}
 
 
@@ -2168,7 +1858,7 @@ abstract class Controller extends System
 					// Generate the thumbnail image
 					try
 					{
-						$src = $this->getImage($strFile, $width, $height, $mode);
+						$src = Image::get($strFile, $width, $height, $mode);
 						$dimensions = '';
 
 						// Add the image dimensions
@@ -3362,7 +3052,7 @@ abstract class Controller extends System
 			$size[1] = floor($intMaxWidth * $ratio);
 		}
 
-		$src = $this->getImage($arrItem['singleSRC'], $size[0], $size[1], $size[2]);
+		$src = Image::get($arrItem['singleSRC'], $size[0], $size[1], $size[2]);
 
 		// Image dimensions
 		if (($imgSize = @getimagesize(TL_ROOT .'/'. rawurldecode($src))) !== false)

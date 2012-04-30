@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Environment, \File, \Input, \Widget;
+use \Environment, \File, \Image, \Input, \Widget;
 
 
 /**
@@ -353,7 +353,7 @@ class FileSelector extends Widget
 				{
 					$_height = ($file->height < 50) ? $file->height : 50;
 					$_width = (($file->width * $_height / $file->height) > 400) ? 90 : '';
-					$thumbnail .= '<br><img src="' . TL_FILES_URL . $this->getImage($objFile->path, $_width, $_height) . '" alt="" style="margin-bottom:2px">';
+					$thumbnail .= '<br><img src="' . TL_FILES_URL . Image::get($objFile->path, $_width, $_height) . '" alt="" style="margin-bottom:2px">';
 				}
 			}
 			else

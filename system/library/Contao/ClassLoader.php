@@ -75,6 +75,7 @@ class ClassLoader
 		'Contao\\FileCache'    => 'system/library/Contao/FileCache.php',
 		'Contao\\Folder'       => 'system/library/Contao/Folder.php',
 		'Contao\\Idna'         => 'system/library/Contao/Idna.php',
+		'Contao\\Image'        => 'system/library/Contao/Image.php',
 		'Contao\\FTP'          => 'system/library/Contao/FTP.php',
 		'Contao\\Input'        => 'system/library/Contao/Input.php',
 		'Contao\\Model'        => 'system/library/Contao/Model.php',

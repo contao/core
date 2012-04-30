@@ -196,16 +196,25 @@ abstract class System
 
 
 	/**
+	 * Instantiate a library in non-object context
+	 * @param string
+	 * @return object
+	 */
+	public static function importStatic($strClass)
+	{
+		return (in_array('getInstance', get_class_methods($strClass))) ? call_user_func(array($strClass, 'getInstance')) : new $strClass();
+	}
+
+
+	/**
 	 * Add a log entry
 	 * @param string
 	 * @param string
 	 * @param string
 	 * @return void
 	 */
-	protected function log($strText, $strFunction, $strAction)
+	public static function log($strText, $strFunction, $strAction)
 	{
-		$this->import('Database');
-
 		$strUa = 'N/A';
 		$strIp = '127.0.0.1';
 
@@ -215,19 +224,18 @@ abstract class System
 		}
 		if (Environment::get('remoteAddr'))
 		{
-			$strIp = $this->anonymizeIp(Environment::get('ip'));
+			$strIp = System::anonymizeIp(Environment::get('ip'));
 		}
 
-		$this->Database->prepare("INSERT INTO tl_log (tstamp, source, action, username, text, func, ip, browser) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")
-					   ->execute(time(), (TL_MODE == 'FE' ? 'FE' : 'BE'), $strAction, ($GLOBALS['TL_USERNAME'] ? $GLOBALS['TL_USERNAME'] : ''), specialchars($strText), $strFunction, $strIp, $strUa);
+		Database::getInstance()->prepare("INSERT INTO tl_log (tstamp, source, action, username, text, func, ip, browser) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")
+							   ->execute(time(), (TL_MODE == 'FE' ? 'FE' : 'BE'), $strAction, ($GLOBALS['TL_USERNAME'] ? $GLOBALS['TL_USERNAME'] : ''), specialchars($strText), $strFunction, $strIp, $strUa);
 
 		// HOOK: allow to add custom loggers
 		if (isset($GLOBALS['TL_HOOKS']['addLogEntry']) && is_array($GLOBALS['TL_HOOKS']['addLogEntry']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['addLogEntry'] as $callback)
 			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($strText, $strFunction, $strAction);
+				System::importStatic($callback[0])->$callback[1]($strText, $strFunction, $strAction);
 			}
 		}
 	}
@@ -269,7 +277,7 @@ abstract class System
 	 * Reload the current page
 	 * @return void
 	 */
-	protected function reload()
+	public static function reload()
 	{
 		$strLocation = Environment::get('url') . Environment::get('requestUri');
 
@@ -296,7 +304,7 @@ abstract class System
 	 * @param integer
 	 * @return void
 	 */
-	protected function redirect($strLocation, $intStatus=303)
+	public static function redirect($strLocation, $intStatus=303)
 	{
 		$strLocation = str_replace('&amp;', '&', $strLocation);
 
@@ -348,10 +356,10 @@ abstract class System
 	 * @param string
 	 * @return string
 	 */
-	protected function getReferer($blnEncodeAmpersands=false, $strTable=null)
+	public static function getReferer($blnEncodeAmpersands=false, $strTable=null)
 	{
 		$key = (Environment::get('script') == 'contao/files.php') ? 'fileReferer' : 'referer';
-		$session = $this->Session->get($key);
+		$session = Session::getInstance()->get($key);
 
 		// Use a specific referer
 		if ($strTable != '' && isset($session[$strTable]) && Input::get('act') != 'select')
@@ -386,7 +394,7 @@ abstract class System
 	 * @param boolean
 	 * @return string
 	 */
-	protected function getIndexFreeRequest($blnAmpersand=true)
+	public static function getIndexFreeRequest($blnAmpersand=true)
 	{
 		$strRequest = Environment::get('request');
 
@@ -498,7 +506,7 @@ abstract class System
 	 * @param integer
 	 * @return string
 	 */
-	protected function parseDate($strFormat, $intTstamp=null)
+	public static function parseDate($strFormat, $intTstamp=null)
 	{
 		$strModified = str_replace
 		(
@@ -736,7 +744,7 @@ abstract class System
 	 * @param string
 	 * @return string
 	 */
-	protected function urlEncode($strPath)
+	public static function urlEncode($strPath)
 	{
 		return str_replace('%2F', '/', rawurlencode($strPath));
 	}
@@ -787,7 +795,7 @@ abstract class System
 	 * @param string
 	 * @return array
 	 */
-	protected function splitFriendlyName($strEmail)
+	public static function splitFriendlyName($strEmail)
 	{
 		if (strpos($strEmail, '<') !== false)
 		{
@@ -870,14 +878,14 @@ abstract class System
 	 * @param integer
 	 * @return string
 	 */
-	protected function getReadableSize($intSize, $intDecimals=1)
+	public static function getReadableSize($intSize, $intDecimals=1)
 	{
 		for ($i=0; $intSize>=1000; $i++)
 		{
 			$intSize /= 1000;
 		}
 
-		return $this->getFormattedNumber($intSize, $intDecimals) . ' ' . $GLOBALS['TL_LANG']['UNITS'][$i];
+		return static::getFormattedNumber($intSize, $intDecimals) . ' ' . $GLOBALS['TL_LANG']['UNITS'][$i];
 	}
 
 
@@ -887,7 +895,7 @@ abstract class System
 	 * @param integer
 	 * @return mixed
 	 */
-	protected function getFormattedNumber($varNumber, $intDecimals=2)
+	public static function getFormattedNumber($varNumber, $intDecimals=2)
 	{
 		return number_format(round($varNumber, $intDecimals), $intDecimals, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']);
 	}
@@ -898,7 +906,7 @@ abstract class System
 	 * @param string
 	 * @return string
 	 */
-	protected function anonymizeIp($strIp)
+	public static function anonymizeIp($strIp)
 	{
 		// The feature has been disabled
 		if (!$GLOBALS['TL_CONFIG']['privacyAnonymizeIp'])
@@ -930,7 +938,7 @@ abstract class System
 	 * @param string
 	 * @return string
 	 */
-	protected function getModelClassFromTable($strTable)
+	public static function getModelClassFromTable($strTable)
 	{
 		$arrChunks = explode('_', $strTable);
 

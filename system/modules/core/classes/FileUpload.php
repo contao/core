@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Backend, \Exception;
+use \Backend, \Image, \Exception;
 
 
 /**
@@ -325,7 +325,7 @@ class FileUpload extends Backend
 		// Resized successfully
 		if ($blnResize)
 		{
-			$this->resizeImage($strImage, $arrImageSize[0], $arrImageSize[1]);
+			Image::resize($strImage, $arrImageSize[0], $arrImageSize[1]);
 			$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['MSC']['fileResized'], $strName));
 			$this->log('File "'.$strName.'" uploaded successfully and was scaled down to the maximum dimensions', 'Uploader resizeUploadedImage()', TL_FILES);
 			$this->blnHasResized = true;

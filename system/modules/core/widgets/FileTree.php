@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \File, \FilesModel, \Input, \Widget;
+use \File, \FilesModel, \Image, \Input, \Widget;
 
 
 /**
@@ -218,7 +218,7 @@ class FileTree extends Widget
 								// Only show images
 								if ($objFile->isGdImage)
 								{
-									$arrValues[$objSubfiles->id] = $this->generateImage($this->getImage($objSubfiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
+									$arrValues[$objSubfiles->id] = $this->generateImage(Image::get($objSubfiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
 								}
 							}
 							else
@@ -240,7 +240,7 @@ class FileTree extends Widget
 							// Only show images
 							if ($objFile->isGdImage)
 							{
-								$arrValues[$objFiles->id] = $this->generateImage($this->getImage($objFiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
+								$arrValues[$objFiles->id] = $this->generateImage(Image::get($objFiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
 							}
 						}
 						else
