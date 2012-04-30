@@ -992,7 +992,7 @@ abstract class Controller extends System
 					break;
 
 				case 'box':
-					if (ceil($objFile->height * $width / $objFile->width) <= $intHeight)
+					if (round($objFile->height * $width / $objFile->width) <= $intHeight)
 					{
 						unset($height, $intHeight);
 					}
@@ -1009,13 +1009,13 @@ abstract class Controller extends System
 		{
 			if (($intWidth * $objFile->height) != ($intHeight * $objFile->width))
 			{
-				$intWidth = ceil($objFile->width * $height / $objFile->height);
+				$intWidth = round($objFile->width * $height / $objFile->height);
 				$intPositionX = -intval(($intWidth - $width) / 2);
 
 				if ($intWidth < $width)
 				{
 					$intWidth = $width;
-					$intHeight = ceil($objFile->height * $width / $objFile->width);
+					$intHeight = round($objFile->height * $width / $objFile->width);
 					$intPositionX = 0;
 					$intPositionY = -intval(($intHeight - $height) / 2);
 				}
@@ -1076,14 +1076,14 @@ abstract class Controller extends System
 		// Calculate the height if only the width is given
 		elseif ($intWidth)
 		{
-			$intHeight = ceil($objFile->height * $width / $objFile->width);
+			$intHeight = round($objFile->height * $width / $objFile->width);
 			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
 		}
 
 		// Calculate the width if only the height is given
 		elseif ($intHeight)
 		{
-			$intWidth = ceil($objFile->width * $height / $objFile->height);
+			$intWidth = round($objFile->width * $height / $objFile->height);
 			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
 		}
 

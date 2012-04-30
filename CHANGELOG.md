@@ -5,6 +5,9 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Use `round()` instead of `ceil()` when resizing images (see #3806).
+
+### Fixed
 Correctly handle empty FAQ categories in the front end modules (see #4084).
 
 ### Fixed
