@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \DbInstaller, \File, \Exception;
+use \Database_Installer, \File, \Exception;
 
 
 /**
@@ -43,7 +43,7 @@ use \DbInstaller, \File, \Exception;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class DcaExtractor extends DbInstaller
+class DcaExtractor extends Database_Installer
 {
 
 	/**

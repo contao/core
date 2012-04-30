@@ -432,8 +432,8 @@ class RepositoryManager extends RepositoryBackendModule
 			} // foreach
 		} // if
 		$this->handleRunOnce(); // PATCH
-		$this->import('DbInstaller');
-		$rep->dbUpdate = $this->DbInstaller->generateSqlForm();
+		$this->import('Database_Installer');
+		$rep->dbUpdate = $this->Database_Installer->generateSqlForm();
 		if ($rep->dbUpdate != '') {
 			$rep->f_submit = 'update';
 			$rep->f_cancel = 'cancel';

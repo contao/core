@@ -240,9 +240,9 @@ class InstallTool extends Backend
 		}
 
 		$this->handleRunOnce();
-		$this->import('DbInstaller');
+		$this->import('Database_Installer');
 
-		$this->Template->dbUpdate = $this->DbInstaller->generateSqlForm();
+		$this->Template->dbUpdate = $this->Database_Installer->generateSqlForm();
 		$this->Template->dbUpToDate = ($this->Template->dbUpdate != '') ? false : true;
 
 		// Import the example website
@@ -781,8 +781,8 @@ class InstallTool extends Backend
 		{
 			if (Input::post('FORM_SUBMIT') == 'tl_28update')
 			{
-				$this->import('DbUpdater');
-				$this->DbUpdater->run28Update();
+				$this->import('Database_Updater');
+				$this->Database_Updater->run28Update();
 				$this->reload();
 			}
 
@@ -802,8 +802,8 @@ class InstallTool extends Backend
 		{
 			if (Input::post('FORM_SUBMIT') == 'tl_29update')
 			{
-				$this->import('DbUpdater');
-				$this->DbUpdater->run29Update();
+				$this->import('Database_Updater');
+				$this->Database_Updater->run29Update();
 				$this->reload();
 			}
 
@@ -829,8 +829,8 @@ class InstallTool extends Backend
 				{
 					if (Input::post('FORM_SUBMIT') == 'tl_292update')
 					{
-						$this->import('DbUpdater');
-						$this->DbUpdater->run292Update();
+						$this->import('Database_Updater');
+						$this->Database_Updater->run292Update();
 						$this->reload();
 					}
 
@@ -852,8 +852,8 @@ class InstallTool extends Backend
 		{
 			if (Input::post('FORM_SUBMIT') == 'tl_210update')
 			{
-				$this->import('DbUpdater');
-				$this->DbUpdater->run210Update();
+				$this->import('Database_Updater');
+				$this->Database_Updater->run210Update();
 				$this->reload();
 			}
 
@@ -888,8 +888,8 @@ class InstallTool extends Backend
 		{
 			if (Input::post('FORM_SUBMIT') == 'tl_30update')
 			{
-				$this->import('DbUpdater');
-				$this->DbUpdater->run300Update();
+				$this->import('Database_Updater');
+				$this->Database_Updater->run300Update();
 				$this->reload();
 			}
 
@@ -905,8 +905,8 @@ class InstallTool extends Backend
 		{
 			if (Input::post('FORM_SUBMIT') == 'tl_30update')
 			{
-				$this->import('DbUpdater');
-				$this->DbUpdater->scanUploadFolder();
+				$this->import('Database_Updater');
+				$this->Database_Updater->scanUploadFolder();
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['checkFileTree']", true);
 				$this->reload();
 			}
@@ -921,8 +921,8 @@ class InstallTool extends Backend
 		{
 			if (Input::post('FORM_SUBMIT') == 'tl_30update')
 			{
-				$this->import('DbUpdater');
-				$this->DbUpdater->updateFileTreeFields();
+				$this->import('Database_Updater');
+				$this->Database_Updater->updateFileTreeFields();
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['checkFileTree']", false);
 				$this->reload();
 			}

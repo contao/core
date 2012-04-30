@@ -36,14 +36,14 @@ use \Controller, \DcaExtractor, \File, \FilesModel, \Folder;
 
 
 /**
- * Class DbUpdater
+ * Class Database_Updater
  *
  * Provide methods to update the database data.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class DbUpdater extends Controller
+class Database_Updater extends Controller
 {
 
 	/**

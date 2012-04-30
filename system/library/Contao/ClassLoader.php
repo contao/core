@@ -65,8 +65,6 @@ class ClassLoader
 		'Contao\\Config'       => 'system/library/Contao/Config.php',
 		'Contao\\Controller'   => 'system/library/Contao/Controller.php',
 		'Contao\\Date'         => 'system/library/Contao/Date.php',
-		'Contao\\DbInstaller'  => 'system/library/Contao/DbInstaller.php',
-		'Contao\\DbUpdater'    => 'system/library/Contao/DbUpdater.php',
 		'Contao\\DcaExtractor' => 'system/library/Contao/DcaExtractor.php',
 		'Contao\\Email'        => 'system/library/Contao/Email.php',
 		'Contao\\Encryption'   => 'system/library/Contao/Encryption.php',
@@ -95,6 +93,8 @@ class ClassLoader
 
 		// Database
 		'Contao\\Database'                      => 'system/library/Contao/Database.php',
+		'Contao\\Database_Installer'            => 'system/library/Contao/Database/Installer.php',
+		'Contao\\Database_Updater'              => 'system/library/Contao/Database/Updater.php',
 		'Contao\\Database_Statement'            => 'system/library/Contao/Database/Statement.php',
 		'Contao\\Database_Result'               => 'system/library/Contao/Database/Result.php',
 		'Contao\\Database_Mssql'                => 'system/library/Contao/Database/Mssql.php',

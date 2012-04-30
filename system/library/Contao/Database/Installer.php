@@ -36,14 +36,14 @@ use \Controller, \DcaExtractor;
 
 
 /**
- * Class DbInstaller
+ * Class Database_Installer
  *
  * Provide methods to handle database installs/updates.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class DbInstaller extends Controller
+class Database_Installer extends Controller
 {
 
 	/**
