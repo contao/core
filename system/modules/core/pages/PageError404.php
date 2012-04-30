@@ -76,7 +76,7 @@ class PageError404 extends Frontend
 		if ($obj404 === null)
 		{
 			header('HTTP/1.1 404 Not Found');
-			die('Page not found'); 
+			die('Page not found');
 		}
 
 		// Generate the error page

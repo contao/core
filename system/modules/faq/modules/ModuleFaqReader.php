@@ -130,7 +130,7 @@ class ModuleFaqReader extends Module
 		if ($objFaq->question != '')
 		{
 			$objPage->pageTitle = strip_insert_tags($objFaq->question);
-			$objPage->description = $this->prepareMetaDescription($objFaq->question); 
+			$objPage->description = $this->prepareMetaDescription($objFaq->question);
 		}
 
 		$this->Template->question = $objFaq->question;

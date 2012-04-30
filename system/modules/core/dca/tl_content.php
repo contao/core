@@ -1295,7 +1295,7 @@ class tl_content extends Backend
 				$syntax = '';
 				break;
 		}
-		
+
 		$GLOBALS['TL_DCA']['tl_content']['fields']['code']['eval']['rte'] = 'codeMirror|' . $syntax;
 		return $varValue;
 	}
@@ -1381,7 +1381,7 @@ class tl_content extends Backend
 		if ($row['invisible'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}

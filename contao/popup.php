@@ -74,7 +74,7 @@ class Popup extends Backend
 		$strFile = base64_decode($strFile);
 		$strFile = preg_replace('@^/+@', '', rawurldecode($strFile));
 
-		$this->strFile = $strFile; 
+		$this->strFile = $strFile;
 	}
 
 

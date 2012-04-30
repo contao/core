@@ -190,7 +190,7 @@ class Message
 		{
 			$_SESSION[$strType] = array();
 		}
-	} 
+	}
 
 
 	/**

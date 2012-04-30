@@ -248,7 +248,7 @@ abstract class Controller extends System
 
 				$this->import('FrontendUser', 'User');
 				$groups = deserialize($objRow->groups);
-	
+
 				if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
 				{
 					return '';
@@ -306,7 +306,7 @@ abstract class Controller extends System
 			$objRow = $varId;
 		}
 		else
-		{		
+		{
 			if (!$varId)
 			{
 				return '';
@@ -370,7 +370,7 @@ abstract class Controller extends System
 			$objRow = $intId;
 		}
 		else
-		{		
+		{
 			if (!strlen($intId) || $intId < 1)
 			{
 				return '';
@@ -1398,7 +1398,7 @@ abstract class Controller extends System
 					{
 						$strUrl = $this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id));
 					}
-	
+
 					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
@@ -1436,7 +1436,7 @@ abstract class Controller extends System
 					{
 						$strUrl = $this->generateFrontendUrl($objFaq->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
 					}
-	
+
 					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
@@ -1487,7 +1487,7 @@ abstract class Controller extends System
 					{
 						$strUrl = $this->generateFrontendUrl($objNews->pid, ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->alias != '') ? $objNews->alias : $objNews->id));
 					}
-	
+
 					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
@@ -2583,7 +2583,7 @@ abstract class Controller extends System
 		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?)")
 					   ->execute($intId, time(), $intVersion, $strTable, $this->User->username, $this->User->id, $strDescription, serialize($objRecord->row()));
 	}
-	
+
 
 	/**
 	 * Check whether a field is unique
@@ -3179,7 +3179,7 @@ abstract class Controller extends System
 		while ($objFiles->next())
 		{
 			if ($objFiles->type == 'file')
-			{				
+			{
 				if (!in_array($objFiles->extension, $allowedDownload))
 				{
 					continue;

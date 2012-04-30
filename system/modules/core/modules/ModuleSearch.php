@@ -232,7 +232,7 @@ class ModuleSearch extends Module
 
 			// Pagination
 			if ($this->perPage > 0)
-			{	
+			{
 				$id = 'page_s' . $this->id;
 				$page = Input::get($id) ?: 1;
 				$per_page = Input::get('per_page') ?: $this->perPage;

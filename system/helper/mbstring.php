@@ -192,7 +192,7 @@ function utf8_decode_entities($str)
 
 
 /**
- * Callback function for utf8_decode_entities 
+ * Callback function for utf8_decode_entities
  * @param array
  * @return string
  */
@@ -203,7 +203,7 @@ function utf8_chr_callback($matches)
 
 
 /**
- * Callback function for utf8_decode_entities 
+ * Callback function for utf8_decode_entities
  * @param array
  * @return string
  */

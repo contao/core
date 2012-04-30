@@ -60,7 +60,7 @@ class Cache extends System
 
 
 	/**
-	 * Prevent direct instantiation (Singleton) 
+	 * Prevent direct instantiation (Singleton)
 	 */
 	protected function __construct() {}
 

@@ -914,7 +914,7 @@ class tl_calendar_events extends Backend
 	 */
 	public function scheduleUpdate()
 	{
-		// Return if there is no ID 
+		// Return if there is no ID
 		if (!CURRENT_ID || Input::get('act') == 'copy')
 		{
 			return;
@@ -967,7 +967,7 @@ class tl_calendar_events extends Backend
 		if (!$row['published'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
@@ -994,7 +994,7 @@ class tl_calendar_events extends Backend
 		}
 
 		$this->createInitialVersion('tl_calendar_events', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_calendar_events']['fields']['published']['save_callback']))
 		{

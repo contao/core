@@ -77,7 +77,7 @@
  * module is rendered. The class "ModuleClass1" has to be stored in a file
  * named "ModuleClass1.php" in your module folder.
  */
- 
+
 
 /**
  * CONTENT ELEMENTS
@@ -100,7 +100,7 @@
  * element is rendered. The class "ContentClass1" has to be stored in a file
  * named "ContentClass1.php" in your module folder.
  */
- 
+
 
 /**
  * BACK END FORM FIELDS
@@ -246,7 +246,7 @@
  *
  * Hooks allow you to add functionality to the core without having to modify the
  * source code by registering callback functions to be executed on a particular
- * event. For more information see http://www.contao.org/de/hooks.html. 
+ * event. For more information see http://www.contao.org/de/hooks.html.
  */
 
 

@@ -132,7 +132,7 @@ class PageSelector extends Widget
 			}
 		}
 		else
-		{		
+		{
 			// Show all pages to admins
 			if ($this->User->isAdmin)
 			{

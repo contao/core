@@ -160,7 +160,7 @@ abstract class Frontend extends Controller
 				{
 					$arrFragments = array($strRequest);
 				}
-				// Remove the alias from the request string, explode it and then re-insert the alias at the beginning 
+				// Remove the alias from the request string, explode it and then re-insert the alias at the beginning
 				else
 				{
 					$arrFragments = explode('/', substr($strRequest, strlen($objPage->alias) + 1));

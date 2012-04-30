@@ -156,7 +156,7 @@ class ModuleNewsArchive extends ModuleNews
 			$intEnd = $objDate->dayEnd;
 			$this->headline .= ' ' . $this->parseDate($objPage->dateFormat, $objDate->tstamp);
 		}
-		// Show all items 
+		// Show all items
 		elseif ($this->news_jumpToCurrent == 'all_items')
 		{
 			$intBegin = 0;

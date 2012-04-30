@@ -508,7 +508,7 @@ abstract class System
 		{
 			include TL_ROOT . '/system/config/langconfig.php';
 		}
-		
+
 		// Use a global cache variable to support nested calls
 		$GLOBALS['loadLanguageFile'][$strName][$strLanguage] = true;
 	}
@@ -583,7 +583,7 @@ abstract class System
 					break;
 
 				case 4:
-					$strReturn .= $GLOBALS['TL_LANG']['MONTHS_SHORT'][($index - 1)]; 
+					$strReturn .= $GLOBALS['TL_LANG']['MONTHS_SHORT'][($index - 1)];
 					break;
 
 				default:
@@ -690,7 +690,7 @@ abstract class System
 	protected function resetMessages()
 	{
 		Message::reset();
-	} 
+	}
 
 
 	/**

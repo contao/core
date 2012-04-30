@@ -549,14 +549,14 @@ class StyleSheets extends Backend
 						'top'          => '270deg',
 						'right'        => '180deg',
 						'bottom'       => '90deg',
-						'top left'     => '315deg', 
-						'left top'     => '315deg', 
-						'bottom left'  => '45deg', 
-						'left bottom'  => '45deg', 
-						'top right'    => '225deg', 
-						'right top'    => '225deg', 
-						'bottom right' => '135deg', 
-						'right bottom' => '135deg' 
+						'top left'     => '315deg',
+						'left top'     => '315deg',
+						'bottom left'  => '45deg',
+						'left bottom'  => '45deg',
+						'top right'    => '225deg',
+						'right top'    => '225deg',
+						'bottom right' => '135deg',
+						'right bottom' => '135deg'
 					);
 
 					if (isset($arrMapper[$webkitAngle]))
@@ -573,7 +573,7 @@ class StyleSheets extends Backend
 						$angle += 360;
 					}
 
-					// Convert the angle to points in percentage from the top left corner 
+					// Convert the angle to points in percentage from the top left corner
 					if ($angle >= 0 && $angle < 45)
 					{
 						$offset = round(($angle * $multi), 2);
@@ -707,7 +707,7 @@ class StyleSheets extends Backend
 						$shadow .= ' ' . $this->compileColor($shColor, $blnWriteToFile, $vars);
 					}
 					$shadow .= ';';
-					
+
 					$return .= $lb . '-moz-box-shadow:' . $shadow;
 					$return .= $lb . '-webkit-box-shadow:' . $shadow;
 					$return .= $lb . 'box-shadow:' . $shadow;
@@ -1021,7 +1021,7 @@ class StyleSheets extends Backend
 		if (isset($GLOBALS['TL_HOOKS']['compileDefinition']) && is_array($GLOBALS['TL_HOOKS']['compileDefinition']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['compileDefinition'] as $callback)
-            {                
+            {
 				$this->import($callback[0]);
 				$strTemp = $this->$callback[0]->$callback[1]($row, $blnWriteToFile, $vars);
 
@@ -1029,7 +1029,7 @@ class StyleSheets extends Backend
 				{
 					$return .= $lb . $strTemp;
 				}
-			}    
+			}
 		}
 
 		// Close the format definition

@@ -457,7 +457,7 @@ class Date extends System
 				case 'i': $chunks[$k] = 'M'; break;
 				case 's': $chunks[$k] = 'S'; break;
 				case 'U': $chunks[$k] = 's'; break;
-			} 
+			}
 		}
 
 		return preg_replace('/([a-zA-Z])/', '%$1', implode('', $chunks));

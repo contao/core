@@ -215,7 +215,7 @@ class FileUpload extends Backend
   </script>';
 	}
 
-  
+
 	/**
 	 * Get the files from the global $_FILES array
 	 * @param string

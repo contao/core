@@ -108,7 +108,7 @@ class ModuleNewsletterList extends Module
 				if (!isset($arrJumpTo[$objTarget->jumpTo]))
 				{
 					$objJumpTo = PageModel::findPublishedById($objTarget->jumpTo);
-	
+
 					if ($objJumpTo !== null)
 					{
 						$arrJumpTo[$objTarget->jumpTo] = $this->generateFrontendUrl($objJumpTo->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));

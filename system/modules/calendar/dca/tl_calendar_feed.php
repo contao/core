@@ -170,7 +170,7 @@ $GLOBALS['TL_DCA']['tl_calendar_feed'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'checkbox',
-			'options_callback'        => array('tl_calendar_feed', 'getAllowedCalendars'), 
+			'options_callback'        => array('tl_calendar_feed', 'getAllowedCalendars'),
 			'eval'                    => array('multiple'=>true, 'mandatory'=>true),
 			'sql'                     => "blob NULL"
 		),
@@ -409,7 +409,7 @@ class tl_calendar_feed extends Backend
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{
-		// Return if there is no ID 
+		// Return if there is no ID
 		if (!$dc->id)
 		{
 			return;

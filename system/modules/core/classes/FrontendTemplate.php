@@ -76,7 +76,7 @@ class FrontendTemplate extends Template
 	{
 		global $objPage;
 
-		// Ignore certain URL parameters 
+		// Ignore certain URL parameters
 		$arrIgnore = array('id', 'file', 'token', 'page', 'day', 'month', 'year');
 
 		if ($GLOBALS['TL_CONFIG']['useAutoItem'])

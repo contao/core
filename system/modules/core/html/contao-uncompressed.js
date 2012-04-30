@@ -1700,7 +1700,7 @@ var ContextMenu =
 			});
 		});
 
-		// Hide the context menu 
+		// Hide the context menu
 		$(document.body).addEvent('click', function() {
 			ContextMenu.hide();
 		});

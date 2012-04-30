@@ -266,7 +266,7 @@ class tl_comments extends Backend
 		parent::__construct();
 		$this->import('BackendUser', 'User');
 	}
-	
+
 
 	/**
 	 * Check permissions to edit table tl_comments
@@ -337,7 +337,7 @@ class tl_comments extends Backend
 
 
 	/**
-	 * Check whether the user is allowed to edit a comment 
+	 * Check whether the user is allowed to edit a comment
 	 * @param integer
 	 * @param string
 	 * @return boolean
@@ -611,7 +611,7 @@ class tl_comments extends Backend
 		if (!$row['published'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		if (!$this->User->isAdmin && !$this->isAllowedToEditComment($row['parent'], $row['source']))
 		{
@@ -643,7 +643,7 @@ class tl_comments extends Backend
 		}
 
 		$this->createInitialVersion('tl_comments', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_comments']['fields']['published']['save_callback']))
 		{

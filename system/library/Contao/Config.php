@@ -190,7 +190,7 @@ class Config
 				$strMode = 'bottom';
 				continue;
 			}
-			
+
 			if ($strMode == 'top')
 			{
 				$this->strTop .= $strLine;

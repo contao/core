@@ -288,7 +288,7 @@ class Database_Installer extends Controller
 		return $return;
 	}
 
-	
+
 	/**
 	 * Compile a table array from all SQL files
 	 * @return array

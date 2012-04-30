@@ -166,7 +166,7 @@ class Theme extends Backend
 
 	/**
 	 * Compare the theme tables with the local database and check
-	 * whether there are custom layout sections 
+	 * whether there are custom layout sections
 	 * @param array
 	 * @param array
 	 * @return string

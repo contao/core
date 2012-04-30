@@ -49,7 +49,7 @@
   </dl>
   <p><?php echo $this->explain; ?></p>
   <p><input type="submit" name="cancel" class="tl_submit" accesskey="s" value="<?php echo $this->cancel; ?>"> <a href="<?php echo $this->href; ?>"><?php echo $this->continue; ?></a></p>
-</div> 
+</div>
 </form>
 
 </div>

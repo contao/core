@@ -221,7 +221,7 @@ class NewsModel extends Model
 
 		$t = static::$strTable;
 		$arrColumns = array("$t.date>=? AND $t.date<=? AND $t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")");
-		
+
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time();
@@ -255,7 +255,7 @@ class NewsModel extends Model
 
 		$t = static::$strTable;
 		$arrColumns = array("$t.date>=? AND $t.date<=? AND $t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")");
-		
+
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time();

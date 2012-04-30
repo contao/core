@@ -566,7 +566,7 @@ class tl_member extends Backend
 		if ($row['disable'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
@@ -588,7 +588,7 @@ class tl_member extends Backend
 		}
 
 		$this->createInitialVersion('tl_member', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_member']['fields']['disable']['save_callback']))
 		{

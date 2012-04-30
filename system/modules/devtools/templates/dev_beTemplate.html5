@@ -4,7 +4,7 @@
 <meta charset="<?php echo '<?php echo $this->charset; ?>'; ?>">
 <title><?php echo '<?php echo $this->title; ?>'; ?> - Contao Open Source CMS <?php echo '<?php echo VERSION; ?>'; ?></title>
 <base href="<?php echo '<?php echo $this->base; ?>'; ?>">
-<link rel="stylesheet" href="<?php echo '<?php 
+<link rel="stylesheet" href="<?php echo '<?php
   $objCombiner = new Combiner();
   $objCombiner->add(\'system/themes/\'. $this->theme .\'/basic.css\');
   $objCombiner->add(\'system/themes/\'. $this->theme .\'/main.css\');

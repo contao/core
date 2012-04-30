@@ -124,7 +124,7 @@ class ContentHyperlink extends ContentElement
 		else
 		{
 			$this->Template->attribute = ' data-lightbox="'. substr($this->rel, 9, -1) .'"';
-		} 
+		}
 
 		$this->Template->rel = $this->rel; // Backwards compatibility
 		$this->Template->href = $this->url;

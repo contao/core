@@ -2,7 +2,7 @@
 <script src="<?php echo TL_PLUGINS_URL; ?>plugins/jQuery/core/<?php echo JQUERY; ?>/jquery-ui.js"></script>
 <script>
 jQuery.noConflict();
-(function($) { 
+(function($) {
   $(document).ready(function() {
     $(document).accordion({
       header:'div.toggler'

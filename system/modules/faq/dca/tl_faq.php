@@ -465,7 +465,7 @@ class tl_faq extends Backend
 		if (!$row['published'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
@@ -487,7 +487,7 @@ class tl_faq extends Backend
 		}
 
 		$this->createInitialVersion('tl_faq', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_faq']['fields']['published']['save_callback']))
 		{

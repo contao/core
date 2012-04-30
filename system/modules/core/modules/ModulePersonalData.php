@@ -265,7 +265,7 @@ class ModulePersonalData extends Module
 					$this->$callback[0]->$callback[1]($this->User, $_SESSION['FORM_DATA'], $this);
 				}
 			}
-			
+
 			$this->jumpToOrReload($this->jumpTo);
 		}
 

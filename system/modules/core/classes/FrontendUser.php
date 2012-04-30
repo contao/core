@@ -164,7 +164,7 @@ class FrontendUser extends User
 
 		return parent::__get($strKey);
 	}
-	
+
 
 	/**
 	 * Authenticate a user

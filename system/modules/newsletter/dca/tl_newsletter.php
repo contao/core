@@ -219,7 +219,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'inputType'               => 'select',
 			'options'                 => $this->getTemplateGroup('mail_'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
-		),		
+		),
 		'sendText' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['sendText'],

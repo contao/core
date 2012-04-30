@@ -92,7 +92,7 @@ class Comments extends Frontend
 			// Set limit and offset
 			$limit = $objConfig->perPage;
 			$offset = ($page - 1) * $objConfig->perPage;
- 
+
 			// Initialize the pagination menu
 			$objPagination = new Pagination($total, $objConfig->perPage, 7, $id);
 			$objTemplate->pagination = $objPagination->generate("\n  ");
@@ -414,7 +414,7 @@ class Comments extends Frontend
 			'@\s*\[code\](.*)\[/code\]\s*@Uis',
 			'@\[color=([^\]" ]+)\](.*)\[/color\]@Uis',
 			'@\s*\[quote\](.*)\[/quote\]\s*@Uis',
-			'@\s*\[quote=([^\]]+)\](.*)\[/quote\]\s*@Uis', 
+			'@\s*\[quote=([^\]]+)\](.*)\[/quote\]\s*@Uis',
 			'@\[img\]\s*([^\[" ]+\.(jpe?g|png|gif|bmp|tiff?|ico))\s*\[/img\]@i',
 			'@\[url\]\s*([^\[" ]+)\s*\[/url\]@i',
 			'@\[url=([^\]" ]+)\](.*)\[/url\]@Uis',

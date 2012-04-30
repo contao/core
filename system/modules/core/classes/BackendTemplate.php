@@ -182,7 +182,7 @@ class BackendTemplate extends Template
 	 */
 	protected function getLocaleString()
 	{
-		return 
+		return
 			'var Contao={'
 				. 'theme:"' . $this->getTheme() . '",'
 				. 'lang:{'

@@ -408,7 +408,7 @@ class Calendar extends Frontend
 				foreach ($arrEnclosure as $strEnclosure)
 				{
 					if (is_file(TL_ROOT . '/' . $strEnclosure))
-					{				
+					{
 						$arrEvent['enclosure'][] = $strEnclosure;
 					}
 				}

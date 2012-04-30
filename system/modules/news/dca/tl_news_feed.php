@@ -170,7 +170,7 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'checkbox',
-			'options_callback'        => array('tl_news_feed', 'getAllowedArchives'), 
+			'options_callback'        => array('tl_news_feed', 'getAllowedArchives'),
 			'eval'                    => array('multiple'=>true, 'mandatory'=>true),
 			'sql'                     => "blob NULL"
 		),
@@ -409,7 +409,7 @@ class tl_news_feed extends Backend
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{
-		// Return if there is no ID 
+		// Return if there is no ID
 		if (!$dc->id)
 		{
 			return;

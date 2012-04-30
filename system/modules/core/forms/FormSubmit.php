@@ -126,7 +126,7 @@ class FormSubmit extends Widget
 			}
 		}
 
-		// Return the regular button 
+		// Return the regular button
 		return sprintf('<input type="submit" id="ctrl_%s" class="submit%s" value="%s"%s%s',
 						$this->strId,
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),

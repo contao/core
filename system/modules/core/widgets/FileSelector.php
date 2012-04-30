@@ -156,7 +156,7 @@ class FileSelector extends Widget
 			}
 		}
 		else
-		{		
+		{
 			// Show all files to admins
 			if ($this->User->isAdmin)
 			{

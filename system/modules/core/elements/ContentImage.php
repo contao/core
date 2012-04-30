@@ -68,7 +68,7 @@ class ContentImage extends ContentElement
 		{
 			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 		}
-		
+
 		$objFile = FilesModel::findByPk($this->singleSRC);
 
 		if ($objFile === null || !is_file(TL_ROOT . '/' . $objFile->path))

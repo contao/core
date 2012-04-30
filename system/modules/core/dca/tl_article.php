@@ -820,7 +820,7 @@ class tl_article extends Backend
 		if (!$row['published'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
 								  ->limit(1)
@@ -856,7 +856,7 @@ class tl_article extends Backend
 		}
 
 		$this->createInitialVersion('tl_article', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_article']['fields']['published']['save_callback']))
 		{

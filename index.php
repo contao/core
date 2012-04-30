@@ -294,7 +294,7 @@ class Index extends Frontend
 			{
 				return;
 			}
- 
+
 			$arrLanguage = Environment::get('httpAcceptLanguage');
 			$strCacheKey = Environment::get('base') .'empty.'. $arrLanguage[0];
 		}

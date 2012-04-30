@@ -457,7 +457,7 @@ class tl_calendar extends Backend
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{
-		// Return if there is no ID 
+		// Return if there is no ID
 		if (!$dc->id)
 		{
 			return;

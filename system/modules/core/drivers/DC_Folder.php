@@ -1910,7 +1910,7 @@ window.addEvent(\'domready\', function() {
 				{
 					$strPath = $this->strPath . '/' . $this->varValue . '/';
 					$objFiles = FilesModel::findMultipleByBasepath($strPath);
-	
+
 					if ($objFiles !== null)
 					{
 						while ($objFiles->next())

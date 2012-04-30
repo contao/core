@@ -491,7 +491,7 @@ class PageRegular extends Frontend
 				}
 
 				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
- 
+
 				// Only .css files are allowed
 				if (substr($stylesheet, -4) != '.css')
 				{

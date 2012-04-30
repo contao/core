@@ -69,5 +69,5 @@ class ContentModel extends Model
 		}
 
 		return static::findBy($arrColumns, $intPid, array('order'=>"$t.sorting"));
-	}					 
+	}
 }

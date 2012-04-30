@@ -766,7 +766,7 @@ class tl_news extends Backend
 	 */
 	public function scheduleUpdate()
 	{
-		// Return if there is no ID 
+		// Return if there is no ID
 		if (!CURRENT_ID || Input::get('act') == 'copy')
 		{
 			return;
@@ -819,7 +819,7 @@ class tl_news extends Backend
 		if (!$row['featured'])
 		{
 			$icon = 'featured_.gif';
-		}		
+		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
@@ -846,7 +846,7 @@ class tl_news extends Backend
 		}
 
 		$this->createInitialVersion('tl_news', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_news']['fields']['featured']['save_callback']))
 		{
@@ -894,7 +894,7 @@ class tl_news extends Backend
 		if (!$row['published'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
@@ -921,7 +921,7 @@ class tl_news extends Backend
 		}
 
 		$this->createInitialVersion('tl_news', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_news']['fields']['published']['save_callback']))
 		{

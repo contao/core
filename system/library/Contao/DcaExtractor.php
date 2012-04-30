@@ -352,7 +352,7 @@ class DcaExtractor extends Database_Installer
 
 		foreach ($fields as $field=>$config)
 		{
-			if (!isset($config['sql']) && !isset($config['inputType'])) 
+			if (!isset($config['sql']) && !isset($config['inputType']))
 			{
 				continue;
 			}

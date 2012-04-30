@@ -386,7 +386,7 @@ class BackendUser extends User
 			$this->filemounts = array();
 		}
 		else
-		{	
+		{
 			$this->filemounts = array_filter($this->filemounts);
 		}
 

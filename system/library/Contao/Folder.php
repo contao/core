@@ -251,7 +251,7 @@ class Folder extends System
 
 			$arrFiles[] = $strFile;
 		}
-		
+
 		return md5(implode('-', $arrFiles));
 	}
 

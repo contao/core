@@ -993,7 +993,7 @@ class tl_page extends Backend
 		if (Input::get('act') != 'create')
 		{
 			return;
-		}	
+		}
 
 		// Insert into
 		if (Input::get('pid') == 0)
@@ -1645,7 +1645,7 @@ class tl_page extends Backend
 		if (!$row['published'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
 								  ->limit(1)
@@ -1681,7 +1681,7 @@ class tl_page extends Backend
 		}
 
 		$this->createInitialVersion('tl_page', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_page']['fields']['published']['save_callback']))
 		{

@@ -65,7 +65,7 @@ class CronJob extends Frontend
 	 */
 	public function run()
 	{
-		// Do not run if there is POST data or the last execution was less than five minutes ago 
+		// Do not run if there is POST data or the last execution was less than five minutes ago
 		if (!empty($_POST) || $this->hasToWait())
 		{
 			return;

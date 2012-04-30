@@ -148,7 +148,7 @@ class ModuleNewsletterReader extends Module
 				for ($i=0; $i<count($arrEnclosure); $i++)
 				{
 					if (is_file(TL_ROOT . '/' . $arrEnclosure[$i]))
-					{				
+					{
 						$objFile = new File($arrEnclosure[$i]);
 
 						if (in_array($objFile->extension, $allowedDownload))

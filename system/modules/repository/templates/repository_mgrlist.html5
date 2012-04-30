@@ -42,15 +42,15 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
   <th class="col_status"><?php echo $text['status']; ?></th>
   <th class="col_functions">&nbsp;</th>
 </tr>
-<?php foreach ($rep->extensions as $ext): 
+<?php foreach ($rep->extensions as $ext):
 	$icons = array($theme->createListButton('edit', $ext->editLink, $text['editextension']));
-	if (property_exists($ext, 'uninstallLink')) 
+	if (property_exists($ext, 'uninstallLink'))
 		$icons[] = $theme->createListButton('uninstall', $ext->uninstallLink, $text['uninstallextension']);
-	if (property_exists($ext, 'manualLink')) 
+	if (property_exists($ext, 'manualLink'))
 		$icons[] = $theme->createListButton('manual16', $ext->manualLink, $text['manual'], '', true);
-	if (property_exists($ext, 'forumLink')) 
+	if (property_exists($ext, 'forumLink'))
 		$icons[] = $theme->createListButton('forum16', $ext->forumLink, $text['forum'], '', true);
-	if (property_exists($ext, 'updateLink')) 
+	if (property_exists($ext, 'updateLink'))
 		$icons[] = $theme->createListButton('ok16', $ext->updateLink, $text['updateextension']);
 ?>
 <tr class="datarow">
@@ -80,7 +80,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 function enableSelectFunctions() {
   var sel = false;
   var cbs = document.getElementsByName('selectedids[]');
-  for (var i = 0; i < cbs.length; ++i) { 
+  for (var i = 0; i < cbs.length; ++i) {
     if (cbs[i].checked) {
       sel = true;
       break;

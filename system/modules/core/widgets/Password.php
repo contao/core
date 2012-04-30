@@ -164,7 +164,7 @@ class Password extends Widget
 						$this->strName,
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						(($this->varValue != '') ? '*****' : ''), 
+						(($this->varValue != '') ? '*****' : ''),
 						$this->getAttributes(),
 						$this->wizard,
 						((strlen($this->description) && $GLOBALS['TL_CONFIG']['showHelp'] && !$this->hasErrors()) ? "\n  " . '<p class="tl_help tl_tip">'.$this->description.'</p>' : ''));
@@ -194,7 +194,7 @@ class Password extends Widget
 						$this->strName,
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						(($this->varValue != '') ? '*****' : ''), 
+						(($this->varValue != '') ? '*****' : ''),
 						$this->getAttributes(),
 						((strlen($GLOBALS['TL_LANG']['MSC']['confirm'][1]) && $GLOBALS['TL_CONFIG']['showHelp']) ? "\n  " . '<p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['MSC']['confirm'][1].'</p>' : ''));
 	}

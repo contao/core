@@ -387,7 +387,7 @@ class tl_newsletter_recipients extends Backend
 		if (!$row['active'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
@@ -414,7 +414,7 @@ class tl_newsletter_recipients extends Backend
 		}
 
 		$this->createInitialVersion('tl_newsletter_recipients', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_newsletter_recipients']['fields']['active']['save_callback']))
 		{

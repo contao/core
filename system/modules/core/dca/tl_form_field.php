@@ -604,7 +604,7 @@ class tl_form_field extends Backend
 		{
 			return $strType . "\n" . $objWidget->value . "\n</div>\n";
 		}
-		
+
 		return $strType . '
 <table class="tl_form_field_preview">
 '.$strWidget.'</table>
@@ -670,7 +670,7 @@ class tl_form_field extends Backend
 		if ($row['invisible'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}

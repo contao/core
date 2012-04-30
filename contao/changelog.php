@@ -94,7 +94,7 @@ class Changelog extends Backend
 			),
 			$strBuffer
 		);
-		
+
 		$strBuffer = str_replace(
 			array(
 				"\n\n```\n", "\n```\n\n",

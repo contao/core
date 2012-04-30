@@ -390,7 +390,7 @@ class String
 		$arrPregReplace = array
 		(
 			'/<(br|hr|img)([^>]*)>/i' => '<$1$2 />', // Close stand-alone tags
-			'/ border="[^"]*"/'       => ''          // Remove deprecated attributes 
+			'/ border="[^"]*"/'       => ''          // Remove deprecated attributes
 		);
 
 		$arrStrReplace = array

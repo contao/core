@@ -789,7 +789,7 @@ class tl_user extends Backend
 		if ($row['disable'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		// Protect admin accounts
 		if (!$this->User->isAdmin && $row['admin'])
@@ -828,7 +828,7 @@ class tl_user extends Backend
 		}
 
 		$this->createInitialVersion('tl_user', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_user']['fields']['disable']['save_callback']))
 		{

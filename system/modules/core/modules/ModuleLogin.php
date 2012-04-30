@@ -123,7 +123,7 @@ class ModuleLogin extends Module
 				}
 			}
 
-			// Auto login is not allowed 
+			// Auto login is not allowed
 			if (isset($_POST['autologin']) && !$this->autologin)
 			{
 				unset($_POST['autologin']);

@@ -653,7 +653,7 @@ class tl_layout extends Backend
 
 		return $this->getTemplateGroup('j_', $intPid);
 	}
- 
+
 
 	/**
 	 * Return all analytics templates as array

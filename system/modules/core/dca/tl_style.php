@@ -733,7 +733,7 @@ class tl_style extends Backend
 	 */
 	public function scheduleUpdate()
 	{
-		// Return if there is no ID 
+		// Return if there is no ID
 		if (!CURRENT_ID || Input::get('act') == 'copy' || Environment::get('isAjaxRequest'))
 		{
 			return;
@@ -793,7 +793,7 @@ class tl_style extends Backend
 		if ($row['invisible'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
@@ -808,7 +808,7 @@ class tl_style extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		$this->createInitialVersion('tl_style', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_style']['fields']['invisible']['save_callback']))
 		{

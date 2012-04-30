@@ -215,7 +215,7 @@ class Feed extends System
 
 		return $xml . '</feed>';
 	}
-	
+
 
 	/**
 	 * Adjust the publication date

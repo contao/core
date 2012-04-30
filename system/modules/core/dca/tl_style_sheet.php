@@ -296,7 +296,7 @@ class tl_style_sheet extends Backend
 			$id = $id->id;
 		}
 
-		// Return if there is no ID 
+		// Return if there is no ID
 		if (!$id || Input::get('act') == 'copy')
 		{
 			return;

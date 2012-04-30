@@ -180,7 +180,7 @@ class News extends Frontend
 						foreach ($arrEnclosure as $strEnclosure)
 						{
 							if (is_file(TL_ROOT . '/' . $strEnclosure))
-							{				
+							{
 								$objItem->addEnclosure($strEnclosure);
 							}
 						}

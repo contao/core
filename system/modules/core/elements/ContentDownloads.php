@@ -69,7 +69,7 @@ class ContentDownloads extends ContentElement
 		if ($this->useHomeDir && FE_USER_LOGGED_IN)
 		{
 			$this->import('FrontendUser', 'User');
-			
+
 			if ($this->User->assignDir && is_dir(TL_ROOT . '/' . $this->User->homeDir))
 			{
 				$this->multiSRC = array($this->User->homeDir);

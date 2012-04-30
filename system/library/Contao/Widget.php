@@ -810,7 +810,7 @@ abstract class Widget extends Controller
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['prcnt'], $this->strLabel));
 					}
 					break;
-				
+
 				// HOOK: pass unknown tags to callback functions
 				default:
 					if (isset($GLOBALS['TL_HOOKS']['addCustomRegexp']) && is_array($GLOBALS['TL_HOOKS']['addCustomRegexp']))
