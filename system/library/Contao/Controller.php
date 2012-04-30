@@ -286,6 +286,8 @@ abstract class Controller extends System
 
 			return $strBuffer;
 		}
+
+		return '';
 	}
 
 
@@ -2591,12 +2593,12 @@ abstract class Controller extends System
 
 		$strUrl = $strDomain . $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language);
 
-		if ($blnReturn)
+		if (!$blnReturn)
 		{
-			return $strUrl;
+			$this->redirect($strUrl);
 		}
 
-		$this->redirect($strUrl);
+		return $strUrl;
 	}
 
 

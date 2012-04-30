@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Widget;
+use \Idna, \Widget;
 
 
 /**
@@ -134,7 +134,7 @@ class TextField extends Widget
 			// Hide the Punycode format (see #2750)
 			if ($this->rgxp == 'email' || $this->rgxp == 'url')
 			{
-				$this->varValue = $this->idnaDecode($this->varValue);
+				$this->varValue = Idna::decode($this->varValue);
 			}
 
 			return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="tl_text%s" value="%s"%s onfocus="Backend.getScrollOffset()">%s',

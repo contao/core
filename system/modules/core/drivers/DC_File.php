@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \DataContainer, \Date, \Environment, \Input, \Messages, \editable;
+use \DataContainer, \Date, \Environment, \Input, \Message, \editable;
 
 
 /**
@@ -308,7 +308,7 @@ class DC_File extends DataContainer implements editable
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG'][$this->strTable]['edit'].'</h2>
-'.$this->getMessages().'
+'.Message::generate().'
 <form action="'.ampersand(Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 
 <div class="tl_formbody_edit">
@@ -334,7 +334,7 @@ class DC_File extends DataContainer implements editable
 			// Reload
 			if (Input::post('saveNclose'))
 			{
-				$this->resetMessages();
+				Message::reset();
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 				$this->redirect($this->getReferer());
 			}

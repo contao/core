@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Email, \Environment, \FrontendUser, \Input, \Messages, \System;
+use \Email, \Environment, \FrontendUser, \Input, \Message, \System;
 
 
 /**

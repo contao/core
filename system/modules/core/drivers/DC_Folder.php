@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \DataContainer, \Date, \Environment, \File, \FilesModel, \Folder, \Image, \Input, \RequestToken, \Exception, \listable, \editable;
+use \DataContainer, \Date, \Environment, \File, \FilesModel, \Folder, \Image, \Input, \Message, \RequestToken, \Exception, \listable, \editable;
 
 
 /**
@@ -1012,7 +1012,7 @@ class DC_Folder extends DataContainer implements listable, editable
 				// Do not purge the html folder (see #2898)
 				if (Input::post('uploadNback') && !$objUploader->hasResized())
 				{
-					$this->resetMessages();
+					Message::reset();
 					$this->redirect($this->getReferer());
 				}
 
@@ -1027,7 +1027,7 @@ class DC_Folder extends DataContainer implements listable, editable
 </div>
 
 <h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_files']['uploadFF'], basename($strFolder)).'</h2>
-'.$this->getMessages().'
+'.Message::generate().'
 <form action="'.ampersand(Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').' enctype="multipart/form-data">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_upload">
@@ -1286,7 +1286,7 @@ class DC_Folder extends DataContainer implements listable, editable
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_files']['editFF'].'</h2>
-'.$this->getMessages().'
+'.Message::generate().'
 <form action="'.ampersand(Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'">
@@ -1334,7 +1334,7 @@ class DC_Folder extends DataContainer implements listable, editable
 			// Redirect
 			if (Input::post('saveNclose'))
 			{
-				$this->resetMessages();
+				Message::reset();
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 				$this->redirect($this->getReferer());
 			}
@@ -1765,7 +1765,7 @@ window.addEvent(\'domready\', function() {
 </div>
 
 <h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_files']['editFile'], $objFile->basename).'</h2>
-'.$this->getMessages().'
+'.Message::generate().'
 <form action="'.ampersand(Environment::get('request'), true).'" id="tl_files" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_files">
@@ -2051,7 +2051,7 @@ window.addEvent(\'domready\', function() {
 	{
 		if (!$this->blnIsDbAssisted)
 		{
-			return;
+			return '';
 		}
 
 		$this->arrMessages = array();
@@ -2157,7 +2157,7 @@ window.addEvent(\'domready\', function() {
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_files']['sync'][1].'</h2>
-'.$this->getMessages().'
+'.Message::generate().'
 <div class="tl_message nobg" style="margin-bottom:2em">';
 
 		// Add the messages
@@ -2605,7 +2605,6 @@ window.addEvent(\'domready\', function() {
 		// Check whether the file is within the files directory
 		if (!preg_match('/^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/').'/i', $strFile))
 		{
-dump($strFile);exit;
 			$this->log('File or folder "'.$strFile.'" is not within the files directory', 'DC_Folder isValid()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}

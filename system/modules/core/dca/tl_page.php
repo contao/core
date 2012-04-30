@@ -1191,7 +1191,7 @@ class tl_page extends Backend
 	 * Check the sitemap alias
 	 * @param mixed
 	 * @param \DataContainer
-	 * @return void
+	 * @return mixed
 	 * @throws \Exception
 	 */
 	public function checkFeedAlias($varValue, DataContainer $dc)

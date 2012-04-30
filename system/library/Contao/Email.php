@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Environment, \String, \System, \Exception;
+use \Environment, \Idna, \String, \System, \Exception;
 
 
 /**
@@ -541,7 +541,7 @@ class Email extends System
 				list($strName, $strEmail) = $this->splitFriendlyName($v);
 
 				$strName = trim($strName, ' "');
-				$strEmail = $this->idnaEncodeEmail($strEmail);
+				$strEmail = Idna::encodeEmail($strEmail);
 
 				if ($strName != '')
 				{

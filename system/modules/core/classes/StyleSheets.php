@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Backend, \Environment, \File, \Input, \Messages, \String, \Exception;
+use \Backend, \Environment, \File, \Input, \Message, \String, \Exception;
 
 
 /**
@@ -1303,7 +1303,7 @@ class StyleSheets extends Backend
 </div>
 
 <h2 class="sub_headline">' .$GLOBALS['TL_LANG']['tl_style_sheet']['import'][1]. '</h2>
-' .$this->getMessages(). '
+' .Message::generate(). '
 <form action="' .ampersand(Environment::get('request'), true). '" id="tl_style_sheet_import" class="tl_form" method="post" enctype="multipart/form-data">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_style_sheet_import">

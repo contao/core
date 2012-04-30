@@ -115,7 +115,7 @@ class Environment
 	/**
 	 * Return an environment parameter
 	 * @param string
-	 * @return string
+	 * @return mixed
 	 */
 	public static function get($strKey)
 	{

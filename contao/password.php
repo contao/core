@@ -130,7 +130,7 @@ class ChangePassword extends Backend
 		}
 
 		$this->Template->theme = $this->getTheme();
-		$this->Template->messages = $this->getMessages();
+		$this->Template->messages = Message::generate();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['pw_new']);

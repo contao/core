@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Backend, \Image, \Messages, \Exception;
+use \Backend, \Image, \Message, \Exception;
 
 
 /**

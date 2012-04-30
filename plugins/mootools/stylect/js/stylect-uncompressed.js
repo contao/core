@@ -99,7 +99,7 @@ var Stylect =
 			}
 		});
 	}
-}
+};
 
 window.addEvent('domready', function() {
 	Stylect.convertSelects();

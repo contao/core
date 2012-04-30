@@ -140,7 +140,7 @@ class Main extends Backend
 		$this->loadLanguageFile('explain');
 
 		$objTemplate = new BackendTemplate('be_welcome');
-		$objTemplate->messages = $this->getMessages(false, true);
+		$objTemplate->messages = Message::generate(false, true);
 
 		// HOOK: add custom messages
 		if (isset($GLOBALS['TL_HOOKS']['getSystemMessages']) && is_array($GLOBALS['TL_HOOKS']['getSystemMessages']))

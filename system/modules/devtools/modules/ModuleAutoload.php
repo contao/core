@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendModule, \Environment, \File, \Input, \Messages;
+use \BackendModule, \Environment, \File, \Input, \Message;
 
 
 /**
@@ -437,7 +437,7 @@ EOT
 
 		$this->Template->modules = $arrModules;
 
-		$this->Template->messages = $this->getMessages();
+		$this->Template->messages = Message::generate();
 		$this->Template->href = $this->getReferer(true);
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']);
 		$this->Template->button = $GLOBALS['TL_LANG']['MSC']['backBT'];

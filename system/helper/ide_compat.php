@@ -126,7 +126,7 @@ class FrontendTemplate extends Contao\FrontendTemplate {}
 class FrontendUser extends Contao\FrontendUser {}
 abstract class Hybrid extends Contao\Hybrid {}
 class LiveUpdate extends Contao\LiveUpdate {}
-class Messages extends Contao\Messages {}
+class Message extends Contao\Message {}
 class Pagination extends Contao\Pagination {}
 class PurgeData extends Contao\PurgeData {}
 class RebuildIndex extends Contao\RebuildIndex {}

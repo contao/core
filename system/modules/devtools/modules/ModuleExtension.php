@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendModule, \BackendTemplate, \Environment, \File, \Input, \Messages;
+use \BackendModule, \BackendTemplate, \Environment, \File, \Input, \Message;
 
 
 /**
@@ -235,7 +235,7 @@ class ModuleExtension extends BackendModule
 		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->selectAll = $GLOBALS['TL_LANG']['MSC']['selectAll'];
 		$this->Template->button = $GLOBALS['TL_LANG']['MSC']['backBT'];
-		$this->Template->message = $this->getMessages();
+		$this->Template->message = Message::generate();
 		$this->Template->submit = specialchars($GLOBALS['TL_LANG']['tl_extension']['make'][0]);
 		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['tl_extension']['headline'], Input::get('id'));
 		$this->Template->explain = $GLOBALS['TL_LANG']['tl_extension']['make'][1];
@@ -252,6 +252,7 @@ class ModuleExtension extends BackendModule
 	protected function newTemplate($strTemplate, Database_Result $objModule)
 	{
 		$objTemplate = new BackendTemplate($strTemplate);
+
 		$objTemplate->folder = $objModule->folder;
 		$objTemplate->author = str_replace(array('[', ']'), array('<', '>'), $objModule->author);
 		$objTemplate->copyright = $objModule->copyright;

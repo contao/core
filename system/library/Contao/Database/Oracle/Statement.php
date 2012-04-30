@@ -56,7 +56,7 @@ class Database_Oracle_Statement extends Database_Statement
 	/**
 	 * Prepare a query and return it
 	 * @param string
-	 * @return void
+	 * @return string
 	 */
 	protected function prepare_query($strQuery)
 	{

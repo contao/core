@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \DataContainer, \Date, \Encryption, \Environment, \Input, \RequestToken, \String, \Exception, \listable, \editable;
+use \DataContainer, \Date, \Encryption, \Environment, \Input, \Message, \RequestToken, \String, \Exception, \listable, \editable;
 
 
 /**
@@ -1847,7 +1847,7 @@ class DC_Table extends DataContainer implements listable, editable
 </div>
 
 <h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['MSC']['editRecord'], ($this->intId ? 'ID '.$this->intId : '')).'</h2>
-'.$this->getMessages().'
+'.Message::generate().'
 <form action="'.ampersand(Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post" enctype="' . ($this->blnUploadable ? 'multipart/form-data' : 'application/x-www-form-urlencoded') . '"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'">
@@ -1897,13 +1897,13 @@ class DC_Table extends DataContainer implements listable, editable
 			// Redirect
 			if (isset($_POST['saveNclose']))
 			{
-				$this->resetMessages();
+				Message::reset();
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 				$this->redirect($this->getReferer());
 			}
 			elseif (isset($_POST['saveNedit']))
 			{
-				$this->resetMessages();
+				Message::reset();
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 				$strUrl = $this->addToUrl($GLOBALS['TL_DCA'][$this->strTable]['list']['operations']['edit']['href']);
 
@@ -1914,7 +1914,7 @@ class DC_Table extends DataContainer implements listable, editable
 			}
 			elseif (isset($_POST['saveNback']))
 			{
-				$this->resetMessages();
+				Message::reset();
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 
 				if ($this->ptable == '')
@@ -1932,7 +1932,7 @@ class DC_Table extends DataContainer implements listable, editable
 			}
 			elseif (isset($_POST['saveNcreate']))
 			{
-				$this->resetMessages();
+				Message::reset();
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 				$strUrl = Environment::get('script') . '?do=' . Input::get('do');
 
@@ -2975,7 +2975,7 @@ window.addEvent(\'domready\', function() {
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : (isset($GLOBALS['TL_DCA'][$this->strTable]['config']['backlink']) ? '
 <a href="contao/main.php?'.$GLOBALS['TL_DCA'][$this->strTable]['config']['backlink'].'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a> &nbsp; :: &nbsp; ' : '')) . ((Input::get('act') != 'select' && !$blnClipboard && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed']) ? '
 <a href="'.$this->addToUrl('act=paste&amp;mode=create').'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['new'][1]).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['new'][0].'</a>' : '') . ((Input::get('act') != 'select' && !$blnClipboard) ? $this->generateGlobalButtons() : '') . ($blnClipboard ? '<a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="x">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a>' : '') . '
-</div>' . $this->getMessages(true);
+</div>' . Message::generate(true);
 
 		$tree = '';
 		$blnHasSorting = $this->Database->fieldExists('sorting', $table);
@@ -3462,7 +3462,7 @@ window.addEvent(\'domready\', function() {
 <div id="tl_buttons">'.(!$blnClipboard ? '
 <a href="'.$this->getReferer(true, $this->ptable).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' . ((Input::get('act') != 'select') ? ' &#160; :: &#160; ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? '
 <a href="'.$this->addToUrl(($blnHasSorting ? 'act=paste&amp;mode=create' : 'act=create&amp;mode=2&amp;pid='.$this->intId)).'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['new'][1]).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['new'][0].'</a>' : '') . $this->generateGlobalButtons() : '') : '<a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="x">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a>') . '
-</div>' . $this->getMessages(true);
+</div>' . Message::generate(true);
 
 		// Get all details of the parent record
 		$objParent = $this->Database->prepare("SELECT * FROM " . $this->ptable . " WHERE id=?")
@@ -3572,7 +3572,7 @@ window.addEvent(\'domready\', function() {
 				// Add the sorting field
 				if ($_v != '')
 				{
-					$key = isset($GLOBALS['TL_LANG'][$this->ptable][$v][0]) ? $GLOBALS['TL_LANG'][$this->ptable][$v][0]  : $v;
+					$key = isset($GLOBALS['TL_LANG'][$this->ptable][$v][0]) ? $GLOBALS['TL_LANG'][$this->ptable][$v][0] : $v;
 					$add[$key] = $_v;
 				}
 			}
@@ -3940,7 +3940,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 <a href="'.$this->getReferer(true, $this->ptable).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : (isset($GLOBALS['TL_DCA'][$this->strTable]['config']['backlink']) ? '
 <a href="contao/main.php?'.$GLOBALS['TL_DCA'][$this->strTable]['config']['backlink'].'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a> &nbsp; :: &nbsp; ' : '')) . (($this->ptable && Input::get('act') != 'select') ? ' &nbsp; :: &nbsp; ' : '') . ((Input::get('act') != 'select') ? '
 '.(!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? '<a href="'.(($this->ptable != '') ? $this->addToUrl('act=create' . (($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] < 4) ? '&amp;mode=2' : '') . '&amp;pid=' . $this->intId) : $this->addToUrl('act=create')).'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['new'][1]).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['new'][0].'</a>' : '') . $this->generateGlobalButtons() : '') . '
-</div>' . $this->getMessages(true);
+</div>' . Message::generate(true);
 		}
 
 		// Return "no records found" message

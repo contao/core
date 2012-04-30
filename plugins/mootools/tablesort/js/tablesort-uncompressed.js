@@ -49,7 +49,6 @@ var TableSort = new Class(
 	 * @param integer
 	 * @param string
 	 * @param string
-	 * @return boolean
 	 */
 	initialize: function(id, thousandsSeparator, decimalSeparator)
 	{
@@ -68,13 +67,13 @@ var TableSort = new Class(
 		// Check whether table exists
 		if (table == null)
 		{
-			return false;
+			return;
 		}
 
 		// Check whether table has rows
 		if (!table.rows || table.rows.length < 1 || !table.tHead || table.tHead.rows.length < 1)
 		{
-			return false;
+			return;
 		}
 
 		var cook = null;
@@ -121,7 +120,6 @@ var TableSort = new Class(
 	 * Resort the table
 	 * @param integer
 	 * @param object
-	 * @return boolean
 	 */
 	resort: function(index, el)
 	{
@@ -130,7 +128,7 @@ var TableSort = new Class(
 		// Check whether column exists
 		if (col == null)
 		{
-			return false;
+			return;
 		}
 
 		var th = col.getParent('tr');
@@ -139,7 +137,7 @@ var TableSort = new Class(
 		// Check whether table exists and there is more than one row
 		if (table == null || table.tBodies[0].rows.length < 2)
 		{
-			return false;
+			return;
 		}
 
 		SORT_INDEX = index;

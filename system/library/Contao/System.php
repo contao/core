@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Environment, \File, \Idna, \Input, \Messages, \Validator, \Exception, \stdClass;
+use \Environment, \File, \Idna, \Input, \Message, \Validator, \Exception, \stdClass;
 
 
 /**

@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \DataContainer, \Environment, \File, \Input, \Messages, \Widget;
+use \DataContainer, \Environment, \File, \Input, \Message, \Widget;
 
 
 /**
@@ -323,7 +323,7 @@ class TableWizard extends Widget
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['MSC']['tw_import'][1].'</h2>
-'.$this->getMessages().'
+'.Message::generate().'
 <form action="'.ampersand(Environment::get('request'), true).'" id="tl_table_import" class="tl_form" method="post" enctype="multipart/form-data">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_table_import">

@@ -47,7 +47,7 @@ ClassLoader::addClasses(array
 	'Contao\\FrontendUser'       => 'system/modules/core/classes/FrontendUser.php',
 	'Contao\\Hybrid'             => 'system/modules/core/classes/Hybrid.php',
 	'Contao\\LiveUpdate'         => 'system/modules/core/classes/LiveUpdate.php',
-	'Contao\\Messages'           => 'system/modules/core/classes/Messages.php',
+	'Contao\\Message'            => 'system/modules/core/classes/Message.php',
 	'Contao\\Pagination'         => 'system/modules/core/classes/Pagination.php',
 	'Contao\\PurgeData'          => 'system/modules/core/classes/PurgeData.php',
 	'Contao\\RebuildIndex'       => 'system/modules/core/classes/RebuildIndex.php',

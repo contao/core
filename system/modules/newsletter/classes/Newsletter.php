@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \Backend, \Database_Result, \DataContainer, \Email, \Environment, \File, \FileTree, \Input, \Messages, \Module, \NewsletterModel, \NewsletterChannelModel, \String;
+use \BackendTemplate, \Backend, \Database_Result, \DataContainer, \Email, \Environment, \File, \Input, \Message, \Module, \NewsletterModel, \NewsletterChannelModel, \String, \Validator;
 
 
 /**
@@ -119,7 +119,7 @@ class Newsletter extends Backend
 			if (isset($_GET['preview']))
 			{
 				// Check the e-mail address
-				if (!$this->isValidEmailAddress(Input::get('recipient', true)))
+				if (!Validator::isEmail(Input::get('recipient', true)))
 				{
 					$_SESSION['TL_PREVIEW_MAIL_ERROR'] = true;
 					$this->redirect($referer);
@@ -237,7 +237,7 @@ class Newsletter extends Backend
 </div>
 
 <h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_newsletter']['send'][1], $objNewsletter->id).'</h2>
-'.$this->getMessages().'
+'.Message::generate().'
 <form action="'.ampersand(Environment::get('script'), true).'" id="tl_newsletter_send" class="tl_form" method="get">
 <div class="tl_formbody_edit tl_newsletter_send">
 <input type="hidden" name="do" value="' . Input::get('do') . '">
@@ -481,7 +481,7 @@ class Newsletter extends Backend
 				foreach ($arrRecipients as $strRecipient)
 				{
 					// Skip invalid entries
-					if (!$this->isValidEmailAddress($strRecipient))
+					if (!Validator::isEmail($strRecipient))
 					{
 						$this->log('Recipient address "' . $strRecipient . '" seems to be invalid and has been skipped', 'Newsletter importRecipients()', TL_ERROR);
 
@@ -514,8 +514,6 @@ class Newsletter extends Backend
 			$this->reload();
 		}
 
-		$objTree = new FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_newsletter_recipients']['fields']['source'], 'source', null, 'source', 'tl_newsletter_recipients'));
-
 		// Return form
 		return '
 <div id="tl_buttons">
@@ -523,7 +521,7 @@ class Newsletter extends Backend
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'][1].'</h2>
-'.$this->getMessages().'
+'.Message::generate().'
 <form action="'.ampersand(Environment::get('request'), true).'" id="tl_recipients_import" class="tl_form" method="post" enctype="multipart/form-data">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_recipients_import">

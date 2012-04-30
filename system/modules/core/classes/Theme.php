@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Backend, \DataContainer, \Environment, \File, \FilesModel, \Folder, \Input, \Messages, \ZipReader, \DOMDocument, \DOMElement, \Exception;
+use \Backend, \DataContainer, \Environment, \File, \FilesModel, \Folder, \Input, \Message, \ZipReader, \DOMDocument, \DOMElement, \Exception;
 
 
 /**
@@ -139,7 +139,7 @@ class Theme extends Backend
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_theme']['importTheme'][1].'</h2>
-'.$this->getMessages().'
+'.Message::generate().'
 <form action="'.ampersand(Environment::get('request'), true).'" id="tl_theme_import" class="tl_form" method="post" enctype="multipart/form-data">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_theme_import">
@@ -179,7 +179,7 @@ class Theme extends Backend
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_theme']['checking_theme'].'</h2>
-'.$this->getMessages().'
+'.Message::generate().'
 <form action="'.ampersand(Environment::get('request'), true).'" id="tl_theme_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_theme_import">

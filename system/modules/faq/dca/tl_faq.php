@@ -376,6 +376,7 @@ class tl_faq extends Backend
 	 * @param mixed
 	 * @param \DataContainer
 	 * @return mixed
+	 * @throws \Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{

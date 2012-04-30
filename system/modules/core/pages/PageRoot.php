@@ -51,6 +51,7 @@ class PageRoot extends Frontend
 	 * @param integer
 	 * @param boolean
 	 * @return integer
+	 * @return integer
 	 */
 	public function generate($pageId, $blnReturn=false)
 	{
@@ -64,12 +65,11 @@ class PageRoot extends Frontend
 			die('No active pages found');
 		}
 
-		// Only return the page ID
-		if ($blnReturn)
+		if (!$blnReturn)
 		{
-			return $objNextPage->id;
+			$this->redirect($this->generateFrontendUrl($objNextPage->row()));
 		}
 
-		$this->redirect($this->generateFrontendUrl($objNextPage->row()));
+		return $objNextPage->id;
 	}
 }
