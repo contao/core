@@ -266,7 +266,7 @@ class ModulePersonalData extends Module
 				}
 			}
 
-			$this->jumpToOrReload($this->jumpTo);
+			$this->jumpToOrReload($this->objModel->getRelated('jumpTo')->row());
 		}
 
 		$this->Template->loginDetails = $GLOBALS['TL_LANG']['tl_member']['loginDetails'];

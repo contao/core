@@ -341,6 +341,6 @@ class ModulePassword extends Module
 		$objEmail->sendTo($objMember->email);
 
 		$this->log('A new password has been requested for user ID ' . $objMember->id . ' (' . $objMember->email . ')', 'ModulePassword sendPasswordLink()', TL_ACCESS);
-		$this->jumpToOrReload($this->jumpTo);
+		$this->jumpToOrReload($this->objModel->getRelated('jumpTo')->row());
 	}
 }

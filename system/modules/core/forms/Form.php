@@ -477,7 +477,7 @@ class Form extends Hybrid
 			$this->log('Form "' . $this->title . '" has been submitted by ' . Environment::get('ip') . '.', 'Form processFormData()', TL_FORMS);
 		}
 
-		$this->jumpToOrReload($this->jumpTo);
+		$this->jumpToOrReload($this->objModel->getRelated('jumpTo')->row());
 	}
 
 

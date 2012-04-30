@@ -472,7 +472,7 @@ class ModuleRegistration extends Module
 			$this->sendAdminNotification($insertId, $arrData);
 		}
 
-		$this->jumpToOrReload($this->jumpTo);
+		$this->jumpToOrReload($this->objModel->getRelated('jumpTo')->row());
 	}
 
 

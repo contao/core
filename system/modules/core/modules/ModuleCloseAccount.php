@@ -149,7 +149,7 @@ class ModuleCloseAccount extends Module
 				}
 
 				$this->User->logout();
-				$this->jumpToOrReload($this->jumpTo);
+				$this->jumpToOrReload($this->objModel->getRelated('jumpTo')->row());
 			}
 		}
 
