@@ -143,7 +143,20 @@ class ModulePersonalData extends Module
 			$arrData['eval']['tableless'] = $this->tableless;
 			$arrData['eval']['required'] = ($this->User->$field == '' && $arrData['eval']['mandatory']) ? true : false;
 
-			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $this->User->$field));
+			$value = $this->User->$field;
+			if (isset($arrData['load_callback']) && is_array($arrData['load_callback']))
+			{
+				foreach ($arrData['load_callback'] as $callback)
+				{
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$value = $this->$callback[0]->$callback[1]($value, $this->User, $this);
+					}
+				}
+			}
+			
+			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $value));
 
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
@@ -259,7 +272,20 @@ class ModulePersonalData extends Module
 					$this->$callback[0]->$callback[1]($this->User, $_SESSION['FORM_DATA'], $this);
 				}
 			}
-			
+
+			// Call onsubmit_callback
+			if (is_array($GLOBALS['TL_DCA']['tl_member']['config']['onsubmit_callback']))
+			{
+				foreach ($GLOBALS['TL_DCA']['tl_member']['config']['onsubmit_callback'] as $callback)
+				{
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($this->User, $this);
+					}
+				}
+			}
+
 			$this->jumpToOrReload($this->jumpTo);
 		}
 
