@@ -119,6 +119,12 @@ class Pagination extends Frontend
 	protected $strUrl = '';
 
 	/**
+	 * Page paramenter
+	 * @var string
+	 */
+	protected $strParameter = 'page';
+
+	/**
 	 * Variable connector
 	 * @var string
 	 */
@@ -136,16 +142,17 @@ class Pagination extends Frontend
 	 * @param integer
 	 * @param integer
 	 * @param integer
-	 * @return void
+	 * @param string
+	 * @return \Contao\Pagination
 	 */
-	public function __construct($intRows, $intPerPage, $intNumberOfLinks=7)
+	public function __construct($intRows, $intPerPage, $intNumberOfLinks=7, $strParameter='page')
 	{
 		parent::__construct();
 
 		$this->intPage = 1;
-		$this->intRows = (int) $intRows;
-		$this->intRowsPerPage = (int) $intPerPage;
-		$this->intNumberOfLinks = (int) $intNumberOfLinks;
+		$this->intRows = (int)$intRows;
+		$this->intRowsPerPage = (int)$intPerPage;
+		$this->intNumberOfLinks = (int)$intNumberOfLinks;
 
 		// Initialize default labels
 		$this->lblFirst = $GLOBALS['TL_LANG']['MSC']['first'];
@@ -154,10 +161,12 @@ class Pagination extends Frontend
 		$this->lblLast = $GLOBALS['TL_LANG']['MSC']['last'];
 		$this->lblTotal = $GLOBALS['TL_LANG']['MSC']['totalPages'];
 
-		if (Input::get('page') != '' && Input::get('page') > 0)
+		if (Input::get($strParameter) != '' && Input::get($strParameter) > 0)
 		{
-			$this->intPage = Input::get('page');
+			$this->intPage = Input::get($strParameter);
 		}
+
+		$this->strParameter = $strParameter;
 	}
 
 
@@ -219,7 +228,7 @@ class Pagination extends Frontend
 		// Prepare the URL
 		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING'], -1, PREG_SPLIT_NO_EMPTY) as $fragment)
 		{
-			if (strncasecmp($fragment, 'page', 4) !== 0)
+			if (strpos($fragment, $this->strParameter) === false)
 			{
 				$this->strUrl .= (!$blnQuery ? '?' : '&amp;') . $fragment;
 				$blnQuery = true;
@@ -364,7 +373,7 @@ class Pagination extends Frontend
 		}
 		else
 		{
-			return ampersand($this->strUrl) . $this->strVarConnector . 'page=' . $intPage;
+			return ampersand($this->strUrl) . $this->strVarConnector . $this->strParameter . '=' . $intPage;
 		}
 	}
 }

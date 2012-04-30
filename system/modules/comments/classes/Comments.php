@@ -73,7 +73,8 @@ class Comments extends Frontend
 			$total = $gtotal = $intTotal;
 
 			// Get the current page
-			$page = Input::get('page') ? Input::get('page') : 1;
+			$id = 'page_c' . $this->id;
+			$page = Input::get($id) ?: 1;
 
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$objConfig->perPage), 1))
@@ -93,7 +94,7 @@ class Comments extends Frontend
 			$offset = ($page - 1) * $objConfig->perPage;
  
 			// Initialize the pagination menu
-			$objPagination = new Pagination($total, $objConfig->perPage);
+			$objPagination = new Pagination($total, $objConfig->perPage, 7, $id);
 			$objTemplate->pagination = $objPagination->generate("\n  ");
 		}
 

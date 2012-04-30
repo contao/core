@@ -287,7 +287,8 @@ class ContentGallery extends ContentElement
 		if ($this->perPage > 0)
 		{
 			// Get the current page
-			$page = Input::get('page') ?: 1;
+			$id = 'page_g' . $this->id;
+			$page = Input::get($id) ?: 1;
 
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))
@@ -305,7 +306,7 @@ class ContentGallery extends ContentElement
 			$offset = ($page - 1) * $this->perPage;
 			$limit = min($this->perPage + $offset, $total);
 
-			$objPagination = new Pagination($total, $this->perPage);
+			$objPagination = new Pagination($total, $this->perPage, 7, $id);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 

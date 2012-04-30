@@ -233,7 +233,8 @@ class ModuleSearch extends Module
 			// Pagination
 			if ($this->perPage > 0)
 			{	
-				$page = Input::get('page') ?: 1;
+				$id = 'page_s' . $this->id;
+				$page = Input::get($id) ?: 1;
 				$per_page = Input::get('per_page') ?: $this->perPage;
 
 				// Do not index or cache the page if the page number is outside the range
@@ -254,7 +255,7 @@ class ModuleSearch extends Module
 				// Pagination menu
 				if ($to < $count || $from > 1)
 				{
-					$objPagination = new Pagination($count, $per_page);
+					$objPagination = new Pagination($count, $per_page, 7, $id);
 					$this->Template->pagination = $objPagination->generate("\n  ");
 				}
 			}

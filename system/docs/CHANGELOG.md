@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+Pagination variables are now unique (see #4141).
+
 ### New
 Added `Folder->size` to the `Folder` class (see #3903).
 

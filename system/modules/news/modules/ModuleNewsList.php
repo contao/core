@@ -136,7 +136,8 @@ class ModuleNewsList extends ModuleNews
 			}
 
 			// Get the current page
-			$page = Input::get('page') ? Input::get('page') : 1;
+			$id = 'page_n' . $this->id;
+			$page = Input::get($id) ?: 1;
 
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))
@@ -161,7 +162,7 @@ class ModuleNewsList extends ModuleNews
 			}
 
 			// Add the pagination menu
-			$objPagination = new Pagination($total, $this->perPage);
+			$objPagination = new Pagination($total, $this->perPage, 7, $id);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
