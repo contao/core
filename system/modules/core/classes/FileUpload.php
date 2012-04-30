@@ -309,7 +309,7 @@ class FileUpload extends Backend
 		{
 			$blnResize = true;
 			$intWidth = $GLOBALS['TL_CONFIG']['imageWidth'];
-			$intHeight = ceil($GLOBALS['TL_CONFIG']['imageWidth'] * $arrImageSize[1] / $arrImageSize[0]);
+			$intHeight = round($GLOBALS['TL_CONFIG']['imageWidth'] * $arrImageSize[1] / $arrImageSize[0]);
 			$arrImageSize = array($intWidth, $intHeight);
 		}
 
@@ -317,7 +317,7 @@ class FileUpload extends Backend
 		if ($arrImageSize[1] > $GLOBALS['TL_CONFIG']['imageHeight'])
 		{
 			$blnResize = true;
-			$intWidth = ceil($GLOBALS['TL_CONFIG']['imageHeight'] * $arrImageSize[0] / $arrImageSize[1]);
+			$intWidth = round($GLOBALS['TL_CONFIG']['imageHeight'] * $arrImageSize[0] / $arrImageSize[1]);
 			$intHeight = $GLOBALS['TL_CONFIG']['imageHeight'];
 			$arrImageSize = array($intWidth, $intHeight);
 		}
