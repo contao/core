@@ -4349,6 +4349,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 	{
 		$session = $this->Session->getData();
 		$filter = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4) ? $this->strTable.'_'.CURRENT_ID : $this->strTable;
+		$fields = '';
 
 		// Set limit from user input
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters' || $this->Input->post('FORM_SUBMIT') == 'tl_filters_limit')
@@ -4443,7 +4444,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				return '';
 			}
 
-			$fields .= '
+			$fields = '
 <select name="tl_limit" class="tl_select' . (($session['filter'][$filter]['limit'] != 'all' && $total > $GLOBALS['TL_CONFIG']['resultsPerPage']) ? ' active' : '') . '" onchange="this.form.submit()">
   <option value="tl_limit">'.$GLOBALS['TL_LANG']['MSC']['filterRecords'].'</option>'.$options.'
 </select> ';
