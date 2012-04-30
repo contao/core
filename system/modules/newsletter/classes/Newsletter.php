@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \Backend, \Database_Result, \DataContainer, \Email, \Environment, \File, \FileTree, \Input, \Messages, \Module, \NewsletterModel, \NewsletterChannelModel;
+use \BackendTemplate, \Backend, \Database_Result, \DataContainer, \Email, \Environment, \File, \FileTree, \Input, \Messages, \Module, \NewsletterModel, \NewsletterChannelModel, \String;
 
 
 /**
@@ -358,7 +358,7 @@ class Newsletter extends Backend
 	protected function sendNewsletter(Email $objEmail, Database_Result $objNewsletter, $arrRecipient, $text, $html, $css=null)
 	{
 		// Prepare the text content
-		$objEmail->text = $this->parseSimpleTokens($text, $arrRecipient);
+		$objEmail->text = String::parseSimpleTokens($text, $arrRecipient);
 
 		// Add the HTML content
 		if (!$objNewsletter->sendText)
@@ -374,7 +374,7 @@ class Newsletter extends Backend
 			$objTemplate->setData($objNewsletter->row());
 
 			$objTemplate->title = $objNewsletter->subject;
-			$objTemplate->body = $this->parseSimpleTokens($html, $arrRecipient);
+			$objTemplate->body = String::parseSimpleTokens($html, $arrRecipient);
 			$objTemplate->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 			$objTemplate->css = $css; // Backwards compatibility
 

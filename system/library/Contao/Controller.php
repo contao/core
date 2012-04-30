@@ -1974,59 +1974,11 @@ abstract class Controller extends System
 	 * @param string
 	 * @param array
 	 * @return string
-	 * @throws \Exception
+	 * @deprecated
 	 */
 	public static function parseSimpleTokens($strBuffer, $arrData)
 	{
-		$strReturn = '';
-
-		// Remove any unwanted tags (especially PHP tags)
-		$strBuffer = strip_tags($strBuffer, $GLOBALS['TL_CONFIG']['allowedTags']);
-		$arrTags = preg_split('/(\{[^\}]+\})/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
-
-		// Replace the tags
-		foreach ($arrTags as $strTag)
-		{
-			if (strncmp($strTag, '{if', 3) === 0)
-			{
-				$strReturn .= preg_replace('/\{if ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\] ]+).*\}/i', '<?php if ($arrData[\'$1\'] $2 $3): ?>', $strTag);
-			}
-			elseif (strncmp($strTag, '{elseif', 7) === 0)
-			{
-				$strReturn .= preg_replace('/\{elseif ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\] ]+).*\}/i', '<?php elseif ($arrData[\'$1\'] $2 $3): ?>', $strTag);
-			}
-			elseif (strncmp($strTag, '{else', 5) === 0)
-			{
-				$strReturn .= '<?php else: ?>';
-			}
-			elseif (strncmp($strTag, '{endif', 6) === 0)
-			{
-				$strReturn .= '<?php endif; ?>';
-			}
-			else
-			{
-				$strReturn .= $strTag;
-			}
-		}
-
-		// Replace tokens
-		$strReturn = str_replace('?><br />', '?>', $strReturn);
-		$strReturn = preg_replace('/##([A-Za-z0-9_]+)##/i', '<?php echo $arrData[\'$1\']; ?>', $strReturn);
-
-		// Eval the code
-		ob_start();
-		$blnEval = eval("?>" . $strReturn);
-		$strReturn = ob_get_contents();
-		ob_end_clean();
-
-		// Throw an exception if there is an eval() error
-		if ($blnEval === false)
-		{
-			throw new Exception("Error parsing simple tokens ($strReturn)");
-		}
-
-		// Return the evaled code
-		return $strReturn;
+		return String::parseSimpleTokens($strBuffer, $arrData);
 	}
 
 
