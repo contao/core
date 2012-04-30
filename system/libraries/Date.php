@@ -450,6 +450,7 @@ class Date extends System
 				case 'h': $chunks[$k] = 'I'; break;
 				case 'i': $chunks[$k] = 'M'; break;
 				case 's': $chunks[$k] = 'S'; break;
+				case 'U': $chunks[$k] = 's'; break;
 			} 
 		}
 
