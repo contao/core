@@ -757,7 +757,7 @@ class tl_news extends Backend
 
 	/**
 	 * Schedule a news feed update
-	 * 
+	 *
 	 * This method is triggered when a single news item or multiple news
 	 * items are modified (edit/editAll), moved (cut/cutAll) or deleted
 	 * (delete/deleteAll). Since duplicated items are unpublished by default,

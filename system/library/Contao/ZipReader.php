@@ -145,7 +145,7 @@ class ZipReader
 	 * - offset_start_cd:           offset of start of central directory with respect to the starting disk number
 	 * - zipfile_comment_length:    ZIP file comment length
 	 * - zipfile_comment:           ZIP file comment
-	 * 
+	 *
 	 * Supported file parameters
 	 * - version_made_by:           version made by
 	 * - version_needed_to_extract: version needed to extract

@@ -725,7 +725,7 @@ class tl_style extends Backend
 
 	/**
 	 * Schedule a style sheet update
-	 * 
+	 *
 	 * This method is triggered when a single style or multiple styles are
 	 * modified (edit/editAll), duplicated (copy/copyAll), moved (cut/cutAll)
 	 * or deleted (delete/deleteAll).

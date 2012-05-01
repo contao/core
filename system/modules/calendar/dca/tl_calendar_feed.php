@@ -401,7 +401,7 @@ class tl_calendar_feed extends Backend
 
 	/**
 	 * Schedule a calendar feed update
-	 * 
+	 *
 	 * This method is triggered when a single calendar or multiple calendars
 	 * are modified (edit/editAll).
 	 * @param \DataContainer

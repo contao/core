@@ -905,7 +905,7 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Schedule a calendar feed update
-	 * 
+	 *
 	 * This method is triggered when a single event or multiple events are
 	 * modified (edit/editAll), moved (cut/cutAll) or deleted (delete/deleteAll).
 	 * Since duplicated events are unpublished by default, it is not necessary

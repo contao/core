@@ -175,7 +175,7 @@ abstract class Database_Statement
 
 	/**
 	 * Take an associative array and auto-generate the SET/VALUES subpart of a query
-	 * 
+	 *
 	 * Usage example:
 	 * $objStatement->prepare("UPDATE table %s")->set(array('id'=>'my_id'));
 	 * will be transformed into "UPDATE table SET id='my_id'".

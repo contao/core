@@ -387,7 +387,7 @@ class Comments extends Frontend
 
 	/**
 	 * Replace bbcode and return the HTML string
-	 * 
+	 *
 	 * Supports the following tags:
 	 * - [b][/b] bold
 	 * - [i][/i] italic

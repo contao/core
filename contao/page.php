@@ -55,7 +55,7 @@ class PagePicker extends Backend
 
 	/**
 	 * Initialize the controller
-	 * 
+	 *
 	 * 1. Import the user
 	 * 2. Call the parent constructor
 	 * 3. Authenticate the user

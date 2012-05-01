@@ -282,7 +282,7 @@ class tl_style_sheet extends Backend
 
 	/**
 	 * Schedule a style sheet update
-	 * 
+	 *
 	 * This method is triggered when a single style sheet or multiple style
 	 * sheets are modified (edit/editAll) or duplicated (copy/copyAll).
 	 * @param mixed

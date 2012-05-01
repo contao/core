@@ -119,7 +119,7 @@ class Database_Oracle extends Database
 
 	/**
 	 * Return a standardized array with field information
-	 * 
+	 *
 	 * Standardized format:
 	 * - name:       field name (e.g. my_field)
 	 * - type:       field type (e.g. "int" or "number")

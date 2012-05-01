@@ -401,7 +401,7 @@ class tl_news_feed extends Backend
 
 	/**
 	 * Schedule a news feed update
-	 * 
+	 *
 	 * This method is triggered when a single news archive or multiple news
 	 * archives are modified (edit/editAll).
 	 * @param \DataContainer

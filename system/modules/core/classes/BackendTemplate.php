@@ -200,7 +200,7 @@ class BackendTemplate extends Template
 
 	/**
 	 * Return the datepicker string
-	 * 
+	 *
 	 * Fix the MooTools more parsers which incorrectly parse ISO-8601 and do
 	 * not handle German date formats at all.
 	 * @return string
