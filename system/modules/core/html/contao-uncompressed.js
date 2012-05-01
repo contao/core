@@ -1020,7 +1020,7 @@ var Backend =
 	/**
 	 * Open the page picker wizard in a modal window
 	 * @param string
-	 * @deprecated
+	 * @deprecated Now uses Backend.openModalWindow()
 	 */
 	pickPage: function(id) {
 		var width = 320;
@@ -1037,7 +1037,7 @@ var Backend =
 	 * Open the file picker wizard in a modal window
 	 * @param string
 	 * @param string
-	 * @deprecated
+	 * @deprecated Now uses Backend.openModalWindow()
 	 */
 	pickFile: function(id, filter) {
 		var width = 320;

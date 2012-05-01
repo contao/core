@@ -145,7 +145,7 @@ class Folder extends System
 
 	/**
 	 * Backwards compatibility
-	 * @deprecated
+	 * @deprecated Use $this->purge() instead
 	 */
 	public function clear()
 	{

@@ -76,7 +76,7 @@ class Encryption
 	/**
 	 * Return the current object instance (Singleton)
 	 * @return \Encryption
-	 * @deprecated
+	 * @deprecated Encryption is now a static class
 	 */
 	public static function getInstance()
 	{

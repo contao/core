@@ -76,7 +76,7 @@ class RequestToken extends System
 	/**
 	 * Return the current object instance (Singleton)
 	 * @return \RequestToken
-	 * @deprecated
+	 * @deprecated RequestToken is now a static class
 	 */
 	public static function getInstance()
 	{

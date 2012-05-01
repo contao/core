@@ -401,7 +401,7 @@ abstract class Template extends Controller
 	/**
 	 * Print the IE6 warning
 	 * @return string
-	 * @deprecated
+	 * @deprecated The IE6 warning is now in the templates (e.g. be_install)
 	 */
 	public function showIE6warning()
 	{

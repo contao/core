@@ -593,7 +593,7 @@ abstract class System
 	/**
 	 * Add an error message
 	 * @param string
-	 * @deprecated
+	 * @deprecated Use Message::addError() instead
 	 */
 	protected function addErrorMessage($strMessage)
 	{
@@ -604,7 +604,7 @@ abstract class System
 	/**
 	 * Add a confirmation message
 	 * @param string
-	 * @deprecated
+	 * @deprecated Use Message::addConfirmation() instead
 	 */
 	protected function addConfirmationMessage($strMessage)
 	{
@@ -615,7 +615,7 @@ abstract class System
 	/**
 	 * Add a new message
 	 * @param string
-	 * @deprecated
+	 * @deprecated Use Message::addNew() instead
 	 */
 	protected function addNewMessage($strMessage)
 	{
@@ -626,7 +626,7 @@ abstract class System
 	/**
 	 * Add an info message
 	 * @param string
-	 * @deprecated
+	 * @deprecated Use Message::addInfo() instead
 	 */
 	protected function addInfoMessage($strMessage)
 	{
@@ -637,7 +637,7 @@ abstract class System
 	/**
 	 * Add a raw message
 	 * @param string
-	 * @deprecated
+	 * @deprecated Use Message::addRaw() instead
 	 */
 	protected function addRawMessage($strMessage)
 	{
@@ -649,7 +649,7 @@ abstract class System
 	 * Add a message
 	 * @param string
 	 * @param string
-	 * @deprecated
+	 * @deprecated Use Message::add() instead
 	 */
 	protected function addMessage($strMessage, $strType)
 	{
@@ -662,7 +662,7 @@ abstract class System
 	 * @param boolean
 	 * @param boolean
 	 * @return string
-	 * @deprecated
+	 * @deprecated Use Message::generate() instead
 	 */
 	protected function getMessages($blnDcLayout=false, $blnNoWrapper=false)
 	{
@@ -672,7 +672,7 @@ abstract class System
 
 	/**
 	 * Reset the message system
-	 * @deprecated
+	 * @deprecated Use Message::reset() instead
 	 */
 	protected function resetMessages()
 	{
@@ -683,7 +683,7 @@ abstract class System
 	/**
 	 * Return all available message types
 	 * @return array
-	 * @deprecated
+	 * @deprecated Use Message::getTypes() instead
 	 */
 	protected function getMessageTypes()
 	{
@@ -766,7 +766,7 @@ abstract class System
 	 * Encode an internationalized domain name
 	 * @param string
 	 * @return string
-	 * @deprecated
+	 * @deprecated Use Idna::encode() instead
 	 */
 	protected function idnaEncode($strDomain)
 	{
@@ -778,7 +778,7 @@ abstract class System
 	 * Decode an internationalized domain name
 	 * @param string
 	 * @return string
-	 * @deprecated
+	 * @deprecated Use Idna::decode() instead
 	 */
 	protected function idnaDecode($strDomain)
 	{
@@ -790,7 +790,7 @@ abstract class System
 	 * Encode an e-mail address
 	 * @param string
 	 * @return string
-	 * @deprecated
+	 * @deprecated Use Idna::encodeEmail() instead
 	 */
 	protected function idnaEncodeEmail($strEmail)
 	{
@@ -802,7 +802,7 @@ abstract class System
 	 * Encode an URL
 	 * @param string
 	 * @return string
-	 * @deprecated
+	 * @deprecated Use Idna::encodeUrl() instead
 	 */
 	protected function idnaEncodeUrl($strUrl)
 	{
@@ -814,7 +814,7 @@ abstract class System
 	 * Validate an e-mail address
 	 * @param string
 	 * @return boolean
-	 * @deprecated
+	 * @deprecated Use Validator::isEmail() instead
 	 */
 	protected function isValidEmailAddress($strEmail)
 	{

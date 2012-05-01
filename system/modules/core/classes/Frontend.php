@@ -479,7 +479,7 @@ abstract class Frontend extends Controller
 	 * Parse the meta.txt file of a folder
 	 * @param string
 	 * @param boolean
-	 * @deprecated
+	 * @deprecated Meta data is now stored in the database
 	 */
 	protected function parseMetaFile($strPath, $blnIsFile=false)
 	{

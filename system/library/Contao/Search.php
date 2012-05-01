@@ -62,7 +62,7 @@ class Search extends System
 	/**
 	 * Return the current object instance (Singleton)
 	 * @return \Search
-	 * @deprecated
+	 * @deprecated Search is now a static class
 	 */
 	public static function getInstance()
 	{

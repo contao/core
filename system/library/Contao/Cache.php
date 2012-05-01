@@ -74,7 +74,7 @@ class Cache extends System
 	 * Check whether a variable is set
 	 * @param string
 	 * @return boolean
-	 * @deprecated
+	 * @deprecated Use Cache::has() instead
 	 */
 	public function __isset($strKey)
 	{
@@ -86,7 +86,7 @@ class Cache extends System
 	 * Return a variable
 	 * @param string
 	 * @return mixed
-	 * @deprecated
+	 * @deprecated Use Cache::get() instead
 	 */
 	public function __get($strKey)
 	{
@@ -103,7 +103,7 @@ class Cache extends System
 	 * Set a variable
 	 * @param string
 	 * @param mixed
-	 * @deprecated
+	 * @deprecated Use Cache::set() instead
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -114,7 +114,7 @@ class Cache extends System
 	/**
 	 * Unset an entry
 	 * @param string
-	 * @deprecated
+	 * @deprecated Use Cache::remove() instead
 	 */
 	public function __unset($strKey)
 	{
@@ -125,7 +125,7 @@ class Cache extends System
 	/**
 	 * Instantiate a new cache object and return it (Factory)
 	 * @return \Cache
-	 * @deprecated
+	 * @deprecated Cache is now a static class
 	 */
 	public static function getInstance()
 	{

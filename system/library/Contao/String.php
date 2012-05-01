@@ -67,7 +67,7 @@ class String
 	/**
 	 * Return the current object instance (Singleton)
 	 * @return \String
-	 * @deprecated
+	 * @deprecated String is now a static class
 	 */
 	public static function getInstance()
 	{

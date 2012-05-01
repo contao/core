@@ -73,7 +73,7 @@ class Environment
 	 * Set an environment parameter
 	 * @param string
 	 * @param mixed
-	 * @deprecated
+	 * @deprecated Use Environment::set() instead
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -85,7 +85,7 @@ class Environment
 	 * Return an environment parameter
 	 * @param string
 	 * @return string
-	 * @deprecated
+	 * @deprecated Use Environment::get() instead
 	 */
 	public function __get($strKey)
 	{
@@ -96,7 +96,7 @@ class Environment
 	/**
 	 * Return the current object instance (Singleton)
 	 * @return \Environment
-	 * @deprecated
+	 * @deprecated Environment is now a static class
 	 */
 	public static function getInstance()
 	{

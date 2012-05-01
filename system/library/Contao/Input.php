@@ -81,7 +81,7 @@ class Input
 	/**
 	 * Return the current object instance (Singleton)
 	 * @return \Input
-	 * @deprecated
+	 * @deprecated Input is now a static class
 	 */
 	public static function getInstance()
 	{

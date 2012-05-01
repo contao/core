@@ -822,7 +822,7 @@ abstract class Controller extends System
 	 * @param integer
 	 * @param string
 	 * @return boolean
-	 * @deprecated
+	 * @deprecated Use Image::resize() instead
 	 */
 	protected function resizeImage($image, $width, $height, $mode='')
 	{
@@ -838,7 +838,7 @@ abstract class Controller extends System
 	 * @param string
 	 * @param string
 	 * @return string|null
-	 * @deprecated
+	 * @deprecated Use Image::get() instead
 	 */
 	protected function getImage($image, $width, $height, $mode='', $target=null)
 	{
@@ -849,7 +849,7 @@ abstract class Controller extends System
 	/**
 	 * Return true for backwards compatibility (see #3218)
 	 * @return boolean
-	 * @deprecated
+	 * @deprecated Specify 'datepicker'=>true in your DCA file instead
 	 */
 	protected function getDatePickerString()
 	{
@@ -1973,7 +1973,7 @@ abstract class Controller extends System
 	 * @param string
 	 * @param array
 	 * @return string
-	 * @deprecated
+	 * @deprecated Use String::parseSimpleTokens() instead
 	 */
 	public static function parseSimpleTokens($strBuffer, $arrData)
 	{
