@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Frontend
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \CalendarFeedModel, \Combiner, \Environment, \Frontend, \FrontendTemplate, \
  * Provide methods to handle a regular front end page.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Core
  */
 class PageRegular extends Frontend
 {

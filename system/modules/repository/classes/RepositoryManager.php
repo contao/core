@@ -21,16 +21,6 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5.3
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Repository
- * @license    LGPL
- */
-
-
-/**
- * Contao Repository :: Backend module for extension management
- *
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
  * @license    See accompaning file LICENSE.txt
@@ -38,7 +28,11 @@
 
 
 /**
- * Implements the extension manager.
+ * Implements the extension manager
+ * @copyright  Peter Koch 2008-2010
+ * @author     Peter Koch, IBK Software AG
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Repository
  */
 class RepositoryManager extends RepositoryBackendModule
 {

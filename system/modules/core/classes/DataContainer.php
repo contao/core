@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Backend
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \Backend, \Environment, \Input, \Exception, \uploadable;
  * Provide methods to handle data container arrays.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Core
  */
 class DataContainer extends Backend
 {

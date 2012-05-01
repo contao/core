@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Newsletter
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \BackendTemplate, \Backend, \Database_Result, \DataContainer, \Email, \Envir
  * Provide methods to handle newsletters.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Newsletter
  */
 class Newsletter extends Backend
 {

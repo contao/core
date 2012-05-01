@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    TemplateEditor
  * @license    LGPL
  */
 
@@ -149,7 +148,7 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Core
  */
 class tl_templates extends Backend
 {

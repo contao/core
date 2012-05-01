@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    System
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \Email, \Environment, \FrontendUser, \Input, \Message, \System;
  * Provide methods to manage users.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Model
+ * @package    Library
  */
 abstract class User extends System
 {

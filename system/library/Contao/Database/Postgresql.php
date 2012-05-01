@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    System
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \Database, \Database_Postgresql_Statement;
  * Driver class for PostgreSQL databases.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Driver
+ * @package    Library
  */
 class Database_Postgresql extends Database
 {

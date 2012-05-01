@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Development
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \BackendModule, \Environmen, \Input;
  * Back end module "missing labels".
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Devtools
  */
 class ModuleLabels extends BackendModule
 {

@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Faq
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \Environment, \FaqCategoryModel, \FaqModel, \Frontend;
  * Provide methods regarding FAQs.
  * @copyright  Leo Feyer 2008-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Faq
  */
 class ModuleFaq extends Frontend
 {

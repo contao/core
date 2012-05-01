@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Frontend
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \Frontend, \FrontendTemplate;
  * Parent class for objects that can be modules or content elements.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Core
  */
 abstract class Hybrid extends Frontend
 {

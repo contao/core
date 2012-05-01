@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Highlighter
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \Combiner, \ContentElement;
  * Front end content element "code".
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Core
  */
 class ContentCode extends ContentElement
 {

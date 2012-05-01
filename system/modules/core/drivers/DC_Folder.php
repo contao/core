@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    System
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \DataContainer, \Date, \Environment, \File, \FilesModel, \Folder, \Image, \I
  * Provide methods to modify the file system.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Core
  */
 class DC_Folder extends DataContainer implements listable, editable
 {

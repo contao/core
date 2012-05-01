@@ -12,12 +12,12 @@ nbproject/
 
 # Contao
 /.htaccess
-*.xml
+/*.xml
 files/*
 assets/css/*
 assets/images/*
 assets/js/*
-share/*
+share/*.xml
 system/cache/*
 system/logs/*
 system/tmp/*

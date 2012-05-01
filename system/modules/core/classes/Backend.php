@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Backend
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \Controller, \Environment, \Input, \Exception, \listable, \editable;
  * Provide methods to manage back end controllers.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Core
  */
 abstract class Backend extends Controller
 {

@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Plugins
  * @license    LGPL
  */
 
@@ -34,7 +33,6 @@
  * Provide methods to render TinyMCE page and file drop down menus.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
  */
 class typolib extends Backend
 {

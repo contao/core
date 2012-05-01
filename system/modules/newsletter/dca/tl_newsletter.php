@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Newsletter
  * @license    LGPL
  */
 
@@ -286,7 +285,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Newsletter
  */
 class tl_newsletter extends Backend
 {

@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    System
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \Database, \Database_Statement, \Database_Result, \DcaExtractor, \Model_Coll
  * Provide active record and a bit of ORM functionality.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Model
+ * @package    Library
  */
 abstract class Model extends System
 {

@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Backend
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \Widget;
  * Provide methods to handle text fields with unit drop down menu.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Core
  */
 class TrblField extends Widget
 {

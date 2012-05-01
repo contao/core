@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Calendar
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \BackendTemplate, \Calendar, \CalendarEventsModel, \Events, \FilesModel, \In
  * Front end module "event reader".
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Calendar
  */
 class ModuleEventReader extends Events
 {

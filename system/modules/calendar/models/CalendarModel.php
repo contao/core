@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Backend
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \Database, \Model;
  * Provide methods to find and save calendars.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Model
+ * @package    Calendar
  */
 class CalendarModel extends Model
 {

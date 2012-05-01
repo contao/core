@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    System
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \ArticleModel, \Cache, \CalendarModel, \CalendarEventsModel, \ContentModel,	
  * Provide methods to manage controllers.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Library
  */
 abstract class Controller extends System
 {
@@ -2723,7 +2722,6 @@ abstract class Controller extends System
 	/**
 	 * Return true if a class exists (tries to autoload the class)
 	 * @param string
-	 * @param boolean
 	 * @return boolean
 	 */
 	protected function classFileExists($strClass)

@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Development
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \BackendModule, \Environment, \File, \Input, \Message;
  * Back end module "autoload files".
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Devtools
  */
 class ModuleAutoload extends BackendModule
 {
@@ -208,7 +207,6 @@ class ModuleAutoload extends BackendModule
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-$intYear
  * @author     Leo Feyer <http://www.contao.org>
- * @package    $strPackage
  * @license    LGPL
  */
 
@@ -337,7 +335,6 @@ EOT
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-$intYear
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Helper
  * @license    LGPL
  */
 

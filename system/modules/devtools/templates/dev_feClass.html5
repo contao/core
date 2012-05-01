@@ -40,7 +40,7 @@ use \<?php echo $this->extends; ?>;
  *
  * @copyright  <?php echo $this->copyright; ?> 
  * @author     <?php echo $this->author; ?> 
- * @package    Controller
+ * @package    Devtools
  */
 class <?php echo $this->class; ?> extends <?php echo $this->extends; ?> 
 {

@@ -21,19 +21,18 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5.3
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Repository
- * @license    LGPL
+ * @copyright  Peter Koch 2008-2010
+ * @author     Peter Koch, IBK Software AG
+ * @license    See accompaning file LICENSE.txt
  */
 
 
 /**
  * Contao Repository :: Repository settings
- *
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
- * @license    See accompaning file LICENSE.txt
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Repository
  */
 
 // enable/disable SOAP cache

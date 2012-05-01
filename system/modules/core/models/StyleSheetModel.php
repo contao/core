@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Backend
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \Database, \Model, \Model_Collection;
  * Provide methods to find and save style sheets.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Model
+ * @package    Core
  */
 class StyleSheetModel extends Model
 {

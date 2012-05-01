@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Listing
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \BackendTemplate, \Input, \Environment, \FrontendTemplate, \Module, \Paginat
  * Provide methods to render content element "listing".
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Listing
  */
 class ModuleListing extends Module
 {

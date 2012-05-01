@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Frontend
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \Environment, \File, \Input, \Search, \Template;
  * Provide methods to handle front end templates.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Core
  */
 class FrontendTemplate extends Template
 {

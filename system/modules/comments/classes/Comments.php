@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Comments
  * @license    LGPL
  */
 
@@ -40,7 +39,7 @@ use \CommentsModel, \Email, \Environment, \Frontend, \FrontendTemplate, \Input, 
  *
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Comments
  */
 class Comments extends Frontend
 {

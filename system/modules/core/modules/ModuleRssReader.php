@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    RssReader
  * @license    LGPL
  */
 
@@ -52,7 +51,7 @@ if (!class_exists('idna_convert', false))
  * Front end module "rss reader".
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Core
  */
 class ModuleRssReader extends Module
 {

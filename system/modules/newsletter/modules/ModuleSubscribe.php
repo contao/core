@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Newsletter
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \BackendTemplate, \Email, \Environment, \FrontendTemplate, \Input, \Module, 
  * Front end module "newsletter subscribe".
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Newsletter
  */
 class ModuleSubscribe extends Module
 {

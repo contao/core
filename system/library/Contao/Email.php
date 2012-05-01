@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    System
  * @license    LGPL
  */
 
@@ -330,7 +329,6 @@ class Email extends System
 	 * Get CC e-mail addresses from an array, string or unlimited number of arguments
 	 *
 	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed.
-	 * @param mixed
 	 */
 	public function sendCc()
 	{
@@ -342,7 +340,6 @@ class Email extends System
 	 * Get BCC e-mail addresses from an array, string or unlimited number of arguments
 	 *
 	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed.
-	 * @param mixed
 	 */
 	public function sendBcc()
 	{
@@ -354,7 +351,6 @@ class Email extends System
 	 * Get ReplyTo e-mail addresses from an array, string or unlimited number of arguments
 	 *
 	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed.
-	 * @param mixed
 	 */
 	public function replyTo()
 	{
@@ -389,7 +385,6 @@ class Email extends System
 	 * Get e-mail addresses from an array, string or unlimited number of arguments and send the e-mail
 	 *
 	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed.
-	 * @param mixed
 	 * @return boolean
 	 */
 	public function sendTo()

@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Calendar
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \ArticleModel, \Calendar, \CalendarModel, \CalendarEventsModel, \Date, \Modu
  * Provide methods to get all events of a certain period from the database.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Calendar
  */
 abstract class Events extends Module
 {

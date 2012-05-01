@@ -40,7 +40,7 @@ use \BackendModule;
  *
  * @copyright  <?php echo $this->copyright; ?> 
  * @author     <?php echo $this->author; ?> 
- * @package    Controller
+ * @package    Devtools
  */
 class <?php echo $this->class; ?> extends BackendModule
 {

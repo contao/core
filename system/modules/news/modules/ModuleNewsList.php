@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    News
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \BackendTemplate, \FrontendTemplate, \Input, \ModuleNews, \NewsModel, \Pagin
  * Front end module "news list".
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    News
  */
 class ModuleNewsList extends ModuleNews
 {

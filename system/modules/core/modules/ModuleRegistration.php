@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Registration
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \BackendTemplate, \Date, \Email, \Environment, \Folder, \FormPassword, \Fron
  * Front end module "registration".
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Core
  */
 class ModuleRegistration extends Module
 {

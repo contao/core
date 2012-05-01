@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Faq
  * @license    LGPL
  */
 
@@ -40,7 +39,7 @@ use \BackenTemplate, \Environment, \FaqModel, \Module, \PageModel;
  *
  * @copyright  Leo Feyer 2008-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Faq
  */
 class ModuleFaqList extends Module
 {

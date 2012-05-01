@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Calendar
  * @license    LGPL
  */
 
@@ -276,7 +275,7 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Calendar
  */
 class tl_calendar extends Backend
 {

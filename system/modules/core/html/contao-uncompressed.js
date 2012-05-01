@@ -21,7 +21,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Backend
  * @license    LGPL
  */
 
@@ -32,7 +31,6 @@
  * Provide methods to handle Ajax requests.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Backend
  */
 var AjaxRequest =
 {
@@ -678,7 +676,6 @@ var AjaxRequest =
  * Provide methods to handle back end tasks.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Backend
  */
 var Backend =
 {
@@ -1669,7 +1666,6 @@ window.addEvent('ajax_change', function() {
  * Provide methods to handle context menus
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Backend
  */
 var ContextMenu =
 {
@@ -1754,7 +1750,6 @@ window.addEvent('structure', function() {
  * Provide callback functions for TinyMCE.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Backend
  */
 var TinyCallback =
 {

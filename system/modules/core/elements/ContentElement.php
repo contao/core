@@ -23,7 +23,6 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Frontend
  * @license    LGPL
  */
 
@@ -41,7 +40,7 @@ use \Frontend, \FrontendTemplate, \Model, \Model_Collection;
  * Parent class for content elements.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Core
  */
 abstract class ContentElement extends Frontend
 {
