@@ -139,6 +139,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'toplink'                     => '{type_legend},type,linkTitle;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
 		'image'                       => '{type_legend},type,headline;{source_legend},singleSRC;{image_legend},alt,title,size,imagemargin,imageUrl,fullsize,caption;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
 		'gallery'                     => '{type_legend},type,headline;{source_legend},multiSRC,sortBy,useHomeDir;{image_legend},size,imagemargin,perRow,fullsize,perPage,numberOfItems;{template_legend:hide},galleryTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
+		'player'                      => '{type_legend},type,headline;{source_legend},multiSRC;{player_legend},playerSize;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
 		'download'                    => '{type_legend},type,headline;{source_legend},singleSRC;{dwnconfig_legend},linkTitle;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
 		'downloads'                   => '{type_legend},type,headline;{source_legend},multiSRC,sortBy,useHomeDir;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
 		'alias'                       => '{type_legend},type;{include_legend},cteAlias;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
@@ -591,6 +592,14 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_content', 'getGalleryTemplates'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
+		),
+		'playerSize' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['playerSize'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'cteAlias' => array
@@ -1160,6 +1169,42 @@ class tl_content extends Backend
 
 		// Return all gallery templates
 		return $this->getTemplateGroup('gallery_', $objLayout->pid);
+	}
+
+
+	/**
+	 * Return all player templates as array
+	 * @param \DataContainer
+	 * @return array
+	 */
+	public function getPlayerTemplates(DataContainer $dc)
+	{
+		$intPid = $dc->activeRecord->pid;
+
+		// Override multiple
+		if (Input::get('act') == 'overrideAll')
+		{
+			$intPid = Input::get('id');
+		}
+
+		// Get the page ID
+		$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
+									 ->limit(1)
+									 ->execute($intPid);
+
+		// Inherit the page settings
+		$objPage = $this->getPageDetails($objArticle->pid);
+
+		// Get the theme ID
+		$objLayout = LayoutModel::findByPk($objPage->layout);
+
+		if ($objLayout === null)
+		{
+			return array();
+		}
+
+		// Return all gallery templates
+		return $this->getTemplateGroup('player_', $objLayout->pid);
 	}
 
 

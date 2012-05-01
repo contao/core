@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added a video/audio player content element based on mediaelement.js.
+
 ### Changed
 Pagination variables are now unique (see #4141).
 

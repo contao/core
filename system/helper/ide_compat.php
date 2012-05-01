@@ -148,6 +148,7 @@ class ContentHtml extends Contao\ContentHtml {}
 class ContentHyperlink extends Contao\ContentHyperlink {}
 class ContentImage extends Contao\ContentImage {}
 class ContentList extends Contao\ContentList {}
+class ContentMedia extends Contao\ContentMedia {}
 class ContentModule extends Contao\ContentModule {}
 class ContentTable extends Contao\ContentTable {}
 class ContentTeaser extends Contao\ContentTeaser {}

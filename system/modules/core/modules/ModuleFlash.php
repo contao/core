@@ -77,7 +77,7 @@ class ModuleFlash extends Module
 
 			$objFile = FilesModel::findByPk($this->singleSRC);
 
-			if ($objFile === null  || !is_file(TL_ROOT . '/' . $objFile->path))
+			if ($objFile === null || !is_file(TL_ROOT . '/' . $objFile->path))
 			{
 				return '';
 			}

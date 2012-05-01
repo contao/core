@@ -76,6 +76,7 @@ $GLOBALS['TL_LANG']['tl_content']['perPage']       = array('Elemente pro Seite',
 $GLOBALS['TL_LANG']['tl_content']['numberOfItems'] = array('Gesamtzahl der Bilder', 'Hier können Sie die Gesamtzahl der Bilder begrenzen. Geben Sie 0 ein, um alle anzuzeigen.');
 $GLOBALS['TL_LANG']['tl_content']['sortBy']        = array('Sortieren nach', 'Bitte wählen Sie eine Sortierreihenfolge aus.');
 $GLOBALS['TL_LANG']['tl_content']['galleryTpl']    = array('Galerietemplate', 'Hier können Sie das Galerietemplate auswählen.');
+$GLOBALS['TL_LANG']['tl_content']['playerSize']    = array('Player-Größe', 'Breite und Höhe des Mediaplayer in Pixeln (nur bei Videos).');
 $GLOBALS['TL_LANG']['tl_content']['cteAlias']      = array('Bezogenes Inhaltselement', 'Bitte wählen Sie das Inhaltselement aus, das Sie einfügen möchten.');
 $GLOBALS['TL_LANG']['tl_content']['articleAlias']  = array('Bezogener Artikel', 'Bitte wählen Sie den Artikel aus, den Sie einfügen möchten.');
 $GLOBALS['TL_LANG']['tl_content']['article']       = array('Artikel', 'Bitte wählen Sie einen Artikel aus.');
@@ -107,6 +108,7 @@ $GLOBALS['TL_LANG']['tl_content']['include_legend']   = 'Include-Einstellungen';
 $GLOBALS['TL_LANG']['tl_content']['protected_legend'] = 'Zugriffsschutz';
 $GLOBALS['TL_LANG']['tl_content']['expert_legend']    = 'Experten-Einstellungen';
 $GLOBALS['TL_LANG']['tl_content']['template_legend']  = 'Template-Einstellungen';
+$GLOBALS['TL_LANG']['tl_content']['player_legend']    = 'Player-Einstellungen';
 
 
 /**

@@ -1184,7 +1184,7 @@ a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header
 }
 
 /* Visual hint for TRBL fields - thanks to Eugene Rybyakov */
-.tl_text_trbl,#ctrl_size_0,#ctrl_size_1,#ctrl_gradient input {
+.tl_text_trbl,#ctrl_size_0,#ctrl_size_1,#ctrl_gradient input,#ctrl_playerSize input {
 	background:url("images/hints.gif") no-repeat -20px 20px;
 }
 #ctrl_size_0 {
@@ -1192,6 +1192,12 @@ a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header
 }
 #ctrl_size_1 {
 	background-position:64px -18px !important;
+}
+#ctrl_playerSize_0 {
+	background-position:142px 1px !important;
+}
+#ctrl_playerSize_1 {
+	background-position:143px -18px !important;
 }
 #tl_form_field #ctrl_size input {
 	background:none !important;

@@ -79,4 +79,30 @@ class FilesModel extends Model
 		$t = static::$strTable;
 		return static::findBy(array("$t.path LIKE ?"), $strPath . '%');
 	}
+
+
+	/**
+	 * Find multiple files by ID and a list of extensions
+	 * @param array
+	 * @param array
+	 * @return \Model_Collection|null
+	 */
+	public static function findMultipleByIdsAndExtensions($arrIds, $arrExtensions)
+	{
+		if (!is_array($arrIds) || empty($arrIds) || !is_array($arrExtensions) || empty($arrExtensions))
+		{
+			return null;
+		}
+
+		foreach ($arrExtensions as $k=>$v)
+		{
+			if (!preg_match('/^[a-z0-9]{2,5}$/i', $v))
+			{
+				unset($arrExtensions[$k]);
+			}
+		}
+
+		$t = static::$strTable;
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ") AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, array('order'=>Database::getInstance()->findInSet("$t.id", $arrIds)));
+	}
 }

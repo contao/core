@@ -177,10 +177,11 @@ $GLOBALS['TL_CTE'] = array
 		'hyperlink' => 'ContentHyperlink',
 		'toplink'   => 'ContentToplink'
 	),
-	'images' => array
+	'media' => array
 	(
 		'image'     => 'ContentImage',
-		'gallery'   => 'ContentGallery'
+		'gallery'   => 'ContentGallery',
+		'player'    => 'ContentMedia'
 	),
 	'files' => array
 	(

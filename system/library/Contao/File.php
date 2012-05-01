@@ -191,6 +191,7 @@ class File extends System
 					Cache::set($strCacheKey, $this->getIcon());
 					break;
 
+				case 'path':
 				case 'value':
 					Cache::set($strCacheKey, $this->strFile);
 					break;
@@ -438,11 +439,13 @@ class File extends System
 			'zip'   => array('application/zip', 'iconRAR.gif'),
 
 			// Audio files
+			'm4a'   => array('audio/m4a', 'iconAUDIO.gif'),
+			'mp3'   => array('audio/mp3', 'iconAUDIO.gif'),
+			'wma'   => array('audio/wma', 'iconAUDIO.gif'),
+			'mpeg'  => array('audio/mpeg', 'iconAUDIO.gif'),
+			'wav'   => array('audio/wav', 'iconAUDIO.gif'),
 			'mid'   => array('audio/midi', 'iconAUDIO.gif'),
 			'midi'  => array('audio/midi', 'iconAUDIO.gif'),
-			'mpga'  => array('audio/mpeg', 'iconAUDIO.gif'),
-			'mp2'   => array('audio/mpeg', 'iconAUDIO.gif'),
-			'mp3'   => array('audio/mpeg', 'iconAUDIO.gif'),
 			'aif'   => array('audio/x-aiff', 'iconAUDIO.gif'),
 			'aiff'  => array('audio/x-aiff', 'iconAUDIO.gif'),
 			'aifc'  => array('audio/x-aiff', 'iconAUDIO.gif'),
@@ -450,7 +453,6 @@ class File extends System
 			'rm'    => array('audio/x-pn-realaudio', 'iconAUDIO.gif'),
 			'rpm'   => array('audio/x-pn-realaudio-plugin', 'iconAUDIO.gif'),
 			'ra'    => array('audio/x-realaudio', 'iconAUDIO.gif'),
-			'wav'   => array('audio/x-wav', 'iconAUDIO.gif'),
 
 			// Images
 			'bmp'   => array('image/bmp', 'iconBMP.gif'),
@@ -480,11 +482,12 @@ class File extends System
 			'xsl'   => array('text/xml', 'iconPLAIN.gif'),
 
 			// Videos
-			'mpeg'  => array('video/mpeg', 'iconVIDEO.gif'),
-			'mpg'   => array('video/mpeg', 'iconVIDEO.gif'),
-			'mpe'   => array('video/mpeg', 'iconVIDEO.gif'),
+			'mp4'   => array('video/mp4', 'iconVIDEO.gif'),
+			'm4v'   => array('video/m4v', 'iconVIDEO.gif'),
+			'mov'   => array('video/mov', 'iconVIDEO.gif'),
+			'wmv'   => array('video/wmv', 'iconVIDEO.gif'),
+			'webm'  => array('video/webm', 'iconVIDEO.gif'),
 			'qt'    => array('video/quicktime', 'iconVIDEO.gif'),
-			'mov'   => array('video/quicktime', 'iconVIDEO.gif'),
 			'rv'    => array('video/vnd.rn-realvideo', 'iconVIDEO.gif'),
 			'avi'   => array('video/x-msvideo', 'iconVIDEO.gif'),
 			'movie' => array('video/x-sgi-movie', 'iconVIDEO.gif')

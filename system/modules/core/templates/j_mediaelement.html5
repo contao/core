@@ -1,0 +1,17 @@
+<?php
+
+// Add the colorbox style sheet
+$GLOBALS['TL_CSS'][] = 'plugins/jQuery/mediaelement/'. MEDIAELEMENT .'/mediaelementplayer.min.css||static';
+
+?>
+
+<script src="<?php echo TL_PLUGINS_URL; ?>plugins/jQuery/mediaelement/<?php echo MEDIAELEMENT; ?>/mediaelement-and-player.min.js"></script>
+<script>
+(function($) {
+  $(document).ready(function() {
+    $('video,audio').mediaelementplayer({
+      // Put custom options here
+    });
+  });
+})(jQuery);
+</script>

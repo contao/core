@@ -46,6 +46,7 @@ define('JQUERY', '1.7.1');
 define('COLORBOX', '1.3.19');
 define('SLIMBOX', '1.71');
 define('TABLESORT', '1.3.1');
+define('MEDIAELEMENT', '2.8.1');
 
 
 /**
