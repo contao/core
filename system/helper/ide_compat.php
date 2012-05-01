@@ -41,8 +41,6 @@ class Config extends Contao\Config {}
 class Controller extends Contao\Controller {}
 abstract class Database extends Contao\Database {}
 class Date extends Contao\Date {}
-class DbInstaller extends Contao\DbInstaller {}
-class DbUpdater extends Contao\DbUpdater {}
 class DcaExtractor extends Contao\DcaExtractor {}
 class Email extends Contao\Email {}
 class Encryption extends Contao\Encryption {}
@@ -50,13 +48,14 @@ class Environment extends Contao\Environment {}
 class Feed extends Contao\Feed {}
 class FeedItem extends Contao\FeedItem {}
 class File extends Contao\File {}
-class FileCache extends Contao\FileCache {}
 class Files_Ftp extends Contao\Files_Ftp {}
 class Files_Php extends Contao\Files_Php {}
 abstract class Files extends Contao\Files {}
 class Folder extends Contao\Folder {}
 class Idna extends Contao\Idna {}
+class Image extends Contao\Image {}
 class Input extends Contao\Input {}
+class Message extends Contao\Message {}
 class Model_Collection extends Contao\Model_Collection {}
 class Model_QueryBuilder extends Contao\Model_QueryBuilder {}
 class Model extends Contao\Model {}
@@ -73,6 +72,7 @@ class Validator extends Contao\Validator {}
 abstract class Widget extends Contao\Widget {}
 class ZipReader extends Contao\ZipReader {}
 class ZipWriter extends Contao\ZipWriter {}
+class Database_Installer extends Contao\Database_Installer {}
 class Database_Mssql_Result extends Contao\Database_Mssql_Result {}
 class Database_Mssql_Statement extends Contao\Database_Mssql_Statement {}
 class Database_Mssql extends Contao\Database_Mssql {}
@@ -93,6 +93,7 @@ abstract class Database_Statement extends Contao\Database_Statement {}
 class Database_Sybase_Result extends Contao\Database_Sybase_Result {}
 class Database_Sybase_Statement extends Contao\Database_Sybase_Statement {}
 class Database_Sybase extends Contao\Database_Sybase {}
+class Database_Updater extends Contao\Database_Updater {}
 
 // calendar
 class Calendar extends Contao\Calendar {}
@@ -125,7 +126,7 @@ class FrontendTemplate extends Contao\FrontendTemplate {}
 class FrontendUser extends Contao\FrontendUser {}
 abstract class Hybrid extends Contao\Hybrid {}
 class LiveUpdate extends Contao\LiveUpdate {}
-class Message extends Contao\Message {}
+class Messages extends Contao\Messages {}
 class Pagination extends Contao\Pagination {}
 class PurgeData extends Contao\PurgeData {}
 class RebuildIndex extends Contao\RebuildIndex {}
