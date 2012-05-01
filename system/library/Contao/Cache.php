@@ -67,7 +67,6 @@ class Cache extends System
 
 	/**
 	 * Prevent cloning of the object (Singleton)
-	 * @return mixed|void
 	 */
 	final public function __clone() {}
 
@@ -105,7 +104,6 @@ class Cache extends System
 	 * Set a variable
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 * @deprecated
 	 */
 	public function __set($strKey, $varValue)
@@ -117,7 +115,6 @@ class Cache extends System
 	/**
 	 * Unset an entry
 	 * @param string
-	 * @return void
 	 * @deprecated
 	 */
 	public function __unset($strKey)
@@ -168,7 +165,6 @@ class Cache extends System
 	 * Set a variable
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 */
 	public static function set($strKey, $varValue)
 	{
@@ -179,7 +175,6 @@ class Cache extends System
 	/**
 	 * Remove an entry
 	 * @param string
-	 * @return void
 	 */
 	public function remove($strKey)
 	{

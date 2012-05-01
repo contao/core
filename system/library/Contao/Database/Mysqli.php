@@ -61,7 +61,6 @@ class Database_Mysqli extends Database
 
 	/**
 	 * Connect to the database server and select the database
-	 * @return void
 	 */
 	protected function connect()
 	{
@@ -72,7 +71,6 @@ class Database_Mysqli extends Database
 
 	/**
 	 * Disconnect from the database
-	 * @return void
 	 */
 	protected function disconnect()
 	{
@@ -211,7 +209,6 @@ class Database_Mysqli extends Database
 
 	/**
 	 * Begin a transaction
-	 * @return void
 	 */
 	protected function begin_transaction()
 	{
@@ -222,7 +219,6 @@ class Database_Mysqli extends Database
 
 	/**
 	 * Commit a transaction
-	 * @return void
 	 */
 	protected function commit_transaction()
 	{
@@ -233,7 +229,6 @@ class Database_Mysqli extends Database
 
 	/**
 	 * Rollback a transaction
-	 * @return void
 	 */
 	protected function rollback_transaction()
 	{
@@ -245,7 +240,6 @@ class Database_Mysqli extends Database
 	/**
 	 * Lock one or more tables
 	 * @param array
-	 * @return void
 	 */
 	protected function lock_tables($arrTables)
 	{
@@ -262,7 +256,6 @@ class Database_Mysqli extends Database
 
 	/**
 	 * Unlock all tables
-	 * @return void
 	 */
 	protected function unlock_tables()
 	{

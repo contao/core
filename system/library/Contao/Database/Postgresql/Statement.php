@@ -72,7 +72,6 @@ class Database_Postgresql_Statement extends Database_Statement
 	 * Limit the current query
 	 * @param integer
 	 * @param integer
-	 * @return void
 	 */
 	protected function limit_query($intRows, $intOffset)
 	{

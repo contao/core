@@ -61,7 +61,6 @@ class CronJob extends Frontend
 
 	/**
 	 * Run the controller
-	 * @return void
 	 */
 	public function run()
 	{
@@ -199,7 +198,6 @@ class CronJob extends Frontend
 	/**
 	 * Update the cron.txt file
 	 * @param integer
-	 * @return void
 	 */
 	protected function updateCronTxt($time)
 	{

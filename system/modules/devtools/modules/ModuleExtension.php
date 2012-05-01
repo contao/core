@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendModule, \BackendTemplate, \Environment, \File, \Input, \Message;
+use \BackendModule, \BackendTemplate, \Database_Result, \Environment, \File, \Input, \Message;
 
 
 /**
@@ -72,7 +72,6 @@ class ModuleExtension extends BackendModule
 
 	/**
 	 * Generate module
-	 * @return void
 	 */
 	protected function compile()
 	{

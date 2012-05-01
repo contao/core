@@ -72,7 +72,6 @@ class Index extends Frontend
 
 	/**
 	 * Run the controller
-	 * @return void
 	 */
 	public function run()
 	{
@@ -271,7 +270,6 @@ class Index extends Frontend
 
 	/**
 	 * Try to load the page from the cache
-	 * @return void
 	 */
 	protected function outputFromCache()
 	{

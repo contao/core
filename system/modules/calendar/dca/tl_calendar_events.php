@@ -537,7 +537,6 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Check permissions to edit table tl_calendar_events
-	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -821,7 +820,6 @@ class tl_calendar_events extends Backend
 	/**
 	 * Adjust start end end time of the event based on date, span, startTime and endTime
 	 * @param \DataContainer
-	 * @return void
 	 */
 	public function adjustTime(DataContainer $dc)
 	{
@@ -881,7 +879,6 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Check for modified calendar feeds and update the XML files if necessary
-	 * @return void
 	 */
 	public function generateFeed()
 	{
@@ -910,7 +907,6 @@ class tl_calendar_events extends Backend
 	 * modified (edit/editAll), moved (cut/cutAll) or deleted (delete/deleteAll).
 	 * Since duplicated events are unpublished by default, it is not necessary
 	 * to schedule updates on copyAll as well.
-	 * @return void
 	 */
 	public function scheduleUpdate()
 	{
@@ -977,7 +973,6 @@ class tl_calendar_events extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
-	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

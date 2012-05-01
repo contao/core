@@ -61,7 +61,6 @@ class OptionWizard extends Widget
 
 	/**
 	 * Validate the input and set the value
-	 * @return void
 	 */
 	public function validate()
 	{

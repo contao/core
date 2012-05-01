@@ -76,7 +76,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Run the controller and parse the login template
-	 * @return void
 	 */
 	public function run()
 	{
@@ -262,7 +261,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Store the FTP login credentials
-	 * @return void
 	 */
 	protected function storeFtpCredentials()
 	{
@@ -369,7 +367,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Authenticate the user
-	 * @return void
 	 */
 	protected function authenticateUser()
 	{
@@ -402,7 +399,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Store the install tool password
-	 * @return void
 	 */
 	protected function storeInstallToolPassword()
 	{
@@ -440,7 +436,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Set up the database connection
-	 * @return void
 	 */
 	protected function setUpDatabaseConnection()
 	{
@@ -524,7 +519,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Store the collation
-	 * @return void
 	 */
 	protected function storeCollation()
 	{
@@ -591,7 +585,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Import the example website
-	 * @return void
 	 */
 	protected function importExampleWebsite()
 	{
@@ -645,7 +638,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Create an admin user
-	 * @return void
 	 */
 	protected function createAdminUser()
 	{
@@ -718,7 +710,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Create the local configuration files if they do not exist
-	 * @return void
 	 */
 	protected function createLocalConfigurationFiles()
 	{
@@ -737,7 +728,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Set the authentication cookie
-	 * @return void
 	 */
 	protected function setAuthCookie()
 	{
@@ -749,7 +739,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Output the template file and exit
-	 * @return void
 	 */
 	protected function outputAndExit()
 	{
@@ -773,7 +762,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Version 2.8.0 update
-	 * @return void
 	 */
 	protected function update28()
 	{
@@ -794,7 +782,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Version 2.9.0 update
-	 * @return void
 	 */
 	protected function update29()
 	{
@@ -815,7 +802,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Version 2.9.2 update
-	 * @return void
 	 */
 	protected function update292()
 	{
@@ -844,7 +830,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Version 2.10.0 update
-	 * @return void
 	 */
 	protected function update210()
 	{
@@ -865,7 +850,6 @@ class InstallTool extends Backend
 
 	/**
 	 * Version 3.0.0 update
-	 * @return void
 	 */
 	protected function update300()
 	{

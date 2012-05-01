@@ -447,7 +447,6 @@ class tl_form_field extends Backend
 
 	/**
 	 * Check permissions to edit table tl_form_field
-	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -680,7 +679,6 @@ class tl_form_field extends Backend
 	 * Toggle the visibility of a form field
 	 * @param integer
 	 * @param boolean
-	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

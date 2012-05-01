@@ -94,7 +94,6 @@ class Model_Collection extends System
 	 * Set an object property
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{

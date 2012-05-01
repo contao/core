@@ -137,7 +137,6 @@ class Folder extends System
 
 	/**
 	 * Empty the folder
-	 * @return void
 	 */
 	public function purge()
 	{
@@ -147,7 +146,6 @@ class Folder extends System
 
 	/**
 	 * Backwards compatibility
-	 * @return void
 	 * @deprecated
 	 */
 	public function clear()
@@ -158,7 +156,6 @@ class Folder extends System
 
 	/**
 	 * Delete the folder
-	 * @return void
 	 */
 	public function delete()
 	{
@@ -208,7 +205,6 @@ class Folder extends System
 
 	/**
 	 * Protect the folder by adding an .htaccess file
-	 * @return void
 	 */
 	public function protect()
 	{
@@ -223,7 +219,6 @@ class Folder extends System
 
 	/**
 	 * Unprotect the folder by removing the .htaccess file
-	 * @return void
 	 */
 	public function unprotect()
 	{

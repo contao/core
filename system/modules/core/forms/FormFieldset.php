@@ -55,7 +55,6 @@ class FormFieldset extends Widget
 
 	/**
 	 * Do not validate
-	 * @return void
 	 */
 	public function validate()
 	{

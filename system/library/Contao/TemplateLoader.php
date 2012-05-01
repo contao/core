@@ -57,7 +57,6 @@ class TemplateLoader
 	 * Add a new template with its file path
 	 * @param string
 	 * @param string
-	 * @return void
 	 */
 	public static function addFile($name, $file)
 	{
@@ -68,7 +67,6 @@ class TemplateLoader
 	/**
 	 * Add multiple new templates with their file paths
 	 * @param array
-	 * @return void
 	 */
 	public static function addFiles($files)
 	{

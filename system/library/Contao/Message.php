@@ -49,7 +49,6 @@ class Message
 	/**
 	 * Add an error message
 	 * @param string
-	 * @return void
 	 */
 	public static function addError($strMessage)
 	{
@@ -60,7 +59,6 @@ class Message
 	/**
 	 * Add a confirmation message
 	 * @param string
-	 * @return void
 	 */
 	public static function addConfirmation($strMessage)
 	{
@@ -71,7 +69,6 @@ class Message
 	/**
 	 * Add a new message
 	 * @param string
-	 * @return void
 	 */
 	public static function addNew($strMessage)
 	{
@@ -82,7 +79,6 @@ class Message
 	/**
 	 * Add an info message
 	 * @param string
-	 * @return void
 	 */
 	public static function addInfo($strMessage)
 	{
@@ -93,7 +89,6 @@ class Message
 	/**
 	 * Add a raw message
 	 * @param string
-	 * @return void
 	 */
 	public static function addRaw($strMessage)
 	{
@@ -105,7 +100,6 @@ class Message
 	 * Add a message
 	 * @param string
 	 * @param string
-	 * @return void
 	 * @throws \Exception
 	 */
 	public static function add($strMessage, $strType)
@@ -182,7 +176,6 @@ class Message
 
 	/**
 	 * Reset the message system
-	 * @return void
 	 */
 	public static function reset()
 	{

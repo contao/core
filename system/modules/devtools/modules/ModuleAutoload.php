@@ -55,7 +55,6 @@ class ModuleAutoload extends BackendModule
 
 	/**
 	 * Generate module
-	 * @return void
 	 */
 	protected function compile()
 	{

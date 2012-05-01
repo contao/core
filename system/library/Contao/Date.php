@@ -313,7 +313,6 @@ class Date extends System
 
 	/**
 	 * Convert a date string into a UNIX timestamp using a particular date format
-	 * @return void
 	 * @throws \Exception
 	 */
 	protected function dateToUnix()

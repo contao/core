@@ -71,7 +71,6 @@ class ModuleEventMenu extends ModuleCalendar
 
 	/**
 	 * Generate the module
-	 * @return void
 	 */
 	protected function compile()
 	{
@@ -96,7 +95,6 @@ class ModuleEventMenu extends ModuleCalendar
 
 	/**
 	 * Generate the yearly menu
-	 * @return void
 	 */
 	protected function compileYearlyMenu()
 	{
@@ -149,7 +147,6 @@ class ModuleEventMenu extends ModuleCalendar
 
 	/**
 	 * Generate the monthly menu
-	 * @return void
 	 */
 	protected function compileMonthlyMenu()
 	{

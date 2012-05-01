@@ -50,7 +50,6 @@ class News extends Frontend
 	 * Update a particular RSS feed
 	 * @param integer
 	 * @param boolean
-	 * @return void
 	 */
 	public function generateFeed($intId, $blnIsFeedId=false)
 	{
@@ -81,7 +80,6 @@ class News extends Frontend
 
 	/**
 	 * Delete old files and generate all feeds
-	 * @return void
 	 */
 	public function generateFeeds()
 	{
@@ -103,7 +101,6 @@ class News extends Frontend
 	/**
 	 * Generate an XML files and save them to the root directory
 	 * @param array
-	 * @return void
 	 */
 	protected function generateFiles($arrFeed)
 	{

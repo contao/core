@@ -246,7 +246,6 @@ class tl_newsletter_channel extends Backend
 
 	/**
 	 * Check permissions to edit table tl_newsletter_channel
-	 * @return void
 	 */
 	public function checkPermission()
 	{

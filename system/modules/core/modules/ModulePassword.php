@@ -78,7 +78,6 @@ class ModulePassword extends Module
 
 	/**
 	 * Generate the module
-	 * @return void
 	 */
 	protected function compile()
 	{
@@ -196,7 +195,6 @@ class ModulePassword extends Module
 
 	/**
 	 * Set the new password
-	 * @return void
 	 */
 	protected function setNewPassword()
 	{
@@ -288,7 +286,6 @@ class ModulePassword extends Module
 	/**
 	 * Create a new user and redirect
 	 * @param object
-	 * @return void
 	 */
 	protected function sendPasswordLink($objMember)
 	{

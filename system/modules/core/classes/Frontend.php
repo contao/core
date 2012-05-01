@@ -371,7 +371,6 @@ abstract class Frontend extends Controller
 	 * @param integer|array
 	 * @param string
 	 * @param string
-	 * @return void
 	 */
 	protected function jumpToOrReload($intId, $strParams=null, $strForceLang=null)
 	{
@@ -481,7 +480,6 @@ abstract class Frontend extends Controller
 	 * Parse the meta.txt file of a folder
 	 * @param string
 	 * @param boolean
-	 * @return void
 	 * @deprecated
 	 */
 	protected function parseMetaFile($strPath, $blnIsFile=false)

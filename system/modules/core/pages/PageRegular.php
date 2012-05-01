@@ -49,7 +49,6 @@ class PageRegular extends Frontend
 	/**
 	 * Generate a regular page
 	 * @param object
-	 * @return void
 	 */
 	public function generate($objPage)
 	{
@@ -204,7 +203,6 @@ class PageRegular extends Frontend
 	 * Create a new template
 	 * @param object
 	 * @param object
-	 * @return void
 	 */
 	protected function createTemplate($objPage, $objLayout)
 	{
@@ -386,7 +384,6 @@ class PageRegular extends Frontend
 	 * Create all header scripts
 	 * @param object
 	 * @param object
-	 * @return void
 	 * @throws \Exception
 	 */
 	protected function createHeaderScripts($objPage, $objLayout)
@@ -599,7 +596,6 @@ class PageRegular extends Frontend
 	 * Create all footer scripts
 	 * @param object
 	 * @param object
-	 * @return void
 	 */
 	protected function createFooterScripts($objPage, $objLayout)
 	{

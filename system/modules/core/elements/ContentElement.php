@@ -104,7 +104,6 @@ abstract class ContentElement extends Frontend
 	 * Set an object property
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -180,7 +179,6 @@ abstract class ContentElement extends Frontend
 
 	/**
 	 * Compile the content element
-	 * @return void
 	 */
 	abstract protected function compile();
 }

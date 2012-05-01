@@ -54,7 +54,6 @@ class <?php echo $this->class; ?> extends <?php echo $this->extends; ?>
 
 	/**
 	 * Generate the module
-	 * @return void
 	 */
 	protected function compile()
 	{

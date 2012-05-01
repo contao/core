@@ -70,7 +70,6 @@ class Encryption
 
 	/**
 	 * Prevent cloning of the object (Singleton)
-	 * @return mixed|void
 	 */
 	final public function __clone() {}
 
@@ -184,7 +183,6 @@ class Encryption
 
 	/**
 	 * Initialize the encryption module
-	 * @return void
 	 * @throws \Exception
 	 */
 	protected static function initialize()

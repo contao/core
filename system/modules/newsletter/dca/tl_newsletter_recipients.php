@@ -221,7 +221,6 @@ class tl_newsletter_recipients extends Backend
 
 	/**
 	 * Check permissions to edit table tl_newsletter_recipients
-	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -397,7 +396,6 @@ class tl_newsletter_recipients extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
-	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

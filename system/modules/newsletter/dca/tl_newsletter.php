@@ -303,7 +303,6 @@ class tl_newsletter extends Backend
 
 	/**
 	 * Check permissions to edit table tl_newsletter
-	 * @return void
 	 */
 	public function checkPermission()
 	{

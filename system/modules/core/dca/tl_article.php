@@ -336,7 +336,6 @@ class tl_article extends Backend
 
 	/**
 	 * Check permissions to edit table tl_page
-	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -839,7 +838,6 @@ class tl_article extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
-	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

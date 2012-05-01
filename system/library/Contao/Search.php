@@ -524,7 +524,6 @@ class Search extends System
 	/**
 	 * Remove an entry from the search index
 	 * @param string
-	 * @return void
 	 */
 	public static function removeEntry($strUrl)
 	{

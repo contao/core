@@ -219,7 +219,6 @@ class tl_files extends Backend
 
 	/**
 	 * Check permissions to edit the file system
-	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -372,7 +371,6 @@ class tl_files extends Backend
 
 	/**
 	 * Add the breadcrumb menu
-	 * @return void
 	 */
 	public function addBreadcrumb()
 	{

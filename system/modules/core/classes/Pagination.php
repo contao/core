@@ -143,7 +143,6 @@ class Pagination extends Frontend
 	 * @param integer
 	 * @param integer
 	 * @param string
-	 * @return \Contao\Pagination
 	 */
 	public function __construct($intRows, $intPerPage, $intNumberOfLinks=7, $strParameter='page')
 	{

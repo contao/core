@@ -86,7 +86,6 @@ class ModuleSubscribe extends Module
 
 	/**
 	 * Generate the module
-	 * @return void
 	 */
 	protected function compile()
 	{
@@ -157,7 +156,6 @@ class ModuleSubscribe extends Module
 
 	/**
 	 * Activate a recipient
-	 * @return void
 	 */
 	protected function activateRecipient()
 	{
@@ -213,7 +211,6 @@ class ModuleSubscribe extends Module
 
 	/**
 	 * Add a new recipient
-	 * @return void
 	 */
 	protected function addRecipient()
 	{

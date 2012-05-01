@@ -76,7 +76,6 @@ class Combiner extends System
 	 * @param string
 	 * @param string
 	 * @param string
-	 * @return void
 	 * @throws \Exception
 	 */
 	public function add($strFile, $strVersion=null, $strMedia='screen')
@@ -149,7 +148,6 @@ class Combiner extends System
 	 * @param array
 	 * @param string
 	 * @param string
-	 * @return void
 	 */
 	public function addMultiple(Array $arrFiles, $strVersion=null, $strMedia='screen')
 	{

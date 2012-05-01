@@ -90,7 +90,6 @@ class Ajax extends Backend
 
 	/**
 	 * Ajax actions that do not require a data container object
-	 * @return void
 	 */
 	public function executePreActions()
 	{
@@ -219,7 +218,6 @@ class Ajax extends Backend
 	/**
 	 * Ajax actions that do require a data container object
 	 * @param \DataContainer
-	 * @return void
 	 */
 	public function executePostActions(DataContainer $dc)
 	{

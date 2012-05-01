@@ -473,7 +473,6 @@ class tl_user extends Backend
 
 	/**
 	 * Check permissions to edit table tl_user
-	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -735,7 +734,6 @@ class tl_user extends Backend
 	/**
 	 * Store the date when the account has been added
 	 * @param \DataContainer
-	 * @return void
 	 */
 	public function storeDateAdded(DataContainer $dc)
 	{
@@ -805,7 +803,6 @@ class tl_user extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
-	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

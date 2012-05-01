@@ -98,7 +98,6 @@ class ModuleNewsArchive extends ModuleNews
 
 	/**
 	 * Generate the module
-	 * @return void
 	 */
 	protected function compile()
 	{

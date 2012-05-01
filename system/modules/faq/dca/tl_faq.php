@@ -358,7 +358,6 @@ class tl_faq extends Backend
 
 	/**
 	 * Check permissions to edit table tl_faq
-	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -476,7 +475,6 @@ class tl_faq extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
-	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

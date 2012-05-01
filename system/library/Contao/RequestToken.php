@@ -70,7 +70,6 @@ class RequestToken extends System
 
 	/**
 	 * Prevent cloning of the object (Singleton)
-	 * @return mixed|void
 	 */
 	final public function __clone() {}
 
@@ -93,7 +92,6 @@ class RequestToken extends System
 
 	/**
 	 * Read the token from the session or generate a new one
-	 * @return void
 	 */
 	public static function initialize()
 	{

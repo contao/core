@@ -66,7 +66,6 @@ class Environment
 
 	/**
 	 * Prevent cloning of the object (Singleton)
-	 * @return mixed|void
 	 */
 	final public function __clone() {}
 
@@ -75,7 +74,6 @@ class Environment
 	 * Set an environment parameter
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 * @deprecated
 	 */
 	public function __set($strKey, $varValue)
@@ -143,7 +141,6 @@ class Environment
 	 * Set an environment parameter
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 */
 	public static function set($strKey, $varValue)
 	{

@@ -75,7 +75,6 @@ class Input
 
 	/**
 	 * Prevent cloning of the object (Singleton)
-	 * @return mixed|void
 	 */
 	final public function __clone() {}
 
@@ -98,7 +97,6 @@ class Input
 
 	/**
 	 * Clean the global GCP arrays
-	 * @return void
 	 */
 	public static function initialize()
 	{
@@ -288,7 +286,6 @@ class Input
 	 * Set a $_GET parameter
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 */
 	public static function setGet($strKey, $varValue)
 	{
@@ -312,7 +309,6 @@ class Input
 	 * Set a $_POST parameter
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 */
 	public static function setPost($strKey, $varValue)
 	{
@@ -337,7 +333,6 @@ class Input
 	 * Set a $_COOKIE parameter
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 */
 	public static function setCookie($strKey, $varValue)
 	{
@@ -359,7 +354,6 @@ class Input
 
 	/**
 	 * Reset the internal cache
-	 * @return void
 	 */
 	public static function resetCache()
 	{

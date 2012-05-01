@@ -558,7 +558,6 @@ class Newsletter extends Backend
 	 * Synchronize newsletter subscription of new users
 	 * @param object
 	 * @param array
-	 * @return void
 	 */
 	public function createNewUser($userId, $arrData)
 	{
@@ -597,7 +596,6 @@ class Newsletter extends Backend
 	/**
 	 * Activate newsletter subscription of new users
 	 * @param object
-	 * @return void
 	 */
 	public function activateAccount($objUser)
 	{
@@ -711,7 +709,6 @@ class Newsletter extends Backend
 
 	/**
 	 * Update a particular member account
-	 * @return void
 	 */
 	public function updateAccount()
 	{

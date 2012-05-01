@@ -235,10 +235,6 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'eval'                    => array('doNotCopy'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
-		'date' => array
-		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
-		),
 		'ip' => array
 		(
 			'sql'                     => "varchar(64) NOT NULL default ''"
@@ -270,7 +266,6 @@ class tl_comments extends Backend
 
 	/**
 	 * Check permissions to edit table tl_comments
-	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -626,7 +621,6 @@ class tl_comments extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
-	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

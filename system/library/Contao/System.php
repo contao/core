@@ -186,7 +186,6 @@ abstract class System
 	 * @param string
 	 * @param string
 	 * @param boolean
-	 * @return void
 	 */
 	protected function import($strClass, $strKey=null, $blnForce=false)
 	{
@@ -226,7 +225,6 @@ abstract class System
 	 * @param string
 	 * @param string
 	 * @param string
-	 * @return void
 	 */
 	public static function log($strText, $strFunction, $strAction)
 	{
@@ -290,7 +288,6 @@ abstract class System
 
 	/**
 	 * Reload the current page
-	 * @return void
 	 */
 	public static function reload()
 	{
@@ -317,7 +314,6 @@ abstract class System
 	 * Redirect to another page
 	 * @param string
 	 * @param integer
-	 * @return void
 	 */
 	public static function redirect($strLocation, $intStatus=303)
 	{
@@ -427,7 +423,6 @@ abstract class System
 	 * @param string
 	 * @param boolean
 	 * @param boolean
-	 * @return void
 	 */
 	public static function loadLanguageFile($strName, $strLanguage=false, $blnNoCache=false)
 	{
@@ -599,7 +594,6 @@ abstract class System
 	/**
 	 * Add an error message
 	 * @param string
-	 * @return void
 	 * @deprecated
 	 */
 	protected function addErrorMessage($strMessage)
@@ -611,7 +605,6 @@ abstract class System
 	/**
 	 * Add a confirmation message
 	 * @param string
-	 * @return void
 	 * @deprecated
 	 */
 	protected function addConfirmationMessage($strMessage)
@@ -623,7 +616,6 @@ abstract class System
 	/**
 	 * Add a new message
 	 * @param string
-	 * @return void
 	 * @deprecated
 	 */
 	protected function addNewMessage($strMessage)
@@ -635,7 +627,6 @@ abstract class System
 	/**
 	 * Add an info message
 	 * @param string
-	 * @return void
 	 * @deprecated
 	 */
 	protected function addInfoMessage($strMessage)
@@ -647,7 +638,6 @@ abstract class System
 	/**
 	 * Add a raw message
 	 * @param string
-	 * @return void
 	 * @deprecated
 	 */
 	protected function addRawMessage($strMessage)
@@ -660,7 +650,6 @@ abstract class System
 	 * Add a message
 	 * @param string
 	 * @param string
-	 * @return void
 	 * @deprecated
 	 */
 	protected function addMessage($strMessage, $strType)
@@ -684,7 +673,6 @@ abstract class System
 
 	/**
 	 * Reset the message system
-	 * @return void
 	 * @deprecated
 	 */
 	protected function resetMessages()
@@ -723,7 +711,6 @@ abstract class System
 	 * @param string
 	 * @param string
 	 * @param boolean
-	 * @return void
 	 */
 	public static function setCookie($strName, $varValue, $intExpires, $strPath=null, $strDomain=null, $blnSecure=false)
 	{

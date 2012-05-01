@@ -32,7 +32,7 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Backend, \DataContainer, \Environment, \File, \FilesModel, \Folder, \Input, \Message, \ZipReader, \DOMDocument, \DOMElement, \Exception;
+use \Backend, \Database_Result, \DataContainer, \Environment, \File, \FilesModel, \Folder, \Input, \Message, \ZipReader, \ZipWriter, \DOMDocument, \DOMElement, \Exception;
 
 
 /**
@@ -365,7 +365,6 @@ class Theme extends Backend
 	 * Extract the theme files and write the data to the database
 	 * @param array
 	 * @param array
-	 * @return void
 	 */
 	protected function extractThemeFiles($arrFiles, $arrDbFields)
 	{
@@ -756,7 +755,6 @@ class Theme extends Backend
 	/**
 	 * Export a theme
 	 * @param \DataContainer
-	 * @return void
 	 */
 	public function exportTheme(DataContainer $dc)
 	{
@@ -862,7 +860,6 @@ class Theme extends Backend
 	 * @param \DOMDocument
 	 * @param \DOMElement
 	 * @param \Database_Result
-	 * @return void
 	 */
 	protected function addTableTlTheme(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
 	{
@@ -881,7 +878,6 @@ class Theme extends Backend
 	 * @param \DOMDocument
 	 * @param \DOMElement
 	 * @param \Database_Result
-	 * @return void
 	 */
 	protected function addTableTlStyleSheet(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
 	{
@@ -928,7 +924,6 @@ class Theme extends Backend
 	 * @param \DOMDocument
 	 * @param \DOMElement
 	 * @param \Database_Result
-	 * @return void
 	 */
 	protected function addTableTlModule(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
 	{
@@ -954,7 +949,6 @@ class Theme extends Backend
 	 * @param \DOMDocument
 	 * @param \DOMElement
 	 * @param \Database_Result
-	 * @return void
 	 */
 	protected function addTableTlLayout(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
 	{
@@ -980,7 +974,6 @@ class Theme extends Backend
 	 * @param \DOMDocument
 	 * @param \DOMElement
 	 * @param \Database_Result
-	 * @return void
 	 */
 	protected function addDataRow(DOMDocument $xml, DOMElement $table, Database_Result $objData)
 	{
@@ -1008,7 +1001,6 @@ class Theme extends Backend
 	 * Recursively add a folder to the archive
 	 * @param \ZipWriter
 	 * @param string
-	 * @return void
 	 */
 	protected function addFolderToArchive(ZipWriter $objArchive, $strFolder)
 	{
@@ -1059,7 +1051,6 @@ class Theme extends Backend
 	 * Add templates to the archive
 	 * @param \ZipWriter
 	 * @param string
-	 * @return void
 	 */
 	protected function addTemplatesToArchive(ZipWriter $objArchive, $strFolder)
 	{
@@ -1099,7 +1090,6 @@ class Theme extends Backend
 	 * Recursively synchronize the new folder
 	 * @param string
 	 * @param integer
-	 * @return void
 	 */
 	protected function syncNewFolder($strPath, $intPid=0)
 	{

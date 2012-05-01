@@ -80,7 +80,6 @@ class Feed extends System
 	 * Set an object property
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -118,7 +117,6 @@ class Feed extends System
 	/**
 	 * Add an item
 	 * @param \FeedItem
-	 * @return void
 	 */
 	public function addItem(FeedItem $objItem)
 	{
@@ -219,7 +217,6 @@ class Feed extends System
 
 	/**
 	 * Adjust the publication date
-	 * @return void
 	 */
 	protected function adjustPublicationDate()
 	{

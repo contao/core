@@ -251,7 +251,6 @@ class tl_news_feed extends Backend
 
 	/**
 	 * Check permissions to edit table tl_news_archive
-	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -377,7 +376,6 @@ class tl_news_feed extends Backend
 
 	/**
 	 * Check for modified news feeds and update the XML files if necessary
-	 * @return void
 	 */
 	public function generateFeed()
 	{
@@ -405,7 +403,6 @@ class tl_news_feed extends Backend
 	 * This method is triggered when a single news archive or multiple news
 	 * archives are modified (edit/editAll).
 	 * @param \DataContainer
-	 * @return void
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{

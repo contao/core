@@ -300,9 +300,8 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'radioTable',
 			'options'                 => array('above', 'left', 'right', 'below'),
-			'eval'                    => array('cols'=>4),
+			'eval'                    => array('cols'=>4, 'tl_class'=>'w50'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'html' => array
@@ -740,7 +739,6 @@ class tl_content extends Backend
 
 	/**
 	 * Check permissions to edit table tl_content
-	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -1391,7 +1389,6 @@ class tl_content extends Backend
 	 * Toggle the visibility of an element
 	 * @param integer
 	 * @param boolean
-	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

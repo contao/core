@@ -48,7 +48,6 @@ class Automator extends Backend
 
 	/**
 	 * Check for new Contao versions
-	 * @return void
 	 */
 	public function checkForUpdates()
 	{
@@ -73,7 +72,6 @@ class Automator extends Backend
 
 	/**
 	 * Purge the search tables
-	 * @return void
 	 */
 	public function purgeSearchTables()
 	{
@@ -92,7 +90,6 @@ class Automator extends Backend
 
 	/**
 	 * Purge the undo table
-	 * @return void
 	 */
 	public function purgeUndoTable()
 	{
@@ -106,7 +103,6 @@ class Automator extends Backend
 
 	/**
 	 * Purge the version table
-	 * @return void
 	 */
 	public function purgeVersionTable()
 	{
@@ -120,7 +116,6 @@ class Automator extends Backend
 
 	/**
 	 * Purge the image cache
-	 * @return void
 	 */
 	public function purgeImageCache()
 	{
@@ -149,7 +144,6 @@ class Automator extends Backend
 
 	/**
 	 * Purge the script cache
-	 * @return void
 	 */
 	public function purgeScriptCache()
 	{
@@ -179,7 +173,6 @@ class Automator extends Backend
 
 	/**
 	 * Purge the page cache
-	 * @return void
 	 */
 	public function purgePageCache()
 	{
@@ -194,7 +187,6 @@ class Automator extends Backend
 
 	/**
 	 * Purge the internal cache
-	 * @return void
 	 */
 	public function purgeInternalCache()
 	{
@@ -221,7 +213,6 @@ class Automator extends Backend
 
 	/**
 	 * Purge the temp folder
-	 * @return void
 	 */
 	public function purgeTempFolder()
 	{
@@ -240,7 +231,6 @@ class Automator extends Backend
 
 	/**
 	 * Regenerate the XML files
-	 * @return void
 	 */
 	public function generateXmlFiles()
 	{
@@ -268,7 +258,6 @@ class Automator extends Backend
 	/**
 	 * Generate the Google XML sitemaps
 	 * @param integer
-	 * @return void
 	 */
 	public function generateSitemap($intId=0)
 	{
@@ -373,7 +362,6 @@ class Automator extends Backend
 
 	/**
 	 * Rotate the log files
-	 * @return void
 	 */
 	public function rotateLogs()
 	{

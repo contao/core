@@ -120,7 +120,6 @@ abstract class Database_Result
 	 * Set a particular field of the current row
 	 * @param mixed
 	 * @param string
-	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{

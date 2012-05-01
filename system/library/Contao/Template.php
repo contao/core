@@ -101,7 +101,6 @@ abstract class Template extends Controller
 	 * Set an object property
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -139,7 +138,6 @@ abstract class Template extends Controller
 	/**
 	 * Set the template data from an array
 	 * @param array
-	 * @return void
 	 */
 	public function setData($arrData)
 	{
@@ -160,7 +158,6 @@ abstract class Template extends Controller
 	/**
 	 * Set the template name
 	 * @param string
-	 * @return void
 	 */
 	public function setName($strTemplate)
 	{
@@ -181,7 +178,6 @@ abstract class Template extends Controller
 	/**
 	 * Set the output format
 	 * @param string
-	 * @return void
 	 */
 	public function setFormat($strFormat)
 	{
@@ -201,7 +197,6 @@ abstract class Template extends Controller
 
 	/**
 	 * Print all template variables to the screen using print_r
-	 * @return void
 	 */
 	public function showTemplateVars()
 	{
@@ -213,7 +208,6 @@ abstract class Template extends Controller
 
 	/**
 	 * Print all template variables to the screen using var_dump
-	 * @return void
 	 */
 	public function dumpTemplateVars()
 	{
@@ -268,7 +262,6 @@ abstract class Template extends Controller
 
 	/**
 	 * Parse the template file and print it to the screen
-	 * @return void
 	 */
 	public function output()
 	{

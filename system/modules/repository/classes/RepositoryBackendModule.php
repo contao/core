@@ -64,6 +64,7 @@ class RepositoryBackendModule extends BackendModule
 	 * Generate module:
 	 * - Display a wildcard in the back end
 	 * - Select the template and compiler in the front end
+	 * @return string
 	 */
 	public function generate()
 	{

@@ -239,7 +239,6 @@ class tl_style_sheet extends Backend
 
 	/**
 	 * Check permissions to edit the table
-	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -258,7 +257,6 @@ class tl_style_sheet extends Backend
 
 	/**
 	 * Check for modified style sheets and update them if necessary
-	 * @return void
 	 */
 	public function updateStyleSheet()
 	{
@@ -286,7 +284,6 @@ class tl_style_sheet extends Backend
 	 * This method is triggered when a single style sheet or multiple style
 	 * sheets are modified (edit/editAll) or duplicated (copy/copyAll).
 	 * @param mixed
-	 * @return void
 	 */
 	public function scheduleUpdate($id)
 	{

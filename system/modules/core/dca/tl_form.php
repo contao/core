@@ -315,7 +315,6 @@ class tl_form extends Backend
 
 	/**
 	 * Check permissions to edit table tl_form
-	 * @return void
 	 */
 	public function checkPermission()
 	{

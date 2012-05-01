@@ -100,7 +100,6 @@ abstract class Database
 
 	/**
 	 * Prevent cloning of the object (Singleton)
-	 * @return mixed|void
 	 */
 	final public function __clone() {}
 
@@ -318,7 +317,6 @@ abstract class Database
 
 	/**
 	 * Begin a transaction
-	 * @return void
 	 */
 	public function beginTransaction()
 	{
@@ -328,7 +326,6 @@ abstract class Database
 
 	/**
 	 * Commit a transaction
-	 * @return void
 	 */
 	public function commitTransaction()
 	{
@@ -338,7 +335,6 @@ abstract class Database
 
 	/**
 	 * Rollback a transaction
-	 * @return void
 	 */
 	public function rollbackTransaction()
 	{
@@ -349,7 +345,6 @@ abstract class Database
 	/**
 	 * Lock one or more tables
 	 * @param array
-	 * @return void
 	 */
 	public function lockTables($arrTables)
 	{
@@ -359,7 +354,6 @@ abstract class Database
 
 	/**
 	 * Unlock all tables
-	 * @return void
 	 */
 	public function unlockTables()
 	{

@@ -86,7 +86,6 @@ class ModuleUnsubscribe extends Module
 
 	/**
 	 * Generate the module
-	 * @return void
 	 */
 	protected function compile()
 	{
@@ -150,7 +149,6 @@ class ModuleUnsubscribe extends Module
 
 	/**
 	 * Remove the recipient
-	 * @return void
 	 */
 	protected function removeRecipient()
 	{

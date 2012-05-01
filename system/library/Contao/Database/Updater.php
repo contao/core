@@ -58,7 +58,6 @@ class Database_Updater extends Controller
 
 	/**
 	 * Version 2.8.0 update
-	 * @return void
 	 */
 	public function run28Update()
 	{
@@ -134,7 +133,6 @@ class Database_Updater extends Controller
 
 	/**
 	 * Version 2.9.0 update
-	 * @return void
 	 */
 	public function run29Update()
 	{
@@ -227,7 +225,6 @@ class Database_Updater extends Controller
 
 	/**
 	 * Version 2.9.2 update
-	 * @return void
 	 */
 	public function run292Update()
 	{
@@ -241,7 +238,6 @@ class Database_Updater extends Controller
 
 	/**
 	 * Version 2.10.0 update
-	 * @return void
 	 */
 	public function run210Update()
 	{
@@ -254,7 +250,6 @@ class Database_Updater extends Controller
 
 	/**
 	 * Version 3.0.0 update
-	 * @return void
 	 */
 	public function run300Update()
 	{
@@ -303,7 +298,6 @@ class Database_Updater extends Controller
 	 * Scan the upload folder and create the database entries
 	 * @param string
 	 * @param integer
-	 * @return void
 	 */
 	public function scanUploadFolder($strPath, $pid=0)
 	{
@@ -392,7 +386,6 @@ class Database_Updater extends Controller
 
 	/**
 	 * Update all FileTree fields
-	 * @return void
 	 */
 	public function updateFileTreeFields()
 	{

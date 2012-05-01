@@ -634,7 +634,7 @@ class tl_style extends Backend
 {
 
 	/**
-	 * Add the mooRainbow scripts to the page
+	 * Import the back end user object
 	 */
 	public function __construct()
 	{
@@ -645,7 +645,6 @@ class tl_style extends Backend
 
 	/**
 	 * Check permissions to edit the table
-	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -701,7 +700,6 @@ class tl_style extends Backend
 
 	/**
 	 * Check for modified style sheets and update them if necessary
-	 * @return void
 	 */
 	public function updateStyleSheet()
 	{
@@ -729,7 +727,6 @@ class tl_style extends Backend
 	 * This method is triggered when a single style or multiple styles are
 	 * modified (edit/editAll), duplicated (copy/copyAll), moved (cut/cutAll)
 	 * or deleted (delete/deleteAll).
-	 * @return void
 	 */
 	public function scheduleUpdate()
 	{
@@ -751,7 +748,6 @@ class tl_style extends Backend
 	 * @param integer
 	 * @param string
 	 * @param array
-	 * @return void
 	 */
 	public function updateAfterRestore($id, $table, $data)
 	{
@@ -803,7 +799,6 @@ class tl_style extends Backend
 	 * Toggle the visibility of a format definition
 	 * @param integer
 	 * @param boolean
-	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

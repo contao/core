@@ -923,7 +923,6 @@ abstract class Controller extends System
 	/**
 	 * Print an article as PDF and stream it to the browser
 	 * @param object
-	 * @return void
 	 */
 	protected function printArticleAsPdf($objArticle)
 	{
@@ -1021,7 +1020,6 @@ abstract class Controller extends System
 		$pdf->setLanguageArray($l);
 
 		// Initialize document and add a page
-		$pdf->AliasNbPages();
 		$pdf->AddPage();
 
 		// Set font
@@ -2186,7 +2184,6 @@ abstract class Controller extends System
 	/**
 	 * Send a file to the browser so the "save as" dialogue opens
 	 * @param string
-	 * @return void
 	 */
 	public static function sendFileToBrowser($strFile)
 	{
@@ -2259,7 +2256,6 @@ abstract class Controller extends System
 	 * Load a set of DCA files
 	 * @param string
 	 * @param boolean
-	 * @return void
 	 */
 	protected function loadDataContainer($strName, $blnNoCache=false)
 	{
@@ -2454,7 +2450,6 @@ abstract class Controller extends System
 	 * Create an initial version of a record
 	 * @param string
 	 * @param integer
-	 * @return void
 	 */
 	protected function createInitialVersion($strTable, $intId)
 	{
@@ -2478,7 +2473,6 @@ abstract class Controller extends System
 	 * Create a new version of a record
 	 * @param string
 	 * @param integer
-	 * @return void
 	 */
 	protected function createNewVersion($strTable, $intId)
 	{
@@ -2955,7 +2949,6 @@ abstract class Controller extends System
 	 * @param array
 	 * @param integer
 	 * @param string
-	 * @return void
 	 */
 	public static function addImageToTemplate($objTemplate, $arrItem, $intMaxWidth=null, $strLightboxId=null)
 	{
@@ -3064,7 +3057,6 @@ abstract class Controller extends System
 	 * Add enclosures to a template
 	 * @param object
 	 * @param array
-	 * @return void
 	 */
 	public static function addEnclosuresToTemplate($objTemplate, $arrItem)
 	{
@@ -3162,7 +3154,6 @@ abstract class Controller extends System
 	 * Set a static URL constant and replace the protocol when requested via SSL
 	 * @param string
 	 * @param string
-	 * @return void
 	 */
 	public static function setStaticUrl($name, $url)
 	{

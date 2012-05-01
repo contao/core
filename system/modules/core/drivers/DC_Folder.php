@@ -397,7 +397,6 @@ class DC_Folder extends DataContainer implements listable, editable
 
 	/**
 	 * Create a new folder
-	 * @return void
 	 */
 	public function create()
 	{
@@ -423,7 +422,6 @@ class DC_Folder extends DataContainer implements listable, editable
 	/**
 	 * Move an existing file or folder
 	 * @param boolean
-	 * @return void
 	 */
 	public function cut($blnDoNotRedirect=false)
 	{
@@ -520,7 +518,6 @@ class DC_Folder extends DataContainer implements listable, editable
 
 	/**
 	 * Move all selected files and folders
-	 * @return void
 	 */
 	public function cutAll()
 	{
@@ -549,7 +546,6 @@ class DC_Folder extends DataContainer implements listable, editable
 	 * Recursively duplicate files and folders
 	 * @param string
 	 * @param string
-	 * @return void
 	 */
 	public function copy($source=null, $destination=null)
 	{
@@ -733,7 +729,6 @@ class DC_Folder extends DataContainer implements listable, editable
 
 	/**
 	 * Move all selected files and folders
-	 * @return void
 	 */
 	public function copyAll()
 	{
@@ -760,7 +755,6 @@ class DC_Folder extends DataContainer implements listable, editable
 	/**
 	 * Recursively delete files and folders
 	 * @param string
-	 * @return void
 	 */
 	public function delete($source=null)
 	{
@@ -873,7 +867,6 @@ class DC_Folder extends DataContainer implements listable, editable
 
 	/**
 	 * Delete all files and folders that are currently shown
-	 * @return void
 	 */
 	public function deleteAll()
 	{
@@ -1791,7 +1784,6 @@ window.addEvent(\'domready\', function() {
 
 	/**
 	 * Protect a folder
-	 * @return void
 	 */
 	public function protect()
 	{
@@ -1823,7 +1815,6 @@ window.addEvent(\'domready\', function() {
 	/**
 	 * Save the current value
 	 * @param mixed
-	 * @return void
 	 * @throws \Exception
 	 */
 	protected function save($varValue)
@@ -2182,7 +2173,6 @@ window.addEvent(\'domready\', function() {
 	 * Recursively synchronize the file system
 	 * @param string
 	 * @param integer
-	 * @return void
 	 */
 	protected function execSync($strPath, $intPid=0)
 	{

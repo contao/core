@@ -252,7 +252,6 @@ class DcaExtractor extends Database_Installer
 
 	/**
 	 * Create the extract from the DCA or the database.sql files
-	 * @return void
 	 * @throws \Exception
 	 */
 	protected function createExtract()
@@ -404,7 +403,6 @@ class DcaExtractor extends Database_Installer
 
 	/**
 	 * Create all extracts
-	 * @return void
 	 */
 	public static function createAllExtracts()
 	{

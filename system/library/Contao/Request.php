@@ -169,7 +169,6 @@ class Request
 	 * Set additional request headers
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 */
 	public function setHeader($strKey, $varValue)
 	{
@@ -192,7 +191,6 @@ class Request
 	 * @param string
 	 * @param string
 	 * @param string
-	 * @return void
 	 */
 	public function send($strUrl, $strData=null, $strMethod=null)
 	{

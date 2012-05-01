@@ -131,7 +131,6 @@ class ZipWriter extends System
 	 * Add a file to the archive
 	 * @param string
 	 * @param string
-	 * @return void
 	 * @throws \Exception
 	 */
 	public function addFile($strFile, $strName=null)
@@ -150,7 +149,6 @@ class ZipWriter extends System
 	 * @param string
 	 * @param string
 	 * @param integer
-	 * @return void
 	 */
 	public function addString($strData, $strName, $intTime=0)
 	{
@@ -216,7 +214,6 @@ class ZipWriter extends System
 
 	/**
 	 * Write the central directory and close the file handle
-	 * @return void
 	 */
 	public function close()
 	{

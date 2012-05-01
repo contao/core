@@ -217,7 +217,6 @@ abstract class Events extends Module
 	 * @param integer
 	 * @param integer
 	 * @param integer
-	 * @return void
 	 */
 	protected function addEvent($objEvents, $intStart, $intEnd, $strUrl, $intBegin, $intLimit, $intCalendar)
 	{

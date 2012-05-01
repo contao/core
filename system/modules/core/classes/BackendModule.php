@@ -80,7 +80,6 @@ abstract class BackendModule extends Backend
 	 * Set an object property
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -126,7 +125,6 @@ abstract class BackendModule extends Backend
 
 	/**
 	 * Compile the current element
-	 * @return void
 	 */
 	abstract protected function compile();
 }

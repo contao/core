@@ -46,6 +46,7 @@ class RepositoryCatalog extends RepositoryBackendModule
 	 * Generate module:
 	 * - Display a wildcard in the back end
 	 * - Declare actionlist with templates and compilers in the front end
+	 * @return string
 	 */
 	public function generate()
 	{
@@ -172,6 +173,7 @@ class RepositoryCatalog extends RepositoryBackendModule
 
 	/**
 	 * Detailed view of one extension.
+	 * @param string
 	 */
 	protected function viewExtension($aParams)
 	{

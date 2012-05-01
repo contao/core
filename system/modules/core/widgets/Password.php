@@ -74,7 +74,6 @@ class Password extends Widget
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{

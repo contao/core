@@ -46,6 +46,7 @@ class RepositoryManager extends RepositoryBackendModule
 	 * Generate module:
 	 * - Display a wildcard in the back end
 	 * - Declare actionlist with templates and compilers in the front end
+	 * @return string
 	 */
 	public function generate()
 	{
@@ -102,6 +103,7 @@ class RepositoryManager extends RepositoryBackendModule
 
 	/**
 	 * Edit extension settings
+	 * @param string
 	 */
 	protected function edit($aName)
 	{
@@ -140,6 +142,7 @@ class RepositoryManager extends RepositoryBackendModule
 
 	/**
 	 * Install new extension
+	 * @param string
 	 */
 	protected function install($aParams)
 	{
@@ -356,6 +359,7 @@ class RepositoryManager extends RepositoryBackendModule
 
 	/**
 	 * Upgrade extensions
+	 * @param string
 	 */
 	protected function upgrade($aParams)
 	{
@@ -443,6 +447,7 @@ class RepositoryManager extends RepositoryBackendModule
 
 	/**
 	 * Uninstall an extension
+	 * @param string
 	 */
 	protected function uninstall($aName)
 	{
@@ -516,6 +521,8 @@ class RepositoryManager extends RepositoryBackendModule
 	 * @param string $aName Name of the extension to install/update.
 	 * @param int $aVersion The extension version to install/update to.
 	 * @param string $aKey License key for commercial or private extensions.
+	 * @return boolean
+	 * @throws Exception
 	 */
 	private function updateExtension($aName, $aVersion, $aKey)
 	{
@@ -655,6 +662,8 @@ class RepositoryManager extends RepositoryBackendModule
 	 * @param string $aName Name of the extension to install/update.
 	 * @param int $aVersion The extension version to install/update to.
 	 * @param string $aKey License key for commercial or private extensions.
+	 * @return boolean
+	 * @throws Exception
 	 */
 	private function installExtension($aName, $aVersion, $aKey)
 	{
@@ -790,8 +799,8 @@ class RepositoryManager extends RepositoryBackendModule
 	/**
 	 * Uninstall the files of an extension.
 	 * @param string $aName Name of the extension to install/update.
-	 * @param int $aVersion The extension version to install/update to.
-	 * @param string $aKey License key for commercial or private extensions.
+	 * @return boolean
+	 * @throws Exception
 	 */
 	private function uninstallExtension($aName)
 	{
@@ -879,6 +888,11 @@ class RepositoryManager extends RepositoryBackendModule
 
 	/**
 	 * Create comma separated list of states
+	 * @param integer
+	 * @param integer
+	 * @param integer
+	 * @param integer
+	 * @return string
 	 */
 	private function stateList($aAlpha, $aBeta, $aRc, $aStable)
 	{
@@ -892,6 +906,15 @@ class RepositoryManager extends RepositoryBackendModule
 
 	/**
 	 * Collect all acctions necessary to install/update an extension.
+	 * @param string
+	 * @param string
+	 * @param array
+	 * @param string
+	 * @param boolean
+	 * @param string
+	 * @param integer
+	 * @param integer
+	 * @param integer
 	 */
 	private function addActions($aName, $aVersion, &$aActions, &$aAction, $aDeps=true, $aParent='', $aParentVersion=0, $aMinversion=0, $aMaxversion=0)
 	{
@@ -1042,6 +1065,7 @@ class RepositoryManager extends RepositoryBackendModule
 
 	/**
 	 * Get installed extensions list.
+	 * @param string
 	 * @return array Array with the extension records.
 	 */
 	private function getInstalledExtensions($aIds = '')
@@ -1308,6 +1332,7 @@ class RepositoryManager extends RepositoryBackendModule
 	/**
 	 * Record an install/update/uninstall action in the repository.
 	 * @param array $aOptions The options as defined in the SOAP interface spec.
+	 * @return array
 	 */
 	private function recordAction($aOptions)
 	{

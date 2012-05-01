@@ -600,7 +600,6 @@ class DC_Table extends DataContainer implements listable, editable
 	/**
 	 * Insert a new row into a database table
 	 * @param array
-	 * @return void
 	 */
 	public function create($set=array())
 	{
@@ -675,7 +674,6 @@ class DC_Table extends DataContainer implements listable, editable
 	/**
 	 * Assign a new position to an existing record
 	 * @param boolean
-	 * @return void
 	 */
 	public function cut($blnDoNotRedirect=false)
 	{
@@ -746,7 +744,6 @@ class DC_Table extends DataContainer implements listable, editable
 
 	/**
 	 * Move all selected records
-	 * @return void
 	 */
 	public function cutAll()
 	{
@@ -933,7 +930,6 @@ class DC_Table extends DataContainer implements listable, editable
 	 * @param integer
 	 * @param integer
 	 * @param integer
-	 * @return void
 	 */
 	protected function copyChilds($table, $insertID, $id, $parentId)
 	{
@@ -1022,7 +1018,6 @@ class DC_Table extends DataContainer implements listable, editable
 
 	/**
 	 * Move all selected records
-	 * @return void
 	 */
 	public function copyAll()
 	{
@@ -1054,7 +1049,6 @@ class DC_Table extends DataContainer implements listable, editable
 	 * @param string
 	 * @param integer
 	 * @param boolean
-	 * @return void
 	 */
 	protected function getNewPosition($mode, $pid=null, $insertInto=false)
 	{
@@ -1282,7 +1276,6 @@ class DC_Table extends DataContainer implements listable, editable
 	/**
 	 * Delete a record of the current table table and save it to tl_undo
 	 * @param boolean
-	 * @return void
 	 */
 	public function delete($blnDoNotRedirect=false)
 	{
@@ -1404,7 +1397,6 @@ class DC_Table extends DataContainer implements listable, editable
 
 	/**
 	 * Delete all selected records
-	 * @return void
 	 */
 	public function deleteAll()
 	{
@@ -1435,7 +1427,6 @@ class DC_Table extends DataContainer implements listable, editable
 	 * @param string
 	 * @param integer
 	 * @param array
-	 * @return void
 	 */
 	public function deleteChilds($table, $id, &$delete)
 	{
@@ -1474,7 +1465,6 @@ class DC_Table extends DataContainer implements listable, editable
 
 	/**
 	 * Restore one or more deleted records
-	 * @return void
 	 */
 	public function undo()
 	{
@@ -1542,7 +1532,6 @@ class DC_Table extends DataContainer implements listable, editable
 
 	/**
 	 * Change the order of two neighbour database records
-	 * @return void
 	 */
 	public function move()
 	{
@@ -2587,7 +2576,6 @@ window.addEvent(\'domready\', function() {
 	/**
 	 * Save the current value
 	 * @param mixed
-	 * @return void
 	 * @throws \Exception
 	 */
 	protected function save($varValue)
@@ -2819,7 +2807,6 @@ window.addEvent(\'domready\', function() {
 
 	/**
 	 * Delete all incomplete and unrelated records
-	 * @return void
 	 */
 	protected function reviseTable()
 	{
@@ -5121,7 +5108,6 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 	/**
 	 * Check if we need to preload TinyMCE
-	 * @return void
 	 */
 	protected function checkForTinyMce()
 	{

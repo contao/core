@@ -512,7 +512,6 @@ class tl_member extends Backend
 	/**
 	 * Store the date when the account has been added
 	 * @param \DataContainer
-	 * @return void
 	 */
 	public function storeDateAdded(DataContainer $dc)
 	{
@@ -576,7 +575,6 @@ class tl_member extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
-	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

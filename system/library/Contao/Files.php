@@ -61,7 +61,6 @@ abstract class Files
 
 	/**
 	 * Prevent cloning of the object (Singleton)
-	 * @return mixed|void
 	 */
 	final public function __clone() {}
 
@@ -222,7 +221,6 @@ abstract class Files
 
 	/**
 	 * Validate the path
-	 * @return void
 	 * @throws \Exception
 	 */
 	protected function validate()

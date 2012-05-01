@@ -503,7 +503,6 @@ class tl_layout extends Backend
 
 	/**
 	 * Check permissions to edit the table
-	 * @return void
 	 */
 	public function checkPermission()
 	{

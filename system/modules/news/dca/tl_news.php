@@ -493,7 +493,6 @@ class tl_news extends Backend
 
 	/**
 	 * Check permissions to edit table tl_news
-	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -714,7 +713,6 @@ class tl_news extends Backend
 	/**
 	 * Adjust start end end time of the event based on date, span, startTime and endTime
 	 * @param \DataContainer
-	 * @return void
 	 */
 	public function adjustTime(DataContainer $dc)
 	{
@@ -733,7 +731,6 @@ class tl_news extends Backend
 
 	/**
 	 * Check for modified news feeds and update the XML files if necessary
-	 * @return void
 	 */
 	public function generateFeed()
 	{
@@ -762,7 +759,6 @@ class tl_news extends Backend
 	 * items are modified (edit/editAll), moved (cut/cutAll) or deleted
 	 * (delete/deleteAll). Since duplicated items are unpublished by default,
 	 * it is not necessary to schedule updates on copyAll as well.
-	 * @return void
 	 */
 	public function scheduleUpdate()
 	{
@@ -904,7 +900,6 @@ class tl_news extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
-	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

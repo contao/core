@@ -57,7 +57,6 @@ class FormFileUpload extends Widget implements uploadable
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -95,7 +94,6 @@ class FormFileUpload extends Widget implements uploadable
 
 	/**
 	 * Validate the input and set the value
-	 * @return void
 	 */
 	public function validate()
 	{

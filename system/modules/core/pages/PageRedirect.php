@@ -49,7 +49,6 @@ class PageRedirect extends Frontend
 	/**
 	 * Redirect to an external page
 	 * @param object
-	 * @return void
 	 */
 	public function generate($objPage)
 	{

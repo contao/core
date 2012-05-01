@@ -61,7 +61,6 @@ class Database_Sybase extends Database
 
 	/**
 	 * Connect to the database server and select the database
-	 * @return void
 	 */
 	protected function connect()
 	{
@@ -90,7 +89,6 @@ class Database_Sybase extends Database
 
 	/**
 	 * Disconnect from the database
-	 * @return void
 	 */
 	protected function disconnect()
 	{
@@ -173,7 +171,6 @@ class Database_Sybase extends Database
 
 	/**
 	 * Begin a transaction
-	 * @return void
 	 */
 	protected function begin_transaction()
 	{
@@ -183,7 +180,6 @@ class Database_Sybase extends Database
 
 	/**
 	 * Commit a transaction
-	 * @return void
 	 */
 	protected function commit_transaction()
 	{
@@ -193,7 +189,6 @@ class Database_Sybase extends Database
 
 	/**
 	 * Rollback a transaction
-	 * @return void
 	 */
 	protected function rollback_transaction()
 	{
@@ -204,7 +199,6 @@ class Database_Sybase extends Database
 	/**
 	 * Lock one or more tables
 	 * @param array
-	 * @return void
 	 * @todo implement
 	 */
 	protected function lock_tables($arrTables) {}
@@ -212,7 +206,6 @@ class Database_Sybase extends Database
 
 	/**
 	 * Unlock all tables
-	 * @return void
 	 * @todo implement
 	 */
 	protected function unlock_tables() {}

@@ -117,7 +117,6 @@ abstract class Model extends System
 
 	/**
 	 * Unset the primary key if an object is cloned
-	 * @return mixed|void
 	 */
 	public function __clone()
 	{
@@ -129,7 +128,6 @@ abstract class Model extends System
 	 * Set an object property
 	 * @param string
 	 * @param mixed
-	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{

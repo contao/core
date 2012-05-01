@@ -673,7 +673,6 @@ class tl_page extends Backend
 
 	/**
 	 * Check permissions to edit table tl_page
-	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -891,7 +890,6 @@ class tl_page extends Backend
 
 	/**
 	 * Add the breadcrumb menu
-	 * @return void
 	 */
 	public function addBreadcrumb()
 	{
@@ -986,7 +984,6 @@ class tl_page extends Backend
 	/**
 	 * Make new top-level pages root pages
 	 * @param \DataContainer
-	 * @return void
 	 */
 	public function setRootType(DataContainer $dc)
 	{
@@ -1036,7 +1033,6 @@ class tl_page extends Backend
 
 	/**
 	 * Show a warning if there is no language fallback page
-	 * @return void
 	 */
 	public function showFallbackWarning()
 	{
@@ -1140,7 +1136,6 @@ class tl_page extends Backend
 	/**
 	 * Automatically create an article in the main column of a new page
 	 * @param \DataContainer
-	 * @return void
 	 */
 	public function generateArticle(DataContainer $dc)
 	{
@@ -1607,7 +1602,6 @@ class tl_page extends Backend
 	/**
 	 * Recursively add pages to a sitemap
 	 * @param \DataContainer
-	 * @return void
 	 */
 	public function updateSitemap(DataContainer $dc)
 	{
@@ -1664,7 +1658,6 @@ class tl_page extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
-	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

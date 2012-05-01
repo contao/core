@@ -37,7 +37,6 @@
  * @param string
  * @param string
  * @param integer
- * @return void
  */
 function __error($intType, $strMessage, $strFile, $intLine)
 {
@@ -103,7 +102,6 @@ function __error($intType, $strMessage, $strFile, $intLine)
  * if "display_errors" is set. Callback to a custom exception handler defined
  * in the application file "config/error.php".
  * @param Exception
- * @return void
  */
 function __exception($e)
 {
@@ -133,7 +131,6 @@ function __exception($e)
 
 /**
  * Show a special Contao "what to do in case of an error" message
- * @return void
  */
 function show_help_message()
 {
@@ -165,7 +162,6 @@ function show_help_message()
  * Add a log entry
  * @param string
  * @param string
- * @return void
  */
 function log_message($strMessage, $strLog='error.log')
 {
@@ -421,7 +417,6 @@ function nl2br_callback($matches)
 
 /**
  * Dump variables depending on their type either with var_dump() or print_r()
- * @return void
  */
 function dump()
 {

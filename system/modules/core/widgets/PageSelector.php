@@ -339,7 +339,6 @@ class PageSelector extends Widget
 
 	/**
 	 * Get the IDs of all parent pages of the selected pages, so they are expanded automatically
-	 * @return void
 	 */
 	protected function getPathNodes()
 	{
