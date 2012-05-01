@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -30,7 +30,7 @@
 
 /**
  * Core and plugin versions
- * 
+ *
  * Version numbers are added to style sheets and JavaScript files to make
  * the web browser reload those resources after a Contao update.
  */
@@ -54,7 +54,7 @@ define('TABLESORT', '1.3.1');
  *
  * These constants can be used with any HTML link. Their primary purpose is
  * to provide an accessible alternative for common operations.
- * 
+ *
  * Usage example:
  *   <a href="index.html"<?php echo LINK_NEW_WINDOW_BLUR; ?>>Home</a>
  */
@@ -67,7 +67,7 @@ define('LINK_NEW_WINDOW_BLUR', ' onclick="this.blur();window.open(this.href);ret
  * Log constants
  *
  * These constants can be used with method $this->log() to add log entries.
- * 
+ *
  * Usage example:
  *   $this->log('An error occured', 'FormGenerator execute()', TL_ERROR);
  */
