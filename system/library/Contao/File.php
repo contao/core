@@ -146,13 +146,21 @@ class File extends System
 					Cache::set($strCacheKey, filesize(TL_ROOT . '/' . $this->strFile));
 					break;
 
-				case 'dirname':
+				case 'name':
 				case 'basename':
 					if (!isset($this->arrPathinfo[$strKey]))
 					{
 						$this->arrPathinfo = pathinfo(TL_ROOT . '/' . $this->strFile);
 					}
-					Cache::set($strCacheKey, $this->arrPathinfo[$strKey]);
+					Cache::set($strCacheKey, $this->arrPathinfo['basename']);
+					break;
+
+				case 'dirname':
+					if (!isset($this->arrPathinfo[$strKey]))
+					{
+						$this->arrPathinfo = pathinfo(TL_ROOT . '/' . $this->strFile);
+					}
+					Cache::set($strCacheKey, $this->arrPathinfo['dirname']);
 					break;
 
 				case 'extension':
@@ -164,7 +172,7 @@ class File extends System
 					break;
 
 				case 'filename':
-					Cache::set($strCacheKey, basename($this->basename, '.'.$this->extension));
+					Cache::set($strCacheKey, basename($this->basename, '.' . $this->extension));
 					break;
 
 				case 'mime':

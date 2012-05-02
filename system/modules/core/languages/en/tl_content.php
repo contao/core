@@ -76,7 +76,10 @@ $GLOBALS['TL_LANG']['tl_content']['perPage']       = array('Items per page', 'Th
 $GLOBALS['TL_LANG']['tl_content']['numberOfItems'] = array('Total number of images', 'Here you can limit the total number of images. Set to 0 to show all.');
 $GLOBALS['TL_LANG']['tl_content']['sortBy']        = array('Order by', 'Please choose the sort order.');
 $GLOBALS['TL_LANG']['tl_content']['galleryTpl']    = array('Gallery template', 'Here you can select the gallery template.');
+$GLOBALS['TL_LANG']['tl_content']['playerSRC']     = array('Video/audio files', 'Here you can add the video/audio file or multiple files if you are using different codecs.');
+$GLOBALS['TL_LANG']['tl_content']['posterSRC']     = array('Preview image', 'Show this image instead of the first frame of the video before playback (videos only).');
 $GLOBALS['TL_LANG']['tl_content']['playerSize']    = array('Player size', 'Width and height of the media player in pixels (videos only).');
+$GLOBALS['TL_LANG']['tl_content']['autoplay']      = array('Autoplay', 'Automatically play the video when the page loads.');
 $GLOBALS['TL_LANG']['tl_content']['cteAlias']      = array('Referenced element', 'Please choose the content element you want to insert.');
 $GLOBALS['TL_LANG']['tl_content']['articleAlias']  = array('Referenced article', 'Please choose the article you want to insert.');
 $GLOBALS['TL_LANG']['tl_content']['article']       = array('Article', 'Please select an article.');
@@ -110,6 +113,7 @@ $GLOBALS['TL_LANG']['tl_content']['protected_legend'] = 'Access protection';
 $GLOBALS['TL_LANG']['tl_content']['expert_legend']    = 'Expert settings';
 $GLOBALS['TL_LANG']['tl_content']['template_legend']  = 'Template settings';
 $GLOBALS['TL_LANG']['tl_content']['player_legend']    = 'Player settings';
+$GLOBALS['TL_LANG']['tl_content']['poster_legend']    = 'Preview image';
 
 
 /**

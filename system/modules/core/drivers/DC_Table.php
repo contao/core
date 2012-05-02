@@ -1909,7 +1909,7 @@ class DC_Table extends DataContainer implements listable, editable
 				{
 					$this->redirect(Environment::get('script') . '?do=' . Input::get('do'));
 				}
-				elseif (($this->ptable == 'tl_theme' && $this->strTable == 'tl_style_sheet') || ($this->ptable == 'tl_page' && $this->strTable == 'tl_article')) # TODO: try to abstract this
+				elseif (($this->ptable == 'tl_theme' && $this->strTable == 'tl_style_sheet') || ($this->ptable == 'tl_page' && $this->strTable == 'tl_article')) // TODO: try to abstract this
 				{
 					$this->redirect($this->getReferer(false, $this->strTable));
 				}

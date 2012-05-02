@@ -4,21 +4,24 @@
 
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
+<?php if ($this->isVideo): ?>
 
 <!-- indexer::stop -->
-<?php if ($this->isVideo): ?>
-<video<?php echo $this->size; ?>>
+<video<?php echo $this->size; ?><?php if ($this->poster): ?> poster="<?php echo $this->poster; ?>" preload="none"<?php endif; ?><?php if ($this->autoplay): ?> autoplay<?php endif; ?> controls>
 <?php foreach ($this->files as $file): ?>
   <source type="<?php echo $file->mime; ?>" src="<?php echo $file->path; ?>">
 <?php endforeach; ?>
 </video>
+<!-- indexer::continue -->
 <?php else: ?>
-<audio>
+
+<!-- indexer::stop -->
+<audio preload="none"<?php if ($this->autoplay): ?> autoplay<?php endif; ?> controls>
 <?php foreach ($this->files as $file): ?>
   <source type="<?php echo $file->mime; ?>" src="<?php echo $file->path; ?>">
 <?php endforeach; ?>
 </audio>
-<?php endif; ?>
 <!-- indexer::continue -->
+<?php endif; ?>
 
 </div>

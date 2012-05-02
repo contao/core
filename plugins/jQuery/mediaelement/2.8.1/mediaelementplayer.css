@@ -6,6 +6,12 @@
 	vertical-align: top;
 }
 
+/* PATCH */
+.mejs-audio {
+	margin-top:18px;
+}
+/* PATCH EOF */
+
 .me-plugin {
 	position: absolute;	
 }

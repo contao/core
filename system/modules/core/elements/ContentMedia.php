@@ -83,6 +83,20 @@ class ContentMedia extends ContentElement
 			return '';
 		}
 
+		// Display a list of files in the back end
+		if (TL_MODE == 'BE')
+		{
+			$return = '<ul>';
+
+			while ($objFiles->next())
+			{
+				$objFile = new File($objFiles->path);
+				$return .= '<li><img src="system/themes/' . $this->getTheme() . '/images/' . $objFile->icon . '" width="18" height="18" alt="" class="mime_icon"> <span>' . $objFile->name . '</span> <span class="size">(' . $this->getReadableSize($objFile->size) . ')</span></li>';
+			}
+
+			return $return . '</ul>';
+		}
+
 		$this->objFiles = $objFiles;
 		return parent::generate();
 	}
@@ -103,6 +117,17 @@ class ContentMedia extends ContentElement
 			if (is_array($size))
 			{
 				$this->Template->size = ' width="' . $size[0] . 'px" height="' . $size[1] . 'px"';
+			}
+		}
+
+		$this->Template->poster = false;
+
+		// Optional poster
+		if ($this->posterSRC != '')
+		{
+			if (($objFile = FilesModel::findByPk($this->posterSRC)) !== null)
+			{
+				$this->Template->poster = $objFile->path;
 			}
 		}
 
@@ -128,6 +153,6 @@ class ContentMedia extends ContentElement
 		}
 
 		$this->Template->files = array_values(array_filter($arrFiles));
-		# TODO: support poster="" and controls="" (?)
+		$this->Template->autoplay = $this->autoplay;
 	}
 }

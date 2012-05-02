@@ -340,21 +340,12 @@ class Model_Collection extends System
 	 */
 	public function fetchEach($strKey)
 	{
-		if ($this->intIndex < 0)
-		{
-			$this->first();
-		}
-
-		if (!isset($this->arrModels[0]->$strKey))
-		{
-			throw new Exception("Unknown field $strKey");
-		}
-
+		$this->reset();
 		$return = array();
 
-		foreach ($this->arrModels as $objModel)
+		while ($this->next())
 		{
-			$return[] = $objModel->$strKey;
+			$return[] = $this->$strKey;
 		}
 
 		return $return;
