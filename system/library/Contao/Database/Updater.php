@@ -16,12 +16,11 @@ use \Controller, \DcaExtractor, \File, \FilesModel, \Folder;
 
 
 /**
- * Class Database_Updater
- *
- * Provide methods to update the database data.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Adjust the database if the system is updated
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Database_Updater extends Controller
 {
@@ -276,8 +275,9 @@ class Database_Updater extends Controller
 
 	/**
 	 * Scan the upload folder and create the database entries
-	 * @param string
-	 * @param integer
+	 * 
+	 * @param string  $strPath The target folder
+	 * @param integer $pid     The parent ID
 	 */
 	public function scanUploadFolder($strPath, $pid=0)
 	{

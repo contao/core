@@ -16,12 +16,21 @@ use \Database_Result, \Exception;
 
 
 /**
- * Class Database_Statement
- *
- * Provide methods to execute a database query.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Create and execute queries
+ * 
+ * The class creates the database queries replacing the wildcards and escaping
+ * the values. It then executes the query and returns a result object. 
+ * 
+ * Usage:
+ * 
+ *     $db = Database::getInstance();
+ *     $stmt = $db->prepare("SELECT * FROM tl_member WHERE city=?");
+ *     $stmt->limit(10);
+ *     $res = $stmt->execute('London');
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 abstract class Database_Statement
 {
@@ -33,34 +42,36 @@ abstract class Database_Statement
 	protected $resConnection;
 
 	/**
-	 * Current result
+	 * Database result
 	 * @var resource
 	 */
 	protected $resResult;
 
 	/**
-	 * Current query string
+	 * Query string
 	 * @var string
 	 */
 	protected $strQuery;
 
 	/**
-	 * Disable autocommit
+	 * Autocommit indicator
 	 * @var boolean
 	 */
 	protected $blnDisableAutocommit = false;
 
 	/**
-	 * Cache array
+	 * Result cache
 	 * @var array
 	 */
 	protected static $arrCache = array();
 
 
 	/**
-	 * Validate the connection resource and store the query
-	 * @param resource
-	 * @param boolean
+	 * Validate the connection resource and store the query string
+	 * 
+	 * @param resource $resConnection        The connection resource
+	 * @param boolean  $blnDisableAutocommit Optionally disable autocommitting
+	 * 
 	 * @throws \Exception
 	 */
 	public function __construct($resConnection, $blnDisableAutocommit=false)
@@ -76,17 +87,18 @@ abstract class Database_Statement
 
 
 	/**
-	 * Return a parameter
-	 *
+	 * Return an object property
+	 * 
 	 * Supported parameters:
-	 * - query:        current query string
-	 * - error:        last error message
-	 * - affectedRows: number of affected rows
-	 * - insertId:     last insert ID
+	 * 
+	 * * query:        the query string
+	 * * error:        the last error message
+	 * * affectedRows: the number of affected rows
+	 * * insertId:     the last insert ID
 	 *
-	 * Throw an exception on requests for protected properties.
-	 * @param string
-	 * @return mixed|null
+	 * @param string $strKey The property name
+	 * 
+	 * @return mixed|null The property value or null
 	 */
 	public function __get($strKey)
 	{
@@ -114,9 +126,12 @@ abstract class Database_Statement
 
 
 	/**
-	 * Prepare a statement
-	 * @param string
-	 * @return \Database_Statement
+	 * Prepare a query string so the following functions can handle it
+	 * 
+	 * @param string $strQuery The query string
+	 * 
+	 * @return \Database_Statement The statement object
+	 * 
 	 * @throws \Exception
 	 */
 	public function prepare($strQuery)
@@ -154,13 +169,19 @@ abstract class Database_Statement
 
 
 	/**
-	 * Take an associative array and auto-generate the SET/VALUES subpart of a query
-	 *
-	 * Usage example:
-	 * $objStatement->prepare("UPDATE table %s")->set(array('id'=>'my_id'));
-	 * will be transformed into "UPDATE table SET id='my_id'".
-	 * @param array
-	 * @return \Database_Statement
+	 * Autogenerate the SET/VALUES subpart of a query from an associative array
+	 * 
+	 * Usage:
+	 * 
+	 *     $set = array(
+	 *         'firstname' => 'Leo',
+	 *         'lastname'  => 'Feyer'
+	 *     );
+	 *     $stmt->prepare("UPDATE tl_member %s")->set($set);
+	 * 
+	 * @param array The associative array
+	 * 
+	 * @return \Database_Statement The statement object
 	 */
 	public function set($arrParams)
 	{
@@ -192,10 +213,12 @@ abstract class Database_Statement
 
 
 	/**
-	 * Limit the current result to a certain number of rows and take an offset value as second argument
-	 * @param integer
-	 * @param integer
-	 * @return \Database_Statement
+	 * Handle limit and offset
+	 * 
+	 * @param integer $intRows   The maximum number of rows
+	 * @param integer $intOffset The number of rows to skip
+	 * 
+	 * @return \Database_Statement The statement object
 	 */
 	public function limit($intRows, $intOffset=0)
 	{
@@ -215,8 +238,9 @@ abstract class Database_Statement
 
 
 	/**
-	 * Escape the parameters and execute the current statement
-	 * @return \Database_Result
+	 * Replace the wildcards and execute the query
+	 * 
+	 * @return \Database_Result The result object
 	 */
 	public function execute()
 	{
@@ -230,7 +254,7 @@ abstract class Database_Statement
 		$this->replaceWildcards($arrParams);
 		$strKey = md5($this->strQuery);
 
-		// Try to load the result from cache
+		// Try to load the result from the cache
 		if (isset(self::$arrCache[$strKey]) && !self::$arrCache[$strKey]->isModified)
 		{
 			return self::$arrCache[$strKey]->reset();
@@ -238,7 +262,7 @@ abstract class Database_Statement
 
 		$objResult = $this->query();
 
-		// Cache the result objects
+		// Cache the result object
 		if ($objResult instanceof Database_Result)
 		{
 			self::$arrCache[$strKey] = $objResult;
@@ -249,9 +273,9 @@ abstract class Database_Statement
 
 
 	/**
-	 * Execute the current statement but do not cache the result
-	 * @return \Database_Result
-	 * @throws \Exception
+	 * Execute the query uncached
+	 * 
+	 * @return \Database_Result The result object
 	 */
 	public function executeUncached()
 	{
@@ -268,9 +292,12 @@ abstract class Database_Statement
 
 
 	/**
-	 * Execute a query and return the result object
-	 * @param string
-	 * @return \Database_Result
+	 * Directly send a query string to the database
+	 * 
+	 * @param string $strQuery The query string
+	 * 
+	 * @return \Database_Result|\Database_Statement The result object or the statement object if there is no result set
+	 * 
 	 * @throws \Exception
 	 */
 	public function query($strQuery='')
@@ -308,17 +335,19 @@ abstract class Database_Statement
 
 
 	/**
-	 * Build the query string
-	 * @param array
+	 * Replace the wildcards in the query string
+	 * 
+	 * @param array $arrValues The values array
+	 * 
 	 * @throws \Exception
 	 */
-	protected function replaceWildcards($arrParams)
+	protected function replaceWildcards($arrValues)
 	{
-		$arrParams = $this->escapeParams($arrParams);
+		$arrValues = $this->escapeParams($arrValues);
 		$this->strQuery = preg_replace('/(?<!%)%([^bcdufosxX%])/', '%%$1', $this->strQuery);
 
 		// Replace wildcards
-		if (($this->strQuery = @vsprintf($this->strQuery, $arrParams)) == false)
+		if (($this->strQuery = @vsprintf($this->strQuery, $arrValues)) == false)
 		{
 			throw new Exception('Too few arguments to build the query string');
 		}
@@ -326,45 +355,48 @@ abstract class Database_Statement
 
 
 	/**
-	 * Escape the parameters and serialize objects and arrays
-	 * @param array
-	 * @return array
+	 * Escape the values and serialize objects and arrays
+	 * 
+	 * @param array $arrValues The values array
+	 * 
+	 * @return array The array with the escaped values
 	 */
-	protected function escapeParams($arrParams)
+	protected function escapeParams($arrValues)
 	{
-		foreach ($arrParams as $k=>$v)
+		foreach ($arrValues as $k=>$v)
 		{
 			switch (gettype($v))
 			{
 				case 'string':
-					$arrParams[$k] = $this->string_escape($v);
+					$arrValues[$k] = $this->string_escape($v);
 					break;
 
 				case 'boolean':
-					$arrParams[$k] = ($v === true) ? 1 : 0;
+					$arrValues[$k] = ($v === true) ? 1 : 0;
 					break;
 
 				case 'object':
-					$arrParams[$k] = $this->string_escape(serialize($v));
+					$arrValues[$k] = $this->string_escape(serialize($v));
 					break;
 
 				case 'array':
-					$arrParams[$k] = $this->string_escape(serialize($v));
+					$arrValues[$k] = $this->string_escape(serialize($v));
 					break;
 
 				default:
-					$arrParams[$k] = ($v === null) ? 'NULL' : $v;
+					$arrValues[$k] = ($v === null) ? 'NULL' : $v;
 					break;
 			}
 		}
 
-		return $arrParams;
+		return $arrValues;
 	}
 
 
 	/**
 	 * Debug a query
-	 * @param \Database_Result
+	 * 
+	 * @param \Database_Result $objResult An optional result object
 	 */
 	protected function debugQuery($objResult=null)
 	{
@@ -402,7 +434,8 @@ abstract class Database_Statement
 
 	/**
 	 * Explain the current query
-	 * @return string
+	 * 
+	 * @return string The explanation string
 	 */
 	public function explain()
 	{
@@ -410,14 +443,83 @@ abstract class Database_Statement
 	}
 
 
-	// Abstract database driver methods
+	/**
+	 * Prepare a query string and return it
+	 * 
+	 * @param string $strQuery The query string
+	 * 
+	 * @return string The modified query string
+	 */
 	abstract protected function prepare_query($strQuery);
+
+
+	/**
+	 * Escape a string
+	 * 
+	 * @param string $strString The unescaped string
+	 * 
+	 * @return string The escaped string
+	 */
 	abstract protected function string_escape($strString);
-	abstract protected function limit_query($intOffset, $intRows);
+
+
+	/**
+	 * Add limit and offset to the query string
+	 * 
+	 * @param integer $intRows   The maximum number of rows
+	 * @param integer $intOffset The number of rows to skip
+	 */
+	abstract protected function limit_query($intRows, $intOffset);
+
+
+	/**
+	 * Execute the query
+	 * 
+	 * @return resource The result resource
+	 */
 	abstract protected function execute_query();
+
+
+	/**
+	 * Return the last error message
+	 * 
+	 * @return string The error message
+	 */
 	abstract protected function get_error();
+
+
+	/**
+	 * Return the last insert ID
+	 * 
+	 * @return integer The last insert ID
+	 */
 	abstract protected function affected_rows();
+
+
+	/**
+	 * Return the last insert ID
+	 * 
+	 * @return integer The last insert ID
+	 */
 	abstract protected function insert_id();
+
+
+	/**
+	 * Explain the current query
+	 * 
+	 * @return array The information array
+	 */
 	abstract protected function explain_query();
+
+
+	/**
+	 * Create a Database_Result object
+	 * 
+	 * @param resource $resResult The database result
+	 * @param string   $strQuery  The query string
+	 * 
+	 * @return \Database_Result The result object
+	 */
 	abstract protected function createResult($resResult, $strQuery);
+
 }

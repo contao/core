@@ -16,20 +16,21 @@ use \Database_Statement, \Database_Mysqli_Result;
 
 
 /**
- * Class Database_Mysqli_Statement
- *
- * Driver class for MySQLi databases.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * MySQLi-specific database statement class
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Database_Mysqli_Statement extends Database_Statement
 {
 
 	/**
-	 * Prepare a query and return it
-	 * @param string
-	 * @return string
+	 * Prepare a query string and return it
+	 * 
+	 * @param string $strQuery The query string
+	 * 
+	 * @return string The modified query string
 	 */
 	protected function prepare_query($strQuery)
 	{
@@ -39,8 +40,10 @@ class Database_Mysqli_Statement extends Database_Statement
 
 	/**
 	 * Escape a string
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string $strString The unescaped string
+	 * 
+	 * @return string The escaped string
 	 */
 	protected function string_escape($strString)
 	{
@@ -49,9 +52,10 @@ class Database_Mysqli_Statement extends Database_Statement
 
 
 	/**
-	 * Limit the current query
-	 * @param integer
-	 * @param integer
+	 * Add limit and offset to the query string
+	 * 
+	 * @param integer $intRows   The maximum number of rows
+	 * @param integer $intOffset The number of rows to skip
 	 */
 	protected function limit_query($intRows, $intOffset)
 	{
@@ -67,8 +71,9 @@ class Database_Mysqli_Statement extends Database_Statement
 
 
 	/**
-	 * Execute the current query
-	 * @return resource
+	 * Execute the query
+	 * 
+	 * @return resource The result resource
 	 */
 	protected function execute_query()
 	{
@@ -78,7 +83,8 @@ class Database_Mysqli_Statement extends Database_Statement
 
 	/**
 	 * Return the last error message
-	 * @return string
+	 * 
+	 * @return string The error message
 	 */
 	protected function get_error()
 	{
@@ -88,7 +94,8 @@ class Database_Mysqli_Statement extends Database_Statement
 
 	/**
 	 * Return the number of affected rows
-	 * @return integer
+	 * 
+	 * @return integer The number of affected rows
 	 */
 	protected function affected_rows()
 	{
@@ -98,7 +105,8 @@ class Database_Mysqli_Statement extends Database_Statement
 
 	/**
 	 * Return the last insert ID
-	 * @return integer
+	 * 
+	 * @return integer The last insert ID
 	 */
 	protected function insert_id()
 	{
@@ -108,18 +116,22 @@ class Database_Mysqli_Statement extends Database_Statement
 
 	/**
 	 * Explain the current query
-	 * @return array
+	 * 
+	 * @return array The information array
 	 */
 	protected function explain_query()
 	{
 		return @$this->resConnection->query('EXPLAIN ' . $this->strQuery)->fetch_assoc();
 	}
 
+
 	/**
 	 * Create a Database_Result object
-	 * @param resource
-	 * @param string
-	 * @return \Database_Mysqli_Result
+	 * 
+	 * @param resource $resResult The database result
+	 * @param string   $strQuery  The query string
+	 * 
+	 * @return \Database_Result The result object
 	 */
 	protected function createResult($resResult, $strQuery)
 	{

@@ -16,12 +16,11 @@ use \Database, \Database_Mysql_Statement;
 
 
 /**
- * Class Database_Mysql
- *
- * Driver class for MySQL databases.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * MySQL-specific database class
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Database_Mysql extends Database
 {
@@ -80,7 +79,8 @@ class Database_Mysql extends Database
 
 	/**
 	 * Return the last error message
-	 * @return string
+	 * 
+	 * @return string The error message
 	 */
 	protected function get_error()
 	{
@@ -95,10 +95,12 @@ class Database_Mysql extends Database
 
 	/**
 	 * Auto-generate a FIND_IN_SET() statement
-	 * @param string
-	 * @param string
-	 * @param boolean
-	 * @return string
+	 * 
+	 * @param string  $strKey     The field name
+	 * @param mixed   $varSet     The set to find the key in
+	 * @param boolean $blnIsField If true, the set will not be quoted
+	 * 
+	 * @return string The FIND_IN_SET() statement
 	 */
 	protected function find_in_set($strKey, $varSet, $blnIsField=false)
 	{
@@ -114,21 +116,23 @@ class Database_Mysql extends Database
 
 
 	/**
-	 * Return a standardized array with field information
+	 * Return a standardized array with the field information
 	 *
-	 * Standardized format:
-	 * - name:       field name (e.g. my_field)
-	 * - type:       field type (e.g. "int" or "number")
-	 * - length:     field length (e.g. 20)
-	 * - precision:  precision of a float number (e.g. 5)
-	 * - null:       NULL or NOT NULL
-	 * - default:    default value (e.g. "default_value")
-	 * - attributes: attributes (e.g. "unsigned")
-	 * - index:      PRIMARY, UNIQUE or INDEX
-	 * - extra:      extra information (e.g. auto_increment)
-	 * @param string
-	 * @return array
-	 * @todo Support all kind of keys (e.g. FULLTEXT or FOREIGN).
+	 * * name:       field name (e.g. my_field)
+	 * * type:       field type (e.g. "int" or "number")
+	 * * length:     field length (e.g. 20)
+	 * * precision:  precision of a float number (e.g. 5)
+	 * * null:       NULL or NOT NULL
+	 * * default:    default value (e.g. "default_value")
+	 * * attributes: attributes (e.g. "unsigned")
+	 * * index:      PRIMARY, UNIQUE or INDEX
+	 * * extra:      extra information (e.g. auto_increment)
+	 * 
+	 * @param string $strTable The table name
+	 * 
+	 * @return array An array with the field information
+	 * 
+	 * @todo Support all kind of keys (e.g. FULLTEXT or FOREIGN)
 	 */
 	protected function list_fields($strTable)
 	{
@@ -203,8 +207,10 @@ class Database_Mysql extends Database
 
 	/**
 	 * Change the current database
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strDatabase The name of the target database
+	 * 
+	 * @return boolean True if the database was changed successfully
 	 */
 	protected function set_database($strDatabase)
 	{
@@ -244,7 +250,8 @@ class Database_Mysql extends Database
 
 	/**
 	 * Lock one or more tables
-	 * @param array
+	 * 
+	 * @param array $arrTables An array of table names
 	 */
 	protected function lock_tables($arrTables)
 	{
@@ -270,8 +277,10 @@ class Database_Mysql extends Database
 
 	/**
 	 * Return the table size in bytes
-	 * @param string
-	 * @return integer
+	 * 
+	 * @param string $strTable The table name
+	 * 
+	 * @return integer The table size in bytes
 	 */
 	protected function get_size_of($strTable)
 	{
@@ -284,8 +293,10 @@ class Database_Mysql extends Database
 
 	/**
 	 * Return the next autoincrement ID of a table
-	 * @param string
-	 * @return integer
+	 * 
+	 * @param string The table name
+	 * 
+	 * @return integer The autoincrement ID
 	 */
 	protected function get_next_id($strTable)
 	{
@@ -298,9 +309,11 @@ class Database_Mysql extends Database
 
 	/**
 	 * Create a Database_Statement object
-	 * @param resource
-	 * @param boolean
-	 * @return \Database_Mysql_Statement
+	 * 
+	 * @param resource $resConnection        The connection ID
+	 * @param boolean  $blnDisableAutocommit If true, autocommitting will be disabled
+	 * 
+	 * @return \Database_Statement The Database_Statement object
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{

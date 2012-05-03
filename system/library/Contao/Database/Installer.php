@@ -16,19 +16,22 @@ use \Controller, \DcaExtractor;
 
 
 /**
- * Class Database_Installer
- *
- * Provide methods to handle database installs/updates.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Handles database updates
+ * 
+ * Compares the existing database structure with the DCA table settings and
+ * calculates the queries needed to update the database.
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Database_Installer extends Controller
 {
 
 	/**
-	 * Generate a HTML form with update commands and return it as string
-	 * @return string
+	 * Generate a HTML form with queries and return it as string
+	 * 
+	 * @return string The form HTML markup
 	 */
 	public function generateSqlForm()
 	{
@@ -91,8 +94,9 @@ class Database_Installer extends Controller
 
 
 	/**
-	 * Compile a command array for each necessary database modification
-	 * @return array
+	 * Compile a command array for each database modification
+	 * 
+	 * @return array An array of commands
 	 */
 	protected function compileCommands()
 	{
@@ -223,8 +227,9 @@ class Database_Installer extends Controller
 
 
 	/**
-	 * Compile a table array from the DCA files
-	 * @return array
+	 * Get the DCA table settings from the DCA cache
+	 * 
+	 * @return array An array of DCA table settings
 	 */
 	protected function getFromDca()
 	{
@@ -270,8 +275,9 @@ class Database_Installer extends Controller
 
 
 	/**
-	 * Compile a table array from all SQL files
-	 * @return array
+	 * Get the DCA table settings from the database.sql files
+	 * 
+	 * @return array An array of DCA table settings
 	 */
 	protected function getFromFile()
 	{
@@ -358,8 +364,9 @@ class Database_Installer extends Controller
 
 
 	/**
-	 * Compile a table array from the database and return it
-	 * @return array
+	 * Get the current database structure
+	 * 
+	 * @return array An array of tables and fields
 	 */
 	protected function getFromDB()
 	{

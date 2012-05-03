@@ -16,19 +16,19 @@ use \Database_Result;
 
 
 /**
- * Class Database_Mysql_Result
- *
- * Driver class for MySQL databases.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * MySQL-specific database result class
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Database_Mysql_Result extends Database_Result
 {
 
 	/**
 	 * Fetch the current row as enumerated array
-	 * @return array
+	 * 
+	 * @return array The row as array
 	 */
 	protected function fetch_row()
 	{
@@ -38,7 +38,8 @@ class Database_Mysql_Result extends Database_Result
 
 	/**
 	 * Fetch the current row as associative array
-	 * @return array
+	 * 
+	 * @return array The row as associative array
 	 */
 	protected function fetch_assoc()
 	{
@@ -47,8 +48,9 @@ class Database_Mysql_Result extends Database_Result
 
 
 	/**
-	 * Return the number of rows of the current result
-	 * @return integer
+	 * Return the number of rows in the result set
+	 * 
+	 * @return integer The number of rows
 	 */
 	protected function num_rows()
 	{
@@ -57,8 +59,9 @@ class Database_Mysql_Result extends Database_Result
 
 
 	/**
-	 * Return the number of fields of the current result
-	 * @return integer
+	 * Return the number of fields of the result set
+	 * 
+	 * @return integer The number of fields
 	 */
 	protected function num_fields()
 	{
@@ -67,9 +70,11 @@ class Database_Mysql_Result extends Database_Result
 
 
 	/**
-	 * Get the column information
-	 * @param integer
-	 * @return object
+	 * Get the column information and return it as array
+	 * 
+	 * @param integer $intOffset The field offset
+	 * 
+	 * @return array An array with the column information
 	 */
 	protected function fetch_field($intOffset)
 	{
@@ -78,7 +83,7 @@ class Database_Mysql_Result extends Database_Result
 
 
 	/**
-	 * Free the current result
+	 * Free the result
 	 */
 	public function free()
 	{
