@@ -926,7 +926,7 @@ abstract class Controller extends System
 		// No resizing required
 		if ($objFile->width == $width && $objFile->height == $height)
 		{
-			return $image;
+			return $this->urlEncode($image);
 		}
 
 		// No mode given
