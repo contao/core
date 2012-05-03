@@ -300,7 +300,7 @@ abstract class Module extends Frontend
 					// Override the link target
 					if ($objSubpages->type == 'redirect' && $objSubpages->target)
 					{
-						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
+						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
 					}
 
 					$items[] = $row;
@@ -333,7 +333,7 @@ abstract class Module extends Frontend
 					// Override the link target
 					if ($objSubpages->type == 'redirect' && $objSubpages->target)
 					{
-						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
+						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
 					}
 
 					$items[] = $row;

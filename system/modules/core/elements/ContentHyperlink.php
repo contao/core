@@ -135,7 +135,7 @@ class ContentHyperlink extends ContentElement
 		// Override the link target
 		if ($this->target)
 		{
-			$this->Template->target = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
+			$this->Template->target = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
 		}
 	}
 }

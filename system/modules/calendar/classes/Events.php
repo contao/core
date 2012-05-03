@@ -273,7 +273,7 @@ abstract class Events extends Module
 		// Override the link target
 		if ($objEvents->source == 'external' && $objEvents->target)
 		{
-			$arrEvent['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
+			$arrEvent['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
 		}
 
 		// Clean the RTE output

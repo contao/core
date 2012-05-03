@@ -406,7 +406,7 @@ abstract class ModuleNews extends Module
 		return sprintf('<a href="%s" title="%s"%s>%s</a>',
 						$objArticle->url,
 						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['open'], $objArticle->url)),
-						($objArticle->target ? (($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"') : ''),
+						($objArticle->target ? (($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"') : ''),
 						$strLink);
 	}
 }
