@@ -844,7 +844,7 @@ class SimplePie
 	 */
 	public function set_file(&$file)
 	{
-		if (is_a($file, 'SimplePie_File'))
+		if ($file instanceof SimplePie_File)
 		{
 			$this->feed_url = $file->url;
 			$this->file =& $file;
@@ -1634,7 +1634,7 @@ class SimplePie
 				// If we don't already have the file (it'll only exist if we've opened it to check if the cache has been modified), open it.
 				if (!isset($file))
 				{
-					if (is_a($this->file, 'SimplePie_File') && $this->file->url === $this->feed_url)
+					if ($this->file instanceof SimplePie_File && $this->file->url === $this->feed_url)
 					{
 						$file =& $this->file;
 					}
@@ -3066,7 +3066,7 @@ class SimplePie
 			$items = array();
 			foreach ($urls as $arg)
 			{
-				if (is_a($arg, 'SimplePie'))
+				if ($arg instanceof SimplePie)
 				{
 					$items = array_merge($items, $arg->get_items(0, $limit));
 				}
@@ -8667,7 +8667,7 @@ class SimplePie_Cache_File
 	{
 		if (file_exists($this->name) && is_writeable($this->name) || file_exists($this->location) && is_writeable($this->location))
 		{
-			if (is_a($data, 'SimplePie'))
+			if ($data instanceof SimplePie)
 			{
 				$data = $data->data;
 			}
@@ -8889,7 +8889,7 @@ class SimplePie_Cache_MySQL extends SimplePie_Cache_DB
 		{
 			$feed_id = "'" . mysql_real_escape_string($this->id) . "'";
 
-			if (is_a($data, 'SimplePie'))
+			if ($data instanceof SimplePie)
 			{
 				if (SIMPLEPIE_PHP5)
 				{

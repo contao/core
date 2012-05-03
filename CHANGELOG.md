@@ -5,6 +5,9 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Replaced `is_a()` with `instanceof` in the simplepie plugin (see #4212).
+
+### Fixed
 Use `round()` instead of `ceil()` when resizing images (see #3806).
 
 ### Fixed
