@@ -19,7 +19,7 @@ use \Files;
  * Loads and writes the local configuration file
  * 
  * Custom settings above or below the `### INSTALL SCRIPT ###` markers will be
- * preserverd.
+ * preserved.
  * 
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
