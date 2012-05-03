@@ -883,7 +883,7 @@ abstract class Controller extends System
 	 */
 	protected function resizeImage($image, $width, $height, $mode='')
 	{
-		return $this->getImage($image, $width, $height, $mode, $image) ? true : false;
+		return $this->getImage($image, $width, $height, $mode, $image, true) ? true : false;
 	}
 
 
@@ -894,9 +894,10 @@ abstract class Controller extends System
 	 * @param integer
 	 * @param string
 	 * @param string
+	 * @param bool Force resize even if $target allready exists
 	 * @return string|null
 	 */
-	protected function getImage($image, $width, $height, $mode='', $target=null)
+	protected function getImage($image, $width, $height, $mode='', $target=null, $targetForce=false)
 	{
 		if ($image == '')
 		{
@@ -947,7 +948,7 @@ abstract class Controller extends System
 			if ($target)
 			{
 				// Return if the target image allready exists
-				if (file_exists(TL_ROOT . '/' . $target))
+				if (file_exists(TL_ROOT . '/' . $target) && !$targetForce)
 				{
 					return $this->urlEncode($target);
 				}
