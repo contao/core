@@ -929,7 +929,8 @@ abstract class Controller extends System
 			if ($target)
 			{
 				// copy if target image not exists or is older than source
-				if (!file_exists(TL_ROOT . '/' . $target) || filemtime(TL_ROOT . '/' . $image) > filemtime(TL_ROOT . '/' . $target)) {
+				if (!file_exists(TL_ROOT . '/' . $target) ||
+					$objFile->mtime > filemtime(TL_ROOT . '/' . $target)) {
 					$this->import('Files');
 					$this->Files->copy($image, $target);
 				}
@@ -959,7 +960,7 @@ abstract class Controller extends System
 			{
 				// Return if the target image allready exists
 				if (file_exists(TL_ROOT . '/' . $target) &&
-					filemtime(TL_ROOT . '/' . $image) <= filemtime(TL_ROOT . '/' . $target) &&
+					$objFile->mtime <= filemtime(TL_ROOT . '/' . $target) &&
 					!$targetForce)
 				{
 					return $this->urlEncode($target);
