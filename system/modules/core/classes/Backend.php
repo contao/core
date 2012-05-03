@@ -80,9 +80,14 @@ abstract class Backend extends Controller
 		$this->import('Files');
 		$arrFiles = array('system/runonce.php');
 
-		// Third-party extensions
-		foreach ($this->Config->getActiveModules() as $strModule)
+		// Always scan all folders and not just the active modules (see #4200)
+		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
 		{
+			if (substr($strModule, 0, 1) == '.' || !is_dir(TL_ROOT . '/system/modules/' . $strModule))
+			{
+				continue;
+			}
+
 			$arrFiles[] = 'system/modules/' . $strModule . '/config/runonce.php';
 		}
 
