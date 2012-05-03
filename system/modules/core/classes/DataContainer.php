@@ -329,8 +329,6 @@ class DataContainer extends Backend
 			}
 		}
 
-		$datepicker = '';
-		$colorpicker = '';
 		$wizard = '';
 		$strHelpClass = '';
 
@@ -355,7 +353,7 @@ class DataContainer extends Backend
 					break;
 			}
 
-			$datepicker = ' <img src="plugins/mootools/datepicker/icon.gif" width="20" height="20" alt="" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px">
+			$wizard .= ' <img src="plugins/mootools/datepicker/icon.gif" width="20" height="20" alt="" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px">
   <script>
   window.addEvent("domready", function() {
     new Picker.Date($$("#ctrl_' . $objWidget->id . '"), {
@@ -375,7 +373,7 @@ class DataContainer extends Backend
 		// Color picker
 		if ($arrData['eval']['colorpicker'])
 		{
-			$colorpicker = ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" id="moo_' . $this->strField . '"') . '
+			$wizard .= ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" id="moo_' . $this->strField . '"') . '
   <script>
   window.addEvent("domready", function() {
     new MooRainbow("moo_' . $this->strField . '", {
@@ -447,7 +445,7 @@ class DataContainer extends Backend
 		}
 
 		return '
-<div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $datepicker . $colorpicker . $updateMode . (!$objWidget->hasErrors() ? $this->help($strHelpClass) : '') . '
+<div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $updateMode . (!$objWidget->hasErrors() ? $this->help($strHelpClass) : '') . '
 </div>';
 	}
 
