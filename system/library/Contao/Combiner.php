@@ -16,24 +16,31 @@ use \File, \System, \Exception;
 
 
 /**
- * Class Combiner
- *
- * This class provides methods to combine CSS and JavaScript files.
- * @copyright  Leo Feyer 2011-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Combines .css or .js files into one single file
+ * 
+ * Usage:
+ * 
+ *     $combiner = new Combiner();
+ * 
+ *     $combiner->add('css/style.css');
+ *     $combiner->add('css/fonts.css');
+ *     $combiner->add('css/print.css');
+ * 
+ *     echo $combiner->getCombinedFile();
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Combiner extends System
 {
 
-	/**
-	 * Constants
-	 */
+	// Constants
 	const CSS = '.css';
 	const JS = '.js';
 
 	/**
-	 * Unique key
+	 * Unique file key
 	 * @var string
 	 */
 	protected $strKey = '';
@@ -42,7 +49,7 @@ class Combiner extends System
 	 * Operation mode
 	 * @var string
 	 */
-	protected $strMode = null;
+	protected $strMode;
 
 	/**
 	 * Files
@@ -52,10 +59,12 @@ class Combiner extends System
 
 
 	/**
-	 * Add a file
-	 * @param string
-	 * @param string
-	 * @param string
+	 * Add a file to the combined file
+	 * 
+	 * @param string $strFile    The file to be added
+	 * @param string $strVersion An optional version number
+	 * @param string $strMedia   The media type of the file (.css only)
+	 * 
 	 * @throws \Exception
 	 */
 	public function add($strFile, $strVersion=null, $strMedia='screen')
@@ -125,9 +134,10 @@ class Combiner extends System
 
 	/**
 	 * Add multiple files from an array
-	 * @param array
-	 * @param string
-	 * @param string
+	 * 
+	 * @param array  $arrFiles   An array of files to be added
+	 * @param string $strVersion An optional version number
+	 * @param string $strMedia   The media type of the file (.css only)
 	 */
 	public function addMultiple(Array $arrFiles, $strVersion=null, $strMedia='screen')
 	{
@@ -139,8 +149,9 @@ class Combiner extends System
 
 
 	/**
-	 * Return true if there are files
-	 * @return boolean
+	 * Check whether files have been added
+	 * 
+	 * @return boolean True if there are files
 	 */
 	public function hasEntries()
 	{
@@ -149,9 +160,11 @@ class Combiner extends System
 
 
 	/**
-	 * Generate the combined file and return the path
-	 * @param string
-	 * @return string
+	 * Generate the combined file and return its path
+	 * 
+	 * @param string $strUrl An optional URL to prepend
+	 * 
+	 * @return string The path to the combined file
 	 */
 	public function getCombinedFile($strUrl=null)
 	{

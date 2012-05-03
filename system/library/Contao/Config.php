@@ -16,25 +16,27 @@ use \Files;
 
 
 /**
- * Class Config
- *
- * Provide methods to manage configuration files.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Loads and writes the local configuration file
+ * 
+ * Custom settings above or below the `### INSTALL SCRIPT ###` markers will be
+ * preserverd.
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Config
 {
 
 	/**
-	 * Current object instance (Singleton)
-	 * @var Config
+	 * Object instance (Singleton)
+	 * @var \Config
 	 */
 	protected static $objInstance;
 
 	/**
 	 * Files object
-	 * @var Files
+	 * @var \Files
 	 */
 	protected $Files;
 
@@ -51,25 +53,25 @@ class Config
 	protected $strBottom = '';
 
 	/**
-	 * Modified
+	 * Modification indicator
 	 * @var boolean
 	 */
 	protected $blnIsModified = false;
 
 	/**
-	 * Local configuration file
+	 * Local file existance
 	 * @var boolean
 	 */
 	protected $blnHasLcf = false;
 
 	/**
-	 * Data array
+	 * Data
 	 * @var array
 	 */
 	protected $arrData = array();
 
 	/**
-	 * Cache array
+	 * Cache
 	 * @var array
 	 */
 	protected $arrCache = array();
@@ -82,7 +84,7 @@ class Config
 
 
 	/**
-	 * Save the local configuration
+	 * Automatically save the local configuration
 	 */
 	public function __destruct()
 	{
@@ -101,7 +103,8 @@ class Config
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return \Config
+	 * 
+	 * @return \Config The object instance
 	 */
 	public static function getInstance()
 	{
@@ -235,7 +238,8 @@ class Config
 
 	/**
 	 * Return true if the installation is completed
-	 * @return boolean
+	 * 
+	 * @return boolean True if the local configuration file exists
 	 */
 	public function isComplete()
 	{
@@ -245,8 +249,10 @@ class Config
 
 	/**
 	 * Return all active modules (starting with "core") as array
-	 * @param boolean
-	 * @return array
+	 * 
+	 * @param boolean $blnNoCache Override the cache
+	 * 
+	 * @return array An array of active modules
 	 */
 	public function getActiveModules($blnNoCache=false)
 	{
@@ -294,8 +300,9 @@ class Config
 
 	/**
 	 * Add a configuration variable to the local configuration file
-	 * @param string
-	 * @param mixed
+	 * 
+	 * @param string $strKey   The full variable name
+	 * @param mixed  $varValue The configuration value
 	 */
 	public function add($strKey, $varValue)
 	{
@@ -307,8 +314,9 @@ class Config
 
 	/**
 	 * Alias for Config::add()
-	 * @param string
-	 * @param mixed
+	 * 
+	 * @param string $strKey   The full variable name
+	 * @param mixed  $varValue The configuration value
 	 */
 	public function update($strKey, $varValue)
 	{
@@ -317,8 +325,27 @@ class Config
 
 
 	/**
-	 * Delete a configuration variable from the local configuration file
-	 * @param string
+	 * Return a configuration value
+	 * 
+	 * @param string $strKey The short key (e.g. "displayErrors")
+	 * 
+	 * @return mixed|null The configuration value
+	 */
+	public function get($strKey)
+	{
+		if (isset($GLOBALS['TL_CONFIG'][$strKey]))
+		{
+			return $GLOBALS['TL_CONFIG'][$strKey];
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Remove a configuration variable
+	 * 
+	 * @param string $strKey The full variable name
 	 */
 	public function delete($strKey)
 	{
@@ -329,9 +356,11 @@ class Config
 
 
 	/**
-	 * Escape a parameter depending on its type and return it
-	 * @param mixed
-	 * @return mixed
+	 * Escape a value depending on its type
+	 * 
+	 * @param mixed $varValue The value
+	 * 
+	 * @return mixed The escaped value
 	 */
 	protected function escape($varValue)
 	{

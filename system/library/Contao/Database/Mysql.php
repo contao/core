@@ -100,15 +100,15 @@ class Database_Mysql extends Database
 	 * @param boolean
 	 * @return string
 	 */
-	protected function find_in_set($strKey, $strSet, $blnIsField=false)
+	protected function find_in_set($strKey, $varSet, $blnIsField=false)
 	{
 		if ($blnIsField)
 		{
-			return "FIND_IN_SET(" . $strKey . ", " . $strSet . ")";
+			return "FIND_IN_SET(" . $strKey . ", " . $varSet . ")";
 		}
 		else
 		{
-			return "FIND_IN_SET(" . $strKey . ", '" . mysql_real_escape_string($strSet, $this->resConnection) . "')";
+			return "FIND_IN_SET(" . $strKey . ", '" . mysql_real_escape_string($varSet, $this->resConnection) . "')";
 		}
 	}
 

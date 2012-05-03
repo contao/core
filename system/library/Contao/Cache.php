@@ -16,7 +16,7 @@ use \System;
 
 
 /**
- * A static class to store non-persistent data.
+ * A static class to store non-persistent data
  * 
  * The class functions as a global cache container where you can store data
  * that is reused by the application. The cache content is not persisted, so
@@ -51,18 +51,6 @@ class Cache extends System
 	 * @var array
 	 */
 	protected static $arrData = array();
-
-
-	/**
-	 * Prevent direct instantiation (Singleton)
-	 */
-	protected function __construct() {}
-
-
-	/**
-	 * Prevent cloning of the object (Singleton)
-	 */
-	final public function __clone() {}
 
 
 	/**
@@ -112,6 +100,20 @@ class Cache extends System
 	{
 		unset(static::$arrData[$strKey]);
 	}
+
+
+	/**
+	 * Prevent direct instantiation (Singleton)
+	 * @deprecated Cache is now a static class
+	 */
+	protected function __construct() {}
+
+
+	/**
+	 * Prevent cloning of the object (Singleton)
+	 * @deprecated Cache is now a static class
+	 */
+	final public function __clone() {}
 
 
 	/**

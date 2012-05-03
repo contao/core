@@ -14,12 +14,20 @@ namespace Contao;
 
 
 /**
- * Class ClassLoader
- *
- * Provide methods to automatically load class files.
- * @copyright  Leo Feyer 2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Automatically load class files based on a mapper array
+ * 
+ * The class stores namespaces and classes and automatically loads the class
+ * files upon their first usage. It uses a mapper array to support complex
+ * nesting and arbitrary subfolders to store class files.
+ * 
+ * Usage:
+ * 
+ *     ClassLoader::addNamespace('Custom');
+ *     ClassLoader::addClass('Custom\\Calendar', 'calendar/Calendar.php');
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class ClassLoader
 {
@@ -110,7 +118,8 @@ class ClassLoader
 
 	/**
 	 * Add a new namespace
-	 * @param string
+	 * 
+	 * @param string $name The namespace name
 	 */
 	public static function addNamespace($name)
 	{
@@ -124,8 +133,9 @@ class ClassLoader
 
 
 	/**
-	 * Add a new namespace
-	 * @param array
+	 * Add multiple new namespaces
+	 * 
+	 * @param array $names An array of namespace names
 	 */
 	public static function addNamespaces($names)
 	{
@@ -138,7 +148,8 @@ class ClassLoader
 
 	/**
 	 * Return the namespaces as array
-	 * @return array
+	 * 
+	 * @return array An array of all namespaces
 	 */
 	public static function getNamespaces()
 	{
@@ -148,8 +159,9 @@ class ClassLoader
 
 	/**
 	 * Add a new class with its file path
-	 * @param string
-	 * @param string
+	 * 
+	 * @param string $class The class name
+	 * @param string $file  The path to the class file
 	 */
 	public static function addClass($class, $file)
 	{
@@ -159,7 +171,8 @@ class ClassLoader
 
 	/**
 	 * Add multiple new classes with their file paths
-	 * @param array
+	 * 
+	 * @param array $classes An array of classes
 	 */
 	public static function addClasses($classes)
 	{
@@ -171,8 +184,9 @@ class ClassLoader
 
 
 	/**
-	 * Return the classes as array
-	 * @return array
+	 * Return the classes as array.
+	 * 
+	 * @return array An array of all classes
 	 */
 	public static function getClasses()
 	{
@@ -181,9 +195,12 @@ class ClassLoader
 
 
 	/**
-	 * Autoload a class and create an alias in the global namespace to
-	 * preserve backwards compatibility with Contao 2 extensions
-	 * @param string
+	 * Autoload a class and create an alias in the global namespace
+	 * 
+	 * To preserve backwards compatibility with Contao 2 extensions, all core
+	 * classes will be aliased into the global namespace.
+	 * 
+	 * @param string $class The class name
 	 */
 	public static function load($class)
 	{
@@ -202,6 +219,7 @@ class ClassLoader
 
 			include TL_ROOT . '/' . self::$classes[$class];
 		}
+
 		// Find the class in the registered namespaces
 		elseif (($namespaced = self::findClass($class)) != false)
 		{
@@ -220,8 +238,10 @@ class ClassLoader
 
 	/**
 	 * Search the namespaces for a matching entry
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string $class The class name
+	 * 
+	 * @return string The full path including the namespace
 	 */
 	protected static function findClass($class)
 	{
@@ -247,8 +267,8 @@ class ClassLoader
 
 
 	/**
-	 * Scan the module directories for config/autoload.php files
-	 * and then register the autoloader on the SPL stack
+	 * Scan the module directories for config/autoload.php files and then
+	 * register the autoloader on the SPL stack
 	 */
 	public static function scanAndRegister()
 	{

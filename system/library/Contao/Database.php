@@ -16,19 +16,28 @@ use \Exception;
 
 
 /**
- * Class Database
- *
- * Provide methods to handle database communication.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Abstract parent class to handle database communication
+ * 
+ * The class is responsible for connecting to the database, listing tables and
+ * fields, handling transactions and locking tables. It also creates the related
+ * Database_Statement and Database_Result objects.
+ * 
+ * Usage:
+ * 
+ *     $db   = Database::getInstance();
+ *     $stmt = $db->prepare("SELECT * FROM tl_user WHERE id=?");
+ *     $res  = $stmt->execute(4);
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 abstract class Database
 {
 
 	/**
-	 * Current object instance (Singleton)
-	 * @var Database
+	 * Object instance (Singleton)
+	 * @var \Database
 	 */
 	protected static $objInstance;
 
@@ -45,14 +54,15 @@ abstract class Database
 	protected $blnDisableAutocommit = false;
 
 	/**
-	 * Cache array
+	 * Cache
 	 * @var array
 	 */
 	protected $arrCache = array();
 
 
 	/**
-	 * Load the database configuration file and connect to the database
+	 * Establish the database connection
+	 * 
 	 * @throws \Exception
 	 */
 	protected function __construct()
@@ -86,8 +96,10 @@ abstract class Database
 
 	/**
 	 * Return an object property
-	 * @param string
-	 * @return string|null
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return string|null The property value
 	 */
 	public function __get($strKey)
 	{
@@ -101,9 +113,9 @@ abstract class Database
 
 
 	/**
-	 * Instantiate a database driver object and return it (Factory)
-	 * @return \Database
-	 * @throws \Exception
+	 * Instantiate the Database object (Factory)
+	 * 
+	 * @return \Database The Database object
 	 */
 	public static function getInstance()
 	{
@@ -118,21 +130,24 @@ abstract class Database
 
 
 	/**
-	 * Prepare a statement (return a Database_Statement object)
-	 * @param string
-	 * @return \Database_Statement
+	 * Prepare a query and return a Database_Statement object
+	 * 
+	 * @param string $strQuery The query string
+	 * 
+	 * @return \Database_Statement The Database_Statement object
 	 */
 	public function prepare($strQuery)
 	{
-		$objStatement = $this->createStatement($this->resConnection, $this->blnDisableAutocommit);
-		return $objStatement->prepare($strQuery);
+		return $this->createStatement($this->resConnection, $this->blnDisableAutocommit)->prepare($strQuery);
 	}
 
 
 	/**
-	 * Execute a query (return a Database_Result object)
-	 * @param string
-	 * @return \Database_Result
+	 * Execute a query and return a Database_Result object
+	 * 
+	 * @param string $strQuery The query string
+	 * 
+	 * @return \Database_Result The Database_Result object
 	 */
 	public function execute($strQuery)
 	{
@@ -142,8 +157,10 @@ abstract class Database
 
 	/**
 	 * Execute a query and do not cache the result
-	 * @param string
-	 * @return \Database_Result
+	 * 
+	 * @param string $strQuery The query string
+	 * 
+	 * @return \Database_Result The Database_Result object
 	 */
 	public function executeUncached($strQuery)
 	{
@@ -152,23 +169,26 @@ abstract class Database
 
 
 	/**
-	 * Execute a raw query (returns a Database_Result object)
-	 * @param string
-	 * @return \Database_Result
+	 * Execute a raw query and return a Database_Result object
+	 * 
+	 * @param string $strQuery The query string
+	 * 
+	 * @return \Database_Result The Database_Result object
 	 */
 	public function query($strQuery)
 	{
-		$objStatement = $this->createStatement($this->resConnection, $this->blnDisableAutocommit);
-		return $objStatement->query($strQuery);
+		return $this->createStatement($this->resConnection, $this->blnDisableAutocommit)->query($strQuery);
 	}
 
 
 	/**
 	 * Auto-generate a FIND_IN_SET() statement
-	 * @param string
-	 * @param mixed
-	 * @param boolean
-	 * @return string
+	 * 
+	 * @param string  $strKey     The field name
+	 * @param mixed   $varSet     The set to find the key in
+	 * @param boolean $blnIsField If true, the set will not be quoted
+	 * 
+	 * @return string The FIND_IN_SET() statement
 	 */
 	public function findInSet($strKey, $varSet, $blnIsField=false)
 	{
@@ -183,9 +203,11 @@ abstract class Database
 
 	/**
 	 * Return all tables of a database as array
-	 * @param string
-	 * @param boolean
-	 * @return array
+	 * 
+	 * @param string  $strDatabase The database name
+	 * @param boolean $blnNoCache  If true, the cache will be bypassed
+	 * 
+	 * @return array An array of table names
 	 */
 	public function listTables($strDatabase=null, $blnNoCache=false)
 	{
@@ -214,10 +236,12 @@ abstract class Database
 
 	/**
 	 * Determine if a particular database table exists
-	 * @param string
-	 * @param string
-	 * @param boolean
-	 * @return boolean
+	 * 
+	 * @param string  $strTable    The table name
+	 * @param string  $strDatabase The optional database name
+	 * @param boolean $blnNoCache  If true, the cache will be bypassed
+	 * 
+	 * @return boolean True if the table exists
 	 */
 	public function tableExists($strTable, $strDatabase=null, $blnNoCache=false)
 	{
@@ -227,9 +251,11 @@ abstract class Database
 
 	/**
 	 * Return all columns of a particular table as array
-	 * @param string
-	 * @param boolean
-	 * @return array
+	 * 
+	 * @param string  $strTable   The table name
+	 * @param boolean $blnNoCache If true, the cache will be bypassed
+	 * 
+	 * @return array An array of column names
 	 */
 	public function listFields($strTable, $blnNoCache=false)
 	{
@@ -245,10 +271,12 @@ abstract class Database
 
 	/**
 	 * Determine if a particular column exists
-	 * @param string
-	 * @param string
-	 * @param boolean
-	 * @return boolean
+	 * 
+	 * @param string  $strField   The field name
+	 * @param string  $strTable   The table name
+	 * @param boolean $blnNoCache If true, the cache will be bypassed
+	 * 
+	 * @return boolean True if the field exists
 	 */
 	public function fieldExists($strField, $strTable, $blnNoCache=false)
 	{
@@ -266,9 +294,11 @@ abstract class Database
 
 	/**
 	 * Return the field names of a particular table as array
-	 * @param string
-	 * @param boolean
-	 * @return array
+	 * 
+	 * @param string  $strTable   The table name
+	 * @param boolean $blnNoCache If true, the cache will be bypassed
+	 * 
+	 * @return array An array of field names
 	 */
 	public function getFieldNames($strTable, $blnNoCache=false)
 	{
@@ -286,8 +316,10 @@ abstract class Database
 
 	/**
 	 * Change the current database
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strDatabase The name of the target database
+	 * 
+	 * @return boolean True if the database was changed successfully
 	 */
 	public function setDatabase($strDatabase)
 	{
@@ -324,7 +356,8 @@ abstract class Database
 
 	/**
 	 * Lock one or more tables
-	 * @param array
+	 * 
+	 * @param array $arrTables An array of table names to be locked
 	 */
 	public function lockTables($arrTables)
 	{
@@ -343,8 +376,10 @@ abstract class Database
 
 	/**
 	 * Return the table size in bytes
-	 * @param string
-	 * @return integer
+	 * 
+	 * @param string $strTable The table name
+	 * 
+	 * @return integer The table size in bytes
 	 */
 	public function getSizeOf($strTable)
 	{
@@ -354,8 +389,10 @@ abstract class Database
 
 	/**
 	 * Return the next autoincrement ID of a table
-	 * @param string
-	 * @return integer
+	 * 
+	 * @param string $strTable The table name
+	 * 
+	 * @return integer The autoincrement ID
 	 */
 	public function getNextId($strTable)
 	{
@@ -363,19 +400,129 @@ abstract class Database
 	}
 
 
-	// Abstract database driver methods
+	/**
+	 * Connect to the database server and select the database
+	 */
 	abstract protected function connect();
+
+
+	/**
+	 * Disconnect from the database
+	 */
 	abstract protected function disconnect();
+
+
+	/**
+	 * Return the last error message
+	 * 
+	 * @return string The error message
+	 */
 	abstract protected function get_error();
-	abstract protected function find_in_set($strKey, $strSet, $blnIsField=false);
-	abstract protected function begin_transaction();
-	abstract protected function commit_transaction();
-	abstract protected function rollback_transaction();
+
+
+	/**
+	 * Auto-generate a FIND_IN_SET() statement
+	 * 
+	 * @param string  $strKey     The field name
+	 * @param mixed   $varSet     The set to find the key in
+	 * @param boolean $blnIsField If true, the set will not be quoted
+	 * 
+	 * @return string The FIND_IN_SET() statement
+	 */
+	abstract protected function find_in_set($strKey, $varSet, $blnIsField=false);
+
+
+	/**
+	 * Return a standardized array with the field information
+	 *
+	 * * name:       field name (e.g. my_field)
+	 * * type:       field type (e.g. "int" or "number")
+	 * * length:     field length (e.g. 20)
+	 * * precision:  precision of a float number (e.g. 5)
+	 * * null:       NULL or NOT NULL
+	 * * default:    default value (e.g. "default_value")
+	 * * attributes: attributes (e.g. "unsigned")
+	 * * index:      PRIMARY, UNIQUE or INDEX
+	 * * extra:      extra information (e.g. auto_increment)
+	 * 
+	 * @param string $strTable The table name
+	 * 
+	 * @return array An array with the field information
+	 * 
+	 * @todo Support all kind of keys (e.g. FULLTEXT or FOREIGN)
+	 */
 	abstract protected function list_fields($strTable);
+
+
+	/**
+	 * Change the current database
+	 * 
+	 * @param string $strDatabase The name of the target database
+	 * 
+	 * @return boolean True if the database was changed successfully
+	 */
 	abstract protected function set_database($strDatabase);
+
+
+	/**
+	 * Begin a transaction
+	 */
+	abstract protected function begin_transaction();
+
+
+	/**
+	 * Commit a transaction
+	 */
+	abstract protected function commit_transaction();
+
+
+	/**
+	 * Rollback a transaction
+	 */
+	abstract protected function rollback_transaction();
+
+
+	/**
+	 * Lock one or more tables
+	 * 
+	 * @param array $arrTables An array of table names
+	 */
 	abstract protected function lock_tables($arrTables);
+
+
+	/**
+	 * Unlock all tables
+	 */
 	abstract protected function unlock_tables();
+
+
+	/**
+	 * Return the table size in bytes
+	 * 
+	 * @param string $strTable The table name
+	 * 
+	 * @return integer The table size in bytes
+	 */
 	abstract protected function get_size_of($strTable);
+
+
+	/**
+	 * Return the next autoincrement ID of a table
+	 * 
+	 * @param string The table name
+	 * 
+	 * @return integer The autoincrement ID
+	 */
 	abstract protected function get_next_id($strTable);
+
+
+	/**
+	 * Create a Database_Statement object
+	 * 
+	 * @param resource $resConnection        The connection ID
+	 * @param boolean  $blnDisableAutocommit If true, autocommitting will be disabled
+	 * 
+	 * @return \Database_Statement The Database_Statement object
+	 */
 	abstract protected function createStatement($resConnection, $blnDisableAutocommit);
 }

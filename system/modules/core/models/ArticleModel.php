@@ -53,7 +53,7 @@ class ArticleModel extends Model
 
 
 	/**
-	 * Find an article by its ID or alias and its column
+	 * Find an article by its ID or alias and its page
 	 * @param mixed
 	 * @param integer
 	 * @return \Model|null

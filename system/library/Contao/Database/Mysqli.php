@@ -69,21 +69,23 @@ class Database_Mysqli extends Database
 
 
 	/**
-	 * Auto-generate a FIND_IN_SET() statement
-	 * @param string
-	 * @param string
-	 * @param boolean
-	 * @return string
+	 * {@inheritdoc}
+	 * 
+	 * @param string  $strKey     The field name
+	 * @param mixed   $varSet     The set to find the key in
+	 * @param boolean $blnIsField If true, the set will not be quoted
+	 * 
+	 * @return string The FIND_IN_SET() statement
 	 */
-	protected function find_in_set($strKey, $strSet, $blnIsField=false)
+	protected function find_in_set($strKey, $varSet, $blnIsField=false)
 	{
 		if ($blnIsField)
 		{
-			return "FIND_IN_SET(" . $strKey . ", " . $strSet . ")";
+			return "FIND_IN_SET(" . $strKey . ", " . $varSet . ")";
 		}
 		else
 		{
-			return "FIND_IN_SET(" . $strKey . ", '" . $this->resConnection->real_escape_string($strSet) . "')";
+			return "FIND_IN_SET(" . $strKey . ", '" . $this->resConnection->real_escape_string($varSet) . "')";
 		}
 	}
 

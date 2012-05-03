@@ -93,9 +93,9 @@ class Database_Mssql extends Database
 	 * @param boolean
 	 * @return string
 	 */
-	protected function find_in_set($strKey, $strSet, $blnIsField=false)
+	protected function find_in_set($strKey, $varSet, $blnIsField=false)
 	{
-		$arrSet = trimsplit(',', $strSet);
+		$arrSet = trimsplit(',', $varSet);
 
 		foreach ($arrSet as $k=>$v)
 		{
