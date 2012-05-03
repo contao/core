@@ -5,6 +5,9 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly insert the date picker in the DOM tree (see #4158).
+
+### Fixed
 Open popup windows so they are not blocked (see #4243).
 
 ### Fixed

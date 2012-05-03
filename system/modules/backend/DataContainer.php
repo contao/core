@@ -338,7 +338,6 @@ class DataContainer extends Backend
 			}
 		}
 
-		$datepicker = '';
 		$wizard = '';
 		$strHelpClass = '';
 
@@ -363,7 +362,7 @@ class DataContainer extends Backend
 					break;
 			}
 
-			$datepicker = ' <img src="plugins/datepicker/icon.gif" width="20" height="20" alt="" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px">
+			$wizard .= ' <img src="plugins/datepicker/icon.gif" width="20" height="20" alt="" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px">
   <script>
   window.addEvent("domready", function() {
     new Picker.Date($$("#ctrl_' . $objWidget->id . '"), {
