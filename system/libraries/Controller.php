@@ -926,6 +926,16 @@ abstract class Controller extends System
 		// No resizing required
 		if ($objFile->width == $width && $objFile->height == $height)
 		{
+			if ($target)
+			{
+				// copy if target image not exists or is older than source
+				if (!file_exists(TL_ROOT . '/' . $target) || filemtime(TL_ROOT . '/' . $image) > filemtime(TL_ROOT . '/' . $target)) {
+					$this->import('Files');
+					$this->Files->copy($image, $target);
+				}
+				return $this->urlEncode($target);
+			}
+
 			return $this->urlEncode($image);
 		}
 
