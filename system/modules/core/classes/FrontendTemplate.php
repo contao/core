@@ -277,9 +277,10 @@ class FrontendTemplate extends Template
 
 		$sections = '';
 
+		// Standardize the IDs (thanks to Tsarma) (see #4251)
 		foreach ($this->sections as $k=>$v)
 		{
-			$sections .= "\n" . '<' . $tag . ' id="' . $k . '">' . "\n" . '<div class="inside">' . "\n" . $v . "\n" . '</div>' . "\n" . '</' . $tag . '>' . "\n";
+			$sections .= "\n" . '<' . $tag . ' id="' . standardize($k) . '">' . "\n" . '<div class="inside">' . "\n" . $v . "\n" . '</div>' . "\n" . '</' . $tag . '>' . "\n";
 		}
 
 		if ($sections == '')
