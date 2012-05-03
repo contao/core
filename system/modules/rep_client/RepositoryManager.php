@@ -57,7 +57,7 @@ class RepositoryManager extends RepositoryBackendModule
 <div id="tl_buttons" class="buttonwrapper">
 	'. $theme->createMainButton('dbcheck16', $this->createUrl(array('update'=>'database')), $GLOBALS['TL_LANG']['tl_repository']['updatedatabase']) .'
 </div>
-<p class="tl_empty">SOAP extension not loaded (configure PHP with --enable-soap).</p>';
+<p class="tl_empty">'.$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule'].'</p>';
 		} // if
 		$this->actions = array(
 			//	  act[0]			strTemplate					compiler

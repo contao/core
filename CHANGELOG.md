@@ -5,6 +5,9 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Always check all modules when looking for `runonce.php` files (see #4200).
+
+### Fixed
 Correctly insert the date picker in the DOM tree (see #4158).
 
 ### Fixed

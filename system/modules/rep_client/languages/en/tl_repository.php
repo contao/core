@@ -93,6 +93,7 @@ $GLOBALS['TL_LANG']['tl_repository']['updatehint']         = 'Check the states t
 $GLOBALS['TL_LANG']['tl_repository']['updatingext']        = 'Update %s %s build %s';
 $GLOBALS['TL_LANG']['tl_repository']['validate']           = 'Repair';
 $GLOBALS['TL_LANG']['tl_repository']['validatingext']      = 'Verify/repair %s %s build %s';
+$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule']  = 'SOAP extension not loaded (configure PHP with --enable-soap).';
 
 
 /**

@@ -51,7 +51,8 @@ class RepositoryCatalog extends RepositoryBackendModule
 	public function generate()
 	{
 		if (!extension_loaded('soap')) {
-			return '<p class="tl_empty">SOAP extension not loaded (configure PHP with --enable-soap).</p>';
+			$this->loadLanguageFile('tl_repository');
+			return '<p class="tl_empty">'.$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule'].'</p>';
 		} // if
 		$this->actions = array(
 			//	  act[0]			strTemplate					compiler
