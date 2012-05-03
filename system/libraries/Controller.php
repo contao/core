@@ -958,7 +958,9 @@ abstract class Controller extends System
 			if ($target)
 			{
 				// Return if the target image allready exists
-				if (file_exists(TL_ROOT . '/' . $target) && !$targetForce)
+				if (file_exists(TL_ROOT . '/' . $target) &&
+					filemtime(TL_ROOT . '/' . $image) <= filemtime(TL_ROOT . '/' . $target) &&
+					!$targetForce)
 				{
 					return $this->urlEncode($target);
 				}
