@@ -3515,7 +3515,7 @@ abstract class Controller extends System
 				}
 				else
 				{
-					$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
+					$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
 				}
 			}
 		}

@@ -99,8 +99,8 @@ define('STRICT_MODE', true);
  *   <a href="index.html"<?php echo LINK_NEW_WINDOW_BLUR; ?>>Home</a>
  */
 define('LINK_BLUR', ' onclick="this.blur()"');
-define('LINK_NEW_WINDOW', ' onclick="window.open(this.href);return false"');
-define('LINK_NEW_WINDOW_BLUR', ' onclick="this.blur();window.open(this.href);return false"');
+define('LINK_NEW_WINDOW', ' onclick="return !window.open(this.href)"');
+define('LINK_NEW_WINDOW_BLUR', ' onclick="this.blur();return !window.open(this.href)"');
 
 
 /**

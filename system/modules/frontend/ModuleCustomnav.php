@@ -180,7 +180,7 @@ class ModuleCustomnav extends Module
 					// Override the link target
 					if ($arrPage['type'] == 'redirect' && $arrPage['target'])
 					{
-						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
+						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
 					}
 
 					$items[] = $row;
@@ -205,7 +205,7 @@ class ModuleCustomnav extends Module
 					// Override the link target
 					if ($arrPage['type'] == 'redirect' && $arrPage['target'])
 					{
-						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
+						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
 					}
 
 					$items[] = $row;

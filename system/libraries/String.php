@@ -397,7 +397,7 @@ class String
 			'<u>'              => '<span style="text-decoration:underline">',
 			'</u>'             => '</span>',
 			' target="_self"'  => '',
-			' target="_blank"' => ' onclick="window.open(this.href);return false"'
+			' target="_blank"' => ' onclick="return !window.open(this.href)"'
 		);
 
 		$strString = preg_replace(array_keys($arrPregReplace), array_values($arrPregReplace), $strString);
