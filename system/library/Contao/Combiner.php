@@ -35,8 +35,14 @@ use \File, \System, \Exception;
 class Combiner extends System
 {
 
-	// Constants
+	/**
+	 * The .css file extension
+	 */
 	const CSS = '.css';
+
+	/**
+	 * The .js file extension
+	 */
 	const JS = '.js';
 
 	/**

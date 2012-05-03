@@ -383,8 +383,11 @@ class Database_Updater extends Controller
 				{
 					if ($arrField['inputType'] == 'fileTree')
 					{
-						$key = $arrField['eval']['multiple'] ? 'multiple' : 'single';
-						$arrFields[$key][] = $strTable . '.' . $strField;
+						if ($this->Database->fieldExists($strField, $strTable))
+						{
+							$key = $arrField['eval']['multiple'] ? 'multiple' : 'single';
+							$arrFields[$key][] = $strTable . '.' . $strField;
+						}
 					}
 				}
 			}
