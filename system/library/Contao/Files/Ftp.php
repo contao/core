@@ -16,12 +16,11 @@ use \Files, \Exception;
 
 
 /**
- * Class Files_Ftp
- *
- * Provide methods to modify files and folders via FTP.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Manage files via FTP ("Safe Mode Hack")
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Files_Ftp extends Files
 {
@@ -33,20 +32,20 @@ class Files_Ftp extends Files
 	protected $resConnection;
 
 	/**
-	 * Is connected
+	 * Connection indicator
 	 * @var boolean
 	 */
 	protected $blnIsConnected = false;
 
 	/**
-	 * Files array
+	 * Files
 	 * @var array
 	 */
 	protected $arrFiles = array();
 
 
 	/**
-	 * Disconnect from ftp server
+	 * Disconnect from FTP server
 	 */
 	public function __destruct()
 	{
@@ -59,6 +58,7 @@ class Files_Ftp extends Files
 
 	/**
 	 * Establish an FTP connection
+	 * 
 	 * @throws \Exception
 	 */
 	public function connect()
@@ -106,8 +106,10 @@ class Files_Ftp extends Files
 
 	/**
 	 * Create a directory
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strDirectory The directory name
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function mkdir($strDirectory)
 	{
@@ -122,8 +124,10 @@ class Files_Ftp extends Files
 
 	/**
 	 * Remove a directory
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strDirectory The directory name
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function rmdir($strDirectory)
 	{
@@ -136,9 +140,11 @@ class Files_Ftp extends Files
 
 	/**
 	 * Open a file and return the handle
-	 * @param string
-	 * @param string
-	 * @return resource|boolean
+	 * 
+	 * @param string $strFile The file name
+	 * @param string $strMode The operation mode
+	 * 
+	 * @return resource|boolean The file handle or false if there was an error
 	 */
 	public function fopen($strFile, $strMode)
 	{
@@ -165,9 +171,11 @@ class Files_Ftp extends Files
 
 	/**
 	 * Write content to a file
-	 * @param string
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param resource $resFile    The file handle
+	 * @param string   $strContent The content to store in the file
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function fputs($resFile, $strContent)
 	{
@@ -176,9 +184,11 @@ class Files_Ftp extends Files
 
 
 	/**
-	 * Close a file
-	 * @param resource
-	 * @return boolean
+	 * Close a file handle
+	 * 
+	 * @param resource $resFile The file handle
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function fclose($resFile)
 	{
@@ -202,9 +212,11 @@ class Files_Ftp extends Files
 
 	/**
 	 * Rename a file or folder
-	 * @param string
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strOldName The old name
+	 * @param string $strNewName The new name
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function rename($strOldName, $strNewName)
 	{
@@ -251,9 +263,11 @@ class Files_Ftp extends Files
 
 	/**
 	 * Copy a file or folder
-	 * @param string
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strSource      The source file or folder
+	 * @param string $strDestination The new file or folder path
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function copy($strSource, $strDestination)
 	{
@@ -268,8 +282,10 @@ class Files_Ftp extends Files
 
 	/**
 	 * Delete a file
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strFile The file name
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function delete($strFile)
 	{
@@ -282,9 +298,11 @@ class Files_Ftp extends Files
 
 	/**
 	 * Change the file mode
-	 * @param string
-	 * @param mixed
-	 * @return boolean
+	 * 
+	 * @param string $strFile The file name
+	 * @param mixed  $varMode The new file mode
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function chmod($strFile, $varMode)
 	{
@@ -297,8 +315,10 @@ class Files_Ftp extends Files
 
 	/**
 	 * Check whether a file is writeable
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strFile The file name
+	 * 
+	 * @return boolean True if the file is writeable
 	 */
 	public function is_writeable($strFile)
 	{
@@ -307,10 +327,12 @@ class Files_Ftp extends Files
 
 
 	/**
-	 * Move an uploaded file to another folder
-	 * @param string
-	 * @param string
-	 * @return boolean
+	 * Move an uploaded file to a folder
+	 * 
+	 * @param string $strSource      The source file
+	 * @param string $strDestination The new file path
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function move_uploaded_file($strSource, $strDestination)
 	{

@@ -17,18 +17,37 @@ use \Model_Collection, \Model_QueryBuilder, \System, \Exception;
 
 
 /**
- * Class Model
- *
- * Provide active record and a bit of ORM functionality.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Reads objects from and writes them to to the database
+ * 
+ * The class allows you to find and automatically join database records and to
+ * convert the result into objects. It also supports creating new objects and
+ * persisting them in the database.
+ * 
+ * Usage:
+ * 
+ *     // Write
+ *     $user = new UserModel();
+ *     $user->name = 'Leo Feyer';
+ *     $user->city = 'Wuppertal';
+ *     $user->save();
+ * 
+ *     // Read
+ *     $user = UserModel::findByCity('Wuppertal');
+ * 
+ *     while ($user->next())
+ *     {
+ *         echo $user->name;
+ *     }
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 abstract class Model extends System
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable;
@@ -40,7 +59,7 @@ abstract class Model extends System
 	protected static $strPk = 'id';
 
 	/**
-	 * Data array
+	 * Data
 	 * @var array
 	 */
 	protected $arrData = array();
@@ -60,7 +79,8 @@ abstract class Model extends System
 
 	/**
 	 * Load the relations and optionally process a result set
-	 * @param \Database_Result
+	 * 
+	 * @param \Database_Result $objResult An optional database result
 	 */
 	public function __construct(Database_Result $objResult=null)
 	{
@@ -97,7 +117,7 @@ abstract class Model extends System
 
 
 	/**
-	 * Unset the primary key if an object is cloned
+	 * Unset the primary key when cloning an object
 	 */
 	public function __clone()
 	{
@@ -107,8 +127,9 @@ abstract class Model extends System
 
 	/**
 	 * Set an object property
-	 * @param string
-	 * @param mixed
+	 * 
+	 * @param string $strKey   The property name
+	 * @param mixed  $varValue The property value
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -118,8 +139,10 @@ abstract class Model extends System
 
 	/**
 	 * Return an object property
-	 * @param string
-	 * @return mixed|null
+	 * 
+	 * @param string $strKey The property key
+	 * 
+	 * @return mixed|null The property value or null
 	 */
 	public function __get($strKey)
 	{
@@ -134,8 +157,10 @@ abstract class Model extends System
 
 	/**
 	 * Check whether a property is set
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strKey The property key
+	 * 
+	 * @return boolean True if the property is set
 	 */
 	public function __isset($strKey)
 	{
@@ -145,7 +170,8 @@ abstract class Model extends System
 
 	/**
 	 * Return the current record as associative array
-	 * @return array
+	 * 
+	 * @return array The data record
 	 */
 	public function row()
 	{
@@ -155,8 +181,10 @@ abstract class Model extends System
 
 	/**
 	 * Set the current record from an array
-	 * @param array
-	 * @return \Model
+	 * 
+	 * @param array $arrData The data record
+	 * 
+	 * @return \Model The model object
 	 */
 	public function setRow(Array $arrData)
 	{
@@ -166,9 +194,11 @@ abstract class Model extends System
 
 
 	/**
-	 * Save the current record and return the number of affected rows or the last insert ID
-	 * @param boolean
-	 * @return \Model
+	 * Save the current record
+	 * 
+	 * @param boolean $blnForceInsert Force creating a new record
+	 * 
+	 * @return \Model The model object
 	 */
 	public function save($blnForceInsert=false)
 	{
@@ -198,8 +228,10 @@ abstract class Model extends System
 
 	/**
 	 * Modify the current row before it is stored in the database
-	 * @param array
-	 * @return array
+	 * 
+	 * @param array $arrSet The data array
+	 * 
+	 * @return array The modified data array
 	 */
 	protected function preSave(Array $arrSet)
 	{
@@ -209,7 +241,8 @@ abstract class Model extends System
 
 	/**
 	 * Delete the current record and return the number of affected rows
-	 * @return integer
+	 * 
+	 * @return integer The number of affected rows
 	 */
 	public function delete()
 	{
@@ -221,8 +254,11 @@ abstract class Model extends System
 
 	/**
 	 * Lazy load related records
-	 * @param string
-	 * @return \Model|\Model_Collection
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return \Model|\Model_Collection The model or a model collection if there are multiple rows
+	 * 
 	 * @throws \Exception
 	 */
 	public function getRelated($strKey)
@@ -262,9 +298,11 @@ abstract class Model extends System
 
 	/**
 	 * Find a single record by its primary key
-	 * @param mixed
-	 * @param array
-	 * @return \Model|null
+	 * 
+	 * @param mixed $varValue   The property value
+	 * @param array $arrOptions An optional options array
+	 * 
+	 * @return \Model|null The model or null if the result is empty
 	 */
 	public static function findByPk($varValue, Array $arrOptions=array())
 	{
@@ -281,9 +319,11 @@ abstract class Model extends System
 
 	/**
 	 * Find a single record by its ID or alias
-	 * @param mixed
-	 * @param array
-	 * @return \Model|null
+	 * 
+	 * @param mixed $varId      The ID or alias
+	 * @param array $arrOptions An optional options array
+	 * 
+	 * @return \Model|null The model or null if the result is empty
 	 */
 	public static function findByIdOrAlias($varId, Array $arrOptions=array())
 	{
@@ -302,10 +342,12 @@ abstract class Model extends System
 
 	/**
 	 * Find a single record by various criteria
-	 * @param mixed
-	 * @param mixed
-	 * @param array
-	 * @return \Model|null
+	 * 
+	 * @param mixed $strColumn  The property name
+	 * @param mixed $varValue   The property value
+	 * @param array $arrOptions An optional options array
+	 * 
+	 * @return \Model|null The model or null if the result is empty
 	 */
 	public static function findOneBy($strColumn, $varValue, Array $arrOptions=array())
 	{
@@ -322,10 +364,12 @@ abstract class Model extends System
 
 	/**
 	 * Find records by various criteria
-	 * @param mixed
-	 * @param mixed
-	 * @param array
-	 * @return \Model_Collection|null
+	 * 
+	 * @param mixed $strColumn  The property name
+	 * @param mixed $varValue   The property value
+	 * @param array $arrOptions An optional options array
+	 * 
+	 * @return \Model_Collection|null The model collection or null if the result is empty
 	 */
 	public static function findBy($strColumn, $varValue, Array $arrOptions=array())
 	{
@@ -341,8 +385,10 @@ abstract class Model extends System
 
 	/**
 	 * Find all records
-	 * @param array
-	 * @return \Model_Collection|null
+	 * 
+	 * @param array $arrOptions An optional options array
+	 * 
+	 * @return \Model_Collection|null The model collection or null if the result is empty
 	 */
 	public static function findAll(Array $arrOptions=array())
 	{
@@ -351,10 +397,12 @@ abstract class Model extends System
 
 
 	/**
-	 * Magic method to call $this->findByName() instead of $this->findBy('name')
-	 * @param string
-	 * @param array
-	 * @return mixed|null
+	 * Magic method to map Model::findByName() to Model::findBy('name')
+	 * 
+	 * @param string $name The method name
+	 * @param array  $args The passed arguments
+	 * 
+	 * @return \Model|\Model_Collection|null A model, model collection or null if the result is empty
 	 */
 	public static function __callStatic($name, $args)
 	{
@@ -373,8 +421,10 @@ abstract class Model extends System
 
 	/**
 	 * Find records and return the model or model collection
-	 * @param array
-	 * @return \Model|\Model_Collection|null
+	 * 
+	 * @param array $arrOptions The options array
+	 * 
+	 * @return \Model|\Model_Collection|null A model, model collection or null if the result is empty
 	 */
 	protected static function find(Array $arrOptions)
 	{
@@ -418,9 +468,11 @@ abstract class Model extends System
 
 
 	/**
-	 * Modify the statement before it is executed
-	 * @param \Database_Statement
-	 * @return \Database_Statement
+	 * Modify the database statement before it is executed
+	 * 
+	 * @param \Database_Statement $objStatement The database statement object
+	 * 
+	 * @return \Database_Statement The database statement object
 	 */
 	protected static function preFind(Database_Statement $objStatement)
 	{
@@ -429,9 +481,11 @@ abstract class Model extends System
 
 
 	/**
-	 * Modify the result set before the model is created
-	 * @param \Database_Result
-	 * @return \Database_Result
+	 * Modify the database result before the model is created
+	 * 
+	 * @param \Database_Result $objResult The database result object
+	 * 
+	 * @return \Database_Result The database result object
 	 */
 	protected static function postFind(Database_Result $objResult)
 	{
@@ -441,9 +495,11 @@ abstract class Model extends System
 
 	/**
 	 * Return the number of records matching certain criteria
-	 * @param mixed
-	 * @param mixed
-	 * @return integer
+	 * 
+	 * @param mixed $strColumn An optional property name
+	 * @param mixed $varValue  An optional property value
+	 * 
+	 * @return integer The number of matching rows
 	 */
 	public static function countBy($strColumn=null, $varValue=null)
 	{
@@ -465,7 +521,8 @@ abstract class Model extends System
 
 	/**
 	 * Return the total number of rows
-	 * @return integer
+	 * 
+	 * @return integer The total number of rows
 	 */
 	public static function countAll()
 	{

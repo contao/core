@@ -16,20 +16,24 @@ use \DcaExtractor;
 
 
 /**
- * Class Model_QueryBuilder
- *
- * Provide methods to built queries and join tables if neccessary.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Turn relations into query string
+ * 
+ * The class reads the relation meta data from the DCA and creates the necessary
+ * JOIN queries to retrieve an object from the database.
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Model_QueryBuilder
 {
 
 	/**
 	 * Build a query based on the given options
-	 * @param array
-	 * @return string
+	 * 
+	 * @param array $arrOptions The options array
+	 * 
+	 * @return string The query string
 	 */
 	public static function find($arrOptions)
 	{
@@ -87,8 +91,10 @@ class Model_QueryBuilder
 
 	/**
 	 * Build a query based on the given options to count the number of records
-	 * @param array
-	 * @return string
+	 * 
+	 * @param array $arrOptions The options array
+	 * 
+	 * @return string The query string
 	 */
 	public static function count($arrOptions)
 	{

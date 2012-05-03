@@ -16,18 +16,20 @@ use \Database_Result, \System, \Exception;
 
 
 /**
- * Class Model_Collection
- *
- * Provide methods to handle multiple models.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Handles a set models
+ * 
+ * The class handles traversing a set of models and lazy loads the database
+ * result rows upon their first usage.
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Model_Collection extends System
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected $strTable;
@@ -51,16 +53,17 @@ class Model_Collection extends System
 	protected $blnDone = false;
 
 	/**
-	 * Models array
+	 * Models
 	 * @var array
 	 */
 	protected $arrModels = array();
 
 
 	/**
-	 * Store the database result
-	 * @param \Database_Result
-	 * @param string
+	 * Store the database result and table name
+	 * 
+	 * @param \Database_Result $objResult The database result object
+	 * @param string           $strTable  The table name
 	 */
 	public function __construct(Database_Result $objResult, $strTable)
 	{
@@ -72,8 +75,9 @@ class Model_Collection extends System
 
 	/**
 	 * Set an object property
-	 * @param string
-	 * @param mixed
+	 * 
+	 * @param string $strKey   The property name
+	 * @param mixed  $varValue The property value
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -88,8 +92,10 @@ class Model_Collection extends System
 
 	/**
 	 * Return an object property
-	 * @param string
-	 * @return mixed|null
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return mixed|null The property value or null
 	 */
 	public function __get($strKey)
 	{
@@ -109,8 +115,10 @@ class Model_Collection extends System
 
 	/**
 	 * Check whether a property is set
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return boolean True if the property is set
 	 */
 	public function __isset($strKey)
 	{
@@ -124,8 +132,9 @@ class Model_Collection extends System
 
 
 	/**
-	 * Return the current row
-	 * @return array
+	 * Return the current row as associative array
+	 * 
+	 * @return array The current row as array
 	 */
 	public function row()
 	{
@@ -139,9 +148,11 @@ class Model_Collection extends System
 
 
 	/**
-	 * Set the current record from an array
-	 * @param array
-	 * @return \Model_Collection
+	 * Set the current row from an array
+	 * 
+	 * @param array $arrData The row data as array
+	 * 
+	 * @return \Model_Collection The model collection object
 	 */
 	public function setRow(Array $arrData)
 	{
@@ -157,7 +168,8 @@ class Model_Collection extends System
 
 	/**
 	 * Save the current model
-	 * @return \Model_Collection
+	 * 
+	 * @return \Model_Collection The model collection object
 	 */
 	public function save()
 	{
@@ -173,7 +185,8 @@ class Model_Collection extends System
 
 	/**
 	 * Delete the current model and return the number of affected rows
-	 * @return integer
+	 * 
+	 * @return integer The number of affected rows
 	 */
 	public function delete()
 	{
@@ -188,8 +201,10 @@ class Model_Collection extends System
 
 	/**
 	 * Lazy load related records
-	 * @param string
-	 * @return \Model|\Model_Collection
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return \Model|\Model_Collection The model or a model collection if there are multiple rows
 	 */
 	public function getRelated($strKey)
 	{
@@ -203,8 +218,9 @@ class Model_Collection extends System
 
 
 	/**
-	 * Return the number of rows
-	 * @return integer
+	 * Return the number of rows in the result set
+	 * 
+	 * @return integer The number of rows
 	 */
 	public function count()
 	{
@@ -214,7 +230,8 @@ class Model_Collection extends System
 
 	/**
 	 * Go to the first row
-	 * @return \Model_Collection
+	 * 
+	 * @return \Model_Collection The model collection object
 	 */
 	public function first()
 	{
@@ -230,7 +247,8 @@ class Model_Collection extends System
 
 	/**
 	 * Go to the previous row
-	 * @return \Model_Collection
+	 * 
+	 * @return \Model_Collection|false The model collection object or false if there is no previous row
 	 */
 	public function prev()
 	{
@@ -246,7 +264,8 @@ class Model_Collection extends System
 
 	/**
 	 * Return the current model
-	 * @return \Model
+	 * 
+	 * @return \Model The model object
 	 */
 	public function current()
 	{
@@ -261,7 +280,8 @@ class Model_Collection extends System
 
 	/**
 	 * Go to the next row
-	 * @return \Model_Collection|boolean
+	 * 
+	 * @return \Model_Collection|boolean The model collection object or false if there is no next row
 	 */
 	public function next()
 	{
@@ -286,7 +306,8 @@ class Model_Collection extends System
 
 	/**
 	 * Go to the last row
-	 * @return \Model_Collection
+	 * 
+	 * @return \Model_Collection The model collection object
 	 */
 	public function last()
 	{
@@ -303,7 +324,8 @@ class Model_Collection extends System
 
 	/**
 	 * Reset the model
-	 * @return \Model_Collection
+	 * 
+	 * @return \Model_Collection The model collection object
 	 */
 	public function reset()
 	{
@@ -315,9 +337,10 @@ class Model_Collection extends System
 
 	/**
 	 * Fetch a column of each row
-	 * @param string
-	 * @return array
-	 * @throws \Exception
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return array An array with all property values
 	 */
 	public function fetchEach($strKey)
 	{
@@ -335,7 +358,8 @@ class Model_Collection extends System
 
 	/**
 	 * Fetch the next result row and create the model
-	 * @return boolean
+	 * 
+	 * @return boolean True if there was another row
 	 */
 	protected function fetchNext()
 	{

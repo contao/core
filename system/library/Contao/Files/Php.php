@@ -16,20 +16,21 @@ use \Files;
 
 
 /**
- * Class Files_Php
- *
- * Provide methods to modify files and folders.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Manage files with the PHP functions
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Files_Php extends Files
 {
 
 	/**
 	 * Create a directory
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strDirectory The directory name
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function mkdir($strDirectory)
 	{
@@ -40,8 +41,10 @@ class Files_Php extends Files
 
 	/**
 	 * Remove a directory
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strDirectory The directory name
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function rmdir($strDirectory)
 	{
@@ -52,9 +55,11 @@ class Files_Php extends Files
 
 	/**
 	 * Open a file and return the handle
-	 * @param string
-	 * @param string
-	 * @return resource
+	 * 
+	 * @param string $strFile The file name
+	 * @param string $strMode The operation mode
+	 * 
+	 * @return resource The file handle
 	 */
 	public function fopen($strFile, $strMode)
 	{
@@ -65,9 +70,11 @@ class Files_Php extends Files
 
 	/**
 	 * Write content to a file
-	 * @param string
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param resource $resFile    The file handle
+	 * @param string   $strContent The content to store in the file
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function fputs($resFile, $strContent)
 	{
@@ -76,9 +83,11 @@ class Files_Php extends Files
 
 
 	/**
-	 * Close a file
-	 * @param resource
-	 * @return boolean
+	 * Close a file handle
+	 * 
+	 * @param resource $resFile The file handle
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function fclose($resFile)
 	{
@@ -88,9 +97,11 @@ class Files_Php extends Files
 
 	/**
 	 * Rename a file or folder
-	 * @param string
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strOldName The old name
+	 * @param string $strNewName The new name
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function rename($strOldName, $strNewName)
 	{
@@ -121,9 +132,11 @@ class Files_Php extends Files
 
 	/**
 	 * Copy a file or folder
-	 * @param string
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strSource      The source file or folder
+	 * @param string $strDestination The new file or folder path
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function copy($strSource, $strDestination)
 	{
@@ -134,8 +147,10 @@ class Files_Php extends Files
 
 	/**
 	 * Delete a file
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strFile The file name
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function delete($strFile)
 	{
@@ -145,10 +160,12 @@ class Files_Php extends Files
 
 
 	/**
-	 * Change file mode
-	 * @param string
-	 * @param mixed
-	 * @return boolean
+	 * Change the file mode
+	 * 
+	 * @param string $strFile The file name
+	 * @param mixed  $varMode The new file mode
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function chmod($strFile, $varMode)
 	{
@@ -159,8 +176,10 @@ class Files_Php extends Files
 
 	/**
 	 * Check whether a file is writeable
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strFile The file name
+	 * 
+	 * @return boolean True if the file is writeable
 	 */
 	public function is_writeable($strFile)
 	{
@@ -170,10 +189,12 @@ class Files_Php extends Files
 
 
 	/**
-	 * Move an uploaded file to another folder
-	 * @param string
-	 * @param string
-	 * @return boolean
+	 * Move an uploaded file to a folder
+	 * 
+	 * @param string $strSource      The source file
+	 * @param string $strDestination The new file path
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function move_uploaded_file($strSource, $strDestination)
 	{
