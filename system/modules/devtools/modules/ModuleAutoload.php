@@ -173,7 +173,7 @@ class ModuleAutoload extends BackendModule
  * 
  * Copyright (C) 2005-$intYear Leo Feyer
  * 
- * @package Library
+ * @package $strPackage
  * @link    http://www.contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
@@ -285,7 +285,7 @@ EOT
  * 
  * Copyright (C) 2005-$intYear Leo Feyer
  * 
- * @package Library
+ * @package Core
  * @link    http://www.contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
