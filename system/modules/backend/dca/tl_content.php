@@ -263,9 +263,8 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'radioTable',
 			'options'                 => array('above', 'left', 'right', 'below'),
-			'eval'                    => array('cols'=>4),
-			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('cols'=>4, 'tl_class'=>'w50'),
+			'reference'               => &$GLOBALS['TL_LANG']['MSC']
 		),
 		'html' => array
 		(
