@@ -999,7 +999,7 @@ class StyleSheets extends Backend
 		// CSS3PIE
 		if ($blnNeedsPie)
 		{
-			$return .= $lb . 'behavior:url(\'plugins/css3pie/PIE.htc\');';
+			$return .= $lb . 'behavior:url(\'' . TL_PATH . '/plugins/css3pie/PIE.htc\');';
 		}
 
 		// Custom code
