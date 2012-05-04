@@ -16,25 +16,34 @@ use \Environment, \Idna, \String, \System, \Exception;
 
 
 /**
- * Class Email
- *
- * Provide methodes to send e-mails.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * A SwiftMailer adapter class
+ * 
+ * The class functions as an adapter for the Swift mailer framework. It can be
+ * used to send e-mails via the PHP mail function or an SMTP server.
+ * 
+ * Usage:
+ * 
+ *     $email = new Email();
+ *     $email->subject = 'Hello';
+ *     $email->text = 'Is it me you are looking for?';
+ *     $email->sendTo('lionel@richie.com');
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Email extends System
 {
 
 	/**
 	 * Mailer object
-	 * @var Email
+	 * @var \Email
 	 */
 	protected static $objMailer;
 
 	/**
 	 * Message object
-	 * @var Swift_Message
+	 * @var \Swift_Message
 	 */
 	protected $objMessage;
 
@@ -99,14 +108,14 @@ class Email extends System
 	protected $arrFailures = array();
 
 	/**
-	 * Log file
+	 * Log file name
 	 * @var string
 	 */
 	protected $strLogFile = 'email.log';
 
 
 	/**
-	 * Instantiate object and load Swift plugin
+	 * Instantiate the object and load the mailer framework
 	 */
 	public function __construct()
 	{
@@ -150,8 +159,10 @@ class Email extends System
 
 	/**
 	 * Set an object property
-	 * @param string
-	 * @param mixed
+	 * 
+	 * @param string $strKey   The property name
+	 * @param mixed  $varValue The property value
+	 * 
 	 * @throws \Exception
 	 */
 	public function __set($strKey, $varValue)
@@ -229,8 +240,10 @@ class Email extends System
 
 	/**
 	 * Return an object property
-	 * @param string
-	 * @return mixed
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return mixed The property value
 	 */
 	public function __get($strKey)
 	{
@@ -287,7 +300,8 @@ class Email extends System
 
 	/**
 	 * Return true if there are failures
-	 * @return boolean
+	 * 
+	 * @return boolean True if there are failures
 	 */
 	public function hasFailures()
 	{
@@ -297,8 +311,9 @@ class Email extends System
 
 	/**
 	 * Add a custom text header
-	 * @param string
-	 * @param string
+	 * 
+	 * @param string $strKey   The header name
+	 * @param string $strValue The header value
 	 */
 	public function addHeader($strKey, $strValue)
 	{
@@ -307,9 +322,10 @@ class Email extends System
 
 
 	/**
-	 * Get CC e-mail addresses from an array, string or unlimited number of arguments
+	 * Add CC e-mail addresses
 	 *
-	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed.
+	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed. The
+	 * method takes an unlimited number of recipient addresses.
 	 */
 	public function sendCc()
 	{
@@ -318,9 +334,10 @@ class Email extends System
 
 
 	/**
-	 * Get BCC e-mail addresses from an array, string or unlimited number of arguments
+	 * Add BCC e-mail addresses
 	 *
-	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed.
+	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed. The
+	 * method takes an unlimited number of recipient addresses.
 	 */
 	public function sendBcc()
 	{
@@ -329,9 +346,10 @@ class Email extends System
 
 
 	/**
-	 * Get ReplyTo e-mail addresses from an array, string or unlimited number of arguments
+	 * Add ReplyTo e-mail addresses
 	 *
-	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed.
+	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed. The
+	 * method takes an unlimited number of recipient addresses.
 	 */
 	public function replyTo()
 	{
@@ -341,8 +359,9 @@ class Email extends System
 
 	/**
 	 * Attach a file
-	 * @param string
-	 * @param string
+	 * 
+	 * @param string $strFile The file path
+	 * @param string $strMime The MIME type (defaults to "application/octet-stream")
 	 */
 	public function attachFile($strFile, $strMime='application/octet-stream')
 	{
@@ -352,9 +371,10 @@ class Email extends System
 
 	/**
 	 * Attach a file from a string
-	 * @param string
-	 * @param string
-	 * @param string
+	 * 
+	 * @param string $strContent  The file content
+	 * @param string $strFilename The file name
+	 * @param string $strMime     The MIME type (defaults to "application/octet-stream")
 	 */
 	public function attachFileFromString($strContent, $strFilename, $strMime='application/octet-stream')
 	{
@@ -363,10 +383,12 @@ class Email extends System
 
 
 	/**
-	 * Get e-mail addresses from an array, string or unlimited number of arguments and send the e-mail
+	 * Send the e-mail
 	 *
-	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed.
-	 * @return boolean
+	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed. The
+	 * method takes an unlimited number of recipient addresses.
+	 * 
+	 * @return boolean True if the e-mail was sent successfully
 	 */
 	public function sendTo()
 	{
@@ -489,9 +511,11 @@ class Email extends System
 
 
 	/**
-	 * Compile e-mail addresses from an array of (different) arguments
-	 * @param array
-	 * @return array
+	 * Extract the e-mail addresses from the func_get_args() arguments
+	 * 
+	 * @param array $arrRecipients The recipients array
+	 * 
+	 * @return array An array of e-mail addresses
 	 */
 	protected function compileRecipients($arrRecipients)
 	{

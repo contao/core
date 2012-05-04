@@ -16,21 +16,33 @@ use \System, \Exception;
 
 
 /**
- * Class Date
- *
- * Provide methods to handle different date formats.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Convert dates and format string
+ * 
+ * The class converts arbitrary date strings to Unix timestamps and provides
+ * extended information like the begin or end of the day, week, month or year. 
+ * 
+ * Usage:
+ * 
+ *     $date = new Date();
+ *     echo $date->datim;
+ * 
+ *     $date = new Date('2011-09-18', 'Y-m-d');
+ *     echo $date->monthBegin;
+ * 
+ *     Date::formatToJs('m/d/Y H:i');
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Date extends System
 {
 
 	/**
-	 * Timestamp
+	 * Date string
 	 * @var int
 	 */
-	protected $intTstamp;
+	protected $strDate;
 
 	/**
 	 * Format string
@@ -39,59 +51,60 @@ class Date extends System
 	protected $strFormat;
 
 	/**
-	 * Date
+	 * Formatted date
 	 * @var string
 	 */
-	protected $strDate;
+	protected $strToDate;
 
 	/**
-	 * Time
+	 * Formatted time
 	 * @var string
 	 */
-	protected $strTime;
+	protected $strToTime;
 
 	/**
-	 * Date and time
+	 * Formatted date and time
 	 * @var string
 	 */
-	protected $strDatim;
+	protected $strToDatim;
 
 	/**
-	 * Date range array
+	 * Date range
 	 * @var array
 	 */
 	protected $arrRange = array();
 
 
 	/**
-	 * Create object properties and date ranges
-	 * @param integer
-	 * @param string
+	 * Create the object properties and date ranges
+	 * 
+	 * @param integer $strDate   An optional date string
+	 * @param string  $strFormat An optional format string
 	 */
-	public function __construct($intTstamp=null, $strFormat=null)
+	public function __construct($strDate=null, $strFormat=null)
 	{
-		$this->intTstamp = $intTstamp ?: time();
+		$this->strDate = $strDate ?: time();
 		$this->strFormat = $strFormat ?: $GLOBALS['TL_CONFIG']['dateFormat'];
 
-		if (!preg_match('/^\-?[0-9]+$/', $this->intTstamp) || preg_match('/^[a-zA-Z]+$/', $this->strFormat))
+		if (!preg_match('/^\-?[0-9]+$/', $this->strDate) || preg_match('/^[a-zA-Z]+$/', $this->strFormat))
 		{
 			$this->dateToUnix();
 		}
 
-		// Create dates
-		$this->strDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->intTstamp);
-		$this->strTime = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $this->intTstamp);
-		$this->strDatim = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $this->intTstamp);
+		// Create the formatted dates
+		$this->strToDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->strDate);
+		$this->strToTime = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $this->strDate);
+		$this->strToDatim = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $this->strDate);
 
-		$intYear = date('Y', $this->intTstamp);
-		$intMonth = date('m', $this->intTstamp);
-		$intDay = date('d', $this->intTstamp);
+		$intYear = date('Y', $this->strDate);
+		$intMonth = date('m', $this->strDate);
+		$intDay = date('d', $this->strDate);
 
-		// Create ranges
+		// Create the date ranges
 		$this->arrRange['day']['begin'] = mktime(0, 0, 0, $intMonth, $intDay, $intYear);
 		$this->arrRange['day']['end'] = mktime(23, 59, 59, $intMonth, $intDay, $intYear);
 		$this->arrRange['month']['begin'] = mktime(0, 0, 0, $intMonth, 1, $intYear);
-		$this->arrRange['month']['end'] = mktime(23, 59, 59, $intMonth, date('t', $this->intTstamp), $intYear);
+		$this->arrRange['month']['end'] = mktime(23, 59, 59, $intMonth, date('t', $this->strDate), $intYear);
 		$this->arrRange['year']['begin'] = mktime(0, 0, 0, 1, 1, $intYear);
 		$this->arrRange['year']['end'] = mktime(23, 59, 59, 12, 31, $intYear);
 	}
@@ -99,8 +112,10 @@ class Date extends System
 
 	/**
 	 * Return an object property
-	 * @param string
-	 * @return mixed
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return mixed The property value
 	 */
 	public function __get($strKey)
 	{
@@ -108,19 +123,19 @@ class Date extends System
 		{
 			case 'tstamp':
 			case 'timestamp':
-				return $this->intTstamp;
-				break;
-
-			case 'date':
 				return $this->strDate;
 				break;
 
+			case 'date':
+				return $this->strToDate;
+				break;
+
 			case 'time':
-				return $this->strTime;
+				return $this->strToTime;
 				break;
 
 			case 'datim':
-				return $this->strDatim;
+				return $this->strToDatim;
 				break;
 
 			case 'dayBegin':
@@ -158,26 +173,30 @@ class Date extends System
 
 	/**
 	 * Return the begin of the week as timestamp
-	 * @param integer
-	 * @return integer
+	 * 
+	 * @param integer $intStartDay The week start day
+	 * 
+	 * @return integer The Unix timestamp
 	 */
 	public function getWeekBegin($intStartDay=0)
 	{
-		$intOffset = date('w', $this->intTstamp) - $intStartDay;
+		$intOffset = date('w', $this->strDate) - $intStartDay;
 
 		if ($intOffset < 0)
 		{
 			$intOffset += 7;
 		}
 
-		return strtotime('-' . $intOffset . ' days', $this->intTstamp);
+		return strtotime('-' . $intOffset . ' days', $this->strDate);
 	}
 
 
 	/**
 	 * Return the end of the week as timestamp
-	 * @param integer
-	 * @return integer
+	 * 
+	 * @param integer $intStartDay The week start day
+	 * 
+	 * @return integer The Unix timestamp
 	 */
 	public function getWeekEnd($intStartDay=0)
 	{
@@ -187,8 +206,11 @@ class Date extends System
 
 	/**
 	 * Return a regular expression to check a date
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string $strFormat An optional format string
+	 * 
+	 * @return string The regular expression string
+	 * 
 	 * @throws \Exception
 	 */
 	public function getRegexp($strFormat=null)
@@ -203,44 +225,40 @@ class Date extends System
 			throw new Exception(sprintf('Invalid date format "%s"', $strFormat));
 		}
 
-		return preg_replace_callback('/[a-zA-Z]/', array(&$this, 'getRegexpCallback'), preg_quote($strFormat));
-	}
-
-
-	/**
-	 * Callback function for getRegexp
-	 * @param array
-	 * @return string
-	 */
-	protected function getRegexpCallback($matches)
-	{
-		// Thanks to Christian Labuda
-		$arrRegexp = array
-		(
-			'a' => '(?P<a>am|pm)',
-			'A' => '(?P<A>AM|PM)',
-			'd' => '(?P<d>0[1-9]|[12][0-9]|3[01])',
-			'g' => '(?P<g>[1-9]|1[0-2])',
-			'G' => '(?P<G>[0-9]|1[0-9]|2[0-3])',
-			'h' => '(?P<h>0[1-9]|1[0-2])',
-			'H' => '(?P<H>[01][0-9]|2[0-3])',
-			'i' => '(?P<i>[0-5][0-9])',
-			'j' => '(?P<j>[1-9]|[12][0-9]|3[01])',
-			'm' => '(?P<m>0[1-9]|1[0-2])',
-			'n' => '(?P<n>[1-9]|1[0-2])',
-			's' => '(?P<s>[0-5][0-9])',
-			'Y' => '(?P<Y>[0-9]{4})',
-			'y' => '(?P<y>[0-9]{2})',
-		);
-
-		return isset($arrRegexp[$matches[0]]) ? $arrRegexp[$matches[0]] : $matches[0];
+		return preg_replace_callback('/[a-zA-Z]/', function($matches)
+			{
+				// Thanks to Christian Labuda
+				$arrRegexp = array
+				(
+					'a' => '(?P<a>am|pm)',
+					'A' => '(?P<A>AM|PM)',
+					'd' => '(?P<d>0[1-9]|[12][0-9]|3[01])',
+					'g' => '(?P<g>[1-9]|1[0-2])',
+					'G' => '(?P<G>[0-9]|1[0-9]|2[0-3])',
+					'h' => '(?P<h>0[1-9]|1[0-2])',
+					'H' => '(?P<H>[01][0-9]|2[0-3])',
+					'i' => '(?P<i>[0-5][0-9])',
+					'j' => '(?P<j>[1-9]|[12][0-9]|3[01])',
+					'm' => '(?P<m>0[1-9]|1[0-2])',
+					'n' => '(?P<n>[1-9]|1[0-2])',
+					's' => '(?P<s>[0-5][0-9])',
+					'Y' => '(?P<Y>[0-9]{4})',
+					'y' => '(?P<y>[0-9]{2})',
+				);
+	
+				return isset($arrRegexp[$matches[0]]) ? $arrRegexp[$matches[0]] : $matches[0];
+			}
+		, preg_quote($strFormat));
 	}
 
 
 	/**
 	 * Return an input format string for a particular date (e.g. YYYY-MM-DD)
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string $strFormat An optional format string
+	 * 
+	 * @return string The input format string
+	 * 
 	 * @throws \Exception
 	 */
 	public function getInputFormat($strFormat=null)
@@ -292,7 +310,8 @@ class Date extends System
 
 
 	/**
-	 * Convert a date string into a UNIX timestamp using a particular date format
+	 * Convert a date string into a Unix timestamp using the format string
+	 * 
 	 * @throws \Exception
 	 */
 	protected function dateToUnix()
@@ -340,7 +359,7 @@ class Date extends System
 				case 'a':
 				case 'A':
 					$blnCorrectHour = true;
-					$blnMeridiem = (strtolower(substr($this->intTstamp, $intCount, 2)) == 'pm') ? true : false;
+					$blnMeridiem = (strtolower(substr($this->strDate, $intCount, 2)) == 'pm') ? true : false;
 					$intCount += 2;
 					break;
 
@@ -351,7 +370,7 @@ class Date extends System
 				case 'H':
 				case 'i':
 				case 's':
-					$$var .= substr($this->intTstamp, $intCount, 2);
+					$$var .= substr($this->strDate, $intCount, 2);
 					$intCount += 2;
 					break;
 
@@ -359,16 +378,16 @@ class Date extends System
 				case 'n':
 				case 'g':
 				case 'G':
-					$$var .= substr($this->intTstamp, $intCount++, 1);
+					$$var .= substr($this->strDate, $intCount++, 1);
 
-					if (preg_match('/[0-9]+/i', substr($this->intTstamp, $intCount, 1)))
+					if (preg_match('/[0-9]+/i', substr($this->strDate, $intCount, 1)))
 					{
-						$$var .= substr($this->intTstamp, $intCount++, 1);
+						$$var .= substr($this->strDate, $intCount++, 1);
 					}
 					break;
 
 				case 'Y':
-					$$var .= substr($this->intTstamp, $intCount, 4);
+					$$var .= substr($this->strDate, $intCount, 4);
 					$intCount += 4;
 					break;
 
@@ -405,14 +424,16 @@ class Date extends System
 			$intYear = 1970;
 		}
 
-		$this->intTstamp =  mktime((int) $intHour, (int) $intMinute, (int) $intSecond, (int) $intMonth, (int) $intDay, (int) $intYear);
+		$this->strDate =  mktime((int) $intHour, (int) $intMinute, (int) $intSecond, (int) $intMonth, (int) $intDay, (int) $intYear);
 	}
 
 
 	/**
 	 * Convert a PHP format string into a JavaScript format string
-	 * @param string
-	 * @return mixed
+	 * 
+	 * @param string $strFormat The PHP format string
+	 * 
+	 * @return mixed The JavaScript format string
 	 */
 	public static function formatToJs($strFormat)
 	{

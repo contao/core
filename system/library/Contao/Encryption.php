@@ -16,19 +16,26 @@ use \Exception;
 
 
 /**
- * Class Encryption
- *
- * Provide methods to encrypt and decrypt data.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Encrypt and decrypt data
+ * 
+ * The class can be used to encrypt and decrypt data based on the encryption
+ * string that is set during the Contao installation.
+ * 
+ * Usage:
+ * 
+ *     $encrypted = Encryption::encrypt('Leo Feyer');
+ *     $decrypted = Encryption::decrypt($encrypted);
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Encryption
 {
 
 	/**
-	 * Current object instance (Singleton)
-	 * @var Encryption
+	 * Object instance (Singleton)
+	 * @var \Encryption
 	 */
 	protected static $objInstance;
 
@@ -40,41 +47,12 @@ class Encryption
 
 
 	/**
-	 * Initialize the encryption module
-	 */
-	protected function __construct()
-	{
-		static::initialize();
-	}
-
-
-	/**
-	 * Prevent cloning of the object (Singleton)
-	 */
-	final public function __clone() {}
-
-
-	/**
-	 * Return the current object instance (Singleton)
-	 * @return \Encryption
-	 * @deprecated Encryption is now a static class
-	 */
-	public static function getInstance()
-	{
-		if (!is_object(static::$objInstance))
-		{
-			static::$objInstance = new static();
-		}
-
-		return static::$objInstance;
-	}
-
-
-	/**
 	 * Encrypt a value
-	 * @param mixed
-	 * @param string
-	 * @return string
+	 * 
+	 * @param mixed  $varValue The value to encrypt
+	 * @param string $strKey   An optional encryption key
+	 * 
+	 * @return string The encrypted value
 	 */
 	public static function encrypt($varValue, $strKey=null)
 	{
@@ -116,9 +94,11 @@ class Encryption
 
 	/**
 	 * Decrypt a value
-	 * @param mixed
-	 * @param string
-	 * @return string
+	 * 
+	 * @param mixed  $varValue The value to decrypt
+	 * @param string $strKey   An optional encryption key
+	 * 
+	 * @return string The decrypted value
 	 */
 	public static function decrypt($varValue, $strKey=null)
 	{
@@ -163,6 +143,7 @@ class Encryption
 
 	/**
 	 * Initialize the encryption module
+	 * 
 	 * @throws \Exception
 	 */
 	protected static function initialize()
@@ -176,5 +157,42 @@ class Encryption
 		{
 			throw new Exception('Encryption key not set');
 		}
+	}
+
+
+	/**
+	 * Initialize the encryption module
+	 * 
+	 * @deprecated Encryption is now a static class
+	 */
+	protected function __construct()
+	{
+		static::initialize();
+	}
+
+
+	/**
+	 * Prevent cloning of the object (Singleton)
+	 * 
+	 * @deprecated Encryption is now a static class
+	 */
+	final public function __clone() {}
+
+
+	/**
+	 * Return the object instance (Singleton)
+	 * 
+	 * @return \Encryption
+	 * 
+	 * @deprecated Encryption is now a static class
+	 */
+	public static function getInstance()
+	{
+		if (!is_object(static::$objInstance))
+		{
+			static::$objInstance = new static();
+		}
+
+		return static::$objInstance;
 	}
 }

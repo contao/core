@@ -16,12 +16,24 @@ use \Database_Installer, \File, \Exception;
 
 
 /**
- * Class DcaExtractor
- *
- * Provide methods to extract information from DCA files.
- * @copyright  Leo Feyer 2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Extracts DCA information and cache it
+ * 
+ * The class parses the DCA files and stores various extracts like relations in
+ * the system/cache directory. This meta data can then be loaded and used in the
+ * application (e.g. the Model classes).
+ * 
+ * Usage:
+ * 
+ *     $user = new DcaExtractor('tl_user');
+ * 
+ *     if ($user->hasRelations())
+ *     {
+ *         print_r($user->getRelations());
+ *     }
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class DcaExtractor extends Database_Installer
 {
@@ -33,13 +45,13 @@ class DcaExtractor extends Database_Installer
 	protected $strTable;
 
 	/**
-	 * Extract file
+	 * Cache file
 	 * @var string
 	 */
 	protected $strFile;
 
 	/**
-	 * Meta information
+	 * Meta data
 	 * @var array
 	 */
 	protected $arrMeta = array();
@@ -71,7 +83,9 @@ class DcaExtractor extends Database_Installer
 
 	/**
 	 * Load or create the extract
-	 * @param string
+	 * 
+	 * @param string $strTable The table name
+	 * 
 	 * @throws \Exception
 	 */
 	public function __construct($strTable)
@@ -98,8 +112,9 @@ class DcaExtractor extends Database_Installer
 
 
 	/**
-	 * Return the meta array
-	 * @return array
+	 * Return the meta data as array
+	 * 
+	 * @return array The meta data
 	 */
 	public function getMeta()
 	{
@@ -108,8 +123,9 @@ class DcaExtractor extends Database_Installer
 
 
 	/**
-	 * Return true if there is meta information
-	 * @return boolean
+	 * Return true if there is meta data
+	 * 
+	 * @return boolean True if there is meta data
 	 */
 	public function hasMeta()
 	{
@@ -118,8 +134,9 @@ class DcaExtractor extends Database_Installer
 
 
 	/**
-	 * Return the fields array
-	 * @return array
+	 * Return the fields as array
+	 * 
+	 * @return array The fields array
 	 */
 	public function getFields()
 	{
@@ -129,7 +146,8 @@ class DcaExtractor extends Database_Installer
 
 	/**
 	 * Return true if there are fields
-	 * @return boolean
+	 * 
+	 * @return boolean True if there are fields
 	 */
 	public function hasFields()
 	{
@@ -138,8 +156,9 @@ class DcaExtractor extends Database_Installer
 
 
 	/**
-	 * Return the keys array
-	 * @return array
+	 * Return the keys as array
+	 * 
+	 * @return array The keys array
 	 */
 	public function getKeys()
 	{
@@ -149,7 +168,8 @@ class DcaExtractor extends Database_Installer
 
 	/**
 	 * Return true if there are keys
-	 * @return boolean
+	 * 
+	 * @return boolean True if there are keys
 	 */
 	public function hasKeys()
 	{
@@ -158,8 +178,9 @@ class DcaExtractor extends Database_Installer
 
 
 	/**
-	 * Return the relations array
-	 * @return array
+	 * Return the relations as array
+	 * 
+	 * @return array The relations array
 	 */
 	public function getRelations()
 	{
@@ -169,7 +190,8 @@ class DcaExtractor extends Database_Installer
 
 	/**
 	 * Return true if there are relations
-	 * @return boolean
+	 * 
+	 * @return boolean True if there are relations
 	 */
 	public function hasRelations()
 	{
@@ -178,8 +200,9 @@ class DcaExtractor extends Database_Installer
 
 
 	/**
-	 * Return the DbInstaller array
-	 * @return array
+	 * Return an array that can be used by the database installer
+	 * 
+	 * @return array The data array
 	 */
 	public function getDbInstallerArray()
 	{
@@ -232,6 +255,7 @@ class DcaExtractor extends Database_Installer
 
 	/**
 	 * Create the extract from the DCA or the database.sql files
+	 * 
 	 * @throws \Exception
 	 */
 	protected function createExtract()

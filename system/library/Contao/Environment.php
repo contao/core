@@ -14,85 +14,42 @@ namespace Contao;
 
 
 /**
- * Class Environment
- *
- * Provide methods to get OS independent environment parameters.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Read the environment variables
+ * 
+ * The class returns the environment variables (which are stored in the PHP
+ * $_SERVER array) independent of the operating system.
+ * 
+ * Usage:
+ * 
+ *     echo Environment::get('scriptName');
+ *     echo Environment::get('requestUri');
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Environment
 {
 
 	/**
-	 * Current object instance (Singleton)
-	 * @var Environment
+	 * Object instance (Singleton)
+	 * @var \Environment
 	 */
 	protected static $objInstance;
 
 	/**
-	 * Cache array
+	 * Cache
 	 * @var array
 	 */
 	protected static $arrCache = array();
 
 
 	/**
-	 * Prevent direct instantiation (Singleton)
-	 */
-	protected function __construct() {}
-
-
-	/**
-	 * Prevent cloning of the object (Singleton)
-	 */
-	final public function __clone() {}
-
-
-	/**
-	 * Set an environment parameter
-	 * @param string
-	 * @param mixed
-	 * @deprecated Use Environment::set() instead
-	 */
-	public function __set($strKey, $varValue)
-	{
-		static::set($strKey, $varValue);
-	}
-
-
-	/**
-	 * Return an environment parameter
-	 * @param string
-	 * @return string
-	 * @deprecated Use Environment::get() instead
-	 */
-	public function __get($strKey)
-	{
-		return static::get($strKey);
-	}
-
-
-	/**
-	 * Return the current object instance (Singleton)
-	 * @return \Environment
-	 * @deprecated Environment is now a static class
-	 */
-	public static function getInstance()
-	{
-		if (!is_object(static::$objInstance))
-		{
-			static::$objInstance = new static();
-		}
-
-		return static::$objInstance;
-	}
-
-
-	/**
-	 * Return an environment parameter
-	 * @param string
-	 * @return mixed
+	 * Return an environment variable
+	 * 
+	 * @param string $strKey The variable name
+	 * 
+	 * @return string The variable value
 	 */
 	public static function get($strKey)
 	{
@@ -117,9 +74,10 @@ class Environment
 
 
 	/**
-	 * Set an environment parameter
-	 * @param string
-	 * @param mixed
+	 * Set an environment variable
+	 * 
+	 * @param string $strKey   The variable name
+	 * @param mixed  $varValue The variable value
 	 */
 	public static function set($strKey, $varValue)
 	{
@@ -129,7 +87,8 @@ class Environment
 
 	/**
 	 * Return the absolute path to the script (e.g. /home/www/html/website/index.php)
-	 * @return string
+	 * 
+	 * @return string The absolute path to the script
 	 */
 	protected static function scriptFilename()
 	{
@@ -139,7 +98,8 @@ class Environment
 
 	/**
 	 * Return the relative path to the script (e.g. /website/index.php)
-	 * @return string
+	 * 
+	 * @return string The relative path to the script
 	 */
 	protected static function scriptName()
 	{
@@ -149,7 +109,8 @@ class Environment
 
 	/**
 	 * Alias for scriptName()
-	 * @return string
+	 * 
+	 * @return string The script name
 	 */
 	protected static function phpSelf()
 	{
@@ -162,7 +123,8 @@ class Environment
 	 *
 	 * Calculated as SCRIPT_FILENAME minus SCRIPT_NAME as some CGI versions
 	 * and mod-rewrite rules might return an incorrect DOCUMENT_ROOT.
-	 * @return string
+	 * 
+	 * @return string The document root
 	 */
 	protected static function documentRoot()
 	{
@@ -206,7 +168,8 @@ class Environment
 
 	/**
 	 * Return the request URI [path]?[query] (e.g. /contao/index.php?id=2)
-	 * @return string
+	 * 
+	 * @return string The request URI
 	 */
 	protected static function requestUri()
 	{
@@ -223,7 +186,8 @@ class Environment
 
 	/**
 	 * Return the first eight user languages as array
-	 * @return array
+	 * 
+	 * @return array The languages array
 	 */
 	protected static function httpAcceptLanguage()
 	{
@@ -246,7 +210,8 @@ class Environment
 
 	/**
 	 * Return accepted encoding types as array
-	 * @return array
+	 * 
+	 * @return array The encoding types array
 	 */
 	protected static function httpAcceptEncoding()
 	{
@@ -256,7 +221,8 @@ class Environment
 
 	/**
 	 * Return the user agent as string
-	 * @return string
+	 * 
+	 * @return string The user agent string
 	 */
 	protected static function httpUserAgent()
 	{
@@ -269,7 +235,8 @@ class Environment
 
 	/**
 	 * Return the HTTP Host
-	 * @return string
+	 * 
+	 * @return string The host name
 	 */
 	protected static function httpHost()
 	{
@@ -291,7 +258,8 @@ class Environment
 
 	/**
 	 * Return the HTTP X-Forwarded-Host
-	 * @return string
+	 * 
+	 * @return string The name of the X-Forwarded-Host
 	 */
 	protected static function httpXForwardedHost()
 	{
@@ -301,7 +269,8 @@ class Environment
 
 	/**
 	 * Return true if the current page was requested via an SSL connection
-	 * @return boolean
+	 * 
+	 * @return boolean True if SSL is enabled
 	 */
 	protected static function ssl()
 	{
@@ -311,7 +280,8 @@ class Environment
 
 	/**
 	 * Return the current URL without path or query string
-	 * @return string
+	 * 
+	 * @return string The URL
 	 */
 	protected static function url()
 	{
@@ -324,7 +294,8 @@ class Environment
 
 	/**
 	 * Return the real REMOTE_ADDR even if a proxy server is used
-	 * @return string
+	 * 
+	 * @return string The IP address of the client
 	 */
 	protected static function ip()
 	{
@@ -339,7 +310,8 @@ class Environment
 
 	/**
 	 * Return the SERVER_ADDR
-	 * @return string
+	 * 
+	 * @return string The IP address of the server
 	 */
 	protected static function server()
 	{
@@ -357,7 +329,8 @@ class Environment
 
 	/**
 	 * Return the relative path to the base directory (e.g. /path)
-	 * @return string
+	 * 
+	 * @return string The relative path to the installation
 	 */
 	protected static function path()
 	{
@@ -367,7 +340,8 @@ class Environment
 
 	/**
 	 * Return the relativ path to the script (e.g. index.php)
-	 * @return string
+	 * 
+	 * @return string The relative path to the script
 	 */
 	protected static function script()
 	{
@@ -377,7 +351,8 @@ class Environment
 
 	/**
 	 * Return the relativ path to the script and include the request (e.g. index.php?id=2)
-	 * @return string
+	 * 
+	 * @return string The relative path to the script including the request string
 	 */
 	protected static function request()
 	{
@@ -395,8 +370,9 @@ class Environment
 
 
 	/**
-	 * Return the current URL and path that can be used in a <base> tag
-	 * @return string
+	 * Return the URL and path that can be used in a <base> tag
+	 * 
+	 * @return string The base URL
 	 */
 	protected static function base()
 	{
@@ -405,8 +381,9 @@ class Environment
 
 
 	/**
-	 * Return the current host name
-	 * @return string
+	 * Return the host name
+	 * 
+	 * @return string The host name
 	 */
 	protected static function host()
 	{
@@ -416,7 +393,8 @@ class Environment
 
 	/**
 	 * Return true on Ajax requests
-	 * @return boolean
+	 * 
+	 * @return boolean True if it is an Ajax request
 	 */
 	protected static function isAjaxRequest()
 	{
@@ -426,7 +404,8 @@ class Environment
 
 	/**
 	 * Return the operating system and the browser name and version
-	 * @return array
+	 * 
+	 * @return object The agent information
 	 */
 	protected static function agent()
 	{
@@ -493,5 +472,68 @@ class Environment
 		$return->mobile   = $mobile;
 
 		return $return;
+	}
+
+
+	/**
+	 * Prevent direct instantiation (Singleton)
+	 * 
+	 * @deprecated Environment is now a static class
+	 */
+	protected function __construct() {}
+
+
+	/**
+	 * Prevent cloning of the object (Singleton)
+	 * 
+	 * @deprecated Environment is now a static class
+	 */
+	final public function __clone() {}
+
+
+	/**
+	 * Return an environment variable
+	 * 
+	 * @param string $strKey The variable name
+	 * 
+	 * @return string The variable value
+	 * 
+	 * @deprecated Use Environment::get() instead
+	 */
+	public function __get($strKey)
+	{
+		return static::get($strKey);
+	}
+
+
+	/**
+	 * Set an environment variable
+	 * 
+	 * @param string $strKey   The variable name
+	 * @param mixed  $varValue The variable value
+	 * 
+	 * @deprecated Use Environment::set() instead
+	 */
+	public function __set($strKey, $varValue)
+	{
+		static::set($strKey, $varValue);
+	}
+
+
+	/**
+	 * Return the object instance (Singleton)
+	 * 
+	 * @return \Environment The object instance
+	 * 
+	 * @deprecated Environment is now a static class
+	 */
+	public static function getInstance()
+	{
+		if (!is_object(static::$objInstance))
+		{
+			static::$objInstance = new static();
+		}
+
+		return static::$objInstance;
 	}
 }
