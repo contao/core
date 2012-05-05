@@ -57,26 +57,14 @@ abstract class Widget extends Contao\Widget {}
 class ZipReader extends Contao\ZipReader {}
 class ZipWriter extends Contao\ZipWriter {}
 class Database_Installer extends Contao\Database_Installer {}
-class Database_Mssql_Result extends Contao\Database_Mssql_Result {}
-class Database_Mssql_Statement extends Contao\Database_Mssql_Statement {}
-class Database_Mssql extends Contao\Database_Mssql {}
 class Database_Mysql_Result extends Contao\Database_Mysql_Result {}
 class Database_Mysql_Statement extends Contao\Database_Mysql_Statement {}
 class Database_Mysql extends Contao\Database_Mysql {}
 class Database_Mysqli_Result extends Contao\Database_Mysqli_Result {}
 class Database_Mysqli_Statement extends Contao\Database_Mysqli_Statement {}
 class Database_Mysqli extends Contao\Database_Mysqli {}
-class Database_Oracle_Result extends Contao\Database_Oracle_Result {}
-class Database_Oracle_Statement extends Contao\Database_Oracle_Statement {}
-class Database_Oracle extends Contao\Database_Oracle {}
-class Database_Postgresql_Result extends Contao\Database_Postgresql_Result {}
-class Database_Postgresql_Statement extends Contao\Database_Postgresql_Statement {}
-class Database_Postgresql extends Contao\Database_Postgresql {}
 abstract class Database_Result extends Contao\Database_Result {}
 abstract class Database_Statement extends Contao\Database_Statement {}
-class Database_Sybase_Result extends Contao\Database_Sybase_Result {}
-class Database_Sybase_Statement extends Contao\Database_Sybase_Statement {}
-class Database_Sybase extends Contao\Database_Sybase {}
 class Database_Updater extends Contao\Database_Updater {}
 
 // calendar

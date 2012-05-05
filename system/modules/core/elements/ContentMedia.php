@@ -48,12 +48,12 @@ class ContentMedia extends ContentElement
 	 */
 	public function generate()
 	{
-		if ($this->multiSRC == '')
+		if ($this->playerSRC == '')
 		{
 			return '';
 		}
 
-		$source = deserialize($this->multiSRC);
+		$source = deserialize($this->playerSRC);
 
 		if (!is_array($source) || empty($source))
 		{

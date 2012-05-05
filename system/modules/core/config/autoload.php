@@ -257,6 +257,7 @@ TemplateLoader::addFiles(array
 	'moo_accordion'       => 'system/modules/core/templates',
 	'moo_chosen'          => 'system/modules/core/templates',
 	'moo_mediabox'        => 'system/modules/core/templates',
+	'moo_mediaelement'    => 'system/modules/core/templates',
 	'moo_slimbox'         => 'system/modules/core/templates',
 	'nav_default'         => 'system/modules/core/templates',
 	'pagination'          => 'system/modules/core/templates',
