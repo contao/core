@@ -1,0 +1,19 @@
+<?php
+
+// Add the colorbox style sheet
+$GLOBALS['TL_CSS'][] = 'plugins/mootools/mediaelement/'. MEDIAELEMENT .'/mediaelementplayer.min.css||static';
+
+?>
+
+<script type="text/javascript" src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/mediaelement/<?php echo MEDIAELEMENT; ?>/mediaelement-and-player.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+(function($) {
+  window.addEvent('domready', function() {
+    $$('video','audio').mediaelementplayer({
+      // Put custom options here
+    });
+  });
+})(jQuery);
+/* ]]> */
+</script>
