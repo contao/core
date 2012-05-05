@@ -11,6 +11,8 @@
  */
 if (typeof jQuery != 'undefined') {
 	mejs.$ = jQuery;
+} else if (typeof MooTools != 'undefined') {
+	mejs.$ = MooToolsCompat(window);
 } else if (typeof ender != 'undefined') {
 	mejs.$ = ender;
 }
@@ -1048,12 +1050,21 @@ if (typeof jQuery != 'undefined') {
 				new mejs.MediaElementPlayer(this, options);
 			});
 		};
+		
+		$(document).ready(function() {
+			// auto enable using JSON attribute
+			$('.mejs-player').mediaelementplayer();
+		});
 	}
-	
-	$(document).ready(function() {
-		// auto enable using JSON attribute
-		$('.mejs-player').mediaelementplayer();
-	});
+	else if (typeof MooTools != 'undefined') {
+		Element.implement('mediaelementplayer', function(options) {
+			return new mejs.MediaElementPlayer(this, options);
+		});
+		
+		window.addEvent('domready', function() {
+			document.getElements('.mejs-player').mediaelementplayer();
+		});
+	}
 	
 	// push out to window
 	window.MediaElementPlayer = mejs.MediaElementPlayer;
