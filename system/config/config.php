@@ -196,15 +196,16 @@ $GLOBALS['TL_CONFIG']['encryptionCipher'] = 'rijndael-256';
  *
  * Please enter how many upload fields you want to show in the back end.
  */
-$GLOBALS['TL_CONFIG']['uploadPath']     = 'tl_files';
-$GLOBALS['TL_CONFIG']['uploadTypes']    = 'jpg,jpeg,gif,png,ico,csv,doc,docx,xls,xlsx,ppt,pptx,odt,ods,odp,pdf,mp3,mp4,m4a,m4v,webm,ogg,wma,wmv,ram,rm,mov,fla,flv,swf,css,html,htm,txt,zip,cto';
-$GLOBALS['TL_CONFIG']['maxFileSize']    = 2048000;
-$GLOBALS['TL_CONFIG']['imageWidth']     = 800;
-$GLOBALS['TL_CONFIG']['imageHeight']    = 600;
-$GLOBALS['TL_CONFIG']['jpgQuality']     = 80;
-$GLOBALS['TL_CONFIG']['uploadFields']   = 8;
-$GLOBALS['TL_CONFIG']['gdMaxImgWidth']  = 3000;
-$GLOBALS['TL_CONFIG']['gdMaxImgHeight'] = 3000;
+$GLOBALS['TL_CONFIG']['uploadPath']        = 'tl_files';
+$GLOBALS['TL_CONFIG']['uploadTypes']       = 'jpg,jpeg,gif,png,ico,csv,doc,docx,xls,xlsx,ppt,pptx,odt,ods,odp,pdf,mp3,mp4,m4a,m4v,webm,ogg,wma,wmv,ram,rm,mov,fla,flv,swf,css,html,htm,txt,zip,cto';
+$GLOBALS['TL_CONFIG']['maxFileSize']       = 2048000;
+$GLOBALS['TL_CONFIG']['imageWidth']        = 800;
+$GLOBALS['TL_CONFIG']['imageHeight']       = 600;
+$GLOBALS['TL_CONFIG']['jpgQuality']        = 80;
+$GLOBALS['TL_CONFIG']['uploadFields']      = 8;
+$GLOBALS['TL_CONFIG']['gdMaxImgWidth']     = 3000;
+$GLOBALS['TL_CONFIG']['gdMaxImgHeight']    = 3000;
+$GLOBALS['TL_CONFIG']['defaultSizeFormat'] = 'decimal';
 
 
 /**

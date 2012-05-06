@@ -217,6 +217,20 @@ $GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
 
 
 /**
+ * Binary units
+ */
+$GLOBALS['TL_LANG']['BUNITS'][0] = 'Byte';
+$GLOBALS['TL_LANG']['BUNITS'][1] = 'kiB';
+$GLOBALS['TL_LANG']['BUNITS'][2] = 'MiB';
+$GLOBALS['TL_LANG']['BUNITS'][3] = 'GiB';
+$GLOBALS['TL_LANG']['BUNITS'][4] = 'TiB';
+$GLOBALS['TL_LANG']['BUNITS'][5] = 'PiB';
+$GLOBALS['TL_LANG']['BUNITS'][6] = 'EiB';
+$GLOBALS['TL_LANG']['BUNITS'][7] = 'ZiB';
+$GLOBALS['TL_LANG']['BUNITS'][8] = 'YiB';
+
+
+/**
  * Datepicker
  */
 $GLOBALS['TL_LANG']['DP']['select_a_time']       = 'Select a time';

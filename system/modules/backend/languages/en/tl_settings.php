@@ -72,6 +72,7 @@ $GLOBALS['TL_LANG']['tl_settings']['maxImageWidth']       = array('Maximum front
 $GLOBALS['TL_LANG']['tl_settings']['jpgQuality']          = array('JPG thumbnail quality', 'Here you can enter the JPG thumbnail quality in percent.');
 $GLOBALS['TL_LANG']['tl_settings']['gdMaxImgWidth']       = array('Maximum GD image width', 'Here you can enter the maximum image width that the GD library shall try to handle.');
 $GLOBALS['TL_LANG']['tl_settings']['gdMaxImgHeight']      = array('Maximum GD image height', 'Here you can enter the maximum image height that the GD library shall try to handle.');
+$GLOBALS['TL_LANG']['tl_settings']['defaultSizeFormat']   = array('Numbering format for data size', 'Here you can choose the default numbering format for data size calculation.');
 $GLOBALS['TL_LANG']['tl_settings']['uploadPath']          = array('Files directory', 'Here you can set the relative path to the Contao files directory.');
 $GLOBALS['TL_LANG']['tl_settings']['uploadTypes']         = array('Upload file types', 'Here you can enter a comma separated list of uploadable file types.');
 $GLOBALS['TL_LANG']['tl_settings']['uploadFields']        = array('Simultaneous file uploads', 'Here you can enter the maximum number of simultaneous file uploads.');
@@ -129,5 +130,7 @@ $GLOBALS['TL_LANG']['tl_settings']['both']    = 'Use the server and the browser 
 $GLOBALS['TL_LANG']['tl_settings']['server']  = 'Use only the server cache';
 $GLOBALS['TL_LANG']['tl_settings']['browser'] = 'Use only the browser cache';
 $GLOBALS['TL_LANG']['tl_settings']['none']    = 'Disable caching';
+$GLOBALS['TL_LANG']['tl_settings']['decimal'] = 'decimal, factor 1000';
+$GLOBALS['TL_LANG']['tl_settings']['binary']  = 'binary, factor 1024';
 
 ?>
