@@ -16,7 +16,7 @@ use \System, \Exception;
 
 
 /**
- * Convert dates and format string
+ * Converts dates and date format string
  * 
  * The class converts arbitrary date strings to Unix timestamps and provides
  * extended information like the begin or end of the day, week, month or year. 

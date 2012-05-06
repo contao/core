@@ -16,12 +16,20 @@ use \Cache, \File, \System, \Exception;
 
 
 /**
- * Class Folder
- *
- * Provide methods to handle folders.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Creates, reads, writes and deletes folders
+ * 
+ * Usage:
+ * 
+ *     $folder = new Folder('test');
+ * 
+ *     if (!$folder->isEmpty())
+ *     {
+ *         $folder->purge();
+ *     }
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Folder extends System
 {
@@ -34,8 +42,10 @@ class Folder extends System
 
 
 	/**
-	 * Check whether a folder exists
-	 * @param string
+	 * Check whether the folder exists
+	 * 
+	 * @param string $strFolder The folder path
+	 * 
 	 * @throws \Exception
 	 */
 	public function __construct($strFolder)
@@ -72,8 +82,10 @@ class Folder extends System
 
 	/**
 	 * Return an object property
-	 * @param string
-	 * @return mixed
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return mixed The property value
 	 */
 	public function __get($strKey)
 	{
@@ -107,7 +119,8 @@ class Folder extends System
 
 	/**
 	 * Return true if the folder is empty
-	 * @return boolean
+	 * 
+	 * @return boolean True if the folder is empty
 	 */
 	public function isEmpty()
 	{
@@ -116,7 +129,7 @@ class Folder extends System
 
 
 	/**
-	 * Empty the folder
+	 * Purge the folder
 	 */
 	public function purge()
 	{
@@ -125,7 +138,8 @@ class Folder extends System
 
 
 	/**
-	 * Backwards compatibility
+	 * Purge the folder
+	 * 
 	 * @deprecated Use $this->purge() instead
 	 */
 	public function clear()
@@ -145,19 +159,23 @@ class Folder extends System
 
 	/**
 	 * Set the folder permissions
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $intChmod The CHMOD settings
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
-	public function chmod($strChmod)
+	public function chmod($intChmod)
 	{
-		return $this->Files->chmod($this->strFolder, $strChmod);
+		return $this->Files->chmod($this->strFolder, $intChmod);
 	}
 
 
 	/**
 	 * Rename the folder
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strNewName The new path
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function renameTo($strNewName)
 	{
@@ -174,8 +192,10 @@ class Folder extends System
 
 	/**
 	 * Copy the folder
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strNewName The target path
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function copyTo($strNewName)
 	{
@@ -210,8 +230,9 @@ class Folder extends System
 
 
 	/**
-	 * Return the MD5 hash
-	 * @return string
+	 * Return the MD5 hash of the folder
+	 * 
+	 * @return string The MD5 has
 	 */
 	protected function getHash()
 	{
@@ -233,7 +254,8 @@ class Folder extends System
 
 	/**
 	 * Return the size of the folder
-	 * @return integer
+	 * 
+	 * @return integer The folder size in bytes
 	 */
 	protected function getSize()
 	{

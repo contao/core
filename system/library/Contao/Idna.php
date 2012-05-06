@@ -21,20 +21,30 @@ if (!class_exists('idna_convert', false))
 
 
 /**
- * Class Idna
- *
- * Provide methods to convert IDNA domain names.
- * @copyright  Leo Feyer 2011-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * An idna_encode adapter class
+ * 
+ * The class encodes and decodes internationalized domain names according to RFC
+ * 3490. It also contains two helper methods to encode e-mails and URLs.
+ * 
+ * Usage:
+ * 
+ *     echo Idna::encode('bürger.de');
+ *     echo Idna::encodeEmail('mit@bürger.de');
+ *     echo Idna::encodeUrl('http://www.bürger.de');
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Idna
 {
 
 	/**
 	 * Encode an internationalized domain name
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string $strDomain The domain name
+	 * 
+	 * @return string The encoded domain name
 	 */
 	public static function encode($strDomain)
 	{
@@ -45,8 +55,10 @@ class Idna
 
 	/**
 	 * Decode an internationalized domain name
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string $strDomain The domain name
+	 * 
+	 * @return string The decoded domain name
 	 */
 	public static function decode($strDomain)
 	{
@@ -56,9 +68,11 @@ class Idna
 
 
 	/**
-	 * Encode an e-mail address
-	 * @param string
-	 * @return string
+	 * Encode the domain in an e-mail address
+	 * 
+	 * @param string $strEmail The e-mail address
+	 * 
+	 * @return string The encoded e-mail address
 	 */
 	public static function encodeEmail($strEmail)
 	{
@@ -73,9 +87,11 @@ class Idna
 
 
 	/**
-	 * Encode an URL
-	 * @param string
-	 * @return string
+	 * Encode the domain in an URL
+	 * 
+	 * @param string $strUrl The URL
+	 * 
+	 * @return string The encoded URL
 	 */
 	public static function encodeUrl($strUrl)
 	{

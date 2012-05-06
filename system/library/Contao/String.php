@@ -16,61 +16,39 @@ use \Exception;
 
 
 /**
- * Class String
- *
- * Provide methods to manipulate strings.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Provides string manipulation methods
+ * 
+ * Usage:
+ * 
+ *     $short = String::substr($str, 32);
+ *     $html  = String::substrHtml($str, 32);
+ *     $xhtml = String::toXhtml($html5);
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class String
 {
 
 	/**
-	 * Current object instance (Singleton)
-	 * @var String
+	 * Object instance (Singleton)
+	 * @var \String
 	 */
 	protected static $objInstance;
 
 
 	/**
-	 * Prevent direct instantiation (Singleton)
-	 */
-	protected function __construct() {}
-
-
-	/**
-	 * Prevent cloning of the object (Singleton)
-	 */
-	final public function __clone() {}
-
-
-	/**
-	 * Return the current object instance (Singleton)
-	 * @return \String
-	 * @deprecated String is now a static class
-	 */
-	public static function getInstance()
-	{
-		if (!is_object(static::$objInstance))
-		{
-			static::$objInstance = new static();
-		}
-
-		return static::$objInstance;
-	}
-
-
-	/**
-	 * Shorten a string to a certain number of characters
+	 * Shorten a string to a given number of characters
 	 *
-	 * Shortens a string to a given number of characters preserving words
-	 * (therefore it might be a bit shorter or longer than the number of
-	 * characters specified). Stips all tags.
-	 * @param string
-	 * @param integer
-	 * @param string
-	 * @return string
+	 * The function preserves words, so the result might be a bit shorter or
+	 * longer than the number of characters given. It stips all tags.
+	 * 
+	 * @param string  $strString        The string to shorten
+	 * @param integer $intNumberOfChars The target number of characters
+	 * @param string  $strEllipsis      An optional ellipsis to append to the shortened string
+	 * 
+	 * @return string The shortened string
 	 */
 	public static function substr($strString, $intNumberOfChars, $strEllipsis=' …')
 	{
@@ -123,14 +101,15 @@ class String
 
 
 	/**
-	 * Shorten a HTML string to a certain number of characters
+	 * Shorten a HTML string to a given number of characters
 	 *
-	 * Shortens a string to a given number of characters preserving words
-	 * (therefore it might be a bit shorter or longer than the number of
-	 * characters specified). Preserves allowed tags.
-	 * @param string
-	 * @param integer
-	 * @return string
+	 * The function preserves words, so the result might be a bit shorter or
+	 * longer than the number of characters given. It preserves allowed tags.
+	 * 
+	 * @param string  $strString        The string to shorten
+	 * @param integer $intNumberOfChars The target number of characters
+	 * 
+	 * @return string The shortened HTML string
 	 */
 	public static function substrHtml($strString, $intNumberOfChars)
 	{
@@ -233,10 +212,12 @@ class String
 
 	/**
 	 * Decode all entities
-	 * @param string
-	 * @param integer
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string  $strString     The string to decode
+	 * @param integer $strQuoteStyle The quote style (defaults to ENT_COMPAT)
+	 * @param string  $strCharset    An optional charset
+	 * 
+	 * @return string The decoded string
 	 */
 	public static function decodeEntities($strString, $strQuoteStyle=ENT_COMPAT, $strCharset=null)
 	{
@@ -259,12 +240,14 @@ class String
 
 	/**
 	 * Censor a single word or an array of words within a string
-	 * @param string
-	 * @param mixed
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string $strString  The string to censor
+	 * @param mixed  $varWords   A string or array or words to replace
+	 * @param string $strReplace An optional replacement string
+	 * 
+	 * @return string The cleaned string
 	 */
-	public static function censor($strString, $varWords, $strReplace="")
+	public static function censor($strString, $varWords, $strReplace='')
 	{
 		foreach ((array) $varWords as $strWord)
 		{
@@ -276,9 +259,11 @@ class String
 
 
 	/**
-	 * Find all e-mail addresses within a string and encode them
-	 * @param string
-	 * @return string
+	 * Encode all e-mail addresses within a string
+	 * 
+	 * @param string $strString The string to encode
+	 * 
+	 * @return string The encoded string
 	 */
 	public static function encodeEmail($strString)
 	{
@@ -312,10 +297,12 @@ class String
 
 	/**
 	 * Wrap words after a particular number of characers
-	 * @param string
-	 * @param integer
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string  $strString The string to wrap
+	 * @param integer $strLength The number of characters to wrap after
+	 * @param string  $strBreak  An optional break character
+	 * 
+	 * @return string The wrapped string
 	 */
 	public static function wordWrap($strString, $strLength=75, $strBreak="\n")
 	{
@@ -325,11 +312,13 @@ class String
 
 	/**
 	 * Highlight a phrase within a string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string $strString     The string
+	 * @param string $strPhrase     The phrase to highlight
+	 * @param string $strOpeningTag The opening tag (defaults to <strong>)
+	 * @param string $strClosingTag The closing tag (defaults to </strong>)
+	 * 
+	 * @return string The highlighted string
 	 */
 	public static function highlight($strString, $strPhrase, $strOpeningTag='<strong>', $strClosingTag='</strong>')
 	{
@@ -344,9 +333,11 @@ class String
 
 	/**
 	 * Split a string of comma separated values
-	 * @param string
-	 * @param string
-	 * @return array
+	 * 
+	 * @param string $strString    The string to split
+	 * @param string $strDelimiter An optional delimiter
+	 * 
+	 * @return array The string chunks
 	 */
 	public static function splitCsv($strString, $strDelimiter=',')
 	{
@@ -363,8 +354,10 @@ class String
 
 	/**
 	 * Convert a string to XHTML
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string $strString The HTML5 string
+	 * 
+	 * @return string The XHTML string
 	 */
 	public static function toXhtml($strString)
 	{
@@ -396,8 +389,10 @@ class String
 
 	/**
 	 * Convert a string to HTML5
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string $strString The XHTML string
+	 * 
+	 * @return string The HTML5 string
 	 */
 	public static function toHtml5($strString)
 	{
@@ -427,18 +422,21 @@ class String
 
 	/**
 	 * Parse simple tokens that can be used to personalize newsletters
-	 * @param string
-	 * @param array
-	 * @return string
+	 * 
+	 * @param string $strString The string to be parsed
+	 * @param array  $arrData   The replacement data
+	 * 
+	 * @return string The converted string
+	 * 
 	 * @throws \Exception
 	 */
-	public static function parseSimpleTokens($strBuffer, $arrData)
+	public static function parseSimpleTokens($strString, $arrData)
 	{
 		$strReturn = '';
 
 		// Remove any unwanted tags (especially PHP tags)
-		$strBuffer = strip_tags($strBuffer, $GLOBALS['TL_CONFIG']['allowedTags']);
-		$arrTags = preg_split('/(\{[^\}]+\})/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+		$strString = strip_tags($strString, $GLOBALS['TL_CONFIG']['allowedTags']);
+		$arrTags = preg_split('/(\{[^\}]+\})/', $strString, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
 		// Replace the tags
 		foreach ($arrTags as $strTag)
@@ -483,5 +481,39 @@ class String
 
 		// Return the evaled code
 		return $strReturn;
+	}
+
+
+	/**
+	 * Prevent direct instantiation (Singleton)
+	 * 
+	 * @deprecated String is now a static class
+	 */
+	protected function __construct() {}
+
+
+	/**
+	 * Prevent cloning of the object (Singleton)
+	 * 
+	 * @deprecated String is now a static class
+	 */
+	final public function __clone() {}
+
+
+	/**
+	 * Return the object instance (Singleton)
+	 * 
+	 * @return \String The object instance
+	 * 
+	 * @deprecated String is now a static class
+	 */
+	public static function getInstance()
+	{
+		if (!is_object(static::$objInstance))
+		{
+			static::$objInstance = new static();
+		}
+
+		return static::$objInstance;
 	}
 }

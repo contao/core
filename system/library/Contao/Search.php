@@ -16,50 +16,42 @@ use \Database, \String, \System, \Exception;
 
 
 /**
- * Class Search
- *
- * Provide methods to handle indexing and searching.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Creates and queries the search index
+ * 
+ * The class takes the HTML markup of a page, exctracts the content and writes
+ * it to the database (search index). It also provides a method to query the
+ * seach index, returning the matching entries.
+ * 
+ * Usage:
+ * 
+ *     Search::indexPage($objPage->row());
+ *     $result = Search::searchFor('keyword');
+ * 
+ *     while ($result->next())
+ *     {
+ *         echo $result->url;
+ *     }
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Search extends System
 {
 
 	/**
-	 * Current object instance (Singleton)
-	 * @var Search
+	 * Object instance (Singleton)
+	 * @var \Search
 	 */
 	protected static $objInstance;
 
 
 	/**
-	 * Prevent cloning of the object (Singleton)
-	 * @return mixed|void
-	 */
-	final public function __clone() {}
-
-
-	/**
-	 * Return the current object instance (Singleton)
-	 * @return \Search
-	 * @deprecated Search is now a static class
-	 */
-	public static function getInstance()
-	{
-		if (!is_object(static::$objInstance))
-		{
-			static::$objInstance = new static();
-		}
-
-		return static::$objInstance;
-	}
-
-
-	/**
-	 * Index a single file
-	 * @param array
-	 * @return boolean
+	 * Index a page
+	 * 
+	 * @param array $arrData The data array
+	 * 
+	 * @return boolean True if a new record was created
 	 */
 	public static function indexPage($arrData)
 	{
@@ -275,14 +267,17 @@ class Search extends System
 
 
 	/**
-	 * Search the database and return the result object
-	 * @param string
-	 * @param boolean
-	 * @param array
-	 * @param integer
-	 * @param integer
-	 * @param boolean
-	 * @return \Database_Result
+	 * Search the index and return the result object
+	 * 
+	 * @param string  $strKeywords The keyword string
+	 * @param boolean $blnOrSearch If true, the result can contain any keyword
+	 * @param array   $arrPid      An optional array of page IDs to limit the result to
+	 * @param integer $intRows     An optional maximum number of result rows
+	 * @param integer $intOffset   An optional result offset
+	 * @param boolean $blnFuzzy    If true, the search will be fuzzy
+	 * 
+	 * @return \Database_Result The database result object
+	 * 
 	 * @throws \Exception
 	 */
 	public static function searchFor($strKeywords, $blnOrSearch=false, $arrPid=array(), $intRows=0, $intOffset=0, $blnFuzzy=false)
@@ -503,7 +498,8 @@ class Search extends System
 
 	/**
 	 * Remove an entry from the search index
-	 * @param string
+	 * 
+	 * @param string $strUrl The URL to be removed
 	 */
 	public static function removeEntry($strUrl)
 	{
@@ -521,5 +517,31 @@ class Search extends System
 			$objDatabase->prepare("DELETE FROM tl_search_index WHERE pid=?")
 						->execute($objSearch->id);
 		}
+	}
+
+
+	/**
+	 * Prevent cloning of the object (Singleton)
+	 * 
+	 * @deprecated Search is now a static class
+	 */
+	final public function __clone() {}
+
+
+	/**
+	 * Return the object instance (Singleton)
+	 * 
+	 * @return \Search The object instance
+	 * 
+	 * @deprecated Search is now a static class
+	 */
+	public static function getInstance()
+	{
+		if (!is_object(static::$objInstance))
+		{
+			static::$objInstance = new static();
+		}
+
+		return static::$objInstance;
 	}
 }

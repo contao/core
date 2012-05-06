@@ -14,11 +14,11 @@ namespace Contao;
 
 
 /**
- * Automatically load class files based on a mapper array
+ * Automatically loads class files based on a mapper array
  * 
  * The class stores namespaces and classes and automatically loads the class
  * files upon their first usage. It uses a mapper array to support complex
- * nesting and arbitrary subfolders to store class files.
+ * nesting and arbitrary subfolders to store the class files in.
  * 
  * Usage:
  * 

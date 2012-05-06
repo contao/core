@@ -16,12 +16,19 @@ use \Cache, \Folder, \System, \Exception;
 
 
 /**
- * Class File
- *
- * Provide methods to handle files.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Creates, reads, writes and deletes files
+ * 
+ * Usage:
+ * 
+ *     $file = new File('test.txt');
+ *     $file->write('This is a test');
+ *     $file->close();
+ * 
+ *     $file->delete();
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class File extends System
 {
@@ -53,7 +60,9 @@ class File extends System
 
 	/**
 	 * Check whether a file exists
-	 * @param string
+	 * 
+	 * @param string $strFile The file path
+	 * 
 	 * @throws \Exception
 	 */
 	public function __construct($strFile)
@@ -111,8 +120,10 @@ class File extends System
 
 	/**
 	 * Return an object property
-	 * @param string
-	 * @return mixed
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return mixed The property value
 	 */
 	public function __get($strKey)
 	{
@@ -225,7 +236,8 @@ class File extends System
 
 	/**
 	 * Truncate the file
-	 * @return boolean
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function truncate()
 	{
@@ -235,8 +247,10 @@ class File extends System
 
 	/**
 	 * Write data to the file
-	 * @param mixed
-	 * @return boolean
+	 * 
+	 * @param mixed $varData The data to be written
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function write($varData)
 	{
@@ -246,9 +260,11 @@ class File extends System
 
 	/**
 	 * Append data to the file
-	 * @param mixed
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param mixed  $varData The data to be appended
+	 * @param string $strLine The line ending (defaults to LF)
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function append($varData, $strLine="\n")
 	{
@@ -258,7 +274,8 @@ class File extends System
 
 	/**
 	 * Delete the file
-	 * @return boolean
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function delete()
 	{
@@ -268,18 +285,21 @@ class File extends System
 
 	/**
 	 * Set the file permissions
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param integer $intChmod The CHMOD settings
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
-	public function chmod($strChmod)
+	public function chmod($intChmod)
 	{
-		return $this->Files->chmod($this->strFile, $strChmod);
+		return $this->Files->chmod($this->strFile, $intChmod);
 	}
 
 
 	/**
 	 * Close the file handle
-	 * @return boolean
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function close()
 	{
@@ -288,8 +308,9 @@ class File extends System
 
 
 	/**
-	 * Return file content as string
-	 * @return string
+	 * Return the file content as string
+	 * 
+	 * @return string The file content
 	 */
 	public function getContent()
 	{
@@ -298,8 +319,9 @@ class File extends System
 
 
 	/**
-	 * Return file content as array
-	 * @return string
+	 * Return the file content as array
+	 * 
+	 * @return array The file content as array
 	 */
 	public function getContentAsArray()
 	{
@@ -309,8 +331,10 @@ class File extends System
 
 	/**
 	 * Rename the file
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strNewName The new path
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function renameTo($strNewName)
 	{
@@ -328,8 +352,10 @@ class File extends System
 
 	/**
 	 * Copy the file
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strNewName The target path
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function copyTo($strNewName)
 	{
@@ -339,9 +365,11 @@ class File extends System
 
 	/**
 	 * Write data to a file
-	 * @param mixed
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param mixed  $varData The data to be written
+	 * @param string $strMode The operation mode
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	protected function fputs($varData, $strMode)
 	{
@@ -359,8 +387,9 @@ class File extends System
 
 
 	/**
-	 * Return the mime type and icon of a file based on its extension
-	 * @return array
+	 * Return the mime type and icon of the file based on its extension
+	 * 
+	 * @return array An array with mime type and icon name
 	 */
 	protected function getMimeInfo()
 	{
@@ -499,8 +528,9 @@ class File extends System
 
 
 	/**
-	 * Get the mime type of a file based on its extension
-	 * @return string
+	 * Get the mime type of the file based on its extension
+	 *  
+	 * @return string The mime type
 	 */
 	protected function getMimeType()
 	{
@@ -510,8 +540,9 @@ class File extends System
 
 
 	/**
-	 * Return an icon depending on the file type
-	 * @return string
+	 * Return the file icon depending on the file type
+	 * 
+	 * @return string The icon name
 	 */
 	protected function getIcon()
 	{
@@ -521,8 +552,9 @@ class File extends System
 
 
 	/**
-	 * Return the MD5 hash
-	 * @return string
+	 * Return the MD5 hash of the file
+	 * 
+	 * @return string The MD5 hash
 	 */
 	protected function getHash()
 	{

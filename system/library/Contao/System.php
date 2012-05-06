@@ -16,102 +16,115 @@ use \Environment, \File, \Idna, \Input, \Message, \Validator, \Exception;
 
 
 /**
- * Class System
- *
- * Provide default methods that are required in all models and controllers.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Abstract library base class
+ * 
+ * The class provides miscellaneous methods that are used all throughout the
+ * application. It is the base class of the Contao library which provides the
+ * central "import" method to load other library classes.
+ * 
+ * Usage:
+ * 
+ *     class MyClass extends System
+ *     {
+ *         public function __construct()
+ *         {
+ *             $this->import('Database');
+ *         }
+ *     }
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 abstract class System
 {
 
 	/**
 	 * Cache object
-	 * @var Cache
+	 * @var \Cache
 	 */
 	protected $Cache;
 
 	/**
 	 * Config object
-	 * @var Cache
+	 * @var \Cache
 	 */
 	protected $Config;
 
 	/**
 	 * Database object
-	 * @var Database
+	 * @var \Database
 	 */
 	protected $Database;
 
 	/**
 	 * Encryption object
-	 * @var Encryption
+	 * @var \Encryption
 	 */
 	protected $Encryption;
 
 	/**
 	 * Files object
-	 * @var Files
+	 * @var \Files
 	 */
 	protected $Files;
 
 	/**
 	 * Search object
-	 * @var Search
+	 * @var \Search
 	 */
 	protected $Search;
 
 	/**
 	 * Session object
-	 * @var Search
+	 * @var \Search
 	 */
 	protected $Session;
 
 	/**
 	 * String object
-	 * @var String
+	 * @var \String
 	 */
 	protected $String;
 
 	/**
 	 * Template object
-	 * @var Template
+	 * @var \Template
 	 */
 	protected $Template;
 
 	/**
 	 * User object
-	 * @var User
+	 * @var \User
 	 */
 	protected $User;
 
 	/**
 	 * Automator object
-	 * @var Automator
+	 * @var \Automator
 	 */
 	protected $Automator;
 
 	/**
 	 * Data container object
-	 * @var DataContainer
+	 * @var \DataContainer
 	 */
 	protected $DataContainer;
 
 	/**
 	 * Messages object
-	 * @var Messages
+	 * @var \Messages
 	 */
 	protected $Messages;
 
 	/**
 	 * Cookie hook object
-	 * @var Messages
+	 * @var \Messages
 	 */
 	protected $objCookie;
 
 	/**
-	 * Cache array
+	 * Cache
 	 * @var array
 	 */
 	protected $arrCache = array(); // Backwards compatibility
@@ -140,10 +153,14 @@ abstract class System
 
 
 	/**
+	 * Get an object property
+	 * 
 	 * Lazy load the Input and Environment libraries (which are now static) and
 	 * only include them as object property if an old module requires it
-	 * @param string
-	 * @return mixed|null
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return mixed|null The property value or null
 	 */
 	public function __get($strKey)
 	{
@@ -163,9 +180,10 @@ abstract class System
 
 	/**
 	 * Import a library and make it accessible by its name or an optional key
-	 * @param string
-	 * @param string
-	 * @param boolean
+	 * 
+	 * @param string  $strClass The class name
+	 * @param string  $strKey   An optional key to store the object under
+	 * @param boolean $blnForce If true, existing objects will be overridden
 	 */
 	protected function import($strClass, $strKey=null, $blnForce=false)
 	{
@@ -181,11 +199,13 @@ abstract class System
 
 
 	/**
-	 * Instantiate a library in non-object context
-	 * @param string
-	 * @param string
-	 * @param boolean
-	 * @return object
+	 * Import a library in non-object context
+	 * 
+	 * @param string  $strClass The class name
+	 * @param string  $strKey   An optional key to store the object under
+	 * @param boolean $blnForce If true, existing objects will be overridden
+	 * 
+	 * @return object The imported object
 	 */
 	public static function importStatic($strClass, $strKey=null, $blnForce=false)
 	{
@@ -201,12 +221,13 @@ abstract class System
 
 
 	/**
-	 * Add a log entry
-	 * @param string
-	 * @param string
-	 * @param string
+	 * Add a log entry to the database
+	 * 
+	 * @param string $strText     The log message
+	 * @param string $strFunction The function name
+	 * @param string $strCategory The category name
 	 */
-	public static function log($strText, $strFunction, $strAction)
+	public static function log($strText, $strFunction, $strCategory)
 	{
 		$strUa = 'N/A';
 		$strIp = '127.0.0.1';
@@ -221,23 +242,25 @@ abstract class System
 		}
 
 		Database::getInstance()->prepare("INSERT INTO tl_log (tstamp, source, action, username, text, func, ip, browser) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")
-							   ->execute(time(), (TL_MODE == 'FE' ? 'FE' : 'BE'), $strAction, ($GLOBALS['TL_USERNAME'] ? $GLOBALS['TL_USERNAME'] : ''), specialchars($strText), $strFunction, $strIp, $strUa);
+							   ->execute(time(), (TL_MODE == 'FE' ? 'FE' : 'BE'), $strCategory, ($GLOBALS['TL_USERNAME'] ? $GLOBALS['TL_USERNAME'] : ''), specialchars($strText), $strFunction, $strIp, $strUa);
 
 		// HOOK: allow to add custom loggers
 		if (isset($GLOBALS['TL_HOOKS']['addLogEntry']) && is_array($GLOBALS['TL_HOOKS']['addLogEntry']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['addLogEntry'] as $callback)
 			{
-				static::importStatic($callback[0])->$callback[1]($strText, $strFunction, $strAction);
+				static::importStatic($callback[0])->$callback[1]($strText, $strFunction, $strCategory);
 			}
 		}
 	}
 
 
 	/**
-	 * Add a request string to the current URI string
-	 * @param string
-	 * @return string
+	 * Add a request string to the current URL
+	 * 
+	 * @param string $strRequest The string to be added
+	 * 
+	 * @return string The new URL
 	 */
 	public static function addToUrl($strRequest)
 	{
@@ -292,8 +315,9 @@ abstract class System
 
 	/**
 	 * Redirect to another page
-	 * @param string
-	 * @param integer
+	 * 
+	 * @param string  $strLocation The target URL
+	 * @param integer $intStatus   The HTTP status code (defaults to 303)
 	 */
 	public static function redirect($strLocation, $intStatus=303)
 	{
@@ -342,10 +366,12 @@ abstract class System
 
 
 	/**
-	 * Return the current referer URL and optionally encode ampersands
-	 * @param boolean
-	 * @param string
-	 * @return string
+	 * Return the referer URL and optionally encode ampersands
+	 * 
+	 * @param boolean $blnEncodeAmpersands If true, ampersands will be encoded
+	 * @param string  $strTable            An optional table name
+	 * 
+	 * @return string The referer URL
 	 */
 	public static function getReferer($blnEncodeAmpersands=false, $strTable=null)
 	{
@@ -380,10 +406,11 @@ abstract class System
 
 
 	/**
-	 * Return the request string or an empty string if the request string
-	 * is "index.php" and optionally encode ampersands
-	 * @param boolean
-	 * @return string
+	 * Return the request string without the index.php fragment
+	 * 
+	 * @param boolean $blnAmpersand If true, ampersands will be encoded
+	 * 
+	 * @return string The request string
 	 */
 	public static function getIndexFreeRequest($blnAmpersand=true)
 	{
@@ -400,13 +427,14 @@ abstract class System
 
 	/**
 	 * Load a set of language files
-	 * @param string
-	 * @param boolean
-	 * @param boolean
+	 * 
+	 * @param string  $strName     The table name
+	 * @param boolean $strLanguage An optional language code
+	 * @param boolean $blnNoCache  If true, the cache will be bypassed
 	 */
-	public static function loadLanguageFile($strName, $strLanguage=false, $blnNoCache=false)
+	public static function loadLanguageFile($strName, $strLanguage=null, $blnNoCache=false)
 	{
-		if (!$strLanguage)
+		if ($strLanguage === null)
 		{
 			$strLanguage = $GLOBALS['TL_LANGUAGE'];
 		}
@@ -491,9 +519,11 @@ abstract class System
 
 	/**
 	 * Parse a date format string and translate textual representations
-	 * @param string
-	 * @param integer
-	 * @return string
+	 * 
+	 * @param string  $strFormat The date format string
+	 * @param integer $intTstamp An optional timestamp
+	 * 
+	 * @return string The textual representation of the date
 	 */
 	public static function parseDate($strFormat, $intTstamp=null)
 	{
@@ -572,110 +602,11 @@ abstract class System
 
 
 	/**
-	 * Add an error message
-	 * @param string
-	 * @deprecated Use Message::addError() instead
-	 */
-	protected function addErrorMessage($strMessage)
-	{
-		Message::addError($strMessage);
-	}
-
-
-	/**
-	 * Add a confirmation message
-	 * @param string
-	 * @deprecated Use Message::addConfirmation() instead
-	 */
-	protected function addConfirmationMessage($strMessage)
-	{
-		Message::addConfirmation($strMessage);
-	}
-
-
-	/**
-	 * Add a new message
-	 * @param string
-	 * @deprecated Use Message::addNew() instead
-	 */
-	protected function addNewMessage($strMessage)
-	{
-		Message::addNew($strMessage);
-	}
-
-
-	/**
-	 * Add an info message
-	 * @param string
-	 * @deprecated Use Message::addInfo() instead
-	 */
-	protected function addInfoMessage($strMessage)
-	{
-		Message::addInfo($strMessage);
-	}
-
-
-	/**
-	 * Add a raw message
-	 * @param string
-	 * @deprecated Use Message::addRaw() instead
-	 */
-	protected function addRawMessage($strMessage)
-	{
-		Message::addRaw($strMessage);
-	}
-
-
-	/**
-	 * Add a message
-	 * @param string
-	 * @param string
-	 * @deprecated Use Message::add() instead
-	 */
-	protected function addMessage($strMessage, $strType)
-	{
-		Message::add($strMessage, $strType);
-	}
-
-
-	/**
-	 * Return all messages as HTML
-	 * @param boolean
-	 * @param boolean
-	 * @return string
-	 * @deprecated Use Message::generate() instead
-	 */
-	protected function getMessages($blnDcLayout=false, $blnNoWrapper=false)
-	{
-		return Message::generate($blnDcLayout, $blnNoWrapper);
-	}
-
-
-	/**
-	 * Reset the message system
-	 * @deprecated Use Message::reset() instead
-	 */
-	protected function resetMessages()
-	{
-		Message::reset();
-	}
-
-
-	/**
-	 * Return all available message types
-	 * @return array
-	 * @deprecated Use Message::getTypes() instead
-	 */
-	protected function getMessageTypes()
-	{
-		return Message::getTypes();
-	}
-
-
-	/**
-	 * Urlencode an image path preserving slashes
-	 * @param string
-	 * @return string
+	 * Urlencode a file path preserving slashes
+	 * 
+	 * @param string $strPath The file path
+	 * 
+	 * @return string The encoded file path
 	 */
 	public static function urlEncode($strPath)
 	{
@@ -685,12 +616,13 @@ abstract class System
 
 	/**
 	 * Set a cookie
-	 * @param string
-	 * @param mixed
-	 * @param integer
-	 * @param string
-	 * @param string
-	 * @param boolean
+	 * 
+	 * @param string  $strName    The cookie name
+	 * @param mixed   $varValue   The cookie value
+	 * @param integer $intExpires The expiration date
+	 * @param string  $strPath    An optional path
+	 * @param string  $strDomain  An optional domain name
+	 * @param boolean $blnSecure  If true, the secure flag will be set
 	 */
 	public static function setCookie($strName, $varValue, $intExpires, $strPath=null, $strDomain=null, $blnSecure=false)
 	{
@@ -722,9 +654,11 @@ abstract class System
 
 
 	/**
-	 * Split a friendly name address and return name and e-mail as array
-	 * @param string
-	 * @return array
+	 * Split a friendly-name e-address and return name and e-mail as array
+	 * 
+	 * @param string $strEmail A friendly-name e-mail address
+	 * 
+	 * @return array An array with name and e-mail address
 	 */
 	public static function splitFriendlyName($strEmail)
 	{
@@ -744,70 +678,12 @@ abstract class System
 
 
 	/**
-	 * Encode an internationalized domain name
-	 * @param string
-	 * @return string
-	 * @deprecated Use Idna::encode() instead
-	 */
-	protected function idnaEncode($strDomain)
-	{
-		return Idna::encode($strDomain);
-	}
-
-
-	/**
-	 * Decode an internationalized domain name
-	 * @param string
-	 * @return string
-	 * @deprecated Use Idna::decode() instead
-	 */
-	protected function idnaDecode($strDomain)
-	{
-		return Idna::decode($strDomain);
-	}
-
-
-	/**
-	 * Encode an e-mail address
-	 * @param string
-	 * @return string
-	 * @deprecated Use Idna::encodeEmail() instead
-	 */
-	protected function idnaEncodeEmail($strEmail)
-	{
-		return Idna::encodeEmail($strEmail);
-	}
-
-
-	/**
-	 * Encode an URL
-	 * @param string
-	 * @return string
-	 * @deprecated Use Idna::encodeUrl() instead
-	 */
-	protected function idnaEncodeUrl($strUrl)
-	{
-		return Idna::encodeUrl($strUrl);
-	}
-
-
-	/**
-	 * Validate an e-mail address
-	 * @param string
-	 * @return boolean
-	 * @deprecated Use Validator::isEmail() instead
-	 */
-	protected function isValidEmailAddress($strEmail)
-	{
-		return Validator::isEmail($strEmail);
-	}
-
-
-	/**
-	 * Convert a filesize into a human readable format
-	 * @param integer
-	 * @param integer
-	 * @return string
+	 * Convert a byte value into a human readable format
+	 * 
+	 * @param integer $intSize     The size in bytes
+	 * @param integer $intDecimals The number of decimals to show
+	 * 
+	 * @return string The human readable size
 	 */
 	public static function getReadableSize($intSize, $intDecimals=1)
 	{
@@ -822,9 +698,11 @@ abstract class System
 
 	/**
 	 * Format a number
-	 * @param mixed
-	 * @param integer
-	 * @return mixed
+	 * 
+	 * @param mixed   $varNumber   An integer or float number
+	 * @param integer $intDecimals The number of decimals to show
+	 * 
+	 * @return mixed The formatted number
 	 */
 	public static function getFormattedNumber($varNumber, $intDecimals=2)
 	{
@@ -834,8 +712,10 @@ abstract class System
 
 	/**
 	 * Anonymize an IP address by overriding the last chunk
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string $strIp The IP address
+	 * 
+	 * @return string The encoded IP address
 	 */
 	public static function anonymizeIp($strIp)
 	{
@@ -866,8 +746,10 @@ abstract class System
 
 	/**
 	 * Compile a Model class name from a table name (e.g. tl_form_field becomes FormFieldModel)
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string $strTable The table name
+	 * 
+	 * @return string The model class name
 	 */
 	public static function getModelClassFromTable($strTable)
 	{
@@ -879,5 +761,199 @@ abstract class System
 		}
 
 		return implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+	}
+
+
+	/**
+	 * Add an error message
+	 * 
+	 * @param string $strMessage The error message
+	 * 
+	 * @deprecated Use Message::addError() instead
+	 */
+	protected function addErrorMessage($strMessage)
+	{
+		Message::addError($strMessage);
+	}
+
+
+	/**
+	 * Add a confirmation message
+	 * 
+	 * @param string $strMessage The confirmation
+	 * 
+	 * @deprecated Use Message::addConfirmation() instead
+	 */
+	protected function addConfirmationMessage($strMessage)
+	{
+		Message::addConfirmation($strMessage);
+	}
+
+
+	/**
+	 * Add a new message
+	 * 
+	 * @param string $strMessage The new message
+	 * 
+	 * @deprecated Use Message::addNew() instead
+	 */
+	protected function addNewMessage($strMessage)
+	{
+		Message::addNew($strMessage);
+	}
+
+
+	/**
+	 * Add an info message
+	 * 
+	 * @param string $strMessage The info message
+	 * 
+	 * @deprecated Use Message::addInfo() instead
+	 */
+	protected function addInfoMessage($strMessage)
+	{
+		Message::addInfo($strMessage);
+	}
+
+
+	/**
+	 * Add an unformatted message
+	 * 
+	 * @param string $strMessage The unformatted message
+	 * 
+	 * @deprecated Use Message::addRaw() instead
+	 */
+	protected function addRawMessage($strMessage)
+	{
+		Message::addRaw($strMessage);
+	}
+
+
+	/**
+	 * Add a message
+	 * 
+	 * @param string $strMessage The message
+	 * @param string $strType    The message type
+	 * 
+	 * @deprecated Use Message::add() instead
+	 */
+	protected function addMessage($strMessage, $strType)
+	{
+		Message::add($strMessage, $strType);
+	}
+
+
+	/**
+	 * Return all messages as HTML
+	 * 
+	 * @param boolean $blnDcLayout If true, the line breaks are different
+	 * @param boolean $blnNoWrapper If true, there will be no wrapping DIV
+	 * 
+	 * @return string The messages HTML markup
+	 * 
+	 * @deprecated Use Message::generate() instead
+	 */
+	protected function getMessages($blnDcLayout=false, $blnNoWrapper=false)
+	{
+		return Message::generate($blnDcLayout, $blnNoWrapper);
+	}
+
+
+	/**
+	 * Reset the message system
+	 * 
+	 * @deprecated Use Message::reset() instead
+	 */
+	protected function resetMessages()
+	{
+		Message::reset();
+	}
+
+
+	/**
+	 * Return all available message types
+	 * 
+	 * @return array An array of message types
+	 * 
+	 * @deprecated Use Message::getTypes() instead
+	 */
+	protected function getMessageTypes()
+	{
+		return Message::getTypes();
+	}
+
+
+	/**
+	 * Encode an internationalized domain name
+	 * 
+	 * @param string $strDomain The domain name
+	 * 
+	 * @return string The encoded domain name
+	 * 
+	 * @deprecated Use Idna::encode() instead
+	 */
+	protected function idnaEncode($strDomain)
+	{
+		return Idna::encode($strDomain);
+	}
+
+
+	/**
+	 * Decode an internationalized domain name
+	 * 
+	 * @param string $strDomain The domain name
+	 * 
+	 * @return string The decoded domain name
+	 * 
+	 * @deprecated Use Idna::decode() instead
+	 */
+	protected function idnaDecode($strDomain)
+	{
+		return Idna::decode($strDomain);
+	}
+
+
+	/**
+	 * Encode the domain in an e-mail address
+	 * 
+	 * @param string $strEmail The e-mail address
+	 * 
+	 * @return string The encoded e-mail address
+	 * 
+	 * @deprecated Use Idna::encodeEmail() instead
+	 */
+	protected function idnaEncodeEmail($strEmail)
+	{
+		return Idna::encodeEmail($strEmail);
+	}
+
+
+	/**
+	 * Encode the domain in an URL
+	 * 
+	 * @param string $strUrl The URL
+	 * 
+	 * @return string The encoded URL
+	 * 
+	 * @deprecated Use Idna::encodeUrl() instead
+	 */
+	protected function idnaEncodeUrl($strUrl)
+	{
+		return Idna::encodeUrl($strUrl);
+	}
+
+
+	/**
+	 * Validate an e-mail address
+	 * 
+	 * @param string $strEmail The e-mail address
+	 * 
+	 * @return boolean True if it is a valid e-mail address
+	 * 
+	 * @deprecated Use Validator::isEmail() instead
+	 */
+	protected function isValidEmailAddress($strEmail)
+	{
+		return Validator::isEmail($strEmail);
 	}
 }

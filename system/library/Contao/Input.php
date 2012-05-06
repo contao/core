@@ -14,68 +14,48 @@ namespace Contao;
 
 
 /**
- * Class Input
- *
- * Provide methods to clean up user input and to prevent XSS.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Safely read the user input
+ * 
+ * The class functions as an adapter for the global input arrays ($_GET, $_POST,
+ * $_COOKIE) and safely returns their values. To prevent XSS vulnerabilities,
+ * you should always use the class when reading user input.
+ * 
+ * Usage:
+ * 
+ *     if (Input::get('action') == 'register')
+ *     {
+ *         $username = Input::post('username');
+ *         $password = Input::post('password');
+ *     }
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Input
 {
 
 	/**
-	 * Current object instance (Singleton)
-	 * @var Input
+	 * Object instance (Singleton)
+	 * @var \Input
 	 */
 	protected static $objInstance;
 
 	/**
-	 * Cache array
+	 * Cache
 	 * @var array
 	 */
 	protected static $arrCache = array();
 
 	/**
-	 * Magic quotes
+	 * Magic quotes setting
 	 * @var boolean
 	 */
 	protected static $blnMagicQuotes;
 
 
 	/**
-	 * Clean the keys of the request arrays
-	 */
-	protected function __construct()
-	{
-		static::initialize();
-	}
-
-
-	/**
-	 * Prevent cloning of the object (Singleton)
-	 */
-	final public function __clone() {}
-
-
-	/**
-	 * Return the current object instance (Singleton)
-	 * @return \Input
-	 * @deprecated Input is now a static class
-	 */
-	public static function getInstance()
-	{
-		if (!is_object(static::$objInstance))
-		{
-			static::$objInstance = new static();
-		}
-
-		return static::$objInstance;
-	}
-
-
-	/**
-	 * Clean the global GCP arrays
+	 * Clean the global GPC arrays
 	 */
 	public static function initialize()
 	{
@@ -89,10 +69,12 @@ class Input
 
 
 	/**
-	 * Return a $_GET parameter
-	 * @param string
-	 * @param boolean
-	 * @return mixed
+	 * Return a $_GET variable
+	 * 
+	 * @param string  $strKey            The variable name
+	 * @param boolean $blnDecodeEntities If true, all entities will be decoded
+	 * 
+	 * @return mixed The cleaned variable value
 	 */
 	public static function get($strKey, $blnDecodeEntities=false)
 	{
@@ -125,10 +107,12 @@ class Input
 
 
 	/**
-	 * Return a $_POST parameter
-	 * @param string
-	 * @param boolean
-	 * @return mixed
+	 * Return a $_POST variable
+	 * 
+	 * @param string  $strKey            The variable name
+	 * @param boolean $blnDecodeEntities If true, all entities will be decoded
+	 * 
+	 * @return mixed The cleaned variable value
 	 */
 	public static function post($strKey, $blnDecodeEntities=false)
 	{
@@ -161,10 +145,12 @@ class Input
 
 
 	/**
-	 * Return a $_POST parameter preserving allowed HTML tags
-	 * @param string
-	 * @param boolean
-	 * @return mixed
+	 * Return a $_POST variable preserving allowed HTML tags
+	 * 
+	 * @param string  $strKey            The variable name
+	 * @param boolean $blnDecodeEntities If true, all entities will be decoded
+	 * 
+	 * @return mixed The cleaned variable value
 	 */
 	public static function postHtml($strKey, $blnDecodeEntities=false)
 	{
@@ -197,9 +183,11 @@ class Input
 
 
 	/**
-	 * Return a $_POST parameter unencoded without stripping tags
-	 * @param string
-	 * @return mixed
+	 * Return a raw, unsafe $_POST variable
+	 * 
+	 * @param string $strKey The variable name
+	 * 
+	 * @return mixed The raw variable value
 	 */
 	public static function postRaw($strKey)
 	{
@@ -226,10 +214,12 @@ class Input
 
 
 	/**
-	 * Return a $_COOKIE parameter
-	 * @param string
-	 * @param boolean
-	 * @return mixed
+	 * Return a $_COOKIE variable
+	 * 
+	 * @param string  $strKey            The variable name
+	 * @param boolean $blnDecodeEntities If true, all entities will be decoded
+	 * 
+	 * @return mixed The cleaned variable value
 	 */
 	public static function cookie($strKey, $blnDecodeEntities=false)
 	{
@@ -262,9 +252,10 @@ class Input
 
 
 	/**
-	 * Set a $_GET parameter
-	 * @param string
-	 * @param mixed
+	 * Set a $_GET variable
+	 * 
+	 * @param string $strKey   The variable name
+	 * @param mixed  $varValue The variable value
 	 */
 	public static function setGet($strKey, $varValue)
 	{
@@ -285,9 +276,10 @@ class Input
 
 
 	/**
-	 * Set a $_POST parameter
-	 * @param string
-	 * @param mixed
+	 * Set a $_POST variable
+	 * 
+	 * @param string $strKey   The variable name
+	 * @param mixed  $varValue The variable value
 	 */
 	public static function setPost($strKey, $varValue)
 	{
@@ -309,9 +301,10 @@ class Input
 
 
 	/**
-	 * Set a $_COOKIE parameter
-	 * @param string
-	 * @param mixed
+	 * Set a $_COOKIE variable
+	 * 
+	 * @param string $strKey   The variable name
+	 * @param mixed  $varValue The variable value
 	 */
 	public static function setCookie($strKey, $varValue)
 	{
@@ -341,9 +334,11 @@ class Input
 
 
 	/**
-	 * Sanitize a key name or an array (thanks to Andreas Schempp)
-	 * @param mixed
-	 * @return mixed
+	 * Sanitize the variable names (thanks to Andreas Schempp)
+	 * 
+	 * @param mixed $varValue A variable name or an array of variable names
+	 * 
+	 * @return mixed The clean name or array of names
 	 */
 	protected static function cleanKey($varValue)
 	{
@@ -378,8 +373,10 @@ class Input
 
 	/**
 	 * Strip slashes
-	 * @param mixed
-	 * @return mixed
+	 * 
+	 * @param mixed $varValue A string or array
+	 * 
+	 * @return mixed The string or array without slashes
 	 */
 	protected static function stripSlashes($varValue)
 	{
@@ -404,10 +401,12 @@ class Input
 
 
 	/**
-	 * Strip tags preserving HTML comments
-	 * @param mixed
-	 * @param string
-	 * @return mixed
+	 * Strip HTML and PHP tags preserving HTML comments
+	 * 
+	 * @param mixed  $varValue       A string or array
+	 * @param string $strAllowedTags A string of tags to preserve
+	 * 
+	 * @return mixed The cleaned string or array
 	 */
 	protected static function stripTags($varValue, $strAllowedTags='')
 	{
@@ -436,10 +435,12 @@ class Input
 
 
 	/**
-	 * Clean user input and try to prevent XSS attacks
-	 * @param mixed
-	 * @param boolean
-	 * @return mixed
+	 * Clean a value and try to prevent XSS attacks
+	 * 
+	 * @param mixed   $varValue      A string or array
+	 * @param boolean $blnStrictMode If true, the function removes also JavaScript event handlers
+	 * 
+	 * @return mixed The cleaned string or array
 	 */
 	protected static function xssClean($varValue, $blnStrictMode=false)
 	{
@@ -547,8 +548,10 @@ class Input
 
 	/**
 	 * Decode HTML entities
-	 * @param mixed
-	 * @return mixed
+	 * 
+	 * @param mixed $varValue A string or array
+	 * 
+	 * @return mixed The decoded string or array
 	 */
 	protected static function decodeEntities($varValue)
 	{
@@ -577,9 +580,11 @@ class Input
 
 
 	/**
-	 * Preserve basic entities
-	 * @param mixed
-	 * @return mixed
+	 * Preserve basic entities by replacing them with square brackets (e.g. &amp; becomes [amp])
+	 * 
+	 * @param mixed $varValue A string or array
+	 * 
+	 * @return mixed The string or array with the converted entities
 	 */
 	protected static function preserveBasicEntities($varValue)
 	{
@@ -611,9 +616,11 @@ class Input
 
 
 	/**
-	 * Encode special characters
-	 * @param mixed
-	 * @return mixed
+	 * Encode special characters which are potentially dangerous
+	 * 
+	 * @param mixed $varValue A string or array
+	 * 
+	 * @return mixed The encoded string or array
 	 */
 	protected static function encodeSpecialChars($varValue)
 	{
@@ -642,8 +649,10 @@ class Input
 
 	/**
 	 * Fallback to the session form data if there is no post data
-	 * @param string
-	 * @return mixed
+	 * 
+	 * @param string $strKey The variable name
+	 * 
+	 * @return mixed The variable value
 	 */
 	protected static function findPost($strKey)
 	{
@@ -658,5 +667,42 @@ class Input
 		}
 
 		return null;
+	}
+
+
+	/**
+	 * Clean the keys of the request arrays
+	 * 
+	 * @deprecated Input is now a static class
+	 */
+	protected function __construct()
+	{
+		static::initialize();
+	}
+
+
+	/**
+	 * Prevent cloning of the object (Singleton)
+	 * 
+	 * @deprecated Input is now a static class
+	 */
+	final public function __clone() {}
+
+
+	/**
+	 * Return the object instance (Singleton)
+	 * 
+	 * @return \Input The object instance
+	 * 
+	 * @deprecated Input is now a static class
+	 */
+	public static function getInstance()
+	{
+		if (!is_object(static::$objInstance))
+		{
+			static::$objInstance = new static();
+		}
+
+		return static::$objInstance;
 	}
 }

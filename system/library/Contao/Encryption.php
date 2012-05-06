@@ -16,7 +16,7 @@ use \Exception;
 
 
 /**
- * Encrypt and decrypt data
+ * Encrypts and decrypts data
  * 
  * The class can be used to encrypt and decrypt data based on the encryption
  * string that is set during the Contao installation.

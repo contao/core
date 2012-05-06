@@ -16,23 +16,52 @@ use \File, \Files, \System;
 
 
 /**
- * Class Image
- *
- * Provide methods to resize images.
- * @copyright  Leo Feyer 2011-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Resizes images
+ * 
+ * The class resizes images and stores them in the assets/images folder.
+ * 
+ * The following resize modes are supported:
+ * 
+ * * Proportional: proportional resize
+ * * Fit-the-box:  proportional resize that fits in the given dimensions
+ * * Crop:         the image will be cropped to fit
+ * 
+ * You can specify which part of the image will be preserved:
+ * 
+ * * left_top:      the top left corner will be preserved
+ * * center_top:    the top of the image will be preserved
+ * * right_top:     the top right corner will be preserved
+ * * left_center:   the left side of the image will be preserved
+ * * center_center: the center of the image will be preserved
+ * * right_center:  the right side of the image will be preserved
+ * * left_bottom:   the bottom left corner will be preserved
+ * * center_bottom: the bottom of the image will be preserved
+ * * right_bottm:   the bottom right corner will be preserved
+ * 
+ * Usage:
+ * 
+ *     // Stores the image in the assets/images folder
+ *     $src = Image::get('example.jpg', 640, 480, 'center_center');
+ * 
+ *     // Resizes the original image
+ *     Image::resize('example.jpg', 640, 480);
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Image
 {
 
 	/**
-	 * Resize or crop an image
-	 * @param string
-	 * @param integer
-	 * @param integer
-	 * @param string
-	 * @return boolean
+	 * Resize or crop an image and replace the original with the resized version
+	 * 
+	 * @param string  $image  The image path
+	 * @param integer $width  The target width
+	 * @param integer $height The target height
+	 * @param string  $mode   The resize mode
+	 * 
+	 * @return boolean True if the image could be resized successfully
 	 */
 	public static function resize($image, $width, $height, $mode='')
 	{
@@ -41,13 +70,15 @@ class Image
 
 
 	/**
-	 * Resize an image
-	 * @param string
-	 * @param integer
-	 * @param integer
-	 * @param string
-	 * @param string
-	 * @return string|null
+	 * Resize an image and store the resized version in the assets/images folder
+	 * 
+	 * @param string  $image  The image path
+	 * @param integer $width  The target width
+	 * @param integer $height The target height
+	 * @param string  $mode   The resize mode
+	 * @param string  $target An optional target path
+	 * 
+	 * @return string|null The path of the resized image or null
 	 */
 	public static function get($image, $width, $height, $mode='', $target=null)
 	{

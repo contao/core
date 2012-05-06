@@ -16,20 +16,28 @@ use \Date, \Idna, \System;
 
 
 /**
- * Class Validator
- *
- * Provide methods to validate data.
- * @copyright  Leo Feyer 2011-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Validates arbitrary data
+ * 
+ * Usage:
+ * 
+ *     if (Validator::isEmail($recipient))
+ *     {
+ *         $email->sendTo($recipient);
+ *     }
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Validator extends System
 {
 
 	/**
 	 * Numeric characters (including full stop [.] minus [-] and space [ ])
-	 * @param mixed
-	 * @return boolean
+	 * 
+	 * @param mixed $varValue The value to be validated
+	 * 
+	 * @return boolean True if the value is numeric
 	 */
 	public static function isNumeric($varValue)
 	{
@@ -39,8 +47,10 @@ class Validator extends System
 
 	/**
 	 * Alphabetic characters (including full stop [.] minus [-] and space [ ])
-	 * @param mixed
-	 * @return boolean
+	 * 
+	 * @param mixed $varValue The value to be validated
+	 * 
+	 * @return boolean True if the value is alphabetic
 	 */
 	public static function isAlphabetic($varValue)
 	{
@@ -57,8 +67,10 @@ class Validator extends System
 
 	/**
 	 * Alphanumeric characters (including full stop [.] minus [-], underscore [_] and space [ ])
-	 * @param mixed
-	 * @return boolean
+	 * 
+	 * @param mixed $varValue The value to be validated
+	 * 
+	 * @return boolean True if the value is alphanumeric
 	 */
 	public static function isAlphanumeric($varValue)
 	{
@@ -75,8 +87,10 @@ class Validator extends System
 
 	/**
 	 * Characters that are usually encoded by class Input [=<>()#/])
-	 * @param mixed
-	 * @return boolean
+	 * 
+	 * @param mixed $varValue The value to be validated
+	 * 
+	 * @return boolean True if the value does not match the characters
 	 */
 	public static function isExtendedAlphanumeric($varValue)
 	{
@@ -86,8 +100,10 @@ class Validator extends System
 
 	/**
 	 * Valid date formats
-	 * @param mixed
-	 * @return boolean
+	 * 
+	 * @param mixed $varValue The value to be validated
+	 * 
+	 * @return boolean True if the value is a valid date format
 	 */
 	public static function isDate($varValue)
 	{
@@ -98,8 +114,10 @@ class Validator extends System
 
 	/**
 	 * Valid time formats
-	 * @param mixed
-	 * @return boolean
+	 * 
+	 * @param mixed $varValue The value to be validated
+	 * 
+	 * @return boolean True if the value is a valid time format
 	 */
 	public static function isTime($varValue)
 	{
@@ -110,8 +128,10 @@ class Validator extends System
 
 	/**
 	 * Valid date and time formats
-	 * @param mixed
-	 * @return boolean
+	 * 
+	 * @param mixed $varValue The value to be validated
+	 * 
+	 * @return boolean True if the value is a valid date and time format
 	 */
 	public static function isDatim($varValue)
 	{
@@ -122,8 +142,10 @@ class Validator extends System
 
 	/**
 	 * Valid e-mail address
-	 * @param mixed
-	 * @return boolean
+	 * 
+	 * @param mixed $varValue The value to be validated
+	 * 
+	 * @return boolean True if the value is a valid e-mail address
 	 */
 	public static function isEmail($varValue)
 	{
@@ -133,8 +155,10 @@ class Validator extends System
 
 	/**
 	 * Valid URL
-	 * @param mixed
-	 * @return boolean
+	 * 
+	 * @param mixed $varValue The value to be validated
+	 * 
+	 * @return boolean True if the value is a valid URL
 	 */
 	public static function isUrl($varValue)
 	{
@@ -144,8 +168,10 @@ class Validator extends System
 
 	/**
 	 * Valid alias name
-	 * @param mixed
-	 * @return boolean
+	 * 
+	 * @param mixed $varValue The value to be validated
+	 * 
+	 * @return boolean True if the value is a valid alias name
 	 */
 	public static function isAlias($varValue)
 	{
@@ -155,8 +181,10 @@ class Validator extends System
 
 	/**
 	 * Valid folder alias name
-	 * @param mixed
-	 * @return boolean
+	 * 
+	 * @param mixed $varValue The value to be validated
+	 * 
+	 * @return boolean True if the value is a valid folder alias name
 	 */
 	public static function isFolderAlias($varValue)
 	{
@@ -166,8 +194,10 @@ class Validator extends System
 
 	/**
 	 * Valid phone number
-	 * @param mixed
-	 * @return boolean
+	 * 
+	 * @param mixed $varValue The value to be validated
+	 * 
+	 * @return boolean True if the value is a valid phone number
 	 */
 	public static function isPhone($varValue)
 	{
@@ -177,8 +207,10 @@ class Validator extends System
 
 	/**
 	 * Valid percentage
-	 * @param mixed
-	 * @return boolean
+	 * 
+	 * @param mixed $varValue The value to be validated
+	 * 
+	 * @return boolean True if the value is a valid percentage
 	 */
 	public static function isPercent($varValue)
 	{

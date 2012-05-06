@@ -16,12 +16,19 @@ use \Exception;
 
 
 /**
- * Class TemplateLoader
- *
- * Provide methods to automatically load template files.
- * @copyright  Leo Feyer 2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Automatically loads template files based on a mapper array
+ * 
+ * The class stores template names and automatically loads the files upon their
+ * first usage. It uses a mapper array to support complex nesting and arbitrary
+ * subfolders to store the template files in.
+ * 
+ * Usage:
+ * 
+ *     ClassLoader::addFile('moo_mediabox', 'core/templates');
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class TemplateLoader
 {
@@ -35,8 +42,9 @@ class TemplateLoader
 
 	/**
 	 * Add a new template with its file path
-	 * @param string
-	 * @param string
+	 * 
+	 * @param string $name The template name
+	 * @param string $file The path to the template folder
 	 */
 	public static function addFile($name, $file)
 	{
@@ -46,7 +54,8 @@ class TemplateLoader
 
 	/**
 	 * Add multiple new templates with their file paths
-	 * @param array
+	 * 
+	 * @param array An array of files
 	 */
 	public static function addFiles($files)
 	{
@@ -58,8 +67,9 @@ class TemplateLoader
 
 
 	/**
-	 * Return the files as array
-	 * @return array
+	 * Return the template files as array
+	 * 
+	 * @return array An array of files
 	 */
 	public static function getFiles()
 	{
@@ -68,9 +78,11 @@ class TemplateLoader
 
 
 	/**
-	 * Return the files matching the prefix as array
-	 * @param string
-	 * @return array
+	 * Return the files matching a prefix as array
+	 * 
+	 * @param string $prefix The prefix (e.g. "moo_")
+	 * 
+	 * @return array An array of matching files
 	 */
 	public static function getPrefixedFiles($prefix)
 	{
@@ -80,10 +92,13 @@ class TemplateLoader
 
 	/**
 	 * Return a template path
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string $template The template name
+	 * @param string $format   The output format (e.g. "html5")
+	 * @param string $custom   The custom templates folder (defaults to "templates")
+	 * 
+	 * @return string The path to the template file
+	 * 
 	 * @throws \Exception
 	 */
 	public static function getPath($template, $format, $custom='templates')

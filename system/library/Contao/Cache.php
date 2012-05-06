@@ -104,6 +104,7 @@ class Cache extends System
 
 	/**
 	 * Prevent direct instantiation (Singleton)
+	 * 
 	 * @deprecated Cache is now a static class
 	 */
 	protected function __construct() {}
@@ -111,6 +112,7 @@ class Cache extends System
 
 	/**
 	 * Prevent cloning of the object (Singleton)
+	 * 
 	 * @deprecated Cache is now a static class
 	 */
 	final public function __clone() {}

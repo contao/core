@@ -14,7 +14,7 @@ namespace Contao;
 
 
 /**
- * Read the environment variables
+ * Reads the environment variables
  * 
  * The class returns the environment variables (which are stored in the PHP
  * $_SERVER array) independent of the operating system.

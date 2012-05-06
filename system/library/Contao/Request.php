@@ -16,19 +16,31 @@ use \Exception;
 
 
 /**
- * Class Request
- *
- * Provide methods to handle HTTP request. This class uses some functions of
- * Drupal's HTTP request class that you can find on http://drupal.org.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Sends HTTP requests and reads the response
+ * 
+ * The class can be used to communitcate with services that are available via
+ * HTTP (e.g. the Contao Extension Repository or the Live Update Service). It
+ * uses some of Drupal's HTTP request class methods ({@see http://drupal.org}).
+ * 
+ * Usage:
+ * 
+ *     $request = new Request();
+ *     $request->send('http://www.inetrobots.com/liveupdate/version.txt');
+ * 
+ *     if (!$request->hasError())
+ *     {
+ *         echo "The latest Contao version is " . $request->response;
+ *     }
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Request
 {
 
 	/**
-	 * Data to be added to the request
+	 * Request data
 	 * @var string
 	 */
 	protected $strData;
@@ -70,7 +82,7 @@ class Request
 	protected $arrHeaders = array();
 
 	/**
-	 * Response headers array (these headers are returned)
+	 * Response headers (these headers are returned)
 	 * @var array
 	 */
 	protected $arrResponseHeaders = array();
@@ -88,8 +100,10 @@ class Request
 
 	/**
 	 * Set an object property
-	 * @param string
-	 * @param mixed
+	 * 
+	 * @param string $strKey   The property name
+	 * @param mixed  $varValue The property value
+	 * 
 	 * @throws \Exception
 	 */
 	public function __set($strKey, $varValue)
@@ -113,8 +127,10 @@ class Request
 
 	/**
 	 * Return an object property
-	 * @param string
-	 * @return mixed|null
+	 * 
+	 * @param string $strKey The property key
+	 * 
+	 * @return mixed|null The property value or null
 	 */
 	public function __get($strKey)
 	{
@@ -146,9 +162,10 @@ class Request
 
 
 	/**
-	 * Set additional request headers
-	 * @param string
-	 * @param mixed
+	 * Add request headers
+	 * 
+	 * @param string $strKey   The header name
+	 * @param mixed  $varValue The header value
 	 */
 	public function setHeader($strKey, $varValue)
 	{
@@ -158,7 +175,8 @@ class Request
 
 	/**
 	 * Return true if there was an error
-	 * @return boolean
+	 * 
+	 * @return boolean True if there was an error
 	 */
 	public function hasError()
 	{
@@ -167,10 +185,11 @@ class Request
 
 
 	/**
-	 * Perform an HTTP request (handle GET, POST, PUT and any other HTTP request)
-	 * @param string
-	 * @param string
-	 * @param string
+	 * Send the HTTP request
+	 * 
+	 * @param string $strUrl    The target URL
+	 * @param string $strData   Optional request data
+	 * @param string $strMethod An optional request method
 	 */
 	public function send($strUrl, $strData=null, $strMethod=null)
 	{

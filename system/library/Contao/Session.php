@@ -16,31 +16,39 @@ use \Exception;
 
 
 /**
- * Class Session
- *
- * Provide methods to set/get session data.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Handles reading and updating the session data
+ * 
+ * The class functions as an adapter for the PHP $_SESSION array and separates
+ * back end from front end session data.
+ * 
+ * Usage:
+ * 
+ *     $session = Session::getInstance();
+ *     $session->set('foo', 'bar');
+ *     echo $session::->('foo');
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class Session
 {
 
 	/**
-	 * Current object instance (Singleton)
-	 * @var Session
+	 * Object instance (Singleton)
+	 * @var \Session
 	 */
 	protected static $objInstance;
 
 	/**
-	 * Session array
+	 * Session data
 	 * @var array
 	 */
 	protected $arrSession;
 
 
 	/**
-	 * Get the session
+	 * Get the session data
 	 */
 	protected function __construct()
 	{
@@ -62,7 +70,7 @@ class Session
 
 
 	/**
-	 * Save the session
+	 * Save the session data
 	 */
 	public function __destruct()
 	{
@@ -90,8 +98,9 @@ class Session
 
 
 	/**
-	 * Return the current object instance (Singleton)
-	 * @return \Session
+	 * Return the object instance (Singleton)
+	 * 
+	 * @return \Session The object instance
 	 */
 	public static function getInstance()
 	{
@@ -105,9 +114,11 @@ class Session
 
 
 	/**
-	 * Return a particular session parameter
-	 * @param string
-	 * @return mixed
+	 * Return a session variable
+	 * 
+	 * @param string $strKey The variable name
+	 * 
+	 * @return mixed The variable value
 	 */
 	public function get($strKey)
 	{
@@ -116,9 +127,10 @@ class Session
 
 
 	/**
-	 * Set a particular session parameter
-	 * @param string
-	 * @param mixed
+	 * Set a session variable
+	 * 
+	 * @param string $strKey   The variable name
+	 * @param mixed  $varValue The variable value
 	 */
 	public function set($strKey, $varValue)
 	{
@@ -127,8 +139,9 @@ class Session
 
 
 	/**
-	 * Remove a particular session parameter
-	 * @param string
+	 * Remove a session variable
+	 * 
+	 * @param string $strKey The variable name
 	 */
 	public function remove($strKey)
 	{
@@ -137,8 +150,9 @@ class Session
 
 
 	/**
-	 * Return the current session array
-	 * @return array
+	 * Return the session data as array
+	 * 
+	 * @return array The session data
 	 */
 	public function getData()
 	{
@@ -147,8 +161,10 @@ class Session
 
 
 	/**
-	 * Set the current session data from an array
-	 * @param array
+	 * Set the session data from an array
+	 * 
+	 * @param array $arrData The session data
+	 * 
 	 * @throws \Exception
 	 */
 	public function setData($arrData)
@@ -163,8 +179,10 @@ class Session
 
 
 	/**
-	 * Append data to the current session
-	 * @param mixed
+	 * Append data to the session
+	 * 
+	 * @param mixed $varData The data object or array
+	 * 
 	 * @throws \Exception
 	 */
 	public function appendData($varData)
