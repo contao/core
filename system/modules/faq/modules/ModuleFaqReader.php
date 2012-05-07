@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \FaqModel, \FilesModel, \Input, \Module, \String;
-
 
 /**
  * Class ModuleFaqReader
@@ -25,7 +23,7 @@ use \BackendTemplate, \FaqModel, \FilesModel, \Input, \Module, \String;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Faq
  */
-class ModuleFaqReader extends Module
+class ModuleFaqReader extends \Module
 {
 
 	/**
@@ -43,7 +41,7 @@ class ModuleFaqReader extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### FAQ READER ###';
 			$objTemplate->title = $this->headline;
@@ -57,11 +55,11 @@ class ModuleFaqReader extends Module
 		// Set the item from the auto_item parameter
 		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
 		{
-			Input::setGet('items', Input::get('auto_item'));
+			\Input::setGet('items', \Input::get('auto_item'));
 		}
 
 		// Do not index or cache the page if no FAQ has been specified
-		if (!Input::get('items'))
+		if (!\Input::get('items'))
 		{
 			global $objPage;
 			$objPage->noSearch = 1;
@@ -94,7 +92,7 @@ class ModuleFaqReader extends Module
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->referer = 'javascript:history.go(-1)';
 
-		$objFaq = FaqModel::findPublishedByParentAndIdOrAlias((is_numeric(Input::get('items')) ? Input::get('items') : 0), Input::get('items'), $this->faq_categories);
+		$objFaq = \FaqModel::findPublishedByParentAndIdOrAlias((is_numeric(\Input::get('items')) ? \Input::get('items') : 0), \Input::get('items'), $this->faq_categories);
 
 		if ($objFaq === null)
 		{
@@ -104,7 +102,7 @@ class ModuleFaqReader extends Module
 
 			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
-			$this->Template->error = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], Input::get('items')) . '</p>';
+			$this->Template->error = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], \Input::get('items')) . '</p>';
 			return;
 		}
 
@@ -120,14 +118,14 @@ class ModuleFaqReader extends Module
 		// Clean RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$objFaq->answer = String::toXhtml($objFaq->answer);
+			$objFaq->answer = \String::toXhtml($objFaq->answer);
 		}
 		else
 		{
-			$objFaq->answer = String::toHtml5($objFaq->answer);
+			$objFaq->answer = \String::toHtml5($objFaq->answer);
 		}
 
-		$this->Template->answer = String::encodeEmail($objFaq->answer);
+		$this->Template->answer = \String::encodeEmail($objFaq->answer);
 		$this->Template->addImage = false;
 
 		// Add image
@@ -139,7 +137,7 @@ class ModuleFaqReader extends Module
 			}
 			else
 			{
-				$objModel = FilesModel::findByPk($objFaq->singleSRC);
+				$objModel = \FilesModel::findByPk($objFaq->singleSRC);
 
 				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 				{

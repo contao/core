@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Backend, \BackendTemplate, \Environment, \Input, \RequestToken, \String, \executable;
-
 
 /**
  * Class RebuildIndex
@@ -26,7 +24,7 @@ use \Backend, \BackendTemplate, \Environment, \Input, \RequestToken, \String, \e
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class RebuildIndex extends Backend implements executable
+class RebuildIndex extends \Backend implements \executable
 {
 
 	/**
@@ -35,7 +33,7 @@ class RebuildIndex extends Backend implements executable
 	 */
 	public function isActive()
 	{
-		return ($GLOBALS['TL_CONFIG']['enableSearch'] && Input::get('act') == 'index');
+		return ($GLOBALS['TL_CONFIG']['enableSearch'] && \Input::get('act') == 'index');
 	}
 
 
@@ -51,8 +49,8 @@ class RebuildIndex extends Backend implements executable
 		}
 
 		$time = time();
-		$objTemplate = new BackendTemplate('be_rebuild_index');
-		$objTemplate->action = ampersand(Environment::get('request'));
+		$objTemplate = new \BackendTemplate('be_rebuild_index');
+		$objTemplate->action = ampersand(\Environment::get('request'));
 		$objTemplate->indexHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['searchIndex'];
 		$objTemplate->isActive = $this->isActive();
 
@@ -64,12 +62,12 @@ class RebuildIndex extends Backend implements executable
 		}
 
 		// Rebuild the index
-		if (Input::get('act') == 'index')
+		if (\Input::get('act') == 'index')
 		{
 			// Check the request token (see #4007)
-			if (!isset($_GET['rt']) || !RequestToken::validate(Input::get('rt')))
+			if (!isset($_GET['rt']) || !\RequestToken::validate(\Input::get('rt')))
 			{
-				$this->Session->set('INVALID_TOKEN_URL', Environment::get('request'));
+				$this->Session->set('INVALID_TOKEN_URL', \Environment::get('request'));
 				$this->redirect('contao/confirm.php');
 			}
 
@@ -100,18 +98,18 @@ class RebuildIndex extends Backend implements executable
 			$this->setCookie('FE_PREVIEW', 0, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
 
 			// Calculate the hash
-			$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? Environment::get('ip') : '') . 'FE_USER_AUTH');
+			$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . 'FE_USER_AUTH');
 
 			// Remove old sessions
 			$this->Database->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")
 						   ->execute(($time - $GLOBALS['TL_CONFIG']['sessionTimeout']), $strHash);
 
 			// Log in the front end user
-			if (is_numeric(Input::get('user')) && Input::get('user') > 0)
+			if (is_numeric(\Input::get('user')) && \Input::get('user') > 0)
 			{
 				// Insert a new session
 				$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
-							   ->execute(Input::get('user'), $time, 'FE_USER_AUTH', session_id(), Environment::get('ip'), $strHash);
+							   ->execute(\Input::get('user'), $time, 'FE_USER_AUTH', session_id(), \Environment::get('ip'), $strHash);
 
 				// Set the cookie
 				$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);
@@ -122,7 +120,7 @@ class RebuildIndex extends Backend implements executable
 			{
 				// Unset the cookies
 				$this->setCookie('FE_USER_AUTH', $strHash, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
-				$this->setCookie('FE_AUTO_LOGIN', Input::cookie('FE_AUTO_LOGIN'), ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
+				$this->setCookie('FE_AUTO_LOGIN', \Input::cookie('FE_AUTO_LOGIN'), ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
 			}
 
 			$strBuffer = '';
@@ -131,7 +129,7 @@ class RebuildIndex extends Backend implements executable
 			// Display the pages
 			for ($i=0; $i<count($arrPages); $i++)
 			{
-				$strBuffer .= '<img src="' . $arrPages[$i] . '#' . $rand . $i . '" alt="" class="invisible">' . String::substr($arrPages[$i], 100) . "<br>\n";
+				$strBuffer .= '<img src="' . $arrPages[$i] . '#' . $rand . $i . '" alt="" class="invisible">' . \String::substr($arrPages[$i], 100) . "<br>\n";
 			}
 
 			$objTemplate->content = $strBuffer;

@@ -16,8 +16,6 @@
  * Namespace
  */
 namespace <?php echo $this->package; ?>;
-use \BackendModule;
-
 
 /**
  * Class <?php echo $this->class; ?> 
@@ -26,7 +24,7 @@ use \BackendModule;
  * @author     <?php echo $this->author; ?> 
  * @package    Devtools
  */
-class <?php echo $this->class; ?> extends BackendModule
+class <?php echo $this->class; ?> extends \BackendModule
 {
 
 	/**

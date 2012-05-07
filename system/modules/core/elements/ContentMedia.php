@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \ContentElement, \File, \FilesModel;
-
 
 /**
  * Class ContentMedia
@@ -26,7 +24,7 @@ use \ContentElement, \File, \FilesModel;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ContentMedia extends ContentElement
+class ContentMedia extends \ContentElement
 {
 
 	/**
@@ -60,7 +58,7 @@ class ContentMedia extends ContentElement
 			return '';
 		}
 
-		$objFiles = FilesModel::findMultipleByIdsAndExtensions($source, array('mp4','m4v','mov','wmv','webm','ogv','m4a','mp3','wma','mpeg','wav'));
+		$objFiles = \FilesModel::findMultipleByIdsAndExtensions($source, array('mp4','m4v','mov','wmv','webm','ogv','m4a','mp3','wma','mpeg','wav'));
 
 		if ($objFiles === null)
 		{
@@ -109,7 +107,7 @@ class ContentMedia extends ContentElement
 		// Optional poster
 		if ($this->posterSRC != '')
 		{
-			if (($objFile = FilesModel::findByPk($this->posterSRC)) !== null)
+			if (($objFile = \FilesModel::findByPk($this->posterSRC)) !== null)
 			{
 				$this->Template->poster = $objFile->path;
 			}

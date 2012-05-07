@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \FrontendTemplate, \Input, \ModuleNews, \NewsModel, \Pagination;
-
 
 /**
  * Class ModuleNewsList
@@ -26,7 +24,7 @@ use \BackendTemplate, \FrontendTemplate, \Input, \ModuleNews, \NewsModel, \Pagin
  * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  */
-class ModuleNewsList extends ModuleNews
+class ModuleNewsList extends \ModuleNews
 {
 
 	/**
@@ -44,7 +42,7 @@ class ModuleNewsList extends ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWS LIST ###';
 			$objTemplate->title = $this->headline;
@@ -98,7 +96,7 @@ class ModuleNewsList extends ModuleNews
 		}
 
 		// Get the total number of items
-		$intTotal = NewsModel::countPublishedByPids($this->news_archives, $blnFeatured);
+		$intTotal = \NewsModel::countPublishedByPids($this->news_archives, $blnFeatured);
 
 		if ($intTotal < 1)
 		{
@@ -119,7 +117,7 @@ class ModuleNewsList extends ModuleNews
 
 			// Get the current page
 			$id = 'page_n' . $this->id;
-			$page = Input::get($id) ?: 1;
+			$page = \Input::get($id) ?: 1;
 
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))
@@ -144,24 +142,24 @@ class ModuleNewsList extends ModuleNews
 			}
 
 			// Add the pagination menu
-			$objPagination = new Pagination($total, $this->perPage, 7, $id);
+			$objPagination = new \Pagination($total, $this->perPage, 7, $id);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
 		// Get the items
 		if (isset($limit))
 		{
-			$objArticles = NewsModel::findPublishedByPids($this->news_archives, $blnFeatured, $limit, $offset);
+			$objArticles = \NewsModel::findPublishedByPids($this->news_archives, $blnFeatured, $limit, $offset);
 		}
 		else
 		{
-			$objArticles = NewsModel::findPublishedByPids($this->news_archives, $blnFeatured);
+			$objArticles = \NewsModel::findPublishedByPids($this->news_archives, $blnFeatured);
 		}
 
 		// No items found
 		if ($objArticles === null)
 		{
-			$this->Template = new FrontendTemplate('mod_newsarchive_empty');
+			$this->Template = new \FrontendTemplate('mod_newsarchive_empty');
 		}
 		else
 		{

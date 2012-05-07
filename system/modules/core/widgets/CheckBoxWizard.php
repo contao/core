@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Environment, \Input, \Widget;
-
 
 /**
  * Class CheckBoxWizard
@@ -27,7 +25,7 @@ use \Environment, \Input, \Widget;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class CheckBoxWizard extends Widget
+class CheckBoxWizard extends \Widget
 {
 
 	/**
@@ -84,25 +82,25 @@ class CheckBoxWizard extends Widget
 		}
 
 		// Change the order
-		if (Input::get($strCommand) && is_numeric(Input::get('cid')) && Input::get('id') == $this->currentRecord)
+		if (\Input::get($strCommand) && is_numeric(\Input::get('cid')) && \Input::get('id') == $this->currentRecord)
 		{
 			$this->import('Database');
 
-			switch (Input::get($strCommand))
+			switch (\Input::get($strCommand))
 			{
 				case 'up':
-					$this->varValue = array_move_up($this->varValue, Input::get('cid'));
+					$this->varValue = array_move_up($this->varValue, \Input::get('cid'));
 					break;
 
 				case 'down':
-					$this->varValue = array_move_down($this->varValue, Input::get('cid'));
+					$this->varValue = array_move_down($this->varValue, \Input::get('cid'));
 					break;
 			}
 
 			$this->Database->prepare("UPDATE " . $this->strTable . " SET " . $this->strField . "=? WHERE id=?")
 						   ->execute(serialize($this->varValue), $this->currentRecord);
 
-			$this->redirect(preg_replace('/&(amp;)?cid=[^&]*/i', '', preg_replace('/&(amp;)?' . preg_quote($strCommand, '/') . '=[^&]*/i', '', Environment::get('request'))));
+			$this->redirect(preg_replace('/&(amp;)?cid=[^&]*/i', '', preg_replace('/&(amp;)?' . preg_quote($strCommand, '/') . '=[^&]*/i', '', \Environment::get('request'))));
 		}
 
 		// Sort options

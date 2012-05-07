@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Exception;
-
 
 /**
  * Provides string manipulation methods
@@ -476,7 +474,7 @@ class String
 		// Throw an exception if there is an eval() error
 		if ($blnEval === false)
 		{
-			throw new Exception("Error parsing simple tokens ($strReturn)");
+			throw new \Exception("Error parsing simple tokens ($strReturn)");
 		}
 
 		// Return the evaled code

@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \File, \FrontendTemplate, \Input, \Module, \Pagination, \Search, \String, \Exception;
-
 
 /**
  * Class ModuleSearch
@@ -26,7 +24,7 @@ use \BackendTemplate, \File, \FrontendTemplate, \Input, \Module, \Pagination, \S
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ModuleSearch extends Module
+class ModuleSearch extends \Module
 {
 
 	/**
@@ -44,7 +42,7 @@ class ModuleSearch extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### WEBSITE SEARCH ###';
 			$objTemplate->title = $this->headline;
@@ -65,24 +63,24 @@ class ModuleSearch extends Module
 	protected function compile()
 	{
 		// Trigger the search module from a custom form
-		if (!$_GET['keywords'] && Input::post('FORM_SUBMIT') == 'tl_search')
+		if (!$_GET['keywords'] && \Input::post('FORM_SUBMIT') == 'tl_search')
 		{
-			$_GET['keywords'] = Input::post('keywords');
-			$_GET['query_type'] = Input::post('query_type');
-			$_GET['per_page'] = Input::post('per_page');
+			$_GET['keywords'] = \Input::post('keywords');
+			$_GET['query_type'] = \Input::post('query_type');
+			$_GET['per_page'] = \Input::post('per_page');
 		}
 
 		// Remove insert tags
-		$strKeywords = trim(Input::get('keywords'));
+		$strKeywords = trim(\Input::get('keywords'));
 		$strKeywords = preg_replace('/\{\{[^\}]*\}\}/', '', $strKeywords);
 
 		// Overwrite the default query_type
-		if (Input::get('query_type'))
+		if (\Input::get('query_type'))
 		{
-			$this->queryType = Input::get('query_type');
+			$this->queryType = \Input::get('query_type');
 		}
 
-		$objFormTemplate = new FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
+		$objFormTemplate = new \FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
 
 		$objFormTemplate->uniqueId = $this->id;
 		$objFormTemplate->queryType = $this->queryType;
@@ -92,7 +90,7 @@ class ModuleSearch extends Module
 		$objFormTemplate->search = specialchars($GLOBALS['TL_LANG']['MSC']['searchLabel']);
 		$objFormTemplate->matchAll = specialchars($GLOBALS['TL_LANG']['MSC']['matchAll']);
 		$objFormTemplate->matchAny = specialchars($GLOBALS['TL_LANG']['MSC']['matchAny']);
-		$objFormTemplate->id = ($GLOBALS['TL_CONFIG']['disableAlias'] && Input::get('id')) ? Input::get('id') : false;
+		$objFormTemplate->id = ($GLOBALS['TL_CONFIG']['disableAlias'] && \Input::get('id')) ? \Input::get('id') : false;
 		$objFormTemplate->action = $this->getIndexFreeRequest();
 
 		// Redirect page
@@ -131,14 +129,14 @@ class ModuleSearch extends Module
 			}
 
 			$arrResult = null;
-			$strChecksum = md5($strKeywords.Input::get('query_type').$intRootId.$this->fuzzy);
+			$strChecksum = md5($strKeywords.\Input::get('query_type').$intRootId.$this->fuzzy);
 			$query_starttime = microtime(true);
 			$strCacheFile = 'system/cache/search/' . $strChecksum . '.json';
 
 			// Load the cached result
 			if (file_exists(TL_ROOT . '/' . $strCacheFile))
 			{
-				$objFile = new File($strCacheFile);
+				$objFile = new \File($strCacheFile);
 
 				if ($objFile->mtime > time() - 1800)
 				{
@@ -155,7 +153,7 @@ class ModuleSearch extends Module
 			{
 				try
 				{
-					$objSearch = Search::searchFor($strKeywords, (Input::get('query_type') == 'or'), $arrPages, 0, 0, $this->fuzzy);
+					$objSearch = \Search::searchFor($strKeywords, (\Input::get('query_type') == 'or'), $arrPages, 0, 0, $this->fuzzy);
 					$arrResult = $objSearch->fetchAllAssoc();
 				}
 				catch (Exception $e)
@@ -164,7 +162,7 @@ class ModuleSearch extends Module
 					$arrResult = array();
 				}
 
-				$objFile = new File($strCacheFile);
+				$objFile = new \File($strCacheFile);
 				$objFile->write(json_encode($arrResult));
 				$objFile->close();
 			}
@@ -216,8 +214,8 @@ class ModuleSearch extends Module
 			if ($this->perPage > 0)
 			{
 				$id = 'page_s' . $this->id;
-				$page = Input::get($id) ?: 1;
-				$per_page = Input::get('per_page') ?: $this->perPage;
+				$page = \Input::get($id) ?: 1;
+				$per_page = \Input::get('per_page') ?: $this->perPage;
 
 				// Do not index or cache the page if the page number is outside the range
 				if ($page < 1 || $page > ceil($count/$per_page))
@@ -237,7 +235,7 @@ class ModuleSearch extends Module
 				// Pagination menu
 				if ($to < $count || $from > 1)
 				{
-					$objPagination = new Pagination($count, $per_page, 7, $id);
+					$objPagination = new \Pagination($count, $per_page, 7, $id);
 					$this->Template->pagination = $objPagination->generate("\n  ");
 				}
 			}
@@ -245,7 +243,7 @@ class ModuleSearch extends Module
 			// Get the results
 			for ($i=($from-1); $i<$to && $i<$count; $i++)
 			{
-				$objTemplate = new FrontendTemplate($this->searchTpl ?: 'search_default');
+				$objTemplate = new \FrontendTemplate($this->searchTpl ?: 'search_default');
 
 				$objTemplate->url = $arrResult[$i]['url'];
 				$objTemplate->link = $arrResult[$i]['title'];
@@ -274,7 +272,7 @@ class ModuleSearch extends Module
 				// Shorten the context and highlight all keywords
 				if (!empty($arrContext))
 				{
-					$objTemplate->context = trim(String::substrHtml(implode('…', $arrContext), $this->totalLength));
+					$objTemplate->context = trim(\String::substrHtml(implode('…', $arrContext), $this->totalLength));
 					$objTemplate->context = preg_replace('/(\PL)(' . implode('|', $arrMatches) . ')(\PL)/ui', '$1<span class="highlight">$2</span>$3', $objTemplate->context);
 
 					$objTemplate->hasContext = true;

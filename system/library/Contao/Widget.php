@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Controller, \Date, \Encryption, \Input, \Validator;
-
 
 /**
  * Generates and validates form fields
@@ -42,7 +40,7 @@ use \Controller, \Date, \Encryption, \Input, \Validator;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-abstract class Widget extends Controller
+abstract class Widget extends \Controller
 {
 
 	/**
@@ -178,7 +176,7 @@ abstract class Widget extends Controller
 				// Decrypt the value if it is encrypted
 				if ($this->arrConfiguration['encrypt'])
 				{
-					$this->varValue = Encryption::decrypt($this->varValue);
+					$this->varValue = \Encryption::decrypt($this->varValue);
 				}
 				break;
 
@@ -300,7 +298,7 @@ abstract class Widget extends Controller
 				// Encrypt the value
 				if ($this->arrConfiguration['encrypt'])
 				{
-					return Encryption::encrypt($this->varValue);
+					return \Encryption::encrypt($this->varValue);
 				}
 				return $this->varValue;
 				break;
@@ -615,7 +613,7 @@ abstract class Widget extends Controller
 
 		if (!empty($arrParts))
     	{
-			$varValue = Input::$strMethod(array_shift($arrParts), $this->decodeEntities);
+			$varValue = \Input::$strMethod(array_shift($arrParts), $this->decodeEntities);
 
 			foreach($arrParts as $part)
 			{
@@ -630,7 +628,7 @@ abstract class Widget extends Controller
 			return $varValue;
     	}
 
-		return Input::$strMethod($strKey, $this->decodeEntities);
+		return \Input::$strMethod($strKey, $this->decodeEntities);
 	}
 
 
@@ -701,7 +699,7 @@ abstract class Widget extends Controller
 
 				// Numeric characters (including full stop [.] minus [-] and space [ ])
 				case 'digit':
-					if (!Validator::isNumeric($varInput))
+					if (!\Validator::isNumeric($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['digit'], $this->strLabel));
 					}
@@ -709,7 +707,7 @@ abstract class Widget extends Controller
 
 				// Alphabetic characters (including full stop [.] minus [-] and space [ ])
 				case 'alpha':
-					if (!Validator::isAlphabetic($varInput))
+					if (!\Validator::isAlphabetic($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alpha'], $this->strLabel));
 					}
@@ -717,7 +715,7 @@ abstract class Widget extends Controller
 
 				// Alphanumeric characters (including full stop [.] minus [-], underscore [_] and space [ ])
 				case 'alnum':
-					if (!Validator::isAlphanumeric($varInput))
+					if (!\Validator::isAlphanumeric($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alnum'], $this->strLabel));
 					}
@@ -725,7 +723,7 @@ abstract class Widget extends Controller
 
 				// Do not allow any characters that are usually encoded by class Input [=<>()#/])
 				case 'extnd':
-					if (!Validator::isExtendedAlphanumeric(html_entity_decode($varInput)))
+					if (!\Validator::isExtendedAlphanumeric(html_entity_decode($varInput)))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['extnd'], $this->strLabel));
 					}
@@ -733,7 +731,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid date format
 				case 'date':
-					$objDate = new Date();
+					$objDate = new \Date();
 
 					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'$~i', $varInput))
 					{
@@ -743,7 +741,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid time format
 				case 'time':
-					$objDate = new Date();
+					$objDate = new \Date();
 
 					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'$~i', $varInput))
 					{
@@ -753,7 +751,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid date and time format
 				case 'datim':
-					$objDate = new Date();
+					$objDate = new \Date();
 
 					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varInput))
 					{
@@ -768,7 +766,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid e-mail address
 				case 'email':
-					if (!Validator::isEmail($varInput))
+					if (!\Validator::isEmail($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['email'], $this->strLabel));
 					}
@@ -784,9 +782,9 @@ abstract class Widget extends Controller
 
 					foreach ($arrEmails as $strEmail)
 					{
-						$strEmail = Idna::encodeEmail($strEmail);
+						$strEmail = \Idna::encodeEmail($strEmail);
 
-						if (!Validator::isEmail($strEmail))
+						if (!\Validator::isEmail($strEmail))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['emails'], $this->strLabel));
 							break;
@@ -796,7 +794,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid URL
 				case 'url':
-					if (!Validator::isUrl($varInput))
+					if (!\Validator::isUrl($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['url'], $this->strLabel));
 					}
@@ -804,7 +802,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid alias
 				case 'alias':
-					if (!Validator::isAlias($varInput))
+					if (!\Validator::isAlias($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alias'], $this->strLabel));
 					}
@@ -812,7 +810,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid folder URL alias
 				case 'folderalias':
-					if (!Validator::isFolderAlias($varInput))
+					if (!\Validator::isFolderAlias($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['folderalias'], $this->strLabel));
 					}
@@ -820,7 +818,7 @@ abstract class Widget extends Controller
 
 				// Phone numbers (numeric characters, space [ ], plus [+], minus [-], parentheses [()] and slash [/])
 				case 'phone':
-					if (!Validator::isPhone(html_entity_decode($varInput)))
+					if (!\Validator::isPhone(html_entity_decode($varInput)))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['phone'], $this->strLabel));
 					}
@@ -828,7 +826,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a percent value
 				case 'prcnt':
-					if (!Validator::isPercent($varInput))
+					if (!\Validator::isPercent($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['prcnt'], $this->strLabel));
 					}

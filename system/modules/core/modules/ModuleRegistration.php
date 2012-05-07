@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \Date, \Email, \Environment, \Folder, \FormPassword, \FrontendTemplate, \Input, \MemberModel, \Module, \NewsletterChannelModel, \Exception, \uploadable;
-
 
 /**
  * Class ModuleRegistration
@@ -26,7 +24,7 @@ use \BackendTemplate, \Date, \Email, \Environment, \Folder, \FormPassword, \Fron
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ModuleRegistration extends Module
+class ModuleRegistration extends \Module
 {
 
 	/**
@@ -44,7 +42,7 @@ class ModuleRegistration extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### USER REGISTRATION ###';
 			$objTemplate->title = $this->headline;
@@ -93,7 +91,7 @@ class ModuleRegistration extends Module
 		}
 
 		// Activate account
-		if (Input::get('token') != '')
+		if (\Input::get('token') != '')
 		{
 			$this->activateAcount();
 			return;
@@ -101,7 +99,7 @@ class ModuleRegistration extends Module
 
 		if ($this->memberTpl != '')
 		{
-			$this->Template = new FrontendTemplate($this->memberTpl);
+			$this->Template = new \FrontendTemplate($this->memberTpl);
 			$this->Template->setData($this->arrData);
 		}
 
@@ -133,7 +131,7 @@ class ModuleRegistration extends Module
 
 			$objCaptcha = new $strClass($arrCaptcha);
 
-			if (Input::post('FORM_SUBMIT') == 'tl_registration')
+			if (\Input::post('FORM_SUBMIT') == 'tl_registration')
 			{
 				$objCaptcha->validate();
 
@@ -176,19 +174,19 @@ class ModuleRegistration extends Module
 			$objWidget->rowClass = 'row_' . $i . (($i == 0) ? ' row_first' : '') . ((($i % 2) == 0) ? ' even' : ' odd');
 
 			// Increase the row count if its a password field
-			if ($objWidget instanceof FormPassword)
+			if ($objWidget instanceof \FormPassword)
 			{
 				$objWidget->rowClassConfirm = 'row_' . ++$i . ((($i % 2) == 0) ? ' even' : ' odd');
 			}
 
 			// Validate input
-			if (Input::post('FORM_SUBMIT') == 'tl_registration')
+			if (\Input::post('FORM_SUBMIT') == 'tl_registration')
 			{
 				$objWidget->validate();
 				$varValue = $objWidget->value;
 
 				// Check whether the password matches the username
-				if ($objWidget instanceof FormPassword && $varValue == Input::post('username'))
+				if ($objWidget instanceof \FormPassword && $varValue == \Input::post('username'))
 				{
 					$objWidget->addError($GLOBALS['TL_LANG']['ERR']['passwordName']);
 				}
@@ -199,7 +197,7 @@ class ModuleRegistration extends Module
 				if (($rgxp == 'date' || $rgxp == 'time' || $rgxp == 'datim') && $varValue != '')
 				{
 					// Use the numeric back end format here!
-					$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
+					$objDate = new \Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
 					$varValue = $objDate->tstamp;
 				}
 
@@ -239,7 +237,7 @@ class ModuleRegistration extends Module
 				}
 			}
 
-			if ($objWidget instanceof uploadable)
+			if ($objWidget instanceof \uploadable)
 			{
 				$hasUpload = true;
 			}
@@ -267,7 +265,7 @@ class ModuleRegistration extends Module
 		$this->Template->hasError = $doNotSubmit;
 
 		// Create new user if there are no errors
-		if (Input::post('FORM_SUBMIT') == 'tl_registration' && !$doNotSubmit)
+		if (\Input::post('FORM_SUBMIT') == 'tl_registration' && !$doNotSubmit)
 		{
 			$this->createNewUser($arrUser);
 		}
@@ -347,11 +345,11 @@ class ModuleRegistration extends Module
 				switch ($strKey)
 				{
 					case 'domain':
-						$strConfirmation = str_replace($strChunk, Environment::get('host'), $strConfirmation);
+						$strConfirmation = str_replace($strChunk, \Environment::get('host'), $strConfirmation);
 						break;
 
 					case 'link':
-						$strConfirmation = str_replace($strChunk, Environment::get('base') . Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $arrData['activation'], $strConfirmation);
+						$strConfirmation = str_replace($strChunk, \Environment::get('base') . \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $arrData['activation'], $strConfirmation);
 						break;
 
 					// HOOK: support newsletter subscriptions
@@ -378,7 +376,7 @@ class ModuleRegistration extends Module
 						// Replace the wildcard
 						if (!empty($arrData['newsletter']))
 						{
-							$objChannels = NewsletterChannelModel::findByIds($arrData['newsletter']);
+							$objChannels = \NewsletterChannelModel::findByIds($arrData['newsletter']);
 
 							if ($objChannels !== null)
 							{
@@ -397,11 +395,11 @@ class ModuleRegistration extends Module
 				}
 			}
 
-			$objEmail = new Email();
+			$objEmail = new \Email();
 
 			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
-			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['emailSubject'], Environment::get('host'));
+			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['emailSubject'], \Environment::get('host'));
 			$objEmail->text = $strConfirmation;
 			$objEmail->sendTo($arrData['email']);
 		}
@@ -413,7 +411,7 @@ class ModuleRegistration extends Module
 		}
 
 		// Create the user
-		$objNewUser = new MemberModel();
+		$objNewUser = new \MemberModel();
 		$objNewUser->setRow($arrData);
 		$objNewUser->save();
 		$insertId = $objNewUser->id;
@@ -430,7 +428,7 @@ class ModuleRegistration extends Module
 				$strUserDir .= '_' . $insertId;
 			}
 
-			new Folder($this->reg_homeDir . '/' . $strUserDir);
+			new \Folder($this->reg_homeDir . '/' . $strUserDir);
 
 			$objNewUser->assignDir = 1;
 			$objNewUser->homeDir = $this->reg_homeDir . '/' . $strUserDir;
@@ -463,10 +461,10 @@ class ModuleRegistration extends Module
 	protected function activateAcount()
 	{
 		$this->strTemplate = 'mod_message';
-		$this->Template = new FrontendTemplate($this->strTemplate);
+		$this->Template = new \FrontendTemplate($this->strTemplate);
 
 		// Check the token
-		$objMember = MemberModel::findByActivation(Input::get('token'));
+		$objMember = \MemberModel::findByActivation(\Input::get('token'));
 
 		if ($objMember === null)
 		{
@@ -525,11 +523,11 @@ class ModuleRegistration extends Module
 	 */
 	protected function sendAdminNotification($intId, $arrData)
 	{
-		$objEmail = new Email();
+		$objEmail = new \Email();
 
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
-		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['adminSubject'], Environment::get('host'));
+		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['adminSubject'], \Environment::get('host'));
 
 		$strData = "\n\n";
 

@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Database_Statement, \Database_Mysql_Result;
-
 
 /**
  * MySQL-specific database statement class
@@ -22,7 +20,7 @@ use \Database_Statement, \Database_Mysql_Result;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Database_Mysql_Statement extends Database_Statement
+class Database_Mysql_Statement extends \Database_Statement
 {
 
 	/**
@@ -135,6 +133,6 @@ class Database_Mysql_Statement extends Database_Statement
 	 */
 	protected function createResult($resResult, $strQuery)
 	{
-		return new Database_Mysql_Result($resResult, $strQuery);
+		return new \Database_Mysql_Result($resResult, $strQuery);
 	}
 }

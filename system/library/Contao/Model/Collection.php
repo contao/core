@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Database_Result, \System, \Exception;
-
 
 /**
  * Handles a set models
@@ -25,7 +23,7 @@ use \Database_Result, \System, \Exception;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Model_Collection extends System
+class Model_Collection extends \System
 {
 
 	/**
@@ -65,7 +63,7 @@ class Model_Collection extends System
 	 * @param \Database_Result $objResult The database result object
 	 * @param string           $strTable  The table name
 	 */
-	public function __construct(Database_Result $objResult, $strTable)
+	public function __construct(\Database_Result $objResult, $strTable)
 	{
 		parent::__construct();
 		$this->objResult = $objResult;

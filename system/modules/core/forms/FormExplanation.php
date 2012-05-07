@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Widget, \String;
-
 
 /**
  * Class FormExplanation
@@ -26,7 +24,7 @@ use \Widget, \String;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class FormExplanation extends Widget
+class FormExplanation extends \Widget
 {
 
 	/**
@@ -56,11 +54,11 @@ class FormExplanation extends Widget
 		// Clean RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			return String::toXhtml($this->text);
+			return \String::toXhtml($this->text);
 		}
 		else
 		{
-			return String::toHtml5($this->text);
+			return \String::toHtml5($this->text);
 		}
 	}
 }

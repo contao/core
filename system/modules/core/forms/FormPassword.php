@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Message, \Widget;
-
 
 /**
  * Class FormPassword
@@ -26,7 +24,7 @@ use \Message, \Widget;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class FormPassword extends Widget
+class FormPassword extends \Widget
 {
 
 	/**
@@ -115,7 +113,7 @@ class FormPassword extends Widget
 		if (!$this->hasErrors())
 		{
 			$this->blnSubmitInput = true;
-			Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);
+			\Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);
 			$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
 
 			return sha1($strSalt . $varInput) . ':' . $strSalt;

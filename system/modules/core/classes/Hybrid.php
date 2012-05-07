@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Frontend, \FrontendTemplate;
-
 
 /**
  * Class Hybrid
@@ -26,7 +24,7 @@ use \Frontend, \FrontendTemplate;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-abstract class Hybrid extends Frontend
+abstract class Hybrid extends \Frontend
 {
 
 	/**
@@ -84,7 +82,7 @@ abstract class Hybrid extends Frontend
 		// Load the model
 		if ($this->classFileExists($strModelClass))
 		{
-			$objHybrid = $strModelClass::findByPk($objElement->{$this->strKey});
+			$objHybrid = $str\ModelClass::findByPk($objElement->{$this->strKey});
 
 			if ($objHybrid === null)
 			{
@@ -174,7 +172,7 @@ abstract class Hybrid extends Frontend
 			$this->arrStyle[] = 'margin-bottom:'.$this->arrData['space'][1].'px;';
 		}
 
-		$this->Template = new FrontendTemplate($this->strTemplate);
+		$this->Template = new \FrontendTemplate($this->strTemplate);
 		$this->Template->setData($this->arrData);
 
 		$this->compile();

@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \Calendar, \CalendarEventsModel, \Events, \FilesModel, \Input, \String;
-
 
 /**
  * Class ModuleEventReader
@@ -26,7 +24,7 @@ use \BackendTemplate, \Calendar, \CalendarEventsModel, \Events, \FilesModel, \In
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  */
-class ModuleEventReader extends Events
+class ModuleEventReader extends \Events
 {
 
 	/**
@@ -44,7 +42,7 @@ class ModuleEventReader extends Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### EVENT READER ###';
 			$objTemplate->title = $this->headline;
@@ -58,11 +56,11 @@ class ModuleEventReader extends Events
 		// Set the item from the auto_item parameter
 		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
 		{
-			Input::setGet('events', Input::get('auto_item'));
+			\Input::setGet('events', \Input::get('auto_item'));
 		}
 
 		// Do not index or cache the page if no event has been specified
-		if (!Input::get('events'))
+		if (!\Input::get('events'))
 		{
 			global $objPage;
 			$objPage->noSearch = 1;
@@ -97,7 +95,7 @@ class ModuleEventReader extends Events
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
 		// Get the current event
-		$objEvent = CalendarEventsModel::findPublishedByParentAndIdOrAlias((is_numeric(Input::get('events')) ? Input::get('events') : 0), Input::get('events'), $this->cal_calendar);
+		$objEvent = \CalendarEventsModel::findPublishedByParentAndIdOrAlias((is_numeric(\Input::get('events')) ? \Input::get('events') : 0), \Input::get('events'), $this->cal_calendar);
 
 		if ($objEvent === null)
 		{
@@ -107,7 +105,7 @@ class ModuleEventReader extends Events
 
 			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
-			$this->Template->event = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], Input::get('events')) . '</p>';
+			$this->Template->event = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], \Input::get('events')) . '</p>';
 			return;
 		}
 
@@ -123,7 +121,7 @@ class ModuleEventReader extends Events
 			$objPage->description = $this->prepareMetaDescription($objEvent->teaser);
 		}
 
-		$span = Calendar::calculateSpan($objEvent->startTime, $objEvent->endTime);
+		$span = \Calendar::calculateSpan($objEvent->startTime, $objEvent->endTime);
 
 		if ($objPage->outputFormat == 'xhtml')
 		{
@@ -179,7 +177,7 @@ class ModuleEventReader extends Events
 			}
 		}
 
-		$objTemplate = new FrontendTemplate($this->cal_template);
+		$objTemplate = new \FrontendTemplate($this->cal_template);
 		$objTemplate->setData($objEvent->row());
 
 		$objTemplate->date = $date;
@@ -192,14 +190,14 @@ class ModuleEventReader extends Events
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$objEvent->details = String::toXhtml($objEvent->details);
+			$objEvent->details = \String::toXhtml($objEvent->details);
 		}
 		else
 		{
-			$objEvent->details = String::toHtml5($objEvent->details);
+			$objEvent->details = \String::toHtml5($objEvent->details);
 		}
 
-		$objTemplate->details = String::encodeEmail($objEvent->details);
+		$objTemplate->details = \String::encodeEmail($objEvent->details);
 		$objTemplate->addImage = false;
 
 		// Add an image
@@ -211,7 +209,7 @@ class ModuleEventReader extends Events
 			}
 			else
 			{
-				$objModel = FilesModel::findByPk($objEvent->singleSRC);
+				$objModel = \FilesModel::findByPk($objEvent->singleSRC);
 
 				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 				{

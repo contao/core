@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Backend, \File, \Folder, \Request;
-
 
 /**
  * Class Automator
@@ -26,11 +24,11 @@ use \Backend, \File, \Folder, \Request;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class Automator extends Backend
+class Automator extends \Backend
 {
 
 	/**
-	 * Check for new Contao versions
+	 * Check for new \Contao versions
 	 */
 	public function checkForUpdates()
 	{
@@ -39,7 +37,7 @@ class Automator extends Backend
 			return;
 		}
 
-		$objRequest = new Request();
+		$objRequest = new \Request();
 		$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . (LONG_TERM_SUPPORT ? 'lts-version.txt' : 'version.txt'));
 
 		if (!$objRequest->hasError())
@@ -63,7 +61,7 @@ class Automator extends Backend
 		$this->Database->execute("TRUNCATE TABLE tl_search_index");
 
 		// Purge the cache folder
-		$objFolder = new Folder('system/cache/search');
+		$objFolder = new \Folder('system/cache/search');
 		$objFolder->purge();
 
 		// Add a log entry
@@ -108,11 +106,11 @@ class Automator extends Backend
 			if ($dir != 'index.html')
 			{
 				// Purge the folder
-				$objFolder = new Folder('assets/images/' . $dir);
+				$objFolder = new \Folder('assets/images/' . $dir);
 				$objFolder->purge();
 
 				// Restore the index.html file
-				$objFile = new File('assets/contao/index.html');
+				$objFile = new \File('assets/contao/index.html');
 				$objFile->copyTo('assets/images/' . $dir . '/index.html');
 			}
 		}
@@ -134,11 +132,11 @@ class Automator extends Backend
 		foreach (array('assets/js', 'assets/css') as $dir)
 		{
 			// Purge the folder
-			$objFolder = new Folder($dir);
+			$objFolder = new \Folder($dir);
 			$objFolder->purge();
 
 			// Restore the index.html file
-			$objFile = new File('assets/contao/index.html');
+			$objFile = new \File('assets/contao/index.html');
 			$objFile->copyTo($dir . '/index.html');
 		}
 
@@ -160,7 +158,7 @@ class Automator extends Backend
 	public function purgePageCache()
 	{
 		// Purge the folder
-		$objFolder = new Folder('system/cache/html');
+		$objFolder = new \Folder('system/cache/html');
 		$objFolder->purge();
 
 		// Add a log entry
@@ -177,7 +175,7 @@ class Automator extends Backend
 		foreach (array('system/cache/dca', 'system/cache/sql') as $dir)
 		{
 			// Purge the folder
-			$objFolder = new Folder($dir);
+			$objFolder = new \Folder($dir);
 			$objFolder->purge();
 		}
 
@@ -185,7 +183,7 @@ class Automator extends Backend
 		foreach (scan(TL_ROOT . '/system/cache/language') as $dir)
 		{
 			// Remove the folder
-			$objFolder = new Folder('system/cache/language/' . $dir);
+			$objFolder = new \Folder('system/cache/language/' . $dir);
 			$objFolder->delete();
 		}
 
@@ -200,11 +198,11 @@ class Automator extends Backend
 	public function purgeTempFolder()
 	{
 		// Purge the folder
-		$objFolder = new Folder('system/tmp');
+		$objFolder = new \Folder('system/tmp');
 		$objFolder->purge();
 
 		// Restore the .htaccess file
-		$objFile = new File('system/logs/.htaccess');
+		$objFile = new \File('system/logs/.htaccess');
 		$objFile->copyTo('system/tmp/.htaccess');
 
 		// Add a log entry
@@ -298,7 +296,7 @@ class Automator extends Backend
 		// Create the XML file
 		while($objRoot->next())
 		{
-			$objFile = new File('share/' . $objRoot->sitemapName . '.xml');
+			$objFile = new \File('share/' . $objRoot->sitemapName . '.xml');
 
 			$objFile->write('');
 			$objFile->append('<?xml version="1.0" encoding="UTF-8"?>');
@@ -355,7 +353,7 @@ class Automator extends Backend
 			// Delete the oldest file
 			if (file_exists(TL_ROOT . '/system/logs/' . $strFile . '.9'))
 			{
-				$objFile = new File('system/logs/' . $strFile . '.9');
+				$objFile = new \File('system/logs/' . $strFile . '.9');
 				$objFile->delete();
 			}
 
@@ -366,13 +364,13 @@ class Automator extends Backend
 
 				if (file_exists(TL_ROOT . '/' . $strGzName))
 				{
-					$objFile = new File($strGzName);
+					$objFile = new \File($strGzName);
 					$objFile->renameTo('system/logs/' . $strFile . '.' . ($i+1));
 				}
 			}
 
 			// Add .1 to the latest file
-			$objFile = new File('system/logs/' . $strFile);
+			$objFile = new \File('system/logs/' . $strFile);
 			$objFile->renameTo('system/logs/' . $strFile . '.1');
 		}
 	}

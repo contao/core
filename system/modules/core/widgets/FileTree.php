@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \File, \FilesModel, \Image, \Input, \Widget;
-
 
 /**
  * Class FileTree
@@ -26,7 +24,7 @@ use \File, \FilesModel, \Image, \Input, \Widget;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class FileTree extends Widget
+class FileTree extends \Widget
 {
 
 	/**
@@ -121,7 +119,7 @@ class FileTree extends Widget
 		if ($this->strOrderField != '')
 		{
 			$this->Database->prepare("UPDATE {$this->strTable} SET {$this->strOrderField}=? WHERE id=?")
-						   ->execute(Input::post($this->strOrderName), Input::get('id'));
+						   ->execute(\Input::post($this->strOrderName), \Input::get('id'));
 		}
 
 		// Return the value as usual
@@ -169,7 +167,7 @@ class FileTree extends Widget
 					}
 					else
 					{
-						$objFile = new File($objFiles->path);
+						$objFile = new \File($objFiles->path);
 						$arrValues[$objFiles->id] = $this->generateImage($objFile->icon) . ' ' . $objFiles->path;
 					}
 				}
@@ -179,7 +177,7 @@ class FileTree extends Widget
 				{
 					if ($objFiles->type == 'folder')
 					{
-						$objSubfiles = FilesModel::findByPid($objFiles->id);
+						$objSubfiles = \FilesModel::findByPid($objFiles->id);
 
 						if ($objSubfiles === null)
 						{
@@ -194,14 +192,14 @@ class FileTree extends Widget
 								continue;
 							}
 
-							$objFile = new File($objSubfiles->path);
+							$objFile = new \File($objSubfiles->path);
 
 							if ($this->blnIsGallery)
 							{
 								// Only show images
 								if ($objFile->isGdImage)
 								{
-									$arrValues[$objSubfiles->id] = $this->generateImage(Image::get($objSubfiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
+									$arrValues[$objSubfiles->id] = $this->generateImage(\Image::get($objSubfiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
 								}
 							}
 							else
@@ -216,14 +214,14 @@ class FileTree extends Widget
 					}
 					else
 					{
-						$objFile = new File($objFiles->path);
+						$objFile = new \File($objFiles->path);
 
 						if ($this->blnIsGallery)
 						{
 							// Only show images
 							if ($objFile->isGdImage)
 							{
-								$arrValues[$objFiles->id] = $this->generateImage(Image::get($objFiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
+								$arrValues[$objFiles->id] = $this->generateImage(\Image::get($objFiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
 							}
 						}
 						else
@@ -277,7 +275,7 @@ class FileTree extends Widget
 		}
 
 		$return .= '</ul>
-    <p><a href="contao/file.php?table='.$this->strTable.'&amp;field='.$this->strField.'&amp;id='.Input::get('id').'&amp;value='.$strValues.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['files'][0].'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . (($this->strOrderField != '') ? '
+    <p><a href="contao/file.php?table='.$this->strTable.'&amp;field='.$this->strField.'&amp;id='.\Input::get('id').'&amp;value='.$strValues.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['files'][0].'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . (($this->strOrderField != '') ? '
     <script>Backend.makeMultiSrcSortable("sort_'.$this->strId.'", "ctrl_'.$this->strOrderId.'");</script>' : '') . '
   </div>';
 

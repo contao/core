@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \ContentElement, \Environment, \File, \FilesModel, \Input;
-
 
 /**
  * Class ContentDownloads
@@ -26,7 +24,7 @@ use \ContentElement, \Environment, \File, \FilesModel, \Input;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ContentDownloads extends ContentElement
+class ContentDownloads extends \ContentElement
 {
 
 	/**
@@ -76,14 +74,14 @@ class ContentDownloads extends ContentElement
 		}
 
 		// Get the file entries from the database
-		$this->objFiles = FilesModel::findMultipleByIds($this->multiSRC);
+		$this->objFiles = \FilesModel::findMultipleByIds($this->multiSRC);
 
 		if ($this->objFiles === null)
 		{
 			return '';
 		}
 
-		$file = Input::get('file', true);
+		$file = \Input::get('file', true);
 
 		// Send the file to the browser
 		if ($file != '' && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($file)))
@@ -159,7 +157,7 @@ class ContentDownloads extends ContentElement
 					'title'     => $arrMeta['title'],
 					'link'      => $arrMeta['title'],
 					'caption'   => $arrMeta['caption'],
-					'href'      => Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objFiles->path),
+					'href'      => \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objFiles->path),
 					'filesize'  => $this->getReadableSize($objFile->filesize, 1),
 					'icon'      => TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
 					'mime'      => $objFile->mime,
@@ -175,7 +173,7 @@ class ContentDownloads extends ContentElement
 			// Folders
 			else
 			{
-				$objSubfiles = FilesModel::findByPid($objFiles->id);
+				$objSubfiles = \FilesModel::findByPid($objFiles->id);
 
 				if ($objSubfiles === null)
 				{
@@ -213,7 +211,7 @@ class ContentDownloads extends ContentElement
 						'title'     => $arrMeta['title'],
 						'link'      => $arrMeta['title'],
 						'caption'   => $arrMeta['caption'],
-						'href'      => Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objSubfiles->path),
+						'href'      => \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objSubfiles->path),
 						'filesize'  => $this->getReadableSize($objFile->filesize, 1),
 						'icon'      => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
 						'mime'      => $objFile->mime,

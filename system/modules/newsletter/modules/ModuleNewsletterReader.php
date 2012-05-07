@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \Environment, \File, \Input, \Module, \NewsletterModel, \String;
-
 
 /**
  * Class ModuleNewsletterReader
@@ -26,7 +24,7 @@ use \BackendTemplate, \Environment, \File, \Input, \Module, \NewsletterModel, \S
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  */
-class ModuleNewsletterReader extends Module
+class ModuleNewsletterReader extends \Module
 {
 
 	/**
@@ -44,7 +42,7 @@ class ModuleNewsletterReader extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWSLETTER READER ###';
 			$objTemplate->title = $this->headline;
@@ -58,11 +56,11 @@ class ModuleNewsletterReader extends Module
 		// Set the item from the auto_item parameter
 		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
 		{
-			Input::setGet('items', Input::get('auto_item'));
+			\Input::setGet('items', \Input::get('auto_item'));
 		}
 
 		// Do not index or cache the page if no news item has been specified
-		if (!Input::get('items'))
+		if (!\Input::get('items'))
 		{
 			global $objPage;
 			$objPage->noSearch = 1;
@@ -96,7 +94,7 @@ class ModuleNewsletterReader extends Module
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$objNewsletter = NewsletterModel::findSentByParentAndIdOrAlias((is_numeric(Input::get('items')) ? Input::get('items') : 0), Input::get('items'), $this->nl_channels);
+		$objNewsletter = \NewsletterModel::findSentByParentAndIdOrAlias((is_numeric(\Input::get('items')) ? \Input::get('items') : 0), \Input::get('items'), $this->nl_channels);
 
 		if ($objNewsletter === null)
 		{
@@ -106,7 +104,7 @@ class ModuleNewsletterReader extends Module
 
 			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
-			$this->Template->content = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], Input::get('items')) . '</p>';
+			$this->Template->content = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], \Input::get('items')) . '</p>';
 			return;
 		}
 
@@ -121,9 +119,9 @@ class ModuleNewsletterReader extends Module
 			if (is_array($arrEnclosure))
 			{
 				// Send file to the browser
-				if (Input::get('file', true) != '' && in_array(Input::get('file', true), $arrEnclosure))
+				if (\Input::get('file', true) != '' && in_array(\Input::get('file', true), $arrEnclosure))
 				{
-					$this->sendFileToBrowser(Input::get('file', true));
+					$this->sendFileToBrowser(\Input::get('file', true));
 				}
 
 				// Add download links
@@ -131,7 +129,7 @@ class ModuleNewsletterReader extends Module
 				{
 					if (is_file(TL_ROOT . '/' . $arrEnclosure[$i]))
 					{
-						$objFile = new File($arrEnclosure[$i]);
+						$objFile = new \File($arrEnclosure[$i]);
 
 						if (in_array($objFile->extension, $allowedDownload))
 						{
@@ -146,7 +144,7 @@ class ModuleNewsletterReader extends Module
 							$arrEnclosures[$i]['link'] = basename($arrEnclosure[$i]);
 							$arrEnclosures[$i]['filesize'] = $this->getReadableSize($objFile->filesize);
 							$arrEnclosures[$i]['title'] = ucfirst(str_replace('_', ' ', $objFile->filename));
-							$arrEnclosures[$i]['href'] = Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
+							$arrEnclosures[$i]['href'] = \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
 							$arrEnclosures[$i]['enclosure'] = $arrEnclosure[$i];
 						}
 					}
@@ -167,10 +165,10 @@ class ModuleNewsletterReader extends Module
 
 		// Parse simple tokens and insert tags
 		$strContent = $this->replaceInsertTags($strContent);
-		$strContent = String::parseSimpleTokens($strContent, array());
+		$strContent = \String::parseSimpleTokens($strContent, array());
 
 		// Encode e-mail addresses
-		$strContent = String::encodeEmail($strContent);
+		$strContent = \String::encodeEmail($strContent);
 
 		$this->Template->content = $strContent;
 		$this->Template->subject = $objNewsletter->subject;

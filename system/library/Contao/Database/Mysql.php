@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Database, \Database_Mysql_Statement;
-
 
 /**
  * MySQL-specific database class
@@ -22,7 +20,7 @@ use \Database, \Database_Mysql_Statement;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Database_Mysql extends Database
+class Database_Mysql extends \Database
 {
 
 	/**
@@ -317,6 +315,6 @@ class Database_Mysql extends Database
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
-		return new Database_Mysql_Statement($resConnection, $blnDisableAutocommit);
+		return new \Database_Mysql_Statement($resConnection, $blnDisableAutocommit);
 	}
 }

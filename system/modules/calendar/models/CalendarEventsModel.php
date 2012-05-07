@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Model;
-
 
 /**
  * Class CalendarEventsModel
@@ -26,7 +24,7 @@ use \Model;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  */
-class CalendarEventsModel extends Model
+class CalendarEventsModel extends \Model
 {
 
 	/**
@@ -75,7 +73,7 @@ class CalendarEventsModel extends Model
 			return null;
 		}
 
-		$objMinMax = Database::getInstance()->query("SELECT MIN(startTime) AS dateFrom, MAX(endTime) AS dateTo, MAX(repeatEnd) AS repeatUntil FROM tl_calendar_events WHERE pid IN(". implode(',', array_map('intval', $arrPids)) .")");
+		$objMinMax = \Database::getInstance()->query("SELECT MIN(startTime) AS dateFrom, MAX(endTime) AS dateTo, MAX(repeatEnd) AS repeatUntil FROM tl_calendar_events WHERE pid IN(". implode(',', array_map('intval', $arrPids)) .")");
 		return new static($objMinMax);
 	}
 

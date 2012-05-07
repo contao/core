@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Input, \Widget;
-
 
 /**
  * Class FormCaptcha
@@ -26,7 +24,7 @@ use \Input, \Widget;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class FormCaptcha extends Widget
+class FormCaptcha extends \Widget
 {
 
 	/**
@@ -90,7 +88,7 @@ class FormCaptcha extends Widget
 	{
 		$arrCaptcha = $this->Session->get('captcha_' . $this->strId);
 
-		if (!is_array($arrCaptcha) || !strlen($arrCaptcha['key']) || !strlen($arrCaptcha['sum']) || Input::post($arrCaptcha['key']) != $arrCaptcha['sum'] || $arrCaptcha['time'] > (time() - 3))
+		if (!is_array($arrCaptcha) || !strlen($arrCaptcha['key']) || !strlen($arrCaptcha['sum']) || \Input::post($arrCaptcha['key']) != $arrCaptcha['sum'] || $arrCaptcha['time'] > (time() - 3))
 		{
 			$this->class = 'error';
 			$this->addError($GLOBALS['TL_LANG']['ERR']['captcha']);

@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \ContentElement;
-
 
 /**
  * Class ContentList
@@ -26,7 +24,7 @@ use \ContentElement;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ContentList extends ContentElement
+class ContentList extends \ContentElement
 {
 
 	/**

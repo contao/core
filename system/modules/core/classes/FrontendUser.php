@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Environment, \Input, \MemberGroupModel, \User;
-
 
 /**
  * Class FrontendUser
@@ -26,7 +24,7 @@ use \Environment, \Input, \MemberGroupModel, \User;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class FrontendUser extends User
+class FrontendUser extends \User
 {
 
 	/**
@@ -79,8 +77,8 @@ class FrontendUser extends User
 	{
 		parent::__construct();
 
-		$this->strIp = Environment::get('ip');
-		$this->strHash = Input::cookie($this->strCookie);
+		$this->strIp = \Environment::get('ip');
+		$this->strHash = \Input::cookie($this->strCookie);
 	}
 
 
@@ -91,10 +89,10 @@ class FrontendUser extends User
 	{
 		$session = $this->Session->getData();
 
-		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != Environment::get('requestUri'))
+		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != \Environment::get('requestUri'))
 		{
 			$session['referer']['last'] = $session['referer']['current'];
-			$session['referer']['current'] = Environment::get('requestUri');
+			$session['referer']['current'] = \Environment::get('requestUri');
 		}
 
 		$this->Session->setData($session);
@@ -161,13 +159,13 @@ class FrontendUser extends User
 		}
 
 		// Check whether auto login is active
-		if ($GLOBALS['TL_CONFIG']['autologin'] < 1 || Input::cookie('FE_AUTO_LOGIN') == '')
+		if ($GLOBALS['TL_CONFIG']['autologin'] < 1 || \Input::cookie('FE_AUTO_LOGIN') == '')
 		{
 			return false;
 		}
 
 		// Try to find the user by his auto login cookie
-		if ($this->findBy('autologin', Input::cookie('FE_AUTO_LOGIN')) == false)
+		if ($this->findBy('autologin', \Input::cookie('FE_AUTO_LOGIN')) == false)
 		{
 			return false;
 		}
@@ -214,7 +212,7 @@ class FrontendUser extends User
 		}
 
 		// Set the auto login data
-		if ($GLOBALS['TL_CONFIG']['autologin'] > 0 && Input::post('autologin'))
+		if ($GLOBALS['TL_CONFIG']['autologin'] > 0 && \Input::post('autologin'))
 		{
 			$time = time();
 			$strToken = md5(uniqid(mt_rand(), true));
@@ -318,7 +316,7 @@ class FrontendUser extends User
 		}
 
 		// Skip inactive groups
-		if (($objGroups = MemberGroupModel::findAllActive()) !== null)
+		if (($objGroups = \MemberGroupModel::findAllActive()) !== null)
 		{
 			$this->groups = array_intersect($this->groups, $objGroups->fetchEach('id'));
 		}
@@ -326,7 +324,7 @@ class FrontendUser extends User
 		// Get the group login page
 		if ($this->groups[0] > 0)
 		{
-			$objGroup = MemberGroupModel::findPublishedById($this->groups[0]);
+			$objGroup = \MemberGroupModel::findPublishedById($this->groups[0]);
 
 			if ($objGroup !== null && $objGroup->redirect && $objGroup->jumpTo)
 			{

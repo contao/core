@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \ContentElement, \File, \FilesModel, \FrontendTemplate, \Image, \String;
-
 
 /**
  * Class ContentHyperlink
@@ -26,7 +24,7 @@ use \ContentElement, \File, \FilesModel, \FrontendTemplate, \Image, \String;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ContentHyperlink extends ContentElement
+class ContentHyperlink extends \ContentElement
 {
 
 	/**
@@ -45,7 +43,7 @@ class ContentHyperlink extends ContentElement
 
 		if (substr($this->url, 0, 7) == 'mailto:')
 		{
-			$this->url = String::encodeEmail($this->url);
+			$this->url = \String::encodeEmail($this->url);
 		}
 		else
 		{
@@ -62,7 +60,7 @@ class ContentHyperlink extends ContentElement
 		// Use an image instead of the title
 		if ($this->useImage && $this->singleSRC != '' && is_numeric($this->singleSRC))
 		{
-			$objModel = FilesModel::findByPk($this->singleSRC);
+			$objModel = \FilesModel::findByPk($this->singleSRC);
 
 			if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 			{
@@ -83,7 +81,7 @@ class ContentHyperlink extends ContentElement
 						$size[1] = floor($intMaxWidth * $objFile->height / $objFile->width);
 					}
 
-					$src = Image::get($objModel->path, $size[0], $size[1], $size[2]);
+					$src = \Image::get($objModel->path, $size[0], $size[1], $size[2]);
 
 					if (($imgSize = @getimagesize(TL_ROOT . '/' . rawurldecode($src))) !== false)
 					{

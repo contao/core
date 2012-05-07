@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \ArticleModel, \CalendarModel, \CalendarEventsModel, \CalendarFeedModel, \Environment, \Feed, \FeedItem, \File, \Frontend, \Input, \String;
-
 
 /**
  * Class Calendar
@@ -26,7 +24,7 @@ use \ArticleModel, \CalendarModel, \CalendarEventsModel, \CalendarFeedModel, \En
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  */
-class Calendar extends Frontend
+class Calendar extends \Frontend
 {
 
 	/**
@@ -43,7 +41,7 @@ class Calendar extends Frontend
 	 */
 	public function generateFeed($intId, $blnIsFeedId=false)
 	{
-		$objCalendar = $blnIsFeedId ? CalendarFeedModel::findByPk($intId) : CalendarFeedModel::findByCalendar($intId);
+		$objCalendar = $blnIsFeedId ? \CalendarFeedModel::findByPk($intId) : \CalendarFeedModel::findByCalendar($intId);
 
 		if ($objCalendar === null)
 		{
@@ -53,7 +51,7 @@ class Calendar extends Frontend
 		$objCalendar->feedName = $objCalendar->alias ?: 'calendar' . $objCalendar->id;
 
 		// Delete XML file
-		if (Input::get('act') == 'delete')
+		if (\Input::get('act') == 'delete')
 		{
 			$this->import('Files');
 			$this->Files->delete('share/' . $objCalendar->feedName . '.xml');
@@ -74,7 +72,7 @@ class Calendar extends Frontend
 	public function generateFeeds()
 	{
 		$this->removeOldFeeds();
-		$objCalendar = CalendarFeedModel::findAll();
+		$objCalendar = \CalendarFeedModel::findAll();
 
 		if ($objCalendar !== null)
 		{
@@ -102,10 +100,10 @@ class Calendar extends Frontend
 		}
 
 		$strType = ($arrFeed['format'] == 'atom') ? 'generateAtom' : 'generateRss';
-		$strLink = $arrFeed['feedBase'] ?: Environment::get('base');
+		$strLink = $arrFeed['feedBase'] ?: \Environment::get('base');
 		$strFile = $arrFeed['feedName'];
 
-		$objFeed = new Feed($strFile);
+		$objFeed = new \Feed($strFile);
 		$objFeed->link = $strLink;
 		$objFeed->title = $arrFeed['title'];
 		$objFeed->description = $arrFeed['description'];
@@ -117,7 +115,7 @@ class Calendar extends Frontend
 		$time = time();
 
 		// Get the upcoming events
-		$objArticle = CalendarEventsModel::findUpcomingByPids($arrCalendars, $arrFeed['maxItems']);
+		$objArticle = \CalendarEventsModel::findUpcomingByPids($arrCalendars, $arrFeed['maxItems']);
 
 		// Parse the items
 		if ($objArticle !== null)
@@ -182,7 +180,7 @@ class Calendar extends Frontend
 						break(3);
 					}
 
-					$objItem = new FeedItem();
+					$objItem = new \FeedItem();
 
 					$objItem->title = $event['title'];
 					$objItem->link = $event['link'];
@@ -210,7 +208,7 @@ class Calendar extends Frontend
 		}
 
 		// Create file
-		$objRss = new File('share/' . $strFile . '.xml');
+		$objRss = new \File('share/' . $strFile . '.xml');
 		$objRss->write($this->replaceInsertTags($objFeed->$strType()));
 		$objRss->close();
 	}
@@ -234,7 +232,7 @@ class Calendar extends Frontend
 		$arrProcessed = array();
 
 		// Get all calendars
-		$objCalendar = CalendarModel::findByProtected('');
+		$objCalendar = \CalendarModel::findByProtected('');
 
 		// Walk through each calendar
 		if ($objCalendar !== null)
@@ -256,12 +254,12 @@ class Calendar extends Frontend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objCalendar->jumpTo]))
 				{
-					$domain = Environment::get('base');
+					$domain = \Environment::get('base');
 					$objParent = $this->getPageDetails($objCalendar->jumpTo);
 
 					if ($objParent->domain != '')
 					{
-						$domain = (Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
+						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
 					$arrProcessed[$objCalendar->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
@@ -270,7 +268,7 @@ class Calendar extends Frontend
 				$strUrl = $arrProcessed[$objCalendar->jumpTo];
 
 				// Get the items
-				$objEvents = CalendarEventsModel::findPublishedDefaultByPid($objCalendar->id);
+				$objEvents = \CalendarEventsModel::findPublishedDefaultByPid($objCalendar->id);
 
 				if ($objEvents !== null)
 				{
@@ -344,7 +342,7 @@ class Calendar extends Frontend
 				break;
 
 			case 'article':
-				if (($objArticle = ArticleModel::findByPk($objEvent->articleId, array('eager'=>true))) !== null)
+				if (($objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true))) !== null)
 				{
 					$link = ampersand($this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
@@ -360,11 +358,11 @@ class Calendar extends Frontend
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$objEvent->teaser = String::toXhtml($objEvent->teaser);
+			$objEvent->teaser = \String::toXhtml($objEvent->teaser);
 		}
 		else
 		{
-			$objEvent->teaser = String::toHtml5($objEvent->teaser);
+			$objEvent->teaser = \String::toHtml5($objEvent->teaser);
 		}
 
 		$arrEvent = array
@@ -449,7 +447,7 @@ class Calendar extends Frontend
 	public function purgeOldFeeds()
 	{
 		$arrFeeds = array();
-		$objFeeds = CalendarFeedModel::findAll();
+		$objFeeds = \CalendarFeedModel::findAll();
 
 		if ($objFeeds !== null)
 		{

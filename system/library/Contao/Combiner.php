@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \File, \System, \Exception;
-
 
 /**
  * Combines .css or .js files into one single file
@@ -32,7 +30,7 @@ use \File, \System, \Exception;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Combiner extends System
+class Combiner extends \System
 {
 
 	/**
@@ -80,7 +78,7 @@ class Combiner extends System
 		// Check the file type
 		if ($strType != self::CSS && $strType != self::JS)
 		{
-			throw new Exception("Invalid file $strFile");
+			throw new \Exception("Invalid file $strFile");
 		}
 
 		// Set the operation mode
@@ -90,7 +88,7 @@ class Combiner extends System
 		}
 		elseif ($this->strMode != $strType)
 		{
-			throw new Exception('You cannot mix different file types. Create another Combiner object instead.');
+			throw new \Exception('You cannot mix different file types. Create another Combiner object instead.');
 		}
 
 		// Prevent duplicates
@@ -104,7 +102,7 @@ class Combiner extends System
 		{
 			if ($this->strMode == self::JS)
 			{
-				throw new Exception("File $strFile does not exist");
+				throw new \Exception("File $strFile does not exist");
 			}
 			else
 			{
@@ -114,7 +112,7 @@ class Combiner extends System
 				// Retry
 				if (!file_exists(TL_ROOT . '/' . $strFile))
 				{
-					throw new Exception("File $strFile does not exist");
+					throw new \Exception("File $strFile does not exist");
 				}
 			}
 		}
@@ -189,7 +187,7 @@ class Combiner extends System
 		}
 
 		// Create the file
-		$objFile = new File('assets/' . $strTarget . '/' . $strKey . $this->strMode);
+		$objFile = new \File('assets/' . $strTarget . '/' . $strKey . $this->strMode);
 		$objFile->truncate();
 
 		foreach ($this->arrFiles as $arrFile)
@@ -233,7 +231,7 @@ class Combiner extends System
 		// Create a gzipped version
 		if ($GLOBALS['TL_CONFIG']['gzipScripts'] && function_exists('gzencode'))
 		{
-			$objFile = new File('assets/' . $strTarget . '/' . $strKey . $this->strMode . '.gz');
+			$objFile = new \File('assets/' . $strTarget . '/' . $strKey . $this->strMode . '.gz');
 			$objFile->write(gzencode(file_get_contents(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode), 9));
 			$objFile->close();
 		}

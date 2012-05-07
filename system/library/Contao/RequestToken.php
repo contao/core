@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \System;
-
 
 /**
  * Generates and validates request tokens
@@ -34,7 +32,7 @@ use \System;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class RequestToken extends System
+class RequestToken extends \System
 {
 
 	/**

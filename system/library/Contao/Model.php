@@ -12,9 +12,6 @@
 
 namespace Contao;
 
-use \Database, \Database_Statement, \Database_Result, \DcaExtractor;
-use \Model_Collection, \Model_QueryBuilder, \System, \Exception;
-
 
 /**
  * Reads objects from and writes them to to the database
@@ -43,7 +40,7 @@ use \Model_Collection, \Model_QueryBuilder, \System, \Exception;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-abstract class Model extends System
+abstract class Model extends \System
 {
 
 	/**
@@ -82,11 +79,11 @@ abstract class Model extends System
 	 * 
 	 * @param \Database_Result $objResult An optional database result
 	 */
-	public function __construct(Database_Result $objResult=null)
+	public function __construct(\Database_Result $objResult=null)
 	{
 		parent::__construct();
 
-		$objRelations = new DcaExtractor(static::$strTable);
+		$objRelations = new \DcaExtractor(static::$strTable);
 		$this->arrRelations = $objRelations->getRelations();
 
 		if ($objResult !== null)
@@ -206,13 +203,13 @@ abstract class Model extends System
 
 		if (isset($this->{static::$strPk}) && !$blnForceInsert)
 		{
-			Database::getInstance()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
+			\Database::getInstance()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
 								   ->set($arrSet)
 								   ->execute($this->{static::$strPk});
 		}
 		else
 		{
-			$stmt = Database::getInstance()->prepare("INSERT INTO " . static::$strTable . " %s")
+			$stmt = \Database::getInstance()->prepare("INSERT INTO " . static::$strTable . " %s")
 										   ->set($arrSet)
 										   ->execute();
 
@@ -246,7 +243,7 @@ abstract class Model extends System
 	 */
 	public function delete()
 	{
-		return Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+		return \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
 									  ->execute($this->{static::$strPk})
 									  ->affectedRows;
 	}
@@ -272,7 +269,7 @@ abstract class Model extends System
 		// The field or relation does not exist
 		if (!isset($this->$strKey) || !isset($this->arrRelations[$strKey]))
 		{
-			throw new Exception("Field $strKey does not seem to be related");
+			throw new \Exception("Field $strKey does not seem to be related");
 		}
 
 		$arrRelation = $this->arrRelations[$strKey];
@@ -288,7 +285,7 @@ abstract class Model extends System
 		{
 			$arrValues = deserialize($this->$strKey, true);
 			$strField = $arrRelation['table'] . '.' . $arrRelation['field'];
-			$objModel = $strClass::findBy(array($strField . " IN('" . implode("','", $arrValues) . "')"), null, array('order'=>Database::getInstance()->findInSet($strField, $arrValues)));
+			$objModel = $strClass::findBy(array($strField . " IN('" . implode("','", $arrValues) . "')"), null, array('order'=>\Database::getInstance()->findInSet($strField, $arrValues)));
 			$this->arrRelated[$strKey] = $objModel;
 		}
 
@@ -434,9 +431,9 @@ abstract class Model extends System
 		}
 
 		$arrOptions['table'] = static::$strTable;
-		$strQuery = Model_QueryBuilder::find($arrOptions);
+		$strQuery = \Model_QueryBuilder::find($arrOptions);
 
-		$objStatement = Database::getInstance()->prepare($strQuery);
+		$objStatement = \Database::getInstance()->prepare($strQuery);
 
 		// Defaults for limit and offset
 		if (!isset($arrOptions['limit']))
@@ -463,7 +460,7 @@ abstract class Model extends System
 		}
 
 		$objResult = static::postFind($objResult);
-		return ($arrOptions['limit'] == 1) ? new static($objResult) : new Model_Collection($objResult, static::$strTable);
+		return ($arrOptions['limit'] == 1) ? new static($objResult) : new \Model_Collection($objResult, static::$strTable);
 	}
 
 
@@ -474,7 +471,7 @@ abstract class Model extends System
 	 * 
 	 * @return \Database_Statement The database statement object
 	 */
-	protected static function preFind(Database_Statement $objStatement)
+	protected static function preFind(\Database_Statement $objStatement)
 	{
 		return $objStatement;
 	}
@@ -487,7 +484,7 @@ abstract class Model extends System
 	 * 
 	 * @return \Database_Result The database result object
 	 */
-	protected static function postFind(Database_Result $objResult)
+	protected static function postFind(\Database_Result $objResult)
 	{
 		return $objResult;
 	}
@@ -508,14 +505,14 @@ abstract class Model extends System
 			return 0;
 		}
 
-		$strQuery = Model_QueryBuilder::count(array
+		$strQuery = \Model_QueryBuilder::count(array
 		(
 			'table'  => static::$strTable,
 			'column' => $strColumn,
 			'value'  => $varValue
 		));
 
-		return Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
+		return \Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
 	}
 
 

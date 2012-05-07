@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \ContentElement, \Environment, \File, \FilesModel, \Input;
-
 
 /**
  * Class ContentDownload
@@ -26,7 +24,7 @@ use \ContentElement, \Environment, \File, \FilesModel, \Input;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ContentDownload extends ContentElement
+class ContentDownload extends \ContentElement
 {
 
 	/**
@@ -54,7 +52,7 @@ class ContentDownload extends ContentElement
 			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 		}
 
-		$objFile = FilesModel::findByPk($this->singleSRC);
+		$objFile = \FilesModel::findByPk($this->singleSRC);
 
 		if ($objFile === null)
 		{
@@ -69,7 +67,7 @@ class ContentDownload extends ContentElement
 			return '';
 		}
 
-		$file = Input::get('file', true);
+		$file = \Input::get('file', true);
 
 		// Send the file to the browser
 		if ($file != '')
@@ -108,7 +106,7 @@ class ContentDownload extends ContentElement
 
 		$this->Template->link = $this->linkTitle;
 		$this->Template->title = specialchars($this->linkTitle);
-		$this->Template->href = Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objFile->value);
+		$this->Template->href = \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objFile->value);
 		$this->Template->filesize = $this->getReadableSize($objFile->filesize, 1);
 		$this->Template->icon = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
 		$this->Template->mime = $objFile->mime;

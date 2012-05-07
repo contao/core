@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Environment, \Idna, \String, \System, \Exception;
-
 
 /**
  * A SwiftMailer adapter class
@@ -32,7 +30,7 @@ use \Environment, \Idna, \String, \System, \Exception;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Email extends System
+class Email extends \System
 {
 
 	/**
@@ -174,7 +172,7 @@ class Email extends System
 				break;
 
 			case 'text':
-				$this->strText = String::decodeEntities($varValue);
+				$this->strText = \String::decodeEntities($varValue);
 				break;
 
 			case 'html':
@@ -232,7 +230,7 @@ class Email extends System
 				break;
 
 			default:
-				throw new Exception(sprintf('Invalid argument "%s"', $strKey));
+				throw new \Exception(sprintf('Invalid argument "%s"', $strKey));
 				break;
 		}
 	}
@@ -424,7 +422,7 @@ class Email extends System
 
 				$arrMatches = array();
 				preg_match_all('/(src=|url\()"([^"]+\.(jpe?g|png|gif|bmp|tiff?|swf))"/Ui', $this->strHtml, $arrMatches);
-				$strBase = Environment::get('base');
+				$strBase = \Environment::get('base');
 
 				// Check for internal images
 				foreach (array_unique($arrMatches[2]) as $url)
@@ -525,7 +523,7 @@ class Email extends System
 		{
 			if (!is_array($varRecipients))
 			{
-				$varRecipients = String::splitCsv($varRecipients);
+				$varRecipients = \String::splitCsv($varRecipients);
 			}
 
 			// Support friendly name addresses and internationalized domain names
@@ -534,7 +532,7 @@ class Email extends System
 				list($strName, $strEmail) = $this->splitFriendlyName($v);
 
 				$strName = trim($strName, ' "');
-				$strEmail = Idna::encodeEmail($strEmail);
+				$strEmail = \Idna::encodeEmail($strEmail);
 
 				if ($strName != '')
 				{

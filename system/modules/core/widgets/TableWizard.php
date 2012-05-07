@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \DataContainer, \Environment, \File, \Input, \Message, \Widget;
-
 
 /**
  * Class TableWizard
@@ -26,7 +24,7 @@ use \DataContainer, \Environment, \File, \Input, \Message, \Widget;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class TableWizard extends Widget
+class TableWizard extends \Widget
 {
 
 	/**
@@ -90,61 +88,61 @@ class TableWizard extends Widget
 		$strCommand = 'cmd_' . $this->strField;
 
 		// Change the order
-		if (Input::get($strCommand) && is_numeric(Input::get('cid')) && Input::get('id') == $this->currentRecord)
+		if (\Input::get($strCommand) && is_numeric(\Input::get('cid')) && \Input::get('id') == $this->currentRecord)
 		{
 			$this->import('Database');
 
-			switch (Input::get($strCommand))
+			switch (\Input::get($strCommand))
 			{
 					case 'ccopy':
 					for ($i=0; $i<count($this->varValue); $i++)
 					{
-						$this->varValue[$i] = array_duplicate($this->varValue[$i], Input::get('cid'));
+						$this->varValue[$i] = array_duplicate($this->varValue[$i], \Input::get('cid'));
 					}
 					break;
 
 				case 'cmovel':
 					for ($i=0; $i<count($this->varValue); $i++)
 					{
-						$this->varValue[$i] = array_move_up($this->varValue[$i], Input::get('cid'));
+						$this->varValue[$i] = array_move_up($this->varValue[$i], \Input::get('cid'));
 					}
 					break;
 
 				case 'cmover':
 					for ($i=0; $i<count($this->varValue); $i++)
 					{
-						$this->varValue[$i] = array_move_down($this->varValue[$i], Input::get('cid'));
+						$this->varValue[$i] = array_move_down($this->varValue[$i], \Input::get('cid'));
 					}
 					break;
 
 				case 'cdelete':
 					for ($i=0; $i<count($this->varValue); $i++)
 					{
-						$this->varValue[$i] = array_delete($this->varValue[$i], Input::get('cid'));
+						$this->varValue[$i] = array_delete($this->varValue[$i], \Input::get('cid'));
 					}
 					break;
 
 				case 'rcopy':
-					$this->varValue = array_duplicate($this->varValue, Input::get('cid'));
+					$this->varValue = array_duplicate($this->varValue, \Input::get('cid'));
 					break;
 
 				case 'rup':
-					$this->varValue = array_move_up($this->varValue, Input::get('cid'));
+					$this->varValue = array_move_up($this->varValue, \Input::get('cid'));
 					break;
 
 				case 'rdown':
-					$this->varValue = array_move_down($this->varValue, Input::get('cid'));
+					$this->varValue = array_move_down($this->varValue, \Input::get('cid'));
 					break;
 
 				case 'rdelete':
-					$this->varValue = array_delete($this->varValue, Input::get('cid'));
+					$this->varValue = array_delete($this->varValue, \Input::get('cid'));
 					break;
 			}
 
 			$this->Database->prepare("UPDATE " . $this->strTable . " SET " . $this->strField . "=? WHERE id=?")
 						   ->execute(serialize($this->varValue), $this->currentRecord);
 
-			$this->redirect(preg_replace('/&(amp;)?cid=[^&]*/i', '', preg_replace('/&(amp;)?' . preg_quote($strCommand, '/') . '=[^&]*/i', '', Environment::get('request'))));
+			$this->redirect(preg_replace('/&(amp;)?cid=[^&]*/i', '', preg_replace('/&(amp;)?' . preg_quote($strCommand, '/') . '=[^&]*/i', '', \Environment::get('request'))));
 		}
 
 		// Make sure there is at least an empty array
@@ -223,9 +221,9 @@ class TableWizard extends Widget
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function importTable(DataContainer $dc)
+	public function importTable(\DataContainer $dc)
 	{
-		if (Input::get('key') != 'table')
+		if (\Input::get('key') != 'table')
 		{
 			return '';
 		}
@@ -242,13 +240,13 @@ class TableWizard extends Widget
 		$objUploader = new $class();
 
 		// Import CSS
-		if (Input::post('FORM_SUBMIT') == 'tl_table_import')
+		if (\Input::post('FORM_SUBMIT') == 'tl_table_import')
 		{
 			$arrUploaded = $objUploader->uploadTo('system/tmp', 'files');
 
 			if (empty($arrUploaded))
 			{
-				Message::addError($GLOBALS['TL_LANG']['ERR']['all_fields']);
+				\Message::addError($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
@@ -257,16 +255,16 @@ class TableWizard extends Widget
 
 			foreach ($arrUploaded as $strCsvFile)
 			{
-				$objFile = new File($strCsvFile);
+				$objFile = new \File($strCsvFile);
 
 				if ($objFile->extension != 'csv')
 				{
-					Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
+					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
 					continue;
 				}
 
 				// Get separator
-				switch (Input::post('separator'))
+				switch (\Input::post('separator'))
 				{
 					case 'semicolon':
 						$strSeparator = ';';
@@ -289,24 +287,24 @@ class TableWizard extends Widget
 				}
 			}
 
-			$this->createNewVersion($dc->table, Input::get('id'));
+			$this->createNewVersion($dc->table, \Input::get('id'));
 
 			$this->Database->prepare("UPDATE " . $dc->table . " SET tableitems=? WHERE id=?")
-						   ->execute(serialize($arrTable), Input::get('id'));
+						   ->execute(serialize($arrTable), \Input::get('id'));
 
 			setcookie('BE_PAGE_OFFSET', 0, 0, '/');
-			$this->redirect(str_replace('&key=table', '', Environment::get('request')));
+			$this->redirect(str_replace('&key=table', '', \Environment::get('request')));
 		}
 
 		// Return form
 		return '
 <div id="tl_buttons">
-<a href="'.ampersand(str_replace('&key=table', '', Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
+<a href="'.ampersand(str_replace('&key=table', '', \Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['MSC']['tw_import'][1].'</h2>
-'.Message::generate().'
-<form action="'.ampersand(Environment::get('request'), true).'" id="tl_table_import" class="tl_form" method="post" enctype="multipart/form-data">
+'.\Message::generate().'
+<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_table_import" class="tl_form" method="post" enctype="multipart/form-data">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_table_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">

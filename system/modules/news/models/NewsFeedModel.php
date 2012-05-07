@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Model;
-
 
 /**
  * Class NewsFeedModel
@@ -26,7 +24,7 @@ use \Model;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  */
-class NewsFeedModel extends Model
+class NewsFeedModel extends \Model
 {
 
 	/**

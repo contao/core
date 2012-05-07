@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Controller, \Environment, \Input, \Exception, \listable, \editable;
-
 
 /**
  * Class Backend
@@ -26,7 +24,7 @@ use \Controller, \Environment, \Input, \Exception, \listable, \editable;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-abstract class Backend extends Controller
+abstract class Backend extends \Controller
 {
 
 	/**
@@ -88,7 +86,7 @@ abstract class Backend extends Controller
 
 				if (!$this->Files->delete($strFile))
 				{
-					throw new Exception("The $strFile file cannot be deleted. Please remove the file manually and correct the file permission settings on your server.");
+					throw new \Exception("The $strFile file cannot be deleted. Please remove the file manually and correct the file permission settings on your server.");
 				}
 
 				$this->log("File $strFile ran once and has then been removed successfully", 'Backend handleRunOnce()', TL_GENERAL);
@@ -127,7 +125,7 @@ abstract class Backend extends Controller
 		$this->import('BackendUser', 'User');
 
 		// Dynamically add the "personal data" module (see #4193)
-		if (Input::get('do') == 'login')
+		if (\Input::get('do') == 'login')
 		{
 			$arrModule = array('tables'=>array('tl_user'), 'callback'=>'ModuleUser');
 		}
@@ -139,8 +137,8 @@ abstract class Backend extends Controller
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$strTable = Input::get('table') ?: $arrModule['tables'][0];
-		$id = (!Input::get('act') && Input::get('id')) ? Input::get('id') : $this->Session->get('CURRENT_ID');
+		$strTable = \Input::get('table') ?: $arrModule['tables'][0];
+		$id = (!\Input::get('act') && \Input::get('id')) ? \Input::get('id') : $this->Session->get('CURRENT_ID');
 
 		// Store the current ID in the current session
 		if ($id != $this->Session->get('CURRENT_ID'))
@@ -149,7 +147,7 @@ abstract class Backend extends Controller
 			$this->reload();
 		}
 
-		define('CURRENT_ID', (Input::get('table') ? $id : Input::get('id')));
+		define('CURRENT_ID', (\Input::get('table') ? $id : \Input::get('id')));
 		$this->Template->headline = $GLOBALS['TL_LANG']['MOD'][$module][0];
 
 		// Add the module style sheet
@@ -212,12 +210,12 @@ abstract class Backend extends Controller
 				trigger_error('Could not create a data container object', E_USER_ERROR);
 			}
 
-			$dataContainer = '\\DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
+			$dataContainer = 'DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
 			$dc = new $dataContainer($strTable, $this->Template, $arrModule);
 		}
 
 		// AJAX request
-		if ($_POST && Environment::get('isAjaxRequest'))
+		if ($_POST && \Environment::get('isAjaxRequest'))
 		{
 			$this->objAjax->executePostActions($dc);
 		}
@@ -230,13 +228,13 @@ abstract class Backend extends Controller
 		}
 
 		// Custom action (if key is not defined in config.php the default action will be called)
-		elseif (Input::get('key') && isset($arrModule[Input::get('key')]))
+		elseif (\Input::get('key') && isset($arrModule[\Input::get('key')]))
 		{
-			$objCallback = new $arrModule[Input::get('key')][0]();
-			$this->Template->main .= $objCallback->$arrModule[Input::get('key')][1]($dc);
+			$objCallback = new $arrModule[\Input::get('key')][0]();
+			$this->Template->main .= $objCallback->$arrModule[\Input::get('key')][1]($dc);
 
 			// Add the name of the parent element
-			if (isset($_GET['table']) && in_array(Input::get('table'), $arrModule['tables']) && Input::get('table') != $arrModule['tables'][0])
+			if (isset($_GET['table']) && in_array(\Input::get('table'), $arrModule['tables']) && \Input::get('table') != $arrModule['tables'][0])
 			{
 				if ($GLOBALS['TL_DCA'][$strTable]['config']['ptable'] != '')
 				{
@@ -256,17 +254,17 @@ abstract class Backend extends Controller
 			}
 
 			// Add the name of the submodule
-			$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][Input::get('key')][1], Input::get('id'));
+			$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][\Input::get('key')][1], \Input::get('id'));
 		}
 
 		// Default action
 		elseif (is_object($dc))
 		{
-			$act = Input::get('act');
+			$act = \Input::get('act');
 
 			if ($act == '' || $act == 'paste' || $act == 'select')
 			{
-				$act = ($dc instanceof listable) ? 'showAll' : 'edit';
+				$act = ($dc instanceof \listable) ? 'showAll' : 'edit';
 			}
 
 			switch ($act)
@@ -275,7 +273,7 @@ abstract class Backend extends Controller
 				case 'show':
 				case 'showAll':
 				case 'undo':
-					if (!$dc instanceof listable)
+					if (!$dc instanceof \listable)
 					{
 						$this->log('Data container ' . $strTable . ' is not listable', 'Backend getBackendModule()', TL_ERROR);
 						trigger_error('The current data container is not listable', E_USER_ERROR);
@@ -289,7 +287,7 @@ abstract class Backend extends Controller
 				case 'copyAll':
 				case 'move':
 				case 'edit':
-					if (!$dc instanceof editable)
+					if (!$dc instanceof \editable)
 					{
 						$this->log('Data container ' . $strTable . ' is not editable', 'Backend getBackendModule()', TL_ERROR);
 						trigger_error('The current data container is not editable', E_USER_ERROR);
@@ -298,18 +296,18 @@ abstract class Backend extends Controller
 			}
 
 			// Correctly add the theme name in the style sheets module
-			if (strncmp(Input::get('table'), 'tl_style', 8) === 0)
+			if (strncmp(\Input::get('table'), 'tl_style', 8) === 0)
 			{
-				if (Input::get('table') == 'tl_style_sheet' || !isset($_GET['act']))
+				if (\Input::get('table') == 'tl_style_sheet' || !isset($_GET['act']))
 				{
 					$objRow = $this->Database->prepare("SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=?)")
 											 ->limit(1)
-											 ->executeUncached(Input::get('id'));
+											 ->executeUncached(\Input::get('id'));
 
 					$this->Template->headline .= ' » ' . $objRow->name;
 					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
 
-					if (Input::get('table') == 'tl_style')
+					if (\Input::get('table') == 'tl_style')
 					{
 						$objRow = $this->Database->prepare("SELECT name FROM tl_style_sheet WHERE id=?")
 												 ->limit(1)
@@ -318,11 +316,11 @@ abstract class Backend extends Controller
 						$this->Template->headline .= ' » ' . $objRow->name;
 					}
 				}
-				elseif (Input::get('table') == 'tl_style')
+				elseif (\Input::get('table') == 'tl_style')
 				{
 					$objRow = $this->Database->prepare("SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=(SELECT pid FROM tl_style WHERE id=?))")
 											 ->limit(1)
-											 ->executeUncached(Input::get('id'));
+											 ->executeUncached(\Input::get('id'));
 
 					$this->Template->headline .= ' » ' . $objRow->name;
 					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
@@ -337,7 +335,7 @@ abstract class Backend extends Controller
 			else
 			{
 				// Add the name of the parent element
-				if (Input::get('table') && in_array(Input::get('table'), $arrModule['tables']) && Input::get('table') != $arrModule['tables'][0])
+				if (\Input::get('table') && in_array(\Input::get('table'), $arrModule['tables']) && \Input::get('table') != $arrModule['tables'][0])
 				{
 					if ($GLOBALS['TL_DCA'][$strTable]['config']['ptable'] != '')
 					{
@@ -357,30 +355,30 @@ abstract class Backend extends Controller
 				}
 
 				// Add the name of the submodule
-				if (Input::get('table') && isset($GLOBALS['TL_LANG']['MOD'][Input::get('table')]))
+				if (\Input::get('table') && isset($GLOBALS['TL_LANG']['MOD'][\Input::get('table')]))
 				{
-					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][Input::get('table')];
+					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][\Input::get('table')];
 				}
 			}
 
 			// Add the current action
-			if (Input::get('act') == 'editAll')
+			if (\Input::get('act') == 'editAll')
 			{
 				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MSC']['all'][0];
 			}
-			elseif (Input::get('act') == 'overrideAll')
+			elseif (\Input::get('act') == 'overrideAll')
 			{
 				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MSC']['all_override'][0];
 			}
 			elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]))
 			{
-				if (Input::get('do') == 'files')
+				if (\Input::get('do') == 'files')
 				{
-					$this->Template->headline .= ' » ' . Input::get('id');
+					$this->Template->headline .= ' » ' . \Input::get('id');
 				}
 				else
 				{
-					$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][$act][1], Input::get('id'));
+					$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][$act][1], \Input::get('id'));
 				}
 			}
 
@@ -415,7 +413,7 @@ abstract class Backend extends Controller
 		// Fallback domain
 		if ($domain == '')
 		{
-			$domain = Environment::get('base');
+			$domain = \Environment::get('base');
 		}
 
 		$arrPages = array();
@@ -428,11 +426,11 @@ abstract class Backend extends Controller
 			{
 				if ($objPages->dns != '')
 				{
-					$domain = (Environment::get('ssl') ? 'https://' : 'http://') . $objPages->dns . TL_PATH . '/';
+					$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objPages->dns . TL_PATH . '/';
 				}
 				else
 				{
-					$domain = Environment::get('base');
+					$domain = \Environment::get('base');
 				}
 
 				$strLanguage = $objPages->language;
@@ -513,7 +511,7 @@ abstract class Backend extends Controller
 			}
 
 			// Skip websites that run under a different domain (see #2387)
-			if ($objPage->domain && $objPage->domain != Environment::get('host'))
+			if ($objPage->domain && $objPage->domain != \Environment::get('host'))
 			{
 				continue;
 			}
@@ -550,7 +548,7 @@ abstract class Backend extends Controller
 			if ($objPages->type == 'root')
 			{
 				// Skip websites that run under a different domain
-				if ($objPages->dns && $objPages->dns != Environment::get('host'))
+				if ($objPages->dns && $objPages->dns != \Environment::get('host'))
 				{
 					continue;
 				}
@@ -561,7 +559,7 @@ abstract class Backend extends Controller
 			}
 			else
 			{
-				$strOptions .= sprintf('<option value="{{link_url::%s}}"%s>%s%s</option>', $objPages->id, (('{{link_url::' . $objPages->id . '}}' == Input::get('value')) ? ' selected="selected"' : ''), str_repeat(" &nbsp; &nbsp; ", $level), specialchars($objPages->title));
+				$strOptions .= sprintf('<option value="{{link_url::%s}}"%s>%s%s</option>', $objPages->id, (('{{link_url::' . $objPages->id . '}}' == \Input::get('value')) ? ' selected="selected"' : ''), str_repeat(" &nbsp; &nbsp; ", $level), specialchars($objPages->title));
 				$strOptions .= $this->doCreatePageList($objPages->id, $level);
 			}
 		}
@@ -677,7 +675,7 @@ abstract class Backend extends Controller
 					continue;
 				}
 
-				$strFiles .= sprintf('<option value="%s"%s>%s</option>', $strFolder . '/' . $strFile, (($strFolder . '/' . $strFile == Input::get('value')) ? ' selected="selected"' : ''), specialchars($strFile));
+				$strFiles .= sprintf('<option value="%s"%s>%s</option>', $strFolder . '/' . $strFile, (($strFolder . '/' . $strFile == \Input::get('value')) ? ' selected="selected"' : ''), specialchars($strFile));
 			}
 		}
 

@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \FrontendTemplate, \Module, \PageModel;
-
 
 /**
  * Class ModuleCustomnav
@@ -26,7 +24,7 @@ use \BackendTemplate, \FrontendTemplate, \Module, \PageModel;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ModuleCustomnav extends Module
+class ModuleCustomnav extends \Module
 {
 
 	/**
@@ -44,7 +42,7 @@ class ModuleCustomnav extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### CUSTOM NAVIGATION MENU ###';
 			$objTemplate->title = $this->headline;
@@ -85,7 +83,7 @@ class ModuleCustomnav extends Module
 		}
 
 		// Get all active pages
-		$objPages = PageModel::findPublishedRegularWithoutGuestsByIds($this->pages);
+		$objPages = \PageModel::findPublishedRegularWithoutGuestsByIds($this->pages);
 
 		// Return if there are no pages
 		if ($objPages === null)
@@ -106,7 +104,7 @@ class ModuleCustomnav extends Module
 			$this->navigationTpl = 'nav_default';
 		}
 
-		$objTemplate = new FrontendTemplate($this->navigationTpl);
+		$objTemplate = new \FrontendTemplate($this->navigationTpl);
 
 		$objTemplate->type = get_class($this);
 		$objTemplate->level = 'level_1';
@@ -126,7 +124,7 @@ class ModuleCustomnav extends Module
 						break;
 
 					case 'forward':
-						if (($objNext = PageModel::findPublishedById($arrPage['jumpTo'])) !== null)
+						if (($objNext = \PageModel::findPublishedById($arrPage['jumpTo'])) !== null)
 						{
 							$href = $this->generateFrontendUrl($objNext->row());
 							break;

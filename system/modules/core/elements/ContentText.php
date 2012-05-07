@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \ContentElement, \FilesModel, \String;
-
 
 /**
  * Class ContentText
@@ -26,7 +24,7 @@ use \ContentElement, \FilesModel, \String;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ContentText extends ContentElement
+class ContentText extends \ContentElement
 {
 
 	/**
@@ -46,14 +44,14 @@ class ContentText extends ContentElement
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$this->text = String::toXhtml($this->text);
+			$this->text = \String::toXhtml($this->text);
 		}
 		else
 		{
-			$this->text = String::toHtml5($this->text);
+			$this->text = \String::toHtml5($this->text);
 		}
 
-		$this->Template->text = String::encodeEmail($this->text);
+		$this->Template->text = \String::encodeEmail($this->text);
 		$this->Template->addImage = false;
 
 		// Add an image
@@ -65,7 +63,7 @@ class ContentText extends ContentElement
 			}
 			else
 			{
-				$objModel = FilesModel::findByPk($this->singleSRC);
+				$objModel = \FilesModel::findByPk($this->singleSRC);
 
 				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 				{

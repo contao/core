@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Environment, \File, \Image, \Input, \Widget;
-
 
 /**
  * Class FileSelector
@@ -26,7 +24,7 @@ use \Environment, \File, \Image, \Input, \Widget;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class FileSelector extends Widget
+class FileSelector extends \Widget
 {
 
 	/**
@@ -80,9 +78,9 @@ class FileSelector extends Widget
 		$this->import('BackendUser', 'User');
 
 		// Store the keyword
-		if (Input::post('FORM_SUBMIT') == 'item_selector')
+		if (\Input::post('FORM_SUBMIT') == 'item_selector')
 		{
-			$this->Session->set('file_selector_search', Input::post('keyword'));
+			$this->Session->set('file_selector_search', \Input::post('keyword'));
 			$this->reload();
 		}
 
@@ -189,7 +187,7 @@ class FileSelector extends Widget
 	 */
 	public function generateAjax($id, $strField, $level)
 	{
-		if (!Environment::get('isAjaxRequest'))
+		if (!\Environment::get('isAjaxRequest'))
 		{
 			return '';
 		}
@@ -260,11 +258,11 @@ class FileSelector extends Widget
 		$xtnode = 'tree_' . $this->strTable . '_' . $this->strName;
 
 		// Get the session data and toggle the nodes
-		if (Input::get($flag.'tg'))
+		if (\Input::get($flag.'tg'))
 		{
-			$session[$node][Input::get($flag.'tg')] = (isset($session[$node][Input::get($flag.'tg')]) && $session[$node][Input::get($flag.'tg')] == 1) ? 0 : 1;
+			$session[$node][\Input::get($flag.'tg')] = (isset($session[$node][\Input::get($flag.'tg')]) && $session[$node][\Input::get($flag.'tg')] == 1) ? 0 : 1;
 			$this->Session->setData($session);
-			$this->redirect(preg_replace('/(&(amp;)?|\?)'.$flag.'tg=[^& ]*/i', '', Environment::get('request')));
+			$this->redirect(preg_replace('/(&(amp;)?|\?)'.$flag.'tg=[^& ]*/i', '', \Environment::get('request')));
 		}
 
 		$strWhere = (($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly']) ? "" : " AND type='folder'") . $this->strExtensions;
@@ -319,7 +317,7 @@ class FileSelector extends Widget
 		}
 		else
 		{
-			$file = new File($objFile->path);
+			$file = new \File($objFile->path);
 			$image = $file->icon;
 		}
 
@@ -336,7 +334,7 @@ class FileSelector extends Widget
 				{
 					$_height = ($file->height < 50) ? $file->height : 50;
 					$_width = (($file->width * $_height / $file->height) > 400) ? 90 : '';
-					$thumbnail .= '<br><img src="' . TL_FILES_URL . Image::get($objFile->path, $_width, $_height) . '" alt="" style="margin-bottom:2px">';
+					$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($objFile->path, $_width, $_height) . '" alt="" style="margin-bottom:2px">';
 				}
 			}
 			else

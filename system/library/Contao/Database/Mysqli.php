@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Database, \Database_Mysqli_Statement;
-
 
 /**
  * MySQLi-specific database class
@@ -22,7 +20,7 @@ use \Database, \Database_Mysqli_Statement;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Database_Mysqli extends Database
+class Database_Mysqli extends \Database
 {
 
 	/**
@@ -292,6 +290,6 @@ class Database_Mysqli extends Database
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
-		return new Database_Mysqli_Statement($resConnection, $blnDisableAutocommit);
+		return new \Database_Mysqli_Statement($resConnection, $blnDisableAutocommit);
 	}
 }

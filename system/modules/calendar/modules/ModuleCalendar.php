@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \CalendarEventsModel, \Date, \Environment, \Events, \FrontendTemplate, \Input;
-
 
 /**
  * Class ModuleCalendar
@@ -26,7 +24,7 @@ use \BackendTemplate, \CalendarEventsModel, \Date, \Environment, \Events, \Front
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  */
-class ModuleCalendar extends Events
+class ModuleCalendar extends \Events
 {
 
 	/**
@@ -56,7 +54,7 @@ class ModuleCalendar extends Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### CALENDAR ###';
 			$objTemplate->title = $this->headline;
@@ -75,7 +73,7 @@ class ModuleCalendar extends Events
 			return '';
 		}
 
-		$this->strUrl = preg_replace('/\?.*$/i', '', Environment::get('request'));
+		$this->strUrl = preg_replace('/\?.*$/i', '', \Environment::get('request'));
 		$this->strLink = $this->strUrl;
 
 		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
@@ -93,28 +91,28 @@ class ModuleCalendar extends Events
 	protected function compile()
 	{
 		// Respond to month
-		if (Input::get('month'))
+		if (\Input::get('month'))
 		{
-			$this->Date = new Date(Input::get('month'), 'Ym');
+			$this->Date = new \Date(\Input::get('month'), 'Ym');
 		}
 		// Respond to day
-		elseif (Input::get('day'))
+		elseif (\Input::get('day'))
 		{
-			$this->Date = new Date(Input::get('day'), 'Ymd');
+			$this->Date = new \Date(\Input::get('day'), 'Ymd');
 		}
 		// Fallback to today
 		else
 		{
-			$this->Date = new Date();
+			$this->Date = new \Date();
 		}
 
 		// Find the boundaries
-		$objMinMax = CalendarEventsModel::findBoundaries($this->cal_calendar);
+		$objMinMax = \CalendarEventsModel::findBoundaries($this->cal_calendar);
 		$intLeftBoundary = date('Ym', $objMinMax->dateFrom);
 		$intRightBoundary = date('Ym', max($objMinMax->dateTo, $objMinMax->repeatUntil));
 
 		// Instantiate the template
-		$objTemplate = new FrontendTemplate(($this->cal_ctemplate ? $this->cal_ctemplate : 'cal_default'));
+		$objTemplate = new \FrontendTemplate(($this->cal_ctemplate ? $this->cal_ctemplate : 'cal_default'));
 
 		// Store year and month
 		$intYear = date('Y', $this->Date->tstamp);
@@ -131,7 +129,7 @@ class ModuleCalendar extends Events
 		// Only generate a link if there are events (see #4160)
 		if ($intPrevYm >= $intLeftBoundary)
 		{
-			$objTemplate->prevHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . Input::get('id') . '&amp;' : '?') . 'month=' . $intPrevYm;
+			$objTemplate->prevHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . \Input::get('id') . '&amp;' : '?') . 'month=' . $intPrevYm;
 			$objTemplate->prevTitle = specialchars($lblPrevious);
 			$objTemplate->prevLink = $GLOBALS['TL_LANG']['MSC']['cal_previous'] . ' ' . $lblPrevious;
 			$objTemplate->prevLabel = $GLOBALS['TL_LANG']['MSC']['cal_previous'];
@@ -149,7 +147,7 @@ class ModuleCalendar extends Events
 		// Only generate a link if there are events (see #4160)
 		if ($intNextYm <= $intRightBoundary)
 		{
-			$objTemplate->nextHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . Input::get('id') . '&amp;' : '?') . 'month=' . $intNextYm;
+			$objTemplate->nextHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . \Input::get('id') . '&amp;' : '?') . 'month=' . $intNextYm;
 			$objTemplate->nextTitle = specialchars($lblNext);
 			$objTemplate->nextLink = $lblNext . ' ' . $GLOBALS['TL_LANG']['MSC']['cal_next'];
 			$objTemplate->nextLabel = $GLOBALS['TL_LANG']['MSC']['cal_next'];
@@ -235,7 +233,7 @@ class ModuleCalendar extends Events
 			$strClass .= ($intKey == date('Ymd')) ? ' today' : '';
 
 			// Mark the selected day (see #1784)
-			if ($intKey == Input::get('day'))
+			if ($intKey == \Input::get('day'))
 			{
 				$strClass .= ' selected';
 			}

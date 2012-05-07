@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \Module;
-
 
 /**
  * Class ModuleComments
@@ -25,7 +23,7 @@ use \BackendTemplate, \Module;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Comments
  */
-class ModuleComments extends Module
+class ModuleComments extends \Module
 {
 
 	/**
@@ -43,7 +41,7 @@ class ModuleComments extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### COMMENTS ###';
 			$objTemplate->title = $this->headline;

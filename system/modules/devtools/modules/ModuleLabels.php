@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendModule, \Environmen, \Input;
-
 
 /**
  * Class ModuleLabels
@@ -26,7 +24,7 @@ use \BackendModule, \Environmen, \Input;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Devtools
  */
-class ModuleLabels extends BackendModule
+class ModuleLabels extends \BackendModule
 {
 
 	/**
@@ -44,7 +42,7 @@ class ModuleLabels extends BackendModule
 		$this->loadLanguageFile('tl_labels');
 
 		$this->Template->label = $GLOBALS['TL_LANG']['tl_labels']['label'][0];
-		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['tl_labels']['headline'], Input::get('id'));
+		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['tl_labels']['headline'], \Input::get('id'));
 		$this->Template->help = ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_labels']['label'][1])) ? $GLOBALS['TL_LANG']['tl_labels']['label'][1] : '';
 		$this->Template->submit = specialchars($GLOBALS['TL_LANG']['tl_labels']['submitBT']);
 
@@ -56,30 +54,30 @@ class ModuleLabels extends BackendModule
 		{
 			if ($strLanguage != 'en' && substr($strLanguage, 0, 1) != '.')
 			{
-				$strOptions .= sprintf('<option value="%s"%s>%s</option>', $strLanguage, (($strLanguage == Input::post('language')) ? ' selected="selected"' : ''), $arrLanguages[$strLanguage]);
+				$strOptions .= sprintf('<option value="%s"%s>%s</option>', $strLanguage, (($strLanguage == \Input::post('language')) ? ' selected="selected"' : ''), $arrLanguages[$strLanguage]);
 			}
 		}
 
 		$this->Template->options = $strOptions;
-		$this->Template->base = Environment::get('base');
+		$this->Template->base = \Environment::get('base');
 		$this->Template->button = $GLOBALS['TL_LANG']['MSC']['backBT'];
 		$this->Template->selectAll = $GLOBALS['TL_LANG']['MSC']['selectAll'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']);
-		$this->Template->href = (Input::post('FORM_SUBMIT') == 'tl_labels') ? Environment::get('request') : $this->getReferer(true);
-		$this->Template->action = ampersand(Environment::get('request'));
+		$this->Template->href = (\Input::post('FORM_SUBMIT') == 'tl_labels') ? \Environment::get('request') : $this->getReferer(true);
+		$this->Template->action = ampersand(\Environment::get('request'));
 		$this->Template->warning = $GLOBALS['TL_LANG']['tl_labels']['warning'];
 		$this->Template->error = $GLOBALS['TL_LANG']['tl_labels']['error'];
 		$this->Template->ok = $GLOBALS['TL_LANG']['tl_labels']['ok'];
 
 		// Find missing labels
-		if (Input::post('FORM_SUBMIT') == 'tl_labels')
+		if (\Input::post('FORM_SUBMIT') == 'tl_labels')
 		{
 			$arrLang = array();
 
 			foreach (scandir(TL_ROOT . '/system/modules') as $strDir)
 			{
 				$strPath = TL_ROOT . '/system/modules/' . $strDir . '/languages/en';
-				$strLang = TL_ROOT . '/system/modules/' . $strDir . '/languages/' . Input::post('language');
+				$strLang = TL_ROOT . '/system/modules/' . $strDir . '/languages/' . \Input::post('language');
 
 				// Continue if language folder does not exists
 				if (in_array($strDir, array('.', '..')) || !is_dir($strPath))
@@ -134,7 +132,7 @@ class ModuleLabels extends BackendModule
 			}
 
 			$this->Template->files = $arrLang;
-			$this->Template->headline .= ' - ' . $arrLanguages[Input::post('language')];
+			$this->Template->headline .= ' - ' . $arrLanguages[\Input::post('language')];
 		}
 	}
 }

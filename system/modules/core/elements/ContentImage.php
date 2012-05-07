@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \ContentElement, \FilesModel;
-
 
 /**
  * Class ContentImage
@@ -26,7 +24,7 @@ use \ContentElement, \FilesModel;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ContentImage extends ContentElement
+class ContentImage extends \ContentElement
 {
 
 	/**
@@ -52,7 +50,7 @@ class ContentImage extends ContentElement
 			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 		}
 
-		$objFile = FilesModel::findByPk($this->singleSRC);
+		$objFile = \FilesModel::findByPk($this->singleSRC);
 
 		if ($objFile === null || !is_file(TL_ROOT . '/' . $objFile->path))
 		{

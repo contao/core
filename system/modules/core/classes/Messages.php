@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Backend;
-
 
 /**
  * Class Messages
@@ -26,7 +24,7 @@ use \Backend;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class Messages extends Backend
+class Messages extends \Backend
 {
 
 	/**

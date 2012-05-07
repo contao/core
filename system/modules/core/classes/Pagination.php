@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Environment, \Frontend, \FrontendTemplate, \Input;
-
 
 /**
  * Class Pagination
@@ -26,7 +24,7 @@ use \Environment, \Frontend, \FrontendTemplate, \Input;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class Pagination extends Frontend
+class Pagination extends \Frontend
 {
 
 	/**
@@ -143,9 +141,9 @@ class Pagination extends Frontend
 		$this->lblLast = $GLOBALS['TL_LANG']['MSC']['last'];
 		$this->lblTotal = $GLOBALS['TL_LANG']['MSC']['totalPages'];
 
-		if (Input::get($strParameter) != '' && Input::get($strParameter) > 0)
+		if (\Input::get($strParameter) != '' && \Input::get($strParameter) > 0)
 		{
-			$this->intPage = Input::get($strParameter);
+			$this->intPage = \Input::get($strParameter);
 		}
 
 		$this->strParameter = $strParameter;
@@ -205,7 +203,7 @@ class Pagination extends Frontend
 		}
 
 		$blnQuery = false;
-		$this->strUrl = preg_replace('/\?.*$/', '', Environment::get('request'));
+		$this->strUrl = preg_replace('/\?.*$/', '', \Environment::get('request'));
 
 		// Prepare the URL
 		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING'], -1, PREG_SPLIT_NO_EMPTY) as $fragment)
@@ -231,7 +229,7 @@ class Pagination extends Frontend
 			$this->intPage = $this->intTotalPages;
 		}
 
-		$this->Template = new FrontendTemplate('pagination');
+		$this->Template = new \FrontendTemplate('pagination');
 
 		$this->Template->hasFirst = $this->hasFirst();
 		$this->Template->hasPrevious = $this->hasPrevious();

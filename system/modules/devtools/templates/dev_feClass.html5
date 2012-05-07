@@ -16,7 +16,6 @@
  * Namespace
  */
 namespace <?php echo $this->package; ?>;
-use \<?php echo $this->extends; ?>;
 
 
 /**
@@ -26,7 +25,7 @@ use \<?php echo $this->extends; ?>;
  * @author     <?php echo $this->author; ?> 
  * @package    Devtools
  */
-class <?php echo $this->class; ?> extends <?php echo $this->extends; ?> 
+class <?php echo $this->class; ?> extends \<?php echo $this->extends; ?> 
 {
 
 	/**

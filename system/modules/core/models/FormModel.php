@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Database, \Model;
-
 
 /**
  * Class FormModel
@@ -26,7 +24,7 @@ use \Database, \Model;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class FormModel extends Model
+class FormModel extends \Model
 {
 
 	/**
@@ -42,7 +40,7 @@ class FormModel extends Model
 	 */
 	public function getMaxUploadFileSize()
 	{
-		$objResult = Database::getInstance()->prepare("SELECT MAX(maxlength) AS maxlength FROM tl_form_field WHERE pid=? AND type='upload' AND maxlength>0")
+		$objResult = \Database::getInstance()->prepare("SELECT MAX(maxlength) AS maxlength FROM tl_form_field WHERE pid=? AND type='upload' AND maxlength>0")
 											 ->execute($this->id);
 
 		if ($objResult->numRows > 0 && $objResult->maxlength > 0)

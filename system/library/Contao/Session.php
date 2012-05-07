@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Exception;
-
 
 /**
  * Handles reading and updating the session data
@@ -171,7 +169,7 @@ class Session
 	{
 		if (!is_array($arrData))
 		{
-			throw new Exception('Array required to set session data');
+			throw new \Exception('Array required to set session data');
 		}
 
 		$this->arrSession = $arrData;
@@ -194,7 +192,7 @@ class Session
 
 		if (!is_array($varData))
 		{
-			throw new Exception('Array or object required to append session data');
+			throw new \Exception('Array or object required to append session data');
 		}
 
 		$this->arrSession = array_merge($this->arrSession, $varData);

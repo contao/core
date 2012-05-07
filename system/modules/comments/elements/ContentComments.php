@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \ContentElement;
-
 
 /**
  * Class ContentComments
@@ -25,7 +23,7 @@ use \BackendTemplate, \ContentElement;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Comments
  */
-class ContentComments extends ContentElement
+class ContentComments extends \ContentElement
 {
 
 	/**
@@ -43,7 +41,7 @@ class ContentComments extends ContentElement
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### COMMENTS ###';
 			$objTemplate->title = $this->headline;

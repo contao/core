@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Widget;
-
 
 /**
  * Class TextStore
@@ -27,7 +25,7 @@ use \Widget;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class TextStore extends Widget
+class TextStore extends \Widget
 {
 
 	/**

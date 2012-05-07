@@ -16,8 +16,6 @@
  * Namespace
  */
 namespace <?php echo $this->package; ?>;
-use \Model;
-
 
 /**
  * Class <?php echo $this->class; ?> 
@@ -26,7 +24,7 @@ use \Model;
  * @author     <?php echo $this->author; ?> 
  * @package    Devtools
  */
-class <?php echo $this->class; ?> extends Model
+class <?php echo $this->class; ?> extends \Model
 {
 
 	/**

@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Files_Ftp, \Files_Php, \Exception;
-
 
 /**
  * A wrapper class for accessing the file system
@@ -73,11 +71,11 @@ abstract class Files
 			// Use FTP to modify files
 			if ($GLOBALS['TL_CONFIG']['useFTP'])
 			{
-				self::$objInstance = new Files_Ftp();
+				self::$objInstance = new \Files_Ftp();
 			}
 
 			// HOOK: use the smhextended module
-			elseif ($GLOBALS['TL_CONFIG']['useSmhExtended'] && in_array('smhextended', Config::getInstance()->getActiveModules()))
+			elseif ($GLOBALS['TL_CONFIG']['useSmhExtended'] && in_array('smhextended', \Config::getInstance()->getActiveModules()))
 			{
 				self::$objInstance = new \SMHExtended();
 			}
@@ -85,7 +83,7 @@ abstract class Files
 			// Use PHP to modify files
 			else
 			{
-				self::$objInstance = new Files_Php();
+				self::$objInstance = new \Files_Php();
 			}
 		}
 
@@ -250,7 +248,7 @@ abstract class Files
 		{
 			if (strpos($strPath, '../') !== false)
 			{
-				throw new Exception('Invalid file or folder name ' . $strPath);
+				throw new \Exception('Invalid file or folder name ' . $strPath);
 			}
 		}
 	}

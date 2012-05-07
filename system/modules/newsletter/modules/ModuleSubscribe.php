@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \Email, \Environment, \FrontendTemplate, \Input, \Module, \NewsletterChannelModel, \NewsletterRecipientsModel, \Validator;
-
 
 /**
  * Class ModuleSubscribe
@@ -26,7 +24,7 @@ use \BackendTemplate, \Email, \Environment, \FrontendTemplate, \Input, \Module, 
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  */
-class ModuleSubscribe extends Module
+class ModuleSubscribe extends \Module
 {
 
 	/**
@@ -44,7 +42,7 @@ class ModuleSubscribe extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWSLETTER SUBSCRIBE ###';
 			$objTemplate->title = $this->headline;
@@ -75,19 +73,19 @@ class ModuleSubscribe extends Module
 		// Overwrite default template
 		if ($this->nl_template)
 		{
-			$this->Template = new FrontendTemplate($this->nl_template);
+			$this->Template = new \FrontendTemplate($this->nl_template);
 			$this->Template->setData($this->arrData);
 		}
 
 		// Activate e-mail address
-		if (Input::get('token'))
+		if (\Input::get('token'))
 		{
 			$this->activateRecipient();
 			return;
 		}
 
 		// Subscribe
-		if (Input::post('FORM_SUBMIT') == 'tl_subscribe')
+		if (\Input::post('FORM_SUBMIT') == 'tl_subscribe')
 		{
 			$this->addRecipient();
 		}
@@ -112,7 +110,7 @@ class ModuleSubscribe extends Module
 		}
 
 		$arrChannels = array();
-		$objChannel = NewsletterChannelModel::findByIds($this->nl_channels);
+		$objChannel = \NewsletterChannelModel::findByIds($this->nl_channels);
 
 		// Get the titles
 		if ($objChannel !== null)
@@ -142,10 +140,10 @@ class ModuleSubscribe extends Module
 	 */
 	protected function activateRecipient()
 	{
-		$this->Template = new FrontendTemplate('mod_newsletter');
+		$this->Template = new \FrontendTemplate('mod_newsletter');
 
 		// Check the token
-		$objRecipient = NewsletterRecipientsModel::findByToken(Input::get('token'));
+		$objRecipient = \NewsletterRecipientsModel::findByToken(\Input::get('token'));
 
 		if ($objRecipient === null)
 		{
@@ -197,7 +195,7 @@ class ModuleSubscribe extends Module
 	 */
 	protected function addRecipient()
 	{
-		$arrChannels = Input::post('channels');
+		$arrChannels = \Input::post('channels');
 
 		if (!is_array($arrChannels))
 		{
@@ -215,7 +213,7 @@ class ModuleSubscribe extends Module
 		}
 
 		// Validate the e-mail address
-		if (!Validator::isEmail(Input::post('email', true)))
+		if (!\Validator::isEmail(\Input::post('email', true)))
 		{
 			$_SESSION['SUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['email'];
 			$this->reload();
@@ -224,7 +222,7 @@ class ModuleSubscribe extends Module
 		$arrSubscriptions = array();
 
 		// Get the existing active subscriptions
-		if (($objSubscription = NewsletterRecipientsModel::findBy(array("email=? AND active=1"), $varInput)) !== null)
+		if (($objSubscription = \NewsletterRecipientsModel::findBy(array("email=? AND active=1"), $varInput)) !== null)
 		{
 			$arrSubscriptions = $objSubscription->fetchEach('pid');
 		}
@@ -239,7 +237,7 @@ class ModuleSubscribe extends Module
 		}
 
 		// Remove old subscriptions that have not been activated yet
-		if (($objOld = NewsletterRecipientsModel::findBy(array("email=? AND active=''"), $varInput)) !== null)
+		if (($objOld = \NewsletterRecipientsModel::findBy(array("email=? AND active=''"), $varInput)) !== null)
 		{
 			while ($objOld->next())
 			{
@@ -253,33 +251,33 @@ class ModuleSubscribe extends Module
 		// Add the new subscriptions
 		foreach ($arrNew as $id)
 		{
-			$objRecipient = new NewsletterRecipientsModel();
+			$objRecipient = new \NewsletterRecipientsModel();
 
 			$objRecipient->pid = $id;
 			$objRecipient->tstamp = $time;
 			$objRecipient->email = $varInput;
 			$objRecipient->active = '';
 			$objRecipient->addedOn = $time;
-			$objRecipient->ip = $this->anonymizeIp(Environment::get('ip'));
+			$objRecipient->ip = $this->anonymizeIp(\Environment::get('ip'));
 			$objRecipient->token = $strToken;
 
 			$objRecipient->save();
 		}
 
 		// Get the channels
-		$objChannel = NewsletterChannelModel::findByIds($arrChannels);
+		$objChannel = \NewsletterChannelModel::findByIds($arrChannels);
 
 		// Prepare the e-mail text
 		$strText = str_replace('##token##', $strToken, $this->nl_subscribe);
-		$strText = str_replace('##domain##', Environment::get('host'), $strText);
-		$strText = str_replace('##link##', Environment::get('base') . Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $strToken, $strText);
+		$strText = str_replace('##domain##', \Environment::get('host'), $strText);
+		$strText = str_replace('##link##', \Environment::get('base') . \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $strToken, $strText);
 		$strText = str_replace(array('##channel##', '##channels##'), implode("\n", $objChannel->fetchEach('title')), $strText);
 
 		// Activation e-mail
-		$objEmail = new Email();
+		$objEmail = new \Email();
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
-		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], Environment::get('host'));
+		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], \Environment::get('host'));
 		$objEmail->text = $strText;
 		$objEmail->sendTo($varInput);
 

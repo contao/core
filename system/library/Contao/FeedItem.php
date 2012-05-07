@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Environment, \File, \System;
-
 
 /**
  * Creates items to be appended to RSS or Atom feeds
@@ -37,7 +35,7 @@ use \Environment, \File, \System;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class FeedItem extends System
+class FeedItem extends \System
 {
 
 	/**
@@ -118,11 +116,11 @@ class FeedItem extends System
 			return;
 		}
 
-		$objFile = new File($strFile);
+		$objFile = new \File($strFile);
 
 		$this->arrData['enclosure'][] = array
 		(
-			'url' => Environment::get('base') . $strFile,
+			'url' => \Environment::get('base') . $strFile,
 			'length' => $objFile->size,
 			'type' => $objFile->mime
 		);

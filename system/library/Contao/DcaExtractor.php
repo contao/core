@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Database_Installer, \File, \Exception;
-
 
 /**
  * Extracts DCA information and cache it
@@ -35,7 +33,7 @@ use \Database_Installer, \File, \Exception;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class DcaExtractor extends Database_Installer
+class DcaExtractor extends \Database_Installer
 {
 
 	/**
@@ -92,7 +90,7 @@ class DcaExtractor extends Database_Installer
 	{
 		if ($strTable == '')
 		{
-			throw new Exception('The table name must not be empty');
+			throw new \Exception('The table name must not be empty');
 		}
 
 		parent::__construct();
@@ -337,11 +335,11 @@ class DcaExtractor extends Database_Installer
 		// Not all information could be loaded
 		if (!is_array($sql) || !is_array($fields))
 		{
-			throw new Exception('Could not load the table information of ' . $this->strTable);
+			throw new \Exception('Could not load the table information of ' . $this->strTable);
 		}
 
 		// Create the file
-		$objFile = new File('system/cache/sql/' . $this->strTable . '.php');
+		$objFile = new \File('system/cache/sql/' . $this->strTable . '.php');
 		$objFile->write("<?php\n\n");
 
 		// Meta
@@ -430,7 +428,7 @@ class DcaExtractor extends Database_Installer
 
 				$included[] = $strFile;
 				$strTable = str_replace('.php', '', $strFile);
-				new DcaExtractor($strTable);
+				new \DcaExtractor($strTable);
 			}
 		}
 	}

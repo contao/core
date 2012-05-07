@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \FormTextField, \Input, \MemberModel, \Module;
-
 
 /**
  * Class ModuleCloseAccount
@@ -26,7 +24,7 @@ use \BackendTemplate, \FormTextField, \Input, \MemberModel, \Module;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ModuleCloseAccount extends Module
+class ModuleCloseAccount extends \Module
 {
 
 	/**
@@ -44,7 +42,7 @@ class ModuleCloseAccount extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### CLOSE ACCOUNT ###';
 			$objTemplate->title = $this->headline;
@@ -81,11 +79,11 @@ class ModuleCloseAccount extends Module
 			'eval' => array('hideInput'=>true, 'mandatory'=>true, 'required'=>true, 'tableless'=>$this->tableless)
 		);
 
-		$objWidget = new FormTextField($this->prepareForWidget($arrField, $arrField['name']));
+		$objWidget = new \FormTextField($this->prepareForWidget($arrField, $arrField['name']));
 		$objWidget->rowClass = 'row_0 row_first even';
 
 		// Validate widget
-		if (Input::post('FORM_SUBMIT') == 'tl_close_account')
+		if (\Input::post('FORM_SUBMIT') == 'tl_close_account')
 		{
 			$objWidget->validate();
 
@@ -114,7 +112,7 @@ class ModuleCloseAccount extends Module
 					}
 				}
 
-				$objMember = MemberModel::findByPk($this->User->id);
+				$objMember = \MemberModel::findByPk($this->User->id);
 
 				// Remove the account
 				if ($this->reg_close == 'close_delete')

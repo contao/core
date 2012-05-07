@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Environment, \FilesModel, \Module, \String;
-
 
 /**
  * Class ModuleFlash
@@ -26,7 +24,7 @@ use \Environment, \FilesModel, \Module, \String;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ModuleFlash extends Module
+class ModuleFlash extends \Module
 {
 
 	/**
@@ -59,7 +57,7 @@ class ModuleFlash extends Module
 				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 			}
 
-			$objFile = FilesModel::findByPk($this->singleSRC);
+			$objFile = \FilesModel::findByPk($this->singleSRC);
 
 			if ($objFile === null || !is_file(TL_ROOT . '/' . $objFile->path))
 			{
@@ -85,8 +83,8 @@ class ModuleFlash extends Module
 		$this->Template->transparent = $this->transparent ? true : false;
 		$this->Template->interactive = $this->interactive ? true : false;
 		$this->Template->flashId = $this->flashID ?: 'swf_' . $this->id;
-		$this->Template->fsCommand = '  ' . preg_replace('/[\n\r]/', "\n  ", String::decodeEntities($this->flashJS));
-		$this->Template->flashvars = 'URL=' . Environment::get('base');
+		$this->Template->fsCommand = '  ' . preg_replace('/[\n\r]/', "\n  ", \String::decodeEntities($this->flashJS));
+		$this->Template->flashvars = 'URL=' . \Environment::get('base');
 		$this->Template->version = $this->version ?: '6.0.0';
 
 		$size = deserialize($this->size);
@@ -105,7 +103,7 @@ class ModuleFlash extends Module
 
 		if (strlen($this->flashvars))
 		{
-			$this->Template->flashvars .= '&' . String::decodeEntities($this->flashvars);
+			$this->Template->flashvars .= '&' . \String::decodeEntities($this->flashvars);
 		}
 	}
 }

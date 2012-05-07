@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Exception;
-
 
 /**
  * Automatically loads template files based on a mapper array
@@ -115,6 +113,6 @@ class TemplateLoader
 			return TL_ROOT . '/' . self::$files[$template] . '/' . $file;
 		}
 
-		throw new Exception('Could not find template "' . $template . '"');
+		throw new \Exception('Could not find template "' . $template . '"');
 	}
 }

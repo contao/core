@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \DataContainer, \Date, \Environment, \Input, \Message, \editable;
-
 
 /**
  * Class DC_File
@@ -26,7 +24,7 @@ use \DataContainer, \Date, \Environment, \Input, \Message, \editable;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class DC_File extends DataContainer implements editable
+class DC_File extends \DataContainer implements \editable
 {
 
 	/**
@@ -36,7 +34,7 @@ class DC_File extends DataContainer implements editable
 	public function __construct($strTable)
 	{
 		parent::__construct();
-		$this->intId = Input::get('id');
+		$this->intId = \Input::get('id');
 
 		// Check whether the table is defined
 		if ($strTable == '' || !isset($GLOBALS['TL_DCA'][$strTable]))
@@ -112,7 +110,7 @@ class DC_File extends DataContainer implements editable
 		$return = '';
 		$ajaxId = null;
 
-		if (Environment::get('isAjaxRequest'))
+		if (\Environment::get('isAjaxRequest'))
 		{
 			$ajaxId = func_get_arg(1);
 		}
@@ -188,7 +186,7 @@ class DC_File extends DataContainer implements editable
 				{
 					if ($vv == '[EOF]')
 					{
-						if ($blnAjax && Environment::get('isAjaxRequest'))
+						if ($blnAjax && \Environment::get('isAjaxRequest'))
 						{
 							return $strAjax . '<input type="hidden" name="FORM_FIELDS[]" value="'.specialchars($this->strPalette).'">';
 						}
@@ -202,7 +200,7 @@ class DC_File extends DataContainer implements editable
 					if (preg_match('/^\[.*\]$/i', $vv))
 					{
 						$thisId = 'sub_' . substr($vv, 1, -1);
-						$blnAjax = ($ajaxId == $thisId && Environment::get('isAjaxRequest')) ? true : false;
+						$blnAjax = ($ajaxId == $thisId && \Environment::get('isAjaxRequest')) ? true : false;
 						$return .= "\n  " . '<div id="'.$thisId.'">';
 
 						continue;
@@ -267,7 +265,7 @@ class DC_File extends DataContainer implements editable
 		// Check whether the target file is writeable
 		if (!$this->Files->is_writeable('system/config/localconfig.php'))
 		{
-			Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'system/config/localconfig.php'));
+			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'system/config/localconfig.php'));
 		}
 
 		// Add some buttons and end the form
@@ -291,8 +289,8 @@ class DC_File extends DataContainer implements editable
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG'][$this->strTable]['edit'].'</h2>
-'.Message::generate().'
-<form action="'.ampersand(Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
+'.\Message::generate().'
+<form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'">
@@ -302,7 +300,7 @@ class DC_File extends DataContainer implements editable
 <p class="tl_error">'.$GLOBALS['TL_LANG']['ERR']['general'].'</p>' : '').$return;
 
 		// Reload the page to prevent _POST variables from being sent twice
-		if (Input::post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
+		if (\Input::post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
 		{
 			// Call onsubmit_callback
 			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback']))
@@ -315,9 +313,9 @@ class DC_File extends DataContainer implements editable
 			}
 
 			// Reload
-			if (Input::post('saveNclose'))
+			if (\Input::post('saveNclose'))
 			{
-				Message::reset();
+				\Message::reset();
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 				$this->redirect($this->getReferer());
 			}
@@ -347,7 +345,7 @@ window.addEvent(\'domready\', function() {
 	 */
 	protected function save($varValue)
 	{
-		if (Input::post('FORM_SUBMIT') != $this->strTable)
+		if (\Input::post('FORM_SUBMIT') != $this->strTable)
 		{
 			return;
 		}
@@ -363,7 +361,7 @@ window.addEvent(\'domready\', function() {
 		// Convert date formats into timestamps
 		if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
 		{
-			$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$arrData['eval']['rgxp'] . 'Format']);
+			$objDate = new \Date($varValue, $GLOBALS['TL_CONFIG'][$arrData['eval']['rgxp'] . 'Format']);
 			$varValue = $objDate->tstamp;
 		}
 
@@ -458,13 +456,13 @@ window.addEvent(\'domready\', function() {
 				$trigger = $GLOBALS['TL_CONFIG'][$name];
 
 				// Overwrite the trigger if the page is not reloaded
-				if (Input::post('FORM_SUBMIT') == $this->strTable)
+				if (\Input::post('FORM_SUBMIT') == $this->strTable)
 				{
-					$key = (Input::get('act') == 'editAll') ? $name.'_'.$this->intId : $name;
+					$key = (\Input::get('act') == 'editAll') ? $name.'_'.$this->intId : $name;
 
 					if (!$GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['eval']['submitOnChange'])
 					{
-						$trigger = Input::post($key);
+						$trigger = \Input::post($key);
 					}
 				}
 

@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Frontend, \FrontendTemplate, \Model, \Model_Collection;
-
 
 /**
  * Class ContentElement
@@ -26,7 +24,7 @@ use \Frontend, \FrontendTemplate, \Model, \Model_Collection;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-abstract class ContentElement extends Frontend
+abstract class ContentElement extends \Frontend
 {
 
 	/**
@@ -66,7 +64,7 @@ abstract class ContentElement extends Frontend
 	 */
 	public function __construct($objElement)
 	{
-		if ($objElement instanceof Model || $objElement instanceof Model_Collection)
+		if ($objElement instanceof \Model || $objElement instanceof \Model_Collection)
 		{
 			$this->objModel = $objElement;
 		}

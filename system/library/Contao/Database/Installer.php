@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Controller, \DcaExtractor;
-
 
 /**
  * Handles database updates
@@ -25,7 +23,7 @@ use \Controller, \DcaExtractor;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Database_Installer extends Controller
+class Database_Installer extends \Controller
 {
 
 	/**
@@ -266,7 +264,7 @@ class Database_Installer extends Controller
 
 		foreach ($arrTables as $strTable)
 		{
-			$objTable = new DcaExtractor($strTable);
+			$objTable = new \DcaExtractor($strTable);
 			$return[$strTable] = $objTable->getDbInstallerArray();
 		}
 

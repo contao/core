@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Exception;
-
 
 /**
  * Abstract parent class to handle database communication
@@ -71,7 +69,7 @@ abstract class Database
 
 		if (!is_resource($this->resConnection) && !is_object($this->resConnection))
 		{
-			throw new Exception(sprintf('Could not connect to database (%s)', $this->error));
+			throw new \Exception(sprintf('Could not connect to database (%s)', $this->error));
 		}
 	}
 

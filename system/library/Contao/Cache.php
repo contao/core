@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \System;
-
 
 /**
  * A static class to store non-persistent data
@@ -37,7 +35,7 @@ use \System;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Cache extends System
+class Cache extends \System
 {
 
 	/**

@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendModule;
-
 
 /**
  * Class ModuleUser
@@ -26,7 +24,7 @@ use \BackendModule;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ModuleUser extends BackendModule
+class ModuleUser extends \BackendModule
 {
 
 	/**

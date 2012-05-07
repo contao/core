@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Database, \Model;
-
 
 /**
  * Class FilesModel
@@ -26,7 +24,7 @@ use \Database, \Model;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class FilesModel extends Model
+class FilesModel extends \Model
 {
 
 	/**
@@ -49,7 +47,7 @@ class FilesModel extends Model
 		}
 
 		$t = static::$strTable;
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, array('order'=>Database::getInstance()->findInSet("$t.id", $arrIds)));
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, array('order'=>\Database::getInstance()->findInSet("$t.id", $arrIds)));
 	}
 
 
@@ -87,6 +85,6 @@ class FilesModel extends Model
 		}
 
 		$t = static::$strTable;
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ") AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, array('order'=>Database::getInstance()->findInSet("$t.id", $arrIds)));
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ") AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, array('order'=>\Database::getInstance()->findInSet("$t.id", $arrIds)));
 	}
 }

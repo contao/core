@@ -29,7 +29,7 @@ $GLOBALS['TL_LANG']['tl_maintenance_jobs']['scripts']  = array('Skriptcache leer
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['pages']    = array('Seitencache leeren', 'Löscht die gespeicherten Versionen der Frontend-Seiten.');
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['internal'] = array('Internen Cache leeren', 'Löscht die gespeicherten DCA- und Sprachdateien. Der interne Cache kann in den Backend-Einstellungen dauerhaft deaktiviert werden.');
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['temp']     = array('Temp-Ordner leeren', 'Löscht die temporären Dateien.');
-$GLOBALS['TL_LANG']['tl_maintenance_jobs']['xml']      = array('XML-Dateien neu schreiben', 'Schreibt die XML-Dateien (Sitemaps und Feeds) neu und leert anschließend den Seitencache, damit keine ungültigen Links zurück bleiben.');
+$GLOBALS['TL_LANG']['tl_maintenance_jobs']['xml']      = array('XML-Dateien neu schreiben', 'Schreibt die XML-Dateien (Sitemaps/Feeds) neu und leert anschließend den Seitencache, damit keine ungültigen Links zurück bleiben.');
 
 
 /**

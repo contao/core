@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Idna, \Widget;
-
 
 /**
  * Class FormTextField
@@ -26,7 +24,7 @@ use \Idna, \Widget;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class FormTextField extends Widget
+class FormTextField extends \Widget
 {
 
 	/**
@@ -106,7 +104,7 @@ class FormTextField extends Widget
 		// Hide the Punycode format (see #2750)
 		if ($this->rgxp == 'email' || $this->rgxp == 'url')
 		{
-			$this->varValue = Idna::decode($this->varValue);
+			$this->varValue = \Idna::decode($this->varValue);
 		}
 
 		return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="text%s%s" value="%s"%s%s',

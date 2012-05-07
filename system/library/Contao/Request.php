@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Exception;
-
 
 /**
  * Sends HTTP requests and reads the response
@@ -119,7 +117,7 @@ class Request
 				break;
 
 			default:
-				throw new Exception(sprintf('Invalid argument "%s"', $strKey));
+				throw new \Exception(sprintf('Invalid argument "%s"', $strKey));
 				break;
 		}
 	}

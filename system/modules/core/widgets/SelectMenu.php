@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Widget;
-
 
 /**
  * Class SelectMenu
@@ -26,7 +24,7 @@ use \Widget;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class SelectMenu extends Widget
+class SelectMenu extends \Widget
 {
 
 	/**

@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \File, \FilesModel, \Module;
-
 
 /**
  * Class ModuleRandomImage
@@ -26,7 +24,7 @@ use \File, \FilesModel, \Module;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ModuleRandomImage extends Module
+class ModuleRandomImage extends \Module
 {
 
 	/**
@@ -62,7 +60,7 @@ class ModuleRandomImage extends Module
 		}
 
 		// Get the file entries from the database
-		$this->objFiles = FilesModel::findMultipleByIds($this->multiSRC);
+		$this->objFiles = \FilesModel::findMultipleByIds($this->multiSRC);
 
 		if ($this->objFiles === null)
 		{
@@ -95,7 +93,7 @@ class ModuleRandomImage extends Module
 			// Single files
 			if ($objFiles->type == 'file')
 			{
-				$objFile = new File($objFiles->path);
+				$objFile = new \File($objFiles->path);
 
 				if (!$objFile->isGdImage)
 				{
@@ -125,7 +123,7 @@ class ModuleRandomImage extends Module
 			// Folders
 			else
 			{
-				$objSubfiles = FilesModel::findByPid($objFiles->id);
+				$objSubfiles = \FilesModel::findByPid($objFiles->id);
 
 				if ($objSubfiles === null)
 				{
@@ -140,7 +138,7 @@ class ModuleRandomImage extends Module
 						continue;
 					}
 
-					$objFile = new File($objSubfiles->path);
+					$objFile = new \File($objSubfiles->path);
 
 					if (!$objFile->isGdImage)
 					{

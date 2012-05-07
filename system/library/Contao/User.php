@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Email, \Environment, \FrontendUser, \Input, \Message, \System;
-
 
 /**
  * Authenticates and initializes user objects
@@ -36,7 +34,7 @@ use \Email, \Environment, \FrontendUser, \Input, \Message, \System;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-abstract class User extends System
+abstract class User extends \System
 {
 
 	/**
@@ -243,13 +241,13 @@ abstract class User extends System
 		$this->loadLanguageFile('default');
 
 		// Do not continue if username or password are missing
-		if (!Input::post('username') || !Input::post('password'))
+		if (!\Input::post('username') || !\Input::post('password'))
 		{
 			return false;
 		}
 
 		// Load the user object
-		if ($this->findBy('username', Input::post('username')) == false)
+		if ($this->findBy('username', \Input::post('username')) == false)
 		{
 			$blnLoaded = false;
 
@@ -259,7 +257,7 @@ abstract class User extends System
 				foreach ($GLOBALS['TL_HOOKS']['importUser'] as $callback)
 				{
 					$this->import($callback[0], 'objImport', true);
-					$blnLoaded = $this->objImport->$callback[1](Input::post('username'), Input::post('password'), $this->strTable);
+					$blnLoaded = $this->objImport->$callback[1](\Input::post('username'), \Input::post('password'), $this->strTable);
 
 					// Load successfull
 					if ($blnLoaded === true)
@@ -270,10 +268,10 @@ abstract class User extends System
 			}
 
 			// Return if the user still cannot be loaded
-			if (!$blnLoaded || $this->findBy('username', Input::post('username')) == false)
+			if (!$blnLoaded || $this->findBy('username', \Input::post('username')) == false)
 			{
-				Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-				$this->log('Could not find user "' . Input::post('username') . '"', get_class($this) . ' login()', TL_ACCESS);
+				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
+				$this->log('Could not find user "' . \Input::post('username') . '"', get_class($this) . ' login()', TL_ACCESS);
 
 				return false;
 			}
@@ -282,9 +280,9 @@ abstract class User extends System
 		$time = time();
 
 		// Set the user language
-		if (Input::post('language'))
+		if (\Input::post('language'))
 		{
-			$this->language = Input::post('language');
+			$this->language = \Input::post('language');
 		}
 
 		// Lock the account if there are too many login attempts
@@ -300,10 +298,10 @@ abstract class User extends System
 			// Send admin notification
 			if (strlen($GLOBALS['TL_CONFIG']['adminEmail']))
 			{
-				$objEmail = new Email();
+				$objEmail = new \Email();
 
 				$objEmail->subject = $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0];
-				$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['lockedAccount'][1], $this->username, ((TL_MODE == 'FE') ? $this->firstname . " " . $this->lastname : $this->name), Environment::get('base'), ceil($GLOBALS['TL_CONFIG']['lockPeriod'] / 60));
+				$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['lockedAccount'][1], $this->username, ((TL_MODE == 'FE') ? $this->firstname . " " . $this->lastname : $this->name), \Environment::get('base'), ceil($GLOBALS['TL_CONFIG']['lockPeriod'] / 60));
 
 				$objEmail->sendTo($GLOBALS['TL_CONFIG']['adminEmail']);
 			}
@@ -321,15 +319,15 @@ abstract class User extends System
 		list($strPassword, $strSalt) = explode(':', $this->password);
 
 		// Password is correct but not yet salted
-		if (!strlen($strSalt) && $strPassword == sha1(Input::post('password')))
+		if (!strlen($strSalt) && $strPassword == sha1(\Input::post('password')))
 		{
 			$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
-			$strPassword = sha1($strSalt . Input::post('password'));
+			$strPassword = sha1($strSalt . \Input::post('password'));
 			$this->password = $strPassword . ':' . $strSalt;
 		}
 
 		// Check the password against the database
-		if (strlen($strSalt) && $strPassword == sha1($strSalt . Input::post('password')))
+		if (strlen($strSalt) && $strPassword == sha1($strSalt . \Input::post('password')))
 		{
 			$blnAuthenticated = true;
 		}
@@ -340,7 +338,7 @@ abstract class User extends System
 			foreach ($GLOBALS['TL_HOOKS']['checkCredentials'] as $callback)
 			{
 				$this->import($callback[0], 'objAuth', true);
-				$blnAuthenticated = $this->objAuth->$callback[1](Input::post('username'), Input::post('password'), $this);
+				$blnAuthenticated = $this->objAuth->$callback[1](\Input::post('username'), \Input::post('password'), $this);
 
 				// Authentication successfull
 				if ($blnAuthenticated === true)
@@ -356,7 +354,7 @@ abstract class User extends System
 			--$this->loginCount;
 			$this->save();
 
-			Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
+			\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 			$this->log('Invalid password submitted for username "' . $this->username . '"', get_class($this) . ' login()', TL_ACCESS);
 
 			return false;
@@ -400,22 +398,22 @@ abstract class User extends System
 		// Check whether the account is locked
 		if (($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) > $time)
 		{
-			Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) - $time) / 60)));
+			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) - $time) / 60)));
 			return false;
 		}
 
 		// Check whether the account is disabled
 		elseif ($this->disable)
 		{
-			Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
+			\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 			$this->log('The account has been disabled', get_class($this) . ' login()', TL_ACCESS);
 			return false;
 		}
 
 		// Check wether login is allowed (front end only)
-		elseif ($this instanceof FrontendUser && !$this->login)
+		elseif ($this instanceof \FrontendUser && !$this->login)
 		{
-			Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
+			\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 			$this->log('User "' . $this->username . '" is not allowed to log in', get_class($this) . ' login()', TL_ACCESS);
 			return false;
 		}
@@ -425,14 +423,14 @@ abstract class User extends System
 		{
 			if ($this->start != '' && $this->start > $time)
 			{
-				Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
+				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 				$this->log('The account was not active yet (activation date: ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->start) . ')', get_class($this) . ' login()', TL_ACCESS);
 				return false;
 			}
 
 			if ($this->stop != '' && $this->stop < $time)
 			{
-				Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
+				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 				$this->log('The account was not active anymore (deactivation date: ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->stop) . ')', get_class($this) . ' login()', TL_ACCESS);
 				return false;
 			}
@@ -511,7 +509,7 @@ abstract class User extends System
 	public function logout()
 	{
 		// Return if the user has been logged out already
-		if (!Input::cookie($this->strCookie))
+		if (!\Input::cookie($this->strCookie))
 		{
 			return false;
 		}

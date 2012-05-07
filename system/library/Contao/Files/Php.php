@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Files;
-
 
 /**
  * Manage files with the PHP functions
@@ -22,7 +20,7 @@ use \Files;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Files_Php extends Files
+class Files_Php extends \Files
 {
 
 	/**

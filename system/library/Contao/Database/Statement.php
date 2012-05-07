@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Database_Result, \Exception;
-
 
 /**
  * Create and execute queries
@@ -78,7 +76,7 @@ abstract class Database_Statement
 	{
 		if (!is_resource($resConnection) && !is_object($resConnection))
 		{
-			throw new Exception('Invalid connection resource');
+			throw new \Exception('Invalid connection resource');
 		}
 
 		$this->resConnection = $resConnection;
@@ -138,7 +136,7 @@ abstract class Database_Statement
 	{
 		if ($strQuery == '')
 		{
-			throw new Exception('Empty query string');
+			throw new \Exception('Empty query string');
 		}
 
 		$this->resResult = NULL;
@@ -263,7 +261,7 @@ abstract class Database_Statement
 		$objResult = $this->query();
 
 		// Cache the result object
-		if ($objResult instanceof Database_Result)
+		if ($objResult instanceof \Database_Result)
 		{
 			self::$arrCache[$strKey] = $objResult;
 		}
@@ -310,13 +308,13 @@ abstract class Database_Statement
 		// Make sure there is a query string
 		if ($this->strQuery == '')
 		{
-			throw new Exception('Empty query string');
+			throw new \Exception('Empty query string');
 		}
 
 		// Execute the query
 		if (($this->resResult = $this->execute_query()) == false)
 		{
-			throw new Exception(sprintf('Query error: %s (%s)', $this->error, $this->strQuery));
+			throw new \Exception(sprintf('Query error: %s (%s)', $this->error, $this->strQuery));
 		}
 
 		// No result set available
@@ -349,7 +347,7 @@ abstract class Database_Statement
 		// Replace wildcards
 		if (($this->strQuery = @vsprintf($this->strQuery, $arrValues)) == false)
 		{
-			throw new Exception('Too few arguments to build the query string');
+			throw new \Exception('Too few arguments to build the query string');
 		}
 	}
 

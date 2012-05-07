@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Exception;
-
 
 /**
  * Lazy load the result set rows
@@ -91,7 +89,7 @@ abstract class Database_Result
 	{
 		if (!is_resource($resResult) && !is_object($resResult))
 		{
-			throw new Exception('Invalid result resource');
+			throw new \Exception('Invalid result resource');
 		}
 
 		$this->resResult = $resResult;

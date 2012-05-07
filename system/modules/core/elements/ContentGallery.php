@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \ContentElement, \File, \FilesModel, \FrontendTemplate, \Input, \Pagination;
-
 
 /**
  * Class ContentGallery
@@ -26,7 +24,7 @@ use \ContentElement, \File, \FilesModel, \FrontendTemplate, \Input, \Pagination;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ContentGallery extends ContentElement
+class ContentGallery extends \ContentElement
 {
 
 	/**
@@ -76,7 +74,7 @@ class ContentGallery extends ContentElement
 		}
 
 		// Get the file entries from the database
-		$this->objFiles = FilesModel::findMultipleByIds($this->multiSRC);
+		$this->objFiles = \FilesModel::findMultipleByIds($this->multiSRC);
 
 		if ($this->objFiles === null)
 		{
@@ -144,7 +142,7 @@ class ContentGallery extends ContentElement
 			// Folders
 			else
 			{
-				$objSubfiles = FilesModel::findByPid($objFiles->id);
+				$objSubfiles = \FilesModel::findByPid($objFiles->id);
 
 				if ($objSubfiles === null)
 				{
@@ -270,7 +268,7 @@ class ContentGallery extends ContentElement
 		{
 			// Get the current page
 			$id = 'page_g' . $this->id;
-			$page = Input::get($id) ?: 1;
+			$page = \Input::get($id) ?: 1;
 
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))

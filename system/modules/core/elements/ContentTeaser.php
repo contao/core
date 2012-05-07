@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \ArticleModel, \ContentElement, \String;
-
 
 /**
  * Class ContentTeaser
@@ -26,7 +24,7 @@ use \ArticleModel, \ContentElement, \String;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ContentTeaser extends ContentElement
+class ContentTeaser extends \ContentElement
 {
 
 	/**
@@ -48,7 +46,7 @@ class ContentTeaser extends ContentElement
 	 */
 	public function generate()
 	{
-		$objArticle = ArticleModel::findPublishedById($this->article);
+		$objArticle = \ArticleModel::findPublishedById($this->article);
 
 		if ($objArticle === null)
 		{
@@ -90,11 +88,11 @@ class ContentTeaser extends ContentElement
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$objArticle->teaser = String::toXhtml($objArticle->teaser);
+			$objArticle->teaser = \String::toXhtml($objArticle->teaser);
 		}
 		else
 		{
-			$objArticle->teaser = String::toHtml5($objArticle->teaser);
+			$objArticle->teaser = \String::toHtml5($objArticle->teaser);
 		}
 
 		$this->Template->headline = $objArticle->title;

@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \Email, \Environment, \FrontendTemplate, \Input, \Module, \NewsletterChannelModel, \NewsletterRecipientsModel, \Validator;
-
 
 /**
  * Class ModuleUnsubscribe
@@ -26,7 +24,7 @@ use \BackendTemplate, \Email, \Environment, \FrontendTemplate, \Input, \Module, 
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  */
-class ModuleUnsubscribe extends Module
+class ModuleUnsubscribe extends \Module
 {
 
 	/**
@@ -44,7 +42,7 @@ class ModuleUnsubscribe extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWSLETTER UNSUBSCRIBE ###';
 			$objTemplate->title = $this->headline;
@@ -75,12 +73,12 @@ class ModuleUnsubscribe extends Module
 		// Overwrite default template
 		if ($this->nl_template)
 		{
-			$this->Template = new FrontendTemplate($this->nl_template);
+			$this->Template = new \FrontendTemplate($this->nl_template);
 			$this->Template->setData($this->arrData);
 		}
 
 		// Unsubscribe
-		if (Input::post('FORM_SUBMIT') == 'tl_unsubscribe')
+		if (\Input::post('FORM_SUBMIT') == 'tl_unsubscribe')
 		{
 			$this->removeRecipient();
 		}
@@ -105,7 +103,7 @@ class ModuleUnsubscribe extends Module
 		}
 
 		$arrChannels = array();
-		$objChannel = NewsletterChannelModel::findByIds($this->nl_channels);
+		$objChannel = \NewsletterChannelModel::findByIds($this->nl_channels);
 
 		// Get the titles
 		if ($objChannel !== null)
@@ -119,7 +117,7 @@ class ModuleUnsubscribe extends Module
 		// Default template variables
 		$this->Template->channels = $arrChannels;
 		$this->Template->showChannels = !$this->nl_hideChannels;
-		$this->Template->email = urldecode(Input::get('email'));
+		$this->Template->email = urldecode(\Input::get('email'));
 		$this->Template->submit = specialchars($GLOBALS['TL_LANG']['MSC']['unsubscribe']);
 		$this->Template->channelsLabel = $GLOBALS['TL_LANG']['MSC']['nl_channels'];
 		$this->Template->emailLabel = $GLOBALS['TL_LANG']['MSC']['emailAddress'];
@@ -135,7 +133,7 @@ class ModuleUnsubscribe extends Module
 	 */
 	protected function removeRecipient()
 	{
-		$arrChannels = Input::post('channels');
+		$arrChannels = \Input::post('channels');
 		$arrChannels = array_intersect($arrChannels, $this->nl_channels); // see #3240
 
 		// Check the selection
@@ -146,7 +144,7 @@ class ModuleUnsubscribe extends Module
 		}
 
 		// Validate e-mail address
-		if (!Validator::isEmail(Input::post('email', true)))
+		if (!\Validator::isEmail(\Input::post('email', true)))
 		{
 			$_SESSION['UNSUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['email'];
 			$this->reload();
@@ -155,7 +153,7 @@ class ModuleUnsubscribe extends Module
 		$arrSubscriptions = array();
 
 		// Get the existing active subscriptions
-		if (($objSubscription = NewsletterRecipientsModel::findBy(array("email=? AND active=1"), $varInput)) !== null)
+		if (($objSubscription = \NewsletterRecipientsModel::findBy(array("email=? AND active=1"), $varInput)) !== null)
 		{
 			$arrSubscriptions = $objSubscription->fetchEach('pid');
 		}
@@ -170,7 +168,7 @@ class ModuleUnsubscribe extends Module
 		}
 
 		// Remove the subscriptions
-		if (($objRemove = NewsletterRecipientsModel::findByEmailAndPids($varInput, $arrRemove)) !== null)
+		if (($objRemove = \NewsletterRecipientsModel::findByEmailAndPids($varInput, $arrRemove)) !== null)
 		{
 			while ($objRemove->next())
 			{
@@ -179,7 +177,7 @@ class ModuleUnsubscribe extends Module
 		}
 
 		// Get the channels
-		$objChannels = NewsletterChannelModel::findByIds($arrRemove);
+		$objChannels = \NewsletterChannelModel::findByIds($arrRemove);
 		$arrChannels = $objChannels->fetchEach('title');
 
 		// Log activity
@@ -196,14 +194,14 @@ class ModuleUnsubscribe extends Module
 		}
 
 		// Prepare the e-mail text
-		$strText = str_replace('##domain##', Environment::get('host'), $this->nl_unsubscribe);
+		$strText = str_replace('##domain##', \Environment::get('host'), $this->nl_unsubscribe);
 		$strText = str_replace(array('##channel##', '##channels##'), implode("\n", $arrChannels), $strText);
 
 		// Confirmation e-mail
-		$objEmail = new Email();
+		$objEmail = new \Email();
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
-		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], Environment::get('host'));
+		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], \Environment::get('host'));
 		$objEmail->text = $strText;
 		$objEmail->sendTo($varInput);
 

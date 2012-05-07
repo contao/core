@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \ContentElement, \ContentModel;
-
 
 /**
  * Class ContentAlias
@@ -26,7 +24,7 @@ use \ContentElement, \ContentModel;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ContentAlias extends ContentElement
+class ContentAlias extends \ContentElement
 {
 
 	/**
@@ -35,7 +33,7 @@ class ContentAlias extends ContentElement
 	 */
 	public function generate()
 	{
-		$objElement = ContentModel::findByPk($this->cteAlias);
+		$objElement = \ContentModel::findByPk($this->cteAlias);
 
 		if ($objElement === null)
 		{

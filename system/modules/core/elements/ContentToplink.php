@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \ContentElement, \Environment;
-
 
 /**
  * Class ContentToplink
@@ -26,7 +24,7 @@ use \ContentElement, \Environment;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ContentToplink extends ContentElement
+class ContentToplink extends \ContentElement
 {
 
 	/**
@@ -48,6 +46,6 @@ class ContentToplink extends ContentElement
 
 		$this->Template->label = $this->linkTitle;
 		$this->Template->title = specialchars($this->linkTitle);
-		$this->Template->request = ampersand(Environment::get('request'), true);
+		$this->Template->request = ampersand(\Environment::get('request'), true);
 	}
 }

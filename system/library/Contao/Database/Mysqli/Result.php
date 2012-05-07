@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Database_Result;
-
 
 /**
  * MySQLi-specific database result class
@@ -22,7 +20,7 @@ use \Database_Result;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Database_Mysqli_Result extends Database_Result
+class Database_Mysqli_Result extends \Database_Result
 {
 
 	/**

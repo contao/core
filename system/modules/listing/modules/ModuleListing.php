@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \Input, \Environment, \FrontendTemplate, \Module, \Pagination, \String;
-
 
 /**
  * Class ModuleListing
@@ -26,7 +24,7 @@ use \BackendTemplate, \Input, \Environment, \FrontendTemplate, \Module, \Paginat
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Listing
  */
-class ModuleListing extends Module
+class ModuleListing extends \Module
 {
 
 	/**
@@ -50,7 +48,7 @@ class ModuleListing extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### LISTING ###';
 			$objTemplate->title = $this->headline;
@@ -68,7 +66,7 @@ class ModuleListing extends Module
 		}
 
 		// Disable the details page
-		if (Input::get('show') && $this->list_info == '')
+		if (\Input::get('show') && $this->list_info == '')
 		{
 			return '';
 		}
@@ -95,15 +93,15 @@ class ModuleListing extends Module
 		$this->loadDataContainer($this->list_table);
 
 		// List a single record
-		if (Input::get('show'))
+		if (\Input::get('show'))
 		{
-			$this->listSingleRecord(Input::get('show'));
+			$this->listSingleRecord(\Input::get('show'));
 			return;
 		}
 
 		$id = 'page_l' . $this->id;
-		$page = Input::get($id) ?: 1;
-		$per_page = Input::get('per_page') ?: $this->perPage;
+		$page = \Input::get($id) ?: 1;
+		$per_page = \Input::get('per_page') ?: $this->perPage;
 
 
 		/**
@@ -120,15 +118,15 @@ class ModuleListing extends Module
 		{
 			$this->Template->searchable = true;
 
-			if (Input::get('search') && Input::get('for'))
+			if (\Input::get('search') && \Input::get('for'))
 			{
-				$varKeyword = '%' . Input::get('for') . '%';
-				$strWhere = (!$this->list_where ? " WHERE " : " AND ") . Input::get('search') . " LIKE ?";
+				$varKeyword = '%' . \Input::get('for') . '%';
+				$strWhere = (!$this->list_where ? " WHERE " : " AND ") . \Input::get('search') . " LIKE ?";
 			}
 
 			foreach ($arrSearchFields as $field)
 			{
-				$strOptions .= '  <option value="' . $field . '"' . (($field == Input::get('search')) ? ' selected="selected"' : '') . '>' . (strlen($label = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['label'][0]) ? $label : $field) . '</option>' . "\n";
+				$strOptions .= '  <option value="' . $field . '"' . (($field == \Input::get('search')) ? ' selected="selected"' : '') . '>' . (strlen($label = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['label'][0]) ? $label : $field) . '</option>' . "\n";
 			}
 		}
 
@@ -162,9 +160,9 @@ class ModuleListing extends Module
 		$strQuery .=  $strWhere;
 
 		// Order by
-		if (Input::get('order_by'))
+		if (\Input::get('order_by'))
 		{
-			$strQuery .= " ORDER BY " . Input::get('order_by') . ' ' . Input::get('sort');
+			$strQuery .= " ORDER BY " . \Input::get('order_by') . ' ' . \Input::get('sort');
 		}
 		elseif ($this->list_sort)
 		{
@@ -174,9 +172,9 @@ class ModuleListing extends Module
 		$objDataStmt = $this->Database->prepare($strQuery);
 
 		// Limit
-		if (Input::get('per_page'))
+		if (\Input::get('per_page'))
 		{
-			$objDataStmt->limit(Input::get('per_page'), (($page - 1) * $per_page));
+			$objDataStmt->limit(\Input::get('per_page'), (($page - 1) * $per_page));
 		}
 		elseif ($this->perPage)
 		{
@@ -189,7 +187,7 @@ class ModuleListing extends Module
 		/**
 		 * Prepare the URL
 		 */
-		$strUrl = preg_replace('/\?.*$/', '', Environment::get('request'));
+		$strUrl = preg_replace('/\?.*$/', '', \Environment::get('request'));
 		$blnQuery = false;
 
 		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING']) as $fragment)
@@ -226,10 +224,10 @@ class ModuleListing extends Module
 			$strField = strlen($label = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$arrFields[$i]]['label'][0]) ? $label : $arrFields[$i];
 
 			// Add a CSS class to the order_by column
-			if (Input::get('order_by') == $arrFields[$i])
+			if (\Input::get('order_by') == $arrFields[$i])
 			{
-				$sort = (Input::get('sort') == 'asc') ? 'desc' : 'asc';
-				$class = ' sorted ' . Input::get('sort');
+				$sort = (\Input::get('sort') == 'asc') ? 'desc' : 'asc';
+				$class = ' sorted ' . \Input::get('sort');
 			}
 
 			$arrTh[] = array
@@ -285,7 +283,7 @@ class ModuleListing extends Module
 		/**
 		 * Pagination
 		 */
-		$objPagination = new Pagination($objTotal->count, $per_page, 7, $id);
+		$objPagination = new \Pagination($objTotal->count, $per_page, 7, $id);
 		$this->Template->pagination = $objPagination->generate("\n  ");
 		$this->Template->per_page = $per_page;
 
@@ -299,10 +297,10 @@ class ModuleListing extends Module
 		$this->Template->per_page_label = specialchars($GLOBALS['TL_LANG']['MSC']['list_perPage']);
 		$this->Template->fields_label = $GLOBALS['TL_LANG']['MSC']['all_fields'][0];
 		$this->Template->keywords_label = $GLOBALS['TL_LANG']['MSC']['keywords'];
-		$this->Template->search = Input::get('search');
-		$this->Template->for = Input::get('for');
-		$this->Template->order_by = Input::get('order_by');
-		$this->Template->sort = Input::get('sort');
+		$this->Template->search = \Input::get('search');
+		$this->Template->for = \Input::get('for');
+		$this->Template->order_by = \Input::get('order_by');
+		$this->Template->sort = \Input::get('sort');
 		$this->Template->col_last = 'col_' . $j;
 	}
 
@@ -319,7 +317,7 @@ class ModuleListing extends Module
 			$this->list_info_layout = 'info_default';
 		}
 
-		$this->Template = new FrontendTemplate($this->list_info_layout);
+		$this->Template = new \FrontendTemplate($this->list_info_layout);
 
 		$this->Template->record = array();
 		$this->Template->referer = 'javascript:history.go(-1)';
@@ -417,7 +415,7 @@ class ModuleListing extends Module
 		// E-mail addresses
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'email')
 		{
-			$value = String::encodeEmail($value);
+			$value = \String::encodeEmail($value);
 			$value = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $value . '">' . $value . '</a>';
 		}
 

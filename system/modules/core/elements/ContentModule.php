@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \ContentElement, \ModuleModel;
-
 
 /**
  * Class ContentModule
@@ -26,7 +24,7 @@ use \ContentElement, \ModuleModel;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class ContentModule extends ContentElement
+class ContentModule extends \ContentElement
 {
 
 	/**
@@ -35,7 +33,7 @@ class ContentModule extends ContentElement
 	 */
 	public function generate()
 	{
-		$objModule = ModuleModel::findByPk($this->module);
+		$objModule = \ModuleModel::findByPk($this->module);
 
 		if ($objModule === null)
 		{

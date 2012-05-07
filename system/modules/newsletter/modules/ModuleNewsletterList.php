@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \BackendTemplate, \Module, \NewsletterModel, \PageModel;
-
 
 /**
  * Class ModuleNewsletterList
@@ -26,7 +24,7 @@ use \BackendTemplate, \Module, \NewsletterModel, \PageModel;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  */
-class ModuleNewsletterList extends Module
+class ModuleNewsletterList extends \Module
 {
 
 	/**
@@ -44,7 +42,7 @@ class ModuleNewsletterList extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWSLETTER LIST ###';
 			$objTemplate->title = $this->headline;
@@ -76,7 +74,7 @@ class ModuleNewsletterList extends Module
 		$arrJumpTo = array();
 		$arrNewsletter = array();
 
-		$objNewsletter = NewsletterModel::findSentByPids($this->nl_channels);
+		$objNewsletter = \NewsletterModel::findSentByPids($this->nl_channels);
 
 		if ($objNewsletter !== null)
 		{
@@ -89,7 +87,7 @@ class ModuleNewsletterList extends Module
 
 				if (!isset($arrJumpTo[$objTarget->jumpTo]))
 				{
-					$objJumpTo = PageModel::findPublishedById($objTarget->jumpTo);
+					$objJumpTo = \PageModel::findPublishedById($objTarget->jumpTo);
 
 					if ($objJumpTo !== null)
 					{

@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Exception;
-
 
 /**
  * Encrypts and decrypts data
@@ -150,12 +148,12 @@ class Encryption
 	{
 		if ((self::$resTd = mcrypt_module_open($GLOBALS['TL_CONFIG']['encryptionCipher'], '', $GLOBALS['TL_CONFIG']['encryptionMode'], '')) == false)
 		{
-			throw new Exception('Error initializing encryption module');
+			throw new \Exception('Error initializing encryption module');
 		}
 
 		if ($GLOBALS['TL_CONFIG']['encryptionKey'] == '')
 		{
-			throw new Exception('Encryption key not set');
+			throw new \Exception('Encryption key not set');
 		}
 	}
 

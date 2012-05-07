@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \File, \Files, \System;
-
 
 /**
  * Resizes images
@@ -92,17 +90,17 @@ class Image
 		// Check whether the file exists
 		if (!file_exists(TL_ROOT . '/' . $image))
 		{
-			Syste::log('Image "' . $image . '" could not be found', 'Controller getImage()', TL_ERROR);
+			\System::log('Image "' . $image . '" could not be found', 'Controller getImage()', TL_ERROR);
 			return null;
 		}
 
-		$objFile = new File($image);
+		$objFile = new \File($image);
 		$arrAllowedTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['validImageTypes']));
 
 		// Check the file type
 		if (!in_array($objFile->extension, $arrAllowedTypes))
 		{
-			System::log('Image type "' . $objFile->extension . '" was not allowed to be processed', 'Controller getImage()', TL_ERROR);
+			\System::log('Image type "' . $objFile->extension . '" was not allowed to be processed', 'Controller getImage()', TL_ERROR);
 			return null;
 		}
 
@@ -130,7 +128,7 @@ class Image
 		// Return the path of the new image if it exists already
 		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheName))
 		{
-			return System::urlEncode($strCacheName);
+			return \System::urlEncode($strCacheName);
 		}
 
 		// HOOK: add custom logic
@@ -138,11 +136,11 @@ class Image
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getImage'] as $callback)
 			{
-				$return = System::importStatic($callback[0])->$callback[1]($image, $width, $height, $mode, $strCacheName, $objFile, $target);
+				$return = \System::importStatic($callback[0])->$callback[1]($image, $width, $height, $mode, $strCacheName, $objFile, $target);
 
 				if (is_string($return))
 				{
-					return System::urlEncode($return);
+					return \System::urlEncode($return);
 				}
 			}
 		}
@@ -150,7 +148,7 @@ class Image
 		// Return the path to the original image if the GDlib cannot handle it
 		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $objFile->height > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] || (!$width && !$height) || $width > 1200 || $height > 1200)
 		{
-			return System::urlEncode($image);
+			return \System::urlEncode($image);
 		}
 
 		$intPositionX = 0;
@@ -321,7 +319,7 @@ class Image
 		if (!$strSourceImage)
 		{
 			imagedestroy($strNewImage);
-			System::log('Image "' . $image . '" could not be processed', 'Controller getImage()', TL_ERROR);
+			\System::log('Image "' . $image . '" could not be processed', 'Controller getImage()', TL_ERROR);
 			return null;
 		}
 
@@ -380,17 +378,17 @@ class Image
 		// Resize the original image
 		if ($target)
 		{
-			Files::getInstance()->rename($strCacheName, $target);
-			return System::urlEncode($target);
+			\Files::getInstance()->rename($strCacheName, $target);
+			return \System::urlEncode($target);
 		}
 
 		// Set the file permissions when the Safe Mode Hack is used
 		if ($GLOBALS['TL_CONFIG']['useFTP'])
 		{
-			Files::getInstance()->chmod($strCacheName, 0644);
+			\Files::getInstance()->chmod($strCacheName, 0644);
 		}
 
 		// Return the path to new image
-		return System::urlEncode($strCacheName);
+		return \System::urlEncode($strCacheName);
 	}
 }

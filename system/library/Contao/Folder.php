@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Cache, \File, \System, \Exception;
-
 
 /**
  * Creates, reads, writes and deletes folders
@@ -31,7 +29,7 @@ use \Cache, \File, \System, \Exception;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Folder extends System
+class Folder extends \System
 {
 
 	/**
@@ -59,7 +57,7 @@ class Folder extends System
 		// Check whether it is a directory
 		if (is_file(TL_ROOT . '/' . $strFolder))
 		{
-			throw new Exception(sprintf('File "%s" is not a directory', $strFolder));
+			throw new \Exception(sprintf('File "%s" is not a directory', $strFolder));
 		}
 
 		$this->import('Files');
@@ -91,20 +89,20 @@ class Folder extends System
 	{
 		$strCacheKey = __METHOD__ . '-' . $this->strFolder . '-' . $strKey;
 
-		if (!Cache::has($strCacheKey))
+		if (!\Cache::has($strCacheKey))
 		{
 			switch ($strKey)
 			{
 				case 'hash':
-					Cache::set($strCacheKey, $this->getHash());
+					\Cache::set($strCacheKey, $this->getHash());
 					break;
 
 				case 'value':
-					Cache::set($strCacheKey, $this->strFolder);
+					\Cache::set($strCacheKey, $this->strFolder);
 					break;
 
 				case 'size':
-					Cache::set($strCacheKey, $this->getSize());
+					\Cache::set($strCacheKey, $this->getSize());
 					break;
 
 				default:
@@ -113,7 +111,7 @@ class Folder extends System
 			}
 		}
 
-		return Cache::get($strCacheKey);
+		return \Cache::get($strCacheKey);
 	}
 
 
@@ -210,7 +208,7 @@ class Folder extends System
 	{
 		if (!file_exists(TL_ROOT . '/' . $this->strFolder . '/.htaccess'))
 		{
-			$objFile = new File($this->strFolder . '/.htaccess');
+			$objFile = new \File($this->strFolder . '/.htaccess');
 			$objFile->write("order deny,allow\ndeny from all");
 			$objFile->close();
 		}
@@ -270,12 +268,12 @@ class Folder extends System
 
 			if (is_dir(TL_ROOT . '/' . $this->strFolder . '/' . $strFile))
 			{
-				$objFolder = new Folder($this->strFolder . '/' . $strFile);
+				$objFolder = new \Folder($this->strFolder . '/' . $strFile);
 				$intSize += $objFolder->size;
 			}
 			else
 			{
-				$objFile = new File($this->strFolder . '/' . $strFile);
+				$objFile = new \File($this->strFolder . '/' . $strFile);
 				$intSize += $objFile->size;
 			}
 		}

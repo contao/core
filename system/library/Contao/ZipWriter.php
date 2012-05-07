@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \Folder, \System, \Exception;
-
 
 /**
  * Creates .zip files and stores them on the disk
@@ -28,7 +26,7 @@ use \Folder, \System, \Exception;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class ZipWriter extends System
+class ZipWriter extends \System
 {
 
 	/**
@@ -98,13 +96,13 @@ class ZipWriter extends System
 		// Create temporary file
 		if (($this->strTemp = tempnam(TL_ROOT . '/' . self::TEMPORARY_FOLDER , 'zip')) == false)
 		{
-			throw new Exception("Cannot create temporary file");
+			throw new \Exception("Cannot create temporary file");
 		}
 
 		// Open temporary file
 		if (($this->resFile = @fopen($this->strTemp, 'wb')) == false)
 		{
-			throw new Exception("Cannot open temporary file");
+			throw new \Exception("Cannot open temporary file");
 		}
 	}
 
@@ -138,7 +136,7 @@ class ZipWriter extends System
 	{
 		if (!file_exists(TL_ROOT . '/' . $strFile))
 		{
-			throw new Exception("File $strFile does not exist");
+			throw new \Exception("File $strFile does not exist");
 		}
 
 		$this->addString(file_get_contents(TL_ROOT . '/' . $strFile), $strName ?: $strFile, filemtime(TL_ROOT . '/' . $strFile));
@@ -249,7 +247,7 @@ class ZipWriter extends System
 			// Create folder
 			if (!is_dir(TL_ROOT . '/' . $strFolder))
 			{
-				new Folder($strFolder);
+				new \Folder($strFolder);
 			}
 		}
 

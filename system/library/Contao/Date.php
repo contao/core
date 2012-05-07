@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use \System, \Exception;
-
 
 /**
  * Converts dates and date format string
@@ -35,7 +33,7 @@ use \System, \Exception;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Date extends System
+class Date extends \System
 {
 
 	/**
@@ -222,7 +220,7 @@ class Date extends System
 
 		if (preg_match('/[BbCcDEeFfIJKkLlMNOoPpQqRrSTtUuVvWwXxZz]+/', $strFormat))
 		{
-			throw new Exception(sprintf('Invalid date format "%s"', $strFormat));
+			throw new \Exception(sprintf('Invalid date format "%s"', $strFormat));
 		}
 
 		return preg_replace_callback('/[a-zA-Z]/', function($matches)
@@ -270,7 +268,7 @@ class Date extends System
 
 		if (preg_match('/[BbCcDEeFfIJKkLlMNOoPpQqRrSTtUuVvWwXxZz]+/', $strFormat))
 		{
-			throw new Exception(sprintf('Invalid date format "%s"', $strFormat));
+			throw new \Exception(sprintf('Invalid date format "%s"', $strFormat));
 		}
 
 		$arrCharacterMapper = array
@@ -318,7 +316,7 @@ class Date extends System
 	{
 		if (preg_match('/[BbCcDEeFfIJKkLlMNOoPpQqRrSTtUuVvWwXxZz]+/', $this->strFormat))
 		{
-			throw new Exception(sprintf('Invalid date format "%s"', $this->strFormat));
+			throw new \Exception(sprintf('Invalid date format "%s"', $this->strFormat));
 		}
 
 		$intCount  = 0;

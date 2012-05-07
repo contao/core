@@ -15,8 +15,6 @@
  * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
-use \Environment, \Input, \Widget;
-
 
 /**
  * Class PageSelector
@@ -26,7 +24,7 @@ use \Environment, \Input, \Widget;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Core
  */
-class PageSelector extends Widget
+class PageSelector extends \Widget
 {
 
 	/**
@@ -68,9 +66,9 @@ class PageSelector extends Widget
 		$this->import('BackendUser', 'User');
 
 		// Store the keyword
-		if (Input::post('FORM_SUBMIT') == 'item_selector')
+		if (\Input::post('FORM_SUBMIT') == 'item_selector')
 		{
-			$this->Session->set('page_selector_search', Input::post('keyword'));
+			$this->Session->set('page_selector_search', \Input::post('keyword'));
 			$this->reload();
 		}
 
@@ -165,7 +163,7 @@ class PageSelector extends Widget
 	 */
 	public function generateAjax($id, $strField, $level)
 	{
-		if (!Environment::get('isAjaxRequest'))
+		if (!\Environment::get('isAjaxRequest'))
 		{
 			return '';
 		}
@@ -236,11 +234,11 @@ class PageSelector extends Widget
 		$xtnode = 'tree_' . $this->strTable . '_' . $this->strName;
 
 		// Get the session data and toggle the nodes
-		if (Input::get($flag.'tg'))
+		if (\Input::get($flag.'tg'))
 		{
-			$session[$node][Input::get($flag.'tg')] = (isset($session[$node][Input::get($flag.'tg')]) && $session[$node][Input::get($flag.'tg')] == 1) ? 0 : 1;
+			$session[$node][\Input::get($flag.'tg')] = (isset($session[$node][\Input::get($flag.'tg')]) && $session[$node][\Input::get($flag.'tg')] == 1) ? 0 : 1;
 			$this->Session->setData($session);
-			$this->redirect(preg_replace('/(&(amp;)?|\?)'.$flag.'tg=[^& ]*/i', '', Environment::get('request')));
+			$this->redirect(preg_replace('/(&(amp;)?|\?)'.$flag.'tg=[^& ]*/i', '', \Environment::get('request')));
 		}
 
 		$objPage = $this->Database->prepare("SELECT id, alias, type, protected, published, start, stop, hide, title FROM tl_page WHERE id=?")
