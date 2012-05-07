@@ -212,6 +212,6 @@ class Validator extends \System
 	 */
 	public static function isPercent($varValue)
 	{
-		return (!is_numeric($varValue) || $varValue < 0 || $varValue > 100);
+		return (is_numeric($varValue) && $varValue >= 0 && $varValue <= 100);
 	}
 }
