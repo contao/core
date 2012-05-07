@@ -16,12 +16,21 @@ use \Controller, \Input;
 
 
 /**
- * Class Template
- *
- * Provide methods to handle templates.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Parses and outputs template files
+ * 
+ * The class supports loading template files, adding variables to them and then
+ * printing them to the screen. It functions as abstract parent class for the
+ * two core classes "BackendTemplate" and "FrontendTemplate".
+ * 
+ * Usage:
+ * 
+ *     $template = new BackendTemplate();
+ *     $template->name = 'Leo Feyer';
+ *     $template->output();
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 abstract class Template extends Controller
 {
@@ -64,9 +73,10 @@ abstract class Template extends Controller
 
 
 	/**
-	 * Create a new template instance
-	 * @param string
-	 * @param string
+	 * Create a new template object
+	 * 
+	 * @param string $strTemplate    The template name
+	 * @param string $strContentType The content type (defaults to "text/html")
 	 */
 	public function __construct($strTemplate='', $strContentType='text/html')
 	{
@@ -79,8 +89,9 @@ abstract class Template extends Controller
 
 	/**
 	 * Set an object property
-	 * @param string
-	 * @param mixed
+	 * 
+	 * @param string $strKey   The property name
+	 * @param mixed  $varValue The property value
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -90,8 +101,10 @@ abstract class Template extends Controller
 
 	/**
 	 * Return an object property
-	 * @param string
-	 * @return mixed
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return mixed The property value
 	 */
 	public function __get($strKey)
 	{
@@ -106,8 +119,10 @@ abstract class Template extends Controller
 
 	/**
 	 * Check whether a property is set
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return boolean True if the property is set
 	 */
 	public function __isset($strKey)
 	{
@@ -117,7 +132,8 @@ abstract class Template extends Controller
 
 	/**
 	 * Set the template data from an array
-	 * @param array
+	 * 
+	 * @param array $arrData The data array
 	 */
 	public function setData($arrData)
 	{
@@ -127,7 +143,8 @@ abstract class Template extends Controller
 
 	/**
 	 * Return the template data as array
-	 * @return array
+	 * 
+	 * @return array The data array
 	 */
 	public function getData()
 	{
@@ -137,7 +154,8 @@ abstract class Template extends Controller
 
 	/**
 	 * Set the template name
-	 * @param string
+	 * 
+	 * @param string $strTemplate The template name
 	 */
 	public function setName($strTemplate)
 	{
@@ -147,7 +165,8 @@ abstract class Template extends Controller
 
 	/**
 	 * Return the template name
-	 * @return string
+	 * 
+	 * @return string The template name
 	 */
 	public function getName()
 	{
@@ -157,7 +176,8 @@ abstract class Template extends Controller
 
 	/**
 	 * Set the output format
-	 * @param string
+	 * 
+	 * @param string $strFormat The output format
 	 */
 	public function setFormat($strFormat)
 	{
@@ -167,7 +187,8 @@ abstract class Template extends Controller
 
 	/**
 	 * Return the output format
-	 * @return string
+	 * 
+	 * @return string The output format
 	 */
 	public function getFormat()
 	{
@@ -199,7 +220,8 @@ abstract class Template extends Controller
 
 	/**
 	 * Parse the template file and return it as string
-	 * @return string
+	 * 
+	 * @return string The template markup
 	 */
 	public function parse()
 	{
@@ -314,8 +336,10 @@ abstract class Template extends Controller
 
 	/**
 	 * Minify the HTML markup preserving pre, script, style and textarea tags
-	 * @param string
-	 * @return string
+	 * 
+	 * @param string $strHtml The HTML markup
+	 * 
+	 * @return string The minified HTML markup
 	 */
 	public function minifyHtml($strHtml)
 	{
@@ -381,7 +405,9 @@ abstract class Template extends Controller
 
 	/**
 	 * Print the IE6 warning
-	 * @return string
+	 * 
+	 * @return string The warning message
+	 * 
 	 * @deprecated The IE6 warning is now in the templates (e.g. be_install)
 	 */
 	public function showIE6warning()

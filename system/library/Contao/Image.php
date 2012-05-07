@@ -22,9 +22,9 @@ use \File, \Files, \System;
  * 
  * The following resize modes are supported:
  * 
- * * Proportional: proportional resize
- * * Fit-the-box:  proportional resize that fits in the given dimensions
- * * Crop:         the image will be cropped to fit
+ * * Proportional:  proportional resize
+ * * Fit-the-box:   proportional resize that fits in the given dimensions
+ * * Crop:          the image will be cropped to fit
  * 
  * You can specify which part of the image will be preserved:
  * 

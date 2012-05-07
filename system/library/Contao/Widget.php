@@ -16,12 +16,31 @@ use \Controller, \Date, \Encryption, \Input, \Validator;
 
 
 /**
- * Class Widget
- *
- * Provide methods to handle form widgets.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Generates and validates form fields
+ * 
+ * The class functions as abstract parent class for all widget classes and
+ * provides methods to generate the form field markup and to validate the form
+ * field input.
+ * 
+ * Usage:
+ * 
+ *     $widget = new TextField();
+ *     $widget->name = 'test';
+ *     $widget->label = 'Test';
+ * 
+ *     if ($_POST)
+ *     {
+ *         $widget->validate();
+ * 
+ *         if (!$widget->hasErrors())
+ *         {
+ *             echo $widget->value;
+ *         }
+ *     }
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 abstract class Widget extends Controller
 {
@@ -99,7 +118,7 @@ abstract class Widget extends Controller
 	protected $arrConfiguration = array();
 
 	/**
-	 * Submit user input
+	 * Submit indicator
 	 * @var boolean
 	 */
 	protected $blnSubmitInput = false;
@@ -107,7 +126,8 @@ abstract class Widget extends Controller
 
 	/**
 	 * Initialize the object
-	 * @param array
+	 * 
+	 * @param array An optional attributes array
 	 */
 	public function __construct($arrAttributes=null)
 	{
@@ -131,9 +151,10 @@ abstract class Widget extends Controller
 
 
 	/**
-	 * Set a parameter
-	 * @param string
-	 * @param mixed
+	 * Set an object property
+	 * 
+	 * @param string $strKey   The property name
+	 * @param mixed  $varValue The property value
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -253,9 +274,11 @@ abstract class Widget extends Controller
 
 
 	/**
-	 * Return a parameter
-	 * @param string
-	 * @return string
+	 * Return an object property
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return string The property value
 	 */
 	public function __get($strKey)
 	{
@@ -316,7 +339,8 @@ abstract class Widget extends Controller
 
 	/**
 	 * Add an error message
-	 * @param string
+	 * 
+	 * @param string $strError The error message
 	 */
 	public function addError($strError)
 	{
@@ -327,7 +351,8 @@ abstract class Widget extends Controller
 
 	/**
 	 * Return true if the widget has errors
-	 * @return boolean
+	 * 
+	 * @return boolean True if there are errors
 	 */
 	public function hasErrors()
 	{
@@ -336,8 +361,9 @@ abstract class Widget extends Controller
 
 
 	/**
-	 * Return the error array
-	 * @return array
+	 * Return the errors array
+	 * 
+	 * @return array An array of error messages
 	 */
 	public function getErrors()
 	{
@@ -347,8 +373,10 @@ abstract class Widget extends Controller
 
 	/**
 	 * Return a particular error as string
-	 * @param integer
-	 * @return string
+	 * 
+	 * @param integer $intIndex The message index
+	 * 
+	 * @return string The corresponding error message
 	 */
 	public function getErrorAsString($intIndex=0)
 	{
@@ -357,9 +385,11 @@ abstract class Widget extends Controller
 
 
 	/**
-	 * Return all errors as string separated by a particular separator
-	 * @param string
-	 * @return string
+	 * Return all errors as string separated by a given separator
+	 * 
+	 * @param string $strSeparator An optional separator (defaults to "<br>")
+	 * 
+	 * @return string The error messages string
 	 */
 	public function getErrorsAsString($strSeparator=null)
 	{
@@ -374,8 +404,10 @@ abstract class Widget extends Controller
 
 	/**
 	 * Return a particular error as HTML string
-	 * @param integer
-	 * @return string
+	 * 
+	 * @param integer $intIndex The message index
+	 * 
+	 * @return string The HTML markup of the corresponding error message
 	 */
 	public function getErrorAsHTML($intIndex=0)
 	{
@@ -384,8 +416,9 @@ abstract class Widget extends Controller
 
 
 	/**
-	 * Return true if the current input shall be submitted
-	 * @return boolean
+	 * Return true if the widgets submits user input
+	 * 
+	 * @return boolean True if the widget submits user input
 	 */
 	public function submitInput()
 	{
@@ -395,8 +428,10 @@ abstract class Widget extends Controller
 
 	/**
 	 * Parse the template file and return it as string
-	 * @param array
-	 * @return string
+	 * 
+	 * @param array $arrAttributes An optional attributes array
+	 * 
+	 * @return string The template markup
 	 */
 	public function parse($arrAttributes=null)
 	{
@@ -418,7 +453,8 @@ abstract class Widget extends Controller
 
 	/**
 	 * Generate the label and return it as string
-	 * @return string
+	 * 
+	 * @return string The label markup
 	 */
 	public function generateLabel()
 	{
@@ -438,15 +474,18 @@ abstract class Widget extends Controller
 
 	/**
 	 * Generate the widget and return it as string
-	 * @return string
+	 * 
+	 * @return string The widget markup
 	 */
 	abstract public function generate();
 
 
 	/**
 	 * Generate the widget with error message and return it as string
-	 * @param boolean
-	 * @return string
+	 * 
+	 * @param boolean $blnSwitchOrder If true, the error message will be shown below the field
+	 * 
+	 * @return string The form field markup
 	 */
 	public function generateWithError($blnSwitchOrder=false)
 	{
@@ -459,8 +498,10 @@ abstract class Widget extends Controller
 
 	/**
 	 * Return all attributes as string
-	 * @param array
-	 * @return string
+	 * 
+	 * @param array $arrStrip An optional array with attributes to strip
+	 * 
+	 * @return string The attributes string
 	 */
 	public function getAttributes($arrStrip=array())
 	{
@@ -519,8 +560,9 @@ abstract class Widget extends Controller
 
 
 	/**
-	 * Return a submit button
-	 * @return string
+	 * Generate a submit button
+	 * 
+	 * @return string The submit button markup
 	 */
 	protected function addSubmit()
 	{
@@ -537,7 +579,7 @@ abstract class Widget extends Controller
 
 
 	/**
-	 * Validate the input and set the value
+	 * Validate the user input and set the value
 	 */
 	public function validate()
 	{
@@ -553,9 +595,11 @@ abstract class Widget extends Controller
 
 
 	/**
-	 * Get a $_POST parameter
-	 * @param string
-	 * @return mixed
+	 * Find and return a $_POST variable
+	 * 
+	 * @param string $strKey The variable name
+	 * 
+	 * @return mixed The variable value
 	 */
 	protected function getPost($strKey)
 	{
@@ -592,8 +636,10 @@ abstract class Widget extends Controller
 
 	/**
 	 * Recursively validate an input variable
-	 * @param mixed
-	 * @return mixed
+	 * 
+	 * @param mixed $varInput The user input
+	 * 
+	 * @return mixed The original or modified user input
 	 */
 	protected function validator($varInput)
 	{
@@ -834,7 +880,8 @@ abstract class Widget extends Controller
 
 	/**
 	 * Take an associative array and add it to the object's attributes
-	 * @param array
+	 * 
+	 * @param array $arrAttributes An array of attributes
 	 */
 	public function addAttributes($arrAttributes)
 	{
@@ -852,8 +899,10 @@ abstract class Widget extends Controller
 
 	/**
 	 * Check whether an option is checked
-	 * @param array
-	 * @return string
+	 * 
+	 * @param array $arrOption The options array
+	 * 
+	 * @return string The "checked" attribute or an empty string
 	 */
 	protected function isChecked($arrOption)
 	{
@@ -868,8 +917,10 @@ abstract class Widget extends Controller
 
 	/**
 	 * Check whether an option is selected
-	 * @param array
-	 * @return string
+	 * 
+	 * @param array $arrOption The options array
+	 * 
+	 * @return string The "selected" attribute or an empty string
 	 */
 	protected function isSelected($arrOption)
 	{

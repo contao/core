@@ -16,15 +16,41 @@ use \Folder, \System, \Exception;
 
 
 /**
- * Class ZipWriter
- *
- * This class provides methods to write a ZIP file.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Creates .zip files and stores them on the disk
+ * 
+ * Usage:
+ * 
+ *     $zip = new ZipWriter('test.zip');
+ *     $zip->addFile('test.txt');
+ *     $zip->close();
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class ZipWriter extends System
 {
+
+	/**
+	 * File signatur
+	 */
+	const FILE_SIGNATURE = "\x50\x4b\x03\x04";
+
+	/**
+	 * Central directory begin marker
+	 */
+	const CENTRAL_DIR_START = "\x50\x4b\x01\x02";
+
+	/**
+	 * Central directory end marker
+	 */
+	const CENTRAL_DIR_END   = "\x50\x4b\x05\x06";
+
+
+	/**
+	 * Temp folder path
+	 */
+	const TEMPORARY_FOLDER  = 'system/tmp';
 
 	/**
 	 * File handle
@@ -58,17 +84,10 @@ class ZipWriter extends System
 
 
 	/**
-	 * Constants
-	 */
-	const FILE_SIGNATURE    = "\x50\x4b\x03\x04";
-	const CENTRAL_DIR_START = "\x50\x4b\x01\x02";
-	const CENTRAL_DIR_END   = "\x50\x4b\x05\x06";
-	const TEMPORARY_FOLDER  = 'system/tmp';
-
-
-	/**
-	 * Create a new file
-	 * @param string
+	 * Create a new zip archive
+	 * 
+	 * @param string $strFile The file path
+	 * 
 	 * @throws \Exception
 	 */
 	public function __construct($strFile)
@@ -109,8 +128,10 @@ class ZipWriter extends System
 
 	/**
 	 * Add a file to the archive
-	 * @param string
-	 * @param string
+	 * 
+	 * @param string $strFile The file path
+	 * @param string $strName An optional file name
+	 * 
 	 * @throws \Exception
 	 */
 	public function addFile($strFile, $strName=null)
@@ -126,9 +147,10 @@ class ZipWriter extends System
 
 	/**
 	 * Add a file from a string to the archive
-	 * @param string
-	 * @param string
-	 * @param integer
+	 * 
+	 * @param string  $strData The data to be added
+	 * @param string  $strName The file path
+	 * @param integer $intTime An optional modification timestamp
 	 */
 	public function addString($strData, $strName, $intTime=0)
 	{
@@ -238,8 +260,10 @@ class ZipWriter extends System
 
 	/**
 	 * Convert a Unix timestamp to a hexadecimal value
-	 * @param integer
-	 * @return integer
+	 * 
+	 * @param integer $intTime The Unix timestamp
+	 * 
+	 * @return integer The hexadecimal value
 	 */
 	protected function unixToHex($intTime=0)
 	{

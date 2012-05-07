@@ -16,15 +16,38 @@ use \Exception;
 
 
 /**
- * Class ZipReader
- *
- * This class provides methods to read a ZIP file.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Reads .zip files and unpacks their content
+ * 
+ * Usage:
+ * 
+ *     $zip = new ZipReader('test.zip');
+ * 
+ *     while ($zip->next())
+ *     {
+ *         echo $zip->->file_name;
+ *     }
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class ZipReader
 {
+
+	/**
+	 * File signatur
+	 */
+	const FILE_SIGNATURE = "\x50\x4b\x03\x04";
+
+	/**
+	 * Central directory begin marker
+	 */
+	const CENTRAL_DIR_START = "\x50\x4b\x01\x02";
+
+	/**
+	 * Central directory end marker
+	 */
+	const CENTRAL_DIR_END = "\x50\x4b\x05\x06";
 
 	/**
 	 * File handle
@@ -39,13 +62,13 @@ class ZipReader
 	protected $strFile;
 
 	/**
-	 * Index of the current file
+	 * Current file index
 	 * @var integer
 	 */
 	private $intIndex = -1;
 
 	/**
-	 * Index of the last file
+	 * Last file index
 	 * @var integer
 	 */
 	private $intLast = 0;
@@ -64,16 +87,10 @@ class ZipReader
 
 
 	/**
-	 * Constants
-	 */
-	const FILE_SIGNATURE    = "\x50\x4b\x03\x04";
-	const CENTRAL_DIR_START = "\x50\x4b\x01\x02";
-	const CENTRAL_DIR_END   = "\x50\x4b\x05\x06";
-
-
-	/**
 	 * Open the archive and return the file handle
-	 * @param string
+	 * 
+	 * @param string $strFile The file path
+	 * 
 	 * @throws \Exception
 	 */
 	public function __construct($strFile)
@@ -114,45 +131,47 @@ class ZipReader
 
 
 	/**
-	 * Return a particular parameter of the header or the current file
+	 * Return a property of the archive header or the current file
 	 *
-	 * Supported header parameters
-	 * - number_of_this_disk:       number of this disk
-	 * - number_of_disk_with_cd:    number of the disk with thestart of the central directory
-	 * - total_cd_entries_disk:     total number of entries in the central directory on this disk
-	 * - total_cd_entries:          total number of entries in the central directory
-	 * - size_of_cd:                size of the central directory
-	 * - offset_start_cd:           offset of start of central directory with respect to the starting disk number
-	 * - zipfile_comment_length:    ZIP file comment length
-	 * - zipfile_comment:           ZIP file comment
+	 * Supported header parameters:
+	 * 
+	 * * number_of_this_disk:       number of this disk
+	 * * number_of_disk_with_cd:    number of the disk with thestart of the central directory
+	 * * total_cd_entries_disk:     total number of entries in the central directory on this disk
+	 * * total_cd_entries:          total number of entries in the central directory
+	 * * size_of_cd:                size of the central directory
+	 * * offset_start_cd:           offset of start of central directory with respect to the starting disk number
+	 * * zipfile_comment_length:    ZIP file comment length
+	 * * zipfile_comment:           ZIP file comment
 	 *
-	 * Supported file parameters
-	 * - version_made_by:           version made by
-	 * - version_needed_to_extract: version needed to extract
-	 * - general_purpose_bit_flag:  general purpose bit flag
-	 * - compression_method:        compression method
-	 * - last_mod_file_time:        last mod file time
-	 * - last_mod_file_date:        last mod file date
-	 * - last_mod_file_unix:        last mod file unix timestamp
-	 * - crc-32:                    CRC32 checksum
-	 * - compressed_size:           compressed size
-	 * - uncompressed_size:         uncompressed size
-	 * - file_name_length:          file name length
-	 * - extra_field_length:        extra field length
-	 * - file_comment_length:       file comment length
-	 * - disk_number_start:         disk number start
-	 * - internal_file_attributes:  internal file attributes
-	 * - external_file_attributes:  external file attributes
-	 * - offset_of_local_header:    relative offset of local header
-	 * - file_name:                 file name
-	 * - file_basename:             file basename
-	 * - file_dirname:              file dirname
-	 * - extra_field:               extra field
-	 * - file_comment:              file comment
+	 * Supported file parameters:
+	 * 
+	 * * version_made_by:           version made by
+	 * * version_needed_to_extract: version needed to extract
+	 * * general_purpose_bit_flag:  general purpose bit flag
+	 * * compression_method:        compression method
+	 * * last_mod_file_time:        last mod file time
+	 * * last_mod_file_date:        last mod file date
+	 * * last_mod_file_unix:        last mod file unix timestamp
+	 * * crc-32:                    CRC32 checksum
+	 * * compressed_size:           compressed size
+	 * * uncompressed_size:         uncompressed size
+	 * * file_name_length:          file name length
+	 * * extra_field_length:        extra field length
+	 * * file_comment_length:       file comment length
+	 * * disk_number_start:         disk number start
+	 * * internal_file_attributes:  internal file attributes
+	 * * external_file_attributes:  external file attributes
+	 * * offset_of_local_header:    relative offset of local header
+	 * * file_name:                 file name
+	 * * file_basename:             file basename
+	 * * file_dirname:              file dirname
+	 * * extra_field:               extra field
+	 * * file_comment:              file comment
 	 *
-	 * Throws an exception on requests for unknown fields.
-	 * @param string
-	 * @return mixed|null
+	 * @param string $strKey The property name
+	 * 
+	 * @return mixed|null The property value or null
 	 */
 	public function __get($strKey)
 	{
@@ -189,7 +208,8 @@ class ZipReader
 
 	/**
 	 * Return a list of all files in the archive
-	 * @return array
+	 * 
+	 * @return array The files array
 	 */
 	public function getFileList()
 	{
@@ -205,9 +225,11 @@ class ZipReader
 
 
 	/**
-	 * Set the internal pointer to a particular file and return true if successful
-	 * @param string
-	 * @return boolean
+	 * Set the internal pointer to a particular file
+	 * 
+	 * @param string $strName The file name
+	 * 
+	 * @return boolean True if the file was found
 	 */
 	public function getFile($strName)
 	{
@@ -226,7 +248,8 @@ class ZipReader
 
 	/**
 	 * Go to the first file of the archive
-	 * @return \ZipReader
+	 * 
+	 * @return \ZipReader The object instance
 	 */
 	public function first()
 	{
@@ -237,7 +260,8 @@ class ZipReader
 
 	/**
 	 * Go to the next file of the archive
-	 * @return \ZipReader|boolean
+	 * 
+	 * @return \ZipReader|boolean The object instance or false if there is no next file
 	 */
 	public function next()
 	{
@@ -253,7 +277,8 @@ class ZipReader
 
 	/**
 	 * Go to the previous file of the archive
-	 * @return \ZipReader|boolean
+	 * 
+	 * @return \ZipReader|boolean The object instance or false if there is no previous file
 	 */
 	public function prev()
 	{
@@ -269,7 +294,8 @@ class ZipReader
 
 	/**
 	 * Go to the last file of the archive
-	 * @return \ZipReader|boolean
+	 * 
+	 * @return \ZipReader The object instance
 	 */
 	public function last()
 	{
@@ -280,7 +306,8 @@ class ZipReader
 
 	/**
 	 * Return the current file as array
-	 * @return array
+	 * 
+	 * @return array The current file array
 	 */
 	public function current()
 	{
@@ -295,7 +322,8 @@ class ZipReader
 
 	/**
 	 * Reset the archive
-	 * @return \ZipReader
+	 * 
+	 * @return \ZipReader The object instance
 	 */
 	public function reset()
 	{
@@ -306,7 +334,9 @@ class ZipReader
 
 	/**
 	 * Unzip the current file and return its contents as string
-	 * @return string
+	 * 
+	 * @return string The file content
+	 * 
 	 * @throws \Exception
 	 */
 	public function unzip()
@@ -399,7 +429,9 @@ class ZipReader
 
 	/**
 	 * Return a list of all files in the archive
-	 * @return array
+	 * 
+	 * @return array The files array
+	 * 
 	 * @throws \Exception
 	 */
 	protected function readCentralDirectory()
@@ -508,9 +540,11 @@ class ZipReader
 
 	/**
 	 * Calculate the Unix timestamp from two hexadecimal values
-	 * @param integer
-	 * @param integer
-	 * @return integer
+	 * 
+	 * @param integer $intTime The time integer
+	 * @param integer $intDate The date integer
+	 * 
+	 * @return integer The Unix timestamp
 	 */
 	protected function decToUnix($intTime, $intDate)
 	{

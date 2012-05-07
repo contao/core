@@ -16,36 +16,49 @@ use \Email, \Environment, \FrontendUser, \Input, \Message, \System;
 
 
 /**
- * Class User
- *
- * Provide methods to manage users.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
+ * Authenticates and initializes user objects
+ * 
+ * The class supports user authentication, login and logout, persisting the
+ * session data and initializing the user object from a database row. It
+ * functions as abstract parent class for the "BackendUser" and "FrontendUser"
+ * classes of the core.
+ * 
+ * Usage:
+ * 
+ *     $user = BackendUser::getInstance();
+ * 
+ *     if ($user->findBy('username', 'leo'))
+ *     {
+ *         echo $user->name;
+ *     }
+ * 
+ * @package   Library
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 abstract class User extends System
 {
 
 	/**
-	 * Current object instance (Singleton)
-	 * @var User
+	 * Object instance (Singleton)
+	 * @var \User
 	 */
 	protected static $objInstance;
 
 	/**
-	 * Current user ID
+	 * User ID
 	 * @var integer
 	 */
 	protected $intId;
 
 	/**
-	 * IP address of the current user
+	 * IP address
 	 * @var string
 	 */
 	protected $strIp;
 
 	/**
-	 * Authentication hash value
+	 * Authentication hash
 	 * @var string
 	 */
 	protected $strHash;
@@ -57,7 +70,7 @@ abstract class User extends System
 	protected $strTable;
 
 	/**
-	 * Name of the current cookie
+	 * Cookie name
 	 * @var string
 	 */
 	protected $strCookie;
@@ -87,7 +100,7 @@ abstract class User extends System
 	protected $objLogout;
 
 	/**
-	 * Data array
+	 * Data
 	 * @var array
 	 */
 	protected $arrData = array();
@@ -111,8 +124,9 @@ abstract class User extends System
 
 	/**
 	 * Set an object property
-	 * @param string
-	 * @param mixed
+	 * 
+	 * @param string $strKey   The property name
+	 * @param mixed  $varValue The property value
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -122,8 +136,10 @@ abstract class User extends System
 
 	/**
 	 * Return an object property
-	 * @param string
-	 * @return mixed
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return mixed The property value
 	 */
 	public function __get($strKey)
 	{
@@ -138,8 +154,10 @@ abstract class User extends System
 
 	/**
 	 * Check whether a property is set
-	 * @param string
-	 * @return boolean
+	 * 
+	 * @param string $strKey The property name
+	 * 
+	 * @return boolean True if the property is set
 	 */
 	public function __isset($strKey)
 	{
@@ -148,8 +166,9 @@ abstract class User extends System
 
 
 	/**
-	 * Instantiate a new cache object and return it (Factory)
-	 * @return \Cache
+	 * Instantiate a new user object (Factory)
+	 * 
+	 * @return \User The object instance
 	 */
 	public static function getInstance()
 	{
@@ -164,7 +183,8 @@ abstract class User extends System
 
 	/**
 	 * Authenticate a user
-	 * @return boolean
+	 * 
+	 * @return boolean True if the user could be authenticated
 	 */
 	public function authenticate()
 	{
@@ -215,7 +235,8 @@ abstract class User extends System
 
 	/**
 	 * Try to login the current user
-	 * @return boolean
+	 * 
+	 * @return boolean True if the user could be logged in
 	 */
 	public function login()
 	{
@@ -369,7 +390,8 @@ abstract class User extends System
 
 	/**
 	 * Check the account status and return true if it is active
-	 * @return boolean
+	 * 
+	 * @return boolean True if the account is active
 	 */
 	protected function checkAccountStatus()
 	{
@@ -421,10 +443,12 @@ abstract class User extends System
 
 
 	/**
-	 * Find a used in the database
-	 * @param string
-	 * @param mixed
-	 * @return boolean
+	 * Find a user in the database
+	 * 
+	 * @param string $strColumn The field name
+	 * @param mixed  $varValue  The field value
+	 * 
+	 * @return boolean True if the user was found
 	 */
 	public function findBy($strColumn, $varValue)
 	{
@@ -481,7 +505,8 @@ abstract class User extends System
 
 	/**
 	 * Remove the authentication cookie and destroy the current session
-	 * @return boolean
+	 * 
+	 * @return boolean True if the user could be logged out
 	 */
 	public function logout()
 	{
@@ -545,8 +570,10 @@ abstract class User extends System
 
 	/**
 	 * Return true if the user is member of a particular group
-	 * @param integer
-	 * @return boolean
+	 * 
+	 * @param integer $id The group ID
+	 * 
+	 * @return boolean True if the user is a member of the group
 	 */
 	public function isMemberOf($id)
 	{
