@@ -52,7 +52,7 @@ var Stylect =
 
 			// Fix right-aligned elements (e.g. Safari and Opera)
 			if (div.getPosition().x != el.getPosition().x) {
-				div.position({ relativeTo:el, ignoreMargins:true });
+				div.position({ relativeTo:el, ignoreMargins:true }).setStyle('top', 0);
 			}
 
 			// Mark active elements
