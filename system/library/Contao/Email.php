@@ -158,6 +158,19 @@ class Email extends \System
 	/**
 	 * Set an object property
 	 * 
+	 * Supported keys:
+	 * 
+	 * * subject:     the e-mail subject
+	 * * text:        the text part of the mail
+	 * * html:        the HTML part of the mail
+	 * * from:        the sender's e-mail address
+	 * * fromName:    the sender's name
+	 * * priority:    the e-mail priority
+	 * * charset:     the e-mail character set
+	 * * imageDir:    the base directory to look for internal images
+	 * * embedImages: whether to embed images inline
+	 * * logFile:     the log file path
+	 * 
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
 	 * 
@@ -238,6 +251,20 @@ class Email extends \System
 
 	/**
 	 * Return an object property
+	 * 
+	 * Supported keys:
+	 * 
+	 * * subject:     the e-mail subject
+	 * * text:        the text part of the mail
+	 * * html:        the HTML part of the mail
+	 * * from:        the sender's e-mail address
+	 * * fromName:    the sender's name
+	 * * priority:    the e-mail priority
+	 * * charset:     the e-mail character set
+	 * * imageDir:    the base directory to look for internal images
+	 * * embedImages: whether to embed images inline
+	 * * logFile:     the log file path
+	 * * failures:    an array of rejected e-mail addresses
 	 * 
 	 * @param string $strKey The property name
 	 * 
@@ -415,7 +442,7 @@ class Email extends \System
 			// Embed images
 			if ($this->blnEmbedImages)
 			{
-				if (!strlen($this->strImageDir))
+				if ($this->strImageDir == '')
 				{
 					$this->strImageDir = TL_ROOT . '/';
 				}

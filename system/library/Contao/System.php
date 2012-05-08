@@ -156,6 +156,11 @@ abstract class System
 	 * Lazy load the Input and Environment libraries (which are now static) and
 	 * only include them as object property if an old module requires it
 	 * 
+	 * Supported keys:
+	 * 
+	 * * Input:       the Input instance
+	 * * Environment: the Environment instance
+	 * 
 	 * @param string $strKey The property name
 	 * 
 	 * @return mixed|null The property value or null

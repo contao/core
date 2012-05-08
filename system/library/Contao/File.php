@@ -119,6 +119,25 @@ class File extends \System
 	/**
 	 * Return an object property
 	 * 
+	 * Supported keys:
+	 * 
+	 * * size:      the file size
+	 * * name:      the file name without extension
+	 * * dirname:   the path of the parent folder
+	 * * extension: the file extension
+	 * * filename:  the file name and extension
+	 * * mime:      the file's mime type
+	 * * hash:      the file's MD5 checksum
+	 * * ctime:     the file's ctime
+	 * * mtime:     the file's mtime
+	 * * atime:     the file's atime
+	 * * icon:      the name of the corresponding mime icon
+	 * * path:      the path to the file
+	 * * width:     the file width (images only)
+	 * * height:    the file height (images only)
+	 * * isGdImage: true if the file can be handled by the GDlib
+	 * * handle:    the file handle (returned by fopen())
+	 * 
 	 * @param string $strKey The property name
 	 * 
 	 * @return mixed The property value

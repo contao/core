@@ -133,39 +133,39 @@ class ZipReader
 	 *
 	 * Supported header parameters:
 	 * 
-	 * * number_of_this_disk:       number of this disk
-	 * * number_of_disk_with_cd:    number of the disk with thestart of the central directory
-	 * * total_cd_entries_disk:     total number of entries in the central directory on this disk
-	 * * total_cd_entries:          total number of entries in the central directory
-	 * * size_of_cd:                size of the central directory
-	 * * offset_start_cd:           offset of start of central directory with respect to the starting disk number
-	 * * zipfile_comment_length:    ZIP file comment length
-	 * * zipfile_comment:           ZIP file comment
+	 * * number_of_this_disk:       the number of this disk
+	 * * number_of_disk_with_cd:    the number of the disk with thestart of the central directory
+	 * * total_cd_entries_disk:     the total number of entries in the central directory on this disk
+	 * * total_cd_entries:          the total number of entries in the central directory
+	 * * size_of_cd:                the size of the central directory
+	 * * offset_start_cd:           the offset of the start of the central directory with respect to the starting disk number
+	 * * zipfile_comment_length:    the ZIP file comment length
+	 * * zipfile_comment:           the ZIP file comment
 	 *
 	 * Supported file parameters:
 	 * 
-	 * * version_made_by:           version made by
-	 * * version_needed_to_extract: version needed to extract
+	 * * version_made_by:           the version made by
+	 * * version_needed_to_extract: the version needed to extract
 	 * * general_purpose_bit_flag:  general purpose bit flag
-	 * * compression_method:        compression method
-	 * * last_mod_file_time:        last mod file time
-	 * * last_mod_file_date:        last mod file date
-	 * * last_mod_file_unix:        last mod file unix timestamp
-	 * * crc-32:                    CRC32 checksum
-	 * * compressed_size:           compressed size
-	 * * uncompressed_size:         uncompressed size
-	 * * file_name_length:          file name length
-	 * * extra_field_length:        extra field length
-	 * * file_comment_length:       file comment length
+	 * * compression_method:        the compression method
+	 * * last_mod_file_time:        the last modification file time
+	 * * last_mod_file_date:        the last modification file date
+	 * * last_mod_file_unix:        the last modification file unix timestamp
+	 * * crc-32:                    the CRC32 checksum
+	 * * compressed_size:           the compressed size
+	 * * uncompressed_size:         the uncompressed size
+	 * * file_name_length:          the file name length
+	 * * extra_field_length:        the extra field length
+	 * * file_comment_length:       the file comment length
 	 * * disk_number_start:         disk number start
 	 * * internal_file_attributes:  internal file attributes
 	 * * external_file_attributes:  external file attributes
-	 * * offset_of_local_header:    relative offset of local header
-	 * * file_name:                 file name
-	 * * file_basename:             file basename
-	 * * file_dirname:              file dirname
-	 * * extra_field:               extra field
-	 * * file_comment:              file comment
+	 * * offset_of_local_header:    the relative offset of local header
+	 * * file_name:                 the file name
+	 * * file_basename:             the file basename
+	 * * file_dirname:              the file dirname
+	 * * extra_field:               the extra field
+	 * * file_comment:              the file comment
 	 *
 	 * @param string $strKey The property name
 	 * 

@@ -111,6 +111,20 @@ class Date extends \System
 	/**
 	 * Return an object property
 	 * 
+	 * Supported keys:
+	 * 
+	 * * timestamp:  the Unix timestamp
+	 * * date:       the formatted date
+	 * * time:       the formatted time
+	 * * datim:      the formatted date and time
+	 * * dayBegin:   the beginning of the current day
+	 * * dayEnd:     the end of the current day
+	 * * monthBegin: the beginning of the current month
+	 * * monthEnd:   the end of the current month
+	 * * yearBegin:  the beginning of the current year
+	 * * yearEnd:    the end of the current year
+	 * * format:     the date format string
+	 * 
 	 * @param string $strKey The property name
 	 * 
 	 * @return mixed The property value

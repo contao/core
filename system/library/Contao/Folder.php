@@ -81,6 +81,12 @@ class Folder extends \System
 	/**
 	 * Return an object property
 	 * 
+	 * Supported keys:
+	 * 
+	 * * hash: the folder's MD5 hash
+	 * * path: the path to the folder
+	 * * size: the folder size
+	 * 
 	 * @param string $strKey The property name
 	 * 
 	 * @return mixed The property value
@@ -97,6 +103,7 @@ class Folder extends \System
 					\Cache::set($strCacheKey, $this->getHash());
 					break;
 
+				case 'path':
 				case 'value':
 					\Cache::set($strCacheKey, $this->strFolder);
 					break;

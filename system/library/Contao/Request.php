@@ -99,6 +99,11 @@ class Request
 	/**
 	 * Set an object property
 	 * 
+	 * Supported keys:
+	 * 
+	 * * data:   the request data
+	 * * method: the request method
+	 * 
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
 	 * 
@@ -125,6 +130,14 @@ class Request
 
 	/**
 	 * Return an object property
+	 * 
+	 * Supported keys:
+	 * 
+	 * * error:    the error message or an empty string
+	 * * code:     the response code
+	 * * request:  the request string
+	 * * response: the response string
+	 * * headers:  the response headers array
 	 * 
 	 * @param string $strKey The property key
 	 * 

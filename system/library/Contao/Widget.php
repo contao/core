@@ -151,6 +151,52 @@ abstract class Widget extends \Controller
 	/**
 	 * Set an object property
 	 * 
+	 * Supported keys:
+	 * 
+	 * * id:                the field ID
+	 * * name:              the field name
+	 * * label:             the field label
+	 * * value:             the field value
+	 * * class:             one or more CSS classes
+	 * * template:          the template name
+	 * * wizard:            the field wizard markup
+	 * * alt:               an alternative text
+	 * * style:             the style attribute
+	 * * accesskey:         the key to focus the field
+	 * * tabindex:          the tabindex of the field
+	 * * disabled:          adds the disabled attribute
+	 * * readonly:          adds the readonly attribute
+	 * * autofocus:         adds the autofocus attribute
+	 * * required:          adds the required attribute
+	 * 
+	 * Event handler:
+	 * 
+	 * * onblur:            the blur event
+	 * * onchange:          the change event
+	 * * onclick:           the click event
+	 * * ondblclick:        the double click event
+	 * * onfocus:           the focus event
+	 * * onmousedown:       the mouse down event
+	 * * onmousemove:       the mouse move event
+	 * * onmouseout:        the mouse out event
+	 * * onmouseover:       the mouse over event
+	 * * onmouseup:         the mouse up event
+	 * * onkeydown:         the key down event
+	 * * onkeypress:        the key press event
+	 * * onkeyup:           the key up event
+	 * * onselect:          the select event
+	 * 
+	 * Miscellaneous:
+	 * 
+	 * * mandatory:         the field value must not be empty
+	 * * nospace:           does not allow whitespace characters
+	 * * allowHtml:         allows HTML tags in the field value
+	 * * addSubmit:         adds an inline submit button
+	 * * storeFile:         store uploaded files in a given folder
+	 * * useHomeDir:        store uploaded files in the user's home directory
+	 * * trailingSlash:     add or remove a trailing slash
+	 * * spaceToUnderscore: convert spaces to underscores
+	 * 
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
 	 */
@@ -273,6 +319,17 @@ abstract class Widget extends \Controller
 
 	/**
 	 * Return an object property
+	 * 
+	 * Supported keys:
+	 * 
+	 * * id:       the field ID
+	 * * name:     the field name
+	 * * label:    the field label
+	 * * value:    the field value
+	 * * class:    one or more CSS classes
+	 * * template: the template name
+	 * * wizard:   the field wizard markup
+	 * * required: makes the widget a required field
 	 * 
 	 * @param string $strKey The property name
 	 * 
