@@ -1,11 +1,11 @@
 <?php
 
-// Add the colorbox style sheet
-$GLOBALS['TL_CSS'][] = 'plugins/mootools/mediaelement/'. MEDIAELEMENT .'/mediaelementplayer.min.css||static';
+// Add the mediaelement style sheet
+$GLOBALS['TL_CSS'][] = 'plugins/mootools/mediaelement/'. MEDIAELEMENT .'/css/mediaelementplayer.min.css||static';
 
 ?>
 
-<script src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/mediaelement/<?php echo MEDIAELEMENT; ?>/mediaelement-and-player.min.js"></script>
+<script src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/mediaelement/<?php echo MEDIAELEMENT; ?>/js/mediaelement-and-player.min.js"></script>
 <script>
 (function($) {
   window.addEvent('domready', function() {

@@ -189,7 +189,7 @@ class Theme extends \Backend
 			}
 
 			// Open the XML file
-			$xml = new DOMDocument();
+			$xml = new \DOMDocument();
 			$xml->preserveWhiteSpace = false;
 			$xml->loadXML($objArchive->unzip());
 			$tables = $xml->getElementsByTagName('table');
@@ -362,7 +362,7 @@ class Theme extends \Backend
 				// Load the XML file
 				if ($objArchive->file_name == 'theme.xml')
 				{
-					$xml = new DOMDocument();
+					$xml = new \DOMDocument();
 					$xml->preserveWhiteSpace = false;
 					$xml->loadXML($objArchive->unzip());
 					continue;
@@ -779,7 +779,7 @@ class Theme extends \Backend
 		}
 
 		// Create a new XML document
-		$xml = new DOMDocument('1.0', 'UTF-8');
+		$xml = new \DOMDocument('1.0', 'UTF-8');
 		$xml->formatOutput = true;
 
 		// Root element

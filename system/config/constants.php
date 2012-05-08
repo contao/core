@@ -21,16 +21,19 @@ define('VERSION', '3.0');
 define('BUILD', 'beta1');
 define('LONG_TERM_SUPPORT', false);
 define('CODEMIRROR', '2.2');
-define('DATEPICKER', '2.1.1');
+define('CSS3PIE', '1.0beta5');
 define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIM', '3');
-define('MEDIABOX', '1.4.6');
-define('MOOTOOLS', '1.4.5');
 define('JQUERY', '1.7.1');
+define('JQUERY_UI', '1.8.17');
 define('COLORBOX', '1.3.19');
-define('SLIMBOX', '1.71');
-define('TABLESORT', '1.3.1');
 define('MEDIAELEMENT', '2.8.1');
+define('COLORPICKER', '1.3');
+define('MOOTOOLS', '1.4.5');
+define('DATEPICKER', '2.1.1');
+define('MEDIABOX', '1.4.6');
+define('SIMPLEMODAL', '1.0');
+define('SLIMBOX', '1.71');
 
 
 /**

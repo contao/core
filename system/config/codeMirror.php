@@ -18,8 +18,8 @@
 if ($GLOBALS['TL_CONFIG']['useCE']):
 
 	// Include the CodeMirror scripts
-	$GLOBALS['TL_CSS'][] = 'plugins/codeMirror/codemirror.css';
-	$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/codeMirror/codemirror.js';
+	$GLOBALS['TL_CSS'][] = 'plugins/codeMirror/'.CODEMIRROR.'/codemirror.css';
+	$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/codeMirror/'.CODEMIRROR.'/codemirror.js';
 
 	foreach ($this->ceFields as $arrField):
 

@@ -72,7 +72,7 @@ class ContentMedia extends \ContentElement
 
 			while ($objFiles->next())
 			{
-				$objFile = new File($objFiles->path);
+				$objFile = new \File($objFiles->path);
 				$return .= '<li><img src="system/themes/' . $this->getTheme() . '/images/' . $objFile->icon . '" width="18" height="18" alt="" class="mime_icon"> <span>' . $objFile->name . '</span> <span class="size">(' . $this->getReadableSize($objFile->size) . ')</span></li>';
 			}
 
@@ -130,7 +130,7 @@ class ContentMedia extends \ContentElement
 		// Pass File objects to the template
 		while ($this->objFiles->next())
 		{
-			$objFile = new File($this->objFiles->path);
+			$objFile = new \File($this->objFiles->path);
 			$arrFiles[$objFile->extension] = $objFile;
 		}
 

@@ -257,7 +257,7 @@ class PageModel extends \Model
 			return null;
 		}
 
-		return new Model_Collection($objSubpages, 'tl_page');
+		return new \Model_Collection($objSubpages, 'tl_page');
 	}
 
 
@@ -333,6 +333,6 @@ class PageModel extends \Model
 			return null;
 		}
 
-		return new Model_Collection($objPages, 'tl_page');
+		return new \Model_Collection($objPages, 'tl_page');
 	}
 }

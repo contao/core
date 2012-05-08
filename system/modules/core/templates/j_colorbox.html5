@@ -1,11 +1,11 @@
 <?php
 
 // Add the colorbox style sheet
-$GLOBALS['TL_CSS'][] = 'plugins/jQuery/colorbox/'. COLORBOX .'/css/colorbox.css||static';
+$GLOBALS['TL_CSS'][] = 'plugins/jQuery/colorbox/'. COLORBOX .'/css/colorbox.min.css||static';
 
 ?>
 
-<script src="<?php echo TL_PLUGINS_URL; ?>plugins/jQuery/colorbox/<?php echo COLORBOX; ?>/js/colorbox-uncompressed.js"></script>
+<script src="<?php echo TL_PLUGINS_URL; ?>plugins/jQuery/colorbox/<?php echo COLORBOX; ?>/js/colorbox.min.js"></script>
 <script>
 (function($) {
   $(document).ready(function() {

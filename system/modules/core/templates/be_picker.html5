@@ -15,8 +15,7 @@
 <script><?php echo $this->getLocaleString(); ?></script>
 <script src="<?php
   $objCombiner = new Combiner();
-  $objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS);
-  $objCombiner->add('plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS);
+  $objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
   $objCombiner->add('plugins/mootools/mootao/Mootao.js');
   $objCombiner->add('system/modules/core/html/contao.js');
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');

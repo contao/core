@@ -22,7 +22,6 @@ var DECIMAL_SEPARATOR = '.';
  *
  * Provide methods to sort tables using the mootools framework
  * keeping the Contao class names intact.
- * @version 1.3.1
  */
 var TableSort = new Class(
 {

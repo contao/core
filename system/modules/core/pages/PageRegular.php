@@ -187,7 +187,7 @@ class PageRegular extends \Frontend
 	 */
 	protected function createTemplate($objPage, $objLayout)
 	{
-		$this->Template = new FrontendTemplate($objPage->template);
+		$this->Template = new \FrontendTemplate($objPage->template);
 
 		// Generate the DTD
 		if ($objPage->outputFormat == 'xhtml')
@@ -302,12 +302,12 @@ class PageRegular extends \Frontend
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->jSource == 'j_fallback')
 				{
-					$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . '>window.jQuery || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/jQuery/core/' . JQUERY . '/jquery.js">\x3C/script>\')</script>' . "\n";
+					$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . '>window.jQuery || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/jQuery/core/' . JQUERY . '/jquery.min.js">\x3C/script>\')</script>' . "\n";
 				}
 			}
 			else
 			{
-				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="plugins/jQuery/core/' . JQUERY . '/jquery.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="plugins/jQuery/core/' . JQUERY . '/jquery.min.js"></script>' . "\n";
 			}
 		}
 
@@ -325,18 +325,12 @@ class PageRegular extends \Frontend
 					$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . '>window.MooTools || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>' . "\n";
 				}
 
-				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";
-				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/mobile/mootools-mobile.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/core/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/core/' . MOOTOOLS . '/mootools-mobile.js"></script>' . "\n";
 			}
 			else
 			{
-				$objCombiner = new Combiner();
-
-				$objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS);
-				$objCombiner->add('plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS);
-				$objCombiner->add('plugins/mootools/mobile/mootools-mobile.js', MOOTOOLS);
-
-				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="plugins/mootools/core/' . MOOTOOLS . '/mootools.js"></script>' . "\n";
 			}
 		}
 
@@ -381,7 +375,7 @@ class PageRegular extends \Frontend
 			$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') .' rel="stylesheet" href="' . $protocol . 'fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
 		}
 
-		$objCombiner = new Combiner();
+		$objCombiner = new \Combiner();
 
 		// Skip the Contao framework style sheet
 		if (!$objLayout->skipFramework)
@@ -465,7 +459,7 @@ class PageRegular extends \Frontend
 				// Validate the file name
 				if (strpos($stylesheet, '..') !== false || strncmp($stylesheet, $GLOBALS['TL_CONFIG']['uploadPath'] . '/', strlen($GLOBALS['TL_CONFIG']['uploadPath']) + 1) !== 0)
 				{
-					throw new Exception("Invalid path $stylesheet");
+					throw new \Exception("Invalid path $stylesheet");
 				}
 
 				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
@@ -473,7 +467,7 @@ class PageRegular extends \Frontend
 				// Only .css files are allowed
 				if (substr($stylesheet, -4) != '.css')
 				{
-					throw new Exception("Invalid file extension $stylesheet");
+					throw new \Exception("Invalid file extension $stylesheet");
 				}
 
 				// Check whether the file exists
@@ -591,7 +585,7 @@ class PageRegular extends \Frontend
 			{
 				if ($strTemplate != '')
 				{
-					$objTemplate = new FrontendTemplate($strTemplate);
+					$objTemplate = new \FrontendTemplate($strTemplate);
 					$strScripts .= $objTemplate->parse();
 				}
 			}
@@ -615,7 +609,7 @@ class PageRegular extends \Frontend
 			{
 				if ($strTemplate != '')
 				{
-					$objTemplate = new FrontendTemplate($strTemplate);
+					$objTemplate = new \FrontendTemplate($strTemplate);
 					$strScripts .= $objTemplate->parse();
 				}
 			}
@@ -639,7 +633,7 @@ class PageRegular extends \Frontend
 		// Add the analytics script
 		if ($objLayout->analytics != '')
 		{
-			$objTemplate = new FrontendTemplate($objLayout->analytics);
+			$objTemplate = new \FrontendTemplate($objLayout->analytics);
 			$strScripts .= $objTemplate->parse();
 		}
 

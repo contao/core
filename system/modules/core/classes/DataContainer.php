@@ -335,10 +335,10 @@ class DataContainer extends \Backend
 					break;
 			}
 
-			$wizard .= ' <img src="plugins/mootools/datepicker/icon.gif" width="20" height="20" alt="" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px">
+			$wizard .= ' <img src="plugins/mootools/datepicker/' . DATEPICKER . '/icon.gif" width="20" height="20" alt="" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px">
   <script>
   window.addEvent("domready", function() {
-    new \Picker.Date($$("#ctrl_' . $objWidget->id . '"), {
+    new Picker.Date($$("#ctrl_' . $objWidget->id . '"), {
       draggable:false,
       toggle:$$("#toggle_' . $objWidget->id . '"),
       format:"' . $format . '",
@@ -358,10 +358,10 @@ class DataContainer extends \Backend
 			$wizard .= ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" id="moo_' . $this->strField . '"') . '
   <script>
   window.addEvent("domready", function() {
-    new \MooRainbow("moo_' . $this->strField . '", {
+    new MooRainbow("moo_' . $this->strField . '", {
       id:"ctrl_' . $this->strField . '_0",
       startColor:((cl = $("ctrl_' . $this->strField . '_0").value.hexToRgb(true)) ? cl : [255, 0, 0]),
-      imgPath:"plugins/mootools/colorpicker/images/",
+      imgPath:"plugins/mootools/colorpicker/'.COLORPICKER.'/images/",
       onComplete: function(color) {
         $("ctrl_' . $this->strField . '_0").value = color.hex.replace("#", "");
       }

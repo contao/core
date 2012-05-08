@@ -109,7 +109,7 @@ class ContentGallery extends \ContentElement
 			// Single files
 			if ($objFiles->type == 'file')
 			{
-				$objFile = new File($objFiles->path);
+				$objFile = new \File($objFiles->path);
 
 				if (!$objFile->isGdImage)
 				{
@@ -157,7 +157,7 @@ class ContentGallery extends \ContentElement
 						continue;
 					}
 
-					$objFile = new File($objSubfiles->path);
+					$objFile = new \File($objSubfiles->path);
 
 					if (!$objFile->isGdImage)
 					{
@@ -286,7 +286,7 @@ class ContentGallery extends \ContentElement
 			$offset = ($page - 1) * $this->perPage;
 			$limit = min($this->perPage + $offset, $total);
 
-			$objPagination = new Pagination($total, $this->perPage, 7, $id);
+			$objPagination = new \Pagination($total, $this->perPage, 7, $id);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -364,7 +364,7 @@ class ContentGallery extends \ContentElement
 			$strTemplate = $this->galleryTpl;
 		}
 
-		$objTemplate = new FrontendTemplate($strTemplate);
+		$objTemplate = new \FrontendTemplate($strTemplate);
 		$objTemplate->setData($this->arrData);
 
 		$objTemplate->body = $body;

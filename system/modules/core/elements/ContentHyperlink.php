@@ -64,10 +64,10 @@ class ContentHyperlink extends \ContentElement
 
 			if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 			{
-				$this->Template = new FrontendTemplate('ce_hyperlink_image');
+				$this->Template = new \FrontendTemplate('ce_hyperlink_image');
 				$this->Template->setData($this->arrData);
 
-				$objFile = new File($objModel->path);
+				$objFile = new \File($objModel->path);
 
 				if ($objFile->isGdImage)
 				{

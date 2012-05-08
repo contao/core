@@ -1,5 +1,5 @@
 
-<script src="<?php echo TL_PLUGINS_URL; ?>plugins/jQuery/core/<?php echo JQUERY; ?>/jquery-ui.js"></script>
+<script src="<?php echo TL_PLUGINS_URL; ?>plugins/jQuery/ui/<?php echo JQUERY_UI; ?>/jquery-ui.min.js"></script>
 <script>
 (function($) {
   $(document).ready(function() {

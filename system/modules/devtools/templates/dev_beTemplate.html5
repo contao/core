@@ -14,8 +14,7 @@
 <script><?php echo '<?php echo $this->getLocaleString(); ?>'; ?></script>
 <script src="<?php echo '<?php
   $objCombiner = new Combiner();
-  $objCombiner->add(\'plugins/mootools/core/\' . MOOTOOLS . \'/mootools-core.js\', MOOTOOLS);
-  $objCombiner->add(\'plugins/mootools/more/\' . MOOTOOLS . \'/mootools-more.js\', MOOTOOLS);
+  $objCombiner->add(\'plugins/mootools/core/\' . MOOTOOLS . \'/mootools.js\', MOOTOOLS);
   echo $objCombiner->getCombinedFile();
 ?>'; ?>"></script>
 <script><?php echo '<?php echo $this->getDateString(); ?>'; ?></script>

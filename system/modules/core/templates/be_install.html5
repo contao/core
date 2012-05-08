@@ -10,8 +10,7 @@
 <!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
 <?php echo $this->stylesheets; ?>
 <script><?php echo $this->getLocaleString(); ?></script>
-<script src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/core/<?php echo MOOTOOLS; ?>/mootools-core.js"></script>
-<script src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/more/<?php echo MOOTOOLS; ?>/mootools-more.js"></script>
+<script src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/core/<?php echo MOOTOOLS; ?>/mootools.js"></script>
 <script src="<?php echo TL_SCRIPT_URL; ?>plugins/mootools/stylect/js/stylect.js"></script>
 <script src="<?php echo TL_SCRIPT_URL; ?>plugins/mootools/mootao/Mootao.js"></script>
 <script src="<?php echo TL_SCRIPT_URL; ?>system/modules/core/html/contao.js"></script>
