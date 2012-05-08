@@ -163,7 +163,7 @@ class Session
 	 * 
 	 * @param array $arrData The session data
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $arrData is not an array
 	 */
 	public function setData($arrData)
 	{
@@ -181,7 +181,7 @@ class Session
 	 * 
 	 * @param mixed $varData The data object or array
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $varData is not an array or object
 	 */
 	public function appendData($varData)
 	{

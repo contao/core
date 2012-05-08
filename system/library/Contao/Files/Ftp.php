@@ -57,7 +57,7 @@ class Files_Ftp extends \Files
 	/**
 	 * Establish an FTP connection
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If an FTP connection cannot be established
 	 */
 	public function connect()
 	{

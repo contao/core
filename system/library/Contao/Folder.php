@@ -44,7 +44,7 @@ class Folder extends \System
 	 * 
 	 * @param string $strFolder The folder path
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $strFolder is not a folder
 	 */
 	public function __construct($strFolder)
 	{

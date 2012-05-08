@@ -61,7 +61,7 @@ abstract class Database
 	/**
 	 * Establish the database connection
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If a connection cannot be established
 	 */
 	protected function __construct()
 	{

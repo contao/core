@@ -63,7 +63,7 @@ abstract class Controller extends \System
 	 * 
 	 * @return string The path to the template file
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $strFormat is unknown
 	 */
 	public static function getTemplate($strTemplate, $strFormat='html5')
 	{

@@ -240,7 +240,7 @@ abstract class Files
 	/**
 	 * Validate a path (must not contain ../ fragments)
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If the given paths are not valid
 	 */
 	protected function validate()
 	{

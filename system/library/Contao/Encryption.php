@@ -142,7 +142,7 @@ class Encryption
 	/**
 	 * Initialize the encryption module
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If the encryption module cannot be initialized
 	 */
 	protected static function initialize()
 	{

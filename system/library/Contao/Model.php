@@ -256,7 +256,7 @@ abstract class Model extends \System
 	 * 
 	 * @return \Model|\Model_Collection The model or a model collection if there are multiple rows
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $strKey is not a related field
 	 */
 	public function getRelated($strKey)
 	{

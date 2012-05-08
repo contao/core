@@ -83,7 +83,7 @@ abstract class Database_Result
 	 * @param resource $resResult The database result
 	 * @param string   $strQuery  The query string
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $resResult is not a valid resource
 	 */
 	public function __construct($resResult, $strQuery)
 	{

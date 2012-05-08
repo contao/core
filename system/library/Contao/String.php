@@ -426,7 +426,7 @@ class String
 	 * 
 	 * @return string The converted string
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $strString cannot be parsed
 	 */
 	public static function parseSimpleTokens($strString, $arrData)
 	{

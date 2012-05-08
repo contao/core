@@ -89,7 +89,7 @@ class ZipReader
 	 * 
 	 * @param string $strFile The file path
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $strFile does not exist or cannot be opened
 	 */
 	public function __construct($strFile)
 	{
@@ -335,7 +335,7 @@ class ZipReader
 	 * 
 	 * @return string The file content
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If the current file is encrypted or not a compressed file
 	 */
 	public function unzip()
 	{
@@ -430,7 +430,7 @@ class ZipReader
 	 * 
 	 * @return array The files array
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If the central directory cannot be found
 	 */
 	protected function readCentralDirectory()
 	{

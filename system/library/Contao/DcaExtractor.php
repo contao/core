@@ -84,7 +84,7 @@ class DcaExtractor extends \Database_Installer
 	 * 
 	 * @param string $strTable The table name
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $strTable is empty
 	 */
 	public function __construct($strTable)
 	{
@@ -254,7 +254,7 @@ class DcaExtractor extends \Database_Installer
 	/**
 	 * Create the extract from the DCA or the database.sql files
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If the table information could not be loaded
 	 */
 	protected function createExtract()
 	{

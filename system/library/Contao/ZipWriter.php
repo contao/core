@@ -86,7 +86,7 @@ class ZipWriter extends \System
 	 * 
 	 * @param string $strFile The file path
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If the temporary file cannot be created or opened
 	 */
 	public function __construct($strFile)
 	{
@@ -130,7 +130,7 @@ class ZipWriter extends \System
 	 * @param string $strFile The file path
 	 * @param string $strName An optional file name
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $strFile does not exist
 	 */
 	public function addFile($strFile, $strName=null)
 	{

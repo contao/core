@@ -70,7 +70,7 @@ abstract class Database_Statement
 	 * @param resource $resConnection        The connection resource
 	 * @param boolean  $blnDisableAutocommit Optionally disable autocommitting
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $resConnection is not a valid resource
 	 */
 	public function __construct($resConnection, $blnDisableAutocommit=false)
 	{
@@ -130,7 +130,7 @@ abstract class Database_Statement
 	 * 
 	 * @return \Database_Statement The statement object
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $strQuery is empty
 	 */
 	public function prepare($strQuery)
 	{
@@ -296,7 +296,7 @@ abstract class Database_Statement
 	 * 
 	 * @return \Database_Result|\Database_Statement The result object or the statement object if there is no result set
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If the query cannot be executed
 	 */
 	public function query($strQuery='')
 	{
@@ -337,7 +337,7 @@ abstract class Database_Statement
 	 * 
 	 * @param array $arrValues The values array
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $arrValues has too few values to replace the wildcards in the query string
 	 */
 	protected function replaceWildcards($arrValues)
 	{

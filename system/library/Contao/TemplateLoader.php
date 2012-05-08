@@ -97,7 +97,7 @@ class TemplateLoader
 	 * 
 	 * @return string The path to the template file
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $template does not exist
 	 */
 	public static function getPath($template, $format, $custom='templates')
 	{

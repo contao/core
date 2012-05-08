@@ -209,7 +209,7 @@ class Date extends \System
 	 * 
 	 * @return string The regular expression string
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $strFormat is invalid
 	 */
 	public function getRegexp($strFormat=null)
 	{
@@ -257,7 +257,7 @@ class Date extends \System
 	 * 
 	 * @return string The input format string
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $strFormat is invalid
 	 */
 	public function getInputFormat($strFormat=null)
 	{
@@ -310,7 +310,7 @@ class Date extends \System
 	/**
 	 * Convert a date string into a Unix timestamp using the format string
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If the format string is invalid
 	 */
 	protected function dateToUnix()
 	{

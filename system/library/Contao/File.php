@@ -61,7 +61,7 @@ class File extends \System
 	 * 
 	 * @param string $strFile The file path
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $strFile is not writeable or not a file
 	 */
 	public function __construct($strFile)
 	{

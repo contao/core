@@ -69,7 +69,7 @@ class Combiner extends \System
 	 * @param string $strVersion An optional version number
 	 * @param string $strMedia   The media type of the file (.css only)
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $strFile is invalid
 	 */
 	public function add($strFile, $strVersion=null, $strMedia='screen')
 	{

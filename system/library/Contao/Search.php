@@ -276,7 +276,7 @@ class Search extends \System
 	 * 
 	 * @return \Database_Result The database result object
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If the cleaned keyword string is empty
 	 */
 	public static function searchFor($strKeywords, $blnOrSearch=false, $arrPid=array(), $intRows=0, $intOffset=0, $blnFuzzy=false)
 	{

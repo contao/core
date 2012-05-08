@@ -102,7 +102,7 @@ class Request
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $strKey is unknown
 	 */
 	public function __set($strKey, $varValue)
 	{

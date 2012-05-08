@@ -94,7 +94,7 @@ class Message
 	 * @param string $strMessage The message text
 	 * @param string $strType    The message type
 	 * 
-	 * @throws \Exception
+	 * @throws \Exception If $strType is not a valid message type
 	 */
 	public static function add($strMessage, $strType)
 	{
