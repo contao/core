@@ -139,7 +139,7 @@ class Combiner extends \System
 	/**
 	 * Add multiple files from an array
 	 * 
-	 * @param array  $arrFiles   An array of files to be added
+	 * @param Array  $arrFiles   An array of files to be added
 	 * @param string $strVersion An optional version number
 	 * @param string $strMedia   The media type of the file (.css only)
 	 */

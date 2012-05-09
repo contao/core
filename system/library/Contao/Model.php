@@ -179,7 +179,7 @@ abstract class Model extends \System
 	/**
 	 * Set the current record from an array
 	 * 
-	 * @param array $arrData The data record
+	 * @param Array $arrData The data record
 	 * 
 	 * @return \Model The model object
 	 */
@@ -226,7 +226,7 @@ abstract class Model extends \System
 	/**
 	 * Modify the current row before it is stored in the database
 	 * 
-	 * @param array $arrSet The data array
+	 * @param Array $arrSet The data array
 	 * 
 	 * @return array The modified data array
 	 */
@@ -297,7 +297,7 @@ abstract class Model extends \System
 	 * Find a single record by its primary key
 	 * 
 	 * @param mixed $varValue   The property value
-	 * @param array $arrOptions An optional options array
+	 * @param Array $arrOptions An optional options array
 	 * 
 	 * @return \Model|null The model or null if the result is empty
 	 */
@@ -318,7 +318,7 @@ abstract class Model extends \System
 	 * Find a single record by its ID or alias
 	 * 
 	 * @param mixed $varId      The ID or alias
-	 * @param array $arrOptions An optional options array
+	 * @param Array $arrOptions An optional options array
 	 * 
 	 * @return \Model|null The model or null if the result is empty
 	 */
@@ -342,7 +342,7 @@ abstract class Model extends \System
 	 * 
 	 * @param mixed $strColumn  The property name
 	 * @param mixed $varValue   The property value
-	 * @param array $arrOptions An optional options array
+	 * @param Array $arrOptions An optional options array
 	 * 
 	 * @return \Model|null The model or null if the result is empty
 	 */
@@ -364,7 +364,7 @@ abstract class Model extends \System
 	 * 
 	 * @param mixed $strColumn  The property name
 	 * @param mixed $varValue   The property value
-	 * @param array $arrOptions An optional options array
+	 * @param Array $arrOptions An optional options array
 	 * 
 	 * @return \Model_Collection|null The model collection or null if the result is empty
 	 */
@@ -383,7 +383,7 @@ abstract class Model extends \System
 	/**
 	 * Find all records
 	 * 
-	 * @param array $arrOptions An optional options array
+	 * @param Array $arrOptions An optional options array
 	 * 
 	 * @return \Model_Collection|null The model collection or null if the result is empty
 	 */
@@ -419,7 +419,7 @@ abstract class Model extends \System
 	/**
 	 * Find records and return the model or model collection
 	 * 
-	 * @param array $arrOptions The options array
+	 * @param Array $arrOptions The options array
 	 * 
 	 * @return \Model|\Model_Collection|null A model, model collection or null if the result is empty
 	 */

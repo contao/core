@@ -2035,7 +2035,7 @@ abstract class Controller extends \System
 	/**
 	 * Generate an URL depending on the current rewriteURL setting
 	 * 
-	 * @param array  $arrRow       An array of page parameters
+	 * @param Array  $arrRow       An array of page parameters
 	 * @param string $strParams    An optional string of URL parameters
 	 * @param string $strForceLang Force a certain language
 	 * 

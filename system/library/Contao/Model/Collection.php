@@ -148,7 +148,7 @@ class Model_Collection extends \System
 	/**
 	 * Set the current row from an array
 	 * 
-	 * @param array $arrData The row data as array
+	 * @param Array $arrData The row data as array
 	 * 
 	 * @return \Model_Collection The model collection object
 	 */
