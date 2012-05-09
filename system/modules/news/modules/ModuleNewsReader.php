@@ -16,6 +16,7 @@
  */
 namespace Contao;
 
+
 /**
  * Class ModuleNewsReader
  *

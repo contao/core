@@ -16,6 +16,7 @@
  */
 namespace Contao;
 
+
 /**
  * Include SimplePie classes
  */
