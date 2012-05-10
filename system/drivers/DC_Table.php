@@ -3742,7 +3742,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 			if (!$this->User->isAdmin)
 			{
-				$this->procedure[] = $this->strTable . '.pid=?';
+				$this->procedure[] = 'pid=?';
 				$this->values[] = $this->User->id;
 			}
 		}
