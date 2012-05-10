@@ -3809,9 +3809,12 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				}
 			}
 
-			if ($join) {
+			if ($join)
+			{
 				$query .= " ORDER BY " . $joinOrderBy . ', ' . $this->strTable . '.' . implode(', ' . $this->strTable . '.', $orderBy);
-			} else {
+			}
+			else
+			{
 				$query .= " ORDER BY " . implode(', ', $orderBy);
 			}
 		}
