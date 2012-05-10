@@ -3747,17 +3747,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			}
 		}
 
-		// Join parent table and sort by it
-		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 3)
-		{
-			$firstOrderBy = 'pid';
-			
-			$query = "SELECT " . $this->strTable . ".* FROM " . $this->strTable . " INNER JOIN " . $this->ptable . " ON " . $this->ptable . ".id=" . $this->strTable . ".pid";
-		}
-		else
-		{
-			$query = "SELECT * FROM " . $this->strTable;
-		}
+		$query = "SELECT * FROM " . $this->strTable;
 
 		if (!empty($this->procedure))
 		{
@@ -3799,9 +3789,20 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 			if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 3)
 			{
+				$firstOrderBy = 'pid';
 				$showFields = $GLOBALS['TL_DCA'][$table]['list']['label']['fields'];
+
+				$query .= " ORDER BY (SELECT " . $showFields[0] . " FROM " . $this->ptable . " WHERE " . $this->ptable . ".id=" . $this->strTable . ".pid), " . implode(', ', $orderBy);
 				
-				$query .= " ORDER BY " . $this->ptable . "." . $showFields[0] . ", " . $this->strTable . "." . implode(', ' . $this->strTable . '.', $orderBy);
+				// Set the foreignKey so that the label is translated (also for backwards compatibility)
+				if ($GLOBALS['TL_DCA'][$table]['fields']['pid']['foreignKey'] == '')
+				{
+					$GLOBALS['TL_DCA'][$table]['fields']['pid']['foreignKey'] = $this->ptable . '.' . $showFields[0];
+				}
+				
+				// Remove the parent field from label fields
+				array_shift($showFields);
+				$GLOBALS['TL_DCA'][$table]['list']['label']['fields'] = $showFields;
 			}
 			else
 			{
