@@ -3748,7 +3748,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		}
 
 		// Join parent table and sort by it
-		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 3 && $this->Database->fieldExists('pid', $this->strTable))
+		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 3)
 		{
 			$showFields = $GLOBALS['TL_DCA'][$table]['list']['label']['fields'];
 
