@@ -153,11 +153,6 @@ Moved the changelog file into a protected subdirectory (see #4049).
 Added a much better page picker which opens in a modal window and shows the site
 structure instead of just a drop-down menu.
 
-### New
-Added a "redirect if mobile device" setting to website root pages to forward
-visitors using a mobile device to another website root page. We recommend to
-use the sub-domains "www.domain.tld" and "m.domain.tld".
-
 ### Improved
 Show a confirmation screen if an invalid URL has been detected instead of the
 default error screen, so deep linking in the back end remains possible.

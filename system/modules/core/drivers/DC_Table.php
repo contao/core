@@ -2955,8 +2955,16 @@ window.addEvent(\'domready\', function() {
 		{
 			$for = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 6) ? 'pid' : 'id';
 
-			$objRoot = $this->Database->prepare("SELECT $for FROM {$this->strTable} WHERE CAST(".$session['search'][$this->strTable]['field']." AS CHAR) REGEXP ?")
-									  ->execute($session['search'][$this->strTable]['value']);
+			if ($session['search'][$this->strTable]['field'] == 'id')
+			{
+				$objRoot = $this->Database->prepare("SELECT $for FROM {$this->strTable} WHERE id=?")
+										  ->execute($session['search'][$this->strTable]['value']);
+			}
+			else
+			{
+				$objRoot = $this->Database->prepare("SELECT $for FROM {$this->strTable} WHERE CAST(".$session['search'][$this->strTable]['field']." AS CHAR) REGEXP ?")
+										  ->execute($session['search'][$this->strTable]['value']);
+			}
 
 			if ($objRoot->numRows < 1)
 			{

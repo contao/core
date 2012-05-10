@@ -123,6 +123,12 @@ class PurgeData extends \Backend implements \executable
 			// Get the current folder size
 			foreach ($config['affected'] as $folder)
 			{
+				// Create the folder if it does not yet exist
+				if (!is_dir(TL_ROOT . '/' . $folder))
+				{
+					Files::getInstance()->mkdir($folder);
+				}
+
 				// Has subfolders
 				if ($folder == 'assets/images' || $folder == 'system/cache/html' || $folder == 'system/cache/language')
 				{
@@ -134,7 +140,6 @@ class PurgeData extends \Backend implements \executable
 						{
 							$total += count(scan(TL_ROOT . '/' . $folder . '/' . $dir));
 						}
-
 					}
 
 					// Do not count the index.html files in the images subfolders
@@ -142,8 +147,6 @@ class PurgeData extends \Backend implements \executable
 					{
 						$total -= 16;
 					}
-
-					$arrJobs[$key]['affected'] .= '<br>' . $folder . ': <span>' . sprintf($GLOBALS['TL_LANG']['MSC']['files'], $total) . '</span>';
 				}
 				else
 				{
@@ -154,9 +157,9 @@ class PurgeData extends \Backend implements \executable
 					{
 						$total -= 1;
 					}
-
-					$arrJobs[$key]['affected'] .= '<br>' . $folder . ': <span>' . sprintf($GLOBALS['TL_LANG']['MSC']['files'], $total) . '</span>';
 				}
+
+				$arrJobs[$key]['affected'] .= '<br>' . $folder . ': <span>' . sprintf($GLOBALS['TL_LANG']['MSC']['files'], $total) . '</span>';
 			}
 		}
 
