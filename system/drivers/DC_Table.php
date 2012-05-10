@@ -3750,26 +3750,14 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		// Join parent table and sort by it
 		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 3)
 		{
-			$showFields = $GLOBALS['TL_DCA'][$table]['list']['label']['fields'];
-
-			// select table fields
-			$select = $this->strTable . '.*';
-			// select parent label as pid
-			$select .= ',' . $this->ptable . '.' . $showFields[0] . ' AS pid';
-
-			$join        = ' INNER JOIN ' . $this->ptable . ' ON ' . $this->ptable . '.id=' . $this->strTable . '.pid';
-			$joinOrderBy = $this->ptable . '.' . $showFields[0];
-
 			$firstOrderBy = 'pid';
+			
+			$query = "SELECT " . $this->strTable . ".* FROM " . $this->strTable . " INNER JOIN " . $this->ptable . " ON " . $this->ptable . ".id=" . $this->strTable . ".pid";
 		}
 		else
 		{
-			$select      = '*';
-			$join        = '';
-			$joinOrderBy = '';
+			$query = "SELECT * FROM " . $this->strTable;
 		}
-
-		$query = "SELECT " . $select . " FROM " . $this->strTable . $join;
 
 		if (!empty($this->procedure))
 		{
@@ -3809,9 +3797,11 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				}
 			}
 
-			if ($join)
+			if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 3)
 			{
-				$query .= " ORDER BY " . $joinOrderBy . ', ' . $this->strTable . '.' . implode(', ' . $this->strTable . '.', $orderBy);
+				$showFields = $GLOBALS['TL_DCA'][$table]['list']['label']['fields'];
+				
+				$query .= " ORDER BY " . $this->ptable . "." . $showFields[0] . ", " . $this->strTable . "." . implode(', ' . $this->strTable . '.', $orderBy);
 			}
 			else
 			{
