@@ -3793,6 +3793,11 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				$showFields = $GLOBALS['TL_DCA'][$table]['list']['label']['fields'];
 				
 				$query .= " ORDER BY (SELECT " . $showFields[0] . " FROM " . $this->ptable . " WHERE " . $this->ptable . ".id=" . $this->strTable . ".pid), " . implode(', ', $orderBy);
+				
+				// Set the foreignKey so that the label is translated (also for backwards compatibility)
+				if ($GLOBALS['TL_DCA'][$table]['fields']['pid']['foreignKey'] == '')
+				{
+					$GLOBALS['TL_DCA'][$table]['fields']['pid']['foreignKey'] = $this->ptable . '.' . $showFields[0];
 			}
 			else
 			{
