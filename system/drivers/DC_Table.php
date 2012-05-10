@@ -3747,7 +3747,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			}
 		}
 
-			$query = "SELECT * FROM " . $this->strTable;
+		$query = "SELECT * FROM " . $this->strTable;
 
 		if (!empty($this->procedure))
 		{
@@ -3791,13 +3791,18 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			{
 				$firstOrderBy = 'pid';
 				$showFields = $GLOBALS['TL_DCA'][$table]['list']['label']['fields'];
-				
+
 				$query .= " ORDER BY (SELECT " . $showFields[0] . " FROM " . $this->ptable . " WHERE " . $this->ptable . ".id=" . $this->strTable . ".pid), " . implode(', ', $orderBy);
 				
 				// Set the foreignKey so that the label is translated (also for backwards compatibility)
 				if ($GLOBALS['TL_DCA'][$table]['fields']['pid']['foreignKey'] == '')
 				{
 					$GLOBALS['TL_DCA'][$table]['fields']['pid']['foreignKey'] = $this->ptable . '.' . $showFields[0];
+				}
+				
+				// Remove the parent field from label fields
+				array_shift($showFields);
+				$GLOBALS['TL_DCA'][$table]['list']['label']['fields'] = $showFields;
 			}
 			else
 			{
