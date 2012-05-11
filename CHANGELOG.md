@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.4 (XXXX-XX-XX)
+---------------------------
+
+### Fixed
+Correctly align stylect menus in Safari and Opera (see #4284).
+
+
 Version 2.11.3 (2012-05-04)
 ---------------------------
 

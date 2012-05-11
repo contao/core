@@ -55,13 +55,22 @@ var Stylect =
 
 			// Create the div element
 			var div = new Element('div', {
-				'id': el.get('id') + '_styled',
 				'class': 'styled_select',
 				'html': '<span>' + label + '</span><b><i></i></b>',
 				'styles': {
 					'width': tw - ((Browser.safari || Browser.chrome) ? 6 : 8)
 				}
 			}).inject(el, 'before');
+
+			// Mark disabled elements
+			if (el.disabled) {
+				div.addClass('disabled');
+			}
+
+			// Fix right-aligned elements (e.g. Safari and Opera)
+			if (div.getPosition().x != el.getPosition().x) {
+				div.position({ relativeTo:el, ignoreMargins:true }).setStyle('top', 0);
+			}
 
 			// Mark active elements
 			if (el.hasClass('active')) {
@@ -80,16 +89,18 @@ var Stylect =
 				div.removeClass('focused');
 			}).setStyle('opacity', 0);
 
+			Browser.webkit = (Browser.chrome || Browser.safari || navigator.userAgent.match(/(?:webkit|khtml)/i));
+
 			// Browser-specific adjustments
-			if (Browser.Engine.webkit) {
+			if (Browser.webkit) {
 				el.setStyle('margin-bottom', '4px');
 			}
-			if (Browser.Engine.webkit || Browser.Engine.trident) {
+			if (Browser.webkit || Browser.ie) {
 				div.setStyle('width', div.getStyle('width').toInt()-4);
 			}
 		});
 	}
-}
+};
 
 window.addEvent('domready', function() {
 	Stylect.convertSelects();
