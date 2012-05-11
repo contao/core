@@ -1322,11 +1322,11 @@ class tl_content extends Backend
 				break;
 
 			case 'XHTML':
-				$syntax = 'html';
+				$syntax = 'htmlmixed';
 				break;
 
 			case 'JavaScript':
-				$syntax = 'js';
+				$syntax = 'javascript';
 				break;
 
 			case 'PHP':

@@ -83,7 +83,7 @@ abstract class Hybrid extends \Frontend
 		// Load the model
 		if ($this->classFileExists($strModelClass))
 		{
-			$objHybrid = $str\ModelClass::findByPk($objElement->{$this->strKey});
+			$objHybrid = $strModelClass::findByPk($objElement->{$this->strKey});
 
 			if ($objHybrid === null)
 			{
