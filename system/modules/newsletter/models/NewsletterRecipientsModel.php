@@ -20,7 +20,7 @@ namespace Contao;
 /**
  * Reads and writes newsletter recipients
  * 
- * @package   Newsletter
+ * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */

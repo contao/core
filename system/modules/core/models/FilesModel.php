@@ -23,7 +23,7 @@ namespace Contao;
  * The files themselves reside in the files directory. This class only handles
  * the corresponding database entries (database aided file system).
  * 
- * @package   Core
+ * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */

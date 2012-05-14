@@ -23,7 +23,7 @@ namespace Contao;
  * The class reads from and writes to the style sheet table. It does not create
  * .css files on the hard disk. This is done by the StyleSheet class.
  * 
- * @package   Core
+ * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
