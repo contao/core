@@ -49,7 +49,7 @@ class Environment
 	 * 
 	 * @param string $strKey The variable name
 	 * 
-	 * @return string The variable value
+	 * @return mixed The variable value
 	 */
 	public static function get($strKey)
 	{
