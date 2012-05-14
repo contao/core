@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class SessionModel
- *
- * Provide methods to find and save sessions.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Core
+ * Reads and writes sessions
+ * 
+ * @package   Core
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class SessionModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_session';
@@ -37,9 +36,11 @@ class SessionModel extends \Model
 
 	/**
 	 * Find a session by its hash and name
-	 * @param string
-	 * @param string
-	 * @return \Model|null
+	 * 
+	 * @param string $strHash The session hash
+	 * @param string $strName The session name
+	 * 
+	 * @return \Model|null The model or null if there is no session
 	 */
 	public static function findByHashAndName($strHash, $strName)
 	{

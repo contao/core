@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class StyleModel
- *
- * Provide methods to find and save format definitions.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Core
+ * Reads and writes format definitions
+ * 
+ * @package   Core
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class StyleModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_style';

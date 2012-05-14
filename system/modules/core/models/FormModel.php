@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class FormModel
- *
- * Provide methods to find and save forms.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Core
+ * Reads and writes forms
+ * 
+ * @package   Core
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class FormModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_form';
@@ -37,7 +36,8 @@ class FormModel extends \Model
 
 	/**
 	 * Get the maximum file size that is allowed for file uploads
-	 * @return integer
+	 * 
+	 * @return integer The maximum file size in bytes
 	 */
 	public function getMaxUploadFileSize()
 	{

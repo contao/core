@@ -96,7 +96,7 @@ class ModuleEventReader extends \Events
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
 		// Get the current event
-		$objEvent = \CalendarEventsModel::findPublishedByParentAndIdOrAlias((is_numeric(\Input::get('events')) ? \Input::get('events') : 0), \Input::get('events'), $this->cal_calendar);
+		$objEvent = \CalendarEventsModel::findPublishedByParentAndIdOrAlias(\Input::get('events'), $this->cal_calendar);
 
 		if ($objEvent === null)
 		{

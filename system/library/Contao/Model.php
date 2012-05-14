@@ -244,8 +244,8 @@ abstract class Model extends \System
 	public function delete()
 	{
 		return \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-									  ->execute($this->{static::$strPk})
-									  ->affectedRows;
+									   ->execute($this->{static::$strPk})
+									   ->affectedRows;
 	}
 
 
@@ -418,6 +418,15 @@ abstract class Model extends \System
 
 	/**
 	 * Find records and return the model or model collection
+	 * 
+	 * Supported options:
+	 * 
+	 * * column: the field name
+	 * * value:  the field value
+	 * * limit:  the maximum number of rows
+	 * * offset: the number of rows to skip
+	 * * order:  the sorting order
+	 * * eager:  load all related records eagerly
 	 * 
 	 * @param Array $arrOptions The options array
 	 * 

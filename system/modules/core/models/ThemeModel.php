@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class ThemeModel
- *
- * Provide methods to find and save themes.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Core
+ * Reads and writes themes
+ * 
+ * @package   Core
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class ThemeModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_theme';

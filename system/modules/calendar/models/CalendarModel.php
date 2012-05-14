@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class CalendarModel
- *
- * Provide methods to find and save calendars.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Calendar
+ * Reads and writes calendars
+ * 
+ * @package   Calendar
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class CalendarModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_calendar';
@@ -37,8 +36,10 @@ class CalendarModel extends \Model
 
 	/**
 	 * Find multiple calendars by their IDs
-	 * @param array
-	 * @return \Model_Collection|null
+	 * 
+	 * @param array $arrIds An array of IDs
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no calendars
 	 */
 	public static function findMultipleByIds($arrIds)
 	{

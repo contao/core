@@ -95,7 +95,7 @@ class ModuleNewsletterReader extends \Module
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$objNewsletter = \NewsletterModel::findSentByParentAndIdOrAlias((is_numeric(\Input::get('items')) ? \Input::get('items') : 0), \Input::get('items'), $this->nl_channels);
+		$objNewsletter = \NewsletterModel::findSentByParentAndIdOrAlias(\Input::get('items'), $this->nl_channels);
 
 		if ($objNewsletter === null)
 		{

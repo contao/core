@@ -93,7 +93,7 @@ class ModuleFaqReader extends \Module
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->referer = 'javascript:history.go(-1)';
 
-		$objFaq = \FaqModel::findPublishedByParentAndIdOrAlias((is_numeric(\Input::get('items')) ? \Input::get('items') : 0), \Input::get('items'), $this->faq_categories);
+		$objFaq = \FaqModel::findPublishedByParentAndIdOrAlias(\Input::get('items'), $this->faq_categories);
 
 		if ($objFaq === null)
 		{

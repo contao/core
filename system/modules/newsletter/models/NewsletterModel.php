@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class NewsletterModel
- *
- * Provide methods to find and save newsletters.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Newsletter
+ * Reads and writes newsletters
+ * 
+ * @package   Newsletter
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class NewsletterModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_newsletter';
@@ -37,12 +36,13 @@ class NewsletterModel extends \Model
 
 	/**
 	 * Find sent newsletters by their parent IDs and their ID or alias
-	 * @param integer
-	 * @param string
-	 * @param array
-	 * @return \Model_Collection|null
+	 * 
+	 * @param integer $varId   The numeric ID or alias name
+	 * @param array   $arrPids An array of newsletter channel IDs
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no sent newsletters
 	 */
-	public static function findSentByParentAndIdOrAlias($intId, $varAlias, $arrPids)
+	public static function findSentByParentAndIdOrAlias($varId, $arrPids)
 	{
 		if (!is_array($arrPids) || empty($arrPids))
 		{
@@ -57,14 +57,16 @@ class NewsletterModel extends \Model
 			$arrColumns[] = "$t.sent=1";
 		}
 
-		return static::findBy($arrColumns, array($intId, $varAlias));
+		return static::findBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId));
 	}
 
 
 	/**
 	 * Find sent newsletters by their parent ID
-	 * @param integer
-	 * @return \Model_Collection|null
+	 * 
+	 * @param integer $intPid The newsletter channel ID
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no sent newsletters
 	 */
 	public static function findSentByPid($intPid)
 	{
@@ -82,8 +84,10 @@ class NewsletterModel extends \Model
 
 	/**
 	 * Find sent newsletters by multiple parent IDs
-	 * @param array
-	 * @return \Model_Collection|null
+	 * 
+	 * @param array $arrPids An array of newsletter channel IDs
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no sent newsletters
 	 */
 	public static function findSentByPids($arrPids)
 	{

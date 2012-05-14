@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class PageModel
- *
- * Provide methods to find and save pages.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Core
+ * Reads and writes pages
+ * 
+ * @package   Core
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class PageModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_page';
@@ -37,8 +36,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find a published page by its ID
-	 * @param mixed
-	 * @return \Model|null
+	 * 
+	 * @param integer $intId The page ID
+	 * 
+	 * @return \Model|null The model or null if there is no published page
 	 */
 	public static function findPublishedById($intId)
 	{
@@ -57,9 +58,11 @@ class PageModel extends \Model
 
 	/**
 	 * Find the first published root page by its host name and language
-	 * @param string
-	 * @param mixed
-	 * @return \Model|null
+	 * 
+	 * @param string $strHost     The host name
+	 * @param mixed  $varLanguage An ISO language code or an array of ISO language codes
+	 * 
+	 * @return \Model|null The model or null if there is no matching root page
 	 */
 	public static function findFirstPublishedRootByHostAndLanguage($strHost, $varLanguage)
 	{
@@ -109,8 +112,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find the first published page by its parent ID
-	 * @param integer
-	 * @return \Model|null
+	 * 
+	 * @param integer $intPid The parent page's ID
+	 * 
+	 * @return \Model|null The model or null if there is no published page
 	 */
 	public static function findFirstPublishedByPid($intPid)
 	{
@@ -129,8 +134,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find the first published regular page by its parent ID
-	 * @param integer
-	 * @return \Model|null
+	 * 
+	 * @param integer $intPid The parent page's ID
+	 * 
+	 * @return \Model|null The model or null if there is no published regular page
 	 */
 	public static function findFirstPublishedRegularByPid($intPid)
 	{
@@ -149,8 +156,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find an error 403 page by its parent ID
-	 * @param integer
-	 * @return \Model|null
+	 * 
+	 * @param integer $intPid The parent page's ID
+	 * 
+	 * @return \Model|null The model or null if there is no 403 page
 	 */
 	public static function find403ByPid($intPid)
 	{
@@ -169,8 +178,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find an error 404 page by its parent ID
-	 * @param integer
-	 * @return \Model|null
+	 * 
+	 * @param integer $intPid The parent page's ID
+	 * 
+	 * @return \Model|null The model or null if there is no 404 page
 	 */
 	public static function find404ByPid($intPid)
 	{
@@ -189,8 +200,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find a page matching a list of possible alias names
-	 * @param array
-	 * @return \Model|null
+	 * 
+	 * @param array $arrAliases An array of possible alias names
+	 * 
+	 * @return \Model|null The model or null if there is no matching page
 	 */
 	public static function findByAliases($arrAliases)
 	{
@@ -218,9 +231,11 @@ class PageModel extends \Model
 
 
 	/**
-	 * Find published pages by their IDs or aliases
-	 * @param mixed
-	 * @return \Model_Collection|null
+	 * Find published pages by their ID or aliases
+	 * 
+	 * @param mixed $varId The numeric ID or the alias name
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedByIdOrAlias($varId)
 	{
@@ -239,12 +254,13 @@ class PageModel extends \Model
 
 
 	/**
-	 * Find all published subpages by their parent ID and exclude pages
-	 * which are only visible for guests
-	 * @param integer
-	 * @param boolean
-	 * @param boolean
-	 * @return \Model_Collection|null
+	 * Find all published subpages by their parent ID and exclude pages only visible for guests
+	 * 
+	 * @param integer $intPid        The parent page's ID
+	 * @param boolean $blnShowHidden If true, hidden pages will be included
+	 * @param boolean $blnIsSitemap  If true, the sitemap settings apply
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedSubpagesWithoutGuestsByPid($intPid, $blnShowHidden=false, $blnIsSitemap=false)
 	{
@@ -263,10 +279,11 @@ class PageModel extends \Model
 
 
 	/**
-	 * Find all published regular pages by their IDs and exclude pages
-	 * which are only visible for guests
-	 * @param integer
-	 * @return \Model_Collection|null
+	 * Find all published regular pages by their IDs and exclude pages only visible for guests
+	 * 
+	 * @param integer $arrIds An array of page IDs
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedRegularWithoutGuestsByIds($arrIds)
 	{
@@ -294,12 +311,13 @@ class PageModel extends \Model
 
 
 	/**
-	 * Find all published regular pages by their parent IDs and exclude
-	 * pages which are only visible for guests
-	 * @param integer
-	 * @return \Model_Collection|null
+	 * Find all published regular pages by their parent IDs and exclude pages only visible for guests
+	 * 
+	 * @param integer $intPid The parent page's ID
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no pages
 	 */
-	public static function findPublishedRegularWithoutGuestsByPid($intId)
+	public static function findPublishedRegularWithoutGuestsByPid($intPid)
 	{
 		$t = static::$strTable;
 		$arrColumns = array("$t.pid=? AND $t.type!='root' AND $t.type!='error_403' AND $t.type!='error_404'");
@@ -315,14 +333,16 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findBy($arrColumns, $intId, array('order'=>"$t.sorting"));
+		return static::findBy($arrColumns, $intPid, array('order'=>"$t.sorting"));
 	}
 
 
 	/**
-	 * Find the parent records of a record
-	 * @param integer
-	 * @return \Model_Collection|null
+	 * Find the parent pages of a page
+	 * 
+	 * @param integer $intId The page's ID
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no parent pages
 	 */
 	public static function findParentsById($intId)
 	{

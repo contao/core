@@ -18,18 +18,20 @@ namespace Contao;
 
 
 /**
- * Class StyleSheetModel
- *
- * Provide methods to find and save style sheets.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Core
+ * Reads and writes style sheets
+ * 
+ * The class reads from and writes to the style sheet table. It does not create
+ * .css files on the hard disk. This is done by the StyleSheet class.
+ * 
+ * @package   Core
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class StyleSheetModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_style_sheet';
@@ -37,8 +39,10 @@ class StyleSheetModel extends \Model
 
 	/**
 	 * Find multiple style sheets by their IDs
-	 * @param array
-	 * @return \Model_Collection|null
+	 * 
+	 * @param array $arrIds An array of style sheet IDs
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no style sheets
 	 */
 	public static function findByIds($arrIds)
 	{

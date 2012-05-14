@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class CommentsModel
- *
- * Provide methods to find and save comments.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Comments
+ * Reads and writes comments
+ * 
+ * @package   Comments
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class CommentsModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_comments';
@@ -37,14 +36,16 @@ class CommentsModel extends \Model
 
 	/**
 	 * Find published comments by their source table and parent ID
-	 * @param string
-	 * @param integer
-	 * @param boolean
-	 * @param integer
-	 * @param integer
-	 * @return \Model_Collection|null
+	 * 
+	 * @param string  $strSource The source element
+	 * @param integer $intParent The parent ID
+	 * @param boolean $blnDesc   If true, comments will be sorted descending
+	 * @param integer $intLimit  An optional limit
+	 * @param integer $intOffset An optional offset
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no comments
 	 */
-	public static function findPublishedBySourceAndParent($strSource, $intParent, $lbnDesc=false, $intLimit=0, $intOffset=0)
+	public static function findPublishedBySourceAndParent($strSource, $intParent, $blnDesc=false, $intLimit=0, $intOffset=0)
 	{
 		$t = static::$strTable;
 		$arrColumns = array("$t.source=? AND $t.parent=?");
@@ -56,7 +57,7 @@ class CommentsModel extends \Model
 
 		$arrOptions = array
 		(
-			'order'  => ($lbnDesc ? "$t.date DESC" : "$t.date"),
+			'order'  => ($blnDesc ? "$t.date DESC" : "$t.date"),
 			'limit'  => $intLimit,
 			'offset' => $intOffset
 		);
@@ -67,9 +68,11 @@ class CommentsModel extends \Model
 
 	/**
 	 * Count published comments by their source table and parent ID
-	 * @param string
-	 * @param integer
-	 * @return integer
+	 * 
+	 * @param string  $strSource The source element
+	 * @param integer $intParent The parent ID
+	 * 
+	 * @return integer The number of comments
 	 */
 	public static function countPublishedBySourceAndParent($strSource, $intParent)
 	{

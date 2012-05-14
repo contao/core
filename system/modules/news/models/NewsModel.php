@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class NewsModel
- *
- * Provide methods to find and save news items.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    News
+ * Reads and writes news
+ * 
+ * @package   News
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class NewsModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_news';
@@ -37,12 +36,13 @@ class NewsModel extends \Model
 
 	/**
 	 * Find published news items by their parent ID and ID or alias
-	 * @param integer
-	 * @param string
-	 * @param array
-	 * @return \Model|null
+	 * 
+	 * @param mixed $varId   The numeric ID or alias name
+	 * @param array $arrPids An array of parent IDs
+	 * 
+	 * @return \Model|null The NewsModel or null if there are no news
 	 */
-	public static function findPublishedByParentAndIdOrAlias($intId, $varAlias, $arrPids)
+	public static function findPublishedByParentAndIdOrAlias($varId, $arrPids)
 	{
 		if (!is_array($arrPids) || empty($arrPids))
 		{
@@ -58,17 +58,19 @@ class NewsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findBy($arrColumns, array($intId, $varAlias));
+		return static::findBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId));
 	}
 
 
 	/**
 	 * Find published news items by their parent ID
-	 * @param array
-	 * @param boolean
-	 * @param integer
-	 * @param integer
-	 * @return \Model_Collection|null
+	 * 
+	 * @param array   $arrPids     An array of news archive IDs
+	 * @param boolean $blnFeatured If true, return only featured news, if false, return only unfeatured news
+	 * @param integer $intLimit    An optional limit
+	 * @param integer $intOffset   An optional offset
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no news
 	 */
 	public static function findPublishedByPids($arrPids, $blnFeatured=null, $intLimit=0, $intOffset=0)
 	{
@@ -108,9 +110,11 @@ class NewsModel extends \Model
 
 	/**
 	 * Count published news items by their parent ID
-	 * @param array
-	 * @param boolean
-	 * @return integer
+	 * 
+	 * @param array   $arrPids     An array of news archive IDs
+	 * @param boolean $blnFeatured If true, return only featured news, if false, return only unfeatured news
+	 * 
+	 * @return integer The number of news items
 	 */
 	public static function countPublishedByPids($arrPids, $blnFeatured=null)
 	{
@@ -143,8 +147,10 @@ class NewsModel extends \Model
 
 	/**
 	 * Find published news items with the default redirect target by their parent ID
-	 * @param integer
-	 * @return \Model_Collection|null
+	 * 
+	 * @param integer $intPid The news archive ID
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no news
 	 */
 	public static function findPublishedDefaultByPid($intPid)
 	{
@@ -163,9 +169,11 @@ class NewsModel extends \Model
 
 	/**
 	 * Find published news items by their parent ID
-	 * @param integer
-	 * @param integer
-	 * @return \Model_Collection|null
+	 * 
+	 * @param integer $intId    The news archive ID
+	 * @param integer $intLimit An optional limit
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no news
 	 */
 	public static function findPublishedByPid($intId, $intLimit=0)
 	{
@@ -187,12 +195,14 @@ class NewsModel extends \Model
 
 	/**
 	 * Find all published news items of a certain period of time by their parent ID
-	 * @param integer
-	 * @param integer
-	 * @param array
-	 * @param integer
-	 * @param integer
-	 * @return \Model_Collection|null
+	 * 
+	 * @param integer $intFrom   The start date as Unix timestamp
+	 * @param integer $intTo     The end date as Unix timestamp
+	 * @param array   $arrPids   An array of news archive IDs
+	 * @param integer $intLimit  An optional limit
+	 * @param integer $intOffset An optional offset
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no news
 	 */
 	public static function findPublishedFromToByPids($intFrom, $intTo, $arrPids, $intLimit=0, $intOffset=0)
 	{
@@ -223,10 +233,12 @@ class NewsModel extends \Model
 
 	/**
 	 * Count all published news items of a certain period of time by their parent ID
-	 * @param integer
-	 * @param integer
-	 * @param array
-	 * @return integer
+	 * 
+	 * @param integer $intFrom The start date as Unix timestamp
+	 * @param integer $intTo   The end date as Unix timestamp
+	 * @param array   $arrPids An array of news archive IDs
+	 * 
+	 * @return integer The number of news items
 	 */
 	public static function countPublishedFromToByPids($intFrom, $intTo, $arrPids)
 	{

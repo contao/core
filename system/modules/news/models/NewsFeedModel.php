@@ -18,27 +18,28 @@ namespace Contao;
 
 
 /**
- * Class NewsFeedModel
- *
- * Provide methods to find and save news feeds.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    News
+ * Reads and writes news feeds
+ * 
+ * @package   News
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class NewsFeedModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_news_feed';
 
 
 	/**
-	 * Find all feeds which include a certain archive
-	 * @param integer
-	 * @return \Model_Collection|null
+	 * Find all feeds which include a certain news archive
+	 * 
+	 * @param integer $intId The news archive ID
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if the news archive is not part of a feed
 	 */
 	public static function findByArchive($intId)
 	{
@@ -49,8 +50,10 @@ class NewsFeedModel extends \Model
 
 	/**
 	 * Find news feeds by their IDs
-	 * @param array
-	 * @return \Model_Collection|null
+	 * 
+	 * @param array $arrIds An array of news feed IDs
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no feeds
 	 */
 	public static function findByIds($arrIds)
 	{

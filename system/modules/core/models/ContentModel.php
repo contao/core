@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class ContentModel
- *
- * Provide methods to find and save content elements.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Core
+ * Reads and writes content elements
+ * 
+ * @package   Core
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class ContentModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_content';
@@ -37,8 +36,10 @@ class ContentModel extends \Model
 
 	/**
 	 * Find all published content elements by their parent ID
-	 * @param integer
-	 * @return \Model_Collection|null
+	 * 
+	 * @param integer $intPid The article ID
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no content elements
 	 */
 	public static function findPublishedByPid($intPid)
 	{

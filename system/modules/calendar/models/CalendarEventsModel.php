@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class CalendarEventsModel
- *
- * Provide methods to find and save events.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Calendar
+ * Reads and writes events
+ * 
+ * @package   Calendar
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class CalendarEventsModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_calendar_events';
@@ -37,12 +36,13 @@ class CalendarEventsModel extends \Model
 
 	/**
 	 * Find a published event from one or more calendars by its ID or alias
-	 * @param integer
-	 * @param string
-	 * @param array
-	 * @return \Model|null
+	 * 
+	 * @param mixed $varId   The numeric ID or alias name
+	 * @param array $arrPids An array of calendar IDs
+	 * 
+	 * @return \Model|null The model or null if there is no event
 	 */
-	public static function findPublishedByParentAndIdOrAlias($intId, $varAlias, $arrPids)
+	public static function findPublishedByParentAndIdOrAlias($varId, $arrPids)
 	{
 		if (!is_array($arrPids) || empty($arrPids))
 		{
@@ -58,14 +58,16 @@ class CalendarEventsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, array($intId, $varAlias));
+		return static::findOneBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId));
 	}
 
 
 	/**
 	 * Find the first and last event in one or more calendars
-	 * @param array
-	 * @return \Model
+	 * 
+	 * @param array $arrPids An array of calendar IDs
+	 * 
+	 * @return \Model The model
 	 */
 	public static function findBoundaries($arrPids)
 	{
@@ -81,10 +83,12 @@ class CalendarEventsModel extends \Model
 
 	/**
 	 * Find events of the current period by their parent ID
-	 * @param integer
-	 * @param integer
-	 * @param integer
-	 * @return \Model_Collection|null
+	 * 
+	 * @param integer $intPid   The calendar ID
+	 * @param integer $intStart The start date as Unix timestamp
+	 * @param integer $intEnd   The end date as Unix timestamp
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no events
 	 */
 	public static function findCurrentByPid($intPid, $intStart, $intEnd)
 	{
@@ -106,8 +110,10 @@ class CalendarEventsModel extends \Model
 
 	/**
 	 * Find published events with the default redirect target by their parent ID
-	 * @param integer
-	 * @return \Model_Collection|null
+	 * 
+	 * @param integer $intPid The calendar ID
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no events
 	 */
 	public static function findPublishedDefaultByPid($intPid)
 	{
@@ -126,9 +132,11 @@ class CalendarEventsModel extends \Model
 
 	/**
 	 * Find upcoming events by their parent IDs
-	 * @param array
-	 * @param integer
-	 * @return \Model_Collection|null
+	 * 
+	 * @param array   $arrIds   An array of calendar IDs
+	 * @param integer $intLimit An optional limit
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no events
 	 */
 	public static function findUpcomingByPids($arrIds, $intLimit=0)
 	{
@@ -151,4 +159,5 @@ class CalendarEventsModel extends \Model
 		{
 			return static::findBy($arrColumns, null, array('order'=>"$t.startTime"));
 		}
-	}}
+	}
+}

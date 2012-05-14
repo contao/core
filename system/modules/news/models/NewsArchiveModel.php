@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class NewsArchiveModel
- *
- * Provide methods to find and save news archives.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    News
+ * Reads and writes news archives
+ * 
+ * @package   News
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class NewsArchiveModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_news_archive';
@@ -37,8 +36,10 @@ class NewsArchiveModel extends \Model
 
 	/**
 	 * Find multiple news archives by their IDs
-	 * @param array
-	 * @return \Model_Collection|null
+	 * 
+	 * @param array $arrIds An array of archive IDs
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no news archives
 	 */
 	public static function findMultipleByIds($arrIds)
 	{

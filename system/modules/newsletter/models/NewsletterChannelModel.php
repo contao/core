@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class NewsletterChannelModel
- *
- * Provide methods to find and save newsletter channels.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Newsletter
+ * Reads and writes newsletter channels
+ * 
+ * @package   Newsletter
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class NewsletterChannelModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_newsletter_channel';
@@ -37,17 +36,19 @@ class NewsletterChannelModel extends \Model
 
 	/**
 	 * Find multiple newsletter channels by their IDs
-	 * @param array
-	 * @return \Model_Collection|null
+	 * 
+	 * @param array $arrIds An array of newsletter channel IDs
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no newsletter channels
 	 */
-	public static function findByIds($arrPids)
+	public static function findByIds($arrIds)
 	{
-		if (!is_array($arrPids) || empty($arrPids))
+		if (!is_array($arrIds) || empty($arrIds))
 		{
 			return null;
 		}
 
 		$t = static::$strTable;
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrPids)) . ")"), null, array('order'=>"$t.title"));
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, array('order'=>"$t.title"));
 	}
 }

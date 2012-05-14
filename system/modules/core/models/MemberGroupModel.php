@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class MemberGroupModel
- *
- * Provide methods to find and save member groups.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Core
+ * Reads and writes member groups
+ * 
+ * @package   Core
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class MemberGroupModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_member_group';
@@ -37,8 +36,10 @@ class MemberGroupModel extends \Model
 
 	/**
 	 * Find a published group by its ID
-	 * @param integer
-	 * @return \Model|null
+	 * 
+	 * @param integer $intId The member group ID
+	 * 
+	 * @return \Model|null The model or null if there is no member group
 	 */
 	public static function findPublishedById($intId)
 	{
@@ -57,8 +58,10 @@ class MemberGroupModel extends \Model
 
 	/**
 	 * Find the first active group with a published jumpTo page
-	 * @param string
-	 * @return \Model|null
+	 * 
+	 * @param string $arrIds An array of member group IDs
+	 * 
+	 * @return \Model|null The model or null if there is no matching member group
 	 */
 	public static function findFirstActiveWithJumpToByIds($arrIds)
 	{
@@ -86,7 +89,8 @@ class MemberGroupModel extends \Model
 
 	/**
 	 * Find all active groups
-	 * @return \Model_Collection|null
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no member groups
 	 */
 	public static function findAllActive()
 	{

@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class NewsletterRecipientsModel
- *
- * Provide methods to find and save content elements.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Newsletter
+ * Reads and writes newsletter recipients
+ * 
+ * @package   Newsletter
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class NewsletterRecipientsModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_newsletter_recipients';
@@ -37,9 +36,11 @@ class NewsletterRecipientsModel extends \Model
 
 	/**
 	 * Find recipients by their e-mail address and parent ID
-	 * @param string
-	 * @param array
-	 * @return \Model_Collection|null
+	 * 
+	 * @param string $strEmail The e-mail address
+	 * @param array  $arrPids  An array of newsletter channel IDs
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no recipients
 	 */
 	public static function findByEmailAndPids($strEmail, $arrPids)
 	{

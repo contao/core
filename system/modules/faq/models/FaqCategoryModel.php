@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class FaqCategoryModel
- *
- * Provide methods to find and save FAQ categories.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Faq
+ * Reads and writes FAQ categories
+ * 
+ * @package   Faq
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class FaqCategoryModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_faq_category';

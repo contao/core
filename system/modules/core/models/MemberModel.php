@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class MemberModel
- *
- * Provide methods to find and save members.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Core
+ * Reads and writes members
+ * 
+ * @package   Core
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class MemberModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_member';
@@ -37,9 +36,11 @@ class MemberModel extends \Model
 
 	/**
 	 * Find an active member by his/her e-mail-address and username
-	 * @param string
-	 * @param string
-	 * @return \Model|null
+	 * 
+	 * @param string $strEmail    The e-mail address
+	 * @param string $strUsername The username
+	 * 
+	 * @return \Model|null The model or null if there is no member
 	 */
 	public static function findActiveByEmailAndUsername($strEmail, $strUsername=null)
 	{

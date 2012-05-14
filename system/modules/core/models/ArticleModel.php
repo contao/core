@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class ArticleModel
- *
- * Provide methods to find and save articles.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Core
+ * Reads and writes articles
+ * 
+ * @package   Core
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class ArticleModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_article';
@@ -37,9 +36,11 @@ class ArticleModel extends \Model
 
 	/**
 	 * Find an article by its ID or alias and its page
-	 * @param mixed
-	 * @param integer
-	 * @return \Model|null
+	 * 
+	 * @param mixed   $varId  The numeric ID or alias name
+	 * @param integer $intPid The page ID
+	 * 
+	 * @return \Model|null The model or null if there is no article
 	 */
 	public static function findByIdOrAliasAndPid($varId, $intPid)
 	{
@@ -59,8 +60,10 @@ class ArticleModel extends \Model
 
 	/**
 	 * Find a published article by its ID
-	 * @param integer
-	 * @return \Model|null
+	 * 
+	 * @param integer $intId The article ID
+	 * 
+	 * @return \Model|null The model or null if there is no published article
 	 */
 	public static function findPublishedById($intId)
 	{
@@ -79,9 +82,11 @@ class ArticleModel extends \Model
 
 	/**
 	 * Find all published articles by their parent ID and column
-	 * @param integer
-	 * @param string
-	 * @return \Model_Collection|null
+	 * 
+	 * @param integer $intPid    The page ID
+	 * @param string  $strColumn The column name
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no articles in the given column
 	 */
 	public static function findPublishedByPidAndColumn($intPid, $strColumn)
 	{
@@ -101,9 +106,11 @@ class ArticleModel extends \Model
 
 	/**
 	 * Find all published articles with teaser by their parent ID and column
-	 * @param integer
-	 * @param string
-	 * @return \Model_Collection|null
+	 * 
+	 * @param integer $intPid    The page ID
+	 * @param string  $strColumn The column name
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no articles in the given column
 	 */
 	public static function findPublishedWithTeaserByPidAndColumn($intPid, $strColumn)
 	{

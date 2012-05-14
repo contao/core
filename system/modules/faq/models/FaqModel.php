@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class FaqModel
- *
- * Provide methods to find and save FAQs.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Faq
+ * Reads and writes FAQs
+ * 
+ * @package   Faq
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class FaqModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_faq';
@@ -37,12 +36,13 @@ class FaqModel extends \Model
 
 	/**
 	 * Find a published FAQ from one or more categories by its ID or alias
-	 * @param integer
-	 * @param string
-	 * @param array
-	 * @return \Model|null
+	 * 
+	 * @param mixed $varId   The numeric ID or alias name
+	 * @param array $arrPids An array of parent IDs
+	 * 
+	 * @return \Model|null The FaqModel or null if there is no FAQ
 	 */
-	public static function findPublishedByParentAndIdOrAlias($intId, $varAlias, $arrPids)
+	public static function findPublishedByParentAndIdOrAlias($varId, $arrPids)
 	{
 		if (!is_array($arrPids) || empty($arrPids))
 		{
@@ -57,14 +57,16 @@ class FaqModel extends \Model
 			$arrColumns[] = "$t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, array($intId, $varAlias));
+		return static::findOneBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId));
 	}
 
 
 	/**
 	 * Find all published FAQs by their parent IDs
-	 * @param array
-	 * @return \Model_Collection|null
+	 * 
+	 * @param array $arrPids An array of FAQ category IDs
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no FAQs
 	 */
 	public static function findPublishedByPids($arrPids)
 	{

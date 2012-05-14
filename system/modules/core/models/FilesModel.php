@@ -18,27 +18,31 @@ namespace Contao;
 
 
 /**
- * Class FilesModel
- *
- * Provide methods to find and save files.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Core
+ * Reads and writes file entries
+ * 
+ * The files themselves reside in the files directory. This class only handles
+ * the corresponding database entries (database aided file system).
+ * 
+ * @package   Core
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class FilesModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_files';
 
 
 	/**
-	 * Find multiple files by ID
-	 * @param array
-	 * @return \Model_Collection|null
+	 * Find multiple files by their IDs
+	 * 
+	 * @param array $arrIds An array of file IDs
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no files
 	 */
 	public static function findMultipleByIds($arrIds)
 	{
@@ -54,8 +58,10 @@ class FilesModel extends \Model
 
 	/**
 	 * Find multiple files with the same base path
-	 * @param array
-	 * @return \Model_Collection|null
+	 * 
+	 * @param string $strPath The base path
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no matching files
 	 */
 	public static function findMultipleByBasepath($strPath)
 	{
@@ -66,9 +72,11 @@ class FilesModel extends \Model
 
 	/**
 	 * Find multiple files by ID and a list of extensions
-	 * @param array
-	 * @param array
-	 * @return \Model_Collection|null
+	 * 
+	 * @param array $arrIds        An array of file IDs
+	 * @param array $arrExtensions An array of file extensions
+	 * 
+	 * @return \Model_Collection|null A collection of models or null of there are no matching files
 	 */
 	public static function findMultipleByIdsAndExtensions($arrIds, $arrExtensions)
 	{

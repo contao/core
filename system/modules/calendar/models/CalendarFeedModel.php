@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class CalendarFeedModel
- *
- * Provide methods to find and save calendar feeds.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Calendar
+ * Reads and writes calendar feeds
+ * 
+ * @package   Calendar
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class CalendarFeedModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_calendar_feed';
@@ -37,8 +36,10 @@ class CalendarFeedModel extends \Model
 
 	/**
 	 * Find all feeds which include a certain calendar
-	 * @param integer
-	 * @return \Model|null
+	 * 
+	 * @param integer $intId The calendar ID
+	 * 
+	 * @return \Model|null The model or null if the calendar is not part of a feed
 	 */
 	public static function findByCalendar($intId)
 	{
@@ -49,8 +50,10 @@ class CalendarFeedModel extends \Model
 
 	/**
 	 * Find calendar feeds by their IDs
-	 * @param array
-	 * @return \Model_Collection|null
+	 * 
+	 * @param array $arrIds An array of calendar feed IDs
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no feeds
 	 */
 	public static function findByIds($arrIds)
 	{

@@ -18,18 +18,17 @@ namespace Contao;
 
 
 /**
- * Class FormFieldModel
- *
- * Provide methods to find and save form fields.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Core
+ * Reads and writes form fields
+ * 
+ * @package   Core
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
  */
 class FormFieldModel extends \Model
 {
 
 	/**
-	 * Name of the table
+	 * Table name
 	 * @var string
 	 */
 	protected static $strTable = 'tl_form_field';
@@ -37,8 +36,10 @@ class FormFieldModel extends \Model
 
 	/**
 	 * Find published form fields by their parent ID
-	 * @param integer
-	 * @return \Model_Collection|null
+	 * 
+	 * @param integer $intPid The form ID
+	 * 
+	 * @return \Model_Collection|null A collection of models or null if there are no form fields
 	 */
 	public static function findPublishedByPid($intPid)
 	{
