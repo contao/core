@@ -292,7 +292,7 @@ h2.sub_headline_index {
 	top:3px;
 	vertical-align:top;
 }
-.tl_panel .active,.tl_panel_bottom .active {
+.tl_panel .active,.tl_panel_bottom .active,#search .active {
 	background:#ffd;
 }
 .tl_panel .tl_select {

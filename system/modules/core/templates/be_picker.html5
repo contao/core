@@ -34,7 +34,7 @@
 <div id="search">
   <input type="hidden" name="FORM_SUBMIT" value="item_selector">
   <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
-  <input type="text" name="keyword" id="keyword" value="<?php echo $this->value; ?>" class="tl_text">
+  <input type="text" name="keyword" id="keyword" value="<?php echo $this->value; ?>" class="tl_text<?php if ($this->value != ''): ?> active<?php endif; ?>">
   <input type="submit" name="search" value="<?php echo $this->search; ?>" class="tl_submit">
 </div>
 </form>
