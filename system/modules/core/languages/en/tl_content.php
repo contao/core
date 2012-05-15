@@ -14,7 +14,6 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_content']['invisible']     = array('Invisible', 'Hide the element on the website.');
 $GLOBALS['TL_LANG']['tl_content']['type']          = array('Element type', 'Please choose the type of content element.');
 $GLOBALS['TL_LANG']['tl_content']['headline']      = array('Headline', 'Here you can add a headline to the content element.');
 $GLOBALS['TL_LANG']['tl_content']['text']          = array('Text', 'You can use HTML tags to format the text.');
@@ -40,9 +39,9 @@ $GLOBALS['TL_LANG']['tl_content']['sortable']      = array('Sortable table', 'Ma
 $GLOBALS['TL_LANG']['tl_content']['sortIndex']     = array('Sort index', 'The number of the default sort column.');
 $GLOBALS['TL_LANG']['tl_content']['sortOrder']     = array('Sort order', 'Please choose the sort order.');
 $GLOBALS['TL_LANG']['tl_content']['mooType']       = array('Operation mode', 'Please select the operation mode of the accordion element.');
-$GLOBALS['TL_LANG']['tl_content']['single']        = array('Single element', 'Behaves like a single text element that is inside an accordion pane.');
-$GLOBALS['TL_LANG']['tl_content']['start']         = array('Wrapper start', 'Marks the beginning of an accordion pane that spans several content elements.');
-$GLOBALS['TL_LANG']['tl_content']['stop']          = array('Wrapper stop', 'Marks the end of an accordion pane that spans several content elements.');
+$GLOBALS['TL_LANG']['tl_content']['mooStart']      = array('Wrapper start', 'Marks the beginning of an accordion pane that spans several content elements.');
+$GLOBALS['TL_LANG']['tl_content']['mooStop']       = array('Wrapper stop', 'Marks the end of an accordion pane that spans several content elements.');
+$GLOBALS['TL_LANG']['tl_content']['mooSingle']     = array('Single element', 'Behaves like a single text element that is inside an accordion pane.');
 $GLOBALS['TL_LANG']['tl_content']['mooHeadline']   = array('Section headline', 'Please enter the headline of the content pane. HTML tags are allowed.');
 $GLOBALS['TL_LANG']['tl_content']['mooStyle']      = array('CSS format', 'Here you can format the section headline using CSS code.');
 $GLOBALS['TL_LANG']['tl_content']['mooClasses']    = array('Element classes', 'Leave blank to use the default classes or enter a custom toggler and accordion class.');
@@ -74,6 +73,9 @@ $GLOBALS['TL_LANG']['tl_content']['groups']        = array('Allowed member group
 $GLOBALS['TL_LANG']['tl_content']['guests']        = array('Show to guests only', 'Hide the content element if a member is logged in.');
 $GLOBALS['TL_LANG']['tl_content']['cssID']         = array('CSS ID/class', 'Here you can set an ID and one or more classes.');
 $GLOBALS['TL_LANG']['tl_content']['space']         = array('Space in front and after', 'Here you can enter the spacing in front of and after the content element in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.');
+$GLOBALS['TL_LANG']['tl_content']['invisible']     = array('Invisible', 'Hide the element on the website.');
+$GLOBALS['TL_LANG']['tl_content']['start']         = array('Show from', 'Do not show the element on the website before this day.');
+$GLOBALS['TL_LANG']['tl_content']['stop']          = array('Show until', 'Do not show the element on the website on and after this day.');
 
 
 
@@ -98,6 +100,7 @@ $GLOBALS['TL_LANG']['tl_content']['expert_legend']    = 'Expert settings';
 $GLOBALS['TL_LANG']['tl_content']['template_legend']  = 'Template settings';
 $GLOBALS['TL_LANG']['tl_content']['player_legend']    = 'Player settings';
 $GLOBALS['TL_LANG']['tl_content']['poster_legend']    = 'Preview image';
+$GLOBALS['TL_LANG']['tl_content']['invisible_legend'] = 'Visibility';
 
 
 /**

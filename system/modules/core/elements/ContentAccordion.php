@@ -41,7 +41,7 @@ class ContentAccordion extends \ContentElement
 	protected function compile()
 	{
 		// Accordion start
-		if ($this->mooType == 'start')
+		if ($this->mooType == 'mooStart')
 		{
 			if (TL_MODE == 'FE')
 			{
@@ -58,7 +58,7 @@ class ContentAccordion extends \ContentElement
 		}
 
 		// Accordion end
-		elseif ($this->mooType == 'stop')
+		elseif ($this->mooType == 'mooStop')
 		{
 			if (TL_MODE == 'FE')
 			{

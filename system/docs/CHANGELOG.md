@@ -5,6 +5,9 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+Content elements can now be shown/hidden at a certain time (see #4187).
+
+### New
 Added a video/audio player content element based on mediaelement.js.
 
 ### Changed

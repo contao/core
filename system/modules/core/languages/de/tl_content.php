@@ -14,7 +14,6 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_content']['invisible']     = array('Unsichtbar', 'Das Element auf der Webseite nicht anzeigen.');
 $GLOBALS['TL_LANG']['tl_content']['type']          = array('Elementtyp', 'Bitte wählen Sie den Typ des Inhaltselements.');
 $GLOBALS['TL_LANG']['tl_content']['headline']      = array('Überschrift', 'Hier können Sie dem Inhaltselement eine Überschrift hinzufügen.');
 $GLOBALS['TL_LANG']['tl_content']['text']          = array('Text', 'Sie können HTML-Tags verwenden, um den Text zu formatieren.');
@@ -40,9 +39,9 @@ $GLOBALS['TL_LANG']['tl_content']['sortable']      = array('Sortierbare Tabelle'
 $GLOBALS['TL_LANG']['tl_content']['sortIndex']     = array('Sortierindex', 'Die Nummer der Spalte, nach der standardmäßig sortiert wird.');
 $GLOBALS['TL_LANG']['tl_content']['sortOrder']     = array('Sortierreihenfolge', 'Bitte wählen Sie die Sortierreihenfolge aus.');
 $GLOBALS['TL_LANG']['tl_content']['mooType']       = array('Betriebsart', 'Bitte wählen Sie die Betriebsart des Akkordeon-Elements.');
-$GLOBALS['TL_LANG']['tl_content']['single']        = array('Einzelnes Element', 'Entspricht einem Text-Inhaltselement in einem Akkordeon-Fenster.');
-$GLOBALS['TL_LANG']['tl_content']['start']         = array('Umschlag-Anfang', 'Markiert den Anfang eines Akkordeon-Fensters, das mehrere Inhaltselemente umfasst.');
-$GLOBALS['TL_LANG']['tl_content']['stop']          = array('Umschlag-Ende', 'Markiert das Ende eines Akkordeon-Fensters, das mehrere Inhaltselemente umfasst.');
+$GLOBALS['TL_LANG']['tl_content']['mooStart']      = array('Umschlag-Anfang', 'Markiert den Anfang eines Akkordeon-Fensters, das mehrere Inhaltselemente umfasst.');
+$GLOBALS['TL_LANG']['tl_content']['mooStop']       = array('Umschlag-Ende', 'Markiert das Ende eines Akkordeon-Fensters, das mehrere Inhaltselemente umfasst.');
+$GLOBALS['TL_LANG']['tl_content']['mooSingle']     = array('Einzelnes Element', 'Entspricht einem Text-Inhaltselement in einem Akkordeon-Fenster.');
 $GLOBALS['TL_LANG']['tl_content']['mooHeadline']   = array('Bereichsüberschrift', 'Bitte geben Sie die Überschrift des Akkordeon-Fensters ein. HTML-Tags sind erlaubt.');
 $GLOBALS['TL_LANG']['tl_content']['mooStyle']      = array('CSS-Format', 'Hier können Sie die Bereichsüberschrift mittels CSS-Code formatieren.');
 $GLOBALS['TL_LANG']['tl_content']['mooClasses']    = array('Klassennamen', 'Lassen Sie das Feld leer, um die Standard-Klassennamen zu verwenden, oder geben Sie eigene Toggler- und Accordion-Klassen ein.');
@@ -74,6 +73,9 @@ $GLOBALS['TL_LANG']['tl_content']['groups']        = array('Erlaubte Mitgliederg
 $GLOBALS['TL_LANG']['tl_content']['guests']        = array('Nur Gästen anzeigen', 'Das Inhaltselement verstecken sobald ein Mitglied angemeldet ist.');
 $GLOBALS['TL_LANG']['tl_content']['cssID']         = array('CSS-ID/Klasse', 'Hier können Sie eine ID und beliebig viele Klassen eingeben.');
 $GLOBALS['TL_LANG']['tl_content']['space']         = array('Abstand davor und dahinter', 'Hier können Sie den Abstand vor und nach dem Inhaltselement in Pixeln eingeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.');
+$GLOBALS['TL_LANG']['tl_content']['invisible']     = array('Unsichtbar', 'Das Element auf der Webseite nicht anzeigen.');
+$GLOBALS['TL_LANG']['tl_content']['start']         = array('Anzeigen ab', 'Das Element erst ab diesem Tag auf der Webseite anzeigen.');
+$GLOBALS['TL_LANG']['tl_content']['stop']          = array('Anzeigen bis', 'Das Element nur bis zu diesem Tag auf der Webseite anzeigen.');
 
 
 /**
@@ -97,6 +99,7 @@ $GLOBALS['TL_LANG']['tl_content']['expert_legend']    = 'Experten-Einstellungen'
 $GLOBALS['TL_LANG']['tl_content']['template_legend']  = 'Template-Einstellungen';
 $GLOBALS['TL_LANG']['tl_content']['player_legend']    = 'Player-Einstellungen';
 $GLOBALS['TL_LANG']['tl_content']['poster_legend']    = 'Vorschaubild';
+$GLOBALS['TL_LANG']['tl_content']['invisible_legend'] = 'Sichtbarkeit';
 
 
 /**

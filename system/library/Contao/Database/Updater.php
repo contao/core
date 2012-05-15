@@ -268,6 +268,11 @@ class Database_Updater extends \Controller
 		$this->Database->query("UPDATE `tl_layout` SET `rows`='2rwh' WHERE `header`!='' AND `footer`=''");
 		$this->Database->query("UPDATE `tl_layout` SET `rows`='2rwf' WHERE `header`='' AND `footer`!=''");
 		$this->Database->query("UPDATE `tl_layout` SET `rows`='3rw' WHERE `header`!='' AND `footer`!=''");
+
+		// Update the "mooType" field
+		$this->Database->query("UPDATE `tl_content` SET `mooType`='mooStart' WHERE `mooType`='start'");
+		$this->Database->query("UPDATE `tl_content` SET `mooType`='mooStop' WHERE `mooType`='stop'");
+		$this->Database->query("UPDATE `tl_content` SET `mooType`='mooSingle' WHERE `mooType`='single'");
 	}
 
 

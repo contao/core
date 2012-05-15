@@ -3700,18 +3700,18 @@ window.addEvent(\'domready\', function() {
 					}
 
 					// Accordion wrapper
-					if ($row[$i]['type'] == 'accordion' && $row[$i]['mooType'] == 'stop')
+					if ($row[$i]['type'] == 'accordion' && $row[$i]['mooType'] == 'mooStop')
 					{
 						$blnIndent = false;
 					}
 
 					$return .= '
 
-<div class="tl_content'.((($row[$i]['type'] == 'accordion' && $row[$i]['mooType'] != 'single')) ? ' acc'.$row[$i]['mooType'] : '').($blnIndent ? ' indent' : '').(($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] != '') ? ' ' . $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] : '').(($i%2 == 0) ? ' even' : ' odd').'" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)">
+<div class="tl_content'.((($row[$i]['type'] == 'accordion' && $row[$i]['mooType'] != 'mooSingle')) ? ' '.$row[$i]['mooType'] : '').($blnIndent ? ' indent' : '').(($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] != '') ? ' ' . $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] : '').(($i%2 == 0) ? ' even' : ' odd').'" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)">
 <div class="tl_content_right">';
 
 					// Accordion wrapper
-					if ($row[$i]['type'] == 'accordion' && $row[$i]['mooType'] == 'start')
+					if ($row[$i]['type'] == 'accordion' && $row[$i]['mooType'] == 'mooStart')
 					{
 						$blnIndent = true;
 					}

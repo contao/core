@@ -126,6 +126,11 @@ abstract class ContentElement extends \Frontend
 	 */
 	public function generate()
 	{
+		if (!BE_USER_LOGGED_IN && ($this->invisible || ($this->start > 0 && $this->start > time()) || ($this->stop > 0 && $this->stop < time())))
+		{
+			return '';
+		}
+
 		if ($this->arrData['space'][0] != '')
 		{
 			$this->arrStyle[] = 'margin-top:'.$this->arrData['space'][0].'px;';

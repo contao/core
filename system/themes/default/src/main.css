@@ -524,16 +524,16 @@ h2.sub_headline_index {
 	border-bottom:1px solid #e9e9e9;
 	overflow:hidden;
 }
-.tl_content.accstart,.tl_content.accstop {
+.tl_content.mooStart,.tl_content.mooStop {
 	background:#f3f3f3;
 }
-.tl_content.accstart {
+.tl_content.mooStart {
 	border-bottom:0;
 }
-.tl_content.accstop {
+.tl_content.mooStop {
 	border-top:0;
 }
-.tl_content.accstart h1 {
+.tl_content.mooStart h1 {
 	margin:0 0 9px 6px;
 }
 .tl_content.indent {
