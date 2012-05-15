@@ -92,7 +92,7 @@ class ModuleBooknav extends \Module
 		}
 
 		// Get all book pages
-		$this->arrPages[$objTarget->id] = $objTarget;
+		$this->arrPages[$objTarget->id] = $objTarget->row();
 		$this->getBookPages($objTarget->id, $groups, time());
 
 		global $objPage;
