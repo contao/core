@@ -1,7 +1,7 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 3.0.beta1 (XXXX-XX-XX)
+Version 3.0.beta1 (2012-05-17)
 ------------------------------
 
 ### New
