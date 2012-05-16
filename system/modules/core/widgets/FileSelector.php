@@ -223,6 +223,18 @@ class FileSelector extends \Widget
 				break;
 		}
 
+		// Extension filter
+		if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['extensions'] != '')
+		{
+			$this->strExtensions = " AND (type='folder' OR extension IN('" . implode("','", trimsplit(',', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['extensions'])) . "'))";
+		}
+
+		// Sort descending
+		if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['flag']) && ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['flag'] % 2) == 0)
+		{
+			$this->strSortFlag = ' DESC';
+		}
+
 		$this->getPathNodes();
 
 		// Load the requested nodes
