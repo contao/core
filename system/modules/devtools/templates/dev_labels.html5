@@ -17,7 +17,7 @@
   <h3><label for="ctrl_language"><?php echo $this->label; ?></label></h3>
   <select name="language" id="ctrl_language" class="tl_select" onfocus="Backend.getScrollOffset();"><?php echo $this->options; ?></select>
 <?php if ($this->help): ?>
-  <p class="tl_help"><?php echo $this->help; ?></p>
+  <p class="tl_help tl_tip"><?php echo $this->help; ?></p>
 <?php endif; ?>
 </div>
 </div>
