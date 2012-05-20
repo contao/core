@@ -103,12 +103,16 @@ class RepositoryBackendModule extends BackendModule
 		$wsdl = trim($GLOBALS['TL_CONFIG']['repository_wsdl']);
 		if ($wsdl != '') {
 			if (!REPOSITORY_SOAPCACHE) ini_set('soap.wsdl_cache_enabled', 0);
+			// Backwards compatibility
+			if (!defined('ZLIB_ENCODING_GZIP')) {
+				define('ZLIB_ENCODING_GZIP', SOAP_COMPRESSION_GZIP);
+			}
 			// HOOK: proxy module
 			if ($GLOBALS['TL_CONFIG']['useProxy']) {
 				$proxy_uri = parse_url($GLOBALS['TL_CONFIG']['proxy_url']);
 				$this->client = new SoapClient($wsdl, array(
 					'soap_version' => SOAP_1_2,
-					'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 1,
+					'compression' => SOAP_COMPRESSION_ACCEPT | ZLIB_ENCODING_GZIP | 1,
 					'proxy_host' => $proxy_uri['host'],
 					'proxy_port' => $proxy_uri['port'],
 					'proxy_login' => $proxy_uri['user'],
@@ -119,7 +123,7 @@ class RepositoryBackendModule extends BackendModule
 			else {
 				$this->client = new SoapClient($wsdl, array(
 					'soap_version' => SOAP_1_2,
-					'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 1
+					'compression' => SOAP_COMPRESSION_ACCEPT | ZLIB_ENCODING_GZIP | 1
 				));
 			}
 			$this->mode = 'soap';
