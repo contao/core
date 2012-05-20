@@ -203,11 +203,17 @@ class DcaExtractor extends \Database_Installer
 	 * @return array The data array
 	 */
 	public function getDbInstallerArray()
-	{
+	{            
 		$return = array();
 
 		// Fields
-		foreach ($this->arrFields as $k=>$v)
+                // WA: only do it, if $this->arrFields is not empty
+		if(empty($this->arrFields))
+                {
+                    return;
+                }
+                
+                foreach ($this->arrFields as $k=>$v)
 		{
 			$return['TABLE_FIELDS'][$k] = '`' . $k . '` ' . $v;
 		}
@@ -263,8 +269,8 @@ class DcaExtractor extends \Database_Installer
 		{
 			$this->loadDataContainer($this->strTable);
 		}
-		
-		// Don't try to extract any SQL if the field "dataContainer" is set to "File"
+                
+                // Don't try to extract any SQL if the field "dataContainer" is set to "File"
                 if($GLOBALS['TL_DCA'][$this->strTable]['config']['dataContainer'] === 'File')
                 {
                         return;
