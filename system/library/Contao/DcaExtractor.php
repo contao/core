@@ -263,6 +263,12 @@ class DcaExtractor extends \Database_Installer
 		{
 			$this->loadDataContainer($this->strTable);
 		}
+		
+		// Don't try to extract any SQL if the field "dataContainer" is set to "File"
+                if($GLOBALS['TL_DCA'][$this->strTable]['config']['dataContainer'] === 'File')
+                {
+                        return;
+                }
 
 		$blnFromFile = false;
 		$arrRelations = array();
