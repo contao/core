@@ -5,6 +5,10 @@ Version 2.11.4 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+The pagination menu fix was missing in the listing, search and RSS reader
+modules (see #4292).
+
+### Fixed
 Added the "required" attribute to the captcha input field (see #4247).
 
 ### Fixed

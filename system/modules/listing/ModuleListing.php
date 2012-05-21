@@ -114,9 +114,6 @@ class ModuleListing extends Module
 			return;
 		}
 
-		$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
-		$per_page = $this->Input->get('per_page') ? $this->Input->get('per_page') : $this->perPage;
-
 
 		/**
 		 * Add the search menu
@@ -159,6 +156,27 @@ class ModuleListing extends Module
 
 		$strQuery .=  $strWhere;
 		$objTotal = $this->Database->prepare($strQuery)->execute($varKeyword);
+
+
+		/**
+		 * Validate the page count
+		 */
+		$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
+		$per_page = $this->Input->get('per_page') ? $this->Input->get('per_page') : $this->perPage;
+
+		if ($page < 1 || $page > max(ceil($objTotal->count/$per_page), 1))
+		{
+			global $objPage;
+			$objPage->noSearch = 1;
+			$objPage->cache = 0;
+
+			$this->Template->thead = array();
+			$this->Template->tbody = array();
+
+			// Send a 404 header
+			header('HTTP/1.1 404 Not Found');
+			return;
+		}
 
 
 		/**
