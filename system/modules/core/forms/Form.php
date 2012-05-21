@@ -190,7 +190,7 @@ class Form extends \Hybrid
 
 				if ($objWidget->name != '')
 				{
-					$arrLabels[$objWidget->name] = $objWidget->label;
+					$arrLabels[$objWidget->name] = $this->replaceInsertTags($objWidget->label); // see #4268
 				}
 
 				$this->Template->fields .= $objWidget->parse();

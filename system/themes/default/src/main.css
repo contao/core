@@ -1030,15 +1030,20 @@ ul.sgallery .gimage {
 	border-radius:4px;
 	margin-right:12px;
 }
+.webkit #contextmenu {
+	padding:4px 6px 2px;
+}
 #contextmenu a {
 	display:block;
-	line-height:1;
 	padding:3px 0 2px 0;
 	white-space:nowrap;
 }
 #contextmenu img {
-	padding-bottom:1px;
-	vertical-align:middle;
+	vertical-align:top;
+}
+#contextmenu img[width="12"] {
+	padding-left:1px;
+	padding-right:1px;
 }
 
 /* Navigation icons */
