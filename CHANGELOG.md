@@ -5,6 +5,9 @@ Version 2.11.4 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Added the "required" attribute to the captcha input field (see #4247).
+
+### Fixed
 Correctly tell Google Analytics to anonymize the visitor's IP (see #4290). Heads
 up: Adjust your `moo_analytics` templates accordingly!
 
