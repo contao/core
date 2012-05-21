@@ -225,7 +225,7 @@ class ModuleArticle extends \Module
 			$this->Template->pdfTitle = specialchars($GLOBALS['TL_LANG']['MSC']['printAsPdf']);
 			$this->Template->facebookTitle = specialchars($GLOBALS['TL_LANG']['MSC']['facebookShare']);
 			$this->Template->twitterTitle = specialchars($GLOBALS['TL_LANG']['MSC']['twitterShare']);
-			$this->Template->glpusTitle = specialchars($GLOBALS['TL_LANG']['MSC']['gplusShare']);
+			$this->Template->gplusTitle = specialchars($GLOBALS['TL_LANG']['MSC']['gplusShare']);
 		}
 	}
 }
