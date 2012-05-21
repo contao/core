@@ -3889,7 +3889,27 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				}
 			}
 
-			$query .= " ORDER BY " . implode(', ', $orderBy);
+			if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 3)
+			{
+				$firstOrderBy = 'pid';
+				$showFields = $GLOBALS['TL_DCA'][$table]['list']['label']['fields'];
+
+				$query .= " ORDER BY (SELECT " . $showFields[0] . " FROM " . $this->ptable . " WHERE " . $this->ptable . ".id=" . $this->strTable . ".pid), " . implode(', ', $orderBy);
+				
+				// Set the foreignKey so that the label is translated (also for backwards compatibility)
+				if ($GLOBALS['TL_DCA'][$table]['fields']['pid']['foreignKey'] == '')
+				{
+					$GLOBALS['TL_DCA'][$table]['fields']['pid']['foreignKey'] = $this->ptable . '.' . $showFields[0];
+				}
+				
+				// Remove the parent field from label fields
+				array_shift($showFields);
+				$GLOBALS['TL_DCA'][$table]['list']['label']['fields'] = $showFields;
+			}
+			else
+			{
+				$query .= " ORDER BY " . implode(', ', $orderBy);
+			}
 		}
 
 		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 1 && ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['flag'] % 2) == 0)
@@ -3950,31 +3970,6 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			if ($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['showColumns'] && !in_array($firstOrderBy, $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['fields']))
 			{
 				$GLOBALS['TL_DCA'][$this->strTable]['list']['label']['fields'][] = $firstOrderBy;
-			}
-
-			// Rename each pid to its label and resort the result (sort by parent table)
-			if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 3)
-			{
-				$firstOrderBy = 'pid';
-				$showFields = $GLOBALS['TL_DCA'][$table]['list']['label']['fields'];
-
-				foreach ($result as $k=>$v)
-				{
-					$objField = $this->Database->prepare("SELECT " . $showFields[0] . " FROM " . $this->ptable . " WHERE id=?")
-											   ->limit(1)
-											   ->execute($v['pid']);
-
-					$result[$k]['pid'] = $objField->$showFields[0];
-				}
-
-				$aux = array();
-
-				foreach ($result as $row)
-				{
-					$aux[] = $row['pid'];
-				}
-
-				array_multisort($aux, SORT_ASC, $result);
 			}
 
 			// Generate the table header if the "show columns" option is active
