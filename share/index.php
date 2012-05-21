@@ -21,10 +21,10 @@ require '../system/initialize.php';
 /**
  * Facebook
  */
-if ($objInput->get('p') == 'facebook')
+if (Input::get('p') == 'facebook')
 {
-	$query  = '?u=' . rawurlencode($objInput->get('u'));
-	$query .= '&t=' . rawurlencode($objInput->get('t'));
+	$query  = '?u=' . rawurlencode(Input::get('u'));
+	$query .= '&t=' . rawurlencode(Input::get('t'));
 	$query .= '&display=popup';
 	$query .= '&redirect_uri=http%3A%2F%2Fwww.facebook.com';
 	header('Location: http://www.facebook.com/sharer/sharer.php' . $query);
@@ -35,10 +35,10 @@ if ($objInput->get('p') == 'facebook')
 /**
  * Twitter
  */
-elseif ($objInput->get('p') == 'twitter')
+elseif (Input::get('p') == 'twitter')
 {
-	$query  = '?url=' . rawurlencode($objInput->get('u'));
-	$query .= '&text=' . rawurlencode($objInput->get('t'));
+	$query  = '?url=' . rawurlencode(Input::get('u'));
+	$query .= '&text=' . rawurlencode(Input::get('t'));
 	header('Location: http://twitter.com/share' . $query);
 	exit;
 }
@@ -47,9 +47,9 @@ elseif ($objInput->get('p') == 'twitter')
 /**
  * Google Plus
  */
-elseif ($objInput->get('p') == 'gplus')
+elseif (Input::get('p') == 'gplus')
 {
-	$query  = '?url=' . rawurlencode($objInput->get('u'));
+	$query  = '?url=' . rawurlencode(Input::get('u'));
 	header('Location: https://plus.google.com/share' . $query);
 	exit;
 }
