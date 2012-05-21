@@ -2596,9 +2596,9 @@ abstract class Controller extends System
 			}
 
 			// Correctly handle the "index" alias (see #3961)
-			if ($arrRow['alias'] == 'index')
+			if ($arrRow['alias'] == 'index' && $strParams == '')
 			{
-				$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage . (($strParams != '') ? $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'] : '');
+				$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage;
 			}
 			else
 			{
