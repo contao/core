@@ -419,6 +419,7 @@ class DcaExtractor extends \Database_Installer
 				continue;
 			}
 
+			// FIXME: ignore non-table drivers (reflection)
 			foreach (scan($strDir) as $strFile)
 			{
 				if (in_array($strFile, $included) || $strFile == '.htaccess')

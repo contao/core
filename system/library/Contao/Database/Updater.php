@@ -384,6 +384,7 @@ class Database_Updater extends \Controller
 
 				foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $strField=>$arrField)
 				{
+					// FIXME: support other field types
 					if ($arrField['inputType'] == 'fileTree')
 					{
 						if ($this->Database->fieldExists($strField, $strTable))
