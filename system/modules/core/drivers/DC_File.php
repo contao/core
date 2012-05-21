@@ -281,7 +281,13 @@ class DC_File extends \DataContainer implements \editable
 </div>
 
 </div>
-</form>';
+</form>
+
+<script>
+window.addEvent(\'domready\', function() {
+  $(\''.$this->strTable.'\').getElement(\'input[type="text"]\').focus();
+});
+</script>';
 
 		// Begin the form (-> DO NOT CHANGE THIS ORDER -> this way the onsubmit attribute of the form can be changed by a field)
 		$return = '

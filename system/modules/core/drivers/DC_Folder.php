@@ -1252,7 +1252,13 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 </div>
 
 </div>
-</form>';
+</form>
+
+<script>
+window.addEvent(\'domready\', function() {
+  $(\''.$this->strTable.'\').getElement(\'input[type="text"]\').focus();
+});
+</script>';
 
 		// Begin the form (-> DO NOT CHANGE THIS ORDER -> this way the onsubmit attribute of the form can be changed by a field)
 		$return = $version . '
@@ -1513,7 +1519,13 @@ window.addEvent(\'domready\', function() {
 </div>
 
 </div>
-</form>';
+</form>
+
+<script>
+window.addEvent(\'domready\', function() {
+  $(\''.$this->strTable.'\').getElement(\'input[type="text"]\').focus();
+});
+</script>';
 
 			// Set the focus if there is an error
 			if ($this->noReload)
