@@ -219,7 +219,7 @@ class ModuleSearch extends \Module
 				$per_page = \Input::get('per_page') ?: $this->perPage;
 
 				// Do not index or cache the page if the page number is outside the range
-				if ($page < 1 || $page > ceil($count/$per_page))
+				if ($page < 1 || $page > max(ceil($count/$per_page), 1))
 				{
 					global $objPage;
 					$objPage->noSearch = 1;
