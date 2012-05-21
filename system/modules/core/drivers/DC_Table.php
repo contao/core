@@ -1930,7 +1930,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					$strUrl .= ($this->ptable != '') ? '&amp;act=create&amp;mode=2&amp;pid=' . CURRENT_ID : '&amp;act=create';
 				}
 
-				$this->redirect($strUrl);
+				$this->redirect($strUrl . '&amp;rt=' . REQUEST_TOKEN);
 			}
 
 			$this->reload();

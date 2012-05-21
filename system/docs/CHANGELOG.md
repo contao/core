@@ -5,6 +5,9 @@ Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
 ### Fixed
+Add the request token to "save and new" requests (see #4329).
+
+### Fixed
 Make sure the size of a resized image is at least 1 pixel (see #4323).
 
 
