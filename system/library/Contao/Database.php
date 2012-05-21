@@ -77,8 +77,9 @@ abstract class Database
 
 
 	/**
-	 * Load the database configuration file and connect to the database
-	 * @throws Exception
+	 * Establish the database connection
+	 * 
+	 * @throws \Exception If a connection cannot be established
 	 */
 	protected function __construct(array $arrConfig)
 	{
@@ -158,7 +159,7 @@ abstract class Database
 
 		if (!is_object(static::$arrInstances[$strKey]))
 		{
-			$strClass = '\\Database_' . ucfirst(strtolower($arrConfig['dbDriver']));
+			$strClass = 'Database_' . ucfirst(strtolower($arrConfig['dbDriver']));
 			static::$arrInstances[$strKey] = new $strClass($arrConfig);
 		}
 
