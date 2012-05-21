@@ -17,19 +17,19 @@
 ClassLoader::addClasses(array
 (
 	// Classes
-	'Contao\\Calendar'            => 'system/modules/calendar/classes/Calendar.php',
-	'Contao\\Events'              => 'system/modules/calendar/classes/Events.php',
+	'Contao\Calendar'            => 'system/modules/calendar/classes/Calendar.php',
+	'Contao\Events'              => 'system/modules/calendar/classes/Events.php',
 
 	// Models
-	'Contao\\CalendarEventsModel' => 'system/modules/calendar/models/CalendarEventsModel.php',
-	'Contao\\CalendarFeedModel'   => 'system/modules/calendar/models/CalendarFeedModel.php',
-	'Contao\\CalendarModel'       => 'system/modules/calendar/models/CalendarModel.php',
+	'Contao\CalendarEventsModel' => 'system/modules/calendar/models/CalendarEventsModel.php',
+	'Contao\CalendarFeedModel'   => 'system/modules/calendar/models/CalendarFeedModel.php',
+	'Contao\CalendarModel'       => 'system/modules/calendar/models/CalendarModel.php',
 
 	// Modules
-	'Contao\\ModuleCalendar'      => 'system/modules/calendar/modules/ModuleCalendar.php',
-	'Contao\\ModuleEventMenu'     => 'system/modules/calendar/modules/ModuleEventMenu.php',
-	'Contao\\ModuleEventReader'   => 'system/modules/calendar/modules/ModuleEventReader.php',
-	'Contao\\ModuleEventlist'     => 'system/modules/calendar/modules/ModuleEventlist.php',
+	'Contao\ModuleCalendar'      => 'system/modules/calendar/modules/ModuleCalendar.php',
+	'Contao\ModuleEventMenu'     => 'system/modules/calendar/modules/ModuleEventMenu.php',
+	'Contao\ModuleEventReader'   => 'system/modules/calendar/modules/ModuleEventReader.php',
+	'Contao\ModuleEventlist'     => 'system/modules/calendar/modules/ModuleEventlist.php',
 ));
 
 

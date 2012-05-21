@@ -17,7 +17,7 @@
 ClassLoader::addClasses(array
 (
 	// Modules
-	'Contao\\ModuleListing' => 'system/modules/listing/modules/ModuleListing.php',
+	'Contao\ModuleListing' => 'system/modules/listing/modules/ModuleListing.php',
 ));
 
 

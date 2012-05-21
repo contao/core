@@ -433,22 +433,6 @@ class InstallTool extends Backend
 		{
 			$arrDrivers[] = 'MySQLi';
 		}
-		if (function_exists('oci_connect'))
-		{
-			$arrDrivers[] = 'Oracle';
-		}
-		if (function_exists('mssql_connect'))
-		{
-			$arrDrivers[] = 'MSSQL';
-		}
-		if (function_exists('pg_connect'))
-		{
-			$arrDrivers[] = 'PostgreSQL';
-		}
-		if (function_exists('sybase_connect'))
-		{
-			$arrDrivers[] = 'Sybase';
-		}
 
 		foreach ($arrDrivers as $strDriver)
 		{

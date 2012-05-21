@@ -17,14 +17,14 @@
 ClassLoader::addClasses(array
 (
 	// Models
-	'Contao\\FaqCategoryModel' => 'system/modules/faq/models/FaqCategoryModel.php',
-	'Contao\\FaqModel'         => 'system/modules/faq/models/FaqModel.php',
+	'Contao\FaqCategoryModel' => 'system/modules/faq/models/FaqCategoryModel.php',
+	'Contao\FaqModel'         => 'system/modules/faq/models/FaqModel.php',
 
 	// Modules
-	'Contao\\ModuleFaq'        => 'system/modules/faq/modules/ModuleFaq.php',
-	'Contao\\ModuleFaqList'    => 'system/modules/faq/modules/ModuleFaqList.php',
-	'Contao\\ModuleFaqPage'    => 'system/modules/faq/modules/ModuleFaqPage.php',
-	'Contao\\ModuleFaqReader'  => 'system/modules/faq/modules/ModuleFaqReader.php',
+	'Contao\ModuleFaq'        => 'system/modules/faq/modules/ModuleFaq.php',
+	'Contao\ModuleFaqList'    => 'system/modules/faq/modules/ModuleFaqList.php',
+	'Contao\ModuleFaqPage'    => 'system/modules/faq/modules/ModuleFaqPage.php',
+	'Contao\ModuleFaqReader'  => 'system/modules/faq/modules/ModuleFaqReader.php',
 ));
 
 

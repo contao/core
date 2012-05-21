@@ -116,7 +116,6 @@ class ModuleAutoload extends \BackendModule
 						else
 						{
 							$strNamespace = preg_replace('/^.*namespace ([^;]+).*$/s', '$1', $strBuffer);
-							$strNamespace = str_replace('\\', '\\\\', $strNamespace);
 
 							if ($strNamespace != 'Contao')
 							{
@@ -127,7 +126,7 @@ class ModuleAutoload extends \BackendModule
 								$arrCompat[$strModule][] = basename($strFile, '.php');
 							}
 
-							$strNamespace .=  '\\\\';
+							$strNamespace .=  '\\';
 						}
 
 						$strKey = $strNamespace . basename($strFile, '.php');

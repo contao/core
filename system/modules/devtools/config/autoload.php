@@ -17,9 +17,9 @@
 ClassLoader::addClasses(array
 (
 	// Modules
-	'Contao\\ModuleAutoload'  => 'system/modules/devtools/modules/ModuleAutoload.php',
-	'Contao\\ModuleExtension' => 'system/modules/devtools/modules/ModuleExtension.php',
-	'Contao\\ModuleLabels'    => 'system/modules/devtools/modules/ModuleLabels.php',
+	'Contao\ModuleAutoload'  => 'system/modules/devtools/modules/ModuleAutoload.php',
+	'Contao\ModuleExtension' => 'system/modules/devtools/modules/ModuleExtension.php',
+	'Contao\ModuleLabels'    => 'system/modules/devtools/modules/ModuleLabels.php',
 ));
 
 

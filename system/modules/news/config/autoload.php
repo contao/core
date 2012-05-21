@@ -17,19 +17,19 @@
 ClassLoader::addClasses(array
 (
 	// Classes
-	'Contao\\News'              => 'system/modules/news/classes/News.php',
+	'Contao\News'              => 'system/modules/news/classes/News.php',
 
 	// Models
-	'Contao\\NewsArchiveModel'  => 'system/modules/news/models/NewsArchiveModel.php',
-	'Contao\\NewsFeedModel'     => 'system/modules/news/models/NewsFeedModel.php',
-	'Contao\\NewsModel'         => 'system/modules/news/models/NewsModel.php',
+	'Contao\NewsArchiveModel'  => 'system/modules/news/models/NewsArchiveModel.php',
+	'Contao\NewsFeedModel'     => 'system/modules/news/models/NewsFeedModel.php',
+	'Contao\NewsModel'         => 'system/modules/news/models/NewsModel.php',
 
 	// Modules
-	'Contao\\ModuleNews'        => 'system/modules/news/modules/ModuleNews.php',
-	'Contao\\ModuleNewsArchive' => 'system/modules/news/modules/ModuleNewsArchive.php',
-	'Contao\\ModuleNewsList'    => 'system/modules/news/modules/ModuleNewsList.php',
-	'Contao\\ModuleNewsMenu'    => 'system/modules/news/modules/ModuleNewsMenu.php',
-	'Contao\\ModuleNewsReader'  => 'system/modules/news/modules/ModuleNewsReader.php',
+	'Contao\ModuleNews'        => 'system/modules/news/modules/ModuleNews.php',
+	'Contao\ModuleNewsArchive' => 'system/modules/news/modules/ModuleNewsArchive.php',
+	'Contao\ModuleNewsList'    => 'system/modules/news/modules/ModuleNewsList.php',
+	'Contao\ModuleNewsMenu'    => 'system/modules/news/modules/ModuleNewsMenu.php',
+	'Contao\ModuleNewsReader'  => 'system/modules/news/modules/ModuleNewsReader.php',
 ));
 
 

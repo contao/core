@@ -119,7 +119,7 @@ abstract class Database
 	{
 		if (!is_object(static::$objInstance))
 		{
-			$strClass = '\\Database_' . ucfirst(strtolower($GLOBALS['TL_CONFIG']['dbDriver']));
+			$strClass = 'Database_' . ucfirst(strtolower($GLOBALS['TL_CONFIG']['dbDriver']));
 			static::$objInstance = new $strClass();
 		}
 
