@@ -5,6 +5,9 @@ Version 2.11.4 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Re-applied the "autofocus the first field" patch (see #4297).
+
+### Fixed
 The pagination menu fix was missing in the listing, search and RSS reader
 modules (see #4292).
 
