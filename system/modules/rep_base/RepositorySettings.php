@@ -44,7 +44,6 @@ define('REPOSITORY_SOAPCACHE', true);
 define('REPOSITORY_COREVERSIONS',
 		'30000003,30000003;'.	// 3.0.0 beta1
 		'20110039,20110039;'.	// 2.11.3 stable
-		'20110039,20110039;'.	// 2.11.2 stable
 		'20110029,20110029;'.	// 2.11.2 stable
 		'20110019,20110019;'.	// 2.11.1 stable
 		'20110009,20110009;'.	// 2.11.0 stable
