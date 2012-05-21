@@ -5,6 +5,10 @@ Version 2.11.4 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly tell Google Analytics to anonymize the visitor's IP (see #4290). Heads
+up: Adjust your `moo_analytics` templates accordingly!
+
+### Fixed
 Correctly align stylect menus in Safari and Opera (see #4284).
 
 

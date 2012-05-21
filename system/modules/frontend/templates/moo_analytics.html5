@@ -14,7 +14,7 @@ if (!BE_USER_LOGGED_IN && sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIp
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-XXXXX-X']);
 <?php if ($GLOBALS['TL_CONFIG']['privacyAnonymizeGA']): ?>
-_gaq.push(['_anonymizeIp']);
+_gaq.push(['_gat._anonymizeIp']);
 <?php endif; ?>
 _gaq.push(['_trackPageview']);
 (function() {
