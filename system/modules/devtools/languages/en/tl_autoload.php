@@ -21,4 +21,4 @@ $GLOBALS['TL_LANG']['tl_merge']['available']      = 'Available modules';
 $GLOBALS['TL_LANG']['tl_merge']['options']        = 'Options';
 $GLOBALS['TL_LANG']['tl_merge']['override']       = 'Override existing autoload files';
 $GLOBALS['TL_LANG']['tl_merge']['ide_compat']     = 'Update the IDE compatibility file';
-$GLOBALS['TL_LANG']['tl_merge']['explain']        = 'Here you can automatically create the <em>config/autoload.php</em> files required by Conato 3, which add all classes and templates to the autoloader. If the <em>namespace</em> command is found in a PHP class, the namespace will be added as well.';
+$GLOBALS['TL_LANG']['tl_merge']['explain']        = 'Here you can automatically create the <em>config/autoload.php</em> files required by Contao 3, which add all classes and templates to the autoloader. If the <em>namespace</em> command is found in a PHP class, the namespace will be added as well.';
