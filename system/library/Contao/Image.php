@@ -190,13 +190,13 @@ class Image
 		{
 			if (($intWidth * $objFile->height) != ($intHeight * $objFile->width))
 			{
-				$intWidth = round($objFile->width * $height / $objFile->height);
+				$intWidth = max(round($objFile->width * $height / $objFile->height), 1);
 				$intPositionX = -intval(($intWidth - $width) / 2);
 
 				if ($intWidth < $width)
 				{
 					$intWidth = $width;
-					$intHeight = round($objFile->height * $width / $objFile->width);
+					$intHeight = max(round($objFile->height * $width / $objFile->width), 1);
 					$intPositionX = 0;
 					$intPositionY = -intval(($intHeight - $height) / 2);
 				}
@@ -257,14 +257,14 @@ class Image
 		// Calculate the height if only the width is given
 		elseif ($intWidth)
 		{
-			$intHeight = round($objFile->height * $width / $objFile->width);
+			$intHeight = max(round($objFile->height * $width / $objFile->width), 1);
 			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
 		}
 
 		// Calculate the width if only the height is given
 		elseif ($intHeight)
 		{
-			$intWidth = round($objFile->width * $height / $objFile->height);
+			$intWidth = max(round($objFile->width * $height / $objFile->height), 1);
 			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
 		}
 

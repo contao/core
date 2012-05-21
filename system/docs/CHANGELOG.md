@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.0.beta2 (XXXX-XX-XX)
+------------------------------
+
+### Fixed
+Make sure the size of a resized image is at least 1 pixel (see #4323).
+
+
 Version 3.0.beta1 (2012-05-17)
 ------------------------------
 
