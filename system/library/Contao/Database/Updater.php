@@ -273,6 +273,12 @@ class Database_Updater extends \Controller
 		$this->Database->query("UPDATE `tl_content` SET `mooType`='mooStart' WHERE `mooType`='start'");
 		$this->Database->query("UPDATE `tl_content` SET `mooType`='mooStop' WHERE `mooType`='stop'");
 		$this->Database->query("UPDATE `tl_content` SET `mooType`='mooSingle' WHERE `mooType`='single'");
+
+		// Add the "framework" field
+		$this->Database->query("ALTER TABLE `tl_layout` ADD `framework` varchar(255) NOT NULL default ''");
+		$this->Database->query("UPDATE `tl_layout` SET `framework`='a:2:{i:0;s:10:\"layout.css\";i:1;s:11:\"tinymce.css\";}'");
+		$this->Database->query("UPDATE `tl_layout` SET `framework`='a:1:{i:0;s:10:\"layout.css\";}' WHERE skipTinymce=1");
+		$this->Database->query("UPDATE `tl_layout` SET `framework`='' WHERE skipFramework=1");
 	}
 
 

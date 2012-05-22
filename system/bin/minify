@@ -47,20 +47,22 @@ usage()
 ##
 assets()
 {
-  version=$folder/assets/contao
-  copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
+	version=$folder/assets/contao
+	copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
 
 	# CSS
-  for file in `ls $version | grep "\-uncompressed.css"`; do
-  	echo "$copyright" > $version/${file/-uncompressed/}
-  	$css $version/$file >> $version/${file/-uncompressed/}
-  	echo "  Created $version/${file/-uncompressed/}"
-  done
+	for file in `ls $version | grep "\-uncompressed.css"`; do
+		echo "$copyright" > $version/${file/-uncompressed/}
+		$css $version/$file >> $version/${file/-uncompressed/}
+		echo "  Created $version/${file/-uncompressed/}"
+	done
 
 	# JavaScript
-	echo "$copyright" > $version/scheduler.js
-	$js $version/scheduler-uncompressed.js >> $version/scheduler.js
-	echo "  Created $version/scheduler.js"
+	for file in `ls $version | grep "\-uncompressed.js"`; do
+		echo "$copyright" > $version/${file/-uncompressed/}
+		$js $version/$file >> $version/${file/-uncompressed/}
+		echo "  Created $version/${file/-uncompressed/}"
+	done
 }
 
 ##
@@ -68,8 +70,8 @@ assets()
 ##
 contao()
 {
-  version=$folder/system/modules/core/html
-  copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
+	version=$folder/system/modules/core/html
+	copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
 	echo "$copyright" > $version/contao.js
 	$js $version/contao-uncompressed.js >> $version/contao.js
 	echo "  Created $version/contao.js"
@@ -89,21 +91,21 @@ theme()
 		cssgrep=".css"
 	fi
 
-  version=$folder/system/themes/default
-  copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
+	version=$folder/system/themes/default
+	copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
 
 	# CSS
 	for file in `ls $version/src | grep "$cssgrep"`; do
- 		echo "$copyright" > $version/$file
- 		$css $version/src/$file >> $version/$file
- 		echo "  Created $version/$file"
+		echo "$copyright" > $version/$file
+		$css $version/src/$file >> $version/$file
+		echo "  Created $version/$file"
 	done
 
 	# JS
 	for file in `ls $version/src | grep "$jsgrep"`; do
- 		echo "$copyright" > $version/$file
- 		$js $version/src/$file >> $version/$file
- 		echo "  Created $version/$file"
+		echo "$copyright" > $version/$file
+		$js $version/src/$file >> $version/$file
+		echo "  Created $version/$file"
 	done
 }
 
@@ -170,55 +172,55 @@ colorbox()
 ##
 mediaelement()
 {
-  # jQuery
+	# jQuery
 	for version in `ls -d $folder/plugins/jQuery/mediaelement/*`; do
 		copyright="/* MediaElement.js $(basename $version), (c) 2010-2012 John Dyer <http://j.hn>, MIT/GPLv2 */"
 
 		# CSS
 		for file in `ls $version/css | grep -v ".min"`; do
-  		echo "$copyright" > $version/css/${file/.css/.min.css}
-  		$css $version/css/$file >> $version/css/${file/.css/.min.css}
-  		echo "  Created $version/css/${file/.css/.min.css}"
+			echo "$copyright" > $version/css/${file/.css/.min.css}
+			$css $version/css/$file >> $version/css/${file/.css/.min.css}
+			echo "  Created $version/css/${file/.css/.min.css}"
 		done
 
 		# JavaScript
 		for file in `ls $version/js | grep -v ".min"`; do
-  		echo "$copyright" > $version/js/${file/.js/.min.js}
-  		$js $version/js/$file >> $version/js/${file/.js/.min.js}
-  		echo "  Created $version/js/${file/.js/.min.js}"
-  	done
+			echo "$copyright" > $version/js/${file/.js/.min.js}
+			$js $version/js/$file >> $version/js/${file/.js/.min.js}
+			echo "  Created $version/js/${file/.js/.min.js}"
+		done
 
-    # Concat the mediaelement.js and mediaelementplayer.js files
-	  { cat $version/js/mediaelement.js; echo ""; cat $version/js/mediaelementplayer.js; } > $version/js/mediaelement-and-player.js
-	  { cat $version/js/mediaelement.min.js; echo ""; cat $version/js/mediaelementplayer.min.js; } > $version/js/mediaelement-and-player.min.js
+		# Concat the mediaelement.js and mediaelementplayer.js files
+		{ cat $version/js/mediaelement.js; echo ""; cat $version/js/mediaelementplayer.js; } > $version/js/mediaelement-and-player.js
+		{ cat $version/js/mediaelement.min.js; echo ""; cat $version/js/mediaelementplayer.min.js; } > $version/js/mediaelement-and-player.min.js
 	done
 
-  # MooTools
+	# MooTools
 	for version in `ls -d $folder/plugins/mootools/mediaelement/*`; do
 		adapter="/* MooToolsAdapter 0.1, (c) 2011 Inkling Systems, Inc. <http://github.com/inkling/backbone-mootools>, Apache License 2.0 */"
 		copyright="/* MediaElement.js $(basename $version), (c) 2010-2012 John Dyer <http://j.hn>, MIT/GPLv2 */"
 
 		# CSS
 		for file in `ls $version/css | grep -v ".min"`; do
-  		echo "$copyright" > $version/css/${file/.css/.min.css}
-  		$css $version/css/$file >> $version/css/${file/.css/.min.css}
-  		echo "  Created $version/css/${file/.css/.min.css}"
+			echo "$copyright" > $version/css/${file/.css/.min.css}
+			$css $version/css/$file >> $version/css/${file/.css/.min.css}
+			echo "  Created $version/css/${file/.css/.min.css}"
 		done
 
 		# JavaScript
 		for file in `ls $version/js | grep -v ".min"`; do
-		  if [ $file == "MooToolsAdapter.js" ]; then
-  		  echo "$adapter" > $version/js/${file/.js/.min.js}
-		  else
-  		  echo "$copyright" > $version/js/${file/.js/.min.js}
-  		fi
-  		$js $version/js/$file >> $version/js/${file/.js/.min.js}
-  		echo "  Created $version/js/${file/.js/.min.js}"
-  	done
+			if [ $file == "MooToolsAdapter.js" ]; then
+				echo "$adapter" > $version/js/${file/.js/.min.js}
+			else
+				echo "$copyright" > $version/js/${file/.js/.min.js}
+			fi
+			$js $version/js/$file >> $version/js/${file/.js/.min.js}
+			echo "  Created $version/js/${file/.js/.min.js}"
+		done
 
-    # Concat the mediaelement.js and mediaelementplayer.js files
-	  { cat $version/js/MooToolsAdapter.js; echo ""; cat $version/js/mediaelement.js; echo ""; cat $version/js/mediaelementplayer.js; } > $version/js/mediaelement-and-player.js
-	  { cat $version/js/MooToolsAdapter.min.js; echo ""; cat $version/js/mediaelement.min.js; echo ""; cat $version/js/mediaelementplayer.min.js; } > $version/js/mediaelement-and-player.min.js
+		# Concat the mediaelement.js and mediaelementplayer.js files
+		{ cat $version/js/MooToolsAdapter.js; echo ""; cat $version/js/mediaelement.js; echo ""; cat $version/js/mediaelementplayer.js; } > $version/js/mediaelement-and-player.js
+		{ cat $version/js/MooToolsAdapter.min.js; echo ""; cat $version/js/mediaelement.min.js; echo ""; cat $version/js/mediaelementplayer.min.js; } > $version/js/mediaelement-and-player.min.js
 	done
 }
 
@@ -227,22 +229,22 @@ mediaelement()
 ##
 mootools()
 {
-  # Minify
+	# Minify
 	for version in `ls -d $folder/plugins/mootools/core/*`; do
-    mobile="/* MooTools mobile, (c) Christoph Pojer (@cpojer), MIT-style license */"
+		mobile="/* MooTools mobile, (c) Christoph Pojer (@cpojer), MIT-style license */"
 		copyright="/* MooTools $(basename $version), <http://mootools.net>, MIT-style license */"
 		for file in `ls $version | grep "\-uncompressed"`; do
-		  if [ $file == "mootools-mobile-uncompressed.js" ]; then
-  		  echo "$mobile" > $version/${file/-uncompressed/}
-		  else
-  		  echo "$copyright" > $version/${file/-uncompressed/}
-  		fi
-  		$js $version/$file >> $version/${file/-uncompressed/}
-  		echo "  Created $version/${file/-uncompressed/}"
-  	done
+			if [ $file == "mootools-mobile-uncompressed.js" ]; then
+				echo "$mobile" > $version/${file/-uncompressed/}
+			else
+				echo "$copyright" > $version/${file/-uncompressed/}
+			fi
+			$js $version/$file >> $version/${file/-uncompressed/}
+			echo "  Created $version/${file/-uncompressed/}"
+		done
 	done
 
-  # Concat the mootools-core.js and mootools-more.js files
+	# Concat the mootools-core.js and mootools-more.js files
 	{ cat $version/mootools-core-uncompressed.js; echo ""; cat $version/mootools-more-uncompressed.js; echo ""; cat $version/mootools-mobile-uncompressed.js; } > $version/mootools-uncompressed.js
 	{ cat $version/mootools-core.js; echo ""; cat $version/mootools-more.js; echo ""; cat $version/mootools-mobile.js; } > $version/mootools.js
 }
@@ -252,8 +254,8 @@ mootools()
 ##
 chosen()
 {
-  version=$folder/plugins/mootools/chosen
-  copyright="/* Chosen by Patrick Filler, Jules Janssen, Jonnathan Soares, MIT-style license */"
+	version=$folder/plugins/mootools/chosen
+	copyright="/* Chosen by Patrick Filler, Jules Janssen, Jonnathan Soares, MIT-style license */"
 
 	# CSS
 	echo "$copyright" > $version/chosen.css
@@ -300,11 +302,11 @@ datepicker()
 		echo "  Created $version/dashboard.css"
 
 		# JavaScript
-  	files=('Picker.js' 'Picker.Attach.js' 'Picker.Date.js')
+		files=('Picker.js' 'Picker.Attach.js' 'Picker.Date.js')
 		echo "$copyright" > $version/datepicker.js
-  	for file in ${files[@]}; do
-	  	$js $version/src/$file >> $version/datepicker.js
-	  done
+		for file in ${files[@]}; do
+			$js $version/src/$file >> $version/datepicker.js
+		done
 		echo "  Created $version/datepicker.js"
 	done
 }
@@ -319,9 +321,9 @@ mediabox()
 
 		# CSS
 		for file in `ls $version/css | grep "\-uncompressed.css"`; do
-  		echo "$copyright" > $version/css/${file/-uncompressed/}
-  		$css $version/css/$file >> $version/css/${file/-uncompressed/}
-  		echo "  Created $version/css/${file/-uncompressed/}"
+			echo "$copyright" > $version/css/${file/-uncompressed/}
+			$css $version/css/$file >> $version/css/${file/-uncompressed/}
+			echo "  Created $version/css/${file/-uncompressed/}"
 		done
 
 		# JavaScript
@@ -336,7 +338,7 @@ mediabox()
 ##
 mootao()
 {
-  version=$folder/plugins/mootools/mootao
+	version=$folder/plugins/mootools/mootao
 	copyright="/* Contao Open Source CMS, (c) 2005-2012 Leo Feyer, LGPL license */"
 	echo "$copyright" > $version/Mootao.js
 	$js $version/Mootao-uncompressed.js >> $version/Mootao.js
@@ -388,15 +390,15 @@ slimbox()
 ##
 stylect()
 {
-  version=$folder/plugins/mootools/stylect
+	version=$folder/plugins/mootools/stylect
 	copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
 
-  # CSS
+	# CSS
 	echo "$copyright" > $version/css/stylect.css
 	$css $version/css/stylect-uncompressed.css >> $version/css/stylect.css
 	echo "  Created $version/css/stylect.css"
 
-  # JS
+	# JS
 	echo "$copyright" > $version/js/stylect.js
 	$js $version/js/stylect-uncompressed.js >> $version/js/stylect.js
 	echo "  Created $version/js/stylect.js"
@@ -407,15 +409,15 @@ stylect()
 ##
 tablesort()
 {
-  version=$folder/plugins/mootools/tablesort
+	version=$folder/plugins/mootools/tablesort
 	copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
 
-  # CSS
+	# CSS
 	echo "$copyright" > $version/css/tablesort.css
 	$css $version/css/tablesort-uncompressed.css >> $version/css/tablesort.css
 	echo "  Created $version/css/tablesort.css"
 
-  # JS
+	# JS
 	echo "$copyright" > $version/js/tablesort.js
 	$js $version/js/tablesort-uncompressed.js >> $version/js/tablesort.js
 	echo "  Created $version/js/tablesort.js"
@@ -478,23 +480,23 @@ if [ "$1" == "" ]; then
 	usage
 else
 
-  # Get the installation path
+	# Get the installation path
 	folder=$(cd $(dirname "$0") && pwd)
 	folder=${folder/\/system\/bin/}
 
 	# Check whether java is available
 	if [ $(which java) == "" ]; then
-  	echo -e "  \033[0;31mJava is required to run this script\033[0m"
+		echo -e "  \033[0;31mJava is required to run this script\033[0m"
 		exit 1
 	fi
 
 	# Check whether uglifyjs is available
 	if [ $(which uglifyjs) != "" ]; then
 		js="uglifyjs -nc --max-line-len 0"
-  	echo -e "  \033[0;33mWill be using uglifyjs to minify .js files\033[0m"
+		echo -e "  \033[0;33mWill be using uglifyjs to minify .js files\033[0m"
 	else
 		js="java -jar $folder/system/bin/yuicompressor-2.4.6.jar --charset UTF-8"
-  	echo -e "  \033[0;33mWill be using yuicompressor to minify .js files\033[0m"
+		echo -e "  \033[0;33mWill be using yuicompressor to minify .js files\033[0m"
 	fi
 
 	# CSS minifier

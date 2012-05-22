@@ -204,9 +204,10 @@ class PageRegular extends \Frontend
 		}
 
 		$strFramework = '';
+		$arrFramework = deserialize($objLayout->framework);
 
 		// Generate the CSS framework
-		if (!$objLayout->skipFramework)
+		if (is_array($arrFramework) && in_array('layout.css', $arrFramework))
 		{
 			// Wrapper
 			if ($objLayout->static)
@@ -275,7 +276,7 @@ class PageRegular extends \Frontend
 			{
 				if ($objPage->outputFormat == 'xhtml')
 				{
-					$this->Template->framework .= '<style type="text/css" media="screen">' . "\n";
+					$this->Template->framework .= '<style type="text/css">' . "\n";
 					$this->Template->framework .= '/* <![CDATA[ */' . "\n";
 					$this->Template->framework .= $strFramework . "\n";
 					$this->Template->framework .= '/* ]]> */' . "\n";
@@ -283,9 +284,7 @@ class PageRegular extends \Frontend
 				}
 				else
 				{
-					$this->Template->framework .= '<style media="screen">' . "\n";
-					$this->Template->framework .= $strFramework . "\n";
-					$this->Template->framework .= '</style>' . "\n";
+					$this->Template->framework .= '<style>' . $strFramework . '</style>' . "\n";
 				}
 			}
 		}
@@ -368,6 +367,7 @@ class PageRegular extends \Frontend
 		$strCcStyleSheets = '';
 		$arrStyleSheets = deserialize($objLayout->stylesheet);
 		$strTagEnding = ($objPage->outputFormat == 'xhtml') ? ' />' : '>';
+		$arrFramework = deserialize($objLayout->framework);
 
 		// Google web fonts
 		if ($objLayout->webfonts != '')
@@ -378,16 +378,22 @@ class PageRegular extends \Frontend
 
 		$objCombiner = new \Combiner();
 
-		// Skip the Contao framework style sheet
-		if (!$objLayout->skipFramework)
+		// Add the Contao CSS framework style sheets
+		if (is_array($arrFramework))
 		{
-			$objCombiner->add('assets/contao/framework.css');
+			foreach ($arrFramework as $strFile)
+			{
+				if ($strFile != 'tinymce.css')
+				{
+					$objCombiner->add('assets/contao/' . $strFile);
+				}
+			}
 		}
 
 		// Skip the TinyMCE style sheet
-		if (!$objLayout->skipTinymce && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
+		if (is_array($arrFramework) && in_array('tinymce.css', $arrFramework) && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
 		{
-			$objCombiner->add($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css', filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'), 'all');
+			$objCombiner->add($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css', filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'));
 		}
 
 		// Internal style sheets

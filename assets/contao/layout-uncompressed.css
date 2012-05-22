@@ -8,23 +8,46 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-body {
-	margin:0;
-	padding:0;
-	font-size:100.01%;
-	text-align:left;
-	position:relative;
-}
-select,input,textarea {
-	font-size:99%;
-}
-form {
+/**
+ * Standardize some basic elements
+ */
+body,form {
 	margin:0;
 	padding:0;
 }
 img {
 	border:0;
 }
+header,footer,nav,section,aside,article,figure,figcaption {
+	display:block;
+}
+
+/**
+ * Fix some font issues
+ */
+body {
+	font-size:100.01%;
+}
+select,input,textarea {
+	font-size:99%;
+}
+body,.inside,.custom {
+	text-align:left;
+}
+
+/**
+ * Fix some positioning issues
+ */
+body,#main,.inside {
+	position:relative;
+}
+*+html #main {
+	position:static;
+}
+
+/**
+ * Float the left and right column
+ */
 #left {
 	float:left;
 }
@@ -33,12 +56,11 @@ img {
 }
 #main {
 	width:auto;
-	position:relative;
 }
-.inside {
-	position:relative;
-	text-align:left;
-}
+
+/**
+ * Clear floats
+ */
 .block {
 	overflow:hidden;
 }
@@ -48,6 +70,10 @@ img {
 	line-height:0.1px;
 	clear:both;
 }
+
+/**
+ * Hide invisible elements
+ */
 .invisible {
 	width:0;
 	height:0;
@@ -57,9 +83,12 @@ img {
 	overflow:hidden;
 	display:inline;
 }
+
+/**
+ * Custom layout sections
+ */
 .custom {
 	display:block;
-	text-align:left;
 }
 .custom:after {
 	content:".";
@@ -67,10 +96,4 @@ img {
 	height:0;
 	clear:both;
 	visibility:hidden;
-}
-*+html #main {
-	position:static;
-}
-header,footer,nav,section,aside,article,figure,figcaption {
-	display:block;
 }

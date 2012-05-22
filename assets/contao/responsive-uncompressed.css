@@ -1,0 +1,179 @@
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * @package Core
+ * @link    http://www.contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+/**
+ * Make the wrapping container 960 pixel wide
+ */
+#wrapper {
+	width:960px;
+	margin:0 auto;
+}
+
+/**
+ * Set the default margin of the grid columns
+ */
+*[class*="grid"] {
+	float:left;
+	display:inline;
+	margin-right:10px;
+	margin-left:10px;
+}
+
+/**
+ * Add a default margin to all content elements, so they align with the floatet
+ * ones (otherwise you would have to add "grid12" to every element)
+ */
+.mod_article>* {
+	margin-left:10px;
+	margin-right:10px;
+}
+
+/**
+ * Remove the margin from floated articles, because the margin is already
+ * applied to its content elements (see above)
+ */
+.inside>*[class*="grid"] {
+	margin-left:0;
+	margin-right:0;
+}
+
+/**
+ * Grid column widths
+ */
+.grid1  { width:60px;  }
+.grid2  { width:140px; }
+.grid3  { width:220px; }
+.grid4  { width:300px; }
+.grid5  { width:380px; }
+.grid6  { width:460px; }
+.grid7  { width:540px; }
+.grid8  { width:620px; }
+.grid9  { width:700px; }
+.grid10 { width:780px; }
+.grid11 { width:860px; }
+.grid12 { width:940px; }
+
+/**
+ * Floated articles can be 20 pixel wider (no margin)
+ */
+.mod_article.grid1  { width:80px;  }
+.mod_article.grid2  { width:160px; }
+.mod_article.grid3  { width:240px; }
+.mod_article.grid4  { width:320px; }
+.mod_article.grid5  { width:400px; }
+.mod_article.grid6  { width:480px; }
+.mod_article.grid7  { width:560px; }
+.mod_article.grid8  { width:640px; }
+.mod_article.grid9  { width:720px; }
+.mod_article.grid10 { width:800px; }
+.mod_article.grid11 { width:880px; }
+.mod_article.grid12 { width:960px; }
+
+/**
+ * Default offset widths
+ */
+.offset1  { margin-left:90px;  }
+.offset2  { margin-left:170px; }
+.offset3  { margin-left:250px; }
+.offset4  { margin-left:330px; }
+.offset5  { margin-left:410px; }
+.offset6  { margin-left:490px; }
+.offset7  { margin-left:570px; }
+.offset8  { margin-left:650px; }
+.offset9  { margin-left:730px; }
+.offset10 { margin-left:810px; }
+.offset11 { margin-left:890px; }
+.offset12 { margin-left:970px; }
+
+/**
+ * Reduce the overall width and the width of the grid columns if the screen
+ * width is less than 980px (e.g. on a portrait tablet)
+ */
+@media (min-width:768px) and (max-width:979px)
+{
+	/**
+	 * Reduce the overall width
+	 */
+	#wrapper {
+		width:744px;
+	}
+
+	/**
+	 * Reduce the grid column widths
+	 */
+	.grid1  { width:42px;  }
+	.grid2  { width:104px; }
+	.grid3  { width:166px; }
+	.grid4  { width:228px; }
+	.grid5  { width:290px; }
+	.grid6  { width:352px; }
+	.grid7  { width:414px; }
+	.grid8  { width:476px; }
+	.grid9  { width:538px; }
+	.grid10 { width:600px; }
+	.grid11 { width:662px; }
+	.grid12 { width:724px; }
+
+	/**
+	 * Floated articles can be 20 pixel wider (no margin)
+	 */
+	.mod_article.grid1  { width:62px;  }
+	.mod_article.grid2  { width:124px; }
+	.mod_article.grid3  { width:186px; }
+	.mod_article.grid4  { width:248px; }
+	.mod_article.grid5  { width:310px; }
+	.mod_article.grid6  { width:372px; }
+	.mod_article.grid7  { width:434px; }
+	.mod_article.grid8  { width:496px; }
+	.mod_article.grid9  { width:558px; }
+	.mod_article.grid10 { width:620px; }
+	.mod_article.grid11 { width:682px; }
+	.mod_article.grid12 { width:744px; }
+
+	/**
+	 * Reduce the offset widths
+	 */
+	.offset1  { margin-left:72px;  }
+	.offset2  { margin-left:134px; }
+	.offset3  { margin-left:196px; }
+	.offset4  { margin-left:258px; }
+	.offset5  { margin-left:320px; }
+	.offset6  { margin-left:382px; }
+	.offset7  { margin-left:444px; }
+	.offset8  { margin-left:506px; }
+	.offset9  { margin-left:568px; }
+	.offset10 { margin-left:630px; }
+	.offset11 { margin-left:692px; }
+	.offset12 { margin-left:754px; }
+}
+
+/**
+ * Remove all floats and fixed widths if the screen width is less than 768
+ * pixel (e.g. on a mobile phone)
+ */
+@media (max-width:767px)
+{
+	/**
+	 * Remove the overall width
+	 */
+	#wrapper {
+		width:auto;
+	}
+
+	/**
+	 * Show all columns underneath each other
+	 */
+	*[class*="grid"],.inside>*[class*="grid"] {
+		float:none;
+		display:block;
+		width:auto;
+		margin:0;
+	}
+}

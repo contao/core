@@ -219,7 +219,12 @@ class Combiner extends \System
 
 				$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
 				$content = preg_replace('/url\("(?!(data:|https?:\/\/|\/))/', 'url("../../' . $strGlue, $content);
-				$content = '@media ' . ($arrFile['media'] ?: 'all') . "{\n" . $content . "\n}";
+
+				// Add the media type if there is no @media command in the code
+				if ($arrFile['media'] != '' && $arrFile['media'] != 'all' && strpos($content, '@media') === false)
+				{
+					$content = '@media ' . $arrFile['media'] . "{\n" . $content . "\n}";
+				}
 			}
 
 			$objFile->append($content);

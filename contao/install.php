@@ -287,7 +287,7 @@ class InstallTool extends Backend
 			$this->Template->ftpUserError = true;
 			$this->outputAndExit();
 		}
-		elseif (ftp_size($resFtp, $GLOBALS['TL_CONFIG']['ftpPath'] . 'assets/contao/framework.css') == -1)
+		elseif (ftp_size($resFtp, $GLOBALS['TL_CONFIG']['ftpPath'] . 'assets/contao/debug.css') == -1)
 		{
 			$this->Template->ftpPathError = true;
 			$this->outputAndExit();

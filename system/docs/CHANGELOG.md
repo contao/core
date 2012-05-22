@@ -4,6 +4,11 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Made the Contao CSS framework configurable in the page layout module and added
+an optional reset style sheet and a responsive 12-column grid. If none of the
+components are selected, the CSS framework is entirely bypassed.
+
 ### Fixed
 Add the request token to "save and new" requests (see #4329).
 
