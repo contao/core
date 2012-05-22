@@ -67,14 +67,32 @@ class Help extends Backend
 
 		$arrData = $GLOBALS['TL_DCA'][$table]['fields'][$field];
 
+		// Back end modules
+		if ($table == 'tl_user_group' && $field == 'modules')
+		{
+			$rows = array();
+
+			foreach (array_keys($GLOBALS['BE_MOD']) as $group)
+			{
+				$rows[] = array('headspan', $arrData['reference'][$group]);
+
+				foreach ($GLOBALS['BE_MOD'][$group] as $module=>$class)
+				{
+					$rows[] = $arrData['reference'][$module];
+				}
+			}
+
+			$this->Template->rows = $rows;
+		}
+
 		// Front end modules
-		if ($table == 'tl_module' && $field == 'type')
+		elseif ($table == 'tl_module' && $field == 'type')
 		{
 			$rows = array();
 
 			foreach (array_keys($GLOBALS['FE_MOD']) as $group)
 			{
-				$rows[] = array('colspan', $arrData['reference'][$group]);
+				$rows[] = array('headspan', $arrData['reference'][$group]);
 
 				foreach ($GLOBALS['FE_MOD'][$group] as $module=>$class)
 				{
@@ -86,13 +104,13 @@ class Help extends Backend
 		}
 
 		// Content elements
-		if ($table == 'tl_content' && $field == 'type')
+		elseif ($table == 'tl_content' && $field == 'type')
 		{
 			$rows = array();
 
 			foreach (array_keys($GLOBALS['TL_CTE']) as $group)
 			{
-				$rows[] = array('colspan', $arrData['reference'][$group]);
+				$rows[] = array('headspan', $arrData['reference'][$group]);
 
 				foreach ($GLOBALS['TL_CTE'][$group] as $element=>$class)
 				{

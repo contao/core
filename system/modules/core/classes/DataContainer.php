@@ -336,7 +336,7 @@ class DataContainer extends \Backend
 					break;
 			}
 
-			$wizard .= ' <img src="plugins/mootools/datepicker/' . DATEPICKER . '/icon.gif" width="20" height="20" alt="" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px">
+			$wizard .= ' <img src="plugins/mootools/datepicker/' . DATEPICKER . '/icon.gif" width="20" height="20" alt="" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['datepicker']).'" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px;cursor:pointer">
   <script>
   window.addEvent("domready", function() {
     new Picker.Date($$("#ctrl_' . $objWidget->id . '"), {
@@ -356,7 +356,7 @@ class DataContainer extends \Backend
 		// Color picker
 		if ($arrData['eval']['colorpicker'])
 		{
-			$wizard .= ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" id="moo_' . $this->strField . '"') . '
+			$wizard .= ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['colorpicker']).'" id="moo_' . $this->strField . '"') . '
   <script>
   window.addEvent("domready", function() {
     new MooRainbow("moo_' . $this->strField . '", {

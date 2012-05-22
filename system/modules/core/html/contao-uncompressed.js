@@ -1059,10 +1059,13 @@ var Backend =
 				return e.get('html');
 			}
 		});
-		['a[title]', 'img[title]', 'input[title]'].each(function(el) {
+		['a[title]', 'input[title]'].each(function(el) {
 			new Tips.Contao($$(el), {
 				offset: {x:0, y:26}
 			});
+		});
+		new Tips.Contao('img[title]', {
+			offset: {x:0, y:30}
 		});
 	},
 

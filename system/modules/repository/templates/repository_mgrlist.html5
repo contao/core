@@ -53,7 +53,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 ?>
 <tr class="datarow">
   <td class="col_selectcheckbox"><?php if (property_exists($ext, 'updateLink')): ?><input type="checkbox" name="selectedids[]" value="<?php echo $ext->id; ?>" onclick="enableSelectFunctions()"><?php else: ?>&nbsp;<?php endif; ?></td>
-  <td class="col_extension"><?php echo property_exists($ext, 'catalogLink') ? '<a href="'.$ext->catalogLink.'">'.$ext->extension.'</a>' : $ext->extension; ?></td>
+  <td class="col_extension"><?php echo property_exists($ext, 'catalogLink') ? '<a href="'.$ext->catalogLink.'" title="'.$text['showdetails'].'">'.$ext->extension.'</a>' : $ext->extension; ?></td>
   <td class="col_version"><?php echo Repository::formatVersion($ext->version); ?></td>
   <td class="col_build"><?php echo $ext->build; ?></td>
   <td class="col_status"><?php foreach ($ext->status as $sta) echo '<div class="color_'.$sta->color.'">'.sprintf($statext[$sta->text], $sta->par1, $sta->par2).'</div>'; ?></td>
