@@ -552,6 +552,7 @@ h2.sub_headline_index {
 	margin-top:3px;
 	margin-bottom:3px;
 	word-break:break-word;
+	white-space:pre-wrap;
 }
 .tl_content pre.disabled {
 	color:#a6a6a6;
