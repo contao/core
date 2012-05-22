@@ -1151,4 +1151,5 @@ fieldset.collapsed > legend {
 	border-radius:4px;
 	position:absolute;
 	left:50%;
+	z-index:99;
 }
