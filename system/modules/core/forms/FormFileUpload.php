@@ -45,7 +45,8 @@ class FormFileUpload extends \Widget implements \uploadable
 		switch ($strKey)
 		{
 			case 'maxlength':
-				// Not allowed here (see #3094)
+				// Do not add as attribute (see #3094)
+				$this->arrConfiguration['maxlength'] = $varValue;
 				break;
 
 			case 'mandatory':
