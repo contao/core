@@ -797,7 +797,7 @@ abstract class Controller extends \System
 			foreach ($GLOBALS['TL_HOOKS']['getCountries'] as $callback)
 			{
 				$this->import($callback[0]);
-				$return = $this->$callback[0]->$callback[1]($return);
+				$return = $this->$callback[0]->$callback[1]($return, $countries);
 			}
 		}
 
