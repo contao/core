@@ -31,38 +31,40 @@ body {
 select,input,textarea {
 	font-size:99%;
 }
-body,.inside,.custom {
-	text-align:left;
-}
 
 /**
  * Fix some positioning issues
  */
-body,#container,#footer,.inside {
+#container,#footer,.inside {
 	position:relative;
 }
 
 /**
+ * Apply the holy grail CSS layout if the screen is at least 768 pixel wide,
+ * otherwise display all columns underneath each other
+ *
  * @see http://www.alistapart.com/articles/holygrail
  */
-
-#container {
-	overflow:hidden;
-}
-#main,#left,#right {
-	float:left;
-	position:relative;
-	padding-bottom:1000em;
-	margin-bottom:-1000em;
-}
-#main {
-	width:100%;
-}
-#left {
-	margin-left:-100%;
-}
-#right {
-	margin-right:-100%;
+@media (min-width:768px)
+{
+	#container {
+		overflow:hidden;
+	}
+	#main,#left,#right {
+		float:left;
+		position:relative;
+		padding-bottom:1000em;
+		margin-bottom:-1000em;
+	}
+	#main {
+		width:100%;
+	}
+	#left {
+		margin-left:-100%;
+	}
+	#right {
+		margin-right:-100%;
+	}
 }
 
 /**
