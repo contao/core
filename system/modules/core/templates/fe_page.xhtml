@@ -31,6 +31,13 @@
 <?php echo $this->getCustomSections('before'); ?>
 
 <div id="container">
+
+<div id="main">
+<div class="inside">
+<?php echo $this->main; ?> 
+</div>
+<?php echo $this->getCustomSections('main'); ?> 
+</div>
 <?php if ($this->left): ?>
 
 <div id="left">
@@ -47,14 +54,6 @@
 </div>
 </div>
 <?php endif; ?>
-
-<div id="main">
-<div class="inside">
-<?php echo $this->main; ?> 
-</div>
-<?php echo $this->getCustomSections('main'); ?> 
-<div id="clear"></div>
-</div>
 
 </div>
 <?php echo $this->getCustomSections('after'); ?>

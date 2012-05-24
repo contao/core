@@ -228,7 +228,7 @@ class PageRegular extends \Frontend
 				}
 			}
 
-			$strMain = '';
+			$strContainer = '';
 
 			// Left column
 			if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
@@ -237,8 +237,8 @@ class PageRegular extends \Frontend
 
 				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 				{
-					$strFramework .= sprintf('#left{width:%s}', $arrSize['value'] . $arrSize['unit']);
-					$strMain .= sprintf('margin-left:%s;', $arrSize['value'] . $arrSize['unit']);
+					$strFramework .= sprintf('#left{width:%s;right:%s}', $arrSize['value'] . $arrSize['unit'], $arrSize['value'] . $arrSize['unit']);
+					$strContainer .= sprintf('padding-left:%s;', $arrSize['value'] . $arrSize['unit']);
 				}
 			}
 
@@ -250,14 +250,14 @@ class PageRegular extends \Frontend
 				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 				{
 					$strFramework .= sprintf('#right{width:%s}', $arrSize['value'] . $arrSize['unit']);
-					$strMain .= sprintf('margin-right:%s;', $arrSize['value'] . $arrSize['unit']);
+					$strContainer .= sprintf('padding-right:%s;', $arrSize['value'] . $arrSize['unit']);
 				}
 			}
 
 			// Main column
-			if ($strMain != '')
+			if ($strContainer != '')
 			{
-				$strFramework .= sprintf('#main{%s}', substr($strMain, 0, -1));
+				$strFramework .= sprintf('#container{%s}', substr($strContainer, 0, -1));
 			}
 
 			// Footer

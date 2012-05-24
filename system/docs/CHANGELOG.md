@@ -4,6 +4,12 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+The layout builder now uses the holy grail CSS code to generate the columns.
+This moves the main column above the left and right column, which is good for
+SEO purposes and for repsonsive designs. If it turns out that this is not
+backwards compatible, it can be reverted.
+
 ### New
 Made the Contao CSS framework configurable in the page layout module and added
 an optional reset style sheet and a responsive 12-column grid. If none of the
