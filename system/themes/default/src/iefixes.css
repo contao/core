@@ -198,3 +198,27 @@ fieldset.nolegend {
 	padding-top:12px;
 	background-position:left top;
 }
+.ie6 #ctrl_borderradius_top,
+.ie7 #ctrl_borderradius_top,
+.ie8 #ctrl_borderradius_top {
+	background-image: url("images/hints.gif") !important;
+	background-position: 47px -39px !important;
+}
+.ie6 #ctrl_borderradius_right,
+.ie7 #ctrl_borderradius_right,
+.ie8 #ctrl_borderradius_right {
+	background-image: url("images/hints.gif") !important;
+	background-position: 47px -59px !important;
+}
+.ie6 #ctrl_borderradius_bottom,
+.ie7 #ctrl_borderradius_bottom,
+.ie8 #ctrl_borderradius_bottom {
+	background-image: url("images/hints.gif") !important;
+	background-position: 47px -79px !important;
+}
+.ie6 #ctrl_borderradius_left,
+.ie7 #ctrl_borderradius_left,
+.ie8 #ctrl_borderradius_left {
+	background-image: url("images/hints.gif") !important;
+	background-position: 47px -99px !important;
+}
