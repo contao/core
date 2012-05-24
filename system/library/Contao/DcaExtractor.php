@@ -101,6 +101,7 @@ class DcaExtractor extends \Database_Installer
 		if ($GLOBALS['TL_CONFIG']['bypassCache'] || !file_exists($this->strFile))
 		{
 			$this->createExtract();
+			$this->createModelExtract();
 		}
 		else
 		{
@@ -432,5 +433,118 @@ class DcaExtractor extends \Database_Installer
 				new \DcaExtractor($strTable);
 			}
 		}
+	}
+
+
+	public function createModelExtract()
+	{
+		$strModelName = System::getModelClassFromTable($this->strTable);
+		$arrClasses = \ClassLoader::getClasses();
+		$arrDefinedProperties = array();
+		$arrDefinedMethods = array();
+
+		// Create the file
+		$objFile = new File('system/cache/models/' . $strModelName . '.php');
+		$objFile->write("<?php\nnamespace Contao;\nclass $strModelName extends \Model\n{\n\n");
+
+		// scan in reverse order so that method overriding is possible
+		// scan everything for the properties first
+		foreach (array_reverse(scan(TL_ROOT . '/system/modules')) as $strModule)
+		{
+			// get the class name from the ClassLoader so namespaces are considered
+			$strClassPath = 'system/modules/' . $strModule . '/models/' . $strModelName . '.php';
+			$strClassName = array_search($strClassPath, $arrClasses);
+
+			if (!$strClassName)
+			{
+				continue;
+			}
+
+			$objClassFile = new \File($strClassPath);
+			$arrFileContent = $objClassFile->getContentAsArray();
+			$objReflector = new \ReflectionClass($strClassName);
+
+			// properties
+			$arrProperties = $objReflector->getProperties();
+
+			foreach ($arrProperties as $objProperty)
+			{
+				// only take those that are declared in the current class (omit parents)
+				if (!preg_match('/' . preg_quote($strModelName) . '$/', $objProperty->getDeclaringClass()->getName()))
+				{
+					continue;
+				}
+
+				if (in_array($objProperty->getName(), $arrDefinedProperties))
+				{
+					continue;
+				}
+
+				$arrDefinedProperties[] = $objProperty->getName();
+
+				// doc comment
+				$objFile->append("\t" . $objProperty->getDocComment());
+
+				// property (cannot use getStartLine() and getEndLine())
+				$objFile->append("\t" . implode(' ', \Reflection::getModifierNames($objProperty->getModifiers())) . ' $' . $objProperty->getName() . ';');
+
+				// add an additional line break
+				$objFile->append("\n");
+			}
+		}
+
+		// scan again for the methods
+		foreach (array_reverse(scan(TL_ROOT . '/system/modules')) as $strModule)
+		{
+			// get the class name from the ClassLoader so namespaces are considered
+			$strClassPath = 'system/modules/' . $strModule . '/models/' . $strModelName . '.php';
+			$strClassName = array_search($strClassPath, $arrClasses);
+
+			if (!$strClassName)
+			{
+				continue;
+			}
+
+			$objClassFile = new \File($strClassPath);
+			$arrFileContent = $objClassFile->getContentAsArray();
+			$objReflector = new \ReflectionClass($strClassName);
+
+			// methods
+			$arrMethods = $objReflector->getMethods(\ReflectionMethod::IS_PUBLIC);
+
+			foreach ($arrMethods as $objMethod)
+			{
+				// only take those that are declared in the current class (omit parents)
+				if (!preg_match('/' . preg_quote($strModelName) . '$/', $objMethod->getDeclaringClass()->getName()))
+				{
+					continue;
+				}
+
+				if (in_array($objMethod->getName(), $arrDefinedMethods))
+				{
+					continue;
+				}
+
+				$arrDefinedMethods[] = $objMethod->getName();
+
+				// doc comment
+				$objFile->append("\t" . $objMethod->getDocComment());
+
+				// method
+				$objFile->append($arrFileContent[$objMethod->getStartLine() - 1]);
+
+				// method body
+				for ($i=$objMethod->getStartLine();$i<=$objMethod->getEndLine() - 1;$i++)
+				{
+					$objFile->append($arrFileContent[$i]);
+				}
+
+				// add an additional line break
+				$objFile->append("\n");
+			}
+		}
+
+		$objFile->append("}");
+		$objFile->close();
 	}
 }

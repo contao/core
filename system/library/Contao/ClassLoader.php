@@ -195,8 +195,17 @@ class ClassLoader
 			return;
 		}
 
+		// try to load the models from the cache, otherwise we get a fatal error (cannot redeclare ...)
+		// @todo: this kills the whole performance advantage - this has to be changed (probably by a ModelLoader?)
+		// @todo: I had to add the class_alias so models are automatically in the global namespace but it still doesn't quite work (ideas?)
+		if (preg_match('/Model$/', $class) && file_exists(TL_ROOT . '/system/cache/models/' . $class . '.php'))
+		{
+			include TL_ROOT . '/system/cache/models/' . $class . '.php';
+			class_alias('Contao\\' . $class, $class);
+		}
+
 		// The class file is set in the mapper
-		if (isset(self::$classes[$class]))
+		elseif (isset(self::$classes[$class]))
 		{
 			if ($GLOBALS['TL_CONFIG']['debugMode'])
 			{
