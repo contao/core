@@ -72,7 +72,7 @@ class BackendUser extends \User
 	{
 		$session = $this->Session->getData();
 
-		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && $session['referer']['current'] != \Environment::get('requestUri'))
+		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && \Input::get('do') != 'feRedirect' && $session['referer']['current'] != \Environment::get('requestUri'))
 		{
 			// Main script
 			if (\Environment::get('script') == 'contao/main.php')
