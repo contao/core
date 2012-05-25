@@ -31,6 +31,9 @@ body {
 select,input,textarea {
 	font-size:99%;
 }
+html {
+	-webkit-text-size-adjust:none;
+}
 
 /**
  * Fix some positioning issues
@@ -42,7 +45,7 @@ select,input,textarea {
 /**
  * Apply the holy grail CSS layout if the screen is at least 768 pixel wide,
  * otherwise display all columns underneath each other
- *
+ * 
  * @see http://www.alistapart.com/articles/holygrail
  */
 @media (min-width:768px)
@@ -64,6 +67,30 @@ select,input,textarea {
 	}
 	#right {
 		margin-right:-100%;
+	}
+}
+
+/**
+ * Flexible images and videos
+ *
+ * @see http://webdesignerwall.com/tutorials/responsive-design-with-css3-media-queries
+ */
+img {
+	max-width:100%;
+	height:auto;
+	width:auto\9; /* IE8 */
+}
+.video embed,.video object,.video iframe {
+	width:100%;
+	height:auto;
+}
+@media (max-width:767px)
+{
+	.ce_gallery table,.ce_gallery tbody,.ce_gallery tr,.ce_gallery td {
+		display:block;
+	}
+	.ce_gallery td {
+		width:auto !important;
 	}
 }
 
