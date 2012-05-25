@@ -665,11 +665,6 @@ abstract class Backend extends \Controller
 			// Files
 			else
 			{
-				if ($strFile == 'meta.txt')
-				{
-					continue;
-				}
-
 				// Filter images
 				if ($strFilter != '' && !preg_match('/\.(' . str_replace(',', '|', $strFilter) . ')$/i', $strFile))
 				{
