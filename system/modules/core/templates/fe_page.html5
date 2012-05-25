@@ -12,9 +12,6 @@
 <?php echo $this->mooScripts; ?>
 <?php echo $this->head; ?>
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5-<?php echo HTML5SHIM; ?>.js"></script><![endif]-->
-<?php if ($this->mobile): ?>
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<?php endif; ?>
 </head>
 <body id="top" class="{{ua::class}}<?php if ($this->class): ?> <?php echo $this->class; ?><?php endif; ?>"<?php if ($this->onload): ?> onload="<?php echo $this->onload; ?>"<?php endif; ?>>
 

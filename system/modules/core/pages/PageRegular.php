@@ -176,7 +176,6 @@ class PageRegular extends \Frontend
 			die('No layout specified');
 		}
 
-		$objLayout->isMobile = $blnMobile;
 		return $objLayout;
 	}
 
@@ -209,6 +208,8 @@ class PageRegular extends \Frontend
 		// Generate the CSS framework
 		if (is_array($arrFramework) && in_array('layout.css', $arrFramework))
 		{
+			$this->Template->framework = '<meta name="viewport" content="width=device-width,initial-scale=1.0">' . "\n";
+
 			// Wrapper
 			if ($objLayout->static)
 			{
@@ -350,7 +351,6 @@ class PageRegular extends \Frontend
 
 		// Default settings
 		$this->Template->layout = $objLayout;
-		$this->Template->mobile = $objLayout->isMobile;
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->base = \Environment::get('base');
