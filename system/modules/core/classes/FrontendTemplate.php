@@ -58,7 +58,7 @@ class FrontendTemplate extends \Template
 		global $objPage;
 
 		// Ignore certain URL parameters
-		$arrIgnore = array('id', 'file', 'token', 'page', 'day', 'month', 'year');
+		$arrIgnore = array('id', 'file', 'token', 'day', 'month', 'year');
 
 		if ($GLOBALS['TL_CONFIG']['useAutoItem'])
 		{
@@ -70,12 +70,19 @@ class FrontendTemplate extends \Template
 		}
 
 		$strParams = '';
+		$arrPageParams = array();
 
 		// Rebuild the URL to eliminate duplicate parameters
 		foreach (array_keys($_GET) as $key)
 		{
 			if (!in_array($key, $arrIgnore))
 			{
+				if (preg_match('/^page/', $key))
+				{
+					$arrPageParams[] = $key;
+					continue; // see #4141
+				}
+
 				if ($GLOBALS['TL_CONFIG']['useAutoItem'] && in_array($key, $GLOBALS['TL_AUTO_ITEM']))
 				{
 					$strParams .= '/' . \Input::get($key);
@@ -89,10 +96,14 @@ class FrontendTemplate extends \Template
 
 		$strUrl = $this->generateFrontendUrl($objPage->row(), $strParams);
 
-		// Add the page number
-		if (isset($_GET['page']))
+		sort($arrPageParams); // see #4141
+		$strGlue = (!$GLOBALS['TL_CONFIG']['disableAlias'] && strpos($strUrl, '?') === false) ? '?' : '&';
+
+		// Re-add the page numbers
+		foreach ($arrPageParams as $key)
 		{
-			$strUrl .= ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&page=' : '?page=') . \Input::get('page');
+			$strUrl .= $strGlue . $key . '=' . \Input::get($key);
+			$strGlue = '&';
 		}
 
 		$this->keywords = '';

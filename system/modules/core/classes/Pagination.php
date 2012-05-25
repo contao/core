@@ -209,7 +209,7 @@ class Pagination extends \Frontend
 		// Prepare the URL
 		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING'], -1, PREG_SPLIT_NO_EMPTY) as $fragment)
 		{
-			if (strpos($fragment, $this->strParameter) === false)
+			if (strpos($fragment.'=', $this->strParameter) === false)
 			{
 				$this->strUrl .= (!$blnQuery ? '?' : '&amp;') . $fragment;
 				$blnQuery = true;
@@ -268,18 +268,8 @@ class Pagination extends \Frontend
 			'title' => sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), $this->intTotalPages)
 		);
 
-		global $objPage;
-		$strTagClose = ($objPage->outputFormat == 'xhtml') ? ' />' : '>';
-
-		// Add rel="prev" and rel="next" links (see #3515)
-		if ($this->hasPrevious())
-		{
-			$GLOBALS['TL_HEAD'][] = '<link rel="prev" href="' . $this->linkToPage($this->intPage - 1) . '"' . $strTagClose;
-		}
-		if ($this->hasNext())
-		{
-			$GLOBALS['TL_HEAD'][] = '<link rel="next" href="' . $this->linkToPage($this->intPage + 1) . '"' . $strTagClose;
-		}
+		// Adding rel="prev" and rel="next" links is not possible
+		// anymore with unique variable names (see #3515 and #4141)
 
 		return $this->Template->parse();
 	}

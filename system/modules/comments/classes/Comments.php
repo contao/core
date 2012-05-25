@@ -54,7 +54,8 @@ class Comments extends \Frontend
 			$total = $gtotal = $intTotal;
 
 			// Get the current page
-			$id = 'page_c' . $this->id;
+			$key = substr($strSource, ((strncmp($strSource, 'tl_', 3) === 0) ? 3 : 0), 1);
+			$id = 'page_c' . $key . $intParent; // see #4141
 			$page = \Input::get($id) ?: 1;
 
 			// Do not index or cache the page if the page number is outside the range

@@ -307,7 +307,8 @@ abstract class Model extends \System
 		(
 			'limit'  => 1,
 			'column' => static::$strPk,
-			'value'  => $varValue
+			'value'  => $varValue,
+			'return' => 'Model'
 		));
 
 		return static::find($arrOptions);
@@ -330,7 +331,8 @@ abstract class Model extends \System
 		(
 			'limit'  => 1,
 			'column' => array("($t.id=? OR $t.alias=?)"),
-			'value'  => array((is_numeric($varId) ? $varId : 0), $varId)
+			'value'  => array((is_numeric($varId) ? $varId : 0), $varId),
+			'return' => 'Model'
 		));
 
 		return static::find($arrOptions);
@@ -352,7 +354,8 @@ abstract class Model extends \System
 		(
 			'limit'  => 1,
 			'column' => $strColumn,
-			'value'  => $varValue
+			'value'  => $varValue,
+			'return' => 'Model'
 		));
 
 		return static::find($arrOptions);
@@ -373,7 +376,8 @@ abstract class Model extends \System
 		$arrOptions = array_merge($arrOptions, array
 		(
 			'column' => $strColumn,
-			'value'  => $varValue
+			'value'  => $varValue,
+			'return' => 'Collection'
 		));
 
 		return static::find($arrOptions);
@@ -389,6 +393,11 @@ abstract class Model extends \System
 	 */
 	public static function findAll(Array $arrOptions=array())
 	{
+		$arrOptions = array_merge($arrOptions, array
+		(
+			'return' => 'Collection'
+		));
+
 		return static::find($arrOptions);
 	}
 
@@ -469,7 +478,7 @@ abstract class Model extends \System
 		}
 
 		$objResult = static::postFind($objResult);
-		return ($arrOptions['limit'] == 1) ? new static($objResult) : new \Model_Collection($objResult, static::$strTable);
+		return ($arrOptions['return'] == 'Model') ? new static($objResult) : new \Model_Collection($objResult, static::$strTable);
 	}
 
 
