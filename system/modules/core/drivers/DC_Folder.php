@@ -972,7 +972,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Update the hash of the target folder
 			if ($this->blnIsDbAssisted)
 			{
-				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+				if ($strFolder != $GLOBALS['TL_CONFIG']['uploadPath'])
 				{
 					$objModel = \FilesModel::findByPath($strFolder);
 					$objFolder = new \Folder($objModel->path);
