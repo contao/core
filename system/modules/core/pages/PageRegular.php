@@ -222,7 +222,7 @@ class PageRegular extends \Frontend
 			{
 				$arrSize = deserialize($objLayout->headerHeight);
 
-				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+				if (isset($arrSize['value']) && $arrSize['value'] >= 0)
 				{
 					$strFramework .= sprintf('#header{height:%s}', $arrSize['value'] . $arrSize['unit']);
 				}
@@ -235,7 +235,7 @@ class PageRegular extends \Frontend
 			{
 				$arrSize = deserialize($objLayout->widthLeft);
 
-				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+				if (isset($arrSize['value']) && $arrSize['value'] >= 0)
 				{
 					$strFramework .= sprintf('#left{width:%s;right:%s}', $arrSize['value'] . $arrSize['unit'], $arrSize['value'] . $arrSize['unit']);
 					$strContainer .= sprintf('padding-left:%s;', $arrSize['value'] . $arrSize['unit']);
@@ -247,7 +247,7 @@ class PageRegular extends \Frontend
 			{
 				$arrSize = deserialize($objLayout->widthRight);
 
-				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+				if (isset($arrSize['value']) && $arrSize['value'] >= 0)
 				{
 					$strFramework .= sprintf('#right{width:%s}', $arrSize['value'] . $arrSize['unit']);
 					$strContainer .= sprintf('padding-right:%s;', $arrSize['value'] . $arrSize['unit']);
@@ -265,7 +265,7 @@ class PageRegular extends \Frontend
 			{
 				$arrSize = deserialize($objLayout->footerHeight);
 
-				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+				if (isset($arrSize['value']) && $arrSize['value'] >= 0)
 				{
 					$strFramework .= sprintf('#footer{height:%s}', $arrSize['value'] . $arrSize['unit']);
 				}
