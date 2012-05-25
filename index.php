@@ -257,7 +257,7 @@ class Index extends Frontend
 	protected function outputFromCache()
 	{
 		// Build the page if a user is logged in or there is POST data
-		if (!empty($_POST) || $_SESSION['TL_USER_LOGGED_IN'] || $_SESSION['DISABLE_CACHE'] || isset($_SESSION['LOGIN_ERROR']) || $GLOBALS['TL_CONFIG']['bypassCache'])
+		if (!empty($_POST) || $_SESSION['TL_USER_LOGGED_IN'] || $_SESSION['DISABLE_CACHE'] || isset($_SESSION['LOGIN_ERROR']) || $GLOBALS['TL_CONFIG']['debugMode'])
 		{
 			return;
 		}
@@ -294,11 +294,34 @@ class Index extends Frontend
 			}
 		}
 
-		$strCacheKey = md5($strCacheKey);
-		$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html';
+		$blnFound = false;
+
+		// Check for a mobile layout
+		if (Environment::get('agent')->mobile)
+		{
+			$strCacheKey = md5($strCacheKey . '.mobile');
+			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html';
+
+			if (file_exists($strCacheFile))
+			{
+				$blnFound = true;
+			}
+		}
+
+		// Check for a regular layout
+		if (!$blnFound)
+		{
+			$strCacheKey = md5($strCacheKey);
+			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html';
+
+			if (file_exists($strCacheFile))
+			{
+				$blnFound = true;
+			}
+		}
 
 		// Return if the file does not exist
-		if (!file_exists($strCacheFile))
+		if (!$blnFound)
 		{
 			return;
 		}

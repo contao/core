@@ -153,6 +153,12 @@ class FrontendTemplate extends \Template
 				}
 			}
 
+			// Store mobile pages separately
+			if ($objPage->mobileLayout && \Environment::get('agent')->mobile)
+			{
+				$strCacheKey .= '.mobile';
+			}
+
 			// Replace insert tags for caching
 			$strBuffer = $this->replaceInsertTags($strBuffer, true);
 			$intCache = intval($objPage->cache) + time();
