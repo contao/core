@@ -25,6 +25,7 @@ $GLOBALS['TL_LANG']['tl_comments']['addReply']  = array('Add a reply', 'Here you
 $GLOBALS['TL_LANG']['tl_comments']['author']    = array('Author', 'Here you can change the author of the reply.');
 $GLOBALS['TL_LANG']['tl_comments']['reply']     = array('Reply', 'Here you can enter the reply.');
 $GLOBALS['TL_LANG']['tl_comments']['published'] = array('Publish comment', 'Make the comment publicly visible on the website.');
+$GLOBALS['TL_LANG']['tl_comments']['ip']        = array('IP address', 'IP address of the author.');
 
 
 /**

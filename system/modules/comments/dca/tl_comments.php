@@ -220,6 +220,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 		),
 		'ip' => array
 		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['ip'],
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		)
 	)
