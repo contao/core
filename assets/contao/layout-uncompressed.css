@@ -31,9 +31,6 @@ body {
 select,input,textarea {
 	font-size:99%;
 }
-html {
-	-webkit-text-size-adjust:none;
-}
 
 /**
  * Fix some positioning issues
@@ -75,15 +72,18 @@ html {
  *
  * @see http://webdesignerwall.com/tutorials/responsive-design-with-css3-media-queries
  */
-img {
+img,embed,object,video {
+	height:auto;
 	max-width:100%;
-	height:auto;
+}
+img {
 	width:auto\9; /* IE8 */
+	-ms-interpolation-mode:bicubic; /* IE7 */
 }
-.video embed,.video object,.video iframe {
-	width:100%;
-	height:auto;
-}
+
+/**
+ * Display the Contao gallery table cells underneath each other
+ */
 @media (max-width:767px)
 {
 	.ce_gallery table,.ce_gallery tbody,.ce_gallery tr,.ce_gallery td {
