@@ -466,6 +466,9 @@ class DcaExtractor extends \Database_Installer
 
 			// properties
 			$arrProperties = $objReflector->getProperties();
+			
+			// default name=>values array
+			$arrDefault = $objReflector->getDefaultProperties();
 
 			foreach ($arrProperties as $objProperty)
 			{
@@ -484,9 +487,12 @@ class DcaExtractor extends \Database_Installer
 
 				// doc comment
 				$objFile->append("\t" . $objProperty->getDocComment());
+				
+				// retrieve default value
+				$strValue = $arrDefault[$objProperty->getName()];
 
 				// property (cannot use getStartLine() and getEndLine())
-				$objFile->append("\t" . implode(' ', \Reflection::getModifierNames($objProperty->getModifiers())) . ' $' . $objProperty->getName() . ';');
+				$objFile->append("\t" . implode(' ', \Reflection::getModifierNames($objProperty->getModifiers())) . ' $' . $objProperty->getName() . ($strValue ? " = '". $strValue . "'" : '') . ';');
 
 				// add an additional line break
 				$objFile->append("\n");

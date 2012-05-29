@@ -1,8 +1,8 @@
 <?php
 
-namespace Test;
+namespace TestOther;
 
-class Test extends System
+class TestOther extends \System
 {
 	public function test()
 	{
