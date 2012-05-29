@@ -526,7 +526,7 @@ else
 	# Purge the assets/css folder
 	if [ -d "$folder/assets/css" ]; then
 		for i in `ls $folder/assets/css`; do
-			if ([ "$i" != "basic.css" ] && [ "$i" != "index.html" ] && [ "$i" != "music_academy.css" ] && [ "$i" != "print.css" ]); then
+			if ([ "$i" != "index.html" ] && [ "$i" != "basic.css" ] && [ "$i" != "default.css" ] && [ "$i" != "mobile.css" ] && [ "$i" != "print.css" ]); then
 				unlink $folder/assets/css/$i
 			fi
 		done

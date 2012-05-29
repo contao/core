@@ -35,7 +35,7 @@ select,input,textarea {
 /**
  * Fix some positioning issues
  */
-#container,#footer,.inside {
+#container,.inside {
 	position:relative;
 }
 
@@ -47,14 +47,9 @@ select,input,textarea {
  */
 @media (min-width:768px)
 {
-	#container {
-		overflow:hidden;
-	}
 	#main,#left,#right {
 		float:left;
 		position:relative;
-		padding-bottom:1000em;
-		margin-bottom:-1000em;
 	}
 	#main {
 		width:100%;
@@ -64,6 +59,9 @@ select,input,textarea {
 	}
 	#right {
 		margin-right:-100%;
+	}
+	#footer {
+		clear:both;
 	}
 }
 
