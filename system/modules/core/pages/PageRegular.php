@@ -208,6 +208,7 @@ class PageRegular extends \Frontend
 		// Generate the CSS framework
 		if (is_array($arrFramework) && in_array('layout.css', $arrFramework))
 		{
+			$strWrapperWidth = '';
 			$this->Template->framework = '<meta name="viewport" content="width=device-width,initial-scale=1.0">' . "\n";
 
 			// Wrapper
@@ -215,7 +216,8 @@ class PageRegular extends \Frontend
 			{
 				$arrSize = deserialize($objLayout->width);
 				$arrMargin = array('left'=>'0 auto 0 0', 'center'=>'0 auto', 'right'=>'0 0 0 auto');
-				$strFramework .= sprintf('#wrapper{width:%s;margin:%s}', $arrSize['value'] . $arrSize['unit'], $arrMargin[$objLayout->align]);
+				$strWrapperWidth = $arrSize['value'] . $arrSize['unit'];
+				$strFramework .= sprintf('#wrapper{margin:%s}', $arrMargin[$objLayout->align]);
 			}
 
 			// Header
@@ -276,7 +278,12 @@ class PageRegular extends \Frontend
 			if ($strFramework != '')
 			{
 				// Do not apply on mobile devices
-				$strFramework = '@media (min-width:768px){' . $strFramework . '}';
+				$strFramework = "\n@media (min-width:768px) {\n  " . $strFramework . "\n}";
+
+				if ($strWrapperWidth != '')
+				{
+					$strFramework = "\n@media (min-width:$strWrapperWidth) {\n  #wrapper{width:$strWrapperWidth}\n}$strFramework\n";
+				}
 
 				if ($objPage->outputFormat == 'xhtml')
 				{
