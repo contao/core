@@ -209,7 +209,7 @@ class Pagination extends \Frontend
 		// Prepare the URL
 		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING'], -1, PREG_SPLIT_NO_EMPTY) as $fragment)
 		{
-			if (strpos($fragment.'=', $this->strParameter) === false)
+			if (strpos($fragment, $this->strParameter . '=') === false)
 			{
 				$this->strUrl .= (!$blnQuery ? '?' : '&amp;') . $fragment;
 				$blnQuery = true;

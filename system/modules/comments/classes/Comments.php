@@ -53,8 +53,16 @@ class Comments extends \Frontend
 			$intTotal = \CommentsModel::countPublishedBySourceAndParent($strSource, $intParent);
 			$total = $gtotal = $intTotal;
 
+			// Calculate the key (e.g. tl_form_field becomes page_cff12)
+			$key = '';
+			$chunks = explode('_', substr($strSource, ((strncmp($strSource, 'tl_', 3) === 0) ? 3 : 0)));
+
+			foreach ($chunks as $chunk)
+			{
+				$key .= substr($chunk, 0, 1);
+			}
+
 			// Get the current page
-			$key = substr($strSource, ((strncmp($strSource, 'tl_', 3) === 0) ? 3 : 0), 1);
 			$id = 'page_c' . $key . $intParent; // see #4141
 			$page = \Input::get($id) ?: 1;
 
