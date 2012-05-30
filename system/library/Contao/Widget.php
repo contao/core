@@ -708,24 +708,16 @@ abstract class Widget extends \Controller
 			return $varInput;
 		}
 
-		$varInput = trim($varInput);
-
-		if ($varInput == '')
+		// check if no value has been entered
+		if ($this->isEmpty($varInput))
 		{
-			if (!$this->mandatory)
+			if ($this->strLabel == '')
 			{
-				return '';
+				$this->addError($GLOBALS['TL_LANG']['ERR']['mdtryNoLabel']);
 			}
 			else
 			{
-				if ($this->strLabel == '')
-				{
-					$this->addError($GLOBALS['TL_LANG']['ERR']['mdtryNoLabel']);
-				}
-				else
-				{
-					$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel));
-				}
+				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel));
 			}
 		}
 
@@ -985,5 +977,20 @@ abstract class Widget extends \Controller
 		}
 
 		return $this->optionSelected($arrOption['value'], $this->varValue);
+	}
+
+
+	/**
+	 * Check whether a mandatory widget has been filled in by the user (you can override this in your widget)
+	 *
+	 * @param mixed $varInput The entered value
+	 *
+	 * @return boolean True if empty, false if not
+	 */
+	protected function isEmpty($varInput)
+	{
+		$varInput = trim($varInput);
+
+		return ($varInput == '' && $this->mandatory);
 	}
 }
