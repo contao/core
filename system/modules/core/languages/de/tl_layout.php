@@ -16,11 +16,11 @@
  */
 $GLOBALS['TL_LANG']['tl_layout']['name']           = array('Titel', 'Bitte geben Sie den Layout-Titel ein.');
 $GLOBALS['TL_LANG']['tl_layout']['fallback']       = array('Standardlayout', 'Das Layout als Standardlayout verwenden.');
-$GLOBALS['TL_LANG']['tl_layout']['rows']           = array('Reihen', 'Bitte wählen Sie die Anzahl an Reihen.');
-$GLOBALS['TL_LANG']['tl_layout']['1rw']            = array('Nur die Hauptreihe', 'Es wird nur eine Reihe angezeigt.');
-$GLOBALS['TL_LANG']['tl_layout']['2rwh']           = array('Kopfzeile und Hauptreihe', 'Eine Kopfzeile oberhalb der Hauptreihe anzeigen.');
-$GLOBALS['TL_LANG']['tl_layout']['2rwf']           = array('Hauptreihe und Fußzeile', 'Eine Fußzeile unterhalb der Hauptreihe anzeigen.');
-$GLOBALS['TL_LANG']['tl_layout']['3rw']            = array('Kopfzeile, Hauptreihe und Fußzeile', 'Eine Kopfzeile oberhalb und eine Fußzeile unterhalb der Hauptreihe anzeigen.');
+$GLOBALS['TL_LANG']['tl_layout']['rows']           = array('Zeilen', 'Bitte wählen Sie die Anzahl an Zeilen.');
+$GLOBALS['TL_LANG']['tl_layout']['1rw']            = array('Nur die Hauptzeile', 'Es wird nur eine Zeilen angezeigt.');
+$GLOBALS['TL_LANG']['tl_layout']['2rwh']           = array('Kopfzeile und Hauptzeile', 'Eine Kopfzeile oberhalb der Hauptzeile anzeigen.');
+$GLOBALS['TL_LANG']['tl_layout']['2rwf']           = array('Hauptzeile und Fußzeile', 'Eine Fußzeile unterhalb der Hauptzeile anzeigen.');
+$GLOBALS['TL_LANG']['tl_layout']['3rw']            = array('Kopfzeile, Hauptzeile und Fußzeile', 'Eine Kopfzeile oberhalb und eine Fußzeile unterhalb der Hauptzeile anzeigen.');
 $GLOBALS['TL_LANG']['tl_layout']['headerHeight']   = array('Höhe der Kopfzeile', 'Bitte geben Sie die Höhe der Kopfzeile ein.');
 $GLOBALS['TL_LANG']['tl_layout']['footerHeight']   = array('Höhe der Fußzeile', 'Bitte geben Sie die Höhe der Fußzeile ein.');
 $GLOBALS['TL_LANG']['tl_layout']['cols']           = array('Spalten', 'Bitte wählen Sie die Anzahl an Spalten.');
@@ -65,7 +65,7 @@ $GLOBALS['TL_LANG']['tl_layout']['align']          = array('Ausrichtung', 'Bitte
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_layout']['title_legend']    = 'Titel';
-$GLOBALS['TL_LANG']['tl_layout']['header_legend']   = 'Reihen';
+$GLOBALS['TL_LANG']['tl_layout']['header_legend']   = 'Zeilen';
 $GLOBALS['TL_LANG']['tl_layout']['column_legend']   = 'Spalten';
 $GLOBALS['TL_LANG']['tl_layout']['sections_legend'] = 'Eigene Layoutbereiche';
 $GLOBALS['TL_LANG']['tl_layout']['style_legend']    = 'Stylesheets';
