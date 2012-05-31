@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added "rem" to the list of CSS units (see #4395).
+
 ### Fixed
 Fixed a few remaining issues with the unique pagination variables (see #4141).
 
