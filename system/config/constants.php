@@ -21,7 +21,7 @@ define('VERSION', '3.0');
 define('BUILD', 'beta1');
 define('LONG_TERM_SUPPORT', false);
 define('CODEMIRROR', '2.2');
-define('CSS3PIE', '1.0beta5');
+define('CSS3PIE', '1.0.0');
 define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIM', '3');
 define('JQUERY', '1.7.1');
