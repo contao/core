@@ -298,8 +298,23 @@ abstract class Template extends \Controller
 		// Debug information
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
 		{
+			$intReturned = 0;
+			$intAffected = 0;
+
+			// Count the totals (see #3884)
+			if (is_array($GLOBALS['TL_DEBUG']['database_queries']))
+			{
+				foreach ($GLOBALS['TL_DEBUG']['database_queries'] as $k=>$v)
+				{
+					$intReturned += $v['return_count'];
+					$intAffected += $v['affected_count'];
+					unset($GLOBALS['TL_DEBUG']['database_queries'][$k]['return_count']);
+					unset($GLOBALS['TL_DEBUG']['database_queries'][$k]['affected_count']);
+				}
+			}
+
 			$strDebug = '<div id="debug" class="' . \Input::cookie('CONTAO_CONSOLE') . '">' . "\n"
-				. '<p><span class="info">Contao debug information</span> <span class="time">Execution time: ' . $this->getFormattedNumber(microtime(true) - TL_START, 4) . ' seconds</span> <span class="memory">Memory usage: ' . $this->getReadableSize(memory_get_peak_usage()) . '</span> <span class="db">Database queries: ' . count($GLOBALS['TL_DEBUG']['database_queries']) . '</span> <span id="tog">&nbsp;</span></p>' . "\n"
+				. '<p><span class="info">Contao debug information</span> <span class="time">Execution time: ' . $this->getFormattedNumber(microtime(true) - TL_START, 4) . ' seconds</span> <span class="memory">Memory usage: ' . $this->getReadableSize(memory_get_peak_usage()) . '</span> <span class="db">Database queries: ' . count($GLOBALS['TL_DEBUG']['database_queries']) . '</span> <span class="rows">Rows: ' . $intReturned . ' returned, ' . $intAffected . ' affected</span> <span id="tog">&nbsp;</span></p>' . "\n"
 				. '<div><pre>' . "\n";
 
 			ob_start();

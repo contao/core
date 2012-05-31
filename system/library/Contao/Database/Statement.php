@@ -403,27 +403,30 @@ abstract class Database_Statement
 			return;
 		}
 
-		$arrData[] = specialchars($this->strQuery);
+		$arrData['query'] = specialchars($this->strQuery);
 
 		if ($objResult === null || strncasecmp($this->strQuery, 'SELECT', 6) !== 0)
 		{
 			if (strncasecmp($this->strQuery, 'SHOW', 4) === 0)
 			{
-				$arrData[] = sprintf('%s rows returned', $this->affectedRows);
+				$arrData['return_count'] = $this->affectedRows;
+				$arrData['returned'] = sprintf('%s row(s) returned', $this->affectedRows);
 			}
 			else
 			{
-				$arrData[] = sprintf('%d rows affected', $this->affectedRows);
+				$arrData['affected_count'] = $this->affectedRows;
+				$arrData['affected'] = sprintf('%d row(s) affected', $this->affectedRows);
 			}
 		}
 		else
 		{
-			$arrData[] = sprintf('%s rows returned', $objResult->numRows);
-
 			if (($arrExplain = $this->explain()) != false)
 			{
-				$arrData[] = $arrExplain;
+				$arrData['explain'] = $arrExplain;
 			}
+
+			$arrData['return_count'] = $this->affectedRows;
+			$arrData['returned'] = sprintf('%s row(s) returned', $objResult->numRows);
 		}
 
 		$GLOBALS['TL_DEBUG']['database_queries'][] = $arrData;

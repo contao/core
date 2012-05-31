@@ -43,6 +43,9 @@
 #debug .db {
 	background:url("../../system/themes/default/images/db.gif") left 0 no-repeat;
 }
+#debug .rows {
+	background:url("../../system/themes/default/images/rows.gif") left 0 no-repeat;
+}
 #debug div {
 	height:260px;
 	position:fixed;
