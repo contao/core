@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.4 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+Support insert tags as external redirect target (see #4373).
+
 ### Updated
 Updated the CSS3PIE plugin to version 1.0.0 (see #4378).
 
