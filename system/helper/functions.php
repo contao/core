@@ -218,11 +218,12 @@ function specialchars($strString, $blnStripInsertTags=false)
 /**
  * Standardize a parameter (strip special characters and convert spaces to underscores)
  * @param string
+ * @param boolean
  * @return string
  */
-function standardize($strString)
+function standardize($strString, $blnPreserveUppercase=false)
 {
-	$arrSearch = array('/[^a-zA-Z0-9 _-]+/i', '/ +/', '/\-+/');
+	$arrSearch = array('/[^a-zA-Z0-9 _-]+/', '/ +/', '/\-+/');
 	$arrReplace = array('', '-', '-');
 
 	$strString = html_entity_decode($strString, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
@@ -235,7 +236,12 @@ function standardize($strString)
 		$strString = 'id-' . $strString;
 	}
 
-	return strtolower(trim($strString, '-'));
+	if (!$blnPreserveUppercase)
+	{
+		$strString = strtolower($strString);
+	}
+
+	return trim($strString, '-');
 }
 
 
