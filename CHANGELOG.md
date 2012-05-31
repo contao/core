@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.4 (XXXX-XX-XX)
 ---------------------------
 
+### Updated
+Updated the CSS3PIE plugin to version 1.0.0 (see #4378).
+
 ### Fixed
 Re-applied the "autofocus the first field" patch (see #4297).
 

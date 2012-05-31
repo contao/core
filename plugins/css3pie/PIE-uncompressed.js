@@ -1,6 +1,6 @@
 /*
 PIE: CSS3 rendering for IE
-Version 1.0beta5
+Version 1.0.0
 http://css3pie.com
 Dual-licensed for use under the Apache License Version 2.0 or the General Public License (GPL) Version 2.
 */
@@ -381,15 +381,20 @@ PIE.Observable.prototype = {
  * Simple heartbeat timer - this is a brute-force workaround for syncing issues caused by IE not
  * always firing the onmove and onresize events when elements are moved or resized. We check a few
  * times every second to make sure the elements have the correct position and size. See Element.js
- * which adds heartbeat listeners based on the custom -pie-poll flag, which defaults to true in IE8
+ * which adds heartbeat listeners based on the custom -pie-poll flag, which defaults to true in IE8-9
  * and false elsewhere.
  */
 
 PIE.Heartbeat = new PIE.Observable();
 PIE.Heartbeat.run = function() {
-    var me = this;
+    var me = this,
+        interval;
     if( !me.running ) {
-        setInterval( function() { me.fire() }, 250 );
+        interval = doc.documentElement.currentStyle.getAttribute( PIE.CSS_PREFIX + 'poll-interval' ) || 250;
+        (function beat() {
+            me.fire();
+            setTimeout(beat, interval);
+        })();
         me.running = 1;
     }
 };
@@ -458,8 +463,10 @@ PIE.OnUnload.attachManagedEvent( window, 'onresize', function() { PIE.OnResize.f
         }
     }
 
-    PIE.OnUnload.attachManagedEvent( window, 'onbeforeprint', beforePrint );
-    PIE.OnUnload.attachManagedEvent( window, 'onafterprint', afterPrint );
+    if( PIE.ieDocMode < 9 ) {
+        PIE.OnUnload.attachManagedEvent( window, 'onbeforeprint', beforePrint );
+        PIE.OnUnload.attachManagedEvent( window, 'onafterprint', afterPrint );
+    }
 
 })();/**
  * Create a single observable listener for document mouseup events.
@@ -476,7 +483,7 @@ PIE.OnUnload.attachManagedEvent( doc, 'onmouseup', function() { PIE.OnMouseup.fi
  */
 PIE.Length = (function() {
     var lengthCalcEl = doc.createElement( 'length-calc' ),
-        parent = doc.documentElement,
+        parent = doc.body || doc.documentElement,
         s = lengthCalcEl.style,
         conversions = {},
         units = [ 'mm', 'cm', 'in', 'pt', 'pc' ],
@@ -488,13 +495,13 @@ PIE.Length = (function() {
 
     parent.appendChild( lengthCalcEl );
     while( i-- ) {
-        lengthCalcEl.style.width = '100' + units[i];
+        s.width = '100' + units[i];
         conversions[ units[i] ] = lengthCalcEl.offsetWidth / 100;
     }
     parent.removeChild( lengthCalcEl );
 
     // All calcs from here on will use 1em
-    lengthCalcEl.style.width = '1em';
+    s.width = '1em';
 
 
     function Length( val ) {
@@ -1224,14 +1231,19 @@ PIE.BoundsInfo.prototype = {
     getLiveBounds: function() {
         var el = this.targetElement,
             rect = el.getBoundingClientRect(),
-            isIE9 = PIE.ieDocMode === 9;
+            isIE9 = PIE.ieDocMode === 9,
+            isIE7 = PIE.ieVersion === 7,
+            width = rect.right - rect.left;
         return {
             x: rect.left,
             y: rect.top,
             // In some cases scrolling the page will cause IE9 to report incorrect dimensions
-            // in the rect returned by getBoundingClientRect, so we must query offsetWidth/Height instead
-            w: isIE9 ? el.offsetWidth : rect.right - rect.left,
-            h: isIE9 ? el.offsetHeight : rect.bottom - rect.top
+            // in the rect returned by getBoundingClientRect, so we must query offsetWidth/Height
+            // instead. Also IE7 is inconsistent in using logical vs. device pixels in measurements
+            // so we must calculate the ratio and use it in certain places as a position adjustment.
+            w: isIE9 || isIE7 ? el.offsetWidth : width,
+            h: isIE9 || isIE7 ? el.offsetHeight : rect.bottom - rect.top,
+            logicalZoomRatio: ( isIE7 && width ) ? el.offsetWidth / width : 1
         };
     },
 
@@ -2538,11 +2550,12 @@ PIE.RootRenderer = PIE.RendererBase.newRenderer( {
                 boxPos,
                 s = this.getBox().style, cs,
                 x = 0, y = 0,
-                elBounds = this.boundsInfo.getBounds();
+                elBounds = this.boundsInfo.getBounds(),
+                logicalZoomRatio = elBounds.logicalZoomRatio;
 
             if( tgtPos === 'fixed' && PIE.ieVersion > 6 ) {
-                x = elBounds.x;
-                y = elBounds.y;
+                x = elBounds.x * logicalZoomRatio;
+                y = elBounds.y * logicalZoomRatio;
                 boxPos = tgtPos;
             } else {
                 // Get the element's offsets from its nearest positioned ancestor. Uses
@@ -2553,12 +2566,12 @@ PIE.RootRenderer = PIE.RendererBase.newRenderer( {
                 if( par ) {
                     parRect = par.getBoundingClientRect();
                     cs = par.currentStyle;
-                    x = elBounds.x - parRect.left - ( parseFloat(cs.borderLeftWidth) || 0 );
-                    y = elBounds.y - parRect.top - ( parseFloat(cs.borderTopWidth) || 0 );
+                    x = ( elBounds.x - parRect.left ) * logicalZoomRatio - ( parseFloat(cs.borderLeftWidth) || 0 );
+                    y = ( elBounds.y - parRect.top ) * logicalZoomRatio - ( parseFloat(cs.borderTopWidth) || 0 );
                 } else {
                     docEl = doc.documentElement;
-                    x = elBounds.x + docEl.scrollLeft - docEl.clientLeft;
-                    y = elBounds.y + docEl.scrollTop - docEl.clientTop;
+                    x = ( elBounds.x + docEl.scrollLeft - docEl.clientLeft ) * logicalZoomRatio;
+                    y = ( elBounds.y + docEl.scrollTop - docEl.clientTop ) * logicalZoomRatio;
                 }
                 boxPos = 'absolute';
             }
@@ -2772,6 +2785,11 @@ PIE.BackgroundRenderer = PIE.RendererBase.newRenderer( {
                 pxY = Math.round( bgPos.y ) + bwT + 0.5;
                 fill.position = ( pxX / elW ) + ',' + ( pxY / elH );
 
+                // Set the size of the image. We have to actually set it to px values otherwise it will not honor
+                // the user's browser zoom level and always display at its natural screen size.
+                fill['size']['x'] = 1; //Can be any value, just has to be set to "prime" it so the next line works. Weird!
+                fill['size'] = size.w + 'px,' + size.h + 'px';
+
                 // Repeating - clip the image shape
                 if( repeat && repeat !== 'repeat' ) {
                     if( repeat === 'repeat-x' || repeat === 'no-repeat' ) {
@@ -2921,8 +2939,7 @@ PIE.BorderRenderer = PIE.RendererBase.newRenderer( {
 
     isActive: function() {
         var si = this.styleInfos;
-        return ( si.borderRadiusInfo.isActive() ||
-                 si.backgroundInfo.isActive() ) &&
+        return si.borderRadiusInfo.isActive() &&
                !si.borderImageInfo.isActive() &&
                si.borderInfo.isActive(); //check BorderStyleInfo last because it's the most expensive
     },
@@ -3393,7 +3410,7 @@ PIE.BoxShadowOutsetRenderer = PIE.RendererBase.newRenderer( {
             shadowInfo = shadowInfos[ i ];
             xOff = shadowInfo.xOffset.pixels( el );
             yOff = shadowInfo.yOffset.pixels( el );
-            spread = shadowInfo.spread.pixels( el ),
+            spread = shadowInfo.spread.pixels( el );
             blur = shadowInfo.blur.pixels( el );
             color = shadowInfo.color;
             // Shape path
@@ -3408,8 +3425,8 @@ PIE.BoxShadowOutsetRenderer = PIE.RendererBase.newRenderer( {
             if( blur ) {
                 totalW = ( spread + blur ) * 2 + w;
                 totalH = ( spread + blur ) * 2 + h;
-                focusX = blur * 2 / totalW;
-                focusY = blur * 2 / totalH;
+                focusX = totalW ? blur * 2 / totalW : 0;
+                focusY = totalH ? blur * 2 / totalH : 0;
                 if( blur - spread > w / 2 || blur - spread > h / 2 ) {
                     // If the blur is larger than half the element's narrowest dimension, we cannot do
                     // this with a single shape gradient, because its focussize would have to be less than
@@ -3902,6 +3919,8 @@ PIE.Element = (function() {
     var wrappers = {},
         lazyInitCssProp = PIE.CSS_PREFIX + 'lazy-init',
         pollCssProp = PIE.CSS_PREFIX + 'poll',
+        trackActiveCssProp = PIE.CSS_PREFIX + 'track-active',
+        trackHoverCssProp = PIE.CSS_PREFIX + 'track-hover',
         hoverClass = PIE.CLASS_PREFIX + 'hover',
         activeClass = PIE.CLASS_PREFIX + 'active',
         focusClass = PIE.CLASS_PREFIX + 'focus',
@@ -3925,8 +3944,10 @@ PIE.Element = (function() {
         var classes = dummyArray.slice.call( arguments, 1 ),
             i = classes.length;
         setTimeout( function() {
-            while( i-- ) {
-                addClass( el, classes[ i ] );
+            if( el ) {
+                while( i-- ) {
+                    addClass( el, classes[ i ] );
+                }
             }
         }, 0 );
     }
@@ -3935,8 +3956,10 @@ PIE.Element = (function() {
         var classes = dummyArray.slice.call( arguments, 1 ),
             i = classes.length;
         setTimeout( function() {
-            while( i-- ) {
-                removeClass( el, classes[ i ] );
+            if( el ) {
+                while( i-- ) {
+                    removeClass( el, classes[ i ] );
+                }
             }
         }, 0 );
     }
@@ -3967,6 +3990,8 @@ PIE.Element = (function() {
                     ieDocMode = PIE.ieDocMode,
                     cs = el.currentStyle,
                     lazy = cs.getAttribute( lazyInitCssProp ) === 'true',
+                    trackActive = cs.getAttribute( trackActiveCssProp ) !== 'false',
+                    trackHover = cs.getAttribute( trackHoverCssProp ) !== 'false',
                     childRenderers;
 
                 // Polling for size/position changes: default to on in IE8, off otherwise, overridable by -pie-poll
@@ -4064,9 +4089,15 @@ PIE.Element = (function() {
                     }
                     addListener( el, 'onresize', handleMoveOrResize );
                     addListener( el, 'onpropertychange', propChanged );
-                    addListener( el, 'onmouseenter', mouseEntered );
-                    addListener( el, 'onmouseleave', mouseLeft );
-                    addListener( el, 'onmousedown', mousePressed );
+                    if( trackHover ) {
+                        addListener( el, 'onmouseenter', mouseEntered );
+                    }
+                    if( trackHover || trackActive ) {
+                        addListener( el, 'onmouseleave', mouseLeft );
+                    }
+                    if( trackActive ) {
+                        addListener( el, 'onmousedown', mousePressed );
+                    }
                     if( el.tagName in PIE.focusableElements ) {
                         addListener( el, 'onfocus', focused );
                         addListener( el, 'onblur', blurred );
