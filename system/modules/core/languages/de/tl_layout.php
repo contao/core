@@ -17,7 +17,7 @@
 $GLOBALS['TL_LANG']['tl_layout']['name']           = array('Titel', 'Bitte geben Sie den Layout-Titel ein.');
 $GLOBALS['TL_LANG']['tl_layout']['fallback']       = array('Standardlayout', 'Das Layout als Standardlayout verwenden.');
 $GLOBALS['TL_LANG']['tl_layout']['rows']           = array('Zeilen', 'Bitte wählen Sie die Anzahl an Zeilen.');
-$GLOBALS['TL_LANG']['tl_layout']['1rw']            = array('Nur die Hauptzeile', 'Es wird nur eine Zeilen angezeigt.');
+$GLOBALS['TL_LANG']['tl_layout']['1rw']            = array('Nur die Hauptzeile', 'Es wird nur eine Zeile angezeigt.');
 $GLOBALS['TL_LANG']['tl_layout']['2rwh']           = array('Kopfzeile und Hauptzeile', 'Eine Kopfzeile oberhalb der Hauptzeile anzeigen.');
 $GLOBALS['TL_LANG']['tl_layout']['2rwf']           = array('Hauptzeile und Fußzeile', 'Eine Fußzeile unterhalb der Hauptzeile anzeigen.');
 $GLOBALS['TL_LANG']['tl_layout']['3rw']            = array('Kopfzeile, Hauptzeile und Fußzeile', 'Eine Kopfzeile oberhalb und eine Fußzeile unterhalb der Hauptzeile anzeigen.');

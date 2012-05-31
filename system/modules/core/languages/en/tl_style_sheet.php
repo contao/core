@@ -15,7 +15,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_style_sheet']['name']        = array('Name', 'Please enter the style sheet name.');
-$GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'] = array('Embed images up to', 'Here you can enter the file size in bytes up to which images will be embeded in the style sheet as data: string. Set to 0 to disable the feature.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'] = array('Embed images up to', 'Here you can enter the file size in bytes up to which images will be embedded in the style sheet as data: string. Set to 0 to disable the feature.');
 $GLOBALS['TL_LANG']['tl_style_sheet']['cc']          = array('Conditional comment', 'Conditional comments allow you to create Internet Explorer specific style sheets (e.g. <em>if lt IE 9</em>).');
 $GLOBALS['TL_LANG']['tl_style_sheet']['media']       = array('Media types', 'Here you can choose the media types the style sheet applies to.');
 $GLOBALS['TL_LANG']['tl_style_sheet']['mediaQuery']  = array('Media query', 'Here you can define the media type using a media query like <em>screen and (min-width: 800px)</em>. The media types defined above will then be overwritten.');
