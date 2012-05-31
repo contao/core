@@ -5,6 +5,7 @@ Disallow: /system/
 Disallow: /templates/
 Disallow: /typolight/
 Disallow: /CHANGELOG.md
+Disallow: /contao-check.php
 Disallow: /cron.php
 Disallow: /flash.php
 Disallow: /share.php
