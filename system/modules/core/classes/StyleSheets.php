@@ -183,7 +183,7 @@ class StyleSheets extends \Backend
 		// Append the definition
 		while ($objDefinitions->next())
 		{
-			$objFile->append($this->compileDefinition($objDefinitions->row(), true, $vars), '');
+			$objFile->append($this->compileDefinition($objDefinitions->row(), true, $vars, $row), '');
 		}
 
 		$objFile->close();
@@ -195,9 +195,10 @@ class StyleSheets extends \Backend
 	 * @param array
 	 * @param boolean
 	 * @param array
+	 * @param array
 	 * @return string
 	 */
-	public function compileDefinition($row, $blnWriteToFile=false, $vars=array())
+	public function compileDefinition($row, $blnWriteToFile=false, $vars=array(), $parent=array())
 	{
 		$blnDebug = $GLOBALS['TL_CONFIG']['debugMode'];
 
@@ -461,8 +462,15 @@ class StyleSheets extends \Backend
 			// Try to shorten the definition
 			if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
 			{
-				$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], 'http://', 7) !== 0 && strncmp($row['bgimage'], 'https://', 8) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
-				$return .= $lb . 'background:' . (($bgColor[0] != '') ? $this->compileColor($bgColor, $blnWriteToFile, $vars) . ' ' : '') . 'url("' . $glue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
+				if (($strImage = $this->generateBase64Image($row['bgimage'], $parent)) !== false)
+				{
+					$return .= $lb . 'background:' . (($bgColor[0] != '') ? $this->compileColor($bgColor, $blnWriteToFile, $vars) . ' ' : '') . 'url("' . $strImage . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
+				}
+				else
+				{
+					$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], 'http://', 7) !== 0 && strncmp($row['bgimage'], 'https://', 8) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+					$return .= $lb . 'background:' . (($bgColor[0] != '') ? $this->compileColor($bgColor, $blnWriteToFile, $vars) . ' ' : '') . 'url("' . $glue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
+				}
 			}
 			else
 			{
@@ -479,8 +487,15 @@ class StyleSheets extends \Backend
 				}
 				elseif ($row['bgimage'] != '')
 				{
-					$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], 'http://', 7) !== 0 && strncmp($row['bgimage'], 'https://', 8) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
-					$return .= $lb . 'background-image:url("' . $glue . $row['bgimage'] . '");';
+					if (($strImage = $this->generateBase64Image($row['bgimage'], $parent)) !== false)
+					{
+						$return .= $lb . 'background-image:url("' . $strImage . '");';
+					}
+					else
+					{
+						$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], 'http://', 7) !== 0 && strncmp($row['bgimage'], 'https://', 8) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+						$return .= $lb . 'background-image:url("' . $glue . $row['bgimage'] . '");';
+					}
 				}
 
 				// Background position
@@ -976,8 +991,15 @@ class StyleSheets extends \Backend
 			}
 			elseif ($row['liststyleimage'] != '')
 			{
-				$glue = (strncmp($row['liststyleimage'], 'data:', 5) !== 0 && strncmp($row['liststyleimage'], 'http://', 7) !== 0 && strncmp($row['liststyleimage'], 'https://', 8) !== 0 && strncmp($row['liststyleimage'], '/', 1) !== 0) ? $strGlue : '';
-				$return .= $lb . 'list-style-image:url("' . $glue . $row['liststyleimage'] . '");';
+				if (($strImage = $this->generateBase64Image($row['liststyleimage'], $parent)) !== false)
+				{
+					$return .= $lb . 'list-style-image:url("' . $strImage . '");';
+				}
+				else
+				{
+					$glue = (strncmp($row['liststyleimage'], 'data:', 5) !== 0 && strncmp($row['liststyleimage'], 'http://', 7) !== 0 && strncmp($row['liststyleimage'], 'https://', 8) !== 0 && strncmp($row['liststyleimage'], '/', 1) !== 0) ? $strGlue : '';
+					$return .= $lb . 'list-style-image:url("' . $glue . $row['liststyleimage'] . '");';
+				}
 			}
 		}
 
@@ -2051,5 +2073,35 @@ class StyleSheets extends \Backend
 		}
 
 		$this->Database->prepare("INSERT INTO tl_style %s")->set($arrSet)->execute();
+	}
+
+
+	/**
+	 * Return an image as data: string
+	 * @param string
+	 * @param array   
+	 * @return string|boolean
+	 */
+	protected function generateBase64Image($strImage, $arrParent)
+	{
+		if ($arrParent['embedImages'] > 0 && file_exists(TL_ROOT . '/' . $strImage))
+		{
+			$objImage = new \File($strImage);
+			$strExtension = $objImage->extension;
+
+			// Fix the jpg mime type
+			if ($strExtension == 'jpg')
+			{
+				$strExtension = 'jpeg';
+			}
+
+			// Return the data: string
+			if ($objImage->size <= $arrParent['embedImages'])
+			{
+				return 'data:image/' . $strExtension . ';base64,' . base64_encode($objImage->getContent());
+			}
+		}
+
+		return false;
 	}
 }

@@ -126,7 +126,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},name,cc;{media_legend},media,mediaQuery;{vars_legend},vars'
+		'default'                     => '{title_legend},name;{config_legend},embedImages,cc;{media_legend},media,mediaQuery;{vars_legend},vars'
 	),
 
 	// Fields
@@ -155,6 +155,14 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'flag'                    => 1,
 			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
+		),
+		'embedImages' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'],
+			'inputType'               => 'text',
+			'exclude'                 => true,
+			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'cc' => array
 		(

@@ -5,6 +5,10 @@ Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+Background images up to a configurable size can optionally be embedded in style
+sheets as data: string (see #3884).
+
+### New
 Added "rem" to the list of CSS units (see #4395).
 
 ### Fixed
