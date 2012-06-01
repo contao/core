@@ -61,6 +61,10 @@ $GLOBALS['TL_DCA']['tl_session'] = array
 		'ip' => array
 		(
 			'sql'                     => "varchar(64) NOT NULL default ''"
+		),
+		'su' => array
+		(
+			'sql'                     => "char(1) NOT NULL default ''"
 		)
 	)
 );

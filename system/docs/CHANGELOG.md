@@ -5,6 +5,10 @@ Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
 ### Improved
+Do not force a password change in the back end if an administrator switches to
+an account (see #3984). Thanks a lot to psi-4ward and aschempp for their work.
+
+### Improved
 If "addLanguageToUrl" is enabled and a request without the language fragment
 ends up in a 404 error, automatically add the language of the corresponding root
 page and redirect sending a 301 header (see #4028).
