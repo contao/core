@@ -288,9 +288,9 @@ class Database_Updater extends \Controller
 	 * @param string  $strPath The target folder
 	 * @param integer $pid     The parent ID
 	 */
-	public function scanUploadFolder($strPath, $pid=0)
+	public function scanUploadFolder($strPath=null, $pid=0)
 	{
-		if ($strPath == '')
+		if ($strPath === null)
 		{
 			$strPath = $GLOBALS['TL_CONFIG']['uploadPath'];
 		}
