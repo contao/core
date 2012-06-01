@@ -4,6 +4,11 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### Improved
+If "addLanguageToUrl" is enabled and a request without the language fragment
+ends up in a 404 error, automatically add the language of the corresponding root
+page and redirect sending a 301 header (see #4028).
+
 ### Changed
 Passwords can now contain special characters (see #4047).
 

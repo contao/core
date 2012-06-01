@@ -49,8 +49,16 @@ class PageError404 extends \Frontend
 		// Check the search index (see #3761)
 		\Search::removeEntry(\Environment::get('request'));
 
-		// Look for an 404 page
+		// Find the matching root page
 		$objRootPage = $this->getRootPageFromUrl();
+
+		// Forward if the language should be but is not set (see #4028)
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !isset($_GET['language']))
+		{
+			$this->redirect($objRootPage->language . '/' . \Environment::get('request'), 301);
+		}
+
+		// Look for an 404 page
 		$obj404 = \PageModel::find404ByPid($objRootPage->id);
 
 		// Die if there is no page at all
