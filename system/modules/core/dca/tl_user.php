@@ -239,7 +239,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['password'],
 			'exclude'                 => true,
 			'inputType'               => 'password',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'minlength'=>$GLOBALS['TL_CONFIG']['minPasswordLength']),
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'minlength'=>$GLOBALS['TL_CONFIG']['minPasswordLength']),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'pwChange' => array

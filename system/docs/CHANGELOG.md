@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+Passwords can now contain special characters (see #4047).
+
 ### New
 Background images up to a configurable size can optionally be embedded in style
 sheets as data: string (see #3884).

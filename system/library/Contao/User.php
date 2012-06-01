@@ -241,13 +241,13 @@ abstract class User extends \System
 		$this->loadLanguageFile('default');
 
 		// Do not continue if username or password are missing
-		if (!\Input::post('username') || !\Input::post('password'))
+		if (!\Input::post('username', true) || !\Input::post('password', true))
 		{
 			return false;
 		}
 
 		// Load the user object
-		if ($this->findBy('username', \Input::post('username')) == false)
+		if ($this->findBy('username', \Input::post('username', true)) == false)
 		{
 			$blnLoaded = false;
 
@@ -257,7 +257,7 @@ abstract class User extends \System
 				foreach ($GLOBALS['TL_HOOKS']['importUser'] as $callback)
 				{
 					$this->import($callback[0], 'objImport', true);
-					$blnLoaded = $this->objImport->$callback[1](\Input::post('username'), \Input::post('password'), $this->strTable);
+					$blnLoaded = $this->objImport->$callback[1](\Input::post('username', true), \Input::post('password', true), $this->strTable);
 
 					// Load successfull
 					if ($blnLoaded === true)
@@ -268,10 +268,10 @@ abstract class User extends \System
 			}
 
 			// Return if the user still cannot be loaded
-			if (!$blnLoaded || $this->findBy('username', \Input::post('username')) == false)
+			if (!$blnLoaded || $this->findBy('username', \Input::post('username', true)) == false)
 			{
 				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-				$this->log('Could not find user "' . \Input::post('username') . '"', get_class($this) . ' login()', TL_ACCESS);
+				$this->log('Could not find user "' . \Input::post('username', true) . '"', get_class($this) . ' login()', TL_ACCESS);
 
 				return false;
 			}
@@ -319,15 +319,15 @@ abstract class User extends \System
 		list($strPassword, $strSalt) = explode(':', $this->password);
 
 		// Password is correct but not yet salted
-		if (!strlen($strSalt) && $strPassword == sha1(\Input::post('password')))
+		if (!strlen($strSalt) && $strPassword == sha1(\Input::post('password', true)))
 		{
 			$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
-			$strPassword = sha1($strSalt . \Input::post('password'));
+			$strPassword = sha1($strSalt . \Input::post('password', true));
 			$this->password = $strPassword . ':' . $strSalt;
 		}
 
 		// Check the password against the database
-		if (strlen($strSalt) && $strPassword == sha1($strSalt . \Input::post('password')))
+		if ($strSalt != '' && $strPassword == sha1($strSalt . \Input::post('password', true)))
 		{
 			$blnAuthenticated = true;
 		}
@@ -338,7 +338,7 @@ abstract class User extends \System
 			foreach ($GLOBALS['TL_HOOKS']['checkCredentials'] as $callback)
 			{
 				$this->import($callback[0], 'objAuth', true);
-				$blnAuthenticated = $this->objAuth->$callback[1](\Input::post('username'), \Input::post('password'), $this);
+				$blnAuthenticated = $this->objAuth->$callback[1](\Input::post('username', true), \Input::post('password', true), $this);
 
 				// Authentication successfull
 				if ($blnAuthenticated === true)

@@ -59,16 +59,11 @@ class ChangePassword extends Backend
 
 		if (Input::post('FORM_SUBMIT') == 'tl_password')
 		{
-			$pw = Input::post('password');
-			$cnf = Input::post('confirm');
+			$pw = Input::post('password', true);
+			$cnf = Input::post('confirm', true);
 
-			// Do not allow special characters
-			if (preg_match('/[#\(\)\/<=>]/', html_entity_decode(Input::post('password'))))
-			{
-				Message::addError($GLOBALS['TL_LANG']['ERR']['extnd']);
-			}
-			// Passwords do not match
-			elseif ($pw != $cnf)
+			// The passwords do not match
+			if ($pw != $cnf)
 			{
 				Message::addError($GLOBALS['TL_LANG']['ERR']['passwordMatch']);
 			}

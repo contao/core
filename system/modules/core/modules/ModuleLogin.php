@@ -64,7 +64,7 @@ class ModuleLogin extends \Module
 		if (\Input::post('FORM_SUBMIT') == 'tl_login')
 		{
 			// Check whether username and password are set
-			if (!\Input::post('username') || !strlen(trim(\Input::post('password'))))
+			if (!\Input::post('username', true) || !\Input::post('password', true))
 			{
 				$_SESSION['LOGIN_ERROR'] = $GLOBALS['TL_LANG']['MSC']['emptyField'];
 				$this->reload();

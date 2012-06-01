@@ -258,7 +258,7 @@ class InstallTool extends Backend
 		}
 
 		$GLOBALS['TL_CONFIG']['ftpSSL']  = Input::post('ssl');
-		$GLOBALS['TL_CONFIG']['ftpPort'] = (float) Input::post('port');
+		$GLOBALS['TL_CONFIG']['ftpPort'] = (float)Input::post('port');
 
 		// Add a trailing slash
 		if ($GLOBALS['TL_CONFIG']['ftpPath'] != '' && substr($GLOBALS['TL_CONFIG']['ftpPath'], -1) != '/')
@@ -359,15 +359,15 @@ class InstallTool extends Backend
 		list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
 
 		// Password is correct but not yet salted
-		if ($strSalt == '' && $strPassword == sha1(Input::post('password')))
+		if ($strSalt == '' && $strPassword == sha1(Input::post('password', true)))
 		{
 			$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
-			$strPassword = sha1($strSalt . Input::post('password'));
+			$strPassword = sha1($strSalt . Input::post('password', true));
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword . ':' . $strSalt);
 		}
 
 		// Set the cookie
-		if ($strSalt != '' && $strPassword == sha1($strSalt . Input::post('password')))
+		if ($strSalt != '' && $strPassword == sha1($strSalt . Input::post('password', true)))
 		{
 			$this->setAuthCookie();
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
@@ -387,14 +387,8 @@ class InstallTool extends Backend
 	{
 		$strPassword = Input::post('password', true);
 
-		// Do not allow special characters
-		if (preg_match('/[#\(\)\/<=>]/', $strPassword))
-		{
-			$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['extnd'];
-		}
-
 		// The passwords do not match
-		elseif ($strPassword != Input::post('confirm_password', true))
+		if ($strPassword != Input::post('confirm_password', true))
 		{
 			$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
 		}
@@ -620,44 +614,39 @@ class InstallTool extends Backend
 			elseif (Input::post('FORM_SUBMIT') == 'tl_admin')
 			{
 				// Do not allow special characters in usernames
-				if (preg_match('/[#\(\)\/<=>]/', html_entity_decode(Input::post('username'))))
+				if (preg_match('/[#\(\)\/<=>]/', Input::post('username', true)))
 				{
 					$this->Template->usernameError = $GLOBALS['TL_LANG']['ERR']['extnd'];
 				}
 				// The username must not contain whitespace characters (see #4006)
-				elseif (strpos(Input::post('username'), ' ') !== false)
+				elseif (strpos(Input::post('username', true), ' ') !== false)
 				{
 					$this->Template->usernameError = sprintf($GLOBALS['TL_LANG']['ERR']['noSpace'], $GLOBALS['TL_LANG']['MSC']['username']);
 				}
-				// Do not allow special characters in passwords
-				elseif (preg_match('/[#\(\)\/<=>]/', html_entity_decode(Input::post('pass'))))
-				{
-					$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['extnd'];
-				}
-				// Passwords do not match
-				elseif (Input::post('pass') != Input::post('confirm_pass'))
+				// The passwords do not match
+				elseif (Input::post('pass', true) != Input::post('confirm_pass', true))
 				{
 					$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
 				}
-				// Password too short
-				elseif (utf8_strlen(Input::post('pass')) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
+				// The password is too short
+				elseif (utf8_strlen(Input::post('pass', true)) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
 				{
 					$this->Template->passwordError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']);
 				}
 				// Password and username are the same
-				elseif (Input::post('pass') == Input::post('username'))
+				elseif (Input::post('pass', true) == Input::post('username', true))
 				{
 					$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['passwordName'];
 				}
 				// Save the data
-				elseif (Input::post('name') != '' && Input::post('email', true) != '' && Input::post('username') != '')
+				elseif (Input::post('name') != '' && Input::post('email', true) != '' && Input::post('username', true) != '')
 				{
 					$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
-					$strPassword = sha1($strSalt . Input::post('pass'));
+					$strPassword = sha1($strSalt . Input::post('pass', true));
 					$time = time();
 
 					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
-						->execute(Input::post('name'), Input::post('email', true), Input::post('username'), $strPassword . ':' . $strSalt);
+						->execute(Input::post('name'), Input::post('email', true), Input::post('username', true), $strPassword . ':' . $strSalt);
 
 					$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", Input::post('email', true));
 					$this->reload();
@@ -665,7 +654,7 @@ class InstallTool extends Backend
 
 				$this->Template->adminName = Input::post('name');
 				$this->Template->adminEmail = Input::post('email', true);
-				$this->Template->adminUser = Input::post('username');
+				$this->Template->adminUser = Input::post('username', true);
 			}
 		}
 		catch (Exception $e)
