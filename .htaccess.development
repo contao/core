@@ -134,8 +134,10 @@ FileETag None
   ExpiresByType text/css                      "access"
   ExpiresByType application/javascript        "access"
   # Reset the header
-  Header unset Cache-Control
-  Header append Cache-Control must-revalidate
+  <IfModule mod_headers.c>
+    Header unset Cache-Control
+    Header append Cache-Control must-revalidate
+  </IfModule>
 </IfModule>
 
 ##
