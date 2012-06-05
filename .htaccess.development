@@ -133,11 +133,12 @@ FileETag None
   # CSS and JavaScript
   ExpiresByType text/css                      "access"
   ExpiresByType application/javascript        "access"
-  # Reset the header
-  <IfModule mod_headers.c>
-    Header unset Cache-Control
-    Header append Cache-Control must-revalidate
-  </IfModule>
+</IfModule>
+
+# Reset the header
+<IfModule mod_headers.c>
+  Header unset Cache-Control
+  Header append Cache-Control must-revalidate
 </IfModule>
 
 ##
