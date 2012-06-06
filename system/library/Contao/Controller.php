@@ -2580,13 +2580,13 @@ abstract class Controller extends \System
 	 * 
 	 * @param mixed   $arrParentIds An array of parent IDs
 	 * @param string  $strTable     The table name
-	 * @param string  $strWhere     Additional SQL WHERE condition string (example: 'published=1')
 	 * @param boolean $blnSorting   True if the table has a sorting field
 	 * @param array   $arrReturn    The array to be returned
+	 * @param string  $strWhere     Additional SQL WHERE condition string (example: 'published=1')
 	 * 
 	 * @return array An array of child record IDs
 	 */
-	protected function getChildRecords($arrParentIds, $strTable, $strWhere = '', $blnSorting=false, $arrReturn=array())
+	protected function getChildRecords($arrParentIds, $strTable, $blnSorting=false, $arrReturn=array(), $strWhere = '')
 	{
 		if (!is_array($arrParentIds))
 		{
@@ -2615,12 +2615,12 @@ abstract class Controller extends \System
 					array_insert($arrReturn, $pos+1, $arrOrdered[$pid]);
 				}
 
-				$arrReturn = $this->getChildRecords($arrChilds, $strTable, $strWhere, $blnSorting, $arrReturn);
+				$arrReturn = $this->getChildRecords($arrChilds, $strTable, $blnSorting, $arrReturn, $strWhere);
 			}
 			else
 			{
 				$arrChilds = $objChilds->fetchEach('id');
-				$arrReturn = array_merge($arrChilds, $this->getChildRecords($arrChilds, $strTable, $strWhere, $blnSorting));
+				$arrReturn = array_merge($arrChilds, $this->getChildRecords($arrChilds, $strTable, $blnSorting, $strWhere));
 			}
 		}
 
@@ -2765,8 +2765,8 @@ abstract class Controller extends \System
 		}
 
 		// Thanks to Andreas Schempp (see #2475 and #3423)
-		$arrPages = array_intersect($this->getChildRecords(0, $strTable, '', $blnSorting), $arrPages);
-		$arrPages = array_values(array_diff($arrPages, $this->getChildRecords($arrPages, $strTable, '', $blnSorting)));
+		$arrPages = array_intersect($this->getChildRecords(0, $strTable, $blnSorting), $arrPages);
+		$arrPages = array_values(array_diff($arrPages, $this->getChildRecords($arrPages, $strTable, $blnSorting)));
 
 		return $arrPages;
 	}
