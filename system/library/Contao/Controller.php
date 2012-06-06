@@ -2615,12 +2615,12 @@ abstract class Controller extends \System
 					array_insert($arrReturn, $pos+1, $arrOrdered[$pid]);
 				}
 
-				$arrReturn = $this->getChildRecords($arrChilds, $strTable, $blnSorting, $arrReturn);
+				$arrReturn = $this->getChildRecords($arrChilds, $strTable, $strWhere, $blnSorting, $arrReturn);
 			}
 			else
 			{
 				$arrChilds = $objChilds->fetchEach('id');
-				$arrReturn = array_merge($arrChilds, $this->getChildRecords($arrChilds, $strTable, $blnSorting));
+				$arrReturn = array_merge($arrChilds, $this->getChildRecords($arrChilds, $strTable, $strWhere, $blnSorting));
 			}
 		}
 
@@ -2765,8 +2765,8 @@ abstract class Controller extends \System
 		}
 
 		// Thanks to Andreas Schempp (see #2475 and #3423)
-		$arrPages = array_intersect($this->getChildRecords(0, $strTable, $blnSorting), $arrPages);
-		$arrPages = array_values(array_diff($arrPages, $this->getChildRecords($arrPages, $strTable, $blnSorting)));
+		$arrPages = array_intersect($this->getChildRecords(0, $strTable, '', $blnSorting), $arrPages);
+		$arrPages = array_values(array_diff($arrPages, $this->getChildRecords($arrPages, $strTable, '', $blnSorting)));
 
 		return $arrPages;
 	}
