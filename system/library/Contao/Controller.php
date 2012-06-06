@@ -2580,12 +2580,13 @@ abstract class Controller extends \System
 	 * 
 	 * @param mixed   $arrParentIds An array of parent IDs
 	 * @param string  $strTable     The table name
+	 * @param string  $strWhere     Additional SQL WHERE condition string (example: 'published=1')
 	 * @param boolean $blnSorting   True if the table has a sorting field
 	 * @param array   $arrReturn    The array to be returned
 	 * 
 	 * @return array An array of child record IDs
 	 */
-	protected function getChildRecords($arrParentIds, $strTable, $blnSorting=false, $arrReturn=array())
+	protected function getChildRecords($arrParentIds, $strTable, $strWhere = '', $blnSorting=false, $arrReturn=array())
 	{
 		if (!is_array($arrParentIds))
 		{
@@ -2593,7 +2594,7 @@ abstract class Controller extends \System
 		}
 
 		$arrParentIds = array_map('intval', $arrParentIds);
-		$objChilds = $this->Database->execute("SELECT id, pid FROM " . $strTable . " WHERE pid IN(" . implode(',', $arrParentIds) . ")" . ($blnSorting ? " ORDER BY " . $this->Database->findInSet('pid', $arrParentIds) . ", sorting" : ""));
+		$objChilds = $this->Database->execute("SELECT id, pid FROM " . $strTable . " WHERE pid IN(" . implode(',', $arrParentIds) . ")" . ($strWhere ? ' AND ' . $strWhere : '') . ($blnSorting ? " ORDER BY " . $this->Database->findInSet('pid', $arrParentIds) . ", sorting" : ""));
 
 		if ($objChilds->numRows > 0)
 		{
