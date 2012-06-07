@@ -163,7 +163,7 @@ class CronJob extends Frontend
 		}
 
 		// Last execution was less than five minutes ago
-		if ($objCron->tstamp > (time() - 300))
+		if ($objCron->tstamp > (time() - 60))
 		{
 			$this->Database->unlockTables();
 			return true;
