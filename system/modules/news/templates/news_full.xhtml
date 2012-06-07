@@ -10,33 +10,7 @@
 
 <h2><?php echo $this->subHeadline; ?></h2>
 <?php endif; ?>
-
-<div class="ce_text">
-<?php if (!$this->addBefore): ?>
-
 <?php echo $this->text; ?>
-<?php endif; ?>
-<?php if ($this->addImage): ?>
-
-<div class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin || $this->float): ?> style="<?php echo trim($this->margin . $this->float); ?>"<?php endif; ?>>
-<?php if ($this->href): ?>
-<a href="<?php echo $this->href; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
-<?php endif; ?>
-<img src="<?php echo $this->src; ?>"<?php echo $this->imgSize; ?> alt="<?php echo $this->alt; ?>" />
-<?php if ($this->href): ?>
-</a>
-<?php endif; ?>
-<?php if ($this->caption): ?>
-<div class="caption" style="width:<?php echo $this->arrSize[0]; ?>px"><?php echo $this->caption; ?></div>
-<?php endif; ?>
-</div>
-<?php endif; ?>
-<?php if ($this->addBefore): ?>
-
-<?php echo $this->text; ?>
-<?php endif; ?>
-
-</div>
 <?php if ($this->enclosure): ?>
 
 <div class="enclosure">

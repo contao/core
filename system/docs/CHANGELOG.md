@@ -4,6 +4,17 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Content elements can now be used everywhere (no kidding). The `ptable` name of
+the content table must therefore be assigned in the module configuration:
+
+```
+$GLOBALS['BE_MOD']['content']['article']['contentPtable'] = 'tl_article';
+```
+
+The news module has already been adjusted, the other modules will follow.
+
+
 ### Improved
 Do not force a password change in the back end if an administrator switches to
 an account (see #3984). Thanks a lot to psi-4ward and aschempp for their work.

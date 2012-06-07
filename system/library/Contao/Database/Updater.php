@@ -279,6 +279,33 @@ class Database_Updater extends \Controller
 		$this->Database->query("UPDATE `tl_layout` SET `framework`='a:2:{i:0;s:10:\"layout.css\";i:1;s:11:\"tinymce.css\";}'");
 		$this->Database->query("UPDATE `tl_layout` SET `framework`='a:1:{i:0;s:10:\"layout.css\";}' WHERE skipTinymce=1");
 		$this->Database->query("UPDATE `tl_layout` SET `framework`='' WHERE skipFramework=1");
+
+		// Create a content element for each news article
+		$objNews = $this->Database->execute("SELECT * FROM tl_news");
+
+		while ($objNews->next())
+		{
+			$set = array
+			(
+				'pid'         => $objNews->id,
+				'ptable'      => 'tl_news',
+				'sorting'     => 128,
+				'tstamp'      => $objNews->tstamp,
+				'type'        => 'text',
+				'text'        => $objNews->text,
+				'addImage'    => $objNews->addImage,
+				'singleSRC'   => $objNews->singleSRC,
+				'alt'         => $objNews->alt,
+				'size'        => $objNews->size,
+				'imagemargin' => $objNews->imagemargin,
+				'imageUrl'    => $objNews->imageUrl,
+				'fullsize'    => $objNews->fullsize,
+				'caption'     => $objNews->caption,
+				'floating'    => $objNews->floating
+			);
+
+			$this->Database->prepare("INSERT INTO tl_content %s")->set($set)->execute();
+		}
 	}
 
 

@@ -21,7 +21,6 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ptable'                      => 'tl_article',
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
@@ -32,7 +31,8 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index'
+				'pid' => 'index',
+				'ptable' => 'index'
 			)
 		)
 	),
@@ -45,7 +45,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'mode'                    => 4,
 			'fields'                  => array('sorting'),
 			'panelLayout'             => 'filter;search,limit',
-			'headerFields'            => array('title', 'author', 'inColumn', 'tstamp', 'showTeaser', 'published', 'start', 'stop'),
+			'headerFields'            => array('title', 'headline', 'author', 'inColumn', 'tstamp', 'showTeaser', 'published', 'start', 'stop'),
 			'child_record_callback'   => array('tl_content', 'addCteType')
 		),
 		'global_operations' => array
@@ -151,9 +151,11 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		),
 		'pid' => array
 		(
-			'foreignKey'              => 'tl_article.title',
-			'sql'                     => "int(10) unsigned NOT NULL default '0'",
-			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'ptable' => array
+		(
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'sorting' => array
 		(

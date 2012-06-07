@@ -557,6 +557,12 @@ h2.sub_headline_index {
 .tl_content pre.disabled {
 	color:#a6a6a6;
 }
+.tl_content_left {
+	float:left;
+}
+.webkit .tl_content_left {
+	margin-top:1px;
+}
 .tl_content_right {
 	float:right;
 	text-align:right;
@@ -1117,6 +1123,9 @@ a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header
 	width:16px;
 	background-position:left center;
 	background-repeat:no-repeat;
+}
+.webkit .list_icon,.webkit .list_icon_new {
+	background-position:left -1px;
 }
 
 /* Header icons */

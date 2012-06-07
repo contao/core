@@ -212,7 +212,7 @@ abstract class Backend extends \Controller
 			}
 
 			$dataContainer = 'DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
-			$dc = new $dataContainer($strTable, $this->Template, $arrModule);
+			$dc = new $dataContainer($strTable, $arrModule);
 		}
 
 		// AJAX request

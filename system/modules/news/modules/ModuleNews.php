@@ -118,20 +118,20 @@ abstract class ModuleNews extends \Module
 		{
 			$objTemplate->text = true;
 		}
-		// Encode e-mail addresses
+
+		// Compile the news text
 		else
 		{
-			// Clean the RTE output
-			if ($objPage->outputFormat == 'xhtml')
-			{
-				$objArticle->text = \String::toXhtml($objArticle->text);
-			}
-			else
-			{
-				$objArticle->text = \String::toHtml5($objArticle->text);
-			}
+			$objTemplate->text = '';
+			$objElement = \ContentModel::findPublishedByPidAndTable($objArticle->id, 'tl_news');
 
-			$objTemplate->text = \String::encodeEmail($objArticle->text);
+			if ($objElement !== null)
+			{
+				while ($objElement->next())
+				{
+					$objTemplate->text .= $this->getContentElement($objElement->id);
+				}
+			}
 		}
 
 		$arrMeta = $this->getMetaFields($objArticle);

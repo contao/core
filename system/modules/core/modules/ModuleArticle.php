@@ -170,7 +170,7 @@ class ModuleArticle extends \Module
 		}
 
 		$arrElements = array();
-		$objCte = \ContentModel::findPublishedByPid($this->id);
+		$objCte = \ContentModel::findPublishedByPidAndTable($this->id, 'tl_content');
 
 		if ($objCte !== null)
 		{

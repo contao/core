@@ -139,7 +139,24 @@ class News extends \Frontend
 				$objItem->author = $objArticle->authorName;
 
 				// Prepare the description
-				$strDescription = ($arrFeed['source'] == 'source_text') ? $objArticle->text : $objArticle->teaser;
+				if ($arrFeed['source'] == 'source_text')
+				{
+					$strDescription = '';
+					$objElement = \ContentModel::findPublishedByPidAndTable($objArticle->id, 'tl_news');
+
+					if ($objElement !== null)
+					{
+						while ($objElement->next())
+						{
+							$strDescription .= $this->getContentElement($objElement->id);
+						}
+					}
+				}
+				else
+				{
+					$strDescription = $objArticle->teaser;
+				}
+
 				$strDescription = $this->replaceInsertTags($strDescription);
 				$objItem->description = $this->convertRelativeUrls($strDescription, $strLink);
 

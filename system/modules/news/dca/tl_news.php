@@ -28,6 +28,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_news_archive',
+		'ctable'                      => array('tl_content'),
+		'switchToEdit'                => true,
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
@@ -67,7 +69,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'fields'                  => array('date DESC'),
 			'headerFields'            => array('title', 'jumpTo', 'tstamp', 'protected', 'allowComments', 'makeFeed'),
 			'panelLayout'             => 'filter;sort,search,limit',
-			'child_record_callback'   => array('tl_news', 'listNewsArticles')
+			'child_record_callback'   => array('tl_news', 'listNewsArticles'),
+			'child_record_class'      => 'no_padding'
 		),
 		'global_operations' => array
 		(
@@ -84,8 +87,16 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'edit' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news']['edit'],
+				'href'                => 'table=tl_content',
+				'icon'                => 'edit.gif',
+				'attributes'          => 'class="contextmenu"'
+			),
+			'editmeta' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_news']['editmeta'],
 				'href'                => 'act=edit',
-				'icon'                => 'edit.gif'
+				'icon'                => 'header.gif',
+				'attributes'          => 'class="edit-header"'
 			),
 			'copy' => array
 			(
@@ -133,7 +144,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addImage', 'addEnclosure', 'source'),
-		'default'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend:hide},subheadline,teaser;{text_legend},text;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop'
+		'default'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend},subheadline,teaser;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
@@ -239,16 +250,6 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'inputType'               => 'textarea',
 			'eval'                    => array('rte'=>'tinyMCE', 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
-		),
-		'text' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['text'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'textarea',
-			'eval'                    => array('rte'=>'tinyMCE', 'helpwizard'=>true),
-			'explanation'             => 'insertTags',
-			'sql'                     => "mediumtext NULL"
 		),
 		'addImage' => array
 		(
@@ -635,15 +636,7 @@ class tl_news extends Backend
 	 */
 	public function listNewsArticles($arrRow)
 	{
-		$time = time();
-		$key = ($arrRow['published'] && ($arrRow['start'] == '' || $arrRow['start'] < $time) && ($arrRow['stop'] == '' || $arrRow['stop'] > $time)) ? 'published' : 'unpublished';
-		$date = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']);
-
-		return '
-<div class="cte_type ' . $key . '"><strong>' . $arrRow['headline'] . '</strong> - ' . $date . '</div>
-<div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h64' : '') . '">
-' . ($arrRow['text'] ?: $arrRow['teaser']) . '
-</div>' . "\n";
+		return '<div class="tl_content_left">' . $arrRow['headline'] . ' <span style="color:#b3b3b3;padding-left:3px">[' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']) . ']</span></div>';
 	}
 
 

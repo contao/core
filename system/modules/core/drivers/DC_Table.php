@@ -106,12 +106,19 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	 */
 	protected $blnUploadable = false;
 
+	/**
+	 * The current back end module
+	 * @param array
+	 */
+	protected $arrModule = array();
+
 
 	/**
 	 * Initialize the object
 	 * @param string
+	 * @param array
 	 */
-	public function __construct($strTable)
+	public function __construct($strTable, $arrModule=array())
 	{
 		parent::__construct();
 
@@ -187,6 +194,14 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		$this->ctable = $GLOBALS['TL_DCA'][$this->strTable]['config']['ctable'];
 		$this->treeView = in_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'], array(5, 6));
 		$this->root = null;
+
+		// Dynamically set the parent table of tl_content
+		if ($this->strTable == 'tl_content')
+		{
+			$this->ptable = $arrModule['contentPtable'];
+		}
+
+		$this->arrModule = $arrModule;
 
 		// Call onload_callback (e.g. to check permissions)
 		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onload_callback']))
@@ -1868,8 +1883,16 @@ window.addEvent(\'domready\', function() {
 			}
 
 			// Set the current timestamp (-> DO NOT CHANGE THE ORDER version - timestamp)
-			$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
-						   ->execute(time(), $this->intId);
+			if ($this->strTable == 'tl_content')
+			{
+				$this->Database->prepare("UPDATE " . $this->strTable . " SET ptable=?, tstamp=? WHERE id=?")
+							   ->execute($this->ptable, time(), $this->intId);
+			}
+			else
+			{
+				$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
+							   ->execute(time(), $this->intId);
+			}
 
 			// Redirect
 			if (isset($_POST['saveNclose']))
@@ -2153,8 +2176,16 @@ window.addEvent(\'domready\', function() {
 					}
 
 					// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
-					$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
-								   ->execute(time(), $this->intId);
+					if ($this->strTable == 'tl_content')
+					{
+						$this->Database->prepare("UPDATE " . $this->strTable . " SET ptable=?, tstamp=? WHERE id=?")
+									   ->execute($this->ptable, time(), $this->intId);
+					}
+					else
+					{
+						$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
+									   ->execute(time(), $this->intId);
+					}
 				}
 			}
 
@@ -2396,8 +2427,16 @@ window.addEvent(\'domready\', function() {
 						}
 
 						// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
-						$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
-									   ->execute(time(), $this->intId);
+						if ($this->strTable == 'tl_content')
+						{
+							$this->Database->prepare("UPDATE " . $this->strTable . " SET ptable=?, tstamp=? WHERE id=?")
+										   ->execute($this->ptable, time(), $this->intId);
+						}
+						else
+						{
+							$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
+										   ->execute(time(), $this->intId);
+						}
 					}
 				}
 			}
@@ -2837,9 +2876,16 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Delete all records of the current table that are not related to the parent table
-		if (strlen($ptable))
+		if ($ptable != '')
 		{
-			$objStmt = $this->Database->execute("DELETE FROM " . $this->strTable . " WHERE NOT EXISTS (SELECT * FROM " . $ptable . " WHERE " . $this->strTable . ".pid = " . $ptable . ".id)");
+			if ($this->strTable == 'tl_content')
+			{
+				$objStmt = $this->Database->execute("DELETE FROM " . $this->strTable . " WHERE ptable='" . $ptable . "' AND NOT EXISTS (SELECT * FROM " . $ptable . " WHERE " . $this->strTable . ".pid = " . $ptable . ".id)");
+			}
+			else
+			{
+				$objStmt = $this->Database->execute("DELETE FROM " . $this->strTable . " WHERE NOT EXISTS (SELECT * FROM " . $ptable . " WHERE " . $this->strTable . ".pid = " . $ptable . ".id)");
+			}
 
 			if ($objStmt->affectedRows > 0)
 			{
@@ -2852,9 +2898,16 @@ window.addEvent(\'domready\', function() {
 		{
 			foreach ($ctable as $v)
 			{
-				if (strlen($v))
+				if ($v != '')
 				{
-					$objStmt = $this->Database->execute("DELETE FROM " . $v . " WHERE NOT EXISTS (SELECT * FROM " . $this->strTable . " WHERE " . $v . ".pid = " . $this->strTable . ".id)");
+					if ($v == 'tl_content')
+					{
+						$objStmt = $this->Database->execute("DELETE FROM " . $v . " WHERE ptable='" . $this->strTable . "' AND NOT EXISTS (SELECT * FROM " . $this->strTable . " WHERE " . $v . ".pid = " . $this->strTable . ".id)");
+					}
+					else
+					{
+						$objStmt = $this->Database->execute("DELETE FROM " . $v . " WHERE NOT EXISTS (SELECT * FROM " . $this->strTable . " WHERE " . $v . ".pid = " . $this->strTable . ".id)");
+					}
 
 					if ($objStmt->affectedRows > 0)
 					{
@@ -3624,16 +3677,24 @@ window.addEvent(\'domready\', function() {
 				$firstOrderBy = preg_replace('/\s+.*$/i', '', $orderBy[0]);
 			}
 
+			// Support empty ptable fields (backwards compatibility)
+			if ($this->strTable == 'tl_content')
+			{
+				$this->procedure[] = ($this->ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?";
+				$this->values[] = $this->ptable;
+			}
+
+			// WHERE
 			if (!empty($this->procedure))
 			{
 				$query .= " WHERE " . implode(' AND ', $this->procedure);
 			}
-
 			if (is_array($this->root) && !empty($this->root))
 			{
 				$query .= (!empty($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
 			}
 
+			// ORDER BY
 			if (is_array($orderBy) && !empty($orderBy))
 			{
 				$query .= " ORDER BY " . implode(', ', $orderBy);
@@ -3641,6 +3702,7 @@ window.addEvent(\'domready\', function() {
 
 			$objOrderByStmt = $this->Database->prepare($query);
 
+			// LIMIT
 			if (strlen($this->limit))
 			{
 				$arrLimit = explode(',', $this->limit);

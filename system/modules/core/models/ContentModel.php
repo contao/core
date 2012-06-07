@@ -35,22 +35,32 @@ class ContentModel extends \Model
 
 
 	/**
-	 * Find all published content elements by their parent ID
+	 * Find all published content elements by their parent ID and parent table
 	 * 
-	 * @param integer $intPid The article ID
+	 * @param integer $intPid         The article ID
+	 * @param string  $strParentTable The parent table name
 	 * 
 	 * @return \Model_Collection|null A collection of models or null if there are no content elements
 	 */
-	public static function findPublishedByPid($intPid)
+	public static function findPublishedByPidAndTable($intPid, $strParentTable)
 	{
 		$t = static::$strTable;
-		$arrColumns = array("$t.pid=?");
+
+		// Also handle empty ptable fields (backwards compatibility)
+		if ($strParentTable == 'tl_content')
+		{
+			$arrColumns = array("$t.pid=? AND (ptable=? OR ptable='')");
+		}
+		else
+		{
+			$arrColumns = array("$t.pid=? AND ptable=?");
+		}
 
 		if (!BE_USER_LOGGED_IN)
 		{
 			$arrColumns[] = "$t.invisible=''";
 		}
 
-		return static::findBy($arrColumns, $intPid, array('order'=>"$t.sorting"));
+		return static::findBy($arrColumns, array($intPid, $strParentTable), array('order'=>"$t.sorting"));
 	}
 }

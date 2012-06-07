@@ -777,7 +777,19 @@ var Backend =
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
 			var val = [], tls = [];
             var par = opt.id.replace(/_[0-9]+$/, '') + '_parent'; // Strip the "edit multiple" suffixes
-			var inp = window.frames[0].document.getElementById(par).getElementsByTagName('input');
+			var frm = null;
+			var frms = window.frames;
+			for (var i=0; i<frms.length; i++) {
+				if (frms[i].name == 'simple-modal-iframe') {
+					frm = frms[i];
+					break;
+				}
+			}
+			if (frm === null) {
+				alert('Could not find the SimpleModal frame');
+				return;
+			}
+			var inp = frm.document.getElementById(par).getElementsByTagName('input');
 			for (var i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
                 if (!inp[i].id.match(/^reset_/)) {
@@ -802,7 +814,7 @@ var Backend =
 		});
 		M.show({
 			'title': opt.title,
-			'contents': '<iframe src="' + opt.url + '" width="100%" height="' + opt.height + '" frameborder="0"></iframe>',
+			'contents': '<iframe src="' + opt.url + '" name="simple-modal-iframe" width="100%" height="' + opt.height + '" frameborder="0"></iframe>',
 			'model': 'modal'
 		});
 	},

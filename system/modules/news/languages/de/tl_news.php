@@ -38,6 +38,7 @@ $GLOBALS['TL_LANG']['tl_news']['featured']     = array('Beitrag hervorheben', 'D
 $GLOBALS['TL_LANG']['tl_news']['published']    = array('Beitrag veröffentlichen', 'Den Beitrag auf der Webseite anzeigen.');
 $GLOBALS['TL_LANG']['tl_news']['start']        = array('Anzeigen ab', 'Den Beitrag erst ab diesem Tag auf der Webseite anzeigen.');
 $GLOBALS['TL_LANG']['tl_news']['stop']         = array('Anzeigen bis', 'Den Beitrag nur bis zu diesem Tag auf der Webseite anzeigen.');
+$GLOBALS['TL_LANG']['tl_news']['tstamp']       = array('Änderungsdatum', 'Datum und Uhrzeit der letzten Änderung');
 
 
 /**
@@ -66,4 +67,5 @@ $GLOBALS['TL_LANG']['tl_news']['delete']     = array('Beitrag löschen', 'Beitra
 $GLOBALS['TL_LANG']['tl_news']['toggle']     = array('Beitrag veröffentlichen/unveröffentlichen', 'Beitrag ID %s veröffentlichen/unveröffentlichen');
 $GLOBALS['TL_LANG']['tl_news']['feature']    = array('Beitrag hervorheben/zurücksetzen', 'Beitrag ID %s hervorheben/zurücksetzen');
 $GLOBALS['TL_LANG']['tl_news']['editheader'] = array('Nachrichtenarchiv bearbeiten', 'Die Nachrichtenarchiv-Einstellungen bearbeiten');
+$GLOBALS['TL_LANG']['tl_news']['editmeta']   = array('Beitragseinstellungen bearbeiten', 'Bei Beitragseinstellungen bearbeiten');
 $GLOBALS['TL_LANG']['tl_news']['pasteafter'] = array('In dieses Nachrichtenarchiv einfügen', 'Nach dem Beitrag ID %s einfügen');
