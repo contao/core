@@ -1125,6 +1125,17 @@ var Backend =
     },
 
     /**
+     * Make checkboxWizard items sortable
+     * @param string
+     */
+    makeCheckboxWizardSortable: function(id) {
+        var list = new Sortables($(id).getElement('.sortable'), {
+            contstrain: true,
+            opacity: 0.6
+        });
+    },
+
+    /**
 	 * List wizard
 	 * @param object
 	 * @param string
