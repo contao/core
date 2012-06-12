@@ -1,8 +1,12 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.11.4 (XXXX-XX-XX)
+Version 2.11.4 (2012-06-12)
 ---------------------------
+
+### Fixed
+Fixed a critical privilege escalation vulnerability which allowed regular users
+to make themselves administrators (see #4427).
 
 ### Fixed
 Support insert tags as external redirect target (see #4373).
