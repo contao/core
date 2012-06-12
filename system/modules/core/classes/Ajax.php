@@ -253,7 +253,17 @@ class Ajax extends \Backend
 
 			// Toggle subpalettes
 			case 'toggleSubpalette':
-				if ($dc instanceof \DC_Table)
+				$this->import('BackendUser', 'User');
+
+				// Check whether the field is a selector field and allowed for regular users (thanks to Fabian Mihailowitsch) (see #4427)
+				if (!is_array($GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || !in_array($this->Input->post('field'), $GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || ($GLOBALS['TL_DCA'][$dc->table]['fields'][$this->Input->post('field')]['exclude'] && !$this->User->hasAccess($dc->table . '::' . $this->Input->post('field'), 'alexf')))
+				{
+					$this->log('Field "' . $this->Input->post('field') . '" is not an allowed selector field (possible SQL injection attempt)', 'Ajax executePostActions()', TL_ERROR);
+					header('HTTP/1.1 400 Bad Request');
+					die('Bad Request');
+				}
+
+				if ($dc instanceof DC_Table)
 				{
 					if (\Input::get('act') == 'editAll')
 					{
