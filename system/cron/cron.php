@@ -137,7 +137,7 @@ class CronJob extends Frontend
 
 
 	/**
-	 * Check whether the last script execution was less than five minutes ago
+	 * Check whether the last script execution was less than a minute ago
 	 * @return boolean
 	 */
 	protected function hasToWait()
@@ -162,8 +162,8 @@ class CronJob extends Frontend
 			return false;
 		}
 
-		// Last execution was less than five minutes ago
-		if ($objCron->tstamp > (time() - 300))
+		// Last execution was less than a minute ago
+		if ($objCron->tstamp > (time() - 60))
 		{
 			$this->Database->unlockTables();
 			return true;
