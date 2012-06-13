@@ -53,6 +53,7 @@ $GLOBALS['TL_LANG']['tl_content']['embed']         = array('Embed the link', 'Us
 $GLOBALS['TL_LANG']['tl_content']['rel']           = array('Lightbox', 'To trigger the lightbox, enter a rel attribute here.');
 $GLOBALS['TL_LANG']['tl_content']['useImage']      = array('Create an image link', 'Use an image instead of the link title.');
 $GLOBALS['TL_LANG']['tl_content']['multiSRC']      = array('Source files', 'Please select one or more files or folders from the files directory. If you select a folder, its files will be included automatically.');
+$GLOBALS['TL_LANG']['tl_content']['orderSRC']      = array('Source files sort order', 'The sort order of the source files.');
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir']    = array('Use home directory', 'Use the home directory as file source if there is an authenticated user.');
 $GLOBALS['TL_LANG']['tl_content']['perRow']        = array('Thumbnails per row', 'The number of image thumbnails per row.');
 $GLOBALS['TL_LANG']['tl_content']['perPage']       = array('Items per page', 'The number of items per page. Set to 0 to disable pagination.');

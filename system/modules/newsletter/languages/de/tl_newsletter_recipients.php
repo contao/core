@@ -16,8 +16,9 @@
  */
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['email']   = array('E-Mail-Adresse', 'Bitte geben Sie die E-Mail-Adresse des Abonnenten ein.');
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['active']  = array('Abonnenten aktivieren', 'Abonnenten werden normalerweise automatisch aktiviert (double-opt-in).');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['ip']      = array('IP-Adresse', 'Die IP-Adresse des Abonnenten.');
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['addedOn'] = array('Registrierungsdatum', 'Das Datum des Abonnements.');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['ip']      = array('IP-Adresse', 'Die IP-Adresse des Abonnenten.');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['token']   = array('Token', 'Der Sende-Token des Newsletters.');
 
 
 /**

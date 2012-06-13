@@ -175,6 +175,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 		),
 		'token' => array
 		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['token'],
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		)
 	)

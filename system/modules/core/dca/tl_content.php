@@ -526,6 +526,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		),
 		'orderSRC' => array
 		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['orderSRC'],
 			'sql'                     => "text NULL"
 		),
 		'useHomeDir' => array
