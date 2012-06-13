@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### News
+Added a development .htaccess file (thanks to Wael M. Nasreddine) (see #4419).
+
 ### New
 Content elements can now be used everywhere (no kidding). The `ptable` name of
 the content table must therefore be assigned in the module configuration:

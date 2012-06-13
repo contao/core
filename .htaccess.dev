@@ -135,7 +135,9 @@ FileETag None
   ExpiresByType application/javascript        "access"
 </IfModule>
 
-# Reset the header
+##
+# Reset the cache headers (see #4419)
+##
 <IfModule mod_headers.c>
   Header unset Cache-Control
   Header append Cache-Control must-revalidate
