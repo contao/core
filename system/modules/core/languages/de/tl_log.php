@@ -20,7 +20,7 @@ $GLOBALS['TL_LANG']['tl_log']['action']   = array('Kategorie', 'Kategorie der Ak
 $GLOBALS['TL_LANG']['tl_log']['username'] = array('Benutzer', 'Name des angemeldeten Benutzers');
 $GLOBALS['TL_LANG']['tl_log']['text']     = array('Details', 'Details des Log-Eintrags');
 $GLOBALS['TL_LANG']['tl_log']['func']     = array('Funktion', 'Name der auslösenden Funktion');
-$GLOBALS['TL_LANG']['tl_log']['ip']       = array('IP Adresse', 'IP-Adresse des Benutzers');
+$GLOBALS['TL_LANG']['tl_log']['ip']       = array('IP-Adresse', 'IP-Adresse des Benutzers');
 $GLOBALS['TL_LANG']['tl_log']['browser']  = array('Browser', 'Name des Browsers');
 
 

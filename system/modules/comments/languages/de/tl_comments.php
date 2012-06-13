@@ -25,7 +25,7 @@ $GLOBALS['TL_LANG']['tl_comments']['addReply']  = array('Antwort hinzufügen', '
 $GLOBALS['TL_LANG']['tl_comments']['author']    = array('Autor', 'Hier können Sie den Autor der Antwort ändern.');
 $GLOBALS['TL_LANG']['tl_comments']['reply']     = array('Antwort', 'Hier können Sie Ihre Antwort eingeben.');
 $GLOBALS['TL_LANG']['tl_comments']['published'] = array('Kommentar veröffentlichen', 'Den Kommentar auf der Webseite anzeigen.');
-$GLOBALS['TL_LANG']['tl_comments']['ip']        = array('IP Adresse', 'IP-Adresse des Autors.');
+$GLOBALS['TL_LANG']['tl_comments']['ip']        = array('IP-Adresse', 'Die IP-Adresse des Autors.');
 
 
 /**
