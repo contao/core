@@ -40,9 +40,15 @@ class ContentTeaser extends \ContentElement
 	 */
 	protected $objArticle;
 
+	/**
+	 * Parent page object
+	 * @var object
+	 */
+	protected $objParent;
+
 
 	/**
-	 * Check whether the target page and article are published
+	 * Check whether the target page and the article are published
 	 * @return string
 	 */
 	public function generate()
@@ -54,15 +60,16 @@ class ContentTeaser extends \ContentElement
 			return '';
 		}
 
-		$objPage = $objArticle->getPage();
+		// Use findPublished() instead of getRelated()
+		$objParent = \PageModel::findPublishedById($objArticle->pid);
 
-		if ($objPage === null)
+		if ($objParent === null)
 		{
 			return '';
 		}
 
-		$objArticle->pid = $objPage;
 		$this->objArticle = $objArticle;
+		$this->objParent = $objParent;
 
 		return parent::generate();
 	}
@@ -84,7 +91,7 @@ class ContentTeaser extends \ContentElement
 		}
 
 		$link .= ($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id;
-		$this->Template->href = $this->generateFrontendUrl($objArticle->pid->row(), $link);
+		$this->Template->href = $this->generateFrontendUrl($this->objParent->row(), $link);
 
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
