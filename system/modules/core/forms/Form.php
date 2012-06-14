@@ -99,7 +99,7 @@ class Form extends \Hybrid
 		if ($objFields !== null)
 		{
 			$row = 0;
-			$max_row = $objFields->numRows;
+			$max_row = $objFields->count();
 
 			while ($objFields->next())
 			{
