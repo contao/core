@@ -5,6 +5,10 @@ Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
 ### Fixed
+Adjusted the permission checks and reworked the "content elements everywhere"
+structure (it is now entirely configured in the DCA).
+
+### Fixed
 Since the command scheduler now supports minutely jobs, the `cron.php` file has
 to be adjusted accordingly (see #4425).
 

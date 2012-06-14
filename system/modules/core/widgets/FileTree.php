@@ -145,7 +145,7 @@ class FileTree extends \Widget
 		$strValues = '';
 		$arrValues = array();
 
-		if ($this->varValue != '')
+		if (!empty($this->varValue)) // Can be an array
 		{
 			$strValues = implode(',', array_map('intval', (array)$this->varValue));
 			$objFiles = $this->Database->execute("SELECT id, path, type FROM tl_files WHERE id IN($strValues) ORDER BY " . $this->Database->findInSet('id', $strValues));

@@ -514,6 +514,130 @@ class tl_article extends Backend
 
 
 	/**
+	 * Check permissions to edit table tl_content
+	 */
+	public function checkContentPermission()
+	{
+		if ($this->User->isAdmin)
+		{
+			return;
+		}
+
+		// Get the pagemounts
+		$pagemounts = array();
+
+		foreach ($this->User->pagemounts as $root)
+		{
+			$pagemounts[] = $root;
+			$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page'));
+		}
+
+		$pagemounts = array_unique($pagemounts);
+
+		// Check the current action
+		switch (Input::get('act'))
+		{
+			case 'paste':
+				// Allow
+				break;
+
+			case '': // empty
+			case 'create':
+			case 'select':
+				// Check access to the article
+				if (!$this->checkAccessToElement(CURRENT_ID, $pagemounts, true))
+				{
+					$this->redirect('contao/main.php?act=error');
+				}
+				break;
+
+			case 'editAll':
+			case 'deleteAll':
+			case 'overrideAll':
+			case 'cutAll':
+			case 'copyAll':
+				// Check access to the parent element if a content element is moved
+				if ((Input::get('act') == 'cutAll' || Input::get('act') == 'copyAll') && !$this->checkAccessToElement(Input::get('pid'), $pagemounts, (Input::get('mode') == 2)))
+				{
+					$this->redirect('contao/main.php?act=error');
+				}
+
+				$objCes = $this->Database->prepare("SELECT id FROM tl_content WHERE (ptable='tl_article' OR ptable='') AND pid=?")
+										 ->execute(CURRENT_ID);
+
+				$session = $this->Session->getData();
+				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $objCes->fetchEach('id'));
+				$this->Session->setData($session);
+				break;
+
+			case 'cut':
+			case 'copy':
+				// Check access to the parent element if a content element is moved
+				if (!$this->checkAccessToElement(Input::get('pid'), $pagemounts, (Input::get('mode') == 2)))
+				{
+					$this->redirect('contao/main.php?act=error');
+				}
+				// NO BREAK STATEMENT HERE
+
+			default:
+				// Check access to the content element
+				if (!$this->checkAccessToElement(Input::get('id'), $pagemounts))
+				{
+					$this->redirect('contao/main.php?act=error');
+				}
+				break;
+		}
+	}
+
+
+	/**
+	 * Check access to a particular content element
+	 * @param integer
+	 * @param array
+	 * @param boolean
+	 * @return boolean
+	 */
+	protected function checkAccessToElement($id, $pagemounts, $blnIsPid=false)
+	{
+		if ($blnIsPid)
+		{
+			$objPage = $this->Database->prepare("SELECT p.id, p.pid, p.includeChmod, p.chmod, p.cuser, p.cgroup, a.id AS aid FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
+									  ->limit(1)
+									  ->execute($id);
+		}
+		else
+		{
+			$objPage = $this->Database->prepare("SELECT p.id, p.pid, p.includeChmod, p.chmod, p.cuser, p.cgroup, a.id AS aid FROM tl_content c, tl_article a, tl_page p WHERE c.id=? AND c.pid=a.id AND a.pid=p.id")
+									  ->limit(1)
+									  ->execute($id);
+		}
+
+		// Invalid ID
+		if ($objPage->numRows < 1)
+		{
+			$this->log('Invalid article content element ID ' . $id, 'tl_article checkAccessToElement()', TL_ERROR);
+			return false;
+		}
+
+		// The page is not mounted
+		if (!in_array($objPage->id, $pagemounts))
+		{
+			$this->log('Not enough permissions to modify article ID ' . $objPage->aid . ' on page ID ' . $objPage->id, 'tl_article checkAccessToElement()', TL_ERROR);
+			return false;
+		}
+
+		// Not enough permissions to modify the article
+		if (!$this->User->isAllowed(4, $objPage->row()))
+		{
+			$this->log('Not enough permissions to modify article ID ' . $objPage->aid, 'tl_article checkAccessToElement()', TL_ERROR);
+			return false;
+		}
+
+		return true;
+	}
+
+
+	/**
 	 * Add an image to each page in the tree
 	 * @param array
 	 * @param string

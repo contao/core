@@ -117,6 +117,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	 * Initialize the object
 	 * @param string
 	 * @param array
+	 * @throws \Exception
 	 */
 	public function __construct($strTable, $arrModule=array())
 	{
@@ -198,7 +199,12 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Dynamically set the parent table of tl_content
 		if ($this->strTable == 'tl_content')
 		{
-			$this->ptable = $arrModule['contentPtable'];
+			if (!isset($GLOBALS['TL_DCA']['tl_content']['config']['dynamicPtable'][\Input::get('do')]))
+			{
+				throw new \Exception('Module "' . \Input::get('do') . '" does not support dynamic parent tables');
+			}
+
+			$this->ptable = $GLOBALS['TL_DCA']['tl_content']['config']['dynamicPtable'][\Input::get('do')][0];
 		}
 
 		$this->arrModule = $arrModule;

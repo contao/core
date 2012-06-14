@@ -79,7 +79,7 @@ class PageTree extends \Widget
 		$strValues = '';
 		$arrValues = array();
 
-		if ($this->varValue != '')
+		if (!empty($this->varValue)) // Can be an array
 		{
 			$strValues = implode(',', array_map('intval', (array)$this->varValue));
 			$objPages = $this->Database->execute("SELECT id, title, alias, type, hide, protected, published, start, stop FROM tl_page WHERE id IN($strValues) ORDER BY " . $this->Database->findInSet('id', $strValues));

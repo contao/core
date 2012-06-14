@@ -23,8 +23,7 @@ $GLOBALS['BE_MOD'] = array
 		(
 			'tables' => array('tl_article', 'tl_content'),
 			'table' => array('TableWizard', 'importTable'),
-			'list' => array('ListWizard', 'importList'),
-			'contentPtable' => 'tl_article'
+			'list' => array('ListWizard', 'importList')
 		),
 		'form' => array
 		(
