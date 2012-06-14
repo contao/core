@@ -716,7 +716,7 @@ class tl_article extends Backend
 			$arrSections = array();
 
 			// Header
-			if ($objLayout->header)
+			if ($objLayout->rows == '2rwh' || $objLayout->rows == '3rw')
 			{
 				$arrSections[] = 'header';
 			}
@@ -737,7 +737,7 @@ class tl_article extends Backend
 			$arrSections[] = 'main';
 
 			// Footer
-			if ($objLayout->footer)
+			if ($objLayout->rows == '2rwf' || $objLayout->rows == '3rw')
 			{
 				$arrSections[] = 'footer';
 			}
