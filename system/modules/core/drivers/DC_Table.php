@@ -624,7 +624,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Get the new position
 		$this->getNewPosition('new', (strlen(\Input::get('pid')) ? \Input::get('pid') : null), (\Input::get('mode') == '2' ? true : false));
 
-		// Empty clipboard
+		// Dynamically set the parent table of tl_content
+		if ($this->strTable == 'tl_content')
+		{
+			$this->set['ptable'] = $this->arrModule['contentPtable'];
+		}
+
+		// Empty the clipboard
 		$arrClipboard = $this->Session->get('CLIPBOARD');
 		$arrClipboard[$this->strTable] = array();
 		$this->Session->set('CLIPBOARD', $arrClipboard);
@@ -718,6 +724,12 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 		}
 
+		// Dynamically set the parent table of tl_content
+		if ($this->strTable == 'tl_content')
+		{
+			$this->set['ptable'] = $this->arrModule['contentPtable'];
+		}
+
 		$this->Database->prepare("UPDATE " . $this->strTable . " %s WHERE id=?")
 					   ->set($this->set)
 					   ->execute($this->intId);
@@ -783,7 +795,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 								 ->limit(1)
 								 ->execute($this->intId);
 
-		// Copy values if the record contains data
+		// Copy the values if the record contains data
 		if ($objRow->numRows)
 		{
 			foreach ($objRow->fetchAssoc() as $k=>$v)
@@ -828,6 +840,12 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 		// Get the new position
 		$this->getNewPosition('copy', (strlen(\Input::get('pid')) ? \Input::get('pid') : null), (\Input::get('mode') == '2' ? true : false));
+
+		// Dynamically set the parent table of tl_content
+		if ($this->strTable == 'tl_content')
+		{
+			$this->set['ptable'] = $this->arrModule['contentPtable'];
+		}
 
 		// Empty clipboard
 		$arrClipboard = $this->Session->get('CLIPBOARD');
