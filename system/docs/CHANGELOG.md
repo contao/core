@@ -8,7 +8,7 @@ Version 3.0.beta2 (XXXX-XX-XX)
 Since the command scheduler now supports minutely jobs, the `cron.php` file has
 to be adjusted accordingly (see #4425).
 
-### News
+### New
 Added a development .htaccess file (thanks to Wael M. Nasreddine) (see #4419).
 
 ### New
