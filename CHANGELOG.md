@@ -5,6 +5,9 @@ Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Set the correct headers to prevent browser caching (see #4436).
+
+### Fixed
 Min- and max-width/height now support `inherit` and `none` (see #4449).
 
 
