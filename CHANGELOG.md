@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+Min- and max-width/height now support `inherit` and `none` (see #4449).
+
 
 Version 2.11.4 (2012-06-12)
 ---------------------------

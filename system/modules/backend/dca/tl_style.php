@@ -225,14 +225,14 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['maxwidth'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit_none', 'tl_class'=>'w50')
 		),
 		'maxheight' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['maxheight'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit_none', 'tl_class'=>'w50')
 		),
 		'positioning' => array
 		(
