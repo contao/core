@@ -926,7 +926,7 @@ abstract class Controller extends System
 		// No resizing required
 		if ($objFile->width == $width && $objFile->height == $height)
 		{
-			return $image;
+			return $this->urlEncode($image);
 		}
 
 		// No mode given
@@ -2494,6 +2494,8 @@ abstract class Controller extends System
 	 */
 	protected function generateImage($src, $alt='', $attributes='')
 	{
+		$src = rawurldecode($src);
+
 		if (strpos($src, '/') === false)
 		{
 			$src = 'system/themes/' . $this->getTheme() . '/images/' . $src;

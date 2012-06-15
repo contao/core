@@ -5,6 +5,9 @@ Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+The function `Controller::generateImage()` did not urldecode (see #4384).
+
+### Fixed
 Check if there is a text field when auto-focussing (see #4422).
 
 ### Fixed
