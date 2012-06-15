@@ -884,7 +884,7 @@ abstract class Controller extends System
 	 */
 	protected function resizeImage($image, $width, $height, $mode='')
 	{
-		return $this->getImage($image, $width, $height, $mode, $image) ? true : false;
+		return $this->getImage($image, $width, $height, $mode, $image, true) ? true : false;
 	}
 
 
@@ -895,9 +895,10 @@ abstract class Controller extends System
 	 * @param integer
 	 * @param string
 	 * @param string
+	 * @param bool Force resize even if $target allready exists
 	 * @return string|null
 	 */
-	protected function getImage($image, $width, $height, $mode='', $target=null)
+	protected function getImage($image, $width, $height, $mode='', $target=null, $targetForce=false)
 	{
 		if ($image == '')
 		{
@@ -926,7 +927,18 @@ abstract class Controller extends System
 		// No resizing required
 		if ($objFile->width == $width && $objFile->height == $height)
 		{
-			return $image;
+			if ($target)
+			{
+				// copy if target image not exists or is older than source
+				if (!file_exists(TL_ROOT . '/' . $target) ||
+					$objFile->mtime > filemtime(TL_ROOT . '/' . $target)) {
+					$this->import('Files');
+					$this->Files->copy($image, $target);
+				}
+				return $this->urlEncode($target);
+			}
+
+			return $this->urlEncode($image);
 		}
 
 		// No mode given
@@ -943,10 +955,30 @@ abstract class Controller extends System
 
 		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8) . '.' . $objFile->extension;
 
-		// Return the path of the new image if it exists already
-		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists(TL_ROOT . '/' . $strCacheName))
-		{
-			return $this->urlEncode($strCacheName);
+		if (!$GLOBALS['TL_CONFIG']['debugMode']) {
+			// Using a custom target image
+			if ($target)
+			{
+				// Return if the target image allready exists
+				if (file_exists(TL_ROOT . '/' . $target) &&
+					$objFile->mtime <= filemtime(TL_ROOT . '/' . $target) &&
+					!$targetForce)
+				{
+					return $this->urlEncode($target);
+				}
+				// Copy cache file if exists
+				else if ($target && file_exists(TL_ROOT . '/' . $strCacheName))
+				{
+					$this->import('Files');
+					$this->Files->copy($strCacheName, $target);
+					return $this->urlEncode($target);
+				}
+			}
+			// Return the path of the new image if it exists already
+			else if (file_exists(TL_ROOT . '/' . $strCacheName))
+			{
+				return $this->urlEncode($strCacheName);
+			}
 		}
 
 		// HOOK: add custom logic
@@ -1198,7 +1230,7 @@ abstract class Controller extends System
 		if ($target)
 		{
 			$this->import('Files');
-			$this->Files->rename($strCacheName, $target);
+			$this->Files->copy($strCacheName, $target);
 			return $this->urlEncode($target);
 		}
 
