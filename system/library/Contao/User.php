@@ -292,17 +292,16 @@ abstract class User extends \System
 			$this->loginCount = $GLOBALS['TL_CONFIG']['loginCount'];
 			$this->save();
 
-			// Add a log entry
+			// Add a log entry and the error message, because checkAccountStatus() will not be called (see #4444)
 			$this->log('The account has been locked for security reasons', get_class($this) . ' login()', TL_ACCESS);
+			$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) - $time) / 60)));
 
 			// Send admin notification
-			if (strlen($GLOBALS['TL_CONFIG']['adminEmail']))
+			if ($GLOBALS['TL_CONFIG']['adminEmail'] != '')
 			{
 				$objEmail = new \Email();
-
 				$objEmail->subject = $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0];
 				$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['lockedAccount'][1], $this->username, ((TL_MODE == 'FE') ? $this->firstname . " " . $this->lastname : $this->name), \Environment::get('base'), ceil($GLOBALS['TL_CONFIG']['lockPeriod'] / 60));
-
 				$objEmail->sendTo($GLOBALS['TL_CONFIG']['adminEmail']);
 			}
 
