@@ -107,7 +107,7 @@ class Image
 		// No resizing required
 		if ($objFile->width == $width && $objFile->height == $height)
 		{
-			return $image;
+			return \System::urlEncode($image);
 		}
 
 		// No mode given

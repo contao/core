@@ -1959,6 +1959,8 @@ abstract class Controller extends \System
 	 */
 	public static function generateImage($src, $alt='', $attributes='')
 	{
+		$src = rawurldecode($src);
+
 		if (strpos($src, '/') === false)
 		{
 			$src = 'system/themes/' . static::getTheme() . '/images/' . $src;
