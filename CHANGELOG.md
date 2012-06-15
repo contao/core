@@ -5,6 +5,9 @@ Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+The "addEntry" hook does not intefere with the user object anymore (see #4414).
+
+### Fixed
 The function `Controller::generateImage()` did not urldecode (see #4384).
 
 ### Fixed
