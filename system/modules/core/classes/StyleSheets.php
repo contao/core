@@ -254,7 +254,7 @@ class StyleSheets extends \Backend
 
 			if (isset($row['minwidth']['value']) && $row['minwidth']['value'] != '')
 			{
-				$return .= $lb . 'min-width:' . $row['minwidth']['value'] . $row['minwidth']['unit'] . ';';
+				$return .= $lb . 'min-width:' . $row['minwidth']['value'] . (($row['minwidth']['value'] == 'inherit') ? '' : $row['minwidth']['unit']) . ';';
 			}
 
 			// Min-height
@@ -262,7 +262,7 @@ class StyleSheets extends \Backend
 
 			if (isset($row['minheight']['value']) && $row['minheight']['value'] != '')
 			{
-				$return .= $lb . 'min-height:' . $row['minheight']['value'] . $row['minheight']['unit'] . ';';
+				$return .= $lb . 'min-height:' . $row['minheight']['value'] . (($row['minheight']['value'] == 'inherit') ? '' : $row['minheight']['unit']) . ';';
 			}
 
 			// Max-width
@@ -270,7 +270,7 @@ class StyleSheets extends \Backend
 
 			if (isset($row['maxwidth']['value']) && $row['maxwidth']['value'] != '')
 			{
-				$return .= $lb . 'max-width:' . $row['maxwidth']['value'] . $row['maxwidth']['unit'] . ';';
+				$return .= $lb . 'max-width:' . $row['maxwidth']['value'] . (($row['maxwidth']['value'] == 'inherit' || $row['maxwidth']['value'] == 'none') ? '' : $row['maxwidth']['unit']) . ';';
 			}
 
 			// Max-height
@@ -278,7 +278,7 @@ class StyleSheets extends \Backend
 
 			if (isset($row['maxheight']['value']) && $row['maxheight']['value'] != '')
 			{
-				$return .= $lb . 'max-height:' . $row['maxheight']['value'] . $row['maxheight']['unit'] . ';';
+				$return .= $lb . 'max-height:' . $row['maxheight']['value'] . (($row['maxheight']['value'] == 'inherit' || $row['maxheight']['value'] == 'none') ? '' : $row['maxheight']['unit']) . ';';
 			}
 		}
 
@@ -1393,15 +1393,46 @@ class StyleSheets extends \Backend
 			{
 				case 'width':
 				case 'height':
-				case 'min-width':
-				case 'min-height':
-				case 'max-width':
-				case 'max-height':
-					$strName = str_replace('-', '', $strKey);
 					if ($arrChunks[1] == 'auto')
 					{
 						$strUnit = '';
 						$varValue = 'auto';
+					}
+					else
+					{
+						$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrChunks[1]);
+						$varValue = preg_replace('/[^0-9\.-]+/', '', $arrChunks[1]);
+					}
+					$arrSet['size'] = 1;
+					$arrSet[$strKey]['value'] = $varValue;
+					$arrSet[$strKey]['unit'] = $strUnit;
+					break;
+
+				case 'min-width':
+				case 'min-height':
+					$strName = str_replace('-', '', $strKey);
+					if ($arrChunks[1] == 'inherit')
+					{
+						$strUnit = '';
+						$varValue = 'inherit';
+					}
+					else
+					{
+						$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrChunks[1]);
+						$varValue = preg_replace('/[^0-9\.-]+/', '', $arrChunks[1]);
+					}
+					$arrSet['size'] = 1;
+					$arrSet[$strName]['value'] = $varValue;
+					$arrSet[$strName]['unit'] = $strUnit;
+					break;
+
+				case 'max-width':
+				case 'max-height':
+					$strName = str_replace('-', '', $strKey);
+					if ($arrChunks[1] == 'inherit' || $arrChunks[1] == 'none')
+					{
+						$strUnit = '';
+						$varValue = $arrChunks[1];
 					}
 					else
 					{

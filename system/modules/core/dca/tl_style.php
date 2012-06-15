@@ -243,7 +243,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['maxwidth'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit_none', 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'maxheight' => array
@@ -251,7 +251,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['maxheight'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit_none', 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'positioning' => array
