@@ -70,7 +70,7 @@ class ContentTable extends ContentElement
 		if ($this->sortable)
 		{
 			$GLOBALS['TL_CSS'][] = 'plugins/tablesort/css/tablesort.css';
-			$GLOBALS['TL_MOOTOOLS'][] = '<script src="' . TL_PLUGINS_URL . 'plugins/tablesort/js/tablesort.js"></script>';
+			$GLOBALS['TL_MOOTOOLS'][] = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/tablesort/js/tablesort.js"></script>';
 			$this->Template->sortable = true;
 		}
 
