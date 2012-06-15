@@ -202,11 +202,10 @@ class FrontendTemplate extends \Template
 			}
 			else
 			{
-				header('Cache-Control: no-cache');
-				header('Cache-Control: pre-check=0, post-check=0', false);
+				header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+				header('Pragma: no-cache');
 				header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 				header('Expires: Fri, 06 Jun 1975 15:10:00 GMT');
-				header('Pragma: no-cache');
 			}
 		}
 
