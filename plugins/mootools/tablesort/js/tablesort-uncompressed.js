@@ -68,7 +68,7 @@ var TableSort = new Class(
 
 		var lastRow = table.tHead.rows[table.tHead.rows.length-1];
 
-		// Add sorting links
+		// Add the sorting links
 		for (var i=0; i<lastRow.cells.length; i++)
 		{
 			if (lastRow.cells[i].className.indexOf('unsortable') != -1)
@@ -84,9 +84,8 @@ var TableSort = new Class(
 			a.innerHTML = txt;
 			el.innerHTML = '';
 
-			// Add event
-			a.addEvent('click', function(i, el) { this.resort(i, el) }.pass([i, el], this));
-			a.injectInside(el);
+			// Add the event
+			a.addEvent('click', function(i, el) { this.resort(i, el) }.pass([i, el], this)).inject(el);
 
 			// Sort the table if there is a cookie
 			if (cook !== null && cook[0] == i)

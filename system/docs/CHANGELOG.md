@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added a jQuery tablesort plugin (see #4393).
+
 ### Fixed
 Adjusted the permission checks and reworked the "content elements everywhere"
 structure (it is now entirely configured in the DCA).

@@ -57,9 +57,20 @@ class ContentTable extends \ContentElement
 		// Add the CSS and JavaScript files
 		if ($this->sortable)
 		{
-			$GLOBALS['TL_CSS'][] = 'plugins/mootools/tablesort/css/tablesort.css';
-			$GLOBALS['TL_MOOTOOLS'][] = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/tablesort/js/tablesort.js"></script>';
-			$this->Template->sortable = true;
+			if ($objPage->hasMooTools)
+			{
+				$this->Template->sortable = true;
+				$this->Template->hasMooTools = true;
+				$GLOBALS['TL_CSS'][] = 'plugins/mootools/tablesort/css/tablesort.css';
+				$GLOBALS['TL_MOOTOOLS'][] = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/tablesort/js/tablesort.js"></script>';
+			}
+			elseif ($objPage->hasJQuery)
+			{
+				$this->Template->sortable = true;
+				$this->Template->hasJQuery = true;
+				$GLOBALS['TL_CSS'][] = 'plugins/jquery/tablesorter/' . TABLESORTER . '/css/tablesorter.css';
+				$GLOBALS['TL_JQUERY'][] = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/jquery/tablesorter/' . TABLESORTER . '/js/tablesorter.js"></script>';
+			}
 		}
 
 		$arrHeader = array();

@@ -176,6 +176,9 @@ class PageRegular extends \Frontend
 			die('No layout specified');
 		}
 
+		$objPage->hasJQuery = $objLayout->addJQuery;
+		$objPage->hasMooTools = $objLayout->addMooTools;
+
 		return $objLayout;
 	}
 
