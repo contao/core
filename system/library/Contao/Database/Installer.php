@@ -265,7 +265,11 @@ class Database_Installer extends \Controller
 		foreach ($arrTables as $strTable)
 		{
 			$objTable = new \DcaExtractor($strTable);
-			$return[$strTable] = $objTable->getDbInstallerArray();
+                        $arrTmp = $objTable->getDbInstallerArray();
+                        if(!empty($arrTmp))
+                        {
+                            $return[$strTable] = $arrTmp;
+                        }
 		}
 
 		return $return;
