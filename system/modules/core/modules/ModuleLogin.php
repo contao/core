@@ -97,7 +97,7 @@ class ModuleLogin extends \Module
 					{
 						$objGroupPage = \MemberGroupModel::findFirstActiveWithJumpToByIds($arrGroups);
 
-						if ($objGroupPage === null)
+						if ($objGroupPage !== null)
 						{
 							$strRedirect = $this->generateFrontendUrl($objGroupPage->row());
 						}
