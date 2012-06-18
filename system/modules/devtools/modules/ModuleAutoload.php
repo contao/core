@@ -61,7 +61,7 @@ class ModuleAutoload extends \BackendModule
 
 			if (empty($arrModules))
 			{
-				\Message::adError($GLOBALS['TL_LANG']['tl_merge']['emptySelection']);
+				\Message::addError($GLOBALS['TL_LANG']['tl_merge']['emptySelection']);
 			}
 			else
 			{

@@ -2622,7 +2622,7 @@ abstract class Controller extends \System
 			else
 			{
 				$arrChilds = $objChilds->fetchEach('id');
-				$arrReturn = array_merge($arrChilds, $this->getChildRecords($arrChilds, $strTable, $blnSorting, $strWhere));
+				$arrReturn = array_merge($arrChilds, $this->getChildRecords($arrChilds, $strTable, $blnSorting, $arrReturn, $strWhere));
 			}
 		}
 
