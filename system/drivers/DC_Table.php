@@ -4568,6 +4568,13 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 							$this->values[] = $objDate->yearEnd;
 						}
 					}
+					
+					// comma separated list
+					elseif($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['findInSet'])
+					{
+						$this->procedure[] = 'FIND_IN_SET(?, ' . $field . ')';
+						$this->values[] = $session['filter'][$filter][$field];
+					}
 
 					// Manual filter
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['multiple'])
@@ -4690,9 +4697,15 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 						unset($options[$k]);
 					}
 				}
+				
+				// comma separated list
+				if($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['findInSet'])
+				{
+					$options = explode(',', implode(',', $options));
+				}
 
 				// Manual filter
-				if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['multiple'])
+				elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['multiple'])
 				{
 					$moptions = array();
 
