@@ -2246,7 +2246,7 @@ abstract class Controller extends \System
 		{
 			// Generate the cache file
 			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php');
-			$objCacheFile->write('<?php' . "\n");
+			$objCacheFile->write('<?php');
 
 			// Parse all module folders
 			foreach ($this->Config->getActiveModules() as $strModule)
@@ -2255,7 +2255,7 @@ abstract class Controller extends \System
 
 				if (file_exists($strFile))
 				{
-					$objCacheFile->append(file_get_contents($strFile, null, null, 6));
+					$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
 					include $strFile;
 				}
 			}

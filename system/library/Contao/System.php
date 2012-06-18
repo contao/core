@@ -460,10 +460,10 @@ abstract class System
 		{
 			// Generate the cache files
 			$objCacheFallback = new \File('system/cache/language/en/' . $strName . '.php');
-			$objCacheFallback->write('<?php' . "\n");
+			$objCacheFallback->write('<?php');
 
 			$objCacheFile = new \File('system/cache/language/' . $strLanguage . '/' . $strName . '.php');
-			$objCacheFile->write('<?php' . "\n");
+			$objCacheFile->write('<?php');
 
 			// Parse all active modules
 			foreach (\Config::getInstance()->getActiveModules() as $strModule)
@@ -472,7 +472,7 @@ abstract class System
 
 				if (file_exists($strFallback))
 				{
-					$objCacheFallback->append(file_get_contents($strFallback, null, null, 6));
+					$objCacheFallback->append(static::readPhpFileWithoutTags($strFallback));
 					include $strFallback;
 				}
 
@@ -485,7 +485,7 @@ abstract class System
 
 				if (file_exists($strFile))
 				{
-					$objCacheFile->append(file_get_contents($strFile, null, null, 6));
+					$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
 					include $strFile;
 				}
 			}
@@ -764,6 +764,31 @@ abstract class System
 		}
 
 		return implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+	}
+
+
+	/**
+	 * Read the contents of a PHP file, stripping the opening and closing PHP tags
+	 * 
+	 * @param string $strName The name of the PHP file
+	 * 
+	 * @return string The PHP code without the PHP tags
+	 */
+	protected static function readPhpFileWithoutTags($strName)
+	{
+		$strCode = file_get_contents($strName);
+
+		if (substr($strCode, 0, 5) == '<?php')
+		{
+			$strCode = substr($strCode, 5);
+		}
+
+		if (substr($strCode, -1, 2) == '?>')
+		{
+			$strCode = substr($strCode, 0, -2);
+		}
+
+		return rtrim($strCode);
 	}
 
 
