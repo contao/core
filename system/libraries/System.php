@@ -39,6 +39,15 @@
  */
 abstract class System
 {
+	/**
+	 * Decimal size format.
+	 */
+	const SIZE_FORMAT_DECIMAL = 'decimal';
+
+	/**
+	 * Binary size format.
+	 */
+	const SIZE_FORMAT_BINARY = 'binary';
 
 	/**
 	 * Cache object
@@ -908,16 +917,33 @@ abstract class System
 	 * Convert a filesize into a human readable format
 	 * @param integer
 	 * @param integer
+	 * @param string
 	 * @return string
 	 */
-	protected function getReadableSize($intSize, $intDecimals=1)
+	protected function getReadableSize($intSize, $intDecimals=1, $strFormat=null)
 	{
-		for ($i=0; $intSize>=1000; $i++)
+		if (!$strFormat)
 		{
-			$intSize /= 1000;
+			$strFormat = $GLOBALS['TL_CONFIG']['defaultSizeFormat'];
 		}
 
-		return $this->getFormattedNumber($intSize, $intDecimals) . ' ' . $GLOBALS['TL_LANG']['UNITS'][$i];
+		if ($strFormat == 'binary')
+		{
+			$fltFactor = 1024;
+			$arrLang   = &$GLOBALS['TL_LANG']['BUNITS'];
+		}
+		else
+		{
+			$fltFactor = 1000;
+			$arrLang   = &$GLOBALS['TL_LANG']['UNITS'];
+		}
+
+		for ($i=0; $intSize>=$fltFactor; $i++)
+		{
+			$intSize /= $fltFactor;
+		}
+
+		return $this->getFormattedNumber($intSize, $intDecimals) . ' ' . $arrLang[$i];
 	}
 
 
