@@ -224,28 +224,32 @@ class Config
 		fclose($objFile);
 
 		// Then move the file to its final destination
-		$localconfigFilename = 'system/config/localconfig.php';
-		$this->Files->rename('system/tmp/' . $strTemp, $localconfigFilename);
+		$this->Files->rename('system/tmp/' . $strTemp, 'system/config/localconfig.php');
 
 		// Reset the Zend Optimizer+ cache (unfortunately no API to delete just a single file)
 		if (function_exists('accelerator_reset'))
 		{
 			accelerator_reset();
 		}
+		// Recompile the APC file (thanks to Trenker)
 		elseif (function_exists('apc_compile_file') && !ini_get('apc.stat'))
 		{
-			apc_compile_file($localconfigFilename);
+			apc_compile_file('system/config/localconfig.php');
 		}
+		// Purge the eAccelerator cache (thanks to Trenker)
 		elseif (function_exists('eaccelerator_purge') && !ini_get('eaccelerator.check_mtime'))
 		{
 			@eaccelerator_purge();
 		}
+		// Purge the XCache cache (thanks to Trenker)
 		elseif (function_exists('xcache_count') && !ini_get('xcache.stat'))
 		{
 			$count = xcache_count(XC_TYPE_PHP);
+
 			if ($count > 0)
 			{
-				for ($id = 0; $id < $count; $id++) {
+				for ($id=0; $id<$count; $id++)
+				{
 					xcache_clear_cache(XC_TYPE_PHP, $id);
 				}
 			}
