@@ -25,7 +25,7 @@ $GLOBALS['TL_DCA']['<?php echo $this->table; ?>'] = array
 		'enableVersioning'            => true,
 		'sql' => array
 		(
-			'keys' => array()
+			'keys' => array('id' => 'primary')
 		)
 	),
 
