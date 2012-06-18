@@ -629,7 +629,7 @@ abstract class System
 	 */
 	public static function setCookie($strName, $varValue, $intExpires, $strPath=null, $strDomain=null, $blnSecure=false)
 	{
-		if ($strPath === null)
+		if ($strPath == '')
 		{
 			$strPath = $GLOBALS['TL_CONFIG']['websitePath'] ?: '/'; // see #4390
 		}
