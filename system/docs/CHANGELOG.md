@@ -12,6 +12,16 @@ extracts during installation (see #4316).
 The Combiner now correctly supports all kind of relative paths (see #4161).
 
 ### New
+Insert tags are now optionally recursive. Use wrapping '{{{' to indicate that
+this insert tag should be replaced recursively. Be careful with this new
+feature as it might affect the performance of your project.
+Example that returns the link to the current page:
+
+```
+{{{link::{{page::id}}}}}
+```
+
+### New
 Added a jQuery tablesort plugin (see #4393).
 
 ### Fixed

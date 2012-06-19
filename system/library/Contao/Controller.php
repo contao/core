@@ -1046,6 +1046,18 @@ abstract class Controller extends \System
 				continue;
 			}
 
+			// support recursive insert tag replacement if desired (be careful, this affects the performance of your project!)
+			if (substr_compare($strTag, '{', 0, 1) === 0)
+			{
+				$chunks = preg_split('/\{([^\}]+)\:\:/U', $strTag, 2, PREG_SPLIT_DELIM_CAPTURE);
+
+				// slice }}} from the following $tags chunk
+				$tags[$_rit+2] = preg_replace('/\}\}\}/', '', $tags[$_rit+2]);
+
+				// overwrite tag and recursively call replaceInsertTags()
+				$strTag = $chunks[1] . '::' . $this->replaceInsertTags($chunks[2] . (str_repeat('}', substr_count($chunks[2], '{', 0))));
+			}
+
 			// Load value from cache array
 			if (isset($arrCache[$strTag]))
 			{
