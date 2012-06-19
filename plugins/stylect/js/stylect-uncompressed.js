@@ -69,7 +69,12 @@ var Stylect =
 
 			// Fix right-aligned elements (e.g. Safari and Opera)
 			if (div.getPosition().x != el.getPosition().x) {
-				div.position({ relativeTo:el, ignoreMargins:true }).setStyle('top', 0);
+				div.position({ relativeTo:el, ignoreMargins:true });
+				if (Browser.safari) {
+					div.setStyle('top', (div.getStyle('top') == '22px') ? '24px' : 0);
+				} else if (Browser.opera && div.getStyle('top') == '23px') {
+					div.setStyle('top', '24px'); // see #4343
+				}
 			}
 
 			// Mark active elements
