@@ -132,19 +132,32 @@ abstract class Database
 	 * @return Database
 	 * @throws Exception
 	 */
-	public static function getInstance($strKey='core', array $arrConfig=null)
+	public static function getInstance(array $arrData=null)
 	{
+		$arrConfig = array
+		(
+			'dbDriver'		=> $GLOBALS['TL_CONFIG']['dbDriver'],
+			'dbHost'		=> $GLOBALS['TL_CONFIG']['dbHost'],
+			'dbUser'		=> $GLOBALS['TL_CONFIG']['dbUser'],
+			'dbPass'		=> $GLOBALS['TL_CONFIG']['dbPass'],
+			'dbDatabase'	=> $GLOBALS['TL_CONFIG']['dbDatabase'],
+			'dbPconnect'	=> $GLOBALS['TL_CONFIG']['dbPconnect'],
+			'dbCharset'		=> $GLOBALS['TL_CONFIG']['dbCharset'],
+			'dbPort'		=> $GLOBALS['TL_CONFIG']['dbPort'],
+		);
+
+		if (is_array($arrData))
+		{
+			$arrConfig = array_merge($arrConfig, $arrData);
+		}
+
+		// Important for generating the key
+		ksort($arrConfig);
+
+		$strKey = md5(implode('', $arrConfig));
+
 		if (!is_object(static::$arrInstances[$strKey]))
 		{
-			if ($arrConfig === null)
-			{
-				$arrConfig = $GLOBALS['TL_CONFIG'];
-			}
-			else
-			{
-				$arrConfig = array_merge($GLOBALS['TL_CONFIG'], $arrConfig);
-			}
-
 			$strClass = '\\Database_' . ucfirst(strtolower($arrConfig['dbDriver']));
 			static::$arrInstances[$strKey] = new $strClass($arrConfig);
 		}
