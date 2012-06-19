@@ -5,6 +5,10 @@ Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
 ### Fixed
+Ignore DCA files which do not relate to a database table when building the DCA
+extracts during installation (see #4316).
+
+### Fixed
 The Combiner now correctly supports all kind of relative paths (see #4161).
 
 ### New

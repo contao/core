@@ -78,6 +78,12 @@ class DcaExtractor extends \Database_Installer
 	 */
 	protected static $arrSql = array();
 
+	/**
+	 * Database table
+	 * @var boolean
+	 */
+	protected $blnIsDbTable = false;
+
 
 	/**
 	 * Load or create the extract
@@ -198,6 +204,17 @@ class DcaExtractor extends \Database_Installer
 
 
 	/**
+	 * Return true if the extract relates to a database table
+	 * 
+	 * @return boolean True if the extract relates to a database table
+	 */
+	public function isDbTable()
+	{
+		return $this->blnIsDbTable;
+	}
+
+
+	/**
 	 * Return an array that can be used by the database installer
 	 * 
 	 * @return array The data array
@@ -253,8 +270,6 @@ class DcaExtractor extends \Database_Installer
 
 	/**
 	 * Create the extract from the DCA or the database.sql files
-	 * 
-	 * @throws \Exception If the table information could not be loaded
 	 */
 	protected function createExtract()
 	{
@@ -283,18 +298,8 @@ class DcaExtractor extends \Database_Installer
 			}
 		}
 
-		$sql = $GLOBALS['TL_DCA'][$this->strTable]['config']['sql'];
-		$fields = $GLOBALS['TL_DCA'][$this->strTable]['fields'];
-
-		// Add the default engine and charset if none is given
-		if (!isset($sql['engine']))
-		{
-			$sql['engine'] = 'MyISAM';
-		}
-		if (!isset($sql['charset']))
-		{
-			$sql['charset'] = 'utf8';
-		}
+		$sql = $GLOBALS['TL_DCA'][$this->strTable]['config']['sql'] ?: array();
+		$fields = $GLOBALS['TL_DCA'][$this->strTable]['fields'] ?: array();
 
 		// Get the SQL information from the database.sql files (backwards compatibility)
 		if ($blnFromFile)
@@ -305,11 +310,16 @@ class DcaExtractor extends \Database_Installer
 			}
 
 			$arrTable = static::$arrSql[$this->strTable];
-
-			// Meta
 			list($engine,, $charset) = explode(' ', trim($arrTable['TABLE_OPTIONS']));
-			$sql['engine'] = str_replace('ENGINE=', '', $engine);
-			$sql['charset'] = str_replace('CHARSET=', '', $charset);
+
+			if ($engine != '')
+			{
+				$sql['engine'] = str_replace('ENGINE=', '', $engine);
+			}
+			if ($charset != '')
+			{
+				$sql['charset'] = str_replace('CHARSET=', '', $charset);
+			}
 
 			// Fields
 			if (isset($arrTable['TABLE_FIELDS']))
@@ -332,10 +342,20 @@ class DcaExtractor extends \Database_Installer
 			}
 		}
 
-		// Not all information could be loaded
-		if (!is_array($sql) || !is_array($fields))
+		// Not a database table or no field information
+		if (empty($sql) || empty($fields))
 		{
-			throw new \Exception('Could not load the table information of ' . $this->strTable);
+			return;
+		}
+
+		// Add the default engine and charset if none is given
+		if (empty($sql['engine']))
+		{
+			$sql['engine'] = 'MyISAM';
+		}
+		if (empty($sql['charset']))
+		{
+			$sql['charset'] = 'utf8';
 		}
 
 		// Create the file
@@ -397,6 +417,7 @@ class DcaExtractor extends \Database_Installer
 		}
 
 		$objFile->close();
+		$this->blnIsDbTable = true;
 
 		// Include the file so the class properties are filled
 		include TL_ROOT . '/system/cache/sql/' . $this->strTable . '.php';
@@ -405,10 +426,13 @@ class DcaExtractor extends \Database_Installer
 
 	/**
 	 * Create all extracts
+	 * 
+	 * @return array An array of DcaExtractors
 	 */
 	public static function createAllExtracts()
 	{
 		$included = array();
+		$arrExtracts = array();
 
 		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
 		{
@@ -419,7 +443,6 @@ class DcaExtractor extends \Database_Installer
 				continue;
 			}
 
-			// FIXME: ignore non-table drivers (reflection)
 			foreach (scan($strDir) as $strFile)
 			{
 				if (in_array($strFile, $included) || $strFile == '.htaccess')
@@ -429,8 +452,15 @@ class DcaExtractor extends \Database_Installer
 
 				$included[] = $strFile;
 				$strTable = str_replace('.php', '', $strFile);
-				new \DcaExtractor($strTable);
+				$objExtract = new \DcaExtractor($strTable);
+
+				if ($objExtract->isDbTable())
+				{
+					$arrExtracts[$strTable] = $objExtract;
+				}
 			}
 		}
+
+		return $arrExtracts;
 	}
 }
