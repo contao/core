@@ -633,7 +633,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Dynamically set the parent table of tl_content
 		if ($this->strTable == 'tl_content')
 		{
-			$this->set['ptable'] = $this->arrModule['contentPtable'];
+			$this->set['ptable'] = $this->ptable;
 		}
 
 		// Empty the clipboard
@@ -733,7 +733,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Dynamically set the parent table of tl_content
 		if ($this->strTable == 'tl_content')
 		{
-			$this->set['ptable'] = $this->arrModule['contentPtable'];
+			$this->set['ptable'] = $this->ptable;
 		}
 
 		$this->Database->prepare("UPDATE " . $this->strTable . " %s WHERE id=?")
@@ -850,7 +850,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Dynamically set the parent table of tl_content
 		if ($this->strTable == 'tl_content')
 		{
-			$this->set['ptable'] = $this->arrModule['contentPtable'];
+			$this->set['ptable'] = $this->ptable;
 		}
 
 		// Empty clipboard
