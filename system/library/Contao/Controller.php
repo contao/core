@@ -1035,7 +1035,7 @@ abstract class Controller extends \System
 		$strBuffer = '';
 		$arrCache = array();
 
-		for($_rit=0; $_rit<count($tags); $_rit=$_rit+2)
+		for ($_rit=0; $_rit<count($tags); $_rit=$_rit+2)
 		{
 			$strBuffer .= $tags[$_rit];
 			$strTag = $tags[$_rit+1];

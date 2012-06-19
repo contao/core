@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### Fixed
+The Combiner now correctly supports all kind of relative paths (see #4161).
+
 ### New
 Added a jQuery tablesort plugin (see #4393).
 
