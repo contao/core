@@ -26,15 +26,8 @@ to be adjusted accordingly (see #4425).
 Added a development .htaccess file (thanks to Wael M. Nasreddine) (see #4419).
 
 ### New
-Content elements can now be used everywhere (no kidding). The `ptable` name of
-the content table must therefore be assigned in the module configuration:
-
-```
-$GLOBALS['BE_MOD']['content']['article']['contentPtable'] = 'tl_article';
-```
-
-The news module has already been adjusted, the other modules will follow.
-
+Content elements can now be used everywhere (no kidding). The news module has
+already been adjusted, the other modules will follow.
 
 ### Improved
 Do not force a password change in the back end if an administrator switches to
