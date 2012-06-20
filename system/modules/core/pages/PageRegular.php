@@ -282,9 +282,6 @@ class PageRegular extends \Frontend
 			// Add the layout specific CSS
 			if ($strFramework != '')
 			{
-				// Do not apply on mobile devices
-				$strFramework = "\n@media (min-width:768px) {\n  $strFramework\n}\n"; // FIXME: do not hard code this
-
 				if ($objPage->outputFormat == 'xhtml')
 				{
 					$this->Template->framework .= '<style type="text/css">' . "\n";

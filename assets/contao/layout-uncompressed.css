@@ -64,6 +64,25 @@ select,input,textarea {
 		clear:both;
 	}
 }
+@media (max-width:767px)
+{
+	#header,#footer {
+		height:auto;
+	}
+	#wrapper,#left,#right {
+		width:auto;
+	}
+	#wrapper {
+		margin:0;
+	}
+	#left {
+		right:0;
+	}
+	#container {
+		padding-left:0;
+		padding-right:0;
+	}
+}
 
 /**
  * Flexible images and videos
