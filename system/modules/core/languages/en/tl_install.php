@@ -56,6 +56,7 @@ $GLOBALS['TL_LANG']['tl_install']['collationInfo']  = 'Changing the collation wi
 $GLOBALS['TL_LANG']['tl_install']['updateError']    = 'The database is not up to date!';
 $GLOBALS['TL_LANG']['tl_install']['updateConfirm']  = 'The database is up to date.';
 $GLOBALS['TL_LANG']['tl_install']['updateSave']     = 'Update database';
+$GLOBALS['TL_LANG']['tl_install']['saveCollation']  = 'Change collation';
 $GLOBALS['TL_LANG']['tl_install']['updateX']        = 'It seems that you are upgrading from a Contao version prior to version %s. If that is the case, <strong>it is required to run the version %s update</strong> to ensure the integrity of your data!';
 $GLOBALS['TL_LANG']['tl_install']['updateXrun']     = 'Run version %s update';
 $GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'Run version %s update - step %s';
