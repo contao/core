@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added an additional routine to check boxes, radio buttons and select menus,
+which compares the user input with the given options (see #4383). 
+
 ### Fixed
 Ignore DCA files which do not relate to a database table when building the DCA
 extracts during installation (see #4316).

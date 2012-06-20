@@ -1000,4 +1000,48 @@ abstract class Widget extends \Controller
 
 		return $this->optionSelected($arrOption['value'], $this->varValue);
 	}
+
+
+	/**
+	 * Check whether an input is one of the given options
+	 * 
+	 * @param mixed $varInput The input string or array
+	 * 
+	 * @return boolean True if the selected option exists
+	 */
+	protected function isValidOption($varInput)
+	{
+		if (!is_array($varInput))
+		{
+			$varInput = array($varInput);
+		}
+
+		foreach ($varInput as $strInput)
+		{
+			foreach ($this->arrOptions as $k=>$v)
+			{
+				// Single dimensional array
+				if (is_numeric($k))
+				{
+					if ($strInput == $v['value'])
+					{
+						return true;
+					}
+				}
+				// Multi-dimensional array
+				else
+				{
+					foreach ($v as $kk=>$vv)
+					{
+						if ($strInput == $vv['value'])
+						{
+							return true;
+						}
+					}
+				}
+			}
+		}
+
+		return false;
+	}
 }

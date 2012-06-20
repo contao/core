@@ -67,6 +67,7 @@ $GLOBALS['TL_LANG']['ERR']['version2format']    = 'This element still uses the o
 $GLOBALS['TL_LANG']['ERR']['form']              = 'The form could not be sent';
 $GLOBALS['TL_LANG']['ERR']['captcha']           = 'Please answer the security question!';
 $GLOBALS['TL_LANG']['ERR']['download']          = 'File "%s" is not available for download!';
+$GLOBALS['TL_LANG']['ERR']['invalid']           = 'Invalid input: %s';
 
 
 /**

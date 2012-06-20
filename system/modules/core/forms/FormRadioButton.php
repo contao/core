@@ -106,6 +106,22 @@ class FormRadioButton extends \Widget
 
 
 	/**
+	 * Check for a valid option (see #4383)
+	 */
+	public function validate()
+	{
+		$varValue = deserialize($this->getPost($this->strName));
+
+		if ($varValue != '' && !$this->isValidOption($varValue))
+		{
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalid'], $varValue));
+		}
+
+		parent::validate();
+	}
+
+
+	/**
 	 * Override the parent method and inject the error message inside the fieldset (see #3392)
 	 * @param boolean
 	 * @return string

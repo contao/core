@@ -116,6 +116,12 @@ class FormCheckBox extends \Widget
 
 		$varInput = $this->validator($options);
 
+		// Check for a valid option (see #4383)
+		if ($varInput != '' && !$this->isValidOption($varInput))
+		{
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalid'], $varInput));
+		}
+
 		// Add class "error"
 		if ($this->hasErrors())
 		{
