@@ -283,7 +283,7 @@ class PageRegular extends \Frontend
 			if ($strFramework != '')
 			{
 				// Do not apply on mobile devices
-				$strFramework = "\n@media (min-width:768px) {\n  $strFramework\n}\n";
+				$strFramework = "\n@media (min-width:768px) {\n  $strFramework\n}\n"; // FIXME: do not hard code this
 
 				if ($objPage->outputFormat == 'xhtml')
 				{

@@ -190,6 +190,7 @@ abstract class System
 	 */
 	protected function import($strClass, $strKey=null, $blnForce=false)
 	{
+		// FIXME: use $this->arrObjects[$strKey] and __get() instead?
 		$strKey = $strKey ?: $strClass;
 
 		if (!$blnForce && is_object($this->$strKey))
