@@ -371,7 +371,7 @@ abstract class Backend extends \Controller
 			{
 				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MSC']['all_override'][0];
 			}
-			elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]))
+			elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]) && \Input::get('id'))
 			{
 				if (\Input::get('do') == 'files')
 				{
