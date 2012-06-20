@@ -34,10 +34,16 @@ abstract class Database
 {
 
 	/**
-	 * Object instance (Singleton)
-	 * @var \Database
+	 * Object instances (Singleton)
+	 * @var array
 	 */
-	protected static $objInstance;
+	protected static $arrInstances = array();
+	
+	/**
+	 * Connection configuration
+	 * @var array
+	 */
+	protected $arrConfig = array();
 
 	/**
 	 * Connection ID
@@ -61,10 +67,13 @@ abstract class Database
 	/**
 	 * Establish the database connection
 	 * 
+	 * @param array $arrConfig A configuration array
+	 * 
 	 * @throws \Exception If a connection cannot be established
 	 */
-	protected function __construct()
+	protected function __construct(Array $arrConfig)
 	{
+		$this->arrConfig = $arrConfig;
 		$this->connect();
 
 		if (!is_resource($this->resConnection) && !is_object($this->resConnection))
@@ -79,7 +88,7 @@ abstract class Database
 	 */
 	public function __destruct()
 	{
-		if (!$GLOBALS['TL_CONFIG']['dbPconnect'])
+		if (!$this->arrConfig['dbPconnect'])
 		{
 			$this->disconnect();
 		}
@@ -113,17 +122,40 @@ abstract class Database
 	/**
 	 * Instantiate the Database object (Factory)
 	 * 
+	 * @param array $arrCustom A configuration array
+	 * 
 	 * @return \Database The Database object
 	 */
-	public static function getInstance()
+	public static function getInstance(Array $arrCustom=null)
 	{
-		if (!is_object(static::$objInstance))
+		$arrConfig = array
+		(
+			'dbDriver'   => $GLOBALS['TL_CONFIG']['dbDriver'],
+			'dbHost'     => $GLOBALS['TL_CONFIG']['dbHost'],
+			'dbUser'     => $GLOBALS['TL_CONFIG']['dbUser'],
+			'dbPass'     => $GLOBALS['TL_CONFIG']['dbPass'],
+			'dbDatabase' => $GLOBALS['TL_CONFIG']['dbDatabase'],
+			'dbPconnect' => $GLOBALS['TL_CONFIG']['dbPconnect'],
+			'dbCharset'  => $GLOBALS['TL_CONFIG']['dbCharset'],
+			'dbPort'     => $GLOBALS['TL_CONFIG']['dbPort'],
+		);
+
+		if (is_array($arrCustom))
 		{
-			$strClass = 'Database_' . ucfirst(strtolower($GLOBALS['TL_CONFIG']['dbDriver']));
-			static::$objInstance = new $strClass();
+			$arrConfig = array_merge($arrConfig, $arrCustom);
 		}
 
-		return static::$objInstance;
+		// Sort the array before generating the key
+		ksort($arrConfig);
+		$strKey = md5(implode('', $arrConfig));
+
+		if (!isset(static::$arrInstances[$strKey]))
+		{
+			$strClass = 'Database_' . ucfirst(strtolower($arrConfig['dbDriver']));
+			static::$arrInstances[$strKey] = new $strClass($arrConfig);
+		}
+
+		return static::$arrInstances[$strKey];
 	}
 
 
@@ -211,7 +243,7 @@ abstract class Database
 	{
 		if ($strDatabase === null)
 		{
-			$strDatabase = $GLOBALS['TL_CONFIG']['dbDatabase'];
+			$strDatabase = $this->arrConfig['dbDatabase'];
 		}
 
 		if (!$blnNoCache && isset($this->arrCache[$strDatabase]))

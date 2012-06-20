@@ -41,27 +41,27 @@ class Database_Mysql extends \Database
 	 */
 	protected function connect()
 	{
-		$strHost = $GLOBALS['TL_CONFIG']['dbHost'];
+		$strHost = $this->arrConfig['dbHost'];
 
-		if ($GLOBALS['TL_CONFIG']['dbPort'])
+		if ($this->arrConfig['dbPort'])
 		{
-			$strHost .= ':' . $GLOBALS['TL_CONFIG']['dbPort'];
+			$strHost .= ':' . $this->arrConfig['dbPort'];
 		}
 
-		if ($GLOBALS['TL_CONFIG']['dbPconnect'])
+		if ($this->arrConfig['dbPconnect'])
 		{
-			$this->resConnection = @mysql_pconnect($strHost, $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass']);
+			$this->resConnection = @mysql_pconnect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass']);
 		}
 		else
 		{
-			$this->resConnection = @mysql_connect($strHost, $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass']);
+			$this->resConnection = @mysql_connect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass']);
 		}
 
 		if (is_resource($this->resConnection))
 		{
 			@mysql_query("SET sql_mode=''", $this->resConnection);
-			@mysql_query("SET NAMES " . $GLOBALS['TL_CONFIG']['dbCharset'], $this->resConnection);
-			@mysql_select_db($GLOBALS['TL_CONFIG']['dbDatabase'], $this->resConnection);
+			@mysql_query("SET NAMES " . $this->arrConfig['dbCharset'], $this->resConnection);
+			@mysql_select_db($this->arrConfig['dbDatabase'], $this->resConnection);
 		}
 	}
 
