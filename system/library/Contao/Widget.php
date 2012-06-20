@@ -121,6 +121,12 @@ abstract class Widget extends \Controller
 	 */
 	protected $blnSubmitInput = false;
 
+	/**
+	 * For attribute indicator
+	 * @var boolean
+	 */
+	protected $blnForAttribute = false;
+
 
 	/**
 	 * Initialize the object
@@ -310,6 +316,10 @@ abstract class Widget extends \Controller
 				$this->arrConfiguration[$strKey] = $varValue ? true : false;
 				break;
 
+			case 'forAttribute':
+				$this->blnForAttribute = $varValue;
+				break;
+
 			default:
 				$this->arrConfiguration[$strKey] = $varValue;
 				break;
@@ -374,6 +384,10 @@ abstract class Widget extends \Controller
 
 			case 'required':
 				return $this->arrConfiguration[$strKey];
+				break;
+
+			case 'forAttribute':
+				return $this->blnForAttribute;
 				break;
 
 			default:
@@ -518,9 +532,9 @@ abstract class Widget extends \Controller
 			return '';
 		}
 
-		return sprintf('<label for="ctrl_%s"%s>%s%s%s</label>',
-						$this->strId,
-						(strlen($this->strClass) ? ' class="' . $this->strClass . '"' : ''),
+		return sprintf('<label%s%s>%s%s%s</label>',
+						($this->blnForAttribute ? ' for="ctrl_' . $this->strId . '"' : ''),
+						(($this->strClass != '') ? ' class="' . $this->strClass . '"' : ''),
 						($this->required ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
 						$this->strLabel,
 						($this->required ? '<span class="mandatory">*</span>' : ''));

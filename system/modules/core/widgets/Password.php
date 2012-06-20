@@ -35,6 +35,12 @@ class Password extends \Widget
 	protected $blnSubmitInput = true;
 
 	/**
+	 * Add a for attribute
+	 * @var boolean
+	 */
+	protected $blnForAttribute = true;
+
+	/**
 	 * Template
 	 * @var string
 	 */
