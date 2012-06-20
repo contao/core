@@ -2912,6 +2912,12 @@ window.addEvent(\'domready\', function() {
 			{
 				if ($v != '')
 				{
+					// Load the DCA configuration so we can check for "dynamicPtable"
+					if (!isset($GLOBALS['loadDataContainer'][$v]))
+					{
+						$this->loadDataContainer($v);
+					}
+
 					if ($GLOBALS['TL_DCA'][$v]['config']['dynamicPtable'])
 					{
 						$objStmt = $this->Database->execute("DELETE FROM " . $v . " WHERE ptable='" . $this->strTable . "' AND NOT EXISTS (SELECT * FROM " . $this->strTable . " WHERE " . $v . ".pid = " . $this->strTable . ".id)");
