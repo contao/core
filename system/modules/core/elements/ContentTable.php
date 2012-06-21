@@ -90,7 +90,7 @@ class ContentTable extends \ContentElement
 
 					if (\Input::cookie($co) == '')
 					{
-						setcookie($co, $i . '|' . $so, 0, '/'); // FIXME: use setCookie()?
+						$this->setCookie($co, $i . '|' . $so, 0, '/');
 					}
 				}
 
