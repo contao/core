@@ -191,7 +191,24 @@ class Calendar extends \Frontend
 					$objItem->author = $event['authorName'];
 
 					// Prepare the description
-					$strDescription = ($arrFeed['source'] == 'source_text') ? $event['description'] : $event['teaser'];
+					if ($arrFeed['source'] == 'source_text')
+					{
+						$strDescription = '';
+						$objElement = \ContentModel::findPublishedByPidAndTable($event['id'], 'tl_calendar_events');
+
+						if ($objElement !== null)
+						{
+							while ($objElement->next())
+							{
+								$strDescription .= $this->getContentElement($objElement->id);
+							}
+						}
+					}
+					else
+					{
+						$strDescription = $event['teaser'];
+					}
+
 					$strDescription = $this->replaceInsertTags($strDescription);
 					$objItem->description = $this->convertRelativeUrls($strDescription, $strLink);
 

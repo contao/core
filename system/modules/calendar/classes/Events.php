@@ -249,9 +249,19 @@ abstract class Events extends \Module
 		$arrEvent['title'] = specialchars($objEvents->title, true);
 		$arrEvent['href'] = $this->generateEventUrl($objEvents, $strUrl);
 		$arrEvent['class'] = ($objEvents->cssClass != '') ? ' ' . $objEvents->cssClass : '';
-		$arrEvent['details'] = \String::encodeEmail($objEvents->details);
 		$arrEvent['start'] = $intStart;
 		$arrEvent['end'] = $intEnd;
+
+		$arrEvent['details'] = '';
+		$objElement = \ContentModel::findPublishedByPidAndTable($objEvents->id, 'tl_calendar_events');
+
+		if ($objElement !== null)
+		{
+			while ($objElement->next())
+			{
+				$arrEvent['details'] .= $this->getContentElement($objElement->id);
+			}
+		}
 
 		// Override the link target
 		if ($objEvents->source == 'external' && $objEvents->target)

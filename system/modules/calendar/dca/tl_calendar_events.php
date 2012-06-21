@@ -28,6 +28,8 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_calendar',
+		'ctable'                      => array('tl_content'),
+		'switchToEdit'                => true,
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
@@ -66,7 +68,8 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'fields'                  => array('startTime DESC'),
 			'headerFields'            => array('title', 'jumpTo', 'tstamp', 'protected', 'allowComments', 'makeFeed'),
 			'panelLayout'             => 'filter;sort,search,limit',
-			'child_record_callback'   => array('tl_calendar_events', 'listEvents')
+			'child_record_callback'   => array('tl_calendar_events', 'listEvents'),
+			'child_record_class'      => 'no_padding'
 		),
 		'global_operations' => array
 		(
@@ -83,8 +86,16 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'edit' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_calendar_events']['edit'],
+				'href'                => 'table=tl_content',
+				'icon'                => 'edit.gif',
+				'attributes'          => 'class="contextmenu"'
+			),
+			'editmeta' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_calendar_events']['editmeta'],
 				'href'                => 'act=edit',
-				'icon'                => 'edit.gif'
+				'icon'                => 'header.gif',
+				'attributes'          => 'class="edit-header"'
 			),
 			'copy' => array
 			(
@@ -125,7 +136,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addTime', 'addImage', 'recurring', 'addEnclosure', 'source'),
-		'default'                     => '{title_legend},title,alias,author;{date_legend},addTime,startDate,endDate;{teaser_legend:hide},teaser;{text_legend},details;{image_legend},addImage;{recurring_legend},recurring;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments;{publish_legend},published,start,stop'
+		'default'                     => '{title_legend},title,alias,author;{date_legend},addTime,startDate,endDate;{teaser_legend:hide},teaser;{image_legend},addImage;{recurring_legend},recurring;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
@@ -256,16 +267,6 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'inputType'               => 'textarea',
 			'eval'                    => array('rte'=>'tinyMCE', 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
-		),
-		'details' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['details'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'textarea',
-			'eval'                    => array('rte'=>'tinyMCE', 'helpwizard'=>true),
-			'explanation'             => 'insertTags',
-			'sql'                     => "mediumtext NULL"
 		),
 		'addImage' => array
 		(
@@ -730,7 +731,6 @@ class tl_calendar_events extends Backend
 	public function listEvents($arrRow)
 	{
 		$time = time();
-		$key = ($arrRow['published'] && ($arrRow['start'] == '' || $arrRow['start'] < $time) && ($arrRow['stop'] == '' || $arrRow['stop'] > $time)) ? 'published' : 'unpublished';
 		$span = Calendar::calculateSpan($arrRow['startTime'], $arrRow['endTime']);
 
 		if ($span > 0)
@@ -739,18 +739,14 @@ class tl_calendar_events extends Backend
 		}
 		elseif ($arrRow['startTime'] == $arrRow['endTime'])
 		{
-			$date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $arrRow['startTime']) . ($arrRow['addTime'] ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['startTime']) . ')' : '');
+			$date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $arrRow['startTime']) . ($arrRow['addTime'] ? ' ' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['startTime']) : '');
 		}
 		else
 		{
-			$date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $arrRow['startTime']) . ($arrRow['addTime'] ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['startTime']) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['endTime']) . ')' : '');
+			$date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $arrRow['startTime']) . ($arrRow['addTime'] ? ' ' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['startTime']) . '-' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['endTime']) : '');
 		}
 
-		return '
-<div class="cte_type ' . $key . '"><strong>' . $arrRow['title'] . '</strong> - ' . $date . '</div>
-<div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h52' : '') . '">
-' . ($arrRow['details'] ?: $arrRow['teaser']) . '
-</div>' . "\n";
+		return '<div class="tl_content_left">' . $arrRow['title'] . ' <span style="color:#b3b3b3;padding-left:3px">[' . $date . ']</span></div>';
 	}
 
 

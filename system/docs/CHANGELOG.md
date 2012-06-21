@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### New
+The calendar module now supports content elements.
+
 ### Fixed
 Ignore DCA files which do not relate to a database table when building the DCA
 extracts during installation (see #4316).

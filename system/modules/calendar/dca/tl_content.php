@@ -5,7 +5,7 @@
  * 
  * Copyright (C) 2005-2012 Leo Feyer
  * 
- * @package News
+ * @package Calendar
  * @link    http://www.contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
@@ -14,22 +14,22 @@
 /**
  * Dynamically add the permission check and parent table 
  */
-if (Input::get('do') == 'news')
+if (Input::get('do') == 'calendar')
 {
-	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_news';
-	$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('tl_content_news', 'checkPermission');
+	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_calendar_events';
+	$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('tl_content_calendar', 'checkPermission');
 }
 
 
 /**
- * Class tl_content_news
+ * Class tl_content_calendar
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    News
+ * @package    Calendar
  */
-class tl_content_news extends Backend
+class tl_content_calendar extends Backend
 {
 
 	/**
@@ -53,13 +53,13 @@ class tl_content_news extends Backend
 		}
 
 		// Set the root IDs
-		if (!is_array($this->User->news) || empty($this->User->news))
+		if (!is_array($this->User->calendars) || empty($this->User->calendars))
 		{
 			$root = array(0);
 		}
 		else
 		{
-			$root = $this->User->news;
+			$root = $this->User->calendars;
 		}
 
 		// Check the current action
@@ -90,7 +90,7 @@ class tl_content_news extends Backend
 					$this->redirect('contao/main.php?act=error');
 				}
 
-				$objCes = $this->Database->prepare("SELECT id FROM tl_content WHERE ptable='tl_news' AND pid=?")
+				$objCes = $this->Database->prepare("SELECT id FROM tl_content WHERE ptable='tl_calendar_events' AND pid=?")
 										 ->execute(CURRENT_ID);
 
 				$session = $this->Session->getData();
@@ -129,28 +129,28 @@ class tl_content_news extends Backend
 	{
 		if ($blnIsPid)
 		{
-			$objArchive = $this->Database->prepare("SELECT a.id, n.id AS nid FROM tl_news n, tl_news_archive a WHERE n.id=? AND n.pid=a.id")
-										 ->limit(1)
-										 ->execute($id);
+			$objCalendar = $this->Database->prepare("SELECT a.id, n.id AS nid FROM tl_calendar_events n, tl_calendar a WHERE n.id=? AND n.pid=a.id")
+										  ->limit(1)
+										  ->execute($id);
 		}
 		else
 		{
-			$objArchive = $this->Database->prepare("SELECT a.id, n.id AS nid FROM tl_content c, tl_news n, tl_news_archive a WHERE c.id=? AND c.pid=n.id AND n.pid=a.id")
-										 ->limit(1)
-										 ->execute($id);
+			$objCalendar = $this->Database->prepare("SELECT a.id, n.id AS nid FROM tl_content c, tl_calendar_events n, tl_calendar a WHERE c.id=? AND c.pid=n.id AND n.pid=a.id")
+										  ->limit(1)
+										  ->execute($id);
 		}
 
 		// Invalid ID
-		if ($objArchive->numRows < 1)
+		if ($objCalendar->numRows < 1)
 		{
-			$this->log('Invalid news content element ID ' . $id, 'tl_content_news checkAccessToElement()', TL_ERROR);
+			$this->log('Invalid event content element ID ' . $id, 'tl_content_calendar checkAccessToElement()', TL_ERROR);
 			return false;
 		}
 
 		// The news archive is not mounted
-		if (!in_array($objArchive->id, $root))
+		if (!in_array($objCalendar->id, $root))
 		{
-			$this->log('Not enough permissions to modify article ID ' . $objArchive->nid . ' in news archive ID ' . $objArchive->id, 'tl_content_news checkAccessToElement()', TL_ERROR);
+			$this->log('Not enough permissions to modify article ID ' . $objCalendar->nid . ' in calendar ID ' . $objCalendar->id, 'tl_content_calendar checkAccessToElement()', TL_ERROR);
 			return false;
 		}
 
