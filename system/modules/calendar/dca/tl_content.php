@@ -147,7 +147,7 @@ class tl_content_calendar extends Backend
 			return false;
 		}
 
-		// The news archive is not mounted
+		// The calendar is not mounted
 		if (!in_array($objCalendar->id, $root))
 		{
 			$this->log('Not enough permissions to modify article ID ' . $objCalendar->nid . ' in calendar ID ' . $objCalendar->id, 'tl_content_calendar checkAccessToElement()', TL_ERROR);

@@ -42,6 +42,7 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['noComments']   = array('Disable comme
 $GLOBALS['TL_LANG']['tl_calendar_events']['published']    = array('Publish event', 'Make the event publicly visible on the website.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['start']        = array('Show from', 'Do not show the event on the website before this day.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['stop']         = array('Show until', 'Do not show the event on the website on and after this day.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['tstamp']       = array('Revision date', 'Date and time of the latest revision');
 
 
 /**
