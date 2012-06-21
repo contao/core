@@ -5,6 +5,10 @@ Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Image galleries are now rendered as unordered lists (see #4130). The Contao CSS
+framework will format them respecting the "thumbnails per row" setting.
+
+### Changed
 The session and authentication cookies are now "http-only" (see #4185).
 
 ### Improved

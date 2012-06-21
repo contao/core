@@ -99,16 +99,19 @@ img {
 }
 
 /**
- * Display the Contao gallery table cells underneath each other
+ * Format the Contao image galleries (now rendered as unordered lists)
  */
-@media (max-width:767px)
-{
-	.ce_gallery table,.ce_gallery tbody,.ce_gallery tr,.ce_gallery td {
-		display:block;
-	}
-	.ce_gallery td {
-		width:auto !important;
-	}
+.ce_gallery ul {
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	list-style:none;
+}																																																																																																																																																																																																																																																						
+.ce_gallery li {
+	float:left;
+}
+.ce_gallery li.col_first {
+	clear:left;
 }
 
 /**
