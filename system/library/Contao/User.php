@@ -226,7 +226,7 @@ abstract class User extends \System
 		$this->Database->prepare("UPDATE tl_session SET tstamp=$time WHERE sessionID=?")
 					   ->execute(session_id());
 
-		$this->setCookie($this->strCookie, $this->strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);
+		$this->setCookie($this->strCookie, $this->strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
 		return true;
 	}
 
@@ -493,7 +493,7 @@ abstract class User extends \System
 					   ->execute($this->intId, $time, $this->strCookie, session_id(), $this->strIp, $this->strHash);
 
 		// Set the authentication cookie
-		$this->setCookie($this->strCookie, $this->strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);
+		$this->setCookie($this->strCookie, $this->strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
 
 		// Save the login status
 		$_SESSION['TL_USER_LOGGED_IN'] = true;
@@ -531,7 +531,7 @@ abstract class User extends \System
 					   ->execute($this->strHash);
 
 		// Remove cookie and hash
-		$this->setCookie($this->strCookie, $this->strHash, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
+		$this->setCookie($this->strCookie, $this->strHash, ($time - 86400), null, null, false, true);
 		$this->strHash = '';
 
 		// Destroy the current session

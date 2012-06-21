@@ -627,8 +627,9 @@ abstract class System
 	 * @param string  $strPath    An optional path
 	 * @param string  $strDomain  An optional domain name
 	 * @param boolean $blnSecure  If true, the secure flag will be set
+	 * @param boolean $blnSecure  If true, the secure flag will be set
 	 */
-	public static function setCookie($strName, $varValue, $intExpires, $strPath=null, $strDomain=null, $blnSecure=false)
+	public static function setCookie($strName, $varValue, $intExpires, $strPath=null, $strDomain=null, $blnSecure=false, $blnHttpOnly=false)
 	{
 		if ($strPath == '')
 		{
@@ -637,12 +638,13 @@ abstract class System
 
 		$objCookie = new \stdClass();
 
-		$objCookie->strName    = $strName;
-		$objCookie->varValue   = $varValue;
-		$objCookie->intExpires = $intExpires;
-		$objCookie->strPath    = $strPath;
-		$objCookie->strDomain  = $strDomain;
-		$objCookie->blnSecure  = $blnSecure;
+		$objCookie->strName     = $strName;
+		$objCookie->varValue    = $varValue;
+		$objCookie->intExpires  = $intExpires;
+		$objCookie->strPath     = $strPath;
+		$objCookie->strDomain   = $strDomain;
+		$objCookie->blnSecure   = $blnSecure;
+		$objCookie->blnHttpOnly = $blnHttpOnly;
 
 		// HOOK: allow to add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['setCookie']) && is_array($GLOBALS['TL_HOOKS']['setCookie']))
@@ -653,7 +655,7 @@ abstract class System
 			}
 		}
 
-		setcookie($objCookie->strName, $objCookie->varValue, $objCookie->intExpires, $objCookie->strPath, $objCookie->strDomain, $objCookie->blnSecure);
+		setcookie($objCookie->strName, $objCookie->varValue, $objCookie->intExpires, $objCookie->strPath, $objCookie->strDomain, $objCookie->blnSecure, $objCookie->blnHttpOnly);
 	}
 
 

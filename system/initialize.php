@@ -35,6 +35,7 @@ require TL_ROOT . '/system/helper/interface.php';
  * Try to disable the PHPSESSID
  */
 @ini_set('session.use_trans_sid', 0);
+@ini_set('session.cookie_httponly', true);
 
 
 /**

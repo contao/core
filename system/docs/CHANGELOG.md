@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+The session and authentication cookies are now "http-only" (see #4185).
+
 ### Improved
 It is now possible to choose multiple analytics templates (see #4328).
 

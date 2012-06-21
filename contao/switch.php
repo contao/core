@@ -83,14 +83,14 @@ class PreviewSwitch extends Backend
 			// Hide unpublished elements
 			if (Input::post('unpublished') == 'hide')
 			{
-				$this->setCookie('FE_PREVIEW', 0, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
+				$this->setCookie('FE_PREVIEW', 0, ($time - 86400));
 				$this->Template->show = 0;
 			}
 
 			// Show unpublished elements
 			else
 			{
-				$this->setCookie('FE_PREVIEW', 1, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);
+				$this->setCookie('FE_PREVIEW', 1, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']));
 				$this->Template->show = 1;
 			}
 
@@ -109,7 +109,7 @@ class PreviewSwitch extends Backend
 								   ->execute(Input::post('user'), $time, 'FE_USER_AUTH', session_id(), Environment::get('ip'), $strHash);
 
 					// Set cookie
-					$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);
+					$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
 					$this->Template->user = Input::post('user');
 				}
 
@@ -117,7 +117,7 @@ class PreviewSwitch extends Backend
 				else
 				{
 					// Remove cookie
-					$this->setCookie('FE_USER_AUTH', $strHash, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
+					$this->setCookie('FE_USER_AUTH', $strHash, ($time - 86400), null, null, false, true);
 					$this->Template->user = 0;
 				}
 			}

@@ -222,7 +222,7 @@ class FrontendUser extends \User
 			$this->autologin = $strToken;
 			$this->save();
 
-			$this->setCookie('FE_AUTO_LOGIN', $strToken, ($time + $GLOBALS['TL_CONFIG']['autologin']), $GLOBALS['TL_CONFIG']['websitePath']);
+			$this->setCookie('FE_AUTO_LOGIN', $strToken, ($time + $GLOBALS['TL_CONFIG']['autologin']), null, null, false, true);
 		}
 
 		return true;
@@ -250,7 +250,7 @@ class FrontendUser extends \User
 		}
 
 		// Remove the auto login cookie
-		$this->setCookie('FE_AUTO_LOGIN', $this->autologin, (time() - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
+		$this->setCookie('FE_AUTO_LOGIN', $this->autologin, (time() - 86400), null, null, false, true);
 		return true;
 	}
 
