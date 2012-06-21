@@ -67,7 +67,7 @@ abstract class Database
 	/**
 	 * Establish the database connection
 	 * 
-	 * @param array $arrConfig A configuration array
+	 * @param Array $arrConfig A configuration array
 	 * 
 	 * @throws \Exception If a connection cannot be established
 	 */
@@ -122,7 +122,7 @@ abstract class Database
 	/**
 	 * Instantiate the Database object (Factory)
 	 * 
-	 * @param array $arrCustom A configuration array
+	 * @param Array $arrCustom A configuration array
 	 * 
 	 * @return \Database The Database object
 	 */
