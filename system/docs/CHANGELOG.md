@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### Improved
+Improved the "latest changes" overview on the back end welcome page and added
+links to edit or restore the changed element (see #4336).
+
 ### New
 Added a YouTube content element based on mediaplayer.js (see #4363).
 

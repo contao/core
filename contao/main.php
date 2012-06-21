@@ -155,7 +155,7 @@ class Main extends Backend
 		$arrVersions = array();
 
 		// Get the latest versions
-		$objVersions = $this->Database->prepare("SELECT pid, tstamp, version, fromTable, username, userid, description FROM tl_version WHERE version>1" . (!$this->User->isAdmin ? " AND userid=?" : "") . " ORDER BY tstamp DESC")
+		$objVersions = $this->Database->prepare("SELECT pid, tstamp, version, fromTable, username, userid, description, editUrl FROM tl_version v WHERE version>1" . (!$this->User->isAdmin ? " AND userid=?" : "") . " ORDER BY tstamp DESC")
 									  ->limit(100)
 									  ->execute($this->User->id);
 
@@ -168,6 +168,11 @@ class Main extends Backend
 			$arrRow['to'] = $objVersions->version;
 			$arrRow['date'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objVersions->tstamp);
 			$arrRow['description'] = String::substr($arrRow['description'], 32);
+
+			if ($arrRow['editUrl'] != '')
+			{
+				$arrRow['editUrl'] = preg_replace('/&(amp;)?rt=[a-f0-9]+/', '&amp;rt=' . REQUEST_TOKEN, $arrRow['editUrl']);
+			}
 
 			$arrVersions[] = $arrRow;
 		}
@@ -199,6 +204,12 @@ class Main extends Backend
 		foreach ($arrVersions as $k=>$v)
 		{
 			$arrVersions[$k]['class'] = ($k%2 == 0) ? 'even' : 'odd';
+
+			// Mark deleted versions (see #4336)
+			$objDeleted = $this->Database->prepare("SELECT COUNT(*) AS count FROM " . $v['fromTable'] . " WHERE id=?")
+										 ->execute($v['pid']);
+
+			$arrVersions[$k]['deleted'] = ($objDeleted->count < 1);
 		}
 
 		$objTemplate->versions = $arrVersions;
@@ -207,6 +218,7 @@ class Main extends Backend
 		$objTemplate->systemMessages = $GLOBALS['TL_LANG']['MSC']['systemMessages'];
 		$objTemplate->shortcuts = $GLOBALS['TL_LANG']['MSC']['shortcuts'][0];
 		$objTemplate->shortcutsLink = $GLOBALS['TL_LANG']['MSC']['shortcuts'][1];
+		$objTemplate->editElement = specialchars($GLOBALS['TL_LANG']['MSC']['editElement']);
 
 		return $objTemplate->parse();
 	}

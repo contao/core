@@ -769,26 +769,6 @@ ul.sgallery .gimage {
 #tl_soverview table {
 	width:705px;
 }
-#tl_soverview .headline {
-	padding-bottom:6px;
-}
-#tl_soverview .headline div {
-	padding:2px 6px 3px;
-	border-top:1px solid #e9e9e9;
-	border-bottom:1px solid #e9e9e9;
-	background:#f6f6f6;
-	font-size:12px;
-	font-weight:bold;
-}
-#tl_soverview span {
-	text-decoration:underline;
-}
-#tl_soverview .col_1 {
-	width:64px;
-}
-#tl_soverview .col_1,#tl_soverview .col_2 {
-	padding:1px 6px;
-}
 #tl_messages,#tl_shortcuts {
 	margin-bottom:24px;
 }
@@ -828,7 +808,8 @@ ul.sgallery .gimage {
 	white-space:nowrap;
 }
 #tl_versions td:last-child {
-	width:16px;
+	width:32px;
+	white-space:nowrap;
 }
 
 /* CHMOD table */

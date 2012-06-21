@@ -518,6 +518,7 @@ $GLOBALS['TL_LANG']['MSC']['currentlySelected'] = 'Ausgewählt';
 $GLOBALS['TL_LANG']['MSC']['selectNode']        = 'Nur diesen Knoten anzeigen';
 $GLOBALS['TL_LANG']['MSC']['selectAllNodes']    = 'Alle Knoten anzeigen';
 $GLOBALS['TL_LANG']['MSC']['showDifferences']   = 'Unterschiede anzeigen';
+$GLOBALS['TL_LANG']['MSC']['editElement']       = 'Element bearbeiten';
 $GLOBALS['TL_LANG']['MSC']['table']             = 'Tabelle';
 $GLOBALS['TL_LANG']['MSC']['description']       = 'Beschreibung';
 $GLOBALS['TL_LANG']['MSC']['noVersions']        = 'Zur Zeit sind keine Versionen vorhanden.';

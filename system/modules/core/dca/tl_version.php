@@ -66,6 +66,10 @@ $GLOBALS['TL_DCA']['tl_version'] = array
 		(
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
+		'editUrl' => array
+		(
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
 		'active' => array
 		(
 			'sql'                     => "char(1) NOT NULL default ''"

@@ -2500,11 +2500,19 @@ abstract class Controller extends \System
 			$strDescription = $objRecord->selector;
 		}
 
+		$strUrl = \Environment::get('request');
+
+		// Do not save the URL if the visibility is toggled via Ajax
+		if (preg_match('/&(amp;)?state=/', $strUrl))
+		{
+			$strUrl = '';
+		}
+
 		$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=? AND fromTable=?")
 					   ->execute($intId, $strTable);
 
-		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?)")
-					   ->execute($intId, time(), $intVersion, $strTable, $this->User->username, $this->User->id, $strDescription, serialize($objRecord->row()));
+		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, editUrl, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)")
+					   ->execute($intId, time(), $intVersion, $strTable, $this->User->username, $this->User->id, $strDescription, $strUrl, serialize($objRecord->row()));
 	}
 
 

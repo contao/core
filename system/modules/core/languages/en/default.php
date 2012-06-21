@@ -518,6 +518,7 @@ $GLOBALS['TL_LANG']['MSC']['currentlySelected'] = 'Selected';
 $GLOBALS['TL_LANG']['MSC']['selectNode']        = 'Only show this node';
 $GLOBALS['TL_LANG']['MSC']['selectAllNodes']    = 'Show all nodes';
 $GLOBALS['TL_LANG']['MSC']['showDifferences']   = 'Show differences';
+$GLOBALS['TL_LANG']['MSC']['editElement']       = 'Edit the element';
 $GLOBALS['TL_LANG']['MSC']['table']             = 'Table';
 $GLOBALS['TL_LANG']['MSC']['description']       = 'Description';
 $GLOBALS['TL_LANG']['MSC']['noVersions']        = 'Currently there are no versions.';
