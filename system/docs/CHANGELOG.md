@@ -5,6 +5,9 @@ Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
 ### Improved
+It is now possible to choose multiple analytics templates (see #4328).
+
+### Improved
 Improved the "latest changes" overview on the back end welcome page and added
 links to edit or restore the changed element (see #4336).
 

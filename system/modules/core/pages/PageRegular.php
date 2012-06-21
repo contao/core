@@ -644,11 +644,19 @@ class PageRegular extends \Frontend
 			$strScripts .= "\n" . trim($objLayout->script) . "\n";
 		}
 
-		// Add the analytics script
+		// Add the analytics scripts
 		if ($objLayout->analytics != '')
 		{
-			$objTemplate = new \FrontendTemplate($objLayout->analytics);
-			$strScripts .= $objTemplate->parse();
+			$arrAnalytics = deserialize($objLayout->analytics, true);
+
+			foreach ($arrAnalytics as $strTemplate)
+			{
+				if ($strTemplate != '')
+				{
+					$objTemplate = new \FrontendTemplate($strTemplate);
+					$strScripts .= $objTemplate->parse();
+				}
+			}
 		}
 
 		$this->Template->mootools = $strScripts;

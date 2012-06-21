@@ -411,10 +411,10 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['analytics'],
 			'exclude'                 => true,
 			'search'                  => true,
-			'inputType'               => 'select',
+			'inputType'               => 'checkboxWizard',
 			'options_callback'        => array('tl_layout', 'getAnalyticsTemplates'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
-			'eval'                    => array('includeBlankOption'=>true),
+			'eval'                    => array('multiple'=>true),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'script' => array
