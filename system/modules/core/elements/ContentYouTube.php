@@ -85,7 +85,7 @@ class ContentYouTube extends \ContentElement
 		}
 
 		$objFile = new \stdClass();
-		$objFile->mime = 'video/youtube';
+		$objFile->mime = 'video/x-youtube';
 		$objFile->path = 'http://www.youtube.com/watch?v=' . $this->youtube;
 
 		$this->Template->isVideo = true;

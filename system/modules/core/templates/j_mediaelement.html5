@@ -11,6 +11,9 @@ $GLOBALS['TL_CSS'][] = 'plugins/jQuery/mediaelement/'. MEDIAELEMENT .'/css/media
   $(document).ready(function() {
     $('video,audio').mediaelementplayer({
       // Put custom options here
+      pluginPath:'<?php echo TL_PATH; ?>/plugins/jQuery/mediaelement/<?php echo MEDIAELEMENT; ?>/',
+      flashName:'legacy/flashmediaelement.swf',
+      silverlightName:'legacy/silverlightmediaelement.xap'
     });
   });
 })(jQuery);

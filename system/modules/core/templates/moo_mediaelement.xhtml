@@ -12,6 +12,9 @@ $GLOBALS['TL_CSS'][] = 'plugins/mootools/mediaelement/'. MEDIAELEMENT .'/css/med
   window.addEvent('domready', function() {
     $$('video','audio').mediaelementplayer({
       // Put custom options here
+      pluginPath:'<?php echo TL_PATH; ?>/plugins/mootools/mediaelement/<?php echo MEDIAELEMENT; ?>/',
+      flashName:'legacy/flashmediaelement.swf',
+      silverlightName:'legacy/silverlightmediaelement.xap'
     });
   });
 })(jQuery);

@@ -772,11 +772,11 @@ mejs.MediaElementDefaults = {
 	// path to Flash and Silverlight plugins
 	pluginPath: mejs.Utility.getScriptPath(['mediaelement.js','mediaelement.min.js','mediaelement-and-player.js','mediaelement-and-player.min.js']),
 	// name of flash file
-	flashName: 'legacy/flashmediaelement.swf',
+	flashName: 'flashmediaelement.swf',
 	// turns on the smoothing filter in Flash
 	enablePluginSmoothing: false,
 	// name of silverlight file
-	silverlightName: 'legacy/silverlightmediaelement.xap',
+	silverlightName: 'silverlightmediaelement.xap',
 	// default if the <video width> is not specified
 	defaultVideoWidth: 480,
 	// default if the <video height> is not specified
