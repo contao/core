@@ -62,6 +62,7 @@ ClassLoader::addClasses(array
 	'Contao\ContentTeaser'      => 'system/modules/core/elements/ContentTeaser.php',
 	'Contao\ContentText'        => 'system/modules/core/elements/ContentText.php',
 	'Contao\ContentToplink'     => 'system/modules/core/elements/ContentToplink.php',
+	'Contao\ContentYouTube'     => 'system/modules/core/elements/ContentYouTube.php',
 
 	// Forms
 	'Contao\Form'               => 'system/modules/core/forms/Form.php',

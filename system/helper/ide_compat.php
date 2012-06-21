@@ -126,6 +126,7 @@ class ContentTable extends Contao\ContentTable {}
 class ContentTeaser extends Contao\ContentTeaser {}
 class ContentText extends Contao\ContentText {}
 class ContentToplink extends Contao\ContentToplink {}
+class ContentYouTube extends Contao\ContentYouTube {}
 class Form extends Contao\Form {}
 class FormCaptcha extends Contao\FormCaptcha {}
 class FormCheckBox extends Contao\FormCheckBox {}

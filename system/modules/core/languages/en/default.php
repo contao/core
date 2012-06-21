@@ -96,6 +96,7 @@ $GLOBALS['TL_LANG']['CTE']['media']     = 'Media elements';
 $GLOBALS['TL_LANG']['CTE']['image']     = array('Image', 'Generates a stand-alone image.');
 $GLOBALS['TL_LANG']['CTE']['gallery']   = array('Gallery', 'Generates a lightbox image gallery.');
 $GLOBALS['TL_LANG']['CTE']['player']    = array('Video/audio', 'Generates a video or audio player.');
+$GLOBALS['TL_LANG']['CTE']['youtube']   = array('YouTube', 'Adds a YouTube video.');
 $GLOBALS['TL_LANG']['CTE']['files']     = 'File elements';
 $GLOBALS['TL_LANG']['CTE']['download']  = array('Download', 'Generates a link to download a file.');
 $GLOBALS['TL_LANG']['CTE']['downloads'] = array('Downloads', 'Generates multiple links to download files.');

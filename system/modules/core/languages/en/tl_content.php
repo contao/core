@@ -61,6 +61,7 @@ $GLOBALS['TL_LANG']['tl_content']['numberOfItems'] = array('Total number of imag
 $GLOBALS['TL_LANG']['tl_content']['sortBy']        = array('Order by', 'Please choose the sort order.');
 $GLOBALS['TL_LANG']['tl_content']['galleryTpl']    = array('Gallery template', 'Here you can select the gallery template.');
 $GLOBALS['TL_LANG']['tl_content']['playerSRC']     = array('Video/audio files', 'Here you can add the video/audio file or multiple files if you are using different codecs.');
+$GLOBALS['TL_LANG']['tl_content']['youtube']       = array('YouTube ID', 'Please enter the YouTube video ID (e.g. <em>nsqh9jHkHlM</em>).');
 $GLOBALS['TL_LANG']['tl_content']['posterSRC']     = array('Preview image', 'Show this image instead of the first frame of the video before playback (videos only).');
 $GLOBALS['TL_LANG']['tl_content']['playerSize']    = array('Player size', 'Width and height of the media player in pixels (videos only).');
 $GLOBALS['TL_LANG']['tl_content']['autoplay']      = array('Autoplay', 'Automatically play the video when the page loads.');

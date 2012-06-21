@@ -5,6 +5,9 @@ Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+Added a YouTube content element based on mediaplayer.js (see #4363).
+
+### New
 Added an additional routine to check boxes, radio buttons and select menus,
 which compares the user input with the given options (see #4383). 
 
