@@ -90,7 +90,6 @@ class Form extends \Hybrid
 		$this->Template->method = ($this->method == 'GET') ? 'get' : 'post';
 
 		$this->initializeSession($formId);
-		$this->Template->maxFileSize = $this->objModel->getMaxUploadFileSize();
 		$arrLabels = array();
 
 		// Get all form fields
@@ -226,6 +225,7 @@ class Form extends \Hybrid
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 		$this->Template->formId = $arrAttributes[0] ?: 'f'.$this->id;
 		$this->Template->action = $this->getIndexFreeRequest();
+		$this->Template->maxFileSize = $hasUpload ? $this->objModel->getMaxUploadFileSize() : false;
 
 		// Get the target URL
 		if ($this->method == 'GET' && $this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)

@@ -41,7 +41,7 @@ class FormModel extends \Model
 	 */
 	public function getMaxUploadFileSize()
 	{
-		$objResult = \Database::getInstance()->prepare("SELECT MAX(maxlength) AS maxlength FROM tl_form_field WHERE pid=? AND type='upload' AND maxlength>0")
+		$objResult = \Database::getInstance()->prepare("SELECT MAX(maxlength) AS maxlength FROM tl_form_field WHERE pid=? AND invisible='' AND type='upload' AND maxlength>0")
 											 ->execute($this->id);
 
 		if ($objResult->numRows > 0 && $objResult->maxlength > 0)
