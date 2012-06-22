@@ -98,7 +98,7 @@ class RequestToken extends \System
 	public static function validate($strToken)
 	{
 		// The feature has been disabled
-		if ($GLOBALS['TL_CONFIG']['disableRefererCheck'])
+		if ($GLOBALS['TL_CONFIG']['disableRefererCheck'] || defined('BYPASS_TOKEN_CHECK'))
 		{
 			return true;
 		}
