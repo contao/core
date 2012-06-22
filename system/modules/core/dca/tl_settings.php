@@ -28,7 +28,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useSMTP'),
-		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,disableCron,minifyMarkup,gzipScripts;{backend_legend},resultsPerPage,maxResultsPerPage,staticFiles,staticSystem,staticPlugins,doNotCollapse;{frontend_legend},urlSuffix,cacheMode,rewriteURL,useAutoItem,addLanguageToUrl,doNotRedirectEmpty,folderUrl,disableAlias;{privacy_legend:hide},privacyAnonymizeIp,privacyAnonymizeGA;{safemode_legend:hide},coreOnlyMode;{security_legend:hide},allowedTags,debugMode,bypassCache,displayErrors,logErrors,disableRefererCheck,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin,lockPeriod;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
+		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,disableCron,minifyMarkup,gzipScripts;{backend_legend},resultsPerPage,maxResultsPerPage,staticFiles,staticSystem,staticPlugins,doNotCollapse;{frontend_legend},urlSuffix,cacheMode,rewriteURL,useAutoItem,addLanguageToUrl,doNotRedirectEmpty,folderUrl,disableAlias;{privacy_legend:hide},privacyAnonymizeIp,privacyAnonymizeGA;{token_legend:hide},disableRefererCheck,tokenWhitelist;{security_legend:hide},allowedTags,debugMode,coreOnlyMode,displayErrors,logErrors,bypassCache,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin,lockPeriod;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
 	),
 
 	// Subpalettes
@@ -228,6 +228,17 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),
+		'disableRefererCheck' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'],
+			'inputType'               => 'checkbox'
+		),
+		'tokenWhitelist' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['tokenWhitelist'],
+			'inputType'               => 'textarea',
+			'eval'                    => array('decodeEntities'=>true, 'style'=>'height:60px'),
+		),
 		'allowedTags' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['allowedTags'],
@@ -250,11 +261,6 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),
-		'coreOnlyMode' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['coreOnlyMode'],
-			'inputType'               => 'checkbox'
-		),
 		'displayErrors' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['displayErrors'],
@@ -267,9 +273,9 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),
-		'disableRefererCheck' => array
+		'coreOnlyMode' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['coreOnlyMode'],
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),

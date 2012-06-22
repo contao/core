@@ -97,6 +97,29 @@ class RequestToken extends \System
 	 */
 	public static function validate($strToken)
 	{
+		// The feature has been disabled
+		if ($GLOBALS['TL_CONFIG']['disableRefererCheck'])
+		{
+			return true;
+		}
+
+		// The referer URL is whitelisted
+		if ($GLOBALS['TL_CONFIG']['tokenWhitelist'] != '')
+		{
+			$strReferer = Environment::get('httpReferer');
+			$arrUrls = trimsplit("\n", $GLOBALS['TL_CONFIG']['tokenWhitelist']);
+
+			foreach ($arrUrls as $strUrl)
+			{
+				// Match the entire URL (e.g. https://www.facebook.com)
+				if (strncmp($strReferer, $strUrl, strlen($strUrl)) === 0)
+				{
+					return true;
+				}
+			}
+		}
+
+		// Validate the token
 		return ($strToken != '' && static::$strToken != '' && $strToken == static::$strToken);
 	}
 

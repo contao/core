@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added a whitelist to exempt URLs from the token check (see #3164).
+
 ### Changed
 Moved the meta viewport tag to its own PHP variable so it can be replaced with
 a custom version if necessary (see #4335).
