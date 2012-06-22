@@ -103,24 +103,25 @@ class RequestToken extends \System
 			return true;
 		}
 
-		// The referer URL is whitelisted
-		if ($GLOBALS['TL_CONFIG']['tokenWhitelist'] != '')
+		// Validate the token
+		if ($strToken != '' && static::$strToken != '' && $strToken == static::$strToken)
 		{
-			$strReferer = Environment::get('httpReferer');
-			$arrUrls = trimsplit("\n", $GLOBALS['TL_CONFIG']['tokenWhitelist']);
+			return true;
+		}
 
-			foreach ($arrUrls as $strUrl)
+		// HOOK: add custom logic (see #3164)
+		if (isset($GLOBALS['TL_HOOKS']['validateToken']) && is_array($GLOBALS['TL_HOOKS']['validateToken']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['validateToken'] as $callback)
 			{
-				// Match the entire URL (e.g. https://www.facebook.com)
-				if (strncmp($strReferer, $strUrl, strlen($strUrl)) === 0)
+				if (static::importStatic($callback[0])->$callback[1]($strToken, static::$strToken) === true)
 				{
 					return true;
 				}
 			}
 		}
 
-		// Validate the token
-		return ($strToken != '' && static::$strToken != '' && $strToken == static::$strToken);
+		return false;
 	}
 
 

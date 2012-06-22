@@ -92,7 +92,6 @@ $GLOBALS['TL_CONFIG']['timeFormat']  = 'H:i';
  */
 $GLOBALS['TL_CONFIG']['allowedTags']         = '<a><abbr><acronym><address><area><article><aside><b><big><blockquote><br><base><bdo><button><caption><cite><code><col><colgroup><dd><del><div><dfn><dl><dt><em><figure><figcaption><form><fieldset><hr><h1><h2><h3><h4><h5><h6><i><img><input><ins><label><legend><li><link><map><object><ol><optgroup><option><p><pre><param><q><section><select><small><span><strong><sub><sup><style><table><tbody><td><textarea><tfoot><th><thead><tr><tt><u><ul>';
 $GLOBALS['TL_CONFIG']['disableRefererCheck'] = false;
-$GLOBALS['TL_CONFIG']['tokenWhitelist']      = '';
 $GLOBALS['TL_CONFIG']['disableIpCheck']      = false;
 
 
