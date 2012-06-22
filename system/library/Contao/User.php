@@ -294,7 +294,7 @@ abstract class User extends \System
 
 			// Add a log entry and the error message, because checkAccountStatus() will not be called (see #4444)
 			$this->log('The account has been locked for security reasons', get_class($this) . ' login()', TL_ACCESS);
-			$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) - $time) / 60)));
+			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) - $time) / 60)));
 
 			// Send admin notification
 			if ($GLOBALS['TL_CONFIG']['adminEmail'] != '')
