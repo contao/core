@@ -88,12 +88,21 @@ class ModuleCloseAccount extends \Module
 		{
 			$objWidget->validate();
 
-			// Validate password
+			// Validate the password
 			if (!$objWidget->hasErrors())
 			{
-				list(, $strSalt) = explode(':', $this->User->password);
+				// The password is up to date (SHA-512)
+				if (strncmp($this->User->password, '$6$', 3) === 0)
+				{
+					$blnAuthenticated = (crypt($objWidget->value, $this->User->password) == $this->User->password);
+				}
+				else
+				{
+					list(, $strSalt) = explode(':', $this->User->password);
+					$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1($objWidget->value)) : ($strPassword == sha1($strSalt . $objWidget->value));
+				}
 
-				if (!strlen($strSalt) || sha1($strSalt . $objWidget->value) . ':' . $strSalt != $this->User->password)
+				if (!$blnAuthenticated)
 				{
 					$objWidget->value = '';
 					$objWidget->addError($GLOBALS['TL_LANG']['ERR']['invalidPass']);

@@ -132,9 +132,7 @@ class Password extends \Widget
 		{
 			$this->blnSubmitInput = true;
 			\Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);
-			$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
-
-			return sha1($strSalt . $varInput) . ':' . $strSalt;
+			return crypt($varInput, '$6$' . md5(uniqid(mt_rand(), true)));
 		}
 
 		return '';

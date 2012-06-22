@@ -80,22 +80,16 @@ class ChangePassword extends Backend
 			// Save the data
 			else
 			{
-				list(, $strSalt) = explode(':', $this->User->password);
-				$strPassword = sha1($strSalt . $pw);
-
 				// Make sure the password has been changed
-				if ($strPassword . ':' . $strSalt == $this->User->password)
+				if (crypt($pw, $this->User->password) == $this->User->password)
 				{
 					Message::addError($GLOBALS['TL_LANG']['MSC']['pw_change']);
 				}
 				else
 				{
-					$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
-					$strPassword = sha1($strSalt . $pw);
-
 					$objUser = UserModel::findByPk($this->User->id);
 					$objUser->pwChange = '';
-					$objUser->password = $strPassword . ':' . $strSalt;
+					$objUser->password = crypt($pw, '$6$' . md5(uniqid(mt_rand(), true)));
 					$objUser->save();
 
 					Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);
