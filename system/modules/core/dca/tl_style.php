@@ -598,7 +598,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['own'],
 			'inputType'               => 'textarea',
-			'eval'                    => array('decodeEntities'=>true, 'style'=>'height:120px;'),
+			'eval'                    => array('decodeEntities'=>true, 'style'=>'height:120px'),
 			'sql'                     => "text NULL"
 		)
 	)

@@ -216,7 +216,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
-			'eval'                    => array('style'=>'height:60px;'),
+			'eval'                    => array('style'=>'height:60px'),
 			'sql'                     => "text NULL"
 		),
 		'showTeaser' => array
