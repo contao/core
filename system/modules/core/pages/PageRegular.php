@@ -40,9 +40,7 @@ class PageRegular extends \Frontend
 		$this->loadLanguageFile('default');
 
 		// Static URLs
-		$this->setStaticUrl('TL_FILES_URL', $objPage->staticFiles);
-		$this->setStaticUrl('TL_SCRIPT_URL', $objPage->staticSystem);
-		$this->setStaticUrl('TL_PLUGINS_URL', $objPage->staticPlugins);
+		$this->setStaticUrls();
 
 		// Get the page layout
 		$objLayout = $this->getPageLayout($objPage);
@@ -148,7 +146,7 @@ class PageRegular extends \Frontend
 		}
 
 		// Execute AFTER the modules have been generated and create footer scripts first
-		$this->createFooterScripts($objPage, $objLayout);
+		$this->createFooterScripts($objLayout);
 		$this->createHeaderScripts($objPage, $objLayout);
 
 		// Print the template to the screen
@@ -190,10 +188,11 @@ class PageRegular extends \Frontend
 	 */
 	protected function createTemplate($objPage, $objLayout)
 	{
+		$blnXhtml = ($objPage->outputFormat == 'xhtml');
 		$this->Template = new \FrontendTemplate($objPage->template);
 
 		// Generate the DTD
-		if ($objPage->outputFormat == 'xhtml')
+		if ($blnXhtml)
 		{
 			if ($objPage->outputVariant == 'strict')
 			{
@@ -208,10 +207,13 @@ class PageRegular extends \Frontend
 		$strFramework = '';
 		$arrFramework = deserialize($objLayout->framework);
 
+		$this->Template->viewport = '';
+		$this->Template->framework = '';
+
 		// Generate the CSS framework
 		if (is_array($arrFramework) && in_array('layout.css', $arrFramework))
 		{
-			$this->Template->framework = '<meta name="viewport" content="width=device-width,initial-scale=1.0">' . "\n";
+			$this->Template->viewport = '<meta name="viewport" content="width=device-width,initial-scale=1.0"' . ($blnXhtml ? ' />' : '>') . "\n";
 
 			// Wrapper
 			if ($objLayout->static)
@@ -282,17 +284,13 @@ class PageRegular extends \Frontend
 			// Add the layout specific CSS
 			if ($strFramework != '')
 			{
-				if ($objPage->outputFormat == 'xhtml')
+				if ($blnXhtml)
 				{
-					$this->Template->framework .= '<style type="text/css">' . "\n";
-					$this->Template->framework .= '/* <![CDATA[ */' . "\n";
-					$this->Template->framework .= $strFramework . "\n";
-					$this->Template->framework .= '/* ]]> */' . "\n";
-					$this->Template->framework .= '</style>' . "\n";
+					$this->Template->framework = '<style type="text/css">' . "\n/* <![CDATA[ */\n" . $strFramework . "\n/* ]]> */\n</style>\n";
 				}
 				else
 				{
-					$this->Template->framework .= '<style>' . $strFramework . '</style>' . "\n";
+					$this->Template->framework = '<style>' . $strFramework . "</style>\n";
 				}
 			}
 		}
@@ -305,17 +303,17 @@ class PageRegular extends \Frontend
 			if ($objLayout->jSource == 'j_googleapis' || $objLayout->jSource == 'j_fallback')
 			{
 				$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
-				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/jquery/' . JQUERY . '/jquery.min.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/jquery/' . JQUERY . '/jquery.min.js"></script>' . "\n";
 
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->jSource == 'j_fallback')
 				{
-					$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . '>window.jQuery || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/jQuery/core/' . JQUERY . '/jquery.min.js">\x3C/script>\')</script>' . "\n";
+					$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . '>window.jQuery || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/jQuery/core/' . JQUERY . '/jquery.min.js">\x3C/script>\')</script>' . "\n";
 				}
 			}
 			else
 			{
-				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="plugins/jQuery/core/' . JQUERY . '/jquery.min.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="plugins/jQuery/core/' . JQUERY . '/jquery.min.js"></script>' . "\n";
 			}
 		}
 
@@ -325,20 +323,20 @@ class PageRegular extends \Frontend
 			if ($objLayout->mooSource == 'moo_googleapis' || $objLayout->mooSource == 'moo_fallback')
 			{
 				$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
-				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS . '/mootools-yui-compressed.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS . '/mootools-yui-compressed.js"></script>' . "\n";
 
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->mooSource == 'moo_fallback')
 				{
-					$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . '>window.MooTools || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>' . "\n";
+					$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . '>window.MooTools || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>' . "\n";
 				}
 
-				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/core/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";
-				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/core/' . MOOTOOLS . '/mootools-mobile.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/core/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/core/' . MOOTOOLS . '/mootools-mobile.js"></script>' . "\n";
 			}
 			else
 			{
-				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="plugins/mootools/core/' . MOOTOOLS . '/mootools.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="plugins/mootools/core/' . MOOTOOLS . '/mootools.js"></script>' . "\n";
 			}
 		}
 
@@ -373,14 +371,15 @@ class PageRegular extends \Frontend
 		$strStyleSheets = '';
 		$strCcStyleSheets = '';
 		$arrStyleSheets = deserialize($objLayout->stylesheet);
-		$strTagEnding = ($objPage->outputFormat == 'xhtml') ? ' />' : '>';
+		$blnXhtml = ($objPage->outputFormat == 'xhtml');
+		$strTagEnding = $blnXhtml ? ' />' : '>';
 		$arrFramework = deserialize($objLayout->framework);
 
 		// Google web fonts
 		if ($objLayout->webfonts != '')
 		{
 			$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
-			$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') .' rel="stylesheet" href="' . $protocol . 'fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
+			$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') .' rel="stylesheet" href="' . $protocol . 'fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
 		}
 
 		$objCombiner = new \Combiner();
@@ -416,7 +415,7 @@ class PageRegular extends \Frontend
 				}
 				else
 				{
-					$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '" media="' . ($media ?: 'all') . '"' . $strTagEnding . "\n";
+					$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
 				}
 			}
 		}
@@ -445,7 +444,7 @@ class PageRegular extends \Frontend
 					}
 					else
 					{
-						$strStyleSheet = '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_SCRIPT_URL . 'css/' . $objStylesheets->name . '.css" media="' . $media . '"' . $strTagEnding;
+						$strStyleSheet = '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_SCRIPT_URL . 'css/' . $objStylesheets->name . '.css"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding;
 
 						if ($objStylesheets->cc)
 						{
@@ -497,7 +496,7 @@ class PageRegular extends \Frontend
 				}
 				else
 				{
-					$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '" media="' . ($media ?: 'all') . '"' . $strTagEnding . "\n";
+					$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
 				}
 			}
 		}
@@ -505,13 +504,13 @@ class PageRegular extends \Frontend
 		// Create the aggregated style sheet
 		if ($objCombiner->hasEntries())
 		{
-			$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '" media="all"' . $strTagEnding . "\n";
+			$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '"' . $strTagEnding . "\n";
 		}
 
 		// Add the debug style sheet
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
 		{
-			$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/debug.css') . '" media="all">' . "\n";
+			$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/debug.css') . '">' . "\n";
 		}
 
 		// Always add conditional style sheets at the end
@@ -557,7 +556,7 @@ class PageRegular extends \Frontend
 		{
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strHeadTags .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $this->addStaticUrlTo($javascript) . '"></script>' . "\n";
+				$strHeadTags .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $this->addStaticUrlTo($javascript) . '"></script>' . "\n";
 			}
 		}
 
@@ -584,9 +583,8 @@ class PageRegular extends \Frontend
 	/**
 	 * Create all footer scripts
 	 * @param object
-	 * @param object
 	 */
-	protected function createFooterScripts($objPage, $objLayout)
+	protected function createFooterScripts($objLayout)
 	{
 		$strScripts = '';
 

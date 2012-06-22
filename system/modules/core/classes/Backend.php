@@ -35,11 +35,7 @@ abstract class Backend extends \Controller
 	{
 		parent::__construct();
 		$this->import('Database');
-
-		// Static URLs
-		$this->setStaticUrl('TL_FILES_URL', $GLOBALS['TL_CONFIG']['staticFiles']);
-		$this->setStaticUrl('TL_SCRIPT_URL', $GLOBALS['TL_CONFIG']['staticSystem']);
-		$this->setStaticUrl('TL_PLUGINS_URL', $GLOBALS['TL_CONFIG']['staticPlugins']);
+		$this->setStaticUrls();
 	}
 
 

@@ -3163,30 +3163,41 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Set a static URL constant
+	 * Set the static URL constants
 	 * 
-	 * @param string $name The constant name
-	 * @param string $url  The static URL
+	 * @param object $objPage An optional page object
 	 */
-	public static function setStaticUrl($name, $url)
+	public static function setStaticUrls($objPage=null)
 	{
-		if (defined($name))
+		if (defined('TL_FILES_URL'))
 		{
 			return;
 		}
 
-		if ($url == '' || $GLOBALS['TL_CONFIG']['debugMode'])
-		{
-			define($name, '');
-		}
-		else
-		{
-			if (\Environment::get('ssl'))
-			{
-				$url = str_replace('http://', 'https://', $url);
-			}
+		$arrConstants = array
+		(
+			'staticFiles'   => 'TL_FILES_URL',
+			'staticPlugins' => 'TL_PLUGINS_URL',
+			'staticSystem'  => 'TL_SCRIPT_URL'
+		);
 
-			define($name, $url . TL_PATH . '/');
+		foreach ($arrConstants as $strKey=>$strConstant)
+		{
+			$url = ($objPage !== null) ? $objPage->$strKey : $GLOBALS['TL_CONFIG'][$strKey];
+
+			if ($url == '' || $GLOBALS['TL_CONFIG']['debugMode'])
+			{
+				define($strConstant, '');
+			}
+			else
+			{
+				if (\Environment::get('ssl'))
+				{
+					$url = str_replace('http://', 'https://', $url);
+				}
+
+				define($strConstant, $url . TL_PATH . '/');
+			}
 		}
 	}
 

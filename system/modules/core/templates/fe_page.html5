@@ -7,6 +7,7 @@
 <meta name="robots" content="<?php echo $this->robots; ?>">
 <meta name="description" content="<?php echo $this->description; ?>">
 <meta name="keywords" content="<?php echo $this->keywords; ?>">
+<?php echo $this->viewport; ?>
 <?php echo $this->framework; ?>
 <?php echo $this->stylesheets; ?>
 <?php echo $this->mooScripts; ?>
