@@ -14,23 +14,21 @@
 /**
  * Back end modules
  */
-$GLOBALS['BE_MOD']['devtools'] = array
+$GLOBALS['BE_MOD']['devtools'][extension] = array
 (
-	'extension' => array
-	(
 		'tables'     => array('tl_extension'),
 		'create'     => array('ModuleExtension', 'generate'),
 		'icon'       => 'system/modules/devtools/html/extension.gif'
-	),
-	'labels' => array
-	(
+);
+$GLOBALS['BE_MOD']['devtools'][labels] = array
+(
 		'callback'   => 'ModuleLabels',
 		'icon'       => 'system/modules/devtools/html/labels.gif',
 		'stylesheet' => 'system/modules/devtools/html/labels.css'
-	),
-	'autoload' => array
-	(
-		'callback'   => 'ModuleAutoload',
-		'icon'       => 'system/modules/devtools/html/autoload.gif'
-	)
 );
+$GLOBALS['BE_MOD']['devtools'][autoload] = array
+(
+	'callback'   => 'ModuleAutoload',
+	'icon'       => 'system/modules/devtools/html/autoload.gif'
+);
+
