@@ -54,11 +54,6 @@ class Encryption
 	 */
 	public static function encrypt($varValue, $strKey=null)
 	{
-		if (static::$resTd === null)
-		{
-			static::initialize();
-		}
-
 		// Recursively encrypt arrays
 		if (is_array($varValue))
 		{
@@ -69,10 +64,15 @@ class Encryption
 
 			return $varValue;
 		}
-
-		if ($varValue == '')
+		elseif ($varValue == '')
 		{
 			return '';
+		}
+
+		// Initialize the module
+		if (static::$resTd === null)
+		{
+			static::initialize();
 		}
 
 		if (!$strKey)
@@ -110,10 +110,15 @@ class Encryption
 
 			return $varValue;
 		}
-
-		if ($varValue == '')
+		elseif ($varValue == '')
 		{
 			return '';
+		}
+
+		// Initialize the module
+		if (static::$resTd === null)
+		{
+			static::initialize();
 		}
 
 		$varValue = base64_decode($varValue);
@@ -155,6 +160,19 @@ class Encryption
 		{
 			throw new \Exception('Encryption key not set');
 		}
+	}
+
+
+	/**
+	 * Generate a SHA-512 password hash
+	 * 
+	 * @param string $strPassword The unencrypted password
+	 * 
+	 * @return string The encrypted password
+	 */
+	protected static function sha512($strPassword)
+	{
+		return crypt($strPassword, '$6$' . md5(uniqid(mt_rand(), true)));
 	}
 
 
