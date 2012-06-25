@@ -89,7 +89,7 @@ class ChangePassword extends Backend
 				{
 					$objUser = UserModel::findByPk($this->User->id);
 					$objUser->pwChange = '';
-					$objUser->password = crypt($pw, '$6$' . md5(uniqid(mt_rand(), true)));
+					$objUser->password = sha512($pw);
 					$objUser->save();
 
 					Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);

@@ -428,6 +428,17 @@ function dump()
 
 
 /**
+ * Encrypt a string using crypt() with the SHA-512 algorithm
+ * @param string
+ * @return string
+ */
+function sha512($str)
+{
+	return crypt($str, '$6$' . md5(uniqid(mt_rand(), true)));
+}
+
+
+/**
  * Compare two file names using a case insensitive "natural order" algorithm
  * @param string
  * @param string

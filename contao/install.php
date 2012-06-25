@@ -369,7 +369,7 @@ class InstallTool extends Backend
 			if ($blnAuthenticated)
 			{
 				// Store a SHA-512 encrpyted version of the password
-				$strPassword = crypt(Input::post('password', true), '$6$' . md5(uniqid(mt_rand(), true)));
+				$strPassword = sha512(Input::post('password', true));
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword);
 
 				$this->setAuthCookie();
@@ -406,7 +406,7 @@ class InstallTool extends Backend
 		// Save the password
 		else
 		{
-			$strPassword = crypt($strPassword, '$6$' . md5(uniqid(mt_rand(), true)));
+			$strPassword = sha512($strPassword);
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword);
 			$this->reload();
 		}
@@ -644,7 +644,7 @@ class InstallTool extends Backend
 				elseif (Input::post('name') != '' && Input::post('email', true) != '' && Input::post('username', true) != '')
 				{
 					$time = time();
-					$strPassword = crypt(Input::post('pass', true), '$6$' . md5(uniqid(mt_rand(), true)));
+					$strPassword = sha512(Input::post('pass', true));
 
 					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
 								   ->execute(Input::post('name'), Input::post('email', true), Input::post('username', true), $strPassword);

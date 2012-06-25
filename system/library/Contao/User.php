@@ -327,7 +327,7 @@ abstract class User extends \System
 			// Store a SHA-512 encrpyted version of the password
 			if ($blnAuthenticated)
 			{
-				$this->password = crypt(\Input::post('password', true), '$6$' . md5(uniqid(mt_rand(), true)));
+				$this->password = sha512(\Input::post('password', true));
 			}
 		}
 
