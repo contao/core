@@ -119,7 +119,7 @@ class InstallTool extends Backend
 		}
 
 		// Auto-login on fresh installations
-		if ($GLOBALS['TL_CONFIG']['installPassword'] == '4d19f112e30930cbe278de966e9b2d907568d1c8')
+		if ($GLOBALS['TL_CONFIG']['installPassword'] == '')
 		{
 			$this->setAuthCookie();
 		}
@@ -141,10 +141,8 @@ class InstallTool extends Backend
 			$this->storeInstallToolPassword();
 		}
 
-		list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
-
-		// The password must not be "contao" or "typolight"
-		if ($strPassword == sha1($strSalt . 'contao') || $strPassword == sha1($strSalt . 'typolight'))
+		// Require a password
+		if ($GLOBALS['TL_CONFIG']['installPassword'] == '')
 		{
 			$this->Template->setPassword = true;
 			$this->outputAndExit();
@@ -353,25 +351,34 @@ class InstallTool extends Backend
 		$_SESSION['TL_INSTALL_AUTH'] = '';
 		$_SESSION['TL_INSTALL_EXPIRE'] = 0;
 
-		list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
-
-		// Password is correct but not yet salted
-		if ($strSalt == '' && $strPassword == sha1(Input::post('password', true)))
+		// The password is up to date (SHA-512)
+		if (strncmp($GLOBALS['TL_CONFIG']['installPassword'], '$6$', 3) === 0)
 		{
-			$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
-			$strPassword = sha1($strSalt . Input::post('password', true));
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword . ':' . $strSalt);
+			if (crypt(Input::post('password', true), $GLOBALS['TL_CONFIG']['installPassword']) == $GLOBALS['TL_CONFIG']['installPassword'])
+			{
+				$this->setAuthCookie();
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
+				$this->reload();
+			}
+		}
+		else
+		{
+			list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
+			$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1(Input::post('password', true))) : ($strPassword == sha1($strSalt . Input::post('password', true)));
+
+			if ($blnAuthenticated)
+			{
+				// Store a SHA-512 encrpyted version of the password
+				$strPassword = Encryption::sha512(Input::post('password', true));
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword);
+
+				$this->setAuthCookie();
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
+				$this->reload();
+			}
 		}
 
-		// Set the cookie
-		if ($strSalt != '' && $strPassword == sha1($strSalt . Input::post('password', true)))
-		{
-			$this->setAuthCookie();
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
-			$this->reload();
-		}
-
-		// Increase the login count
+		// Increase the login count if we get here
 		$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", $GLOBALS['TL_CONFIG']['installCount'] + 1);
 		$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['invalidPass'];
 	}
@@ -399,10 +406,8 @@ class InstallTool extends Backend
 		// Save the password
 		else
 		{
-			$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
-			$strPassword = sha1($strSalt . $strPassword);
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword . ':' . $strSalt);
-
+			$strPassword = Encryption::sha512($strPassword);
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword);
 			$this->reload();
 		}
 	}
@@ -638,12 +643,11 @@ class InstallTool extends Backend
 				// Save the data
 				elseif (Input::post('name') != '' && Input::post('email', true) != '' && Input::post('username', true) != '')
 				{
-					$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
-					$strPassword = sha1($strSalt . Input::post('pass', true));
 					$time = time();
+					$strPassword = Encryption::sha512(Input::post('pass', true));
 
 					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
-						->execute(Input::post('name'), Input::post('email', true), Input::post('username', true), $strPassword . ':' . $strSalt);
+								   ->execute(Input::post('name'), Input::post('email', true), Input::post('username', true), $strPassword);
 
 					$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", Input::post('email', true));
 					$this->reload();

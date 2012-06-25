@@ -324,7 +324,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			(
 				array('tl_member', 'setNewPassword')
 			),
-			'sql'                     => "varchar(64) NOT NULL default ''"
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'assignDir' => array
 		(

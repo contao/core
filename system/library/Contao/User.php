@@ -314,25 +314,25 @@ abstract class User extends \System
 			return false;
 		}
 
-		$blnAuthenticated = false;
-		list($strPassword, $strSalt) = explode(':', $this->password);
-
-		// Password is correct but not yet salted
-		if (!strlen($strSalt) && $strPassword == sha1(\Input::post('password', true)))
+		// The password is up to date (SHA-512)
+		if (strncmp($this->password, '$6$', 3) === 0)
 		{
-			$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
-			$strPassword = sha1($strSalt . \Input::post('password', true));
-			$this->password = $strPassword . ':' . $strSalt;
+			$blnAuthenticated = (crypt(\Input::post('password', true), $this->password) == $this->password);
 		}
-
-		// Check the password against the database
-		if ($strSalt != '' && $strPassword == sha1($strSalt . \Input::post('password', true)))
+		else
 		{
-			$blnAuthenticated = true;
+			list($strPassword, $strSalt) = explode(':', $this->password);
+			$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1(\Input::post('password', true))) : ($strPassword == sha1($strSalt . \Input::post('password', true)));
+
+			// Store a SHA-512 encrpyted version of the password
+			if ($blnAuthenticated)
+			{
+				$this->password = \Encryption::sha512(\Input::post('password', true));
+			}
 		}
 
 		// HOOK: pass credentials to callback functions
-		elseif (isset($GLOBALS['TL_HOOKS']['checkCredentials']) && is_array($GLOBALS['TL_HOOKS']['checkCredentials']))
+		if (!$blnAuthenticated && isset($GLOBALS['TL_HOOKS']['checkCredentials']) && is_array($GLOBALS['TL_HOOKS']['checkCredentials']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['checkCredentials'] as $callback)
 			{
