@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+Load the core modules before the extension modules.
+
 ### New
 Added a separate field to enter the link title to the "hyperlink" and "download"
 elements (see #4068).

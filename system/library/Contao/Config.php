@@ -282,36 +282,29 @@ class Config
 			return (array) $this->arrCache['activeModules']; // (array) = PHP 5.1.2 fix
 		}
 
-		$arrActiveModules = array('core');
+		$arrActiveModules = array();
+		$arrCoreModules = array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository');
+		$arrExtensionModules = scan(TL_ROOT . '/system/modules');
 
-		// Load only core modules in safe mode
-		if ($GLOBALS['TL_CONFIG']['coreOnlyMode'])
+		// Load the core modules first
+		foreach ($arrCoreModules as $strModule)
 		{
-			$arrAllModules = array('core', 'calendar', 'comments', 'faq', 'listing', 'news', 'newsletter', 'repository');
+			if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
+			{
+				$arrActiveModules[] = $strModule;
+			}
 		}
-		else
+
+		// Then load the extension modules
+		if (!$GLOBALS['TL_CONFIG']['coreOnlyMode'])
 		{
-			$arrAllModules = scan(TL_ROOT . '/system/modules');
-		}
-
-		foreach ($arrAllModules as $strModule)
-		{
-			if (strncmp($strModule, '.', 1) === 0)
+			foreach ($arrExtensionModules as $strModule)
 			{
-				continue;
+				if (strncmp($strModule, '.', 1) !== 0 && !in_array($strModule, $arrCoreModules) && is_dir(TL_ROOT . '/system/modules/' . $strModule) && !file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
+				{
+					$arrActiveModules[] = $strModule;
+				}
 			}
-
-			if ($strModule == 'core' || !is_dir(TL_ROOT . '/system/modules/' . $strModule))
-			{
-				continue;
-			}
-
-			if (file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
-			{
-				continue;
-			}
-
-			$arrActiveModules[] = $strModule;
 		}
 
 		$this->arrCache['activeModules'] = $arrActiveModules;
