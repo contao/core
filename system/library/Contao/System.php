@@ -786,7 +786,7 @@ abstract class System
 			$strCode = substr($strCode, 5);
 		}
 
-		if (substr($strCode, -1, 2) == '?>')
+		if (substr($strCode, -2) == '?>')
 		{
 			$strCode = substr($strCode, 0, -2);
 		}
