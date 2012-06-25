@@ -1293,7 +1293,7 @@ var Backend =
 			for (var j=0; j<childs.length; j++) {
 				if (textarea = childs[j].getFirst('textarea')) {
 					textarea.set('tabindex', tabindex++);
-					textarea.name = textarea.name.replace(/\[[0-9]+\][[0-9]+\]/ig, '[' + (i-1) + '][' + j + ']')
+					textarea.name = textarea.name.replace(/\[[0-9]+\][[0-9]+\]/g, '[' + (i-1) + '][' + j + ']')
 				}
 			}
 		}
@@ -1385,7 +1385,7 @@ var Backend =
 			for (var j=0; j<childs.length; j++) {
 				if (select = childs[j].getFirst('select')) {
 					select.set('tabindex', tabindex++);
-					select.name = select.name.replace(/\[[0-9]+\]/ig, '[' + i + ']');
+					select.name = select.name.replace(/\[[0-9]+\]/g, '[' + i + ']');
 				}
 			}
 		}

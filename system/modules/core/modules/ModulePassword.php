@@ -280,7 +280,7 @@ class ModulePassword extends \Module
 		$objMember->save();
 
 		$strConfirmation = $this->reg_password;
-		preg_match_all('/##[^#]+##/i', $strConfirmation, $arrChunks);
+		preg_match_all('/##[^#]+##/', $strConfirmation, $arrChunks);
 
 		foreach ($arrChunks[0] as $strChunk)
 		{

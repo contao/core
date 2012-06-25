@@ -129,7 +129,7 @@ var TableSort = new Class(
 		// Skip emtpy cells and get value
 		while (val == '' && table.tBodies[0].rows[i])
 		{
-			val = table.tBodies[0].rows[i].cells[index].innerHTML.replace(/<[^>]+>/ig, '').clean();
+			val = table.tBodies[0].rows[i].cells[index].innerHTML.replace(/<[^>]+>/g, '').clean();
 			i++;
 		}
 
@@ -260,8 +260,8 @@ var TableSort = new Class(
 	 */
 	sortDate: function(a, b)
 	{
-		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/ig, '').clean();
-		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/ig, '').clean();
+		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean();
+		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean();
 
 		var aaChunks = aa.replace(/[\/\.-]/g, ' ').split(' ');
 		var bbChunks = bb.replace(/[\/\.-]/g, ' ').split(' ');
@@ -313,8 +313,8 @@ var TableSort = new Class(
 			bb = bb.replace(DECIMAL_SEPARATOR, '.');
 		}
 
-		aa = aa.replace(/<[^>]+>/i).replace(/[^0-9\.,-]/g, '').clean();
-		bb = bb.replace(/<[^>]+>/i).replace(/[^0-9\.,-]/g, '').clean();
+		aa = aa.replace(/<[^>]+>/).replace(/[^0-9\.,-]/g, '').clean();
+		bb = bb.replace(/<[^>]+>/).replace(/[^0-9\.,-]/g, '').clean();
 
 		aa = parseFloat(aa);
 
@@ -342,8 +342,8 @@ var TableSort = new Class(
 	 */
 	sortCaseInsensitive: function(a, b)
 	{
-		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/ig, '').clean().toLowerCase();
-		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/ig, '').clean().toLowerCase();
+		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean().toLowerCase();
+		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean().toLowerCase();
 
 		if (aa == bb)
 		{

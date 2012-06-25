@@ -398,8 +398,8 @@ class Config
 			return 'false';
 		}
 
-		$varValue = preg_replace('/[\n\r\t]+/i', ' ', str_replace("'", "\\'", $varValue));
-		$varValue = "'" . preg_replace('/ {2,}/i', ' ', $varValue) . "'";
+		$varValue = preg_replace('/[\n\r\t]+/', ' ', str_replace("'", "\\'", $varValue));
+		$varValue = "'" . preg_replace('/ {2,}/', ' ', $varValue) . "'";
 
 		return $varValue;
 	}

@@ -390,7 +390,7 @@ abstract class System
 
 		// Get the default referer
 		$return = preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', (($session['current'] != \Environment::get('requestUri')) ? $session['current'] : $session['last']));
-		$return = preg_replace('/^'.preg_quote(TL_PATH, '/').'\//i', '', $return);
+		$return = preg_replace('/^'.preg_quote(TL_PATH, '/').'\//', '', $return);
 
 		// Fallback to the generic referer in the front end
 		if ($return == '' && TL_MODE == 'FE')

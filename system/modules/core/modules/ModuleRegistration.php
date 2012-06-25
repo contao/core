@@ -337,7 +337,7 @@ class ModuleRegistration extends \Module
 			$arrChunks = array();
 
 			$strConfirmation = $this->reg_text;
-			preg_match_all('/##[^#]+##/i', $strConfirmation, $arrChunks);
+			preg_match_all('/##[^#]+##/', $strConfirmation, $arrChunks);
 
 			foreach ($arrChunks[0] as $strChunk)
 			{

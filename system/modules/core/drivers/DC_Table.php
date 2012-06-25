@@ -1676,13 +1676,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 				foreach ($boxes[$k] as $kk=>$vv)
 				{
-					if (preg_match('/^\[.*\]$/i', $vv))
+					if (preg_match('/^\[.*\]$/', $vv))
 					{
 						++$eCount;
 						continue;
 					}
 
-					if (preg_match('/^\{.*\}$/i', $vv))
+					if (preg_match('/^\{.*\}$/', $vv))
 					{
 						$legends[$k] = substr($vv, 1, -1);
 						unset($boxes[$k][$kk]);
@@ -1746,7 +1746,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						continue;
 					}
 
-					if (preg_match('/^\[.*\]$/i', $vv))
+					if (preg_match('/^\[.*\]$/', $vv))
 					{
 						$thisId = 'sub_' . substr($vv, 1, -1);
 						$blnAjax = ($ajaxId == $thisId && \Environment::get('isAjaxRequest')) ? true : false;
@@ -2114,7 +2114,7 @@ window.addEvent(\'domready\', function() {
 						continue;
 					}
 
-					if (preg_match('/^\[.*\]$/i', $v))
+					if (preg_match('/^\[.*\]$/', $v))
 					{
 						$thisId = 'sub_' . substr($v, 1, -1) . '_' . $id;
 						$blnAjax = ($ajaxId == $thisId && \Environment::get('isAjaxRequest')) ? true : false;
@@ -3381,7 +3381,7 @@ window.addEvent(\'domready\', function() {
 			$label = trim(\String::substrHtml($label, $GLOBALS['TL_DCA'][$table]['list']['label']['maxCharacters'])) . ' …';
 		}
 
-		$label = preg_replace('/\(\) ?|\[\] ?|\{\} ?|<> ?/i', '', $label);
+		$label = preg_replace('/\(\) ?|\[\] ?|\{\} ?|<> ?/', '', $label);
 
 		// Call the label_callback ($row, $label, $this)
 		if (is_array($GLOBALS['TL_DCA'][$table]['list']['label']['label_callback']))
@@ -3686,7 +3686,7 @@ window.addEvent(\'domready\', function() {
 			if (is_array($this->orderBy) && strlen($this->orderBy[0]))
 			{
 				$orderBy = $this->orderBy;
-				$firstOrderBy = preg_replace('/\s+.*$/i', '', $orderBy[0]);
+				$firstOrderBy = preg_replace('/\s+.*$/', '', $orderBy[0]);
 
 				// Order by the foreign key
 				if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['foreignKey']))
@@ -3699,7 +3699,7 @@ window.addEvent(\'domready\', function() {
 			elseif (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields']))
 			{
 				$orderBy = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields'];
-				$firstOrderBy = preg_replace('/\s+.*$/i', '', $orderBy[0]);
+				$firstOrderBy = preg_replace('/\s+.*$/', '', $orderBy[0]);
 			}
 
 			// Support empty ptable fields (backwards compatibility)
@@ -3928,7 +3928,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		$return = '';
 		$table = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 6) ? $this->ptable : $this->strTable;
 		$orderBy = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields'];
-		$firstOrderBy = preg_replace('/\s+.*$/i', '', $orderBy[0]);
+		$firstOrderBy = preg_replace('/\s+.*$/', '', $orderBy[0]);
 
 		if (is_array($this->orderBy) && $this->orderBy[0] != '')
 		{
@@ -4177,8 +4177,8 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				}
 
 				// Remove empty brackets (), [], {}, <> and empty tags from the label
-				$label = preg_replace('/\( *\) ?|\[ *\] ?|\{ *\} ?|< *> ?/i', '', $label);
-				$label = preg_replace('/<[^>]+>\s*<\/[^>]+>/i', '', $label);
+				$label = preg_replace('/\( *\) ?|\[ *\] ?|\{ *\} ?|< *> ?/', '', $label);
+				$label = preg_replace('/<[^>]+>\s*<\/[^>]+>/', '', $label);
 
 				// Build the sorting groups
 				if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] > 0)
@@ -4480,7 +4480,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		$this->bid = 'tl_buttons_a';
 		$session = $this->Session->getData();
 		$orderBy = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields'];
-		$firstOrderBy = preg_replace('/\s+.*$/i', '', $orderBy[0]);
+		$firstOrderBy = preg_replace('/\s+.*$/', '', $orderBy[0]);
 
 		// Add PID to order fields
 		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 3 && $this->Database->fieldExists('pid', $this->strTable))
@@ -4498,7 +4498,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		// Overwrite the "orderBy" value with the session value
 		elseif (strlen($session['sorting'][$this->strTable]))
 		{
-			$overwrite = preg_quote(preg_replace('/\s+.*$/i', '', $session['sorting'][$this->strTable]), '/');
+			$overwrite = preg_quote(preg_replace('/\s+.*$/', '', $session['sorting'][$this->strTable]), '/');
 			$orderBy = array_diff($orderBy, preg_grep('/^'.$overwrite.'/i', $orderBy));
 
 			array_unshift($orderBy, $session['sorting'][$this->strTable]);
@@ -4589,7 +4589,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			$blnIsMaxResultsPerPage = false;
 
 			// Overall limit
-			if ($total > $GLOBALS['TL_CONFIG']['maxResultsPerPage'] && ($this->limit === null || preg_replace('/^.*,/i', '', $this->limit) == $GLOBALS['TL_CONFIG']['maxResultsPerPage']))
+			if ($total > $GLOBALS['TL_CONFIG']['maxResultsPerPage'] && ($this->limit === null || preg_replace('/^.*,/', '', $this->limit) == $GLOBALS['TL_CONFIG']['maxResultsPerPage']))
 			{
 				if ($this->limit === null)
 				{
@@ -4610,7 +4610,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				$options_total = ceil($total / $GLOBALS['TL_CONFIG']['resultsPerPage']);
 
 				// Reset limit if other parameters have decreased the number of results
-				if ($this->limit !== null && ($this->limit == '' || preg_replace('/,.*$/i', '', $this->limit) > $total))
+				if ($this->limit !== null && ($this->limit == '' || preg_replace('/,.*$/', '', $this->limit) > $total))
 				{
 					$this->limit = '0,'.$GLOBALS['TL_CONFIG']['resultsPerPage'];
 				}

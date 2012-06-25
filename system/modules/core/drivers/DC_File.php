@@ -129,12 +129,12 @@ class DC_File extends \DataContainer implements \editable
 
 				foreach ($boxes[$k] as $kk=>$vv)
 				{
-					if (preg_match('/^\[.*\]$/i', $vv))
+					if (preg_match('/^\[.*\]$/', $vv))
 					{
 						continue;
 					}
 
-					if (preg_match('/^\{.*\}$/i', $vv))
+					if (preg_match('/^\{.*\}$/', $vv))
 					{
 						$legends[$k] = substr($vv, 1, -1);
 						unset($boxes[$k][$kk]);
@@ -198,7 +198,7 @@ class DC_File extends \DataContainer implements \editable
 						continue;
 					}
 
-					if (preg_match('/^\[.*\]$/i', $vv))
+					if (preg_match('/^\[.*\]$/', $vv))
 					{
 						$thisId = 'sub_' . substr($vv, 1, -1);
 						$blnAjax = ($ajaxId == $thisId && \Environment::get('isAjaxRequest')) ? true : false;

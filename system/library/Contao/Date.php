@@ -392,7 +392,7 @@ class Date extends \System
 				case 'G':
 					$$var .= substr($this->strDate, $intCount++, 1);
 
-					if (preg_match('/[0-9]+/i', substr($this->strDate, $intCount, 1)))
+					if (preg_match('/[0-9]+/', substr($this->strDate, $intCount, 1)))
 					{
 						$$var .= substr($this->strDate, $intCount++, 1);
 					}

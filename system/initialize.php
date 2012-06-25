@@ -108,8 +108,8 @@ error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']
  */
 if ($GLOBALS['TL_CONFIG']['websitePath'] === null)
 {
-	$path = preg_replace('/\/contao\/[^\/]*$/i', '', Environment::get('requestUri'));
-	$path = preg_replace('/\/$/i', '', $path);
+	$path = preg_replace('/\/contao\/[^\/]*$/', '', Environment::get('requestUri'));
+	$path = preg_replace('/\/$/', '', $path);
 
 	try
 	{

@@ -928,19 +928,19 @@ abstract class Widget extends \Controller
 			$varInput = preg_replace('/[^a-f0-9]+/i', '', $varInput);
 		}
 
-		if ($this->nospace && preg_match('/[\t ]+/i', $varInput))
+		if ($this->nospace && preg_match('/[\t ]+/', $varInput))
 		{
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['noSpace'], $this->strLabel));
 		}
 
 		if ($this->spaceToUnderscore)
 		{
-			$varInput = preg_replace('/\s+/i', '_', trim($varInput));
+			$varInput = preg_replace('/\s+/', '_', trim($varInput));
 		}
 
 		if (is_bool($this->trailingSlash) && $varInput != '')
 		{
-			$varInput = preg_replace('/\/+$/i', '', $varInput) . ($this->trailingSlash ? '/' : '');
+			$varInput = preg_replace('/\/+$/', '', $varInput) . ($this->trailingSlash ? '/' : '');
 		}
 
 		return $varInput;

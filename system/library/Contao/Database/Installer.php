@@ -276,7 +276,7 @@ class Database_Installer extends \Controller
 				$subpatterns = array();
 
 				// Unset comments and empty lines
-				if (preg_match('/^[#-]+/i', $v) || !strlen(trim($v)))
+				if (preg_match('/^[#-]+/', $v) || !strlen(trim($v)))
 				{
 					unset($data[$k]);
 					continue;
@@ -288,7 +288,7 @@ class Database_Installer extends \Controller
 					$table = $subpatterns[1];
 				}
 				// Get the table options
-				elseif ($table != '' && preg_match('/^\)([^;]+);/i', $v, $subpatterns))
+				elseif ($table != '' && preg_match('/^\)([^;]+);/', $v, $subpatterns))
 				{
 					$return[$table]['TABLE_OPTIONS'] = $subpatterns[1];
 					$table = '';
@@ -296,8 +296,8 @@ class Database_Installer extends \Controller
 				// Add the fields
 				elseif ($table != '')
 				{
-					preg_match('/^[^`]*`([^`]+)`/i', trim($v), $key_name);
-					$first = preg_replace('/\s[^\n\r]+/i', '', $key_name[0]);
+					preg_match('/^[^`]*`([^`]+)`/', trim($v), $key_name);
+					$first = preg_replace('/\s[^\n\r]+/', '', $key_name[0]);
 					$key = $key_name[1];
 
 					// Create definitions
@@ -308,11 +308,11 @@ class Database_Installer extends \Controller
 							$key = 'PRIMARY';
 						}
 
-						$return[$table]['TABLE_CREATE_DEFINITIONS'][$key] = preg_replace('/,$/i', '', trim($v));
+						$return[$table]['TABLE_CREATE_DEFINITIONS'][$key] = preg_replace('/,$/', '', trim($v));
 					}
 					else
 					{
-						$return[$table]['TABLE_FIELDS'][$key] = preg_replace('/,$/i', '', trim($v));
+						$return[$table]['TABLE_FIELDS'][$key] = preg_replace('/,$/', '', trim($v));
 					}
 				}
 			}
@@ -340,7 +340,7 @@ class Database_Installer extends \Controller
 	protected function getFromDB()
 	{
 		$this->import('Database');
-		$tables = preg_grep('/^tl_/i', $this->Database->listTables(null, true));
+		$tables = preg_grep('/^tl_/', $this->Database->listTables(null, true));
 
 		if (empty($tables))
 		{
