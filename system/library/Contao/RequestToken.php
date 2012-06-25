@@ -109,12 +109,14 @@ class RequestToken extends \System
 			return true;
 		}
 
-		// HOOK: add custom logic (see #3164)
-		if (isset($GLOBALS['TL_HOOKS']['validateToken']) && is_array($GLOBALS['TL_HOOKS']['validateToken']))
+		// Check against the whitelist (thanks to Tristan Lins) (see #3164)
+		if (!empty($GLOBALS['TL_CONFIG']['requestTokenWhitelist']))
 		{
-			foreach ($GLOBALS['TL_HOOKS']['validateToken'] as $callback)
+			$strHostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+
+			foreach ($GLOBALS['TL_CONFIG']['requestTokenWhitelist'] as $strDomain)
 			{
-				if (static::importStatic($callback[0])->$callback[1]($strToken, static::$strToken) === true)
+				if ($strDomain == $strHostname || preg_match('/\.' . preg_quote($strDomain, '/') . '$/', $strHostname))
 				{
 					return true;
 				}

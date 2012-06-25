@@ -5,8 +5,14 @@ Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
 ### New
-Added the "validateToken" hook which is triggered if a request token cannot be
-validated (see #3164).
+Added a "requestTokenWhitelist" array to the Contao configuration which can be
+used to exempt domains from the request token check (see #3164). Example:
+
+```
+$GLOBALS['TL_CONFIG']['requestTokenWhitelist'][] = 'facebook.com';
+```
+
+The code above can be added in the local configuration file.
 
 ### Changed
 Moved the meta viewport tag to its own PHP variable so it can be replaced with
