@@ -5,6 +5,9 @@ Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Contao now uses `crypt()` to generate stronger password hashes (see #3225).
+
+### Changed
 Load the core modules before the extension modules.
 
 ### New
