@@ -1863,7 +1863,7 @@ abstract class Controller extends \System
 							$arrCache[$strTag] = '<img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (($class != '') ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>');
 						}
 					}
-					catch (Exception $e)
+					catch (\Exception $e)
 					{
 						$arrCache[$strTag] = '';
 					}

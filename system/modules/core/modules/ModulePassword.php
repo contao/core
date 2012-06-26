@@ -301,7 +301,7 @@ class ModulePassword extends \Module
 					{
 						$strConfirmation = str_replace($strChunk, $objMember->$strKey, $strConfirmation);
 					}
-					catch (Exception $e)
+					catch (\Exception $e)
 					{
 						$strConfirmation = str_replace($strChunk, '', $strConfirmation);
 						$this->log('Invalid wildcard "' . $strKey . '" used in password request e-mail', 'ModulePassword sendPasswordLink()', TL_GENERAL, $e->getMessage());

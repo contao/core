@@ -156,7 +156,7 @@ class Ajax extends \Backend
 					$objFile->close();
 					$objFile->delete();
 				}
-				catch (Exception $e)
+				catch (\Exception $e)
 				{
 					if ($e->getCode() == 0)
 					{

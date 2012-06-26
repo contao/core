@@ -79,7 +79,7 @@ abstract class Backend extends \Controller
 				{
 					include TL_ROOT . '/' . $strFile;
 				}
-				catch (Exception $e) {}
+				catch (\Exception $e) {}
 
 				if (!$this->Files->delete($strFile))
 				{
