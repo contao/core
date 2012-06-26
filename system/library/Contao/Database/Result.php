@@ -254,7 +254,7 @@ abstract class Database_Result
 
 		foreach ($this->arrCache as $arrRow)
 		{
-			if (isset($arrRow['id']))
+			if ($strKey != 'id' && isset($arrRow['id']))
 			{
 				$arrReturn[$arrRow['id']] = $arrRow[$strKey];
 			}

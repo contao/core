@@ -349,7 +349,7 @@ class Model_Collection extends \System
 		{
 			$strPk = $this->getPk();
 
-			if (isset($this->$strPk))
+			if ($strKey == 'id' && isset($this->$strPk))
 			{
 				$return[$this->$strPk] = $this->$strKey;
 			}
