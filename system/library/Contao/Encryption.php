@@ -170,7 +170,7 @@ class Encryption
 	 * 
 	 * @return string The encrypted password
 	 */
-	protected static function sha512($strPassword)
+	public static function sha512($strPassword)
 	{
 		return crypt($strPassword, '$6$' . md5(uniqid(mt_rand(), true)));
 	}
