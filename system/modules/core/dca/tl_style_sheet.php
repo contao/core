@@ -180,6 +180,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		'media' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['media'],
+			'default'                 => array('all'),
 			'inputType'               => 'checkbox',
 			'exclude'                 => true,
 			'filter'                  => true,

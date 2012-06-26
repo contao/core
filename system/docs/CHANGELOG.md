@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### Fixed
+Use the correct path to font-face style sheets (see #4475).
+
 ### New
 Added a "requestTokenWhitelist" array to the Contao configuration which can be
 used to exempt domains from the request token check (see #3164). Example:
