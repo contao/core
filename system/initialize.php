@@ -180,35 +180,31 @@ if (file_exists(TL_ROOT . '/system/config/initconfig.php'))
 /**
  * Check the request token upon POST requests
  */
-if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !defined('BYPASS_TOKEN_CHECK'))
+if ($_POST && !RequestToken::validate(Input::post('REQUEST_TOKEN')))
 {
-	// Exit if the token cannot be validated
-	if (!RequestToken::validate(Input::post('REQUEST_TOKEN')))
+	// Force JavaScript redirect upon Ajax requests (IE requires absolute link)
+	if (Environment::get('isAjaxRequest'))
 	{
-		// Force JavaScript redirect upon Ajax requests (IE requires absolute link)
-		if (Environment::get('isAjaxRequest'))
+		echo '<script>location.replace("' . Environment::get('base') . 'contao/index.php")</script>';
+	}
+	else
+	{
+		// Send an error 400 header if it is not an Ajax request
+		header('HTTP/1.1 400 Bad Request');
+
+		if (file_exists(TL_ROOT . '/templates/be_referer.html5'))
 		{
-			echo '<script>location.replace("' . Environment::get('base') . 'contao/index.php")</script>';
+			include TL_ROOT . '/templates/be_referer.html5';
+		}
+		elseif (file_exists(TL_ROOT . '/system/modules/core/templates/be_referer.html5'))
+		{
+			include TL_ROOT . '/system/modules/core/templates/be_referer.html5';
 		}
 		else
 		{
-			// Send an error 400 header if it is not an Ajax request
-			header('HTTP/1.1 400 Bad Request');
-
-			if (file_exists(TL_ROOT . '/templates/be_referer.html5'))
-			{
-				include TL_ROOT . '/templates/be_referer.html5';
-			}
-			elseif (file_exists(TL_ROOT . '/system/modules/core/templates/be_referer.html5'))
-			{
-				include TL_ROOT . '/system/modules/core/templates/be_referer.html5';
-			}
-			else
-			{
-				echo 'Invalid request token. Please <a href="javascript:window.location.href=window.location.href">go back</a> and try again.';
-			}
+			echo 'Invalid request token. Please <a href="javascript:window.location.href=window.location.href">go back</a> and try again.';
 		}
-
-		exit;
 	}
+
+	exit;
 }
