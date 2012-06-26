@@ -146,6 +146,13 @@ FileETag None
 # Add a Vary Accept-Encoding header for the compressed resources. If you
 # modify the file types above, make sure to change them here accordingly.
 # @see http://developer.yahoo.com/performance/rules.html#gzip
+#
+# Note: If you are using a case-sensitive file system like HFS+ or ext4, you
+# have to change the <FilesMatch> directive as follows:
+#
+# <FilesMatch "\.(?i:js|css|xml|gz)$">
+#
+# For more information see: https://github.com/contao/core/issues/4364
 ##
 <IfModule mod_headers.c>
   <FilesMatch "\.(js|css|xml|gz)$">
@@ -196,6 +203,13 @@ FileETag None
   ##
   # Do not rewrite requests for static files or folders such as style sheets,
   # images, movies or text documents. Do not add the URL suffix here!
+  #
+  # Note: If you are using a case-sensitive file system like HFS+ or ext4, you
+  # have to change the <FilesMatch> directive as follows:
+  #
+  # <FilesMatch "\.(?i:htm|php|js|css| … |gz)$">
+  #
+  # For more information see: https://github.com/contao/core/issues/4364
   ##
   <FilesMatch "\.(htm|php|js|css|htc|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|eot|woff|svg|ttf|pdf|gz)$">
     RewriteEngine Off
