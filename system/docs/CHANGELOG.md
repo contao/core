@@ -19,6 +19,9 @@ Make the return value of `Database_Result::fetchEach()` an associative array
 with the ID as key and the requested field as value.
 
 ### Changed
+Contao now uses `crypt()` to generate stronger password hashes (see #3225).
+
+### Changed
 Load the core modules before the extension modules.
 
 ### New
