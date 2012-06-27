@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added a button to the safe mode notice, which allows administrators to disable
+the safe mode without having to open the back end settings.
+
 ### Fixed
 Use the correct path to font-face style sheets (see #4475).
 

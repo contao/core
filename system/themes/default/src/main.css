@@ -50,6 +50,11 @@ body.popup {
 	padding:8px 12px 10px;
 	border-top:1px solid #ccc;
 }
+#safe_mode a {
+	float:right;
+	margin:1px 3px 0 24px;
+	color:#666966;
+}
 
 /* Container */
 #container {

@@ -76,6 +76,13 @@ class Main extends Backend
 			$this->redirectToFrontendPage(Input::get('page'), Input::get('article'));
 		}
 
+		// Safe mode off
+		if (Input::get('smo') && $this->User->isAdmin)
+		{
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", false);
+			$this->redirect($this->getReferer());
+		}
+
 		$this->loadLanguageFile('default');
 		$this->loadLanguageFile('modules');
 	}
@@ -267,6 +274,9 @@ class Main extends Backend
 		$this->Template->coreOnlyMode = $GLOBALS['TL_LANG']['MSC']['coreOnlyMode'];
 		$this->Template->isCoreOnlyMode = $GLOBALS['TL_CONFIG']['coreOnlyMode'];
 		$this->Template->loadFonts = $GLOBALS['TL_CONFIG']['loadGoogleFonts'];
+		$this->Template->isAdmin = $this->User->isAdmin;
+		$this->Template->coreOnlyOff = specialchars($GLOBALS['TL_LANG']['MSC']['coreOnlyOff']);
+		$this->Template->coreOnlyHref = $this->addToUrl('smo=1');
 
 		// Front end preview links
 		if (CURRENT_ID != '')

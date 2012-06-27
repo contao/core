@@ -53,7 +53,7 @@
 </div>
 <?php if ($this->isCoreOnlyMode): ?>
 
-<p id="safe_mode" class="tl_error"><?php echo $this->coreOnlyMode; ?></p>
+<p id="safe_mode" class="tl_error"><?php if ($this->isAdmin): ?><a href="<?php echo $this->coreOnlyHref; ?>" class="tl_submit"><?php echo $this->coreOnlyOff; ?></a><?php endif; ?><?php echo $this->coreOnlyMode; ?></p>
 <?php endif; ?>
 
 </div>
