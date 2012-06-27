@@ -1252,7 +1252,7 @@ window.addEvent('domready', function() {
 <?php endif; ?>
 <?php endif; ?>
 
-<p id="go_to_login"><a href="contao/index.php" title="<?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?>"><?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?></a></p>
+<p id="go_to_login"><a href="contao/" title="<?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?>"><?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?></a></p>
 
 </div>
 </div>

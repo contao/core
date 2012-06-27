@@ -185,7 +185,7 @@ if ($_POST && !RequestToken::validate(Input::post('REQUEST_TOKEN')))
 	// Force JavaScript redirect upon Ajax requests (IE requires absolute link)
 	if (Environment::get('isAjaxRequest'))
 	{
-		echo '<script>location.replace("' . Environment::get('base') . 'contao/index.php")</script>';
+		echo '<script>location.replace("' . Environment::get('base') . 'contao/")</script>';
 	}
 	else
 	{
