@@ -3254,7 +3254,7 @@ abstract class Controller extends System
 	 */
 	protected function optionSelected($strName, $varValue)
 	{
-		if ($strName == '')
+		if ($strName === '')
 		{
 			return '';
 		}
