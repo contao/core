@@ -137,21 +137,13 @@ class BackendUser extends \User
 
 	/**
 	 * Redirect to contao/index.php if authentication fails
-	 * @param boolean
-	 * @return boolean
 	 */
-	public function authenticate($blnNoRedirect=false)
+	public function authenticate()
 	{
 		// Do not redirect if authentication is successful
 		if (parent::authenticate() || \Environment::get('script') == 'contao/index.php')
 		{
-			return true;
-		}
-
-		// Do not redirect
-		if ($blnNoRedirect)
-		{
-			return false;
+			return;
 		}
 
 		$strRedirect = 'contao/';
@@ -170,7 +162,6 @@ class BackendUser extends \User
 		}
 
 		$this->redirect($strRedirect);
-		return false;
 	}
 
 
