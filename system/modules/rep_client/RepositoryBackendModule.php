@@ -119,16 +119,21 @@ class RepositoryBackendModule extends BackendModule
 		$wsdl = trim($GLOBALS['TL_CONFIG']['repository_wsdl']);
 		if ($wsdl != '') {
 			if (!REPOSITORY_SOAPCACHE) ini_set('soap.wsdl_cache_enabled', 0);
-			// Backwards compatibility
-			if (!defined('ZLIB_ENCODING_GZIP')) {
-				define('ZLIB_ENCODING_GZIP', SOAP_COMPRESSION_GZIP);
+			// workaround for PHP 5.4.0-5.4.3
+			if (version_compare(PHP_VERSION, '5.4.0', '>=') && version_compare(PHP_VERSION, '5.4.4', '<'))
+			{
+				// buggy gzencode call in function "int make_http_soap_request(...) {...}" in ext/soap/php_http.c
+				define('COMPRESSION_KIND', SOAP_COMPRESSION_DEFLATE);
+			} else {
+				// use gzip as previously done
+				define('COMPRESSION_KIND', SOAP_COMPRESSION_GZIP);
 			}
 			// HOOK: proxy module
 			if ($GLOBALS['TL_CONFIG']['useProxy']) {
 				$proxy_uri = parse_url($GLOBALS['TL_CONFIG']['proxy_url']);
 				$this->client = new SoapClient($wsdl, array(
 					'soap_version' => SOAP_1_2,
-					'compression' => SOAP_COMPRESSION_ACCEPT | ZLIB_ENCODING_GZIP | 1,
+					'compression' => SOAP_COMPRESSION_ACCEPT | COMPRESSION_KIND | 1,
 					'proxy_host' => $proxy_uri['host'],
 					'proxy_port' => $proxy_uri['port'],
 					'proxy_login' => $proxy_uri['user'],
@@ -139,7 +144,7 @@ class RepositoryBackendModule extends BackendModule
 			else {
 				$this->client = new SoapClient($wsdl, array(
 					'soap_version' => SOAP_1_2,
-					'compression' => SOAP_COMPRESSION_ACCEPT | ZLIB_ENCODING_GZIP | 1
+					'compression' => SOAP_COMPRESSION_ACCEPT | COMPRESSION_KIND | 1,
 				));
 			}
 			$this->mode = 'soap';
