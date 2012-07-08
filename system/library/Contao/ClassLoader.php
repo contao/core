@@ -42,6 +42,12 @@ class ClassLoader
 	);
 
 	/**
+	 * Namespace mapping
+	 * @var array
+	 */
+	protected static $namespaceMapping = array();
+
+	/**
 	 * Known classes
 	 * @var array
 	 */
@@ -144,6 +150,53 @@ class ClassLoader
 
 
 	/**
+	 * Add a namespace mapping
+	 *
+	 * @param string $name The origin namespace name
+	 * @param string $target The target namespace name
+	 */
+	public static function addNamespaceMapping($name, $target)
+	{
+		// prepend mapping to allow overwrite
+		if (isset(self::$namespaceMapping[$name]))
+		{
+			array_unshift(self::$namespaceMapping[$name], $target);
+		}
+
+		// or add new mapping
+		else
+		{
+			self::$namespaceMapping[$name] = array($target);
+		}
+	}
+
+
+	/**
+	 * Add a namespace mapping
+	 *
+	 * @param array $mappings An mapping array with origin namespace as key and target namespace as value.
+	 */
+	public static function addNamespaceMappings($mappings)
+	{
+		foreach ($mappings as $name => $target)
+		{
+			self::addNamespaceMapping($name, $target);
+		}
+	}
+
+
+	/**
+	 * Return the namespace mapping as array
+	 *
+	 * @return array An array of all namespace mappings
+	 */
+	public static function getNamespaceMappings()
+	{
+		return self::$namespaceMapping;
+	}
+
+
+	/**
 	 * Add a new class with its file path
 	 * 
 	 * @param string $class The class name
@@ -193,6 +246,33 @@ class ClassLoader
 		if (class_exists($class, false) || interface_exists($class, false))
 		{
 			return;
+		}
+
+		if (preg_match('#\\\\(_\w+_)\\\\#', $class, $match))
+		{
+			trigger_error('You should not use your vendor namespace, please remove "' . $match[1] . '" when using your class!', E_USER_WARNING);
+		}
+
+		foreach (self::$namespaceMapping as $namespace => $mappings)
+		{
+			if (preg_match('#^' . preg_quote($namespace) . '\\\\#', $class) &&
+				!preg_match('#^' . preg_quote($namespace) . '\\\\_\w+_\\\\#', $class)) {
+				foreach ($mappings as $mapping)
+				{
+					$target = str_replace($namespace, $mapping, $class);
+					if (isset(self::$classes[$target]))
+					{
+						if ($GLOBALS['TL_CONFIG']['debugMode'])
+						{
+							$GLOBALS['TL_DEBUG']['classes_set'][] = $class;
+						}
+
+						include TL_ROOT . '/' . self::$classes[$target];
+						class_alias($target, $class);
+						return;
+					}
+				}
+			}
 		}
 
 		// The class file is set in the mapper
