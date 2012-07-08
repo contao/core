@@ -439,11 +439,24 @@ EOT
 		$this->Template->ide_compat = $GLOBALS['TL_LANG']['tl_merge']['ide_compat'];
 	}
 
+
+	/**
+	 * Search a directory for PSR-0 compliant classes.
+	 *
+	 * @param string $strModule
+	 * @param string $strFolder
+	 * @param string $strNamespace
+	 * @param int $intClassWidth
+	 * @param array $arrClassLoader
+	 * @param array $arrNamespaceMaps
+	 * @param array $arrCompat
+	 */
 	protected function scanPSR0($strModule, $strFolder, $strNamespace, &$intClassWidth, &$arrClassLoader, &$arrNamespaceMaps, &$arrCompat)
 	{
 		$arrFiles = scan(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFolder);
+
 		$arrFiles = array_map(function($val) use ($strFolder, $strNamespace, &$arrNamespaceMaps) {
-			// Register vendor and custom namespace mappings
+			// Register vendor namespace mappings
 			if (preg_match('#^_\w+_#', $val)) {
 				$arrNamespaceMaps[$strNamespace] = $strNamespace . '\\' . $val;
 			}
@@ -463,6 +476,7 @@ EOT
 				continue;
 			}
 
+			// Show an error, if no vendor part is found in the namespace
 			if (!preg_match('#\\\\_\w+_\\\\#', $strNamespace))
 			{
 				\Message::addError(sprintf('Your namespace %s should contain any vendor part, e.a. \\_vendor_\\ (with a leading and trailing underscore).', $strNamespace));

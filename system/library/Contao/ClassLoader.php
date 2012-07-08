@@ -248,11 +248,13 @@ class ClassLoader
 			return;
 		}
 
+		// trigger a warning, if the class contain a vendor part
 		if (preg_match('#\\\\(_\w+_)\\\\#', $class, $match))
 		{
 			trigger_error('You should not use your vendor namespace, please remove "' . $match[1] . '" when using your class!', E_USER_WARNING);
 		}
 
+		// Search for namespace mappings
 		foreach (self::$namespaceMapping as $namespace => $mappings)
 		{
 			if (preg_match('#^' . preg_quote($namespace) . '\\\\#', $class) &&
@@ -260,15 +262,20 @@ class ClassLoader
 				foreach ($mappings as $mapping)
 				{
 					$target = str_replace($namespace, $mapping, $class);
+
+					// The class file is set in the mapper
 					if (isset(self::$classes[$target]))
 					{
 						if ($GLOBALS['TL_CONFIG']['debugMode'])
 						{
-							$GLOBALS['TL_DEBUG']['classes_set'][] = $class;
+							$GLOBALS['TL_DEBUG']['classes_aliased'][] = $class . ' <span style="color:#999">(' . $target . ')</span>';
 						}
 
 						include TL_ROOT . '/' . self::$classes[$target];
+
+						// Create an alias for the mapped namespaced class
 						class_alias($target, $class);
+
 						return;
 					}
 				}
