@@ -257,8 +257,7 @@ class ClassLoader
 		// Search for namespace mappings
 		foreach (self::$namespaceMapping as $namespace => $mappings)
 		{
-			if (preg_match('#^' . preg_quote($namespace) . '\\\\#', $class) &&
-				!preg_match('#^' . preg_quote($namespace) . '\\\\_\w+_\\\\#', $class)) {
+			if (preg_match('#^' . preg_quote($namespace) . '\\\\#', $class)) {
 				foreach ($mappings as $mapping)
 				{
 					$target = str_replace($namespace, $mapping, $class);
