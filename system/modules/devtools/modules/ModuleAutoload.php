@@ -79,7 +79,9 @@ class ModuleAutoload extends \BackendModule
 					$intClassWidth = 0;
 					$arrClassLoader = array();
 					$arrNamespaces = array();
+					$arrNamespaceMaps = array();
 
+					$arrClassFolders = array();
 					$arrFiles = scan(TL_ROOT . '/system/modules/' . $strModule);
 
 					// Support subfolders
@@ -92,8 +94,19 @@ class ModuleAutoload extends \BackendModule
 								$files = scan(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFolder);
 								$files = array_map(function($val) use ($strFolder) { return $strFolder . '/' . $val; }, $files);
 								$arrFiles = array_merge($arrFiles, $files);
+
+								$files = array_filter($files, function($val) use ($strModule) {
+									return is_dir(TL_ROOT . '/system/modules/' . $strModule . '/' . $val);
+								});
+								$arrClassFolders = array_merge($arrClassFolders, $files);
 							}
 						}
+					}
+
+					// Scan with PSR-0 for classes
+					foreach ($arrClassFolders as $strClassFolder)
+					{
+						$this->scanPSR0($strModule, $strClassFolder, basename($strClassFolder), $intClassWidth, $arrClassLoader, $arrNamespaceMaps, $arrCompat);
 					}
 
 					// Scan for classes
@@ -119,14 +132,13 @@ class ModuleAutoload extends \BackendModule
 
 							if ($strNamespace != 'Contao')
 							{
-								$arrNamespaces[] = $strNamespace;
-							}
-							else
-							{
-								$arrCompat[$strModule][] = basename($strFile, '.php');
+								$arrNamespaces[$strNamespace] = $strNamespace;
 							}
 
 							$strNamespace .=  '\\';
+
+							$strClass = basename($strFile, '.php');
+							$arrCompat[$strModule][$strClass] = $strNamespace . $strClass;
 						}
 
 						$strKey = $strNamespace . basename($strFile, '.php');
@@ -199,6 +211,31 @@ EOT
 						foreach ($arrNamespaces as $strNamespace)
 						{
 							$objFile->append("\t'" . $strNamespace . "',");
+						}
+
+						$objFile->append('));');
+					}
+
+					// Namespace mapping
+					$arrNamespaceMaps = array_unique($arrNamespaceMaps);
+
+					if (!empty($arrNamespaceMaps))
+					{
+						$objFile->append(
+<<<EOT
+
+
+/**
+ * Register the namespaces
+ */
+ClassLoader::addNamespaceMappings(array
+(
+EOT
+						);
+
+						foreach ($arrNamespaceMaps as $strOriginNamespace => $strTargetNamespace)
+						{
+							$objFile->append("\t'" . $strOriginNamespace . "' => '" . $strTargetNamespace . "',");
 						}
 
 						$objFile->append('));');
@@ -310,7 +347,8 @@ EOT
 
 					if (is_file(TL_ROOT . '/system/library/Contao/' . $strFile))
 					{
-						$arrLibrary[] = basename($strFile, '.php');
+						$strClass = basename($strFile, '.php');
+						$arrLibrary[$strClass] = 'Contao\\' . $strClass;
 					}
 					elseif ($strFile != 'Database')
 					{
@@ -318,7 +356,8 @@ EOT
 						{
 							if (is_file(TL_ROOT . '/system/library/Contao/' . $strFile . '/' . $strSubfile))
 							{
-								$arrLibrary[] = basename($strFile, '.php') . '_' . basename($strSubfile, '.php');
+								$strClass = basename($strFile, '.php') . '_' . basename($strSubfile, '.php');
+								$arrLibrary[$strClass] = 'Contao\\' . $strClass;
 							}
 						}
 					}
@@ -334,7 +373,8 @@ EOT
 
 					if (is_file(TL_ROOT . '/system/library/Contao/Database/' . $strFile))
 					{
-						$arrLibrary[] = 'Database_' . basename($strFile, '.php');
+						$strClass = 'Database_' . basename($strFile, '.php');
+						$arrLibrary[$strClass] = 'Contao\\' . $strClass;
 					}
 					else
 					{
@@ -342,7 +382,8 @@ EOT
 						{
 							if (is_file(TL_ROOT . '/system/library/Contao/Database/' . $strFile . '/' . $strSubfile))
 							{
-								$arrLibrary[] = 'Database_' . basename($strFile, '.php') . '_' . basename($strSubfile, '.php');
+								$strClass = 'Database_' . basename($strFile, '.php') . '_' . basename($strSubfile, '.php');
+								$arrLibrary[$strClass] = 'Contao\\' . $strClass;
 							}
 						}
 					}
@@ -356,9 +397,9 @@ EOT
 				{
 					$objFile->append("\n// " . ($strModule ?: 'library'));
 
-					foreach ($arrClasses as $strClass)
+					foreach ($arrClasses as $strClass => $strBase)
 					{
-						$objFile->append((in_array($strClass, $arrIsAbstract) ? 'abstract ' : '') . "class $strClass extends Contao\\$strClass {}");
+						$objFile->append((in_array($strClass, $arrIsAbstract) ? 'abstract ' : '') . "class $strClass extends $strBase {}");
 					}
 				}
 
@@ -396,5 +437,42 @@ EOT
 		$this->Template->submitButton = specialchars($GLOBALS['TL_LANG']['MSC']['continue']);
 		$this->Template->options = $GLOBALS['TL_LANG']['tl_merge']['options'];
 		$this->Template->ide_compat = $GLOBALS['TL_LANG']['tl_merge']['ide_compat'];
+	}
+
+	protected function scanPSR0($strModule, $strFolder, $strNamespace, &$intClassWidth, &$arrClassLoader, &$arrNamespaceMaps, &$arrCompat)
+	{
+		$arrFiles = scan(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFolder);
+		$arrFiles = array_map(function($val) use ($strFolder, $strNamespace, &$arrNamespaceMaps) {
+			// Register vendor and custom namespace mappings
+			if (preg_match('#^_\w+_#', $val)) {
+				$arrNamespaceMaps[$strNamespace] = $strNamespace . '\\' . $val;
+			}
+
+			return $strFolder . '/' . $val;
+		}, $arrFiles);
+
+		// Scan for classes
+		foreach ($arrFiles as $strFile)
+		{
+			if (strrchr($strFile, '.') != '.php')
+			{
+				if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile)) {
+					$this->scanPSR0($strModule, $strFile, $strNamespace . '\\' . basename($strFile), $intClassWidth, $arrClassLoader, $arrNamespaceMaps, $arrCompat);
+				}
+
+				continue;
+			}
+
+			if (!preg_match('#\\\\_\w+_\\\\#', $strNamespace))
+			{
+				\Message::addError(sprintf('Your namespace %s should contain any vendor part, e.a. \\_vendor_\\ (with a leading and trailing underscore).', $strNamespace));
+			}
+
+			$strKey = $strNamespace . '\\' . basename($strFile, '.php');
+			$arrClassLoader[$strKey] = 'system/modules/' . $strModule . '/' . $strFile;
+			$intClassWidth = max(strlen($strKey), $intClassWidth);
+
+			$arrCompat[$strModule][preg_replace('#\\\\_\w+_\\\\#', '\\', $strKey)] = $strKey;
+		}
 	}
 }
