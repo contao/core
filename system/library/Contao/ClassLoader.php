@@ -258,6 +258,8 @@ class ClassLoader
 		foreach (self::$namespaceMapping as $namespace => $mappings)
 		{
 			if (preg_match('#^' . preg_quote($namespace) . '\\\\#', $class)) {
+				$aliased = false;
+
 				foreach ($mappings as $mapping)
 				{
 					$target = str_replace($namespace, $mapping, $class);
@@ -270,13 +272,20 @@ class ClassLoader
 							$GLOBALS['TL_DEBUG']['classes_aliased'][] = $class . ' <span style="color:#999">(' . $target . ')</span>';
 						}
 
-						include TL_ROOT . '/' . self::$classes[$target];
+						include_once TL_ROOT . '/' . self::$classes[$target];
 
 						// Create an alias for the mapped namespaced class
-						class_alias($target, $class);
+						if (!$aliased) {
+							class_alias($target, $class);
+							$aliased = true;
+						}
 
-						return;
 					}
+				}
+
+				// Return if an alias is created
+				if ($aliased) {
+					return;
 				}
 			}
 		}
