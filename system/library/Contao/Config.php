@@ -231,22 +231,23 @@ class Config
 		{
 			accelerator_reset();
 		}
+
 		// Recompile the APC file (thanks to Trenker)
-		elseif (function_exists('apc_compile_file') && !ini_get('apc.stat'))
+		if (function_exists('apc_compile_file') && !ini_get('apc.stat'))
 		{
 			apc_compile_file('system/config/localconfig.php');
 		}
+
 		// Purge the eAccelerator cache (thanks to Trenker)
-		elseif (function_exists('eaccelerator_purge') && !ini_get('eaccelerator.check_mtime'))
+		if (function_exists('eaccelerator_purge') && !ini_get('eaccelerator.check_mtime'))
 		{
 			@eaccelerator_purge();
 		}
-		// Purge the XCache cache (thanks to Trenker)
-		elseif (function_exists('xcache_count') && !ini_get('xcache.stat'))
-		{
-			$count = xcache_count(XC_TYPE_PHP);
 
-			if ($count > 0)
+		// Purge the XCache cache (thanks to Trenker)
+		if (function_exists('xcache_count') && !ini_get('xcache.stat'))
+		{
+			if (($count = xcache_count(XC_TYPE_PHP)) > 0)
 			{
 				for ($id=0; $id<$count; $id++)
 				{
