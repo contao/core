@@ -477,7 +477,7 @@ EOT
 			}
 
 			// Show an error, if no vendor part is found in the namespace
-			if (!preg_match('#\\\\_\w+_\\\\#', $strNamespace))
+			if (!preg_match('#\\\\_\w+_\\\\#', $strNamespace) && !preg_match('#\\\\_\w+_$#', $strNamespace))
 			{
 				\Message::addError(sprintf('Your namespace %s should contain any vendor part, e.a. \\_vendor_\\ (with a leading and trailing underscore).', $strNamespace));
 			}
