@@ -118,38 +118,47 @@ class RepositoryBackendModule extends BackendModule
 		// load soap client in case wsdl file is defined
 		$wsdl = trim($GLOBALS['TL_CONFIG']['repository_wsdl']);
 		if ($wsdl != '') {
-			if (!REPOSITORY_SOAPCACHE) ini_set('soap.wsdl_cache_enabled', 0);
-			// Backwards compatibility
-			if (!defined('ZLIB_ENCODING_GZIP')) {
-				define('ZLIB_ENCODING_GZIP', SOAP_COMPRESSION_GZIP);
+			try {
+				if (!REPOSITORY_SOAPCACHE) ini_set('soap.wsdl_cache_enabled', 0);
+				// Backwards compatibility
+				if (!defined('ZLIB_ENCODING_GZIP')) {
+					define('ZLIB_ENCODING_GZIP', SOAP_COMPRESSION_GZIP);
+				}
+				// HOOK: proxy module
+				if ($GLOBALS['TL_CONFIG']['useProxy']) {
+					$proxy_uri = parse_url($GLOBALS['TL_CONFIG']['proxy_url']);
+					$this->client = new SoapClient($wsdl, array(
+						'soap_version' => SOAP_1_2,
+						'compression' => SOAP_COMPRESSION_ACCEPT | ZLIB_ENCODING_GZIP | 1,
+						'proxy_host' => $proxy_uri['host'],
+						'proxy_port' => $proxy_uri['port'],
+						'proxy_login' => $proxy_uri['user'],
+						'proxy_password' => $proxy_uri['pass']
+					));
+				}
+				// Default client
+				else {
+					$this->client = new SoapClient($wsdl, array(
+						'soap_version' => SOAP_1_2,
+						'compression' => SOAP_COMPRESSION_ACCEPT | ZLIB_ENCODING_GZIP | 1
+					));
+				}
+				$this->mode = 'soap';
+			} catch (Exception $e) {
+				$rep->installLink = $this->createUrl(array());
+				$rep->updateLink = $this->createUrl(array('update'=>'database'));
+				$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = '<p class="tl_error">Could not connect to the repository server</p>';
+				if ($compiler == 'update') $this->$compiler($this->parameter);
+				return;
 			}
-			// HOOK: proxy module
-			if ($GLOBALS['TL_CONFIG']['useProxy']) {
-				$proxy_uri = parse_url($GLOBALS['TL_CONFIG']['proxy_url']);
-				$this->client = new SoapClient($wsdl, array(
-					'soap_version' => SOAP_1_2,
-					'compression' => SOAP_COMPRESSION_ACCEPT | ZLIB_ENCODING_GZIP | 1,
-					'proxy_host' => $proxy_uri['host'],
-					'proxy_port' => $proxy_uri['port'],
-					'proxy_login' => $proxy_uri['user'],
-					'proxy_password' => $proxy_uri['pass']
-				));
-			}
-			// Default client
-			else {
-				$this->client = new SoapClient($wsdl, array(
-					'soap_version' => SOAP_1_2,
-					'compression' => SOAP_COMPRESSION_ACCEPT | ZLIB_ENCODING_GZIP | 1
-				));
-			}
-			$this->mode = 'soap';
-		} else
+		} else {
 			// fallback to load RepositoryServer class if on central server
 			if (file_exists($this->tl_root . 'system/modules/rep_server/RepositoryServer.php')) {
 				$this->import('RepositoryServer');
 				$this->RepositoryServer->enableLocal();
 				$this->mode = 'local';
 			} // if
+		}
 
 		// execute compiler
 		$this->$compiler($this->parameter);
