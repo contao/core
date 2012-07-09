@@ -375,7 +375,7 @@ class Form extends \Hybrid
 
 			// Send e-mail
 			$email->text = \String::decodeEntities(trim($message)) . $uploaded . "\n\n";
-			$email->sendTo($recipients);
+			$email->sendTo($this->replaceInsertTags($recipients));
 		}
 
 		// Store the values in the database
