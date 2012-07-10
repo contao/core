@@ -226,7 +226,7 @@ abstract class User extends \System
 		$this->Database->prepare("UPDATE tl_session SET tstamp=$time WHERE sessionID=?")
 					   ->execute(session_id());
 
-		$this->setCookie($this->strCookie, $this->strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);
+		$this->setCookie($this->strCookie, $this->strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
 		return true;
 	}
 
@@ -292,17 +292,16 @@ abstract class User extends \System
 			$this->loginCount = $GLOBALS['TL_CONFIG']['loginCount'];
 			$this->save();
 
-			// Add a log entry
+			// Add a log entry and the error message, because checkAccountStatus() will not be called (see #4444)
 			$this->log('The account has been locked for security reasons', get_class($this) . ' login()', TL_ACCESS);
+			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) - $time) / 60)));
 
 			// Send admin notification
-			if (strlen($GLOBALS['TL_CONFIG']['adminEmail']))
+			if ($GLOBALS['TL_CONFIG']['adminEmail'] != '')
 			{
 				$objEmail = new \Email();
-
 				$objEmail->subject = $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0];
 				$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['lockedAccount'][1], $this->username, ((TL_MODE == 'FE') ? $this->firstname . " " . $this->lastname : $this->name), \Environment::get('base'), ceil($GLOBALS['TL_CONFIG']['lockPeriod'] / 60));
-
 				$objEmail->sendTo($GLOBALS['TL_CONFIG']['adminEmail']);
 			}
 
@@ -315,25 +314,25 @@ abstract class User extends \System
 			return false;
 		}
 
-		$blnAuthenticated = false;
-		list($strPassword, $strSalt) = explode(':', $this->password);
-
-		// Password is correct but not yet salted
-		if (!strlen($strSalt) && $strPassword == sha1(\Input::post('password', true)))
+		// The password is up to date (SHA-512)
+		if (strncmp($this->password, '$6$', 3) === 0)
 		{
-			$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
-			$strPassword = sha1($strSalt . \Input::post('password', true));
-			$this->password = $strPassword . ':' . $strSalt;
+			$blnAuthenticated = (crypt(\Input::post('password', true), $this->password) == $this->password);
 		}
-
-		// Check the password against the database
-		if ($strSalt != '' && $strPassword == sha1($strSalt . \Input::post('password', true)))
+		else
 		{
-			$blnAuthenticated = true;
+			list($strPassword, $strSalt) = explode(':', $this->password);
+			$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1(\Input::post('password', true))) : ($strPassword == sha1($strSalt . \Input::post('password', true)));
+
+			// Store a SHA-512 encrpyted version of the password
+			if ($blnAuthenticated)
+			{
+				$this->password = \Encryption::sha512(\Input::post('password', true));
+			}
 		}
 
 		// HOOK: pass credentials to callback functions
-		elseif (isset($GLOBALS['TL_HOOKS']['checkCredentials']) && is_array($GLOBALS['TL_HOOKS']['checkCredentials']))
+		if (!$blnAuthenticated && isset($GLOBALS['TL_HOOKS']['checkCredentials']) && is_array($GLOBALS['TL_HOOKS']['checkCredentials']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['checkCredentials'] as $callback)
 			{
@@ -494,7 +493,7 @@ abstract class User extends \System
 					   ->execute($this->intId, $time, $this->strCookie, session_id(), $this->strIp, $this->strHash);
 
 		// Set the authentication cookie
-		$this->setCookie($this->strCookie, $this->strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);
+		$this->setCookie($this->strCookie, $this->strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
 
 		// Save the login status
 		$_SESSION['TL_USER_LOGGED_IN'] = true;
@@ -532,7 +531,7 @@ abstract class User extends \System
 					   ->execute($this->strHash);
 
 		// Remove cookie and hash
-		$this->setCookie($this->strCookie, $this->strHash, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
+		$this->setCookie($this->strCookie, $this->strHash, ($time - 86400), null, null, false, true);
 		$this->strHash = '';
 
 		// Destroy the current session

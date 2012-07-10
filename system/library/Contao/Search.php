@@ -290,7 +290,7 @@ class Search extends \System
 		}
 		else
 		{
-			$strKeywords = preg_replace(array('/\. /', '/\.$/', '/: /', '/:$/', '/, /', '/,$/', '/[^\pN\pL \*\+\'"\.:,_-]/iu'), ' ', $strKeywords);
+			$strKeywords = preg_replace(array('/\. /', '/\.$/', '/: /', '/:$/', '/, /', '/,$/', '/[^\pN\pL \*\+\'"\.:,_-]/u'), ' ', $strKeywords);
 		}
 
 		// Check keyword string

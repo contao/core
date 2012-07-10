@@ -166,6 +166,28 @@ abstract class Model extends \System
 
 
 	/**
+	 * Return the name of the primary key
+	 * 
+	 * @return string The primary key
+	 */
+	public function getPk()
+	{
+		return static::$strPk;
+	}
+
+
+	/**
+	 * Return the name of the related table
+	 * 
+	 * @return string The table name
+	 */
+	public function getTable()
+	{
+		return static::$strTable;
+	}
+
+
+	/**
 	 * Return the current record as associative array
 	 * 
 	 * @return array The data record

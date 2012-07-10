@@ -137,7 +137,7 @@ class Index extends Frontend
 		}
 
 		// Throw a 404 error if the page could not be found or the result is still ambiguous
-		if ($objPage === null || $objPage->count() != 1)
+		if ($objPage === null || ($objPage instanceof Model_Collection && $objPage->count() != 1))
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();

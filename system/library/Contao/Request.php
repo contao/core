@@ -268,7 +268,7 @@ class Request
 		$request .= implode("\r\n", $default);
 		$request .= "\r\n\r\n";
 
-		if (strlen($this->strData))
+		if ($this->strData != '')
 		{
 			$request .= $this->strData . "\r\n";
 		}

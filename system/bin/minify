@@ -19,9 +19,10 @@ usage()
 	echo -e "  \033[0;36mtypolinks\033[0m     Minify the TYPOlinks plugin (plugins/tinyMCE/plugins/typolinks)"
 	echo ""
 	echo -e "  jQuery"
-	echo -e "  \033[0;36mjquery\033[0m        Minify the jQuery core (plugins/jquery/core|ui)"
+	echo -e "  \033[0;36mjquery\033[0m        Minify the jQuery core (plugins/jQuery/core|ui)"
 	echo -e "  \033[0;36mcolorbox\033[0m      Minify the colorbox plugin (plugins/jQuery/colorbox)"
 	echo -e "  \033[0;36mmediaelement\033[0m  Minify the mediaelement plugin (plugins/jQuery|mootools/mediaelement)"
+	echo -e "  \033[0;36mtablesorter\033[0m   Minify the tablesorter plugin (plugins/jQuery/tablesorter)"
 	echo ""
 	echo -e "  MooTools"
 	echo -e "  \033[0;36mmootools\033[0m      Minify the MooTools core (plugins/mootools/core)"
@@ -126,7 +127,7 @@ typolinks()
 }
 
 ##
-# plugins/jquery/core|ui
+# plugins/jQuery/core|ui
 ##
 jquery()
 {
@@ -221,6 +222,27 @@ mediaelement()
 		# Concat the mediaelement.js and mediaelementplayer.js files
 		{ cat $version/js/MooToolsAdapter.js; echo ""; cat $version/js/mediaelement.js; echo ""; cat $version/js/mediaelementplayer.js; } > $version/js/mediaelement-and-player.js
 		{ cat $version/js/MooToolsAdapter.min.js; echo ""; cat $version/js/mediaelement.min.js; echo ""; cat $version/js/mediaelementplayer.min.js; } > $version/js/mediaelement-and-player.min.js
+	done
+}
+
+##
+# plugins/jQuery/tablesorter
+##
+tablesorter()
+{
+	for version in `ls -d $folder/plugins/jQuery/tablesorter/*`; do
+
+  	# CSS
+  	copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
+	  echo "$copyright" > $version/css/tablesorter.min.css
+	  $css $version/css/tablesorter.css >> $version/css/tablesorter.min.css
+	  echo "  Created $version/css/tablesorter.min.css"
+
+	  # JS
+	  copyright="/* TableSorter 2.0.5b, (c) 2007 Christian Bach, http://tablesorter.com, MIT license */"
+	  echo "$copyright" > $version/js/tablesorter.min.js
+	  $js $version/js/tablesorter.js >> $version/js/tablesorter.min.js
+	  echo "  Created $version/js/tablesorter.min.js"
 	done
 }
 

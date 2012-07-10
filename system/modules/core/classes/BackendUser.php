@@ -146,9 +146,9 @@ class BackendUser extends \User
 			return;
 		}
 
-		$strRedirect = 'contao/index.php';
+		$strRedirect = 'contao/';
 
-		// Redirect to the last page visited on login
+		// Redirect to the last page visited upon login
 		if (\Environment::get('script') == 'contao/main.php' || \Environment::get('script') == 'contao/preview.php')
 		{
 			$strRedirect .= '?referer=' . base64_encode(\Environment::get('request'));
@@ -330,9 +330,11 @@ class BackendUser extends \User
 			{
 				foreach ($inherit as $field)
 				{
-					$value = deserialize($objGroup->$field);
+					$value = deserialize($objGroup->$field, true);
 
-					if (is_array($value))
+					// The new page/file picker can return integers instead of arrays,
+					// so use empty() instead of is_array() and deserialize(true) here
+					if (!empty($value))
 					{
 						$this->$field = array_merge((is_array($this->$field) ? $this->$field : (($this->$field != '') ? array($this->$field) : array())), $value);
 						$this->$field = array_unique($this->$field);

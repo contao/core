@@ -80,6 +80,22 @@ class RadioButton extends \Widget
 
 
 	/**
+	 * Check for a valid option (see #4383)
+	 */
+	public function validate()
+	{
+		$varValue = deserialize($this->getPost($this->strName));
+
+		if ($varValue != '' && !$this->isValidOption($varValue))
+		{
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalid'], $varValue));
+		}
+
+		parent::validate();
+	}
+
+
+	/**
 	 * Generate the widget and return it as string
 	 * @return string
 	 */

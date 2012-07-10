@@ -302,7 +302,7 @@ class DataContainer extends \Backend
 					{
 						$this->save($varValue);
 					}
-					catch (Exception $e)
+					catch (\Exception $e)
 					{
 						$this->noReload = true;
 						$objWidget->addError($e->getMessage());

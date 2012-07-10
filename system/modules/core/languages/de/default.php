@@ -67,6 +67,7 @@ $GLOBALS['TL_LANG']['ERR']['version2format']    = 'Dieses Element verwendet noch
 $GLOBALS['TL_LANG']['ERR']['form']              = 'Das Formular konnte nicht gesendet werden';
 $GLOBALS['TL_LANG']['ERR']['captcha']           = 'Bitte beantworten Sie die Sicherheitsfrage!';
 $GLOBALS['TL_LANG']['ERR']['download']          = 'Die Datei "%s" ist nicht für den Download verfügbar!';
+$GLOBALS['TL_LANG']['ERR']['invalid']           = 'Ungültige Eingabe: %s';
 
 
 /**
@@ -95,6 +96,7 @@ $GLOBALS['TL_LANG']['CTE']['media']     = 'Media-Elemente';
 $GLOBALS['TL_LANG']['CTE']['image']     = array('Bild', 'Erzeugt ein einzelnes Bild.');
 $GLOBALS['TL_LANG']['CTE']['gallery']   = array('Galerie', 'Erzeugt eine Lightbox-Bildergalerie.');
 $GLOBALS['TL_LANG']['CTE']['player']    = array('Video/Audio', 'Erzeugt einen Video- bzw. Audio-Player.');
+$GLOBALS['TL_LANG']['CTE']['youtube']   = array('YouTube', 'Fügt ein YouTube-Video ein.');
 $GLOBALS['TL_LANG']['CTE']['files']     = 'Datei Elemente';
 $GLOBALS['TL_LANG']['CTE']['download']  = array('Download', 'Erzeugt einen Link zum Download einer Datei.');
 $GLOBALS['TL_LANG']['CTE']['downloads'] = array('Downloads', 'Erzeugt mehrere Links zum Download von Dateien.');
@@ -372,7 +374,7 @@ $GLOBALS['TL_LANG']['MSC']['staticSystem']  = array('Skript-URL', 'Die Skript-UR
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'] = array('Plugins-URL', 'Die Plugins-URL gilt für alle Ressourcen im <em>plugins</em>-Verzeichnis (Page-Speed-Optimierung).');
 $GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Backend-Tastaturkürzel', 'Wie Sie Ihren Arbeitsablauf durch die Verwendung von <a href="http://www.contao.org/de/keyboard-shortcuts.html" title="Übersicht der Tastaturkürzel auf contao.org" target="_blank">Tastaturkürzeln</a> beschleunigen.');
 $GLOBALS['TL_LANG']['MSC']['toggleAll']     = array('Alle umschalten', 'Alle Knoten öffnen bzw. schließen');
-$GLOBALS['TL_LANG']['MSC']['lockedAccount']	= array('Ein Contao-Konto wurde gesperrt', "Das folgende Contao-Konto wurde aus Sicherheitsgründen gesperrt:\n\nBenutzer: %s\nName: %s\nWebseite: %s\n\nDer Account wurde für %d Minuten gesperrt, weil der Benutzer dreimal hintereinander ein falsches Passwort eingegeben hat. Nach Ablauf der Sperrfrist wird das Konto automatisch wieder entsperrt.\n\nDiese E-Mail wurde von Contao generiert. Sie können nicht darauf antworten.\n");
+$GLOBALS['TL_LANG']['MSC']['lockedAccount'] = array('Ein Contao-Konto wurde gesperrt', "Das folgende Contao-Konto wurde aus Sicherheitsgründen gesperrt:\n\nBenutzer: %s\nName: %s\nWebseite: %s\n\nDer Account wurde für %d Minuten gesperrt, weil der Benutzer dreimal hintereinander ein falsches Passwort eingegeben hat. Nach Ablauf der Sperrfrist wird das Konto automatisch wieder entsperrt.\n\nDiese E-Mail wurde von Contao generiert. Sie können nicht darauf antworten.\n");
 
 
 /**
@@ -496,7 +498,7 @@ $GLOBALS['TL_LANG']['MSC']['helpWizard']        = 'Den Hilfe-Assistent aufrufen'
 $GLOBALS['TL_LANG']['MSC']['helpWizardTitle']   = 'Hilfe-Assistent';
 $GLOBALS['TL_LANG']['MSC']['noCookies']         = 'Für die Nutzung von Contao müssen Cookies erlaubt sein.';
 $GLOBALS['TL_LANG']['MSC']['copyOf']            = '%s (Kopie)';
-$GLOBALS['TL_LANG']['MSC']['coreOnlyMode']      = 'Contao befindet sich momentan im <strong>abgesicherten Modus</strong>, in dem nur Core-Module geladen werden. Dieser Modus ist z.B. nach einem Live Update aktiv, um eventuellen Fehlern durch inkompatible Third-Party-Erweiterungen vorzubeugen. Sie können den Betriebsmodus nach der Prüfung der installierten Third-Party-Erweiterungen in den Backend-Einstellungen anpassen.';
+$GLOBALS['TL_LANG']['MSC']['coreOnlyMode']      = 'Contao läuft momentan im <strong>abgesicherten Modus</strong>, in dem nur Core-Module geladen werden, um Fehlern durch inkompatible Third-Party-Erweiterungen vorzubeugen. Nach Prüfung der installierten Erweiterungen können Sie den abgesicherten Modus wieder deaktivieren.';
 $GLOBALS['TL_LANG']['MSC']['emailAddress']      = 'E-Mail-Adresse';
 $GLOBALS['TL_LANG']['MSC']['register']          = 'Registrieren';
 $GLOBALS['TL_LANG']['MSC']['accountActivated']  = 'Ihr Konto wurde aktiviert.';
@@ -516,6 +518,7 @@ $GLOBALS['TL_LANG']['MSC']['currentlySelected'] = 'Ausgewählt';
 $GLOBALS['TL_LANG']['MSC']['selectNode']        = 'Nur diesen Knoten anzeigen';
 $GLOBALS['TL_LANG']['MSC']['selectAllNodes']    = 'Alle Knoten anzeigen';
 $GLOBALS['TL_LANG']['MSC']['showDifferences']   = 'Unterschiede anzeigen';
+$GLOBALS['TL_LANG']['MSC']['editElement']       = 'Element bearbeiten';
 $GLOBALS['TL_LANG']['MSC']['table']             = 'Tabelle';
 $GLOBALS['TL_LANG']['MSC']['description']       = 'Beschreibung';
 $GLOBALS['TL_LANG']['MSC']['noVersions']        = 'Zur Zeit sind keine Versionen vorhanden.';
@@ -584,3 +587,4 @@ $GLOBALS['TL_LANG']['MSC']['autologin']         = 'Angemeldet bleiben';
 $GLOBALS['TL_LANG']['MSC']['relevance']         = '%s Relevanz';
 $GLOBALS['TL_LANG']['MSC']['invalidTokenUrl']   = 'Ungültiges Token';
 $GLOBALS['TL_LANG']['MSC']['changelog']         = 'Änderungsliste';
+$GLOBALS['TL_LANG']['MSC']['coreOnlyOff']       = 'Deaktivieren';

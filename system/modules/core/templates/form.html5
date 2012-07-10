@@ -11,7 +11,9 @@
 <?php if ($this->method != 'get'): ?>
 <input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formSubmit; ?>">
 <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+<?php if ($this->maxFileSize): ?>
 <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $this->maxFileSize; ?>">
+<?php endif; ?>
 <?php endif; ?>
 <?php echo $this->hidden; ?>
 <?php if (!$this->tableless): ?>

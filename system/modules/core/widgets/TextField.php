@@ -35,6 +35,12 @@ class TextField extends \Widget
 	protected $blnSubmitInput = true;
 
 	/**
+	 * Add a for attribute
+	 * @var boolean
+	 */
+	protected $blnForAttribute = true;
+
+	/**
 	 * Template
 	 * @var string
 	 */
@@ -45,6 +51,21 @@ class TextField extends \Widget
 	 * @var array
 	 */
 	protected $arrContents = array();
+
+
+	/**
+	 * Disable the for attribute if the "multiple" option is set
+	 * @param array
+	 */
+	public function __construct($arrAttributes=null)
+	{
+		parent::__construct($arrAttributes);
+
+		if ($this->multiple)
+		{
+			$this->blnForAttribute = false;
+		}
+	}
 
 
 	/**

@@ -104,13 +104,13 @@ class Ajax extends \Backend
 			case 'toggleFileManager':
 			case 'togglePagetree':
 			case 'toggleFiletree':
-				$this->strAjaxId = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', \Input::post('id'));
+				$this->strAjaxId = preg_replace('/.*_([0-9a-zA-Z]+)$/', '$1', \Input::post('id'));
 				$this->strAjaxKey = str_replace('_' . $this->strAjaxId, '', \Input::post('id'));
 
 				if (\Input::get('act') == 'editAll')
 				{
-					$this->strAjaxKey = preg_replace('/(.*)_[0-9a-zA-Z]+$/i', '$1', $this->strAjaxKey);
-					$this->strAjaxName = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', \Input::post('name'));
+					$this->strAjaxKey = preg_replace('/(.*)_[0-9a-zA-Z]+$/', '$1', $this->strAjaxKey);
+					$this->strAjaxName = preg_replace('/.*_([0-9a-zA-Z]+)$/', '$1', \Input::post('name'));
 				}
 
 				$nodes = $this->Session->get($this->strAjaxKey);
@@ -123,13 +123,13 @@ class Ajax extends \Backend
 			case 'loadFileManager':
 			case 'loadPagetree':
 			case 'loadFiletree':
-				$this->strAjaxId = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', \Input::post('id'));
+				$this->strAjaxId = preg_replace('/.*_([0-9a-zA-Z]+)$/', '$1', \Input::post('id'));
 				$this->strAjaxKey = str_replace('_' . $this->strAjaxId, '', \Input::post('id'));
 
 				if (\Input::get('act') == 'editAll')
 				{
-					$this->strAjaxKey = preg_replace('/(.*)_[0-9a-zA-Z]+$/i', '$1', $this->strAjaxKey);
-					$this->strAjaxName = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', \Input::post('name'));
+					$this->strAjaxKey = preg_replace('/(.*)_[0-9a-zA-Z]+$/', '$1', $this->strAjaxKey);
+					$this->strAjaxName = preg_replace('/.*_([0-9a-zA-Z]+)$/', '$1', \Input::post('name'));
 				}
 
 				$nodes = $this->Session->get($this->strAjaxKey);
@@ -156,7 +156,7 @@ class Ajax extends \Backend
 					$objFile->close();
 					$objFile->delete();
 				}
-				catch (Exception $e)
+				catch (\Exception $e)
 				{
 					if ($e->getCode() == 0)
 					{
@@ -253,11 +253,21 @@ class Ajax extends \Backend
 
 			// Toggle subpalettes
 			case 'toggleSubpalette':
-				if ($dc instanceof \DC_Table)
+				$this->import('BackendUser', 'User');
+
+				// Check whether the field is a selector field and allowed for regular users (thanks to Fabian Mihailowitsch) (see #4427)
+				if (!is_array($GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || !in_array($this->Input->post('field'), $GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || ($GLOBALS['TL_DCA'][$dc->table]['fields'][$this->Input->post('field')]['exclude'] && !$this->User->hasAccess($dc->table . '::' . $this->Input->post('field'), 'alexf')))
+				{
+					$this->log('Field "' . $this->Input->post('field') . '" is not an allowed selector field (possible SQL injection attempt)', 'Ajax executePostActions()', TL_ERROR);
+					header('HTTP/1.1 400 Bad Request');
+					die('Bad Request');
+				}
+
+				if ($dc instanceof DC_Table)
 				{
 					if (\Input::get('act') == 'editAll')
 					{
-						$this->strAjaxId = preg_replace('/.*_([0-9a-zA-Z]+)$/i', '$1', \Input::post('id'));
+						$this->strAjaxId = preg_replace('/.*_([0-9a-zA-Z]+)$/', '$1', \Input::post('id'));
 						$this->Database->prepare("UPDATE " . $dc->table . " SET " . \Input::post('field') . "='" . (intval(\Input::post('state') == 1) ? 1 : '') . "' WHERE id=?")->execute($this->strAjaxId);
 
 						if (\Input::post('load'))

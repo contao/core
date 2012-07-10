@@ -397,7 +397,7 @@ class Theme extends \Backend
 					$objFile->write($objArchive->unzip());
 					$objFile->close();
 				}
-				catch (Exception $e)
+				catch (\Exception $e)
 				{
 					\Message::addError($e->getMessage());
 				}

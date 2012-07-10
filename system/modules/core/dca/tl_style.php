@@ -243,7 +243,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['maxwidth'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit_none', 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'maxheight' => array
@@ -251,7 +251,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['maxheight'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit_none', 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'positioning' => array
@@ -598,7 +598,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['own'],
 			'inputType'               => 'textarea',
-			'eval'                    => array('decodeEntities'=>true, 'style'=>'height:120px;'),
+			'eval'                    => array('decodeEntities'=>true, 'style'=>'height:120px'),
 			'sql'                     => "text NULL"
 		)
 	)
@@ -677,7 +677,7 @@ class tl_style extends Backend
 	 */
 	public function filePicker(DataContainer $dc)
 	{
-		return ' <a href="contao/file.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.$dc->value.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['filepicker']).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['files'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="contao/file.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.$dc->value.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['filepicker']).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['files'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 

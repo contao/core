@@ -121,6 +121,12 @@ abstract class Widget extends \Controller
 	 */
 	protected $blnSubmitInput = false;
 
+	/**
+	 * For attribute indicator
+	 * @var boolean
+	 */
+	protected $blnForAttribute = false;
+
 
 	/**
 	 * Initialize the object
@@ -310,6 +316,10 @@ abstract class Widget extends \Controller
 				$this->arrConfiguration[$strKey] = $varValue ? true : false;
 				break;
 
+			case 'forAttribute':
+				$this->blnForAttribute = $varValue;
+				break;
+
 			default:
 				$this->arrConfiguration[$strKey] = $varValue;
 				break;
@@ -374,6 +384,10 @@ abstract class Widget extends \Controller
 
 			case 'required':
 				return $this->arrConfiguration[$strKey];
+				break;
+
+			case 'forAttribute':
+				return $this->blnForAttribute;
 				break;
 
 			default:
@@ -518,9 +532,9 @@ abstract class Widget extends \Controller
 			return '';
 		}
 
-		return sprintf('<label for="ctrl_%s"%s>%s%s%s</label>',
-						$this->strId,
-						(strlen($this->strClass) ? ' class="' . $this->strClass . '"' : ''),
+		return sprintf('<label%s%s>%s%s%s</label>',
+						($this->blnForAttribute ? ' for="ctrl_' . $this->strId . '"' : ''),
+						(($this->strClass != '') ? ' class="' . $this->strClass . '"' : ''),
 						($this->required ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
 						$this->strLabel,
 						($this->required ? '<span class="mandatory">*</span>' : ''));
@@ -914,19 +928,19 @@ abstract class Widget extends \Controller
 			$varInput = preg_replace('/[^a-f0-9]+/i', '', $varInput);
 		}
 
-		if ($this->nospace && preg_match('/[\t ]+/i', $varInput))
+		if ($this->nospace && preg_match('/[\t ]+/', $varInput))
 		{
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['noSpace'], $this->strLabel));
 		}
 
 		if ($this->spaceToUnderscore)
 		{
-			$varInput = preg_replace('/\s+/i', '_', trim($varInput));
+			$varInput = preg_replace('/\s+/', '_', trim($varInput));
 		}
 
 		if (is_bool($this->trailingSlash) && $varInput != '')
 		{
-			$varInput = preg_replace('/\/+$/i', '', $varInput) . ($this->trailingSlash ? '/' : '');
+			$varInput = preg_replace('/\/+$/', '', $varInput) . ($this->trailingSlash ? '/' : '');
 		}
 
 		return $varInput;
@@ -985,5 +999,49 @@ abstract class Widget extends \Controller
 		}
 
 		return $this->optionSelected($arrOption['value'], $this->varValue);
+	}
+
+
+	/**
+	 * Check whether an input is one of the given options
+	 * 
+	 * @param mixed $varInput The input string or array
+	 * 
+	 * @return boolean True if the selected option exists
+	 */
+	protected function isValidOption($varInput)
+	{
+		if (!is_array($varInput))
+		{
+			$varInput = array($varInput);
+		}
+
+		foreach ($varInput as $strInput)
+		{
+			foreach ($this->arrOptions as $k=>$v)
+			{
+				// Single dimensional array
+				if (is_numeric($k))
+				{
+					if ($strInput == $v['value'])
+					{
+						return true;
+					}
+				}
+				// Multi-dimensional array
+				else
+				{
+					foreach ($v as $kk=>$vv)
+					{
+						if ($strInput == $vv['value'])
+						{
+							return true;
+						}
+					}
+				}
+			}
+		}
+
+		return false;
 	}
 }

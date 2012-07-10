@@ -1,0 +1,250 @@
+##
+# Contao Open Source CMS
+# 
+# Copyright (C) 2005-2012 Leo Feyer
+# 
+# @package Core
+# @link    http://www.contao.org
+# @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+##
+
+##
+# Disable ETags
+# @see http://developer.yahoo.com/performance/rules.html#etags
+##
+FileETag None
+<IfModule mod_headers.c>
+  Header unset ETag
+</IfModule>
+
+##
+# Prevent access to the Contao template files
+##
+<FilesMatch "\.(tpl|html5|xhtml)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+##
+# Set the proper MIME types
+# @see https://github.com/h5bp/html5-boilerplate
+##
+<IfModule mod_mime.c>
+  # JavaScript
+  AddType application/javascript              js jsonp
+  AddType application/json                    json
+  # Audio
+  AddType audio/ogg                           oga ogg
+  AddType audio/mp4                           m4a f4a f4b
+  # Video
+  AddType video/ogg                           ogv
+  AddType video/mp4                           mp4 m4v f4v f4p
+  AddType video/webm                          webm
+  AddType video/x-flv                         flv
+  # SVG
+  AddType image/svg+xml                       svg svgz
+  AddEncoding gzip                            svgz
+  # Webfonts
+  AddType application/vnd.ms-fontobject       eot
+  AddType application/x-font-ttf              ttf ttc
+  AddType font/opentype                       otf
+  AddType application/x-font-woff             woff
+  # Assorted types
+  AddType image/x-icon                        ico
+  AddType image/webp                          webp
+  AddType text/cache-manifest                 appcache manifest
+  AddType text/x-component                    htc
+  AddType application/xml                     rss atom xml rdf
+  AddType application/x-web-app-manifest+json webapp
+  AddType text/x-vcard                        vcf
+  AddType application/x-shockwave-flash       swf
+</IfModule>
+
+##
+# Gzip compression
+# @see https://github.com/h5bp/html5-boilerplate
+##
+<IfModule mod_deflate.c>
+  # Current Apache versions (>= 2.2)
+  <IfModule filter_module>
+    FilterDeclare   COMPRESS
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/html
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/css
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/plain
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/xml
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/x-component
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/javascript
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/json
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/xml
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/xhtml+xml
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/rss+xml
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/atom+xml
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/vnd.ms-fontobject
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $image/svg+xml
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $image/x-icon
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/x-font-ttf
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $font/opentype
+    FilterChain     COMPRESS
+    FilterProtocol  COMPRESS  DEFLATE change=yes;byteranges=no
+  </IfModule>
+  # Legacy Apache versions
+  <IfModule !mod_filter.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/json
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE text/xml application/xml text/x-component
+    AddOutputFilterByType DEFLATE application/xhtml+xml application/rss+xml application/atom+xml
+    AddOutputFilterByType DEFLATE image/x-icon image/svg+xml application/vnd.ms-fontobject application/x-font-ttf font/opentype
+  </IfModule>
+</IfModule>
+
+##
+# Expires headers (for better cache control)
+# @see https://github.com/h5bp/html5-boilerplate
+##
+<IfModule mod_expires.c>
+  ExpiresActive on
+  ExpiresByType text/cache-manifest           "access"
+  ExpiresByType text/html                     "access"
+  # Data
+  ExpiresByType text/xml                      "access"
+  ExpiresByType application/xml               "access"
+  ExpiresByType application/json              "access"
+  # Feed
+  ExpiresByType application/rss+xml           "access"
+  ExpiresByType application/atom+xml          "access"
+  # Media: images, video, audio
+  ExpiresByType image/gif                     "access"
+  ExpiresByType image/png                     "access"
+  ExpiresByType image/jpeg                    "access"
+  ExpiresByType image/x-icon                  "access"
+  ExpiresByType video/ogg                     "access"
+  ExpiresByType audio/ogg                     "access"
+  ExpiresByType video/mp4                     "access"
+  ExpiresByType video/webm                    "access"
+  # HTC files  (css3pie)
+  ExpiresByType text/x-component              "access"
+  # Webfonts
+  ExpiresByType application/x-font-ttf        "access"
+  ExpiresByType font/opentype                 "access"
+  ExpiresByType application/x-font-woff       "access"
+  ExpiresByType image/svg+xml                 "access"
+  ExpiresByType application/vnd.ms-fontobject "access"
+  # CSS and JavaScript
+  ExpiresByType text/css                      "access"
+  ExpiresByType application/javascript        "access"
+</IfModule>
+
+##
+# Reset the cache headers (see #4419)
+##
+<IfModule mod_headers.c>
+  Header unset Cache-Control
+  Header append Cache-Control must-revalidate
+</IfModule>
+
+##
+# Add a Vary Accept-Encoding header for the compressed resources. If you
+# modify the file types above, make sure to change them here accordingly.
+# @see http://developer.yahoo.com/performance/rules.html#gzip
+#
+# Note: If you are using a case-sensitive file system like HFS+ or ext4, you
+# have to change the <FilesMatch> directive as follows:
+#
+# <FilesMatch "\.(?i:js|css|xml|gz)$">
+#
+# For more information see: https://github.com/contao/core/issues/4364
+##
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|xml|gz)$">
+    Header append Vary Accept-Encoding
+  </FilesMatch>
+</IfModule>
+
+##
+# URL rewriting
+##
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  ##
+  # Change the RewriteBase if your Contao installation is in a subdirectoy and
+  # the rewrite rules are not working properly. Usage examples:
+  #
+  #   RewriteBase /contao-3.0.0
+  #   RewriteBase /path/to/contao
+  #
+  # Depending on your server, you might have to remove the line entirely. 
+  ##
+  RewriteBase /
+
+  ##
+  # Uncomment the following lines and replace "domain.com" with your domain
+  # name to redirect requests without "www" to the correct domain. 
+  ##
+  #RewriteCond %{HTTP_HOST} ^domain\.com [NC]
+  #RewriteRule (.*) http://www.domain.com/$1 [R=301,L]
+
+  ##
+  # If you cannot use mod_deflate, uncomment the following lines to load a
+  # compressed .gz version of the aggregated Contao JavaScript and CSS files.
+  ##
+  #AddEncoding gzip .gz
+  #<FilesMatch "\.js\.gz$">
+  #  AddType "text/javascript" .gz
+  #</FilesMatch>
+  #<FilesMatch "\.css\.gz$">
+  #  AddType "text/css" .gz
+  #</FilesMatch>
+  #RewriteCond %{HTTP:Accept-encoding} gzip
+  #RewriteCond %{REQUEST_FILENAME} \.(js|css)$
+  #RewriteCond %{REQUEST_FILENAME}.gz -f
+  #RewriteRule ^(.*)$ $1.gz [QSA,L]
+
+  ##
+  # Do not rewrite requests for static files or folders such as style sheets,
+  # images, movies or text documents. Do not add the URL suffix here!
+  #
+  # Note: If you are using a case-sensitive file system like HFS+ or ext4, you
+  # have to change the <FilesMatch> directive as follows:
+  #
+  # <FilesMatch "\.(?i:htm|php|js|css| … |gz)$">
+  #
+  # For more information see: https://github.com/contao/core/issues/4364
+  ##
+  <FilesMatch "\.(htm|php|js|css|htc|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|eot|woff|svg|ttf|pdf|gz)$">
+    RewriteEngine Off
+  </FilesMatch>
+
+  ##
+  # By default, Contao adds ".html" to the generated URLs to simulate static
+  # HTML documents. If you change the URL suffix in the back end settings, make
+  # sure to change it here accordingly!
+  #
+  #   RewriteRule .*\.html$ index.php [L]   # URL suffix .html
+  #   RewriteRule .*\.txt$ index.php [L]    # URL suffix .txt
+  #   RewriteRule .*\.json$ index.php [L]   # URL suffix .json
+  #
+  # If you do not want to use an URL suffix at all, you have to add a second
+  # line to prevent URLs that point to folders from being rewritten (see #4031).
+  #
+  #   RewriteCond %{REQUEST_FILENAME} !-d
+  #
+  # If you are using mod_cache, it is recommended to use the RewriteRule below,
+  # which adds the query string to the internal URL:
+  # 
+  #   RewriteRule (.*\.html)$ index.php/$1 [L]
+  #
+  # Note that not all environments support mod_rewrite and mod_cache.
+  ##
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule .*\.html$ index.php [L]
+
+  ##
+  # The following rules are required if you want to pass the language as first
+  # URL parameter (added in Contao 2.11). The first rule rewrites an empty URL
+  # to the front end controller, the second one adds a missing trailing slash.
+  ##
+  RewriteRule ^[a-z]{2}/$ index.php [L]
+  RewriteRule ^([a-z]{2})$ $1/ [R=301,L]
+
+</IfModule>

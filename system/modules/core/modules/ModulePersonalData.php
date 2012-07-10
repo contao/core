@@ -179,7 +179,7 @@ class ModulePersonalData extends \Module
 						{
 							$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
 						}
-						catch (Exception $e)
+						catch (\Exception $e)
 						{
 							$objWidget->class = 'error';
 							$objWidget->addError($e->getMessage());

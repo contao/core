@@ -465,7 +465,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'allowHtml'=>true, 'style'=>'height:60px;', 'tl_class'=>'clr'),
+			'eval'                    => array('mandatory'=>true, 'allowHtml'=>true, 'style'=>'height:60px', 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
 		),
 		'source' => array
@@ -583,7 +583,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['rss_feed'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'style'=>'height:60px;'),
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'style'=>'height:60px'),
 			'sql'                     => "text NULL"
 		),
 		'rss_template' => array
@@ -683,7 +683,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['reg_text'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:120px;', 'decodeEntities'=>true, 'alwaysSave'=>true),
+			'eval'                    => array('style'=>'height:120px', 'decodeEntities'=>true, 'alwaysSave'=>true),
 			'load_callback' => array
 			(
 				array('tl_module', 'getActivationDefault')
@@ -695,7 +695,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['reg_password'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:120px;', 'decodeEntities'=>true, 'alwaysSave'=>true),
+			'eval'                    => array('style'=>'height:120px', 'decodeEntities'=>true, 'alwaysSave'=>true),
 			'load_callback'           => array
 			(
 				array('tl_module', 'getPasswordDefault')

@@ -179,7 +179,7 @@ class Environment
 		}
 		else
 		{
-			return '/' . preg_replace('/^\//i', '', static::get('scriptName')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
+			return '/' . preg_replace('/^\//', '', static::get('scriptName')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
 		}
 	}
 
@@ -345,7 +345,7 @@ class Environment
 	 */
 	protected static function script()
 	{
-		return preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', static::get('scriptName'));
+		return preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/', '', static::get('scriptName'));
 	}
 
 
@@ -356,7 +356,7 @@ class Environment
 	 */
 	protected static function request()
 	{
-		$strRequest = preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', static::get('requestUri'));
+		$strRequest = preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/', '', static::get('requestUri'));
 
 		// From version 2.9, do not fallback to $this->script
 		// anymore if the request string is empty (see #1844).

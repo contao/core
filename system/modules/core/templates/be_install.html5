@@ -1133,7 +1133,7 @@ window.addEvent('domready', function() {
   </div>
   <div class="tl_formbody_submit">
     <div class="tl_submit_container">
-      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset()">
+      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['saveCollation']; ?>" onclick="Backend.getScrollOffset()">
     </div>
   </div>
   </form>
@@ -1252,7 +1252,7 @@ window.addEvent('domready', function() {
 <?php endif; ?>
 <?php endif; ?>
 
-<p id="go_to_login"><a href="contao/index.php" title="<?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?>"><?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?></a></p>
+<p id="go_to_login"><a href="contao/" title="<?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?>"><?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?></a></p>
 
 </div>
 </div>

@@ -231,44 +231,15 @@ class Database_Installer extends \Controller
 	 */
 	protected function getFromDca()
 	{
-		$arrTables = array();
+		$arrReturn = array();
+		$arrTables = \DcaExtractor::createAllExtracts();
 
-		// Scan the modules
-		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
+		foreach ($arrTables as $strTable=>$objTable)
 		{
-			$dir = TL_ROOT . '/system/modules/' . $strModule . '/dca';
-
-			if (!is_dir($dir))
-			{
-				continue;
-			}
-
-			foreach (scan($dir) as $strTable)
-			{
-				if (strncmp($strTable, '.', 1) === 0 || strrchr($strTable, '.') != '.php')
-				{
-					continue;
-				}
-
-				if ($strTable == 'tl_settings.php' || $strTable == 'tl_templates.php')
-				{
-					continue;
-				}
-
-				$arrTables[] = str_replace('.php', '', $strTable);
-			}
+			$arrReturn[$strTable] = $objTable->getDbInstallerArray();
 		}
 
-		$return = array();
-		$arrTables = array_values(array_unique($arrTables));
-
-		foreach ($arrTables as $strTable)
-		{
-			$objTable = new \DcaExtractor($strTable);
-			$return[$strTable] = $objTable->getDbInstallerArray();
-		}
-
-		return $return;
+		return $arrReturn;
 	}
 
 
@@ -305,7 +276,7 @@ class Database_Installer extends \Controller
 				$subpatterns = array();
 
 				// Unset comments and empty lines
-				if (preg_match('/^[#-]+/i', $v) || !strlen(trim($v)))
+				if (preg_match('/^[#-]+/', $v) || !strlen(trim($v)))
 				{
 					unset($data[$k]);
 					continue;
@@ -317,7 +288,7 @@ class Database_Installer extends \Controller
 					$table = $subpatterns[1];
 				}
 				// Get the table options
-				elseif ($table != '' && preg_match('/^\)([^;]+);/i', $v, $subpatterns))
+				elseif ($table != '' && preg_match('/^\)([^;]+);/', $v, $subpatterns))
 				{
 					$return[$table]['TABLE_OPTIONS'] = $subpatterns[1];
 					$table = '';
@@ -325,8 +296,8 @@ class Database_Installer extends \Controller
 				// Add the fields
 				elseif ($table != '')
 				{
-					preg_match('/^[^`]*`([^`]+)`/i', trim($v), $key_name);
-					$first = preg_replace('/\s[^\n\r]+/i', '', $key_name[0]);
+					preg_match('/^[^`]*`([^`]+)`/', trim($v), $key_name);
+					$first = preg_replace('/\s[^\n\r]+/', '', $key_name[0]);
 					$key = $key_name[1];
 
 					// Create definitions
@@ -337,11 +308,11 @@ class Database_Installer extends \Controller
 							$key = 'PRIMARY';
 						}
 
-						$return[$table]['TABLE_CREATE_DEFINITIONS'][$key] = preg_replace('/,$/i', '', trim($v));
+						$return[$table]['TABLE_CREATE_DEFINITIONS'][$key] = preg_replace('/,$/', '', trim($v));
 					}
 					else
 					{
-						$return[$table]['TABLE_FIELDS'][$key] = preg_replace('/,$/i', '', trim($v));
+						$return[$table]['TABLE_FIELDS'][$key] = preg_replace('/,$/', '', trim($v));
 					}
 				}
 			}
@@ -369,7 +340,7 @@ class Database_Installer extends \Controller
 	protected function getFromDB()
 	{
 		$this->import('Database');
-		$tables = preg_grep('/^tl_/i', $this->Database->listTables(null, true));
+		$tables = preg_grep('/^tl_/', $this->Database->listTables(null, true));
 
 		if (empty($tables))
 		{

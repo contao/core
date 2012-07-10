@@ -4,6 +4,97 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added a button to the safe mode notice, which allows administrators to disable
+the safe mode without having to open the back end settings.
+
+### Fixed
+Use the correct path to font-face style sheets (see #4475).
+
+### New
+Added a "requestTokenWhitelist" array to the Contao configuration which can be
+used to exempt domains from the request token check (see #3164). Example:
+
+```
+$GLOBALS['TL_CONFIG']['requestTokenWhitelist'][] = 'facebook.com';
+```
+
+The code above can be added in the local configuration file.
+
+### Changed
+Make the return value of `Database_Result::fetchEach()` an associative array
+with the ID as key and the requested field as value.
+
+### Changed
+Contao now uses `crypt()` to generate stronger password hashes (see #3225).
+
+### Changed
+Load the core modules before the extension modules.
+
+### New
+Added a separate field to enter the link title to the "hyperlink" and "download"
+elements (see #4068).
+
+### Fixed
+Hide the `MAX_FILE_SIZE` form field if there is no upload field (see #4001).
+
+### Changed
+Moved the meta viewport tag to its own PHP variable so it can be replaced with
+a custom version if necessary (see #4335).
+
+### Changed
+Image galleries are now rendered as unordered lists (see #4130). The Contao CSS
+framework will format them respecting the "thumbnails per row" setting.
+
+### Changed
+The session and authentication cookies are now "http-only" (see #4185).
+
+### Improved
+It is now possible to choose multiple analytics templates (see #4328).
+
+### Improved
+Improved the "latest changes" overview on the back end welcome page and added
+links to edit or restore the changed element (see #4336).
+
+### New
+Added a YouTube content element based on mediaplayer.js (see #4363).
+
+### New
+Added an additional routine to check boxes, radio buttons and select menus,
+which compares the user input with the given options (see #4383). 
+
+### Fixed
+Ignore DCA files which do not relate to a database table when building the DCA
+extracts during installation (see #4316).
+
+### Fixed
+The Combiner now correctly supports all kind of relative paths (see #4161).
+
+### New
+Added a jQuery tablesort plugin (see #4393).
+
+### Fixed
+Adjusted the permission checks and reworked the "content elements everywhere"
+structure (it is now entirely configured in the DCA).
+
+### Fixed
+Since the command scheduler now supports minutely jobs, the `cron.php` file has
+to be adjusted accordingly (see #4425).
+
+### New
+Added a development .htaccess file (thanks to Wael M. Nasreddine) (see #4419).
+
+### New
+Content elements can now be used everywhere (no kidding). The `ptable` name of
+the content table must therefore be assigned in the module configuration:
+
+```
+$GLOBALS['BE_MOD']['content']['article']['contentPtable'] = 'tl_article';
+```
+
+The news module has already been adjusted, the other modules will follow.
+
+
 ### Improved
 Do not force a password change in the back end if an administrator switches to
 an account (see #3984). Thanks a lot to psi-4ward and aschempp for their work.

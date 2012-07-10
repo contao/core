@@ -96,7 +96,7 @@ class RebuildIndex extends \Backend implements \executable
 			$this->Automator->purgeSearchTables();
 
 			// Hide unpublished elements
-			$this->setCookie('FE_PREVIEW', 0, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
+			$this->setCookie('FE_PREVIEW', 0, ($time - 86400));
 
 			// Calculate the hash
 			$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . 'FE_USER_AUTH');
@@ -113,15 +113,15 @@ class RebuildIndex extends \Backend implements \executable
 							   ->execute(\Input::get('user'), $time, 'FE_USER_AUTH', session_id(), \Environment::get('ip'), $strHash);
 
 				// Set the cookie
-				$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);
+				$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
 			}
 
 			// Log out the front end user
 			else
 			{
 				// Unset the cookies
-				$this->setCookie('FE_USER_AUTH', $strHash, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
-				$this->setCookie('FE_AUTO_LOGIN', \Input::cookie('FE_AUTO_LOGIN'), ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
+				$this->setCookie('FE_USER_AUTH', $strHash, ($time - 86400), null, null, false, true);
+				$this->setCookie('FE_AUTO_LOGIN', \Input::cookie('FE_AUTO_LOGIN'), ($time - 86400), null, null, false, true);
 			}
 
 			$strBuffer = '';

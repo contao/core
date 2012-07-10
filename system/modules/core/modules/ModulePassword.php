@@ -280,7 +280,7 @@ class ModulePassword extends \Module
 		$objMember->save();
 
 		$strConfirmation = $this->reg_password;
-		preg_match_all('/##[^#]+##/i', $strConfirmation, $arrChunks);
+		preg_match_all('/##[^#]+##/', $strConfirmation, $arrChunks);
 
 		foreach ($arrChunks[0] as $strChunk)
 		{
@@ -301,7 +301,7 @@ class ModulePassword extends \Module
 					{
 						$strConfirmation = str_replace($strChunk, $objMember->$strKey, $strConfirmation);
 					}
-					catch (Exception $e)
+					catch (\Exception $e)
 					{
 						$strConfirmation = str_replace($strChunk, '', $strConfirmation);
 						$this->log('Invalid wildcard "' . $strKey . '" used in password request e-mail', 'ModulePassword sendPasswordLink()', TL_GENERAL, $e->getMessage());

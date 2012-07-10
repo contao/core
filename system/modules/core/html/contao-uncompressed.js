@@ -777,7 +777,19 @@ var Backend =
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
 			var val = [], tls = [];
             var par = opt.id.replace(/_[0-9]+$/, '') + '_parent'; // Strip the "edit multiple" suffixes
-			var inp = window.frames[0].document.getElementById(par).getElementsByTagName('input');
+			var frm = null;
+			var frms = window.frames;
+			for (var i=0; i<frms.length; i++) {
+				if (frms[i].name == 'simple-modal-iframe') {
+					frm = frms[i];
+					break;
+				}
+			}
+			if (frm === null) {
+				alert('Could not find the SimpleModal frame');
+				return;
+			}
+			var inp = frm.document.getElementById(par).getElementsByTagName('input');
 			for (var i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
                 if (!inp[i].id.match(/^reset_/)) {
@@ -802,7 +814,7 @@ var Backend =
 		});
 		M.show({
 			'title': opt.title,
-			'contents': '<iframe src="' + opt.url + '" width="100%" height="' + opt.height + '" frameborder="0"></iframe>',
+			'contents': '<iframe src="' + opt.url + '" name="simple-modal-iframe" width="100%" height="' + opt.height + '" frameborder="0"></iframe>',
 			'model': 'modal'
 		});
 	},
@@ -1004,7 +1016,7 @@ var Backend =
 	/**
 	 * Open the page picker wizard in a modal window
 	 * @param string
-	 * @deprecated Now uses Backend.openModalWindow()
+	 * @deprecated Use Backend.openModalIframe() instead
 	 */
 	pickPage: function(id) {
 		var width = 320;
@@ -1021,7 +1033,7 @@ var Backend =
 	 * Open the file picker wizard in a modal window
 	 * @param string
 	 * @param string
-	 * @deprecated Now uses Backend.openModalWindow()
+	 * @deprecated Use Backend.openModalIframe() instead
 	 */
 	pickFile: function(id, filter) {
 		var width = 320;
@@ -1292,7 +1304,7 @@ var Backend =
 			for (var j=0; j<childs.length; j++) {
 				if (textarea = childs[j].getFirst('textarea')) {
 					textarea.set('tabindex', tabindex++);
-					textarea.name = textarea.name.replace(/\[[0-9]+\][[0-9]+\]/ig, '[' + (i-1) + '][' + j + ']')
+					textarea.name = textarea.name.replace(/\[[0-9]+\][[0-9]+\]/g, '[' + (i-1) + '][' + j + ']')
 				}
 			}
 		}
@@ -1384,7 +1396,7 @@ var Backend =
 			for (var j=0; j<childs.length; j++) {
 				if (select = childs[j].getFirst('select')) {
 					select.set('tabindex', tabindex++);
-					select.name = select.name.replace(/\[[0-9]+\]/ig, '[' + i + ']');
+					select.name = select.name.replace(/\[[0-9]+\]/g, '[' + i + ']');
 				}
 			}
 		}

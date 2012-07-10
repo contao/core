@@ -106,7 +106,7 @@ $GLOBALS['TL_LANG']['tl_style']['upper-alpha']   = 'Großbuchstaben';
 $GLOBALS['TL_LANG']['tl_style']['lower-alpha']   = 'Kleinbuchstaben';
 $GLOBALS['TL_LANG']['tl_style']['uppercase']     = 'Großbuchstaben';
 $GLOBALS['TL_LANG']['tl_style']['lowercase']     = 'Kleinbuchstaben';
-$GLOBALS['TL_LANG']['tl_style']['capitalize']    = 'Kapitälchen';
+$GLOBALS['TL_LANG']['tl_style']['capitalize']    = 'Anfangsbuchstaben groß';
 $GLOBALS['TL_LANG']['tl_style']['none']          = 'deaktivieren';
 
 

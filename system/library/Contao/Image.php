@@ -88,7 +88,7 @@ class Image
 		$image = rawurldecode($image);
 
 		// Check whether the file exists
-		if (!file_exists(TL_ROOT . '/' . $image))
+		if (!is_file(TL_ROOT . '/' . $image))
 		{
 			\System::log('Image "' . $image . '" could not be found', 'Controller getImage()', TL_ERROR);
 			return null;
@@ -107,7 +107,7 @@ class Image
 		// No resizing required
 		if ($objFile->width == $width && $objFile->height == $height)
 		{
-			return $image;
+			return \System::urlEncode($image);
 		}
 
 		// No mode given

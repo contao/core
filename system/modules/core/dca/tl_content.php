@@ -21,8 +21,11 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ptable'                      => 'tl_article',
 		'enableVersioning'            => true,
+		'dynamicPtable' => array
+		(
+			'article' => array('tl_article', array('tl_article', 'checkContentPermission'))
+		),
 		'onload_callback' => array
 		(
 			array('tl_content', 'checkPermission')
@@ -32,7 +35,8 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index'
+				'pid' => 'index',
+				'ptable' => 'index'
 			)
 		)
 	),
@@ -45,7 +49,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'mode'                    => 4,
 			'fields'                  => array('sorting'),
 			'panelLayout'             => 'filter;search,limit',
-			'headerFields'            => array('title', 'author', 'inColumn', 'tstamp', 'showTeaser', 'published', 'start', 'stop'),
+			'headerFields'            => array('title', 'headline', 'author', 'inColumn', 'tstamp', 'showTeaser', 'published', 'start', 'stop'),
 			'child_record_callback'   => array('tl_content', 'addCteType')
 		),
 		'global_operations' => array
@@ -119,12 +123,13 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'accordionmooStart'           => '{type_legend},type,mooType;{moo_legend},mooHeadline,mooStyle,mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'accordionmooStop'            => '{type_legend},type,mooType;{moo_legend},mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop',
 		'code'                        => '{type_legend},type,headline;{text_legend},highlight,shClass,code;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
-		'hyperlink'                   => '{type_legend},type,headline;{link_legend},url,target,linkTitle,rel,embed;{imglink_legend:hide},useImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
+		'hyperlink'                   => '{type_legend},type,headline;{link_legend},url,target,linkTitle,embed,titleText,rel;{imglink_legend:hide},useImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'toplink'                     => '{type_legend},type,linkTitle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'image'                       => '{type_legend},type,headline;{source_legend},singleSRC;{image_legend},alt,title,size,imagemargin,imageUrl,fullsize,caption;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'gallery'                     => '{type_legend},type,headline;{source_legend},multiSRC,sortBy,useHomeDir;{image_legend},size,imagemargin,perRow,fullsize,perPage,numberOfItems;{template_legend:hide},galleryTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'player'                      => '{type_legend},type,headline;{source_legend},playerSRC;{poster_legend:hide},posterSRC;{player_legend},playerSize,autoplay;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
-		'download'                    => '{type_legend},type,headline;{source_legend},singleSRC;{dwnconfig_legend},linkTitle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
+		'youtube'                     => '{type_legend},type,headline;{source_legend},youtube;{poster_legend:hide},posterSRC;{player_legend},playerSize,autoplay;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
+		'download'                    => '{type_legend},type,headline;{source_legend},singleSRC;{dwnconfig_legend},linkTitle,titleText;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'downloads'                   => '{type_legend},type,headline;{source_legend},multiSRC,sortBy,useHomeDir;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'alias'                       => '{type_legend},type;{include_legend},cteAlias;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'article'                     => '{type_legend},type;{include_legend},articleAlias;{protected_legend:hide},protected;{invisible_legend:hide},invisible,start,stop',
@@ -151,9 +156,11 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		),
 		'pid' => array
 		(
-			'foreignKey'              => 'tl_article.title',
-			'sql'                     => "int(10) unsigned NOT NULL default '0'",
-			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'ptable' => array
+		(
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'sorting' => array
 		(
@@ -324,7 +331,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['tableitems'],
 			'exclude'                 => true,
 			'inputType'               => 'tableWizard',
-			'eval'                    => array('allowHtml'=>true, 'doNotSaveEmpty'=>true, 'style'=>'width:142px; height:66px;'),
+			'eval'                    => array('allowHtml'=>true, 'doNotSaveEmpty'=>true, 'style'=>'width:142px;height:66px'),
 			'xlabel' => array
 			(
 				array('tl_content', 'tableImportWizard')
@@ -480,6 +487,15 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'eval'                    => array('tl_class'=>'w50 m12'),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
+		'titleText' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['titleText'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
 		'linkTitle' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['linkTitle'],
@@ -494,7 +510,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['embed'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long clr'),
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'rel' => array
@@ -524,6 +540,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		),
 		'orderSRC' => array
 		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['orderSRC'],
 			'sql'                     => "text NULL"
 		),
 		'useHomeDir' => array
@@ -585,6 +602,14 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'inputType'               => 'fileTree',
 			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'files'=>true, 'mandatory'=>true),
 			'sql'                     => "blob NULL"
+		),
+		'youtube' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['youtube'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'url', 'mandatory'=>true),
+			'sql'                     => "varchar(16) NOT NULL default ''"
 		),
 		'posterSRC' => array
 		(
@@ -769,7 +794,8 @@ class tl_content extends Backend
 
 
 	/**
-	 * Check permissions to edit table tl_content
+	 * Trigger the permission check of the dynamic parent table
+	 * @throws \Exception
 	 */
 	public function checkPermission()
 	{
@@ -778,117 +804,16 @@ class tl_content extends Backend
 			return;
 		}
 
-		// Get pagemounts
-		$pagemounts = array();
-
-		foreach ($this->User->pagemounts as $root)
+		if (!isset($GLOBALS['TL_DCA']['tl_content']['config']['dynamicPtable'][\Input::get('do')]))
 		{
-			$pagemounts[] = $root;
-			$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page'));
+			throw new \Exception('Module "' . \Input::get('do') . '" does not support dynamic parent tables');
 		}
 
-		$pagemounts = array_unique($pagemounts);
+		$callback = $GLOBALS['TL_DCA']['tl_content']['config']['dynamicPtable'][\Input::get('do')][1];
+		$this->loadDataContainer($GLOBALS['TL_DCA']['tl_content']['config']['dynamicPtable'][\Input::get('do')][0]);
 
-		// Check the current action
-		switch (Input::get('act'))
-		{
-			case 'paste':
-				// Allow
-				break;
-
-			case '': // empty
-			case 'create':
-			case 'select':
-				// Check access to the article
-				if (!$this->checkAccessToElement(CURRENT_ID, $pagemounts, true))
-				{
-					$this->redirect('contao/main.php?act=error');
-				}
-				break;
-
-			case 'editAll':
-			case 'deleteAll':
-			case 'overrideAll':
-			case 'cutAll':
-			case 'copyAll':
-				// Check access to the parent element if a content element is moved
-				if ((Input::get('act') == 'cutAll' || Input::get('act') == 'copyAll') && !$this->checkAccessToElement(Input::get('pid'), $pagemounts, (Input::get('mode') == 2)))
-				{
-					$this->redirect('contao/main.php?act=error');
-				}
-
-				$objCes = $this->Database->prepare("SELECT id FROM tl_content WHERE pid=?")
-										 ->execute(CURRENT_ID);
-
-				$session = $this->Session->getData();
-				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $objCes->fetchEach('id'));
-				$this->Session->setData($session);
-				break;
-
-			case 'cut':
-			case 'copy':
-				// Check access to the parent element if a content element is moved
-				if (!$this->checkAccessToElement(Input::get('pid'), $pagemounts, (Input::get('mode') == 2)))
-				{
-					$this->redirect('contao/main.php?act=error');
-				}
-				// NO BREAK STATEMENT HERE
-
-			default:
-				// Check access to the content element
-				if (!$this->checkAccessToElement(Input::get('id'), $pagemounts))
-				{
-					$this->redirect('contao/main.php?act=error');
-				}
-				break;
-		}
-	}
-
-
-	/**
-	 * Check access to a particular content element
-	 * @param integer
-	 * @param array
-	 * @param boolean
-	 * @return boolean
-	 */
-	protected function checkAccessToElement($id, $pagemounts, $blnIsPid=false)
-	{
-		if ($blnIsPid)
-		{
-			$objPage = $this->Database->prepare("SELECT p.id, p.pid, p.includeChmod, p.chmod, p.cuser, p.cgroup, a.id AS aid FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
-									  ->limit(1)
-									  ->execute($id);
-		}
-		else
-		{
-			$objPage = $this->Database->prepare("SELECT p.id, p.pid, p.includeChmod, p.chmod, p.cuser, p.cgroup, a.id AS aid FROM tl_content c, tl_article a, tl_page p WHERE c.id=? AND c.pid=a.id AND a.pid=p.id")
-									  ->limit(1)
-									  ->execute($id);
-		}
-
-		// Invalid ID
-		if ($objPage->numRows < 1)
-		{
-			$this->log('Invalid content element ID ' . $id, 'tl_content checkAccessToElement()', TL_ERROR);
-			return false;
-		}
-
-		// The page is not mounted
-		if (!in_array($objPage->id, $pagemounts))
-		{
-			$this->log('Not enough permissions to modify article ID ' . $objPage->aid . ' on page ID ' . $objPage->id, 'tl_content checkAccessToElement()', TL_ERROR);
-			return false;
-		}
-
-		// Not enough permissions to modify the article
-		if (!$this->User->isAllowed(4, $objPage->row()))
-		{
-			$this->log('Not enough permissions to modify article ID ' . $objPage->aid, 'tl_content checkAccessToElement()', TL_ERROR);
-			return false;
-		}
-
-		return true;
+		$this->import($callback[0]);
+		$this->$callback[0]->$callback[1]();
 	}
 
 
@@ -1393,7 +1318,7 @@ class tl_content extends Backend
 	 */
 	public function pagePicker(DataContainer $dc)
 	{
-		return ' <a href="contao/page.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="contao/page.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 

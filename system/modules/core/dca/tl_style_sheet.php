@@ -162,7 +162,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'inputType'               => 'text',
 			'exclude'                 => true,
 			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
-			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'cc' => array
 		(
@@ -180,6 +180,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		'media' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['media'],
+			'default'                 => array('all'),
 			'inputType'               => 'checkbox',
 			'exclude'                 => true,
 			'filter'                  => true,

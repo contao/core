@@ -83,11 +83,19 @@ class ModuleQuicklink extends \Module
 	protected function compile()
 	{
 		// Get all active pages
-		$arrPages = \PageModel::findPublishedRegularWithoutGuestsByIds($this->pages)->getData();
+		$objPages = \PageModel::findPublishedRegularWithoutGuestsByIds($this->pages);
 
-		if (empty($arrPages))
+		// Return if there are no pages
+		if ($objPages === null)
 		{
 			return;
+		}
+
+		$arrPages = array();
+
+		while ($objPages->next())
+		{
+			$arrPages[] = $objPages->row();
 		}
 
 		$items = array();

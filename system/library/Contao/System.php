@@ -190,6 +190,7 @@ abstract class System
 	 */
 	protected function import($strClass, $strKey=null, $blnForce=false)
 	{
+		// FIXME: use $this->arrObjects[$strKey] and __get() instead?
 		$strKey = $strKey ?: $strClass;
 
 		if (!$blnForce && is_object($this->$strKey))
@@ -389,7 +390,7 @@ abstract class System
 
 		// Get the default referer
 		$return = preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', (($session['current'] != \Environment::get('requestUri')) ? $session['current'] : $session['last']));
-		$return = preg_replace('/^'.preg_quote(TL_PATH, '/').'\//i', '', $return);
+		$return = preg_replace('/^'.preg_quote(TL_PATH, '/').'\//', '', $return);
 
 		// Fallback to the generic referer in the front end
 		if ($return == '' && TL_MODE == 'FE')
@@ -460,10 +461,10 @@ abstract class System
 		{
 			// Generate the cache files
 			$objCacheFallback = new \File('system/cache/language/en/' . $strName . '.php');
-			$objCacheFallback->write('<?php' . "\n");
+			$objCacheFallback->write('<?php');
 
 			$objCacheFile = new \File('system/cache/language/' . $strLanguage . '/' . $strName . '.php');
-			$objCacheFile->write('<?php' . "\n");
+			$objCacheFile->write('<?php');
 
 			// Parse all active modules
 			foreach (\Config::getInstance()->getActiveModules() as $strModule)
@@ -472,7 +473,7 @@ abstract class System
 
 				if (file_exists($strFallback))
 				{
-					$objCacheFallback->append(file_get_contents($strFallback, null, null, 6));
+					$objCacheFallback->append(static::readPhpFileWithoutTags($strFallback));
 					include $strFallback;
 				}
 
@@ -485,7 +486,7 @@ abstract class System
 
 				if (file_exists($strFile))
 				{
-					$objCacheFile->append(file_get_contents($strFile, null, null, 6));
+					$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
 					include $strFile;
 				}
 			}
@@ -620,28 +621,30 @@ abstract class System
 	/**
 	 * Set a cookie
 	 * 
-	 * @param string  $strName    The cookie name
-	 * @param mixed   $varValue   The cookie value
-	 * @param integer $intExpires The expiration date
-	 * @param string  $strPath    An optional path
-	 * @param string  $strDomain  An optional domain name
-	 * @param boolean $blnSecure  If true, the secure flag will be set
+	 * @param string  $strName     The cookie name
+	 * @param mixed   $varValue    The cookie value
+	 * @param integer $intExpires  The expiration date
+	 * @param string  $strPath     An optional path
+	 * @param string  $strDomain   An optional domain name
+	 * @param boolean $blnSecure   If true, the secure flag will be set
+	 * @param boolean $blnHttpOnly If true, the http-only flag will be set
 	 */
-	public static function setCookie($strName, $varValue, $intExpires, $strPath=null, $strDomain=null, $blnSecure=false)
+	public static function setCookie($strName, $varValue, $intExpires, $strPath=null, $strDomain=null, $blnSecure=false, $blnHttpOnly=false)
 	{
-		if ($strPath === null)
+		if ($strPath == '')
 		{
-			$strPath = $GLOBALS['TL_CONFIG']['websitePath'];
+			$strPath = $GLOBALS['TL_CONFIG']['websitePath'] ?: '/'; // see #4390
 		}
 
 		$objCookie = new \stdClass();
 
-		$objCookie->strName    = $strName;
-		$objCookie->varValue   = $varValue;
-		$objCookie->intExpires = $intExpires;
-		$objCookie->strPath    = $strPath;
-		$objCookie->strDomain  = $strDomain;
-		$objCookie->blnSecure  = $blnSecure;
+		$objCookie->strName     = $strName;
+		$objCookie->varValue    = $varValue;
+		$objCookie->intExpires  = $intExpires;
+		$objCookie->strPath     = $strPath;
+		$objCookie->strDomain   = $strDomain;
+		$objCookie->blnSecure   = $blnSecure;
+		$objCookie->blnHttpOnly = $blnHttpOnly;
 
 		// HOOK: allow to add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['setCookie']) && is_array($GLOBALS['TL_HOOKS']['setCookie']))
@@ -652,7 +655,7 @@ abstract class System
 			}
 		}
 
-		setcookie($objCookie->strName, $objCookie->varValue, $objCookie->intExpires, $objCookie->strPath, $objCookie->strDomain, $objCookie->blnSecure);
+		setcookie($objCookie->strName, $objCookie->varValue, $objCookie->intExpires, $objCookie->strPath, $objCookie->strDomain, $objCookie->blnSecure, $objCookie->blnHttpOnly);
 	}
 
 
@@ -764,6 +767,31 @@ abstract class System
 		}
 
 		return implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+	}
+
+
+	/**
+	 * Read the contents of a PHP file, stripping the opening and closing PHP tags
+	 * 
+	 * @param string $strName The name of the PHP file
+	 * 
+	 * @return string The PHP code without the PHP tags
+	 */
+	protected static function readPhpFileWithoutTags($strName)
+	{
+		$strCode = file_get_contents($strName);
+
+		if (substr($strCode, 0, 5) == '<?php')
+		{
+			$strCode = substr($strCode, 5);
+		}
+
+		if (substr($strCode, -2) == '?>')
+		{
+			$strCode = substr($strCode, 0, -2);
+		}
+
+		return rtrim($strCode);
 	}
 
 

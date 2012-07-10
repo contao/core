@@ -273,7 +273,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
-			'eval'                    => array('style'=>'height:60px;', 'tl_class'=>'clr'),
+			'eval'                    => array('style'=>'height:60px', 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
 		),
 		'redirect' => array

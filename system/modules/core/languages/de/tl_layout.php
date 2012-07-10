@@ -54,7 +54,7 @@ $GLOBALS['TL_LANG']['tl_layout']['jquery']         = array('jQuery-Templates', '
 $GLOBALS['TL_LANG']['tl_layout']['addMooTools']    = array('MooTools laden', 'Dem Layout die MooTools-Bibliothek hinzufügen.');
 $GLOBALS['TL_LANG']['tl_layout']['mooSource']      = array('MooTools-Quelle', 'Hier können Sie auswählen, von wo die MooTools-Skripte geladen werden.');
 $GLOBALS['TL_LANG']['tl_layout']['mootools']       = array('MooTools-Templates', 'Hier können Sie eines oder mehrere MooTools-Templates auswählen.');
-$GLOBALS['TL_LANG']['tl_layout']['analytics']      = array('Analytics-Template', 'Hier können Sie dem Layout ein Analytics-Template (z.B. für Google-Analytics oder Piwik) hinzufügen. Beachten Sie, dass Sie diese Templates anpassen und Ihre Analytics-ID hinzufügen müssen, bevor Sie sie verwenden können!');
+$GLOBALS['TL_LANG']['tl_layout']['analytics']      = array('Analytics-Templates', 'Hier können Sie die Analytics-Templates (z.B. für Google-Analytics oder Piwik) aktivieren. Beachten Sie, dass Sie diese Templates anpassen und Ihre Analytics-ID hinzufügen müssen, bevor Sie sie verwenden können!');
 $GLOBALS['TL_LANG']['tl_layout']['script']         = array('Eigener JavaScript-Code', 'Der JavaScript-Code wird am Ende der Seite eingefügt.');
 $GLOBALS['TL_LANG']['tl_layout']['static']         = array('Statisches Layout', 'Ein statisches Layout mit fester Breite und Ausrichtung erstellen.');
 $GLOBALS['TL_LANG']['tl_layout']['width']          = array('Gesamtbreite', 'Die Gesamtbreite wird dem Wrapper-Element zugewiesen.');
@@ -95,7 +95,7 @@ $GLOBALS['TL_LANG']['tl_layout']['main']             = 'In der Hauptspalte';
 $GLOBALS['TL_LANG']['tl_layout']['after']            = 'Oberhalb der Fußzeile';
 $GLOBALS['TL_LANG']['tl_layout']['edit_styles']      = 'Die Stylesheets bearbeiten';
 $GLOBALS['TL_LANG']['tl_layout']['edit_module']      = 'Das Modul bearbeiten';
-$GLOBALS['TL_LANG']['tl_layout']['analytics_google'] = 'Google-Analytics';
+$GLOBALS['TL_LANG']['tl_layout']['analytics_google'] = 'Google';
 $GLOBALS['TL_LANG']['tl_layout']['analytics_piwik']  = 'Piwik';
 
 

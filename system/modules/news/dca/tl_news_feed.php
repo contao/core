@@ -203,7 +203,7 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:60px;', 'tl_class'=>'clr'),
+			'eval'                    => array('style'=>'height:60px', 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
 		)
 	)

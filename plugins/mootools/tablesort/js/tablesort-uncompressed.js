@@ -68,7 +68,7 @@ var TableSort = new Class(
 
 		var lastRow = table.tHead.rows[table.tHead.rows.length-1];
 
-		// Add sorting links
+		// Add the sorting links
 		for (var i=0; i<lastRow.cells.length; i++)
 		{
 			if (lastRow.cells[i].className.indexOf('unsortable') != -1)
@@ -84,9 +84,8 @@ var TableSort = new Class(
 			a.innerHTML = txt;
 			el.innerHTML = '';
 
-			// Add event
-			a.addEvent('click', function(i, el) { this.resort(i, el) }.pass([i, el], this));
-			a.injectInside(el);
+			// Add the event
+			a.addEvent('click', function(i, el) { this.resort(i, el) }.pass([i, el], this)).inject(el);
 
 			// Sort the table if there is a cookie
 			if (cook !== null && cook[0] == i)
@@ -130,7 +129,7 @@ var TableSort = new Class(
 		// Skip emtpy cells and get value
 		while (val == '' && table.tBodies[0].rows[i])
 		{
-			val = table.tBodies[0].rows[i].cells[index].innerHTML.replace(/<[^>]+>/ig, '').clean();
+			val = table.tBodies[0].rows[i].cells[index].innerHTML.replace(/<[^>]+>/g, '').clean();
 			i++;
 		}
 
@@ -261,8 +260,8 @@ var TableSort = new Class(
 	 */
 	sortDate: function(a, b)
 	{
-		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/ig, '').clean();
-		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/ig, '').clean();
+		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean();
+		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean();
 
 		var aaChunks = aa.replace(/[\/\.-]/g, ' ').split(' ');
 		var bbChunks = bb.replace(/[\/\.-]/g, ' ').split(' ');
@@ -314,8 +313,8 @@ var TableSort = new Class(
 			bb = bb.replace(DECIMAL_SEPARATOR, '.');
 		}
 
-		aa = aa.replace(/<[^>]+>/i).replace(/[^0-9\.,-]/g, '').clean();
-		bb = bb.replace(/<[^>]+>/i).replace(/[^0-9\.,-]/g, '').clean();
+		aa = aa.replace(/<[^>]+>/).replace(/[^0-9\.,-]/g, '').clean();
+		bb = bb.replace(/<[^>]+>/).replace(/[^0-9\.,-]/g, '').clean();
 
 		aa = parseFloat(aa);
 
@@ -343,8 +342,8 @@ var TableSort = new Class(
 	 */
 	sortCaseInsensitive: function(a, b)
 	{
-		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/ig, '').clean().toLowerCase();
-		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/ig, '').clean().toLowerCase();
+		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean().toLowerCase();
+		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean().toLowerCase();
 
 		if (aa == bb)
 		{

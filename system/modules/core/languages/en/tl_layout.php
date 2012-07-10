@@ -54,7 +54,7 @@ $GLOBALS['TL_LANG']['tl_layout']['jquery']         = array('jQuery templates', '
 $GLOBALS['TL_LANG']['tl_layout']['addMooTools']    = array('Include MooTools', 'Include the MooTools library in the layout.');
 $GLOBALS['TL_LANG']['tl_layout']['mooSource']      = array('MooTools source', 'Here you can select from where to load the MooTools scripts.');
 $GLOBALS['TL_LANG']['tl_layout']['mootools']       = array('MooTools templates', 'Here you can select one or more MooTools templates.');
-$GLOBALS['TL_LANG']['tl_layout']['analytics']      = array('Analytics template', 'Here you can add an analytics template (e.g. for Google Analytics or Piwik) to the layout. Note that you have to adjust those templates and add your analytics ID before you can use them!');
+$GLOBALS['TL_LANG']['tl_layout']['analytics']      = array('Analytics templates', 'Here you can activate the analytics templates (e.g. for Google Analytics or Piwik). Note that you have to adjust those templates and add your analytics ID before you can use them!');
 $GLOBALS['TL_LANG']['tl_layout']['script']         = array('Custom JavaScript code', 'The JavaScript code which will be inserted at the bottom of the page.');
 $GLOBALS['TL_LANG']['tl_layout']['static']         = array('Static layout', 'Create a static layout with a fixed width and alignment.');
 $GLOBALS['TL_LANG']['tl_layout']['width']          = array('Overall width', 'The overall width will be applied to the wrapper element.');
@@ -95,7 +95,7 @@ $GLOBALS['TL_LANG']['tl_layout']['main']             = 'Inside the main column';
 $GLOBALS['TL_LANG']['tl_layout']['after']            = 'Before the page footer';
 $GLOBALS['TL_LANG']['tl_layout']['edit_styles']      = 'Edit the style sheets';
 $GLOBALS['TL_LANG']['tl_layout']['edit_module']      = 'Edit the module';
-$GLOBALS['TL_LANG']['tl_layout']['analytics_google'] = 'Google Analytics';
+$GLOBALS['TL_LANG']['tl_layout']['analytics_google'] = 'Google';
 $GLOBALS['TL_LANG']['tl_layout']['analytics_piwik']  = 'Piwik';
 
 

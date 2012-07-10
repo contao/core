@@ -277,7 +277,7 @@ abstract class Controller extends \System
 			}
 
 			// Disable indexing if protected
-			if ($objModule->protected && !preg_match('/^\s*<!-- indexer::stop/i', $strBuffer))
+			if ($objModule->protected && !preg_match('/^\s*<!-- indexer::stop/', $strBuffer))
 			{
 				$strBuffer = "\n<!-- indexer::stop -->". $strBuffer ."<!-- indexer::continue -->\n";
 			}
@@ -441,7 +441,7 @@ abstract class Controller extends \System
 		}
 
 		// Disable indexing if protected
-		if ($objElement->protected && !preg_match('/^\s*<!-- indexer::stop/i', $strBuffer))
+		if ($objElement->protected && !preg_match('/^\s*<!-- indexer::stop/', $strBuffer))
 		{
 			$strBuffer = "\n<!-- indexer::stop -->". $strBuffer ."<!-- indexer::continue -->\n";
 		}
@@ -508,7 +508,9 @@ abstract class Controller extends \System
 	{
 		if (is_object($intId))
 		{
-			$objPage = $intId;
+			// Always return a Model (see #4428)
+			$objPage = ($intId instanceof \Model_Collection) ? $intId->current() : $intId;
+
 			$intId = $objPage->id;
 			$strKey = __METHOD__ . '-' . $objPage->id;
 
@@ -1035,7 +1037,7 @@ abstract class Controller extends \System
 		$strBuffer = '';
 		$arrCache = array();
 
-		for($_rit=0; $_rit<count($tags); $_rit=$_rit+2)
+		for ($_rit=0; $_rit<count($tags); $_rit=$_rit+2)
 		{
 			$strBuffer .= $tags[$_rit];
 			$strTag = $tags[$_rit+1];
@@ -1863,7 +1865,7 @@ abstract class Controller extends \System
 							$arrCache[$strTag] = '<img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (($class != '') ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>');
 						}
 					}
-					catch (Exception $e)
+					catch (\Exception $e)
 					{
 						$arrCache[$strTag] = '';
 					}
@@ -1959,6 +1961,8 @@ abstract class Controller extends \System
 	 */
 	public static function generateImage($src, $alt='', $attributes='')
 	{
+		$src = rawurldecode($src);
+
 		if (strpos($src, '/') === false)
 		{
 			$src = 'system/themes/' . static::getTheme() . '/images/' . $src;
@@ -2244,7 +2248,7 @@ abstract class Controller extends \System
 		{
 			// Generate the cache file
 			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php');
-			$objCacheFile->write('<?php' . "\n");
+			$objCacheFile->write('<?php');
 
 			// Parse all module folders
 			foreach ($this->Config->getActiveModules() as $strModule)
@@ -2253,7 +2257,7 @@ abstract class Controller extends \System
 
 				if (file_exists($strFile))
 				{
-					$objCacheFile->append(file_get_contents($strFile, null, null, 6));
+					$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
 					include $strFile;
 				}
 			}
@@ -2498,11 +2502,19 @@ abstract class Controller extends \System
 			$strDescription = $objRecord->selector;
 		}
 
+		$strUrl = \Environment::get('request');
+
+		// Do not save the URL if the visibility is toggled via Ajax
+		if (preg_match('/&(amp;)?state=/', $strUrl))
+		{
+			$strUrl = '';
+		}
+
 		$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=? AND fromTable=?")
 					   ->execute($intId, $strTable);
 
-		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?)")
-					   ->execute($intId, time(), $intVersion, $strTable, $this->User->username, $this->User->id, $strDescription, serialize($objRecord->row()));
+		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, editUrl, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)")
+					   ->execute($intId, time(), $intVersion, $strTable, $this->User->username, $this->User->id, $strDescription, $strUrl, serialize($objRecord->row()));
 	}
 
 
@@ -2582,10 +2594,11 @@ abstract class Controller extends \System
 	 * @param string  $strTable     The table name
 	 * @param boolean $blnSorting   True if the table has a sorting field
 	 * @param array   $arrReturn    The array to be returned
+	 * @param string  $strWhere     Additional WHERE condition
 	 * 
 	 * @return array An array of child record IDs
 	 */
-	protected function getChildRecords($arrParentIds, $strTable, $blnSorting=false, $arrReturn=array())
+	protected function getChildRecords($arrParentIds, $strTable, $blnSorting=false, $arrReturn=array(), $strWhere='')
 	{
 		if (!is_array($arrParentIds))
 		{
@@ -2593,7 +2606,7 @@ abstract class Controller extends \System
 		}
 
 		$arrParentIds = array_map('intval', $arrParentIds);
-		$objChilds = $this->Database->execute("SELECT id, pid FROM " . $strTable . " WHERE pid IN(" . implode(',', $arrParentIds) . ")" . ($blnSorting ? " ORDER BY " . $this->Database->findInSet('pid', $arrParentIds) . ", sorting" : ""));
+		$objChilds = $this->Database->execute("SELECT id, pid FROM " . $strTable . " WHERE pid IN(" . implode(',', $arrParentIds) . ")" . ($strWhere ? " AND $strWhere" : "") . ($blnSorting ? " ORDER BY " . $this->Database->findInSet('pid', $arrParentIds) . ", sorting" : ""));
 
 		if ($objChilds->numRows > 0)
 		{
@@ -2614,12 +2627,12 @@ abstract class Controller extends \System
 					array_insert($arrReturn, $pos+1, $arrOrdered[$pid]);
 				}
 
-				$arrReturn = $this->getChildRecords($arrChilds, $strTable, $blnSorting, $arrReturn);
+				$arrReturn = $this->getChildRecords($arrChilds, $strTable, $blnSorting, $arrReturn, $strWhere);
 			}
 			else
 			{
 				$arrChilds = $objChilds->fetchEach('id');
-				$arrReturn = array_merge($arrChilds, $this->getChildRecords($arrChilds, $strTable, $blnSorting));
+				$arrReturn = array_merge($arrChilds, $this->getChildRecords($arrChilds, $strTable, $blnSorting, $arrReturn, $strWhere));
 			}
 		}
 
@@ -3152,30 +3165,41 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Set a static URL constant
+	 * Set the static URL constants
 	 * 
-	 * @param string $name The constant name
-	 * @param string $url  The static URL
+	 * @param object $objPage An optional page object
 	 */
-	public static function setStaticUrl($name, $url)
+	public static function setStaticUrls($objPage=null)
 	{
-		if (defined($name))
+		if (defined('TL_FILES_URL'))
 		{
 			return;
 		}
 
-		if ($url == '' || $GLOBALS['TL_CONFIG']['debugMode'])
-		{
-			define($name, '');
-		}
-		else
-		{
-			if (\Environment::get('ssl'))
-			{
-				$url = str_replace('http://', 'https://', $url);
-			}
+		$arrConstants = array
+		(
+			'staticFiles'   => 'TL_FILES_URL',
+			'staticPlugins' => 'TL_PLUGINS_URL',
+			'staticSystem'  => 'TL_SCRIPT_URL'
+		);
 
-			define($name, $url . TL_PATH . '/');
+		foreach ($arrConstants as $strKey=>$strConstant)
+		{
+			$url = ($objPage !== null) ? $objPage->$strKey : $GLOBALS['TL_CONFIG'][$strKey];
+
+			if ($url == '' || $GLOBALS['TL_CONFIG']['debugMode'])
+			{
+				define($strConstant, '');
+			}
+			else
+			{
+				if (\Environment::get('ssl'))
+				{
+					$url = str_replace('http://', 'https://', $url);
+				}
+
+				define($strConstant, $url . TL_PATH . '/');
+			}
 		}
 	}
 

@@ -41,8 +41,8 @@ class Database_Mysqli extends \Database
 	 */
 	protected function connect()
 	{
-		@$this->resConnection = new \mysqli($GLOBALS['TL_CONFIG']['dbHost'], $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $GLOBALS['TL_CONFIG']['dbDatabase'], $GLOBALS['TL_CONFIG']['dbPort']);
-		@$this->resConnection->set_charset($GLOBALS['TL_CONFIG']['dbCharset']);
+		@$this->resConnection = new \mysqli($this->arrConfig['dbHost'], $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbDatabase'], $this->arrConfig['dbPort']);
+		@$this->resConnection->set_charset($this->arrConfig['dbCharset']);
 	}
 
 
@@ -187,7 +187,7 @@ class Database_Mysqli extends \Database
 	 */
 	protected function set_database($strDatabase)
 	{
-		@$this->resConnection = new \mysqli($GLOBALS['TL_CONFIG']['dbHost'], $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $strDatabase, $GLOBALS['TL_CONFIG']['dbPort']);
+		@$this->resConnection = new \mysqli($this->arrConfig['dbHost'], $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $strDatabase, $this->arrConfig['dbPort']);
 	}
 
 

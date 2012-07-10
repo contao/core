@@ -231,6 +231,30 @@ class Config
 		{
 			accelerator_reset();
 		}
+
+		// Recompile the APC file (thanks to Trenker)
+		if (function_exists('apc_compile_file') && !ini_get('apc.stat'))
+		{
+			apc_compile_file('system/config/localconfig.php');
+		}
+
+		// Purge the eAccelerator cache (thanks to Trenker)
+		if (function_exists('eaccelerator_purge') && !ini_get('eaccelerator.check_mtime'))
+		{
+			@eaccelerator_purge();
+		}
+
+		// Purge the XCache cache (thanks to Trenker)
+		if (function_exists('xcache_count') && !ini_get('xcache.stat'))
+		{
+			if (($count = xcache_count(XC_TYPE_PHP)) > 0)
+			{
+				for ($id=0; $id<$count; $id++)
+				{
+					xcache_clear_cache(XC_TYPE_PHP, $id);
+				}
+			}
+		}
 	}
 
 
@@ -259,36 +283,29 @@ class Config
 			return (array) $this->arrCache['activeModules']; // (array) = PHP 5.1.2 fix
 		}
 
-		$arrActiveModules = array('core');
+		$arrActiveModules = array();
+		$arrCoreModules = array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository');
+		$arrExtensionModules = scan(TL_ROOT . '/system/modules');
 
-		// Load only core modules in safe mode
-		if ($GLOBALS['TL_CONFIG']['coreOnlyMode'])
+		// Load the core modules first
+		foreach ($arrCoreModules as $strModule)
 		{
-			$arrAllModules = array('core', 'calendar', 'comments', 'faq', 'listing', 'news', 'newsletter', 'repository');
+			if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
+			{
+				$arrActiveModules[] = $strModule;
+			}
 		}
-		else
+
+		// Then load the extension modules
+		if (!$GLOBALS['TL_CONFIG']['coreOnlyMode'])
 		{
-			$arrAllModules = scan(TL_ROOT . '/system/modules');
-		}
-
-		foreach ($arrAllModules as $strModule)
-		{
-			if (strncmp($strModule, '.', 1) === 0)
+			foreach ($arrExtensionModules as $strModule)
 			{
-				continue;
+				if (strncmp($strModule, '.', 1) !== 0 && !in_array($strModule, $arrCoreModules) && is_dir(TL_ROOT . '/system/modules/' . $strModule) && !file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
+				{
+					$arrActiveModules[] = $strModule;
+				}
 			}
-
-			if ($strModule == 'core' || !is_dir(TL_ROOT . '/system/modules/' . $strModule))
-			{
-				continue;
-			}
-
-			if (file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
-			{
-				continue;
-			}
-
-			$arrActiveModules[] = $strModule;
 		}
 
 		$this->arrCache['activeModules'] = $arrActiveModules;
@@ -382,8 +399,8 @@ class Config
 			return 'false';
 		}
 
-		$varValue = preg_replace('/[\n\r\t]+/i', ' ', str_replace("'", "\\'", $varValue));
-		$varValue = "'" . preg_replace('/ {2,}/i', ' ', $varValue) . "'";
+		$varValue = preg_replace('/[\n\r\t]+/', ' ', str_replace("'", "\\'", $varValue));
+		$varValue = "'" . preg_replace('/ {2,}/', ' ', $varValue) . "'";
 
 		return $varValue;
 	}

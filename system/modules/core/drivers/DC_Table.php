@@ -106,12 +106,20 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	 */
 	protected $blnUploadable = false;
 
+	/**
+	 * The current back end module
+	 * @param array
+	 */
+	protected $arrModule = array();
+
 
 	/**
 	 * Initialize the object
 	 * @param string
+	 * @param array
+	 * @throws \Exception
 	 */
-	public function __construct($strTable)
+	public function __construct($strTable, $arrModule=array())
 	{
 		parent::__construct();
 
@@ -187,6 +195,19 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		$this->ctable = $GLOBALS['TL_DCA'][$this->strTable]['config']['ctable'];
 		$this->treeView = in_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'], array(5, 6));
 		$this->root = null;
+
+		// Dynamically set the parent table of tl_content
+		if ($this->strTable == 'tl_content')
+		{
+			if (!isset($GLOBALS['TL_DCA']['tl_content']['config']['dynamicPtable'][\Input::get('do')]))
+			{
+				throw new \Exception('Module "' . \Input::get('do') . '" does not support dynamic parent tables');
+			}
+
+			$this->ptable = $GLOBALS['TL_DCA']['tl_content']['config']['dynamicPtable'][\Input::get('do')][0];
+		}
+
+		$this->arrModule = $arrModule;
 
 		// Call onload_callback (e.g. to check permissions)
 		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onload_callback']))
@@ -609,7 +630,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Get the new position
 		$this->getNewPosition('new', (strlen(\Input::get('pid')) ? \Input::get('pid') : null), (\Input::get('mode') == '2' ? true : false));
 
-		// Empty clipboard
+		// Dynamically set the parent table of tl_content
+		if ($this->strTable == 'tl_content')
+		{
+			$this->set['ptable'] = $this->ptable;
+		}
+
+		// Empty the clipboard
 		$arrClipboard = $this->Session->get('CLIPBOARD');
 		$arrClipboard[$this->strTable] = array();
 		$this->Session->set('CLIPBOARD', $arrClipboard);
@@ -703,6 +730,12 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 		}
 
+		// Dynamically set the parent table of tl_content
+		if ($this->strTable == 'tl_content')
+		{
+			$this->set['ptable'] = $this->ptable;
+		}
+
 		$this->Database->prepare("UPDATE " . $this->strTable . " %s WHERE id=?")
 					   ->set($this->set)
 					   ->execute($this->intId);
@@ -768,7 +801,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 								 ->limit(1)
 								 ->execute($this->intId);
 
-		// Copy values if the record contains data
+		// Copy the values if the record contains data
 		if ($objRow->numRows)
 		{
 			foreach ($objRow->fetchAssoc() as $k=>$v)
@@ -813,6 +846,12 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 		// Get the new position
 		$this->getNewPosition('copy', (strlen(\Input::get('pid')) ? \Input::get('pid') : null), (\Input::get('mode') == '2' ? true : false));
+
+		// Dynamically set the parent table of tl_content
+		if ($this->strTable == 'tl_content')
+		{
+			$this->set['ptable'] = $this->ptable;
+		}
 
 		// Empty clipboard
 		$arrClipboard = $this->Session->get('CLIPBOARD');
@@ -1637,13 +1676,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 				foreach ($boxes[$k] as $kk=>$vv)
 				{
-					if (preg_match('/^\[.*\]$/i', $vv))
+					if (preg_match('/^\[.*\]$/', $vv))
 					{
 						++$eCount;
 						continue;
 					}
 
-					if (preg_match('/^\{.*\}$/i', $vv))
+					if (preg_match('/^\{.*\}$/', $vv))
 					{
 						$legends[$k] = substr($vv, 1, -1);
 						unset($boxes[$k][$kk]);
@@ -1707,7 +1746,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						continue;
 					}
 
-					if (preg_match('/^\[.*\]$/i', $vv))
+					if (preg_match('/^\[.*\]$/', $vv))
 					{
 						$thisId = 'sub_' . substr($vv, 1, -1);
 						$blnAjax = ($ajaxId == $thisId && \Environment::get('isAjaxRequest')) ? true : false;
@@ -1813,7 +1852,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 <script>
 window.addEvent(\'domready\', function() {
-  $(\''.$this->strTable.'\').getElement(\'input[type="text"]\').focus();
+  (inp = $(\''.$this->strTable.'\').getElement(\'input[type="text"]\')) && inp.focus();
 });
 </script>';
 
@@ -1868,8 +1907,16 @@ window.addEvent(\'domready\', function() {
 			}
 
 			// Set the current timestamp (-> DO NOT CHANGE THE ORDER version - timestamp)
-			$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
-						   ->execute(time(), $this->intId);
+			if ($this->strTable == 'tl_content')
+			{
+				$this->Database->prepare("UPDATE " . $this->strTable . " SET ptable=?, tstamp=? WHERE id=?")
+							   ->execute($this->ptable, time(), $this->intId);
+			}
+			else
+			{
+				$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
+							   ->execute(time(), $this->intId);
+			}
 
 			// Redirect
 			if (isset($_POST['saveNclose']))
@@ -1898,7 +1945,8 @@ window.addEvent(\'domready\', function() {
 				{
 					$this->redirect(\Environment::get('script') . '?do=' . \Input::get('do'));
 				}
-				elseif (($this->ptable == 'tl_theme' && $this->strTable == 'tl_style_sheet') || ($this->ptable == 'tl_page' && $this->strTable == 'tl_article')) // TODO: try to abstract this
+				// TODO: try to abstract this
+				elseif (($this->ptable == 'tl_theme' && $this->strTable == 'tl_style_sheet') || ($this->ptable == 'tl_page' && $this->strTable == 'tl_article'))
 				{
 					$this->redirect($this->getReferer(false, $this->strTable));
 				}
@@ -2066,7 +2114,7 @@ window.addEvent(\'domready\', function() {
 						continue;
 					}
 
-					if (preg_match('/^\[.*\]$/i', $v))
+					if (preg_match('/^\[.*\]$/', $v))
 					{
 						$thisId = 'sub_' . substr($v, 1, -1) . '_' . $id;
 						$blnAjax = ($ajaxId == $thisId && \Environment::get('isAjaxRequest')) ? true : false;
@@ -2153,8 +2201,16 @@ window.addEvent(\'domready\', function() {
 					}
 
 					// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
-					$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
-								   ->execute(time(), $this->intId);
+					if ($this->strTable == 'tl_content')
+					{
+						$this->Database->prepare("UPDATE " . $this->strTable . " SET ptable=?, tstamp=? WHERE id=?")
+									   ->execute($this->ptable, time(), $this->intId);
+					}
+					else
+					{
+						$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
+									   ->execute(time(), $this->intId);
+					}
 				}
 			}
 
@@ -2184,7 +2240,7 @@ window.addEvent(\'domready\', function() {
 
 <script>
 window.addEvent(\'domready\', function() {
-  $(\''.$this->strTable.'\').getElement(\'input[type="text"]\').focus();
+  (inp = $(\''.$this->strTable.'\').getElement(\'input[type="text"]\')) && inp.focus();
 });
 </script>';
 
@@ -2396,8 +2452,16 @@ window.addEvent(\'domready\', function() {
 						}
 
 						// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
-						$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
-									   ->execute(time(), $this->intId);
+						if ($this->strTable == 'tl_content')
+						{
+							$this->Database->prepare("UPDATE " . $this->strTable . " SET ptable=?, tstamp=? WHERE id=?")
+										   ->execute($this->ptable, time(), $this->intId);
+						}
+						else
+						{
+							$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
+										   ->execute(time(), $this->intId);
+						}
 					}
 				}
 			}
@@ -2837,9 +2901,16 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Delete all records of the current table that are not related to the parent table
-		if (strlen($ptable))
+		if ($ptable != '')
 		{
-			$objStmt = $this->Database->execute("DELETE FROM " . $this->strTable . " WHERE NOT EXISTS (SELECT * FROM " . $ptable . " WHERE " . $this->strTable . ".pid = " . $ptable . ".id)");
+			if ($this->strTable == 'tl_content')
+			{
+				$objStmt = $this->Database->execute("DELETE FROM " . $this->strTable . " WHERE ptable='" . $ptable . "' AND NOT EXISTS (SELECT * FROM " . $ptable . " WHERE " . $this->strTable . ".pid = " . $ptable . ".id)");
+			}
+			else
+			{
+				$objStmt = $this->Database->execute("DELETE FROM " . $this->strTable . " WHERE NOT EXISTS (SELECT * FROM " . $ptable . " WHERE " . $this->strTable . ".pid = " . $ptable . ".id)");
+			}
 
 			if ($objStmt->affectedRows > 0)
 			{
@@ -2852,9 +2923,16 @@ window.addEvent(\'domready\', function() {
 		{
 			foreach ($ctable as $v)
 			{
-				if (strlen($v))
+				if ($v != '')
 				{
-					$objStmt = $this->Database->execute("DELETE FROM " . $v . " WHERE NOT EXISTS (SELECT * FROM " . $this->strTable . " WHERE " . $v . ".pid = " . $this->strTable . ".id)");
+					if ($v == 'tl_content')
+					{
+						$objStmt = $this->Database->execute("DELETE FROM " . $v . " WHERE ptable='" . $this->strTable . "' AND NOT EXISTS (SELECT * FROM " . $this->strTable . " WHERE " . $v . ".pid = " . $this->strTable . ".id)");
+					}
+					else
+					{
+						$objStmt = $this->Database->execute("DELETE FROM " . $v . " WHERE NOT EXISTS (SELECT * FROM " . $this->strTable . " WHERE " . $v . ".pid = " . $this->strTable . ".id)");
+					}
 
 					if ($objStmt->affectedRows > 0)
 					{
@@ -3303,7 +3381,7 @@ window.addEvent(\'domready\', function() {
 			$label = trim(\String::substrHtml($label, $GLOBALS['TL_DCA'][$table]['list']['label']['maxCharacters'])) . ' …';
 		}
 
-		$label = preg_replace('/\(\) ?|\[\] ?|\{\} ?|<> ?/i', '', $label);
+		$label = preg_replace('/\(\) ?|\[\] ?|\{\} ?|<> ?/', '', $label);
 
 		// Call the label_callback ($row, $label, $this)
 		if (is_array($GLOBALS['TL_DCA'][$table]['list']['label']['label_callback']))
@@ -3608,7 +3686,7 @@ window.addEvent(\'domready\', function() {
 			if (is_array($this->orderBy) && strlen($this->orderBy[0]))
 			{
 				$orderBy = $this->orderBy;
-				$firstOrderBy = preg_replace('/\s+.*$/i', '', $orderBy[0]);
+				$firstOrderBy = preg_replace('/\s+.*$/', '', $orderBy[0]);
 
 				// Order by the foreign key
 				if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['foreignKey']))
@@ -3621,19 +3699,27 @@ window.addEvent(\'domready\', function() {
 			elseif (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields']))
 			{
 				$orderBy = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields'];
-				$firstOrderBy = preg_replace('/\s+.*$/i', '', $orderBy[0]);
+				$firstOrderBy = preg_replace('/\s+.*$/', '', $orderBy[0]);
 			}
 
+			// Support empty ptable fields (backwards compatibility)
+			if ($this->strTable == 'tl_content')
+			{
+				$this->procedure[] = ($this->ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?";
+				$this->values[] = $this->ptable;
+			}
+
+			// WHERE
 			if (!empty($this->procedure))
 			{
 				$query .= " WHERE " . implode(' AND ', $this->procedure);
 			}
-
 			if (is_array($this->root) && !empty($this->root))
 			{
 				$query .= (!empty($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
 			}
 
+			// ORDER BY
 			if (is_array($orderBy) && !empty($orderBy))
 			{
 				$query .= " ORDER BY " . implode(', ', $orderBy);
@@ -3641,6 +3727,7 @@ window.addEvent(\'domready\', function() {
 
 			$objOrderByStmt = $this->Database->prepare($query);
 
+			// LIMIT
 			if (strlen($this->limit))
 			{
 				$arrLimit = explode(',', $this->limit);
@@ -3841,7 +3928,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		$return = '';
 		$table = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 6) ? $this->ptable : $this->strTable;
 		$orderBy = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields'];
-		$firstOrderBy = preg_replace('/\s+.*$/i', '', $orderBy[0]);
+		$firstOrderBy = preg_replace('/\s+.*$/', '', $orderBy[0]);
 
 		if (is_array($this->orderBy) && $this->orderBy[0] != '')
 		{
@@ -4090,8 +4177,8 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				}
 
 				// Remove empty brackets (), [], {}, <> and empty tags from the label
-				$label = preg_replace('/\( *\) ?|\[ *\] ?|\{ *\} ?|< *> ?/i', '', $label);
-				$label = preg_replace('/<[^>]+>\s*<\/[^>]+>/i', '', $label);
+				$label = preg_replace('/\( *\) ?|\[ *\] ?|\{ *\} ?|< *> ?/', '', $label);
+				$label = preg_replace('/<[^>]+>\s*<\/[^>]+>/', '', $label);
 
 				// Build the sorting groups
 				if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] > 0)
@@ -4324,7 +4411,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 					$session['search'][$this->strTable]['value'] = \Input::postRaw('tl_value');
 				}
-				catch (Exception $e) {}
+				catch (\Exception $e) {}
 			}
 
 			$this->Session->setData($session);
@@ -4393,7 +4480,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		$this->bid = 'tl_buttons_a';
 		$session = $this->Session->getData();
 		$orderBy = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields'];
-		$firstOrderBy = preg_replace('/\s+.*$/i', '', $orderBy[0]);
+		$firstOrderBy = preg_replace('/\s+.*$/', '', $orderBy[0]);
 
 		// Add PID to order fields
 		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 3 && $this->Database->fieldExists('pid', $this->strTable))
@@ -4411,7 +4498,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		// Overwrite the "orderBy" value with the session value
 		elseif (strlen($session['sorting'][$this->strTable]))
 		{
-			$overwrite = preg_quote(preg_replace('/\s+.*$/i', '', $session['sorting'][$this->strTable]), '/');
+			$overwrite = preg_quote(preg_replace('/\s+.*$/', '', $session['sorting'][$this->strTable]), '/');
 			$orderBy = array_diff($orderBy, preg_grep('/^'.$overwrite.'/i', $orderBy));
 
 			array_unshift($orderBy, $session['sorting'][$this->strTable]);
@@ -4502,7 +4589,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			$blnIsMaxResultsPerPage = false;
 
 			// Overall limit
-			if ($total > $GLOBALS['TL_CONFIG']['maxResultsPerPage'] && ($this->limit === null || preg_replace('/^.*,/i', '', $this->limit) == $GLOBALS['TL_CONFIG']['maxResultsPerPage']))
+			if ($total > $GLOBALS['TL_CONFIG']['maxResultsPerPage'] && ($this->limit === null || preg_replace('/^.*,/', '', $this->limit) == $GLOBALS['TL_CONFIG']['maxResultsPerPage']))
 			{
 				if ($this->limit === null)
 				{
@@ -4523,7 +4610,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				$options_total = ceil($total / $GLOBALS['TL_CONFIG']['resultsPerPage']);
 
 				// Reset limit if other parameters have decreased the number of results
-				if ($this->limit !== null && ($this->limit == '' || preg_replace('/,.*$/i', '', $this->limit) > $total))
+				if ($this->limit !== null && ($this->limit == '' || preg_replace('/,.*$/', '', $this->limit) > $total))
 				{
 					$this->limit = '0,'.$GLOBALS['TL_CONFIG']['resultsPerPage'];
 				}

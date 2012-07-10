@@ -28,6 +28,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_news_archive',
+		'ctable'                      => array('tl_content'),
+		'switchToEdit'                => true,
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
@@ -67,7 +69,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'fields'                  => array('date DESC'),
 			'headerFields'            => array('title', 'jumpTo', 'tstamp', 'protected', 'allowComments', 'makeFeed'),
 			'panelLayout'             => 'filter;sort,search,limit',
-			'child_record_callback'   => array('tl_news', 'listNewsArticles')
+			'child_record_callback'   => array('tl_news', 'listNewsArticles'),
+			'child_record_class'      => 'no_padding'
 		),
 		'global_operations' => array
 		(
@@ -84,8 +87,16 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'edit' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news']['edit'],
+				'href'                => 'table=tl_content',
+				'icon'                => 'edit.gif',
+				'attributes'          => 'class="contextmenu"'
+			),
+			'editmeta' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_news']['editmeta'],
 				'href'                => 'act=edit',
-				'icon'                => 'edit.gif'
+				'icon'                => 'header.gif',
+				'attributes'          => 'class="edit-header"'
 			),
 			'copy' => array
 			(
@@ -133,7 +144,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addImage', 'addEnclosure', 'source'),
-		'default'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend:hide},subheadline,teaser;{text_legend},text;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop'
+		'default'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend},subheadline,teaser;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
@@ -239,16 +250,6 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'inputType'               => 'textarea',
 			'eval'                    => array('rte'=>'tinyMCE', 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
-		),
-		'text' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['text'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'textarea',
-			'eval'                    => array('rte'=>'tinyMCE', 'helpwizard'=>true),
-			'explanation'             => 'insertTags',
-			'sql'                     => "mediumtext NULL"
 		),
 		'addImage' => array
 		(
@@ -491,7 +492,7 @@ class tl_news extends Backend
 			return;
 		}
 
-		// Set root IDs
+		// Set the root IDs
 		if (!is_array($this->User->news) || empty($this->User->news))
 		{
 			$root = array(0);
@@ -583,11 +584,127 @@ class tl_news extends Backend
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access news archive ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access news archive ID ' . $id, 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 		}
+	}
+
+
+	/**
+	 * Check permissions to edit table tl_content
+	 */
+	public function checkContentPermission()
+	{
+		if ($this->User->isAdmin)
+		{
+			return;
+		}
+
+		// Set the root IDs
+		if (!is_array($this->User->news) || empty($this->User->news))
+		{
+			$root = array(0);
+		}
+		else
+		{
+			$root = $this->User->news;
+		}
+
+		// Check the current action
+		switch (Input::get('act'))
+		{
+			case 'paste':
+				// Allow
+				break;
+
+			case '': // empty
+			case 'create':
+			case 'select':
+				// Check access to the news item
+				if (!$this->checkAccessToElement(CURRENT_ID, $root, true))
+				{
+					$this->redirect('contao/main.php?act=error');
+				}
+				break;
+
+			case 'editAll':
+			case 'deleteAll':
+			case 'overrideAll':
+			case 'cutAll':
+			case 'copyAll':
+				// Check access to the parent element if a content element is moved
+				if ((Input::get('act') == 'cutAll' || Input::get('act') == 'copyAll') && !$this->checkAccessToElement(Input::get('pid'), $root, (Input::get('mode') == 2)))
+				{
+					$this->redirect('contao/main.php?act=error');
+				}
+
+				$objCes = $this->Database->prepare("SELECT id FROM tl_content WHERE ptable='tl_news' AND pid=?")
+										 ->execute(CURRENT_ID);
+
+				$session = $this->Session->getData();
+				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $objCes->fetchEach('id'));
+				$this->Session->setData($session);
+				break;
+
+			case 'cut':
+			case 'copy':
+				// Check access to the parent element if a content element is moved
+				if (!$this->checkAccessToElement(Input::get('pid'), $root, (Input::get('mode') == 2)))
+				{
+					$this->redirect('contao/main.php?act=error');
+				}
+				// NO BREAK STATEMENT HERE
+
+			default:
+				// Check access to the content element
+				if (!$this->checkAccessToElement(Input::get('id'), $root))
+				{
+					$this->redirect('contao/main.php?act=error');
+				}
+				break;
+		}
+	}
+
+
+	/**
+	 * Check access to a particular content element
+	 * @param integer
+	 * @param array
+	 * @param boolean
+	 * @return boolean
+	 */
+	protected function checkAccessToElement($id, $root, $blnIsPid=false)
+	{
+		if ($blnIsPid)
+		{
+			$objArchive = $this->Database->prepare("SELECT a.id, n.id AS nid FROM tl_news n, tl_news_archive a WHERE n.id=? AND n.pid=a.id")
+										 ->limit(1)
+										 ->execute($id);
+		}
+		else
+		{
+			$objArchive = $this->Database->prepare("SELECT a.id, n.id AS nid FROM tl_content c, tl_news n, tl_news_archive a WHERE c.id=? AND c.pid=n.id AND n.pid=a.id")
+										 ->limit(1)
+										 ->execute($id);
+		}
+
+		// Invalid ID
+		if ($objArchive->numRows < 1)
+		{
+			$this->log('Invalid news content element ID ' . $id, 'tl_news checkAccessToElement()', TL_ERROR);
+			return false;
+		}
+
+		// The news archive is not mounted
+		if (!in_array($objArchive->id, $root))
+		{
+			$this->log('Not enough permissions to modify article ID ' . $objArchive->nid . ' in news archive ID ' . $objArchive->id, 'tl_news checkAccessToElement()', TL_ERROR);
+			return false;
+		}
+
+		return true;
 	}
 
 
@@ -635,15 +752,7 @@ class tl_news extends Backend
 	 */
 	public function listNewsArticles($arrRow)
 	{
-		$time = time();
-		$key = ($arrRow['published'] && ($arrRow['start'] == '' || $arrRow['start'] < $time) && ($arrRow['stop'] == '' || $arrRow['stop'] > $time)) ? 'published' : 'unpublished';
-		$date = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']);
-
-		return '
-<div class="cte_type ' . $key . '"><strong>' . $arrRow['headline'] . '</strong> - ' . $date . '</div>
-<div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h64' : '') . '">
-' . ($arrRow['text'] ?: $arrRow['teaser']) . '
-</div>' . "\n";
+		return '<div class="tl_content_left">' . $arrRow['headline'] . ' <span style="color:#b3b3b3;padding-left:3px">[' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']) . ']</span></div>';
 	}
 
 
@@ -765,7 +874,7 @@ class tl_news extends Backend
 	 */
 	public function pagePicker(DataContainer $dc)
 	{
-		return ' <a href="contao/page.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="contao/page.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 

@@ -147,7 +147,7 @@ class Validator extends \System
 	 */
 	public static function isEmail($varValue)
 	{
-		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', \Idna::encodeEmail($varValue));
+		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/', \Idna::encodeEmail($varValue));
 	}
 
 

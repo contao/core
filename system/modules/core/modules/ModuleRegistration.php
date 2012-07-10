@@ -219,7 +219,7 @@ class ModuleRegistration extends \Module
 						{
 							$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User);
 						}
-						catch (Exception $e)
+						catch (\Exception $e)
 						{
 							$objWidget->class = 'error';
 							$objWidget->addError($e->getMessage());
@@ -337,7 +337,7 @@ class ModuleRegistration extends \Module
 			$arrChunks = array();
 
 			$strConfirmation = $this->reg_text;
-			preg_match_all('/##[^#]+##/i', $strConfirmation, $arrChunks);
+			preg_match_all('/##[^#]+##/', $strConfirmation, $arrChunks);
 
 			foreach ($arrChunks[0] as $strChunk)
 			{

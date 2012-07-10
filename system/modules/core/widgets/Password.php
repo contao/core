@@ -35,6 +35,12 @@ class Password extends \Widget
 	protected $blnSubmitInput = true;
 
 	/**
+	 * Add a for attribute
+	 * @var boolean
+	 */
+	protected $blnForAttribute = true;
+
+	/**
 	 * Template
 	 * @var string
 	 */
@@ -126,9 +132,7 @@ class Password extends \Widget
 		{
 			$this->blnSubmitInput = true;
 			\Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);
-			$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
-
-			return sha1($strSalt . $varInput) . ':' . $strSalt;
+			return \Encryption::sha512($varInput);
 		}
 
 		return '';

@@ -71,7 +71,7 @@ class Combiner extends \System
 	 * 
 	 * @throws \Exception If $strFile is invalid
 	 */
-	public function add($strFile, $strVersion=null, $strMedia='screen')
+	public function add($strFile, $strVersion=null, $strMedia='all')
 	{
 		$strType = strrchr($strFile, '.');
 
@@ -209,16 +209,51 @@ class Combiner extends \System
 			{
 				// Adjust the file paths
 				$strDirname = dirname($arrFile['name']);
+				$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
 
-				// Remove relative paths
-				while (strpos($content, 'url("../') !== false)
+				$strBuffer = '';
+				$chunks = preg_split('/url\("([^"]+)"\)/', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+				// Check the URLs
+				for ($i=0; $i<count($chunks); $i=$i+2)
 				{
-					$strDirname = dirname($strDirname);
-					$content = str_replace('url("../', 'url("', $content);
+					$strBuffer .= $chunks[$i];
+
+					if (!isset($chunks[$i+1]))
+					{
+						break;
+					}
+
+					$strData = $chunks[$i+1];
+
+					// Skip absolute links and embedded images
+					if (strncmp($strData, 'data:', 5) !== 0 && strncmp($strData, 'http://', 7) !== 0 && strncmp($strData, 'https://', 8) !== 0)
+					{
+						// Make the paths relative to the root (see #4161)
+						if (strncmp($strData, '../', 3) !== 0)
+						{
+							$strData = '../../' . $strGlue . $strData;
+						}
+						else
+						{
+							$dir = $strDirname;
+
+							// Remove relative paths
+							while (strncmp($strData, '../', 3) === 0)
+							{
+								$dir = dirname($dir);
+								$strData = substr($strData, 3);
+							}
+
+							$glue = ($dir != '.') ? $dir . '/' : '';
+							$strData = '../../' . $glue . $strData;
+						}
+					}
+
+					$strBuffer .= 'url("' . $strData . '")';
 				}
 
-				$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
-				$content = preg_replace('/url\("(?!(data:|https?:\/\/|\/))/', 'url("../../' . $strGlue, $content);
+				$content = $strBuffer;
 
 				// Add the media type if there is no @media command in the code
 				if ($arrFile['media'] != '' && $arrFile['media'] != 'all' && strpos($content, '@media') === false)

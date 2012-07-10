@@ -126,14 +126,13 @@ class TimePeriod extends \Widget
 			$this->varValue = array('value'=>$this->varValue);
 		}
 
-		return sprintf('<input type="text" name="%s[value]" id="ctrl_%s" class="tl_text_interval%s" value="%s"%s onfocus="Backend.getScrollOffset()"> <select name="%s[unit]" class="tl_select_interval"%s onfocus="Backend.getScrollOffset()">%s</select>%s',
+		return sprintf('<input type="text" name="%s[value]" id="ctrl_%s" class="tl_text_interval%s" value="%s"%s onfocus="Backend.getScrollOffset()"> <select name="%s[unit]" class="tl_select_interval" onfocus="Backend.getScrollOffset()">%s</select>%s',
 						$this->strName,
 						$this->strId,
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						specialchars($this->varValue['value']),
 						$this->getAttributes(),
 						$this->strName,
-						$this->getAttributes(),
 						implode('', $arrUnits),
 						$this->wizard);
 	}

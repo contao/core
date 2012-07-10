@@ -38,6 +38,7 @@ $GLOBALS['TL_LANG']['tl_news']['featured']     = array('Feature item', 'Show the
 $GLOBALS['TL_LANG']['tl_news']['published']    = array('Publish item', 'Make the news item publicly visible on the website.');
 $GLOBALS['TL_LANG']['tl_news']['start']        = array('Show from', 'Do not show the news item on the website before this day.');
 $GLOBALS['TL_LANG']['tl_news']['stop']         = array('Show until', 'Do not show the news item on the website on and after this day.');
+$GLOBALS['TL_LANG']['tl_news']['tstamp']       = array('Revision date', 'Date and time of the latest revision');
 
 
 /**
@@ -66,4 +67,5 @@ $GLOBALS['TL_LANG']['tl_news']['delete']     = array('Delete article', 'Delete n
 $GLOBALS['TL_LANG']['tl_news']['toggle']     = array('Publish/unpublish article', 'Publish/unpublish news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['feature']    = array('Feature/unfeature article', 'Feature/unfeature news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['editheader'] = array('Edit archive settings', 'Edit the archive settings');
+$GLOBALS['TL_LANG']['tl_news']['editmeta']   = array('Edit article settings', 'Edit the article settings');
 $GLOBALS['TL_LANG']['tl_news']['pasteafter'] = array('Paste into this archive', 'Paste after news article ID %s');

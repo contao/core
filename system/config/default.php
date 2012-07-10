@@ -90,9 +90,10 @@ $GLOBALS['TL_CONFIG']['timeFormat']  = 'H:i';
  * In Contao 2.10, the referer check has been replaced with a request token
  * system, which you can disable here (not recommended).
  */
-$GLOBALS['TL_CONFIG']['allowedTags']         = '<a><abbr><acronym><address><area><article><aside><b><big><blockquote><br><base><bdo><button><caption><cite><code><col><colgroup><dd><del><div><dfn><dl><dt><em><figure><figcaption><form><fieldset><hr><h1><h2><h3><h4><h5><h6><i><img><input><ins><label><legend><li><link><map><object><ol><optgroup><option><p><pre><param><q><section><select><small><span><strong><sub><sup><style><table><tbody><td><textarea><tfoot><th><thead><tr><tt><u><ul>';
-$GLOBALS['TL_CONFIG']['disableRefererCheck'] = false;
-$GLOBALS['TL_CONFIG']['disableIpCheck']      = false;
+$GLOBALS['TL_CONFIG']['allowedTags']           = '<a><abbr><acronym><address><area><article><aside><b><big><blockquote><br><base><bdo><button><caption><cite><code><col><colgroup><dd><del><div><dfn><dl><dt><em><figure><figcaption><form><fieldset><hr><h1><h2><h3><h4><h5><h6><i><img><input><ins><label><legend><li><link><map><object><ol><optgroup><option><p><pre><param><q><section><select><small><span><strong><sub><sup><style><table><tbody><td><textarea><tfoot><th><thead><tr><tt><u><ul>';
+$GLOBALS['TL_CONFIG']['disableRefererCheck']   = false;
+$GLOBALS['TL_CONFIG']['disableIpCheck']        = false;
+$GLOBALS['TL_CONFIG']['requestTokenWhitelist'] = array();
 
 
 /**
@@ -286,7 +287,7 @@ $GLOBALS['TL_CONFIG']['validImageTypes']      = 'jpg,jpeg,gif,png,tif,tiff,bmp';
 $GLOBALS['TL_CONFIG']['editableFiles']        = 'htm,html,css,js,txt,log,xml';
 $GLOBALS['TL_CONFIG']['templateFiles']        = 'tpl,html5,xhtml';
 $GLOBALS['TL_CONFIG']['allowedDownload']      = 'jpg,jpeg,gif,png,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov,zip,rar,7z';
-$GLOBALS['TL_CONFIG']['installPassword']      = '4d19f112e30930cbe278de966e9b2d907568d1c8';
+$GLOBALS['TL_CONFIG']['installPassword']      = '';
 $GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'http://www.inetrobots.com/liveupdate/';
 $GLOBALS['TL_CONFIG']['repository_wsdl']      = 'http://www.contao.org/services/repository.wsdl';
 $GLOBALS['TL_CONFIG']['repository_languages'] = 'en,de';

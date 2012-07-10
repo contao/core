@@ -45,6 +45,14 @@ $GLOBALS['TL_LANG']['MOD']['tl_layout']      = 'Seitenlayouts';
 
 
 /**
+ * Reference
+ */
+$GLOBALS['TL_LANG']['MOD']['css']     = 'Stylesheets';
+$GLOBALS['TL_LANG']['MOD']['modules'] = 'Frontend-Module';
+$GLOBALS['TL_LANG']['MOD']['layout']  = 'Seitenlayouts';
+
+
+/**
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['navigationMenu'] = 'Navigation';

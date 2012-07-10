@@ -35,11 +35,7 @@ abstract class Backend extends \Controller
 	{
 		parent::__construct();
 		$this->import('Database');
-
-		// Static URLs
-		$this->setStaticUrl('TL_FILES_URL', $GLOBALS['TL_CONFIG']['staticFiles']);
-		$this->setStaticUrl('TL_SCRIPT_URL', $GLOBALS['TL_CONFIG']['staticSystem']);
-		$this->setStaticUrl('TL_PLUGINS_URL', $GLOBALS['TL_CONFIG']['staticPlugins']);
+		$this->setStaticUrls();
 	}
 
 
@@ -83,7 +79,7 @@ abstract class Backend extends \Controller
 				{
 					include TL_ROOT . '/' . $strFile;
 				}
-				catch (Exception $e) {}
+				catch (\Exception $e) {}
 
 				if (!$this->Files->delete($strFile))
 				{
@@ -212,7 +208,7 @@ abstract class Backend extends \Controller
 			}
 
 			$dataContainer = 'DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
-			$dc = new $dataContainer($strTable, $this->Template, $arrModule);
+			$dc = new $dataContainer($strTable, $arrModule);
 		}
 
 		// AJAX request
@@ -371,7 +367,7 @@ abstract class Backend extends \Controller
 			{
 				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MSC']['all_override'][0];
 			}
-			elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]))
+			elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]) && \Input::get('id'))
 			{
 				if (\Input::get('do') == 'files')
 				{

@@ -97,7 +97,33 @@ class RequestToken extends \System
 	 */
 	public static function validate($strToken)
 	{
-		return ($strToken != '' && static::$strToken != '' && $strToken == static::$strToken);
+		// The feature has been disabled
+		if ($GLOBALS['TL_CONFIG']['disableRefererCheck'] || defined('BYPASS_TOKEN_CHECK'))
+		{
+			return true;
+		}
+
+		// Validate the token
+		if ($strToken != '' && static::$strToken != '' && $strToken == static::$strToken)
+		{
+			return true;
+		}
+
+		// Check against the whitelist (thanks to Tristan Lins) (see #3164)
+		if (!empty($GLOBALS['TL_CONFIG']['requestTokenWhitelist']))
+		{
+			$strHostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+
+			foreach ($GLOBALS['TL_CONFIG']['requestTokenWhitelist'] as $strDomain)
+			{
+				if ($strDomain == $strHostname || preg_match('/\.' . preg_quote($strDomain, '/') . '$/', $strHostname))
+				{
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 

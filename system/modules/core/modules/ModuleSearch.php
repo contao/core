@@ -157,7 +157,7 @@ class ModuleSearch extends \Module
 					$objSearch = \Search::searchFor($strKeywords, (\Input::get('query_type') == 'or'), $arrPages, 0, 0, $this->fuzzy);
 					$arrResult = $objSearch->fetchAllAssoc();
 				}
-				catch (Exception $e)
+				catch (\Exception $e)
 				{
 					$this->log('Website search failed: ' . $e->getMessage(), 'ModuleSearch compile()', TL_ERROR);
 					$arrResult = array();

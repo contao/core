@@ -346,7 +346,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:60px;', 'preserveTags'=>true, 'tl_class'=>'clr'),
+			'eval'                    => array('style'=>'height:60px', 'preserveTags'=>true, 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
 		),
 		'addJQuery' => array
@@ -411,10 +411,10 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['analytics'],
 			'exclude'                 => true,
 			'search'                  => true,
-			'inputType'               => 'select',
+			'inputType'               => 'checkboxWizard',
 			'options_callback'        => array('tl_layout', 'getAnalyticsTemplates'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
-			'eval'                    => array('includeBlankOption'=>true),
+			'eval'                    => array('multiple'=>true),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'script' => array

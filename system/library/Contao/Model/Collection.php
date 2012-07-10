@@ -347,7 +347,16 @@ class Model_Collection extends \System
 
 		while ($this->next())
 		{
-			$return[] = $this->$strKey;
+			$strPk = $this->current()->getPk();
+
+			if ($strKey == 'id' && isset($this->$strPk))
+			{
+				$return[$this->$strPk] = $this->$strKey;
+			}
+			else
+			{
+				$return[] = $this->$strKey;
+			}
 		}
 
 		return $return;
