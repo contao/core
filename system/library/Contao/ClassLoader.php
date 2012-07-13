@@ -42,6 +42,12 @@ class ClassLoader
 	);
 
 	/**
+	 * Class mapping
+	 * @var array
+	 */
+	protected static $classMapping = array();
+
+	/**
 	 * Known classes
 	 * @var array
 	 */
@@ -144,6 +150,53 @@ class ClassLoader
 
 
 	/**
+	 * Add a class mapping
+	 *
+	 * @param string $name The origin class name
+	 * @param string $target The target class name
+	 */
+	public static function addClassMapping($name, $target)
+	{
+		// prepend mapping to allow overwrite
+		if (isset(self::$classMapping[$name]))
+		{
+			array_unshift(self::$classMapping[$name], $target);
+		}
+
+		// or add new mapping
+		else
+		{
+			self::$classMapping[$name] = array($target);
+		}
+	}
+
+
+	/**
+	 * Add a class mapping
+	 *
+	 * @param array $mappings An mapping array with origin class as key and target class as value.
+	 */
+	public static function addClassMappings($mappings)
+	{
+		foreach ($mappings as $name => $target)
+		{
+			self::addClassMapping($name, $target);
+		}
+	}
+
+
+	/**
+	 * Return the class mapping as array
+	 *
+	 * @return array An array of all namespace mappings
+	 */
+	public static function getClassMappings()
+	{
+		return self::$classMapping;
+	}
+
+
+	/**
 	 * Add a new class with its file path
 	 * 
 	 * @param string $class The class name
@@ -204,6 +257,41 @@ class ClassLoader
 			}
 
 			include TL_ROOT . '/' . self::$classes[$class];
+		}
+
+		// Find class in the class mappings
+		elseif (isset(self::$classMapping[$class]))
+		{
+			$aliased = false;
+
+			foreach (self::$classMapping[$class] as $target)
+			{
+				// The class file is set in the mapper
+				if (isset(self::$classes[$target]))
+				{
+					if ($GLOBALS['TL_CONFIG']['debugMode'])
+					{
+						$GLOBALS['TL_DEBUG']['classes_set'][] = $class;
+					}
+					include_once TL_ROOT . '/' . self::$classes[$target];
+
+					if (!$aliased) {
+						if ($GLOBALS['TL_CONFIG']['debugMode'])
+						{
+							$GLOBALS['TL_DEBUG']['classes_aliased'][] = $class . ' <span style="color:#999">(' . $target . ' &rarr; ' . $class . ')</span>';
+						}
+
+						// Create an alias for the mapped class
+						class_alias($target, $class);
+						$aliased = true;
+					}
+				}
+			}
+
+			// Return if an alias is created
+			if ($aliased) {
+				return;
+			}
 		}
 
 		// Find the class in the registered namespaces
