@@ -941,7 +941,13 @@ class StyleSheets extends \Backend
 			// White space
 			if ($row['whitespace'] != '')
 			{
-				$return .= $lb . 'white-space:nowrap;';
+				// Backwards compatibility
+				if ($row['whitespace'] == 1)
+				{
+					$row['whitespace'] = 'nowrap';
+				}
+
+				$return .= $lb . 'white-space:' . $row['whitespace'] . ';';
 			}
 
 			// Text transform
@@ -2033,7 +2039,7 @@ class StyleSheets extends \Backend
 
 				case 'white-space':
 					$arrSet['font'] = 1;
-					$arrSet['whitespace'] = ($arrChunks[1] == 'nowrap') ? 1 : '';
+					$arrSet['whitespace'] = $arrChunks[1];
 					break;
 
 				case 'text-transform':

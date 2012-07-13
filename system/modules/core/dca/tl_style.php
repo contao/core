@@ -531,8 +531,10 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		'whitespace' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['whitespace'],
-			'inputType'               => 'checkbox',
-			'sql'                     => "char(1) NOT NULL default ''"
+			'inputType'               => 'select',
+			'options'                 => array('normal', 'nowrap', 'pre', 'pre-line', 'pre-wrap'),
+			'eval'                    => array('includeBlankOption'=>true),
+			'sql'                     => "varchar(8) NOT NULL default ''"
 		),
 		'texttransform' => array
 		(
