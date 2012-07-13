@@ -133,14 +133,13 @@ class ModuleAutoload extends \BackendModule
 
 							if ($strNamespace != 'Contao')
 							{
-								$arrNamespaces[] = $strNamespace;
-							}
-							else
-							{
-								$arrCompat[$strModule][] = basename($strFile, '.php');
+								$arrNamespaces[$strNamespace] = $strNamespace;
 							}
 
 							$strNamespace .=  '\\';
+
+							$strClass = basename($strFile, '.php');
+							$arrCompat[$strModule][$strClass] = $strNamespace . $strClass;
 						}
 
 						$strKey = $strNamespace . basename($strFile, '.php');
@@ -350,7 +349,8 @@ EOT
 
 					if (is_file(TL_ROOT . '/system/library/Contao/' . $strFile))
 					{
-						$arrLibrary[] = basename($strFile, '.php');
+						$strClass = basename($strFile, '.php');
+						$arrLibrary[$strClass] = 'Contao\\' . $strClass;
 					}
 					elseif ($strFile != 'Database')
 					{
@@ -358,7 +358,8 @@ EOT
 						{
 							if (is_file(TL_ROOT . '/system/library/Contao/' . $strFile . '/' . $strSubfile))
 							{
-								$arrLibrary[] = basename($strFile, '.php') . '_' . basename($strSubfile, '.php');
+								$strClass = basename($strFile, '.php') . '_' . basename($strSubfile, '.php');
+								$arrLibrary[$strClass] = 'Contao\\' . $strClass;
 							}
 						}
 					}
@@ -374,7 +375,8 @@ EOT
 
 					if (is_file(TL_ROOT . '/system/library/Contao/Database/' . $strFile))
 					{
-						$arrLibrary[] = 'Database_' . basename($strFile, '.php');
+						$strClass = 'Database_' . basename($strFile, '.php');
+						$arrLibrary[$strClass] = 'Contao\\' . $strClass;
 					}
 					else
 					{
@@ -382,7 +384,8 @@ EOT
 						{
 							if (is_file(TL_ROOT . '/system/library/Contao/Database/' . $strFile . '/' . $strSubfile))
 							{
-								$arrLibrary[] = 'Database_' . basename($strFile, '.php') . '_' . basename($strSubfile, '.php');
+								$strClass = 'Database_' . basename($strFile, '.php') . '_' . basename($strSubfile, '.php');
+								$arrLibrary[$strClass] = 'Contao\\' . $strClass;
 							}
 						}
 					}
@@ -396,9 +399,9 @@ EOT
 				{
 					$objFile->append("\n// " . ($strModule ?: 'library'));
 
-					foreach ($arrClasses as $strClass)
+					foreach ($arrClasses as $strClass => $strBase)
 					{
-						$objFile->append((in_array($strClass, $arrIsAbstract) ? 'abstract ' : '') . "class $strClass extends Contao\\$strClass {}");
+						$objFile->append((in_array($strClass, $arrIsAbstract) ? 'abstract ' : '') . "class $strClass extends $strBase {}");
 					}
 				}
 
