@@ -256,6 +256,11 @@ class ClassLoader
 				$GLOBALS['TL_DEBUG']['classes_set'][] = $class;
 			}
 
+			if (strpos($class, '\\') !== false && !preg_match('#^Runtime\\\\#', $class))
+			{
+				trigger_error('You should the runtime namespace when using your class, please prepend Runtime\\ to your namespaced class ' . $class . '!', E_USER_WARNING);
+			}
+
 			include TL_ROOT . '/' . self::$classes[$class];
 		}
 
