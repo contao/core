@@ -258,7 +258,7 @@ class ClassLoader
 
 			if (strpos($class, '\\') !== false && !preg_match('#^Runtime\\\\#', $class))
 			{
-				trigger_error('You should the runtime namespace when using your class, please prepend Runtime\\ to your namespaced class ' . $class . '!', E_USER_WARNING);
+				trigger_error('You should use the runtime namespace when using your class, please prepend Runtime\\ to your namespaced class ' . $class . '!', E_USER_WARNING);
 			}
 
 			include TL_ROOT . '/' . self::$classes[$class];
