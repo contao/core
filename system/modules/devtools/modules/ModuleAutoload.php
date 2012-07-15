@@ -437,11 +437,35 @@ EOT
 				foreach ($arrCompat as $strModule=>$arrClasses)
 				{
 					$objFile->append("\n// " . ($strModule ?: 'library'));
+					$strNamespace = false;
+					$strIndent = '';
 
 					foreach ($arrClasses as $strClass => $strBase)
 					{
-						$objFile->append((in_array($strClass, $arrIsAbstract) ? 'abstract ' : '') . "class $strClass extends $strBase {}");
+						if (strpos($strClass, '\\') !== false)
+						{
+							$strNewNamespace = preg_replace('#\\\\[^\\\\]+$#', '', $strClass);
+						}
+						else
+						{
+							$strNewNamespace = '';
+						}
+						if ($strNamespace !== $strNewNamespace)
+						{
+							if ($strNamespace !== false)
+							{
+								$objFile->append("}");
+							}
+
+							$strNamespace = $strNewNamespace;
+							$strClass = preg_replace('#^.*\\\\#', '', $strClass);
+							$objFile->append("namespace $strNamespace {");
+						}
+
+						$objFile->append("\t" . (in_array($strClass, $arrIsAbstract) ? 'abstract ' : '') . "class $strClass extends $strBase {}");
 					}
+
+					$objFile->append("}");
 				}
 
 				$objFile->close();
