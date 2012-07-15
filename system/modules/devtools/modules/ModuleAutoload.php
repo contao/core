@@ -130,34 +130,35 @@ class ModuleAutoload extends \BackendModule
 						else
 						{
 							$strNamespace = preg_replace('/^.*namespace ([^;]+).*$/s', '$1', $strBuffer);
+						}
 
+						$strPSR0Namespace = str_replace('/', '\\', dirname($strModule . '/' . $strFile));
+
+						// Skip class that follow the PSR-0 naming
+						if ($strPSR0Namespace == $strNamespace)
+						{
+							$strRuntimeNamespace = 'Runtime\\' . $strNamespace;
+							$strClassName = basename($strFile, '.php');
+							$strClass = $strNamespace . '\\' . $strClassName;
+							$strRuntimeClass = $strRuntimeNamespace . '\\' . $strClassName;
+
+							// Check file for class mappings
+							$strRuntimeClass = $this->checkClassMapping($strModule, $strFile, $strClassName, $strClass, $strRuntimeClass, $arrClassMapping, $intClassMappingWith);
+
+							$arrCompat[$strModule][$strRuntimeClass] = $strClass;
+							continue;
+						}
+						else if ($strNamespace)
+						{
 							if ($strNamespace != 'Contao')
 							{
 								$arrNamespaces[$strNamespace] = $strNamespace;
 							}
 
-							$strNamespace .=  '\\';
+							$strNamespace .= '\\';
 
 							$strClass = basename($strFile, '.php');
 							$arrCompat[$strModule][$strClass] = $strNamespace . $strClass;
-						}
-
-						$strPSR0Namespace = str_replace('/', '\\', dirname($strModule . '/' . $strFile)) . '\\';
-
-						// Skip class that follow the PSR-0 naming
-						if ($strPSR0Namespace == $strNamespace)
-						{
-							unset($arrNamespaces[substr($strNamespace, 0, -1)]);
-
-							$strRuntimeNamespace = 'Runtime\\' . $strNamespace;
-							$strClassName = basename($strFile, '.php');
-							$strClass = $strNamespace . $strClassName;
-							$strRuntimeClass = $strRuntimeNamespace . $strClassName;
-
-							// Check file for class mappings
-							$this->checkClassMapping($strModule, $strFile, $strClassName, $strClass, $strRuntimeClass, $arrClassMapping, $intClassMappingWith);
-
-							continue;
 						}
 
 						$strKey = $strNamespace . basename($strFile, '.php');
@@ -511,6 +512,7 @@ EOT
 	 * @param string $strRuntimeClass Name of the Runtime\ class, e.a. Runtime\Example\My\Class.
 	 * @param array $arrClassMapping Array containing the class mappings.
 	 * @param int $intClassMappingWith Max string size in class mappings array.
+	 * @return string The target runtime class.
 	 */
 	protected function checkClassMapping($strModule, $strFile, $strClassName, $strClass, $strRuntimeClass, &$arrClassMapping, &$intClassMappingWith)
 	{
@@ -543,5 +545,7 @@ EOT
 
 		$arrClassMapping[$strRuntimeClass] = $strClass;
 		$intClassMappingWith = max(strlen($strRuntimeClass), $intClassMappingWith);
+
+		return $strRuntimeClass;
 	}
 }
