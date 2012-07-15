@@ -331,6 +331,26 @@ EOT
 			// IDE compatibility
 			if (\Input::post('ide_compat'))
 			{
+				// Reverse mapping classes to modules and remove duplicate classes
+				$arrModules = array_keys($arrCompat);
+				$arrClasses = array();
+				foreach ($arrModules as $strModule)
+				{
+					$arrModuleClasses = array_combine(
+						array_keys($arrCompat[$strModule]),
+						array_fill(0, count($arrCompat[$strModule]), $strModule)
+					);
+					$arrIntersect = array_intersect_key($arrClasses, $arrModuleClasses);
+
+					// Remove classes from previous modules
+					foreach ($arrIntersect as $strClass => $strInModules)
+					{
+						unset($arrCompat[$strInModules][$strClass]);
+					}
+
+					$arrClasses = array_merge($arrClasses, $arrModuleClasses);
+				}
+
 				$objFile = new \File('system/helper/ide_compat.php');
 				$objFile->write(
 <<<EOT
