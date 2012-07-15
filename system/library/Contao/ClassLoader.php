@@ -160,7 +160,7 @@ class ClassLoader
 		// prepend mapping to allow overwrite
 		if (isset(self::$classMapping[$name]))
 		{
-			array_unshift(self::$classMapping[$name], $target);
+			self::$classMapping[$name][] = $target;
 		}
 
 		// or add new mapping
@@ -267,7 +267,13 @@ class ClassLoader
 		// Find class in the class mappings
 		elseif (isset(self::$classMapping[$class]))
 		{
-			$aliased = false;
+			$alias = false;
+
+			$origin = preg_replace('#^Runtime\\\\#', '', $class);
+			if (!in_array($origin, self::$classMapping[$class]))
+			{
+				array_unshift(self::$classMapping[$class], $origin);
+			}
 
 			foreach (self::$classMapping[$class] as $target)
 			{
@@ -278,24 +284,58 @@ class ClassLoader
 					{
 						$GLOBALS['TL_DEBUG']['classes_set'][] = $class;
 					}
+
 					include_once TL_ROOT . '/' . self::$classes[$target];
 
-					if (!$aliased) {
-						if ($GLOBALS['TL_CONFIG']['debugMode'])
-						{
-							$GLOBALS['TL_DEBUG']['classes_aliased'][] = $class . ' <span style="color:#999">(' . $target . ' &rarr; ' . $class . ')</span>';
-						}
+					$alias = $target;
+				}
 
-						// Create an alias for the mapped class
-						class_alias($target, $class);
-						$aliased = true;
+				// Find namespaced classes by PSR-0
+				else if (strpos($target, '\\') !== false && ($file = self::findPSR0($target)))
+				{
+					if ($GLOBALS['TL_CONFIG']['debugMode'])
+					{
+						$GLOBALS['TL_DEBUG']['classes_set'][] = $class;
 					}
+
+					include_once TL_ROOT . '/' . $file;
+
+					$alias = $target;
 				}
 			}
 
-			// Return if an alias is created
-			if ($aliased) {
-				return;
+			if ($alias)
+			{
+				if ($GLOBALS['TL_CONFIG']['debugMode'])
+				{
+					$GLOBALS['TL_DEBUG']['classes_aliased'][] = $class . ' <span style="color:#999">(' . $target . ' &rarr; ' . $class . ')</span>';
+				}
+
+				// Create an alias for the mapped class
+				class_alias($alias, $class);
+			}
+		}
+
+		// Find namespaced classes by PSR-0
+		elseif (strpos($class, '\\') !== false && ($file = self::findPSR0($class)))
+		{
+			if (!preg_match('#^Runtime\\\\#', $class))
+			{
+				trigger_error('You should use the runtime namespace when using your class, please prepend Runtime\\ to your namespaced class ' . $class . '!', E_USER_WARNING);
+
+				$alias = false;
+			}
+			else
+			{
+				$alias = $class;
+				$class = preg_replace('#^Runtime\\\\#', '', $class);
+			}
+
+			include TL_ROOT . '/' . $file;
+
+			if ($alias)
+			{
+				class_alias($class, $alias);
 			}
 		}
 
@@ -335,6 +375,26 @@ class ClassLoader
 		return '';
 	}
 
+
+	protected static function findPSR0($class)
+	{
+		// use preg_split, to split double delimiter even as single delimiter
+		$arrParts = preg_split('#\\\\+#', $class);
+
+		if ($arrParts[0] == 'Runtime')
+		{
+			array_shift($arrParts);
+		}
+
+		$strFile = 'system/modules/' . implode('/', $arrParts) . '.php';
+
+		if (file_exists(TL_ROOT . '/' . $strFile))
+		{
+			return $strFile;
+		}
+
+		return false;
+	}
 
 	/**
 	 * Register the autoloader
