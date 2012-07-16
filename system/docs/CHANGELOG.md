@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+Adjusted the maintenance module to the new Live Update (coming soon).
+
 ### New
 Added a button to the safe mode notice, which allows administrators to disable
 the safe mode without having to open the back end settings.

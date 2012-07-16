@@ -588,7 +588,7 @@ var AjaxRequest =
 		if (!uid) return;
 
 		new Request.Contao({
-			onRequest: $('lu_message').set('html', '<p class="tl_info">Connecting to live update server</p>'),
+			onRequest: $('lu_message').set('html', '<p class="tl_info">Connecting to the Live Update server</p>'),
 			onSuccess: function(txt, json) {
 				if (txt) {
 					$('lu_message').set('html', json.content);
