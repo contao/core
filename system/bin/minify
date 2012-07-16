@@ -7,7 +7,7 @@ usage()
 {
 	echo ""
 	echo -e "  \033[1;33mMinify scripts using YUI compressor or UglifyJS (requires node.js)\033[0m"
-	echo -e "  Usage: ./system/bin/minify <command> [<file>]"
+	echo -e "  Usage: system/bin/minify <command> [<file>]"
 	echo ""
 	echo -e "  \033[1;33m<command>\033[0m"
 	echo -e "  \033[0;36mall\033[0m           Execute all the functions"

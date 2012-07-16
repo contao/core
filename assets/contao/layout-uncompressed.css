@@ -146,7 +146,7 @@ img {
 .custom {
 	display:block;
 }
-.custom:after {
+#container:after,.custom:after {
 	content:".";
 	display:block;
 	height:0;

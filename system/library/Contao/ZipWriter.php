@@ -44,7 +44,6 @@ class ZipWriter extends \System
 	 */
 	const CENTRAL_DIR_END   = "\x50\x4b\x05\x06";
 
-
 	/**
 	 * Temp folder path
 	 */

@@ -99,7 +99,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('rows', 'cols', 'addJQuery', 'addMooTools', 'static'),
-		'default'                     => '{title_legend},name;{header_legend},rows;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,framework,external;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,webfonts,cssClass,onload,head;{jquery_legend},addJQuery;{mootools_legend},addMooTools;{script_legend},analytics,script;{static_legend},static'
+		'default'                     => '{title_legend},name;{header_legend},rows;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},framework,stylesheet,external;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,webfonts,cssClass,onload,head;{jquery_legend},addJQuery;{mootools_legend},addMooTools;{script_legend},analytics,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -222,6 +222,17 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
+		'framework' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['framework'],
+			'default'                 => array('layout.css'),
+			'exclude'                 => true,
+			'inputType'               => 'checkboxWizard',
+			'options'                 => array('reset.css', 'layout.css', 'responsive.css', 'tinymce.css'),
+			'eval'                    => array('multiple'=>true, 'helpwizard'=>true),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
 		'stylesheet' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['stylesheet'],
@@ -237,17 +248,6 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			),
 			'sql'                     => "blob NULL",
 			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
-		),
-		'framework' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['framework'],
-			'default'                 => array('layout.css'),
-			'exclude'                 => true,
-			'inputType'               => 'checkboxWizard',
-			'options'                 => array('reset.css', 'layout.css', 'responsive.css', 'tinymce.css'),
-			'eval'                    => array('multiple'=>true, 'helpwizard'=>true),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
-			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'external' => array
 		(
