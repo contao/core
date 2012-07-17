@@ -43,6 +43,12 @@ class Search extends \System
 	 */
 	protected static $objInstance;
 
+	/**
+	 * IndexPage object
+	 * @var object
+	 */
+	protected $objIndexPage;
+
 
 	/**
 	 * Index a page
@@ -102,8 +108,8 @@ class Search extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['indexPage'] as $callback)
 			{
-				$this->import($callback[0]);
-				$strContent = $this->$callback[0]->$callback[1]($strContent, $arrData, $arrSet);
+				$this->import($callback[0], 'objIndexPage', true);
+				$strContent = $this->objIndexPage->$callback[1]($strContent, $arrData, $arrSet);
 			}
 		}
 
