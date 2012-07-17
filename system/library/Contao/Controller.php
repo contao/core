@@ -1032,12 +1032,12 @@ abstract class Controller extends \System
 			return $this->restoreBasicEntities($strBuffer);
 		}
 
-		$tags = preg_split('/\{\{([^\}]+)\}\}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$tags = preg_split('/\{\{(([^{}]*|(?R))*)\}\}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 		$strBuffer = '';
-		$arrCache = array();
+		static $arrCache = array();
 
-		for ($_rit=0; $_rit<count($tags); $_rit=$_rit+2)
+		for ($_rit=0; $_rit<count($tags); $_rit=$_rit+3)
 		{
 			$strBuffer .= $tags[$_rit];
 			$strTag = $tags[$_rit+1];
@@ -1046,6 +1046,12 @@ abstract class Controller extends \System
 			if ($strTag == '')
 			{
 				continue;
+			}
+
+			// run replacement again if there are more insert tags
+			if (strpos($strTag, '{{') !== false)
+			{
+				$strTag = $this->replaceInsertTags($strTag);
 			}
 
 			// Load value from cache array
