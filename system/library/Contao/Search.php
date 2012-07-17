@@ -71,7 +71,6 @@ class Search extends \System
 
 		// Replace special characters
 		$strContent = str_replace(array("\n", "\r", "\t", '&#160;', '&nbsp;'), ' ', $arrData['content']);
-		unset($arrData['content']);
 
 		$arrOuter = array();
 		$arrInner = array();
@@ -107,6 +106,9 @@ class Search extends \System
 				$strContent = $this->$callback[0]->$callback[1]($strContent, $arrData, $arrSet);
 			}
 		}
+
+		// free memory
+		unset($arrData['content']);
 
 		// Calculate the checksum (see #4179)
 		$arrSet['checksum'] = md5(preg_replace('/ +/', ' ', strip_tags($strContent)));
