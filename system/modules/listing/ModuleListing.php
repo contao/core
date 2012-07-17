@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -164,7 +164,7 @@ class ModuleListing extends Module
 		$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
 		$per_page = $this->Input->get('per_page') ? $this->Input->get('per_page') : $this->perPage;
 
-		if ($page < 1 || $page > max(ceil($objTotal->count/$per_page), 1))
+		if ($page < 1 || ($per_page > 0 && $page > max(ceil($objTotal->count/$per_page), 1)))
 		{
 			global $objPage;
 			$objPage->noSearch = 1;
@@ -204,13 +204,9 @@ class ModuleListing extends Module
 		$objDataStmt = $this->Database->prepare($strQuery);
 
 		// Limit
-		if ($this->Input->get('per_page'))
+		if ($per_page)
 		{
-			$objDataStmt->limit($this->Input->get('per_page'), (($page - 1) * $per_page));
-		}
-		elseif ($this->perPage)
-		{
-			$objDataStmt->limit($this->perPage, (($page - 1) * $per_page));
+			$objDataStmt->limit($per_page, (($page - 1) * $per_page));
 		}
 
 		$objData = $objDataStmt->execute($varKeyword);
