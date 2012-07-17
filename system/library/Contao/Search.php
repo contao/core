@@ -98,9 +98,6 @@ class Search extends \System
 			$strContent = substr($strContent, 0, $arrOuter[0][1]) . substr($strContent, (strlen($arrInner[0][0]) + $arrInner[0][1]));
 		}
 
-		// Calculate the checksum (see #4179)
-		$arrSet['checksum'] = md5(preg_replace('/ +/', ' ', strip_tags($strContent)));
-
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['indexPage']) && is_array($GLOBALS['TL_HOOKS']['indexPage']))
 		{
@@ -110,6 +107,9 @@ class Search extends \System
 				$strContent = $this->$callback[0]->$callback[1]($strContent, $arrData, $arrSet);
 			}
 		}
+
+		// Calculate the checksum (see #4179)
+		$arrSet['checksum'] = md5(preg_replace('/ +/', ' ', strip_tags($strContent)));
 
 		// Return if the page is indexed and up to date
 		$objIndex = $objDatabase->prepare("SELECT id, checksum FROM tl_search WHERE url=? AND pid=?")
