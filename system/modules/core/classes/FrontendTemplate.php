@@ -209,9 +209,8 @@ class FrontendTemplate extends \Template
 			}
 		}
 
-		// Replace insert tags and then re-replace the request_token tag in case a form element has been loaded via insert tag
+		// Replace insert tags
 		$this->strBuffer = $this->replaceInsertTags($strBuffer);
-		$this->strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $this->strBuffer);
 
 		// Index page if searching is allowed and there is no back end user
 		if ($GLOBALS['TL_CONFIG']['enableSearch'] && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)
