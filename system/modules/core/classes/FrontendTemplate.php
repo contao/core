@@ -209,8 +209,9 @@ class FrontendTemplate extends \Template
 			}
 		}
 
-		// Replace insert tags
+		// Replace insert tags and then re-replace the request_token tag in case a form element has been loaded via insert tag
 		$this->strBuffer = $this->replaceInsertTags($strBuffer);
+		$this->strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $this->strBuffer);
 
 		// Add headTags from $GLOBALS[TL_JAVASCRIPT], $GLOBALS[TL_HEAD] and $GLOBALS[TL_CSS]
 		$this->strBuffer = str_replace('[{[TL_HEAD]}]',\PageRegular::generateHeadJsCssData(),$this->strBuffer);
