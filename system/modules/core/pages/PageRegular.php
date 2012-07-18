@@ -402,24 +402,6 @@ class PageRegular extends \Frontend
 			$objCombiner->add($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css', filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'));
 		}
 
-		// Internal style sheets
-		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
-		{
-			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
-			{
-				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
-
-				if ($mode == 'static')
-				{
-					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
-				}
-				else
-				{
-					$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
-				}
-			}
-		}
-
 		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
@@ -551,12 +533,64 @@ class PageRegular extends \Frontend
 
 		$strHeadTags = '';
 
+		// Add user <head> tags
+		if (($strHead = trim($objLayout->head)) != false)
+		{
+			$strHeadTags .= $strHead . "\n";
+		}
+
+		// Add placeholder to insert tags from $GLOBALS[TL_JAVASCRIPT], $GLOBALS[TL_HEAD] and $GLOBALS[TL_CSS]
+		$strHeadTags .= '[{[TL_HEAD]}]';
+
+		$this->Template->stylesheets = $strStyleSheets;
+		$this->Template->head = $strHeadTags;
+	}
+
+
+	/**
+	 * Generate Javascript, Head-Tags and Stylesheet links
+	 * from $GLOBALS[TL_JAVASCRIPT], $GLOBALS[TL_HEAD] and $GLOBALS[TL_CSS]
+	 * @static
+	 * @return string head tags
+	 */
+	public static function generateHeadJsCssData()
+	{
+		$strHeadTags = '';
+
+		$blnXhtml = ($objPage->outputFormat == 'xhtml');
+		$strTagEnding = $blnXhtml ? ' />' : '>';
+		$objCombiner = new \Combiner();
+
+		// Internal style sheets
+		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
+		{
+			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
+			{
+				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
+
+				if ($mode == 'static')
+				{
+					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
+				}
+				else
+				{
+					$strHeadTags .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . self::addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
+				}
+			}
+		}
+
+		// Create the aggregated style sheet
+		if ($objCombiner->hasEntries())
+		{
+			$strHeadTags .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '"' . $strTagEnding . "\n";
+		}
+
 		// Add internal scripts
 		if (is_array($GLOBALS['TL_JAVASCRIPT']) && !empty($GLOBALS['TL_JAVASCRIPT']))
 		{
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strHeadTags .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $this->addStaticUrlTo($javascript) . '"></script>' . "\n";
+				$strHeadTags .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . self::addStaticUrlTo($javascript) . '"></script>' . "\n";
 			}
 		}
 
@@ -569,14 +603,7 @@ class PageRegular extends \Frontend
 			}
 		}
 
-		// Add user <head> tags
-		if (($strHead = trim($objLayout->head)) != false)
-		{
-			$strHeadTags .= $strHead . "\n";
-		}
-
-		$this->Template->stylesheets = $strStyleSheets;
-		$this->Template->head = $strHeadTags;
+		return $strHeadTags;
 	}
 
 
