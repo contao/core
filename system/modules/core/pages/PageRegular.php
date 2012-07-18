@@ -540,7 +540,7 @@ class PageRegular extends \Frontend
 		}
 
 		// Add placeholder to insert tags from $GLOBALS[TL_JAVASCRIPT], $GLOBALS[TL_HEAD] and $GLOBALS[TL_CSS]
-		$strHeadTags .= '[{[TL_HEAD]}]';
+		$strHeadTags .= '[[TL_HEAD]]';
 
 		$this->Template->stylesheets = $strStyleSheets;
 		$this->Template->head = $strHeadTags;

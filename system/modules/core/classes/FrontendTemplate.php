@@ -161,6 +161,10 @@ class FrontendTemplate extends \Template
 
 			// Replace insert tags for caching
 			$strBuffer = $this->replaceInsertTags($strBuffer, true);
+
+			// Add headTags from $GLOBALS[TL_JAVASCRIPT], $GLOBALS[TL_HEAD] and $GLOBALS[TL_CSS]
+			$this->strBuffer = str_replace('[[TL_HEAD]]', \PageRegular::generateHeadJsCssData(), $this->strBuffer);
+
 			$intCache = intval($objPage->cache) + time();
 			$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 			$strMd5CacheKey = md5($strCacheKey);
@@ -209,12 +213,11 @@ class FrontendTemplate extends \Template
 			}
 		}
 
-		// Replace insert tags and then re-replace the request_token tag in case a form element has been loaded via insert tag
+		// Replace insert tags
 		$this->strBuffer = $this->replaceInsertTags($strBuffer);
-		$this->strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $this->strBuffer);
 
-		// Add headTags from $GLOBALS[TL_JAVASCRIPT], $GLOBALS[TL_HEAD] and $GLOBALS[TL_CSS]
-		$this->strBuffer = str_replace('[{[TL_HEAD]}]',\PageRegular::generateHeadJsCssData(),$this->strBuffer);
+		// Add headTags from $GLOBALS[TL_JAVASCRIPT], $GLOBALS[TL_HEAD] and $GLOBALS[TL_CSS] and replace [}] to allow plain insert tags output
+		$this->strBuffer = str_replace(array('[[TL_HEAD]]', '[{]', '[}]'), array(\PageRegular::generateHeadJsCssData(), '{{', '}}'), $this->strBuffer);
 
 		// Index page if searching is allowed and there is no back end user
 		if ($GLOBALS['TL_CONFIG']['enableSearch'] && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)
