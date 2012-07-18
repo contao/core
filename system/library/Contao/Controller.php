@@ -1032,7 +1032,7 @@ abstract class Controller extends \System
 			return $this->restoreBasicEntities($strBuffer);
 		}
 
-		$tags = preg_split('/\{\{(([^{}]*|(?R))*)\}\}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$tags = preg_split('/\{\{(([^\{\}]*|(?R))*)\}\}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 		$strBuffer = '';
 		static $arrCache = array();
@@ -1048,7 +1048,7 @@ abstract class Controller extends \System
 				continue;
 			}
 
-			// run replacement again if there are more insert tags
+			// Run replacement again if there are more insert tags
 			if (strpos($strTag, '{{') !== false)
 			{
 				$strTag = $this->replaceInsertTags($strTag);
