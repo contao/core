@@ -145,9 +145,12 @@ class PageRegular extends \Frontend
 			}
 		}
 
-		// Execute AFTER the modules have been generated and create footer scripts first
+		// Execute AFTER the modules have been generated
 		$this->createFooterScripts($objLayout);
 		$this->createHeaderScripts($objPage, $objLayout);
+
+		// Add placeholder for inserting $GLOBALS[TL_MOOTOOLS] and $GLOBALS[TL_JQUERY] to the footer
+		$this->Template->mootools = '[[TL_FOOT]]';
 
 		// Print the template to the screen
 		$this->Template->output();
@@ -608,13 +611,14 @@ class PageRegular extends \Frontend
 
 
 	/**
-	 * Create all footer scripts
+	 * Create all footer scripts and store it in
+	 * $GLOBALS[TL_MOOTOOLS] / $GLOBALS[TL_JQUERY]
+	 * to insert it into fe_page via FrontendTemplate::output()
+	 *
 	 * @param object
 	 */
 	protected function createFooterScripts($objLayout)
 	{
-		$strScripts = '';
-
 		// jQuery
 		if ($objLayout->addJQuery)
 		{
@@ -625,16 +629,7 @@ class PageRegular extends \Frontend
 				if ($strTemplate != '')
 				{
 					$objTemplate = new \FrontendTemplate($strTemplate);
-					$strScripts .= $objTemplate->parse();
-				}
-			}
-
-			// Add the internal jQuery scripts
-			if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
-			{
-				foreach (array_unique($GLOBALS['TL_JQUERY']) as $script)
-				{
-					$strScripts .= "\n" . trim($script) . "\n";
+					$GLOBALS['TL_JQUERY'][] = $objTemplate->parse();
 				}
 			}
 		}
@@ -649,16 +644,7 @@ class PageRegular extends \Frontend
 				if ($strTemplate != '')
 				{
 					$objTemplate = new \FrontendTemplate($strTemplate);
-					$strScripts .= $objTemplate->parse();
-				}
-			}
-
-			// Add the internal MooTools scripts
-			if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
-			{
-				foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
-				{
-					$strScripts .= "\n" . trim($script) . "\n";
+					$GLOBALS['TL_MOOTOOLS'][]  = $objTemplate->parse();
 				}
 			}
 		}
@@ -666,7 +652,7 @@ class PageRegular extends \Frontend
 		// Add the custom JavaScript
 		if ($objLayout->script != '')
 		{
-			$strScripts .= "\n" . trim($objLayout->script) . "\n";
+			$GLOBALS['TL_MOOTOOLS'][]  = "\n" . trim($objLayout->script) . "\n";
 		}
 
 		// Add the analytics scripts
@@ -679,11 +665,41 @@ class PageRegular extends \Frontend
 				if ($strTemplate != '')
 				{
 					$objTemplate = new \FrontendTemplate($strTemplate);
-					$strScripts .= $objTemplate->parse();
+					$GLOBALS['TL_MOOTOOLS'][] = $objTemplate->parse();
 				}
 			}
 		}
+	}
 
-		$this->Template->mootools = $strScripts;
+
+	/**
+	 * Generate Javascript, Head-Tags and Stylesheet links
+	 * from $GLOBALS[TL_JAVASCRIPT], $GLOBALS[TL_HEAD] and $GLOBALS[TL_CSS]
+	 * @static
+	 * @return string head tags
+	 */
+	public static function generateFootMootoolsJqueryData()
+	{
+		$strScripts = '';
+
+		// Add the internal MooTools scripts
+		if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
+		{
+			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
+			{
+				$strScripts .= "\n" . trim($script) . "\n";
+			}
+		}
+
+		// Add the internal jQuery scripts
+		if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
+		{
+			foreach (array_unique($GLOBALS['TL_JQUERY']) as $script)
+			{
+				$strScripts .= "\n" . trim($script) . "\n";
+			}
+		}
+
+		return $strScripts;
 	}
 }
