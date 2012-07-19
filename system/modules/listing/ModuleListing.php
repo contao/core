@@ -164,18 +164,22 @@ class ModuleListing extends Module
 		$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
 		$per_page = $this->Input->get('per_page') ? $this->Input->get('per_page') : $this->perPage;
 
-		if ($page < 1 || $page > max(ceil($objTotal->count/$per_page), 1))
+		// Thanks to Hagen Klemp (see #4485)
+		if ($per_page > 0)
 		{
-			global $objPage;
-			$objPage->noSearch = 1;
-			$objPage->cache = 0;
+			if ($page < 1 || $page > max(ceil($objTotal->count/$per_page), 1))
+			{
+				global $objPage;
+				$objPage->noSearch = 1;
+				$objPage->cache = 0;
 
-			$this->Template->thead = array();
-			$this->Template->tbody = array();
+				$this->Template->thead = array();
+				$this->Template->tbody = array();
 
-			// Send a 404 header
-			header('HTTP/1.1 404 Not Found');
-			return;
+				// Send a 404 header
+				header('HTTP/1.1 404 Not Found');
+				return;
+			}
 		}
 
 

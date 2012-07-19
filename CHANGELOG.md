@@ -5,6 +5,9 @@ Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Fixed the "division by zero" issue in the listing module (see #4485).
+
+### Fixed
 Do not hide the current page in the quick navigation (see #4523).
 
 ### Fixed
