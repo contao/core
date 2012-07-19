@@ -887,14 +887,11 @@ class tl_page extends Backend
 			return;
 		}	
 
-		// Insert into
 		if ($this->Input->get('pid') == 0)
 		{
 			$GLOBALS['TL_DCA']['tl_page']['fields']['type']['default'] = 'root';
 		}
-
-		// Insert after
-		else
+		elseif ($this->Input->get('mode') == 1)
 		{
 			$objPage = $this->Database->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
 									  ->limit(1)

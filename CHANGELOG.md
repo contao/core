@@ -5,6 +5,10 @@ Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Fixed the issue with new pages being inserted into first-level pages having the
+wrong default page type (see #4507).
+
+### Fixed
 Limit the "inputUnit" fields in the style sheet generator to 20 characters so
 they are stored correctly in the database (see #4472).
 
