@@ -5,6 +5,9 @@ Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly check the permissions to manage undo steps (see #4535).
+
+### Fixed
 Fixed the issue with new pages being inserted into first-level pages having the
 wrong default page type (see #4507).
 

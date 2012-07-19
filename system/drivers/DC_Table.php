@@ -3752,18 +3752,6 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			$firstOrderBy = $this->firstOrderBy;
 		}
 
-		// Show only own undo steps
-		if ($this->strTable == 'tl_undo')
-		{
-			$this->import('BackendUser', 'User');
-
-			if (!$this->User->isAdmin)
-			{
-				$this->procedure[] = 'pid=?';
-				$this->values[] = $this->User->id;
-			}
-		}
-
 		$query = "SELECT * FROM " . $this->strTable;
 
 		if (!empty($this->procedure))
