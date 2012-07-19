@@ -16,6 +16,7 @@ nbproject/
 assets/css/*
 assets/images/*
 assets/js/*
+contao/update.phar.php
 share/
 system/cache/
 system/cron/

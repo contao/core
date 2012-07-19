@@ -5,6 +5,9 @@ Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not hide the current page in the quick navigation (see #4523).
+
+### Fixed
 The "addEntry" hook does not intefere with the user object anymore (see #4414).
 
 ### Fixed
