@@ -59,6 +59,11 @@ class Encryption
 	 */
 	protected function __construct()
 	{
+		if (!in_array('mcrypt', get_loaded_extensions()))
+		{
+			throw new Exception('The PHP mcrypt extension is not installed');
+		}
+
 		if (($this->resTd = mcrypt_module_open($GLOBALS['TL_CONFIG']['encryptionCipher'], '', $GLOBALS['TL_CONFIG']['encryptionMode'], '')) == false)
 		{
 			throw new Exception('Error initializing encryption module');
