@@ -5,6 +5,9 @@ Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Added better border radius hints in the style sheet editor (see #4379).
+
+### Fixed
 Fixed the HTML5 "form action attribute must not be empty" issue (see #3997).
 
 ### Fixed
