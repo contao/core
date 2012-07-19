@@ -5,6 +5,9 @@ Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Fixed the SOAP compression issue in PHP 5.4 (see #4087).
+
+### Fixed
 Fixed the "division by zero" issue in the listing module (see #4485).
 
 ### Fixed
