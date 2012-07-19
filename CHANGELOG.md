@@ -5,6 +5,10 @@ Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Limit the "inputUnit" fields in the style sheet generator to 20 characters so
+they are stored correctly in the database (see #4472).
+
+### Fixed
 Update the style sheets when changing the theme, in case the global style sheet
 variables have changed (see #4471).
 
