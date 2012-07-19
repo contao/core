@@ -4,6 +4,33 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### New
+The filter panel can now be used multiple times so fields can be grouped.
+You can still use "true" which is going to be automatically assigned to the first filter panel.
+Example:
+
+```
+$GLOBALS['TL_DCA']['tl_member']['list']['sorting']['panelLayout'] = 'filter;sort;filter;limit;filter';
+$GLOBALS['TL_DCA']['tl_member']['fields']['country']['filter'] = 2;
+$GLOBALS['TL_DCA']['tl_member']['fields']['groups']['filter'] = 3;
+```
+
+### New
+Added a panel_layout callback that allows defining own panels. Example:
+
+```
+$GLOBALS['TL_DCA']['tl_member']['list']['sorting']['panelLayout'] = 'filter;foobar;';
+$GLOBALS['TL_DCA']['tl_member']['list']['sorting']['panel_callback']['foobar'] = array('tl_member_foobar', 'addFoobarPanel');
+
+class tl_member_foobar extends Backend
+{
+	public function addFoobarPanel(DataContainer $dc)
+	{
+		return '<div class="tl_sorting tl_subpanel"><strong>foobar panel</strong></div>';
+	}
+}
+```
+
 ### Changed
 Moved the Transifex `.xlf` files to the `languages` folders of the modules and
 tweaked the `System::loadLanguageFile()` method to handle them (see #5005).
