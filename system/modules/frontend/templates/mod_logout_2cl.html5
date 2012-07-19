@@ -6,7 +6,7 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<form action="<?php echo $this->action; ?>" id="tl_logout" method="post">
+<form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?> id="tl_logout" method="post">
 <div class="formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_logout">
 <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">

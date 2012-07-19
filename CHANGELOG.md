@@ -5,6 +5,9 @@ Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Fixed the HTML5 "form action attribute must not be empty" issue (see #3997).
+
+### Fixed
 Fixed the SOAP compression issue in PHP 5.4 (see #4087).
 
 ### Fixed
