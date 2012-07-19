@@ -5,6 +5,10 @@ Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Update the style sheets when changing the theme, in case the global style sheet
+variables have changed (see #4471).
+
+### Fixed
 Added better border radius hints in the style sheet editor (see #4379).
 
 ### Fixed
