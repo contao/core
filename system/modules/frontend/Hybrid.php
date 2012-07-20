@@ -70,6 +70,11 @@ abstract class Hybrid extends Frontend
 	 */
 	protected $arrStyle = array();
 
+	/**
+	 * Database array
+	 * @var array
+	 */
+	protected $objElement;
 
 	/**
 	 * Initialize the object
@@ -79,7 +84,10 @@ abstract class Hybrid extends Frontend
 	public function __construct(Database_Result $objElement)
 	{
 		parent::__construct();
-
+		
+		// to make the data available in class Form (Form.php)
+		$this->objElement = $objElement;
+		
 		if ($this->strKey == '' || $this->strTable == '')
 		{
 			return;
