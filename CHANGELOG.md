@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
+### Updated
+Updated TinyMCE to version 3.5.5 to finally fix the issue with links pointing to
+the empty domain not being handled correctly (see #132).
+
 ### Changed
 Directly go to the new Live Update client if the file exists.
 
