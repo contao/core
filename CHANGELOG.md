@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
+### Changed
+Directly go to the new Live Update client if the file exists.
+
 ### Fixed
 Correctly check the permissions to manage undo steps (see #4535).
 
