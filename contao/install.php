@@ -112,7 +112,7 @@ class InstallTool extends Backend
 			}
 
 			$GLOBALS['TL_CONFIG']['ftpSSL']  = $this->Input->post('ssl');
-			$GLOBALS['TL_CONFIG']['ftpPort'] = (float) $this->Input->post('port');
+			$GLOBALS['TL_CONFIG']['ftpPort'] = (int) $this->Input->post('port');
 
 			// Add a trailing slash
 			if ($GLOBALS['TL_CONFIG']['ftpPath'] != '' && substr($GLOBALS['TL_CONFIG']['ftpPath'], -1) != '/')

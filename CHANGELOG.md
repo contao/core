@@ -1,12 +1,61 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.5 (XXXX-XX-XX)
+---------------------------
+
+### Fixed
+Correctly check the permissions to manage undo steps (see #4535).
+
+### Fixed
+Fixed the issue with new pages being inserted into first-level pages having the
+wrong default page type (see #4507).
+
+### Fixed
+Limit the "inputUnit" fields in the style sheet generator to 20 characters so
+they are stored correctly in the database (see #4472).
+
+### Fixed
+Update the style sheets when changing the theme, in case the global style sheet
+variables have changed (see #4471).
+
+### Fixed
+Added better border radius hints in the style sheet editor (see #4379).
+
+### Fixed
+Fixed the HTML5 "form action attribute must not be empty" issue (see #3997).
+
+### Fixed
+Fixed the SOAP compression issue in PHP 5.4 (see #4087).
+
+### Fixed
+Fixed the "division by zero" issue in the listing module (see #4485).
+
+### Fixed
+Do not hide the current page in the quick navigation (see #4523).
+
+### Fixed
+The "addEntry" hook does not intefere with the user object anymore (see #4414).
+
+### Fixed
+The function `Controller::generateImage()` did not urldecode (see #4384).
+
+### Fixed
+Check if there is a text field when auto-focussing (see #4422).
+
+### Fixed
+Set the correct headers to prevent browser caching (see #4436).
+
+### Fixed
+Min- and max-width/height now support `inherit` and `none` (see #4449).
+
+
 Version 2.11.4 (2012-06-12)
 ---------------------------
 
 ### Fixed
 Fixed a critical privilege escalation vulnerability which allowed regular users
-to make themselves administrators (see #4427).
+to make themselves administrators (thanks to Fabian Mihailowitsch) (see #4427).
 
 ### Fixed
 Support insert tags as external redirect target (see #4373).

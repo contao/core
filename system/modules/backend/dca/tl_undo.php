@@ -40,7 +40,11 @@ $GLOBALS['TL_DCA']['tl_undo'] = array
 	(
 		'dataContainer'               => 'Table',
 		'closed'                      => true,
-		'notEditable'                 => true
+		'notEditable'                 => true,
+		'onload_callback' => array
+		(
+			array('tl_undo', 'checkPermission')
+		)
 	),
 
 	// List
@@ -109,5 +113,53 @@ $GLOBALS['TL_DCA']['tl_undo'] = array
 		)
 	)
 );
+
+
+/**
+ * Class tl_undo
+ *
+ * Provide miscellaneous methods that are used by the data configuration array.
+ * @copyright  Leo Feyer 2005-2012
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Controller
+ */
+class tl_undo extends Backend
+{
+
+	/**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+	}
+
+
+	/**
+	 * Check permissions to use table tl_undo
+	 */
+	public function checkPermission()
+	{
+		if ($this->User->isAdmin)
+		{
+			return;
+		}
+
+		// Show only own undo steps
+		$objSteps = $this->Database->prepare("SELECT id FROM tl_undo WHERE pid=?")
+								   ->execute($this->User->id);
+
+		// Restrict the list
+		$GLOBALS['TL_DCA']['tl_undo']['list']['sorting']['root'] = $objSteps->numRows ? $objSteps->fetchEach('id') : array(0);
+
+		// Redirect if there is an error
+		if ($this->Input->get('act') && !in_array($this->Input->get('id'), $GLOBALS['TL_DCA']['tl_undo']['list']['sorting']['root']))
+		{
+			$this->log('Not enough permissions to '. $this->Input->get('act') .' undo step ID '. $this->Input->get('id'), 'tl_undo checkPermission', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+	}
+}
 
 ?>

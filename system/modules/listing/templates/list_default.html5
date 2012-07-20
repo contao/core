@@ -7,7 +7,7 @@
 <?php if ($this->searchable): ?>
 
 <div class="list_search">
-<form action="<?php echo $this->action; ?>" method="get">
+<form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?> method="get">
 <div class="formbody">
 <input type="hidden" name="order_by" value="<?php echo $this->order_by; ?>">
 <input type="hidden" name="sort" value="<?php echo $this->sort; ?>">
@@ -26,7 +26,7 @@
 <?php if ($this->per_page): ?>
 
 <div class="list_per_page">
-<form action="<?php echo $this->action; ?>" method="get">
+<form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?> method="get">
 <div class="formbody">
 <input type="hidden" name="order_by" value="<?php echo $this->order_by; ?>">
 <input type="hidden" name="sort" value="<?php echo $this->sort; ?>">

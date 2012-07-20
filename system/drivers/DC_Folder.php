@@ -921,7 +921,9 @@ class DC_Folder extends DataContainer implements listable, editable
 
 <script>
 window.addEvent(\'domready\', function() {
-  $(\''.$this->strTable.'\').getElement(\'input[type="text"]\').focus();
+  if (input = $(\''.$this->strTable.'\').getElement(\'input[type="text"]\')) {
+    input.focus();
+  }
 });
 </script>';
 
@@ -1099,7 +1101,9 @@ window.addEvent(\'domready\', function() {
 
 <script>
 window.addEvent(\'domready\', function() {
-  $(\''.$this->strTable.'\').getElement(\'input[type="text"]\').focus();
+  if (input = $(\''.$this->strTable.'\').getElement(\'input[type="text"]\')) {
+    input.focus();
+  }
 });
 </script>';
 

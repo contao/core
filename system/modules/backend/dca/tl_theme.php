@@ -40,7 +40,19 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ctable'                      => array('tl_module', 'tl_style_sheet', 'tl_layout'),
-		'enableVersioning'            => true
+		'enableVersioning'            => true,
+		'onload_callback' => array
+		(
+			array('tl_theme', 'updateStyleSheet')
+		),
+		'oncopy_callback' => array
+		(
+			array('tl_theme', 'scheduleUpdate')
+		),
+		'onsubmit_callback' => array
+		(
+			array('tl_theme', 'scheduleUpdate')
+		)
 	),
 
 	// List
@@ -228,6 +240,33 @@ class tl_theme extends Backend
 		}
 
 		return $label;
+	}
+
+
+	/**
+	 * Check for modified style sheets and update them if necessary
+	 */
+	public function updateStyleSheet()
+	{
+		if ($this->Session->get('style_sheet_update_all'))
+		{
+			$this->import('StyleSheets');
+			$this->StyleSheets->updateStyleSheets();
+		}
+
+		$this->Session->set('style_sheet_update_all', null);
+	}
+
+
+	/**
+	 * Schedule a style sheet update
+	 * 
+	 * This method is triggered when a single theme or multiple themes are
+	 * modified (edit/editAll) or duplicated (copy/copyAll).
+	 */
+	public function scheduleUpdate()
+	{
+		$this->Session->set('style_sheet_update_all', true);
 	}
 
 

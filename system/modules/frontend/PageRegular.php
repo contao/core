@@ -402,7 +402,7 @@ class PageRegular extends Frontend
 		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
-			$objStylesheets = $this->Database->execute("SELECT *, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2, (SELECT COUNT(*) FROM tl_style WHERE tl_style.selector='@font-face' AND tl_style.pid=tl_style_sheet.id) AS hasFontFace FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
+			$objStylesheets = $this->Database->execute("SELECT *, (SELECT tstamp FROM tl_theme WHERE tl_theme.id=tl_style_sheet.pid) AS tstamp3, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2, (SELECT COUNT(*) FROM tl_style WHERE tl_style.selector='@font-face' AND tl_style.pid=tl_style_sheet.id) AS hasFontFace FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
 
 			while ($objStylesheets->next())
 			{
@@ -417,7 +417,7 @@ class PageRegular extends Frontend
 				// Aggregate regular style sheets
 				if (!$objStylesheets->cc && !$objStylesheets->hasFontFace)
 				{
-					$objCombiner->add('system/scripts/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2), $media);
+					$objCombiner->add('system/scripts/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2, $objStylesheets->tstamp3), $media);
 				}
 				else
 				{
