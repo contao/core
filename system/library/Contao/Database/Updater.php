@@ -285,26 +285,15 @@ class Database_Updater extends \Controller
 
 		while ($objNews->next())
 		{
-			$set = array
-			(
-				'pid'         => $objNews->id,
-				'ptable'      => 'tl_news',
-				'sorting'     => 128,
-				'tstamp'      => $objNews->tstamp,
-				'type'        => 'text',
-				'text'        => $objNews->text,
-				'addImage'    => $objNews->addImage,
-				'singleSRC'   => $objNews->singleSRC,
-				'alt'         => $objNews->alt,
-				'size'        => $objNews->size,
-				'imagemargin' => $objNews->imagemargin,
-				'imageUrl'    => $objNews->imageUrl,
-				'fullsize'    => $objNews->fullsize,
-				'caption'     => $objNews->caption,
-				'floating'    => $objNews->floating
-			);
+			$this->createContentElement($objNews, 'tl_news', 'text');
+		}
 
-			$this->Database->prepare("INSERT INTO tl_content %s")->set($set)->execute();
+		// Create a content element for each event
+		$objEvents = $this->Database->execute("SELECT * FROM tl_calendar_events");
+
+		while ($objEvents->next())
+		{
+			$this->createContentElement($objEvents, 'tl_calendar_events', 'details');
 		}
 	}
 
@@ -476,5 +465,37 @@ class Database_Updater extends \Controller
 							   ->execute(serialize($arrPaths), $objRow->id);
 			}
 		}
+	}
+
+
+	/**
+	 * Create a content element
+	 * 
+	 * @param \Database_Result $objElement A database result object
+	 * @param string           $strPtable  The name of the parent table
+	 * @param string           $strField   The name of the text column
+	 */
+	protected function createContentElement(\Database_Result $objElement, $strPtable, $strField)
+	{
+		$set = array
+		(
+			'pid'         => $objElement->id,
+			'ptable'      => $strPtable,
+			'sorting'     => 128,
+			'tstamp'      => $objElement->tstamp,
+			'type'        => 'text',
+			'text'        => $objElement->$strField,
+			'addImage'    => $objElement->addImage,
+			'singleSRC'   => $objElement->singleSRC,
+			'alt'         => $objElement->alt,
+			'size'        => $objElement->size,
+			'imagemargin' => $objElement->imagemargin,
+			'imageUrl'    => $objElement->imageUrl,
+			'fullsize'    => $objElement->fullsize,
+			'caption'     => $objElement->caption,
+			'floating'    => $objElement->floating
+		);
+
+		$this->Database->prepare("INSERT INTO tl_content %s")->set($set)->execute();
 	}
 }

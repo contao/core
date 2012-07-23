@@ -42,6 +42,7 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['noComments']   = array('Disable comme
 $GLOBALS['TL_LANG']['tl_calendar_events']['published']    = array('Publish event', 'Make the event publicly visible on the website.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['start']        = array('Show from', 'Do not show the event on the website before this day.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['stop']         = array('Show until', 'Do not show the event on the website on and after this day.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['tstamp']       = array('Revision date', 'Date and time of the latest revision');
 
 
 /**
@@ -79,4 +80,5 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['cut']        = array('Move event', 'M
 $GLOBALS['TL_LANG']['tl_calendar_events']['delete']     = array('Delete event', 'Delete event ID %s');
 $GLOBALS['TL_LANG']['tl_calendar_events']['toggle']     = array('Publish/unpublish event', 'Publish/unpublish event ID %s');
 $GLOBALS['TL_LANG']['tl_calendar_events']['editheader'] = array('Edit calendar', 'Edit the calendar settings');
+$GLOBALS['TL_LANG']['tl_calendar_events']['editmeta']   = array('Edit event settings', 'Edit the event settings');
 $GLOBALS['TL_LANG']['tl_calendar_events']['pasteafter'] = array('Paste into this calendar', 'Paste after event ID %s');

@@ -42,6 +42,7 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['noComments']   = array('Kommentare de
 $GLOBALS['TL_LANG']['tl_calendar_events']['published']    = array('Event veröffentlichen', 'Das Event auf der Webseite anzeigen.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['start']        = array('Anzeigen ab', 'Das Event erst ab diesem Tag auf der Webseite anzeigen.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['stop']         = array('Anzeigen bis', 'Das Event nur bis zu diesem Tag auf der Webseite anzeigen.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['tstamp']       = array('Änderungsdatum', 'Datum und Uhrzeit der letzten Änderung');
 
 
 /**
@@ -78,4 +79,5 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['cut']        = array('Event verschieb
 $GLOBALS['TL_LANG']['tl_calendar_events']['delete']     = array('Event löschen', 'Event ID %s löschen');
 $GLOBALS['TL_LANG']['tl_calendar_events']['toggle']     = array('Event veröffentlichen/unveröffentlichen', 'Event ID %s veröffentlichen/unveröffentlichen');
 $GLOBALS['TL_LANG']['tl_calendar_events']['editheader'] = array('Kalender bearbeiten', 'Die Kalender-Einstellungen bearbeiten');
+$GLOBALS['TL_LANG']['tl_calendar_events']['editmeta']   = array('Eventeinstellungen bearbeiten', 'Die Eventeinstellungen bearbeiten');
 $GLOBALS['TL_LANG']['tl_calendar_events']['pasteafter'] = array('In diesen Kalender einfügen', 'Nach dem Event ID %s einfügen');
