@@ -5,6 +5,9 @@ Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Handle dependencies when updating extensions (see #3804).
+
+### Fixed
 Switched all comments of the example website to "moderated" (see #4995).
 
 ### Fixed
