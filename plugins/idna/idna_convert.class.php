@@ -972,7 +972,7 @@ class idna_convert
             return mb_strlen($string, '8bit');
         }
         //return strlen((binary) $string);
-        return utf8_strlen($string); // PATCH: support PHP 5.2 (see #4044)
+        return count(unpack('c*', $string)); // PATCH: support PHP 5.2 (see #4044 and #3649)
     }
 
     /**

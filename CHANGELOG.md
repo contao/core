@@ -4,6 +4,13 @@ Contao Open Source CMS Changelog
 Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+The IDNA convert class did (again) not run under PHP 5.2 (see #4044).
+
+### Fixed
+Fixed an issue with `getImage()` not working correctly when the `$target`
+parameter was set (thanks to Tristan Lins) (see #4166).
+
 ### Updated
 Updated TinyMCE to version 3.5.5 to finally fix the issue with links pointing to
 the empty domain not being handled correctly (see #132).
