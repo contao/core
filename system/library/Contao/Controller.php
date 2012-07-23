@@ -2039,13 +2039,13 @@ abstract class Controller extends \System
 	/**
 	 * Generate an URL depending on the current rewriteURL setting
 	 * 
-	 * @param Array  $arrRow       An array of page parameters
+	 * @param array  $arrRow       An array of page parameters
 	 * @param string $strParams    An optional string of URL parameters
 	 * @param string $strForceLang Force a certain language
 	 * 
 	 * @return string An URL that can be used in the front end
 	 */
-	public static function generateFrontendUrl(Array $arrRow, $strParams=null, $strForceLang=null)
+	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null)
 	{
 		if (!$GLOBALS['TL_CONFIG']['disableAlias'])
 		{

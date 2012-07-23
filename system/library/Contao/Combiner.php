@@ -139,11 +139,11 @@ class Combiner extends \System
 	/**
 	 * Add multiple files from an array
 	 * 
-	 * @param Array  $arrFiles   An array of files to be added
+	 * @param array  $arrFiles   An array of files to be added
 	 * @param string $strVersion An optional version number
 	 * @param string $strMedia   The media type of the file (.css only)
 	 */
-	public function addMultiple(Array $arrFiles, $strVersion=null, $strMedia='screen')
+	public function addMultiple(array $arrFiles, $strVersion=null, $strMedia='screen')
 	{
 		foreach ($arrFiles as $strFile)
 		{

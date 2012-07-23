@@ -201,11 +201,11 @@ abstract class Model extends \System
 	/**
 	 * Set the current record from an array
 	 * 
-	 * @param Array $arrData The data record
+	 * @param array $arrData The data record
 	 * 
 	 * @return \Model The model object
 	 */
-	public function setRow(Array $arrData)
+	public function setRow(array $arrData)
 	{
 		$this->arrData = $arrData;
 		return $this;
@@ -248,11 +248,11 @@ abstract class Model extends \System
 	/**
 	 * Modify the current row before it is stored in the database
 	 * 
-	 * @param Array $arrSet The data array
+	 * @param array $arrSet The data array
 	 * 
 	 * @return array The modified data array
 	 */
-	protected function preSave(Array $arrSet)
+	protected function preSave(array $arrSet)
 	{
 		return $arrSet;
 	}
@@ -319,11 +319,11 @@ abstract class Model extends \System
 	 * Find a single record by its primary key
 	 * 
 	 * @param mixed $varValue   The property value
-	 * @param Array $arrOptions An optional options array
+	 * @param array $arrOptions An optional options array
 	 * 
 	 * @return \Model|null The model or null if the result is empty
 	 */
-	public static function findByPk($varValue, Array $arrOptions=array())
+	public static function findByPk($varValue, array $arrOptions=array())
 	{
 		$arrOptions = array_merge($arrOptions, array
 		(
@@ -341,11 +341,11 @@ abstract class Model extends \System
 	 * Find a single record by its ID or alias
 	 * 
 	 * @param mixed $varId      The ID or alias
-	 * @param Array $arrOptions An optional options array
+	 * @param array $arrOptions An optional options array
 	 * 
 	 * @return \Model|null The model or null if the result is empty
 	 */
-	public static function findByIdOrAlias($varId, Array $arrOptions=array())
+	public static function findByIdOrAlias($varId, array $arrOptions=array())
 	{
 		$t = static::$strTable;
 
@@ -366,11 +366,11 @@ abstract class Model extends \System
 	 * 
 	 * @param mixed $strColumn  The property name
 	 * @param mixed $varValue   The property value
-	 * @param Array $arrOptions An optional options array
+	 * @param array $arrOptions An optional options array
 	 * 
 	 * @return \Model|null The model or null if the result is empty
 	 */
-	public static function findOneBy($strColumn, $varValue, Array $arrOptions=array())
+	public static function findOneBy($strColumn, $varValue, array $arrOptions=array())
 	{
 		$arrOptions = array_merge($arrOptions, array
 		(
@@ -389,11 +389,11 @@ abstract class Model extends \System
 	 * 
 	 * @param mixed $strColumn  The property name
 	 * @param mixed $varValue   The property value
-	 * @param Array $arrOptions An optional options array
+	 * @param array $arrOptions An optional options array
 	 * 
 	 * @return \Model_Collection|null The model collection or null if the result is empty
 	 */
-	public static function findBy($strColumn, $varValue, Array $arrOptions=array())
+	public static function findBy($strColumn, $varValue, array $arrOptions=array())
 	{
 		$arrOptions = array_merge($arrOptions, array
 		(
@@ -409,11 +409,11 @@ abstract class Model extends \System
 	/**
 	 * Find all records
 	 * 
-	 * @param Array $arrOptions An optional options array
+	 * @param array $arrOptions An optional options array
 	 * 
 	 * @return \Model_Collection|null The model collection or null if the result is empty
 	 */
-	public static function findAll(Array $arrOptions=array())
+	public static function findAll(array $arrOptions=array())
 	{
 		$arrOptions = array_merge($arrOptions, array
 		(
@@ -459,11 +459,11 @@ abstract class Model extends \System
 	 * * order:  the sorting order
 	 * * eager:  load all related records eagerly
 	 * 
-	 * @param Array $arrOptions The options array
+	 * @param array $arrOptions The options array
 	 * 
 	 * @return \Model|\Model_Collection|null A model, model collection or null if the result is empty
 	 */
-	protected static function find(Array $arrOptions)
+	protected static function find(array $arrOptions)
 	{
 		if (static::$strTable == '')
 		{

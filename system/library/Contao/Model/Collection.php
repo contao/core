@@ -148,11 +148,11 @@ class Model_Collection extends \System
 	/**
 	 * Set the current row from an array
 	 * 
-	 * @param Array $arrData The row data as array
+	 * @param array $arrData The row data as array
 	 * 
 	 * @return \Model_Collection The model collection object
 	 */
-	public function setRow(Array $arrData)
+	public function setRow(array $arrData)
 	{
 		if ($this->intIndex < 0)
 		{

@@ -67,11 +67,11 @@ abstract class Database
 	/**
 	 * Establish the database connection
 	 * 
-	 * @param Array $arrConfig A configuration array
+	 * @param array $arrConfig A configuration array
 	 * 
 	 * @throws \Exception If a connection cannot be established
 	 */
-	protected function __construct(Array $arrConfig)
+	protected function __construct(array $arrConfig)
 	{
 		$this->arrConfig = $arrConfig;
 		$this->connect();
@@ -122,11 +122,11 @@ abstract class Database
 	/**
 	 * Instantiate the Database object (Factory)
 	 * 
-	 * @param Array $arrCustom A configuration array
+	 * @param array $arrCustom A configuration array
 	 * 
 	 * @return \Database The Database object
 	 */
-	public static function getInstance(Array $arrCustom=null)
+	public static function getInstance(array $arrCustom=null)
 	{
 		$arrConfig = array
 		(
