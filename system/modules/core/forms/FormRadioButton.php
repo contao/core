@@ -143,7 +143,7 @@ class FormRadioButton extends \Widget
 
 		foreach ($this->arrOptions as $i=>$arrOption)
 		{
-			$strOptions .= sprintf('<span><input type="radio" name="%s" id="opt_%s" class="radio" value="%s"%s%s%s <label id="lbl_%s" for="opt_%s">%s</label></span>',
+			$strOptions .= sprintf('<span><input type="radio" name="%s" id="opt_%s" class="radio" value="%s"%s%s%s <label id="lbl_%s" for="opt_%s">%s</label></span> ',
 									$this->strName,
 									$this->strId.'_'.$i,
 									$arrOption['value'],
