@@ -5,6 +5,9 @@ Version 2.11.5 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Crop theme preview images so they are not being distorted (see #4361).
+
+### Fixed
 The IDNA convert class did (again) not run under PHP 5.2 (see #4044).
 
 ### Fixed
