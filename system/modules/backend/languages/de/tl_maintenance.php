@@ -47,6 +47,7 @@ $GLOBALS['TL_LANG']['tl_maintenance']['clearCss']      = 'CSS-Dateien';
 $GLOBALS['TL_LANG']['tl_maintenance']['cacheCleared']  = 'Die Daten wurden bereinigt';
 $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate']    = 'Live Update';
 $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdateId']  = 'Live Update ID';
+$GLOBALS['TL_LANG']['tl_maintenance']['toLiveUpdate']  = 'Zum Live Update';
 $GLOBALS['TL_LANG']['tl_maintenance']['upToDate']      = 'Ihre Contao-Version %s ist aktuell';
 $GLOBALS['TL_LANG']['tl_maintenance']['newVersion']    = 'Eine neuere Contao-Version %s ist verfügbar';
 $GLOBALS['TL_LANG']['tl_maintenance']['betaVersion']   = 'Beta-Versionen können nicht per Live Update aktualisiert werden';

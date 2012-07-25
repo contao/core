@@ -128,6 +128,8 @@ class LiveUpdate extends Backend implements executable
 		$objTemplate->runLiveUpdate = specialchars($GLOBALS['TL_LANG']['tl_maintenance']['runLiveUpdate']);
 		$objTemplate->referer = base64_encode($this->Environment->base . $this->Environment->request . '|' . $this->Environment->server);
 		$objTemplate->updateHelp = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['updateHelp'], '<a href="http://luid.inetrobots.com" target="_blank">Live Update ID</a>');
+		$objTemplate->phar = file_exists(TL_ROOT . '/contao/update.phar.php');
+		$objTemplate->toLiveUpdate = $GLOBALS['TL_LANG']['tl_maintenance']['toLiveUpdate'];
 
 		return $objTemplate->parse();
 	}

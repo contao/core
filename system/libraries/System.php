@@ -132,9 +132,15 @@ abstract class System
 
 	/**
 	 * Cookie hook object
-	 * @var Messages
+	 * @var object
 	 */
 	protected $objCookie;
+
+	/**
+	 * Log hook object
+	 * @var object
+	 */
+	protected $objLog;
 
 	/**
 	 * Cache array
@@ -202,8 +208,8 @@ abstract class System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['addLogEntry'] as $callback)
 			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($strText, $strFunction, $strAction);
+				$this->import($callback[0], 'objLog'); // see #4414
+				$this->objLog->$callback[1]($strText, $strFunction, $strAction);
 			}
 		}
 	}

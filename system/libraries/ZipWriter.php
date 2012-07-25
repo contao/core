@@ -135,6 +135,12 @@ class ZipWriter extends System
 			throw new Exception("File $strFile does not exist");
 		}
 
+		// Remove leading slashes (see #4502)
+		if (strncmp($strName, '/', 1) === 0)
+		{
+			$strName = substr($strName, 1);
+		}
+
 		$this->addString(file_get_contents(TL_ROOT . '/' . $strFile), (($strName != '') ? $strName : $strFile), filemtime(TL_ROOT . '/' . $strFile));
 	}
 

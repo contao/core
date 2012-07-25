@@ -11,14 +11,9 @@ Thumbs.db
 nbproject/
 
 # Contao
-.htaccess
-*.xml
-assets/css/*
-assets/images/*
-assets/js/*
-share/
-system/cache/
-system/cron/
+/.htaccess
+/*.xml
+contao/update.phar.php
 system/html/*
 system/logs/*
 system/scripts/*

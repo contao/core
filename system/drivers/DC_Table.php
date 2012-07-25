@@ -1808,7 +1808,9 @@ class DC_Table extends DataContainer implements listable, editable
 
 <script>
 window.addEvent(\'domready\', function() {
-  $(\''.$this->strTable.'\').getElement(\'input[type="text"]\').focus();
+  if (input = $(\''.$this->strTable.'\').getElement(\'input[type="text"]\')) {
+    input.focus();
+  }
 });
 </script>';
 
@@ -2179,7 +2181,9 @@ window.addEvent(\'domready\', function() {
 
 <script>
 window.addEvent(\'domready\', function() {
-  $(\''.$this->strTable.'\').getElement(\'input[type="text"]\').focus();
+  if (input = $(\''.$this->strTable.'\').getElement(\'input[type="text"]\')) {
+    input.focus();
+  }
 });
 </script>';
 
@@ -3746,18 +3750,6 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		{
 			$orderBy = $this->orderBy;
 			$firstOrderBy = $this->firstOrderBy;
-		}
-
-		// Show only own undo steps
-		if ($this->strTable == 'tl_undo')
-		{
-			$this->import('BackendUser', 'User');
-
-			if (!$this->User->isAdmin)
-			{
-				$this->procedure[] = 'pid=?';
-				$this->values[] = $this->User->id;
-			}
 		}
 
 		$query = "SELECT * FROM " . $this->strTable;

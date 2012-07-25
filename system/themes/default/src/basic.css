@@ -331,10 +331,18 @@ pre,.tl_textarea.monospace {
 	background-image:-ms-linear-gradient(top, #ccc 0%, #eee 60%);
 	background-image:linear-gradient(top, #ccc 0%, #eee 60%);
 }
-.firefox .tl_submit {
+a.tl_submit {
+	padding:4px 12px 4px 13px;
+	font-family:"Trebuchet MS",Verdana,sans-serif;
+	font-size:12px;
+}
+a.tl_submit:hover {
+	color:#666966;
+}
+.firefox input.tl_submit {
 	padding:2px 12px 2px 13px;
 }
-.opera .tl_submit {
+.opera input.tl_submit {
 	padding:4px 12px 4px 13px;
 }
 .tl_submit:focus,.tl_submit:hover {

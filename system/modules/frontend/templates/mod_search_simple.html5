@@ -1,5 +1,5 @@
 
-<form action="<?php echo $this->action; ?>" method="get">
+<form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?> method="get">
 <div class="formbody">
 <?php if ($this->id): ?>
 <input type="hidden" name="id" value="<?php echo $this->id; ?>">

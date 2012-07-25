@@ -30,7 +30,7 @@
 
 
 /**
- * Class DB_Mysqlii
+ * Class DB_Mysqli
  *
  * Driver class for MySQLi databases.
  * @copyright  Leo Feyer 2005-2012

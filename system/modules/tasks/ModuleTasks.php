@@ -291,7 +291,7 @@ class ModuleTasks extends BackendModule
 		$this->Template->goBack = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['tl_task']['edit'][1], $this->Input->get('id'));
 
-		$objTask = $this->Database->prepare("SELECT *, (SELECT name FROM tl_user u WHERE u.id=t.createdBy) AS creator FROM tl_task t WHERE id=?")
+		$objTask = $this->Database->prepare("SELECT *, t.id AS id, (SELECT name FROM tl_user u WHERE u.id=t.createdBy) AS creator FROM tl_task t LEFT JOIN tl_task_status s ON t.id=s.pid AND s.tstamp=(SELECT MAX(tstamp) FROM tl_task_status ts WHERE ts.pid=t.id) WHERE t.id=?")
 								  ->limit(1)
 								  ->execute($this->Input->get('id'));
 
@@ -302,7 +302,7 @@ class ModuleTasks extends BackendModule
 		}
 
 		// Check if the user is allowed to edit the task
-		if (!$this->User->isAdmin && $objTask->createdBy != $this->User->id)
+		if (!$this->User->isAdmin && $objTask->createdBy != $this->User->id && $objTask->assignedTo != $this->User->id)
 		{
 			$this->log('Not enough permissions to edit task ID "' . $this->Input->get('id') . '"', 'ModuleTask editTask()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');

@@ -1,12 +1,78 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.5 (2012-07-25)
+---------------------------
+
+### Fixed
+Crop theme preview images so they are not being distorted (see #4361).
+
+### Fixed
+The IDNA convert class did (again) not run under PHP 5.2 (see #4044).
+
+### Fixed
+Fixed an issue with `getImage()` not working correctly when the `$target`
+parameter was set (thanks to Tristan Lins) (see #4166).
+
+### Updated
+Updated TinyMCE to version 3.5.5 to finally fix the issue with links pointing to
+the empty domain not being handled correctly (see #132).
+
+### Changed
+Directly go to the new Live Update client if the file exists.
+
+### Fixed
+Correctly check the permissions to manage undo steps (see #4535).
+
+### Fixed
+Fixed the issue with new pages being inserted into first-level pages having the
+wrong default page type (see #4507).
+
+### Fixed
+Limit the "inputUnit" fields in the style sheet generator to 20 characters so
+they are stored correctly in the database (see #4472).
+
+### Fixed
+Update the style sheets when changing the theme, in case the global style sheet
+variables have changed (see #4471).
+
+### Fixed
+Added better border radius hints in the style sheet editor (see #4379).
+
+### Fixed
+Fixed the HTML5 "form action attribute must not be empty" issue (see #3997).
+
+### Fixed
+Fixed the SOAP compression issue in PHP 5.4 (see #4087).
+
+### Fixed
+Fixed the "division by zero" issue in the listing module (see #4485).
+
+### Fixed
+Do not hide the current page in the quick navigation (see #4523).
+
+### Fixed
+The "addEntry" hook does not intefere with the user object anymore (see #4414).
+
+### Fixed
+The function `Controller::generateImage()` did not urldecode (see #4384).
+
+### Fixed
+Check if there is a text field when auto-focussing (see #4422).
+
+### Fixed
+Set the correct headers to prevent browser caching (see #4436).
+
+### Fixed
+Min- and max-width/height now support `inherit` and `none` (see #4449).
+
+
 Version 2.11.4 (2012-06-12)
 ---------------------------
 
 ### Fixed
 Fixed a critical privilege escalation vulnerability which allowed regular users
-to make themselves administrators (see #4427).
+to make themselves administrators (thanks to Fabian Mihailowitsch) (see #4427).
 
 ### Fixed
 Support insert tags as external redirect target (see #4373).
