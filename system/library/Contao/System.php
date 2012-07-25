@@ -117,7 +117,7 @@ abstract class System
 
 	/**
 	 * Cookie hook object
-	 * @var \Messages
+	 * @var object
 	 */
 	protected $objCookie;
 

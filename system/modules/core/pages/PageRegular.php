@@ -440,7 +440,7 @@ class PageRegular extends \Frontend
 					// Aggregate regular style sheets
 					if (!$objStylesheets->cc && !$objStylesheets->hasFontFace)
 					{
-						$objCombiner->add('assets/css/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2), $media);
+						$objCombiner->add('assets/css/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2, $objStylesheets->tstamp3), $media);
 					}
 					else
 					{

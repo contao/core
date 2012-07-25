@@ -6,7 +6,7 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<form action="<?php echo $this->action; ?>" id="tl_login" method="post">
+<form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?> id="tl_login" method="post">
 <div class="formbody">
 <?php if ($this->message): ?>
 <p class="error"><?php echo $this->message; ?></p>

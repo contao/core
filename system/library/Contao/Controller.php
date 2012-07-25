@@ -781,6 +781,16 @@ abstract class Controller extends \System
 		$this->loadLanguageFile('countries');
 		include TL_ROOT . '/system/config/countries.php';
 
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getCountries']) && is_array($GLOBALS['TL_HOOKS']['getCountries']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getCountries'] as $callback)
+			{
+				$this->import($callback[0]);
+				$return = $this->$callback[0]->$callback[1]($return, $countries);
+			}
+		}
+
 		foreach ($countries as $strKey=>$strName)
 		{
 			$arrAux[$strKey] = isset($GLOBALS['TL_LANG']['CNT'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['CNT'][$strKey]) : $strName;
@@ -2794,7 +2804,7 @@ abstract class Controller extends \System
 	 */
 	public static function optionSelected($strName, $varValue)
 	{
-		if ($strName == '')
+		if ($strName === '')
 		{
 			return '';
 		}
@@ -3263,14 +3273,15 @@ abstract class Controller extends \System
 	 * @param integer $height The target height
 	 * @param string  $mode   An optional resize mode
 	 * @param string  $target An optional target to be replaced
+	 * @param boolean $force  Override existing target images
 	 * 
 	 * @return string|null The image path or null
 	 * 
 	 * @deprecated Use Image::get() instead
 	 */
-	protected function getImage($image, $width, $height, $mode='', $target=null)
+	protected function getImage($image, $width, $height, $mode='', $target=null, $force=false)
 	{
-		return \Image::get($image, $width, $height, $mode, $target);
+		return \Image::get($image, $width, $height, $mode, $target, $force);
 	}
 
 

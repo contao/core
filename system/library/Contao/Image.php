@@ -63,7 +63,7 @@ class Image
 	 */
 	public static function resize($image, $width, $height, $mode='')
 	{
-		return static::get($image, $width, $height, $mode, $image) ? true : false;
+		return static::get($image, $width, $height, $mode, $image, true) ? true : false;
 	}
 
 
@@ -75,10 +75,11 @@ class Image
 	 * @param integer $height The target height
 	 * @param string  $mode   The resize mode
 	 * @param string  $target An optional target path
+	 * @param boolean $force  Override existing target images
 	 * 
 	 * @return string|null The path of the resized image or null
 	 */
-	public static function get($image, $width, $height, $mode='', $target=null)
+	public static function get($image, $width, $height, $mode='', $target=null, $force=false)
 	{
 		if ($image == '')
 		{
@@ -107,6 +108,18 @@ class Image
 		// No resizing required
 		if ($objFile->width == $width && $objFile->height == $height)
 		{
+			// Return the target image (thanks to Tristan Lins) (see #4166)
+			if ($target)
+			{
+				// Copy the source image if the target image does not exist or is older than the source image
+				if (!file_exists(TL_ROOT . '/' . $target) || $objFile->mtime > filemtime(TL_ROOT . '/' . $target))
+				{
+					\Files::getInstance()->copy($image, $target);
+				}
+
+				return \System::urlEncode($target);
+			}
+
 			return \System::urlEncode($image);
 		}
 
@@ -125,10 +138,29 @@ class Image
 		$strCacheKey = substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8);
 		$strCacheName = 'assets/images/' . substr($strCacheKey, -1) . '/' . $objFile->filename . '-' . $strCacheKey . '.' . $objFile->extension;
 
-		// Return the path of the new image if it exists already
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheName))
+		// Check whether the image exists already
+		if (!$GLOBALS['TL_CONFIG']['bypassCache'])
 		{
-			return \System::urlEncode($strCacheName);
+			// Custom target (thanks to Tristan Lins) (see #4166)
+			if ($target && !$force)
+			{
+				if (file_exists(TL_ROOT . '/' . $target) && $objFile->mtime <= filemtime(TL_ROOT . '/' . $target))
+				{
+					return \System::urlEncode($target);
+				}
+			}
+
+			// Regular cache file
+			if (file_exists(TL_ROOT . '/' . $strCacheName))
+			{
+				// Copy the cached file if it exists
+				if ($target)
+				{
+					\Files::getInstance()->copy($strCacheName, $target);
+				}
+
+				return \System::urlEncode($strCacheName);
+			}
 		}
 
 		// HOOK: add custom logic
@@ -378,7 +410,7 @@ class Image
 		// Resize the original image
 		if ($target)
 		{
-			\Files::getInstance()->rename($strCacheName, $target);
+			\Files::getInstance()->copy($strCacheName, $target);
 			return \System::urlEncode($target);
 		}
 

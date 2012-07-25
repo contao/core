@@ -177,6 +177,7 @@ class Comments extends \Frontend
 		if ($objConfig->requireLogin && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN)
 		{
 			$objTemplate->requireLogin = true;
+			$objTemplate->comments = array(); // see #4064
 			return;
 		}
 

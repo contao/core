@@ -844,7 +844,7 @@ class SimplePie
 	 */
 	public function set_file(&$file)
 	{
-		if (is_a($file, 'SimplePie_File'))
+		if ($file instanceof SimplePie_File)
 		{
 			$this->feed_url = $file->url;
 			$this->file =& $file;
@@ -1634,7 +1634,7 @@ class SimplePie
 				// If we don't already have the file (it'll only exist if we've opened it to check if the cache has been modified), open it.
 				if (!isset($file))
 				{
-					if (is_a($this->file, 'SimplePie_File') && $this->file->url === $this->feed_url)
+					if ($this->file instanceof SimplePie_File && $this->file->url === $this->feed_url)
 					{
 						$file =& $this->file;
 					}
@@ -3066,7 +3066,7 @@ class SimplePie
 			$items = array();
 			foreach ($urls as $arg)
 			{
-				if (is_a($arg, 'SimplePie'))
+				if ($arg instanceof SimplePie)
 				{
 					$items = array_merge($items, $arg->get_items(0, $limit));
 				}
@@ -8667,7 +8667,7 @@ class SimplePie_Cache_File
 	{
 		if (file_exists($this->name) && is_writeable($this->name) || file_exists($this->location) && is_writeable($this->location))
 		{
-			if (is_a($data, 'SimplePie'))
+			if ($data instanceof SimplePie)
 			{
 				$data = $data->data;
 			}
@@ -8889,7 +8889,7 @@ class SimplePie_Cache_MySQL extends SimplePie_Cache_DB
 		{
 			$feed_id = "'" . mysql_real_escape_string($this->id) . "'";
 
-			if (is_a($data, 'SimplePie'))
+			if ($data instanceof SimplePie)
 			{
 				if (SIMPLEPIE_PHP5)
 				{
@@ -9461,7 +9461,9 @@ class SimplePie_Misc
 			return SimplePie_Misc::windows_1252_to_utf8($data);
 		}
 		// This is second, as behaviour of this varies only with PHP version (the middle part of this expression checks the encoding is supported).
-		elseif (function_exists('mb_convert_encoding') && @mb_convert_encoding("\x80", 'UTF-16BE', $input) !== "\x00\x80" && in_array($input, mb_list_encodings()) && ($return = @mb_convert_encoding($data, $output, $input)))
+		// PATCH: see #4504
+		//elseif (function_exists('mb_convert_encoding') && @mb_convert_encoding("\x80", 'UTF-16BE', $input) !== "\x00\x80" && in_array($input, mb_list_encodings()) && ($return = @mb_convert_encoding($data, $output, $input)))
+		elseif (function_exists('mb_convert_encoding') && @mb_convert_encoding("\x80", 'UTF-16BE', $input) !== "\x00\x80" && function_exists('mb_list_encodings') && in_array($input, mb_list_encodings()) && ($return = @mb_convert_encoding($data, $output, $input)))
 		{
 			return $return;
 		}

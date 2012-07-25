@@ -6,7 +6,7 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<form action="<?php echo $this->request; ?>" method="post">
+<form<?php if ($this->request): ?> action="<?php echo $this->request; ?>"<?php endif; ?> method="post">
 <div class="formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_quicknav">
 <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">

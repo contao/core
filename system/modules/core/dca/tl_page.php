@@ -982,9 +982,7 @@ class tl_page extends Backend
 		{
 			$GLOBALS['TL_DCA']['tl_page']['fields']['type']['default'] = 'root';
 		}
-
-		// Insert after
-		else
+		elseif (Input::get('mode') == 1)
 		{
 			$objPage = $this->Database->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
 									  ->limit(1)
