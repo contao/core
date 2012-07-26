@@ -1954,6 +1954,82 @@ abstract class Controller extends \System
 
 
 	/**
+	 * Replace the dynamic script tags (see #4203)
+	 * 
+	 * @param string $strBuffer The string with the tags to be replaced
+	 * 
+	 * @return string The string with the replaced tags
+	 */
+	public static function replaceDynamicScriptTags($strBuffer)
+	{
+		global $objPage;
+
+		$arrReplace = array();
+		$blnXhtml = ($objPage->outputFormat == 'xhtml');
+		$strTagEnding = $blnXhtml ? ' />' : '>';
+		$strScripts = '';
+
+		// Add the internal jQuery scripts
+		if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
+		{
+			foreach (array_unique($GLOBALS['TL_JQUERY']) as $script)
+			{
+				$strScripts .= "\n" . trim($script) . "\n";
+			}
+		}
+
+		$arrReplace['[[TL_JQUERY]]'] = $strScripts;
+		$strScripts = '';
+
+		// Add the internal MooTools scripts
+		if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
+		{
+			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
+			{
+				$strScripts .= "\n" . trim($script) . "\n";
+			}
+		}
+
+		$arrReplace['[[TL_MOOTOOLS]]'] = $strScripts;
+		$strScripts = '';
+
+		// Internal style sheets
+		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
+		{
+			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
+			{
+				list($stylesheet, $media) = explode('|', $stylesheet);
+				$strScripts .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . static::addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
+			}
+		}
+
+		$arrReplace['[[TL_CSS]]'] = $strScripts;
+		$strScripts = '';
+
+		// Add internal scripts
+		if (is_array($GLOBALS['TL_JAVASCRIPT']) && !empty($GLOBALS['TL_JAVASCRIPT']))
+		{
+			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
+			{
+				$strScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . static::addStaticUrlTo($javascript) . '"></script>' . "\n";
+			}
+		}
+
+		// Add internal <head> tags
+		if (is_array($GLOBALS['TL_HEAD']) && !empty($GLOBALS['TL_HEAD']))
+		{
+			foreach (array_unique($GLOBALS['TL_HEAD']) as $head)
+			{
+				$strScripts .= trim($head) . "\n";
+			}
+		}
+
+		$arrReplace['[[TL_HEAD]]'] = $strScripts;
+		return str_replace(array_keys($arrReplace), array_values($arrReplace), $strBuffer);
+	}
+
+
+	/**
 	 * Restore basic entities
 	 * 
 	 * @param string $strBuffer The string with the tags to be replaced

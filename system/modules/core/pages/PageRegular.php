@@ -145,12 +145,9 @@ class PageRegular extends \Frontend
 			}
 		}
 
-		// Execute AFTER the modules have been generated
+		// Execute AFTER the modules have been generated and create footer scripts first
 		$this->createFooterScripts($objLayout);
 		$this->createHeaderScripts($objPage, $objLayout);
-
-		// Add placeholder for inserting $GLOBALS[TL_MOOTOOLS] and $GLOBALS[TL_JQUERY] to the footer
-		$this->Template->mootools = '[[TL_FOOT]]';
 
 		// Print the template to the screen
 		$this->Template->output();
@@ -405,6 +402,27 @@ class PageRegular extends \Frontend
 			$objCombiner->add($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css', filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'));
 		}
 
+		// Internal style sheets
+		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
+		{
+			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
+			{
+				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
+
+				if ($mode == 'static')
+				{
+					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
+				}
+				else
+				{
+					$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
+				}
+			}
+		}
+
+		// Add a placeholder for dynamic style sheets (see #4203)
+		$strStyleSheets .= '[[TL_CSS]]';
+
 		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
@@ -536,89 +554,25 @@ class PageRegular extends \Frontend
 
 		$strHeadTags = '';
 
-		// Add user <head> tags
+		// Add the user <head> tags
 		if (($strHead = trim($objLayout->head)) != false)
 		{
 			$strHeadTags .= $strHead . "\n";
 		}
 
-		// Add placeholder to insert tags from $GLOBALS[TL_JAVASCRIPT], $GLOBALS[TL_HEAD] and $GLOBALS[TL_CSS]
-		$strHeadTags .= '[[TL_HEAD]]';
-
 		$this->Template->stylesheets = $strStyleSheets;
-		$this->Template->head = $strHeadTags;
+		$this->Template->head = $strHeadTags . '[[TL_HEAD]]'; // see #4203
 	}
 
 
 	/**
-	 * Generate Javascript, Head-Tags and Stylesheet links
-	 * from $GLOBALS[TL_JAVASCRIPT], $GLOBALS[TL_HEAD] and $GLOBALS[TL_CSS]
-	 * @static
-	 * @return string head tags
-	 */
-	public static function generateHeadJsCssData()
-	{
-		$strHeadTags = '';
-
-		$blnXhtml = ($objPage->outputFormat == 'xhtml');
-		$strTagEnding = $blnXhtml ? ' />' : '>';
-		$objCombiner = new \Combiner();
-
-		// Internal style sheets
-		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
-		{
-			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
-			{
-				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
-
-				if ($mode == 'static')
-				{
-					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
-				}
-				else
-				{
-					$strHeadTags .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . self::addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
-				}
-			}
-		}
-
-		// Create the aggregated style sheet
-		if ($objCombiner->hasEntries())
-		{
-			$strHeadTags .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '"' . $strTagEnding . "\n";
-		}
-
-		// Add internal scripts
-		if (is_array($GLOBALS['TL_JAVASCRIPT']) && !empty($GLOBALS['TL_JAVASCRIPT']))
-		{
-			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
-			{
-				$strHeadTags .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . self::addStaticUrlTo($javascript) . '"></script>' . "\n";
-			}
-		}
-
-		// Add internal <head> tags
-		if (is_array($GLOBALS['TL_HEAD']) && !empty($GLOBALS['TL_HEAD']))
-		{
-			foreach (array_unique($GLOBALS['TL_HEAD']) as $head)
-			{
-				$strHeadTags .= trim($head) . "\n";
-			}
-		}
-
-		return $strHeadTags;
-	}
-
-
-	/**
-	 * Create all footer scripts and store it in
-	 * $GLOBALS[TL_MOOTOOLS] / $GLOBALS[TL_JQUERY]
-	 * to insert it into fe_page via FrontendTemplate::output()
-	 *
+	 * Create all footer scripts
 	 * @param object
 	 */
 	protected function createFooterScripts($objLayout)
 	{
+		$strScripts = '';
+
 		// jQuery
 		if ($objLayout->addJQuery)
 		{
@@ -629,9 +583,12 @@ class PageRegular extends \Frontend
 				if ($strTemplate != '')
 				{
 					$objTemplate = new \FrontendTemplate($strTemplate);
-					$GLOBALS['TL_JQUERY'][] = $objTemplate->parse();
+					$strScripts .= $objTemplate->parse();
 				}
 			}
+
+			// Add a placeholder for dynamic scripts (see #4203)
+			$strScripts .= '[[TL_JQUERY]]';
 		}
 
 		// MooTools
@@ -644,15 +601,18 @@ class PageRegular extends \Frontend
 				if ($strTemplate != '')
 				{
 					$objTemplate = new \FrontendTemplate($strTemplate);
-					$GLOBALS['TL_MOOTOOLS'][]  = $objTemplate->parse();
+					$strScripts .= $objTemplate->parse();
 				}
 			}
+
+			// Add a placeholder for dynamic scripts (see #4203)
+			$strScripts .= '[[TL_MOOTOOLS]]';
 		}
 
 		// Add the custom JavaScript
 		if ($objLayout->script != '')
 		{
-			$GLOBALS['TL_MOOTOOLS'][]  = "\n" . trim($objLayout->script) . "\n";
+			$strScripts .= "\n" . trim($objLayout->script) . "\n";
 		}
 
 		// Add the analytics scripts
@@ -665,41 +625,11 @@ class PageRegular extends \Frontend
 				if ($strTemplate != '')
 				{
 					$objTemplate = new \FrontendTemplate($strTemplate);
-					$GLOBALS['TL_MOOTOOLS'][] = $objTemplate->parse();
+					$strScripts .= $objTemplate->parse();
 				}
 			}
 		}
-	}
 
-
-	/**
-	 * Generate Javascript, Head-Tags and Stylesheet links
-	 * from $GLOBALS[TL_JAVASCRIPT], $GLOBALS[TL_HEAD] and $GLOBALS[TL_CSS]
-	 * @static
-	 * @return string head tags
-	 */
-	public static function generateFootMootoolsJqueryData()
-	{
-		$strScripts = '';
-
-		// Add the internal MooTools scripts
-		if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
-		{
-			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
-			{
-				$strScripts .= "\n" . trim($script) . "\n";
-			}
-		}
-
-		// Add the internal jQuery scripts
-		if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
-		{
-			foreach (array_unique($GLOBALS['TL_JQUERY']) as $script)
-			{
-				$strScripts .= "\n" . trim($script) . "\n";
-			}
-		}
-
-		return $strScripts;
+		$this->Template->mootools = $strScripts;
 	}
 }

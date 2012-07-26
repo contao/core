@@ -161,9 +161,7 @@ class FrontendTemplate extends \Template
 
 			// Replace insert tags for caching
 			$strBuffer = $this->replaceInsertTags($strBuffer, true);
-
-			// Add head/foot Tags from $GLOBALS[TL_JAVASCRIPT], $GLOBALS[TL_HEAD], $GLOBALS[TL_MOOTOOLS], $GLOBALS[TL_JQUERY] and $GLOBALS[TL_CSS]
-			$this->strBuffer = str_replace(array('[[TL_HEAD]]','[[TL_FOOT]]'), array(\PageRegular::generateHeadJsCssData(),\PageRegular::generateFootMootoolsJqueryData()), $this->strBuffer);
+			$strBuffer = $this->replaceDynamicScriptTags($strBuffer); // see #4203
 
 			$intCache = intval($objPage->cache) + time();
 			$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
@@ -213,11 +211,10 @@ class FrontendTemplate extends \Template
 			}
 		}
 
-		// Replace insert tags
+		// Replace insert tags and then re-replace the request_token tag in case a form element has been loaded via insert tag
 		$this->strBuffer = $this->replaceInsertTags($strBuffer);
-
-		// Add headTags from $GLOBALS[TL_JAVASCRIPT], $GLOBALS[TL_HEAD], $GLOBALS[TL_MOOTOOLS], $GLOBALS[TL_JQUERY] and $GLOBALS[TL_CSS] and replace [}] to allow plain insert tags output
-		$this->strBuffer = str_replace(array('[[TL_HEAD]]', '[[TL_FOOT]]', '[{]', '[}]'), array(\PageRegular::generateHeadJsCssData(), \PageRegular::generateFootMootoolsJqueryData(), '{{', '}}'), $this->strBuffer);
+		$this->strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $this->strBuffer);
+		$this->strBuffer = $this->replaceDynamicScriptTags($this->strBuffer); // see #4203
 
 		// Index page if searching is allowed and there is no back end user
 		if ($GLOBALS['TL_CONFIG']['enableSearch'] && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)
