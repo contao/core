@@ -536,6 +536,11 @@ class tl_layout extends Backend
 	 */
 	public function getNewsfeeds()
 	{
+		if (!in_array('news', $this->Config->getActiveModules()))
+		{
+			return array();
+		}
+
 		$objFeed = NewsFeedModel::findAll();
 
 		if ($objFeed === null)
@@ -560,6 +565,11 @@ class tl_layout extends Backend
 	 */
 	public function getCalendarfeeds()
 	{
+		if (!in_array('calendar', $this->Config->getActiveModules()))
+		{
+			return array();
+		}
+
 		$objFeed = CalendarFeedModel::findAll();
 
 		if ($objFeed === null)
