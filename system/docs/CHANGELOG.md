@@ -5,6 +5,10 @@ Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
 ### Added
+Insert tags can now dynamically add style sheets, JavaScripts and additional
+head tags to the page (see #4203).
+
+### Added
 Support nested insert tags (one nesting level) (see #4402). Thanks a lot to
 Christoph Wiechert for his great finds and hard work.
 
