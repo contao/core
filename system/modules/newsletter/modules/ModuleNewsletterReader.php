@@ -109,6 +109,12 @@ class ModuleNewsletterReader extends \Module
 			return;
 		}
 
+		// Overwrite the page title
+		if ($objNewsletter->subject != '')
+		{
+			$objPage->pageTitle = strip_insert_tags($objNewsletter->subject);
+		}
+
 		$arrEnclosures = array();
 
 		// Add enclosure
