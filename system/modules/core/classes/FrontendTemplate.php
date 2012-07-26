@@ -161,6 +161,10 @@ class FrontendTemplate extends \Template
 
 			// Replace insert tags for caching
 			$strBuffer = $this->replaceInsertTags($strBuffer, true);
+
+			// Add head/foot Tags from $GLOBALS[TL_JAVASCRIPT], $GLOBALS[TL_HEAD], $GLOBALS[TL_MOOTOOLS], $GLOBALS[TL_JQUERY] and $GLOBALS[TL_CSS]
+			$this->strBuffer = str_replace(array('[[TL_HEAD]]','[[TL_FOOT]]'), array(\PageRegular::generateHeadJsCssData(),\PageRegular::generateFootMootoolsJqueryData()), $this->strBuffer);
+
 			$intCache = intval($objPage->cache) + time();
 			$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 			$strMd5CacheKey = md5($strCacheKey);
@@ -211,6 +215,9 @@ class FrontendTemplate extends \Template
 
 		// Replace insert tags
 		$this->strBuffer = $this->replaceInsertTags($strBuffer);
+
+		// Add headTags from $GLOBALS[TL_JAVASCRIPT], $GLOBALS[TL_HEAD], $GLOBALS[TL_MOOTOOLS], $GLOBALS[TL_JQUERY] and $GLOBALS[TL_CSS] and replace [}] to allow plain insert tags output
+		$this->strBuffer = str_replace(array('[[TL_HEAD]]', '[[TL_FOOT]]', '[{]', '[}]'), array(\PageRegular::generateHeadJsCssData(), \PageRegular::generateFootMootoolsJqueryData(), '{{', '}}'), $this->strBuffer);
 
 		// Index page if searching is allowed and there is no back end user
 		if ($GLOBALS['TL_CONFIG']['enableSearch'] && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)
