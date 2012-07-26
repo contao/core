@@ -1058,7 +1058,7 @@ abstract class Controller extends \System
 				continue;
 			}
 
-			// Run replacement again if there are more insert tags
+			// Run the replacement again if there are more tags (see #4402)
 			if (strpos($strTag, '{{') !== false)
 			{
 				$strTag = $this->replaceInsertTags($strTag);
