@@ -121,7 +121,7 @@ class FormPassword extends \Widget
 		{
 			$this->blnSubmitInput = true;
 			\Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);
-			return \Encryption::sha512($varInput);
+			return \Encryption::hash($varInput);
 		}
 
 		return '';

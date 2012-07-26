@@ -327,7 +327,7 @@ abstract class User extends \System
 			// Store a SHA-512 encrpyted version of the password
 			if ($blnAuthenticated)
 			{
-				$this->password = \Encryption::sha512(\Input::post('password', true));
+				$this->password = \Encryption::hash(\Input::post('password', true));
 			}
 		}
 

@@ -5,6 +5,10 @@ Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
 ### Fixed
+Fall back to `CRYPT_SHA256` or `CRYPT_BLOWFISH` if `CRYPT_SHA512` is not
+available and throw an exception if none of these algorithms exists.
+
+### Fixed
 Themes can now be linked with a template folder again (see #4360).
 
 ### New

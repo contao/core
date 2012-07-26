@@ -169,15 +169,32 @@ class Encryption
 
 
 	/**
-	 * Generate a SHA-512 password hash
+	 * Generate a password hash
 	 * 
 	 * @param string $strPassword The unencrypted password
 	 * 
 	 * @return string The encrypted password
+	 * 
+	 * @throws \Exception If none of the algorithms is available
 	 */
-	public static function sha512($strPassword)
+	public static function hash($strPassword)
 	{
-		return crypt($strPassword, '$6$' . md5(uniqid(mt_rand(), true)));
+		if (CRYPT_SHA512 == 1)
+		{
+			return crypt($strPassword, '$6$' . md5(uniqid(mt_rand(), true)) . '$');
+		}
+		elseif (CRYPT_SHA256 == 1)
+		{
+			return crypt($strPassword, '$5$' . md5(uniqid(mt_rand(), true)) . '$');
+		}
+		elseif (CRYPT_BLOWFISH == 1)
+		{
+			return crypt($strPassword, '$2a$07$' . md5(uniqid(mt_rand(), true)) . '$');
+		}
+		else
+		{
+			throw new \Exception('None of the required crypt() algorithms is available');
+		}
 	}
 
 
