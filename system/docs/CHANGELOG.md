@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### Fixed
+Themes can now be linked with a template folder again (see #4360).
+
 ### New
 Content elements can now be used everywhere (no kidding).
 

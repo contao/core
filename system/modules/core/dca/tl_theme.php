@@ -132,7 +132,7 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},name,author;{config_legend},folders,templates,screenshot;{vars_legend},vars'
+		'default'                     => '{title_legend},name,author;{config_legend},folders,screenshot,templates;{vars_legend},vars'
 	),
 
 	// Fields
@@ -176,20 +176,21 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox'),
 			'sql'                     => "blob NULL"
 		),
-		'templates' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['templates'],
-			'exclude'                 => true,
-			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'path'=>'templates'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
 		'screenshot' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['screenshot'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'filesOnly'=>true),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'templates' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['templates'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options_callback'        => array('tl_theme', 'getTemplateFolders'),
+			'eval'                    => array('includeBlankOption'=>true),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'vars' => array
@@ -270,6 +271,39 @@ class tl_theme extends Backend
 	public function scheduleUpdate()
 	{
 		$this->Session->set('style_sheet_update_all', true);
+	}
+
+
+	/**
+	 * Return all template folders as array
+	 * @return array
+	 */
+	public function getTemplateFolders()
+	{
+		return $this->doGetTemplateFolders('templates');
+	}
+
+
+	/**
+	 * Return all template folders as array
+	 * @param string
+	 * @param integer
+	 * @return array
+	 */
+	protected function doGetTemplateFolders($path, $level=0)
+	{
+		$return = array();
+
+		foreach (scan(TL_ROOT . '/' . $path) as $file)
+		{
+			if (is_dir(TL_ROOT . '/' . $path . '/' . $file))
+			{
+				$return[$path . '/' . $file] = str_repeat(' &nbsp; &nbsp; ', $level) . $file;
+				$return = array_merge($return, $this->doGetTemplateFolders($path . '/' . $file, $level+1));
+			}
+		}
+
+		return $return;
 	}
 
 
