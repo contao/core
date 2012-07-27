@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### Improved
+`File::getContent()` now removed BOMs (see #4469).
+
 ### New
 Added an option to limit the page picker to a predefined node set (see #3563).
 To use the feature, set the `rootNodes` key in the DCA:

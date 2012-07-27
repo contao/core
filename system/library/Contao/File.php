@@ -327,11 +327,27 @@ class File extends \System
 	/**
 	 * Return the file content as string
 	 * 
-	 * @return string The file content
+	 * @return string The file content without BOM
 	 */
 	public function getContent()
 	{
-		return file_get_contents(TL_ROOT . '/' . $this->strFile);
+		$strContent = file_get_contents(TL_ROOT . '/' . $this->strFile);
+
+		// Remove BOMs (see #4469)
+		if (strncmp($strContent, "\xEF\xBB\xBF", 3) === 0)
+		{
+			$strContent = substr($strContent, 3);
+		}
+		elseif (strncmp($strContent, "\xFF\xFE", 2) === 0)
+		{
+			$strContent = substr($strContent, 2);
+		}
+		elseif (strncmp($strContent, "\xFE\xFF", 2) === 0)
+		{
+			$strContent = substr($strContent, 2);
+		}
+
+		return $strContent;
 	}
 
 
