@@ -4,6 +4,15 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added an option to limit the page picker to a predefined node set (see #3563).
+To use the feature, set the `rootNodes` key in the DCA:
+
+```
+$GLOBALS['TL_DCA'][$table]['fields'][$field]['rootNodes'] = array(2, 6, 7);
+```
+
+
 ### Changed
 The breadcrumb templates now use lists to render its links (see #1258).
 

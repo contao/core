@@ -87,8 +87,24 @@ class PageSelector extends \Widget
 			if ($objRoot->numRows > 0)
 			{
 				// Respect existing limitations
-				if ($this->User->isAdmin)
+				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes']))
 				{
+					$arrRoot = array();
+
+					while ($objRoot->next())
+					{
+						// Predefined node set (see #3563)
+						if (count(array_intersect($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes'], $this->getParentRecords($objRoot->id, 'tl_page'))) > 0)
+						{
+							$arrRoot[] = $objRoot->id;
+						}
+					}
+
+					$arrIds = $arrRoot;
+				}
+				elseif ($this->User->isAdmin)
+				{
+					// Show all pages to admins
 					$arrIds = $objRoot->fetchEach('id');
 				}
 				else
@@ -97,6 +113,7 @@ class PageSelector extends \Widget
 
 					while ($objRoot->next())
 					{
+						// Show only mounted pages to regular users
 						if (count(array_intersect($this->User->pagemounts, $this->getParentRecords($objRoot->id, 'tl_page'))) > 0)
 						{
 							$arrRoot[] = $objRoot->id;
@@ -115,8 +132,17 @@ class PageSelector extends \Widget
 		}
 		else
 		{
+			// Predefined node set (see #3563)
+			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes']))
+			{
+				foreach ($this->eliminateNestedPages($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes']) as $node)
+				{
+					$tree .= $this->renderPagetree($node, -20);
+				}
+			}
+
 			// Show all pages to admins
-			if ($this->User->isAdmin)
+			elseif ($this->User->isAdmin)
 			{
 				$objPage = $this->Database->prepare("SELECT id FROM tl_page WHERE pid=? ORDER BY sorting")
 										  ->execute(0);
@@ -127,7 +153,7 @@ class PageSelector extends \Widget
 				}
 			}
 
-			// Show mounted pages to regular users
+			// Show only mounted pages to regular users
 			else
 			{
 				foreach ($this->eliminateNestedPages($this->User->pagemounts) as $node)
