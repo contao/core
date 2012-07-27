@@ -103,7 +103,7 @@ class ModulePassword extends \Module
 		$strFields = '';
 		$doNotSubmit = false;
 
-		// Initialize widgets
+		// Initialize the widgets
 		foreach ($arrFields as $arrField)
 		{
 			$strClass = $GLOBALS['TL_FFL'][$arrField['inputType']];
@@ -122,7 +122,7 @@ class ModulePassword extends \Module
 			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
 			++$row;
 
-			// Validate widget
+			// Validate the widget
 			if (\Input::post('FORM_SUBMIT') == 'tl_lost_password')
 			{
 				$objWidget->validate();
@@ -153,16 +153,13 @@ class ModulePassword extends \Module
 
 			if ($objMember === null)
 			{
-				$this->strTemplate = 'mod_message';
-
-				$this->Template = new \FrontendTemplate($this->strTemplate);
-				$this->Template->type = 'error';
-				$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountNotFound'];
-
-				return;
+				sleep(2); // Wait 2 seconds while brute forcing :)
+				$this->Template->error = $GLOBALS['TL_LANG']['MSC']['accountNotFound'];
 			}
-
-			$this->sendPasswordLink($objMember);
+			else
+			{
+				$this->sendPasswordLink($objMember);
+			}
 		}
 
 		$this->Template->formId = 'tl_lost_password';
