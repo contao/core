@@ -205,18 +205,29 @@ class Main extends Backend
 			}
 		}
 
+		$intCount = -1;
 		$arrVersions = array_values($arrVersions);
 
 		// Add the "even" and "odd" classes
 		foreach ($arrVersions as $k=>$v)
 		{
-			$arrVersions[$k]['class'] = ($k%2 == 0) ? 'even' : 'odd';
+			$arrVersions[$k]['class'] = (++$intCount%2 == 0) ? 'even' : 'odd';
 
-			// Mark deleted versions (see #4336)
-			$objDeleted = $this->Database->prepare("SELECT COUNT(*) AS count FROM " . $v['fromTable'] . " WHERE id=?")
-										 ->execute($v['pid']);
+			try
+			{
+				// Mark deleted versions (see #4336)
+				$objDeleted = $this->Database->prepare("SELECT COUNT(*) AS count FROM " . $v['fromTable'] . " WHERE id=?")
+											 ->execute($v['pid']);
 
-			$arrVersions[$k]['deleted'] = ($objDeleted->count < 1);
+				$arrVersions[$k]['deleted'] = ($objDeleted->count < 1);
+			}
+			catch (Exception $e)
+			{
+				// Probably a disabled module
+				--$intCount;
+				unset($arrVersions[$k]);
+			}
+
 		}
 
 		$objTemplate->versions = $arrVersions;
