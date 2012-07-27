@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+The breadcrumb templates now use lists to render its links (see #1258).
+
 ### New
 Added the insert tag "post" to access POST data (see #4448).
 
