@@ -253,13 +253,14 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['external'],
 			'exclude'                 => true,
-			'inputType'               => 'listWizard',
-			'eval'                    => array('style'=>'width:360px'),
-			'save_callback' => array
-			(
-				array('tl_layout', 'filterExternalPaths')
-			),
+			'inputType'               => 'fileTree',
+			'eval'                    => array('multiple'=>true, 'orderField'=>'orderExt', 'fieldType'=>'checkbox', 'filesOnly'=>true, 'extensions'=>'css'),
 			'sql'                     => "blob NULL"
+		),
+		'orderExt' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['orderExt'],
+			'sql'                     => "text NULL"
 		),
 		'newsfeeds' => array
 		(
@@ -668,29 +669,6 @@ class tl_layout extends Backend
 	public function listLayout($row)
 	{
 		return '<div style="float:left">'. $row['name'] ."</div>\n";
-	}
-
-
-	/**
-	 * Remove empty and duplicate elements from the external style sheets array
-	 * @param mixed
-	 * @return string
-	 */
-	public function filterExternalPaths($varValue)
-	{
-		if ($varValue == '')
-		{
-			return $varValue;
-		}
-
-		$varValue = deserialize($varValue);
-
-		if (!is_array($varValue))
-		{
-			return '';
-		}
-
-		return array_filter(array_unique($varValue));
 	}
 
 

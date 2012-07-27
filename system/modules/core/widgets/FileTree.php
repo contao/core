@@ -93,15 +93,15 @@ class FileTree extends \Widget
 		// Prepare the orderSRC field
 		if ($this->strOrderField != '')
 		{
-			$this->strOrderId = 'orderSRC' . str_replace($this->strField, '', $this->strId);
-			$this->strOrderName = 'orderSRC' . str_replace($this->strField, '', $this->strName);
+			$this->strOrderId = $this->strOrderField . str_replace($this->strField, '', $this->strId);
+			$this->strOrderName = $this->strOrderField . str_replace($this->strField, '', $this->strName);
 
 			// Retrieve the orderSRC value
 			$objRow = $this->Database->prepare("SELECT {$this->strOrderField} FROM {$this->strTable} WHERE id=?")
 						   ->limit(1)
 						   ->execute($this->activeRecord->id);
 
-			$this->orderSRC = $objRow->orderSRC;
+			$this->orderSRC = $objRow->{$this->strOrderField};
 		}
 
 		$this->blnIsGallery = ($this->activeRecord->type == 'gallery');

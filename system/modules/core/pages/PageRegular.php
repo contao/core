@@ -462,41 +462,17 @@ class PageRegular extends \Frontend
 		// External style sheets
 		if (is_array($arrExternal) && !empty($arrExternal))
 		{
-			foreach (array_unique($arrExternal) as $stylesheet)
+			// Get the file entries from the database
+			$objFiles = \FilesModel::findMultipleByIds($arrExternal);
+
+			if ($objFiles !== null)
 			{
-				if ($stylesheet == '')
+				while ($objFiles->next())
 				{
-					continue;
-				}
-
-				// Validate the file name
-				if (strpos($stylesheet, '..') !== false || strncmp($stylesheet, $GLOBALS['TL_CONFIG']['uploadPath'] . '/', strlen($GLOBALS['TL_CONFIG']['uploadPath']) + 1) !== 0)
-				{
-					throw new \Exception("Invalid path $stylesheet");
-				}
-
-				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
-
-				// Only .css files are allowed
-				if (substr($stylesheet, -4) != '.css')
-				{
-					throw new \Exception("Invalid file extension $stylesheet");
-				}
-
-				// Check whether the file exists
-				if (!file_exists(TL_ROOT . '/' . $stylesheet))
-				{
-					continue;
-				}
-
-				// Include the file
-				if ($mode == 'static')
-				{
-					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
-				}
-				else
-				{
-					$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
+					if (file_exists(TL_ROOT . '/' . $objFiles->path))
+					{
+						$objCombiner->add($objFiles->path, filemtime(TL_ROOT . '/' . $stylesheet));
+					}
 				}
 			}
 		}

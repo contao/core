@@ -39,6 +39,7 @@ $GLOBALS['TL_LANG']['tl_layout']['layout.css']     = array('Layout-Builder', 'Er
 $GLOBALS['TL_LANG']['tl_layout']['responsive.css'] = array('12-Spalten Grid (responsive)', 'Erzeugt ein responsives 12-Spalten Grid, das mittels der CSS-Klassen "grid1" bis "grid12" sowie "offset1" bis "offset12" gesteuert wird.');
 $GLOBALS['TL_LANG']['tl_layout']['tinymce.css']    = array('TinyMCE-Stylesheet', 'Bindet das <em>tinymce.css</em>-Stylesheet aus dem Upload-Verzeichnis ein.');
 $GLOBALS['TL_LANG']['tl_layout']['external']       = array('Zusätzliche Stylesheets', 'Hier können Sie Stylesheets aus dem Dateisystem hinzufügen (z.B. <em>files/css/style.css|screen|static</em>).');
+$GLOBALS['TL_LANG']['tl_layout']['orderExt']       = array('Sortierreihenfolge', 'Die Sortierreihenfolge der Stylesheets.');
 $GLOBALS['TL_LANG']['tl_layout']['webfonts']       = array('Google-Webfonts', 'Hier können Sie Google-Webfonts zu Ihrer Webseite hinzfügen. Geben Sie die Schriftarten ohne die Basis-URL an (z.B. <em>Ubuntu|Ubuntu+Mono</em>).');
 $GLOBALS['TL_LANG']['tl_layout']['newsfeeds']      = array('Newsfeeds', 'Bitte wählen Sie die Newsfeeds aus, die Sie dem Layout hinzufügen möchten.');
 $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds']  = array('Kalender-Feeds', 'Bitte wählen Sie die Kalender-Feeds aus, die Sie dem Layout hinzufügen möchten.');
