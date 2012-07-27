@@ -1070,7 +1070,7 @@ abstract class Controller extends \System
 			// Skip certain elements if the output will be cached
 			if ($blnCache)
 			{
-				if ($elements[0] == 'date' || $elements[0] == 'ua' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer' || $elements[0] == 'request_token' || strncmp($elements[0], 'cache_', 6) === 0)
+				if ($elements[0] == 'date' || $elements[0] == 'ua' || $elements[0] == 'post' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer' || $elements[0] == 'request_token' || strncmp($elements[0], 'cache_', 6) === 0)
 				{
 					$strBuffer .= '{{' . $strTag . '}}';
 					continue;
@@ -1639,6 +1639,11 @@ abstract class Controller extends \System
 				// Request token
 				case 'request_token':
 					$arrCache[$strTag] = REQUEST_TOKEN;
+					break;
+
+				// POST data
+				case 'post':
+					$arrCache[$strTag] = \Input::post($elements[1]);
 					break;
 
 				// Conditional tags
