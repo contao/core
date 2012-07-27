@@ -1992,30 +1992,94 @@ abstract class Controller extends \System
 
 		$arrReplace['[[TL_MOOTOOLS]]'] = $strScripts;
 		$strScripts = '';
+		$objCombiner = new \Combiner();
 
-		// Internal style sheets
+		// Add the CSS framework style sheets
+		if (is_array($GLOBALS['TL_FRAMEWORK_CSS']) && !empty($GLOBALS['TL_FRAMEWORK_CSS']))
+		{
+			foreach (array_unique($GLOBALS['TL_FRAMEWORK_CSS']) as $stylesheet)
+			{
+				$objCombiner->add($stylesheet);
+			}
+		}
+
+		// Add the internal style sheets
 		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
 		{
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
-				list($stylesheet, $media) = explode('|', $stylesheet);
-				$strScripts .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . static::addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
+				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
+
+				if ($mode == 'static')
+				{
+					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
+				}
+				else
+				{
+					$strScripts .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . static::addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
+				}
 			}
+		}
+
+		// Add the user style sheets
+		if (is_array($GLOBALS['TL_USER_CSS']) && !empty($GLOBALS['TL_USER_CSS']))
+		{
+			foreach (array_unique($GLOBALS['TL_USER_CSS']) as $stylesheet)
+			{
+				list($stylesheet, $media, $mode, $version) = explode('|', $stylesheet);
+
+				if (!$version)
+				{
+					$version = filemtime(TL_ROOT . '/' . $stylesheet);
+				}
+
+				if ($mode == 'static')
+				{
+					$objCombiner->add($stylesheet, $version, $media);
+				}
+				else
+				{
+					$strScripts .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . static::addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
+				}
+			}
+		}
+
+		// Create the aggregated style sheet
+		if ($objCombiner->hasEntries())
+		{
+			$strScripts .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '"' . $strTagEnding . "\n";
 		}
 
 		$arrReplace['[[TL_CSS]]'] = $strScripts;
 		$strScripts = '';
 
-		// Add internal scripts
+		// Add the internal scripts
 		if (is_array($GLOBALS['TL_JAVASCRIPT']) && !empty($GLOBALS['TL_JAVASCRIPT']))
 		{
+			$objCombiner = new \Combiner();
+
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . static::addStaticUrlTo($javascript) . '"></script>' . "\n";
+				list($javascript, $mode) = explode('|', $javascript);
+
+				if ($mode == 'static')
+				{
+					$objCombiner->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
+				}
+				else
+				{
+					$strScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . static::addStaticUrlTo($javascript) . '"></script>' . "\n";
+				}
+			}
+
+			// Create the aggregated script
+			if ($objCombiner->hasEntries())
+			{
+				$strScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>' . "\n";
 			}
 		}
 
-		// Add internal <head> tags
+		// Add the internal <head> tags
 		if (is_array($GLOBALS['TL_HEAD']) && !empty($GLOBALS['TL_HEAD']))
 		{
 			foreach (array_unique($GLOBALS['TL_HEAD']) as $head)

@@ -382,8 +382,6 @@ class PageRegular extends \Frontend
 			$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') .' rel="stylesheet" href="' . $protocol . 'fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
 		}
 
-		$objCombiner = new \Combiner();
-
 		// Add the Contao CSS framework style sheets
 		if (is_array($arrFramework))
 		{
@@ -391,37 +389,16 @@ class PageRegular extends \Frontend
 			{
 				if ($strFile != 'tinymce.css')
 				{
-					$objCombiner->add('assets/contao/' . $strFile);
+					$GLOBALS['TL_FRAMEWORK_CSS'][] = 'assets/contao/' . $strFile;
 				}
 			}
 		}
 
-		// Skip the TinyMCE style sheet
+		// Add the TinyMCE style sheet
 		if (is_array($arrFramework) && in_array('tinymce.css', $arrFramework) && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
 		{
-			$objCombiner->add($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css', filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'));
+			$GLOBALS['TL_FRAMEWORK_CSS'][] = $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css';
 		}
-
-		// Internal style sheets
-		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
-		{
-			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
-			{
-				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
-
-				if ($mode == 'static')
-				{
-					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
-				}
-				else
-				{
-					$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
-				}
-			}
-		}
-
-		// Add a placeholder for dynamic style sheets (see #4203)
-		$strStyleSheets .= '[[TL_CSS]]';
 
 		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
@@ -443,7 +420,7 @@ class PageRegular extends \Frontend
 					// Aggregate regular style sheets
 					if (!$objStylesheets->cc && !$objStylesheets->hasFontFace)
 					{
-						$objCombiner->add('assets/css/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2, $objStylesheets->tstamp3), $media);
+						$GLOBALS['TL_USER_CSS'][] = 'assets/css/' . $objStylesheets->name . '.css|' . $media . '|static|' . max($objStylesheets->tstamp, $objStylesheets->tstamp2, $objStylesheets->tstamp3);
 					}
 					else
 					{
@@ -492,23 +469,13 @@ class PageRegular extends \Frontend
 					continue;
 				}
 
-				// Include the file
-				if ($mode == 'static')
-				{
-					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
-				}
-				else
-				{
-					$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
-				}
+				// Add the file
+				$GLOBALS['TL_USER_CSS'][] = $stylesheet . '|' . $media . '|' . $mode;
 			}
 		}
 
-		// Create the aggregated style sheet
-		if ($objCombiner->hasEntries())
-		{
-			$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '"' . $strTagEnding . "\n";
-		}
+		// Add a placeholder for dynamic style sheets (see #4203)
+		$strStyleSheets .= '[[TL_CSS]]';
 
 		// Add the debug style sheet
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
@@ -560,8 +527,11 @@ class PageRegular extends \Frontend
 			$strHeadTags .= $strHead . "\n";
 		}
 
+		// Add a placeholder for dynamic <head> tags (see #4203)
+		$strHeadTags .= '[[TL_HEAD]]';
+
 		$this->Template->stylesheets = $strStyleSheets;
-		$this->Template->head = $strHeadTags . '[[TL_HEAD]]'; // see #4203
+		$this->Template->head = $strHeadTags;
 	}
 
 
