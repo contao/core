@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### Fixed
+Removed all unnecessary prefixed format definitions (see #4463).
+
 ### Changed
 Take the external style sheets from the database-aided file system (see #4324).
 

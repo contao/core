@@ -5,8 +5,6 @@
 	position:absolute;
 	background:#fff;
 	border:1px solid #b8b8b8;
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
 	border-radius:3px;
 	padding:0 0 0 6px;
 	font-family:"Trebuchet MS",Verdana,sans-serif;
@@ -49,8 +47,6 @@
 	right:0;
 	border-left:1px solid #b8b8b8;
 	background:#eee;
-	-moz-border-radius:0 3px 3px 0;
-	-webkit-border-radius:0 3px 3px 0;
 	border-radius:0 3px 3px 0;
 	background-image:-moz-linear-gradient(center bottom, #ccc 0%, #eee 60%);
 	background-image:-webkit-gradient(linear, left bottom, left top, color-stop(0, #ccc), color-stop(0.6, #eee));

@@ -534,66 +534,6 @@ class StyleSheets extends \Backend
 						$row['gradientAngle'] = 'top';
 					}
 
-					$webkitAngle = $row['gradientAngle'];
-
-					// Convert the starting point to degrees
-					$arrMapper = array
-					(
-						'left'         => '0deg',
-						'top'          => '270deg',
-						'right'        => '180deg',
-						'bottom'       => '90deg',
-						'top left'     => '315deg',
-						'left top'     => '315deg',
-						'bottom left'  => '45deg',
-						'left bottom'  => '45deg',
-						'top right'    => '225deg',
-						'right top'    => '225deg',
-						'bottom right' => '135deg',
-						'right bottom' => '135deg'
-					);
-
-					if (isset($arrMapper[$webkitAngle]))
-					{
-						$webkitAngle = $arrMapper[$webkitAngle];
-					}
-
-					$angle = floatval($webkitAngle);
-					$multi = 50 / 45; // 45 degree == 50 %
-
-					// Make angle a positive value
-					while ($angle < 0)
-					{
-						$angle += 360;
-					}
-
-					// Convert the angle to points in percentage from the top left corner
-					if ($angle >= 0 && $angle < 45)
-					{
-						$offset = round(($angle * $multi), 2);
-						$webkitAngle = '0% ' . (50 + $offset) . '%,100% ' . (50 - $offset) .'%';
-					}
-					elseif ($angle >= 45 && $angle < 135)
-					{
-						$offset = round((($angle - 45) * $multi), 2);
-						$webkitAngle = $offset . '% 100%,' . (100 - $offset) .'% 0%';
-					}
-					elseif ($angle >= 135 && $angle < 225)
-					{
-						$offset = round((($angle - 135) * $multi), 2);
-						$webkitAngle = '100% ' . (100 - $offset) . '%,0% ' . $offset .'%';
-					}
-					elseif ($angle >= 225 && $angle < 315)
-					{
-						$offset = round((($angle - 225) * $multi), 2);
-						$webkitAngle = (100 - $offset) . '% 0%,' . $offset .'% 100%';
-					}
-					elseif ($angle >= 315 && $angle <= 360)
-					{
-						$offset = round((($angle - 315) * $multi), 2);
-						$webkitAngle = '0% ' . $offset . '%,100% ' . (100 - $offset) .'%';
-					}
-
 					$row['gradientColors'] = array_values(array_filter($row['gradientColors']));
 
 					// Add a hash tag to the color values
@@ -602,70 +542,12 @@ class StyleSheets extends \Backend
 						$row['gradientColors'][$k] = '#' . $v;
 					}
 
-					$webkitColors = $row['gradientColors'];
-
-					// Convert #ffc 10% to color-stop(0.1,#ffc)
-					foreach ($webkitColors as $k=>$v)
-					{
-						// Split #ffc 10%
-						list($col, $pct) = explode(' ', $v, 2);
-
-						// Convert 10% to 0.1
-						if ($pct != '')
-						{
-							$pct = intval($pct) / 100;
-						}
-						else
-						{
-							// Default values: 0, 0.33, 0.66, 1
-							switch ($k)
-							{
-								case 0:
-									$pct = 0;
-									break;
-
-								case 1:
-									if (count($webkitColors) == 2)
-									{
-										$pct = 1;
-									}
-									elseif (count($webkitColors) == 3)
-									{
-										$pct = 0.5;
-									}
-									elseif (count($webkitColors) == 4)
-									{
-										$pct = 0.33;
-									}
-									break;
-
-								case 2:
-									if (count($webkitColors) == 3)
-									{
-										$pct = 1;
-									}
-									elseif (count($webkitColors) == 4)
-									{
-										$pct = 0.66;
-									}
-									break;
-
-								case 3:
-									$pct = 1;
-									break;
-							}
-						}
-
-						// The syntax is: color-stop(0.1,#ffc)
-						$webkitColors[$k] = 'color-stop(' . $pct . ',' . $col . ')';
-					}
-
 					$gradient = $row['gradientAngle'] . ',' . implode(',', $row['gradientColors']);
-					$webkitGradient = $webkitAngle . ',' . implode(',', $webkitColors);
 
 					$return .= $lb . 'background:' . $bgImage . '-moz-linear-gradient(' . $gradient . ');';
-					$return .= $lb . 'background:' . $bgImage . '-webkit-gradient(linear,' . $webkitGradient . ');';
+					$return .= $lb . 'background:' . $bgImage . '-webkit-linear-gradient(' . $gradient . ');';
 					$return .= $lb . 'background:' . $bgImage . '-o-linear-gradient(' . $gradient . ');';
+					$return .= $lb . 'background:' . $bgImage . '-ms-linear-gradient(' . $gradient . ');';
 					$return .= $lb . 'background:' . $bgImage . 'linear-gradient(' . $gradient . ');';
 					$return .= $lb . '-pie-background:' . $bgImage . 'linear-gradient(' . $gradient . ');';
 				}
@@ -702,7 +584,7 @@ class StyleSheets extends \Backend
 					}
 					$shadow .= ';';
 
-					$return .= $lb . '-moz-box-shadow:' . $shadow;
+					// Prefix required in Safari <= 5 and Android
 					$return .= $lb . '-webkit-box-shadow:' . $shadow;
 					$return .= $lb . 'box-shadow:' . $shadow;
 				}
@@ -815,8 +697,6 @@ class StyleSheets extends \Backend
 							$borderradius .= $top . (($top === '0') ? '' : $row['borderradius']['unit']) . ' ' . $right . (($right === '0') ? '' : $row['borderradius']['unit']) . ' ' . $bottom . (($bottom === '0') ? '' : $row['borderradius']['unit']) . ' ' . $left . (($left === '0') ? '' : $row['borderradius']['unit']) . ';';
 						}
 
-						$return .= $lb . '-moz-border-radius:' . $borderradius;
-						$return .= $lb . '-webkit-border-radius:' . $borderradius;
 						$return .= $lb . 'border-radius:' . $borderradius;
 					}
 					else
@@ -827,8 +707,6 @@ class StyleSheets extends \Backend
 						{
 							if ($v != '')
 							{
-								$return .= $lb . '-moz-border-radius-' . str_replace('-', '', $k) . ':' . $v . (($v === '0') ? '' : $row['borderradius']['unit']) . ';';
-								$return .= $lb . '-webkit-border-' . $k . '-radius:' . $v . (($v === '0') ? '' : $row['borderradius']['unit']) . ';';
 								$return .= $lb . 'border-' . $k . '-radius:' . $v . (($v === '0') ? '' : $row['borderradius']['unit']) . ';';
 							}
 						}
