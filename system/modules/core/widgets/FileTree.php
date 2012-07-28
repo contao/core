@@ -194,13 +194,14 @@ class FileTree extends \Widget
 							}
 
 							$objFile = new \File($objSubfiles->path);
+							$strInfo = $objSubfiles->path . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
 
 							if ($this->blnIsGallery)
 							{
 								// Only show images
 								if ($objFile->isGdImage)
 								{
-									$arrValues[$objSubfiles->id] = $this->generateImage(\Image::get($objSubfiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
+									$arrValues[$objSubfiles->id] = $this->generateImage(\Image::get($objSubfiles->path, 50, 50, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
 								}
 							}
 							else
@@ -208,7 +209,7 @@ class FileTree extends \Widget
 								// Only show allowed download types
 								if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
 								{
-									$arrValues[$objSubfiles->id] = $this->generateImage($objFile->icon) . ' ' . $objSubfiles->path;
+									$arrValues[$objSubfiles->id] = $this->generateImage($objFile->icon) . ' ' . $strInfo;
 								}
 							}
 						}

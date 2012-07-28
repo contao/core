@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### Improved
+Show some meta information in the "FileTree" widget (see #4330).
+
 ### Fixed
 Removed all unnecessary prefixed format definitions (see #4463).
 
