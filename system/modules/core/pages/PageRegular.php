@@ -162,8 +162,33 @@ class PageRegular extends \Frontend
 	protected function getPageLayout($objPage)
 	{
 		$blnMobile = ($objPage->mobileLayout && \Environment::get('agent')->mobile);
-		$intId = $blnMobile ? $objPage->mobileLayout : $objPage->layout;
 
+		// Set the cookie
+		if (isset($_GET['view']))
+		{
+			if (\Input::get('view') == 'mobile')
+			{
+				$this->setCookie('TL_VIEW', 'mobile', 0);
+			}
+			else
+			{
+				$this->setCookie('TL_VIEW', 'desktop', 0);
+			}
+
+			$this->redirect($this->getReferer());
+		}
+
+		// Override the autodetected value
+		if (\Input::cookie('TL_VIEW') == 'mobile' && $objPage->mobileLayout)
+		{
+			$blnMobile = true;
+		}
+		elseif (\Input::cookie('TL_VIEW') == 'desktop')
+		{
+			$blnMobile = false;
+		}
+
+		$intId = $blnMobile ? $objPage->mobileLayout : $objPage->layout;
 		$objLayout = \LayoutModel::findByPk($intId);
 
 		// Die if there is no layout
@@ -176,6 +201,7 @@ class PageRegular extends \Frontend
 
 		$objPage->hasJQuery = $objLayout->addJQuery;
 		$objPage->hasMooTools = $objLayout->addMooTools;
+		$objPage->isMobile = $blnMobile;
 
 		return $objLayout;
 	}

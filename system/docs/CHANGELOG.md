@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added the "toggle_view" insert tag to toggle between mobile and desktop view, so
+the autodetected status can be overridden (see #4308).
+
 ### Improved
 Show some meta information in the "FileTree" widget (see #4330).
 

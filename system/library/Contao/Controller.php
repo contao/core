@@ -1646,6 +1646,27 @@ abstract class Controller extends \System
 					$arrCache[$strTag] = \Input::post($elements[1]);
 					break;
 
+				// Mobile/desktop toggle (hide if there is no mobile layout)
+				case 'toggle_view':
+					if (!$objPage->mobileLayout)
+					{
+						$arrCache[$strTag] = '';
+						break;
+					}
+
+					$strUrl = \Environment::get('request');
+					$strGlue = (strpos($strUrl, '?') === false) ? '?' : '&amp;';
+
+					if ($objPage->isMobile)
+					{
+						$arrCache[$strTag] = '<a href="' . $strUrl . $strGlue . 'view=desktop" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['toggleDesktop'][1]) . '">' . $GLOBALS['TL_LANG']['MSC']['toggleDesktop'][0] . '</a>';
+					}
+					else
+					{
+						$arrCache[$strTag] = '<a href="' . $strUrl . $strGlue . 'view=mobile" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['toggleMobile'][1]) . '">' . $GLOBALS['TL_LANG']['MSC']['toggleMobile'][0] . '</a>';
+					}
+					break;
+
 				// Conditional tags
 				case 'iflng':
 					if ($elements[1] != '' && $elements[1] != $objPage->language)
