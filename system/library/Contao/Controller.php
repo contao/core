@@ -1602,8 +1602,8 @@ abstract class Controller extends \System
 					break;
 
 				// News feed URL
-				case 'news_feed': // FIXME: feeds are now in tl_calendar_feed
-					$objFeed = \NewsArchiveModel::findByPk($elements[1]);
+				case 'news_feed':
+					$objFeed = \NewsFeedModel::findByPk($elements[1]);
 
 					if ($objFeed !== null)
 					{
@@ -1612,8 +1612,8 @@ abstract class Controller extends \System
 					break;
 
 				// Calendar feed URL
-				case 'calendar_feed': // FIXME: feeds are now in tl_calendar_feed
-					$objFeed = \CalendarModel::findByPk($elements[1]);
+				case 'calendar_feed':
+					$objFeed = \CalendarFeedModel::findByPk($elements[1]);
 
 					if ($objFeed !== null)
 					{
