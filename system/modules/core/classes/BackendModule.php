@@ -81,14 +81,12 @@ abstract class BackendModule extends \Backend
 			return $this->arrData[$strKey];
 		}
 
-		try
+		if ($this->objDc->$strKey !== null)
 		{
 			return $this->objDc->$strKey;
 		}
-		catch (\Exception $e)
-		{
-			return parent::__get($strKey);
-		}
+
+		return parent::__get($strKey);
 	}
 
 

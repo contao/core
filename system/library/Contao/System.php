@@ -38,90 +38,6 @@ abstract class System
 {
 
 	/**
-	 * Cache object
-	 * @var \Cache
-	 */
-	protected $Cache;
-
-	/**
-	 * Config object
-	 * @var \Cache
-	 */
-	protected $Config;
-
-	/**
-	 * Database object
-	 * @var \Database
-	 */
-	protected $Database;
-
-	/**
-	 * Encryption object
-	 * @var \Encryption
-	 */
-	protected $Encryption;
-
-	/**
-	 * Files object
-	 * @var \Files
-	 */
-	protected $Files;
-
-	/**
-	 * Search object
-	 * @var \Search
-	 */
-	protected $Search;
-
-	/**
-	 * Session object
-	 * @var \Search
-	 */
-	protected $Session;
-
-	/**
-	 * String object
-	 * @var \String
-	 */
-	protected $String;
-
-	/**
-	 * Template object
-	 * @var \Template
-	 */
-	protected $Template;
-
-	/**
-	 * User object
-	 * @var \User
-	 */
-	protected $User;
-
-	/**
-	 * Automator object
-	 * @var \Automator
-	 */
-	protected $Automator;
-
-	/**
-	 * Data container object
-	 * @var \DataContainer
-	 */
-	protected $DataContainer;
-
-	/**
-	 * Messages object
-	 * @var \Messages
-	 */
-	protected $Messages;
-
-	/**
-	 * Cookie hook object
-	 * @var object
-	 */
-	protected $objCookie;
-
-	/**
 	 * Cache
 	 * @var array
 	 */
@@ -156,28 +72,25 @@ abstract class System
 	 * Lazy load the Input and Environment libraries (which are now static) and
 	 * only include them as object property if an old module requires it
 	 * 
-	 * Supported keys:
-	 * 
-	 * * Input:       the Input instance
-	 * * Environment: the Environment instance
-	 * 
 	 * @param string $strKey The property name
 	 * 
 	 * @return mixed|null The property value or null
 	 */
 	public function __get($strKey)
 	{
-		if ($strKey == 'Input' || $strKey == 'Environment')
+		if (!isset($this->arrObjects[$strKey]))
 		{
-			if (!isset($this->arrObjects[$strKey]))
+			if ($strKey == 'Input' || $strKey == 'Environment')
 			{
 				$this->arrObjects[$strKey] = $strKey::getInstance();
 			}
-
-			return $this->arrObjects[$strKey];
+			else
+			{
+				return null;
+			}
 		}
 
-		return null;
+		return $this->arrObjects[$strKey];
 	}
 
 
@@ -190,15 +103,12 @@ abstract class System
 	 */
 	protected function import($strClass, $strKey=null, $blnForce=false)
 	{
-		// FIXME: use $this->arrObjects[$strKey] and __get() instead?
 		$strKey = $strKey ?: $strClass;
 
-		if (!$blnForce && is_object($this->$strKey))
+		if ($blnForce || !isset($this->arrObjects[$strKey]))
 		{
-			return;
+			$this->arrObjects[$strKey] = (in_array('getInstance', get_class_methods($strClass))) ? call_user_func(array($strClass, 'getInstance')) : new $strClass();
 		}
-
-		$this->$strKey = (in_array('getInstance', get_class_methods($strClass))) ? call_user_func(array($strClass, 'getInstance')) : new $strClass();
 	}
 
 
