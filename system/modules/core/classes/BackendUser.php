@@ -157,7 +157,7 @@ class BackendUser extends \User
 		// Force JavaScript redirect on Ajax requests (IE requires an absolute link)
 		if (\Environment::get('isAjaxRequest'))
 		{
-			echo json_encode(array('content' => '<script>location.replace("' . \Environment::get('base') . $strRedirect . '")</script>'));
+			echo '<script>location.replace("' . \Environment::get('base') . $strRedirect . '")</script>';
 			exit;
 		}
 
