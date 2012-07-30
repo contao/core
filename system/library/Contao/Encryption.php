@@ -199,6 +199,34 @@ class Encryption
 
 
 	/**
+	 * Test whether a password hash has been generated with crypt()
+	 *
+	 * @param string $strHash The password hash
+	 *
+	 * @return boolean True if the password hash has been generated with crypt()
+	 */
+	public static function test($strHash)
+	{
+		if (strncmp($strHash, '$6$', 3) === 0)
+		{
+			return true;
+		}
+		elseif (strncmp($strHash, '$5$', 3) === 0)
+		{
+			return true;
+		}
+		elseif (strncmp($strHash, '$2a$07$', 7) === 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+	/**
 	 * Initialize the encryption module
 	 * 
 	 * @deprecated Encryption is now a static class

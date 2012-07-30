@@ -351,8 +351,8 @@ class InstallTool extends Backend
 		$_SESSION['TL_INSTALL_AUTH'] = '';
 		$_SESSION['TL_INSTALL_EXPIRE'] = 0;
 
-		// The password is up to date (SHA-512)
-		if (strncmp($GLOBALS['TL_CONFIG']['installPassword'], '$6$', 3) === 0)
+		// The password has been generated with crypt()
+		if (Encryption::test($GLOBALS['TL_CONFIG']['installPassword']))
 		{
 			if (crypt(Input::post('password', true), $GLOBALS['TL_CONFIG']['installPassword']) == $GLOBALS['TL_CONFIG']['installPassword'])
 			{
@@ -368,7 +368,7 @@ class InstallTool extends Backend
 
 			if ($blnAuthenticated)
 			{
-				// Store a SHA-512 encrpyted version of the password
+				// Store a crypt() version of the password
 				$strPassword = Encryption::hash(Input::post('password', true));
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword);
 

@@ -314,8 +314,8 @@ abstract class User extends \System
 			return false;
 		}
 
-		// The password is up to date (SHA-512)
-		if (strncmp($this->password, '$6$', 3) === 0)
+		// The password has been generated with crypt()
+		if (\Encryption::test($this->password))
 		{
 			$blnAuthenticated = (crypt(\Input::post('password', true), $this->password) == $this->password);
 		}

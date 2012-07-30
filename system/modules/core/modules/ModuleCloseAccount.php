@@ -91,8 +91,8 @@ class ModuleCloseAccount extends \Module
 			// Validate the password
 			if (!$objWidget->hasErrors())
 			{
-				// The password is up to date (SHA-512)
-				if (strncmp($this->User->password, '$6$', 3) === 0)
+				// The password has been generated with crypt()
+				if (\Encryption::test($this->User->password))
 				{
 					$blnAuthenticated = (crypt($objWidget->value, $this->User->password) == $this->User->password);
 				}
