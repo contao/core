@@ -413,7 +413,7 @@ class Search extends \System
 		$strQuery .= ", SUM(relevance) AS relevance";
 
 		// Get meta information from tl_search
-		$strQuery .= ", url, title, filesize, text, protected, groups";
+		$strQuery .= ", tl_search.*";
 
 		// Prepare keywords array
 		$arrAllKeywords = array();
