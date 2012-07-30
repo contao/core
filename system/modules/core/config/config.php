@@ -205,6 +205,7 @@ $GLOBALS['BE_FFL'] = array
 	'pageSelector'   => 'PageSelector',
 	'fileTree'       => 'FileTree',
 	'fileSelector'   => 'FileSelector',
+	'fileUpload'     => 'FileUpload',
 	'tableWizard'    => 'TableWizard',
 	'listWizard'     => 'ListWizard',
 	'optionWizard'   => 'OptionWizard',
