@@ -1042,12 +1042,12 @@ abstract class Controller extends \System
 			return $this->restoreBasicEntities($strBuffer);
 		}
 
-		$tags = preg_split('/\{\{([^\}]+)\}\}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$tags = preg_split('/\{\{(([^\{\}]*|(?R))*)\}\}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 		$strBuffer = '';
-		$arrCache = array();
+		static $arrCache = array();
 
-		for ($_rit=0; $_rit<count($tags); $_rit=$_rit+2)
+		for ($_rit=0; $_rit<count($tags); $_rit=$_rit+3)
 		{
 			$strBuffer .= $tags[$_rit];
 			$strTag = $tags[$_rit+1];
@@ -1056,6 +1056,12 @@ abstract class Controller extends \System
 			if ($strTag == '')
 			{
 				continue;
+			}
+
+			// Run the replacement again if there are more tags (see #4402)
+			if (strpos($strTag, '{{') !== false)
+			{
+				$strTag = $this->replaceInsertTags($strTag);
 			}
 
 			// Load value from cache array
@@ -1970,6 +1976,146 @@ abstract class Controller extends \System
 		}
 
 		return $this->restoreBasicEntities($strBuffer);
+	}
+
+
+	/**
+	 * Replace the dynamic script tags (see #4203)
+	 * 
+	 * @param string $strBuffer The string with the tags to be replaced
+	 * 
+	 * @return string The string with the replaced tags
+	 */
+	public static function replaceDynamicScriptTags($strBuffer)
+	{
+		global $objPage;
+
+		$arrReplace = array();
+		$blnXhtml = ($objPage->outputFormat == 'xhtml');
+		$strTagEnding = $blnXhtml ? ' />' : '>';
+		$strScripts = '';
+		$objCombiner = new \Combiner();
+
+		// Add the CSS framework style sheets
+		if (is_array($GLOBALS['TL_FRAMEWORK_CSS']) && !empty($GLOBALS['TL_FRAMEWORK_CSS']))
+		{
+			foreach (array_unique($GLOBALS['TL_FRAMEWORK_CSS']) as $stylesheet)
+			{
+				$objCombiner->add($stylesheet);
+			}
+		}
+
+		// Add the internal style sheets
+		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
+		{
+			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
+			{
+				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
+
+				if ($mode == 'static')
+				{
+					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
+				}
+				else
+				{
+					$strScripts .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . static::addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
+				}
+			}
+		}
+
+		// Add the user style sheets
+		if (is_array($GLOBALS['TL_USER_CSS']) && !empty($GLOBALS['TL_USER_CSS']))
+		{
+			foreach (array_unique($GLOBALS['TL_USER_CSS']) as $stylesheet)
+			{
+				list($stylesheet, $media, $mode, $version) = explode('|', $stylesheet);
+
+				if (!$version)
+				{
+					$version = filemtime(TL_ROOT . '/' . $stylesheet);
+				}
+
+				if ($mode == 'static')
+				{
+					$objCombiner->add($stylesheet, $version, $media);
+				}
+				else
+				{
+					$strScripts .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . static::addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
+				}
+			}
+		}
+
+		// Create the aggregated style sheet
+		if ($objCombiner->hasEntries())
+		{
+			$strScripts .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '"' . $strTagEnding . "\n";
+		}
+
+		$arrReplace['[[TL_CSS]]'] = $strScripts;
+		$strScripts = '';
+
+		// Add the internal scripts
+		if (is_array($GLOBALS['TL_JAVASCRIPT']) && !empty($GLOBALS['TL_JAVASCRIPT']))
+		{
+			$objCombiner = new \Combiner();
+
+			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
+			{
+				list($javascript, $mode) = explode('|', $javascript);
+
+				if ($mode == 'static')
+				{
+					$objCombiner->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
+				}
+				else
+				{
+					$strScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . static::addStaticUrlTo($javascript) . '"></script>' . "\n";
+				}
+			}
+
+			// Create the aggregated script
+			if ($objCombiner->hasEntries())
+			{
+				$strScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>' . "\n";
+			}
+		}
+
+		// Add the internal <head> tags
+		if (is_array($GLOBALS['TL_HEAD']) && !empty($GLOBALS['TL_HEAD']))
+		{
+			foreach (array_unique($GLOBALS['TL_HEAD']) as $head)
+			{
+				$strScripts .= trim($head) . "\n";
+			}
+		}
+
+		$arrReplace['[[TL_HEAD]]'] = $strScripts;
+		$strScripts = '';
+
+		// Add the internal jQuery scripts
+		if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
+		{
+			foreach (array_unique($GLOBALS['TL_JQUERY']) as $script)
+			{
+				$strScripts .= "\n" . trim($script) . "\n";
+			}
+		}
+
+		$arrReplace['[[TL_JQUERY]]'] = $strScripts;
+		$strScripts = '';
+
+		// Add the internal MooTools scripts
+		if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
+		{
+			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
+			{
+				$strScripts .= "\n" . trim($script) . "\n";
+			}
+		}
+
+		$arrReplace['[[TL_MOOTOOLS]]'] = $strScripts;
+		return str_replace(array_keys($arrReplace), array_values($arrReplace), $strBuffer);
 	}
 
 

@@ -161,6 +161,8 @@ class FrontendTemplate extends \Template
 
 			// Replace insert tags for caching
 			$strBuffer = $this->replaceInsertTags($strBuffer, true);
+			$strBuffer = $this->replaceDynamicScriptTags($strBuffer); // see #4203
+
 			$intCache = intval($objPage->cache) + time();
 			$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 			$strMd5CacheKey = md5($strCacheKey);
@@ -212,6 +214,7 @@ class FrontendTemplate extends \Template
 		// Replace insert tags and then re-replace the request_token tag in case a form element has been loaded via insert tag
 		$this->strBuffer = $this->replaceInsertTags($strBuffer);
 		$this->strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $this->strBuffer);
+		$this->strBuffer = $this->replaceDynamicScriptTags($this->strBuffer); // see #4203
 
 		// Index page if searching is allowed and there is no back end user
 		if ($GLOBALS['TL_CONFIG']['enableSearch'] && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)

@@ -408,8 +408,6 @@ class PageRegular extends \Frontend
 			$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') .' rel="stylesheet" href="' . $protocol . 'fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
 		}
 
-		$objCombiner = new \Combiner();
-
 		// Add the Contao CSS framework style sheets
 		if (is_array($arrFramework))
 		{
@@ -417,33 +415,15 @@ class PageRegular extends \Frontend
 			{
 				if ($strFile != 'tinymce.css')
 				{
-					$objCombiner->add('assets/contao/' . $strFile);
+					$GLOBALS['TL_FRAMEWORK_CSS'][] = 'assets/contao/' . $strFile;
 				}
 			}
 		}
 
-		// Skip the TinyMCE style sheet
+		// Add the TinyMCE style sheet
 		if (is_array($arrFramework) && in_array('tinymce.css', $arrFramework) && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
 		{
-			$objCombiner->add($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css', filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'));
-		}
-
-		// Internal style sheets
-		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
-		{
-			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
-			{
-				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
-
-				if ($mode == 'static')
-				{
-					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
-				}
-				else
-				{
-					$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
-				}
-			}
+			$GLOBALS['TL_FRAMEWORK_CSS'][] = $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css';
 		}
 
 		// User style sheets
@@ -466,7 +446,7 @@ class PageRegular extends \Frontend
 					// Aggregate regular style sheets
 					if (!$objStylesheets->cc && !$objStylesheets->hasFontFace)
 					{
-						$objCombiner->add('assets/css/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2, $objStylesheets->tstamp3), $media);
+						$GLOBALS['TL_USER_CSS'][] = 'assets/css/' . $objStylesheets->name . '.css|' . $media . '|static|' . max($objStylesheets->tstamp, $objStylesheets->tstamp2, $objStylesheets->tstamp3);
 					}
 					else
 					{
@@ -497,17 +477,14 @@ class PageRegular extends \Frontend
 				{
 					if (file_exists(TL_ROOT . '/' . $objFiles->path))
 					{
-						$objCombiner->add($objFiles->path, filemtime(TL_ROOT . '/' . $stylesheet));
+						$GLOBALS['TL_USER_CSS'][] = $objFiles->path . '||static';
 					}
 				}
 			}
 		}
 
-		// Create the aggregated style sheet
-		if ($objCombiner->hasEntries())
-		{
-			$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '"' . $strTagEnding . "\n";
-		}
+		// Add a placeholder for dynamic style sheets (see #4203)
+		$strStyleSheets .= '[[TL_CSS]]';
 
 		// Add the debug style sheet
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
@@ -553,29 +530,14 @@ class PageRegular extends \Frontend
 
 		$strHeadTags = '';
 
-		// Add internal scripts
-		if (is_array($GLOBALS['TL_JAVASCRIPT']) && !empty($GLOBALS['TL_JAVASCRIPT']))
-		{
-			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
-			{
-				$strHeadTags .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $this->addStaticUrlTo($javascript) . '"></script>' . "\n";
-			}
-		}
-
-		// Add internal <head> tags
-		if (is_array($GLOBALS['TL_HEAD']) && !empty($GLOBALS['TL_HEAD']))
-		{
-			foreach (array_unique($GLOBALS['TL_HEAD']) as $head)
-			{
-				$strHeadTags .= trim($head) . "\n";
-			}
-		}
-
-		// Add user <head> tags
+		// Add the user <head> tags
 		if (($strHead = trim($objLayout->head)) != false)
 		{
 			$strHeadTags .= $strHead . "\n";
 		}
+
+		// Add a placeholder for dynamic <head> tags (see #4203)
+		$strHeadTags .= '[[TL_HEAD]]';
 
 		$this->Template->stylesheets = $strStyleSheets;
 		$this->Template->head = $strHeadTags;
@@ -604,14 +566,8 @@ class PageRegular extends \Frontend
 				}
 			}
 
-			// Add the internal jQuery scripts
-			if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
-			{
-				foreach (array_unique($GLOBALS['TL_JQUERY']) as $script)
-				{
-					$strScripts .= "\n" . trim($script) . "\n";
-				}
-			}
+			// Add a placeholder for dynamic scripts (see #4203)
+			$strScripts .= '[[TL_JQUERY]]';
 		}
 
 		// MooTools
@@ -628,14 +584,8 @@ class PageRegular extends \Frontend
 				}
 			}
 
-			// Add the internal MooTools scripts
-			if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
-			{
-				foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
-				{
-					$strScripts .= "\n" . trim($script) . "\n";
-				}
-			}
+			// Add a placeholder for dynamic scripts (see #4203)
+			$strScripts .= '[[TL_MOOTOOLS]]';
 		}
 
 		// Add the custom JavaScript

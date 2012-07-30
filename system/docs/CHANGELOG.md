@@ -1,8 +1,16 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 3.0.beta2 (XXXX-XX-XX)
-------------------------------
+Version 3.0.RC1 (XXXX-XX-XX)
+----------------------------
+
+### Added
+Insert tags can now dynamically add style sheets, JavaScripts and additional
+head tags to the page (see #4203).
+
+### Added
+Support nested insert tags (one nesting level) (see #4402). Thanks a lot to
+Christoph Wiechert for his great finds and hard work.
 
 ### New
 Added the "toggle_view" insert tag to toggle between mobile and desktop view, so
@@ -27,7 +35,6 @@ To use the feature, set the `rootNodes` key in the DCA:
 ```
 $GLOBALS['TL_DCA'][$table]['fields'][$field]['rootNodes'] = array(2, 6, 7);
 ```
-
 
 ### Changed
 The breadcrumb templates now use lists to render its links (see #1258).

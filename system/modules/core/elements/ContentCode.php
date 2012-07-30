@@ -101,16 +101,12 @@ class ContentCode extends \ContentElement
 			}
 
 			// Add the style sheet
-			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/'.HIGHLIGHTER.'/shCore.css';
+			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/'.HIGHLIGHTER.'/shCore.css||static';
 
-			// Add the core scripts
-			$objCombiner = new \Combiner();
-			$objCombiner->add('plugins/highlighter/'.HIGHLIGHTER.'/XRegExp.js', HIGHLIGHTER);
-			$objCombiner->add('plugins/highlighter/'.HIGHLIGHTER.'/shCore.js', HIGHLIGHTER);
-			$GLOBALS['TL_JAVASCRIPT'][] = $objCombiner->getCombinedFile(TL_PLUGINS_URL);
-
-			// Add the brushes separately in case there are multiple code elements
-			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/'.HIGHLIGHTER.'/' . $arrMapper[$this->highlight] . '.js';
+			// Add the JavaScripts
+			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/'.HIGHLIGHTER.'/XRegExp.js|static';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/'.HIGHLIGHTER.'/shCore.js|static';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/'.HIGHLIGHTER.'/' . $arrMapper[$this->highlight] . '.js|static';
 
 			global $objPage;
 
