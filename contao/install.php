@@ -112,10 +112,10 @@ class InstallTool extends Backend
 			$this->outputAndExit();
 		}
 
-		// Authenticate the user
+		// Log in the user
 		if (Input::post('FORM_SUBMIT') == 'tl_login')
 		{
-			$this->authenticateUser();
+			$this->loginUser();
 		}
 
 		// Auto-login on fresh installations
@@ -242,6 +242,11 @@ class InstallTool extends Backend
 	 */
 	protected function storeFtpCredentials()
 	{
+		if ($GLOBALS['TL_CONFIG']['installPassword'] != '')
+		{
+			return;
+		}
+
 		$GLOBALS['TL_CONFIG']['useFTP']  = true;
 		$GLOBALS['TL_CONFIG']['ftpHost'] = Input::post('host');
 		$GLOBALS['TL_CONFIG']['ftpPath'] = Input::post('path');
@@ -344,9 +349,9 @@ class InstallTool extends Backend
 
 
 	/**
-	 * Authenticate the user
+	 * Log in the user
 	 */
-	protected function authenticateUser()
+	protected function loginUser()
 	{
 		$_SESSION['TL_INSTALL_AUTH'] = '';
 		$_SESSION['TL_INSTALL_EXPIRE'] = 0;
@@ -670,6 +675,11 @@ class InstallTool extends Backend
 	 */
 	protected function createLocalConfigurationFiles()
 	{
+		if ($GLOBALS['TL_CONFIG']['installPassword'] != '')
+		{
+			return;
+		}
+
 		// The localconfig.php file is created by the Config class
 		foreach (array('dcaconfig', 'initconfig', 'langconfig') as $file)
 		{
