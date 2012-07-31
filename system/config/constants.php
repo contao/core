@@ -33,7 +33,7 @@ define('TABLESORTER', '2.0.5');
 define('MOOTOOLS', '1.4.5');
 define('DATEPICKER', '2.1.1');
 define('MEDIABOX', '1.4.6');
-define('SIMPLEMODAL', '1.0');
+define('SIMPLEMODAL', '1.2');
 define('SLIMBOX', '1.71');
 
 
