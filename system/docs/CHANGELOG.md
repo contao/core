@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.RC1 (XXXX-XX-XX)
 ----------------------------
 
+### Updated
+Updated the codeMirror plugin to version 2.32.
+
 ### Added
 Insert tags can now dynamically add style sheets, JavaScripts and additional
 head tags to the page (see #4203).

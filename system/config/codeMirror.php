@@ -23,6 +23,11 @@ if ($GLOBALS['TL_CONFIG']['useCE']):
 
 	foreach ($this->ceFields as $arrField):
 
+		if ($arrField['type'] == 'sql')
+		{
+			$arrField['type'] = 'mysql';
+		}
+
 		// Validate the syntax
 		switch ($arrField['type'])
 		{
@@ -32,7 +37,7 @@ if ($GLOBALS['TL_CONFIG']['useCE']):
 			case 'htmlmixed';
 			case 'javascript';
 			case 'php':
-			case 'sql':
+			case 'mysql':
 			case 'xml':
 				// Supported
 				break;

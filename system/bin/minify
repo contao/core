@@ -460,7 +460,7 @@ codemirror()
 
 		# JavaScript
 		echo "$copyright" > $version/codemirror.js
-		files=('codemirror.js' 'runmode.js' 'overlay.js' 'clike.js' 'css.js' 'diff.js' 'htmlmixed.js' 'javascript.js' 'php.js' 'sql.js' 'xml.js')
+		files=('codemirror.js' 'runmode.js' 'overlay.js' 'clike.js' 'css.js' 'diff.js' 'htmlmixed.js' 'javascript.js' 'markdown.js' 'mysql.js' 'php.js' 'xml.js')
 		for file in ${files[@]}; do
 			$js $version/src/$file >> $version/codemirror.js
 		done
