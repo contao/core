@@ -23,7 +23,7 @@ define('LONG_TERM_SUPPORT', false);
 define('CODEMIRROR', '2.32');
 define('CSS3PIE', '1.0.0');
 define('HIGHLIGHTER', '3.0.83');
-define('HTML5SHIM', '3');
+define('HTML5SHIV', '3.6');
 define('JQUERY', '1.7.1');
 define('JQUERY_UI', '1.8.17');
 define('COLORBOX', '1.3.19');
