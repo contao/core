@@ -490,7 +490,7 @@ class File extends \System
 			'zip'   => array('application/zip', 'iconRAR.gif'),
 
 			// Audio files
-			'm4a'   => array('audio/m4a', 'iconAUDIO.gif'),
+			'm4a'   => array('audio/x-m4a', 'iconAUDIO.gif'),
 			'mp3'   => array('audio/mp3', 'iconAUDIO.gif'),
 			'wma'   => array('audio/wma', 'iconAUDIO.gif'),
 			'mpeg'  => array('audio/mpeg', 'iconAUDIO.gif'),
@@ -534,7 +534,7 @@ class File extends \System
 
 			// Videos
 			'mp4'   => array('video/mp4', 'iconVIDEO.gif'),
-			'm4v'   => array('video/m4v', 'iconVIDEO.gif'),
+			'm4v'   => array('video/x-m4v', 'iconVIDEO.gif'),
 			'mov'   => array('video/mov', 'iconVIDEO.gif'),
 			'wmv'   => array('video/wmv', 'iconVIDEO.gif'),
 			'webm'  => array('video/webm', 'iconVIDEO.gif'),
