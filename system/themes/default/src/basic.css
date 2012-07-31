@@ -312,11 +312,11 @@ pre,.tl_textarea.monospace {
 	line-height:1;
 	text-shadow:1px 1px 0 #eee;
 	background:#eee;
-	background-image:-moz-linear-gradient(center bottom, #ccc 0%, #eee 60%);
-	background-image:-webkit-gradient(linear, left bottom, left top, color-stop(0, #ccc), color-stop(0.6, #eee));
+	background-image:-moz-linear-gradient(bottom, #ccc 0%, #eee 60%);
+	background-image:-webkit-linear-gradient(bottom, #ccc 0%, #eee 60%);
 	background-image:-o-linear-gradient(bottom, #ccc 0%, #eee 60%);
-	background-image:-ms-linear-gradient(top, #ccc 0%, #eee 60%);
-	background-image:linear-gradient(top, #ccc 0%, #eee 60%);
+	background-image:-ms-linear-gradient(bottom, #ccc 0%, #eee 60%);
+	background-image:linear-gradient(bottom, #ccc 0%, #eee 60%);
 }
 a.tl_submit {
 	padding:4px 12px 4px 13px;
@@ -400,11 +400,11 @@ a.tl_submit:hover {
 	border-radius:3px;
 	box-shadow:1px 1px 3px #666;
 	background:#666;
-	background-image:-moz-linear-gradient(center bottom, #333 0%, #666 80%);
-	background-image:-webkit-gradient(linear, left bottom, left top, color-stop(0, #333), color-stop(0.8, #666));
+	background-image:-moz-linear-gradient(bottom, #333 0%, #666 80%);
+	background-image:-webkit-linear-gradient(bottom, #333 0%, #666 80%);
 	background-image:-o-linear-gradient(bottom, #333 0%, #666 80%);
-	background-image:-ms-linear-gradient(top, #333 0%, #666 80%);
-	background-image:linear-gradient(top, #333 0%, #666 80%);
+	background-image:-ms-linear-gradient(bottom, #333 0%, #666 80%);
+	background-image:linear-gradient(bottom, #333 0%, #666 80%);
 }
 .tip div {
 	line-height:1.3;

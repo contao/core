@@ -20,11 +20,11 @@
 	position:fixed;
 	bottom:260px;
 	background:#ddd;
-	background-image:-moz-linear-gradient(top,#eee,#ddd);
-	background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#eee),color-stop(1,#ddd));
-	background-image:-o-linear-gradient(top,#eee,#ddd);
-	background-image:-ms-linear-gradient(top,#eee,#ddd);
-	background-image:linear-gradient(top,#eee,#ddd);
+	background-image:-moz-linear-gradient(top, #eee, #ddd);
+	background-image:-webkit-linear-gradient(top, #eee, #ddd);
+	background-image:-o-linear-gradient(top, #eee, #ddd);
+	background-image:-ms-linear-gradient(top, #eee, #ddd);
+	background-image:linear-gradient(top, #eee, #ddd);
 }
 #debug p span {
 	padding:1px 20px;

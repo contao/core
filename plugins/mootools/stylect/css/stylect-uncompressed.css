@@ -48,11 +48,11 @@
 	border-left:1px solid #b8b8b8;
 	background:#eee;
 	border-radius:0 3px 3px 0;
-	background-image:-moz-linear-gradient(center bottom, #ccc 0%, #eee 60%);
-	background-image:-webkit-gradient(linear, left bottom, left top, color-stop(0, #ccc), color-stop(0.6, #eee));
+	background-image:-moz-linear-gradient(bottom, #ccc 0%, #eee 60%);
+	background-image:-webkit-linear-gradient(bottom, #ccc 0%, #eee 60%);
 	background-image:-o-linear-gradient(bottom, #ccc 0%, #eee 60%);
-	background-image:-ms-linear-gradient(top, #ccc 0%, #eee 60%);
-	background-image:linear-gradient(top, #ccc 0%, #eee 60%);
+	background-image:-ms-linear-gradient(bottom, #ccc 0%, #eee 60%);
+	background-image:linear-gradient(bottom, #ccc 0%, #eee 60%);
 }
 .styled_select b i {
 	display:block;
