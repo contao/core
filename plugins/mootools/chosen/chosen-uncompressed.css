@@ -288,7 +288,6 @@ select.chzn-select {
   padding: 0;
 }
 .chzn-container .chzn-results li {
-  display: none;
   line-height: 1.2; /* PATCH: 1.2 instead of 80% */
   padding: 1px 7px 2px; /* PATCH: 1px 7px 2px instead of 7px 7px 8px */
   margin: 0;
