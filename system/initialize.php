@@ -78,7 +78,7 @@ Swift::registerAutoload(function() {
 	require TL_ROOT . '/system/library/Swiftmailer/swift_init.php';
 });
 
-require_once TL_ROOT . '/system/library/SimplePie/autoloader.php';
+require_once TL_ROOT . '/system/library/Simplepie/autoloader.php';
 
 
 /**
