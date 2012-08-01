@@ -70,13 +70,15 @@ ClassLoader::scanAndRegister(); // config/autoload.php
 
 
 /**
- * Register the SwiftMailer autoloader
+ * Register the SwiftMailer and SimplePie autoloaders
  */
 require_once TL_ROOT . '/system/library/Swiftmailer/classes/Swift.php';
 
 Swift::registerAutoload(function() {
 	require TL_ROOT . '/system/library/Swiftmailer/swift_init.php';
 });
+
+require_once TL_ROOT . '/system/library/SimplePie/autoloader.php';
 
 
 /**

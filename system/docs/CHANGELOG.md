@@ -5,7 +5,7 @@ Version 3.0.RC1 (XXXX-XX-XX)
 ----------------------------
 
 ### Updated
-Updated the codeMirror plugin to version 2.32.
+Updated all third-party plugins and libraries to their latest version.
 
 ### Added
 Insert tags can now dynamically add style sheets, JavaScripts and additional
