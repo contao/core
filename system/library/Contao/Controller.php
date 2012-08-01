@@ -1996,6 +1996,30 @@ abstract class Controller extends \System
 		$strScripts = '';
 		$objCombiner = new \Combiner();
 
+		// Add the internal jQuery scripts
+		if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
+		{
+			foreach (array_unique($GLOBALS['TL_JQUERY']) as $script)
+			{
+				$strScripts .= "\n" . trim($script) . "\n";
+			}
+		}
+
+		$arrReplace['[[TL_JQUERY]]'] = $strScripts;
+		$strScripts = '';
+
+		// Add the internal MooTools scripts
+		if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
+		{
+			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
+			{
+				$strScripts .= "\n" . trim($script) . "\n";
+			}
+		}
+
+		$arrReplace['[[TL_MOOTOOLS]]'] = $strScripts;
+		$strScripts = '';
+
 		// Add the CSS framework style sheets
 		if (is_array($GLOBALS['TL_FRAMEWORK_CSS']) && !empty($GLOBALS['TL_FRAMEWORK_CSS']))
 		{
@@ -2091,30 +2115,6 @@ abstract class Controller extends \System
 		}
 
 		$arrReplace['[[TL_HEAD]]'] = $strScripts;
-		$strScripts = '';
-
-		// Add the internal jQuery scripts
-		if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
-		{
-			foreach (array_unique($GLOBALS['TL_JQUERY']) as $script)
-			{
-				$strScripts .= "\n" . trim($script) . "\n";
-			}
-		}
-
-		$arrReplace['[[TL_JQUERY]]'] = $strScripts;
-		$strScripts = '';
-
-		// Add the internal MooTools scripts
-		if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
-		{
-			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
-			{
-				$strScripts .= "\n" . trim($script) . "\n";
-			}
-		}
-
-		$arrReplace['[[TL_MOOTOOLS]]'] = $strScripts;
 		return str_replace(array_keys($arrReplace), array_values($arrReplace), $strBuffer);
 	}
 
