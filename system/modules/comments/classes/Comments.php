@@ -131,7 +131,7 @@ class Comments extends \Frontend
 				$objPartial->datim = $this->parseDate($objPage->datimFormat, $objComments->date);
 				$objPartial->date = $this->parseDate($objPage->dateFormat, $objComments->date);
 				$objPartial->class = (($count < 1) ? ' first' : '') . (($count >= ($total - 1)) ? ' last' : '') . (($count % 2 == 0) ? ' even' : ' odd');
-				$objPartial->by = $GLOBALS['TL_LANG']['MSC']['comment_by'];
+				$objPartial->by = $GLOBALS['TL_LANG']['MSC']['com_by'];
 				$objPartial->id = 'c' . $objComments->id;
 				$objPartial->timestamp = $objComments->date;
 				$objPartial->datetime = date('Y-m-d\TH:i:sP', $objComments->date);
@@ -143,7 +143,7 @@ class Comments extends \Frontend
 					if (($objAuthor = $objComments->getRelated('author')) !== null)
 					{
 						$objPartial->addReply = true;
-						$objPartial->rby = $GLOBALS['TL_LANG']['MSC']['reply_by'];
+						$objPartial->rby = $GLOBALS['TL_LANG']['MSC']['com_reply'];
 						$objPartial->reply = $this->replaceInsertTags($objComments->reply);
 						$objPartial->author = $objAuthor;
 
