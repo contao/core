@@ -46,6 +46,9 @@
 <div class="widget">
   <?php echo $this->fields['comment']->generateWithError(); ?> <label for="ctrl_<?php echo $this->fields['comment']->id; ?>" class="invisible"><?php echo $this->fields['comment']->label; ?></label>
 </div>
+<div class="widget">
+  <?php echo $this->fields['notify']->generateWithError(); ?> 
+</div>
 <div class="submit_container">
   <input type="submit" class="submit" value="<?php echo $this->submit; ?>">
 </div>
