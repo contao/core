@@ -82,6 +82,7 @@ class ModuleEventlist extends Contao\ModuleEventlist {}
 class Comments extends Contao\Comments {}
 class ContentComments extends Contao\ContentComments {}
 class CommentsModel extends Contao\CommentsModel {}
+class CommentsNotifyModel extends Contao\CommentsNotifyModel {}
 class ModuleComments extends Contao\ModuleComments {}
 
 // core

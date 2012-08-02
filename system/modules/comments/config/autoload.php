@@ -36,6 +36,7 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'ce_comments' => 'system/modules/comments/templates',
-	'com_default' => 'system/modules/comments/templates',
+	'ce_comments'      => 'system/modules/comments/templates',
+	'com_default'      => 'system/modules/comments/templates',
+	'mod_comment_form' => 'system/modules/comments/templates',
 ));
