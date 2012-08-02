@@ -157,6 +157,7 @@ ClassLoader::addClasses(array
 	'Contao\TextStore'          => 'system/modules/core/widgets/TextStore.php',
 	'Contao\TimePeriod'         => 'system/modules/core/widgets/TimePeriod.php',
 	'Contao\TrblField'          => 'system/modules/core/widgets/TrblField.php',
+	'Contao\Upload'             => 'system/modules/core/widgets/Upload.php',
 ));
 
 

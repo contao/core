@@ -5,6 +5,9 @@ Version 3.0.beta2 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+Added a back end upload widget (see #4244).
+
+### New
 Added the "toggle_view" insert tag to toggle between mobile and desktop view, so
 the autodetected status can be overridden (see #4308).
 
