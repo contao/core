@@ -604,13 +604,13 @@ abstract class Widget extends \Controller
 		// Add the remaining attributes
 		foreach ($this->arrAttributes as $k=>$v)
 		{
-			if ($k == 'disabled' || $k == 'readonly' || $k == 'required' || $k == 'autofocus')
+			if ($k == 'disabled' || $k == 'readonly' || $k == 'required' || $k == 'autofocus' || $k == 'multiple')
 			{
 				if (TL_MODE == 'FE') // see #3878
 				{
 					$strAttributes .= $blnIsXhtml ? ' ' . $k . '="' . $v . '"' : ' ' . $k;
 				}
-				elseif ($k == 'disabled' || $k == 'readonly') // see #4131
+				elseif ($k == 'disabled' || $k == 'readonly' || $k == 'multiple') // see #4131
 				{
 					$strAttributes .= ' ' . $k;
 				}

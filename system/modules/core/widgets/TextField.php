@@ -46,12 +46,6 @@ class TextField extends \Widget
 	 */
 	protected $strTemplate = 'be_widget';
 
-	/**
-	 * Contents
-	 * @var array
-	 */
-	protected $arrContents = array();
-
 
 	/**
 	 * Disable the for attribute if the "multiple" option is set

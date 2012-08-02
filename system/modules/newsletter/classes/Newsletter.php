@@ -408,7 +408,7 @@ class Newsletter extends \Backend
 		// Import CSS
 		if (\Input::post('FORM_SUBMIT') == 'tl_recipients_import')
 		{
-			$arrUploaded = $objUploader->uploadTo('system/tmp', 'files');
+			$arrUploaded = $objUploader->uploadTo('system/tmp');
 
 			if (empty($arrUploaded))
 			{

@@ -40,6 +40,12 @@ class FileUpload extends \Backend
 	 */
 	protected $blnHasResized = false;
 
+	/**
+	 * Field name
+	 * @var string
+	 */
+	protected $strName = 'files';
+
 
 	/**
 	 * Make the constructor public
@@ -71,28 +77,32 @@ class FileUpload extends \Backend
 
 
 	/**
-	 * Check the uploaded files and move them to the target directory
+	 * Override the field name
 	 * @param string
+	 */
+	public function setName($strName)
+	{
+		$this->strName = $strName;
+	}
+
+
+	/**
+	 * Check the uploaded files and move them to the target directory
 	 * @param string
 	 * @return array
 	 * @throws \Exception
 	 */
-	public function uploadTo($strTarget, $strKey)
+	public function uploadTo($strTarget)
 	{
 		if ($strTarget == '' || strpos($strTarget, '../') !== false)
 		{
 			throw new \Exception("Invalid target path $strTarget");
 		}
 
-		if ($strKey == '')
-		{
-			throw new \Exception('The key must not be empty');
-		}
-
 		$maxlength_kb = $this->getMaximumUploadSize();
 		$maxlength_kb_readable = $this->getReadableSize($maxlength_kb);
 		$arrUploaded = array();
-		$arrFiles = $this->getFilesFromGlobal($strKey);
+		$arrFiles = $this->getFilesFromGlobal();
 
 		foreach ($arrFiles as $file)
 		{
@@ -178,7 +188,7 @@ class FileUpload extends \Backend
 		for ($i=0; $i<$GLOBALS['TL_CONFIG']['uploadFields']; $i++)
 		{
 			$fields .= '
-  <input type="file" name="files[]" class="tl_upload_field" onfocus="Backend.getScrollOffset()"><br>';
+  <input type="file" name="' . $this->strName . '[]" class="tl_upload_field" onfocus="Backend.getScrollOffset()"><br>';
 		}
 
 		return '
@@ -200,27 +210,26 @@ class FileUpload extends \Backend
 
 	/**
 	 * Get the files from the global $_FILES array
-	 * @param string
 	 * @return array
 	 */
-	protected function getFilesFromGlobal($strKey)
+	protected function getFilesFromGlobal()
 	{
 		$arrFiles = array();
 
-		for ($i=0; $i<count($_FILES[$strKey]['name']); $i++)
+		for ($i=0; $i<count($_FILES[$this->strName]['name']); $i++)
 		{
-			if ($_FILES[$strKey]['name'][$i] == '')
+			if ($_FILES[$this->strName]['name'][$i] == '')
 			{
 				continue;
 			}
 
 			$arrFiles[] = array
 			(
-				'name'     => $_FILES[$strKey]['name'][$i],
-				'type'     => $_FILES[$strKey]['type'][$i],
-				'tmp_name' => $_FILES[$strKey]['tmp_name'][$i],
-				'error'    => $_FILES[$strKey]['error'][$i],
-				'size'     => $_FILES[$strKey]['size'][$i],
+				'name'     => $_FILES[$this->strName]['name'][$i],
+				'type'     => $_FILES[$this->strName]['type'][$i],
+				'tmp_name' => $_FILES[$this->strName]['tmp_name'][$i],
+				'error'    => $_FILES[$this->strName]['error'][$i],
+				'size'     => $_FILES[$this->strName]['size'][$i],
 			);
 		}
 

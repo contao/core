@@ -927,7 +927,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Process the uploaded files
 		if (\Input::post('FORM_SUBMIT') == 'tl_upload')
 		{
-			$arrUploaded = $objUploader->uploadTo($strFolder, 'files');
+			$arrUploaded = $objUploader->uploadTo($strFolder);
 
 			// Generate the DB entries
 			if ($this->blnIsDbAssisted)

@@ -174,7 +174,7 @@ class ListWizard extends \Widget
 		// Import CSS
 		if (\Input::post('FORM_SUBMIT') == 'tl_list_import')
 		{
-			$arrUploaded = $objUploader->uploadTo('system/tmp', 'files');
+			$arrUploaded = $objUploader->uploadTo('system/tmp');
 
 			if (empty($arrUploaded))
 			{

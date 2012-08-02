@@ -49,7 +49,7 @@ class Theme extends \Backend
 		{
 			if (!\Input::post('confirm'))
 			{
-				$arrUploaded = $objUploader->uploadTo('system/tmp', 'files');
+				$arrUploaded = $objUploader->uploadTo('system/tmp');
 
 				if (empty($arrUploaded))
 				{

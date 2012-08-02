@@ -1050,7 +1050,7 @@ class StyleSheets extends \Backend
 		// Import CSS
 		if (\Input::post('FORM_SUBMIT') == 'tl_style_sheet_import')
 		{
-			$arrUploaded = $objUploader->uploadTo('system/tmp', 'files');
+			$arrUploaded = $objUploader->uploadTo('system/tmp');
 
 			if (empty($arrUploaded))
 			{

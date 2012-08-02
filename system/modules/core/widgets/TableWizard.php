@@ -243,7 +243,7 @@ class TableWizard extends \Widget
 		// Import CSS
 		if (\Input::post('FORM_SUBMIT') == 'tl_table_import')
 		{
-			$arrUploaded = $objUploader->uploadTo('system/tmp', 'files');
+			$arrUploaded = $objUploader->uploadTo('system/tmp');
 
 			if (empty($arrUploaded))
 			{
