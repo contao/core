@@ -358,6 +358,7 @@ abstract class Template extends \Controller
 		}
 
 		echo $this->strBuffer;
+		exit; // see #4565
 	}
 
 

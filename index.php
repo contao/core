@@ -248,6 +248,9 @@ class Index extends Frontend
 				$objHandler->generate($objPage);
 				break;
 		}
+
+		// Stop the script (see #4565)
+		exit;
 	}
 
 

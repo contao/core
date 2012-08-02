@@ -4,6 +4,11 @@ Contao Open Source CMS Changelog
 Version 3.0.RC1 (XXXX-XX-XX)
 ----------------------------
 
+### Improved
+Stop the script execution after the main controller is finished or when a back
+end or front end template has been output (see #4565). This will prevent code
+which has been injected at the end of a PHP file from being executed.
+
 ### Updated
 Updated all third-party plugins and libraries to their latest version.
 
