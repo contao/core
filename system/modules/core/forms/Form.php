@@ -244,6 +244,16 @@ class Form extends \Hybrid
 	 */
 	protected function processFormData($arrSubmitted, $arrLabels)
 	{
+		// HOOK: prepare form data callback
+		if (isset($GLOBALS['TL_HOOKS']['prepareFormData']) && is_array($GLOBALS['TL_HOOKS']['prepareFormData']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['prepareFormData'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($arrSubmitted, $arrLabels, $this);
+			}
+		}
+
 		// Send form data via e-mail
 		if ($this->sendViaEmail)
 		{
