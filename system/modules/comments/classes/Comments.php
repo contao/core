@@ -198,7 +198,7 @@ class Comments extends \Frontend
 		// Confirm or remove a subscription
 		if (\Input::get('token'))
 		{
-			$this->changeSubscriptionStatus($objTemplate);
+			static::changeSubscriptionStatus($objTemplate);
 			return;
 		}
 
@@ -341,27 +341,26 @@ class Comments extends \Frontend
 			// Prepare the record
 			$arrSet = array
 			(
-				'tstamp' => $time,
-				'source' => $strSource,
-				'parent' => $intParent,
-				'name' => $arrWidgets['name']->value,
-				'email' => $arrWidgets['email']->value,
-				'website' => $strWebsite,
-				'comment' => $this->convertLineFeeds($strComment),
-				'ip' => $this->anonymizeIp(\Environment::get('ip')),
-				'date' => $time,
+				'tstamp'    => $time,
+				'source'    => $strSource,
+				'parent'    => $intParent,
+				'name'      => $arrWidgets['name']->value,
+				'email'     => $arrWidgets['email']->value,
+				'website'   => $strWebsite,
+				'comment'   => $this->convertLineFeeds($strComment),
+				'ip'        => $this->anonymizeIp(\Environment::get('ip')),
+				'date'      => $time,
 				'published' => ($objConfig->moderate ? '' : 1)
 			);
 
+			// Store the comment
 			$objComment = new \CommentsModel();
-			$objComment->setRow($arrSet);
-			$objComment->save();
-			$insertId = $objComment->id;
+			$objComment->setRow($arrSet)->save();
 
 			// Store the subscription
 			if ($arrWidgets['notify']->value)
 			{
-				$this->addCommentsSubscription($strSource, $intParent, $arrWidgets['name']->value, $arrWidgets['email']->value);
+				static::addCommentsSubscription($objComment);
 			}
 
 			// HOOK: add custom logic
@@ -370,7 +369,7 @@ class Comments extends \Frontend
 				foreach ($GLOBALS['TL_HOOKS']['addComment'] as $callback)
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($insertId, $arrSet, $this);
+					$this->$callback[0]->$callback[1]($objComment->id, $arrSet, $this);
 				}
 			}
 
@@ -390,8 +389,7 @@ class Comments extends \Frontend
 									  $arrSet['name'] . ' (' . $arrSet['email'] . ')',
 									  $strComment,
 									  \Environment::get('base') . \Environment::get('request'),
-									  \Environment::get('base') . 'contao/main.php?do=comments&act=edit&id=' . $insertId
-			);
+									  \Environment::get('base') . 'contao/main.php?do=comments&act=edit&id=' . $objComment->id);
 
 			// Do not send notifications twice
 			if (is_array($arrNotifies))
@@ -407,7 +405,7 @@ class Comments extends \Frontend
 			}
 			else
 			{
-				$this->notifyCommentsSubscribers($strSource, $intParent, $arrWidgets['email']->value);
+				static::notifyCommentsSubscribers($objComment);
 			}
 
 			$this->reload();
@@ -512,14 +510,11 @@ class Comments extends \Frontend
 
 	/**
 	 * Add the subscription and send the activation mail (double opt-in)
-	 * @param string
-	 * @param integer
-	 * @param string
-	 * @param string
+	 * @param \CommentsModel
 	 */
-	protected function addCommentsSubscription($strSource, $intParent, $strName, $strEmail)
+	public static function addCommentsSubscription(\CommentsModel $objComment)
 	{
-		$objNotify = \CommentsNotifyModel::findBySourceParentAndEmail($strSource, $intParent, $strEmail);
+		$objNotify = \CommentsNotifyModel::findBySourceParentAndEmail($objComment->source, $objComment->parent, $objComment->email);
 
 		// The subscription exists already
 		if ($objNotify !== null)
@@ -532,21 +527,21 @@ class Comments extends \Frontend
 		// Prepare the record
 		$arrSet = array
 		(
-			'tstamp' => $time,
-			'source' => $strSource,
-			'parent' => $intParent,
-			'name' => $strName,
-			'email' => $strEmail,
-			'addedOn' => $time,
-			'ip' => $this->anonymizeIp(\Environment::get('ip')),
+			'tstamp'       => $time,
+			'source'       => $objComment->source,
+			'parent'       => $objComment->parent,
+			'name'         => $objComment->name,
+			'email'        => $objComment->email,
+			'url'          => \Environment::get('request'),
+			'addedOn'      => $time,
+			'ip'           => \System::anonymizeIp(\Environment::get('ip')),
 			'tokenConfirm' => md5(uniqid(mt_rand(), true)),
-			'tokenRemove' => md5(uniqid(mt_rand(), true))
+			'tokenRemove'  => md5(uniqid(mt_rand(), true))
 		);
 
 		// Store the subscription
 		$objNotify = new \CommentsNotifyModel();
-		$objNotify->setRow($arrSet);
-		$objNotify->save();
+		$objNotify->setRow($arrSet)->save();
 
 		$strUrl = \Environment::get('base') . \Environment::get('request');
 
@@ -564,9 +559,9 @@ class Comments extends \Frontend
 	 * Change the subscription status
 	 * @param \FrontendTemplate
 	 */
-	protected function changeSubscriptionStatus(\FrontendTemplate $objTemplate)
+	public static function changeSubscriptionStatus(\FrontendTemplate $objTemplate)
 	{
-		$objNotify = \CommentsNotifyModel::findByToken(\Input::get('token'));
+		$objNotify = \CommentsNotifyModel::findByTokens(\Input::get('token'));
 
 		if ($objNotify === null)
 		{
@@ -574,14 +569,12 @@ class Comments extends \Frontend
 			return;
 		}
 
-		// Confirm
 		if ($objNotify->tokenConfirm != '' && $objNotify->tokenConfirm == \Input::get('token'))
 		{
 			$objNotify->tokenConfirm = '';
 			$objNotify->save();
 			$objTemplate->confirm = $GLOBALS['TL_LANG']['MSC']['com_optInConfirm'];
 		}
-		// Remove
 		elseif ($objNotify->tokenRemove != '' && $objNotify->tokenRemove == \Input::get('token'))
 		{
 			$objNotify->delete();
@@ -592,29 +585,34 @@ class Comments extends \Frontend
 
 	/**
 	 * Notify the subscribers of new comments
-	 * @param string
-	 * @param integer
-	 * @param string
+	 * @param \CommentsModel
 	 */
-	protected function notifyCommentsSubscribers($strSource, $intParent, $strEmail)
+	public static function notifyCommentsSubscribers(\CommentsModel $objComment)
 	{
-		$objNotify = \CommentsNotifyModel::findActiveBySourceAndParent($strSource, $intParent);
+		// Notified already
+		if ($objComment->notified)
+		{
+			return;
+		}
 
+		$objNotify = \CommentsNotifyModel::findActiveBySourceAndParent($objComment->source, $objComment->parent);
+
+		// No subscriptions
 		if ($objNotify === null)
 		{
 			return;
 		}
 
-		// Prepare the URL
-		$strUrl = \Environment::get('base') . \Environment::get('request');
-
 		while ($objNotify->next())
 		{
 			// Don't notify the commentor about his own comment
-			if ($objNotify->email == $strEmail)
+			if ($objNotify->email == $objComment->email)
 			{
 				continue;
 			}
+
+			// Prepare the URL
+			$strUrl = \Environment::get('base') . $objNotify->url;
 
 			$objEmail = new \Email();
 			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
@@ -623,5 +621,8 @@ class Comments extends \Frontend
 			$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_notifyMessage'], $objNotify->name, $strUrl, $strUrl . '?token=' . $objNotify->tokenRemove);
 			$objEmail->sendTo($objNotify->email);
 		}
+
+		$objComment->notified = 1;
+		$objComment->save();
 	}
 }

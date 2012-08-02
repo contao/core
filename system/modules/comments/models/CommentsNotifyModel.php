@@ -41,7 +41,7 @@ class CommentsNotifyModel extends \Model
 	 * 
 	 * @return \Model|null The subscription model or null
 	 */
-	public static function findByToken($strToken)
+	public static function findByTokens($strToken)
 	{
 		$t = static::$strTable;
 		return static::findOneBy(array("($t.tokenConfirm=? OR $t.tokenRemove=?)"), array($strToken, $strToken));
