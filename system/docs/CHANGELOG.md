@@ -5,6 +5,9 @@ Version 3.0.RC1 (XXXX-XX-XX)
 ----------------------------
 
 ### New
+Added the "indexPage" hook (see #4506).
+
+### New
 Added the "prepareFormData" hook (see #4538).
 
 ### Improved

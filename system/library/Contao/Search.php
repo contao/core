@@ -43,12 +43,6 @@ class Search extends \System
 	 */
 	protected static $objInstance;
 
-	/**
-	 * IndexPage object
-	 * @var object
-	 */
-	protected $objIndexPage;
-
 
 	/**
 	 * Index a page
@@ -108,12 +102,11 @@ class Search extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['indexPage'] as $callback)
 			{
-				$this->import($callback[0], 'objIndexPage', true);
-				$strContent = $this->objIndexPage->$callback[1]($strContent, $arrData, $arrSet);
+				static::importStatic($callback[0])->$callback[1]($strContent, $arrData, $arrSet);
 			}
 		}
 
-		// free memory
+		// Free the memory
 		unset($arrData['content']);
 
 		// Calculate the checksum (see #4179)
@@ -413,7 +406,7 @@ class Search extends \System
 		$strQuery .= ", SUM(relevance) AS relevance";
 
 		// Get meta information from tl_search
-		$strQuery .= ", tl_search.*";
+		$strQuery .= ", tl_search.*"; // see #4506
 
 		// Prepare keywords array
 		$arrAllKeywords = array();
