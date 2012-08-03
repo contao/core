@@ -45,16 +45,14 @@ class ModuleAutoload extends \BackendModule
 		// Create the config/autoload.php file
 		if (\Input::post('FORM_SUBMIT') == 'tl_autoload')
 		{
+			$arrModules = \Input::post('modules');
+
 			// Always scan all modules in ide_compat mode
 			if (\Input::post('ide_compat'))
 			{
 				$arrModules = array_filter(scan(TL_ROOT . '/system/modules'), function($e) {
 					return is_dir(TL_ROOT . '/system/modules/' . $e) ? $e : null;
 				});
-			}
-			else
-			{
-				$arrModules = \Input::post('modules');
 			}
 
 			$intYear = date('Y');
@@ -77,21 +75,23 @@ class ModuleAutoload extends \BackendModule
 					}
 
 					$intClassWidth = 0;
+					$arrFiles = array();
 					$arrClassLoader = array();
 					$arrNamespaces = array();
 
-					$arrFiles = scan(TL_ROOT . '/system/modules/' . $strModule);
+					// Recursively scan all subfolders
+					$objFiles = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule));
 
-					// Support subfolders
-					foreach ($arrFiles as $strFolder)
+					// Get all PHP files
+					foreach ($objFiles as $objFile)
 					{
-						if ($strFolder != 'config' && $strFolder != 'dca' && $strFolder != 'html' && $strFolder != 'languages' && $strFolder != 'templates')
+						if ($objFile->isFile() && $objFile->getExtension() == 'php')
 						{
-							if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFolder))
+							$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
+
+							if (strncmp($strRelpath, 'config/', 7) !== 0 && strncmp($strRelpath, 'dca/', 4) !== 0 && strncmp($strRelpath, 'html/', 5) !== 0 && strncmp($strRelpath, 'languages/', 10) !== 0 && strncmp($strRelpath, 'templates/', 10) !== 0)
 							{
-								$files = scan(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFolder);
-								$files = array_map(function($val) use ($strFolder) { return $strFolder . '/' . $val; }, $files);
-								$arrFiles = array_merge($arrFiles, $files);
+								$arrFiles[] = $strRelpath;
 							}
 						}
 					}
@@ -99,11 +99,6 @@ class ModuleAutoload extends \BackendModule
 					// Scan for classes
 					foreach ($arrFiles as $strFile)
 					{
-						if (strrchr($strFile, '.') != '.php')
-						{
-							continue;
-						}
-
 						// Read the first 1200 characters of the file (should include the namespace tag)
 						$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
 						$strBuffer = fread($fh, 1200);

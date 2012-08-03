@@ -74,9 +74,9 @@ class CalendarEventsModel extends Contao\CalendarEventsModel {}
 class CalendarFeedModel extends Contao\CalendarFeedModel {}
 class CalendarModel extends Contao\CalendarModel {}
 class ModuleCalendar extends Contao\ModuleCalendar {}
+class ModuleEventlist extends Contao\ModuleEventlist {}
 class ModuleEventMenu extends Contao\ModuleEventMenu {}
 class ModuleEventReader extends Contao\ModuleEventReader {}
-class ModuleEventlist extends Contao\ModuleEventlist {}
 
 // comments
 class Comments extends Contao\Comments {}

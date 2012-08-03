@@ -27,9 +27,9 @@ ClassLoader::addClasses(array
 
 	// Modules
 	'Contao\ModuleCalendar'      => 'system/modules/calendar/modules/ModuleCalendar.php',
+	'Contao\ModuleEventlist'     => 'system/modules/calendar/modules/ModuleEventlist.php',
 	'Contao\ModuleEventMenu'     => 'system/modules/calendar/modules/ModuleEventMenu.php',
 	'Contao\ModuleEventReader'   => 'system/modules/calendar/modules/ModuleEventReader.php',
-	'Contao\ModuleEventlist'     => 'system/modules/calendar/modules/ModuleEventlist.php',
 ));
 
 
