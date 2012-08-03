@@ -22,7 +22,17 @@ class Cache extends Contao\Cache {}
 class ClassLoader extends Contao\ClassLoader {}
 class Combiner extends Contao\Combiner {}
 class Config extends Contao\Config {}
-class Controller extends Contao\Controller {}
+abstract class Controller extends Contao\Controller {}
+class Database_Installer extends Contao\Database_Installer {}
+class Database_Mysql_Result extends Contao\Database_Mysql_Result {}
+class Database_Mysql_Statement extends Contao\Database_Mysql_Statement {}
+class Database_Mysql extends Contao\Database_Mysql {}
+class Database_Mysqli_Result extends Contao\Database_Mysqli_Result {}
+class Database_Mysqli_Statement extends Contao\Database_Mysqli_Statement {}
+class Database_Mysqli extends Contao\Database_Mysqli {}
+abstract class Database_Result extends Contao\Database_Result {}
+abstract class Database_Statement extends Contao\Database_Statement {}
+class Database_Updater extends Contao\Database_Updater {}
 abstract class Database extends Contao\Database {}
 class Date extends Contao\Date {}
 class DcaExtractor extends Contao\DcaExtractor {}
@@ -42,30 +52,20 @@ class Input extends Contao\Input {}
 class Message extends Contao\Message {}
 class Model_Collection extends Contao\Model_Collection {}
 class Model_QueryBuilder extends Contao\Model_QueryBuilder {}
-class Model extends Contao\Model {}
+abstract class Model extends Contao\Model {}
 class Request extends Contao\Request {}
 class RequestToken extends Contao\RequestToken {}
 class Search extends Contao\Search {}
 class Session extends Contao\Session {}
 class String extends Contao\String {}
-class System extends Contao\System {}
-class Template extends Contao\Template {}
+abstract class System extends Contao\System {}
+abstract class Template extends Contao\Template {}
 class TemplateLoader extends Contao\TemplateLoader {}
 abstract class User extends Contao\User {}
 class Validator extends Contao\Validator {}
 abstract class Widget extends Contao\Widget {}
 class ZipReader extends Contao\ZipReader {}
 class ZipWriter extends Contao\ZipWriter {}
-class Database_Installer extends Contao\Database_Installer {}
-class Database_Mysql_Result extends Contao\Database_Mysql_Result {}
-class Database_Mysql_Statement extends Contao\Database_Mysql_Statement {}
-class Database_Mysql extends Contao\Database_Mysql {}
-class Database_Mysqli_Result extends Contao\Database_Mysqli_Result {}
-class Database_Mysqli_Statement extends Contao\Database_Mysqli_Statement {}
-class Database_Mysqli extends Contao\Database_Mysqli {}
-abstract class Database_Result extends Contao\Database_Result {}
-abstract class Database_Statement extends Contao\Database_Statement {}
-class Database_Updater extends Contao\Database_Updater {}
 
 // calendar
 class Calendar extends Contao\Calendar {}
@@ -87,13 +87,13 @@ class ModuleComments extends Contao\ModuleComments {}
 // core
 class Ajax extends Contao\Ajax {}
 class Automator extends Contao\Automator {}
-class Backend extends Contao\Backend {}
+abstract class Backend extends Contao\Backend {}
 abstract class BackendModule extends Contao\BackendModule {}
 class BackendTemplate extends Contao\BackendTemplate {}
 class BackendUser extends Contao\BackendUser {}
 class DataContainer extends Contao\DataContainer {}
 class FileUpload extends Contao\FileUpload {}
-class Frontend extends Contao\Frontend {}
+abstract class Frontend extends Contao\Frontend {}
 class FrontendTemplate extends Contao\FrontendTemplate {}
 class FrontendUser extends Contao\FrontendUser {}
 abstract class Hybrid extends Contao\Hybrid {}

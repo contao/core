@@ -121,10 +121,14 @@ class ModuleAutoload extends \BackendModule
 							{
 								$arrNamespaces[] = $strNamespace;
 							}
-							else
-							{
-								$arrCompat[$strModule][] = basename($strFile, '.php');
-							}
+
+							// Add the ide_compat information
+							$arrCompat[$strModule][] = array
+							(
+								'namespace' => $strNamespace,
+								'class'     => basename($strFile, '.php'),
+								'abstract'  => preg_match('/^.*abstract class [^;]+.*$/s', $strBuffer)
+							);
 
 							$strNamespace .=  '\\';
 						}
@@ -298,67 +302,17 @@ EOT
 EOT
 				);
 
-				$arrLibrary = array();
-
-				// library/Contao
-				foreach (scan(TL_ROOT . '/system/library/Contao') as $strFile)
-				{
-					if (strncmp($strFile, '.', 1) === 0)
-					{
-						continue;
-					}
-
-					if (is_file(TL_ROOT . '/system/library/Contao/' . $strFile))
-					{
-						$arrLibrary[] = basename($strFile, '.php');
-					}
-					elseif ($strFile != 'Database')
-					{
-						foreach (scan(TL_ROOT . '/system/library/Contao/' . $strFile) as $strSubfile)
-						{
-							if (is_file(TL_ROOT . '/system/library/Contao/' . $strFile . '/' . $strSubfile))
-							{
-								$arrLibrary[] = basename($strFile, '.php') . '_' . basename($strSubfile, '.php');
-							}
-						}
-					}
-				}
-
-				// library/Contao/Database
-				foreach (scan(TL_ROOT . '/system/library/Contao/Database') as $strFile)
-				{
-					if (strncmp($strFile, '.', 1) === 0)
-					{
-						continue;
-					}
-
-					if (is_file(TL_ROOT . '/system/library/Contao/Database/' . $strFile))
-					{
-						$arrLibrary[] = 'Database_' . basename($strFile, '.php');
-					}
-					else
-					{
-						foreach (scan(TL_ROOT . '/system/library/Contao/Database/' . $strFile) as $strSubfile)
-						{
-							if (is_file(TL_ROOT . '/system/library/Contao/Database/' . $strFile . '/' . $strSubfile))
-							{
-								$arrLibrary[] = 'Database_' . basename($strFile, '.php') . '_' . basename($strSubfile, '.php');
-							}
-						}
-					}
-				}
-
-				array_unshift($arrCompat, $arrLibrary);
-				$arrIsAbstract = array('Database', 'Database_Statement', 'Database_Result', 'Files', 'User', 'Widget', 'BackendModule', 'Events', 'ContentElement', 'Hybrid', 'Module', 'ModuleNews');
+				// Prepend the library array
+				array_unshift($arrCompat, $this->scanLibrary('Contao'));
 
 				// Add the classes
 				foreach ($arrCompat as $strModule=>$arrClasses)
 				{
 					$objFile->append("\n// " . ($strModule ?: 'library'));
 
-					foreach ($arrClasses as $strClass)
+					foreach ($arrClasses as $arrClass)
 					{
-						$objFile->append((in_array($strClass, $arrIsAbstract) ? 'abstract ' : '') . "class $strClass extends Contao\\$strClass {}");
+						$objFile->append(($arrClass['abstract'] ? 'abstract ' : '') . 'class ' . $arrClass['class'] . ' extends ' . $arrClass['namespace'] . '\\' . $arrClass['class'] . ' {}');
 					}
 				}
 
@@ -382,7 +336,6 @@ EOT
 		}
 
 		$this->Template->modules = $arrModules;
-
 		$this->Template->messages = \Message::generate();
 		$this->Template->href = $this->getReferer(true);
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']);
@@ -396,5 +349,47 @@ EOT
 		$this->Template->submitButton = specialchars($GLOBALS['TL_LANG']['MSC']['continue']);
 		$this->Template->options = $GLOBALS['TL_LANG']['tl_merge']['options'];
 		$this->Template->ide_compat = $GLOBALS['TL_LANG']['tl_merge']['ide_compat'];
+	}
+
+
+	/**
+	 * Recursively scan a library folder for class names (Pear style)
+	 * @param string
+	 * @param string
+	 * @return array
+	 */
+	protected function scanLibrary($strPath, $strPrefix='')
+	{
+		$arrReturn = array();
+
+		foreach (scan(TL_ROOT . '/system/library/' . $strPath) as $strFile)
+		{
+			if (strncmp($strFile, '.', 1) === 0)
+			{
+				continue;
+			}
+
+			if (is_dir(TL_ROOT . '/system/library/' . $strPath . '/' . $strFile))
+			{
+				$arrReturn = array_merge($arrReturn, $this->scanLibrary($strPath . '/' . $strFile, $strPrefix . $strFile . '_'));
+			}
+			else
+			{
+				// Read the first 1200 characters of the file (should include the namespace tag)
+				$fh = fopen(TL_ROOT . '/system/library/' . $strPath . '/' . $strFile, 'rb');
+				$strBuffer = fread($fh, 1200);
+				fclose($fh);
+
+				// Add the ide_compat information
+				$arrReturn[] = array
+				(
+					'namespace' => 'Contao',
+					'class'     => $strPrefix . basename($strFile, '.php'),
+					'abstract'  => preg_match('/^.*abstract class [^;]+.*$/s', $strBuffer)
+				);
+			}
+		}
+
+		return $arrReturn;
 	}
 }
