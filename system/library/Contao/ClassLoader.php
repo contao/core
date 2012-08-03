@@ -42,6 +42,12 @@ class ClassLoader
 	);
 
 	/**
+	 * Class mapping
+	 * @var array
+	 */
+	protected static $classMapping = array();
+
+	/**
 	 * Known classes
 	 * @var array
 	 */
@@ -144,6 +150,53 @@ class ClassLoader
 
 
 	/**
+	 * Add a class mapping
+	 *
+	 * @param string $name The origin class name
+	 * @param string $target The target class name
+	 */
+	public static function addClassMapping($name, $target)
+	{
+		// prepend mapping to allow overwrite
+		if (isset(self::$classMapping[$name]))
+		{
+			self::$classMapping[$name][] = $target;
+		}
+
+		// or add new mapping
+		else
+		{
+			self::$classMapping[$name] = array($target);
+		}
+	}
+
+
+	/**
+	 * Add a class mapping
+	 *
+	 * @param array $mappings An mapping array with origin class as key and target class as value.
+	 */
+	public static function addClassMappings($mappings)
+	{
+		foreach ($mappings as $name => $target)
+		{
+			self::addClassMapping($name, $target);
+		}
+	}
+
+
+	/**
+	 * Return the class mapping as array
+	 *
+	 * @return array An array of all namespace mappings
+	 */
+	public static function getClassMappings()
+	{
+		return self::$classMapping;
+	}
+
+
+	/**
 	 * Add a new class with its file path
 	 * 
 	 * @param string $class The class name
@@ -203,7 +256,87 @@ class ClassLoader
 				$GLOBALS['TL_DEBUG']['classes_set'][] = $class;
 			}
 
+			if (strpos($class, '\\') !== false && !preg_match('#^Runtime\\\\#', $class))
+			{
+				trigger_error('You should use the runtime namespace when using your class, please prepend Runtime\\ to your namespaced class ' . $class . '!', E_USER_WARNING);
+			}
+
 			include TL_ROOT . '/' . self::$classes[$class];
+		}
+
+		// Find class in the class mappings
+		elseif (isset(self::$classMapping[$class]))
+		{
+			$alias = false;
+
+			$origin = preg_replace('#^Runtime\\\\#', '', $class);
+			if (!in_array($origin, self::$classMapping[$class]))
+			{
+				array_unshift(self::$classMapping[$class], $origin);
+			}
+
+			foreach (self::$classMapping[$class] as $target)
+			{
+				// The class file is set in the mapper
+				if (isset(self::$classes[$target]))
+				{
+					if ($GLOBALS['TL_CONFIG']['debugMode'])
+					{
+						$GLOBALS['TL_DEBUG']['classes_set'][] = $class;
+					}
+
+					include_once TL_ROOT . '/' . self::$classes[$target];
+
+					$alias = $target;
+				}
+
+				// Find namespaced classes by PSR-0
+				else if (strpos($target, '\\') !== false && ($file = self::findPSR0($target)))
+				{
+					if ($GLOBALS['TL_CONFIG']['debugMode'])
+					{
+						$GLOBALS['TL_DEBUG']['classes_set'][] = $class;
+					}
+
+					include_once TL_ROOT . '/' . $file;
+
+					$alias = $target;
+				}
+			}
+
+			if ($alias)
+			{
+				if ($GLOBALS['TL_CONFIG']['debugMode'])
+				{
+					$GLOBALS['TL_DEBUG']['classes_aliased'][] = $class . ' <span style="color:#999">(' . $target . ' &rarr; ' . $class . ')</span>';
+				}
+
+				// Create an alias for the mapped class
+				class_alias($alias, $class);
+			}
+		}
+
+		// Find namespaced classes by PSR-0
+		elseif (strpos($class, '\\') !== false && ($file = self::findPSR0($class)))
+		{
+			if (!preg_match('#^Runtime\\\\#', $class))
+			{
+				trigger_error('You should use the runtime namespace when using your class, please prepend Runtime\\ to your namespaced class ' . $class . '!', E_USER_WARNING);
+
+				$alias = false;
+			}
+			else
+			{
+				$alias = $class;
+				$class = preg_replace('#^Runtime\\\\#', '', $class);
+			}
+
+			include TL_ROOT . '/' . $file;
+
+			if ($alias)
+			{
+				class_alias($class, $alias);
+			}
 		}
 
 		// Find the class in the registered namespaces
@@ -242,6 +375,26 @@ class ClassLoader
 		return '';
 	}
 
+
+	protected static function findPSR0($class)
+	{
+		// use preg_split, to split double delimiter even as single delimiter
+		$arrParts = preg_split('#\\\\+#', $class);
+
+		if ($arrParts[0] == 'Runtime')
+		{
+			array_shift($arrParts);
+		}
+
+		$strFile = 'system/modules/' . implode('/', $arrParts) . '.php';
+
+		if (file_exists(TL_ROOT . '/' . $strFile))
+		{
+			return $strFile;
+		}
+
+		return false;
+	}
 
 	/**
 	 * Register the autoloader

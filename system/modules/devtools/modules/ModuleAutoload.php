@@ -77,9 +77,12 @@ class ModuleAutoload extends \BackendModule
 					}
 
 					$intClassWidth = 0;
+					$intClassMappingWith = 0;
 					$arrClassLoader = array();
 					$arrNamespaces = array();
+					$arrClassMapping = array();
 
+					$arrClassFolders = array();
 					$arrFiles = scan(TL_ROOT . '/system/modules/' . $strModule);
 
 					// Support subfolders
@@ -92,8 +95,19 @@ class ModuleAutoload extends \BackendModule
 								$files = scan(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFolder);
 								$files = array_map(function($val) use ($strFolder) { return $strFolder . '/' . $val; }, $files);
 								$arrFiles = array_merge($arrFiles, $files);
+
+								$files = array_filter($files, function($val) use ($strModule) {
+									return is_dir(TL_ROOT . '/system/modules/' . $strModule . '/' . $val);
+								});
+								$arrClassFolders = array_merge($arrClassFolders, $files);
 							}
 						}
+					}
+
+					// Scan with PSR-0 for classes
+					foreach ($arrClassFolders as $strClassFolder)
+					{
+						$this->scanPSR0($strModule, $strClassFolder, basename($strClassFolder), $intClassWidth, $intClassMappingWith, $arrClassLoader, $arrClassMapping, $arrCompat);
 					}
 
 					// Scan for classes
@@ -116,17 +130,35 @@ class ModuleAutoload extends \BackendModule
 						else
 						{
 							$strNamespace = preg_replace('/^.*namespace ([^;]+).*$/s', '$1', $strBuffer);
+						}
 
+						$strPSR0Namespace = str_replace('/', '\\', dirname($strModule . '/' . $strFile));
+
+						// Skip class that follow the PSR-0 naming
+						if ($strPSR0Namespace == $strNamespace)
+						{
+							$strRuntimeNamespace = 'Runtime\\' . $strNamespace;
+							$strClassName = basename($strFile, '.php');
+							$strClass = $strNamespace . '\\' . $strClassName;
+							$strRuntimeClass = $strRuntimeNamespace . '\\' . $strClassName;
+
+							// Check file for class mappings
+							$strRuntimeClass = $this->checkClassMapping($strModule, $strFile, $strClassName, $strClass, $strRuntimeClass, $arrClassMapping, $intClassMappingWith);
+
+							$arrCompat[$strModule][$strRuntimeClass] = $strClass;
+							continue;
+						}
+						else if ($strNamespace)
+						{
 							if ($strNamespace != 'Contao')
 							{
-								$arrNamespaces[] = $strNamespace;
-							}
-							else
-							{
-								$arrCompat[$strModule][] = basename($strFile, '.php');
+								$arrNamespaces[$strNamespace] = $strNamespace;
 							}
 
-							$strNamespace .=  '\\';
+							$strNamespace .= '\\';
+
+							$strClass = basename($strFile, '.php');
+							$arrCompat[$strModule][$strClass] = $strNamespace . $strClass;
 						}
 
 						$strKey = $strNamespace . basename($strFile, '.php');
@@ -153,8 +185,8 @@ class ModuleAutoload extends \BackendModule
 						}
 					}
 
-					// Neither classes nor templates found
-					if (empty($arrClassLoader) && empty($arrTplLoader))
+					// Neither classes, templates nor class mappings found
+					if (empty($arrClassLoader) && empty($arrTplLoader) && empty($arrClassMapping))
 					{
 						continue;
 					}
@@ -199,6 +231,32 @@ EOT
 						foreach ($arrNamespaces as $strNamespace)
 						{
 							$objFile->append("\t'" . $strNamespace . "',");
+						}
+
+						$objFile->append('));');
+					}
+
+					// Classes mapping
+					$arrClassMapping = array_unique($arrClassMapping);
+
+					if (!empty($arrClassMapping))
+					{
+						$objFile->append(
+<<<EOT
+
+
+/**
+ * Register class mapping
+ */
+ClassLoader::addClassMappings(array
+(
+EOT
+						);
+
+						foreach ($arrClassMapping as $strOriginClass => $strTargetClass)
+						{
+							$strOriginClass = "'" . $strOriginClass . "'";
+							$objFile->append("\t" . str_pad($strOriginClass, $intClassMappingWith+2) . " => '" . $strTargetClass . "',");
 						}
 
 						$objFile->append('));');
@@ -273,6 +331,26 @@ EOT
 			// IDE compatibility
 			if (\Input::post('ide_compat'))
 			{
+				// Reverse mapping classes to modules and remove duplicate classes
+				$arrModules = array_keys($arrCompat);
+				$arrClasses = array();
+				foreach ($arrModules as $strModule)
+				{
+					$arrModuleClasses = array_combine(
+						array_keys($arrCompat[$strModule]),
+						array_fill(0, count($arrCompat[$strModule]), $strModule)
+					);
+					$arrIntersect = array_intersect_key($arrClasses, $arrModuleClasses);
+
+					// Remove classes from previous modules
+					foreach ($arrIntersect as $strClass => $strInModules)
+					{
+						unset($arrCompat[$strInModules][$strClass]);
+					}
+
+					$arrClasses = array_merge($arrClasses, $arrModuleClasses);
+				}
+
 				$objFile = new \File('system/helper/ide_compat.php');
 				$objFile->write(
 <<<EOT
@@ -310,7 +388,8 @@ EOT
 
 					if (is_file(TL_ROOT . '/system/library/Contao/' . $strFile))
 					{
-						$arrLibrary[] = basename($strFile, '.php');
+						$strClass = basename($strFile, '.php');
+						$arrLibrary[$strClass] = 'Contao\\' . $strClass;
 					}
 					elseif ($strFile != 'Database')
 					{
@@ -318,7 +397,8 @@ EOT
 						{
 							if (is_file(TL_ROOT . '/system/library/Contao/' . $strFile . '/' . $strSubfile))
 							{
-								$arrLibrary[] = basename($strFile, '.php') . '_' . basename($strSubfile, '.php');
+								$strClass = basename($strFile, '.php') . '_' . basename($strSubfile, '.php');
+								$arrLibrary[$strClass] = 'Contao\\' . $strClass;
 							}
 						}
 					}
@@ -334,7 +414,8 @@ EOT
 
 					if (is_file(TL_ROOT . '/system/library/Contao/Database/' . $strFile))
 					{
-						$arrLibrary[] = 'Database_' . basename($strFile, '.php');
+						$strClass = 'Database_' . basename($strFile, '.php');
+						$arrLibrary[$strClass] = 'Contao\\' . $strClass;
 					}
 					else
 					{
@@ -342,7 +423,8 @@ EOT
 						{
 							if (is_file(TL_ROOT . '/system/library/Contao/Database/' . $strFile . '/' . $strSubfile))
 							{
-								$arrLibrary[] = 'Database_' . basename($strFile, '.php') . '_' . basename($strSubfile, '.php');
+								$strClass = 'Database_' . basename($strFile, '.php') . '_' . basename($strSubfile, '.php');
+								$arrLibrary[$strClass] = 'Contao\\' . $strClass;
 							}
 						}
 					}
@@ -355,11 +437,35 @@ EOT
 				foreach ($arrCompat as $strModule=>$arrClasses)
 				{
 					$objFile->append("\n// " . ($strModule ?: 'library'));
+					$strNamespace = false;
+					$strIndent = '';
 
-					foreach ($arrClasses as $strClass)
+					foreach ($arrClasses as $strClass => $strBase)
 					{
-						$objFile->append((in_array($strClass, $arrIsAbstract) ? 'abstract ' : '') . "class $strClass extends Contao\\$strClass {}");
+						if (strpos($strClass, '\\') !== false)
+						{
+							$strNewNamespace = preg_replace('#\\\\[^\\\\]+$#', '', $strClass);
+						}
+						else
+						{
+							$strNewNamespace = '';
+						}
+						if ($strNamespace !== $strNewNamespace)
+						{
+							if ($strNamespace !== false)
+							{
+								$objFile->append("}");
+							}
+
+							$strNamespace = $strNewNamespace;
+							$strClass = preg_replace('#^.*\\\\#', '', $strClass);
+							$objFile->append("namespace $strNamespace {");
+						}
+
+						$objFile->append("\t" . (in_array($strClass, $arrIsAbstract) ? 'abstract ' : '') . "class $strClass extends $strBase {}");
 					}
+
+					$objFile->append("}");
 				}
 
 				$objFile->close();
@@ -396,5 +502,94 @@ EOT
 		$this->Template->submitButton = specialchars($GLOBALS['TL_LANG']['MSC']['continue']);
 		$this->Template->options = $GLOBALS['TL_LANG']['tl_merge']['options'];
 		$this->Template->ide_compat = $GLOBALS['TL_LANG']['tl_merge']['ide_compat'];
+	}
+
+
+	/**
+	 * Search a directory for PSR-0 compliant classes.
+	 *
+	 * @param string $strModule
+	 * @param string $strFolder
+	 * @param string $strNamespace
+	 * @param int $intClassWidth
+	 * @param array $arrClassLoader
+	 * @param array $arrNamespaceMaps
+	 * @param array $arrCompat
+	 */
+	protected function scanPSR0($strModule, $strFolder, $strNamespace, &$intClassWidth, &$intClassMappingWith, &$arrClassLoader, &$arrClassMapping, &$arrCompat)
+	{
+		$arrFiles = scan(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFolder);
+
+		$arrFiles = array_map(function($val) use ($strFolder, $strNamespace, &$arrNamespaceMaps) { return $strFolder . '/' . $val; }, $arrFiles);
+
+		// Scan for classes
+		foreach ($arrFiles as $strFile)
+		{
+			if (strrchr($strFile, '.') != '.php')
+			{
+				if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile)) {
+					$this->scanPSR0($strModule, $strFile, $strNamespace . '\\' . basename($strFile), $intClassWidth, $intClassMappingWith, $arrClassLoader, $arrClassMapping, $arrCompat);
+				}
+
+				continue;
+			}
+
+			$strRuntimeNamespace = 'Runtime\\' . $strNamespace;
+			$strClassName = basename($strFile, '.php');
+			$strClass = $strNamespace . '\\' . $strClassName;
+			$strRuntimeClass = $strRuntimeNamespace . '\\' . $strClassName;
+
+			// Check file for class mappings
+			$this->checkClassMapping($strModule, $strFile, $strClassName, $strClass, $strRuntimeClass, $arrClassMapping, $intClassMappingWith);
+
+			// Add class to compat file
+			$arrCompat[$strModule][$strRuntimeNamespace][basename($strFile, '.php')] = $strClass;
+		}
+	}
+
+	/**
+	 * Check a class file for mapping annotations @Overwrite
+	 *
+	 * @param string $strModule Name of the module.
+	 * @param string $strFile Name of the file, including folders within the module directory.
+	 * @param string $strClassName Name of the class, e.a. Example\My\Class.
+	 * @param string $strRuntimeClass Name of the Runtime\ class, e.a. Runtime\Example\My\Class.
+	 * @param array $arrClassMapping Array containing the class mappings.
+	 * @param int $intClassMappingWith Max string size in class mappings array.
+	 * @return string The target runtime class.
+	 */
+	protected function checkClassMapping($strModule, $strFile, $strClassName, $strClass, $strRuntimeClass, &$arrClassMapping, &$intClassMappingWith)
+	{
+		// Read until class declaration found
+		$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
+		$strBuffer = '';
+		do {
+			$strBuffer .= fread($fh, 1200);
+		} while (strpos($strBuffer, 'class ' . $strClassName) === false && !feof($fh));
+		fclose($fh);
+
+		// search for class documentation
+		if (preg_match('#/\*\*(.*)\*/[\s\n\r]*class ' . preg_quote($strClassName) . '#sU', $strBuffer, $arrMatch)) {
+			$strClassComment = $arrMatch[1];
+
+			if (preg_match('#@Overwrite ([a-zA-Z0-0_\\\\]+)#', $strClassComment, $arrMatch))
+			{
+				$strRuntimeClass = $arrMatch[1];
+
+				while ($strRuntimeClass[0] == '\\')
+				{
+					$strRuntimeClass = substr($strRuntimeClass, 1);
+				}
+				if (!preg_match('#^Runtime\\\\#', $strRuntimeClass))
+				{
+					$strRuntimeClass = 'Runtime\\' . $strRuntimeClass;
+				}
+			}
+		}
+
+		$arrClassMapping[$strRuntimeClass] = $strClass;
+		$intClassMappingWith = max(strlen($strRuntimeClass), $intClassMappingWith);
+
+		return $strRuntimeClass;
 	}
 }
