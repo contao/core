@@ -114,7 +114,15 @@ class ModuleAutoload extends \BackendModule
 
 							if ($strNamespace != 'Contao')
 							{
-								$arrNamespaces[] = $strNamespace;
+								// Register only the first chunk as namespace
+								if (strpos($strNamespace, '\\') !== false)
+								{
+									$arrNamespaces[] = substr($strNamespace, 0, strpos($strNamespace, '\\'));
+								}
+								else
+								{
+									$arrNamespaces[] = $strNamespace;
+								}
 							}
 
 							// Add the ide_compat information
@@ -222,15 +230,18 @@ EOT
 
 						foreach ($arrClassLoader as $strClass=>$strPath)
 						{
+							$strRelpath = str_replace('system/modules/' . $strModule . '/', '', $strPath);
+							$strBasedir = substr($strRelpath, 0, strpos($strRelpath, '/'));
+
 							if ($strGroup === null)
 							{
-								$strGroup = dirname($strPath);
-								$objFile->append("\t// " . ucfirst(basename($strGroup)));
+								$strGroup = $strBasedir;
+								$objFile->append("\t// " . ucfirst($strBasedir));
 							}
-							elseif (dirname($strPath) != $strGroup)
+							elseif ($strBasedir != $strGroup)
 							{
-								$strGroup = dirname($strPath);
-								$objFile->append("\n\t// " . ucfirst(basename($strGroup)));
+								$strGroup = $strBasedir;
+								$objFile->append("\n\t// " . ucfirst($strBasedir));
 							}
 
 							$strClass = "'" . $strClass . "'";
