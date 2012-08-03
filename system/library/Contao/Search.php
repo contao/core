@@ -43,6 +43,12 @@ class Search extends \System
 	 */
 	protected static $objInstance;
 
+	/**
+	 * IndexPage object
+	 * @var object
+	 */
+	protected $objIndexPage;
+
 
 	/**
 	 * Index a page
@@ -71,7 +77,6 @@ class Search extends \System
 
 		// Replace special characters
 		$strContent = str_replace(array("\n", "\r", "\t", '&#160;', '&nbsp;'), ' ', $arrData['content']);
-		unset($arrData['content']);
 
 		$arrOuter = array();
 		$arrInner = array();
@@ -97,6 +102,19 @@ class Search extends \System
 
 			$strContent = substr($strContent, 0, $arrOuter[0][1]) . substr($strContent, (strlen($arrInner[0][0]) + $arrInner[0][1]));
 		}
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['indexPage']) && is_array($GLOBALS['TL_HOOKS']['indexPage']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['indexPage'] as $callback)
+			{
+				$this->import($callback[0], 'objIndexPage', true);
+				$strContent = $this->objIndexPage->$callback[1]($strContent, $arrData, $arrSet);
+			}
+		}
+
+		// free memory
+		unset($arrData['content']);
 
 		// Calculate the checksum (see #4179)
 		$arrSet['checksum'] = md5(preg_replace('/ +/', ' ', strip_tags($strContent)));
@@ -395,7 +413,7 @@ class Search extends \System
 		$strQuery .= ", SUM(relevance) AS relevance";
 
 		// Get meta information from tl_search
-		$strQuery .= ", url, title, filesize, text, protected, groups";
+		$strQuery .= ", tl_search.*";
 
 		// Prepare keywords array
 		$arrAllKeywords = array();
