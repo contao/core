@@ -82,6 +82,7 @@ class ModuleAutoload extends \BackendModule
 						'autoload' => array(
 							'register_namespaces' => true,
 							'register_classes'    => true,
+							'register_templates'  => true,
 						),
 					);
 
@@ -275,7 +276,7 @@ EOT
 					}
 
 					// Templates
-					if (!empty($arrTplLoader))
+					if ($arrConfig['autoload']['register_templates'] && !empty($arrTplLoader))
 					{
 						$objFile->append(
 <<<EOT
