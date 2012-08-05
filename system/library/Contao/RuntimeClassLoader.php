@@ -47,13 +47,27 @@ class RuntimeClassLoader
 
 
 	/**
-	 * Add a new namespace
+	 * Add a class mapping
 	 * 
 	 * @param string $name The namespace name
 	 */
 	public static function addClassMapping($runtimeClass, $targetClass)
 	{
 		self::$classMapping[$runtimeClass] = $targetClass;
+	}
+
+
+	/**
+	 * Add multiple class mappings
+	 *
+	 * @param string $name The namespace name
+	 */
+	public static function addClassMappings($classMappings)
+	{
+		foreach ($classMappings as $runtimeClass => $targetClass)
+		{
+			self::addClassMapping($runtimeClass, $targetClass);
+		}
 	}
 
 
