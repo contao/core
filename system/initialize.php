@@ -60,12 +60,16 @@ require TL_ROOT . '/system/helper/interface.php';
 /**
  * Register the class and template loader
  */
+require TL_ROOT . '/system/library/Contao/RuntimeClassLoader.php';
+class_alias('Contao\\RuntimeClassLoader', 'RuntimeClassLoader');
+
 require TL_ROOT . '/system/library/Contao/ClassLoader.php';
 class_alias('Contao\\ClassLoader', 'ClassLoader');
 
 require TL_ROOT . '/system/library/Contao/TemplateLoader.php';
 class_alias('Contao\\TemplateLoader', 'TemplateLoader');
 
+RuntimeClassLoader::register();
 ClassLoader::scanAndRegister(); // config/autoload.php
 
 
