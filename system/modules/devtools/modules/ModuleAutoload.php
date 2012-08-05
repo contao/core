@@ -84,6 +84,7 @@ class ModuleAutoload extends \BackendModule
 							'register_classes'    => true,
 							'register_templates'  => true,
 						),
+						'autoload/map' => array(),
 					);
 
 					// load the config.ini
@@ -206,6 +207,34 @@ class ModuleAutoload extends \BackendModule
 
 EOT
 					);
+
+					// Class mapping
+					if (!empty($arrConfig['autoload/map']))
+					{
+						$objFile->append(
+<<<EOT
+
+
+/**
+ * Register class mappings
+ */
+RuntimeClassLoader::addClassMappings(array
+(
+EOT
+						);
+
+						foreach ($arrConfig['autoload/map'] as $strRuntimeClass => $strTargetClass)
+						{
+							if (strncmp($strRuntimeClass, 'Runtime\\', 8) !== 0)
+							{
+								$strRuntimeClass = 'Runtime\\' . $strRuntimeClass;
+							}
+
+							$objFile->append("\t'" . $strRuntimeClass . "' => '" . $strTargetClass . "',");
+						}
+
+						$objFile->append('));');
+					}
 
 					// Namespaces
 					if ($arrConfig['autoload']['register_namespaces'])
