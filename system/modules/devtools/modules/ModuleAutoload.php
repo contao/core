@@ -78,7 +78,11 @@ class ModuleAutoload extends \BackendModule
 					$arrFiles = array();
 					$arrClassLoader = array();
 					$arrNamespaces = array();
-					$arrConfig = array();
+					$arrConfig = array(
+						'autoload' => array(
+							'register_namespaces' => true,
+						),
+					);
 
 					// load the config.ini
 					if (file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/config.ini'))
@@ -202,11 +206,13 @@ EOT
 					);
 
 					// Namespaces
-					$arrNamespaces = array_unique($arrNamespaces);
-
-					if (!empty($arrNamespaces))
+					if ($arrConfig['autoload']['register_namespaces'])
 					{
-						$objFile->append(
+						$arrNamespaces = array_unique($arrNamespaces);
+
+						if (!empty($arrNamespaces))
+						{
+							$objFile->append(
 <<<EOT
 
 
@@ -216,14 +222,15 @@ EOT
 ClassLoader::addNamespaces(array
 (
 EOT
-						);
+							);
 
-						foreach ($arrNamespaces as $strNamespace)
-						{
-							$objFile->append("\t'" . $strNamespace . "',");
+							foreach ($arrNamespaces as $strNamespace)
+							{
+								$objFile->append("\t'" . $strNamespace . "',");
+							}
+
+							$objFile->append('));');
 						}
-
-						$objFile->append('));');
 					}
 
 					// Classes
