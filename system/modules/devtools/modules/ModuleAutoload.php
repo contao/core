@@ -81,6 +81,7 @@ class ModuleAutoload extends \BackendModule
 					$arrConfig = array(
 						'autoload' => array(
 							'register_namespaces' => true,
+							'register_classes'    => true,
 						),
 					);
 
@@ -234,7 +235,7 @@ EOT
 					}
 
 					// Classes
-					if (!empty($arrClassLoader))
+					if ($arrConfig['autoload']['register_classes'] && !empty($arrClassLoader))
 					{
 						$objFile->append(
 <<<EOT
