@@ -78,6 +78,21 @@ class ModuleAutoload extends \BackendModule
 					$arrFiles = array();
 					$arrClassLoader = array();
 					$arrNamespaces = array();
+					$arrConfig = array();
+
+					// load the config.ini
+					if (file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/config.ini'))
+					{
+						$arrTemp = parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/config.ini', true);
+
+						foreach (array_keys($arrConfig) as $strSection)
+						{
+							if (isset($arrTemp[$strSection]))
+							{
+								$arrConfig[$strSection] = array_merge($arrConfig[$strSection], $arrTemp[$strSection]);
+							}
+						}
+					}
 
 					// Recursively scan all subfolders
 					$objFiles = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule));
