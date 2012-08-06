@@ -13,11 +13,11 @@
 
 /**
  * This is the TCPDF (PDF generator) configuration file. See
- * plugins/tcpdf for more information.
+ * system/vendor/tcpdf for more information.
  */
 define('K_TCPDF_EXTERNAL_CONFIG', true);
-define('K_PATH_MAIN', TL_ROOT . '/system/vendor/TCPDF/');
-define('K_PATH_URL', Environment::get('base') . 'system/vendor/TCPDF/');
+define('K_PATH_MAIN', TL_ROOT . '/system/vendor/tcpdf/');
+define('K_PATH_URL', Environment::get('base') . 'system/vendor/tcpdf/');
 define('K_PATH_FONTS', K_PATH_MAIN . 'fonts/');
 define('K_PATH_CACHE', TL_ROOT . '/system/tmp/');
 define('K_PATH_URL_CACHE', TL_ROOT . '/system/tmp/');
