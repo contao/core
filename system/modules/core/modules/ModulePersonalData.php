@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (C) 2005-2012 Leo Feyer
- * 
+ *
  * @package Core
  * @link    http://www.contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -134,7 +134,7 @@ class ModulePersonalData extends \Module
 			$arrData['eval']['tableless'] = $this->tableless;
 			$arrData['eval']['required'] = ($this->User->$field == '' && $arrData['eval']['mandatory']) ? true : false;
 
-			$value = $this->User->$field;
+			$varValue = $this->User->$field;
 
 			// Call the load_callback
 			if (isset($arrData['load_callback']) && is_array($arrData['load_callback']))
@@ -144,12 +144,12 @@ class ModulePersonalData extends \Module
 					if (is_array($callback))
 					{
 						$this->import($callback[0]);
-						$value = $this->$callback[0]->$callback[1]($value);
+						$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
 					}
 				}
 			}
 
-			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $value));
+			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $varValue));
 
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
@@ -270,7 +270,7 @@ class ModulePersonalData extends \Module
 					if (is_array($callback))
 					{
 						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]();
+						$this->$callback[0]->$callback[1]($this->User, $this);
 					}
 				}
 			}
