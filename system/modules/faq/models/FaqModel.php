@@ -66,7 +66,7 @@ class FaqModel extends \Model
 	 * 
 	 * @param array $arrPids An array of FAQ category IDs
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no FAQs
+	 * @return \Model\Collection|null A collection of models or null if there are no FAQs
 	 */
 	public static function findPublishedByPids($arrPids)
 	{

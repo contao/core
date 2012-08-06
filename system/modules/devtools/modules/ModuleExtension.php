@@ -227,10 +227,10 @@ class ModuleExtension extends \BackendModule
 	/**
 	 * Return a new template object
 	 * @param string
-	 * @param \Database_Result
+	 * @param \Database\Result
 	 * @return \BackendTemplate
 	 */
-	protected function newTemplate($strTemplate, \Database_Result $objModule)
+	protected function newTemplate($strTemplate, \Database\Result $objModule)
 	{
 		$objTemplate = new \BackendTemplate($strTemplate);
 

@@ -10,7 +10,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-namespace Contao;
+namespace Contao\Model;
 
 
 /**
@@ -23,7 +23,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Model_QueryBuilder
+class QueryBuilder
 {
 
 	/**

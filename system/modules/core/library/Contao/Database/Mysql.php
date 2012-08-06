@@ -10,17 +10,17 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-namespace Contao;
+namespace Contao\Database;
 
 
 /**
- * MySQLi-specific database class
+ * MySQL-specific database class
  * 
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Database_Mysqli extends \Database
+class Mysql extends \Database
 {
 
 	/**
@@ -41,8 +41,28 @@ class Database_Mysqli extends \Database
 	 */
 	protected function connect()
 	{
-		@$this->resConnection = new \mysqli($this->arrConfig['dbHost'], $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbDatabase'], $this->arrConfig['dbPort']);
-		@$this->resConnection->set_charset($this->arrConfig['dbCharset']);
+		$strHost = $this->arrConfig['dbHost'];
+
+		if ($this->arrConfig['dbPort'])
+		{
+			$strHost .= ':' . $this->arrConfig['dbPort'];
+		}
+
+		if ($this->arrConfig['dbPconnect'])
+		{
+			$this->resConnection = @mysql_pconnect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass']);
+		}
+		else
+		{
+			$this->resConnection = @mysql_connect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass']);
+		}
+
+		if (is_resource($this->resConnection))
+		{
+			@mysql_query("SET sql_mode=''", $this->resConnection);
+			@mysql_query("SET NAMES " . $this->arrConfig['dbCharset'], $this->resConnection);
+			@mysql_select_db($this->arrConfig['dbDatabase'], $this->resConnection);
+		}
 	}
 
 
@@ -51,7 +71,7 @@ class Database_Mysqli extends \Database
 	 */
 	protected function disconnect()
 	{
-		@$this->resConnection->close();
+		@mysql_close($this->resConnection);
 	}
 
 
@@ -62,7 +82,12 @@ class Database_Mysqli extends \Database
 	 */
 	protected function get_error()
 	{
-		return @$this->resConnection->error;
+		if (is_resource($this->resConnection))
+		{
+			return mysql_error($this->resConnection);
+		}
+
+		return mysql_error();
 	}
 
 
@@ -83,7 +108,7 @@ class Database_Mysqli extends \Database
 		}
 		else
 		{
-			return "FIND_IN_SET(" . $strKey . ", '" . $this->resConnection->real_escape_string($varSet) . "')";
+			return "FIND_IN_SET(" . $strKey . ", '" . mysql_real_escape_string($varSet, $this->resConnection) . "')";
 		}
 	}
 
@@ -187,7 +212,7 @@ class Database_Mysqli extends \Database
 	 */
 	protected function set_database($strDatabase)
 	{
-		@$this->resConnection = new \mysqli($this->arrConfig['dbHost'], $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $strDatabase, $this->arrConfig['dbPort']);
+		return @mysql_select_db($strDatabase, $this->resConnection);
 	}
 
 
@@ -196,8 +221,8 @@ class Database_Mysqli extends \Database
 	 */
 	protected function begin_transaction()
 	{
-		@$this->resConnection->query("SET AUTOCOMMIT=0");
-		@$this->resConnection->query("BEGIN");
+		@mysql_query("SET AUTOCOMMIT=0", $this->resConnection);
+		@mysql_query("BEGIN", $this->resConnection);
 	}
 
 
@@ -206,8 +231,8 @@ class Database_Mysqli extends \Database
 	 */
 	protected function commit_transaction()
 	{
-		@$this->resConnection->query("COMMIT");
-		@$this->resConnection->query("SET AUTOCOMMIT=1");
+		@mysql_query("COMMIT", $this->resConnection);
+		@mysql_query("SET AUTOCOMMIT=1", $this->resConnection);
 	}
 
 
@@ -216,8 +241,8 @@ class Database_Mysqli extends \Database
 	 */
 	protected function rollback_transaction()
 	{
-		@$this->resConnection->query("ROLLBACK");
-		@$this->resConnection->query("SET AUTOCOMMIT=1");
+		@mysql_query("ROLLBACK", $this->resConnection);
+		@mysql_query("SET AUTOCOMMIT=1", $this->resConnection);
 	}
 
 
@@ -235,7 +260,7 @@ class Database_Mysqli extends \Database
 			$arrLocks[] = $table .' '. $mode;
 		}
 
-		@$this->resConnection->query("LOCK TABLES " . implode(', ', $arrLocks));
+		@mysql_query("LOCK TABLES " . implode(', ', $arrLocks));
 	}
 
 
@@ -244,7 +269,7 @@ class Database_Mysqli extends \Database
 	 */
 	protected function unlock_tables()
 	{
-		@$this->resConnection->query("UNLOCK TABLES");
+		@mysql_query("UNLOCK TABLES");
 	}
 
 
@@ -257,8 +282,8 @@ class Database_Mysqli extends \Database
 	 */
 	protected function get_size_of($strTable)
 	{
-		$objStatus = @$this->resConnection->query("SHOW TABLE STATUS LIKE '" . $strTable . "'")
-										  ->fetch_object();
+		$objStatus = @mysql_query("SHOW TABLE STATUS LIKE '" . $strTable . "'");
+		$objStatus = @mysql_fetch_object($objStatus);
 
 		return ($objStatus->Data_length + $objStatus->Index_length);
 	}
@@ -273,23 +298,23 @@ class Database_Mysqli extends \Database
 	 */
 	protected function get_next_id($strTable)
 	{
-		$objStatus = @$this->resConnection->query("SHOW TABLE STATUS LIKE '" . $strTable . "'")
-										  ->fetch_object();
+		$objStatus = @mysql_query("SHOW TABLE STATUS LIKE '" . $strTable . "'");
+		$objStatus = @mysql_fetch_object($objStatus);
 
 		return $objStatus->Auto_increment;
 	}
 
 
 	/**
-	 * Create a Database_Statement object
+	 * Create a Database\Statement object
 	 * 
 	 * @param resource $resConnection        The connection ID
 	 * @param boolean  $blnDisableAutocommit If true, autocommitting will be disabled
 	 * 
-	 * @return \Database_Statement The Database_Statement object
+	 * @return \Database\Mysql\Statement The Database\Statement object
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
-		return new \Database_Mysqli_Statement($resConnection, $blnDisableAutocommit);
+		return new \Database\Mysql\Statement($resConnection, $blnDisableAutocommit);
 	}
 }

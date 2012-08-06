@@ -39,7 +39,7 @@ class CalendarModel extends \Model
 	 * 
 	 * @param array $arrIds An array of IDs
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no calendars
+	 * @return \Model\Collection|null A collection of models or null if there are no calendars
 	 */
 	public static function findMultipleByIds($arrIds)
 	{

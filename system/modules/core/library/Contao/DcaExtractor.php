@@ -33,7 +33,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class DcaExtractor extends \Database_Installer
+class DcaExtractor extends \Database\Installer
 {
 
 	/**

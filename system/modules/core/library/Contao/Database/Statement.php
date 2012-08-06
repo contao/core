@@ -10,7 +10,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-namespace Contao;
+namespace Contao\Database;
 
 
 /**
@@ -30,7 +30,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-abstract class Database_Statement
+abstract class Statement
 {
 
 	/**
@@ -128,7 +128,7 @@ abstract class Database_Statement
 	 * 
 	 * @param string $strQuery The query string
 	 * 
-	 * @return \Database_Statement The statement object
+	 * @return \Database\Statement The statement object
 	 * 
 	 * @throws \Exception If $strQuery is empty
 	 */
@@ -179,7 +179,7 @@ abstract class Database_Statement
 	 * 
 	 * @param array The associative array
 	 * 
-	 * @return \Database_Statement The statement object
+	 * @return \Database\Statement The statement object
 	 */
 	public function set($arrParams)
 	{
@@ -216,7 +216,7 @@ abstract class Database_Statement
 	 * @param integer $intRows   The maximum number of rows
 	 * @param integer $intOffset The number of rows to skip
 	 * 
-	 * @return \Database_Statement The statement object
+	 * @return \Database\Statement The statement object
 	 */
 	public function limit($intRows, $intOffset=0)
 	{
@@ -238,7 +238,7 @@ abstract class Database_Statement
 	/**
 	 * Replace the wildcards and execute the query
 	 * 
-	 * @return \Database_Result The result object
+	 * @return \Database\Result The result object
 	 */
 	public function execute()
 	{
@@ -261,7 +261,7 @@ abstract class Database_Statement
 		$objResult = $this->query();
 
 		// Cache the result object
-		if ($objResult instanceof \Database_Result)
+		if ($objResult instanceof \Database\Result)
 		{
 			self::$arrCache[$strKey] = $objResult;
 		}
@@ -273,7 +273,7 @@ abstract class Database_Statement
 	/**
 	 * Execute the query uncached
 	 * 
-	 * @return \Database_Result The result object
+	 * @return \Database\Result The result object
 	 */
 	public function executeUncached()
 	{
@@ -294,7 +294,7 @@ abstract class Database_Statement
 	 * 
 	 * @param string $strQuery The query string
 	 * 
-	 * @return \Database_Result|\Database_Statement The result object or the statement object if there is no result set
+	 * @return \Database\Result|\Database\Statement The result object or the statement object if there is no result set
 	 * 
 	 * @throws \Exception If the query cannot be executed
 	 */
@@ -394,7 +394,7 @@ abstract class Database_Statement
 	/**
 	 * Debug a query
 	 * 
-	 * @param \Database_Result $objResult An optional result object
+	 * @param \Database\Result $objResult An optional result object
 	 */
 	protected function debugQuery($objResult=null)
 	{
@@ -514,12 +514,12 @@ abstract class Database_Statement
 
 
 	/**
-	 * Create a Database_Result object
+	 * Create a Database\Result object
 	 * 
 	 * @param resource $resResult The database result
 	 * @param string   $strQuery  The query string
 	 * 
-	 * @return \Database_Result The result object
+	 * @return \Database\Result The result object
 	 */
 	abstract protected function createResult($resResult, $strQuery);
 

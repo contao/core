@@ -840,9 +840,9 @@ class Theme extends \Backend
 	 * Add the table tl_theme
 	 * @param \DOMDocument
 	 * @param \DOMElement
-	 * @param \Database_Result
+	 * @param \Database\Result
 	 */
-	protected function addTableTlTheme(\DOMDocument $xml, \DOMElement $tables, \Database_Result $objTheme)
+	protected function addTableTlTheme(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -858,9 +858,9 @@ class Theme extends \Backend
 	 * Add the table tl_style_sheet
 	 * @param \DOMDocument
 	 * @param \DOMElement
-	 * @param \Database_Result
+	 * @param \Database\Result
 	 */
-	protected function addTableTlStyleSheet(\DOMDocument $xml, \DOMElement $tables, \Database_Result $objTheme)
+	protected function addTableTlStyleSheet(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -904,9 +904,9 @@ class Theme extends \Backend
 	 * Add the table tl_module
 	 * @param \DOMDocument
 	 * @param \DOMElement
-	 * @param \Database_Result
+	 * @param \Database\Result
 	 */
-	protected function addTableTlModule(\DOMDocument $xml, \DOMElement $tables, \Database_Result $objTheme)
+	protected function addTableTlModule(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -929,9 +929,9 @@ class Theme extends \Backend
 	 * Add the table tl_layout
 	 * @param \DOMDocument
 	 * @param \DOMElement
-	 * @param \Database_Result
+	 * @param \Database\Result
 	 */
-	protected function addTableTlLayout(\DOMDocument $xml, \DOMElement $tables, \Database_Result $objTheme)
+	protected function addTableTlLayout(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -954,9 +954,9 @@ class Theme extends \Backend
 	 * Add a data row to the XML document
 	 * @param \DOMDocument
 	 * @param \DOMElement
-	 * @param \Database_Result
+	 * @param \Database\Result
 	 */
-	protected function addDataRow(\DOMDocument $xml, \DOMElement $table, \Database_Result $objData)
+	protected function addDataRow(\DOMDocument $xml, \DOMElement $table, \Database\Result $objData)
 	{
 		$row = $xml->createElement('row');
 		$row = $table->appendChild($row);

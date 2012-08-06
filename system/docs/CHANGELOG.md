@@ -87,7 +87,7 @@ $GLOBALS['TL_CONFIG']['requestTokenWhitelist'][] = 'facebook.com';
 The code above can be added in the local configuration file.
 
 ### Changed
-Make the return value of `Database_Result::fetchEach()` an associative array
+Make the return value of `Database\Result::fetchEach()` an associative array
 with the ID as key and the requested field as value.
 
 ### Changed
@@ -327,7 +327,7 @@ Added a meta wizard to manage file meta information with a GUI.
 Replaced the default browser tooltips with the MooTools tips interface.
 
 ### New
-Added a magic method to the `Model` and `Model_Collection` classes, so you can
+Added a magic method to the `Model` and `Model\Collection` classes, so you can
 call `Model::findByName($name)` instead of `Model::findBy('name', $name)`. The
 first method call will be rewritten to the second one.
 

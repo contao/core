@@ -39,7 +39,7 @@ class FormFieldModel extends \Model
 	 * 
 	 * @param integer $intPid The form ID
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no form fields
+	 * @return \Model\Collection|null A collection of models or null if there are no form fields
 	 */
 	public static function findPublishedByPid($intPid)
 	{

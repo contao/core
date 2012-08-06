@@ -10,7 +10,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-namespace Contao;
+namespace Contao\Database;
 
 
 /**
@@ -31,7 +31,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-abstract class Database_Result
+abstract class Result
 {
 
 	/**
@@ -308,7 +308,7 @@ abstract class Database_Result
 	/**
 	 * Go to the first row of the current result
 	 * 
-	 * @return \Database_Result The result object
+	 * @return \Database\Result The result object
 	 */
 	public function first()
 	{
@@ -325,7 +325,7 @@ abstract class Database_Result
 	/**
 	 * Go to the previous row of the current result
 	 * 
-	 * @return \Database_Result|boolean The result object or false if there is no previous row
+	 * @return \Database\Result|boolean The result object or false if there is no previous row
 	 */
 	public function prev()
 	{
@@ -342,7 +342,7 @@ abstract class Database_Result
 	/**
 	 * Go to the next row of the current result
 	 * 
-	 * @return \Database_Result|boolean The result object or false if there is no next row
+	 * @return \Database\Result|boolean The result object or false if there is no next row
 	 */
 	public function next()
 	{
@@ -374,7 +374,7 @@ abstract class Database_Result
 	/**
 	 * Go to the last row of the current result
 	 * 
-	 * @return \Database_Result The result object
+	 * @return \Database\Result The result object
 	 */
 	public function last()
 	{
@@ -422,7 +422,7 @@ abstract class Database_Result
 	/**
 	 * Reset the current result
 	 * 
-	 * @return \Database_Result The result object
+	 * @return \Database\Result The result object
 	 */
 	public function reset()
 	{

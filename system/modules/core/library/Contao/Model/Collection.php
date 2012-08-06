@@ -10,7 +10,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-namespace Contao;
+namespace Contao\Model;
 
 
 /**
@@ -23,7 +23,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Model_Collection extends \System
+class Collection extends \System
 {
 
 	/**
@@ -34,7 +34,7 @@ class Model_Collection extends \System
 
 	/**
 	 * Database result
-	 * @var \Database_Result
+	 * @var \Database\Result
 	 */
 	protected $objResult;
 
@@ -60,10 +60,10 @@ class Model_Collection extends \System
 	/**
 	 * Store the database result and table name
 	 * 
-	 * @param \Database_Result $objResult The database result object
+	 * @param \Database\Result $objResult The database result object
 	 * @param string           $strTable  The table name
 	 */
-	public function __construct(\Database_Result $objResult, $strTable)
+	public function __construct(\Database\Result $objResult, $strTable)
 	{
 		parent::__construct();
 		$this->objResult = $objResult;
@@ -150,7 +150,7 @@ class Model_Collection extends \System
 	 * 
 	 * @param array $arrData The row data as array
 	 * 
-	 * @return \Model_Collection The model collection object
+	 * @return \Model\Collection The model collection object
 	 */
 	public function setRow(array $arrData)
 	{
@@ -167,7 +167,7 @@ class Model_Collection extends \System
 	/**
 	 * Save the current model
 	 * 
-	 * @return \Model_Collection The model collection object
+	 * @return \Model\Collection The model collection object
 	 */
 	public function save()
 	{
@@ -202,7 +202,7 @@ class Model_Collection extends \System
 	 * 
 	 * @param string $strKey The property name
 	 * 
-	 * @return \Model|\Model_Collection The model or a model collection if there are multiple rows
+	 * @return \Model|\Model\Collection The model or a model collection if there are multiple rows
 	 */
 	public function getRelated($strKey)
 	{
@@ -229,7 +229,7 @@ class Model_Collection extends \System
 	/**
 	 * Go to the first row
 	 * 
-	 * @return \Model_Collection The model collection object
+	 * @return \Model\Collection The model collection object
 	 */
 	public function first()
 	{
@@ -246,7 +246,7 @@ class Model_Collection extends \System
 	/**
 	 * Go to the previous row
 	 * 
-	 * @return \Model_Collection|false The model collection object or false if there is no previous row
+	 * @return \Model\Collection|false The model collection object or false if there is no previous row
 	 */
 	public function prev()
 	{
@@ -279,7 +279,7 @@ class Model_Collection extends \System
 	/**
 	 * Go to the next row
 	 * 
-	 * @return \Model_Collection|boolean The model collection object or false if there is no next row
+	 * @return \Model\Collection|boolean The model collection object or false if there is no next row
 	 */
 	public function next()
 	{
@@ -305,7 +305,7 @@ class Model_Collection extends \System
 	/**
 	 * Go to the last row
 	 * 
-	 * @return \Model_Collection The model collection object
+	 * @return \Model\Collection The model collection object
 	 */
 	public function last()
 	{
@@ -323,7 +323,7 @@ class Model_Collection extends \System
 	/**
 	 * Reset the model
 	 * 
-	 * @return \Model_Collection The model collection object
+	 * @return \Model\Collection The model collection object
 	 */
 	public function reset()
 	{

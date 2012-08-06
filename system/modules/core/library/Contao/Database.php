@@ -18,7 +18,7 @@ namespace Contao;
  * 
  * The class is responsible for connecting to the database, listing tables and
  * fields, handling transactions and locking tables. It also creates the related
- * Database_Statement and Database_Result objects.
+ * Database\Statement and Database\Result objects.
  * 
  * Usage:
  * 
@@ -151,7 +151,7 @@ abstract class Database
 
 		if (!isset(static::$arrInstances[$strKey]))
 		{
-			$strClass = 'Database_' . ucfirst(strtolower($arrConfig['dbDriver']));
+			$strClass = 'Database\\' . ucfirst(strtolower($arrConfig['dbDriver']));
 			static::$arrInstances[$strKey] = new $strClass($arrConfig);
 		}
 
@@ -160,11 +160,11 @@ abstract class Database
 
 
 	/**
-	 * Prepare a query and return a Database_Statement object
+	 * Prepare a query and return a Database\Statement object
 	 * 
 	 * @param string $strQuery The query string
 	 * 
-	 * @return \Database_Statement The Database_Statement object
+	 * @return \Database\Statement The Database\Statement object
 	 */
 	public function prepare($strQuery)
 	{
@@ -173,11 +173,11 @@ abstract class Database
 
 
 	/**
-	 * Execute a query and return a Database_Result object
+	 * Execute a query and return a Database\Result object
 	 * 
 	 * @param string $strQuery The query string
 	 * 
-	 * @return \Database_Result The Database_Result object
+	 * @return \Database\Result The Database\Result object
 	 */
 	public function execute($strQuery)
 	{
@@ -190,7 +190,7 @@ abstract class Database
 	 * 
 	 * @param string $strQuery The query string
 	 * 
-	 * @return \Database_Result The Database_Result object
+	 * @return \Database\Result The Database\Result object
 	 */
 	public function executeUncached($strQuery)
 	{
@@ -199,11 +199,11 @@ abstract class Database
 
 
 	/**
-	 * Execute a raw query and return a Database_Result object
+	 * Execute a raw query and return a Database\Result object
 	 * 
 	 * @param string $strQuery The query string
 	 * 
-	 * @return \Database_Result The Database_Result object
+	 * @return \Database\Result The Database\Result object
 	 */
 	public function query($strQuery)
 	{
@@ -547,12 +547,12 @@ abstract class Database
 
 
 	/**
-	 * Create a Database_Statement object
+	 * Create a Database\Statement object
 	 * 
 	 * @param resource $resConnection        The connection ID
 	 * @param boolean  $blnDisableAutocommit If true, autocommitting will be disabled
 	 * 
-	 * @return \Database_Statement The Database_Statement object
+	 * @return \Database\Statement The Database\Statement object
 	 */
 	abstract protected function createStatement($resConnection, $blnDisableAutocommit);
 }

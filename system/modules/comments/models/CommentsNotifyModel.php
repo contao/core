@@ -70,7 +70,7 @@ class CommentsNotifyModel extends \Model
 	 * @param string  $strSource The source element
 	 * @param integer $intParent The parent ID
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no active subscriptions
+	 * @return \Model\Collection|null A collection of models or null if there are no active subscriptions
 	 */
 	public static function findActiveBySourceAndParent($strSource, $intParent)
 	{

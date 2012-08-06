@@ -77,9 +77,9 @@ abstract class Model extends \System
 	/**
 	 * Load the relations and optionally process a result set
 	 * 
-	 * @param \Database_Result $objResult An optional database result
+	 * @param \Database\Result $objResult An optional database result
 	 */
-	public function __construct(\Database_Result $objResult=null)
+	public function __construct(\Database\Result $objResult=null)
 	{
 		parent::__construct();
 
@@ -276,7 +276,7 @@ abstract class Model extends \System
 	 * 
 	 * @param string $strKey The property name
 	 * 
-	 * @return \Model|\Model_Collection The model or a model collection if there are multiple rows
+	 * @return \Model|\Model\Collection The model or a model collection if there are multiple rows
 	 * 
 	 * @throws \Exception If $strKey is not a related field
 	 */
@@ -391,7 +391,7 @@ abstract class Model extends \System
 	 * @param mixed $varValue   The property value
 	 * @param array $arrOptions An optional options array
 	 * 
-	 * @return \Model_Collection|null The model collection or null if the result is empty
+	 * @return \Model\Collection|null The model collection or null if the result is empty
 	 */
 	public static function findBy($strColumn, $varValue, array $arrOptions=array())
 	{
@@ -411,7 +411,7 @@ abstract class Model extends \System
 	 * 
 	 * @param array $arrOptions An optional options array
 	 * 
-	 * @return \Model_Collection|null The model collection or null if the result is empty
+	 * @return \Model\Collection|null The model collection or null if the result is empty
 	 */
 	public static function findAll(array $arrOptions=array())
 	{
@@ -430,7 +430,7 @@ abstract class Model extends \System
 	 * @param string $name The method name
 	 * @param array  $args The passed arguments
 	 * 
-	 * @return \Model|\Model_Collection|null A model, model collection or null if the result is empty
+	 * @return \Model|\Model\Collection|null A model, model collection or null if the result is empty
 	 */
 	public static function __callStatic($name, $args)
 	{
@@ -461,7 +461,7 @@ abstract class Model extends \System
 	 * 
 	 * @param array $arrOptions The options array
 	 * 
-	 * @return \Model|\Model_Collection|null A model, model collection or null if the result is empty
+	 * @return \Model|\Model\Collection|null A model, model collection or null if the result is empty
 	 */
 	protected static function find(array $arrOptions)
 	{
@@ -471,7 +471,7 @@ abstract class Model extends \System
 		}
 
 		$arrOptions['table'] = static::$strTable;
-		$strQuery = \Model_QueryBuilder::find($arrOptions);
+		$strQuery = \Model\QueryBuilder::find($arrOptions);
 
 		$objStatement = \Database::getInstance()->prepare($strQuery);
 
@@ -500,18 +500,18 @@ abstract class Model extends \System
 		}
 
 		$objResult = static::postFind($objResult);
-		return ($arrOptions['return'] == 'Model') ? new static($objResult) : new \Model_Collection($objResult, static::$strTable);
+		return ($arrOptions['return'] == 'Model') ? new static($objResult) : new \Model\Collection($objResult, static::$strTable);
 	}
 
 
 	/**
 	 * Modify the database statement before it is executed
 	 * 
-	 * @param \Database_Statement $objStatement The database statement object
+	 * @param \Database\Statement $objStatement The database statement object
 	 * 
-	 * @return \Database_Statement The database statement object
+	 * @return \Database\Statement The database statement object
 	 */
-	protected static function preFind(\Database_Statement $objStatement)
+	protected static function preFind(\Database\Statement $objStatement)
 	{
 		return $objStatement;
 	}
@@ -520,11 +520,11 @@ abstract class Model extends \System
 	/**
 	 * Modify the database result before the model is created
 	 * 
-	 * @param \Database_Result $objResult The database result object
+	 * @param \Database\Result $objResult The database result object
 	 * 
-	 * @return \Database_Result The database result object
+	 * @return \Database\Result The database result object
 	 */
-	protected static function postFind(\Database_Result $objResult)
+	protected static function postFind(\Database\Result $objResult)
 	{
 		return $objResult;
 	}
@@ -545,7 +545,7 @@ abstract class Model extends \System
 			return 0;
 		}
 
-		$strQuery = \Model_QueryBuilder::count(array
+		$strQuery = \Model\QueryBuilder::count(array
 		(
 			'table'  => static::$strTable,
 			'column' => $strColumn,

@@ -10,7 +10,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-namespace Contao;
+namespace Contao\Database;
 
 
 /**
@@ -20,7 +20,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Database_Updater extends \Controller
+class Updater extends \Controller
 {
 
 	/**
@@ -478,11 +478,11 @@ class Database_Updater extends \Controller
 	/**
 	 * Create a content element
 	 * 
-	 * @param \Database_Result $objElement A database result object
+	 * @param \Database\Result $objElement A database result object
 	 * @param string           $strPtable  The name of the parent table
 	 * @param string           $strField   The name of the text column
 	 */
-	protected function createContentElement(\Database_Result $objElement, $strPtable, $strField)
+	protected function createContentElement(\Database\Result $objElement, $strPtable, $strField)
 	{
 		$set = array
 		(

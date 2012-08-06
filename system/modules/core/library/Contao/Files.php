@@ -71,7 +71,7 @@ abstract class Files
 			// Use FTP to modify files
 			if ($GLOBALS['TL_CONFIG']['useFTP'])
 			{
-				self::$objInstance = new \Files_Ftp();
+				self::$objInstance = new \Files\Ftp();
 			}
 
 			// HOOK: use the smhextended module
@@ -83,7 +83,7 @@ abstract class Files
 			// Use PHP to modify files
 			else
 			{
-				self::$objInstance = new \Files_Php();
+				self::$objInstance = new \Files\Php();
 			}
 		}
 

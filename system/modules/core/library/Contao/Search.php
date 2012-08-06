@@ -274,7 +274,7 @@ class Search extends \System
 	 * @param integer $intOffset   An optional result offset
 	 * @param boolean $blnFuzzy    If true, the search will be fuzzy
 	 * 
-	 * @return \Database_Result The database result object
+	 * @return \Database\Result The database result object
 	 * 
 	 * @throws \Exception If the cleaned keyword string is empty
 	 */

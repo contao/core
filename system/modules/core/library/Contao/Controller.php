@@ -509,7 +509,7 @@ abstract class Controller extends \System
 		if (is_object($intId))
 		{
 			// Always return a Model (see #4428)
-			$objPage = ($intId instanceof \Model_Collection) ? $intId->current() : $intId;
+			$objPage = ($intId instanceof \Model\Collection) ? $intId->current() : $intId;
 
 			$intId = $objPage->id;
 			$strKey = __METHOD__ . '-' . $objPage->id;

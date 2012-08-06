@@ -39,7 +39,7 @@ class NewsArchiveModel extends \Model
 	 * 
 	 * @param array $arrIds An array of archive IDs
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no news archives
+	 * @return \Model\Collection|null A collection of models or null if there are no news archives
 	 */
 	public static function findMultipleByIds($arrIds)
 	{

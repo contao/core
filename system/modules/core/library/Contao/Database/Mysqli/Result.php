@@ -10,17 +10,17 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-namespace Contao;
+namespace Contao\Database\Mysqli;
 
 
 /**
- * MySQL-specific database result class
+ * MySQLi-specific database result class
  * 
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Database_Mysql_Result extends \Database_Result
+class Result extends \Database\Result
 {
 
 	/**
@@ -30,7 +30,7 @@ class Database_Mysql_Result extends \Database_Result
 	 */
 	protected function fetch_row()
 	{
-		return @mysql_fetch_row($this->resResult);
+		return @$this->resResult->fetch_row();
 	}
 
 
@@ -41,7 +41,7 @@ class Database_Mysql_Result extends \Database_Result
 	 */
 	protected function fetch_assoc()
 	{
-		return @mysql_fetch_assoc($this->resResult);
+		return @$this->resResult->fetch_assoc();
 	}
 
 
@@ -52,7 +52,7 @@ class Database_Mysql_Result extends \Database_Result
 	 */
 	protected function num_rows()
 	{
-		return @mysql_num_rows($this->resResult);
+		return @$this->resResult->num_rows;
 	}
 
 
@@ -63,7 +63,7 @@ class Database_Mysql_Result extends \Database_Result
 	 */
 	protected function num_fields()
 	{
-		return @mysql_num_fields($this->resResult);
+		return @$this->resResult->field_countmysql;
 	}
 
 
@@ -76,7 +76,7 @@ class Database_Mysql_Result extends \Database_Result
 	 */
 	protected function fetch_field($intOffset)
 	{
-		return @mysql_fetch_field($this->resResult, $intOffset);
+		return @$this->resResult->fetch_field_direct($intOffset);
 	}
 
 
@@ -85,9 +85,12 @@ class Database_Mysql_Result extends \Database_Result
 	 */
 	public function free()
 	{
-		if (is_resource($this->resResult))
+		if (is_object($this->resResult))
 		{
-			@mysql_free_result($this->resResult);
+			@$this->resResult->free();
 		}
 	}
 }
+
+// Backwards compatibility
+class_alias('Contao\\Database\\Mysqli\\Result', 'Database_Result');

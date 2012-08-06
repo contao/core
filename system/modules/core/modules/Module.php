@@ -66,7 +66,7 @@ abstract class Module extends \Frontend
 	 */
 	public function __construct($objModule, $strColumn='main')
 	{
-		if ($objModule instanceof \Model || $objModule instanceof \Model_Collection)
+		if ($objModule instanceof \Model || $objModule instanceof \Model\Collection)
 		{
 			$this->objModel = $objModule;
 		}

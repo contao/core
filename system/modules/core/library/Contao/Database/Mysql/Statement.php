@@ -10,7 +10,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-namespace Contao;
+namespace Contao\Database\Mysql;
 
 
 /**
@@ -20,7 +20,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Database_Mysql_Statement extends \Database_Statement
+class Statement extends \Database\Statement
 {
 
 	/**
@@ -124,15 +124,18 @@ class Database_Mysql_Statement extends \Database_Statement
 
 
 	/**
-	 * Create a Database_Result object
+	 * Create a Database\Result object
 	 * 
 	 * @param resource $resResult The database result
 	 * @param string   $strQuery  The query string
 	 * 
-	 * @return \Database_Result The result object
+	 * @return \Database\Mysql\Result The result object
 	 */
 	protected function createResult($resResult, $strQuery)
 	{
-		return new \Database_Mysql_Result($resResult, $strQuery);
+		return new \Database\Mysql\Result($resResult, $strQuery);
 	}
 }
+
+// Backwards compatibility
+class_alias('Contao\\Database\\Mysql\\Statement', 'Database_Statement');
