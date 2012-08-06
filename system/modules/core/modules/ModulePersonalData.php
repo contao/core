@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (C) 2005-2012 Leo Feyer
- * 
+ *
  * @package Core
  * @link    http://www.contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -134,7 +134,22 @@ class ModulePersonalData extends \Module
 			$arrData['eval']['tableless'] = $this->tableless;
 			$arrData['eval']['required'] = ($this->User->$field == '' && $arrData['eval']['mandatory']) ? true : false;
 
-			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $this->User->$field));
+			$varValue = $this->User->$field;
+
+			// Call the load_callback
+			if (isset($arrData['load_callback']) && is_array($arrData['load_callback']))
+			{
+				foreach ($arrData['load_callback'] as $callback)
+				{
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
+					}
+				}
+			}
+
+			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $varValue));
 
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
@@ -244,6 +259,19 @@ class ModulePersonalData extends \Module
 				{
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]($this->User, $_SESSION['FORM_DATA'], $this);
+				}
+			}
+
+			// Call the onsubmit_callback
+			if (is_array($GLOBALS['TL_DCA']['tl_member']['config']['onsubmit_callback']))
+			{
+				foreach ($GLOBALS['TL_DCA']['tl_member']['config']['onsubmit_callback'] as $callback)
+				{
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($this->User, $this);
+					}
 				}
 			}
 
