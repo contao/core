@@ -72,13 +72,13 @@ ClassLoader::scanAndRegister(); // config/autoload.php
 /**
  * Register the SwiftMailer and SimplePie autoloaders
  */
-require_once TL_ROOT . '/system/library/Swiftmailer/classes/Swift.php';
+require_once TL_ROOT . '/system/vendor/Swiftmailer/classes/Swift.php';
 
 Swift::registerAutoload(function() {
-	require TL_ROOT . '/system/library/Swiftmailer/swift_init.php';
+	require TL_ROOT . '/system/vendor/Swiftmailer/swift_init.php';
 });
 
-require_once TL_ROOT . '/system/library/Simplepie/autoloader.php';
+require_once TL_ROOT . '/system/vendor/Simplepie/autoloader.php';
 
 
 /**

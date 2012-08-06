@@ -16,7 +16,7 @@ namespace Contao;
 // Import the inda_convert class
 if (!class_exists('idna_convert', false))
 {
-	require_once TL_ROOT . '/system/library/IDNA/idna_convert.class.php';
+	require_once TL_ROOT . '/system/vendor/IDNA/idna_convert.class.php';
 }
 
 

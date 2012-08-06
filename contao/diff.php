@@ -47,8 +47,8 @@ class DiffController extends Backend
 		$this->loadLanguageFile('default');
 
 		// Include the PhpDiff library
-		require TL_ROOT . '/system/library/PhpDiff/Diff.php';
-		require TL_ROOT . '/system/library/PhpDiff/Diff/Renderer/Html/Contao.php';
+		require TL_ROOT . '/system/vendor/PhpDiff/Diff.php';
+		require TL_ROOT . '/system/vendor/PhpDiff/Diff/Renderer/Html/Contao.php';
 	}
 
 
