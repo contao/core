@@ -262,6 +262,10 @@ class Database_Updater extends \Controller
 		$this->Database->query("ALTER TABLE `tl_layout` ADD `addMooTools` char(1) NOT NULL default ''");
 		$this->Database->query("UPDATE `tl_layout` SET `addMooTools`=1 WHERE `mooSource`!=''");
 
+		// Add the "notified" field
+		$this->Database->query("ALTER TABLE `tl_comments` ADD `notified` char(1) NOT NULL default ''");
+		$this->Database->query("UPDATE `tl_comments` SET `notified`=1");
+
 		// Add the "rows" field
 		$this->Database->query("ALTER TABLE `tl_layout` ADD `rows` varchar(8) NOT NULL default ''");
 		$this->Database->query("UPDATE `tl_layout` SET `rows`='1rw' WHERE `header`='' AND `footer`=''");

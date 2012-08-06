@@ -26,6 +26,7 @@ $GLOBALS['TL_LANG']['tl_comments']['author']    = array('Autor', 'Hier können S
 $GLOBALS['TL_LANG']['tl_comments']['reply']     = array('Antwort', 'Hier können Sie Ihre Antwort eingeben.');
 $GLOBALS['TL_LANG']['tl_comments']['published'] = array('Kommentar veröffentlichen', 'Den Kommentar auf der Webseite anzeigen.');
 $GLOBALS['TL_LANG']['tl_comments']['ip']        = array('IP-Adresse', 'Die IP-Adresse des Autors.');
+$GLOBALS['TL_LANG']['tl_comments']['notified']  = array('Benachrichtigt', 'Die Benachrichtigung für diesen Kommentar wurde gesendet.');
 
 
 /**

@@ -216,12 +216,21 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('doNotCopy'=>true),
+			'save_callback' => array
+			(
+				array('tl_comments', 'sendNotifications')
+			),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'ip' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['ip'],
 			'sql'                     => "varchar(64) NOT NULL default ''"
+		),
+		'notified' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['notified'],
+			'sql'                     => "char(1) NOT NULL default ''"
 		)
 	)
 );
@@ -435,6 +444,22 @@ class tl_comments extends Backend
 		}
 
 		return Cache::get($strKey);
+	}
+
+
+	/**
+	 * Send out the new comment notifications
+	 * @param mixed
+	 * @return mixed
+	 */
+	public function sendNotifications($varValue)
+	{
+		if ($varValue)
+		{
+			Comments::notifyCommentsSubscribers(CommentsModel::findByPk(Input::get('id')));
+		}
+
+		return $varValue;
 	}
 
 

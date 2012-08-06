@@ -20,7 +20,7 @@ namespace Contao;
 /**
  * Reads and writes comments
  * 
- * @package   Models
+ * @package   Comments
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */

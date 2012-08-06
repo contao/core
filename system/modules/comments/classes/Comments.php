@@ -100,6 +100,7 @@ class Comments extends \Frontend
 			$objComments = \CommentsModel::findPublishedBySourceAndParent($strSource, $intParent);
 		}
 
+		// Parse the comments
 		if ($objComments !== null && ($total = $objComments->count()) > 0)
 		{
 			$count = 0;
@@ -130,7 +131,7 @@ class Comments extends \Frontend
 				$objPartial->datim = $this->parseDate($objPage->datimFormat, $objComments->date);
 				$objPartial->date = $this->parseDate($objPage->dateFormat, $objComments->date);
 				$objPartial->class = (($count < 1) ? ' first' : '') . (($count >= ($total - 1)) ? ' last' : '') . (($count % 2 == 0) ? ' even' : ' odd');
-				$objPartial->by = $GLOBALS['TL_LANG']['MSC']['comment_by'];
+				$objPartial->by = $GLOBALS['TL_LANG']['MSC']['com_by'];
 				$objPartial->id = 'c' . $objComments->id;
 				$objPartial->timestamp = $objComments->date;
 				$objPartial->datetime = date('Y-m-d\TH:i:sP', $objComments->date);
@@ -142,7 +143,7 @@ class Comments extends \Frontend
 					if (($objAuthor = $objComments->getRelated('author')) !== null)
 					{
 						$objPartial->addReply = true;
-						$objPartial->rby = $GLOBALS['TL_LANG']['MSC']['reply_by'];
+						$objPartial->rby = $GLOBALS['TL_LANG']['MSC']['com_reply'];
 						$objPartial->reply = $this->replaceInsertTags($objComments->reply);
 						$objPartial->author = $objAuthor;
 
@@ -170,14 +171,34 @@ class Comments extends \Frontend
 		$objTemplate->website = $GLOBALS['TL_LANG']['MSC']['com_website'];
 		$objTemplate->commentsTotal = $limit ? $gtotal : $total;
 
-		// Get the front end user object
+		// Add a form to create new comments
+		$this->renderCommentForm($objTemplate, $objConfig, $strSource, $intParent, $arrNotifies);
+	}
+
+
+	/**
+	 * Add a form to create new comments
+	 * @param \FrontendTemplate
+	 * @param \stdClass
+	 * @param string
+	 * @param integer
+	 * @param array
+	 */
+	protected function renderCommentForm(\FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $arrNotifies)
+	{
 		$this->import('FrontendUser', 'User');
 
 		// Access control
 		if ($objConfig->requireLogin && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN)
 		{
 			$objTemplate->requireLogin = true;
-			$objTemplate->comments = array(); // see #4064
+			return;
+		}
+
+		// Confirm or remove a subscription
+		if (\Input::get('token'))
+		{
+			static::changeSubscriptionStatus($objTemplate);
 			return;
 		}
 
@@ -229,11 +250,20 @@ class Comments extends \Frontend
 			'eval' => array('mandatory'=>true, 'rows'=>4, 'cols'=>40, 'preserveTags'=>true)
 		);
 
+		// Notify me of new comments
+		$arrFields['notify'] = array
+		(
+			'name' => 'notify',
+			'label' => '',
+			'inputType' => 'checkbox',
+			'options' => array(1=>$GLOBALS['TL_LANG']['MSC']['com_notify'])
+		);
+
 		$doNotSubmit = false;
 		$arrWidgets = array();
 		$strFormId = 'com_'. $strSource .'_'. $intParent;
 
-		// Initialize widgets
+		// Initialize the widgets
 		foreach ($arrFields as $arrField)
 		{
 			$strClass = $GLOBALS['TL_FFL'][$arrField['inputType']];
@@ -279,7 +309,7 @@ class Comments extends \Frontend
 			$_SESSION['TL_COMMENT_ADDED'] = false;
 		}
 
-		// Add the comment
+		// Store the comment
 		if (!$doNotSubmit && \Input::post('FORM_SUBMIT') == $strFormId)
 		{
 			$strWebsite = $arrWidgets['website']->value;
@@ -311,22 +341,27 @@ class Comments extends \Frontend
 			// Prepare the record
 			$arrSet = array
 			(
-				'source' => $strSource,
-				'parent' => $intParent,
-				'tstamp' => $time,
-				'name' => $arrWidgets['name']->value,
-				'email' => $arrWidgets['email']->value,
-				'website' => $strWebsite,
-				'comment' => $this->convertLineFeeds($strComment),
-				'ip' => $this->anonymizeIp(\Environment::get('ip')),
-				'date' => $time,
+				'tstamp'    => $time,
+				'source'    => $strSource,
+				'parent'    => $intParent,
+				'name'      => $arrWidgets['name']->value,
+				'email'     => $arrWidgets['email']->value,
+				'website'   => $strWebsite,
+				'comment'   => $this->convertLineFeeds($strComment),
+				'ip'        => $this->anonymizeIp(\Environment::get('ip')),
+				'date'      => $time,
 				'published' => ($objConfig->moderate ? '' : 1)
 			);
 
+			// Store the comment
 			$objComment = new \CommentsModel();
-			$objComment->setRow($arrSet);
-			$objComment->save();
-			$insertId = $objComment->id;
+			$objComment->setRow($arrSet)->save();
+
+			// Store the subscription
+			if ($arrWidgets['notify']->value)
+			{
+				static::addCommentsSubscription($objComment);
+			}
 
 			// HOOK: add custom logic
 			if (isset($GLOBALS['TL_HOOKS']['addComment']) && is_array($GLOBALS['TL_HOOKS']['addComment']))
@@ -334,13 +369,12 @@ class Comments extends \Frontend
 				foreach ($GLOBALS['TL_HOOKS']['addComment'] as $callback)
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($insertId, $arrSet, $this);
+					$this->$callback[0]->$callback[1]($objComment->id, $arrSet, $this);
 				}
 			}
 
-			// Notification
+			// Prepare the notification mail
 			$objEmail = new \Email();
-
 			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_subject'], \Environment::get('host'));
@@ -350,25 +384,28 @@ class Comments extends \Frontend
 			$strComment = \String::decodeEntities($strComment);
 			$strComment = str_replace(array('[&]', '[lt]', '[gt]'), array('&', '<', '>'), $strComment);
 
-			// Add comment details
+			// Add the comment details
 			$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_message'],
 									  $arrSet['name'] . ' (' . $arrSet['email'] . ')',
 									  $strComment,
 									  \Environment::get('base') . \Environment::get('request'),
-									  \Environment::get('base') . 'contao/main.php?do=comments&act=edit&id=' . $insertId);
+									  \Environment::get('base') . 'contao/main.php?do=comments&act=edit&id=' . $objComment->id);
 
 			// Do not send notifications twice
 			if (is_array($arrNotifies))
 			{
-				$arrNotifies = array_unique($arrNotifies);
+				$objEmail->sendTo(array_unique($arrNotifies));
 			}
-
-			$objEmail->sendTo($arrNotifies);
 
 			// Pending for approval
 			if ($objConfig->moderate)
 			{
+				// FIXME: notify the subscribers when the comment is published
 				$_SESSION['TL_COMMENT_ADDED'] = true;
+			}
+			else
+			{
+				static::notifyCommentsSubscribers($objComment);
 			}
 
 			$this->reload();
@@ -468,5 +505,124 @@ class Comments extends \Frontend
 		);
 
 		return preg_replace(array_keys($arrReplace), array_values($arrReplace), $strComment);
+	}
+
+
+	/**
+	 * Add the subscription and send the activation mail (double opt-in)
+	 * @param \CommentsModel
+	 */
+	public static function addCommentsSubscription(\CommentsModel $objComment)
+	{
+		$objNotify = \CommentsNotifyModel::findBySourceParentAndEmail($objComment->source, $objComment->parent, $objComment->email);
+
+		// The subscription exists already
+		if ($objNotify !== null)
+		{
+			return;
+		}
+
+		$time = time();
+
+		// Prepare the record
+		$arrSet = array
+		(
+			'tstamp'       => $time,
+			'source'       => $objComment->source,
+			'parent'       => $objComment->parent,
+			'name'         => $objComment->name,
+			'email'        => $objComment->email,
+			'url'          => \Environment::get('request'),
+			'addedOn'      => $time,
+			'ip'           => \System::anonymizeIp(\Environment::get('ip')),
+			'tokenConfirm' => md5(uniqid(mt_rand(), true)),
+			'tokenRemove'  => md5(uniqid(mt_rand(), true))
+		);
+
+		// Store the subscription
+		$objNotify = new \CommentsNotifyModel();
+		$objNotify->setRow($arrSet)->save();
+
+		$strUrl = \Environment::get('base') . \Environment::get('request');
+
+		// Send the activation mail
+		$objEmail = new \Email();
+		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
+		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
+		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_optInSubject'], \Environment::get('host'));
+		$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_optInMessage'], $strName, $strUrl, $strUrl . '?token=' . $objNotify->tokenConfirm, $strUrl . '?token=' . $objNotify->tokenRemove);
+		$objEmail->sendTo($strEmail);
+	}
+
+
+	/**
+	 * Change the subscription status
+	 * @param \FrontendTemplate
+	 */
+	public static function changeSubscriptionStatus(\FrontendTemplate $objTemplate)
+	{
+		$objNotify = \CommentsNotifyModel::findByTokens(\Input::get('token'));
+
+		if ($objNotify === null)
+		{
+			$objTemplate->confirm = 'Invalid token';
+			return;
+		}
+
+		if ($objNotify->tokenConfirm != '' && $objNotify->tokenConfirm == \Input::get('token'))
+		{
+			$objNotify->tokenConfirm = '';
+			$objNotify->save();
+			$objTemplate->confirm = $GLOBALS['TL_LANG']['MSC']['com_optInConfirm'];
+		}
+		elseif ($objNotify->tokenRemove != '' && $objNotify->tokenRemove == \Input::get('token'))
+		{
+			$objNotify->delete();
+			$objTemplate->confirm = $GLOBALS['TL_LANG']['MSC']['com_optInCancel'];
+		}
+	}
+
+
+	/**
+	 * Notify the subscribers of new comments
+	 * @param \CommentsModel
+	 */
+	public static function notifyCommentsSubscribers(\CommentsModel $objComment)
+	{
+		// Notified already
+		if ($objComment->notified)
+		{
+			return;
+		}
+
+		$objNotify = \CommentsNotifyModel::findActiveBySourceAndParent($objComment->source, $objComment->parent);
+
+		// No subscriptions
+		if ($objNotify === null)
+		{
+			return;
+		}
+
+		while ($objNotify->next())
+		{
+			// Don't notify the commentor about his own comment
+			if ($objNotify->email == $objComment->email)
+			{
+				continue;
+			}
+
+			// Prepare the URL
+			$strUrl = \Environment::get('base') . $objNotify->url;
+
+			$objEmail = new \Email();
+			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
+			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
+			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_notifySubject'], \Environment::get('host'));
+			$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_notifyMessage'], $objNotify->name, $strUrl, $strUrl . '?token=' . $objNotify->tokenRemove);
+			$objEmail->sendTo($objNotify->email);
+		}
+
+		$objComment->notified = 1;
+		$objComment->save();
 	}
 }

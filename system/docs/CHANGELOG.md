@@ -7,6 +7,9 @@ Version 3.0.RC1 (XXXX-XX-XX)
 ### New
 Added the "prepareFormData" hook (see #4538).
 
+### New
+Added an option to get notified of new comments by e-mail (see #3858).
+
 ### Improved
 Stop the script execution after the main controller is finished or when a back
 end or front end template has been output (see #4565). This will prevent code
