@@ -63,7 +63,7 @@ class BackendTemplate extends \Template
 			$this->uploadPath = $GLOBALS['TL_CONFIG']['uploadPath'];
 
 			// Fallback to English if the user language is not supported
-			$this->language = file_exists(TL_ROOT . '/plugins/tinyMCE/langs/' . $GLOBALS['TL_LANGUAGE'] . '.js') ? $GLOBALS['TL_LANGUAGE'] : 'en';
+			$this->language = file_exists(TL_ROOT . '/assets/tinymce/langs/' . $GLOBALS['TL_LANGUAGE'] . '.js') ? $GLOBALS['TL_LANGUAGE'] : 'en';
 
 			foreach ($GLOBALS['TL_RTE'] as $file=>$fields)
 			{

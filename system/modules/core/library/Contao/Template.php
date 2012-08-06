@@ -338,7 +338,7 @@ abstract class Template extends \Controller
 			ob_end_clean();
 
 			$strDebug .= '</pre></div>'
-				. '<script>window.MooTools || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>'
+				. '<script>window.MooTools || document.write(\'<script src="' . TL_PLUGINS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>'
 				. '<script>'
 					. "(function($) {"
 						. "$$('#debug p','#debug div').setStyle('width',window.getSize().x);"

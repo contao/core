@@ -5,6 +5,11 @@ Version 3.0.RC1 (XXXX-XX-XX)
 ----------------------------
 
 ### New
+Moved all vendor PHP libraries to `system/vendor` and the Contao library to
+`system/modules/core/library`. Also moved all vendor JavaScript plugins to the
+`assets` folder. 
+
+### New
 Added the "prepareFormData" hook (see #4538).
 
 ### New

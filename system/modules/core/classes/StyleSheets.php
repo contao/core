@@ -884,7 +884,7 @@ class StyleSheets extends \Backend
 		// CSS3PIE
 		if ($blnNeedsPie)
 		{
-			$return .= $lb . 'behavior:url(\'plugins/css3pie/'.CSS3PIE.'/PIE.htc\');';
+			$return .= $lb . 'behavior:url(\'assets/css3pie/'.CSS3PIE.'/PIE.htc\');';
 		}
 
 		// Custom code
@@ -1942,7 +1942,7 @@ class StyleSheets extends \Backend
 					break;
 
 				case 'behavior':
-					if ($arrChunks[1] != 'url(\'plugins/'.CSS3PIE.'/css3pie/PIE.htc\')')
+					if ($arrChunks[1] != 'url(\'assets/'.CSS3PIE.'/css3pie/PIE.htc\')')
 					{
 						$arrSet['own'][] = $strDefinition;
 					}

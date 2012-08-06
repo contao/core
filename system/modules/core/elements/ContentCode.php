@@ -101,12 +101,12 @@ class ContentCode extends \ContentElement
 			}
 
 			// Add the style sheet
-			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/'.HIGHLIGHTER.'/shCore.css||static';
+			$GLOBALS['TL_CSS'][] = 'assets/highlighter/'.HIGHLIGHTER.'/shCore.css||static';
 
 			// Add the JavaScripts
-			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/'.HIGHLIGHTER.'/XRegExp.js|static';
-			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/'.HIGHLIGHTER.'/shCore.js|static';
-			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/'.HIGHLIGHTER.'/' . $arrMapper[$this->highlight] . '.js|static';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/highlighter/'.HIGHLIGHTER.'/XRegExp.js|static';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/highlighter/'.HIGHLIGHTER.'/shCore.js|static';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/highlighter/'.HIGHLIGHTER.'/' . $arrMapper[$this->highlight] . '.js|static';
 
 			global $objPage;
 

@@ -13,69 +13,56 @@ usage()
 	echo -e "  \033[0;36mall\033[0m           Execute all the functions"
 	echo ""
 	echo -e "  Contao"
-	echo -e "  \033[0;36massets\033[0m        Minify the Contao assets (assets/contao)"
-	echo -e "  \033[0;36mcontao\033[0m        Minify the Contao back end script (system/modules/core/html/contao.js)"
+	echo -e "  \033[0;36mcontao\033[0m        Minify the Contao assets (assets/contao)"
 	echo -e "  \033[0;36mtheme\033[0m         Minify the default back end theme (system/themes/default)"
-	echo -e "  \033[0;36mtypolinks\033[0m     Minify the TYPOlinks plugin (plugins/tinyMCE/plugins/typolinks)"
+	echo -e "  \033[0;36mtypolinks\033[0m     Minify the TYPOlinks plugin (assets/tinymce/plugins/typolinks)"
 	echo ""
 	echo -e "  jQuery"
-	echo -e "  \033[0;36mjquery\033[0m        Minify the jQuery core (plugins/jQuery/core|ui)"
-	echo -e "  \033[0;36mcolorbox\033[0m      Minify the colorbox plugin (plugins/jQuery/colorbox)"
-	echo -e "  \033[0;36mmediaelement\033[0m  Minify the mediaelement plugin (plugins/jQuery|mootools/mediaelement)"
-	echo -e "  \033[0;36mtablesorter\033[0m   Minify the tablesorter plugin (plugins/jQuery/tablesorter)"
+	echo -e "  \033[0;36mjquery\033[0m        Minify the jQuery core (assets/jquery/core|ui)"
+	echo -e "  \033[0;36mcolorbox\033[0m      Minify the colorbox plugin (assets/jquery/colorbox)"
+	echo -e "  \033[0;36mmediaelement\033[0m  Minify the mediaelement plugin (assets/jquery|mootools/mediaelement)"
+	echo -e "  \033[0;36mtablesorter\033[0m   Minify the tablesorter plugin (assets/jquery/tablesorter)"
 	echo ""
 	echo -e "  MooTools"
-	echo -e "  \033[0;36mmootools\033[0m      Minify the MooTools core (plugins/mootools/core)"
-	echo -e "  \033[0;36mchosen\033[0m        Minify the chosen plugin (plugins/mootools/chosen)"
-	echo -e "  \033[0;36mcolorpicker\033[0m   Minify the colorpicker plugin (plugins/mootools/colorpicker)"
-	echo -e "  \033[0;36mdatepicker\033[0m    Minify the datepicker plugin (plugins/mootools/datepicker)"
-	echo -e "  \033[0;36mmediabox\033[0m      Minify the mediabox plugin (plugins/mootools/mediabox)"
-	echo -e "  \033[0;36mmediaelement\033[0m  Minify the mediaelement plugin (plugins/jQuery|mootools/mediaelement)"
-	echo -e "  \033[0;36mmootao\033[0m        Minify the Contao MooTools enhancements (plugins/mootools/mootao)"
-	echo -e "  \033[0;36msimplemodal\033[0m   Minify the SimpleModal plugin (plugins/mootools/simplemodal)"
-	echo -e "  \033[0;36mslimbox\033[0m       Minify the slimbox plugin (plugins/mootools/slimbox)"
-	echo -e "  \033[0;36mstylect\033[0m       Minify the stylect plugin (plugins/mootools/stylect)"
-	echo -e "  \033[0;36mtablesort\033[0m     Minify the tablesort plugin (plugins/mootools/tablesort)"
+	echo -e "  \033[0;36mmootools\033[0m      Minify the MooTools core (assets/mootools/core)"
+	echo -e "  \033[0;36mchosen\033[0m        Minify the chosen plugin (assets/mootools/chosen)"
+	echo -e "  \033[0;36mcolorpicker\033[0m   Minify the colorpicker plugin (assets/mootools/colorpicker)"
+	echo -e "  \033[0;36mdatepicker\033[0m    Minify the datepicker plugin (assets/mootools/datepicker)"
+	echo -e "  \033[0;36mmediabox\033[0m      Minify the mediabox plugin (assets/mootools/mediabox)"
+	echo -e "  \033[0;36mmediaelement\033[0m  Minify the mediaelement plugin (assets/jquery|mootools/mediaelement)"
+	echo -e "  \033[0;36mmootao\033[0m        Minify the Contao MooTools enhancements (assets/mootools/mootao)"
+	echo -e "  \033[0;36msimplemodal\033[0m   Minify the SimpleModal plugin (assets/mootools/simplemodal)"
+	echo -e "  \033[0;36mslimbox\033[0m       Minify the slimbox plugin (assets/mootools/slimbox)"
+	echo -e "  \033[0;36mstylect\033[0m       Minify the stylect plugin (assets/mootools/stylect)"
+	echo -e "  \033[0;36mtablesort\033[0m     Minify the tablesort plugin (assets/mootools/tablesort)"
 	echo ""
 	echo -e "  Other"
-	echo -e "  \033[0;36mcodemirror\033[0m    Minify the CodeMirror plugin (plugins/codeMirror)"
-	echo -e "  \033[0;36mhighlighter\033[0m   Minify the SyntaxHighlighter plugin (plugins/highlighter)"
+	echo -e "  \033[0;36mcodemirror\033[0m    Minify the CodeMirror plugin (assets/codemirror)"
+	echo -e "  \033[0;36mhighlighter\033[0m   Minify the SyntaxHighlighter plugin (assets/highlighter)"
 	echo ""
 }
 
 ##
 # assets/contao
 ##
-assets()
+contao()
 {
 	version=$folder/assets/contao
 	copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
 
 	# CSS
-	for file in `ls $version | grep "\-uncompressed.css"`; do
-		echo "$copyright" > $version/${file/-uncompressed/}
-		$css $version/$file >> $version/${file/-uncompressed/}
-		echo "  Created $version/${file/-uncompressed/}"
+	for file in `ls $version/src | grep ".css"`; do
+		echo "$copyright" > $version/$file
+		$css $version/src/$file >> $version/$file
+		echo "  Created $version/$file"
 	done
 
 	# JavaScript
-	for file in `ls $version | grep "\-uncompressed.js"`; do
-		echo "$copyright" > $version/${file/-uncompressed/}
-		$js $version/$file >> $version/${file/-uncompressed/}
-		echo "  Created $version/${file/-uncompressed/}"
+	for file in `ls $version/src | grep ".js"`; do
+		echo "$copyright" > $version/$file
+		$js $version/src/$file >> $version/$file
+		echo "  Created $version/$file"
 	done
-}
-
-##
-# system/modules/core/html/contao.js
-##
-contao()
-{
-	version=$folder/system/modules/core/html
-	copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
-	echo "$copyright" > $version/contao.js
-	$js $version/contao-uncompressed.js >> $version/contao.js
-	echo "  Created $version/contao.js"
 }
 
 ##
@@ -111,11 +98,11 @@ theme()
 }
 
 ##
-# plugins/tinyMCE/plugins/typolinks
+# assets/tinymce/plugins/typolinks
 ##
 typolinks()
 {
-	version=$folder/plugins/tinyMCE/plugins/typolinks
+	version=$folder/assets/tinymce/plugins/typolinks
 	copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
 
 	files=('editor_plugin' 'js/typolinks' 'js/typobox')
@@ -127,12 +114,12 @@ typolinks()
 }
 
 ##
-# plugins/jQuery/core|ui
+# assets/jquery/core|ui
 ##
 jquery()
 {
 	# core
-	for version in `ls -d $folder/plugins/jQuery/core/*`; do
+	for version in `ls -d $folder/assets/jquery/core/*`; do
 		copyright="/* jQuery v$(basename $version) http://jquery.com | jquery.org/license */"
 		echo "$copyright" > $version/jquery.min.js
 		$js $version/jquery.js >> $version/jquery.min.js
@@ -140,7 +127,7 @@ jquery()
 	done
 
 	# ui
-	for version in `ls -d $folder/plugins/jQuery/ui/*`; do
+	for version in `ls -d $folder/assets/jquery/ui/*`; do
 		copyright="/* jQuery UI v$(basename $version) http://docs.jquery.com/UI | jquery.org/license */"
 		echo "$copyright" > $version/jquery-ui.min.js
 		$js $version/jquery-ui.js >> $version/jquery-ui.min.js
@@ -149,11 +136,11 @@ jquery()
 }
 
 ##
-# plugins/jQuery/colorbox
+# assets/jquery/colorbox
 ##
 colorbox()
 {
-	for version in `ls -d $folder/plugins/jQuery/colorbox/*`; do
+	for version in `ls -d $folder/assets/jquery/colorbox/*`; do
 		copyright="/* ColorBox v$(basename $version), (c) 2011 Jack Moore - jacklmoore.com, MIT license */"
 
 		# CSS
@@ -169,12 +156,12 @@ colorbox()
 }
 
 ##
-# plugins/jQuery|mootools/mediaelement
+# assets/jquery|mootools/mediaelement
 ##
 mediaelement()
 {
 	# jQuery
-	for version in `ls -d $folder/plugins/jQuery/mediaelement/*`; do
+	for version in `ls -d $folder/assets/jquery/mediaelement/*`; do
 		copyright="/* MediaElement.js $(basename $version), (c) 2010-2012 John Dyer <http://j.hn>, MIT/GPLv2 */"
 
 		# CSS
@@ -197,7 +184,7 @@ mediaelement()
 	done
 
 	# MooTools
-	for version in `ls -d $folder/plugins/mootools/mediaelement/*`; do
+	for version in `ls -d $folder/assets/mootools/mediaelement/*`; do
 		adapter="/* MooToolsAdapter 0.1, (c) 2011 Inkling Systems, Inc. <http://github.com/inkling/backbone-mootools>, Apache License 2.0 */"
 		copyright="/* MediaElement.js $(basename $version), (c) 2010-2012 John Dyer <http://j.hn>, MIT/GPLv2 */"
 
@@ -226,11 +213,11 @@ mediaelement()
 }
 
 ##
-# plugins/jQuery/tablesorter
+# assets/jquery/tablesorter
 ##
 tablesorter()
 {
-	for version in `ls -d $folder/plugins/jQuery/tablesorter/*`; do
+	for version in `ls -d $folder/assets/jquery/tablesorter/*`; do
 
   	# CSS
   	copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
@@ -247,12 +234,12 @@ tablesorter()
 }
 
 ##
-# plugins/mootools/core
+# assets/mootools/core
 ##
 mootools()
 {
 	# Minify
-	for version in `ls -d $folder/plugins/mootools/core/*`; do
+	for version in `ls -d $folder/assets/mootools/core/*`; do
 		mobile="/* MooTools mobile, (c) Christoph Pojer (@cpojer), MIT-style license */"
 		copyright="/* MooTools $(basename $version), <http://mootools.net>, MIT-style license */"
 		for file in `ls $version | grep "\-uncompressed"`; do
@@ -272,11 +259,11 @@ mootools()
 }
 
 ##
-# plugins/mootools/chosen
+# assets/mootools/chosen
 ##
 chosen()
 {
-	version=$folder/plugins/mootools/chosen
+	version=$folder/assets/mootools/chosen
 	copyright="/* Chosen by Patrick Filler, Jules Janssen, Jonnathan Soares, MIT-style license */"
 
 	# CSS
@@ -291,11 +278,11 @@ chosen()
 }
 
 ##
-# plugins/mootools/colorpicker
+# assets/mootools/colorpicker
 ##
 colorpicker()
 {
-	for version in `ls -d $folder/plugins/mootools/colorpicker/*`; do
+	for version in `ls -d $folder/assets/mootools/colorpicker/*`; do
 		copyright="/* MooRainbow $(basename $version) by Djamil Legato (w00fz) and Christopher Beloch, MIT-style license */"
 
 		# CSS
@@ -311,11 +298,11 @@ colorpicker()
 }
 
 ##
-# plugins/mootools/datepicker
+# assets/mootools/datepicker
 ##
 datepicker()
 {
-	for version in `ls -d $folder/plugins/mootools/datepicker/*`; do
+	for version in `ls -d $folder/assets/mootools/datepicker/*`; do
 		copyright="/* DatePicker $(basename $version) by Arian Stolwijk, <http://mootools.net/forge/p/mootools_datepicker>, MIT license */"
 
 		# CSS
@@ -334,11 +321,11 @@ datepicker()
 }
 
 ##
-# plugins/mootools/mediabox
+# assets/mootools/mediabox
 ##
 mediabox()
 {
-	for version in `ls -d $folder/plugins/mootools/mediabox/*`; do
+	for version in `ls -d $folder/assets/mootools/mediabox/*`; do
 		copyright="/* mediaboxAdvanced v$(basename $version), (c) 2007-2010 John Einselen <http://iaian7.com>, MIT-style license */"
 
 		# CSS
@@ -356,11 +343,11 @@ mediabox()
 }
 
 ##
-# plugins/mootools/mootao
+# assets/mootools/mootao
 ##
 mootao()
 {
-	version=$folder/plugins/mootools/mootao
+	version=$folder/assets/mootools/mootao
 	copyright="/* Contao Open Source CMS, (c) 2005-2012 Leo Feyer, LGPL license */"
 	echo "$copyright" > $version/Mootao.js
 	$js $version/Mootao-uncompressed.js >> $version/Mootao.js
@@ -368,11 +355,11 @@ mootao()
 }
 
 ##
-# plugins/mootools/simplemodal
+# assets/mootools/simplemodal
 ##
 simplemodal()
 {
-	for version in `ls -d $folder/plugins/mootools/simplemodal/*`; do
+	for version in `ls -d $folder/assets/mootools/simplemodal/*`; do
 		copyright="/* Simple Modal $(basename $version), (c) 2011 Marco Dell’Anna <http://www.plasm.it>, MIT-style license */"
 
 		# CSS
@@ -388,11 +375,11 @@ simplemodal()
 }
 
 ##
-# plugins/mootools/slimbox
+# assets/mootools/slimbox
 ##
 slimbox()
 {
-	for version in `ls -d $folder/plugins/mootools/slimbox/*`; do
+	for version in `ls -d $folder/assets/mootools/slimbox/*`; do
 		copyright="/* Slimbox v$(basename $version), (c) 2007-2009 Christophe Beyls <http://www.digitalia.be>, MIT-style license */"
 
 		# CSS
@@ -408,11 +395,11 @@ slimbox()
 }
 
 ##
-# plugins/mootools/stylect
+# assets/mootools/stylect
 ##
 stylect()
 {
-	version=$folder/plugins/mootools/stylect
+	version=$folder/assets/mootools/stylect
 	copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
 
 	# CSS
@@ -427,11 +414,11 @@ stylect()
 }
 
 ##
-# plugins/mootools/tablesort
+# assets/mootools/tablesort
 ##
 tablesort()
 {
-	version=$folder/plugins/mootools/tablesort
+	version=$folder/assets/mootools/tablesort
 	copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
 
 	# CSS
@@ -446,11 +433,11 @@ tablesort()
 }
 
 ##
-# plugins/codeMirror
+# assets/codemirror
 ##
 codemirror()
 {
-	for version in `ls -d $folder/plugins/codeMirror/*`; do
+	for version in `ls -d $folder/assets/codemirror/*`; do
 		copyright="/* CodeMirror $(basename $version), (C) 2011 by Marijn Haverbeke, MIT-style license */"
 
 		# CSS
@@ -469,11 +456,11 @@ codemirror()
 }
 
 ##
-# plugins/highlighter
+# assets/highlighter
 ##
 highlighter()
 {
-	for version in `ls -d $folder/plugins/highlighter/*`; do
+	for version in `ls -d $folder/assets/highlighter/*`; do
 		xregexp="/* XRegExp 1.5.0, (c) 2007-2010 Steven Levithan, http://xregexp.com */"
 		copyright="/* SyntaxHighlighter $(basename $version), (c) 2004-2010 Alex Gorbatchev, http://alexgorbatchev.com/SyntaxHighlighter */"
 
