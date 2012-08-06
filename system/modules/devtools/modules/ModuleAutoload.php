@@ -78,6 +78,28 @@ class ModuleAutoload extends \BackendModule
 					$arrFiles = array();
 					$arrClassLoader = array();
 					$arrNamespaces = array();
+					$arrConfig = array(
+						'autoload' => array(
+							'register_namespaces' => true,
+							'register_classes'    => true,
+							'register_templates'  => true,
+						),
+						'autoload/map' => array(),
+					);
+
+					// load the config.ini
+					if (file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/config.ini'))
+					{
+						$arrTemp = parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/config.ini', true);
+
+						foreach (array_keys($arrConfig) as $strSection)
+						{
+							if (isset($arrTemp[$strSection]))
+							{
+								$arrConfig[$strSection] = array_merge($arrConfig[$strSection], $arrTemp[$strSection]);
+							}
+						}
+					}
 
 					// Recursively scan all subfolders
 					$objFiles = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule));
@@ -186,12 +208,42 @@ class ModuleAutoload extends \BackendModule
 EOT
 					);
 
-					// Namespaces
-					$arrNamespaces = array_unique($arrNamespaces);
-
-					if (!empty($arrNamespaces))
+					// Class mapping
+					if (!empty($arrConfig['autoload/map']))
 					{
 						$objFile->append(
+<<<EOT
+
+
+/**
+ * Register class mappings
+ */
+RuntimeClassLoader::addClassMappings(array
+(
+EOT
+						);
+
+						foreach ($arrConfig['autoload/map'] as $strRuntimeClass => $strTargetClass)
+						{
+							if (strncmp($strRuntimeClass, 'Runtime\\', 8) !== 0)
+							{
+								$strRuntimeClass = 'Runtime\\' . $strRuntimeClass;
+							}
+
+							$objFile->append("\t'" . $strRuntimeClass . "' => '" . $strTargetClass . "',");
+						}
+
+						$objFile->append('));');
+					}
+
+					// Namespaces
+					if ($arrConfig['autoload']['register_namespaces'])
+					{
+						$arrNamespaces = array_unique($arrNamespaces);
+
+						if (!empty($arrNamespaces))
+						{
+							$objFile->append(
 <<<EOT
 
 
@@ -201,18 +253,19 @@ EOT
 ClassLoader::addNamespaces(array
 (
 EOT
-						);
+							);
 
-						foreach ($arrNamespaces as $strNamespace)
-						{
-							$objFile->append("\t'" . $strNamespace . "',");
+							foreach ($arrNamespaces as $strNamespace)
+							{
+								$objFile->append("\t'" . $strNamespace . "',");
+							}
+
+							$objFile->append('));');
 						}
-
-						$objFile->append('));');
 					}
 
 					// Classes
-					if (!empty($arrClassLoader))
+					if ($arrConfig['autoload']['register_classes'] && !empty($arrClassLoader))
 					{
 						$objFile->append(
 <<<EOT
@@ -252,7 +305,7 @@ EOT
 					}
 
 					// Templates
-					if (!empty($arrTplLoader))
+					if ($arrConfig['autoload']['register_templates'] && !empty($arrTplLoader))
 					{
 						$objFile->append(
 <<<EOT

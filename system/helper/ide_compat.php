@@ -55,6 +55,7 @@ class Model_QueryBuilder extends Contao\Model_QueryBuilder {}
 abstract class Model extends Contao\Model {}
 class Request extends Contao\Request {}
 class RequestToken extends Contao\RequestToken {}
+class RuntimeClassLoader extends Contao\RuntimeClassLoader {}
 class Search extends Contao\Search {}
 class Session extends Contao\Session {}
 class String extends Contao\String {}
