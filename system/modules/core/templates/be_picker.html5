@@ -15,15 +15,15 @@
 <script><?php echo $this->getLocaleString(); ?></script>
 <script src="<?php
   $objCombiner = new Combiner();
-  $objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
-  $objCombiner->add('plugins/mootools/mootao/Mootao.js');
-  $objCombiner->add('system/modules/core/html/contao.js');
+  $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
+  $objCombiner->add('assets/mootools/mootao/Mootao.js');
+  $objCombiner->add('assets/contao/js/core.js');
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>
 <script><?php echo $this->getDateString(); ?></script>
 <?php echo $this->javascripts; ?>
-<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
 </head>
 <body class="__ua__ popup">
 

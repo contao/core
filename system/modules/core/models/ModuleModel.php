@@ -39,7 +39,7 @@ class ModuleModel extends \Model
 	 * 
 	 * @param array $arrIds An array of front end module IDs
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no front end modules
+	 * @return \Model\Collection|null A collection of models or null if there are no front end modules
 	 */
 	public static function findMultipleByIds($arrIds)
 	{

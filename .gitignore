@@ -20,10 +20,10 @@ assets/images/*
 assets/js/*
 share/*.xml
 system/cache/*
-system/logs/*
-system/tmp/*
 system/config/dcaconfig.php
 system/config/initconfig.php
 system/config/langconfig.php
 system/config/localconfig.php
 system/cron/cron.txt
+system/logs/*
+system/tmp/*

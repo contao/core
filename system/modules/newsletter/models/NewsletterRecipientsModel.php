@@ -40,7 +40,7 @@ class NewsletterRecipientsModel extends \Model
 	 * @param string $strEmail The e-mail address
 	 * @param array  $arrPids  An array of newsletter channel IDs
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no recipients
+	 * @return \Model\Collection|null A collection of models or null if there are no recipients
 	 */
 	public static function findByEmailAndPids($strEmail, $arrPids)
 	{

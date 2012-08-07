@@ -39,7 +39,7 @@ class NewsletterChannelModel extends \Model
 	 * 
 	 * @param array $arrIds An array of newsletter channel IDs
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no newsletter channels
+	 * @return \Model\Collection|null A collection of models or null if there are no newsletter channels
 	 */
 	public static function findByIds($arrIds)
 	{

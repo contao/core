@@ -40,7 +40,7 @@ class ContentModel extends \Model
 	 * @param integer $intPid         The article ID
 	 * @param string  $strParentTable The parent table name
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no content elements
+	 * @return \Model\Collection|null A collection of models or null if there are no content elements
 	 */
 	public static function findPublishedByPidAndTable($intPid, $strParentTable)
 	{

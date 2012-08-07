@@ -16,7 +16,7 @@
  * http://tinymce.moxiecode.com for more information.
  */
 if ($GLOBALS['TL_CONFIG']['useRTE']): ?>
-<script src="<?php echo $this->base; ?>plugins/tinyMCE/tiny_mce_gzip.js"></script>
+<script src="<?php echo $this->base; ?>assets/tinymce/tiny_mce_gzip.js"></script>
 <script>
 tinyMCE_GZ.init({
   plugins : "advimage,autosave,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
@@ -45,8 +45,8 @@ tinyMCE.init({
   save_on_tinymce_forms : true,
   init_instance_callback : "TinyCallback.getScrollOffset",
   advimage_update_dimensions_onchange : false,
-  external_image_list_url : "<?php echo TL_PATH; ?>/plugins/tinyMCE/plugins/typolinks/typoimages.php",
-  template_external_list_url : "<?php echo TL_PATH; ?>/plugins/tinyMCE/plugins/typolinks/typotemplates.php",
+  external_image_list_url : "<?php echo TL_PATH; ?>/assets/tinymce/plugins/typolinks/typoimages.php",
+  template_external_list_url : "<?php echo TL_PATH; ?>/assets/tinymce/plugins/typolinks/typotemplates.php",
   plugins : "advimage,autosave,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
   spellchecker_languages : "<?php echo $this->getSpellcheckerString(); ?>",
   content_css : "<?php echo TL_PATH; ?>/system/themes/tinymce.css,<?php echo TL_PATH .'/'. $this->uploadPath; ?>/tinymce.css",

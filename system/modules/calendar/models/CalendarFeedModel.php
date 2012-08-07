@@ -53,7 +53,7 @@ class CalendarFeedModel extends \Model
 	 * 
 	 * @param array $arrIds An array of calendar feed IDs
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no feeds
+	 * @return \Model\Collection|null A collection of models or null if there are no feeds
 	 */
 	public static function findByIds($arrIds)
 	{

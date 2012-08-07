@@ -70,7 +70,7 @@ class NewsModel extends \Model
 	 * @param integer $intLimit    An optional limit
 	 * @param integer $intOffset   An optional offset
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no news
+	 * @return \Model\Collection|null A collection of models or null if there are no news
 	 */
 	public static function findPublishedByPids($arrPids, $blnFeatured=null, $intLimit=0, $intOffset=0)
 	{
@@ -150,7 +150,7 @@ class NewsModel extends \Model
 	 * 
 	 * @param integer $intPid The news archive ID
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no news
+	 * @return \Model\Collection|null A collection of models or null if there are no news
 	 */
 	public static function findPublishedDefaultByPid($intPid)
 	{
@@ -173,7 +173,7 @@ class NewsModel extends \Model
 	 * @param integer $intId    The news archive ID
 	 * @param integer $intLimit An optional limit
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no news
+	 * @return \Model\Collection|null A collection of models or null if there are no news
 	 */
 	public static function findPublishedByPid($intId, $intLimit=0)
 	{
@@ -202,7 +202,7 @@ class NewsModel extends \Model
 	 * @param integer $intLimit  An optional limit
 	 * @param integer $intOffset An optional offset
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no news
+	 * @return \Model\Collection|null A collection of models or null if there are no news
 	 */
 	public static function findPublishedFromToByPids($intFrom, $intTo, $arrPids, $intLimit=0, $intOffset=0)
 	{

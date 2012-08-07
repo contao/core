@@ -9,11 +9,11 @@
 <?php endif; ?>
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
-  $objCombiner->add('plugins/mootools/colorpicker/'. COLORPICKER .'/css/mooRainbow.css', COLORPICKER);
-  $objCombiner->add('plugins/mootools/chosen/chosen.css');
-  $objCombiner->add('plugins/mootools/stylect/css/stylect.css');
-  $objCombiner->add('plugins/mootools/simplemodal/'. SIMPLEMODAL .'/css/simplemodal.css', SIMPLEMODAL);
-  $objCombiner->add('plugins/mootools/datepicker/'. DATEPICKER .'/dashboard.css', DATEPICKER);
+  $objCombiner->add('assets/mootools/colorpicker/'. COLORPICKER .'/css/mooRainbow.css', COLORPICKER);
+  $objCombiner->add('assets/mootools/chosen/chosen.css');
+  $objCombiner->add('assets/mootools/stylect/css/stylect.css');
+  $objCombiner->add('assets/mootools/simplemodal/'. SIMPLEMODAL .'/css/simplemodal.css', SIMPLEMODAL);
+  $objCombiner->add('assets/mootools/datepicker/'. DATEPICKER .'/dashboard.css', DATEPICKER);
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
   $objCombiner->add('system/themes/'. $this->theme .'/main.css');
   echo $objCombiner->getCombinedFile();
@@ -23,20 +23,20 @@
 <script><?php echo $this->getLocaleString(); ?></script>
 <script src="<?php
   $objCombiner = new Combiner();
-  $objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
-  $objCombiner->add('plugins/mootools/colorpicker/'. COLORPICKER .'/js/mooRainbow.js', COLORPICKER);
-  $objCombiner->add('plugins/mootools/chosen/chosen.js');
-  $objCombiner->add('plugins/mootools/stylect/js/stylect.js');
-  $objCombiner->add('plugins/mootools/simplemodal/'. SIMPLEMODAL .'/js/simplemodal.js', SIMPLEMODAL);
-  $objCombiner->add('plugins/mootools/datepicker/'. DATEPICKER .'/datepicker.js', DATEPICKER);
-  $objCombiner->add('plugins/mootools/mootao/Mootao.js');
-  $objCombiner->add('system/modules/core/html/contao.js');
+  $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
+  $objCombiner->add('assets/mootools/colorpicker/'. COLORPICKER .'/js/mooRainbow.js', COLORPICKER);
+  $objCombiner->add('assets/mootools/chosen/chosen.js');
+  $objCombiner->add('assets/mootools/stylect/js/stylect.js');
+  $objCombiner->add('assets/mootools/simplemodal/'. SIMPLEMODAL .'/js/simplemodal.js', SIMPLEMODAL);
+  $objCombiner->add('assets/mootools/datepicker/'. DATEPICKER .'/datepicker.js', DATEPICKER);
+  $objCombiner->add('assets/mootools/mootao/Mootao.js');
+  $objCombiner->add('assets/contao/js/core.js');
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>
 <script><?php echo $this->getDateString(); ?></script>
 <?php echo $this->javascripts; ?>
-<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
 <?php echo $this->rteConfig; ?>
 </head>
 <body id="top" class="__ua__">

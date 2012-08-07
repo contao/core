@@ -16,7 +16,7 @@
  * Please visit http://tinymce.moxiecode.com for more information.
  */
 if ($GLOBALS['TL_CONFIG']['useRTE']): ?>
-<script src="<?php echo $this->base; ?>plugins/tinyMCE/tiny_mce_gzip.js"></script>
+<script src="<?php echo $this->base; ?>assets/tinyMCE/tiny_mce_gzip.js"></script>
 <script>
 tinyMCE_GZ.init({
   plugins : "autosave,directionality,inlinepopups,legacyoutput,paste,save,searchreplace,spellchecker,tabfocus,template,typolinks",

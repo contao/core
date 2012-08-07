@@ -69,12 +69,6 @@ class ModuleExtension extends \BackendModule
 				return;
 			}
 
-			// .htaccess
-			$tplHtaccess = new \BackendTemplate('dev_htaccess');
-			$objHtaccess = new \File('system/modules/' . $objModule->folder . '/.htaccess');
-			$objHtaccess->write($tplHtaccess->parse());
-			$objHtaccess->close();
-
 			// config/config.php
 			$tplConfig = $this->newTemplate('dev_config', $objModule);
 			$objConfig = new \File('system/modules/' . $objModule->folder . '/config/config.php');
@@ -175,10 +169,6 @@ class ModuleExtension extends \BackendModule
 
 				foreach ($arrLanguages as $strLanguage)
 				{
-					$objHtaccess = new \File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/.htaccess');
-					$objHtaccess->write($tplHtaccess->parse());
-					$objHtaccess->close();
-
 					// languages/xx/default.php
 					$tplLanguage = $this->newTemplate('dev_default', $objModule);
 					$tplLanguage->language = $strLanguage;
@@ -227,10 +217,10 @@ class ModuleExtension extends \BackendModule
 	/**
 	 * Return a new template object
 	 * @param string
-	 * @param \Database_Result
+	 * @param \Database\Result
 	 * @return \BackendTemplate
 	 */
-	protected function newTemplate($strTemplate, \Database_Result $objModule)
+	protected function newTemplate($strTemplate, \Database\Result $objModule)
 	{
 		$objTemplate = new \BackendTemplate($strTemplate);
 

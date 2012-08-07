@@ -17,56 +17,6 @@
  * is a bit too complex for them to understand.
  */
 
-// library
-class Cache extends Contao\Cache {}
-class ClassLoader extends Contao\ClassLoader {}
-class Combiner extends Contao\Combiner {}
-class Config extends Contao\Config {}
-abstract class Controller extends Contao\Controller {}
-class Database_Installer extends Contao\Database_Installer {}
-class Database_Mysql_Result extends Contao\Database_Mysql_Result {}
-class Database_Mysql_Statement extends Contao\Database_Mysql_Statement {}
-class Database_Mysql extends Contao\Database_Mysql {}
-class Database_Mysqli_Result extends Contao\Database_Mysqli_Result {}
-class Database_Mysqli_Statement extends Contao\Database_Mysqli_Statement {}
-class Database_Mysqli extends Contao\Database_Mysqli {}
-abstract class Database_Result extends Contao\Database_Result {}
-abstract class Database_Statement extends Contao\Database_Statement {}
-class Database_Updater extends Contao\Database_Updater {}
-abstract class Database extends Contao\Database {}
-class Date extends Contao\Date {}
-class DcaExtractor extends Contao\DcaExtractor {}
-class Email extends Contao\Email {}
-class Encryption extends Contao\Encryption {}
-class Environment extends Contao\Environment {}
-class Feed extends Contao\Feed {}
-class FeedItem extends Contao\FeedItem {}
-class File extends Contao\File {}
-class Files_Ftp extends Contao\Files_Ftp {}
-class Files_Php extends Contao\Files_Php {}
-abstract class Files extends Contao\Files {}
-class Folder extends Contao\Folder {}
-class Idna extends Contao\Idna {}
-class Image extends Contao\Image {}
-class Input extends Contao\Input {}
-class Message extends Contao\Message {}
-class Model_Collection extends Contao\Model_Collection {}
-class Model_QueryBuilder extends Contao\Model_QueryBuilder {}
-abstract class Model extends Contao\Model {}
-class Request extends Contao\Request {}
-class RequestToken extends Contao\RequestToken {}
-class Search extends Contao\Search {}
-class Session extends Contao\Session {}
-class String extends Contao\String {}
-abstract class System extends Contao\System {}
-abstract class Template extends Contao\Template {}
-class TemplateLoader extends Contao\TemplateLoader {}
-abstract class User extends Contao\User {}
-class Validator extends Contao\Validator {}
-abstract class Widget extends Contao\Widget {}
-class ZipReader extends Contao\ZipReader {}
-class ZipWriter extends Contao\ZipWriter {}
-
 // calendar
 class Calendar extends Contao\Calendar {}
 abstract class Events extends Contao\Events {}
@@ -143,6 +93,54 @@ class FormSelectMenu extends Contao\FormSelectMenu {}
 class FormSubmit extends Contao\FormSubmit {}
 class FormTextArea extends Contao\FormTextArea {}
 class FormTextField extends Contao\FormTextField {}
+class Cache extends Contao\Cache {}
+class ClassLoader extends Contao\ClassLoader {}
+class Combiner extends Contao\Combiner {}
+class Config extends Contao\Config {}
+abstract class Controller extends Contao\Controller {}
+class Database\Installer extends Contao\Database\Installer {}
+class Database\Mysql\Result extends Contao\Database\Mysql\Result {}
+class Database\Mysql\Statement extends Contao\Database\Mysql\Statement {}
+class Database\Mysql extends Contao\Database\Mysql {}
+class Database\Mysqli\Result extends Contao\Database\Mysqli\Result {}
+class Database\Mysqli\Statement extends Contao\Database\Mysqli\Statement {}
+class Database\Mysqli extends Contao\Database\Mysqli {}
+abstract class Database\Result extends Contao\Database\Result {}
+abstract class Database\Statement extends Contao\Database\Statement {}
+class Database\Updater extends Contao\Database\Updater {}
+abstract class Database extends Contao\Database {}
+class Date extends Contao\Date {}
+class DcaExtractor extends Contao\DcaExtractor {}
+class Email extends Contao\Email {}
+class Encryption extends Contao\Encryption {}
+class Environment extends Contao\Environment {}
+class Feed extends Contao\Feed {}
+class FeedItem extends Contao\FeedItem {}
+class File extends Contao\File {}
+class Files\Ftp extends Contao\Files\Ftp {}
+class Files\Php extends Contao\Files\Php {}
+abstract class Files extends Contao\Files {}
+class Folder extends Contao\Folder {}
+class Idna extends Contao\Idna {}
+class Image extends Contao\Image {}
+class Input extends Contao\Input {}
+class Message extends Contao\Message {}
+class Model\Collection extends Contao\Model\Collection {}
+class Model\QueryBuilder extends Contao\Model\QueryBuilder {}
+abstract class Model extends Contao\Model {}
+class Request extends Contao\Request {}
+class RequestToken extends Contao\RequestToken {}
+class Search extends Contao\Search {}
+class Session extends Contao\Session {}
+class String extends Contao\String {}
+abstract class System extends Contao\System {}
+abstract class Template extends Contao\Template {}
+class TemplateLoader extends Contao\TemplateLoader {}
+abstract class User extends Contao\User {}
+class Validator extends Contao\Validator {}
+abstract class Widget extends Contao\Widget {}
+class ZipReader extends Contao\ZipReader {}
+class ZipWriter extends Contao\ZipWriter {}
 class ArticleModel extends Contao\ArticleModel {}
 class ContentModel extends Contao\ContentModel {}
 class FilesModel extends Contao\FilesModel {}

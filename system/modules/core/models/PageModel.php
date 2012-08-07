@@ -235,7 +235,7 @@ class PageModel extends \Model
 	 * 
 	 * @param mixed $varId The numeric ID or the alias name
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no pages
+	 * @return \Model\Collection|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedByIdOrAlias($varId)
 	{
@@ -260,7 +260,7 @@ class PageModel extends \Model
 	 * @param boolean $blnShowHidden If true, hidden pages will be included
 	 * @param boolean $blnIsSitemap  If true, the sitemap settings apply
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no pages
+	 * @return \Model\Collection|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedSubpagesWithoutGuestsByPid($intPid, $blnShowHidden=false, $blnIsSitemap=false)
 	{
@@ -274,7 +274,7 @@ class PageModel extends \Model
 			return null;
 		}
 
-		return new \Model_Collection($objSubpages, 'tl_page');
+		return new \Model\Collection($objSubpages, 'tl_page');
 	}
 
 
@@ -283,7 +283,7 @@ class PageModel extends \Model
 	 * 
 	 * @param integer $arrIds An array of page IDs
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no pages
+	 * @return \Model\Collection|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedRegularWithoutGuestsByIds($arrIds)
 	{
@@ -315,7 +315,7 @@ class PageModel extends \Model
 	 * 
 	 * @param integer $intPid The parent page's ID
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no pages
+	 * @return \Model\Collection|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedRegularWithoutGuestsByPid($intPid)
 	{
@@ -342,7 +342,7 @@ class PageModel extends \Model
 	 * 
 	 * @param integer $intId The page's ID
 	 * 
-	 * @return \Model_Collection|null A collection of models or null if there are no parent pages
+	 * @return \Model\Collection|null A collection of models or null if there are no parent pages
 	 */
 	public static function findParentsById($intId)
 	{
@@ -354,6 +354,6 @@ class PageModel extends \Model
 			return null;
 		}
 
-		return new \Model_Collection($objPages, 'tl_page');
+		return new \Model\Collection($objPages, 'tl_page');
 	}
 }

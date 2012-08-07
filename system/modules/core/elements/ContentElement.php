@@ -65,7 +65,7 @@ abstract class ContentElement extends \Frontend
 	 */
 	public function __construct($objElement)
 	{
-		if ($objElement instanceof \Model || $objElement instanceof \Model_Collection)
+		if ($objElement instanceof \Model || $objElement instanceof \Model\Collection)
 		{
 			$this->objModel = $objElement;
 		}

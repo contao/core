@@ -110,7 +110,13 @@ class ModuleAutoload extends \BackendModule
 						}
 						else
 						{
-							$strNamespace = preg_replace('/^.*namespace ([^;]+).*$/s', '$1', $strBuffer);
+							$strNamespace = preg_replace('/^.*namespace ([^; ]+);.*$/s', '$1', $strBuffer);
+							list($strFirst, $strRest) = explode('\\', $strNamespace, 2);
+
+							if ($strRest != '')
+							{
+								$strRest .= '\\';
+							}
 
 							if ($strNamespace != 'Contao')
 							{
@@ -128,8 +134,8 @@ class ModuleAutoload extends \BackendModule
 							// Add the ide_compat information
 							$arrCompat[$strModule][] = array
 							(
-								'namespace' => $strNamespace,
-								'class'     => basename($strFile, '.php'),
+								'namespace' => $strFirst,
+								'class'     => $strRest . basename($strFile, '.php'),
 								'abstract'  => preg_match('/^.*abstract class [^;]+.*$/s', $strBuffer)
 							);
 
@@ -308,9 +314,6 @@ EOT
 EOT
 				);
 
-				// Prepend the library array
-				array_unshift($arrCompat, $this->scanLibrary('Contao'));
-
 				// Add the classes
 				foreach ($arrCompat as $strModule=>$arrClasses)
 				{
@@ -355,47 +358,5 @@ EOT
 		$this->Template->submitButton = specialchars($GLOBALS['TL_LANG']['MSC']['continue']);
 		$this->Template->options = $GLOBALS['TL_LANG']['tl_merge']['options'];
 		$this->Template->ide_compat = $GLOBALS['TL_LANG']['tl_merge']['ide_compat'];
-	}
-
-
-	/**
-	 * Recursively scan a library folder for class names (Pear style)
-	 * @param string
-	 * @param string
-	 * @return array
-	 */
-	protected function scanLibrary($strPath, $strPrefix='')
-	{
-		$arrReturn = array();
-
-		foreach (scan(TL_ROOT . '/system/library/' . $strPath) as $strFile)
-		{
-			if (strncmp($strFile, '.', 1) === 0)
-			{
-				continue;
-			}
-
-			if (is_dir(TL_ROOT . '/system/library/' . $strPath . '/' . $strFile))
-			{
-				$arrReturn = array_merge($arrReturn, $this->scanLibrary($strPath . '/' . $strFile, $strPrefix . $strFile . '_'));
-			}
-			else
-			{
-				// Read the first 1200 characters of the file (should include the namespace tag)
-				$fh = fopen(TL_ROOT . '/system/library/' . $strPath . '/' . $strFile, 'rb');
-				$strBuffer = fread($fh, 1200);
-				fclose($fh);
-
-				// Add the ide_compat information
-				$arrReturn[] = array
-				(
-					'namespace' => 'Contao',
-					'class'     => $strPrefix . basename($strFile, '.php'),
-					'abstract'  => preg_match('/^.*abstract class [^;]+.*$/s', $strBuffer)
-				);
-			}
-		}
-
-		return $arrReturn;
 	}
 }

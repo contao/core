@@ -61,8 +61,8 @@ class ContentTable extends \ContentElement
 			{
 				$this->Template->sortable = true;
 				$this->Template->hasMooTools = true;
-				$GLOBALS['TL_CSS'][] = 'plugins/mootools/tablesort/css/tablesort.css';
-				$GLOBALS['TL_MOOTOOLS'][] = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/tablesort/js/tablesort.js"></script>';
+				$GLOBALS['TL_CSS'][] = 'assets/mootools/tablesort/css/tablesort.css';
+				$GLOBALS['TL_MOOTOOLS'][] = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'assets/mootools/tablesort/js/tablesort.js"></script>';
 			}
 			elseif ($objPage->hasJQuery)
 			{

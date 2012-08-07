@@ -1,6 +1,5 @@
 User-agent: *
 Disallow: /contao/
-Disallow: /plugins/
 Disallow: /system/
 Disallow: /templates/
 Disallow: /share/index.php
@@ -8,5 +7,3 @@ Disallow: /contao-check.php
 Disallow: /flash.php
 Disallow: /README.md
 Allow: /assets/
-Allow: /plugins/*.js
-Allow: /plugins/*.css

@@ -37,7 +37,6 @@ TemplateLoader::addFiles(array
 	'dev_extension'  => 'system/modules/devtools/templates',
 	'dev_feClass'    => 'system/modules/devtools/templates',
 	'dev_feTemplate' => 'system/modules/devtools/templates',
-	'dev_htaccess'   => 'system/modules/devtools/templates',
 	'dev_labels'     => 'system/modules/devtools/templates',
 	'dev_model'      => 'system/modules/devtools/templates',
 	'dev_modules'    => 'system/modules/devtools/templates',
