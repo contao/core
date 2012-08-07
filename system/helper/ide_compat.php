@@ -212,6 +212,7 @@ class TextField extends Contao\TextField {}
 class TextStore extends Contao\TextStore {}
 class TimePeriod extends Contao\TimePeriod {}
 class TrblField extends Contao\TrblField {}
+class Upload extends Contao\Upload {}
 
 // devtools
 class ModuleAutoload extends Contao\ModuleAutoload {}
