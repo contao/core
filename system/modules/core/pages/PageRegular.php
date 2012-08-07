@@ -415,7 +415,7 @@ class PageRegular extends \Frontend
 			{
 				if ($strFile != 'tinymce.css')
 				{
-					$GLOBALS['TL_FRAMEWORK_CSS'][] = 'assets/contao/' . $strFile;
+					$GLOBALS['TL_FRAMEWORK_CSS'][] = 'assets/contao/css/' . $strFile;
 				}
 			}
 		}
@@ -489,7 +489,7 @@ class PageRegular extends \Frontend
 		// Add the debug style sheet
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
 		{
-			$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/debug.css') . '">' . "\n";
+			$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/css/debug.css') . '">' . "\n";
 		}
 
 		// Always add conditional style sheets at the end

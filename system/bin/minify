@@ -51,17 +51,17 @@ contao()
 	copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
 
 	# CSS
-	for file in `ls $version/src | grep ".css"`; do
-		echo "$copyright" > $version/$file
-		$css $version/src/$file >> $version/$file
-		echo "  Created $version/$file"
+	for file in `ls $version/css | grep "\-uncompressed"`; do
+		echo "$copyright" > $version/css/${file/-uncompressed/}
+		$css $version/css/$file >> $version/css/${file/-uncompressed/}
+		echo "  Created $version/css/${file/-uncompressed/}"
 	done
 
 	# JavaScript
-	for file in `ls $version/src | grep ".js"`; do
-		echo "$copyright" > $version/$file
-		$js $version/src/$file >> $version/$file
-		echo "  Created $version/$file"
+	for file in `ls $version/js | grep "\-uncompressed"`; do
+		echo "$copyright" > $version/js/${file/-uncompressed/}
+		$js $version/js/$file >> $version/js/${file/-uncompressed/}
+		echo "  Created $version/js/${file/-uncompressed/}"
 	done
 }
 

@@ -22,7 +22,7 @@
   $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
   $objCombiner->add('assets/mootools/datepicker/'. DATEPICKER .'/datepicker.js', DATEPICKER);
   $objCombiner->add('assets/mootools/mootao/Mootao.js');
-  $objCombiner->add('assets/contao/core.js');
+  $objCombiner->add('assets/contao/js/core.js');
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>

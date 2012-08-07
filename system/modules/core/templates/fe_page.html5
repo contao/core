@@ -67,7 +67,7 @@
 <?php echo $this->mootools; ?>
 <?php if (!$this->disableCron): ?>
 
-<script src="<?php echo TL_SCRIPT_URL; ?>assets/contao/scheduler.js"></script>
+<script src="<?php echo TL_SCRIPT_URL; ?>assets/contao/js/scheduler.js"></script>
 <?php endif; ?>
 
 </body>

@@ -17,7 +17,7 @@
   $objCombiner = new Combiner();
   $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
   $objCombiner->add('assets/mootools/mootao/Mootao.js');
-  $objCombiner->add('assets/contao/core.js');
+  $objCombiner->add('assets/contao/js/core.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>
 <script><?php echo $this->getDateString(); ?></script>
