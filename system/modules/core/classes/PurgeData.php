@@ -136,7 +136,7 @@ class PurgeData extends \Backend implements \executable
 
 					foreach (scan(TL_ROOT . '/' . $folder) as $dir)
 					{
-						if ($dir != 'index.html')
+						if ($dir != 'index.html' && strncmp($dir, '.', 1) !== 0)
 						{
 							$total += count(scan(TL_ROOT . '/' . $folder . '/' . $dir));
 						}

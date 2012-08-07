@@ -104,14 +104,14 @@ class Automator extends \Backend
 		// Walk through the subfolders
 		foreach (scan(TL_ROOT . '/assets/images') as $dir)
 		{
-			if ($dir != 'index.html')
+			if ($dir != 'index.html' && strncmp($dir, '.', 1) !== 0)
 			{
 				// Purge the folder
 				$objFolder = new \Folder('assets/images/' . $dir);
 				$objFolder->purge();
 
 				// Restore the index.html file
-				$objFile = new \File('assets/contao/index.html');
+				$objFile = new \File('templates/index.html');
 				$objFile->copyTo('assets/images/' . $dir . '/index.html');
 			}
 		}
@@ -137,7 +137,7 @@ class Automator extends \Backend
 			$objFolder->purge();
 
 			// Restore the index.html file
-			$objFile = new \File('assets/contao/index.html');
+			$objFile = new \File('templates/index.html');
 			$objFile->copyTo($dir . '/index.html');
 		}
 
