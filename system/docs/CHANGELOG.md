@@ -14,6 +14,9 @@ Moved all vendor PHP libraries to `system/vendor` and the Contao library to
 `assets` folder. 
 
 ### New
+Added the "indexPage" hook (see #4506).
+
+### New
 Added the "prepareFormData" hook (see #4538).
 
 ### New
