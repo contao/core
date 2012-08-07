@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.RC1 (XXXX-XX-XX)
 ----------------------------
 
+### New
+Added a `config/config.ini` file to optionally disable the registration of
+namespaces, classes or templates in the autoload creator (see #4591).
+
 ### Changed
 Renamed the `system/modules/*/html` folders to `public`, since the only thing
 which is not stored in there are HTML files.
