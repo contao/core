@@ -95,7 +95,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_newsletter']['send'],
 				'href'                => 'key=send',
-				'icon'                => 'system/modules/newsletter/html/icon.gif'
+				'icon'                => 'system/modules/newsletter/public/icon.gif'
 			)
 		)
 	),

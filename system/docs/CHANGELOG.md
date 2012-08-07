@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.RC1 (XXXX-XX-XX)
 ----------------------------
 
+### Changed
+Renamed the `system/modules/*/html` folders to `public`, since the only thing
+which is not stored in there are HTML files.
+
 ### New
 Moved all vendor PHP libraries to `system/vendor` and the Contao library to
 `system/modules/core/library`. Also moved all vendor JavaScript plugins to the

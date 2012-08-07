@@ -31,7 +31,7 @@ array_insert($GLOBALS['BE_MOD']['content'], 5, array
 	'comments' => array
 	(
 		'tables'     => array('tl_comments'),
-		'icon'       => 'system/modules/comments/html/icon.gif',
-		'stylesheet' => 'system/modules/comments/html/style.css'
+		'icon'       => 'system/modules/comments/public/icon.gif',
+		'stylesheet' => 'system/modules/comments/public/style.css'
 	)
 ));

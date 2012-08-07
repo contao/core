@@ -20,17 +20,17 @@ $GLOBALS['BE_MOD']['devtools'] = array
 	(
 		'tables'     => array('tl_extension'),
 		'create'     => array('ModuleExtension', 'generate'),
-		'icon'       => 'system/modules/devtools/html/extension.gif'
+		'icon'       => 'system/modules/devtools/public/extension.gif'
 	),
 	'labels' => array
 	(
 		'callback'   => 'ModuleLabels',
-		'icon'       => 'system/modules/devtools/html/labels.gif',
-		'stylesheet' => 'system/modules/devtools/html/labels.css'
+		'icon'       => 'system/modules/devtools/public/labels.gif',
+		'stylesheet' => 'system/modules/devtools/public/labels.css'
 	),
 	'autoload' => array
 	(
 		'callback'   => 'ModuleAutoload',
-		'icon'       => 'system/modules/devtools/html/autoload.gif'
+		'icon'       => 'system/modules/devtools/public/autoload.gif'
 	)
 );

@@ -21,8 +21,8 @@ array_insert($GLOBALS['BE_MOD']['content'], 4, array
 		'tables'     => array('tl_newsletter_channel', 'tl_newsletter', 'tl_newsletter_recipients'),
 		'send'       => array('Newsletter', 'send'),
 		'import'     => array('Newsletter', 'importRecipients'),
-		'icon'       => 'system/modules/newsletter/html/icon.gif',
-		'stylesheet' => 'system/modules/newsletter/html/style.css'
+		'icon'       => 'system/modules/newsletter/public/icon.gif',
+		'stylesheet' => 'system/modules/newsletter/public/style.css'
 	)
 ));
 

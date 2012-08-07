@@ -89,7 +89,7 @@ class ModuleAutoload extends \BackendModule
 						{
 							$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
 
-							if (strncmp($strRelpath, 'config/', 7) !== 0 && strncmp($strRelpath, 'dca/', 4) !== 0 && strncmp($strRelpath, 'html/', 5) !== 0 && strncmp($strRelpath, 'languages/', 10) !== 0 && strncmp($strRelpath, 'templates/', 10) !== 0)
+							if (strncmp($strRelpath, 'config/', 7) !== 0 && strncmp($strRelpath, 'dca/', 4) !== 0 && strncmp($strRelpath, 'languages/', 10) !== 0 && strncmp($strRelpath, 'public/', 7) !== 0 && strncmp($strRelpath, 'templates/', 10) !== 0)
 							{
 								$arrFiles[] = $strRelpath;
 							}
