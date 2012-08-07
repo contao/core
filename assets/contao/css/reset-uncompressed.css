@@ -25,6 +25,7 @@ table {
 }
 caption,th,td {
 	text-align:left;
+	text-align:start; /* see #4596 */
 	vertical-align:top;
 }
 abbr,acronym {
