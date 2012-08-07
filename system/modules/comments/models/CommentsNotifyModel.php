@@ -35,7 +35,7 @@ class CommentsNotifyModel extends \Model
 
 
 	/**
-	 * Find a subscription by it tokens
+	 * Find a subscription by its tokens
 	 * 
 	 * @param string $strToken The token string
 	 * 
@@ -49,7 +49,7 @@ class CommentsNotifyModel extends \Model
 
 
 	/**
-	 * Find a subscription by it tokens
+	 * Find a subscription by its tokens
 	 * 
 	 * @param string  $strSource The source element
 	 * @param integer $intParent The parent ID

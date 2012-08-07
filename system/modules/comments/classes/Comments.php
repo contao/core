@@ -207,26 +207,26 @@ class Comments extends \Frontend
 		(
 			'name' => array
 			(
-				'name' => 'name',
-				'label' => $GLOBALS['TL_LANG']['MSC']['com_name'],
-				'value' => trim($this->User->firstname . ' ' . $this->User->lastname),
+				'name'      => 'name',
+				'label'     => $GLOBALS['TL_LANG']['MSC']['com_name'],
+				'value'     => trim($this->User->firstname . ' ' . $this->User->lastname),
 				'inputType' => 'text',
-				'eval' => array('mandatory'=>true, 'maxlength'=>64)
+				'eval'      => array('mandatory'=>true, 'maxlength'=>64)
 			),
 			'email' => array
 			(
-				'name' => 'email',
-				'label' => $GLOBALS['TL_LANG']['MSC']['com_email'],
-				'value' => $this->User->email,
+				'name'      => 'email',
+				'label'     => $GLOBALS['TL_LANG']['MSC']['com_email'],
+				'value'     => $this->User->email,
 				'inputType' => 'text',
-				'eval' => array('rgxp'=>'email', 'mandatory'=>true, 'maxlength'=>128, 'decodeEntities'=>true)
+				'eval'      => array('rgxp'=>'email', 'mandatory'=>true, 'maxlength'=>128, 'decodeEntities'=>true)
 			),
 			'website' => array
 			(
-				'name' => 'website',
-				'label' => $GLOBALS['TL_LANG']['MSC']['com_website'],
+				'name'      => 'website',
+				'label'     => $GLOBALS['TL_LANG']['MSC']['com_website'],
 				'inputType' => 'text',
-				'eval' => array('rgxp'=>'url', 'maxlength'=>128, 'decodeEntities'=>true)
+				'eval'      => array('rgxp'=>'url', 'maxlength'=>128, 'decodeEntities'=>true)
 			)
 		);
 
@@ -235,28 +235,28 @@ class Comments extends \Frontend
 		{
 			$arrFields['captcha'] = array
 			(
-				'name' => 'captcha',
+				'name'      => 'captcha',
 				'inputType' => 'captcha',
-				'eval' => array('mandatory'=>true)
+				'eval'      => array('mandatory'=>true)
 			);
 		}
 
 		// Comment field
 		$arrFields['comment'] = array
 		(
-			'name' => 'comment',
-			'label' => $GLOBALS['TL_LANG']['MSC']['com_comment'],
+			'name'      => 'comment',
+			'label'     => $GLOBALS['TL_LANG']['MSC']['com_comment'],
 			'inputType' => 'textarea',
-			'eval' => array('mandatory'=>true, 'rows'=>4, 'cols'=>40, 'preserveTags'=>true)
+			'eval'      => array('mandatory'=>true, 'rows'=>4, 'cols'=>40, 'preserveTags'=>true)
 		);
 
 		// Notify me of new comments
 		$arrFields['notify'] = array
 		(
-			'name' => 'notify',
-			'label' => '',
+			'name'      => 'notify',
+			'label'     => '',
 			'inputType' => 'checkbox',
-			'options' => array(1=>$GLOBALS['TL_LANG']['MSC']['com_notify'])
+			'options'   => array(1=>$GLOBALS['TL_LANG']['MSC']['com_notify'])
 		);
 
 		$doNotSubmit = false;
