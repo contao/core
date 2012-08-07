@@ -78,6 +78,27 @@ class ModuleAutoload extends \BackendModule
 					$arrFiles = array();
 					$arrClassLoader = array();
 					$arrNamespaces = array();
+					$arrConfig = array(
+						'autoload' => array(
+							'register_namespaces' => true,
+							'register_classes'    => true,
+							'register_templates'  => true,
+						),
+					);
+
+					// load the config.ini
+					if (file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/config.ini'))
+					{
+						$arrTemp = parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/config.ini', true);
+
+						foreach (array_keys($arrConfig) as $strSection)
+						{
+							if (isset($arrTemp[$strSection]))
+							{
+								$arrConfig[$strSection] = array_merge($arrConfig[$strSection], $arrTemp[$strSection]);
+							}
+						}
+					}
 
 					// Recursively scan all subfolders
 					$objFiles = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule));
@@ -193,11 +214,13 @@ EOT
 					);
 
 					// Namespaces
-					$arrNamespaces = array_unique($arrNamespaces);
-
-					if (!empty($arrNamespaces))
+					if ($arrConfig['autoload']['register_namespaces'])
 					{
-						$objFile->append(
+						$arrNamespaces = array_unique($arrNamespaces);
+
+						if (!empty($arrNamespaces))
+						{
+							$objFile->append(
 <<<EOT
 
 
@@ -207,18 +230,19 @@ EOT
 ClassLoader::addNamespaces(array
 (
 EOT
-						);
+							);
 
-						foreach ($arrNamespaces as $strNamespace)
-						{
-							$objFile->append("\t'" . $strNamespace . "',");
+							foreach ($arrNamespaces as $strNamespace)
+							{
+								$objFile->append("\t'" . $strNamespace . "',");
+							}
+
+							$objFile->append('));');
 						}
-
-						$objFile->append('));');
 					}
 
 					// Classes
-					if (!empty($arrClassLoader))
+					if ($arrConfig['autoload']['register_classes'] && !empty($arrClassLoader))
 					{
 						$objFile->append(
 <<<EOT
@@ -258,7 +282,7 @@ EOT
 					}
 
 					// Templates
-					if (!empty($arrTplLoader))
+					if ($arrConfig['autoload']['register_templates'] && !empty($arrTplLoader))
 					{
 						$objFile->append(
 <<<EOT
