@@ -27,6 +27,9 @@ Support nested insert tags (one nesting level) (see #4402). Thanks a lot to
 Christoph Wiechert for his great finds and hard work.
 
 ### New
+Added a back end upload widget (see #4244).
+
+### New
 Added the "toggle_view" insert tag to toggle between mobile and desktop view, so
 the autodetected status can be overridden (see #4308).
 
