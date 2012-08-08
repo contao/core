@@ -130,11 +130,6 @@ class ModuleAutoload extends \BackendModule
 							$strNamespace = preg_replace('/^.*namespace ([^; ]+);.*$/s', '$1', $strBuffer);
 							list($strFirst, $strRest) = explode('\\', $strNamespace, 2);
 
-							if ($strRest != '')
-							{
-								$strRest .= '\\';
-							}
-
 							if ($strNamespace != 'Contao')
 							{
 								// Register only the first chunk as namespace
@@ -149,10 +144,10 @@ class ModuleAutoload extends \BackendModule
 							}
 
 							// Add the ide_compat information
-							$arrCompat[$strModule][] = array
+							$arrCompat[$strModule][$strRest][] = array
 							(
 								'namespace' => $strFirst,
-								'class'     => $strRest . basename($strFile, '.php'),
+								'class'     => basename($strFile, '.php'),
 								'abstract'  => preg_match('/^.*abstract class [^;]+.*$/s', $strBuffer)
 							);
 
@@ -335,13 +330,20 @@ EOT
 				);
 
 				// Add the classes
-				foreach ($arrCompat as $strModule=>$arrClasses)
+				foreach ($arrCompat as $strModule=>$arrNamespaces)
 				{
-					$objFile->append("\n// " . ($strModule ?: 'library'));
+					$objFile->append("\n// " . $strModule);
 
-					foreach ($arrClasses as $arrClass)
+					foreach ($arrNamespaces as $strNamespace=>$arrClasses)
 					{
-						$objFile->append(($arrClass['abstract'] ? 'abstract ' : '') . 'class ' . $arrClass['class'] . ' extends ' . $arrClass['namespace'] . '\\' . $arrClass['class'] . ' {}');
+						$objFile->append('namespace ' . $strNamespace . '{');
+
+						foreach ($arrClasses as $arrClass)
+						{
+							$objFile->append("\t" . ($arrClass['abstract'] ? 'abstract ' : '') . 'class ' . $arrClass['class'] . ' extends ' . $arrClass['namespace'] . '\\' . ($strNamespace ? $strNamespace . '\\' : '') . $arrClass['class'] . ' {}');
+						}
+
+						$objFile->append('}');
 					}
 				}
 
