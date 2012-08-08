@@ -172,12 +172,10 @@ class Ftp extends \Files
 	 * 
 	 * @param resource $resFile    The file handle
 	 * @param string   $strContent The content to store in the file
-	 * 
-	 * @return boolean True if the operation was successful
 	 */
 	public function fputs($resFile, $strContent)
 	{
-		return @fputs($resFile, $strContent);
+		@fputs($resFile, $strContent);
 	}
 
 
