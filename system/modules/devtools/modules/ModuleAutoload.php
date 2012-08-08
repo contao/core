@@ -79,14 +79,22 @@ class ModuleAutoload extends \BackendModule
 					$arrClassLoader = array();
 					$arrNamespaces = array();
 
-					// Create the config.ini file if it does not yet exist
-					if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/config.ini'))
+					// Default configuration
+					$arrConfig = array
+					(
+						'register_namespaces' => true,
+						'register_classes'    => true,
+						'register_templates'  => true,
+					);
+
+					// Create the autoload.ini file if it does not yet exist
+					if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini'))
 					{
-						$objIni = new \File('system/modules/devtools/config/config.ini');
-						$objIni->copyTo('system/modules/' . $strModule . '/config/config.ini');
+						$objIni = new \File('system/modules/devtools/config/autoload.ini');
+						$objIni->copyTo('system/modules/' . $strModule . '/config/autoload.ini');
 					}
 
-					$arrConfig = parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/config.ini', true);
+					$arrConfig = array_merge($arrConfig, parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini'));
 
 					// Recursively scan all subfolders
 					$objFiles = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule));
@@ -202,7 +210,7 @@ EOT
 					);
 
 					// Namespaces
-					if ($arrConfig['autoload']['namespaces'])
+					if ($arrConfig['register_namespaces'])
 					{
 						$arrNamespaces = array_unique($arrNamespaces);
 
@@ -230,7 +238,7 @@ EOT
 					}
 
 					// Classes
-					if ($arrConfig['autoload']['classes'] && !empty($arrClassLoader))
+					if ($arrConfig['register_classes'] && !empty($arrClassLoader))
 					{
 						$objFile->append(
 <<<EOT
@@ -270,7 +278,7 @@ EOT
 					}
 
 					// Templates
-					if ($arrConfig['autoload']['templates'] && !empty($arrTplLoader))
+					if ($arrConfig['register_templates'] && !empty($arrTplLoader))
 					{
 						$objFile->append(
 <<<EOT
