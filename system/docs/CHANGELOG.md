@@ -1,7 +1,7 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 3.0.RC1 (XXXX-XX-XX)
+Version 3.0.RC1 (2012-08-08)
 ----------------------------
 
 ### New
@@ -70,7 +70,7 @@ $GLOBALS['TL_DCA'][$table]['fields'][$field]['rootNodes'] = array(2, 6, 7);
 ```
 
 ### Changed
-The breadcrumb templates now use lists to render its links (see #1258).
+The breadcrumb templates now uses lists to render its links (see #1258).
 
 ### New
 Added the insert tag "post" to access POST data (see #4448).
