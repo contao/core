@@ -410,6 +410,17 @@ class Updater extends \Controller
 			{
 				$strTable = str_replace('.php', '', $strFile);
 				$this->loadDataContainer($strTable);
+				$arrConfig = &$GLOBALS['TL_DCA'][$strTable]['config'];
+
+				// Skip non-database DCAs
+				if ($arrConfig['dataContainer'] == 'File')
+				{
+					continue;
+				}
+				if ($arrConfig['dataContainer'] == 'Folder' && !$arrConfig['databaseAssisted'])
+				{
+					continue;
+				}
 
 				foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $strField=>$arrField)
 				{

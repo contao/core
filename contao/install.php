@@ -834,6 +834,12 @@ class InstallTool extends Backend
 			return;
 		}
 
+		// Save the old upload path in the localconfig.php
+		if ($GLOBALS['TL_CONFIG']['uploadPath'] == 'tl_files')
+		{
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['uploadPath']", 'tl_files');
+		}
+
 		// Step 1: database structure
 		if (!$this->Database->tableExists('tl_files'))
 		{
