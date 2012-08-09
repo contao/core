@@ -96,7 +96,7 @@ abstract class ModuleNews extends \Module
 		$objTemplate->linkHeadline = $this->generateLink($objArticle->headline, $objArticle, $blnAddArchive);
 		$objTemplate->more = $this->generateLink($GLOBALS['TL_LANG']['MSC']['more'], $objArticle, $blnAddArchive, true);
 		$objTemplate->link = $this->generateNewsUrl($objArticle, $blnAddArchive);
-		$objTemplate->archive = $objArticle->archive;
+		$objTemplate->archive = $objArticle->getRelated('pid');
 
 		// Clean the RTE output
 		if ($objArticle->teaser != '')
