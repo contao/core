@@ -373,12 +373,10 @@ class DcaExtractor extends \Database\Installer
 
 		foreach ($fields as $field=>$config)
 		{
-			if (!isset($config['sql']) && !isset($config['inputType']))
+			if (isset($config['sql']))
 			{
-				continue;
+				$objFile->append("\t'$field' => \"{$config['sql']}\",");
 			}
-
-			$objFile->append("\t'$field' => \"{$config['sql']}\",");
 		}
 
 		$objFile->append(');', "\n\n");

@@ -1047,7 +1047,7 @@ abstract class Controller extends \System
 		$strBuffer = '';
 		static $arrCache = array();
 
-		for ($_rit=0; $_rit<count($tags); $_rit=$_rit+3)
+		for ($_rit=0; $_rit<count($tags); $_rit+=3)
 		{
 			$strBuffer .= $tags[$_rit];
 			$strTag = $tags[$_rit+1];
@@ -1665,11 +1665,11 @@ abstract class Controller extends \System
 
 					if ($objPage->isMobile)
 					{
-						$arrCache[$strTag] = '<a href="' . $strUrl . $strGlue . 'view=desktop" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['toggleDesktop'][1]) . '">' . $GLOBALS['TL_LANG']['MSC']['toggleDesktop'][0] . '</a>';
+						$arrCache[$strTag] = '<a href="' . $strUrl . $strGlue . 'toggle_view=desktop" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['toggleDesktop'][1]) . '">' . $GLOBALS['TL_LANG']['MSC']['toggleDesktop'][0] . '</a>';
 					}
 					else
 					{
-						$arrCache[$strTag] = '<a href="' . $strUrl . $strGlue . 'view=mobile" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['toggleMobile'][1]) . '">' . $GLOBALS['TL_LANG']['MSC']['toggleMobile'][0] . '</a>';
+						$arrCache[$strTag] = '<a href="' . $strUrl . $strGlue . 'toggle_view=mobile" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['toggleMobile'][1]) . '">' . $GLOBALS['TL_LANG']['MSC']['toggleMobile'][0] . '</a>';
 					}
 					break;
 
@@ -1677,7 +1677,7 @@ abstract class Controller extends \System
 				case 'iflng':
 					if ($elements[1] != '' && $elements[1] != $objPage->language)
 					{
-						for ($_rit; $_rit<count($tags); $_rit+=2)
+						for ($_rit; $_rit<count($tags); $_rit+=3)
 						{
 							if ($tags[$_rit+1] == 'iflng')
 							{
@@ -1695,7 +1695,7 @@ abstract class Controller extends \System
 
 						if (in_array($objPage->language, $langs))
 						{
-							for ($_rit; $_rit<count($tags); $_rit+=2)
+							for ($_rit; $_rit<count($tags); $_rit+=3)
 							{
 								if ($tags[$_rit+1] == 'ifnlng')
 								{

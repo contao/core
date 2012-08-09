@@ -463,9 +463,9 @@ class Updater extends \Controller
 
 			while ($objRow->next())
 			{
-				$arrPaths = deserialize($objRow->$field);
+				$arrPaths = deserialize($objRow->$field, true);
 
-				if (!is_array($arrPaths) || empty($arrPaths))
+				if (empty($arrPaths))
 				{
 					continue;
 				}
