@@ -100,8 +100,8 @@ class ModuleFaqList extends \Module
 			$arrTemp['title'] = specialchars($objFaq->question, true);
 			$arrTemp['href'] = $this->generateFaqLink($objFaq);
 
-			$arrFaq[$objFaq->id]['items'][] = $arrTemp;
-			$arrFaq[$objFaq->id]['headline'] = $objFaq->headline;
+			$arrFaq[$objFaq->pid]['items'][] = $arrTemp;
+			$arrFaq[$objFaq->pid]['headline'] = $objFaq->getRelated('pid')->headline;
 		}
 
 		$arrFaq = array_values(array_filter($arrFaq));

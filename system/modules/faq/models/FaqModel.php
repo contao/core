@@ -76,6 +76,13 @@ class FaqModel extends \Model
 		}
 
 		$t = static::$strTable;
-		return static::findBy(array("$t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")"), null, array('order'=>"$t.pid, $t.sorting"));
+		$arrColumns = array("$t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$arrColumns[] = "$t.published=1";
+		}
+
+		return static::findBy($arrColumns, null, array('order'=>"$t.pid, $t.sorting"));
 	}
 }
