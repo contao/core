@@ -321,7 +321,7 @@ abstract class ModuleNews extends \Module
 
 				if ($objArticle !== null)
 				{
-					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
