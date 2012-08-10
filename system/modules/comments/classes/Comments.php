@@ -550,8 +550,8 @@ class Comments extends \Frontend
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_optInSubject'], \Environment::get('host'));
-		$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_optInMessage'], $strName, $strUrl, $strUrl . '?token=' . $objNotify->tokenConfirm, $strUrl . '?token=' . $objNotify->tokenRemove);
-		$objEmail->sendTo($strEmail);
+		$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_optInMessage'], $objComment->name, $strUrl, $strUrl . '?token=' . $objNotify->tokenConfirm, $strUrl . '?token=' . $objNotify->tokenRemove);
+		$objEmail->sendTo($objComment->email);
 	}
 
 

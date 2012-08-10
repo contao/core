@@ -46,12 +46,15 @@ function __error($intType, $strMessage, $strFile, $intLine)
 	{
 		if ($intType != E_NOTICE)
 		{
+			$e = new Exception();
+
 			// Log the error
-			error_log(sprintf('PHP %s: %s in %s on line %s',
+			error_log(sprintf("\nPHP %s: %s in %s on line %s\n%s\n",
 							$arrErrors[$intType],
 							$strMessage,
 							$strFile,
-							$intLine));
+							$intLine,
+							$e->getTraceAsString()));
 
 			// Display the error
 			if (ini_get('display_errors'))
@@ -62,7 +65,6 @@ function __error($intType, $strMessage, $strFile, $intLine)
 									$strFile,
 									$intLine);
 
-				$e = new Exception();
 				$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . $e->getTraceAsString() . "\n" . '</pre>';
 				echo '<br>' . $strMessage;
 			}
