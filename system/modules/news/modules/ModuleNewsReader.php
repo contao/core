@@ -135,6 +135,12 @@ class ModuleNewsReader extends \ModuleNews
 		$objArchive = $objArticle->getRelated('pid');
 		$this->Template->allowComments = $objArchive->allowComments;
 
+		// Comments are not allowed
+		if (!$objArchive->allowComments)
+		{
+			return;
+		}
+
 		// Adjust the comments headline level
 		$intHl = min(intval(str_replace('h', '', $this->hl)), 5);
 		$this->Template->hlc = 'h' . ($intHl + 1);

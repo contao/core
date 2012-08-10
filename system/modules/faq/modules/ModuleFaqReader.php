@@ -166,15 +166,13 @@ class ModuleFaqReader extends \Module
 		}
 
 		$objCategory = $objFaq->getRelated('pid');
+		$this->Template->allowComments = $objCategory->allowComments;
 
-		// Check whether comments are allowed
+		// Comments are not allowed
 		if (!$objCategory->allowComments)
 		{
-			$this->Template->allowComments = false;
 			return;
 		}
-
-		$this->Template->allowComments = true;
 
 		// Adjust the comments headline level
 		$intHl = min(intval(str_replace('h', '', $this->hl)), 5);

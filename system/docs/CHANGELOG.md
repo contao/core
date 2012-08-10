@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.0.0 (2012-XX-XX)
+--------------------------
+
+### Fixed
+Downgraded the chosen plugin to make it work again (see #4595).
+
+
 Version 3.0.RC1 (2012-08-08)
 ----------------------------
 

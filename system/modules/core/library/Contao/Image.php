@@ -126,7 +126,15 @@ class Image
 		// No mode given
 		if ($mode == '')
 		{
-			$mode = 'proportional';
+			// Backwards compatibility
+			if ($width && $height)
+			{
+				$mode = 'center_top';
+			}
+			else
+			{
+				$mode = 'proportional';
+			}
 		}
 
 		// Backwards compatibility

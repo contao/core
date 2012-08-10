@@ -164,9 +164,9 @@ class PageRegular extends \Frontend
 		$blnMobile = ($objPage->mobileLayout && \Environment::get('agent')->mobile);
 
 		// Set the cookie
-		if (isset($_GET['view']))
+		if (isset($_GET['toggle_view']))
 		{
-			if (\Input::get('view') == 'mobile')
+			if (\Input::get('toggle_view') == 'mobile')
 			{
 				$this->setCookie('TL_VIEW', 'mobile', 0);
 			}

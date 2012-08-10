@@ -219,6 +219,12 @@ class ModuleEventReader extends \Events
 		$objCalendar = $objEvent->getRelated('pid');
 		$this->Template->allowComments = $objCalendar->allowComments;
 
+		// Comments are not allowed
+		if (!$objCalendar->allowComments)
+		{
+			return;
+		}
+
 		// Adjust the comments headline level
 		$intHl = min(intval(str_replace('h', '', $this->hl)), 5);
 		$this->Template->hlc = 'h' . ($intHl + 1);

@@ -254,15 +254,18 @@ EOT
 							$strRelpath = str_replace('system/modules/' . $strModule . '/', '', $strPath);
 							$strBasedir = substr($strRelpath, 0, strpos($strRelpath, '/'));
 
-							if ($strGroup === null)
+							if ($strBasedir != '')
 							{
-								$strGroup = $strBasedir;
-								$objFile->append("\t// " . ucfirst($strBasedir));
-							}
-							elseif ($strBasedir != $strGroup)
-							{
-								$strGroup = $strBasedir;
-								$objFile->append("\n\t// " . ucfirst($strBasedir));
+								if ($strGroup === null)
+								{
+									$strGroup = $strBasedir;
+									$objFile->append("\t// " . ucfirst($strBasedir));
+								}
+								elseif ($strBasedir != $strGroup)
+								{
+									$strGroup = $strBasedir;
+									$objFile->append("\n\t// " . ucfirst($strBasedir));
+								}
 							}
 
 							$strClass = "'" . $strClass . "'";

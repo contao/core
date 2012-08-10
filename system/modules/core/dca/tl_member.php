@@ -494,10 +494,16 @@ class tl_member extends Backend
 
 	/**
 	 * Store the date when the account has been added
-	 * @param \DataContainer
+	 * @param object
 	 */
-	public function storeDateAdded(DataContainer $dc)
+	public function storeDateAdded($dc)
 	{
+		// Front end call
+		if (!$dc instanceof \DataContainer)
+		{
+			return;
+		}
+
 		// Return if there is no active record (override all)
 		if (!$dc->activeRecord || $dc->activeRecord->dateAdded > 0)
 		{

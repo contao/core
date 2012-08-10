@@ -1,10 +1,8 @@
 <?php
 
 // CSS files
-$objCombiner = new Combiner();
-$objCombiner->add('assets/mootools/chosen/chosen.css');
-$objCombiner->add('assets/mootools/stylect/css/stylect.css');
-$GLOBALS['TL_CSS'][] = $objCombiner->getCombinedFile();
+$GLOBALS['TL_CSS'][] = 'assets/mootools/chosen/chosen.css||static';
+$GLOBALS['TL_CSS'][] = 'assets/mootools/stylect/css/stylect.css||static';
 
 // JavaScript files
 $objCombiner = new Combiner();

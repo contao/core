@@ -691,11 +691,19 @@ abstract class System
 	{
 		$strCode = rtrim(file_get_contents($strName));
 
-		if (substr($strCode, 0, 5) == '<?php')
+		// Opening tag
+		if (strncmp($strCode, '<?php', 5) === 0)
 		{
 			$strCode = substr($strCode, 5);
 		}
 
+		// die() statement
+		$strCode = str_replace(array(
+			" if (!defined('TL_ROOT')) die('You cannot access this file directly!');",
+			" if (!defined('TL_ROOT')) die('You can not access this file directly!');"
+		), '', $strCode);
+
+		// Closing tag
 		if (substr($strCode, -2) == '?>')
 		{
 			$strCode = substr($strCode, 0, -2);

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Contao Open Source CMS</title>
-<style media="screen">
+<style>
 a { text-decoration:none; }
 div { width:520px; margin:64px auto 18px; padding:18px 18px 9px; background:#ffc; border:1px solid #fc0; font-family:Verdana,sans-serif; font-size:12px; }
 h1 { font-size:18px; font-weight:normal; margin:0 0 18px; }

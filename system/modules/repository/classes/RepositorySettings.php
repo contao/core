@@ -17,6 +17,7 @@ define('REPOSITORY_SOAPCACHE', true);
 
 // valid core versions in descending order
 define('REPOSITORY_COREVERSIONS',
+		'30000009,30000009;'.	// 3.0.0 stable
 		'30000006,30000006;'.	// 3.0.0 RC1
 		'30000003,30000003;'.	// 3.0.0 beta1
 		'20110059,20110059;'.	// 2.11.5 stable
@@ -82,47 +83,8 @@ define('REPOSITORY_COREVERSIONS',
 		'20040079,20040079;'.	// 2.4.7 stable
 		'20040069,20040069;'.	// 2.4.6 stable
 		'20040009,20040009;'.	// 2.4.0 stable
-		'20030029,20030029'	// 2.3.2 stable
+		'20030029,20030029'		// 2.3.2 stable
 );
-
-// Where files are stored, relative to TL_ROOT
-define('REPOSITORY_FILEROOT', 'files/repository');
-
-// Path of download script
-define('REPOSITORY_DOWNLOADS', 'system/modules/rep_server/RepositoryDownload.php?token=');
 
 // HTML tags allowed in long texts
 define('REPOSITORY_TEXTTAGS', '<h3><h4><h5><h6><p><br><ol><ul><li><em><strong>');
-
-// # of searchtags allowed
-define('REPOSITORY_SEARCHTAGS', 5);
-
-// Assumed maximum length of one line in translation editor
-define('REPOSITORY_TRANSLINECHARS', 45);
-
-// Minimum # of lines of textareas in translation editor
-define('REPOSITORY_TRANSMINLINES', 3);
-
-// Maximum # of lines of textareas in translation editor
-define('REPOSITORY_TRANSMAXLINES', 15);
-
-// Pixel height of one line in translation editor
-define('REPOSITORY_TRANSLINEHEIGHT', 15);
-
-// Non editable file extensions
-define('REPOSITORY_NOEDIT', 'gif,png,zip,gz,tgz,bz,jpg,jpeg,exe,tif,tiff,db');
-
-// Max # of items to display in each cloud
-define('REPOSITORY_MAXCLOUDITEMS', 100);
-
-// Thumbnail size limits
-define('REPOSITORY_THUMBWIDTHMAX', 240);
-define('REPOSITORY_THUMBHEIGHTMAX', 180);
-
-// Time in seconds after which a dirty cache must be flushed
-// NOW   : Used for 'Resynchronize' by repository admins and after delete/unpublish
-// NORMAL: Used on updates by authors and translators
-// LATER : Used for download-, install- and update-counters, and for ratings.
-define('REPOSITORY_CLEARCACHE_NOW', 1);			// immediate
-define('REPOSITORY_CLEARCACHE_NORMAL', 300);	// allow 5 minutes max
-define('REPOSITORY_CLEARCACHE_LATER', 3600);	// allow 1 hour max
