@@ -1472,7 +1472,7 @@ abstract class Controller extends \System
 					elseif ($objNews->source == 'article')
 					{
 						$objArticle = \ArticleModel::findByPk($objNews->articleId, array('eager'=>true));
-						$strUrl = $this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
+						$strUrl = $this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 					}
 					elseif ($objNews->source == 'external')
 					{
@@ -1480,7 +1480,7 @@ abstract class Controller extends \System
 					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objNews->pid, ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->alias != '') ? $objNews->alias : $objNews->id));
+						$strUrl = $this->generateFrontendUrl($objNews->getRelated('pid')->getRelated('jumpTo')->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->alias != '') ? $objNews->alias : $objNews->id));
 					}
 
 					// Replace the tag
@@ -1523,7 +1523,7 @@ abstract class Controller extends \System
 					elseif ($objEvent->source == 'article')
 					{
 						$objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true));
-						$strUrl = $this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
+						$strUrl = $this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 					}
 					elseif ($objEvent->source == 'external')
 					{
@@ -1531,7 +1531,7 @@ abstract class Controller extends \System
 					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objEvent->pid, ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/events/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id));
+						$strUrl = $this->generateFrontendUrl($objEvent->getRelated('pid')->getRelated('jumpTo')->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/events/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id));
 					}
 
 					// Replace the tag
