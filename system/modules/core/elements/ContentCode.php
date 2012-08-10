@@ -77,6 +77,7 @@ class ContentCode extends \ContentElement
 				'Delphi'     => 'shBrushDelphi',
 				'Diff'       => 'shBrushDiff',
 				'Groovy'     => 'shBrushGroovy',
+				'HTML'       => 'shBrushXml',
 				'Java'       => 'shBrushJava',
 				'JavaFX'     => 'shBrushJavaFX',
 				'JavaScript' => 'shBrushJScript',
