@@ -434,7 +434,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['highlight'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('AS3', 'Bash', 'C', 'CSharp', 'CSS', 'Delphi', 'Diff', 'Groovy', 'HTML', 'Java', 'JavaFx', 'JavaScript', 'Perl', 'PHP', 'PowerShell', 'Python', 'Ruby', 'Scala', 'SQL', 'Text', 'VB', 'XHTML', 'XML'),
+			'options'                 => array('ApacheConf', 'AS3', 'Bash', 'C', 'CSharp', 'CSS', 'Delphi', 'Diff', 'Groovy', 'HTML', 'Java', 'JavaFx', 'JavaScript', 'Perl', 'PHP', 'PowerShell', 'Python', 'Ruby', 'Scala', 'SQL', 'Text', 'VB', 'XHTML', 'XML'),
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'load_callback' => array
 			(

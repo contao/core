@@ -462,6 +462,7 @@ highlighter()
 {
 	for version in `ls -d $folder/assets/highlighter/*`; do
 		xregexp="/* XRegExp 1.5.0, (c) 2007-2010 Steven Levithan, http://xregexp.com */"
+		apacheconf="/* ApacheConf for SyntaxHighlighter, (c) 2010-2011 Sandro Bilbeisi */"
 		copyright="/* SyntaxHighlighter $(basename $version), (c) 2004-2010 Alex Gorbatchev, http://alexgorbatchev.com/SyntaxHighlighter */"
 
 		# CSS
@@ -473,6 +474,8 @@ highlighter()
 		for file in `ls $version/src | grep ".js"`; do
 			if [ $file == "XRegExp.js" ]; then
 				echo "$xregexp" > $version/$file
+			elif [ $file == "shBrushApacheConf.js" ]; then
+				echo "$apacheconf" > $version/$file
 			else
 				echo "$copyright" > $version/$file
 			fi

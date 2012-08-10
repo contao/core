@@ -69,6 +69,7 @@ class ContentCode extends \ContentElement
 		{
 			$arrMapper = array
 			(
+				'ApacheConf' => 'shBrushApacheConf',
 				'AS3'        => 'shBrushAS3',
 				'Bash'       => 'shBrushBash',
 				'C'          => 'shBrushCpp',
