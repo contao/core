@@ -360,7 +360,7 @@ abstract class Frontend extends \Controller
 
 		if (is_array($intId))
 		{
-			if ($intId['id'] == $objPage->id)
+			if ($intId['id'] == '' || $intId['id'] == $objPage->id)
 			{
 				$this->reload();
 			}
