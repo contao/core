@@ -282,7 +282,12 @@ class Updater extends \Controller
 		$this->Database->query("ALTER TABLE `tl_layout` ADD `framework` varchar(255) NOT NULL default ''");
 		$this->Database->query("UPDATE `tl_layout` SET `framework`='a:2:{i:0;s:10:\"layout.css\";i:1;s:11:\"tinymce.css\";}'");
 		$this->Database->query("UPDATE `tl_layout` SET `framework`='a:1:{i:0;s:10:\"layout.css\";}' WHERE skipTinymce=1");
-		$this->Database->query("UPDATE `tl_layout` SET `framework`='' WHERE skipFramework=1");
+		
+		// make sure skipFramework exists (updating from versions < 2.11)
+		if ($this->Database->fieldExists('skipFramework', 'tl_layout'))
+		{
+			$this->Database->query("UPDATE `tl_layout` SET `framework`='' WHERE skipFramework=1");
+		}
 
 		// Add the "ptable" field
 		$this->Database->query("ALTER TABLE `tl_content` ADD ptable varchar(64) NOT NULL default ''");
