@@ -4,9 +4,9 @@
 <meta charset="<?php echo $this->charset; ?>">
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
 <base href="<?php echo $this->base; ?>">
-<link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>assets/mootools/stylect/css/stylect.css" media="all">
-<link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/basic.css" media="all">
-<link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/install.css" media="all">
+<link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>assets/mootools/stylect/css/stylect.css">
+<link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/basic.css">
+<link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/install.css">
 <!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
 <?php echo $this->stylesheets; ?>
 <script><?php echo $this->getLocaleString(); ?></script>

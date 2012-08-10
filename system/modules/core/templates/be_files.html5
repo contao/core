@@ -13,7 +13,7 @@
   $objCombiner->add('system/themes/'. $this->theme .'/main.css');
   $objCombiner->add('assets/mootools/datepicker/'. DATEPICKER .'/dashboard.css', DATEPICKER);
   echo $objCombiner->getCombinedFile();
-?>" media="all">
+?>">
 <!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
 <?php echo $this->stylesheets; ?>
 <script><?php echo $this->getLocaleString(); ?></script>
