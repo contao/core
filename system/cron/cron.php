@@ -53,16 +53,51 @@ class CronJob extends Frontend
 			return;
 		}
 
-		$intMonthly  = date('Ym');
-		$intWeekly   = date('YW');
-		$intDaily    = date('Ymd');
-		$intHourly   = date('YmdH');
-		$intMinutely = date('YmdHi');
+		$arrLock = array();
+		$arrIntervals = array('monthly', 'weekly', 'daily', 'hourly', 'minutely');
 
-		// Monthly jobs
-		if (!empty($GLOBALS['TL_CRON']['monthly']) && $GLOBALS['TL_CONFIG']['cron_monthly'] != $intMonthly)
+		// Store the current timestamps
+		$arrCurrent = array
+		(
+			'monthly'  => date('Ym'),
+			'weekly'   => date('YW'),
+			'daily'    => date('Ymd'),
+			'hourly'   => date('YmdH'),
+			'minutely' => date('YmdHi')
+		);
+
+		// Get the timestamps from tl_cron
+		$objLock = $this->Database->query("SELECT * FROM tl_cron WHERE name !='lastrun'");
+
+		while ($objLock->next())
 		{
-			$this->log('Running monthly cron jobs', 'CronJobs run()', TL_CRON);
+			$arrLock[$objLock->name] = $objLock->value;
+		}
+
+		// Create the database entries
+		foreach ($arrIntervals as $strInterval)
+		{
+			if (!isset($arrLock[$strInterval]))
+			{
+				$arrLock[$strInterval] = 0;
+				$this->Database->query("INSERT INTO tl_cron (name, value) VALUES ('$strInterval', 0)");
+			}
+		}
+
+		// Run the jobs
+		foreach ($arrIntervals as $strInterval)
+		{
+			$intCurrent = $arrCurrent[$strInterval];
+
+			// Skip empty intervals and jobs that have been executed already
+			if (empty($GLOBALS['TL_CRON'][$strInterval]) || $arrLock[$strInterval] == $intCurrent)
+			{
+				continue;
+			}
+
+			// Update the database before the jobs are executed, in case one of them fails
+			$this->Database->query("UPDATE tl_cron SET value=$intCurrent WHERE name='$strInterval'");
+			$this->log('Running the ' . $strInterval . ' cron jobs', 'CronJobs run()', TL_CRON);
 
 			foreach ($GLOBALS['TL_CRON']['monthly'] as $callback)
 			{
@@ -70,68 +105,8 @@ class CronJob extends Frontend
 				$this->$callback[0]->$callback[1]();
 			}
 
-			$this->log('Monthly cron jobs complete', 'CronJobs run()', TL_CRON);
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_monthly']", $intMonthly);
-		}
-
-		// Weekly jobs
-		elseif (!empty($GLOBALS['TL_CRON']['weekly']) && $GLOBALS['TL_CONFIG']['cron_weekly'] != $intWeekly)
-		{
-			$this->log('Running weekly cron jobs', 'CronJobs run()', TL_CRON);
-
-			foreach ($GLOBALS['TL_CRON']['weekly'] as $callback)
-			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]();
-			}
-
-			$this->log('Weekly cron jobs complete', 'CronJobs run()', TL_CRON);
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_weekly']", $intWeekly);
-		}
-
-		// Daily jobs
-		elseif (!empty($GLOBALS['TL_CRON']['daily']) && $GLOBALS['TL_CONFIG']['cron_daily'] != $intDaily)
-		{
-			$this->log('Running daily cron jobs', 'CronJobs run()', TL_CRON);
-
-			foreach ($GLOBALS['TL_CRON']['daily'] as $callback)
-			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]();
-			}
-
-			$this->log('Daily cron jobs complete', 'CronJobs run()', TL_CRON);
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_daily']", $intDaily);
-		}
-
-		// Hourly jobs
-		elseif (!empty($GLOBALS['TL_CRON']['hourly']) && $GLOBALS['TL_CONFIG']['cron_hourly'] != $intHourly)
-		{
-			$this->log('Running hourly cron jobs', 'CronJobs run()', TL_CRON);
-
-			foreach ($GLOBALS['TL_CRON']['hourly'] as $callback)
-			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]();
-			}
-
-			$this->log('Hourly cron jobs complete', 'CronJobs run()', TL_CRON);
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_hourly']", $intHourly);
-		}
-
-		// Minutely jobs
-		elseif (!empty($GLOBALS['TL_CRON']['minutely']) && $GLOBALS['TL_CONFIG']['cron_minutely'] != $intMinutely)
-		{
-			$this->log('Running minutely cron jobs', 'CronJobs run()', TL_CRON);
-
-			foreach ($GLOBALS['TL_CRON']['minutely'] as $callback)
-			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]();
-			}
-
-			$this->log('Minutely cron jobs complete', 'CronJobs run()', TL_CRON);
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_minutely']", $intMinutely);
+			$this->log(ucfirst($strInterval) . ' cron jobs complete', 'CronJobs run()', TL_CRON);
+			break;
 		}
 	}
 
@@ -143,12 +118,13 @@ class CronJob extends Frontend
 	protected function hasToWait()
 	{
 		$time = time();
+		$return = true;
 
 		// Lock the table
-		$this->Database->lockTables(array('tl_lock'=>'WRITE'));
+		$this->Database->lockTables(array('tl_cron'=>'WRITE'));
 
 		// Get the last execution date
-		$objCron = $this->Database->prepare("SELECT * FROM tl_lock WHERE name='cron'")
+		$objCron = $this->Database->prepare("SELECT * FROM tl_cron WHERE name='lastrun'")
 								  ->limit(1)
 								  ->execute();
 
@@ -156,25 +132,20 @@ class CronJob extends Frontend
 		if ($objCron->numRows < 1)
 		{
 			$this->updateCronTxt($time);
-			$this->Database->query("INSERT INTO tl_lock (name, tstamp) VALUES ('cron', $time)");
-			$this->Database->unlockTables();
-
-			return false;
+			$this->Database->query("INSERT INTO tl_cron (name, value) VALUES ('lastrun', $time)");
+			$return = false;
 		}
 
-		// Last execution was less than a minute ago
-		if ($objCron->tstamp > (time() - 60))
+		// Last execution was more than a minute ago
+		elseif ($objCron->value < (time() - 60))
 		{
-			$this->Database->unlockTables();
-			return true;
+			$this->updateCronTxt($time);
+			$this->Database->query("UPDATE tl_cron SET value=$time WHERE name='lastrun'");
+			$return = false;
 		}
 
-		// Store the new value
-		$this->updateCronTxt($time);
-		$this->Database->query("UPDATE tl_lock SET tstamp=$time WHERE name='cron'");
 		$this->Database->unlockTables();
-
-		return false;
+		return $return;
 	}
 
 

@@ -12,9 +12,9 @@
 
 
 /**
- * Table tl_lock
+ * Table tl_cron
  */
-$GLOBALS['TL_DCA']['tl_lock'] = array
+$GLOBALS['TL_DCA']['tl_cron'] = array
 (
 
 	// Config
@@ -25,7 +25,7 @@ $GLOBALS['TL_DCA']['tl_lock'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'name' => 'index'
+				'name' => 'unique'
 			)
 		)
 	),
@@ -37,13 +37,13 @@ $GLOBALS['TL_DCA']['tl_lock'] = array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
 		),
-		'tstamp' => array
-		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
-		),
 		'name' => array
 		(
-			'sql'                     => "varchar(64) NOT NULL default ''"
+			'sql'                     => "varchar(32) NOT NULL default ''"
+		),
+		'value' => array
+		(
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		)
 	)
 );

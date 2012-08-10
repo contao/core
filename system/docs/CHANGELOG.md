@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Do not write to the local configuration file in the cron script (see #4483).
+
+### Fixed
 Downgraded the chosen plugin to make it work again (see #4595).
 
 
