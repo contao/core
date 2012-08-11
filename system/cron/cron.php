@@ -137,7 +137,7 @@ class CronJob extends Frontend
 		}
 
 		// Check the last execution time
-		elseif ($objCron->value < (time() - $this->getTimeout()))
+		elseif ($objCron->value < (time() - $this->getCronTimeout()))
 		{
 			$this->updateCronTxt($time);
 			$this->Database->query("UPDATE tl_cron SET value=$time WHERE name='lastrun'");
