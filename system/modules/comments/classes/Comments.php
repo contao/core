@@ -88,8 +88,6 @@ class Comments extends \Frontend
 			$objTemplate->pagination = $objPagination->generate("\n  ");
 		}
 
-		$objTemplate->allowComments = true;
-
 		// Get all published comments
 		if ($limit)
 		{
