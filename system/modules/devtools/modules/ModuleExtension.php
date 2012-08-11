@@ -75,6 +75,12 @@ class ModuleExtension extends \BackendModule
 			$objConfig->write($tplConfig->parse());
 			$objConfig->close();
 
+			// config/autoload.ini
+			$tplConfig = $this->newTemplate('dev_ini', $objModule);
+			$objConfig = new \File('system/modules/' . $objModule->folder . '/config/autoload.ini');
+			$objConfig->write($tplConfig->parse());
+			$objConfig->close();
+
 			// Back end
 			if ($objModule->addBeMod)
 			{
@@ -93,7 +99,7 @@ class ModuleExtension extends \BackendModule
 
 				$arrTables = trimsplit(',', $objModule->beTables);
 
-				// Data container files
+				// Back end data container files
 				foreach ($arrTables as $strTable)
 				{
 					$tplTable = $this->newTemplate('dev_dca', $objModule);
@@ -134,6 +140,17 @@ class ModuleExtension extends \BackendModule
 				}
 
 				$arrTables = trimsplit(',', $objModule->feTables);
+
+				// Front end data container files
+				foreach ($arrTables as $strTable)
+				{
+					$tplTable = $this->newTemplate('dev_feDca', $objModule);
+					$tplTable->table = $strTable;
+
+					$objTable = new \File('system/modules/' . $objModule->folder . '/dca/' . $strTable . '.php');
+					$objTable->write($tplTable->parse());
+					$objTable->close();
+				}
 
 				// Models
 				foreach ($arrTables as $strTable)
@@ -195,6 +212,12 @@ class ModuleExtension extends \BackendModule
 					}
 				}
 			}
+
+			// Public folder
+			$tplConfig = $this->newTemplate('dev_htaccess', $objModule);
+			$objConfig = new \File('system/modules/' . $objModule->folder . '/public/.htaccess');
+			$objConfig->write($tplConfig->parse());
+			$objConfig->close();
 
 			\Message::addConfirmation($GLOBALS['TL_LANG']['tl_extension']['confirm']);
 			$this->reload();

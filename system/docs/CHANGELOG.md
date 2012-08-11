@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Make the modules' html folders accessible during the update and create the
+required files in the extension creator as well.
+
+### Fixed
 Pass the minimum cron timeout value to the cron trigger so minutely cron jobs
 are correctly executed (the minimum interval used to be 5 minutes).
 

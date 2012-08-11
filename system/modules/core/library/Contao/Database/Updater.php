@@ -302,6 +302,20 @@ class Updater extends \Controller
 		{
 			$this->createContentElement($objEvents, 'tl_calendar_events', 'details');
 		}
+
+		// Add an .htaccess file to the modules' html folders so they can be accessed via HTTP
+		foreach (scan(TL_ROOT . '/system/modules') as $strFolder)
+		{
+			if (is_dir(TL_ROOT . '/system/modules/' . $strFolder) && is_dir(TL_ROOT . '/system/modules/' . $strFolder . '/html'))
+			{
+				if (!file_exists(TL_ROOT . '/system/modules/' . $strFolder . '/html/.htaccess'))
+				{
+					$objFile = new \File('system/modules/' . $strFolder . '/html/.htaccess');
+					$objFile->write("order deny,allow\nallow from all");
+					$objFile->close();
+				}
+			}
+		}
 	}
 
 

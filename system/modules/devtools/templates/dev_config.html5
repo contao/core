@@ -202,9 +202,10 @@
  *    (
  *       array('Automator', 'purgeImageCache')
  *    ),
- *    'weekly' => array(),
- *    'daily' => array(),
- *    'hourly' => array()
+ *    'weekly'   => array(),
+ *    'daily'    => array(),
+ *    'hourly'   => array(),
+ *    'minutely' => array()
  * );
  *
  * Note that this is rather a command scheduler than a cron job, which does not
