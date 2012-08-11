@@ -350,8 +350,7 @@ $GLOBALS['TL_CRON'] = array
 (
 	'monthly' => array
 	(
-		array('Automator', 'purgeImageCache'),
-		array('Automator', 'purgeTempFolder'),
+		array('Automator', 'purgeImageCache')
 	),
 	'weekly' => array
 	(
@@ -361,6 +360,7 @@ $GLOBALS['TL_CRON'] = array
 	'daily' => array
 	(
 		array('Automator', 'rotateLogs'),
+		array('Automator', 'purgeTempFolder'),
 		array('Automator', 'checkForUpdates')
 	),
 	'hourly' => array(),

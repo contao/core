@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Pass the minimum cron timeout value to the cron trigger so minutely cron jobs
+are correctly executed (the minimum interval used to be 5 minutes).
+
+### Fixed
 Do not write to the local configuration file in the cron script (see #4483).
 
 ### Fixed

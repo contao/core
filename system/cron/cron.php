@@ -99,7 +99,7 @@ class CronJob extends Frontend
 			$this->Database->query("UPDATE tl_cron SET value=$intCurrent WHERE name='$strInterval'");
 			$this->log('Running the ' . $strInterval . ' cron jobs', 'CronJobs run()', TL_CRON);
 
-			foreach ($GLOBALS['TL_CRON']['monthly'] as $callback)
+			foreach ($GLOBALS['TL_CRON'][$strInterval] as $callback)
 			{
 				$this->import($callback[0]);
 				$this->$callback[0]->$callback[1]();
@@ -136,8 +136,8 @@ class CronJob extends Frontend
 			$return = false;
 		}
 
-		// Last execution was more than a minute ago
-		elseif ($objCron->value < (time() - 60))
+		// Check the last execution time
+		elseif ($objCron->value < (time() - $this->getTimeout()))
 		{
 			$this->updateCronTxt($time);
 			$this->Database->query("UPDATE tl_cron SET value=$time WHERE name='lastrun'");

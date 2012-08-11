@@ -383,6 +383,7 @@ class PageRegular extends \Frontend
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->base = \Environment::get('base');
 		$this->Template->disableCron = $GLOBALS['TL_CONFIG']['disableCron'];
+		$this->Template->cronTimeout = $this->getCronTimeout();
 	}
 
 

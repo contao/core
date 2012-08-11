@@ -516,4 +516,25 @@ abstract class Frontend extends \Controller
 
 		return trim($strText);
 	}
+
+
+	/**
+	 * Return the cron timeout in seconds
+	 * @return integer
+	 */
+	protected function getCronTimeout()
+	{
+		if (!empty($GLOBALS['TL_CRON']['minutely']))
+		{
+			return 60;
+		}
+		elseif (!empty($GLOBALS['TL_CRON']['hourly']))
+		{
+			return 3660;
+		}
+		else
+		{
+			return 86400; // daily
+		}
+	}
 }
