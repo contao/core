@@ -1840,7 +1840,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 <script>
 window.addEvent(\'domready\', function() {
-  (inp = $(\''.$this->strTable.'\').getElement(\'input[type="text"]\')) && inp.focus();
+  (inp = $(\''.$this->strTable.'\').getElement(\'input[class^="tl_text"]\')) && inp.focus();
 });
 </script>';
 
@@ -2228,7 +2228,7 @@ window.addEvent(\'domready\', function() {
 
 <script>
 window.addEvent(\'domready\', function() {
-  (inp = $(\''.$this->strTable.'\').getElement(\'input[type="text"]\')) && inp.focus();
+  (inp = $(\''.$this->strTable.'\').getElement(\'input[class^="tl_text"]\')) && inp.focus();
 });
 </script>';
 

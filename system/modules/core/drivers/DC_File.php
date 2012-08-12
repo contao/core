@@ -285,7 +285,7 @@ class DC_File extends \DataContainer implements \editable
 
 <script>
 window.addEvent(\'domready\', function() {
-  (inp = $(\''.$this->strTable.'\').getElement(\'input[type="text"]\')) && inp.focus();
+  (inp = $(\''.$this->strTable.'\').getElement(\'input[class^="tl_text"]\')) && inp.focus();
 });
 </script>';
 
