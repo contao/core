@@ -994,6 +994,15 @@ ul.sgallery .gimage {
 	opacity: 0.5;
 }
 
+/* Galleries */
+.ce_gallery ul {
+	overflow:hidden;
+}
+.ce_gallery li {
+	float:left;
+	margin:0 6px 6px 0;
+}
+
 /* Context menu */
 #contextmenu {
 	display:block;

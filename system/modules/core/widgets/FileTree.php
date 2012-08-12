@@ -201,7 +201,7 @@ class FileTree extends \Widget
 								// Only show images
 								if ($objFile->isGdImage)
 								{
-									$arrValues[$objSubfiles->id] = $this->generateImage(\Image::get($objSubfiles->path, 50, 50, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
+									$arrValues[$objSubfiles->id] = $this->generateImage(\Image::get($objSubfiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
 								}
 							}
 							else
@@ -223,7 +223,7 @@ class FileTree extends \Widget
 							// Only show images
 							if ($objFile->isGdImage)
 							{
-								$arrValues[$objFiles->id] = $this->generateImage(\Image::get($objFiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
+								$arrValues[$objFiles->id] = $this->generateImage(\Image::get($objFiles->path, 80, 60, 'center_center'), '', 'class="gimage"');
 							}
 						}
 						else
