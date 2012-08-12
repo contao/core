@@ -380,7 +380,7 @@ class Updater extends \Controller
 
 				foreach ($arrData as $line)
 				{
-					list($name, $info) = explode('=', $line);
+					list($name, $info) = explode('=', $line, 2);
 					list($title, $link, $caption) = explode('|', $info);
 					$arrMeta[trim($name)][$key] = array('title'=>trim($title), 'link'=>trim($link), 'caption'=>trim($caption));
 				}
