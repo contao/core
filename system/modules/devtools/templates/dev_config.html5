@@ -158,7 +158,7 @@
  *    'RebuildSearchIndex'
  * );
  *
- * Take a look at the system/modules/core/PurgeData.php file to see how
+ * Take a look at the system/modules/core/classes/PurgeData.php file to see how
  * maintenance modules are set up. The class "ClearCache" has to be stored in a
  * file named "ClearCache.php" in your module folder.
  */
@@ -231,7 +231,7 @@
  *
  * Hooks allow you to add functionality to the core without having to modify the
  * source code by registering callback functions to be executed on a particular
- * event. For more information see http://www.contao.org/de/hooks.html.
+ * event. For more information see http://www.contao.org/en/hooks.html.
  */
 
 

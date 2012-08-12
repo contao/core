@@ -17,7 +17,7 @@
 $GLOBALS['TL_LANG']['tl_extension']['title']       = array('Titel', 'Bitte geben Sie den Titel der Erweiterung ein.');
 $GLOBALS['TL_LANG']['tl_extension']['folder']      = array('Ordnername', 'Bitte geben Sie einen eindeutigen Ordnernamen ein.');
 $GLOBALS['TL_LANG']['tl_extension']['author']      = array('Autor', 'Bitte geben Sie den Namen des Autors und eine optionale E-Mail-Adresse ein (z.B. <em>Name [e-mail@adresse.de]</em>).');
-$GLOBALS['TL_LANG']['tl_extension']['copyright']   = array('Copyright', 'Bitte geben Sie den Copyright-Vermerk ein (z.B. <em>Name 2007</em>).');
+$GLOBALS['TL_LANG']['tl_extension']['copyright']   = array('Copyright', 'Bitte geben Sie den Copyright-Vermerk ein (z.B. <em>Name ' . date('Y') . '</em>).');
 $GLOBALS['TL_LANG']['tl_extension']['package']     = array('Paket', 'Bitte geben Sie den Paketnamen ohne Leerzeichen ein (z.B. <em>MeinEigenesModul</em>).');
 $GLOBALS['TL_LANG']['tl_extension']['license']     = array('Lizenz', 'Bitte geben Sie den Lizenztyp an (z.B. <em>GNU/LGPL</em>).');
 $GLOBALS['TL_LANG']['tl_extension']['addBeMod']    = array('Ein Backend-Modul hinzufügen', 'Der Erweiterung ein Backend-Modul hinzufügen.');
