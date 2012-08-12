@@ -65,7 +65,7 @@ class ChmodTable extends \Widget
 		{
 			$return .= '
     <tr>
-      <td scope="row" class="th">'.$GLOBALS['TL_LANG']['CHMOD'][$v].'</td>';
+      <th scope="row" class="th">'.$GLOBALS['TL_LANG']['CHMOD'][$v].'</th>';
 
 			// Add checkboxes
 			for ($j=1; $j<=6; $j++)
