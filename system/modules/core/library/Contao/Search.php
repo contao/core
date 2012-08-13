@@ -71,63 +71,45 @@ class Search extends \System
 
 		// Replace special characters
 		$strContent = str_replace(array("\n", "\r", "\t", '&#160;', '&nbsp;'), ' ', $arrData['content']);
-		$strBuffer = '';
 
 		// Strip script tags
 		while (($intStart = strpos($strContent, '<script')) !== false)
 		{
-			$strBuffer .= substr($strContent, 0, $intStart);
-			$strContent = substr($strContent, $intStart + 7);
-
-			if (($intEnd = strpos($strContent, '</script>')) !== false)
+			if (($intEnd = strpos($strContent, '</script>', $intStart)) !== false)
 			{
-				$strContent = substr($strContent, $intEnd + 9);
+				$strContent = substr($strContent, 0, $intStart) . substr($strContent, $intEnd + 9);
 			}
 		}
-
-		$strContent = $strBuffer . $strContent;
-		$strBuffer = '';
 
 		// Strip style tags
 		while (($intStart = strpos($strContent, '<style')) !== false)
 		{
-			$strBuffer .= substr($strContent, 0, $intStart);
-			$strContent = substr($strContent, $intStart + 6);
-
-			if (($intEnd = strpos($strContent, '</style>')) !== false)
+			if (($intEnd = strpos($strContent, '</style>', $intStart)) !== false)
 			{
-				$strContent = substr($strContent, $intEnd + 8);
+				$strContent = substr($strContent, 0, $intStart) . substr($strContent, $intEnd + 8);
 			}
 		}
-
-		$strContent = $strBuffer . $strContent;
-		$strBuffer = '';
 
 		// Strip non-indexable areas
 		while (($intStart = strpos($strContent, '<!-- indexer::stop -->')) !== false)
 		{
-			$strBuffer .= substr($strContent, 0, $intStart);
-			$strContent = substr($strContent, $intStart + 22);
-
-			if (($intEnd = strpos($strContent, '<!-- indexer::continue -->')) !== false)
+			if (($intEnd = strpos($strContent, '<!-- indexer::continue -->', $intStart)) !== false)
 			{
+				$intCurrent = $intStart;
+
 				// Handle nested tags
-				while ($intEnd !== false && ($intNested = strpos($strContent, '<!-- indexer::stop -->')) !== false && $intNested < $intEnd)
+				while (($intNested = strpos($strContent, '<!-- indexer::stop -->', $intCurrent + 22)) !== false && $intNested < $intEnd)
 				{
-					$strContent = substr($strContent, $intEnd + 26);
-					$intEnd = strpos($strContent, '<!-- indexer::continue -->');
+					if (($intNewEnd = strpos($strContent, '<!-- indexer::continue -->', $intEnd + 26)) !== false)
+					{
+						$intEnd = $intNewEnd;
+						$intCurrent = $intNested;
+					}
 				}
 
-				// Check $intEnd again
-				if ($intEnd !== false)
-				{
-					$strContent = substr($strContent, $intEnd + 26);
-				}
+				$strContent = substr($strContent, 0, $intStart) . substr($strContent, $intEnd + 26);
 			}
 		}
-
-		$strContent = $strBuffer . $strContent;
-		unset($strBuffer);
 
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['indexPage']) && is_array($GLOBALS['TL_HOOKS']['indexPage']))
