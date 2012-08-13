@@ -63,7 +63,7 @@ class Search extends \System
 		$arrSet['pid'] = $arrData['pid'];
 		$arrSet['language'] = $arrData['language'];
 
-		// Get filesize from raw content
+		// Get the file size from the raw content
 		if (!$arrSet['filesize'])
 		{
 			$arrSet['filesize'] = number_format((strlen($arrData['content']) / 1024 ), 2, '.', '');
@@ -71,31 +71,63 @@ class Search extends \System
 
 		// Replace special characters
 		$strContent = str_replace(array("\n", "\r", "\t", '&#160;', '&nbsp;'), ' ', $arrData['content']);
+		$strBuffer = '';
 
-		$arrOuter = array();
-		$arrInner = array();
-
-		// Strip JavaScript (thanks to Pieter Dreef)
-		while (preg_match('/<script[^>]*>/i', $strContent, $arrOuter, PREG_OFFSET_CAPTURE))
+		// Strip script tags
+		while (($intStart = strpos($strContent, '<script')) !== false)
 		{
-			if (!preg_match('/<\/script>/i', $strContent, $arrInner, PREG_OFFSET_CAPTURE, (strlen($arrOuter[0][0]) + $arrOuter[0][1])))
-			{
-				break;
-			}
+			$strBuffer .= substr($strContent, 0, $intStart);
+			$strContent = substr($strContent, $intStart + 7);
 
-			$strContent = substr($strContent, 0, $arrOuter[0][1]) . substr($strContent, (strlen($arrInner[0][0]) + $arrInner[0][1]));
+			if (($intEnd = strpos($strContent, '</script>')) !== false)
+			{
+				$strContent = substr($strContent, $intEnd + 9);
+			}
 		}
 
-		// Strip non-indexable areas (thanks to Pieter Dreef)
-		while (preg_match('/<!-- indexer::stop -->/', $strContent, $arrOuter, PREG_OFFSET_CAPTURE))
-		{
-			if (!preg_match('/<!-- indexer::continue -->/', $strContent, $arrInner, PREG_OFFSET_CAPTURE, (strlen($arrOuter[0][0]) + $arrOuter[0][1])))
-			{
-				break;
-			}
+		$strContent = $strBuffer . $strContent;
+		$strBuffer = '';
 
-			$strContent = substr($strContent, 0, $arrOuter[0][1]) . substr($strContent, (strlen($arrInner[0][0]) + $arrInner[0][1]));
+		// Strip style tags
+		while (($intStart = strpos($strContent, '<style')) !== false)
+		{
+			$strBuffer .= substr($strContent, 0, $intStart);
+			$strContent = substr($strContent, $intStart + 6);
+
+			if (($intEnd = strpos($strContent, '</style>')) !== false)
+			{
+				$strContent = substr($strContent, $intEnd + 8);
+			}
 		}
+
+		$strContent = $strBuffer . $strContent;
+		$strBuffer = '';
+
+		// Strip non-indexable areas
+		while (($intStart = strpos($strContent, '<!-- indexer::stop -->')) !== false)
+		{
+			$strBuffer .= substr($strContent, 0, $intStart);
+			$strContent = substr($strContent, $intStart + 22);
+
+			if (($intEnd = strpos($strContent, '<!-- indexer::continue -->')) !== false)
+			{
+				// Handle nested tags
+				while ($intEnd !== false && ($intNested = strpos($strContent, '<!-- indexer::stop -->')) !== false && $intNested < $intEnd)
+				{
+					$strContent = substr($strContent, $intEnd + 26);
+					$intEnd = strpos($strContent, '<!-- indexer::continue -->');
+				}
+
+				// Check $intEnd again
+				if ($intEnd !== false)
+				{
+					$strContent = substr($strContent, $intEnd + 26);
+				}
+			}
+		}
+
+		$strContent = $strBuffer . $strContent;
+		unset($strBuffer);
 
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['indexPage']) && is_array($GLOBALS['TL_HOOKS']['indexPage']))
