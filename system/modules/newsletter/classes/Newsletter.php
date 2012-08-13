@@ -868,6 +868,12 @@ class Newsletter extends \Backend
 					$domain = \Environment::get('base');
 					$objParent = $this->getPageDetails($objNewsletter->jumpTo);
 
+					// The target page does not exist
+					if ($objParent === null)
+					{
+						continue;
+					}
+
 					if ($objParent->domain != '')
 					{
 						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';

@@ -275,6 +275,12 @@ class Calendar extends \Frontend
 					$domain = \Environment::get('base');
 					$objParent = $this->getPageDetails($objCalendar->jumpTo);
 
+					// The target page does not exist
+					if ($objParent === null)
+					{
+						continue;
+					}
+
 					if ($objParent->domain != '')
 					{
 						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
