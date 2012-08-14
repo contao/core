@@ -353,10 +353,10 @@ abstract class System
 			$strLanguage = $GLOBALS['TL_LANGUAGE'];
 		}
 
-		// Return if there is no language
+		// Fall back to english
 		if ($strLanguage == '')
 		{
-			return;
+			$strLanguage = 'en';
 		}
 
 		// Return if the data has been loaded already
