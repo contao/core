@@ -2039,6 +2039,14 @@ window.addEvent(\'domready\', function() {
 			return '';
 		}
 
+		$this->import('BackendUser', 'User');
+
+		// Stop if a regular user manually triggers the file synchronisation
+		if (!$this->User->isAdmin)
+		{
+			return '<p class="tl_error">You have to be an administrator to run the file synchronisation.</p>';
+		}
+
 		$this->arrMessages = array();
 
 		// Reset the "found" flag

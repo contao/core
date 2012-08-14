@@ -49,7 +49,8 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['sync'],
 				'href'                => 'act=sync',
-				'class'               => 'header_sync'
+				'class'               => 'header_sync',
+				'button_callback'     => array('tl_files', 'syncFiles')
 			),
 			'toggleNodes' => array
 			(
@@ -451,6 +452,22 @@ class tl_files extends Backend
 		}
 
 		return $varValue;
+	}
+
+
+	/**
+	 * Return the sync files button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function syncFiles($href, $label, $title, $class, $attributes)
+	{
+		return $this->User->isAdmin ? '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'" class="'.$class.'"'.$attributes.'>'.$label.'</a> ' : '';
 	}
 
 
