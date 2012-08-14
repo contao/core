@@ -91,7 +91,8 @@ class NewsModel extends \Model
 			$arrColumns[] = "$t.featured=''";
 		}
 
-		if (!BE_USER_LOGGED_IN)
+		// Never return unpublished elements in the back end, so they don't end up in the RSS feed
+		if (!BE_USER_LOGGED_IN || TL_MODE == 'BE')
 		{
 			$time = time();
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";

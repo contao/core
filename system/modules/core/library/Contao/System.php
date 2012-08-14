@@ -353,6 +353,12 @@ abstract class System
 			$strLanguage = $GLOBALS['TL_LANGUAGE'];
 		}
 
+		// Return if there is no language
+		if ($strLanguage == '')
+		{
+			return;
+		}
+
 		// Return if the data has been loaded already
 		if (isset($GLOBALS['loadLanguageFile'][$strName][$strLanguage]) && !$blnNoCache)
 		{
