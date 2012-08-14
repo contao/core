@@ -461,7 +461,7 @@ class tl_news_archive extends Backend
 	 */
 	public function manageFeeds($href, $label, $title, $class, $attributes)
 	{
-		return ($this->User->isAdmin || !empty($this->User->newsfeeds) || $this->User->hasAccess('create', 'newsfeedp')) ? ($this->User->hasAccess('create', 'newp') ? ' &nbsp; :: &nbsp; ' : '') . '<a href="'.$this->addToUrl($href).'" class="'.$class.'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : '';
+		return ($this->User->isAdmin || !empty($this->User->newsfeeds) || $this->User->hasAccess('create', 'newsfeedp')) ? '<a href="'.$this->addToUrl($href).'" class="'.$class.'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : '';
 	}
 
 

@@ -16,7 +16,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 ?>
 
 <div id="tl_buttons" class="buttonwrapper">
-<?php echo $theme->createMainButton('dbcheck16', $rep->updateLink, $text['updatedatabase']); ?> &nbsp; :: &nbsp;
+<?php echo $theme->createMainButton('dbcheck16', $rep->updateLink, $text['updatedatabase']); ?> 
 <?php echo $theme->createMainButton('install16', $rep->installLink, $text['installextension']); ?> 
 </div>
 

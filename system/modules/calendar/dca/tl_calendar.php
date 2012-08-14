@@ -461,7 +461,7 @@ class tl_calendar extends Backend
 	 */
 	public function manageFeeds($href, $label, $title, $class, $attributes)
 	{
-		return ($this->User->isAdmin || !empty($this->User->calendarfeeds) || $this->User->hasAccess('create', 'calendarfeedp')) ? ($this->User->hasAccess('create', 'calendarp') ? ' &nbsp; :: &nbsp; ' : '') . '<a href="'.$this->addToUrl($href).'" class="'.$class.'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : '';
+		return ($this->User->isAdmin || !empty($this->User->calendarfeeds) || $this->User->hasAccess('create', 'calendarfeedp')) ? '<a href="'.$this->addToUrl($href).'" class="'.$class.'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : '';
 	}
 
 
