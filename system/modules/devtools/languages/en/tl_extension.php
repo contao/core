@@ -17,7 +17,7 @@
 $GLOBALS['TL_LANG']['tl_extension']['title']       = array('Title', 'Please enter the extension title.');
 $GLOBALS['TL_LANG']['tl_extension']['folder']      = array('Folder name', 'Please enter a unique folder name.');
 $GLOBALS['TL_LANG']['tl_extension']['author']      = array('Author', 'Please enter the author\'s name and an optional e-mail address (e.g. <em>Name [e-mail@address.com]</em>).');
-$GLOBALS['TL_LANG']['tl_extension']['copyright']   = array('Copyright', 'Please enter the copyright notice (e.g. <em>Name 2007</em>).');
+$GLOBALS['TL_LANG']['tl_extension']['copyright']   = array('Copyright', 'Please enter the copyright notice (e.g. <em>Name ' . date('Y') . '</em>).');
 $GLOBALS['TL_LANG']['tl_extension']['package']     = array('Package', 'Please enter the package name without spaces (e.g. <em>MyCustomModule</em>).');
 $GLOBALS['TL_LANG']['tl_extension']['license']     = array('License', 'Please enter the license type (e.g. <em>GNU/LGPL</em>).');
 $GLOBALS['TL_LANG']['tl_extension']['addBeMod']    = array('Add a back end module', 'Add a back end module to the extension.');
