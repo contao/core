@@ -2430,7 +2430,7 @@ abstract class Controller extends \System
 		{
 			// Generate the cache file
 			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php');
-			$objCacheFile->write('<?php');
+			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
 
 			// Parse all module folders
 			foreach ($this->Config->getActiveModules() as $strModule)

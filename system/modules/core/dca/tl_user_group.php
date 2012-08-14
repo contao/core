@@ -318,7 +318,7 @@ class tl_user_group extends Backend
 
 			foreach (scan($strDir) as $strFile)
 			{
-				if (in_array($strFile, $included))
+				if ($strFile == '.htaccess' || in_array($strFile, $included))
 				{
 					continue;
 				}
