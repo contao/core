@@ -2787,6 +2787,11 @@ abstract class Controller extends \System
 			$arrParentIds = array($arrParentIds);
 		}
 
+		if (empty($arrParentIds))
+		{
+			return $arrReturn;
+		}
+
 		$arrParentIds = array_map('intval', $arrParentIds);
 		$objChilds = $this->Database->execute("SELECT id, pid FROM " . $strTable . " WHERE pid IN(" . implode(',', $arrParentIds) . ")" . ($strWhere ? " AND $strWhere" : "") . ($blnSorting ? " ORDER BY " . $this->Database->findInSet('pid', $arrParentIds) . ", sorting" : ""));
 

@@ -52,6 +52,12 @@ class BackendUser extends \User
 	 */
 	protected $alexf = array();
 
+	/**
+	 * File mount IDs
+	 * @var array
+	 */
+	protected $arrFilemountIds;
+
 
 	/**
 	 * Initialize the object
@@ -120,6 +126,10 @@ class BackendUser extends \User
 
 			case 'filemounts':
 				return is_array($this->arrData['filemounts']) ? $this->arrData['filemounts'] : (($this->arrData['filemounts'] != '') ? array($this->arrData['filemounts']) : false);
+				break;
+
+			case 'filemountIds':
+				return $this->arrFilemountIds;
 				break;
 
 			case 'fop':
@@ -372,7 +382,10 @@ class BackendUser extends \User
 			$this->filemounts = array_filter($this->filemounts);
 		}
 
-		// Convert the numeric file mounts into paths
+		// Store the numeric file mounts
+		$this->arrFilemountIds = $this->filemounts;
+
+		// Convert the file mounts into paths (backwards compatibility)
 		if (!$this->isAdmin && !empty($this->filemounts))
 		{
 			$objFiles = \FilesModel::findMultipleByIds($this->filemounts);

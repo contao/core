@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+The file picker can now be accessed properly by regular users.
+
+### Fixed
 Make the modules' html folders accessible during the update and create the
 required files in the extension creator as well.
 

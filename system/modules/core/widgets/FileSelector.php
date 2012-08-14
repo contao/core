@@ -154,7 +154,7 @@ class FileSelector extends \Widget
 			// Show mounted files to regular users
 			else
 			{
-				foreach ($this->eliminateNestedPages($this->User->filemounts, 'tl_files') as $node)
+				foreach ($this->eliminateNestedPages($this->User->filemountIds, 'tl_files') as $node)
 				{
 					$tree .= $this->renderFiletree($node, -20);
 				}

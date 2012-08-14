@@ -73,6 +73,9 @@ class FilePicker extends Backend
 		$strTable = Input::get('table');
 		$strField = Input::get('field');
 
+		// Define the current ID
+		define('CURRENT_ID', (Input::get('table') ? $this->Session->get('CURRENT_ID') : Input::get('id')));
+
 		$this->loadDataContainer($strTable);
 		$objDca = new DC_Table($strTable);
 
