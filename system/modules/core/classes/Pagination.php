@@ -89,6 +89,12 @@ class Pagination extends \Frontend
 	protected $lblTotal;
 
 	/**
+	 * Template object
+	 * @var \Template
+	 */
+	protected $objTemplate;
+
+	/**
 	 * Show "<< first" and "last >>" links
 	 * @var boolean
 	 */
@@ -125,8 +131,9 @@ class Pagination extends \Frontend
 	 * @param integer
 	 * @param integer
 	 * @param string
+	 * @param \Template
 	 */
-	public function __construct($intRows, $intPerPage, $intNumberOfLinks=7, $strParameter='page')
+	public function __construct($intRows, $intPerPage, $intNumberOfLinks=7, $strParameter='page', \Template $objTemplate=null)
 	{
 		parent::__construct();
 
@@ -148,6 +155,14 @@ class Pagination extends \Frontend
 		}
 
 		$this->strParameter = $strParameter;
+
+		// Backwards compatibility
+		if ($objTemplate === null)
+		{
+			$objTemplate = new \FrontendTemplate('pagination');
+		}
+
+		$this->objTemplate = $objTemplate;
 	}
 
 
@@ -230,38 +245,38 @@ class Pagination extends \Frontend
 			$this->intPage = $this->intTotalPages;
 		}
 
-		$this->Template = new \FrontendTemplate('pagination');
+		$objTemplate = $this->objTemplate;
 
-		$this->Template->hasFirst = $this->hasFirst();
-		$this->Template->hasPrevious = $this->hasPrevious();
-		$this->Template->hasNext = $this->hasNext();
-		$this->Template->hasLast = $this->hasLast();
+		$objTemplate->hasFirst = $this->hasFirst();
+		$objTemplate->hasPrevious = $this->hasPrevious();
+		$objTemplate->hasNext = $this->hasNext();
+		$objTemplate->hasLast = $this->hasLast();
 
-		$this->Template->items = $this->getItemsAsString($strSeparator);
-		$this->Template->total = sprintf($this->lblTotal, $this->intPage, $this->intTotalPages);
+		$objTemplate->items = $this->getItemsAsString($strSeparator);
+		$objTemplate->total = sprintf($this->lblTotal, $this->intPage, $this->intTotalPages);
 
-		$this->Template->first = array
+		$objTemplate->first = array
 		(
 			'link' => $this->lblFirst,
 			'href' => $this->linkToPage(1),
 			'title' => sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), 1)
 		);
 
-		$this->Template->previous = array
+		$objTemplate->previous = array
 		(
 			'link' => $this->lblPrevious,
 			'href' => $this->linkToPage($this->intPage - 1),
 			'title' => sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), ($this->intPage - 1))
 		);
 
-		$this->Template->next = array
+		$objTemplate->next = array
 		(
 			'link' => $this->lblNext,
 			'href' => $this->linkToPage($this->intPage + 1),
 			'title' => sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), ($this->intPage + 1))
 		);
 
-		$this->Template->last = array
+		$objTemplate->last = array
 		(
 			'link' => $this->lblLast,
 			'href' => $this->linkToPage($this->intTotalPages),
@@ -271,7 +286,7 @@ class Pagination extends \Frontend
 		// Adding rel="prev" and rel="next" links is not possible
 		// anymore with unique variable names (see #3515 and #4141)
 
-		return $this->Template->parse();
+		return $objTemplate->parse();
 	}
 
 

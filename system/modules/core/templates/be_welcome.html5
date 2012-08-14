@@ -44,6 +44,7 @@
 <?php endforeach; ?>
 </tbody>
 </table>
+<?php echo $this->pagination; ?> 
 <?php else: ?>
 <p><?php echo $GLOBALS['TL_LANG']['MSC']['noVersions']; ?></p>
 <?php endif; ?>

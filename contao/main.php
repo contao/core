@@ -161,9 +161,26 @@ class Main extends Backend
 
 		$arrVersions = array();
 
-		// Get the latest versions
-		$objVersions = $this->Database->prepare("SELECT pid, tstamp, version, fromTable, username, userid, description, editUrl FROM tl_version v WHERE version>1" . (!$this->User->isAdmin ? " AND userid=?" : "") . " ORDER BY tstamp DESC")
-									  ->limit(100)
+		// Get the total number of versions
+		$objTotal = $this->Database->query("SELECT COUNT(*) AS count FROM tl_version");
+
+		$intPage   = Input::get('page') ?: 1;
+		$intOffset = ($intPage - 1) * 30;
+		$intLast   = ceil($objTotal->count / 30);
+
+		// Validate the page number
+		if ($intPage < 1 || $intPage > $intLast)
+		{
+			header('HTTP/1.1 404 Not Found');
+		}
+
+		// Create the pagination menu
+		$objPagination = new Pagination($objTotal->count, 30, 7, 'vp', new \BackendTemplate('be_pagination'));
+		$objTemplate->pagination = $objPagination->generate();
+
+		// Get the versions
+		$objVersions = $this->Database->prepare("SELECT pid, tstamp, version, fromTable, username, userid, description, editUrl FROM tl_version v" . (!$this->User->isAdmin ? " WHERE userid=?" : "") . " ORDER BY tstamp DESC, pid, version DESC")
+									  ->limit(30, $intOffset)
 									  ->execute($this->User->id);
 
 		while ($objVersions->next())
@@ -182,27 +199,6 @@ class Main extends Backend
 			}
 
 			$arrVersions[] = $arrRow;
-		}
-
-		$intIndex = 0;
-		$strFromTable = $intPid = $intUserid = null;
-
-		// Only show the latest version each user has created
-		foreach ($arrVersions as $k=>$v)
-		{
-			if ($strFromTable != $v['fromTable'] || $intPid != $v['pid'] || $intUserid != $v['userid'])
-			{
-				$intIndex = $k;
-				$strFromTable = $v['fromTable'];
-				$intPid = $v['pid'];
-				$intUserid = $v['userid'];
-			}
-			else
-			{
-				// Override the from version
-				$arrVersions[$intIndex]['from'] = $v['version'];
-				unset($arrVersions[$k]);
-			}
 		}
 
 		$intCount = -1;
