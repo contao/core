@@ -3413,7 +3413,7 @@ abstract class Controller extends \System
 		}
 
 		// Prepend the static URL
-		if (strncmp($script, 'plugins/', 8) === 0)
+		if (strncmp($script, 'assets/', 7) === 0)
 		{
 			return TL_PLUGINS_URL . $script;
 		}

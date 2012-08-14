@@ -362,7 +362,7 @@ class PageRegular extends \Frontend
 			}
 			else
 			{
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="assets/mootools/core/' . MOOTOOLS . '/mootools.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools.js"></script>' . "\n";
 			}
 		}
 
