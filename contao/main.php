@@ -162,7 +162,8 @@ class Main extends Backend
 		$arrVersions = array();
 
 		// Get the total number of versions
-		$objTotal = $this->Database->query("SELECT COUNT(*) AS count FROM tl_version");
+		$objTotal = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_version" . (!$this->User->isAdmin ? " WHERE userid=?" : ""))
+								   ->execute($this->User->id);
 
 		$intPage   = Input::get('page') ?: 1;
 		$intOffset = ($intPage - 1) * 30;
