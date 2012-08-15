@@ -653,8 +653,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			while (file_exists(TL_ROOT . '/' . $new) && $count < 12)
 			{
-				$pif = pathinfo($destination);
-				$new = str_replace('.' . $pif['extension'], '_' . $count++ . '.' . $pif['extension'], $destination);
+				$ext = pathinfo($destination, PATHINFO_EXTENSION);
+				$new = str_replace('.' . $ext, '_' . $count++ . '.' . $ext, $destination);
 			}
 
 			$destination = $new;

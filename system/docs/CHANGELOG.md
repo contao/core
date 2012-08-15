@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Replaced `SplFileInfo::getExtension()` which is only available from PHP 5.3.6
+with `pathinfo($info->getFilename())` (see #4619).
+
+### Fixed
 Do not send a 404 header if a download element does not find a file to send to
 the client. There might be other download elements which do (see #4632).
 

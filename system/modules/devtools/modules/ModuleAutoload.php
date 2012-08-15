@@ -102,7 +102,7 @@ class ModuleAutoload extends \BackendModule
 					// Get all PHP files
 					foreach ($objFiles as $objFile)
 					{
-						if ($objFile->isFile() && $objFile->getExtension() == 'php')
+						if ($objFile->isFile() && pathinfo($objFile->getFilename(), PATHINFO_EXTENSION) == 'php')
 						{
 							$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
 
