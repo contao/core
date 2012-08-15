@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+The "custom navigation" and "quick link" modules did not show if there was only
+a single page (see #4616).
+
+### Fixed
 The quick navigation module could not jump to pages named "index" (see #4611).
 
 ### Fixed
