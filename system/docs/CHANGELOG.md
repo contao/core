@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Do not create files without file name in the extension creator (see #4635).
+
+### Fixed
 Moved `Controller::restoreBasicEntities()` to the `String` class (see #4646).
 
 ### Fixed
