@@ -15,7 +15,6 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['rep_base']           = array('Repository-Base', 'Das Basis-Modul des Extension Repository');
-$GLOBALS['TL_LANG']['MOD']['rep_client']         = 'Repository-Client';
+$GLOBALS['TL_LANG']['MOD']['repository']         = array('Extension Repository', 'Die Backend-Module des Extension Repository');
 $GLOBALS['TL_LANG']['MOD']['repository_catalog'] = array('Erweiterungskatalog', 'Das Extension Repository durchsuchen und Erweiterungen installieren');
 $GLOBALS['TL_LANG']['MOD']['repository_manager'] = array('Erweiterungsverwaltung', 'Installierte Erweiterungen verwalten oder entfernen');
