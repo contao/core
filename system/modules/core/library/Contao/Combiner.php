@@ -183,7 +183,7 @@ class Combiner extends \System
 	{
 		if ($strUrl === null)
 		{
-			$strUrl = TL_SCRIPT_URL;
+			$strUrl = TL_ASSETS_URL;
 		}
 
 		$strTarget = substr($this->strMode, 1);

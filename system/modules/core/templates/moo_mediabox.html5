@@ -5,7 +5,7 @@ $GLOBALS['TL_CSS'][] = 'assets/mootools/mediabox/'. MEDIABOX .'/css/mediaboxAdvB
 
 ?>
 
-<script src="<?php echo TL_PLUGINS_URL; ?>assets/mootools/mediabox/<?php echo MEDIABOX; ?>/js/mediabox.js"></script>
+<script src="<?php echo TL_ASSETS_URL; ?>assets/mootools/mediabox/<?php echo MEDIABOX; ?>/js/mediabox.js"></script>
 <script>
 (function($) {
   window.addEvent('domready', function() {

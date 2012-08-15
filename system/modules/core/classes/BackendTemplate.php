@@ -173,7 +173,7 @@ class BackendTemplate extends \Template
 					. 'loading:"' . $GLOBALS['TL_LANG']['MSC']['loadingData'] . '",'
 					. 'apply:"' . $GLOBALS['TL_LANG']['MSC']['apply'] . '"'
 				. '},'
-				. 'script_url:"' . TL_SCRIPT_URL . '",'
+				. 'script_url:"' . TL_ASSETS_URL . '",'
 				. 'request_token:"' . REQUEST_TOKEN . '"'
 			. '};';
 	}

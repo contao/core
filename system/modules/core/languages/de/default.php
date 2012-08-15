@@ -369,9 +369,8 @@ $GLOBALS['TL_LANG']['MSC']['dateAdded']     = array('Hinzugefügt am', 'Hinzugef
 $GLOBALS['TL_LANG']['MSC']['lastLogin']     = array('Letzte Anmeldung', 'Letzte Anmeldung: %s');
 $GLOBALS['TL_LANG']['MSC']['move_up']       = array('Nach oben', 'Den Eintrag eine Position nach oben verschieben');
 $GLOBALS['TL_LANG']['MSC']['move_down']     = array('Nach unten', 'Den Eintrag eine Position nach unten verschieben');
-$GLOBALS['TL_LANG']['MSC']['staticFiles']   = array('Datei-URL', 'Die Datei-URL gilt für das <em>files</em>-Verzeichnis sowie alle Vorschaubilder (Page-Speed-Optimierung).');
-$GLOBALS['TL_LANG']['MSC']['staticSystem']  = array('Skript-URL', 'Die Skript-URL gilt für alle JavaScript- und CSS-Dateien inklusive eingebundener Hintergrundbilder (Page-Speed-Optimierung).');
-$GLOBALS['TL_LANG']['MSC']['staticPlugins'] = array('Plugins-URL', 'Die Plugins-URL gilt für alle Ressourcen im <em>plugins</em>-Verzeichnis (Page-Speed-Optimierung).');
+$GLOBALS['TL_LANG']['MSC']['staticFiles']   = array('Datei-URL', 'Die Datei-URL gilt für das <em>files</em>-Verzeichnis (Page-Speed-Optimierung).');
+$GLOBALS['TL_LANG']['MSC']['staticPlugins'] = array('Assets-URL', 'Die Assets-URL gilt für das <em>assets</em>-Verzeichnis (Page-Speed-Optimierung).');
 $GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Backend-Tastaturkürzel', 'Wie Sie Ihren Arbeitsablauf durch die Verwendung von <a href="http://contao.org/de/keyboard-shortcuts.html" title="Übersicht der Tastaturkürzel auf contao.org" target="_blank">Tastaturkürzeln</a> beschleunigen.');
 $GLOBALS['TL_LANG']['MSC']['toggleAll']     = array('Alle umschalten', 'Alle Knoten öffnen bzw. schließen');
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'] = array('Ein Contao-Konto wurde gesperrt', "Das folgende Contao-Konto wurde aus Sicherheitsgründen gesperrt:\n\nBenutzer: %s\nName: %s\nWebseite: %s\n\nDer Account wurde für %d Minuten gesperrt, weil der Benutzer dreimal hintereinander ein falsches Passwort eingegeben hat. Nach Ablauf der Sperrfrist wird das Konto automatisch wieder entsperrt.\n\nDiese E-Mail wurde von Contao generiert. Sie können nicht darauf antworten.\n");

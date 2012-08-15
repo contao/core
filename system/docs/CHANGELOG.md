@@ -5,6 +5,11 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+The new file structure only allows for two static URLs pointing to the upload
+folder (`TL_FILES_URL`) and the assets folder (`TL_ASSETS_URL`) (see #4638). The
+old constants will remain available for reasons of backwards compatibility.
+
+### Fixed
 Clone the Model and not the Collection when copying files (see #4628).
 
 ### Fixed

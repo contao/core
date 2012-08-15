@@ -334,7 +334,7 @@ class PageRegular extends \Frontend
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->jSource == 'j_fallback')
 				{
-					$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . '>window.jQuery || document.write(\'<script src="' . TL_PLUGINS_URL . 'assets/jquery/core/' . JQUERY . '/jquery.min.js">\x3C/script>\')</script>' . "\n";
+					$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . '>window.jQuery || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/jquery/core/' . JQUERY . '/jquery.min.js">\x3C/script>\')</script>' . "\n";
 				}
 			}
 			else
@@ -354,15 +354,15 @@ class PageRegular extends \Frontend
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->mooSource == 'moo_fallback')
 				{
-					$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . '>window.MooTools || document.write(\'<script src="' . TL_PLUGINS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>' . "\n";
+					$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . '>window.MooTools || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>' . "\n";
 				}
 
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-mobile.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . TL_ASSETS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . TL_ASSETS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-mobile.js"></script>' . "\n";
 			}
 			else
 			{
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="assets/mootools/core/' . MOOTOOLS . '/mootools.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . TL_ASSETS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools.js"></script>' . "\n";
 			}
 		}
 
@@ -451,7 +451,7 @@ class PageRegular extends \Frontend
 					}
 					else
 					{
-						$strStyleSheet = '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_SCRIPT_URL . 'assets/css/' . $objStylesheets->name . '.css"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding;
+						$strStyleSheet = '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_ASSETS_URL . 'assets/css/' . $objStylesheets->name . '.css"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding;
 
 						if ($objStylesheets->cc)
 						{

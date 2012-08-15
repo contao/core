@@ -5,7 +5,7 @@ $GLOBALS['TL_CSS'][] = 'assets/jquery/mediaelement/'. MEDIAELEMENT .'/css/mediae
 
 ?>
 
-<script src="<?php echo TL_PLUGINS_URL; ?>assets/jquery/mediaelement/<?php echo MEDIAELEMENT; ?>/js/mediaelement-and-player.min.js"></script>
+<script src="<?php echo TL_ASSETS_URL; ?>assets/jquery/mediaelement/<?php echo MEDIAELEMENT; ?>/js/mediaelement-and-player.min.js"></script>
 <script>
 (function($) {
   $(document).ready(function() {

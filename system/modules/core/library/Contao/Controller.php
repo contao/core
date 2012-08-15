@@ -1743,12 +1743,10 @@ abstract class Controller extends \System
 							$arrCache[$strTag] = TL_FILES_URL;
 							break;
 
-						case 'script_url':
-							$arrCache[$strTag] = TL_SCRIPT_URL;
-							break;
-
+						case 'assets_url':
 						case 'plugins_url':
-							$arrCache[$strTag] = TL_PLUGINS_URL;
+						case 'script_url':
+							$arrCache[$strTag] = TL_ASSETS_URL;
 							break;
 					}
 					break;
@@ -3353,8 +3351,7 @@ abstract class Controller extends \System
 		$arrConstants = array
 		(
 			'staticFiles'   => 'TL_FILES_URL',
-			'staticPlugins' => 'TL_PLUGINS_URL',
-			'staticSystem'  => 'TL_SCRIPT_URL'
+			'staticPlugins' => 'TL_ASSETS_URL'
 		);
 
 		foreach ($arrConstants as $strKey=>$strConstant)
@@ -3375,6 +3372,10 @@ abstract class Controller extends \System
 				define($strConstant, $url . TL_PATH . '/');
 			}
 		}
+
+		// Backwards compatibility
+		define('TL_SCRIPT_URL', TL_ASSETS_URL);
+		define('TL_PLUGINS_URL', TL_ASSETS_URL);
 	}
 
 
@@ -3388,7 +3389,7 @@ abstract class Controller extends \System
 	public static function addStaticUrlTo($script)
 	{
 		// The feature is not used
-		if (TL_PLUGINS_URL == '' && TL_SCRIPT_URL == '')
+		if (TL_ASSETS_URL == '')
 		{
 			return $script;
 		}
@@ -3399,15 +3400,7 @@ abstract class Controller extends \System
 			return $script;
 		}
 
-		// Prepend the static URL
-		if (strncmp($script, 'plugins/', 8) === 0)
-		{
-			return TL_PLUGINS_URL . $script;
-		}
-		else
-		{
-			return TL_SCRIPT_URL . $script;
-		}
+		return TL_ASSETS_URL . $script;
 	}
 
 

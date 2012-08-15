@@ -5,7 +5,7 @@
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
 <base href="<?php echo $this->base; ?>">
 <?php if ($this->loadFonts): ?>
-<link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/fonts.css">
+<link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/fonts.css">
 <?php endif; ?>
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
@@ -14,7 +14,7 @@
   $objCombiner->add('assets/mootools/datepicker/'. DATEPICKER .'/dashboard.css', DATEPICKER);
   echo $objCombiner->getCombinedFile();
 ?>">
-<!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
+<!--[if IE]><link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
 <?php echo $this->stylesheets; ?>
 <script><?php echo $this->getLocaleString(); ?></script>
 <script src="<?php
@@ -28,7 +28,7 @@
 ?>"></script>
 <script><?php echo $this->getDateString(); ?></script>
 <?php echo $this->javascripts; ?>
-<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
 <?php echo $this->rteConfig; ?>
 <script>parent.Contao.enableFiletreeReload();</script>
 </head>
