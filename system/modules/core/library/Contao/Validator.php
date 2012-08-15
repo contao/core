@@ -27,7 +27,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Validator extends \System
+class Validator
 {
 
 	/**
