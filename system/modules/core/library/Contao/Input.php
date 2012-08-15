@@ -287,6 +287,8 @@ class Input
 
 		unset(static::$arrCache['postEncoded'][$strKey]);
 		unset(static::$arrCache['postDecoded'][$strKey]);
+		unset(static::$arrCache['postHtmlEncoded'][$strKey]);
+		unset(static::$arrCache['postHtmlDecoded'][$strKey]);
 		unset(static::$arrCache['postRaw'][$strKey]);
 
 		if ($varValue === null)
