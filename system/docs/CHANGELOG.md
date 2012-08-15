@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Do not send a 404 header if a download element does not find a file to send to
+the client. There might be other download elements which do (see #4632).
+
+### Fixed
 Do not create files without file name in the extension creator (see #4635).
 
 ### Fixed
