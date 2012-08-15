@@ -196,7 +196,7 @@ class Main extends Backend
 
 			if ($arrRow['editUrl'] != '')
 			{
-				$arrRow['editUrl'] = preg_replace('/&(amp;)?rt=[a-f0-9]+/', '&amp;rt=' . REQUEST_TOKEN, $arrRow['editUrl']);
+				$arrRow['editUrl'] = preg_replace('/&(amp;)?rt=[a-f0-9]+/', '&amp;rt=' . REQUEST_TOKEN, ampersand($arrRow['editUrl']));
 			}
 
 			$arrVersions[] = $arrRow;
