@@ -3363,6 +3363,8 @@ abstract class Controller extends \System
 			return;
 		}
 
+		global $objPage;
+
 		$arrConstants = array
 		(
 			'staticFiles'   => 'TL_FILES_URL',

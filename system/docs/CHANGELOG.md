@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Add the static files URL to images added in the rich text editor.
+
+### Fixed
 Add the SyntaxHighlighter scripts at the page bottom.
 
 ### Fixed
