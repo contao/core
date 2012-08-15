@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Core
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -350,8 +350,7 @@ $GLOBALS['TL_CRON'] = array
 (
 	'monthly' => array
 	(
-		array('Automator', 'purgeImageCache'),
-		array('Automator', 'purgeTempFolder'),
+		array('Automator', 'purgeImageCache')
 	),
 	'weekly' => array
 	(
@@ -361,6 +360,7 @@ $GLOBALS['TL_CRON'] = array
 	'daily' => array
 	(
 		array('Automator', 'rotateLogs'),
+		array('Automator', 'purgeTempFolder'),
 		array('Automator', 'checkForUpdates')
 	),
 	'hourly' => array(),

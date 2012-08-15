@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Core
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -22,7 +22,7 @@ namespace Contao;
  *
  * Provide methods to manage back end users.
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <http://contao.org>
  * @package    Core
  */
 class BackendUser extends \User
@@ -51,6 +51,12 @@ class BackendUser extends \User
 	 * @var array
 	 */
 	protected $alexf = array();
+
+	/**
+	 * File mount IDs
+	 * @var array
+	 */
+	protected $arrFilemountIds;
 
 
 	/**
@@ -120,6 +126,10 @@ class BackendUser extends \User
 
 			case 'filemounts':
 				return is_array($this->arrData['filemounts']) ? $this->arrData['filemounts'] : (($this->arrData['filemounts'] != '') ? array($this->arrData['filemounts']) : false);
+				break;
+
+			case 'filemountIds':
+				return $this->arrFilemountIds;
 				break;
 
 			case 'fop':
@@ -372,7 +382,10 @@ class BackendUser extends \User
 			$this->filemounts = array_filter($this->filemounts);
 		}
 
-		// Convert the numeric file mounts into paths
+		// Store the numeric file mounts
+		$this->arrFilemountIds = $this->filemounts;
+
+		// Convert the file mounts into paths (backwards compatibility)
 		if (!$this->isAdmin && !empty($this->filemounts))
 		{
 			$objFiles = \FilesModel::findMultipleByIds($this->filemounts);

@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Core
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -22,7 +22,7 @@ namespace Contao;
  *
  * Provide methods to modify the file system.
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <http://contao.org>
  * @package    Core
  */
 class DC_Folder extends \DataContainer implements \listable, \editable
@@ -307,8 +307,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Build the tree
 		$return = '
 <div id="tl_buttons">'.((\Input::get('act') == 'select') ? '
-<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : '') . ((\Input::get('act') != 'select' && !$blnClipboard) ? '
-<a href="'.$this->addToUrl($hrfNew).'" class="'.$clsNew.'" title="'.specialchars($ttlNew).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$lblNew.'</a>' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? ' &nbsp; :: &nbsp; <a href="'.$this->addToUrl('&amp;act=paste&amp;mode=move').'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['move'][1]).'" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['move'][0].'</a>' : '') . $this->generateGlobalButtons(true) : '') . ($blnClipboard ? '<a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="x">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a>' : '') . '
+<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a> ' : '') . ((\Input::get('act') != 'select' && !$blnClipboard) ? '
+<a href="'.$this->addToUrl($hrfNew).'" class="'.$clsNew.'" title="'.specialchars($ttlNew).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$lblNew.'</a> ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? '<a href="'.$this->addToUrl('&amp;act=paste&amp;mode=move').'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['move'][1]).'" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['move'][0].'</a> ' : '') . $this->generateGlobalButtons(true) : '') . ($blnClipboard ? '<a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="x">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a> ' : '') . '
 </div>' . ((\Input::get('act') == 'select') ? '
 
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post">
@@ -1256,7 +1256,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 <script>
 window.addEvent(\'domready\', function() {
-  (inp = $(\''.$this->strTable.'\').getElement(\'input[type="text"]\')) && inp.focus();
+  (inp = $(\''.$this->strTable.'\').getElement(\'input[class^="tl_text"]\')) && inp.focus();
 });
 </script>';
 
@@ -1523,7 +1523,7 @@ window.addEvent(\'domready\', function() {
 
 <script>
 window.addEvent(\'domready\', function() {
-  (inp = $(\''.$this->strTable.'\').getElement(\'input[type="text"]\')) && inp.focus();
+  (inp = $(\''.$this->strTable.'\').getElement(\'input[class^="tl_text"]\')) && inp.focus();
 });
 </script>';
 
@@ -2037,6 +2037,14 @@ window.addEvent(\'domready\', function() {
 		if (!$this->blnIsDbAssisted)
 		{
 			return '';
+		}
+
+		$this->import('BackendUser', 'User');
+
+		// Stop if a regular user manually triggers the file synchronisation
+		if (!$this->User->isAdmin)
+		{
+			return '<p class="tl_error">You have to be an administrator to run the file synchronisation.</p>';
 		}
 
 		$this->arrMessages = array();

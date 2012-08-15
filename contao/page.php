@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Core
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -23,7 +23,7 @@ require_once '../system/initialize.php';
  *
  * Back end page picker.
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <http://contao.org>
  * @package    Core
  */
 class PagePicker extends Backend
@@ -72,6 +72,9 @@ class PagePicker extends Backend
 
 		$strTable = Input::get('table');
 		$strField = Input::get('field');
+
+		// Define the current ID
+		define('CURRENT_ID', (Input::get('table') ? $this->Session->get('CURRENT_ID') : Input::get('id')));
 
 		$this->loadDataContainer($strTable);
 		$objDca = new DC_Table($strTable);

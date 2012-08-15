@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Library
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -302,6 +302,20 @@ class Updater extends \Controller
 		{
 			$this->createContentElement($objEvents, 'tl_calendar_events', 'details');
 		}
+
+		// Add an .htaccess file to the modules' html folders so they can be accessed via HTTP
+		foreach (scan(TL_ROOT . '/system/modules') as $strFolder)
+		{
+			if (is_dir(TL_ROOT . '/system/modules/' . $strFolder) && is_dir(TL_ROOT . '/system/modules/' . $strFolder . '/html'))
+			{
+				if (!file_exists(TL_ROOT . '/system/modules/' . $strFolder . '/html/.htaccess'))
+				{
+					$objFile = new \File('system/modules/' . $strFolder . '/html/.htaccess');
+					$objFile->write("order deny,allow\nallow from all");
+					$objFile->close();
+				}
+			}
+		}
 	}
 
 
@@ -366,7 +380,7 @@ class Updater extends \Controller
 
 				foreach ($arrData as $line)
 				{
-					list($name, $info) = explode('=', $line);
+					list($name, $info) = explode('=', $line, 2);
 					list($title, $link, $caption) = explode('|', $info);
 					$arrMeta[trim($name)][$key] = array('title'=>trim($title), 'link'=>trim($link), 'caption'=>trim($caption));
 				}

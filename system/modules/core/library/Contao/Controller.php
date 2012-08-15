@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Library
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -2430,7 +2430,7 @@ abstract class Controller extends \System
 		{
 			// Generate the cache file
 			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php');
-			$objCacheFile->write('<?php');
+			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
 
 			// Parse all module folders
 			foreach ($this->Config->getActiveModules() as $strModule)
@@ -2785,6 +2785,11 @@ abstract class Controller extends \System
 		if (!is_array($arrParentIds))
 		{
 			$arrParentIds = array($arrParentIds);
+		}
+
+		if (empty($arrParentIds))
+		{
+			return $arrReturn;
 		}
 
 		$arrParentIds = array_map('intval', $arrParentIds);

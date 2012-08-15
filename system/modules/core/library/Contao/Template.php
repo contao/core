@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Library
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -287,7 +287,7 @@ abstract class Template extends \Controller
 			"<!--\n\n"
 			. "\tThis website is powered by Contao Open Source CMS :: Licensed under GNU/LGPL\n"
 			. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
-			. "\tVisit the project website at http://www.contao.org for more information\n\n"
+			. "\tVisit the project website at http://contao.org for more information\n\n"
 			. "//-->$lb$1",
 			$this->strBuffer, 1
 		);

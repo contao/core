@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Core
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -22,7 +22,7 @@ namespace Contao;
  *
  * Provide methods to handle data container arrays.
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <http://contao.org>
  * @package    Core
  */
 class DataContainer extends \Backend
@@ -574,10 +574,9 @@ class DataContainer extends \Backend
 
 	/**
 	 * Compile global buttons from the table configuration array and return them as HTML
-	 * @param boolean
 	 * @return string
 	 */
-	protected function generateGlobalButtons($blnForceSeparator=false)
+	protected function generateGlobalButtons()
 	{
 		if (!is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['global_operations']))
 		{
@@ -607,13 +606,12 @@ class DataContainer extends \Backend
 			{
 				$this->import($v['button_callback'][0]);
 				$return .= $this->$v['button_callback'][0]->$v['button_callback'][1]($v['href'], $label, $title, $v['class'], $attributes, $this->strTable, $this->root);
-
 				continue;
 			}
 
-			$return .= ' &#160; :: &#160; <a href="'.$this->addToUrl($v['href']).'" class="'.$v['class'].'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ';
+			$return .= '<a href="'.$this->addToUrl($v['href']).'" class="'.$v['class'].'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ';
 		}
 
-		return ($GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && !$blnForceSeparator) ? preg_replace('/^ &#160; :: &#160; /', '', $return) : $return;
+		return $return;
 	}
 }

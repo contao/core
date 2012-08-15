@@ -4,9 +4,17 @@
 # Copyright (C) 2005-2012 Leo Feyer
 # 
 # @package Core
-# @link    http://www.contao.org
+# @link    http://contao.org
 # @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
 ##
+
+##
+# Prevent access to the Contao template files
+##
+<FilesMatch "\.(tpl|html5|xhtml)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
 
 ##
 # Disable ETags
@@ -18,38 +26,24 @@ FileETag None
 </IfModule>
 
 ##
-# Prevent access to the Contao template files
-##
-<FilesMatch "\.(tpl|html5|xhtml)$">
-  Order allow,deny
-  Deny from all
-</FilesMatch>
-
-##
 # Set the proper MIME types
 # @see https://github.com/h5bp/html5-boilerplate
 ##
 <IfModule mod_mime.c>
-  # JavaScript
   AddType application/javascript              js jsonp
   AddType application/json                    json
-  # Audio
   AddType audio/ogg                           oga ogg
   AddType audio/mp4                           m4a f4a f4b
-  # Video
   AddType video/ogg                           ogv
   AddType video/mp4                           mp4 m4v f4v f4p
   AddType video/webm                          webm
   AddType video/x-flv                         flv
-  # SVG
   AddType image/svg+xml                       svg svgz
   AddEncoding gzip                            svgz
-  # Webfonts
   AddType application/vnd.ms-fontobject       eot
   AddType application/x-font-ttf              ttf ttc
   AddType font/opentype                       otf
   AddType application/x-font-woff             woff
-  # Assorted types
   AddType image/x-icon                        ico
   AddType image/webp                          webp
   AddType text/cache-manifest                 appcache manifest
@@ -65,8 +59,11 @@ FileETag None
 # @see https://github.com/h5bp/html5-boilerplate
 ##
 <IfModule mod_deflate.c>
-  # Current Apache versions (>= 2.2)
   <IfModule filter_module>
+
+    ##
+    # Current Apache versions (>= 2.1)
+    ##
     FilterDeclare   COMPRESS
     FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/html
     FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/css
@@ -80,20 +77,25 @@ FileETag None
     FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/rss+xml
     FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/atom+xml
     FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/vnd.ms-fontobject
+    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/x-font-ttf
     FilterProvider  COMPRESS  DEFLATE resp=Content-Type $image/svg+xml
     FilterProvider  COMPRESS  DEFLATE resp=Content-Type $image/x-icon
-    FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/x-font-ttf
     FilterProvider  COMPRESS  DEFLATE resp=Content-Type $font/opentype
     FilterChain     COMPRESS
     FilterProtocol  COMPRESS  DEFLATE change=yes;byteranges=no
-  </IfModule>
-  # Legacy Apache versions
-  <IfModule !mod_filter.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/css application/json
-    AddOutputFilterByType DEFLATE application/javascript
-    AddOutputFilterByType DEFLATE text/xml application/xml text/x-component
-    AddOutputFilterByType DEFLATE application/xhtml+xml application/rss+xml application/atom+xml
-    AddOutputFilterByType DEFLATE image/x-icon image/svg+xml application/vnd.ms-fontobject application/x-font-ttf font/opentype
+
+    ##
+    # Upcoming Apache versions (>= 2.4)
+    # @see https://github.com/contao/core/issues/4552
+    ##
+    #FilterDeclare  COMPRESS
+    #FilterProvider COMPRESS DEFLATE "%{CONTENT_TYPE} =~ m#^text/(html|css|plain|xml|x-component)#i"
+    #FilterProvider COMPRESS DEFLATE "%{CONTENT_TYPE} =~ m#^application/(javascript|json|xml|xhtml+xml|rss+xml|atom+xml|vnd.ms-fontobject|x-font-ttf)#i"
+    #FilterProvider COMPRESS DEFLATE "%{CONTENT_TYPE} =~ m#^image/(svg+xml|x-icon)#i"
+    #FilterProvider COMPRESS DEFLATE "%{CONTENT_TYPE} = 'font/opentype'"
+    #FilterChain    COMPRESS
+    #FilterProtocol COMPRESS DEFLATE change=yes;byteranges=no
+
   </IfModule>
 </IfModule>
 
@@ -103,16 +105,17 @@ FileETag None
 ##
 <IfModule mod_expires.c>
   ExpiresActive on
+
+  ##
+  # Productional website
+  ##
   ExpiresByType text/cache-manifest           "access plus 0 seconds"
   ExpiresByType text/html                     "access plus 0 seconds"
-  # Data
   ExpiresByType text/xml                      "access plus 0 seconds"
   ExpiresByType application/xml               "access plus 0 seconds"
   ExpiresByType application/json              "access plus 0 seconds"
-  # Feed
   ExpiresByType application/rss+xml           "access plus 1 hour"
   ExpiresByType application/atom+xml          "access plus 1 hour"
-  # Media: images, video, audio
   ExpiresByType image/gif                     "access plus 1 month"
   ExpiresByType image/png                     "access plus 1 month"
   ExpiresByType image/jpeg                    "access plus 1 month"
@@ -121,18 +124,53 @@ FileETag None
   ExpiresByType audio/ogg                     "access plus 1 month"
   ExpiresByType video/mp4                     "access plus 1 month"
   ExpiresByType video/webm                    "access plus 1 month"
-  # HTC files  (css3pie)
   ExpiresByType text/x-component              "access plus 1 month"
-  # Webfonts
   ExpiresByType application/x-font-ttf        "access plus 1 month"
   ExpiresByType font/opentype                 "access plus 1 month"
   ExpiresByType application/x-font-woff       "access plus 1 month"
   ExpiresByType image/svg+xml                 "access plus 1 month"
   ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
-  # CSS and JavaScript
   ExpiresByType text/css                      "access plus 1 year"
   ExpiresByType application/javascript        "access plus 1 year"
+
+  ##
+  # Disable caching during development
+  # @see https://github.com/contao/core/issues/4364
+  ##
+  #ExpiresByType text/cache-manifest           "access"
+  #ExpiresByType text/html                     "access"
+  #ExpiresByType text/xml                      "access"
+  #ExpiresByType application/xml               "access"
+  #ExpiresByType application/json              "access"
+  #ExpiresByType application/rss+xml           "access"
+  #ExpiresByType application/atom+xml          "access"
+  #ExpiresByType image/gif                     "access"
+  #ExpiresByType image/png                     "access"
+  #ExpiresByType image/jpeg                    "access"
+  #ExpiresByType image/x-icon                  "access"
+  #ExpiresByType video/ogg                     "access"
+  #ExpiresByType audio/ogg                     "access"
+  #ExpiresByType video/mp4                     "access"
+  #ExpiresByType video/webm                    "access"
+  #ExpiresByType text/x-component              "access"
+  #ExpiresByType application/x-font-ttf        "access"
+  #ExpiresByType font/opentype                 "access"
+  #ExpiresByType application/x-font-woff       "access"
+  #ExpiresByType image/svg+xml                 "access"
+  #ExpiresByType application/vnd.ms-fontobject "access"
+  #ExpiresByType text/css                      "access"
+  #ExpiresByType application/javascript        "access"
+
 </IfModule>
+
+##
+# Disable caching during development
+# @see https://github.com/contao/core/issues/4364
+##
+#<IfModule mod_headers.c>
+#  Header unset Cache-Control
+#  Header append Cache-Control must-revalidate
+#</IfModule>
 
 ##
 # Add a Vary Accept-Encoding header for the compressed resources. If you
@@ -170,11 +208,16 @@ FileETag None
   RewriteBase /
 
   ##
-  # Uncomment the following lines and replace "domain.com" with your domain
-  # name to redirect requests without "www" to the correct domain. 
+  # Uncomment to redirect domains without "www" to the "www" subdomain.
   ##
-  #RewriteCond %{HTTP_HOST} ^domain\.com [NC]
-  #RewriteRule (.*) http://www.domain.com/$1 [R=301,L]
+  #RewriteCond %{HTTP_HOST} !^www\..+$ [NC]
+  #RewriteRule ^ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  ##
+  # Uncomment to redirect domains with "www" to the empty domain.
+  ##
+  #RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  #RewriteRule ^ http://%1%{REQUEST_URI} [R=301,L]
 
   ##
   # If you cannot use mod_deflate, uncomment the following lines to load a

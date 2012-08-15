@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Core
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -22,7 +22,7 @@ namespace Contao;
  *
  * Provide methods to manage front end controllers.
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <http://contao.org>
  * @package    Core
  */
 abstract class Frontend extends \Controller
@@ -515,5 +515,26 @@ abstract class Frontend extends \Controller
 		$strText = \String::substr($strText, 180);
 
 		return trim($strText);
+	}
+
+
+	/**
+	 * Return the cron timeout in seconds
+	 * @return integer
+	 */
+	protected function getCronTimeout()
+	{
+		if (!empty($GLOBALS['TL_CRON']['minutely']))
+		{
+			return 60;
+		}
+		elseif (!empty($GLOBALS['TL_CRON']['hourly']))
+		{
+			return 3660;
+		}
+		else
+		{
+			return 86400; // daily
+		}
 	}
 }

@@ -5,6 +5,20 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+The file picker can now be accessed properly by regular users.
+
+### Fixed
+Make the modules' html folders accessible during the update and create the
+required files in the extension creator as well.
+
+### Fixed
+Pass the minimum cron timeout value to the cron trigger so minutely cron jobs
+are correctly executed (the minimum interval used to be 5 minutes).
+
+### Fixed
+Do not write to the local configuration file in the cron script (see #4483).
+
+### Fixed
 Downgraded the chosen plugin to make it work again (see #4595).
 
 

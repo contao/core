@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Library
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -63,7 +63,7 @@ class Search extends \System
 		$arrSet['pid'] = $arrData['pid'];
 		$arrSet['language'] = $arrData['language'];
 
-		// Get filesize from raw content
+		// Get the file size from the raw content
 		if (!$arrSet['filesize'])
 		{
 			$arrSet['filesize'] = number_format((strlen($arrData['content']) / 1024 ), 2, '.', '');
@@ -72,29 +72,43 @@ class Search extends \System
 		// Replace special characters
 		$strContent = str_replace(array("\n", "\r", "\t", '&#160;', '&nbsp;'), ' ', $arrData['content']);
 
-		$arrOuter = array();
-		$arrInner = array();
-
-		// Strip JavaScript (thanks to Pieter Dreef)
-		while (preg_match('/<script[^>]*>/i', $strContent, $arrOuter, PREG_OFFSET_CAPTURE))
+		// Strip script tags
+		while (($intStart = strpos($strContent, '<script')) !== false)
 		{
-			if (!preg_match('/<\/script>/i', $strContent, $arrInner, PREG_OFFSET_CAPTURE, (strlen($arrOuter[0][0]) + $arrOuter[0][1])))
+			if (($intEnd = strpos($strContent, '</script>', $intStart)) !== false)
 			{
-				break;
+				$strContent = substr($strContent, 0, $intStart) . substr($strContent, $intEnd + 9);
 			}
-
-			$strContent = substr($strContent, 0, $arrOuter[0][1]) . substr($strContent, (strlen($arrInner[0][0]) + $arrInner[0][1]));
 		}
 
-		// Strip non-indexable areas (thanks to Pieter Dreef)
-		while (preg_match('/<!-- indexer::stop -->/', $strContent, $arrOuter, PREG_OFFSET_CAPTURE))
+		// Strip style tags
+		while (($intStart = strpos($strContent, '<style')) !== false)
 		{
-			if (!preg_match('/<!-- indexer::continue -->/', $strContent, $arrInner, PREG_OFFSET_CAPTURE, (strlen($arrOuter[0][0]) + $arrOuter[0][1])))
+			if (($intEnd = strpos($strContent, '</style>', $intStart)) !== false)
 			{
-				break;
+				$strContent = substr($strContent, 0, $intStart) . substr($strContent, $intEnd + 8);
 			}
+		}
 
-			$strContent = substr($strContent, 0, $arrOuter[0][1]) . substr($strContent, (strlen($arrInner[0][0]) + $arrInner[0][1]));
+		// Strip non-indexable areas
+		while (($intStart = strpos($strContent, '<!-- indexer::stop -->')) !== false)
+		{
+			if (($intEnd = strpos($strContent, '<!-- indexer::continue -->', $intStart)) !== false)
+			{
+				$intCurrent = $intStart;
+
+				// Handle nested tags
+				while (($intNested = strpos($strContent, '<!-- indexer::stop -->', $intCurrent + 22)) !== false && $intNested < $intEnd)
+				{
+					if (($intNewEnd = strpos($strContent, '<!-- indexer::continue -->', $intEnd + 26)) !== false)
+					{
+						$intEnd = $intNewEnd;
+						$intCurrent = $intNested;
+					}
+				}
+
+				$strContent = substr($strContent, 0, $intStart) . substr($strContent, $intEnd + 26);
+			}
 		}
 
 		// HOOK: add custom logic

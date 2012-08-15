@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Core
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -17,7 +17,7 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'] = array
 (
 	array('Rich Text Editor', 'For more information about TinyMCE please visit <a href="http://www.tinymce.com/" title="TinyMCE by moxiecode" target="_blank">http://www.tinymce.com/</a>.'),
-	array('Insert tags', 'For more information on insert tags please visit <a href="http://www.contao.org/en/insert-tags.html" title="Contao online documentation" target="_blank">http://www.contao.org/en/insert-tags.html</a>.'),
+	array('Insert tags', 'For more information on insert tags please visit <a href="http://contao.org/en/insert-tags.html" title="Contao online documentation" target="_blank">http://contao.org/en/insert-tags.html</a>.'),
 	array('Code Editor', 'For more information about CodeMirror please visit <a href="http://codemirror.net" title="EditArea by Marijn Haverbeke" target="_blank">http://codemirror.net</a>.')
 );
 

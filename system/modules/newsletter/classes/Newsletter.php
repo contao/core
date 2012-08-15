@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Newsletter
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -22,7 +22,7 @@ namespace Contao;
  *
  * Provide methods to handle newsletters.
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <http://contao.org>
  * @package    Newsletter
  */
 class Newsletter extends \Backend
@@ -867,6 +867,12 @@ class Newsletter extends \Backend
 				{
 					$domain = \Environment::get('base');
 					$objParent = $this->getPageDetails($objNewsletter->jumpTo);
+
+					// The target page does not exist
+					if ($objParent === null)
+					{
+						continue;
+					}
 
 					if ($objParent->domain != '')
 					{

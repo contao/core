@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Library
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -353,6 +353,12 @@ abstract class System
 			$strLanguage = $GLOBALS['TL_LANGUAGE'];
 		}
 
+		// Fall back to english
+		if ($strLanguage == '')
+		{
+			$strLanguage = 'en';
+		}
+
 		// Return if the data has been loaded already
 		if (isset($GLOBALS['loadLanguageFile'][$strName][$strLanguage]) && !$blnNoCache)
 		{
@@ -371,10 +377,10 @@ abstract class System
 		{
 			// Generate the cache files
 			$objCacheFallback = new \File('system/cache/language/en/' . $strName . '.php');
-			$objCacheFallback->write('<?php');
+			$objCacheFallback->write('<?php '); // add one space to prevent the "unexpected $end" error
 
 			$objCacheFile = new \File('system/cache/language/' . $strLanguage . '/' . $strName . '.php');
-			$objCacheFile->write('<?php');
+			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
 
 			// Parse all active modules
 			foreach (\Config::getInstance()->getActiveModules() as $strModule)

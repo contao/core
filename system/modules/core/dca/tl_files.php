@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Core
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -49,7 +49,8 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['sync'],
 				'href'                => 'act=sync',
-				'class'               => 'header_sync'
+				'class'               => 'header_sync',
+				'button_callback'     => array('tl_files', 'syncFiles')
 			),
 			'toggleNodes' => array
 			(
@@ -184,7 +185,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <http://contao.org>
  * @package    Core
  */
 class tl_files extends Backend
@@ -451,6 +452,22 @@ class tl_files extends Backend
 		}
 
 		return $varValue;
+	}
+
+
+	/**
+	 * Return the sync files button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function syncFiles($href, $label, $title, $class, $attributes)
+	{
+		return $this->User->isAdmin ? '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'" class="'.$class.'"'.$attributes.'>'.$label.'</a> ' : '';
 	}
 
 

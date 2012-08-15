@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Library
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -222,6 +222,13 @@ class Config
 		$objFile = fopen(TL_ROOT . '/system/tmp/' . $strTemp, 'wb');
 		fputs($objFile, $strFile);
 		fclose($objFile);
+
+		// Make sure the file has been written (see #4483)
+		if (!filesize(TL_ROOT . '/system/tmp/' . $strTemp))
+		{
+			$this->log('The local configuration file could not be written. Have your reached your quota limit?');
+			return;
+		}
 
 		// Then move the file to its final destination
 		$this->Files->rename('system/tmp/' . $strTemp, 'system/config/localconfig.php');

@@ -4,7 +4,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Core
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -994,6 +994,15 @@ ul.sgallery .gimage {
 	opacity: 0.5;
 }
 
+/* Galleries */
+.ce_gallery ul {
+	overflow:hidden;
+}
+.ce_gallery li {
+	float:left;
+	margin:0 6px 6px 0;
+}
+
 /* Context menu */
 #contextmenu {
 	display:block;
@@ -1080,6 +1089,10 @@ a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header
 	padding:2px 0 3px 20px;
 	background-position:left center;
 	background-repeat:no-repeat;
+	margin-left:15px;
+}
+a.navigation {
+	margin-left:0;
 }
 .list_icon {
 	margin-left:-5px;
@@ -1098,50 +1111,50 @@ a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header
 
 /* Header icons */
 .header_home {
-	background:url("images/home.gif") no-repeat left center;
+	background-image:url("images/home.gif");
 }
 .header_user {
-	background:url("images/login.gif") no-repeat left center;
+	background-image:url("images/login.gif");
 }
 .header_preview {
-	background:url("images/preview.gif") no-repeat left center;
+	background-image:url("images/preview.gif");
 }
 .header_clipboard {
-	background:url("images/clipboard.gif") no-repeat left center;
+	background-image:url("images/clipboard.gif");
 }
 .header_logout {
-	background:url("images/logout.gif") no-repeat left center;
+	background-image:url("images/logout.gif");
 }
 .header_back {
-	background:url("images/back.gif") no-repeat left center;
+	background-image:url("images/back.gif");
 }
 .header_new {
 	padding-left:18px;
-	background:url("images/new.gif") no-repeat left center;
+	background-image:url("images/new.gif");
 }
 .header_rss {
-	background:url("images/rss.gif") no-repeat left center;
+	background-image:url("images/rss.gif");
 }
 .header_edit_all {
-	background:url("images/all.gif") no-repeat left center;
+	background-image:url("images/all.gif");
 }
 .header_delete_all {
-	background:url("images/deleteAll.gif") no-repeat left center;
+	background-image:url("images/deleteAll.gif");
 }
 .header_new_folder {
-	background:url("images/newfolder.gif") no-repeat left center;
+	background-image:url("images/newfolder.gif");
 }
 .header_css_import {
-	background:url("images/cssimport.gif") no-repeat left center;
+	background-image:url("images/cssimport.gif");
 }
 .header_theme_import {
-	background:url("images/theme_import.gif") no-repeat left center;
+	background-image:url("images/theme_import.gif");
 }
 .header_toggle {
-	background:url("images/folPlus.gif") no-repeat left center;
+	background:url("images/folPlus.gif") no-repeat -1px center;
 }
 .header_sync {
-	background:url("images/sync.gif") no-repeat left center;
+	background-image:url("images/sync.gif");
 }
 
 /* News icons */
@@ -1278,4 +1291,31 @@ fieldset.collapsed > legend {
 	padding-left:0;
 	font-weight:bold;
 	display:inline;
+}
+
+/* Pagination */
+.pagination {
+	overflow:hidden;
+	background:#f6f6f6;
+	border:1px solid #e9e9e9;
+	border-width:1px 0;
+	padding:2px 0 4px;
+}
+.pagination ul {
+	width:60%;
+	float:right;
+	text-align:right;
+	padding-right:3px;
+}
+.pagination p {
+	width:30%;
+	float:left;
+	margin-bottom:0;
+}
+.pagination li {
+	display:inline;
+	padding-right:3px;
+}
+.pagination .current {
+	color:#999;
 }

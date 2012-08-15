@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Core
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -22,7 +22,7 @@ namespace Contao;
  *
  * Provide methods to handle input field "file tree".
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <http://contao.org>
  * @package    Core
  */
 class FileSelector extends \Widget
@@ -154,7 +154,7 @@ class FileSelector extends \Widget
 			// Show mounted files to regular users
 			else
 			{
-				foreach ($this->eliminateNestedPages($this->User->filemounts, 'tl_files') as $node)
+				foreach ($this->eliminateNestedPages($this->User->filemountIds, 'tl_files') as $node)
 				{
 					$tree .= $this->renderFiletree($node, -20);
 				}

@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Core
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -24,7 +24,7 @@ $GLOBALS['TL_LANG']['MSC']['com_by']            = 'Comment by';
 $GLOBALS['TL_LANG']['MSC']['com_reply']         = 'Reply by';
 $GLOBALS['TL_LANG']['MSC']['com_quote']         = '%s wrote:';
 $GLOBALS['TL_LANG']['MSC']['com_code']          = 'Code:';
-$GLOBALS['TL_LANG']['MSC']['com_subject']       = 'Contao :: New comment on %s';
+$GLOBALS['TL_LANG']['MSC']['com_subject']       = 'New comment on %s';
 $GLOBALS['TL_LANG']['MSC']['com_message']       = "%s has created a new comment on your website.\n\n---\n\n%s\n\n---\n\nView: %s\nEdit: %s\n\nIf you are moderating comments, you have to log in to the back end to publish it.";
 $GLOBALS['TL_LANG']['MSC']['com_confirm']       = 'Your comment has been added and is now pending for approval.';
 $GLOBALS['TL_LANG']['MSC']['com_optInConfirm']  = 'Your subscription has been activated';

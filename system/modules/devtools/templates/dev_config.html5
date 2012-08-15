@@ -202,9 +202,10 @@
  *    (
  *       array('Automator', 'purgeImageCache')
  *    ),
- *    'weekly' => array(),
- *    'daily' => array(),
- *    'hourly' => array()
+ *    'weekly'   => array(),
+ *    'daily'    => array(),
+ *    'hourly'   => array(),
+ *    'minutely' => array()
  * );
  *
  * Note that this is rather a command scheduler than a cron job, which does not
@@ -230,7 +231,7 @@
  *
  * Hooks allow you to add functionality to the core without having to modify the
  * source code by registering callback functions to be executed on a particular
- * event. For more information see http://www.contao.org/de/hooks.html.
+ * event. For more information see http://contao.org/hooks.html.
  */
 
 

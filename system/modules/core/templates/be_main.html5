@@ -46,9 +46,9 @@
 <h1>Contao Open Source CMS <?php echo VERSION . '.' . BUILD; ?></h1>
 
 <div>
-<span class="header_user_container"><a href="<?php echo $this->base; ?>contao/main.php?do=login" class="header_user" title="<?php echo $this->account; ?>"><?php echo $this->username; ?></a> &nbsp; :: &nbsp; </span>
-<span class="header_preview_container"><a href="contao/preview.php<?php echo $this->frontendFile; ?>" target="_blank" class="header_preview" title="<?php echo $this->previewTitle; ?>" accesskey="f"><?php echo $this->preview; ?></a> &nbsp; :: &nbsp; </span>
-<span class="header_home_container"><a href="<?php echo $this->base; ?>contao/main.php" class="header_home" title="<?php echo $this->homeTitle; ?>" accesskey="h"><?php echo $this->home; ?></a> &nbsp; :: &nbsp; </span>
+<span class="header_user_container"><a href="<?php echo $this->base; ?>contao/main.php?do=login" class="header_user" title="<?php echo $this->account; ?>"><?php echo $this->username; ?></a></span>
+<span class="header_preview_container"><a href="contao/preview.php<?php echo $this->frontendFile; ?>" target="_blank" class="header_preview" title="<?php echo $this->previewTitle; ?>" accesskey="f"><?php echo $this->preview; ?></a></span>
+<span class="header_home_container"><a href="<?php echo $this->base; ?>contao/main.php" class="header_home" title="<?php echo $this->homeTitle; ?>" accesskey="h"><?php echo $this->home; ?></a></span>
 <span class="header_logout_container"><a href="<?php echo $this->base; ?>contao/" class="header_logout" title="<?php echo $this->logoutTitle; ?>" accesskey="q"><?php echo $this->logout; ?></a></span>
 </div>
 <?php if ($this->isCoreOnlyMode): ?>
@@ -106,7 +106,7 @@
 <div id="footer">
 
 <div>
-<span class="footer_top_container"><a href="<?php echo $this->request; ?>#top" class="footer_top" title="<?php echo $this->backToTop; ?>" accesskey="t"><?php echo $this->top; ?></a> &nbsp; :: &nbsp; </span>
+<span class="footer_top_container"><a href="<?php echo $this->request; ?>#top" class="footer_top" title="<?php echo $this->backToTop; ?>" accesskey="t"><?php echo $this->top; ?></a></span>
 <span class="footer_preview_container"><a href="contao/preview.php<?php echo $this->frontendFile; ?>" target="_blank" class="footer_preview" title="<?php echo $this->previewTitle; ?>"><?php echo $this->preview; ?></a></span>
 </div>
 
