@@ -21,13 +21,13 @@
 <table class="tl_listing">
 <thead>
 <tr>
-  <th><?php echo $GLOBALS['TL_LANG']['MSC']['date']; ?></th>
-  <th><?php echo $GLOBALS['TL_LANG']['MSC']['user']; ?></th>
-  <th><?php echo $GLOBALS['TL_LANG']['MSC']['table']; ?></th>
-  <th>ID</th>
-  <th><?php echo $GLOBALS['TL_LANG']['MSC']['description']; ?></th>
-  <th><?php echo $GLOBALS['TL_LANG']['MSC']['version']; ?></th>
-  <th>&nbsp;</th>
+  <th scope="col"><?php echo $GLOBALS['TL_LANG']['MSC']['date']; ?></th>
+  <th scope="col"><?php echo $GLOBALS['TL_LANG']['MSC']['user']; ?></th>
+  <th scope="col"><?php echo $GLOBALS['TL_LANG']['MSC']['table']; ?></th>
+  <th scope="col">ID</th>
+  <th scope="col"><?php echo $GLOBALS['TL_LANG']['MSC']['description']; ?></th>
+  <th scope="col"><?php echo $GLOBALS['TL_LANG']['MSC']['version']; ?></th>
+  <th scope="col">&nbsp;</th>
 </tr>
 </thead>
 <tbody>
