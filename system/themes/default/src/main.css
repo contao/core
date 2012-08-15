@@ -804,7 +804,7 @@ ul.sgallery .gimage {
 }
 
 /* CHMOD table */
-.tl_chmod th,.tl_chmod .th {
+.tl_chmod th {
 	width:97px;
 	text-align:center;
 	font-weight:normal;
