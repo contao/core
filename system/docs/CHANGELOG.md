@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+The quick navigation module could not jump to pages named "index" (see #4611).
+
+### Fixed
 Replaced `SplFileInfo::getExtension()` which is only available from PHP 5.3.6
 with `pathinfo($info->getFilename())` (see #4619).
 

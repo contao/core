@@ -56,12 +56,7 @@ class ModuleQuicknav extends \Module
 
 		if (\Input::post('FORM_SUBMIT') == 'tl_quicknav')
 		{
-			if (strlen(\Input::post('target', true)))
-			{
-				$this->redirect(\Input::post('target', true));
-			}
-
-			$this->reload();
+			$this->redirect(\Input::post('target', true));
 		}
 
 		return parent::generate();
