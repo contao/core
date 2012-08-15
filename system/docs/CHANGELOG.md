@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Add the SyntaxHighlighter scripts at the page bottom.
+
+### Fixed
 Do not add the jQuery/MooTools scripts as separate scripts.
 
 ### Fixed

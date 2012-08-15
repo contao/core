@@ -106,35 +106,9 @@ class ContentCode extends \ContentElement
 			$GLOBALS['TL_CSS'][] = 'assets/highlighter/'.HIGHLIGHTER.'/shCore.css||static';
 
 			// Add the JavaScripts
-			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/highlighter/'.HIGHLIGHTER.'/XRegExp.js|static';
-			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/highlighter/'.HIGHLIGHTER.'/shCore.js|static';
-			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/highlighter/'.HIGHLIGHTER.'/' . $arrMapper[$this->highlight] . '.js|static';
-
-			global $objPage;
-
-			// Initialization
-			if ($objPage->outputFormat == 'xhtml')
-			{
-				$strInit  = '<script type="text/javascript">' . "\n";
-				$strInit .= '/* <![CDATA[ */' . "\n";
-			}
-			else
-			{
-				$strInit  = '<script>' . "\n";
-			}
-
-			$strInit .= 'SyntaxHighlighter.defaults.toolbar = false;' . "\n";
-			$strInit .= 'SyntaxHighlighter.all();' . "\n";
-
-			if ($objPage->outputFormat == 'xhtml')
-			{
-				$strInit .= '/* ]]> */' . "\n";
-			}
-
-			$strInit .= '</script>';
-
-			// Add the initialization script to the head section and not (!) to TL_JAVASCRIPT
-			$GLOBALS['TL_HEAD'][] = $strInit;
+			$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/'.HIGHLIGHTER.'/XRegExp.js';
+			$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/'.HIGHLIGHTER.'/shCore.js';
+			$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/'.HIGHLIGHTER.'/' . $arrMapper[$this->highlight] . '.js';
 		}
 	}
 }

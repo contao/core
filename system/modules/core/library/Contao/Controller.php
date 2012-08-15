@@ -1992,7 +1992,6 @@ abstract class Controller extends \System
 		$blnXhtml = ($objPage->outputFormat == 'xhtml');
 		$strTagEnding = $blnXhtml ? ' />' : '>';
 		$strScripts = '';
-		$objCombiner = new \Combiner();
 
 		// Add the internal jQuery scripts
 		if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
@@ -2015,8 +2014,24 @@ abstract class Controller extends \System
 			}
 		}
 
+		// Add the syntax highlighter scripts
+		if (is_array($GLOBALS['TL_HIGHLIGHTER']) && !empty($GLOBALS['TL_HIGHLIGHTER']))
+		{
+			$objCombiner = new \Combiner();
+
+			foreach (array_unique($GLOBALS['TL_HIGHLIGHTER']) as $script)
+			{
+				$objCombiner->add($script);
+			}
+
+			$strScripts .= "\n" . '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>';
+			$strScripts .= "\n" . '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . '>SyntaxHighlighter.defaults.toolbar=false;SyntaxHighlighter.all()</script>' . "\n";
+		}
+
 		$arrReplace['[[TL_MOOTOOLS]]'] = $strScripts;
 		$strScripts = '';
+
+		$objCombiner = new \Combiner();
 
 		// Add the CSS framework style sheets
 		if (is_array($GLOBALS['TL_FRAMEWORK_CSS']) && !empty($GLOBALS['TL_FRAMEWORK_CSS']))
