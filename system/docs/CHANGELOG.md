@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Clone the Model and not the Collection when copying files (see #4628).
+
+### Fixed
 The "custom navigation" and "quick link" modules did not show if there was only
 a single page (see #4616).
 

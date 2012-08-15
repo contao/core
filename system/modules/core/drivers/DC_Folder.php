@@ -592,7 +592,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			if ($this->blnIsDbAssisted)
 			{
 				$objFolder = \FilesModel::findByPath($source);
-				$objNewFolder = clone $objFolder;
+				$objNewFolder = clone $objFolder->current();
 
 				// Set the parent ID
 				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
@@ -633,7 +633,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					if ($this->blnIsDbAssisted)
 					{
 						$objFile = \FilesModel::findByPath($source . '/' . $file);
-						$objNewFile = clone $objFile;
+						$objNewFile = clone $objFile->current();
 
 						// Update the database
 						$objNewFile->pid = $objNewFolder->id;
@@ -665,7 +665,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			if ($this->blnIsDbAssisted)
 			{
 				$objFile = \FilesModel::findByPath($source);
-				$objNewFile = clone $objFile;
+				$objNewFile = clone $objFile->current();
 
 				// Set the parent ID
 				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
