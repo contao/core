@@ -15,7 +15,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_install']['installTool'] = array('Installation', 'Installtool-Anmeldung');
-$GLOBALS['TL_LANG']['tl_install']['locked']      = array('Das Installtool wurde gesperrt', 'Aus Sicherheitsgründen wurde das Installtool gesperrt, nachdem dreimal hintereinander ein falsches Passwort eingegeben wurde. Um es zu entsperren, öffnen Sie die lokale Konfigurationsdatei und setzten Sie <em>installCount</em> auf <em>0</em>.');
+$GLOBALS['TL_LANG']['tl_install']['locked']      = array('Das Installtool wurde gesperrt', 'Aus Sicherheitsgründen wurde das Installtool gesperrt, nachdem dreimal hintereinander ein falsches Passwort eingegeben wurde. Um es zu entsperren, öffnen Sie die lokale Konfigurationsdatei und setzen Sie <em>installCount</em> auf <em>0</em>.');
 $GLOBALS['TL_LANG']['tl_install']['password']    = array('Passwort', 'Bitte geben Sie das Installtool-Passwort ein. Das Installtool-Passwort ist nicht gleich dem Contao Backend-Passwort.');
 $GLOBALS['TL_LANG']['tl_install']['changePass']  = array('Installtool-Passwort', 'Um das Contao-Installtool zusätzlich abzusichern, können Sie die Datei <strong>contao/install.php</strong> nach der Installation von Contao entweder umbenennen oder komplett von Ihrem Server entfernen.');
 $GLOBALS['TL_LANG']['tl_install']['encryption']  = array('Einen Verschlüsselungsschlüssel erstellen', 'Der Schlüssel wird zur verschlüsselten Datenspeicherung verwendet. Beachten Sie, dass einmal verschlüsselte Daten nur mit diesem Schlüssel wiederhergestellt werden können! Notieren Sie ihn sich daher und ändern Sie ihn nicht, wenn es bereits verschlüsselte Daten gibt. Lassen Sie das Feld leer, um einen zufälligen Schlüssel zu generieren.');
@@ -52,12 +52,12 @@ $GLOBALS['TL_LANG']['tl_install']['dbCharset']      = 'Zeichensatz';
 $GLOBALS['TL_LANG']['tl_install']['dbCollation']    = 'Kollation';
 $GLOBALS['TL_LANG']['tl_install']['dbPort']         = 'Portnummer';
 $GLOBALS['TL_LANG']['tl_install']['dbSave']         = 'Einstellungen speichern';
-$GLOBALS['TL_LANG']['tl_install']['collationInfo']  = 'Das Ändern der Kollation betrifft alle Tabellen mit <em>tl_</em>-Prefix.';
+$GLOBALS['TL_LANG']['tl_install']['collationInfo']  = 'Das Ändern der Kollation betrifft alle Tabellen mit <em>tl_</em>-Präfix.';
 $GLOBALS['TL_LANG']['tl_install']['updateError']    = 'Die Datenbank ist nicht aktuell!';
 $GLOBALS['TL_LANG']['tl_install']['updateConfirm']  = 'Die Datenbank ist aktuell.';
 $GLOBALS['TL_LANG']['tl_install']['updateSave']     = 'Datenbank aktualisieren';
 $GLOBALS['TL_LANG']['tl_install']['saveCollation']  = 'Kollation ändern';
-$GLOBALS['TL_LANG']['tl_install']['updateX']        = 'Es scheint als würden Sie ein Update von einer Contao-Version kleiner als %s durchführen. Falls das zutrifft, ist es <strong>unbedingt notwendig, das Version %s-Update auszuführen</strong>, um die Integrität der Daten zu gewährleisten!';
+$GLOBALS['TL_LANG']['tl_install']['updateX']        = 'Es scheint, als würden Sie ein Update von einer Contao-Version kleiner als %s durchführen. Falls das zutrifft, ist es <strong>unbedingt notwendig, das Version %s-Update auszuführen</strong>, um die Integrität der Daten zu gewährleisten!';
 $GLOBALS['TL_LANG']['tl_install']['updateXrun']     = 'Version %s-Update ausführen';
 $GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'Version %s-Update – Schritt %s ausführen';
 $GLOBALS['TL_LANG']['tl_install']['importError']    = 'Bitte wählen Sie eine Template-Datei!';
