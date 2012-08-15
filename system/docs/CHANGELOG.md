@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Moved `Controller::restoreBasicEntities()` to the `String` class (see #4646).
+
+### Fixed
 The file picker can now be accessed properly by regular users.
 
 ### Fixed

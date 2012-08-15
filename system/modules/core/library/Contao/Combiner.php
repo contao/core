@@ -63,6 +63,15 @@ class Combiner extends \System
 
 
 	/**
+	 * Public constructor required
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+
+	/**
 	 * Add a file to the combined file
 	 * 
 	 * @param string $strFile    The file to be added

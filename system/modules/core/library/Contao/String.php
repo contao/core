@@ -237,6 +237,19 @@ class String
 
 
 	/**
+	 * Restore basic entities
+	 * 
+	 * @param string $strBuffer The string with the tags to be replaced
+	 * 
+	 * @return string The string with the original entities
+	 */
+	public static function restoreBasicEntities($strBuffer)
+	{
+		return str_replace(array('[&]', '[&amp;]', '[lt]', '[gt]', '[nbsp]', '[-]'), array('&amp;', '&amp;', '&lt;', '&gt;', '&nbsp;', '&shy;'), $strBuffer);
+	}
+
+
+	/**
 	 * Censor a single word or an array of words within a string
 	 * 
 	 * @param string $strString  The string to censor

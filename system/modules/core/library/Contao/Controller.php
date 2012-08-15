@@ -1039,7 +1039,7 @@ abstract class Controller extends \System
 		// Preserve insert tags
 		if ($GLOBALS['TL_CONFIG']['disableInsertTags'])
 		{
-			return $this->restoreBasicEntities($strBuffer);
+			return \String::restoreBasicEntities($strBuffer);
 		}
 
 		$tags = preg_split('/\{\{(([^\{\}]*|(?R))*)\}\}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
@@ -1975,7 +1975,7 @@ abstract class Controller extends \System
 			$strBuffer .= $arrCache[$strTag];
 		}
 
-		return $this->restoreBasicEntities($strBuffer);
+		return \String::restoreBasicEntities($strBuffer);
 	}
 
 
@@ -2116,19 +2116,6 @@ abstract class Controller extends \System
 
 		$arrReplace['[[TL_HEAD]]'] = $strScripts;
 		return str_replace(array_keys($arrReplace), array_values($arrReplace), $strBuffer);
-	}
-
-
-	/**
-	 * Restore basic entities
-	 * 
-	 * @param string $strBuffer The string with the tags to be replaced
-	 * 
-	 * @return string The string with the original entities
-	 */
-	public static function restoreBasicEntities($strBuffer)
-	{
-		return str_replace(array('[&]', '[&amp;]', '[lt]', '[gt]', '[nbsp]', '[-]'), array('&amp;', '&amp;', '&lt;', '&gt;', '&nbsp;', '&shy;'), $strBuffer);
 	}
 
 
@@ -3421,6 +3408,21 @@ abstract class Controller extends \System
 		{
 			return TL_SCRIPT_URL . $script;
 		}
+	}
+
+
+	/**
+	 * Restore basic entities
+	 * 
+	 * @param string $strBuffer The string with the tags to be replaced
+	 * 
+	 * @return string The string with the original entities
+	 * 
+	 * @deprecated Use String::restoreBasicEntities() instead
+	 */
+	public static function restoreBasicEntities($strBuffer)
+	{
+		return \String::restoreBasicEntities($strBuffer);
 	}
 
 
