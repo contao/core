@@ -22,7 +22,7 @@ require_once dirname(__FILE__).'/RepositorySettings.php';
  * Basic general functions of the central repository
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <http://contao.org>
  * @package    Repository
  */
 class Repository

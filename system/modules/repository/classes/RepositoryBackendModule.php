@@ -22,7 +22,7 @@ require_once dirname(dirname(__FILE__)).'/classes/RepositorySettings.php';
  * Implements the frontend interface
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <http://contao.org>
  * @package    Repository
  */
 class RepositoryBackendModule extends BackendModule

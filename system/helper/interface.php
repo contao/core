@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2012 Leo Feyer
  * 
  * @package Core
- * @link    http://www.contao.org
+ * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -14,7 +14,7 @@
 /**
  * Interface listable
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <http://contao.org>
  * @package    Core
  */
 interface listable
@@ -29,7 +29,7 @@ interface listable
 /**
  * Interface editable
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <http://contao.org>
  * @package    Core
  */
 interface editable
@@ -45,7 +45,7 @@ interface editable
 /**
  * Interface executable
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <http://contao.org>
  * @package    Core
  */
 interface executable
@@ -58,7 +58,7 @@ interface executable
 /**
  * Interface uploadable
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <http://contao.org>
  * @package    Core
  */
 interface uploadable {}
