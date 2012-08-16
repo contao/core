@@ -231,11 +231,7 @@
  *
  * Hooks allow you to add functionality to the core without having to modify the
  * source code by registering callback functions to be executed on a particular
-<<<<<<< HEAD
  * event. For more information see http://contao.org/hooks.html.
-=======
- * event. For more information see http://www.contao.org/en/hooks.html.
->>>>>>> 2923532e839ead0d55b4458d6c42301f756d06e2
  */
 
 
