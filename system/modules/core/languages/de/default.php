@@ -343,15 +343,15 @@ $GLOBALS['TL_LANG']['MSC']['relative']      = 'Relatives Format';
 $GLOBALS['TL_LANG']['MSC']['proportional']  = array('Proportional', 'Die längere Seite des Bildes wird an die vorgegebenen Abmessungen angepasst und das Bild proportional verkleinert.');
 $GLOBALS['TL_LANG']['MSC']['box']           = array('An Rahmen anpassen', 'Die kürzere Seite des Bildes wird an die vorgegebenen Abmessungen angepasst und das Bild proportional verkleinert.');
 $GLOBALS['TL_LANG']['MSC']['crop']          = 'Exaktes Format';
-$GLOBALS['TL_LANG']['MSC']['left_top']      = array('Links oben', 'Erhält den linken Teil eines Querformat-Bildes und den oberen Teil eines Hochformat-Bildes.');
-$GLOBALS['TL_LANG']['MSC']['center_top']    = array('Mitte oben', 'Erhält den mittleren Teil eines Querformat-Bildes und den oberen Teil eines Hochformat-Bildes.');
-$GLOBALS['TL_LANG']['MSC']['right_top']     = array('Rechts oben', 'Erhält den rechten Teil eines Querformat-Bildes und den oberen Teil eines Hochformat-Bildes.');
-$GLOBALS['TL_LANG']['MSC']['left_center']   = array('Links Mitte', 'Erhält den linken Teil eines Querformat-Bildes und den mittleren Teil eines Hochformat-Bildes.');
-$GLOBALS['TL_LANG']['MSC']['center_center'] = array('Mitte Mitte', 'Erhält den mittleren Teil eines Querformat-Bildes und den mittleren Teil eines Hochformat-Bildes.');
-$GLOBALS['TL_LANG']['MSC']['right_center']  = array('Rechts Mitte', 'Erhält den rechten Teil eines Querformat-Bildes und den mittleren Teil eines Hochformat-Bildes.');
-$GLOBALS['TL_LANG']['MSC']['left_bottom']   = array('Links unten', 'Erhält den linken Teil eines Querformat-Bildes und den unteren Teil eines Hochformat-Bildes.');
-$GLOBALS['TL_LANG']['MSC']['center_bottom'] = array('Mitte unten', 'Erhält den mittleren Teil eines Querformat-Bildes und den unteren Teil eines Hochformat-Bildes.');
-$GLOBALS['TL_LANG']['MSC']['right_bottom']  = array('Rechts unten', 'Erhält den rechten Teil eines Querformat-Bildes und den unteren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['left_top']      = array('Links | Oben', 'Erhält den linken Teil eines Querformat-Bildes und den oberen Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['center_top']    = array('Mitte | Oben', 'Erhält den mittleren Teil eines Querformat-Bildes und den oberen Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['right_top']     = array('Rechts | Oben', 'Erhält den rechten Teil eines Querformat-Bildes und den oberen Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['left_center']   = array('Links | Mitte', 'Erhält den linken Teil eines Querformat-Bildes und den mittleren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['center_center'] = array('Mitte | Mitte', 'Erhält den mittleren Teil eines Querformat-Bildes und den mittleren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['right_center']  = array('Rechts | Mitte', 'Erhält den rechten Teil eines Querformat-Bildes und den mittleren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['left_bottom']   = array('Links | Unten', 'Erhält den linken Teil eines Querformat-Bildes und den unteren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['center_bottom'] = array('Mitte | Unten', 'Erhält den mittleren Teil eines Querformat-Bildes und den unteren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['right_bottom']  = array('Rechts | Unten', 'Erhält den rechten Teil eines Querformat-Bildes und den unteren Teil eines Hochformat-Bildes.');
 
 
 /**
