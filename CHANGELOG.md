@@ -1,6 +1,14 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.6 (2012-XX-XX)
+---------------------------
+
+### Fixed
+Do not override the comments array in case login is required to comment,
+otherwise no commets will be shown (see #4064).
+
+
 Version 2.11.5 (2012-07-25)
 ---------------------------
 
