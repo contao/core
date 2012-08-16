@@ -608,6 +608,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				// Update the database
 				$objNewFolder->tstamp = time();
 				$objNewFolder->path = $destination;
+				$objNewFolder->name = basename($destination); // see #4628
 				$objNewFolder->save();
 			}
 
@@ -681,6 +682,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				// Update the database
 				$objNewFile->tstamp = time();
 				$objNewFile->path = $destination;
+				$objNewFile->name = basename($destination); // see #4628
 				$objNewFile->save();
 			}
 
