@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+The newsletter subscription modules now work again (see #4660).
+
+### Fixed
 Add the static files URL to images added in the rich text editor.
 
 ### Fixed
