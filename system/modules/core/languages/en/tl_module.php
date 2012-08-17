@@ -17,6 +17,7 @@
 $GLOBALS['TL_LANG']['tl_module']['name']           = array('Title', 'Please enter the module title.');
 $GLOBALS['TL_LANG']['tl_module']['headline']       = array('Headline', 'Here you can add a headline to the module.');
 $GLOBALS['TL_LANG']['tl_module']['type']           = array('Module type', 'Please choose the type of module.');
+$GLOBALS['TL_LANG']['tl_module']['modtpl']         = array('Module template', 'Please choose the module template.');
 $GLOBALS['TL_LANG']['tl_module']['levelOffset']    = array('Start level', 'Enter a value greater than 0 to show only submenu items.');
 $GLOBALS['TL_LANG']['tl_module']['showLevel']      = array('Stop level', 'Enter a value greater than 0 to limit the nesting level of the menu.');
 $GLOBALS['TL_LANG']['tl_module']['hardLimit']      = array('Hard limit', 'Never show any menu items beyond the stop level.');
@@ -93,6 +94,7 @@ $GLOBALS['TL_LANG']['tl_module']['reg_password']   = array('Password message', '
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_module']['title_legend']     = 'Title and type';
+$GLOBALS['TL_LANG']['tl_module']['modtpl_legend']    = 'Module template settings';
 $GLOBALS['TL_LANG']['tl_module']['nav_legend']       = 'Navigation settings';
 $GLOBALS['TL_LANG']['tl_module']['reference_legend'] = 'Reference page';
 $GLOBALS['TL_LANG']['tl_module']['redirect_legend']  = 'Redirect settings';

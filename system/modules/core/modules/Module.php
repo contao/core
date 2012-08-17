@@ -107,6 +107,11 @@ abstract class Module extends \Frontend
 			return $this->arrData[$strKey];
 		}
 
+		if ($strKey == 'template')
+		{
+			return $this->strTemplate;
+		}
+
 		return parent::__get($strKey);
 	}
 
@@ -138,7 +143,7 @@ abstract class Module extends \Frontend
 			$this->arrStyle[] = 'margin-bottom:'.$this->arrData['space'][1].'px;';
 		}
 
-		$this->Template = new \FrontendTemplate($this->strTemplate);
+		$this->Template = new \FrontendTemplate(($this->modtpl) ?: $this->strTemplate);
 		$this->Template->setData($this->arrData);
 
 		$this->compile();

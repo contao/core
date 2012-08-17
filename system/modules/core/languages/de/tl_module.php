@@ -17,6 +17,7 @@
 $GLOBALS['TL_LANG']['tl_module']['name']           = array('Titel', 'Bitte geben Sie den Titel des Moduls ein.');
 $GLOBALS['TL_LANG']['tl_module']['headline']       = array('Überschrift', 'Hier können Sie dem Modul eine Überschrift hinzufügen.');
 $GLOBALS['TL_LANG']['tl_module']['type']           = array('Modultyp', 'Bitte wählen Sie den Typ des Moduls.');
+$GLOBALS['TL_LANG']['tl_module']['modtpl']         = array('Modul-Template', 'Bitte wählen Sie das Modul-Template aus.');
 $GLOBALS['TL_LANG']['tl_module']['levelOffset']    = array('Startlevel', 'Geben Sie einen Wert größer 0 ein, um nur Untermenüpunkte darzustellen.');
 $GLOBALS['TL_LANG']['tl_module']['showLevel']      = array('Stoplevel', 'Geben Sie einen Wert größer 0 ein, um die Verschachtelungstiefe des Menüs zu beschränken.');
 $GLOBALS['TL_LANG']['tl_module']['hardLimit']      = array('Hard Limit', 'Niemals Menüpunkte jenseits des Stoplevels anzeigen.');
@@ -93,6 +94,7 @@ $GLOBALS['TL_LANG']['tl_module']['reg_password']   = array('Bestätigungsmail', 
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_module']['title_legend']     = 'Titel und Typ';
+$GLOBALS['TL_LANG']['tl_module']['modtpl_legend']    = 'Modul-Template-Einstellungen';
 $GLOBALS['TL_LANG']['tl_module']['nav_legend']       = 'Menü-Konfiguration';
 $GLOBALS['TL_LANG']['tl_module']['reference_legend'] = 'Referenzseite';
 $GLOBALS['TL_LANG']['tl_module']['redirect_legend']  = 'Weiterleitung';
