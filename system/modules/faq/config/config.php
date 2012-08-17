@@ -19,7 +19,7 @@ array_insert($GLOBALS['BE_MOD']['content'], 2, array
 	'faq' => array
 	(
 		'tables' => array('tl_faq_category', 'tl_faq'),
-		'icon'   => 'system/modules/faq/public/icon.gif'
+		'icon'   => 'system/modules/faq/assets/icon.gif'
 	)
 ));
 

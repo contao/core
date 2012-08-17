@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.0 (2012-XX-XX)
 --------------------------
 
+### Changed
+Renamed the public module folders to "assets" (see #4667).
+
 ### Added
 You can now exempt folders from the files synchronisation (see #4522). Exempt
 folders will also be hidden in the TinyMCE popup file select menu.

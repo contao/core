@@ -215,7 +215,7 @@ class ModuleExtension extends \BackendModule
 
 			// Public folder
 			$tplConfig = $this->newTemplate('dev_htaccess', $objModule);
-			$objConfig = new \File('system/modules/' . $objModule->folder . '/public/.htaccess');
+			$objConfig = new \File('system/modules/' . $objModule->folder . '/assets/.htaccess');
 			$objConfig->write($tplConfig->parse());
 			$objConfig->close();
 
