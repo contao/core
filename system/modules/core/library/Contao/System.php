@@ -438,7 +438,7 @@ abstract class System
 
 
 	/**
-	 * Return the counties as array
+	 * Return the countries as array
 	 * 
 	 * @return array An array of country names
 	 */
