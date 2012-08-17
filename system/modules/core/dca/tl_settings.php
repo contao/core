@@ -28,7 +28,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useSMTP'),
-		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,minifyMarkup,gzipScripts,disableCron,coreOnlyMode;{backend_legend},resultsPerPage,maxResultsPerPage,doNotCollapse,staticFiles,staticPlugins;{frontend_legend},urlSuffix,cacheMode,rewriteURL,useAutoItem,addLanguageToUrl,doNotRedirectEmpty,folderUrl,disableAlias;{privacy_legend:hide},privacyAnonymizeIp,privacyAnonymizeGA;{security_legend:hide},allowedTags,debugMode,bypassCache,displayErrors,logErrors,disableRefererCheck,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{sections_legend:hide},customSections;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin,lockPeriod;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
+		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,minifyMarkup,gzipScripts,disableCron,coreOnlyMode;{backend_legend},resultsPerPage,maxResultsPerPage,fileSyncExclude,doNotCollapse,staticFiles,staticPlugins;{frontend_legend},urlSuffix,cacheMode,rewriteURL,useAutoItem,addLanguageToUrl,doNotRedirectEmpty,folderUrl,disableAlias;{privacy_legend:hide},privacyAnonymizeIp,privacyAnonymizeGA;{security_legend:hide},allowedTags,debugMode,bypassCache,displayErrors,logErrors,disableRefererCheck,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{sections_legend:hide},customSections;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin,lockPeriod;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
 	),
 
 	// Subpalettes
@@ -150,11 +150,17 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 				array('tl_settings', 'checkStaticUrl')
 			)
 		),
+		'fileSyncExclude' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['fileSyncExclude'],
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'w50')
+		),
 		'doNotCollapse' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['doNotCollapse'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'clr')
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'urlSuffix' => array
 		(

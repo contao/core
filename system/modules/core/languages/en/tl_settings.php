@@ -28,6 +28,7 @@ $GLOBALS['TL_LANG']['tl_settings']['minifyMarkup']        = array('Minify the ma
 $GLOBALS['TL_LANG']['tl_settings']['gzipScripts']         = array('Compress scripts', 'Create a compressed version of the combined CSS and JavaScript files. Requires adjustments of the .htaccess file.');
 $GLOBALS['TL_LANG']['tl_settings']['resultsPerPage']      = array('Items per page', 'Here you can define the number of items per page in the back end.');
 $GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage']   = array('Maximum items per page', 'This overall limit takes effect if a user chooses the "show all records" option.');
+$GLOBALS['TL_LANG']['tl_settings']['fileSyncExclude']     = array('Exclude folders from synchronisation', 'Here you can enter a comma separated list of folders which will be exempt from the files synchronisation (e.g. <em>files/attachments</em>). Note that excluded resources cannot be used in e.g. image or download elements!');
 $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse']       = array('Do not collapse elements', 'Do not collapse elements in the back end preview.');
 $GLOBALS['TL_LANG']['tl_settings']['urlSuffix']           = array('URL suffix', 'The URL suffix will be added to the URI string to simulate static documents.');
 $GLOBALS['TL_LANG']['tl_settings']['cacheMode']           = array('Cache mode', 'Here you can select the cache mode.');

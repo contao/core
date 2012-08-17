@@ -2049,13 +2049,20 @@ window.addEvent(\'domready\', function() {
 			return '<p class="tl_error">You have to be an administrator to run the file synchronisation.</p>';
 		}
 
+		$arrExempt = array();
 		$this->arrMessages = array();
 
 		// Reset the "found" flag
 		$this->Database->query("UPDATE tl_files SET found=''");
 
+		// Exempt folders from the synchronisation (see #4522)
+		if ($GLOBALS['TL_CONFIG']['fileSyncExclude'] != '')
+		{
+			$arrExempt = trimsplit(',', $GLOBALS['TL_CONFIG']['fileSyncExclude']);
+		}
+
 		// Traverse the file system
-		$this->execSync($GLOBALS['TL_CONFIG']['uploadPath']);
+		$this->execSync($GLOBALS['TL_CONFIG']['uploadPath'], 0, $arrExempt);
 
 		// Check for left-over entries in the DB
 		$objFiles = \FilesModel::findByFound('');
@@ -2177,10 +2184,17 @@ window.addEvent(\'domready\', function() {
 	 * Recursively synchronize the file system
 	 * @param string
 	 * @param integer
+	 * @param array
 	 */
-	protected function execSync($strPath, $intPid=0)
+	protected function execSync($strPath, $intPid=0, $arrExempt=array())
 	{
 		if (!$this->blnIsDbAssisted)
+		{
+			return;
+		}
+
+		// Exempt folders (see #4522)
+		if (in_array($strPath, $arrExempt))
 		{
 			return;
 		}
@@ -2210,6 +2224,12 @@ window.addEvent(\'domready\', function() {
 		// Folders
 		foreach ($arrFolders as $strFolder)
 		{
+			// Exempt folders (see #4522)
+			if (in_array($strFolder, $arrExempt))
+			{
+				continue;
+			}
+
 			$objFolder = new \Folder($strFolder);
 			$objModel = \FilesModel::findByPath($strFolder);
 
@@ -2243,7 +2263,7 @@ window.addEvent(\'domready\', function() {
 				$this->arrMessages[] = '<p class="tl_confirm">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderF'], $strFolder) . '</p>';
 			}
 
-			$this->execSync($strFolder, $objModel->id);
+			$this->execSync($strFolder, $objModel->id, $arrExempt);
 		}
 
 		// Files
