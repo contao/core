@@ -175,7 +175,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getBackendLanguages(),
+			'options'                 => System::getLanguages(true),
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(2) NOT NULL default ''"
 		),

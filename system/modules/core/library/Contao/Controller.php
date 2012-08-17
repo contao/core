@@ -689,61 +689,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Return the languages as array
-	 * 
-	 * @param boolean $blnBeOnly If true, return only back end languages
-	 * 
-	 * @return array An array available of languages
-	 */
-	protected function getLanguages($blnBeOnly=false)
-	{
-		$return = array();
-		$languages = array();
-		$arrAux = array();
-		$langsNative = array();
-
-		$this->loadLanguageFile('languages');
-		include TL_ROOT . '/system/config/languages.php';
-
-		foreach ($languages as $strKey=>$strName)
-		{
-			$arrAux[$strKey] = isset($GLOBALS['TL_LANG']['LNG'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['LNG'][$strKey]) : $strName;
-		}
-
-		asort($arrAux);
-		$arrBackendLanguages = scan(TL_ROOT . '/system/modules/core/languages');
-
-		foreach (array_keys($arrAux) as $strKey)
-		{
-			if ($blnBeOnly && !in_array($strKey, $arrBackendLanguages))
-			{
-				continue;
-			}
-
-			$return[$strKey] = isset($GLOBALS['TL_LANG']['LNG'][$strKey]) ? $GLOBALS['TL_LANG']['LNG'][$strKey] : $languages[$strKey];
-
-			if (isset($langsNative[$strKey]) && $langsNative[$strKey] != $return[$strKey])
-			{
-				$return[$strKey] .= ' - ' . $langsNative[$strKey];
-			}
-		}
-
-		return $return;
-	}
-
-
-	/**
-	 * Return the installed back end languages as array
-	 * 
-	 * @return array An array of available back end languages
-	 */
-	protected function getBackendLanguages()
-	{
-		return $this->getLanguages(true);
-	}
-
-
-	/**
 	 * Return the back end themes as array
 	 * 
 	 * @return array An array of available back end themes
@@ -3434,6 +3379,19 @@ abstract class Controller extends \System
 	protected function getDatePickerString()
 	{
 		return true;
+	}
+
+
+	/**
+	 * Return the installed back end languages as array
+	 * 
+	 * @return array An array of available back end languages
+	 * 
+	 * @deprecated Use System::getLanguages(true) instead
+	 */
+	protected function getBackendLanguages()
+	{
+		return $this->getLanguages(true);
 	}
 
 
