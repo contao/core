@@ -486,6 +486,50 @@ abstract class System
 
 
 	/**
+	 * Return the available languages as array
+	 * 
+	 * @param boolean $blnInstalledOnly If true, return only installed languages
+	 * 
+	 * @return array An array of languages
+	 */
+	public static function getLanguages($blnInstalledOnly=false)
+	{
+		$return = array();
+		$languages = array();
+		$arrAux = array();
+		$langsNative = array();
+
+		static::loadLanguageFile('languages');
+		include TL_ROOT . '/system/config/languages.php';
+
+		foreach ($languages as $strKey=>$strName)
+		{
+			$arrAux[$strKey] = isset($GLOBALS['TL_LANG']['LNG'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['LNG'][$strKey]) : $strName;
+		}
+
+		asort($arrAux);
+		$arrBackendLanguages = scan(TL_ROOT . '/system/modules/core/languages');
+
+		foreach (array_keys($arrAux) as $strKey)
+		{
+			if ($blnInstalledOnly && !in_array($strKey, $arrBackendLanguages))
+			{
+				continue;
+			}
+
+			$return[$strKey] = isset($GLOBALS['TL_LANG']['LNG'][$strKey]) ? $GLOBALS['TL_LANG']['LNG'][$strKey] : $languages[$strKey];
+
+			if (isset($langsNative[$strKey]) && $langsNative[$strKey] != $return[$strKey])
+			{
+				$return[$strKey] .= ' - ' . $langsNative[$strKey];
+			}
+		}
+
+		return $return;
+	}
+
+
+	/**
 	 * Parse a date format string and translate textual representations
 	 * 
 	 * @param string  $strFormat The date format string
