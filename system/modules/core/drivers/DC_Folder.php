@@ -2058,7 +2058,9 @@ window.addEvent(\'domready\', function() {
 		// Exempt folders from the synchronisation (see #4522)
 		if ($GLOBALS['TL_CONFIG']['fileSyncExclude'] != '')
 		{
-			$arrExempt = trimsplit(',', $GLOBALS['TL_CONFIG']['fileSyncExclude']);
+			$arrExempt = array_map(function($e) {
+				return $GLOBALS['TL_CONFIG']['uploadPath'] . '/' . $e;
+			}, trimsplit(',', $GLOBALS['TL_CONFIG']['fileSyncExclude']));
 		}
 
 		// Traverse the file system
