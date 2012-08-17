@@ -345,6 +345,33 @@ abstract class Database
 
 
 	/**
+	 * Check whether a field value in the database is unique
+	 * 
+	 * @param string  $strTable The table name
+	 * @param string  $strField The field name
+	 * @param mixed   $varValue The field value
+	 * @param integer $intId    The ID of a record to exempt
+	 * 
+	 * @return boolean True if the field value is unique
+	 */
+	public function isUniqueValue($strTable, $strField, $varValue, $intId=null)
+	{
+		$strQuery = "SELECT * FROM $strTable WHERE $strField=?";
+
+		if ($intId !== null)
+		{
+			$strQuery .= " AND id!=?";
+		}
+
+		$objUnique = $this->prepare($strQuery)
+						  ->limit(1)
+						  ->execute($varValue, $intId);
+
+		return $objUnique->numRows ? false : true;
+	}
+
+
+	/**
 	 * Change the current database
 	 * 
 	 * @param string $strDatabase The name of the target database
