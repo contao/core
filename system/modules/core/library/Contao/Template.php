@@ -342,11 +342,11 @@ abstract class Template extends \Controller
 				. '<script>'
 					. "(function($) {"
 						. "$$('#debug p','#debug div').setStyle('width',window.getSize().x);"
-						. "document.body.setStyle('margin-bottom', $('debug').hasClass('closed')?'60px':'320px');"
+						. "$(document.body).setStyle('margin-bottom', $('debug').hasClass('closed')?'60px':'320px');"
 						. "$('tog').addEvent('click',function(e) {"
 							. "$('debug').toggleClass('closed');"
 							. "Cookie.write('CONTAO_CONSOLE',$('debug').hasClass('closed')?'closed':'');"
-							. "document.body.setStyle('margin-bottom', $('debug').hasClass('closed')?'60px':'320px');"
+							. "$(document.body).setStyle('margin-bottom', $('debug').hasClass('closed')?'60px':'320px');"
 						. "});"
 						. "window.addEvent('resize',function() {"
 							. "$$('#debug p','#debug div').setStyle('width',window.getSize().x);"
