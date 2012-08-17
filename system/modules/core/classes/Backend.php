@@ -218,7 +218,7 @@ abstract class Backend extends \Controller
 		}
 
 		// Trigger the module callback
-		elseif ($this->classFileExists($arrModule['callback']))
+		elseif (class_exists($arrModule['callback']))
 		{
 			$objCallback = new $arrModule['callback']($dc);
 			$this->Template->main .= $objCallback->generate();

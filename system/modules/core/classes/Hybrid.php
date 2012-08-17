@@ -81,7 +81,7 @@ abstract class Hybrid extends \Frontend
 		$strModelClass = $this->getModelClassFromTable($this->strTable);
 
 		// Load the model
-		if ($this->classFileExists($strModelClass))
+		if (class_exists($strModelClass))
 		{
 			$objHybrid = $strModelClass::findByPk($objElement->{$this->strKey});
 

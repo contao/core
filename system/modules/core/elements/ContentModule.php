@@ -43,7 +43,7 @@ class ContentModule extends \ContentElement
 
 		$strClass = $this->findFrontendModule($objModule->type);
 
-		if (!$this->classFileExists($strClass))
+		if (!class_exists($strClass))
 		{
 			return '';
 		}

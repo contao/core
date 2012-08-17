@@ -571,7 +571,7 @@ class tl_form_field extends Backend
 
 		$strClass = $GLOBALS['TL_FFL'][$arrRow['type']];
 
-		if (!$this->classFileExists($strClass))
+		if (!class_exists($strClass))
 		{
 			return '';
 		}

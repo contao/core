@@ -105,7 +105,7 @@ class Form extends \Hybrid
 				$strClass = $GLOBALS['TL_FFL'][$objFields->type];
 
 				// Continue if the class is not defined
-				if (!$this->classFileExists($strClass))
+				if (!class_exists($strClass))
 				{
 					continue;
 				}

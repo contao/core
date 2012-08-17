@@ -109,7 +109,7 @@ class ModulePassword extends \Module
 			$strClass = $GLOBALS['TL_FFL'][$arrField['inputType']];
 
 			// Continue if the class is not defined
-			if (!$this->classFileExists($strClass))
+			if (!class_exists($strClass))
 			{
 				continue;
 			}
@@ -197,7 +197,7 @@ class ModulePassword extends \Module
 		$strClass = $GLOBALS['TL_FFL']['password'];
 
 		// Fallback to default if the class is not defined
-		if (!$this->classFileExists($strClass))
+		if (!class_exists($strClass))
 		{
 			$strClass = 'FormPassword';
 		}
