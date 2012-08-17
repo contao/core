@@ -125,7 +125,7 @@ class ModuleRegistration extends \Module
 			$strClass = $GLOBALS['TL_FFL']['captcha'];
 
 			// Fallback to default if the class is not defined
-			if (!$this->classFileExists($strClass))
+			if (!class_exists($strClass))
 			{
 				$strClass = 'FormCaptcha';
 			}
@@ -162,7 +162,7 @@ class ModuleRegistration extends \Module
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
 			// Continue if the class is not defined
-			if (!$this->classFileExists($strClass))
+			if (!class_exists($strClass))
 			{
 				continue;
 			}

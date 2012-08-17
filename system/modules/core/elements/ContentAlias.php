@@ -43,7 +43,7 @@ class ContentAlias extends \ContentElement
 
 		$strClass = $this->findContentElement($objElement->type);
 
-		if (!$this->classFileExists($strClass))
+		if (!class_exists($strClass))
 		{
 			return '';
 		}

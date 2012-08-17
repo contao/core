@@ -256,7 +256,7 @@ abstract class Controller extends \System
 			$strClass = $this->findFrontendModule($objRow->type);
 
 			// Return if the class does not exist
-			if (!$this->classFileExists($strClass))
+			if (!class_exists($strClass))
 			{
 				$this->log('Module class "'.$GLOBALS['FE_MOD'][$objRow->type].'" (module "'.$objRow->type.'") does not exist', 'Controller getFrontendModule()', TL_ERROR);
 				return '';
@@ -420,7 +420,7 @@ abstract class Controller extends \System
 		$strClass = $this->findContentElement($objRow->type);
 
 		// Return if the class does not exist
-		if (!$this->classFileExists($strClass))
+		if (!class_exists($strClass))
 		{
 			$this->log('Content element class "'.$strClass.'" (content element "'.$objRow->type.'") does not exist', 'Controller getContentElement()', TL_ERROR);
 			return '';
@@ -2800,19 +2800,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Return true if a class exists (tries to autoload the class)
-	 * 
-	 * @param string $strClass The class name
-	 * 
-	 * @return boolean True if the class exists
-	 */
-	protected function classFileExists($strClass)
-	{
-		return class_exists($strClass, true);
-	}
-
-
-	/**
 	 * Take an array of file paths and eliminate the nested ones
 	 * 
 	 * @param array $arrPaths The array of file paths
@@ -3313,6 +3300,21 @@ abstract class Controller extends \System
 		}
 
 		return TL_ASSETS_URL . $script;
+	}
+
+
+	/**
+	 * Return true if a class exists (tries to autoload the class)
+	 * 
+	 * @param string $strClass The class name
+	 * 
+	 * @return boolean True if the class exists
+	 * 
+	 * @deprecated Use the PHP function class_exists() instead
+	 */
+	protected function classFileExists($strClass)
+	{
+		return class_exists($strClass);
 	}
 
 
