@@ -72,7 +72,9 @@ class Calendar extends \Frontend
 	 */
 	public function generateFeeds()
 	{
-		$this->removeOldFeeds();
+		$this->import('Automator');
+		$this->Automator->purgeXmlFiles();
+
 		$objCalendar = \CalendarFeedModel::findAll();
 
 		if ($objCalendar !== null)

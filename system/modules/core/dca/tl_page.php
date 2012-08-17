@@ -1169,7 +1169,8 @@ class tl_page extends Backend
 			return $varValue;
 		}
 
-		$arrFeeds = $this->removeOldFeeds(true);
+		$this->import('Automator');
+		$arrFeeds = $this->Automator->purgeXmlFiles(true);
 
 		// Alias exists
 		if (array_search($varValue, $arrFeeds) !== false)

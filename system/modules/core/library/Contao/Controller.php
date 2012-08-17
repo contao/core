@@ -2847,68 +2847,18 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Remove old XML files from the root directory
+	 * Remove old XML files from the share directory
 	 * 
 	 * @param boolean $blnReturn If true, only return the finds and don't delete
 	 * 
 	 * @return array An array of old XML files
+	 * 
+	 * @deprecated Use Automator::purgeXmlFiles() instead
 	 */
 	protected function removeOldFeeds($blnReturn=false)
 	{
-		$arrFeeds = array();
-
-		// XML sitemaps
-		$objFeeds = $this->Database->execute("SELECT sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!=''");
-
-		while ($objFeeds->next())
-		{
-			$arrFeeds[] = $objFeeds->sitemapName;
-		}
-
-		// HOOK: preserve third party feeds
-		if (isset($GLOBALS['TL_HOOKS']['removeOldFeeds']) && is_array($GLOBALS['TL_HOOKS']['removeOldFeeds']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['removeOldFeeds'] as $callback)
-			{
-				$this->import($callback[0]);
-				$arrFeeds = array_merge($arrFeeds, $this->$callback[0]->$callback[1]());
-			}
-		}
-
-		// Make sure the dcaconfig.php is loaded
-		@include TL_ROOT . '/system/config/dcaconfig.php';
-
-		// Add the root files
-		if (is_array($GLOBALS['TL_CONFIG']['rootFiles']))
-		{
-			foreach ($GLOBALS['TL_CONFIG']['rootFiles'] as $strFile)
-			{
-				$arrFeeds[] = str_replace('.xml', '', $strFile);
-			}
-		}
-
-		// Delete the old files
-		if (!$blnReturn)
-		{
-			foreach (scan(TL_ROOT) as $file)
-			{
-				if (is_dir(TL_ROOT . '/' . $file))
-				{
-					continue;
-				}
-
-				$objFile = new \File($file);
-
-				if ($objFile->extension == 'xml' && !in_array($objFile->filename, $arrFeeds) && !preg_match('/^sitemap/i', $objFile->filename))
-				{
-					$objFile->delete();
-				}
-
-				$objFile->close();
-			}
-		}
-
-		return $arrFeeds;
+		$this->import('Automator');
+		$this->Automator->purgeXmlFiles($blnReturn);
 	}
 
 
