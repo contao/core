@@ -5,7 +5,8 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Added
-You can now exempt folders from the files synchronisation (see #4522).
+You can now exempt folders from the files synchronisation (see #4522). Exempt
+folders will also be hidden in the TinyMCE popup file select menu.
 
 ### Fixed
 The newsletter subscription modules now work again (see #4660).
