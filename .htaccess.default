@@ -191,6 +191,13 @@ FileETag None
 </IfModule>
 
 ##
+# Disable MultiViews if you are having issues with requests returning the wrong
+# page. Requires AllowOverride Options=All,MultiViews to be set here.
+# @see https://github.com/contao/core/issues/3521
+##
+#Options -MultiViews
+
+##
 # URL rewriting
 ##
 <IfModule mod_rewrite.c>
