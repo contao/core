@@ -2641,28 +2641,18 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Make sure unique fields are unique
-		if ($varValue != '' && $arrData['eval']['unique'])
+		if ($arrData['eval']['unique'] && $varValue != '' && !$this->Database->isUniqueValue($this->strTable, $this->strField, $varValue, $this->objActiveRecord->id))
 		{
-			$objUnique = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . $this->strField . "=? AND id!=?")
-										->execute($varValue, $this->intId);
-
-			if ($objUnique->numRows)
-			{
-				throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $arrData['label'][0] ?: $this->strField));
-			}
+			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $arrData['label'][0] ?: $this->strField));
 		}
 
 		// Handle multi-select fields in "override all" mode
 		if (\Input::get('act') == 'overrideAll' && ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard') && $arrData['eval']['multiple'])
 		{
-			$objCurrent = $this->Database->prepare("SELECT " . $this->strField . " FROM " . $this->strTable . " WHERE id=?")
-										 ->limit(1)
-										 ->execute($this->intId);
-
-			if ($objCurrent->numRows > 0)
+			if ($this->objActiveRecord !== null)
 			{
 				$new = deserialize($varValue, true);
-				$old = deserialize($objCurrent->{$this->strField}, true);
+				$old = deserialize($this->objActiveRecord->{$this->strField}, true);
 
 				switch (\Input::post($this->strInputName . '_update'))
 				{
