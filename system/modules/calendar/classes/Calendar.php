@@ -244,7 +244,7 @@ class Calendar extends \Frontend
 
 		if ($intRoot > 0)
 		{
-			$arrRoot = $this->getChildRecords($intRoot, 'tl_page');
+			$arrRoot = $this->Database->getChildRecords($intRoot, 'tl_page');
 		}
 
 		$arrProcessed = array();

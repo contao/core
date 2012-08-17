@@ -688,7 +688,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Avoid circular references when there is no parent table
 		if ($this->Database->fieldExists('pid', $this->strTable) && !strlen($this->ptable))
 		{
-			$cr = $this->getChildRecords($this->intId, $this->strTable);
+			$cr = $this->Database->getChildRecords($this->intId, $this->strTable);
 			$cr[] = $this->intId;
 		}
 
@@ -1315,7 +1315,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// If there is a PID field but no parent table
 		if ($this->Database->fieldExists('pid', $this->strTable) && !strlen($this->ptable))
 		{
-			$delete[$this->strTable] = $this->getChildRecords($this->intId, $this->strTable);
+			$delete[$this->strTable] = $this->Database->getChildRecords($this->intId, $this->strTable);
 			array_unshift($delete[$this->strTable], $this->intId);
 		}
 		else
@@ -3227,7 +3227,7 @@ window.addEvent(\'domready\', function() {
 
 		for ($i=0; $i<count($arrIds); $i++)
 		{
-			$return .= ' ' . trim($this->generateTree($table, $arrIds[$i], array('p'=>$arrIds[($i-1)], 'n'=>$arrIds[($i+1)]), $hasSorting, $margin, ($blnClipboard ? $arrClipboard : false), ($id == $arrClipboard ['id'] || (is_array($arrClipboard ['id']) && in_array($id, $arrClipboard ['id'])) || (!$blnPtable && !is_array($arrClipboard['id']) && in_array($id, $this->getChildRecords($arrClipboard['id'], $table)))), $blnProtected));
+			$return .= ' ' . trim($this->generateTree($table, $arrIds[$i], array('p'=>$arrIds[($i-1)], 'n'=>$arrIds[($i+1)]), $hasSorting, $margin, ($blnClipboard ? $arrClipboard : false), ($id == $arrClipboard ['id'] || (is_array($arrClipboard ['id']) && in_array($id, $arrClipboard ['id'])) || (!$blnPtable && !is_array($arrClipboard['id']) && in_array($id, $this->Database->getChildRecords($arrClipboard['id'], $table)))), $blnProtected));
 		}
 
 		return $return;

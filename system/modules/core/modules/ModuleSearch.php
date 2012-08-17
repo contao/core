@@ -111,7 +111,7 @@ class ModuleSearch extends \Module
 			if ($this->rootPage > 0)
 			{
 				$intRootId = $this->rootPage;
-				$arrPages = $this->getChildRecords($this->rootPage, 'tl_page');
+				$arrPages = $this->Database->getChildRecords($this->rootPage, 'tl_page');
 				array_unshift($arrPages, $this->rootPage);
 			}
 			// Website root
@@ -119,7 +119,7 @@ class ModuleSearch extends \Module
 			{
 				global $objPage;
 				$intRootId = $objPage->rootId;
-				$arrPages = $this->getChildRecords($objPage->rootId, 'tl_page');
+				$arrPages = $this->Database->getChildRecords($objPage->rootId, 'tl_page');
 			}
 
 			// Return if there are no pages
