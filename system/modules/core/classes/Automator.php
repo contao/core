@@ -266,6 +266,8 @@ class Automator extends \Backend
 			}
 		}
 
+		// FIXME: is the "rootFiles" check still relevant now that the files are in a subfolder?
+
 		// Make sure the dcaconfig.php is loaded
 		@include TL_ROOT . '/system/config/dcaconfig.php';
 
