@@ -438,6 +438,54 @@ abstract class System
 
 
 	/**
+	 * Return the counties as array
+	 * 
+	 * @return array An array of country names
+	 */
+	public static function getCountries()
+	{
+		$return = array();
+		$countries = array();
+		$arrAux = array();
+
+		static::loadLanguageFile('countries');
+		include TL_ROOT . '/system/config/countries.php';
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getCountries']) && is_array($GLOBALS['TL_HOOKS']['getCountries']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getCountries'] as $callback)
+			{
+				static::importStatic($callback[0])->$callback[1]($return, $countries);
+			}
+		}
+
+		foreach ($countries as $strKey=>$strName)
+		{
+			$arrAux[$strKey] = isset($GLOBALS['TL_LANG']['CNT'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['CNT'][$strKey]) : $strName;
+		}
+
+		asort($arrAux);
+
+		foreach (array_keys($arrAux) as $strKey)
+		{
+			$return[$strKey] = isset($GLOBALS['TL_LANG']['CNT'][$strKey]) ? $GLOBALS['TL_LANG']['CNT'][$strKey] : $countries[$strKey];
+		}
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getCountries']) && is_array($GLOBALS['TL_HOOKS']['getCountries']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getCountries'] as $callback)
+			{
+				static::importStatic($callback[0])->$callback[1]($return, $countries);
+			}
+		}
+
+		return $return;
+	}
+
+
+	/**
 	 * Parse a date format string and translate textual representations
 	 * 
 	 * @param string  $strFormat The date format string
