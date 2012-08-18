@@ -43,18 +43,6 @@ class Config
 	protected $Files;
 
 	/**
-	 * Top content
-	 * @var string
-	 */
-	protected $strTop = '';
-
-	/**
-	 * Bottom content
-	 * @var string
-	 */
-	protected $strBottom = '';
-
-	/**
 	 * Modification indicator
 	 * @var boolean
 	 */
@@ -67,11 +55,21 @@ class Config
 	protected $blnHasLcf = false;
 
 	/**
-	 * Data
+	 * Added/Updated Data
 	 * @var array
 	 */
 	protected $arrData = array();
 	
+	/**
+	 * Removed Data
+	 * @var array
+	 */
+	protected $arrDelete = array();
+	
+	/**
+	 * Cached calculated active modules and order
+	 * @var array
+	 */
 	protected $arrModules;
 
 	/**
@@ -85,10 +83,7 @@ class Config
 	 */
 	public function __destruct()
 	{
-		if ($this->blnIsModified)
-		{
-			$this->save();
-		}
+		$this->save();
 	}
 
 
@@ -143,7 +138,6 @@ class Config
 		
 		if($this->blnHasLcf) {
 			include TL_ROOT . '/' . static::LOCALCONFIG_FILE;
-			list($this->strTop, $this->strBottom, $this->arrData) = $this->readLcf();
 		}
 	}
 
@@ -204,9 +198,19 @@ class Config
 	/**
 	 * Save the local configuration file
 	 */
-	public function save()
+	public function save($blnForce = false)
 	{
-		$this->writeLcf();
+		if(!$blnForce && !$this->blnIsModified) {
+			return;
+		}
+		
+		list($strTop, $strBottom, $arrData) = $this->readLcf();
+		$arrData = array_diff_key(array_merge($arrData, $this->arrData), $this->arrDelete);
+		$this->writeLcf($strTop, $strBottom, $arrData);
+		
+		$this->blnIsModified = false;
+		$this->arrData = array();
+		$this->arrDelete = array();
 	}
 
 	/**
@@ -219,6 +223,7 @@ class Config
 	{
 		$this->blnIsModified = true;
 		$this->arrData[$strKey] = $this->escape($varValue) . ';';
+		unset($this->arrDelete[$strKey]);
 	}
 
 
@@ -260,7 +265,7 @@ class Config
 	public function delete($strKey)
 	{
 		$this->blnIsModified = true;
-		unset($this->arrData[$strKey]);
+		$this->arrDelete[$strKey] = true;
 	}
 
 
@@ -347,16 +352,16 @@ class Config
 		return array($strTop, $strBottom, $arrData);
 	}
 	
-	protected function writeLcf() {
-		$strTop = trim($this->strTop);
+	protected function writeLcf($strTop, $strBottom, $arrData) {
+		$strTop = trim($strTop);
 		$strContent = ($strTop == '' ? '<?php' : $strTop) . "\n\n";
 		$strContent .= "### INSTALL SCRIPT START ###\n";
 		
-		foreach($this->arrData as $k=>$v) $strContent .= $k . ' = ' . $v . "\n";
+		foreach($arrData as $k=>$v) $strContent .= $k . ' = ' . $v . "\n";
 		
 		$strContent .= "### INSTALL SCRIPT STOP ###\n";
-		$strBottom = trim($this->strBottom);
-		$strBottom == '' && $strContent .= $strBottom . "\n";
+		$strBottom = trim($strBottom);
+		$strBottom == '' || $strContent .= $strBottom . "\n";
 		
 		$strTemp = static::writeTempFile($strContent);
 		
