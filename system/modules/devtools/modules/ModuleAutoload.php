@@ -97,7 +97,9 @@ class ModuleAutoload extends \BackendModule
 					$arrConfig = array_merge($arrConfig, parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini'));
 
 					// Recursively scan all subfolders
-					$objFiles = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule));
+					$objFiles = new \RecursiveIteratorIterator(
+						new \RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule, \FilesystemIterator::UNIX_PATHS)
+					);
 
 					// Get all PHP files
 					foreach ($objFiles as $objFile)
