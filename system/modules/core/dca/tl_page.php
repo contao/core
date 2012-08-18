@@ -800,7 +800,7 @@ class tl_page extends Backend
 						$pagemounts[] = $root;
 					}
 
-					$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page'));
+					$pagemounts = array_merge($pagemounts, $this->Database->getChildRecords($root, 'tl_page'));
 				}
 
 				$error = false;
@@ -1169,7 +1169,8 @@ class tl_page extends Backend
 			return $varValue;
 		}
 
-		$arrFeeds = $this->removeOldFeeds(true);
+		$this->import('Automator');
+		$arrFeeds = $this->Automator->purgeXmlFiles(true);
 
 		// Alias exists
 		if (array_search($varValue, $arrFeeds) !== false)
@@ -1551,7 +1552,7 @@ class tl_page extends Backend
 
 			$ids = $session['CURRENT']['IDS'];
 			$ids = $this->eliminateNestedPages($ids);
-			$ids = $this->getChildRecords($ids, 'tl_page');
+			$ids = $this->Database->getChildRecords($ids, 'tl_page');
 
 			foreach ($ids as $id)
 			{

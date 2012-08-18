@@ -474,7 +474,7 @@ class tl_article extends Backend
 				foreach ($this->User->pagemounts as $root)
 				{
 					$pagemounts[] = $root;
-					$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page'));
+					$pagemounts = array_merge($pagemounts, $this->Database->getChildRecords($root, 'tl_page'));
 				}
 
 				$pagemounts = array_unique($pagemounts);

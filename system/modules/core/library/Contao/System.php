@@ -438,7 +438,11 @@ abstract class System
 
 
 	/**
+<<<<<<< HEAD
 	 * Return the counties as array
+=======
+	 * Return the countries as array
+>>>>>>> 82981723f8240d874fd96252deec9effe345c146
 	 * 
 	 * @return array An array of country names
 	 */
