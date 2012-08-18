@@ -190,7 +190,7 @@ class Config
 				$arrDepend = static::loadDependencyMap($arrModules);
 				list($arrModules, $arrCycles, $arrUnresolvable) = static::resolveDependencies($arrModules, $arrDepend);
 				if($arrCycles || $arrUnresolvable) {
-					$this->log();
+					$this->log('Errors in dependency definitions. Cycles: ' . implode(',', $arrCycles) . ' - Unresolvable: ' . implode(',', $arrUnresolvable));
 				}
 				
 				$blnWriteCache && $this->writeModules($arrModules);
