@@ -283,18 +283,13 @@ class Config
 			return $varValue ? 'true' : 'false';
 		}
 
-		if ($varValue == 'true')
+		if ($varValue == 'true' || $varValue == 'false')
 		{
-			return 'true';
+			return strval($varValue);
 		}
 
-		if ($varValue == 'false')
-		{
-			return 'false';
-		}
-
-		$varValue = preg_replace('/[\n\r\t]+/', ' ', str_replace("'", "\\'", $varValue));
-		$varValue = "'" . preg_replace('/ {2,}/', ' ', $varValue) . "'";
+		$varValue = preg_replace('/[\n\r\t ]+/', ' ', str_replace("'", "\\'", $varValue));
+		$varValue = "'" . $varValue . "'";
 
 		return $varValue;
 	}
