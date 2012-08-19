@@ -343,7 +343,7 @@ class String
 
 
 	/**
-	 * Split a string of comma separated values
+	 * Split a string of comma-separated values
 	 * 
 	 * @param string $strString    The string to split
 	 * @param string $strDelimiter An optional delimiter
@@ -432,7 +432,7 @@ class String
 
 
 	/**
-	 * Parse simple tokens that can be used to personalize newsletters
+	 * Parse simple tokens that can be used to personalise newsletters
 	 * 
 	 * @param string $strString The string to be parsed
 	 * @param array  $arrData   The replacement data

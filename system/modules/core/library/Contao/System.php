@@ -635,7 +635,7 @@ abstract class System
 	 * 
 	 * @param string  $strName     The cookie name
 	 * @param mixed   $varValue    The cookie value
-	 * @param integer $intExpires  The expiration date
+	 * @param integer $intExpires  The expiry date
 	 * @param string  $strPath     An optional path
 	 * @param string  $strDomain   An optional domain name
 	 * @param boolean $blnSecure   If true, the secure flag will be set

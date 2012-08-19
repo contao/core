@@ -19,24 +19,24 @@ $GLOBALS['TL_LANG']['tl_extension']['folder']      = array('Folder name', 'Pleas
 $GLOBALS['TL_LANG']['tl_extension']['author']      = array('Author', 'Please enter the author\'s name and an optional e-mail address (e.g. <em>Name [e-mail@address.com]</em>).');
 $GLOBALS['TL_LANG']['tl_extension']['copyright']   = array('Copyright', 'Please enter the copyright notice (e.g. <em>Name 2012</em>).');
 $GLOBALS['TL_LANG']['tl_extension']['package']     = array('Package', 'Please enter the package name without spaces (e.g. <em>MyCustomModule</em>).');
-$GLOBALS['TL_LANG']['tl_extension']['license']     = array('License', 'Please enter the license type (e.g. <em>GNU/LGPL</em>).');
+$GLOBALS['TL_LANG']['tl_extension']['license']     = array('Licence', 'Please enter the licence type (e.g. <em>GNU/LGPL</em>).');
 $GLOBALS['TL_LANG']['tl_extension']['addBeMod']    = array('Add a back end module', 'Add a back end module to the extension.');
-$GLOBALS['TL_LANG']['tl_extension']['beClasses']   = array('Back end classes', 'Here you can enter a comma separated list of back end classes.');
-$GLOBALS['TL_LANG']['tl_extension']['beTables']    = array('Back end tables', 'Here you can enter a comma separated list of back end tables.');
-$GLOBALS['TL_LANG']['tl_extension']['beTemplates'] = array('Back end templates', 'Here you can enter a comma separated list of back end templates.');
+$GLOBALS['TL_LANG']['tl_extension']['beClasses']   = array('Back end classes', 'Here you can enter a comma-separated list of back end classes.');
+$GLOBALS['TL_LANG']['tl_extension']['beTables']    = array('Back end tables', 'Here you can enter a comma-separated list of back end tables.');
+$GLOBALS['TL_LANG']['tl_extension']['beTemplates'] = array('Back end templates', 'Here you can enter a comma-separated list of back end templates.');
 $GLOBALS['TL_LANG']['tl_extension']['addFeMod']    = array('Add a front end module', 'Add a front end module to the extension.');
-$GLOBALS['TL_LANG']['tl_extension']['feClasses']   = array('Front end classes', 'Here you can enter a comma separated list of front end classes.');
-$GLOBALS['TL_LANG']['tl_extension']['feTables']    = array('Front end tables', 'Here you can enter a comma separated list of front end tables.');
-$GLOBALS['TL_LANG']['tl_extension']['feTemplates'] = array('Front end templates', 'Here you can enter a comma separated list of front end templates.');
+$GLOBALS['TL_LANG']['tl_extension']['feClasses']   = array('Front end classes', 'Here you can enter a comma-separated list of front end classes.');
+$GLOBALS['TL_LANG']['tl_extension']['feTables']    = array('Front end tables', 'Here you can enter a comma-separated list of front end tables.');
+$GLOBALS['TL_LANG']['tl_extension']['feTemplates'] = array('Front end templates', 'Here you can enter a comma-separated list of front end templates.');
 $GLOBALS['TL_LANG']['tl_extension']['addLanguage'] = array('Add language packs', 'Add one or more language packs to the extension.');
-$GLOBALS['TL_LANG']['tl_extension']['languages']   = array('Languages', 'Here you can enter a comma separated list of languages (e.g. <em>en,de</em>).');
+$GLOBALS['TL_LANG']['tl_extension']['languages']   = array('Languages', 'Here you can enter a comma-separated list of languages (e.g. <em>en,de</em>).');
 
 
 /**
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_extension']['title_legend']    = 'Title and name';
-$GLOBALS['TL_LANG']['tl_extension']['license_legend']  = 'License information';
+$GLOBALS['TL_LANG']['tl_extension']['license_legend']  = 'Licence information';
 $GLOBALS['TL_LANG']['tl_extension']['backend_legend']  = 'Back end resources';
 $GLOBALS['TL_LANG']['tl_extension']['frontend_legend'] = 'Front end resources';
 $GLOBALS['TL_LANG']['tl_extension']['language_legend'] = 'Language settings';

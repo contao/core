@@ -353,7 +353,7 @@ class DataContainer extends \Backend
   </script>';
 		}
 
-		// Color picker
+		// Colour picker
 		if ($arrData['eval']['colorpicker'])
 		{
 			$wizard .= ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['colorpicker']).'" id="moo_' . $this->strField . '"') . '

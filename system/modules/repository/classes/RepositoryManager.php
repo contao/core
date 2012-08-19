@@ -918,7 +918,7 @@ class RepositoryManager extends RepositoryBackendModule
 	} // uninstallExtension
 
 	/**
-	 * Create comma separated list of states
+	 * Create comma-separated list of states
 	 * @param integer
 	 * @param integer
 	 * @param integer

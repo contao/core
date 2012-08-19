@@ -23,7 +23,7 @@ p { line-height:1.5; }
 
 </div>
 
-<p class="hint">To customize this notice, create a custom template file named <em>templates/be_referer.html5</em>.</p>
+<p class="hint">To customise this notice, create a custom template file named <em>templates/be_referer.html5</em>.</p>
 
 </body>
 </html>

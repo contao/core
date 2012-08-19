@@ -78,7 +78,7 @@
 .buttonwrapper, .buttonwrapper * { vertical-align:middle; }
 .mod_repository_submit form { display:inline; }
 
-/* Status colors */
+/* Status colours */
 .mod_repository table.extension td.status-0, .mod_repository table.extension td.status-1, .mod_repository table.extension td.status-2 { background-color:#ffe0e0; }
 .mod_repository table.extension td.status-3, .mod_repository table.extension td.status-4, .mod_repository table.extension td.status-5, .mod_repository table.extension td.type-private { background-color:#ffffe0; }
 .mod_repository table.extension td.status-6, .mod_repository table.extension td.status-7, .mod_repository table.extension td.status-8, .mod_repository table.extension td.type-commercial { background-color:#d0e8ff; }

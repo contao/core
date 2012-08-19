@@ -537,7 +537,7 @@ class Newsletter extends \Backend
 
 
 	/**
-	 * Synchronize newsletter subscription of new users
+	 * Synchronise newsletter subscription of new users
 	 * @param object
 	 * @param array
 	 */
@@ -606,7 +606,7 @@ class Newsletter extends \Backend
 
 
 	/**
-	 * Synchronize newsletter subscription of existing users
+	 * Synchronise newsletter subscription of existing users
 	 * @param mixed
 	 * @param object
 	 * @param object

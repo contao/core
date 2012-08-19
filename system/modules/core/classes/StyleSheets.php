@@ -474,7 +474,7 @@ class StyleSheets extends \Backend
 			}
 			else
 			{
-				// Background color
+				// Background colour
 				if ($bgColor[0] != '')
 				{
 					$return .= $lb . 'background-color:' . $this->compileColor($bgColor, $blnWriteToFile, $vars) . ';';
@@ -536,7 +536,7 @@ class StyleSheets extends \Backend
 
 					$row['gradientColors'] = array_values(array_filter($row['gradientColors']));
 
-					// Add a hash tag to the color values
+					// Add a hash tag to the colour values
 					foreach ($row['gradientColors'] as $k=>$v)
 					{
 						$row['gradientColors'][$k] = '#' . $v;
@@ -810,7 +810,7 @@ class StyleSheets extends \Backend
 
 			$fnColor = deserialize($row['fontcolor'], true);
 
-			// Font color
+			// Font colour
 			if ($fnColor[0] != '')
 			{
 				$return .= $lb . 'color:' . $this->compileColor($fnColor, $blnWriteToFile, $vars) . ';';
@@ -939,7 +939,7 @@ class StyleSheets extends \Backend
 
 
 	/**
-	 * Compile a color value and return a hex or rgba color
+	 * Compile a colour value and return a hex or rgba colour
 	 * @param mixed
 	 * @param boolean
 	 * @param array
@@ -963,7 +963,7 @@ class StyleSheets extends \Backend
 
 
 	/**
-	 * Try to shorten a hex color
+	 * Try to shorten a hex colour
 	 * @param string
 	 * @return string
 	 */
@@ -979,7 +979,7 @@ class StyleSheets extends \Backend
 
 
 	/**
-	 * Convert hex colors to rgb
+	 * Convert hex colours to rgb
 	 * @param string
 	 * @param boolean
 	 * @param array

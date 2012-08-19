@@ -369,7 +369,7 @@ Better page layout edit screen: row icons, separate analytics templates, jQuery
 and MooTools configuration in subpalettes.
 
 ### Changed
-The color picker can now be activated in the data container (see #3874).
+The colour picker can now be activated in the data container (see #3874).
 
 ### Improved
 Added an `addMultiple()` method to the Combiner (see #3814).
@@ -463,7 +463,7 @@ calendar module). Feeds are no longer bound to a news archive and can include
 multiple archives now.
 
 ### New
-Added a nicer dialog script in the back end.
+Added a nicer dialogue script in the back end.
 
 ### New
 Added `mootools-mobile.js` and swipe support to the mediabox and slimbox.
