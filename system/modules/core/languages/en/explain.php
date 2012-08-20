@@ -27,10 +27,10 @@ $GLOBALS['TL_LANG']['XPL']['insertTags'] = array
  */
 $GLOBALS['TL_LANG']['XPL']['dateFormat'] = array
 (
-	array('colspan', 'Contao supports all date and time formats that can be parsed with the PHP date() function. However, to ensure that any input can be transformed into a UNIX timestamp, you can only use numeric date and time formats (j, d, m, n, y, Y, g, G, h, H, i, s) in the back end.<br><br><strong>You can enter variant front end formats in the site structure (website root pages).</strong><br><br><em>Here are some examples of valid date and time formats</em>:'),
+	array('colspan', 'Contao supports all date and time formats that can be parsed with the PHP <em>date()</em> function. However, to ensure that any input can be transformed into a UNIX timestamp, you can only use numeric date and time formats (j, d, m, n, y, Y, g, G, h, H, i, s) in the back end.<br><br><strong>You can enter variant front end formats in the site structure (website root pages).</strong><br><br><em>Here are some examples of valid date and time formats</em>:'),
 	array('Y-m-d', 'YYYY-MM-DD, international ISO-8601, e.g. 2005-01-28'),
-	array('m/d/Y', 'MM/DD/YYYY, english format, e.g. 01/28/2005'),
-	array('d.m.Y', 'DD.MM.YYYY, german format, e.g. 28.01.2005'),
+	array('m/d/Y', 'MM/DD/YYYY, English format, e.g. 01/28/2005'),
+	array('d.m.Y', 'DD.MM.YYYY, German format, e.g. 28.01.2005'),
 	array('y-n-j', 'YY-M-D, without leading zeros, e.g. 05-1-28'),
 	array('Ymd', 'YYYYMMDD, timestamp, e.g. 20050128'),
 	array('H:i:s', '24 hours, minutes and seconds, e.g. 20:36:59'),
@@ -43,5 +43,5 @@ $GLOBALS['TL_LANG']['XPL']['dateFormat'] = array
  */
 $GLOBALS['TL_LANG']['XPL']['highlighter'] = array
 (
-	array('Rich Text Editor', 'For more information about how to configure the syntax highlighter please visit <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults" title="SyntaxHighlighter by Alex Gorbatchev" target="_blank">http://alexgorbatchev.com</a>.')
+	array('Rich Text Editor', 'For more information about how to configure the syntax highlighter please visit <a href="http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults" title="SyntaxHighlighter by Alex Gorbatchev" target="_blank">http://alexgorbatchev.com</a>.')
 );

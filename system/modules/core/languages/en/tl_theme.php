@@ -19,8 +19,8 @@ $GLOBALS['TL_LANG']['tl_theme']['author']     = array('Author', 'Please enter th
 $GLOBALS['TL_LANG']['tl_theme']['folders']    = array('Folders', 'Please select the folders that belong to the theme from the files directory.');
 $GLOBALS['TL_LANG']['tl_theme']['templates']  = array('Templates folder', 'Here you can select a templates folder that will be exported with the theme.');
 $GLOBALS['TL_LANG']['tl_theme']['screenshot'] = array('Screenshot', 'Here you can choose a screenshot of the theme.');
-$GLOBALS['TL_LANG']['tl_theme']['vars']       = array('Global variables', 'Here you can define global variables for the style sheets of the theme (e.g. <em>$red</em> -> <em>c00</em> or <em>$margin</em> -> <em>12px</em>).');
-$GLOBALS['TL_LANG']['tl_theme']['source']     = array('Source files', 'Here you can upload one or more .cto files to be imported.');
+$GLOBALS['TL_LANG']['tl_theme']['vars']       = array('Global variables', 'Here you can define global variables for the style sheets of the theme (e.g. <em>$red</em> &rarr; <em>c00</em> or <em>$margin</em> &rarr; <em>12px</em>).');
+$GLOBALS['TL_LANG']['tl_theme']['source']     = array('Source files', 'Here you can upload one or more <em>.cto</em> files to be imported.');
 $GLOBALS['TL_LANG']['tl_theme']['tstamp']     = array('Revision date', 'Date and time of the latest revision');
 
 

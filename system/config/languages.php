@@ -13,7 +13,6 @@
 
 /**
  * Languages (thanks to Leo Unglaub)
- * @see http://www.sub.uni-goettingen.de/ssgfi/projekt/doku/sprachcode.html
  */
 $languages = array
 (

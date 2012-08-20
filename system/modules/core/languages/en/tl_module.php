@@ -52,7 +52,7 @@ $GLOBALS['TL_LANG']['tl_module']['inColumn']       = array('Column', 'Please cho
 $GLOBALS['TL_LANG']['tl_module']['skipFirst']      = array('Skip items', 'Here you can define how many items will be skipped.');
 $GLOBALS['TL_LANG']['tl_module']['loadFirst']      = array('Load the first item', 'Automatically redirect to the first item if none is selected.');
 $GLOBALS['TL_LANG']['tl_module']['size']           = array('Width and height', 'Please enter the width and height in pixel.');
-$GLOBALS['TL_LANG']['tl_module']['transparent']    = array('Transparent movie', 'Make the Flash movie transparent (wmode = transparent).');
+$GLOBALS['TL_LANG']['tl_module']['transparent']    = array('Transparent movie', 'Make the Flash movie transparent (<em>wmode = transparent</em>).');
 $GLOBALS['TL_LANG']['tl_module']['flashvars']      = array('FlashVars', 'Pass variables to the Flash movie (<em>var1=value1&amp;var2=value2</em>).');
 $GLOBALS['TL_LANG']['tl_module']['version']        = array('Flash player version', 'Please enter the required Flash player version (e.g. 6.0.12).');
 $GLOBALS['TL_LANG']['tl_module']['altContent']     = array('Alternate content', 'The alternate content will be shown if the movie cannot be loaded. HTML tags are allowed.');

@@ -16,7 +16,7 @@
  */
 $GLOBALS['TL_LANG']['tl_merge']['headline']       = 'Die autoload.php-Dateien automatisch erstellen';
 $GLOBALS['TL_LANG']['tl_merge']['emptySelection'] = 'Bitte wählen Sie mindestens ein Modul aus!';
-$GLOBALS['TL_LANG']['tl_merge']['autoloadExists'] = 'Das Modul "%s" hat bereits eine autoload.php-Datei. Wollen Sie sie überschreiben?';
+$GLOBALS['TL_LANG']['tl_merge']['autoloadExists'] = 'Das Modul "%s" hat bereits eine <em>autoload.php</em>-Datei. Wollen Sie sie überschreiben?';
 $GLOBALS['TL_LANG']['tl_merge']['available']      = 'Verfügbare Module';
 $GLOBALS['TL_LANG']['tl_merge']['options']        = 'Optionen';
 $GLOBALS['TL_LANG']['tl_merge']['override']       = 'Bestehende Autoload-Dateien überschreiben';

@@ -19,7 +19,7 @@ require_once dirname(dirname(__FILE__)).'/classes/RepositorySettings.php';
 
 
 /**
- * Implements the frontend interface
+ * Implements the front end interface
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
  * @author     Leo Feyer <http://contao.org>
@@ -73,7 +73,7 @@ class RepositoryBackendModule extends BackendModule
 	} // generate
 
 	/**
-	 * Compile module: common initializations and forwarding to distinct function compiler
+	 * Compile module: common initialisations and forwarding to distinct function compiler
 	 */
 	protected function compile()
 	{

@@ -353,7 +353,7 @@ abstract class System
 			$strLanguage = $GLOBALS['TL_LANGUAGE'];
 		}
 
-		// Fall back to english
+		// Fall back to English
 		if ($strLanguage == '')
 		{
 			$strLanguage = 'en';
