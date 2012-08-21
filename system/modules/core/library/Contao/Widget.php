@@ -887,7 +887,7 @@ abstract class Widget extends \Controller
 					}
 					break;
 
-				// Phone numbers (numeric characters, space [ ], plus [+], minus [-], parentheses [()] and slash [/])
+				// Phone numbers (numeric characters, space [ ], plus [+], minus [-], round brackets [()] and slash [/])
 				case 'phone':
 					if (!\Validator::isPhone(html_entity_decode($varInput)))
 					{

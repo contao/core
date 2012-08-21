@@ -20,16 +20,16 @@ $GLOBALS['TL_LANG']['tl_repository']['copyright']     = array('Copyright', 'Here
 $GLOBALS['TL_LANG']['tl_repository']['description']   = array('Description', 'These HTML tags are allowed: %s');
 $GLOBALS['TL_LANG']['tl_repository']['extension']     = array('Extension', 'Name of the extension.');
 $GLOBALS['TL_LANG']['tl_repository']['functionality'] = array('Functionality', 'Does the extension provide the expected functionality?');
-$GLOBALS['TL_LANG']['tl_repository']['license']       = array('License', 'Please enter a short license information. You may add full license information in a file LICENSE.txt.');
-$GLOBALS['TL_LANG']['tl_repository']['name']          = array('Name', 'Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are prefered. Additionally, the characters _ and - are allowed within the name.');
+$GLOBALS['TL_LANG']['tl_repository']['license']       = array('Licence', 'Please enter a short licence information. You may add full licence information in a file <em>LICENSE.txt</em>.');
+$GLOBALS['TL_LANG']['tl_repository']['name']          = array('Name', 'Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.');
 $GLOBALS['TL_LANG']['tl_repository']['popularity']    = array('Popularity', '%s/%s (downloads/installs)');
 $GLOBALS['TL_LANG']['tl_repository']['quality']       = array('Quality', 'How robust is the extension and how painless is installation and maintenance?');
 $GLOBALS['TL_LANG']['tl_repository']['releasedate']   = array('Release date', 'Enter the publishing date of this release in format %s');
 $GLOBALS['TL_LANG']['tl_repository']['selversion']    = array('Version', 'Please select the version');
 $GLOBALS['TL_LANG']['tl_repository']['type']          = array('Type', 'Please select the extension type.');
-$GLOBALS['TL_LANG']['tl_repository']['usability']     = array('Usability', 'Does the extension meet the Contao standards for usability and accessability?');
+$GLOBALS['TL_LANG']['tl_repository']['usability']     = array('Usability', 'Does the extension meet the Contao standards for usability and accessibility?');
 $GLOBALS['TL_LANG']['tl_repository']['version']       = array('Version', 'Version numbers must be in format n.n.n s, where n are integers and s is one of: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable');
-$GLOBALS['TL_LANG']['tl_repository']['lickey']        = array('License key', 'Enter the license key that you got from the extension vendor.');
+$GLOBALS['TL_LANG']['tl_repository']['lickey']        = array('Licence key', 'Enter the licence key that you got from the extension vendor.');
 $GLOBALS['TL_LANG']['tl_repository']['uninstprotect'] = array('Uninstall protection', 'Protect extension against accidental uninstallation.');
 $GLOBALS['TL_LANG']['tl_repository']['updateprotect'] = array('Update protection', 'Protect extension against accidental update.');
 
@@ -67,7 +67,7 @@ $GLOBALS['TL_LANG']['tl_repository']['relupdates']         = 'Release updates';
 $GLOBALS['TL_LANG']['tl_repository']['relusability']       = 'Release usability';
 $GLOBALS['TL_LANG']['tl_repository']['save']               = 'Save';
 $GLOBALS['TL_LANG']['tl_repository']['shop']               = 'Shop';
-$GLOBALS['TL_LANG']['tl_repository']['showpicture']        = 'Show full size picture';
+$GLOBALS['TL_LANG']['tl_repository']['showpicture']        = 'Show full-size picture';
 $GLOBALS['TL_LANG']['tl_repository']['state']              = 'State';
 $GLOBALS['TL_LANG']['tl_repository']['tag']                = 'Tag';
 $GLOBALS['TL_LANG']['tl_repository']['thumbnail']          = 'Thumbnail picture';
@@ -107,7 +107,7 @@ $GLOBALS['TL_LANG']['tl_repository']['install']            = 'Install';
 $GLOBALS['TL_LANG']['tl_repository']['installextension']   = 'Install extension';
 $GLOBALS['TL_LANG']['tl_repository']['installingext']      = 'Install %s %s build %s';
 $GLOBALS['TL_LANG']['tl_repository']['installlogtitle']    = 'File installation/update log';
-$GLOBALS['TL_LANG']['tl_repository']['lickeyrequired']     = 'This extension requires a license key. Please visit the vendor\'s shop to purchase one.';
+$GLOBALS['TL_LANG']['tl_repository']['lickeyrequired']     = 'This extension requires a licence key. Please visit the vendor\'s shop to purchase one.';
 $GLOBALS['TL_LANG']['tl_repository']['none']               = 'None';
 $GLOBALS['TL_LANG']['tl_repository']['notfound']           = 'not found';
 $GLOBALS['TL_LANG']['tl_repository']['ok']                 = 'OK';
@@ -128,7 +128,7 @@ $GLOBALS['TL_LANG']['tl_repository']['validate']           = 'Repair';
 $GLOBALS['TL_LANG']['tl_repository']['validatingext']      = 'Verify/repair %s %s build %s';
 $GLOBALS['TL_LANG']['tl_repository']['approvedForLabel']   = 'Approved for';
 $GLOBALS['TL_LANG']['tl_repository']['approvedForText']    = 'Contao %s to %s';
-$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule']  = 'SOAP extension not loaded (configure PHP with --enable-soap).';
+$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule']  = 'SOAP extension not loaded (configure PHP with <em>--enable-soap</em>).';
 
 
 /**
@@ -142,7 +142,7 @@ $GLOBALS['TL_LANG']['tl_repository_statext']['newversion']      = 'Version %s bu
 $GLOBALS['TL_LANG']['tl_repository_statext']['depmissing']      = 'Missing required extension %s';
 $GLOBALS['TL_LANG']['tl_repository_statext']['extnotfound']     = 'Extension not found in repository';
 $GLOBALS['TL_LANG']['tl_repository_statext']['vernotfound']     = 'Installed version not found in repository';
-$GLOBALS['TL_LANG']['tl_repository_statext']['extneedkey']      = 'License key required, install extension in advance';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extneedkey']      = 'Licence key required, install extension in advance';
 $GLOBALS['TL_LANG']['tl_repository_statext']['errorinstall']    = 'Corrupted, update/repair required';
 
 

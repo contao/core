@@ -32,7 +32,7 @@ $GLOBALS['TL_LANG']['tl_calendar']['language']       = array('Feed-Sprache', 'Bi
 $GLOBALS['TL_LANG']['tl_calendar']['source']         = array('Export-Einstellungen', 'Hier können Sie festlegen, was exportiert werden soll.');
 $GLOBALS['TL_LANG']['tl_calendar']['maxItems']       = array('Maximale Anzahl an Beiträgen', 'Hier können Sie die Anzahl der Events limitieren. Geben Sie 0 ein, um alle zu exportieren.');
 $GLOBALS['TL_LANG']['tl_calendar']['feedBase']       = array('Basis-URL', 'Bitte geben Sie die Basis-URL mit Protokoll (z.B. <em>http://</em>) ein.');
-$GLOBALS['TL_LANG']['tl_calendar']['alias']          = array('Feed-Alias', 'Hier können Sie einen eindeutigen Dateinamen (ohne Endung) eingeben. Die XML-Datei wird automatisch im Wurzelverzeichnis Ihrer Contao-Installation erstellt, z.B. als <em>name.xml</em>.');
+$GLOBALS['TL_LANG']['tl_calendar']['alias']          = array('Feed-Alias', 'Hier können Sie einen eindeutigen Dateinamen (ohne Endung) eingeben. Die XML-Datei wird automatisch im <em>share</em>-Ordner Ihrer Contao-Installation erstellt, z.B. als <em>share/alias.xml</em>.');
 $GLOBALS['TL_LANG']['tl_calendar']['description']    = array('Feed-Beschreibung', 'Bitte geben Sie eine kurze Beschreibung des Kalender-Feeds ein.');
 $GLOBALS['TL_LANG']['tl_calendar']['tstamp']         = array('Änderungsdatum', 'Datum und Uhrzeit der letzten Änderung');
 

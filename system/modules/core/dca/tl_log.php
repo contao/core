@@ -159,7 +159,7 @@ class tl_log extends Backend
 {
 
 	/**
-	 * Colorize the log entries depending on their category
+	 * Colourise the log entries depending on their category
 	 * @param array
 	 * @param string
 	 * @return string

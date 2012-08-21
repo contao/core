@@ -258,7 +258,7 @@ $GLOBALS['TL_CONFIG']['useCE']      = true;
  * end. It does not apply to the search engine.
  *
  * If you need custom page sections (in addition to "header", "left", "main",
- * "right" and "footer", you can define a comma separated list here.
+ * "right" and "footer", you can define a comma-separated list here.
  *
  * If you enter a maximum image width, images and media files cannot be wider
  * than this value and will not break your page layout.
@@ -272,7 +272,7 @@ $GLOBALS['TL_CONFIG']['useCE']      = true;
  * Default page permissions: allow everything for the owner (u1 - u6) of a page.
  * See back end module "Navigation" for more information.
  *
- * Please enter a comma separated list of allowed image types, editable files
+ * Please enter a comma-separated list of allowed image types, editable files
  * and all all file types that are allowed to be downloaded.
  */
 $GLOBALS['TL_CONFIG']['loginCount']           = 3;

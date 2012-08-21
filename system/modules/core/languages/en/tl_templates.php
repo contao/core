@@ -14,7 +14,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_templates']['original'] = array('Original template', 'Here you can select the template that you want to customize.');
+$GLOBALS['TL_LANG']['tl_templates']['original'] = array('Original template', 'Here you can select the template that you want to customise.');
 $GLOBALS['TL_LANG']['tl_templates']['target']   = array('Target folder', 'A copy of the selected template will be stored in the target folder.');
 
 

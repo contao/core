@@ -52,7 +52,7 @@ $GLOBALS['TL_LANG']['tl_module']['inColumn']       = array('Spalte', 'Bitte wäh
 $GLOBALS['TL_LANG']['tl_module']['skipFirst']      = array('Elemente überspringen', 'Hier legen Sie fest, wie viele Elemente übersprungen werden sollen.');
 $GLOBALS['TL_LANG']['tl_module']['loadFirst']      = array('Erstes Element laden', 'Automatisch zum ersten Element weiterleiten, wenn keines ausgewählt ist.');
 $GLOBALS['TL_LANG']['tl_module']['size']           = array('Breite und Höhe', 'Bitte geben Sie die Breite und Höhe in Pixeln ein.');
-$GLOBALS['TL_LANG']['tl_module']['transparent']    = array('Transparenter Film', 'Den Flash-Film transparent machen (wmode = transparent).');
+$GLOBALS['TL_LANG']['tl_module']['transparent']    = array('Transparenter Film', 'Den Flash-Film transparent machen (<em>wmode = transparent</em>).');
 $GLOBALS['TL_LANG']['tl_module']['flashvars']      = array('FlashVars', 'Variablen an den Flash-Film übergeben (<em>var1=wert1&amp;var2=wert2</em>).');
 $GLOBALS['TL_LANG']['tl_module']['version']        = array('Flash-Player-Version', 'Bitte geben Sie die benötigte Flash-Player-Version ein (z.B. 6.0.12).');
 $GLOBALS['TL_LANG']['tl_module']['altContent']     = array('Alternativer Inhalt', 'Der alternative Inhalt wird angezeigt, falls der Flash-Film nicht geladen werden kann. HTML-Tags sind erlaubt.');

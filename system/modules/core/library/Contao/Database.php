@@ -372,6 +372,8 @@ abstract class Database
 
 
 	/**
+<<<<<<< HEAD
+=======
 	 * Return the IDs of all child records of a particular record (see #2475)
 	 * 
 	 * @author Andreas Schempp
@@ -457,6 +459,7 @@ abstract class Database
 
 
 	/**
+>>>>>>> 82981723f8240d874fd96252deec9effe345c146
 	 * Change the current database
 	 * 
 	 * @param string $strDatabase The name of the target database

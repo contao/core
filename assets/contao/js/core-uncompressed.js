@@ -580,7 +580,7 @@ var AjaxRequest =
 	},
 
 	/**
-	 * Store the live update ID
+	 * Store the Live Update ID
 	 * @param string
 	 */
 	liveUpdate: function(el, id) {
@@ -1007,7 +1007,7 @@ var Backend =
 	},
 
 	/**
-	 * Initialize the mootools color picker (backwards compatibility)
+	 * Initialize the mootools colour picker (backwards compatibility)
 	 */
 	addColorPicker: function() {
 		return true;

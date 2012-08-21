@@ -1068,7 +1068,7 @@ class Theme extends \Backend
 
 
 	/**
-	 * Recursively synchronize the new folder
+	 * Recursively synchronise the new folder
 	 * @param string
 	 * @param integer
 	 */

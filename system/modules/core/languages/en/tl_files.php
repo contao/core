@@ -53,4 +53,4 @@ $GLOBALS['TL_LANG']['tl_files']['protect']   = array('Protect folder', 'Protect 
 $GLOBALS['TL_LANG']['tl_files']['unlock']    = array('Remove protection', 'Unprotect folder "%s"');
 $GLOBALS['TL_LANG']['tl_files']['move']      = array('File upload', 'Upload files to the server');
 $GLOBALS['TL_LANG']['tl_files']['pasteinto'] = array('Paste into', 'Paste into this folder');
-$GLOBALS['TL_LANG']['tl_files']['sync']      = array('Synchronize', 'Synchronize the file system and the database');
+$GLOBALS['TL_LANG']['tl_files']['sync']      = array('Synchronise', 'Synchronise the file system and the database');

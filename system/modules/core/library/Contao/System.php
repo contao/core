@@ -353,7 +353,7 @@ abstract class System
 			$strLanguage = $GLOBALS['TL_LANGUAGE'];
 		}
 
-		// Fall back to english
+		// Fall back to English
 		if ($strLanguage == '')
 		{
 			$strLanguage = 'en';
@@ -438,7 +438,11 @@ abstract class System
 
 
 	/**
+<<<<<<< HEAD
+	 * Return the counties as array
+=======
 	 * Return the countries as array
+>>>>>>> 82981723f8240d874fd96252deec9effe345c146
 	 * 
 	 * @return array An array of country names
 	 */
@@ -622,7 +626,7 @@ abstract class System
 	 * 
 	 * @param string  $strName     The cookie name
 	 * @param mixed   $varValue    The cookie value
-	 * @param integer $intExpires  The expiration date
+	 * @param integer $intExpires  The expiry date
 	 * @param string  $strPath     An optional path
 	 * @param string  $strDomain   An optional domain name
 	 * @param boolean $blnSecure   If true, the secure flag will be set

@@ -17,4 +17,4 @@
 $GLOBALS['TL_LANG']['MOD']['devtools']  = 'Entwickler-Tools';
 $GLOBALS['TL_LANG']['MOD']['extension'] = array('Extension-Creator', 'Eigene Contao-Erweiterungen erstellen');
 $GLOBALS['TL_LANG']['MOD']['labels']    = array('Fehlende Labels', 'Fehlende Bezeichnungen in einem Sprachpaket finden');
-$GLOBALS['TL_LANG']['MOD']['autoload']  = array('Autoload-Creator ', 'Automatisch die "config/autoload.php"-Dateien erstellen');
+$GLOBALS['TL_LANG']['MOD']['autoload']  = array('Autoload-Creator ', 'Automatisch die <em>config/autoload.php</em>-Dateien erstellen');

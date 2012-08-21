@@ -27,13 +27,13 @@ namespace Contao;
  * You can specify which part of the image will be preserved:
  * 
  * * left_top:      the left side of a landscape image and the top of a portrait image
- * * center_top:    the center of a landscape image and the top of a portrait image
+ * * center_top:    the centre of a landscape image and the top of a portrait image
  * * right_top:     the right side of a landscape image and the top of a portrait image
- * * left_center:   the left side of a landscape image and the center of a portrait image
- * * center_center: the center of a landscape image and the center of a portrait image
- * * right_center:  the right side of a landscape image and the center of a portrait image
+ * * left_center:   the left side of a landscape image and the centre of a portrait image
+ * * center_center: the centre of a landscape image and the centre of a portrait image
+ * * right_center:  the right side of a landscape image and the centre of a portrait image
  * * left_bottom:   the left side of a landscape image and the bottom of a portrait image
- * * center_bottom: the center of a landscape image and the bottom of a portrait image
+ * * center_bottom: the centre of a landscape image and the bottom of a portrait image
  * * right_bottm:   the right side of a landscape image and the bottom of a portrait image
  * 
  * Usage:

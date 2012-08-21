@@ -20,7 +20,7 @@ $GLOBALS['TL_LANG']['tl_repository']['copyright']     = array('Urheberrecht', 'H
 $GLOBALS['TL_LANG']['tl_repository']['description']   = array('Beschreibung', 'Folgende HTML-Tags sind erlaubt: %s');
 $GLOBALS['TL_LANG']['tl_repository']['extension']     = array('Erweiterung', 'Name der Erweiterung.');
 $GLOBALS['TL_LANG']['tl_repository']['functionality'] = array('Funktion', 'Bietet die Erweiterung die erwarteten Funktionen?');
-$GLOBALS['TL_LANG']['tl_repository']['license']       = array('Lizenz', 'Eingabe einer kurzen Lizenzinformation für freie Erweiterungen. Ausführliche Lizenzinformationen können z.B. in einer Datei LICENSE.txt hinterlegt werden.');
+$GLOBALS['TL_LANG']['tl_repository']['license']       = array('Lizenz', 'Eingabe einer kurzen Lizenzinformation für freie Erweiterungen. Ausführliche Lizenzinformationen können z.B. in einer Datei <em>LICENSE.txt</em> hinterlegt werden.');
 $GLOBALS['TL_LANG']['tl_repository']['name']          = array('Name', 'Erweiterungsnamen müssen mit a-z, A-Z oder 0-9 beginnen, wobei bevorzugt die Kleinschreibung anzuwenden ist. Innerhalb des Namens sind zusätzlich die Zeichen _ und - erlaubt.');
 $GLOBALS['TL_LANG']['tl_repository']['popularity']    = array('Popularität', '%s/%s (Downloads/Install.)');
 $GLOBALS['TL_LANG']['tl_repository']['quality']       = array('Qualität', 'Wie robust ist die Erweiterung und wie einfach und logisch gestalten sich Installation und Unterhalt?');
@@ -128,7 +128,7 @@ $GLOBALS['TL_LANG']['tl_repository']['validate']           = 'Reparieren';
 $GLOBALS['TL_LANG']['tl_repository']['validatingext']      = 'Prüfung/Reparatur %s %s Build %s';
 $GLOBALS['TL_LANG']['tl_repository']['approvedForLabel']   = 'Freigegeben für';
 $GLOBALS['TL_LANG']['tl_repository']['approvedForText']    = 'Contao %s bis %s';
-$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule']  = 'SOAP-Erweiterung nicht geladen (konfigurieren Sie PHP mit --enable-soap).';
+$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule']  = 'SOAP-Erweiterung nicht geladen (konfigurieren Sie PHP mit <em>--enable-soap</em>).';
 
 
 /**

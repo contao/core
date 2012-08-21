@@ -15,7 +15,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_calendar_feed']['title']       = array('Titel', 'Bitte geben Sie einen Feed-Titel ein.');
-$GLOBALS['TL_LANG']['tl_calendar_feed']['alias']       = array('Feed-Alias', 'Hier können Sie einen eindeutigen Dateinamen (ohne Endung) eingeben. Die XML-Datei wird automatisch im <em>share</em>-Ordner Ihrer Contao-Installation erstellt, z.B. als <em>share/name.xml</em>.');
+$GLOBALS['TL_LANG']['tl_calendar_feed']['alias']       = array('Feed-Alias', 'Hier können Sie einen eindeutigen Dateinamen (ohne Endung) eingeben. Die XML-Datei wird automatisch im <em>share</em>-Ordner Ihrer Contao-Installation erstellt, z.B. als <em>share/alias.xml</em>.');
 $GLOBALS['TL_LANG']['tl_calendar_feed']['language']    = array('Feed-Sprache', 'Bitte geben Sie die Sprache der Seite gemäß des ISO-639 Standards ein (z.B. <em>de</em>, <em>de-ch</em>).');
 $GLOBALS['TL_LANG']['tl_calendar_feed']['calendars']   = array('Kalender', 'Hier legen Sie fest, welche Kalender in dem Feed enthalten sind.');
 $GLOBALS['TL_LANG']['tl_calendar_feed']['format']      = array('Feed-Format', 'Bitte wählen Sie ein Format.');

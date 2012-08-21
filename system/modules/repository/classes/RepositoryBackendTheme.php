@@ -13,7 +13,7 @@
 
 
 /**
- * Implements the backend theme
+ * Implements the back end theme
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
  * @author     Leo Feyer <http://contao.org>

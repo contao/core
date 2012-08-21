@@ -3236,7 +3236,7 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Parse simple tokens that can be used to personalize newsletters
+	 * Parse simple tokens that can be used to personalise newsletters
 	 * 
 	 * @param string $strBuffer The text with the tokens to be replaced
 	 * @param array  $arrData   The replacement data as array
