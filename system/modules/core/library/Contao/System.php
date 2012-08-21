@@ -451,15 +451,6 @@ abstract class System
 		static::loadLanguageFile('countries');
 		include TL_ROOT . '/system/config/countries.php';
 
-		// HOOK: add custom logic
-		if (isset($GLOBALS['TL_HOOKS']['getCountries']) && is_array($GLOBALS['TL_HOOKS']['getCountries']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['getCountries'] as $callback)
-			{
-				static::importStatic($callback[0])->$callback[1]($return, $countries);
-			}
-		}
-
 		foreach ($countries as $strKey=>$strName)
 		{
 			$arrAux[$strKey] = isset($GLOBALS['TL_LANG']['CNT'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['CNT'][$strKey]) : $strName;
