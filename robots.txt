@@ -1,4 +1,5 @@
 User-agent: *
+Disallow: /check/
 Disallow: /contao/
 Disallow: /system/
 Disallow: /templates/
