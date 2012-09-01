@@ -4793,10 +4793,10 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			// Custom filter
 			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter']) && !empty($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter']))
 			{
-				foreach ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter'] as $filter)
+				foreach ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter'] as $filterValue)
 				{
-					$arrProcedure[] = $filter[0];
-					$arrValues[] = $filter[1];
+					$arrProcedure[] = $filterValue[0];
+					$arrValues[] = $filterValue[1];
 				}
 			}
 
