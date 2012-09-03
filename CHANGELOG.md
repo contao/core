@@ -5,6 +5,9 @@ Version 2.11.6 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Add a link if a news item or event points to an internal page (see #4671).
+
+### Fixed
 Wrap the MooTools fallback into CDATA tags on XHTML pages (see #4680).
 
 ### Fixed
