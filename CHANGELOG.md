@@ -5,6 +5,9 @@ Version 2.11.6 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly align stylect menus in the form generator in the back end (see #4557).
+
+### Fixed
 Add a link if a news item or event points to an internal page (see #4671).
 
 ### Fixed
