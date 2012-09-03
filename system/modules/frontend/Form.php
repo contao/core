@@ -144,6 +144,12 @@ class Form extends Hybrid
 				$arrData['name'] = '';
 			}
 
+			// Textareas do not use the value attribute (see #4722)
+			if ($objFields->type == 'textarea')
+			{
+				$arrData['value'] = '';
+			}
+
 			$objWidget = new $strClass($arrData);
 			$objWidget->required = $objFields->mandatory ? true : false;
 

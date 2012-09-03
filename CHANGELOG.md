@@ -5,6 +5,9 @@ Version 2.11.6 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not add a default value to textareas (see #4722).
+
+### Fixed
 Do not override the comments array in case login is required to comment,
 otherwise no commets will be shown (see #4064).
 
