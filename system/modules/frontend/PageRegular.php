@@ -313,7 +313,14 @@ class PageRegular extends Frontend
 			// Local fallback (thanks to DyaGa)
 			if ($objLayout->mooSource == 'moo_fallback')
 			{
-				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . '>window.MooTools || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/mootools/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>' . "\n";
+				if ($objPage->outputFormat == 'xhtml')
+				{
+					$this->Template->mooScripts .= '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . 'window.MooTools || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/mootools/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')' . "\n/* ]]> */\n" . '</script>' . "\n";
+				}
+				else
+				{
+					$this->Template->mooScripts .= '<script>window.MooTools || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/mootools/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>' . "\n";
+				}
 			}
 
 			$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";

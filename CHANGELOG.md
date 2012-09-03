@@ -5,6 +5,9 @@ Version 2.11.6 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Wrap the MooTools fallback into CDATA tags on XHTML pages (see #4680).
+
+### Fixed
 Do not add a default value to textareas (see #4722).
 
 ### Fixed
