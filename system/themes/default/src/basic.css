@@ -275,7 +275,7 @@ pre,.tl_textarea.monospace {
 
 /* Radio buttons */
 .tl_radio {
-	margin:1px 3px 0 0;
+	margin:1px 3px 3px 0;
 	vertical-align:bottom;
 }
 .tl_tree_radio {
