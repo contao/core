@@ -97,6 +97,7 @@ abstract class ModuleNews extends \Module
 		$objTemplate->more = $this->generateLink($GLOBALS['TL_LANG']['MSC']['more'], $objArticle, $blnAddArchive, true);
 		$objTemplate->link = $this->generateNewsUrl($objArticle, $blnAddArchive);
 		$objTemplate->archive = $objArticle->getRelated('pid');
+		$objTemplate->text = '';
 
 		// Clean the RTE output
 		if ($objArticle->teaser != '')
@@ -114,7 +115,7 @@ abstract class ModuleNews extends \Module
 		}
 
 		// Display the "read more" button for external/article links
-		if (($objArticle->source == 'external' || $objArticle->source == 'article') && $objArticle->text == '')
+		if ($objArticle->source != 'default')
 		{
 			$objTemplate->text = true;
 		}
@@ -122,7 +123,6 @@ abstract class ModuleNews extends \Module
 		// Compile the news text
 		else
 		{
-			$objTemplate->text = '';
 			$objElement = \ContentModel::findPublishedByPidAndTable($objArticle->id, 'tl_news');
 
 			if ($objElement !== null)
@@ -295,7 +295,7 @@ abstract class ModuleNews extends \Module
 
 		switch ($objItem->source)
 		{
-			// Link to external page
+			// Link to an external page
 			case 'external':
 				if (substr($objItem->url, 0, 7) == 'mailto:')
 				{

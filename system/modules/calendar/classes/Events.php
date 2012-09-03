@@ -251,17 +251,7 @@ abstract class Events extends \Module
 		$arrEvent['class'] = ($objEvents->cssClass != '') ? ' ' . $objEvents->cssClass : '';
 		$arrEvent['start'] = $intStart;
 		$arrEvent['end'] = $intEnd;
-
 		$arrEvent['details'] = '';
-		$objElement = \ContentModel::findPublishedByPidAndTable($objEvents->id, 'tl_calendar_events');
-
-		if ($objElement !== null)
-		{
-			while ($objElement->next())
-			{
-				$arrEvent['details'] .= $this->getContentElement($objElement->id);
-			}
-		}
 
 		// Override the link target
 		if ($objEvents->source == 'external' && $objEvents->target)
@@ -283,21 +273,22 @@ abstract class Events extends \Module
 		}
 
 		// Display the "read more" button for external/article links
-		if (($objEvents->source == 'external' || $objEvents->source == 'article') && $objEvents->details == '')
+		if ($objEvents->source != 'default')
 		{
 			$arrEvent['details'] = true;
 		}
 
-		// Clean the RTE output
+		// Compile the event text
 		else
 		{
-			if ($objPage->outputFormat == 'xhtml')
+			$objElement = \ContentModel::findPublishedByPidAndTable($objEvents->id, 'tl_calendar_events');
+
+			if ($objElement !== null)
 			{
-				$arrEvent['details'] = \String::toXhtml($arrEvent['details']);
-			}
-			else
-			{
-				$arrEvent['details'] = \String::toHtml5($arrEvent['details']);
+				while ($objElement->next())
+				{
+					$arrEvent['details'] .= $this->getContentElement($objElement->id);
+				}
 			}
 		}
 
