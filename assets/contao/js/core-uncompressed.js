@@ -1071,12 +1071,20 @@ var Backend =
 				return e.get('html');
 			}
 		});
+
+		// Links and input elements
 		['a[title]', 'input[title]'].each(function(el) {
-			new Tips.Contao($$(el), {
+			new Tips.Contao($$(el).filter(function(i) {
+				return i.title != '';
+			}), {
 				offset: {x:0, y:26}
 			});
 		});
-		$$('img[title]').each(function(el) {
+
+		// Images
+		$$('img[title]').filter(function(i) {
+			return i.title != '';
+		}).each(function(el) {
 			new Tips.Contao(el, {
 				offset: {x:0, y:((el.get('class') == 'gimage') ? 60 : 30)}
 			});

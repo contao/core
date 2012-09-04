@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Do not show the tool tips if the title is empty (see #4672).
+
+### Fixed
 Show the back button when editing multiple elements in parent view (see #4709).
 
 ### Changed
