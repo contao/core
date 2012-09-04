@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.0 (2012-XX-XX)
 --------------------------
 
+### Fixed
+Show the back button when editing multiple elements in parent view (see #4709).
+
 ### Changed
 Changed the `Controller::replaceInsertTags()` logic so non-cacheable tags are
 preserved by default (see #4712).
