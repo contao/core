@@ -103,6 +103,9 @@ body.popup {
 	margin:0;
 	padding:0 1px;
 }
+#footer span {
+	padding-left:12px;
+}
 
 /* Navigation */
 #tl_navigation h1 {
