@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Support uppercase TLDs when validating e-mail addresses (see #4738).
+
+### Fixed
 Do not show the tool tips if the title is empty (see #4672).
 
 ### Fixed
