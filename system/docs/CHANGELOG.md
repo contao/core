@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.0 (2012-XX-XX)
 --------------------------
 
+### Fixed
+Do not cache the page if the `file` parameter is set (see #4702).
+
 ### Changed
 Renamed the public module folders to "assets" (see #4667).
 

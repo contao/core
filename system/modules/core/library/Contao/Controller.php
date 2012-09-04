@@ -2296,7 +2296,7 @@ abstract class Controller extends \System
 			}
 		}
 
-		// Stop script
+		// Stop the script
 		exit;
 	}
 
