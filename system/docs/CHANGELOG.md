@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.0 (2012-XX-XX)
 --------------------------
 
+### Changed
+Changed the `Controller::replaceInsertTags()` logic so non-cacheable tags are
+preserved by default (see #4712).
+
 ### Fixed
 Correctly link new items and events to articles (see #4728).
 

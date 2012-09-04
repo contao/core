@@ -367,7 +367,7 @@ class Index extends Frontend
 
 		// Replace the insert tags and then re-replace the request_token
 		// tag in case a form element has been loaded via insert tag
-		$strBuffer = $this->replaceInsertTags($strBuffer);
+		$strBuffer = $this->replaceInsertTags($strBuffer, false);
 		$strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $strBuffer);
 
 		// Content type

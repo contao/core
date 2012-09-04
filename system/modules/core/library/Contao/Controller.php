@@ -923,11 +923,11 @@ abstract class Controller extends \System
 	 * Replace insert tags with their values
 	 * 
 	 * @param string  $strBuffer The text with the tags to be replaced
-	 * @param boolean $blnCache  If true, some tags will be preserved
+	 * @param boolean $blnCache  If true, non-cacheable tags will be preserved
 	 * 
 	 * @return string The text with the replaced tags
 	 */
-	protected function replaceInsertTags($strBuffer, $blnCache=false)
+	protected function replaceInsertTags($strBuffer, $blnCache=true)
 	{
 		global $objPage;
 
