@@ -543,16 +543,14 @@ class PageRegular extends \Frontend
 			}
 		}
 
-		$strHeadTags = '';
+		// Add a placeholder for dynamic <head> tags (see #4203)
+		$strHeadTags = '[[TL_HEAD]]';
 
 		// Add the user <head> tags
 		if (($strHead = trim($objLayout->head)) != false)
 		{
 			$strHeadTags .= $strHead . "\n";
 		}
-
-		// Add a placeholder for dynamic <head> tags (see #4203)
-		$strHeadTags .= '[[TL_HEAD]]';
 
 		$this->Template->stylesheets = $strStyleSheets;
 		$this->Template->head = $strHeadTags;

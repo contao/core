@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Output the dynamic HEAD tags before the static ones (see #4700).
+
+### Fixed
 Do not cache the page if the `file` parameter is set (see #4702).
 
 ### Changed
