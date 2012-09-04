@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly link new items and events to articles (see #4728).
+
+### Fixed
 Output the dynamic HEAD tags before the static ones (see #4700).
 
 ### Fixed

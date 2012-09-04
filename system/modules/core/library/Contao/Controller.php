@@ -1367,7 +1367,7 @@ abstract class Controller extends \System
 					elseif ($objNews->source == 'article')
 					{
 						$objArticle = \ArticleModel::findByPk($objNews->articleId, array('eager'=>true));
-						$strUrl = $this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
+						$strUrl = $this->generateFrontendUrl($objArticle->getRelated('pid')->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 					}
 					elseif ($objNews->source == 'external')
 					{
@@ -1418,7 +1418,7 @@ abstract class Controller extends \System
 					elseif ($objEvent->source == 'article')
 					{
 						$objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true));
-						$strUrl = $this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
+						$strUrl = $this->generateFrontendUrl($objArticle->getRelated('pid')->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 					}
 					elseif ($objEvent->source == 'external')
 					{
