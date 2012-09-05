@@ -1610,7 +1610,22 @@ class StyleSheets extends \Backend
 
 				case 'background-image':
 					$arrSet['background'] = 1;
-					$arrSet['bgimage'] = preg_replace('/url\(["\']?([^"\'\)]+)["\']?\)/i', '$1', $arrChunks[1]);
+					$url = preg_replace('/url\(["\']?([^"\'\)]+)["\']?\)/i', '$1', $arrChunks[1]);
+					if (strncmp($url, '-', 1) === 0)
+					{
+						// Ignore vendor prefixed commands
+					}
+					elseif (strncmp($url, 'linear-gradient', 15) === 0)
+					{
+						// Handle background gradients (see #4640)
+						$colors = trimsplit(',', preg_replace('/linear-gradient ?\(([^\)]+)\)/', '$1', $url));
+						$arrSet['gradientAngle'] = array_shift($colors);
+						$arrSet['gradientColors'] = serialize($colors);
+					}
+					else
+					{
+						$arrSet['bgimage'] = $url;
+					}
 					break;
 
 				case 'background-position':

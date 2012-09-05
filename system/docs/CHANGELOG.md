@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.0 (2012-XX-XX)
 --------------------------
 
+### Fixed
+The style sheet importer now handles background gradients (see #4640).
+
 ### Updated
 Update jQuery to version 1.8.1 (see #4678).
 
