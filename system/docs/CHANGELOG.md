@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Show the teaser text in the full view if a news item or event does not have a
+text, so linking and commenting is possible (see #4630).
+
+### Fixed
 The style sheet importer now handles background gradients (see #4640).
 
 ### Updated

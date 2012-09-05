@@ -10,7 +10,14 @@
 
 <h2><?php echo $this->subHeadline; ?></h2>
 <?php endif; ?>
+<?php if ($this->text): ?>
 <?php echo $this->text; ?>
+<?php else: ?>
+
+<div class="ce_text block">
+<?php echo $this->teaser; ?> 
+</div>
+<?php endif; ?>
 <?php if ($this->enclosure): ?>
 
 <div class="enclosure">
