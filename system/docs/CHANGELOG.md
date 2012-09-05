@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Allow to import other white-space values than `nowrap` (see #4519).
+
+### Fixed
 Show the teaser text in the full view if a news item or event does not have a
 text, so linking and commenting is possible (see #4630).
 

@@ -1925,8 +1925,15 @@ class StyleSheets extends \Backend
 					break;
 
 				case 'white-space':
-					$arrSet['font'] = 1;
-					$arrSet['whitespace'] = ($arrChunks[1] == 'nowrap') ? 1 : '';
+					if ($arrChunks[1] == 'nowrap')
+					{
+						$arrSet['font'] = 1;
+						$arrSet['whitespace'] = 1;
+					}
+					else
+					{
+						$arrSet['own'][] = $strDefinition;
+					}
 					break;
 
 				case 'text-transform':
