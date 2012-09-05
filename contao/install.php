@@ -655,6 +655,11 @@ class InstallTool extends Backend
 								   ->execute(Input::post('name'), Input::post('email', true), Input::post('username', true), $strPassword);
 
 					$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", Input::post('email', true));
+
+					// Scan the upload folder
+					$this->import('Database\\Updater', 'Updater');
+					$this->Updater->scanUploadFolder();
+
 					$this->reload();
 				}
 
@@ -826,7 +831,7 @@ class InstallTool extends Backend
 			return;
 		}
 
-		$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_user");
+		$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_page");
 
 		// Still a fresh installation
 		if ($objRow->count < 1)

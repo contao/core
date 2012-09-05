@@ -5,6 +5,11 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly determine in the install tool whether it is a fresh installation or
+the version 3 update is required (see #4676). Also, scan the files directory if
+an administrator account is created during the installation.
+
+### Fixed
 If an article is selected, do not hide articles in other columns (see #4740).
 
 ### Fixed
