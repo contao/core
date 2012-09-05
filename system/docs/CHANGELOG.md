@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.0 (2012-XX-XX)
 --------------------------
 
+### Updated
+Update jQuery to version 1.8.1 (see #4678).
+
 ### Fixed
 Correctly determine in the install tool whether it is a fresh installation or
 the version 3 update is required (see #4676). Also, scan the files directory if

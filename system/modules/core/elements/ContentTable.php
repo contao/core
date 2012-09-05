@@ -68,8 +68,8 @@ class ContentTable extends \ContentElement
 			{
 				$this->Template->sortable = true;
 				$this->Template->hasJQuery = true;
-				$GLOBALS['TL_CSS'][] = 'plugins/jquery/tablesorter/' . TABLESORTER . '/css/tablesorter.css';
-				$GLOBALS['TL_JQUERY'][] = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_ASSETS_URL . 'plugins/jquery/tablesorter/' . TABLESORTER . '/js/tablesorter.js"></script>';
+				$GLOBALS['TL_CSS'][] = 'assets/jquery/tablesorter/' . TABLESORTER . '/css/tablesorter.css';
+				$GLOBALS['TL_JQUERY'][] = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_ASSETS_URL . 'assets/jquery/tablesorter/' . TABLESORTER . '/js/tablesorter.js"></script>';
 			}
 		}
 

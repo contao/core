@@ -1,5 +1,5 @@
 /*!
- * jQuery UI 1.8.22
+ * jQuery UI 1.8.23
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -18,7 +18,7 @@ if ( $.ui.version ) {
 }
 
 $.extend( $.ui, {
-	version: "1.8.22",
+	version: "1.8.23",
 
 	keyCode: {
 		ALT: 18,
@@ -333,7 +333,7 @@ $.extend( $.ui, {
 
 })( jQuery );
 /*!
- * jQuery UI Widget 1.8.22
+ * jQuery UI Widget 1.8.23
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -605,7 +605,7 @@ $.Widget.prototype = {
 
 })( jQuery );
 /*!
- * jQuery UI Accordion 1.8.22
+ * jQuery UI Accordion 1.8.23
  *
  * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -1124,7 +1124,7 @@ $.widget( "ui.accordion", {
 });
 
 $.extend( $.ui.accordion, {
-	version: "1.8.22",
+	version: "1.8.23",
 	animations: {
 		slide: function( options, additions ) {
 			options = $.extend({
