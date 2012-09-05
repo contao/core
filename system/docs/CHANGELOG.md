@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+If an article is selected, do not hide articles in other columns (see #4740).
+
+### Fixed
 Support uppercase TLDs when validating e-mail addresses (see #4738).
 
 ### Fixed

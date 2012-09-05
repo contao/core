@@ -156,7 +156,7 @@ abstract class Controller extends \System
 		if ($intId == 0)
 		{
 			// Show a particular article only
-			if (\Input::get('articles') && $objPage->type == 'regular')
+			if ($objPage->type == 'regular' && \Input::get('articles'))
 			{
 				list($strSection, $strArticle) = explode(':', \Input::get('articles'));
 
@@ -186,31 +186,28 @@ abstract class Controller extends \System
 			}
 
 			// HOOK: trigger the article_raster_designer extension
-			elseif (in_array('article_raster_designer', $this->Config->getActiveModules()))
+			if (in_array('article_raster_designer', $this->Config->getActiveModules()))
 			{
 				return \RasterDesigner::load($objPage->id, $strColumn);
 			}
 
-			// Show all articles
-			else
+			// Show all articles (no else block here, see #4740)
+			$objArticles = \ArticleModel::findPublishedByPidAndColumn($objPage->id, $strColumn);
+
+			if ($objArticles === null)
 			{
-				$objArticles = \ArticleModel::findPublishedByPidAndColumn($objPage->id, $strColumn);
-
-				if ($objArticles === null)
-				{
-					return '';
-				}
-
-				$return = '';
-				$blnMultiMode = ($objArticles->count() > 1);
-
-				while ($objArticles->next())
-				{
-					$return .= $this->getArticle($objArticles, $blnMultiMode, false, $strColumn);
-				}
-
-				return $return;
+				return '';
 			}
+
+			$return = '';
+			$blnMultiMode = ($objArticles->count() > 1);
+
+			while ($objArticles->next())
+			{
+				$return .= $this->getArticle($objArticles, $blnMultiMode, false, $strColumn);
+			}
+
+			return $return;
 		}
 
 		// Other modules
