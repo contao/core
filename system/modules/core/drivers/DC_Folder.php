@@ -684,17 +684,17 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				$objNewFile->path = $destination;
 				$objNewFile->name = basename($destination); // see #4628
 				$objNewFile->save();
-			}
 
-			$strPath = dirname($destination);
+				$strPath = dirname($destination);
 
-			// Update the MD5 hash of the parent folder
-			if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				$objModel = \FilesModel::findByPath($strPath);
-				$objFolder = new \Folder($objModel->path);
-				$objModel->hash = $objFolder->hash;
-				$objModel->save();
+				// Update the MD5 hash of the parent folder
+				if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
+				{
+					$objModel = \FilesModel::findByPath($strPath);
+					$objFolder = new \Folder($objModel->path);
+					$objModel->hash = $objFolder->hash;
+					$objModel->save();
+				}
 			}
 		}
 
