@@ -920,7 +920,7 @@ abstract class Controller extends \System
 	 * Replace insert tags with their values
 	 * 
 	 * @param string  $strBuffer The text with the tags to be replaced
-	 * @param boolean $blnCache  If true, non-cacheable tags will be preserved
+	 * @param boolean $blnCache  If false, non-cacheable tags will be replaced
 	 * 
 	 * @return string The text with the replaced tags
 	 */
@@ -1175,36 +1175,33 @@ abstract class Controller extends \System
 								break;
 
 							case 'forward':
-								if (($objTarget = $objNextPage->getRelated('jumpTo')) !== null)
+								if ($objNextPage->jumpTo)
 								{
-									$strUrl = $this->generateFrontendUrl($objTarget->row());
-									break;
+									$objNext = $objNextPage->getRelated('jumpTo');
 								}
-								elseif (($objTarget = \PageModel::findFirstPublishedRegularByPid($objNextPage->id)) !== null)
+								else
 								{
+									$objNext = \PageModel::findFirstPublishedRegularByPid($objNextPage->id);
+								}
+
+								if ($objNext !== null)
+								{
+									$strForceLang = null;
+
+									// Check the target page language (see #4706)
 									if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 									{
-										$objTarget = $this->getPageDetails($objTarget); // see #3983
-										$strUrl = $this->generateFrontendUrl($objTarget->row(), null, $objTarget->language);
+										$objNext = $this->getPageDetails($objNext); // see #3983
+										$strForceLang = $objNext->language;
 									}
-									else
-									{
-										$strUrl = $this->generateFrontendUrl($objTarget->row());
-									}
+
+									$strUrl = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
 									break;
 								}
 								// DO NOT ADD A break; STATEMENT
 
 							default:
-								if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
-								{
-									$objNextPage = $this->getPageDetails($objNextPage); // see #3983
-									$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $objNextPage->language);
-								}
-								else
-								{
-									$strUrl = $this->generateFrontendUrl($objNextPage->row());
-								}
+								$strUrl = $this->generateFrontendUrl($objNextPage->row());
 								break;
 						}
 

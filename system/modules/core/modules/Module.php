@@ -244,7 +244,7 @@ abstract class Module extends \Frontend
 					case 'forward':
 						if ($objSubpages->jumpTo)
 						{
-							$objNext = \PageModel::findPublishedById($objSubpages->jumpTo);
+							$objNext = $objSubpages->getRelated('jumpTo');
 						}
 						else
 						{
@@ -253,7 +253,16 @@ abstract class Module extends \Frontend
 
 						if ($objNext !== null)
 						{
-							$href = $this->generateFrontendUrl($objNext->row());
+							$strForceLang = null;
+
+							// Check the target page language (see #4706)
+							if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+							{
+								$objNext = $this->getPageDetails($objNext); // see #3983
+								$strForceLang = $objNext->language;
+							}
+
+							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
 							break;
 						}
 						// DO NOT ADD A break; STATEMENT

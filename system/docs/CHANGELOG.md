@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Consider the language of a forward target when setting up a forward page or
+using a `{{link}}` insert tag (see #4706).
+
+### Fixed
 Allow to import other white-space values than `nowrap` (see #4519).
 
 ### Fixed
