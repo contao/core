@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Ignore case when entering an extension name in the extension installer of the
+repository manager (see #4689).
+
+### Fixed
 Consider the language of a forward target when setting up a forward page or
 using a `{{link}}` insert tag (see #4706).
 
