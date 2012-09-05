@@ -132,10 +132,13 @@ class Form extends \Hybrid
 					$arrData['name'] = '';
 				}
 
-				// Textareas do not use the value attribute (see #4722)
-				if ($objFields->type == 'textarea')
+				// Unset the default value depending on the field type (see #4722)
+				if (!empty($arrData['value']))
 				{
-					$arrData['value'] = '';
+					if (!in_array('value', trimsplit('[,;]', $GLOBALS['TL_DCA']['tl_form_field']['palettes'][$objFields->type])))
+					{
+						$arrData['value'] = '';
+					}
 				}
 
 				$objWidget = new $strClass($arrData);
