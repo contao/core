@@ -109,6 +109,12 @@ class ContentCode extends \ContentElement
 			$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/'.HIGHLIGHTER.'/XRegExp.js';
 			$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/'.HIGHLIGHTER.'/shCore.js';
 			$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/'.HIGHLIGHTER.'/' . $arrMapper[$this->highlight] . '.js';
+
+			// The shBrushXml.js file is required for the "html-script" option (see #4748)
+			if ($this->shClass != '' && strpos($this->shClass, 'html-script') !== false)
+			{
+				$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/'.HIGHLIGHTER.'/shBrushXml.js';
+			}
 		}
 	}
 }

@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Fixed the SyntaxHighlighter "html-script" option (see #4748).
+
+### Fixed
 Do not offer to drop all tables when installing an extension (see #4622).
 
 ### Fixed
