@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Do not offer to drop all tables when installing an extension (see #4622).
+
+### Fixed
 Consider the domain, language and publication settings when searching for a
 folder-style alias (see #4652).
 

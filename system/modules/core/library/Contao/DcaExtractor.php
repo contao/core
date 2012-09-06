@@ -111,6 +111,7 @@ class DcaExtractor extends \Database\Installer
 		else
 		{
 			include	$this->strFile;
+			$this->blnIsDbTable = true;
 		}
 	}
 
