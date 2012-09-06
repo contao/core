@@ -601,6 +601,9 @@ class PageRegular extends \Frontend
 			$strScripts .= '[[TL_MOOTOOLS]]';
 		}
 
+		// Add a placeholder for dynamic scripts (see #4203)
+		$strScripts .= '[[TL_HIGHLIGHTER]]';
+
 		// Add the custom JavaScript
 		if ($objLayout->script != '')
 		{

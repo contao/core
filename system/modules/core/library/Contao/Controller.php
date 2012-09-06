@@ -1903,6 +1903,9 @@ abstract class Controller extends \System
 			}
 		}
 
+		$arrReplace['[[TL_MOOTOOLS]]'] = $strScripts;
+		$strScripts = '';
+
 		// Add the syntax highlighter scripts
 		if (is_array($GLOBALS['TL_HIGHLIGHTER']) && !empty($GLOBALS['TL_HIGHLIGHTER']))
 		{
@@ -1914,10 +1917,18 @@ abstract class Controller extends \System
 			}
 
 			$strScripts .= "\n" . '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>';
-			$strScripts .= "\n" . '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . '>SyntaxHighlighter.defaults.toolbar=false;SyntaxHighlighter.all()</script>' . "\n";
+
+			if ($blnXhtml)
+			{
+				$strScripts .= "\n" . '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . 'SyntaxHighlighter.defaults.toolbar=false;SyntaxHighlighter.all()' . "\n/* ]]> */\n" . '</script>' . "\n";
+			}
+			else
+			{
+				$strScripts .= "\n" . '<script>SyntaxHighlighter.defaults.toolbar=false;SyntaxHighlighter.all()</script>' . "\n";
+			}
 		}
 
-		$arrReplace['[[TL_MOOTOOLS]]'] = $strScripts;
+		$arrReplace['[[TL_HIGHLIGHTER]]'] = $strScripts;
 		$strScripts = '';
 
 		$objCombiner = new \Combiner();
