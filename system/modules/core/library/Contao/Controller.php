@@ -501,7 +501,7 @@ abstract class Controller extends \System
 	 * 
 	 * @return \Model|null The page model or null
 	 */
-	protected function getPageDetails($intId)
+	public static function getPageDetails($intId)
 	{
 		if (is_object($intId))
 		{
@@ -648,7 +648,7 @@ abstract class Controller extends \System
 		elseif (TL_MODE == 'FE' && $objPage->type != 'root')
 		{
 			header('HTTP/1.1 404 Not Found');
-			$this->log('Page ID "'. $objPage->id .'" does not belong to a root page', 'Controller getPageDetails()', TL_ERROR);
+			\System::log('Page ID "'. $objPage->id .'" does not belong to a root page', 'Controller getPageDetails()', TL_ERROR);
 			die('No root page found');
 		}
 

@@ -96,8 +96,7 @@ class Index extends Frontend
 			// Order by domain and language
 			while ($objPage->next())
 			{
-				// Pass the ID so a new page object is created!
-				$objCurrentPage = $this->getPageDetails($objPage->id);
+				$objCurrentPage = $this->getPageDetails($objPage->current());
 
 				$domain = $objCurrentPage->domain ?: '*';
 				$arrPages[$domain][$objCurrentPage->rootLanguage] = $objCurrentPage;
@@ -109,10 +108,12 @@ class Index extends Frontend
 				}
 			}
 
+			$strHost = Environment::get('host');
+
 			// Look for a root page whose domain name matches the host name
-			if (isset($arrPages[Environment::get('host')]))
+			if (isset($arrPages[$strHost]))
 			{
-				$arrLangs = $arrPages[Environment::get('host')];
+				$arrLangs = $arrPages[$strHost];
 			}
 			else
 			{

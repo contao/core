@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Consider the domain, language and publication settings when searching for a
+folder-style alias (see #4652).
+
+### Fixed
 Ignore case when entering an extension name in the extension installer of the
 repository manager (see #4689).
 

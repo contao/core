@@ -132,11 +132,60 @@ abstract class Frontend extends \Controller
 				$arrOptions[] = $strAlias;
 			}
 
-			// Check if there is a page with a matching alias
-			$objPage = \PageModel::findByAliases($arrOptions);
+			// Check if there are pages with a matching alias
+			$objPages = \PageModel::findByAliases($arrOptions);
 
-			if ($objPage !== null)
+			if ($objPages !== null)
 			{
+				$arrPages = array();
+
+				// Order by domain and language
+				while ($objPages->next())
+				{
+					$objPage = static::getPageDetails($objPages->current());
+
+					$domain = $objPage->domain ?: '*';
+					$arrPages[$domain][$objPage->rootLanguage][] = $objPage;
+
+					// Also store the fallback language
+					if ($objPage->rootIsFallback)
+					{
+						$arrPages[$domain]['*'][] = $objPage;
+					}
+				}
+
+				$strHost = \Environment::get('host');
+
+				// Look for a root page whose domain name matches the host name
+				if (isset($arrPages[$strHost]))
+				{
+					$arrLangs = $arrPages[$strHost];
+				}
+				else
+				{
+					$arrLangs = $arrPages['*']; // Empty domain
+				}
+
+				$arrAliases = array();
+
+				// Try to find a page matching the language parameter
+				if (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+				{
+					$arrAliases = $arrLangs['*']; // Fallback language
+				}
+				elseif (($lang = \Input::get('language')) != '' && isset($arrLangs[$lang]))
+				{
+					$arrAliases = $arrLangs[$lang];
+				}
+
+				// Return if there are no matches
+				if (empty($arrAliases))
+				{
+					return false;
+				}
+
+				$objPage = $arrAliases[0];
+
 				// The request consists of the alias only
 				if ($strRequest == $objPage->alias)
 				{
@@ -230,7 +279,7 @@ abstract class Frontend extends \Controller
 			if ($objRootPage === null)
 			{
 				header('HTTP/1.1 404 Not Found');
-				static::log('No root page found (host "' . $host . '", language "'. \Input::get('language') .'"', 'Frontend getRootPageFromUrl()', TL_ERROR);
+				\System::log('No root page found (host "' . $host . '", language "'. \Input::get('language') .'"', 'Frontend getRootPageFromUrl()', TL_ERROR);
 				die('No root page found');
 			}
 		}
@@ -247,7 +296,7 @@ abstract class Frontend extends \Controller
 			if ($objRootPage === null)
 			{
 				header('HTTP/1.1 404 Not Found');
-				static::log('No root page found (host "' . \Environment::get('host') . '", languages "'.implode(', ', \Environment::get('httpAcceptLanguage')).'")', 'Frontend getRootPageFromUrl()', TL_ERROR);
+				\System::log('No root page found (host "' . \Environment::get('host') . '", languages "'.implode(', ', \Environment::get('httpAcceptLanguage')).'")', 'Frontend getRootPageFromUrl()', TL_ERROR);
 				die('No root page found');
 			}
 
