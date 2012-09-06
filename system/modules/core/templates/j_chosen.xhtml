@@ -1,0 +1,23 @@
+<?php
+
+// CSS files
+$objCombiner = new Combiner();
+$objCombiner->add('plugins/jQuery/chosen/chosen.css');
+$GLOBALS['TL_CSS'][] = $objCombiner->getCombinedFile();
+
+// JavaScript files
+$objCombiner = new Combiner();
+$objCombiner->add('plugins/jQuery/chosen/chosen.jquery.min.js');
+
+?>
+
+<script type="text/javascript" src="<?php echo $objCombiner->getCombinedFile(); ?>"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+(function($) {
+  $(document).ready(function() {
+    $('select.tl_chosen').chosen();
+  });
+})(jQuery);
+/* ]]> */
+</script>
