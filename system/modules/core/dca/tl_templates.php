@@ -20,7 +20,7 @@ $this->loadLanguageFile('tl_files');
 /**
  * Overwrite some settings
  */
-if (Input::get('do') == 'templates')
+if (Input::get('do') == 'tpl_editor')
 {
 	$GLOBALS['TL_CONFIG']['uploadPath'] = 'templates';
 	$GLOBALS['TL_CONFIG']['editableFiles'] = $GLOBALS['TL_CONFIG']['templateFiles'];
