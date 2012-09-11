@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (C) 2005-2012 Leo Feyer
- * 
+ *
  * @package Core
  * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -161,7 +161,7 @@ class BackendUser extends \User
 		// Redirect to the last page visited upon login
 		if (\Environment::get('script') == 'contao/main.php' || \Environment::get('script') == 'contao/preview.php')
 		{
-			$strRedirect .= '?referer=' . base64_encode(\Environment::get('request'));
+			$strRedirect .= 'index.php?referer=' . base64_encode(\Environment::get('request'));
 		}
 
 		// Force JavaScript redirect on Ajax requests (IE requires an absolute link)
