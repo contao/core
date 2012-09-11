@@ -396,7 +396,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'mooType' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['mooType'],
-			'default'                 => 'mooSingle',
+			'default'                 => 'mooStart',
 			'exclude'                 => true,
 			'inputType'               => 'radio',
 			'options'                 => array('mooStart', 'mooStop', 'mooSingle'),

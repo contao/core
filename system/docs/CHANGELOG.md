@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Do not add invalid "float" commands to images (see #4758).
+
+### Fixed
 Fixed the CHANGELOG parser in the back end (see #4190).
 
 ### Fixed
