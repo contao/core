@@ -123,7 +123,7 @@ class ModuleAutoload extends \BackendModule
 						$strBuffer = fread($fh, 1200);
 						fclose($fh);
 
-						if (strpos($strBuffer, 'namespace') === false)
+						if (!preg_match('/namespace ([^; ]+);/s', $strBuffer))
 						{
 							$strNamespace = '';
 						}
