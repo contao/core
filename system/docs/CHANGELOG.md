@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Fixed the CHANGELOG parser in the back end (see #4190).
+
+### Fixed
 Fixed the SyntaxHighlighter "html-script" option (see #4748).
 
 ### Fixed
