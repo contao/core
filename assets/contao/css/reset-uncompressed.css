@@ -11,7 +11,7 @@
 /**
  * Reset the margin and padding of the block elements
  */
-body,div,h1,h2,h3,h4,h5,h6,p,blockquote,pre,code,ol,ul,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea {
+body,div,h1,h2,h3,h4,h5,h6,p,blockquote,pre,code,ol,ul,li,dl,dt,dd,figure,table,th,td,form,fieldset,legend,input,textarea {
 	margin:0;
 	padding:0;
 }
