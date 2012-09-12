@@ -802,31 +802,25 @@ abstract class Widget extends \Controller
 
 				// Check whether the current value is a valid date format
 				case 'date':
-					$objDate = new \Date();
-
-					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'$~i', $varInput))
+					if (!\Validator::isDate($varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['dateFormat'])));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], \Date::getInputFormat($GLOBALS['TL_CONFIG']['dateFormat'])));
 					}
 					break;
 
 				// Check whether the current value is a valid time format
 				case 'time':
-					$objDate = new \Date();
-
-					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'$~i', $varInput))
+					if (!\Validator::isTime($varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['timeFormat'])));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], \Date::getInputFormat($GLOBALS['TL_CONFIG']['timeFormat'])));
 					}
 					break;
 
 				// Check whether the current value is a valid date and time format
 				case 'datim':
-					$objDate = new \Date();
-
-					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varInput))
+					if (!\Validator::isDatim($varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['datimFormat'])));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], \Date::getInputFormat($GLOBALS['TL_CONFIG']['datimFormat'])));
 					}
 					break;
 

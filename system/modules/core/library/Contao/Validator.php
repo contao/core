@@ -105,8 +105,7 @@ class Validator
 	 */
 	public static function isDate($varValue)
 	{
-		$objDate = new \Date();
-		return preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'$~i', $varValue);
+		return preg_match('~^'. \Date::getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'$~i', $varValue);
 	}
 
 
@@ -119,8 +118,7 @@ class Validator
 	 */
 	public static function isTime($varValue)
 	{
-		$objDate = new \Date();
-		return preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'$~i', $varValue);
+		return preg_match('~^'. \Date::getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'$~i', $varValue);
 	}
 
 
@@ -133,8 +131,7 @@ class Validator
 	 */
 	public static function isDatim($varValue)
 	{
-		$objDate = new \Date();
-		return preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varValue);
+		return preg_match('~^'. \Date::getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varValue);
 	}
 
 
