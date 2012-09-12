@@ -38,7 +38,7 @@ abstract class Database
 	 * @var array
 	 */
 	protected static $arrInstances = array();
-	
+
 	/**
 	 * Connection configuration
 	 * @var array
@@ -91,6 +91,10 @@ abstract class Database
 		if (!$this->arrConfig['dbPconnect'])
 		{
 			$this->disconnect();
+
+			// Unset the reference (see #4772)
+			$strKey = md5(implode('', $this->arrConfig));
+			unset(static::$arrInstances[$strKey]);
 		}
 	}
 
