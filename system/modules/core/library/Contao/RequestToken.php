@@ -155,7 +155,7 @@ class RequestToken extends \System
 	 */
 	public static function getInstance()
 	{
-		if (!is_object(static::$objInstance))
+		if (static::$objInstance === null)
 		{
 			static::$objInstance = new static();
 		}

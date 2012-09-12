@@ -121,7 +121,7 @@ class Email extends \System
 		$this->strCharset = $GLOBALS['TL_CONFIG']['characterSet'];
 
 		// Instantiate mailer
-		if (!is_object(self::$objMailer))
+		if (self::$objMailer === null)
 		{
 			if (!$GLOBALS['TL_CONFIG']['useSMTP'])
 			{
