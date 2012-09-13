@@ -758,6 +758,11 @@ abstract class System
 	 */
 	public static function getModelClassFromTable($strTable)
 	{
+		if (isset($GLOBALS['TL_DCA'][$strTable]['config']['model']))
+		{
+			return $GLOBALS['TL_DCA'][$strTable]['config']['model'];
+		}
+
 		$arrChunks = explode('_', $strTable);
 
 		if ($arrChunks[0] == 'tl')
