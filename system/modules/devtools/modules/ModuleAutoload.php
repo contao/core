@@ -94,7 +94,7 @@ class ModuleAutoload extends \BackendModule
 						$objIni->copyTo('system/modules/' . $strModule . '/config/autoload.ini');
 					}
 
-					$arrConfig = array_merge($arrConfig, parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini'));
+					$arrConfig = array_merge($arrConfig, parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini', true));
 
 					// Recursively scan all subfolders
 					$objFiles = new \RecursiveIteratorIterator(
@@ -118,6 +118,20 @@ class ModuleAutoload extends \BackendModule
 					// Scan for classes
 					foreach ($arrFiles as $strFile)
 					{
+						// By default use global config
+						$arrCurrentConfig = $arrConfig;
+
+						// Search for path based config
+						foreach ($arrConfig as $strPattern => $arrPathConfig)
+						{
+							if (is_array($arrPathConfig) && fnmatch($strPattern, $strFile))
+							{
+								// do merging here with global config, to inherit global config
+								$arrCurrentConfig = array_merge($arrConfig, $arrPathConfig);
+								break;
+							}
+						}
+
 						// Read the first 1200 characters of the file (should include the namespace tag)
 						$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
 						$strBuffer = fread($fh, 1200);
@@ -132,33 +146,39 @@ class ModuleAutoload extends \BackendModule
 							$strNamespace = preg_replace('/^.*namespace ([^; ]+);.*$/s', '$1', $strBuffer);
 							list($strFirst, $strRest) = explode('\\', $strNamespace, 2);
 
-							if ($strNamespace != 'Contao')
+							if ($arrCurrentConfig['register_namespaces'])
 							{
-								// Register only the first chunk as namespace
-								if (strpos($strNamespace, '\\') !== false)
+								if ($strNamespace != 'Contao')
 								{
-									$arrNamespaces[] = substr($strNamespace, 0, strpos($strNamespace, '\\'));
+									// Register only the first chunk as namespace
+									if (strpos($strNamespace, '\\') !== false)
+									{
+										$arrNamespaces[] = substr($strNamespace, 0, strpos($strNamespace, '\\'));
+									}
+									else
+									{
+										$arrNamespaces[] = $strNamespace;
+									}
 								}
-								else
-								{
-									$arrNamespaces[] = $strNamespace;
-								}
-							}
 
-							// Add the ide_compat information
-							$arrCompat[$strModule][$strRest][] = array
-							(
-								'namespace' => $strFirst,
-								'class'     => basename($strFile, '.php'),
-								'abstract'  => preg_match('/^.*abstract class [^;]+.*$/s', $strBuffer)
-							);
+								// Add the ide_compat information
+								$arrCompat[$strModule][$strRest][] = array
+								(
+									'namespace' => $strFirst,
+									'class'	 => basename($strFile, '.php'),
+									'abstract'  => preg_match('/^.*abstract class [^;]+.*$/s', $strBuffer)
+								);
+							}
 
 							$strNamespace .=  '\\';
 						}
 
-						$strKey = $strNamespace . basename($strFile, '.php');
-						$arrClassLoader[$strKey] = 'system/modules/' . $strModule . '/' . $strFile;
-						$intClassWidth = max(strlen($strKey), $intClassWidth);
+						if ($arrCurrentConfig['register_classes'])
+						{
+							$strKey = $strNamespace . basename($strFile, '.php');
+							$arrClassLoader[$strKey] = 'system/modules/' . $strModule . '/' . $strFile;
+							$intClassWidth = max(strlen($strKey), $intClassWidth);
+						}
 					}
 
 					$intTplWidth = 0;
@@ -207,13 +227,11 @@ EOT
 					);
 
 					// Namespaces
-					if ($arrConfig['register_namespaces'])
-					{
-						$arrNamespaces = array_unique($arrNamespaces);
+					$arrNamespaces = array_unique($arrNamespaces);
 
-						if (!empty($arrNamespaces))
-						{
-							$objFile->append(
+					if (!empty($arrNamespaces))
+					{
+						$objFile->append(
 <<<EOT
 
 
@@ -223,19 +241,18 @@ EOT
 ClassLoader::addNamespaces(array
 (
 EOT
-							);
+						);
 
-							foreach ($arrNamespaces as $strNamespace)
-							{
-								$objFile->append("\t'" . $strNamespace . "',");
-							}
-
-							$objFile->append('));');
+						foreach ($arrNamespaces as $strNamespace)
+						{
+							$objFile->append("\t'" . $strNamespace . "',");
 						}
+
+						$objFile->append('));');
 					}
 
 					// Classes
-					if ($arrConfig['register_classes'] && !empty($arrClassLoader))
+					if (!empty($arrClassLoader))
 					{
 						$objFile->append(
 <<<EOT
