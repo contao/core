@@ -127,6 +127,11 @@ class ModuleAutoload extends \BackendModule
 						}
 						fclose($fh);
 
+						// The file does not contains a class
+						if (strpos($strBuffer, 'class ' . basename($strFile, '.php')) === false) {
+							continue;
+						}
+
 						// By default use global config
 						$arrCurrentConfig = $arrConfig;
 
