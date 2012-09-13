@@ -118,6 +118,15 @@ class ModuleAutoload extends \BackendModule
 					// Scan for classes
 					foreach ($arrFiles as $strFile)
 					{
+						// Read as long as needed to get namespace and class declaration
+						$strBuffer = '';
+						$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
+						while (!feof($fh) && (strpos($strBuffer, 'class ' . basename($strFile, '.php')) === false))
+						{
+							$strBuffer .= fread($fh, 1200);
+						}
+						fclose($fh);
+
 						// By default use global config
 						$arrCurrentConfig = $arrConfig;
 
@@ -131,11 +140,6 @@ class ModuleAutoload extends \BackendModule
 								break;
 							}
 						}
-
-						// Read the first 1200 characters of the file (should include the namespace tag)
-						$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
-						$strBuffer = fread($fh, 1200);
-						fclose($fh);
 
 						if (!preg_match('/namespace ([^; ]+);/s', $strBuffer))
 						{
@@ -179,6 +183,9 @@ class ModuleAutoload extends \BackendModule
 							$arrClassLoader[$strKey] = 'system/modules/' . $strModule . '/' . $strFile;
 							$intClassWidth = max(strlen($strKey), $intClassWidth);
 						}
+
+						// Memory cleanup
+						unset($strBuffer);
 					}
 
 					$intTplWidth = 0;
