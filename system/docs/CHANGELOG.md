@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Readded the news list "skip items" feature (see #4783).
+
+### Fixed
 Use the `Validator` class to validate date and time formats (see #4762).
 
 ### Fixed
