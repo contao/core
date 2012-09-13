@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Comments can now be sorted descending again (see #4782).
+
+### Fixed
 Readded the news list "skip items" feature (see #4783).
 
 ### Fixed
