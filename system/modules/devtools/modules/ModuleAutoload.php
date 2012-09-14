@@ -118,17 +118,19 @@ class ModuleAutoload extends \BackendModule
 					// Scan for classes
 					foreach ($arrFiles as $strFile)
 					{
+						$strClInRegexp = '#(class|interface) ' . preg_quote(basename($strFile, '.php')) . '#S';
+
 						// Read as long as needed to get namespace and class declaration
 						$strBuffer = '';
 						$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
-						while (!feof($fh) && (strpos($strBuffer, 'class ' . basename($strFile, '.php')) === false))
+						while (!feof($fh) && !preg_match($strClInRegexp, $strBuffer))
 						{
 							$strBuffer .= fread($fh, 1200);
 						}
 						fclose($fh);
 
 						// The file does not contains a class
-						if (strpos($strBuffer, 'class ' . basename($strFile, '.php')) === false) {
+						if (!preg_match($strClInRegexp, $strBuffer)) {
 							continue;
 						}
 
