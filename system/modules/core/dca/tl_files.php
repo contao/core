@@ -441,7 +441,7 @@ class tl_files extends Backend
 		$varValue = utf8_romanize($varValue);
 		$varValue = str_replace('"', '', $varValue);
 
-		if (preg_match('/\.$/', $varValue))
+		if (strpos($varValue, '/') !== false || preg_match('/\.$/', $varValue))
 		{
 			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}
