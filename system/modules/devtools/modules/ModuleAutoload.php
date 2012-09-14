@@ -376,7 +376,7 @@ EOT
 
 						foreach ($arrClasses as $arrClass)
 						{
-							$objFile->append("\t" . ($arrClass['abstract'] ? 'abstract ' : '') . 'class ' . $arrClass['class'] . ' extends ' . $arrClass['namespace'] . '\\' . ($strNamespace ? $strNamespace . '\\' : '') . $arrClass['class'] . ' {}');
+							$objFile->append("\t" . ($arrClass['abstract'] ? 'abstract ' : '') . 'class ' . $arrClass['class'] . ' extends \\' . $arrClass['namespace'] . '\\' . ($strNamespace ? $strNamespace . '\\' : '') . $arrClass['class'] . ' {}');
 						}
 
 						$objFile->append('}');
