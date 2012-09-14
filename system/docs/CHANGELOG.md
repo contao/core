@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Index the content of the download(s) element (see #4755).
+
+### Fixed
 The mediabox plugin did not play Vimeo videos (see #4770).
 
 ### Fixed
