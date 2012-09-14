@@ -5,6 +5,9 @@ Version 2.11.6 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+The mediabox plugin did not play Vimeo videos (see #4770).
+
+### Fixed
 Correctly align stylect menus in the form generator in the back end (see #4557).
 
 ### Fixed
