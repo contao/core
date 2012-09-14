@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Skip news archives and calendars without a jumpTo page when creating RSS feeds
+(see #4784).
+
+### Fixed
 Index the content of the download(s) element (see #4755).
 
 ### Fixed

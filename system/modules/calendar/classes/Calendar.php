@@ -127,6 +127,12 @@ class Calendar extends \Frontend
 			{
 				$jumpTo = $objArticle->getRelated('pid')->jumpTo;
 
+				// No jumpTo page set (see #4784)
+				if (!$jumpTo)
+				{
+					continue;
+				}
+
 				// Get the jumpTo URL
 				if (!isset($arrUrls[$jumpTo]))
 				{
