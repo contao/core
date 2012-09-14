@@ -1875,6 +1875,15 @@ abstract class Controller extends \System
 	 */
 	public static function replaceDynamicScriptTags($strBuffer)
 	{
+		if (isset($GLOBALS['TL_HOOKS']['replaceDynamicScriptTags']) && is_array($GLOBALS['TL_HOOKS']['replaceDynamicScriptTags']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['replaceDynamicScriptTags'] as $callback)
+			{
+				$object = (in_array('getInstance', get_class_methods($callback[0]))) ? call_user_func(array($callback[0], 'getInstance')) : new $callback[0]();
+				$strBuffer = $object->$callback[1]($strBuffer);
+			}
+		}
+
 		global $objPage;
 
 		$arrReplace = array();
