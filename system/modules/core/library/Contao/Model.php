@@ -430,7 +430,7 @@ abstract class Model extends \System
 
 		$arrOptions = array_merge($arrOptions, array
 		(
-			'column' => static::$strPk . ' IN (' . implode(',', $arrColumns) . ')',
+			'column' => array(static::$strTable . '.' . static::$strPk . ' IN (' . implode(',', $arrColumns) . ')'),
 			'value'  => $arrPks,
 			'return' => 'Collection'
 		));
