@@ -1879,7 +1879,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['replaceDynamicScriptTags'] as $callback)
 			{
-				$object = (in_array('getInstance', get_class_methods($callback[0]))) ? call_user_func(array($callback[0], 'getInstance')) : new $callback[0]();
+				$object = \System::importStatic($callback[0]);
 				$strBuffer = $object->$callback[1]($strBuffer);
 			}
 		}
