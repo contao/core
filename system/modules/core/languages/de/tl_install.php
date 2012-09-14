@@ -82,6 +82,7 @@ $GLOBALS['TL_LANG']['tl_install']['ftpSave']        = 'FTP-Einstellungen speiche
 $GLOBALS['TL_LANG']['tl_install']['ftpHostError']   = 'Keine Verbindung zum FTP-Server %s möglich';
 $GLOBALS['TL_LANG']['tl_install']['ftpUserError']   = 'Anmeldung als "%s" fehlgeschlagen';
 $GLOBALS['TL_LANG']['tl_install']['ftpPathError']   = 'Das Contao-Verzeichnis %s wurde nicht gefunden';
+$GLOBALS['TL_LANG']['tl_install']['filesWarning']   = 'Das konfigurierte Datei-Verzeichnis existiert nicht. Führen Sie die Umbenennung von <em>tl_files</em> in <em>files</em> keinesfalls vor dem Version 3-Update durch!';
 
 
 /**

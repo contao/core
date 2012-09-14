@@ -845,6 +845,12 @@ class InstallTool extends Backend
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['uploadPath']", 'tl_files');
 		}
 
+		// Show a warning if the user has renamed the tl_files directory already (see #4626)
+		if (!is_dir(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath']))
+		{
+			$this->Template->filesWarning = $GLOBALS['TL_LANG']['tl_install']['filesWarning'];
+		}
+
 		// Step 1: database structure
 		if (!$this->Database->tableExists('tl_files'))
 		{

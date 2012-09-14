@@ -82,6 +82,7 @@ $GLOBALS['TL_LANG']['tl_install']['ftpSave']        = 'Save FTP settings';
 $GLOBALS['TL_LANG']['tl_install']['ftpHostError']   = 'Could not connect to FTP server %s';
 $GLOBALS['TL_LANG']['tl_install']['ftpUserError']   = 'Could not login as "%s"';
 $GLOBALS['TL_LANG']['tl_install']['ftpPathError']   = 'Could not locate Contao directory %s';
+$GLOBALS['TL_LANG']['tl_install']['filesWarning']   = 'The configured files directory does not exist. Make sure not to rename <em>tl_files</em> to <em>files</em> before the version 3 update!';
 
 
 /**
