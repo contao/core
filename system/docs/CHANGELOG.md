@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+The mediabox plugin did not play Vimeo videos (see #4770).
+
+### Fixed
 Comments can now be sorted descending again (see #4782).
 
 ### Fixed
