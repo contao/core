@@ -27,3 +27,5 @@ system/config/localconfig.php
 system/cron/cron.txt
 system/logs/*
 system/tmp/*
+system/scripts/*
+system/html/*
