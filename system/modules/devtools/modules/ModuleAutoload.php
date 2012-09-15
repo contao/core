@@ -165,7 +165,26 @@ class ModuleAutoload extends \BackendModule
 					// Scan for templates
 					if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
 					{
-						foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates') as $strFile)
+						$strTemplatesFolder = 'system/modules/' . $strModule . '/templates';
+						$arrTemplates = array();
+
+						foreach (scan(TL_ROOT . '/' . $strTemplatesFolder) as $strFile)
+						{
+							if (is_dir(TL_ROOT . '/' . $strTemplatesFolder . '/' . $strFile))
+							{
+								$strTemplatesSubFolder = $strTemplatesFolder . '/' . $strFile;
+
+								foreach (scan(TL_ROOT . '/' . $strTemplatesSubFolder) as $strFile)
+								{
+									$arrTemplates[$strFile] = $strTemplatesSubFolder;
+								}
+								continue;
+							}
+
+							$arrTemplates[$strFile] = $strTemplatesFolder;
+						}
+
+						foreach ($arrTemplates as $strFile=>$strFolder)
 						{
 							if (strrchr($strFile, '.') != '.html5' && strrchr($strFile, '.') != '.xhtml')
 							{
@@ -173,9 +192,11 @@ class ModuleAutoload extends \BackendModule
 							}
 
 							$strKey = basename($strFile, strrchr($strFile, '.'));
-							$arrTplLoader[$strKey] = 'system/modules/' . $strModule . '/templates';
+							$arrTplLoader[$strKey] = $strFolder;
 							$intTplWidth = max(strlen($strKey), $intTplWidth);
 						}
+
+						unset($arrTemplates, $strTemplatesFolder, $strTemplatesSubFolder);
 					}
 
 					// Neither classes nor templates found
