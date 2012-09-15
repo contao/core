@@ -322,7 +322,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'search'                  => true,
-			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255),
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255),
 			'save_callback' => array
 			(
 				array('tl_page', 'checkDns')
