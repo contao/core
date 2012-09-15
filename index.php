@@ -202,7 +202,8 @@ class Index extends Frontend
 		if ($objPage->domain != '')
 		{
 			// Load an error 404 page object
-			if ($objPage->domain != Environment::get('host'))
+                        $arrDomains = explode(' ', $objPage->domain);
+			if (!in_array(Environment::get('host'), $arrDomains))
 			{
 				$this->User->authenticate();
 				$objHandler = new $GLOBALS['TL_PTY']['error_404']();

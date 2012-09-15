@@ -69,10 +69,11 @@ class PageModel extends \Model
 		$t = static::$strTable;
 		$objDatabase = \Database::getInstance();
 		$arrOptions = array();
+                $strHost = "%$strHost%";
 
 		if (is_array($varLanguage))
 		{
-			$arrColumns = array("$t.type='root' AND ($t.dns=? OR $t.dns='')");
+			$arrColumns = array("$t.type='root' AND ($t.dns LIKE ? OR $t.dns='')");
 
 			if (!empty($varLanguage))
 			{
@@ -90,8 +91,8 @@ class PageModel extends \Model
 				$time = time();
 				$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 			}
-
-			return static::findOneBy($arrColumns, $strHost, $arrOptions);
+                        
+                        return static::findOneBy($arrColumns, $strHost, $arrOptions);
 		}
 		else
 		{
