@@ -130,9 +130,12 @@ class ModuleAutoload extends \BackendModule
 						fclose($fh);
 
 						// The file does not contains a class
-						if (!preg_match($strClInRegexp, $strBuffer)) {
+						if (!preg_match($strClInRegexp, $strBuffer, $arrMatch)) {
 							continue;
 						}
+
+						// class or interface
+						$strType = $arrMatch[1];
 
 						// By default use global config
 						$arrCurrentConfig = $arrConfig;
@@ -176,7 +179,7 @@ class ModuleAutoload extends \BackendModule
 								$arrCompat[$strModule][$strRest][] = array
 								(
 									'namespace' => $strFirst,
-									'class'	 => basename($strFile, '.php'),
+									$strType    => basename($strFile, '.php'),
 									'abstract'  => preg_match('/^.*abstract class [^;]+.*$/s', $strBuffer)
 								);
 							}
@@ -376,7 +379,12 @@ EOT
 
 						foreach ($arrClasses as $arrClass)
 						{
-							$objFile->append("\t" . ($arrClass['abstract'] ? 'abstract ' : '') . 'class ' . $arrClass['class'] . ' extends \\' . $arrClass['namespace'] . '\\' . ($strNamespace ? $strNamespace . '\\' : '') . $arrClass['class'] . ' {}');
+							if (isset($arrClass['class'])) {
+								$objFile->append("\t" . ($arrClass['abstract'] ? 'abstract ' : '') . 'class ' . $arrClass['class'] . ' extends \\' . $arrClass['namespace'] . '\\' . ($strNamespace ? $strNamespace . '\\' : '') . $arrClass['class'] . ' {}');
+							}
+							else if (isset($arrClass['interface'])) {
+								$objFile->append("\t" . 'interface ' . $arrClass['interface'] . ' extends \\' . $arrClass['namespace'] . '\\' . ($strNamespace ? $strNamespace . '\\' : '') . $arrClass['interface'] . ' {}');
+							}
 						}
 
 						$objFile->append('}');
