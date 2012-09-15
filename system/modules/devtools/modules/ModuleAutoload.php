@@ -178,7 +178,7 @@ class ModuleAutoload extends \BackendModule
 							if ($objFile->isFile() && ($strExtension == 'html5' || $strExtension == 'xhtml'))
 							{
 								$strKey = basename($strFile, strrchr($strFile, '.'));
-								$arrTplLoader[$strKey] = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
+								$arrTplLoader[$strKey] = str_replace(array(TL_ROOT . '/', '/' . $strFile), '', $objFile->getPathname());
 								$intTplWidth = max(strlen($strKey), $intTplWidth);
 							}
 						}
