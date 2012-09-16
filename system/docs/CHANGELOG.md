@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly handle units when importing style sheets (see #4721).
+
+### Fixed
 Manually merge the legacy `database.sql` definitions (see #4766).
 
 ### Fixed

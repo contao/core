@@ -1410,7 +1410,7 @@ class StyleSheets extends \Backend
 								$varValue_2 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[1]);
 							}
 							// Move to custom section if there are different units
-							if (count(array_filter(array_unique($arrUnits))) > 0)
+							if (count(array_filter(array_unique($arrUnits))) > 1)
 							{
 								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
@@ -1464,7 +1464,7 @@ class StyleSheets extends \Backend
 								$varValue_3 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[2]);
 							}
 							// Move to custom section if there are different units
-							if (count(array_filter(array_unique($arrUnits))) > 0)
+							if (count(array_filter(array_unique($arrUnits))) > 1)
 							{
 								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
@@ -1527,7 +1527,7 @@ class StyleSheets extends \Backend
 								$varValue_4 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[3]);
 							}
 							// Move to custom section if there are different units
-							if (count(array_filter(array_unique($arrUnits))) > 0)
+							if (count(array_filter(array_unique($arrUnits))) > 1)
 							{
 								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
