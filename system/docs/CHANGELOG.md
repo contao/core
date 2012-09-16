@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Manually merge the legacy `database.sql` definitions (see #4766).
+
+### Fixed
 Skip news archives and calendars without a jumpTo page when creating RSS feeds
 (see #4784).
 

@@ -103,7 +103,30 @@ class Installer extends \Controller
 		$return = array();
 
 		$sql_current = $this->getFromDb();
-		$sql_target = $this->getFromDca() + $this->getFromFile();
+		$sql_target = $this->getFromDca();
+		$sql_legacy = $this->getFromFile();
+
+		// Manually merge the legacy definitions (see #4766)
+		if (!empty($sql_legacy))
+		{
+			foreach ($sql_legacy as $table=>$categories)
+			{
+				foreach ($categories as $category=>$fields)
+				{
+					if (is_array($fields))
+					{
+						foreach ($fields as $name=>$sql)
+						{
+							$sql_target[$table][$category][$name] = $sql;
+						}
+					}
+					else
+					{
+						$sql_target[$table][$category] = $fields;
+					}
+				}
+			}
+		}
 
 		// Create tables
 		foreach (array_diff(array_keys($sql_target), array_keys($sql_current)) as $table)
