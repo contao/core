@@ -5,6 +5,9 @@ Version 2.11.6 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly handle units when importing style sheets (see #4721).
+
+### Fixed
 The mediabox plugin did not play Vimeo videos (see #4770).
 
 ### Fixed
