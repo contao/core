@@ -171,8 +171,7 @@ class String
 
 						for ($j=count($arrOpenTags)-1; $j>=0; $j--)
 						{
-							$strOpenTag = str_replace('<', '</', $arrOpenTags[$j]);
-							$strOpenTag = substr($strOpenTag, 0, strpos($strOpenTag, ' ')) . '>';
+							$strOpenTag = trim(str_replace('<', '</', $arrOpenTags[$j]));
 
 							if ($strOpenTag == $strTag)
 							{

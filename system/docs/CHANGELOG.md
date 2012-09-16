@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly handle open tags in `String::substrHtml()` (see #4773).
+
+### Fixed
 Correctly handle units when importing style sheets (see #4721).
 
 ### Fixed
