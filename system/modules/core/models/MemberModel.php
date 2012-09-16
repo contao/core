@@ -56,4 +56,17 @@ class MemberModel extends \Model
 
 		return static::findOneBy($arrColumns, array($strEmail, $strUsername));
 	}
+
+
+	/**
+	 * Find all users having a specific group
+	 *
+	 * @param int $groupID a tl_member_group.id
+	 * @return \Model\Collection|null A collection of models or null if there are no members having the group
+	 */
+	public static function finyByGroup($groupID)
+	{
+		$t = static::$strTable;
+		return static::findBy(array("$t.groups LIKE ?"), '%"'.$groupID.'"%');
+	}
 }

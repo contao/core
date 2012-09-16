@@ -33,4 +33,16 @@ class UserModel extends \Model
 	 */
 	protected static $strTable = 'tl_user';
 
+
+	/**
+	 * Find all users having a specific group
+	 *
+	 * @param int $groupID a tl_user_group.id
+	 * @return \Model\Collection|null A collection of models or null if there are no members having the group
+	 */
+	public static function finyByGroup($groupID)
+	{
+		$t = static::$strTable;
+		return static::findBy(array("$t.groups LIKE ?"), '%"'.$groupID.'"%');
+	}
 }
