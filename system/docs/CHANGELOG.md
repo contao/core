@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Only limit `getTemplateGroup()` to a theme in the articles module (see #4808).
+
+### Fixed
 Decode Punycode domains when used via insert tag (see #4753).
 
 ### Fixed

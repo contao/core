@@ -1196,28 +1196,32 @@ class tl_content extends Backend
 	 */
 	public function getGalleryTemplates(DataContainer $dc)
 	{
-		$intPid = $dc->activeRecord->pid;
-
-		// Override multiple
-		if (Input::get('act') == 'overrideAll')
+		// Only look for a theme in the articles module (see #4808)
+		if (Input::get('do') == 'article')
 		{
-			$intPid = Input::get('id');
-		}
+			$intPid = $dc->activeRecord->pid;
 
-		// Get the page ID
-		$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
-									 ->limit(1)
-									 ->execute($intPid);
+			// Override multiple
+			if (Input::get('act') == 'overrideAll')
+			{
+				$intPid = Input::get('id');
+			}
 
-		// Inherit the page settings
-		$objPage = $this->getPageDetails($objArticle->pid);
+			// Get the page ID
+			$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
+										 ->limit(1)
+										 ->execute($intPid);
 
-		// Get the theme ID
-		$objLayout = LayoutModel::findByPk($objPage->layout);
+			// Inherit the page settings
+			$objPage = $this->getPageDetails($objArticle->pid);
 
-		if ($objLayout === null)
-		{
-			return array();
+			// Get the theme ID
+			$objLayout = LayoutModel::findByPk($objPage->layout);
+
+			if ($objLayout === null)
+			{
+				return array();
+			}
 		}
 
 		// Return all gallery templates
@@ -1232,28 +1236,32 @@ class tl_content extends Backend
 	 */
 	public function getPlayerTemplates(DataContainer $dc)
 	{
-		$intPid = $dc->activeRecord->pid;
-
-		// Override multiple
-		if (Input::get('act') == 'overrideAll')
+		// Only look for a theme in the articles module (see #4808)
+		if (Input::get('do') == 'article')
 		{
-			$intPid = Input::get('id');
-		}
+			$intPid = $dc->activeRecord->pid;
 
-		// Get the page ID
-		$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
-									 ->limit(1)
-									 ->execute($intPid);
+			// Override multiple
+			if (Input::get('act') == 'overrideAll')
+			{
+				$intPid = Input::get('id');
+			}
 
-		// Inherit the page settings
-		$objPage = $this->getPageDetails($objArticle->pid);
+			// Get the page ID
+			$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
+										 ->limit(1)
+										 ->execute($intPid);
 
-		// Get the theme ID
-		$objLayout = LayoutModel::findByPk($objPage->layout);
+			// Inherit the page settings
+			$objPage = $this->getPageDetails($objArticle->pid);
 
-		if ($objLayout === null)
-		{
-			return array();
+			// Get the theme ID
+			$objLayout = LayoutModel::findByPk($objPage->layout);
+
+			if ($objLayout === null)
+			{
+				return array();
+			}
 		}
 
 		// Return all gallery templates
