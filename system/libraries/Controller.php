@@ -2175,19 +2175,19 @@ abstract class Controller extends System
 							break;
 
 						case 'host':
-							$arrCache[$strTag] = $this->Environment->host;
+							$arrCache[$strTag] = $this->idnaDecode($this->Environment->host);
 							break;
 
 						case 'http_host':
-							$arrCache[$strTag] = $this->Environment->httpHost;
+							$arrCache[$strTag] = $this->idnaDecode($this->Environment->httpHost);
 							break;
 
 						case 'url':
-							$arrCache[$strTag] = $this->Environment->url;
+							$arrCache[$strTag] = $this->idnaDecode($this->Environment->url);
 							break;
 
 						case 'path':
-							$arrCache[$strTag] = $this->Environment->base;
+							$arrCache[$strTag] = $this->idnaDecode($this->Environment->base);
 							break;
 
 						case 'request':
