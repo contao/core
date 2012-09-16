@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Decode Punycode domains when used via insert tag (see #4753).
+
+### Fixed
 Correctly handle open tags in `String::substrHtml()` (see #4773).
 
 ### Fixed

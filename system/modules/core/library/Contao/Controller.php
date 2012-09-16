@@ -1601,19 +1601,19 @@ abstract class Controller extends \System
 					switch ($elements[1])
 					{
 						case 'host':
-							$arrCache[$strTag] = \Environment::get('host');
+							$arrCache[$strTag] = \Idna::decode(\Environment::get('host'));
 							break;
 
 						case 'http_host':
-							$arrCache[$strTag] = \Environment::get('httpHost');
+							$arrCache[$strTag] = \Idna::decode(\Environment::get('httpHost'));
 							break;
 
 						case 'url':
-							$arrCache[$strTag] = \Environment::get('url');
+							$arrCache[$strTag] = \Idna::decode(\Environment::get('url'));
 							break;
 
 						case 'path':
-							$arrCache[$strTag] = \Environment::get('base');
+							$arrCache[$strTag] = \Idna::decode(\Environment::get('base'));
 							break;
 
 						case 'request':
