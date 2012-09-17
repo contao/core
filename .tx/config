@@ -1,0 +1,295 @@
+[main]
+host = https://www.transifex.com
+type = ANDROID
+
+[contao.calendar-default]
+source_file = system/transifex/source/calendar/default.xml
+source_lang = en
+
+[contao.calendar-modules]
+source_file = system/transifex/source/calendar/modules.xml
+source_lang = en
+
+[contao.calendar-tl_calendar]
+source_file = system/transifex/source/calendar/tl_calendar.xml
+source_lang = en
+
+[contao.calendar-tl_calendar_events]
+source_file = system/transifex/source/calendar/tl_calendar_events.xml
+source_lang = en
+
+[contao.calendar-tl_calendar_feed]
+source_file = system/transifex/source/calendar/tl_calendar_feed.xml
+source_lang = en
+
+[contao.calendar-tl_module]
+source_file = system/transifex/source/calendar/tl_module.xml
+source_lang = en
+
+[contao.calendar-tl_user]
+source_file = system/transifex/source/calendar/tl_user.xml
+source_lang = en
+
+[contao.calendar-tl_user_group]
+source_file = system/transifex/source/calendar/tl_user_group.xml
+source_lang = en
+
+[contao.comments-default]
+source_file = system/transifex/source/comments/default.xml
+source_lang = en
+
+[contao.comments-modules]
+source_file = system/transifex/source/comments/modules.xml
+source_lang = en
+
+[contao.comments-tl_comments]
+source_file = system/transifex/source/comments/tl_comments.xml
+source_lang = en
+
+[contao.comments-tl_content]
+source_file = system/transifex/source/comments/tl_content.xml
+source_lang = en
+
+[contao.comments-tl_module]
+source_file = system/transifex/source/comments/tl_module.xml
+source_lang = en
+
+[contao.core-countries]
+source_file = system/transifex/source/core/countries.xml
+source_lang = en
+
+[contao.core-default]
+source_file = system/transifex/source/core/default.xml
+source_lang = en
+
+[contao.core-explain]
+source_file = system/transifex/source/core/explain.xml
+source_lang = en
+
+[contao.core-languages]
+source_file = system/transifex/source/core/languages.xml
+source_lang = en
+
+[contao.core-modules]
+source_file = system/transifex/source/core/modules.xml
+source_lang = en
+
+[contao.core-tl_article]
+source_file = system/transifex/source/core/tl_article.xml
+source_lang = en
+
+[contao.core-tl_content]
+source_file = system/transifex/source/core/tl_content.xml
+source_lang = en
+
+[contao.core-tl_files]
+source_file = system/transifex/source/core/tl_files.xml
+source_lang = en
+
+[contao.core-tl_form]
+source_file = system/transifex/source/core/tl_form.xml
+source_lang = en
+
+[contao.core-tl_form_field]
+source_file = system/transifex/source/core/tl_form_field.xml
+source_lang = en
+
+[contao.core-tl_install]
+source_file = system/transifex/source/core/tl_install.xml
+source_lang = en
+
+[contao.core-tl_layout]
+source_file = system/transifex/source/core/tl_layout.xml
+source_lang = en
+
+[contao.core-tl_log]
+source_file = system/transifex/source/core/tl_log.xml
+source_lang = en
+
+[contao.core-tl_maintenance]
+source_file = system/transifex/source/core/tl_maintenance.xml
+source_lang = en
+
+[contao.core-tl_member]
+source_file = system/transifex/source/core/tl_member.xml
+source_lang = en
+
+[contao.core-tl_member_group]
+source_file = system/transifex/source/core/tl_member_group.xml
+source_lang = en
+
+[contao.core-tl_module]
+source_file = system/transifex/source/core/tl_module.xml
+source_lang = en
+
+[contao.core-tl_page]
+source_file = system/transifex/source/core/tl_page.xml
+source_lang = en
+
+[contao.core-tl_settings]
+source_file = system/transifex/source/core/tl_settings.xml
+source_lang = en
+
+[contao.core-tl_style]
+source_file = system/transifex/source/core/tl_style.xml
+source_lang = en
+
+[contao.core-tl_style_sheet]
+source_file = system/transifex/source/core/tl_style_sheet.xml
+source_lang = en
+
+[contao.core-tl_templates]
+source_file = system/transifex/source/core/tl_templates.xml
+source_lang = en
+
+[contao.core-tl_theme]
+source_file = system/transifex/source/core/tl_theme.xml
+source_lang = en
+
+[contao.core-tl_undo]
+source_file = system/transifex/source/core/tl_undo.xml
+source_lang = en
+
+[contao.core-tl_user]
+source_file = system/transifex/source/core/tl_user.xml
+source_lang = en
+
+[contao.core-tl_user_group]
+source_file = system/transifex/source/core/tl_user_group.xml
+source_lang = en
+
+[contao.devtools-modules]
+source_file = system/transifex/source/devtools/modules.xml
+source_lang = en
+
+[contao.devtools-tl_autoload]
+source_file = system/transifex/source/devtools/tl_autoload.xml
+source_lang = en
+
+[contao.devtools-tl_extension]
+source_file = system/transifex/source/devtools/tl_extension.xml
+source_lang = en
+
+[contao.devtools-tl_labels]
+source_file = system/transifex/source/devtools/tl_labels.xml
+source_lang = en
+
+[contao.faq-default]
+source_file = system/transifex/source/faq/default.xml
+source_lang = en
+
+[contao.faq-modules]
+source_file = system/transifex/source/faq/modules.xml
+source_lang = en
+
+[contao.faq-tl_faq]
+source_file = system/transifex/source/faq/tl_faq.xml
+source_lang = en
+
+[contao.faq-tl_faq_category]
+source_file = system/transifex/source/faq/tl_faq_category.xml
+source_lang = en
+
+[contao.faq-tl_module]
+source_file = system/transifex/source/faq/tl_module.xml
+source_lang = en
+
+[contao.faq-tl_user]
+source_file = system/transifex/source/faq/tl_user.xml
+source_lang = en
+
+[contao.faq-tl_user_group]
+source_file = system/transifex/source/faq/tl_user_group.xml
+source_lang = en
+
+[contao.listing-modules]
+source_file = system/transifex/source/listing/modules.xml
+source_lang = en
+
+[contao.listing-tl_module]
+source_file = system/transifex/source/listing/tl_module.xml
+source_lang = en
+
+[contao.news-default]
+source_file = system/transifex/source/news/default.xml
+source_lang = en
+
+[contao.news-modules]
+source_file = system/transifex/source/news/modules.xml
+source_lang = en
+
+[contao.news-tl_module]
+source_file = system/transifex/source/news/tl_module.xml
+source_lang = en
+
+[contao.news-tl_news]
+source_file = system/transifex/source/news/tl_news.xml
+source_lang = en
+
+[contao.news-tl_news_archive]
+source_file = system/transifex/source/news/tl_news_archive.xml
+source_lang = en
+
+[contao.news-tl_news_comments]
+source_file = system/transifex/source/news/tl_news_comments.xml
+source_lang = en
+
+[contao.news-tl_news_feed]
+source_file = system/transifex/source/news/tl_news_feed.xml
+source_lang = en
+
+[contao.news-tl_user]
+source_file = system/transifex/source/news/tl_user.xml
+source_lang = en
+
+[contao.news-tl_user_group]
+source_file = system/transifex/source/news/tl_user_group.xml
+source_lang = en
+
+[contao.newsletter-default]
+source_file = system/transifex/source/newsletter/default.xml
+source_lang = en
+
+[contao.newsletter-modules]
+source_file = system/transifex/source/newsletter/modules.xml
+source_lang = en
+
+[contao.newsletter-tl_member]
+source_file = system/transifex/source/newsletter/tl_member.xml
+source_lang = en
+
+[contao.newsletter-tl_module]
+source_file = system/transifex/source/newsletter/tl_module.xml
+source_lang = en
+
+[contao.newsletter-tl_newsletter]
+source_file = system/transifex/source/newsletter/tl_newsletter.xml
+source_lang = en
+
+[contao.newsletter-tl_newsletter_channel]
+source_file = system/transifex/source/newsletter/tl_newsletter_channel.xml
+source_lang = en
+
+[contao.newsletter-tl_newsletter_recipients]
+source_file = system/transifex/source/newsletter/tl_newsletter_recipients.xml
+source_lang = en
+
+[contao.newsletter-tl_user]
+source_file = system/transifex/source/newsletter/tl_user.xml
+source_lang = en
+
+[contao.newsletter-tl_user_group]
+source_file = system/transifex/source/newsletter/tl_user_group.xml
+source_lang = en
+
+[contao.repository-modules]
+source_file = system/transifex/source/repository/modules.xml
+source_lang = en
+
+[contao.repository-tl_repository]
+source_file = system/transifex/source/repository/tl_repository.xml
+source_lang = en
+
+[contao.repository-tl_settings]
+source_file = system/transifex/source/repository/tl_settings.xml
+source_lang = en
