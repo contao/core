@@ -82,9 +82,9 @@ class Transifex
 			}
 
 			// Create the subdirectory
-			if (!is_dir(TL_ROOT . '/.tx/source/' . $module))
+			if (!is_dir(TL_ROOT . '/.tx/source/en/' . $module))
 			{
-				mkdir(TL_ROOT . '/.tx/source/' . $module);
+				mkdir(TL_ROOT . '/.tx/source/en/' . $module);
 			}
 
 			// Scan the language files
@@ -145,11 +145,14 @@ class Transifex
 				}
 
 				// Save the XML document
-				$xml->save(TL_ROOT . '/.tx/source/' . $module . '/' . $file . '.xml');
-				echo "  Created .tx/source/$module/$file.xml\n";
+				$xml->save(TL_ROOT . '/.tx/source/en/' . $module . '/' . $file . '.xml');
+				echo "  Created .tx/source/en/$module/$file.xml\n";
 
 				// Add an entry to the .tx/config file
-				fputs($fh, "\n[contao.$module-$file]\nsource_file = .tx/source/$module/$file.xml\nsource_lang = en\n");
+				fputs($fh, "\n[contao.$module-$file]");
+				fputs($fh, "\nsource_file = .tx/source/en/$module/$file.xml");
+				fputs($fh, "\nsource_lang = en");
+				fputs($fh, "\nfile_filter = .tx/source/<lang>/$module/$file.xml\n");
 			}
 		}
 
@@ -186,27 +189,28 @@ class Transifex
 	 */
 	protected function prepare()
 	{
-		if (!is_dir(TL_ROOT . '/.tx/source'))
+		if (!is_dir(TL_ROOT . '/.tx/source/en'))
 		{
-			mkdir(TL_ROOT . '/.tx/source');
+			@mkdir(TL_ROOT . '/.tx/source');
+			@mkdir(TL_ROOT . '/.tx/source/en');
 		}
 		else
 		{
-			foreach ($this->scandir(TL_ROOT . '/.tx/source') as $module)
+			foreach ($this->scandir(TL_ROOT . '/.tx/source/en') as $module)
 			{
-				if (is_file(TL_ROOT . '/.tx/source/' . $module))
+				if (is_file(TL_ROOT . '/.tx/source/en/' . $module))
 				{
-					@unlink(TL_ROOT . '/.tx/source/' . $module);
+					@unlink(TL_ROOT . '/.tx/source/en/' . $module);
 				}
 				else
 				{
-					foreach ($this->scandir(TL_ROOT . '/.tx/source/' . $module) as $file)
+					foreach ($this->scandir(TL_ROOT . '/.tx/source/en/' . $module) as $file)
 					{
-						@unlink(TL_ROOT . '/.tx/source/' . $module . '/' . $file);
+						@unlink(TL_ROOT . '/.tx/source/en/' . $module . '/' . $file);
 					}
 				}
 
-				@rmdir(TL_ROOT . '/.tx/source/' . $module);
+				@rmdir(TL_ROOT . '/.tx/source/en/' . $module);
 			}
 		}
 	}
