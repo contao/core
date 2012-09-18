@@ -1,0 +1,209 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * @package Core
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+
+/**
+ * Define the TL_ROOT constant
+ */
+define('TL_ROOT', dirname(dirname(__DIR__)));
+
+
+/**
+ * Prepare the language files for Transifex.
+ *
+ * @package   Core
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2011-2012
+ */
+class Transifex
+{
+
+	/**
+	 * Dispatch the request
+	 */
+	public function run()
+	{
+		global $argv;
+
+		if (!isset($argv[1]) || !in_array($argv[1], get_class_methods($this)))
+		{
+			$this->help();
+		}
+		else
+		{
+			$this->$argv[1]();
+		}
+	}
+
+
+	/**
+	 * Show the help text
+	 */
+	protected function help()
+	{
+		
+	}
+
+
+	/**
+	 * Setup the .xml and config files for the Transifex client
+	 */
+	protected function setup()
+	{
+		$this->prepare();
+
+		// Create the .tx/config file
+		$fh = fopen(TL_ROOT . '/.tx/config', 'wb');
+		fputs($fh, "[main]\nhost = https://www.transifex.com\ntype = ANDROID\n");
+
+		// Scan the modules folder
+		foreach ($this->scandir(TL_ROOT . '/system/modules') as $module)
+		{
+			if (!is_dir(TL_ROOT . '/system/modules/' . $module . '/languages/en'))
+			{
+				continue;
+			}
+
+			// Create the subdirectory
+			if (!is_dir(TL_ROOT . '/.tx/source/' . $module))
+			{
+				mkdir(TL_ROOT . '/.tx/source/' . $module);
+			}
+
+			// Scan the language files
+			foreach ($this->scandir(TL_ROOT . '/system/modules/' . $module . '/languages/en') as $file)
+			{
+				if (substr($file, -4) != '.php')
+				{
+					continue;
+				}
+
+				// Create the XML document
+				$xml = new DOMDocument();
+				$xml->formatOutput = true;
+				$resources = $xml->createElement('resources');
+				$xml->appendChild($resources);
+
+				// Reset the TL_LANG array before the include
+				$GLOBALS['TL_LANG'] = array();
+				include TL_ROOT . '/system/modules/' . $module . '/languages/en/' . $file;
+				$file = basename($file, '.php');
+
+				// Add the labels
+				foreach ($GLOBALS['TL_LANG'] as $category=>$labels)
+				{
+					foreach ($labels as $key=>$label)
+					{
+						if (is_array($label)) // headline and explanation
+						{
+							foreach ($label as $i=>$text)
+							{
+								if (is_array($text)) // multiple explanations
+								{
+									foreach ($text as $j=>$subtext)
+									{
+										$string = $xml->createElement('string');
+										$string->setAttribute('name', "$module:$file:$category:$key:$i:$j");
+										$string->appendChild($xml->createTextNode($subtext));
+										$resources->appendChild($string);
+									}
+								}
+								else
+								{
+									$string = $xml->createElement('string');
+									$string->setAttribute('name', "$module:$file:$category:$key:$i");
+									$string->appendChild($xml->createTextNode($text));
+									$resources->appendChild($string);
+								}
+							}
+						}
+						else
+						{
+							$string = $xml->createElement('string');
+							$string->setAttribute('name', "$module:$file:$category:$key");
+							$string->appendChild($xml->createTextNode($label));
+							$resources->appendChild($string);
+						}
+					}
+				}
+
+				// Save the XML document
+				$xml->save(TL_ROOT . '/.tx/source/' . $module . '/' . $file . '.xml');
+				echo "  Created .tx/source/$module/$file.xml\n";
+
+				// Add an entry to the .tx/config file
+				fputs($fh, "\n[contao.$module-$file]\nsource_file = .tx/source/$module/$file.xml\nsource_lang = en\n");
+			}
+		}
+
+		// Close the .tx/config file
+		fclose($fh);
+	}
+
+
+	/**
+	 * Return the contents of a directory without "." and ".."
+	 * 
+	 * @param string $dir The directory path
+	 * 
+	 * @return array The directory content
+	 */
+	protected function scandir($dir)
+	{
+		$return = array();
+
+		foreach (scandir($dir) as $file)
+		{
+			if (strncmp($file, '.', 1) !== 0)
+			{
+				$return[] = $file;
+			}
+		}
+
+		return $return;
+	}
+
+
+	/**
+	 * Prepare the source directory
+	 */
+	protected function prepare()
+	{
+		if (!is_dir(TL_ROOT . '/.tx/source'))
+		{
+			mkdir(TL_ROOT . '/.tx/source');
+		}
+		else
+		{
+			foreach ($this->scandir(TL_ROOT . '/.tx/source') as $module)
+			{
+				if (is_file(TL_ROOT . '/.tx/source/' . $module))
+				{
+					@unlink(TL_ROOT . '/.tx/source/' . $module);
+				}
+				else
+				{
+					foreach ($this->scandir(TL_ROOT . '/.tx/source/' . $module) as $file)
+					{
+						@unlink(TL_ROOT . '/.tx/source/' . $module . '/' . $file);
+					}
+				}
+
+				@rmdir(TL_ROOT . '/.tx/source/' . $module);
+			}
+		}
+	}
+}
+
+$objTransifex = new Transifex();
+$objTransifex->run();
