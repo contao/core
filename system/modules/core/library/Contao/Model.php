@@ -416,7 +416,8 @@ abstract class Model extends \System
 	 */
 	public static function findByPks($arrPks, array $arrOptions = array())
 	{
-		if (!is_array($arrPks) || empty($arrPks))
+		$arrPks = (array) $arrPks;
+		if (!$arrPks)
 		{
 			return null;
 		}
