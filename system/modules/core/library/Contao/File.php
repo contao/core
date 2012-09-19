@@ -414,8 +414,7 @@ class File extends \System
 			}
 		}
 
-		fputs($this->resFile, $varData);
-		return true;
+		return (fwrite($this->resFile, $varData) !== false);
 	}
 
 
