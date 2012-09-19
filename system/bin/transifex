@@ -60,23 +60,26 @@ class Transifex
 		echo "  \033[0;36mpush\033[0m          Push the source translation to transifex.com\n";
 		echo "  \033[0;36mpull\033[0m          Download translations from transifex.com\n";
 		echo "  \033[0;36mimport\033[0m        Convert the Transifex files into Contao files\n";
+		echo "  \033[0;36mexport\033[0m        Export and push an existing translation\n";
 		echo "  \033[0;36mhelp\033[0m          Show this help text\n";
 		echo "\n";
-		echo "  The \"push\" command will execute \"setup\" and the \"import\" command will execute \"pull\" automatically.\n";
+		echo "  The \"push\" command will execute \"setup\" and the \"pull\" command will execute \"import\" automatically.\n";
 		echo "\n";
 	}
 
 
 	/**
-	 * Setup the .xml and config files for the Transifex client
+	 * Setup the .xlf and config files for the Transifex client
+	 * 
+	 * @param boolean $quiet If true, do not output any status messages
 	 */
-	protected function setup()
+	protected function setup($quiet=false)
 	{
-		$this->prepare();
+		$this->prepare('en');
 
 		// Create the .tx/config file
 		$fh = fopen(TL_ROOT . '/.tx/config', 'wb');
-		fputs($fh, "[main]\nhost = https://www.transifex.com\ntype = ANDROID\n");
+		fputs($fh, "[main]\nhost = https://www.transifex.com\ntype = XLIFF\n");
 
 		// Scan the modules folder
 		foreach ($this->scandir(TL_ROOT . '/system/modules') as $module)
@@ -100,16 +103,27 @@ class Transifex
 					continue;
 				}
 
-				// Create the XML document
-				$xml = new DOMDocument();
-				$xml->formatOutput = true;
-				$resources = $xml->createElement('resources');
-				$xml->appendChild($resources);
-
 				// Reset the TL_LANG array before the include
 				$GLOBALS['TL_LANG'] = array();
 				include TL_ROOT . '/system/modules/' . $module . '/languages/en/' . $file;
 				$file = basename($file, '.php');
+
+				// Create the XML document
+				$xml = new DOMDocument('1.0', 'UTF-8');
+				$xml->formatOutput = true;
+
+				$xliff = $xml->createElement('xliff');
+				$xliff->setAttribute('version', '1.1');
+				$xml->appendChild($xliff);
+
+				$xfile = $xml->createElement('file');
+				$xfile->setAttribute('datatype', 'php');
+				$xfile->setAttribute('original', 'system/modules/' . $module . '/languages/en/' . $file . '.php');
+				$xfile->setAttribute('source-language', 'en');
+				$xliff->appendChild($xfile);
+
+				$xbody = $xml->createElement('body');
+				$xfile->appendChild($xbody);
 
 				// Add the labels
 				foreach ($GLOBALS['TL_LANG'] as $category=>$labels)
@@ -124,40 +138,54 @@ class Transifex
 								{
 									foreach ($text as $j=>$subtext)
 									{
-										$string = $xml->createElement('string');
-										$string->setAttribute('name', "$category:$key:$i:$j");
-										$string->appendChild($xml->createTextNode($subtext));
-										$resources->appendChild($string);
+										$trans = $xml->createElement('trans-unit');
+										$trans->setAttribute('id', "$category.$key.$i.$j");
+										$xbody->appendChild($trans);
+
+										$source = $xml->createElement('source');
+										$source->appendChild($xml->createTextNode($subtext));
+										$trans->appendChild($source);
 									}
 								}
 								else
 								{
-									$string = $xml->createElement('string');
-									$string->setAttribute('name', "$category:$key:$i");
-									$string->appendChild($xml->createTextNode($text));
-									$resources->appendChild($string);
+									$trans = $xml->createElement('trans-unit');
+									$trans->setAttribute('id', "$category.$key.$i");
+									$xbody->appendChild($trans);
+
+									$source = $xml->createElement('source');
+									$source->appendChild($xml->createTextNode($text));
+									$trans->appendChild($source);
 								}
 							}
 						}
 						else
 						{
-							$string = $xml->createElement('string');
-							$string->setAttribute('name', "$category:$key");
-							$string->appendChild($xml->createTextNode($label));
-							$resources->appendChild($string);
+							$trans = $xml->createElement('trans-unit');
+							$trans->setAttribute('id', "$category.$key");
+							$xbody->appendChild($trans);
+
+							$source = $xml->createElement('source');
+							$source->appendChild($xml->createTextNode($label));
+							$trans->appendChild($source);
 						}
 					}
 				}
 
 				// Save the XML document
-				$xml->save(TL_ROOT . '/.tx/source/en/' . $module . '/' . $file . '.xml');
-				echo "  Created .tx/source/en/$module/$file.xml\n";
+				$xml->save(TL_ROOT . '/.tx/source/en/' . $module . '/' . $file . '.xlf');
+
+				// Confirm
+				if (!$quiet)
+				{
+					echo "  Created .tx/source/en/$module/$file.xlf\n";
+				}
 
 				// Add an entry to the .tx/config file
 				fputs($fh, "\n[contao.$module-$file]");
-				fputs($fh, "\nsource_file = .tx/source/en/$module/$file.xml");
+				fputs($fh, "\nsource_file = .tx/source/en/$module/$file.xlf");
 				fputs($fh, "\nsource_lang = en");
-				fputs($fh, "\nfile_filter = .tx/source/<lang>/$module/$file.xml\n");
+				fputs($fh, "\nfile_filter = .tx/source/<lang>/$module/$file.xlf\n");
 			}
 		}
 
@@ -186,7 +214,7 @@ class Transifex
 		// Get the completed languages
 		if (isset($argv[2]))
 		{
-			passthru('tx pull --minimum-perc=95 --language=' . $argv[2]);
+			passthru('tx pull --language=' . $argv[2]);
 		}
 		else
 		{
@@ -198,7 +226,7 @@ class Transifex
 
 
 	/**
-	 * Create the Contao language files from the Transifex .xml files
+	 * Create the Contao language files from the Transifex .xlf files
 	 */
 	protected function import()
 	{
@@ -240,16 +268,17 @@ class Transifex
 
 				foreach ($this->scandir(TL_ROOT . '/.tx/source/' . $language . '/' . $module) as $file)
 				{
-					if (substr($file, -4) != '.xml')
+					if (substr($file, -4) != '.xlf')
 					{
 						continue;
 					}
 
-					// Read the .xml file
+					// Read the .xlf file
 					$xml = new DOMDocument();
+					$xml->preserveWhiteSpace = false;
 					$xml->load(TL_ROOT . '/.tx/source/' . $language . '/' . $module . '/' . $file);
-					$strings = $xml->getElementsByTagName('string');
-					$file = basename($file, '.xml');
+					$units = $xml->getElementsByTagName('trans-unit');
+					$file = basename($file, '.xlf');
 
 					// Create the .php file
 					$fh = fopen(TL_ROOT . '/system/modules/' . $module . '/languages/' . $language . '/' . $file . '.php', 'wb');
@@ -271,9 +300,14 @@ class Transifex
 					fputs($fh, " */\n\n");
 
 					// Add the labels
-					foreach ($strings as $string)
+					foreach ($units as $unit)
 					{
-						$value = str_replace("\n", '\n', $string->nodeValue);
+						if ($unit->firstChild->nextSibling === null)
+						{
+							continue;
+						}
+
+						$value = str_replace("\n", '\n', $unit->firstChild->nextSibling->nodeValue);
 
 						// Quote the value depending on whether there are line breaks
 						if (strpos($value, '\n') !== false)
@@ -285,7 +319,7 @@ class Transifex
 							$value = "'" . str_replace("'", "\\'", $value) . "'";
 						}
 
-						$chunks = explode(':', $string->getAttribute('name'));
+						$chunks = explode('.', $unit->getAttribute('id'));
 
 						switch (count($chunks))
 						{
@@ -307,6 +341,170 @@ class Transifex
 					fclose($fh);
 					echo "  Created system/modules/$module/languages/$language/$file.php\n";
 				}
+			}
+		}
+	}
+
+
+	/**
+	 * Export and push an existing translation
+	 */
+	protected function export()
+	{
+		global $argv;
+
+		// The language code is required
+		if (!isset($argv[2]))
+		{
+			die("  Please provide the language code as argument\n");
+		}
+
+		$this->setup(true);
+		$this->prepare($argv[2]);
+
+		// Scan the modules folder
+		foreach ($this->scandir(TL_ROOT . '/system/modules') as $module)
+		{
+			// Skip if the source language does not exist
+			if (!is_dir(TL_ROOT . '/system/modules/' . $module . '/languages/en'))
+			{
+				continue;
+			}
+
+			// Create the subdirectory
+			if (!is_dir(TL_ROOT . '/.tx/source/' . $argv[2] . '/' . $module))
+			{
+				mkdir(TL_ROOT . '/.tx/source/' . $argv[2] . '/' . $module);
+			}
+
+			// Scan the source language files
+			foreach ($this->scandir(TL_ROOT . '/system/modules/' . $module . '/languages/en') as $file)
+			{
+				if (substr($file, -4) != '.php')
+				{
+					continue;
+				}
+
+				// The file has not been translated yet
+				if (!file_exists(TL_ROOT . '/system/modules/' . $module . '/languages/' . $argv[2] . '/' . $file))
+				{
+					continue;
+				}
+
+				$file = basename($file, '.php');
+
+				// Read the source file
+				$english = new DOMDocument();
+				$english->preserveWhiteSpace = false;
+				$english->load(TL_ROOT . '/.tx/source/en/' . $module . '/' . $file . '.xlf');
+
+				// Prepare for XPath
+				$xpath = new DOMXPath($english);
+
+				// Create the XML document
+				$xml = new DOMDocument('1.0', 'UTF-8');
+				$xml->formatOutput = true;
+
+				$xliff = $xml->createElement('xliff');
+				$xliff->setAttribute('version', '1.1');
+				$xml->appendChild($xliff);
+
+				$xfile = $xml->createElement('file');
+				$xfile->setAttribute('datatype', 'php');
+				$xfile->setAttribute('original', 'system/modules/' . $module . '/languages/en/' . $file . '.php');
+				$xfile->setAttribute('source-language', 'en');
+				$xliff->appendChild($xfile);
+
+				$xbody = $xml->createElement('body');
+				$xfile->appendChild($xbody);
+
+				// Reset the TL_LANG array before the include
+				$GLOBALS['TL_LANG'] = array();
+				include TL_ROOT . '/system/modules/' . $module . '/languages/' . $argv[2] . '/' . $file . '.php';
+
+				// Add the labels
+				foreach ($GLOBALS['TL_LANG'] as $category=>$labels)
+				{
+					foreach ($labels as $key=>$label)
+					{
+						if (is_array($label)) // headline and explanation
+						{
+							foreach ($label as $i=>$text)
+							{
+								if (is_array($text)) // multiple explanations
+								{
+									foreach ($text as $j=>$subtext)
+									{
+										$id = "$category.$key.$i.$j";
+
+										// Check whether the string exists in the source translation
+										if (($original = $xpath->query("//*[@id='$id']")->item(0)) !== null)
+										{
+											$trans = $xml->createElement('trans-unit');
+											$trans->setAttribute('id', $id);
+											$xbody->appendChild($trans);
+
+											$source = $xml->createElement('source');
+											$source->appendChild($xml->createTextNode($original->nodeValue));
+											$trans->appendChild($source);
+
+											$target = $xml->createElement('target');
+											$target->appendChild($xml->createTextNode($subtext));
+											$trans->appendChild($target);
+										}
+									}
+								}
+								else
+								{
+									$id = "$category.$key.$i";
+
+									// Check whether the string exists in the source translation
+									if (($original = $xpath->query("//*[@id='$id']")->item(0)) !== null)
+									{
+										$trans = $xml->createElement('trans-unit');
+										$trans->setAttribute('id', $id);
+										$xbody->appendChild($trans);
+
+										$source = $xml->createElement('source');
+										$source->appendChild($xml->createTextNode($original->nodeValue));
+										$trans->appendChild($source);
+
+										$target = $xml->createElement('target');
+										$target->appendChild($xml->createTextNode($text));
+										$trans->appendChild($target);
+									}
+								}
+							}
+						}
+						else
+						{
+							$id = "$category.$key";
+
+							// Check whether the string exists in the source translation
+							if (($original = $xpath->query("//*[@id='$id']")->item(0)) !== null)
+							{
+								$trans = $xml->createElement('trans-unit');
+								$trans->setAttribute('id', $id);
+								$xbody->appendChild($trans);
+
+								$source = $xml->createElement('source');
+								$source->appendChild($xml->createTextNode($original->nodeValue));
+								$trans->appendChild($source);
+
+								$target = $xml->createElement('target');
+								$target->appendChild($xml->createTextNode($label));
+								$trans->appendChild($target);
+							}
+						}
+					}
+				}
+
+				// Save the XML document
+				$xml->save(TL_ROOT . '/.tx/source/' . $argv[2] . '/' . $module . '/' . $file . '.xlf');
+				echo "  Created .tx/source/{$argv[2]}/$module/$file.xlf\n";
+
+				// Push the resouce to transifex.com
+				passthru('tx push --translations --language=' . $argv[2] . ' --resource=contao.' . $module . '-' . $file);
 			}
 		}
 	}
@@ -337,31 +535,33 @@ class Transifex
 
 	/**
 	 * Prepare the source directory
+	 * 
+	 * @param string $dir The directory name
 	 */
-	protected function prepare()
+	protected function prepare($dir)
 	{
-		if (!is_dir(TL_ROOT . '/.tx/source/en'))
+		if (!is_dir(TL_ROOT . '/.tx/source/' . $dir))
 		{
 			@mkdir(TL_ROOT . '/.tx/source');
-			@mkdir(TL_ROOT . '/.tx/source/en');
+			@mkdir(TL_ROOT . '/.tx/source/' . $dir);
 		}
 		else
 		{
-			foreach ($this->scandir(TL_ROOT . '/.tx/source/en') as $module)
+			foreach ($this->scandir(TL_ROOT . '/.tx/source/' . $dir) as $module)
 			{
-				if (is_file(TL_ROOT . '/.tx/source/en/' . $module))
+				if (is_file(TL_ROOT . '/.tx/source/' . $dir . '/' . $module))
 				{
-					@unlink(TL_ROOT . '/.tx/source/en/' . $module);
+					@unlink(TL_ROOT . '/.tx/source/' . $dir . '/' . $module);
 				}
 				else
 				{
-					foreach ($this->scandir(TL_ROOT . '/.tx/source/en/' . $module) as $file)
+					foreach ($this->scandir(TL_ROOT . '/.tx/source/' . $dir . '/' . $module) as $file)
 					{
-						@unlink(TL_ROOT . '/.tx/source/en/' . $module . '/' . $file);
+						@unlink(TL_ROOT . '/.tx/source/' . $dir . '/' . $module . '/' . $file);
 					}
 				}
 
-				@rmdir(TL_ROOT . '/.tx/source/en/' . $module);
+				@rmdir(TL_ROOT . '/.tx/source/' . $dir . '/' . $module);
 			}
 		}
 	}
