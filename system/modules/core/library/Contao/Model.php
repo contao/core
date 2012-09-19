@@ -422,12 +422,9 @@ abstract class Model extends \System
 			return null;
 		}
 
-		$arrOptions = array_merge($arrOptions, array
-		(
-			'column' => array(static::$strTable . '.' . static::$strPk . ' IN (' . rtrim(str_repeat('?,', count($arrPks)), ',') . ')'),
-			'value'  => $arrPks,
-			'return' => 'Collection'
-		));
+		$arrOptions['column'][] = static::$strTable . '.' . static::$strPk . ' IN (' . rtrim(str_repeat('?,', count($arrPks)), ',') . ')';
+		$arrOptions['value'][]  = $arrPks;
+		$arrOptions['return']   = 'Collection';
 
 		return static::find($arrOptions);
 	}
