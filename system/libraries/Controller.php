@@ -900,6 +900,7 @@ abstract class Controller extends System
 	 */
 	protected function getImage($image, $width, $height, $mode='', $target=null, $force=false, $intSrcX = 0, $intSrcY = 0, $intSrcWidth = null, $intSrcHeight = null)
 	{
+	
 		if ($image == '')
 		{
 			return null;
@@ -1197,6 +1198,10 @@ abstract class Controller extends System
 			return null;
 		}
 
+		echo $intSrcX . ' - ';
+		echo $intSrcY . ' - ';
+		echo $intSrcWidth . ' - ';
+		echo $intSrcHeight . '<br />';
 		imagecopyresampled($strNewImage, $strSourceImage, $intPositionX, $intPositionY, $intSrcX, $intSrcY, $intWidth, $intHeight, $intSrcWidth, $intSrcHeight);
 
 		// Fallback to PNG if GIF ist not supported
@@ -2301,6 +2306,10 @@ abstract class Controller extends System
 				case 'image':
 					$width = null;
 					$height = null;
+					$srcX = 0;
+					$srcY = 0;
+					$srcWidth = null;
+					$srcHeight = null;
 					$alt = '';
 					$class = '';
 					$rel = '';
@@ -2329,6 +2338,21 @@ abstract class Controller extends System
 
 								case 'height':
 									$height = $value;
+									break;
+									
+								case 'srcX':
+									$srcX = $value;
+									break;
+
+								case 'srcY':
+									$srcY = $value;
+									break;
+								case 'srcWidth':
+									$srcWidth = $value;
+									break;
+
+								case 'srcHeight':
+									$srcHeight = $value;
 									break;
 
 								case 'alt':
@@ -2365,7 +2389,7 @@ abstract class Controller extends System
 					// Generate the thumbnail image
 					try
 					{
-						$src = $this->getImage($strFile, $width, $height, $mode);
+						$src = $this->getImage($strFile, $width, $height, $mode, null, false, $srcX, $srcY, $srcWidth, $srcHeight);
 						$dimensions = '';
 
 						// Add the image dimensions
