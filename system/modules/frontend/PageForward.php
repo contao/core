@@ -51,14 +51,14 @@ class PageForward extends Frontend
 		{
 			$time = time();
 
-			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type='regular'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
+			$objNextPage = $this->Database->prepare("SELECT id FROM tl_page WHERE pid=? AND type='regular'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
 										  ->limit(1)
 										  ->execute($objPage->id);
 		}
 		// Forward to jumpTo page
 		else
 		{
-			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+			$objNextPage = $this->Database->prepare("SELECT id FROM tl_page WHERE id=?")
 										  ->limit(1)
 										  ->execute($objPage->jumpTo);
 		}
@@ -92,7 +92,9 @@ class PageForward extends Frontend
 			}
 		}
 
-		$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc(), $strGet), (($objPage->redirect == 'temporary') ? 302 : 301));
+		$objNextPage = $this->getPageDetails($objNextPage->id);
+
+		$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strGet, $objNextPage->rootLanguage), (($objPage->redirect == 'temporary') ? 302 : 301));
 	}
 }
 
