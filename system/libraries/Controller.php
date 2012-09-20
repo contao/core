@@ -898,7 +898,7 @@ abstract class Controller extends System
 	 * @param boolean
 	 * @return string|null
 	 */
-	protected function getImage($image, $width, $height, $mode='', $target=null, $force=false)
+	protected function getImage($image, $width, $height, $mode='', $target=null, $force=false, $intSrcX = 0, $intSrcY = 0, $intSrcWidth = null, $intSrcHeight = null)
 	{
 		if ($image == '')
 		{
@@ -923,9 +923,28 @@ abstract class Controller extends System
 			$this->log('Image type "' . $objFile->extension . '" was not allowed to be processed', 'Controller getImage()', TL_ERROR);
 			return null;
 		}
+		
+		/* Calc the source area if no width/height is specified */
+		if($intSrcWidth === null) {
+			$intSrcWidth = $objFile->width - $intSrcX;
+		} else {
+			if($intSrcWidth + $intSrcX > $objFile->width) {
+				$this->log('Image source area width larger than source image width', TL_ERROR);
+				return null;
+			}
+		}
+			
+		if($intSrcHeight === null) {
+			$intSrcHeight = $objFile->height - $intSrcY;
+		} else {
+			if($intSrcHeight + $intSrcY > $objFile->height) {
+				$this->log('Image source area height larger than source image height', TL_ERROR);
+				return null;
+			}
+		}
 
 		// No resizing required
-		if ($objFile->width == $width && $objFile->height == $height)
+		if ($intSrcX == 0 && $intSrcY == 0 && $intSrcWidth == $width && $intSrcHeight == $height)
 		{
 			// Return the target image (thanks to Tristan Lins) (see #4166)
 			if ($target)
@@ -955,7 +974,8 @@ abstract class Controller extends System
 			$mode = 'center_center';
 		}
 
-		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8) . '.' . $objFile->extension;
+		$strSrcCacheName = 'srcX' . $intSrcX . '-srcY' - $intSrcY . '-srcWidth' - $intSrcWidth . '-srcHeight' - $intSrcHeight;
+		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime . '-' . $strSrcCacheName), 0, 8) . '.' . $objFile->extension;
 
 		// Check whether the image exists already
 		if (!$GLOBALS['TL_CONFIG']['debugMode'])
@@ -989,6 +1009,7 @@ abstract class Controller extends System
 			foreach ($GLOBALS['TL_HOOKS']['getImage'] as $callback)
 			{
 				$this->import($callback[0]);
+				// TODO: Extend the callback to pass $intSrcX, $intSrcY, $intSrcWidth & $intSrcHeight
 				$return = $this->$callback[0]->$callback[1]($image, $width, $height, $mode, $strCacheName, $objFile, $target);
 
 				if (is_string($return))
@@ -1015,7 +1036,7 @@ abstract class Controller extends System
 			switch ($mode)
 			{
 				case 'proportional':
-					if ($objFile->width >= $objFile->height)
+					if ($intSrcWidth >= $intSrcHeight)
 					{
 						unset($height, $intHeight);
 					}
@@ -1026,7 +1047,7 @@ abstract class Controller extends System
 					break;
 
 				case 'box':
-					if (round($objFile->height * $width / $objFile->width) <= $intHeight)
+					if (round($intSrcHeight * $width / $intSrcWidth) <= $intHeight)
 					{
 						unset($height, $intHeight);
 					}
@@ -1041,15 +1062,15 @@ abstract class Controller extends System
 		// Resize width and height and crop the image if necessary
 		if ($intWidth && $intHeight)
 		{
-			if (($intWidth * $objFile->height) != ($intHeight * $objFile->width))
+			if (($intWidth * $intSrcHeight) != ($intHeight * $intSrcWidth))
 			{
-				$intWidth = max(round($objFile->width * $height / $objFile->height), 1);
+				$intWidth = max(round($intSrcWidth * $height / $intSrcHeight), 1);
 				$intPositionX = -intval(($intWidth - $width) / 2);
 
 				if ($intWidth < $width)
 				{
 					$intWidth = $width;
-					$intHeight = max(round($objFile->height * $width / $objFile->width), 1);
+					$intHeight = max(round($intSrcHeight * $width / $intSrcWidth), 1);
 					$intPositionX = 0;
 					$intPositionY = -intval(($intHeight - $height) / 2);
 				}
@@ -1110,14 +1131,14 @@ abstract class Controller extends System
 		// Calculate the height if only the width is given
 		elseif ($intWidth)
 		{
-			$intHeight = max(round($objFile->height * $width / $objFile->width), 1);
+			$intHeight = max(round($intSrcHeight * $width / $intSrcWidth), 1);
 			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
 		}
 
 		// Calculate the width if only the height is given
 		elseif ($intHeight)
 		{
-			$intWidth = max(round($objFile->width * $height / $objFile->height), 1);
+			$intWidth = max(round($intSrcWidth * $height / $intSrcHeight), 1);
 			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
 		}
 
@@ -1176,7 +1197,7 @@ abstract class Controller extends System
 			return null;
 		}
 
-		imagecopyresampled($strNewImage, $strSourceImage, $intPositionX, $intPositionY, 0, 0, $intWidth, $intHeight, $objFile->width, $objFile->height);
+		imagecopyresampled($strNewImage, $strSourceImage, $intPositionX, $intPositionY, $intSrcX, $intSrcY, $intWidth, $intHeight, $intSrcWidth, $intSrcHeight);
 
 		// Fallback to PNG if GIF ist not supported
 		if ($objFile->extension == 'gif' && !$arrGdinfo['GIF Create Support'])
