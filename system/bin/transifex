@@ -211,14 +211,20 @@ class Transifex
 	{
 		global $argv;
 
+		// Create the source directory
+		if (!is_dir(TL_ROOT . '/.tx/source'))
+		{
+			@mkdir(TL_ROOT . '/.tx/source');
+		}
+
 		// Get the completed languages
 		if (isset($argv[2]))
 		{
-			passthru('tx pull --language=' . $argv[2]);
+			passthru('tx pull --all --language=' . $argv[2]);
 		}
 		else
 		{
-			passthru('tx pull --minimum-perc=95');
+			passthru('tx pull --all --minimum-perc=95');
 		}
 
 		$this->import();

@@ -1,0 +1,174 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/fr/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$GLOBALS['TL_LANG']['tl_repository']['category'][0] = 'Catégorie';
+$GLOBALS['TL_LANG']['tl_repository']['category'][1] = 'Sélectionner la catégorie de l\'extension';
+$GLOBALS['TL_LANG']['tl_repository']['copyright'][0] = 'Copyright';
+$GLOBALS['TL_LANG']['tl_repository']['copyright'][1] = 'Entrer vos informations de droit d\'auteur (ex : © 2007,2008 Jerry Miller Inc Webservices).';
+$GLOBALS['TL_LANG']['tl_repository']['description'][0] = 'Description';
+$GLOBALS['TL_LANG']['tl_repository']['description'][1] = 'Ces balises HTML ne sont pas autorisées : %s';
+$GLOBALS['TL_LANG']['tl_repository']['extension'][0] = 'Extension';
+$GLOBALS['TL_LANG']['tl_repository']['extension'][1] = 'Sélectionner le nom de l\'extension';
+$GLOBALS['TL_LANG']['tl_repository']['functionality'][0] = 'Fonctionnalité';
+$GLOBALS['TL_LANG']['tl_repository']['functionality'][1] = 'Est-ce que l\'extension remplit toutes ses fonctions ?';
+$GLOBALS['TL_LANG']['tl_repository']['license'][0] = 'Licence';
+$GLOBALS['TL_LANG']['tl_repository']['license'][1] = 'Saisir une courte licence pour les extensions libre Vous pouvez ajouter la licence complète dans un fichier LICENSE.txt.';
+$GLOBALS['TL_LANG']['tl_repository']['name'][0] = 'Nom';
+$GLOBALS['TL_LANG']['tl_repository']['name'][1] = 'Les noms d\'extension doivent commencer par a-z, A-Z ou 0-9. Les noms en minuscules sont préférables. En outre, les caractères _ et - sont autorisés dans le nom.';
+$GLOBALS['TL_LANG']['tl_repository']['popularity'][0] = 'Popularité';
+$GLOBALS['TL_LANG']['tl_repository']['popularity'][1] = '%s/%s (téléchargements/installations)';
+$GLOBALS['TL_LANG']['tl_repository']['quality'][0] = 'Qualité';
+$GLOBALS['TL_LANG']['tl_repository']['quality'][1] = 'L\'extension est-elle robuste ? L\'installation et la maintenance ce font-elles facilement ?';
+$GLOBALS['TL_LANG']['tl_repository']['releasedate'][0] = 'Date de publication';
+$GLOBALS['TL_LANG']['tl_repository']['releasedate'][1] = 'Saisir la date de publication de l\'extension au format %s.';
+$GLOBALS['TL_LANG']['tl_repository']['selversion'][0] = 'Version';
+$GLOBALS['TL_LANG']['tl_repository']['selversion'][1] = 'Saisir la version';
+$GLOBALS['TL_LANG']['tl_repository']['type'][0] = 'Type';
+$GLOBALS['TL_LANG']['tl_repository']['type'][1] = 'Sélectionner le type d\'extension.';
+$GLOBALS['TL_LANG']['tl_repository']['usability'][0] = 'Utilisabilité';
+$GLOBALS['TL_LANG']['tl_repository']['usability'][1] = 'Est-ce que l\'extension répond aux normes Contao pour l\'utilisabilité et l\'accessibilité ?';
+$GLOBALS['TL_LANG']['tl_repository']['version'][0] = 'Version';
+$GLOBALS['TL_LANG']['tl_repository']['version'][1] = 'Les numéros de version doivent-être au format n.n.n s, ou n est un entier et s un terme parmi ceux-ci : alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable';
+$GLOBALS['TL_LANG']['tl_repository']['lickey'][0] = 'Clé d\'enregistrement';
+$GLOBALS['TL_LANG']['tl_repository']['lickey'][1] = 'Saisir la clé d\'enregistrement que le vendeur de l\'extension vous a fourni.';
+$GLOBALS['TL_LANG']['tl_repository']['uninstprotect'][0] = 'Protéger contre la désinstallation';
+$GLOBALS['TL_LANG']['tl_repository']['uninstprotect'][1] = 'Protéger l\'extension contre une désinstallation accidentelle.';
+$GLOBALS['TL_LANG']['tl_repository']['updateprotect'][0] = 'Protéger contre les mises à jour';
+$GLOBALS['TL_LANG']['tl_repository']['updateprotect'][1] = 'Protéger l\'extension contre une mise à jour accidentelle.';
+$GLOBALS['TL_LANG']['tl_repository']['author'] = 'Auteur';
+$GLOBALS['TL_LANG']['tl_repository']['build'] = 'Révision';
+$GLOBALS['TL_LANG']['tl_repository']['cancel'] = 'Annuler';
+$GLOBALS['TL_LANG']['tl_repository']['continue'] = 'Continuer';
+$GLOBALS['TL_LANG']['tl_repository']['dependencies'] = 'Dépendances de cette extension';
+$GLOBALS['TL_LANG']['tl_repository']['dependents'] = 'Autres extensions dépendant de celle-ci';
+$GLOBALS['TL_LANG']['tl_repository']['dependentsdel'] = 'Les extensions suivantes sont dépendantes de <em>%s</em> :';
+$GLOBALS['TL_LANG']['tl_repository']['donate'] = 'Faire un don';
+$GLOBALS['TL_LANG']['tl_repository']['downloads'] = 'Téléchargements du paquet';
+$GLOBALS['TL_LANG']['tl_repository']['extensionnotfound'] = 'Extension non trouvée.';
+$GLOBALS['TL_LANG']['tl_repository']['forum'] = 'Forum';
+$GLOBALS['TL_LANG']['tl_repository']['installs'] = 'Installation en ligne';
+$GLOBALS['TL_LANG']['tl_repository']['langtrans'] = '%s trad.';
+$GLOBALS['TL_LANG']['tl_repository']['manual'] = 'Manuel';
+$GLOBALS['TL_LANG']['tl_repository']['no'] = 'non';
+$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = 'Aucune extension trouvée.';
+$GLOBALS['TL_LANG']['tl_repository']['orderby'] = 'Trier par';
+$GLOBALS['TL_LANG']['tl_repository']['otherlanguages'] = 'Autres langues';
+$GLOBALS['TL_LANG']['tl_repository']['pageof'] = 'Page %s de %s';
+$GLOBALS['TL_LANG']['tl_repository']['ratingfmt'] = '%.2f (%d votes)';
+$GLOBALS['TL_LANG']['tl_repository']['reldownloads'] = 'Téléchargements';
+$GLOBALS['TL_LANG']['tl_repository']['releasenotesfor'] = 'Notes de publication et changements pour %s';
+$GLOBALS['TL_LANG']['tl_repository']['relfunctionality'] = 'Fonctionnalités';
+$GLOBALS['TL_LANG']['tl_repository']['relinstalls'] = 'Installations';
+$GLOBALS['TL_LANG']['tl_repository']['relquality'] = 'Qualité';
+$GLOBALS['TL_LANG']['tl_repository']['relrating'] = 'Avis';
+$GLOBALS['TL_LANG']['tl_repository']['relupdates'] = 'Mises à jour';
+$GLOBALS['TL_LANG']['tl_repository']['relusability'] = 'Utilisabilité';
+$GLOBALS['TL_LANG']['tl_repository']['save'] = 'Sauvegarder';
+$GLOBALS['TL_LANG']['tl_repository']['shop'] = 'Achat';
+$GLOBALS['TL_LANG']['tl_repository']['showpicture'] = 'Afficher l\'image en taille réelle';
+$GLOBALS['TL_LANG']['tl_repository']['state'] = 'Etat';
+$GLOBALS['TL_LANG']['tl_repository']['tag'] = 'Mot clé';
+$GLOBALS['TL_LANG']['tl_repository']['thumbnail'] = 'Vignette';
+$GLOBALS['TL_LANG']['tl_repository']['totdownloads'] = 'Total téléchargements';
+$GLOBALS['TL_LANG']['tl_repository']['totfunctionality'] = 'Total fonctionnalité';
+$GLOBALS['TL_LANG']['tl_repository']['totinstalls'] = 'Total installations';
+$GLOBALS['TL_LANG']['tl_repository']['totquality'] = 'Total qualité';
+$GLOBALS['TL_LANG']['tl_repository']['totrating'] = 'Total des avis';
+$GLOBALS['TL_LANG']['tl_repository']['totupdates'] = 'Total de mises à jour';
+$GLOBALS['TL_LANG']['tl_repository']['totusability'] = 'Total utilisabilité';
+$GLOBALS['TL_LANG']['tl_repository']['versionfrom'] = 'de la version';
+$GLOBALS['TL_LANG']['tl_repository']['versions'] = 'Autres versions';
+$GLOBALS['TL_LANG']['tl_repository']['versionto'] = 'à la version';
+$GLOBALS['TL_LANG']['tl_repository']['yes'] = 'oui';
+$GLOBALS['TL_LANG']['tl_repository']['action'] = 'Action';
+$GLOBALS['TL_LANG']['tl_repository']['actionsummary'] = 'Résumé de l\'action';
+$GLOBALS['TL_LANG']['tl_repository']['actionsuccess'] = 'Actions effectuées avec succès.';
+$GLOBALS['TL_LANG']['tl_repository']['actionfailed'] = 'Une ou plusieurs actions ont échouées.';
+$GLOBALS['TL_LANG']['tl_repository']['apply'] = 'Appliquer';
+$GLOBALS['TL_LANG']['tl_repository']['byorder'] = 'Par %s';
+$GLOBALS['TL_LANG']['tl_repository']['checkextension'] = 'Vérifier l\'extension';
+$GLOBALS['TL_LANG']['tl_repository']['dbuptodate'] = 'La base de données est à jour';
+$GLOBALS['TL_LANG']['tl_repository']['deletingdirs'] = 'Suppression des répertoires';
+$GLOBALS['TL_LANG']['tl_repository']['deletingfiles'] = 'Suppression des fichiers';
+$GLOBALS['TL_LANG']['tl_repository']['editextension'] = 'Editer les paramètres';
+$GLOBALS['TL_LANG']['tl_repository']['extinstrecntf'] = 'L\'enregistrement de l\'installation de l\'extension n\'a pas été trouvé';
+$GLOBALS['TL_LANG']['tl_repository']['errdldpkg'] = 'Le téléchargement du paquet à partir du référentiel a échoué';
+$GLOBALS['TL_LANG']['tl_repository']['failed'] = 'échoué';
+$GLOBALS['TL_LANG']['tl_repository']['fileerrwrite'] = 'Erreur lors de l\'écriture du fichier %s';
+$GLOBALS['TL_LANG']['tl_repository']['filesdeleted'] = '%s fichier(s) supprimés';
+$GLOBALS['TL_LANG']['tl_repository']['filesinstalled'] = '%s fichier(s) installés';
+$GLOBALS['TL_LANG']['tl_repository']['filesunchanged'] = '%s fichier(s) inchangés';
+$GLOBALS['TL_LANG']['tl_repository']['filesupdated'] = '%s fichier(s) mis à jour';
+$GLOBALS['TL_LANG']['tl_repository']['ftsearch'] = 'Recherche plein texte';
+$GLOBALS['TL_LANG']['tl_repository']['goback'] = 'Retour';
+$GLOBALS['TL_LANG']['tl_repository']['install'] = 'Installer';
+$GLOBALS['TL_LANG']['tl_repository']['installextension'] = 'Installer/mettre à jour une extension';
+$GLOBALS['TL_LANG']['tl_repository']['installingext'] = 'Installer %s %s révision %s';
+$GLOBALS['TL_LANG']['tl_repository']['installlogtitle'] = 'Journal d\'installation/mise à jour';
+$GLOBALS['TL_LANG']['tl_repository']['lickeyrequired'] = 'Cette extension nécessite une clé d\'enregistrement. Visitez le site du vendeur pour en acheter une.';
+$GLOBALS['TL_LANG']['tl_repository']['none'] = 'Aucun';
+$GLOBALS['TL_LANG']['tl_repository']['notfound'] = 'non trouvé';
+$GLOBALS['TL_LANG']['tl_repository']['ok'] = 'OK';
+$GLOBALS['TL_LANG']['tl_repository']['okuninstextension'] = 'Êtes-vous d\'accord pour désinstaller <em>% s</em> maintenant ?';
+$GLOBALS['TL_LANG']['tl_repository']['showdetails'] = 'Afficher les détails';
+$GLOBALS['TL_LANG']['tl_repository']['stateshint'] = 'Sélectionnez les états à inclure.';
+$GLOBALS['TL_LANG']['tl_repository']['status'] = 'Statut';
+$GLOBALS['TL_LANG']['tl_repository']['success'] = 'succès';
+$GLOBALS['TL_LANG']['tl_repository']['uninstallextension'] = 'Désinstaller l\'extension';
+$GLOBALS['TL_LANG']['tl_repository']['updatedatabase'] = 'Vérifier/mettre à jour la base de données';
+$GLOBALS['TL_LANG']['tl_repository']['updateextension'] = 'Mettre à jour l\'extension';
+$GLOBALS['TL_LANG']['tl_repository']['updateextensions'] = 'Mettre à jour les extensions sélectionnées';
+$GLOBALS['TL_LANG']['tl_repository']['update'] = 'Mettre à jour';
+$GLOBALS['TL_LANG']['tl_repository']['updates'] = 'Mises à jour';
+$GLOBALS['TL_LANG']['tl_repository']['updatehint'] = 'Vérifier/réparer %s %s révision %s';
+$GLOBALS['TL_LANG']['tl_repository']['updatingext'] = 'Mettre à jour %s %s révision %s';
+$GLOBALS['TL_LANG']['tl_repository']['validate'] = 'Réparer';
+$GLOBALS['TL_LANG']['tl_repository']['validatingext'] = 'Vérifier/réparer %s %s révision %s';
+$GLOBALS['TL_LANG']['tl_repository']['approvedForLabel'] = 'Approuvé pour';
+$GLOBALS['TL_LANG']['tl_repository']['approvedForText'] = 'Contao %s à %s';
+$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule'] = 'L\'extension SOAP n\'est pas chargée (configurer PHP avec --enable-soap).';
+$GLOBALS['TL_LANG']['tl_repository_statext']['uptodate'] = 'Dernière version installée';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapproved'] = 'Non approuvé pour %s %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapprovedwith'] = 'Non approuvé avec %s %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['shouldwork'] = 'Devrait être compatible avec %s %s';
+$GLOBALS['TL_LANG']['tl_repository_statext']['newversion'] = 'Nouvelle version %s révision %s disponible.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['depmissing'] = 'L\'extension requise %s est manquante.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extnotfound'] = 'Extension non trouvée dans le référenciel';
+$GLOBALS['TL_LANG']['tl_repository_statext']['vernotfound'] = 'La version installée n\'a pas été trouvée dans le référenciel.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extneedkey'] = 'Clé d\'enregistrement nécessaire, installez l\'extension d\'abord.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['errorinstall'] = 'Échec de l\'installation, mise à jour et/ou réparation conseillée.';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['free'] = 'Libre';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['private'] = 'Privé';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['commercial'] = 'Commercial';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['application'] = 'Application';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['plugin'] = 'Plugin';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['template'] = 'Thème';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['utility'] = 'Utilitaire';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['widget'] = 'Widget';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['translation'] = 'Traduction';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['bundle'] = 'Bundle';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['other'] = 'Autre';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['core'] = 'Core';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['reldate'] = 'Date de sortie';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['rating'] = 'Note';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['popular'] = 'Popularité';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['name'] = 'Nom';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['title'] = 'Titre';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['author'] = 'Auteur';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['alpha'] = 'Alpha';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['beta'] = 'Beta';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['rc'] = 'RC (Release Candidate)';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['stable'] = 'Stable';

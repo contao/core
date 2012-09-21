@@ -1,0 +1,175 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/ja/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$GLOBALS['TL_LANG']['tl_style']['invisible'][0] = '非表示';
+$GLOBALS['TL_LANG']['tl_style']['invisible'][1] = '書式定義を書き出しません。';
+$GLOBALS['TL_LANG']['tl_style']['selector'][0] = 'セレクター';
+$GLOBALS['TL_LANG']['tl_style']['selector'][1] = 'セレクターは書式定義を適用する要素を指定します。';
+$GLOBALS['TL_LANG']['tl_style']['category'][0] = 'カテゴリ';
+$GLOBALS['TL_LANG']['tl_style']['category'][1] = 'カテゴリを使用してバックエンドで書式定義をグループ化できます。';
+$GLOBALS['TL_LANG']['tl_style']['comment'][0] = 'コメント';
+$GLOBALS['TL_LANG']['tl_style']['comment'][1] = 'コメントを追加できます。';
+$GLOBALS['TL_LANG']['tl_style']['size'][0] = '大きさ';
+$GLOBALS['TL_LANG']['tl_style']['size'][1] = 'width, height, min-width, min-height, max-width, max-height';
+$GLOBALS['TL_LANG']['tl_style']['width'][0] = '幅(width)';
+$GLOBALS['TL_LANG']['tl_style']['width'][1] = '要素の幅を入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['height'][0] = '高さ(height)';
+$GLOBALS['TL_LANG']['tl_style']['height'][1] = '要素の高さを入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['minwidth'][0] = '最小の幅(min-width)';
+$GLOBALS['TL_LANG']['tl_style']['minwidth'][1] = '要素の最小の幅を入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['minheight'][0] = '最小の高さ(min-height)';
+$GLOBALS['TL_LANG']['tl_style']['minheight'][1] = '要素の最小の高さを入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['maxwidth'][0] = '最大の幅(max-width)';
+$GLOBALS['TL_LANG']['tl_style']['maxwidth'][1] = '要素の最大の幅を入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['maxheight'][0] = '最大の高さ(max-height)';
+$GLOBALS['TL_LANG']['tl_style']['maxheight'][1] = '要素の最大の高さを入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['positioning'][0] = '位置';
+$GLOBALS['TL_LANG']['tl_style']['positioning'][1] = 'position, float, clear, overflow, display';
+$GLOBALS['TL_LANG']['tl_style']['trbl'][0] = '位置(top, right, bottom, left)';
+$GLOBALS['TL_LANG']['tl_style']['trbl'][1] = '上、右、下、左の位置を入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['position'][0] = '位置の種類(position)';
+$GLOBALS['TL_LANG']['tl_style']['position'][1] = 'positionの種類を選択できます。';
+$GLOBALS['TL_LANG']['tl_style']['floating'][0] = '浮動化(float)';
+$GLOBALS['TL_LANG']['tl_style']['floating'][1] = 'float属性の値を選択できます。';
+$GLOBALS['TL_LANG']['tl_style']['clear'][0] = '浮動化の解除(clear)';
+$GLOBALS['TL_LANG']['tl_style']['clear'][1] = 'clear属性の値を選択できます。';
+$GLOBALS['TL_LANG']['tl_style']['overflow'][0] = 'オーバーフロー(overflow)';
+$GLOBALS['TL_LANG']['tl_style']['overflow'][1] = 'overflow属性の値を選択できます。';
+$GLOBALS['TL_LANG']['tl_style']['display'][0] = 'ディスプレイ(display)';
+$GLOBALS['TL_LANG']['tl_style']['display'][1] = 'display属性の値を選択できます。';
+$GLOBALS['TL_LANG']['tl_style']['alignment'][0] = 'マージン、パディング、位置合わせ';
+$GLOBALS['TL_LANG']['tl_style']['alignment'][1] = 'margin, padding, align, vertical-align, text-align';
+$GLOBALS['TL_LANG']['tl_style']['margin'][0] = 'マージン(margin)';
+$GLOBALS['TL_LANG']['tl_style']['margin'][1] = '上、右、下、左のマージンを入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['padding'][0] = 'パディング(padding)';
+$GLOBALS['TL_LANG']['tl_style']['padding'][1] = '上、右、下、左のパディングを入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['align'][0] = '要素の位置合わせ(margin-left, margin-right)';
+$GLOBALS['TL_LANG']['tl_style']['align'][1] = '要素の位置合わせを指定すると、左右のマージンの指定は無効になります。';
+$GLOBALS['TL_LANG']['tl_style']['verticalalign'][0] = '垂直の位置合わせ(vertical-align)';
+$GLOBALS['TL_LANG']['tl_style']['verticalalign'][1] = '垂直の位置合わせを選択できます。';
+$GLOBALS['TL_LANG']['tl_style']['textalign'][0] = 'テキストの位置合わせ(text-align)';
+$GLOBALS['TL_LANG']['tl_style']['textalign'][1] = '水平のテキストの位置合わせを選択できます。';
+$GLOBALS['TL_LANG']['tl_style']['background'][0] = '背景';
+$GLOBALS['TL_LANG']['tl_style']['background'][1] = 'background-color, background-image, background-position, background-repeat, linear-gradient, box-shadow';
+$GLOBALS['TL_LANG']['tl_style']['bgcolor'][0] = '背景色と不透明度';
+$GLOBALS['TL_LANG']['tl_style']['bgcolor'][1] = '16進数で背景色(例: 赤ではff0000)とオプションで不透明度(例: 75)を入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['bgimage'][0] = '背景画像(background-image)';
+$GLOBALS['TL_LANG']['tl_style']['bgimage'][1] = '背景画像のパスを入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['bgposition'][0] = '背景画像の位置(background-position)';
+$GLOBALS['TL_LANG']['tl_style']['bgposition'][1] = '背景画像の位置を選択できます。';
+$GLOBALS['TL_LANG']['tl_style']['bgrepeat'][0] = '背景画像の繰り返し(background-repeat)';
+$GLOBALS['TL_LANG']['tl_style']['bgrepeat'][1] = '背景画像の繰り返しの方法を選択できます。';
+$GLOBALS['TL_LANG']['tl_style']['shadowsize'][0] = '影の大きさ';
+$GLOBALS['TL_LANG']['tl_style']['shadowsize'][1] = '横方向と横方向の位置、ぼかしの範囲、必須ではないぼかしの拡散範囲を入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['shadowcolor'][0] = '影の色';
+$GLOBALS['TL_LANG']['tl_style']['shadowcolor'][1] = '16進数で影の色(例: 赤ではff0000)とオプションで不透明度(例: 75)を入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][0] = 'グラデーションの角度';
+$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][1] = 'グラデーションの角度(例: <em>-45deg</em>)、または開始点(例: <em>top</em> や <em>left bottom</em>)を入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['gradientColors'][0] = 'グラデーションの色';
+$GLOBALS['TL_LANG']['tl_style']['gradientColors'][1] = 'パーセント値を付加できる、4つまでの色を入力できます。(例: <em>ffc 10% | f90 | f00</em>)';
+$GLOBALS['TL_LANG']['tl_style']['border'][0] = 'ボーダー';
+$GLOBALS['TL_LANG']['tl_style']['border'][1] = 'border-width, border-style, border-color, border-radius, border-collapse, border-spacing';
+$GLOBALS['TL_LANG']['tl_style']['borderwidth'][0] = 'ボーダーの幅(border-width)';
+$GLOBALS['TL_LANG']['tl_style']['borderwidth'][1] = '上、右、下、左のボーダーの幅を入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['borderstyle'][0] = 'ボーダーのスタイル(border-style)';
+$GLOBALS['TL_LANG']['tl_style']['borderstyle'][1] = 'ボーダーのスタイルを選択できます。';
+$GLOBALS['TL_LANG']['tl_style']['bordercolor'][0] = 'ボーダーの色(border-color)';
+$GLOBALS['TL_LANG']['tl_style']['bordercolor'][1] = '16進数でボーダーの色(例: 赤ではff0000)とオプションで不透明度(例: 75)を入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['borderradius'][0] = 'ボーダーの丸み(border-radius)';
+$GLOBALS['TL_LANG']['tl_style']['borderradius'][1] = '上、右、下、左のボーダーの丸みを入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['bordercollapse'][0] = 'ボーダーの重ね方(border-collapse)';
+$GLOBALS['TL_LANG']['tl_style']['bordercollapse'][1] = 'ボーダーの重ね方を選択できます。';
+$GLOBALS['TL_LANG']['tl_style']['borderspacing'][0] = 'ボーダーの間隔(border-spacing)';
+$GLOBALS['TL_LANG']['tl_style']['borderspacing'][1] = 'ボーダーの間隔を入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['font'][0] = 'フォント';
+$GLOBALS['TL_LANG']['tl_style']['font'][1] = 'font-family, font-size, font-color, line-height, font-style, white-space';
+$GLOBALS['TL_LANG']['tl_style']['fontfamily'][0] = 'フォントファミリー(font-family)';
+$GLOBALS['TL_LANG']['tl_style']['fontfamily'][1] = 'フォントの種類をコンマで区切ったリストを入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['fontsize'][0] = 'フォントの大きさ(font-size)';
+$GLOBALS['TL_LANG']['tl_style']['fontsize'][1] = 'フォントの大きさを入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['fontcolor'][0] = 'フォントの色(font-color)';
+$GLOBALS['TL_LANG']['tl_style']['fontcolor'][1] = '16進数でフォントの色(例: 赤ではff0000)とオプションで不透明度(例: 75)を入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['lineheight'][0] = '行の高さ(line-height)';
+$GLOBALS['TL_LANG']['tl_style']['lineheight'][1] = '行の高さを指定できます。';
+$GLOBALS['TL_LANG']['tl_style']['fontstyle'][0] = 'フォントのスタイル(font-style, font-variant, font-weight, text-decoration)';
+$GLOBALS['TL_LANG']['tl_style']['fontstyle'][1] = 'フォントのスタイルを1つ以上選択できます。';
+$GLOBALS['TL_LANG']['tl_style']['whitespace'][0] = '自動的な改行を無効(white-space: nowrap)';
+$GLOBALS['TL_LANG']['tl_style']['whitespace'][1] = '単語の折り返しをしません。';
+$GLOBALS['TL_LANG']['tl_style']['texttransform'][0] = 'テキスト変換(text-transform)';
+$GLOBALS['TL_LANG']['tl_style']['texttransform'][1] = 'テキスト変換のモードを選択できます。';
+$GLOBALS['TL_LANG']['tl_style']['textindent'][0] = 'テキストの字下げ(text-indent)';
+$GLOBALS['TL_LANG']['tl_style']['textindent'][1] = 'テキストの字下げを入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['letterspacing'][0] = '文字の間隔(letter-spacing)';
+$GLOBALS['TL_LANG']['tl_style']['letterspacing'][1] = '文字の間隔を修正できます。(初期値: 0px)';
+$GLOBALS['TL_LANG']['tl_style']['wordspacing'][0] = '単語の間隔(word-spacing)';
+$GLOBALS['TL_LANG']['tl_style']['wordspacing'][1] = '単語の間隔を修正できます。(初期値: 0px)';
+$GLOBALS['TL_LANG']['tl_style']['list'][0] = '箇条書き';
+$GLOBALS['TL_LANG']['tl_style']['list'][1] = 'list-style-type, list-style-image';
+$GLOBALS['TL_LANG']['tl_style']['liststyletype'][0] = '箇条書きの行頭文字(list-style-type)';
+$GLOBALS['TL_LANG']['tl_style']['liststyletype'][1] = '箇条書きの行頭文字を選択できます。';
+$GLOBALS['TL_LANG']['tl_style']['liststyleimage'][0] = '独自の行頭文字(list-style-image)';
+$GLOBALS['TL_LANG']['tl_style']['liststyleimage'][1] = '独自の行頭文字として使用する画像のパスを入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['own'][0] = '独自のコード';
+$GLOBALS['TL_LANG']['tl_style']['own'][1] = '独自のCSSのコードを入力できます。';
+$GLOBALS['TL_LANG']['tl_style']['selector_legend'] = 'セレクターとカテゴリ';
+$GLOBALS['TL_LANG']['tl_style']['size_legend'] = '大きさ';
+$GLOBALS['TL_LANG']['tl_style']['position_legend'] = '位置';
+$GLOBALS['TL_LANG']['tl_style']['align_legend'] = 'マージンと位置合わせ';
+$GLOBALS['TL_LANG']['tl_style']['background_legend'] = '背景の設定';
+$GLOBALS['TL_LANG']['tl_style']['border_legend'] = 'ボーダーの設定';
+$GLOBALS['TL_LANG']['tl_style']['font_legend'] = 'フォントの設定';
+$GLOBALS['TL_LANG']['tl_style']['list_legend'] = '箇条書きの設定';
+$GLOBALS['TL_LANG']['tl_style']['custom_legend'] = '独自のコード';
+$GLOBALS['TL_LANG']['tl_style']['normal'] = '通常(font-weight: normal)';
+$GLOBALS['TL_LANG']['tl_style']['bold'] = '太字(font-weight: bold)';
+$GLOBALS['TL_LANG']['tl_style']['italic'] = '斜自体(font-weight: italic)';
+$GLOBALS['TL_LANG']['tl_style']['underline'] = '下線(text-decoration: underline)';
+$GLOBALS['TL_LANG']['tl_style']['notUnderlined'] = '下線なし(text-decoration: none)';
+$GLOBALS['TL_LANG']['tl_style']['line-through'] = '取り消し線(text-decoration: line-through)';
+$GLOBALS['TL_LANG']['tl_style']['overline'] = '上線(text-decoration: overline)';
+$GLOBALS['TL_LANG']['tl_style']['small-caps'] = '小さい大文字(font-variant: small-caps)';
+$GLOBALS['TL_LANG']['tl_style']['disc'] = '黒丸(disc)';
+$GLOBALS['TL_LANG']['tl_style']['circle'] = '円(circle)';
+$GLOBALS['TL_LANG']['tl_style']['square'] = '四角(square)';
+$GLOBALS['TL_LANG']['tl_style']['decimal'] = '数字(decimal)';
+$GLOBALS['TL_LANG']['tl_style']['upper-roman'] = '大文字のローマ数字(upper-roman)';
+$GLOBALS['TL_LANG']['tl_style']['lower-roman'] = '小文字のローマ数字(lower-roman)';
+$GLOBALS['TL_LANG']['tl_style']['upper-alpha'] = '大文字のアルファベット(upper-alpha)';
+$GLOBALS['TL_LANG']['tl_style']['lower-alpha'] = '小文字のアルファベット(lower-alpha)';
+$GLOBALS['TL_LANG']['tl_style']['uppercase'] = '大文字(uppercase)';
+$GLOBALS['TL_LANG']['tl_style']['lowercase'] = '小文字(lowercase)';
+$GLOBALS['TL_LANG']['tl_style']['capitalize'] = '大文字で開始(capitalize)';
+$GLOBALS['TL_LANG']['tl_style']['none'] = 'なし(none)';
+$GLOBALS['TL_LANG']['tl_style']['new'][0] = '新しい書式定義';
+$GLOBALS['TL_LANG']['tl_style']['new'][1] = '新しく書式定義を作成';
+$GLOBALS['TL_LANG']['tl_style']['show'][0] = '書式定義の詳細';
+$GLOBALS['TL_LANG']['tl_style']['show'][1] = 'ID %sの書式定義の詳細を表示';
+$GLOBALS['TL_LANG']['tl_style']['edit'][0] = '書式定義を編集';
+$GLOBALS['TL_LANG']['tl_style']['edit'][1] = 'ID %sの書式定義を編集';
+$GLOBALS['TL_LANG']['tl_style']['cut'][0] = '書式定義を移動';
+$GLOBALS['TL_LANG']['tl_style']['cut'][1] = 'ID %sの書式定義を移動';
+$GLOBALS['TL_LANG']['tl_style']['copy'][0] = '書式定義を複製';
+$GLOBALS['TL_LANG']['tl_style']['copy'][1] = 'ID %sの書式定義を複製';
+$GLOBALS['TL_LANG']['tl_style']['delete'][0] = '書式定義を削除';
+$GLOBALS['TL_LANG']['tl_style']['delete'][1] = 'ID %sの書式定義を削除';
+$GLOBALS['TL_LANG']['tl_style']['editheader'][0] = 'スタイルシートを変更';
+$GLOBALS['TL_LANG']['tl_style']['editheader'][1] = 'このスタイルシートの設定を変更';
+$GLOBALS['TL_LANG']['tl_style']['pasteafter'][0] = '先頭に貼り付け';
+$GLOBALS['TL_LANG']['tl_style']['pasteafter'][1] = 'ID %sの書式定義の後に貼り付け';
+$GLOBALS['TL_LANG']['tl_style']['pastenew'][0] = '先頭に追加';
+$GLOBALS['TL_LANG']['tl_style']['pastenew'][1] = 'ID %sの書式定義の後に追加';
+$GLOBALS['TL_LANG']['tl_style']['toggle'][0] = '表示の有無を切り替え';
+$GLOBALS['TL_LANG']['tl_style']['toggle'][1] = 'ID %sの書式定義の表示の有無を切り替え';

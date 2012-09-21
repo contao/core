@@ -1,0 +1,175 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/ru/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$GLOBALS['TL_LANG']['tl_style']['invisible'][0] = 'Невидимый';
+$GLOBALS['TL_LANG']['tl_style']['invisible'][1] = 'Не экспортировать определение формата.';
+$GLOBALS['TL_LANG']['tl_style']['selector'][0] = 'Selector (Селектор)';
+$GLOBALS['TL_LANG']['tl_style']['selector'][1] = 'Селектор определяет, к какому элементу HTML или элементу группы относится определение формата. Вы можете ввести один или несколько селекторов через запятую.';
+$GLOBALS['TL_LANG']['tl_style']['category'][0] = 'Category (Категория)';
+$GLOBALS['TL_LANG']['tl_style']['category'][1] = 'Категории можно использовать для группировки форматов дескрипторов.';
+$GLOBALS['TL_LANG']['tl_style']['comment'][0] = 'Комментарий';
+$GLOBALS['TL_LANG']['tl_style']['comment'][1] = 'Комментарии будут показаны выше соответствующего определения формата.';
+$GLOBALS['TL_LANG']['tl_style']['size'][0] = 'Свойство Size (Размер)';
+$GLOBALS['TL_LANG']['tl_style']['size'][1] = 'Width (ширина), height (высота), min-width (минимальная ширина), min-height (минимальная высота), max-width (максимальная ширина) и max-height (максимальная высота).';
+$GLOBALS['TL_LANG']['tl_style']['width'][0] = 'Свойство Width (Ширина)';
+$GLOBALS['TL_LANG']['tl_style']['width'][1] = 'Вы можете ввести ширину элемента и единицы.';
+$GLOBALS['TL_LANG']['tl_style']['height'][0] = 'Свойство Height (Высота)';
+$GLOBALS['TL_LANG']['tl_style']['height'][1] = 'Вы можете ввести высоту элемента и единицы.';
+$GLOBALS['TL_LANG']['tl_style']['minwidth'][0] = 'Свойство Minimum width (Минимальная ширина)';
+$GLOBALS['TL_LANG']['tl_style']['minwidth'][1] = 'Вы можете ввести минимальную ширину элемента и единицы.';
+$GLOBALS['TL_LANG']['tl_style']['minheight'][0] = 'Свойство Minimum height (Минимальная высота)';
+$GLOBALS['TL_LANG']['tl_style']['minheight'][1] = 'Вы можете ввести минимальную высоту элемента и единицы.';
+$GLOBALS['TL_LANG']['tl_style']['maxwidth'][0] = 'Свойство Maximum width (Максимальная ширина)';
+$GLOBALS['TL_LANG']['tl_style']['maxwidth'][1] = 'Вы можете ввести максимальную ширину элемента и единицы.';
+$GLOBALS['TL_LANG']['tl_style']['maxheight'][0] = 'Свойство Maximum height (Максимальная высота)';
+$GLOBALS['TL_LANG']['tl_style']['maxheight'][1] = 'Вы можете ввести максимальную высоту элемента и единицы.';
+$GLOBALS['TL_LANG']['tl_style']['positioning'][0] = 'Свойство Position (Позиционирование)';
+$GLOBALS['TL_LANG']['tl_style']['positioning'][1] = 'Position (Позиционирование), float (обтекание), clear (отмена обтекания), overflow (переполнение) и display (тип отображения).';
+$GLOBALS['TL_LANG']['tl_style']['trbl'][0] = 'Свойство Position (Позиционирование)';
+$GLOBALS['TL_LANG']['tl_style']['trbl'][1] = 'Вы можете ввести верхнее (top), правое (right), нижнее (bottom) и левое (left) позиционирование, а также единицы значений. (Устанавливает способ позиционирования элемента относительно окна браузера или других объектов на веб-странице).';
+$GLOBALS['TL_LANG']['tl_style']['position'][0] = 'Свойство Position type (Тип позиционирования)';
+$GLOBALS['TL_LANG']['tl_style']['position'][1] = 'Определите тип позиционирования блока.';
+$GLOBALS['TL_LANG']['tl_style']['floating'][0] = 'Свойство Float (Обтекание блока)';
+$GLOBALS['TL_LANG']['tl_style']['floating'][1] = 'Определите тип обтекания блока';
+$GLOBALS['TL_LANG']['tl_style']['clear'][0] = 'Свойство Clear (Отменить обтекание)';
+$GLOBALS['TL_LANG']['tl_style']['clear'][1] = 'Определите тип отмены обтекания. (Продолжает нормальный текст под плавающим элементом).';
+$GLOBALS['TL_LANG']['tl_style']['overflow'][0] = 'Свойство Overflow (Переполнение блока)';
+$GLOBALS['TL_LANG']['tl_style']['overflow'][1] = 'Вы можете выбрать поведение при переполнении. (Определяет, как отображается элемент, если содержимое превышает заданный размер.)';
+$GLOBALS['TL_LANG']['tl_style']['display'][0] = 'Свойство Display (Тип отображения)';
+$GLOBALS['TL_LANG']['tl_style']['display'][1] = 'Вы можете выбрать тип отображения элемента.';
+$GLOBALS['TL_LANG']['tl_style']['alignment'][0] = 'Свойства Margin, Padding и Alignment (Внешние и внутренние отступы, и выравнивание)';
+$GLOBALS['TL_LANG']['tl_style']['alignment'][1] = 'Margin (Внешние отступы), padding (внутренние отступы), align (выравнивание), vertical-align (вертикальное выравнивание) и text-align (выравнивание текста).';
+$GLOBALS['TL_LANG']['tl_style']['margin'][0] = 'Свойство Margin (Внешний отступ)';
+$GLOBALS['TL_LANG']['tl_style']['margin'][1] = 'Вы можете ввести верхний (top), правый (right), нижний (bottom) и левый (left) внешний отступ, а также единицы значений. (Значения являются расстояниями между элементом и окружающими элементами.)';
+$GLOBALS['TL_LANG']['tl_style']['padding'][0] = 'Свойство Padding (Внутренний отступ)';
+$GLOBALS['TL_LANG']['tl_style']['padding'][1] = 'Вы можете ввести верхний (top), правый (right), нижний (bottom) и левый (left) внутренний отступ, а также единицы значений. (Значения являются расстояниями между содержимым элемента и собственными границами.)';
+$GLOBALS['TL_LANG']['tl_style']['align'][0] = 'Свойство Align (Выравнивание элемента)';
+$GLOBALS['TL_LANG']['tl_style']['align'][1] = 'Определяет выравнивание элемента по левому или правому краю. (Чтобы выровнять элемент, его левый и правый внешний отступ (Margin) будет перезаписан.';
+$GLOBALS['TL_LANG']['tl_style']['verticalalign'][0] = 'Свойство Vertical-Align (Вертикальное выравнивание)';
+$GLOBALS['TL_LANG']['tl_style']['verticalalign'][1] = 'Вы можете выбрать вертикальное выравнивание.';
+$GLOBALS['TL_LANG']['tl_style']['textalign'][0] = 'Свойство Text-Align (Выравнивание текста)';
+$GLOBALS['TL_LANG']['tl_style']['textalign'][1] = 'Вы можете выбрать горизонтальное выравнивание текста.';
+$GLOBALS['TL_LANG']['tl_style']['background'][0] = 'Свойство Background (Фон)';
+$GLOBALS['TL_LANG']['tl_style']['background'][1] = 'Background-color (Цвет фона), background-image (фоновое изображение), background-position (позиционирование фона), background-repeat (повторение фона), linear-gradient (линейный градиент) и box-shadow (тень элемента). фона (цвет фона, фоновое изображение, позиция фона).';
+$GLOBALS['TL_LANG']['tl_style']['bgcolor'][0] = 'Свойства Background color и transparency (Цвет фона и прозрачность)';
+$GLOBALS['TL_LANG']['tl_style']['bgcolor'][1] = 'Вы можете ввести шестнадцатеричный цвет фона (напр. ff0000 для красного) и дополнительную прозрачность в процентах (напр. 75).';
+$GLOBALS['TL_LANG']['tl_style']['bgimage'][0] = 'Свойство Background image (Фоновое изображение)';
+$GLOBALS['TL_LANG']['tl_style']['bgimage'][1] = 'Вы можете указать путь к фоновому изображению.';
+$GLOBALS['TL_LANG']['tl_style']['bgposition'][0] = 'Свойство Background position (Позиционирование фона)';
+$GLOBALS['TL_LANG']['tl_style']['bgposition'][1] = 'Вы можете выбрать позиционирование фонового изображения.';
+$GLOBALS['TL_LANG']['tl_style']['bgrepeat'][0] = 'Свойство Background repeat (Повторение фона)';
+$GLOBALS['TL_LANG']['tl_style']['bgrepeat'][1] = 'Выберите режим повторения фонового изображения.';
+$GLOBALS['TL_LANG']['tl_style']['shadowsize'][0] = 'Свойство Shadow size (Размер тени)';
+$GLOBALS['TL_LANG']['tl_style']['shadowsize'][1] = 'Вы можете ввести X и Y смещение (offset), дополнительный размер размытия (blur) и дополнительный радиус распространения (spread radius).';
+$GLOBALS['TL_LANG']['tl_style']['shadowcolor'][0] = 'Свойство Shadow color (Цвет тени)';
+$GLOBALS['TL_LANG']['tl_style']['shadowcolor'][1] = 'Вы можете ввести шестнадцатеричный цвет тени (напр. ff0000 для красного) и дополнительную прозрачность в процентах (напр. 75).';
+$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][0] = 'Свойство Gradient angle (Угол градиента)';
+$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][1] = 'Вы можете ввести угол наклона градиента (напр. <em>-45deg</em>) или отправную точку (напр. <em>top</em> или <em>left bottom</em>)';
+$GLOBALS['TL_LANG']['tl_style']['gradientColors'][0] = 'Свойство Gradient colors (Цвет градиента)';
+$GLOBALS['TL_LANG']['tl_style']['gradientColors'][1] = 'Вы можете ввести до четырех цветов процентах (напр. <em>ffc 10% | f90 | f00</em>).';
+$GLOBALS['TL_LANG']['tl_style']['border'][0] = 'Свойство Border (Граница)';
+$GLOBALS['TL_LANG']['tl_style']['border'][1] = 'Border-width (Ширина границы), border-style (стиль границы), border-color (цвет границы), border-radius (радиус границы), border-collapse (сворачивание границы) и border-spacing (интервалы границ).';
+$GLOBALS['TL_LANG']['tl_style']['borderwidth'][0] = 'Свойство Border width (Ширина границы)';
+$GLOBALS['TL_LANG']['tl_style']['borderwidth'][1] = 'Вы можете ввести верхнюю (top), правую (right), нижнюю (bottom) и левую (left) ширину границы.';
+$GLOBALS['TL_LANG']['tl_style']['borderstyle'][0] = 'Свойство Border style (Стиль границы)';
+$GLOBALS['TL_LANG']['tl_style']['borderstyle'][1] = 'Вы можете выбрать стиль границы.';
+$GLOBALS['TL_LANG']['tl_style']['bordercolor'][0] = 'Свойство Border color (Цвет границы)';
+$GLOBALS['TL_LANG']['tl_style']['bordercolor'][1] = 'Вы можете ввести шестнадцатеричный цвет границы (напр. ff0000 для красного) и дополнительную прозрачность в процентах (напр. 75).';
+$GLOBALS['TL_LANG']['tl_style']['borderradius'][0] = 'Свойство Border radius (Радиус границы)';
+$GLOBALS['TL_LANG']['tl_style']['borderradius'][1] = 'Вы можете ввести верхнюю (top), правую (right), нижнюю (bottom) и левую (left) границу радиуса.';
+$GLOBALS['TL_LANG']['tl_style']['bordercollapse'][0] = 'Свойство Border-Collapse (Border handling) (Сворачивание границы)';
+$GLOBALS['TL_LANG']['tl_style']['bordercollapse'][1] = 'Вы можете выбрать границы обработки. (Будут ли границы ячеек таблицы отображаться как единая граница или как отдельные границы).';
+$GLOBALS['TL_LANG']['tl_style']['borderspacing'][0] = 'Свойство Border spacing (Интервалы границ)';
+$GLOBALS['TL_LANG']['tl_style']['borderspacing'][1] = 'Вы можете ввести границы интервала между ячейками в таблице.';
+$GLOBALS['TL_LANG']['tl_style']['font'][0] = 'Свойство Font (Шрифт)';
+$GLOBALS['TL_LANG']['tl_style']['font'][1] = 'Font-family (Семейство шрифтов), font-size (размер шрифта), font-color (цвет шрифта), line-height (высота строки), font-style (стиль шрифта) и white-space (перевод строки).';
+$GLOBALS['TL_LANG']['tl_style']['fontfamily'][0] = 'Свойство Font family (Семейство шрифтов)';
+$GLOBALS['TL_LANG']['tl_style']['fontfamily'][1] = 'Вы можете ввести список разделенных запятыми типов шрифта, в порядке убывания предпочтения. Используйте кавычки, если название какого-либо семейства содержит пробелы (напр. <em>"MS Microsoft Sans Serif sans-serif"</em>).';
+$GLOBALS['TL_LANG']['tl_style']['fontsize'][0] = 'Свойство Font size (Размер шрифта)';
+$GLOBALS['TL_LANG']['tl_style']['fontsize'][1] = 'Вы можете ввести размер и единицы отображения шрифта.';
+$GLOBALS['TL_LANG']['tl_style']['fontcolor'][0] = 'Свойство Font color (Цвет шрифта)';
+$GLOBALS['TL_LANG']['tl_style']['fontcolor'][1] = 'Вы можете ввести шестнадцатеричный цвет шрифта (напр. ff0000 для красного) и дополнительную прозрачность в процентах (напр. 75).';
+$GLOBALS['TL_LANG']['tl_style']['lineheight'][0] = 'Свойство Line height (Высота строки)';
+$GLOBALS['TL_LANG']['tl_style']['lineheight'][1] = 'Вы можете указать требуемую высоту строки.';
+$GLOBALS['TL_LANG']['tl_style']['fontstyle'][0] = 'Свойство Font style (Стиль шрифта)';
+$GLOBALS['TL_LANG']['tl_style']['fontstyle'][1] = 'Вы можете выбрать один или несколько стилей отображения шрифта.';
+$GLOBALS['TL_LANG']['tl_style']['whitespace'][0] = 'Свойство White space (Перевод строки)';
+$GLOBALS['TL_LANG']['tl_style']['whitespace'][1] = 'Отключает автоматический перевод строки. (Можно отключить автоматическое определение расстояния между словами).';
+$GLOBALS['TL_LANG']['tl_style']['texttransform'][0] = 'Свойство Text transform (Преобразование текста)';
+$GLOBALS['TL_LANG']['tl_style']['texttransform'][1] = 'Вы можете выбрать режим преобразования текста. (Свойство text-transform контролирует в тексте выделение заглавными буквами).';
+$GLOBALS['TL_LANG']['tl_style']['textindent'][0] = 'Свойство Text indent (Отступ текста)';
+$GLOBALS['TL_LANG']['tl_style']['textindent'][1] = 'Вы можете ввести отступ текста. (Свойство text-indent определяет отступ первой строки в текстовом блоке).';
+$GLOBALS['TL_LANG']['tl_style']['letterspacing'][0] = 'Свойство Letter spacing (Межбуквенный интервал)';
+$GLOBALS['TL_LANG']['tl_style']['letterspacing'][1] = 'Вы можете изменить расстояние между буквами (по умолчанию: 0px). (Свойство letter-spacing увеличивает или уменьшает расстояние между буквами в тексте).';
+$GLOBALS['TL_LANG']['tl_style']['wordspacing'][0] = 'Свойство Word spacing (Интервал между словами)';
+$GLOBALS['TL_LANG']['tl_style']['wordspacing'][1] = 'Вы можете изменить интервал между словами (по умолчанию: 0px). (Свойство word-spacing уменьшает или увеличивает пробелы между словами).';
+$GLOBALS['TL_LANG']['tl_style']['list'][0] = 'Свойство List (Список)';
+$GLOBALS['TL_LANG']['tl_style']['list'][1] = 'List-style-type (Стиль отображения списка) и list-style-image (маркер списка в виде изображения).';
+$GLOBALS['TL_LANG']['tl_style']['liststyletype'][0] = 'Свойство List-Style-Type (Стиль отображения списка)';
+$GLOBALS['TL_LANG']['tl_style']['liststyletype'][1] = 'Вы можете выбрать символ списка. (Свойство list-style-type определяет тип маркера в списке. Применяется к тегам < dd >, < dt >, < li >, < ol > и < ul > и к элементам display: list-item).';
+$GLOBALS['TL_LANG']['tl_style']['liststyleimage'][0] = 'Свойство List-Style-Image (Маркер списка в виде изображения)';
+$GLOBALS['TL_LANG']['tl_style']['liststyleimage'][1] = 'Вы можете указать путь к изображению, которое будет использоваться как маркер, заменяя символ в отображении пунктов списка. (Свойство list-style-image заменяет маркер списка изображением).';
+$GLOBALS['TL_LANG']['tl_style']['own'][0] = 'Пользовательский CSS-код';
+$GLOBALS['TL_LANG']['tl_style']['own'][1] = 'Вы можете ввести собственный код стилей (CSS).';
+$GLOBALS['TL_LANG']['tl_style']['selector_legend'] = 'Свойства Selector и category (Селектор и категории)';
+$GLOBALS['TL_LANG']['tl_style']['size_legend'] = 'Свойство Size (Размер)';
+$GLOBALS['TL_LANG']['tl_style']['position_legend'] = 'Свойство Position (Позиционирование)';
+$GLOBALS['TL_LANG']['tl_style']['align_legend'] = 'Свойства Margin и alignment (Внешние отступы и выравнивание)';
+$GLOBALS['TL_LANG']['tl_style']['background_legend'] = 'Настройки фона';
+$GLOBALS['TL_LANG']['tl_style']['border_legend'] = 'Настройки границ';
+$GLOBALS['TL_LANG']['tl_style']['font_legend'] = 'Настройки шрифтов';
+$GLOBALS['TL_LANG']['tl_style']['list_legend'] = 'Настройки списка';
+$GLOBALS['TL_LANG']['tl_style']['custom_legend'] = 'Пользовательский CSS-код';
+$GLOBALS['TL_LANG']['tl_style']['normal'] = 'обычный (normal)';
+$GLOBALS['TL_LANG']['tl_style']['bold'] = 'полужирный (bold)';
+$GLOBALS['TL_LANG']['tl_style']['italic'] = 'курсив (italic)';
+$GLOBALS['TL_LANG']['tl_style']['underline'] = 'с подчеркиванием (underlined)';
+$GLOBALS['TL_LANG']['tl_style']['notUnderlined'] = 'без подчеркивания (not underlined)';
+$GLOBALS['TL_LANG']['tl_style']['line-through'] = 'с перечеркиванием (line-through)';
+$GLOBALS['TL_LANG']['tl_style']['overline'] = 'с отчеркиванием (overlined)';
+$GLOBALS['TL_LANG']['tl_style']['small-caps'] = 'прописные-строчные (small-caps)';
+$GLOBALS['TL_LANG']['tl_style']['disc'] = 'точка (dot)';
+$GLOBALS['TL_LANG']['tl_style']['circle'] = 'круг (circle)';
+$GLOBALS['TL_LANG']['tl_style']['square'] = 'квадрат (square)';
+$GLOBALS['TL_LANG']['tl_style']['decimal'] = 'арабские цифры (figures)';
+$GLOBALS['TL_LANG']['tl_style']['upper-roman'] = 'большие латинские цифры (upper latin figures)';
+$GLOBALS['TL_LANG']['tl_style']['lower-roman'] = 'малые латинские цифры (lower latin figures)';
+$GLOBALS['TL_LANG']['tl_style']['upper-alpha'] = 'прописные латинские буквы (upper characters)';
+$GLOBALS['TL_LANG']['tl_style']['lower-alpha'] = 'строчные латинские буквы (lower characters)';
+$GLOBALS['TL_LANG']['tl_style']['uppercase'] = 'прописные буквы (uppercase)';
+$GLOBALS['TL_LANG']['tl_style']['lowercase'] = 'строчные буквы (lowercase)';
+$GLOBALS['TL_LANG']['tl_style']['capitalize'] = 'первый символ заглавный (capitalize)';
+$GLOBALS['TL_LANG']['tl_style']['none'] = 'без маркера';
+$GLOBALS['TL_LANG']['tl_style']['new'][0] = 'Создание определения нового формата';
+$GLOBALS['TL_LANG']['tl_style']['new'][1] = 'Создать определение нового формата';
+$GLOBALS['TL_LANG']['tl_style']['show'][0] = 'Детали определения формата';
+$GLOBALS['TL_LANG']['tl_style']['show'][1] = 'Показать детали определения формата ID %s';
+$GLOBALS['TL_LANG']['tl_style']['edit'][0] = 'Редактировать определения формата';
+$GLOBALS['TL_LANG']['tl_style']['edit'][1] = 'Редактировать определение формата ID %s';
+$GLOBALS['TL_LANG']['tl_style']['cut'][0] = 'Переместить определение формата';
+$GLOBALS['TL_LANG']['tl_style']['cut'][1] = 'Переместить определение формата ID %s';
+$GLOBALS['TL_LANG']['tl_style']['copy'][0] = 'Дублировать определение формата';
+$GLOBALS['TL_LANG']['tl_style']['copy'][1] = 'Дублировать определение формата ID %s';
+$GLOBALS['TL_LANG']['tl_style']['delete'][0] = 'Удаление определения формата';
+$GLOBALS['TL_LANG']['tl_style']['delete'][1] = 'Удалить определение формата ID %s';
+$GLOBALS['TL_LANG']['tl_style']['editheader'][0] = 'Редактировать стиль заголовка';
+$GLOBALS['TL_LANG']['tl_style']['editheader'][1] = 'Редактировать заголовок таблицы стилей';
+$GLOBALS['TL_LANG']['tl_style']['pasteafter'][0] = 'Вставить в начало';
+$GLOBALS['TL_LANG']['tl_style']['pasteafter'][1] = 'Вставить после определения формата ID %s';
+$GLOBALS['TL_LANG']['tl_style']['pastenew'][0] = 'Создать в начале новое определение формата';
+$GLOBALS['TL_LANG']['tl_style']['pastenew'][1] = 'Создать в начале новое определение формата после определения формата ID %s';
+$GLOBALS['TL_LANG']['tl_style']['toggle'][0] = 'Переключить видимость';
+$GLOBALS['TL_LANG']['tl_style']['toggle'][1] = 'Переключить видимость определения формата ID %s';

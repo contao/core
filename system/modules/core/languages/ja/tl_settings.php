@@ -1,0 +1,173 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/ja/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$GLOBALS['TL_LANG']['tl_settings']['websiteTitle'][0] = 'ウェブサイトの題名';
+$GLOBALS['TL_LANG']['tl_settings']['websiteTitle'][1] = 'ウェブサイトの題名を入力してください。';
+$GLOBALS['TL_LANG']['tl_settings']['adminEmail'][0] = 'システム管理者の電子メールアドレス';
+$GLOBALS['TL_LANG']['tl_settings']['adminEmail'][1] = '申し込みの確認の電子メールといった、自動的に生成するメッセージはこのアドレスから送信します。';
+$GLOBALS['TL_LANG']['tl_settings']['dateFormat'][0] = '日付の書式';
+$GLOBALS['TL_LANG']['tl_settings']['dateFormat'][1] = '日付の書式はPHPのdate()関数で解析します。';
+$GLOBALS['TL_LANG']['tl_settings']['timeFormat'][0] = '時刻の書式';
+$GLOBALS['TL_LANG']['tl_settings']['timeFormat'][1] = '時刻の書式はPHPのdate()関数で解析します。';
+$GLOBALS['TL_LANG']['tl_settings']['datimFormat'][0] = '日付と時刻の書式';
+$GLOBALS['TL_LANG']['tl_settings']['datimFormat'][1] = '日付と時刻の書式はPHPのdate()関数で解析します。';
+$GLOBALS['TL_LANG']['tl_settings']['timeZone'][0] = 'タイムゾーン';
+$GLOBALS['TL_LANG']['tl_settings']['timeZone'][1] = 'サーバーのタイムゾーンを選択してください。';
+$GLOBALS['TL_LANG']['tl_settings']['websitePath'][0] = 'Contaoのディレクトリの相対パス';
+$GLOBALS['TL_LANG']['tl_settings']['websitePath'][1] = 'Contaoのディレクトリの相対パスは通常インストールツールが自動的に設定します。';
+$GLOBALS['TL_LANG']['tl_settings']['characterSet'][0] = '文字セット';
+$GLOBALS['TL_LANG']['tl_settings']['characterSet'][1] = '特殊文字を正しく表示するように、UTF-8の使用をお勧めします。';
+$GLOBALS['TL_LANG']['tl_settings']['customSections'][0] = 'カスタムレイアウトセクション';
+$GLOBALS['TL_LANG']['tl_settings']['customSections'][1] = 'カスタムレイアウトセクションの名前をコンマで区切ったリストで入力します。';
+$GLOBALS['TL_LANG']['tl_settings']['disableCron'][0] = 'コマンドスケジューラーを不使用';
+$GLOBALS['TL_LANG']['tl_settings']['disableCron'][1] = '定期的なコマンドのスケジューラーを使用しないで、(手動で設定がしなければならない)本当のcronのジョブでcron.phpスクリプトを実行します。';
+$GLOBALS['TL_LANG']['tl_settings']['minifyMarkup'][0] = 'マークアップを削減';
+$GLOBALS['TL_LANG']['tl_settings']['minifyMarkup'][1] = 'ブラウザーに送る前にHTMLのマークアップを少なくします。(PHPのtidy拡張が必要です。)';
+$GLOBALS['TL_LANG']['tl_settings']['gzipScripts'][0] = 'スクリプトを圧縮';
+$GLOBALS['TL_LANG']['tl_settings']['gzipScripts'][1] = '一体化したCSSとJavaScriptの圧縮したバージョンを作成します。.htaccessファイルに調整が必要です。';
+$GLOBALS['TL_LANG']['tl_settings']['resultsPerPage'][0] = '1ページの項目数';
+$GLOBALS['TL_LANG']['tl_settings']['resultsPerPage'][1] = 'バックエンドで1ページの項目数を指定します。';
+$GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage'][0] = '1ページの項目数の最大値';
+$GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage'][1] = '「すべての項目を表示」のオプションを選択した場合の、項目の最大数となります。';
+$GLOBALS['TL_LANG']['tl_settings']['fileSyncExclude'][0] = '同期の対称としないフォルダー';
+$GLOBALS['TL_LANG']['tl_settings']['fileSyncExclude'][1] = 'ファイルの同期を適用しないフォルダー(例えば、<em>attachments、music_academy</em>)をコンマで区切ったリストで指定します。指定したフォルダーに含まれるリソースはコンテンツ要素の画像やダウンロード等で使用できないことに注意してください。';
+$GLOBALS['TL_LANG']['tl_settings']['doNotCollapse'][0] = '要素を折り畳まない';
+$GLOBALS['TL_LANG']['tl_settings']['doNotCollapse'][1] = 'バックエンドのプレビューで要素を折り畳みません。';
+$GLOBALS['TL_LANG']['tl_settings']['urlSuffix'][0] = 'URLのサフィックス';
+$GLOBALS['TL_LANG']['tl_settings']['urlSuffix'][1] = '静的なドキュメントのように見せるため、URLのサフィックスをURIに追加します。';
+$GLOBALS['TL_LANG']['tl_settings']['cacheMode'][0] = 'キャッシュのモード';
+$GLOBALS['TL_LANG']['tl_settings']['cacheMode'][1] = 'キャッシュのモードを選択します。';
+$GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeIp'][0] = 'IPアドレスの匿名化';
+$GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeIp'][1] = 'データベースに保存するIPアドレスを、<em>tl_session</em>テーブルを除いて匿名化します。(セキュリティ上の理由でIPアドレスはセッションに結びつけられています。)';
+$GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeGA'][0] = 'Googleアナリティックスを匿名化';
+$GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeGA'][1] = 'Googleアナリティックスに送るIPアドレスを匿名化します。';
+$GLOBALS['TL_LANG']['tl_settings']['rewriteURL'][0] = 'URLの書き換え';
+$GLOBALS['TL_LANG']['tl_settings']['rewriteURL'][1] = 'index.phpを含まない静的なURLをContaoに生成させます。この機能は"mod_rewrite"が必要とし、".htaccess.default"を".htaccess"に名前を変更し、必要に応じてRewriteBaseを調整しなければなりません。';
+$GLOBALS['TL_LANG']['tl_settings']['addLanguageToUrl'][0] = '言語をURLに追加';
+$GLOBALS['TL_LANG']['tl_settings']['addLanguageToUrl'][1] = 'URLの最初のパラメーターに言語の文字列を追加します。(例: <em>http://domain.tld/en/</em>)';
+$GLOBALS['TL_LANG']['tl_settings']['doNotRedirectEmpty'][0] = '空のURLにリダイレクトしない';
+$GLOBALS['TL_LANG']['tl_settings']['doNotRedirectEmpty'][1] = '言語をURLに追加を有効にしているときに、空のURLで言語のルートのページにリダイレクトしません。(推奨しません。)';
+$GLOBALS['TL_LANG']['tl_settings']['useAutoItem'][0] = 'auto_itemパラメーターを有効';
+$GLOBALS['TL_LANG']['tl_settings']['useAutoItem'][1] = 'URLの <em>items/</em> や <em>events/</em> といった断片を飛ばして、 <em>auto_item</em> パラメーターを基に自動的に項目を見いだします。';
+$GLOBALS['TL_LANG']['tl_settings']['disableAlias'][0] = 'ページのエイリアスを無効';
+$GLOBALS['TL_LANG']['tl_settings']['disableAlias'][1] = 'ページやアーティクルのエイリアスの代わりに数値のIDを使用します。';
+$GLOBALS['TL_LANG']['tl_settings']['folderUrl'][0] = 'フォルダーのURLを有効';
+$GLOBALS['TL_LANG']['tl_settings']['folderUrl'][1] = 'フォルダー形式のページのエイリアスを有効にして、<em>docs-install-download.html</em>の代わりに<em>docs/install/download.html</em>を使用可能にします。';
+$GLOBALS['TL_LANG']['tl_settings']['allowedTags'][0] = '許可するHTMLタグ';
+$GLOBALS['TL_LANG']['tl_settings']['allowedTags'][1] = '削除しないで許可するHTMLのタグのリストを指定します。';
+$GLOBALS['TL_LANG']['tl_settings']['debugMode'][0] = 'デバッグモードを有効';
+$GLOBALS['TL_LANG']['tl_settings']['debugMode'][1] = 'データベースの問い合わせのような、特定の実行時の情報を画面に表示します。';
+$GLOBALS['TL_LANG']['tl_settings']['bypassCache'][0] = '内部のキャッシュを無視';
+$GLOBALS['TL_LANG']['tl_settings']['bypassCache'][1] = '内部のキャッシュファイルを使用しません(例えば、機能拡張を開発しているときに便利です)。';
+$GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'][0] = 'リクエストトークンを不使用';
+$GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'][1] = 'フォームが提出されたときにリクエストトークンを検査しません。注意: このオプションを選択すると、潜在的なセキュリティのリスクが発生します。';
+$GLOBALS['TL_LANG']['tl_settings']['lockPeriod'][0] = 'アカウントのロック時間';
+$GLOBALS['TL_LANG']['tl_settings']['lockPeriod'][1] = '連続して3回誤ったパスワードを入力すると、アカウントをロックします。';
+$GLOBALS['TL_LANG']['tl_settings']['displayErrors'][0] = 'エラーメッセージを表示';
+$GLOBALS['TL_LANG']['tl_settings']['displayErrors'][1] = 'エラーメッセージを画面に表示(実運用のサイトではお勧めしません)。';
+$GLOBALS['TL_LANG']['tl_settings']['logErrors'][0] = 'エラーメッセージのログ';
+$GLOBALS['TL_LANG']['tl_settings']['logErrors'][1] = 'ログファイル(<em>system/logs/error.log</em>)にエラーメッセージを書き込みます。';
+$GLOBALS['TL_LANG']['tl_settings']['coreOnlyMode'][0] = 'セーフモードで動作';
+$GLOBALS['TL_LANG']['tl_settings']['coreOnlyMode'][1] = 'Contaoをセーフモードで動作させてコアのモジュールだけ読み込みます。';
+$GLOBALS['TL_LANG']['tl_settings']['disableIpCheck'][0] = 'IPの検査を中止';
+$GLOBALS['TL_LANG']['tl_settings']['disableIpCheck'][1] = 'IPアドレスにセッションを結び付けません。このオプションを選択すると、潜在的なセキュリティのリスクが発生します。';
+$GLOBALS['TL_LANG']['tl_settings']['allowedDownload'][0] = 'ダウンロードのファイル形式';
+$GLOBALS['TL_LANG']['tl_settings']['allowedDownload'][1] = 'ダウンロードできるファイル形式をコンマで区切ったリストで入力します。';
+$GLOBALS['TL_LANG']['tl_settings']['validImageTypes'][0] = '画像のファイル形式';
+$GLOBALS['TL_LANG']['tl_settings']['validImageTypes'][1] = '画像のクラスライブラリで処理してよいファイル形式をコンマで区切ったリストで入力します。';
+$GLOBALS['TL_LANG']['tl_settings']['editableFiles'][0] = '編集できるファイル形式';
+$GLOBALS['TL_LANG']['tl_settings']['editableFiles'][1] = 'ソースファイルエディターで編集できるファイル形式をコンマで区切ったリストで入力します。';
+$GLOBALS['TL_LANG']['tl_settings']['templateFiles'][0] = 'テンプレートのファイル形式';
+$GLOBALS['TL_LANG']['tl_settings']['templateFiles'][1] = 'サポートするテンプレートのファイル形式をコンマで区切ったリストで入力します。';
+$GLOBALS['TL_LANG']['tl_settings']['maxImageWidth'][0] = 'フロントエンドの最大幅';
+$GLOBALS['TL_LANG']['tl_settings']['maxImageWidth'][1] = 'この値を画像や動画の幅が超えると、自動的に幅を調整します。';
+$GLOBALS['TL_LANG']['tl_settings']['jpgQuality'][0] = 'JPEGのサムネイルの品質';
+$GLOBALS['TL_LANG']['tl_settings']['jpgQuality'][1] = 'JPEGのサムネイルの品質をパーセントで入力します。';
+$GLOBALS['TL_LANG']['tl_settings']['gdMaxImgWidth'][0] = 'GD画像の最大の幅';
+$GLOBALS['TL_LANG']['tl_settings']['gdMaxImgWidth'][1] = 'GDライブラリで扱わなければならない画像の最大の幅を入力してください。';
+$GLOBALS['TL_LANG']['tl_settings']['gdMaxImgHeight'][0] = 'GD画像の最大の高さ';
+$GLOBALS['TL_LANG']['tl_settings']['gdMaxImgHeight'][1] = 'GDライブラリで扱わなければならない画像の最大の高さを入力してください。';
+$GLOBALS['TL_LANG']['tl_settings']['uploadPath'][0] = 'ファイルディレクトリ';
+$GLOBALS['TL_LANG']['tl_settings']['uploadPath'][1] = 'Contaoのファイルディレクトリの相対パスを指定します。';
+$GLOBALS['TL_LANG']['tl_settings']['uploadTypes'][0] = 'アップロードのファイル形式';
+$GLOBALS['TL_LANG']['tl_settings']['uploadTypes'][1] = 'アップロードできるファイル形式をコンマで区切ったリストで入力します。';
+$GLOBALS['TL_LANG']['tl_settings']['uploadFields'][0] = '同時のファイルのアップロード数';
+$GLOBALS['TL_LANG']['tl_settings']['uploadFields'][1] = '同時にアップロードするファイルの最大数を入力します。';
+$GLOBALS['TL_LANG']['tl_settings']['maxFileSize'][0] = 'アップロードできるファイルの最大サイズ';
+$GLOBALS['TL_LANG']['tl_settings']['maxFileSize'][1] = 'アップロードできるファイルの大きさの最大値をバイトで入力します。(1 MB = 1000 kB = 1000000 byte)';
+$GLOBALS['TL_LANG']['tl_settings']['imageWidth'][0] = '画像の最大の幅';
+$GLOBALS['TL_LANG']['tl_settings']['imageWidth'][1] = 'アップロードできる画像の最大の幅をピクセルで入力します。';
+$GLOBALS['TL_LANG']['tl_settings']['imageHeight'][0] = '画像の最大の高さ';
+$GLOBALS['TL_LANG']['tl_settings']['imageHeight'][1] = 'アップロードできる画像の最大の高さをピクセルで入力します。';
+$GLOBALS['TL_LANG']['tl_settings']['enableSearch'][0] = '検索を使用';
+$GLOBALS['TL_LANG']['tl_settings']['enableSearch'][1] = 'ページのインデックスを作成して検索できるようにします。';
+$GLOBALS['TL_LANG']['tl_settings']['indexProtected'][0] = '保護したページをインデックス';
+$GLOBALS['TL_LANG']['tl_settings']['indexProtected'][1] = 'このオプションは注意して使用し、常に個人用のページをインデックス作成から除外してください。';
+$GLOBALS['TL_LANG']['tl_settings']['useSMTP'][0] = 'SMTPで電子メールを送信';
+$GLOBALS['TL_LANG']['tl_settings']['useSMTP'][1] = '電子メールの送信に、PHPのmail()関数の代わりにSMTPサーバーを使用します。';
+$GLOBALS['TL_LANG']['tl_settings']['smtpHost'][0] = 'SMTPのホスト名';
+$GLOBALS['TL_LANG']['tl_settings']['smtpHost'][1] = 'SMTPサーバーのホスト名を入力してください。';
+$GLOBALS['TL_LANG']['tl_settings']['smtpUser'][0] = 'SMTPのユーザー名';
+$GLOBALS['TL_LANG']['tl_settings']['smtpUser'][1] = 'SMTPのユーザー名を入力できます。';
+$GLOBALS['TL_LANG']['tl_settings']['smtpPass'][0] = 'SMTPのパスワード';
+$GLOBALS['TL_LANG']['tl_settings']['smtpPass'][1] = 'SMTPのパスワードを入力できます。';
+$GLOBALS['TL_LANG']['tl_settings']['smtpEnc'][0] = 'SMTPの暗号化';
+$GLOBALS['TL_LANG']['tl_settings']['smtpEnc'][1] = '暗号化の方法を(SSLまたはTLSから)選択します。';
+$GLOBALS['TL_LANG']['tl_settings']['smtpPort'][0] = 'SMTPのポート番号';
+$GLOBALS['TL_LANG']['tl_settings']['smtpPort'][1] = 'SMTPサーバーの番号を入力してください。';
+$GLOBALS['TL_LANG']['tl_settings']['inactiveModules'][0] = '機能拡張の停止';
+$GLOBALS['TL_LANG']['tl_settings']['inactiveModules'][1] = '不要な機能拡張を停止できます。';
+$GLOBALS['TL_LANG']['tl_settings']['undoPeriod'][0] = '取り消しの項目の保管期間';
+$GLOBALS['TL_LANG']['tl_settings']['undoPeriod'][1] = '取り消しの項目の保管期間を秒数で入力します。(初期値: 24時間 = 86400秒)';
+$GLOBALS['TL_LANG']['tl_settings']['versionPeriod'][0] = 'バージョンの保管期間';
+$GLOBALS['TL_LANG']['tl_settings']['versionPeriod'][1] = 'レコードの異なるバージョンの保管期間を秒数で入力します。(初期値: 90日 = 7776000秒)';
+$GLOBALS['TL_LANG']['tl_settings']['logPeriod'][0] = 'ログの項目の保管期間';
+$GLOBALS['TL_LANG']['tl_settings']['logPeriod'][1] = 'ログの項目の保管期間を秒数で入力します。(初期値: 14日 = 1209600秒)';
+$GLOBALS['TL_LANG']['tl_settings']['sessionTimeout'][0] = 'セッションの時間切れ';
+$GLOBALS['TL_LANG']['tl_settings']['sessionTimeout'][1] = 'セッションの最大の存続期間を秒数で入力します。(初期値: 60分 = 3600秒)';
+$GLOBALS['TL_LANG']['tl_settings']['autologin'][0] = '自動ログインの期間';
+$GLOBALS['TL_LANG']['tl_settings']['autologin'][1] = 'フロントエンドの自動ログインの期間を秒数で入力します。(初期値: 90日 = 7776000秒)';
+$GLOBALS['TL_LANG']['tl_settings']['defaultUser'][0] = 'ページの所有者の初期値';
+$GLOBALS['TL_LANG']['tl_settings']['defaultUser'][1] = 'ページを所有するユーザーの初期値を選択できます。';
+$GLOBALS['TL_LANG']['tl_settings']['defaultGroup'][0] = 'ページのグループの初期値';
+$GLOBALS['TL_LANG']['tl_settings']['defaultGroup'][1] = 'ページを所有するグループの初期値を選択できます。';
+$GLOBALS['TL_LANG']['tl_settings']['defaultChmod'][0] = 'アクセス権の初期設定';
+$GLOBALS['TL_LANG']['tl_settings']['defaultChmod'][1] = 'ページとアーティクルの初期状態のアクセス権を割り当ててください。';
+$GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase'][0] = 'ライブアップデートのURL';
+$GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase'][1] = 'ライブアップデートのURLを入力できます。';
+$GLOBALS['TL_LANG']['tl_settings']['title_legend'] = 'ウェブサイトの題名';
+$GLOBALS['TL_LANG']['tl_settings']['date_legend'] = '日付と時刻';
+$GLOBALS['TL_LANG']['tl_settings']['global_legend'] = '全体的な構成';
+$GLOBALS['TL_LANG']['tl_settings']['backend_legend'] = 'バックエンドの構成';
+$GLOBALS['TL_LANG']['tl_settings']['frontend_legend'] = 'フロントエンドの構成';
+$GLOBALS['TL_LANG']['tl_settings']['sections_legend'] = 'レイアウトセクション';
+$GLOBALS['TL_LANG']['tl_settings']['privacy_legend'] = 'プライバシーの設定';
+$GLOBALS['TL_LANG']['tl_settings']['security_legend'] = 'セキュリティの設定';
+$GLOBALS['TL_LANG']['tl_settings']['files_legend'] = 'ファイルと画像';
+$GLOBALS['TL_LANG']['tl_settings']['uploads_legend'] = 'アップロードの設定';
+$GLOBALS['TL_LANG']['tl_settings']['search_legend'] = '検索エンジンの設定';
+$GLOBALS['TL_LANG']['tl_settings']['smtp_legend'] = 'SMTPの構成';
+$GLOBALS['TL_LANG']['tl_settings']['ftp_legend'] = 'セーフモード対処';
+$GLOBALS['TL_LANG']['tl_settings']['modules_legend'] = '機能拡張の停止';
+$GLOBALS['TL_LANG']['tl_settings']['timeout_legend'] = 'タイムアウトの値';
+$GLOBALS['TL_LANG']['tl_settings']['chmod_legend'] = 'アクセス権の初期設定';
+$GLOBALS['TL_LANG']['tl_settings']['update_legend'] = 'ライブアップデート';
+$GLOBALS['TL_LANG']['tl_settings']['static_legend'] = '静的なリソース';
+$GLOBALS['TL_LANG']['tl_settings']['edit'] = 'ローカルな構成を編集';
+$GLOBALS['TL_LANG']['tl_settings']['both'] = 'サーバーとブラウザーのキャッシュを使用';
+$GLOBALS['TL_LANG']['tl_settings']['server'] = 'サーバーのキャッシュだけを使用';
+$GLOBALS['TL_LANG']['tl_settings']['browser'] = 'ブラウザーのキャッシュだけを使用';
+$GLOBALS['TL_LANG']['tl_settings']['none'] = 'キャッシュを無効';

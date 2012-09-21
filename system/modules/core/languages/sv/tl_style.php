@@ -1,0 +1,175 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/sv/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$GLOBALS['TL_LANG']['tl_style']['invisible'][0] = 'Osynlig';
+$GLOBALS['TL_LANG']['tl_style']['invisible'][1] = 'Exportera inte formatdefinitionen.';
+$GLOBALS['TL_LANG']['tl_style']['selector'][0] = 'Element, Element-ID, Klass';
+$GLOBALS['TL_LANG']['tl_style']['selector'][1] = 'Detta definierar till vilket HTML-element, element-ID eller CSS-klass en formatdefinition hör.<br />Du kan ange en eller flera kommaseparerade värden här. Glöm ej prefix för element-id (#) eller klass (.).';
+$GLOBALS['TL_LANG']['tl_style']['category'][0] = 'Kategori';
+$GLOBALS['TL_LANG']['tl_style']['category'][1] = 'Använd kategorier för att gruppera dina formatdefinitioner.';
+$GLOBALS['TL_LANG']['tl_style']['comment'][0] = 'Kommentar';
+$GLOBALS['TL_LANG']['tl_style']['comment'][1] = 'Kommentarer kommer att visas ovanför formatdefinitionen.';
+$GLOBALS['TL_LANG']['tl_style']['size'][0] = 'Storlek';
+$GLOBALS['TL_LANG']['tl_style']['size'][1] = 'Parametrarna width, height, min-width, min-height, max-width och max-height.';
+$GLOBALS['TL_LANG']['tl_style']['width'][0] = 'Bredd';
+$GLOBALS['TL_LANG']['tl_style']['width'][1] = 'Ange bredden på elementet samt enhet.';
+$GLOBALS['TL_LANG']['tl_style']['height'][0] = 'Höjd';
+$GLOBALS['TL_LANG']['tl_style']['height'][1] = 'Ange höjden på elementet samt enhet.';
+$GLOBALS['TL_LANG']['tl_style']['minwidth'][0] = 'Minimum bredd';
+$GLOBALS['TL_LANG']['tl_style']['minwidth'][1] = 'Här kan du ange elementets minimum-bredd samt enhet.';
+$GLOBALS['TL_LANG']['tl_style']['minheight'][0] = 'Minimum höjd';
+$GLOBALS['TL_LANG']['tl_style']['minheight'][1] = 'Här kan du ange elementets minimum-höjd samt enhet.';
+$GLOBALS['TL_LANG']['tl_style']['maxwidth'][0] = 'Maximal bredd';
+$GLOBALS['TL_LANG']['tl_style']['maxwidth'][1] = 'Här kan du ange elementets maximal-bredd samt enhet.';
+$GLOBALS['TL_LANG']['tl_style']['maxheight'][0] = 'Maximal höjd';
+$GLOBALS['TL_LANG']['tl_style']['maxheight'][1] = 'Här kan du ange elementets maximal-höjd samt enhet.';
+$GLOBALS['TL_LANG']['tl_style']['positioning'][0] = 'Position';
+$GLOBALS['TL_LANG']['tl_style']['positioning'][1] = 'Parametrarna position, float, clear, overflow och display.';
+$GLOBALS['TL_LANG']['tl_style']['trbl'][0] = 'Position';
+$GLOBALS['TL_LANG']['tl_style']['trbl'][1] = 'Ange topp, höger, botten och vänster position samt en enhet.';
+$GLOBALS['TL_LANG']['tl_style']['position'][0] = 'Positionsattribut';
+$GLOBALS['TL_LANG']['tl_style']['position'][1] = 'Ange positionstypen.';
+$GLOBALS['TL_LANG']['tl_style']['floating'][0] = 'Float';
+$GLOBALS['TL_LANG']['tl_style']['floating'][1] = 'Tillåt att elementet flyter över gränsen.';
+$GLOBALS['TL_LANG']['tl_style']['clear'][0] = 'Clear';
+$GLOBALS['TL_LANG']['tl_style']['clear'][1] = 'Fortsätt med normal text under ett flytande element.';
+$GLOBALS['TL_LANG']['tl_style']['overflow'][0] = 'Overflow';
+$GLOBALS['TL_LANG']['tl_style']['overflow'][1] = 'Definierar hur ett element visas när dess innehåll överskrider angiven storlek.';
+$GLOBALS['TL_LANG']['tl_style']['display'][0] = 'Display';
+$GLOBALS['TL_LANG']['tl_style']['display'][1] = 'Definierar hur ett element ska visas.';
+$GLOBALS['TL_LANG']['tl_style']['alignment'][0] = 'Marginal, vaddering och justering';
+$GLOBALS['TL_LANG']['tl_style']['alignment'][1] = 'Parametrarna margin, padding, align, vertical-align och text-align.';
+$GLOBALS['TL_LANG']['tl_style']['margin'][0] = 'Marginal';
+$GLOBALS['TL_LANG']['tl_style']['margin'][1] = 'Ange topp, höger, botten och vänster marginal samt en enhet.<br /> Marginal är avståndet mellan elementet och dess omgivande element.';
+$GLOBALS['TL_LANG']['tl_style']['padding'][0] = 'Vaddering';
+$GLOBALS['TL_LANG']['tl_style']['padding'][1] = 'Ange topp, höger, botten och vänster vaddering samt en enhet. <br />Vaddering är avståndet mellan innehållet i ett elementet och dess egna yttre gräns (ev. ram).';
+$GLOBALS['TL_LANG']['tl_style']['align'][0] = 'Justering';
+$GLOBALS['TL_LANG']['tl_style']['align'][1] = 'För att justera ett element måste dess vänster och höger marginalvärde skrivas över.';
+$GLOBALS['TL_LANG']['tl_style']['verticalalign'][0] = 'Vertikal justering';
+$GLOBALS['TL_LANG']['tl_style']['verticalalign'][1] = 'Definierar den vertikala justeringen.';
+$GLOBALS['TL_LANG']['tl_style']['textalign'][0] = 'Horisontell justering';
+$GLOBALS['TL_LANG']['tl_style']['textalign'][1] = 'Definierar den horisontella justeringen av texten.';
+$GLOBALS['TL_LANG']['tl_style']['background'][0] = 'Bakgrund';
+$GLOBALS['TL_LANG']['tl_style']['background'][1] = 'Parametrarna background-color, background-image, background-position, background-repeat, linear-gradient och box-shadow.';
+$GLOBALS['TL_LANG']['tl_style']['bgcolor'][0] = 'Bakgrundsfärg och transparens';
+$GLOBALS['TL_LANG']['tl_style']['bgcolor'][1] = 'Ange en hexadecimal bakgrundsfärg (t.ex. <em>ff0000</em> för röd) och ev. transparens i procent (t.ex. <em>75</em>).';
+$GLOBALS['TL_LANG']['tl_style']['bgimage'][0] = 'Bakgrundsbild';
+$GLOBALS['TL_LANG']['tl_style']['bgimage'][1] = 'Ange sökvägen för en ev. bakgrundsbild.';
+$GLOBALS['TL_LANG']['tl_style']['bgposition'][0] = 'Bakgrundsposition';
+$GLOBALS['TL_LANG']['tl_style']['bgposition'][1] = 'Ange bakgrundsbildens position.';
+$GLOBALS['TL_LANG']['tl_style']['bgrepeat'][0] = 'Bakgrundsrepetering';
+$GLOBALS['TL_LANG']['tl_style']['bgrepeat'][1] = 'Ange repeteringsläget för bilden.';
+$GLOBALS['TL_LANG']['tl_style']['shadowsize'][0] = 'Skuggstorlek';
+$GLOBALS['TL_LANG']['tl_style']['shadowsize'][1] = 'Ange en X- och Y-offset samt ev. utsmetningsstorlek och spridningsradie.';
+$GLOBALS['TL_LANG']['tl_style']['shadowcolor'][0] = 'Skuggfärg och transparens';
+$GLOBALS['TL_LANG']['tl_style']['shadowcolor'][1] = 'Ange en skuggfärg med hexadecimal färgkod (t.ex. <em>ff0000</em> för röd) och ev. transparens i procent (t.ex. <em>75</em>).';
+$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][0] = 'Övertoningsvinkel';
+$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][1] = 'Ange en övertoningsvinkel (t.ex. <em>-45</em>) eller startpunkt (t.ex. <em>top</em> eller <em>left bottom</em>).';
+$GLOBALS['TL_LANG']['tl_style']['gradientColors'][0] = 'Övertoningsfärg';
+$GLOBALS['TL_LANG']['tl_style']['gradientColors'][1] = 'Ange upp till fyra färger samt ev. procentsats (t.ex. <em>ffc 10% | f90 | f00</em>).';
+$GLOBALS['TL_LANG']['tl_style']['border'][0] = 'Kantlinje';
+$GLOBALS['TL_LANG']['tl_style']['border'][1] = 'Parametrarna border-width, border-style, border-color, border-radius, border-collapse and border-spacing.';
+$GLOBALS['TL_LANG']['tl_style']['borderwidth'][0] = 'Rambredd';
+$GLOBALS['TL_LANG']['tl_style']['borderwidth'][1] = 'Ange topp, höger, botten och vänster rambredd samt en enhet.';
+$GLOBALS['TL_LANG']['tl_style']['borderstyle'][0] = 'Ramstil';
+$GLOBALS['TL_LANG']['tl_style']['borderstyle'][1] = 'Ange ramstilen.';
+$GLOBALS['TL_LANG']['tl_style']['bordercolor'][0] = 'Ramfärg och transparens';
+$GLOBALS['TL_LANG']['tl_style']['bordercolor'][1] = 'Ange en ramfärg med hexadecimal färgkod (t.ex. <em>ff0000</em> för röd) och ev. transparens i procent (t.ex. <em>75</em>).';
+$GLOBALS['TL_LANG']['tl_style']['borderradius'][0] = 'Ram radie';
+$GLOBALS['TL_LANG']['tl_style']['borderradius'][1] = 'Ange topp, höger, botten och vänster ram-radie.';
+$GLOBALS['TL_LANG']['tl_style']['bordercollapse'][0] = 'Mötande ramar';
+$GLOBALS['TL_LANG']['tl_style']['bordercollapse'][1] = 'Ange om mötande ramar ska visas var för sig eller som en gemensam ram.';
+$GLOBALS['TL_LANG']['tl_style']['borderspacing'][0] = 'Ram mellanrum';
+$GLOBALS['TL_LANG']['tl_style']['borderspacing'][1] = 'Ange ram-mellanrummets storlek.';
+$GLOBALS['TL_LANG']['tl_style']['font'][0] = 'Font';
+$GLOBALS['TL_LANG']['tl_style']['font'][1] = 'Redigera fontegenskaper (types, size, style, color, line-height, white-space).';
+$GLOBALS['TL_LANG']['tl_style']['fontfamily'][0] = 'Fonttyper';
+$GLOBALS['TL_LANG']['tl_style']['fontfamily'][1] = 'Ange en kommaseparerad lista med fonttyper. Ange minst en generisk fontfamilj (t.ex. <em>sans-serif</em>).';
+$GLOBALS['TL_LANG']['tl_style']['fontsize'][0] = 'Fontstorlek';
+$GLOBALS['TL_LANG']['tl_style']['fontsize'][1] = 'Ange fontstorlek och en enhet.';
+$GLOBALS['TL_LANG']['tl_style']['fontcolor'][0] = 'Fontfärg och transparens';
+$GLOBALS['TL_LANG']['tl_style']['fontcolor'][1] = 'Ange en fontfärg med hexadecimal färgkod (t.ex. <em>ff0000</em> för röd) och ev. transparens i procent (t.ex. <em>75</em>).';
+$GLOBALS['TL_LANG']['tl_style']['lineheight'][0] = 'Linjehöjd';
+$GLOBALS['TL_LANG']['tl_style']['lineheight'][1] = 'Du kan här ange en linjehöjd på elementet.';
+$GLOBALS['TL_LANG']['tl_style']['fontstyle'][0] = 'Fontstil';
+$GLOBALS['TL_LANG']['tl_style']['fontstyle'][1] = 'Ange en eller flera fonsstilar.';
+$GLOBALS['TL_LANG']['tl_style']['whitespace'][0] = 'Stäng av automatisk radmatning';
+$GLOBALS['TL_LANG']['tl_style']['whitespace'][1] = 'Om du väljer detta alternativ kommer automatisk radbrytning att avaktiveras.';
+$GLOBALS['TL_LANG']['tl_style']['texttransform'][0] = 'Texttransformering';
+$GLOBALS['TL_LANG']['tl_style']['texttransform'][1] = 'Ange läge för texttransformering.';
+$GLOBALS['TL_LANG']['tl_style']['textindent'][0] = 'Textinskjutning';
+$GLOBALS['TL_LANG']['tl_style']['textindent'][1] = 'Ange hur mycket texten ska skjutas in från marginalen.';
+$GLOBALS['TL_LANG']['tl_style']['letterspacing'][0] = 'Teckenmellanrum';
+$GLOBALS['TL_LANG']['tl_style']['letterspacing'][1] = 'Ange mellanrum mellan tecken (normalt = 0px).';
+$GLOBALS['TL_LANG']['tl_style']['wordspacing'][0] = 'Ordmellanrum';
+$GLOBALS['TL_LANG']['tl_style']['wordspacing'][1] = 'Ange mellanrum mellan ord (normalt = 0px).';
+$GLOBALS['TL_LANG']['tl_style']['list'][0] = 'Lista';
+$GLOBALS['TL_LANG']['tl_style']['list'][1] = 'Redigera listegenskaperna (style, type, image).';
+$GLOBALS['TL_LANG']['tl_style']['liststyletype'][0] = 'Listsymbol';
+$GLOBALS['TL_LANG']['tl_style']['liststyletype'][1] = 'Välj en listsymbol.';
+$GLOBALS['TL_LANG']['tl_style']['liststyleimage'][0] = 'Egen listsymbol';
+$GLOBALS['TL_LANG']['tl_style']['liststyleimage'][1] = 'Här kan du ange sökvägen till en egen listsymbol.';
+$GLOBALS['TL_LANG']['tl_style']['own'][0] = 'Egen CSS-kod';
+$GLOBALS['TL_LANG']['tl_style']['own'][1] = 'Här kan du skriva in egen CSS-kod.';
+$GLOBALS['TL_LANG']['tl_style']['selector_legend'] = 'Element/Klass och kategori';
+$GLOBALS['TL_LANG']['tl_style']['size_legend'] = 'Storlek';
+$GLOBALS['TL_LANG']['tl_style']['position_legend'] = 'Position';
+$GLOBALS['TL_LANG']['tl_style']['align_legend'] = 'Mariginal och justering';
+$GLOBALS['TL_LANG']['tl_style']['background_legend'] = 'Bakgrund';
+$GLOBALS['TL_LANG']['tl_style']['border_legend'] = 'Ramar';
+$GLOBALS['TL_LANG']['tl_style']['font_legend'] = 'Typsnitt';
+$GLOBALS['TL_LANG']['tl_style']['list_legend'] = 'Listor';
+$GLOBALS['TL_LANG']['tl_style']['custom_legend'] = 'Egendefinierad kod';
+$GLOBALS['TL_LANG']['tl_style']['normal'] = 'normal';
+$GLOBALS['TL_LANG']['tl_style']['bold'] = 'fet';
+$GLOBALS['TL_LANG']['tl_style']['italic'] = 'kursiv';
+$GLOBALS['TL_LANG']['tl_style']['underline'] = 'understruken';
+$GLOBALS['TL_LANG']['tl_style']['notUnderlined'] = 'inte understruken';
+$GLOBALS['TL_LANG']['tl_style']['line-through'] = 'genomstruken';
+$GLOBALS['TL_LANG']['tl_style']['overline'] = 'linje ovanför';
+$GLOBALS['TL_LANG']['tl_style']['small-caps'] = 'små bokstäver';
+$GLOBALS['TL_LANG']['tl_style']['disc'] = 'punkt';
+$GLOBALS['TL_LANG']['tl_style']['circle'] = 'cirkel';
+$GLOBALS['TL_LANG']['tl_style']['square'] = 'fyrkant';
+$GLOBALS['TL_LANG']['tl_style']['decimal'] = 'siffror';
+$GLOBALS['TL_LANG']['tl_style']['upper-roman'] = 'versala latinska tecken';
+$GLOBALS['TL_LANG']['tl_style']['lower-roman'] = 'gemena latinska tecken';
+$GLOBALS['TL_LANG']['tl_style']['upper-alpha'] = 'versala tecken';
+$GLOBALS['TL_LANG']['tl_style']['lower-alpha'] = 'gemena tecken';
+$GLOBALS['TL_LANG']['tl_style']['uppercase'] = 'versaler';
+$GLOBALS['TL_LANG']['tl_style']['lowercase'] = 'gemener';
+$GLOBALS['TL_LANG']['tl_style']['capitalize'] = 'första bokstav versal';
+$GLOBALS['TL_LANG']['tl_style']['none'] = 'inget';
+$GLOBALS['TL_LANG']['tl_style']['new'][0] = 'Ny formatdefinition';
+$GLOBALS['TL_LANG']['tl_style']['new'][1] = 'Skapa en ny formatdefinition';
+$GLOBALS['TL_LANG']['tl_style']['show'][0] = 'Visa formatdefinitionsdetaljer';
+$GLOBALS['TL_LANG']['tl_style']['show'][1] = 'Visa detaljer för formatdefinition med ID %s';
+$GLOBALS['TL_LANG']['tl_style']['edit'][0] = 'Redigera formatdefinition';
+$GLOBALS['TL_LANG']['tl_style']['edit'][1] = 'Redigera formatdefinitionen med ID %s';
+$GLOBALS['TL_LANG']['tl_style']['cut'][0] = 'Flytta formatdefinition';
+$GLOBALS['TL_LANG']['tl_style']['cut'][1] = 'Flytta formatdefinitionen med ID %s';
+$GLOBALS['TL_LANG']['tl_style']['copy'][0] = 'Kopiera formatdefinition';
+$GLOBALS['TL_LANG']['tl_style']['copy'][1] = 'Kopiera formatdefinitionen med ID %s';
+$GLOBALS['TL_LANG']['tl_style']['delete'][0] = 'Ta bort formatdefinition';
+$GLOBALS['TL_LANG']['tl_style']['delete'][1] = 'Ta bort formatdefinitionen med ID %s';
+$GLOBALS['TL_LANG']['tl_style']['editheader'][0] = 'Redigera stilmallsinställning';
+$GLOBALS['TL_LANG']['tl_style']['editheader'][1] = 'Redigera inställningarna för denna stilmall';
+$GLOBALS['TL_LANG']['tl_style']['pasteafter'][0] = 'Klistra in i början';
+$GLOBALS['TL_LANG']['tl_style']['pasteafter'][1] = 'Klistra in efter formatdefinitionen med ID %s';
+$GLOBALS['TL_LANG']['tl_style']['pastenew'][0] = 'Skapa en ny formatdefinition i början';
+$GLOBALS['TL_LANG']['tl_style']['pastenew'][1] = 'Skapa en ny formatdefinition efter formatdefinitionen med ID %s';
+$GLOBALS['TL_LANG']['tl_style']['toggle'][0] = 'Växla synlighet';
+$GLOBALS['TL_LANG']['tl_style']['toggle'][1] = 'Växla synlighet för formatdefinitionen med ID %s';
