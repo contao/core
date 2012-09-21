@@ -283,19 +283,23 @@ class DcaExtractor extends \Database\Installer
 		$blnFromFile = false;
 		$arrRelations = array();
 
-		foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'] as $field=>$config)
+		// Check whether there are fields (see #4826)
+		if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields']))
 		{
-			// Check whether all fields have an SQL definition
-			if (!isset($config['sql']) && isset($config['inputType']))
+			foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'] as $field=>$config)
 			{
-				$blnFromFile = true;
-			}
+				// Check whether all fields have an SQL definition
+				if (!isset($config['sql']) && isset($config['inputType']))
+				{
+					$blnFromFile = true;
+				}
 
-			// Check whether there is a relation
-			if (isset($config['foreignKey']) && isset($config['relation']))
-			{
-				$table = substr($config['foreignKey'], 0, strrpos($config['foreignKey'], '.'));
-				$arrRelations[$field] = array_merge(array('table'=>$table, 'field'=>'id'), $config['relation']);
+				// Check whether there is a relation
+				if (isset($config['foreignKey']) && isset($config['relation']))
+				{
+					$table = substr($config['foreignKey'], 0, strrpos($config['foreignKey'], '.'));
+					$arrRelations[$field] = array_merge(array('table'=>$table, 'field'=>'id'), $config['relation']);
+				}
 			}
 		}
 
