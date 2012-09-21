@@ -258,12 +258,6 @@ class Transifex
 		// Process the selected languages
 		foreach ($languages as $language)
 		{
-			if ($language == 'en')
-			{
-				continue;
-			}
-
-			// Generate the Contao language files
 			foreach ($this->scandir(TL_ROOT . '/.tx/source/' . $language) as $module)
 			{
 				// Create the language folder
@@ -308,12 +302,14 @@ class Transifex
 					// Add the labels
 					foreach ($units as $unit)
 					{
-						if ($unit->firstChild->nextSibling === null)
+						$node = ($language == 'en') ? $unit->firstChild : $unit->firstChild->nextSibling;
+
+						if ($node === null)
 						{
 							continue;
 						}
 
-						$value = str_replace("\n", '\n', $unit->firstChild->nextSibling->nodeValue);
+						$value = str_replace("\n", '\n', $node->nodeValue);
 
 						// Quote the value depending on whether there are line breaks
 						if (strpos($value, '\n') !== false)
