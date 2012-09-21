@@ -220,7 +220,7 @@ class Transifex
 		// Get the completed languages
 		if (isset($argv[2]))
 		{
-			passthru('tx pull --all --language=' . $argv[2]);
+			passthru('tx pull --language=' . $argv[2]);
 		}
 		else
 		{

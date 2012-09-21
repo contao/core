@@ -5,19 +5,16 @@
  * 
  * Copyright (C) 2005-2012 Leo Feyer
  * 
- * @package Listing
- * @link    http://contao.org
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/de/
+ * 
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-
-/**
- * Front end modules
- */
-$GLOBALS['TL_LANG']['MOD']['listing'] = array('Auflistung', 'Die Daten einer beliebigen Tabelle auflisten');
-
-
-/**
- * Front end modules
- */
-$GLOBALS['TL_LANG']['FMD']['listing'] = array('Auflistung', 'Listet die Daten einer beliebigen Tabelle auf');
+$GLOBALS['TL_LANG']['MOD']['listing'][0] = 'Auflistung';
+$GLOBALS['TL_LANG']['MOD']['listing'][1] = 'Die Daten einer beliebigen Tabelle auflisten';
+$GLOBALS['TL_LANG']['FMD']['listing'][0] = 'Auflistung';
+$GLOBALS['TL_LANG']['FMD']['listing'][1] = 'Listet die Daten einer beliebigen Tabelle auf';
