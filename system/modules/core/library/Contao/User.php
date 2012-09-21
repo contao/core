@@ -74,30 +74,6 @@ abstract class User extends \System
 	protected $strCookie;
 
 	/**
-	 * Authentication object
-	 * @var object
-	 */
-	protected $objAuth;
-
-	/**
-	 * Import object
-	 * @var object
-	 */
-	protected $objImport;
-
-	/**
-	 * Login object
-	 * @var object
-	 */
-	protected $objLogin;
-
-	/**
-	 * Logout object
-	 * @var object
-	 */
-	protected $objLogout;
-
-	/**
 	 * Data
 	 * @var array
 	 */
