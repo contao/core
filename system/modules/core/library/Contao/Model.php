@@ -422,6 +422,7 @@ abstract class Model extends \System
 			return null;
 		}
 
+		$arrOptions['column']   = (array)$arrOptions['column'];
 		$arrOptions['column'][] = static::$strTable . '.' . static::$strPk . ' IN (' . rtrim(str_repeat('?,', count($arrPks)), ',') . ')';
 		$arrOptions['value'][]  = $arrPks;
 		$arrOptions['return']   = 'Collection';
