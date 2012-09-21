@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly handle replacements when uploading files (see #4818).
+
+### Fixed
 Only limit `getTemplateGroup()` to a theme in the articles module (see #4808).
 
 ### Fixed

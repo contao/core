@@ -947,17 +947,30 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 				foreach ($arrUploaded as $strFile)
 				{
-					$objFile = new \File($strFile);
+					$objFile = \FilesModel::findByPath($strFile);
 
-					$objNew = new \FilesModel();
-					$objNew->pid       = $pid;
-					$objNew->tstamp    = time();
-					$objNew->type      = 'file';
-					$objNew->path      = $strFile;
-					$objNew->extension = $objFile->extension;
-					$objNew->hash      = md5_file(TL_ROOT . '/' . $strFile);
-					$objNew->name      = $objFile->basename;
-					$objNew->save();
+					// Existing file is being replaced (see #4818)
+					if ($objFile !== null)
+					{
+						$objFile->tstamp = time();
+						$objFile->path   = $strFile;
+						$objFile->hash   = md5_file(TL_ROOT . '/' . $strFile);
+						$objFile->save();
+					}
+					else
+					{
+						$objFile = new \File($strFile);
+
+						$objNew = new \FilesModel();
+						$objNew->pid       = $pid;
+						$objNew->tstamp    = time();
+						$objNew->type      = 'file';
+						$objNew->path      = $strFile;
+						$objNew->extension = $objFile->extension;
+						$objNew->hash      = md5_file(TL_ROOT . '/' . $strFile);
+						$objNew->name      = $objFile->basename;
+						$objNew->save();
+					}
 				}
 			}
 
