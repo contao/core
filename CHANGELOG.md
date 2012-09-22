@@ -5,6 +5,9 @@ Version 2.11.6 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Also create empty templates folders if a theme is imported (see #4793).
+
+### Fixed
 Decode Punycode domains when used via insert tag (see #4753).
 
 ### Fixed
