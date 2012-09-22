@@ -5,6 +5,9 @@ Version 2.11.6 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Consider the page language when forwarding (see #4841).
+
+### Fixed
 URL encode the enclosure URLs in RSS/Atom feeds (see #4839).
 
 ### Fixed
