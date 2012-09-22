@@ -5,6 +5,9 @@ Version 2.11.6 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+URL encode the enclosure URLs in RSS/Atom feeds (see #4839).
+
+### Fixed
 Also create empty templates folders if a theme is imported (see #4793).
 
 ### Fixed
