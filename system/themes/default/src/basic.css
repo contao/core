@@ -125,6 +125,7 @@ fieldset.tl_checkbox_container,fieldset.tl_radio_container {
 	padding:0;
 }
 fieldset.tl_checkbox_container {
+	margin:15px 0;
 	line-height:14px;
 }
 fieldset.tl_checkbox_container legend,fieldset.tl_radio_container legend {
@@ -251,9 +252,6 @@ pre,.tl_textarea.monospace {
 	margin:-14px 0;
 	padding-left:20px;
 }
-.tl_checkbox_container label:last-child {
-	margin-bottom:0;
-}
 
 /* Grouped checkboxes */
 .checkbox_toggler {
@@ -277,6 +275,9 @@ pre,.tl_textarea.monospace {
 .tl_radio {
 	margin:1px 3px 0 0;
 	vertical-align:bottom;
+}
+.win .tl_radio {
+	margin:1px 3px 3px 0; /* see #4599 */
 }
 .tl_tree_radio {
 	margin:0 3px 1px 0;

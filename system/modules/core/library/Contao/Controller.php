@@ -556,71 +556,78 @@ abstract class Controller extends \System
 		$ptitle = '';
 		$trail = array($intId, $pid);
 
-		// Load all parent pages
-		$objParentPage = \PageModel::findParentsById($pid);
-
-		// Inherit settings
-		if ($objParentPage !== null)
+		// Inherit the settings
+		if ($objPage->type == 'root')
 		{
-			while ($objParentPage->next() && $pid > 0 && $type != 'root')
+			$objParentPage = $objPage; // see #4610
+		}
+		else
+		{
+			// Load all parent pages
+			$objParentPage = \PageModel::findParentsById($pid);
+
+			if ($objParentPage !== null)
 			{
-				$pid = $objParentPage->pid;
-				$type = $objParentPage->type;
-
-				// Parent title
-				if ($ptitle == '')
+				while ($objParentPage->next() && $pid > 0 && $type != 'root')
 				{
-					$palias = $objParentPage->alias;
-					$pname = $objParentPage->title;
-					$ptitle = $objParentPage->pageTitle ?: $objParentPage->title;
-				}
+					$pid = $objParentPage->pid;
+					$type = $objParentPage->type;
 
-				// Page title
-				if ($type != 'root')
-				{
-					$alias = $objParentPage->alias;
-					$name = $objParentPage->title;
-					$title = $objParentPage->pageTitle ?: $objParentPage->title;
-					$folderUrl = basename($alias) . '/' . $folderUrl;
-					$trail[] = $objParentPage->pid;
-				}
-
-				// Cache
-				if ($objParentPage->includeCache && $objPage->cache === false)
-				{
-					$objPage->cache = $objParentPage->cache;
-				}
-
-				// Layout
-				if ($objParentPage->includeLayout)
-				{
-					if ($objPage->layout === false)
+					// Parent title
+					if ($ptitle == '')
 					{
-						$objPage->layout = $objParentPage->layout;
+						$palias = $objParentPage->alias;
+						$pname = $objParentPage->title;
+						$ptitle = $objParentPage->pageTitle ?: $objParentPage->title;
 					}
-					if ($objPage->mobileLayout === false)
-					{
-						$objPage->mobileLayout = $objParentPage->mobileLayout;
-					}
-				}
 
-				// Protection
-				if ($objParentPage->protected && $objPage->protected === false)
-				{
-					$objPage->protected = true;
-					$objPage->groups = deserialize($objParentPage->groups);
+					// Page title
+					if ($type != 'root')
+					{
+						$alias = $objParentPage->alias;
+						$name = $objParentPage->title;
+						$title = $objParentPage->pageTitle ?: $objParentPage->title;
+						$folderUrl = basename($alias) . '/' . $folderUrl;
+						$trail[] = $objParentPage->pid;
+					}
+
+					// Cache
+					if ($objParentPage->includeCache && $objPage->cache === false)
+					{
+						$objPage->cache = $objParentPage->cache;
+					}
+
+					// Layout
+					if ($objParentPage->includeLayout)
+					{
+						if ($objPage->layout === false)
+						{
+							$objPage->layout = $objParentPage->layout;
+						}
+						if ($objPage->mobileLayout === false)
+						{
+							$objPage->mobileLayout = $objParentPage->mobileLayout;
+						}
+					}
+
+					// Protection
+					if ($objParentPage->protected && $objPage->protected === false)
+					{
+						$objPage->protected = true;
+						$objPage->groups = deserialize($objParentPage->groups);
+					}
 				}
 			}
-		}
 
-		// Set the titles
-		$objPage->mainAlias = $alias;
-		$objPage->mainTitle = $name;
-		$objPage->mainPageTitle = $title;
-		$objPage->parentAlias = $palias;
-		$objPage->parentTitle = $pname;
-		$objPage->parentPageTitle = $ptitle;
-		$objPage->folderUrl = $folderUrl;
+			// Set the titles
+			$objPage->mainAlias = $alias;
+			$objPage->mainTitle = $name;
+			$objPage->mainPageTitle = $title;
+			$objPage->parentAlias = $palias;
+			$objPage->parentTitle = $pname;
+			$objPage->parentPageTitle = $ptitle;
+			$objPage->folderUrl = $folderUrl;
+		}
 
 		// Set the root ID and title
 		if ($objParentPage !== null && $objParentPage->type == 'root')

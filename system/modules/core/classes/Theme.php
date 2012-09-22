@@ -709,6 +709,12 @@ class Theme extends \Backend
 						}
 					}
 
+					// Create the templates folder even if it is empty (see #4793)
+					if ($table == 'tl_theme' && isset($set['templates']) && strncmp($set['templates'], 'templates/', 10) === 0 && !is_dir(TL_ROOT . '/' . $set['templates']))
+					{
+						new \Folder($set['templates']);
+					}
+
 					// Update the datatbase
 					$this->Database->prepare("INSERT INTO ". $table ." %s")->set($set)->execute();
 				}
