@@ -287,6 +287,9 @@ pre,.tl_textarea.monospace {
 	margin:1px 3px 0 0;
 	vertical-align:bottom;
 }
+.win .tl_radio {
+	margin:1px 3px 3px 0; /* see #4599 */
+}
 .tl_tree_radio {
 	margin:0 3px 1px 0;
 	vertical-align:middle;
