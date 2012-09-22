@@ -5,6 +5,9 @@ Version 2.11.6 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly handle root pages in `Controller::getPageDetails()` (see #4610).
+
+### Fixed
 Consider the page language when forwarding (see #4841).
 
 ### Fixed
