@@ -16,6 +16,8 @@
 
 $GLOBALS['TL_LANG']['tl_faq']['question'][0] = 'پرسش';
 $GLOBALS['TL_LANG']['tl_faq']['question'][1] = 'لطفا پرسش خود را وارد نمائید.';
+$GLOBALS['TL_LANG']['tl_faq']['alias'][0] = 'اسم مستعار سوالات متداول';
+$GLOBALS['TL_LANG']['tl_faq']['alias'][1] = 'اسم مستعار سوالات متداول مرجعی یکتا برای سوالات متداول است که می تواند بجای شناسه عددی استفاده شود.';
 $GLOBALS['TL_LANG']['tl_faq']['author'][0] = 'نویسنده';
 $GLOBALS['TL_LANG']['tl_faq']['author'][1] = 'لطفا یک نویسنده انتخاب نمائید.';
 $GLOBALS['TL_LANG']['tl_faq']['answer'][0] = 'پاسخ';

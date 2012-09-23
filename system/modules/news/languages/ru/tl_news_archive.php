@@ -79,3 +79,5 @@ $GLOBALS['TL_LANG']['tl_news_archive']['delete'][0] = 'Удалить архив
 $GLOBALS['TL_LANG']['tl_news_archive']['delete'][1] = 'Удалить архив ID %s';
 $GLOBALS['TL_LANG']['tl_news_archive']['comments'][0] = 'Комментарии';
 $GLOBALS['TL_LANG']['tl_news_archive']['comments'][1] = 'Показать комментарии архива ID %s';
+$GLOBALS['TL_LANG']['tl_news_archive']['feeds'][0] = 'RSS каналы';
+$GLOBALS['TL_LANG']['tl_news_archive']['feeds'][1] = 'Управление RSS каналами';

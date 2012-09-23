@@ -53,6 +53,7 @@ $GLOBALS['TL_LANG']['tl_article']['print'] = 'چاپ صفحه';
 $GLOBALS['TL_LANG']['tl_article']['pdf'] = 'خروجی PDF';
 $GLOBALS['TL_LANG']['tl_article']['facebook'] = 'اشتراک‌گذاری در فیسبوک';
 $GLOBALS['TL_LANG']['tl_article']['twitter'] = 'اشتراک‌گذاری در تویتر';
+$GLOBALS['TL_LANG']['tl_article']['gplus'] = 'اشتراک‌گذاری در گوگل+';
 $GLOBALS['TL_LANG']['tl_article']['header'] = 'قسمت فوقانی سایت';
 $GLOBALS['TL_LANG']['tl_article']['left'] = 'ستون سمت چپ';
 $GLOBALS['TL_LANG']['tl_article']['main'] = 'بخش اصلی (مرکزی)';

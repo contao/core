@@ -53,6 +53,7 @@ $GLOBALS['TL_LANG']['tl_article']['print'] = 'Печать страницы';
 $GLOBALS['TL_LANG']['tl_article']['pdf'] = 'Сохранить в PDF';
 $GLOBALS['TL_LANG']['tl_article']['facebook'] = 'Публиковать на Facebook';
 $GLOBALS['TL_LANG']['tl_article']['twitter'] = 'Публиковать на Twitter';
+$GLOBALS['TL_LANG']['tl_article']['gplus'] = 'Поделиться на Google+';
 $GLOBALS['TL_LANG']['tl_article']['header'] = 'Верхняя секция \'Header\'';
 $GLOBALS['TL_LANG']['tl_article']['left'] = 'Левая колонка';
 $GLOBALS['TL_LANG']['tl_article']['main'] = 'Основная колонка';

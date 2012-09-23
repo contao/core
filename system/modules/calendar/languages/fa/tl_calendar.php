@@ -77,3 +77,5 @@ $GLOBALS['TL_LANG']['tl_calendar']['copy'][0] = 'تکثیر تقویم';
 $GLOBALS['TL_LANG']['tl_calendar']['copy'][1] = 'تکثیر تقویم شناسه %s';
 $GLOBALS['TL_LANG']['tl_calendar']['delete'][0] = 'حذف تقویم';
 $GLOBALS['TL_LANG']['tl_calendar']['delete'][1] = 'حذف تقویم شناسه %s';
+$GLOBALS['TL_LANG']['tl_calendar']['feeds'][0] = 'خوراک آراس‌اس';
+$GLOBALS['TL_LANG']['tl_calendar']['feeds'][1] = 'مدیریت خوراک آر‌اس‌اس';

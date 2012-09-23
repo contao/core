@@ -79,3 +79,5 @@ $GLOBALS['TL_LANG']['tl_news_archive']['delete'][0] = 'حذف بایگانی';
 $GLOBALS['TL_LANG']['tl_news_archive']['delete'][1] = 'حذف بایگانی شناسه %s';
 $GLOBALS['TL_LANG']['tl_news_archive']['comments'][0] = 'نظرات';
 $GLOBALS['TL_LANG']['tl_news_archive']['comments'][1] = 'نمایش نظرات بایگانی شناسه %s';
+$GLOBALS['TL_LANG']['tl_news_archive']['feeds'][0] = 'خوراک‌های آر‌اس‌اس';
+$GLOBALS['TL_LANG']['tl_news_archive']['feeds'][1] = 'مدیریت خوراک‌های آراس‌اس';
