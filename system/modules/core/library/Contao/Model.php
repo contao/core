@@ -407,6 +407,31 @@ abstract class Model extends \System
 
 
 	/**
+	 * Find all records by their primary keys
+	 *
+	 * @param array $arrPks     An array of primary key values
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model\Collection|null The model collection or null if the result is empty
+	 */
+	public static function findByPks($arrPks, array $arrOptions = array())
+	{
+		$arrPks = (array) $arrPks;
+		if (!$arrPks)
+		{
+			return null;
+		}
+
+		$arrOptions['column']   = (array)$arrOptions['column'];
+		$arrOptions['column'][] = static::$strTable . '.' . static::$strPk . ' IN (' . rtrim(str_repeat('?,', count($arrPks)), ',') . ')';
+		$arrOptions['value']    = array_merge((array)$arrOptions['value'], $arrPks);
+		$arrOptions['return']   = 'Collection';
+
+		return static::find($arrOptions);
+	}
+
+
+	/**
 	 * Find all records
 	 * 
 	 * @param array $arrOptions An optional options array
