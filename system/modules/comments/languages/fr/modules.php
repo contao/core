@@ -15,7 +15,7 @@
  */
 
 $GLOBALS['TL_LANG']['CTE']['comments'][0] = 'Commentaires';
-$GLOBALS['TL_LANG']['CTE']['comments'][1] = 'Ajoute à la page un formulaire de saisie de commentaires.';
+$GLOBALS['TL_LANG']['CTE']['comments'][1] = 'Ajouter à la page un formulaire de saisie de commentaires.';
 $GLOBALS['TL_LANG']['FMD']['comments'][0] = 'Commentaires';
 $GLOBALS['TL_LANG']['FMD']['comments'][1] = 'Gérer les commentaires ou les entrées d\'un livre d\'or.';
 $GLOBALS['TL_LANG']['MOD']['comments'][0] = 'Commentaires';

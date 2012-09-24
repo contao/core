@@ -15,7 +15,7 @@
  */
 
 $GLOBALS['TL_LANG']['tl_content']['com_order'][0] = 'Ordre de tri';
-$GLOBALS['TL_LANG']['tl_content']['com_order'][1] = 'Par défaut, les commentaires sont triés en ordre croissant, en commençant par le plus ancien.';
+$GLOBALS['TL_LANG']['tl_content']['com_order'][1] = 'Choisir l\'ordre de tri.';
 $GLOBALS['TL_LANG']['tl_content']['com_perPage'][0] = 'Commentaires par page';
 $GLOBALS['TL_LANG']['tl_content']['com_perPage'][1] = 'Nombre de commentaires par page. Mettre 0 pour désactiver la pagination.';
 $GLOBALS['TL_LANG']['tl_content']['com_moderate'][0] = 'Modérer';
@@ -25,7 +25,7 @@ $GLOBALS['TL_LANG']['tl_content']['com_bbcode'][1] = 'Autoriser les visiteurs à
 $GLOBALS['TL_LANG']['tl_content']['com_requireLogin'][0] = 'Connexion préalable nécessaire';
 $GLOBALS['TL_LANG']['tl_content']['com_requireLogin'][1] = 'N\'autoriser que les utilisateurs authentifiés à créer des commentaires.';
 $GLOBALS['TL_LANG']['tl_content']['com_disableCaptcha'][0] = 'Désactiver la question de sécurité';
-$GLOBALS['TL_LANG']['tl_content']['com_disableCaptcha'][1] = 'N\'utiliser cette option que si vous avez restreint les commentaires aux utilisateurs habilités.';
-$GLOBALS['TL_LANG']['tl_content']['com_template'][0] = 'Modèle de commentaires';
-$GLOBALS['TL_LANG']['tl_content']['com_template'][1] = 'Choisir un modèle de commentaires.';
+$GLOBALS['TL_LANG']['tl_content']['com_disableCaptcha'][1] = 'Désactiver la question de sécurité (non recommandé).';
+$GLOBALS['TL_LANG']['tl_content']['com_template'][0] = 'Modèle des commentaires';
+$GLOBALS['TL_LANG']['tl_content']['com_template'][1] = 'Sélectionner un modèle de commentaires.';
 $GLOBALS['TL_LANG']['tl_content']['comment_legend'] = 'Paramètres des commentaires';

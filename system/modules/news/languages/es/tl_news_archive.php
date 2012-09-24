@@ -79,3 +79,5 @@ $GLOBALS['TL_LANG']['tl_news_archive']['delete'][0] = 'Eliminar archivo';
 $GLOBALS['TL_LANG']['tl_news_archive']['delete'][1] = 'Eliminar archivo con ID %s';
 $GLOBALS['TL_LANG']['tl_news_archive']['comments'][0] = 'Comentarios';
 $GLOBALS['TL_LANG']['tl_news_archive']['comments'][1] = 'Mostrar comentarios del archivo con ID %s';
+$GLOBALS['TL_LANG']['tl_news_archive']['feeds'][0] = 'RSS feeds';
+$GLOBALS['TL_LANG']['tl_news_archive']['feeds'][1] = 'Administrar RSS feeds';

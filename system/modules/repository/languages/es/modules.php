@@ -14,6 +14,8 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
+$GLOBALS['TL_LANG']['MOD']['repository'][0] = 'Repositorio de Extensiones';
+$GLOBALS['TL_LANG']['MOD']['repository'][1] = 'El back end módulo del Repositorio de Extensiones';
 $GLOBALS['TL_LANG']['MOD']['repository_catalog'][0] = 'Catálogo de extensiones';
 $GLOBALS['TL_LANG']['MOD']['repository_catalog'][1] = 'Explorar el repositorio e instalar extensiones.';
 $GLOBALS['TL_LANG']['MOD']['repository_manager'][0] = 'Administrador de extensiones';

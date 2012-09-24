@@ -16,6 +16,8 @@
 
 $GLOBALS['TL_LANG']['tl_style_sheet']['name'][0] = 'Nombre';
 $GLOBALS['TL_LANG']['tl_style_sheet']['name'][1] = 'Por favor introduce un nombre único para la hoja de estilo.';
+$GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'][0] = 'Imágenes incorporadas hasta';
+$GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'][1] = 'Puedes entrar el tamaño limite en bytes hasta cual estará integrado a la hoja de estilo como data. Se establece en 0 para desactivar la función.';
 $GLOBALS['TL_LANG']['tl_style_sheet']['cc'][0] = 'Comentario condicional';
 $GLOBALS['TL_LANG']['tl_style_sheet']['cc'][1] = 'Los comentarios condicionales te permiten crear hojas de estilo específicas para Internet Explorer';
 $GLOBALS['TL_LANG']['tl_style_sheet']['media'][0] = 'Tipos de media';
@@ -29,6 +31,7 @@ $GLOBALS['TL_LANG']['tl_style_sheet']['source'][1] = 'Por favor selecciona el ar
 $GLOBALS['TL_LANG']['tl_style_sheet']['tstamp'][0] = 'Última modificación';
 $GLOBALS['TL_LANG']['tl_style_sheet']['tstamp'][1] = 'Fecha y hora de la última modificación';
 $GLOBALS['TL_LANG']['tl_style_sheet']['title_legend'] = 'Nombre y tipo de media';
+$GLOBALS['TL_LANG']['tl_style_sheet']['config_legend'] = 'Configuración';
 $GLOBALS['TL_LANG']['tl_style_sheet']['media_legend'] = 'Configuración de media';
 $GLOBALS['TL_LANG']['tl_style_sheet']['vars_legend'] = 'Variables globales';
 $GLOBALS['TL_LANG']['tl_style_sheet']['css_imported'] = 'La hoja de estilo "%s" ha sido importada.';
