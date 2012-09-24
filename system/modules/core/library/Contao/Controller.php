@@ -1760,10 +1760,26 @@ abstract class Controller extends \System
 						$strFile = $arrChunks[0];
 					}
 
-					// Sanitize path
-					$strFile = str_replace('../', '', $strFile);
+					// Handle numeric IDs (see #4805)
+					if (is_numeric($strFile))
+					{
+						$objFile = \FilesModel::findByPk($strFile);
 
-					// Check maximum image width
+						if ($objFile === null)
+						{
+							$arrCache[$strTag] = '';
+							break;
+						}
+
+						$strFile = $objFile->path;
+					}
+					else
+					{
+						// Sanitize the path
+						$strFile = str_replace('../', '', $strFile);
+					}
+
+					// Check the maximum image width
 					if ($GLOBALS['TL_CONFIG']['maxImageWidth'] > 0 && $width > $GLOBALS['TL_CONFIG']['maxImageWidth'])
 					{
 						$width = $GLOBALS['TL_CONFIG']['maxImageWidth'];
