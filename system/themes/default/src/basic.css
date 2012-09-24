@@ -145,7 +145,6 @@ fieldset.tl_checkbox_container,fieldset.tl_radio_container {
 	padding:0;
 }
 fieldset.tl_checkbox_container {
-	margin:15px 0;
 	line-height:14px;
 }
 fieldset.tl_checkbox_container legend,fieldset.tl_radio_container legend {
@@ -262,6 +261,9 @@ pre,.tl_textarea.monospace {
 	display:block;
 	margin:-14px 0;
 	padding-left:20px;
+}
+.tl_checkbox_container label:last-child {
+	margin-bottom:0;
 }
 
 /* Grouped checkboxes */
