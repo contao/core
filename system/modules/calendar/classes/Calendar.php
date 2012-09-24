@@ -177,7 +177,7 @@ class Calendar extends \Frontend
 		$count = 0;
 		ksort($this->arrEvents);
 
-		// Add feed items
+		// Add the feed items
 		foreach ($this->arrEvents as $days)
 		{
 			foreach ($days as $events)
@@ -407,19 +407,18 @@ class Calendar extends \Frontend
 			'authorName' => $objEvent->authorName
 		);
 
-		// Enclosure
+		// Enclosures
 		if ($objEvent->addEnclosure)
 		{
 			$arrEnclosure = deserialize($objEvent->enclosure, true);
 
 			if (is_array($arrEnclosure))
 			{
-				foreach ($arrEnclosure as $strEnclosure)
+				$objFile = \FilesModel::findMultipleByIds($arrEnclosure);
+
+				while ($objFile->next())
 				{
-					if (is_file(TL_ROOT . '/' . $strEnclosure))
-					{
-						$arrEvent['enclosure'][] = $strEnclosure;
-					}
+					$arrEvent['enclosure'][] = $objFile->path;
 				}
 			}
 		}

@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly add enclosures to RSS/Atom feeds (see #4853).
+
+### Fixed
 Handle numeric IDs in the "image" insert tag (see #4805).
 
 ### Fixed

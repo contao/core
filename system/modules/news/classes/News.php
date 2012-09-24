@@ -174,19 +174,18 @@ class News extends \Frontend
 					$objItem->addEnclosure($objArticle->singleSRC);
 				}
 
-				// Enclosure
+				// Enclosures
 				if ($objArticle->addEnclosure)
 				{
 					$arrEnclosure = deserialize($objArticle->enclosure, true);
 
 					if (is_array($arrEnclosure))
 					{
-						foreach ($arrEnclosure as $strEnclosure)
+						$objFile = \FilesModel::findMultipleByIds($arrEnclosure);
+
+						while ($objFile->next())
 						{
-							if (is_file(TL_ROOT . '/' . $strEnclosure))
-							{
-								$objItem->addEnclosure($strEnclosure);
-							}
+							$objItem->addEnclosure($objFile->path);
 						}
 					}
 				}
