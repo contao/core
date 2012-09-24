@@ -1561,7 +1561,7 @@ class tl_page extends Backend
 				if ($objPage !== null)
 				{
 					$this->Database->prepare("UPDATE tl_page SET alias=? WHERE id=?")
-								   ->execute($objPage->folderUrl, $id);
+								   ->execute(($GLOBALS['TL_CONFIG']['folderUrl'] ? $objPage->folderUrl : basename($objPage->alias)), $id);
 				}
 			}
 

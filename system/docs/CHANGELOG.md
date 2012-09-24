@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+If folder URLs are disabled in the back end settings, the "generate alias" job
+(edit multiple) will generate simple aliases (see #4846).
+
+### Fixed
 Correctly handle replacements when uploading files (see #4818).
 
 ### Fixed
