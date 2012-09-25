@@ -120,7 +120,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 		'checkbox'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory;{options_legend},options;{expert_legend:hide},class;{submit_legend},addSubmit',
 		'upload'                      => '{type_legend},type,name,label;{fconfig_legend},mandatory,extensions,maxlength;{store_legend:hide},storeFile;{expert_legend:hide},class,accesskey,tabindex,fSize;{submit_legend},addSubmit',
 		'hidden'                      => '{type_legend},type,name,value;{fconfig_legend},mandatory,rgxp',
-		'captcha'                     => '{type_legend},type,label;{expert_legend:hide},class,accesskey,tabindex;{submit_legend},addSubmit',
+		'captcha'                     => '{type_legend},type,label;{fconfig_legend},placeholder;{expert_legend:hide},class,accesskey,tabindex;{submit_legend},addSubmit',
 		'submit'                      => '{type_legend},type,slabel;{image_legend:hide},imageSubmit;{expert_legend:hide},class,accesskey,tabindex'
 	),
 

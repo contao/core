@@ -76,6 +76,10 @@ class FormCaptcha extends \Widget
 				// Is set by default
 				break;
 
+			case 'placeholder':
+				$this->arrAttributes['placeholder'] = $varValue;
+				break;
+
 			default:
 				parent::__set($strKey, $varValue);
 				break;

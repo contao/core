@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+The CAPTCHA form field now supports the "placeholder" attribute (see #4865).
+
+### Fixed
 Correctly add enclosures to RSS/Atom feeds (see #4853).
 
 ### Fixed
