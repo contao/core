@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Do not add the file picker to the list of referer addresses (see #4855).
+
+### Fixed
 The CAPTCHA form field now supports the "placeholder" attribute (see #4865).
 
 ### Fixed
