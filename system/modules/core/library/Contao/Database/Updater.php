@@ -352,6 +352,9 @@ class Updater extends \Controller
 							   ->execute($angle, $objStyle->id);
 			}
 		}
+
+		// Make unlimited recurrences end on 2038-01-01 00:00:00 (see #4862)
+		$this->Database->query("UPDATE `tl_calendar_events` SET `repeatEnd`=2145913200 WHERE `recurring`=1 AND `recurrences`=0");
 	}
 
 

@@ -841,15 +841,24 @@ class tl_calendar_events extends Backend
 
 		$arrSet['repeatEnd'] = 0;
 
+		// Recurring events
 		if ($dc->activeRecord->recurring)
 		{
-			$arrRange = deserialize($dc->activeRecord->repeatEach);
+			// Unlimited recurrences end on 2038-01-01 00:00:00 (see #4862)
+			if ($dc->activeRecord->recurrences == 0)
+			{
+				$arrSet['repeatEnd'] = 2145913200;
+			}
+			else
+			{
+				$arrRange = deserialize($dc->activeRecord->repeatEach);
 
-			$arg = $arrRange['value'] * $dc->activeRecord->recurrences;
-			$unit = $arrRange['unit'];
+				$arg = $arrRange['value'] * $dc->activeRecord->recurrences;
+				$unit = $arrRange['unit'];
 
-			$strtotime = '+ ' . $arg . ' ' . $unit;
-			$arrSet['repeatEnd'] = strtotime($strtotime, $arrSet['endTime']);
+				$strtotime = '+ ' . $arg . ' ' . $unit;
+				$arrSet['repeatEnd'] = strtotime($strtotime, $arrSet['endTime']);
+			}
 		}
 
 		$this->Database->prepare("UPDATE tl_calendar_events %s WHERE id=?")->set($arrSet)->execute($dc->id);

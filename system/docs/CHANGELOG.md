@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Do not set a right boundary for the calendar navigation if there are events with
+unlimited recurrences (see #4862).
+
+### Fixed
 Gradient angles are now converted from the new syntax to the legacy syntax for
 the prefixed versions (see #4569). This also means that from now on you have to
 use the new syntax, e.g. "to bottom" instead of "top" and "180deg" instead of
