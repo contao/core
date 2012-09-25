@@ -1,7 +1,7 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.11.6 (2012-XX-XX)
+Version 2.11.6 (2012-09-26)
 ---------------------------
 
 ### Fixed
