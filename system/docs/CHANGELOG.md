@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly link to articles and FAQs when using insert tags (see #4835).
+
+### Fixed
 Do not add the file picker to the list of referer addresses (see #4855).
 
 ### Fixed
