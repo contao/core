@@ -3011,6 +3011,7 @@ abstract class Controller extends \System
 		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
 		$objTemplate->margin = static::generateMargin(deserialize($arrItem['imagemargin']), 'padding');
 		$objTemplate->caption = $arrItem['caption'];
+		$objTemplate->singleSRC = $arrItem['singleSRC'];
 		$objTemplate->addImage = true;
 	}
 
