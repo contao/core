@@ -531,7 +531,7 @@ class StyleSheets extends \Backend
 					// Default starting point
 					if ($row['gradientAngle'] == '')
 					{
-						$row['gradientAngle'] = 'top';
+						$row['gradientAngle'] = 'to top';
 					}
 
 					$row['gradientColors'] = array_values(array_filter($row['gradientColors']));
@@ -542,14 +542,37 @@ class StyleSheets extends \Backend
 						$row['gradientColors'][$k] = '#' . $v;
 					}
 
-					$gradient = $row['gradientAngle'] . ',' . implode(',', $row['gradientColors']);
+					// Convert the angle for the legacy commands (see #4569)
+					if (strpos($row['gradientAngle'], 'deg') !== false)
+					{
+						$angle = (abs(intval($row['gradientAngle']) - 450) % 360) . 'deg';
+					}
+					else
+					{
+						switch ($row['gradientAngle'])
+						{
+							case 'to top':          $angle = 'bottom';       break;
+							case 'to right':        $angle = 'left';         break;
+							case 'to bottom':       $angle = 'top';          break;
+							case 'to left':         $angle = 'right';        break;
+							case 'to top left':     $angle = 'bottom right'; break;
+							case 'to top right':    $angle = 'bottom left';  break;
+							case 'to bottom left':  $angle = 'top right';    break;
+							case 'to bottom right': $angle = 'top left';     break;
+						}
+					}
 
-					$return .= $lb . 'background:' . $bgImage . '-moz-linear-gradient(' . $gradient . ');';
-					$return .= $lb . 'background:' . $bgImage . '-webkit-linear-gradient(' . $gradient . ');';
-					$return .= $lb . 'background:' . $bgImage . '-o-linear-gradient(' . $gradient . ');';
-					$return .= $lb . 'background:' . $bgImage . '-ms-linear-gradient(' . $gradient . ');';
+					$colors = implode(',', $row['gradientColors']);
+
+					$legacy = $angle . ',' . $colors;
+					$gradient = $row['gradientAngle'] . ',' . $colors;
+
+					$return .= $lb . 'background:' . $bgImage . '-moz-linear-gradient(' . $legacy . ');';
+					$return .= $lb . 'background:' . $bgImage . '-webkit-linear-gradient(' . $legacy . ');';
+					$return .= $lb . 'background:' . $bgImage . '-o-linear-gradient(' . $legacy . ');';
+					$return .= $lb . 'background:' . $bgImage . '-ms-linear-gradient(' . $legacy . ');';
 					$return .= $lb . 'background:' . $bgImage . 'linear-gradient(' . $gradient . ');';
-					$return .= $lb . '-pie-background:' . $bgImage . 'linear-gradient(' . $gradient . ');';
+					$return .= $lb . '-pie-background:' . $bgImage . 'linear-gradient(' . $legacy . ');';
 				}
 			}
 

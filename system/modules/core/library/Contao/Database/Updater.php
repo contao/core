@@ -321,6 +321,37 @@ class Updater extends \Controller
 				}
 			}
 		}
+
+		// Convert the gradient angle syntax (see #4569)
+		if ($this->Database->fieldExists('gradientAngle', 'tl_style'))
+		{
+			$objStyle = $this->Database->execute("SELECT id, gradientAngle FROM tl_style WHERE gradientAngle!=''");
+
+			while ($objStyle->next())
+			{
+				if (strpos($objStyle->gradientAngle, 'deg') !== false)
+				{
+					$angle = (abs(450 - intval($objStyle->gradientAngle)) % 360) . 'deg';
+				}
+				else
+				{
+					switch ($objStyle->gradientAngle)
+					{
+						case 'top':          $angle = 'to bottom';       break;
+						case 'right':        $angle = 'to left';         break;
+						case 'bottom':       $angle = 'to top';          break;
+						case 'left':         $angle = 'to right';        break;
+						case 'top left':     $angle = 'to bottom right'; break;
+						case 'top right':    $angle = 'to bottom left';  break;
+						case 'bottom left':  $angle = 'to top right';    break;
+						case 'bottom right': $angle = 'to top left';     break;
+					}
+				}
+
+				$this->Database->prepare("UPDATE tl_style SET gradientAngle=? WHERE id=?")
+							   ->execute($angle, $objStyle->id);
+			}
+		}
 	}
 
 
