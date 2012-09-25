@@ -97,7 +97,7 @@ class MetaWizard extends \Widget
 				$return .= '
     <li class="'.(($count%2 == 0) ? 'even' : 'odd').'">';
 
-				$return .= '<span class="lang">' . $languages[$lang] . ' ' . $this->generateImage('delete.gif', '', 'class="tl_metawizard_img" onclick="this.getParent(\'li\').destroy();$$(\'div.tip-wrap\').destroy()" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['aw_delete']).'"') . '</span>';
+				$return .= '<span class="lang">' . $languages[$lang] . ' ' . $this->generateImage('delete.gif', '', 'class="tl_metawizard_img" onclick="Backend.metaDelete(this)" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['aw_delete']).'"') . '</span>';
 				$return .= '<label for="ctrl_title_'.$count.'">'.$GLOBALS['TL_LANG']['MSC']['aw_title'].'</label> <input type="text" name="'.$this->strId.'['.$lang.'][title]" id="ctrl_title_'.$count.'" class="tl_text" value="'.specialchars($meta['title']).'"><br>';
 				$return .= '<label for="ctrl_link_'.$count.'">'.$GLOBALS['TL_LANG']['MSC']['aw_link'].'</label> <input type="text" name="'.$this->strId.'['.$lang.'][link]" id="ctrl_link_'.$count.'" class="tl_text" value="'.specialchars($meta['link']).'"><br>';
 				$return .= '<label for="ctrl_caption_'.$count.'">'.$GLOBALS['TL_LANG']['MSC']['aw_caption'].'</label> <input type="text" name="'.$this->strId.'['.$lang.'][caption]" id="ctrl_caption_'.$count.'" class="tl_text" value="'.specialchars($meta['caption']).'">';
