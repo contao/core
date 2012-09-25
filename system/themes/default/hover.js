@@ -1,2 +1,2 @@
 /* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */
-var Theme={hoverRow:function(e,t){var n=$(e).getChildren();for(var r=0;r<n.length;r++)n[r].nodeName.toLowerCase()=="td"&&n[r].setStyle("background-color",t?"#ebfdd7":"")},hoverDiv:function(e,t){$(e).setStyle("background-color",t?"#ebfdd7":"")}};
+var Theme={hoverRow:function(e,t){var n=$(e).getChildren();for(var r=0;r<n.length;r++)n[r].nodeName.toLowerCase()=="td"&&n[r].setStyle("background-color",t?"#ebfdd7":"")},hoverDiv:function(e,t){$(e).setStyle("background-color",t?"#ebfdd7":"")},fixLabelLastChild:function(){(Browser.ie7||Browser.ie8)&&$$(".tl_checkbox_container label:last-child").each(function(e){e.setStyle("margin-bottom",0)})}};window.addEvent("domready",function(){Theme.fixLabelLastChild()});
