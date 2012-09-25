@@ -90,7 +90,27 @@ $GLOBALS['TL_CONFIG']['timeFormat']  = 'H:i';
  * In Contao 2.10, the referer check has been replaced with a request token
  * system, which you can disable here (not recommended).
  */
-$GLOBALS['TL_CONFIG']['allowedTags']           = '<a><abbr><acronym><address><area><article><aside><audio><b><big><blockquote><br><base><bdo><button><canvas><caption><cite><code><col><colgroup><data><dataset><dd><del><div><dfn><dl><dt><em><figure><figcaption><form><fieldset><hgroup><hr><h1><h2><h3><h4><h5><h6><i><img><input><ins><label><legend><li><link><map><mark><nav><object><ol><optgroup><option><p><pre><param><q><section><select><small><span><strong><sub><sup><style><table><tbody><td><textarea><tfoot><th><thead><time><tr><tt><u><ul><video>';
+$GLOBALS['TL_CONFIG']['allowedTags']
+	= '<a><abbr><acronym><address><area><article><aside><audio>'
+	. '<b><bdi><bdo><big><blockquote><br><base><button>'
+	. '<canvas><caption><cite><code><col><colgroup>'
+	. '<data><datalist><dataset><dd><del><dfn><div><dl><dt>'
+	. '<em>'
+	. '<fieldset><figcaption><figure><footer><form>'
+	. '<h1><h2><h3><h4><h5><h6><header><hgroup><hr>'
+	. '<i><img><input><ins>'
+	. '<kbd><keygen>'
+	. '<label><legend><li><link>'
+	. '<map><mark><menu>'
+	. '<nav>'
+	. '<object><ol><optgroup><option><output>'
+	. '<p><param><pre>'
+	. '<q>'
+	. '<s><samp><section><select><small><source><span><strong><style><sub><sup>'
+	. '<table><tbody><td><textarea><tfoot><th><thead><time><tr><tt>'
+	. '<u><ul>'
+	. '<var><video>'
+	. '<wbr>';
 $GLOBALS['TL_CONFIG']['disableRefererCheck']   = false;
 $GLOBALS['TL_CONFIG']['disableIpCheck']        = false;
 $GLOBALS['TL_CONFIG']['requestTokenWhitelist'] = array();
@@ -180,8 +200,13 @@ $GLOBALS['TL_CONFIG']['encryptionCipher'] = 'rijndael-256';
  *
  * Please enter how many upload fields you want to show in the back end.
  */
+$GLOBALS['TL_CONFIG']['uploadTypes']
+	= 'jpg,jpeg,gif,png,ico,'
+	. 'csv,doc,docx,xls,xlsx,ppt,pptx,odt,ods,odp,pdf,'
+	. 'mp3,mp4,m4a,m4v,webm,ogg,wma,wmv,ram,rm,mov,fla,flv,swf,'
+	. 'css,js,html,htm,txt,'
+	. 'zip,rar,7z,cto';
 $GLOBALS['TL_CONFIG']['uploadPath']     = 'files';
-$GLOBALS['TL_CONFIG']['uploadTypes']    = 'jpg,jpeg,gif,png,ico,csv,doc,docx,xls,xlsx,ppt,pptx,odt,ods,odp,pdf,mp3,mp4,m4a,m4v,webm,ogg,wma,wmv,ram,rm,mov,fla,flv,swf,css,html,htm,txt,zip,rar,7z,cto';
 $GLOBALS['TL_CONFIG']['maxFileSize']    = 2048000;
 $GLOBALS['TL_CONFIG']['imageWidth']     = 800;
 $GLOBALS['TL_CONFIG']['imageHeight']    = 600;
