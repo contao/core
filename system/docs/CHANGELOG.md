@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.0 (2012-XX-XX)
 --------------------------
 
+### Fixed
+Show the hint arrows in all "imageSize" fields by default (see #4326).
+
 ### Updated
 Updated TCPDF to version 5.9.192 and fixed some CHMOD settings (see #4819).
 

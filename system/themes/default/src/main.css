@@ -1170,19 +1170,19 @@ a.navigation {
 }
 
 /* Visual hint for TRBL fields - thanks to Eugene Rybyakov */
-.tl_text_trbl,#ctrl_size_0,#ctrl_size_1,#ctrl_gradient input,#ctrl_playerSize input {
+.tl_text_trbl,.tl_imageSize_0,.tl_imageSize_1,#ctrl_gradient input,#ctrl_playerSize input {
 	background:url("images/hints.gif") no-repeat -20px 20px;
 }
-#ctrl_size_0,#ctrl_playerSize_0 {
+#ctrl_playerSize_0 {
 	background-position:142px 1px !important;
 }
-#ctrl_size_1,#ctrl_playerSize_1 {
+#ctrl_playerSize_1 {
 	background-position:143px -18px !important;
 }
-#ctrl_size_0.tl_text_4 {
+.tl_imageSize_0 {
 	background-position:63px 1px !important;
 }
-#ctrl_size_1.tl_text_4 {
+.tl_imageSize_1 {
 	background-position:64px -18px !important;
 }
 .trbl_top {
