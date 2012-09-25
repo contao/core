@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.0 (2012-XX-XX)
 --------------------------
 
+### Updated
+Updated TCPDF to version 5.9.192 and fixed some CHMOD settings (see #4819).
+
 ### Fixed
 Added the classes "first" and "last" to the breadcrumb menu to be more in line
 with the other navigation templates (see #4833).
