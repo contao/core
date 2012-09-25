@@ -9,9 +9,9 @@
 <ul>
 <?php foreach ($this->items as $item): ?>
 <?php if ($item['isActive']): ?>
-  <li class="active"><?php echo $item['title']; ?></li>
+  <li class="active<?php if ($item['class']): ?> <?php echo $item['class']; ?><?php endif; ?> last"><?php echo $item['title']; ?></li>
 <?php else: ?>
-  <li><a href="<?php echo $item['href']; ?>" title="<?php echo $item['title']; ?>"><?php echo $item['link']; ?></a></li> 
+  <li<?php if ($item['class']): ?> class="<?php echo $item['class']; ?>"<?php endif; ?> title="<?php echo $item['title']; ?>"><?php echo $item['link']; ?></a></li> 
 <?php endif; ?>
 <?php endforeach; ?>
 </ul>

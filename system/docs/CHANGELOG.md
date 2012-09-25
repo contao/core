@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Added the classes "first" and "last" to the breadcrumb menu to be more in line
+with the other navigation templates (see #4833).
+
+### Fixed
 Correctly link to articles and FAQs when using insert tags (see #4835).
 
 ### Fixed
