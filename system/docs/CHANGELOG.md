@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Removed the back end context menu, because it was buggy in IE and did not work
+at all on touch-based devices (see #4459).
+
+### Fixed
 Do not set a right boundary for the calendar navigation if there are events with
 unlimited recurrences (see #4862).
 
