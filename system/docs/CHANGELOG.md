@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Do not regenerate the `autoload.php` files when generating the IDE compatiblity
+file (see #4810).
+
+### Fixed
 Model class names which cannot be build from the corresponding table name can
 now be registered in the `$GLOBALS['TL_MODELS']` array (see #4796).
 
