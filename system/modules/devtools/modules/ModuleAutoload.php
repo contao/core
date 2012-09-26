@@ -98,111 +98,139 @@ class ModuleAutoload extends \BackendModule
 		if (empty($arrModules))
 		{
 			\Message::addError($GLOBALS['TL_LANG']['tl_autoload']['emptySelection']);
+			return;
 		}
-		else
-		{
-			$intYear = date('Y');
 
-			foreach ($arrModules as $strModule)
+		$intYear = date('Y');
+
+		foreach ($arrModules as $strModule)
+		{
+			// The autoload.php file exists
+			if (!\Input::post('override') && file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.php'))
 			{
-				// config/autoload.php exists
-				if (!\Input::post('override') && file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.php'))
+				\Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_autoload']['autoloadExists'], $strModule));
+				continue;
+			}
+
+			$intClassWidth = 0;
+			$arrFiles = array();
+			$arrClassLoader = array();
+			$arrNamespaces = array();
+
+			// Default configuration
+			$arrDefaultConfig = array
+			(
+				'register_namespaces' => true,
+				'register_classes'    => true,
+				'register_templates'  => true,
+			);
+
+			// Create the autoload.ini file if it does not yet exist
+			if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini'))
+			{
+				$objIni = new \File('system/modules/devtools/config/autoload.ini');
+				$objIni->copyTo('system/modules/' . $strModule . '/config/autoload.ini');
+			}
+
+			$arrDefaultConfig = array_merge($arrDefaultConfig, parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini', true));
+
+			// Recursively scan all subfolders
+			$objFiles = new \RecursiveIteratorIterator(
+				new \RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule, \FilesystemIterator::UNIX_PATHS)
+			);
+
+			// Get all PHP files
+			foreach ($objFiles as $objFile)
+			{
+				if ($objFile->isFile() && pathinfo($objFile->getFilename(), PATHINFO_EXTENSION) == 'php')
 				{
-					\Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_autoload']['autoloadExists'], $strModule));
+					$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
+
+					if (strncmp($strRelpath, 'assets/', 7) !== 0 && strncmp($strRelpath, 'config/', 7) !== 0 && strncmp($strRelpath, 'dca/', 4) !== 0 && strncmp($strRelpath, 'languages/', 10) !== 0 && strncmp($strRelpath, 'templates/', 10) !== 0)
+					{
+						$arrFiles[] = $strRelpath;
+					}
+				}
+			}
+
+			// Scan for classes
+			foreach ($arrFiles as $strFile)
+			{
+				$strBuffer = '';
+				$arrMatches = array();
+
+				$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
+
+				// Read until a class or interface definition has been found
+				while (!feof($fh) && !preg_match('/(class|interface) ' . preg_quote(basename($strFile, '.php'), '/') . '/', $strBuffer, $arrMatches))
+				{
+					$strBuffer .= fread($fh, 512);
+				}
+
+				fclose($fh);
+
+				// The file does not contain a class or interface
+				if (empty($arrMatches))
+				{
 					continue;
 				}
 
-				$intClassWidth = 0;
-				$arrFiles = array();
-				$arrClassLoader = array();
-				$arrNamespaces = array();
+				$strNamespace = preg_replace('/^.*namespace ([^; ]+);.*$/s', '$1', $strBuffer);
 
-				// Default configuration
-				$arrConfig = array
-				(
-					'register_namespaces' => true,
-					'register_classes'    => true,
-					'register_templates'  => true,
-				);
-
-				// Create the autoload.ini file if it does not yet exist
-				if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini'))
+				// No namespace declaration found
+				if ($strNamespace == $strBuffer)
 				{
-					$objIni = new \File('system/modules/devtools/config/autoload.ini');
-					$objIni->copyTo('system/modules/' . $strModule . '/config/autoload.ini');
+					$strNamespace = '';
 				}
 
-				$arrConfig = array_merge($arrConfig, parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini'));
+				unset($strBuffer);
+				$arrConfig = $arrDefaultConfig;
 
-				// Recursively scan all subfolders
-				$objFiles = new \RecursiveIteratorIterator(
-					new \RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule, \FilesystemIterator::UNIX_PATHS)
-				);
-
-				// Get all PHP files
-				foreach ($objFiles as $objFile)
+				// Search for a path configuration
+				foreach ($arrDefaultConfig as $strPattern=>$arrPathConfig)
 				{
-					if ($objFile->isFile() && pathinfo($objFile->getFilename(), PATHINFO_EXTENSION) == 'php')
+					// Merge the path configuration with the global configuration
+					if (is_array($arrPathConfig) && fnmatch($strPattern, $strFile))
 					{
-						$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
-
-						if (strncmp($strRelpath, 'assets/', 7) !== 0 && strncmp($strRelpath, 'config/', 7) !== 0 && strncmp($strRelpath, 'dca/', 4) !== 0 && strncmp($strRelpath, 'languages/', 10) !== 0 && strncmp($strRelpath, 'templates/', 10) !== 0)
-						{
-							$arrFiles[] = $strRelpath;
-						}
+						$arrConfig = array_merge($arrDefaultConfig, $arrPathConfig);
+						break;
 					}
 				}
 
-				// Scan for classes
-				foreach ($arrFiles as $strFile)
+				// Register the namespace
+				if ($strNamespace != '')
 				{
-					// Read the first 1200 characters of the file (should include the namespace tag)
-					$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
-					$strBuffer = fread($fh, 1200);
-					fclose($fh);
-
-					if (strpos($strBuffer, 'namespace') === false)
+					if ($arrConfig['register_namespaces'] && $strNamespace != 'Contao')
 					{
-						$strNamespace = '';
-					}
-					else
-					{
-						$strNamespace = preg_replace('/^.*namespace ([^; ]+);.*$/s', '$1', $strBuffer);
-						list($strFirst, $strRest) = explode('\\', $strNamespace, 2);
-
-						if ($strNamespace != 'Contao')
+						// Register only the first chunk as namespace
+						if (strpos($strNamespace, '\\') !== false)
 						{
-							// Register only the first chunk as namespace
-							if (strpos($strNamespace, '\\') !== false)
-							{
-								$arrNamespaces[] = substr($strNamespace, 0, strpos($strNamespace, '\\'));
-							}
-							else
-							{
-								$arrNamespaces[] = $strNamespace;
-							}
+							$arrNamespaces[] = substr($strNamespace, 0, strpos($strNamespace, '\\'));
 						}
-
-						// Add the ide_compat information
-						$arrCompat[$strModule][$strRest][] = array
-						(
-							'namespace' => $strFirst,
-							'class'     => basename($strFile, '.php'),
-							'abstract'  => preg_match('/^.*abstract class [^;]+.*$/s', $strBuffer)
-						);
-
-						$strNamespace .=  '\\';
+						else
+						{
+							$arrNamespaces[] = $strNamespace;
+						}
 					}
 
+					$strNamespace .=  '\\';
+				}
+
+				// Register the class
+				if ($arrConfig['register_classes'])
+				{
 					$strKey = $strNamespace . basename($strFile, '.php');
 					$arrClassLoader[$strKey] = 'system/modules/' . $strModule . '/' . $strFile;
 					$intClassWidth = max(strlen($strKey), $intClassWidth);
 				}
+			}
 
-				$intTplWidth = 0;
-				$arrTplLoader = array();
+			$intTplWidth = 0;
+			$arrTplLoader = array();
 
-				// Scan for templates
+			// Scan for templates
+			if ($arrConfig['register_templates'])
+			{
 				if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
 				{
 					foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates') as $strFile)
@@ -217,17 +245,18 @@ class ModuleAutoload extends \BackendModule
 						$intTplWidth = max(strlen($strKey), $intTplWidth);
 					}
 				}
+			}
 
-				// Neither classes nor templates found
-				if (empty($arrClassLoader) && empty($arrTplLoader))
-				{
-					continue;
-				}
+			// Neither classes nor templates found
+			if (empty($arrNamespaces) && empty($arrClassLoader) && empty($arrTplLoader))
+			{
+				continue;
+			}
 
-				$strPackage = ucfirst($strModule);
+			$strPackage = ucfirst($strModule);
 
-				$objFile = new \File('system/modules/' . $strModule . '/config/autoload.php');
-				$objFile->write(
+			$objFile = new \File('system/modules/' . $strModule . '/config/autoload.php');
+			$objFile->write(
 <<<EOT
 <?php
 
@@ -242,16 +271,16 @@ class ModuleAutoload extends \BackendModule
  */
 
 EOT
-				);
+			);
 
-				// Namespaces
-				if ($arrConfig['register_namespaces'])
+			// Namespaces
+			if (!empty($arrNamespaces))
+			{
+				$arrNamespaces = array_unique($arrNamespaces);
+
+				if (!empty($arrNamespaces))
 				{
-					$arrNamespaces = array_unique($arrNamespaces);
-
-					if (!empty($arrNamespaces))
-					{
-						$objFile->append(
+					$objFile->append(
 <<<EOT
 
 
@@ -261,21 +290,21 @@ EOT
 ClassLoader::addNamespaces(array
 (
 EOT
-						);
+					);
 
-						foreach ($arrNamespaces as $strNamespace)
-						{
-							$objFile->append("\t'" . $strNamespace . "',");
-						}
-
-						$objFile->append('));');
+					foreach ($arrNamespaces as $strNamespace)
+					{
+						$objFile->append("\t'" . $strNamespace . "',");
 					}
-				}
 
-				// Classes
-				if ($arrConfig['register_classes'] && !empty($arrClassLoader))
-				{
-					$objFile->append(
+					$objFile->append('));');
+				}
+			}
+
+			// Classes
+			if (!empty($arrClassLoader))
+			{
+				$objFile->append(
 <<<EOT
 
 
@@ -285,40 +314,40 @@ EOT
 ClassLoader::addClasses(array
 (
 EOT
-					);
+				);
 
-					$strGroup = null;
+				$strGroup = null;
 
-					foreach ($arrClassLoader as $strClass=>$strPath)
+				foreach ($arrClassLoader as $strClass=>$strPath)
+				{
+					$strRelpath = str_replace('system/modules/' . $strModule . '/', '', $strPath);
+					$strBasedir = substr($strRelpath, 0, strpos($strRelpath, '/'));
+
+					if ($strBasedir != '')
 					{
-						$strRelpath = str_replace('system/modules/' . $strModule . '/', '', $strPath);
-						$strBasedir = substr($strRelpath, 0, strpos($strRelpath, '/'));
-
-						if ($strBasedir != '')
+						if ($strGroup === null)
 						{
-							if ($strGroup === null)
-							{
-								$strGroup = $strBasedir;
-								$objFile->append("\t// " . ucfirst($strBasedir));
-							}
-							elseif ($strBasedir != $strGroup)
-							{
-								$strGroup = $strBasedir;
-								$objFile->append("\n\t// " . ucfirst($strBasedir));
-							}
+							$strGroup = $strBasedir;
+							$objFile->append("\t// " . ucfirst($strBasedir));
 						}
-
-						$strClass = "'" . $strClass . "'";
-						$objFile->append("\t" . str_pad($strClass, $intClassWidth+2) . " => '$strPath',");
+						elseif ($strBasedir != $strGroup)
+						{
+							$strGroup = $strBasedir;
+							$objFile->append("\n\t// " . ucfirst($strBasedir));
+						}
 					}
 
-					$objFile->append('));');
+					$strClass = "'" . $strClass . "'";
+					$objFile->append("\t" . str_pad($strClass, $intClassWidth+2) . " => '$strPath',");
 				}
 
-				// Templates
-				if ($arrConfig['register_templates'] && !empty($arrTplLoader))
-				{
-					$objFile->append(
+				$objFile->append('));');
+			}
+
+			// Templates
+			if (!empty($arrTplLoader))
+			{
+				$objFile->append(
 <<<EOT
 
 
@@ -328,20 +357,19 @@ EOT
 TemplateLoader::addFiles(array
 (
 EOT
-					);
+				);
 
-					foreach ($arrTplLoader as $strName=>$strPath)
-					{
-						$strName = "'" . $strName . "'";
-						$objFile->append("\t" . str_pad($strName, $intTplWidth+2) . " => '$strPath',");
-					}
-
-					$objFile->append('));');
+				foreach ($arrTplLoader as $strName=>$strPath)
+				{
+					$strName = "'" . $strName . "'";
+					$objFile->append("\t" . str_pad($strName, $intTplWidth+2) . " => '$strPath',");
 				}
 
-				$objFile->close();
-				\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_autoload']['autoloadConfirm'], $strModule));
+				$objFile->append('));');
 			}
+
+			$objFile->close();
+			\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_autoload']['autoloadConfirm'], $strModule));
 		}
 	}
 
@@ -351,7 +379,6 @@ EOT
 	 */
 	protected function createIdeCompatFile()
 	{
-		$intYear = date('Y');
 		$arrCompat = array();
 
 		// Scan all modules
@@ -385,29 +412,54 @@ EOT
 			// Scan for classes
 			foreach ($arrFiles as $strFile)
 			{
-				// Read the first 1200 characters of the file (should include the namespace tag)
+				$strBuffer = '';
+				$arrMatches = array();
+
 				$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
-				$strBuffer = fread($fh, 1200);
+
+				// Read until a class or interface definition has been found
+				while (!feof($fh) && !preg_match('/(class|interface) ' . preg_quote(basename($strFile, '.php'), '/') . '/', $strBuffer, $arrMatches))
+				{
+					$strBuffer .= fread($fh, 512);
+				}
+
 				fclose($fh);
 
-				if (strpos($strBuffer, 'namespace') !== false)
+				// The file does not contain a class or interface
+				if (empty($arrMatches))
 				{
-					$strNamespace = preg_replace('/^.*namespace ([^; ]+);.*$/s', '$1', $strBuffer);
-					list($strFirst, $strRest) = explode('\\', $strNamespace, 2);
-
-					// Add the ide_compat information
-					$arrCompat[$strModule][$strRest][] = array
-					(
-						'namespace' => $strFirst,
-						'class'     => basename($strFile, '.php'),
-						'abstract'  => preg_match('/^.*abstract class [^;]+.*$/s', $strBuffer)
-					);
+					continue;
 				}
-			}
 
-			// Write the file
-			$objFile = new \File('system/helper/ide_compat.php');
-			$objFile->write(
+				$strType = $arrMatches[1];
+				$strNamespace = preg_replace('/^.*namespace ([^; ]+);.*$/s', '$1', $strBuffer);
+
+				// No namespace declaration found
+				if ($strNamespace == $strBuffer)
+				{
+					continue;
+				}
+
+				list($strFirst, $strRest) = explode('\\', $strNamespace, 2);
+
+				// Add the ide_compat information
+				$arrCompat[$strModule][$strRest][] = array
+				(
+					'namespace' => $strFirst,
+					'class'     => basename($strFile, '.php'),
+					'abstract'  => preg_match('/^.*abstract ' . preg_quote($strType, '/') . ' [^;]+.*$/s', $strBuffer),
+					'type'      => $strType
+				);
+
+				unset($strBuffer);
+			}
+		}
+
+		$intYear = date('Y');
+
+		// Write the file
+		$objFile = new \File('system/helper/ide_compat.php');
+		$objFile->write(
 <<<EOT
 <?php
 
@@ -429,28 +481,27 @@ EOT
  */
 
 EOT
-			);
+		);
 
-			// Add the classes
-			foreach ($arrCompat as $strModule=>$arrNamespaces)
+		// Add the classes
+		foreach ($arrCompat as $strModule=>$arrNamespaces)
+		{
+			$objFile->append("\n// " . $strModule);
+
+			foreach ($arrNamespaces as $strNamespace=>$arrClasses)
 			{
-				$objFile->append("\n// " . $strModule);
+				$objFile->append('namespace ' . $strNamespace . ' {');
 
-				foreach ($arrNamespaces as $strNamespace=>$arrClasses)
+				foreach ($arrClasses as $arrClass)
 				{
-					$objFile->append('namespace ' . $strNamespace . '{');
-
-					foreach ($arrClasses as $arrClass)
-					{
-						$objFile->append("\t" . ($arrClass['abstract'] ? 'abstract ' : '') . 'class ' . $arrClass['class'] . ' extends ' . $arrClass['namespace'] . '\\' . ($strNamespace ? $strNamespace . '\\' : '') . $arrClass['class'] . ' {}');
-					}
-
-					$objFile->append('}');
+					$objFile->append("\t" . ($arrClass['abstract'] ? 'abstract ' : '') . $arrClass['type'] . ' ' . $arrClass['class'] . ' extends ' . $arrClass['namespace'] . '\\' . ($strNamespace ? $strNamespace . '\\' : '') . $arrClass['class'] . ' {}');
 				}
-			}
 
-			$objFile->close();
-			\Message::addConfirmation($GLOBALS['TL_LANG']['tl_autoload']['ideCompatConfirm']);
+				$objFile->append('}');
+			}
 		}
+
+		$objFile->close();
+		\Message::addConfirmation($GLOBALS['TL_LANG']['tl_autoload']['ideCompatConfirm']);
 	}
 }

@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly detect the namespace in the autoload creator and support custom
+configurations per path (see #4776).
+
+### Fixed
 Do not regenerate the `autoload.php` files when generating the IDE compatiblity
 file (see #4810).
 
