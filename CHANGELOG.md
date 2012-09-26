@@ -1,6 +1,50 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.6 (2012-09-26)
+---------------------------
+
+### Fixed
+Correctly handle root pages in `Controller::getPageDetails()` (see #4610).
+
+### Fixed
+Consider the page language when forwarding (see #4841).
+
+### Fixed
+URL encode the enclosure URLs in RSS/Atom feeds (see #4839).
+
+### Fixed
+Also create empty templates folders if a theme is imported (see #4793).
+
+### Fixed
+Decode Punycode domains when used via insert tag (see #4753).
+
+### Fixed
+Correctly handle open tags in `String::substrHtml()` (see #4773).
+
+### Fixed
+Correctly handle units when importing style sheets (see #4721).
+
+### Fixed
+The mediabox plugin did not play Vimeo videos (see #4770).
+
+### Fixed
+Correctly align stylect menus in the form generator in the back end (see #4557).
+
+### Fixed
+Add a link if a news item or event points to an internal page (see #4671).
+
+### Fixed
+Wrap the MooTools fallback into CDATA tags on XHTML pages (see #4680).
+
+### Fixed
+Do not add a default value to textareas (see #4722).
+
+### Fixed
+Do not override the comments array in case login is required to comment,
+otherwise no commets will be shown (see #4064).
+
+
 Version 2.11.5 (2012-07-25)
 ---------------------------
 

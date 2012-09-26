@@ -144,6 +144,12 @@ class Form extends Hybrid
 				$arrData['name'] = '';
 			}
 
+			// Textareas do not use the value attribute (see #4722)
+			if ($objFields->type == 'textarea')
+			{
+				$arrData['value'] = '';
+			}
+
 			$objWidget = new $strClass($arrData);
 			$objWidget->required = $objFields->mandatory ? true : false;
 
@@ -215,7 +221,7 @@ class Form extends Hybrid
 		}
 
 		// Add a warning to the page title
-		if ($doNotSubmit && !$this->Environment->isAjax)
+		if ($doNotSubmit && !$this->Environment->isAjaxRequest)
 		{
 			global $objPage;
 			$title = ($objPage->pageTitle != '') ? $objPage->pageTitle : $objPage->title;

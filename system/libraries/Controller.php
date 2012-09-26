@@ -617,63 +617,70 @@ abstract class Controller extends System
 		$ptitle = '';
 		$trail = array($intId, $pid);
 
-		// Inherit settings
-		do
+		// Inherit the settings
+		if ($objPage->type == 'root')
 		{
-			$objParentPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
-											->limit(1)
-											->execute($pid);
-
-			if ($objParentPage->numRows < 1)
-			{
-				break;
-			}
-
-			$pid = $objParentPage->pid;
-			$type = $objParentPage->type;
-
-			// Parent title
-			if ($ptitle == '')
-			{
-				$palias = $objParentPage->alias;
-				$pname = $objParentPage->title;
-				$ptitle = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
-			}
-
-			// Page title
-			if ($type != 'root')
-			{
-				$alias = $objParentPage->alias;
-				$name = $objParentPage->title;
-				$title = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
-				$trail[] = $objParentPage->pid;
-			}
-
-			if ($objPage->cache === false && $objParentPage->includeCache)
-			{
-				$objPage->cache = $objParentPage->cache;
-			}
-
-			if (!$objPage->layout && $objParentPage->includeLayout)
-			{
-				$objPage->layout = $objParentPage->layout;
-			}
-
-			if (!$objPage->protected && $objParentPage->protected)
-			{
-				$objPage->protected = true;
-				$objPage->groups = deserialize($objParentPage->groups);
-			}
+			$objParentPage = $objPage; // see #4610
 		}
-		while ($pid > 0 && $type != 'root');
+		else
+		{
+			do
+			{
+				$objParentPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
+												->limit(1)
+												->execute($pid);
 
-		// Set titles
-		$objPage->mainAlias = $alias;
-		$objPage->mainTitle = $name;
-		$objPage->mainPageTitle = $title;
-		$objPage->parentAlias = $palias;
-		$objPage->parentTitle = $pname;
-		$objPage->parentPageTitle = $ptitle;
+				if ($objParentPage->numRows < 1)
+				{
+					break;
+				}
+
+				$pid = $objParentPage->pid;
+				$type = $objParentPage->type;
+
+				// Parent title
+				if ($ptitle == '')
+				{
+					$palias = $objParentPage->alias;
+					$pname = $objParentPage->title;
+					$ptitle = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
+				}
+
+				// Page title
+				if ($type != 'root')
+				{
+					$alias = $objParentPage->alias;
+					$name = $objParentPage->title;
+					$title = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
+					$trail[] = $objParentPage->pid;
+				}
+
+				if ($objPage->cache === false && $objParentPage->includeCache)
+				{
+					$objPage->cache = $objParentPage->cache;
+				}
+
+				if (!$objPage->layout && $objParentPage->includeLayout)
+				{
+					$objPage->layout = $objParentPage->layout;
+				}
+
+				if (!$objPage->protected && $objParentPage->protected)
+				{
+					$objPage->protected = true;
+					$objPage->groups = deserialize($objParentPage->groups);
+				}
+			}
+			while ($pid > 0 && $type != 'root');
+
+			// Set the titles
+			$objPage->mainAlias = $alias;
+			$objPage->mainTitle = $name;
+			$objPage->mainPageTitle = $title;
+			$objPage->parentAlias = $palias;
+			$objPage->parentTitle = $pname;
+			$objPage->parentPageTitle = $ptitle;
+		}
 
 		// Set the root ID and title
 		if ($objParentPage->numRows && $objParentPage->type == 'root')
@@ -2175,19 +2182,19 @@ abstract class Controller extends System
 							break;
 
 						case 'host':
-							$arrCache[$strTag] = $this->Environment->host;
+							$arrCache[$strTag] = $this->idnaDecode($this->Environment->host);
 							break;
 
 						case 'http_host':
-							$arrCache[$strTag] = $this->Environment->httpHost;
+							$arrCache[$strTag] = $this->idnaDecode($this->Environment->httpHost);
 							break;
 
 						case 'url':
-							$arrCache[$strTag] = $this->Environment->url;
+							$arrCache[$strTag] = $this->idnaDecode($this->Environment->url);
 							break;
 
 						case 'path':
-							$arrCache[$strTag] = $this->Environment->base;
+							$arrCache[$strTag] = $this->idnaDecode($this->Environment->base);
 							break;
 
 						case 'request':

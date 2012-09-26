@@ -296,7 +296,7 @@ class FeedItem extends System
 
 		$this->arrData['enclosure'][] = array
 		(
-			'url' => $this->Environment->base . $strFile,
+			'url' => $this->Environment->base . $this->urlEncode($strFile),
 			'length' => $objFile->size,
 			'type' => $objFile->mime
 		);

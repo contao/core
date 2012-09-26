@@ -46,7 +46,7 @@ class PageForward extends Frontend
 	 */
 	public function generate(Database_Result $objPage)
 	{
-		// Forward to first active page
+		// Forward to the first active page
 		if (!$objPage->jumpTo)
 		{
 			$time = time();
@@ -55,7 +55,7 @@ class PageForward extends Frontend
 										  ->limit(1)
 										  ->execute($objPage->id);
 		}
-		// Forward to jumpTo page
+		// Forward to the jumpTo page
 		else
 		{
 			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
@@ -63,7 +63,7 @@ class PageForward extends Frontend
 										  ->execute($objPage->jumpTo);
 		}
 
-		// Forward page does not exist
+		// The forward page does not exist
 		if ($objNextPage->numRows < 1)
 		{
 			header('HTTP/1.1 404 Not Found');
@@ -92,7 +92,18 @@ class PageForward extends Frontend
 			}
 		}
 
-		$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc(), $strGet), (($objPage->redirect == 'temporary') ? 302 : 301));
+		// Consider the page language (see #4841)
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+		{
+			$objNextPage = $this->getPageDetails($objNextPage->id); // see #3983
+			$strUrl = $this->generateFrontendUrl($objNextPage->row(), $strGet, $objNextPage->rootLanguage);
+		}
+		else
+		{
+			$strUrl = $this->generateFrontendUrl($objNextPage->row(), $strGet);
+		}
+
+		$this->redirect($strUrl, (($objPage->redirect == 'temporary') ? 302 : 301));
 	}
 }
 

@@ -10,5 +10,17 @@ var Theme = {
 	},
 	hoverDiv: function(el, state) {
 		$(el).setStyle('background-color', (state ? '#ebfdd7' : ''));
+	},
+	fixLabelLastChild: function() {
+		if (Browser.ie7 || Browser.ie8) {
+			$$('.tl_checkbox_container label:last-child').each(function(el) {
+				el.setStyle('margin-bottom', 0);
+			});
+		}	
 	}
 };
+
+// Fix the :last-child issue (see #4017)
+window.addEvent('domready', function() {
+	Theme.fixLabelLastChild();
+});

@@ -150,7 +150,7 @@ abstract class ModuleNews extends Module
 			}
 
 			// Display the "read more" button for external/article links
-			if (($objArticles->source == 'external' || $objArticles->source == 'article') && $objArticles->text == '')
+			if ($objArticles->source != 'default' && $objArticles->text == '')
 			{
 				$objTemplate->text = true;
 			}
@@ -290,12 +290,12 @@ abstract class ModuleNews extends Module
 			return self::$arrUrlCache[$strCacheKey];
 		}
 
-		// Initialize cache
+		// Initialize the cache
 		self::$arrUrlCache[$strCacheKey] = '';
 
 		switch ($objArticle->source)
 		{
-			// Link to external page
+			// Link to an external page
 			case 'external':
 				$this->import('String');
 

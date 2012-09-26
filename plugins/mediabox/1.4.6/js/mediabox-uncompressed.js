@@ -906,14 +906,14 @@ var Mediabox;
 			image.setStyles({backgroundImage: "none", display: ""});
 			preload.inject(image);
 //			preload;
+		} else if (mediaType == "url") {
+			image.setStyles({backgroundImage: "none", display: ""});
+			preload.inject(image);
 		} else if (mediaType == "ios" || Browser.Platform.ios) {
 			image.setStyles({backgroundImage: "none", display: ""});
 			image.set('html', options.linkText.replace(/{x}/gi, URL));
 			mediaWidth = options.DefaultWidth;
 			mediaHeight = options.DefaultHeight;
-		} else if (mediaType == "url") {
-			image.setStyles({backgroundImage: "none", display: ""});
-			preload.inject(image);
 		} else if (mediaType == "obj") {
 			if (Browser.Plugins.Flash.version < "8") {
 				image.setStyles({backgroundImage: "none", display: ""});
