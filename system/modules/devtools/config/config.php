@@ -16,6 +16,11 @@
  */
 $GLOBALS['BE_MOD']['devtools'] = array
 (
+	'autoload' => array
+	(
+		'callback'   => 'ModuleAutoload',
+		'icon'       => 'system/modules/devtools/assets/autoload.gif'
+	),
 	'extension' => array
 	(
 		'tables'     => array('tl_extension'),
@@ -27,10 +32,5 @@ $GLOBALS['BE_MOD']['devtools'] = array
 		'callback'   => 'ModuleLabels',
 		'icon'       => 'system/modules/devtools/assets/labels.gif',
 		'stylesheet' => 'system/modules/devtools/assets/labels.css'
-	),
-	'autoload' => array
-	(
-		'callback'   => 'ModuleAutoload',
-		'icon'       => 'system/modules/devtools/assets/autoload.gif'
 	)
 );
