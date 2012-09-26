@@ -147,6 +147,23 @@
 
 
 /**
+ * MODEL MAPPINGS
+ *
+ * Model names are usually built from the table names, e.g. "tl_user_group"
+ * becomes "UserGroupModel". There might be situations, however, where you need
+ * to specify a custom mapping, e.g. when you are using nested namespaces.
+ *
+ * $GLOBALS['TL_MODELS'] = array
+ * (
+ *    'tl_user'       => 'Vendor\Application\UserModel',
+ *    'tl_user_group' => 'Vendor\Application\UserGroupModel'
+ * );
+ *
+ * You can register your mappings in the config.php file of your extension.
+ */
+
+
+/**
  * MAINTENANCE MODULES
  *
  * Maintenance modules are stored in a global array called "TL_MAINTENANCE". You

@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Model class names which cannot be build from the corresponding table name can
+now be registered in the `$GLOBALS['TL_MODELS']` array (see #4796).
+
+### Fixed
 Removed the back end context menu, because it was buggy in IE and did not work
 at all on touch-based devices (see #4459).
 

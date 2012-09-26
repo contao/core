@@ -758,14 +758,21 @@ abstract class System
 	 */
 	public static function getModelClassFromTable($strTable)
 	{
-		$arrChunks = explode('_', $strTable);
-
-		if ($arrChunks[0] == 'tl')
+		if (isset($GLOBALS['TL_MODELS'][$strTable]))
 		{
-			array_shift($arrChunks);
+			return $GLOBALS['TL_MODELS'][$strTable]; // see 4796
 		}
+		else
+		{
+			$arrChunks = explode('_', $strTable);
 
-		return implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+			if ($arrChunks[0] == 'tl')
+			{
+				array_shift($arrChunks);
+			}
+
+			return implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+		}
 	}
 
 
