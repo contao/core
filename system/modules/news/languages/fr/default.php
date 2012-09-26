@@ -22,5 +22,5 @@ $GLOBALS['TL_LANG']['MSC']['emptyList'] = 'Actuellement, il n\'y a pas d\'actual
 $GLOBALS['TL_LANG']['MSC']['comments'] = 'Commentaires';
 $GLOBALS['TL_LANG']['MSC']['commentCount'] = '(commentaires : %s)';
 $GLOBALS['TL_LANG']['MSC']['news_items'] = '%d élément(s)';
-$GLOBALS['TL_LANG']['MSC']['news_previous'] = '<';
-$GLOBALS['TL_LANG']['MSC']['news_next'] = '>';
+$GLOBALS['TL_LANG']['MSC']['news_previous'] = '&lt;';
+$GLOBALS['TL_LANG']['MSC']['news_next'] = '&gt;';

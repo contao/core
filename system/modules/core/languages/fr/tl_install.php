@@ -24,7 +24,7 @@ $GLOBALS['TL_LANG']['tl_install']['changePass'][0] = 'Mot de passe de l\'outil d
 $GLOBALS['TL_LANG']['tl_install']['changePass'][1] = 'De plus, si vous voulez sécuriser l\'outil d\'installation de Contao, vous pouvez renommer ou supprimer complètement le fichier <strong>contao/install.php</strong>';
 $GLOBALS['TL_LANG']['tl_install']['encryption'][0] = 'Générer une clé de cryptage';
 $GLOBALS['TL_LANG']['tl_install']['encryption'][1] = 'Cette clé est utilisée pour stocker des données cryptées. Veuillez noter que les données cryptées peuvent être décryptées SEULEMENT avec cette clé ! Ne la changez pas s\'il existe déjà des données cryptées. Laisser vide pour générer une clé aléatoire.';
-$GLOBALS['TL_LANG']['tl_install']['database'][0] = 'Vérifier la connection à la base de données';
+$GLOBALS['TL_LANG']['tl_install']['database'][0] = 'Vérifier la connexion à la base de données';
 $GLOBALS['TL_LANG']['tl_install']['database'][1] = 'Saisissez vos paramètres de connexion à la base de données.';
 $GLOBALS['TL_LANG']['tl_install']['collation'][0] = 'Classement';
 $GLOBALS['TL_LANG']['tl_install']['collation'][1] = 'Pour de plus amples renseignements, consultez le <a href="http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html" target="_blank">manuel MySQL</a>.';
@@ -35,7 +35,7 @@ $GLOBALS['TL_LANG']['tl_install']['template'][1] = 'Vous pouvez importer un fich
 $GLOBALS['TL_LANG']['tl_install']['admin'][0] = 'Créer un utilisateur administrateur';
 $GLOBALS['TL_LANG']['tl_install']['admin'][1] = 'Si vous avez importé le site d\'exemple, l\'identifiant de l\'utilisateur administrateur sera <strong>k.jones</strong> et son mot de passe <strong>kevinjones</strong>. Consulter la page d\'accueil du site d\'exemple (front office) pour plus d\'information.';
 $GLOBALS['TL_LANG']['tl_install']['completed'][0] = 'Félicitations !';
-$GLOBALS['TL_LANG']['tl_install']['completed'][1] = 'Maintenant, veuillez vous connecter au <a href="contao/index.php">back office de Contao</a> et vérifiez tous les paramètres système. Puis, visitez votre site Web pour s\'assurer que Contao fonctionne correctement.';
+$GLOBALS['TL_LANG']['tl_install']['completed'][1] = 'Maintenant, veuillez vous connecter au <a href="contao/">back office de Contao</a> et vérifiez tous les paramètres système. Puis, visitez votre site Web pour s\'assurer que Contao fonctionne correctement.';
 $GLOBALS['TL_LANG']['tl_install']['ftp'][0] = 'Modifier les fichiers par FTP';
 $GLOBALS['TL_LANG']['tl_install']['ftp'][1] = 'Votre serveur ne supporte pas l\'accès aux fichiers via PHP. PHP fonctionne probablement avec le module Apache sous un utilisateur différent. Donc, veuillez saisir vos informations de connexion FTP de sorte Contao puisse modifier des fichiers via FTP (Safe Mode Hack).';
 $GLOBALS['TL_LANG']['tl_install']['accept'] = 'Accepter la licence';
@@ -63,9 +63,9 @@ $GLOBALS['TL_LANG']['tl_install']['collationInfo'] = 'La modification du classem
 $GLOBALS['TL_LANG']['tl_install']['updateError'] = 'La base de données n\'est pas à jour !';
 $GLOBALS['TL_LANG']['tl_install']['updateConfirm'] = 'La base de données est à jour.';
 $GLOBALS['TL_LANG']['tl_install']['updateSave'] = 'Mettre à jour la base de données';
-$GLOBALS['TL_LANG']['tl_install']['saveCollation'] = 'Changer la collation';
+$GLOBALS['TL_LANG']['tl_install']['saveCollation'] = 'Changer le classement';
 $GLOBALS['TL_LANG']['tl_install']['updateX'] = 'Il semble que vous mettez à niveau une version de Contao antérieure à la version %s. Si tel est le cas, il est <strong>nécessaire d\'exécuter la mise à jour vers la version %s</strong> pour assurer l\'intégrité de vos données !';
-$GLOBALS['TL_LANG']['tl_install']['updateXrun'] = 'Exécutez la mise à jour vers la version %s';
+$GLOBALS['TL_LANG']['tl_install']['updateXrun'] = 'Exécuter la mise à jour vers la version %s';
 $GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'Exécute la mise à jour de la version %s - étape %s';
 $GLOBALS['TL_LANG']['tl_install']['importError'] = 'Veuillez choisir un fichier de modèle !';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm'] = 'Modèle importé le %s';

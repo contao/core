@@ -17,11 +17,13 @@
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['email'][0] = 'Dirección e-mail';
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['email'][1] = 'Por favor introduce el e-mail del recipiente';
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['active'][0] = 'Activado';
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['active'][1] = 'Las direcciones e-mail acosturmbran a ser activadas al hacer clic sobre un enlance de un e-mail de confirmación (double-opt-in).';
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['ip'][0] = 'Dirección IP';
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['ip'][1] = 'La dirección IP del suscriptor';
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['active'][1] = 'Las direcciones e-mail acostrumbran a ser activadas al hacer clic sobre un enlance de un e-mail de confirmación (double-opt-in).';
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['addedOn'][0] = 'Fecha suscripción';
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['addedOn'][1] = 'Fecha de suscripción';
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['ip'][0] = 'Dirección IP';
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['ip'][1] = 'La dirección IP del suscriptor';
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['token'][0] = 'Vale';
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['token'][1] = 'El vale de confirmación de la suscripción';
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['email_legend'] = 'Dirección e-mail';
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['confirm'] = '%s suscriptores nuevos han sido importandos.';
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['invalid'] = '%s entradas no válidas han sido ignoradas.';

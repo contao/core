@@ -14,11 +14,11 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_merge']['headline'] = 'Creación automática de los archivos autoload.php';
-$GLOBALS['TL_LANG']['tl_merge']['emptySelection'] = '¡Por favor, seleccione al menos un módulo!';
-$GLOBALS['TL_LANG']['tl_merge']['autoloadExists'] = 'Módulo de "%s" ya tiene un archivo autoload.php. ¿Desea reemplazar?';
-$GLOBALS['TL_LANG']['tl_merge']['available'] = 'Módulos disponibles';
-$GLOBALS['TL_LANG']['tl_merge']['options'] = 'Opciones';
-$GLOBALS['TL_LANG']['tl_merge']['override'] = 'Reemplazar los archivos autoload existentes';
-$GLOBALS['TL_LANG']['tl_merge']['ide_compat'] = 'Actualizar el archivo de compatibilidad IDE';
-$GLOBALS['TL_LANG']['tl_merge']['explain'] = 'Aquí puede crear automáticamente los archivos <em>config/autoload.php</ em> requeridos por Contao 3, que añaden todas las clases y plantillas para el cargador automático. Si <em>el espacio de nombres</ em> comando se encuentra en una clase de PHP, el espacio de nombres se añadirán también.';
+$GLOBALS['TL_LANG']['tl_autoload']['headline'] = 'Creación automática de los archivos autoload.php';
+$GLOBALS['TL_LANG']['tl_autoload']['emptySelection'] = '¡Por favor, seleccione al menos un módulo!';
+$GLOBALS['TL_LANG']['tl_autoload']['autoloadExists'] = 'Módulo de "%s" ya tiene un archivo autoload.php. ¿Desea reemplazar?';
+$GLOBALS['TL_LANG']['tl_autoload']['available'] = 'Módulos disponibles';
+$GLOBALS['TL_LANG']['tl_autoload']['options'] = 'Opciones';
+$GLOBALS['TL_LANG']['tl_autoload']['override'] = 'Reemplazar los archivos autoload existentes';
+$GLOBALS['TL_LANG']['tl_autoload']['ide_compat'] = 'Actualizar el archivo de compatibilidad IDE';
+$GLOBALS['TL_LANG']['tl_autoload']['explain'] = 'Aquí puede crear automáticamente los archivos <em>config/autoload.php</ em> requeridos por Contao 3, que añaden todas las clases y plantillas para el cargador automático. Si <em>el espacio de nombres</ em> comando se encuentra en una clase de PHP, el espacio de nombres se añadirán también.';

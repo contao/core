@@ -16,6 +16,7 @@
 
 $GLOBALS['TL_LANG']['MOD']['calendar'][0] = 'Calendario/Eventos';
 $GLOBALS['TL_LANG']['MOD']['calendar'][1] = 'Este módulo permite la gestión de eventos en diferentes calendarios.';
+$GLOBALS['TL_LANG']['MOD']['tl_calendar_feed'] = 'Flujo del calendario';
 $GLOBALS['TL_LANG']['FMD']['events'] = 'Calendario/Eventos';
 $GLOBALS['TL_LANG']['FMD']['calendar'][0] = 'Calendario';
 $GLOBALS['TL_LANG']['FMD']['calendar'][1] = 'Añade un calendario a la página';

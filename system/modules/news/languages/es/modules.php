@@ -16,6 +16,7 @@
 
 $GLOBALS['TL_LANG']['MOD']['news'][0] = 'Noticias';
 $GLOBALS['TL_LANG']['MOD']['news'][1] = 'Este módulo permite la gestión de noticias en tu web.';
+$GLOBALS['TL_LANG']['MOD']['tl_news_feed'] = 'Flujo de noticias';
 $GLOBALS['TL_LANG']['FMD']['news'] = 'Noticias';
 $GLOBALS['TL_LANG']['FMD']['newslist'][0] = 'Lista de noticias';
 $GLOBALS['TL_LANG']['FMD']['newslist'][1] = 'Este módulo genera un listado de un número de noticias de un archivo de noticias.';
