@@ -9,7 +9,7 @@ Correctly detect the namespace in the autoload creator and support custom
 configurations per path (see #4776).
 
 ### Fixed
-Do not regenerate the `autoload.php` files when generating the IDE compatiblity
+Do not regenerate the `autoload.php` files when generating the IDE compatibility
 file (see #4810).
 
 ### Fixed
