@@ -15,9 +15,9 @@
  */
 
 $GLOBALS['TL_LANG']['tl_labels']['label'][0] = 'Язык';
-$GLOBALS['TL_LANG']['tl_labels']['label'][1] = 'Пожалуйста, выберите перевод, который вы хотите проверить.';
-$GLOBALS['TL_LANG']['tl_labels']['headline'] = 'Найти недостающие этикетки';
-$GLOBALS['TL_LANG']['tl_labels']['ok'] = 'Файл завершён.';
-$GLOBALS['TL_LANG']['tl_labels']['warning'] = 'Там отсутствуют этикетки.';
-$GLOBALS['TL_LANG']['tl_labels']['error'] = 'Этот файл не существует.';
+$GLOBALS['TL_LANG']['tl_labels']['label'][1] = 'Выберите язык локализации для проверки.';
+$GLOBALS['TL_LANG']['tl_labels']['headline'] = 'Поиск потерянных языковых констант';
+$GLOBALS['TL_LANG']['tl_labels']['ok'] = 'Всё в порядке';
+$GLOBALS['TL_LANG']['tl_labels']['warning'] = 'Потерянны константы';
+$GLOBALS['TL_LANG']['tl_labels']['error'] = 'Файл не существует';
 $GLOBALS['TL_LANG']['tl_labels']['submitBT'] = 'Поиск';

@@ -15,9 +15,9 @@
  */
 
 $GLOBALS['TL_LANG']['MOD']['devtools'] = 'Инструменты разработчика';
-$GLOBALS['TL_LANG']['MOD']['extension'][0] = 'Создатель расширений';
-$GLOBALS['TL_LANG']['MOD']['extension'][1] = 'Создать пользовательское расширение для Contao';
-$GLOBALS['TL_LANG']['MOD']['labels'][0] = 'Отсутствующие этикетки';
-$GLOBALS['TL_LANG']['MOD']['labels'][1] = 'Найти недостающие этикетки в языковом пакете';
-$GLOBALS['TL_LANG']['MOD']['autoload'][0] = 'Создатель автоматической загрузки';
-$GLOBALS['TL_LANG']['MOD']['autoload'][1] = 'Автоматически создать файлы "config/autoload.php"';
+$GLOBALS['TL_LANG']['MOD']['extension'][0] = 'Создание расширений';
+$GLOBALS['TL_LANG']['MOD']['extension'][1] = 'Создание пользовательских расширений для Contao';
+$GLOBALS['TL_LANG']['MOD']['labels'][0] = 'Языковые константы';
+$GLOBALS['TL_LANG']['MOD']['labels'][1] = 'Поиск недостающих языковых констант в файлах пакета локализации.';
+$GLOBALS['TL_LANG']['MOD']['autoload'][0] = 'Создание автозагрузки';
+$GLOBALS['TL_LANG']['MOD']['autoload'][1] = 'Автоматическое создание файлов "config/autoload.php"';
