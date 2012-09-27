@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly handle small class files in the autoload creator (see #4876).
+
+### Fixed
 The Email class now correctly embeds all kind of images (see #4562).
 
 ### Fixed

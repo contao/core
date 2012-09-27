@@ -159,12 +159,14 @@ class ModuleAutoload extends \BackendModule
 				$strBuffer = '';
 				$arrMatches = array();
 
+				// Store the file size for fread() (see #4876)
+				$size = filesize(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile);
 				$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
 
 				// Read until a class or interface definition has been found
 				while (!feof($fh) && !preg_match('/(class|interface) ' . preg_quote(basename($strFile, '.php'), '/') . '/', $strBuffer, $arrMatches))
 				{
-					$strBuffer .= fread($fh, 512);
+					$strBuffer .= fread($fh, min(512, $size));
 				}
 
 				fclose($fh);
