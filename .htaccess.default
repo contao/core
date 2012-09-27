@@ -17,6 +17,16 @@
 </FilesMatch>
 
 ##
+# Allow access from all domains for webfonts
+# @see https://github.com/h5bp/html5-boilerplate
+##
+<IfModule mod_headers.c>
+  <FilesMatch "\.(ttf|ttc|otf|eot|woff|font.css)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
+
+##
 # Disable ETags
 # @see http://developer.yahoo.com/performance/rules.html#etags
 ##
