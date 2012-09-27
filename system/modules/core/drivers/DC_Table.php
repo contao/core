@@ -1299,7 +1299,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$this->redirect($this->getReferer());
 		}
 
-		$data = array();
 		$delete = array();
 
 		// Do not save records from tl_undo itself
@@ -1333,6 +1332,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		$affected = 0;
+		$data = array();
 
 		// Save each record of each table
 		foreach ($delete as $table=>$fields)
@@ -1453,8 +1453,17 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$this->loadDataContainer($v);
 			$cctable[$v] = $GLOBALS['TL_DCA'][$v]['config']['ctable'];
 
-			$objDelete = $this->Database->prepare("SELECT id FROM " . $v . " WHERE pid=?")
-										->execute($id);
+			// Consider the dynamic parent table (see #4867)
+			if ($GLOBALS['TL_DCA'][$v]['config']['dynamicPtable'])
+			{
+				$objDelete = $this->Database->prepare("SELECT id FROM " . $v . " WHERE pid=? AND ptable=?")
+											->execute($id, $GLOBALS['TL_DCA'][$v]['config']['ptable']);
+			}
+			else
+			{
+				$objDelete = $this->Database->prepare("SELECT id FROM " . $v . " WHERE pid=?")
+											->execute($id);
+			}
 
 			if (!$GLOBALS['TL_DCA'][$v]['config']['doNotDeleteRecords'] && strlen($v) && $objDelete->numRows)
 			{

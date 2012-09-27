@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Consider the dynamic parent table when deleting child records (see #4867).
+
+### Fixed
 Correctly detect the namespace in the autoload creator and support custom
 configurations per path (see #4776).
 
