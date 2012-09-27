@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+The Email class now correctly embeds all kind of images (see #4562).
+
+### Fixed
 Consider the dynamic parent table when deleting child records (see #4867).
 
 ### Fixed

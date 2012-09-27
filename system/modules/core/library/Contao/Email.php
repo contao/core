@@ -447,22 +447,34 @@ class Email extends \System
 					$this->strImageDir = TL_ROOT . '/';
 				}
 
+				$arrCid = array();
 				$arrMatches = array();
-				preg_match_all('/(src=|url\()"([^"]+\.(jpe?g|png|gif|bmp|tiff?|swf))"/Ui', $this->strHtml, $arrMatches);
 				$strBase = \Environment::get('base');
 
-				// Check for internal images
-				foreach (array_unique($arrMatches[2]) as $url)
-				{
-					// Try to remove the base URL
-					$src = str_replace($strBase, '', $url);
-					$src = rawurldecode($src); // see #3713
+				// Thanks to @ofriedrich and @aschempp (see #4562)
+				preg_match_all('/<[a-z][a-z0-9]*\b[^>]*((src=|background=|url\()["\']??)(.+\.(jpe?g|png|gif|bmp|tiff?|swf))(["\' ]??(\)??))[^>]*>/Ui', $this->strHtml, $arrMatches);
 
-					// Embed the image if the URL is now relative
-					if (!preg_match('@^https?://@', $src) && file_exists($this->strImageDir . $src))
+				// Check for internal images
+				if (!empty($arrMatches) && isset($arrMatches[0]))
+				{
+					for ($i=0; $i<count($arrMatches[0]); $i++)
 					{
-						$cid = $this->objMessage->embed(\Swift_EmbeddedFile::fromPath($this->strImageDir . $src));
-						$this->strHtml = str_replace(array('src="' . $url . '"', 'url("' . $url . '"'), array('src="' . $cid . '"', 'url("' . $cid . '"'), $this->strHtml);
+						$url = $arrMatches[3][$i];
+
+						// Try to remove the base URL
+						$src = str_replace($strBase, '', $url);
+						$src = rawurldecode($src); // see #3713
+
+						// Embed the image if the URL is now relative
+						if (!preg_match('@^https?://@', $src) && file_exists($this->strImageDir . $src))
+						{
+							if (!isset($arrCid[$src]))
+							{
+								$arrCid[$src] = $this->objMessage->embed(\Swift_EmbeddedFile::fromPath($this->strImageDir . $src));
+							}
+
+							$this->strHtml = str_replace($arrMatches[1][$i] . $arrMatches[3][$i] . $arrMatches[5][$i], $arrMatches[1][$i] . $arrCid[$src] . $arrMatches[5][$i], $this->strHtml);
+						}
 					}
 				}
 			}
