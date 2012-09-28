@@ -22,7 +22,7 @@ $GLOBALS['TL_LANG']['tl_article']['author'][0] = 'Автор';
 $GLOBALS['TL_LANG']['tl_article']['author'][1] = 'Вы можете выбрать автора этой статьи.';
 $GLOBALS['TL_LANG']['tl_article']['inColumn'][0] = 'Показать в';
 $GLOBALS['TL_LANG']['tl_article']['inColumn'][1] = 'Выберите раздел макета для вывода статьи.';
-$GLOBALS['TL_LANG']['tl_article']['keywords'][0] = 'Мета-тег \'Ключевые слова\'';
+$GLOBALS['TL_LANG']['tl_article']['keywords'][0] = 'Метатег \'Ключевые слова\'';
 $GLOBALS['TL_LANG']['tl_article']['keywords'][1] = 'Вы можете ввести, через запятую, список ключевых слов. Однако, ключевые слова больше не актуальны для большинства поисковых систем (включая Google). Добавляет описание в тег <em>meta name="keywords" content=" "</em>';
 $GLOBALS['TL_LANG']['tl_article']['teaserCssID'][0] = 'CSS ID и класс анонса';
 $GLOBALS['TL_LANG']['tl_article']['teaserCssID'][1] = 'Вы можете ввести ID одного или нескольких классов анонса.';

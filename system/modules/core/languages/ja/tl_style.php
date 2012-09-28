@@ -77,7 +77,6 @@ $GLOBALS['TL_LANG']['tl_style']['shadowsize'][1] = '横方向と横方向の位�
 $GLOBALS['TL_LANG']['tl_style']['shadowcolor'][0] = '影の色';
 $GLOBALS['TL_LANG']['tl_style']['shadowcolor'][1] = '16進数で影の色(例: 赤ではff0000)とオプションで不透明度(例: 75)を入力できます。';
 $GLOBALS['TL_LANG']['tl_style']['gradientAngle'][0] = 'グラデーションの角度';
-$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][1] = 'グラデーションの角度(例: <em>-45deg</em>)、または開始点(例: <em>top</em> や <em>left bottom</em>)を入力できます。';
 $GLOBALS['TL_LANG']['tl_style']['gradientColors'][0] = 'グラデーションの色';
 $GLOBALS['TL_LANG']['tl_style']['gradientColors'][1] = 'パーセント値を付加できる、4つまでの色を入力できます。(例: <em>ffc 10% | f90 | f00</em>)';
 $GLOBALS['TL_LANG']['tl_style']['border'][0] = 'ボーダー';

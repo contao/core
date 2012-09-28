@@ -77,7 +77,6 @@ $GLOBALS['TL_LANG']['tl_style']['shadowsize'][1] = 'Wprowadź offset X i Y, opcj
 $GLOBALS['TL_LANG']['tl_style']['shadowcolor'][0] = 'Kolor cienia';
 $GLOBALS['TL_LANG']['tl_style']['shadowcolor'][1] = 'Wprowadź heksadecymalny kolor cienia (np. ff0000 lub red) i opcjonalnie krycie w procentach (np. 75).';
 $GLOBALS['TL_LANG']['tl_style']['gradientAngle'][0] = 'Kąt gradientu';
-$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][1] = 'Wprowadź kąt gradientu (np. <em>-45deg</em>) lub punkt startowy (np. <em>top</em> lub <em>left bottom></em>).';
 $GLOBALS['TL_LANG']['tl_style']['gradientColors'][0] = 'Kolor gardientu';
 $GLOBALS['TL_LANG']['tl_style']['gradientColors'][1] = 'Wprowadź do czterech kolorów z opcjonalnym procentem (np. <em>ffc 10% | f90 | f00</em>).';
 $GLOBALS['TL_LANG']['tl_style']['border'][0] = 'Obramowanie';

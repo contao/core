@@ -77,7 +77,6 @@ $GLOBALS['TL_LANG']['tl_style']['shadowsize'][1] = 'Вы можете ввест
 $GLOBALS['TL_LANG']['tl_style']['shadowcolor'][0] = 'Свойство Shadow color (Цвет тени)';
 $GLOBALS['TL_LANG']['tl_style']['shadowcolor'][1] = 'Вы можете ввести шестнадцатеричный цвет тени (напр. ff0000 для красного) и дополнительную прозрачность в процентах (напр. 75).';
 $GLOBALS['TL_LANG']['tl_style']['gradientAngle'][0] = 'Свойство Gradient angle (Угол градиента)';
-$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][1] = 'Вы можете ввести угол наклона градиента (напр. <em>-45deg</em>) или отправную точку (напр. <em>top</em> или <em>left bottom</em>)';
 $GLOBALS['TL_LANG']['tl_style']['gradientColors'][0] = 'Свойство Gradient colors (Цвет градиента)';
 $GLOBALS['TL_LANG']['tl_style']['gradientColors'][1] = 'Вы можете ввести до четырех цветов процентах (напр. <em>ffc 10% | f90 | f00</em>).';
 $GLOBALS['TL_LANG']['tl_style']['border'][0] = 'Свойство Border (Граница)';

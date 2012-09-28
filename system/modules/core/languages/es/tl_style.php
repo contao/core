@@ -77,7 +77,6 @@ $GLOBALS['TL_LANG']['tl_style']['shadowsize'][1] = 'Aquí puede ingresar el desf
 $GLOBALS['TL_LANG']['tl_style']['shadowcolor'][0] = 'Color de sombra';
 $GLOBALS['TL_LANG']['tl_style']['shadowcolor'][1] = 'Aquí puede ingresar un número hexadecimal de color (p.e. ff0000 para rojo) y un porcentaje de transparencia opcional (p.e. 75).';
 $GLOBALS['TL_LANG']['tl_style']['gradientAngle'][0] = 'Ángulo de gradiente';
-$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][1] = 'Aquí puede ingresar el ángulo de gradiente (p.e. <em>-45deg</em>) o el punto inicial (p.e. <em>top</em> para el borde superior, o <em>left bottom</em> para la esquina inferior izquierda).';
 $GLOBALS['TL_LANG']['tl_style']['gradientColors'][0] = 'Colores de gradiente';
 $GLOBALS['TL_LANG']['tl_style']['gradientColors'][1] = 'Aquí puede ingresar hasta cuatro colores con un porcentaje opcional (p.e. <em>ffc 10%| f90 | f00</em>).';
 $GLOBALS['TL_LANG']['tl_style']['border'][0] = 'Bordes';

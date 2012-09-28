@@ -77,7 +77,6 @@ $GLOBALS['TL_LANG']['tl_style']['shadowsize'][1] = 'Saisir les valeur X et Y de 
 $GLOBALS['TL_LANG']['tl_style']['shadowcolor'][0] = 'Couleur et opacité de l\'ombre';
 $GLOBALS['TL_LANG']['tl_style']['shadowcolor'][1] = 'Saisir une valeur hexadécimale de la couleur de l\'ombre (ex : ff0000 pour du rouge) et optionnellement un pourcentage de transparence (ex : 75).';
 $GLOBALS['TL_LANG']['tl_style']['gradientAngle'][0] = 'Angle du dégradé';
-$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][1] = 'Saisir l\'angle du dégradé (ex : <em>-45deg</em>) ou le point de départ (ex : <em>top</em> ou <em>left bottom</em>).';
 $GLOBALS['TL_LANG']['tl_style']['gradientColors'][0] = 'Couleurs du dégradé';
 $GLOBALS['TL_LANG']['tl_style']['gradientColors'][1] = 'Saisir jusqu\'à quatre couleurs avec un pourcentage en option (ex : <em>ffc 10% | f90 | f00</em>).';
 $GLOBALS['TL_LANG']['tl_style']['border'][0] = 'Bordure';
