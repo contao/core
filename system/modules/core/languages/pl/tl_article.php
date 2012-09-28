@@ -53,6 +53,7 @@ $GLOBALS['TL_LANG']['tl_article']['print'] = 'Drukuą tę stronę';
 $GLOBALS['TL_LANG']['tl_article']['pdf'] = 'Eksportuj jako PDF';
 $GLOBALS['TL_LANG']['tl_article']['facebook'] = 'Opublikuj na Facebooku';
 $GLOBALS['TL_LANG']['tl_article']['twitter'] = 'Opublikuj na Twitterze';
+$GLOBALS['TL_LANG']['tl_article']['gplus'] = 'Podziel się na Google+';
 $GLOBALS['TL_LANG']['tl_article']['header'] = 'Nagłówek';
 $GLOBALS['TL_LANG']['tl_article']['left'] = 'Lewa kolumna';
 $GLOBALS['TL_LANG']['tl_article']['main'] = 'Główna kolumna';

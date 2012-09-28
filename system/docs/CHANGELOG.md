@@ -1,8 +1,14 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 3.0.0 (2012-09-27)
+Version 3.0.0 (2012-XX-XX)
 --------------------------
+
+
+
+
+Version 3.0.RC2 (2012-09-27)
+----------------------------
 
 ### Fixed
 Correctly handle small class files in the autoload creator (see #4876).

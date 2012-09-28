@@ -79,3 +79,5 @@ $GLOBALS['TL_LANG']['tl_news_archive']['delete'][0] = 'Usuń archiwum';
 $GLOBALS['TL_LANG']['tl_news_archive']['delete'][1] = 'Usuń archiwum ID %s';
 $GLOBALS['TL_LANG']['tl_news_archive']['comments'][0] = 'Komentarze';
 $GLOBALS['TL_LANG']['tl_news_archive']['comments'][1] = 'Pokaż komentarze z archiwum ID %s';
+$GLOBALS['TL_LANG']['tl_news_archive']['feeds'][0] = 'Kanały RSS';
+$GLOBALS['TL_LANG']['tl_news_archive']['feeds'][1] = 'Zarządzaj kanałami RSS';

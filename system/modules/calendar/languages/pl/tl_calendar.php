@@ -77,3 +77,5 @@ $GLOBALS['TL_LANG']['tl_calendar']['copy'][0] = 'Kopiuj kalendarz';
 $GLOBALS['TL_LANG']['tl_calendar']['copy'][1] = 'Kopiuj kalendarz ID %s';
 $GLOBALS['TL_LANG']['tl_calendar']['delete'][0] = 'Skasuj kalendarz';
 $GLOBALS['TL_LANG']['tl_calendar']['delete'][1] = 'Skasuj kalendarz ID %s';
+$GLOBALS['TL_LANG']['tl_calendar']['feeds'][0] = 'Kanały RSS';
+$GLOBALS['TL_LANG']['tl_calendar']['feeds'][1] = 'Zarządzaj kanałami RSS';

@@ -16,7 +16,7 @@
 
 $GLOBALS['TL_LANG']['tl_undo']['pid'][0] = 'Utilisateur';
 $GLOBALS['TL_LANG']['tl_undo']['pid'][1] = 'Nom de l\'utilisateur associé';
-$GLOBALS['TL_LANG']['tl_undo']['fromTable'][0] = 'Table';
+$GLOBALS['TL_LANG']['tl_undo']['fromTable'][0] = 'Table source';
 $GLOBALS['TL_LANG']['tl_undo']['fromTable'][1] = 'Nom de la table originale';
 $GLOBALS['TL_LANG']['tl_undo']['affectedRows'][0] = 'Enregistrements';
 $GLOBALS['TL_LANG']['tl_undo']['affectedRows'][1] = 'Nombre d\'enregistrements affectés';

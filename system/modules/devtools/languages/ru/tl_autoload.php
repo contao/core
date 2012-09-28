@@ -14,11 +14,14 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_autoload']['headline'] = 'Автоматически создавать файлы autoload.php';
-$GLOBALS['TL_LANG']['tl_autoload']['emptySelection'] = 'Пожалуйста, выберите по крайней мере один модуль!';
-$GLOBALS['TL_LANG']['tl_autoload']['autoloadExists'] = 'Модуль "%s" имеет уже файл autoload.php. Вы хотите его переписать?';
+$GLOBALS['TL_LANG']['tl_autoload']['headline'] = 'Автоматическое создание файлов autoload.php';
+$GLOBALS['TL_LANG']['tl_autoload']['emptySelection'] = 'Выберите как минимум один модуль!';
+$GLOBALS['TL_LANG']['tl_autoload']['autoloadExists'] = 'Модуль "%s" уже содержит файл autoload.php. Вы хотите его переписать?';
 $GLOBALS['TL_LANG']['tl_autoload']['available'] = 'Доступные модули';
-$GLOBALS['TL_LANG']['tl_autoload']['options'] = 'Опции';
-$GLOBALS['TL_LANG']['tl_autoload']['override'] = 'Переопределение существующих файлов автозагрузки';
-$GLOBALS['TL_LANG']['tl_autoload']['ide_compat'] = 'Обновите файла для совместимости с IDE';
-$GLOBALS['TL_LANG']['tl_autoload']['explain'] = 'Здесь вы можете автоматически создать <em>config/autoload.php</em> файлы, необходимые для Contao 3, который добавляет все классы и шаблоны для автоматической загрузки. Если каманда для <em>namespace</em> находится в классе PHP, namespace будут также добавлен.';
+$GLOBALS['TL_LANG']['tl_autoload']['xplAvailable'] = 'Выберите модули, которые хотите изменить.';
+$GLOBALS['TL_LANG']['tl_autoload']['override'] = 'Переопределение существующих файлов';
+$GLOBALS['TL_LANG']['tl_autoload']['xplOverride'] = 'Переопределение существующих файлов autoload.php (используйте с осторожностью).';
+$GLOBALS['TL_LANG']['tl_autoload']['autoload'] = 'Создать файлы автозагрузки';
+$GLOBALS['TL_LANG']['tl_autoload']['autoloadConfirm'] = 'Файл autoload.php записан в каталог модуля "%s".';
+$GLOBALS['TL_LANG']['tl_autoload']['ideCompat'] = 'Обновить файл совместимости IDE';
+$GLOBALS['TL_LANG']['tl_autoload']['ideCompatConfirm'] = 'Файл совместимости IDE обновлен.';

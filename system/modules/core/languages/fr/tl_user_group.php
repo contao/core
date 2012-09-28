@@ -41,5 +41,5 @@ $GLOBALS['TL_LANG']['tl_user_group']['copy'][0] = 'Dupliquer le groupe';
 $GLOBALS['TL_LANG']['tl_user_group']['copy'][1] = 'Dupliquer le groupe ID %s';
 $GLOBALS['TL_LANG']['tl_user_group']['delete'][0] = 'Supprimer le groupe';
 $GLOBALS['TL_LANG']['tl_user_group']['delete'][1] = 'Supprimer le groupe ID %s';
-$GLOBALS['TL_LANG']['tl_user_group']['toggle'][0] = 'Activer / désactiver le groupe';
-$GLOBALS['TL_LANG']['tl_user_group']['toggle'][1] = 'Activer / désactiver le groupe ID %s';
+$GLOBALS['TL_LANG']['tl_user_group']['toggle'][0] = 'Activer/désactiver le groupe';
+$GLOBALS['TL_LANG']['tl_user_group']['toggle'][1] = 'Activer/désactiver le groupe ID %s';

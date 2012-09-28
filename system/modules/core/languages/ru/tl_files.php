@@ -16,8 +16,8 @@
 
 $GLOBALS['TL_LANG']['tl_files']['name'][0] = 'Имя';
 $GLOBALS['TL_LANG']['tl_files']['name'][1] = 'Contao автоматически добавляет расширение файла.';
-$GLOBALS['TL_LANG']['tl_files']['meta'][0] = 'Мета данные';
-$GLOBALS['TL_LANG']['tl_files']['meta'][1] = 'Сюда вы можете ввести мета данные файла.';
+$GLOBALS['TL_LANG']['tl_files']['meta'][0] = 'Метаданные';
+$GLOBALS['TL_LANG']['tl_files']['meta'][1] = 'Вы можете ввести метаданные файла.';
 $GLOBALS['TL_LANG']['tl_files']['fileupload'][0] = 'Загрузка файла';
 $GLOBALS['TL_LANG']['tl_files']['fileupload'][1] = 'Выберите в компьютере один или несколько файлов для загрузки на сервер.';
 $GLOBALS['TL_LANG']['tl_files']['editor'][0] = 'Редактор кода';

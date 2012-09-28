@@ -561,11 +561,16 @@ class Transifex
 	 */
 	protected function rrdir($dir)
 	{
+		if (!is_dir($dir))
+		{
+			return;
+		}
+
 		foreach ($this->scandir($dir) as $file)
 		{
 			if (is_dir("$dir/$file"))
 			{
-				$this->rrdir($dir);
+				$this->rrdir("$dir/$file");
 			}
 			else
 			{

@@ -14,9 +14,9 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_autoload']['headline'] = 'Créer automatiquement les fichiers "autoload.php"';
+$GLOBALS['TL_LANG']['tl_autoload']['headline'] = 'Créer automatiquement les fichiers autoload.php';
 $GLOBALS['TL_LANG']['tl_autoload']['emptySelection'] = 'Sélectionner au moins un module !';
-$GLOBALS['TL_LANG']['tl_autoload']['autoloadExists'] = 'Le module "%s" a déjà un fichier "autoload.php". Voulez-vous le remplacer ?';
+$GLOBALS['TL_LANG']['tl_autoload']['autoloadExists'] = 'Le module "%s" a déjà un fichier autoload.php. Voulez-vous le remplacer ?';
 $GLOBALS['TL_LANG']['tl_autoload']['available'] = 'Modules disponibles';
 $GLOBALS['TL_LANG']['tl_autoload']['xplAvailable'] = 'Sélectionner les modules à modifier.';
 $GLOBALS['TL_LANG']['tl_autoload']['override'] = 'Écraser les fichiers existant.';
