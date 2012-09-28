@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.7 (2012-XX-XX)
+---------------------------
+
+### Fixed
+Fixed the automatic page alias generator (see #4880).
+
+
 Version 2.11.6 (2012-09-26)
 ---------------------------
 

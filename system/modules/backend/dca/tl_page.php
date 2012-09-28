@@ -963,10 +963,8 @@ class tl_page extends Backend
 		if ($objAlias->numRows > ($autoAlias ? 0 : 1))
 		{
 			$arrPages = array();
-
-			// Get the DNS and language settings from the POST data (see #4610)
-			$strDomain = $this->Input->post('dns');
-			$strLanguage = $this->Input->post('language');
+			$strDomain = '';
+			$strLanguage = '';
 
 			while ($objAlias->next())
 			{
@@ -974,20 +972,32 @@ class tl_page extends Backend
 				$domain = ($objCurrentPage->domain != '') ? $objCurrentPage->domain : '*';
 				$language = (!$objCurrentPage->rootIsFallback) ? $objCurrentPage->rootLanguage : '*';
 
-				// Skip the current page
+				// Store the current page's data
 				if ($objCurrentPage->id == $dc->id)
 				{
-					continue;
-				}
-
-				// Check the domain and language or the domain only
-				if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
-				{
-					$arrPages[$domain][$language][] = $objAlias->id;
+					// Get the DNS and language settings from the POST data (see #4610)
+					if ($objCurrentPage->type == 'root')
+					{
+						$strDomain = $this->Input->post('dns');
+						$strLanguage = $this->Input->post('language');
+					}
+					else
+					{
+						$strDomain = $domain;
+						$strLanguage = $language;
+					}
 				}
 				else
 				{
-					$arrPages[$domain][] = $objAlias->id;
+					// Check the domain and language or the domain only
+					if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+					{
+						$arrPages[$domain][$language][] = $objAlias->id;
+					}
+					else
+					{
+						$arrPages[$domain][] = $objAlias->id;
+					}
 				}
 			}
 
