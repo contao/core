@@ -77,6 +77,7 @@ $GLOBALS['TL_LANG']['tl_style']['shadowsize'][1] = 'Inserire l\'offset X e Y del
 $GLOBALS['TL_LANG']['tl_style']['shadowcolor'][0] = 'Colore dell\'ombra';
 $GLOBALS['TL_LANG']['tl_style']['shadowcolor'][1] = 'Inserire un colore dell\'ombra in esadecimale (es: ff0000 per il rosso) e una trasparenza opzionale compresa tra 0 e 100 (es: 75).';
 $GLOBALS['TL_LANG']['tl_style']['gradientAngle'][0] = 'Angolo del gradiente';
+$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][1] = 'Inserire un angolo del gradiente (es. <em>-0deg</em>) o la direzione (es. <em>to bottom</em> o <em>to top right</em>).';
 $GLOBALS['TL_LANG']['tl_style']['gradientColors'][0] = 'Colori del gradiente';
 $GLOBALS['TL_LANG']['tl_style']['gradientColors'][1] = 'Inserire fino a 4 colori con le percentuali opzionali (es. <em>ffc 10% | f90 | f00</em>).';
 $GLOBALS['TL_LANG']['tl_style']['border'][0] = 'Bordo';

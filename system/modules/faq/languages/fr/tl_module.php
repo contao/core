@@ -14,7 +14,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_module']['faq_categories'][0] = 'Catégories de FAQ';
+$GLOBALS['TL_LANG']['tl_module']['faq_categories'][0] = 'Catégories des FAQ';
 $GLOBALS['TL_LANG']['tl_module']['faq_categories'][1] = 'Sélectionner une ou plusieurs catégories de FAQ.';
 $GLOBALS['TL_LANG']['tl_module']['faq_readerModule'][0] = 'Module lecteur de FAQ';
 $GLOBALS['TL_LANG']['tl_module']['faq_readerModule'][1] = 'Basculer automatiquement vers le lecteur de FAQ si un élément a été sélectionné.';

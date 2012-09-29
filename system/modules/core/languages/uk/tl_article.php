@@ -53,6 +53,7 @@ $GLOBALS['TL_LANG']['tl_article']['print'] = 'Друк сторінки';
 $GLOBALS['TL_LANG']['tl_article']['pdf'] = 'Експортувати як PDF';
 $GLOBALS['TL_LANG']['tl_article']['facebook'] = 'Розмістити на Facebook';
 $GLOBALS['TL_LANG']['tl_article']['twitter'] = 'Розмістити на Twitter';
+$GLOBALS['TL_LANG']['tl_article']['gplus'] = 'Подiлитися в Google+';
 $GLOBALS['TL_LANG']['tl_article']['header'] = 'Верхній сектор';
 $GLOBALS['TL_LANG']['tl_article']['left'] = 'Ліва колонка';
 $GLOBALS['TL_LANG']['tl_article']['main'] = 'Основна колонка';

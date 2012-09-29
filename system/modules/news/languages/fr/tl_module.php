@@ -16,10 +16,10 @@
 
 $GLOBALS['TL_LANG']['tl_module']['news_archives'][0] = 'Archives d\'actualités';
 $GLOBALS['TL_LANG']['tl_module']['news_archives'][1] = 'Sélectionner une ou plusieurs archives d\'actualités.';
-$GLOBALS['TL_LANG']['tl_module']['news_featured'][0] = 'Éléments à afficher';
-$GLOBALS['TL_LANG']['tl_module']['news_featured'][1] = 'Choisir les éléments à afficher.';
-$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'][0] = 'Aller à la période courante';
-$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'][1] = 'Aller automatiquement à la période courante si aucune n\'est sélectionnée.';
+$GLOBALS['TL_LANG']['tl_module']['news_featured'][0] = 'Eléments vedettes';
+$GLOBALS['TL_LANG']['tl_module']['news_featured'][1] = 'Choisir comment les éléments vedette sont gérés.';
+$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'][0] = 'Aucune période selectionnée';
+$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'][1] = 'Définir ce qui doit être affiché si aucune période n\'est sélectionnée.';
 $GLOBALS['TL_LANG']['tl_module']['news_readerModule'][0] = 'Module lecteur d\'actualité';
 $GLOBALS['TL_LANG']['tl_module']['news_readerModule'][1] = 'Basculer automatiquement sur le lecteur d\'actualité, si un élément a été sélectionné.';
 $GLOBALS['TL_LANG']['tl_module']['news_metaFields'][0] = 'Champs d\'en-tête';

@@ -15,7 +15,7 @@
  */
 
 $GLOBALS['TL_LANG']['tl_module']['list_table'][0] = 'Table';
-$GLOBALS['TL_LANG']['tl_module']['list_table'][1] = 'Choisir la table à lister.';
+$GLOBALS['TL_LANG']['tl_module']['list_table'][1] = 'Choisir la table source.';
 $GLOBALS['TL_LANG']['tl_module']['list_fields'][0] = 'Champs';
 $GLOBALS['TL_LANG']['tl_module']['list_fields'][1] = 'Saisir une liste séparée par des virgules des champs que vous voulez lister.';
 $GLOBALS['TL_LANG']['tl_module']['list_where'][0] = 'Condition';

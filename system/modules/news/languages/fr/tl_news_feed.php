@@ -17,7 +17,7 @@
 $GLOBALS['TL_LANG']['tl_news_feed']['title'][0] = 'Titre';
 $GLOBALS['TL_LANG']['tl_news_feed']['title'][1] = 'Saisir le titre du flux.';
 $GLOBALS['TL_LANG']['tl_news_feed']['alias'][0] = 'Alias du flux';
-$GLOBALS['TL_LANG']['tl_news_feed']['alias'][1] = 'Saisir un nom de fichier unique (sans extension). Le fichier de flux XML sera généré automatiquement dans le répertoire <em>share</em> de votre installation Contao, ex :  <em>share/name.xml</em>.';
+$GLOBALS['TL_LANG']['tl_news_feed']['alias'][1] = 'Saisir un nom de fichier unique (sans extension). Le fichier de flux XML sera généré automatiquement dans le répertoire <em>share</em> de votre installation Contao, ex : <em>share/name.xml</em>.';
 $GLOBALS['TL_LANG']['tl_news_feed']['language'][0] = 'Langue du flux';
 $GLOBALS['TL_LANG']['tl_news_feed']['language'][1] = 'Saisir la langue du flux selon la norme ISO-639 (ex : <em>en</em> ou <em>en-us</em>).';
 $GLOBALS['TL_LANG']['tl_news_feed']['archives'][0] = 'Archives d\'actualités';

@@ -17,7 +17,7 @@
 $GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'][0] = 'URL de l\'extension référentiel';
 $GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'][1] = 'Saisir l\'URL du fichier WSDL de l\'extension référentiel.';
 $GLOBALS['TL_LANG']['tl_settings']['repository_languages'][0] = 'Langues de secours';
-$GLOBALS['TL_LANG']['tl_settings']['repository_languages'][1] = 'Liste séparées par des virgules des codes ISO des langues à utiliser lorsque la description d\'une extension n\'est pas disponible dans la langue actuelle du back office.';
+$GLOBALS['TL_LANG']['tl_settings']['repository_languages'][1] = 'Liste des codes ISO des langues séparées par des virgules à utiliser lorsque la description d\'une extension n\'est pas disponible dans la langue actuelle du back office.';
 $GLOBALS['TL_LANG']['tl_settings']['repository_listsize'][0] = 'Extensions par page';
 $GLOBALS['TL_LANG']['tl_settings']['repository_listsize'][1] = 'Définir le nombre d\'extensions à afficher par page.';
 $GLOBALS['TL_LANG']['tl_settings']['repository_unsafe_catalog'][0] = 'Afficher les extensions incompatibles';
