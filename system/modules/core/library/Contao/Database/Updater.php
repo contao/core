@@ -293,7 +293,7 @@ class Updater extends \Controller
 		$this->Database->query("ALTER TABLE `tl_content` ADD ptable varchar(64) NOT NULL default ''");
 
 		// Create a content element for each news article
-		$objNews = $this->Database->execute("SELECT * FROM tl_news");
+		$objNews = $this->Database->execute("SELECT * FROM tl_news WHERE text!=''");
 
 		while ($objNews->next())
 		{
@@ -301,7 +301,7 @@ class Updater extends \Controller
 		}
 
 		// Create a content element for each event
-		$objEvents = $this->Database->execute("SELECT * FROM tl_calendar_events");
+		$objEvents = $this->Database->execute("SELECT * FROM tl_calendar_events WHERE details!=''");
 
 		while ($objEvents->next())
 		{

@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Do not add a content element to news or events without text (see #4882).
+
+### Fixed
 Fixed the automatic page alias generator (see #4880).
 
 
