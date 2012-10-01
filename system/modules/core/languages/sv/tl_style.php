@@ -77,6 +77,7 @@ $GLOBALS['TL_LANG']['tl_style']['shadowsize'][1] = 'Ange en X- och Y-offset samt
 $GLOBALS['TL_LANG']['tl_style']['shadowcolor'][0] = 'Skuggfärg och transparens';
 $GLOBALS['TL_LANG']['tl_style']['shadowcolor'][1] = 'Ange en skuggfärg med hexadecimal färgkod (t.ex. <em>ff0000</em> för röd) och ev. transparens i procent (t.ex. <em>75</em>).';
 $GLOBALS['TL_LANG']['tl_style']['gradientAngle'][0] = 'Övertoningsvinkel';
+$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][1] = 'Här kan du ange en vinkel för övertoning (t.ex. <em>0deg</em>) eller en riktning (t.ex <em>to bottom</em> eller <em>to top right</em>).';
 $GLOBALS['TL_LANG']['tl_style']['gradientColors'][0] = 'Övertoningsfärg';
 $GLOBALS['TL_LANG']['tl_style']['gradientColors'][1] = 'Ange upp till fyra färger samt ev. procentsats (t.ex. <em>ffc 10% | f90 | f00</em>).';
 $GLOBALS['TL_LANG']['tl_style']['border'][0] = 'Kantlinje';

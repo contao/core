@@ -14,8 +14,8 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_user']['faqs'][0] = 'Доступ к категориям FAQ';
-$GLOBALS['TL_LANG']['tl_user']['faqs'][1] = 'Предоставьте доступ к одной или нескольким категориям FAQ.';
-$GLOBALS['TL_LANG']['tl_user']['faqp'][0] = 'Категории разрешений FAQ';
-$GLOBALS['TL_LANG']['tl_user']['faqp'][1] = 'Задайте категории разрешений FAQ';
+$GLOBALS['TL_LANG']['tl_user']['faqs'][0] = 'Разрешенные категории FAQ';
+$GLOBALS['TL_LANG']['tl_user']['faqs'][1] = 'Вы можете предоставить доступ к одной или нескольким категориям FAQ.';
+$GLOBALS['TL_LANG']['tl_user']['faqp'][0] = 'Разрешения для категорий FAQ';
+$GLOBALS['TL_LANG']['tl_user']['faqp'][1] = 'Вы можете задать разрешения для категорий FAQ.';
 $GLOBALS['TL_LANG']['tl_user']['faq_legend'] = 'Разрешения FAQ';

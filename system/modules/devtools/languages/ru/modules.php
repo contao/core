@@ -14,7 +14,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['MOD']['devtools'] = 'Инструменты разработчика';
+$GLOBALS['TL_LANG']['MOD']['devtools'] = 'Средства разработки';
 $GLOBALS['TL_LANG']['MOD']['extension'][0] = 'Создание расширений';
 $GLOBALS['TL_LANG']['MOD']['extension'][1] = 'Создание пользовательских расширений для Contao';
 $GLOBALS['TL_LANG']['MOD']['labels'][0] = 'Языковые константы';

@@ -14,8 +14,8 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_style_sheet']['name'][0] = 'Имя';
-$GLOBALS['TL_LANG']['tl_style_sheet']['name'][1] = 'Введите имя стиля.';
+$GLOBALS['TL_LANG']['tl_style_sheet']['name'][0] = 'Имя стиля';
+$GLOBALS['TL_LANG']['tl_style_sheet']['name'][1] = 'Введите имя таблицы стилей.';
 $GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'][0] = 'Вставлять изображения до';
 $GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'][1] = 'Здесь вы можете ввести максимальный размер файла в байтах, при котором изображения будут встраиваться в таблицу стилей, как данные: строка. Установите 0, чтобы отключить эту функцию.';
 $GLOBALS['TL_LANG']['tl_style_sheet']['cc'][0] = 'Условный комментарий';

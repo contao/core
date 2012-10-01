@@ -15,16 +15,16 @@
  */
 
 $GLOBALS['TL_LANG']['tl_undo']['pid'][0] = 'Пользователь';
-$GLOBALS['TL_LANG']['tl_undo']['pid'][1] = 'Имя ассоциируемого пользователя';
+$GLOBALS['TL_LANG']['tl_undo']['pid'][1] = 'Имя связанного пользователя';
 $GLOBALS['TL_LANG']['tl_undo']['fromTable'][0] = 'Исходная таблица';
-$GLOBALS['TL_LANG']['tl_undo']['fromTable'][1] = 'Имя оригинальной таблицы';
+$GLOBALS['TL_LANG']['tl_undo']['fromTable'][1] = 'Имя исходной таблицы';
 $GLOBALS['TL_LANG']['tl_undo']['affectedRows'][0] = 'Записи данных';
-$GLOBALS['TL_LANG']['tl_undo']['affectedRows'][1] = 'Число неэффективных записей данных';
+$GLOBALS['TL_LANG']['tl_undo']['affectedRows'][1] = 'Количество неэффективных записей данных';
 $GLOBALS['TL_LANG']['tl_undo']['query'][0] = 'Детали';
-$GLOBALS['TL_LANG']['tl_undo']['query'][1] = 'Детали текущего входа';
+$GLOBALS['TL_LANG']['tl_undo']['query'][1] = 'Детали шага отмены';
 $GLOBALS['TL_LANG']['tl_undo']['data'][0] = 'Данные';
-$GLOBALS['TL_LANG']['tl_undo']['data'][1] = 'Данные удалённых записей';
+$GLOBALS['TL_LANG']['tl_undo']['data'][1] = 'Данные шага отмены';
 $GLOBALS['TL_LANG']['tl_undo']['show'][0] = 'Показать детали';
 $GLOBALS['TL_LANG']['tl_undo']['show'][1] = 'Показать детали записи ID %s';
-$GLOBALS['TL_LANG']['tl_undo']['undo'][0] = 'Отменить';
-$GLOBALS['TL_LANG']['tl_undo']['undo'][1] = 'Отменить действие ID %s';
+$GLOBALS['TL_LANG']['tl_undo']['undo'][0] = 'Восстановить';
+$GLOBALS['TL_LANG']['tl_undo']['undo'][1] = 'Восстановить запись ID %s';

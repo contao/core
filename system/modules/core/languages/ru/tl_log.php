@@ -15,15 +15,15 @@
  */
 
 $GLOBALS['TL_LANG']['tl_log']['tstamp'][0] = 'Дата';
-$GLOBALS['TL_LANG']['tl_log']['tstamp'][1] = 'Дата и время создания записи в журнале';
+$GLOBALS['TL_LANG']['tl_log']['tstamp'][1] = 'Дата и время записи в журнале';
 $GLOBALS['TL_LANG']['tl_log']['source'][0] = 'Источник';
-$GLOBALS['TL_LANG']['tl_log']['source'][1] = 'Источники - панель управления и внешний интерфейс';
+$GLOBALS['TL_LANG']['tl_log']['source'][1] = 'Панель управления или внешний интерфейс';
 $GLOBALS['TL_LANG']['tl_log']['action'][0] = 'Категория';
 $GLOBALS['TL_LANG']['tl_log']['action'][1] = 'Категория действия';
 $GLOBALS['TL_LANG']['tl_log']['username'][0] = 'Пользователь';
-$GLOBALS['TL_LANG']['tl_log']['username'][1] = 'Имя зарегистрированного пользователя';
+$GLOBALS['TL_LANG']['tl_log']['username'][1] = 'Имя авторизованного пользователя';
 $GLOBALS['TL_LANG']['tl_log']['text'][0] = 'Детали';
-$GLOBALS['TL_LANG']['tl_log']['text'][1] = 'Детали текущей записи';
+$GLOBALS['TL_LANG']['tl_log']['text'][1] = 'Подробности записи в журнале';
 $GLOBALS['TL_LANG']['tl_log']['func'][0] = 'Функция';
 $GLOBALS['TL_LANG']['tl_log']['func'][1] = 'Имя инициирующий функции';
 $GLOBALS['TL_LANG']['tl_log']['ip'][0] = 'IP-адрес';

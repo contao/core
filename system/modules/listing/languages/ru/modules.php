@@ -15,6 +15,6 @@
  */
 
 $GLOBALS['TL_LANG']['MOD']['listing'][0] = 'Список';
-$GLOBALS['TL_LANG']['MOD']['listing'][1] = 'Модуль позволит структурировать записи любой таблицы на сайте.';
+$GLOBALS['TL_LANG']['MOD']['listing'][1] = 'Список записей в любой таблице';
 $GLOBALS['TL_LANG']['FMD']['listing'][0] = 'Список';
-$GLOBALS['TL_LANG']['FMD']['listing'][1] = 'Модуль позволит структурировать записи любой таблицы на сайте.';
+$GLOBALS['TL_LANG']['FMD']['listing'][1] = 'Список записей в любой таблице';

@@ -520,7 +520,7 @@ class Transifex
 
 		foreach (scandir($dir) as $file)
 		{
-			if (strncmp($file, '.', 1) !== 0)
+			if ($file != '.' && $file != '..' && $file != '.DS_Store')
 			{
 				$return[] = $file;
 			}

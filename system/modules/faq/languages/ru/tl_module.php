@@ -15,6 +15,6 @@
  */
 
 $GLOBALS['TL_LANG']['tl_module']['faq_categories'][0] = 'Категории FAQ';
-$GLOBALS['TL_LANG']['tl_module']['faq_categories'][1] = 'Выберите одну или несколько категорий FAQ, которые вы хотите включить.';
+$GLOBALS['TL_LANG']['tl_module']['faq_categories'][1] = 'Выберите одну или несколько категорий FAQ.';
 $GLOBALS['TL_LANG']['tl_module']['faq_readerModule'][0] = 'Модуль просмотрщика FAQ';
-$GLOBALS['TL_LANG']['tl_module']['faq_readerModule'][1] = 'Автоматически переключить на просмотрщик FAQ, если выбран элемент.';
+$GLOBALS['TL_LANG']['tl_module']['faq_readerModule'][1] = 'Автоматически переключить на просмотрщик FAQ если выбран элемент.';
