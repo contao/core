@@ -486,10 +486,12 @@ class Transifex
 
 
 	/**
-	 * Remove and reimport all Contao language files
+	 * Remove the Contao language files
 	 */
 	protected function purge()
 	{
+		global $argv;
+
 		foreach ($this->scandir(TL_ROOT . '/system/modules') as $module)
 		{
 			if (!is_dir(TL_ROOT . '/system/modules/' . $module . '/languages'))
@@ -497,13 +499,21 @@ class Transifex
 				continue;
 			}
 
-			foreach ($this->scandir(TL_ROOT . '/system/modules/' . $module . '/languages') as $language)
+			if (isset($argv[2]))
 			{
-				$this->rrdir(TL_ROOT . '/system/modules/' . $module . '/languages/' . $language);
+				if (is_dir(TL_ROOT . '/system/modules/' . $module . '/languages/' . $argv[2]))
+				{
+					$this->rrdir(TL_ROOT . '/system/modules/' . $module . '/languages/' . $argv[2]);
+				}
+			}
+			else
+			{
+				foreach ($this->scandir(TL_ROOT . '/system/modules/' . $module . '/languages') as $language)
+				{
+					$this->rrdir(TL_ROOT . '/system/modules/' . $module . '/languages/' . $language);
+				}
 			}
 		}
-
-		$this->import();
 	}
 
 
