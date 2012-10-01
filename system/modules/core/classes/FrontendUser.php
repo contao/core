@@ -296,6 +296,14 @@ class FrontendUser extends \User
 		// Unserialize values
 		foreach ($this->arrData as $k=>$v)
 		{
+			if ($k == 'homeDir' && version_compare(VERSION, '3.0', '>='))
+			{
+				if (is_numeric($v) && !preg_match('/^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/').'/', $v))
+				{
+					$v = \FilesModel::findByPk($v)->path;
+				}
+			}
+
 			if (!is_numeric($v))
 			{
 				$this->$k = deserialize($v);

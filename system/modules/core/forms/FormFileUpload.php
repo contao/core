@@ -68,6 +68,15 @@ class FormFileUpload extends \Widget implements \uploadable
 				}
 				break;
 
+			case 'uploadFolder':
+				if (version_compare(VERSION, '3.0', '>='))
+				{
+					if (is_numeric($varValue) && !preg_match('/^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/').'/', $varValue))
+					{
+						$varValue = \FilesModel::findByPk($varValue)->path;
+					}
+				}
+
 			default:
 				parent::__set($strKey, $varValue);
 				break;
