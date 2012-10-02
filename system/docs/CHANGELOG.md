@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Automatically adjust the CSS framework if the layout builder and the responsive
+grid are combined (see #4824).
+
+### Fixed
 Pass the cache status to all recursive `replaceInsertTags()` calls (see #4402).
 
 ### Updated
