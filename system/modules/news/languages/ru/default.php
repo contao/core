@@ -14,7 +14,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['MSC']['open'] = 'Больше информации на %s';
+$GLOBALS['TL_LANG']['MSC']['open'] = 'Подробнее на %s';
 $GLOBALS['TL_LANG']['MSC']['author'] = 'Автор';
 $GLOBALS['TL_LANG']['MSC']['by'] = 'от';
 $GLOBALS['TL_LANG']['MSC']['empty'] = 'Новостей за этот период нет.';

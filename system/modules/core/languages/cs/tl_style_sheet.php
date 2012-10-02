@@ -16,6 +16,8 @@
 
 $GLOBALS['TL_LANG']['tl_style_sheet']['name'][0] = 'Název';
 $GLOBALS['TL_LANG']['tl_style_sheet']['name'][1] = 'Zadejte prosím název kaskádovitého stylu.';
+$GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'][0] = 'Zapojit grafiky do velikosti';
+$GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'][1] = 'Sem můžete zadat maximální velikost souborů v bitech, které budou zaslány spolu s Vaším zpravodajem. Zadejte 0, chcete-li tuto funkci deaktivovat. ';
 $GLOBALS['TL_LANG']['tl_style_sheet']['cc'][0] = 'Conditional comment';
 $GLOBALS['TL_LANG']['tl_style_sheet']['cc'][1] = 'Conditional comment umožňuje nadefinování specifických stylů pro Internet Expolover.';
 $GLOBALS['TL_LANG']['tl_style_sheet']['media'][0] = 'Typ média';
@@ -29,6 +31,7 @@ $GLOBALS['TL_LANG']['tl_style_sheet']['source'][1] = 'Vyberte prosím jeden nebo
 $GLOBALS['TL_LANG']['tl_style_sheet']['tstamp'][0] = 'Datum poslední úpravy';
 $GLOBALS['TL_LANG']['tl_style_sheet']['tstamp'][1] = 'Datum a čas poslední úpravy';
 $GLOBALS['TL_LANG']['tl_style_sheet']['title_legend'] = 'Název a mediální typ';
+$GLOBALS['TL_LANG']['tl_style_sheet']['config_legend'] = 'Nastavení';
 $GLOBALS['TL_LANG']['tl_style_sheet']['media_legend'] = 'Nastavení médií';
 $GLOBALS['TL_LANG']['tl_style_sheet']['vars_legend'] = 'Globální proměnné';
 $GLOBALS['TL_LANG']['tl_style_sheet']['css_imported'] = 'Kaskádovitý styl "%s" byl úspěšně importován.';

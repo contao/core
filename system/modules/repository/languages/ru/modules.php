@@ -17,6 +17,6 @@
 $GLOBALS['TL_LANG']['MOD']['repository'][0] = 'Хранилище расширений';
 $GLOBALS['TL_LANG']['MOD']['repository'][1] = 'Модуль внутреннего интерфейса для хранилища расширений';
 $GLOBALS['TL_LANG']['MOD']['repository_catalog'][0] = 'Каталог расширений';
-$GLOBALS['TL_LANG']['MOD']['repository_catalog'][1] = 'Просмотрите репозиторий и установите расширения.';
+$GLOBALS['TL_LANG']['MOD']['repository_catalog'][1] = 'Обзор хранилища и установка расширений.';
 $GLOBALS['TL_LANG']['MOD']['repository_manager'][0] = 'Менеджер расширений';
 $GLOBALS['TL_LANG']['MOD']['repository_manager'][1] = 'Обслуживание и удаление установленных расширений.';

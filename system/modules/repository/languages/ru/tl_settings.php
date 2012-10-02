@@ -14,12 +14,12 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'][0] = 'URL репозитория расширений';
-$GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'][1] = 'Введите адрес WSDL-файла репозитория расширений (по умолчанию: <em>http://www.contao.org/services/repository.wsdl</em>).';
-$GLOBALS['TL_LANG']['tl_settings']['repository_languages'][0] = 'Языки репозитория';
-$GLOBALS['TL_LANG']['tl_settings']['repository_languages'][1] = 'Здесь можно ввести разделенный запятыми список ISO кодов языков, для использования в случае, если расширение на текущем внутреннем языке не доступно. Укажите список, начиная с языка с высоким приоритетом. (напр.: en,de,ru ("en" для English, ru - Русский))';
+$GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'][0] = 'URL хранилища расширений';
+$GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'][1] = 'Вы можете ввести адрес WSDL-файла хранилища расширений.';
+$GLOBALS['TL_LANG']['tl_settings']['repository_languages'][0] = 'Языки хранилища';
+$GLOBALS['TL_LANG']['tl_settings']['repository_languages'][1] = 'Вы можете ввести разделенный запятыми список ISO кодов языков, который будет использоваться, если описание расширения не доступно на текущем языке панели управления.';
 $GLOBALS['TL_LANG']['tl_settings']['repository_listsize'][0] = 'Расширений на странице';
-$GLOBALS['TL_LANG']['tl_settings']['repository_listsize'][1] = 'Количество расширений, отображаемых на странице (по умолчанию = 10).';
+$GLOBALS['TL_LANG']['tl_settings']['repository_listsize'][1] = 'Вы можете определить количество расширений на странице.';
 $GLOBALS['TL_LANG']['tl_settings']['repository_unsafe_catalog'][0] = 'Показать несовместимые расширения';
-$GLOBALS['TL_LANG']['tl_settings']['repository_unsafe_catalog'][1] = 'Показать несовместимые расширения в каталоге расширений. Внимание! Установка несовместимых расширений может привести к поломке Contao!';
-$GLOBALS['TL_LANG']['tl_settings']['repository_legend'] = 'Репозиторий расширений';
+$GLOBALS['TL_LANG']['tl_settings']['repository_unsafe_catalog'][1] = 'Показать несовместимые расширения в каталоге расширений. Обратите внимание, что установка несовместимых расширений может привести к поломке Contao!';
+$GLOBALS['TL_LANG']['tl_settings']['repository_legend'] = 'Хранилище расширений';

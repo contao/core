@@ -14,6 +14,8 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
+$GLOBALS['TL_LANG']['MOD']['repository'][0] = 'Katalog rozšíření';
+$GLOBALS['TL_LANG']['MOD']['repository'][1] = 'Backendový modul katalogu rozšíření';
 $GLOBALS['TL_LANG']['MOD']['repository_catalog'][0] = 'Katalog rozšíření';
 $GLOBALS['TL_LANG']['MOD']['repository_catalog'][1] = 'Prohlížet repozitář k nalezení a instalaci rozšíření';
 $GLOBALS['TL_LANG']['MOD']['repository_manager'][0] = 'Správce rozšíření';

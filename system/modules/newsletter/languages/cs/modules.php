@@ -16,6 +16,7 @@
 
 $GLOBALS['TL_LANG']['MOD']['newsletter'][0] = 'Zpravodaj/Newsletter';
 $GLOBALS['TL_LANG']['MOD']['newsletter'][1] = 'Správa předplatného a zasílání zpravodajů.';
+$GLOBALS['TL_LANG']['MOD']['tl_newsletter_recipients'] = 'Příjemci';
 $GLOBALS['TL_LANG']['FMD']['newsletter'] = 'Zpravodaj';
 $GLOBALS['TL_LANG']['FMD']['subscribe'][0] = 'Objednat';
 $GLOBALS['TL_LANG']['FMD']['subscribe'][1] = 'vytvoří formulář na objednání zpravodaje.';

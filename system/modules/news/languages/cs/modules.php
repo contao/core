@@ -16,6 +16,7 @@
 
 $GLOBALS['TL_LANG']['MOD']['news'][0] = 'Novinky';
 $GLOBALS['TL_LANG']['MOD']['news'][1] = 'Tento modul umožňuje správu novinek na vašich stránkách.';
+$GLOBALS['TL_LANG']['MOD']['tl_news_feed'] = 'Kanály novinek';
 $GLOBALS['TL_LANG']['FMD']['news'] = 'Novinky';
 $GLOBALS['TL_LANG']['FMD']['newslist'][0] = 'Seznam novinek';
 $GLOBALS['TL_LANG']['FMD']['newslist'][1] = 'Zobrazí zadaný počet novinek z konkrétního archivu novinek.';
