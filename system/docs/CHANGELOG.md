@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Encode single quotes in JavaScript calls (see #4889).
+
+### Fixed
 Do not add a content element to news or events without text (see #4882).
 
 ### Fixed
