@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+The autoload creator now correctly reads files (see #4876).
+
+### Fixed
 Encode single quotes in JavaScript calls (see #4889).
 
 ### Fixed
