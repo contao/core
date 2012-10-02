@@ -638,7 +638,6 @@ abstract class Controller extends \System
 			$objPage->rootLanguage = $objParentPage->language;
 			$objPage->language = $objParentPage->language;
 			$objPage->staticFiles = $objParentPage->staticFiles;
-			$objPage->staticSystem = $objParentPage->staticSystem;
 			$objPage->staticPlugins = $objParentPage->staticPlugins;
 			$objPage->dateFormat = $objParentPage->dateFormat;
 			$objPage->timeFormat = $objParentPage->timeFormat;
