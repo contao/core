@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.0 (2012-XX-XX)
 --------------------------
 
+### Updated
+Updated jQuery to version 1.8.2 and jQuery UI to version 1.8.24 (see #4848).
+
 ### Fixed
 The autoload creator now correctly reads files (see #4876).
 
