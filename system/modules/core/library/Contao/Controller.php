@@ -959,10 +959,10 @@ abstract class Controller extends \System
 			// Run the replacement again if there are more tags (see #4402)
 			if (strpos($strTag, '{{') !== false)
 			{
-				$strTag = $this->replaceInsertTags($strTag);
+				$strTag = $this->replaceInsertTags($strTag, $blnCache);
 			}
 
-			// Load value from cache array
+			// Load the value from cache
 			if (isset($arrCache[$strTag]))
 			{
 				$strBuffer .= $arrCache[$strTag];
@@ -1250,7 +1250,7 @@ abstract class Controller extends \System
 				case 'insert_article':
 					if (($strOutput = $this->getArticle($elements[1], false, true)) !== false)
 					{
-						$arrCache[$strTag] = $this->replaceInsertTags(ltrim($strOutput));
+						$arrCache[$strTag] = $this->replaceInsertTags(ltrim($strOutput), $blnCache);
 					}
 					else
 					{
@@ -1260,17 +1260,17 @@ abstract class Controller extends \System
 
 				// Insert content element
 				case 'insert_content':
-					$arrCache[$strTag] = $this->replaceInsertTags($this->getContentElement($elements[1]));
+					$arrCache[$strTag] = $this->replaceInsertTags($this->getContentElement($elements[1]), $blnCache);
 					break;
 
 				// Insert module
 				case 'insert_module':
-					$arrCache[$strTag] = $this->replaceInsertTags($this->getFrontendModule($elements[1]));
+					$arrCache[$strTag] = $this->replaceInsertTags($this->getFrontendModule($elements[1]), $blnCache);
 					break;
 
 				// Insert form
 				case 'insert_form':
-					$arrCache[$strTag] = $this->replaceInsertTags($this->getForm($elements[1]));
+					$arrCache[$strTag] = $this->replaceInsertTags($this->getForm($elements[1]), $blnCache);
 					break;
 
 				// Article
@@ -1459,11 +1459,11 @@ abstract class Controller extends \System
 					{
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = \String::toXhtml($this->replaceInsertTags($objTeaser->teaser));
+							$arrCache[$strTag] = \String::toXhtml($this->replaceInsertTags($objTeaser->teaser), $blnCache);
 						}
 						else
 						{
-							$arrCache[$strTag] = \String::toHtml5($this->replaceInsertTags($objTeaser->teaser));
+							$arrCache[$strTag] = \String::toHtml5($this->replaceInsertTags($objTeaser->teaser), $blnCache);
 						}
 					}
 					break;
@@ -1868,7 +1868,7 @@ abstract class Controller extends \System
 						foreach ($GLOBALS['TL_HOOKS']['replaceInsertTags'] as $callback)
 						{
 							$this->import($callback[0]);
-							$varValue = $this->$callback[0]->$callback[1]($strTag);
+							$varValue = $this->$callback[0]->$callback[1]($strTag, $blnCache);
 
 							// Replace the tag and stop the loop
 							if ($varValue !== false)

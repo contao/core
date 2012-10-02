@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.0 (2012-XX-XX)
 --------------------------
 
+### Fixed
+Pass the cache status to all recursive `replaceInsertTags()` calls (see #4402).
+
 ### Updated
 Updated jQuery to version 1.8.2 and jQuery UI to version 1.8.24 (see #4848).
 
