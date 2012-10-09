@@ -15,7 +15,7 @@
  */
 
 $GLOBALS['TL_LANG']['tl_user']['newsletters'][0] = 'Разрешенные каналы';
-$GLOBALS['TL_LANG']['tl_user']['newsletters'][1] = 'Предоставление доступа к одному или нескольким каналам.';
+$GLOBALS['TL_LANG']['tl_user']['newsletters'][1] = 'Вы можете предоставить доступ к одному или нескольким каналам.';
 $GLOBALS['TL_LANG']['tl_user']['newsletterp'][0] = 'Разрешения канала';
-$GLOBALS['TL_LANG']['tl_user']['newsletterp'][1] = 'Определение разрешений канала рассылок.';
+$GLOBALS['TL_LANG']['tl_user']['newsletterp'][1] = 'Вы можете определить разрешения канала.';
 $GLOBALS['TL_LANG']['tl_user']['newsletter_legend'] = 'Разрешения рассылки';

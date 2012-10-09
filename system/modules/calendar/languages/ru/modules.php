@@ -25,4 +25,4 @@ $GLOBALS['TL_LANG']['FMD']['eventlist'][1] = 'Добавляет список с
 $GLOBALS['TL_LANG']['FMD']['eventreader'][0] = 'Просмотрщик событий';
 $GLOBALS['TL_LANG']['FMD']['eventreader'][1] = 'Показывает детали события';
 $GLOBALS['TL_LANG']['FMD']['eventmenu'][0] = 'Меню списка событий';
-$GLOBALS['TL_LANG']['FMD']['eventmenu'][1] = 'Создает меню навигации для просмотра списка событий';
+$GLOBALS['TL_LANG']['FMD']['eventmenu'][1] = 'Создаёт меню навигации для просмотра списка событий';

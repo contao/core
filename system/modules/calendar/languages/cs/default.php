@@ -15,8 +15,8 @@
  */
 
 $GLOBALS['TL_LANG']['MSC']['cal_events'] = '%d událostí';
-$GLOBALS['TL_LANG']['MSC']['cal_previous'] = 'Předchozí měsíc';
-$GLOBALS['TL_LANG']['MSC']['cal_next'] = 'Následující měsíc';
+$GLOBALS['TL_LANG']['MSC']['cal_previous'] = '&lt;';
+$GLOBALS['TL_LANG']['MSC']['cal_next'] = '&gt;';
 $GLOBALS['TL_LANG']['MSC']['cal_emptyDay'] = 'Tento den nejsou žádné události.';
 $GLOBALS['TL_LANG']['MSC']['cal_emptyWeek'] = 'Žádné události pro tento týden.';
 $GLOBALS['TL_LANG']['MSC']['cal_emptyMonth'] = 'Žádné události pro tento měsíc.';

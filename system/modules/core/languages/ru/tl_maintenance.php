@@ -58,4 +58,4 @@ $GLOBALS['TL_LANG']['tl_maintenance_jobs']['internal'][1] = 'Удаляет кэ
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['temp'][0] = 'Очистить временные файлы';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['temp'][1] = 'Удаляет временные файлы.';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['xml'][0] = 'Создать заново XML файлы';
-$GLOBALS['TL_LANG']['tl_maintenance_jobs']['xml'][1] = 'Создает заново XML файлы (карты сайта и каналы), а затем очищает кэш страниц, при этом очищаются ссылки на удаленные ресурсы.';
+$GLOBALS['TL_LANG']['tl_maintenance_jobs']['xml'][1] = 'Создает заново XML файлы (карты веб-сайта и каналы), а затем очищает кэш страниц, при этом очищаются ссылки на удаленные ресурсы.';

@@ -14,7 +14,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_member']['newsletter'][0] = 'Рассылки';
-$GLOBALS['TL_LANG']['tl_member']['newsletter'][1] = 'Управление подписчиками.';
+$GLOBALS['TL_LANG']['tl_member']['newsletter'][0] = 'Новостные рассылки';
+$GLOBALS['TL_LANG']['tl_member']['newsletter'][1] = 'Вы можете управлять подписками участников.';
 $GLOBALS['TL_LANG']['tl_member']['newsletter_legend'] = 'Подписки';
 $GLOBALS['TL_LANG']['tl_member']['newsletterDetails'] = 'Подписки';

@@ -14,25 +14,25 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_news_comments']['pid'][0] = 'Пункты новостей';
-$GLOBALS['TL_LANG']['tl_news_comments']['pid'][1] = 'Ассоциируемые пункты новостей';
+$GLOBALS['TL_LANG']['tl_news_comments']['pid'][0] = 'Новость';
+$GLOBALS['TL_LANG']['tl_news_comments']['pid'][1] = 'Ассоциируемая новость';
 $GLOBALS['TL_LANG']['tl_news_comments']['date'][0] = 'Дата';
-$GLOBALS['TL_LANG']['tl_news_comments']['date'][1] = 'Введите дату публикации комментария.';
-$GLOBALS['TL_LANG']['tl_news_comments']['name'][0] = 'Имя';
+$GLOBALS['TL_LANG']['tl_news_comments']['date'][1] = 'Введите дату комментария.';
+$GLOBALS['TL_LANG']['tl_news_comments']['name'][0] = 'Автор';
 $GLOBALS['TL_LANG']['tl_news_comments']['name'][1] = 'Введите имя автора.';
 $GLOBALS['TL_LANG']['tl_news_comments']['email'][0] = 'E-mail адрес';
 $GLOBALS['TL_LANG']['tl_news_comments']['email'][1] = 'Введите e-mail адрес автора (не публикуется).';
 $GLOBALS['TL_LANG']['tl_news_comments']['website'][0] = 'Веб-сайт';
-$GLOBALS['TL_LANG']['tl_news_comments']['website'][1] = 'Введите адрес веб-сайта (опционально).';
+$GLOBALS['TL_LANG']['tl_news_comments']['website'][1] = 'Введите адрес веб-сайта.';
 $GLOBALS['TL_LANG']['tl_news_comments']['comment'][0] = 'Комментарий';
 $GLOBALS['TL_LANG']['tl_news_comments']['comment'][1] = 'Введите комментарий.';
 $GLOBALS['TL_LANG']['tl_news_comments']['published'][0] = 'Опубликовать';
-$GLOBALS['TL_LANG']['tl_news_comments']['published'][1] = 'Только опубликованные комментарии будут показаны на странице.';
+$GLOBALS['TL_LANG']['tl_news_comments']['published'][1] = 'Сделать комментарий видимым на веб-сайте.';
 $GLOBALS['TL_LANG']['tl_news_comments']['author_legend'] = 'Автор';
 $GLOBALS['TL_LANG']['tl_news_comments']['comment_legend'] = 'Комментарий';
 $GLOBALS['TL_LANG']['tl_news_comments']['publish_legend'] = 'Настройки публикации';
-$GLOBALS['TL_LANG']['tl_news_comments']['approved'] = 'Проверенный';
-$GLOBALS['TL_LANG']['tl_news_comments']['pending'] = 'Ожидающий модерации';
+$GLOBALS['TL_LANG']['tl_news_comments']['approved'] = 'Разрешенный';
+$GLOBALS['TL_LANG']['tl_news_comments']['pending'] = 'Ожидающий одобрения';
 $GLOBALS['TL_LANG']['tl_news_comments']['show'][0] = 'Детали комментария';
 $GLOBALS['TL_LANG']['tl_news_comments']['show'][1] = 'Показать детали комментария ID %s';
 $GLOBALS['TL_LANG']['tl_news_comments']['edit'][0] = 'Редактировать комментарий';

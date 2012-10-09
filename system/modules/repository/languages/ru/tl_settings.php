@@ -17,7 +17,7 @@
 $GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'][0] = 'URL хранилища расширений';
 $GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'][1] = 'Вы можете ввести адрес WSDL-файла хранилища расширений.';
 $GLOBALS['TL_LANG']['tl_settings']['repository_languages'][0] = 'Языки хранилища';
-$GLOBALS['TL_LANG']['tl_settings']['repository_languages'][1] = 'Вы можете ввести разделенный запятыми список ISO кодов языков, который будет использоваться, если описание расширения не доступно на текущем языке панели управления.';
+$GLOBALS['TL_LANG']['tl_settings']['repository_languages'][1] = 'Вы можете ввести разделенный запятыми список ISO кодов языков, который будет использован, если описание расширения не доступно на текущем языке панели управления.';
 $GLOBALS['TL_LANG']['tl_settings']['repository_listsize'][0] = 'Расширений на странице';
 $GLOBALS['TL_LANG']['tl_settings']['repository_listsize'][1] = 'Вы можете определить количество расширений на странице.';
 $GLOBALS['TL_LANG']['tl_settings']['repository_unsafe_catalog'][0] = 'Показать несовместимые расширения';

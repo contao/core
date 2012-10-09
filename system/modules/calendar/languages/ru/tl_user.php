@@ -14,7 +14,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_user']['calendars'][0] = 'Разрешенные календари';
+$GLOBALS['TL_LANG']['tl_user']['calendars'][0] = 'Разрешённые календари';
 $GLOBALS['TL_LANG']['tl_user']['calendars'][1] = 'Предоставление доступа к одному или нескольким календарям.';
 $GLOBALS['TL_LANG']['tl_user']['calendarp'][0] = 'Разрешения календаря';
 $GLOBALS['TL_LANG']['tl_user']['calendarp'][1] = 'Определение разрешений календаря.';

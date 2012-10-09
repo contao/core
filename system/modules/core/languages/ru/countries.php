@@ -15,7 +15,7 @@
  */
 
 $GLOBALS['TL_LANG']['CNT']['ad'] = 'Андорра';
-$GLOBALS['TL_LANG']['CNT']['ae'] = 'Объединенные Арабские Эмираты';
+$GLOBALS['TL_LANG']['CNT']['ae'] = 'Объединённые Арабские Эмираты';
 $GLOBALS['TL_LANG']['CNT']['af'] = 'Афганистан';
 $GLOBALS['TL_LANG']['CNT']['ag'] = 'Антигуа и Барбуда';
 $GLOBALS['TL_LANG']['CNT']['ai'] = 'Ангилья';
