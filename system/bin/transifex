@@ -501,9 +501,12 @@ class Transifex
 
 			if (isset($argv[2]))
 			{
-				if (is_dir(TL_ROOT . '/system/modules/' . $module . '/languages/' . $argv[2]))
+				for ($i=2; $i<count($argv); $i++)
 				{
-					$this->rrdir(TL_ROOT . '/system/modules/' . $module . '/languages/' . $argv[2]);
+					if (is_dir(TL_ROOT . '/system/modules/' . $module . '/languages/' . $argv[$i]))
+					{
+						$this->rrdir(TL_ROOT . '/system/modules/' . $module . '/languages/' . $argv[$i]);
+					}
 				}
 			}
 			else

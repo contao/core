@@ -17,7 +17,7 @@
 $GLOBALS['TL_LANG']['tl_news_feed']['title'][0] = '題名';
 $GLOBALS['TL_LANG']['tl_news_feed']['title'][1] = 'フィードの題名を入力してください。';
 $GLOBALS['TL_LANG']['tl_news_feed']['alias'][0] = 'フィードのエイリアス';
-$GLOBALS['TL_LANG']['tl_news_feed']['alias'][1] = '重複しない(拡張子を付けない)ファイル名を入力してください。XMLのフィードのファイルはインストールしたContaoの <em>share</em> のディレクトリに、例えば <em>share/name.xml</em> として自動生成します。';
+$GLOBALS['TL_LANG']['tl_news_feed']['alias'][1] = '重複しない(拡張子なしの)ファイル名を入力してください。XMLのフィードのファイルはインストールしたContaoの <em>share</em> のディレクトリに、例えば <em>share/name.xml</em> として自動生成します。';
 $GLOBALS['TL_LANG']['tl_news_feed']['language'][0] = 'フィードの言語';
 $GLOBALS['TL_LANG']['tl_news_feed']['language'][1] = 'フィードのISO-639の標準による言語(例: <em>ja</em>や<em>ja_jp</em>)を入力してください。';
 $GLOBALS['TL_LANG']['tl_news_feed']['archives'][0] = 'ニュースアーカイブ';

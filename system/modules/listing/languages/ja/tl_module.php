@@ -25,7 +25,7 @@ $GLOBALS['TL_LANG']['tl_module']['list_search'][1] = '検索できるように�
 $GLOBALS['TL_LANG']['tl_module']['list_sort'][0] = '並べ替え';
 $GLOBALS['TL_LANG']['tl_module']['list_sort'][1] = '結果を並べ替えに使用できるフィールドをコンマで区切って入力します。';
 $GLOBALS['TL_LANG']['tl_module']['list_info'][0] = '詳細なページのフィールド';
-$GLOBALS['TL_LANG']['tl_module']['list_info'][1] = '詳細なページに表示したいフィールドをカンマで区切って入力してください。';
+$GLOBALS['TL_LANG']['tl_module']['list_info'][1] = '詳細なページに表示したいフィールドをコンマで区切って入力してください。';
 $GLOBALS['TL_LANG']['tl_module']['list_info_where'][0] = '詳細なページの条件';
 $GLOBALS['TL_LANG']['tl_module']['list_info_where'][1] = '結果をフィルターする条件(例えば、<em>published=1</em>や<em>type!="admin"</em>)を入力します。';
 $GLOBALS['TL_LANG']['tl_module']['list_layout'][0] = 'リストのテンプレート';

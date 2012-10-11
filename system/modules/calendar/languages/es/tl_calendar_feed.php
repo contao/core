@@ -35,6 +35,7 @@ $GLOBALS['TL_LANG']['tl_calendar_feed']['description'][1] = 'Introducir una brev
 $GLOBALS['TL_LANG']['tl_calendar_feed']['title_legend'] = 'Título e idioma';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['calendars_legend'] = 'Calendarios';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['config_legend'] = 'Ajustes del flujo';
+$GLOBALS['TL_LANG']['tl_calendar_feed']['source_teaser'] = 'Avances del evento';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['source_text'] = 'Artículos completos';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['new'][0] = 'Nuevo flujo';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['new'][1] = 'Crear un nuevo flujo';
