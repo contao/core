@@ -766,7 +766,7 @@ class InstallTool extends Backend
 				$this->reload();
 			}
 
-			$this->Template->is28Update = true;
+			$this->Template->is29Update = true;
 			$this->outputAndExit();
 		}
 	}

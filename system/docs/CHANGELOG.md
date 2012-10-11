@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly check for the version 2.9 update in the install tool (see #4920).
+
+### Fixed
 Automatically adjust the CSS framework if the layout builder and the responsive
 grid are combined (see #4824).
 
