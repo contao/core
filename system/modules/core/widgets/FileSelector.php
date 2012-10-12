@@ -105,6 +105,12 @@ class FileSelector extends \Widget
 		// Search for a specific file
 		if ($for != '')
 		{
+			// The keyword must not start with a wildcard (see #4910)
+			if (strncmp($for, '*', 1) === 0)
+			{
+				$for = substr($for, 1);
+			}
+
 			$objRoot = $this->Database->prepare("SELECT id FROM tl_files WHERE CAST(name AS CHAR) REGEXP ?{$this->strExtensions} ORDER BY type='file', name{$this->strSortFlag}")
 									  ->execute($for);
 

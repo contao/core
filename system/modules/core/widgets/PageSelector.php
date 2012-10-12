@@ -81,6 +81,12 @@ class PageSelector extends \Widget
 		// Search for a specific page
 		if ($for != '')
 		{
+			// The keyword must not start with a wildcard (see #4910)
+			if (strncmp($for, '*', 1) === 0)
+			{
+				$for = substr($for, 1);
+			}
+
 			$objRoot = $this->Database->prepare("SELECT id FROM tl_page WHERE CAST(title AS CHAR) REGEXP ?")
 									  ->execute($for);
 

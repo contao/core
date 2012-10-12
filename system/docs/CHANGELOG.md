@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly handle wildcards in the page and file picker (see #4910).
+
+### Fixed
 Correctly handle the case that a front end module is included in a page layout
 more than once (see #4849).
 
