@@ -900,7 +900,7 @@ class tl_content extends Backend
 		// Invalid ID
 		if ($objPage->numRows < 1)
 		{
-			$this->log('Invalid article content element ID ' . $id, 'tl_article checkAccessToElement()', TL_ERROR);
+			$this->log('Invalid content element ID ' . $id, 'tl_article checkAccessToElement()', TL_ERROR);
 			return false;
 		}
 
@@ -1500,7 +1500,19 @@ class tl_content extends Backend
 		// Check permissions to edit
 		Input::setGet('id', $intId);
 		Input::setGet('act', 'toggle');
-		$this->checkPermission();
+
+		// The onload_callbacks vary depending on the dynamic parent table (see #4894)
+		if (is_array($GLOBALS['TL_DCA']['tl_content']['config']['onload_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$this->$callback[0]->$callback[1]($this);
+				}
+			}
+		}
 
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_content::invisible', 'alexf'))

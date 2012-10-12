@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly check permissions to toggle the visibility of content elements now
+that they can be used everywhere (see #4894).
+
+### Fixed
 Added an accessible jQuery accordion variant (see #4900).
 
 ### Fixed
