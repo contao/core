@@ -89,7 +89,6 @@ $GLOBALS['TL_LANG']['tl_install']['ftpSave'] = 'ذخیره تنظیمات FTP';
 $GLOBALS['TL_LANG']['tl_install']['ftpHostError'] = 'ارتباط با سرویس دهنده FTP %s نتوانست برقرار شود';
 $GLOBALS['TL_LANG']['tl_install']['ftpUserError'] = 'ورود به عنوان "%s" نتوانست انجام شود';
 $GLOBALS['TL_LANG']['tl_install']['ftpPathError'] = 'نتوانست دایرکتوری کانتائو %s قرار گیرد';
-$GLOBALS['TL_LANG']['tl_install']['filesWarning'] = 'پوشه فایل‌های پیکربندی وجود ندارد. مطمئن شوید که قبل از بروزرسانی به ویرایش 3 <em>tl_file</em> را به <em>file</em> تغییر نداده باشید!';
 $GLOBALS['TL_LANG']['tl_install']['CREATE'] = 'ایجاد جدول‌های جدید';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD'] = 'ایجاد ستون‌های جدید';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_CHANGE'] = 'تغییر ستون‌های موجود';

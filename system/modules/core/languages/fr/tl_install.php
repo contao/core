@@ -89,7 +89,6 @@ $GLOBALS['TL_LANG']['tl_install']['ftpSave'] = 'Enregistrer les paramètres FTP'
 $GLOBALS['TL_LANG']['tl_install']['ftpHostError'] = 'Impossible de se connecter au serveur FTP %s';
 $GLOBALS['TL_LANG']['tl_install']['ftpUserError'] = 'Impossible de se connecter en tant que "%s"';
 $GLOBALS['TL_LANG']['tl_install']['ftpPathError'] = 'Impossible de localiser le répertoire de Contao %s';
-$GLOBALS['TL_LANG']['tl_install']['filesWarning'] = 'Le répertoire configuré contenant les fichiers n\'existe pas. Assurez-vous de ne pas avoir renommé <em>tl_files</ em> en <em>files</ em> avant la mise à jour de la version 3 !';
 $GLOBALS['TL_LANG']['tl_install']['CREATE'] = 'Créer de nouvelles tables';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD'] = 'Ajouter de nouvelles colonnes';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_CHANGE'] = 'Changer les colonnes existantes';

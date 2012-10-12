@@ -103,12 +103,6 @@ li {
 	border:1px solid #0a0;
 	background:#dfd;
 }
-p.hint {
-	padding:9px;
-	background:#ffc;
-	border:1px solid #fc0;
-	border-radius:3px;
-}
 
 /* Form tables */
 #sql_table {

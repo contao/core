@@ -89,7 +89,6 @@ $GLOBALS['TL_LANG']['tl_install']['ftpSave'] = 'Uložit spojení k FTP';
 $GLOBALS['TL_LANG']['tl_install']['ftpHostError'] = 'Nelze se připojit k FTP serveru %s';
 $GLOBALS['TL_LANG']['tl_install']['ftpUserError'] = 'Přihlášení jako "%s" se nezdařilo.';
 $GLOBALS['TL_LANG']['tl_install']['ftpPathError'] = 'Nelze najít složku Contao %s';
-$GLOBALS['TL_LANG']['tl_install']['filesWarning'] = 'Upravený souborový adresář neexistuje. Ujistěte se, že nepřejmenujete <em>tl_files</em> před aktualizací na 3. verzi!';
 $GLOBALS['TL_LANG']['tl_install']['CREATE'] = 'Vytvořit nové tabulky';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD'] = 'Přidat nové sloupce';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_CHANGE'] = 'Změnit existující sloupce';

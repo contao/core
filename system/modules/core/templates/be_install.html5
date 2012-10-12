@@ -1106,8 +1106,9 @@ window.addEvent('domready', function() {
   <p class="tl_error"><?php echo $GLOBALS['TL_LANG']['tl_install']['updateError']; ?></p>
   <p><?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateX'], '3.0', '3.0'); ?></p>
 <?php if ($this->filesWarning): ?>
-  <p class="hint"><?php echo $this->filesWarning; ?></p>
-<?php endif; ?>
+  <p class="tl_error"><?php echo $GLOBALS['TL_LANG']['tl_install']['filesRenamed']; ?></p>
+  <p><?php echo $this->filesWarning; ?></p>
+<?php else: ?>
   <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
   <div class="tl_formbody_submit">
     <input type="hidden" name="FORM_SUBMIT" value="tl_30update">
@@ -1117,6 +1118,7 @@ window.addEvent('domready', function() {
     </div>
   </div>
   </form>
+<?php endif; ?>
 </div>
 </fieldset>
 <?php elseif ($this->dbConnection): ?>

@@ -89,7 +89,6 @@ $GLOBALS['TL_LANG']['tl_install']['ftpSave'] = 'Сохранить настро�
 $GLOBALS['TL_LANG']['tl_install']['ftpHostError'] = 'Не удалось подключиться к FTP-серверу %s';
 $GLOBALS['TL_LANG']['tl_install']['ftpUserError'] = 'Не верный логин "%s"';
 $GLOBALS['TL_LANG']['tl_install']['ftpPathError'] = 'Не удалось найти каталог Contao %s';
-$GLOBALS['TL_LANG']['tl_install']['filesWarning'] = 'Каталог настроенных файлов не существует. Убедитесь, что каталог <em>tl_files</em> не переименован в <em>files</em> перед обновлением до версии 3.';
 $GLOBALS['TL_LANG']['tl_install']['CREATE'] = 'Создать новые таблицы';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD'] = 'Добавить новые колонки';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_CHANGE'] = 'Измененить существующие колонки';

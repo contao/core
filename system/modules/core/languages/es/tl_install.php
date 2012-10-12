@@ -89,7 +89,6 @@ $GLOBALS['TL_LANG']['tl_install']['ftpSave'] = 'Grabar ajustes FTP';
 $GLOBALS['TL_LANG']['tl_install']['ftpHostError'] = 'No se pudo establecer conexión al servidor FTP %s';
 $GLOBALS['TL_LANG']['tl_install']['ftpUserError'] = 'No se pudo iniciar sesión como "%s"';
 $GLOBALS['TL_LANG']['tl_install']['ftpPathError'] = 'No se pudo localizar el directorio de Contao %s';
-$GLOBALS['TL_LANG']['tl_install']['filesWarning'] = 'El directorio de archivos configurado no existe. Asegúrate de no cambiar el nombre <em>tl_files</em> to <em>files</em> antes de la versión 3!';
 $GLOBALS['TL_LANG']['tl_install']['CREATE'] = 'Crear tablas nuevas';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD'] = 'Agregar columnas nuevas';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_CHANGE'] = 'Cambiar columnas existentes';

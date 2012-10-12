@@ -89,7 +89,6 @@ $GLOBALS['TL_LANG']['tl_install']['ftpSave'] = 'Bewaar FTP gegevens';
 $GLOBALS['TL_LANG']['tl_install']['ftpHostError'] = 'Kan geen verbinding maken met FTP server %s';
 $GLOBALS['TL_LANG']['tl_install']['ftpUserError'] = 'Kon niet inloggen als "%s"';
 $GLOBALS['TL_LANG']['tl_install']['ftpPathError'] = 'Geen Contao map %s gevonden';
-$GLOBALS['TL_LANG']['tl_install']['filesWarning'] = 'De geconfigureerde bestanden map bestaat niet. Zorg ervoor dat <em> tl_files</ em> niet worden hernoemd naar<em>files</ em> voor de update naar versie 3!';
 $GLOBALS['TL_LANG']['tl_install']['CREATE'] = 'Maak nieuwe tabellen';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD'] = 'Voeg nieuwe kolommen toe';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_CHANGE'] = 'Wijzig bestaande kolommen';

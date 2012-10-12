@@ -89,7 +89,6 @@ $GLOBALS['TL_LANG']['tl_install']['ftpSave'] = 'Spara FTP inställningar';
 $GLOBALS['TL_LANG']['tl_install']['ftpHostError'] = 'Det gick inte att ansluta till FTP-server %s';
 $GLOBALS['TL_LANG']['tl_install']['ftpUserError'] = 'Det gick inte att logga in som "%s"';
 $GLOBALS['TL_LANG']['tl_install']['ftpPathError'] = 'Kunde inte hitta Contao-mappen %s';
-$GLOBALS['TL_LANG']['tl_install']['filesWarning'] = 'Den angivna mappen finns inte. Döp ej om mappen <em>tl_files</em> till <em>files</em> före uppgraderingen till version 3!';
 $GLOBALS['TL_LANG']['tl_install']['CREATE'] = 'Skapa nya tabeller';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD'] = 'Lägg till nya kolumner';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_CHANGE'] = 'Ändra befintliga kolumnerna';

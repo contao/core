@@ -842,13 +842,14 @@ class InstallTool extends Backend
 		// Save the old upload path in the localconfig.php
 		if ($GLOBALS['TL_CONFIG']['uploadPath'] == 'files' && is_dir(TL_ROOT . '/tl_files'))
 		{
+			$GLOBALS['TL_CONFIG']['uploadPath'] = 'tl_files';
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['uploadPath']", 'tl_files');
 		}
 
 		// Show a warning if the user has renamed the tl_files directory already (see #4626)
 		if (!is_dir(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath']))
 		{
-			$this->Template->filesWarning = $GLOBALS['TL_LANG']['tl_install']['filesWarning'];
+			$this->Template->filesWarning = sprintf($GLOBALS['TL_LANG']['tl_install']['filesWarning'], '<a href="https://gist.github.com/3304014" target="_blank">https://gist.github.com/3304014</a>');
 		}
 
 		// Step 1: database structure

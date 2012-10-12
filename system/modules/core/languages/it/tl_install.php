@@ -89,7 +89,6 @@ $GLOBALS['TL_LANG']['tl_install']['ftpSave'] = 'Impostazioni FTP';
 $GLOBALS['TL_LANG']['tl_install']['ftpHostError'] = 'Impossibile connettersi al server FTP %s';
 $GLOBALS['TL_LANG']['tl_install']['ftpUserError'] = 'Impossibile effettuare il login come "%s"';
 $GLOBALS['TL_LANG']['tl_install']['ftpPathError'] = 'Impossibile trovare la cartella %s di Contao';
-$GLOBALS['TL_LANG']['tl_install']['filesWarning'] = 'La cartella configurata come cartella file non esiste. Non rinominare la cartella <em>tl_files</em> in <em>files</em> prima di aver effettuato l\'aggiornamento alla versione 3!';
 $GLOBALS['TL_LANG']['tl_install']['CREATE'] = 'Crea nuove tabelle';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD'] = 'Aggiungi nuove colonne';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_CHANGE'] = 'Modifica colonne esistenti';
