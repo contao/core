@@ -1324,7 +1324,7 @@ abstract class Controller extends \System
 					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objFaq->getRelated('jumpTo')->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
+						$strUrl = $this->generateFrontendUrl($objFaq->getRelated('pid')->getRelated('jumpTo')->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
 					}
 
 					// Replace the tag
@@ -1568,7 +1568,7 @@ abstract class Controller extends \System
 					}
 					break;
 
-				// Conditional tags
+				// Conditional tags (if)
 				case 'iflng':
 					if ($elements[1] != '' && $elements[1] != $objPage->language)
 					{
@@ -1583,6 +1583,7 @@ abstract class Controller extends \System
 					unset($arrCache[$strTag]);
 					break;
 
+				// Conditional tags (if not)
 				case 'ifnlng':
 					if ($elements[1] != '')
 					{

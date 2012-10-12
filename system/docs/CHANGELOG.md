@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly link to FAQs via insert tag (see #4905).
+
+### Fixed
 Correctly handle wildcards in the page and file picker (see #4910).
 
 ### Fixed
