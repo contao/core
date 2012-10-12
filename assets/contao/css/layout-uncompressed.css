@@ -86,6 +86,9 @@ select,input,textarea {
 		margin-right:0;
 	}
 }
+#main .inside {
+	min-height:1px; /* see #4893 */
+}
 
 /**
  * Flexible images and videos
