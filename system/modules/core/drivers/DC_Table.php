@@ -3062,7 +3062,7 @@ window.addEvent(\'domready\', function() {
 
 					while ($objRoot->next())
 					{
-						if (count(array_intersect($this->root, $this->getParentRecords($objRoot->$for, $table))) > 0)
+						if (count(array_intersect($this->root, $this->Database->getParentRecords($objRoot->$for, $table))) > 0)
 						{
 							$arrRoot[] = $objRoot->$for;
 						}

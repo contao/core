@@ -127,7 +127,7 @@ class FileSelector extends \Widget
 
 					while ($objRoot->next())
 					{
-						if (count(array_intersect($this->User->filemounts, $this->getParentRecords($objRoot->id, 'tl_files'))) > 0)
+						if (count(array_intersect($this->User->filemounts, $this->Database->getParentRecords($objRoot->id, 'tl_files'))) > 0)
 						{
 							$arrRoot[] = $objRoot->id;
 						}
@@ -419,7 +419,7 @@ class FileSelector extends \Widget
 
 		foreach ($this->varValue as $id)
 		{
-			$arrPids = $this->getParentRecords($id, 'tl_files');
+			$arrPids = $this->Database->getParentRecords($id, 'tl_files');
 			array_shift($arrPids); // the first element is the ID of the page itself
 			$this->arrNodes = array_merge($this->arrNodes, $arrPids);
 		}
