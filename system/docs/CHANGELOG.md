@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Add the static JavaScript file before the non-static ones (see #4890).
+
+### Fixed
 Correctly check permissions to toggle the visibility of content elements now
 that they can be used everywhere (see #4894).
 
