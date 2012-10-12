@@ -228,7 +228,7 @@ class StyleSheets extends \Backend
 
 		// Selector
 		$arrSelector = trimsplit(',', \String::decodeEntities($row['selector']));
-		$return .= implode(($blnWriteToFile ? ',' : ', '), $arrSelector) . (($blnWriteToFile && !$blnDebug) ? '' : ' ') . '{';
+		$return .= implode(($blnWriteToFile ? ',' : ",\n"), $arrSelector) . (($blnWriteToFile && !$blnDebug) ? '' : ' ') . '{';
 
 		// Size
 		if ($row['size'])
