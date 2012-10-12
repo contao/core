@@ -66,13 +66,23 @@ class PageRegular extends \Frontend
 
 		if ($objModules !== null || $arrModules[0]['mod'] == 0) // see #4137
 		{
+			$arrMapper = array();
+
+			// Create a mapper array in case a module is included more than once (see #4849)
+			if ($objModules !== null)
+			{
+				while ($objModules->next())
+				{
+					$arrMapper[$objModules->id] = $objModules->current();
+				}
+			}
+
 			foreach ($arrModules as $arrModule)
 			{
-				// Replace the module ID with the result row
-				if ($arrModule['mod'] > 0)
+				// Replace the module ID with the module model
+				if ($arrModule['mod'] > 0 && isset($arrMapper[$arrModule['mod']]))
 				{
-					$objModules->next();
-					$arrModule['mod'] = $objModules;
+					$arrModule['mod'] = $arrMapper[$arrModule['mod']];
 				}
 
 				// Generate the modules

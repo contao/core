@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly handle the case that a front end module is included in a page layout
+more than once (see #4849).
+
+### Fixed
 Correctly detect the language fragment in the error 404 page (see #4669).
 
 ### Fixed
