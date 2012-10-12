@@ -1557,10 +1557,7 @@ class tl_page extends Backend
 		if (Input::post('FORM_SUBMIT') == 'tl_select' && isset($_POST['alias']))
 		{
 			$session = $this->Session->getData();
-
 			$ids = $session['CURRENT']['IDS'];
-			$ids = $this->eliminateNestedPages($ids);
-			$ids = $this->Database->getChildRecords($ids, 'tl_page');
 
 			foreach ($ids as $id)
 			{
