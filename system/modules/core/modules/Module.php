@@ -203,6 +203,7 @@ abstract class Module extends \Frontend
 		$objTemplate = new \FrontendTemplate($this->navigationTpl);
 
 		$objTemplate->type = get_class($this);
+		$objTemplate->cssID = $this->cssID; // see #4897
 		$objTemplate->level = 'level_' . $level++;
 
 		// Get page object
