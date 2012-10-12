@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Added an accessible jQuery accordion variant (see #4900).
+
+### Fixed
 Correctly link to FAQs via insert tag (see #4905).
 
 ### Fixed
