@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly detect the language fragment in the error 404 page (see #4669).
+
+### Fixed
 Correctly check for the version 2.9 update in the install tool (see #4920).
 
 ### Fixed
