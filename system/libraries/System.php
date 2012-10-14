@@ -955,12 +955,12 @@ abstract class System
 		// IPv6
 		if (strpos($strIp, ':') !== false)
 		{
-			echo substr_replace($strIp, ':0000', strrpos($strIp, ':'));
+			return substr_replace($strIp, ':0000', strrpos($strIp, ':'));
 		}
 		// IPv4
 		else
 		{
-			echo substr_replace($strIp, '.0', strrpos($strIp, '.'));
+			return substr_replace($strIp, '.0', strrpos($strIp, '.'));
 		}
 	}
 }
