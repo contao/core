@@ -1573,6 +1573,9 @@ var Backend =
 		var span = li.getElement('span');
 		var img = span.getElement('img');
 
+		// Update the data-language attribute
+		li.setProperty('data-language', opt.value);
+
 		// Update the language text
 		span.set('text', opt.options[opt.selectedIndex].text + ' ');
 		img.inject(span, 'bottom');
@@ -1594,8 +1597,9 @@ var Backend =
 		// Disable the "add language" button
 		el.getParent('div').getElement('input[type="button"]').setProperty('disabled', true);
 
-		// Remove the option from the select menu and update chosen
-		opt.removeChild(opt.options[opt.selectedIndex]);
+		// Disable the option and update chosen
+		opt.options[opt.selectedIndex].setProperty('disabled', true);
+		opt.value = '';
 		opt.fireEvent('liszt:updated');
 	},
 
@@ -1605,6 +1609,7 @@ var Backend =
 	 */
 	metaDelete: function(el) {
 		var li = el.getParent('li')
+		var opt = el.getParent('div').getElement('select');
 
 		// Empty the last element instead of removing it (see #4858)
 		if (li.getPrevious() === null && li.getNext() === null) {
@@ -1612,7 +1617,10 @@ var Backend =
 				input.value = '';
 			});
 		} else {
+			// Enable the option and update chosen
+			opt.getElement('option[value=' + li.getProperty('data-language') + ']').removeProperty('disabled');
 			li.destroy();
+			opt.fireEvent('liszt:updated');
 		}
 
 		// Remove the tool tip of the delete button

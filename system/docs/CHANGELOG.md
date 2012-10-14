@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Readd a language to the meta editor drop-down if it is deleted (see #4716).
+
+### Fixed
 Add the static JavaScript file before the non-static ones (see #4890).
 
 ### Fixed

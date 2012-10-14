@@ -95,7 +95,7 @@ class MetaWizard extends \Widget
 			foreach ($this->varValue as $lang=>$meta)
 			{
 				$return .= '
-    <li class="'.(($count%2 == 0) ? 'even' : 'odd').'">';
+    <li class="'.(($count%2 == 0) ? 'even' : 'odd').'" data-language="' . $lang . '">';
 
 				$return .= '<span class="lang">' . $languages[$lang] . ' ' . $this->generateImage('delete.gif', '', 'class="tl_metawizard_img" onclick="Backend.metaDelete(this)" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['aw_delete']).'"') . '</span>';
 				$return .= '<label for="ctrl_title_'.$count.'">'.$GLOBALS['TL_LANG']['MSC']['aw_title'].'</label> <input type="text" name="'.$this->strId.'['.$lang.'][title]" id="ctrl_title_'.$count.'" class="tl_text" value="'.specialchars($meta['title']).'"><br>';
