@@ -739,12 +739,12 @@ abstract class System
 		// IPv6
 		if (strpos($strIp, ':') !== false)
 		{
-			return str_replace(strrchr($strIp, ':'), ':0000', $strIp);
+			return substr_replace($strIp, ':0000', strrpos($strIp, ':'));
 		}
 		// IPv4
 		else
 		{
-			return str_replace(strrchr($strIp, '.'), '.0', $strIp);
+			return substr_replace($strIp, '.0', strrpos($strIp, '.'));
 		}
 	}
 

@@ -288,7 +288,7 @@ class Environment
 		$xhost = static::get('httpXForwardedHost');
 		$protocol = static::get('ssl') ? 'https://' : 'http://';
 
-		return $protocol . (!empty($xhost) ? $xhost . '/' : '') . static::get('httpHost');
+		return $protocol . (($xhost != '') ? $xhost . '/' : '') . static::get('httpHost');
 	}
 
 
