@@ -5,6 +5,9 @@ Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly handle external image URLs in the image element (see #4923).
+
+### Fixed
 Fixed the too eager IP address anonymization (see #4924).
 
 ### Fixed
