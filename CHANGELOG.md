@@ -5,6 +5,9 @@ Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Fixed the too eager IP address anonymization (see #4924).
+
+### Fixed
 Fixed the automatic page alias generator (see #4880).
 
 
