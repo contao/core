@@ -308,7 +308,7 @@ class Environment
 		$xhost = $this->httpXForwardedHost;
 		$protocol = $this->ssl ? 'https://' : 'http://';
 
-		return $protocol . (!empty($xhost) ? $xhost . '/' : '') . $this->httpHost;
+		return $protocol . (($xhost != '') ? $xhost . '/' : '') . $this->httpHost;
 	}
 
 
