@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly scale videos (see #4896).
+
+### Fixed
 Readd a language to the meta editor drop-down if it is deleted (see #4716).
 
 ### Fixed

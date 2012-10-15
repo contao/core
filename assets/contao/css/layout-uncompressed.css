@@ -91,17 +91,15 @@ select,input,textarea {
 }
 
 /**
- * Flexible images and videos
+ * Flexible images (videos see #4896)
  *
  * @see http://webdesignerwall.com/tutorials/responsive-design-with-css3-media-queries
  */
-img,embed,object,video {
-	height:auto;
-	max-width:100%;
-}
 img {
-	width:auto\9; /* IE8 */
+	max-width:100%;
+	height:auto;
 	-ms-interpolation-mode:bicubic; /* IE7 */
+	width:auto\9; /* IE8 */
 }
 
 /**
