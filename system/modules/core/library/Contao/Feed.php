@@ -150,7 +150,7 @@ class Feed extends \System
 			$xml .= '<description><![CDATA[' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . ']]></description>';
 			$xml .= '<link>' . specialchars($objItem->link) . '</link>';
 			$xml .= '<pubDate>' . date('r', $objItem->published) . '</pubDate>';
-			$xml .= '<guid>' . ($objItem->guid ? $objItem->guid : specialchars($objItem->link)) . '</guid>';
+			$xml .= '<guid' . ($objItem->guid ? ((strpos($objItem->guid, 'http') !== 0 ? ' isPermaLink="false">' : '') . $objItem->guid) : ('>'.specialchars($objItem->link))) . '</guid>';
 
 			// Enclosures
 			if (is_array($objItem->enclosure))
