@@ -16,15 +16,24 @@
 
 $GLOBALS['TL_LANG']['tl_style_sheet']['name'][0] = 'Navn';
 $GLOBALS['TL_LANG']['tl_style_sheet']['name'][1] = 'Angiv venligst et unikt navn til stilarket.';
+$GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'][0] = 'Integrer billeder op til';
+$GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'][1] = 'Har kan du indtaste den maksimale filstørrelse i bytes hvor billeder vil blive integreret i style sheetet som en data:string. Sæt til 0 for at deaktivere funktionen.';
 $GLOBALS['TL_LANG']['tl_style_sheet']['cc'][0] = 'Betinget kommentar';
 $GLOBALS['TL_LANG']['tl_style_sheet']['cc'][1] = 'Betingede kommentarer lader dig lave et stilark specifikt til Internet Explorer.';
 $GLOBALS['TL_LANG']['tl_style_sheet']['media'][0] = 'Medietyper';
 $GLOBALS['TL_LANG']['tl_style_sheet']['media'][1] = 'Hvis et stilark kan anvendes til flere medietyper kan du begrænse dets anvending ved at vælge en eller flere medietyper.';
+$GLOBALS['TL_LANG']['tl_style_sheet']['mediaQuery'][0] = 'Media query';
+$GLOBALS['TL_LANG']['tl_style_sheet']['mediaQuery'][1] = 'Her kan du definere media typen ved brug af media query som <em>screen and (min-width: 800px)</em>. Media typer defineret herover vil så blive overskrevet.';
+$GLOBALS['TL_LANG']['tl_style_sheet']['vars'][0] = 'Globale variabler';
+$GLOBALS['TL_LANG']['tl_style_sheet']['vars'][1] = 'Her kan du definere globale variabler for style sheetet (f.eks. <em>$red</em> -> <em>c00</em> eller <em>$margin</em> -> <em>12px</em>).';
 $GLOBALS['TL_LANG']['tl_style_sheet']['source'][0] = 'Fil-kilde';
 $GLOBALS['TL_LANG']['tl_style_sheet']['source'][1] = 'Vælg en eller flere filer fra filsystemet.';
 $GLOBALS['TL_LANG']['tl_style_sheet']['tstamp'][0] = 'Revisionsdato';
 $GLOBALS['TL_LANG']['tl_style_sheet']['tstamp'][1] = 'Dato og tid for sidste revision';
 $GLOBALS['TL_LANG']['tl_style_sheet']['title_legend'] = 'Navn og medietyper';
+$GLOBALS['TL_LANG']['tl_style_sheet']['config_legend'] = 'Konfiguration';
+$GLOBALS['TL_LANG']['tl_style_sheet']['media_legend'] = 'Media indstillinger';
+$GLOBALS['TL_LANG']['tl_style_sheet']['vars_legend'] = 'Globale variabler';
 $GLOBALS['TL_LANG']['tl_style_sheet']['css_imported'] = 'Stilarket "%s" er blevet importet.';
 $GLOBALS['TL_LANG']['tl_style_sheet']['css_renamed'] = 'Stilarket "%s" er blevet importet som "%s".';
 $GLOBALS['TL_LANG']['tl_style_sheet']['new'][0] = 'Nyt stilark';

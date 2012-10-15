@@ -56,6 +56,6 @@ $GLOBALS['TL_LANG']['tl_files']['unlock'][1] = 'Verwijder bescherming van map "%
 $GLOBALS['TL_LANG']['tl_files']['move'][0] = 'Bestand uploaden';
 $GLOBALS['TL_LANG']['tl_files']['move'][1] = 'Upload één of meerdere bestanden';
 $GLOBALS['TL_LANG']['tl_files']['pasteinto'][0] = 'Plakken in';
-$GLOBALS['TL_LANG']['tl_files']['pasteinto'][1] = 'Plakken in deze map';
+$GLOBALS['TL_LANG']['tl_files']['pasteinto'][1] = 'Plak in deze map';
 $GLOBALS['TL_LANG']['tl_files']['sync'][0] = 'Synchroniseer';
 $GLOBALS['TL_LANG']['tl_files']['sync'][1] = 'Synchroniseer het systeembestand en de database';

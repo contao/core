@@ -14,13 +14,13 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_comments']['source'][0] = 'Bron';
+$GLOBALS['TL_LANG']['tl_comments']['source'][0] = 'Oorsprong';
 $GLOBALS['TL_LANG']['tl_comments']['source'][1] = 'Bijbehorende tabel.';
 $GLOBALS['TL_LANG']['tl_comments']['parent'][0] = 'Parent ID';
 $GLOBALS['TL_LANG']['tl_comments']['parent'][1] = 'Bijbehorend record.';
 $GLOBALS['TL_LANG']['tl_comments']['date'][0] = 'Datum';
-$GLOBALS['TL_LANG']['tl_comments']['date'][1] = 'Geef de datum van de reactie.';
-$GLOBALS['TL_LANG']['tl_comments']['name'][0] = 'Naam';
+$GLOBALS['TL_LANG']['tl_comments']['date'][1] = 'Geef datum van de reactie op.';
+$GLOBALS['TL_LANG']['tl_comments']['name'][0] = 'Auteur';
 $GLOBALS['TL_LANG']['tl_comments']['name'][1] = 'Geef de naam van de auteur.';
 $GLOBALS['TL_LANG']['tl_comments']['email'][0] = 'E-mailadres';
 $GLOBALS['TL_LANG']['tl_comments']['email'][1] = 'Geef het e-mailadres van de auteur op (wordt niet gepubliceerd).';
@@ -50,7 +50,7 @@ $GLOBALS['TL_LANG']['tl_comments']['tl_content'] = 'Artikel';
 $GLOBALS['TL_LANG']['tl_comments']['tl_page'] = 'Pagina';
 $GLOBALS['TL_LANG']['tl_comments']['tl_news'] = 'Nieuws item';
 $GLOBALS['TL_LANG']['tl_comments']['tl_faq'] = 'FAQ';
-$GLOBALS['TL_LANG']['tl_comments']['tl_calendar_events'] = 'Gebeurtenis';
+$GLOBALS['TL_LANG']['tl_comments']['tl_calendar_events'] = 'Event';
 $GLOBALS['TL_LANG']['tl_comments']['show'][0] = 'Reactie details';
 $GLOBALS['TL_LANG']['tl_comments']['show'][1] = 'Toon details van reactie ID %s';
 $GLOBALS['TL_LANG']['tl_comments']['edit'][0] = 'Bewerk reactie';

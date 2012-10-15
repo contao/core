@@ -15,8 +15,8 @@
  */
 
 $GLOBALS['TL_LANG']['MSC']['cal_events'] = '%d evenement(en)';
-$GLOBALS['TL_LANG']['MSC']['cal_previous'] = '<';
-$GLOBALS['TL_LANG']['MSC']['cal_next'] = '>';
+$GLOBALS['TL_LANG']['MSC']['cal_previous'] = '&lt;';
+$GLOBALS['TL_LANG']['MSC']['cal_next'] = '&gt;';
 $GLOBALS['TL_LANG']['MSC']['cal_emptyDay'] = 'Er zijn geen evenementen op deze dag.';
 $GLOBALS['TL_LANG']['MSC']['cal_emptyWeek'] = 'Er zijn geen evenementen in deze week.';
 $GLOBALS['TL_LANG']['MSC']['cal_emptyMonth'] = 'Er zijn geen evenementen in deze maand.';
