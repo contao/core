@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly add news and event images as RSS feed enclosures (see #4928).
+
+### Fixed
 Correctly scale videos (see #4896).
 
 ### Fixed

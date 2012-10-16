@@ -171,7 +171,12 @@ class News extends \Frontend
 				// Add the article image as enclosure
 				if ($objArticle->addImage)
 				{
-					$objItem->addEnclosure($objArticle->singleSRC);
+					$objFile = \FilesModel::findByPk($objArticle->singleSRC);
+
+					if ($objFile !== null)
+					{
+						$objItem->addEnclosure($objFile->path);
+					}
 				}
 
 				// Enclosures

@@ -407,6 +407,17 @@ class Calendar extends \Frontend
 			'authorName' => $objEvent->authorName
 		);
 
+		// Add the article image as enclosure
+		if ($objEvent->addImage)
+		{
+			$objFile = \FilesModel::findByPk($objEvent->singleSRC);
+
+			if ($objFile !== null)
+			{
+				$arrEvent['enclosure'][] = $objFile->path;
+			}
+		}
+
 		// Enclosures
 		if ($objEvent->addEnclosure)
 		{
