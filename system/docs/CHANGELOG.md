@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.0 (2012-XX-XX)
 --------------------------
 
+### Improved
+Added a hint that selected files can be dragged to re-order them (see #4838). 
+
 ### Fixed
 Correctly add news and event images as RSS feed enclosures (see #4928).
 
