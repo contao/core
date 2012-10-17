@@ -929,18 +929,36 @@ abstract class Controller extends System
 		if($intSrcWidth === null) {
 			$intSrcWidth = $objFile->width - $intSrcX;
 		} else {
-			if($intSrcWidth + $intSrcX > $objFile->width) {
-				$this->log('Image source area width larger than source image width', TL_ERROR);
-				return null;
+			if($intSrcWidth < 0) {
+				
+				// Sourcefile width - y + negative source width
+				$intSrcWidth = $objFile->width - $intSrcX + $intSrcWidth;
+				
+			} else {
+		
+				if($intSrcWidth + $intSrcX > $objFile->width) {
+					$this->log('Image source area width larger than source image width using source image width', TL_ERROR);
+					return $objFile->width - $intSrcX;
+				}
+			
 			}
 		}
 			
 		if($intSrcHeight === null) {
 			$intSrcHeight = $objFile->height - $intSrcY;
 		} else {
-			if($intSrcHeight + $intSrcY > $objFile->height) {
-				$this->log('Image source area height larger than source image height', TL_ERROR);
-				return null;
+			if($intSrcHeight < 0) {
+				
+				// Sourcefile height - y + negative source height
+				$intSrcHeight = $objFile->height - $intSrcY + $intSrcHeight;
+								
+			} else {
+				
+				if($intSrcHeight + $intSrcY > $objFile->height) {
+					$this->log('Image source area height larger than source image height using source image height', TL_ERROR);
+					return $objFile->height - $intSrcY;
+				}
+			
 			}
 		}
 
@@ -1198,10 +1216,10 @@ abstract class Controller extends System
 			return null;
 		}
 
-		echo $intSrcX . ' - ';
-		echo $intSrcY . ' - ';
-		echo $intSrcWidth . ' - ';
-		echo $intSrcHeight . '<br />';
+		//echo $intSrcX . ' - ';
+		//echo $intSrcY . ' - ';
+		//echo $intSrcWidth . ' - ';
+		//echo $intSrcHeight . '<br />';
 		imagecopyresampled($strNewImage, $strSourceImage, $intPositionX, $intPositionY, $intSrcX, $intSrcY, $intWidth, $intHeight, $intSrcWidth, $intSrcHeight);
 
 		// Fallback to PNG if GIF ist not supported
