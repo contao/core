@@ -288,7 +288,7 @@ class Environment
 		$xhost = static::get('httpXForwardedHost');
 		$protocol = static::get('ssl') ? 'https://' : 'http://';
 
-		return $protocol . (!empty($xhost) ? $xhost . '/' : '') . static::get('httpHost');
+		return $protocol . (($xhost != '') ? $xhost . '/' : '') . static::get('httpHost');
 	}
 
 
@@ -529,7 +529,7 @@ class Environment
 	 */
 	public static function getInstance()
 	{
-		if (!is_object(static::$objInstance))
+		if (static::$objInstance === null)
 		{
 			static::$objInstance = new static();
 		}

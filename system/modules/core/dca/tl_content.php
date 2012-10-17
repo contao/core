@@ -396,7 +396,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'mooType' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['mooType'],
-			'default'                 => 'start',
+			'default'                 => 'mooStart',
 			'exclude'                 => true,
 			'inputType'               => 'radio',
 			'options'                 => array('mooStart', 'mooStop', 'mooSingle'),
@@ -814,7 +814,7 @@ class tl_content extends Backend
 		foreach ($this->User->pagemounts as $root)
 		{
 			$pagemounts[] = $root;
-			$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page'));
+			$pagemounts = array_merge($pagemounts, $this->Database->getChildRecords($root, 'tl_page'));
 		}
 
 		$pagemounts = array_unique($pagemounts);
@@ -900,7 +900,7 @@ class tl_content extends Backend
 		// Invalid ID
 		if ($objPage->numRows < 1)
 		{
-			$this->log('Invalid article content element ID ' . $id, 'tl_article checkAccessToElement()', TL_ERROR);
+			$this->log('Invalid content element ID ' . $id, 'tl_article checkAccessToElement()', TL_ERROR);
 			return false;
 		}
 
@@ -1016,7 +1016,7 @@ class tl_content extends Backend
 			foreach ($this->User->pagemounts as $id)
 			{
 				$arrPids[] = $id;
-				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+				$arrPids = array_merge($arrPids, $this->Database->getChildRecords($id, 'tl_page'));
 			}
 
 			if (empty($arrPids))
@@ -1073,7 +1073,7 @@ class tl_content extends Backend
 			foreach ($this->User->pagemounts as $id)
 			{
 				$arrPids[] = $id;
-				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+				$arrPids = array_merge($arrPids, $this->Database->getChildRecords($id, 'tl_page'));
 			}
 
 			if (empty($arrPids))
@@ -1196,28 +1196,32 @@ class tl_content extends Backend
 	 */
 	public function getGalleryTemplates(DataContainer $dc)
 	{
-		$intPid = $dc->activeRecord->pid;
-
-		// Override multiple
-		if (Input::get('act') == 'overrideAll')
+		// Only look for a theme in the articles module (see #4808)
+		if (Input::get('do') == 'article')
 		{
-			$intPid = Input::get('id');
-		}
+			$intPid = $dc->activeRecord->pid;
 
-		// Get the page ID
-		$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
-									 ->limit(1)
-									 ->execute($intPid);
+			// Override multiple
+			if (Input::get('act') == 'overrideAll')
+			{
+				$intPid = Input::get('id');
+			}
 
-		// Inherit the page settings
-		$objPage = $this->getPageDetails($objArticle->pid);
+			// Get the page ID
+			$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
+										 ->limit(1)
+										 ->execute($intPid);
 
-		// Get the theme ID
-		$objLayout = LayoutModel::findByPk($objPage->layout);
+			// Inherit the page settings
+			$objPage = $this->getPageDetails($objArticle->pid);
 
-		if ($objLayout === null)
-		{
-			return array();
+			// Get the theme ID
+			$objLayout = LayoutModel::findByPk($objPage->layout);
+
+			if ($objLayout === null)
+			{
+				return array();
+			}
 		}
 
 		// Return all gallery templates
@@ -1232,28 +1236,32 @@ class tl_content extends Backend
 	 */
 	public function getPlayerTemplates(DataContainer $dc)
 	{
-		$intPid = $dc->activeRecord->pid;
-
-		// Override multiple
-		if (Input::get('act') == 'overrideAll')
+		// Only look for a theme in the articles module (see #4808)
+		if (Input::get('do') == 'article')
 		{
-			$intPid = Input::get('id');
-		}
+			$intPid = $dc->activeRecord->pid;
 
-		// Get the page ID
-		$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
-									 ->limit(1)
-									 ->execute($intPid);
+			// Override multiple
+			if (Input::get('act') == 'overrideAll')
+			{
+				$intPid = Input::get('id');
+			}
 
-		// Inherit the page settings
-		$objPage = $this->getPageDetails($objArticle->pid);
+			// Get the page ID
+			$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
+										 ->limit(1)
+										 ->execute($intPid);
 
-		// Get the theme ID
-		$objLayout = LayoutModel::findByPk($objPage->layout);
+			// Inherit the page settings
+			$objPage = $this->getPageDetails($objArticle->pid);
 
-		if ($objLayout === null)
-		{
-			return array();
+			// Get the theme ID
+			$objLayout = LayoutModel::findByPk($objPage->layout);
+
+			if ($objLayout === null)
+			{
+				return array();
+			}
 		}
 
 		// Return all gallery templates
@@ -1297,7 +1305,7 @@ class tl_content extends Backend
 		if ($objPage->numRows)
 		{
 			$objPage = $this->getPageDetails($objPage->pid);
-			$arrRoot = $this->getChildRecords($objPage->rootId, 'tl_page');
+			$arrRoot = $this->Database->getChildRecords($objPage->rootId, 'tl_page');
 			array_unshift($arrRoot, $objPage->rootId);
 		}
 
@@ -1316,7 +1324,7 @@ class tl_content extends Backend
 				}
 
 				$arrPids[] = $id;
-				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+				$arrPids = array_merge($arrPids, $this->Database->getChildRecords($id, 'tl_page'));
 			}
 
 			if (empty($arrPids))
@@ -1423,7 +1431,7 @@ class tl_content extends Backend
 	 */
 	public function pagePicker(DataContainer $dc)
 	{
-		return ' <a href="contao/page.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="contao/page.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MOD']['page'][0]).'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
@@ -1492,7 +1500,19 @@ class tl_content extends Backend
 		// Check permissions to edit
 		Input::setGet('id', $intId);
 		Input::setGet('act', 'toggle');
-		$this->checkPermission();
+
+		// The onload_callbacks vary depending on the dynamic parent table (see #4894)
+		if (is_array($GLOBALS['TL_DCA']['tl_content']['config']['onload_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$this->$callback[0]->$callback[1]($this);
+				}
+			}
+		}
 
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_content::invisible', 'alexf'))

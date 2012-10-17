@@ -131,7 +131,7 @@ class FrontendTemplate extends \Template
 		$intCache = null;
 
 		// Cache the page if it is not protected
-		if (empty($_POST) && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && !$_SESSION['DISABLE_CACHE'] && !isset($_SESSION['LOGIN_ERROR']) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'server') && intval($objPage->cache) > 0 && !$objPage->protected)
+		if (!isset($_GET['file']) && empty($_POST) && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && !$_SESSION['DISABLE_CACHE'] && !isset($_SESSION['LOGIN_ERROR']) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'server') && intval($objPage->cache) > 0 && !$objPage->protected)
 		{
 			// If the request string is empty, use a special cache tag which considers the page language
 			if (\Environment::get('request') == '' || \Environment::get('request') == 'index.php')
@@ -160,7 +160,7 @@ class FrontendTemplate extends \Template
 			}
 
 			// Replace insert tags for caching
-			$strBuffer = $this->replaceInsertTags($strBuffer, true);
+			$strBuffer = $this->replaceInsertTags($strBuffer);
 			$strBuffer = $this->replaceDynamicScriptTags($strBuffer); // see #4203
 
 			$intCache = intval($objPage->cache) + time();
@@ -212,7 +212,7 @@ class FrontendTemplate extends \Template
 		}
 
 		// Replace insert tags and then re-replace the request_token tag in case a form element has been loaded via insert tag
-		$this->strBuffer = $this->replaceInsertTags($strBuffer);
+		$this->strBuffer = $this->replaceInsertTags($strBuffer, false);
 		$this->strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $this->strBuffer);
 		$this->strBuffer = $this->replaceDynamicScriptTags($this->strBuffer); // see #4203
 

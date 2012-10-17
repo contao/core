@@ -1,0 +1,368 @@
+[main]
+host = https://www.transifex.com
+type = XLIFF
+
+[contao.calendar-default]
+source_file = .tx/source/en/calendar/default.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/calendar/default.xlf
+
+[contao.calendar-modules]
+source_file = .tx/source/en/calendar/modules.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/calendar/modules.xlf
+
+[contao.calendar-tl_calendar]
+source_file = .tx/source/en/calendar/tl_calendar.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/calendar/tl_calendar.xlf
+
+[contao.calendar-tl_calendar_events]
+source_file = .tx/source/en/calendar/tl_calendar_events.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/calendar/tl_calendar_events.xlf
+
+[contao.calendar-tl_calendar_feed]
+source_file = .tx/source/en/calendar/tl_calendar_feed.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/calendar/tl_calendar_feed.xlf
+
+[contao.calendar-tl_module]
+source_file = .tx/source/en/calendar/tl_module.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/calendar/tl_module.xlf
+
+[contao.calendar-tl_user]
+source_file = .tx/source/en/calendar/tl_user.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/calendar/tl_user.xlf
+
+[contao.calendar-tl_user_group]
+source_file = .tx/source/en/calendar/tl_user_group.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/calendar/tl_user_group.xlf
+
+[contao.comments-default]
+source_file = .tx/source/en/comments/default.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/comments/default.xlf
+
+[contao.comments-modules]
+source_file = .tx/source/en/comments/modules.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/comments/modules.xlf
+
+[contao.comments-tl_comments]
+source_file = .tx/source/en/comments/tl_comments.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/comments/tl_comments.xlf
+
+[contao.comments-tl_content]
+source_file = .tx/source/en/comments/tl_content.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/comments/tl_content.xlf
+
+[contao.comments-tl_module]
+source_file = .tx/source/en/comments/tl_module.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/comments/tl_module.xlf
+
+[contao.core-countries]
+source_file = .tx/source/en/core/countries.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/countries.xlf
+
+[contao.core-default]
+source_file = .tx/source/en/core/default.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/default.xlf
+
+[contao.core-explain]
+source_file = .tx/source/en/core/explain.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/explain.xlf
+
+[contao.core-languages]
+source_file = .tx/source/en/core/languages.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/languages.xlf
+
+[contao.core-modules]
+source_file = .tx/source/en/core/modules.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/modules.xlf
+
+[contao.core-tl_article]
+source_file = .tx/source/en/core/tl_article.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_article.xlf
+
+[contao.core-tl_content]
+source_file = .tx/source/en/core/tl_content.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_content.xlf
+
+[contao.core-tl_files]
+source_file = .tx/source/en/core/tl_files.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_files.xlf
+
+[contao.core-tl_form]
+source_file = .tx/source/en/core/tl_form.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_form.xlf
+
+[contao.core-tl_form_field]
+source_file = .tx/source/en/core/tl_form_field.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_form_field.xlf
+
+[contao.core-tl_install]
+source_file = .tx/source/en/core/tl_install.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_install.xlf
+
+[contao.core-tl_layout]
+source_file = .tx/source/en/core/tl_layout.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_layout.xlf
+
+[contao.core-tl_log]
+source_file = .tx/source/en/core/tl_log.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_log.xlf
+
+[contao.core-tl_maintenance]
+source_file = .tx/source/en/core/tl_maintenance.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_maintenance.xlf
+
+[contao.core-tl_member]
+source_file = .tx/source/en/core/tl_member.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_member.xlf
+
+[contao.core-tl_member_group]
+source_file = .tx/source/en/core/tl_member_group.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_member_group.xlf
+
+[contao.core-tl_module]
+source_file = .tx/source/en/core/tl_module.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_module.xlf
+
+[contao.core-tl_page]
+source_file = .tx/source/en/core/tl_page.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_page.xlf
+
+[contao.core-tl_settings]
+source_file = .tx/source/en/core/tl_settings.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_settings.xlf
+
+[contao.core-tl_style]
+source_file = .tx/source/en/core/tl_style.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_style.xlf
+
+[contao.core-tl_style_sheet]
+source_file = .tx/source/en/core/tl_style_sheet.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_style_sheet.xlf
+
+[contao.core-tl_templates]
+source_file = .tx/source/en/core/tl_templates.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_templates.xlf
+
+[contao.core-tl_theme]
+source_file = .tx/source/en/core/tl_theme.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_theme.xlf
+
+[contao.core-tl_undo]
+source_file = .tx/source/en/core/tl_undo.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_undo.xlf
+
+[contao.core-tl_user]
+source_file = .tx/source/en/core/tl_user.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_user.xlf
+
+[contao.core-tl_user_group]
+source_file = .tx/source/en/core/tl_user_group.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/core/tl_user_group.xlf
+
+[contao.devtools-modules]
+source_file = .tx/source/en/devtools/modules.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/devtools/modules.xlf
+
+[contao.devtools-tl_autoload]
+source_file = .tx/source/en/devtools/tl_autoload.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/devtools/tl_autoload.xlf
+
+[contao.devtools-tl_extension]
+source_file = .tx/source/en/devtools/tl_extension.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/devtools/tl_extension.xlf
+
+[contao.devtools-tl_labels]
+source_file = .tx/source/en/devtools/tl_labels.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/devtools/tl_labels.xlf
+
+[contao.faq-default]
+source_file = .tx/source/en/faq/default.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/faq/default.xlf
+
+[contao.faq-modules]
+source_file = .tx/source/en/faq/modules.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/faq/modules.xlf
+
+[contao.faq-tl_faq]
+source_file = .tx/source/en/faq/tl_faq.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/faq/tl_faq.xlf
+
+[contao.faq-tl_faq_category]
+source_file = .tx/source/en/faq/tl_faq_category.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/faq/tl_faq_category.xlf
+
+[contao.faq-tl_module]
+source_file = .tx/source/en/faq/tl_module.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/faq/tl_module.xlf
+
+[contao.faq-tl_user]
+source_file = .tx/source/en/faq/tl_user.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/faq/tl_user.xlf
+
+[contao.faq-tl_user_group]
+source_file = .tx/source/en/faq/tl_user_group.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/faq/tl_user_group.xlf
+
+[contao.listing-modules]
+source_file = .tx/source/en/listing/modules.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/listing/modules.xlf
+
+[contao.listing-tl_module]
+source_file = .tx/source/en/listing/tl_module.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/listing/tl_module.xlf
+
+[contao.news-default]
+source_file = .tx/source/en/news/default.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/news/default.xlf
+
+[contao.news-modules]
+source_file = .tx/source/en/news/modules.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/news/modules.xlf
+
+[contao.news-tl_module]
+source_file = .tx/source/en/news/tl_module.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/news/tl_module.xlf
+
+[contao.news-tl_news]
+source_file = .tx/source/en/news/tl_news.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/news/tl_news.xlf
+
+[contao.news-tl_news_archive]
+source_file = .tx/source/en/news/tl_news_archive.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/news/tl_news_archive.xlf
+
+[contao.news-tl_news_comments]
+source_file = .tx/source/en/news/tl_news_comments.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/news/tl_news_comments.xlf
+
+[contao.news-tl_news_feed]
+source_file = .tx/source/en/news/tl_news_feed.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/news/tl_news_feed.xlf
+
+[contao.news-tl_user]
+source_file = .tx/source/en/news/tl_user.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/news/tl_user.xlf
+
+[contao.news-tl_user_group]
+source_file = .tx/source/en/news/tl_user_group.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/news/tl_user_group.xlf
+
+[contao.newsletter-default]
+source_file = .tx/source/en/newsletter/default.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/newsletter/default.xlf
+
+[contao.newsletter-modules]
+source_file = .tx/source/en/newsletter/modules.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/newsletter/modules.xlf
+
+[contao.newsletter-tl_member]
+source_file = .tx/source/en/newsletter/tl_member.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/newsletter/tl_member.xlf
+
+[contao.newsletter-tl_module]
+source_file = .tx/source/en/newsletter/tl_module.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/newsletter/tl_module.xlf
+
+[contao.newsletter-tl_newsletter]
+source_file = .tx/source/en/newsletter/tl_newsletter.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/newsletter/tl_newsletter.xlf
+
+[contao.newsletter-tl_newsletter_channel]
+source_file = .tx/source/en/newsletter/tl_newsletter_channel.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/newsletter/tl_newsletter_channel.xlf
+
+[contao.newsletter-tl_newsletter_recipients]
+source_file = .tx/source/en/newsletter/tl_newsletter_recipients.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/newsletter/tl_newsletter_recipients.xlf
+
+[contao.newsletter-tl_user]
+source_file = .tx/source/en/newsletter/tl_user.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/newsletter/tl_user.xlf
+
+[contao.newsletter-tl_user_group]
+source_file = .tx/source/en/newsletter/tl_user_group.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/newsletter/tl_user_group.xlf
+
+[contao.repository-modules]
+source_file = .tx/source/en/repository/modules.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/repository/modules.xlf
+
+[contao.repository-tl_repository]
+source_file = .tx/source/en/repository/tl_repository.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/repository/tl_repository.xlf
+
+[contao.repository-tl_settings]
+source_file = .tx/source/en/repository/tl_settings.xlf
+source_lang = en
+file_filter = .tx/source/<lang>/repository/tl_settings.xlf

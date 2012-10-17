@@ -54,9 +54,10 @@ class ModuleCustomnav extends \Module
 			return $objTemplate->parse();
 		}
 
-		$this->pages = deserialize($this->pages);
+		// Always return an array (see #4616)
+		$this->pages = deserialize($this->pages, true);
 
-		if (!is_array($this->pages) || $this->pages[0] == '')
+		if (empty($this->pages) || $this->pages[0] == '')
 		{
 			return '';
 		}

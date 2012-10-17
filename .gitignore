@@ -11,6 +11,7 @@ Thumbs.db
 nbproject/
 
 # Contao
+.tx/source
 /.htaccess
 /*.xml
 contao/update.phar.php

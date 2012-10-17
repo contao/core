@@ -93,11 +93,11 @@ class Comments extends \Frontend
 		// Get all published comments
 		if ($limit)
 		{
-			$objComments = \CommentsModel::findPublishedBySourceAndParent($strSource, $intParent, $limit, $offset);
+			$objComments = \CommentsModel::findPublishedBySourceAndParent($strSource, $intParent, ($objConfig->order == 'descending'), $limit, $offset);
 		}
 		else
 		{
-			$objComments = \CommentsModel::findPublishedBySourceAndParent($strSource, $intParent);
+			$objComments = \CommentsModel::findPublishedBySourceAndParent($strSource, $intParent, ($objConfig->order == 'descending'));
 		}
 
 		// Parse the comments
@@ -269,7 +269,7 @@ class Comments extends \Frontend
 			$strClass = $GLOBALS['TL_FFL'][$arrField['inputType']];
 
 			// Continue if the class is not defined
-			if (!$this->classFileExists($strClass))
+			if (!class_exists($strClass))
 			{
 				continue;
 			}

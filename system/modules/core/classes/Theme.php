@@ -38,7 +38,7 @@ class Theme extends \Backend
 		$class = $this->User->uploader;
 
 		// See #4086
-		if (!$this->classFileExists($class))
+		if (!class_exists($class))
 		{
 			$class = 'FileUpload';
 		}
@@ -707,6 +707,12 @@ class Theme extends \Backend
 						{
 							unset($set[$k]);
 						}
+					}
+
+					// Create the templates folder even if it is empty (see #4793)
+					if ($table == 'tl_theme' && isset($set['templates']) && strncmp($set['templates'], 'templates/', 10) === 0 && !is_dir(TL_ROOT . '/' . $set['templates']))
+					{
+						new \Folder($set['templates']);
 					}
 
 					// Update the datatbase

@@ -241,7 +241,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		// Store the current referer
-		if (!empty($this->ctable) && !\Input::get('act') && !\Input::get('key') && !\Input::get('token'))
+		if (!empty($this->ctable) && !\Input::get('act') && !\Input::get('key') && !\Input::get('token') && \Environment::get('script') == 'contao/main.php')
 		{
 			$session = $this->Session->get('referer');
 			$session[$this->strTable] = \Environment::get('requestUri');
@@ -688,7 +688,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Avoid circular references when there is no parent table
 		if ($this->Database->fieldExists('pid', $this->strTable) && !strlen($this->ptable))
 		{
-			$cr = $this->getChildRecords($this->intId, $this->strTable);
+			$cr = $this->Database->getChildRecords($this->intId, $this->strTable);
 			$cr[] = $this->intId;
 		}
 
@@ -1299,7 +1299,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$this->redirect($this->getReferer());
 		}
 
-		$data = array();
 		$delete = array();
 
 		// Do not save records from tl_undo itself
@@ -1315,7 +1314,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// If there is a PID field but no parent table
 		if ($this->Database->fieldExists('pid', $this->strTable) && !strlen($this->ptable))
 		{
-			$delete[$this->strTable] = $this->getChildRecords($this->intId, $this->strTable);
+			$delete[$this->strTable] = $this->Database->getChildRecords($this->intId, $this->strTable);
 			array_unshift($delete[$this->strTable], $this->intId);
 		}
 		else
@@ -1333,6 +1332,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		$affected = 0;
+		$data = array();
 
 		// Save each record of each table
 		foreach ($delete as $table=>$fields)
@@ -1453,8 +1453,17 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$this->loadDataContainer($v);
 			$cctable[$v] = $GLOBALS['TL_DCA'][$v]['config']['ctable'];
 
-			$objDelete = $this->Database->prepare("SELECT id FROM " . $v . " WHERE pid=?")
-										->execute($id);
+			// Consider the dynamic parent table (see #4867)
+			if ($GLOBALS['TL_DCA'][$v]['config']['dynamicPtable'])
+			{
+				$objDelete = $this->Database->prepare("SELECT id FROM " . $v . " WHERE pid=? AND ptable=?")
+											->execute($id, $GLOBALS['TL_DCA'][$v]['config']['ptable']);
+			}
+			else
+			{
+				$objDelete = $this->Database->prepare("SELECT id FROM " . $v . " WHERE pid=?")
+											->execute($id);
+			}
 
 			if (!$GLOBALS['TL_DCA'][$v]['config']['doNotDeleteRecords'] && strlen($v) && $objDelete->numRows)
 			{
@@ -2641,28 +2650,18 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Make sure unique fields are unique
-		if ($varValue != '' && $arrData['eval']['unique'])
+		if ($arrData['eval']['unique'] && $varValue != '' && !$this->Database->isUniqueValue($this->strTable, $this->strField, $varValue, $this->objActiveRecord->id))
 		{
-			$objUnique = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . $this->strField . "=? AND id!=?")
-										->execute($varValue, $this->intId);
-
-			if ($objUnique->numRows)
-			{
-				throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $arrData['label'][0] ?: $this->strField));
-			}
+			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $arrData['label'][0] ?: $this->strField));
 		}
 
 		// Handle multi-select fields in "override all" mode
 		if (\Input::get('act') == 'overrideAll' && ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard') && $arrData['eval']['multiple'])
 		{
-			$objCurrent = $this->Database->prepare("SELECT " . $this->strField . " FROM " . $this->strTable . " WHERE id=?")
-										 ->limit(1)
-										 ->execute($this->intId);
-
-			if ($objCurrent->numRows > 0)
+			if ($this->objActiveRecord !== null)
 			{
 				$new = deserialize($varValue, true);
-				$old = deserialize($objCurrent->{$this->strField}, true);
+				$old = deserialize($this->objActiveRecord->{$this->strField}, true);
 
 				switch (\Input::post($this->strInputName . '_update'))
 				{
@@ -3063,7 +3062,7 @@ window.addEvent(\'domready\', function() {
 
 					while ($objRoot->next())
 					{
-						if (count(array_intersect($this->root, $this->getParentRecords($objRoot->$for, $table))) > 0)
+						if (count(array_intersect($this->root, $this->Database->getParentRecords($objRoot->$for, $table))) > 0)
 						{
 							$arrRoot[] = $objRoot->$for;
 						}
@@ -3237,7 +3236,7 @@ window.addEvent(\'domready\', function() {
 
 		for ($i=0; $i<count($arrIds); $i++)
 		{
-			$return .= ' ' . trim($this->generateTree($table, $arrIds[$i], array('p'=>$arrIds[($i-1)], 'n'=>$arrIds[($i+1)]), $hasSorting, $margin, ($blnClipboard ? $arrClipboard : false), ($id == $arrClipboard ['id'] || (is_array($arrClipboard ['id']) && in_array($id, $arrClipboard ['id'])) || (!$blnPtable && !is_array($arrClipboard['id']) && in_array($id, $this->getChildRecords($arrClipboard['id'], $table)))), $blnProtected));
+			$return .= ' ' . trim($this->generateTree($table, $arrIds[$i], array('p'=>$arrIds[($i-1)], 'n'=>$arrIds[($i+1)]), $hasSorting, $margin, ($blnClipboard ? $arrClipboard : false), ($id == $arrClipboard ['id'] || (is_array($arrClipboard ['id']) && in_array($id, $arrClipboard ['id'])) || (!$blnPtable && !is_array($arrClipboard['id']) && in_array($id, $this->Database->getChildRecords($arrClipboard['id'], $table)))), $blnProtected));
 		}
 
 		return $return;
@@ -3520,8 +3519,8 @@ window.addEvent(\'domready\', function() {
 		$this->loadDataContainer($this->ptable);
 
 		$return = '
-<div id="tl_buttons">'.(!$blnClipboard ? '
-<a href="'.$this->getReferer(true, $this->ptable).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a> ' . ((\Input::get('act') != 'select') ? (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? '
+<div id="tl_buttons">
+<a href="'.$this->getReferer(true, $this->ptable).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a> ' . (!$blnClipboard ? ((\Input::get('act') != 'select') ? (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? '
 <a href="'.$this->addToUrl(($blnHasSorting ? 'act=paste&amp;mode=create' : 'act=create&amp;mode=2&amp;pid='.$this->intId)).'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['new'][1]).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['new'][0].'</a> ' : '') . $this->generateGlobalButtons() : '') : '<a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="x">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a> ') . '
 </div>' . \Message::generate(true);
 
@@ -3557,11 +3556,12 @@ window.addEvent(\'domready\', function() {
 			$imagePasteNew = $this->generateImage('new.gif', $GLOBALS['TL_LANG'][$this->strTable]['pastenew'][0]);
 			$imagePasteAfter = $this->generateImage('pasteafter.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]);
 			$imageEditHeader = $this->generateImage('edit.gif', $GLOBALS['TL_LANG'][$this->strTable]['editheader'][0]);
+			$strEditHeader = ($this->ptable != '') ? $GLOBALS['TL_LANG'][$this->ptable]['edit'][0] : $GLOBALS['TL_LANG'][$this->strTable]['editheader'][1];
 
 			$return .= '
 <div class="tl_content_right">'.((\Input::get('act') == 'select') ? '
 <label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox">' : (!$GLOBALS['TL_DCA'][$this->ptable]['config']['notEditable'] ? '
-<a href="'.preg_replace('/&(amp;)?table=[^& ]*/i', (($this->ptable != '') ? '&amp;table='.$this->ptable : ''), $this->addToUrl('act=edit')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['editheader'][1]).'">'.$imageEditHeader.'</a>' : '') . (($blnHasSorting && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed']) ? ' <a href="'.$this->addToUrl('act=create&amp;mode=2&amp;pid='.$objParent->id.'&amp;id='.$this->intId).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][0]).'">'.$imagePasteNew.'</a>' : '') . ($blnClipboard ? ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$objParent->id . (!$blnMultiboard ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a>' : '')) . '
+<a href="'.preg_replace('/&(amp;)?table=[^& ]*/i', (($this->ptable != '') ? '&amp;table='.$this->ptable : ''), $this->addToUrl('act=edit')).'" title="'.specialchars($strEditHeader).'">'.$imageEditHeader.'</a>' : '') . (($blnHasSorting && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed']) ? ' <a href="'.$this->addToUrl('act=create&amp;mode=2&amp;pid='.$objParent->id.'&amp;id='.$this->intId).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][0]).'">'.$imagePasteNew.'</a>' : '') . ($blnClipboard ? ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$objParent->id . (!$blnMultiboard ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a>' : '')) . '
 </div>';
 
 			// Format header fields

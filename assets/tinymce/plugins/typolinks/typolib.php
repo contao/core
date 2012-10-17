@@ -44,9 +44,19 @@ class typolib extends Backend
 	 */
 	public function createImageList()
 	{
+		$arrExempt = array();
+
+		// Do not show folders which are exempt from synchronisation (see #4522)
+		if ($GLOBALS['TL_CONFIG']['fileSyncExclude'] != '')
+		{
+			$arrExempt = array_map(function($e) {
+				return $GLOBALS['TL_CONFIG']['uploadPath'] . '/' . $e;
+			}, trimsplit(',', $GLOBALS['TL_CONFIG']['fileSyncExclude']));
+		}
+
 		if ($this->User->isAdmin)
 		{
-			return $this->doCreateImageList($GLOBALS['TL_CONFIG']['uploadPath']);
+			return $this->doCreateImageList($GLOBALS['TL_CONFIG']['uploadPath'], -1, $arrExempt);
 		}
 
 		$return = '';
@@ -61,7 +71,7 @@ class typolib extends Backend
 			}
 
 			$processed[] = $path;
-			$return .= $this->doCreateImageList($path);
+			$return .= $this->doCreateImageList($path, -1, $arrExempt);
 		}
 
 		return $return;
@@ -72,10 +82,17 @@ class typolib extends Backend
 	 * Recursively get all allowed images and return them as string
 	 * @param integer
 	 * @param integer
+	 * @param array
 	 * @return string
 	 */
-	public function doCreateImageList($strFolder=null, $level=-1)
+	public function doCreateImageList($strFolder=null, $level=-1, $arrExempt=array())
 	{
+		// Exempt folders (see #4522)
+		if (in_array($strFolder, $arrExempt))
+		{
+			return '';
+		}
+
 		$arrPages = scan(TL_ROOT . '/' . $strFolder);
 
 		// Empty folder
@@ -102,10 +119,16 @@ class typolib extends Backend
 				continue;
 			}
 
+			// Exempt folders (see #4522)
+			if (in_array($strFolder . '/' . $strFile, $arrExempt))
+			{
+				continue;
+			}
+
 			// Folders
 			if (is_dir(TL_ROOT . '/' . $strFolder . '/' . $strFile))
 			{
-				$strFolders .= $this->doCreateImageList($strFolder . '/' . $strFile, $level);
+				$strFolders .= $this->doCreateImageList($strFolder . '/' . $strFile, $level, $arrExempt);
 			}
 
 			// Files

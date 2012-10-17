@@ -650,7 +650,7 @@ class tl_calendar_events extends Backend
 		if (!strlen($varValue))
 		{
 			$autoAlias = true;
-			$varValue = standardize($this->restoreBasicEntities($dc->activeRecord->title));
+			$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->title));
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_calendar_events WHERE alias=?")
@@ -765,7 +765,7 @@ class tl_calendar_events extends Backend
 			foreach ($this->User->pagemounts as $id)
 			{
 				$arrPids[] = $id;
-				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+				$arrPids = array_merge($arrPids, $this->Database->getChildRecords($id, 'tl_page'));
 			}
 
 			if (empty($arrPids))
@@ -841,15 +841,24 @@ class tl_calendar_events extends Backend
 
 		$arrSet['repeatEnd'] = 0;
 
+		// Recurring events
 		if ($dc->activeRecord->recurring)
 		{
-			$arrRange = deserialize($dc->activeRecord->repeatEach);
+			// Unlimited recurrences end on 2038-01-01 00:00:00 (see #4862)
+			if ($dc->activeRecord->recurrences == 0)
+			{
+				$arrSet['repeatEnd'] = 2145913200;
+			}
+			else
+			{
+				$arrRange = deserialize($dc->activeRecord->repeatEach);
 
-			$arg = $arrRange['value'] * $dc->activeRecord->recurrences;
-			$unit = $arrRange['unit'];
+				$arg = $arrRange['value'] * $dc->activeRecord->recurrences;
+				$unit = $arrRange['unit'];
 
-			$strtotime = '+ ' . $arg . ' ' . $unit;
-			$arrSet['repeatEnd'] = strtotime($strtotime, $arrSet['endTime']);
+				$strtotime = '+ ' . $arg . ' ' . $unit;
+				$arrSet['repeatEnd'] = strtotime($strtotime, $arrSet['endTime']);
+			}
 		}
 
 		$this->Database->prepare("UPDATE tl_calendar_events %s WHERE id=?")->set($arrSet)->execute($dc->id);
@@ -909,7 +918,7 @@ class tl_calendar_events extends Backend
 	 */
 	public function pagePicker(DataContainer $dc)
 	{
-		return ' <a href="contao/page.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="contao/page.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MOD']['page'][0]).'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 

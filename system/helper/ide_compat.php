@@ -18,7 +18,7 @@
  */
 
 // calendar
-namespace {
+namespace  {
 	class Calendar extends Contao\Calendar {}
 	abstract class Events extends Contao\Events {}
 	class CalendarEventsModel extends Contao\CalendarEventsModel {}
@@ -31,7 +31,7 @@ namespace {
 }
 
 // comments
-namespace {
+namespace  {
 	class Comments extends Contao\Comments {}
 	class ContentComments extends Contao\ContentComments {}
 	class CommentsModel extends Contao\CommentsModel {}
@@ -40,7 +40,7 @@ namespace {
 }
 
 // core
-namespace {
+namespace  {
 	class Ajax extends Contao\Ajax {}
 	class Automator extends Contao\Automator {}
 	abstract class Backend extends Contao\Backend {}
@@ -203,7 +203,7 @@ namespace {
 	class TrblField extends Contao\TrblField {}
 	class Upload extends Contao\Upload {}
 }
-namespace Database{
+namespace Database {
 	class Installer extends Contao\Database\Installer {}
 	class Mysql extends Contao\Database\Mysql {}
 	class Mysqli extends Contao\Database\Mysqli {}
@@ -211,32 +211,32 @@ namespace Database{
 	abstract class Statement extends Contao\Database\Statement {}
 	class Updater extends Contao\Database\Updater {}
 }
-namespace Database\Mysql{
+namespace Database\Mysql {
 	class Result extends Contao\Database\Mysql\Result {}
 	class Statement extends Contao\Database\Mysql\Statement {}
 }
-namespace Database\Mysqli{
+namespace Database\Mysqli {
 	class Result extends Contao\Database\Mysqli\Result {}
 	class Statement extends Contao\Database\Mysqli\Statement {}
 }
-namespace Files{
+namespace Files {
 	class Ftp extends Contao\Files\Ftp {}
 	class Php extends Contao\Files\Php {}
 }
-namespace Model{
+namespace Model {
 	class Collection extends Contao\Model\Collection {}
 	class QueryBuilder extends Contao\Model\QueryBuilder {}
 }
 
 // devtools
-namespace {
+namespace  {
 	class ModuleAutoload extends Contao\ModuleAutoload {}
 	class ModuleExtension extends Contao\ModuleExtension {}
 	class ModuleLabels extends Contao\ModuleLabels {}
 }
 
 // faq
-namespace {
+namespace  {
 	class FaqCategoryModel extends Contao\FaqCategoryModel {}
 	class FaqModel extends Contao\FaqModel {}
 	class ModuleFaq extends Contao\ModuleFaq {}
@@ -246,12 +246,12 @@ namespace {
 }
 
 // listing
-namespace {
+namespace  {
 	class ModuleListing extends Contao\ModuleListing {}
 }
 
 // news
-namespace {
+namespace  {
 	class News extends Contao\News {}
 	class NewsArchiveModel extends Contao\NewsArchiveModel {}
 	class NewsFeedModel extends Contao\NewsFeedModel {}
@@ -264,7 +264,7 @@ namespace {
 }
 
 // newsletter
-namespace {
+namespace  {
 	class Newsletter extends Contao\Newsletter {}
 	class NewsletterChannelModel extends Contao\NewsletterChannelModel {}
 	class NewsletterModel extends Contao\NewsletterModel {}

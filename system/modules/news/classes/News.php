@@ -65,7 +65,9 @@ class News extends \Frontend
 	 */
 	public function generateFeeds()
 	{
-		$this->removeOldFeeds();
+		$this->import('Automator');
+		$this->Automator->purgeXmlFiles();
+
 		$objFeed = \NewsFeedModel::findAll();
 
 		if ($objFeed !== null)
@@ -123,6 +125,12 @@ class News extends \Frontend
 			{
 				$jumpTo = $objArticle->getRelated('pid')->jumpTo;
 
+				// No jumpTo page set (see #4784)
+				if (!$jumpTo)
+				{
+					continue;
+				}
+
 				// Get the jumpTo URL
 				if (!isset($arrUrls[$jumpTo]))
 				{
@@ -163,22 +171,26 @@ class News extends \Frontend
 				// Add the article image as enclosure
 				if ($objArticle->addImage)
 				{
-					$objItem->addEnclosure($objArticle->singleSRC);
+					$objFile = \FilesModel::findByPk($objArticle->singleSRC);
+
+					if ($objFile !== null)
+					{
+						$objItem->addEnclosure($objFile->path);
+					}
 				}
 
-				// Enclosure
+				// Enclosures
 				if ($objArticle->addEnclosure)
 				{
 					$arrEnclosure = deserialize($objArticle->enclosure, true);
 
 					if (is_array($arrEnclosure))
 					{
-						foreach ($arrEnclosure as $strEnclosure)
+						$objFile = \FilesModel::findMultipleByIds($arrEnclosure);
+
+						while ($objFile->next())
 						{
-							if (is_file(TL_ROOT . '/' . $strEnclosure))
-							{
-								$objItem->addEnclosure($strEnclosure);
-							}
+							$objItem->addEnclosure($objFile->path);
 						}
 					}
 				}
@@ -207,7 +219,7 @@ class News extends \Frontend
 
 		if ($intRoot > 0)
 		{
-			$arrRoot = $this->getChildRecords($intRoot, 'tl_page');
+			$arrRoot = $this->Database->getChildRecords($intRoot, 'tl_page');
 		}
 
 		$arrProcessed = array();
@@ -298,7 +310,7 @@ class News extends \Frontend
 			case 'article':
 				if (($objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true))) !== null)
 				{
-					return ampersand($this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					return ampersand($this->generateFrontendUrl($objArticle->getRelated('pid')->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}

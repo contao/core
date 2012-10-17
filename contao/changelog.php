@@ -60,7 +60,7 @@ class Changelog extends Backend
 				'/#([0-9]+)/',
 				'/(---+\n)(?!\n)/',
 				'/([^\n]+)\n===+\n/',
-				'/([^\n]+)\n---+\n/',
+				'/\n([^\n]+)\n---+\n/',
 				'/\n### ([^\n]+)\n/',
 				'/ _(?!_)/', '/_ /',
 				'/===+\n/'
@@ -68,9 +68,9 @@ class Changelog extends Backend
 			array(
 				'<a href="https://github.com/contao/core/issues/$1" target="_blank">#$1</a>',
 				"$1\n",
-				'<h2>$1</h2>',
+				"<h2>$1</h2>\n\n",
 				"<h3>\$1</h3>\n",
-				"<h4>\$1</h4>\n",
+				"\n<h4>\$1</h4>\n",
 				' <em>', '</em> ',
 				''
 			),

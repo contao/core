@@ -165,7 +165,7 @@ class Main extends Backend
 		$objTotal = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_version" . (!$this->User->isAdmin ? " WHERE userid=?" : ""))
 								   ->execute($this->User->id);
 
-		$intPage   = Input::get('page') ?: 1;
+		$intPage   = Input::get('vp') ?: 1;
 		$intOffset = ($intPage - 1) * 30;
 		$intLast   = ceil($objTotal->count / 30);
 
@@ -196,7 +196,7 @@ class Main extends Backend
 
 			if ($arrRow['editUrl'] != '')
 			{
-				$arrRow['editUrl'] = preg_replace('/&(amp;)?rt=[a-f0-9]+/', '&amp;rt=' . REQUEST_TOKEN, $arrRow['editUrl']);
+				$arrRow['editUrl'] = preg_replace('/&(amp;)?rt=[a-f0-9]+/', '&amp;rt=' . REQUEST_TOKEN, ampersand($arrRow['editUrl']));
 			}
 
 			$arrVersions[] = $arrRow;

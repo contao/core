@@ -228,7 +228,7 @@ class StyleSheets extends \Backend
 
 		// Selector
 		$arrSelector = trimsplit(',', \String::decodeEntities($row['selector']));
-		$return .= implode(($blnWriteToFile ? ',' : ', '), $arrSelector) . (($blnWriteToFile && !$blnDebug) ? '' : ' ') . '{';
+		$return .= implode(($blnWriteToFile ? ',' : ",\n"), $arrSelector) . (($blnWriteToFile && !$blnDebug) ? '' : ' ') . '{';
 
 		// Size
 		if ($row['size'])
@@ -531,7 +531,7 @@ class StyleSheets extends \Backend
 					// Default starting point
 					if ($row['gradientAngle'] == '')
 					{
-						$row['gradientAngle'] = 'top';
+						$row['gradientAngle'] = 'to top';
 					}
 
 					$row['gradientColors'] = array_values(array_filter($row['gradientColors']));
@@ -542,14 +542,37 @@ class StyleSheets extends \Backend
 						$row['gradientColors'][$k] = '#' . $v;
 					}
 
-					$gradient = $row['gradientAngle'] . ',' . implode(',', $row['gradientColors']);
+					// Convert the angle for the legacy commands (see #4569)
+					if (strpos($row['gradientAngle'], 'deg') !== false)
+					{
+						$angle = (abs(intval($row['gradientAngle']) - 450) % 360) . 'deg';
+					}
+					else
+					{
+						switch ($row['gradientAngle'])
+						{
+							case 'to top':          $angle = 'bottom';       break;
+							case 'to right':        $angle = 'left';         break;
+							case 'to bottom':       $angle = 'top';          break;
+							case 'to left':         $angle = 'right';        break;
+							case 'to top left':     $angle = 'bottom right'; break;
+							case 'to top right':    $angle = 'bottom left';  break;
+							case 'to bottom left':  $angle = 'top right';    break;
+							case 'to bottom right': $angle = 'top left';     break;
+						}
+					}
 
-					$return .= $lb . 'background:' . $bgImage . '-moz-linear-gradient(' . $gradient . ');';
-					$return .= $lb . 'background:' . $bgImage . '-webkit-linear-gradient(' . $gradient . ');';
-					$return .= $lb . 'background:' . $bgImage . '-o-linear-gradient(' . $gradient . ');';
-					$return .= $lb . 'background:' . $bgImage . '-ms-linear-gradient(' . $gradient . ');';
+					$colors = implode(',', $row['gradientColors']);
+
+					$legacy = $angle . ',' . $colors;
+					$gradient = $row['gradientAngle'] . ',' . $colors;
+
+					$return .= $lb . 'background:' . $bgImage . '-moz-linear-gradient(' . $legacy . ');';
+					$return .= $lb . 'background:' . $bgImage . '-webkit-linear-gradient(' . $legacy . ');';
+					$return .= $lb . 'background:' . $bgImage . '-o-linear-gradient(' . $legacy . ');';
+					$return .= $lb . 'background:' . $bgImage . '-ms-linear-gradient(' . $legacy . ');';
 					$return .= $lb . 'background:' . $bgImage . 'linear-gradient(' . $gradient . ');';
-					$return .= $lb . '-pie-background:' . $bgImage . 'linear-gradient(' . $gradient . ');';
+					$return .= $lb . '-pie-background:' . $bgImage . 'linear-gradient(' . $legacy . ');';
 				}
 			}
 
@@ -1040,7 +1063,7 @@ class StyleSheets extends \Backend
 		$class = $this->User->uploader;
 
 		// See #4086
-		if (!$this->classFileExists($class))
+		if (!class_exists($class))
 		{
 			$class = 'FileUpload';
 		}
@@ -1410,7 +1433,7 @@ class StyleSheets extends \Backend
 								$varValue_2 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[1]);
 							}
 							// Move to custom section if there are different units
-							if (count(array_filter(array_unique($arrUnits))) > 0)
+							if (count(array_filter(array_unique($arrUnits))) > 1)
 							{
 								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
@@ -1464,7 +1487,7 @@ class StyleSheets extends \Backend
 								$varValue_3 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[2]);
 							}
 							// Move to custom section if there are different units
-							if (count(array_filter(array_unique($arrUnits))) > 0)
+							if (count(array_filter(array_unique($arrUnits))) > 1)
 							{
 								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
@@ -1527,7 +1550,7 @@ class StyleSheets extends \Backend
 								$varValue_4 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[3]);
 							}
 							// Move to custom section if there are different units
-							if (count(array_filter(array_unique($arrUnits))) > 0)
+							if (count(array_filter(array_unique($arrUnits))) > 1)
 							{
 								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
@@ -1610,7 +1633,22 @@ class StyleSheets extends \Backend
 
 				case 'background-image':
 					$arrSet['background'] = 1;
-					$arrSet['bgimage'] = preg_replace('/url\(["\']?([^"\'\)]+)["\']?\)/i', '$1', $arrChunks[1]);
+					$url = preg_replace('/url\(["\']?([^"\'\)]+)["\']?\)/i', '$1', $arrChunks[1]);
+					if (strncmp($url, '-', 1) === 0)
+					{
+						// Ignore vendor prefixed commands
+					}
+					elseif (strncmp($url, 'linear-gradient', 15) === 0)
+					{
+						// Handle background gradients (see #4640)
+						$colors = trimsplit(',', preg_replace('/linear-gradient ?\(([^\)]+)\)/', '$1', $url));
+						$arrSet['gradientAngle'] = array_shift($colors);
+						$arrSet['gradientColors'] = serialize($colors);
+					}
+					else
+					{
+						$arrSet['bgimage'] = $url;
+					}
 					break;
 
 				case 'background-position':
@@ -1910,8 +1948,15 @@ class StyleSheets extends \Backend
 					break;
 
 				case 'white-space':
-					$arrSet['font'] = 1;
-					$arrSet['whitespace'] = ($arrChunks[1] == 'nowrap') ? 1 : '';
+					if ($arrChunks[1] == 'nowrap')
+					{
+						$arrSet['font'] = 1;
+						$arrSet['whitespace'] = 1;
+					}
+					else
+					{
+						$arrSet['own'][] = $strDefinition;
+					}
 					break;
 
 				case 'text-transform':

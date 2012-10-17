@@ -70,22 +70,10 @@ class ContentDownload extends \ContentElement
 
 		$file = \Input::get('file', true);
 
-		// Send the file to the browser
-		if ($file != '')
+		// Send the file to the browser and do not send a 404 header (see #4632)
+		if ($file != '' && $file == $objFile->path)
 		{
-			if ($file == $objFile->path)
-			{
-				$this->sendFileToBrowser($file);
-			}
-
-			// Do not index or cache the page
-			global $objPage;
-			$objPage->noSearch = 1;
-			$objPage->cache = 0;
-
-			// Send a 404 header
-			header('HTTP/1.1 404 Not Found');
-			return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['ERR']['download'], $file) . '</p>';
+			$this->sendFileToBrowser($file);
 		}
 
 		$this->singleSRC = $objFile->path;

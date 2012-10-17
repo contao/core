@@ -22,7 +22,6 @@ ClassLoader::addClasses(array
 	'RepositoryBackendTheme'  => 'system/modules/repository/classes/RepositoryBackendTheme.php',
 	'RepositoryCatalog'       => 'system/modules/repository/classes/RepositoryCatalog.php',
 	'RepositoryManager'       => 'system/modules/repository/classes/RepositoryManager.php',
-	'RepositorySettings'      => 'system/modules/repository/classes/RepositorySettings.php',
 ));
 
 

@@ -98,7 +98,7 @@ class BackendTemplate extends \Template
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
 				list($stylesheet, $media) = explode('|', $stylesheet);
-				$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . '">' . "\n";
+				$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . '>' . "\n";
 			}
 
 			$this->stylesheets = $strStyleSheets;
@@ -173,7 +173,7 @@ class BackendTemplate extends \Template
 					. 'loading:"' . $GLOBALS['TL_LANG']['MSC']['loadingData'] . '",'
 					. 'apply:"' . $GLOBALS['TL_LANG']['MSC']['apply'] . '"'
 				. '},'
-				. 'script_url:"' . TL_SCRIPT_URL . '",'
+				. 'script_url:"' . TL_ASSETS_URL . '",'
 				. 'request_token:"' . REQUEST_TOKEN . '"'
 			. '};';
 	}

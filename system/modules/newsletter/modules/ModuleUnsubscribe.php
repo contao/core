@@ -144,8 +144,10 @@ class ModuleUnsubscribe extends \Module
 			$this->reload();
 		}
 
+		$varInput = \Idna::encodeEmail(\Input::post('email', true));
+
 		// Validate e-mail address
-		if (!\Validator::isEmail(\Input::post('email', true)))
+		if (!\Validator::isEmail($varInput))
 		{
 			$_SESSION['UNSUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['email'];
 			$this->reload();

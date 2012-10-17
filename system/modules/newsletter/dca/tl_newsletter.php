@@ -95,7 +95,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_newsletter']['send'],
 				'href'                => 'key=send',
-				'icon'                => 'system/modules/newsletter/public/icon.gif'
+				'icon'                => 'system/modules/newsletter/assets/icon.gif'
 			)
 		)
 	),
@@ -452,7 +452,7 @@ class tl_newsletter extends Backend
 		if (!strlen($varValue))
 		{
 			$autoAlias = true;
-			$varValue = standardize($this->restoreBasicEntities($dc->activeRecord->subject));
+			$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->subject));
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_newsletter WHERE alias=?")

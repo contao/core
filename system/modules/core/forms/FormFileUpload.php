@@ -133,14 +133,14 @@ class FormFileUpload extends \Widget implements \uploadable
 			return;
 		}
 
-		$pathinfo = pathinfo($file['name']);
+		$strExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
 		$uploadTypes = trimsplit(',', $this->extensions);
 
 		// File type is not allowed
-		if (!in_array(strtolower($pathinfo['extension']), $uploadTypes))
+		if (!in_array(strtolower($strExtension), $uploadTypes))
 		{
-			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $pathinfo['extension']));
-			$this->log('File type "'.$pathinfo['extension'].'" is not allowed to be uploaded ('.$file['name'].')', 'FormFileUpload validate()', TL_ERROR);
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $strExtension));
+			$this->log('File type "'.$strExtension.'" is not allowed to be uploaded ('.$file['name'].')', 'FormFileUpload validate()', TL_ERROR);
 
 			unset($_FILES[$this->strName]);
 			return;

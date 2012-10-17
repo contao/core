@@ -38,7 +38,7 @@ abstract class Database
 	 * @var array
 	 */
 	protected static $arrInstances = array();
-	
+
 	/**
 	 * Connection configuration
 	 * @var array
@@ -91,6 +91,10 @@ abstract class Database
 		if (!$this->arrConfig['dbPconnect'])
 		{
 			$this->disconnect();
+
+			// Unset the reference (see #4772)
+			$strKey = md5(implode('', $this->arrConfig));
+			unset(static::$arrInstances[$strKey]);
 		}
 	}
 
@@ -341,6 +345,118 @@ abstract class Database
 		}
 
 		return $arrNames;
+	}
+
+
+	/**
+	 * Check whether a field value in the database is unique
+	 * 
+	 * @param string  $strTable The table name
+	 * @param string  $strField The field name
+	 * @param mixed   $varValue The field value
+	 * @param integer $intId    The ID of a record to exempt
+	 * 
+	 * @return boolean True if the field value is unique
+	 */
+	public function isUniqueValue($strTable, $strField, $varValue, $intId=null)
+	{
+		$strQuery = "SELECT * FROM $strTable WHERE $strField=?";
+
+		if ($intId !== null)
+		{
+			$strQuery .= " AND id!=?";
+		}
+
+		$objUnique = $this->prepare($strQuery)
+						  ->limit(1)
+						  ->execute($varValue, $intId);
+
+		return $objUnique->numRows ? false : true;
+	}
+
+
+	/**
+	 * Return the IDs of all child records of a particular record (see #2475)
+	 * 
+	 * @author Andreas Schempp
+	 * 
+	 * @param mixed   $arrParentIds An array of parent IDs
+	 * @param string  $strTable     The table name
+	 * @param boolean $blnSorting   True if the table has a sorting field
+	 * @param array   $arrReturn    The array to be returned
+	 * @param string  $strWhere     Additional WHERE condition
+	 * 
+	 * @return array An array of child record IDs
+	 */
+	public function getChildRecords($arrParentIds, $strTable, $blnSorting=false, $arrReturn=array(), $strWhere='')
+	{
+		if (!is_array($arrParentIds))
+		{
+			$arrParentIds = array($arrParentIds);
+		}
+
+		if (empty($arrParentIds))
+		{
+			return $arrReturn;
+		}
+
+		$arrParentIds = array_map('intval', $arrParentIds);
+		$objChilds = $this->query("SELECT id, pid FROM " . $strTable . " WHERE pid IN(" . implode(',', $arrParentIds) . ")" . ($strWhere ? " AND $strWhere" : "") . ($blnSorting ? " ORDER BY " . $this->findInSet('pid', $arrParentIds) . ", sorting" : ""));
+
+		if ($objChilds->numRows > 0)
+		{
+			if ($blnSorting)
+			{
+				$arrChilds = array();
+				$arrOrdered = array();
+
+				while ($objChilds->next())
+				{
+					$arrChilds[] = $objChilds->id;
+					$arrOrdered[$objChilds->pid][] = $objChilds->id;
+				}
+
+				foreach (array_reverse(array_keys($arrOrdered)) as $pid)
+				{
+					$pos = (int) array_search($pid, $arrReturn);
+					array_insert($arrReturn, $pos+1, $arrOrdered[$pid]);
+				}
+
+				$arrReturn = $this->getChildRecords($arrChilds, $strTable, $blnSorting, $arrReturn, $strWhere);
+			}
+			else
+			{
+				$arrChilds = $objChilds->fetchEach('id');
+				$arrReturn = array_merge($arrChilds, $this->getChildRecords($arrChilds, $strTable, $blnSorting, $arrReturn, $strWhere));
+			}
+		}
+
+		return $arrReturn;
+	}
+
+
+	/**
+	 * Return the IDs of all parent records of a particular record
+	 * 
+	 * @param integer $intId    The ID of the record
+	 * @param string  $strTable The table name
+	 * 
+	 * @return array An array of parent record IDs
+	 */
+	public function getParentRecords($intId, $strTable)
+	{
+		$arrReturn = array();
+
+		// Currently supports a nesting-level of 10
+		$objPages = $this->prepare("SELECT id, @pid:=pid FROM $strTable WHERE id=?" . str_repeat(" UNION SELECT id, @pid:=pid FROM $strTable WHERE id=@pid", 9))
+						 ->execute($intId);
+
+		while ($objPages->next())
+		{
+			$arrReturn[] = $objPages->id;
+		}
+
+		return $arrReturn;
 	}
 
 

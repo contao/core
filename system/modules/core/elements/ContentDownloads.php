@@ -84,7 +84,7 @@ class ContentDownloads extends \ContentElement
 
 		$file = \Input::get('file', true);
 
-		// Send the file to the browser
+		// Send the file to the browser and do not send a 404 header (see #4632)
 		if ($file != '' && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($file)))
 		{
 			while ($this->objFiles->next())
@@ -94,15 +94,6 @@ class ContentDownloads extends \ContentElement
 					$this->sendFileToBrowser($file);
 				}
 			}
-
-			// Do not index or cache the page
-			global $objPage;
-			$objPage->noSearch = 1;
-			$objPage->cache = 0;
-
-			// Send a 404 header
-			header('HTTP/1.1 404 Not Found');
-			return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['ERR']['download'], $file) . '</p>';
 		}
 
 		return parent::generate();

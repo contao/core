@@ -124,7 +124,7 @@ class ModulePersonalData extends \Module
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
 			// Continue if the class does not exist
-			if (!$arrData['eval']['feEditable'] || !$this->classFileExists($strClass))
+			if (!$arrData['eval']['feEditable'] || !class_exists($strClass))
 			{
 				continue;
 			}
@@ -178,7 +178,7 @@ class ModulePersonalData extends \Module
 				}
 
 				// Make sure that unique fields are unique (check the eval setting first -> #3063)
-				if ($arrData['eval']['unique'] && $varValue != '' && !$this->fieldIsUnique('tl_member', $field, $varValue, $this->User->id))
+				if ($arrData['eval']['unique'] && $varValue != '' && !$this->Database->isUniqueValue('tl_member', $field, $varValue, $this->User->id))
 				{
 					$objWidget->addError(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $arrData['label'][0] ?: $field));
 				}

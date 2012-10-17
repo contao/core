@@ -125,7 +125,7 @@ class ModuleNewsletterReader extends \Module
 
 			if (is_array($arrEnclosure))
 			{
-				// Send file to the browser
+				// Send the file to the browser and do not send a 404 header (see #4632)
 				if (\Input::get('file', true) != '' && in_array(\Input::get('file', true), $arrEnclosure))
 				{
 					$this->sendFileToBrowser(\Input::get('file', true));

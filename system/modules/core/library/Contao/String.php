@@ -171,8 +171,7 @@ class String
 
 						for ($j=count($arrOpenTags)-1; $j>=0; $j--)
 						{
-							$strOpenTag = str_replace('<', '</', $arrOpenTags[$j]);
-							$strOpenTag = substr($strOpenTag, 0, strpos($strOpenTag, ' ')) . '>';
+							$strOpenTag = trim(str_replace('<', '</', $arrOpenTags[$j]));
 
 							if ($strOpenTag == $strTag)
 							{
@@ -233,6 +232,19 @@ class String
 		$strString = preg_replace('/(&#x*)([0-9a-f]+);/i', '$1$2;', $strString);
 
 		return html_entity_decode($strString, $strQuoteStyle, $strCharset);
+	}
+
+
+	/**
+	 * Restore basic entities
+	 * 
+	 * @param string $strBuffer The string with the tags to be replaced
+	 * 
+	 * @return string The string with the original entities
+	 */
+	public static function restoreBasicEntities($strBuffer)
+	{
+		return str_replace(array('[&]', '[&amp;]', '[lt]', '[gt]', '[nbsp]', '[-]'), array('&amp;', '&amp;', '&lt;', '&gt;', '&nbsp;', '&shy;'), $strBuffer);
 	}
 
 
@@ -507,7 +519,7 @@ class String
 	 */
 	public static function getInstance()
 	{
-		if (!is_object(static::$objInstance))
+		if (static::$objInstance === null)
 		{
 			static::$objInstance = new static();
 		}

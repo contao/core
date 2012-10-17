@@ -379,13 +379,13 @@ window.addEvent(\'domready\', function() {
 
 			if (!is_array($varValue))
 			{
-				$varValue = $this->restoreBasicEntities($varValue);
+				$varValue = \String::restoreBasicEntities($varValue);
 			}
 			else
 			{
 				foreach ($varValue as $k=>$v)
 				{
-					$varValue[$k] = $this->restoreBasicEntities($v);
+					$varValue[$k] = \String::restoreBasicEntities($v);
 				}
 
 				$varValue = serialize($varValue);

@@ -282,13 +282,18 @@ class Updater extends \Controller
 		$this->Database->query("ALTER TABLE `tl_layout` ADD `framework` varchar(255) NOT NULL default ''");
 		$this->Database->query("UPDATE `tl_layout` SET `framework`='a:2:{i:0;s:10:\"layout.css\";i:1;s:11:\"tinymce.css\";}'");
 		$this->Database->query("UPDATE `tl_layout` SET `framework`='a:1:{i:0;s:10:\"layout.css\";}' WHERE skipTinymce=1");
-		$this->Database->query("UPDATE `tl_layout` SET `framework`='' WHERE skipFramework=1");
+
+		// Make sure the "skipFramework" field exists (see #4624)
+		if ($this->Database->fieldExists('skipFramework', 'tl_layout'))
+		{
+			$this->Database->query("UPDATE `tl_layout` SET `framework`='' WHERE skipFramework=1");
+		}
 
 		// Add the "ptable" field
 		$this->Database->query("ALTER TABLE `tl_content` ADD ptable varchar(64) NOT NULL default ''");
 
 		// Create a content element for each news article
-		$objNews = $this->Database->execute("SELECT * FROM tl_news");
+		$objNews = $this->Database->execute("SELECT * FROM tl_news WHERE text!=''");
 
 		while ($objNews->next())
 		{
@@ -296,7 +301,7 @@ class Updater extends \Controller
 		}
 
 		// Create a content element for each event
-		$objEvents = $this->Database->execute("SELECT * FROM tl_calendar_events");
+		$objEvents = $this->Database->execute("SELECT * FROM tl_calendar_events WHERE details!=''");
 
 		while ($objEvents->next())
 		{
@@ -316,6 +321,40 @@ class Updater extends \Controller
 				}
 			}
 		}
+
+		// Convert the gradient angle syntax (see #4569)
+		if ($this->Database->fieldExists('gradientAngle', 'tl_style'))
+		{
+			$objStyle = $this->Database->execute("SELECT id, gradientAngle FROM tl_style WHERE gradientAngle!=''");
+
+			while ($objStyle->next())
+			{
+				if (strpos($objStyle->gradientAngle, 'deg') !== false)
+				{
+					$angle = (abs(450 - intval($objStyle->gradientAngle)) % 360) . 'deg';
+				}
+				else
+				{
+					switch ($objStyle->gradientAngle)
+					{
+						case 'top':          $angle = 'to bottom';       break;
+						case 'right':        $angle = 'to left';         break;
+						case 'bottom':       $angle = 'to top';          break;
+						case 'left':         $angle = 'to right';        break;
+						case 'top left':     $angle = 'to bottom right'; break;
+						case 'top right':    $angle = 'to bottom left';  break;
+						case 'bottom left':  $angle = 'to top right';    break;
+						case 'bottom right': $angle = 'to top left';     break;
+					}
+				}
+
+				$this->Database->prepare("UPDATE tl_style SET gradientAngle=? WHERE id=?")
+							   ->execute($angle, $objStyle->id);
+			}
+		}
+
+		// Make unlimited recurrences end on 2038-01-01 00:00:00 (see #4862)
+		$this->Database->query("UPDATE `tl_calendar_events` SET `repeatEnd`=2145913200 WHERE `recurring`=1 AND `recurrences`=0");
 	}
 
 

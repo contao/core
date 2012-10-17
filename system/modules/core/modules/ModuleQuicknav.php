@@ -56,12 +56,7 @@ class ModuleQuicknav extends \Module
 
 		if (\Input::post('FORM_SUBMIT') == 'tl_quicknav')
 		{
-			if (strlen(\Input::post('target', true)))
-			{
-				$this->redirect(\Input::post('target', true));
-			}
-
-			$this->reload();
+			$this->redirect(\Input::post('target', true));
 		}
 
 		return parent::generate();
@@ -142,7 +137,7 @@ class ModuleQuicknav extends \Module
 					);
 
 					// Subpages
-					if (!$this->showLevel || $this->showLevel >= $level || (!$this->hardLimit && ($objPage->id == $objSubpages->id || in_array($objPage->id, $this->getChildRecords($objSubpages->id, 'tl_page')))))
+					if (!$this->showLevel || $this->showLevel >= $level || (!$this->hardLimit && ($objPage->id == $objSubpages->id || in_array($objPage->id, $this->Database->getChildRecords($objSubpages->id, 'tl_page')))))
 					{
 						$subpages = $this->getQuicknavPages($objSubpages->id, $level);
 

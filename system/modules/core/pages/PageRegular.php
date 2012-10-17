@@ -66,13 +66,23 @@ class PageRegular extends \Frontend
 
 		if ($objModules !== null || $arrModules[0]['mod'] == 0) // see #4137
 		{
+			$arrMapper = array();
+
+			// Create a mapper array in case a module is included more than once (see #4849)
+			if ($objModules !== null)
+			{
+				while ($objModules->next())
+				{
+					$arrMapper[$objModules->id] = $objModules->current();
+				}
+			}
+
 			foreach ($arrModules as $arrModule)
 			{
-				// Replace the module ID with the result row
-				if ($arrModule['mod'] > 0)
+				// Replace the module ID with the module model
+				if ($arrModule['mod'] > 0 && isset($arrMapper[$arrModule['mod']]))
 				{
-					$objModules->next();
-					$arrModule['mod'] = $objModules;
+					$arrModule['mod'] = $arrMapper[$arrModule['mod']];
 				}
 
 				// Generate the modules
@@ -307,6 +317,34 @@ class PageRegular extends \Frontend
 				}
 			}
 
+			// Special adjustments if the layout builder is combined with the responsive grid (see #4824)
+			if (in_array('responsive.css', $arrFramework))
+			{
+				if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
+				{
+					$arrSize = deserialize($objLayout->widthLeft);
+					$strFramework .= sprintf('#left{right:%s}', ($arrSize['value'] - 10) . $arrSize['unit']);
+				}
+				if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
+				{
+					$arrSize = deserialize($objLayout->widthRight);
+					$strFramework .= sprintf('#container{padding-right:%s}', ($arrSize['value'] + 10) . $arrSize['unit']);
+				}
+
+				if ($objLayout->cols == '2cll')
+				{
+					$strFramework .= '#main .inside{margin-left:30px;margin-right:10px}';
+				}
+				if ($objLayout->cols == '3cl')
+				{
+					$strFramework .= '#main .inside{margin-left:30px;margin-right:20px}';
+				}
+				if ($objLayout->cols == '2clr')
+				{
+					$strFramework .= '#main .inside{margin-left:10px;margin-right:20px}';
+				}
+			}
+
 			// Add the layout specific CSS
 			if ($strFramework != '')
 			{
@@ -334,12 +372,19 @@ class PageRegular extends \Frontend
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->jSource == 'j_fallback')
 				{
-					$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . '>window.jQuery || document.write(\'<script src="' . TL_PLUGINS_URL . 'assets/jquery/core/' . JQUERY . '/jquery.min.js">\x3C/script>\')</script>' . "\n";
+					if ($blnXhtml)
+					{
+						$this->Template->mooScripts .= '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . 'window.jQuery || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/jquery/core/' . JQUERY . '/jquery.min.js">\x3C/script>\')' . "\n/* ]]> */\n" . '</script>' . "\n";
+					}
+					else
+					{
+						$this->Template->mooScripts .= '<script>window.jQuery || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/jquery/core/' . JQUERY . '/jquery.min.js">\x3C/script>\')</script>' . "\n";
+					}
 				}
 			}
 			else
 			{
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="assets/jquery/core/' . JQUERY . '/jquery.min.js"></script>' . "\n";
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/jquery/core/' . JQUERY . '/jquery.min.js|static';
 			}
 		}
 
@@ -354,15 +399,22 @@ class PageRegular extends \Frontend
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->mooSource == 'moo_fallback')
 				{
-					$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . '>window.MooTools || document.write(\'<script src="' . TL_PLUGINS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>' . "\n";
+					if ($blnXhtml)
+					{
+						$this->Template->mooScripts .= '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . 'window.MooTools || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')' . "\n/* ]]> */\n" . '</script>' . "\n";
+					}
+					else
+					{
+						$this->Template->mooScripts .= '<script>window.MooTools || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>' . "\n";
+					}
 				}
 
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-mobile.js"></script>' . "\n";
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-more.js|static';
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-mobile.js|static';
 			}
 			else
 			{
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="assets/mootools/core/' . MOOTOOLS . '/mootools.js"></script>' . "\n";
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools.js|static';
 			}
 		}
 
@@ -451,7 +503,7 @@ class PageRegular extends \Frontend
 					}
 					else
 					{
-						$strStyleSheet = '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_SCRIPT_URL . 'assets/css/' . $objStylesheets->name . '.css"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding;
+						$strStyleSheet = '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_ASSETS_URL . 'assets/css/' . $objStylesheets->name . '.css"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding;
 
 						if ($objStylesheets->cc)
 						{
@@ -529,16 +581,14 @@ class PageRegular extends \Frontend
 			}
 		}
 
-		$strHeadTags = '';
+		// Add a placeholder for dynamic <head> tags (see #4203)
+		$strHeadTags = '[[TL_HEAD]]';
 
 		// Add the user <head> tags
 		if (($strHead = trim($objLayout->head)) != false)
 		{
 			$strHeadTags .= $strHead . "\n";
 		}
-
-		// Add a placeholder for dynamic <head> tags (see #4203)
-		$strHeadTags .= '[[TL_HEAD]]';
 
 		$this->Template->stylesheets = $strStyleSheets;
 		$this->Template->head = $strHeadTags;
@@ -588,6 +638,9 @@ class PageRegular extends \Frontend
 			// Add a placeholder for dynamic scripts (see #4203)
 			$strScripts .= '[[TL_MOOTOOLS]]';
 		}
+
+		// Add a placeholder for dynamic scripts (see #4203)
+		$strScripts .= '[[TL_HIGHLIGHTER]]';
 
 		// Add the custom JavaScript
 		if ($objLayout->script != '')

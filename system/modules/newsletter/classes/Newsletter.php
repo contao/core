@@ -190,7 +190,7 @@ class Newsletter extends \Backend
 
 				\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], $intTotal));
 
-				echo '<script>setTimeout(\'window.location="' . \Environment::get('base') . $referer . '"\', 1000);</script>';
+				echo '<script>setTimeout(\'window.location="' . \Environment::get('base') . $referer . '"\',1000)</script>';
 				echo '<a href="' . \Environment::get('base') . $referer . '">Please click here to proceed if you are not using JavaScript</a>';
 			}
 
@@ -199,7 +199,7 @@ class Newsletter extends \Backend
 			{
 				$url = preg_replace('/&(amp;)?(start|mpc|recipient)=[^&]*/', '', \Environment::get('request')) . '&start=' . ($intStart + $intPages) . '&mpc=' . $intPages;
 
-				echo '<script>setTimeout(\'window.location="' . \Environment::get('base') . $url . '"\', ' . ($intTimeout * 1000) . ');</script>';
+				echo '<script>setTimeout(\'window.location="' . \Environment::get('base') . $url . '"\',' . ($intTimeout * 1000) . ')</script>';
 				echo '<a href="' . \Environment::get('base') . $url . '">Please click here to proceed if you are not using JavaScript</a>';
 			}
 
@@ -398,7 +398,7 @@ class Newsletter extends \Backend
 		$class = $this->User->uploader;
 
 		// See #4086
-		if (!$this->classFileExists($class))
+		if (!class_exists($class))
 		{
 			$class = 'FileUpload';
 		}
@@ -837,7 +837,7 @@ class Newsletter extends \Backend
 
 		if ($intRoot > 0)
 		{
-			$arrRoot = $this->getChildRecords($intRoot, 'tl_page');
+			$arrRoot = $this->Database->getChildRecords($intRoot, 'tl_page');
 		}
 
 		$arrProcessed = array();

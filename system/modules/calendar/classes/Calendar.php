@@ -72,7 +72,9 @@ class Calendar extends \Frontend
 	 */
 	public function generateFeeds()
 	{
-		$this->removeOldFeeds();
+		$this->import('Automator');
+		$this->Automator->purgeXmlFiles();
+
 		$objCalendar = \CalendarFeedModel::findAll();
 
 		if ($objCalendar !== null)
@@ -125,6 +127,12 @@ class Calendar extends \Frontend
 			{
 				$jumpTo = $objArticle->getRelated('pid')->jumpTo;
 
+				// No jumpTo page set (see #4784)
+				if (!$jumpTo)
+				{
+					continue;
+				}
+
 				// Get the jumpTo URL
 				if (!isset($arrUrls[$jumpTo]))
 				{
@@ -169,7 +177,7 @@ class Calendar extends \Frontend
 		$count = 0;
 		ksort($this->arrEvents);
 
-		// Add feed items
+		// Add the feed items
 		foreach ($this->arrEvents as $days)
 		{
 			foreach ($days as $events)
@@ -244,7 +252,7 @@ class Calendar extends \Frontend
 
 		if ($intRoot > 0)
 		{
-			$arrRoot = $this->getChildRecords($intRoot, 'tl_page');
+			$arrRoot = $this->Database->getChildRecords($intRoot, 'tl_page');
 		}
 
 		$arrProcessed = array();
@@ -368,7 +376,7 @@ class Calendar extends \Frontend
 			case 'article':
 				if (($objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true))) !== null)
 				{
-					$link = ampersand($this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					$link = ampersand($this->generateFrontendUrl($objArticle->getRelated('pid')->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
@@ -399,19 +407,29 @@ class Calendar extends \Frontend
 			'authorName' => $objEvent->authorName
 		);
 
-		// Enclosure
+		// Add the article image as enclosure
+		if ($objEvent->addImage)
+		{
+			$objFile = \FilesModel::findByPk($objEvent->singleSRC);
+
+			if ($objFile !== null)
+			{
+				$arrEvent['enclosure'][] = $objFile->path;
+			}
+		}
+
+		// Enclosures
 		if ($objEvent->addEnclosure)
 		{
 			$arrEnclosure = deserialize($objEvent->enclosure, true);
 
 			if (is_array($arrEnclosure))
 			{
-				foreach ($arrEnclosure as $strEnclosure)
+				$objFile = \FilesModel::findMultipleByIds($arrEnclosure);
+
+				while ($objFile->next())
 				{
-					if (is_file(TL_ROOT . '/' . $strEnclosure))
-					{
-						$arrEvent['enclosure'][] = $strEnclosure;
-					}
+					$arrEvent['enclosure'][] = $objFile->path;
 				}
 			}
 		}

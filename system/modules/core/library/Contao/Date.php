@@ -225,7 +225,7 @@ class Date extends \System
 	 * 
 	 * @throws \Exception If $strFormat is invalid
 	 */
-	public function getRegexp($strFormat=null)
+	public static function getRegexp($strFormat=null)
 	{
 		if ($strFormat === null)
 		{
@@ -273,7 +273,7 @@ class Date extends \System
 	 * 
 	 * @throws \Exception If $strFormat is invalid
 	 */
-	public function getInputFormat($strFormat=null)
+	public static function getInputFormat($strFormat=null)
 	{
 		if ($strFormat === null)
 		{

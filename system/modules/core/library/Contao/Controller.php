@@ -156,7 +156,7 @@ abstract class Controller extends \System
 		if ($intId == 0)
 		{
 			// Show a particular article only
-			if (\Input::get('articles') && $objPage->type == 'regular')
+			if ($objPage->type == 'regular' && \Input::get('articles'))
 			{
 				list($strSection, $strArticle) = explode(':', \Input::get('articles'));
 
@@ -186,31 +186,28 @@ abstract class Controller extends \System
 			}
 
 			// HOOK: trigger the article_raster_designer extension
-			elseif (in_array('article_raster_designer', $this->Config->getActiveModules()))
+			if (in_array('article_raster_designer', $this->Config->getActiveModules()))
 			{
 				return \RasterDesigner::load($objPage->id, $strColumn);
 			}
 
-			// Show all articles
-			else
+			// Show all articles (no else block here, see #4740)
+			$objArticles = \ArticleModel::findPublishedByPidAndColumn($objPage->id, $strColumn);
+
+			if ($objArticles === null)
 			{
-				$objArticles = \ArticleModel::findPublishedByPidAndColumn($objPage->id, $strColumn);
-
-				if ($objArticles === null)
-				{
-					return '';
-				}
-
-				$return = '';
-				$blnMultiMode = ($objArticles->count() > 1);
-
-				while ($objArticles->next())
-				{
-					$return .= $this->getArticle($objArticles, $blnMultiMode, false, $strColumn);
-				}
-
-				return $return;
+				return '';
 			}
+
+			$return = '';
+			$blnMultiMode = ($objArticles->count() > 1);
+
+			while ($objArticles->next())
+			{
+				$return .= $this->getArticle($objArticles, $blnMultiMode, false, $strColumn);
+			}
+
+			return $return;
 		}
 
 		// Other modules
@@ -256,7 +253,7 @@ abstract class Controller extends \System
 			$strClass = $this->findFrontendModule($objRow->type);
 
 			// Return if the class does not exist
-			if (!$this->classFileExists($strClass))
+			if (!class_exists($strClass))
 			{
 				$this->log('Module class "'.$GLOBALS['FE_MOD'][$objRow->type].'" (module "'.$objRow->type.'") does not exist', 'Controller getFrontendModule()', TL_ERROR);
 				return '';
@@ -420,7 +417,7 @@ abstract class Controller extends \System
 		$strClass = $this->findContentElement($objRow->type);
 
 		// Return if the class does not exist
-		if (!$this->classFileExists($strClass))
+		if (!class_exists($strClass))
 		{
 			$this->log('Content element class "'.$strClass.'" (content element "'.$objRow->type.'") does not exist', 'Controller getContentElement()', TL_ERROR);
 			return '';
@@ -504,7 +501,7 @@ abstract class Controller extends \System
 	 * 
 	 * @return \Model|null The page model or null
 	 */
-	protected function getPageDetails($intId)
+	public static function getPageDetails($intId)
 	{
 		if (is_object($intId))
 		{
@@ -553,77 +550,84 @@ abstract class Controller extends \System
 		$alias = $objPage->alias;
 		$name = $objPage->title;
 		$title = $objPage->pageTitle ?: $objPage->title;
-		$folderUrl = basename($objPage->alias);
+		$folderUrl = standardize(\String::restoreBasicEntities($name));
 		$palias = '';
 		$pname = '';
 		$ptitle = '';
 		$trail = array($intId, $pid);
 
-		// Load all parent pages
-		$objParentPage = \PageModel::findParentsById($pid);
-
-		// Inherit settings
-		if ($objParentPage !== null)
+		// Inherit the settings
+		if ($objPage->type == 'root')
 		{
-			while ($objParentPage->next() && $pid > 0 && $type != 'root')
+			$objParentPage = $objPage; // see #4610
+		}
+		else
+		{
+			// Load all parent pages
+			$objParentPage = \PageModel::findParentsById($pid);
+
+			if ($objParentPage !== null)
 			{
-				$pid = $objParentPage->pid;
-				$type = $objParentPage->type;
-
-				// Parent title
-				if ($ptitle == '')
+				while ($objParentPage->next() && $pid > 0 && $type != 'root')
 				{
-					$palias = $objParentPage->alias;
-					$pname = $objParentPage->title;
-					$ptitle = $objParentPage->pageTitle ?: $objParentPage->title;
-				}
+					$pid = $objParentPage->pid;
+					$type = $objParentPage->type;
 
-				// Page title
-				if ($type != 'root')
-				{
-					$alias = $objParentPage->alias;
-					$name = $objParentPage->title;
-					$title = $objParentPage->pageTitle ?: $objParentPage->title;
-					$folderUrl = basename($alias) . '/' . $folderUrl;
-					$trail[] = $objParentPage->pid;
-				}
-
-				// Cache
-				if ($objParentPage->includeCache && $objPage->cache === false)
-				{
-					$objPage->cache = $objParentPage->cache;
-				}
-
-				// Layout
-				if ($objParentPage->includeLayout)
-				{
-					if ($objPage->layout === false)
+					// Parent title
+					if ($ptitle == '')
 					{
-						$objPage->layout = $objParentPage->layout;
+						$palias = $objParentPage->alias;
+						$pname = $objParentPage->title;
+						$ptitle = $objParentPage->pageTitle ?: $objParentPage->title;
 					}
-					if ($objPage->mobileLayout === false)
-					{
-						$objPage->mobileLayout = $objParentPage->mobileLayout;
-					}
-				}
 
-				// Protection
-				if ($objParentPage->protected && $objPage->protected === false)
-				{
-					$objPage->protected = true;
-					$objPage->groups = deserialize($objParentPage->groups);
+					// Page title
+					if ($type != 'root')
+					{
+						$alias = $objParentPage->alias;
+						$name = $objParentPage->title;
+						$title = $objParentPage->pageTitle ?: $objParentPage->title;
+						$folderUrl = standardize(\String::restoreBasicEntities($name)) . '/' . $folderUrl;
+						$trail[] = $objParentPage->pid;
+					}
+
+					// Cache
+					if ($objParentPage->includeCache && $objPage->cache === false)
+					{
+						$objPage->cache = $objParentPage->cache;
+					}
+
+					// Layout
+					if ($objParentPage->includeLayout)
+					{
+						if ($objPage->layout === false)
+						{
+							$objPage->layout = $objParentPage->layout;
+						}
+						if ($objPage->mobileLayout === false)
+						{
+							$objPage->mobileLayout = $objParentPage->mobileLayout;
+						}
+					}
+
+					// Protection
+					if ($objParentPage->protected && $objPage->protected === false)
+					{
+						$objPage->protected = true;
+						$objPage->groups = deserialize($objParentPage->groups);
+					}
 				}
 			}
-		}
 
-		// Set the titles
-		$objPage->mainAlias = $alias;
-		$objPage->mainTitle = $name;
-		$objPage->mainPageTitle = $title;
-		$objPage->parentAlias = $palias;
-		$objPage->parentTitle = $pname;
-		$objPage->parentPageTitle = $ptitle;
-		$objPage->folderUrl = $folderUrl;
+			// Set the titles
+			$objPage->mainAlias = $alias;
+			$objPage->mainTitle = $name;
+			$objPage->mainPageTitle = $title;
+			$objPage->parentAlias = $palias;
+			$objPage->parentTitle = $pname;
+			$objPage->parentPageTitle = $ptitle;
+			$objPage->folderUrl = $folderUrl;
+		}
 
 		// Set the root ID and title
 		if ($objParentPage !== null && $objParentPage->type == 'root')
@@ -634,7 +638,6 @@ abstract class Controller extends \System
 			$objPage->rootLanguage = $objParentPage->language;
 			$objPage->language = $objParentPage->language;
 			$objPage->staticFiles = $objParentPage->staticFiles;
-			$objPage->staticSystem = $objParentPage->staticSystem;
 			$objPage->staticPlugins = $objParentPage->staticPlugins;
 			$objPage->dateFormat = $objParentPage->dateFormat;
 			$objPage->timeFormat = $objParentPage->timeFormat;
@@ -651,7 +654,7 @@ abstract class Controller extends \System
 		elseif (TL_MODE == 'FE' && $objPage->type != 'root')
 		{
 			header('HTTP/1.1 404 Not Found');
-			$this->log('Page ID "'. $objPage->id .'" does not belong to a root page', 'Controller getPageDetails()', TL_ERROR);
+			\System::log('Page ID "'. $objPage->id .'" does not belong to a root page', 'Controller getPageDetails()', TL_ERROR);
 			die('No root page found');
 		}
 
@@ -689,61 +692,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Return the languages as array
-	 * 
-	 * @param boolean $blnBeOnly If true, return only back end languages
-	 * 
-	 * @return array An array available of languages
-	 */
-	protected function getLanguages($blnBeOnly=false)
-	{
-		$return = array();
-		$languages = array();
-		$arrAux = array();
-		$langsNative = array();
-
-		$this->loadLanguageFile('languages');
-		include TL_ROOT . '/system/config/languages.php';
-
-		foreach ($languages as $strKey=>$strName)
-		{
-			$arrAux[$strKey] = isset($GLOBALS['TL_LANG']['LNG'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['LNG'][$strKey]) : $strName;
-		}
-
-		asort($arrAux);
-		$arrBackendLanguages = scan(TL_ROOT . '/system/modules/core/languages');
-
-		foreach (array_keys($arrAux) as $strKey)
-		{
-			if ($blnBeOnly && !in_array($strKey, $arrBackendLanguages))
-			{
-				continue;
-			}
-
-			$return[$strKey] = isset($GLOBALS['TL_LANG']['LNG'][$strKey]) ? $GLOBALS['TL_LANG']['LNG'][$strKey] : $languages[$strKey];
-
-			if (isset($langsNative[$strKey]) && $langsNative[$strKey] != $return[$strKey])
-			{
-				$return[$strKey] .= ' - ' . $langsNative[$strKey];
-			}
-		}
-
-		return $return;
-	}
-
-
-	/**
-	 * Return the installed back end languages as array
-	 * 
-	 * @return array An array of available back end languages
-	 */
-	protected function getBackendLanguages()
-	{
-		return $this->getLanguages(true);
-	}
-
-
-	/**
 	 * Return the back end themes as array
 	 * 
 	 * @return array An array of available back end themes
@@ -764,56 +712,6 @@ abstract class Controller extends \System
 		}
 
 		return $arrReturn;
-	}
-
-
-	/**
-	 * Return the counties as array
-	 * 
-	 * @return array An array of country names
-	 */
-	protected function getCountries()
-	{
-		$return = array();
-		$countries = array();
-		$arrAux = array();
-
-		$this->loadLanguageFile('countries');
-		include TL_ROOT . '/system/config/countries.php';
-
-		// HOOK: add custom logic
-		if (isset($GLOBALS['TL_HOOKS']['getCountries']) && is_array($GLOBALS['TL_HOOKS']['getCountries']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['getCountries'] as $callback)
-			{
-				$this->import($callback[0]);
-				$return = $this->$callback[0]->$callback[1]($return, $countries);
-			}
-		}
-
-		foreach ($countries as $strKey=>$strName)
-		{
-			$arrAux[$strKey] = isset($GLOBALS['TL_LANG']['CNT'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['CNT'][$strKey]) : $strName;
-		}
-
-		asort($arrAux);
-
-		foreach (array_keys($arrAux) as $strKey)
-		{
-			$return[$strKey] = isset($GLOBALS['TL_LANG']['CNT'][$strKey]) ? $GLOBALS['TL_LANG']['CNT'][$strKey] : $countries[$strKey];
-		}
-
-		// HOOK: add custom logic
-		if (isset($GLOBALS['TL_HOOKS']['getCountries']) && is_array($GLOBALS['TL_HOOKS']['getCountries']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['getCountries'] as $callback)
-			{
-				$this->import($callback[0]);
-				$return = $this->$callback[0]->$callback[1]($return, $countries);
-			}
-		}
-
-		return $return;
 	}
 
 
@@ -1028,18 +926,18 @@ abstract class Controller extends \System
 	 * Replace insert tags with their values
 	 * 
 	 * @param string  $strBuffer The text with the tags to be replaced
-	 * @param boolean $blnCache  If true, some tags will be preserved
+	 * @param boolean $blnCache  If false, non-cacheable tags will be replaced
 	 * 
 	 * @return string The text with the replaced tags
 	 */
-	protected function replaceInsertTags($strBuffer, $blnCache=false)
+	protected function replaceInsertTags($strBuffer, $blnCache=true)
 	{
 		global $objPage;
 
 		// Preserve insert tags
 		if ($GLOBALS['TL_CONFIG']['disableInsertTags'])
 		{
-			return $this->restoreBasicEntities($strBuffer);
+			return \String::restoreBasicEntities($strBuffer);
 		}
 
 		$tags = preg_split('/\{\{(([^\{\}]*|(?R))*)\}\}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
@@ -1061,10 +959,10 @@ abstract class Controller extends \System
 			// Run the replacement again if there are more tags (see #4402)
 			if (strpos($strTag, '{{') !== false)
 			{
-				$strTag = $this->replaceInsertTags($strTag);
+				$strTag = $this->replaceInsertTags($strTag, $blnCache);
 			}
 
-			// Load value from cache array
+			// Load the value from cache
 			if (isset($arrCache[$strTag]))
 			{
 				$strBuffer .= $arrCache[$strTag];
@@ -1283,36 +1181,33 @@ abstract class Controller extends \System
 								break;
 
 							case 'forward':
-								if (($objTarget = $objNextPage->getRelated('jumpTo')) !== null)
+								if ($objNextPage->jumpTo)
 								{
-									$strUrl = $this->generateFrontendUrl($objTarget->row());
-									break;
+									$objNext = $objNextPage->getRelated('jumpTo');
 								}
-								elseif (($objTarget = \PageModel::findFirstPublishedRegularByPid($objNextPage->id)) !== null)
+								else
 								{
+									$objNext = \PageModel::findFirstPublishedRegularByPid($objNextPage->id);
+								}
+
+								if ($objNext !== null)
+								{
+									$strForceLang = null;
+
+									// Check the target page language (see #4706)
 									if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 									{
-										$objTarget = $this->getPageDetails($objTarget); // see #3983
-										$strUrl = $this->generateFrontendUrl($objTarget->row(), null, $objTarget->language);
+										$objNext = $this->getPageDetails($objNext); // see #3983
+										$strForceLang = $objNext->language;
 									}
-									else
-									{
-										$strUrl = $this->generateFrontendUrl($objTarget->row());
-									}
+
+									$strUrl = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
 									break;
 								}
 								// DO NOT ADD A break; STATEMENT
 
 							default:
-								if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
-								{
-									$objNextPage = $this->getPageDetails($objNextPage); // see #3983
-									$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $objNextPage->language);
-								}
-								else
-								{
-									$strUrl = $this->generateFrontendUrl($objNextPage->row());
-								}
+								$strUrl = $this->generateFrontendUrl($objNextPage->row());
 								break;
 						}
 
@@ -1355,7 +1250,7 @@ abstract class Controller extends \System
 				case 'insert_article':
 					if (($strOutput = $this->getArticle($elements[1], false, true)) !== false)
 					{
-						$arrCache[$strTag] = $this->replaceInsertTags(ltrim($strOutput));
+						$arrCache[$strTag] = $this->replaceInsertTags(ltrim($strOutput), $blnCache);
 					}
 					else
 					{
@@ -1365,17 +1260,17 @@ abstract class Controller extends \System
 
 				// Insert content element
 				case 'insert_content':
-					$arrCache[$strTag] = $this->replaceInsertTags($this->getContentElement($elements[1]));
+					$arrCache[$strTag] = $this->replaceInsertTags($this->getContentElement($elements[1]), $blnCache);
 					break;
 
 				// Insert module
 				case 'insert_module':
-					$arrCache[$strTag] = $this->replaceInsertTags($this->getFrontendModule($elements[1]));
+					$arrCache[$strTag] = $this->replaceInsertTags($this->getFrontendModule($elements[1]), $blnCache);
 					break;
 
 				// Insert form
 				case 'insert_form':
-					$arrCache[$strTag] = $this->replaceInsertTags($this->getForm($elements[1]));
+					$arrCache[$strTag] = $this->replaceInsertTags($this->getForm($elements[1]), $blnCache);
 					break;
 
 				// Article
@@ -1391,7 +1286,7 @@ abstract class Controller extends \System
 					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id));
+						$strUrl = $this->generateFrontendUrl($objArticle->getRelated('pid')->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id));
 					}
 
 					// Replace the tag
@@ -1429,7 +1324,7 @@ abstract class Controller extends \System
 					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objFaq->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
+						$strUrl = $this->generateFrontendUrl($objFaq->getRelated('pid')->getRelated('jumpTo')->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
 					}
 
 					// Replace the tag
@@ -1472,7 +1367,7 @@ abstract class Controller extends \System
 					elseif ($objNews->source == 'article')
 					{
 						$objArticle = \ArticleModel::findByPk($objNews->articleId, array('eager'=>true));
-						$strUrl = $this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
+						$strUrl = $this->generateFrontendUrl($objArticle->getRelated('pid')->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 					}
 					elseif ($objNews->source == 'external')
 					{
@@ -1523,7 +1418,7 @@ abstract class Controller extends \System
 					elseif ($objEvent->source == 'article')
 					{
 						$objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true));
-						$strUrl = $this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
+						$strUrl = $this->generateFrontendUrl($objArticle->getRelated('pid')->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 					}
 					elseif ($objEvent->source == 'external')
 					{
@@ -1564,11 +1459,11 @@ abstract class Controller extends \System
 					{
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = \String::toXhtml($this->replaceInsertTags($objTeaser->teaser));
+							$arrCache[$strTag] = \String::toXhtml($this->replaceInsertTags($objTeaser->teaser), $blnCache);
 						}
 						else
 						{
-							$arrCache[$strTag] = \String::toHtml5($this->replaceInsertTags($objTeaser->teaser));
+							$arrCache[$strTag] = \String::toHtml5($this->replaceInsertTags($objTeaser->teaser), $blnCache);
 						}
 					}
 					break;
@@ -1673,7 +1568,7 @@ abstract class Controller extends \System
 					}
 					break;
 
-				// Conditional tags
+				// Conditional tags (if)
 				case 'iflng':
 					if ($elements[1] != '' && $elements[1] != $objPage->language)
 					{
@@ -1688,6 +1583,7 @@ abstract class Controller extends \System
 					unset($arrCache[$strTag]);
 					break;
 
+				// Conditional tags (if not)
 				case 'ifnlng':
 					if ($elements[1] != '')
 					{
@@ -1712,19 +1608,19 @@ abstract class Controller extends \System
 					switch ($elements[1])
 					{
 						case 'host':
-							$arrCache[$strTag] = \Environment::get('host');
+							$arrCache[$strTag] = \Idna::decode(\Environment::get('host'));
 							break;
 
 						case 'http_host':
-							$arrCache[$strTag] = \Environment::get('httpHost');
+							$arrCache[$strTag] = \Idna::decode(\Environment::get('httpHost'));
 							break;
 
 						case 'url':
-							$arrCache[$strTag] = \Environment::get('url');
+							$arrCache[$strTag] = \Idna::decode(\Environment::get('url'));
 							break;
 
 						case 'path':
-							$arrCache[$strTag] = \Environment::get('base');
+							$arrCache[$strTag] = \Idna::decode(\Environment::get('base'));
 							break;
 
 						case 'request':
@@ -1743,12 +1639,10 @@ abstract class Controller extends \System
 							$arrCache[$strTag] = TL_FILES_URL;
 							break;
 
-						case 'script_url':
-							$arrCache[$strTag] = TL_SCRIPT_URL;
-							break;
-
+						case 'assets_url':
 						case 'plugins_url':
-							$arrCache[$strTag] = TL_PLUGINS_URL;
+						case 'script_url':
+							$arrCache[$strTag] = TL_ASSETS_URL;
 							break;
 					}
 					break;
@@ -1866,10 +1760,26 @@ abstract class Controller extends \System
 						$strFile = $arrChunks[0];
 					}
 
-					// Sanitize path
-					$strFile = str_replace('../', '', $strFile);
+					// Handle numeric IDs (see #4805)
+					if (is_numeric($strFile))
+					{
+						$objFile = \FilesModel::findByPk($strFile);
 
-					// Check maximum image width
+						if ($objFile === null)
+						{
+							$arrCache[$strTag] = '';
+							break;
+						}
+
+						$strFile = $objFile->path;
+					}
+					else
+					{
+						// Sanitize the path
+						$strFile = str_replace('../', '', $strFile);
+					}
+
+					// Check the maximum image width
 					if ($GLOBALS['TL_CONFIG']['maxImageWidth'] > 0 && $width > $GLOBALS['TL_CONFIG']['maxImageWidth'])
 					{
 						$width = $GLOBALS['TL_CONFIG']['maxImageWidth'];
@@ -1959,7 +1869,7 @@ abstract class Controller extends \System
 						foreach ($GLOBALS['TL_HOOKS']['replaceInsertTags'] as $callback)
 						{
 							$this->import($callback[0]);
-							$varValue = $this->$callback[0]->$callback[1]($strTag);
+							$varValue = $this->$callback[0]->$callback[1]($strTag, $blnCache);
 
 							// Replace the tag and stop the loop
 							if ($varValue !== false)
@@ -1975,7 +1885,7 @@ abstract class Controller extends \System
 			$strBuffer .= $arrCache[$strTag];
 		}
 
-		return $this->restoreBasicEntities($strBuffer);
+		return \String::restoreBasicEntities($strBuffer);
 	}
 
 
@@ -1988,13 +1898,21 @@ abstract class Controller extends \System
 	 */
 	public static function replaceDynamicScriptTags($strBuffer)
 	{
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['replaceDynamicScriptTags']) && is_array($GLOBALS['TL_HOOKS']['replaceDynamicScriptTags']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['replaceDynamicScriptTags'] as $callback)
+			{
+				$strBuffer = static::importStatic($callback[0])->$callback[1]($strBuffer);
+			}
+		}
+
 		global $objPage;
 
 		$arrReplace = array();
 		$blnXhtml = ($objPage->outputFormat == 'xhtml');
 		$strTagEnding = $blnXhtml ? ' />' : '>';
 		$strScripts = '';
-		$objCombiner = new \Combiner();
 
 		// Add the internal jQuery scripts
 		if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
@@ -2019,6 +1937,33 @@ abstract class Controller extends \System
 
 		$arrReplace['[[TL_MOOTOOLS]]'] = $strScripts;
 		$strScripts = '';
+
+		// Add the syntax highlighter scripts
+		if (is_array($GLOBALS['TL_HIGHLIGHTER']) && !empty($GLOBALS['TL_HIGHLIGHTER']))
+		{
+			$objCombiner = new \Combiner();
+
+			foreach (array_unique($GLOBALS['TL_HIGHLIGHTER']) as $script)
+			{
+				$objCombiner->add($script);
+			}
+
+			$strScripts .= "\n" . '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>';
+
+			if ($blnXhtml)
+			{
+				$strScripts .= "\n" . '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . 'SyntaxHighlighter.defaults.toolbar=false;SyntaxHighlighter.all()' . "\n/* ]]> */\n" . '</script>' . "\n";
+			}
+			else
+			{
+				$strScripts .= "\n" . '<script>SyntaxHighlighter.defaults.toolbar=false;SyntaxHighlighter.all()</script>' . "\n";
+			}
+		}
+
+		$arrReplace['[[TL_HIGHLIGHTER]]'] = $strScripts;
+		$strScripts = '';
+
+		$objCombiner = new \Combiner();
 
 		// Add the CSS framework style sheets
 		if (is_array($GLOBALS['TL_FRAMEWORK_CSS']) && !empty($GLOBALS['TL_FRAMEWORK_CSS']))
@@ -2098,10 +2043,10 @@ abstract class Controller extends \System
 				}
 			}
 
-			// Create the aggregated script
+			// Create the aggregated script and add it before the non-static scripts (see #4890)
 			if ($objCombiner->hasEntries())
 			{
-				$strScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>' . "\n";
+				$strScripts = '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>' . "\n" . $strScripts;
 			}
 		}
 
@@ -2116,19 +2061,6 @@ abstract class Controller extends \System
 
 		$arrReplace['[[TL_HEAD]]'] = $strScripts;
 		return str_replace(array_keys($arrReplace), array_values($arrReplace), $strBuffer);
-	}
-
-
-	/**
-	 * Restore basic entities
-	 * 
-	 * @param string $strBuffer The string with the tags to be replaced
-	 * 
-	 * @return string The string with the original entities
-	 */
-	public static function restoreBasicEntities($strBuffer)
-	{
-		return str_replace(array('[&]', '[&amp;]', '[lt]', '[gt]', '[nbsp]', '[-]'), array('&amp;', '&amp;', '&lt;', '&gt;', '&nbsp;', '&shy;'), $strBuffer);
 	}
 
 
@@ -2401,7 +2333,7 @@ abstract class Controller extends \System
 			}
 		}
 
-		// Stop script
+		// Stop the script
 		exit;
 	}
 
@@ -2701,33 +2633,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Check whether a field value in the database is unique
-	 * 
-	 * @param string  $strTable The table name
-	 * @param string  $strField The field name
-	 * @param mixed   $varValue The field value
-	 * @param integer $intId    The ID of a record to exempt
-	 * 
-	 * @return boolean True if the field value is unique
-	 */
-	protected function fieldIsUnique($strTable, $strField, $varValue, $intId=null)
-	{
-		$strQuery = "SELECT * FROM $strTable WHERE $strField=?";
-
-		if ($intId !== null)
-		{
-			$strQuery .= " AND id!=?";
-		}
-
-		$objUnique = $this->Database->prepare($strQuery)
-						  ->limit(1)
-						  ->execute($varValue, $intId);
-
-		return $objUnique->numRows ? false : true;
-	}
-
-
-	/**
 	 * Redirect to a front end page
 	 * 
 	 * @param integer $intPage    The page ID
@@ -2764,91 +2669,6 @@ abstract class Controller extends \System
 		}
 
 		return $strUrl;
-	}
-
-
-	/**
-	 * Return the IDs of all child records of a particular record (see #2475)
-	 * 
-	 * @author Andreas Schempp
-	 * 
-	 * @param mixed   $arrParentIds An array of parent IDs
-	 * @param string  $strTable     The table name
-	 * @param boolean $blnSorting   True if the table has a sorting field
-	 * @param array   $arrReturn    The array to be returned
-	 * @param string  $strWhere     Additional WHERE condition
-	 * 
-	 * @return array An array of child record IDs
-	 */
-	protected function getChildRecords($arrParentIds, $strTable, $blnSorting=false, $arrReturn=array(), $strWhere='')
-	{
-		if (!is_array($arrParentIds))
-		{
-			$arrParentIds = array($arrParentIds);
-		}
-
-		if (empty($arrParentIds))
-		{
-			return $arrReturn;
-		}
-
-		$arrParentIds = array_map('intval', $arrParentIds);
-		$objChilds = $this->Database->execute("SELECT id, pid FROM " . $strTable . " WHERE pid IN(" . implode(',', $arrParentIds) . ")" . ($strWhere ? " AND $strWhere" : "") . ($blnSorting ? " ORDER BY " . $this->Database->findInSet('pid', $arrParentIds) . ", sorting" : ""));
-
-		if ($objChilds->numRows > 0)
-		{
-			if ($blnSorting)
-			{
-				$arrChilds = array();
-				$arrOrdered = array();
-
-				while ($objChilds->next())
-				{
-					$arrChilds[] = $objChilds->id;
-					$arrOrdered[$objChilds->pid][] = $objChilds->id;
-				}
-
-				foreach (array_reverse(array_keys($arrOrdered)) as $pid)
-				{
-					$pos = (int) array_search($pid, $arrReturn);
-					array_insert($arrReturn, $pos+1, $arrOrdered[$pid]);
-				}
-
-				$arrReturn = $this->getChildRecords($arrChilds, $strTable, $blnSorting, $arrReturn, $strWhere);
-			}
-			else
-			{
-				$arrChilds = $objChilds->fetchEach('id');
-				$arrReturn = array_merge($arrChilds, $this->getChildRecords($arrChilds, $strTable, $blnSorting, $arrReturn, $strWhere));
-			}
-		}
-
-		return $arrReturn;
-	}
-
-
-	/**
-	 * Return the IDs of all parent records of a particular record
-	 * 
-	 * @param integer $intId    The ID of the record
-	 * @param string  $strTable The table name
-	 * 
-	 * @return array An array of parent record IDs
-	 */
-	protected function getParentRecords($intId, $strTable)
-	{
-		$arrReturn = array();
-
-		// Currently supports a nesting-level of 10
-		$objPages = $this->Database->prepare("SELECT id, @pid:=pid FROM $strTable WHERE id=?" . str_repeat(" UNION SELECT id, @pid:=pid FROM $strTable WHERE id=@pid", 9))
-								   ->execute($intId);
-
-		while ($objPages->next())
-		{
-			$arrReturn[] = $objPages->id;
-		}
-
-		return $arrReturn;
 	}
 
 
@@ -2905,19 +2725,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Return true if a class exists (tries to autoload the class)
-	 * 
-	 * @param string $strClass The class name
-	 * 
-	 * @return boolean True if the class exists
-	 */
-	protected function classFileExists($strClass)
-	{
-		return class_exists($strClass, true);
-	}
-
-
-	/**
 	 * Take an array of file paths and eliminate the nested ones
 	 * 
 	 * @param array $arrPaths The array of file paths
@@ -2964,8 +2771,8 @@ abstract class Controller extends \System
 		}
 
 		// Thanks to Andreas Schempp (see #2475 and #3423)
-		$arrPages = array_intersect($this->getChildRecords(0, $strTable, $blnSorting), $arrPages);
-		$arrPages = array_values(array_diff($arrPages, $this->getChildRecords($arrPages, $strTable, $blnSorting)));
+		$arrPages = array_intersect($this->Database->getChildRecords(0, $strTable, $blnSorting), $arrPages);
+		$arrPages = array_values(array_diff($arrPages, $this->Database->getChildRecords($arrPages, $strTable, $blnSorting)));
 
 		return $arrPages;
 	}
@@ -3077,68 +2884,18 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Remove old XML files from the root directory
+	 * Remove old XML files from the share directory
 	 * 
 	 * @param boolean $blnReturn If true, only return the finds and don't delete
 	 * 
 	 * @return array An array of old XML files
+	 * 
+	 * @deprecated Use Automator::purgeXmlFiles() instead
 	 */
 	protected function removeOldFeeds($blnReturn=false)
 	{
-		$arrFeeds = array();
-
-		// XML sitemaps
-		$objFeeds = $this->Database->execute("SELECT sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!=''");
-
-		while ($objFeeds->next())
-		{
-			$arrFeeds[] = $objFeeds->sitemapName;
-		}
-
-		// HOOK: preserve third party feeds
-		if (isset($GLOBALS['TL_HOOKS']['removeOldFeeds']) && is_array($GLOBALS['TL_HOOKS']['removeOldFeeds']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['removeOldFeeds'] as $callback)
-			{
-				$this->import($callback[0]);
-				$arrFeeds = array_merge($arrFeeds, $this->$callback[0]->$callback[1]());
-			}
-		}
-
-		// Make sure the dcaconfig.php is loaded
-		@include TL_ROOT . '/system/config/dcaconfig.php';
-
-		// Add the root files
-		if (is_array($GLOBALS['TL_CONFIG']['rootFiles']))
-		{
-			foreach ($GLOBALS['TL_CONFIG']['rootFiles'] as $strFile)
-			{
-				$arrFeeds[] = str_replace('.xml', '', $strFile);
-			}
-		}
-
-		// Delete the old files
-		if (!$blnReturn)
-		{
-			foreach (scan(TL_ROOT) as $file)
-			{
-				if (is_dir(TL_ROOT . '/' . $file))
-				{
-					continue;
-				}
-
-				$objFile = new \File($file);
-
-				if ($objFile->extension == 'xml' && !in_array($objFile->filename, $arrFeeds) && !preg_match('/^sitemap/i', $objFile->filename))
-				{
-					$objFile->delete();
-				}
-
-				$objFile->close();
-			}
-		}
-
-		return $arrFeeds;
+		$this->import('Automator');
+		$this->Automator->purgeXmlFiles($blnReturn);
 	}
 
 
@@ -3210,7 +2967,12 @@ abstract class Controller extends \System
 		if ($arrItem['floating'] != '')
 		{
 			$objTemplate->floatClass = ' float_' . $arrItem['floating'];
-			$objTemplate->float = ' float:' . $arrItem['floating'] . ';';
+
+			// Only float:left and float:right are supported (see #4758)
+			if ($arrItem['floating'] == 'left' || $arrItem['floating'] == 'right')
+			{
+				$objTemplate->float = ' float:' . $arrItem['floating'] . ';';
+			}
 		}
 
 		// Image link
@@ -3221,9 +2983,15 @@ abstract class Controller extends \System
 
 			if ($arrItem['fullsize'])
 			{
+				// Open images in the lightbox
 				if (preg_match('/\.(jpe?g|gif|png)$/', $arrItem['imageUrl']))
 				{
-					$objTemplate->href = TL_FILES_URL . static::urlEncode($arrItem['imageUrl']);
+					// Do not add the TL_FILES_URL to external URLs (see #4923)
+					if (strncmp($arrItem['imageUrl'], 'http://', 7) !== 0 && strncmp($arrItem['imageUrl'], 'https://', 8) !== 0)
+					{
+						$objTemplate->href = TL_FILES_URL . static::urlEncode($arrItem['imageUrl']);
+					}
+
 					$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 				}
 				else
@@ -3249,6 +3017,7 @@ abstract class Controller extends \System
 		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
 		$objTemplate->margin = static::generateMargin(deserialize($arrItem['imagemargin']), 'padding');
 		$objTemplate->caption = $arrItem['caption'];
+		$objTemplate->singleSRC = $arrItem['singleSRC'];
 		$objTemplate->addImage = true;
 	}
 
@@ -3363,11 +3132,12 @@ abstract class Controller extends \System
 			return;
 		}
 
+		global $objPage;
+
 		$arrConstants = array
 		(
 			'staticFiles'   => 'TL_FILES_URL',
-			'staticPlugins' => 'TL_PLUGINS_URL',
-			'staticSystem'  => 'TL_SCRIPT_URL'
+			'staticPlugins' => 'TL_ASSETS_URL'
 		);
 
 		foreach ($arrConstants as $strKey=>$strConstant)
@@ -3388,6 +3158,10 @@ abstract class Controller extends \System
 				define($strConstant, $url . TL_PATH . '/');
 			}
 		}
+
+		// Backwards compatibility
+		define('TL_SCRIPT_URL', TL_ASSETS_URL);
+		define('TL_PLUGINS_URL', TL_ASSETS_URL);
 	}
 
 
@@ -3401,7 +3175,7 @@ abstract class Controller extends \System
 	public static function addStaticUrlTo($script)
 	{
 		// The feature is not used
-		if (TL_PLUGINS_URL == '' && TL_SCRIPT_URL == '')
+		if (TL_ASSETS_URL == '')
 		{
 			return $script;
 		}
@@ -3412,15 +3186,37 @@ abstract class Controller extends \System
 			return $script;
 		}
 
-		// Prepend the static URL
-		if (strncmp($script, 'plugins/', 8) === 0)
-		{
-			return TL_PLUGINS_URL . $script;
-		}
-		else
-		{
-			return TL_SCRIPT_URL . $script;
-		}
+		return TL_ASSETS_URL . $script;
+	}
+
+
+	/**
+	 * Return true if a class exists (tries to autoload the class)
+	 * 
+	 * @param string $strClass The class name
+	 * 
+	 * @return boolean True if the class exists
+	 * 
+	 * @deprecated Use the PHP function class_exists() instead
+	 */
+	protected function classFileExists($strClass)
+	{
+		return class_exists($strClass);
+	}
+
+
+	/**
+	 * Restore basic entities
+	 * 
+	 * @param string $strBuffer The string with the tags to be replaced
+	 * 
+	 * @return string The string with the original entities
+	 * 
+	 * @deprecated Use String::restoreBasicEntities() instead
+	 */
+	public static function restoreBasicEntities($strBuffer)
+	{
+		return \String::restoreBasicEntities($strBuffer);
 	}
 
 
@@ -3476,6 +3272,19 @@ abstract class Controller extends \System
 
 
 	/**
+	 * Return the installed back end languages as array
+	 * 
+	 * @return array An array of available back end languages
+	 * 
+	 * @deprecated Use System::getLanguages(true) instead
+	 */
+	protected function getBackendLanguages()
+	{
+		return $this->getLanguages(true);
+	}
+
+
+	/**
 	 * Parse simple tokens that can be used to personalize newsletters
 	 * 
 	 * @param string $strBuffer The text with the tokens to be replaced
@@ -3488,5 +3297,42 @@ abstract class Controller extends \System
 	protected function parseSimpleTokens($strBuffer, $arrData)
 	{
 		return \String::parseSimpleTokens($strBuffer, $arrData);
+	}
+
+
+	/**
+	 * Return the IDs of all child records of a particular record (see #2475)
+	 * 
+	 * @author Andreas Schempp
+	 * 
+	 * @param mixed   $arrParentIds An array of parent IDs
+	 * @param string  $strTable     The table name
+	 * @param boolean $blnSorting   True if the table has a sorting field
+	 * @param array   $arrReturn    The array to be returned
+	 * @param string  $strWhere     Additional WHERE condition
+	 * 
+	 * @return array An array of child record IDs
+	 * 
+	 * @deprecated Use Database::getChildRecords() instead
+	 */
+	protected function getChildRecords($arrParentIds, $strTable, $blnSorting=false, $arrReturn=array(), $strWhere='')
+	{
+		return $this->Database->getChildRecords($arrParentIds, $strTable, $blnSorting, $arrReturn, $strWhere);
+	}
+
+
+	/**
+	 * Return the IDs of all parent records of a particular record
+	 * 
+	 * @param integer $intId    The ID of the record
+	 * @param string  $strTable The table name
+	 * 
+	 * @return array An array of parent record IDs
+	 * 
+	 * @deprecated Use Database::getParentRecords() instead
+	 */
+	protected function getParentRecords($intId, $strTable)
+	{
+		return $this->Database->getParentRecords($intId, $strTable);
 	}
 }

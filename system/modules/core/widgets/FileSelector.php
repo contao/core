@@ -105,6 +105,12 @@ class FileSelector extends \Widget
 		// Search for a specific file
 		if ($for != '')
 		{
+			// The keyword must not start with a wildcard (see #4910)
+			if (strncmp($for, '*', 1) === 0)
+			{
+				$for = substr($for, 1);
+			}
+
 			$objRoot = $this->Database->prepare("SELECT id FROM tl_files WHERE CAST(name AS CHAR) REGEXP ?{$this->strExtensions} ORDER BY type='file', name{$this->strSortFlag}")
 									  ->execute($for);
 
@@ -121,7 +127,7 @@ class FileSelector extends \Widget
 
 					while ($objRoot->next())
 					{
-						if (count(array_intersect($this->User->filemounts, $this->getParentRecords($objRoot->id, 'tl_files'))) > 0)
+						if (count(array_intersect($this->User->filemounts, $this->Database->getParentRecords($objRoot->id, 'tl_files'))) > 0)
 						{
 							$arrRoot[] = $objRoot->id;
 						}
@@ -139,8 +145,20 @@ class FileSelector extends \Widget
 		}
 		else
 		{
+
+			// Show a custom path (see #4926)
+			if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path'] != '')
+			{
+				$objFolder = \FilesModel::findByPath($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']);
+
+				if ($objFolder !== null)
+				{
+					$tree .= $this->renderFiletree($objFolder->id, -20);
+				}
+			}
+
 			// Show all files to admins
-			if ($this->User->isAdmin)
+			elseif ($this->User->isAdmin)
 			{
 				$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=?{$this->strExtensions} ORDER BY type='file', name{$this->strSortFlag}")
 										  ->execute(0);
@@ -413,7 +431,7 @@ class FileSelector extends \Widget
 
 		foreach ($this->varValue as $id)
 		{
-			$arrPids = $this->getParentRecords($id, 'tl_files');
+			$arrPids = $this->Database->getParentRecords($id, 'tl_files');
 			array_shift($arrPids); // the first element is the ID of the page itself
 			$this->arrNodes = array_merge($this->arrNodes, $arrPids);
 		}

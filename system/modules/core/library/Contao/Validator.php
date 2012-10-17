@@ -27,7 +27,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Validator extends \System
+class Validator
 {
 
 	/**
@@ -105,8 +105,7 @@ class Validator extends \System
 	 */
 	public static function isDate($varValue)
 	{
-		$objDate = new \Date();
-		return preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'$~i', $varValue);
+		return preg_match('~^'. \Date::getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'$~i', $varValue);
 	}
 
 
@@ -119,8 +118,7 @@ class Validator extends \System
 	 */
 	public static function isTime($varValue)
 	{
-		$objDate = new \Date();
-		return preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'$~i', $varValue);
+		return preg_match('~^'. \Date::getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'$~i', $varValue);
 	}
 
 
@@ -133,8 +131,7 @@ class Validator extends \System
 	 */
 	public static function isDatim($varValue)
 	{
-		$objDate = new \Date();
-		return preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varValue);
+		return preg_match('~^'. \Date::getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varValue);
 	}
 
 
@@ -147,7 +144,7 @@ class Validator extends \System
 	 */
 	public static function isEmail($varValue)
 	{
-		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/', \Idna::encodeEmail($varValue));
+		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[A-Za-z]{2,6}$/', \Idna::encodeEmail($varValue));
 	}
 
 

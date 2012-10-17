@@ -438,6 +438,89 @@ abstract class System
 
 
 	/**
+	 * Return the countries as array
+	 * 
+	 * @return array An array of country names
+	 */
+	public static function getCountries()
+	{
+		$return = array();
+		$countries = array();
+		$arrAux = array();
+
+		static::loadLanguageFile('countries');
+		include TL_ROOT . '/system/config/countries.php';
+
+		foreach ($countries as $strKey=>$strName)
+		{
+			$arrAux[$strKey] = isset($GLOBALS['TL_LANG']['CNT'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['CNT'][$strKey]) : $strName;
+		}
+
+		asort($arrAux);
+
+		foreach (array_keys($arrAux) as $strKey)
+		{
+			$return[$strKey] = isset($GLOBALS['TL_LANG']['CNT'][$strKey]) ? $GLOBALS['TL_LANG']['CNT'][$strKey] : $countries[$strKey];
+		}
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getCountries']) && is_array($GLOBALS['TL_HOOKS']['getCountries']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getCountries'] as $callback)
+			{
+				static::importStatic($callback[0])->$callback[1]($return, $countries);
+			}
+		}
+
+		return $return;
+	}
+
+
+	/**
+	 * Return the available languages as array
+	 * 
+	 * @param boolean $blnInstalledOnly If true, return only installed languages
+	 * 
+	 * @return array An array of languages
+	 */
+	public static function getLanguages($blnInstalledOnly=false)
+	{
+		$return = array();
+		$languages = array();
+		$arrAux = array();
+		$langsNative = array();
+
+		static::loadLanguageFile('languages');
+		include TL_ROOT . '/system/config/languages.php';
+
+		foreach ($languages as $strKey=>$strName)
+		{
+			$arrAux[$strKey] = isset($GLOBALS['TL_LANG']['LNG'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['LNG'][$strKey]) : $strName;
+		}
+
+		asort($arrAux);
+		$arrBackendLanguages = scan(TL_ROOT . '/system/modules/core/languages');
+
+		foreach (array_keys($arrAux) as $strKey)
+		{
+			if ($blnInstalledOnly && !in_array($strKey, $arrBackendLanguages))
+			{
+				continue;
+			}
+
+			$return[$strKey] = isset($GLOBALS['TL_LANG']['LNG'][$strKey]) ? $GLOBALS['TL_LANG']['LNG'][$strKey] : $languages[$strKey];
+
+			if (isset($langsNative[$strKey]) && $langsNative[$strKey] != $return[$strKey])
+			{
+				$return[$strKey] .= ' - ' . $langsNative[$strKey];
+			}
+		}
+
+		return $return;
+	}
+
+
+	/**
 	 * Parse a date format string and translate textual representations
 	 * 
 	 * @param string  $strFormat The date format string
@@ -656,12 +739,12 @@ abstract class System
 		// IPv6
 		if (strpos($strIp, ':') !== false)
 		{
-			return str_replace(strrchr($strIp, ':'), ':0000', $strIp);
+			return substr_replace($strIp, ':0000', strrpos($strIp, ':'));
 		}
 		// IPv4
 		else
 		{
-			return str_replace(strrchr($strIp, '.'), '.0', $strIp);
+			return substr_replace($strIp, '.0', strrpos($strIp, '.'));
 		}
 	}
 
@@ -675,14 +758,21 @@ abstract class System
 	 */
 	public static function getModelClassFromTable($strTable)
 	{
-		$arrChunks = explode('_', $strTable);
-
-		if ($arrChunks[0] == 'tl')
+		if (isset($GLOBALS['TL_MODELS'][$strTable]))
 		{
-			array_shift($arrChunks);
+			return $GLOBALS['TL_MODELS'][$strTable]; // see 4796
 		}
+		else
+		{
+			$arrChunks = explode('_', $strTable);
 
-		return implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+			if ($arrChunks[0] == 'tl')
+			{
+				array_shift($arrChunks);
+			}
+
+			return implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+		}
 	}
 
 

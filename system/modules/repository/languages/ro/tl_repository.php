@@ -1,0 +1,174 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/ro/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$GLOBALS['TL_LANG']['tl_repository']['category'][0] = 'Categorie';
+$GLOBALS['TL_LANG']['tl_repository']['category'][1] = 'Alegeţi categoria de extensii.';
+$GLOBALS['TL_LANG']['tl_repository']['copyright'][0] = 'Copyright';
+$GLOBALS['TL_LANG']['tl_repository']['copyright'][1] = 'Aici puteţi introduce o notificare de copyright (de exemplu: © 2007,2008 Jerry Miller Webservices Inc).';
+$GLOBALS['TL_LANG']['tl_repository']['description'][0] = 'Descriere';
+$GLOBALS['TL_LANG']['tl_repository']['description'][1] = 'Aceste taguri HTML sunt permise: %s';
+$GLOBALS['TL_LANG']['tl_repository']['extension'][0] = 'Extensie';
+$GLOBALS['TL_LANG']['tl_repository']['extension'][1] = 'Alegeţi numele extensiei.';
+$GLOBALS['TL_LANG']['tl_repository']['functionality'][0] = 'Funcţionalitate';
+$GLOBALS['TL_LANG']['tl_repository']['functionality'][1] = 'Oferă extensia funcţionalitatea de care este nevoie?';
+$GLOBALS['TL_LANG']['tl_repository']['license'][0] = 'Licenţă';
+$GLOBALS['TL_LANG']['tl_repository']['license'][1] = 'Introduceţi o scurtă prezentare a licenţei. Se poate adăuga o descriere completă într-un fişier LICENSE.txt';
+$GLOBALS['TL_LANG']['tl_repository']['name'][0] = 'Nume';
+$GLOBALS['TL_LANG']['tl_repository']['name'][1] = 'Numele extensiei trebuie să înceapă cu a-z, A-Z sau 0-9, dintre care numele cu minuscule sunt preferate. În plus caracterele _ şi - sunt permise în nume.';
+$GLOBALS['TL_LANG']['tl_repository']['popularity'][0] = 'Popularitate';
+$GLOBALS['TL_LANG']['tl_repository']['popularity'][1] = '%s/%s (descărcări / instalări)';
+$GLOBALS['TL_LANG']['tl_repository']['quality'][0] = 'Calitate';
+$GLOBALS['TL_LANG']['tl_repository']['quality'][1] = 'Cât de robustă este extensia şi cât de uşoară este instalarea şi mentenanţa.';
+$GLOBALS['TL_LANG']['tl_repository']['releasedate'][0] = 'Data publicării';
+$GLOBALS['TL_LANG']['tl_repository']['releasedate'][1] = 'Introduceţi data publicării acestei extensii ca AAAA-LL-ZZ';
+$GLOBALS['TL_LANG']['tl_repository']['selversion'][0] = 'Versiune';
+$GLOBALS['TL_LANG']['tl_repository']['selversion'][1] = 'Alegeţi versiunea';
+$GLOBALS['TL_LANG']['tl_repository']['type'][0] = 'Tip';
+$GLOBALS['TL_LANG']['tl_repository']['type'][1] = 'Alegeţi tipul extensiei.';
+$GLOBALS['TL_LANG']['tl_repository']['usability'][0] = 'Ergonomie';
+$GLOBALS['TL_LANG']['tl_repository']['usability'][1] = 'Extensia se ridică la standardele Contao de ergonomie şi accesibilitate?';
+$GLOBALS['TL_LANG']['tl_repository']['version'][0] = 'Versiune';
+$GLOBALS['TL_LANG']['tl_repository']['version'][1] = 'Numerele versiunilor trebuie să fi în formatul n.n.n.s, unde n este număr întreg iar s este unul dintre: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable';
+$GLOBALS['TL_LANG']['tl_repository']['lickey'][0] = 'Cheia de licenţă';
+$GLOBALS['TL_LANG']['tl_repository']['lickey'][1] = 'Introduceţi cheia de licenţă pe care aţi primit-o de la producătorul extensiei.';
+$GLOBALS['TL_LANG']['tl_repository']['uninstprotect'][0] = 'Protecţie la dezinstalare';
+$GLOBALS['TL_LANG']['tl_repository']['uninstprotect'][1] = 'Protejează extensia împotriva unei dezinstalări accidentale.';
+$GLOBALS['TL_LANG']['tl_repository']['updateprotect'][0] = 'Protecţie la update';
+$GLOBALS['TL_LANG']['tl_repository']['updateprotect'][1] = 'Protejează extensia împotriva modificării accidentale.';
+$GLOBALS['TL_LANG']['tl_repository']['author'] = 'Autor';
+$GLOBALS['TL_LANG']['tl_repository']['build'] = 'Build';
+$GLOBALS['TL_LANG']['tl_repository']['cancel'] = 'Anulează';
+$GLOBALS['TL_LANG']['tl_repository']['continue'] = 'Continuă';
+$GLOBALS['TL_LANG']['tl_repository']['dependencies'] = 'Dependenţele acestei extensii';
+$GLOBALS['TL_LANG']['tl_repository']['dependents'] = 'Alte extensii care depind de aceasta';
+$GLOBALS['TL_LANG']['tl_repository']['dependentsdel'] = 'Următoarele extensii sunt dependente de <em>%s</em> şi pot fi afectate.';
+$GLOBALS['TL_LANG']['tl_repository']['donate'] = 'Donează';
+$GLOBALS['TL_LANG']['tl_repository']['downloads'] = 'Descărcare pachete';
+$GLOBALS['TL_LANG']['tl_repository']['extensionnotfound'] = 'Extensie indisponibilă';
+$GLOBALS['TL_LANG']['tl_repository']['forum'] = 'Forum';
+$GLOBALS['TL_LANG']['tl_repository']['installs'] = 'Instalări online';
+$GLOBALS['TL_LANG']['tl_repository']['langtrans'] = '%s transl.';
+$GLOBALS['TL_LANG']['tl_repository']['manual'] = 'Manual';
+$GLOBALS['TL_LANG']['tl_repository']['no'] = 'nu';
+$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = 'Nu sunt extensii disponibile.';
+$GLOBALS['TL_LANG']['tl_repository']['orderby'] = 'Ordonează după';
+$GLOBALS['TL_LANG']['tl_repository']['otherlanguages'] = 'Alte limbi';
+$GLOBALS['TL_LANG']['tl_repository']['pageof'] = 'Pagina %s din %s';
+$GLOBALS['TL_LANG']['tl_repository']['ratingfmt'] = '%.2f (%d voturi)';
+$GLOBALS['TL_LANG']['tl_repository']['reldownloads'] = 'Descărcările versiunii';
+$GLOBALS['TL_LANG']['tl_repository']['releasenotesfor'] = 'Note despre versiune şi jurnalul de modificări pentru %s';
+$GLOBALS['TL_LANG']['tl_repository']['relfunctionality'] = 'Funcţionalitatea versiunii';
+$GLOBALS['TL_LANG']['tl_repository']['relinstalls'] = 'Instalările versiunii';
+$GLOBALS['TL_LANG']['tl_repository']['relquality'] = 'Calitatea versiunii';
+$GLOBALS['TL_LANG']['tl_repository']['relrating'] = 'Ratingul versiunii';
+$GLOBALS['TL_LANG']['tl_repository']['relupdates'] = 'Actualizările versiunii';
+$GLOBALS['TL_LANG']['tl_repository']['relusability'] = 'Ergonomia versiunii';
+$GLOBALS['TL_LANG']['tl_repository']['save'] = 'Salvează';
+$GLOBALS['TL_LANG']['tl_repository']['shop'] = 'Achiziţionează';
+$GLOBALS['TL_LANG']['tl_repository']['showpicture'] = 'Arată imagini maximizat';
+$GLOBALS['TL_LANG']['tl_repository']['state'] = 'Stare';
+$GLOBALS['TL_LANG']['tl_repository']['tag'] = 'Tag';
+$GLOBALS['TL_LANG']['tl_repository']['thumbnail'] = 'Imagine minimizată';
+$GLOBALS['TL_LANG']['tl_repository']['totdownloads'] = 'Total descărcări';
+$GLOBALS['TL_LANG']['tl_repository']['totfunctionality'] = 'Total funcţionalitate';
+$GLOBALS['TL_LANG']['tl_repository']['totinstalls'] = 'Total instalări';
+$GLOBALS['TL_LANG']['tl_repository']['totquality'] = 'Total calitate';
+$GLOBALS['TL_LANG']['tl_repository']['totrating'] = 'Total rating';
+$GLOBALS['TL_LANG']['tl_repository']['totupdates'] = 'Total actualizări';
+$GLOBALS['TL_LANG']['tl_repository']['totusability'] = 'Total ergonomie';
+$GLOBALS['TL_LANG']['tl_repository']['versionfrom'] = 'Versiune din';
+$GLOBALS['TL_LANG']['tl_repository']['versions'] = 'Alte versiuni';
+$GLOBALS['TL_LANG']['tl_repository']['versionto'] = 'Versiune până';
+$GLOBALS['TL_LANG']['tl_repository']['yes'] = 'da';
+$GLOBALS['TL_LANG']['tl_repository']['action'] = 'Acţiune';
+$GLOBALS['TL_LANG']['tl_repository']['actionsummary'] = 'Sumar acţiuni';
+$GLOBALS['TL_LANG']['tl_repository']['actionsuccess'] = 'Acţiuni terminate cu succes.';
+$GLOBALS['TL_LANG']['tl_repository']['actionfailed'] = 'Una sau mai multe acţiuni au eşuat.';
+$GLOBALS['TL_LANG']['tl_repository']['apply'] = 'Aplică';
+$GLOBALS['TL_LANG']['tl_repository']['byorder'] = 'De %s';
+$GLOBALS['TL_LANG']['tl_repository']['checkextension'] = 'Verifică extensie';
+$GLOBALS['TL_LANG']['tl_repository']['dbuptodate'] = 'Baza de date este actualizată';
+$GLOBALS['TL_LANG']['tl_repository']['deletingdirs'] = 'Se şterg directoare';
+$GLOBALS['TL_LANG']['tl_repository']['deletingfiles'] = 'Se şterg fişiere';
+$GLOBALS['TL_LANG']['tl_repository']['editextension'] = 'Editare configurări';
+$GLOBALS['TL_LANG']['tl_repository']['extinstrecntf'] = 'Nu s-a găsit înregistrarea instalării extensiei';
+$GLOBALS['TL_LANG']['tl_repository']['errdldpkg'] = 'Descărcarea pachetului din registru a eşuat';
+$GLOBALS['TL_LANG']['tl_repository']['failed'] = 'eroare';
+$GLOBALS['TL_LANG']['tl_repository']['fileerrwrite'] = 'Eroare de scriere în fişier %s';
+$GLOBALS['TL_LANG']['tl_repository']['filesdeleted'] = '%s fişier(e) şterse';
+$GLOBALS['TL_LANG']['tl_repository']['filesinstalled'] = '%s fişier(e) instalate';
+$GLOBALS['TL_LANG']['tl_repository']['filesunchanged'] = '%s fişier(e) nemodificate';
+$GLOBALS['TL_LANG']['tl_repository']['filesupdated'] = '%s fişier(e) actualizate';
+$GLOBALS['TL_LANG']['tl_repository']['ftsearch'] = 'Căutare în text';
+$GLOBALS['TL_LANG']['tl_repository']['goback'] = 'Înapoi';
+$GLOBALS['TL_LANG']['tl_repository']['install'] = 'Instalează';
+$GLOBALS['TL_LANG']['tl_repository']['installextension'] = 'Instalează sau actualizează extensia';
+$GLOBALS['TL_LANG']['tl_repository']['installingext'] = 'Instalează %s %s build %s';
+$GLOBALS['TL_LANG']['tl_repository']['installlogtitle'] = 'Jurnal de instalări / actualizări';
+$GLOBALS['TL_LANG']['tl_repository']['lickeyrequired'] = 'Această extensie necesită o cheie de licenţă. Puteţi accesa site-ul producătorului pentru a beneficia de una.';
+$GLOBALS['TL_LANG']['tl_repository']['none'] = 'Niciunul';
+$GLOBALS['TL_LANG']['tl_repository']['notfound'] = 'indisponibil';
+$GLOBALS['TL_LANG']['tl_repository']['ok'] = 'Accept';
+$GLOBALS['TL_LANG']['tl_repository']['okuninstextension'] = 'Accept pentru dezinstalare <em>%s</em> acum?';
+$GLOBALS['TL_LANG']['tl_repository']['showdetails'] = 'Arată detalii';
+$GLOBALS['TL_LANG']['tl_repository']['stateshint'] = 'Verifică stările pentru a fi inclus';
+$GLOBALS['TL_LANG']['tl_repository']['status'] = 'Status';
+$GLOBALS['TL_LANG']['tl_repository']['success'] = 'succes';
+$GLOBALS['TL_LANG']['tl_repository']['uninstallextension'] = 'Deznstalare';
+$GLOBALS['TL_LANG']['tl_repository']['updatedatabase'] = 'Verifică / actualizează baza de date';
+$GLOBALS['TL_LANG']['tl_repository']['updateextension'] = 'Actualizează extensie';
+$GLOBALS['TL_LANG']['tl_repository']['updateextensions'] = 'Actualizare la extensiile alese';
+$GLOBALS['TL_LANG']['tl_repository']['update'] = 'Actualizare';
+$GLOBALS['TL_LANG']['tl_repository']['updates'] = 'Actualizări';
+$GLOBALS['TL_LANG']['tl_repository']['updatehint'] = 'Verifică stările să fie incluse la actualizări.';
+$GLOBALS['TL_LANG']['tl_repository']['updatingext'] = 'Actualizează %s %s build %s';
+$GLOBALS['TL_LANG']['tl_repository']['validate'] = 'Repară';
+$GLOBALS['TL_LANG']['tl_repository']['validatingext'] = 'Verifică / repară %s %s build %s';
+$GLOBALS['TL_LANG']['tl_repository']['approvedForLabel'] = 'Aprobat pentru';
+$GLOBALS['TL_LANG']['tl_repository']['approvedForText'] = 'Contao %s la %s';
+$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule'] = 'Extensia SOAP nu este încărcată (configuraţi PHP cu parametrul --enable-soap).';
+$GLOBALS['TL_LANG']['tl_repository_statext']['uptodate'] = 'Actualizat';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapproved'] = 'Neaprobat pentru %s %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapprovedwith'] = 'Neaprobat cu %s %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['shouldwork'] = 'Trebuie să fie compatibil cu %s %s';
+$GLOBALS['TL_LANG']['tl_repository_statext']['newversion'] = 'O nouă versiune %s build %s este disponibilă.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['depmissing'] = 'Lipseşte extensia %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extnotfound'] = 'Extensia nu a fost găsită în baza de software.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['vernotfound'] = 'Versiunea instalată nu a fot găsită în baza de software';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extneedkey'] = 'Cheie de licenţă necesară, instalaţi extensia în avans.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['errorinstall'] = 'Instalare eşuată, se recomandă actualizare sau reparare.';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['free'] = 'Gratis';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['private'] = 'Privat';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['commercial'] = 'Comercial';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['application'] = 'Aplicaţie';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['plugin'] = 'Plugin';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['template'] = 'Şablon';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['utility'] = 'Utilitar';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['widget'] = 'Widget';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['translation'] = 'Traducere';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['bundle'] = 'Pachet';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['other'] = 'Altul';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['core'] = 'De bază';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['reldate'] = 'Publicare';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['rating'] = 'Rating';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['popular'] = 'Popularitate';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['name'] = 'Nume';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['title'] = 'Titlu';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['author'] = 'Autor';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['alpha'] = 'Alfa';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['beta'] = 'Beta';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['rc'] = 'Preproducţie';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['stable'] = 'Producţie';

@@ -139,14 +139,14 @@ class FileUpload extends \Backend
 			// Move the file to its destination
 			else
 			{
-				$pathinfo = pathinfo($file['name']);
+				$strExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
 				$arrAllowedTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['uploadTypes']));
 
 				// File type not allowed
-				if (!in_array(strtolower($pathinfo['extension']), $arrAllowedTypes))
+				if (!in_array(strtolower($strExtension), $arrAllowedTypes))
 				{
-					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $pathinfo['extension']));
-					$this->log('File type "'.$pathinfo['extension'].'" is not allowed to be uploaded ('.$file['name'].')', 'Uploader uploadTo()', TL_ERROR);
+					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $strExtension));
+					$this->log('File type "'.$strExtension.'" is not allowed to be uploaded ('.$file['name'].')', 'Uploader uploadTo()', TL_ERROR);
 					$this->blnHasError = true;
 				}
 				else

@@ -76,6 +76,7 @@
 
 /* Buttons */
 .buttonwrapper, .buttonwrapper * { vertical-align:middle; }
+.buttonwrapper a { padding-left:12px; }
 .mod_repository_submit form { display:inline; }
 
 /* Status colors */

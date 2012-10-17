@@ -592,7 +592,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			if ($this->blnIsDbAssisted)
 			{
 				$objFolder = \FilesModel::findByPath($source);
-				$objNewFolder = clone $objFolder;
+				$objNewFolder = clone $objFolder->current();
 
 				// Set the parent ID
 				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
@@ -608,6 +608,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				// Update the database
 				$objNewFolder->tstamp = time();
 				$objNewFolder->path = $destination;
+				$objNewFolder->name = basename($destination); // see #4628
 				$objNewFolder->save();
 			}
 
@@ -633,7 +634,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					if ($this->blnIsDbAssisted)
 					{
 						$objFile = \FilesModel::findByPath($source . '/' . $file);
-						$objNewFile = clone $objFile;
+						$objNewFile = clone $objFile->current();
 
 						// Update the database
 						$objNewFile->pid = $objNewFolder->id;
@@ -653,8 +654,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			while (file_exists(TL_ROOT . '/' . $new) && $count < 12)
 			{
-				$pif = pathinfo($destination);
-				$new = str_replace('.' . $pif['extension'], '_' . $count++ . '.' . $pif['extension'], $destination);
+				$ext = pathinfo($destination, PATHINFO_EXTENSION);
+				$new = str_replace('.' . $ext, '_' . $count++ . '.' . $ext, $destination);
 			}
 
 			$destination = $new;
@@ -665,7 +666,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			if ($this->blnIsDbAssisted)
 			{
 				$objFile = \FilesModel::findByPath($source);
-				$objNewFile = clone $objFile;
+				$objNewFile = clone $objFile->current();
 
 				// Set the parent ID
 				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
@@ -681,18 +682,19 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				// Update the database
 				$objNewFile->tstamp = time();
 				$objNewFile->path = $destination;
+				$objNewFile->name = basename($destination); // see #4628
 				$objNewFile->save();
-			}
 
-			$strPath = dirname($destination);
+				$strPath = dirname($destination);
 
-			// Update the MD5 hash of the parent folder
-			if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				$objModel = \FilesModel::findByPath($strPath);
-				$objFolder = new \Folder($objModel->path);
-				$objModel->hash = $objFolder->hash;
-				$objModel->save();
+				// Update the MD5 hash of the parent folder
+				if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
+				{
+					$objModel = \FilesModel::findByPath($strPath);
+					$objFolder = new \Folder($objModel->path);
+					$objModel->hash = $objFolder->hash;
+					$objModel->save();
+				}
 			}
 		}
 
@@ -917,7 +919,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$class = $this->User->uploader;
 
 		// See #4086
-		if (!$this->classFileExists($class))
+		if (!class_exists($class))
 		{
 			$class = 'FileUpload';
 		}
@@ -945,17 +947,30 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 				foreach ($arrUploaded as $strFile)
 				{
-					$objFile = new \File($strFile);
+					$objFile = \FilesModel::findByPath($strFile);
 
-					$objNew = new \FilesModel();
-					$objNew->pid       = $pid;
-					$objNew->tstamp    = time();
-					$objNew->type      = 'file';
-					$objNew->path      = $strFile;
-					$objNew->extension = $objFile->extension;
-					$objNew->hash      = md5_file(TL_ROOT . '/' . $strFile);
-					$objNew->name      = $objFile->basename;
-					$objNew->save();
+					// Existing file is being replaced (see #4818)
+					if ($objFile !== null)
+					{
+						$objFile->tstamp = time();
+						$objFile->path   = $strFile;
+						$objFile->hash   = md5_file(TL_ROOT . '/' . $strFile);
+						$objFile->save();
+					}
+					else
+					{
+						$objFile = new \File($strFile);
+
+						$objNew = new \FilesModel();
+						$objNew->pid       = $pid;
+						$objNew->tstamp    = time();
+						$objNew->type      = 'file';
+						$objNew->path      = $strFile;
+						$objNew->extension = $objFile->extension;
+						$objNew->hash      = md5_file(TL_ROOT . '/' . $strFile);
+						$objNew->name      = $objFile->basename;
+						$objNew->save();
+					}
 				}
 			}
 
@@ -1940,15 +1955,9 @@ window.addEvent(\'domready\', function() {
 			}
 
 			// Make sure unique fields are unique
-			if ($varValue != '' && $arrData['eval']['unique'])
+			if ($arrData['eval']['unique'] && $varValue != '' && !$this->Database->isUniqueValue($this->strTable, $this->strField, $varValue, $this->objActiveRecord->id))
 			{
-				$objUnique = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . $this->strField . "=? AND id!=?")
-											->execute($varValue, $this->objActiveRecord->id);
-
-				if ($objUnique->numRows)
-				{
-					throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $arrData['label'][0] ?: $this->strField));
-				}
+				throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $arrData['label'][0] ?: $this->strField));
 			}
 
 			// Handle multi-select fields in "override all" mode
@@ -2047,13 +2056,22 @@ window.addEvent(\'domready\', function() {
 			return '<p class="tl_error">You have to be an administrator to run the file synchronisation.</p>';
 		}
 
+		$arrExempt = array();
 		$this->arrMessages = array();
 
 		// Reset the "found" flag
 		$this->Database->query("UPDATE tl_files SET found=''");
 
+		// Exempt folders from the synchronisation (see #4522)
+		if ($GLOBALS['TL_CONFIG']['fileSyncExclude'] != '')
+		{
+			$arrExempt = array_map(function($e) {
+				return $GLOBALS['TL_CONFIG']['uploadPath'] . '/' . $e;
+			}, trimsplit(',', $GLOBALS['TL_CONFIG']['fileSyncExclude']));
+		}
+
 		// Traverse the file system
-		$this->execSync($GLOBALS['TL_CONFIG']['uploadPath']);
+		$this->execSync($GLOBALS['TL_CONFIG']['uploadPath'], 0, $arrExempt);
 
 		// Check for left-over entries in the DB
 		$objFiles = \FilesModel::findByFound('');
@@ -2175,10 +2193,17 @@ window.addEvent(\'domready\', function() {
 	 * Recursively synchronize the file system
 	 * @param string
 	 * @param integer
+	 * @param array
 	 */
-	protected function execSync($strPath, $intPid=0)
+	protected function execSync($strPath, $intPid=0, $arrExempt=array())
 	{
 		if (!$this->blnIsDbAssisted)
+		{
+			return;
+		}
+
+		// Exempt folders (see #4522)
+		if (in_array($strPath, $arrExempt))
 		{
 			return;
 		}
@@ -2208,6 +2233,12 @@ window.addEvent(\'domready\', function() {
 		// Folders
 		foreach ($arrFolders as $strFolder)
 		{
+			// Exempt folders (see #4522)
+			if (in_array($strFolder, $arrExempt))
+			{
+				continue;
+			}
+
 			$objFolder = new \Folder($strFolder);
 			$objModel = \FilesModel::findByPath($strFolder);
 
@@ -2241,7 +2272,7 @@ window.addEvent(\'domready\', function() {
 				$this->arrMessages[] = '<p class="tl_confirm">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderF'], $strFolder) . '</p>';
 			}
 
-			$this->execSync($strFolder, $objModel->id);
+			$this->execSync($strFolder, $objModel->id, $arrExempt);
 		}
 
 		// Files

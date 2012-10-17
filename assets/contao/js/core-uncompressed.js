@@ -1071,12 +1071,20 @@ var Backend =
 				return e.get('html');
 			}
 		});
+
+		// Links and input elements
 		['a[title]', 'input[title]'].each(function(el) {
-			new Tips.Contao($$(el), {
+			new Tips.Contao($$(el).filter(function(i) {
+				return i.title != '';
+			}), {
 				offset: {x:0, y:26}
 			});
 		});
-		$$('img[title]').each(function(el) {
+
+		// Images
+		$$('img[title]').filter(function(i) {
+			return i.title != '';
+		}).each(function(el) {
 			new Tips.Contao(el, {
 				offset: {x:0, y:((el.get('class') == 'gimage') ? 60 : 30)}
 			});
@@ -1565,6 +1573,9 @@ var Backend =
 		var span = li.getElement('span');
 		var img = span.getElement('img');
 
+		// Update the data-language attribute
+		li.setProperty('data-language', opt.value);
+
 		// Update the language text
 		span.set('text', opt.options[opt.selectedIndex].text + ' ');
 		img.inject(span, 'bottom');
@@ -1586,9 +1597,34 @@ var Backend =
 		// Disable the "add language" button
 		el.getParent('div').getElement('input[type="button"]').setProperty('disabled', true);
 
-		// Remove the option from the select menu and update chosen
-		opt.removeChild(opt.options[opt.selectedIndex]);
+		// Disable the option and update chosen
+		opt.options[opt.selectedIndex].setProperty('disabled', true);
+		opt.value = '';
 		opt.fireEvent('liszt:updated');
+	},
+
+	/**
+	 * Remove a meta entry
+	 * @param object
+	 */
+	metaDelete: function(el) {
+		var li = el.getParent('li')
+		var opt = el.getParent('div').getElement('select');
+
+		// Empty the last element instead of removing it (see #4858)
+		if (li.getPrevious() === null && li.getNext() === null) {
+			li.getElements('input').each(function(input) {
+				input.value = '';
+			});
+		} else {
+			// Enable the option and update chosen
+			opt.getElement('option[value=' + li.getProperty('data-language') + ']').removeProperty('disabled');
+			li.destroy();
+			opt.fireEvent('liszt:updated');
+		}
+
+		// Remove the tool tip of the delete button
+		$$('div.tip-wrap').destroy();
 	},
 
 	/**
@@ -1659,89 +1695,6 @@ window.addEvent('ajax_change', function() {
 		}).chosen();
 	}
 	Backend.addInteractiveHelp();
-});
-
-/**
- * Class ContextMenu
- *
- * Provide methods to handle context menus
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://contao.org>
- */
-var ContextMenu =
-{
-	/**
-	 * Initialize the context menu
-	 * @param object
-	 * @param object
-	 */
-	initialize: function() {
-		// Hide the edit header buttons
-		$$('a.edit-header').each(function(el) {
-			el.addClass('invisible');
-		});
-
-		// Add a trigger to the edit buttons
-		$$('a.contextmenu').each(function(el) {
-			var el2 = el.getNext('a');
-
-			// Return if there is no edit header button
-			if (!el2 || !el2.hasClass('edit-header')) {
-				return;
-			}
-
-			// Show the context menu
-			el.addEvent('contextmenu', function(e) {
-				e.preventDefault();
-				ContextMenu.show(el, el2, e);
-			});
-		});
-
-		// Hide the context menu
-		$(document.body).addEvent('click', function() {
-			ContextMenu.hide();
-		});
-	},
-
-	/**
-	 * Show the context menu
-	 * @param object
-	 * @param object
-	 * @param object
-	 */
-	show: function(el, el2, e) {
-		ContextMenu.hide();
-		var img = el.getFirst('img');
-		var im2 = el2.getFirst('img');
-
-		var div = new Element('div', {
-			'id': 'contextmenu',
-			'html': '<a href="'+ el.href +'" title="'+ el.title +'">'+ el.get('html') +' '+ img.alt +'</a><a href="'+ el2.href +'" title="'+ el2.title +'">'+ el2.get('html') +' '+ im2.alt +'</a>',
-			'styles': {
-				'top': (el.getPosition().y - 6) + 'px'
-			}
-		}).inject($(document.body), 'bottom');
-
-		// Set the left position after the element has been generated!
-		div.setStyle('left', el.getPosition().x - (div.getSize().x / 2));
-	},
-
-	/**
-	 * Hide the context menu
-	 */
-	hide: function() {
-		if ($('contextmenu') != null) {
-			$('contextmenu').destroy();
-		}
-	}
-};
-
-// Initialize the context menu
-window.addEvent('domready', function() {
-	ContextMenu.initialize();
-});
-window.addEvent('structure', function() {
-	ContextMenu.initialize();
 });
 
 

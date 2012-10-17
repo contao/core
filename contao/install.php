@@ -655,6 +655,11 @@ class InstallTool extends Backend
 								   ->execute(Input::post('name'), Input::post('email', true), Input::post('username', true), $strPassword);
 
 					$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", Input::post('email', true));
+
+					// Scan the upload folder
+					$this->import('Database\\Updater', 'Updater');
+					$this->Updater->scanUploadFolder();
+
 					$this->reload();
 				}
 
@@ -761,7 +766,7 @@ class InstallTool extends Backend
 				$this->reload();
 			}
 
-			$this->Template->is28Update = true;
+			$this->Template->is29Update = true;
 			$this->outputAndExit();
 		}
 	}
@@ -826,7 +831,7 @@ class InstallTool extends Backend
 			return;
 		}
 
-		$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_user");
+		$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_page");
 
 		// Still a fresh installation
 		if ($objRow->count < 1)
@@ -837,7 +842,14 @@ class InstallTool extends Backend
 		// Save the old upload path in the localconfig.php
 		if ($GLOBALS['TL_CONFIG']['uploadPath'] == 'files' && is_dir(TL_ROOT . '/tl_files'))
 		{
+			$GLOBALS['TL_CONFIG']['uploadPath'] = 'tl_files';
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['uploadPath']", 'tl_files');
+		}
+
+		// Show a warning if the user has renamed the tl_files directory already (see #4626)
+		if (!is_dir(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath']))
+		{
+			$this->Template->filesWarning = sprintf($GLOBALS['TL_LANG']['tl_install']['filesWarning'], '<a href="https://gist.github.com/3304014" target="_blank">https://gist.github.com/3304014</a>');
 		}
 
 		// Step 1: database structure

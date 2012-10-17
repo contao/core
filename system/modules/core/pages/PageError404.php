@@ -53,9 +53,23 @@ class PageError404 extends \Frontend
 		$objRootPage = $this->getRootPageFromUrl();
 
 		// Forward if the language should be but is not set (see #4028)
-		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !isset($_GET['language']))
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 		{
-			$this->redirect($objRootPage->language . '/' . \Environment::get('request'), 301);
+			// Get the request string without the index.php fragment
+			if (\Environment::get('request') == 'index.php')
+			{
+				$strRequest = '';
+			}
+			else
+			{
+				$strRequest = str_replace('index.php/', '', \Environment::get('request'));
+			}
+
+			// Only redirect if there is no language fragment (see #4669)
+			if ($strRequest != '' && !preg_match('@^[a-z]{2}/@', $strRequest))
+			{
+				$this->redirect($objRootPage->language . '/' . \Environment::get('request'), 301);
+			}
 		}
 
 		// Look for an 404 page

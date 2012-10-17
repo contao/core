@@ -81,6 +81,12 @@ class PageSelector extends \Widget
 		// Search for a specific page
 		if ($for != '')
 		{
+			// The keyword must not start with a wildcard (see #4910)
+			if (strncmp($for, '*', 1) === 0)
+			{
+				$for = substr($for, 1);
+			}
+
 			$objRoot = $this->Database->prepare("SELECT id FROM tl_page WHERE CAST(title AS CHAR) REGEXP ?")
 									  ->execute($for);
 
@@ -94,7 +100,7 @@ class PageSelector extends \Widget
 					while ($objRoot->next())
 					{
 						// Predefined node set (see #3563)
-						if (count(array_intersect($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes'], $this->getParentRecords($objRoot->id, 'tl_page'))) > 0)
+						if (count(array_intersect($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes'], $this->Database->getParentRecords($objRoot->id, 'tl_page'))) > 0)
 						{
 							$arrRoot[] = $objRoot->id;
 						}
@@ -114,7 +120,7 @@ class PageSelector extends \Widget
 					while ($objRoot->next())
 					{
 						// Show only mounted pages to regular users
-						if (count(array_intersect($this->User->pagemounts, $this->getParentRecords($objRoot->id, 'tl_page'))) > 0)
+						if (count(array_intersect($this->User->pagemounts, $this->Database->getParentRecords($objRoot->id, 'tl_page'))) > 0)
 						{
 							$arrRoot[] = $objRoot->id;
 						}
@@ -362,7 +368,7 @@ class PageSelector extends \Widget
 
 		foreach ($this->varValue as $id)
 		{
-			$arrPids = $this->getParentRecords($id, 'tl_page');
+			$arrPids = $this->Database->getParentRecords($id, 'tl_page');
 			array_shift($arrPids); // the first element is the ID of the page itself
 			$this->arrNodes = array_merge($this->arrNodes, $arrPids);
 		}

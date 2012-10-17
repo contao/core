@@ -5,6 +5,289 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Readded the option to limit the file tree to a certain path (see #4926).
+
+### Improved
+Added a hint that selected files can be dragged to re-order them (see #4838). 
+
+### Fixed
+Correctly add news and event images as RSS feed enclosures (see #4928).
+
+### Fixed
+Correctly scale videos (see #4896).
+
+### Fixed
+Readd a language to the meta editor drop-down if it is deleted (see #4716).
+
+### Fixed
+Add the static JavaScript file before the non-static ones (see #4890).
+
+### Fixed
+Correctly check permissions to toggle the visibility of content elements now
+that they can be used everywhere (see #4894).
+
+### Fixed
+Added an accessible jQuery accordion variant (see #4900).
+
+### Fixed
+Correctly link to FAQs via insert tag (see #4905).
+
+### Fixed
+Correctly handle wildcards in the page and file picker (see #4910).
+
+### Fixed
+Correctly handle the case that a front end module is included in a page layout
+more than once (see #4849).
+
+### Fixed
+Correctly detect the language fragment in the error 404 page (see #4669).
+
+### Fixed
+Correctly check for the version 2.9 update in the install tool (see #4920).
+
+### Fixed
+Automatically adjust the CSS framework if the layout builder and the responsive
+grid are combined (see #4824).
+
+### Fixed
+Pass the cache status to all recursive `replaceInsertTags()` calls (see #4402).
+
+### Updated
+Updated jQuery to version 1.8.2 and jQuery UI to version 1.8.24 (see #4848).
+
+### Fixed
+The autoload creator now correctly reads files (see #4876).
+
+### Fixed
+Encode single quotes in JavaScript calls (see #4889).
+
+### Fixed
+Do not add a content element to news or events without text (see #4882).
+
+### Fixed
+Fixed the automatic page alias generator (see #4880).
+
+
+Version 3.0.RC2 (2012-09-27)
+----------------------------
+
+### Fixed
+Correctly handle small class files in the autoload creator (see #4876).
+
+### Fixed
+The Email class now correctly embeds all kind of images (see #4562).
+
+### Fixed
+Consider the dynamic parent table when deleting child records (see #4867).
+
+### Fixed
+Correctly detect the namespace in the autoload creator and support custom
+configurations per path (see #4776).
+
+### Fixed
+Do not regenerate the `autoload.php` files when generating the IDE compatibility
+file (see #4810).
+
+### Fixed
+Model class names which cannot be build from the corresponding table name can
+now be registered in the `$GLOBALS['TL_MODELS']` array (see #4796).
+
+### Fixed
+Removed the back end context menu, because it was buggy in IE and did not work
+at all on touch-based devices (see #4459).
+
+### Fixed
+Do not set a right boundary for the calendar navigation if there are events with
+unlimited recurrences (see #4862).
+
+### Fixed
+Gradient angles are now converted from the new syntax to the legacy syntax for
+the prefixed versions (see #4569). This also means that from now on you have to
+use the new syntax, e.g. "to bottom" instead of "top" and "180deg" instead of
+"270deg" to generate a top to bottom gradient.
+
+### Fixed
+Show the hint arrows in all "imageSize" fields by default (see #4326).
+
+### Updated
+Updated TCPDF to version 5.9.192 and fixed some CHMOD settings (see #4819).
+
+### Fixed
+Added the classes "first" and "last" to the breadcrumb menu to be more in line
+with the other navigation templates (see #4833).
+
+### Fixed
+Correctly link to articles and FAQs when using insert tags (see #4835).
+
+### Fixed
+Do not add the file picker to the list of referer addresses (see #4855).
+
+### Fixed
+The CAPTCHA form field now supports the "placeholder" attribute (see #4865).
+
+### Fixed
+Correctly add enclosures to RSS/Atom feeds (see #4853).
+
+### Fixed
+Handle numeric IDs in the "image" insert tag (see #4805).
+
+### Fixed
+If folder URLs are disabled in the back end settings, the "generate alias" job
+(edit multiple) will generate simple aliases (see #4846).
+
+### Fixed
+Correctly handle replacements when uploading files (see #4818).
+
+### Fixed
+Only limit `getTemplateGroup()` to a theme in the articles module (see #4808).
+
+### Fixed
+Decode Punycode domains when used via insert tag (see #4753).
+
+### Fixed
+Correctly handle open tags in `String::substrHtml()` (see #4773).
+
+### Fixed
+Correctly handle units when importing style sheets (see #4721).
+
+### Fixed
+Manually merge the legacy `database.sql` definitions (see #4766).
+
+### Fixed
+Skip news archives and calendars without a jumpTo page when creating RSS feeds
+(see #4784).
+
+### Fixed
+Index the content of the download(s) element (see #4755).
+
+### Fixed
+The mediabox plugin did not play Vimeo videos (see #4770).
+
+### Fixed
+Comments can now be sorted descending again (see #4782).
+
+### Fixed
+Readded the news list "skip items" feature (see #4783).
+
+### Fixed
+Use the `Validator` class to validate date and time formats (see #4762).
+
+### Fixed
+Do not add invalid "float" commands to images (see #4758).
+
+### Fixed
+Fixed the CHANGELOG parser in the back end (see #4190).
+
+### Fixed
+Fixed the SyntaxHighlighter "html-script" option (see #4748).
+
+### Fixed
+Do not offer to drop all tables when installing an extension (see #4622).
+
+### Fixed
+Consider the domain, language and publication settings when searching for a
+folder-style alias (see #4652).
+
+### Fixed
+Ignore case when entering an extension name in the extension installer of the
+repository manager (see #4689).
+
+### Fixed
+Consider the language of a forward target when setting up a forward page or
+using a `{{link}}` insert tag (see #4706).
+
+### Fixed
+Allow to import other white-space values than `nowrap` (see #4519).
+
+### Fixed
+Show the teaser text in the full view if a news item or event does not have a
+text, so linking and commenting is possible (see #4630).
+
+### Fixed
+The style sheet importer now handles background gradients (see #4640).
+
+### Updated
+Update jQuery to version 1.8.1 (see #4678).
+
+### Fixed
+Correctly determine in the install tool whether it is a fresh installation or
+the version 3 update is required (see #4676). Also, scan the files directory if
+an administrator account is created during the installation.
+
+### Fixed
+If an article is selected, do not hide articles in other columns (see #4740).
+
+### Fixed
+Support uppercase TLDs when validating e-mail addresses (see #4738).
+
+### Fixed
+Do not show the tool tips if the title is empty (see #4672).
+
+### Fixed
+Show the back button when editing multiple elements in parent view (see #4709).
+
+### Changed
+Changed the `Controller::replaceInsertTags()` logic so non-cacheable tags are
+preserved by default (see #4712).
+
+### Fixed
+Correctly link new items and events to articles (see #4728).
+
+### Fixed
+Output the dynamic HEAD tags before the static ones (see #4700).
+
+### Fixed
+Do not cache the page if the `file` parameter is set (see #4702).
+
+### Changed
+Renamed the public module folders to "assets" (see #4667).
+
+### Added
+You can now exempt folders from the files synchronisation (see #4522). Exempt
+folders will also be hidden in the TinyMCE popup file select menu.
+
+### Fixed
+The newsletter subscription modules now work again (see #4660).
+
+### Fixed
+Add the static files URL to images added in the rich text editor.
+
+### Fixed
+Add the SyntaxHighlighter scripts at the page bottom.
+
+### Fixed
+Do not add the jQuery/MooTools scripts as separate scripts.
+
+### Fixed
+The new file structure only allows for two static URLs pointing to the upload
+folder (`TL_FILES_URL`) and the assets folder (`TL_ASSETS_URL`) (see #4638). The
+old constants will remain available for reasons of backwards compatibility.
+
+### Fixed
+Clone the Model and not the Collection when copying files (see #4628).
+
+### Fixed
+The "custom navigation" and "quick link" modules did not show if there was only
+a single page (see #4616).
+
+### Fixed
+The quick navigation module could not jump to pages named "index" (see #4611).
+
+### Fixed
+Replaced `SplFileInfo::getExtension()` which is only available from PHP 5.3.6
+with `pathinfo($info->getFilename())` (see #4619).
+
+### Fixed
+Do not send a 404 header if a download element does not find a file to send to
+the client. There might be other download elements which do (see #4632).
+
+### Fixed
+Do not create files without file name in the extension creator (see #4635).
+
+### Fixed
+Moved `Controller::restoreBasicEntities()` to the `String` class (see #4646).
+
+### Fixed
 The file picker can now be accessed properly by regular users.
 
 ### Fixed

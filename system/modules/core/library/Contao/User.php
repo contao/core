@@ -74,30 +74,6 @@ abstract class User extends \System
 	protected $strCookie;
 
 	/**
-	 * Authentication object
-	 * @var object
-	 */
-	protected $objAuth;
-
-	/**
-	 * Import object
-	 * @var object
-	 */
-	protected $objImport;
-
-	/**
-	 * Login object
-	 * @var object
-	 */
-	protected $objLogin;
-
-	/**
-	 * Logout object
-	 * @var object
-	 */
-	protected $objLogout;
-
-	/**
 	 * Data
 	 * @var array
 	 */
@@ -170,7 +146,7 @@ abstract class User extends \System
 	 */
 	public static function getInstance()
 	{
-		if (!is_object(static::$objInstance))
+		if (static::$objInstance === null)
 		{
 			static::$objInstance = new static();
 		}

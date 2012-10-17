@@ -199,11 +199,11 @@ class PageModel extends \Model
 
 
 	/**
-	 * Find a page matching a list of possible alias names
+	 * Find pages matching a list of possible alias names
 	 * 
 	 * @param array $arrAliases An array of possible alias names
 	 * 
-	 * @return \Model|null The model or null if there is no matching page
+	 * @return \Model_Collection|null A collection of Models or null if there is no matching pages
 	 */
 	public static function findByAliases($arrAliases)
 	{
@@ -226,7 +226,14 @@ class PageModel extends \Model
 		$t = static::$strTable;
 		$arrColumns = array("$t.alias IN('" . implode("','", array_filter($arrAliases)) . "')");
 
-		return static::findOneBy($arrColumns, null, array('order'=>\Database::getInstance()->findInSet("$t.alias", $arrAliases)));
+		// Check the publication status (see #4652)
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		return static::findBy($arrColumns, null, array('order'=>\Database::getInstance()->findInSet("$t.alias", $arrAliases)));
 	}
 
 

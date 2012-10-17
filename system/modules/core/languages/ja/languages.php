@@ -1,0 +1,157 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/ja/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$GLOBALS['TL_LANG']['LNG']['aa'] = 'アファル語';
+$GLOBALS['TL_LANG']['LNG']['ab'] = 'アブハズ語';
+$GLOBALS['TL_LANG']['LNG']['af'] = 'アフリカーンス語';
+$GLOBALS['TL_LANG']['LNG']['am'] = 'アムハラ語';
+$GLOBALS['TL_LANG']['LNG']['ar'] = 'アラビア語';
+$GLOBALS['TL_LANG']['LNG']['as'] = 'アッサム語';
+$GLOBALS['TL_LANG']['LNG']['ay'] = 'アイマラ語';
+$GLOBALS['TL_LANG']['LNG']['az'] = 'アゼルバイジャン語';
+$GLOBALS['TL_LANG']['LNG']['ba'] = 'バシキール語';
+$GLOBALS['TL_LANG']['LNG']['be'] = 'ベラルーシ語';
+$GLOBALS['TL_LANG']['LNG']['bg'] = 'ブルガリア語';
+$GLOBALS['TL_LANG']['LNG']['bh'] = 'ビハール語';
+$GLOBALS['TL_LANG']['LNG']['bi'] = 'ビスラマ語';
+$GLOBALS['TL_LANG']['LNG']['bn'] = 'ベンガル語';
+$GLOBALS['TL_LANG']['LNG']['bo'] = 'チベット語';
+$GLOBALS['TL_LANG']['LNG']['br'] = 'ブルトン語';
+$GLOBALS['TL_LANG']['LNG']['bs'] = 'ボスニア語';
+$GLOBALS['TL_LANG']['LNG']['ca'] = 'カタルーニャ語、バレンシア語';
+$GLOBALS['TL_LANG']['LNG']['co'] = 'コルシカ語';
+$GLOBALS['TL_LANG']['LNG']['cr'] = 'クリー語';
+$GLOBALS['TL_LANG']['LNG']['cs'] = 'チェコ語';
+$GLOBALS['TL_LANG']['LNG']['cy'] = 'ウェールズ語';
+$GLOBALS['TL_LANG']['LNG']['da'] = 'デンマーク語';
+$GLOBALS['TL_LANG']['LNG']['de'] = 'ドイツ語';
+$GLOBALS['TL_LANG']['LNG']['dz'] = 'ゾンカ語';
+$GLOBALS['TL_LANG']['LNG']['el'] = 'ギリシャ語';
+$GLOBALS['TL_LANG']['LNG']['en'] = '英語';
+$GLOBALS['TL_LANG']['LNG']['eo'] = 'エスペラント';
+$GLOBALS['TL_LANG']['LNG']['es'] = 'スペイン語';
+$GLOBALS['TL_LANG']['LNG']['et'] = 'エストニア語';
+$GLOBALS['TL_LANG']['LNG']['eu'] = 'バスク語';
+$GLOBALS['TL_LANG']['LNG']['fa'] = 'ペルシア語';
+$GLOBALS['TL_LANG']['LNG']['fi'] = 'フィンランド語';
+$GLOBALS['TL_LANG']['LNG']['fj'] = 'フィジー語';
+$GLOBALS['TL_LANG']['LNG']['fo'] = 'フェロー語';
+$GLOBALS['TL_LANG']['LNG']['fr'] = 'フランス語';
+$GLOBALS['TL_LANG']['LNG']['fy'] = 'フリジア語';
+$GLOBALS['TL_LANG']['LNG']['ga'] = 'アイルランド語';
+$GLOBALS['TL_LANG']['LNG']['gd'] = 'スコットランド・ゲール語';
+$GLOBALS['TL_LANG']['LNG']['gl'] = 'ガリシア語';
+$GLOBALS['TL_LANG']['LNG']['gn'] = 'グアラニー語';
+$GLOBALS['TL_LANG']['LNG']['gu'] = 'グジャラート語';
+$GLOBALS['TL_LANG']['LNG']['ha'] = 'ハウサ語';
+$GLOBALS['TL_LANG']['LNG']['he'] = 'ヘブライ語';
+$GLOBALS['TL_LANG']['LNG']['hi'] = 'ヒンディー語';
+$GLOBALS['TL_LANG']['LNG']['hr'] = 'クロアチア語';
+$GLOBALS['TL_LANG']['LNG']['hu'] = 'ハンガリー語';
+$GLOBALS['TL_LANG']['LNG']['hy'] = 'アルメニア語';
+$GLOBALS['TL_LANG']['LNG']['ia'] = 'インターリングア';
+$GLOBALS['TL_LANG']['LNG']['ie'] = 'インターリング';
+$GLOBALS['TL_LANG']['LNG']['id'] = 'インドネシア語';
+$GLOBALS['TL_LANG']['LNG']['ik'] = 'イヌピアック語';
+$GLOBALS['TL_LANG']['LNG']['is'] = 'アイスランド語';
+$GLOBALS['TL_LANG']['LNG']['it'] = 'イタリア語';
+$GLOBALS['TL_LANG']['LNG']['iu'] = 'イヌイット語';
+$GLOBALS['TL_LANG']['LNG']['ja'] = '日本語';
+$GLOBALS['TL_LANG']['LNG']['jv'] = 'ジャワ語';
+$GLOBALS['TL_LANG']['LNG']['ka'] = 'グルジア語';
+$GLOBALS['TL_LANG']['LNG']['kk'] = 'カザフ語';
+$GLOBALS['TL_LANG']['LNG']['kl'] = 'グリーンランド語';
+$GLOBALS['TL_LANG']['LNG']['km'] = 'クメール語';
+$GLOBALS['TL_LANG']['LNG']['kn'] = 'カンナダ語';
+$GLOBALS['TL_LANG']['LNG']['ko'] = '韓国語';
+$GLOBALS['TL_LANG']['LNG']['ks'] = 'カシミール語';
+$GLOBALS['TL_LANG']['LNG']['ku'] = 'クルド語';
+$GLOBALS['TL_LANG']['LNG']['ky'] = 'キルギス語';
+$GLOBALS['TL_LANG']['LNG']['la'] = 'ラテン語';
+$GLOBALS['TL_LANG']['LNG']['ln'] = 'リンガラ語';
+$GLOBALS['TL_LANG']['LNG']['lo'] = 'ラーオ語';
+$GLOBALS['TL_LANG']['LNG']['lt'] = 'リトアニア語';
+$GLOBALS['TL_LANG']['LNG']['lv'] = 'ラトビア語';
+$GLOBALS['TL_LANG']['LNG']['mg'] = 'マダガスカル語';
+$GLOBALS['TL_LANG']['LNG']['mi'] = 'マオリ語';
+$GLOBALS['TL_LANG']['LNG']['mk'] = 'マケドニア語';
+$GLOBALS['TL_LANG']['LNG']['ml'] = 'マラヤーラム語';
+$GLOBALS['TL_LANG']['LNG']['mn'] = 'モンゴル語';
+$GLOBALS['TL_LANG']['LNG']['mo'] = 'モルダビア語';
+$GLOBALS['TL_LANG']['LNG']['mr'] = 'マラッタ語';
+$GLOBALS['TL_LANG']['LNG']['ms'] = 'マレー語';
+$GLOBALS['TL_LANG']['LNG']['mt'] = 'マルタ語';
+$GLOBALS['TL_LANG']['LNG']['my'] = 'ビルマ語';
+$GLOBALS['TL_LANG']['LNG']['na'] = 'ナウル語';
+$GLOBALS['TL_LANG']['LNG']['ne'] = 'ネパール語';
+$GLOBALS['TL_LANG']['LNG']['nl'] = 'オランダ語';
+$GLOBALS['TL_LANG']['LNG']['no'] = 'ノルウェー語';
+$GLOBALS['TL_LANG']['LNG']['oc'] = 'オック語';
+$GLOBALS['TL_LANG']['LNG']['om'] = 'オロモ語';
+$GLOBALS['TL_LANG']['LNG']['or'] = 'オリヤー語';
+$GLOBALS['TL_LANG']['LNG']['pa'] = 'パンジャーブ語';
+$GLOBALS['TL_LANG']['LNG']['pl'] = 'ポーランド語';
+$GLOBALS['TL_LANG']['LNG']['ps'] = 'パシュトー語';
+$GLOBALS['TL_LANG']['LNG']['pt'] = 'ポルトガル語';
+$GLOBALS['TL_LANG']['LNG']['qu'] = 'ケチュア語';
+$GLOBALS['TL_LANG']['LNG']['rm'] = 'ロマンシュ語';
+$GLOBALS['TL_LANG']['LNG']['rn'] = 'ルンディ語';
+$GLOBALS['TL_LANG']['LNG']['ro'] = 'ルーマニア語';
+$GLOBALS['TL_LANG']['LNG']['ru'] = 'ロシア語';
+$GLOBALS['TL_LANG']['LNG']['rw'] = 'ルワンダ語';
+$GLOBALS['TL_LANG']['LNG']['sa'] = 'サンスクリット';
+$GLOBALS['TL_LANG']['LNG']['sd'] = 'シンディー語';
+$GLOBALS['TL_LANG']['LNG']['sg'] = 'サンゴ語';
+$GLOBALS['TL_LANG']['LNG']['sh'] = 'セルビア・クロアチア語';
+$GLOBALS['TL_LANG']['LNG']['si'] = 'シンハラ語';
+$GLOBALS['TL_LANG']['LNG']['sk'] = 'スロバキア語';
+$GLOBALS['TL_LANG']['LNG']['sl'] = 'スロベニア語';
+$GLOBALS['TL_LANG']['LNG']['sm'] = 'サモア語';
+$GLOBALS['TL_LANG']['LNG']['sn'] = 'ショナ語';
+$GLOBALS['TL_LANG']['LNG']['so'] = 'ソマリ語';
+$GLOBALS['TL_LANG']['LNG']['sq'] = 'アルバニア語';
+$GLOBALS['TL_LANG']['LNG']['sr'] = 'セルビア語';
+$GLOBALS['TL_LANG']['LNG']['ss'] = 'スワジ語';
+$GLOBALS['TL_LANG']['LNG']['st'] = '南ソト語';
+$GLOBALS['TL_LANG']['LNG']['su'] = 'スンダ語';
+$GLOBALS['TL_LANG']['LNG']['sv'] = 'スウェーデン語';
+$GLOBALS['TL_LANG']['LNG']['sw'] = 'スワヒリ語';
+$GLOBALS['TL_LANG']['LNG']['ta'] = 'タミル語';
+$GLOBALS['TL_LANG']['LNG']['te'] = 'テルグ語';
+$GLOBALS['TL_LANG']['LNG']['tg'] = 'タジク語';
+$GLOBALS['TL_LANG']['LNG']['th'] = 'タイ語';
+$GLOBALS['TL_LANG']['LNG']['ti'] = 'ティグリニャ語';
+$GLOBALS['TL_LANG']['LNG']['tk'] = 'トルクメン語';
+$GLOBALS['TL_LANG']['LNG']['tl'] = 'タガログ語';
+$GLOBALS['TL_LANG']['LNG']['tn'] = 'ツワナ語';
+$GLOBALS['TL_LANG']['LNG']['to'] = 'トンガ語';
+$GLOBALS['TL_LANG']['LNG']['tr'] = 'トルコ語';
+$GLOBALS['TL_LANG']['LNG']['ts'] = 'ツォンガ語';
+$GLOBALS['TL_LANG']['LNG']['tt'] = 'タタール語';
+$GLOBALS['TL_LANG']['LNG']['tw'] = 'トウィ語';
+$GLOBALS['TL_LANG']['LNG']['ug'] = 'ウイグル語';
+$GLOBALS['TL_LANG']['LNG']['uk'] = 'ウクライナ語';
+$GLOBALS['TL_LANG']['LNG']['ur'] = 'ウルドゥー語';
+$GLOBALS['TL_LANG']['LNG']['uz'] = 'ウズベク語';
+$GLOBALS['TL_LANG']['LNG']['vi'] = 'ベトナム語';
+$GLOBALS['TL_LANG']['LNG']['vo'] = 'ヴォラピュク';
+$GLOBALS['TL_LANG']['LNG']['wo'] = 'ウォロフ語';
+$GLOBALS['TL_LANG']['LNG']['xh'] = 'コサ語';
+$GLOBALS['TL_LANG']['LNG']['yi'] = 'イディッシュ語';
+$GLOBALS['TL_LANG']['LNG']['yo'] = 'ヨルバ語';
+$GLOBALS['TL_LANG']['LNG']['za'] = 'チワン語';
+$GLOBALS['TL_LANG']['LNG']['zh'] = '中国語';
+$GLOBALS['TL_LANG']['LNG']['zu'] = 'ズールー語';

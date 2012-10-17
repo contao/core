@@ -97,7 +97,7 @@ class Index extends Backend
 		$this->Template->messages = Message::generate();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->languages = $this->getBackendLanguages();
+		$this->Template->languages = System::getLanguages(true);
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['login']);
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->action = ampersand(Environment::get('request'));

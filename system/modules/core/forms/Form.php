@@ -105,7 +105,7 @@ class Form extends \Hybrid
 				$strClass = $GLOBALS['TL_FFL'][$objFields->type];
 
 				// Continue if the class is not defined
-				if (!$this->classFileExists($strClass))
+				if (!class_exists($strClass))
 				{
 					continue;
 				}
@@ -130,6 +130,15 @@ class Form extends \Hybrid
 				if ($objFields->type == 'submit')
 				{
 					$arrData['name'] = '';
+				}
+
+				// Unset the default value depending on the field type (see #4722)
+				if (!empty($arrData['value']))
+				{
+					if (!in_array('value', trimsplit('[,;]', $GLOBALS['TL_DCA']['tl_form_field']['palettes'][$objFields->type])))
+					{
+						$arrData['value'] = '';
+					}
 				}
 
 				$objWidget = new $strClass($arrData);
@@ -204,7 +213,7 @@ class Form extends \Hybrid
 		}
 
 		// Add a warning to the page title
-		if ($doNotSubmit && !\Environment::get('isAjax'))
+		if ($doNotSubmit && !\Environment::get('isAjaxRequest'))
 		{
 			global $objPage;
 			$title = $objPage->pageTitle ?: $objPage->title;

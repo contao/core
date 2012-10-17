@@ -5,21 +5,20 @@
  * 
  * Copyright (C) 2005-2012 Leo Feyer
  * 
- * @package Core
- * @link    http://contao.org
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/de/
+ * 
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-
-/**
- * Languages (thanks to Leo Unglaub)
- * @see http://www.metatab.de/meta_tags/sprachenkuerzel.htm
- */
 $GLOBALS['TL_LANG']['LNG']['aa'] = 'Kuschitisch';
 $GLOBALS['TL_LANG']['LNG']['ab'] = 'Abchasisch';
 $GLOBALS['TL_LANG']['LNG']['af'] = 'Afrikaans';
-$GLOBALS['TL_LANG']['LNG']['ar'] = 'Arabisch';
 $GLOBALS['TL_LANG']['LNG']['am'] = 'Amharisch';
+$GLOBALS['TL_LANG']['LNG']['ar'] = 'Arabisch';
 $GLOBALS['TL_LANG']['LNG']['as'] = 'Assamesisch';
 $GLOBALS['TL_LANG']['LNG']['ay'] = 'Aimara';
 $GLOBALS['TL_LANG']['LNG']['az'] = 'Aserbeidschanisch';
@@ -64,8 +63,8 @@ $GLOBALS['TL_LANG']['LNG']['hr'] = 'Kroatisch';
 $GLOBALS['TL_LANG']['LNG']['hu'] = 'Ungarisch';
 $GLOBALS['TL_LANG']['LNG']['hy'] = 'Armenisch';
 $GLOBALS['TL_LANG']['LNG']['ia'] = 'Interlingua';
-$GLOBALS['TL_LANG']['LNG']['id'] = 'Indonesisch';
 $GLOBALS['TL_LANG']['LNG']['ie'] = 'Interlingue';
+$GLOBALS['TL_LANG']['LNG']['id'] = 'Indonesisch';
 $GLOBALS['TL_LANG']['LNG']['ik'] = 'Inupiak';
 $GLOBALS['TL_LANG']['LNG']['is'] = 'Isländisch';
 $GLOBALS['TL_LANG']['LNG']['it'] = 'Italienisch';

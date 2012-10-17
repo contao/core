@@ -213,8 +213,10 @@ class ModuleSubscribe extends \Module
 			$this->reload();
 		}
 
+		$varInput = \Idna::encodeEmail(\Input::post('email', true));
+
 		// Validate the e-mail address
-		if (!\Validator::isEmail(\Input::post('email', true)))
+		if (!\Validator::isEmail($varInput))
 		{
 			$_SESSION['SUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['email'];
 			$this->reload();

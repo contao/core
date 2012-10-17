@@ -95,7 +95,8 @@ class ModuleBreadcrumb extends \Module
 				'href'     => (($objFirstPage !== null) ? $this->generateFrontendUrl($objFirstPage->row()) : \Environment::get('base')),
 				'title'    => specialchars($objPages->pageTitle ?: $objPages->title, true),
 				'link'     => $objPages->title,
-				'data'     => $objFirstPage->row()
+				'data'     => $objFirstPage->row(),
+				'class'    => ''
 			);
 
 			array_pop($pages);
@@ -143,7 +144,8 @@ class ModuleBreadcrumb extends \Module
 				'href'     => $href,
 				'title'    => specialchars($pages[$i]['pageTitle'] ?: $pages[$i]['title'], true),
 				'link'     => $pages[$i]['title'],
-				'data'     => $pages[$i]
+				'data'     => $pages[$i],
+				'class'    => ''
 			);
 		}
 
@@ -157,7 +159,8 @@ class ModuleBreadcrumb extends \Module
 				'href'     => $this->generateFrontendUrl($pages[0]),
 				'title'    => specialchars($pages[0]['pageTitle'] ?: $pages[0]['title'], true),
 				'link'     => $pages[0]['title'],
-				'data'     => $pages[0]
+				'data'     => $pages[0],
+				'class'    => ''
 			);
 
 			list($strSection, $strArticle) = explode(':', \Input::get('articles'));
@@ -174,11 +177,12 @@ class ModuleBreadcrumb extends \Module
 			{
 				$items[] = array
 				(
-					'isRoot' => false,
+					'isRoot'   => false,
 					'isActive' => true,
-					'title' => specialchars($objArticle->title, true),
-					'link' => $objArticle->title,
-					'data' => $objArticle->row()
+					'title'    => specialchars($objArticle->title, true),
+					'link'     => $objArticle->title,
+					'data'     => $objArticle->row(),
+					'class'    => ''
 				);
 			}
 		}
@@ -192,9 +196,13 @@ class ModuleBreadcrumb extends \Module
 				'isActive' => true,
 				'title'    => specialchars($pages[0]['pageTitle'] ?: $pages[0]['title']),
 				'link'     => $pages[0]['title'],
-				'data'     => $pages[0]
+				'data'     => $pages[0],
+				'class'    => ''
 			);
 		}
+
+		// Mark the first element (see #4833)
+		$items[0]['class'] = 'first';
 
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['generateBreadcrumb']) && is_array($GLOBALS['TL_HOOKS']['generateBreadcrumb']))

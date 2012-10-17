@@ -66,7 +66,7 @@ abstract class Files
 	 */
 	public static function getInstance()
 	{
-		if (!is_object(self::$objInstance))
+		if (self::$objInstance === null)
 		{
 			// Use FTP to modify files
 			if ($GLOBALS['TL_CONFIG']['useFTP'])

@@ -175,7 +175,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getBackendLanguages(),
+			'options'                 => System::getLanguages(true),
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(2) NOT NULL default ''"
 		),
@@ -525,7 +525,7 @@ class tl_user extends Backend
 			$image .= '_';
 		}
 
-		$args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">&nbsp;</div>', TL_SCRIPT_URL, $this->getTheme(), $image);
+		$args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">&nbsp;</div>', TL_ASSETS_URL, $this->getTheme(), $image);
 		return $args;
 	}
 

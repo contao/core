@@ -84,7 +84,7 @@ class ModuleExtension extends \BackendModule
 			// Back end
 			if ($objModule->addBeMod)
 			{
-				$arrClasses = trimsplit(',', $objModule->beClasses);
+				$arrClasses = array_filter(trimsplit(',', $objModule->beClasses));
 
 				// Classes
 				foreach ($arrClasses as $strClass)
@@ -97,7 +97,7 @@ class ModuleExtension extends \BackendModule
 					$objClass->close();
 				}
 
-				$arrTables = trimsplit(',', $objModule->beTables);
+				$arrTables = array_filter(trimsplit(',', $objModule->beTables));
 
 				// Back end data container files
 				foreach ($arrTables as $strTable)
@@ -110,7 +110,7 @@ class ModuleExtension extends \BackendModule
 					$objTable->close();
 				}
 
-				$arrTemplates = trimsplit(',', $objModule->beTemplates);
+				$arrTemplates = array_filter(trimsplit(',', $objModule->beTemplates));
 
 				// Templates
 				foreach ($arrTemplates as $strTemplate)
@@ -125,7 +125,7 @@ class ModuleExtension extends \BackendModule
 			// Front end
 			if ($objModule->addFeMod)
 			{
-				$arrClasses = trimsplit(',', $objModule->feClasses);
+				$arrClasses = array_filter(trimsplit(',', $objModule->feClasses));
 
 				// Classes
 				foreach ($arrClasses as $strClass)
@@ -139,7 +139,7 @@ class ModuleExtension extends \BackendModule
 					$objClass->close();
 				}
 
-				$arrTables = trimsplit(',', $objModule->feTables);
+				$arrTables = array_filter(trimsplit(',', $objModule->feTables));
 
 				// Front end data container files
 				foreach ($arrTables as $strTable)
@@ -166,7 +166,7 @@ class ModuleExtension extends \BackendModule
 					$objTable->close();
 				}
 
-				$arrTemplates = trimsplit(',', $objModule->feTemplates);
+				$arrTemplates = array_filter(trimsplit(',', $objModule->feTemplates));
 
 				// Templates
 				foreach ($arrTemplates as $strTemplate)
@@ -182,7 +182,7 @@ class ModuleExtension extends \BackendModule
 			// Language packs
 			if ($objModule->addLanguage)
 			{
-				$arrLanguages = trimsplit(',', $objModule->languages);
+				$arrLanguages = array_filter(trimsplit(',', $objModule->languages));
 
 				foreach ($arrLanguages as $strLanguage)
 				{
@@ -215,7 +215,7 @@ class ModuleExtension extends \BackendModule
 
 			// Public folder
 			$tplConfig = $this->newTemplate('dev_htaccess', $objModule);
-			$objConfig = new \File('system/modules/' . $objModule->folder . '/public/.htaccess');
+			$objConfig = new \File('system/modules/' . $objModule->folder . '/assets/.htaccess');
 			$objConfig->write($tplConfig->parse());
 			$objConfig->close();
 

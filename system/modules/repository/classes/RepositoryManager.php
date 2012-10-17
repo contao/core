@@ -155,10 +155,12 @@ class RepositoryManager extends RepositoryBackendModule
 				if ($rep->f_extension != '') {
 					$exts = $this->getExtensionList(array(
 						'languages' => $this->languages,
-						'match'		=> 'exact',
+						'match'		=> 'ignorecase',
 						'names'		=> $rep->f_extension,
 						'sets'		=> 'history'
 					));
+					// replace the case-insensitive user input with the real name (see #4689)
+					if (count($exts)>0) $rep->f_extension = $exts[0]->name;
 				} else
 					$exts = array();
 				$ok = count($exts)>0;
