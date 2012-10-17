@@ -145,8 +145,20 @@ class FileSelector extends \Widget
 		}
 		else
 		{
+
+			// Show a custom path (see #4926)
+			if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path'] != '')
+			{
+				$objFolder = \FilesModel::findByPath($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']);
+
+				if ($objFolder !== null)
+				{
+					$tree .= $this->renderFiletree($objFolder->id, -20);
+				}
+			}
+
 			// Show all files to admins
-			if ($this->User->isAdmin)
+			elseif ($this->User->isAdmin)
 			{
 				$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=?{$this->strExtensions} ORDER BY type='file', name{$this->strSortFlag}")
 										  ->execute(0);
