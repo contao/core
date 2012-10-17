@@ -1,6 +1,14 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.1.beta1 (XXXX-XX-XX)
+------------------------------
+
+### Improved
+The pageTree widget is now sortable just like the fileTree widget and the custom
+and quick navigation modules consider the custom order (see #4936).
+
+
 Version 3.0.0 (2012-XX-XX)
 --------------------------
 

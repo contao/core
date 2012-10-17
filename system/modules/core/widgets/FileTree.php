@@ -86,22 +86,21 @@ class FileTree extends \Widget
 		$this->import('Database');
 		parent::__construct($arrAttributes);
 
-		$this->orderSRC = null;
 		$this->strOrderField = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['orderField'];
 		$this->blnIsMultiple = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'];
 
-		// Prepare the orderSRC field
+		// Prepare the order field
 		if ($this->strOrderField != '')
 		{
 			$this->strOrderId = $this->strOrderField . str_replace($this->strField, '', $this->strId);
 			$this->strOrderName = $this->strOrderField . str_replace($this->strField, '', $this->strName);
 
-			// Retrieve the orderSRC value
+			// Retrieve the order value
 			$objRow = $this->Database->prepare("SELECT {$this->strOrderField} FROM {$this->strTable} WHERE id=?")
 						   ->limit(1)
 						   ->execute($this->activeRecord->id);
 
-			$this->orderSRC = $objRow->{$this->strOrderField};
+			$this->{$this->strOrderField} = $objRow->{$this->strOrderField};
 		}
 
 		$this->blnIsGallery = ($this->activeRecord->type == 'gallery');
@@ -116,7 +115,7 @@ class FileTree extends \Widget
 	 */
 	protected function validator($varInput)
 	{
-		// Store the orderSRC value
+		// Store the order value
 		if ($this->strOrderField != '')
 		{
 			$this->Database->prepare("UPDATE {$this->strTable} SET {$this->strOrderField}=? WHERE id=?")
@@ -239,10 +238,10 @@ class FileTree extends \Widget
 			}
 
 			// Apply a custom sort order
-			if ($this->strOrderField != '' && $this->orderSRC != '')
+			if ($this->strOrderField != '' && $this->{$this->strOrderField} != '')
 			{
 				$arrNew = array();
-				$arrOrder = array_map('intval', explode(',', $this->orderSRC));
+				$arrOrder = array_map('intval', explode(',', $this->{$this->strOrderField}));
 
 				foreach ($arrOrder as $i)
 				{
@@ -270,9 +269,9 @@ class FileTree extends \Widget
 		$GLOBALS['TL_CONFIG']['loadGoogleFonts'] = true;
 
 		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.$strValues.'">' . (($this->strOrderField != '') ? '
-  <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->orderSRC.'">' : '') . '
-  <div class="selector_container" id="target_'.$this->strId.'">
-    <p id="hint_'.$this->strId.'" class="sort_hint">' . $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] . '</p>
+  <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->{$this->strOrderField}.'">' : '') . '
+  <div class="selector_container" id="target_'.$this->strId.'">' . (($this->strOrderField != '') ? '
+    <p id="hint_'.$this->strId.'" class="sort_hint">' . $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] . '</p>' : '') . '
     <ul id="sort_'.$this->strId.'" class="'.trim((($this->strOrderField != '') ? 'sortable ' : '').($this->blnIsGallery ? 'sgallery' : '')).'">';
 
 		foreach ($arrValues as $k=>$v)

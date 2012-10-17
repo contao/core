@@ -102,10 +102,10 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		'__selector__'                => array('type', 'defineRoot', 'source', 'interactive', 'protected', 'reg_assignDir', 'reg_activate'),
 		'default'                     => '{title_legend},name,type',
 		'navigation'                  => '{title_legend},name,headline,type;{nav_legend},levelOffset,showLevel,hardLimit,showProtected;{reference_legend:hide},defineRoot;{template_legend:hide},navigationTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'customnav'                   => '{title_legend},name,headline,type;{nav_legend},showProtected,pages;{template_legend:hide},navigationTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'customnav'                   => '{title_legend},name,headline,type;{nav_legend},pages,showProtected;{template_legend:hide},navigationTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'breadcrumb'                  => '{title_legend},name,headline,type;{nav_legend},showHidden;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'quicknav'                    => '{title_legend},name,headline,type;{nav_legend},customLabel,showLevel,hardLimit,showProtected,showHidden;{reference_legend:hide},rootPage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'quicklink'                   => '{title_legend},name,headline,type;{nav_legend},customLabel,pages;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'quicklink'                   => '{title_legend},name,headline,type;{nav_legend},pages,customLabel;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'booknav'                     => '{title_legend},name,headline,type;{nav_legend},showProtected,showHidden,rootPage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'articlenav'                  => '{title_legend},name,headline,type;{config_legend},loadFirst;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'sitemap'                     => '{title_legend},name,headline,type;{nav_legend},showProtected,showHidden;{reference_legend:hide},rootPage;{template_legend:hide},navigationTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
@@ -253,9 +253,14 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'foreignKey'              => 'tl_page.title',
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'mandatory'=>true, 'tl_class'=>'clr'),
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'files'=>true, 'orderField'=>'orderPages', 'mandatory'=>true, 'tl_class'=>'clr'),
 			'sql'                     => "blob NULL",
 			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
+		),
+		'orderPages' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['orderSRC'],
+			'sql'                     => "text NULL"
 		),
 		'showHidden' => array
 		(
@@ -555,6 +560,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		),
 		'orderSRC' => array
 		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['orderSRC'],
 			'sql'                     => "text NULL"
 		),
 		'html' => array

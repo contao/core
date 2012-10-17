@@ -88,9 +88,18 @@ class ModuleQuicklink extends \Module
 
 		$arrPages = array();
 
+		// Sort the array keys according to the given order
+		if ($this->orderPages != '')
+		{
+			$arrPages = array_flip(trimsplit(',', $this->orderPages));
+		}
+
+		$i = 0;
+
+		// Add the items to the pre-sorted array
 		while ($objPages->next())
 		{
-			$arrPages[] = $objPages->row();
+			$arrPages[$i++] = $objPages->row();
 		}
 
 		$items = array();

@@ -40,6 +40,30 @@ class PageTree extends \Widget
 	 */
 	protected $strTemplate = 'be_widget';
 
+	/**
+	 * Order ID
+	 * @var string
+	 */
+	protected $strOrderId;
+
+	/**
+	 * Order name
+	 * @var string
+	 */
+	protected $strOrderName;
+
+	/**
+	 * Order field
+	 * @var string
+	 */
+	protected $strOrderField;
+
+	/**
+	 * Multiple flag
+	 * @var boolean
+	 */
+	protected $blnIsMultiple = false;
+
 
 	/**
 	 * Load the database object
@@ -49,6 +73,23 @@ class PageTree extends \Widget
 	{
 		$this->import('Database');
 		parent::__construct($arrAttributes);
+
+		$this->strOrderField = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['orderField'];
+		$this->blnIsMultiple = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'];
+
+		// Prepare the order field
+		if ($this->strOrderField != '')
+		{
+			$this->strOrderId = $this->strOrderField . str_replace($this->strField, '', $this->strId);
+			$this->strOrderName = $this->strOrderField . str_replace($this->strField, '', $this->strName);
+
+			// Retrieve the order value
+			$objRow = $this->Database->prepare("SELECT {$this->strOrderField} FROM {$this->strTable} WHERE id=?")
+						   ->limit(1)
+						   ->execute($this->activeRecord->id);
+
+			$this->{$this->strOrderField} = $objRow->{$this->strOrderField};
+		}
 	}
 
 
@@ -59,13 +100,22 @@ class PageTree extends \Widget
 	 */
 	protected function validator($varInput)
 	{
+		// Store the order value
+		if ($this->strOrderField != '')
+		{
+			$this->Database->prepare("UPDATE {$this->strTable} SET {$this->strOrderField}=? WHERE id=?")
+						   ->execute(\Input::post($this->strOrderName), \Input::get('id'));
+		}
+
+		// Return the value as usual
 		if (strpos($varInput, ',') === false)
 		{
-			return $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'] ? array(intval($varInput)) : intval($varInput);
+			return $this->blnIsMultiple ? array(intval($varInput)) : intval($varInput);
 		}
 		else
 		{
-			return array_map('intval', array_filter(explode(',', $varInput)));
+			$arrValue = array_map('intval', array_filter(explode(',', $varInput)));
+			return $this->blnIsMultiple ? $arrValue : $arrValue[0];
 		}
 	}
 
@@ -88,12 +138,54 @@ class PageTree extends \Widget
 			{
 				$arrValues[] = $this->generateImage($this->getPageStatusIcon($objPages)) . ' ' . $objPages->title . ' (' . $objPages->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')';
 			}
+
+			// Apply a custom sort order
+			if ($this->strOrderField != '' && $this->{$this->strOrderField} != '')
+			{
+				$arrNew = array();
+				$arrOrder = array_map('intval', explode(',', $this->{$this->strOrderField}));
+
+				foreach ($arrOrder as $i)
+				{
+					if (isset($arrValues[$i]))
+					{
+						$arrNew[$i] = $arrValues[$i];
+						unset($arrValues[$i]);
+					}
+				}
+
+				if (!empty($arrValues))
+				{
+					foreach ($arrValues as $k=>$v)
+					{
+						$arrNew[$k] = $v;
+					}
+				}
+
+				$arrValues = $arrNew;
+				unset($arrNew);
+			}
 		}
 
-		return '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.$strValues.'">
-  <div class="selector_container" id="target_'.$this->strId.'">
-    <ul><li>' . implode('</li><li>', $arrValues) . '</li></ul>
-    <p><a href="contao/page.php?do='.\Input::get('do').'&amp;table='.$this->strTable.'&amp;field='.$this->strField.'&amp;act=show&amp;id='.\Input::get('id').'&amp;value='.$strValues.'&rt='.REQUEST_TOKEN.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MOD']['page'][0]).'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>
+		// Load the fonts for the drag hint (see #4838)
+		$GLOBALS['TL_CONFIG']['loadGoogleFonts'] = true;
+
+		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.$strValues.'">' . (($this->strOrderField != '') ? '
+  <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->{$this->strOrderField}.'">' : '') . '
+  <div class="selector_container" id="target_'.$this->strId.'">' . (($this->strOrderField != '') ? '
+    <p id="hint_'.$this->strId.'" class="sort_hint">' . $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] . '</p>' : '') . '
+    <ul id="sort_'.$this->strId.'" class="'.(($this->strOrderField != '') ? 'sortable' : '').'">';
+
+		foreach ($arrValues as $k=>$v)
+		{
+			$return .= '<li data-id="'.$k.'">'.$v.'</li>';
+		}
+
+		$return .= '</ul>
+    <p><a href="contao/page.php?do='.\Input::get('do').'&amp;table='.$this->strTable.'&amp;field='.$this->strField.'&amp;act=show&amp;id='.\Input::get('id').'&amp;value='.$strValues.'&rt='.REQUEST_TOKEN.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MOD']['page'][0]).'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . (($this->strOrderField != '') ? '
+    <script>Backend.makeMultiSrcSortable("sort_'.$this->strId.'", "ctrl_'.$this->strOrderId.'");window.addEvent("sm_hide",function(){$("hint_'.$this->strId.'").destroy();$("sort_'.$this->strId.'").removeClass("sortable")})</script>' : '') . '
   </div>';
+
+		return $return;
 	}
 }
