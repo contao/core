@@ -17,13 +17,13 @@
 $GLOBALS['TL_LANG']['tl_form']['title'][0] = 'Titel';
 $GLOBALS['TL_LANG']['tl_form']['title'][1] = 'Geef een titel voor het formulier op.';
 $GLOBALS['TL_LANG']['tl_form']['alias'][0] = 'Formulier alias';
-$GLOBALS['TL_LANG']['tl_form']['alias'][1] = 'Het formulier alias is een verwijzing naar het formulier welke kan worden aangeroepen in plaats van zijn numerieke ID.';
+$GLOBALS['TL_LANG']['tl_form']['alias'][1] = 'Het formulier alias is een verwijzing naar het formulier welk kan worden aangeroepen in plaats van zijn numerieke ID.';
 $GLOBALS['TL_LANG']['tl_form']['jumpTo'][0] = 'Omleidingspagina';
 $GLOBALS['TL_LANG']['tl_form']['jumpTo'][1] = 'Een formulier wordt meestal doorgezonden naar een andere pagina die de formuliergegevens verwerkt of een "dank u" bericht weergeeft. U kunt deze pagina hier opgeven.';
 $GLOBALS['TL_LANG']['tl_form']['sendViaEmail'][0] = 'Formuliergegevens via e-mail verzenden';
 $GLOBALS['TL_LANG']['tl_form']['sendViaEmail'][1] = 'Indien u deze optie kiest worden formuliergegevens verzonden via e-mail.';
 $GLOBALS['TL_LANG']['tl_form']['recipient'][0] = 'Adres van de ontvanger';
-$GLOBALS['TL_LANG']['tl_form']['recipient'][1] = 'Geef één of meerdere e-mail adressen op . Meerdere adressen moeten gescheiden worden door een komma. U kunt ook gebruik maken van het "friendly name format" (bv "Naam [naam@domein.com]").';
+$GLOBALS['TL_LANG']['tl_form']['recipient'][1] = 'Geef één of meerdere e-mail adressen op . Meerdere adressen moeten gescheiden worden door een komma.';
 $GLOBALS['TL_LANG']['tl_form']['subject'][0] = 'Onderwerp';
 $GLOBALS['TL_LANG']['tl_form']['subject'][1] = 'Geef het onderwerp op. Als u geen onderwerp opgeeft vergroot dit de kans dat uw e-mail als SPAM wordt aangezien.';
 $GLOBALS['TL_LANG']['tl_form']['format'][0] = 'Gegevensformaat';

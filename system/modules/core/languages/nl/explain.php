@@ -16,12 +16,12 @@
 
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'Rich Text Editor';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'Voor meer informatie over TinyMCE ga naar <a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" target="_blank">http://tinymce.moxiecode.com</a>.';
-$GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Insert tags';
-$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'Voor meer informatie over insert tags ga naar <a href="http://www.contao.org/insert-tags.html" title="Contao online documentation" target="_blank">http://www.contao.org/insert-tags.html</a>.';
+$GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Tags invoegen';
+$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'Voor meer informatie over het invoegen van tags kijk op <a href="http://contao.org/en/insert-tags.html" title="Contao online documentation" target="_blank">http://contao.org/en/insert-tags.html</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'Code Editor';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'Voor meer informatie over CodeMirror ga naar <a href="http://codemirror.net" title="EditArea by Marijn Haverbeke" target="_blank">http://codemirror.net</a>.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';
-$GLOBALS['TL_LANG']['XPL']['dateFormat'][0][1] = 'Contao ondersteunt alle datum en tijd formaten die kunnen worden geparsed met de PHP date ()-functie Om er echter zeker van te zijn dat iedere gebruikersinvoer kan omgezet worden in een UNIX tijdnotatie kunt u enkel numerieke datum- en tijdformaten gebruiken (j, d, m, n, y, Y, g, G, h, H, i, s) in het backend <br><br><strong> U kunt varianten van front-end-formaten invoeren in de sitestructuur (website root pagina\'s).</strong><br><br><em>Hier zijn enkele voorbeelden van geldige datum- en tijdformaten</em>:';
+$GLOBALS['TL_LANG']['XPL']['dateFormat'][0][1] = 'Contao ondersteunt alle datum en tijd formaten die kunnen worden geparsed met de PHP date ()-functie Om er echter zeker van te zijn dat iedere gebruikersinvoer kan omgezet worden in een UNIX tijdnotatie kunt u enkel numerieke datum- en tijdformaten gebruiken (j, d, m, n, y, Y, g, G, h, H, i, s) in het back-end <br><br><strong> U kunt varianten van front-end-formaten invoeren in de sitestructuur (website root pagina\'s).</strong><br><br><em>Hier zijn enkele voorbeelden van geldige datum- en tijd formaten</em>:';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][1][0] = 'Y-m-d';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][1][1] = 'YYYY-MM-DD, international ISO 8601 bv. 2012-01-28';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][2][0] = 'm/d/Y';
