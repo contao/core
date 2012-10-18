@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Updated mediaelement.js to version 2.9.5 (see #4917).
+
+### Fixed
 If folder URLs are enabled in the back end settings, generate folder URL aliases
 in the site structure (see #4933).
 
