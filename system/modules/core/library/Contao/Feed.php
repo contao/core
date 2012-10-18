@@ -150,7 +150,24 @@ class Feed extends \System
 			$xml .= '<description><![CDATA[' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . ']]></description>';
 			$xml .= '<link>' . specialchars($objItem->link) . '</link>';
 			$xml .= '<pubDate>' . date('r', $objItem->published) . '</pubDate>';
-			$xml .= '<guid>' . ($objItem->guid ? $objItem->guid : specialchars($objItem->link)) . '</guid>';
+
+			// Add the GUID
+			if ($objItem->guid)
+			{
+				// Add the isPermaLink attribute if the guid is not a link (see #4930)
+				if (strncmp($objItem->guid, 'http://', 7) !== 0 && strncmp($objItem->guid, 'https://', 8) !== 0)
+				{
+					$xml .= '<guid isPermaLink="false">' . $objItem->guid . '</guid>';
+				}
+				else
+				{
+					$xml .= '<guid>' . $objItem->guid . '</guid>';
+				}
+			}
+			else
+			{
+				$xml .= '<guid>' . specialchars($objItem->link) . '</guid>';
+			}
 
 			// Enclosures
 			if (is_array($objItem->enclosure))
