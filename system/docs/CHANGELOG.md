@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+If folder URLs are enabled in the back end settings, generate folder URL aliases
+in the site structure (see #4933).
+
+### Fixed
 Readded the default value for textareas to the form generator (see #4932).
 
 ### Fixed

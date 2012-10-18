@@ -550,7 +550,7 @@ abstract class Controller extends \System
 		$alias = $objPage->alias;
 		$name = $objPage->title;
 		$title = $objPage->pageTitle ?: $objPage->title;
-		$folderUrl = standardize(\String::restoreBasicEntities($name));
+		$folderUrl = basename($objPage->alias);
 		$palias = '';
 		$pname = '';
 		$ptitle = '';
@@ -587,7 +587,7 @@ abstract class Controller extends \System
 						$alias = $objParentPage->alias;
 						$name = $objParentPage->title;
 						$title = $objParentPage->pageTitle ?: $objParentPage->title;
-						$folderUrl = standardize(\String::restoreBasicEntities($name)) . '/' . $folderUrl;
+						$folderUrl = basename($alias) . '/' . $folderUrl;
 						$trail[] = $objParentPage->pid;
 					}
 
