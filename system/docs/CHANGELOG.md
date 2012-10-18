@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Readded the default value for textareas to the form generator (see #4932).
+
+### Fixed
 Readded the option to limit the file tree to a certain path (see #4926).
 
 ### Improved
