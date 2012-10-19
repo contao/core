@@ -1034,14 +1034,18 @@ class tl_page extends Backend
 		if ($varValue == '')
 		{
 			$autoAlias = true;
+			$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->title));
 
-			if ($GLOBALS['TL_CONFIG']['folderUrl']) // see #4933
+			// Generate folder URL aliases (see #4933)
+			if ($GLOBALS['TL_CONFIG']['folderUrl'])
 			{
-				$varValue = $this->getPageDetails($dc->activeRecord)->folderUrl;
-			}
-			else
-			{
-				$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->title));
+				$dc->activeRecord->alias = $varValue;
+				$objPage = $this->getPageDetails($dc->activeRecord);
+
+				if ($objPage->folderUrl != '')
+				{
+					$varValue = $objPage->folderUrl;
+				}
 			}
 		}
 
