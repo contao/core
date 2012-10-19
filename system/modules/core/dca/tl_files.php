@@ -34,7 +34,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			(
 				'id' => 'primary',
 				'pid' => 'index',
-				'path' => 'index',
+				'path' => 'unique',
 				'extension' => 'index'
 			)
 		)

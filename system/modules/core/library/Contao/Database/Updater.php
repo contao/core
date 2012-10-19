@@ -245,7 +245,7 @@ class Updater extends \Controller
 			  `meta` blob NULL,
 			  PRIMARY KEY  (`id`),
 			  KEY `pid` (`pid`),
-			  KEY `path` (`path`),
+			  UNIQUE KEY `path` (`path`),
 			  KEY `extension` (`extension`)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
 		);
@@ -260,7 +260,7 @@ class Updater extends \Controller
 
 		// Add the "addMooTools" field
 		$this->Database->query("ALTER TABLE `tl_layout` ADD `addMooTools` char(1) NOT NULL default ''");
-		$this->Database->query("UPDATE `tl_layout` SET `addMooTools`=1 WHERE `mooSource`!=''");
+		$this->Database->query("UPDATE `tl_layout` SET `addMooTools`=1 WHERE `mootools`!=''");
 
 		// Add the "notified" field
 		$this->Database->query("ALTER TABLE `tl_comments` ADD `notified` char(1) NOT NULL default ''");

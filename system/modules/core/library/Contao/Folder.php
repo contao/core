@@ -243,14 +243,18 @@ class Folder extends \System
 	{
 		$arrFiles = array();
 
-		foreach (scan(TL_ROOT . '/' . $this->strFolder) as $strFile)
+		$it = new \RecursiveIteratorIterator(
+			new \RecursiveDirectoryIterator(TL_ROOT . '/' . $this->strFolder, \FilesystemIterator::UNIX_PATHS)
+		);
+
+		while ($it->valid())
 		{
-			if ($strFile == '.svn' || $strFile == '.DS_Store')
+			if ($it->isFile())
 			{
-				continue;
+				$arrFiles[] = $it->getSubPathname();
 			}
 
-			$arrFiles[] = $strFile;
+			$it->next();
 		}
 
 		return md5(implode('-', $arrFiles));

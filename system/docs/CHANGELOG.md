@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+The too simple folder hash algorithm caused issues with the file synchronization
+and was replaced with a more sophisticated one (see #4934).
+
+### Fixed
 Updated mediaelement.js to version 2.9.5 (see #4917).
 
 ### Fixed
