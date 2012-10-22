@@ -68,20 +68,23 @@ input,button,textarea,select {
 	font-weight:inherit;
 }
 pre,code {
-	font:12px "Lucida Console",Monaco,monospace;
+	font-family:Monaco,monospace;
 }
 h1,h2,h3,h4,h5,h6 {
 	font-size:100%;
 	font-weight:normal;
 }
 h1 {
-	font-size:22px;
+	font-size:1.8333em; /* 22px */
 }
 h2 {
-	font-size:20px;
+	font-size:1.6667em; /* 20px */
 }
 h3 {
-	font-size:18px;
+	font-size:1.5em;    /* 18px */
+}
+h4 {
+	font-size:1.3333em; /* 16px */
 }
 table {
 	font-size:inherit;
