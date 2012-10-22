@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Removed some left-over `ENT_COMPAT` constants (see #4889).
+
+### Fixed
 The too simple folder hash algorithm caused issues with the file synchronization
 and was replaced with a more sophisticated one (see #4934).
 
