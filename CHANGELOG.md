@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
+### Updated
+Updated SwiftMailer to version 4.2.1 (see #4935).
+
 ### Fixed
 Set the file permissions depending on the server's umask setting (see #4941).
 
