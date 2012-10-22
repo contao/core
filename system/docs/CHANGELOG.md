@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Prevent deleting referenced content elements using "edit multiple" (see #4898).
+
+### Fixed
 Removed some left-over `ENT_COMPAT` constants (see #4889).
 
 ### Fixed
