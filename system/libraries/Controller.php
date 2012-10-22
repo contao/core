@@ -1247,7 +1247,7 @@ abstract class Controller extends System
 		if ($GLOBALS['TL_CONFIG']['useFTP'])
 		{
 			$this->import('Files');
-			$this->Files->chmod($strCacheName, 0644);
+			$this->Files->chmod($strCacheName, $this->Files->getFilePermissions());
 		}
 
 		// Return the path to new image

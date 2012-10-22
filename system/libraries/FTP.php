@@ -262,7 +262,15 @@ class FTP extends Files
 		$this->connect();
 		$this->validate($strSource, $strDestination);
 		$return = @ftp_put($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strDestination, TL_ROOT . '/' . $strSource, FTP_BINARY);
-		$this->chmod($strDestination, 0644);
+
+		if (is_dir(TL_ROOT . '/' . $strDestination))
+		{
+			$this->chmod($strDestination, $this->getFolderPermissions());
+		}
+		else
+		{
+			$this->chmod($strDestination, $this->getFilePermissions());
+		}
 
 		return $return;
 	}

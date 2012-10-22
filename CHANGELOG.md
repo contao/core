@@ -5,6 +5,9 @@ Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Set the file permissions depending on the server's umask setting (see #4941).
+
+### Fixed
 Correctly handle external image URLs in the image element (see #4923).
 
 ### Fixed
