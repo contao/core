@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
+### Fixed
+Prevent deleting referenced content elements using "edit multiple" (see #4898).
+
 ### Updated
 Updated SwiftMailer to version 4.2.1 (see #4935).
 
