@@ -276,40 +276,6 @@ class Files
 
 
 	/**
-	 * Return the default file permissions based on the umask setting
-	 * @return string
-	 */
-	public function getFilePermissions()
-	{
-		$strPermissions = str_pad(decoct(0666 - umask()), 4, 0, STR_PAD_LEFT);
-
-		if ($strPermissions == '0000')
-		{
-			return '0644';
-		}
-
-		return $strPermissions;
-	}
-
-
-	/**
-	 * Return the default folder permissions based on the umask setting
-	 * @return string
-	 */
-	public function getFolderPermissions()
-	{
-		$strPermissions = str_pad(decoct(0777 - umask()), 4, 0, STR_PAD_LEFT);
-
-		if ($strPermissions == '0000')
-		{
-			return '0755';
-		}
-
-		return $strPermissions;
-	}
-
-
-	/**
 	 * Validate the path
 	 * @throws Exception
 	 */

@@ -128,7 +128,7 @@ class FTP extends Files
 		$this->connect();
 		$this->validate($strDirectory);
 		$return = @ftp_mkdir($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strDirectory) ? true : false;
-		$this->chmod($strDirectory, $this->getFolderPermissions());
+		$this->chmod($strDirectory, $GLOBALS['TL_CONFIG']['defaultFolderChmod']);
 
 		return $return;
 	}
@@ -265,11 +265,11 @@ class FTP extends Files
 
 		if (is_dir(TL_ROOT . '/' . $strDestination))
 		{
-			$this->chmod($strDestination, $this->getFolderPermissions());
+			$this->chmod($strDestination, $GLOBALS['TL_CONFIG']['defaultFolderChmod']);
 		}
 		else
 		{
-			$this->chmod($strDestination, $this->getFilePermissions());
+			$this->chmod($strDestination, $GLOBALS['TL_CONFIG']['defaultFileChmod']);
 		}
 
 		return $return;
