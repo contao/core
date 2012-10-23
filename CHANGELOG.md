@@ -5,6 +5,9 @@ Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Remove newsletter subscriptions when a member closes his account (see #4943).
+
+### Fixed
 Prevent deleting referenced content elements using "edit multiple" (see #4898).
 
 ### Updated
