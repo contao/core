@@ -213,7 +213,8 @@ function specialchars($strString, $blnStripInsertTags=false)
 		$strString = strip_insert_tags($strString);
 	}
 
-	return htmlspecialchars($strString, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet'], false);
+	// Use ENT_COMPAT here (see #4889)
+	return htmlspecialchars($strString, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet'], false);
 }
 
 
