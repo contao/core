@@ -2108,7 +2108,6 @@ window.addEvent(\'domready\', function() {
 					$objFolder->name   = $objFound->name;
 					$objFolder->type   = $objFound->type;
 					$objFolder->path   = $objFound->path;
-					$objFolder->save();
 
 					// Update the PID of the child records
 					$objChildren = \FilesModel::findByPid($objFound->id);
@@ -2124,6 +2123,9 @@ window.addEvent(\'domready\', function() {
 
 					// Delete the newer (duplicate) entry
 					$objFound->delete();
+
+					// Then save the modified original entry (prevents duplicate key errors)
+					$objFolder->save();
 				}
 				else
 				{
@@ -2148,10 +2150,12 @@ window.addEvent(\'domready\', function() {
 					$objFile->name   = $objFound->name;
 					$objFile->type   = $objFound->type;
 					$objFile->path   = $objFound->path;
-					$objFile->save();
 
 					// Delete the newer (duplicate) entry
 					$objFound->delete();
+
+					// Then save the modified original entry (prevents duplicate key errors)
+					$objFile->save();
 				}
 				else
 				{

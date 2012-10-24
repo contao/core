@@ -249,9 +249,10 @@ class Folder extends \System
 
 		while ($it->valid())
 		{
-			if ($it->isFile())
+			if ($it->isFile() && $it->getFilename() != '.DS_Store')
 			{
 				$arrFiles[] = $it->getSubPathname();
+				$arrFiles[] = md5_file($it->getPathname());
 			}
 
 			$it->next();
