@@ -5,6 +5,9 @@ Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Decode entities in meta tags like "description" (see #4949).
+
+### Fixed
 Remove newsletter subscriptions when a member closes his account (see #4943).
 
 ### Fixed

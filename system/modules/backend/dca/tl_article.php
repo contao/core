@@ -159,7 +159,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['title'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true)
 		),
 		'alias' => array
 		(
@@ -196,7 +196,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['keywords'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:60px;')
+			'eval'                    => array('style'=>'height:60px;', 'decodeEntities'=>true)
 		),
 		'teaserCssID' => array
 		(

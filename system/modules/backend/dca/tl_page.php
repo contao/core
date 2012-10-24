@@ -241,7 +241,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['description'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:60px;', 'tl_class'=>'clr')
+			'eval'                    => array('style'=>'height:60px;', 'tl_class'=>'clr', 'decodeEntities'=>true)
 		),
 		'redirect' => array
 		(
