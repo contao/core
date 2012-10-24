@@ -516,3 +516,4 @@ $GLOBALS['TL_LANG']['DP']['time_confirm_button'] = 'OK';
 $GLOBALS['TL_LANG']['DP']['apply_range'] = 'Anvend';
 $GLOBALS['TL_LANG']['DP']['cancel'] = 'Annuller';
 $GLOBALS['TL_LANG']['DP']['week'] = 'Uger';
+$GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Træk elementerne for at sortere dem';

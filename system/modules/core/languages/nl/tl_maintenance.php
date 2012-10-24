@@ -14,14 +14,14 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][0] = 'Verwijder gegevens uit de cache';
+$GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][0] = 'Opschonen gegevens uit de cache';
 $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1] = 'Selecteer de gegevens die u wilt opschonen.';
-$GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'][0] = 'Frontend gebruiker';
-$GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'][1] = 'Automatisch inloggen van een frontend gebruiker om beveiligde pagina\'s te indexeren.';
+$GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'][0] = 'Front-end gebruiker';
+$GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'][1] = 'Automatisch inloggen van een front-end gebruiker om beveiligde pagina\'s te indexeren.';
 $GLOBALS['TL_LANG']['tl_maintenance']['job'] = 'Taak';
 $GLOBALS['TL_LANG']['tl_maintenance']['description'] = 'Omschrijving';
-$GLOBALS['TL_LANG']['tl_maintenance']['clearCache'] = 'Verwijder data';
-$GLOBALS['TL_LANG']['tl_maintenance']['cacheCleared'] = 'De cache is geleegd';
+$GLOBALS['TL_LANG']['tl_maintenance']['clearCache'] = 'Opschonen data';
+$GLOBALS['TL_LANG']['tl_maintenance']['cacheCleared'] = 'De cache is opgeschoond';
 $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate'] = 'Live Update';
 $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdateId'] = 'Live Update ID';
 $GLOBALS['TL_LANG']['tl_maintenance']['toLiveUpdate'] = 'Ga naar Live Update';
@@ -42,13 +42,13 @@ $GLOBALS['TL_LANG']['tl_maintenance']['indexLoading'] = 'Even wachten terwijl de
 $GLOBALS['TL_LANG']['tl_maintenance']['indexComplete'] = 'De zoekindex is opnieuw opgebouwd. U kunt doorgaan.';
 $GLOBALS['TL_LANG']['tl_maintenance']['updateHelp'] = 'Vul uw %s hier in.';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['index'][0] = 'Zoekindex opschonen';
-$GLOBALS['TL_LANG']['tl_maintenance_jobs']['index'][1] = 'Kort de tabellen <em> tl_search </ em> en <em> tl_search_index </ em> in. Hierna dient u de zoekindex (zie hierboven) weer opnieuw opbouwen.';
+$GLOBALS['TL_LANG']['tl_maintenance_jobs']['index'][1] = 'Kort de tabellen <em> tl_search </ em> en <em> tl_search_index </ em> in. Hierna dient u de zoekindex (zie hierboven) weer opnieuw op te bouwen.';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['undo'][0] = 'Opschonen van de undo tabel';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['undo'][1] = 'Kort de <em>tl_undo</em> tabel in welke de verwijderde records bevat.Deze actie zal de records permanent verwijderen.';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['versions'][0] = 'Opschonen versie tabel';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['versions'][1] = 'Kort de <em> tl_version </ em> tabel in welke de vorige versies van een opgeslagen record bevat. Deze actie verwijdert permanent deze records.';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['images'][0] = 'Opschonen afbeelding cache';
-$GLOBALS['TL_LANG']['tl_maintenance_jobs']['images'][1] = 'Hiermee verwijdert u de automatisch gegenereerde beelden en schoont de pagina cache op, zodat er geen links naar verwijderde bronnen zijn.';
+$GLOBALS['TL_LANG']['tl_maintenance_jobs']['images'][1] = 'Hiermee verwijdert u de automatisch gegenereerde beelden en schoont u de pagina cache op, zodat er geen links naar verwijderde bronnen zijn.';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['scripts'][0] = 'Opschonen script cache';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['scripts'][1] = 'Verwijdert de automatisch gegenereerde. css en. js bestanden, maakt de interne style sheets aan en schoont de pagina cache op.';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['pages'][0] = 'Opschonen pagina cache';

@@ -15,8 +15,8 @@
  */
 
 $GLOBALS['TL_LANG']['tl_faq_category']['title'][0] = 'Titel';
-$GLOBALS['TL_LANG']['tl_faq_category']['title'][1] = 'Geef een titel op voor de FAQ categorie.';
-$GLOBALS['TL_LANG']['tl_faq_category']['headline'][0] = 'Kop';
+$GLOBALS['TL_LANG']['tl_faq_category']['title'][1] = 'Geef een titel op voor de categorie.';
+$GLOBALS['TL_LANG']['tl_faq_category']['headline'][0] = 'Hoofdtitel';
 $GLOBALS['TL_LANG']['tl_faq_category']['headline'][1] = 'Geef een hoofdtitel op voor de categorie.';
 $GLOBALS['TL_LANG']['tl_faq_category']['jumpTo'][0] = 'Ga naar pagina';
 $GLOBALS['TL_LANG']['tl_faq_category']['jumpTo'][1] = 'Selecteer de FAQ pagina waarnaar bezoekers worden geleid na het aanklikken van een vraag.';
@@ -43,7 +43,7 @@ $GLOBALS['TL_LANG']['tl_faq_category']['comments_legend'] = 'Reacties';
 $GLOBALS['TL_LANG']['tl_faq_category']['notify_admin'] = 'Systeembeheerder';
 $GLOBALS['TL_LANG']['tl_faq_category']['notify_author'] = 'Auteur van de FAQ';
 $GLOBALS['TL_LANG']['tl_faq_category']['notify_both'] = 'Auteur en systeembeheerder';
-$GLOBALS['TL_LANG']['tl_faq_category']['deleteConfirm'] = 'Verwijderen van een categorie heeft tot gevolg dat alle FAQs hierin worden verwijderd! Wilt u werkelijk categorie ID %s verwijderen?';
+$GLOBALS['TL_LANG']['tl_faq_category']['deleteConfirm'] = 'Verwijderen van categorie ID %s heeft tot gevolg dat alle FAQs hierin worden verwijderd! Doorgaan?';
 $GLOBALS['TL_LANG']['tl_faq_category']['new'][0] = 'Nieuwe categorie';
 $GLOBALS['TL_LANG']['tl_faq_category']['new'][1] = 'Maak een nieuwe categorie aan';
 $GLOBALS['TL_LANG']['tl_faq_category']['show'][0] = 'Categorie details';

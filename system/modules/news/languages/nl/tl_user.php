@@ -14,7 +14,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_user']['news'][0] = 'Nieuwsarchieven';
+$GLOBALS['TL_LANG']['tl_user']['news'][0] = 'Toegestane nieuwsarchieven';
 $GLOBALS['TL_LANG']['tl_user']['news'][1] = 'Selecteer de nieuwsarchieven die u toegankelijk wil maken voor de gebruiker.';
 $GLOBALS['TL_LANG']['tl_user']['newp'][0] = 'Permissies voor nieuws';
 $GLOBALS['TL_LANG']['tl_user']['newp'][1] = 'Selecteer nieuws permissies voor de gebruiker.';

@@ -850,9 +850,12 @@ class InstallTool extends Backend
 			}
 
 			// Disable the tasks extension (see #4907)
-			$objFile = new File('system/modules/tasks/.skip');
-			$objFile->write('Disabled during the version 3 update (see #4907)');
-			$objFile->close();
+			if (is_dir(TL_ROOT . '/system/modules/tasks'))
+			{
+				$objFile = new File('system/modules/tasks/.skip');
+				$objFile->write('Disabled during the version 3 update (see #4907)');
+				$objFile->close();
+			}
 
 			// Save the old upload path in the localconfig.php
 			if ($GLOBALS['TL_CONFIG']['uploadPath'] == 'files' && is_dir(TL_ROOT . '/tl_files'))

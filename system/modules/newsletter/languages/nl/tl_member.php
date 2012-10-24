@@ -15,6 +15,6 @@
  */
 
 $GLOBALS['TL_LANG']['tl_member']['newsletter'][0] = 'Nieuwsbrieven';
-$GLOBALS['TL_LANG']['tl_member']['newsletter'][1] = 'Hier kunt u de gebruiker opgeven voor een of meerdere nieuwsbriefkanalen.';
+$GLOBALS['TL_LANG']['tl_member']['newsletter'][1] = 'Hier kunt u de gebruiker abonnementen beheren.';
 $GLOBALS['TL_LANG']['tl_member']['newsletter_legend'] = 'Nieuwsbrief abonnementen';
 $GLOBALS['TL_LANG']['tl_member']['newsletterDetails'] = 'Nieuwsbrief abonnementen';

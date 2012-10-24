@@ -516,3 +516,4 @@ $GLOBALS['TL_LANG']['DP']['time_confirm_button'] = 'OK';
 $GLOBALS['TL_LANG']['DP']['apply_range'] = 'Applitgar';
 $GLOBALS['TL_LANG']['DP']['cancel'] = 'Interrumper';
 $GLOBALS['TL_LANG']['DP']['week'] = 'emna';
+$GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Tira ils elements per midar la successiun';

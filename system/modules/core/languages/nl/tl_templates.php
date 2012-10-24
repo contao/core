@@ -15,8 +15,8 @@
  */
 
 $GLOBALS['TL_LANG']['tl_templates']['original'][0] = 'Standaard template';
-$GLOBALS['TL_LANG']['tl_templates']['original'][1] = 'Kies de standaard template die u wil bewerken. Een kopie zal gemaakt worden in de map die u hieronder aangeeft.';
-$GLOBALS['TL_LANG']['tl_templates']['target'][0] = 'Map';
+$GLOBALS['TL_LANG']['tl_templates']['original'][1] = 'Kies de standaard template die u wil bewerken.';
+$GLOBALS['TL_LANG']['tl_templates']['target'][0] = 'Doelmap';
 $GLOBALS['TL_LANG']['tl_templates']['target'][1] = 'Een kopie van de geselecteerde template wordt opgeslagen in deze map.';
 $GLOBALS['TL_LANG']['tl_templates']['headline'] = 'Voeg een nieuwe template toe';
 $GLOBALS['TL_LANG']['tl_templates']['newTpl'] = 'Maak template';

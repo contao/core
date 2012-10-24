@@ -516,3 +516,4 @@ $GLOBALS['TL_LANG']['DP']['time_confirm_button'] = '確認';
 $GLOBALS['TL_LANG']['DP']['apply_range'] = '適用';
 $GLOBALS['TL_LANG']['DP']['cancel'] = '取り消し';
 $GLOBALS['TL_LANG']['DP']['week'] = '週';
+$GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = '項目をドラッグして並べ替え';

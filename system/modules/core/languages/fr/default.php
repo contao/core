@@ -516,3 +516,4 @@ $GLOBALS['TL_LANG']['DP']['time_confirm_button'] = 'OK';
 $GLOBALS['TL_LANG']['DP']['apply_range'] = 'Appliquer';
 $GLOBALS['TL_LANG']['DP']['cancel'] = 'Annuler';
 $GLOBALS['TL_LANG']['DP']['week'] = 'Wk';
+$GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Faites glisser les éléments pour les ré-ordonner';

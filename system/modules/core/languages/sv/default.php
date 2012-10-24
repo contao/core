@@ -516,3 +516,4 @@ $GLOBALS['TL_LANG']['DP']['time_confirm_button'] = 'OK';
 $GLOBALS['TL_LANG']['DP']['apply_range'] = 'Utför';
 $GLOBALS['TL_LANG']['DP']['cancel'] = 'Avbryt';
 $GLOBALS['TL_LANG']['DP']['week'] = 'Wk';
+$GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Ta tag i och drag posterna för att ändra deras ordning';

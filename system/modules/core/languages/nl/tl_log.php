@@ -15,9 +15,9 @@
  */
 
 $GLOBALS['TL_LANG']['tl_log']['tstamp'][0] = 'Datum';
-$GLOBALS['TL_LANG']['tl_log']['tstamp'][1] = 'Datum en tijd van aanmaken';
+$GLOBALS['TL_LANG']['tl_log']['tstamp'][1] = 'Datum en tijd van aanmaak logbestand';
 $GLOBALS['TL_LANG']['tl_log']['source'][0] = 'Bron';
-$GLOBALS['TL_LANG']['tl_log']['source'][1] = 'Backend of frontend';
+$GLOBALS['TL_LANG']['tl_log']['source'][1] = 'Back-end of front-end';
 $GLOBALS['TL_LANG']['tl_log']['action'][0] = 'Categorie';
 $GLOBALS['TL_LANG']['tl_log']['action'][1] = 'Categorie van de handeling';
 $GLOBALS['TL_LANG']['tl_log']['username'][0] = 'Gebruiker';
@@ -25,13 +25,13 @@ $GLOBALS['TL_LANG']['tl_log']['username'][1] = 'Naam van de ingelogde gebruiker'
 $GLOBALS['TL_LANG']['tl_log']['text'][0] = 'Details';
 $GLOBALS['TL_LANG']['tl_log']['text'][1] = 'Details van de huidige invoeging';
 $GLOBALS['TL_LANG']['tl_log']['func'][0] = 'Functie';
-$GLOBALS['TL_LANG']['tl_log']['func'][1] = 'Functie naam';
+$GLOBALS['TL_LANG']['tl_log']['func'][1] = 'Naam functie welke getriggerd wordt';
 $GLOBALS['TL_LANG']['tl_log']['ip'][0] = 'IP adres';
 $GLOBALS['TL_LANG']['tl_log']['ip'][1] = 'IP adres van de gebruiker';
 $GLOBALS['TL_LANG']['tl_log']['browser'][0] = 'Browser';
 $GLOBALS['TL_LANG']['tl_log']['browser'][1] = 'Browser van de gebruiker';
-$GLOBALS['TL_LANG']['tl_log']['BE'] = 'Backend';
-$GLOBALS['TL_LANG']['tl_log']['FE'] = 'Frontend';
+$GLOBALS['TL_LANG']['tl_log']['BE'] = 'Back-end';
+$GLOBALS['TL_LANG']['tl_log']['FE'] = 'Front-end';
 $GLOBALS['TL_LANG']['tl_log']['show'][0] = 'Toon details';
 $GLOBALS['TL_LANG']['tl_log']['show'][1] = 'Toon details van invoeging ID %s';
 $GLOBALS['TL_LANG']['tl_log']['delete'][0] = 'Verwijder';
