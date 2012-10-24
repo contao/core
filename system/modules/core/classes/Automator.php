@@ -266,20 +266,6 @@ class Automator extends \Backend
 			}
 		}
 
-		// FIXME: is the "rootFiles" check still relevant now that the files are in a subfolder?
-
-		// Make sure the dcaconfig.php is loaded
-		@include TL_ROOT . '/system/config/dcaconfig.php';
-
-		// Add the root files
-		if (is_array($GLOBALS['TL_CONFIG']['rootFiles']))
-		{
-			foreach ($GLOBALS['TL_CONFIG']['rootFiles'] as $strFile)
-			{
-				$arrFeeds[] = str_replace('.xml', '', $strFile);
-			}
-		}
-
 		// Delete the old files
 		if (!$blnReturn)
 		{
@@ -287,7 +273,7 @@ class Automator extends \Backend
 			{
 				$objFile = new \File('share/' . $file);
 
-				if ($objFile->extension == 'xml' && !in_array($objFile->filename, $arrFeeds) && !preg_match('/^sitemap/i', $objFile->filename))
+				if ($objFile->extension == 'xml' && !in_array($objFile->filename, $arrFeeds))
 				{
 					$objFile->delete();
 				}
