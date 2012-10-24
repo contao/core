@@ -292,6 +292,7 @@ class Config
 
 		$arrActiveModules = array();
 		$arrCoreModules = array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository');
+		$arrDeprecatedModules = array('backend', 'frontend', 'rep_base', 'rep_client', 'registration', 'rss_reader', 'tpl_editor');
 		$arrExtensionModules = scan(TL_ROOT . '/system/modules');
 
 		// Load the core modules first
@@ -308,6 +309,11 @@ class Config
 		{
 			foreach ($arrExtensionModules as $strModule)
 			{
+				if (in_array($strModule, $arrDeprecatedModules))
+				{
+					continue; // see #4907
+				}
+
 				if (strncmp($strModule, '.', 1) !== 0 && !in_array($strModule, $arrCoreModules) && is_dir(TL_ROOT . '/system/modules/' . $strModule) && !file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
 				{
 					$arrActiveModules[] = $strModule;

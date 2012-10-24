@@ -5,6 +5,11 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Make sure the install tool and – after the version 3 update – the back end
+remain accessible if the Contao 3 files are just added to an existing Contao 2
+installation (which is not recommended) (see #4907).
+
+### Fixed
 Prevent deleting referenced content elements using "edit multiple" (see #4898).
 
 ### Fixed
