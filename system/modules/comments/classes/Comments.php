@@ -400,7 +400,6 @@ class Comments extends \Frontend
 			// Pending for approval
 			if ($objConfig->moderate)
 			{
-				// FIXME: notify the subscribers when the comment is published
 				$_SESSION['TL_COMMENT_ADDED'] = true;
 			}
 			else
