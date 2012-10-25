@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Make the original element passed to a `Hybrid` object available (see #4556).
+
+### Fixed
 Show an error message instead of throwing an Exception if the file system and
 the database are out of sync (see #4438).
 

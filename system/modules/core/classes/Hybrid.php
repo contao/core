@@ -53,6 +53,12 @@ abstract class Hybrid extends \Frontend
 	protected $objModel;
 
 	/**
+	 * Element
+	 * @var Model
+	 */
+	protected $objElement;
+
+	/**
 	 * Current record
 	 * @var array
 	 */
@@ -72,6 +78,16 @@ abstract class Hybrid extends \Frontend
 	public function __construct($objElement)
 	{
 		parent::__construct();
+
+		// Store the original element (see #4556)
+		if ($objElement instanceof \Model)
+		{
+			$this->objElement = $objElement;
+		}
+		elseif ($objElement instanceof \Model\Collection)
+		{
+			$this->objElement = $objElement->current();
+		}
 
 		if ($this->strKey == '' || $this->strTable == '')
 		{
