@@ -109,6 +109,13 @@ abstract class Frontend extends \Controller
 			if (preg_match('@^([a-z]{2})/(.*)$@', $strRequest, $arrMatches))
 			{
 				\Input::setGet('language', $arrMatches[1]);
+
+				// Trigger the root page if only the language was given
+				if ($arrMatches[2] == '')
+				{
+					return null;
+				}
+
 				$strRequest = $arrMatches[2];
 			}
 			else
@@ -126,7 +133,7 @@ abstract class Frontend extends \Controller
 			$arrOptions = array($strAlias);
 
 			// Compile all possible aliases by applying dirname() to the request (e.g. news/archive/item, news/archive, news)
-			while (strpos($strAlias, '/') !== false)
+			while ($strAlias != '/' && strpos($strAlias, '/') !== false)
 			{
 				$strAlias = dirname($strAlias);
 				$arrOptions[] = $strAlias;
@@ -204,7 +211,14 @@ abstract class Frontend extends \Controller
 		// If folderUrl is deactivated or did not find a matching page
 		if ($arrFragments === null)
 		{
-			$arrFragments = explode('/', $strRequest);
+			if ($strRequest == '/')
+			{
+				return false;
+			}
+			else
+			{
+				$arrFragments = explode('/', $strRequest);
+			}
 		}
 
 		// Add the second fragment as auto_item if the number of fragments is even
@@ -222,12 +236,24 @@ abstract class Frontend extends \Controller
 			}
 		}
 
+		// Return if the alias is empty (see #4702)
+		if ($arrFragments[0] == '')
+		{
+			return false;
+		}
+
 		$arrFragments = array_map('urldecode', $arrFragments);
 
 		// Add the fragments to the $_GET array
 		for ($i=1; $i<count($arrFragments); $i+=2)
 		{
-			// Return false the request contains an auto_item keyword (duplicate content) (see #4012)
+			// Skip key value pairs if the key is empty (see #4702)
+			if ($arrFragments[$i] == '')
+			{
+				continue;
+			}
+
+			// Return false if the request contains an auto_item keyword (duplicate content) (see #4012)
 			if ($GLOBALS['TL_CONFIG']['useAutoItem'] && in_array($arrFragments[$i], $GLOBALS['TL_AUTO_ITEM']))
 			{
 				return false;
