@@ -95,7 +95,6 @@ $GLOBALS['TL_LANG']['tl_content']['useImage'][1] = 'Utiliser une image à la pla
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][0] = 'Source des fichiers';
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][1] = 'Choisir un ou plusieurs fichiers ou répertoires (les fichiers contenus dans un répertoires seront inclus automatiquement).';
 $GLOBALS['TL_LANG']['tl_content']['orderSRC'][0] = 'Ordre de tri';
-$GLOBALS['TL_LANG']['tl_content']['orderSRC'][1] = 'Ordre de tri des fichiers source.';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][0] = 'Utiliser le répertoire personnel';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][1] = 'Utiliser le répertoire personnel d\'un membre comme source de fichiers.';
 $GLOBALS['TL_LANG']['tl_content']['perRow'][0] = 'Vignettes par ligne';

@@ -95,7 +95,6 @@ $GLOBALS['TL_LANG']['tl_content']['useImage'][1] = 'Utiliza una imagen en vez de
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][0] = 'Achivos fuente';
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][1] = 'Por favor selecciona uno o más archivos o carpetas (todos los archivos de una carpeta serán incluidos automáticamente).';
 $GLOBALS['TL_LANG']['tl_content']['orderSRC'][0] = 'Criterio de ordenación';
-$GLOBALS['TL_LANG']['tl_content']['orderSRC'][1] = 'Criterio de ordenación de los archivos fuentes.';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][0] = 'Utilizar directorio home';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][1] = 'Cuando se conecte un usuario del front end, utiliza su directorio home como archivo fuente.';
 $GLOBALS['TL_LANG']['tl_content']['perRow'][0] = 'Miniaturas por fila';

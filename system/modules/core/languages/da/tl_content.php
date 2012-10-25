@@ -95,7 +95,6 @@ $GLOBALS['TL_LANG']['tl_content']['useImage'][1] = 'Brug et billede i stedet for
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][0] = 'Kildefiler';
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][1] = 'Vælg venligst en eller flere filer eller mapper (filer i en mappe inkluderes automatisk).';
 $GLOBALS['TL_LANG']['tl_content']['orderSRC'][0] = 'Sortering';
-$GLOBALS['TL_LANG']['tl_content']['orderSRC'][1] = 'Rækkefølgen af filerne.';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][0] = 'Brug hjemmemappen';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][1] = 'Hvis en frontend-bruger har logget på, brug da hans hjemmemappe som filkilde.';
 $GLOBALS['TL_LANG']['tl_content']['perRow'][0] = 'Miniaturebilleder pr. række';

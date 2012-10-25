@@ -95,7 +95,6 @@ $GLOBALS['TL_LANG']['tl_content']['useImage'][1] = 'Gebruik een afbeelding i.p.v
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][0] = 'Bronbestanden';
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][1] = 'Selecteer een of meerdere bestanden of mappen (bestanden in een map worden automatisch geselecteerd).';
 $GLOBALS['TL_LANG']['tl_content']['orderSRC'][0] = 'Sorteer volgorde';
-$GLOBALS['TL_LANG']['tl_content']['orderSRC'][1] = 'Sorteervolgorde van de bron bestanden.';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][0] = 'Gebruik home directory';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][1] = 'Als een gebruiker aangemeld is, gebruik dan zijn home directory als bestandsbron.';
 $GLOBALS['TL_LANG']['tl_content']['perRow'][0] = 'Thumbnails per rij';

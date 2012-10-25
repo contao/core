@@ -516,3 +516,4 @@ $GLOBALS['TL_LANG']['DP']['time_confirm_button'] = 'ОК';
 $GLOBALS['TL_LANG']['DP']['apply_range'] = 'Застосувати';
 $GLOBALS['TL_LANG']['DP']['cancel'] = 'Відміна';
 $GLOBALS['TL_LANG']['DP']['week'] = 'Нед.';
+$GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Перетягніть елементи для зміни їх порядку';

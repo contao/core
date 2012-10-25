@@ -95,7 +95,6 @@ $GLOBALS['TL_LANG']['tl_content']['useImage'][1] = 'Använd en klickbar bild ist
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][0] = 'Källfiler';
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][1] = 'Välj en eller fler filer eller mappar från filarkivet. Om du väljer mappar kommer mapparnas ingående filer att inkluderas automatiskt.';
 $GLOBALS['TL_LANG']['tl_content']['orderSRC'][0] = 'Sorteringsordning';
-$GLOBALS['TL_LANG']['tl_content']['orderSRC'][1] = 'Ordningen som filerna sorteras i.';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][0] = 'Använd hemmapp';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][1] = 'Om en medlem har loggat in, använd då medlemmens hemmapp som källa för filer.';
 $GLOBALS['TL_LANG']['tl_content']['perRow'][0] = 'Minibilder per rad';

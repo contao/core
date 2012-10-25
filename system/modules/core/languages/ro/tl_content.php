@@ -95,7 +95,6 @@ $GLOBALS['TL_LANG']['tl_content']['useImage'][1] = 'Foloseşte o imagine în loc
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][0] = 'Fişiere sursă';
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][1] = 'Selectaţi unul sau mai multe fişiere sau directoare (fişierele din directoare vor fi incluse automat).';
 $GLOBALS['TL_LANG']['tl_content']['orderSRC'][0] = 'Ordinea de sortare';
-$GLOBALS['TL_LANG']['tl_content']['orderSRC'][1] = 'Ordinea de sortare a fişierelor.';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][0] = 'Foloseşte director propriu';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][1] = 'Dacă un membru al sitului s-a autentificat, se va folosi directorul său propriu ca sursă pentru fişiere.';
 $GLOBALS['TL_LANG']['tl_content']['perRow'][0] = 'Iconiţe pe rând';

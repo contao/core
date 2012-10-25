@@ -95,7 +95,6 @@ $GLOBALS['TL_LANG']['tl_content']['useImage'][1] = 'Utilisar in maletg empè dal
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][0] = 'Datotecas da funtauna';
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][1] = 'Tscherna ina u pliras datotecas u ordinaturs da la survista da datotecas. Sche ti tschernas in ordinatur vegnan las datotecas lien encolladas automaticamain.';
 $GLOBALS['TL_LANG']['tl_content']['orderSRC'][0] = 'Successiun da zavrar';
-$GLOBALS['TL_LANG']['tl_content']['orderSRC'][1] = 'La successiun da zavrar da las datotecas da funtauna.';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][0] = 'Utilisar l\'ordinatur persunal';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][1] = 'Utilisar l\'ordinatur persunal sco funatuna da datotecas sche l\'utilisader è s\'annunzià.';
 $GLOBALS['TL_LANG']['tl_content']['perRow'][0] = 'Miniaturas per retscha';
