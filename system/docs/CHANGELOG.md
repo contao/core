@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Do not cache pages if the request contains a token (see #4702).
+
+### Fixed
 Make the original element passed to a `Hybrid` object available (see #4556).
 
 ### Fixed
