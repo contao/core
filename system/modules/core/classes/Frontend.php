@@ -168,11 +168,12 @@ abstract class Frontend extends \Controller
 
 				$arrAliases = array();
 
-				// Try to find a page matching the language parameter
+				// Use the first result (see #4872)
 				if (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 				{
-					$arrAliases = $arrLangs['*']; // Fallback language
+					$arrAliases = current($arrLangs);
 				}
+				// Try to find a page matching the language parameter
 				elseif (($lang = \Input::get('language')) != '' && isset($arrLangs[$lang]))
 				{
 					$arrAliases = $arrLangs[$lang];
