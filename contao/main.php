@@ -189,7 +189,7 @@ class Main extends Backend
 			$arrRow = $objVersions->row();
 
 			// Add some parameters
-			$arrRow['from'] = 1;
+			$arrRow['from'] = max(($objVersions->version - 1), 1); // see #4828
 			$arrRow['to'] = $objVersions->version;
 			$arrRow['date'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objVersions->tstamp);
 			$arrRow['description'] = String::substr($arrRow['description'], 32);
