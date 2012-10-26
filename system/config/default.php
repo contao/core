@@ -340,3 +340,5 @@ $GLOBALS['TL_CONFIG']['privacyAnonymizeIp']   = true;
 $GLOBALS['TL_CONFIG']['privacyAnonymizeGA']   = true;
 $GLOBALS['TL_CONFIG']['bypassCache']          = false;
 $GLOBALS['TL_CONFIG']['loadGoogleFonts']      = false;
+$GLOBALS['TL_CONFIG']['defaultFileChmod']     = 0644;
+$GLOBALS['TL_CONFIG']['defaultFolderChmod']   = 0755;
