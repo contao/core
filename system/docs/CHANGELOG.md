@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.0 (2012-XX-XX)
 --------------------------
 
+### Fixed
+Mark active forward pages with "forward" instead of "active" (see #4822).
+
 ### Updated
 Updated jQuery UI to version 1.9.1 (see #4953).
 
