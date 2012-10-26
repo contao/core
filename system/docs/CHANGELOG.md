@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.0 (2012-XX-XX)
 --------------------------
 
+### Updated
+Updated jQuery UI to version 1.9.1 (see #4953).
+
 ### Fixed
 Remove HTML tags when overriding the page title (see #4955).
 
