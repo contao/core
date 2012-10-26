@@ -537,11 +537,37 @@ class Newsletter extends \Backend
 
 
 	/**
+	 * Remove the newsletter subscriptions of members who close their account
+	 * @param integer
+	 * @param string
+	 */
+	public function removeSubscriptions($intUser, $strMode)
+	{
+		if (!$intUser)
+		{
+			return;
+		}
+
+		// Delete or deactivate
+		if ($strMode == 'close_delete')
+		{
+			$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE email=(SELECT email FROM tl_member WHERE id=?)")
+						   ->execute($intUser);
+		}
+		else
+		{
+			$this->Database->prepare("UPDATE tl_newsletter_recipients SET active='' WHERE email=(SELECT email FROM tl_member WHERE id=?)")
+						   ->execute($intUser);
+		}
+	}
+
+
+	/**
 	 * Synchronize newsletter subscription of new users
 	 * @param object
 	 * @param array
 	 */
-	public function createNewUser($userId, $arrData)
+	public function createNewUser($intUser, $arrData)
 	{
 		$arrNewsletters = deserialize($arrData['newsletter'], true);
 
