@@ -109,10 +109,10 @@ class ModuleNewsletterReader extends \Module
 			return;
 		}
 
-		// Overwrite the page title
+		// Overwrite the page title (see #2853 and #4955)
 		if ($objNewsletter->subject != '')
 		{
-			$objPage->pageTitle = strip_insert_tags($objNewsletter->subject);
+			$objPage->pageTitle = strip_tags(strip_insert_tags($objNewsletter->subject));
 		}
 
 		$arrEnclosures = array();

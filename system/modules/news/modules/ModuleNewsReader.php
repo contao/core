@@ -113,10 +113,10 @@ class ModuleNewsReader extends \ModuleNews
 		$arrArticle = $this->parseArticle($objArticle);
 		$this->Template->articles = $arrArticle;
 
-		// Overwrite the page title
+		// Overwrite the page title (see #2853 and #4955)
 		if ($objArticle->headline != '')
 		{
-			$objPage->pageTitle = strip_insert_tags($objArticle->headline);
+			$objPage->pageTitle = strip_tags(strip_insert_tags($objArticle->headline));
 		}
 
 		// Overwrite the page description

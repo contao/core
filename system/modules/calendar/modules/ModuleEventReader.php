@@ -110,10 +110,10 @@ class ModuleEventReader extends \Events
 			return;
 		}
 
-		// Overwrite the page title
+		// Overwrite the page title (see #2853 and #4955)
 		if ($objEvent->title != '')
 		{
-			$objPage->pageTitle = strip_insert_tags($objEvent->title);
+			$objPage->pageTitle = strip_tags(strip_insert_tags($objEvent->title));
 		}
 
 		// Overwrite the page description

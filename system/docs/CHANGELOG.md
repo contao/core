@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Remove HTML tags when overriding the page title (see #4955).
+
+### Fixed
 Correctly route pages if the language is not added to the URL and there are
 multiple results or folder URL aliases (see #4872).
 

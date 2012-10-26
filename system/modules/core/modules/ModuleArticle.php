@@ -144,10 +144,10 @@ class ModuleArticle extends \Module
 			$strArticle = $strSection;
 		}
 
-		// Overwrite the page title
+		// Overwrite the page title (see #2853 and #4955)
 		if (!$this->blnNoMarkup && $strArticle != '' && ($strArticle == $this->id || $strArticle == $this->alias) && $this->title != '')
 		{
-			$objPage->pageTitle = strip_insert_tags($this->title);
+			$objPage->pageTitle = strip_tags(strip_insert_tags($this->title));
 		}
 
 		$this->Template->printable = false;
