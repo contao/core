@@ -5,6 +5,9 @@ Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Remove HTML tags when overriding the page title (see #4955).
+
+### Fixed
 Decode entities in meta tags like "description" (see #4949).
 
 ### Fixed
