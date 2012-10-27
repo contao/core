@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Always convert file IDs to paths when exporting themes (see #4952).
+
+### Fixed
 Mark active forward pages with "forward" instead of "active" (see #4822).
 
 ### Updated
