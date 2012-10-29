@@ -15,8 +15,7 @@
 }
 
 .CodeMirror-scroll {
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto;
   height: 300px;
   /* This is needed to prevent an IE[67] bug where the scrolled content
      is visible outside of the scrolling box. */
@@ -26,13 +25,11 @@
 
 /* Vertical scrollbar */
 .CodeMirror-scrollbar {
-  float: right;
+  position: absolute;
+  right: 0; top: 0;
   overflow-x: hidden;
   overflow-y: scroll;
-
-  /* This corrects for the 1px gap introduced to the left of the scrollbar
-     by the rule for .CodeMirror-scrollbar-inner. */
-  margin-left: -1px;
+  z-index: 5;
 }
 .CodeMirror-scrollbar-inner {
   /* This needs to have a nonzero width in order for the scrollbar to appear
@@ -75,10 +72,6 @@
   white-space: pre;
   cursor: text;
 }
-.CodeMirror-lines * {
-  /* Necessary for throw-scrolling to decelerate properly on Safari. */
-  pointer-events: none;
-}
 
 .CodeMirror pre {
   -moz-border-radius: 0;
@@ -92,11 +85,12 @@
   PATCH EOF */
   padding: 0; margin: 0;
   white-space: pre;
-  word-wrap: normal;
   /* PATCH
+  word-wrap: normal;
   line-height: inherit;
-  color: inherit;
   PATCH EOF */
+  color: inherit;
+  overflow: visible;
 }
 
 .CodeMirror-wrap pre {
@@ -174,6 +168,8 @@ span.cm-em {font-style: italic;}
 span.cm-emstrong {font-style: italic; font-weight: bold;}
 span.cm-link {text-decoration: underline;}
 
+span.cm-invalidchar {color: #f00;}
+
 div.CodeMirror span.CodeMirror-matchingbracket {color: #0f0;}
 div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 
@@ -240,3 +236,10 @@ span.cm-mysql-type {color: purple;}
 span.cm-mysql-separator {color: #666666;}
 span.cm-mysql-number {color: darkcyan;}
 /* PATCH EOF */
+
+@media print {
+  /* Hide the cursor when printing */
+  .CodeMirror pre.CodeMirror-cursor {
+    visibility: hidden;
+  }
+}

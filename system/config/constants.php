@@ -20,7 +20,7 @@
 define('VERSION', '3.0');
 define('BUILD', 'RC2');
 define('LONG_TERM_SUPPORT', false);
-define('CODEMIRROR', '2.32');
+define('CODEMIRROR', '2.35');
 define('CSS3PIE', '1.0.0');
 define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIV', '3.6');
