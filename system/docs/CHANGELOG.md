@@ -5,6 +5,10 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Show an error message instead of an exception if a template cannot be imported
+in the install tool (see #4961).
+
+### Fixed
 Readded the "active" class to the custom navigation module (see #4963).
 
 ### Fixed

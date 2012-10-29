@@ -223,7 +223,16 @@ class InstallTool extends Backend
 		$this->Template->dbUpToDate = ($this->Template->dbUpdate != '') ? false : true;
 
 		// Import the example website
-		$this->importExampleWebsite();
+		try
+		{
+			$this->importExampleWebsite();
+		}
+		catch (Exception $e)
+		{
+			$this->Template->importException = true;
+			$this->Config->delete("\$GLOBALS['TL_CONFIG']['exampleWebsite']");
+			$this->outputAndExit();
+		}
 
 		// Create an admin user
 		$this->createAdminUser();
@@ -556,6 +565,20 @@ class InstallTool extends Backend
 	 */
 	protected function importExampleWebsite()
 	{
+		$strTemplates = '<option value="">-</option>';
+
+		foreach (scan(TL_ROOT . '/templates') as $strFile)
+		{
+			if (preg_match('/.sql$/', $strFile))
+			{
+				$strTemplates .= sprintf('<option value="%s">%s</option>', $strFile, specialchars($strFile));
+			}
+		}
+
+		$this->Template->templates = $strTemplates;
+
+		// Process the request after the select menu has been generated
+		// so the options show up even if the import throws an Exception
 		if (Input::post('FORM_SUBMIT') == 'tl_tutorial')
 		{
 			$this->Template->emptySelection = true;
@@ -589,17 +612,6 @@ class InstallTool extends Backend
 			}
 		}
 
-		$strTemplates = '<option value="">-</option>';
-
-		foreach (scan(TL_ROOT . '/templates') as $strFile)
-		{
-			if (preg_match('/.sql$/', $strFile))
-			{
-				$strTemplates .= sprintf('<option value="%s">%s</option>', $strFile, specialchars($strFile));
-			}
-		}
-
-		$this->Template->templates = $strTemplates;
 		$this->Template->dateImported = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $GLOBALS['TL_CONFIG']['exampleWebsite']);
 	}
 

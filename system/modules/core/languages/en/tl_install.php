@@ -67,6 +67,7 @@ $GLOBALS['TL_LANG']['tl_install']['saveCollation'] = 'Change collation';
 $GLOBALS['TL_LANG']['tl_install']['updateX'] = 'It seems that you are upgrading from a Contao version prior to version %s. If that is the case, <strong>it is required to run the version %s update</strong> to ensure the integrity of your data!';
 $GLOBALS['TL_LANG']['tl_install']['updateXrun'] = 'Run version %s update';
 $GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'Run version %s update - step %s';
+$GLOBALS['TL_LANG']['tl_install']['importException'] = 'The import failed! Is the database structure up to date and is the template file compatible with your Contao version?';
 $GLOBALS['TL_LANG']['tl_install']['importError'] = 'Please choose a template file!';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm'] = 'Template imported on %s';
 $GLOBALS['TL_LANG']['tl_install']['importWarn'] = 'Any existing data will be deleted!';
