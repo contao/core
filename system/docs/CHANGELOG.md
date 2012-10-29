@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.0 (2012-XX-XX)
 --------------------------
 
+### Updated
+Updated all vendor scripts and assets to their latest version (see #4966).
+
 ### Fixed
 Handle existing folders during a theme import (see #4952).
 
