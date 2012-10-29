@@ -150,7 +150,7 @@ class Form extends \Hybrid
 					foreach ($GLOBALS['TL_HOOKS']['loadFormField'] as $callback)
 					{
 						$this->import($callback[0]);
-						$objWidget = $this->$callback[0]->$callback[1]($objWidget, $formId, $this->arrData);
+						$objWidget = $this->$callback[0]->$callback[1]($objWidget, $formId, $this->arrData, $this);
 					}
 				}
 
@@ -165,7 +165,7 @@ class Form extends \Hybrid
 						foreach ($GLOBALS['TL_HOOKS']['validateFormField'] as $callback)
 						{
 							$this->import($callback[0]);
-							$objWidget = $this->$callback[0]->$callback[1]($objWidget, $formId, $this->arrData);
+							$objWidget = $this->$callback[0]->$callback[1]($objWidget, $formId, $this->arrData, $this);
 						}
 					}
 
@@ -458,7 +458,7 @@ class Form extends \Hybrid
 			foreach ($GLOBALS['TL_HOOKS']['processFormData'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($arrData, $this->arrData, $arrFiles, $arrLabels);
+				$this->$callback[0]->$callback[1]($arrData, $this->arrData, $arrFiles, $arrLabels, $this);
 			}
 		}
 

@@ -269,7 +269,7 @@ abstract class Controller extends \System
 				foreach ($GLOBALS['TL_HOOKS']['getFrontendModule'] as $callback)
 				{
 					$this->import($callback[0]);
-					$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer);
+					$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer, $objModule);
 				}
 			}
 
@@ -433,7 +433,7 @@ abstract class Controller extends \System
 			foreach ($GLOBALS['TL_HOOKS']['getContentElement'] as $callback)
 			{
 				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer);
+				$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer, $objElement);
 			}
 		}
 
@@ -486,7 +486,7 @@ abstract class Controller extends \System
 			foreach ($GLOBALS['TL_HOOKS']['getForm'] as $callback)
 			{
 				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer);
+				$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer, $objElement);
 			}
 		}
 

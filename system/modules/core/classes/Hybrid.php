@@ -53,10 +53,10 @@ abstract class Hybrid extends \Frontend
 	protected $objModel;
 
 	/**
-	 * Element
+	 * Parent element
 	 * @var Model
 	 */
-	protected $objElement;
+	protected $objParent;
 
 	/**
 	 * Current record
@@ -79,14 +79,14 @@ abstract class Hybrid extends \Frontend
 	{
 		parent::__construct();
 
-		// Store the original element (see #4556)
+		// Store the parent element (see #4556)
 		if ($objElement instanceof \Model)
 		{
-			$this->objElement = $objElement;
+			$this->objParent = $objElement;
 		}
 		elseif ($objElement instanceof \Model\Collection)
 		{
-			$this->objElement = $objElement->current();
+			$this->objParent = $objElement->current();
 		}
 
 		if ($this->strKey == '' || $this->strTable == '')
@@ -170,6 +170,16 @@ abstract class Hybrid extends \Frontend
 	public function __isset($strKey)
 	{
 		return isset($this->arrData[$strKey]);
+	}
+
+
+	/**
+	 * Return the parent object
+	 * @return object
+	 */
+	public function getParent()
+	{
+		return $this->objParent;
 	}
 
 
