@@ -17,9 +17,9 @@
 $GLOBALS['TL_LANG']['tl_news_feed']['title'][0] = 'Título';
 $GLOBALS['TL_LANG']['tl_news_feed']['title'][1] = 'Introducir el título del flujo.';
 $GLOBALS['TL_LANG']['tl_news_feed']['alias'][0] = 'Alias del flujo';
-$GLOBALS['TL_LANG']['tl_news_feed']['alias'][1] = 'Introducir un nombre de archivo único (sin extensión). El archivo XML del flujo se auto-genera en la carpeta <em>share</em> de la instalación de Contao, por ejemplo, <em>share/nombre.xml </ em>.';
+$GLOBALS['TL_LANG']['tl_news_feed']['alias'][1] = 'Introducir un nombre de archivo único (sin extensión). El archivo XML del flujo se auto-genera en la carpeta <em>share</em> de la instalación de Contao, por ejemplo, <em>share/nombre.xml </em>.';
 $GLOBALS['TL_LANG']['tl_news_feed']['language'][0] = 'Idioma del flujo';
-$GLOBALS['TL_LANG']['tl_news_feed']['language'][1] = 'Introducir el lenguaje del flujo de acuerdo con la norma ISO-639 (por ejemplo <em>en</em> o <em>en-us</ em>).';
+$GLOBALS['TL_LANG']['tl_news_feed']['language'][1] = 'Introducir el lenguaje del flujo de acuerdo con la norma ISO-639 (por ejemplo <em>en</em> o <em>en-us</em>).';
 $GLOBALS['TL_LANG']['tl_news_feed']['archives'][0] = 'Archivos de noticias';
 $GLOBALS['TL_LANG']['tl_news_feed']['archives'][1] = 'Elegir los archivos de noticias para ser incluidos en el flujo';
 $GLOBALS['TL_LANG']['tl_news_feed']['format'][0] = 'Formato del flujo';

@@ -1025,7 +1025,7 @@ abstract class Widget extends \Controller
 				// Multi-dimensional array
 				else
 				{
-					foreach ($v as $kk=>$vv)
+					foreach ($v as $vv)
 					{
 						if ($strInput == $vv['value'])
 						{

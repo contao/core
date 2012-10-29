@@ -285,6 +285,12 @@ class Transifex
 							$value = "'" . str_replace("'", "\\'", $value) . "'";
 						}
 
+						// Some closing </em> tags oddly have an extra space in
+						if (strpos($value, '</ em>') !== false)
+						{
+							$value = str_replace('</ em>', '</em>', $value);
+						}
+
 						$chunks = explode('.', $unit->getAttribute('id'));
 
 						// Handle keys with dots

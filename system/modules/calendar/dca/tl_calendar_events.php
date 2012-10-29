@@ -730,7 +730,6 @@ class tl_calendar_events extends Backend
 	 */
 	public function listEvents($arrRow)
 	{
-		$time = time();
 		$span = Calendar::calculateSpan($arrRow['startTime'], $arrRow['endTime']);
 
 		if ($span > 0)

@@ -289,7 +289,7 @@ $GLOBALS['TL_LANG']['MSC']['move_down'][1] = 'Перемістити на одн
 $GLOBALS['TL_LANG']['MSC']['staticFiles'][0] = 'URL файлів';
 $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'URL файлів застосовується до каталогу <em>tl_files</em> і всім ескізами зображень (оптимізація швидкості завантаження сторінок).';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL плагінів';
-$GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'URL плагінів застосовується до всіх ресурсів каталогу <em>plugins</ em> (оптимізація швидкості завантаження сторінок).';
+$GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'URL плагінів застосовується до всіх ресурсів каталогу <em>plugins</em> (оптимізація швидкості завантаження сторінок).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Комбінації клавіш панелі управління';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Дізнайтеся більше про прискорення робочого процесу за допомогою <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">комбінацій клавіш</ a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Переключити всі';
