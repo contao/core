@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Readded the "active" class to the custom navigation module (see #4963).
+
+### Fixed
 Always convert file IDs to paths when exporting themes (see #4952).
 
 ### Fixed

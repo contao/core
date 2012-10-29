@@ -145,7 +145,7 @@ class ModuleCustomnav extends \Module
 					$row = $arrPage;
 
 					$row['isActive'] = true;
-					$row['class'] = $strClass;
+					$row['class'] = trim('active ' . $strClass);
 					$row['title'] = specialchars($arrPage['title'], true);
 					$row['pageTitle'] = specialchars($arrPage['pageTitle'], true);
 					$row['link'] = $arrPage['title'];
