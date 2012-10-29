@@ -5,6 +5,9 @@ Version 3.0.0 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Handle existing folders during a theme import (see #4952).
+
+### Fixed
 Show an error message instead of an exception if a template cannot be imported
 in the install tool (see #4961).
 

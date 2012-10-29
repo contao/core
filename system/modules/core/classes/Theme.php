@@ -495,6 +495,10 @@ class Theme extends \Backend
 
 							$intNextPid = $objModel->id;
 						}
+						else
+						{
+							$intNextPid = $objParent->id; // see #4952
+						}
 					}
 
 					$this->syncNewFolder($strFolder, $intNextPid);
