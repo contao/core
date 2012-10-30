@@ -18,6 +18,16 @@ $GLOBALS['TL_LANG']['tl_layout']['name'][0] = 'عنوان';
 $GLOBALS['TL_LANG']['tl_layout']['name'][1] = 'لطفا عنوان چیدمان را وارد نمائید.';
 $GLOBALS['TL_LANG']['tl_layout']['fallback'][0] = 'چیدمان پیش‌فرض';
 $GLOBALS['TL_LANG']['tl_layout']['fallback'][1] = 'تبدیل چیدمان به چیدمان پیش‌فرض.';
+$GLOBALS['TL_LANG']['tl_layout']['rows'][0] = 'ردیف‌ها';
+$GLOBALS['TL_LANG']['tl_layout']['rows'][1] = 'تعداد ردیف‌ها را انتخاب نمایید';
+$GLOBALS['TL_LANG']['tl_layout']['1rw'][0] = 'فقط  ردیف اصلی';
+$GLOBALS['TL_LANG']['tl_layout']['1rw'][1] = 'نمایش فقط یک ردیف.';
+$GLOBALS['TL_LANG']['tl_layout']['2rwh'][0] = 'هیدر و ردیف اصلی';
+$GLOBALS['TL_LANG']['tl_layout']['2rwh'][1] = 'نمایش یک هیدر بالای ردیف اصلی';
+$GLOBALS['TL_LANG']['tl_layout']['2rwf'][0] = 'ردیف اصلی و فوتر';
+$GLOBALS['TL_LANG']['tl_layout']['2rwf'][1] = 'نمایش یک فوتر زیر ردیف اصلی';
+$GLOBALS['TL_LANG']['tl_layout']['3rw'][0] = 'هیدر، ردیف اصلی و فوتر';
+$GLOBALS['TL_LANG']['tl_layout']['3rw'][1] = 'نمایش یک هیدر در بالا و فوتر در زیر ردیف اصلی.';
 $GLOBALS['TL_LANG']['tl_layout']['headerHeight'][0] = 'ارتفاع قسمت فوقانی';
 $GLOBALS['TL_LANG']['tl_layout']['headerHeight'][1] = 'لطفاً ارتفاع قسمت فوقانی را وارد نمائید.';
 $GLOBALS['TL_LANG']['tl_layout']['footerHeight'][0] = 'ارتفاع قسمت زیرین';
@@ -42,6 +52,12 @@ $GLOBALS['TL_LANG']['tl_layout']['sPosition'][0] = 'موقعیت بخش‌های
 $GLOBALS['TL_LANG']['tl_layout']['sPosition'][1] = 'موقعیت بخش‌های چیدمان اختصاصی را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_layout']['stylesheet'][0] = 'شیوه‌نامه‌ها';
 $GLOBALS['TL_LANG']['tl_layout']['stylesheet'][1] = 'شیوه‌نامه‌ها که میخواهید به چیدمان اضافه شود را انتخاب نمایید.';
+$GLOBALS['TL_LANG']['tl_layout']['framework'][0] = 'چارچوب CSS';
+$GLOBALS['TL_LANG']['tl_layout']['reset.css'][0] = 'بازتنظیم CSS';
+$GLOBALS['TL_LANG']['tl_layout']['tinymce.css'][0] = 'برگه سبک TinyMCE';
+$GLOBALS['TL_LANG']['tl_layout']['orderExt'][0] = 'ترتیب مرتب‌سازی';
+$GLOBALS['TL_LANG']['tl_layout']['orderExt'][1] = 'ترتیب مرتب‌سازی برگه‌های سبک';
+$GLOBALS['TL_LANG']['tl_layout']['webfonts'][0] = 'فونت‌های وب گوگل';
 $GLOBALS['TL_LANG']['tl_layout']['newsfeeds'][0] = 'خوراک‌های اخبار';
 $GLOBALS['TL_LANG']['tl_layout']['newsfeeds'][1] = 'خبرخوان‌هایی را که می‌خواهید برای اضافه شدن به چیدمان انتخاب کنید.';
 $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds'][0] = 'خوراک تقویم';
@@ -58,10 +74,18 @@ $GLOBALS['TL_LANG']['tl_layout']['onload'][0] = 'Body onload';
 $GLOBALS['TL_LANG']['tl_layout']['onload'][1] = 'خصوصیت body onload را اضافه کنید.';
 $GLOBALS['TL_LANG']['tl_layout']['head'][0] = 'برچسب‌های اضافی &lt;head&gt;';
 $GLOBALS['TL_LANG']['tl_layout']['head'][1] = 'برچسب‌های منحصربفرد را به بخش head صفحه اضافه کنید.';
+$GLOBALS['TL_LANG']['tl_layout']['addJQuery'][0] = 'شامل جی‌کوئری';
+$GLOBALS['TL_LANG']['tl_layout']['addJQuery'][1] = 'شامل کردن کتابخانه جی‌کوئری در چیدمان.';
+$GLOBALS['TL_LANG']['tl_layout']['jSource'][0] = 'منبع جی‌کوئری';
+$GLOBALS['TL_LANG']['tl_layout']['jSource'][1] = 'اینجا می‌توانید جایی که اسکریپت جی‌کوئری باید بارگزاری شود را انتخاب نمایید.';
+$GLOBALS['TL_LANG']['tl_layout']['jquery'][0] = 'قالب‌های جی‌کوئری';
+$GLOBALS['TL_LANG']['tl_layout']['jquery'][1] = 'اینجا می‌توانید یک یا چند قابل جی‌کوئری را انتخاب نمایید.';
+$GLOBALS['TL_LANG']['tl_layout']['addMooTools'][0] = 'شامل کردن موتولز';
 $GLOBALS['TL_LANG']['tl_layout']['mooSource'][0] = 'منبع موتولز';
 $GLOBALS['TL_LANG']['tl_layout']['mooSource'][1] = 'شما می توانید یا از اسکریپت موتولز محلی و یا از شبکه‌های تحویل محتوا بارگذاری کنید.';
 $GLOBALS['TL_LANG']['tl_layout']['mootools'][0] = 'قالب‌های موتولز';
 $GLOBALS['TL_LANG']['tl_layout']['mootools'][1] = 'یک یا چند قالب موتولز را انتخاب کنید.';
+$GLOBALS['TL_LANG']['tl_layout']['analytics'][0] = 'قالب‌های تجزیه و تحلیل';
 $GLOBALS['TL_LANG']['tl_layout']['script'][0] = 'کد جاوااسکریپت اختصاصی';
 $GLOBALS['TL_LANG']['tl_layout']['script'][1] = 'کد جاوا اسکریپت که در پایین صفحه اضافه خواهد شد.';
 $GLOBALS['TL_LANG']['tl_layout']['static'][0] = 'چیدمان ثابت';
@@ -80,6 +104,11 @@ $GLOBALS['TL_LANG']['tl_layout']['modules_legend'] = 'ماژول‌های وب�
 $GLOBALS['TL_LANG']['tl_layout']['expert_legend'] = 'تنظیمات پیشرفته';
 $GLOBALS['TL_LANG']['tl_layout']['script_legend'] = 'تنظیمات اسکریپت';
 $GLOBALS['TL_LANG']['tl_layout']['static_legend'] = 'چیدمان استاتیک';
+$GLOBALS['TL_LANG']['tl_layout']['jquery_legend'] = 'جی‌کوئری';
+$GLOBALS['TL_LANG']['tl_layout']['mootools_legend'] = 'موتولز';
+$GLOBALS['TL_LANG']['tl_layout']['j_local'] = 'جی‌کوئری - پرونده محلی';
+$GLOBALS['TL_LANG']['tl_layout']['j_googleapis'] = 'جی‌کوئری - googleapis.com';
+$GLOBALS['TL_LANG']['tl_layout']['j_fallback'] = 'جی‌کوئری - googleapis.com با جایگزین محلی';
 $GLOBALS['TL_LANG']['tl_layout']['moo_local'] = 'استفاده از فایل‌های محلی';
 $GLOBALS['TL_LANG']['tl_layout']['moo_googleapis'] = 'بارگذاری از googleapis.com';
 $GLOBALS['TL_LANG']['tl_layout']['moo_fallback'] = 'بارگذاری از googleapis.com با جایگزین محلی';
@@ -91,6 +120,8 @@ $GLOBALS['TL_LANG']['tl_layout']['main'] = 'در ستون مرکزی';
 $GLOBALS['TL_LANG']['tl_layout']['after'] = 'قبل از قسمت زیرین';
 $GLOBALS['TL_LANG']['tl_layout']['edit_styles'] = 'ویرایش شیوه‌نامه‌ها';
 $GLOBALS['TL_LANG']['tl_layout']['edit_module'] = 'ویرایش ماژول';
+$GLOBALS['TL_LANG']['tl_layout']['analytics_google'] = 'گوگل';
+$GLOBALS['TL_LANG']['tl_layout']['analytics_piwik'] = 'پی‌ویک';
 $GLOBALS['TL_LANG']['tl_layout']['new'][0] = 'چیدمان جدید';
 $GLOBALS['TL_LANG']['tl_layout']['new'][1] = 'ساخت یک چیدمان جدید';
 $GLOBALS['TL_LANG']['tl_layout']['show'][0] = 'جزئیات چیدمان';

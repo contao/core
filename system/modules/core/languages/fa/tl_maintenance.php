@@ -42,11 +42,14 @@ $GLOBALS['TL_LANG']['tl_maintenance']['indexLoading'] = 'لطفاً تا زما�
 $GLOBALS['TL_LANG']['tl_maintenance']['indexComplete'] = 'فهرست جستجو ساخته شد. می‌توانید ادامه دهید.';
 $GLOBALS['TL_LANG']['tl_maintenance']['updateHelp'] = 'لطفا %s خودتان را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['index'][0] = 'پاکسازی فهرست جستجو';
+$GLOBALS['TL_LANG']['tl_maintenance_jobs']['index'][1] = 'جدول‌های <em>tl_search</em> و <em>tl_search_index</em> را کوتاه می‌کند. پس، شما باید فهرست جستجو را دوباره بسازید (بالا را ببینید).';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['undo'][0] = 'پاکسازی جدول بازگردانی';
+$GLOBALS['TL_LANG']['tl_maintenance_jobs']['undo'][1] = 'جدول <em>tl_undo</em> که رکوردهای حذف شده را نگهداری می‌کند را کوتاه می‌کند. این کار به صورت همیشگی این رکوردها را پاک می‌کند.';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['versions'][0] = 'پاکسازی جدول ویرایش';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['images'][0] = 'پاکسازی نهان‌گاه تصویر';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['scripts'][0] = 'پاکسازی نهان‌گاه اسکریپت';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['pages'][0] = 'پاکسازی نهان‌گاه صفحه';
+$GLOBALS['TL_LANG']['tl_maintenance_jobs']['pages'][1] = 'نسخه‌های نهان‌گاه صفحات مدیریت را پاک می‌کند';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['internal'][0] = 'پاکسازی نهان‌گاه داخلی';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['temp'][0] = 'پاکسازی پوشه موقت';
 $GLOBALS['TL_LANG']['tl_maintenance_jobs']['temp'][1] = 'حذف پرونده‌های موقت.';

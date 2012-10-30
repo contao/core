@@ -68,6 +68,7 @@ $GLOBALS['TL_LANG']['ERR']['form'] = 'Форма не может быть отп
 $GLOBALS['TL_LANG']['ERR']['captcha'] = 'Ответьте на контрольный вопрос!';
 $GLOBALS['TL_LANG']['ERR']['download'] = 'Файл "%s" не доступен для загрузки!';
 $GLOBALS['TL_LANG']['ERR']['invalid'] = 'Неверный ввод: %s';
+$GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'] = 'Не найдена запись базы данных для %s. Синхронизируйте файловую систему.';
 $GLOBALS['TL_LANG']['SEC']['question1'] = 'Прибавьте %d к %d.';
 $GLOBALS['TL_LANG']['SEC']['question2'] = 'Просуммируйте %d и %d.';
 $GLOBALS['TL_LANG']['SEC']['question3'] = 'Сложите %d и %d.';

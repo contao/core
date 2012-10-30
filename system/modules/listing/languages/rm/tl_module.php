@@ -25,7 +25,7 @@ $GLOBALS['TL_LANG']['tl_module']['list_search'][1] = 'Qua pudais inditgar ina gl
 $GLOBALS['TL_LANG']['tl_module']['list_sort'][0] = 'Zavrar tenor';
 $GLOBALS['TL_LANG']['tl_module']['list_sort'][1] = 'Qua pudais vus inditgar ina glista separada entras commas cun ils champs tenor ils quals duai vegnir zavrà.';
 $GLOBALS['TL_LANG']['tl_module']['list_info'][0] = 'Champs da la pagina da detagls';
-$GLOBALS['TL_LANG']['tl_module']['list_info'][1] = 'Qua pudais vus inditgar ina glista seperada entras commas cun ils champs che vus vulais ch\'els vegnan mussads sin la pagina da detagls. Laschar vid per deactivar la funcziun.';
+$GLOBALS['TL_LANG']['tl_module']['list_info'][1] = 'Qua pudais vus inditgar ina glista separada entras commas cun ils champs che vus vulais ch\'els vegnan mussads sin la pagina da detagls. Laschar vid per deactivar la funcziun.';
 $GLOBALS['TL_LANG']['tl_module']['list_info_where'][0] = 'Cundiziun per la pagina da detagls';
 $GLOBALS['TL_LANG']['tl_module']['list_info_where'][1] = 'Qua pudais vus inditgar ina cundiziun per filtrar ils resultats (p.ex. <em>published=1</em> u <em>type!="admin"</em>).';
 $GLOBALS['TL_LANG']['tl_module']['list_layout'][0] = 'Template da la glista';

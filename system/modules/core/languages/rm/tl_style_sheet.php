@@ -17,7 +17,7 @@
 $GLOBALS['TL_LANG']['tl_style_sheet']['name'][0] = 'Num';
 $GLOBALS['TL_LANG']['tl_style_sheet']['name'][1] = 'Endatescha in num per il style-sheet.';
 $GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'][0] = 'Includer maletgs enfin ad ina grondezza da';
-$GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'][1] = 'Qua pos ti endatar ina grondezza da datoteca en bytes enfin la quala ils maletgs vegnan includs en il style-sheet sco string da data:. 0 deactivescha questa funcziun.';
+$GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'][1] = 'Qua pos ti endatar ina grondezza da datoteca en bytes enfin la quala ils maletgs vegnan integrads en il style-sheet sco string da data:. 0 deactivescha questa funcziun.';
 $GLOBALS['TL_LANG']['tl_style_sheet']['cc'][0] = 'Commentari cundiziunal';
 $GLOBALS['TL_LANG']['tl_style_sheet']['cc'][1] = 'Commentaris cundiziunals ta lubeschan da crear style-sheets specifics per l\'Internet Explorer (p. ex. <em>if lt IE 9</em>).';
 $GLOBALS['TL_LANG']['tl_style_sheet']['media'][0] = 'Tips da media';

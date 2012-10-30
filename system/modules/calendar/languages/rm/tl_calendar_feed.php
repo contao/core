@@ -17,7 +17,7 @@
 $GLOBALS['TL_LANG']['tl_calendar_feed']['title'][0] = 'Titel';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['title'][1] = 'Endatescha in titel per il feed.';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['alias'][0] = 'Alias dal feed';
-$GLOBALS['TL_LANG']['tl_calendar_feed']['alias'][1] = 'Qua pos ti inditgar in num da datoteca unic (senza extensiun). Il feed XML vegn generà automaticamian en l\'ordinatur <em>share</em> da tia installaziun da Contao, p. ex. sco <em>share/name.xml</em>.';
+$GLOBALS['TL_LANG']['tl_calendar_feed']['alias'][1] = 'Qua pos ti inditgar in num da datoteca unic (senza extensiun). Il feed XML vegn generà automaticamain en l\'ordinatur <em>share</em> da tia installaziun da Contao, p. ex. sco <em>share/name.xml</em>.';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['language'][0] = 'Lingua dal feed';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['language'][1] = 'Endatescha la lingua dal feed tenor il standard ISO-639 (p. ex. <em>rm</em> u <em>de</em>).';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['calendars'][0] = 'Chalenders';
@@ -36,7 +36,7 @@ $GLOBALS['TL_LANG']['tl_calendar_feed']['title_legend'] = 'Titel e lingua';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['calendars_legend'] = 'Chalenders';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['config_legend'] = 'Opziuns dal feed';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['source_teaser'] = 'Teasers dad occurrenzas';
-$GLOBALS['TL_LANG']['tl_calendar_feed']['source_text'] = 'Artitgels cumpletts';
+$GLOBALS['TL_LANG']['tl_calendar_feed']['source_text'] = 'Artitgels cumplets';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['new'][0] = 'Nov feed';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['new'][1] = 'Crear in nov feed';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['show'][0] = 'Detagls dal feed';

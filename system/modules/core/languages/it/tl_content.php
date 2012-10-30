@@ -95,6 +95,7 @@ $GLOBALS['TL_LANG']['tl_content']['useImage'][1] = 'Utilizza una immagine invece
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][0] = 'Files origine';
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][1] = 'Seleziona uno o più files o cartelle. (i files nelle cartelle verranno inclusi automaticamente)';
 $GLOBALS['TL_LANG']['tl_content']['orderSRC'][0] = 'Ordina per';
+$GLOBALS['TL_LANG']['tl_content']['orderSRC'][1] = 'Ordinamento degli elementi.';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][0] = 'Usa cartella principale';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][1] = 'Se un utente è loggato nel pannello di amministrazione, usa questa cartella come file sorgente.';
 $GLOBALS['TL_LANG']['tl_content']['perRow'][0] = 'Miniature per riga';

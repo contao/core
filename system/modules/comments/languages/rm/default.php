@@ -30,6 +30,6 @@ $GLOBALS['TL_LANG']['MSC']['com_confirm'] = 'Tes commentari è vegnì agiunta e 
 $GLOBALS['TL_LANG']['MSC']['com_optInConfirm'] = 'Tes abunament è activà';
 $GLOBALS['TL_LANG']['MSC']['com_optInCancel'] = 'Tes abunament è vegnì deactivà';
 $GLOBALS['TL_LANG']['MSC']['com_optInSubject'] = 'Tes abunament sin %s';
-$GLOBALS['TL_LANG']['MSC']['com_optInMessage'] = "Olla %s,\n\nconvermescha p. pl. che ti vuls vegnir infurmà per e-mail davart novs commentaris sin questa pagina:\n\n%s\n\n---\n\nConfermar: %s\nInterrumper: %s\n";
+$GLOBALS['TL_LANG']['MSC']['com_optInMessage'] = "Olla %s,\n\nconferma p. pl. che ti vuls vegnir infurmà per e-mail davart novs commentaris sin questa pagina:\n\n%s\n\n---\n\nConfermar: %s\nInterrumper: %s\n";
 $GLOBALS['TL_LANG']['MSC']['com_notifySubject'] = 'In nov commentari è vegnì scrit sin %s';
 $GLOBALS['TL_LANG']['MSC']['com_notifyMessage'] = "Olla %s,\n\nin nov commentari è vegnì scrit sin questa pagina che ti has abunà:\n\n%s\n\n---\n\nPer betg pli vegnir infurmà davart novs commentaris pos ti cliccar qua:\n%s\n";

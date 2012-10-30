@@ -68,6 +68,7 @@ $GLOBALS['TL_LANG']['ERR']['form'] = 'Formuläret kunde inte skickas';
 $GLOBALS['TL_LANG']['ERR']['captcha'] = 'Vänligen svara på säkerhetsfrågan!';
 $GLOBALS['TL_LANG']['ERR']['download'] = 'Filen "%s" är inte tillgänglig för nedladdning!';
 $GLOBALS['TL_LANG']['ERR']['invalid'] = 'Felaktig inmatning: %s';
+$GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'] = 'Ingen databaspost existerar för %s. Vänligen synkronisera filsystemet.';
 $GLOBALS['TL_LANG']['SEC']['question1'] = 'Addera %d och %d.';
 $GLOBALS['TL_LANG']['SEC']['question2'] = 'Vad är summan av %d och %d?';
 $GLOBALS['TL_LANG']['SEC']['question3'] = 'Räkna ut %d plus %d.';

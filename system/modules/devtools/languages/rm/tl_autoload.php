@@ -17,10 +17,10 @@
 $GLOBALS['TL_LANG']['tl_autoload']['headline'] = 'Crear automaticamain las datotecas autoload.php';
 $GLOBALS['TL_LANG']['tl_autoload']['emptySelection'] = 'Tscherna almain in modul';
 $GLOBALS['TL_LANG']['tl_autoload']['autoloadExists'] = 'Il modul "%s" ha gia ina datoteca autoload.php. Vuls ti remplazzar ella?';
-$GLOBALS['TL_LANG']['tl_autoload']['available'] = 'Moduls disponibles';
+$GLOBALS['TL_LANG']['tl_autoload']['available'] = 'Moduls disponibels';
 $GLOBALS['TL_LANG']['tl_autoload']['xplAvailable'] = 'Tscherna ils moduls che ti vuls modifitgar.';
 $GLOBALS['TL_LANG']['tl_autoload']['override'] = 'Remplazzar las datotecas existentas';
-$GLOBALS['TL_LANG']['tl_autoload']['xplOverride'] = 'Remplazzar las datotecas autoload.php exitentas (utilisar cun precauziun)';
+$GLOBALS['TL_LANG']['tl_autoload']['xplOverride'] = 'Remplazzar las datotecas autoload.php existentas (utilisar cun precauziun)';
 $GLOBALS['TL_LANG']['tl_autoload']['autoload'] = 'Crear datotecas dad autoload';
 $GLOBALS['TL_LANG']['tl_autoload']['autoloadConfirm'] = 'La datoteca autoload.php dal modul "%s" è vegnida remplazzada.';
 $GLOBALS['TL_LANG']['tl_autoload']['ideCompat'] = 'Actualisar la datoteca da cumpatibilitad IDE';

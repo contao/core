@@ -67,6 +67,7 @@ $GLOBALS['TL_LANG']['tl_install']['saveCollation'] = 'Changer le classement';
 $GLOBALS['TL_LANG']['tl_install']['updateX'] = 'Il semble que vous mettez à niveau une version de Contao antérieure à la version %s. Si tel est le cas, il est <strong>nécessaire d\'exécuter la mise à jour vers la version %s</strong> pour assurer l\'intégrité de vos données !';
 $GLOBALS['TL_LANG']['tl_install']['updateXrun'] = 'Exécuter la mise à jour vers la version %s';
 $GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'Exécute la mise à jour de la version %s - étape %s';
+$GLOBALS['TL_LANG']['tl_install']['importException'] = 'L\'importation a échoué ! La structure de la base de données est-elle à jour ? Est-ce que le modèle est compatible avec votre version de Contao ?';
 $GLOBALS['TL_LANG']['tl_install']['importError'] = 'Veuillez choisir un fichier de modèle !';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm'] = 'Modèle importé le %s';
 $GLOBALS['TL_LANG']['tl_install']['importWarn'] = 'Toutes les données existantes seront supprimées !';

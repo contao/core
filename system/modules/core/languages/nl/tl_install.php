@@ -67,6 +67,7 @@ $GLOBALS['TL_LANG']['tl_install']['saveCollation'] = 'Wijzig sortering';
 $GLOBALS['TL_LANG']['tl_install']['updateX'] = 'Het lijkt erop dat u aan het upgraden bent van een Contao versie voorafgaand aan versie %s. In dat geval, <strong>is het noodzakelijk om versie %s update te gebruiken</strong> om de integriteit van uw gegevens te garanderen!';
 $GLOBALS['TL_LANG']['tl_install']['updateXrun'] = 'Uitvoeren versie %s update';
 $GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'UItvoeren versie %s update - step %s';
+$GLOBALS['TL_LANG']['tl_install']['importException'] = 'Importeren is mislukt! Is de database structuur up-to-date en is het template bestand compatibel met uw Contao versie?';
 $GLOBALS['TL_LANG']['tl_install']['importError'] = 'Kies een template bestand!';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm'] = 'Template geïmporteerd op %s';
 $GLOBALS['TL_LANG']['tl_install']['importWarn'] = 'Alle bestaande gegevens worden verwijderd!';

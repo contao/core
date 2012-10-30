@@ -68,6 +68,7 @@ $GLOBALS['TL_LANG']['ERR']['form'] = 'Het formulier kon niet worden verstuurd';
 $GLOBALS['TL_LANG']['ERR']['captcha'] = 'Beantwoord de verificatievraag a.u.b.!';
 $GLOBALS['TL_LANG']['ERR']['download'] = 'Bestand "%s" is niet beschikbaar als download!';
 $GLOBALS['TL_LANG']['ERR']['invalid'] = 'Foutieve invoer %s';
+$GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'] = 'Geen database toegang gevonden voor %s. Gelieve  het bestandssysteem te synchroniseren.';
 $GLOBALS['TL_LANG']['SEC']['question1'] = 'Tel %d en %d bij elkaar op.';
 $GLOBALS['TL_LANG']['SEC']['question2'] = 'Wat is de som van %d en %d?';
 $GLOBALS['TL_LANG']['SEC']['question3'] = 'Bereken het volgende: %d plus %d.';

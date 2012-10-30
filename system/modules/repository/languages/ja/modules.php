@@ -17,6 +17,6 @@
 $GLOBALS['TL_LANG']['MOD']['repository'][0] = '機能拡張リポジトリ';
 $GLOBALS['TL_LANG']['MOD']['repository'][1] = '機能拡張リポジトリのバックエンドモジュール';
 $GLOBALS['TL_LANG']['MOD']['repository_catalog'][0] = '機能拡張カタログ';
-$GLOBALS['TL_LANG']['MOD']['repository_catalog'][1] = 'リポジトリの一覧を表示し、機能拡張のインストールを行います。';
+$GLOBALS['TL_LANG']['MOD']['repository_catalog'][1] = '機能拡張リポジトリの一覧と機能拡張のインストール';
 $GLOBALS['TL_LANG']['MOD']['repository_manager'][0] = '機能拡張管理';
-$GLOBALS['TL_LANG']['MOD']['repository_manager'][1] = 'インストールしている機能拡張の保守や削除を行います。';
+$GLOBALS['TL_LANG']['MOD']['repository_manager'][1] = 'インストールしている機能拡張の保守や削除';

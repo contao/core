@@ -23,6 +23,6 @@ $GLOBALS['TL_LANG']['FMD']['newslist'][1] = 'Agiunscha a la pagina ina glista da
 $GLOBALS['TL_LANG']['FMD']['newsreader'][0] = 'Lectur da novitads';
 $GLOBALS['TL_LANG']['FMD']['newsreader'][1] = 'Mussa ils detagls d\'in element da novitads.';
 $GLOBALS['TL_LANG']['FMD']['newsarchive'][0] = 'Archiv da novitads';
-$GLOBALS['TL_LANG']['FMD']['newsarchive'][1] = 'Agiunscha a la pagina in arichv da las novitads.';
+$GLOBALS['TL_LANG']['FMD']['newsarchive'][1] = 'Agiunscha a la pagina in archiv da novitads.';
 $GLOBALS['TL_LANG']['FMD']['newsmenu'][0] = 'Menu per l\'archiv da novitads';
 $GLOBALS['TL_LANG']['FMD']['newsmenu'][1] = 'Generescha in menu da navigaziun per navigar en l\'archiv da novitads.';

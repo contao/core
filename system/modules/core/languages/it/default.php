@@ -68,6 +68,7 @@ $GLOBALS['TL_LANG']['ERR']['form'] = 'Il form non è stato inviato correttamente
 $GLOBALS['TL_LANG']['ERR']['captcha'] = 'Rispondi alla domanda di sicurezza!';
 $GLOBALS['TL_LANG']['ERR']['download'] = 'Il file "%s" non è disponibile per il download!';
 $GLOBALS['TL_LANG']['ERR']['invalid'] = 'Input non valido: %s';
+$GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'] = 'Nel database non è stata trovata nessuna informazione per %s. È necessario risincronizare il file system.';
 $GLOBALS['TL_LANG']['SEC']['question1'] = 'Somma %d a %d.';
 $GLOBALS['TL_LANG']['SEC']['question2'] = 'Quanto fa %d sommato a %d?';
 $GLOBALS['TL_LANG']['SEC']['question3'] = 'Calcola %d più %s.';

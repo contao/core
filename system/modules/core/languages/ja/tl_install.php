@@ -67,6 +67,7 @@ $GLOBALS['TL_LANG']['tl_install']['saveCollation'] = '照合順序の変更';
 $GLOBALS['TL_LANG']['tl_install']['updateX'] = 'バージョン%sより前のContaoからアップグレードのようです。その場合、データの完全性を確実にするために<strong>バージョン%sアップデートを実行する必要</strong>があります。';
 $GLOBALS['TL_LANG']['tl_install']['updateXrun'] = 'バージョン%sアップデートを実行';
 $GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'バージョン%sアップデート - ステップ%s';
+$GLOBALS['TL_LANG']['tl_install']['importException'] = 'インポートに失敗しました!  データベースの構造は最新にしていて、テンプレートはContaoのバージョンと互換性がありますか?';
 $GLOBALS['TL_LANG']['tl_install']['importError'] = 'テンプレートのファイルを選択してください。';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm'] = '%sにテンプレートをインポートしました。';
 $GLOBALS['TL_LANG']['tl_install']['importWarn'] = '現在のデータをすべて削除します。';

@@ -95,6 +95,7 @@ $GLOBALS['TL_LANG']['tl_content']['useImage'][1] = 'Použít obrázek namísto b
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][0] = 'Zdrojové soubory';
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][1] = 'Vyberte prosím jeden nebo více souborů z úložny souborů. Zaškrtnutím složky se automaticky vyberou všechny v soubory, které se v ní nachází.';
 $GLOBALS['TL_LANG']['tl_content']['orderSRC'][0] = 'Srovnat podle';
+$GLOBALS['TL_LANG']['tl_content']['orderSRC'][1] = 'Způsob řazení položek.';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][0] = 'Domovský adresář';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][1] = 'Použít domovský adresář jako zdroj dat, když se přihlášil jeden z členů.';
 $GLOBALS['TL_LANG']['tl_content']['perRow'][0] = 'Náhledů na řádek';

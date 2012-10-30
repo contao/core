@@ -68,6 +68,7 @@ $GLOBALS['TL_LANG']['ERR']['form'] = 'フォームを送信できませんでし
 $GLOBALS['TL_LANG']['ERR']['captcha'] = '回答を入力してください。';
 $GLOBALS['TL_LANG']['ERR']['download'] = '"%s"というファイルはダウンロードできません。';
 $GLOBALS['TL_LANG']['ERR']['invalid'] = '正しくない入力: %s';
+$GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'] = '%sに対応するデータベースの項目がありません。ファイルシステムと同期してください。';
 $GLOBALS['TL_LANG']['SEC']['question1'] = '%dと%dを加算してください。';
 $GLOBALS['TL_LANG']['SEC']['question2'] = '%dと%dの合計は何ですか?';
 $GLOBALS['TL_LANG']['SEC']['question3'] = '%dプラス%dを計算してください。';
