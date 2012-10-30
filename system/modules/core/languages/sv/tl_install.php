@@ -67,6 +67,7 @@ $GLOBALS['TL_LANG']['tl_install']['saveCollation'] = 'Ändra sortering';
 $GLOBALS['TL_LANG']['tl_install']['updateX'] = 'Det verkar som att du uppgraderar från en Contao-version som föregår version %s. Om så är fallet <strong>krävs det att du kör version %s-uppdateringen</strong> för att säkerställa dataintegritet!';
 $GLOBALS['TL_LANG']['tl_install']['updateXrun'] = 'Kör version %s-uppdatering';
 $GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'Kör uppgradering version %s - steg %s';
+$GLOBALS['TL_LANG']['tl_install']['importException'] = 'Importeringen misslyckades! Är databasstrukturen aktuell och är mall-filerna kompatibla med din Contao-version?';
 $GLOBALS['TL_LANG']['tl_install']['importError'] = 'Välj en mallfil!';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm'] = 'Mall importeras på %s';
 $GLOBALS['TL_LANG']['tl_install']['importWarn'] = 'Allt befintligt data kommer att raderas!';

@@ -17,6 +17,6 @@
 $GLOBALS['TL_LANG']['CTE']['comments'][0] = 'Commentaris';
 $GLOBALS['TL_LANG']['CTE']['comments'][1] = 'Agiunscha a la pagina in formular per commentaris.';
 $GLOBALS['TL_LANG']['FMD']['comments'][0] = 'Commentaris';
-$GLOBALS['TL_LANG']['FMD']['comments'][1] = 'Administrar commentaris u endataziuns en cudeschs da hosps.';
+$GLOBALS['TL_LANG']['FMD']['comments'][1] = 'Administrar commentaris u endataziuns en cudeschs da giasts.';
 $GLOBALS['TL_LANG']['MOD']['comments'][0] = 'Commentaris';
-$GLOBALS['TL_LANG']['MOD']['comments'][1] = 'Administrar commentaris u endataziuns en cudeschs da hosps.';
+$GLOBALS['TL_LANG']['MOD']['comments'][1] = 'Administrar commentaris u endataziuns en cudeschs da giasts.';

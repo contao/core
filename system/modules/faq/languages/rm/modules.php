@@ -22,4 +22,4 @@ $GLOBALS['TL_LANG']['FMD']['faqlist'][1] = 'Agiuntescha a la pagina ina glista d
 $GLOBALS['TL_LANG']['FMD']['faqreader'][0] = 'Lectur da FAQ';
 $GLOBALS['TL_LANG']['FMD']['faqreader'][1] = 'Mussa la resposta ad ina dumonda frequenta.';
 $GLOBALS['TL_LANG']['FMD']['faqpage'][0] = 'Pagina da dumondas frequentas';
-$GLOBALS['TL_LANG']['FMD']['faqpage'][1] = 'Mussar la glista ed il lectur da damondas frequentas sin la medema pagina';
+$GLOBALS['TL_LANG']['FMD']['faqpage'][1] = 'Mussar la glista ed il lectur da dumondas frequentas sin la medema pagina';

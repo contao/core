@@ -189,7 +189,7 @@ class Main extends Backend
 			$arrRow = $objVersions->row();
 
 			// Add some parameters
-			$arrRow['from'] = 1;
+			$arrRow['from'] = max(($objVersions->version - 1), 1); // see #4828
 			$arrRow['to'] = $objVersions->version;
 			$arrRow['date'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objVersions->tstamp);
 			$arrRow['description'] = String::substr($arrRow['description'], 32);
@@ -228,8 +228,8 @@ class Main extends Backend
 		}
 
 		$objTemplate->versions = $arrVersions;
-		$objTemplate->showDifferences = specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']);
- 		$objTemplate->welcome = sprintf($GLOBALS['TL_LANG']['MSC']['welcomeTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
+		$objTemplate->welcome = sprintf($GLOBALS['TL_LANG']['MSC']['welcomeTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
+		$objTemplate->showDifferences = specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['showDifferences']));
 		$objTemplate->systemMessages = $GLOBALS['TL_LANG']['MSC']['systemMessages'];
 		$objTemplate->shortcuts = $GLOBALS['TL_LANG']['MSC']['shortcuts'][0];
 		$objTemplate->shortcutsLink = $GLOBALS['TL_LANG']['MSC']['shortcuts'][1];

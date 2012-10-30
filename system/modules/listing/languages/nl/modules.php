@@ -15,6 +15,6 @@
  */
 
 $GLOBALS['TL_LANG']['MOD']['listing'][0] = 'Opsommen';
-$GLOBALS['TL_LANG']['MOD']['listing'][1] = 'Met deze module kunt u records uit een database-tabel weergeven in het frontend.';
+$GLOBALS['TL_LANG']['MOD']['listing'][1] = 'Een overzicht van de records van elke tabel';
 $GLOBALS['TL_LANG']['FMD']['listing'][0] = 'Opsommen';
-$GLOBALS['TL_LANG']['FMD']['listing'][1] = 'Geef records uit een bepaalde database-tabel weer in het frontend.';
+$GLOBALS['TL_LANG']['FMD']['listing'][1] = 'Overzichten van de records van elke tabel';

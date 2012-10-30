@@ -411,7 +411,7 @@ window.addEvent(\'domready\', function() {
 		}
 		elseif (is_string($strCurrent))
 		{
-			$strCurrent = html_entity_decode($this->varValue, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet']);
+			$strCurrent = html_entity_decode($this->varValue, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
 		}
 
 		// Save the value if there was no error

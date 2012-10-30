@@ -20,4 +20,4 @@ $GLOBALS['TL_LANG']['MOD']['extension'][1] = 'Maak standaard Contao extensies aa
 $GLOBALS['TL_LANG']['MOD']['labels'][0] = 'Ontbrekende labels';
 $GLOBALS['TL_LANG']['MOD']['labels'][1] = 'Zoek ontbrekende labels in een taalpakket';
 $GLOBALS['TL_LANG']['MOD']['autoload'][0] = 'Autoload creator';
-$GLOBALS['TL_LANG']['MOD']['autoload'][1] = 'Maak automatisch de "config / autoload.php" bestanden aan';
+$GLOBALS['TL_LANG']['MOD']['autoload'][1] = 'Maak automatisch de "config/autoload.php" bestanden aan';

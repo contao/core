@@ -107,10 +107,10 @@ class ModuleFaqReader extends \Module
 			return;
 		}
 
-		// Overwrite the page title and description
+		// Overwrite the page title and description (see #2853 and #4955)
 		if ($objFaq->question != '')
 		{
-			$objPage->pageTitle = strip_insert_tags($objFaq->question);
+			$objPage->pageTitle = strip_tags(strip_insert_tags($objFaq->question));
 			$objPage->description = $this->prepareMetaDescription($objFaq->question);
 		}
 

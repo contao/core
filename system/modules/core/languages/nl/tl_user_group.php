@@ -17,9 +17,9 @@
 $GLOBALS['TL_LANG']['tl_user_group']['name'][0] = 'Titel';
 $GLOBALS['TL_LANG']['tl_user_group']['name'][1] = 'Geef een naam op voor de gebruikersgroep.';
 $GLOBALS['TL_LANG']['tl_user_group']['alexf'][0] = 'Toegestane velden';
-$GLOBALS['TL_LANG']['tl_user_group']['alexf'][1] = 'Verschillende tabellen bevatten velden die standaard niet gewijzigd kunnen worden. U kunt deze velden hier bewerkbaar maken voor de huidige groep. Gebruik de [CTRL]/[CMD] toets om meerdere items te selecteren.';
+$GLOBALS['TL_LANG']['tl_user_group']['alexf'][1] = 'Kies hier de velden welke bewerkbaar dienen te zijn.';
 $GLOBALS['TL_LANG']['tl_user_group']['disable'][0] = 'Deactiveer';
-$GLOBALS['TL_LANG']['tl_user_group']['disable'][1] = 'Als u deze optie kiest zal de huidige groep gedeactiveerd worden. Permissies van een gedeactiveerde groep kunnen niet meer overgeërfd worden door groepsleden.';
+$GLOBALS['TL_LANG']['tl_user_group']['disable'][1] = 'Als u deze optie kiest zal de huidige groep gedeactiveerd worden.';
 $GLOBALS['TL_LANG']['tl_user_group']['start'][0] = 'Activeer op';
 $GLOBALS['TL_LANG']['tl_user_group']['start'][1] = 'Als u hier een datum invult zal de huidige groep op deze dag geactiveerd worden.';
 $GLOBALS['TL_LANG']['tl_user_group']['stop'][0] = 'Deactiveer op';

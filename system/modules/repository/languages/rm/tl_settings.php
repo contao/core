@@ -21,5 +21,5 @@ $GLOBALS['TL_LANG']['tl_settings']['repository_languages'][1] = 'Qua pudais vus 
 $GLOBALS['TL_LANG']['tl_settings']['repository_listsize'][0] = 'Extensiuns per pagina';
 $GLOBALS['TL_LANG']['tl_settings']['repository_listsize'][1] = 'Qua pudais vus definir il dumber d\'extensiun che vegnan mussadas per pagina.';
 $GLOBALS['TL_LANG']['tl_settings']['repository_unsafe_catalog'][0] = 'Mussar extensiuns betg cumpatiblas';
-$GLOBALS['TL_LANG']['tl_settings']['repository_unsafe_catalog'][1] = 'Mussar extensiuns betg cumpatiblas en il catalog d\'extensiuns. ATTENZIUN: L\'installaziun d\'extensiuns nuncumpatiblas po donnegiar tia installaziun da Contao!';
+$GLOBALS['TL_LANG']['tl_settings']['repository_unsafe_catalog'][1] = 'Mussar extensiuns betg cumpatiblas en il catalog d\'extensiuns. ATTENZIUN: L\'installaziun d\'extensiuns betg cumpatiblas po donnegiar tia installaziun da Contao!';
 $GLOBALS['TL_LANG']['tl_settings']['repository_legend'] = 'Repository d\'extensiuns';

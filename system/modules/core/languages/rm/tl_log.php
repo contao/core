@@ -15,13 +15,13 @@
  */
 
 $GLOBALS['TL_LANG']['tl_log']['tstamp'][0] = 'Data';
-$GLOBALS['TL_LANG']['tl_log']['tstamp'][1] = 'Date e temp da l\'endataziun en il protocol';
+$GLOBALS['TL_LANG']['tl_log']['tstamp'][1] = 'Data e temp da l\'endataziun en il protocol';
 $GLOBALS['TL_LANG']['tl_log']['source'][0] = 'Origin';
 $GLOBALS['TL_LANG']['tl_log']['source'][1] = 'Back-end u front-end';
 $GLOBALS['TL_LANG']['tl_log']['action'][0] = 'Categoria';
 $GLOBALS['TL_LANG']['tl_log']['action'][1] = 'Categoria da l\'acziun';
 $GLOBALS['TL_LANG']['tl_log']['username'][0] = 'Utilisader';
-$GLOBALS['TL_LANG']['tl_log']['username'][1] = 'Num da l\'utilisader autentificà';
+$GLOBALS['TL_LANG']['tl_log']['username'][1] = 'Num da l\'utilisader autentifitgà';
 $GLOBALS['TL_LANG']['tl_log']['text'][0] = 'Detagls';
 $GLOBALS['TL_LANG']['tl_log']['text'][1] = 'Detagls da l\'endataziun en il protocol';
 $GLOBALS['TL_LANG']['tl_log']['func'][0] = 'Funcziun';

@@ -223,7 +223,16 @@ class InstallTool extends Backend
 		$this->Template->dbUpToDate = ($this->Template->dbUpdate != '') ? false : true;
 
 		// Import the example website
-		$this->importExampleWebsite();
+		try
+		{
+			$this->importExampleWebsite();
+		}
+		catch (Exception $e)
+		{
+			$this->Template->importException = true;
+			$this->Config->delete("\$GLOBALS['TL_CONFIG']['exampleWebsite']");
+			$this->outputAndExit();
+		}
 
 		// Create an admin user
 		$this->createAdminUser();
@@ -556,6 +565,20 @@ class InstallTool extends Backend
 	 */
 	protected function importExampleWebsite()
 	{
+		$strTemplates = '<option value="">-</option>';
+
+		foreach (scan(TL_ROOT . '/templates') as $strFile)
+		{
+			if (preg_match('/.sql$/', $strFile))
+			{
+				$strTemplates .= sprintf('<option value="%s">%s</option>', $strFile, specialchars($strFile));
+			}
+		}
+
+		$this->Template->templates = $strTemplates;
+
+		// Process the request after the select menu has been generated
+		// so the options show up even if the import throws an Exception
 		if (Input::post('FORM_SUBMIT') == 'tl_tutorial')
 		{
 			$this->Template->emptySelection = true;
@@ -589,17 +612,6 @@ class InstallTool extends Backend
 			}
 		}
 
-		$strTemplates = '<option value="">-</option>';
-
-		foreach (scan(TL_ROOT . '/templates') as $strFile)
-		{
-			if (preg_match('/.sql$/', $strFile))
-			{
-				$strTemplates .= sprintf('<option value="%s">%s</option>', $strFile, specialchars($strFile));
-			}
-		}
-
-		$this->Template->templates = $strTemplates;
 		$this->Template->dateImported = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $GLOBALS['TL_CONFIG']['exampleWebsite']);
 	}
 
@@ -839,19 +851,6 @@ class InstallTool extends Backend
 			return;
 		}
 
-		// Save the old upload path in the localconfig.php
-		if ($GLOBALS['TL_CONFIG']['uploadPath'] == 'files' && is_dir(TL_ROOT . '/tl_files'))
-		{
-			$GLOBALS['TL_CONFIG']['uploadPath'] = 'tl_files';
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['uploadPath']", 'tl_files');
-		}
-
-		// Show a warning if the user has renamed the tl_files directory already (see #4626)
-		if (!is_dir(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath']))
-		{
-			$this->Template->filesWarning = sprintf($GLOBALS['TL_LANG']['tl_install']['filesWarning'], '<a href="https://gist.github.com/3304014" target="_blank">https://gist.github.com/3304014</a>');
-		}
-
 		// Step 1: database structure
 		if (!$this->Database->tableExists('tl_files'))
 		{
@@ -860,6 +859,27 @@ class InstallTool extends Backend
 				$this->import('Database\\Updater', 'Updater');
 				$this->Updater->run300Update();
 				$this->reload();
+			}
+
+			// Disable the tasks extension (see #4907)
+			if (is_dir(TL_ROOT . '/system/modules/tasks'))
+			{
+				$objFile = new File('system/modules/tasks/.skip');
+				$objFile->write('Disabled during the version 3 update (see #4907)');
+				$objFile->close();
+			}
+
+			// Save the old upload path in the localconfig.php
+			if ($GLOBALS['TL_CONFIG']['uploadPath'] == 'files' && is_dir(TL_ROOT . '/tl_files'))
+			{
+				$GLOBALS['TL_CONFIG']['uploadPath'] = 'tl_files';
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['uploadPath']", 'tl_files');
+			}
+
+			// Show a warning if the user has renamed the tl_files directory already (see #4626)
+			if (!is_dir(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath']))
+			{
+				$this->Template->filesWarning = sprintf($GLOBALS['TL_LANG']['tl_install']['filesWarning'], '<a href="https://gist.github.com/3304014" target="_blank">https://gist.github.com/3304014</a>');
 			}
 
 			$this->Template->step = 1;

@@ -14,4 +14,4 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['MSC']['faqCreatedBy'] = 'Ulima actualisaziun: ils %s da %s.';
+$GLOBALS['TL_LANG']['MSC']['faqCreatedBy'] = 'Ultima actualisaziun: ils %s da %s.';

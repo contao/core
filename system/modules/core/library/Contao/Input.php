@@ -575,7 +575,7 @@ class Input
 
 		// Preserve basic entities
 		$varValue = static::preserveBasicEntities($varValue);
-		$varValue = html_entity_decode($varValue, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet']);
+		$varValue = html_entity_decode($varValue, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
 
 		return $varValue;
 	}

@@ -14,12 +14,12 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
+$GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'][0] = 'Extensie Repository URL';
+$GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'][1] = 'Geef de URL van de extensie repository in van WSDL bestand.';
 $GLOBALS['TL_LANG']['tl_settings']['repository_languages'][0] = 'Talen om op terug te vallen';
 $GLOBALS['TL_LANG']['tl_settings']['repository_languages'][1] = 'Komma-gescheiden lijst van ISO taal codes om op terug te vallen als een extensie niet beschikbaar is in uw huidige backend taal.';
 $GLOBALS['TL_LANG']['tl_settings']['repository_listsize'][0] = 'Aantal extensies per pagina';
-$GLOBALS['TL_LANG']['tl_settings']['repository_listsize'][1] = 'Aantal extensies per pagina die in de catalogus worden weergegeven (standaard = 10).';
+$GLOBALS['TL_LANG']['tl_settings']['repository_listsize'][1] = 'Aantal extensies per pagina die in de catalogus worden weergegeven.';
 $GLOBALS['TL_LANG']['tl_settings']['repository_unsafe_catalog'][0] = 'Toon incompatibele extensies';
 $GLOBALS['TL_LANG']['tl_settings']['repository_unsafe_catalog'][1] = 'Toon ook de incompatibele extensies in de catalogus. Bedenk dat het installeren van deze extensies uw Contao installatie kunnen beïnvloeden!';
-$GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'][0] = 'Extensie Repository URL';
-$GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'][1] = 'Geef de URL van de extensie repository in van WSDL bestand (standaard:<em>http://contao.org/services/repository.wsdl</em>).';
 $GLOBALS['TL_LANG']['tl_settings']['repository_legend'] = 'Extensie catalogus';

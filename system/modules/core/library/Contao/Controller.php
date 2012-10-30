@@ -269,7 +269,7 @@ abstract class Controller extends \System
 				foreach ($GLOBALS['TL_HOOKS']['getFrontendModule'] as $callback)
 				{
 					$this->import($callback[0]);
-					$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer);
+					$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer, $objModule);
 				}
 			}
 
@@ -433,7 +433,7 @@ abstract class Controller extends \System
 			foreach ($GLOBALS['TL_HOOKS']['getContentElement'] as $callback)
 			{
 				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer);
+				$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer, $objElement);
 			}
 		}
 
@@ -486,7 +486,7 @@ abstract class Controller extends \System
 			foreach ($GLOBALS['TL_HOOKS']['getForm'] as $callback)
 			{
 				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer);
+				$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer, $objElement);
 			}
 		}
 
@@ -550,7 +550,7 @@ abstract class Controller extends \System
 		$alias = $objPage->alias;
 		$name = $objPage->title;
 		$title = $objPage->pageTitle ?: $objPage->title;
-		$folderUrl = standardize(\String::restoreBasicEntities($name));
+		$folderUrl = basename($objPage->alias);
 		$palias = '';
 		$pname = '';
 		$ptitle = '';
@@ -587,7 +587,7 @@ abstract class Controller extends \System
 						$alias = $objParentPage->alias;
 						$name = $objParentPage->title;
 						$title = $objParentPage->pageTitle ?: $objParentPage->title;
-						$folderUrl = standardize(\String::restoreBasicEntities($name)) . '/' . $folderUrl;
+						$folderUrl = basename($alias) . '/' . $folderUrl;
 						$trail[] = $objParentPage->pid;
 					}
 

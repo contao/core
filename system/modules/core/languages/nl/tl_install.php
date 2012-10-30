@@ -14,14 +14,14 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_install']['installTool'][0] = 'Contao installatie hulpprogramma';
-$GLOBALS['TL_LANG']['tl_install']['installTool'][1] = 'Installatie hulpprogramma login';
-$GLOBALS['TL_LANG']['tl_install']['locked'][0] = 'Het installatie hulpprogramma is geblokkeerd';
-$GLOBALS['TL_LANG']['tl_install']['locked'][1] = 'Om veiligheidsredenen is het installatie hulpprogramma geblokkeerd omdat een wachtwoord meer dan drie keer achter elkaar verkeerd is ingevoerd. Om te ontgrendelen, open localconfig en zet <em>installCount</em> op<em>0</em>.';
+$GLOBALS['TL_LANG']['tl_install']['installTool'][0] = 'Installatie';
+$GLOBALS['TL_LANG']['tl_install']['installTool'][1] = 'Installatie programma login';
+$GLOBALS['TL_LANG']['tl_install']['locked'][0] = 'Het installatie programma is geblokkeerd';
+$GLOBALS['TL_LANG']['tl_install']['locked'][1] = 'Om veiligheidsredenen is het installatie programma geblokkeerd omdat een wachtwoord meer dan drie keer achter elkaar verkeerd is ingevoerd. Om te ontgrendelen, open localconfig en zet <em>installCount</em> op<em>0</em>.';
 $GLOBALS['TL_LANG']['tl_install']['password'][0] = 'Wachtwoord';
-$GLOBALS['TL_LANG']['tl_install']['password'][1] = 'Geef het installatie hulpprogramma wachtwoord op. Dit is niet hetzelfde als het Contao backend wachtwoord.';
-$GLOBALS['TL_LANG']['tl_install']['changePass'][0] = 'Installatie hulpprogramma wachtwoord';
-$GLOBALS['TL_LANG']['tl_install']['changePass'][1] = 'Om het Contao installatie hulpprogramma extra te beveiligen kunt u het bestand <strong>contao/install.php</strong> hernoemen of geheel verwijderen.';
+$GLOBALS['TL_LANG']['tl_install']['password'][1] = 'Geef het installatie programma wachtwoord op. Dit is niet hetzelfde als het Contao backend wachtwoord.';
+$GLOBALS['TL_LANG']['tl_install']['changePass'][0] = 'Installatie programma wachtwoord';
+$GLOBALS['TL_LANG']['tl_install']['changePass'][1] = 'Om het Contao installatie programma extra te beveiligen kunt u het bestand <strong>contao/install.php</strong> hernoemen of geheel verwijderen.';
 $GLOBALS['TL_LANG']['tl_install']['encryption'][0] = 'Maak een codesleutel aan';
 $GLOBALS['TL_LANG']['tl_install']['encryption'][1] = 'Deze sleutel wordt gebruikt om versleutelde data op te slaan. Bedenk dat versleutelde data alleen kunnen worden ontcijferd met deze sleutel! Belangrijk: noteer deze code ergens en wijzig deze niet als er al versleutelde data aanwezig is. Laat dit vak leeg om een willekeurige code te genereren.';
 $GLOBALS['TL_LANG']['tl_install']['database'][0] = 'Controleer database verbinding';
@@ -67,6 +67,7 @@ $GLOBALS['TL_LANG']['tl_install']['saveCollation'] = 'Wijzig sortering';
 $GLOBALS['TL_LANG']['tl_install']['updateX'] = 'Het lijkt erop dat u aan het upgraden bent van een Contao versie voorafgaand aan versie %s. In dat geval, <strong>is het noodzakelijk om versie %s update te gebruiken</strong> om de integriteit van uw gegevens te garanderen!';
 $GLOBALS['TL_LANG']['tl_install']['updateXrun'] = 'Uitvoeren versie %s update';
 $GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'UItvoeren versie %s update - step %s';
+$GLOBALS['TL_LANG']['tl_install']['importException'] = 'Importeren is mislukt! Is de database structuur up-to-date en is het template bestand compatibel met uw Contao versie?';
 $GLOBALS['TL_LANG']['tl_install']['importError'] = 'Kies een template bestand!';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm'] = 'Template geïmporteerd op %s';
 $GLOBALS['TL_LANG']['tl_install']['importWarn'] = 'Alle bestaande gegevens worden verwijderd!';
@@ -77,7 +78,7 @@ $GLOBALS['TL_LANG']['tl_install']['importContinue'] = 'Alle bestaande gegevens w
 $GLOBALS['TL_LANG']['tl_install']['adminError'] = 'Vul alle velden in om een admin gebruiker aan te maken!';
 $GLOBALS['TL_LANG']['tl_install']['adminConfirm'] = 'Een admin gebruiker is aangemaakt.';
 $GLOBALS['TL_LANG']['tl_install']['adminSave'] = 'Maak een admin account';
-$GLOBALS['TL_LANG']['tl_install']['installConfirm'] = 'U hebt Contao succesvol geïnstalleerd.';
+$GLOBALS['TL_LANG']['tl_install']['installConfirm'] = 'Contao is met succes geïnstalleerd.';
 $GLOBALS['TL_LANG']['tl_install']['ftpHost'] = 'FTP hostnaam';
 $GLOBALS['TL_LANG']['tl_install']['ftpPath'] = 'Relatief pad naar Contao directory (b.v. <em>httpdocs/</em>)';
 $GLOBALS['TL_LANG']['tl_install']['ftpUser'] = 'FTP gebruikersnaam';

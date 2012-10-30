@@ -28,10 +28,10 @@ class Swift_KeyCache_DummyKeyCache implements Swift_KeyCache
 {
     /**
      * Set a string into the cache under $itemKey for the namespace $nsKey.
-     * @param string $nsKey
-     * @param string $itemKey
-     * @param string $string
-     * @param int    $mode
+     * @param string  $nsKey
+     * @param string  $itemKey
+     * @param string  $string
+     * @param integer $mode
      * @see MODE_WRITE, MODE_APPEND
      */
     public function setString($nsKey, $itemKey, $string, $mode)
@@ -43,7 +43,7 @@ class Swift_KeyCache_DummyKeyCache implements Swift_KeyCache
      * @param string                 $nsKey
      * @param string                 $itemKey
      * @param Swift_OutputByteStream $os
-     * @param int                    $mode
+     * @param integer                $mode
      * @see MODE_WRITE, MODE_APPEND
      */
     public function importFromByteStream($nsKey, $itemKey, Swift_OutputByteStream $os, $mode)
@@ -53,8 +53,9 @@ class Swift_KeyCache_DummyKeyCache implements Swift_KeyCache
     /**
      * Provides a ByteStream which when written to, writes data to $itemKey.
      * NOTE: The stream will always write in append mode.
-     * @param  string                $nsKey
-     * @param  string                $itemKey
+     * @param string                $nsKey
+     * @param string                $itemKey
+     * @param Swift_InputByteStream $writeThrough
      * @return Swift_InputByteStream
      */
     public function getInputByteStream($nsKey, $itemKey, Swift_InputByteStream $writeThrough = null)
@@ -78,6 +79,8 @@ class Swift_KeyCache_DummyKeyCache implements Swift_KeyCache
      * @param string                $nsKey
      * @param string                $itemKey
      * @param Swift_InputByteStream $is      to write the data to
+     *
+     * @return boolean
      */
     public function exportToByteStream($nsKey, $itemKey, Swift_InputByteStream $is)
     {

@@ -15,7 +15,7 @@
  */
 
 $GLOBALS['TL_LANG']['tl_theme']['name'][0] = 'Titel dal theme';
-$GLOBALS['TL_LANG']['tl_theme']['name'][1] = 'Endatscha in titel unic per il theme';
+$GLOBALS['TL_LANG']['tl_theme']['name'][1] = 'Endatescha in titel unic per il theme';
 $GLOBALS['TL_LANG']['tl_theme']['author'][0] = 'Autur';
 $GLOBALS['TL_LANG']['tl_theme']['author'][1] = 'Endatescha il num dal designer dal theme.';
 $GLOBALS['TL_LANG']['tl_theme']['folders'][0] = 'Ordinaturs';

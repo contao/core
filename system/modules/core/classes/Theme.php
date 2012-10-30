@@ -495,6 +495,10 @@ class Theme extends \Backend
 
 							$intNextPid = $objModel->id;
 						}
+						else
+						{
+							$intNextPid = $objParent->id; // see #4952
+						}
 					}
 
 					$this->syncNewFolder($strFolder, $intNextPid);
@@ -671,7 +675,7 @@ class Theme extends \Backend
 						}
 
 						// Replace the file paths in multiSRC fields with their tl_files ID
-						elseif (($table == 'tl_theme' && $name == 'folders') || ($table == 'tl_module' && $name == 'multiSRC'))
+						elseif (($table == 'tl_theme' && $name == 'folders') || ($table == 'tl_module' && $name == 'multiSRC') || ($table == 'tl_layout' && $name == 'external'))
 						{
 							$tmp = deserialize($value);
 
@@ -761,30 +765,6 @@ class Theme extends \Backend
 		$strName = preg_replace('/[^A-Za-z0-9\._-]/', '', $strName);
 		$strName = basename($strName);
 
-		// Replace the numeric folder IDs
-		$arrFolders = deserialize($objTheme->folders);
-
-		if (is_array($arrFolders) && !empty($arrFolders))
-		{
-			$objFolders = \FilesModel::findMultipleByIds($arrFolders);
-
-			if ($objFolders !== null)
-			{
-				$objTheme->folders = serialize($objFolders->fetchEach('path'));
-			}
-		}
-
-		// Replace the numeric screenshot ID
-		if ($objTheme->screenshot != '')
-		{
-			$objFile = \FilesModel::findByPk($objTheme->screenshot);
-
-			if ($objFile !== null)
-			{
-				$objTheme->screenshot = $objFile->path;
-			}
-		}
-
 		// Create a new XML document
 		$xml = new \DOMDocument('1.0', 'UTF-8');
 		$xml->formatOutput = true;
@@ -811,9 +791,14 @@ class Theme extends \Backend
 
 		if (is_array($arrFolders) && !empty($arrFolders))
 		{
-			foreach ($this->eliminateNestedPaths($arrFolders) as $strFolder)
+			$objFolders = \FilesModel::findMultipleByIds($arrFolders);
+
+			if ($objFolders !== null)
 			{
-				$this->addFolderToArchive($objArchive, $strFolder);
+				foreach ($this->eliminateNestedPaths($objFolders->fetchEach('path')) as $strFolder)
+				{
+					$this->addFolderToArchive($objArchive, $strFolder);
+				}
 			}
 		}
 
@@ -976,6 +961,56 @@ class Theme extends \Backend
 			if ($v === null)
 			{
 				$v = 'NULL';
+			}
+
+			// Replace the IDs of singleSRC fields with their path (see #4952)
+			elseif (($table->getAttribute('name') == 'tl_theme' && $k == 'screenshot') || ($table->getAttribute('name') == 'tl_module' && $k == 'singleSRC') || ($table->getAttribute('name') == 'tl_module' && $k == 'reg_homeDir'))
+			{
+				$objFile = \FilesModel::findByPk($v);
+
+				if ($objFile !== null)
+				{
+					// Standardize the upload path if it is not "files"
+					if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files')
+					{
+						$v = 'files/' . preg_replace('@^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@').'/@', '', $objFile->path);
+					}
+					else
+					{
+						$v = $objFile->path;
+					}
+				}
+			}
+
+			// Replace the IDs of multiSRC fields with their paths (see #4952)
+			elseif (($table->getAttribute('name') == 'tl_theme' && $k == 'folders') || ($table->getAttribute('name') == 'tl_module' && $k == 'multiSRC') || ($table->getAttribute('name') == 'tl_layout' && $k == 'external'))
+			{
+				$arrFiles = deserialize($v);
+
+				if (is_array($arrFiles) && !empty($arrFiles))
+				{
+					$objFiles = \FilesModel::findMultipleByIds($arrFiles);
+
+					if ($objFiles !== null)
+					{
+						// Standardize the upload path if it is not "files"
+						if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files')
+						{
+							$arrTmp = array();
+
+							while ($objFiles->next())
+							{
+								$arrTmp[] = 'files/' . preg_replace('@^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@').'/@', '', $objFiles->path);
+							}
+
+							$v = serialize($arrTmp);
+						}
+						else
+						{
+							$v = serialize($objFiles->fetchEach('path'));
+						}
+					}
+				}
 			}
 
 			$value = $xml->createTextNode($v);

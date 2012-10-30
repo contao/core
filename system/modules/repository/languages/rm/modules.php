@@ -19,4 +19,4 @@ $GLOBALS['TL_LANG']['MOD']['repository'][1] = 'Il modul dal back-end dal reposit
 $GLOBALS['TL_LANG']['MOD']['repository_catalog'][0] = 'Catalog d\'extensiuns';
 $GLOBALS['TL_LANG']['MOD']['repository_catalog'][1] = 'Navigar en il repository ed installar extensiuns.';
 $GLOBALS['TL_LANG']['MOD']['repository_manager'][0] = 'Administraziun d\'extensiuns';
-$GLOBALS['TL_LANG']['MOD']['repository_manager'][1] = 'Mantegnair u allontanar extensiuns intalladas.';
+$GLOBALS['TL_LANG']['MOD']['repository_manager'][1] = 'Mantegnair u allontanar extensiuns installadas.';

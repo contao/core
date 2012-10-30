@@ -17,9 +17,9 @@
 $GLOBALS['TL_LANG']['tl_calendar_feed']['title'][0] = 'Titel';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['title'][1] = 'Geef een feed titel.';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['alias'][0] = 'Feed alias';
-$GLOBALS['TL_LANG']['tl_calendar_feed']['alias'][1] = 'Hier kunt u een unieke bestandsnaam (zonder extensie) invoeren. Het XML-feed bestand wordt automatisch aangemaakt in de <em> share </ em> directory van uw Contao installatie, b.v. als <em> share / name.xml </ em>.';
+$GLOBALS['TL_LANG']['tl_calendar_feed']['alias'][1] = 'Hier kunt u een unieke bestandsnaam (zonder extensie) invoeren. Het XML-feed bestand wordt automatisch aangemaakt in de <em> share </em> directory van uw Contao installatie, b.v. als <em> share / name.xml </em>.';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['language'][0] = 'Feed taal';
-$GLOBALS['TL_LANG']['tl_calendar_feed']['language'][1] = 'Geef de feed taal op volgens de ISO-639 norm (b.v. <em> en </ em> of <em> en-us </ em>).';
+$GLOBALS['TL_LANG']['tl_calendar_feed']['language'][1] = 'Geef de feed taal op volgens de ISO-639 norm (b.v. <em> en </em> of <em> en-us </em>).';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['calendars'][0] = 'Kalenders';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['calendars'][1] = 'Kies hier de kalenders welke worden opgenomen in de feed.';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['format'][0] = 'Feed format';

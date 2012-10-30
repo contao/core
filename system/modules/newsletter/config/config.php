@@ -48,6 +48,7 @@ array_insert($GLOBALS['FE_MOD'], 4, array
 $GLOBALS['TL_HOOKS']['createNewUser'][] = array('Newsletter', 'createNewUser');
 $GLOBALS['TL_HOOKS']['activateAccount'][] = array('Newsletter', 'activateAccount');
 $GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Newsletter', 'getSearchablePages');
+$GLOBALS['TL_HOOKS']['closeAccount'][] = array('Newsletter', 'removeSubscriptions');
 
 
 /**

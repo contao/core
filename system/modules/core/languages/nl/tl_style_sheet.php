@@ -15,7 +15,7 @@
  */
 
 $GLOBALS['TL_LANG']['tl_style_sheet']['name'][0] = 'Naam';
-$GLOBALS['TL_LANG']['tl_style_sheet']['name'][1] = 'Geef een naam voor de style sheet op.';
+$GLOBALS['TL_LANG']['tl_style_sheet']['name'][1] = 'Geef een naam voor het style sheet op.';
 $GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'][0] = 'Sluit afbeeldingen in tot';
 $GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'][1] = 'Hier kunt u de bestandsgrootte in bytes instellen waarop afbeeldingen zullen worden ingesloten in het style sheet als data: string. Stel in op 0 om deze functie uit te schakelen.';
 $GLOBALS['TL_LANG']['tl_style_sheet']['cc'][0] = 'Conditional comment';

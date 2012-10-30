@@ -75,6 +75,53 @@ $GLOBALS['TL_LANG']['tl_style']['bgrepeat'][1] = 'می‌توانید حالت �
 $GLOBALS['TL_LANG']['tl_style']['shadowsize'][0] = 'اندازه سایه';
 $GLOBALS['TL_LANG']['tl_style']['shadowsize'][1] = 'می‌توانید افست X و Y، اندازه محو بودن اختیاری و شعاع پخش‌شدگی اختیاری را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_style']['shadowcolor'][0] = 'رنگ و شفافیت سایه';
+$GLOBALS['TL_LANG']['tl_style']['shadowcolor'][1] = 'اینجا می‌توانید رنگ سایه در مبنای ۱۶ (مانند ff0000 برای قرمز) و درصد شفافیت (مانند ۷۵) اختیاری را وارد نمایید.';
+$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][0] = 'زاویه شیب';
+$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][1] = 'اینجا می‌توانید زاویه شیب (مانند <em>0deg</em>) یا جهت (مانند <em>to bottom</em> و <em>to top right</em>)  را وارد نمایید.';
+$GLOBALS['TL_LANG']['tl_style']['gradientColors'][0] = 'رنگ‌های شیب';
+$GLOBALS['TL_LANG']['tl_style']['gradientColors'][1] = 'اینجا می‌توانید تا چهار رنگ با درصد اختیاری را وارد نمایید (مانند <em>ffc 10% | f90 | f00</em>).';
+$GLOBALS['TL_LANG']['tl_style']['border'][0] = 'خط حاشیه';
+$GLOBALS['TL_LANG']['tl_style']['border'][1] = 'Border-width، border-style، border-color، border-radius، border-collapse و border-spacing.';
+$GLOBALS['TL_LANG']['tl_style']['borderwidth'][0] = 'عرش حاشیه';
+$GLOBALS['TL_LANG']['tl_style']['borderwidth'][1] = 'اینجا می‌توانید عرض حاشیه بالا، راست، پایین و چپ را وارد نمایید.';
+$GLOBALS['TL_LANG']['tl_style']['borderstyle'][0] = 'سبک حاشیه';
+$GLOBALS['TL_LANG']['tl_style']['borderstyle'][1] = 'اینجا می‌توانید سبک حاشیه را انتخاب نمایید.';
+$GLOBALS['TL_LANG']['tl_style']['bordercolor'][0] = 'رنگ و شفافیت حشایه';
+$GLOBALS['TL_LANG']['tl_style']['bordercolor'][1] = 'اینجا می‌توانید رنگ حاشیه در مبنای ۱۶ (مانند ff0000 برای قرمز) و درصد شفافیت (مانند ۷۵) اختیاری را وارد نمایید.';
+$GLOBALS['TL_LANG']['tl_style']['borderradius'][0] = 'شعاع حاشیه';
+$GLOBALS['TL_LANG']['tl_style']['borderradius'][1] = 'اینجا می‌توانید شعاع حاشیه بالا، راست، پایین و چپ را وارد نمایید.';
+$GLOBALS['TL_LANG']['tl_style']['borderspacing'][0] = 'فاصله حاشیه';
+$GLOBALS['TL_LANG']['tl_style']['borderspacing'][1] = 'اینجا می‌توانید فاصله حاشیه را وارد نمایید.';
+$GLOBALS['TL_LANG']['tl_style']['font'][0] = 'فونت';
+$GLOBALS['TL_LANG']['tl_style']['font'][1] = 'Font-family، font-size، font-color، line-height، font-style و white-space.';
+$GLOBALS['TL_LANG']['tl_style']['fontfamily'][0] = 'خانواده فونت';
+$GLOBALS['TL_LANG']['tl_style']['fontfamily'][1] = 'اینجا می توانید لیست جدا شده با ویرگول از انواع فونت را وارد نمایید';
+$GLOBALS['TL_LANG']['tl_style']['fontsize'][0] = 'اندازه فونت';
+$GLOBALS['TL_LANG']['tl_style']['fontsize'][1] = 'اینجا می‌تواندی اندازه فونت را وارد نمایید';
+$GLOBALS['TL_LANG']['tl_style']['fontcolor'][0] = 'رنگ و شفافیت فونت';
+$GLOBALS['TL_LANG']['tl_style']['fontcolor'][1] = 'اینجا می‌توانید رنگ فونت در مبنای ۱۶ (مانند ff0000 برای قرمز) و درصد شفافیت (مانند ۷۵) اختیاری را وارد نمایید.';
+$GLOBALS['TL_LANG']['tl_style']['lineheight'][0] = 'اندازه خط';
+$GLOBALS['TL_LANG']['tl_style']['lineheight'][1] = 'اینجا می‌توانید ارتفاع خط را وارد نمایید.';
+$GLOBALS['TL_LANG']['tl_style']['fontstyle'][0] = 'سبک فونت';
+$GLOBALS['TL_LANG']['tl_style']['fontstyle'][1] = 'اینجا می توانید یک یا چند سبک فونت را انتخاب نمایید.';
+$GLOBALS['TL_LANG']['tl_style']['whitespace'][0] = 'غیرفعال کردن خوراک خطی خودکار';
+$GLOBALS['TL_LANG']['tl_style']['whitespace'][1] = 'کلمات را صورت خودکار پنهان نمی‌کند.';
+$GLOBALS['TL_LANG']['tl_style']['texttransform'][0] = 'تغییر شکل متن';
+$GLOBALS['TL_LANG']['tl_style']['texttransform'][1] = 'اینجا می‌توانید حالت دگرگونی متن را انتخاب نمایید.';
+$GLOBALS['TL_LANG']['tl_style']['textindent'][0] = 'تو رفتگی متن';
+$GLOBALS['TL_LANG']['tl_style']['textindent'][1] = 'اینجا می‌توانید تورفتگی متن را انتخاب نمایید.';
+$GLOBALS['TL_LANG']['tl_style']['letterspacing'][0] = 'فاصله حروف';
+$GLOBALS['TL_LANG']['tl_style']['letterspacing'][1] = 'اینجا می‌توانید فاصله حروف را تغییر دهید (پیشفرض: 0px).';
+$GLOBALS['TL_LANG']['tl_style']['wordspacing'][0] = 'فاصله کلمات';
+$GLOBALS['TL_LANG']['tl_style']['wordspacing'][1] = 'اینجا می‌توانید فاصله کلمات را تغییر دهید (پیشفرض: 0px).';
+$GLOBALS['TL_LANG']['tl_style']['list'][0] = 'لیست';
+$GLOBALS['TL_LANG']['tl_style']['list'][1] = 'List-style-type و list-style-image.';
+$GLOBALS['TL_LANG']['tl_style']['liststyletype'][0] = 'نشانه لیست';
+$GLOBALS['TL_LANG']['tl_style']['liststyletype'][1] = 'اینجا می‌توانید نشانه لیست را انتخاب نمایید.';
+$GLOBALS['TL_LANG']['tl_style']['liststyleimage'][0] = 'نشانه اختصاصی';
+$GLOBALS['TL_LANG']['tl_style']['liststyleimage'][1] = 'اینجا می توانید مسیر نشانه اختصاصی را وارد نمایید.';
+$GLOBALS['TL_LANG']['tl_style']['own'][0] = 'کد اختصاصی';
+$GLOBALS['TL_LANG']['tl_style']['own'][1] = 'اینجا می‌توانید کد CSS اختصاصی را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_style']['selector_legend'] = 'گزینشگر و دسته';
 $GLOBALS['TL_LANG']['tl_style']['size_legend'] = 'اندازه';
 $GLOBALS['TL_LANG']['tl_style']['position_legend'] = 'موقعیت';

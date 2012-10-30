@@ -273,7 +273,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
-			'eval'                    => array('style'=>'height:60px', 'tl_class'=>'clr'),
+			'eval'                    => array('style'=>'height:60px', 'decodeEntities'=>true, 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
 		),
 		'redirect' => array
@@ -1035,6 +1035,18 @@ class tl_page extends Backend
 		{
 			$autoAlias = true;
 			$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->title));
+
+			// Generate folder URL aliases (see #4933)
+			if ($GLOBALS['TL_CONFIG']['folderUrl'])
+			{
+				$dc->activeRecord->alias = $varValue;
+				$objPage = $this->getPageDetails($dc->activeRecord);
+
+				if ($objPage->folderUrl != '')
+				{
+					$varValue = $objPage->folderUrl;
+				}
+			}
 		}
 
 		$objAlias = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? OR alias=?")
@@ -1563,11 +1575,27 @@ class tl_page extends Backend
 			{
 				$objPage = $this->getPageDetails($id);
 
-				if ($objPage !== null)
+				if ($objPage === null)
 				{
-					$this->Database->prepare("UPDATE tl_page SET alias=? WHERE id=?")
-								   ->execute(($GLOBALS['TL_CONFIG']['folderUrl'] ? $objPage->folderUrl : basename($objPage->alias)), $id);
+					continue;
 				}
+
+				// Set the new alias
+				$objPage->alias = standardize(String::restoreBasicEntities($objPage->title));
+
+				// Update the folderURL entry
+				if (strpos($objPage->folderUrl, '/') !== false)
+				{
+					$objPage->folderUrl = dirname($objPage->folderUrl) . '/' . $objPage->alias;
+				}
+				else
+				{
+					$objPage->folderUrl = $objPage->alias;
+				}
+
+				// Store the new alias
+				$this->Database->prepare("UPDATE tl_page SET alias=? WHERE id=?")
+							   ->execute(($GLOBALS['TL_CONFIG']['folderUrl'] ? $objPage->folderUrl : basename($objPage->alias)), $id);
 			}
 
 			$this->redirect($this->getReferer());

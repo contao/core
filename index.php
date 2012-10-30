@@ -120,11 +120,12 @@ class Index extends Frontend
 				$arrLangs = $arrPages['*']; // Empty domain
 			}
 
-			// Try to find a page matching the language parameter
+			// Use the first result (see #4872)
 			if (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 			{
-				$objNewPage = $arrLangs['*']; // Fallback language
+				$objNewPage = current($arrLangs);
 			}
+			// Try to find a page matching the language parameter
 			elseif (($lang = Input::get('language')) != '' && isset($arrLangs[$lang]))
 			{
 				$objNewPage = $arrLangs[$lang];

@@ -220,7 +220,7 @@ class FormFileUpload extends \Widget implements \uploadable
 					}
 
 					$this->Files->move_uploaded_file($file['tmp_name'], $strUploadFolder . '/' . $file['name']);
-					$this->Files->chmod($strUploadFolder . '/' . $file['name'], 0644);
+					$this->Files->chmod($strUploadFolder . '/' . $file['name'], $GLOBALS['TL_CONFIG']['defaultFileChmod']);
 
 					$_SESSION['FILES'][$this->strName] = array
 					(

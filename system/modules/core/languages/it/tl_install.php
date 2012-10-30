@@ -67,6 +67,7 @@ $GLOBALS['TL_LANG']['tl_install']['saveCollation'] = 'Modifica la codifica carat
 $GLOBALS['TL_LANG']['tl_install']['updateX'] = 'Sembra che si stia aggiornando una versione di Contao precedente versione %s. Se si tratta di questo caso, <strong> è necessario eseguire l\'aggiornamento alla versione %s </ strong> per assicurare l\'integrità dei dati!';
 $GLOBALS['TL_LANG']['tl_install']['updateXrun'] = 'Esegui aggiornamento versione %s';
 $GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'Esecuzione  aggiornamento versione %s - step %s';
+$GLOBALS['TL_LANG']['tl_install']['importException'] = 'L\'importazione non è riuscita! E\' la struttura della banca dati aggiornata ed è il file della template compatibile con la tua versione Contao?';
 $GLOBALS['TL_LANG']['tl_install']['importError'] = 'Selezionare un file template';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm'] = 'Template importato il %s';
 $GLOBALS['TL_LANG']['tl_install']['importWarn'] = 'ATTENZIONE, ogni informazione esistente sarà cancellata!';

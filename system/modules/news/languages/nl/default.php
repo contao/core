@@ -22,5 +22,5 @@ $GLOBALS['TL_LANG']['MSC']['emptyList'] = 'Momenteel zijn er geen nieuwsitems.';
 $GLOBALS['TL_LANG']['MSC']['comments'] = 'Reacties';
 $GLOBALS['TL_LANG']['MSC']['commentCount'] = '(reacties: %s)';
 $GLOBALS['TL_LANG']['MSC']['news_items'] = '%d item(s)';
-$GLOBALS['TL_LANG']['MSC']['news_previous'] = '<';
-$GLOBALS['TL_LANG']['MSC']['news_next'] = '>';
+$GLOBALS['TL_LANG']['MSC']['news_previous'] = '&lt;';
+$GLOBALS['TL_LANG']['MSC']['news_next'] = '&gt;';

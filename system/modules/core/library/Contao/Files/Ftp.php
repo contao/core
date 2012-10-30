@@ -114,7 +114,7 @@ class Ftp extends \Files
 		$this->connect();
 		$this->validate($strDirectory);
 		$return = @ftp_mkdir($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strDirectory) ? true : false;
-		$this->chmod($strDirectory, 0755);
+		$this->chmod($strDirectory, $GLOBALS['TL_CONFIG']['defaultFolderChmod']);
 
 		return $return;
 	}
@@ -270,7 +270,15 @@ class Ftp extends \Files
 		$this->connect();
 		$this->validate($strSource, $strDestination);
 		$return = @ftp_put($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strDestination, TL_ROOT . '/' . $strSource, FTP_BINARY);
-		$this->chmod($strDestination, 0644);
+
+		if (is_dir(TL_ROOT . '/' . $strDestination))
+		{
+			$this->chmod($strDestination, $GLOBALS['TL_CONFIG']['defaultFolderChmod']);
+		}
+		else
+		{
+			$this->chmod($strDestination, $GLOBALS['TL_CONFIG']['defaultFileChmod']);
+		}
 
 		return $return;
 	}

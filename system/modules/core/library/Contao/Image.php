@@ -425,7 +425,7 @@ class Image
 		// Set the file permissions when the Safe Mode Hack is used
 		if ($GLOBALS['TL_CONFIG']['useFTP'])
 		{
-			\Files::getInstance()->chmod($strCacheName, 0644);
+			\Files::getInstance()->chmod($strCacheName, $GLOBALS['TL_CONFIG']['defaultFileChmod']);
 		}
 
 		// Return the path to new image

@@ -68,6 +68,7 @@ $GLOBALS['TL_LANG']['ERR']['form'] = 'Das Formular konnte nicht gesendet werden'
 $GLOBALS['TL_LANG']['ERR']['captcha'] = 'Bitte beantworten Sie die Sicherheitsfrage!';
 $GLOBALS['TL_LANG']['ERR']['download'] = 'Die Datei "%s" ist nicht für den Download verfügbar!';
 $GLOBALS['TL_LANG']['ERR']['invalid'] = 'Ungültige Eingabe: %s';
+$GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'] = 'Kein Datenbank-Eintrag zu %s gefunden. Bitte synchronisieren Sie das Dateisystem.';
 $GLOBALS['TL_LANG']['SEC']['question1'] = 'Bitte addieren Sie %d und %d.';
 $GLOBALS['TL_LANG']['SEC']['question2'] = 'Was ist die Summe aus %d und %d?';
 $GLOBALS['TL_LANG']['SEC']['question3'] = 'Bitte rechnen Sie %d plus %d.';

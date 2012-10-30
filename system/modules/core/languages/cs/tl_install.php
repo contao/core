@@ -67,6 +67,7 @@ $GLOBALS['TL_LANG']['tl_install']['saveCollation'] = 'Změnit shromažďování'
 $GLOBALS['TL_LANG']['tl_install']['updateX'] = 'Zdá se, že akualizujete z verze nižší než %s. Je-li tomu tak, <strong>je nezbytné, abyste provedli aktualizaci na %s-verzi</strong>. Tím zajistíte integraci Vašich dat.';
 $GLOBALS['TL_LANG']['tl_install']['updateXrun'] = 'Spustit aktualizaci na %s. verzi';
 $GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'Spustit aktualizaci verze %s - krok %s';
+$GLOBALS['TL_LANG']['tl_install']['importException'] = 'Import selhal! Je databáze aktuální a soubor předlohy kompatabilní s touto verzí Contaa?';
 $GLOBALS['TL_LANG']['tl_install']['importError'] = 'Vyberte prosím předlohu!';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm'] = 'Předloha importována %s';
 $GLOBALS['TL_LANG']['tl_install']['importWarn'] = 'Všechna stávající data budou smazána.';

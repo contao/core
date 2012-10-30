@@ -309,7 +309,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <div id="tl_buttons">'.((\Input::get('act') == 'select') ? '
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a> ' : '') . ((\Input::get('act') != 'select' && !$blnClipboard) ? '
 <a href="'.$this->addToUrl($hrfNew).'" class="'.$clsNew.'" title="'.specialchars($ttlNew).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$lblNew.'</a> ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? '<a href="'.$this->addToUrl('&amp;act=paste&amp;mode=move').'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['move'][1]).'" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['move'][0].'</a> ' : '') . $this->generateGlobalButtons(true) : '') . ($blnClipboard ? '<a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="x">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a> ' : '') . '
-</div>' . ((\Input::get('act') == 'select') ? '
+</div>' . \Message::generate(true) . ((\Input::get('act') == 'select') ? '
 
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post">
 <div class="tl_formbody">
@@ -798,7 +798,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					if ($this->blnIsDbAssisted && $file != '.DS_Store')
 					{
 						$objFile = \FilesModel::findByPath($source . '/' . $file);
-						$objFile->delete();
+
+						if ($objFile !== null)
+						{
+							$objFile->delete();
+						}
+						else
+						{
+							\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source . '/' . $file));
+						}
 					}
 				}
 			}
@@ -809,7 +817,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			if ($this->blnIsDbAssisted && $source != '.svn')
 			{
 				$objFile = \FilesModel::findByPath($source);
-				$objFile->delete();
+
+				if ($objFile !== null)
+				{
+					$objFile->delete();
+				}
+				else
+				{
+					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
+				}
 			}
 		}
 
@@ -822,7 +838,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			if ($this->blnIsDbAssisted)
 			{
 				$objFile = \FilesModel::findByPath($source);
-				$objFile->delete();
+
+				if ($objFile !== null)
+				{
+					$objFile->delete();
+				}
+				else
+				{
+					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
+				}
 			}
 		}
 
@@ -1246,7 +1270,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <select name="version" class="tl_select">'.$versions.'
 </select> 
 <input type="submit" name="showVersion" id="showVersion" class="tl_submit" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['restore']).'"> 
-<a href="contao/diff.php?table='.$this->strTable.'&amp;pid='.$objFile->id.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']).'" onclick="Backend.openModalIframe({\'width\':860,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']).'\',\'url\':this.href});return false">'.$this->generateImage('diff.gif').'</a>
+<a href="contao/diff.php?table='.$this->strTable.'&amp;pid='.$objFile->id.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']).'" onclick="Backend.openModalIframe({\'width\':860,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['showDifferences'])).'\',\'url\':this.href});return false">'.$this->generateImage('diff.gif').'</a>
 </div>
 </form>
 
@@ -2108,7 +2132,6 @@ window.addEvent(\'domready\', function() {
 					$objFolder->name   = $objFound->name;
 					$objFolder->type   = $objFound->type;
 					$objFolder->path   = $objFound->path;
-					$objFolder->save();
 
 					// Update the PID of the child records
 					$objChildren = \FilesModel::findByPid($objFound->id);
@@ -2124,6 +2147,9 @@ window.addEvent(\'domready\', function() {
 
 					// Delete the newer (duplicate) entry
 					$objFound->delete();
+
+					// Then save the modified original entry (prevents duplicate key errors)
+					$objFolder->save();
 				}
 				else
 				{
@@ -2148,10 +2174,12 @@ window.addEvent(\'domready\', function() {
 					$objFile->name   = $objFound->name;
 					$objFile->type   = $objFound->type;
 					$objFile->path   = $objFound->path;
-					$objFile->save();
 
 					// Delete the newer (duplicate) entry
 					$objFound->delete();
+
+					// Then save the modified original entry (prevents duplicate key errors)
+					$objFile->save();
 				}
 				else
 				{
@@ -2539,7 +2567,7 @@ window.addEvent(\'domready\', function() {
 			}
 			else
 			{
-				$return .= '<a href="contao/popup.php?src='.base64_encode($currentEncoded).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openModalIframe({\'width\':'.$popupWidth.',\'title\':\''.$strFileNameEncoded.'\',\'url\':this.href,\'height\':'.$popupHeight.'});return false">' . $this->generateImage($objFile->icon, $objFile->mime).'</a> '.$strFileNameEncoded.$thumbnail.'</div> <div class="tl_right">';
+				$return .= '<a href="contao/popup.php?src='.base64_encode($currentEncoded).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openModalIframe({\'width\':'.$popupWidth.',\'title\':\''.str_replace("'", "\\'", $strFileNameEncoded).'\',\'url\':this.href,\'height\':'.$popupHeight.'});return false">' . $this->generateImage($objFile->icon, $objFile->mime).'</a> '.$strFileNameEncoded.$thumbnail.'</div> <div class="tl_right">';
 			}
 
 			// Buttons

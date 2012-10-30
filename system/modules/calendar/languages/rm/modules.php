@@ -15,7 +15,7 @@
  */
 
 $GLOBALS['TL_LANG']['MOD']['calendar'][0] = 'Occurrenzas';
-$GLOBALS['TL_LANG']['MOD']['calendar'][1] = 'Administrar ocurrenzas e mussar ellas en in chalender u en ina glista d\'occurrenzas.';
+$GLOBALS['TL_LANG']['MOD']['calendar'][1] = 'Administrar occurrenzas e mussar ellas en in chalender u en ina glista d\'occurrenzas.';
 $GLOBALS['TL_LANG']['MOD']['tl_calendar_feed'] = 'Feeds da chalender';
 $GLOBALS['TL_LANG']['FMD']['events'] = 'Occurrenzas';
 $GLOBALS['TL_LANG']['FMD']['calendar'][0] = 'Chalender';

@@ -1173,7 +1173,9 @@ window.addEvent('domready', function() {
 <legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['template'][0]; ?></legend>
 <div>
   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['template'][0]; ?></h3>
-<?php if ($this->emptySelection): ?>
+<?php if ($this->importException): ?>
+  <p class="tl_error"><?php echo $GLOBALS['TL_LANG']['tl_install']['importException']; ?></p>
+<?php elseif ($this->emptySelection): ?>
   <p class="tl_error"><?php echo $GLOBALS['TL_LANG']['tl_install']['importError']; ?></p>
 <?php elseif ($this->dateImported): ?>
   <p class="tl_confirm"><?php printf($GLOBALS['TL_LANG']['tl_install']['importConfirm'], $this->dateImported); ?></p>
