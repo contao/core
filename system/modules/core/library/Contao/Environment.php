@@ -185,26 +185,42 @@ class Environment
 
 
 	/**
-	 * Return the first eight user languages as array
+	 * Return the first eight accepted languages as array
 	 * 
 	 * @return array The languages array
+	 * 
+	 * @author Leo Unglaub <https://github.com/LeoUnglaub>
 	 */
 	protected static function httpAcceptLanguage()
 	{
 		$arrAccepted = array();
-		$arrLanguages = explode(',', strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']));
+		$arrLanguages = array();
 
-		foreach ($arrLanguages as $strLanguage)
+		// The implementation differs from the original implementation and also works with .jp browsers
+		preg_match_all('/([a-z]{1,8}(-[a-z]{1,8})?)\s*(;\s*q\s*=\s*(1|0\.[0-9]+))?/i', $_SERVER['HTTP_ACCEPT_LANGUAGE'], $arrAccepted);
+
+		// Remove all invalid locales
+		foreach ($arrAccepted[1] as $v)
 		{
-			$strTag = substr($strLanguage, 0, 2);
+			$chunks = explode('-', $v);
+			$locale = $chunks[0] . '_' . strtoupper($chunks[1]);
 
-			if ($strTag != '' && preg_match('/^[a-z]{2}$/', $strTag))
+			// Language plus dialect, e.g. en_US, fr_FR
+			if (isset($chunks[1]) && preg_match('/^[a-z]{2}(_[A-Z]{2})?$/', $locale))
 			{
-				$arrAccepted[] = $strTag;
+				$arrLanguages[] = $locale;
+			}
+
+			$locale = $chunks[0];
+
+			// Language only, e.g. en, fr (see #29)
+			if (preg_match('/^[a-z]{2}(_[A-Z]{2})?$/', $locale))
+			{
+				$arrLanguages[] = $locale;
 			}
 		}
 
-		return array_slice(array_unique($arrAccepted), 0, 8);
+		return array_slice(array_unique($arrLanguages), 0, 8);
 	}
 
 

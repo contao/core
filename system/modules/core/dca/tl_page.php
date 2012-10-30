@@ -250,12 +250,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'search'                  => true,
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alpha', 'maxlength'=>2, 'nospace'=>true, 'tl_class'=>'w50 clr'),
-			'save_callback' => array
-			(
-				array('tl_page', 'languageToLower')
-			),
-			'sql'                     => "varchar(2) NOT NULL default ''"
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'locale', 'maxlength'=>5, 'nospace'=>true, 'tl_class'=>'w50 clr'),
+			'sql'                     => "varchar(5) NOT NULL default ''"
 		),
 		'robots' => array
 		(
@@ -1111,17 +1107,6 @@ class tl_page extends Backend
 		}
 
 		return $varValue;
-	}
-
-
-	/**
-	 * Convert language tags to lowercase letters
-	 * @param string
-	 * @return string
-	 */
-	public function languageToLower($varValue)
-	{
-		return strtolower($varValue);
 	}
 
 

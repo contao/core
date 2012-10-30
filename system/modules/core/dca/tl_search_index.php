@@ -52,7 +52,7 @@ $GLOBALS['TL_DCA']['tl_search_index'] = array
 		),
 		'language' => array
 		(
-			'sql'                     => "varchar(2) NOT NULL default ''"
+			'sql'                     => "varchar(5) NOT NULL default ''"
 		)
 	)
 );

@@ -211,4 +211,17 @@ class Validator
 	{
 		return (is_numeric($varValue) && $varValue >= 0 && $varValue <= 100);
 	}
+
+
+	/**
+	 * Valid locale
+	 * 
+	 * @param mixed $varValue The value to be validated
+	 * 
+	 * @return boolean True if the value is a valid locale
+	 */
+	public static function isLocale($varValue)
+	{
+		return preg_match('/^[a-z]{2}(_[A-Z]{2})?$/', $varValue);
+	}
 }

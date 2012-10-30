@@ -29,6 +29,7 @@ $GLOBALS['TL_LANG']['ERR']['extnd'] = 'Aus Sicherheitsgründen können Sie folge
 $GLOBALS['TL_LANG']['ERR']['email'] = 'Bitte geben Sie eine gültige E-Mail-Adresse ein!';
 $GLOBALS['TL_LANG']['ERR']['emails'] = 'Mindestens eine der E-Mail-Adressen ist ungültig!';
 $GLOBALS['TL_LANG']['ERR']['url'] = 'Bitte geben Sie ein gültiges URL-Format ein und kodieren Sie Sonderzeichen!';
+$GLOBALS['TL_LANG']['ERR']['locale'] = 'Bitte geben Sie ein gültiges Gebietsschema wie z.B. "de" oder "de_DE" ein!';
 $GLOBALS['TL_LANG']['ERR']['alias'] = 'Bitte geben Sie nur Buchstaben und Zahlen sowie folgende Sonderzeichen ein: .-_';
 $GLOBALS['TL_LANG']['ERR']['folderalias'] = 'Bitte geben Sie nur Buchstaben und Zahlen sowie folgende Sonderzeichen ein: .-/_';
 $GLOBALS['TL_LANG']['ERR']['date'] = 'Bitte geben Sie das Datum im Format "%s" ein!';

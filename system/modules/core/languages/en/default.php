@@ -29,6 +29,7 @@ $GLOBALS['TL_LANG']['ERR']['extnd'] = 'For security reasons you can not use the 
 $GLOBALS['TL_LANG']['ERR']['email'] = 'Please enter a valid e-mail address!';
 $GLOBALS['TL_LANG']['ERR']['emails'] = 'There is at least one invalid e-mail address!';
 $GLOBALS['TL_LANG']['ERR']['url'] = 'Please enter a valid URL format and encode special characters!';
+$GLOBALS['TL_LANG']['ERR']['locale'] = 'Please enter a valid locale such as "en" or "en_US"!';
 $GLOBALS['TL_LANG']['ERR']['alias'] = 'Please enter only alphanumeric characters and the following special characters: .-_';
 $GLOBALS['TL_LANG']['ERR']['folderalias'] = 'Please enter only alphanumeric characters and the following special characters: .-/_';
 $GLOBALS['TL_LANG']['ERR']['date'] = 'Please enter the date as "%s"!';

@@ -5,6 +5,9 @@ Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Improved
+Language dialects such as `fr_FR` are now supported (see #4836).
+
+### Improved
 The pageTree widget is now sortable just like the fileTree widget and the custom
 and quick navigation modules consider the custom order (see #4936).
 

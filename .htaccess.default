@@ -266,7 +266,7 @@ FileETag None
   # URL parameter (added in Contao 2.11). The first rule rewrites an empty URL
   # to the front end controller, the second one adds a missing trailing slash.
   ##
-  RewriteRule ^[a-z]{2}/$ index.php [L]
-  RewriteRule ^([a-z]{2})$ $1/ [R=301,L]
+  RewriteRule ^[a-z]{2}(_[A-Z]{2})?/$ index.php [L]
+  RewriteRule ^([a-z]{2}(_[A-Z]{2})?)$ $1/ [R=301,L]
 
 </IfModule>
