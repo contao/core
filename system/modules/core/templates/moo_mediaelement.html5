@@ -1,0 +1,20 @@
+<?php
+
+// Add the mediaelement style sheet
+$GLOBALS['TL_CSS'][] = 'assets/mootools/mediaelement/'. MEDIAELEMENT .'/css/mediaelementplayer.min.css||static';
+
+?>
+
+<script src="<?php echo TL_ASSETS_URL; ?>assets/mootools/mediaelement/<?php echo MEDIAELEMENT; ?>/js/mediaelement-and-player.js"></script>
+<script>
+(function($) {
+  window.addEvent('domready', function() {
+    $$('video','audio').mediaelementplayer({
+      // Put custom options here
+      pluginPath:'<?php echo TL_PATH; ?>/assets/mootools/mediaelement/<?php echo MEDIAELEMENT; ?>/',
+      flashName:'legacy/flashmediaelement.swf',
+      silverlightName:'legacy/silverlightmediaelement.xap'
+    });
+  });
+})(MooTools);
+</script>

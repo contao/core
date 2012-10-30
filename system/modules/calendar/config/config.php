@@ -1,31 +1,13 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Calendar
- * @license    LGPL
- * @filesource
+ * @package Calendar
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
 
@@ -36,8 +18,8 @@ array_insert($GLOBALS['BE_MOD']['content'], 1, array
 (
 	'calendar' => array
 	(
-		'tables'     => array('tl_calendar', 'tl_calendar_events'),
-		'icon'       => 'system/modules/calendar/html/icon.gif'
+		'tables'     => array('tl_calendar', 'tl_calendar_events', 'tl_calendar_feed', 'tl_content'),
+		'icon'       => 'system/modules/calendar/assets/icon.gif'
 	)
 ));
 
@@ -66,7 +48,9 @@ $GLOBALS['TL_CRON']['daily'][] = array('Calendar', 'generateFeeds');
 /**
  * Register hook to add news items to the indexer
  */
+$GLOBALS['TL_HOOKS']['removeOldFeeds'][] = array('Calendar', 'purgeOldFeeds');
 $GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Calendar', 'getSearchablePages');
+$GLOBALS['TL_HOOKS']['generateXmlFiles'][] = array('Calendar', 'generateFeeds');
 
 
 /**
@@ -74,5 +58,5 @@ $GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Calendar', 'getSearchableP
  */
 $GLOBALS['TL_PERMISSIONS'][] = 'calendars';
 $GLOBALS['TL_PERMISSIONS'][] = 'calendarp';
-
-?>
+$GLOBALS['TL_PERMISSIONS'][] = 'calendarfeeds';
+$GLOBALS['TL_PERMISSIONS'][] = 'calendarfeedp';

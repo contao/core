@@ -1,0 +1,47 @@
+
+<div id="tl_maintenance_cache" class="maintenance_<?php echo $this->isActive ? 'active' : 'inactive'; ?>">
+
+<h2 class="sub_headline"><?php echo $this->headline; ?></h2>
+<?php if ($this->message): ?>
+
+<div class="tl_message">
+<?php echo $this->message; ?>
+</div>
+<?php endif; ?>
+
+<form action="<?php echo $this->action; ?>" class="tl_form" method="post">
+<div class="tl_formbody_edit">
+<input type="hidden" name="FORM_SUBMIT" value="tl_purge">
+<input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
+<div class="tl_tbox">
+  <fieldset class="tl_checkbox_container">
+    <table>
+    <thead>
+      <tr>
+        <th><input type="checkbox" id="check_all" class="tl_checkbox" onclick="Backend.toggleCheckboxes(this, 'purge')"></th>
+        <th><?php echo $this->job; ?></th>
+        <th><?php echo $this->description; ?></th>
+      </tr>
+    </thead>
+    <tbody>
+<?php foreach ($this->jobs as $value=>$job): ?>
+      <tr>
+        <td><input type="checkbox" name="purge[<?php echo $job['group']; ?>][]" id="<?php echo $job['id']; ?>" class="tl_checkbox" value="<?php echo $value; ?>" onfocus="Backend.getScrollOffset()"></td>
+        <td class="nw"><label for="<?php echo $job['id']; ?>"><?php echo $job['title']; ?></label><?php echo $job['affected']; ?></td>
+        <td><?php echo $job['description']; ?></td>
+      </tr>
+<?php endforeach; ?>
+    </tbody>
+    </table>
+  </fieldset>
+<?php if ($this->help): ?>
+  <p class="tl_help tl_tip"><?php echo $this->help; ?></p>
+<?php endif; ?>
+</div>
+</div>
+<div class="tl_submit_container">
+  <input type="submit" name="clear" class="tl_submit" value="<?php echo $this->submit; ?>"> 
+</div>
+</form>
+
+</div>

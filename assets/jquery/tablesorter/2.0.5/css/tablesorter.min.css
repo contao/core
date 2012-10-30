@@ -1,0 +1,2 @@
+/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */
+table.sortable th{background-image:url("../images/default.gif");background-repeat:no-repeat;background-position:center right}table.sortable th a.pointer{display:block;margin-right:9px;cursor:pointer}table.sortable th.unsortable{background-image:none}table.sortable th.headerSortDown{background-image:url("../images/asc.gif")}table.sortable th.headerSortUp{background-image:url("../images/desc.gif")}

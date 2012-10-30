@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * To use this script, please fill in your Piwik site ID and Piwik URL below
+ */
+$PiwikSite = 0;
+$PiwikPath = 'www.domain.tld/piwik/';
+
+
+/**
+ * DO NOT EDIT ANYTHING BELOW THIS LINE UNLESS YOU KNOW WHAT YOU ARE DOING!
+ */
+if ($PiwikSite > 0 && $PiwikPath != 'www.domain.tld/piwik/' && !BE_USER_LOGGED_IN && sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? Environment::get('ip') : '') . 'BE_USER_AUTH') != Input::cookie('BE_USER_AUTH')): ?>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+var _paq = _paq || [];
+(function() {
+  var u = ('https:' == document.location.protocol ? 'https://' : 'http://') + '<?php echo $PiwikPath; ?>';
+  _paq.push(['setSiteId', <?php echo $PiwikSite; ?>]);
+  _paq.push(['setTrackerUrl', u + 'piwik.php']);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  var g = document.createElement('script'); g.type='text/javascript'; g.src = u + 'piwik.js'; g.async=true;
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(g, s);
+})();
+/* ]]> */
+</script>
+<?php endif; ?>

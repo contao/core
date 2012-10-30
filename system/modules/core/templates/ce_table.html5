@@ -1,0 +1,62 @@
+
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<?php if ($this->headline): ?>
+
+<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+<?php endif; ?>
+
+<table id="<?php echo $this->id; ?>"<?php if ($this->sortable): ?> class="sortable"<?php endif; ?>>
+<?php if ($this->useHeader): ?>
+<thead>
+<tr>
+<?php foreach ($this->header as $col): ?>
+  <th class="<?php echo $col['class']; ?>"><?php echo $col['content']; ?></th>
+<?php endforeach; ?>
+</tr>
+</thead>
+<?php endif; ?>
+<?php if ($this->useFooter): ?>
+<tfoot>
+<tr>
+<?php foreach ($this->footer as $col): ?>
+  <td class="<?php echo $col['class']; ?>"><?php echo $col['content']; ?></td>
+<?php endforeach; ?>
+</tr>
+</tfoot>
+<?php endif; ?>
+<tbody>
+<?php foreach ($this->body as $class=>$row): ?>
+<tr class="<?php echo $class; ?>">
+<?php foreach ($row as $i=>$col): ?>
+<?php if ($i == 0 && $this->useLeftTh): ?>
+  <th scope="row" class="<?php echo $col['class']; ?>"><?php echo $col['content']; ?></th>
+<?php else: ?>
+  <td class="<?php echo $col['class']; ?>"><?php echo $col['content']; ?></td>
+<?php endif; ?>
+<?php endforeach; ?>
+</tr>
+<?php endforeach; ?>
+</tbody>
+</table>
+<?php if ($this->sortable): ?>
+
+<!-- indexer::stop -->
+<script>
+<?php if ($this->hasMooTools): ?>
+(function($) {
+  window.addEvent('domready', function() {
+    new TableSort('<?php echo $this->id; ?>', '<?php echo $this->thousandsSeparator; ?>', '<?php echo $this->decimalSeparator; ?>');
+  });
+})(document.id);
+<?php elseif ($this->hasJQuery): ?>
+(function($) {
+  $(document).ready(function() {
+    $('#<?php echo $this->id; ?>').tablesorter();
+  });
+})(jQuery);
+<?php endif; ?>
+</script>
+<!-- indexer::continue -->
+<?php endif; ?>
+
+</div>

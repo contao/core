@@ -1,29 +1,11 @@
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    System
- * @license    LGPL
- * @filesource
+ * @package Core
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
 /* Body */
@@ -39,8 +21,6 @@ body {
 	background:#fff;
 	border:1px solid #bbb;
 	border-bottom:0;
-	-moz-border-radius:3px 3px 0 0;
-	-webkit-border-radius:3px 3px 0 0;
 	border-radius:3px 3px 0 0;
 }
 #header h1 {
@@ -48,8 +28,6 @@ body {
 	padding:4px 8px 6px;
 	background:#b3b6b3 url("images/headline.gif") repeat-x;
 	color:#fff;
-	-moz-border-radius:3px 3px 0 0;
-	-webkit-border-radius:3px 3px 0 0;
 	border-radius:3px 3px 0 0;
 }
 
@@ -67,8 +45,6 @@ body {
 	background:#fff;
 	border:1px solid #bbb;
 	border-top:0;
-	-moz-border-radius:0 0 3px 3px;
-	-webkit-border-radius:0 0 3px 3px;
 	border-radius:0 0 3px 3px;
 	box-shadow:0 3px 6px #ccc;
 }
@@ -107,7 +83,6 @@ p {
 	margin:0 0 12px;
 	padding:0;
 	line-height:16px;
-	text-align:justify;
 }
 ul {
 	margin:12px 0;

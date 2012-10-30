@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="<?php echo $this->language; ?>">
+<head>
+<meta charset="<?php echo $this->charset; ?>">
+<title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
+<base href="<?php echo $this->base; ?>">
+<link rel="stylesheet" href="<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
+  $objCombiner->add('system/themes/'. $this->theme .'/changelog.css');
+  echo $objCombiner->getCombinedFile();
+?>">
+<!--[if IE]><link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
+<?php echo $this->stylesheets; ?>
+<!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+</head>
+<body class="__ua__">
+
+<div id="changelog">
+<?php echo $this->content; ?> 
+</div>
+
+</body>
+</html>

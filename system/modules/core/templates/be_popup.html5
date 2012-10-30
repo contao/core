@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="<?php echo $this->language; ?>">
+<head>
+<meta charset="<?php echo $this->charset; ?>">
+<title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
+<base href="<?php echo $this->base; ?>">
+<link rel="stylesheet" href="<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
+  $objCombiner->add('system/themes/'. $this->theme .'/popup.css');
+  echo $objCombiner->getCombinedFile();
+?>">
+<!--[if IE]><link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
+<?php echo $this->stylesheets; ?>
+<script><?php echo $this->getLocaleString(); ?></script>
+<script src="<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
+  $objCombiner->add('assets/mootools/mootao/Mootao.js');
+  $objCombiner->add('assets/contao/js/core.js');
+  echo $objCombiner->getCombinedFile();
+?>"></script>
+<script><?php echo $this->getDateString(); ?></script>
+<?php echo $this->javascripts; ?>
+<!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+</head>
+<body class="__ua__ popup">
+
+<div id="container">
+<div id="main">
+
+<h1>File preview</h1>
+
+<h2><?php echo $this->headline; ?></h2>
+
+<table class="tl_help_table">
+<tr>
+  <td class="tl_label"><?php echo $this->label_ctime; ?>:</td>
+  <td><?php echo $this->ctime; ?></td>
+</tr>
+<tr>
+  <td class="tl_label"><?php echo $this->label_mtime; ?>:</td>
+  <td><?php echo $this->mtime; ?></td>
+</tr>
+<tr>
+  <td class="tl_label"><?php echo $this->label_atime; ?>:</td>
+  <td><?php echo $this->atime; ?></td>
+</tr>
+<tr>
+  <td class="tl_label"><?php echo $this->label_filesize; ?>:</td>
+  <td><?php echo $this->filesize; ?></td>
+</tr>
+<tr>
+  <td class="tl_label"><?php echo $this->label_path; ?>:</td>
+  <td><?php echo $this->path; ?></td>
+</tr>
+<?php if ($this->src): ?>
+<tr>
+  <td class="tl_label"><?php echo $this->label_imagesize; ?>:</td>
+  <td><?php echo $this->width; ?> x <?php echo $this->height; ?></td>
+</tr>
+<?php endif; ?>
+</table>
+
+<div id="download">
+<a href="<?php echo $this->href; ?>" title="<?php echo $this->downloadTitle; ?>"><img src="system/themes/<?php echo $this->theme; ?>/images/<?php echo $this->icon; ?>" width="18" height="18" class="mime_icon"> <?php echo $this->download; ?></a>
+</div>
+<?php if ($this->isImage): ?>
+
+<div id="preview">
+<img src="<?php echo $this->src; ?>" width="<?php echo $this->width; ?>" height="<?php echo $this->height; ?>" alt="">
+</div>
+<?php endif; ?>
+
+</div>
+</div>
+
+</body>
+</html>

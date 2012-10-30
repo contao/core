@@ -1,0 +1,45 @@
+
+<div id="tl_buttons">
+<a href="<?php echo $this->href; ?>" class="header_back" title="<?php echo $this->title; ?>"><?php echo $this->button; ?></a>
+</div>
+
+<div id="tl_extension">
+
+<h2 class="sub_headline"><?php echo $this->headline; ?></h2>
+<?php echo $this->messages; ?>
+
+<form action="<?php echo $this->action; ?>" class="tl_form" method="post">
+<div class="tl_formbody_edit">
+<input type="hidden" name="FORM_SUBMIT" value="tl_autoload">
+<input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
+<div class="tl_tbox">
+
+<div>
+  <fieldset class="tl_checkbox_container" style="margin-top:2em">
+    <legend><?php echo $this->available; ?></legend>
+    <input type="checkbox" id="check_all_modules" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this, 'ctrl_modules')"> <label for="check_all_modules" style="color:#a6a6a6"><em><?php echo $this->selectAll; ?></em></label><br>
+<?php foreach ($this->modules as $module): ?>
+    <input type="checkbox" name="modules[]" id="opt_<?php echo $module; ?>" class="tl_checkbox" value="<?php echo $module; ?>" onfocus="Backend.getScrollOffset()"> <label for="opt_<?php echo $module; ?>"><?php echo $module; ?></label><br>
+<?php endforeach; ?>
+  </fieldset>
+  <p class="tl_help tl_tip"><?php echo $this->xplAvailable; ?></p>
+</div>
+
+<div>
+  <div class="tl_checkbox_single_container">
+    <input type="hidden" name="override" value=""><input type="checkbox" name="override" id="opt_override" value="1" class="tl_checkbox" onfocus="Backend.getScrollOffset()"> <label for="opt_override"><?php echo $this->override; ?></label>
+  </div>
+  <p class="tl_help tl_tip"><?php echo $this->xplOverride; ?></p>
+</div>
+
+</div>
+</div>
+
+<div class="tl_submit_container">
+  <input type="submit" name="autoload" class="tl_submit" value="<?php echo $this->autoload; ?>">
+  <input type="submit" name="ide_compat" class="tl_submit" value="<?php echo $this->ideCompat; ?>">
+</div>
+
+</form>
+
+</div>

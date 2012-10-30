@@ -1,31 +1,13 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Listing
- * @license    LGPL
- * @filesource
+ * @package Listing
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
 
@@ -44,7 +26,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_table'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_listing', 'getAllTables'),
-	'eval'                    => array('chosen'=>true, 'tl_class'=>'w50')
+	'eval'                    => array('chosen'=>true, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(64) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_fields'] = array
@@ -52,7 +35,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_fields'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_fields'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+	'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_where'] = array
@@ -60,7 +44,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_where'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_where'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('preserveTags'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+	'eval'                    => array('preserveTags'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_search'] = array
@@ -68,7 +53,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_search'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_search'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+	'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_sort'] = array
@@ -76,7 +62,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_sort'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_sort'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+	'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_info'] = array
@@ -84,7 +71,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_info'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_info'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+	'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_where'] = array
@@ -92,7 +80,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_where'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_info_where'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('preserveTags'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+	'eval'                    => array('preserveTags'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_layout'] = array
@@ -102,7 +91,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_layout'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_listing', 'getListTemplates'),
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_layout'] = array
@@ -112,7 +102,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_layout'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_listing', 'getInfoTemplates'),
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 
@@ -121,8 +112,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_layout'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @author     Leo Feyer <http://contao.org>
+ * @package    Listing
  */
 class tl_module_listing extends Backend
 {
@@ -139,16 +130,16 @@ class tl_module_listing extends Backend
 
 	/**
 	 * Return all list templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
 	public function getListTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if ($this->Input->get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('list_', $intPid);
@@ -157,20 +148,18 @@ class tl_module_listing extends Backend
 
 	/**
 	 * Return all info templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
 	public function getInfoTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if ($this->Input->get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('info_', $intPid);
 	}
 }
-
-?>

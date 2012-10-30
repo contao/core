@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="<?php echo $this->language; ?>">
+<head>
+<meta charset="<?php echo $this->charset; ?>">
+<title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
+<base href="<?php echo $this->base; ?>">
+<link rel="stylesheet" href="<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
+  $objCombiner->add('system/themes/'. $this->theme .'/confirm.css');
+  echo $objCombiner->getCombinedFile();
+?>">
+<!--[if IE]><link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
+<?php echo $this->stylesheets; ?>
+<script><?php echo $this->getLocaleString(); ?></script>
+<script src="<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
+  $objCombiner->add('assets/mootools/mootao/Mootao.js');
+  $objCombiner->add('assets/contao/js/core.js');
+  echo $objCombiner->getCombinedFile();
+?>"></script>
+<script><?php echo $this->getDateString(); ?></script>
+<?php echo $this->javascripts; ?>
+<!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+</head>
+<body class="__ua__">
+
+<div id="header">
+<h1>Contao Open Source CMS <?php echo VERSION; ?></h1>
+</div>
+
+<div id="container">
+<div id="main">
+
+<p><img class="pngfix" src="system/modules/repository/themes/default/images/stop128.png" width="128" height="128" alt=""></p>
+
+<form action="contao/confirm.php" class="tl_form" method="post">
+<div class="tl_formbody_edit">
+  <input type="hidden" name="FORM_SUBMIT" value="invalid_token_url">
+  <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
+  <p id="link"><?php echo $this->link; ?></p>
+  <dl>
+<?php foreach ($this->info as $key=>$info): ?>
+    <dt><?php echo $this->labels[$key]; ?></dt>
+    <dd><?php echo $info; ?></dd>
+<?php endforeach; ?>
+  </dl>
+  <p><?php echo $this->explain; ?></p>
+  <p><input type="submit" name="cancel" class="tl_submit" accesskey="s" value="<?php echo $this->cancel; ?>"> <a href="<?php echo $this->href; ?>"><?php echo $this->continue; ?></a></p>
+</div>
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>

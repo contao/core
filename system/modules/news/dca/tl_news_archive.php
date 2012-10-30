@@ -1,31 +1,13 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    News
- * @license    LGPL
- * @filesource
+ * @package News
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
 
@@ -50,6 +32,13 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 		'onsubmit_callback' => array
 		(
 			array('tl_news_archive', 'scheduleUpdate')
+		),
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary'
+			)
 		)
 	),
 
@@ -70,6 +59,14 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 		),
 		'global_operations' => array
 		(
+			'feeds' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_news_archive']['feeds'],
+				'href'                => 'table=tl_news_feed',
+				'class'               => 'header_rss',
+				'attributes'          => 'onclick="Backend.getScrollOffset()"',
+				'button_callback'     => array('tl_news_archive', 'manageFeeds')
+			),
 			'all' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
@@ -122,35 +119,65 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('allowComments', 'protected', 'makeFeed'),
-		'default'                     => '{title_legend},title,jumpTo;{comments_legend:hide},allowComments;{protected_legend:hide},protected;{feed_legend:hide},makeFeed'
+		'__selector__'                => array('protected', 'allowComments'),
+		'default'                     => '{title_legend},title,jumpTo;{protected_legend:hide},protected;{comments_legend:hide},allowComments'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'allowComments'               => 'notify,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha',
 		'protected'                   => 'groups',
-		'makeFeed'                    => 'format,language,source,maxItems,feedBase,alias,description'
+		'allowComments'               => 'notify,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha'
 	),
 
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'title' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'jumpTo' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'radio')
+			'foreignKey'              => 'tl_page.title',
+			'eval'                    => array('fieldType'=>'radio'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
+		),
+		'protected' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['protected'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'groups' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['groups'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'foreignKey'              => 'tl_member_group.name',
+			'eval'                    => array('mandatory'=>true, 'multiple'=>true),
+			'sql'                     => "blob NULL",
+			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
 		),
 		'allowComments' => array
 		(
@@ -158,7 +185,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'notify' => array
 		(
@@ -167,7 +195,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('notify_admin', 'notify_author', 'notify_both'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive']
+			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive'],
+			'sql'                     => "varchar(16) NOT NULL default ''"
 		),
 		'sortOrder' => array
 		(
@@ -177,132 +206,48 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'inputType'               => 'select',
 			'options'                 => array('ascending', 'descending'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'perPage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['perPage'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'moderate' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['moderate'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'bbcode' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['bbcode'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'requireLogin' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['requireLogin'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'disableCaptcha' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['disableCaptcha'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
-		),
-		'protected' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['protected'],
-			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
-		),
-		'groups' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['groups'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'foreignKey'              => 'tl_member_group.name',
-			'eval'                    => array('mandatory'=>true, 'multiple'=>true)
-		),
-		'makeFeed' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['makeFeed'],
-			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
-		),
-		'format' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['format'],
-			'default'                 => 'rss',
-			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'select',
-			'options'                 => array('rss'=>'RSS 2.0', 'atom'=>'Atom'),
-			'eval'                    => array('tl_class'=>'w50')
-		),
-		'language' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['language'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'filter'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'tl_class'=>'w50')
-		),
-		'source' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['source'],
-			'default'                 => 'source_teaser',
-			'exclude'                 => true,
-			'inputType'               => 'select',
-			'options'                 => array('source_teaser', 'source_text'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive'],
-			'eval'                    => array('tl_class'=>'w50')
-		),
-		'maxItems' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['maxItems'],
-			'default'                 => 25,
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
-		),
-		'feedBase' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['feedBase'],
-			'default'                 => $this->Environment->base,
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('trailingSlash'=>true, 'rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
-		),
-		'alias' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['alias'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_news_archive', 'checkFeedAlias')
-			)
-		),
-		'description' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['description'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:60px;', 'tl_class'=>'clr')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		)
 	)
 );
@@ -313,8 +258,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @author     Leo Feyer <http://contao.org>
+ * @package    News
  */
 class tl_news_archive extends Backend
 {
@@ -364,7 +309,7 @@ class tl_news_archive extends Backend
 		}
 
 		// Check current action
-		switch ($this->Input->get('act'))
+		switch (Input::get('act'))
 		{
 			case 'create':
 			case 'select':
@@ -373,11 +318,11 @@ class tl_news_archive extends Backend
 
 			case 'edit':
 				// Dynamically add the record to the user profile
-				if (!in_array($this->Input->get('id'), $root))
+				if (!in_array(Input::get('id'), $root))
 				{
 					$arrNew = $this->Session->get('new_records');
 
-					if (is_array($arrNew['tl_news_archive']) && in_array($this->Input->get('id'), $arrNew['tl_news_archive']))
+					if (is_array($arrNew['tl_news_archive']) && in_array(Input::get('id'), $arrNew['tl_news_archive']))
 					{
 						// Add permissions on user level
 						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
@@ -391,7 +336,7 @@ class tl_news_archive extends Backend
 							if (is_array($arrNewp) && in_array('create', $arrNewp))
 							{
 								$arrNews = deserialize($objUser->news);
-								$arrNews[] = $this->Input->get('id');
+								$arrNews[] = Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user SET news=? WHERE id=?")
 											   ->execute(serialize($arrNews), $this->User->id);
@@ -410,7 +355,7 @@ class tl_news_archive extends Backend
 							if (is_array($arrNewp) && in_array('create', $arrNewp))
 							{
 								$arrNews = deserialize($objGroup->news);
-								$arrNews[] = $this->Input->get('id');
+								$arrNews[] = Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user_group SET news=? WHERE id=?")
 											   ->execute(serialize($arrNews), $this->User->groups[0]);
@@ -418,7 +363,7 @@ class tl_news_archive extends Backend
 						}
 
 						// Add new element to the user object
-						$root[] = $this->Input->get('id');
+						$root[] = Input::get('id');
 						$this->User->news = $root;
 					}
 				}
@@ -427,9 +372,9 @@ class tl_news_archive extends Backend
 			case 'copy':
 			case 'delete':
 			case 'show':
-				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && !$this->User->hasAccess('delete', 'newp')))
+				if (!in_array(Input::get('id'), $root) || (Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'newp')))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' news archive ID "'.$this->Input->get('id').'"', 'tl_news_archive checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news archive ID "'.Input::get('id').'"', 'tl_news_archive checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -438,7 +383,7 @@ class tl_news_archive extends Backend
 			case 'deleteAll':
 			case 'overrideAll':
 				$session = $this->Session->getData();
-				if ($this->Input->get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'newp'))
+				if (Input::get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'newp'))
 				{
 					$session['CURRENT']['IDS'] = array();
 				}
@@ -450,9 +395,9 @@ class tl_news_archive extends Backend
 				break;
 
 			default:
-				if (strlen($this->Input->get('act')))
+				if (strlen(Input::get('act')))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' news archives', 'tl_news_archive checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news archives', 'tl_news_archive checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -485,14 +430,14 @@ class tl_news_archive extends Backend
 
 	/**
 	 * Schedule a news feed update
-	 * 
+	 *
 	 * This method is triggered when a single news archive or multiple news
 	 * archives are modified (edit/editAll).
-	 * @param DataContainer
+	 * @param \DataContainer
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{
-		// Return if there is no ID 
+		// Return if there is no ID
 		if (!$dc->id)
 		{
 			return;
@@ -506,29 +451,17 @@ class tl_news_archive extends Backend
 
 
 	/**
-	 * Check the RSS-feed alias
-	 * @param mixed
-	 * @param DataContainer
-	 * @return mixed
-	 * @throws Exception
+	 * Return the manage feeds button
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
 	 */
-	public function checkFeedAlias($varValue, DataContainer $dc)
+	public function manageFeeds($href, $label, $title, $class, $attributes)
 	{
-		// No change or empty value
-		if ($varValue == $dc->value || $varValue == '')
-		{
-			return $varValue;
-		}
-
-		$arrFeeds = $this->removeOldFeeds(true);
-
-		// Alias exists
-		if (array_search($varValue, $arrFeeds) !== false)
-		{
-			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
-		}
-
-		return $varValue;
+		return ($this->User->isAdmin || !empty($this->User->newsfeeds) || $this->User->hasAccess('create', 'newsfeedp')) ? '<a href="'.$this->addToUrl($href).'" class="'.$class.'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : '';
 	}
 
 
@@ -579,5 +512,3 @@ class tl_news_archive extends Backend
 		return ($this->User->isAdmin || $this->User->hasAccess('delete', 'newp')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 }
-
-?>

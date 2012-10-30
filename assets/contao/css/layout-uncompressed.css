@@ -1,0 +1,159 @@
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * @package Core
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+/**
+ * Standardize some basic elements
+ */
+body,form {
+	margin:0;
+	padding:0;
+}
+img {
+	border:0;
+}
+header,footer,nav,section,aside,article,figure,figcaption {
+	display:block;
+}
+
+/**
+ * Fix some font issues
+ */
+body {
+	font-size:100.01%;
+}
+select,input,textarea {
+	font-size:99%;
+}
+
+/**
+ * Fix some positioning issues
+ */
+#container,.inside {
+	position:relative;
+}
+
+/**
+ * Apply the holy grail CSS layout if the screen is at least 768 pixel wide,
+ * otherwise display all columns underneath each other
+ * 
+ * @see http://www.alistapart.com/articles/holygrail
+ */
+#main,#left,#right {
+	float:left;
+	position:relative;
+}
+#main {
+	width:100%;
+}
+#left {
+	margin-left:-100%;
+}
+#right {
+	margin-right:-100%;
+}
+#footer {
+	clear:both;
+}
+@media (max-width:767px)
+{
+	#wrapper {
+		margin:0;
+		width:auto;
+	}
+	#header,#footer {
+		height:auto;
+	}
+	#container {
+		padding-left:0;
+		padding-right:0;
+	}
+	#main,#left,#right {
+		float:none;
+		width:auto;
+	}
+	#left {
+		right:0;
+		margin-left:0;
+	}
+	#right {
+		margin-right:0;
+	}
+}
+#main .inside {
+	min-height:1px; /* see #4893 */
+}
+
+/**
+ * Flexible images (videos see #4896)
+ *
+ * @see http://webdesignerwall.com/tutorials/responsive-design-with-css3-media-queries
+ */
+img {
+	max-width:100%;
+	height:auto;
+	-ms-interpolation-mode:bicubic; /* IE7 */
+	width:auto\9; /* IE8 */
+}
+
+/**
+ * Format the Contao image galleries (now rendered as unordered lists)
+ */
+.ce_gallery ul {
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	list-style:none;
+}																																																																																																																																																																																																																																																						
+.ce_gallery li {
+	float:left;
+}
+.ce_gallery li.col_first {
+	clear:left;
+}
+
+/**
+ * Clear floats
+ */
+.block {
+	overflow:hidden;
+}
+.clear,#clear {
+	height:0.1px;
+	font-size:0.1px;
+	line-height:0.1px;
+	clear:both;
+}
+
+/**
+ * Hide invisible elements
+ */
+.invisible {
+	width:0;
+	height:0;
+	left:-1000px;
+	top:-1000px;
+	position:absolute;
+	overflow:hidden;
+	display:inline;
+}
+
+/**
+ * Custom layout sections
+ */
+.custom {
+	display:block;
+}
+#container:after,.custom:after {
+	content:".";
+	display:block;
+	height:0;
+	clear:both;
+	visibility:hidden;
+}

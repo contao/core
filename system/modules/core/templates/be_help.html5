@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="<?php echo $this->language; ?>">
+<head>
+<meta charset="<?php echo $this->charset; ?>">
+<title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
+<base href="<?php echo $this->base; ?>">
+<link rel="stylesheet" href="<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
+  $objCombiner->add('system/themes/'. $this->theme .'/help.css');
+  echo $objCombiner->getCombinedFile();
+?>">
+<!--[if IE]><link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
+<?php echo $this->stylesheets; ?>
+<script><?php echo $this->getLocaleString(); ?></script>
+<script src="<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
+  $objCombiner->add('assets/mootools/mootao/Mootao.js');
+  $objCombiner->add('assets/contao/js/core.js');
+  echo $objCombiner->getCombinedFile();
+?>"></script>
+<script><?php echo $this->getDateString(); ?></script>
+<?php echo $this->javascripts; ?>
+<!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+</head>
+<body class="__ua__ popup">
+
+<div id="container">
+<div id="main">
+
+<h1><?php echo $this->helpWizard; ?></h1>
+
+<h2><?php echo $this->headline; ?></h2>
+
+<?php echo $this->explanation; ?>
+<?php if (!empty($this->rows)): ?>
+<table class="tl_help_table">
+<?php foreach ($this->rows as $row): ?>
+  <tr>
+<?php if ($row[0] == 'colspan'): ?>
+    <td colspan="2"><?php echo $row[1]; ?></td>
+<?php elseif ($row[0] == 'headspan'): ?>
+    <td colspan="2" class="headline"><?php echo $row[1]; ?></td>
+<?php else: ?>
+    <td class="tl_label"><?php echo $row[0]; ?></td>
+    <td><?php echo $row[1]; ?></td>
+<?php endif; ?>
+  </tr>
+<?php endforeach; ?>
+</table>
+<?php endif; ?>
+
+</div>
+</div>
+
+</body>
+</html>

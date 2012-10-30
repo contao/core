@@ -1,0 +1,174 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/da/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$GLOBALS['TL_LANG']['tl_repository']['category'][0] = 'Kategori';
+$GLOBALS['TL_LANG']['tl_repository']['category'][1] = 'Vælg venligst udvidelseskategorien.';
+$GLOBALS['TL_LANG']['tl_repository']['copyright'][0] = 'Ophavsret';
+$GLOBALS['TL_LANG']['tl_repository']['copyright'][1] = 'Her kan du skrive en ophavsret notits (f.eks. © 2007,2008 Jerry Miller Webservices Inc).';
+$GLOBALS['TL_LANG']['tl_repository']['description'][0] = 'Beskrivelse';
+$GLOBALS['TL_LANG']['tl_repository']['description'][1] = 'Disse HTML tags er tilladt: %s';
+$GLOBALS['TL_LANG']['tl_repository']['extension'][0] = 'Udvidelse';
+$GLOBALS['TL_LANG']['tl_repository']['extension'][1] = 'Vælg venligst udvidelsesnavnet.';
+$GLOBALS['TL_LANG']['tl_repository']['functionality'][0] = 'Funktionalitet';
+$GLOBALS['TL_LANG']['tl_repository']['functionality'][1] = 'Tilbyder udvidelsen den forventede funktionalitet?';
+$GLOBALS['TL_LANG']['tl_repository']['license'][0] = 'Licens';
+$GLOBALS['TL_LANG']['tl_repository']['license'][1] = 'Skriv venligst en kort licensinformation. Du kan tilføje den fulde licensinformation i filen LICENSE.txt';
+$GLOBALS['TL_LANG']['tl_repository']['name'][0] = 'Navn';
+$GLOBALS['TL_LANG']['tl_repository']['name'][1] = 'Udvidelsens navn skal starte med a-z, A-Z eller 0-9, hvor små bogstaver foretrækkes. Endvidere er karaktererne _ og - tilladt inde i navnet.';
+$GLOBALS['TL_LANG']['tl_repository']['popularity'][0] = 'Polaritet';
+$GLOBALS['TL_LANG']['tl_repository']['popularity'][1] = '%s/%s (downloadede / installerede)';
+$GLOBALS['TL_LANG']['tl_repository']['quality'][0] = 'Kvalitet';
+$GLOBALS['TL_LANG']['tl_repository']['quality'][1] = 'Hvor robust er udvidelsen og hvor nem er installationen og vedligeholdelsen.';
+$GLOBALS['TL_LANG']['tl_repository']['releasedate'][0] = 'Udgivelsesdato';
+$GLOBALS['TL_LANG']['tl_repository']['releasedate'][1] = 'Skriv udgivelsesdatoen for denne udgave som ÅÅÅÅ-MM-DD.';
+$GLOBALS['TL_LANG']['tl_repository']['selversion'][0] = 'Version';
+$GLOBALS['TL_LANG']['tl_repository']['selversion'][1] = 'Vælg venligst versionen';
+$GLOBALS['TL_LANG']['tl_repository']['type'][0] = 'Type';
+$GLOBALS['TL_LANG']['tl_repository']['type'][1] = 'Vælg venligst udvidelsestypen';
+$GLOBALS['TL_LANG']['tl_repository']['usability'][0] = 'Andvendelighed';
+$GLOBALS['TL_LANG']['tl_repository']['usability'][1] = 'Imødekommer udvidelsen TYPOlights standarder for anvendelighed og tilgængelighed?';
+$GLOBALS['TL_LANG']['tl_repository']['version'][0] = 'Version';
+$GLOBALS['TL_LANG']['tl_repository']['version'][1] = 'Versionnumre skal være i formatet n.n.n s, hvor n er et tal, og s er enten: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable';
+$GLOBALS['TL_LANG']['tl_repository']['lickey'][0] = 'Licensnøgle';
+$GLOBALS['TL_LANG']['tl_repository']['lickey'][1] = 'Skriv licensnøglen du har fået fra udvidelsens forhandler.';
+$GLOBALS['TL_LANG']['tl_repository']['uninstprotect'][0] = 'Beskyttelse mod afinstallation';
+$GLOBALS['TL_LANG']['tl_repository']['uninstprotect'][1] = 'Beskyt udvidelsen mod utilsigtet afinstallation.';
+$GLOBALS['TL_LANG']['tl_repository']['updateprotect'][0] = 'Beskyttelse mod opdatering';
+$GLOBALS['TL_LANG']['tl_repository']['updateprotect'][1] = 'Beskyt udvidelsen mod utilsigtet opdatering.';
+$GLOBALS['TL_LANG']['tl_repository']['author'] = 'Udvikler';
+$GLOBALS['TL_LANG']['tl_repository']['build'] = 'Build';
+$GLOBALS['TL_LANG']['tl_repository']['cancel'] = 'Annullere';
+$GLOBALS['TL_LANG']['tl_repository']['continue'] = 'Fortsæt';
+$GLOBALS['TL_LANG']['tl_repository']['dependencies'] = 'Afhængigheder for denne udvidelse';
+$GLOBALS['TL_LANG']['tl_repository']['dependents'] = 'Andre udvidelser der er afhængige af denne';
+$GLOBALS['TL_LANG']['tl_repository']['dependentsdel'] = 'Følgende udvidelser er afhængige af <em>%s</em> og vil måske blive ugyldige.';
+$GLOBALS['TL_LANG']['tl_repository']['donate'] = 'Donér';
+$GLOBALS['TL_LANG']['tl_repository']['downloads'] = 'Pakke downloads';
+$GLOBALS['TL_LANG']['tl_repository']['extensionnotfound'] = 'Udvidelse ikke fundet';
+$GLOBALS['TL_LANG']['tl_repository']['forum'] = 'Forum';
+$GLOBALS['TL_LANG']['tl_repository']['installs'] = 'Online installeringer';
+$GLOBALS['TL_LANG']['tl_repository']['langtrans'] = '%s oversat.';
+$GLOBALS['TL_LANG']['tl_repository']['manual'] = 'Manual';
+$GLOBALS['TL_LANG']['tl_repository']['no'] = 'nr.';
+$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = 'Ingen udvidelser fundet.';
+$GLOBALS['TL_LANG']['tl_repository']['orderby'] = 'Sorter efter';
+$GLOBALS['TL_LANG']['tl_repository']['otherlanguages'] = 'Andre sprog';
+$GLOBALS['TL_LANG']['tl_repository']['pageof'] = 'Side %s af %s';
+$GLOBALS['TL_LANG']['tl_repository']['ratingfmt'] = '%.2f (%d stemmer)';
+$GLOBALS['TL_LANG']['tl_repository']['reldownloads'] = 'Udgivelse downloads';
+$GLOBALS['TL_LANG']['tl_repository']['releasenotesfor'] = 'Udgivelsesnoter og ændringslog for %s';
+$GLOBALS['TL_LANG']['tl_repository']['relfunctionality'] = 'Udgivelse funktionalitet';
+$GLOBALS['TL_LANG']['tl_repository']['relinstalls'] = 'Udgivelse installeret';
+$GLOBALS['TL_LANG']['tl_repository']['relquality'] = 'Udgivelse kvalitet';
+$GLOBALS['TL_LANG']['tl_repository']['relrating'] = 'Udgivelse vurdering';
+$GLOBALS['TL_LANG']['tl_repository']['relupdates'] = 'Udgivelse opdateringer';
+$GLOBALS['TL_LANG']['tl_repository']['relusability'] = 'Udgivelse anvendelighed';
+$GLOBALS['TL_LANG']['tl_repository']['save'] = 'Gem';
+$GLOBALS['TL_LANG']['tl_repository']['shop'] = 'Butik';
+$GLOBALS['TL_LANG']['tl_repository']['showpicture'] = 'Vis billede i fuld størrelse';
+$GLOBALS['TL_LANG']['tl_repository']['state'] = 'Form';
+$GLOBALS['TL_LANG']['tl_repository']['tag'] = 'Tag';
+$GLOBALS['TL_LANG']['tl_repository']['thumbnail'] = 'Miniature billede';
+$GLOBALS['TL_LANG']['tl_repository']['totdownloads'] = 'Total downloadede';
+$GLOBALS['TL_LANG']['tl_repository']['totfunctionality'] = 'Total funktionalitet';
+$GLOBALS['TL_LANG']['tl_repository']['totinstalls'] = 'Total installerede';
+$GLOBALS['TL_LANG']['tl_repository']['totquality'] = 'Total kvalitet';
+$GLOBALS['TL_LANG']['tl_repository']['totrating'] = 'Total vurdering';
+$GLOBALS['TL_LANG']['tl_repository']['totupdates'] = 'Total opdateringer';
+$GLOBALS['TL_LANG']['tl_repository']['totusability'] = 'Total anvendelighed';
+$GLOBALS['TL_LANG']['tl_repository']['versionfrom'] = 'Version fra';
+$GLOBALS['TL_LANG']['tl_repository']['versions'] = 'Andre versioner';
+$GLOBALS['TL_LANG']['tl_repository']['versionto'] = 'Version til';
+$GLOBALS['TL_LANG']['tl_repository']['yes'] = 'ja';
+$GLOBALS['TL_LANG']['tl_repository']['action'] = 'Handling';
+$GLOBALS['TL_LANG']['tl_repository']['actionsummary'] = 'Handlings opsummering';
+$GLOBALS['TL_LANG']['tl_repository']['actionsuccess'] = 'Handling udført.';
+$GLOBALS['TL_LANG']['tl_repository']['actionfailed'] = 'En eller flere handlinger mislykkedes.';
+$GLOBALS['TL_LANG']['tl_repository']['apply'] = 'Anvend';
+$GLOBALS['TL_LANG']['tl_repository']['byorder'] = 'Af %s';
+$GLOBALS['TL_LANG']['tl_repository']['checkextension'] = 'Kontroller udvidelse';
+$GLOBALS['TL_LANG']['tl_repository']['dbuptodate'] = 'Database er opdateret';
+$GLOBALS['TL_LANG']['tl_repository']['deletingdirs'] = 'Slet biblioteket';
+$GLOBALS['TL_LANG']['tl_repository']['deletingfiles'] = 'Slet filer';
+$GLOBALS['TL_LANG']['tl_repository']['editextension'] = 'Rediger indstillinger';
+$GLOBALS['TL_LANG']['tl_repository']['extinstrecntf'] = 'Udvidelsens installeringslog er ikke fundet';
+$GLOBALS['TL_LANG']['tl_repository']['errdldpkg'] = 'Download af pakken fra udvidelsesbanken mislykkedes.';
+$GLOBALS['TL_LANG']['tl_repository']['failed'] = 'mislykkedes';
+$GLOBALS['TL_LANG']['tl_repository']['fileerrwrite'] = 'Fejl ved skrivning til filen %s';
+$GLOBALS['TL_LANG']['tl_repository']['filesdeleted'] = '%s fil(er) slettet';
+$GLOBALS['TL_LANG']['tl_repository']['filesinstalled'] = '%s fil(er) installeret';
+$GLOBALS['TL_LANG']['tl_repository']['filesunchanged'] = '%s fil(er) uændrede';
+$GLOBALS['TL_LANG']['tl_repository']['filesupdated'] = '%s fil(er) opdaterede';
+$GLOBALS['TL_LANG']['tl_repository']['ftsearch'] = 'Fuldtekst søgning';
+$GLOBALS['TL_LANG']['tl_repository']['goback'] = 'Gå tilbage';
+$GLOBALS['TL_LANG']['tl_repository']['install'] = 'Installer';
+$GLOBALS['TL_LANG']['tl_repository']['installextension'] = 'Installer/opdater udvidels';
+$GLOBALS['TL_LANG']['tl_repository']['installingext'] = 'Installer %s %s build %s';
+$GLOBALS['TL_LANG']['tl_repository']['installlogtitle'] = 'Fil installation/opdaterings log';
+$GLOBALS['TL_LANG']['tl_repository']['lickeyrequired'] = 'Denne udvidelse kræver en licensnøgle. Besøg venligst forhandlerens butik for at købe en.';
+$GLOBALS['TL_LANG']['tl_repository']['none'] = 'Ingen.';
+$GLOBALS['TL_LANG']['tl_repository']['notfound'] = 'ikke fundet';
+$GLOBALS['TL_LANG']['tl_repository']['ok'] = 'OK';
+$GLOBALS['TL_LANG']['tl_repository']['okuninstextension'] = 'OK at afinstallere <em>%s</em> nu?';
+$GLOBALS['TL_LANG']['tl_repository']['showdetails'] = 'Vis detaljer';
+$GLOBALS['TL_LANG']['tl_repository']['stateshint'] = 'Vælg de stadier der skal inkluderes.';
+$GLOBALS['TL_LANG']['tl_repository']['status'] = 'Status';
+$GLOBALS['TL_LANG']['tl_repository']['success'] = 'Success';
+$GLOBALS['TL_LANG']['tl_repository']['uninstallextension'] = 'Afinstaller udvidelse';
+$GLOBALS['TL_LANG']['tl_repository']['updatedatabase'] = 'Kontroller/opdater database';
+$GLOBALS['TL_LANG']['tl_repository']['updateextension'] = 'Opdater udvidelse';
+$GLOBALS['TL_LANG']['tl_repository']['updateextensions'] = 'Opdater markerede udvidelser';
+$GLOBALS['TL_LANG']['tl_repository']['update'] = 'Opdatering';
+$GLOBALS['TL_LANG']['tl_repository']['updates'] = 'Opdateringer';
+$GLOBALS['TL_LANG']['tl_repository']['updatehint'] = 'Vælg de stadier der skal inkluderes i opdateringer.';
+$GLOBALS['TL_LANG']['tl_repository']['updatingext'] = 'Opdater %s %s build %s';
+$GLOBALS['TL_LANG']['tl_repository']['validate'] = 'Reparer';
+$GLOBALS['TL_LANG']['tl_repository']['validatingext'] = 'Bekræft/reparer %s %s build %s';
+$GLOBALS['TL_LANG']['tl_repository']['approvedForLabel'] = 'Kompatibel med';
+$GLOBALS['TL_LANG']['tl_repository']['approvedForText'] = 'Contao %s til %s';
+$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule'] = 'SOAP extension ikke indlæst (konfigurer PHP med --enable-soap).';
+$GLOBALS['TL_LANG']['tl_repository_statext']['uptodate'] = 'Up-to-date.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapproved'] = 'Ikke godkendt for %s %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapprovedwith'] = 'Ikke godkendt med %s %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['shouldwork'] = 'Forventet at være kompatibel med %s %s';
+$GLOBALS['TL_LANG']['tl_repository_statext']['newversion'] = 'Ny version %s build %s er tilgængelig.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['depmissing'] = 'Mangler behøvet udvidelse %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extnotfound'] = 'Udvidelse er ikke fundet i udvidelsesbanken.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['vernotfound'] = 'Installeret version er ikke fundet i udvidelsesbanken.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extneedkey'] = 'Licensnøgle er behøvet, installer udvidelse på forhånd.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['errorinstall'] = 'Installationen mislykkedes, opdater/reparer.';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['free'] = 'Gratis';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['private'] = 'Privat';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['commercial'] = 'Kommerciel';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['application'] = 'Applikation';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['plugin'] = 'Udvidelse';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['template'] = 'Tema';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['utility'] = 'Redskab';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['widget'] = 'Widget';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['translation'] = 'Oversættelse';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['bundle'] = 'Bundt';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['other'] = 'Andre';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['core'] = 'Kerne';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['reldate'] = 'Udgivelsesdato';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['rating'] = 'Vurdering';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['popular'] = 'Popularitet';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['name'] = 'Navn';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['title'] = 'Titel';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['author'] = 'Udvikler';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['alpha'] = 'Alpha';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['beta'] = 'Beta';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['rc'] = 'RC';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['stable'] = 'Stabil';

@@ -1,31 +1,13 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Faq
- * @license    LGPL
- * @filesource
+ * @package Faq
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
 
@@ -50,6 +32,14 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 		'onload_callback' => array
 		(
 			array('tl_faq', 'checkPermission')
+		),
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary',
+				'pid' => 'index'
+			)
 		)
 	),
 
@@ -134,6 +124,27 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'foreignKey'              => 'tl_faq_category.title',
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
+		),
+		'sorting' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['MSC']['sorting'],
+			'sorting'                 => true,
+			'flag'                    => 2,
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'question' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_faq']['question'],
@@ -142,7 +153,8 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'alias' => array
 		(
@@ -150,11 +162,12 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'alias', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_faq', 'generateAlias')
-			)
+			),
+			'sql'                     => "varbinary(128) NOT NULL default ''"
 		),
 		'author' => array
 		(
@@ -166,7 +179,9 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'flag'                    => 1,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
-			'eval'                    => array('doNotCopy'=>true, 'chosen'=>true, 'mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('doNotCopy'=>true, 'chosen'=>true, 'mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
 		),
 		'answer' => array
 		(
@@ -175,7 +190,8 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'search'                  => true,
 			'inputType'               => 'textarea',
 			'eval'                    => array('mandatory'=>true, 'rte'=>'tinyMCE', 'helpwizard'=>true),
-			'explanation'             => 'insertTags'
+			'explanation'             => 'insertTags',
+			'sql'                     => "text NULL"
 		),
 		'addImage' => array
 		(
@@ -183,14 +199,16 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'singleSRC' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true)
+			'eval'                    => array('fieldType'=>'radio', 'filesOnly'=>true, 'mandatory'=>true),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'alt' => array
 		(
@@ -198,7 +216,8 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'size' => array
 		(
@@ -207,7 +226,8 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'inputType'               => 'imageSize',
 			'options'                 => $GLOBALS['TL_CROP'],
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'imagemargin' => array
 		(
@@ -215,7 +235,8 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'exclude'                 => true,
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'imageUrl' => array
 		(
@@ -227,14 +248,16 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'wizard' => array
 			(
 				array('tl_faq', 'pagePicker')
-			)
+			),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'fullsize' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['fullsize'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12')
+			'eval'                    => array('tl_class'=>'w50 m12'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'caption' => array
 		(
@@ -242,7 +265,8 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'floating' => array
 		(
@@ -251,7 +275,8 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'inputType'               => 'radioTable',
 			'options'                 => array('above', 'left', 'right', 'below'),
 			'eval'                    => array('cols'=>4, 'tl_class'=>'w50'),
-			'reference'               => &$GLOBALS['TL_LANG']['MSC']
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+			'sql'                     => "varchar(12) NOT NULL default ''"
 		),
 		'addEnclosure' => array
 		(
@@ -259,14 +284,16 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'enclosure' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_faq']['enclosure'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true)
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'mandatory'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'noComments' => array
 		(
@@ -274,7 +301,8 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'published' => array
 		(
@@ -283,13 +311,8 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'filter'                  => true,
 			'flag'                    => 2,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true)
-		),
-		'sorting' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['MSC']['sorting'],
-			'sorting'                 => true,
-			'flag'                    => 2,
+			'eval'                    => array('doNotCopy'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		)
 	)
 );
@@ -300,8 +323,8 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2008-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @author     Leo Feyer <http://contao.org>
+ * @package    Faq
  */
 class tl_faq extends Backend
 {
@@ -333,8 +356,9 @@ class tl_faq extends Backend
 	/**
 	 * Auto-generate the FAQ alias if it has not been set yet
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return mixed
+	 * @throws \Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -344,7 +368,7 @@ class tl_faq extends Backend
 		if (!strlen($varValue))
 		{
 			$autoAlias = true;
-			$varValue = standardize($this->restoreBasicEntities($dc->activeRecord->question));
+			$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->question));
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_faq WHERE alias=?")
@@ -386,13 +410,12 @@ class tl_faq extends Backend
 
 	/**
 	 * Return the link picker wizard
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
 	public function pagePicker(DataContainer $dc)
 	{
-		$strField = 'ctrl_' . $dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '');
-		return ' ' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer" onclick="Backend.pickPage(\'' . $strField . '\')"');
+		return ' <a href="contao/page.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MOD']['page'][0])).'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
@@ -408,9 +431,9 @@ class tl_faq extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen($this->Input->get('tid')))
+		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 
@@ -425,7 +448,7 @@ class tl_faq extends Backend
 		if (!$row['published'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
@@ -446,7 +469,7 @@ class tl_faq extends Backend
 		}
 
 		$this->createInitialVersion('tl_faq', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_faq']['fields']['published']['save_callback']))
 		{
@@ -464,5 +487,3 @@ class tl_faq extends Backend
 		$this->createNewVersion('tl_faq', $intId);
 	}
 }
-
-?>

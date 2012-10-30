@@ -1,0 +1,27 @@
+<?php
+
+// Add slimbox style sheet
+$GLOBALS['TL_CSS'][] = 'assets/mootools/slimbox/' . SLIMBOX . '/css/slimbox.css||static';
+
+?>
+
+<script type="text/javascript" src="<?php echo TL_ASSETS_URL; ?>assets/mootools/slimbox/<?php echo SLIMBOX; ?>/js/slimbox.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+(function($) {
+  window.addEvent('domready', function() {
+    $$(document.links).filter(function(el) {
+      return el.rel && el.rel.test(/^lightbox/i);
+    }).slimbox({
+      // Put custom options here
+    }, null, function(el) {
+      return (this == el) || ((this.rel.length > 8) && (this.rel == el.rel));
+    });
+    // Support swiping on mobile devices
+    $('lbImage').addEvent('swipe', function(e) {
+      (e.direction == 'left') ? $('lbNextLink').fireEvent('click') : $('lbPrevLink').fireEvent('click');
+    });
+  });
+})(document.id);
+/* ]]> */
+</script>

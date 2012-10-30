@@ -1,0 +1,32 @@
+
+<script type="text/javascript" src="<?php echo TL_ASSETS_URL; ?>assets/jquery/ui/<?php echo JQUERY_UI; ?>/jquery-ui.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+(function($) {
+  $(document).ready(function() {
+    $(document).accordion({
+      // Put custom options here
+      autoHeight: false,
+      header:'div.toggler'
+    });
+    var activate = function(tog) {
+      var tgs = $('div.toggler');
+      tgs.removeClass('active');
+      tog.addClass('active');
+      tgs.next('div.accordion').attr('aria-hidden', 'true');
+      tog.next('div.accordion').attr('aria-hidden', 'false');
+    }
+    $('div.toggler').focus(function(e) {
+      $('div.toggler').attr('tabindex', 0);
+      $(this).attr('tabindex', -1);
+    }).blur(function() {
+      $(this).attr('tabindex', 0);
+    }).click(function() {
+      activate($(this));
+    }).keypress(function(event) {
+      if (event.keyCode == 13) activate($(this));
+    });
+  });
+})(jQuery);
+/* ]]> */
+</script>

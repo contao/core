@@ -1,0 +1,23 @@
+/**
+ * Global TinyMCE style sheet
+ * 
+ * Use this style sheet to define CSS classes for the rich text editor. The
+ * stlye sheet will be included in the editor and the page layout automatically.
+ * Although the stlye sheet is shared by all themes, you can override its
+ * formattings in any of your theme style sheets.
+ * 
+ *   files/tinymce.css (this is how it looks like in TinyMCE)
+ *   .warning { color:#c55; }
+ * 
+ *   theme_a.css (this is how it looks like in theme A)
+ *   .warning { font-weight:bold; }
+ * 
+ *   theme_b.css (this is how it looks like in theme B)
+ *   .warning { color:#000; }
+ * 
+ * If you do not want to use a global TinyMCE style sheet at all, simply delete
+ * this file (files/tinymce.css).
+ */
+.warning { color:#c55; font-size:1.1em; }
+.confirmation { color:#090; font-size:1.1em; }
+.information { color:#999; font-size:0.9em; }

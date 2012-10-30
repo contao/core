@@ -1,0 +1,24 @@
+<?php echo '<?php'; ?> 
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * @package   <?php echo $this->package; ?> 
+ * @author    <?php echo $this->author; ?> 
+ * @license   <?php echo $this->license; ?> 
+ * @copyright <?php echo $this->copyright; ?> 
+ */
+
+
+/**
+ * Back end modules
+ */
+$GLOBALS['TL_LANG']['MOD'][''] = array('', '');
+
+
+/**
+ * Front end modules
+ */
+$GLOBALS['TL_LANG']['FMD'][''] = array('', '');

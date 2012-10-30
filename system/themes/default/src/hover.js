@@ -1,4 +1,4 @@
-/* Contao Open Source CMS :: Copyright (C) 2005-2012 Leo Feyer :: LGPL license */
+/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */
 var Theme = {
 	hoverRow: function(el, state) {
 		var items = $(el).getChildren();
@@ -16,7 +16,7 @@ var Theme = {
 			$$('.tl_checkbox_container label:last-child').each(function(el) {
 				el.setStyle('margin-bottom', 0);
 			});
-		}	
+		}
 	}
 };
 

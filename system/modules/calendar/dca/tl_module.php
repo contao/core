@@ -1,31 +1,13 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Calendar
- * @license    LGPL
- * @filesource
+ * @package Calendar
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
 
@@ -47,14 +29,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_calendar'] = array
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'options_callback'        => array('tl_module_calendar', 'getCalendars'),
-	'eval'                    => array('mandatory'=>true, 'multiple'=>true)
+	'eval'                    => array('mandatory'=>true, 'multiple'=>true),
+	'sql'                     => "blob NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_noSpan'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_noSpan'],
 	'exclude'                 => true,
-	'inputType'               => 'checkbox'
+	'inputType'               => 'checkbox',
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_startDay'] = array
@@ -65,7 +49,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_startDay'] = array
 	'inputType'               => 'select',
 	'options'                 => array(0, 1, 2, 3, 4, 5, 6),
 	'reference'               => &$GLOBALS['TL_LANG']['DAYS'],
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_format'] = array
@@ -80,7 +65,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_format'] = array
 	'wizard' => array
 	(
 		array('tl_module_calendar', 'hideStartDay')
-	)
+	),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_ignoreDynamic'] = array
@@ -88,7 +74,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_ignoreDynamic'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_ignoreDynamic'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50 m12')
+	'eval'                    => array('tl_class'=>'w50 m12'),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_order'] = array
@@ -99,7 +86,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_order'] = array
 	'inputType'               => 'select',
 	'options'                 => array('ascending', 'descending'),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_readerModule'] = array
@@ -109,7 +97,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_readerModule'] = array
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_calendar', 'getReaderModules'),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
-	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+	'sql'                     => "int(10) unsigned NOT NULL default '0'"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_limit'] = array
@@ -117,7 +106,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_limit'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_limit'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
+	'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+	'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_template'] = array
@@ -127,7 +117,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_template'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_calendar', 'getEventTemplates'),
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_ctemplate'] = array
@@ -137,14 +128,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_ctemplate'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_calendar', 'getCalendarTemplates'),
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_showQuantity'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_showQuantity'],
 	'exclude'                 => true,
-	'inputType'               => 'checkbox'
+	'inputType'               => 'checkbox',
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 
@@ -162,8 +155,8 @@ if (in_array('comments', Config::getInstance()->getActiveModules()))
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @author     Leo Feyer <http://contao.org>
+ * @package    Calendar
  */
 class tl_module_calendar extends Backend
 {
@@ -224,7 +217,7 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return the calendar formats depending on the module type
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
 	public function getFormats(DataContainer $dc)
@@ -274,16 +267,16 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return all event templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
 	public function getEventTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if ($this->Input->get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('event_', $intPid);
@@ -292,20 +285,18 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return all calendar templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
 	public function getCalendarTemplates(DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
-		if ($this->Input->get('act') == 'overrideAll')
+		if (Input::get('act') == 'overrideAll')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = Input::get('id');
 		}
 
 		return $this->getTemplateGroup('cal_', $intPid);
 	}
 }
-
-?>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="<?php echo $this->language; ?>">
+<head>
+<meta charset="<?php echo $this->charset; ?>">
+<title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
+<base href="<?php echo $this->base; ?>">
+<?php if ($this->loadFonts): ?>
+<link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/fonts.css">
+<?php endif; ?>
+<link rel="stylesheet" href="<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add('assets/mootools/colorpicker/'. COLORPICKER .'/css/mooRainbow.css', COLORPICKER);
+  $objCombiner->add('assets/mootools/chosen/chosen.css');
+  $objCombiner->add('assets/mootools/stylect/css/stylect.css');
+  $objCombiner->add('assets/mootools/simplemodal/'. SIMPLEMODAL .'/css/simplemodal.css', SIMPLEMODAL);
+  $objCombiner->add('assets/mootools/datepicker/'. DATEPICKER .'/dashboard.css', DATEPICKER);
+  $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
+  $objCombiner->add('system/themes/'. $this->theme .'/main.css');
+  echo $objCombiner->getCombinedFile();
+?>">
+<!--[if IE]><link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
+<?php echo $this->stylesheets; ?>
+<script><?php echo $this->getLocaleString(); ?></script>
+<script src="<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
+  $objCombiner->add('assets/mootools/colorpicker/'. COLORPICKER .'/js/mooRainbow.js', COLORPICKER);
+  $objCombiner->add('assets/mootools/chosen/chosen.js');
+  $objCombiner->add('assets/mootools/stylect/js/stylect.js');
+  $objCombiner->add('assets/mootools/simplemodal/'. SIMPLEMODAL .'/js/simplemodal.js', SIMPLEMODAL);
+  $objCombiner->add('assets/mootools/datepicker/'. DATEPICKER .'/datepicker.js', DATEPICKER);
+  $objCombiner->add('assets/mootools/mootao/Mootao.js');
+  $objCombiner->add('assets/contao/js/core.js');
+  $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
+  echo $objCombiner->getCombinedFile();
+?>"></script>
+<script><?php echo $this->getDateString(); ?></script>
+<?php echo $this->javascripts; ?>
+<!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+<?php echo $this->rteConfig; ?>
+</head>
+<body id="top" class="__ua__">
+
+<div id="header">
+
+<h1>Contao Open Source CMS <?php echo VERSION . '.' . BUILD; ?></h1>
+
+<div>
+<span class="header_user_container"><a href="<?php echo $this->base; ?>contao/main.php?do=login" class="header_user" title="<?php echo $this->account; ?>"><?php echo $this->username; ?></a></span>
+<span class="header_preview_container"><a href="contao/preview.php<?php echo $this->frontendFile; ?>" target="_blank" class="header_preview" title="<?php echo $this->previewTitle; ?>" accesskey="f"><?php echo $this->preview; ?></a></span>
+<span class="header_home_container"><a href="<?php echo $this->base; ?>contao/main.php" class="header_home" title="<?php echo $this->homeTitle; ?>" accesskey="h"><?php echo $this->home; ?></a></span>
+<span class="header_logout_container"><a href="<?php echo $this->base; ?>contao/" class="header_logout" title="<?php echo $this->logoutTitle; ?>" accesskey="q"><?php echo $this->logout; ?></a></span>
+</div>
+<?php if ($this->isCoreOnlyMode): ?>
+
+<p id="safe_mode" class="tl_error"><?php if ($this->isAdmin): ?><a href="<?php echo $this->coreOnlyHref; ?>" class="tl_submit"><?php echo $this->coreOnlyOff; ?></a><?php endif; ?><?php echo $this->coreOnlyMode; ?></p>
+<?php endif; ?>
+
+</div>
+
+<div id="container">
+<div id="left">
+
+<div id="tl_navigation">
+
+<h1><?php echo $this->backendModules; ?></h1>
+
+<a href="<?php echo $this->request; ?>#skipNavigation" class="invisible"><?php echo $this->skipNavigation; ?></a>
+
+<ul class="tl_level_1">
+<?php foreach ($this->modules as $strGroup=>$arrModules): ?>
+  <li class="tl_level_1_group<?php echo $arrModules['class']; ?>"><a href="<?php echo $arrModules['href']; ?>" title="<?php echo $arrModules['title']; ?>" onclick="return AjaxRequest.toggleNavigation(this,'<?php echo $strGroup; ?>')"><img src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" width="16" height="16" alt=""><?php echo $arrModules['label']; ?></a></li>
+<?php if ($arrModules['modules']): ?>
+  <li class="tl_parent" id="<?php echo $strGroup; ?>">
+  <ul class="tl_level_2">
+<?php foreach ($arrModules['modules'] as $arrConfig): ?>
+    <li><a href="<?php echo $arrConfig['href']; ?>" class="<?php echo $arrConfig['class']; ?>" title="<?php echo $arrConfig['title']; ?>"<?php echo $arrConfig['icon']; ?>><?php echo $arrConfig['label']; ?></a></li>
+<?php endforeach; ?>
+  </ul>
+  </li>
+<?php endif; ?>
+<?php endforeach; ?>
+</ul>
+
+<a id="skipNavigation" class="invisible">&nbsp;</a>
+
+</div>
+
+</div>
+
+<div id="main">
+
+<h1 class="main_headline"><?php echo $this->headline; ?></h1>
+<?php if ($this->error): ?>
+
+<p class="tl_gerror"><?php echo $this->error; ?></p>
+<?php endif; ?>
+<?php echo $this->main; ?>
+
+</div>
+
+<div class="clear"></div>
+
+</div>
+
+<div id="footer">
+
+<div>
+<span class="footer_top_container"><a href="<?php echo $this->request; ?>#top" class="footer_top" title="<?php echo $this->backToTop; ?>" accesskey="t"><?php echo $this->top; ?></a></span> 
+<span class="footer_preview_container"><a href="contao/preview.php<?php echo $this->frontendFile; ?>" target="_blank" class="footer_preview" title="<?php echo $this->previewTitle; ?>"><?php echo $this->preview; ?></a></span>
+</div>
+
+</div>
+<?php if ($this->pageOffset): ?>
+
+<script>
+Backend.vScrollTo(<?php echo $this->pageOffset; ?>);
+</script>
+<?php setcookie('BE_PAGE_OFFSET', 0, 0, '/'); endif; ?>
+
+<script>
+Contao.enableFiletreeReload = function() {
+  window.addEvent('sm_hide', function() {
+    AjaxRequest.reloadFiletrees();
+    window.removeEvents('sm_hide');
+  });
+};
+</script>
+<?php echo $this->mootools; ?>
+
+</body>
+</html>

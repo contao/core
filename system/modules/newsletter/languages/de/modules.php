@@ -1,47 +1,28 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
  * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Newsletter
- * @license    LGPL
- * @filesource
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/de/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-
-/**
- * Back end modules
- */
-$GLOBALS['TL_LANG']['MOD']['newsletter'] = array('Newsletter', 'Abonnements verwalten und Newsletter versenden.');
-
-
-/**
- * Front end modules
- */
-$GLOBALS['TL_LANG']['FMD']['newsletter']  = 'Newsletter';
-$GLOBALS['TL_LANG']['FMD']['subscribe']   = array('Abonnieren', 'Erzeugt ein Formular zum Abonnieren von Verteilern.');
-$GLOBALS['TL_LANG']['FMD']['unsubscribe'] = array('Kündigen', 'Erzeugt ein Formular zum Kündigen von Abonnements.');
-$GLOBALS['TL_LANG']['FMD']['nl_list']     = array('Newsletterliste', 'Fügt der Seite eine Newsletterliste hinzu.');
-$GLOBALS['TL_LANG']['FMD']['nl_reader']   = array('Newsletterleser', 'Stellt einen einzelnen Newsletter dar.');
-
-?>
+$GLOBALS['TL_LANG']['MOD']['newsletter'][0] = 'Newsletter';
+$GLOBALS['TL_LANG']['MOD']['newsletter'][1] = 'Abonnements verwalten und Newsletter versenden';
+$GLOBALS['TL_LANG']['MOD']['tl_newsletter_recipients'] = 'Abonnenten';
+$GLOBALS['TL_LANG']['FMD']['newsletter'] = 'Newsletter';
+$GLOBALS['TL_LANG']['FMD']['subscribe'][0] = 'Abonnieren';
+$GLOBALS['TL_LANG']['FMD']['subscribe'][1] = 'Erzeugt ein Formular zum Abonnieren von Verteilern';
+$GLOBALS['TL_LANG']['FMD']['unsubscribe'][0] = 'Kündigen';
+$GLOBALS['TL_LANG']['FMD']['unsubscribe'][1] = 'Erzeugt ein Formular zum Kündigen von Abonnements';
+$GLOBALS['TL_LANG']['FMD']['nl_list'][0] = 'Newsletterliste';
+$GLOBALS['TL_LANG']['FMD']['nl_list'][1] = 'Fügt der Seite eine Newsletterliste hinzu';
+$GLOBALS['TL_LANG']['FMD']['nl_reader'][0] = 'Newsletterleser';
+$GLOBALS['TL_LANG']['FMD']['nl_reader'][1] = 'Stellt einen einzelnen Newsletter dar';

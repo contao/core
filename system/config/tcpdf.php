@@ -1,50 +1,32 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Config
- * @license    LGPL
- * @filesource
+ * @package Core
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
 
 /**
  * This is the TCPDF (PDF generator) configuration file. See
- * plugins/tcpdf for more information.
+ * system/vendor/tcpdf for more information.
  */
 define('K_TCPDF_EXTERNAL_CONFIG', true);
-define('K_PATH_MAIN', TL_ROOT . '/plugins/tcpdf/');
-define('K_PATH_URL', $this->Environment->base . 'plugins/tcpdf/');
+define('K_PATH_MAIN', TL_ROOT . '/system/vendor/tcpdf/');
+define('K_PATH_URL', Environment::get('base') . 'system/vendor/tcpdf/');
 define('K_PATH_FONTS', K_PATH_MAIN . 'fonts/');
-define('K_PATH_CACHE', K_PATH_MAIN . 'cache/');
-define('K_PATH_URL_CACHE', K_PATH_URL . 'cache/');
+define('K_PATH_CACHE', TL_ROOT . '/system/tmp/');
+define('K_PATH_URL_CACHE', TL_ROOT . '/system/tmp/');
 define('K_PATH_IMAGES', K_PATH_MAIN . 'images/');
 define('K_BLANK_IMAGE', K_PATH_IMAGES . '_blank.png');
 define('PDF_PAGE_FORMAT', 'A4');
 define('PDF_PAGE_ORIENTATION', 'P');
 define('PDF_CREATOR', 'Contao Open Source CMS');
-define('PDF_AUTHOR', $this->Environment->url);
+define('PDF_AUTHOR', Environment::get('url'));
 define('PDF_HEADER_TITLE', $GLOBALS['TL_CONFIG']['websiteTitle']);
 define('PDF_HEADER_STRING', '');
 define('PDF_HEADER_LOGO', '');
@@ -69,5 +51,3 @@ define('K_TITLE_MAGNIFICATION', 1.3);
 define('K_SMALL_RATIO', 2/3);
 define('K_THAI_TOPCHARS', false);
 define('K_TCPDF_CALLS_IN_HTML', false);
-
-?>

@@ -1,0 +1,53 @@
+
+<h1 id="tl_welcome"><?php echo $this->welcome; ?></h1>
+
+<div id="tl_soverview">
+<?php if (!empty($this->messages)): ?>
+
+<div id="tl_messages">
+<h2><?php echo $this->systemMessages; ?></h2>
+<?php echo $this->messages; ?> 
+</div>
+<?php endif; ?>
+
+<div id="tl_shortcuts">
+<h2><?php echo $this->shortcuts; ?></h2>
+<p><?php echo $this->shortcutsLink; ?></p>
+</div>
+
+<div id="tl_versions">
+<h2><?php echo $GLOBALS['TL_LANG']['MSC']['latestChanges']; ?></h2>
+<?php if (!empty($this->versions)): ?>
+<table class="tl_listing">
+<thead>
+<tr>
+  <th><?php echo $GLOBALS['TL_LANG']['MSC']['date']; ?></th>
+  <th><?php echo $GLOBALS['TL_LANG']['MSC']['user']; ?></th>
+  <th><?php echo $GLOBALS['TL_LANG']['MSC']['table']; ?></th>
+  <th>ID</th>
+  <th><?php echo $GLOBALS['TL_LANG']['MSC']['description']; ?></th>
+  <th><?php echo $GLOBALS['TL_LANG']['MSC']['version']; ?></th>
+  <th>&nbsp;</th>
+</tr>
+</thead>
+<tbody>
+<?php foreach ($this->versions as $version): ?>
+<tr class="<?php echo $version['class']; ?>" onmouseover="Theme.hoverRow(this,1)" onmouseout="Theme.hoverRow(this,0)">
+  <td><?php echo $version['date']; ?></td>
+  <td><?php echo $version['username']; ?></td>
+  <td><?php echo $version['fromTable']; ?></td>
+  <td><?php echo $version['pid']; ?></td>
+  <td><?php echo $version['description'] ?: '-'; ?></td>
+  <td><?php echo $version['version']; ?></td>
+  <td><?php if ($version['deleted']): ?><a href="contao/main.php?do=undo" title="<?php echo specialchars($GLOBALS['TL_LANG']['MSC']['restore']); ?>"><?php echo $this->generateImage('undo.gif'); ?></a><?php elseif ($version['editUrl'] != ''): ?><a href="<?php echo $version['editUrl']; ?>" title="<?php echo $this->editElement; ?>"><?php echo $this->generateImage('edit.gif', '', 'style="padding:0 2px"'); ?></a><?php else: ?><?php echo $this->generateImage('edit_.gif', '', 'style="padding:0 2px"'); ?><?php endif; ?> <a href="contao/diff.php?table=<?php echo $version['fromTable']; ?>&amp;pid=<?php echo $version['pid']; ?>&amp;from=<?php echo $version['from']; ?>&amp;to=<?php echo $version['to']; ?>" title="<?php echo $this->showDifferences; ?>" onclick="Backend.openModalIframe({'width':860,'title':'<?php echo $this->showDifferences; ?>','url':this.href});return false"><?php echo $this->generateImage('diff.gif'); ?></a></td>
+</tr>
+<?php endforeach; ?>
+</tbody>
+</table>
+<?php echo $this->pagination; ?> 
+<?php else: ?>
+<p><?php echo $GLOBALS['TL_LANG']['MSC']['noVersions']; ?></p>
+<?php endif; ?>
+</div>
+
+</div>

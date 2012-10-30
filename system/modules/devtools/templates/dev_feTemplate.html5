@@ -1,0 +1,8 @@
+
+<div class="<?php echo '<?php echo $this->class; ?>'; ?> block"<?php echo '<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>'; ?>>
+<?php echo '<?php if ($this->headline): ?>'; ?> 
+
+<<?php echo '<?php echo $this->hl; ?>'; ?>><?php echo '<?php echo $this->headline; ?>'; ?></<?php echo '<?php echo $this->hl; ?>'; ?>>
+<?php echo '<?php endif; ?>'; ?> 
+
+</div>

@@ -1,0 +1,30 @@
+<?php
+
+// Add the mediabox style sheet
+$GLOBALS['TL_CSS'][] = 'assets/mootools/mediabox/'. MEDIABOX .'/css/mediaboxAdvBlack21.css||static';
+
+?>
+
+<script type="text/javascript" src="<?php echo TL_ASSETS_URL; ?>assets/mootools/mediabox/<?php echo MEDIABOX; ?>/js/mediabox.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+(function($) {
+  window.addEvent('domready', function() {
+    var links = $$('a').filter(function(el) {
+      return el.rel && el.rel.test(/^lightbox/i);
+    });
+    $$(links).mediabox({
+      /* Put custom options here */
+    }, null, function(el) {
+      var rel0 = this.rel.replace(/[[]|]/gi,' ');
+      var relsize = rel0.split(' ');
+      return (this == el) || ((this.rel.length > 8) && el.rel.match(relsize[1]));
+    });
+    // Support swiping on mobile devices
+    $('mbImage').addEvent('swipe', function(e) {
+      (e.direction == 'left') ? $('mbNextLink').fireEvent('click') : $('mbPrevLink').fireEvent('click');
+    });
+  });
+})(document.id);
+/* ]]> */
+</script>

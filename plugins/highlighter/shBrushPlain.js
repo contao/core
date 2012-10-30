@@ -1,2 +1,0 @@
-/* SyntaxHighlighter 3.0.83 (C) 2004-2010 Alex Gorbatchev http://alexgorbatchev.com/SyntaxHighlighter */
-(function(){function a(){}typeof require!="undefined"?SyntaxHighlighter=require("shCore").SyntaxHighlighter:null,a.prototype=new SyntaxHighlighter.Highlighter,a.aliases=["text","plain"],SyntaxHighlighter.brushes.Plain=a,typeof exports!="undefined"?exports.Brush=a:null})();

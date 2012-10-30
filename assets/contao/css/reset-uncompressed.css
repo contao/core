@@ -1,0 +1,107 @@
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * @package Core
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+/**
+ * Reset the margin and padding of the block elements
+ */
+body,div,h1,h2,h3,h4,h5,h6,p,blockquote,pre,code,ol,ul,li,dl,dt,dd,figure,table,th,td,form,fieldset,legend,input,textarea {
+	margin:0;
+	padding:0;
+}
+
+/**
+ * Basic element formatting
+ */
+table {
+	border-spacing:0;
+	border-collapse:collapse;
+}
+caption,th,td {
+	text-align:left;
+	text-align:start; /* see #4596 */
+	vertical-align:top;
+}
+abbr,acronym {
+	font-variant:normal;
+	border-bottom:1px dotted #666;
+	cursor:help;
+}
+blockquote,q {
+	quotes:none;
+}
+fieldset,img {
+	border:0;
+}
+ul {
+	list-style-type:none;
+}
+sup {
+	vertical-align:text-top;
+}
+sub {
+	vertical-align:text-bottom;
+}
+del {
+	text-decoration:line-through;
+}
+ins {
+	text-decoration:none;
+}
+
+/**
+ * Default font settings
+ */
+body {
+	font:12px "Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
+	color:#000;
+}
+input,button,textarea,select {
+	font-family:inherit;
+	font-size:99%;
+	font-weight:inherit;
+}
+pre,code {
+	font-family:Monaco,monospace;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+h1 {
+	font-size:1.8333em; /* 22px */
+}
+h2 {
+	font-size:1.6667em; /* 20px */
+}
+h3 {
+	font-size:1.5em;    /* 18px */
+}
+h4 {
+	font-size:1.3333em; /* 16px */
+}
+table {
+	font-size:inherit;
+}
+caption,th {
+	font-weight:bold;
+}
+a {
+	color:#00f;
+}
+
+/**
+ * Default margins
+ */
+h1,h2,h3,h4,h5,h6 {
+	margin-top:1em;
+}
+h1,h2,h3,h4,h5,h6,p,pre,blockquote,table,ol,ul,form {
+	margin-bottom:12px; /* Should match the font size */
+}

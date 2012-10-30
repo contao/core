@@ -1,38 +1,20 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Comments
- * @license    LGPL
- * @filesource
+ * @package Comments
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
 
 /**
  * Add palette to tl_content
  */
-$GLOBALS['TL_DCA']['tl_content']['palettes']['comments'] = '{type_legend},type,headline;{comment_legend},com_order,com_perPage,com_moderate,com_bbcode,com_requireLogin,com_disableCaptcha;{template_legend:hide},com_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['comments'] = '{type_legend},type,headline;{comment_legend},com_order,com_perPage,com_moderate,com_bbcode,com_requireLogin,com_disableCaptcha;{template_legend:hide},com_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 
 
 /**
@@ -46,7 +28,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_order'] = array
 	'inputType'               => 'select',
 	'options'                 => array('ascending', 'descending'),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['com_perPage'] = array
@@ -54,7 +37,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_perPage'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_perPage'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
+	'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+	'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['com_moderate'] = array
@@ -62,7 +46,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_moderate'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_moderate'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['com_bbcode'] = array
@@ -70,7 +55,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_bbcode'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_bbcode'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['com_disableCaptcha'] = array
@@ -78,7 +64,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_disableCaptcha'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_disableCaptcha'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['com_requireLogin'] = array
@@ -86,7 +73,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_requireLogin'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_requireLogin'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['com_template'] = array
@@ -95,7 +83,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_template'] = array
 	'default'                 => 'com_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('tl_content_comments', 'getCommentsTemplates')
+	'options_callback'        => array('tl_content_comments', 'getCommentsTemplates'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 
@@ -104,42 +93,47 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_template'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @author     Leo Feyer <http://contao.org>
+ * @package    Comments
  */
 class tl_content_comments extends Backend
 {
 
 	/**
 	 * Return all comments templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
 	public function getCommentsTemplates(DataContainer $dc)
 	{
-		$intPid = $dc->activeRecord->pid;
-
-		if ($this->Input->get('act') == 'overrideAll')
+		// Only look for a theme in the articles module (see #4808)
+		if (Input::get('do') == 'article')
 		{
-			$intPid = $this->Input->get('id');
+			$intPid = $dc->activeRecord->pid;
+
+			if (Input::get('act') == 'overrideAll')
+			{
+				$intPid = Input::get('id');
+			}
+
+			// Get the page ID
+			$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
+										 ->limit(1)
+										 ->execute($intPid);
+
+			// Inherit the page settings
+			$objPage = $this->getPageDetails($objArticle->pid);
+
+			// Get the theme ID
+			$objLayout = LayoutModel::findByPk($objPage->layout);
+
+			if ($objLayout === null)
+			{
+				return array();
+			}
 		}
-
-		// Get the page ID
-		$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
-									 ->limit(1)
-									 ->execute($intPid);
-
-		// Inherit the page settings
-		$objPage = $this->getPageDetails($objArticle->pid);
-
-		// Get the theme ID
-		$objLayout = $this->Database->prepare("SELECT pid FROM tl_layout WHERE id=? OR fallback=1 ORDER BY fallback")
-									->limit(1)
-									->execute($objPage->layout);
 
 		// Return all gallery templates
 		return $this->getTemplateGroup('com_', $objLayout->pid);
 	}
 }
-
-?>

@@ -1,68 +1,45 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
  * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    News
- * @license    LGPL
- * @filesource
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/de/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-
-/**
- * Fields
- */
-$GLOBALS['TL_LANG']['tl_news_comments']['pid']       = array('Nachrichtenbeitrag', 'Der dazugehörige Nachrichtenbeitrag.');
-$GLOBALS['TL_LANG']['tl_news_comments']['date']      = array('Datum', 'Bitte geben Sie das Kommentardatum ein.');
-$GLOBALS['TL_LANG']['tl_news_comments']['name']      = array('Autor', 'Bitte geben Sie den Namen des Autors ein.');
-$GLOBALS['TL_LANG']['tl_news_comments']['email']     = array('E-Mail-Adresse', 'Die E-Mail-Adresse wird nicht veröffentlicht.');
-$GLOBALS['TL_LANG']['tl_news_comments']['website']   = array('Webseite', 'Hier können Sie eine Webadresse eingeben.');
-$GLOBALS['TL_LANG']['tl_news_comments']['comment']   = array('Kommentar', 'Bitte geben Sie den Kommentar ein.');
-$GLOBALS['TL_LANG']['tl_news_comments']['published'] = array('Kommentar veröffentlichen', 'Den Kommentar auf der Webseite anzeigen.');
-
-
-/**
- * Legends
- */
-$GLOBALS['TL_LANG']['tl_news_comments']['author_legend']  = 'Autor';
+$GLOBALS['TL_LANG']['tl_news_comments']['pid'][0] = 'Nachrichtenbeitrag';
+$GLOBALS['TL_LANG']['tl_news_comments']['pid'][1] = 'Der dazugehörige Nachrichtenbeitrag.';
+$GLOBALS['TL_LANG']['tl_news_comments']['date'][0] = 'Datum';
+$GLOBALS['TL_LANG']['tl_news_comments']['date'][1] = 'Bitte geben Sie das Kommentardatum ein.';
+$GLOBALS['TL_LANG']['tl_news_comments']['name'][0] = 'Autor';
+$GLOBALS['TL_LANG']['tl_news_comments']['name'][1] = 'Bitte geben Sie den Namen des Autors ein.';
+$GLOBALS['TL_LANG']['tl_news_comments']['email'][0] = 'E-Mail-Adresse';
+$GLOBALS['TL_LANG']['tl_news_comments']['email'][1] = 'Die E-Mail-Adresse wird nicht veröffentlicht.';
+$GLOBALS['TL_LANG']['tl_news_comments']['website'][0] = 'Webseite';
+$GLOBALS['TL_LANG']['tl_news_comments']['website'][1] = 'Hier können Sie eine Webadresse eingeben.';
+$GLOBALS['TL_LANG']['tl_news_comments']['comment'][0] = 'Kommentar';
+$GLOBALS['TL_LANG']['tl_news_comments']['comment'][1] = 'Bitte geben Sie den Kommentar ein.';
+$GLOBALS['TL_LANG']['tl_news_comments']['published'][0] = 'Kommentar veröffentlichen';
+$GLOBALS['TL_LANG']['tl_news_comments']['published'][1] = 'Den Kommentar auf der Webseite anzeigen.';
+$GLOBALS['TL_LANG']['tl_news_comments']['author_legend'] = 'Autor';
 $GLOBALS['TL_LANG']['tl_news_comments']['comment_legend'] = 'Kommentar';
 $GLOBALS['TL_LANG']['tl_news_comments']['publish_legend'] = 'Veröffentlichung';
-
-
-/**
- * Reference
- */
 $GLOBALS['TL_LANG']['tl_news_comments']['approved'] = 'Genehmigt';
-$GLOBALS['TL_LANG']['tl_news_comments']['pending']  = 'Zur Überprüfung';
-
-
-/**
- * Buttons
- */
-$GLOBALS['TL_LANG']['tl_news_comments']['show']       = array('Kommentardetails', 'Details des Kommentars ID %s anzeigen');
-$GLOBALS['TL_LANG']['tl_news_comments']['edit']       = array('Kommentar bearbeiten', 'Kommentar ID %s bearbeiten');
-$GLOBALS['TL_LANG']['tl_news_comments']['delete']     = array('Kommentar löschen', 'Kommentar ID %s löschen');
-$GLOBALS['TL_LANG']['tl_news_comments']['toggle']     = array('Kommentar veröffentlichen/unveröffentlichen', 'Kommentar ID %s veröffentlichen/unveröffentlichen');
-$GLOBALS['TL_LANG']['tl_news_comments']['editheader'] = array('Archiv bearbeiten', 'Das aktuelle Archiv bearbeiten');
-
-?>
+$GLOBALS['TL_LANG']['tl_news_comments']['pending'] = 'Zur Überprüfung';
+$GLOBALS['TL_LANG']['tl_news_comments']['show'][0] = 'Kommentardetails';
+$GLOBALS['TL_LANG']['tl_news_comments']['show'][1] = 'Details des Kommentars ID %s anzeigen';
+$GLOBALS['TL_LANG']['tl_news_comments']['edit'][0] = 'Kommentar bearbeiten';
+$GLOBALS['TL_LANG']['tl_news_comments']['edit'][1] = 'Kommentar ID %s bearbeiten';
+$GLOBALS['TL_LANG']['tl_news_comments']['delete'][0] = 'Kommentar löschen';
+$GLOBALS['TL_LANG']['tl_news_comments']['delete'][1] = 'Kommentar ID %s löschen';
+$GLOBALS['TL_LANG']['tl_news_comments']['toggle'][0] = 'Kommentar veröffentlichen/unveröffentlichen';
+$GLOBALS['TL_LANG']['tl_news_comments']['toggle'][1] = 'Kommentar ID %s veröffentlichen/unveröffentlichen';
+$GLOBALS['TL_LANG']['tl_news_comments']['editheader'][0] = 'Archiv bearbeiten';
+$GLOBALS['TL_LANG']['tl_news_comments']['editheader'][1] = 'Das aktuelle Archiv bearbeiten';

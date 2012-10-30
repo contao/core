@@ -14,42 +14,42 @@ modern CSS framework and many already integrated modules (news, calendar, forms,
 etc.) have quickly made Contao one of the most popular open source content
 management systems on the market.
 
-Visit the project website at http://www.contao.org.
+Visit the project website at http://contao.org.
 
 
 System requirements
 -------------------
 
-* Webserver (Apache, IIS, etc.)
-* PHP version 5.2 or greater
-* MySQL version 4.1 or greater
-* PHP extension GDLib
-* PHP extension mcrypt (optional)
+ * Webserver (Apache, IIS, etc.)
+ * PHP version 5.3.2 or greater
+ * MySQL version 4.1 or greater
+ * PHP extension GDLib
+ * PHP extension mcrypt (optional)
 
 
 Installation
 ------------
 
-* Download a Contao package from the project website
-* Unpack the archive on your server
-* Open the installation directory in your web browser
-* Follow the instructions of the install tool
+ * Download a Contao package from the project website
+ * Unpack the archive on your server
+ * Open the installation directory in your web browser
+ * Follow the instructions of the install tool
 
 
 How to access the back end
 --------------------------
 
-Open your web browser and add `/contao` to the URL of your website. Here are
-a few examples:
+Open your web browser and add `/contao` to the URL of your website. Here are a
+few examples:
 
-* `http://www.yourdomain.com/contao`
-* `http://www.yourdomain.com/contao/contao`
-* `http://www.yourdomain.com/contao-2.11.0/contao`
+ * `http://www.yourdomain.com/contao`
+ * `http://www.yourdomain.com/contao/contao`
+ * `http://www.yourdomain.com/contao-3.0.0/contao`
 
 
 Troubleshooting
 ---------------
 
-If you are having problems installing or using Contao, please visit the
-project website at http://www.contao.org/support.html and read the user's
-guide or post your question in the Contao forum.
+If you are having problems installing or using Contao, please visit the project
+website at http://contao.org/support.html and read the user's guide or post your
+question in the Contao forum.

@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * To use this script, please fill in your Google Analytics ID below
+ */
+$GoogleAnalyticsId = 'UA-XXXXX-X';
+
+
+/**
+ * DO NOT EDIT ANYTHING BELOW THIS LINE UNLESS YOU KNOW WHAT YOU ARE DOING!
+ */
+if ($GoogleAnalyticsId != 'UA-XXXXX-X' && !BE_USER_LOGGED_IN && sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? Environment::get('ip') : '') . 'BE_USER_AUTH') != Input::cookie('BE_USER_AUTH')): ?>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', '<?php echo $GoogleAnalyticsId; ?>']);
+<?php if ($GLOBALS['TL_CONFIG']['privacyAnonymizeGA']): ?>
+_gaq.push(['_gat._anonymizeIp']);
+<?php endif; ?>
+_gaq.push(['_trackPageview']);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+/* ]]> */
+</script>
+<?php endif; ?>

@@ -1,31 +1,13 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Faq
- * @license    LGPL
- * @filesource
+ * @package Faq
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
 
@@ -45,6 +27,13 @@ $GLOBALS['TL_DCA']['tl_faq_category'] = array
 		'onload_callback' => array
 		(
 			array('tl_faq_category', 'checkPermission')
+		),
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary'
+			)
 		)
 	),
 
@@ -130,13 +119,22 @@ $GLOBALS['TL_DCA']['tl_faq_category'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'title' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_faq_category']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'headline' => array
 		(
@@ -144,14 +142,18 @@ $GLOBALS['TL_DCA']['tl_faq_category'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'jumpTo' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_faq_category']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr')
+			'foreignKey'              => 'tl_page.title',
+			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
 		),
 		'allowComments' => array
 		(
@@ -159,7 +161,8 @@ $GLOBALS['TL_DCA']['tl_faq_category'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'notify' => array
 		(
@@ -168,7 +171,8 @@ $GLOBALS['TL_DCA']['tl_faq_category'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('notify_admin', 'notify_author', 'notify_both'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_faq_category']
+			'reference'               => &$GLOBALS['TL_LANG']['tl_faq_category'],
+			'sql'                     => "varchar(16) NOT NULL default ''"
 		),
 		'sortOrder' => array
 		(
@@ -178,42 +182,48 @@ $GLOBALS['TL_DCA']['tl_faq_category'] = array
 			'inputType'               => 'select',
 			'options'                 => array('ascending', 'descending'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(12) NOT NULL default ''"
 		),
 		'perPage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_faq_category']['perPage'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'moderate' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_faq_category']['moderate'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'bbcode' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_faq_category']['bbcode'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'requireLogin' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_faq_category']['requireLogin'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'disableCaptcha' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_faq_category']['disableCaptcha'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		)
 	)
 );
@@ -224,8 +234,8 @@ $GLOBALS['TL_DCA']['tl_faq_category'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @author     Leo Feyer <http://contao.org>
+ * @package    Faq
  */
 class tl_faq_category extends Backend
 {
@@ -275,7 +285,7 @@ class tl_faq_category extends Backend
 		}
 
 		// Check current action
-		switch ($this->Input->get('act'))
+		switch (Input::get('act'))
 		{
 			case 'create':
 			case 'select':
@@ -284,11 +294,11 @@ class tl_faq_category extends Backend
 
 			case 'edit':
 				// Dynamically add the record to the user profile
-				if (!in_array($this->Input->get('id'), $root))
+				if (!in_array(Input::get('id'), $root))
 				{
 					$arrNew = $this->Session->get('new_records');
 
-					if (is_array($arrNew['tl_faq_category']) && in_array($this->Input->get('id'), $arrNew['tl_faq_category']))
+					if (is_array($arrNew['tl_faq_category']) && in_array(Input::get('id'), $arrNew['tl_faq_category']))
 					{
 						// Add permissions on user level
 						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
@@ -302,7 +312,7 @@ class tl_faq_category extends Backend
 							if (is_array($arrFaqp) && in_array('create', $arrFaqp))
 							{
 								$arrFaqs = deserialize($objUser->faqs);
-								$arrFaqs[] = $this->Input->get('id');
+								$arrFaqs[] = Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user SET faqs=? WHERE id=?")
 											   ->execute(serialize($arrFaqs), $this->User->id);
@@ -321,7 +331,7 @@ class tl_faq_category extends Backend
 							if (is_array($arrFaqp) && in_array('create', $arrFaqp))
 							{
 								$arrFaqs = deserialize($objGroup->faqs);
-								$arrFaqs[] = $this->Input->get('id');
+								$arrFaqs[] = Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user_group SET faqs=? WHERE id=?")
 											   ->execute(serialize($arrFaqs), $this->User->groups[0]);
@@ -329,7 +339,7 @@ class tl_faq_category extends Backend
 						}
 
 						// Add new element to the user object
-						$root[] = $this->Input->get('id');
+						$root[] = Input::get('id');
 						$this->User->faqs = $root;
 					}
 				}
@@ -338,9 +348,9 @@ class tl_faq_category extends Backend
 			case 'copy':
 			case 'delete':
 			case 'show':
-				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && !$this->User->hasAccess('delete', 'faqp')))
+				if (!in_array(Input::get('id'), $root) || (Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'faqp')))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' FAQ category ID "'.$this->Input->get('id').'"', 'tl_faq_category checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' FAQ category ID "'.Input::get('id').'"', 'tl_faq_category checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -349,7 +359,7 @@ class tl_faq_category extends Backend
 			case 'deleteAll':
 			case 'overrideAll':
 				$session = $this->Session->getData();
-				if ($this->Input->get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'faqp'))
+				if (Input::get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'faqp'))
 				{
 					$session['CURRENT']['IDS'] = array();
 				}
@@ -361,9 +371,9 @@ class tl_faq_category extends Backend
 				break;
 
 			default:
-				if (strlen($this->Input->get('act')))
+				if (strlen(Input::get('act')))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' FAQ categories', 'tl_faq_category checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' FAQ categories', 'tl_faq_category checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -418,5 +428,3 @@ class tl_faq_category extends Backend
 		return ($this->User->isAdmin || $this->User->hasAccess('delete', 'faqp')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 }
-
-?>

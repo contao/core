@@ -1,31 +1,13 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Config
- * @license    LGPL
- * @filesource
+ * @package Core
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
 
@@ -38,7 +20,7 @@ $GLOBALS['TL_CONFIG']['os'] = array
 	'Windows CE'    => array('os'=>'win-ce',     'mobile'=>true),
 	'Windows Phone' => array('os'=>'win-ce',     'mobile'=>true),
 	'Windows'       => array('os'=>'win',        'mobile'=>false),
-	'iPad'          => array('os'=>'ios',        'mobile'=>true),
+	'iPad'          => array('os'=>'ios',        'mobile'=>false),
 	'iPhone'        => array('os'=>'ios',        'mobile'=>true),
 	'iPod'          => array('os'=>'ios',        'mobile'=>true),
 	'Android'       => array('os'=>'android',    'mobile'=>true),
@@ -57,17 +39,15 @@ $GLOBALS['TL_CONFIG']['os'] = array
  */
 $GLOBALS['TL_CONFIG']['browser'] = array
 (
-	'MSIE'       => array('browser'=>'ie',           'shorty'=>'ie', 'version'=>'/^.*?MSIE (\d+(\.\d+)*).*$/'),
-	'Firefox'    => array('browser'=>'firefox',      'shorty'=>'fx', 'version'=>'/^.*Firefox\/(\d+(\.\d+)*).*$/'),
-	'Chrome'     => array('browser'=>'chrome',       'shorty'=>'ch', 'version'=>'/^.*Chrome\/(\d+(\.\d+)*).*$/'),
-	'OmniWeb'    => array('browser'=>'omniweb',      'shorty'=>'ow', 'version'=>'/^.*Version\/(\d+(\.\d+)*).*$/'),
-	'Safari'     => array('browser'=>'safari',       'shorty'=>'sf', 'version'=>'/^.*Version\/(\d+(\.\d+)*).*$/'),
-	'Opera Mini' => array('browser'=>'opera-mini',   'shorty'=>'oi', 'version'=>'/^.*Opera Mini\/(\d+(\.\d+)*).*$/'),
-	'Opera Mobi' => array('browser'=>'opera-mobile', 'shorty'=>'om', 'version'=>'/^.*Version\/(\d+(\.\d+)*).*$/'),
-	'Opera'      => array('browser'=>'opera',        'shorty'=>'op', 'version'=>'/^.*Version\/(\d+(\.\d+)*).*$/'),
-	'IEMobile'   => array('browser'=>'ie-mobile',    'shorty'=>'im', 'version'=>'/^.*IEMobile (\d+(\.\d+)*).*$/'),
-	'Camino'     => array('browser'=>'camino',       'shorty'=>'ca', 'version'=>'/^.*Camino\/(\d+(\.\d+)*).*$/'),
-	'Konqueror'  => array('browser'=>'konqueror',    'shorty'=>'ko', 'version'=>'/^.*Konqueror\/(\d+(\.\d+)*).*$/')
+	'MSIE'       => array('browser'=>'ie',           'shorty'=>'ie', 'engine'=>'trident', 'version'=>'/^.*?MSIE (\d+(\.\d+)*).*$/'),
+	'Firefox'    => array('browser'=>'firefox',      'shorty'=>'fx', 'engine'=>'gecko',   'version'=>'/^.*Firefox\/(\d+(\.\d+)*).*$/'),
+	'Chrome'     => array('browser'=>'chrome',       'shorty'=>'ch', 'engine'=>'webkit',  'version'=>'/^.*Chrome\/(\d+(\.\d+)*).*$/'),
+	'OmniWeb'    => array('browser'=>'omniweb',      'shorty'=>'ow', 'engine'=>'webkit',  'version'=>'/^.*Version\/(\d+(\.\d+)*).*$/'),
+	'Safari'     => array('browser'=>'safari',       'shorty'=>'sf', 'engine'=>'webkit',  'version'=>'/^.*Version\/(\d+(\.\d+)*).*$/'),
+	'Opera Mini' => array('browser'=>'opera-mini',   'shorty'=>'oi', 'engine'=>'presto',  'version'=>'/^.*Opera Mini\/(\d+(\.\d+)*).*$/'),
+	'Opera Mobi' => array('browser'=>'opera-mobile', 'shorty'=>'om', 'engine'=>'presto',  'version'=>'/^.*Version\/(\d+(\.\d+)*).*$/'),
+	'Opera'      => array('browser'=>'opera',        'shorty'=>'op', 'engine'=>'presto',  'version'=>'/^.*Version\/(\d+(\.\d+)*).*$/'),
+	'IEMobile'   => array('browser'=>'ie-mobile',    'shorty'=>'im', 'engine'=>'trident', 'version'=>'/^.*IEMobile (\d+(\.\d+)*).*$/'),
+	'Camino'     => array('browser'=>'camino',       'shorty'=>'ca', 'engine'=>'gecko',   'version'=>'/^.*Camino\/(\d+(\.\d+)*).*$/'),
+	'Konqueror'  => array('browser'=>'konqueror',    'shorty'=>'ko', 'engine'=>'webkit',  'version'=>'/^.*Konqueror\/(\d+(\.\d+)*).*$/')
 );
-
-?>

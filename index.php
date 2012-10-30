@@ -2,30 +2,12 @@
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Frontend
- * @license    LGPL
- * @filesource
+ * @package Core
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
 
@@ -33,7 +15,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'FE');
-require('system/initialize.php');
+require 'system/initialize.php';
 
 
 /**
@@ -41,8 +23,8 @@ require('system/initialize.php');
  *
  * Main front end controller.
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @author     Leo Feyer <http://contao.org>
+ * @package    Core
  */
 class Index extends Frontend
 {
@@ -78,6 +60,7 @@ class Index extends Frontend
 	{
 		global $objPage;
 		$pageId = $this->getPageIdFromUrl();
+		$objRootPage = null;
 
 		// Load a website root page object if there is no page ID
 		if ($pageId === null)
@@ -94,21 +77,18 @@ class Index extends Frontend
 			$objHandler->generate($pageId);
 		}
 		// Throw a 404 error if URL rewriting is active and the URL contains the index.php fragment
-		elseif ($GLOBALS['TL_CONFIG']['rewriteURL'] && strncmp($this->Environment->request, 'index.php/', 10) === 0)
+		elseif ($GLOBALS['TL_CONFIG']['rewriteURL'] && strncmp(Environment::get('request'), 'index.php/', 10) === 0)
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 			$objHandler->generate($pageId);
 		}
 
-		$time = time();
-
-		// Get the current page object
-		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-								  ->execute((is_numeric($pageId) ? $pageId : 0), $pageId);
+		// Get the current page object(s)
+		$objPage = PageModel::findPublishedByIdOrAlias($pageId);
 
 		// Check the URL and language of each page if there are multiple results
-		if ($objPage->numRows > 1)
+		if ($objPage !== null && $objPage->count() > 1)
 		{
 			$objNewPage = null;
 			$arrPages = array();
@@ -116,8 +96,9 @@ class Index extends Frontend
 			// Order by domain and language
 			while ($objPage->next())
 			{
-				$objCurrentPage = $this->getPageDetails($objPage->id);
-				$domain = ($objCurrentPage->domain != '') ? $objCurrentPage->domain : '*';
+				$objCurrentPage = $this->getPageDetails($objPage->current());
+
+				$domain = $objCurrentPage->domain ?: '*';
 				$arrPages[$domain][$objCurrentPage->rootLanguage] = $objCurrentPage;
 
 				// Also store the fallback language
@@ -127,22 +108,25 @@ class Index extends Frontend
 				}
 			}
 
+			$strHost = Environment::get('host');
+
 			// Look for a root page whose domain name matches the host name
-			if (isset($arrPages[$this->Environment->host]))
+			if (isset($arrPages[$strHost]))
 			{
-				$arrLangs = $arrPages[$this->Environment->host];
+				$arrLangs = $arrPages[$strHost];
 			}
 			else
 			{
 				$arrLangs = $arrPages['*']; // Empty domain
 			}
 
-			// Try to find a page matching the language parameter
+			// Use the first result (see #4872)
 			if (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 			{
-				$objNewPage = $arrLangs['*']; // Fallback language
+				$objNewPage = current($arrLangs);
 			}
-			elseif (($lang = $this->Input->get('language')) != '' && isset($arrLangs[$lang]))
+			// Try to find a page matching the language parameter
+			elseif (($lang = Input::get('language')) != '' && isset($arrLangs[$lang]))
 			{
 				$objNewPage = $arrLangs[$lang];
 			}
@@ -154,8 +138,8 @@ class Index extends Frontend
 			}
 		}
 
-		// Throw a 404 error if the result is still ambiguous
-		if ($objPage->numRows != 1)
+		// Throw a 404 error if the page could not be found or the result is still ambiguous
+		if ($objPage === null || ($objPage instanceof Model\Collection && $objPage->count() != 1))
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
@@ -172,7 +156,7 @@ class Index extends Frontend
 		// Inherit the settings from the parent pages if it has not been done yet
 		if (!is_bool($objPage->protected))
 		{
-			$objPage = $this->getPageDetails($objPage->id);
+			$objPage = $this->getPageDetails($objPage);
 		}
 
 		// Use the global date format if none is set
@@ -208,7 +192,7 @@ class Index extends Frontend
 		}
 
 		// Check wether the language matches the root page language
-		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $this->Input->get('language') != $objPage->rootLanguage)
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && Input::get('language') != $objPage->rootLanguage)
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
@@ -219,11 +203,11 @@ class Index extends Frontend
 		if ($objPage->domain != '')
 		{
 			// Load an error 404 page object
-			if ($objPage->domain != $this->Environment->host)
+			if ($objPage->domain != Environment::get('host'))
 			{
 				$this->User->authenticate();
 				$objHandler = new $GLOBALS['TL_PTY']['error_404']();
-				$objHandler->generate($objPage->id, $objPage->domain, $this->Environment->host);
+				$objHandler->generate($objPage->id, $objPage->domain, Environment::get('host'));
 			}
 		}
 
@@ -266,6 +250,9 @@ class Index extends Frontend
 				$objHandler->generate($objPage);
 				break;
 		}
+
+		// Stop the script (see #4565)
+		exit;
 	}
 
 
@@ -280,27 +267,26 @@ class Index extends Frontend
 			return;
 		}
 
-		$this->import('Environment');
-
 		/**
 		 * If the request string is empty, look for a cached page matching the
 		 * primary browser language. This is a compromise between not caching
 		 * empty requests at all and considering all browser languages, which
 		 * is not possible for various reasons.
 		 */
-		if ($this->Environment->request == '' || $this->Environment->request == 'index.php')
+		if (Environment::get('request') == '' || Environment::get('request') == 'index.php')
 		{
 			// Return if the language is added to the URL and the empty domain will be redirected
 			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'])
 			{
 				return;
 			}
- 
-			$strCacheKey = $this->Environment->base .'empty.'. $this->Environment->httpAcceptLanguage[0];
+
+			$arrLanguage = Environment::get('httpAcceptLanguage');
+			$strCacheKey = Environment::get('base') .'empty.'. $arrLanguage[0];
 		}
 		else
 		{
-			$strCacheKey = $this->Environment->base . $this->Environment->request;
+			$strCacheKey = Environment::get('base') . Environment::get('request');
 		}
 
 		// HOOK: add custom logic
@@ -313,10 +299,34 @@ class Index extends Frontend
 			}
 		}
 
-		$strCacheFile = TL_ROOT . '/system/tmp/' . md5($strCacheKey) . '.html';
+		$blnFound = false;
+
+		// Check for a mobile layout
+		if (Environment::get('agent')->mobile)
+		{
+			$strCacheKey = md5($strCacheKey . '.mobile');
+			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html';
+
+			if (file_exists($strCacheFile))
+			{
+				$blnFound = true;
+			}
+		}
+
+		// Check for a regular layout
+		if (!$blnFound)
+		{
+			$strCacheKey = md5($strCacheKey);
+			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html';
+
+			if (file_exists($strCacheFile))
+			{
+				$blnFound = true;
+			}
+		}
 
 		// Return if the file does not exist
-		if (!file_exists($strCacheFile))
+		if (!$blnFound)
 		{
 			return;
 		}
@@ -326,7 +336,7 @@ class Index extends Frontend
 
 		// Include the file
 		ob_start();
-		require_once($strCacheFile);
+		require_once $strCacheFile;
 
 		// The file has expired
 		if ($expire < time())
@@ -344,10 +354,10 @@ class Index extends Frontend
 		$session = $this->Session->getData();
 
 		// Set the new referer
-		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != $this->Environment->requestUri)
+		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != Environment::get('requestUri'))
 		{
 			$session['referer']['last'] = $session['referer']['current'];
-			$session['referer']['current'] = $this->Environment->requestUri;
+			$session['referer']['current'] = Environment::get('requestUri');
 		}
 
 		// Store the session data
@@ -359,7 +369,7 @@ class Index extends Frontend
 
 		// Replace the insert tags and then re-replace the request_token
 		// tag in case a form element has been loaded via insert tag
-		$strBuffer = $this->replaceInsertTags($strBuffer);
+		$strBuffer = $this->replaceInsertTags($strBuffer, false);
 		$strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $strBuffer);
 
 		// Content type
@@ -399,5 +409,3 @@ class Index extends Frontend
  */
 $objIndex = new Index();
 $objIndex->run();
-
-?>

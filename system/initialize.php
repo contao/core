@@ -2,51 +2,40 @@
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    System
- * @license    LGPL
- * @filesource
+ * @package Core
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
+
+
+/**
+ * Store the microtime
+ */
+define('TL_START', microtime(true));
 
 
 /**
  * Define the root path to the Contao installation
  */
-define('TL_ROOT', dirname(dirname(__FILE__)));
+define('TL_ROOT', dirname(__DIR__));
 
 
 /**
  * Include functions, constants and interfaces
  */
-require(TL_ROOT . '/system/functions.php');
-require(TL_ROOT . '/system/constants.php');
-require(TL_ROOT . '/system/interface.php');
+require TL_ROOT . '/system/helper/functions.php';
+require TL_ROOT . '/system/config/constants.php';
+require TL_ROOT . '/system/helper/interface.php';
 
 
 /**
- * Try to disable PHPSESSID
+ * Try to disable the PHPSESSID
  */
 @ini_set('session.use_trans_sid', 0);
+@ini_set('session.cookie_httponly', true);
 
 
 /**
@@ -69,19 +58,47 @@ require(TL_ROOT . '/system/interface.php');
 
 
 /**
- * Load the basic classes
+ * Register the class and template loader
+ */
+require TL_ROOT . '/system/modules/core/library/Contao/ClassLoader.php';
+class_alias('Contao\\ClassLoader', 'ClassLoader');
+
+require TL_ROOT . '/system/modules/core/library/Contao/TemplateLoader.php';
+class_alias('Contao\\TemplateLoader', 'TemplateLoader');
+
+ClassLoader::scanAndRegister(); // config/autoload.php
+
+
+/**
+ * Register the SwiftMailer and SimplePie autoloaders
+ */
+require_once TL_ROOT . '/system/vendor/swiftmailer/classes/Swift.php';
+
+Swift::registerAutoload(function() {
+	require TL_ROOT . '/system/vendor/swiftmailer/swift_init.php';
+});
+
+require_once TL_ROOT . '/system/vendor/simplepie/autoloader.php';
+
+
+/**
+ * Get the Config instance
  */
 $objConfig = Config::getInstance();
-$objEnvironment = Environment::getInstance();
-$objInput = Input::getInstance();
-$objToken = RequestToken::getInstance();
+
+
+/**
+ * Initialize the Input and RequestToken class
+ */
+Input::initialize();
+RequestToken::initialize();
 
 
 /**
  * Set error_reporting
  */
 @ini_set('display_errors', ($GLOBALS['TL_CONFIG']['displayErrors'] ? 1 : 0));
-error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']['logErrors'] ? E_ALL|E_STRICT : 0));
+error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']['logErrors']) ? E_ALL|E_STRICT : 0);
 
 
 /**
@@ -96,8 +113,8 @@ error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']
  */
 if ($GLOBALS['TL_CONFIG']['websitePath'] === null)
 {
-	$path = preg_replace('/\/contao\/[^\/]*$/i', '', $objEnvironment->requestUri);
-	$path = preg_replace('/\/$/i', '', $path);
+	$path = preg_replace('/\/contao\/[^\/]*$/', '', Environment::get('requestUri'));
+	$path = preg_replace('/\/$/', '', $path);
 
 	try
 	{
@@ -132,9 +149,9 @@ if (USE_MBSTRING && function_exists('mb_regex_encoding'))
 /**
  * Set the default language
  */
-if ($objInput->post('language'))
+if (Input::post('language'))
 {
-	$GLOBALS['TL_LANGUAGE'] = $objInput->post('language');
+	$GLOBALS['TL_LANGUAGE'] = Input::post('language');
 }
 elseif (isset($_SESSION['TL_LANGUAGE']))
 {
@@ -142,9 +159,9 @@ elseif (isset($_SESSION['TL_LANGUAGE']))
 }
 else
 {
-	foreach ($objEnvironment->httpAcceptLanguage as $v)
+	foreach (Environment::get('httpAcceptLanguage') as $v)
 	{
-		if (is_dir(TL_ROOT . '/system/modules/backend/languages/' . $v))
+		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . $v))
 		{
 			$GLOBALS['TL_LANGUAGE'] = $v;
 			$_SESSION['TL_LANGUAGE'] = $v;
@@ -161,44 +178,38 @@ else
  */
 if (file_exists(TL_ROOT . '/system/config/initconfig.php'))
 {
-	include(TL_ROOT . '/system/config/initconfig.php');
+	include TL_ROOT . '/system/config/initconfig.php';
 }
 
 
 /**
  * Check the request token upon POST requests
  */
-if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !defined('BYPASS_TOKEN_CHECK'))
+if ($_POST && !RequestToken::validate(Input::post('REQUEST_TOKEN')))
 {
-	// Exit if the token cannot be validated
-	if (!$objToken->validate($objInput->post('REQUEST_TOKEN')))
+	// Force JavaScript redirect upon Ajax requests (IE requires absolute link)
+	if (Environment::get('isAjaxRequest'))
 	{
-		// Force JavaScript redirect upon Ajax requests (IE requires absolute link)
-		if ($objEnvironment->isAjaxRequest)
+		echo '<script>location.replace("' . Environment::get('base') . 'contao/")</script>';
+	}
+	else
+	{
+		// Send an error 400 header if it is not an Ajax request
+		header('HTTP/1.1 400 Bad Request');
+
+		if (file_exists(TL_ROOT . '/templates/be_referer.html5'))
 		{
-			echo '<script>location.replace("' . $objEnvironment->base . 'contao/index.php")</script>';
+			include TL_ROOT . '/templates/be_referer.html5';
+		}
+		elseif (file_exists(TL_ROOT . '/system/modules/core/templates/be_referer.html5'))
+		{
+			include TL_ROOT . '/system/modules/core/templates/be_referer.html5';
 		}
 		else
 		{
-			// Send an error 400 header if it is not an Ajax request
-			header('HTTP/1.1 400 Bad Request');
-
-			if (file_exists(TL_ROOT . '/templates/be_referer.html5'))
-			{
-				include(TL_ROOT . '/templates/be_referer.html5');
-			}
-			elseif (file_exists(TL_ROOT . '/system/modules/backend/templates/be_referer.html5'))
-			{
-				include(TL_ROOT . '/system/modules/backend/templates/be_referer.html5');
-			}
-			else
-			{
-				echo 'Invalid request token. Please <a href="javascript:window.location.href=window.location.href">go back</a> and try again.';
-			}
+			echo 'Invalid request token. Please <a href="javascript:window.location.href=window.location.href">go back</a> and try again.';
 		}
-
-		exit;
 	}
-}
 
-?>
+	exit;
+}

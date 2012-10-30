@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="<?php echo $this->language; ?>">
+<head>
+<meta charset="<?php echo $this->charset; ?>">
+<title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
+<base href="<?php echo $this->base; ?>">
+<link rel="stylesheet" href="<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add('assets/mootools/stylect/css/stylect.css');
+  $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
+  $objCombiner->add('system/themes/'. $this->theme .'/diff.css');
+  echo $objCombiner->getCombinedFile();
+?>">
+<!--[if IE]><link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
+<?php echo $this->stylesheets; ?>
+<script><?php echo $this->getLocaleString(); ?></script>
+<script src="<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
+  $objCombiner->add('assets/mootools/stylect/js/stylect.js');
+  echo $objCombiner->getCombinedFile();
+?>"></script>
+<?php echo $this->javascripts; ?>
+<!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+</head>
+<body class="__ua__">
+
+<div id="container">
+<div id="main">
+
+<form action="<?php echo $this->action; ?>" method="get">
+<div class="formbody">
+<input type="hidden" name="table" value="<?php echo $this->table; ?>">
+<input type="hidden" name="pid" value="<?php echo $this->pid; ?>">
+
+<select name="from" id="ctrl_from" class="tl_select">
+<?php foreach ($this->versions as $k=>$v): ?>
+  <option value="<?php echo $k; ?>"<?php if ($v['version'] == $this->from): ?> selected="selected"<?php endif; ?>><?php echo $v['info']; ?></option>
+<?php endforeach; ?>
+</select> 
+
+<span class="arrow">→</span>
+
+<select name="to" id="ctrl_to" class="tl_select">
+<?php foreach ($this->versions as $k=>$v): ?>
+  <option value="<?php echo $k; ?>"<?php if ($v['version'] == $this->to): ?> selected="selected"<?php endif; ?>><?php echo $v['info']; ?></option>
+<?php endforeach; ?>
+</select> 
+
+<input type="submit" class="tl_submit" value="<?php echo $this->showLabel; ?>">
+</div>
+</form>
+
+<div id="diff">
+<?php echo $this->content; ?> 
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

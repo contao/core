@@ -1,0 +1,40 @@
+Contao Extension Repository - License Conditions
+------------------------------------------------
+
+This software was developed by Peter Koch (community nick "Acenes") and is property of:
+
+	IBK Software AG
+	Bondastrasse 45
+	7000 Chur
+	Switzerland
+
+Author Contact:
+
+	http://ibk-software.com/contact
+
+Disclaimer:
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Licenses and distribution conditions:
+
+	Modules repository:
+
+		GNU Lesser Public License Version 3 as published by the Free Software
+		Foundation. See the files LGPL3.txt and GPL3.txt for details. You
+		should have received these files with the GNU Lesser General Public
+		License and the GNU General Public License along with this program.
+		If not, see http://www.gnu.org/licenses/
+
+	Modules rep_listrev, rep_autran, rep_server:
+
+		This software is licensed for exclusive use to the Contao project.
+		Distribution or usage outside of the official Contao websites
+		is prohibited without a written permission from IBK Software AG.
+
+---
+Chur, 2010-31-05
+Peter Koch
+IBK Software AG

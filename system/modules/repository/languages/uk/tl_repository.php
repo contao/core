@@ -1,0 +1,174 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/uk/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$GLOBALS['TL_LANG']['tl_repository']['category'][0] = 'Категорія';
+$GLOBALS['TL_LANG']['tl_repository']['category'][1] = 'Будь ласка, виберіть категорію розширень системи.';
+$GLOBALS['TL_LANG']['tl_repository']['copyright'][0] = 'Авторське право';
+$GLOBALS['TL_LANG']['tl_repository']['copyright'][1] = 'Введіть інформацію про авторське право (напр.: © 2007-2012 Компанія «Роги та копита»).';
+$GLOBALS['TL_LANG']['tl_repository']['description'][0] = 'Опис';
+$GLOBALS['TL_LANG']['tl_repository']['description'][1] = 'Дані HTML теги є доступними: %s';
+$GLOBALS['TL_LANG']['tl_repository']['extension'][0] = 'Розширення';
+$GLOBALS['TL_LANG']['tl_repository']['extension'][1] = 'Будь ласка, виберіть назву розширення.';
+$GLOBALS['TL_LANG']['tl_repository']['functionality'][0] = 'Функціональність';
+$GLOBALS['TL_LANG']['tl_repository']['functionality'][1] = 'Чи забезпечує дане розширення необхідний функціонал ?';
+$GLOBALS['TL_LANG']['tl_repository']['license'][0] = 'Ліцензія';
+$GLOBALS['TL_LANG']['tl_repository']['license'][1] = 'Будь ласка, введіть коротку ліцензійну інформацію. Повний текст ліцензійної угоди Ви можете додати до файлу LICENSE.txt.';
+$GLOBALS['TL_LANG']['tl_repository']['name'][0] = 'Назва';
+$GLOBALS['TL_LANG']['tl_repository']['name'][1] = 'Назва модуля повинно починатись із наступних символів: a-z, A-Z або 0-9. Рекомендовано використовувати слова в нижньому регістрі. Додатково можна використовувати символи підкреслення «_», або дефісу «-».';
+$GLOBALS['TL_LANG']['tl_repository']['popularity'][0] = 'Популярність';
+$GLOBALS['TL_LANG']['tl_repository']['popularity'][1] = '%s/%s (завантажень/встановлень)';
+$GLOBALS['TL_LANG']['tl_repository']['quality'][0] = 'Якість';
+$GLOBALS['TL_LANG']['tl_repository']['quality'][1] = 'Наскільки важким у встановленні, конфігуруванні та користуванні є даний модуль?';
+$GLOBALS['TL_LANG']['tl_repository']['releasedate'][0] = 'Дата випуску';
+$GLOBALS['TL_LANG']['tl_repository']['releasedate'][1] = 'Введіть дату публікації даної збірки в форматі %s';
+$GLOBALS['TL_LANG']['tl_repository']['selversion'][0] = 'Версія';
+$GLOBALS['TL_LANG']['tl_repository']['selversion'][1] = 'Будь ласка, виберіть версію';
+$GLOBALS['TL_LANG']['tl_repository']['type'][0] = 'Тип';
+$GLOBALS['TL_LANG']['tl_repository']['type'][1] = 'Будь ласка, виберіть тип розширення.';
+$GLOBALS['TL_LANG']['tl_repository']['usability'][0] = 'Зручність користування';
+$GLOBALS['TL_LANG']['tl_repository']['usability'][1] = 'Чи відповідає розширення стандартам Contao по зручності користування та функціональності?';
+$GLOBALS['TL_LANG']['tl_repository']['version'][0] = 'Версія';
+$GLOBALS['TL_LANG']['tl_repository']['version'][1] = 'Номери версій повинні бути в форматі «n.n.n s», де «n» - ціле число та «s» - одна строка з наступного списку: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable';
+$GLOBALS['TL_LANG']['tl_repository']['lickey'][0] = 'Ліцензійний ключ';
+$GLOBALS['TL_LANG']['tl_repository']['lickey'][1] = 'Будь ласка, введіть ліцензійний ключ від виробника розширення.';
+$GLOBALS['TL_LANG']['tl_repository']['uninstprotect'][0] = 'Зняти захист';
+$GLOBALS['TL_LANG']['tl_repository']['uninstprotect'][1] = 'Захистити розширення від випадкового видалення.';
+$GLOBALS['TL_LANG']['tl_repository']['updateprotect'][0] = 'Оновлення захисту';
+$GLOBALS['TL_LANG']['tl_repository']['updateprotect'][1] = 'Захист від випадкового продовження поновлення.';
+$GLOBALS['TL_LANG']['tl_repository']['author'] = 'Автор';
+$GLOBALS['TL_LANG']['tl_repository']['build'] = 'Збірка';
+$GLOBALS['TL_LANG']['tl_repository']['cancel'] = 'Відмінити';
+$GLOBALS['TL_LANG']['tl_repository']['continue'] = 'Продовжити';
+$GLOBALS['TL_LANG']['tl_repository']['dependencies'] = 'Залежності розширення';
+$GLOBALS['TL_LANG']['tl_repository']['dependents'] = 'Інші розширення, що залежать від даного розширення';
+$GLOBALS['TL_LANG']['tl_repository']['dependentsdel'] = 'Наступні розширення залежні від <em>%s</em> та можуть будти поламаними:';
+$GLOBALS['TL_LANG']['tl_repository']['donate'] = 'Спонсорувати';
+$GLOBALS['TL_LANG']['tl_repository']['downloads'] = 'Завантажень пакету';
+$GLOBALS['TL_LANG']['tl_repository']['extensionnotfound'] = 'Розширення не знайдено.';
+$GLOBALS['TL_LANG']['tl_repository']['forum'] = 'Форум';
+$GLOBALS['TL_LANG']['tl_repository']['installs'] = 'Онлайнових інсталяцій';
+$GLOBALS['TL_LANG']['tl_repository']['langtrans'] = '%s переклад';
+$GLOBALS['TL_LANG']['tl_repository']['manual'] = 'Інструкція по користуванню';
+$GLOBALS['TL_LANG']['tl_repository']['no'] = 'ні';
+$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = 'Розширення незнайдено.';
+$GLOBALS['TL_LANG']['tl_repository']['orderby'] = 'Сортувати за';
+$GLOBALS['TL_LANG']['tl_repository']['otherlanguages'] = 'Інші мови';
+$GLOBALS['TL_LANG']['tl_repository']['pageof'] = 'Сторінок %s із %s';
+$GLOBALS['TL_LANG']['tl_repository']['ratingfmt'] = '%.2f (%d голосів)';
+$GLOBALS['TL_LANG']['tl_repository']['reldownloads'] = 'Завантажень збірки';
+$GLOBALS['TL_LANG']['tl_repository']['releasenotesfor'] = 'Примітки та список змін до збірки %s';
+$GLOBALS['TL_LANG']['tl_repository']['relfunctionality'] = 'Функціональні можливості збірки';
+$GLOBALS['TL_LANG']['tl_repository']['relinstalls'] = 'Встановлень збірки';
+$GLOBALS['TL_LANG']['tl_repository']['relquality'] = 'Якість збірки';
+$GLOBALS['TL_LANG']['tl_repository']['relrating'] = 'Рейтинг збірки';
+$GLOBALS['TL_LANG']['tl_repository']['relupdates'] = 'Оновлень збірки';
+$GLOBALS['TL_LANG']['tl_repository']['relusability'] = 'Зручність користування в збірці';
+$GLOBALS['TL_LANG']['tl_repository']['save'] = 'Зберегти';
+$GLOBALS['TL_LANG']['tl_repository']['shop'] = 'Магазин';
+$GLOBALS['TL_LANG']['tl_repository']['showpicture'] = 'Показати повнорозмірне зображення';
+$GLOBALS['TL_LANG']['tl_repository']['state'] = 'Стан';
+$GLOBALS['TL_LANG']['tl_repository']['tag'] = 'Тег';
+$GLOBALS['TL_LANG']['tl_repository']['thumbnail'] = 'Зменшене зображення';
+$GLOBALS['TL_LANG']['tl_repository']['totdownloads'] = 'Загальна кількість завантажень';
+$GLOBALS['TL_LANG']['tl_repository']['totfunctionality'] = 'Загальна функціональність';
+$GLOBALS['TL_LANG']['tl_repository']['totinstalls'] = 'Загальний рівень';
+$GLOBALS['TL_LANG']['tl_repository']['totquality'] = 'Загальний рівень якості';
+$GLOBALS['TL_LANG']['tl_repository']['totrating'] = 'Загальний рейтинг';
+$GLOBALS['TL_LANG']['tl_repository']['totupdates'] = 'Загальний рівень оновлень';
+$GLOBALS['TL_LANG']['tl_repository']['totusability'] = 'Загальний рівень зручності користування';
+$GLOBALS['TL_LANG']['tl_repository']['versionfrom'] = 'Версія від';
+$GLOBALS['TL_LANG']['tl_repository']['versions'] = 'Інші версії';
+$GLOBALS['TL_LANG']['tl_repository']['versionto'] = 'Версія до';
+$GLOBALS['TL_LANG']['tl_repository']['yes'] = 'так';
+$GLOBALS['TL_LANG']['tl_repository']['action'] = 'Дія';
+$GLOBALS['TL_LANG']['tl_repository']['actionsummary'] = 'Опис';
+$GLOBALS['TL_LANG']['tl_repository']['actionsuccess'] = 'Уся послідовність дій пройшла успішно.';
+$GLOBALS['TL_LANG']['tl_repository']['actionfailed'] = 'Деякі дії невиконано.';
+$GLOBALS['TL_LANG']['tl_repository']['apply'] = 'Застосувати';
+$GLOBALS['TL_LANG']['tl_repository']['byorder'] = 'Ким: %s';
+$GLOBALS['TL_LANG']['tl_repository']['checkextension'] = 'Перевірити розширення';
+$GLOBALS['TL_LANG']['tl_repository']['dbuptodate'] = 'Базу даних оновлено';
+$GLOBALS['TL_LANG']['tl_repository']['deletingdirs'] = 'Видалення папок';
+$GLOBALS['TL_LANG']['tl_repository']['deletingfiles'] = 'Видалення файлів';
+$GLOBALS['TL_LANG']['tl_repository']['editextension'] = 'Редагувати налаштування';
+$GLOBALS['TL_LANG']['tl_repository']['extinstrecntf'] = 'Не знайдено рядків налаштування встановлення';
+$GLOBALS['TL_LANG']['tl_repository']['errdldpkg'] = 'Помилка! Неможливо завантажити пакет із репозиторію';
+$GLOBALS['TL_LANG']['tl_repository']['failed'] = 'помилка';
+$GLOBALS['TL_LANG']['tl_repository']['fileerrwrite'] = 'Помилка запису файлу %s';
+$GLOBALS['TL_LANG']['tl_repository']['filesdeleted'] = '%s файл(и) видалені';
+$GLOBALS['TL_LANG']['tl_repository']['filesinstalled'] = '%s файл(и) встановлено';
+$GLOBALS['TL_LANG']['tl_repository']['filesunchanged'] = '%s файл(и) без змін';
+$GLOBALS['TL_LANG']['tl_repository']['filesupdated'] = '%s файл(и) оновлено';
+$GLOBALS['TL_LANG']['tl_repository']['ftsearch'] = 'Повнотекстовий пошук';
+$GLOBALS['TL_LANG']['tl_repository']['goback'] = 'Повернутись назад';
+$GLOBALS['TL_LANG']['tl_repository']['install'] = 'Встановити';
+$GLOBALS['TL_LANG']['tl_repository']['installextension'] = 'Встановити/оновити розширення';
+$GLOBALS['TL_LANG']['tl_repository']['installingext'] = 'Встановити %s %s збірку %s';
+$GLOBALS['TL_LANG']['tl_repository']['installlogtitle'] = 'Журнал встановлення/оновлення файлів';
+$GLOBALS['TL_LANG']['tl_repository']['lickeyrequired'] = 'Дане розширення потребує ліцензійного ключа. Відвідайте, будь ласка, магазин виробника для його покупки.';
+$GLOBALS['TL_LANG']['tl_repository']['none'] = 'Немає';
+$GLOBALS['TL_LANG']['tl_repository']['notfound'] = 'не виявлено';
+$GLOBALS['TL_LANG']['tl_repository']['ok'] = 'OK';
+$GLOBALS['TL_LANG']['tl_repository']['okuninstextension'] = 'Дозволити деінсталяцію <em>%s</em> зараз?';
+$GLOBALS['TL_LANG']['tl_repository']['showdetails'] = 'Показати додаткову інформацію';
+$GLOBALS['TL_LANG']['tl_repository']['stateshint'] = 'Перевірити.';
+$GLOBALS['TL_LANG']['tl_repository']['status'] = 'Статус';
+$GLOBALS['TL_LANG']['tl_repository']['success'] = 'успішно';
+$GLOBALS['TL_LANG']['tl_repository']['uninstallextension'] = 'Деінсталювати розширення';
+$GLOBALS['TL_LANG']['tl_repository']['updatedatabase'] = 'Перевірити/оновити базу даних';
+$GLOBALS['TL_LANG']['tl_repository']['updateextension'] = 'Оновити розширення';
+$GLOBALS['TL_LANG']['tl_repository']['updateextensions'] = 'Оновлення вибраних розширень';
+$GLOBALS['TL_LANG']['tl_repository']['update'] = 'Оновити';
+$GLOBALS['TL_LANG']['tl_repository']['updates'] = 'Оновлення';
+$GLOBALS['TL_LANG']['tl_repository']['updatehint'] = 'Перевірте збірки, що будуть включені в оновлення.';
+$GLOBALS['TL_LANG']['tl_repository']['updatingext'] = 'Оновити %s %s збірку %s';
+$GLOBALS['TL_LANG']['tl_repository']['validate'] = 'Виправити';
+$GLOBALS['TL_LANG']['tl_repository']['validatingext'] = 'Перевірити/виправити %s %s збірку %s';
+$GLOBALS['TL_LANG']['tl_repository']['approvedForLabel'] = 'Одобрено для';
+$GLOBALS['TL_LANG']['tl_repository']['approvedForText'] = 'Contao %s до %s';
+$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule'] = 'PHP модуль SOAP не завантажений (увімкніть його за допомогою команди --enable-soap в конфігурації PHP)';
+$GLOBALS['TL_LANG']['tl_repository_statext']['uptodate'] = 'Оновлено до останньої версії.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapproved'] = 'Не затверджені на %s %s';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapprovedwith'] = 'Не затверджені із %s %s';
+$GLOBALS['TL_LANG']['tl_repository_statext']['shouldwork'] = 'Очікувана сумісність з %s %s';
+$GLOBALS['TL_LANG']['tl_repository_statext']['newversion'] = 'Доступна нова версія %s збірка %s';
+$GLOBALS['TL_LANG']['tl_repository_statext']['depmissing'] = 'Відсутнє необхідне розширення %s';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extnotfound'] = 'Розширення незнайдено в репозиторії';
+$GLOBALS['TL_LANG']['tl_repository_statext']['vernotfound'] = 'Встановлена версія не виявлена в репозиторії';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extneedkey'] = 'Для встановлення розширення спочатку необхідно отримати ліцензійний ключ';
+$GLOBALS['TL_LANG']['tl_repository_statext']['errorinstall'] = 'Невдалось встановити, оновити/виправити розширення';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['free'] = 'Вільний';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['private'] = 'Приватний';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['commercial'] = 'Комерційний';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['application'] = 'Додаток';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['plugin'] = 'Плагін';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['template'] = 'Тема';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['utility'] = 'Утиліти';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['widget'] = 'Віджет';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['translation'] = 'Переклад';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['bundle'] = 'Комплект поставки';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['other'] = 'Інше';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['core'] = 'Ядро';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['reldate'] = 'Дата випуску';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['rating'] = 'Рейтинг';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['popular'] = 'Популярність';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['name'] = 'Назва';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['title'] = 'Заголовок';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['author'] = 'Автор';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['alpha'] = 'Alpha';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['beta'] = 'Beta';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['rc'] = 'RC';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['stable'] = 'Стабільна';

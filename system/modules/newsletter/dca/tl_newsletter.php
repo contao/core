@@ -1,31 +1,13 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Newsletter
- * @license    LGPL
- * @filesource
+ * @package Newsletter
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
 
@@ -44,6 +26,14 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 		'onload_callback' => array
 		(
 			array('tl_newsletter', 'checkPermission')
+		),
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary',
+				'pid' => 'index'
+			)
 		)
 	),
 
@@ -105,7 +95,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_newsletter']['send'],
 				'href'                => 'key=send',
-				'icon'                => 'system/modules/newsletter/html/icon.gif'
+				'icon'                => 'system/modules/newsletter/assets/icon.gif'
 			)
 		)
 	),
@@ -126,6 +116,20 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'foreignKey'              => 'tl_newsletter_channel.title',
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'subject' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['subject'],
@@ -134,7 +138,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'alias' => array
 		(
@@ -142,11 +147,12 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'alias', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_newsletter', 'generateAlias')
-			)
+			),
+			'sql'                     => "varbinary(128) NOT NULL default ''"
 		),
 		'content' => array
 		(
@@ -159,7 +165,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'save_callback' => array
 			(
 				array('tl_newsletter', 'convertRelativeLinks')
-			)
+			),
+			'sql'                     => "mediumtext NULL"
 		),
 		'text' => array
 		(
@@ -167,7 +174,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('decodeEntities'=>true)
+			'eval'                    => array('decodeEntities'=>true),
+			'sql'                     => "mediumtext NULL"
 		),
 		'addFile' => array
 		(
@@ -175,14 +183,16 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'files' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['files'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true)
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'mandatory'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'template' => array
 		(
@@ -190,22 +200,25 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'default'                 => 'mail_default',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('mail_')
-		),		
+			'options'                 => $this->getTemplateGroup('mail_'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
+		),
 		'sendText' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['sendText'],
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'externalImages' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['externalImages'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'sender' => array
 		(
@@ -214,7 +227,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'search'                  => true,
 			'filter'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'email', 'maxlength'=>128, 'decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'email', 'maxlength'=>128, 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'senderName' => array
 		(
@@ -224,7 +238,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'sorting'                 => true,
 			'flag'                    => 11,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'sent' => array
 		(
@@ -232,7 +247,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'filter'                  => true,
 			'sorting'                 => true,
 			'flag'                    => 11,
-			'eval'                    => array('doNotCopy'=>true, 'isBoolean'=>true)
+			'eval'                    => array('doNotCopy'=>true, 'isBoolean'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'date' => array
 		(
@@ -240,7 +256,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'filter'                  => true,
 			'sorting'                 => true,
 			'flag'                    => 8,
-			'eval'                    => array('rgxp'=>'datim')
+			'eval'                    => array('rgxp'=>'datim'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		)
 	)
 );
@@ -251,8 +268,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @author     Leo Feyer <http://contao.org>
+ * @package    Newsletter
  */
 class tl_newsletter extends Backend
 {
@@ -287,10 +304,10 @@ class tl_newsletter extends Backend
 			$root = $this->User->newsletters;
 		}
 
-		$id = strlen($this->Input->get('id')) ? $this->Input->get('id') : CURRENT_ID;
+		$id = strlen(Input::get('id')) ? Input::get('id') : CURRENT_ID;
 
 		// Check current action
-		switch ($this->Input->get('act'))
+		switch (Input::get('act'))
 		{
 			case 'paste':
 			case 'select':
@@ -298,18 +315,18 @@ class tl_newsletter extends Backend
 				break;
 
 			case 'create':
-				if (!strlen($this->Input->get('pid')) || !in_array($this->Input->get('pid'), $root))
+				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create newsletters in channel ID "'.$this->Input->get('pid').'"', 'tl_newsletter checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to create newsletters in channel ID "'.Input::get('pid').'"', 'tl_newsletter checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
 			case 'cut':
 			case 'copy':
-				if (!in_array($this->Input->get('pid'), $root))
+				if (!in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter ID "'.$id.'" to channel ID "'.$this->Input->get('pid').'"', 'tl_newsletter checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' newsletter ID "'.$id.'" to channel ID "'.Input::get('pid').'"', 'tl_newsletter checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -329,7 +346,7 @@ class tl_newsletter extends Backend
 
 				if (!in_array($objChannel->pid, $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter ID "'.$id.'" of newsletter channel ID "'.$objChannel->pid.'"', 'tl_newsletter checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' newsletter ID "'.$id.'" of newsletter channel ID "'.$objChannel->pid.'"', 'tl_newsletter checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -360,12 +377,12 @@ class tl_newsletter extends Backend
 				break;
 
 			default:
-				if (strlen($this->Input->get('act')))
+				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_newsletter checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', 'tl_newsletter checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
-				if ($this->Input->get('key') == 'send')
+				if (Input::get('key') == 'send')
 				{
 					$objChannel = $this->Database->prepare("SELECT pid FROM tl_newsletter WHERE id=?")
 												 ->limit(1)
@@ -423,8 +440,9 @@ class tl_newsletter extends Backend
 	/**
 	 * Auto-generate the newsletter alias if it has not been set yet
 	 * @param mixed
-	 * @param DataContainer
-	 * @return string
+	 * @param \DataContainer
+	 * @return mixed
+	 * @throws \Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -434,7 +452,7 @@ class tl_newsletter extends Backend
 		if (!strlen($varValue))
 		{
 			$autoAlias = true;
-			$varValue = standardize($this->restoreBasicEntities($dc->activeRecord->subject));
+			$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->subject));
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_newsletter WHERE alias=?")
@@ -455,5 +473,3 @@ class tl_newsletter extends Backend
 		return $varValue;
 	}
 }
-
-?>

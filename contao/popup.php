@@ -2,30 +2,12 @@
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Backend
- * @license    LGPL
- * @filesource
+ * @package Core
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
 
@@ -33,16 +15,16 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../system/initialize.php');
+require_once '../system/initialize.php';
 
 
 /**
  * Class Popup
  *
- * Preview images in a back end pop up window.
+ * Pop-up file preview (file manager).
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @author     Leo Feyer <http://contao.org>
+ * @package    Core
  */
 class Popup extends Backend
 {
@@ -71,11 +53,11 @@ class Popup extends Backend
 		$this->User->authenticate();
 		$this->loadLanguageFile('default');
 
-		$strFile = $this->Input->get('src', true);
+		$strFile = Input::get('src', true);
 		$strFile = base64_decode($strFile);
 		$strFile = preg_replace('@^/+@', '', rawurldecode($strFile));
 
-		$this->strFile = $strFile; 
+		$this->strFile = $strFile;
 	}
 
 
@@ -90,7 +72,7 @@ class Popup extends Backend
 			die('Invalid file name');
 		}
 
-		// Limit preview to the tl_files directory
+		// Limit preview to the files directory
 		if (!preg_match('@^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@') . '@i', $this->strFile))
 		{
 			die('Invalid path');
@@ -109,7 +91,7 @@ class Popup extends Backend
 		}
 
 		// Open download dialogue
-		if ($this->Input->get('download') && $this->strFile)
+		if (Input::get('download') && $this->strFile)
 		{
 			$objFile = new File($this->strFile);
 
@@ -126,7 +108,7 @@ class Popup extends Backend
 			fclose($resFile);
 			ob_flush(); // see #3595
 
-			$this->redirect(str_replace('&download=1', '', $this->Environment->request));
+			$this->redirect(str_replace('&download=1', '', Environment::get('request')));
 		}
 
 		$this->Template = new BackendTemplate('be_popup');
@@ -160,11 +142,11 @@ class Popup extends Backend
 	protected function output()
 	{
 		$this->Template->theme = $this->getTheme();
-		$this->Template->base = $this->Environment->base;
+		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
+		$this->Template->title = specialchars($this->strFile);
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->href = ampersand($this->Environment->request, true) . '&amp;download=1';
+		$this->Template->href = ampersand(Environment::get('request'), true) . '&amp;download=1';
 		$this->Template->headline = basename(utf8_convert_encoding($this->strFile, $GLOBALS['TL_CONFIG']['characterSet']));
 		$this->Template->label_imagesize = $GLOBALS['TL_LANG']['MSC']['fileImageSize'];
 		$this->Template->label_filesize = $GLOBALS['TL_LANG']['MSC']['fileSize'];
@@ -173,8 +155,10 @@ class Popup extends Backend
 		$this->Template->label_atime = $GLOBALS['TL_LANG']['MSC']['fileAccessed'];
 		$this->Template->label_atime = $GLOBALS['TL_LANG']['MSC']['fileAccessed'];
 		$this->Template->label_path = $GLOBALS['TL_LANG']['MSC']['filePath'];
-		$this->Template->download = $GLOBALS['TL_LANG']['MSC']['fileDownload'];
+		$this->Template->download = specialchars($GLOBALS['TL_LANG']['MSC']['fileDownload']);
+		$this->Template->downloadTitle = specialchars($GLOBALS['TL_LANG']['MSC']['fileDownloadTitle']);
 
+		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
 	}
 }
@@ -185,5 +169,3 @@ class Popup extends Backend
  */
 $objPopup = new Popup();
 $objPopup->run();
-
-?>

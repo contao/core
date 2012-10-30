@@ -1,0 +1,35 @@
+<?php echo '<?php'; ?>
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * @package   <?php echo $this->package; ?> 
+ * @author    <?php echo $this->author; ?> 
+ * @license   <?php echo $this->license; ?> 
+ * @copyright <?php echo $this->copyright; ?> 
+ */
+
+
+/**
+ * Fields
+ */
+$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['title'] = array('Title', 'Please enter the title.');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['title_legend'] = 'Title';
+
+
+/**
+ * Buttons
+ */
+$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['new']    = array('New ', 'Create a new ');
+$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['show']   = array(' details', 'Show the details of  ID %s');
+$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['edit']   = array('Edit ', 'Edit  ID %s');
+$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['cut']    = array('Move ', 'Move  ID %s');
+$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['copy']   = array('Duplicate ', 'Duplicate  ID %s');
+$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['delete'] = array('Delete ', 'Delete  ID %s');

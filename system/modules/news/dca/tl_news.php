@@ -1,31 +1,13 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    News
- * @license    LGPL
- * @filesource
+ * @package News
+ * @link    http://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
 
@@ -46,6 +28,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_news_archive',
+		'ctable'                      => array('tl_content'),
+		'switchToEdit'                => true,
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
@@ -64,6 +48,15 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 		(
 			array('tl_news', 'adjustTime'),
 			array('tl_news', 'scheduleUpdate')
+		),
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary',
+				'pid' => 'index',
+				'alias' => 'index'
+			)
 		)
 	),
 
@@ -76,7 +69,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'fields'                  => array('date DESC'),
 			'headerFields'            => array('title', 'jumpTo', 'tstamp', 'protected', 'allowComments', 'makeFeed'),
 			'panelLayout'             => 'filter;sort,search,limit',
-			'child_record_callback'   => array('tl_news', 'listNewsArticles')
+			'child_record_callback'   => array('tl_news', 'listNewsArticles'),
+			'child_record_class'      => 'no_padding'
 		),
 		'global_operations' => array
 		(
@@ -93,8 +87,16 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'edit' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news']['edit'],
+				'href'                => 'table=tl_content',
+				'icon'                => 'edit.gif',
+				'attributes'          => 'class="contextmenu"'
+			),
+			'editmeta' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_news']['editmeta'],
 				'href'                => 'act=edit',
-				'icon'                => 'edit.gif'
+				'icon'                => 'header.gif',
+				'attributes'          => 'class="edit-header"'
 			),
 			'copy' => array
 			(
@@ -142,7 +144,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addImage', 'addEnclosure', 'source'),
-		'default'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend:hide},subheadline,teaser;{text_legend},text;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop'
+		'default'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend},subheadline,teaser;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
@@ -158,6 +160,20 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'foreignKey'              => 'tl_news_archive.title',
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'headline' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['headline'],
@@ -166,7 +182,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'alias' => array
 		(
@@ -174,11 +191,12 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'alias', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_news', 'generateAlias')
-			)
+			),
+			'sql'                     => "varbinary(128) NOT NULL default ''"
 		),
 		'author' => array
 		(
@@ -190,7 +208,9 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'flag'                    => 11,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
-			'eval'                    => array('doNotCopy'=>true, 'chosen'=>true, 'mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('doNotCopy'=>true, 'chosen'=>true, 'mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
 		),
 		'date' => array
 		(
@@ -201,7 +221,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'sorting'                 => true,
 			'flag'                    => 8,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard')
+			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'time' => array
 		(
@@ -209,7 +230,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'default'                 => time(),
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'time', 'doNotCopy'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'time', 'doNotCopy'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'subheadline' => array
 		(
@@ -217,7 +239,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'teaser' => array
 		(
@@ -225,30 +248,24 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('rte'=>'tinyMCE', 'tl_class'=>'clr')
-		),
-		'text' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['text'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'textarea',
-			'eval'                    => array('rte'=>'tinyMCE', 'helpwizard'=>true),
-			'explanation'             => 'insertTags'
+			'eval'                    => array('rte'=>'tinyMCE', 'tl_class'=>'clr'),
+			'sql'                     => "text NULL"
 		),
 		'addImage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['addImage'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'singleSRC' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true)
+			'eval'                    => array('fieldType'=>'radio', 'filesOnly'=>true, 'mandatory'=>true),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'alt' => array
 		(
@@ -256,7 +273,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'size' => array
 		(
@@ -265,7 +283,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'inputType'               => 'imageSize',
 			'options'                 => $GLOBALS['TL_CROP'],
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'imagemargin' => array
 		(
@@ -273,7 +292,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'imageUrl' => array
 		(
@@ -285,14 +305,16 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'wizard' => array
 			(
 				array('tl_news', 'pagePicker')
-			)
+			),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'fullsize' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['fullsize'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12')
+			'eval'                    => array('tl_class'=>'w50 m12'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'caption' => array
 		(
@@ -300,7 +322,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'floating' => array
 		(
@@ -309,21 +332,24 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'inputType'               => 'radioTable',
 			'options'                 => array('above', 'left', 'right', 'below'),
 			'eval'                    => array('cols'=>4, 'tl_class'=>'w50'),
-			'reference'               => &$GLOBALS['TL_LANG']['MSC']
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+			'sql'                     => "varchar(12) NOT NULL default ''"
 		),
 		'addEnclosure' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['addEnclosure'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'enclosure' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['enclosure'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true)
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'mandatory'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'source' => array
 		(
@@ -334,14 +360,18 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'inputType'               => 'radio',
 			'options'                 => array('default', 'internal', 'article', 'external'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_news'],
-			'eval'                    => array('submitOnChange'=>true, 'helpwizard'=>true)
+			'eval'                    => array('submitOnChange'=>true, 'helpwizard'=>true),
+			'sql'                     => "varchar(12) NOT NULL default ''"
 		),
 		'jumpTo' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'radio')
+			'foreignKey'              => 'tl_page.title',
+			'eval'                    => array('fieldType'=>'radio'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
 		),
 		'articleId' => array
 		(
@@ -349,7 +379,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_news', 'getArticleAlias'),
-			'eval'                    => array('chosen'=>true, 'mandatory'=>true)
+			'eval'                    => array('chosen'=>true, 'mandatory'=>true),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'url' => array
 		(
@@ -357,20 +388,23 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'target' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['target'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12')
+			'eval'                    => array('tl_class'=>'w50 m12'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'cssClass' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['cssClass'],
 			'exclude'                 => true,
-			'inputType'               => 'text'
+			'inputType'               => 'text',
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'noComments' => array
 		(
@@ -378,7 +412,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'featured' => array
 		(
@@ -386,7 +421,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'published' => array
 		(
@@ -395,21 +431,24 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true)
+			'eval'                    => array('doNotCopy'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'start' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['start'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard')
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		),
 		'stop' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['stop'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard')
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		)
 	)
 );
@@ -420,8 +459,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @author     Leo Feyer <http://contao.org>
+ * @package    News
  */
 class tl_news extends Backend
 {
@@ -453,7 +492,7 @@ class tl_news extends Backend
 			return;
 		}
 
-		// Set root IDs
+		// Set the root IDs
 		if (!is_array($this->User->news) || empty($this->User->news))
 		{
 			$root = array(0);
@@ -463,28 +502,28 @@ class tl_news extends Backend
 			$root = $this->User->news;
 		}
 
-		$id = strlen($this->Input->get('id')) ? $this->Input->get('id') : CURRENT_ID;
+		$id = strlen(Input::get('id')) ? Input::get('id') : CURRENT_ID;
 
 		// Check current action
-		switch ($this->Input->get('act'))
+		switch (Input::get('act'))
 		{
 			case 'paste':
 				// Allow
 				break;
 
 			case 'create':
-				if (!strlen($this->Input->get('pid')) || !in_array($this->Input->get('pid'), $root))
+				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create news items in news archive ID "'.$this->Input->get('pid').'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to create news items in news archive ID "'.Input::get('pid').'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
 			case 'cut':
 			case 'copy':
-				if (!in_array($this->Input->get('pid'), $root))
+				if (!in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' news item ID "'.$id.'" to news archive ID "'.$this->Input->get('pid').'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news item ID "'.$id.'" to news archive ID "'.Input::get('pid').'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -506,7 +545,7 @@ class tl_news extends Backend
 
 				if (!in_array($objArchive->pid, $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' news item ID "'.$id.'" of news archive ID "'.$objArchive->pid.'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news item ID "'.$id.'" of news archive ID "'.$objArchive->pid.'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -538,14 +577,14 @@ class tl_news extends Backend
 				break;
 
 			default:
-				if (strlen($this->Input->get('act')))
+				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access news archive ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access news archive ID ' . $id, 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -556,8 +595,9 @@ class tl_news extends Backend
 	/**
 	 * Auto-generate the news alias if it has not been set yet
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
+	 * @throws \Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -567,7 +607,7 @@ class tl_news extends Backend
 		if (!strlen($varValue))
 		{
 			$autoAlias = true;
-			$varValue = standardize($this->restoreBasicEntities($dc->activeRecord->headline));
+			$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->headline));
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_news WHERE alias=?")
@@ -596,21 +636,13 @@ class tl_news extends Backend
 	 */
 	public function listNewsArticles($arrRow)
 	{
-		$time = time();
-		$key = ($arrRow['published'] && ($arrRow['start'] == '' || $arrRow['start'] < $time) && ($arrRow['stop'] == '' || $arrRow['stop'] > $time)) ? 'published' : 'unpublished';
-		$date = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']);
-
-		return '
-<div class="cte_type ' . $key . '"><strong>' . $arrRow['headline'] . '</strong> - ' . $date . '</div>
-<div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h64' : '') . '">
-' . (($arrRow['text'] != '') ? $arrRow['text'] : $arrRow['teaser']) . '
-</div>' . "\n";
+		return '<div class="tl_content_left">' . $arrRow['headline'] . ' <span style="color:#b3b3b3;padding-left:3px">[' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']) . ']</span></div>';
 	}
 
 
 	/**
 	 * Get all articles and return them as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
 	public function getArticleAlias(DataContainer $dc)
@@ -623,7 +655,7 @@ class tl_news extends Backend
 			foreach ($this->User->pagemounts as $id)
 			{
 				$arrPids[] = $id;
-				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+				$arrPids = array_merge($arrPids, $this->Database->getChildRecords($id, 'tl_page'));
 			}
 
 			if (empty($arrPids))
@@ -646,7 +678,7 @@ class tl_news extends Backend
 
 			while ($objAlias->next())
 			{
-				$arrAlias[$objAlias->parent][$objAlias->id] = $objAlias->title . ' (' . (strlen($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn]) ? $GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] : $objAlias->inColumn) . ', ID ' . $objAlias->id . ')';
+				$arrAlias[$objAlias->parent][$objAlias->id] = $objAlias->title . ' (' . ($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] ?: $objAlias->inColumn) . ', ID ' . $objAlias->id . ')';
 			}
 		}
 
@@ -656,7 +688,7 @@ class tl_news extends Backend
 
 	/**
 	 * Adjust start end end time of the event based on date, span, startTime and endTime
-	 * @param DataContainer
+	 * @param \DataContainer
 	 */
 	public function adjustTime(DataContainer $dc)
 	{
@@ -698,7 +730,7 @@ class tl_news extends Backend
 
 	/**
 	 * Schedule a news feed update
-	 * 
+	 *
 	 * This method is triggered when a single news item or multiple news
 	 * items are modified (edit/editAll), moved (cut/cutAll) or deleted
 	 * (delete/deleteAll). Since duplicated items are unpublished by default,
@@ -706,8 +738,8 @@ class tl_news extends Backend
 	 */
 	public function scheduleUpdate()
 	{
-		// Return if there is no ID 
-		if (!CURRENT_ID || $this->Input->get('act') == 'copy')
+		// Return if there is no ID
+		if (!CURRENT_ID || Input::get('act') == 'copy')
 		{
 			return;
 		}
@@ -721,13 +753,12 @@ class tl_news extends Backend
 
 	/**
 	 * Return the link picker wizard
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
 	public function pagePicker(DataContainer $dc)
 	{
-		$strField = 'ctrl_' . $dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '');
-		return ' ' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer" onclick="Backend.pickPage(\'' . $strField . '\')"');
+		return ' <a href="contao/page.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MOD']['page'][0])).'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
@@ -743,9 +774,9 @@ class tl_news extends Backend
 	 */
 	public function iconFeatured($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen($this->Input->get('fid')))
+		if (strlen(Input::get('fid')))
 		{
-			$this->toggleFeatured($this->Input->get('fid'), ($this->Input->get('state') == 1));
+			$this->toggleFeatured(Input::get('fid'), (Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 
@@ -760,7 +791,7 @@ class tl_news extends Backend
 		if (!$row['featured'])
 		{
 			$icon = 'featured_.gif';
-		}		
+		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
@@ -775,8 +806,8 @@ class tl_news extends Backend
 	public function toggleFeatured($intId, $blnVisible)
 	{
 		// Check permissions to edit
-		$this->Input->setGet('id', $intId);
-		$this->Input->setGet('act', 'feature');
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'feature');
 		$this->checkPermission();
 
 		// Check permissions to feature
@@ -787,7 +818,7 @@ class tl_news extends Backend
 		}
 
 		$this->createInitialVersion('tl_news', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_news']['fields']['featured']['save_callback']))
 		{
@@ -818,9 +849,9 @@ class tl_news extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen($this->Input->get('tid')))
+		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 
@@ -835,7 +866,7 @@ class tl_news extends Backend
 		if (!$row['published'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
@@ -849,8 +880,8 @@ class tl_news extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check permissions to edit
-		$this->Input->setGet('id', $intId);
-		$this->Input->setGet('act', 'toggle');
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
 		$this->checkPermission();
 
 		// Check permissions to publish
@@ -861,7 +892,7 @@ class tl_news extends Backend
 		}
 
 		$this->createInitialVersion('tl_news', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_news']['fields']['published']['save_callback']))
 		{
@@ -884,5 +915,3 @@ class tl_news extends Backend
 		$this->News->generateFeed(CURRENT_ID);
 	}
 }
-
-?>

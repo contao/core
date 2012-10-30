@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="<?php echo '<?php echo $this->language; ?>'; ?>">
+<head>
+<meta charset="<?php echo '<?php echo $this->charset; ?>'; ?>">
+<title><?php echo '<?php echo $this->title; ?>'; ?> - Contao Open Source CMS <?php echo '<?php echo VERSION; ?>'; ?></title>
+<base href="<?php echo '<?php echo $this->base; ?>'; ?>">
+<link rel="stylesheet" href="<?php echo '<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add(\'system/themes/\'. $this->theme .\'/basic.css\');
+  $objCombiner->add(\'system/themes/\'. $this->theme .\'/main.css\');
+  echo $objCombiner->getCombinedFile();
+?>'; ?>">
+<!--[if IE]><link rel="stylesheet" href="<?php echo '<?php echo TL_ASSETS_URL; ?>'; ?>system/themes/<?php echo '<?php echo $this->theme; ?>'; ?>/iefixes.css"><![endif]-->
+<script><?php echo '<?php echo $this->getLocaleString(); ?>'; ?></script>
+<script src="<?php echo '<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add(\'assets/mootools/core/\' . MOOTOOLS . \'/mootools.js\', MOOTOOLS);
+  echo $objCombiner->getCombinedFile();
+?>'; ?>"></script>
+<script><?php echo '<?php echo $this->getDateString(); ?>'; ?></script>
+<?php echo '<?php echo $this->javascripts; ?>'; ?> 
+<!--[if lt IE 9]><script src="<?php echo '<?php echo TL_ASSETS_URL; ?>'; ?>assets/html5shiv/<?php echo '<?php echo HTML5SHIV; ?>'; ?>/html5shiv.js"></script><![endif]-->
+</head>
+<body class="__ua__">
+
+<div id="container">
+<div id="main">
+
+
+
+</div>
+</div>
+
+</body>
+</html>

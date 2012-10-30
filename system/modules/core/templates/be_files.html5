@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="<?php echo $this->language; ?>">
+<head>
+<meta charset="<?php echo $this->charset; ?>">
+<title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
+<base href="<?php echo $this->base; ?>">
+<?php if ($this->loadFonts): ?>
+<link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/fonts.css">
+<?php endif; ?>
+<link rel="stylesheet" href="<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
+  $objCombiner->add('system/themes/'. $this->theme .'/main.css');
+  $objCombiner->add('assets/mootools/datepicker/'. DATEPICKER .'/dashboard.css', DATEPICKER);
+  echo $objCombiner->getCombinedFile();
+?>">
+<!--[if IE]><link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
+<?php echo $this->stylesheets; ?>
+<script><?php echo $this->getLocaleString(); ?></script>
+<script src="<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
+  $objCombiner->add('assets/mootools/datepicker/'. DATEPICKER .'/datepicker.js', DATEPICKER);
+  $objCombiner->add('assets/mootools/mootao/Mootao.js');
+  $objCombiner->add('assets/contao/js/core.js');
+  $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
+  echo $objCombiner->getCombinedFile();
+?>"></script>
+<script><?php echo $this->getDateString(); ?></script>
+<?php echo $this->javascripts; ?>
+<!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+<?php echo $this->rteConfig; ?>
+<script>parent.Contao.enableFiletreeReload()</script>
+</head>
+<body class="__ua__ popup">
+
+<div id="container">
+<div id="main">
+
+<h1 class="main_headline"><?php echo $this->headline; ?></h1>
+<?php if ($this->error): ?>
+
+<p class="tl_gerror"><?php echo $this->error; ?></p>
+<?php endif; ?>
+<?php echo $this->main; ?>
+
+</div>
+
+<div class="clear"></div>
+
+</div>
+<?php if ($this->pageOffset): ?>
+
+<script>
+Backend.vScrollTo(<?php echo $this->pageOffset; ?>);
+</script>
+<?php setcookie('BE_PAGE_OFFSET', 0, 0, '/'); endif; ?>
+<?php echo $this->mootools; ?>
+
+</body>
+</html>

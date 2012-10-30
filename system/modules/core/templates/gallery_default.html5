@@ -1,0 +1,21 @@
+
+<ul>
+<?php foreach ($this->body as $class=>$row): ?>
+<?php foreach ($row as $col): ?>
+<?php if ($col->addImage): ?>
+  <li class="<?php echo $col->class; ?>">
+  <figure class="image_container"<?php if ($col->margin): ?> style="<?php echo $col->margin; ?>"<?php endif; ?>>
+<?php if ($col->href): ?>
+    <a href="<?php echo $col->href; ?>"<?php echo $col->attributes; ?> title="<?php echo $col->alt; ?>"><img src="<?php echo $col->src; ?>"<?php echo $col->imgSize; ?> alt="<?php echo $col->alt; ?>"></a>
+<?php else: ?>
+    <img src="<?php echo $col->src; ?>"<?php echo $col->imgSize; ?> alt="<?php echo $col->alt; ?>">
+<?php endif; ?>
+<?php if ($col->caption): ?>
+    <figcaption class="caption" style="width:<?php echo $col->arrSize[0]; ?>px"><?php echo $col->caption; ?></figcaption>
+<?php endif; ?>
+  </figure>
+  </li>
+<?php endif; ?>
+<?php endforeach; ?>
+<?php endforeach; ?>
+</ul>

@@ -1,47 +1,28 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
+ * 
  * Copyright (C) 2005-2012 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
  * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    News
- * @license    LGPL
- * @filesource
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/de/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-
-/**
- * Back end modules
- */
-$GLOBALS['TL_LANG']['MOD']['news'] = array('Nachrichten', 'Nachrichten verwalten und als RSS- oder Atom-Feed exportieren.');
-
-
-/**
- * Front end modules
- */
-$GLOBALS['TL_LANG']['FMD']['news']        = 'Nachrichten';
-$GLOBALS['TL_LANG']['FMD']['newslist']    = array('Nachrichtenliste', 'Fügt der Seite eine Nachrichtenliste hinzu.');
-$GLOBALS['TL_LANG']['FMD']['newsreader']  = array('Nachrichtenleser', 'Stellt einen einzelnen Nachrichtenbeitrag dar.');
-$GLOBALS['TL_LANG']['FMD']['newsarchive'] = array('Nachrichtenarchiv', 'Fügt der Seite ein Nachrichtenarchiv hinzu.');
-$GLOBALS['TL_LANG']['FMD']['newsmenu']    = array('Nachrichtenarchiv-Menü', 'Erzeugt ein Menü zur Navigation des Nachrichtenarchivs.');
-
-?>
+$GLOBALS['TL_LANG']['MOD']['news'][0] = 'Nachrichten';
+$GLOBALS['TL_LANG']['MOD']['news'][1] = 'Nachrichten verwalten und als RSS- oder Atom-Feed exportieren';
+$GLOBALS['TL_LANG']['MOD']['tl_news_feed'] = 'Nachrichten-Feeds';
+$GLOBALS['TL_LANG']['FMD']['news'] = 'Nachrichten';
+$GLOBALS['TL_LANG']['FMD']['newslist'][0] = 'Nachrichtenliste';
+$GLOBALS['TL_LANG']['FMD']['newslist'][1] = 'Fügt der Seite eine Nachrichtenliste hinzu';
+$GLOBALS['TL_LANG']['FMD']['newsreader'][0] = 'Nachrichtenleser';
+$GLOBALS['TL_LANG']['FMD']['newsreader'][1] = 'Stellt einen einzelnen Nachrichtenbeitrag dar';
+$GLOBALS['TL_LANG']['FMD']['newsarchive'][0] = 'Nachrichtenarchiv';
+$GLOBALS['TL_LANG']['FMD']['newsarchive'][1] = 'Fügt der Seite ein Nachrichtenarchiv hinzu';
+$GLOBALS['TL_LANG']['FMD']['newsmenu'][0] = 'Nachrichtenarchiv-Menü';
+$GLOBALS['TL_LANG']['FMD']['newsmenu'][1] = 'Erzeugt ein Menü zur Navigation des Nachrichtenarchivs';
