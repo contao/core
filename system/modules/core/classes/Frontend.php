@@ -236,8 +236,8 @@ abstract class Frontend extends \Controller
 			}
 		}
 
-		// Return if the alias is empty (see #4702)
-		if ($arrFragments[0] == '')
+		// Return if the alias is empty (see #4702 and #4972)
+		if ($arrFragments[0] == '' && count($arrFragments) > 1)
 		{
 			return false;
 		}

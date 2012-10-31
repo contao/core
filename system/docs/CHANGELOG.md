@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.0.1 (2012-XX-XX)
+--------------------------
+
+# Fixed
+Correctly handle URL parameters appended to the empty domain (see #4972).
+
+
 Version 3.0.0 (2012-10-30)
 --------------------------
 
