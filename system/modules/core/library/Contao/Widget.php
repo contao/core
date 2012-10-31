@@ -905,6 +905,14 @@ abstract class Widget extends \Controller
 					}
 					break;
 
+				// Check whether the current value is a language code
+				case 'language':
+					if (!\Validator::isLanguage($varInput))
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['language'], $this->strLabel));
+					}
+					break;
+
 				// HOOK: pass unknown tags to callback functions
 				default:
 					if (isset($GLOBALS['TL_HOOKS']['addCustomRegexp']) && is_array($GLOBALS['TL_HOOKS']['addCustomRegexp']))

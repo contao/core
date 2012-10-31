@@ -171,12 +171,12 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 		'language' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['language'],
-			'default'                 => $GLOBALS['TL_LANGUAGE'],
+			'default'                 => str_replace('-', '_', $GLOBALS['TL_LANGUAGE']),
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'select',
 			'options'                 => System::getLanguages(true),
-			'eval'                    => array('tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'locale', 'tl_class'=>'w50'),
 			'sql'                     => "varchar(5) NOT NULL default ''"
 		),
 		'backendTheme' => array

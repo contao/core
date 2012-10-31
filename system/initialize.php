@@ -151,7 +151,8 @@ if (USE_MBSTRING && function_exists('mb_regex_encoding'))
  */
 if (Input::post('language'))
 {
-	$GLOBALS['TL_LANGUAGE'] = Input::post('language');
+	$GLOBALS['TL_LANGUAGE'] = str_replace('_', '-', Input::post('language'));
+	$_SESSION['TL_LANGUAGE'] = $GLOBALS['TL_LANGUAGE'];
 }
 elseif (isset($_SESSION['TL_LANGUAGE']))
 {
@@ -161,7 +162,7 @@ else
 {
 	foreach (Environment::get('httpAcceptLanguage') as $v)
 	{
-		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . $v))
+		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . str_replace('-', '_', $v)))
 		{
 			$GLOBALS['TL_LANGUAGE'] = $v;
 			$_SESSION['TL_LANGUAGE'] = $v;

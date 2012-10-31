@@ -224,4 +224,17 @@ class Validator
 	{
 		return preg_match('/^[a-z]{2}(_[A-Z]{2})?$/', $varValue);
 	}
+
+
+	/**
+	 * Valid language code
+	 * 
+	 * @param mixed $varValue The value to be validated
+	 * 
+	 * @return boolean True if the value is a valid language code
+	 */
+	public static function isLanguage($varValue)
+	{
+		return preg_match('/^[a-z]{2}(\-[A-Z]{2})?$/', $varValue);
+	}
 }

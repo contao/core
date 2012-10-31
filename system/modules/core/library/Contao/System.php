@@ -350,7 +350,7 @@ abstract class System
 	{
 		if ($strLanguage === null)
 		{
-			$strLanguage = $GLOBALS['TL_LANGUAGE'];
+			$strLanguage = str_replace('-', '_', $GLOBALS['TL_LANGUAGE']);
 		}
 
 		// Fall back to english

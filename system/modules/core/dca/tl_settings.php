@@ -537,7 +537,7 @@ class tl_settings extends Backend
 
 			if ($blnCheckInactiveModules && in_array($strModule, $arrInactiveModules))
 			{
-				$strFile = sprintf('%s/system/modules/%s/languages/%s/modules.php', TL_ROOT, $strModule, $GLOBALS['TL_LANGUAGE']);
+				$strFile = sprintf('%s/system/modules/%s/languages/%s/modules.php', TL_ROOT, $strModule, str_replace('-', '_', $GLOBALS['TL_LANGUAGE']));
 
 				if (file_exists($strFile))
 				{

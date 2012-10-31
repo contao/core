@@ -754,6 +754,8 @@ abstract class Controller extends \System
 
 		foreach ($langs as $lang)
 		{
+			$lang = substr($lang, 0, 2);
+
 			if (isset($GLOBALS['TL_LANG']['LNG'][$lang]))
 			{
 				$return[$lang] = $GLOBALS['TL_LANG']['LNG'][$lang] . '=' . $lang;
@@ -868,7 +870,7 @@ abstract class Controller extends \System
 		// TCPDF configuration
 		$l['a_meta_dir'] = 'ltr';
 		$l['a_meta_charset'] = $GLOBALS['TL_CONFIG']['characterSet'];
-		$l['a_meta_language'] = $GLOBALS['TL_LANGUAGE'];
+		$l['a_meta_language'] = substr($GLOBALS['TL_LANGUAGE'], 0, 2);
 		$l['w_page'] = 'page';
 
 		// Include library

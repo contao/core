@@ -87,7 +87,7 @@ class RepositoryBackendModule extends BackendModule
 		$this->loadLanguageFile('tl_repository');
 		$this->loadLanguageFile('languages');
 		$this->Template->rep = $this->rep;
-		$this->languages = rtrim($GLOBALS['TL_LANGUAGE'].','.trim($GLOBALS['TL_CONFIG']['repository_languages']),',');
+		$this->languages = rtrim(str_replace('-', '_', $GLOBALS['TL_LANGUAGE']).','.trim($GLOBALS['TL_CONFIG']['repository_languages']),',');
 		$this->languages = implode(',',array_unique(explode(',',$this->languages)));
 
 		// complete rep initialization

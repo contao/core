@@ -305,7 +305,7 @@ class FrontendUser extends \User
 		// Set language
 		if ($this->language != '')
 		{
-			$GLOBALS['TL_LANGUAGE'] = $this->language;
+			$GLOBALS['TL_LANGUAGE'] = str_replace('_', '-', $this->language);
 		}
 
 		$GLOBALS['TL_USERNAME'] = $this->username;

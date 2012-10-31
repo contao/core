@@ -103,7 +103,7 @@ class Index extends Backend
 		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->userLanguage = $GLOBALS['TL_LANG']['tl_user']['language'][0];
 		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['MSC']['loginTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
-		$this->Template->curLanguage = Input::post('language') ?: $GLOBALS['TL_LANGUAGE'];
+		$this->Template->curLanguage = Input::post('language') ?: str_replace('-', '_', $GLOBALS['TL_LANGUAGE']);
 		$this->Template->curUsername = Input::post('username') ?: '';
 		$this->Template->uClass = ($_POST && !Input::post('username')) ? ' class="login_error"' : '';
 		$this->Template->pClass = ($_POST && !Input::post('password')) ? ' class="login_error"' : '';

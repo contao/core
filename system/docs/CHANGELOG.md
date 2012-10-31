@@ -5,7 +5,9 @@ Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Improved
-Language dialects such as `fr_FR` are now supported (see #4836).
+Language dialects such as `fr_FR` are now supported (see #4836). Note that
+locales like `fr_FR` (used to store user languages) differ from language codes
+like `fr-FR` (used to define page languages).
 
 ### Improved
 The pageTree widget is now sortable just like the fileTree widget and the custom

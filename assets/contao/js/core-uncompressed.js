@@ -1583,7 +1583,7 @@ var Backend =
 		// Update the name, label and ID attributes
 		li.getElements('input').each(function(inp) {
 			inp.value = '';
-			inp.name = inp.name.replace(/\[[a-z]{2}\]/, '['+opt.value+']');
+			inp.name = inp.name.replace(/\[[a-z]{2}(_[A-Z]{2})?\]/, '['+opt.value+']');
 			var lbl = inp.getPrevious('label');
 			var i = parseInt(lbl.get('for').replace(/ctrl_[^_]+_/, ''));
 			lbl.set('for', lbl.get('for').replace(i, i+1));

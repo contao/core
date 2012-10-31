@@ -298,8 +298,8 @@ class BackendUser extends \User
 			}
 		}
 
-		$GLOBALS['TL_LANGUAGE'] = $this->language;
 		$GLOBALS['TL_USERNAME'] = $this->username;
+		$GLOBALS['TL_LANGUAGE'] = str_replace('_', '-', $this->language);
 
 		$GLOBALS['TL_CONFIG']['showHelp'] = $this->showHelp;
 		$GLOBALS['TL_CONFIG']['useRTE'] = $this->useRTE;
