@@ -131,6 +131,7 @@ $GLOBALS['TL_LANG']['LNG']['ik'] = 'Inupiak';
 $GLOBALS['TL_LANG']['LNG']['is'] = 'Icelandic';
 $GLOBALS['TL_LANG']['LNG']['is_IS'] = 'Icelandic (Iceland)';
 $GLOBALS['TL_LANG']['LNG']['it'] = 'Italian';
+$GLOBALS['TL_LANG']['LNG']['it_CH'] = 'Italian (Switzerland)';
 $GLOBALS['TL_LANG']['LNG']['it_IT'] = 'Italian (Italy)';
 $GLOBALS['TL_LANG']['LNG']['iu'] = 'Inuktitut (Eskimo)';
 $GLOBALS['TL_LANG']['LNG']['ja'] = 'Japanese';
