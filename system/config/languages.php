@@ -13,7 +13,6 @@
 
 /**
  * Languages (thanks to Leo Unglaub)
- * @see http://www.sub.uni-goettingen.de/ssgfi/projekt/doku/sprachcode.html
  */
 $languages = array
 (
@@ -235,7 +234,7 @@ $languages = array
 	'sw_KE' => 'Swahili (Kenya)',
 	'ta'    => 'Tamil',
 	'ta_IN' => 'Tamil (India)',
-	'ta_LK' => 'Tamil (Sri-Lanka)',
+	'ta_LK' => 'Tamil (Sri Lanka)',
 	'te'    => 'Tegulu',
 	'te_IN' => 'Tegulu (India)',
 	'tg'    => 'Tajik',
