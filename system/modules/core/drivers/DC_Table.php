@@ -4284,48 +4284,57 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			return '';
 		}
 		
-		// prepare the panel array
-		$arrPanels = $this->preparePanelArray();
+		$panelLayout = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout'];
+		$arrPanels = trimsplit(';', $panelLayout);
+		$intFilterPanel = 0;
 
-		// prepare the filter panels
-		$arrFilterPanels = array();
-		$intFilterPanelCount = 0;
-
-		foreach ($this->getFilterFields() as $arrFilterField)
+		foreach ($arrPanels as $strPanel)
 		{
-			$arrFilterPanels[] = $this->filterMenu($arrFilterField);
-		}
+			$panels = '';
+			$arrSubPanels = trimsplit(',', $strPanel);
 
-		// prepare the panels
-		foreach ($arrPanels as $k => $arrSubPanels)
+			foreach ($arrSubPanels as $strSubPanel)
 		{
-			foreach ($arrSubPanels as $kk => $strSubPanelKey)
-			{
-				switch ($strSubPanelKey)
+				$panel = '';
+
+				// Regular panels
+				if ($strSubPanel == 'search' || $strSubPanel == 'limit' || $strSubPanel == 'sort')
 				{
-					case 'filter':
-						if (!empty($arrFilterPanels[$intFilterPanelCount]))
+					$panel = $this->{$strSubPanel . 'Menu'}();
+				}
+
+				// Multiple filter subpanels can be defined to split the fields across panels
+				elseif ($strSubPanel == 'filter')
 						{
-							$arrPanels[$k][$kk] = $arrFilterPanels[$intFilterPanelCount];
+					$panel = $this->{$strSubPanel . 'Menu'}(++$intFilterPanel);
 						}
-						$intFilterPanelCount++;
-						break;
-					case 'search':
-					case 'limit':
-					case 'sort':
-						$arrPanels[$k][$kk] = $this->{$strSubPanelKey . 'Menu'}();
-						break;
 					
 					// call the panel_callback
-					default:
-						$arrCallback = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panel_callback'][$strSubPanelKey];
+				else
+				{
+					$arrCallback = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panel_callback'][$strSubPanel];
 						if (is_array($arrCallback))
 						{
 							$this->import($arrCallback[0]);
-							$arrPanels[$k][$kk] = $this->$arrCallback[0]->$arrCallback[1]($this);
+						$panel = $this->$arrCallback[0]->$arrCallback[1]($this);
 						}
 				}
+
+				if ($panel != '')
+				{
+					$panels = $panel . $panels;
+				}
 			}
+
+			if ($panels != '')
+			{
+				$arrPanels[] = $panels;
+			}
+			}
+
+		if (empty($arrPanels))
+		{
+			return '';
 		}
 
 		if (\Input::post('FORM_SUBMIT') == 'tl_filters')
@@ -4334,27 +4343,28 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		}
 
 		$return = '';
-		$intLast = count($arrPanels) - 1;
+		$intTotal = count($arrPanels);
+		$intLast = $intTotal - 1;
 
-		for ($i=0; $i<count($arrPanels); $i++)
+		for ($i=0; $i<$intTotal; $i++)
 		{
-			$return .= '<div class="tl_panel">';
+			$submit = '';
 	
 			if ($i == $intLast)
 			{
-				$return .= '
+				$submit = '
+
 <div class="tl_submit_panel tl_subpanel">
 <input type="image" name="filter" id="filter" src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/reload.gif" class="tl_img_submit" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['applyTitle']) . '" alt="' . specialchars($GLOBALS['TL_LANG']['MSC']['apply']) . '">
 </div>';
 			}
 			
-			foreach ($arrPanels[$i] as $strSubPanelHtml)
-			{
-				$return .= $strSubPanelHtml;
-			}
+			$return .= '
+<div class="tl_panel">'.$submit.$arrPanels[$i].'
 
+<div class="clear"></div>
 			
-			$return .= '<div class="clear"></div></div>';
+</div>';
 		}
 
 		$return = '
@@ -4368,66 +4378,6 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 ';
 
 		return $return;
-	}
-
-
-	/**
-	 * Prepare the panel array
-	 * @return array
-	 */
-	protected function preparePanelArray()
-	{
-		$arrReturn = array();
-		$arrPanels = trimsplit(';', $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout']);
-
-		foreach ($arrPanels as $intPanelKey => $strPanel)
-		{
-			// prevent empty panels
-			if ($strPanel == '')
-			{
-				continue;
-			}
-			
-			$arrSubPanels = trimsplit(',', $strPanel);
-			
-			foreach ($arrSubPanels as $intSubPanelKey => $strSubPanel)
-			{
-				// prevent empty subpanels
-				if ($strSubPanel == '')
-				{
-					continue;
-				}
-
-				$arrReturn[$intPanelKey][$intSubPanelKey] = $strSubPanel;
-			}
-		}
-		
-		return $arrReturn;
-	}
-
-
-	/**
-	 * Prepare the filter fields
-	 * @return array
-	 */
-	protected function getFilterFields()
-	{
-		$arrFilterFields = array();
-
-		// Get the filter fields
-
-		foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'] as $k=>$v)
-		{
-			if ($v['filter'])
-			{
-				// convert to int so that "true" becomes 1 (backward compatibility)
-				$arrFilterFields[(int) $v['filter']][] = $k;
-			}
-		}
-
-		ksort($arrFilterFields);
-
-		return array_values($arrFilterFields);
 	}
 
 
@@ -4728,18 +4678,27 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 	/**
 	 * Generate the filter panel and return it as HTML string
-	 * @param array containing the field names that build a filter
+	 * @param int
 	 * @return string
 	 */
-	protected function filterMenu($arrFilterFields)
+	protected function filterMenu($intFilterPanel)
 	{
 		$fields = '';
 		$this->bid = 'tl_buttons_a';
 		$session = $this->Session->getData();
 		$filter = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4) ? $this->strTable.'_'.CURRENT_ID : $this->strTable;
 
+		// Get the sorting fields
+		foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'] as $k=>$v)
+		{
+			if (intval($v['filter']) == $intFilterPanel)
+			{
+				$sortingFields[] = $k;
+			}
+		}
+
 		// Return if there are no sorting fields
-		if (empty($arrFilterFields))
+		if (empty($sortingFields))
 		{
 			return '';
 		}
@@ -4747,7 +4706,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		// Set filter from user input
 		if (\Input::post('FORM_SUBMIT') == 'tl_filters')
 		{
-			foreach ($arrFilterFields as $field)
+			foreach ($sortingFields as $field)
 			{
 				if (\Input::post($field, true) != 'tl_'.$field)
 				{
@@ -4765,7 +4724,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		// Set filter from table configuration
 		else
 		{
-			foreach ($arrFilterFields as $field)
+			foreach ($sortingFields as $field)
 			{
 				if (isset($session['filter'][$filter][$field]))
 				{
@@ -4844,7 +4803,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		}
 
 		// Add sorting options
-		foreach ($arrFilterFields as $cnt=>$field)
+		foreach ($sortingFields as $cnt=>$field)
 		{
 			$arrValues = array();
 			$arrProcedure = array();
