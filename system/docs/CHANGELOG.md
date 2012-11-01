@@ -5,6 +5,9 @@ Version 3.0.1 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Fixed an issue in the mediaelement.js MooTools adapter (see #4917).
+
+### Fixed
 Correctly assing the classes "first" and "last" in the (mini) calendar if the
 week does not start on Sunday (see #4970).
 
