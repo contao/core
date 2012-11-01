@@ -4,7 +4,11 @@ Contao Open Source CMS Changelog
 Version 3.0.1 (2012-XX-XX)
 --------------------------
 
-# Fixed
+### Fixed
+Correctly assing the classes "first" and "last" in the (mini) calendar if the
+week does not start on Sunday (see #4970).
+
+### Fixed
 Correctly handle URL parameters appended to the empty domain (see #4972).
 
 

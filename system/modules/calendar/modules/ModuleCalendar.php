@@ -179,7 +179,7 @@ class ModuleCalendar extends \Events
 		for ($i=0; $i<7; $i++)
 		{
 			$intCurrentDay = ($i + $this->cal_startDay) % 7;
-			$arrDays[$intCurrentDay] = $GLOBALS['TL_LANG']['DAYS'][$intCurrentDay];
+			$arrDays[$i] = $GLOBALS['TL_LANG']['DAYS'][$intCurrentDay];
 		}
 
 		return $arrDays;
