@@ -97,7 +97,7 @@ class ContentDownload extends \ContentElement
 		$this->Template->title = specialchars($this->titleText ?: $this->linkTitle);
 		$this->Template->href = \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objFile->value);
 		$this->Template->filesize = $this->getReadableSize($objFile->filesize, 1);
-		$this->Template->icon = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
+		$this->Template->icon = TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon;
 		$this->Template->mime = $objFile->mime;
 		$this->Template->extension = $objFile->extension;
 		$this->Template->path = $objFile->dirname;

@@ -140,14 +140,14 @@ class ModuleNewsletterReader extends \Module
 
 						if (in_array($objFile->extension, $allowedDownload))
 						{
-							$src = 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
+							$src = 'assets/contao/images/' . $objFile->icon;
 
 							if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
 							{
 								$arrEnclosures[$i]['size'] = ' ' . $imgSize[3];
 							}
 
-							$arrEnclosures[$i]['icon'] = TL_FILES_URL . $src;
+							$arrEnclosures[$i]['icon'] = TL_ASSETS_URL . $src;
 							$arrEnclosures[$i]['link'] = basename($arrEnclosure[$i]);
 							$arrEnclosures[$i]['filesize'] = $this->getReadableSize($objFile->filesize);
 							$arrEnclosures[$i]['title'] = ucfirst(str_replace('_', ' ', $objFile->filename));

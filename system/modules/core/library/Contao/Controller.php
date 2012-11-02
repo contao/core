@@ -2077,11 +2077,20 @@ abstract class Controller extends \System
 	 */
 	public static function generateImage($src, $alt='', $attributes='')
 	{
+		$static = TL_FILES_URL;
 		$src = rawurldecode($src);
 
 		if (strpos($src, '/') === false)
 		{
-			$src = 'system/themes/' . static::getTheme() . '/images/' . $src;
+			if (strncmp($src, 'icon', 4) === 0)
+			{
+				$static = TL_ASSETS_URL;
+				$src = 'assets/contao/images/' . $src;
+			}
+			else
+			{
+				$src = 'system/themes/' . static::getTheme() . '/images/' . $src;
+			}
 		}
 
 		if (!file_exists(TL_ROOT .'/'. $src))
@@ -2090,7 +2099,7 @@ abstract class Controller extends \System
 		}
 
 		$size = getimagesize(TL_ROOT .'/'. $src);
-		return '<img src="' . TL_FILES_URL . static::urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
+		return '<img src="' . $static . static::urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
 	}
 
 
@@ -3112,7 +3121,7 @@ abstract class Controller extends \System
 					'title'     => ucfirst(str_replace('_', ' ', $objFile->filename)),
 					'href'      => \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . static::urlEncode($objFiles->path),
 					'enclosure' => $objFiles->path,
-					'icon'      => TL_FILES_URL . 'system/themes/' . static::getTheme() . '/images/' . $objFile->icon,
+					'icon'      => TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon,
 					'mime'      => $objFile->mime
 				);
 			}
