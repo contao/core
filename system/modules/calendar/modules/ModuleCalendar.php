@@ -178,8 +178,28 @@ class ModuleCalendar extends \Events
 
 		for ($i=0; $i<7; $i++)
 		{
+			$strClass = '';
 			$intCurrentDay = ($i + $this->cal_startDay) % 7;
-			$arrDays[$i] = $GLOBALS['TL_LANG']['DAYS'][$intCurrentDay];
+
+			if ($i == 0)
+			{
+				$strClass .= ' col_first';
+			}
+			elseif ($i == 6)
+			{
+				$strClass .= ' col_last';
+			}
+
+			if ($intCurrentDay == 0 || $intCurrentDay == 6)
+			{
+				$strClass .= ' weekend';
+			}
+
+			$arrDays[$intCurrentDay] = array
+			(
+				'class' => $strClass,
+				'name' => $GLOBALS['TL_LANG']['DAYS'][$intCurrentDay]
+			);
 		}
 
 		return $arrDays;
