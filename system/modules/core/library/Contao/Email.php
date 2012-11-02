@@ -30,7 +30,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2011-2012
  */
-class Email extends \System
+class Email
 {
 
 	/**
@@ -117,7 +117,6 @@ class Email extends \System
 	 */
 	public function __construct()
 	{
-		parent::__construct();
 		$this->strCharset = $GLOBALS['TL_CONFIG']['characterSet'];
 
 		// Instantiate mailer
@@ -319,7 +318,7 @@ class Email extends \System
 				break;
 		}
 
-		return parent::__get($strKey);
+		return null;
 	}
 
 
@@ -498,7 +497,7 @@ class Email extends \System
 		// Add the administrator e-mail as default sender
 		if ($this->strSender == '')
 		{
-			list($this->strSenderName, $this->strSender) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
+			list($this->strSenderName, $this->strSender) = \String::splitFriendlyEmail($GLOBALS['TL_CONFIG']['adminEmail']);
 		}
 
 		// Sender
@@ -568,7 +567,7 @@ class Email extends \System
 			// Support friendly name addresses and internationalized domain names
 			foreach ($varRecipients as $v)
 			{
-				list($strName, $strEmail) = $this->splitFriendlyName($v);
+				list($strName, $strEmail) = \String::splitFriendlyEmail($v);
 
 				$strName = trim($strName, ' "');
 				$strEmail = \Idna::encodeEmail($strEmail);

@@ -306,6 +306,30 @@ class String
 
 
 	/**
+	 * Split a friendly-name e-address and return name and e-mail as array
+	 * 
+	 * @param string $strEmail A friendly-name e-mail address
+	 * 
+	 * @return array An array with name and e-mail address
+	 */
+	public static function splitFriendlyEmail($strEmail)
+	{
+		if (strpos($strEmail, '<') !== false)
+		{
+			return array_map('trim', explode(' <', str_replace('>', '', $strEmail)));
+		}
+		elseif (strpos($strEmail, '[') !== false)
+		{
+			return array_map('trim', explode(' [', str_replace(']', '', $strEmail)));
+		}
+		else
+		{
+			return array('', $strEmail);
+		}
+	}
+
+
+	/**
 	 * Wrap words after a particular number of characers
 	 * 
 	 * @param string  $strString The string to wrap

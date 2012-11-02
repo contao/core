@@ -60,7 +60,7 @@ class Newsletter extends \Backend
 		// Add default sender address
 		if ($objNewsletter->sender == '')
 		{
-			list($objNewsletter->senderName, $objNewsletter->sender) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
+			list($objNewsletter->senderName, $objNewsletter->sender) = \String::splitFriendlyEmail($GLOBALS['TL_CONFIG']['adminEmail']);
 		}
 
 		$arrAttachments = array();

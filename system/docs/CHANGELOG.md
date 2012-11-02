@@ -5,6 +5,10 @@ Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Moved `System::splitFriendlyName()` to `String::splitFriendlyEmail()` and
+made the `Email` class independent from the `System` class (see #4694).
+
+### Changed
 Moved `Controller::getBackendThemes()` to `Backend::getThemes()` (see #4694).
 
 ### Changed

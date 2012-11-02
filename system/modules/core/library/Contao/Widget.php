@@ -826,7 +826,7 @@ abstract class Widget extends \Controller
 
 				// Check whether the current value is a valid friendly name e-mail address
 				case 'friendly':
-					list ($strName, $varInput) = $this->splitFriendlyName($varInput);
+					list ($strName, $varInput) = \String::splitFriendlyEmail($varInput);
 					// no break;
 
 				// Check whether the current value is a valid e-mail address

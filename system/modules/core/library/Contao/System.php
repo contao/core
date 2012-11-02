@@ -659,30 +659,6 @@ abstract class System
 
 
 	/**
-	 * Split a friendly-name e-address and return name and e-mail as array
-	 * 
-	 * @param string $strEmail A friendly-name e-mail address
-	 * 
-	 * @return array An array with name and e-mail address
-	 */
-	public static function splitFriendlyName($strEmail)
-	{
-		if (strpos($strEmail, '<') !== false)
-		{
-			return array_map('trim', explode(' <', str_replace('>', '', $strEmail)));
-		}
-		elseif (strpos($strEmail, '[') !== false)
-		{
-			return array_map('trim', explode(' [', str_replace(']', '', $strEmail)));
-		}
-		else
-		{
-			return array('', $strEmail);
-		}
-	}
-
-
-	/**
 	 * Convert a byte value into a human readable format
 	 * 
 	 * @param integer $intSize     The size in bytes
@@ -1000,5 +976,20 @@ abstract class System
 	protected function isValidEmailAddress($strEmail)
 	{
 		return \Validator::isEmail($strEmail);
+	}
+
+
+	/**
+	 * Split a friendly-name e-address and return name and e-mail as array
+	 * 
+	 * @param string $strEmail A friendly-name e-mail address
+	 * 
+	 * @return array An array with name and e-mail address
+	 * 
+	 * @deprecated Use String::splitFriendlyEmail() instead
+	 */
+	public static function splitFriendlyName($strEmail)
+	{
+		return \String::splitFriendlyEmail($strEmail);
 	}
 }
