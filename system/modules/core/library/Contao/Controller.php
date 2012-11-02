@@ -674,30 +674,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Return the back end themes as array
-	 * 
-	 * @return array An array of available back end themes
-	 */
-	public static function getBackendThemes()
-	{
-		$arrReturn = array();
-		$arrThemes = scan(TL_ROOT . '/system/themes');
-
-		foreach ($arrThemes as $strTheme)
-		{
-			if (strncmp($strTheme, '.', 1) === 0 || !is_dir(TL_ROOT . '/system/themes/' . $strTheme))
-			{
-				continue;
-			}
-
-			$arrReturn[$strTheme] = $strTheme;
-		}
-
-		return $arrReturn;
-	}
-
-
-	/**
 	 * Return the timezones as array
 	 * 
 	 * @return array An array of timezones
@@ -2886,6 +2862,19 @@ abstract class Controller extends \System
 	public static function getTheme()
 	{
 		return \Backend::getTheme();
+	}
+
+
+	/**
+	 * Return the back end themes as array
+	 * 
+	 * @return array An array of available back end themes
+	 * 
+	 * @deprecated Use Backend::getThemes() instead
+	 */
+	public static function getBackendThemes()
+	{
+		return \Backend::getThemes();
 	}
 
 

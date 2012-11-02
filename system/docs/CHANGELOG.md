@@ -5,6 +5,9 @@ Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Moved `Controller::getBackendThemes()` to `Backend::getThemes()` (see #4694).
+
+### Changed
 Moved `Controller::getTheme()` to `Backend::getTheme()` (see #4662).
 
 ### Improved

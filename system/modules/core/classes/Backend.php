@@ -58,6 +58,30 @@ abstract class Backend extends \Controller
 
 
 	/**
+	 * Return the back end themes as array
+	 * 
+	 * @return array An array of available back end themes
+	 */
+	public static function getThemes()
+	{
+		$arrReturn = array();
+		$arrThemes = scan(TL_ROOT . '/system/themes');
+
+		foreach ($arrThemes as $strTheme)
+		{
+			if (strncmp($strTheme, '.', 1) === 0 || !is_dir(TL_ROOT . '/system/themes/' . $strTheme))
+			{
+				continue;
+			}
+
+			$arrReturn[$strTheme] = $strTheme;
+		}
+
+		return $arrReturn;
+	}
+
+
+	/**
 	 * Add the request token to the URL
 	 * @param string
 	 * @return string
