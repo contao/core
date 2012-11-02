@@ -151,7 +151,7 @@ class ModuleFaqPage extends \Module
 		}
 
 		$this->Template->faq = $arrFaq;
-		$this->Template->request = $this->getIndexFreeRequest(true);
+		$this->Template->request = \Environment::get('indexFreeRequest');
 		$this->Template->topLink = $GLOBALS['TL_LANG']['MSC']['backToTop'];
 	}
 }

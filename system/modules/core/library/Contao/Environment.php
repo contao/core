@@ -386,6 +386,24 @@ class Environment
 
 
 	/**
+	 * Return the request string without the index.php fragment
+	 * 
+	 * @return string The request string without the index.php fragment
+	 */
+	protected static function indexFreeRequest()
+	{
+		$strRequest = static::get('request');
+
+		if ($strRequest == 'index.php')
+		{
+			return '';
+		}
+
+		return $strRequest;
+	}
+
+
+	/**
 	 * Return the URL and path that can be used in a <base> tag
 	 * 
 	 * @return string The base URL

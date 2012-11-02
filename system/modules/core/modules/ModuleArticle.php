@@ -214,7 +214,7 @@ class ModuleArticle extends \Module
 		// Add syndication variables
 		if ($this->Template->printable)
 		{
-			$request = $this->getIndexFreeRequest(true);
+			$request = \Environment::get('indexFreeRequest');
 
 			$this->Template->print = '#';
 			$this->Template->encUrl = rawurlencode(\Environment::get('base') . \Environment::get('request'));

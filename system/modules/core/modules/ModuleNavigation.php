@@ -76,7 +76,7 @@ class ModuleNavigation extends \Module
 			$level = 0;
 		}
 
-		$this->Template->request = $this->getIndexFreeRequest(true);
+		$this->Template->request = \Environment::get('indexFreeRequest');
 		$this->Template->skipId = 'skipNavigation' . $this->id;
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
 		$this->Template->items = $this->renderNavigation($trail[$level]);

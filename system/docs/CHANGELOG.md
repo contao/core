@@ -5,6 +5,10 @@ Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Moved `System::getIndexFreeRequest()` to `Environment::get('indexFreeRequest')`
+(see #4685).
+
+### Changed
 Moved `Controller::printArticleAsPdf()` to `ModuleArticle::generatePdf()`
 (see #4683).
 

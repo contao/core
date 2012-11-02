@@ -1468,7 +1468,7 @@ abstract class Controller extends \System
 							break;
 
 						case 'request':
-							$arrCache[$strTag] = $this->getIndexFreeRequest(true);
+							$arrCache[$strTag] = \Environment::get('indexFreeRequest');
 							break;
 
 						case 'ip':

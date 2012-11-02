@@ -165,7 +165,7 @@ class ModulePassword extends \Module
 		$this->Template->formId = 'tl_lost_password';
 		$this->Template->username = specialchars($GLOBALS['TL_LANG']['MSC']['username']);
 		$this->Template->email = specialchars($GLOBALS['TL_LANG']['MSC']['emailAddress']);
-		$this->Template->action = $this->getIndexFreeRequest();
+		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['requestPassword']);
 		$this->Template->rowLast = 'row_' . count($arrFields) . ' row_last' . ((($row % 2) == 0) ? ' even' : ' odd');
 		$this->Template->tableless = $this->tableless;
@@ -256,7 +256,7 @@ class ModulePassword extends \Module
 
 		$this->Template->formId = $strToken;
 		$this->Template->fields = $objWidget->parse();
-		$this->Template->action = $this->getIndexFreeRequest();
+		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['setNewPassword']);
 		$this->Template->tableless = $this->tableless;
 	}

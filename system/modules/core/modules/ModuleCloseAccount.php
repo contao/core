@@ -146,7 +146,7 @@ class ModuleCloseAccount extends \Module
 		$this->Template->fields = $objWidget->parse();
 
 		$this->Template->formId = 'tl_close_account';
-		$this->Template->action = $this->getIndexFreeRequest();
+		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['closeAccount']);
 		$this->Template->rowLast = 'row_1 row_last odd';
 		$this->Template->tableless = $this->tableless;

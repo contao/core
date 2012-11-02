@@ -320,26 +320,6 @@ abstract class System
 
 
 	/**
-	 * Return the request string without the index.php fragment
-	 * 
-	 * @param boolean $blnAmpersand If true, ampersands will be encoded
-	 * 
-	 * @return string The request string
-	 */
-	public static function getIndexFreeRequest($blnAmpersand=true)
-	{
-		$strRequest = \Environment::get('request');
-
-		if ($strRequest == 'index.php')
-		{
-			return '';
-		}
-
-		return ampersand($strRequest, $blnAmpersand);
-	}
-
-
-	/**
 	 * Load a set of language files
 	 * 
 	 * @param string  $strName     The table name
@@ -991,5 +971,20 @@ abstract class System
 	public static function splitFriendlyName($strEmail)
 	{
 		return \String::splitFriendlyEmail($strEmail);
+	}
+
+
+	/**
+	 * Return the request string without the index.php fragment
+	 * 
+	 * @param boolean $blnAmpersand If true, ampersands will be encoded
+	 * 
+	 * @return string The request string
+	 * 
+	 * @deprecated Use Environment::get('indexFreeRequest') instead
+	 */
+	public static function getIndexFreeRequest($blnAmpersand=true)
+	{
+		return ampersand(\Environment::get('indexFreeRequest'), $blnAmpersand);
 	}
 }

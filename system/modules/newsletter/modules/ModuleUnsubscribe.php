@@ -122,7 +122,7 @@ class ModuleUnsubscribe extends \Module
 		$this->Template->submit = specialchars($GLOBALS['TL_LANG']['MSC']['unsubscribe']);
 		$this->Template->channelsLabel = $GLOBALS['TL_LANG']['MSC']['nl_channels'];
 		$this->Template->emailLabel = $GLOBALS['TL_LANG']['MSC']['emailAddress'];
-		$this->Template->action = $this->getIndexFreeRequest();
+		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->formId = 'tl_unsubscribe';
 		$this->Template->id = $this->id;
 		$this->Template->hasError = $blnHasError;
