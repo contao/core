@@ -99,7 +99,7 @@ class Changelog extends Backend
 
 		// Template variables
 		$this->Template->content = $strBuffer;
-		$this->Template->theme = $this->getTheme();
+		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['changelog']);

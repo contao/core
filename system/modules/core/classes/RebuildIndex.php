@@ -138,7 +138,7 @@ class RebuildIndex extends \Backend implements \executable
 			$objTemplate->loading = $GLOBALS['TL_LANG']['tl_maintenance']['indexLoading'];
 			$objTemplate->complete = $GLOBALS['TL_LANG']['tl_maintenance']['indexComplete'];
 			$objTemplate->indexContinue = $GLOBALS['TL_LANG']['MSC']['continue'];
-			$objTemplate->theme = $this->getTheme();
+			$objTemplate->theme = \Backend::getTheme();
 			$objTemplate->isRunning = true;
 
 			return $objTemplate->parse();

@@ -166,7 +166,7 @@ class BackendTemplate extends \Template
 	{
 		return
 			'var Contao={'
-				. 'theme:"' . $this->getTheme() . '",'
+				. 'theme:"' . \Backend::getTheme() . '",'
 				. 'lang:{'
 					. 'close:"' . $GLOBALS['TL_LANG']['MSC']['close'] . '",'
 					. 'collapse:"' . $GLOBALS['TL_LANG']['MSC']['collapseNode'] . '",'

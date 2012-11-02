@@ -141,7 +141,7 @@ class PreviewSwitch extends Backend
 
 		// Default variables
 		$this->Template->users = $arrUser;
-		$this->Template->theme = $this->getTheme();
+		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->apply = $GLOBALS['TL_LANG']['MSC']['apply'];
@@ -152,7 +152,7 @@ class PreviewSwitch extends Backend
 		$this->Template->lblShow = $GLOBALS['TL_LANG']['MSC']['hiddenShow'];
 		$this->Template->fePreview = $GLOBALS['TL_LANG']['MSC']['fePreview'];
 		$this->Template->hiddenElements = $GLOBALS['TL_LANG']['MSC']['hiddenElements'];
-		$this->Template->closeSrc = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/close.gif';
+		$this->Template->closeSrc = TL_FILES_URL . 'system/themes/' . Backend::getTheme() . '/images/close.gif';
 		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->isAdmin = $this->User->isAdmin;
 

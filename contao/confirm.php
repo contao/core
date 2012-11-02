@@ -147,7 +147,7 @@ class Confirm extends Backend
 		$this->Template->explain = $GLOBALS['TL_LANG']['ERR']['invalidTokenUrl'];
 		$this->Template->cancel = $GLOBALS['TL_LANG']['MSC']['cancelBT'];
 		$this->Template->continue = $GLOBALS['TL_LANG']['MSC']['continue'];
-		$this->Template->theme = $this->getTheme();
+		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['invalidTokenUrl']);

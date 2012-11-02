@@ -194,7 +194,7 @@ class DiffController extends Backend
 		$this->Template->showLabel = specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']);
 		$this->Template->table = Input::get('table');
 		$this->Template->pid = intval(Input::get('pid'));
-		$this->Template->theme = $this->getTheme();
+		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']);

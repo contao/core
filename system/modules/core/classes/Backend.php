@@ -40,6 +40,24 @@ abstract class Backend extends \Controller
 
 
 	/**
+	 * Return the current theme as string
+	 * 
+	 * @return string The name of the theme
+	 */
+	public static function getTheme()
+	{
+		$theme = $GLOBALS['TL_CONFIG']['backendTheme'];
+
+		if ($theme != '' && $theme != 'default' && is_dir(TL_ROOT . '/system/themes/' . $theme))
+		{
+			return $theme;
+		}
+
+		return 'default';
+	}
+
+
+	/**
 	 * Add the request token to the URL
 	 * @param string
 	 * @return string

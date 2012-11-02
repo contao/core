@@ -93,7 +93,7 @@ class Index extends Backend
 			$this->Template->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
 		}
 
-		$this->Template->theme = $this->getTheme();
+		$this->Template->theme = Backend::getTheme();
 		$this->Template->messages = Message::generate();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];

@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+Moved `Controller::getTheme()` to `Backend::getTheme()` (see #4662).
+
 ### Improved
 Added the classes "toggle_desktop" and "toggle_mobile" to the desktop/mobile
 switch link (see #4975).
