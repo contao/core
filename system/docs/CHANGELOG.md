@@ -5,6 +5,10 @@ Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Improved
+Added the classes "toggle_desktop" and "toggle_mobile" to the desktop/mobile
+switch link (see #4975).
+
+### Improved
 Language dialects such as `fr_FR` are now supported (see #4836). Note that
 locales like `fr_FR` (used to store user languages) differ from language codes
 like `fr-FR` (used to define page languages).
