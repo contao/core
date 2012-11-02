@@ -5,6 +5,10 @@ Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Moved `Controller::printArticleAsPdf()` to `ModuleArticle::generatePdf()`
+(see #4683).
+
+### Changed
 Moved `Controller::generateImage()` to `Image::getHtml()` (see #4664).
 
 ### Changed
