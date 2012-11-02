@@ -192,7 +192,7 @@ class FileSelector extends \Widget
 
 		// Return the tree
 		return '<ul class="tl_listing tree_view'.(($this->strClass != '') ? ' ' . $this->strClass : '').'" id="'.$this->strId.'">
-    <li class="tl_folder_top"><div class="tl_left">'.$this->generateImage((($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] != '') ? $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] : 'filemounts.gif')).' '.($GLOBALS['TL_CONFIG']['websiteTitle'] ?: 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
+    <li class="tl_folder_top"><div class="tl_left">'.\Image::getHtml((($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] != '') ? $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] : 'filemounts.gif')).' '.($GLOBALS['TL_CONFIG']['websiteTitle'] ?: 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
   </ul></li></ul>';
 	}
 
@@ -337,7 +337,7 @@ class FileSelector extends \Widget
 			$folderAttribute = '';
 			$img = $blnIsOpen ? 'folMinus.gif' : 'folPlus.gif';
 			$alt = $blnIsOpen ? $GLOBALS['TL_LANG']['MSC']['collapseNode'] : $GLOBALS['TL_LANG']['MSC']['expandNode'];
-			$return .= '<a href="'.$this->addToUrl($flag.'tg='.$id).'" title="'.specialchars($alt).'" onclick="Backend.getScrollOffset();return AjaxRequest.toggleFiletree(this,\''.$xtnode.'_'.$id.'\',\''.$this->strField.'\',\''.$this->strName.'\','.$level.')">'.$this->generateImage($img, '', 'style="margin-right:2px"').'</a>';
+			$return .= '<a href="'.$this->addToUrl($flag.'tg='.$id).'" title="'.specialchars($alt).'" onclick="Backend.getScrollOffset();return AjaxRequest.toggleFiletree(this,\''.$xtnode.'_'.$id.'\',\''.$this->strField.'\',\''.$this->strName.'\','.$level.')">'.\Image::getHtml($img, '', 'style="margin-right:2px"').'</a>';
 		}
 
 		// Get the icon
@@ -375,7 +375,7 @@ class FileSelector extends \Widget
 		}
 
 		// Add the file name
-		$return .= $this->generateImage($image, '', $folderAttribute).' <label title="'.specialchars($objFile->path).'" for="'.$this->strName.'_'.$id.'">'.(($objFile->type == 'folder') ? '<strong>' : '').$objFile->name.(($objFile->type == 'folder') ? '</strong>' : '').'</label>'.$thumbnail.'</div> <div class="tl_right">';
+		$return .= \Image::getHtml($image, '', $folderAttribute).' <label title="'.specialchars($objFile->path).'" for="'.$this->strName.'_'.$id.'">'.(($objFile->type == 'folder') ? '<strong>' : '').$objFile->name.(($objFile->type == 'folder') ? '</strong>' : '').'</label>'.$thumbnail.'</div> <div class="tl_right">';
 
 		// Add a checkbox or radio button
 		if ($objFile->type == 'file' || !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly'])

@@ -566,7 +566,7 @@ class tl_comments extends Backend
 	 */
 	public function editComment($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || $this->isAllowedToEditComment($row['parent'], $row['source'])) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->isAllowedToEditComment($row['parent'], $row['source'])) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -582,7 +582,7 @@ class tl_comments extends Backend
 	 */
 	public function deleteComment($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || $this->isAllowedToEditComment($row['parent'], $row['source'])) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->isAllowedToEditComment($row['parent'], $row['source'])) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -619,10 +619,10 @@ class tl_comments extends Backend
 
 		if (!$this->User->isAdmin && !$this->isAllowedToEditComment($row['parent'], $row['source']))
 		{
-			return $this->generateImage($icon) . ' ';
+			return Image::getHtml($icon) . ' ';
 		}
 
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 

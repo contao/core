@@ -5,6 +5,9 @@ Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Moved `Controller::generateImage()` to `Image::getHtml()` (see #4664).
+
+### Changed
 Moved `System::splitFriendlyName()` to `String::splitFriendlyEmail()` and
 made the `Email` class independent from the `System` class (see #4694).
 

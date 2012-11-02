@@ -182,7 +182,7 @@ class PageSelector extends \Widget
 
 		// Return the tree
 		return '<ul class="tl_listing tree_view'.(($this->strClass != '') ? ' ' . $this->strClass : '').'" id="'.$this->strId.'">
-    <li class="tl_folder_top"><div class="tl_left">'.$this->generateImage($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] ?: 'pagemounts.gif').' '.($GLOBALS['TL_CONFIG']['websiteTitle'] ?: 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
+    <li class="tl_folder_top"><div class="tl_left">'.\Image::getHtml($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] ?: 'pagemounts.gif').' '.($GLOBALS['TL_CONFIG']['websiteTitle'] ?: 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
   </ul></li></ul>';
 	}
 
@@ -312,12 +312,12 @@ class PageSelector extends \Widget
 			$folderAttribute = '';
 			$img = $blnIsOpen ? 'folMinus.gif' : 'folPlus.gif';
 			$alt = $blnIsOpen ? $GLOBALS['TL_LANG']['MSC']['collapseNode'] : $GLOBALS['TL_LANG']['MSC']['expandNode'];
-			$return .= '<a href="'.$this->addToUrl($flag.'tg='.$id).'" title="'.specialchars($alt).'" onclick="Backend.getScrollOffset();return AjaxRequest.togglePagetree(this,\''.$xtnode.'_'.$id.'\',\''.$this->strField.'\',\''.$this->strName.'\','.$level.')">'.$this->generateImage($img, '', 'style="margin-right:2px"').'</a>';
+			$return .= '<a href="'.$this->addToUrl($flag.'tg='.$id).'" title="'.specialchars($alt).'" onclick="Backend.getScrollOffset();return AjaxRequest.togglePagetree(this,\''.$xtnode.'_'.$id.'\',\''.$this->strField.'\',\''.$this->strName.'\','.$level.')">'.\Image::getHtml($img, '', 'style="margin-right:2px"').'</a>';
 		}
 
 		// Add the page name
 		$objPage->protected = ($objPage->protected || $protectedPage);
-		$return .= $this->generateImage($this->getPageStatusIcon($objPage), '', $folderAttribute).' <label title="'.specialchars($objPage->title . ' (' . $objPage->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')').'" for="'.$this->strName.'_'.$id.'">'.(($objPage->type == 'root') ? '<strong>' : '').$objPage->title.(($objPage->type == 'root') ? '</strong>' : '').'</label></div> <div class="tl_right">';
+		$return .= \Image::getHtml($this->getPageStatusIcon($objPage), '', $folderAttribute).' <label title="'.specialchars($objPage->title . ' (' . $objPage->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')').'" for="'.$this->strName.'_'.$id.'">'.(($objPage->type == 'root') ? '<strong>' : '').$objPage->title.(($objPage->type == 'root') ? '</strong>' : '').'</label></div> <div class="tl_right">';
 
 		// Add checkbox or radio button
 		switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])

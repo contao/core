@@ -431,4 +431,41 @@ class Image
 		// Return the path to new image
 		return \System::urlEncode($strCacheName);
 	}
+
+
+	/**
+	 * Generate an image tag and return it as string
+	 * 
+	 * @param string $src        The image path
+	 * @param string $alt        An optional alt attribute
+	 * @param string $attributes A string of other attributes
+	 * 
+	 * @return string The image HTML tag
+	 */
+	public static function getHtml($src, $alt='', $attributes='')
+	{
+		$static = TL_FILES_URL;
+		$src = rawurldecode($src);
+
+		if (strpos($src, '/') === false)
+		{
+			if (strncmp($src, 'icon', 4) === 0)
+			{
+				$static = TL_ASSETS_URL;
+				$src = 'assets/contao/images/' . $src;
+			}
+			else
+			{
+				$src = 'system/themes/' . static::getTheme() . '/images/' . $src;
+			}
+		}
+
+		if (!file_exists(TL_ROOT .'/'. $src))
+		{
+			return '';
+		}
+
+		$size = getimagesize(TL_ROOT .'/'. $src);
+		return '<img src="' . $static . static::urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
+	}
 }

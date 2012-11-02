@@ -2025,43 +2025,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Generate an image tag and return it as string
-	 * 
-	 * @param string $src        The image path
-	 * @param string $alt        An optional alt attribute
-	 * @param string $attributes A string of other attributes
-	 * 
-	 * @return string The image HTML tag
-	 */
-	public static function generateImage($src, $alt='', $attributes='')
-	{
-		$static = TL_FILES_URL;
-		$src = rawurldecode($src);
-
-		if (strpos($src, '/') === false)
-		{
-			if (strncmp($src, 'icon', 4) === 0)
-			{
-				$static = TL_ASSETS_URL;
-				$src = 'assets/contao/images/' . $src;
-			}
-			else
-			{
-				$src = 'system/themes/' . static::getTheme() . '/images/' . $src;
-			}
-		}
-
-		if (!file_exists(TL_ROOT .'/'. $src))
-		{
-			return '';
-		}
-
-		$size = getimagesize(TL_ROOT .'/'. $src);
-		return '<img src="' . $static . static::urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
-	}
-
-
-	/**
 	 * Compile the margin format definition based on an array of values
 	 * 
 	 * @param array  $arrValues An array of four values and a unit
@@ -3250,6 +3213,23 @@ abstract class Controller extends \System
 	protected function getImage($image, $width, $height, $mode='', $target=null, $force=false)
 	{
 		return \Image::get($image, $width, $height, $mode, $target, $force);
+	}
+
+
+	/**
+	 * Generate an image tag and return it as string
+	 * 
+	 * @param string $src        The image path
+	 * @param string $alt        An optional alt attribute
+	 * @param string $attributes A string of other attributes
+	 * 
+	 * @return string The image HTML tag
+	 * 
+	 * @deprecated Use Image::getHtml() instead
+	 */
+	public static function generateImage($src, $alt='', $attributes='')
+	{
+		return \Image::getHtml($src, $alt, $attributes);
 	}
 
 

@@ -136,7 +136,7 @@ class PageTree extends \Widget
 
 			while ($objPages->next())
 			{
-				$arrValues[] = $this->generateImage($this->getPageStatusIcon($objPages)) . ' ' . $objPages->title . ' (' . $objPages->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')';
+				$arrValues[] = \Image::getHtml($this->getPageStatusIcon($objPages)) . ' ' . $objPages->title . ' (' . $objPages->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')';
 			}
 
 			// Apply a custom sort order
