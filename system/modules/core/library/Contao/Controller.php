@@ -665,17 +665,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Return all page sections as array
-	 * 
-	 * @return array An array of active page sections
-	 */
-	public static function getPageSections()
-	{
-		return array_merge(array('header', 'left', 'right', 'main', 'footer'), trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']));
-	}
-
-
-	/**
 	 * Return the timezones as array
 	 * 
 	 * @return array An array of timezones
@@ -3207,5 +3196,18 @@ abstract class Controller extends \System
 	{
 		$objArticle = new \ModuleArticle($objArticle);
 		$objArticle->generatePdf();
+	}
+
+
+	/**
+	 * Return all page sections as array
+	 * 
+	 * @return array An array of active page sections
+	 * 
+	 * @deprecated See #4693
+	 */
+	public static function getPageSections()
+	{
+		return array_merge(array('header', 'left', 'right', 'main', 'footer'), trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']));
 	}
 }
