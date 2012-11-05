@@ -324,7 +324,7 @@ class Calendar extends \Frontend
 	 * @param string
 	 * @param string
 	 */
-	protected function addEvent($objEvent, $intStart, $intEnd, $strUrl, $strLink)
+	protected function addEvent($objEvent, $intStart, $intEnd, $strUrl, $strBase)
 	{
 		if ($intEnd < time()) // see #3917
 		{
@@ -369,22 +369,22 @@ class Calendar extends \Frontend
 			case 'internal':
 				if (($objTarget = $objEvent->getRelated('jumpTo')) !== null)
 				{
-					$link = $strLink . $this->generateFrontendUrl($objTarget->row());
+					$link = $strBase . $this->generateFrontendUrl($objTarget->row());
 				}
 				break;
 
 			case 'article':
 				if (($objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true))) !== null)
 				{
-					$link = ampersand($this->generateFrontendUrl($objArticle->getRelated('pid')->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					$link = $strBase . ampersand($this->generateFrontendUrl($objArticle->getRelated('pid')->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
 
-		// Link to default page
+		// Link to the default page
 		if ($link == '')
 		{
-			$link = sprintf($strUrl, (($objEvent->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objEvent->alias : $objEvent->id));
+			$link = sprintf($strBase . $strUrl, (($objEvent->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objEvent->alias : $objEvent->id));
 		}
 
 		// Clean the RTE output
