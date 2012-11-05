@@ -5,6 +5,10 @@ Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Moved `Controller::getPageDetails()` to `PageModel::findWithDetails()` and
+`PageModel->loadDetails()` (see #4692).
+
+### Changed
 Moved `Controller::findContentElement()` to `ContentElement::findClass()` and
 `Controller::findFrontendModule()` to `Module::findClass()` (see #4684).
 

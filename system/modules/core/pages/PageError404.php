@@ -87,7 +87,7 @@ class PageError404 extends \Frontend
 		{
 			global $objPage;
 
-			$objPage = $this->getPageDetails($obj404);
+			$objPage = $obj404->loadDetails();
 			$objHandler = new $GLOBALS['TL_PTY']['regular']();
 
 			header('HTTP/1.1 404 Not Found');

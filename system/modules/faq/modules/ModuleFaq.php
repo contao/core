@@ -70,7 +70,7 @@ class ModuleFaq extends \Frontend
 				if (!isset($arrProcessed[$objFaq->jumpTo]))
 				{
 					$domain = \Environment::get('base');
-					$objParent = $this->getPageDetails($objFaq->jumpTo);
+					$objParent = \PageModel::findWithDetails($objFaq->jumpTo);
 
 					// The target page does not exist
 					if ($objParent === null)

@@ -1223,8 +1223,8 @@ class tl_content extends Backend
 										 ->limit(1)
 										 ->execute($intPid);
 
-			// Inherit the page settings
-			$objPage = $this->getPageDetails($objArticle->pid);
+			// Load the page
+			$objPage = PageModel::findWithDetails($objArticle->pid);
 
 			// Get the theme ID
 			$objLayout = LayoutModel::findByPk($objPage->layout);
@@ -1263,8 +1263,8 @@ class tl_content extends Backend
 										 ->limit(1)
 										 ->execute($intPid);
 
-			// Inherit the page settings
-			$objPage = $this->getPageDetails($objArticle->pid);
+			// Load the page
+			$objPage = PageModel::findWithDetails($objArticle->pid);
 
 			// Get the theme ID
 			$objLayout = LayoutModel::findByPk($objPage->layout);
@@ -1309,16 +1309,18 @@ class tl_content extends Backend
 		}
 
 		// Limit pages to the website root
-		$objPage = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
-								  ->limit(1)
-								  ->execute($intPid);
+		$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
+									 ->limit(1)
+									 ->execute($intPid);
 
-		if ($objPage->numRows)
+		if ($objArticle->numRows)
 		{
-			$objPage = $this->getPageDetails($objPage->pid);
+			$objPage = PageModel::findWithDetails($objArticle->pid);
 			$arrRoot = $this->Database->getChildRecords($objPage->rootId, 'tl_page');
 			array_unshift($arrRoot, $objPage->rootId);
 		}
+
+		unset($objArticle);
 
 		// Limit pages to the user's pagemounts
 		if ($this->User->isAdmin)

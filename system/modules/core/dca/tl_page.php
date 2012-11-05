@@ -1036,7 +1036,7 @@ class tl_page extends Backend
 			if ($GLOBALS['TL_CONFIG']['folderUrl'])
 			{
 				$dc->activeRecord->alias = $varValue;
-				$objPage = $this->getPageDetails($dc->activeRecord);
+				$objPage = PageModel::findWithDetails($dc->activeRecord->id);
 
 				if ($objPage->folderUrl != '')
 				{
@@ -1045,7 +1045,7 @@ class tl_page extends Backend
 			}
 		}
 
-		$objAlias = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? OR alias=?")
+		$objAlias = $this->Database->prepare("SELECT id FROM tl_page WHERE id=? OR alias=?")
 								   ->execute($dc->id, $varValue);
 
 		// Check whether the page alias exists
@@ -1057,7 +1057,7 @@ class tl_page extends Backend
 
 			while ($objAlias->next())
 			{
-				$objCurrentPage = $this->getPageDetails($objAlias);
+				$objCurrentPage = PageModel::findWithDetails($objAlias->id);
 				$domain = $objCurrentPage->domain ?: '*';
 				$language = (!$objCurrentPage->rootIsFallback) ? $objCurrentPage->rootLanguage : '*';
 
@@ -1558,7 +1558,7 @@ class tl_page extends Backend
 
 			foreach ($ids as $id)
 			{
-				$objPage = $this->getPageDetails($id);
+				$objPage = PageModel::findWithDetails($id);
 
 				if ($objPage === null)
 				{

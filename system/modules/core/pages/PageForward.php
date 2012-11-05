@@ -57,7 +57,7 @@ class PageForward extends \Frontend
 		// Check the target page language (see #4706)
 		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 		{
-			$objNextPage = $this->getPageDetails($objNextPage); // see #3983
+			$objNextPage->loadDetails(); // see #3983
 			$strForceLang = $objNextPage->language;
 		}
 

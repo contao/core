@@ -136,7 +136,7 @@ class Calendar extends \Frontend
 				// Get the jumpTo URL
 				if (!isset($arrUrls[$jumpTo]))
 				{
-					$objParent = $this->getPageDetails($jumpTo);
+					$objParent = \PageModel::findWithDetails($jumpTo);
 					$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
 				}
 
@@ -281,7 +281,7 @@ class Calendar extends \Frontend
 				if (!isset($arrProcessed[$objCalendar->jumpTo]))
 				{
 					$domain = \Environment::get('base');
-					$objParent = $this->getPageDetails($objCalendar->jumpTo);
+					$objParent = \PageModel::findWithDetails($objCalendar->jumpTo);
 
 					// The target page does not exist
 					if ($objParent === null)

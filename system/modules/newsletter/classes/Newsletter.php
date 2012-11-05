@@ -892,7 +892,7 @@ class Newsletter extends \Backend
 				if (!isset($arrProcessed[$objNewsletter->jumpTo]))
 				{
 					$domain = \Environment::get('base');
-					$objParent = $this->getPageDetails($objNewsletter->jumpTo);
+					$objParent = \PageModel::findWithDetails($objNewsletter->jumpTo);
 
 					// The target page does not exist
 					if ($objParent === null)

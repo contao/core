@@ -577,8 +577,8 @@ class tl_article extends Backend
 		// Show only active sections
 		if ($dc->activeRecord->pid)
 		{
-			// Inherit the page settings
-			$objPage = $this->getPageDetails($dc->activeRecord->pid);
+			// Load the page
+			$objPage = PageModel::findWithDetails($dc->activeRecord->pid);
 
 			// Get the layout settings
 			$objLayout = LayoutModel::findByPk($objPage->layout);

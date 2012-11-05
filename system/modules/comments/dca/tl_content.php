@@ -121,8 +121,8 @@ class tl_content_comments extends Backend
 										 ->limit(1)
 										 ->execute($intPid);
 
-			// Inherit the page settings
-			$objPage = $this->getPageDetails($objArticle->pid);
+			// Load the page
+			$objPage = PageModel::findWithDetails($objArticle->pid);
 
 			// Get the theme ID
 			$objLayout = LayoutModel::findByPk($objPage->layout);
@@ -131,9 +131,11 @@ class tl_content_comments extends Backend
 			{
 				return array();
 			}
+
+			return $this->getTemplateGroup('com_', $objLayout->pid);
 		}
 
 		// Return all gallery templates
-		return $this->getTemplateGroup('com_', $objLayout->pid);
+		return $this->getTemplateGroup('com_');
 	}
 }

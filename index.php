@@ -96,7 +96,7 @@ class Index extends Frontend
 			// Order by domain and language
 			while ($objPage->next())
 			{
-				$objCurrentPage = $this->getPageDetails($objPage->current());
+				$objCurrentPage = $objPage->current()->loadDetails();
 
 				$domain = $objCurrentPage->domain ?: '*';
 				$arrPages[$domain][$objCurrentPage->rootLanguage] = $objCurrentPage;
@@ -146,6 +146,12 @@ class Index extends Frontend
 			$objHandler->generate($pageId);
 		}
 
+		// Make sure $objPage is a Model
+		if ($objPage instanceof Model\Collection)
+		{
+			$objPage = $objPage->current();
+		}
+
 		// Load a website root page object (will redirect to the first active regular page)
 		if ($objPage->type == 'root')
 		{
@@ -156,7 +162,7 @@ class Index extends Frontend
 		// Inherit the settings from the parent pages if it has not been done yet
 		if (!is_bool($objPage->protected))
 		{
-			$objPage = $this->getPageDetails($objPage);
+			$objPage->loadDetails();
 		}
 
 		// Use the global date format if none is set

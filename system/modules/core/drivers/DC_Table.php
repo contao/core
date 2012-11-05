@@ -3207,7 +3207,7 @@ window.addEvent(\'domready\', function() {
 		// Check protected pages
 		if ($table == 'tl_page')
 		{
-			$objParent = $this->getPageDetails($id);
+			$objParent = \PageModel::findWithDetails($id);
 			$blnProtected = $objParent->protected ? true : false;
 		}
 

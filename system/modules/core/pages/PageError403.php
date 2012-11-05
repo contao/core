@@ -63,7 +63,7 @@ class PageError403 extends \Frontend
 		{
 			global $objPage;
 
-			$objPage = $this->getPageDetails($obj403);
+			$objPage = $obj403->loadDetails();
 			$objHandler = new $GLOBALS['TL_PTY']['regular']();
 
 			header('HTTP/1.1 403 Forbidden');

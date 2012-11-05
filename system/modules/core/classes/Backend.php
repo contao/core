@@ -527,7 +527,7 @@ abstract class Backend extends \Controller
 
 		foreach ($this->eliminateNestedPages($this->User->pagemounts) as $page)
 		{
-			$objPage = $this->getPageDetails($page);
+			$objPage = \PageModel::findWithDetails($page);
 
 			// Root page mounted
 			if ($objPage->type == 'root')

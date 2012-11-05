@@ -479,192 +479,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Get the details of a page including inherited parameters
-	 * 
-	 * @param mixed $intId A page ID or a Model object
-	 * 
-	 * @return \Model|null The page model or null
-	 */
-	public static function getPageDetails($intId)
-	{
-		if (is_object($intId))
-		{
-			// Always return a Model (see #4428)
-			$objPage = ($intId instanceof \Model\Collection) ? $intId->current() : $intId;
-
-			$intId = $objPage->id;
-			$strKey = __METHOD__ . '-' . $objPage->id;
-
-			if (\Cache::has($strKey))
-			{
-				return \Cache::get($strKey);
-			}
-		}
-		else
-		{
-			if (!strlen($intId) || $intId < 1)
-			{
-				return null;
-			}
-
-			$strKey = __METHOD__ . '-' . $intId;
-
-			if (\Cache::has($strKey))
-			{
-				return \Cache::get($strKey);
-			}
-
-			$objPage = \PageModel::findByPk($intId);
-
-			if ($objPage === null)
-			{
-				return null;
-			}
-		}
-
-		// Set some default values
-		$objPage->protected = (boolean) $objPage->protected;
-		$objPage->groups = $objPage->protected ? deserialize($objPage->groups) : false;
-		$objPage->layout = $objPage->includeLayout ? $objPage->layout : false;
-		$objPage->mobileLayout = $objPage->includeLayout ? $objPage->mobileLayout : false;
-		$objPage->cache = $objPage->includeCache ? $objPage->cache : false;
-
-		$pid = $objPage->pid;
-		$type = $objPage->type;
-		$alias = $objPage->alias;
-		$name = $objPage->title;
-		$title = $objPage->pageTitle ?: $objPage->title;
-		$folderUrl = basename($objPage->alias);
-		$palias = '';
-		$pname = '';
-		$ptitle = '';
-		$trail = array($intId, $pid);
-
-		// Inherit the settings
-		if ($objPage->type == 'root')
-		{
-			$objParentPage = $objPage; // see #4610
-		}
-		else
-		{
-			// Load all parent pages
-			$objParentPage = \PageModel::findParentsById($pid);
-
-			if ($objParentPage !== null)
-			{
-				while ($objParentPage->next() && $pid > 0 && $type != 'root')
-				{
-					$pid = $objParentPage->pid;
-					$type = $objParentPage->type;
-
-					// Parent title
-					if ($ptitle == '')
-					{
-						$palias = $objParentPage->alias;
-						$pname = $objParentPage->title;
-						$ptitle = $objParentPage->pageTitle ?: $objParentPage->title;
-					}
-
-					// Page title
-					if ($type != 'root')
-					{
-						$alias = $objParentPage->alias;
-						$name = $objParentPage->title;
-						$title = $objParentPage->pageTitle ?: $objParentPage->title;
-						$folderUrl = basename($alias) . '/' . $folderUrl;
-						$trail[] = $objParentPage->pid;
-					}
-
-					// Cache
-					if ($objParentPage->includeCache && $objPage->cache === false)
-					{
-						$objPage->cache = $objParentPage->cache;
-					}
-
-					// Layout
-					if ($objParentPage->includeLayout)
-					{
-						if ($objPage->layout === false)
-						{
-							$objPage->layout = $objParentPage->layout;
-						}
-						if ($objPage->mobileLayout === false)
-						{
-							$objPage->mobileLayout = $objParentPage->mobileLayout;
-						}
-					}
-
-					// Protection
-					if ($objParentPage->protected && $objPage->protected === false)
-					{
-						$objPage->protected = true;
-						$objPage->groups = deserialize($objParentPage->groups);
-					}
-				}
-			}
-
-			// Set the titles
-			$objPage->mainAlias = $alias;
-			$objPage->mainTitle = $name;
-			$objPage->mainPageTitle = $title;
-			$objPage->parentAlias = $palias;
-			$objPage->parentTitle = $pname;
-			$objPage->parentPageTitle = $ptitle;
-			$objPage->folderUrl = $folderUrl;
-		}
-
-		// Set the root ID and title
-		if ($objParentPage !== null && $objParentPage->type == 'root')
-		{
-			$objPage->rootId = $objParentPage->id;
-			$objPage->rootTitle = $objParentPage->pageTitle ?: $objParentPage->title;
-			$objPage->domain = $objParentPage->dns;
-			$objPage->rootLanguage = $objParentPage->language;
-			$objPage->language = $objParentPage->language;
-			$objPage->staticFiles = $objParentPage->staticFiles;
-			$objPage->staticPlugins = $objParentPage->staticPlugins;
-			$objPage->dateFormat = $objParentPage->dateFormat;
-			$objPage->timeFormat = $objParentPage->timeFormat;
-			$objPage->datimFormat = $objParentPage->datimFormat;
-			$objPage->adminEmail = $objParentPage->adminEmail;
-
-			// Store whether the root page has been published
-			$time = time();
-			$objPage->rootIsPublic = ($objParentPage->published && ($objParentPage->start == '' || $objParentPage->start < $time) && ($objParentPage->stop == '' || $objParentPage->stop > $time));
-			$objPage->rootIsFallback = ($objParentPage->fallback != '');
-		}
-
-		// No root page found
-		elseif (TL_MODE == 'FE' && $objPage->type != 'root')
-		{
-			header('HTTP/1.1 404 Not Found');
-			\System::log('Page ID "'. $objPage->id .'" does not belong to a root page', 'Controller getPageDetails()', TL_ERROR);
-			die('No root page found');
-		}
-
-		$objPage->trail = array_reverse($trail);
-
-		// Remove insert tags from all titles (see #2853)
-		$objPage->title = strip_insert_tags($objPage->title);
-		$objPage->pageTitle = strip_insert_tags($objPage->pageTitle);
-		$objPage->parentTitle = strip_insert_tags($objPage->parentTitle);
-		$objPage->parentPageTitle = strip_insert_tags($objPage->parentPageTitle);
-		$objPage->mainTitle = strip_insert_tags($objPage->mainTitle);
-		$objPage->mainPageTitle = strip_insert_tags($objPage->mainPageTitle);
-		$objPage->rootTitle = strip_insert_tags($objPage->rootTitle);
-
-		// Do not cache protected pages
-		if ($objPage->protected)
-		{
-			$objPage->cache = 0;
-		}
-
-		\Cache::set($strKey, $objPage);
-		return $objPage;
-	}
-
-
-	/**
 	 * Return the timezones as array
 	 * 
 	 * @return array An array of timezones
@@ -1030,7 +844,7 @@ abstract class Controller extends \System
 									// Check the target page language (see #4706)
 									if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 									{
-										$objNext = $this->getPageDetails($objNext); // see #3983
+										$objNext->loadDetails(); // see #3983
 										$strForceLang = $objNext->language;
 									}
 
@@ -2454,7 +2268,7 @@ abstract class Controller extends \System
 		}
 
 		$strDomain = \Environment::get('base');
-		$objPage = $this->getPageDetails($intPage);
+		$objPage = \PageModel::findWithDetails($intPage);
 
 		if ($objPage->domain != '')
 		{
@@ -2606,6 +2420,67 @@ abstract class Controller extends \System
 	public static function getBackendThemes()
 	{
 		return \Backend::getThemes();
+	}
+
+
+	/**
+	 * Get the details of a page including inherited parameters
+	 * 
+	 * @param mixed $intId A page ID or a Model object
+	 * 
+	 * @return \Model|null The page model or null
+	 * 
+	 * @deprecated Use PageModel::findWithDetails() or PageModel->loadDetails() instead
+	 */
+	public static function getPageDetails($intId)
+	{
+		if ($intId instanceof \Model)
+		{
+			return $intId->loadDetails();
+		}
+		elseif ($intId instanceof \Model\Collection)
+		{
+			return $intId->current()->loadDetails();
+		}
+		elseif (is_object($intId))
+		{
+			$strKey = __METHOD__ . '-' . $intId->id;
+
+			// Try to load from cache
+			if (\Cache::has($strKey))
+			{
+				return \Cache::get($strKey);
+			}
+
+			// Create a model from the database result
+			$objPage = new \PageModel();
+			$objPage->setRow($intId->row());
+			$objPage->loadDetails();
+
+			\Cache::set($strKey, $objPage);
+			return $objPage;
+		}
+		else
+		{
+			// Invalid ID
+			if (!strlen($intId) || $intId < 1)
+			{
+				return null;
+			}
+
+			$strKey = __METHOD__ . '-' . $intId;
+
+			// Try to load from cache
+			if (\Cache::has($strKey))
+			{
+				return \Cache::get($strKey);
+			}
+
+			$objPage = \PageModel::findWithDetails($intId);
+
+			\Cache::set($strKey, $objPage);
+			return $objPage;
+		}
 	}
 
 

@@ -149,7 +149,7 @@ abstract class Frontend extends \Controller
 				// Order by domain and language
 				while ($objPages->next())
 				{
-					$objPage = static::getPageDetails($objPages->current());
+					$objPage = $objPages->current()->loadDetails();
 
 					$domain = $objPage->domain ?: '*';
 					$arrPages[$domain][$objPage->rootLanguage][] = $objPage;
