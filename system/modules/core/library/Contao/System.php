@@ -325,6 +325,8 @@ abstract class System
 	 * @param string  $strName     The table name
 	 * @param boolean $strLanguage An optional language code
 	 * @param boolean $blnNoCache  If true, the cache will be bypassed
+	 * 
+	 * @throws \Exception In case a language does not exist
 	 */
 	public static function loadLanguageFile($strName, $strLanguage=null, $blnNoCache=false)
 	{
@@ -343,6 +345,27 @@ abstract class System
 		if (isset($GLOBALS['loadLanguageFile'][$strName][$strLanguage]) && !$blnNoCache)
 		{
 			return;
+		}
+
+		$strCacheKey = $strLanguage;
+
+		// Make sure the language exists
+		if (!is_dir(TL_ROOT . '/system/modules/core/languages/' . $strLanguage))
+		{
+			$strShortLang = substr($strLanguage, 0, 2);
+
+			// Fall back to "de" if "de_DE" does not exist
+			if ($strShortLang != $strLanguage)
+			{
+				if (!is_dir(TL_ROOT . '/system/modules/core/languages/' . $strShortLang))
+				{
+					throw new \Exception("Language $strLanguage does not exist");
+				}
+				else
+				{
+					$strLanguage = $strShortLang;
+				}
+			}
 		}
 
 		$strCacheFallback = TL_ROOT . '/system/cache/language/en/' . $strName . '.php';
@@ -396,7 +419,7 @@ abstract class System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['loadLanguageFile'] as $callback)
 			{
-				static::importStatic($callback[0])->$callback[1]($strName, $strLanguage);
+				static::importStatic($callback[0])->$callback[1]($strName, $strLanguage, $strCacheKey);
 			}
 		}
 
@@ -413,7 +436,7 @@ abstract class System
 		}
 
 		// Use a global cache variable to support nested calls
-		$GLOBALS['loadLanguageFile'][$strName][$strLanguage] = true;
+		$GLOBALS['loadLanguageFile'][$strName][$strCacheKey] = true;
 	}
 
 
