@@ -5,6 +5,10 @@ Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Moved `Controller::findContentElement()` to `ContentElement::findClass()` and
+`Controller::findFrontendModule()` to `Module::findClass()` (see #4684).
+
+### Changed
 Moved `Controller::optionChecked()` and `Controller::optionSelected()` to the
 `Widget` class (see #4665).
 

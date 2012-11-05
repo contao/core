@@ -41,7 +41,7 @@ class ContentAlias extends \ContentElement
 			return '';
 		}
 
-		$strClass = $this->findContentElement($objElement->type);
+		$strClass = static::findClass($objElement->type);
 
 		if (!class_exists($strClass))
 		{

@@ -351,4 +351,28 @@ abstract class Module extends \Frontend
 		$objTemplate->items = $items;
 		return !empty($items) ? $objTemplate->parse() : '';
 	}
+
+
+	/**
+	 * Find a front end module in the FE_MOD array and return the class name
+	 * 
+	 * @param string $strName The front end module name
+	 * 
+	 * @return string The class name
+	 */
+	public static function findClass($strName)
+	{
+		foreach ($GLOBALS['FE_MOD'] as $v)
+		{
+			foreach ($v as $kk=>$vv)
+			{
+				if ($kk == $strName)
+				{
+					return $vv;
+				}
+			}
+		}
+
+		return '';
+	}
 }

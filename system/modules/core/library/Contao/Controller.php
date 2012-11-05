@@ -232,7 +232,7 @@ abstract class Controller extends \System
 				}
 			}
 
-			$strClass = $this->findFrontendModule($objRow->type);
+			$strClass = \Module::findClass($objRow->type);
 
 			// Return if the class does not exist
 			if (!class_exists($strClass))
@@ -398,7 +398,7 @@ abstract class Controller extends \System
 			$objRow->space = null;
 		}
 
-		$strClass = $this->findContentElement($objRow->type);
+		$strClass = \ContentElement::findClass($objRow->type);
 
 		// Return if the class does not exist
 		if (!class_exists($strClass))
@@ -2584,54 +2584,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Find a content element in the TL_CTE array and return the class name
-	 * 
-	 * @param string $strName The content element name
-	 * 
-	 * @return string The class name
-	 */
-	public static function findContentElement($strName)
-	{
-		foreach ($GLOBALS['TL_CTE'] as $v)
-		{
-			foreach ($v as $kk=>$vv)
-			{
-				if ($kk == $strName)
-				{
-					return $vv;
-				}
-			}
-		}
-
-		return '';
-	}
-
-
-	/**
-	 * Find a front end module in the FE_MOD array and return the class name
-	 * 
-	 * @param string $strName The front end module name
-	 * 
-	 * @return string The class name
-	 */
-	public static function findFrontendModule($strName)
-	{
-		foreach ($GLOBALS['FE_MOD'] as $v)
-		{
-			foreach ($v as $kk=>$vv)
-			{
-				if ($kk == $strName)
-				{
-					return $vv;
-				}
-			}
-		}
-
-		return '';
-	}
-
-
-	/**
 	 * Return the current theme as string
 	 * 
 	 * @return string The name of the theme
@@ -3184,5 +3136,35 @@ abstract class Controller extends \System
 	public static function optionChecked($strOption, $varValues)
 	{
 		return \Widget::optionChecked($strOption, $varValues);
+	}
+
+
+	/**
+	 * Find a content element in the TL_CTE array and return the class name
+	 * 
+	 * @param string $strName The content element name
+	 * 
+	 * @return string The class name
+	 * 
+	 * @deprecated Use ContentElement::findClass() instead
+	 */
+	public static function findContentElement($strName)
+	{
+		return \ContentElement::findClass($strName);
+	}
+
+
+	/**
+	 * Find a front end module in the FE_MOD array and return the class name
+	 * 
+	 * @param string $strName The front end module name
+	 * 
+	 * @return string The class name
+	 * 
+	 * @deprecated Use Module::findClass() instead
+	 */
+	public static function findFrontendModule($strName)
+	{
+		return \Module::findClass($strName);
 	}
 }

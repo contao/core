@@ -172,4 +172,28 @@ abstract class ContentElement extends \Frontend
 	 * Compile the content element
 	 */
 	abstract protected function compile();
+
+
+	/**
+	 * Find a content element in the TL_CTE array and return the class name
+	 * 
+	 * @param string $strName The content element name
+	 * 
+	 * @return string The class name
+	 */
+	public static function findClass($strName)
+	{
+		foreach ($GLOBALS['TL_CTE'] as $v)
+		{
+			foreach ($v as $kk=>$vv)
+			{
+				if ($kk == $strName)
+				{
+					return $vv;
+				}
+			}
+		}
+
+		return '';
+	}
 }

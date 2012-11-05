@@ -41,7 +41,7 @@ class ContentModule extends \ContentElement
 			return '';
 		}
 
-		$strClass = $this->findFrontendModule($objModule->type);
+		$strClass = \Module::findClass($objModule->type);
 
 		if (!class_exists($strClass))
 		{
