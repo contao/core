@@ -987,10 +987,10 @@ abstract class Widget extends \Controller
 	{
 		if (empty($this->varValue) && $arrOption['default'])
 		{
-			return $this->optionChecked(1, 1);
+			return static::optionChecked(1, 1);
 		}
 
-		return $this->optionChecked($arrOption['value'], $this->varValue);
+		return static::optionChecked($arrOption['value'], $this->varValue);
 	}
 
 
@@ -1005,10 +1005,72 @@ abstract class Widget extends \Controller
 	{
 		if (empty($this->varValue) && $arrOption['default'])
 		{
-			return $this->optionSelected(1, 1);
+			return static::optionSelected(1, 1);
 		}
 
-		return $this->optionSelected($arrOption['value'], $this->varValue);
+		return static::optionSelected($arrOption['value'], $this->varValue);
+	}
+
+
+	/**
+	 * Return a "selected" attribute if the option is selected
+	 * 
+	 * @param string $strOption The option to check
+	 * @param mixed  $varValues One or more values to check against
+	 * 
+	 * @return string The attribute or an empty string
+	 */
+	public static function optionSelected($strOption, $varValues)
+	{
+		if ($strOption === '')
+		{
+			return '';
+		}
+
+		$attribute = ' selected';
+
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->outputFormat == 'xhtml')
+			{
+				$attribute = ' selected="selected"';
+			}
+		}
+
+		return (is_array($varValues) ? in_array($strOption, $varValues) : $strOption == $varValues) ? $attribute : '';
+	}
+
+
+	/**
+	 * Return a "checked" attribute if the option is checked
+	 * 
+	 * @param string $strOption The option to check
+	 * @param mixed  $varValues One or more values to check against
+	 * 
+	 * @return string The attribute or an empty string
+	 */
+	public static function optionChecked($strOption, $varValues)
+	{
+		if ($strOption === '')
+		{
+			return '';
+		}
+
+		$attribute = ' checked';
+
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->outputFormat == 'xhtml')
+			{
+				$attribute = ' checked="checked"';
+			}
+		}
+
+		return (is_array($varValues) ? in_array($strOption, $varValues) : $strOption == $varValues) ? $attribute : '';
 	}
 
 

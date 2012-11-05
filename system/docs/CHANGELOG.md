@@ -5,6 +5,10 @@ Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Moved `Controller::optionChecked()` and `Controller::optionSelected()` to the
+`Widget` class (see #4665).
+
+### Changed
 Moved `System::getIndexFreeRequest()` to `Environment::get('indexFreeRequest')`
 (see #4685).
 

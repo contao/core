@@ -385,12 +385,12 @@ class FileSelector extends \Widget
 			switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])
 			{
 				case 'checkbox':
-					$return .= '<input type="checkbox" name="'.$this->strName.'[]" id="'.$this->strName.'_'.$id.'" class="tl_tree_checkbox" value="'.specialchars($value).'" onfocus="Backend.getScrollOffset()"'.$this->optionChecked($value, $this->varValue).'>';
+					$return .= '<input type="checkbox" name="'.$this->strName.'[]" id="'.$this->strName.'_'.$id.'" class="tl_tree_checkbox" value="'.specialchars($value).'" onfocus="Backend.getScrollOffset()"'.static::optionChecked($value, $this->varValue).'>';
 					break;
 
 				default:
 				case 'radio':
-					$return .= '<input type="radio" name="'.$this->strName.'" id="'.$this->strName.'_'.$id.'" class="tl_tree_radio" value="'.specialchars($value).'" onfocus="Backend.getScrollOffset()"'.$this->optionChecked($value, $this->varValue).'>';
+					$return .= '<input type="radio" name="'.$this->strName.'" id="'.$this->strName.'_'.$id.'" class="tl_tree_radio" value="'.specialchars($value).'" onfocus="Backend.getScrollOffset()"'.static::optionChecked($value, $this->varValue).'>';
 					break;
 			}
 		}

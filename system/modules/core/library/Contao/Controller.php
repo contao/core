@@ -2584,63 +2584,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Return a "selected" attribute if the current option is selected
-	 * 
-	 * @param string $strName  The option name
-	 * @param mixed  $varValue The option value
-	 * 
-	 * @return string The attribute or an empty string
-	 */
-	public static function optionSelected($strName, $varValue)
-	{
-		if ($strName === '')
-		{
-			return '';
-		}
-
-		$attribute = ' selected';
-
-		if (TL_MODE == 'FE')
-		{
-			global $objPage;
-
-			if ($objPage->outputFormat == 'xhtml')
-			{
-				$attribute = ' selected="selected"';
-			}
-		}
-
-		return (is_array($varValue) ? in_array($strName, $varValue) : $strName == $varValue) ? $attribute : '';
-	}
-
-
-	/**
-	 * Return a "checked" attribute if the current option is checked
-	 * 
-	 * @param string $strName  The option name
-	 * @param mixed  $varValue The option value
-	 * 
-	 * @return string The attribute or an empty string
-	 */
-	public static function optionChecked($strName, $varValue)
-	{
-		$attribute = ' checked';
-
-		if (TL_MODE == 'FE')
-		{
-			global $objPage;
-
-			if ($objPage->outputFormat == 'xhtml')
-			{
-				$attribute = ' checked="checked"';
-			}
-		}
-
-		return (is_array($varValue) ? in_array($strName, $varValue) : $strName == $varValue) ? $attribute : '';
-	}
-
-
-	/**
 	 * Find a content element in the TL_CTE array and return the class name
 	 * 
 	 * @param string $strName The content element name
@@ -3209,5 +3152,37 @@ abstract class Controller extends \System
 	public static function getPageSections()
 	{
 		return array_merge(array('header', 'left', 'right', 'main', 'footer'), trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']));
+	}
+
+
+	/**
+	 * Return a "selected" attribute if the option is selected
+	 * 
+	 * @param string $strOption The option to check
+	 * @param mixed  $varValues One or more values to check against
+	 * 
+	 * @return string The attribute or an empty string
+	 * 
+	 * @deprecated Use Widget::optionSelected() instead
+	 */
+	public static function optionSelected($strOption, $varValues)
+	{
+		return \Widget::optionSelected($strOption, $varValues);
+	}
+
+
+	/**
+	 * Return a "checked" attribute if the option is checked
+	 * 
+	 * @param string $strOption The option to check
+	 * @param mixed  $varValues One or more values to check against
+	 * 
+	 * @return string The attribute or an empty string
+	 * 
+	 * @deprecated Use Widget::optionChecked() instead
+	 */
+	public static function optionChecked($strOption, $varValues)
+	{
+		return \Widget::optionChecked($strOption, $varValues);
 	}
 }

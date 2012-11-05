@@ -181,7 +181,7 @@ class ModuleWizard extends \Widget
 			// Add modules
 			foreach ($modules as $v)
 			{
-				$options .= '<option value="'.specialchars($v['id']).'"'.$this->optionSelected($v['id'], $this->varValue[$i]['mod']).'>'.$v['name'].' ['. $v['type'] .']</option>';
+				$options .= '<option value="'.specialchars($v['id']).'"'.static::optionSelected($v['id'], $this->varValue[$i]['mod']).'>'.$v['name'].' ['. $v['type'] .']</option>';
 			}
 
 			$return .= '
@@ -194,7 +194,7 @@ class ModuleWizard extends \Widget
 			// Add columns
 			foreach ($cols as $v)
 			{
-				$options .= '<option value="'.specialchars($v).'"'.$this->optionSelected($v, $this->varValue[$i]['col']).'>'. ((isset($GLOBALS['TL_LANG']['tl_article'][$v]) && !is_array($GLOBALS['TL_LANG']['tl_article'][$v])) ? $GLOBALS['TL_LANG']['tl_article'][$v] : $v) .'</option>';
+				$options .= '<option value="'.specialchars($v).'"'.static::optionSelected($v, $this->varValue[$i]['col']).'>'. ((isset($GLOBALS['TL_LANG']['tl_article'][$v]) && !is_array($GLOBALS['TL_LANG']['tl_article'][$v])) ? $GLOBALS['TL_LANG']['tl_article'][$v] : $v) .'</option>';
 			}
 
 			$return .= '
