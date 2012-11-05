@@ -456,7 +456,7 @@ class Image
 			}
 			else
 			{
-				$src = 'system/themes/' . static::getTheme() . '/images/' . $src;
+				$src = 'system/themes/' . \Backend::getTheme() . '/images/' . $src;
 			}
 		}
 
@@ -466,6 +466,6 @@ class Image
 		}
 
 		$size = getimagesize(TL_ROOT .'/'. $src);
-		return '<img src="' . $static . static::urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
+		return '<img src="' . $static . \System::urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
 	}
 }
