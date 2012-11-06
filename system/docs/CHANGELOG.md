@@ -5,6 +5,9 @@ Version 3.0.1 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Do not strip tags from passwords (see #4977).
+
+### Fixed
 Correctly show the number of returned rows in the debug bar (see #4981).
 
 ### Fixed
