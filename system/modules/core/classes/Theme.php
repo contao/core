@@ -525,6 +525,9 @@ class Theme extends \Backend
 			$tl_module = $this->Database->getNextId('tl_module');
 			$tl_layout = $this->Database->getNextId('tl_layout');
 
+			$arrMissingCustomSections = array();
+			$arrCustomSections = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
+
 			// Loop through the tables
 			for ($i=0; $i<$tables->length; $i++)
 			{
@@ -616,6 +619,13 @@ class Theme extends \Backend
 									if ($modules[$key]['mod'] > 0)
 									{
 										$modules[$key]['mod'] = $arrMapper['tl_module'][$modules[$key]['mod']];
+									}
+								}
+								foreach ($modules as $module)
+								{
+									if (!in_array($module['col'], array('header', 'left', 'main', 'right', 'footer')) && !in_array($module['col'], $arrCustomSections) && !in_array($module['col'], $arrMissingCustomSections))
+									{
+										$arrMissingCustomSections[] = $module['col'];
 									}
 								}
 
@@ -730,6 +740,13 @@ class Theme extends \Backend
 			// Update the style sheets
 			$this->import('StyleSheets');
 			$this->StyleSheets->updateStyleSheets();
+
+			// Add missing custom sections to localconfig
+			if (count($arrMissingCustomSections))
+			{
+				$GLOBALS['TL_CONFIG']['customSections'] = implode(',', array_merge($arrCustomSections, $arrMissingCustomSections));
+				$this->Config->add('$GLOBALS[\'TL_CONFIG\'][\'customSections\']', $GLOBALS['TL_CONFIG']['customSections']);
+			}
 
 			// Notify the user
 			\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));
