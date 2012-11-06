@@ -5,6 +5,9 @@ Version 3.0.1 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly add the RSS feed base URLs (see #4994).
+
+### Fixed
 Fixed an issue in the mediaelement.js MooTools adapter (see #4917).
 
 ### Fixed
