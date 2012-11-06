@@ -5,6 +5,9 @@ Version 3.0.1 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly show the number of returned rows in the debug bar (see #4981).
+
+### Fixed
 Correctly add the RSS feed base URLs (see #4994).
 
 ### Fixed

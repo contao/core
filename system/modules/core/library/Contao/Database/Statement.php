@@ -425,7 +425,7 @@ abstract class Statement
 				$arrData['explain'] = $arrExplain;
 			}
 
-			$arrData['return_count'] = $this->affectedRows;
+			$arrData['return_count'] = $objResult->numRows;
 			$arrData['returned'] = sprintf('%s row(s) returned', $objResult->numRows);
 		}
 
