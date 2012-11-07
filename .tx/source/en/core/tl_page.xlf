@@ -30,7 +30,7 @@
         <source>Language</source>
       </trans-unit>
       <trans-unit id="tl_page.language.1">
-        <source>Please enter the page language according to the ISO-639-1 standard (e.g. "en" for English or "en_US" for American English).</source>
+        <source>Please enter the page language according to the ISO-639-1 standard (e.g. "en" for English or "en-US" for American English).</source>
       </trans-unit>
       <trans-unit id="tl_page.robots.0">
         <source>Robots tag</source>
