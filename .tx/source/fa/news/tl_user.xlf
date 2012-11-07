@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_user.php" source-language="en">
+    <body>
+      <trans-unit id="tl_user.news.0">
+        <source>Allowed archives</source>
+        <target>بایگانی‌های مجاز</target>
+      </trans-unit>
+      <trans-unit id="tl_user.news.1">
+        <source>Here you can grant access to one or more news archives.</source>
+        <target>لطفاً آرشیوهایی را که می‌خواهید برای کاربر فعال باشند را انتخاب نمائید.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newp.0">
+        <source>News permissions</source>
+        <target>مجوزهای خبر</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newp.1">
+        <source>Here you can define the news permissions.</source>
+        <target>مجوزهای خبر را تعریف نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeeds.0">
+        <source>Allowed RSS feeds</source>
+        <target>خوراک‌های آراس‌اس مجاز</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeeds.1">
+        <source>Here you can grant access to one or more news feeds.</source>
+        <target>شما می توانید دسترسی به یک یا چند خوراک اخبار را اعطاء نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeedp.0">
+        <source>RSS feed permissions</source>
+        <target>مجوزهای خوراک آراس‌اس</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeedp.1">
+        <source>Here you can define the news feed permissions.</source>
+        <target>شما می‌توانید مجوزهای خوراک اخبار را تعریف نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.news_legend">
+        <source>News permissions</source>
+        <target>مجوز جدید</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

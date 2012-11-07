@@ -1,0 +1,22 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/listing/languages/en/modules.php" source-language="en">
+    <body>
+      <trans-unit id="MOD.listing.0">
+        <source>Listing</source>
+        <target>Visa poster</target>
+      </trans-unit>
+      <trans-unit id="MOD.listing.1">
+        <source>List the records of any table</source>
+        <target>Den här modulen låter dig visa poster från en utvald tabell i frontend.</target>
+      </trans-unit>
+      <trans-unit id="FMD.listing.0">
+        <source>Listing</source>
+        <target>Visa poster</target>
+      </trans-unit>
+      <trans-unit id="FMD.listing.1">
+        <source>Lists the records of any table</source>
+        <target>Listar poster från valfri tabell.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

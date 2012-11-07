@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/faq/languages/en/modules.php" source-language="en">
+    <body>
+      <trans-unit id="MOD.faq.0">
+        <source>FAQ</source>
+        <target>FAQ</target>
+      </trans-unit>
+      <trans-unit id="MOD.faq.1">
+        <source>Manage frequently asked questions</source>
+        <target>Ten moduł pozwala zarządzać FAQ (pol. często zadawane pytania)</target>
+      </trans-unit>
+      <trans-unit id="FMD.faq">
+        <source>FAQ</source>
+        <target>FAQ</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqlist.0">
+        <source>FAQ list</source>
+        <target>Lista FAQ</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqlist.1">
+        <source>Adds a list of frequently asked questions to the page</source>
+        <target>Poprzez ten moduł możesz opublikować listę FAQ (pol. często zadawanych pytań) na stronach twojego serwisu.</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqreader.0">
+        <source>FAQ reader</source>
+        <target>Czytnik FAQ</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqreader.1">
+        <source>Shows the answer to a frequently asked question</source>
+        <target>Poprzez ten moduł możesz opublikować FAQ (pol. często zadawane pytania) na stronach twojego serwisu.</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqpage.0">
+        <source>FAQ page</source>
+        <target>Strona FAQ</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqpage.1">
+        <source>Shows the FAQ list and FAQ reader on the same page</source>
+        <target>Wyświetla listę FAQ i czytnik FAQ na tej samej stronie.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

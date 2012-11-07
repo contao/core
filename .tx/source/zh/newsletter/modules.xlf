@@ -1,0 +1,54 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/modules.php" source-language="en">
+    <body>
+      <trans-unit id="MOD.newsletter.0">
+        <source>Newsletters</source>
+        <target>新闻通讯</target>
+      </trans-unit>
+      <trans-unit id="MOD.newsletter.1">
+        <source>Manage subscriptions and send newsletters</source>
+        <target>此模块可让您管理通讯。</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_newsletter_recipients">
+        <source>Recipients</source>
+        <target>接收人</target>
+      </trans-unit>
+      <trans-unit id="FMD.newsletter">
+        <source>Newsletter</source>
+        <target>简报</target>
+      </trans-unit>
+      <trans-unit id="FMD.subscribe.0">
+        <source>Subscribe</source>
+        <target>订阅</target>
+      </trans-unit>
+      <trans-unit id="FMD.subscribe.1">
+        <source>Generates a form to subscribe to one or more channels</source>
+        <target>这个模块允许前端用户订阅某些渠道。</target>
+      </trans-unit>
+      <trans-unit id="FMD.unsubscribe.0">
+        <source>Unsubscribe</source>
+        <target>取消订阅</target>
+      </trans-unit>
+      <trans-unit id="FMD.unsubscribe.1">
+        <source>Generates a form to unsubscribe from one or more channels</source>
+        <target>这个模块允许前端用户退订某些渠道。</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_list.0">
+        <source>Newsletter list</source>
+        <target>新闻名单</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_list.1">
+        <source>Adds a list of newsletters to the page</source>
+        <target>此模块列出了通讯的一个或多个频道。</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_reader.0">
+        <source>Newsletter reader</source>
+        <target>通讯读者</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_reader.1">
+        <source>Shows the details of a newsletter</source>
+        <target>此模块显示一个单一的通讯。</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

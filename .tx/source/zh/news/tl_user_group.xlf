@@ -1,0 +1,10 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_user_group.php" source-language="en">
+    <body>
+      <trans-unit id="tl_user_group.news_legend">
+        <source>News permissions</source>
+        <target>新闻权限</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

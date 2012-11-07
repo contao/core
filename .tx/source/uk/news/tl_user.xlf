@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_user.php" source-language="en">
+    <body>
+      <trans-unit id="tl_user.news.0">
+        <source>Allowed archives</source>
+        <target>Архіви новин</target>
+      </trans-unit>
+      <trans-unit id="tl_user.news.1">
+        <source>Here you can grant access to one or more news archives.</source>
+        <target>Вкажіть, будь ласка, архіви новим, які б ви хотіли включити для користувача.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newp.0">
+        <source>News permissions</source>
+        <target>Права доступу до новини</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newp.1">
+        <source>Here you can define the news permissions.</source>
+        <target>Вкажіть, будь ласка, права доступу до новини.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeeds.0">
+        <source>Allowed RSS feeds</source>
+        <target>Дозволені RSS-канали</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeeds.1">
+        <source>Here you can grant access to one or more news feeds.</source>
+        <target>Ви можете надати доступ до одного або декількох каналів новин.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeedp.0">
+        <source>RSS feed permissions</source>
+        <target>Дозволи RSS-каналів</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeedp.1">
+        <source>Here you can define the news feed permissions.</source>
+        <target>Ви можете задати дозволи до RSS-каналів новин.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.news_legend">
+        <source>News permissions</source>
+        <target>Права доступу до новини</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

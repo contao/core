@@ -1,0 +1,94 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_log.php" source-language="en">
+    <body>
+      <trans-unit id="tl_log.tstamp.0">
+        <source>Date</source>
+        <target>Дата</target>
+      </trans-unit>
+      <trans-unit id="tl_log.tstamp.1">
+        <source>Date and time of the log entry</source>
+        <target>Дата и время записи в журнале</target>
+      </trans-unit>
+      <trans-unit id="tl_log.source.0">
+        <source>Origin</source>
+        <target>Источник</target>
+      </trans-unit>
+      <trans-unit id="tl_log.source.1">
+        <source>Back end or front end</source>
+        <target>Панель управления или внешний интерфейс</target>
+      </trans-unit>
+      <trans-unit id="tl_log.action.0">
+        <source>Category</source>
+        <target>Категория</target>
+      </trans-unit>
+      <trans-unit id="tl_log.action.1">
+        <source>Category of the action</source>
+        <target>Категория действия</target>
+      </trans-unit>
+      <trans-unit id="tl_log.username.0">
+        <source>User</source>
+        <target>Пользователь</target>
+      </trans-unit>
+      <trans-unit id="tl_log.username.1">
+        <source>Name of the authenticated user</source>
+        <target>Имя авторизованного пользователя</target>
+      </trans-unit>
+      <trans-unit id="tl_log.text.0">
+        <source>Details</source>
+        <target>Детали</target>
+      </trans-unit>
+      <trans-unit id="tl_log.text.1">
+        <source>Details of the log entry</source>
+        <target>Подробности записи в журнале</target>
+      </trans-unit>
+      <trans-unit id="tl_log.func.0">
+        <source>Function</source>
+        <target>Функция</target>
+      </trans-unit>
+      <trans-unit id="tl_log.func.1">
+        <source>Name of the initiating function</source>
+        <target>Имя инициирующий функции</target>
+      </trans-unit>
+      <trans-unit id="tl_log.ip.0">
+        <source>IP address</source>
+        <target>IP-адрес</target>
+      </trans-unit>
+      <trans-unit id="tl_log.ip.1">
+        <source>IP address of the user</source>
+        <target>IP-адрес пользователя</target>
+      </trans-unit>
+      <trans-unit id="tl_log.browser.0">
+        <source>Browser</source>
+        <target>Браузер</target>
+      </trans-unit>
+      <trans-unit id="tl_log.browser.1">
+        <source>Name of the user agent</source>
+        <target>Поле User-Agent</target>
+      </trans-unit>
+      <trans-unit id="tl_log.BE">
+        <source>Back end</source>
+        <target>Панель управления</target>
+      </trans-unit>
+      <trans-unit id="tl_log.FE">
+        <source>Front end</source>
+        <target>Внешний интерфейс</target>
+      </trans-unit>
+      <trans-unit id="tl_log.show.0">
+        <source>Show details</source>
+        <target>Показать детали</target>
+      </trans-unit>
+      <trans-unit id="tl_log.show.1">
+        <source>Show the details of entry ID %s</source>
+        <target>Показать детали записи ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_log.delete.0">
+        <source>Delete</source>
+        <target>Удалить</target>
+      </trans-unit>
+      <trans-unit id="tl_log.delete.1">
+        <source>Delete entry ID %s</source>
+        <target>Удалить запись ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

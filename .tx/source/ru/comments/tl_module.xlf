@@ -1,0 +1,10 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/comments/languages/en/tl_module.php" source-language="en">
+    <body>
+      <trans-unit id="tl_module.comment_legend">
+        <source>Comment settings</source>
+        <target>Настройки комментариев</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

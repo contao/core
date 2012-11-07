@@ -1,0 +1,30 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/comments/languages/en/modules.php" source-language="en">
+    <body>
+      <trans-unit id="CTE.comments.0">
+        <source>Comments</source>
+        <target>Kommentarer</target>
+      </trans-unit>
+      <trans-unit id="CTE.comments.1">
+        <source>Adds a comment form to the page</source>
+        <target>Dette modul giver dine besøgende mulighed for at tilføje kommentarer.</target>
+      </trans-unit>
+      <trans-unit id="FMD.comments.0">
+        <source>Comments</source>
+        <target>Kommentarer</target>
+      </trans-unit>
+      <trans-unit id="FMD.comments.1">
+        <source>Manage comments or guestbook entries</source>
+        <target>Administrer kommentarer eller indlæg i gæstebog.</target>
+      </trans-unit>
+      <trans-unit id="MOD.comments.0">
+        <source>Comments</source>
+        <target>Kommentarer</target>
+      </trans-unit>
+      <trans-unit id="MOD.comments.1">
+        <source>Manage comments or guestbook entries</source>
+        <target>Dette modul giver dig mulighed for at håndtere besøgendes kommentarer.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

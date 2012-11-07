@@ -1,0 +1,272 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_news_archive.php" source-language="en">
+    <body>
+      <trans-unit id="tl_news_archive.title.0">
+        <source>Title</source>
+        <target>Naziv</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.title.1">
+        <source>Please enter a news archive title.</source>
+        <target>Upišite naziv arhive novosti.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Stranica preusmjeravanja</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.jumpTo.1">
+        <source>Please choose the news reader page to which visitors will be redirected when clicking a news item.</source>
+        <target>Odaberite stranicu čitača novosti na koju će posjetitelji biti preusmjereni nakon što kliknu na članak novosti.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.allowComments.0">
+        <source>Enable comments</source>
+        <target>Uključi komentare</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.allowComments.1">
+        <source>Allow visitors to comment news items.</source>
+        <target>Dozvolite posjetiteljima da komentiraju članke novosti.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify.0">
+        <source>Notify</source>
+        <target>Obavijest</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+        <target>Odredite tko će biti obaviješten o dodavanju novog komentara.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.sortOrder.0">
+        <source>Sort order</source>
+        <target>Redoslijed razvrstavanja</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+        <target>Komentari se standardno izlistavaju na način da popis počinje s najstarijim komentarom.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.perPage.0">
+        <source>Comments per page</source>
+        <target>Komentara po stranici</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>Broj komentara po stranici. Upišite 0 ako želite isključiti numeriranje stranica.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.moderate.0">
+        <source>Moderate comments</source>
+        <target>Moderacija komentara</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>Odobrite komentare prije njihovog objavljivanja na web stranici.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.bbcode.0">
+        <source>Allow BBCode</source>
+        <target>Dozvoli BBCode</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Dozvolite posjetiteljima da uređuju svoje komentare pomoću BBCode.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.requireLogin.0">
+        <source>Require login to comment</source>
+        <target>Obvezno ulogovanje za komentiranje</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>Komentare mogu kreirati samo ulogovani korisnici.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Isključi sigurnosno pitanje</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+        <target>Isključite ovu opciju samo ako ste komentiranje ograničili samo na ulogovane korisnike.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected.0">
+        <source>Protect archive</source>
+        <target>Zaštita arhive</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected.1">
+        <source>Show news items to certain member groups only.</source>
+        <target>Prikažite članke novosti samo određenim grupama korisnika.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.groups.0">
+        <source>Allowed member groups</source>
+        <target>Dozvoljene grupe korisnika</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.groups.1">
+        <source>These groups will be able to see the news items in this archive.</source>
+        <target>Ove grupe korisnika moći će vidjeti članke novosti u ovoj arhivi.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.makeFeed.0">
+        <source>Generate feed</source>
+        <target>Generiraj feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.makeFeed.1">
+        <source>Generate an RSS or Atom feed from the news archive.</source>
+        <target>Generirajte RSS ili Atom feed od ove arhive novosti.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.format.0">
+        <source>Feed format</source>
+        <target>Format feed-a</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.format.1">
+        <source>Please choose a feed format.</source>
+        <target>Odaberite format feed-a.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.language.0">
+        <source>Feed language</source>
+        <target>Jezik feed-a</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.language.1">
+        <source>Please enter the feed language according to the ISO-639 standard (e.g. &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;).</source>
+        <target>Upišite jezik stranice skladno ISO-639 standardu (npr. &lt;em&gt;en&lt;/em&gt; ili &lt;em&gt;en-us&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source.0">
+        <source>Export settings</source>
+        <target>Postavke eksporta</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source.1">
+        <source>Here you can choose what will be exported.</source>
+        <target>Ovdje možete odabrati šta će se eksportirati.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.maxItems.0">
+        <source>Maximum number of items</source>
+        <target>Maksimalan broj članaka</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.maxItems.1">
+        <source>Here you can limit the number of feed items. Set to 0 to export all.</source>
+        <target>Ovdje možete ograničiti broj članaka rss-a. Odaberite 0 ako ih sve želite eksportirati.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feedBase.0">
+        <source>Base URL</source>
+        <target>Temeljni URL</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feedBase.1">
+        <source>Please enter the base URL with protocol (e.g. &lt;em&gt;http://&lt;/em&gt;).</source>
+        <target>Upišite temeljni URL s protokolom (npr. &lt;em&gt;http://&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.alias.0">
+        <source>Feed alias</source>
+        <target>Alias rss-a</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.alias.1">
+        <source>Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the root directory of your Contao installation, e.g. as &lt;em&gt;name.xml&lt;/em&gt;.</source>
+        <target>Ovdje možete upisati jedinstveni naziv fajla (bez ekstenzije). XML fajl feed-a automatski će se generirati u korijenskom direktoriju vaše TYPOlight instalacije, npr. kao &lt;em&gt;naziv.xml&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.description.0">
+        <source>Feed description</source>
+        <target>Opis rss-a</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.description.1">
+        <source>Please enter a short description of the news feed.</source>
+        <target>Upišite kratki opis vašeg rss-a novosti.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.tstamp.0">
+        <source>Revision date</source>
+        <target>Datum revizije</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Datum i vrijeme posljednje revizije.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.title_legend">
+        <source>Title and redirect page</source>
+        <target>Naslov i stranica preusmjeravanja</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments_legend">
+        <source>Comments</source>
+        <target>Komentari</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected_legend">
+        <source>Access protection</source>
+        <target>Zaštita pristupa</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feed_legend">
+        <source>RSS/Atom feed</source>
+        <target>RSS/Atom feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_admin">
+        <source>System administrator</source>
+        <target>Administrator sistema</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_author">
+        <source>Author of the news item</source>
+        <target>Autor članka novosti</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_both">
+        <source>Author and system administrator</source>
+        <target>Autor i sistem administrator</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source_teaser">
+        <source>News teasers</source>
+        <target>Najave novosti</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source_text">
+        <source>Full articles</source>
+        <target>Cijeli članci</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.new.0">
+        <source>New archive</source>
+        <target>Arhiva novosti</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.new.1">
+        <source>Create a new archive</source>
+        <target>Kreiraj novu arhivu.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.show.0">
+        <source>Archive details</source>
+        <target>Detalji arhive</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.show.1">
+        <source>Show the details of archive ID %s</source>
+        <target>Prikazati detalje arhive s ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.edit.0">
+        <source>Edit archive</source>
+        <target>Edituj arhivu</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.edit.1">
+        <source>Edit archive ID %s</source>
+        <target>Editujte arhivu s ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.editheader.0">
+        <source>Edit archive settings</source>
+        <target>Edituj postavke arhive</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.editheader.1">
+        <source>Edit the settings of archive ID %s</source>
+        <target>Edituj postavke arhive s ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.copy.0">
+        <source>Duplicate archive</source>
+        <target>Kopiraj arhivu</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.copy.1">
+        <source>Duplicate archive ID %s</source>
+        <target>Kopirajte arhivu s ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.delete.0">
+        <source>Delete archive</source>
+        <target>Izbriši arhivu</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.delete.1">
+        <source>Delete archive ID %s</source>
+        <target>Izbrišite arhivu s ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments.0">
+        <source>Comments</source>
+        <target>Komentari</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments.1">
+        <source>Show comments of archive ID %s</source>
+        <target>Prikazati komentare arhive s ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feeds.0">
+        <source>RSS feeds</source>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feeds.1">
+        <source>Manage RSS feeds</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

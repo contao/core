@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_module.php" source-language="en">
+    <body>
+      <trans-unit id="tl_module.newsletters.0">
+        <source>Subscribable newsletters</source>
+        <target>خبرنامه‌های قابل اشتراک</target>
+      </trans-unit>
+      <trans-unit id="tl_module.newsletters.1">
+        <source>Show these channels in the front end form.</source>
+        <target>این خبرنامه‌ها را در فرم front end نشان دهید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.0">
+        <source>Channels</source>
+        <target>کانال‌ها</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.1">
+        <source>Please select one or more channels.</source>
+        <target>لطفا یک یا چند کانال را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.0">
+        <source>Hide channel menu</source>
+        <target>منو کانال‌ها را مخفی کن</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.1">
+        <source>Do not show the channel selection menu.</source>
+        <target>منو انتخاب کانال را نشان ندهید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.0">
+        <source>Subscription message</source>
+        <target>متن پست الکترونیک اشتراک</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names), &lt;em&gt;##domain##&lt;/em&gt; (domain name) and &lt;em&gt;##link##&lt;/em&gt; (activation link).</source>
+        <target>Please enter the text of the subscription confirmation e-mail. You can use the wildcards &lt;em&gt;##channel##&lt;/em&gt; (channel name), &lt;em&gt;##domain##&lt;/em&gt; (current domain name) and &lt;em&gt;##link##&lt;/em&gt; (activation link).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.0">
+        <source>Unsubscription message</source>
+        <target>متن پست الکترونیک قطع اشتراک</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names) and &lt;em&gt;##domain##&lt;/em&gt; (domain name).</source>
+        <target>Please enter the text of the unsubscription confirmation e-mail. You can use the wildcards &lt;em&gt;##channel##&lt;/em&gt; (channel name) and &lt;em&gt;##domain##&lt;/em&gt; (current domain name).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.0">
+        <source>Newsletter template</source>
+        <target>قالب ماژول</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.1">
+        <source>Here you can select the newsletter template.</source>
+        <target>لطفا یک قالب برای ماژول انتخاب نمائید . شما می توانید یک قالب سفارشی به فولدر &lt;em&gt;templates&lt;/em&gt; اضافه نمائید . نام فایل قالب خبرنامه باید با &lt;em&gt;nl_&lt;/em&gt; شروع گردد و همچنین حتماً باید با پسوند &lt;em&gt;.tpl&lt;/em&gt; پایان یابد .</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.0">
+        <source>Your subscription on %s</source>
+        <target>اشتراک شما در %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.1">
+        <source>You have subscribed to the following channels on ##domain##:
+
+##channels##
+
+Please click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.
+</source>
+        <target>شماره مشترک خبرنامه ##channel## در ##domain## شده اید . لطفا با کلیک بر روی لینک ##link## مراحل اشتراک خود را تکمیل نمائید . در صورتی که خودتان تقاضای اشتراک نداده اید ، می توانید از این پست الکترونیک چشم پوشی نمائید .</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.0">
+        <source>Your subscription on %s</source>
+        <target>اشتراک شما در %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.1">
+        <source>You have unsubscribed from the following channels on ##domain##:
+
+##channels##
+</source>
+        <target>اشتراک شما در ##channel## به طور کامل قطع شد .</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
