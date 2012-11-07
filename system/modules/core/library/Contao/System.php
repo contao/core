@@ -335,13 +335,13 @@ abstract class System
 			$strLanguage = str_replace('-', '_', $GLOBALS['TL_LANGUAGE']);
 		}
 
-		// Fall back to english
+		// Fall back to English
 		if ($strLanguage == '')
 		{
 			$strLanguage = 'en';
 		}
 
-		// Return if the data has been loaded already
+		// Return if the language file has been loaded already
 		if (isset($GLOBALS['loadLanguageFile'][$strName][$strLanguage]) && !$blnNoCache)
 		{
 			return;
@@ -368,32 +368,47 @@ abstract class System
 			}
 		}
 
-		$strCacheFallback = TL_ROOT . '/system/cache/language/en/' . $strName . '.php';
-		$strCacheFile = TL_ROOT . '/system/cache/language/' . $strLanguage . '/' . $strName . '.php';
+		$strCacheFallback = 'system/cache/language/en/' . $strName . '.php';
+		$strCacheFile = 'system/cache/language/' . $strLanguage . '/' . $strName . '.php';
 
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists($strCacheFile))
+		// Generate the cache files
+		if ($GLOBALS['TL_CONFIG']['bypassCache'] || !file_exists($strCacheFile))
 		{
-			include $strCacheFallback;
-			include $strCacheFile;
-		}
-		else
-		{
+			// Add a short header with links to transifex.com
+			$strHeader = "<?php\n\n"
+					   . "/**\n"
+					   . " * Contao Open Source CMS\n"
+					   . " * \n"
+					   . " * Copyright (C) 2005-2012 Leo Feyer\n"
+					   . " * \n"
+					   . " * Core translations are managed using Transifex. To create a new translation\n"
+					   . " * or to help to maintain an existing one, please register at transifex.com.\n"
+					   . " * \n"
+					   . " * @link http://help.transifex.com/intro/translating.html\n"
+					   . " * @link https://www.transifex.com/projects/p/contao/language/%s/\n"
+					   . " * \n"
+					   . " * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL\n"
+					   . " */\n";
+
 			// Generate the cache files
-			$objCacheFallback = new \File('system/cache/language/en/' . $strName . '.php');
-			$objCacheFallback->write('<?php '); // add one space to prevent the "unexpected $end" error
+			$objCacheFallback = new \File($strCacheFallback);
+			$objCacheFallback->write(sprintf($strHeader, 'en'));
 
-			$objCacheFile = new \File('system/cache/language/' . $strLanguage . '/' . $strName . '.php');
-			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
+			$objCacheFile = new \File($strCacheFile);
+			$objCacheFile->write(sprintf($strHeader, $strLanguage));
 
 			// Parse all active modules
 			foreach (\Config::getInstance()->getActiveModules() as $strModule)
 			{
-				$strFallback = TL_ROOT . '/system/modules/' . $strModule . '/languages/en/' . $strName . '.php';
+				$strFallback = 'system/modules/' . $strModule . '/languages/en/' . $strName;
 
-				if (file_exists($strFallback))
+				if (file_exists(TL_ROOT . '/' . $strFallback . '.xlf'))
 				{
-					$objCacheFallback->append(static::readPhpFileWithoutTags($strFallback));
-					include $strFallback;
+					$objCacheFallback->append(static::convertXlfToPhp($strFallback . '.xlf', 'en'));
+				}
+				elseif (file_exists(TL_ROOT . '/' . $strFallback . '.php'))
+				{
+					$objCacheFallback->append(static::readPhpFileWithoutTags($strFallback . '.php'));
 				}
 
 				if ($strLanguage == 'en')
@@ -401,18 +416,25 @@ abstract class System
 					continue;
 				}
 
-				$strFile = TL_ROOT . '/system/modules/' . $strModule . '/languages/' . $strLanguage . '/' . $strName . '.php';
+				$strFile = 'system/modules/' . $strModule . '/languages/' . $strLanguage . '/' . $strName;
 
-				if (file_exists($strFile))
+				if (file_exists(TL_ROOT . '/' . $strFile . '.xlf'))
 				{
-					$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
-					include $strFile;
+					$objCacheFile->append(static::convertXlfToPhp($strFile . '.xlf', $strLanguage));
+				}
+				elseif (file_exists(TL_ROOT . '/' . $strFile . '.php'))
+				{
+					$objCacheFallback->append(static::readPhpFileWithoutTags($strFile . '.php'));
 				}
 			}
 
 			$objCacheFallback->close();
 			$objCacheFile->close();
 		}
+
+		// Load the PHP array with the labels
+		include TL_ROOT . '/' . $objCacheFallback->path;
+		include TL_ROOT . '/' . $objCacheFile->path;
 
 		// HOOK: allow to load custom labels
 		if (isset($GLOBALS['TL_HOOKS']['loadLanguageFile']) && is_array($GLOBALS['TL_HOOKS']['loadLanguageFile']))
@@ -785,6 +807,98 @@ abstract class System
 		}
 
 		return rtrim($strCode);
+	}
+
+
+	/**
+	 * Convert an .xlf file into a PHP language file
+	 * 
+	 * @param string $strName     The name of the .xlf file
+	 * @param string $strLanguage The language code
+	 * 
+	 * @return string The PHP code
+	 */
+	protected static function convertXlfToPhp($strName, $strLanguage)
+	{
+		// Read the .xlf file
+		$xml = new \DOMDocument();
+		$xml->preserveWhiteSpace = false;
+		$xml->load(TL_ROOT . '/' . $strName);
+
+		$return = "\n// $strName\n";
+		$units = $xml->getElementsByTagName('trans-unit');
+
+		// Add the labels
+		foreach ($units as $unit)
+		{
+			$node = ($strLanguage == 'en') ? $unit->firstChild : $unit->firstChild->nextSibling;
+
+			if ($node === null)
+			{
+				continue;
+			}
+
+			$value = str_replace("\n", '\n', $node->nodeValue);
+
+			// Quote the value depending on whether there are line breaks
+			if (strpos($value, '\n') !== false)
+			{
+				$value = '"' . str_replace('"', '\\"', $value) . '"';
+			}
+			else
+			{
+				$value = "'" . str_replace("'", "\\'", $value) . "'";
+			}
+
+			// Some closing </em> tags oddly have an extra space in
+			if (strpos($value, '</ em>') !== false)
+			{
+				$value = str_replace('</ em>', '</em>', $value);
+			}
+
+			$chunks = explode('.', $unit->getAttribute('id'));
+
+			// Handle keys with dots
+			if (preg_match('/tl_layout\.(reset|layout|responsive|tinymce)\.css\./', $unit->getAttribute('id')))
+			{
+				$chunks = array($chunks[0], $chunks[1] . '.' . $chunks[2], $chunks[3]);
+			}
+
+			// Set up the quote function
+			$quote = function($key)
+			{
+				if ($key === '0')
+				{
+					return 0;
+				}
+				elseif (is_numeric($key))
+				{
+					return intval($key);
+				}
+				else
+				{
+					return "'$key'";
+				}
+			};
+
+			// Create the array entries
+			switch (count($chunks))
+			{
+				case 2:
+					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quote($chunks[1]) . "] = $value;\n";
+					break;
+
+				case 3:
+					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quote($chunks[1]) . "][" . $quote($chunks[2]) . "] = $value;\n";
+					break;
+
+				case 4:
+					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quote($chunks[1]) . "][" . $quote($chunks[2]) . "][" . $quote($chunks[3]) . "] = $value;\n";
+					break;
+			}
+		}
+
+		return rtrim($return);
 	}
 
 

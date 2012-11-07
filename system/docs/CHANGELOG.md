@@ -5,6 +5,10 @@ Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Moved the Transifex `.xlf` files to the `languages` folders of the modules and
+tweaked the `System::loadLanguageFile()` method to handle them (see #5005).
+
+### Changed
 Moved `Controller::getPageDetails()` to `PageModel::findWithDetails()` and
 `PageModel->loadDetails()` (see #4692).
 
