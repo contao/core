@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/devtools/languages/en/tl_autoload.php" source-language="en">
+    <body>
+      <trans-unit id="tl_autoload.headline">
+        <source>Automatically create the autoload.php files</source>
+      </trans-unit>
+      <trans-unit id="tl_autoload.emptySelection">
+        <source>Please select at least one module!</source>
+      </trans-unit>
+      <trans-unit id="tl_autoload.autoloadExists">
+        <source>Module "%s" has an autoload.php file already. Do you want to override?</source>
+      </trans-unit>
+      <trans-unit id="tl_autoload.available">
+        <source>Available modules</source>
+      </trans-unit>
+      <trans-unit id="tl_autoload.xplAvailable">
+        <source>Please select the modules you want to modify.</source>
+      </trans-unit>
+      <trans-unit id="tl_autoload.override">
+        <source>Override existing files</source>
+      </trans-unit>
+      <trans-unit id="tl_autoload.xplOverride">
+        <source>Override existing autoload.php files (use with care).</source>
+      </trans-unit>
+      <trans-unit id="tl_autoload.autoload">
+        <source>Create the autoload files</source>
+      </trans-unit>
+      <trans-unit id="tl_autoload.autoloadConfirm">
+        <source>The autoload.php file of module "%s" has been written.</source>
+      </trans-unit>
+      <trans-unit id="tl_autoload.ideCompat">
+        <source>Update the IDE compatibility file</source>
+      </trans-unit>
+      <trans-unit id="tl_autoload.ideCompatConfirm">
+        <source>The IDE compatibility file has been written.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

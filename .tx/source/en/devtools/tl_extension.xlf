@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/devtools/languages/en/tl_extension.php" source-language="en">
+    <body>
+      <trans-unit id="tl_extension.title.0">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.title.1">
+        <source>Please enter the extension title.</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.folder.0">
+        <source>Folder name</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.folder.1">
+        <source>Please enter a unique folder name.</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.author.0">
+        <source>Author</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.author.1">
+        <source>Please enter the author's name and an optional e-mail address (e.g. &lt;em&gt;Name [e-mail@address.com]&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.copyright.0">
+        <source>Copyright</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.copyright.1">
+        <source>Please enter the copyright notice (e.g. &lt;em&gt;Name 2012&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.package.0">
+        <source>Package</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.package.1">
+        <source>Please enter the package name without spaces (e.g. &lt;em&gt;MyCustomModule&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.license.0">
+        <source>License</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.license.1">
+        <source>Please enter the license type (e.g. &lt;em&gt;GNU/LGPL&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.addBeMod.0">
+        <source>Add a back end module</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.addBeMod.1">
+        <source>Add a back end module to the extension.</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.beClasses.0">
+        <source>Back end classes</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.beClasses.1">
+        <source>Here you can enter a comma separated list of back end classes.</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.beTables.0">
+        <source>Back end tables</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.beTables.1">
+        <source>Here you can enter a comma separated list of back end tables.</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.beTemplates.0">
+        <source>Back end templates</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.beTemplates.1">
+        <source>Here you can enter a comma separated list of back end templates.</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.addFeMod.0">
+        <source>Add a front end module</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.addFeMod.1">
+        <source>Add a front end module to the extension.</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.feClasses.0">
+        <source>Front end classes</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.feClasses.1">
+        <source>Here you can enter a comma separated list of front end classes.</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.feTables.0">
+        <source>Front end tables</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.feTables.1">
+        <source>Here you can enter a comma separated list of front end tables.</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.feTemplates.0">
+        <source>Front end templates</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.feTemplates.1">
+        <source>Here you can enter a comma separated list of front end templates.</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.addLanguage.0">
+        <source>Add language packs</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.addLanguage.1">
+        <source>Add one or more language packs to the extension.</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.languages.0">
+        <source>Languages</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.languages.1">
+        <source>Here you can enter a comma separated list of languages (e.g. &lt;em&gt;en,de&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.title_legend">
+        <source>Title and name</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.license_legend">
+        <source>License information</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.backend_legend">
+        <source>Back end resources</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.frontend_legend">
+        <source>Front end resources</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.language_legend">
+        <source>Language settings</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.headline">
+        <source>Create extension ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.label">
+        <source>How to create an extension</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.confirm">
+        <source>The files have been created</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.unique">
+        <source>Folder "%s" exists already!</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.new.0">
+        <source>New extension</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.new.1">
+        <source>Create a new extension</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.show.0">
+        <source>Extension details</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.show.1">
+        <source>Show the details of extension ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.edit.0">
+        <source>Edit extension</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.edit.1">
+        <source>Edit extension ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.copy.0">
+        <source>Copy extension</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.copy.1">
+        <source>Copy extension ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.delete.0">
+        <source>Delete extension</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.delete.1">
+        <source>Delete extension ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.create.0">
+        <source>Create files</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.create.1">
+        <source>Create the files of extension ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.make.0">
+        <source>Create files</source>
+      </trans-unit>
+      <trans-unit id="tl_extension.make.1">
+        <source>Click the "Create files" button to generate a new folder in the &lt;em&gt;system/modules&lt;/em&gt; directory (note that existing files will be overwritten). The folder will contain all files and subfolders that are required to set up the extension. It is recommended to download these files to your development environment.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
