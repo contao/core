@@ -1,0 +1,66 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/comments/languages/en/tl_content.php" source-language="en">
+    <body>
+      <trans-unit id="tl_content.com_order.0">
+        <source>Sort order</source>
+        <target>Спосіб сортування</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_order.1">
+        <source>Please choose the sort order.</source>
+        <target>Виберіть будь ласка спосіб сортування</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_perPage.0">
+        <source>Items per page</source>
+        <target>Кількість записів на сторінку</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_perPage.1">
+        <source>The number of comments per page. Set to 0 to disable pagination.</source>
+        <target>Введіть, кількість коментарів на сторінку. ( 0 для відображення усіх коментарів.)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_moderate.0">
+        <source>Moderate</source>
+        <target>Режим редактора</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>Редагувати коментарі перед їх розміщенням на веб-сайті.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_bbcode.0">
+        <source>Allow BBCode</source>
+        <target>Дозволити BBCode коди</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Дозволити користувачам використання BBCode для редагування коментарів</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_requireLogin.0">
+        <source>Require login to comment</source>
+        <target>Вимагати вхід в систему</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>Дозволити тільки авторизованим користувачам добавляти коментарі.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Відключити контрольне запитання</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_disableCaptcha.1">
+        <source>Here you can disable the security question (not recommended).</source>
+        <target>Виберіть дану опцію, щоб відключити контрольне запитання</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_template.0">
+        <source>Comments template</source>
+        <target>Шаблон коментаря</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_template.1">
+        <source>Here you can select the comments template.</source>
+        <target>Виберіть, будь-ласка, шаблон коментаря. Ви можете додати новий шаблон до папки &lt;em&gt;templates&lt;/em&gt;. Шаблон файлу коментаря повинен розпочинатись із префіксу &lt;em&gt;com_&lt;/em&gt; та мати розширення &lt;em&gt;.tpl&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.comment_legend">
+        <source>Comment settings</source>
+        <target>Налаштування коментарів</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

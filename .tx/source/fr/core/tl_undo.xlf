@@ -1,0 +1,62 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_undo.php" source-language="en">
+    <body>
+      <trans-unit id="tl_undo.pid.0">
+        <source>User</source>
+        <target>Utilisateur</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.pid.1">
+        <source>Name of the associated user</source>
+        <target>Nom de l'utilisateur associé</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.fromTable.0">
+        <source>Source table</source>
+        <target>Table source</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.fromTable.1">
+        <source>Name of the original table</source>
+        <target>Nom de la table originale</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.affectedRows.0">
+        <source>Affected rows</source>
+        <target>Enregistrements</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.affectedRows.1">
+        <source>Number of records included in the undo step</source>
+        <target>Nombre d'enregistrements affectés</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.query.0">
+        <source>Details</source>
+        <target>Détails</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.query.1">
+        <source>Details of the undo step</source>
+        <target>Détails de l'entrée courante</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.data.0">
+        <source>Data</source>
+        <target>Données</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.data.1">
+        <source>Raw data of the undo step</source>
+        <target>Données des enregistrements supprimés</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.show.0">
+        <source>Show details</source>
+        <target>Afficher les détails</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.show.1">
+        <source>Show the details of entry ID %s</source>
+        <target>Afficher les détails de l'entrée ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.undo.0">
+        <source>Restore</source>
+        <target>Rétablir</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.undo.1">
+        <source>Restore entry ID %s</source>
+        <target>Rétablir l'action ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

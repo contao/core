@@ -1,0 +1,374 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_calendar_events.php" source-language="en">
+    <body>
+      <trans-unit id="tl_calendar_events.title.0">
+        <source>Title</source>
+        <target>Заголовок</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.title.1">
+        <source>Please enter the event title.</source>
+        <target>Будь-ласка введіть заголовок події.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.alias.0">
+        <source>Event alias</source>
+        <target>Аліас події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.alias.1">
+        <source>The event alias is a unique reference to the event which can be called instead of its numeric ID.</source>
+        <target>Аліас події - це унікальне значення яке може бти використане замість ID події.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.author.0">
+        <source>Author</source>
+        <target>Автор</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.author.1">
+        <source>Here you can change the author of the event.</source>
+        <target>Тут ви пожете змінити автора події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addTime.0">
+        <source>Add time</source>
+        <target>Додати час</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addTime.1">
+        <source>Add a start and end time to the event.</source>
+        <target>Додайте початок та кінець події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startTime.0">
+        <source>Start time</source>
+        <target>Початок події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startTime.1">
+        <source>Please enter the start time according to the global time format.</source>
+        <target>Введіть початкову дату та час події в глобальному форматі</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endTime.0">
+        <source>End time</source>
+        <target>Кінець події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endTime.1">
+        <source>Use the same value for start and end time to create an open-ended event.</source>
+        <target>Введіть кінцеву дату та час події в глобальному форматі</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startDate.0">
+        <source>Start date</source>
+        <target>Початкова дата</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startDate.1">
+        <source>Please enter the start date according to the global date format.</source>
+        <target>Введіть дату початку події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endDate.0">
+        <source>End date</source>
+        <target>Кінцева дата</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endDate.1">
+        <source>Leave blank to create a single day event.</source>
+        <target>Введіть дату кінця події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.teaser.0">
+        <source>Event teaser</source>
+        <target>Вступний текст</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.teaser.1">
+        <source>The event teaser can be shown in an event list instead of the full article. A &quot;read more …&quot; link will be added automatically.</source>
+        <target>Вступний текст зазвичай показується замість повного тексту події що відображається після натиснення на лінк &quot;детальніше&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.details.0">
+        <source>Event text</source>
+        <target>Детальна інформація події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.details.1">
+        <source>Here you can enter the event text.</source>
+        <target>Будь-ласка введіть деталі події.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addImage.0">
+        <source>Add an image</source>
+        <target>Додати малюнок</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addImage.1">
+        <source>Add an image to the event.</source>
+        <target>Якщо відзначити дану опцію то, ви зможете додати малюнок до події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurring.0">
+        <source>Repeat event</source>
+        <target>Подія що повторюються</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurring.1">
+        <source>Create a recurring event.</source>
+        <target>Повторювати дану подію</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.repeatEach.0">
+        <source>Interval</source>
+        <target>Інтервал</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.repeatEach.1">
+        <source>Here you can set the recurrence interval.</source>
+        <target>Введіть часовий інтервал.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurrences.0">
+        <source>Recurrences</source>
+        <target>Повторів</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurrences.1">
+        <source>Set to 0 for unlimited recurrences.</source>
+        <target>Введіть, будь-ласка, кількість повторень події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addEnclosure.0">
+        <source>Add enclosures</source>
+        <target>Додати додаток</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addEnclosure.1">
+        <source>Add one or more downloadable files to the event.</source>
+        <target>Якщо відзначити дану опцію то, ви зможете додати один або декілька додатків до події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.enclosure.0">
+        <source>Enclosures</source>
+        <target>додаток</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.enclosure.1">
+        <source>Please choose the files you want to attach.</source>
+        <target>Будь ласка, виберіть файли, які потрібно додати.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.source.0">
+        <source>Redirect target</source>
+        <target>Цільова сторінка</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.source.1">
+        <source>Here you can override the default redirect target.</source>
+        <target>Встановіть, будь ласка, посилання на внутрішню або зовнішню сторінку замість стандартної сторінки.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.default.0">
+        <source>Use default</source>
+        <target>Використати значення по замовчуванню</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.default.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to the default page of the calendar.</source>
+        <target>Натиснувши кнопку &quot;читати далі ...&quot; відвідувачі будуть перенаправлені на сторінку календаря за замовчуванням.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.internal.0">
+        <source>Page</source>
+        <target>Внутрішня сторінка</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.internal.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an internal page.</source>
+        <target>Натиснувши кнопку &quot;читати далі ...&quot; відвідувачі будуть перенаправлені на внутрішню сторінку.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.article.0">
+        <source>Article</source>
+        <target>Стаття</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.article.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an article.</source>
+        <target>Натисканням на &quot;далі ...&quot;, відвідувачі будуть перенаправлятися на статтю.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.external.0">
+        <source>External URL</source>
+        <target>Зовнішній сайт</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.external.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an external website.</source>
+        <target>Натиснувши кнопку &quot;читати далі ...&quot; відвідувачі будуть перенаправлені на зовнішній сайт.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Перехід на сторінку</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected when clicking the event.</source>
+        <target>Будь ласка, виберіть сторінку, на яку відвідувачі будуть перенаправлені.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.articleId.0">
+        <source>Article</source>
+        <target>Стаття</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.articleId.1">
+        <source>Please choose the article to which visitors will be redirected when clicking the event.</source>
+        <target>Будь ласка, виберіть статтю, на яку будуть перенаправлятися відвідувачі при натисканні на подію.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cssClass.0">
+        <source>CSS class</source>
+        <target>CSS клас</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cssClass.1">
+        <source>Here you can enter one or more classes.</source>
+        <target>Тут ви можете ввести один або кілька CSS класів (клас атрибутів).</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.noComments.0">
+        <source>Disable comments</source>
+        <target>Вимкнути коментарі</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.noComments.1">
+        <source>Do not allow comments for this particular event.</source>
+        <target>Не дозволяйти коментарі для даної події.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.published.0">
+        <source>Publish event</source>
+        <target>Опубліковано</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.published.1">
+        <source>Make the event publicly visible on the website.</source>
+        <target>Подія буде відображена тільки після її публікації.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.start.0">
+        <source>Show from</source>
+        <target>Показувати з</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.start.1">
+        <source>Do not show the event on the website before this day.</source>
+        <target>Якщо ви введете тут дати поточних подій, вони не будуть показуватися на сайті до цих пір.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.stop.0">
+        <source>Show until</source>
+        <target>Показувати до</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.stop.1">
+        <source>Do not show the event on the website on and after this day.</source>
+        <target>Якщо ви введете тут дати поточних подій, вони не будуть показуватися на сайті після цього дня.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.tstamp.0">
+        <source>Revision date</source>
+        <target>Дата зміни</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Дата та час зміни запису</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.title_legend">
+        <source>Title and author</source>
+        <target>Заголовок та автор</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.date_legend">
+        <source>Date and time</source>
+        <target>Дата та час</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.teaser_legend">
+        <source>Teaser</source>
+        <target>Короткий опис</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.text_legend">
+        <source>Event text</source>
+        <target>Текст події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.image_legend">
+        <source>Image settings</source>
+        <target>Налаштування малюнка</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurring_legend">
+        <source>Recurrence settings</source>
+        <target>Налаштування, що повторюються</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.enclosure_legend">
+        <source>Enclosures</source>
+        <target>Додатки</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.source_legend">
+        <source>Redirect target</source>
+        <target>Ціль перенаправлення</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.expert_legend">
+        <source>Expert settings</source>
+        <target>Експертні налаштування</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.publish_legend">
+        <source>Publish settings</source>
+        <target>Параметри публікації</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.days">
+        <source>day(s)</source>
+        <target>день (дні)</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.weeks">
+        <source>week(s)</source>
+        <target>тиждень (тижні)</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.months">
+        <source>month(s)</source>
+        <target>місяць (місяці)</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.years">
+        <source>year(s)</source>
+        <target>рік (роки)</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.new.0">
+        <source>New event</source>
+        <target>Нова подія</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.new.1">
+        <source>Create a new event</source>
+        <target>Створити нову подію</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.show.0">
+        <source>Event details</source>
+        <target>Деталі події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.show.1">
+        <source>Show the details of event ID %s</source>
+        <target>Показати детальну інформацію події.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.edit.0">
+        <source>Edit event</source>
+        <target>Редагувати подію</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.edit.1">
+        <source>Edit event ID %s</source>
+        <target>Редагувати подію ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.copy.0">
+        <source>Duplicate event</source>
+        <target>Копіювати подію</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.copy.1">
+        <source>Duplicate event ID %s</source>
+        <target>Копіювати подію ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cut.0">
+        <source>Move event</source>
+        <target>Перемістити події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cut.1">
+        <source>Move event ID %s</source>
+        <target>Перемістити події ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.delete.0">
+        <source>Delete event</source>
+        <target>Видалити подію</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.delete.1">
+        <source>Delete event ID %s</source>
+        <target>Видалити подію ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.toggle.0">
+        <source>Publish/unpublish event</source>
+        <target>Опублікувати/Зняти із публікації подію</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.toggle.1">
+        <source>Publish/unpublish event ID %s</source>
+        <target>Опублікувати/Зняти із публікації подію ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.editheader.0">
+        <source>Edit calendar</source>
+        <target>Редагувати календар</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.editheader.1">
+        <source>Edit the calendar settings</source>
+        <target>Редагувати поточний календар</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.editmeta.0">
+        <source>Edit event settings</source>
+        <target>Редагувати налаштування події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.editmeta.1">
+        <source>Edit the event settings</source>
+        <target>Редагувати налаштування події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.pasteafter.0">
+        <source>Paste into this calendar</source>
+        <target>Вставити в календар</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.pasteafter.1">
+        <source>Paste after event ID %s</source>
+        <target>Вставити після події ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

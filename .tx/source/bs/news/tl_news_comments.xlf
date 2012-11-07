@@ -1,0 +1,122 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_news_comments.php" source-language="en">
+    <body>
+      <trans-unit id="tl_news_comments.pid.0">
+        <source>News item</source>
+        <target>Članak novosti</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.pid.1">
+        <source>The associated news item.</source>
+        <target>Povezani članak novosti.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.date.0">
+        <source>Date</source>
+        <target>Datum</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.date.1">
+        <source>Please enter the comment date.</source>
+        <target>Upišite datum komentara.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.name.0">
+        <source>Author</source>
+        <target>Autor</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.name.1">
+        <source>Please enter the author's name.</source>
+        <target>Upišite ime autora.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.email.0">
+        <source>E-mail address</source>
+        <target>E-mail adresa</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.email.1">
+        <source>The e-mail address will not be published.</source>
+        <target>E-mail adresa neće biti objavljena.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.website.0">
+        <source>Website</source>
+        <target>Web stranice</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.website.1">
+        <source>Here you can enter a website address.</source>
+        <target>Ovdje možete upisati adresu web stranice.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.comment.0">
+        <source>Comment</source>
+        <target>Komentar</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.comment.1">
+        <source>Please enter the comment.</source>
+        <target>Upišite komentar.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.published.0">
+        <source>Publish comment</source>
+        <target>Objavi komentar</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.published.1">
+        <source>Make the comment publicly visible on the website.</source>
+        <target>Učinite komentar dostupan svim posjetiteljima sajta.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.author_legend">
+        <source>Author</source>
+        <target>Autor</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.comment_legend">
+        <source>Comment</source>
+        <target>Komentar</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.publish_legend">
+        <source>Publish settings</source>
+        <target>Konfiguracija objavljivanja</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.approved">
+        <source>Approved</source>
+        <target>Odobreno</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.pending">
+        <source>Awaiting moderation</source>
+        <target>Čeka moderaciju</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.show.0">
+        <source>Comment details</source>
+        <target>Detalji komentara</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.show.1">
+        <source>Show the details of comment ID %s</source>
+        <target>Prikazati detalje komentara s ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.edit.0">
+        <source>Edit comment</source>
+        <target>Edituj komentar</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.edit.1">
+        <source>Edit comment ID %s</source>
+        <target>Editujte komentar s ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.delete.0">
+        <source>Delete comment</source>
+        <target>Izbriši komentar</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.delete.1">
+        <source>Delete comment ID %s</source>
+        <target>Izbrišite komentar s ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.toggle.0">
+        <source>Publish/unpublish comment</source>
+        <target>Objavi/odjavi komentar</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.toggle.1">
+        <source>Publish/unpublish comment ID %s</source>
+        <target>Objavi/odjavi komentar s ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.editheader.0">
+        <source>Edit archive</source>
+        <target>Edituj arhivu</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.editheader.1">
+        <source>Edit the current archive</source>
+        <target>Editujte sadašnju arhivu.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

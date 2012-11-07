@@ -1,0 +1,22 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/listing/languages/en/modules.php" source-language="en">
+    <body>
+      <trans-unit id="MOD.listing.0">
+        <source>Listing</source>
+        <target>Elenco</target>
+      </trans-unit>
+      <trans-unit id="MOD.listing.1">
+        <source>List the records of any table</source>
+        <target>Aggiungi un elenco di record, provenienti da una determinata tabella, nel frontend.</target>
+      </trans-unit>
+      <trans-unit id="FMD.listing.0">
+        <source>Listing</source>
+        <target>Elenco</target>
+      </trans-unit>
+      <trans-unit id="FMD.listing.1">
+        <source>Lists the records of any table</source>
+        <target>Mostra nel front-end un elenco di record di una determinata tabella</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

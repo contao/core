@@ -1,0 +1,122 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_user_group.php" source-language="en">
+    <body>
+      <trans-unit id="tl_user_group.name.0">
+        <source>Title</source>
+        <target>Naziv</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.name.1">
+        <source>Please enter the group title.</source>
+        <target>Upišite naziv grupe.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.alexf.0">
+        <source>Allowed fields</source>
+        <target>Dozvoljena polja</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.alexf.1">
+        <source>Here you can choose which fields will be editable.</source>
+        <target>Odaberite polja koja će se moći editovati.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.disable.0">
+        <source>Deactivate</source>
+        <target>Deaktiviraj</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.disable.1">
+        <source>Temporarily disable the group.</source>
+        <target>Privremeno isključite ovu grupu.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.start.0">
+        <source>Activate on</source>
+        <target>Aktiviraj na</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.start.1">
+        <source>Automatically activate the group on this day.</source>
+        <target>Automatski aktivirajte grupu na ovaj dan.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.stop.0">
+        <source>Deactivate on</source>
+        <target>Deaktiviraj na</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.stop.1">
+        <source>Automatically deactivate the group on this day.</source>
+        <target>Automatski deaktivirajte grupu na ovaj dan.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.title_legend">
+        <source>Title</source>
+        <target>Naziv</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.modules_legend">
+        <source>Allowed modules</source>
+        <target>Dozvoljeni moduli</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.pagemounts_legend">
+        <source>Pagemounts</source>
+        <target>Individualna stranica</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.filemounts_legend">
+        <source>Filemounts</source>
+        <target>Individualna mapa</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.forms_legend">
+        <source>Form permissions</source>
+        <target>Dozvoljeni obrasci</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.account_legend">
+        <source>Account settings</source>
+        <target>Postavke računa</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.alexf_legend">
+        <source>Allowed fields</source>
+        <target>Isključena polja</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.new.0">
+        <source>New user group</source>
+        <target>Nova grupa korisnika</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.new.1">
+        <source>Create a new user group</source>
+        <target>Kreirajte novu korisničku grupu.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.show.0">
+        <source>Group details</source>
+        <target>Detalji grupe</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.show.1">
+        <source>Show the details of group ID %s</source>
+        <target>Prikažite detalje grupe s ID %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.edit.0">
+        <source>Edit group</source>
+        <target>Edituj grupu</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.edit.1">
+        <source>Edit group ID %s</source>
+        <target>Editujte grupu s ID %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.copy.0">
+        <source>Duplicate group</source>
+        <target>Kopiraj grupu</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.copy.1">
+        <source>Duplicate group ID %s</source>
+        <target>Kopirajte grupu s ID %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.delete.0">
+        <source>Delete group</source>
+        <target>Izbriši grupu</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.delete.1">
+        <source>Delete group ID %s</source>
+        <target>Izbrišite grupu s ID %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.toggle.0">
+        <source>Activate/deactivate group</source>
+        <target>Aktiviraj/deaktiviraj grupu</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.toggle.1">
+        <source>Activate/deactivate group ID %s</source>
+        <target>Aktivirajte/deaktivirajte grupu s ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

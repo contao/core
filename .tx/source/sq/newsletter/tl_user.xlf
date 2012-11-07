@@ -1,0 +1,26 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_user.php" source-language="en">
+    <body>
+      <trans-unit id="tl_user.newsletters.0">
+        <source>Allowed channels</source>
+        <target>Kanale lajmesh</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsletters.1">
+        <source>Here you can grant access to one or more channels.</source>
+        <target>Zgjedhoni kanale lajmesh që doni t'i aktivizoni për përdoruesin.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsletterp.0">
+        <source>Channel permissions</source>
+        <target>Drejta për kanal</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsletterp.1">
+        <source>Here you can define the channel permissions.</source>
+        <target>Definimi i drejtave për kanal.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsletter_legend">
+        <source>Newsletter permissions</source>
+        <target>Drejta për lajm</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

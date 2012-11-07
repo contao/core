@@ -1,0 +1,94 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_log.php" source-language="en">
+    <body>
+      <trans-unit id="tl_log.tstamp.0">
+        <source>Date</source>
+        <target>Data</target>
+      </trans-unit>
+      <trans-unit id="tl_log.tstamp.1">
+        <source>Date and time of the log entry</source>
+        <target>Data e temp da l'endataziun en il protocol</target>
+      </trans-unit>
+      <trans-unit id="tl_log.source.0">
+        <source>Origin</source>
+        <target>Origin</target>
+      </trans-unit>
+      <trans-unit id="tl_log.source.1">
+        <source>Back end or front end</source>
+        <target>Back-end u front-end</target>
+      </trans-unit>
+      <trans-unit id="tl_log.action.0">
+        <source>Category</source>
+        <target>Categoria</target>
+      </trans-unit>
+      <trans-unit id="tl_log.action.1">
+        <source>Category of the action</source>
+        <target>Categoria da l'acziun</target>
+      </trans-unit>
+      <trans-unit id="tl_log.username.0">
+        <source>User</source>
+        <target>Utilisader</target>
+      </trans-unit>
+      <trans-unit id="tl_log.username.1">
+        <source>Name of the authenticated user</source>
+        <target>Num da l'utilisader autentifitgà</target>
+      </trans-unit>
+      <trans-unit id="tl_log.text.0">
+        <source>Details</source>
+        <target>Detagls</target>
+      </trans-unit>
+      <trans-unit id="tl_log.text.1">
+        <source>Details of the log entry</source>
+        <target>Detagls da l'endataziun en il protocol</target>
+      </trans-unit>
+      <trans-unit id="tl_log.func.0">
+        <source>Function</source>
+        <target>Funcziun</target>
+      </trans-unit>
+      <trans-unit id="tl_log.func.1">
+        <source>Name of the initiating function</source>
+        <target>Num da la funcziun inizianta</target>
+      </trans-unit>
+      <trans-unit id="tl_log.ip.0">
+        <source>IP address</source>
+        <target>Adressa IP</target>
+      </trans-unit>
+      <trans-unit id="tl_log.ip.1">
+        <source>IP address of the user</source>
+        <target>Adressa IP da l'utilisader</target>
+      </trans-unit>
+      <trans-unit id="tl_log.browser.0">
+        <source>Browser</source>
+        <target>Navigatur</target>
+      </trans-unit>
+      <trans-unit id="tl_log.browser.1">
+        <source>Name of the user agent</source>
+        <target>Num da l'user agent</target>
+      </trans-unit>
+      <trans-unit id="tl_log.BE">
+        <source>Back end</source>
+        <target>Back-end</target>
+      </trans-unit>
+      <trans-unit id="tl_log.FE">
+        <source>Front end</source>
+        <target>Front-end</target>
+      </trans-unit>
+      <trans-unit id="tl_log.show.0">
+        <source>Show details</source>
+        <target>Mussar detagls</target>
+      </trans-unit>
+      <trans-unit id="tl_log.show.1">
+        <source>Show the details of entry ID %s</source>
+        <target>Mussar ils detagls da l'endataziun cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_log.delete.0">
+        <source>Delete</source>
+        <target>Stizzar</target>
+      </trans-unit>
+      <trans-unit id="tl_log.delete.1">
+        <source>Delete entry ID %s</source>
+        <target>Stizzar l'endataziun cun l'ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

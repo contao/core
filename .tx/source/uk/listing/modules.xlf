@@ -1,0 +1,22 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/listing/languages/en/modules.php" source-language="en">
+    <body>
+      <trans-unit id="MOD.listing.0">
+        <source>Listing</source>
+        <target>Список</target>
+      </trans-unit>
+      <trans-unit id="MOD.listing.1">
+        <source>List the records of any table</source>
+        <target>Даний модуль дозволяє вивести записи обраної таблиці із бази даних на клієнтській частині сайту</target>
+      </trans-unit>
+      <trans-unit id="FMD.listing.0">
+        <source>Listing</source>
+        <target>Список</target>
+      </trans-unit>
+      <trans-unit id="FMD.listing.1">
+        <source>Lists the records of any table</source>
+        <target>Даний модуль дозволяє вивести записи обраної таблиці із бази даних на клієнтській частині сайту</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

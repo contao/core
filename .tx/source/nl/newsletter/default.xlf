@@ -1,0 +1,50 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/default.php" source-language="en">
+    <body>
+      <trans-unit id="ERR.subscribed">
+        <source>You are subscribed to the selected channels already.</source>
+        <target>U bent reeds ingeschreven voor deze nieuwsbrief.</target>
+      </trans-unit>
+      <trans-unit id="ERR.unsubscribed">
+        <source>You are not subscribed to the selected channels.</source>
+        <target>U bent niet ingeschreven voor deze nieuwsbrief.</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidToken">
+        <source>The activation link is invalid or outdated.</source>
+        <target>Deze activatielink is ongeldig of verouderd.</target>
+      </trans-unit>
+      <trans-unit id="ERR.noChannels">
+        <source>Please select at least one channel.</source>
+        <target>Selecteer minstens 1 nieuwsbrief.</target>
+      </trans-unit>
+      <trans-unit id="MSC.subscribe">
+        <source>Subscribe</source>
+        <target>Inschrijven</target>
+      </trans-unit>
+      <trans-unit id="MSC.unsubscribe">
+        <source>Unsubscribe</source>
+        <target>Uitschrijven</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_subject">
+        <source>Your subscription on %s</source>
+        <target>Uw inschrijving voor nieuwsbrief %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_confirm">
+        <source>Thank you for your subscription. You will receive a confirmation e-mail.</source>
+        <target>Dank u voor uw inschrijving. U onvangt een e-mail ter bevestiging.</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_activate">
+        <source>Your subscription has been activated.</source>
+        <target>Uw abonnement is geactiveerd.</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_removed">
+        <source>Your subscription has been cancelled.</source>
+        <target>Uw abonnement is succesvol opgezegd.</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_channels">
+        <source>Channels</source>
+        <target>Nieuwsbrieven</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

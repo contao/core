@@ -1,0 +1,144 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/comments/languages/en/default.php" source-language="en">
+    <body>
+      <trans-unit id="MSC.com_name">
+        <source>Name</source>
+        <target>Ім'я</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_email">
+        <source>E-mail (not published)</source>
+        <target>E-mail (не публікується)</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_website">
+        <source>Website</source>
+        <target>Веб-сайт</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_comment">
+        <source>Comment</source>
+        <target>Коментар</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_notify">
+        <source>Notify me of new comments by e-mail</source>
+        <target>Повідомляти мене про нові коментарі по e-mail</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_submit">
+        <source>Submit comment</source>
+        <target>Відправити коментар</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_by">
+        <source>Comment by</source>
+        <target>Коментар від</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_reply">
+        <source>Reply by</source>
+        <target>Відповідь від</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_quote">
+        <source>%s wrote:</source>
+        <target>%s написав:</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_code">
+        <source>Code:</source>
+        <target>Код:</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_subject">
+        <source>New comment on %s</source>
+        <target>Новий коментар до %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_message">
+        <source>%s has created a new comment on your website.
+
+---
+
+%s
+
+---
+
+View: %s
+Edit: %s
+
+If you are moderating comments, you have to log in to the back end to publish it.</source>
+        <target>%s створив новий коментар на веб-сайті
+
+----
+
+%s
+
+----
+
+Переглянути: %s
+Редагувати: %s
+
+Якщо ви адмініструєте коментарі, то увійдіть до панелі управління сайту для того, щоб опублікувати коментар.</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_confirm">
+        <source>Your comment has been added and is now pending for approval.</source>
+        <target>Ваш коментар доданий та чекає схвалення.</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_optInConfirm">
+        <source>Your subscription has been activated</source>
+        <target>Ваша підписка активована.</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_optInCancel">
+        <source>Your subscription has been cancelled</source>
+        <target>Ваша підписка була скасована.</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_optInSubject">
+        <source>Your subscription on %s</source>
+        <target>Ваша підписка на %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_optInMessage">
+        <source>Hello %s,
+
+please confirm that you want to be notified of new comments by e-mail on this page:
+
+%s
+
+---
+
+Confirm: %s
+Cancel: %s
+</source>
+        <target>Доброго дня, %s!
+
+Будь ласка, підтвердіть, що хочете отримувати повідомлення про нові коментарі по електронній пошті на наступній сторінці:
+
+%s
+
+----
+
+Підтвердити: %s
+Скасувати: %s
+</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_notifySubject">
+        <source>A new comment has been added on %s</source>
+        <target>Новий коментар був доданий до %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_notifyMessage">
+        <source>Hello %s,
+
+a new comment has been added on a page you have subscribed to:
+
+%s
+
+---
+
+To cancel your subscription, please click here:
+%s
+</source>
+        <target>Доброго дня, %s!
+
+На сторінці на яку ви підписалися був доданий новий коментар:
+
+%s
+
+----
+
+Щоб скасувати підписку, натисніть тут:
+%s
+</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,274 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_news_archive.php" source-language="en">
+    <body>
+      <trans-unit id="tl_news_archive.title.0">
+        <source>Title</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.title.1">
+        <source>Please enter a news archive title.</source>
+        <target>Geef een titel op voor het nieuwsarchief.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Ga naar pagina</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.jumpTo.1">
+        <source>Please choose the news reader page to which visitors will be redirected when clicking a news item.</source>
+        <target>Geef op naar welke pagina bezoekers verder geleid worden na het klikken op een nieuwsbericht.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.allowComments.0">
+        <source>Enable comments</source>
+        <target>Reacties toestaan</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.allowComments.1">
+        <source>Allow visitors to comment news items.</source>
+        <target>Sta bezoekers toe om te reageren op nieuwsberichten.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify.0">
+        <source>Notify</source>
+        <target>Kennisgeving reacties</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+        <target>Kies wie te berichten wanneer nieuwe reacties zijn toegevoegd.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.sortOrder.0">
+        <source>Sort order</source>
+        <target>Sorteervolgorde</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+        <target>Kies de sorteervolgorde van de reacties.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.perPage.0">
+        <source>Comments per page</source>
+        <target>Reacties per pagina</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>Geef het aantal reacties per pagina. Zet op 0 om paginatie uit te zetten.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.moderate.0">
+        <source>Moderate comments</source>
+        <target>Goedkeuren reacties</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>Reacties goedkeuren voordat ze getoond worden op de website.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.bbcode.0">
+        <source>Allow BBCode</source>
+        <target>BBCode toestaan</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Sta bezoekers toe om BBCode te gebruiken in hun opmerkingen.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.requireLogin.0">
+        <source>Require login to comment</source>
+        <target>Login vereist om te reageren</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>Alleen geregistreerde bezoekers (leden) mogen reacties plaatsen.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Veiligheidsvraag uitzetten</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+        <target>Kies deze optie alleen als reageren is beperkt tot aangemelde gebruikers.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected.0">
+        <source>Protect archive</source>
+        <target>Bescherm archief</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected.1">
+        <source>Show news items to certain member groups only.</source>
+        <target>Toon nieuwsberichten alleen aan bepaalde ledengroepen.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.groups.0">
+        <source>Allowed member groups</source>
+        <target>Toegestane ledengroepen</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.groups.1">
+        <source>These groups will be able to see the news items in this archive.</source>
+        <target>Hier kunt u kiezen welke groepen het toegestaan is om de nieuwsberichten te bekijken.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.makeFeed.0">
+        <source>Generate feed</source>
+        <target>Genereer feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.makeFeed.1">
+        <source>Generate an RSS or Atom feed from the news archive.</source>
+        <target>Genereer een RSS/Atom feed van het nieuwsarchief.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.format.0">
+        <source>Feed format</source>
+        <target>Feed formaat</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.format.1">
+        <source>Please choose a feed format.</source>
+        <target>Kies een feed formaat.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.language.0">
+        <source>Feed language</source>
+        <target>Feed taal</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.language.1">
+        <source>Please enter the feed language according to the ISO-639 standard (e.g. &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;).</source>
+        <target>Geef de taal op volgens ISO-639 (bv. &lt;em&gt;en&lt;/em&gt;, &lt;em&gt;nl&lt;/em&gt; of &lt;em&gt;nl-be&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source.0">
+        <source>Export settings</source>
+        <target>Export instellingen</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source.1">
+        <source>Here you can choose what will be exported.</source>
+        <target>Hier kunt u kiezen wat geëxporteerd wordt.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.maxItems.0">
+        <source>Maximum number of items</source>
+        <target>Maximum aantal berichten</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.maxItems.1">
+        <source>Here you can limit the number of feed items. Set to 0 to export all.</source>
+        <target>Beperk het aantal geëxporteerde berichten. Stel in op 0 om alles te exporteren.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feedBase.0">
+        <source>Base URL</source>
+        <target>Basis-URL</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feedBase.1">
+        <source>Please enter the base URL with protocol (e.g. &lt;em&gt;http://&lt;/em&gt;).</source>
+        <target>Geef de basis-URL inclusief het protocol op (bv. &lt;em&gt;http://&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.alias.0">
+        <source>Feed alias</source>
+        <target>Feed alias</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.alias.1">
+        <source>Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the root directory of your Contao installation, e.g. as &lt;em&gt;name.xml&lt;/em&gt;.</source>
+        <target>Hier kunt u een unieke feed naam opgeven. Een XML bestand zal automatisch in de root directory van uw Contao installatie worden aangemaakt. (&lt;em&gt;name.xml&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.description.0">
+        <source>Feed description</source>
+        <target>Omschrijving Feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.description.1">
+        <source>Please enter a short description of the news feed.</source>
+        <target>Geef een korte omschrijving voor deze feed.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.tstamp.0">
+        <source>Revision date</source>
+        <target>Datum van aanpassing</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Geef datum en tijdstip van de laatste aanpassing.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.title_legend">
+        <source>Title and redirect page</source>
+        <target>Titel en doelpagina</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments_legend">
+        <source>Comments</source>
+        <target>Reacties</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected_legend">
+        <source>Access protection</source>
+        <target>Toegangsbeveiliging</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feed_legend">
+        <source>RSS/Atom feed</source>
+        <target>RSS/Atom feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_admin">
+        <source>System administrator</source>
+        <target>Systeembeheerder</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_author">
+        <source>Author of the news item</source>
+        <target>Auteur van het nieuwsbericht</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_both">
+        <source>Author and system administrator</source>
+        <target>Auteur en systeembeheerder</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source_teaser">
+        <source>News teasers</source>
+        <target>Teasers van nieuwsberichten</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source_text">
+        <source>Full articles</source>
+        <target>Volledige nieuwsberichten</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.new.0">
+        <source>New archive</source>
+        <target>Nieuw archief</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.new.1">
+        <source>Create a new archive</source>
+        <target>Maak een nieuw nieuwsarchief</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.show.0">
+        <source>Archive details</source>
+        <target>Archief details</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.show.1">
+        <source>Show the details of archive ID %s</source>
+        <target>Toon de details van nieuwsarchief ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.edit.0">
+        <source>Edit archive</source>
+        <target>Bewerk archief</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.edit.1">
+        <source>Edit archive ID %s</source>
+        <target>Bewerk nieuwsarchief ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.editheader.0">
+        <source>Edit archive settings</source>
+        <target>Bewerk archief instellingen</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.editheader.1">
+        <source>Edit the settings of archive ID %s</source>
+        <target>Bewerk de instellingen van nieuwsarchief ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.copy.0">
+        <source>Duplicate archive</source>
+        <target>Kopieer archief</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.copy.1">
+        <source>Duplicate archive ID %s</source>
+        <target>Kopieer nieuwsarchief ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.delete.0">
+        <source>Delete archive</source>
+        <target>Verwijder archief</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.delete.1">
+        <source>Delete archive ID %s</source>
+        <target>Verwijder nieuwsarchief ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments.0">
+        <source>Comments</source>
+        <target>Reacties</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments.1">
+        <source>Show comments of archive ID %s</source>
+        <target>Toon de reacties van nieuwsarchief ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feeds.0">
+        <source>RSS feeds</source>
+        <target>RSS feeds</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feeds.1">
+        <source>Manage RSS feeds</source>
+        <target>Beheer RSS feeds</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

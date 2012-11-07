@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_module.php" source-language="en">
+    <body>
+      <trans-unit id="tl_module.newsletters.0">
+        <source>Subscribable newsletters</source>
+        <target>Канал розсилки</target>
+      </trans-unit>
+      <trans-unit id="tl_module.newsletters.1">
+        <source>Show these channels in the front end form.</source>
+        <target>Виберіть, будь-ласка, канали розсилки на які користувач зможе підписатись, в процесі реєстрації.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.0">
+        <source>Channels</source>
+        <target>Канали розсилок</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.1">
+        <source>Please select one or more channels.</source>
+        <target>Виберіть, будь ласка, один або більше каналів</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.0">
+        <source>Hide channel menu</source>
+        <target>Сховати меню каналу розсилки</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.1">
+        <source>Do not show the channel selection menu.</source>
+        <target>Не показувати меню вибору каналів розсилки</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.0">
+        <source>Subscription message</source>
+        <target>Текст листа підтвердження</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names), &lt;em&gt;##domain##&lt;/em&gt; (domain name) and &lt;em&gt;##link##&lt;/em&gt; (activation link).</source>
+        <target>Будь ласка, введіть текст що відображатиметься в листі підтвердження. Ви можете використовувати наступні маски, &lt;em&gt;##channels##&lt;/em&gt; (назва каналів розсилок), &lt;em&gt;##domain##&lt;/em&gt; (доменне ім’я) та &lt;em&gt;##link##&lt;/em&gt; (активаційний лінк).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.0">
+        <source>Unsubscription message</source>
+        <target>Текст листа для виключення з списку розсилки</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names) and &lt;em&gt;##domain##&lt;/em&gt; (domain name).</source>
+        <target>Будь ласка, введіть текст що відображатиметься в листі відмови від розсилки. Ви можете використовувати наступні маски, &lt;em&gt;##channels##&lt;/em&gt; (назва каналів розсилок), &lt;em&gt;##domain##&lt;/em&gt; (доменне ім’я).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.0">
+        <source>Newsletter template</source>
+        <target>Шаблон розсилки</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.1">
+        <source>Here you can select the newsletter template.</source>
+        <target>Будь-ласка, виберіть шаблон розсилки. Ви можете додати власний шаблон розсилки до папки &lt;em&gt;templates&lt;/em&gt;. Шаблони модуля розсилки розпочинається &lt;em&gt;nl_&lt;/em&gt; і вимагають розширеня файлу &lt;em&gt;.tpl&lt;/em&gt;</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Ваша підписка на %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.1">
+        <source>You have subscribed to the following channels on ##domain##:
+
+##channels##
+
+Please click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.
+</source>
+        <target>Ви включені в список наступних розсилок ##channels## на ##domain##. Будь-ласка, натисніть на ##link## для завершення реєстрації. Якщо ви не підписувались то проігноруйте даний електронний лист.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Ваша підписка на %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.1">
+        <source>You have unsubscribed from the following channels on ##domain##:
+
+##channels##
+</source>
+        <target>Ви успішно виключені зі списку розсилок ##channels## на ##domain##.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
