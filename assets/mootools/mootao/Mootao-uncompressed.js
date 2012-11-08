@@ -118,7 +118,8 @@ Tips.Contao = new Class(
 	position: function(event) {
 		if (!this.tip) document.id(this);
 
-		var size = window.getSize(), scroll = window.getScroll(),
+		var size = window.getSize(),
+			scroll = window.getScroll(),
 			tip = {x: this.tip.offsetWidth, y: this.tip.offsetHeight},
 			props = {x: 'left', y: 'top'},
 			bounds = {y: false, x2: false, y2: false, x: false},

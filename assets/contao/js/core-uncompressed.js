@@ -26,8 +26,9 @@ var AjaxRequest =
 	 */
 	toggleNavigation: function(el, id) {
 		el.blur();
-		var item = $(id);
-		var image = $(el).getFirst('img');
+
+		var item = $(id),
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
@@ -79,8 +80,9 @@ var AjaxRequest =
 	 */
 	toggleStructure: function (el, id, level, mode) {
 		el.blur();
-		var item = $(id);
-		var image = $(el).getFirst('img');
+
+		var item = $(id),
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
@@ -118,8 +120,8 @@ var AjaxRequest =
 				if (mode == 5) {
 					li.inject($(el).getParent('li'), 'after');
 				} else {
-					var folder = false;
-					var parent = $(el).getParent('li');
+					var folder = false,
+						parent = $(el).getParent('li');
 
 					while (typeOf(parent) == 'element' && (next = parent.getNext('li'))) {
 						parent = next;
@@ -159,9 +161,10 @@ var AjaxRequest =
 	 */
 	toggleFileManager: function (el, id, folder, level) {
 		el.blur();
-		var item = $(id);
-		var image = $(el).getFirst('img');
-		var icon = $(el).getNext('img');
+
+		var item = $(id),
+			image = $(el).getFirst('img'),
+			icon = $(el).getNext('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
@@ -223,8 +226,9 @@ var AjaxRequest =
 	 */
 	togglePagetree: function (el, id, field, name, level) {
 		el.blur();
-		var item = $(id);
-		var image = $(el).getFirst('img');
+
+		var item = $(id),
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
@@ -283,8 +287,9 @@ var AjaxRequest =
 	 */
 	toggleFiletree: function (el, id, field, name, level) {
 		el.blur();
-		var item = $(id);
-		var image = $(el).getFirst('img');
+
+		var item = $(id),
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
@@ -337,8 +342,8 @@ var AjaxRequest =
 	 */
 	reloadFiletrees: function () {
 		$$('.filetree').each(function(el) {
-			var name = el.id;
-			var field = name.replace(/_[0-9]+$/, '');
+			var name = el.id,
+				field = name.replace(/_[0-9]+$/, '');
 
 			new Request.Contao({
 				evalScripts: true,
@@ -346,8 +351,8 @@ var AjaxRequest =
 				onSuccess: function(txt, json) {
 
 					// Preserve the "reset selection" entry
-					var ul = $(el.id + '_parent').getFirst('ul');
-					var li = ul.getLast('li');
+					var ul = $(el.id + '_parent').getFirst('ul'),
+						li = ul.getLast('li');
 					ul.set('html', txt);
 					li.inject(ul, 'bottom');
 					AjaxRequest.hideBox();
@@ -423,10 +428,11 @@ var AjaxRequest =
 	 */
 	toggleVisibility: function(el, id, table) {
 		el.blur();
-		var img = null;
-		var image = $(el).getFirst('img');
-		var publish = (image.src.indexOf('invisible') != -1);
-		var div = el.getParent('div');
+
+		var img = null,
+			image = $(el).getFirst('img'),
+			publish = (image.src.indexOf('invisible') != -1),
+			div = el.getParent('div');
 
 		// Find the icon depending on the view (tree view, list view, parent view)
 		if (div.hasClass('tl_right')) {
@@ -515,8 +521,9 @@ var AjaxRequest =
 	 */
 	toggleFeatured: function(el, id) {
 		el.blur();
-		var image = $(el).getFirst('img');
-		var featured = (image.src.indexOf('featured_') == -1);
+
+		var image = $(el).getFirst('img'),
+			featured = (image.src.indexOf('featured_') == -1);
 
 		// Send the request
 		if (!featured) {
@@ -560,8 +567,9 @@ var AjaxRequest =
 	 */
 	toggleCheckboxGroup: function(el, id) {
 		el.blur();
-		var item = $(id);
-		var image = $(el).getFirst('img');
+
+		var item = $(id),
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') != 'block') {
@@ -604,9 +612,9 @@ var AjaxRequest =
 	 * @param string
 	 */
 	displayBox: function(message) {
-		var box = $('tl_ajaxBox');
-		var overlay = $('tl_ajaxOverlay');
-		var scroll = window.getScroll();
+		var box = $('tl_ajaxBox'),
+			overlay = $('tl_ajaxOverlay'),
+			scroll = window.getScroll();
 
 		if (overlay == null) {
 			overlay = new Element('div', {
@@ -640,8 +648,8 @@ var AjaxRequest =
 	 * Hide the "loading data" message
 	 */
 	hideBox: function() {
-		var box = $('tl_ajaxBox');
-		var overlay = $('tl_ajaxOverlay');
+		var box = $('tl_ajaxBox'),
+			overlay = $('tl_ajaxOverlay');
 
 		if (overlay) {
 			overlay.setStyle('display', 'none');
@@ -775,10 +783,11 @@ var Backend =
 			this.hide();
 		});
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
-			var val = [], tls = [];
-            var par = opt.id.replace(/_[0-9]+$/, '') + '_parent'; // Strip the "edit multiple" suffixes
-			var frm = null;
-			var frms = window.frames;
+			var val = [],
+				tls = [],
+            	par = opt.id.replace(/_[0-9]+$/, '') + '_parent', // Strip the "edit multiple" suffixes
+				frm = null,
+				frms = window.frames;
 			for (var i=0; i<frms.length; i++) {
 				if (frms[i].name == 'simple-modal-iframe') {
 					frm = frms[i];
@@ -868,8 +877,8 @@ var Backend =
 	 * Hide all pagetree and filetree nodes
 	 */
 	hideTreeBody: function() {
-		var lists = $$('ul');
-		var parent = null;
+		var lists = $$('ul'),
+			parent = null;
 
 		for (var i=0; i<lists.length; i++) {
 			if (lists[i].hasClass('mandatory')) {
@@ -884,10 +893,10 @@ var Backend =
 	 * Limit the height of the preview pane
 	 */
 	limitPreviewHeight: function() {
-		var size = null;
-		var toggler = null;
-		var style = '';
-		var hgt = 0;
+		var size = null,
+			toggler = null,
+			style = '',
+			hgt = 0;
 
 		$$('div.limit_height').each(function(div) {
 			size = div.getCoordinates();
@@ -935,8 +944,8 @@ var Backend =
 	 * @param string
 	 */
 	toggleCheckboxes: function(trigger, id) {
-		var items = $$('input');
-		var status = trigger.checked ? 'checked' : '';
+		var items = $$('input'),
+			status = trigger.checked ? 'checked' : '';
 
 		for (var i=0; i<items.length; i++) {
 			if (items[i].type.toLowerCase() != 'checkbox') {
@@ -955,8 +964,8 @@ var Backend =
 	 * @param string
 	 */
 	toggleCheckboxGroup: function(el, id) {
-		var cls = $(el).className;
-		var status = $(el).checked ? 'checked' : '';
+		var cls = $(el).className,
+			status = $(el).checked ? 'checked' : '';
 
 		if (cls == 'tl_checkbox') {
 			var cbx = $(id) ? $$('#' + id + ' .tl_checkbox') : $(el).getParent('fieldset').getElements('.tl_checkbox');
@@ -993,8 +1002,8 @@ var Backend =
 	 * @param string
 	 */
 	toggleWrap: function(id) {
-		var textarea = $(id);
-		var status = (textarea.getProperty('wrap') == 'off') ? 'soft' : 'off';
+		var textarea = $(id),
+			status = (textarea.getProperty('wrap') == 'off') ? 'soft' : 'off';
 		textarea.setProperty('wrap', status);
 	},
 
@@ -1019,8 +1028,8 @@ var Backend =
 	 * @deprecated Use Backend.openModalIframe() instead
 	 */
 	pickPage: function(id) {
-		var width = 320;
-		var height = 112;
+		var width = 320,
+			height = 112;
 
 		Backend.currentId = id;
 		Backend.ppValue = $(id).value;
@@ -1036,8 +1045,8 @@ var Backend =
 	 * @deprecated Use Backend.openModalIframe() instead
 	 */
 	pickFile: function(id, filter) {
-		var width = 320;
-		var height = 112;
+		var width = 320,
+			height = 112;
 
 		Backend.currentId = id;
 		Backend.ppValue = $(id).value;
@@ -1111,16 +1120,16 @@ var Backend =
 	    	if (!list.active) return;
 
     		if (el.getPrevious('li')) {
-    			var id = el.get('id').replace(/li_/, '');
-    			var pid = el.getPrevious('li').get('id').replace(/li_/, '');
-    			var req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=1&pid=' + pid;
-    			var href = window.location.href.replace(/\?.*$/, '');
+    			var id = el.get('id').replace(/li_/, ''),
+    				pid = el.getPrevious('li').get('id').replace(/li_/, ''),
+    				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=1&pid=' + pid,
+    				href = window.location.href.replace(/\?.*$/, '');
     			new Request({'url':href+req}).get();
     		} else if (el.getParent('ul')) {
-    			var id = el.get('id').replace(/li_/, '');
-    			var pid = el.getParent('ul').get('id').replace(/ul_/, '');
-    			var req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=2&pid=' + pid;
-    			var href = window.location.href.replace(/\?.*$/, '');
+    			var id = el.get('id').replace(/li_/, ''),
+    				pid = el.getParent('ul').get('id').replace(/ul_/, ''),
+    				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=2&pid=' + pid,
+    				href = window.location.href.replace(/\?.*$/, '');
     			new Request({'url':href+req}).get();
     		}
     	});
@@ -1136,8 +1145,8 @@ var Backend =
             contstrain: true,
             opacity: 0.6
         }).addEvent('complete', function() {
-            var els = [];
-            var lis = $(id).getChildren('li');
+            var els = [],
+            	lis = $(id).getChildren('li');
             for (i=0; i<lis.length; i++) {
                 els.push(lis[i].get('data-id'));
             }
@@ -1153,9 +1162,10 @@ var Backend =
 	 * @param string
 	 */
 	listWizard: function(el, command, id) {
-		var list = $(id);
-		var parent = $(el).getParent('li');
-		var items = list.getChildren();
+		var list = $(id),
+			parent = $(el).getParent('li'),
+			items = list.getChildren();
+
 		Backend.getScrollOffset();
 
 		switch (command) {
@@ -1203,13 +1213,13 @@ var Backend =
 	 * @param string
 	 */
 	tableWizard: function(el, command, id) {
-		var table = $(id);
-		var tbody = table.getElement('tbody');
-		var rows = tbody.getChildren();
-		var parentTd = $(el).getParent('td');
-		var parentTr = parentTd.getParent('tr');
-		var cols = parentTr.getChildren();
-		var index = 0;
+		var table = $(id),
+			tbody = table.getElement('tbody'),
+			rows = tbody.getChildren(),
+			parentTd = $(el).getParent('td'),
+			parentTr = parentTd.getParent('tr'),
+			cols = parentTr.getChildren(),
+			index = 0;
 
 		for (var i=0; i<cols.length; i++) {
 			if (cols[i] == parentTd) {
@@ -1253,8 +1263,8 @@ var Backend =
 				break;
 			case 'ccopy':
 				for (var i=0; i<rows.length; i++) {
-					var current = rows[i].getChildren()[index];
-					var next = current.clone(true).inject(current, 'after');
+					var current = rows[i].getChildren()[index],
+						next = current.clone(true).inject(current, 'after');
 					if (textarea = current.getFirst('textarea')) {
 						next.getFirst('textarea').value = textarea.value;
 					}
@@ -1345,16 +1355,17 @@ var Backend =
 	 * @param string
 	 */
 	moduleWizard: function(el, command, id) {
-		var table = $(id);
-		var tbody = table.getElement('tbody');
-		var parent = $(el).getParent('tr');
-		var rows = tbody.getChildren();
+		var table = $(id),
+			tbody = table.getElement('tbody'),
+			parent = $(el).getParent('tr'),
+			rows = tbody.getChildren();
+
 		Backend.getScrollOffset();
 
 		switch (command) {
 			case 'copy':
-				var tr = new Element('tr');
-				var childs = parent.getChildren();
+				var tr = new Element('tr'),
+					childs = parent.getChildren();
 				for (var i=0; i<childs.length; i++) {
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (select = childs[i].getFirst('select')) {
@@ -1408,16 +1419,17 @@ var Backend =
 	 * @param string
 	 */
 	optionsWizard: function(el, command, id) {
-		var table = $(id);
-		var tbody = table.getElement('tbody');
-		var parent = $(el).getParent('tr');
-		var rows = tbody.getChildren();
+		var table = $(id),
+			tbody = table.getElement('tbody'),
+			parent = $(el).getParent('tr'),
+			rows = tbody.getChildren();
+
 		Backend.getScrollOffset();
 
 		switch (command) {
 			case 'copy':
-				var tr = new Element('tr');
-				var childs = parent.getChildren();
+				var tr = new Element('tr'),
+					childs = parent.getChildren();
 				for (var i=0; i<childs.length; i++) {
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (input = childs[i].getFirst('input')) {
@@ -1475,16 +1487,17 @@ var Backend =
 	 * @param string
 	 */
 	keyValueWizard: function(el, command, id) {
-		var table = $(id);
-		var tbody = table.getElement('tbody');
-		var parent = $(el).getParent('tr');
-		var rows = tbody.getChildren();
+		var table = $(id),
+			tbody = table.getElement('tbody'),
+			parent = $(el).getParent('tr'),
+			rows = tbody.getChildren();
+
 		Backend.getScrollOffset();
 
 		switch (command) {
 			case 'copy':
-				var tr = new Element('tr');
-				var childs = parent.getChildren();
+				var tr = new Element('tr'),
+					childs = parent.getChildren();
 				for (var i=0; i<childs.length; i++) {
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (input = childs[i].getFirst('input')) {
@@ -1535,8 +1548,9 @@ var Backend =
 	 * @param string
 	 */
 	checkboxWizard: function(el, command, id) {
-		var container = $(id);
-		var parent = $(el).getParent('span');
+		var container = $(id),
+			parent = $(el).getParent('span');
+
 		Backend.getScrollOffset();
 
 		switch (command) {
@@ -1569,9 +1583,9 @@ var Backend =
 			return; // No language given
 		}
 
-		var li = $(ul).getLast('li').clone();
-		var span = li.getElement('span');
-		var img = span.getElement('img');
+		var li = $(ul).getLast('li').clone(),
+			span = li.getElement('span'),
+			img = span.getElement('img');
 
 		// Update the data-language attribute
 		li.setProperty('data-language', opt.value);
@@ -1584,8 +1598,8 @@ var Backend =
 		li.getElements('input').each(function(inp) {
 			inp.value = '';
 			inp.name = inp.name.replace(/\[[a-z]{2}(_[A-Z]{2})?\]/, '['+opt.value+']');
-			var lbl = inp.getPrevious('label');
-			var i = parseInt(lbl.get('for').replace(/ctrl_[^_]+_/, ''));
+			var lbl = inp.getPrevious('label'),
+				i = parseInt(lbl.get('for').replace(/ctrl_[^_]+_/, ''));
 			lbl.set('for', lbl.get('for').replace(i, i+1));
 			inp.id = lbl.get('for');
 		});
@@ -1608,8 +1622,8 @@ var Backend =
 	 * @param object
 	 */
 	metaDelete: function(el) {
-		var li = el.getParent('li')
-		var opt = el.getParent('div').getElement('select');
+		var li = el.getParent('li'),
+			opt = el.getParent('div').getElement('select');
 
 		// Empty the last element instead of removing it (see #4858)
 		if (li.getPrevious() === null && li.getNext() === null) {
@@ -1645,8 +1659,8 @@ var Backend =
 	 * @param object
 	 */
 	updateModuleLink: function(el) {
-		var td = el.getParent('td').getNext('td');
-		var a = td.getElement('a.module_link');
+		var td = el.getParent('td').getNext('td'),
+			a = td.getElement('a.module_link');
 
 		a.href = a.href.replace(/id=[0-9]+/, 'id=' + el.value);
 
