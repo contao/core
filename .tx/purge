@@ -1,0 +1,64 @@
+#!/bin/bash
+
+
+##
+# Usage
+##
+usage()
+{
+  echo "";
+  echo -e "  \033[1;33mPurge incomplete translations\033[0m"
+  echo "  Removes all translations which are less than 95% complete."
+  echo ""
+  echo "  Since the Transifex client does not provide a way to check the overall"
+  echo "  completion of a translation, it will download any resource which is at"
+  echo "  least 95% complete. Incomplete resources will be skipped, therefore we"
+  echo "  can assume that a translation is less than 95% complete if there is at"
+  echo "  least one missing file."
+  echo "";
+  echo "  In this case the script will remove the entire translation."
+  echo ""
+}
+
+##
+# Purge
+##
+purge()
+{
+  # Loop through the modules
+  for i in `ls system/modules`; do
+
+    # Loop through the languages
+    for j in `ls system/modules/$i/languages`; do
+
+      # Skip the source language
+      if [ "$j" == "en" ]; then
+        continue
+      fi
+
+      # Check whether all language files exist
+      for k in `ls system/modules/$i/languages/en`; do
+        if [ ! -e "system/modules/$i/languages/$j/$k" ]; then
+          echo "  Removing $j ($i/languages/$j/$k does not exist)"
+
+          # Remove the translation
+          for l in `ls -d system/modules/*/languages/$j`; do
+            rm -rf $l
+          done
+
+          # Continue with the next language
+          continue 2
+        fi
+      done
+    done
+  done
+}
+
+##
+# Dispatch
+##
+if [ "$1" == "-h" ]; then
+	usage
+else
+  purge
+fi

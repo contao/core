@@ -1,6 +1,7 @@
 [main]
 host = https://www.transifex.com
 type = XLIFF
+minimum_perc = 95
 
 [contao.develop-calendar-default]
 source_file = system/modules/calendar/languages/en/default.xlf
