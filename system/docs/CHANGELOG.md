@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.1 (2012-XX-XX)
 --------------------------
 
+### Changed
+Replaced the automatic copyright notice with a meta generator tag.
+
 ### Fixed
 Do not strip tags from passwords (see #4977).
 

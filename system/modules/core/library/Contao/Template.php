@@ -272,26 +272,8 @@ abstract class Template extends \Controller
 
 		// Minify the markup if activated
 		$this->strBuffer = $this->minifyHtml($this->strBuffer);
-		$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 
-		/**
-		 * Copyright notice
-		 *
-		 * ACCORDING TO THE LESSER GENERAL PUBLIC LICENSE (LGPL),YOU ARE NOT
-		 * PERMITTED TO RUN CONTAO WITHOUT THIS COPYRIGHT NOTICE. CHANGING,
-		 * REMOVING OR OBSTRUCTING IT IS PROHIBITED BY LAW!
-		 */
-		$this->strBuffer = preg_replace
-		(
-			'/([ \t]*<title[^>]*>)\n*/',
-			"<!--\n\n"
-			. "\tThis website is powered by Contao Open Source CMS :: Licensed under GNU/LGPL\n"
-			. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
-			. "\tVisit the project website at http://contao.org for more information\n\n"
-			. "//-->$lb$1",
-			$this->strBuffer, 1
-		);
-
+		// Send some headers
 		header('Vary: User-Agent', false);
 		header('Content-Type: ' . $this->strContentType . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 
