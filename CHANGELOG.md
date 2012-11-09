@@ -5,6 +5,9 @@ Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Replaced the automatic copyright notice with a meta generator tag.
+
+### Fixed
 Remove HTML tags when overriding the page title (see #4955).
 
 ### Fixed
