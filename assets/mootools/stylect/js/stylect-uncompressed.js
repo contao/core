@@ -10,15 +10,39 @@
 
 
 
+
 /**
- * Find all select menus and style them
+ * Class Stylect
+ *
+ * Replace select menus with a nicer, JavaScript based solution.
+ * @copyright  Leo Feyer 2005-2012
+ * @author     Leo Feyer <http://contao.org>
+ * @author     Joe Ray Gregory <https://github.com/may17>
  */
 var Stylect =
 {
+	/**
+	 * Store whether we are on WebKit
+	 */
+	isWebkit: (Browser.chrome || Browser.safari || navigator.userAgent.match(/(?:webkit|khtml)/i)),
+
+	/**
+	 * Create the div template
+	 */
+	template: new Element('div', {
+		'class': 'styled_select',
+		'html': '<span></span><b><i></i></b>'
+	}),
+
+	/**
+	 * Find all select menus and try to convert them
+	 */
 	convertSelects: function() {
+
+		// Not supported in IE < 9
+		if (Browser.ie6 || Browser.ie7 || Browser.ie8) return;
+
 		$$('select').each(function(el) {
-			// Not supported in IE < 9
-			if (Browser.ie6 || Browser.ie7 || Browser.ie8) return;
 
 			// Multiple select
 			if (el.get('multiple')) return;
@@ -26,38 +50,40 @@ var Stylect =
 			// Handled by chosen
 			if (el.hasClass('tl_chosen')) return;
 
-			// Get the selected option label
-			if ((active = el.getElement('option[value="' + el.value + '"]')) != null) {
-				var label = active.get('html');
-			} else {
-				var label = el.getElement('option').get('html');
+			// Clone the template
+			var div = Stylect.template.clone(),
+				cls = el.get('class');
+
+			// Add a left margin to the span
+			div.getElement('span').setStyle('padding-left', '5px');
+
+			// Hide the original select menu
+			el.setStyle('opacity', 0);
+
+			// Apply an extra bottom margin in WebKit
+			if (Stylect.isWebkit) {
+				el.setStyle('margin-bottom', '4px');
 			}
 
-			// Try to calculate the width of the select menu (getComputedSize() does not seem to work in Webkit)
-			var tw = el.getComputedSize().totalWidth || (el.getStyle('width').toInt() + el.getStyle('border-left-width').toInt() + el.getStyle('border-right-width').toInt());
-
-			// Create the div element
-			var div = new Element('div', {
-				'class': 'styled_select',
-				'html': '<span>' + label + '</span><b><i></i></b>',
-				'styles': {
-					'width': tw - ((Browser.safari || Browser.chrome) ? 6 : 8)
+			// Update the div onchange
+			el.addEvents({
+				'keydown': function(event) {
+					setTimeout(function() { el.fireEvent('change'); }, 100);
+				},
+				'change': function() {
+					div.getElement('span').set('text', el.getElement('option[value=' + el.value + ']').get('text'));
+				},
+				'focus': function() {
+					div.addClass('focused');
+				},
+				'blur': function() {
+					div.removeClass('focused');
 				}
-			}).inject(el, 'before');
+			});
 
 			// Mark disabled elements
 			if (el.disabled) {
 				div.addClass('disabled');
-			}
-
-			// Fix right-aligned elements (e.g. Safari and Opera)
-			if (div.getPosition().x != el.getPosition().x) {
-				div.position({ relativeTo:el, ignoreMargins:true });
-				if (Browser.safari) {
-					div.setStyle('top', (div.getStyle('top') == '22px') ? '24px' : 0);
-				} else if (Browser.opera && div.getStyle('top') == '23px') {
-					div.setStyle('top', '24px'); // see #4343
-				}
 			}
 
 			// Mark active elements
@@ -65,27 +91,11 @@ var Stylect =
 				div.addClass('active');
 			}
 
-			// Update the div onchange
-			el.addEvent('change', function() {
-				var option = el.getElement('option[value="' + el.value + '"]');
-				div.getElement('span').set('html', option.get('html'));
-			}).addEvent('keydown', function(event) {
-				setTimeout(function() {	el.fireEvent('change'); }, 100);
-			}).addEvent('focus', function() {
-				div.addClass('focused');
-			}).addEvent('blur', function() {
-				div.removeClass('focused');
-			}).setStyle('opacity', 0);
+			// Add the original CSS class, remove the padding and inject
+			div.addClass(cls).setStyle('padding', 0).inject(el, 'before');
 
-			Browser.webkit = (Browser.chrome || Browser.safari || navigator.userAgent.match(/(?:webkit|khtml)/i));
-
-			// Browser-specific adjustments
-			if (Browser.webkit) {
-				el.setStyle('margin-bottom', '4px');
-			}
-			if (Browser.webkit || Browser.ie) {
-				div.setStyle('width', div.getStyle('width').toInt()-4);
-			}
+			// Activate
+			el.fireEvent('change');
 		});
 	}
 };
