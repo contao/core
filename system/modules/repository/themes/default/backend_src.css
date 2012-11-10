@@ -95,6 +95,10 @@
 	font-size:1px;
 	line-height:1px;
 }
+.mod_repository div.ratebarframe.empty
+{
+	background-color:#eee;
+}
 .mod_repository div.ratebar
 {
 	width:10%;
