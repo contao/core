@@ -54,9 +54,6 @@ var Stylect =
 			var div = Stylect.template.clone(),
 				cls = el.get('class');
 
-			// Add a left margin to the span
-			div.getElement('span').setStyle('padding-left', '5px');
-
 			// Hide the original select menu
 			el.setStyle('opacity', 0);
 

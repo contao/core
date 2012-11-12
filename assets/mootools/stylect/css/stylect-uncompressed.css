@@ -13,6 +13,9 @@
 	line-height:20px;
 	white-space:nowrap;
 	overflow:hidden;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
 }
 .styled_select.focused {
 	background-color:#ebfdd7;
@@ -37,6 +40,9 @@
 }
 .win.firefox .tl_subpanel .styled_select {
 	line-height:20px;
+}
+.styled_select span {
+	padding:0 2px;
 }
 .styled_select b {
 	display:block;

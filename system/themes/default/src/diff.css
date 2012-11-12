@@ -26,6 +26,9 @@ h2 {
 	margin:12px 0 18px;
 	text-align:right;
 }
+.formbody .tl_select {
+	width:220px;
+}
 .formbody .tl_submit {
 	margin-top:1px;
 	vertical-align:top;
