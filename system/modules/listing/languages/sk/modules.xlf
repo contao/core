@@ -1,0 +1,22 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/listing/languages/en/modules.php" source-language="en">
+    <body>
+      <trans-unit id="MOD.listing.0">
+        <source>Listing</source>
+        <target>Zoznam</target>
+      </trans-unit>
+      <trans-unit id="MOD.listing.1">
+        <source>List the records of any table</source>
+        <target>Tento modul vam umozni vytvorit zoznam záznamov určitej tabuľky.</target>
+      </trans-unit>
+      <trans-unit id="FMD.listing.0">
+        <source>Listing</source>
+        <target>Zoznam</target>
+      </trans-unit>
+      <trans-unit id="FMD.listing.1">
+        <source>Lists the records of any table</source>
+        <target>Použite tento modul k vytvoreniu zoznamu záznamov určitej tabuľky.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
