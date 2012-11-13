@@ -9,8 +9,6 @@
  */
 
 
-
-
 /**
  * Class Stylect
  *
@@ -22,7 +20,7 @@
 var Stylect =
 {
 	/**
-	 * Store whether we are on WebKit
+	 * Check for WebKit
 	 */
 	isWebkit: (Browser.chrome || Browser.safari || navigator.userAgent.match(/(?:webkit|khtml)/i)),
 
@@ -88,8 +86,8 @@ var Stylect =
 				div.addClass('active');
 			}
 
-			// Add the original CSS class, remove the padding and inject
-			div.addClass(cls).setStyle('padding', 0).inject(el, 'before');
+			// Add the CSS class and inject
+			div.addClass(cls).inject(el, 'before');
 
 			// Activate
 			el.fireEvent('change');

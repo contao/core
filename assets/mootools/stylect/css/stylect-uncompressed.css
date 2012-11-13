@@ -6,7 +6,7 @@
 	background:#fff;
 	border:1px solid #b8b8b8;
 	border-radius:3px;
-	padding:0 0 0 6px;
+	padding:0 !important;
 	font-family:"Trebuchet MS",Verdana,sans-serif;
 	font-size:12px;
 	text-align:left;
