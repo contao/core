@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.1 (2012-XX-XX)
 --------------------------
 
+### Fixed
+Correctly add event images to the templates (see #5002).
+
 ### Changed
 Replaced the automatic copyright notice with a meta generator tag.
 
