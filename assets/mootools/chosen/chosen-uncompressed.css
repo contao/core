@@ -66,7 +66,7 @@ select.chzn-select {
   position: relative;
   height: 20px; /* PATCH: 20px instead of 26px */
   line-height: 20px; /* PATCH: 20px instead of 26px */
-  padding: 0 0 0 6px; /* PATCH: 6px instead of 8px */
+  padding: 0 2px; /* PATCH: 2px instead of 8px */
   color: #666966; /* PATCH: #666966 instead of #444 */
   text-decoration: none;
 }

@@ -597,6 +597,21 @@ h2.sub_headline_index {
 .limit_height input[type="file"] {
 	position:relative;
 }
+.tl_form_field_preview td {
+	padding-right:6px;
+}
+.tl_form_field_preview td.col_0 {
+	min-width:180px;
+}
+.tl_form_field_preview .text,.tl_form_field_preview .password {
+	width:140px;
+}
+.tl_form_field_preview .select {
+	width:144px;
+}
+.tl_form_field_preview textarea {
+	width:280px;
+}
 
 /* Tree view */
 .tl_folder_top {
