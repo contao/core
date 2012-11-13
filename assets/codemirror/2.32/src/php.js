@@ -9,7 +9,7 @@
       if (stream.match(delim)) state.tokenize = null;
       else stream.skipToEnd();
       return "string";
-    };
+    }
   }
   var phpConfig = {
     name: "clike",
@@ -56,13 +56,14 @@
     var phpMode = CodeMirror.getMode(config, phpConfig);
 
     function dispatch(stream, state) { // TODO open PHP inside text/css
-      var isPHP = state.curMode == phpMode;
+      var isPHP = state.mode == "php";
       if (stream.sol() && state.pending != '"') state.pending = null;
       if (state.curMode == htmlMode) {
         if (stream.match(/^<\?\w*/)) {
           state.curMode = phpMode;
           state.curState = state.php;
           state.curClose = "?>";
+	  state.mode = "php";
           return "meta";
         }
         if (state.pending == '"') {
@@ -85,11 +86,13 @@
             state.curMode = jsMode;
             state.curState = jsMode.startState(htmlMode.indent(state.curState, ""));
             state.curClose = /^<\/\s*script\s*>/i;
+	    state.mode = "javascript";
           }
           else if (/^style$/i.test(state.curState.context.tagName)) {
             state.curMode = cssMode;
             state.curState = cssMode.startState(htmlMode.indent(state.curState, ""));
             state.curClose = /^<\/\s*style\s*>/i;
+            state.mode = "css";
           }
         }
         return style;
@@ -98,6 +101,7 @@
         state.curMode = htmlMode;
         state.curState = state.html;
         state.curClose = null;
+	state.mode = "html";
         if (isPHP) return "meta";
         else return dispatch(stream, state);
       } else {
@@ -114,7 +118,7 @@
                 curState: parserConfig.startOpen ? phpMode.startState() : html,
                 curClose: parserConfig.startOpen ? /^\?>/ : null,
 		mode: parserConfig.startOpen ? "php" : "html",
-                pending: null};
+                pending: null}
       },
 
       copyState: function(state) {
@@ -137,10 +141,8 @@
         return state.curMode.indent(state.curState, textAfter);
       },
 
-      electricChars: "/{}:",
-
-      innerMode: function(state) { return {state: state.curState, mode: state.curMode}; }
-    };
+      electricChars: "/{}:"
+    }
   }, "xml", "clike", "javascript", "css");
   CodeMirror.defineMIME("application/x-httpd-php", "php");
   CodeMirror.defineMIME("application/x-httpd-php-open", {name: "php", startOpen: true});

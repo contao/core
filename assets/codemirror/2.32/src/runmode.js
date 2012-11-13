@@ -1,8 +1,4 @@
 CodeMirror.runMode = function(string, modespec, callback, options) {
-  function esc(str) {
-    return str.replace(/[<&]/g, function(ch) { return ch == "<" ? "&lt;" : "&amp;"; });
-  }
-
   var mode = CodeMirror.getMode(CodeMirror.defaults, modespec);
   var isNode = callback.nodeType == 1;
   var tabSize = (options && options.tabSize) || CodeMirror.defaults.tabSize;
@@ -19,12 +15,12 @@ CodeMirror.runMode = function(string, modespec, callback, options) {
       for (var pos = 0;;) {
         var idx = text.indexOf("\t", pos);
         if (idx == -1) {
-          escaped += esc(text.slice(pos));
+          escaped += CodeMirror.htmlEscape(text.slice(pos));
           col += text.length - pos;
           break;
         } else {
           col += idx - pos;
-          escaped += esc(text.slice(pos, idx));
+          escaped += CodeMirror.htmlEscape(text.slice(pos, idx));
           var size = tabSize - col % tabSize;
           col += size;
           for (var i = 0; i < size; ++i) escaped += " ";
@@ -33,10 +29,10 @@ CodeMirror.runMode = function(string, modespec, callback, options) {
       }
 
       if (style) 
-        accum.push("<span class=\"cm-" + esc(style) + "\">" + escaped + "</span>");
+        accum.push("<span class=\"cm-" + CodeMirror.htmlEscape(style) + "\">" + escaped + "</span>");
       else
         accum.push(escaped);
-    };
+    }
   }
   var lines = CodeMirror.splitLines(string), state = CodeMirror.startState(mode);
   for (var i = 0, e = lines.length; i < e; ++i) {
