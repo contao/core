@@ -428,13 +428,18 @@ abstract class System
 				}
 			}
 
+			// Close the files
 			$objCacheFallback->close();
 			$objCacheFile->close();
+
+			// Override the paths
+			$strCacheFallback = $objCacheFallback->path;
+			$strCacheFile = $objCacheFile->path;
 		}
 
 		// Load the PHP array with the labels
-		include TL_ROOT . '/' . $objCacheFallback->path;
-		include TL_ROOT . '/' . $objCacheFile->path;
+		include TL_ROOT . '/' . $strCacheFallback;
+		include TL_ROOT . '/' . $strCacheFile;
 
 		// HOOK: allow to load custom labels
 		if (isset($GLOBALS['TL_HOOKS']['loadLanguageFile']) && is_array($GLOBALS['TL_HOOKS']['loadLanguageFile']))
