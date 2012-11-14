@@ -59,7 +59,7 @@ ins {
  * Default font settings
  */
 body {
-	font:12px "Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
+	font:12px/1 "Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
 	color:#000;
 }
 input,button,textarea,select {
