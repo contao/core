@@ -4294,7 +4294,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			$arrSubPanels = trimsplit(',', $strPanel);
 
 			foreach ($arrSubPanels as $strSubPanel)
-		{
+			{
 				$panel = '';
 
 				// Regular panels
@@ -4305,11 +4305,10 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 				// Multiple filter subpanels can be defined to split the fields across panels
 				elseif ($strSubPanel == 'filter')
-						{
+				{
 					$panel = $this->{$strSubPanel . 'Menu'}(++$intFilterPanel);
-						}
-					
-					// call the panel_callback
+				}
+				// call the panel_callback
 				else
 				{
 					$arrCallback = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panel_callback'][$strSubPanel];
@@ -4330,7 +4329,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			{
 				$arrPanels[] = $panels;
 			}
-			}
+		}
 
 		if (empty($arrPanels))
 		{
