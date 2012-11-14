@@ -4312,11 +4312,11 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				else
 				{
 					$arrCallback = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panel_callback'][$strSubPanel];
-						if (is_array($arrCallback))
-						{
-							$this->import($arrCallback[0]);
+					if (is_array($arrCallback))
+					{
+						$this->import($arrCallback[0]);
 						$panel = $this->$arrCallback[0]->$arrCallback[1]($this);
-						}
+					}
 				}
 
 				if ($panel != '')
