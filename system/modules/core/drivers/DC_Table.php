@@ -4283,12 +4283,11 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		{
 			return '';
 		}
-		
-		$panelLayout = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout'];
-		$arrPanels = trimsplit(';', $panelLayout);
+
+		$arrPanels = array();
 		$intFilterPanel = 0;
 
-		foreach ($arrPanels as $strPanel)
+		foreach (trimsplit(';', $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout']) as $strPanel)
 		{
 			$panels = '';
 			$arrSubPanels = trimsplit(',', $strPanel);
