@@ -260,7 +260,9 @@ class ModulePersonalData extends Module
 				}
 			}
 			
-			$this->jumpToOrReload($this->jumpTo);
+			if($this->jumpTo) {
+				$this->jumpToOrReload($this->jumpTo);
+			}
 		}
 
 		$this->Template->loginDetails = $GLOBALS['TL_LANG']['tl_member']['loginDetails'];
