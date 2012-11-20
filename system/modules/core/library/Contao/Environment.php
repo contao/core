@@ -203,12 +203,16 @@ class Environment
 		foreach ($arrAccepted[1] as $v)
 		{
 			$chunks = explode('-', $v);
-			$locale = $chunks[0] . '-' . strtoupper($chunks[1]);
 
 			// Language plus dialect, e.g. en-US or fr-FR
-			if (isset($chunks[1]) && preg_match('/^[a-z]{2}(\-[A-Z]{2})?$/', $locale))
+			if (isset($chunks[1]))
 			{
-				$arrLanguages[] = $locale;
+				$locale = $chunks[0] . '-' . strtoupper($chunks[1]);
+
+				if (preg_match('/^[a-z]{2}(\-[A-Z]{2})?$/', $locale))
+				{
+					$arrLanguages[] = $locale;
+				}
 			}
 
 			$locale = $chunks[0];
