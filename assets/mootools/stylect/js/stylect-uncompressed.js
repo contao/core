@@ -33,6 +33,34 @@ var Stylect =
 	}),
 
 	/**
+	 * Change event
+	 */
+	change: function(div, el) {
+		div.getElement('span').set('text', el.getElement('option[value=' + el.value + ']').get('text'));
+	},
+
+	/**
+	 * Keydown event
+	 */
+	keydown: function(div, el) {
+		setTimeout(function() { Stylect.change(div, el); }, 100);
+	},
+
+	/**
+	 * Focus event
+	 */
+	focus: function(div) {
+		div.addClass('focused');
+	},
+
+	/**
+	 * Blur event
+	 */
+	blur: function(div) {
+		div.removeClass('focused');
+	},
+
+	/**
 	 * Find all select menus and try to convert them
 	 */
 	convertSelects: function() {
@@ -62,18 +90,10 @@ var Stylect =
 
 			// Update the div onchange
 			el.addEvents({
-				'keydown': function(event) {
-					setTimeout(function() { el.fireEvent('change'); }, 100);
-				},
-				'change': function() {
-					div.getElement('span').set('text', el.getElement('option[value=' + el.value + ']').get('text'));
-				},
-				'focus': function() {
-					div.addClass('focused');
-				},
-				'blur': function() {
-					div.removeClass('focused');
-				}
+				'change': Stylect.change(div, el),
+				'keydown': Stylect.keydown(div, el),
+				'focus': Stylect.focus(div),
+				'blur': Stylect.blur(div)
 			});
 
 			// Mark disabled elements
@@ -90,7 +110,7 @@ var Stylect =
 			div.addClass(cls).inject(el, 'before');
 
 			// Activate
-			el.fireEvent('change');
+			Stylect.change(div, el);
 		});
 	}
 };
