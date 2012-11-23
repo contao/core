@@ -90,10 +90,18 @@ var Stylect =
 
 			// Update the div onchange
 			el.addEvents({
-				'change': Stylect.change(div, el),
-				'keydown': Stylect.keydown(div, el),
-				'focus': Stylect.focus(div),
-				'blur': Stylect.blur(div)
+				'change': function() {
+					Stylect.change(div, el)
+				},
+				'keydown': function() {
+					Stylect.keydown(div, el)
+				},
+				'focus': function() {
+					Stylect.focus(div)
+				},
+				'blur': function() {
+					Stylect.blur(div)
+				}
 			});
 
 			// Mark disabled elements
