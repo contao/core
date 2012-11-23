@@ -1632,22 +1632,31 @@ class StyleSheets extends \Backend
 					break;
 
 				case 'background-image':
-					$arrSet['background'] = 1;
 					$url = preg_replace('/url\(["\']?([^"\'\)]+)["\']?\)/i', '$1', $arrChunks[1]);
+
 					if (strncmp($url, '-', 1) === 0)
 					{
 						// Ignore vendor prefixed commands
 					}
-					elseif (strncmp($url, 'linear-gradient', 15) === 0)
+					elseif (strncmp($url, 'radial-gradient', 15) === 0)
 					{
-						// Handle background gradients (see #4640)
-						$colors = trimsplit(',', preg_replace('/linear-gradient ?\(([^\)]+)\)/', '$1', $url));
-						$arrSet['gradientAngle'] = array_shift($colors);
-						$arrSet['gradientColors'] = serialize($colors);
+						$arrSet['own'][] = $strDefinition; // radial gradients (see #4640)
 					}
 					else
 					{
-						$arrSet['bgimage'] = $url;
+						$arrSet['background'] = 1;
+
+						// Handle linear gradients (see #4640)
+						if (strncmp($url, 'linear-gradient', 15) === 0)
+						{
+							$colors = trimsplit(',', preg_replace('/linear-gradient ?\(([^\)]+)\)/', '$1', $url));
+							$arrSet['gradientAngle'] = array_shift($colors);
+							$arrSet['gradientColors'] = serialize($colors);
+						}
+						else
+						{
+							$arrSet['bgimage'] = $url;
+						}
 					}
 					break;
 

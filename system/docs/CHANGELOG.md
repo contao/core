@@ -5,6 +5,9 @@ Version 3.0.1 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Handle radial gradients when importing style sheets (see #4640).
+
+### Fixed
 More abstract and effective algorithm to determin the number of files in the
 "purge data" maintenance module (see #5028).
 
