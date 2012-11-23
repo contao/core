@@ -3045,7 +3045,7 @@ window.addEvent(\'domready\', function() {
 			}
 			else
 			{
-				$objRoot = $this->Database->prepare("SELECT $for FROM {$this->strTable} WHERE CAST(".$session['search'][$this->strTable]['field']." AS CHAR) REGEXP ?")
+				$objRoot = $this->Database->prepare("SELECT $for FROM {$this->strTable} WHERE CAST(".$session['search'][$this->strTable]['field']." AS CHAR) REGEXP ? GROUP BY $for")
 										  ->execute($session['search'][$this->strTable]['value']);
 			}
 
