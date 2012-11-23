@@ -129,33 +129,19 @@ class PurgeData extends \Backend implements \executable
 					\Files::getInstance()->mkdir($folder);
 				}
 
-				// Has subfolders
-				if ($folder == 'assets/images' || $folder == 'system/cache/html' || $folder == 'system/cache/language')
+				$total = 0;
+
+				// Recursively scan all subfolders
+				$objFiles = new \RecursiveIteratorIterator(
+					new \RecursiveDirectoryIterator(TL_ROOT . '/' . $folder, \FilesystemIterator::UNIX_PATHS)
+				);
+
+				// Ignore the index.html and .htaccess files
+				foreach ($objFiles as $objFile)
 				{
-					$total = 0;
-
-					foreach (scan(TL_ROOT . '/' . $folder) as $dir)
+					if ($objFile->isFile() && $objFile->getFilename() != '.htaccess' && $objFile->getFilename() != 'index.html')
 					{
-						if ($dir != 'index.html' && strncmp($dir, '.', 1) !== 0)
-						{
-							$total += count(scan(TL_ROOT . '/' . $folder . '/' . $dir));
-						}
-					}
-
-					// Do not count the index.html files in the images subfolders
-					if ($folder == 'assets/images')
-					{
-						$total -= 16;
-					}
-				}
-				else
-				{
-					$total = count(scan(TL_ROOT . '/' . $folder));
-
-					// Do not count the index.html files in the assets folders
-					if (strncmp($folder, 'assets/', 7) === 0 || $folder == 'system/tmp')
-					{
-						$total -= 1;
+						++$total;
 					}
 				}
 

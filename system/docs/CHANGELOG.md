@@ -5,6 +5,10 @@ Version 3.0.1 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+More abstract and effective algorithm to determin the number of files in the
+"purge data" maintenance module (see #5028).
+
+### Fixed
 Fixed two wrong class paths (see #5027).
 
 ### Fixed
