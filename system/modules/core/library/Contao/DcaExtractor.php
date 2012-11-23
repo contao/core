@@ -438,7 +438,7 @@ class DcaExtractor extends \Database\Installer
 		$arrExtracts = array();
 
 		// Only check the active modules (see #4541)
-		foreach (Config::getInstance()->getActiveModules() as $strModule)
+		foreach (\Config::getInstance()->getActiveModules() as $strModule)
 		{
 			$strDir = TL_ROOT . '/system/modules/' . $strModule . '/dca';
 

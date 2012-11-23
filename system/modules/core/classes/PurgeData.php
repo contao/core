@@ -126,7 +126,7 @@ class PurgeData extends \Backend implements \executable
 				// Create the folder if it does not yet exist
 				if (!is_dir(TL_ROOT . '/' . $folder))
 				{
-					Files::getInstance()->mkdir($folder);
+					\Files::getInstance()->mkdir($folder);
 				}
 
 				// Has subfolders

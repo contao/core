@@ -5,6 +5,9 @@ Version 3.0.1 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Fixed two wrong class paths (see #5027).
+
+### Fixed
 Correctly add event images to the templates (see #5002).
 
 ### Changed
