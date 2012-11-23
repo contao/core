@@ -5,6 +5,9 @@ Version 3.0.1 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly generate the debug bar markup on XHTML pages (see #5031).
+
+### Fixed
 Handle radial gradients when importing style sheets (see #4640).
 
 ### Fixed

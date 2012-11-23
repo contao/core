@@ -319,9 +319,20 @@ abstract class Template extends \Controller
 			$strDebug .= ob_get_contents();
 			ob_end_clean();
 
-			$strDebug .= '</pre></div>'
-				. '<script>window.MooTools || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>'
-				. '<script>'
+			if ($this->strFormat == 'xhtml')
+			{
+				$strScriptOpen = '<script type="text/javascript">' . "\n/* <![CDATA[ */\n";
+				$strScriptClose = "\n/* ]]> */\n" . '</script>';
+			}
+			else
+			{
+				$strScriptOpen = '<script>';
+				$strScriptClose = '</script>';
+			}
+
+			$strDebug .= '</pre></div></div>'
+				. $strScriptOpen . 'window.MooTools || document.write(\'<script' . (($this->strFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_ASSETS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')' . $strScriptClose
+				. $strScriptOpen
 					. "(function($) {"
 						. "$$('#debug p','#debug div').setStyle('width',window.getSize().x);"
 						. "$(document.body).setStyle('margin-bottom', $('debug').hasClass('closed')?'60px':'320px');"
@@ -334,7 +345,7 @@ abstract class Template extends \Controller
 							. "$$('#debug p','#debug div').setStyle('width',window.getSize().x);"
 						. "});"
 					. "})(document.id);"
-				. '</script>' . "\n\n";
+				. $strScriptClose . "\n\n";
 
 			$this->strBuffer = str_replace('</body>', $strDebug . '</body>', $this->strBuffer);
 		}

@@ -542,7 +542,7 @@ class PageRegular extends \Frontend
 		// Add the debug style sheet
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
 		{
-			$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/css/debug.css') . '">' . "\n";
+			$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/css/debug.css') . '"' . $strTagEnding . "\n";
 		}
 
 		// Always add conditional style sheets at the end
