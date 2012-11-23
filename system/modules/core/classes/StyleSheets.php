@@ -1683,8 +1683,13 @@ class StyleSheets extends \Backend
 						$arrSet['own'][] = $strDefinition;
 						break;
 					}
-					$arrSet['border'] = 1;
 					$arrWSC = preg_split('/\s+/', $arrChunks[1]);
+					if ($arrWSC[2] != '' && !preg_match('/^#[a-f0-9]+$/i', $arrWSC[2]))
+					{
+						$arrSet['own'][] = $strDefinition;
+						break;
+					}
+					$arrSet['border'] = 1;
 					$varValue = preg_replace('/[^0-9\.-]+/', '', $arrWSC[0]);
 					$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrWSC[0]);
 					$arrSet['borderwidth'] = array
@@ -1714,8 +1719,13 @@ class StyleSheets extends \Backend
 						$arrSet['own'][] = $strDefinition;
 						break;
 					}
-					$arrSet['border'] = 1;
 					$arrWSC = preg_split('/\s+/', $arrChunks[1]);
+					if ($arrWSC[2] != '' && !preg_match('/^#[a-f0-9]+$/i', $arrWSC[2]))
+					{
+						$arrSet['own'][] = $strDefinition;
+						break;
+					}
+					$arrSet['border'] = 1;
 					$strName = str_replace('border-', '', $strKey);
 					$varValue = preg_replace('/[^0-9\.-]+/', '', $arrWSC[0]);
 					$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrWSC[0]);
@@ -1786,8 +1796,15 @@ class StyleSheets extends \Backend
 					break;
 
 				case 'border-color':
-					$arrSet['border'] = 1;
-					$arrSet['bordercolor'] = str_replace('#', '', $arrChunks[1]);
+					if (!preg_match('/^#[a-f0-9]+$/i', $arrChunks[1]))
+					{
+						$arrSet['own'][] = $strDefinition;
+					}
+					else
+					{
+						$arrSet['border'] = 1;
+						$arrSet['bordercolor'] = str_replace('#', '', $arrChunks[1]);
+					}
 					break;
 
 				case 'border-radius':
