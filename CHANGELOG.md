@@ -5,6 +5,9 @@ Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Handle border color names when importing style sheets (see #5034).
+
+### Fixed
 Prevent the "Illegal string offset" error in back end widgets (see #4979).
 
 ### Fixed
