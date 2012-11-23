@@ -5,6 +5,9 @@ Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Set the return path when sending e-mails (see #5004).
+
+### Fixed
 Handle border color names when importing style sheets (see #5034).
 
 ### Fixed
