@@ -791,7 +791,7 @@ abstract class System
 	 */
 	protected static function readPhpFileWithoutTags($strName)
 	{
-		$strCode = rtrim(file_get_contents($strName));
+		$strCode = rtrim(file_get_contents(TL_ROOT . '/' . $strName));
 
 		// Opening tag
 		if (strncmp($strCode, '<?php', 5) === 0)

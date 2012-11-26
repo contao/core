@@ -1971,11 +1971,11 @@ abstract class Controller extends \System
 			return;
 		}
 
-		$strCacheFile = TL_ROOT . '/system/cache/dca/' . $strName . '.php';
+		$strCacheFile = 'system/cache/dca/' . $strName . '.php';
 
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists($strCacheFile))
+		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
 		{
-			include $strCacheFile;
+			include TL_ROOT . '/' . $strCacheFile;
 		}
 		else
 		{
@@ -1986,12 +1986,12 @@ abstract class Controller extends \System
 			// Parse all module folders
 			foreach ($this->Config->getActiveModules() as $strModule)
 			{
-				$strFile = TL_ROOT . '/system/modules/' . $strModule . '/dca/' . $strName . '.php';
+				$strFile = 'system/modules/' . $strModule . '/dca/' . $strName . '.php';
 
-				if (file_exists($strFile))
+				if (file_exists(TL_ROOT . '/' . $strFile))
 				{
 					$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
-					include $strFile;
+					include TL_ROOT . '/' . $strFile;
 				}
 			}
 
