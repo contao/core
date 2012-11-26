@@ -63,8 +63,15 @@ class ModuleSearch extends \Module
 	 */
 	protected function compile()
 	{
+		// Mark the x and y parameter as used (see #4277)
+		if (isset($_GET['x']))
+		{
+			\Input::get('x');
+			\Input::get('y');
+		}
+
 		// Trigger the search module from a custom form
-		if (!$_GET['keywords'] && \Input::post('FORM_SUBMIT') == 'tl_search')
+		if (!isset($_GET['keywords']) && \Input::post('FORM_SUBMIT') == 'tl_search')
 		{
 			$_GET['keywords'] = \Input::post('keywords');
 			$_GET['query_type'] = \Input::post('query_type');

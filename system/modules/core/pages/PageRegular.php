@@ -31,8 +31,9 @@ class PageRegular extends \Frontend
 	/**
 	 * Generate a regular page
 	 * @param object
+	 * @param boolean
 	 */
-	public function generate($objPage)
+	public function generate($objPage, $blnCheckRequest=false)
 	{
 		$GLOBALS['TL_KEYWORDS'] = '';
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
@@ -151,7 +152,7 @@ class PageRegular extends \Frontend
 		$this->createHeaderScripts($objPage, $objLayout);
 
 		// Print the template to the screen
-		$this->Template->output();
+		$this->Template->output($blnCheckRequest);
 	}
 
 

@@ -48,6 +48,12 @@ class Input
 	protected static $arrCache = array();
 
 	/**
+	 * Unused $_GET parameters
+	 * @var array
+	 */
+	protected static $arrUnusedGet = array();
+
+	/**
 	 * Magic quotes setting
 	 * @var boolean
 	 */
@@ -65,6 +71,9 @@ class Input
 
 		// Only check magic quotes once (see #3438)
 		static::$blnMagicQuotes = function_exists('get_magic_quotes_gpc') && @get_magic_quotes_gpc();
+
+		// Initialize the unused parameters (see #4277)
+		static::$arrUnusedGet = $_GET;
 	}
 
 
@@ -73,10 +82,11 @@ class Input
 	 * 
 	 * @param string  $strKey            The variable name
 	 * @param boolean $blnDecodeEntities If true, all entities will be decoded
+	 * @param boolean $blnKeepUnused     If true, the parameter will not be marked as used (see #4277)
 	 * 
 	 * @return mixed The cleaned variable value
 	 */
-	public static function get($strKey, $blnDecodeEntities=false)
+	public static function get($strKey, $blnDecodeEntities=false, $blnKeepUnused=false)
 	{
 		if (!isset($_GET[$strKey]))
 		{
@@ -100,6 +110,12 @@ class Input
 			}
 
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
+
+			// Mark the parameter as used (see #4277)
+			if (!$blnKeepUnused)
+			{
+				unset(static::$arrUnusedGet[$strKey]);
+			}
 		}
 
 		return static::$arrCache[$strCacheKey][$strKey];
@@ -271,6 +287,7 @@ class Input
 		else
 		{
 			$_GET[$strKey] = $varValue;
+			static::$arrUnusedGet[$strKey] = $varValue; // see #4277
 		}
 	}
 
@@ -332,6 +349,17 @@ class Input
 	public static function resetCache()
 	{
 		static::$arrCache = array();
+	}
+
+
+	/**
+	 * Return whether there are unused GET parameters
+	 * 
+	 * @return boolean True if there are unused GET parameters
+	 */
+	public static function hasUnusedGet()
+	{
+		return count(static::$arrUnusedGet) > 0;
 	}
 
 
