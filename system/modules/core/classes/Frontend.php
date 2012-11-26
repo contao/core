@@ -253,6 +253,12 @@ abstract class Frontend extends \Controller
 				continue;
 			}
 
+			// Return false if there is a duplicate parameter (duplicate content) (see #4277)
+			if (isset($_GET[$arrFragments[$i]]))
+			{
+				return false;
+			}
+
 			// Return false if the request contains an auto_item keyword (duplicate content) (see #4012)
 			if ($GLOBALS['TL_CONFIG']['useAutoItem'] && in_array($arrFragments[$i], $GLOBALS['TL_AUTO_ITEM']))
 			{

@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Fixed
+Trigger the error 404 page if a request parameter is set twice (see #4277).
+
 ### New
 You can now enter different static assets and files URLs for SSL connections.
 
