@@ -2743,6 +2743,11 @@ abstract class Controller extends \System
 
 		foreach ($arrConstants as $strKey=>$strConstant)
 		{
+			if (\Environment::get('ssl'))
+			{
+				$strKey .= 'Ssl';
+			}
+
 			$url = ($objPage !== null) ? $objPage->$strKey : $GLOBALS['TL_CONFIG'][$strKey];
 
 			if ($url == '' || $GLOBALS['TL_CONFIG']['debugMode'])
@@ -2751,11 +2756,6 @@ abstract class Controller extends \System
 			}
 			else
 			{
-				if (\Environment::get('ssl'))
-				{
-					$url = str_replace('http://', 'https://', $url);
-				}
-
 				define($strConstant, $url . TL_PATH . '/');
 			}
 		}

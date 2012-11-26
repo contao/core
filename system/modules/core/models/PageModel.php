@@ -505,6 +505,8 @@ class PageModel extends \Model
 			$this->language = $objParentPage->language;
 			$this->staticFiles = $objParentPage->staticFiles;
 			$this->staticPlugins = $objParentPage->staticPlugins;
+			$this->staticFilesSsl = $objParentPage->staticFilesSsl;
+			$this->staticPluginsSsl = $objParentPage->staticPluginsSsl;
 			$this->dateFormat = $objParentPage->dateFormat;
 			$this->timeFormat = $objParentPage->timeFormat;
 			$this->datimFormat = $objParentPage->datimFormat;

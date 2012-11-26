@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### New
+You can now enter different static assets and files URLs for SSL connections.
+
 ### Changed
 Moved the Transifex `.xlf` files to the `languages` folders of the modules and
 tweaked the `System::loadLanguageFile()` method to handle them (see #5005).
