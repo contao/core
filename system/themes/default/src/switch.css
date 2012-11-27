@@ -56,12 +56,13 @@ img.close {
 
 /* Select menus */
 .tl_select {
+	width:100px;
 	margin:1px 9px 1px 0;
 	padding:1px;
 	border:1px solid #b8b8b8;
 }
-#ctrl_user {
-	width:24%;
+.tl_select.user {
+	width:180px;
 }
 
 /* Form elements */

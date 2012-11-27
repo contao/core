@@ -41,7 +41,7 @@
 <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 <?php if ($this->isAdmin): ?>
 <label for="ctrl_user"><?php echo $this->feUser; ?>:</label> 
-<select name="user" id="ctrl_user" class="tl_select">
+<select name="user" id="ctrl_user" class="tl_select user">
 <?php foreach ($this->users as $id=>$name): ?>
   <option value="<?php echo $id; ?>"<?php if ($id == $this->user): ?> selected="selected"<?php endif; ?>><?php echo $name; ?></option>
 <?php endforeach; ?>
