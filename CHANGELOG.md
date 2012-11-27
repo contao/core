@@ -5,6 +5,9 @@ Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Handle auto_items in the `Frontend::addToUrl()` method (see #5037).
+
+### Fixed
 Do not use `specialchars()` in the "page" insert tag (see #4687).
 
 ### Fixed
