@@ -5,6 +5,9 @@ Version 3.0.1 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+`Validator::isAlias()` did not support Unicode characters (see #5033).
+
+### Fixed
 Group the search results by their parent IDs when searching the extended tree
 view, e.g. the article tree (see #5051).
 
