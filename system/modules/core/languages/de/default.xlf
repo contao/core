@@ -1117,22 +1117,6 @@
         <source>The assets URL applies to the &lt;em&gt;assets&lt;/em&gt; directory (page speed optimization).</source>
         <target>Die Assets-URL gilt für das &lt;em&gt;assets&lt;/em&gt;-Verzeichnis (Page-Speed-Optimierung).</target>
       </trans-unit>
-      <trans-unit id="MSC.staticFilesSsl.0">
-        <source>Files SSL URL</source>
-        <target>Datei-SSL-URL</target>
-      </trans-unit>
-      <trans-unit id="MSC.staticFilesSsl.1">
-        <source>Here you can enter a different files URL used for secure SSL connections.</source>
-        <target>Hier können Sie eine abweichende Datei-URL für sichere SSL-Verbindungen eingeben.</target>
-      </trans-unit>
-      <trans-unit id="MSC.staticPluginsSsl.0">
-        <source>Assets SSL URL</source>
-        <target>Assets-SSL-URL</target>
-      </trans-unit>
-      <trans-unit id="MSC.staticPluginsSsl.1">
-        <source>Here you can enter a different assets URL used for secure SSL connections.</source>
-        <target>Hier können Sie eine abweichende Assets-URL für sichere SSL-Verbindungen eingeben.</target>
-      </trans-unit>
       <trans-unit id="MSC.shortcuts.0">
         <source>Back end keyboard shortcuts</source>
         <target>Backend-Tastaturkürzel</target>

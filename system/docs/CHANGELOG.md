@@ -7,9 +7,6 @@ Version 3.1.beta1 (XXXX-XX-XX)
 ### Fixed
 Trigger the error 404 page if a request parameter is set twice (see #4277).
 
-### New
-You can now enter different static assets and files URLs for SSL connections.
-
 ### Changed
 Moved the Transifex `.xlf` files to the `languages` folders of the modules and
 tweaked the `System::loadLanguageFile()` method to handle them (see #5005).

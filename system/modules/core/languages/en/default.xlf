@@ -839,18 +839,6 @@
       <trans-unit id="MSC.staticPlugins.1">
         <source>The assets URL applies to the &lt;em&gt;assets&lt;/em&gt; directory (page speed optimization).</source>
       </trans-unit>
-      <trans-unit id="MSC.staticFilesSsl.0">
-        <source>Files SSL URL</source>
-      </trans-unit>
-      <trans-unit id="MSC.staticFilesSsl.1">
-        <source>Here you can enter a different files URL used for secure SSL connections.</source>
-      </trans-unit>
-      <trans-unit id="MSC.staticPluginsSsl.0">
-        <source>Assets SSL URL</source>
-      </trans-unit>
-      <trans-unit id="MSC.staticPluginsSsl.1">
-        <source>Here you can enter a different assets URL used for secure SSL connections.</source>
-      </trans-unit>
       <trans-unit id="MSC.shortcuts.0">
         <source>Back end keyboard shortcuts</source>
       </trans-unit>

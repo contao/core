@@ -161,7 +161,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'regular'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{search_legend},noSearch;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'forward'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,jumpTo;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'redirect'                    => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,url,target;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
-		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle;{dns_legend},dns,staticFiles,staticFilesSsl,staticPlugins,staticPluginsSsl,language,fallback;{global_legend:hide},dateFormat,timeFormat,datimFormat,adminEmail;{sitemap_legend:hide},createSitemap;{layout_legend},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
+		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle;{dns_legend},dns,staticFiles,staticPlugins,language,fallback;{global_legend:hide},dateFormat,timeFormat,datimFormat,adminEmail;{sitemap_legend:hide},createSitemap;{layout_legend},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
 		'error_403'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{forward_legend},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop',
 		'error_404'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{forward_legend},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop'
 	),
@@ -344,28 +344,6 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'save_callback' => array
 			(
 				array('tl_page', 'checkStaticUrl')
-			),
-			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'staticFilesSsl' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['MSC']['staticFilesSsl'],
-			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_page', 'checkStaticSslUrl')
-			),
-			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'staticPluginsSsl' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['MSC']['staticPluginsSsl'],
-			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_page', 'checkStaticSslUrl')
 			),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
@@ -1271,25 +1249,9 @@ class tl_page extends Backend
 	 */
 	public function checkStaticUrl($varValue)
 	{
-		if ($varValue != '' && strncmp($varValue, 'http://', 7) !== 0)
+		if ($varValue != '' && !preg_match('@^https?://@', $varValue))
 		{
-			$varValue = 'http://' . str_replace('https://', '', $varValue);
-		}
-
-		return $varValue;
-	}
-
-
-	/**
-	 * Check a static SSL URL
-	 * @param mixed
-	 * @return mixed
-	 */
-	public function checkStaticSslUrl($varValue)
-	{
-		if ($varValue != '' && strncmp($varValue, 'https://', 8) !== 0)
-		{
-			$varValue = 'https://' . str_replace('http://', '', $varValue);
+			$varValue = (Environment::get('ssl') ? 'https://' : 'http://') . $varValue;
 		}
 
 		return $varValue;

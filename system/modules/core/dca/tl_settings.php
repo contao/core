@@ -28,7 +28,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useSMTP'),
-		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,minifyMarkup,gzipScripts,disableCron,coreOnlyMode;{backend_legend},resultsPerPage,maxResultsPerPage,fileSyncExclude,doNotCollapse,staticFiles,staticFilesSsl,staticPlugins,staticPluginsSsl;{frontend_legend},urlSuffix,cacheMode,rewriteURL,useAutoItem,addLanguageToUrl,doNotRedirectEmpty,folderUrl,disableAlias;{privacy_legend:hide},privacyAnonymizeIp,privacyAnonymizeGA;{security_legend:hide},allowedTags,debugMode,bypassCache,displayErrors,logErrors,disableRefererCheck,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{sections_legend:hide},customSections;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin,lockPeriod;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
+		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,minifyMarkup,gzipScripts,disableCron,coreOnlyMode;{backend_legend},resultsPerPage,maxResultsPerPage,fileSyncExclude,doNotCollapse,staticFiles,staticPlugins;{frontend_legend},urlSuffix,cacheMode,rewriteURL,useAutoItem,addLanguageToUrl,doNotRedirectEmpty,folderUrl,disableAlias;{privacy_legend:hide},privacyAnonymizeIp,privacyAnonymizeGA;{security_legend:hide},allowedTags,debugMode,bypassCache,displayErrors,logErrors,disableRefererCheck,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{sections_legend:hide},customSections;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin,lockPeriod;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
 	),
 
 	// Subpalettes
@@ -148,26 +148,6 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'save_callback' => array
 			(
 				array('tl_settings', 'checkStaticUrl')
-			)
-		),
-		'staticFilesSsl' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['MSC']['staticFilesSsl'],
-			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_settings', 'checkStaticSslUrl')
-			)
-		),
-		'staticPluginsSsl' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['MSC']['staticPluginsSsl'],
-			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_settings', 'checkStaticSslUrl')
 			)
 		),
 		'fileSyncExclude' => array
@@ -717,25 +697,9 @@ class tl_settings extends Backend
 	 */
 	public function checkStaticUrl($varValue)
 	{
-		if ($varValue != '' && strncmp($varValue, 'http://', 7) !== 0)
+		if ($varValue != '' && !preg_match('@^https?://@', $varValue))
 		{
-			$varValue = 'http://' . str_replace('https://', '', $varValue);
-		}
-
-		return $varValue;
-	}
-
-
-	/**
-	 * Check a static SSL URL
-	 * @param mixed
-	 * @return mixed
-	 */
-	public function checkStaticSslUrl($varValue)
-	{
-		if ($varValue != '' && strncmp($varValue, 'https://', 8) !== 0)
-		{
-			$varValue = 'https://' . str_replace('http://', '', $varValue);
+			$varValue = (Environment::get('ssl') ? 'https://' : 'http://') . $varValue;
 		}
 
 		return $varValue;
