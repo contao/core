@@ -5,6 +5,9 @@ Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not use `specialchars()` in the "page" insert tag (see #4687).
+
+### Fixed
 Set the return path when sending e-mails (see #5004).
 
 ### Fixed
