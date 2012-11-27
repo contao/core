@@ -149,7 +149,7 @@ if (USE_MBSTRING && function_exists('mb_regex_encoding'))
 /**
  * Set the default language
  */
-if (Input::post('language'))
+if (Input::post('language') && Input::post('FORM_SUBMIT') != 'tl_filters')
 {
 	$GLOBALS['TL_LANGUAGE'] = str_replace('_', '-', Input::post('language'));
 	$_SESSION['TL_LANGUAGE'] = $GLOBALS['TL_LANGUAGE'];
