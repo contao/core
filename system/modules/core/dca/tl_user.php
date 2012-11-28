@@ -670,8 +670,9 @@ class tl_user extends Backend
 
 		foreach ($GLOBALS['BE_MOD'] as $k=>$v)
 		{
-			if ($k != 'profile' && !empty($v))
+			if (!empty($v))
 			{
+				unset($v['undo']);
 				$arrModules[$k] = array_keys($v);
 			}
 		}

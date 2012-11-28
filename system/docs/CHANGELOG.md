@@ -5,6 +5,9 @@ Version 3.0.1 (2012-XX-XX)
 --------------------------
 
 ### Fixed
+Exclude the undo module from the list of allowable back end modules (see #5056).
+
+### Fixed
 `Validator::isAlias()` did not support Unicode characters (see #5033).
 
 ### Fixed
