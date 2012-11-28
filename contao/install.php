@@ -216,7 +216,12 @@ class InstallTool extends Backend
 			}
 		}
 
-		$this->handleRunOnce();
+		// Wait for the tables to be created (see #5061)
+		if ($this->Database->tableExists('tl_log'))
+		{
+			$this->handleRunOnce();
+		}
+
 		$this->import('Database\\Installer', 'Installer');
 
 		$this->Template->dbUpdate = $this->Installer->generateSqlForm();
