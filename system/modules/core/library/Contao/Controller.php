@@ -281,8 +281,6 @@ abstract class Controller extends \System
 
 			return $strBuffer;
 		}
-
-		return '';
 	}
 
 
