@@ -247,6 +247,9 @@ h2.sub_headline_index {
 	border-top:1px solid #bbb;
 	text-align:right;
 }
+.tl_version_panel .tl_select {
+	width:240px;
+}
 .mac .tl_version_panel .tl_select,.mac .tl_panel_bottom .tl_select {
 	font-size:11px;
 }
