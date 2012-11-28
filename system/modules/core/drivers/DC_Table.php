@@ -4124,7 +4124,27 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					{
 						$row_v = deserialize($row[$v]);
 
-						if (is_array($row_v))
+						// Get the field value
+						if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['foreignKey']))
+						{
+							$temp = array();
+							$chunks = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['foreignKey'], 2);
+
+							foreach ((array) $row_v as $v)
+							{
+								$objKey = $this->Database->prepare("SELECT " . $chunks[1] . " AS value FROM " . $chunks[0] . " WHERE id=?")
+														 ->limit(1)
+														 ->execute($v);
+
+								if ($objKey->numRows)
+								{
+									$temp[] = $objKey->value;
+								}
+							}
+
+							$args[$k] = implode(', ', $temp);
+						}
+						elseif (is_array($row_v))
 						{
 							$args_k = array();
 
