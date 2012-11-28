@@ -5,6 +5,9 @@ Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Only execute runonce files after the DB tables have been created (see #5061).
+
+### Fixed
 Add an empty option in the TimePeriod widget if there are none (see #5067).
 
 ### Fixed
