@@ -5,6 +5,9 @@ Version 2.11.7 (2012-XX-XX)
 ---------------------------
 
 ### Fixed
+Add an empty option in the TimePeriod widget if there are none (see #5067).
+
+### Fixed
 Handle auto_items in the `Frontend::addToUrl()` method (see #5037).
 
 ### Fixed
