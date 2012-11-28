@@ -1,0 +1,175 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/sk/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$GLOBALS['TL_LANG']['tl_style']['invisible'][0] = 'Skryté';
+$GLOBALS['TL_LANG']['tl_style']['invisible'][1] = 'Nexportovať formátovanie.';
+$GLOBALS['TL_LANG']['tl_style']['selector'][0] = 'Selektor';
+$GLOBALS['TL_LANG']['tl_style']['selector'][1] = 'Selektor určuje, k akému elementu sa dané formátovanie vzťahuje.';
+$GLOBALS['TL_LANG']['tl_style']['category'][0] = 'Kategória';
+$GLOBALS['TL_LANG']['tl_style']['category'][1] = 'Kategóriami je možné v backende zoskupiť nadefinované štýly.';
+$GLOBALS['TL_LANG']['tl_style']['comment'][0] = 'Komentár';
+$GLOBALS['TL_LANG']['tl_style']['comment'][1] = 'Tu môžte vložiť komentár.';
+$GLOBALS['TL_LANG']['tl_style']['size'][0] = 'Rozmery';
+$GLOBALS['TL_LANG']['tl_style']['size'][1] = 'Šírka, výška (width, height, min-width, min-height, max-width a max-height).';
+$GLOBALS['TL_LANG']['tl_style']['width'][0] = 'Šírka';
+$GLOBALS['TL_LANG']['tl_style']['width'][1] = 'Tu môžte zadať šírku elementu.';
+$GLOBALS['TL_LANG']['tl_style']['height'][0] = 'Výška';
+$GLOBALS['TL_LANG']['tl_style']['height'][1] = 'Tu môžte zadať výšku elementu.';
+$GLOBALS['TL_LANG']['tl_style']['minwidth'][0] = 'Minimálna šírka';
+$GLOBALS['TL_LANG']['tl_style']['minwidth'][1] = 'Tu môžte zadať minimálnu šírku elementu.';
+$GLOBALS['TL_LANG']['tl_style']['minheight'][0] = 'Minimálna výška';
+$GLOBALS['TL_LANG']['tl_style']['minheight'][1] = 'Tu môžte zadať minimálnu výšku elementu.';
+$GLOBALS['TL_LANG']['tl_style']['maxwidth'][0] = 'Maximálna šírka';
+$GLOBALS['TL_LANG']['tl_style']['maxwidth'][1] = 'Tu môžte zadať maximálnu šírku elementu.';
+$GLOBALS['TL_LANG']['tl_style']['maxheight'][0] = 'Maximálna výška';
+$GLOBALS['TL_LANG']['tl_style']['maxheight'][1] = 'Tu môžte zadať maximálnu výšku elementu.';
+$GLOBALS['TL_LANG']['tl_style']['positioning'][0] = 'Umiestnenie (position)';
+$GLOBALS['TL_LANG']['tl_style']['positioning'][1] = 'Umiestnenie (position), pretekanie (overflow), obtekanie (float), zrušenie (clear) a zobrazenie (display).';
+$GLOBALS['TL_LANG']['tl_style']['trbl'][0] = 'Poloha';
+$GLOBALS['TL_LANG']['tl_style']['trbl'][1] = 'Tu môžte zadať polohu elementu - hore (top), vpravo (right), dole (bottom), vľavo (left).';
+$GLOBALS['TL_LANG']['tl_style']['position'][0] = 'Spôsob umiestnenia (position)';
+$GLOBALS['TL_LANG']['tl_style']['position'][1] = 'Tu môžte zvoliť spôsob umiestnenia.';
+$GLOBALS['TL_LANG']['tl_style']['floating'][0] = 'Spôsob obtekania (float)';
+$GLOBALS['TL_LANG']['tl_style']['floating'][1] = 'Tu môžte zvoliť spôsob obtekania.';
+$GLOBALS['TL_LANG']['tl_style']['clear'][0] = 'Spôsob zrušenia (clear)';
+$GLOBALS['TL_LANG']['tl_style']['clear'][1] = 'Tu môžte zvoliť spôsob zrušenia.';
+$GLOBALS['TL_LANG']['tl_style']['overflow'][0] = 'Spôsob pretekania (overflow)';
+$GLOBALS['TL_LANG']['tl_style']['overflow'][1] = 'Tu môžte zvoliť spôsob pretekania.';
+$GLOBALS['TL_LANG']['tl_style']['display'][0] = 'Zobrazenie (display)';
+$GLOBALS['TL_LANG']['tl_style']['display'][1] = 'Tu môžte zvoliť spôsob zobrazenia.';
+$GLOBALS['TL_LANG']['tl_style']['alignment'][0] = 'Odsadenie zvonku, zvnútra a zarovnanie';
+$GLOBALS['TL_LANG']['tl_style']['alignment'][1] = 'Odsadenie zvonku (margin), odsadenie zvnútra (padding), vertikálne zarovnanie (vertical-align) a zarovnanie textu (text-align).';
+$GLOBALS['TL_LANG']['tl_style']['margin'][0] = 'Odsadenie zvonku (margin)';
+$GLOBALS['TL_LANG']['tl_style']['margin'][1] = 'Tu môžte zadať vonkajšie odsadenie zhora (margin-top), zprava (margin-right), zdola (margin-bottom), zľava (margin-left).';
+$GLOBALS['TL_LANG']['tl_style']['padding'][0] = 'Odsadenie zvnútra (padding)';
+$GLOBALS['TL_LANG']['tl_style']['padding'][1] = 'Tu môžte zadať vnútorné odsadenie zhora (padding-top), zprava (padding-right), zdola (padding-bottom), zľava (padding-left).';
+$GLOBALS['TL_LANG']['tl_style']['align'][0] = 'Zarovnanie elementu';
+$GLOBALS['TL_LANG']['tl_style']['align'][1] = 'Zarovnaním elementu bude nahradené jeho pravé a ľavé vonkajšie odsadenie (margin).';
+$GLOBALS['TL_LANG']['tl_style']['verticalalign'][0] = 'Vertikálne zarovnanie';
+$GLOBALS['TL_LANG']['tl_style']['verticalalign'][1] = 'Tu môžte zvoliť spôsob vertikálneho zarovnania.';
+$GLOBALS['TL_LANG']['tl_style']['textalign'][0] = 'Zarovnanie textu';
+$GLOBALS['TL_LANG']['tl_style']['textalign'][1] = 'Tu môžte zvoliť spôsob horizontálneho zarovnania textu.';
+$GLOBALS['TL_LANG']['tl_style']['background'][0] = 'Pozadie (background)';
+$GLOBALS['TL_LANG']['tl_style']['background'][1] = 'Farba pozadia (background-color), obrázok pozadia (background-image), umiestnenie pozadia (background-position), opakovanie pozadia (background-repeat), lineárny prechod (linear-gradient) a tieň (box-shadow).';
+$GLOBALS['TL_LANG']['tl_style']['bgcolor'][0] = 'Farba a priehľadnosť pozadia';
+$GLOBALS['TL_LANG']['tl_style']['bgcolor'][1] = 'Tu môžte zadať farbu pozadia v hexadecimálnom formáte (napr. ff0000 je červená) a priehľadnosť v percentách (napr. 75).';
+$GLOBALS['TL_LANG']['tl_style']['bgimage'][0] = 'Obrázok pozadia';
+$GLOBALS['TL_LANG']['tl_style']['bgimage'][1] = 'Tu môžte zadať cestu k obrázku, ktorý bude vložený do pozadia.';
+$GLOBALS['TL_LANG']['tl_style']['bgposition'][0] = 'Umiestnenie pozadia';
+$GLOBALS['TL_LANG']['tl_style']['bgposition'][1] = 'Tu môžte zvoliť umiestnenie obrázku v pozadí.';
+$GLOBALS['TL_LANG']['tl_style']['bgrepeat'][0] = 'Opakovanie pozadia';
+$GLOBALS['TL_LANG']['tl_style']['bgrepeat'][1] = 'Tu si môžete vybrať či a ako sa má opakovať obrázok v pozadí.';
+$GLOBALS['TL_LANG']['tl_style']['shadowsize'][0] = 'Veľkosť tieňa';
+$GLOBALS['TL_LANG']['tl_style']['shadowsize'][1] = 'Tu môžete zadať umiestnenie, odsadenie a dosah tieňa v osi X a Y.';
+$GLOBALS['TL_LANG']['tl_style']['shadowcolor'][0] = 'Farba a priehľadnosť tieňa';
+$GLOBALS['TL_LANG']['tl_style']['shadowcolor'][1] = 'Tu môžte zadať farbu tieňa v hexadecimálnom formáte (napr. ff0000 je červená) a priehľadnosť v percentách (napr. 75).';
+$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][0] = 'Uhol gradientu';
+$GLOBALS['TL_LANG']['tl_style']['gradientAngle'][1] = 'Tu môžte zadať uhol prechodu farieb (napr. <em>-45deg</em>) alebo jeho začiatok (napr. <em>top</em> alebo <em>left bottom</em>)';
+$GLOBALS['TL_LANG']['tl_style']['gradientColors'][0] = 'Farby gradientu';
+$GLOBALS['TL_LANG']['tl_style']['gradientColors'][1] = 'Tu môžte určiť jednotlivé farby prechodu (napr. <em>ffc 10% | f90 | f00</em>';
+$GLOBALS['TL_LANG']['tl_style']['border'][0] = 'Orámovanie (border)';
+$GLOBALS['TL_LANG']['tl_style']['border'][1] = 'Hrúbka orámovania (border-width), štýl orámovania (border-style), farba orámovania (border-color), spracovanie orámovania (border-collapse) a (border-spacing).';
+$GLOBALS['TL_LANG']['tl_style']['borderwidth'][0] = 'Hrúbka orámovania';
+$GLOBALS['TL_LANG']['tl_style']['borderwidth'][1] = 'Tu môžte zadať hrúbku orámovania hore (border-top), vpravo (border-right), dole (border-bottom), vľavo (border-left).';
+$GLOBALS['TL_LANG']['tl_style']['borderstyle'][0] = 'Štýl orámovania';
+$GLOBALS['TL_LANG']['tl_style']['borderstyle'][1] = 'Tu môžte zvoliť štýl orámovania.';
+$GLOBALS['TL_LANG']['tl_style']['bordercolor'][0] = 'Farba a priehľadnosť orámovania';
+$GLOBALS['TL_LANG']['tl_style']['bordercolor'][1] = 'Tu môžte zadať farbu orámovania v hexadecimálnom formáte (napr. 000000 je čierna) a priehľadnosť v percentách (napr. 75).';
+$GLOBALS['TL_LANG']['tl_style']['borderradius'][0] = 'Zaoblenie rohov orámovania';
+$GLOBALS['TL_LANG']['tl_style']['borderradius'][1] = 'Tu môžte zadať mieru zaoblenia orámovania hore, vpravo, dole a vľavo.';
+$GLOBALS['TL_LANG']['tl_style']['bordercollapse'][0] = 'Spracovanie orámovania';
+$GLOBALS['TL_LANG']['tl_style']['bordercollapse'][1] = 'Tu môžte zvoliť spôsob spracovania orámovania.';
+$GLOBALS['TL_LANG']['tl_style']['borderspacing'][0] = 'Odsadenie orámovania';
+$GLOBALS['TL_LANG']['tl_style']['borderspacing'][1] = 'Tu môžte zadať veľkosť odsadenia orámovania.';
+$GLOBALS['TL_LANG']['tl_style']['font'][0] = 'Písmo';
+$GLOBALS['TL_LANG']['tl_style']['font'][1] = 'Typ písma (font-family), veľkosť písma (font-size), farba písma (font-color), výška riadku (line-height), štýl písma (font-style) a zalomenie riadkov (white-space).';
+$GLOBALS['TL_LANG']['tl_style']['fontfamily'][0] = 'Typ písma (font-family)';
+$GLOBALS['TL_LANG']['tl_style']['fontfamily'][1] = 'Tu môžte zadať, čiarkou oddelený zoznam typov písma (fontov).';
+$GLOBALS['TL_LANG']['tl_style']['fontsize'][0] = 'Veľkosť písma (font-size)';
+$GLOBALS['TL_LANG']['tl_style']['fontsize'][1] = 'Tu môžte zadať veľkosť písma.';
+$GLOBALS['TL_LANG']['tl_style']['fontcolor'][0] = 'Farba a priehľadnosť písma (color)';
+$GLOBALS['TL_LANG']['tl_style']['fontcolor'][1] = 'Tu môžte zadať farbu písma v hexadecimálnom formáte (napr. 0055ff je modrá) a priehľadnosť v percentách (napr. 75).';
+$GLOBALS['TL_LANG']['tl_style']['lineheight'][0] = 'Výška riadku (line-height)';
+$GLOBALS['TL_LANG']['tl_style']['lineheight'][1] = 'Tu môžte zadefinovať výšku riadkov.';
+$GLOBALS['TL_LANG']['tl_style']['fontstyle'][0] = 'Štýl písma (font-style)';
+$GLOBALS['TL_LANG']['tl_style']['fontstyle'][1] = 'Tu môžte zvoliť jeden alebo viac štýlov písma.';
+$GLOBALS['TL_LANG']['tl_style']['whitespace'][0] = 'Vypnúť automatické zalomenie riadkov (white-space)';
+$GLOBALS['TL_LANG']['tl_style']['whitespace'][1] = 'Nezalamovať riadky vnútri elementu.';
+$GLOBALS['TL_LANG']['tl_style']['texttransform'][0] = 'Transformácia textu';
+$GLOBALS['TL_LANG']['tl_style']['texttransform'][1] = 'Tu môžte zvoliť spôsob transformácie textu.';
+$GLOBALS['TL_LANG']['tl_style']['textindent'][0] = 'Odsadenie textu';
+$GLOBALS['TL_LANG']['tl_style']['textindent'][1] = 'Tu môžte zadať veľkosť odsadenia textu.';
+$GLOBALS['TL_LANG']['tl_style']['letterspacing'][0] = 'Odsadenie znakov';
+$GLOBALS['TL_LANG']['tl_style']['letterspacing'][1] = 'Tu môžte upraviť veľkosť odsadenia znakov (prednastavená hodnota je 0px).';
+$GLOBALS['TL_LANG']['tl_style']['wordspacing'][0] = 'Odsadenie slov';
+$GLOBALS['TL_LANG']['tl_style']['wordspacing'][1] = 'Tu môžte upraviť veľkosť odsadenia slov (prednastavená hodnota je 0px).';
+$GLOBALS['TL_LANG']['tl_style']['list'][0] = 'Odrážky';
+$GLOBALS['TL_LANG']['tl_style']['list'][1] = 'List-style-type a list-style-image.';
+$GLOBALS['TL_LANG']['tl_style']['liststyletype'][0] = 'Symbol odrážky';
+$GLOBALS['TL_LANG']['tl_style']['liststyletype'][1] = 'Tu môžte zvoliť symbol odrážky.';
+$GLOBALS['TL_LANG']['tl_style']['liststyleimage'][0] = 'Vlastný symbol odrážky';
+$GLOBALS['TL_LANG']['tl_style']['liststyleimage'][1] = 'Tu môžte zadať cestu k vlastnému symbolu.';
+$GLOBALS['TL_LANG']['tl_style']['own'][0] = 'Vlastný kód';
+$GLOBALS['TL_LANG']['tl_style']['own'][1] = 'Tu môžte zadať vlastný CSS kód.';
+$GLOBALS['TL_LANG']['tl_style']['selector_legend'] = 'Selektor a kategória';
+$GLOBALS['TL_LANG']['tl_style']['size_legend'] = 'Rozmery';
+$GLOBALS['TL_LANG']['tl_style']['position_legend'] = 'Umiestnenie';
+$GLOBALS['TL_LANG']['tl_style']['align_legend'] = 'Odsadenie a zarovnanie';
+$GLOBALS['TL_LANG']['tl_style']['background_legend'] = 'Nastavenia pozadia';
+$GLOBALS['TL_LANG']['tl_style']['border_legend'] = 'Nastavenia orámovania';
+$GLOBALS['TL_LANG']['tl_style']['font_legend'] = 'Nastavenia písma';
+$GLOBALS['TL_LANG']['tl_style']['list_legend'] = 'Nastavenia odrážok';
+$GLOBALS['TL_LANG']['tl_style']['custom_legend'] = 'Vlastný kód';
+$GLOBALS['TL_LANG']['tl_style']['normal'] = 'normálne';
+$GLOBALS['TL_LANG']['tl_style']['bold'] = 'tučné';
+$GLOBALS['TL_LANG']['tl_style']['italic'] = 'kurzíva';
+$GLOBALS['TL_LANG']['tl_style']['underline'] = 'podčiarknuté';
+$GLOBALS['TL_LANG']['tl_style']['notUnderlined'] = 'nepodčiarknuté';
+$GLOBALS['TL_LANG']['tl_style']['line-through'] = 'prečiarknuté';
+$GLOBALS['TL_LANG']['tl_style']['overline'] = 's čiarou na vrchu';
+$GLOBALS['TL_LANG']['tl_style']['small-caps'] = 'malé kapitálky';
+$GLOBALS['TL_LANG']['tl_style']['disc'] = 'bod';
+$GLOBALS['TL_LANG']['tl_style']['circle'] = 'krúžok';
+$GLOBALS['TL_LANG']['tl_style']['square'] = 'kocka';
+$GLOBALS['TL_LANG']['tl_style']['decimal'] = 'čísla';
+$GLOBALS['TL_LANG']['tl_style']['upper-roman'] = 'latinské čísla veľkými písmenami';
+$GLOBALS['TL_LANG']['tl_style']['lower-roman'] = 'latinské čísla malými písmenami';
+$GLOBALS['TL_LANG']['tl_style']['upper-alpha'] = 'veľké písmená';
+$GLOBALS['TL_LANG']['tl_style']['lower-alpha'] = 'malé písmená';
+$GLOBALS['TL_LANG']['tl_style']['uppercase'] = 'všetky písmena veľké';
+$GLOBALS['TL_LANG']['tl_style']['lowercase'] = 'všetky písmena malé';
+$GLOBALS['TL_LANG']['tl_style']['capitalize'] = 'kapitálky';
+$GLOBALS['TL_LANG']['tl_style']['none'] = 'žiadny symbol';
+$GLOBALS['TL_LANG']['tl_style']['new'][0] = 'Nová definícia štýlu';
+$GLOBALS['TL_LANG']['tl_style']['new'][1] = 'Vytvoriť novú definíciu štýlu';
+$GLOBALS['TL_LANG']['tl_style']['show'][0] = 'Detaily definície štýlu';
+$GLOBALS['TL_LANG']['tl_style']['show'][1] = 'Zobraziť detaily definície štýlu ID %s';
+$GLOBALS['TL_LANG']['tl_style']['edit'][0] = 'Upraviť definíciu štýlu';
+$GLOBALS['TL_LANG']['tl_style']['edit'][1] = 'Upraviť definíciu štýlu ID %s';
+$GLOBALS['TL_LANG']['tl_style']['cut'][0] = 'Premiestniť definíciu štýlu';
+$GLOBALS['TL_LANG']['tl_style']['cut'][1] = 'Premiestniť definíciu štýlu ID %s';
+$GLOBALS['TL_LANG']['tl_style']['copy'][0] = 'Kopírovať definíciu štýlu';
+$GLOBALS['TL_LANG']['tl_style']['copy'][1] = 'Kopírovať definíciu štýlu ID %s';
+$GLOBALS['TL_LANG']['tl_style']['delete'][0] = 'Odstrániť definíciu štýlu';
+$GLOBALS['TL_LANG']['tl_style']['delete'][1] = 'Odstrániť definíciu štýlu ID %s';
+$GLOBALS['TL_LANG']['tl_style']['editheader'][0] = 'Upraviť kaskádový štýl';
+$GLOBALS['TL_LANG']['tl_style']['editheader'][1] = 'Upraviť nastavenie kaskádových štýlov';
+$GLOBALS['TL_LANG']['tl_style']['pasteafter'][0] = 'Vložiť navrchu';
+$GLOBALS['TL_LANG']['tl_style']['pasteafter'][1] = 'Vložiť za definíciu štýlu ID %s';
+$GLOBALS['TL_LANG']['tl_style']['pastenew'][0] = 'Pridať novú navrchu';
+$GLOBALS['TL_LANG']['tl_style']['pastenew'][1] = 'Pridať nový za definíciu štýlu ID %s';
+$GLOBALS['TL_LANG']['tl_style']['toggle'][0] = 'Používať/nepoužívať definíciu štýlu';
+$GLOBALS['TL_LANG']['tl_style']['toggle'][1] = 'Používať/nepoužívať definíciu štýlu ID %s';

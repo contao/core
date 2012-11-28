@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/sk/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$GLOBALS['TL_LANG']['tl_module']['cal_calendar'][0] = 'Kalendáre';
+$GLOBALS['TL_LANG']['tl_module']['cal_calendar'][1] = 'Prosím, vyberte jeden, alebo viac kalendárov';
+$GLOBALS['TL_LANG']['tl_module']['cal_noSpan'][0] = 'Skrátený náhľad';
+$GLOBALS['TL_LANG']['tl_module']['cal_noSpan'][1] = 'Zobraziť udalosti iba raz, aj pokiaľ trvajú viac dní.';
+$GLOBALS['TL_LANG']['tl_module']['cal_startDay'][0] = 'Deň začiatku týždňa';
+$GLOBALS['TL_LANG']['tl_module']['cal_startDay'][1] = 'Prośim, vyberte deň, kedy začína týždeň.';
+$GLOBALS['TL_LANG']['tl_module']['cal_format'][0] = 'Formát';
+$GLOBALS['TL_LANG']['tl_module']['cal_format'][1] = 'Prosím, vyberte formát zoznamu udalostí.';
+$GLOBALS['TL_LANG']['tl_module']['cal_limit'][0] = 'Počet udalostí';
+$GLOBALS['TL_LANG']['tl_module']['cal_limit'][1] = 'Prosím, vložte číslo reprezentujúce maximálny počet udalosti. Vložte 0 pre zobrazenie všetkých udalostí.';
+$GLOBALS['TL_LANG']['tl_module']['cal_template'][0] = 'Šablóna podujatia';
+$GLOBALS['TL_LANG']['tl_module']['cal_template'][1] = 'Prosím vyberte rozloženie udalosti. Môžete pridať vlastné rozloženia udalosti do priečinka <em>templates</em>. Súbory šablóny udalosti začínajú prefixom <em>event_</em> a vyžadujú súborovú príponu <em>.tpl</em>.';
+$GLOBALS['TL_LANG']['tl_module']['cal_day'] = 'Deň';
+$GLOBALS['TL_LANG']['tl_module']['cal_month'] = 'Mesiac';
+$GLOBALS['TL_LANG']['tl_module']['cal_year'] = 'Rok';
+$GLOBALS['TL_LANG']['tl_module']['next_7'] = '+1 týždeň';
+$GLOBALS['TL_LANG']['tl_module']['next_14'] = '+2 týždne';
+$GLOBALS['TL_LANG']['tl_module']['next_30'] = '+1 mesiac';
+$GLOBALS['TL_LANG']['tl_module']['next_90'] = '+3 mesiace';
+$GLOBALS['TL_LANG']['tl_module']['next_180'] = '+6 mesiacov';
+$GLOBALS['TL_LANG']['tl_module']['next_365'] = '+1 rok';

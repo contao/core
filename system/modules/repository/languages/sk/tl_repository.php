@@ -1,0 +1,174 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/sk/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$GLOBALS['TL_LANG']['tl_repository']['category'][0] = 'Kategória';
+$GLOBALS['TL_LANG']['tl_repository']['category'][1] = 'Prosím vyberte kategóriu rozšírenia.';
+$GLOBALS['TL_LANG']['tl_repository']['copyright'][0] = 'Copyright';
+$GLOBALS['TL_LANG']['tl_repository']['copyright'][1] = 'Tu môžete vložiť poznámku o copyrighte (napríklad © 2007, 2008 Bintree.sk)';
+$GLOBALS['TL_LANG']['tl_repository']['description'][0] = 'Popis';
+$GLOBALS['TL_LANG']['tl_repository']['description'][1] = 'Tieto HTML tagy sú povolené: %s';
+$GLOBALS['TL_LANG']['tl_repository']['extension'][0] = 'Rozšírenia';
+$GLOBALS['TL_LANG']['tl_repository']['extension'][1] = 'Prosím vyberte meno rozšírenia.';
+$GLOBALS['TL_LANG']['tl_repository']['functionality'][0] = 'Funkcionalita';
+$GLOBALS['TL_LANG']['tl_repository']['functionality'][1] = 'Poskytlo rozšírenie očakávanú funkcionalitu?';
+$GLOBALS['TL_LANG']['tl_repository']['license'][0] = 'Licencia';
+$GLOBALS['TL_LANG']['tl_repository']['license'][1] = 'Prosím zadajte krátke informácie o licencii. Plné znenie licencie môžete vložiť do súboru LICENSE.txt.';
+$GLOBALS['TL_LANG']['tl_repository']['name'][0] = 'Meno';
+$GLOBALS['TL_LANG']['tl_repository']['name'][1] = 'Meno rozšírenia musí začínať na a-z, A-Z, alebo 0-9, pričom preferované su malé písmena. Navyše názov môže obsahovať znaky _ a -.';
+$GLOBALS['TL_LANG']['tl_repository']['popularity'][0] = 'Popularita';
+$GLOBALS['TL_LANG']['tl_repository']['popularity'][1] = '%s/%s (stiahnutí/nainštalovaní)';
+$GLOBALS['TL_LANG']['tl_repository']['quality'][0] = 'Kvalita';
+$GLOBALS['TL_LANG']['tl_repository']['quality'][1] = 'Ako robustné je rozšírenie a ako náročná je inštalácia a údržba?';
+$GLOBALS['TL_LANG']['tl_repository']['releasedate'][0] = 'Dátum vydania';
+$GLOBALS['TL_LANG']['tl_repository']['releasedate'][1] = 'Zadajte dátum publikovania tohto vydania v tvare YYYY-MM-DD.';
+$GLOBALS['TL_LANG']['tl_repository']['selversion'][0] = 'Verzia';
+$GLOBALS['TL_LANG']['tl_repository']['selversion'][1] = 'Prosím vyberte verziu';
+$GLOBALS['TL_LANG']['tl_repository']['type'][0] = 'Typ';
+$GLOBALS['TL_LANG']['tl_repository']['type'][1] = 'Prosím vyberte typ rozšírenia.';
+$GLOBALS['TL_LANG']['tl_repository']['usability'][0] = 'Použiteľnosť';
+$GLOBALS['TL_LANG']['tl_repository']['usability'][1] = 'Je rozšírenie vytvorené v rámci TYPOlight štandardov o použiteľnosti a prístupnosti?';
+$GLOBALS['TL_LANG']['tl_repository']['version'][0] = 'Verzia';
+$GLOBALS['TL_LANG']['tl_repository']['version'][1] = 'Čísla verzií musia byť vo formáte n.n.n s, kde n je číslo a s je jedno z: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable';
+$GLOBALS['TL_LANG']['tl_repository']['lickey'][0] = 'Licenčný kľúč';
+$GLOBALS['TL_LANG']['tl_repository']['lickey'][1] = 'Vložte licenčný kľúč, ktorý máte od predajcu rozšírenia.';
+$GLOBALS['TL_LANG']['tl_repository']['uninstprotect'][0] = 'Ochrana proti odinštalovaniu';
+$GLOBALS['TL_LANG']['tl_repository']['uninstprotect'][1] = 'Ochrániť rozšírenie proti náhodnému odinštalovaniu.';
+$GLOBALS['TL_LANG']['tl_repository']['updateprotect'][0] = 'Ochrana proti aktualizácii';
+$GLOBALS['TL_LANG']['tl_repository']['updateprotect'][1] = 'Ochrániť rozšírenie proti náhodnej aktualizácii.';
+$GLOBALS['TL_LANG']['tl_repository']['author'] = 'Autor';
+$GLOBALS['TL_LANG']['tl_repository']['build'] = 'Zostavenie';
+$GLOBALS['TL_LANG']['tl_repository']['cancel'] = 'Zrušiť';
+$GLOBALS['TL_LANG']['tl_repository']['continue'] = 'Pokračovať';
+$GLOBALS['TL_LANG']['tl_repository']['dependencies'] = 'Závislosti tohto rozšírenia';
+$GLOBALS['TL_LANG']['tl_repository']['dependents'] = 'Iný rozšírenia závislé na tomto';
+$GLOBALS['TL_LANG']['tl_repository']['dependentsdel'] = 'Nasledujúce rošírenia sú závislé na <em>%s</em> a môžu byť poškodené:';
+$GLOBALS['TL_LANG']['tl_repository']['donate'] = 'Prispieť';
+$GLOBALS['TL_LANG']['tl_repository']['downloads'] = 'Balíky k stiahnutiu';
+$GLOBALS['TL_LANG']['tl_repository']['extensionnotfound'] = 'Rošírenie nebolo nájdené.';
+$GLOBALS['TL_LANG']['tl_repository']['forum'] = 'Fórum';
+$GLOBALS['TL_LANG']['tl_repository']['installs'] = 'Online inštalácii';
+$GLOBALS['TL_LANG']['tl_repository']['langtrans'] = '%s prekladov';
+$GLOBALS['TL_LANG']['tl_repository']['manual'] = 'Manuál';
+$GLOBALS['TL_LANG']['tl_repository']['no'] = 'nie';
+$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = 'Nenašli sa žiadne rozšírenia.';
+$GLOBALS['TL_LANG']['tl_repository']['orderby'] = 'Zoradiť podľa';
+$GLOBALS['TL_LANG']['tl_repository']['otherlanguages'] = 'Iné jazyky';
+$GLOBALS['TL_LANG']['tl_repository']['pageof'] = 'Strana %s z %s.';
+$GLOBALS['TL_LANG']['tl_repository']['ratingfmt'] = '%.2f (%d hodnotení)';
+$GLOBALS['TL_LANG']['tl_repository']['reldownloads'] = 'Počet stiahnutí tohto vydania';
+$GLOBALS['TL_LANG']['tl_repository']['releasenotesfor'] = 'Poznámky a log zmien k vydaniu %s';
+$GLOBALS['TL_LANG']['tl_repository']['relfunctionality'] = 'Funkcionalita u tohto vydania';
+$GLOBALS['TL_LANG']['tl_repository']['relinstalls'] = 'Počet inštalácií tohto vydania';
+$GLOBALS['TL_LANG']['tl_repository']['relquality'] = 'Kvalita tohto vydania';
+$GLOBALS['TL_LANG']['tl_repository']['relrating'] = 'Hodnotenie tohto vydania';
+$GLOBALS['TL_LANG']['tl_repository']['relupdates'] = 'Aktualizácie tohto vydania';
+$GLOBALS['TL_LANG']['tl_repository']['relusability'] = 'Použiteľnosť tohto vydania';
+$GLOBALS['TL_LANG']['tl_repository']['save'] = 'Uložiť';
+$GLOBALS['TL_LANG']['tl_repository']['shop'] = 'Kúpiť';
+$GLOBALS['TL_LANG']['tl_repository']['showpicture'] = 'Zobraziť celý obrázok';
+$GLOBALS['TL_LANG']['tl_repository']['state'] = 'Stuts';
+$GLOBALS['TL_LANG']['tl_repository']['tag'] = 'Tag';
+$GLOBALS['TL_LANG']['tl_repository']['thumbnail'] = 'Obrázok miniatúry';
+$GLOBALS['TL_LANG']['tl_repository']['totdownloads'] = 'Celkovo stiahnutí';
+$GLOBALS['TL_LANG']['tl_repository']['totfunctionality'] = 'Celkovo funkcionalita';
+$GLOBALS['TL_LANG']['tl_repository']['totinstalls'] = 'Celkovo inštalácií';
+$GLOBALS['TL_LANG']['tl_repository']['totquality'] = 'Celkovo kvalita';
+$GLOBALS['TL_LANG']['tl_repository']['totrating'] = 'Celkovo hodotenie';
+$GLOBALS['TL_LANG']['tl_repository']['totupdates'] = 'Celkovo aktualizácií';
+$GLOBALS['TL_LANG']['tl_repository']['totusability'] = 'Celkovo použiteľnosť';
+$GLOBALS['TL_LANG']['tl_repository']['versionfrom'] = 'Formulár verzií';
+$GLOBALS['TL_LANG']['tl_repository']['versions'] = 'Iné verzie';
+$GLOBALS['TL_LANG']['tl_repository']['versionto'] = 'Verzia k';
+$GLOBALS['TL_LANG']['tl_repository']['yes'] = 'áno';
+$GLOBALS['TL_LANG']['tl_repository']['action'] = 'Akcia';
+$GLOBALS['TL_LANG']['tl_repository']['actionsummary'] = 'Sumarizácia akcií';
+$GLOBALS['TL_LANG']['tl_repository']['actionsuccess'] = 'Akcie úspešné.';
+$GLOBALS['TL_LANG']['tl_repository']['actionfailed'] = 'Jedna, alebo viac akcií nebolo úspešných.';
+$GLOBALS['TL_LANG']['tl_repository']['apply'] = 'Použiť';
+$GLOBALS['TL_LANG']['tl_repository']['byorder'] = 'Od %s';
+$GLOBALS['TL_LANG']['tl_repository']['checkextension'] = 'Skontrolovať rozšírenie';
+$GLOBALS['TL_LANG']['tl_repository']['dbuptodate'] = 'Databáza je aktuálna';
+$GLOBALS['TL_LANG']['tl_repository']['deletingdirs'] = 'Mažú sa priečinky';
+$GLOBALS['TL_LANG']['tl_repository']['deletingfiles'] = 'Mažú sa súbory';
+$GLOBALS['TL_LANG']['tl_repository']['editextension'] = 'Upraviť nastavenia';
+$GLOBALS['TL_LANG']['tl_repository']['extinstrecntf'] = 'Inštalačný záznam rozšírenia nebol nájdený';
+$GLOBALS['TL_LANG']['tl_repository']['errdldpkg'] = 'Stiahnutie balíka z repozitára bolo neúspešné';
+$GLOBALS['TL_LANG']['tl_repository']['failed'] = 'neúspešné';
+$GLOBALS['TL_LANG']['tl_repository']['fileerrwrite'] = 'Chyba pri zapisovaní súboru %s';
+$GLOBALS['TL_LANG']['tl_repository']['filesdeleted'] = '%s súbor(y) boli zmazané';
+$GLOBALS['TL_LANG']['tl_repository']['filesinstalled'] = '%s súbor(y) boli nainštalované';
+$GLOBALS['TL_LANG']['tl_repository']['filesunchanged'] = '%s súbor(y) boli nezmenené';
+$GLOBALS['TL_LANG']['tl_repository']['filesupdated'] = '%s súbor(y) boli aktualizované';
+$GLOBALS['TL_LANG']['tl_repository']['ftsearch'] = 'Úplné (fulltext) vyhľadávanie';
+$GLOBALS['TL_LANG']['tl_repository']['goback'] = 'Ísť späť';
+$GLOBALS['TL_LANG']['tl_repository']['install'] = 'Inštalovať';
+$GLOBALS['TL_LANG']['tl_repository']['installextension'] = 'Inštalovať/aktualizovať rozšírenie';
+$GLOBALS['TL_LANG']['tl_repository']['installingext'] = 'Inštalovať %s %s build %s';
+$GLOBALS['TL_LANG']['tl_repository']['installlogtitle'] = 'Záznam (log) o inštalácii/aktualizácii';
+$GLOBALS['TL_LANG']['tl_repository']['lickeyrequired'] = 'Toto rozšírenie vyžaduje licenčný kľúč. Prosím navštívte obchod predajcu a kľúč zakúpte.';
+$GLOBALS['TL_LANG']['tl_repository']['none'] = 'Žiadne';
+$GLOBALS['TL_LANG']['tl_repository']['notfound'] = 'nenájdené';
+$GLOBALS['TL_LANG']['tl_repository']['ok'] = 'OK';
+$GLOBALS['TL_LANG']['tl_repository']['okuninstextension'] = 'Odinštalovať <em>%s</em>?';
+$GLOBALS['TL_LANG']['tl_repository']['showdetails'] = 'Zobraziť podrobnosti';
+$GLOBALS['TL_LANG']['tl_repository']['stateshint'] = 'Zaškrtnite štádia vývoja, ktoré chcete pripojiť.';
+$GLOBALS['TL_LANG']['tl_repository']['status'] = 'Stav';
+$GLOBALS['TL_LANG']['tl_repository']['success'] = 'úspech';
+$GLOBALS['TL_LANG']['tl_repository']['uninstallextension'] = 'Odinštalovať rozšírenie';
+$GLOBALS['TL_LANG']['tl_repository']['updatedatabase'] = 'Skontrolovať/aktualizovať databázu';
+$GLOBALS['TL_LANG']['tl_repository']['updateextension'] = 'Aktualizovať rozšírenie';
+$GLOBALS['TL_LANG']['tl_repository']['updateextensions'] = 'Aktualizovať zaškrtnuté rozšírenia';
+$GLOBALS['TL_LANG']['tl_repository']['update'] = 'Aktualizovať';
+$GLOBALS['TL_LANG']['tl_repository']['updates'] = 'Aktualizácie';
+$GLOBALS['TL_LANG']['tl_repository']['updatehint'] = 'Zaškrtnite štádia vývoja, ktoré chcete pripojiť pri aktualizáciách.';
+$GLOBALS['TL_LANG']['tl_repository']['updatingext'] = 'Aktualizácia %s %s build %s';
+$GLOBALS['TL_LANG']['tl_repository']['validate'] = 'Opraviť';
+$GLOBALS['TL_LANG']['tl_repository']['validatingext'] = 'Kontrola/oprava %s %s build %s';
+$GLOBALS['TL_LANG']['tl_repository']['approvedForLabel'] = 'Doporučené pre';
+$GLOBALS['TL_LANG']['tl_repository']['approvedForText'] = 'Contao %s k %s';
+$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule'] = 'SOAP rozšírenie nie je k dispozícií (nakonfigurujte v nastavení PHP --anable-soap)';
+$GLOBALS['TL_LANG']['tl_repository_statext']['uptodate'] = 'Aktuálna verzia.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapproved'] = 'Neschválené pre %s %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapprovedwith'] = 'Neschválené k používaniu s %s %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['shouldwork'] = 'Očakávaná kompatibilita s %s %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['newversion'] = 'Nová verzia %s build %s je dostupná.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['depmissing'] = 'Chýbajúce nutné rozšírenie %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extnotfound'] = 'Rozšírenie nebolo nájdene v repozitáry.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['vernotfound'] = 'Inštalovaná verzia nebola nájdená v repozitáry.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extneedkey'] = 'Licenčný klúč vyžadovaný, inštalovať v predstihu.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['errorinstall'] = 'Neúspešná inštalácia, doporučuje sa aktualizovať/opraviť.';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['free'] = 'Zadarmo';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['private'] = 'Súkromná';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['commercial'] = 'Komerčná';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['application'] = 'Aplikácia';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['plugin'] = 'Plugin';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['template'] = 'Šablóna';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['utility'] = 'Utilita';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['widget'] = 'Widget';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['translation'] = 'Preklad';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['bundle'] = 'Balík';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['other'] = 'Iné';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['core'] = 'Jadro';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['reldate'] = 'Dátum vydania';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['rating'] = 'Hodnotenie';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['popular'] = 'Popularita';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['name'] = 'Meno';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['title'] = 'Názov';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['author'] = 'Autor';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['alpha'] = 'Alfa';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['beta'] = 'Beta';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['rc'] = 'RC (verzia pred vydaním)';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['stable'] = 'Stabilná verzia';
