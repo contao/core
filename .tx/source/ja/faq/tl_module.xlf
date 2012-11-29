@@ -1,0 +1,22 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/faq/languages/en/tl_module.php" source-language="en">
+    <body>
+      <trans-unit id="tl_module.faq_categories.0">
+        <source>FAQ categories</source>
+        <target>FAQのカテゴリ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.faq_categories.1">
+        <source>Please select one or more FAQ categories.</source>
+        <target>FAQのカテゴリを1つ以上選択してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.faq_readerModule.0">
+        <source>FAQ reader module</source>
+        <target>FAQリーダーのモジュール</target>
+      </trans-unit>
+      <trans-unit id="tl_module.faq_readerModule.1">
+        <source>Automatically switch to the FAQ reader if an item has been selected.</source>
+        <target>FAQを選択していると、自動的にFAQリーダーに切り替えます。</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

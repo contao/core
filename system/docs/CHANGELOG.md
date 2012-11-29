@@ -1,6 +1,58 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.0.1 (2012-11-29)
+--------------------------
+
+### Fixed
+Exclude the undo module from the list of allowable back end modules (see #5056).
+
+### Fixed
+`Validator::isAlias()` did not support Unicode characters (see #5033).
+
+### Fixed
+Group the search results by their parent IDs when searching the extended tree
+view, e.g. the article tree (see #5051).
+
+### Fixed
+Correctly generate the debug bar markup on XHTML pages (see #5031).
+
+### Fixed
+Handle radial gradients when importing style sheets (see #4640).
+
+### Fixed
+More abstract and effective algorithm to determin the number of files in the
+"purge data" maintenance module (see #5028).
+
+### Fixed
+Fixed two wrong class paths (see #5027).
+
+### Fixed
+Correctly add event images to the templates (see #5002).
+
+### Changed
+Replaced the automatic copyright notice with a meta generator tag.
+
+### Fixed
+Do not strip tags from passwords (see #4977).
+
+### Fixed
+Correctly show the number of returned rows in the debug bar (see #4981).
+
+### Fixed
+Correctly add the RSS feed base URLs (see #4994).
+
+### Fixed
+Fixed an issue in the mediaelement.js MooTools adapter (see #4917).
+
+### Fixed
+Correctly assing the classes "first" and "last" in the (mini) calendar if the
+week does not start on Sunday (see #4970).
+
+### Fixed
+Correctly handle URL parameters appended to the empty domain (see #4972).
+
+
 Version 3.0.0 (2012-10-30)
 --------------------------
 

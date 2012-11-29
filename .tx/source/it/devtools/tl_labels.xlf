@@ -1,0 +1,34 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/devtools/languages/en/tl_labels.php" source-language="en">
+    <body>
+      <trans-unit id="tl_labels.label.0">
+        <source>Language</source>
+        <target>Lingua</target>
+      </trans-unit>
+      <trans-unit id="tl_labels.label.1">
+        <source>Please choose the translation you want to check.</source>
+        <target>Selezionare la traduzione che si vuole verificare</target>
+      </trans-unit>
+      <trans-unit id="tl_labels.headline">
+        <source>Find missing labels</source>
+        <target>Trova le etichette mancanti</target>
+      </trans-unit>
+      <trans-unit id="tl_labels.ok">
+        <source>The file is complete.</source>
+        <target>Il file è completo</target>
+      </trans-unit>
+      <trans-unit id="tl_labels.warning">
+        <source>There are missing labels.</source>
+        <target>Queste sono le etichette mancanti.</target>
+      </trans-unit>
+      <trans-unit id="tl_labels.error">
+        <source>The file does not exist.</source>
+        <target>Il file non esiste</target>
+      </trans-unit>
+      <trans-unit id="tl_labels.submitBT">
+        <source>Search</source>
+        <target>Ricerca</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

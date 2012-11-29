@@ -1,0 +1,266 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_newsletter.php" source-language="en">
+    <body>
+      <trans-unit id="tl_newsletter.subject.0">
+        <source>Subject</source>
+        <target>Assunto</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.subject.1">
+        <source>Please enter the newsletter subject.</source>
+        <target>Favor digitar o assunto da newsletter.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.alias.0">
+        <source>Newsletter alias</source>
+        <target>Pseudônimo da Newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.alias.1">
+        <source>The newsletter alias is a unique reference to the newsletter which can be called instead of its numeric ID.</source>
+        <target>O Pseudônimo da Newsletter é uma referência única para a newsletter e esta pode ser referenciada pelo pseudônimo em vez do seu ID.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.content.0">
+        <source>HTML content</source>
+        <target>Conteúdo</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.content.1">
+        <source>Here you can enter the HTML content of the newsletter. Use the wildcard &lt;em&gt;##email##&lt;/em&gt; to insert the recipient's e-mail address.</source>
+        <target>Favor inserir o conteúdo da newsletter. Use o curinga &lt;em&gt;##email##&lt;/em&gt; para inserir o e-mail do destinatário. Gere um link de cancelamento de assinatura deste modo: &lt;em&gt;http://www.domain.com/unsubscribe-page.html?email=##email##&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.text.0">
+        <source>Text content</source>
+        <target>Texto do conteúdo</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.text.1">
+        <source>Here you can enter the text content of the newsletter. Use the wildcard &lt;em&gt;##email##&lt;/em&gt; to insert the recipient's e-mail address.</source>
+        <target>Por favor insira o texto do conteúdo da newsletter. Use o wildcard &lt;em&gt;##email##&lt;/em&gt; para inserir o endereço de email do destinatário. Gerar links para desinscrição como &lt;em&gt;http://www.domain.com/unsubscribe-page.html?email=##email##&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.addFile.0">
+        <source>Add attachments</source>
+        <target>Adicionar anexos</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.addFile.1">
+        <source>Attach one or more files to the newsletter.</source>
+        <target>Anexe um ou mais arquivos à newsletter.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.files.0">
+        <source>Attachments</source>
+        <target>Anexos</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.files.1">
+        <source>Please choose the files to be attached from the files directory.</source>
+        <target>Por favor, selecione os arquivos que deseja anexar à newsletter.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.template.0">
+        <source>E-mail template</source>
+        <target>Exemplo de e-mail</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.template.1">
+        <source>Here you can choose the e-mail template.</source>
+        <target>Por favor escolha um modelo de email (grupo de modelos &lt;em&gt;mail_&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sendText.0">
+        <source>Send as plain text</source>
+        <target>Enviar como texto</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sendText.1">
+        <source>Send the newsletter as plain text e-mail without the HTML content.</source>
+        <target>Se você selecionar esta opção, o e-mail será enviado como texto puro.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.externalImages.0">
+        <source>External images</source>
+        <target>Imagens externas</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.externalImages.1">
+        <source>Do not embed images in HTML newsletters.</source>
+        <target>Não embutir as imagens em HTML newsletters.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.senderName.0">
+        <source>Sender name</source>
+        <target>Nome do remetente</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.senderName.1">
+        <source>Here you can enter the sender's name.</source>
+        <target>Aqui você pode inserir o nome do remetente.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sender.0">
+        <source>Sender address</source>
+        <target>Endereço do remetente</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sender.1">
+        <source>Here you can enter a custom sender address.</source>
+        <target>Se você não digitar um endereço de e-mail o sistema utilizará o do administrador.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.mailsPerCycle.0">
+        <source>Mails per cycle</source>
+        <target>Correios por ciclo</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.mailsPerCycle.1">
+        <source>The sending process is split into several cycles to prevent the script from timing out.</source>
+        <target>Para evitar que o script exceda o limite de tempo, o envio é dividido em vários ciclos. Aqui você pode definir o número de emails por ciclo dependendo do tempo máximo de execução definido no seu php.ini.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.timeout.0">
+        <source>Timeout in seconds</source>
+        <target>Tempo Esgotado em segundos</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.timeout.1">
+        <source>Here you can modify the waiting time between each cycle to control the number of e-mails per minute.</source>
+        <target>Alguns servidores limitam o número de emails que uma pessoa pode enviar por minuto. Aqui você pode modificar o Tempo Esgotado entre cada ciclo em segundos para ter mais controle sobre a margem de tempo.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.start.0">
+        <source>Offset</source>
+        <target>Índice numérico</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.start.1">
+        <source>In case the sending process is interrupted, you can enter a numeric offset here to continue with a particular recipient. You can check how many mails have been sent in the &lt;em&gt;system/logs/newsletter_*.log&lt;/em&gt; file. E.g., if 120 mails have been sent, enter &quot;120&quot; to continue with the 121st recipient (counting starts at 0).</source>
+        <target>No caso de o processo de envio for interrompido, você pode inserir um índice numérico aqui para continuar com um destinatário específico. Você pode verificar quantos e-mails foram enviados no sistema &lt;em&gt;sytem/logs /newsletter_*.log&lt;/em&gt; arquivo. Por exemplo, se 120 mails foram enviados, digite &quot;120&quot; para continuar com o receptor 121 (contagem inicia em 0).</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sendPreviewTo.0">
+        <source>Send preview to</source>
+        <target>Enviar prévia para</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sendPreviewTo.1">
+        <source>Send the preview of the newsletter to this e-mail address.</source>
+        <target>Enviar uma amostra da newsletter para este endereço de email.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.title_legend">
+        <source>Title and subject</source>
+        <target>Título e assunto</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.html_legend">
+        <source>HTML content</source>
+        <target>Conteúdo HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.text_legend">
+        <source>Text content</source>
+        <target>Texto do conteúdo</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.attachment_legend">
+        <source>Attachments</source>
+        <target>Anexos</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.template_legend">
+        <source>Template settings</source>
+        <target>Configurações do Modelo</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.expert_legend">
+        <source>Expert settings</source>
+        <target>Configurações avançadas</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sent">
+        <source>Sent</source>
+        <target>Enviado</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sentOn">
+        <source>Sent on %s</source>
+        <target>Enviado em %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.notSent">
+        <source>Not sent yet</source>
+        <target>Ainda não enviado</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.mailingDate">
+        <source>Mailing date</source>
+        <target>Data de envio</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.confirm">
+        <source>The newsletter has been sent to %s recipients.</source>
+        <target>A newsletter foi enviada para %s destinatários.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.rejected">
+        <source>%s invalid e-mail address(es) has/have been disabled (see system log).</source>
+        <target>%s endereço(s) de e-mail inválido tem/têm sido desabilitada (veja log do sistema).</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.error">
+        <source>There are no active subscribers to the channel.</source>
+        <target>Não existem assinantes ativos neste canal.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.from">
+        <source>From</source>
+        <target>De</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.attachments">
+        <source>Attachments</source>
+        <target>Anexos</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.preview">
+        <source>Send preview</source>
+        <target>Enviar prévia</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sendConfirm">
+        <source>Do you really want to send the newsletter?</source>
+        <target>Você realmente deseja enviar a newsletter?</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.new.0">
+        <source>New newsletter</source>
+        <target>Nova newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.new.1">
+        <source>Create a new newsletter</source>
+        <target>Criar nova newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.show.0">
+        <source>Newsletter details</source>
+        <target>Detalhes da newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.show.1">
+        <source>Show the details of newsletter ID %s</source>
+        <target>Mostrar detalhes da newsletter com ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.edit.0">
+        <source>Edit newsletter</source>
+        <target>Editar newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.edit.1">
+        <source>Edit newsletter ID %s</source>
+        <target>Editar newsletter com ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.copy.0">
+        <source>Duplicate newsletter</source>
+        <target>Copiar newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.copy.1">
+        <source>Duplicate newsletter ID %s</source>
+        <target>Copiar newsletter com ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.cut.0">
+        <source>Move newsletter</source>
+        <target>Mover Newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.cut.1">
+        <source>Move newsletter ID %s</source>
+        <target>Mover Newsletter ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.delete.0">
+        <source>Delete newsletter</source>
+        <target>Remover newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.delete.1">
+        <source>Delete newsletter ID %s</source>
+        <target>Remover newsletter com ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.editheader.0">
+        <source>Edit channel</source>
+        <target>Editar canal</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.editheader.1">
+        <source>Edit the channel settings</source>
+        <target>Editar o canal</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.pasteafter.0">
+        <source>Paste into this channel</source>
+        <target>Colar para este canal</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.pasteafter.1">
+        <source>Paste after newsletter ID %s</source>
+        <target>Colar para canal ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.send.0">
+        <source>Send newsletter</source>
+        <target>Enviar newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.send.1">
+        <source>Send newsletter ID %s</source>
+        <target>Enviar newsletter com ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

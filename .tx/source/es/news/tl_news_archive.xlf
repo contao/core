@@ -1,0 +1,274 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_news_archive.php" source-language="en">
+    <body>
+      <trans-unit id="tl_news_archive.title.0">
+        <source>Title</source>
+        <target>Título</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.title.1">
+        <source>Please enter a news archive title.</source>
+        <target>Por favor introduce un título para el archivo de noticias</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Saltar a página</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.jumpTo.1">
+        <source>Please choose the news reader page to which visitors will be redirected when clicking a news item.</source>
+        <target>Por favor selecciona la página a la que los visitates serán redirigidos al hacer clic sobre la noticia</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.allowComments.0">
+        <source>Enable comments</source>
+        <target>Permitir comentarios</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.allowComments.1">
+        <source>Allow visitors to comment news items.</source>
+        <target>Permitir a tus visitantes comentar los elementos de noticias.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify.0">
+        <source>Notify</source>
+        <target>Notificar</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+        <target>Por favor selecciona quien debe ser notificado con se añadan comentarios</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.sortOrder.0">
+        <source>Sort order</source>
+        <target>Tipo orden</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+        <target>Por favor selecciona el tipo de orden.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.perPage.0">
+        <source>Comments per page</source>
+        <target>Items por página</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>Por favor introduce el número de comentarios por página (0=comentarios deshabilitados)</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.moderate.0">
+        <source>Moderate comments</source>
+        <target>Moderar</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>Aprobar contenido antes de que sea publicado en la web.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.bbcode.0">
+        <source>Allow BBCode</source>
+        <target>Permitir BBCode</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Permite el uso de BBCode a los visitantes para formatear sus comentarios.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.requireLogin.0">
+        <source>Require login to comment</source>
+        <target>Requerir registro</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>No permitir a invitados crear comentarios.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Deshabilitar la pregunta de seguridad</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+        <target>Selecciona esta opción para deshabilitar la pregunta de seguridad (no recomendado)</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected.0">
+        <source>Protect archive</source>
+        <target>Proteger archivo</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected.1">
+        <source>Show news items to certain member groups only.</source>
+        <target>Mostrar elementos de noticia soloo a ciertos grupos de miembros.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.groups.0">
+        <source>Allowed member groups</source>
+        <target>Grupos de miembros permitidos</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.groups.1">
+        <source>These groups will be able to see the news items in this archive.</source>
+        <target>Aqui puedes seleccionar a qué grupos les será permitido visionar los elementos de noticias.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.makeFeed.0">
+        <source>Generate feed</source>
+        <target>Generar feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.makeFeed.1">
+        <source>Generate an RSS or Atom feed from the news archive.</source>
+        <target>Generar un feed RSS/Atom del archivo de noticias</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.format.0">
+        <source>Feed format</source>
+        <target>Formato de feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.format.1">
+        <source>Please choose a feed format.</source>
+        <target>Por favor selecciona un formato de feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.language.0">
+        <source>Feed language</source>
+        <target>Idioma</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.language.1">
+        <source>Please enter the feed language according to the ISO-639 standard (e.g. &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;).</source>
+        <target>Por favor introduce el idioma se el formato RFC3066 (por ejemplo &lt;em&gt;es&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source.0">
+        <source>Export settings</source>
+        <target>Ajustes de exportar</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source.1">
+        <source>Here you can choose what will be exported.</source>
+        <target>Aqui puedes escoger qué será exportado.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.maxItems.0">
+        <source>Maximum number of items</source>
+        <target>Número máximo de items</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.maxItems.1">
+        <source>Here you can limit the number of feed items. Set to 0 to export all.</source>
+        <target>Limita el número de items exportados. Dejar en blanco o introducir un 0 para incluirlos todos.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feedBase.0">
+        <source>Base URL</source>
+        <target>URL base</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feedBase.1">
+        <source>Please enter the base URL with protocol (e.g. &lt;em&gt;http://&lt;/em&gt;).</source>
+        <target>Por favor introduce la URL base incluyendo el protocolo (por ejemplo &lt;em&gt;http://&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.alias.0">
+        <source>Feed alias</source>
+        <target>Alias de feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.alias.1">
+        <source>Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the root directory of your Contao installation, e.g. as &lt;em&gt;name.xml&lt;/em&gt;.</source>
+        <target>Aqui puedes introducir un nombre único para el feed. Un archivo XML sera generado automáticamente en el directorio raiz de la instalación TYPOlight (&lt;em&gt;nombre.xml&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.description.0">
+        <source>Feed description</source>
+        <target>Descripción</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.description.1">
+        <source>Please enter a short description of the news feed.</source>
+        <target>Por favor introduce una descripción breve del archivo de noticias</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.tstamp.0">
+        <source>Revision date</source>
+        <target>Fecha revisión</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Fecha y hora de la última revisión</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.title_legend">
+        <source>Title and redirect page</source>
+        <target>Título y página de redirección.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments_legend">
+        <source>Comments</source>
+        <target>Comentarios</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected_legend">
+        <source>Access protection</source>
+        <target>Protección de acceso</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feed_legend">
+        <source>RSS/Atom feed</source>
+        <target>RSS/Atom feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_admin">
+        <source>System administrator</source>
+        <target>Administrador de sistema</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_author">
+        <source>Author of the news item</source>
+        <target>Autor del artículo de noticia</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_both">
+        <source>Author and system administrator</source>
+        <target>Autor y Administrador de sistema</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source_teaser">
+        <source>News teasers</source>
+        <target>Destacados de noticia</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source_text">
+        <source>Full articles</source>
+        <target>Noticias completas</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.new.0">
+        <source>New archive</source>
+        <target>Archivo nuevo</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.new.1">
+        <source>Create a new archive</source>
+        <target>Crear un archivo nuevo</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.show.0">
+        <source>Archive details</source>
+        <target>Detalles del archivo</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.show.1">
+        <source>Show the details of archive ID %s</source>
+        <target>Mostrar los detalles del archivo con ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.edit.0">
+        <source>Edit archive</source>
+        <target>Editar archivo</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.edit.1">
+        <source>Edit archive ID %s</source>
+        <target>Editar archivo con ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.editheader.0">
+        <source>Edit archive settings</source>
+        <target>Editar ajustes de archivo</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.editheader.1">
+        <source>Edit the settings of archive ID %s</source>
+        <target>Editar los ajustes del archivo con ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.copy.0">
+        <source>Duplicate archive</source>
+        <target>Copiar archivo</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.copy.1">
+        <source>Duplicate archive ID %s</source>
+        <target>Copiar archivo con ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.delete.0">
+        <source>Delete archive</source>
+        <target>Eliminar archivo</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.delete.1">
+        <source>Delete archive ID %s</source>
+        <target>Eliminar archivo con ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments.0">
+        <source>Comments</source>
+        <target>Comentarios</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments.1">
+        <source>Show comments of archive ID %s</source>
+        <target>Mostrar comentarios del archivo con ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feeds.0">
+        <source>RSS feeds</source>
+        <target>RSS feeds</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feeds.1">
+        <source>Manage RSS feeds</source>
+        <target>Administrar RSS feeds</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

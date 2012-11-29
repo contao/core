@@ -183,7 +183,7 @@ class Transifex
 				}
 
 				// Add an entry to the .tx/config file
-				fputs($fh, "\n[contao.$module-$file]");
+				fputs($fh, "\n[contao.master-$module-$file]");
 				fputs($fh, "\nsource_file = .tx/source/en/$module/$file.xlf");
 				fputs($fh, "\nsource_lang = en");
 				fputs($fh, "\nfile_filter = .tx/source/<lang>/$module/$file.xlf\n");
@@ -485,7 +485,7 @@ class Transifex
 				echo "  Created .tx/source/{$argv[2]}/$module/$file.xlf\n";
 
 				// Push the resouce to transifex.com
-				passthru('tx push --translations --language=' . $argv[2] . ' --resource=contao.' . $module . '-' . $file);
+				passthru('tx push --translations --language=' . $argv[2] . ' --resource=contao.master-' . $module . '-' . $file);
 			}
 		}
 	}

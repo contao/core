@@ -1,0 +1,118 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_module.php" source-language="en">
+    <body>
+      <trans-unit id="tl_module.news_archives.0">
+        <source>News archives</source>
+        <target>ニュースアーカイブ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_archives.1">
+        <source>Please select one or more news archives.</source>
+        <target>ニュースアーカイブを1つ以上選択してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_featured.0">
+        <source>Featured items</source>
+        <target>特別な項目</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_featured.1">
+        <source>Here you can choose how featured items are handled.</source>
+        <target>特別な項目を扱う方法を選択します。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_jumpToCurrent.0">
+        <source>No period selected</source>
+        <target>期間の未選択</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_jumpToCurrent.1">
+        <source>Here you can define what to display if no period is selected.</source>
+        <target>期間を選択していない場合に表示するものを指定します。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_readerModule.0">
+        <source>News reader module</source>
+        <target>ニュースリーダーのモジュール</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_readerModule.1">
+        <source>Automatically switch to the news reader if an item has been selected.</source>
+        <target>ニュースの項目を選択していると、自動的にニュースリーダーに切り替えます。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_metaFields.0">
+        <source>Meta fields</source>
+        <target>メタフィールド</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_metaFields.1">
+        <source>Here you can select the meta fields.</source>
+        <target>メタフィールドを選択します。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_template.0">
+        <source>News template</source>
+        <target>ニュースのテンプレート</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_template.1">
+        <source>Here you can select the news template.</source>
+        <target>ニュースのテンプレートを選択します。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_format.0">
+        <source>Archive format</source>
+        <target>アーカイブの書式</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_format.1">
+        <source>Here you can choose the news archive format.</source>
+        <target>ニュースアーカイブの書式を選択します。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_startDay.0">
+        <source>Week start day</source>
+        <target>週の開始曜日</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_startDay.1">
+        <source>Here you can choose the week start day.</source>
+        <target>週の開始曜日を選択します。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_order.0">
+        <source>Sort order</source>
+        <target>並べ替えの順序</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_order.1">
+        <source>Here you can choose the sort order.</source>
+        <target>並べ替えの順序を選択します。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_showQuantity.0">
+        <source>Show number of items</source>
+        <target>項目の数を表示</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_showQuantity.1">
+        <source>Show the number of news items of each month.</source>
+        <target>各月のニュース項目の数を表示します。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_day">
+        <source>Day</source>
+        <target>日</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_month">
+        <source>Month</source>
+        <target>月</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_year">
+        <source>Year</source>
+        <target>年</target>
+      </trans-unit>
+      <trans-unit id="tl_module.hide_module">
+        <source>Hide the module</source>
+        <target>モジュールを表示しない</target>
+      </trans-unit>
+      <trans-unit id="tl_module.show_current">
+        <source>Jump to the current period</source>
+        <target>現在の期間に移動</target>
+      </trans-unit>
+      <trans-unit id="tl_module.all_items">
+        <source>Show all news items</source>
+        <target>すべてのニュース項目を表示</target>
+      </trans-unit>
+      <trans-unit id="tl_module.featured">
+        <source>Show featured news items only</source>
+        <target>特別なニュース項目だけを表示</target>
+      </trans-unit>
+      <trans-unit id="tl_module.unfeatured">
+        <source>Skip featured news items</source>
+        <target>特別なニュース項目以外を表示</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

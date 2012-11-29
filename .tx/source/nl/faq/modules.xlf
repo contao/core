@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/faq/languages/en/modules.php" source-language="en">
+    <body>
+      <trans-unit id="MOD.faq.0">
+        <source>FAQ</source>
+        <target>FAQ</target>
+      </trans-unit>
+      <trans-unit id="MOD.faq.1">
+        <source>Manage frequently asked questions</source>
+        <target>Beheer van veelgestelde vragen (FAQ).</target>
+      </trans-unit>
+      <trans-unit id="FMD.faq">
+        <source>FAQ</source>
+        <target>FAQ</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqlist.0">
+        <source>FAQ list</source>
+        <target>FAQ lijst</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqlist.1">
+        <source>Adds a list of frequently asked questions to the page</source>
+        <target>Voegt een lijst van veelgestelde vragen toe.</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqreader.0">
+        <source>FAQ reader</source>
+        <target>FAQ lezer</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqreader.1">
+        <source>Shows the answer to a frequently asked question</source>
+        <target>Toont het antwoord op een veelgestelde vraag.</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqpage.0">
+        <source>FAQ page</source>
+        <target>FAQ pagina</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqpage.1">
+        <source>Shows the FAQ list and FAQ reader on the same page</source>
+        <target>Toont de FAQ lijst en FAQ lezer op dezelfde pagina.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

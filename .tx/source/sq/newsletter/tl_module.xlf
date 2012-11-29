@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_module.php" source-language="en">
+    <body>
+      <trans-unit id="tl_module.newsletters.0">
+        <source>Subscribable newsletters</source>
+        <target>Kanalet e lajmeve</target>
+      </trans-unit>
+      <trans-unit id="tl_module.newsletters.1">
+        <source>Show these channels in the front end form.</source>
+        <target>Zgjedhoni kanalet, të cilat përdoruese mund t'i zgjedh gjatë regjistrimit.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.0">
+        <source>Channels</source>
+        <target>Kanalet</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.1">
+        <source>Please select one or more channels.</source>
+        <target>Zgjedhoni një apo më shumë kanale.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.0">
+        <source>Hide channel menu</source>
+        <target>Fshih menyen e kanalit</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.1">
+        <source>Do not show the channel selection menu.</source>
+        <target>Mos e trego menyen e kanalit.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.0">
+        <source>Subscription message</source>
+        <target>E-Mal lajmërimi</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names), &lt;em&gt;##domain##&lt;/em&gt; (domain name) and &lt;em&gt;##link##&lt;/em&gt; (activation link).</source>
+        <target>Epeni tekstin e e-mail-it për konfirmimin e lajmërimit. Mund të përdorni zëvendësim &lt;em&gt;##channel##&lt;/em&gt; (emri kanalit), &lt;em&gt;##domain##&lt;/em&gt; (emri aktual i domain) dhe &lt;em&gt;##link##&lt;/em&gt; (lidhja për aktivizim).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.0">
+        <source>Unsubscription message</source>
+        <target>E-Mail ç'lajmërimi</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names) and &lt;em&gt;##domain##&lt;/em&gt; (domain name).</source>
+        <target>Epeni tekstin e e-mail-it për konfirmimin e ç'lajmërimit. Mund të përdorni zëvendësim &lt;em&gt;##channel##&lt;/em&gt; (emri kanalit), &lt;em&gt;##domain##&lt;/em&gt; (emri aktual i domain) dhe &lt;em&gt;##link##&lt;/em&gt; (lidhja për aktivizim).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.0">
+        <source>Newsletter template</source>
+        <target>Struktura modulit</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.1">
+        <source>Here you can select the newsletter template.</source>
+        <target>Zgjedhoni një struktur të modulit. Mund të fusni struktur lajmesh në dosjen &lt;em&gt;templates&lt;/em&gt;. Shabllonet për lajme fillojnë me &lt;em&gt;nl_&lt;/em&gt; dhe kërkojnë prapashtesën &lt;em&gt;.tpl&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Lajmërimi juaj me %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.1">
+        <source>You have subscribed to the following channels on ##domain##:
+
+##channels##
+
+Please click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.
+</source>
+        <target>Ju jeni lajmëruar për ##channel## në ##domain##. Ju lutem shtypni ##link## për ta kompletuar lajmërimin e juaj. Në qoftë se nuk e keni lajmëruar vetveten, atëherë ignoroni këtë e-mail.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Lajmërimi juaj me %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.1">
+        <source>You have unsubscribed from the following channels on ##domain##:
+
+##channels##
+</source>
+        <target>Jeni ç'lajmëruar me sukses nga kanali ##channel##.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

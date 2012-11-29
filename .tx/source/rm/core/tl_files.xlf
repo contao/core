@@ -1,0 +1,186 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_files.php" source-language="en">
+    <body>
+      <trans-unit id="tl_files.name.0">
+        <source>Name</source>
+        <target>Num</target>
+      </trans-unit>
+      <trans-unit id="tl_files.name.1">
+        <source>Contao automatically adds the file extension.</source>
+        <target>Contao agiuntescha automaticamain l'extensiun da la datoteca.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.meta.0">
+        <source>Meta information</source>
+        <target>Infurmaziuns meta</target>
+      </trans-unit>
+      <trans-unit id="tl_files.meta.1">
+        <source>Here you can enter the file meta information.</source>
+        <target>Qua pos ti endatar las infurmaziuns meta da la datoteca</target>
+      </trans-unit>
+      <trans-unit id="tl_files.fileupload.0">
+        <source>File upload</source>
+        <target>Transferir datotecas</target>
+      </trans-unit>
+      <trans-unit id="tl_files.fileupload.1">
+        <source>Browse your local computer and select the files you want to upload to the server.</source>
+        <target>Tschertga datotecas sin tes computer local ed las transferescha sin il server.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editor.0">
+        <source>Source editor</source>
+        <target>Editur da la funtauna.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editor.1">
+        <source>Here you can edit the file source.</source>
+        <target>Qua pos ti modifitgar la funtauna da la datoteca.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.upload">
+        <source>Upload files</source>
+        <target>Transferir datotecas</target>
+      </trans-unit>
+      <trans-unit id="tl_files.uploadNback">
+        <source>Upload files and go back</source>
+        <target>Transferir las datotecas e turnar</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editFF">
+        <source>Edit a file or folder</source>
+        <target>Modifitgar ina datoteca u in ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.uploadFF">
+        <source>Upload files to folder &quot;%s&quot;</source>
+        <target>Transferir datotecas a l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editFile">
+        <source>Edit file &quot;%s&quot;</source>
+        <target>Modifitgar la datoteca &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.browseFiles">
+        <source>Browse files</source>
+        <target>Navigar en las datotecas</target>
+      </trans-unit>
+      <trans-unit id="tl_files.clearList">
+        <source>Clear list</source>
+        <target>Stizzar la glista</target>
+      </trans-unit>
+      <trans-unit id="tl_files.startUpload">
+        <source>Start upload</source>
+        <target>Cumenzar da transferir</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncFound">
+        <source>Found the original file &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>Chattà la datoteca originala &quot;%s&quot; en &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncRemoved">
+        <source>Removed the file or folder &quot;%s&quot;</source>
+        <target>Allontanà la datoteca u l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncFolderC">
+        <source>Created the folder &quot;%s&quot;</source>
+        <target>Creà l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncFolderF">
+        <source>Found the folder &quot;%s&quot;</source>
+        <target>Chattà l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncFileC">
+        <source>Created the file &quot;%s&quot;</source>
+        <target>Creà la datoteca &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncFileF">
+        <source>Found the file &quot;%s&quot;</source>
+        <target>Chattà la datoteca &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncHash">
+        <source>Updated the hash of the file &quot;%s&quot;</source>
+        <target>Actualisà il hash da la datoteca &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.new.0">
+        <source>New folder</source>
+        <target>Nov ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.new.1">
+        <source>Create a new folder</source>
+        <target>Crear in nov ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.cut.0">
+        <source>Move file or folder</source>
+        <target>Spustar la datoteca u l'ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.cut.1">
+        <source>Move file or folder &quot;%s&quot;</source>
+        <target>Spustar la datoteca u l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.copy.0">
+        <source>Duplicate file or folder</source>
+        <target>Duplitgar la datoteca u l'ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.copy.1">
+        <source>Duplicate file or folder &quot;%s&quot;</source>
+        <target>Duplitgar la datoteca u l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.edit.0">
+        <source>Rename file or folder</source>
+        <target>Renumnar la datoteca u l'ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.edit.1">
+        <source>Rename file or folder &quot;%s&quot;</source>
+        <target>Renumnar la datoteca u l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.delete.0">
+        <source>Delete file or folder</source>
+        <target>Stizzar la datoteca u l'ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.delete.1">
+        <source>Delete file or folder &quot;%s&quot;</source>
+        <target>Stizzar la datoteca u l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.source.0">
+        <source>Edit file</source>
+        <target>Modifitgar la datoteca</target>
+      </trans-unit>
+      <trans-unit id="tl_files.source.1">
+        <source>Edit file &quot;%s&quot;</source>
+        <target>Modifitgar la datoteca &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protect.0">
+        <source>Protect folder</source>
+        <target>Proteger l'ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protect.1">
+        <source>Protect folder &quot;%s&quot;</source>
+        <target>Proteger l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.unlock.0">
+        <source>Remove protection</source>
+        <target>Allontanar la protecziun</target>
+      </trans-unit>
+      <trans-unit id="tl_files.unlock.1">
+        <source>Unprotect folder &quot;%s&quot;</source>
+        <target>Betg pli proteger l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.move.0">
+        <source>File upload</source>
+        <target>Transferir datotecas</target>
+      </trans-unit>
+      <trans-unit id="tl_files.move.1">
+        <source>Upload files to the server</source>
+        <target>Transferir datotecas sin il server</target>
+      </trans-unit>
+      <trans-unit id="tl_files.pasteinto.0">
+        <source>Paste into</source>
+        <target>Encollar en</target>
+      </trans-unit>
+      <trans-unit id="tl_files.pasteinto.1">
+        <source>Paste into this folder</source>
+        <target>Encollar en quest ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.sync.0">
+        <source>Synchronize</source>
+        <target>Sincronisar</target>
+      </trans-unit>
+      <trans-unit id="tl_files.sync.1">
+        <source>Synchronize the file system and the database</source>
+        <target>Sincronisar il sistem da datotecas e la banca da datas</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

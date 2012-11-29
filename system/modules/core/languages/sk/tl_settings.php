@@ -1,0 +1,173 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2012 Leo Feyer
+ * 
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/sk/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$GLOBALS['TL_LANG']['tl_settings']['websiteTitle'][0] = 'Nadpis webstránok';
+$GLOBALS['TL_LANG']['tl_settings']['websiteTitle'][1] = 'Prosím zadajte nadpis webstránok.';
+$GLOBALS['TL_LANG']['tl_settings']['adminEmail'][0] = 'E-mailová adresa administrátora';
+$GLOBALS['TL_LANG']['tl_settings']['adminEmail'][1] = 'Prosím zadajte e-mailovú adresu administrátora.';
+$GLOBALS['TL_LANG']['tl_settings']['dateFormat'][0] = 'Formát datumu';
+$GLOBALS['TL_LANG']['tl_settings']['dateFormat'][1] = 'Formát dátumu použiteľný PHP funkciou date().';
+$GLOBALS['TL_LANG']['tl_settings']['timeFormat'][0] = 'Formátovanie času';
+$GLOBALS['TL_LANG']['tl_settings']['timeFormat'][1] = 'Formát času použiteľný PHP funkciou date().';
+$GLOBALS['TL_LANG']['tl_settings']['datimFormat'][0] = 'Formátovanie času a dátumu';
+$GLOBALS['TL_LANG']['tl_settings']['datimFormat'][1] = 'Formát dátumu a času použiteľný PHP funkciou date().';
+$GLOBALS['TL_LANG']['tl_settings']['timeZone'][0] = 'Časová zóna';
+$GLOBALS['TL_LANG']['tl_settings']['timeZone'][1] = 'Vyberte vašu časovú zónu.';
+$GLOBALS['TL_LANG']['tl_settings']['websitePath'][0] = 'Relatívna cesta do Contao adresára';
+$GLOBALS['TL_LANG']['tl_settings']['websitePath'][1] = 'Relatívnu cestu do Contao adresára obvykle automaticky nastaví inštalačný nástroj.';
+$GLOBALS['TL_LANG']['tl_settings']['characterSet'][0] = 'Znaková sada';
+$GLOBALS['TL_LANG']['tl_settings']['characterSet'][1] = 'Doporučujeme používať znakovú sadu UTF-8, aby sa špeciálne znaky zobrazovali správne.';
+$GLOBALS['TL_LANG']['tl_settings']['customSections'][0] = 'Vlastné časti layoutu';
+$GLOBALS['TL_LANG']['tl_settings']['customSections'][1] = 'Tu môžte zadať, čiarkou oddelený zoznam vlastných sekcií layoutu.';
+$GLOBALS['TL_LANG']['tl_settings']['disableCron'][0] = 'Vypnúťcommand scheduler';
+$GLOBALS['TL_LANG']['tl_settings']['disableCron'][1] = 'Vypne prednastavený periodický plánovač údržby systému. V tom prípade budete musieť sami nastaviť iný plánovač.';
+$GLOBALS['TL_LANG']['tl_settings']['minifyMarkup'][0] = 'Minimalizovať markup';
+$GLOBALS['TL_LANG']['tl_settings']['minifyMarkup'][1] = 'Minimalizuje HTML markup pred odoslaním do prehliadača (vyžaduje rozšírenie »PHP tidy«).';
+$GLOBALS['TL_LANG']['tl_settings']['gzipScripts'][0] = 'Komprimovať scripty';
+$GLOBALS['TL_LANG']['tl_settings']['gzipScripts'][1] = 'Vytvorí zkomprimovanú verziu kaskádových štýlov (CSS) a JavaScriptových súborov. Vyžaduje povolené využívanie .htaccess súboru.';
+$GLOBALS['TL_LANG']['tl_settings']['resultsPerPage'][0] = 'Počet položiek na stránku';
+$GLOBALS['TL_LANG']['tl_settings']['resultsPerPage'][1] = 'Tu môžte zadefinovať počet zobrazených položiek na stránku backendu.';
+$GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage'][0] = 'Maximálny počet položiek na stránku';
+$GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage'][1] = 'Táto možnosť prepíše požiadavku backend užívateľa, pokiaľ zvolí "zobraziť všetky záznamy".';
+$GLOBALS['TL_LANG']['tl_settings']['fileSyncExclude'][0] = 'Vylúčiť adresáre zo synchronizácie';
+$GLOBALS['TL_LANG']['tl_settings']['fileSyncExclude'][1] = 'Sem môžete zadať zoznam adresárov oddelených čiarkou, ktoré sa majú vylúčiť zo synchronizácie (napr. <em>prilohy,music_academy</em>). Upozornenie: vylúčené zdroje sa nebudú môcť použiť ako napr. obrázky či stiahnuteľné položky!';
+$GLOBALS['TL_LANG']['tl_settings']['doNotCollapse'][0] = 'Nezbaľovať elementy';
+$GLOBALS['TL_LANG']['tl_settings']['doNotCollapse'][1] = 'Ponechá elemety rozbalené v prostredí backendu.';
+$GLOBALS['TL_LANG']['tl_settings']['urlSuffix'][0] = 'Prípona vytvorených stránok';
+$GLOBALS['TL_LANG']['tl_settings']['urlSuffix'][1] = 'Prípona bude pridaná ku každému názvu stránky pri prevode na statické stránky. (napr. nieco.html).';
+$GLOBALS['TL_LANG']['tl_settings']['cacheMode'][0] = 'Mód cachovania';
+$GLOBALS['TL_LANG']['tl_settings']['cacheMode'][1] = 'Tu môžete nastaviť mód cachovania.';
+$GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeIp'][0] = 'Anonymizovať IP adresy';
+$GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeIp'][1] = 'Anonymizuje všetky IP adresy, ktoré sú uložené v databáze, okrem <em>tl_session</em> tabuľky. Táto IP adresa je spojená s aktuálnou reláciou (session) z bezpečnostných dôvodov.';
+$GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeGA'][0] = 'Anonymizovať Google Analytics';
+$GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeGA'][1] = 'Anonymizuje IP adresy, ktoré sa posielajú do Google Analytics.';
+$GLOBALS['TL_LANG']['tl_settings']['rewriteURL'][0] = 'Prepísať URL adresy';
+$GLOBALS['TL_LANG']['tl_settings']['rewriteURL'][1] = 'Contao bude prepisovať všetky stránky do statického kódu HTML (bez fragmentu <em>index.php</em> v URL adrese). Táto funkcia vyžaduje zapnutý "mod_rewrite". Premenujte ".htaccess.default" na ".htaccess" a v prípade nutnosti pridajte nastavenia pre RewriteBase.';
+$GLOBALS['TL_LANG']['tl_settings']['addLanguageToUrl'][0] = 'Pridať jazyk do URL';
+$GLOBALS['TL_LANG']['tl_settings']['addLanguageToUrl'][1] = 'Pridá jazykový reťazec ako prvý URL parameter (napr. <em>http://domena.tld/en/</em>).';
+$GLOBALS['TL_LANG']['tl_settings']['doNotRedirectEmpty'][0] = 'Nepresmerovávať prázdne URL';
+$GLOBALS['TL_LANG']['tl_settings']['doNotRedirectEmpty'][1] = 'Namiesto presmerovania na "koreňovú" stránku daného jazyka bude zobrazená prázdná stránka (nedoporučené).';
+$GLOBALS['TL_LANG']['tl_settings']['useAutoItem'][0] = 'Použiť auto_item parameter';
+$GLOBALS['TL_LANG']['tl_settings']['useAutoItem'][1] = 'Preskočí v URL adrese stránky fragment <em>items</em> alebo <em>events</em> a pridá do nej hodnotu <em>auto_item</em>.';
+$GLOBALS['TL_LANG']['tl_settings']['disableAlias'][0] = 'Vypnúť používanie aliasov stránok';
+$GLOBALS['TL_LANG']['tl_settings']['disableAlias'][1] = 'Použijú sa číselné ID stránok alebo článkov namiesto ich aliasov.';
+$GLOBALS['TL_LANG']['tl_settings']['folderUrl'][0] = 'Povoliť URL adresárového typu';
+$GLOBALS['TL_LANG']['tl_settings']['folderUrl'][1] = 'Tu môžete povoliť štýl adresárových aliasov ako <em>docs/install/download.html</em> namiesto <em>docs-install-download.html</em>.';
+$GLOBALS['TL_LANG']['tl_settings']['allowedTags'][0] = 'Povolené HTML tagy';
+$GLOBALS['TL_LANG']['tl_settings']['allowedTags'][1] = 'Tu možte upraviť zoznam HTML tagov, ktoré sú povolené používať pri zadávaní HTML kódu.';
+$GLOBALS['TL_LANG']['tl_settings']['debugMode'][0] = 'Ladiaci mód';
+$GLOBALS['TL_LANG']['tl_settings']['debugMode'][1] = 'Zobrazí na obrazovke určité informácie celého procesu, napr. spojenie s databázou alebo zaslané príkazy.';
+$GLOBALS['TL_LANG']['tl_settings']['bypassCache'][0] = 'Nepoužiť interné úložisko (cache)';
+$GLOBALS['TL_LANG']['tl_settings']['bypassCache'][1] = 'Nepoužívať interné úložisko cache súborov (užitočné napríklad pri vývoji rozšírení)';
+$GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'][0] = 'Vypnúť kontrolu zadávateľa';
+$GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'][1] = 'Nekontrolovať adresu zadávateľa pri odosielaní formulára. Upozornenie: možné bezpečnostné riziko!';
+$GLOBALS['TL_LANG']['tl_settings']['lockPeriod'][0] = 'Čakacia doba pre uzamknutie účtu';
+$GLOBALS['TL_LANG']['tl_settings']['lockPeriod'][1] = 'Účet bude uzamknutý ak užívateľ 3-krát za sebou zadá nesprávne heslo.';
+$GLOBALS['TL_LANG']['tl_settings']['displayErrors'][0] = 'Zobrazovať chybové správy';
+$GLOBALS['TL_LANG']['tl_settings']['displayErrors'][1] = 'Zobrazí chybové správy na obrazovke (nedoporučené pre produktívne stránky).';
+$GLOBALS['TL_LANG']['tl_settings']['logErrors'][0] = 'Zapisovať chybové hlášky';
+$GLOBALS['TL_LANG']['tl_settings']['logErrors'][1] = 'Zapíše chybové hlášky do log súboru (<em>system/logs/error.log</em>).';
+$GLOBALS['TL_LANG']['tl_settings']['coreOnlyMode'][0] = 'Spustiť v núdzovom režime';
+$GLOBALS['TL_LANG']['tl_settings']['coreOnlyMode'][1] = 'Spustí Contao v núdzovom režime -> načíta len základné moduly.';
+$GLOBALS['TL_LANG']['tl_settings']['disableIpCheck'][0] = 'Vypnúť kontrolu IP';
+$GLOBALS['TL_LANG']['tl_settings']['disableIpCheck'][1] = 'Nepriradzovať sessions k IP adresám. Upozornenie: táto voľba znamená potencionálne bezpečnostné riziko!';
+$GLOBALS['TL_LANG']['tl_settings']['allowedDownload'][0] = 'Typy stiahnuteľných (download) súborov';
+$GLOBALS['TL_LANG']['tl_settings']['allowedDownload'][1] = 'Tu môžte zadať, čiarkou oddelený zoznam typov súborov, ktoré bude možné sťahovať zo servera.';
+$GLOBALS['TL_LANG']['tl_settings']['validImageTypes'][0] = 'Typy obrázkových súborov';
+$GLOBALS['TL_LANG']['tl_settings']['validImageTypes'][1] = 'Tu môžte zadať, čiarkou oddelený zoznam typov súborov, ktoré bude možné ovládať pomocou CSS triedy obrázka.';
+$GLOBALS['TL_LANG']['tl_settings']['editableFiles'][0] = 'Typy editovateľných súborov';
+$GLOBALS['TL_LANG']['tl_settings']['editableFiles'][1] = 'Tu môžte zadať, čiarkou oddelený zoznam typov súborov, ktoré bude možné upravovať v editore zdrojového kódu.';
+$GLOBALS['TL_LANG']['tl_settings']['templateFiles'][0] = 'Typy súborov šablón';
+$GLOBALS['TL_LANG']['tl_settings']['templateFiles'][1] = 'Tu môžte zadať, čiarkou oddelený zoznam povolených typov súborov šablón.';
+$GLOBALS['TL_LANG']['tl_settings']['maxImageWidth'][0] = 'Maximálna šírka vo frontende';
+$GLOBALS['TL_LANG']['tl_settings']['maxImageWidth'][1] = 'Ak je šírka obrázkov alebo videí väčšia ako uvedená hodnota, bude automaticky zmenšená na túto hodnotu.';
+$GLOBALS['TL_LANG']['tl_settings']['jpgQuality'][0] = 'Kvalita JPG miniatúr';
+$GLOBALS['TL_LANG']['tl_settings']['jpgQuality'][1] = 'Tu môžte zadať kvalitu JPG miniatúr v percentách.';
+$GLOBALS['TL_LANG']['tl_settings']['gdMaxImgWidth'][0] = 'Maximálna šírka GD obrázkov';
+$GLOBALS['TL_LANG']['tl_settings']['gdMaxImgWidth'][1] = 'Tu môžte zadať maximálnu šírku obrázkov, ktorú sa pokúsi spracovať GD knižnica.';
+$GLOBALS['TL_LANG']['tl_settings']['gdMaxImgHeight'][0] = 'Maximálna výška GD obrázkov';
+$GLOBALS['TL_LANG']['tl_settings']['gdMaxImgHeight'][1] = 'Tu môžte zadať maximálnu výšku obrázkov, ktorú sa pokúsi spracovať GD knižnica.';
+$GLOBALS['TL_LANG']['tl_settings']['uploadPath'][0] = 'Priečinok súborov';
+$GLOBALS['TL_LANG']['tl_settings']['uploadPath'][1] = 'Tu môžte nastaviť relatívnu cestu k priečinku súborov (prednastavená je tl_files).';
+$GLOBALS['TL_LANG']['tl_settings']['uploadTypes'][0] = 'Typy nahrateľných (upload) súborov';
+$GLOBALS['TL_LANG']['tl_settings']['uploadTypes'][1] = 'Tu môžte zadať, čiarkou oddelený zoznam typov súborov, ktoré bude možné nahrávať na server.';
+$GLOBALS['TL_LANG']['tl_settings']['uploadFields'][0] = 'Počet súbežných nahrávaní súborov';
+$GLOBALS['TL_LANG']['tl_settings']['uploadFields'][1] = 'Tu môžte zadať maximálny počet súborov, ktoré môžu byť nahrávané v rovnakom čase.';
+$GLOBALS['TL_LANG']['tl_settings']['maxFileSize'][0] = 'Maximálna veľkosť nahrávaného súboru';
+$GLOBALS['TL_LANG']['tl_settings']['maxFileSize'][1] = 'Tu môžte zadať maximálnu veľkosť nahrávaného súboru v bytoch (prednastavené sú 2 MB = 2048 kB = 2048000 bytov).';
+$GLOBALS['TL_LANG']['tl_settings']['imageWidth'][0] = 'Maximálna šírka obrázku';
+$GLOBALS['TL_LANG']['tl_settings']['imageWidth'][1] = 'Tu môžte zadať maximálnu šírku nahrávaného obrázku v pixeloch.';
+$GLOBALS['TL_LANG']['tl_settings']['imageHeight'][0] = 'Maximálna výška obrázku';
+$GLOBALS['TL_LANG']['tl_settings']['imageHeight'][1] = 'Tu môžte zadať maximálnu výšku nahrávaného obrázku v pixeloch.';
+$GLOBALS['TL_LANG']['tl_settings']['enableSearch'][0] = 'Aktivovať vyhľadávanie';
+$GLOBALS['TL_LANG']['tl_settings']['enableSearch'][1] = 'Indexovanie stránok. Tým sa v nich potom môže vyhľadávať.';
+$GLOBALS['TL_LANG']['tl_settings']['indexProtected'][0] = 'Indexovať chránené stránky';
+$GLOBALS['TL_LANG']['tl_settings']['indexProtected'][1] = 'Používajte túto možnosť opatrne. Pri jej použití vždy vylúčte personalizované stranky z indexácie!';
+$GLOBALS['TL_LANG']['tl_settings']['useSMTP'][0] = 'Použiť SMTP na odosielanie e-mailov';
+$GLOBALS['TL_LANG']['tl_settings']['useSMTP'][1] = 'Použiť SMTP na odosielanie e-mailov namiesto funkcie PHP mail().';
+$GLOBALS['TL_LANG']['tl_settings']['smtpHost'][0] = 'Názov SMTP poskytovateľa';
+$GLOBALS['TL_LANG']['tl_settings']['smtpHost'][1] = 'Zadajte názov poskytovateľa vašeho SMTP serveru (prednastavený je localhost).';
+$GLOBALS['TL_LANG']['tl_settings']['smtpUser'][0] = 'Užívateľské meno pre SMTP';
+$GLOBALS['TL_LANG']['tl_settings']['smtpUser'][1] = 'Ak váš SMTP server vyžaduje overenie zadajte užívateľské meno.';
+$GLOBALS['TL_LANG']['tl_settings']['smtpPass'][0] = 'Heslo pre SMTP';
+$GLOBALS['TL_LANG']['tl_settings']['smtpPass'][1] = 'Ak váš SMTP server vyžaduje overenie, zadajte heslo.';
+$GLOBALS['TL_LANG']['tl_settings']['smtpEnc'][0] = 'Šifrovanie SMTP';
+$GLOBALS['TL_LANG']['tl_settings']['smtpEnc'][1] = 'Tu si môžte vybrať metódu šifrovania (SSL alebo TLS).';
+$GLOBALS['TL_LANG']['tl_settings']['smtpPort'][0] = 'Číslo portu SMTP';
+$GLOBALS['TL_LANG']['tl_settings']['smtpPort'][1] = 'Zadajte číslo portu vášho SMTP servra (prednastavené hodnoty sú 25 alebo 465 pre SSL).';
+$GLOBALS['TL_LANG']['tl_settings']['inactiveModules'][0] = 'Nepoužívané rozšírenia';
+$GLOBALS['TL_LANG']['tl_settings']['inactiveModules'][1] = 'Tu môžte deaktivovať rozšírenia, ktoré nepotrebujete používať.';
+$GLOBALS['TL_LANG']['tl_settings']['undoPeriod'][0] = 'Doba uchovania vykonaných zmien';
+$GLOBALS['TL_LANG']['tl_settings']['undoPeriod'][1] = 'Tu môžte zadať ako dlho (v sekundách) sa majú uchovávať vykonané zmeny, aby ste mali možnosť obnoviť predchádzajúci stav "kroky späť" (24 hodín = 86400 sekúnd).';
+$GLOBALS['TL_LANG']['tl_settings']['versionPeriod'][0] = 'Doba uchovania verzií';
+$GLOBALS['TL_LANG']['tl_settings']['versionPeriod'][1] = 'Tu môžte zadať ako dlho (v sekundách) sa majú uchovávať rôzne verzie záznamov (90 dní = 7776000 sekúnd).';
+$GLOBALS['TL_LANG']['tl_settings']['logPeriod'][0] = 'Doba uchovania systémových správ';
+$GLOBALS['TL_LANG']['tl_settings']['logPeriod'][1] = 'Tu môžte zadať ako dlho (v sekundách) sa majú uchovávať správy systému (14 dní = 1209600 sekúnd).';
+$GLOBALS['TL_LANG']['tl_settings']['sessionTimeout'][0] = 'Doba platnosti session';
+$GLOBALS['TL_LANG']['tl_settings']['sessionTimeout'][1] = 'Tu môžte zadať maximálnu dobu platnosti session v sekundách (60 minút = 3600 sekúnd).';
+$GLOBALS['TL_LANG']['tl_settings']['autologin'][0] = 'Doba automatického prihlasovania';
+$GLOBALS['TL_LANG']['tl_settings']['autologin'][1] = 'Tu môžte zadať dobu, v rámci ktorej sa môže člen automaticky prihlasovať vo frontende (90 dní = 7776000 sekúnd).';
+$GLOBALS['TL_LANG']['tl_settings']['defaultUser'][0] = 'Prednastavený vlastník stránky';
+$GLOBALS['TL_LANG']['tl_settings']['defaultUser'][1] = 'Tu môžte zvoliť užívateľa, ktorý bude prednastaveným vlastníkom stránky.';
+$GLOBALS['TL_LANG']['tl_settings']['defaultGroup'][0] = 'Prednastavená skupina vlastníkov';
+$GLOBALS['TL_LANG']['tl_settings']['defaultGroup'][1] = 'Tu môžte zvoliť skupinu, ktorá bude prednastaveným vlastníkom stránky.';
+$GLOBALS['TL_LANG']['tl_settings']['defaultChmod'][0] = 'Prednastavené prístupové práva';
+$GLOBALS['TL_LANG']['tl_settings']['defaultChmod'][1] = 'Zvoľte prosím prednastavené prístupové práva pre stránky a články.';
+$GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase'][0] = 'Adresa služby Live Update';
+$GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase'][1] = 'Tu môžte zadať (URL) adresu služby Live Update.';
+$GLOBALS['TL_LANG']['tl_settings']['title_legend'] = 'Nadpis webstránok';
+$GLOBALS['TL_LANG']['tl_settings']['date_legend'] = 'Dátum a čas';
+$GLOBALS['TL_LANG']['tl_settings']['global_legend'] = 'Globálne nastavenia';
+$GLOBALS['TL_LANG']['tl_settings']['backend_legend'] = 'Nastavenia backendu';
+$GLOBALS['TL_LANG']['tl_settings']['frontend_legend'] = 'Nastavenia frontendu';
+$GLOBALS['TL_LANG']['tl_settings']['sections_legend'] = 'Sekcie rozmiestnenia';
+$GLOBALS['TL_LANG']['tl_settings']['privacy_legend'] = 'Nastavenia súkromia';
+$GLOBALS['TL_LANG']['tl_settings']['security_legend'] = 'Bezpečnostné nastavenia';
+$GLOBALS['TL_LANG']['tl_settings']['files_legend'] = 'Súbory a obrázky';
+$GLOBALS['TL_LANG']['tl_settings']['uploads_legend'] = 'Nastavenia prenosu dát';
+$GLOBALS['TL_LANG']['tl_settings']['search_legend'] = 'Nastavenia vyhľadávania';
+$GLOBALS['TL_LANG']['tl_settings']['smtp_legend'] = 'Nastavenia SMTP';
+$GLOBALS['TL_LANG']['tl_settings']['ftp_legend'] = 'Nastavenia Safe Mode Hack';
+$GLOBALS['TL_LANG']['tl_settings']['modules_legend'] = 'Nepoužívané rozšírenia';
+$GLOBALS['TL_LANG']['tl_settings']['timeout_legend'] = 'Doba uchovávania dát';
+$GLOBALS['TL_LANG']['tl_settings']['chmod_legend'] = 'Prednastavené prístupové práva';
+$GLOBALS['TL_LANG']['tl_settings']['update_legend'] = 'Live Update';
+$GLOBALS['TL_LANG']['tl_settings']['static_legend'] = 'Stabilné zdroje';
+$GLOBALS['TL_LANG']['tl_settings']['edit'] = 'Upraviť lokálnu konfiguráciu';
+$GLOBALS['TL_LANG']['tl_settings']['both'] = 'Použiť cache servera a prehliadača';
+$GLOBALS['TL_LANG']['tl_settings']['server'] = 'Použiť iba cache servera';
+$GLOBALS['TL_LANG']['tl_settings']['browser'] = 'Použiť iba cache prehliadača';
+$GLOBALS['TL_LANG']['tl_settings']['none'] = 'Vypnúť cachovanie';

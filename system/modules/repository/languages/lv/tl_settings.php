@@ -16,10 +16,10 @@
 
 $GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'][0] = 'Paplašinājumu repozitorija URL';
 $GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'][1] = 'Šiet varat norādīt paplašinājumu repozitorija URL.';
-$GLOBALS['TL_LANG']['tl_settings']['repository_legend'] = 'Paplašinājumu repozitorijs';
 $GLOBALS['TL_LANG']['tl_settings']['repository_languages'][0] = 'Atpazītās valodas';
 $GLOBALS['TL_LANG']['tl_settings']['repository_languages'][1] = 'Šeit jūs varat ievadīt ar komatu atdalītus ISO valodas kodus, ko izmanto, ja pagarinājums apraksts nav pieejams pašreizējā backend valodā.';
 $GLOBALS['TL_LANG']['tl_settings']['repository_listsize'][0] = 'Paplašinājumi lapā';
 $GLOBALS['TL_LANG']['tl_settings']['repository_listsize'][1] = 'Šeit jūs varat definēt cik lapā attēlot paplašinājumus.';
 $GLOBALS['TL_LANG']['tl_settings']['repository_unsafe_catalog'][0] = 'Parādīt nepabeigtos paplašinājumus';
 $GLOBALS['TL_LANG']['tl_settings']['repository_unsafe_catalog'][1] = 'Rādīt nesaderīgos paplašinājumus paplašinājumu katalogā. Ņemiet vērā, ka uzstādot nesaderīgus paplašinājumus, tie var salauzt jūsu Contao instalāciju!';
+$GLOBALS['TL_LANG']['tl_settings']['repository_legend'] = 'Paplašinājumu repozitorijs';

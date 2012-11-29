@@ -1,0 +1,30 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/comments/languages/en/modules.php" source-language="en">
+    <body>
+      <trans-unit id="CTE.comments.0">
+        <source>Comments</source>
+        <target>Commentaris</target>
+      </trans-unit>
+      <trans-unit id="CTE.comments.1">
+        <source>Adds a comment form to the page</source>
+        <target>Agiunscha a la pagina in formular per commentaris.</target>
+      </trans-unit>
+      <trans-unit id="FMD.comments.0">
+        <source>Comments</source>
+        <target>Commentaris</target>
+      </trans-unit>
+      <trans-unit id="FMD.comments.1">
+        <source>Manage comments or guestbook entries</source>
+        <target>Administrar commentaris u endataziuns en cudeschs da giasts.</target>
+      </trans-unit>
+      <trans-unit id="MOD.comments.0">
+        <source>Comments</source>
+        <target>Commentaris</target>
+      </trans-unit>
+      <trans-unit id="MOD.comments.1">
+        <source>Manage comments or guestbook entries</source>
+        <target>Administrar commentaris u endataziuns en cudeschs da giasts.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -101,7 +101,7 @@ class ImageSize extends \Widget
 		}
 
 		// Backwards compatibility (see #3911)
-		if ($this->varValue[2] == 'crop')
+		if (@$this->varValue[2] == 'crop')
 		{
 			$this->varValue[2] = 'center_center';
 		}
@@ -114,7 +114,7 @@ class ImageSize extends \Widget
 									$this->strName,
 									$this->strId.'_'.$i,
 									$i,
-									specialchars($this->varValue[$i]),
+									specialchars(@$this->varValue[$i]), // see #4979
 									$this->getAttributes());
 		}
 

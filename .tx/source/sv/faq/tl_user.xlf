@@ -1,0 +1,26 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/faq/languages/en/tl_user.php" source-language="en">
+    <body>
+      <trans-unit id="tl_user.faqs.0">
+        <source>Allowed FAQ categories</source>
+        <target>Tillåtna FAQ-kategorier</target>
+      </trans-unit>
+      <trans-unit id="tl_user.faqs.1">
+        <source>Here you can grant access to one or more FAQ categories.</source>
+        <target>Här kan du ge tillträde till en eller flera FAQ-kategorier.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.faqp.0">
+        <source>FAQ category permissions</source>
+        <target>Behörigheter för FAQ-kategorier</target>
+      </trans-unit>
+      <trans-unit id="tl_user.faqp.1">
+        <source>Here you can define the FAQ category permissions.</source>
+        <target>Här kan du ändra behörigheter för FAQ-kategorier.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.faq_legend">
+        <source>FAQ permissions</source>
+        <target>FAQ-behörigheter</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

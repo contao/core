@@ -281,8 +281,6 @@ abstract class Controller extends \System
 
 			return $strBuffer;
 		}
-
-		return '';
 	}
 
 
@@ -1662,7 +1660,8 @@ abstract class Controller extends \System
 						$elements[1] = 'mainTitle';
 					}
 
-					$arrCache[$strTag] = specialchars($objPage->{$elements[1]});
+					// Do not use specialchars() here (see #4687)
+					$arrCache[$strTag] = $objPage->{$elements[1]};
 					break;
 
 				// User agent

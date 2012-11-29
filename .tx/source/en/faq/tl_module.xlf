@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/faq/languages/en/tl_module.php" source-language="en">
+    <body>
+      <trans-unit id="tl_module.faq_categories.0">
+        <source>FAQ categories</source>
+      </trans-unit>
+      <trans-unit id="tl_module.faq_categories.1">
+        <source>Please select one or more FAQ categories.</source>
+      </trans-unit>
+      <trans-unit id="tl_module.faq_readerModule.0">
+        <source>FAQ reader module</source>
+      </trans-unit>
+      <trans-unit id="tl_module.faq_readerModule.1">
+        <source>Automatically switch to the FAQ reader if an item has been selected.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
