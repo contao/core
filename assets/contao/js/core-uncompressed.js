@@ -1105,9 +1105,22 @@ var Backend =
 	 * @param object
 	 */
 	makeParentViewSortable: function(ul) {
+		var dragAndScroll = new Scroller(document.getElement('body'),{
+            		onChange: function(x, y) {
+                		var scroll = this.element.getScroll();
+                		this.element.scrollTo(scroll.x, y);
+            		}
+		});
+		
 		var list = new Sortables(ul, {
 			contstrain: true,
-			opacity: 0.6
+			opacity: 0.6,
+			onStart: function(){
+        			dragAndScroll.start();
+    			},
+    			onComplete: function(){
+        			dragAndScroll.stop();
+    			}
 		});
 
 		list.active = false;
