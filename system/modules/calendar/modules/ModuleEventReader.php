@@ -199,6 +199,27 @@ class ModuleEventReader extends \Events
 			}
 		}
 
+		$objTemplate->addImage = false;
+
+		// Add an image
+		if ($objEvent->addImage && $objEvent->singleSRC != '')
+		{
+			if (!is_numeric($objEvent->singleSRC))
+			{
+				$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+			else
+			{
+				$objModel = \FilesModel::findByPk($objEvent->singleSRC);
+
+				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+				{
+					$objEvent->singleSRC = $objModel->path;
+					$this->addImageToTemplate($objTemplate, $objEvent->row());
+				}
+			}
+		}
+
 		$objTemplate->enclosure = array();
 
 		// Add enclosures

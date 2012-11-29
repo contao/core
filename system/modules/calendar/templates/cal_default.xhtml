@@ -8,7 +8,7 @@
   </tr>
   <tr>
 <?php foreach ($this->days as $i=>$day): ?>
-    <th class="label<?php if ($i == 0) echo ' weekend col_first'; if ($i == 6) echo ' weekend col_last'; ?>"><?php echo $day; ?></th>
+    <th class="label<?php echo $day['class']; ?>"><?php echo $day['name']; ?></th>
 <?php endforeach; ?>
   </tr>
 </thead>

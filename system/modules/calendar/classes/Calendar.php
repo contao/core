@@ -384,7 +384,7 @@ class Calendar extends \Frontend
 		// Link to the default page
 		if ($link == '')
 		{
-			$link = sprintf($strBase . $strUrl, (($objEvent->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objEvent->alias : $objEvent->id));
+			$link = $strBase . sprintf($strUrl, (($objEvent->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objEvent->alias : $objEvent->id));
 		}
 
 		// Clean the RTE output

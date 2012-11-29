@@ -510,6 +510,9 @@ class Email
 			$this->objMessage->setFrom($this->strSender);
 		}
 
+		// Set the return path (see #5004)
+		$this->objMessage->setReturnPath($this->strSender);
+
 		// Send e-mail
 		$intSent = self::$objMailer->send($this->objMessage, $this->arrFailures);
 

@@ -317,7 +317,7 @@ class News extends \Frontend
 		}
 
 		// Link to the default page
-		return sprintf($strBase . $strUrl, (($objItem->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
+		return $strBase . sprintf($strUrl, (($objItem->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
 	}
 
 

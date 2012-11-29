@@ -236,8 +236,8 @@ abstract class Frontend extends \Controller
 			}
 		}
 
-		// Return if the alias is empty (see #4702)
-		if ($arrFragments[0] == '')
+		// Return if the alias is empty (see #4702 and #4972)
+		if ($arrFragments[0] == '' && count($arrFragments) > 1)
 		{
 			return false;
 		}
@@ -400,7 +400,15 @@ abstract class Frontend extends \Controller
 		// Compile the parameters string
 		foreach ($arrGet as $k=>$v)
 		{
-			$strParams .= $strConnector . urlencode($k) . $strSeparator . urlencode($v);
+			// Omit the key if it is an auto_item key (see #5037)
+			if (!$GLOBALS['TL_CONFIG']['disableAlias'] && $GLOBALS['TL_CONFIG']['useAutoItem'] && in_array($k, $GLOBALS['TL_AUTO_ITEM']))
+			{
+				$strParams .= $strConnector . urlencode($v);
+			}
+			else
+			{
+				$strParams .= $strConnector . urlencode($k) . $strSeparator . urlencode($v);
+			}
 		}
 
 		// Do not use aliases

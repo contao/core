@@ -170,7 +170,14 @@ class Validator
 	 */
 	public static function isAlias($varValue)
 	{
-		return preg_match('/^[\pN\pL\._-]*$/', $varValue);
+		if (function_exists('mb_eregi'))
+		{
+			return mb_eregi('^[[:alnum:]\._-]*$', $varValue);
+		}
+		else
+		{
+			return preg_match('/^[\pN\pL\._-]*$/u', $varValue);
+		}
 	}
 
 
@@ -183,7 +190,14 @@ class Validator
 	 */
 	public static function isFolderAlias($varValue)
 	{
-		return preg_match('/^[\pN\pL\/\._-]*$/', $varValue);
+		if (function_exists('mb_eregi'))
+		{
+			return mb_eregi('^[[:alnum:]\/\._-]*$', $varValue);
+		}
+		else
+		{
+			return preg_match('/^[\pN\pL\/\._-]*$/u', $varValue);
+		}
 	}
 
 

@@ -239,7 +239,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['password'],
 			'exclude'                 => true,
 			'inputType'               => 'password',
-			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'minlength'=>$GLOBALS['TL_CONFIG']['minPasswordLength']),
+			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'minlength'=>$GLOBALS['TL_CONFIG']['minPasswordLength']),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'pwChange' => array
@@ -670,8 +670,9 @@ class tl_user extends Backend
 
 		foreach ($GLOBALS['BE_MOD'] as $k=>$v)
 		{
-			if ($k != 'profile' && !empty($v))
+			if (!empty($v))
 			{
+				unset($v['undo']);
 				$arrModules[$k] = array_keys($v);
 			}
 		}

@@ -164,31 +164,12 @@ class FrontendTemplate extends \Template
 			$strBuffer = $this->replaceDynamicScriptTags($strBuffer); // see #4203
 
 			$intCache = intval($objPage->cache) + time();
-			$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 			$strMd5CacheKey = md5($strCacheKey);
 
 			// Create the cache file
 			$objFile = new \File('system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html');
 			$objFile->write('<?php' . " /* $strCacheKey */ \$expire = $intCache; \$content = '{$this->strContentType}'; ?>\n");
-
-			/**
-			 * Copyright notice
-			 *
-			 * ACCORDING TO THE LESSER GENERAL PUBLIC LICENSE (LGPL),YOU ARE NOT
-			 * PERMITTED TO RUN CONTAO WITHOUT THIS COPYRIGHT NOTICE. CHANGING,
-			 * REMOVING OR OBSTRUCTING IT IS PROHIBITED BY LAW!
-			 */
-			$objFile->append(preg_replace
-			(
-				'/([ \t]*<title[^>]*>)\n*/',
-				"<!--\n\n"
-				. "\tThis website is powered by Contao Open Source CMS :: Licensed under GNU/LGPL\n"
-				. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
-				. "\tVisit the project website at http://contao.org for more information\n\n"
-				. "//-->$lb$1",
-				$this->minifyHtml($strBuffer), 1
-			), '');
-
+			$objFile->append($this->minifyHtml($strBuffer), '');
 			$objFile->close();
 		}
 

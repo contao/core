@@ -163,7 +163,7 @@ class TextField extends \Widget
 									$this->strName,
 									$this->strId.'_'.$i,
 									$this->size,
-									specialchars($this->varValue[$i]),
+									specialchars(@$this->varValue[$i]), // see #4979
 									$this->getAttributes());
 		}
 

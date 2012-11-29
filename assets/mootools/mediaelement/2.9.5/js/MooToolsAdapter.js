@@ -591,7 +591,7 @@ var MooToolsCompat = (function(window){
         width: function(value){
             if (typeof value == 'undefined'){
                 // DOMWindow does not support getComputedSize
-                return this[0].getComputedSize ? this[0].getComputedSize().width : this[0].getSize().y;
+                return this[0].getComputedSize ? this[0].getComputedSize().width : this[0].getSize().x;
             }
             // fix numeric string
             value = value.toInt() == value ? value+'px' : value;
