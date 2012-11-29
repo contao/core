@@ -654,6 +654,17 @@ class tl_content extends Backend
 	 */
 	public function checkPermission()
 	{
+		// Prevent deleting referenced elements (see #4898)
+		if ($this->Input->get('act') == 'deleteAll')
+		{
+			$objCes = $this->Database->prepare("SELECT cteAlias FROM tl_content WHERE type='alias'")
+									 ->execute();
+
+			$session = $this->Session->getData();
+			$session['CURRENT']['IDS'] = array_diff($session['CURRENT']['IDS'], $objCes->fetchEach('cteAlias'));
+			$this->Session->setData($session);
+		}
+
 		if ($this->User->isAdmin)
 		{
 			return;

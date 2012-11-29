@@ -113,7 +113,7 @@ class ImageSize extends Widget
 		}
 
 		// Backwards compatibility (see #3911)
-		if ($this->varValue[2] == 'crop')
+		if (@$this->varValue[2] == 'crop')
 		{
 			$this->varValue[2] = 'center_center';
 		}
@@ -125,7 +125,7 @@ class ImageSize extends Widget
 			$arrFields[] = sprintf('<input type="text" name="%s[]" id="ctrl_%s" class="tl_text_4" value="%s"%s onfocus="Backend.getScrollOffset()">',
 									$this->strName,
 									$this->strId.'_'.$i,
-									specialchars($this->varValue[$i]),
+									specialchars(@$this->varValue[$i]), // see #4979
 									$this->getAttributes());
 		}
 

@@ -85,8 +85,26 @@ class Help extends Backend
 
 		$arrData = $GLOBALS['TL_DCA'][$table]['fields'][$field];
 
+		// Back end modules
+		if ($table == 'tl_user_group' && $field == 'modules')
+		{
+			$rows = array();
+
+			foreach (array_keys($GLOBALS['BE_MOD']) as $group)
+			{
+				$rows[] = array('colspan', $arrData['reference'][$group]);
+
+				foreach ($GLOBALS['BE_MOD'][$group] as $module=>$class)
+				{
+					$rows[] = $arrData['reference'][$module];
+				}
+			}
+
+			$this->Template->rows = $rows;
+		}
+
 		// Front end modules
-		if ($table == 'tl_module' && $field == 'type')
+		elseif ($table == 'tl_module' && $field == 'type')
 		{
 			$rows = array();
 
@@ -104,7 +122,7 @@ class Help extends Backend
 		}
 
 		// Content elements
-		if ($table == 'tl_content' && $field == 'type')
+		elseif ($table == 'tl_content' && $field == 'type')
 		{
 			$rows = array();
 

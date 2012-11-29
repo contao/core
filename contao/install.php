@@ -759,7 +759,12 @@ class InstallTool extends Backend
 			$this->reload();
 		}
 
-		$this->handleRunOnce();
+		// Wait for the tables to be created (see #5061)
+		if ($this->Database->tableExists('tl_log'))
+		{
+			$this->handleRunOnce();
+		}
+
 		$this->import('DbInstaller');
 
 		$this->Template->dbUpdate = $this->DbInstaller->generateSqlForm();

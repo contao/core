@@ -1,6 +1,67 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.7 (2012-11-29)
+---------------------------
+
+### Fixed
+Only execute runonce files after the DB tables have been created (see #5061).
+
+### Fixed
+Add an empty option in the TimePeriod widget if there are none (see #5067).
+
+### Fixed
+Handle auto_items in the `Frontend::addToUrl()` method (see #5037).
+
+### Fixed
+Do not use `specialchars()` in the "page" insert tag (see #4687).
+
+### Fixed
+Set the return path when sending e-mails (see #5004).
+
+### Fixed
+Handle border color names when importing style sheets (see #5034).
+
+### Fixed
+Prevent the "Illegal string offset" error in back end widgets (see #4979).
+
+### Fixed
+Handle dependencies when updating extensions (see #3804).
+
+### Fixed
+Switched all comments of the example website to "moderated" (see #4995).
+
+### Fixed
+Replaced the automatic copyright notice with a meta generator tag.
+
+### Fixed
+Remove HTML tags when overriding the page title (see #4955).
+
+### Fixed
+Decode entities in meta tags like "description" (see #4949).
+
+### Fixed
+Remove newsletter subscriptions when a member closes his account (see #4943).
+
+### Fixed
+Prevent deleting referenced content elements using "edit multiple" (see #4898).
+
+### Updated
+Updated SwiftMailer to version 4.2.1 (see #4935).
+
+### Fixed
+Set the file permissions depending on the server's umask setting (see #4941).
+
+### Fixed
+Correctly handle external image URLs in the image element (see #4923).
+
+### Fixed
+Fixed the too eager IP address anonymization (see #4924).
+
+### Fixed
+Fixed the automatic page alias generator (see #4880).
+
+
 Version 2.11.6 (2012-09-26)
 ---------------------------
 

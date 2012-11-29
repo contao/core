@@ -1247,7 +1247,7 @@ abstract class Controller extends System
 		if ($GLOBALS['TL_CONFIG']['useFTP'])
 		{
 			$this->import('Files');
-			$this->Files->chmod($strCacheName, 0644);
+			$this->Files->chmod($strCacheName, $GLOBALS['TL_CONFIG']['defaultFileChmod']);
 		}
 
 		// Return the path to new image
@@ -2238,7 +2238,8 @@ abstract class Controller extends System
 						$elements[1] = 'mainTitle';
 					}
 
-					$arrCache[$strTag] = specialchars($objPage->{$elements[1]});
+					// Do not use specialchars() here (see #4687)
+					$arrCache[$strTag] = $objPage->{$elements[1]};
 					break;
 
 				// User agent
@@ -3551,9 +3552,15 @@ abstract class Controller extends System
 
 			if ($arrItem['fullsize'])
 			{
+				// Open images in the lightbox
 				if (preg_match('/\.(jpe?g|gif|png)$/', $arrItem['imageUrl']))
 				{
-					$objTemplate->href = TL_FILES_URL . $this->urlEncode($arrItem['imageUrl']);
+					// Do not add the TL_FILES_URL to external URLs (see #4923)
+					if (strncmp($arrItem['imageUrl'], 'http://', 7) !== 0 && strncmp($arrItem['imageUrl'], 'https://', 8) !== 0)
+					{
+						$objTemplate->href = TL_FILES_URL . $this->urlEncode($arrItem['imageUrl']);
+					}
+
 					$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 				}
 				else
