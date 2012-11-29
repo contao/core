@@ -171,7 +171,7 @@
       </trans-unit>
       <trans-unit id="ERR.ie6warning">
         <source>&lt;strong&gt;Attention!&lt;/strong&gt; Your web browser is %sout of date%s and &lt;strong&gt;you cannot use all features of this website&lt;/strong&gt;.</source>
-        <target>%s&lt;strong&gt;Upozornění!&lt;/strong&gt; Nemáte nejaktuálnější verzi Vašeho webového prohlížeče %s %s a &lt;strong&gt;, proto nebudete moci využít všech funkcí použitých na této webové stránce&lt;/strong&gt;.%s</target>
+        <target>&lt;strong&gt;Upozornění!&lt;/strong&gt; Nemáte nejaktuálnější verzi %s Vašeho webového prohlížeče  %s, a &lt;strong&gt;proto nebudete moci využít všech funkcí použitých na této webové stránce&lt;/strong&gt;.</target>
       </trans-unit>
       <trans-unit id="ERR.noFallbackEmpty">
         <source>None of the active website root pages without an explicit DNS setting has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>

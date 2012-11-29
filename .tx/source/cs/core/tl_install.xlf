@@ -203,11 +203,11 @@
       </trans-unit>
       <trans-unit id="tl_install.updateX">
         <source>It seems that you are upgrading from a Contao version prior to version %s. If that is the case, &lt;strong&gt;it is required to run the version %s update&lt;/strong&gt; to ensure the integrity of your data!</source>
-        <target>Zdá se, že akualizujete z verze nižší než %s. Je-li tomu tak, &lt;strong&gt;je nezbytné, abyste provedli aktualizaci na %s-verzi&lt;/strong&gt;. Tím zajistíte integraci Vašich dat.</target>
+        <target>Zdá se, že akualizujete z verze nižší než %s. Je-li tomu tak, &lt;strong&gt;je nezbytné, abyste provedli aktualizaci na verzi: %s&lt;/strong&gt;. Tím zajistíte integraci Vašich dat.</target>
       </trans-unit>
       <trans-unit id="tl_install.updateXrun">
         <source>Run version %s update</source>
-        <target>Spustit aktualizaci na %s. verzi</target>
+        <target>Spustit aktualizaci na %s verzi</target>
       </trans-unit>
       <trans-unit id="tl_install.updateXrunStep">
         <source>Run version %s update - step %s</source>

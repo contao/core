@@ -16,3 +16,5 @@
 
 $GLOBALS['TL_LANG']['tl_module']['faq_categories'][0] = 'Kategórie FAQ (často kladených otázok)';
 $GLOBALS['TL_LANG']['tl_module']['faq_categories'][1] = 'Zvoľte prosím kategórie FAQ (často kladených otázok), ktoré chcete začleniť.';
+$GLOBALS['TL_LANG']['tl_module']['faq_readerModule'][0] = 'Modul Čítačka FAQ';
+$GLOBALS['TL_LANG']['tl_module']['faq_readerModule'][1] = 'Kliknutím na jednu z položiek automaticky prejde na čítačku FAQ.';

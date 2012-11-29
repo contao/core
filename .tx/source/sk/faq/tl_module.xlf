@@ -11,9 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_module.faq_readerModule.0">
         <source>FAQ reader module</source>
+        <target>Modul Čítačka FAQ</target>
       </trans-unit>
       <trans-unit id="tl_module.faq_readerModule.1">
         <source>Automatically switch to the FAQ reader if an item has been selected.</source>
+        <target>Kliknutím na jednu z položiek automaticky prejde na čítačku FAQ.</target>
       </trans-unit>
     </body>
   </file>

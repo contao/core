@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/newsletter/languages/en/tl_newsletter_recipients.php" source-language="en">
     <body>
       <trans-unit id="tl_newsletter_recipients.email.0">
@@ -18,6 +17,14 @@
         <source>Recipients are usually activated automatically (double-opt-in).</source>
         <target>A címzettek általában automatikusan aktiválódnak (dupla opt-in).</target>
       </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.addedOn.0">
+        <source>Subscription date</source>
+        <target>Feliratkozás dátuma</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.addedOn.1">
+        <source>The date of subscription.</source>
+        <target>A feliratkozás dátuma.</target>
+      </trans-unit>
       <trans-unit id="tl_newsletter_recipients.ip.0">
         <source>IP address</source>
         <target>IP cím</target>
@@ -26,13 +33,11 @@
         <source>The IP address of the subscriber.</source>
         <target>A feliratkozó IP címe</target>
       </trans-unit>
-      <trans-unit id="tl_newsletter_recipients.addedOn.0">
-        <source>Subscription date</source>
-        <target>Feliratkozás dátuma</target>
+      <trans-unit id="tl_newsletter_recipients.token.0">
+        <source>Token key</source>
       </trans-unit>
-      <trans-unit id="tl_newsletter_recipients.addedOn.1">
-        <source>The date of subscription.</source>
-        <target>A feliratkozás dátuma.</target>
+      <trans-unit id="tl_newsletter_recipients.token.1">
+        <source>The confirmation token of the subscription.</source>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.email_legend">
         <source>E-mail address</source>

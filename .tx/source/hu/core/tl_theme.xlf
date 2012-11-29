@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_theme.php" source-language="en">
     <body>
       <trans-unit id="tl_theme.name.0">
@@ -79,8 +78,8 @@
         <target>Globális változók</target>
       </trans-unit>
       <trans-unit id="tl_theme.theme_imported">
-        <source>Theme "%s" has been imported.</source>
-        <target>A "%s" téma importálva.</target>
+        <source>Theme &quot;%s&quot; has been imported.</source>
+        <target>A &quot;%s&quot; téma importálva.</target>
       </trans-unit>
       <trans-unit id="tl_theme.checking_theme">
         <source>The theme data is being checked</source>
@@ -111,16 +110,16 @@
         <target>A téma nem tartalmazza az egyéni elrendezésű szakaszokat.</target>
       </trans-unit>
       <trans-unit id="tl_theme.missing_xml">
-        <source>Theme "%s" is corrupt and cannot be imported.</source>
-        <target>A "%s" téma hibás és nem lett importálva.</target>
+        <source>Theme &quot;%s&quot; is corrupt and cannot be imported.</source>
+        <target>A &quot;%s&quot; téma hibás és nem lett importálva.</target>
       </trans-unit>
       <trans-unit id="tl_theme.custom_templates">
         <source>Custom templates</source>
         <target>Egyedi sablonok</target>
       </trans-unit>
       <trans-unit id="tl_theme.template_exists">
-        <source>The template &lt;strong&gt;"%s"&lt;/strong&gt; exists and will be overwritten.</source>
-        <target>A sablon &lt;strong&gt; "% s" &lt;/ strong&gt; létezik és felül lesz írva.</target>
+        <source>The template &lt;strong&gt;&quot;%s&quot;&lt;/strong&gt; exists and will be overwritten.</source>
+        <target>A sablon &lt;strong&gt; &quot;% s&quot; &lt;/ strong&gt; létezik és felül lesz írva.</target>
       </trans-unit>
       <trans-unit id="tl_theme.templates_ok">
         <source>No conflicts detected.</source>

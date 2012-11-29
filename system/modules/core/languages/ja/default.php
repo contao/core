@@ -292,13 +292,13 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'ファイルのURLは<em>files</
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'assetsのURL';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'asstesのURLは<em>assets</em>のディレクトリに適用します。(Page Speed最適化)';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'バックエンドのキーボードのショートカット';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = '<a href="http://contao.org/ja/keyboard-shortcuts.html" target="_blank">キーボードのショートカット</a>の使用を学んで、作業の流れを速くしましょう。';
+$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = '<a href="http://contao.org/en/keyboard-shortcuts.html" target="_blank">キーボードのショートカット</a>の使用を学んで、作業の流れを速くしましょう。';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'すべてを切り替え';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'すべてのノードの展開または折り畳み';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Contaoのアカウントはロック中';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][1] = "以下のContaoのアカウントはセキュリティ上の理由のためロックしました。\n\nユーザー名: %s\n氏名: %s\nウェブサイト: %s\n\nアカウントのロックは、あと%d分続き、ユーザーが正しくないパスワードを連続して3回入力したためです。この期間の後で、アカウントのロックは自動的に解除となります。\n\nこの電子メールはContaoが作成しました。直接返信はできません。\n";
-$GLOBALS['TL_LANG']['MSC']['toggleMobile'][0] = '移動端末版';
-$GLOBALS['TL_LANG']['MSC']['toggleMobile'][1] = '移動端末版に移動';
+$GLOBALS['TL_LANG']['MSC']['toggleMobile'][0] = '携帯端末版';
+$GLOBALS['TL_LANG']['MSC']['toggleMobile'][1] = '携帯端末版に移動';
 $GLOBALS['TL_LANG']['MSC']['toggleDesktop'][0] = 'デスクトップ版';
 $GLOBALS['TL_LANG']['MSC']['toggleDesktop'][1] = 'デスクトップ版に移動';
 $GLOBALS['TL_LANG']['MSC']['feLink'] = 'フロントエンドに移動';

@@ -63,9 +63,11 @@
       </trans-unit>
       <trans-unit id="ERR.alias">
         <source>Please enter only alphanumeric characters and the following special characters: .-_</source>
+        <target>Zadajte iba abecedné znaky, číslice a nasledovné špeciálne znaky . - _</target>
       </trans-unit>
       <trans-unit id="ERR.folderalias">
         <source>Please enter only alphanumeric characters and the following special characters: .-/_</source>
+        <target>Zadajte iba abecedné znaky, číslice a nasledovné špeciálne znaky . - / _</target>
       </trans-unit>
       <trans-unit id="ERR.date">
         <source>Please enter the date as &quot;%s&quot;!</source>
@@ -193,9 +195,11 @@
       </trans-unit>
       <trans-unit id="ERR.invalidTokenUrl">
         <source>The link you were trying to open could not be verified. If you have clicked the link yourself or have received it by a trustworthy person, you can confirm the process below.</source>
+        <target>Odkaz, ktorý sa snažíte otvoriť, sa nedá overiť. Pokiaľ ste si ho overili sami, alebo ste ho obdržali od dôveryhodnej osoby, môžete to potvrdiť nižšie / v ďalšom kroku.</target>
       </trans-unit>
       <trans-unit id="ERR.version2format">
         <source>This element still uses the old Contao 2 SRC format. Did you upgrade the database?</source>
+        <target>Tento element ešte stále používa starý Contao2 formát. Aktualizovali ste databázu?</target>
       </trans-unit>
       <trans-unit id="ERR.form">
         <source>The form could not be sent</source>
@@ -207,12 +211,15 @@
       </trans-unit>
       <trans-unit id="ERR.download">
         <source>File &quot;%s&quot; is not available for download!</source>
+        <target>Súbor &quot;%s&quot; nie je k dispozícii na stiahnutie!</target>
       </trans-unit>
       <trans-unit id="ERR.invalid">
         <source>Invalid input: %s</source>
+        <target>Neplatný vstupný údaj: %s</target>
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
         <source>No database entry found for %s. Please synchronize the file system.</source>
+        <target>V databáze sa nenašiel žiadny záznam pre %s. Prosím, zosúlaďte systém súborov.</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
@@ -236,7 +243,7 @@
       </trans-unit>
       <trans-unit id="CTE.headline.1">
         <source>Generates a headline (h1 - h6).</source>
-        <target>Tento element obsahuje nezávislý nadpis, ktorý je formátovaný v &lt;H1&gt; tagu.</target>
+        <target>Tento element generuje nezávislý nadpis, ktorý je formátovaný v &lt;H1&gt; tagu.</target>
       </trans-unit>
       <trans-unit id="CTE.text.0">
         <source>Text</source>
@@ -244,7 +251,7 @@
       </trans-unit>
       <trans-unit id="CTE.text.1">
         <source>Generates a rich text element.</source>
-        <target>Tento elements obsahuje formátovaný text s hyperlinkami. Ako doplnok môžete priložiť obrázky.</target>
+        <target>Tento elements generuje formátovaný text s hyperlinkami. Ako doplnok môžete priložiť obrázky.</target>
       </trans-unit>
       <trans-unit id="CTE.html.0">
         <source>HTML</source>
@@ -252,7 +259,7 @@
       </trans-unit>
       <trans-unit id="CTE.html.1">
         <source>Allows you to add custom HTML code.</source>
-        <target>Tento element obsahuje HTML kód. Niektoré HTML tagy sú z bezpečnostných dôvodov zablokované.</target>
+        <target>Tento element generuje HTML kód. Niektoré HTML tagy sú z bezpečnostných dôvodov zablokované.</target>
       </trans-unit>
       <trans-unit id="CTE.list.0">
         <source>List</source>
@@ -260,7 +267,7 @@
       </trans-unit>
       <trans-unit id="CTE.list.1">
         <source>Generates an ordered or unordered list.</source>
-        <target>Tento element obsahuje očíslovaný alebo neočíslovaný zoznam.</target>
+        <target>Tento element generuje očíslovaný alebo neočíslovaný zoznam.</target>
       </trans-unit>
       <trans-unit id="CTE.table.0">
         <source>Table</source>
@@ -268,7 +275,7 @@
       </trans-unit>
       <trans-unit id="CTE.table.1">
         <source>Generates an optionally sortable table.</source>
-        <target>Tento element obsahuje tabuľku.</target>
+        <target>Tento element generuje tabuľku.</target>
       </trans-unit>
       <trans-unit id="CTE.accordion.0">
         <source>Accordion</source>
@@ -284,7 +291,7 @@
       </trans-unit>
       <trans-unit id="CTE.code.1">
         <source>Highlights code snippets and prints them to the screen.</source>
-        <target>Tento element obsahuje zdrojové kódy formátované špecifickým spôsobom. Zdrojový kód bude zobrazený a nebude vykonaný/preložený.</target>
+        <target>Tento element generuje zdrojové kódy formátované špecifickým spôsobom. Zdrojový kód bude zobrazený a nebude vykonaný/preložený.</target>
       </trans-unit>
       <trans-unit id="CTE.links">
         <source>Link elements</source>
@@ -296,7 +303,7 @@
       </trans-unit>
       <trans-unit id="CTE.hyperlink.1">
         <source>Generates a link to another website.</source>
-        <target>Tento element obsahuje hypertextový odkaz na inú webovú stránku.</target>
+        <target>Tento element generuje hypertextový odkaz na inú webovú stránku.</target>
       </trans-unit>
       <trans-unit id="CTE.toplink.0">
         <source>Top link</source>
@@ -308,6 +315,7 @@
       </trans-unit>
       <trans-unit id="CTE.media">
         <source>Media elements</source>
+        <target>Media elementy</target>
       </trans-unit>
       <trans-unit id="CTE.image.0">
         <source>Image</source>
@@ -315,7 +323,7 @@
       </trans-unit>
       <trans-unit id="CTE.image.1">
         <source>Generates a stand-alone image.</source>
-        <target>Tento element obsahuje jeden obrázok.</target>
+        <target>Tento element generuje jeden obrázok.</target>
       </trans-unit>
       <trans-unit id="CTE.gallery.0">
         <source>Gallery</source>
@@ -323,19 +331,23 @@
       </trans-unit>
       <trans-unit id="CTE.gallery.1">
         <source>Generates a lightbox image gallery.</source>
-        <target>Tento element obsahuje miniatúry obrázkov, ktoré môžu byť zobrazené v plnej veľkosti po kliknutí na miniatúru.</target>
+        <target>Tento element generuje miniatúry obrázkov, ktoré môžu byť zobrazené v plnej veľkosti po kliknutí na miniatúru.</target>
       </trans-unit>
       <trans-unit id="CTE.player.0">
         <source>Video/audio</source>
+        <target>Video/audio</target>
       </trans-unit>
       <trans-unit id="CTE.player.1">
         <source>Generates a video or audio player.</source>
+        <target>Tento element generuje video alebo audio prehrávač.</target>
       </trans-unit>
       <trans-unit id="CTE.youtube.0">
         <source>YouTube</source>
+        <target>YouTube</target>
       </trans-unit>
       <trans-unit id="CTE.youtube.1">
         <source>Adds a YouTube video.</source>
+        <target>Vložiť YouTube video</target>
       </trans-unit>
       <trans-unit id="CTE.files">
         <source>File elements</source>
@@ -347,7 +359,7 @@
       </trans-unit>
       <trans-unit id="CTE.download.1">
         <source>Generates a link to download a file.</source>
-        <target>Tento element obsahuje hyperlink na súbor, ktorý môže byť stiahnutý návštevníkmi vašich stránok.</target>
+        <target>Tento element generuje hyperlink na súbor, ktorý môže byť stiahnutý návštevníkmi vašich stránok.</target>
       </trans-unit>
       <trans-unit id="CTE.downloads.0">
         <source>Downloads</source>
@@ -355,7 +367,7 @@
       </trans-unit>
       <trans-unit id="CTE.downloads.1">
         <source>Generates multiple links to download files.</source>
-        <target>Tento element obsahuje This element contains niekoľko súborov, ktoré môžu byť stiahnuté návštevníkmi vašich stránok.</target>
+        <target>Tento element generuje hyperlinky na niekoľko súborov, ktoré môžu byť stiahnuté návštevníkmi vašich stránok.</target>
       </trans-unit>
       <trans-unit id="CTE.includes">
         <source>Include elements</source>
@@ -383,7 +395,7 @@
       </trans-unit>
       <trans-unit id="CTE.form.1">
         <source>Includes a form.</source>
-        <target>Pôužite tento element k vsadeniu formulára do článku.</target>
+        <target>Použite tento element ak chcete vložiť formulár do článku.</target>
       </trans-unit>
       <trans-unit id="CTE.module.0">
         <source>Module</source>
@@ -391,7 +403,7 @@
       </trans-unit>
       <trans-unit id="CTE.module.1">
         <source>Includes a front end module.</source>
-        <target>Pôužite tento element k vsadeniu modulu (napríklad navigácie, alebo flashového videa) do článku.</target>
+        <target>Použite tento element ak chcete vložiť frontend modul do článku.</target>
       </trans-unit>
       <trans-unit id="CTE.teaser.0">
         <source>Article teaser</source>
@@ -871,18 +883,23 @@
       </trans-unit>
       <trans-unit id="MSC.aw_title">
         <source>Title</source>
+        <target>Názov</target>
       </trans-unit>
       <trans-unit id="MSC.aw_link">
         <source>Link</source>
+        <target>Odkaz</target>
       </trans-unit>
       <trans-unit id="MSC.aw_caption">
         <source>Caption</source>
+        <target>Titulok</target>
       </trans-unit>
       <trans-unit id="MSC.aw_delete">
         <source>Delete the language</source>
+        <target>Odstrániť jazyk</target>
       </trans-unit>
       <trans-unit id="MSC.aw_new">
         <source>Add language</source>
+        <target>Pridať jazyk</target>
       </trans-unit>
       <trans-unit id="MSC.relative">
         <source>Relative dimensions</source>
@@ -1010,21 +1027,23 @@
       </trans-unit>
       <trans-unit id="MSC.all.1">
         <source>Edit multiple records at once</source>
-        <target>Upraviť všetky záznamy</target>
+        <target>Upraviť všetky záznamy naraz</target>
       </trans-unit>
       <trans-unit id="MSC.all_override.0">
         <source>Override multiple</source>
+        <target>Prepísať všetky záznamy</target>
       </trans-unit>
       <trans-unit id="MSC.all_override.1">
         <source>Override multiple records at once</source>
+        <target>Prepísať všetky záznamy naraz</target>
       </trans-unit>
       <trans-unit id="MSC.all_fields.0">
         <source>Available fields</source>
-        <target>Prístupné polia</target>
+        <target>Dostupné položky</target>
       </trans-unit>
       <trans-unit id="MSC.all_fields.1">
         <source>Please select the fields you want to edit.</source>
-        <target>Vyberte polia, ktoré chcete upravovať.</target>
+        <target>Vyberte položky, ktoré chcete upravovať.</target>
       </trans-unit>
       <trans-unit id="MSC.password.0">
         <source>Password</source>
@@ -1100,12 +1119,15 @@
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
+        <target>Rozbaliť všetky</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.1">
         <source>Expand or collapse all nodes</source>
+        <target>Rozbaliť alebo zavrieť všetky uzly</target>
       </trans-unit>
       <trans-unit id="MSC.lockedAccount.0">
         <source>A Contao account has been locked</source>
+        <target>Jeden z Contao účtov bol uzamknutý</target>
       </trans-unit>
       <trans-unit id="MSC.lockedAccount.1">
         <source>The following Contao account has been locked for security reasons.
@@ -1118,18 +1140,32 @@ The account has been locked for %d minutes, because the user has entered an inva
 
 This e-mail has been generated by Contao. You can not reply to it directly.
 </source>
+        <target>Nasledujúci Contao účet bol z bezpečnostných dôvodov uzamknutý.
+
+Užívateľské meno: %s
+Skutočné meno: %s
+Webová stránka: %s
+
+Tento účet bol uzamknutý na %d minút, protože uživateľ trikrát po sebe zadal neplatné heslo. Po uvedenej dobe sa účet automaticky aktivuje.
+
+Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň.
+</target>
       </trans-unit>
       <trans-unit id="MSC.toggleMobile.0">
         <source>Mobile version</source>
+        <target>Mobile verzia</target>
       </trans-unit>
       <trans-unit id="MSC.toggleMobile.1">
         <source>Go to the mobile version</source>
+        <target>Prejsť na verziu pre mobilné zariadenia</target>
       </trans-unit>
       <trans-unit id="MSC.toggleDesktop.0">
         <source>Desktop version</source>
+        <target>Desktop verzia</target>
       </trans-unit>
       <trans-unit id="MSC.toggleDesktop.1">
         <source>Go to the desktop version</source>
+        <target>Prejsť na verziu pre desktop zariadenia</target>
       </trans-unit>
       <trans-unit id="MSC.feLink">
         <source>Go to front end</source>
@@ -1141,6 +1177,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.fePreviewTitle">
         <source>Preview of the website in a new window</source>
+        <target>Náhľad danej stránky v novom okne prehliadača</target>
       </trans-unit>
       <trans-unit id="MSC.feUser">
         <source>Front end user</source>
@@ -1152,6 +1189,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.backToTopTitle">
         <source>Go to the top of the page</source>
+        <target>Prejsť na horný okraj stránky</target>
       </trans-unit>
       <trans-unit id="MSC.home">
         <source>Home</source>
@@ -1159,6 +1197,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.homeTitle">
         <source>Back to the back end start page</source>
+        <target>Späť na úvodnú stránku backendu</target>
       </trans-unit>
       <trans-unit id="MSC.user">
         <source>User</source>
@@ -1178,6 +1217,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.logoutBTTitle">
         <source>Close the current session</source>
+        <target>Ukončiť súčasnú session</target>
       </trans-unit>
       <trans-unit id="MSC.backBT">
         <source>Go back</source>
@@ -1185,6 +1225,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.backBTTitle">
         <source>Back to the previous page</source>
+        <target>Späť na predchádzajúcu stránku</target>
       </trans-unit>
       <trans-unit id="MSC.cancelBT">
         <source>Cancel</source>
@@ -1264,6 +1305,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.close">
         <source>Close</source>
+        <target>Zavrieť</target>
       </trans-unit>
       <trans-unit id="MSC.skipNavigation">
         <source>Skip navigation</source>
@@ -1275,6 +1317,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.pw_new">
         <source>Change password</source>
+        <target>Zmeniť heslo</target>
       </trans-unit>
       <trans-unit id="MSC.pw_change">
         <source>Please enter a new password</source>
@@ -1298,18 +1341,19 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.datepicker">
         <source>Date picker</source>
+        <target>Výber dátumu </target>
       </trans-unit>
       <trans-unit id="MSC.colorpicker">
         <source>Color picker</source>
-        <target>Výber farby (vyžaduje JavaScript)</target>
+        <target>Výber farby </target>
       </trans-unit>
       <trans-unit id="MSC.pagepicker">
         <source>Page picker</source>
-        <target>Výber stránky (vyžaduje JavaScript)</target>
+        <target>Výber stránky </target>
       </trans-unit>
       <trans-unit id="MSC.filepicker">
         <source>File picker</source>
-        <target>Výber súboru (vyžaduje JavaScript)</target>
+        <target>Výber súboru </target>
       </trans-unit>
       <trans-unit id="MSC.ppHeadline">
         <source>Contao pages</source>
@@ -1361,6 +1405,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.files">
         <source>%s file(s)</source>
+        <target>%s súbor(y)</target>
       </trans-unit>
       <trans-unit id="MSC.left">
         <source>left</source>
@@ -1412,6 +1457,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.fileDownloadTitle">
         <source>Download this file</source>
+        <target>Stiahnúť tento súbor</target>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
@@ -1487,6 +1533,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.aliasSelected">
         <source>Generate aliases</source>
+        <target>Vytvoriť aliasy</target>
       </trans-unit>
       <trans-unit id="MSC.changeSelected">
         <source>Change selection</source>
@@ -1526,6 +1573,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.applyTitle">
         <source>Apply the changes</source>
+        <target>Použiť zmeny</target>
       </trans-unit>
       <trans-unit id="MSC.mandatory">
         <source>Mandatory field</source>
@@ -1577,10 +1625,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.helpWizard">
         <source>Open the help wizard</source>
-        <target>Nápoveda</target>
+        <target>Otvoriť nápovedu</target>
       </trans-unit>
       <trans-unit id="MSC.helpWizardTitle">
         <source>Help wizard</source>
+        <target>Nápoveda</target>
       </trans-unit>
       <trans-unit id="MSC.noCookies">
         <source>You have to allow cookies to use Contao.</source>
@@ -1596,6 +1645,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.name">
         <source>Name</source>
+        <target>Meno</target>
       </trans-unit>
       <trans-unit id="MSC.emailAddress">
         <source>E-mail address</source>
@@ -1655,39 +1705,51 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.changeSelection">
         <source>Change selection</source>
+        <target>Zmeniť výber</target>
       </trans-unit>
       <trans-unit id="MSC.currentlySelected">
         <source>Selected</source>
+        <target>Vybrané</target>
       </trans-unit>
       <trans-unit id="MSC.selectNode">
         <source>Only show this node</source>
+        <target>Zobraziť len tento uzol</target>
       </trans-unit>
       <trans-unit id="MSC.selectAllNodes">
         <source>Show all nodes</source>
+        <target>Zobraziť všetky uzly</target>
       </trans-unit>
       <trans-unit id="MSC.showDifferences">
         <source>Show differences</source>
+        <target>Zobraziť rozdiely</target>
       </trans-unit>
       <trans-unit id="MSC.editElement">
         <source>Edit the element</source>
+        <target>Upraviť element</target>
       </trans-unit>
       <trans-unit id="MSC.table">
         <source>Table</source>
+        <target>Tabuľka</target>
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>
+        <target>Popisok</target>
       </trans-unit>
       <trans-unit id="MSC.noVersions">
         <source>Currently there are no versions.</source>
+        <target>V súčasnosti neexistujú žiadne verzie.</target>
       </trans-unit>
       <trans-unit id="MSC.latestChanges">
         <source>Latest changes</source>
+        <target>Posledné zmeny</target>
       </trans-unit>
       <trans-unit id="MSC.identicalVersions">
         <source>The two selected versions are identical.</source>
+        <target>Dve vybrané verzie sú identické.</target>
       </trans-unit>
       <trans-unit id="MSC.selectNewPosition">
         <source>Next, please choose the (new) position of the element</source>
+        <target>Ďalší, prosím vyberte (novú) pozíciu daného elementu</target>
       </trans-unit>
       <trans-unit id="MSC.go">
         <source>Go</source>
@@ -1827,6 +1889,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.gplusShare">
         <source>Share on Google+</source>
+        <target>Zdieľať na Google+</target>
       </trans-unit>
       <trans-unit id="MSC.pleaseWait">
         <source>Please wait</source>
@@ -1882,15 +1945,19 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.invalidTokenUrl">
         <source>Invalid token</source>
+        <target>Neplatný kľúč / token</target>
       </trans-unit>
       <trans-unit id="MSC.changelog">
         <source>Changelog</source>
+        <target>Zoznam zmien</target>
       </trans-unit>
       <trans-unit id="MSC.coreOnlyOff">
         <source>Disable</source>
+        <target>Neaktívny</target>
       </trans-unit>
       <trans-unit id="MSC.dragItemsHint">
         <source>Drag the items to re-order them</source>
+        <target>Vyňať položky pre ich znovuzoradenie</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>
@@ -1930,15 +1997,19 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="CONFIRM.do">
         <source>Module</source>
+        <target>Modul</target>
       </trans-unit>
       <trans-unit id="CONFIRM.table">
         <source>Affected table</source>
+        <target>Ovplyvnená tabuľka</target>
       </trans-unit>
       <trans-unit id="CONFIRM.act">
         <source>Action</source>
+        <target>Akcia</target>
       </trans-unit>
       <trans-unit id="CONFIRM.id">
         <source>Affected record</source>
+        <target>Ovplyvnený záznam</target>
       </trans-unit>
       <trans-unit id="DP.select_a_time">
         <source>Select a time</source>

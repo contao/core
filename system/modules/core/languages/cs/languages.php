@@ -129,6 +129,7 @@ $GLOBALS['TL_LANG']['LNG']['su'] = 'Sudánština';
 $GLOBALS['TL_LANG']['LNG']['sv'] = 'Švédština';
 $GLOBALS['TL_LANG']['LNG']['sw'] = 'Swahilština';
 $GLOBALS['TL_LANG']['LNG']['ta'] = 'Tamilština';
+$GLOBALS['TL_LANG']['LNG']['te'] = 'Telugština';
 $GLOBALS['TL_LANG']['LNG']['tg'] = 'Tajik';
 $GLOBALS['TL_LANG']['LNG']['th'] = 'Thajština';
 $GLOBALS['TL_LANG']['LNG']['ti'] = 'Tigrinya';

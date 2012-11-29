@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_article.php" source-language="en">
     <body>
       <trans-unit id="tl_article.title.0">
@@ -63,8 +62,8 @@
         <target>Cikk előzetes</target>
       </trans-unit>
       <trans-unit id="tl_article.teaser.1">
-        <source>The article teaser can also be displayed with the content element "article teaser".</source>
-        <target>A cikk előzetese "cikk előzetes" tartalmi elemmel is megjeleníthető.</target>
+        <source>The article teaser can also be displayed with the content element &quot;article teaser&quot;.</source>
+        <target>A cikk előzetese &quot;cikk előzetes&quot; tartalmi elemmel is megjeleníthető.</target>
       </trans-unit>
       <trans-unit id="tl_article.printable.0">
         <source>Syndication</source>
@@ -157,6 +156,10 @@
       <trans-unit id="tl_article.twitter">
         <source>Share on Twitter</source>
         <target>Megosztás a Twitter-en</target>
+      </trans-unit>
+      <trans-unit id="tl_article.gplus">
+        <source>Share on Google+</source>
+        <target>Google+ megosztás</target>
       </trans-unit>
       <trans-unit id="tl_article.header">
         <source>Header</source>

@@ -1,15 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_content.php" source-language="en">
     <body>
-      <trans-unit id="tl_content.invisible.0">
-        <source>Invisible</source>
-        <target>Elrejt</target>
-      </trans-unit>
-      <trans-unit id="tl_content.invisible.1">
-        <source>Hide the element on the website.</source>
-        <target>Nem jeleníti meg az adott elemet a weboldalon.</target>
-      </trans-unit>
       <trans-unit id="tl_content.type.0">
         <source>Element type</source>
         <target>Elem típus</target>
@@ -210,21 +201,23 @@
         <source>Please select the operation mode of the accordion element.</source>
         <target>Válassza ki a harmonika működési módját.</target>
       </trans-unit>
-      <trans-unit id="tl_content.start.0">
-        <source>Show from</source>
-        <target>Harmonika tábla kezdete</target>
+      <trans-unit id="tl_content.mooStart.0">
+        <source>Wrapper start</source>
       </trans-unit>
-      <trans-unit id="tl_content.start.1">
-        <source>Do not show the element on the website before this day.</source>
-        <target>A harmonika tábla kezdetét jelzi, mely több tartalmi elemet foglalhat magába.</target>
+      <trans-unit id="tl_content.mooStart.1">
+        <source>Marks the beginning of an accordion pane that spans several content elements.</source>
       </trans-unit>
-      <trans-unit id="tl_content.stop.0">
-        <source>Show until</source>
-        <target>Harmonika tábla vége</target>
+      <trans-unit id="tl_content.mooStop.0">
+        <source>Wrapper stop</source>
       </trans-unit>
-      <trans-unit id="tl_content.stop.1">
-        <source>Do not show the element on the website on and after this day.</source>
-        <target>A harmonika tábla végét jelzi, mely több tartalmi elemet foglalhat magába.</target>
+      <trans-unit id="tl_content.mooStop.1">
+        <source>Marks the end of an accordion pane that spans several content elements.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.mooSingle.0">
+        <source>Single element</source>
+      </trans-unit>
+      <trans-unit id="tl_content.mooSingle.1">
+        <source>Behaves like a single text element that is inside an accordion pane.</source>
       </trans-unit>
       <trans-unit id="tl_content.mooHeadline.0">
         <source>Section headline</source>
@@ -282,13 +275,19 @@
         <source>The link text will be displayed instead of the target URL.</source>
         <target>A link címe ami megjelenik az URL vagy filenév helyett. Ha kép-linket készít, akkor a kép fog megjelenni a link címe helyett.</target>
       </trans-unit>
+      <trans-unit id="tl_content.titleText.0">
+        <source>Link title</source>
+      </trans-unit>
+      <trans-unit id="tl_content.titleText.1">
+        <source>The link title is added as title attribute in the HTML markup.</source>
+      </trans-unit>
       <trans-unit id="tl_content.embed.0">
         <source>Embed the link</source>
         <target>Beágyazott link</target>
       </trans-unit>
       <trans-unit id="tl_content.embed.1">
-        <source>Use the wildcard "%s" to embed the link in a phrase (e.g. &lt;em&gt;For more information please visit %s&lt;/em&gt;).</source>
-        <target>Használja a "%s" kódot a link beágyazásához a szövegbe (pld.: &lt;em&gt;További információért látogasson ide: %s&lt;/em&gt;).</target>
+        <source>Use the wildcard &quot;%s&quot; to embed the link in a phrase (e.g. &lt;em&gt;For more information please visit %s&lt;/em&gt;).</source>
+        <target>Használja a &quot;%s&quot; kódot a link beágyazásához a szövegbe (pld.: &lt;em&gt;További információért látogasson ide: %s&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_content.rel.0">
         <source>Lightbox</source>
@@ -313,6 +312,12 @@
       <trans-unit id="tl_content.multiSRC.1">
         <source>Please select one or more files or folders from the files directory. If you select a folder, its files will be included automatically.</source>
         <target>Válasszon egy fájl vagy mappát. Mappa választása esetén benne lévő fájlok automatikusan csatolva lesznek.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.orderSRC.0">
+        <source>Sort order</source>
+      </trans-unit>
+      <trans-unit id="tl_content.orderSRC.1">
+        <source>The sort order of the items.</source>
       </trans-unit>
       <trans-unit id="tl_content.useHomeDir.0">
         <source>Use home directory</source>
@@ -361,6 +366,36 @@
       <trans-unit id="tl_content.galleryTpl.1">
         <source>Here you can select the gallery template.</source>
         <target>Itt választhat galéria sablont.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSRC.0">
+        <source>Video/audio files</source>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSRC.1">
+        <source>Here you can add the video/audio file or multiple files if you are using different codecs.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.youtube.0">
+        <source>YouTube ID</source>
+      </trans-unit>
+      <trans-unit id="tl_content.youtube.1">
+        <source>Please enter the YouTube video ID (e.g. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_content.posterSRC.0">
+        <source>Preview image</source>
+      </trans-unit>
+      <trans-unit id="tl_content.posterSRC.1">
+        <source>Show this image instead of the first frame of the video before playback (videos only).</source>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSize.0">
+        <source>Player size</source>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSize.1">
+        <source>Width and height of the media player in pixels (videos only).</source>
+      </trans-unit>
+      <trans-unit id="tl_content.autoplay.0">
+        <source>Autoplay</source>
+      </trans-unit>
+      <trans-unit id="tl_content.autoplay.1">
+        <source>Automatically play the video when the page loads.</source>
       </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>
@@ -442,6 +477,30 @@
         <source>Here you can enter the spacing in front of and after the content element in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
         <target>Itt adhatja meg egy tartalmi elem előtt és után megjelenő üres hely méretét pixelben. Javasolt a beágyazott stílus formázás helyett a stíluslap használata.</target>
       </trans-unit>
+      <trans-unit id="tl_content.invisible.0">
+        <source>Invisible</source>
+        <target>Elrejt</target>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible.1">
+        <source>Hide the element on the website.</source>
+        <target>Nem jeleníti meg az adott elemet a weboldalon.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.start.0">
+        <source>Show from</source>
+        <target>Harmonika tábla kezdete</target>
+      </trans-unit>
+      <trans-unit id="tl_content.start.1">
+        <source>Do not show the element on the website before this day.</source>
+        <target>A harmonika tábla kezdetét jelzi, mely több tartalmi elemet foglalhat magába.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.stop.0">
+        <source>Show until</source>
+        <target>Harmonika tábla vége</target>
+      </trans-unit>
+      <trans-unit id="tl_content.stop.1">
+        <source>Do not show the element on the website on and after this day.</source>
+        <target>A harmonika tábla végét jelzi, mely több tartalmi elemet foglalhat magába.</target>
+      </trans-unit>
       <trans-unit id="tl_content.type_legend">
         <source>Element type</source>
         <target>Elem típus</target>
@@ -506,6 +565,15 @@
         <source>Template settings</source>
         <target>Template beállítások</target>
       </trans-unit>
+      <trans-unit id="tl_content.player_legend">
+        <source>Player settings</source>
+      </trans-unit>
+      <trans-unit id="tl_content.poster_legend">
+        <source>Preview image</source>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible_legend">
+        <source>Visibility</source>
+      </trans-unit>
       <trans-unit id="tl_content.ordered">
         <source>ordered list</source>
         <target>rendezett lista</target>
@@ -529,6 +597,9 @@
       <trans-unit id="tl_content.date_desc">
         <source>Date (descending)</source>
         <target>Dátum (csökkenő sorrend)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.custom">
+        <source>Custom order</source>
       </trans-unit>
       <trans-unit id="tl_content.random">
         <source>Random order</source>

@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_form.sendViaEmail.1">
         <source>Send the submitted data to an e-mail address.</source>
-        <target>Keď zvolíte túto možnosť, formulárové dáta budú poslané e-mailom.</target>
+        <target>Keď zvolíte túto možnosť, formulárové dáta budú odoslané na e-mailovú adresu.</target>
       </trans-unit>
       <trans-unit id="tl_form.recipient.0">
         <source>Recipient address</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.1">
         <source>Hide empty fields in the e-mail.</source>
-        <target>Nezahrne prázdne polia do e-mailu.</target>
+        <target>Nezahrnie prázdne polia do e-mailu.</target>
       </trans-unit>
       <trans-unit id="tl_form.storeValues.0">
         <source>Store data</source>
@@ -139,7 +139,7 @@
       </trans-unit>
       <trans-unit id="tl_form.tableless.0">
         <source>Tableless layout</source>
-        <target>Beztabuľkový layout</target>
+        <target>Beztabuľkový vzhľad</target>
       </trans-unit>
       <trans-unit id="tl_form.tableless.1">
         <source>Render the form without HTML tables.</source>

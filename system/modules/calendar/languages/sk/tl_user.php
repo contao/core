@@ -14,5 +14,12 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_user']['calendars'][0] = 'Kalendáre';
+$GLOBALS['TL_LANG']['tl_user']['calendars'][0] = 'Povolené kalendáre';
 $GLOBALS['TL_LANG']['tl_user']['calendars'][1] = 'Prosím, vyberte kalendáre, ktoré chcete skupine povoliť.';
+$GLOBALS['TL_LANG']['tl_user']['calendarp'][0] = 'Oprávnenia pre kalendár';
+$GLOBALS['TL_LANG']['tl_user']['calendarp'][1] = 'Tu môžete definovať práva pre kalendár.';
+$GLOBALS['TL_LANG']['tl_user']['calendarfeeds'][0] = 'Povolené RSS kanály';
+$GLOBALS['TL_LANG']['tl_user']['calendarfeeds'][1] = 'Tu môžete povoliť prístup k jednému alebo viacerým kanálom kalendára.';
+$GLOBALS['TL_LANG']['tl_user']['calendarfeedp'][0] = 'Prístupové práva pre kanál RSS';
+$GLOBALS['TL_LANG']['tl_user']['calendarfeedp'][1] = 'Tu môžete definovať prístupové práva pre zvolený kanál.';
+$GLOBALS['TL_LANG']['tl_user']['calendars_legend'] = 'Práva pre kalendár';

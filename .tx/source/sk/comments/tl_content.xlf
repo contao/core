@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_content.com_order.0">
         <source>Sort order</source>
-        <target>Poradie zoradenia</target>
+        <target>Zoradiť podľa</target>
       </trans-unit>
       <trans-unit id="tl_content.com_order.1">
         <source>Please choose the sort order.</source>
-        <target>Prosím vyberte poradie zoradovania.</target>
+        <target>Prosím vyberte spôsob zoraďovania.</target>
       </trans-unit>
       <trans-unit id="tl_content.com_perPage.0">
         <source>Items per page</source>
@@ -35,9 +35,11 @@
       </trans-unit>
       <trans-unit id="tl_content.com_requireLogin.0">
         <source>Require login to comment</source>
+        <target>Vyžadovať prihlásenie pre pridávanie komentárov</target>
       </trans-unit>
       <trans-unit id="tl_content.com_requireLogin.1">
         <source>Allow only authenticated users to create comments.</source>
+        <target>Povoliť iba prihláseným užívateľom pridávať komentáre.</target>
       </trans-unit>
       <trans-unit id="tl_content.com_disableCaptcha.0">
         <source>Disable the security question</source>
@@ -57,6 +59,7 @@
       </trans-unit>
       <trans-unit id="tl_content.comment_legend">
         <source>Comment settings</source>
+        <target>Nastavenia komentárov</target>
       </trans-unit>
     </body>
   </file>

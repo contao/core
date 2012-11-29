@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_module.levelOffset.1">
         <source>Enter a value greater than 0 to show only submenu items.</source>
-        <target>Zadajte hodnotu väčšiu ako 0, ak chcete na stránke zobrazovať položky podmenu.</target>
+        <target>Zadajte hodnotu väčšiu ako 0, ak chcete na stránke zobrazovať iba položky podmenu.</target>
       </trans-unit>
       <trans-unit id="tl_module.showLevel.0">
         <source>Stop level</source>

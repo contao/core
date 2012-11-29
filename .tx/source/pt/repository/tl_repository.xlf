@@ -103,7 +103,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
         <source>Does the extension meet the Contao standards for usability and accessability?</source>
-        <target>Esta extensão satisfaz os padrões TYPOlight de praticidade e acessibilidade?</target>
+        <target>Esta extensão satisfaz os padrões Contao de praticidade e acessibilidade?</target>
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
         <source>Version</source>

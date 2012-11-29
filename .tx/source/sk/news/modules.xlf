@@ -7,10 +7,11 @@
       </trans-unit>
       <trans-unit id="MOD.news.1">
         <source>Manage news and export them as RSS or Atom feed</source>
-        <target>Tento modul umožňuje spravovať novinky na webe (RSS alebo Atom feed).</target>
+        <target>Správa noviniek a export noviniek ako RSS alebo Atom feed.</target>
       </trans-unit>
       <trans-unit id="MOD.tl_news_feed">
         <source>News feeds</source>
+        <target>Kanály noviniek</target>
       </trans-unit>
       <trans-unit id="FMD.news">
         <source>News</source>
@@ -46,7 +47,7 @@
       </trans-unit>
       <trans-unit id="FMD.newsmenu.1">
         <source>Generates a navigation menu to browse the news archive</source>
-        <target>Tento modul umožňuje prechádzať archív noviniek.</target>
+        <target>Vygeneruje navigačné menu pre archív noviniek.</target>
       </trans-unit>
     </body>
   </file>

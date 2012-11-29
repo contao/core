@@ -19,15 +19,19 @@
       </trans-unit>
       <trans-unit id="tl_user.newsfeeds.0">
         <source>Allowed RSS feeds</source>
+        <target>Povolené kanály RSS</target>
       </trans-unit>
       <trans-unit id="tl_user.newsfeeds.1">
         <source>Here you can grant access to one or more news feeds.</source>
+        <target>Tu môžete povoliť prístup k jednému alebo viacerým kanálom správ.</target>
       </trans-unit>
       <trans-unit id="tl_user.newsfeedp.0">
         <source>RSS feed permissions</source>
+        <target>Prístupové práva ku kanálu RSS</target>
       </trans-unit>
       <trans-unit id="tl_user.newsfeedp.1">
         <source>Here you can define the news feed permissions.</source>
+        <target>Tu môžete definovať prístupové práva ku kanálu RSS.</target>
       </trans-unit>
       <trans-unit id="tl_user.news_legend">
         <source>News permissions</source>

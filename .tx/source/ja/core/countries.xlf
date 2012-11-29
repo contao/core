@@ -323,7 +323,7 @@
       </trans-unit>
       <trans-unit id="CNT.gg">
         <source>Guernsey</source>
-        <target>ガーンジー島</target>
+        <target>ガーンジー</target>
       </trans-unit>
       <trans-unit id="CNT.gh">
         <source>Ghana</source>
@@ -443,7 +443,7 @@
       </trans-unit>
       <trans-unit id="CNT.je">
         <source>Jersey</source>
-        <target>ジャージー島</target>
+        <target>ジャージー</target>
       </trans-unit>
       <trans-unit id="CNT.jm">
         <source>Jamaica</source>
@@ -567,7 +567,7 @@
       </trans-unit>
       <trans-unit id="CNT.mf">
         <source>Saint Martin</source>
-        <target>サン・マルタン島</target>
+        <target>セント・マーチン島</target>
       </trans-unit>
       <trans-unit id="CNT.mg">
         <source>Madagascar</source>
@@ -767,7 +767,7 @@
       </trans-unit>
       <trans-unit id="CNT.ru">
         <source>Russian Federation</source>
-        <target>ロシア連邦</target>
+        <target>ロシア</target>
       </trans-unit>
       <trans-unit id="CNT.rw">
         <source>Rwanda</source>

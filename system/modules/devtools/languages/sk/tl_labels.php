@@ -14,3 +14,10 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
+$GLOBALS['TL_LANG']['tl_labels']['label'][0] = 'Jazyk';
+$GLOBALS['TL_LANG']['tl_labels']['label'][1] = 'Vyberte prosím preklad, ktorý chcete preskúmať.';
+$GLOBALS['TL_LANG']['tl_labels']['headline'] = 'Nájsť chýbajúce štítky (labels)';
+$GLOBALS['TL_LANG']['tl_labels']['ok'] = 'Súbor je kompletný';
+$GLOBALS['TL_LANG']['tl_labels']['warning'] = 'Upozornenie: Chýbajúce štítky!';
+$GLOBALS['TL_LANG']['tl_labels']['error'] = 'Súbor neexistuje';
+$GLOBALS['TL_LANG']['tl_labels']['submitBT'] = 'Hľadať';

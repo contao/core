@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="LNG.en">
         <source>English</source>
-        <target>Anglický</target>
+        <target>Angličtina</target>
       </trans-unit>
       <trans-unit id="LNG.eo">
         <source>Esperanto</source>
@@ -147,7 +147,7 @@
       </trans-unit>
       <trans-unit id="LNG.fy">
         <source>Frisian</source>
-        <target>Frisian</target>
+        <target>Fríština</target>
       </trans-unit>
       <trans-unit id="LNG.ga">
         <source>Irish</source>

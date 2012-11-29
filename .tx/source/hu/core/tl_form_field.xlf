@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_form_field.php" source-language="en">
     <body>
       <trans-unit id="FFL.headline.0">

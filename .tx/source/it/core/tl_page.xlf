@@ -39,6 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_page.language.1">
         <source>Please enter the page language according to the ISO-639-1 standard (e.g. &quot;en&quot; for English).</source>
+        <target>Inserisci la lingua che stai usando per il tuo sito (inserisci il codice primario con riferimento allo standard ISO-639-1, ad esempio &quot;it&quot; per italiano o &quot;en&quot; per inglese).</target>
       </trans-unit>
       <trans-unit id="tl_page.robots.0">
         <source>Robots tag</source>
@@ -126,6 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_page.createSitemap.1">
         <source>Create a Google XML sitemap in the &lt;em&gt;share/&lt;/em&gt; directory.</source>
+        <target>Crea una Google XML sitemap nella directory &lt;em&gt;share/&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_page.sitemapName.0">
         <source>Sitemap file name</source>

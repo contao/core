@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/repository/languages/en/tl_repository.php" source-language="en">
     <body>
       <trans-unit id="tl_repository.category.0">
@@ -113,6 +112,30 @@
       <trans-unit id="tl_repository.version.1">
         <source>Version numbers must be in format n.n.n s, where n are integers and s is one of: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</source>
         <target>Verziószám a következő formátumú kell legyen: n.n.n s, ahol n egy egész szám, s pedig a következők egyike: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.0">
+        <source>License key</source>
+        <target>Licenc kulcs</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.1">
+        <source>Enter the license key that you got from the extension vendor.</source>
+        <target>Adja meg a licenc kulcsot amit az eladótól kapott.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.0">
+        <source>Uninstall protection</source>
+        <target>Eltávolítás védelem</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.1">
+        <source>Protect extension against accidental uninstallation.</source>
+        <target>Védelem a kiterjesztés véletlen eltávolítása ellen.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.0">
+        <source>Update protection</source>
+        <target>Frissítés védelem</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.1">
+        <source>Protect extension against accidental update.</source>
+        <target>Védelem a kiterjesztés véletlen frissítése ellen.</target>
       </trans-unit>
       <trans-unit id="tl_repository.author">
         <source>Author</source>
@@ -294,30 +317,6 @@
         <source>yes</source>
         <target>igen</target>
       </trans-unit>
-      <trans-unit id="tl_repository.lickey.0">
-        <source>License key</source>
-        <target>Licenc kulcs</target>
-      </trans-unit>
-      <trans-unit id="tl_repository.lickey.1">
-        <source>Enter the license key that you got from the extension vendor.</source>
-        <target>Adja meg a licenc kulcsot amit az eladótól kapott.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository.uninstprotect.0">
-        <source>Uninstall protection</source>
-        <target>Eltávolítás védelem</target>
-      </trans-unit>
-      <trans-unit id="tl_repository.uninstprotect.1">
-        <source>Protect extension against accidental uninstallation.</source>
-        <target>Védelem a kiterjesztés véletlen eltávolítása ellen.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository.updateprotect.0">
-        <source>Update protection</source>
-        <target>Frissítés védelem</target>
-      </trans-unit>
-      <trans-unit id="tl_repository.updateprotect.1">
-        <source>Protect extension against accidental update.</source>
-        <target>Védelem a kiterjesztés véletlen frissítése ellen.</target>
-      </trans-unit>
       <trans-unit id="tl_repository.action">
         <source>Action</source>
         <target>Művelet</target>
@@ -494,9 +493,55 @@
         <source>Verify/repair %s %s build %s</source>
         <target>Ellenőrzés/javítás %s %s build %s</target>
       </trans-unit>
+      <trans-unit id="tl_repository.approvedForLabel">
+        <source>Approved for</source>
+      </trans-unit>
+      <trans-unit id="tl_repository.approvedForText">
+        <source>Contao %s to %s</source>
+      </trans-unit>
       <trans-unit id="tl_repository.missingSoapModule">
         <source>SOAP extension not loaded (configure PHP with --enable-soap).</source>
         <target>SOAP kiterjesztés nem töltődött be (módosítsa a PHP beállításokat így: --enable-soap)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.uptodate">
+        <source>Up to date</source>
+        <target>Frissítve</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapproved">
+        <source>Not approved for %s %s</source>
+        <target>Nem engedélyezett: %s %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapprovedwith">
+        <source>Not approved with %s %s</source>
+        <target>Nem jóváhagyott: %s %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.shouldwork">
+        <source>Expected to be compatible with %s %s</source>
+        <target>Várhatóan összeegyeztethető ezzel: %s %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.newversion">
+        <source>Version %s build %s available</source>
+        <target>Verzió: %s build %s elérhető</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.depmissing">
+        <source>Missing required extension %s</source>
+        <target>Hiányzik a szükséges kiterjesztés: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extnotfound">
+        <source>Extension not found in repository</source>
+        <target>Kiterjesztés nem található a tárolóban</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.vernotfound">
+        <source>Installed version not found in repository</source>
+        <target>Telepített verzió nem található a tárolóan</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extneedkey">
+        <source>License key required, install extension in advance</source>
+        <target>Licenc kulcs szükséges, telepítés annak beszerzése előtt</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.errorinstall">
+        <source>Corrupted, update/repair required</source>
+        <target>Sérült! Frissítés/javítás szükséges</target>
       </trans-unit>
       <trans-unit id="tl_repository_type_options.free">
         <source>Free</source>
@@ -585,46 +630,6 @@
       <trans-unit id="tl_repository_state_options.stable">
         <source>Stable</source>
         <target>Stabil (végleges stabil verzió)</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.uptodate">
-        <source>Up to date</source>
-        <target>Frissítve</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.notapproved">
-        <source>Not approved for %s %s</source>
-        <target>Nem engedélyezett: %s %s</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.notapprovedwith">
-        <source>Not approved with %s %s</source>
-        <target>Nem jóváhagyott: %s %s</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.shouldwork">
-        <source>Expected to be compatible with %s %s</source>
-        <target>Várhatóan összeegyeztethető ezzel: %s %s</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.newversion">
-        <source>Version %s build %s available</source>
-        <target>Verzió: %s build %s elérhető</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.depmissing">
-        <source>Missing required extension %s</source>
-        <target>Hiányzik a szükséges kiterjesztés: %s</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.extnotfound">
-        <source>Extension not found in repository</source>
-        <target>Kiterjesztés nem található a tárolóban</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.vernotfound">
-        <source>Installed version not found in repository</source>
-        <target>Telepített verzió nem található a tárolóan</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.extneedkey">
-        <source>License key required, install extension in advance</source>
-        <target>Licenc kulcs szükséges, telepítés annak beszerzése előtt</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.errorinstall">
-        <source>Corrupted, update/repair required</source>
-        <target>Sérült! Frissítés/javítás szükséges</target>
       </trans-unit>
     </body>
   </file>

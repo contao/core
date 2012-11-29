@@ -35,9 +35,11 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.token.0">
         <source>Token key</source>
+        <target>Kľúč (token)</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.token.1">
         <source>The confirmation token of the subscription.</source>
+        <target>Potvrdzujúci kľúč pre odber.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.email_legend">
         <source>E-mail address</source>

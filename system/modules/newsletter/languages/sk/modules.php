@@ -16,6 +16,7 @@
 
 $GLOBALS['TL_LANG']['MOD']['newsletter'][0] = 'Odoberanie správ';
 $GLOBALS['TL_LANG']['MOD']['newsletter'][1] = 'Tento modul umožňuje spravovať odoberanie správ.';
+$GLOBALS['TL_LANG']['MOD']['tl_newsletter_recipients'] = 'Príjemcovia';
 $GLOBALS['TL_LANG']['FMD']['newsletter'] = 'Odoberanie správ';
 $GLOBALS['TL_LANG']['FMD']['subscribe'][0] = 'Prihlásenie';
 $GLOBALS['TL_LANG']['FMD']['subscribe'][1] = 'Tento modul umožňuje návštevníkom stránky prihlásiť sa na odoberanie niektorých kanálov.';

@@ -11,6 +11,7 @@
       </trans-unit>
       <trans-unit id="MOD.tl_calendar_feed">
         <source>Calendar feeds</source>
+        <target>Kanály kalendára</target>
       </trans-unit>
       <trans-unit id="FMD.events">
         <source>Events</source>
@@ -26,21 +27,27 @@
       </trans-unit>
       <trans-unit id="FMD.eventlist.0">
         <source>Event list</source>
+        <target>Zoznam udalostí</target>
       </trans-unit>
       <trans-unit id="FMD.eventlist.1">
         <source>Adds a list of events to the page</source>
+        <target>Tento modul pridá zoznam udalostí mesiaca, týždňa alebo dňa.</target>
       </trans-unit>
       <trans-unit id="FMD.eventreader.0">
         <source>Event reader</source>
+        <target>Čítačka udalostí</target>
       </trans-unit>
       <trans-unit id="FMD.eventreader.1">
         <source>Shows the details of an event</source>
+        <target>Tento modul zobrazuje podrobnosti jednotlivých udalostí.</target>
       </trans-unit>
       <trans-unit id="FMD.eventmenu.0">
         <source>Event list menu</source>
+        <target>Menu zoznamu udalostí</target>
       </trans-unit>
       <trans-unit id="FMD.eventmenu.1">
         <source>Generates a navigation menu to browse the event list</source>
+        <target>Tento modul vytvorí navigačné menu, ktorým je možné prechádzať záznamy podľa rôzneho obdobia (napr. podľa rokov).</target>
       </trans-unit>
     </body>
   </file>

@@ -16,6 +16,8 @@
 
 $GLOBALS['TL_LANG']['tl_style_sheet']['name'][0] = 'Názov';
 $GLOBALS['TL_LANG']['tl_style_sheet']['name'][1] = 'Zadajte prosím názov kaskádového štýlu.';
+$GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'][0] = 'Vkladať obrázky do veľkosti';
+$GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'][1] = 'Tu môžete zadať maximálnu veľkosť souborov v <em>bytoch</em>, ktoré budú vložené do kaskádových štýlov - napr. zasielanie kanálu správ. Zadajte 0, ak chcete túto funkciu deaktivovať.';
 $GLOBALS['TL_LANG']['tl_style_sheet']['cc'][0] = 'Conditional comment';
 $GLOBALS['TL_LANG']['tl_style_sheet']['cc'][1] = 'Conditional comments umožňujú nadefinovanie štýlov, špecifických pre Internet Explorer (napr. <em>if lt IE 9</em>).';
 $GLOBALS['TL_LANG']['tl_style_sheet']['media'][0] = 'Druhy médií';
@@ -29,6 +31,7 @@ $GLOBALS['TL_LANG']['tl_style_sheet']['source'][1] = 'Vyberte si jeden alebo via
 $GLOBALS['TL_LANG']['tl_style_sheet']['tstamp'][0] = 'Dátum poslednej úpravy';
 $GLOBALS['TL_LANG']['tl_style_sheet']['tstamp'][1] = 'Dátum a čas poslednej úpravy';
 $GLOBALS['TL_LANG']['tl_style_sheet']['title_legend'] = 'Názov';
+$GLOBALS['TL_LANG']['tl_style_sheet']['config_legend'] = 'Nastavenia';
 $GLOBALS['TL_LANG']['tl_style_sheet']['media_legend'] = 'Nastavenia médií';
 $GLOBALS['TL_LANG']['tl_style_sheet']['vars_legend'] = 'Globálne premenné';
 $GLOBALS['TL_LANG']['tl_style_sheet']['css_imported'] = 'Kaskádový štýl "%s" bol úspešne importovaný.';

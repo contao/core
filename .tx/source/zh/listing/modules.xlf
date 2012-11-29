@@ -7,6 +7,7 @@
       </trans-unit>
       <trans-unit id="MOD.listing.1">
         <source>List the records of any table</source>
+        <target>列出任何数据表的记录</target>
       </trans-unit>
       <trans-unit id="FMD.listing.0">
         <source>Listing</source>
@@ -14,6 +15,7 @@
       </trans-unit>
       <trans-unit id="FMD.listing.1">
         <source>Lists the records of any table</source>
+        <target>任何数据表的记录列表</target>
       </trans-unit>
     </body>
   </file>

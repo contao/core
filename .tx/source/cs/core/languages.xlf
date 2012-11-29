@@ -463,6 +463,7 @@
       </trans-unit>
       <trans-unit id="LNG.te">
         <source>Telugu</source>
+        <target>Telugština</target>
       </trans-unit>
       <trans-unit id="LNG.tg">
         <source>Tajik</source>

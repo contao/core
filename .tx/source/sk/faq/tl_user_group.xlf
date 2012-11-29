@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_user_group.faq_legend">
         <source>FAQ permissions</source>
+        <target>Prístupové práva ku FAQ (Často kladeným otázkam)</target>
       </trans-unit>
     </body>
   </file>

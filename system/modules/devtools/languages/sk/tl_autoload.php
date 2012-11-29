@@ -14,3 +14,14 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
+$GLOBALS['TL_LANG']['tl_autoload']['headline'] = 'Automaticky vytvoriť súbory autoload.php';
+$GLOBALS['TL_LANG']['tl_autoload']['emptySelection'] = 'Vyberte prosím aspoň jeden modul!';
+$GLOBALS['TL_LANG']['tl_autoload']['autoloadExists'] = 'Modul "%s" už má súbor autoload.php. Chcete ho prepísať?';
+$GLOBALS['TL_LANG']['tl_autoload']['available'] = 'Dostupné moduly';
+$GLOBALS['TL_LANG']['tl_autoload']['xplAvailable'] = 'Vyberte prosím moduly, ktoré chcete upraviť.';
+$GLOBALS['TL_LANG']['tl_autoload']['override'] = 'Prepísať existujúce súbory';
+$GLOBALS['TL_LANG']['tl_autoload']['xplOverride'] = 'Prepísať existujúce súbory autoload.php (používajte obozretne).';
+$GLOBALS['TL_LANG']['tl_autoload']['autoload'] = 'Vytvoriť autoload.php súbory';
+$GLOBALS['TL_LANG']['tl_autoload']['autoloadConfirm'] = 'Súbor autoload.php pre modul "%s" bol vytvorený.';
+$GLOBALS['TL_LANG']['tl_autoload']['ideCompat'] = 'Aktualizovať kompatibilný súbor IDE';
+$GLOBALS['TL_LANG']['tl_autoload']['ideCompatConfirm'] = 'Kompatibilný súbor IDE bol vytvorený.';

@@ -11,11 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_article.alias.0">
         <source>Article alias</source>
-        <target>Prezývka (alias) článku</target>
+        <target>Alias článku</target>
       </trans-unit>
       <trans-unit id="tl_article.alias.1">
         <source>The article alias is a unique reference to the article which can be called instead of its numeric ID.</source>
-        <target>Prezývka (alias) článku je unikátny odkaz k článku, ktorý je možné vyvolať namiesto ID článku.</target>
+        <target>Alias článku je unikátny odkaz k článku, ktorý je možné vyvolať namiesto ID článku.</target>
       </trans-unit>
       <trans-unit id="tl_article.author.0">
         <source>Author</source>

@@ -16,8 +16,8 @@
 
 $GLOBALS['TL_LANG']['tl_article']['title'][0] = 'Názov';
 $GLOBALS['TL_LANG']['tl_article']['title'][1] = 'Prosím vložte názov článku.';
-$GLOBALS['TL_LANG']['tl_article']['alias'][0] = 'Prezývka (alias) článku';
-$GLOBALS['TL_LANG']['tl_article']['alias'][1] = 'Prezývka (alias) článku je unikátny odkaz k článku, ktorý je možné vyvolať namiesto ID článku.';
+$GLOBALS['TL_LANG']['tl_article']['alias'][0] = 'Alias článku';
+$GLOBALS['TL_LANG']['tl_article']['alias'][1] = 'Alias článku je unikátny odkaz k článku, ktorý je možné vyvolať namiesto ID článku.';
 $GLOBALS['TL_LANG']['tl_article']['author'][0] = 'Autor';
 $GLOBALS['TL_LANG']['tl_article']['author'][1] = 'Prosím vložte meno autora článku.';
 $GLOBALS['TL_LANG']['tl_article']['inColumn'][0] = 'Zobraz v';

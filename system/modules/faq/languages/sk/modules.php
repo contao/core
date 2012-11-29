@@ -17,7 +17,7 @@
 $GLOBALS['TL_LANG']['MOD']['faq'][0] = 'FAQ (často kladené otázky)';
 $GLOBALS['TL_LANG']['MOD']['faq'][1] = 'Tento modul vám umožňuje správu FAQ (často kladených otázok).';
 $GLOBALS['TL_LANG']['FMD']['faq'] = 'FAQ (často kladené otázky)';
-$GLOBALS['TL_LANG']['FMD']['faqlist'][0] = 'Zoznym FAQ (často kladených otázok)';
+$GLOBALS['TL_LANG']['FMD']['faqlist'][0] = 'Zoznam FAQ (často kladených otázok)';
 $GLOBALS['TL_LANG']['FMD']['faqlist'][1] = 'Pomocou tohoto modulu môžete vytvoriť zoznam často kladených otázok vo front end.';
 $GLOBALS['TL_LANG']['FMD']['faqreader'][0] = 'Čítačka FAQ (často kladených otázok)';
 $GLOBALS['TL_LANG']['FMD']['faqreader'][1] = 'Pomocou tohoto modulu môžete zobraziť jednotlivé otázky vo front end.';

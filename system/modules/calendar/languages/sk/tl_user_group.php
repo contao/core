@@ -14,3 +14,4 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
+$GLOBALS['TL_LANG']['tl_user_group']['calendars_legend'] = 'Práva pre kalendár';
