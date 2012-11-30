@@ -422,7 +422,7 @@ EOT
 				$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
 
 				// Read until a class or interface definition has been found
-				while (!feof($fh) && !preg_match('/(class|interface) ' . preg_quote(basename($strFile, '.php'), '/') . '/', $strBuffer, $arrMatches))
+				while (!preg_match('/(class|interface) ' . preg_quote(basename($strFile, '.php'), '/') . '/', $strBuffer, $arrMatches) && !feof($fh))
 				{
 					$strBuffer .= fread($fh, 512);
 				}
