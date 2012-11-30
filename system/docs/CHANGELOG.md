@@ -5,6 +5,9 @@ Version 3.0.2 (201X-XX-XX)
 --------------------------
 
 ### Fixed
+Consider the sorting order of external style sheets (see #5038).
+
+### Fixed
 The numeric file mounts of a user were overridden by the real paths (see #5083).
 
 

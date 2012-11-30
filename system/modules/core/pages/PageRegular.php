@@ -521,6 +521,13 @@ class PageRegular extends \Frontend
 		// External style sheets
 		if (is_array($arrExternal) && !empty($arrExternal))
 		{
+			// Consider the sorting order (see #5038)
+			if ($objLayout->orderExt != '')
+			{
+				$arrOrdered = array_map('intval', explode(',', $objLayout->orderExt));
+				$arrExternal = array_merge($arrOrdered, array_diff($arrExternal, $arrOrdered));
+			}
+
 			// Get the file entries from the database
 			$objFiles = \FilesModel::findMultipleByIds($arrExternal);
 
