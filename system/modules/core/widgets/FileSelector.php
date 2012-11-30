@@ -145,7 +145,6 @@ class FileSelector extends \Widget
 		}
 		else
 		{
-
 			// Show a custom path (see #4926)
 			if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path'] != '')
 			{

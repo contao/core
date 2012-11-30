@@ -275,13 +275,12 @@ class FrontendUser extends \User
 
 	/**
 	 * Restore the original group membership
-	 * @param boolean
 	 */
-	public function save($blnForceInsert=false)
+	public function save()
 	{
 		$groups = $this->groups;
 		$this->arrData['groups'] = $this->arrGroups;
-		parent::save($blnForceInsert);
+		parent::save();
 		$this->groups = $groups;
 	}
 

@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.0.2 (201X-XX-XX)
+--------------------------
+
+### Fixed
+The numeric file mounts of a user were overridden by the real paths (see #5083).
+
+
 Version 3.0.1 (2012-11-29)
 --------------------------
 
