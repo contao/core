@@ -74,6 +74,13 @@ class Newsletter extends \Backend
 			{
 				foreach ($files as $file)
 				{
+					// Check for version 3 format
+					if (is_numeric($file))
+					{
+						$objFile = \FilesModel::findByPk($file);
+						$file = $objFile->path;
+					}
+					
 					if (is_file(TL_ROOT . '/' . $file))
 					{
 						$arrAttachments[] = $file;
