@@ -71,12 +71,16 @@ class FormFileUpload extends \Widget implements \uploadable
 			case 'uploadFolder':
 				if (version_compare(VERSION, '3.0', '>='))
 				{
-					if (is_numeric($varValue) && !preg_match('/^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/').'/', $varValue))
+					$this->loadDataContainer('tl_files');
+
+					$this->isDatabaseAssisted = ($GLOBALS['TL_DCA']['tl_files']['config']['databaseAssisted']) ? true : false;
+
+					if ($this->isDatabaseAssisted && is_numeric($varValue) && !preg_match('/^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/').'/', $varValue))
 					{
 						$varValue = \FilesModel::findByPk($varValue)->path;
 					}
 				}
-
+				
 			default:
 				parent::__set($strKey, $varValue);
 				break;
@@ -231,6 +235,53 @@ class FormFileUpload extends \Widget implements \uploadable
 					$this->Files->move_uploaded_file($file['tmp_name'], $strUploadFolder . '/' . $file['name']);
 					$this->Files->chmod($strUploadFolder . '/' . $file['name'], 0644);
 
+
+					// Generate the DB entry
+					$pid = null;
+					$id = null;
+
+					if ($this->isDatabaseAssisted)
+					{
+						// Get the parent ID
+						if ($strUploadFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+						{
+							$pid = 0;
+						}
+						else
+						{
+							$objModel = \FilesModel::findByPath($strUploadFolder);
+							$pid = $objModel->id;
+						}
+
+						$objFile = \FilesModel::findByPath($strUploadFolder . '/' . $file['name']);
+
+						// Existing file is being replaced
+						if ($objFile !== null)
+						{
+							$objFile->tstamp = time();
+							$objFile->path   = $strUploadFolder . '/' . $file['name'];
+							$objFile->hash   = md5_file(TL_ROOT . '/' . $strUploadFolder . '/' . $file['name']);
+							$objFile->save();
+							$id = $objFile->id;
+						}
+						else
+						{
+							$objFile = new \File($strFile);
+
+							$objNew = new \FilesModel();
+							$objNew->pid       = $pid;
+							$objNew->tstamp    = time();
+							$objNew->type      = 'file';
+							$objNew->path      = $strUploadFolder . '/' . $file['name'];
+							$objNew->extension = $objFile->extension;
+							$objNew->hash      = md5_file(TL_ROOT . '/' . $strUploadFolder . '/' . $file['name']);
+							$objNew->name      = $objFile->basename;
+							$objNew->save();
+							$id = $objNew->id;
+						}
+
+					}
+					
 					$_SESSION['FILES'][$this->strName] = array
 					(
 						'name' => $file['name'],
@@ -241,6 +292,17 @@ class FormFileUpload extends \Widget implements \uploadable
 						'uploaded' => true
 					);
 
+
+					// Add additional info when using database assisted file manager
+					if ($pid !== null)
+					{
+						$_SESSION['FILES'][$this->strName]['pid'] = $pid;
+					}
+					if ($id !== null)
+					{
+						$_SESSION['FILES'][$this->strName]['id'] = $id;
+					}
+					
 					$this->log('File "'.$file['name'].'" has been moved to "'.$strUploadFolder.'"', 'FormFileUpload validate()', TL_FILES);
 				}
 			}
