@@ -80,7 +80,6 @@ class FormFileUpload extends \Widget implements \uploadable
 						$varValue = \FilesModel::findByPk($varValue)->path;
 					}
 				}
-				
 			default:
 				parent::__set($strKey, $varValue);
 				break;
@@ -233,10 +232,9 @@ class FormFileUpload extends \Widget implements \uploadable
 					}
 
 					$this->Files->move_uploaded_file($file['tmp_name'], $strUploadFolder . '/' . $file['name']);
-					$this->Files->chmod($strUploadFolder . '/' . $file['name'], 0644);
+					$this->Files->chmod($strUploadFolder . '/' . $file['name'], $GLOBALS['TL_CONFIG']['defaultFileChmod']);
 
-
-					// Generate the DB entry
+   					// Generate the DB entry
 					$pid = null;
 					$id = null;
 
@@ -266,7 +264,7 @@ class FormFileUpload extends \Widget implements \uploadable
 						}
 						else
 						{
-							$objFile = new \File($strFile);
+							$objFile = new \File($strUploadFolder . '/' . $file['name']);
 
 							$objNew = new \FilesModel();
 							$objNew->pid       = $pid;
@@ -281,7 +279,7 @@ class FormFileUpload extends \Widget implements \uploadable
 						}
 
 					}
-					
+
 					$_SESSION['FILES'][$this->strName] = array
 					(
 						'name' => $file['name'],
@@ -292,17 +290,15 @@ class FormFileUpload extends \Widget implements \uploadable
 						'uploaded' => true
 					);
 
-
-					// Add additional info when using database assisted file manager
-					if ($pid !== null)
-					{
+ 					// Add additional info when using database assisted file manager
+					if ($pid !== null)					{
 						$_SESSION['FILES'][$this->strName]['pid'] = $pid;
 					}
 					if ($id !== null)
 					{
 						$_SESSION['FILES'][$this->strName]['id'] = $id;
 					}
-					
+
 					$this->log('File "'.$file['name'].'" has been moved to "'.$strUploadFolder.'"', 'FormFileUpload validate()', TL_FILES);
 				}
 			}
