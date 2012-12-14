@@ -118,9 +118,6 @@ body.popup {
 	color:#fff;
 	border-radius:3px 3px 0 0;
 }
-#tl_navigation .tl_level_1 {
-	margin-top:6px !important;
-}
 #tl_navigation .tl_level_1_group {
 	padding:3px 6px !important;
 	font-weight:bold;
@@ -140,6 +137,9 @@ body.popup {
 }
 #tl_navigation .active {
 	color:#8ab858;
+}
+#navigation_wrapper {
+	padding-top:6px;
 }
 #switch_nav {
 	background: url("images/switch_nav.png") no-repeat;
