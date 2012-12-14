@@ -1693,19 +1693,59 @@ var Backend =
 						onSuccess: function(html) {
 							placeholder.set('html', html);
 							newEl = placeholder.getFirst();
+							newEl.store('contao_height', Number.from(newEl.getStyle('height'))).setStyles({'opacity': 0, 'height': 0});
+
+							Backend.swapNavigations(oldEl, newEl, wrapper, placeholder);
 
 							// HOOK
 							window.fireEvent('ajax_change');
 						}
 					}).post({'action':'loadPersonalNavigation', 'REQUEST_TOKEN':Contao.request_token});
 				}
-				wrapper.getFirst().fade('out');
+				else {
+					Backend.swapNavigations(oldEl, newEl, wrapper, placeholder);
+				}
+
+				// update class
 				this.set('class', 'personal');
 			}
 			else {
-				wrapper.getFirst().fade('in');
+				Backend.swapNavigations(oldEl, newEl, wrapper, placeholder);
 				this.set('class', 'default');
 			}
+		});
+	},
+
+	swapNavigations: function(oldEl, newEl, wrapper, placeholder) {
+		var oldElHeight = Number.from(oldEl.getStyle('height'));
+		var newElHeight = Number.from(newEl.retrieve('contao_height'));
+
+		// calculate duration with a ratio so it doesn't look slow on small navigations and not too fast on huge
+		// @todo: probably add a nice algorithm with max and min numbers?
+		var durationOld = (oldElHeight > 400) ? 2000 : 1000;
+		var durationNew = (newElHeight > 400) ? 2000 : 1000;
+
+		// store original sizes to retrieve later on
+		oldEl.store('contao_height', oldElHeight);
+
+		// animate
+		new Fx.Morph(oldEl, {
+			duration: durationOld,
+			onComplete: function() {
+				// inject new element
+				newEl.inject(wrapper, 'top');
+				new Fx.Morph(newEl, {
+					duration: durationNew
+				}).start({
+					'height': newElHeight,
+					'opacity': 1
+				});
+				// place the old one
+				oldEl.inject(placeholder);
+			}
+		}).start({
+			'height': 0,
+			'opacity': 0
 		});
 	}
 };
