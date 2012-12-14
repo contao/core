@@ -108,6 +108,9 @@ body.popup {
 }
 
 /* Navigation */
+#tl_navigation {
+	position:relative;
+}
 #tl_navigation h1 {
 	margin:1px 1px 0;
 	padding:4px 8px 6px;
@@ -138,7 +141,14 @@ body.popup {
 #tl_navigation .active {
 	color:#8ab858;
 }
-
+#switch_nav {
+	background: url("images/switch_nav.png") no-repeat;
+	height: 16px;
+	width: 16px;
+	position: absolute;
+	top: 5px;
+	left: 175px;
+}
 /* Buttons */
 #tl_buttons,#tl_buttons_a {
 	margin:0;
@@ -1345,4 +1355,9 @@ fieldset.collapsed > legend {
 }
 .pagination .current {
 	color:#999;
+}
+
+/* Navigation customizer */
+#nav_customizer li ul li {
+	margin-left: 15px;
 }

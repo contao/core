@@ -64,6 +64,7 @@
 <div id="tl_navigation">
 
 <h1><?php echo $this->backendModules; ?></h1>
+<a href="#" id="switch_nav" class="default"></a>
 
 <a href="<?php echo $this->request; ?>#skipNavigation" class="invisible"><?php echo $this->skipNavigation; ?></a>
 
