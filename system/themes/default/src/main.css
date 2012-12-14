@@ -110,6 +110,7 @@ body.popup {
 /* Navigation */
 #tl_navigation {
 	position:relative;
+	overflow-y:hidden;
 }
 #tl_navigation h1 {
 	margin:1px 1px 0;
