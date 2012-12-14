@@ -1,0 +1,32 @@
+<ul id="nav_customizer" class="level_1">
+	<?php foreach ($this->modules as $strGroup=>$arrModules): ?>
+	<li><span><?php echo $arrModules['label']; ?></span>
+		<?php if ($arrModules['modules']): ?>
+			<ul class="level_2">
+				<?php foreach ($arrModules['modules'] as $arrConfig): ?>
+				<li><span><?php echo $arrConfig['label']; ?></span></li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
+		</li>
+	<?php endforeach; ?>
+</ul>
+
+<script>
+(function() {
+	window.addEvent('domready', function() {
+		new Tree('nav_customizer', {
+
+			checkDrag: function(element) {
+			return true;
+				//console.log(element);
+			},
+
+			checkDrop: function(element) {
+				return true;
+				//console.log(element);
+			}
+		});
+	});
+})()
+</script>

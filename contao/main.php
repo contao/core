@@ -109,6 +109,12 @@ class Main extends Backend
 			$this->Template->error = $GLOBALS['TL_LANG']['ERR']['general'];
 			$this->Template->title = $GLOBALS['TL_LANG']['ERR']['general'];
 		}
+		// Navigation customizer
+		elseif (Input::get('act') == 'nav_customizer')
+		{
+			$this->Template->main .= $this->getNavigationCustomizer();
+			$this->Template->title = $GLOBALS['TL_LANG']['MSC']['home'];
+		}
 		// Welcome screen
 		elseif (!Input::get('do') && !Input::get('act'))
 		{
