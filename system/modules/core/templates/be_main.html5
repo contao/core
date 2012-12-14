@@ -15,7 +15,7 @@
   $objCombiner->add('assets/mootools/simplemodal/'. SIMPLEMODAL .'/css/simplemodal.css', SIMPLEMODAL);
   $objCombiner->add('assets/mootools/datepicker/'. DATEPICKER .'/dashboard.css', DATEPICKER);
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
-  $objCombiner->add('system/themes/'. $this->theme .'/main.css');
+  $objCombiner->add('system/themes/'. $this->theme .'/src/main.css');
   echo $objCombiner->getCombinedFile();
 ?>">
 <!--[if IE]><link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
@@ -30,7 +30,7 @@
   $objCombiner->add('assets/mootools/simplemodal/'. SIMPLEMODAL .'/js/simplemodal.js', SIMPLEMODAL);
   $objCombiner->add('assets/mootools/datepicker/'. DATEPICKER .'/datepicker.js', DATEPICKER);
   $objCombiner->add('assets/mootools/mootao/Mootao.js');
-  $objCombiner->add('assets/contao/js/core.js');
+  $objCombiner->add('assets/contao/js/core-uncompressed.js');
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>
@@ -68,6 +68,7 @@
 
 <a href="<?php echo $this->request; ?>#skipNavigation" class="invisible"><?php echo $this->skipNavigation; ?></a>
 
+<div id="navigation_wrapper">
 <ul class="tl_level_1">
 <?php foreach ($this->modules as $strGroup=>$arrModules): ?>
   <li class="tl_level_1_group<?php echo $arrModules['class']; ?>"><a href="<?php echo $arrModules['href']; ?>" title="<?php echo $arrModules['title']; ?>" onclick="return AjaxRequest.toggleNavigation(this,'<?php echo $strGroup; ?>')"><img src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" width="16" height="16" alt=""><?php echo $arrModules['label']; ?></a></li>
@@ -82,6 +83,7 @@
 <?php endif; ?>
 <?php endforeach; ?>
 </ul>
+</div>
 
 <a id="skipNavigation" class="invisible">&nbsp;</a>
 

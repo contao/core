@@ -490,4 +490,16 @@ class BackendUser extends \User
 
 		return $arrModules;
 	}
+
+
+	/**
+	 * Personalize the default navigation to the users needs
+	 * @param array
+	 * @return array
+	 */
+	public function personalizeNavigation(&$arrModules)
+	{
+		unset($arrModules['content']);
+		return $arrModules;
+	}
 }

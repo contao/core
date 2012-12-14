@@ -182,6 +182,13 @@ class Ajax extends \Backend
 				$this->Session->set('checkbox_groups', $state);
 				break;
 
+			// Get personal back end navigation
+			case 'loadPersonalNavigation':
+				$this->import('BackendUser', 'User');
+				$arrModules = $this->User->navigation(true);
+				echo json_encode($this->User->personalizeNavigation($arrModules));
+				exit; break;
+
 			// HOOK: pass unknown actions to callback functions
 			default:
 				if (isset($GLOBALS['TL_HOOKS']['executePreActions']) && is_array($GLOBALS['TL_HOOKS']['executePreActions']))

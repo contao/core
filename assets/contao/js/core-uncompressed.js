@@ -1671,6 +1671,39 @@ var Backend =
 			td.getElement('a.module_link').setStyle('display', 'none');
 			td.getElement('img.module_image').setStyle('display', 'inline');
 		}
+	},
+
+	/**
+	 * Init custom back end navigation
+	 */
+	initCustomNavigation: function() {
+		document.id('switch_nav').addEvent('click', function(e) {
+			e.preventDefault();
+
+			var wrapper = document.id('navigation_wrapper');
+			var personal = null;
+
+			// show personal
+			if (this.get('class') == 'default') {
+				if (!personal) {
+					new Request.JSON({
+						url: window.location.href,
+						onSuccess: function(json) {
+							console.log(json);
+
+							// HOOK
+							window.fireEvent('ajax_change');
+						}
+					}).post({'action':'loadPersonalNavigation', 'REQUEST_TOKEN':Contao.request_token});
+				}
+				wrapper.getFirst().fade('out');
+				this.set('class', 'personal');
+			}
+			else {
+				wrapper.getFirst().fade('in');
+				this.set('class', 'default');
+			}
+		});
 	}
 };
 
@@ -1694,6 +1727,7 @@ window.addEvent('domready', function() {
 	Backend.collapsePalettes();
 	Backend.addInteractiveHelp();
 	Backend.addColorPicker();
+	Backend.initCustomNavigation();
 });
 
 // Limit the height of the preview fields
