@@ -70,6 +70,7 @@
 
 <div id="navigation_wrapper">
 <?php echo $this->navigation; ?>
+<div class="ajax_placeholder"></div>
 </div>
 
 <a id="skipNavigation" class="invisible">&nbsp;</a>

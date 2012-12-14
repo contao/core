@@ -1681,15 +1681,18 @@ var Backend =
 			e.preventDefault();
 
 			var wrapper = document.id('navigation_wrapper');
-			var personal = null;
+			var placeholder = wrapper.getElement('.ajax_placeholder');
+			var oldEl = wrapper.getFirst();
+			var newEl = placeholder.getFirst();
 
 			// show personal
 			if (this.get('class') == 'default') {
-				if (!personal) {
+				if (!oldEl) {
 					new Request.JSON({
 						url: window.location.href,
-						onSuccess: function(json) {
-							console.log(json);
+						onSuccess: function(html) {
+							placeholder.set('html', html);
+							newEl = placeholder.getFirst();
 
 							// HOOK
 							window.fireEvent('ajax_change');
