@@ -1687,7 +1687,7 @@ var Backend =
 
 			// show personal
 			if (this.get('class') == 'default') {
-				if (!oldEl) {
+				if (!newEl) {
 					new Request.JSON({
 						url: window.location.href,
 						onSuccess: function(html) {
