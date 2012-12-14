@@ -186,7 +186,11 @@ class Ajax extends \Backend
 			case 'loadPersonalNavigation':
 				$this->import('BackendUser', 'User');
 				$arrModules = $this->User->navigation(true);
-				echo json_encode($this->User->personalizeNavigation($arrModules));
+				$arrModules = $this->User->personalizeNavigation($arrModules);
+				$objTemplate = new \BackendTemplate('be_navigation');
+				$objTemplate->theme = \Backend::getTheme();
+				$objTemplate->modules = $arrModules;
+				echo json_encode($objTemplate->parse());
 				exit; break;
 
 			// HOOK: pass unknown actions to callback functions
