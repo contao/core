@@ -278,7 +278,6 @@ class Main extends Backend
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
 		$this->Template->request = ampersand(Environment::get('request'));
 		$this->Template->top = $GLOBALS['TL_LANG']['MSC']['backToTop'];
-		$this->Template->modules = $this->User->navigation();
 		$this->Template->home = $GLOBALS['TL_LANG']['MSC']['home'];
 		$this->Template->homeTitle = $GLOBALS['TL_LANG']['MSC']['homeTitle'];
 		$this->Template->backToTop = specialchars($GLOBALS['TL_LANG']['MSC']['backToTopTitle']);
@@ -291,6 +290,23 @@ class Main extends Backend
 		$this->Template->isAdmin = $this->User->isAdmin;
 		$this->Template->coreOnlyOff = specialchars($GLOBALS['TL_LANG']['MSC']['coreOnlyOff']);
 		$this->Template->coreOnlyHref = $this->addToUrl('smo=1');
+
+		// Back end navigation
+		$objNavigationTpl = new \BackendTemplate('be_navigation');
+		$arrModules = $this->User->navigation();
+		foreach ($arrModules as $strGroup => $arrModuleConfig)
+		{
+			if ($arrModuleConfig['modules'])
+			{
+				$arrModules[$strGroup]['hasSubItems'] = true;
+				$objSubNavigationTpl = new \BackendTemplate('be_navigation_item');
+				$objSubNavigationTpl->modules = $arrModuleConfig['modules'];
+				$arrModules[$strGroup]['subItemHtml'] = $objSubNavigationTpl->parse();
+			}
+		}
+		$objNavigationTpl->modules = $arrModules;
+		$objNavigationTpl->theme = Backend::getTheme();
+		$this->Template->navigation = $objNavigationTpl->parse();
 
 		// Front end preview links
 		if (CURRENT_ID != '')

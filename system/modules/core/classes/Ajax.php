@@ -92,7 +92,7 @@ class Ajax extends \Backend
 
 				$this->import('BackendUser', 'User');
 
-				$objTemplate = new \BackendTemplate('be_navigation');
+				$objTemplate = new \BackendTemplate('be_navigation_item');
 				$navigation = $this->User->navigation();
 				$objTemplate->modules = $navigation[\Input::post('id')]['modules'];
 
