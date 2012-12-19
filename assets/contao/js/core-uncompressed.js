@@ -1679,6 +1679,7 @@ var Backend =
 	initCustomNavigation: function() {
 		document.id('switch_nav').addEvent('click', function(e) {
 			e.preventDefault();
+			var self = this;
 
 			var wrapper = document.id('navigation_wrapper');
 			var placeholder = wrapper.getElement('.ajax_placeholder');
@@ -1695,7 +1696,7 @@ var Backend =
 							newEl = placeholder.getFirst();
 							newEl.store('contao_height', Number.from(newEl.getStyle('height'))).setStyles({'opacity': 0, 'height': 0});
 
-							Backend.swapNavigations(oldEl, newEl, wrapper, placeholder);
+							Backend.swapNavigations('personal', oldEl, newEl, wrapper, placeholder, self);
 
 							// HOOK
 							window.fireEvent('ajax_change');
@@ -1703,20 +1704,16 @@ var Backend =
 					}).post({'action':'loadPersonalNavigation', 'REQUEST_TOKEN':Contao.request_token});
 				}
 				else {
-					Backend.swapNavigations(oldEl, newEl, wrapper, placeholder);
+					Backend.swapNavigations('personal', oldEl, newEl, wrapper, placeholder, self);
 				}
-
-				// update class
-				this.set('class', 'personal');
 			}
 			else {
-				Backend.swapNavigations(oldEl, newEl, wrapper, placeholder);
-				this.set('class', 'default');
+				Backend.swapNavigations('default', oldEl, newEl, wrapper, placeholder, self);
 			}
 		});
 	},
 
-	swapNavigations: function(oldEl, newEl, wrapper, placeholder) {
+	swapNavigations: function(newClass, oldEl, newEl, wrapper, placeholder, switchEl) {
 		var oldElHeight = Number.from(oldEl.getStyle('height'));
 		var newElHeight = Number.from(newEl.retrieve('contao_height'));
 
@@ -1731,6 +1728,9 @@ var Backend =
 		// animate
 		new Fx.Morph(oldEl, {
 			duration: durationOld,
+			onStart: function() {
+				switchEl.set('class', 'animated');
+			},
 			onComplete: function() {
 				// inject new element
 				newEl.inject(wrapper, 'top');
@@ -1742,6 +1742,9 @@ var Backend =
 				});
 				// place the old one
 				oldEl.inject(placeholder);
+
+				// update class
+				switchEl.set('class', newClass);
 			}
 		}).start({
 			'height': 0,

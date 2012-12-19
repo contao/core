@@ -143,12 +143,20 @@ body.popup {
 	padding-top:6px;
 }
 #switch_nav {
-	background: url("images/switch_nav.png") no-repeat;
-	height: 16px;
-	width: 16px;
+	height: 17px;
+	width: 17px;
 	position: absolute;
 	top: 5px;
 	left: 175px;
+}
+#switch_nav.default {
+	background: url("images/be_navi-icon_default.png") no-repeat;
+}
+#switch_nav.personal {
+	background: url("images/be_navi-icon_user.png") no-repeat;
+}
+#switch_nav.animated {
+	background: url("images/be_navi-icon_ani.gif") no-repeat;
 }
 /* Buttons */
 #tl_buttons,#tl_buttons_a {
