@@ -155,7 +155,7 @@ body.popup {
 #switch_nav.personal {
 	background: url("images/be_navi-icon_user.png") no-repeat;
 }
-#switch_nav.animated {
+#switch_nav:hover, #switch_nav.animated {
 	background: url("images/be_navi-icon_ani.gif") no-repeat;
 }
 /* Buttons */
