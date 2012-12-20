@@ -5,6 +5,9 @@ Version 2.11.8 (20XX-XX-XX)
 ---------------------------
 
 ### Fixed
+Fixed a small formatting issue in the Music Academy theme (see #5160).
+
+### Fixed
 Show all extensions in the log when updating multiple at once (see #5144).
 
 ### Fixed
