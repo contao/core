@@ -5,6 +5,9 @@ Version 3.0.2 (201X-XX-XX)
 --------------------------
 
 ### Fixed
+Consider the dynamic ptable when copying/deleting content elements (see #5041).
+
+### Fixed
 Scan templates in the autoload creator even if there are no classes (see #5158).
 
 ### Fixed

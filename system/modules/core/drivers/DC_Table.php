@@ -965,8 +965,19 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 			if (!$GLOBALS['TL_DCA'][$v]['config']['doNotCopyRecords'] && strlen($v))
 			{
-				$objCTable = $this->Database->prepare("SELECT * FROM " . $v . " WHERE pid=?" . ($this->Database->fieldExists('sorting', $v) ? " ORDER BY sorting" : ""))
-											->execute($id);
+				// Consider the dynamic parent table (see #4867)
+				if ($GLOBALS['TL_DCA'][$v]['config']['dynamicPtable'])
+				{
+					$cond = ($v == 'tl_content') ? "(ptable=? OR ptable='')" : "ptable=?"; // backwards compatibility
+
+					$objCTable = $this->Database->prepare("SELECT * FROM $v WHERE pid=? AND $cond" . ($this->Database->fieldExists('sorting', $v) ? " ORDER BY sorting" : ""))
+												->execute($id, $GLOBALS['TL_DCA'][$v]['config']['ptable']);
+				}
+				else
+				{
+					$objCTable = $this->Database->prepare("SELECT * FROM $v WHERE pid=?" . ($this->Database->fieldExists('sorting', $v) ? " ORDER BY sorting" : ""))
+												->execute($id);
+				}
 
 				foreach ($objCTable->fetchAllAssoc() as $row)
 				{
@@ -1456,12 +1467,14 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			// Consider the dynamic parent table (see #4867)
 			if ($GLOBALS['TL_DCA'][$v]['config']['dynamicPtable'])
 			{
-				$objDelete = $this->Database->prepare("SELECT id FROM " . $v . " WHERE pid=? AND ptable=?")
+				$cond = ($v == 'tl_content') ? "(ptable=? OR ptable='')" : "ptable=?"; // backwards compatibility
+
+				$objDelete = $this->Database->prepare("SELECT id FROM $v WHERE pid=? AND $cond")
 											->execute($id, $GLOBALS['TL_DCA'][$v]['config']['ptable']);
 			}
 			else
 			{
-				$objDelete = $this->Database->prepare("SELECT id FROM " . $v . " WHERE pid=?")
+				$objDelete = $this->Database->prepare("SELECT id FROM $v WHERE pid=?")
 											->execute($id);
 			}
 
@@ -2920,11 +2933,11 @@ window.addEvent(\'domready\', function() {
 
 					if ($GLOBALS['TL_DCA'][$v]['config']['dynamicPtable'])
 					{
-						$objStmt = $this->Database->execute("DELETE FROM " . $v . " WHERE ptable='" . $this->strTable . "' AND NOT EXISTS (SELECT * FROM " . $this->strTable . " WHERE " . $v . ".pid = " . $this->strTable . ".id)");
+						$objStmt = $this->Database->execute("DELETE FROM $v WHERE ptable='" . $this->strTable . "' AND NOT EXISTS (SELECT * FROM " . $this->strTable . " WHERE $v.pid = " . $this->strTable . ".id)");
 					}
 					else
 					{
-						$objStmt = $this->Database->execute("DELETE FROM " . $v . " WHERE NOT EXISTS (SELECT * FROM " . $this->strTable . " WHERE " . $v . ".pid = " . $this->strTable . ".id)");
+						$objStmt = $this->Database->execute("DELETE FROM $v WHERE NOT EXISTS (SELECT * FROM " . $this->strTable . " WHERE $v.pid = " . $this->strTable . ".id)");
 					}
 
 					if ($objStmt->affectedRows > 0)
