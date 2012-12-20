@@ -115,12 +115,12 @@ class ContentTable extends \ContentElement
 
 			if ($j == 0)
 			{
-				$class_tr = ' row_first';
+				$class_tr .= ' row_first';
 			}
 
 			if ($j == ($limit - 1))
 			{
-				$class_tr = ' row_last';
+				$class_tr .= ' row_last';
 			}
 
 			$class_eo = (($j % 2) == 0) ? ' even' : ' odd';
@@ -131,12 +131,12 @@ class ContentTable extends \ContentElement
 
 				if ($i == 0)
 				{
-					$class_td = ' col_first';
+					$class_td .= ' col_first';
 				}
 
 				if ($i == (count($rows[$j]) - 1))
 				{
-					$class_td = ' col_last';
+					$class_td .= ' col_last';
 				}
 
 				$arrBody['row_' . $j . $class_tr . $class_eo][] = array

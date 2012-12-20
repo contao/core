@@ -5,6 +5,10 @@ Version 3.0.2 (201X-XX-XX)
 --------------------------
 
 ### Fixed
+The table content element did not assign the correct CSS class names when there
+was only one row and one column (see #5140).
+
+### Fixed
 Consider the dynamic ptable when copying/deleting content elements (see #5041).
 
 ### Fixed
