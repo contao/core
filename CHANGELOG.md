@@ -5,6 +5,9 @@ Version 2.11.8 (20XX-XX-XX)
 ---------------------------
 
 ### Fixed
+Show all extensions in the log when updating multiple at once (see #5144).
+
+### Fixed
 Standardize RSS feed aliases (see #5096).
 
 ### Fixed
