@@ -1095,6 +1095,7 @@ class tl_page extends Backend
 			return $varValue;
 		}
 
+		$varValue = standardize($varValue); // see #5096
 		$arrFeeds = $this->removeOldFeeds(true);
 
 		// Alias exists

@@ -341,7 +341,7 @@ class tl_faq extends Backend
 		$autoAlias = false;
 
 		// Generate alias if there is none
-		if (!strlen($varValue))
+		if ($varValue == '')
 		{
 			$autoAlias = true;
 			$varValue = standardize($this->restoreBasicEntities($dc->activeRecord->question));

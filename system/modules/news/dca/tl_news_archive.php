@@ -520,6 +520,7 @@ class tl_news_archive extends Backend
 			return $varValue;
 		}
 
+		$varValue = standardize($varValue); // see #5096
 		$arrFeeds = $this->removeOldFeeds(true);
 
 		// Alias exists

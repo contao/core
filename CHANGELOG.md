@@ -5,6 +5,9 @@ Version 2.11.8 (20XX-XX-XX)
 ---------------------------
 
 ### Fixed
+Standardize RSS feed aliases (see #5096).
+
+### Fixed
 Make the `FileUpload` constructor public (see #5054).
 
 ### Fixed
