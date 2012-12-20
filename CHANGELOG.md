@@ -5,6 +5,9 @@ Version 2.11.8 (20XX-XX-XX)
 ---------------------------
 
 ### Fixed
+Removed Tahiti and the Netherlands Antilles from the countries list (see #3791).
+
+### Fixed
 Also adjust the `be_navigation.html5` template to the new "getUserNavigation"
 hook changes (see #3411).
 
