@@ -1189,6 +1189,8 @@ class tl_page extends Backend
 			return $varValue;
 		}
 
+		$varValue = standardize($varValue); // see #5096
+
 		$this->import('Automator');
 		$arrFeeds = $this->Automator->purgeXmlFiles(true);
 

@@ -449,7 +449,7 @@ class tl_newsletter extends Backend
 		$autoAlias = false;
 
 		// Generate alias if there is none
-		if (!strlen($varValue))
+		if ($varValue == '')
 		{
 			$autoAlias = true;
 			$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->subject));

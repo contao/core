@@ -372,7 +372,7 @@ class RepositoryManager extends RepositoryBackendModule
 				$actions = array();
 				$this->addActions($ext->extension, $ext->upd_version, $actions, $act);
 				if ($act=='ok') {
-					$rep->log = '<div class="title">'.$text['installlogtitle'].'</div>'."\n";
+					$rep->log .= '<div class="title">'.$text['installlogtitle'].'</div>'."\n";
 					$lickey = $ext->lickey;
 					$checkdb = false;
 					foreach ($actions as $act) {
