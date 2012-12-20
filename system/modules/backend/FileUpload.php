@@ -54,6 +54,15 @@ class FileUpload extends Backend
 
 
 	/**
+	 * Make the constructor public (see #5054)
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+
+	/**
 	 * Return true if there was an error
 	 * @return boolean
 	 */

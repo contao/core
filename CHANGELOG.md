@@ -5,6 +5,9 @@ Version 2.11.8 (20XX-XX-XX)
 ---------------------------
 
 ### Fixed
+Make the `FileUpload` constructor public (see #5054).
+
+### Fixed
 Use `isset()` in the `Database::fetch*()` methods (see #4990).
 
 ### Fixed
