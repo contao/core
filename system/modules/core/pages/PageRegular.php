@@ -333,11 +333,11 @@ class PageRegular extends \Frontend
 
 				if ($objLayout->cols == '2cll')
 				{
-					$strFramework .= '#main .inside{margin-left:30px;margin-right:10px}';
+					$strFramework .= '#main .inside{margin-left:20px;margin-right:0}';
 				}
 				if ($objLayout->cols == '3cl')
 				{
-					$strFramework .= '#main .inside{margin-left:30px;margin-right:20px}';
+					$strFramework .= '#main .inside{margin-left:20px;margin-right:10px}';
 				}
 				if ($objLayout->cols == '2clr')
 				{

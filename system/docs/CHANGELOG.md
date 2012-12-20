@@ -5,6 +5,10 @@ Version 3.0.2 (201X-XX-XX)
 --------------------------
 
 ### Fixed
+Corrected the main column margin when using the layout builder in combination
+with the responsive grid (see #5170).
+
+### Fixed
 Consider the sorting order of external style sheets (see #5038).
 
 ### Fixed
