@@ -79,6 +79,10 @@ class Search extends \System
 			{
 				$strContent = substr($strContent, 0, $intStart) . substr($strContent, $intEnd + 9);
 			}
+			else
+			{
+				break; // see #5119
+			}
 		}
 
 		// Strip style tags
@@ -87,6 +91,10 @@ class Search extends \System
 			if (($intEnd = strpos($strContent, '</style>', $intStart)) !== false)
 			{
 				$strContent = substr($strContent, 0, $intStart) . substr($strContent, $intEnd + 8);
+			}
+			else
+			{
+				break; // see #5119
 			}
 		}
 
@@ -105,9 +113,17 @@ class Search extends \System
 						$intEnd = $intNewEnd;
 						$intCurrent = $intNested;
 					}
+					else
+					{
+						break; // see #5119
+					}
 				}
 
 				$strContent = substr($strContent, 0, $intStart) . substr($strContent, $intEnd + 26);
+			}
+			else
+			{
+				break; // see #5119
 			}
 		}
 

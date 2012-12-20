@@ -5,6 +5,9 @@ Version 3.0.2 (201X-XX-XX)
 --------------------------
 
 ### Fixed
+Handle incorrectly closed indexer comments (see #5119).
+
+### Fixed
 The table content element did not assign the correct CSS class names when there
 was only one row and one column (see #5140).
 
