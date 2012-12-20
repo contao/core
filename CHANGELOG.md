@@ -5,6 +5,9 @@ Version 2.11.8 (20XX-XX-XX)
 ---------------------------
 
 ### Fixed
+Fixed the unprefixed CSS gradient output (see #4569). 
+
+### Fixed
 Fixed a small formatting issue in the Music Academy theme (see #5160).
 
 ### Fixed
