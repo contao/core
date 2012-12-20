@@ -5,6 +5,9 @@ Version 2.11.8 (20XX-XX-XX)
 ---------------------------
 
 ### Fixed
+Changed the `System::getReadableSize()` algorithm to powers of two (see #4283).
+
+### Fixed
 Removed Tahiti and the Netherlands Antilles from the countries list (see #3791).
 
 ### Fixed
