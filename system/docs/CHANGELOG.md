@@ -5,6 +5,10 @@ Version 3.0.2 (201X-XX-XX)
 --------------------------
 
 ### Fixed
+Do not create content elements for news and events which redirect to articles,
+pages or external URLs during the version 3 update (see #5117). 
+
+### Fixed
 Handle incorrectly closed indexer comments (see #5119).
 
 ### Fixed
