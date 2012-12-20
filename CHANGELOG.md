@@ -5,6 +5,9 @@ Version 2.11.8 (20XX-XX-XX)
 ---------------------------
 
 ### Fixed
+Use `isset()` in the `Database::fetch*()` methods (see #4990).
+
+### Fixed
 Changed the `System::getReadableSize()` algorithm to powers of two (see #4283).
 
 ### Fixed

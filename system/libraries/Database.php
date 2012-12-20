@@ -964,7 +964,7 @@ abstract class Database_Result
 	 */
 	public function fetchRow()
 	{
-		if (!$this->arrCache[++$this->intIndex])
+		if (!isset($this->arrCache[++$this->intIndex]))
 		{
 			if (($arrRow = $this->fetch_row()) == false)
 			{
@@ -985,7 +985,7 @@ abstract class Database_Result
 	 */
 	public function fetchAssoc()
 	{
-		if (!$this->arrCache[++$this->intIndex])
+		if (!isset($this->arrCache[++$this->intIndex]))
 		{
 			if (($arrRow = $this->fetch_assoc()) == false)
 			{
@@ -1084,7 +1084,7 @@ abstract class Database_Result
 			return false;
 		}
 
-		if (!$this->arrCache[++$this->intIndex])
+		if (!isset($this->arrCache[++$this->intIndex]))
 		{
 			--$this->intIndex; // see #3762
 
