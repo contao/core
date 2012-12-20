@@ -272,7 +272,7 @@ class InstallTool extends Backend
 		}
 
 		$GLOBALS['TL_CONFIG']['ftpSSL']  = Input::post('ssl');
-		$GLOBALS['TL_CONFIG']['ftpPort'] = (int)Input::post('port');
+		$GLOBALS['TL_CONFIG']['ftpPort'] = (int) Input::post('port');
 
 		// Add a trailing slash
 		if ($GLOBALS['TL_CONFIG']['ftpPath'] != '' && substr($GLOBALS['TL_CONFIG']['ftpPath'], -1) != '/')

@@ -552,7 +552,7 @@ abstract class Model extends \System
 			'value'  => $varValue
 		));
 
-		return \Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
+		return (int) \Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
 	}
 
 
