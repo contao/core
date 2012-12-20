@@ -1,6 +1,14 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.8 (20XX-XX-XX)
+---------------------------
+
+### Fixed
+Also adjust the `be_navigation.html5` template to the new "getUserNavigation"
+hook changes (see #3411).
+
+
 Version 2.11.7 (2012-11-29)
 ---------------------------
 
