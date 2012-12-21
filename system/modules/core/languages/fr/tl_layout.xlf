@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.3cl.0">
         <source>Main, left and right column</source>
-        <target>Colonnes principales, gauche et droite</target>
+        <target>Colonne principale, gauche et droite</target>
       </trans-unit>
       <trans-unit id="tl_layout.3cl.1">
         <source>Show three columns with the main column in the middle.</source>
@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.responsive.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
-        <target>Ajoute une grille responsive de 12 colonnes qui est déclenchée par les classes CSS &quot;grid1&quot; à grid12&quot; et &quot;offset1&quot; à &quot;offset12&quot;.</target>
+        <target>Ajoute une grille responsive de 12 colonnes qui est déclenchée par les classes CSS &quot;grid1&quot; à &quot;grid12&quot; et &quot;offset1&quot; à &quot;offset12&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.0">
         <source>TinyMCE style sheet</source>
@@ -199,7 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
         <source>Here you can add style sheets from the file system (e.g. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</source>
-        <target>Ajouter des feuilles de style à partir du système de fichier (ex: &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</target>
+        <target>Ajouter des feuilles de style à partir du système de fichier (ex. : &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>

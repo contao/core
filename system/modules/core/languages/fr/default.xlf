@@ -113,6 +113,9 @@
         <source>File %s exceeds the maximum image height of %d pixels!</source>
         <target>L'image %s dépasse la hauteur maximale qui est de %d pixels !</target>
       </trans-unit>
+      <trans-unit id="ERR.filetarget">
+        <source>Cannot move %s to %s because the target exists!</source>
+      </trans-unit>
       <trans-unit id="ERR.invalidReferer">
         <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
         <target>Accès interdit ! L'adresse de l'hôte courant (%s) est différente de l'adresse de l'hôte référent (%s) !</target>
@@ -1972,36 +1975,28 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
         <target>Byte</target>
       </trans-unit>
       <trans-unit id="UNITS.1">
-        <source>kB</source>
-        <target>kB</target>
+        <source>KiB</source>
       </trans-unit>
       <trans-unit id="UNITS.2">
-        <source>MB</source>
-        <target>MB</target>
+        <source>MiB</source>
       </trans-unit>
       <trans-unit id="UNITS.3">
-        <source>GB</source>
-        <target>GB</target>
+        <source>GiB</source>
       </trans-unit>
       <trans-unit id="UNITS.4">
-        <source>TB</source>
-        <target>TB</target>
+        <source>TiB</source>
       </trans-unit>
       <trans-unit id="UNITS.5">
-        <source>PB</source>
-        <target>PB</target>
+        <source>PiB</source>
       </trans-unit>
       <trans-unit id="UNITS.6">
-        <source>EB</source>
-        <target>EB</target>
+        <source>EiB</source>
       </trans-unit>
       <trans-unit id="UNITS.7">
-        <source>ZB</source>
-        <target>ZB</target>
+        <source>ZiB</source>
       </trans-unit>
       <trans-unit id="UNITS.8">
-        <source>YB</source>
-        <target>YB</target>
+        <source>YiB</source>
       </trans-unit>
       <trans-unit id="CONFIRM.do">
         <source>Module</source>

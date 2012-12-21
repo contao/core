@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="MOD.extension.0">
         <source>Extension creator</source>
-        <target>Créateur de module</target>
+        <target>Créateur d'extension</target>
       </trans-unit>
       <trans-unit id="MOD.extension.1">
         <source>Create custom Contao extensions</source>

@@ -875,12 +875,15 @@
       </trans-unit>
       <trans-unit id="LNG.ta_LK">
         <source>Tamil (Sri Lanka)</source>
+        <target>Tamilština (Srí Lanka)</target>
       </trans-unit>
       <trans-unit id="LNG.te">
         <source>Telugu</source>
+        <target>Telugština</target>
       </trans-unit>
       <trans-unit id="LNG.te_IN">
         <source>Telugu (India)</source>
+        <target>Telugština (Indie)</target>
       </trans-unit>
       <trans-unit id="LNG.tg">
         <source>Tajik</source>
@@ -972,6 +975,7 @@
       </trans-unit>
       <trans-unit id="LNG.vi_VN">
         <source>Vietnamese (Vietnam)</source>
+        <target>Vietnamština (Vietnam)</target>
       </trans-unit>
       <trans-unit id="LNG.vo">
         <source>Volapuk</source>

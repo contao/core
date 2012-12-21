@@ -199,7 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_style.background.1">
         <source>Background-color, background-image, background-position, background-repeat, linear-gradient and box-shadow.</source>
-        <target>Couleur de fond, image de fond, position du fond et répétition du fond.</target>
+        <target>Couleur de fond, image de fond, position du fond, répétition du fond, gradient linéaire et ombrage.</target>
       </trans-unit>
       <trans-unit id="tl_style.bgcolor.0">
         <source>Background color and opacity</source>
@@ -207,7 +207,7 @@
       </trans-unit>
       <trans-unit id="tl_style.bgcolor.1">
         <source>Here you can enter a hexadecimal background color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
-        <target>Saisir une couleur de fond en hexadécimal (ex : ff0000 pour le rouge) et optionnellement un pourcentage de transparence (ex : 75).</target>
+        <target>Saisir une couleur de fond en hexadécimal (ex. : ff0000 pour le rouge) et optionnellement un pourcentage de transparence (ex. : 75).</target>
       </trans-unit>
       <trans-unit id="tl_style.bgimage.0">
         <source>Background image</source>
@@ -247,7 +247,7 @@
       </trans-unit>
       <trans-unit id="tl_style.shadowcolor.1">
         <source>Here you can enter a hexadecimal shadow color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
-        <target>Saisir une valeur hexadécimale de la couleur de l'ombre (ex : ff0000 pour du rouge) et optionnellement un pourcentage de transparence (ex : 75).</target>
+        <target>Saisir une valeur hexadécimale de la couleur de l'ombre (ex. : ff0000 pour du rouge) et optionnellement un pourcentage de transparence (ex : 75).</target>
       </trans-unit>
       <trans-unit id="tl_style.gradientAngle.0">
         <source>Gradient angle</source>
@@ -255,7 +255,7 @@
       </trans-unit>
       <trans-unit id="tl_style.gradientAngle.1">
         <source>Here you can enter the gradient angle (e.g. &lt;em&gt;0deg&lt;/em&gt;) or the direction (e.g. &lt;em&gt;to bottom&lt;/em&gt; or &lt;em&gt;to top right&lt;/em&gt;).</source>
-        <target>Entrer l'angle (ex:&lt;em&gt;0deg&lt;/em&gt;) ou la direction (ex:&lt;em&gt;to bottom&lt;/em&gt; ou &lt;em&gt;to top right&lt;/em&gt;).</target>
+        <target>Entrer l'angle (ex. :&lt;em&gt;0deg&lt;/em&gt;) ou la direction (ex. :&lt;em&gt;to bottom&lt;/em&gt; ou &lt;em&gt;to top right&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_style.gradientColors.0">
         <source>Gradient colors</source>
@@ -263,7 +263,7 @@
       </trans-unit>
       <trans-unit id="tl_style.gradientColors.1">
         <source>Here you can enter up to four colors with an optional percentage (e.g. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;).</source>
-        <target>Saisir jusqu'à quatre couleurs avec un pourcentage en option (ex : &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;).</target>
+        <target>Saisir jusqu'à quatre couleurs avec un pourcentage en option (ex. : &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_style.border.0">
         <source>Border</source>
@@ -271,7 +271,7 @@
       </trans-unit>
       <trans-unit id="tl_style.border.1">
         <source>Border-width, border-style, border-color, border-radius, border-collapse and border-spacing.</source>
-        <target>Épaisseur de bordure, style de bordure, couleur de bordure et fusion de bordure.</target>
+        <target>Épaisseur de bordure, style de bordure, couleur de bordure, rayon de bordure, fusion de bordure et espacement de bordure.</target>
       </trans-unit>
       <trans-unit id="tl_style.borderwidth.0">
         <source>Border width</source>
@@ -295,7 +295,7 @@
       </trans-unit>
       <trans-unit id="tl_style.bordercolor.1">
         <source>Here you can enter a hexadecimal border color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
-        <target>Saisir une couleur de bordure en hexadécimal (ex : ff0000 pour le rouge) et optionnellement un pourcentage de transparence (ex : 75).</target>
+        <target>Saisir une couleur de bordure en hexadécimal (ex. : ff0000 pour le rouge) et optionnellement un pourcentage de transparence (ex. : 75).</target>
       </trans-unit>
       <trans-unit id="tl_style.borderradius.0">
         <source>Border radius</source>
@@ -351,7 +351,7 @@
       </trans-unit>
       <trans-unit id="tl_style.fontcolor.1">
         <source>Here you can enter a hexadecimal font color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
-        <target>Saisir la couleur de la police de caractère en hexadécimal (ex : ff0000 pour le rouge) et une transparence optionnelle en pourcentage (ex : 75).</target>
+        <target>Saisir la couleur de la police de caractère en hexadécimal (ex. : ff0000 pour le rouge) et une transparence optionnelle en pourcentage (ex. : 75).</target>
       </trans-unit>
       <trans-unit id="tl_style.lineheight.0">
         <source>Line height</source>
@@ -395,7 +395,7 @@
       </trans-unit>
       <trans-unit id="tl_style.letterspacing.0">
         <source>Letter spacing</source>
-        <target>Espacement des lettres</target>
+        <target>Espacement entre les lettres</target>
       </trans-unit>
       <trans-unit id="tl_style.letterspacing.1">
         <source>Here you can modify the letter spacing (default: 0px).</source>
@@ -403,7 +403,7 @@
       </trans-unit>
       <trans-unit id="tl_style.wordspacing.0">
         <source>Word spacing</source>
-        <target>Espacement des mots</target>
+        <target>Espacement entre les mots</target>
       </trans-unit>
       <trans-unit id="tl_style.wordspacing.1">
         <source>Here you can modify the word spacing (default: 0px).</source>
