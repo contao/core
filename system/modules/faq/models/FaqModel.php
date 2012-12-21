@@ -37,12 +37,13 @@ class FaqModel extends \Model
 	/**
 	 * Find a published FAQ from one or more categories by its ID or alias
 	 * 
-	 * @param mixed $varId   The numeric ID or alias name
-	 * @param array $arrPids An array of parent IDs
+	 * @param mixed $varId      The numeric ID or alias name
+	 * @param array $arrPids    An array of parent IDs
+	 * @param array $arrOptions An optional options array
 	 * 
 	 * @return \Model|null The FaqModel or null if there is no FAQ
 	 */
-	public static function findPublishedByParentAndIdOrAlias($varId, $arrPids)
+	public static function findPublishedByParentAndIdOrAlias($varId, $arrPids, array $arrOptions=array())
 	{
 		if (!is_array($arrPids) || empty($arrPids))
 		{
@@ -57,18 +58,19 @@ class FaqModel extends \Model
 			$arrColumns[] = "$t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId));
+		return static::findOneBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
 	}
 
 
 	/**
 	 * Find all published FAQs by their parent IDs
 	 * 
-	 * @param array $arrPids An array of FAQ category IDs
+	 * @param array $arrPids    An array of FAQ category IDs
+	 * @param array $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no FAQs
 	 */
-	public static function findPublishedByPids($arrPids)
+	public static function findPublishedByPids($arrPids, array $arrOptions=array())
 	{
 		if (!is_array($arrPids) || empty($arrPids))
 		{
@@ -83,6 +85,8 @@ class FaqModel extends \Model
 			$arrColumns[] = "$t.published=1";
 		}
 
-		return static::findBy($arrColumns, null, array('order'=>"$t.pid, $t.sorting"));
+		$arrOptions['order'] = "$t.pid, $t.sorting";
+
+		return static::findBy($arrColumns, null, $arrOptions);
 	}
 }

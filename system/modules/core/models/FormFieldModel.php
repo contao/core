@@ -37,11 +37,12 @@ class FormFieldModel extends \Model
 	/**
 	 * Find published form fields by their parent ID
 	 * 
-	 * @param integer $intPid The form ID
+	 * @param integer $intPid     The form ID
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no form fields
 	 */
-	public static function findPublishedByPid($intPid)
+	public static function findPublishedByPid($intPid, array $arrOptions=array())
 	{
 		$t = static::$strTable;
 		$arrColumns = array("$t.pid=?");
@@ -51,6 +52,8 @@ class FormFieldModel extends \Model
 			$arrColumns[] = "$t.invisible=''";
 		}
 
-		return static::findBy($arrColumns, $intPid, array('order'=>"$t.sorting"));
+		$arrOptions['order'] = "$t.sorting";
+
+		return static::findBy($arrColumns, $intPid, $arrOptions);
 	}
 }

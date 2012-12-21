@@ -37,12 +37,13 @@ class NewsletterRecipientsModel extends \Model
 	/**
 	 * Find recipients by their e-mail address and parent ID
 	 * 
-	 * @param string $strEmail The e-mail address
-	 * @param array  $arrPids  An array of newsletter channel IDs
+	 * @param string $strEmail   The e-mail address
+	 * @param array  $arrPids    An array of newsletter channel IDs
+	 * @param array  $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no recipients
 	 */
-	public static function findByEmailAndPids($strEmail, $arrPids)
+	public static function findByEmailAndPids($strEmail, $arrPids, array $arrOptions=array())
 	{
 		if (!is_array($arrPids) || empty($arrPids))
 		{
@@ -50,6 +51,6 @@ class NewsletterRecipientsModel extends \Model
 		}
 
 		$t = static::$strTable;
-		return static::findBy(array("$t.email=? AND $t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")"), $strEmail);
+		return static::findBy(array("$t.email=? AND $t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")"), $strEmail, $arrOptions);
 	}
 }

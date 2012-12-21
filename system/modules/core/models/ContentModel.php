@@ -39,10 +39,11 @@ class ContentModel extends \Model
 	 * 
 	 * @param integer $intPid         The article ID
 	 * @param string  $strParentTable The parent table name
+	 * @param array   $arrOptions     An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no content elements
 	 */
-	public static function findPublishedByPidAndTable($intPid, $strParentTable)
+	public static function findPublishedByPidAndTable($intPid, $strParentTable, array $arrOptions=array())
 	{
 		$t = static::$strTable;
 
@@ -61,6 +62,8 @@ class ContentModel extends \Model
 			$arrColumns[] = "$t.invisible=''";
 		}
 
-		return static::findBy($arrColumns, array($intPid, $strParentTable), array('order'=>"$t.sorting"));
+		$arrOptions['order'] = "$t.sorting";
+
+		return static::findBy($arrColumns, array($intPid, $strParentTable), $arrOptions);
 	}
 }

@@ -37,44 +37,47 @@ class CommentsNotifyModel extends \Model
 	/**
 	 * Find a subscription by its tokens
 	 * 
-	 * @param string $strToken The token string
+	 * @param string $strToken   The token string
+	 * @param array  $arrOptions An optional options array
 	 * 
 	 * @return \Model|null The subscription model or null
 	 */
-	public static function findByTokens($strToken)
+	public static function findByTokens($strToken, array $arrOptions=array())
 	{
 		$t = static::$strTable;
-		return static::findOneBy(array("($t.tokenConfirm=? OR $t.tokenRemove=?)"), array($strToken, $strToken));
+		return static::findOneBy(array("($t.tokenConfirm=? OR $t.tokenRemove=?)"), array($strToken, $strToken), $arrOptions);
 	}
 
 
 	/**
 	 * Find a subscription by its tokens
 	 * 
-	 * @param string  $strSource The source element
-	 * @param integer $intParent The parent ID
-	 * @param string  $strEmail  The e-mail address
+	 * @param string  $strSource  The source element
+	 * @param integer $intParent  The parent ID
+	 * @param string  $strEmail   The e-mail address
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model|null The subscription model or null
 	 */
-	public static function findBySourceParentAndEmail($strSource, $intParent, $strEmail)
+	public static function findBySourceParentAndEmail($strSource, $intParent, $strEmail, array $arrOptions=array())
 	{
 		$t = static::$strTable;
-		return static::findOneBy(array("$t.source=? AND $t.parent=? AND $t.email=?"), array($strSource, $intParent, $strEmail));
+		return static::findOneBy(array("$t.source=? AND $t.parent=? AND $t.email=?"), array($strSource, $intParent, $strEmail), $arrOptions);
 	}
 
 
 	/**
 	 * Find published comments by their source table and parent ID
 	 * 
-	 * @param string  $strSource The source element
-	 * @param integer $intParent The parent ID
+	 * @param string  $strSource  The source element
+	 * @param integer $intParent  The parent ID
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no active subscriptions
 	 */
-	public static function findActiveBySourceAndParent($strSource, $intParent)
+	public static function findActiveBySourceAndParent($strSource, $intParent, array $arrOptions=array())
 	{
 		$t = static::$strTable;
-		return static::findBy(array("$t.source=? AND $t.parent=? AND tokenConfirm=''"), array($strSource, $intParent));
+		return static::findBy(array("$t.source=? AND $t.parent=? AND tokenConfirm=''"), array($strSource, $intParent), $arrOptions);
 	}
 }

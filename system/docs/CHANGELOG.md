@@ -5,6 +5,9 @@ Version 3.0.2 (201X-XX-XX)
 --------------------------
 
 ### Fixed
+Added an option to load models uncached (see #5102).
+
+### Fixed
 Added support for `CURRENT_DATE`, `CURRENT_TIME` and `CURRENT_TIMESTAMP` to the
 database installer (see #5089).
 

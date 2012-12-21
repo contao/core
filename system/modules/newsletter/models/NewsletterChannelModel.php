@@ -37,11 +37,12 @@ class NewsletterChannelModel extends \Model
 	/**
 	 * Find multiple newsletter channels by their IDs
 	 * 
-	 * @param array $arrIds An array of newsletter channel IDs
+	 * @param array $arrIds     An array of newsletter channel IDs
+	 * @param array $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no newsletter channels
 	 */
-	public static function findByIds($arrIds)
+	public static function findByIds($arrIds, array $arrOptions=array())
 	{
 		if (!is_array($arrIds) || empty($arrIds))
 		{
@@ -49,6 +50,8 @@ class NewsletterChannelModel extends \Model
 		}
 
 		$t = static::$strTable;
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, array('order'=>"$t.title"));
+		$arrOptions['order'] = "$t.title";
+
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, $arrOptions);
 	}
 }

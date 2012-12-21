@@ -436,11 +436,13 @@ abstract class Model extends \System
 	{
 		if (strncmp($name, 'findBy', 6) === 0)
 		{
-			return call_user_func('static::findBy', lcfirst(substr($name, 6)), array_shift($args), $args);
+			array_unshift($args, lcfirst(substr($name, 6)));
+			return call_user_func_array('static::findBy', $args);
 		}
 		elseif (strncmp($name, 'findOneBy', 9) === 0)
 		{
-			return call_user_func('static::findOneBy', lcfirst(substr($name, 9)), array_shift($args), $args);
+			array_unshift($args, lcfirst(substr($name, 9)));
+			return call_user_func_array('static::findOneBy', $args);
 		}
 
 		return null;
@@ -492,7 +494,16 @@ abstract class Model extends \System
 		}
 
 		$objStatement = static::preFind($objStatement);
-		$objResult = $objStatement->execute($arrOptions['value']);
+
+		// Optionally execute uncached (see #5102)
+		if (isset($arrOptions['uncached']))
+		{
+			$objResult = $objStatement->executeUncached($arrOptions['value']);
+		}
+		else
+		{
+			$objResult = $objStatement->execute($arrOptions['value']);
+		}
 
 		if ($objResult->numRows < 1)
 		{
