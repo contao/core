@@ -5,6 +5,9 @@ Version 3.0.2 (201X-XX-XX)
 --------------------------
 
 ### Fixed
+Do not cache the `system/cron/cron.txt` file (see #5105).
+
+### Fixed
 Do not create content elements for news and events which redirect to articles,
 pages or external URLs during the version 3 update (see #5117). 
 
