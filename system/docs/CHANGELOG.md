@@ -5,6 +5,9 @@ Version 3.0.2 (201X-XX-XX)
 --------------------------
 
 ### Fixed
+Purge the internal cache after a module has been (de)activated (see #5016).
+
+### Fixed
 Do not cache the `system/cron/cron.txt` file (see #5105).
 
 ### Fixed
