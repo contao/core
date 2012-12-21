@@ -5,6 +5,9 @@ Version 3.0.2 (201X-XX-XX)
 --------------------------
 
 ### Fixed
+The newsletter system did not yet handle file ID attachments (see #5118).
+
+### Fixed
 The gallery and downloads element now support using the user's home directory
 again (see #5113).
 

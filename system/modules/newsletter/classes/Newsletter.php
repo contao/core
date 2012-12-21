@@ -64,6 +64,7 @@ class Newsletter extends \Backend
 		}
 
 		$arrAttachments = array();
+		$blnAttachmentsFormatError = false;
 
 		// Add attachments
 		if ($objNewsletter->addFile)
@@ -72,11 +73,25 @@ class Newsletter extends \Backend
 
 			if (is_array($files) && !empty($files))
 			{
-				foreach ($files as $file)
+				// Check for version 3 format
+				if (!is_numeric($files[0]))
 				{
-					if (is_file(TL_ROOT . '/' . $file))
+					$blnAttachmentsFormatError = true;
+					\Message::addError($GLOBALS['TL_LANG']['ERR']['version2format']);
+				}
+				else
+				{
+					$objFiles = \FilesModel::findMultipleByIds($files);
+
+					if ($objFiles !== null)
 					{
-						$arrAttachments[] = $file;
+						while ($objFiles->next())
+						{
+							if (is_file(TL_ROOT . '/' . $objFiles->path))
+							{
+								$arrAttachments[] = $objFiles->path;
+							}
+						}
 					}
 				}
 			}
@@ -93,7 +108,7 @@ class Newsletter extends \Backend
 		}
 
 		// Send newsletter
-		if (\Input::get('token') != '' && \Input::get('token') == $this->Session->get('tl_newsletter_send'))
+		if (!$blnAttachmentsFormatError && \Input::get('token') != '' && \Input::get('token') == $this->Session->get('tl_newsletter_send'))
 		{
 			$referer = preg_replace('/&(amp;)?(start|mpc|token|recipient|preview)=[^&]*/', '', \Environment::get('request'));
 
@@ -276,14 +291,22 @@ class Newsletter extends \Backend
 </div>
 <div class="clear"></div>
 </div>
-</div>
+</div>';
+
+		// Do not send the newsletter if there is an attachment format error
+		if (!$blnAttachmentsFormatError)
+		{
+			$return .= '
 
 <div class="tl_formbody_submit">
 <div class="tl_submit_container">
 <input type="submit" name="preview" class="tl_submit" accesskey="p" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter']['preview']).'">
 <input type="submit" id="send" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter']['send'][0]).'" onclick="return confirm(\''. str_replace("'", "\\'", $GLOBALS['TL_LANG']['tl_newsletter']['sendConfirm']) .'\')">
 </div>
-</div>
+</div>';
+		}
+
+		$return .= '
 
 </form>';
 
