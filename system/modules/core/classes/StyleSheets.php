@@ -2009,7 +2009,7 @@ class StyleSheets extends \Backend
 
 				case 'list-style-image':
 					$arrSet['list'] = 1;
-					$arrSet['liststyleimage'] = preg_replace('/url\("?([^"\)]+)"?\)/i', '$1', $arrChunks[1]);
+					$arrSet['liststyleimage'] = preg_replace('/url\(["\']?([^"\'\)]+)["\']?\)/i', '$1', $arrChunks[1]);
 					break;
 
 				case 'behavior':
