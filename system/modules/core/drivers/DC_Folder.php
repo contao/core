@@ -449,7 +449,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->Files->rename($this->intId, $destination);
 
 			// Find the corresponding DB entries
-			if (false && $this->blnIsDbAssisted)
+			if ($this->blnIsDbAssisted)
 			{
 				$objFile = \FilesModel::findByPath($this->intId);
 
