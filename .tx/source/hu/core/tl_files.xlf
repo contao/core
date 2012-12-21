@@ -11,9 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
+        <target>Meta információk</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.1">
         <source>Here you can enter the file meta information.</source>
+        <target>Megadhatja a fájl meta információit.</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
@@ -68,21 +70,27 @@
       </trans-unit>
       <trans-unit id="tl_files.syncRemoved">
         <source>Removed the file or folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot; fájl vagy könyvtár törölve</target>
       </trans-unit>
       <trans-unit id="tl_files.syncFolderC">
         <source>Created the folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot; könyvtár létrehozva</target>
       </trans-unit>
       <trans-unit id="tl_files.syncFolderF">
         <source>Found the folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot; könyvtár megtalálva</target>
       </trans-unit>
       <trans-unit id="tl_files.syncFileC">
         <source>Created the file &quot;%s&quot;</source>
+        <target>&quot;%s&quot; fájl létrehozva</target>
       </trans-unit>
       <trans-unit id="tl_files.syncFileF">
         <source>Found the file &quot;%s&quot;</source>
+        <target>&quot;%s&quot; fájl megtalálva</target>
       </trans-unit>
       <trans-unit id="tl_files.syncHash">
         <source>Updated the hash of the file &quot;%s&quot;</source>
+        <target>&quot;%s&quot; fájl hash információja frissült</target>
       </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>
@@ -166,9 +174,11 @@
       </trans-unit>
       <trans-unit id="tl_files.sync.0">
         <source>Synchronize</source>
+        <target>Szinkronizálás</target>
       </trans-unit>
       <trans-unit id="tl_files.sync.1">
         <source>Synchronize the file system and the database</source>
+        <target>Szinkronizálja a fájlrendszert és az adatbázist.</target>
       </trans-unit>
     </body>
   </file>

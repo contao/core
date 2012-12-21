@@ -11,9 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
+        <target>Meta informacije</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.1">
         <source>Here you can enter the file meta information.</source>
+        <target>Tu vnesite meta informacije za datoteko.</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
@@ -65,21 +67,27 @@
       </trans-unit>
       <trans-unit id="tl_files.syncFound">
         <source>Found the original file &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>Originalna datoteka &quot;%s&quot; najdena v &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncRemoved">
         <source>Removed the file or folder &quot;%s&quot;</source>
+        <target>Datoteka ali mapa &quot;%s&quot; odstranjena</target>
       </trans-unit>
       <trans-unit id="tl_files.syncFolderC">
         <source>Created the folder &quot;%s&quot;</source>
+        <target>Ustvarjena mapa &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncFolderF">
         <source>Found the folder &quot;%s&quot;</source>
+        <target>Najdena mapa &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncFileC">
         <source>Created the file &quot;%s&quot;</source>
+        <target>Ustvarjena datoteka &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncFileF">
         <source>Found the file &quot;%s&quot;</source>
+        <target>Najdena datoteka &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncHash">
         <source>Updated the hash of the file &quot;%s&quot;</source>
@@ -166,9 +174,11 @@
       </trans-unit>
       <trans-unit id="tl_files.sync.0">
         <source>Synchronize</source>
+        <target>Sinhroniziraj</target>
       </trans-unit>
       <trans-unit id="tl_files.sync.1">
         <source>Synchronize the file system and the database</source>
+        <target>Sinhroniziraj datotečni sistem in podatkovno bazo</target>
       </trans-unit>
     </body>
   </file>

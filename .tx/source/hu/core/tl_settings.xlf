@@ -197,9 +197,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.folderUrl.0">
         <source>Enable folder URLs</source>
+        <target>Könyvtár stílusú URLek</target>
       </trans-unit>
       <trans-unit id="tl_settings.folderUrl.1">
         <source>Here you can enable folder-style page aliases like &lt;em&gt;docs/install/download.html&lt;/em&gt; instead of &lt;em&gt;docs-install-download.html&lt;/em&gt;.</source>
+        <target>Itt engedélyezheti könyvtárszerkezet stílusú oldal álneveket, mint &lt;em&gt; docs/install/download.html&lt;/em&gt; az ilyen alak helyett: &lt;em&gt;docs-install-download.html&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_settings.allowedTags.0">
         <source>Allowed HTML tags</source>
@@ -219,9 +221,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
+        <target>Belső gyorsítótár kikerülése</target>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.1">
         <source>Do not use the internal cache files (e.g. useful when developing extensions).</source>
+        <target>Ne használja a belső gyorsítótár fájlokat (pl.: hasznos, ha kiterjesztéseket fejleszt).</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableRefererCheck.0">
         <source>Disable request tokens</source>
@@ -549,6 +553,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.sections_legend">
         <source>Layout sections</source>
+        <target>Elrendezés szakaszok</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>

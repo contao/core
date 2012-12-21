@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_module.name.0">
         <source>Title</source>
-        <target>Cím</target>
+        <target>Megnevezés</target>
       </trans-unit>
       <trans-unit id="tl_module.name.1">
         <source>Please enter the module title.</source>
-        <target>Adja meg a modul címét.</target>
+        <target>Adja meg a modul nevét.</target>
       </trans-unit>
       <trans-unit id="tl_module.headline.0">
         <source>Headline</source>
@@ -159,7 +159,7 @@
       </trans-unit>
       <trans-unit id="tl_module.editable.1">
         <source>Show these fields in the front end form.</source>
-        <target>Ezen mezők mutatása a front end űrlapon.</target>
+        <target>Ezen mezők mutatása a felhasználói felület űrlapon.</target>
       </trans-unit>
       <trans-unit id="tl_module.memberTpl.0">
         <source>Form template</source>
@@ -319,7 +319,7 @@
       </trans-unit>
       <trans-unit id="tl_module.flashvars.1">
         <source>Pass variables to the Flash movie (&lt;em&gt;var1=value1&amp;amp;var2=value2&lt;/em&gt;).</source>
-        <target>A rendszer ezeket a változókat adja tovább a Flash filmnek (&lt;em&gt;var1=ertek1&amp;var2=ertek2&lt;/em&gt;).</target>
+        <target>A rendszer ezeket a változókat adja tovább a Flash filmnek (&lt;em&gt;var1=value1&amp;amp;var2=value2&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_module.version.0">
         <source>Flash player version</source>
@@ -391,7 +391,7 @@
       </trans-unit>
       <trans-unit id="tl_module.fullsize.1">
         <source>Open the full-size image in a lightbox or the link in a new browser window.</source>
-        <target>A teljes méretű kép megnyitása lightbox-al vagy új böngésző ablak használatával</target>
+        <target>A teljes méretű kép megnyitása lightbox-al vagy új böngésző ablakban.</target>
       </trans-unit>
       <trans-unit id="tl_module.imgSize.0">
         <source>Image width and height</source>
@@ -419,9 +419,11 @@
       </trans-unit>
       <trans-unit id="tl_module.orderSRC.0">
         <source>Sort order</source>
+        <target>Sorrend</target>
       </trans-unit>
       <trans-unit id="tl_module.orderSRC.1">
         <source>The sort order of the items.</source>
+        <target>Az elemek sorrendje.</target>
       </trans-unit>
       <trans-unit id="tl_module.html.0">
         <source>HTML code</source>
@@ -457,9 +459,11 @@
       </trans-unit>
       <trans-unit id="tl_module.numberOfItems.0">
         <source>Number of items</source>
+        <target>Darabszám</target>
       </trans-unit>
       <trans-unit id="tl_module.numberOfItems.1">
         <source>Here you can limit the number of items. Set to 0 to show all.</source>
+        <target>Itt lehet beállítani az elemek számát. 0-ra állítva az összes megjelenik.</target>
       </trans-unit>
       <trans-unit id="tl_module.protected.0">
         <source>Protect module</source>
@@ -483,7 +487,7 @@
       </trans-unit>
       <trans-unit id="tl_module.guests.1">
         <source>Hide the module if a member is logged in.</source>
-        <target>A modul elrejtése a regisztrált és bejelentkezett felhasználók elől.</target>
+        <target>A modul elrejtése a bejelentkezett felhasználók elől.</target>
       </trans-unit>
       <trans-unit id="tl_module.cssID.0">
         <source>CSS ID/class</source>
@@ -591,7 +595,7 @@
       </trans-unit>
       <trans-unit id="tl_module.title_legend">
         <source>Title and type</source>
-        <target>Cím és típus</target>
+        <target>Megnevezés és típus</target>
       </trans-unit>
       <trans-unit id="tl_module.nav_legend">
         <source>Navigation settings</source>

@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_user_group.name.0">
         <source>Title</source>
-        <target>Cím</target>
+        <target>Megnevezés</target>
       </trans-unit>
       <trans-unit id="tl_user_group.name.1">
         <source>Please enter the group title.</source>
-        <target>Adja meg a csoport címét.</target>
+        <target>Adja meg a csoport nevét.</target>
       </trans-unit>
       <trans-unit id="tl_user_group.alexf.0">
         <source>Allowed fields</source>
@@ -43,7 +43,7 @@
       </trans-unit>
       <trans-unit id="tl_user_group.title_legend">
         <source>Title</source>
-        <target>Cím</target>
+        <target>Megnevezés</target>
       </trans-unit>
       <trans-unit id="tl_user_group.modules_legend">
         <source>Allowed modules</source>

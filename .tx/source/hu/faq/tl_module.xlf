@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="tl_module.faq_readerModule.0">
         <source>FAQ reader module</source>
-        <target>GyIK olvasó modúl</target>
+        <target>GyIK olvasó modul</target>
       </trans-unit>
       <trans-unit id="tl_module.faq_readerModule.1">
         <source>Automatically switch to the FAQ reader if an item has been selected.</source>

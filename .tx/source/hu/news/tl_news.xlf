@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="tl_news.headline.0">
         <source>Title</source>
-        <target>Cím</target>
+        <target>Megnevezés</target>
       </trans-unit>
       <trans-unit id="tl_news.headline.1">
         <source>Please enter the news title.</source>
@@ -195,13 +195,15 @@
       </trans-unit>
       <trans-unit id="tl_news.tstamp.0">
         <source>Revision date</source>
+        <target>Módosítás dátuma</target>
       </trans-unit>
       <trans-unit id="tl_news.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>Legutóbbi módosítás dátuma és időpontja</target>
       </trans-unit>
       <trans-unit id="tl_news.title_legend">
         <source>Title and author</source>
-        <target>Cím és szerző</target>
+        <target>Megnevezés és szerző</target>
       </trans-unit>
       <trans-unit id="tl_news.date_legend">
         <source>Date and time</source>
@@ -309,9 +311,11 @@
       </trans-unit>
       <trans-unit id="tl_news.editmeta.0">
         <source>Edit article settings</source>
+        <target>Cikk beállítások szerkesztése</target>
       </trans-unit>
       <trans-unit id="tl_news.editmeta.1">
         <source>Edit the article settings</source>
+        <target>A cikk beállításainak szerkesztése</target>
       </trans-unit>
       <trans-unit id="tl_news.pasteafter.0">
         <source>Paste into this archive</source>

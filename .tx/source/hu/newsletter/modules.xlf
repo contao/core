@@ -7,10 +7,11 @@
       </trans-unit>
       <trans-unit id="MOD.newsletter.1">
         <source>Manage subscriptions and send newsletters</source>
-        <target>Ebben a modulban szerkesztheti a hírleveleket.</target>
+        <target>Feliratkozások kezelése és hírlevelek küldése</target>
       </trans-unit>
       <trans-unit id="MOD.tl_newsletter_recipients">
         <source>Recipients</source>
+        <target>Címzettek</target>
       </trans-unit>
       <trans-unit id="FMD.newsletter">
         <source>Newsletter</source>
@@ -18,11 +19,11 @@
       </trans-unit>
       <trans-unit id="FMD.subscribe.0">
         <source>Subscribe</source>
-        <target>Előfizetés</target>
+        <target>Feliratkozás</target>
       </trans-unit>
       <trans-unit id="FMD.subscribe.1">
         <source>Generates a form to subscribe to one or more channels</source>
-        <target>Ez a modul teszi lehetővé a feliratkozást a weblapon.</target>
+        <target>Űrlap létrehozása egy vagy több csatornára való feliratkozáshoz</target>
       </trans-unit>
       <trans-unit id="FMD.unsubscribe.0">
         <source>Unsubscribe</source>
@@ -30,15 +31,15 @@
       </trans-unit>
       <trans-unit id="FMD.unsubscribe.1">
         <source>Generates a form to unsubscribe from one or more channels</source>
-        <target>Ez a modul teszi lehetővé a leiratkozást a weblapon.</target>
+        <target>Űrlap létrehozása egy vagy több csatornáról leiratkozáshoz</target>
       </trans-unit>
       <trans-unit id="FMD.nl_list.0">
         <source>Newsletter list</source>
-        <target>Hírlevelek listája</target>
+        <target>Hírlevél lista</target>
       </trans-unit>
       <trans-unit id="FMD.nl_list.1">
         <source>Adds a list of newsletters to the page</source>
-        <target>Ez a modul listázza a hírleveleket egy vagy több csatornáról.</target>
+        <target>Hírlevelek listájának hozzáadása az oldalhoz</target>
       </trans-unit>
       <trans-unit id="FMD.nl_reader.0">
         <source>Newsletter reader</source>
@@ -46,7 +47,7 @@
       </trans-unit>
       <trans-unit id="FMD.nl_reader.1">
         <source>Shows the details of a newsletter</source>
-        <target>Ez a modul egy hírlevelet mutat meg.</target>
+        <target>Hírlevél tartalmának megmutatása</target>
       </trans-unit>
     </body>
   </file>

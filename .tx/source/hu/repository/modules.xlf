@@ -3,9 +3,11 @@
     <body>
       <trans-unit id="MOD.repository.0">
         <source>Extension Repository</source>
+        <target>Kiterjesztés Gyűjtemény</target>
       </trans-unit>
       <trans-unit id="MOD.repository.1">
         <source>The back end module of the Extension Repository</source>
+        <target>Az adminisztrációs felület moduljai a Kiterjesztés Gyűjteményben</target>
       </trans-unit>
       <trans-unit id="MOD.repository_catalog.0">
         <source>Extension catalog</source>

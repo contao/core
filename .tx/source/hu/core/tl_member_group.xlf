@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="tl_member_group.name.0">
         <source>Title</source>
-        <target>Cím</target>
+        <target>Megnevezés</target>
       </trans-unit>
       <trans-unit id="tl_member_group.name.1">
         <source>Please enter the group title.</source>
@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="tl_member_group.title_legend">
         <source>Title</source>
-        <target>Cím</target>
+        <target>Megnevezés</target>
       </trans-unit>
       <trans-unit id="tl_member_group.redirect_legend">
         <source>Auto-redirect</source>

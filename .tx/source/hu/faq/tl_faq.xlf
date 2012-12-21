@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.author.1">
         <source>Here you can change the author of the FAQ.</source>
-        <target>Válasszon egy szerzőt.</target>
+        <target>Válassza ki a GyIK szerzőjét.</target>
       </trans-unit>
       <trans-unit id="tl_faq.answer.0">
         <source>Answer</source>

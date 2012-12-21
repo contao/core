@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="LNG.aa">
         <source>Afar</source>
-        <target>Afar</target>
+        <target>Afari</target>
       </trans-unit>
       <trans-unit id="LNG.ab">
         <source>Abkhazian</source>

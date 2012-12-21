@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.text.1">
         <source>Here you can enter the text content of the newsletter. Use the wildcard &lt;em&gt;##email##&lt;/em&gt; to insert the recipient's e-mail address.</source>
-        <target>Itt lehet megadni a hírlevél szöveges tartalmát. Használd a helyettesítőt: &lt;em&gt; # # # # e-mail &lt;/ em&gt;, hogy helyezze be a címzett e-mail címét.</target>
+        <target>Itt lehet megadni a hírlevél szöveges tartalmát. Használd a helyettesítőt: &lt;em&gt;##email##&lt;/ em&gt;, hogy helyezze be a címzett e-mail címét.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.addFile.0">
         <source>Add attachments</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.externalImages.1">
         <source>Do not embed images in HTML newsletters.</source>
-        <target>Ne ágyazzon be képeket a html hírlevélbe.</target>
+        <target>Ne ágyazzon be képeket a HTML hírlevélbe.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.senderName.0">
         <source>Sender name</source>
@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.start.1">
         <source>In case the sending process is interrupted, you can enter a numeric offset here to continue with a particular recipient. You can check how many mails have been sent in the &lt;em&gt;system/logs/newsletter_*.log&lt;/em&gt; file. E.g., if 120 mails have been sent, enter &quot;120&quot; to continue with the 121st recipient (counting starts at 0).</source>
-        <target>Abban az esetben ha a küldő folyamat megszakad, akkor adja meg a ciklus számát ahonnan folytatni szeretné. A számlálás 0-val kezdődik, ez az első ciklus!</target>
+        <target>Abban az esetben ha a küldő folyamat megszakad, akkor adja meg a ciklus számát ahonnan folytatni szeretné. A kiküldött levelek számát megtekintheti a &lt;em&gt;system/logs/newsletter_*.log&lt;/em&gt; fájlban. Pl.: ha 120 levél lett kiküldve. üsse be &quot;120&quot; hogy a 121. levél küldésével folytassa. (a számlálás 0-val kezdődik)</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.sendPreviewTo.0">
         <source>Send preview to</source>
@@ -123,7 +123,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.title_legend">
         <source>Title and subject</source>
-        <target>Cím és tárgy</target>
+        <target>Megnevezés és tárgy</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.html_legend">
         <source>HTML content</source>

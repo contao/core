@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_log.source.1">
         <source>Back end or front end</source>
-        <target>Back end vagy Front end</target>
+        <target>Adminisztrációs felület vagy Felhasználói felület</target>
       </trans-unit>
       <trans-unit id="tl_log.action.0">
         <source>Category</source>
@@ -67,11 +67,11 @@
       </trans-unit>
       <trans-unit id="tl_log.BE">
         <source>Back end</source>
-        <target>Back end</target>
+        <target>Adminisztrációs felület</target>
       </trans-unit>
       <trans-unit id="tl_log.FE">
         <source>Front end</source>
-        <target>Front end</target>
+        <target>Felhasználói felület</target>
       </trans-unit>
       <trans-unit id="tl_log.show.0">
         <source>Show details</source>

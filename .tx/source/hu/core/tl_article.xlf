@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_article.title.0">
         <source>Title</source>
-        <target>Cím</target>
+        <target>Megnevezés</target>
       </trans-unit>
       <trans-unit id="tl_article.title.1">
         <source>Please enter the article title.</source>
-        <target>Adja meg a cikk címét.</target>
+        <target>Adja meg a cikk nevét.</target>
       </trans-unit>
       <trans-unit id="tl_article.alias.0">
         <source>Article alias</source>
@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="tl_article.keywords.0">
         <source>Meta keywords</source>
-        <target>Kulcsszavak</target>
+        <target>Meta kulcsszavak</target>
       </trans-unit>
       <trans-unit id="tl_article.keywords.1">
         <source>Here you can enter a list of comma separated keywords. Keywords, however, are no longer relevant to most search engines (including Google).</source>
@@ -151,11 +151,11 @@
       </trans-unit>
       <trans-unit id="tl_article.facebook">
         <source>Share on Facebook</source>
-        <target>Megosztás a Facebook-on</target>
+        <target>Facebook megosztás</target>
       </trans-unit>
       <trans-unit id="tl_article.twitter">
         <source>Share on Twitter</source>
-        <target>Megosztás a Twitter-en</target>
+        <target>Twitter megosztás</target>
       </trans-unit>
       <trans-unit id="tl_article.gplus">
         <source>Share on Google+</source>

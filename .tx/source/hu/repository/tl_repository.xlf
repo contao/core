@@ -495,9 +495,11 @@
       </trans-unit>
       <trans-unit id="tl_repository.approvedForLabel">
         <source>Approved for</source>
+        <target>Jóváhagyva</target>
       </trans-unit>
       <trans-unit id="tl_repository.approvedForText">
         <source>Contao %s to %s</source>
+        <target>Contao %s - %s</target>
       </trans-unit>
       <trans-unit id="tl_repository.missingSoapModule">
         <source>SOAP extension not loaded (configure PHP with --enable-soap).</source>
@@ -609,7 +611,7 @@
       </trans-unit>
       <trans-unit id="tl_repository_order_options.title">
         <source>Title</source>
-        <target>Cím</target>
+        <target>Megnevezés</target>
       </trans-unit>
       <trans-unit id="tl_repository_order_options.author">
         <source>Author</source>

@@ -7,10 +7,11 @@
       </trans-unit>
       <trans-unit id="MOD.news.1">
         <source>Manage news and export them as RSS or Atom feed</source>
-        <target>Hírek kezelése és azokból RSS vagy Atom feed létrehozása.</target>
+        <target>Hírek kezelése és azokból RSS vagy Atom hírfolyam létrehozása.</target>
       </trans-unit>
       <trans-unit id="MOD.tl_news_feed">
         <source>News feeds</source>
+        <target>Hírek hírfolyam</target>
       </trans-unit>
       <trans-unit id="FMD.news">
         <source>News</source>
@@ -22,7 +23,7 @@
       </trans-unit>
       <trans-unit id="FMD.newslist.1">
         <source>Adds a list of news items to the page</source>
-        <target>Ezzel a modullal listázhat adott számú hírt egy adott hírarchívumból.</target>
+        <target>Hírek listájának hozzáadása az oldalhoz</target>
       </trans-unit>
       <trans-unit id="FMD.newsreader.0">
         <source>Newsreader</source>
@@ -30,7 +31,7 @@
       </trans-unit>
       <trans-unit id="FMD.newsreader.1">
         <source>Shows the details of a news item</source>
-        <target>Ezzel a modullal jeleníthet meg egy adott cikket.</target>
+        <target>Hír részleteinek megjelenítése</target>
       </trans-unit>
       <trans-unit id="FMD.newsarchive.0">
         <source>News archive</source>
@@ -38,7 +39,7 @@
       </trans-unit>
       <trans-unit id="FMD.newsarchive.1">
         <source>Adds a news archive to the page</source>
-        <target>Ezzel a modullal listázhatja az összes cikket egy adott hírarchívumból. A hírarchívumot a &quot;Hírarchívum menü&quot; modullal tallózhatja.</target>
+        <target>Hírarchívum hozzáadása az oldalhoz</target>
       </trans-unit>
       <trans-unit id="FMD.newsmenu.0">
         <source>News archive menu</source>
@@ -46,7 +47,7 @@
       </trans-unit>
       <trans-unit id="FMD.newsmenu.1">
         <source>Generates a navigation menu to browse the news archive</source>
-        <target>Ezzel a modullal tallózhatja a hírarchívumot.</target>
+        <target>Navigációs menü létrehozása a hírarchívum böngészéséhez</target>
       </trans-unit>
     </body>
   </file>

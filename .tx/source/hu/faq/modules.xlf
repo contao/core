@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="FMD.faqlist.1">
         <source>Adds a list of frequently asked questions to the page</source>
-        <target>Ezzel a modullal jelenítheti meg a Gyakran Ismételt Kérdéseket a font end-en.</target>
+        <target>Ezzel a modullal jelenítheti meg a Gyakran Ismételt Kérdéseket a felhasználói felületen.</target>
       </trans-unit>
       <trans-unit id="FMD.faqreader.0">
         <source>FAQ reader</source>
@@ -27,7 +27,7 @@
       </trans-unit>
       <trans-unit id="FMD.faqreader.1">
         <source>Shows the answer to a frequently asked question</source>
-        <target>Ezzel a modullal a válaszokat jelenítheti meg a front end-en.</target>
+        <target>Ezzel a modullal a válaszokat jelenítheti meg a felhasználói felületen.</target>
       </trans-unit>
       <trans-unit id="FMD.faqpage.0">
         <source>FAQ page</source>

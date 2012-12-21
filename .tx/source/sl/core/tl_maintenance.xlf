@@ -19,9 +19,11 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.job">
         <source>Job</source>
+        <target>Opravilo</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.description">
         <source>Description</source>
+        <target>Opis</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.clearCache">
         <source>Purge data</source>
@@ -41,6 +43,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.toLiveUpdate">
         <source>Go to the Live Update</source>
+        <target>Pojdi na Live Update</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.upToDate">
         <source>Your Contao version %s is up to date</source>
@@ -108,12 +111,14 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.index.0">
         <source>Purge the search index</source>
+        <target>Sprazni indeks iskalnika</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.index.1">
         <source>Truncates the tables &lt;em&gt;tl_search&lt;/em&gt; and &lt;em&gt;tl_search_index&lt;/em&gt;. Afterwards, you have to rebuild the search index (see above).</source>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.undo.0">
         <source>Purge the undo table</source>
+        <target>Sprazni tabelo razveljavitev</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.undo.1">
         <source>Truncates the &lt;em&gt;tl_undo&lt;/em&gt; table which stores the deleted records. This job permanently deletes these records.</source>
@@ -126,12 +131,14 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.images.0">
         <source>Purge the image cache</source>
+        <target>Sprazni slikovni predpomnilnik</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.images.1">
         <source>Removes the automatically generated images and then purges the page cache, so there are no links to deleted resources.</source>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.scripts.0">
         <source>Purge the script cache</source>
+        <target>Sprazni skriptni predpomnilnik</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.scripts.1">
         <source>Removes the automatically generated .css and .js files, recreates the internal style sheets and then purges the page cache.</source>
@@ -141,21 +148,26 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.pages.1">
         <source>Removes the cached versions of the front end pages.</source>
+        <target>Odstrani predpomnjene različice predstavitvenih (front end) strani.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.internal.0">
         <source>Purge the internal cache</source>
+        <target>Sprazni notranji predpomnilnik</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.internal.1">
         <source>Removes the cached versions of the DCA and language files. You can permanently disable the internal cache in the back end settings.</source>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.temp.0">
         <source>Purge the temp folder</source>
+        <target>Sprazni začasno mapo</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.temp.1">
         <source>Removes the temporary files.</source>
+        <target>Izbriše začasne datoteke.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.xml.0">
         <source>Recreate the XML files</source>
+        <target>Ponovno ustvari datoteke XML</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.xml.1">
         <source>Recreates the XML files (sitemaps and feeds) and then purges the page cache, so there are no links to deleted resources.</source>

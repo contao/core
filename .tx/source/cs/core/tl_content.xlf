@@ -507,19 +507,19 @@
       </trans-unit>
       <trans-unit id="tl_content.start.0">
         <source>Show from</source>
-        <target>Začátek lišty akordeonu</target>
+        <target>Zobrazit od</target>
       </trans-unit>
       <trans-unit id="tl_content.start.1">
         <source>Do not show the element on the website before this day.</source>
-        <target>Označí začátek lišty akordeonum, která může obsahovat několik obsahových elementů.</target>
+        <target>Nezobrazovat před tímto datem</target>
       </trans-unit>
       <trans-unit id="tl_content.stop.0">
         <source>Show until</source>
-        <target>Konec lišty akordeonu</target>
+        <target>Zobrazit do</target>
       </trans-unit>
       <trans-unit id="tl_content.stop.1">
         <source>Do not show the element on the website on and after this day.</source>
-        <target>Označí konec lišty akordeonu, která může obsahovat několik obsahových elementů.</target>
+        <target>Nezobrazovat po tomto datu.</target>
       </trans-unit>
       <trans-unit id="tl_content.type_legend">
         <source>Element type</source>

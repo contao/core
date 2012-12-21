@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_news_archive.title.0">
         <source>Title</source>
-        <target>Cím</target>
+        <target>Megnevezés</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.title.1">
         <source>Please enter a news archive title.</source>
-        <target>Adja meg a hírarchívum címét.</target>
+        <target>Adja meg a hírarchívum nevét.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.jumpTo.0">
         <source>Redirect page</source>
@@ -99,27 +99,27 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.makeFeed.0">
         <source>Generate feed</source>
-        <target>Feed készítése</target>
+        <target>Hírfolyam készítése</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.makeFeed.1">
         <source>Generate an RSS or Atom feed from the news archive.</source>
-        <target>RSS vagy Atom feed készítése a hírarchívumból.</target>
+        <target>RSS vagy Atom hírfolyam készítése a hírarchívumból.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.format.0">
         <source>Feed format</source>
-        <target>Feed formátum</target>
+        <target>Hírfolyam formátum</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.format.1">
         <source>Please choose a feed format.</source>
-        <target>Válassza ki a Feed formátumát.</target>
+        <target>Válassza ki a hírfolyam formátumát.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.language.0">
         <source>Feed language</source>
-        <target>Feed nyelve</target>
+        <target>Hírfolyam nyelve</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.language.1">
         <source>Please enter the feed language according to the ISO-639 standard (e.g. &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;).</source>
-        <target>Itt írja ba a feed nyelvét az ISO-639 szabvány szerint (pl.: &lt;em&gt;hu&lt;/em&gt; vagy &lt;em&gt;hu-hu&lt;/em&gt; a magyar nyelvhez )</target>
+        <target>Itt írja ba a hírfolyam nyelvét az ISO-639 szabvány szerint (pl.: &lt;em&gt;hu&lt;/em&gt; vagy &lt;em&gt;hu-hu&lt;/em&gt; a magyar nyelvhez )</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.source.0">
         <source>Export settings</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.source.1">
         <source>Here you can choose what will be exported.</source>
-        <target>Itt lehet kiválasztani, mi kerüljün exportálásra. (mi kerüljön a feedbe)</target>
+        <target>Itt lehet kiválasztani, mi kerüljün exportálásra. (mi kerüljön a hírfolyamba)</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.maxItems.0">
         <source>Maximum number of items</source>
@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.maxItems.1">
         <source>Here you can limit the number of feed items. Set to 0 to export all.</source>
-        <target>Itt tudja korlátozni a feed-be kerülő elemek számát. Állítsa 0-ra ha mindent exportálni akar.</target>
+        <target>Itt tudja korlátozni a hírfolyamba kerülő elemek számát. Állítsa 0-ra ha mindent exportálni akar.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.feedBase.0">
         <source>Base URL</source>
@@ -147,19 +147,19 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.alias.0">
         <source>Feed alias</source>
-        <target>Feed álnév</target>
+        <target>Hírfolyam álnév</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.alias.1">
         <source>Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the root directory of your Contao installation, e.g. as &lt;em&gt;name.xml&lt;/em&gt;.</source>
-        <target>Itt megadhat egy egyedi fájlnevet (kiterjesztés nélkül). Az XML feed fájl automatikusan generálódik a gyökér könyvtárba, ahová a Contaot telepítette, pl.: &lt;em&gt;name.xml&lt;/em&gt;</target>
+        <target>Itt megadhat egy egyedi fájlnevet (kiterjesztés nélkül). Az XML hírfolyam fájl automatikusan generálódik a gyökér könyvtárba, ahová a Contaot telepítette, pl.: &lt;em&gt;name.xml&lt;/em&gt;</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.description.0">
         <source>Feed description</source>
-        <target>Feed leírás</target>
+        <target>Hírfolyam leírás</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.description.1">
         <source>Please enter a short description of the news feed.</source>
-        <target>Írjon egy rövid leírást a hír feed-hez.</target>
+        <target>Írjon egy rövid leírást a hírek hírfolyamhoz.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.tstamp.0">
         <source>Revision date</source>
@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.feed_legend">
         <source>RSS/Atom feed</source>
-        <target>RSS/Atom feed</target>
+        <target>RSS/Atom hírfolyam</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.notify_admin">
         <source>System administrator</source>
@@ -195,7 +195,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.notify_both">
         <source>Author and system administrator</source>
-        <target>A hír szerzője és a Rendszer adminisztrátor</target>
+        <target>A hír szerzője és a rendszer adminisztrátor</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.source_teaser">
         <source>News teasers</source>
@@ -263,9 +263,11 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.feeds.0">
         <source>RSS feeds</source>
+        <target>RSS hírfolyam</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.feeds.1">
         <source>Manage RSS feeds</source>
+        <target>RSS hírfolyam kezelése</target>
       </trans-unit>
     </body>
   </file>
