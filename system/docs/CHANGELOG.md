@@ -5,6 +5,10 @@ Version 3.0.2 (201X-XX-XX)
 --------------------------
 
 ### Fixed
+The gallery and downloads element now support using the user's home directory
+again (see #5113).
+
+### Fixed
 Added an option to load models uncached (see #5102).
 
 ### Fixed
