@@ -170,7 +170,7 @@ abstract class Model extends \System
 	 * 
 	 * @return string The primary key
 	 */
-	public function getPk()
+	public static function getPk()
 	{
 		return static::$strPk;
 	}
@@ -181,7 +181,7 @@ abstract class Model extends \System
 	 * 
 	 * @return string The table name
 	 */
-	public function getTable()
+	public static function getTable()
 	{
 		return static::$strTable;
 	}

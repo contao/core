@@ -5,6 +5,9 @@ Version 3.0.2 (201X-XX-XX)
 --------------------------
 
 ### Fixed
+Made `Model::getPk()` and `Model::getTable()` static (see #5128).
+
+### Fixed
 Do not move resources in the file manager if the targets exist. Otherwise the
 database might get out of sync with the file system (see #5145).
 
