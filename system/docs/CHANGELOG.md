@@ -5,6 +5,10 @@ Version 3.0.2 (201X-XX-XX)
 --------------------------
 
 ### Fixed
+Store the whole database row in `Calendar::addEvent()` so e.g. RSS feeds with
+the event text instead of just the teaser are being rendered (see #5085).
+
+### Fixed
 Purge the internal cache after a module has been (de)activated (see #5016).
 
 ### Fixed
