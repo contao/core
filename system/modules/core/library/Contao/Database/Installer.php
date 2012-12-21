@@ -399,6 +399,12 @@ class Installer extends \Controller
 					{
 						unset($field['default']);
 					}
+					// Date/time constants (see #5089)
+					elseif (in_array(strtolower($field['default']), array('current_date', 'current_time', 'current_timestamp')))
+					{
+						$field['default'] = "default " . $field['default'];
+					}
+					// Everything else
 					else
 					{
 						$field['default'] = "default '" . $field['default'] . "'";

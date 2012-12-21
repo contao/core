@@ -5,6 +5,10 @@ Version 3.0.2 (201X-XX-XX)
 --------------------------
 
 ### Fixed
+Added support for `CURRENT_DATE`, `CURRENT_TIME` and `CURRENT_TIMESTAMP` to the
+database installer (see #5089).
+
+### Fixed
 Store the whole database row in `Calendar::addEvent()` so e.g. RSS feeds with
 the event text instead of just the teaser are being rendered (see #5085).
 
