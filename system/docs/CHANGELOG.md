@@ -5,6 +5,10 @@ Version 3.0.2 (201X-XX-XX)
 --------------------------
 
 ### Fixed
+Convert automatically generated article alias names if the page uses folder URL
+style alias names (see #5168).
+
+### Fixed
 The newsletter system did not yet handle file ID attachments (see #5118).
 
 ### Fixed
