@@ -436,60 +436,69 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 		$this->import('Files');
 
-		// Move the file
+		// Calculate the destination path
 		$destination = str_replace(dirname($this->intId), $strFolder, $this->intId);
-		$this->Files->rename($this->intId, $destination);
 
-		// Find the corresponding DB entries
-		if ($this->blnIsDbAssisted)
+		// Do not move if the target exists and would be overriden (not possible for folders anyway)
+		if (file_exists(TL_ROOT . '/' . $destination))
 		{
-			$objFile = \FilesModel::findByPath($this->intId);
+			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetarget'], basename($this->intId), dirname($destination)));
+		}
+		else
+		{
+			$this->Files->rename($this->intId, $destination);
 
-			// Set the parent ID
-			if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+			// Find the corresponding DB entries
+			if ($this->blnIsDbAssisted)
 			{
-				$objFile->pid = 0;
-			}
-			else
-			{
-				$objFolder = \FilesModel::findByPath($strFolder);
-				$objFile->pid = $objFolder->id;
-			}
+				$objFile = \FilesModel::findByPath($this->intId);
 
-			// Update the database
-			$objFile->path = $destination;
-			$objFile->save();
-
-			// Update all child records
-			if ($objFile->type == 'folder')
-			{
-				$objFiles = \FilesModel::findMultipleByBasepath($this->intId.'/');
-
-				if ($objFiles !== null)
+				// Set the parent ID
+				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
 				{
-					while ($objFiles->next())
+					$objFile->pid = 0;
+				}
+				else
+				{
+					$objFolder = \FilesModel::findByPath($strFolder);
+					$objFile->pid = $objFolder->id;
+				}
+
+				// Update the database
+				$objFile->path = $destination;
+				$objFile->save();
+
+				// Update all child records
+				if ($objFile->type == 'folder')
+				{
+					$objFiles = \FilesModel::findMultipleByBasepath($this->intId.'/');
+
+					if ($objFiles !== null)
 					{
-						$objFiles->path = preg_replace('@^'.$this->intId.'/@', $destination.'/', $objFiles->path);
-						$objFiles->save();
+						while ($objFiles->next())
+						{
+							$objFiles->path = preg_replace('@^'.$this->intId.'/@', $destination.'/', $objFiles->path);
+							$objFiles->save();
+						}
+					}
+				}
+
+				// Update the MD5 hash of the parent folders
+				foreach (array(dirname($this->intId), dirname($destination)) as $strPath)
+				{
+					if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
+					{
+						$objModel = \FilesModel::findByPath($strPath);
+						$objFolder = new \Folder($objModel->path);
+						$objModel->hash = $objFolder->hash;
+						$objModel->save();
 					}
 				}
 			}
 
-			// Update the MD5 hash of the parent folders
-			foreach (array(dirname($this->intId), dirname($destination)) as $strPath)
-			{
-				if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					$objModel = \FilesModel::findByPath($strPath);
-					$objFolder = new \Folder($objModel->path);
-					$objModel->hash = $objFolder->hash;
-					$objModel->save();
-				}
-			}
+			// Add a log entry
+			$this->log('File or folder "'.$this->intId.'" has been moved to "'.$destination.'"', 'DC_Folder cut()', TL_FILES);
 		}
-
-		// Add a log entry
-		$this->log('File or folder "'.$this->intId.'" has been moved to "'.$destination.'"', 'DC_Folder cut()', TL_FILES);
 
 		if (!$blnDoNotRedirect)
 		{

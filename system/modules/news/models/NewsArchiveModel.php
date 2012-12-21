@@ -37,11 +37,12 @@ class NewsArchiveModel extends \Model
 	/**
 	 * Find multiple news archives by their IDs
 	 * 
-	 * @param array $arrIds An array of archive IDs
+	 * @param array $arrIds     An array of archive IDs
+	 * @param array $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no news archives
 	 */
-	public static function findMultipleByIds($arrIds)
+	public static function findMultipleByIds($arrIds, array $arrOptions=array())
 	{
 		if (!is_array($arrIds) || empty($arrIds))
 		{
@@ -49,6 +50,8 @@ class NewsArchiveModel extends \Model
 		}
 
 		$t = static::$strTable;
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, array('order'=>\Database::getInstance()->findInSet("$t.id", $arrIds)));
+		$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, $arrOptions);
 	}
 }

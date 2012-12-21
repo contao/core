@@ -283,6 +283,18 @@ class BackendUser extends \User
 
 
 	/**
+	 * Restore the original numeric file mounts (see #5083)
+	 */
+	public function save()
+	{
+		$filemounts = $this->filemounts;
+		$this->arrData['filemounts'] = $this->arrFilemountIds;
+		parent::save();
+		$this->filemounts = $filemounts;
+	}
+
+
+	/**
 	 * Set all user properties from a database record
 	 */
 	protected function setUserFromDb()
@@ -342,8 +354,7 @@ class BackendUser extends \User
 				{
 					$value = deserialize($objGroup->$field, true);
 
-					// The new page/file picker can return integers instead of arrays,
-					// so use empty() instead of is_array() and deserialize(true) here
+					// The new page/file picker can return integers instead of arrays, so use empty() instead of is_array() and deserialize(true) here
 					if (!empty($value))
 					{
 						$this->$field = array_merge((is_array($this->$field) ? $this->$field : (($this->$field != '') ? array($this->$field) : array())), $value);

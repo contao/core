@@ -333,11 +333,11 @@ class PageRegular extends \Frontend
 
 				if ($objLayout->cols == '2cll')
 				{
-					$strFramework .= '#main .inside{margin-left:30px;margin-right:10px}';
+					$strFramework .= '#main .inside{margin-left:20px;margin-right:0}';
 				}
 				if ($objLayout->cols == '3cl')
 				{
-					$strFramework .= '#main .inside{margin-left:30px;margin-right:20px}';
+					$strFramework .= '#main .inside{margin-left:20px;margin-right:10px}';
 				}
 				if ($objLayout->cols == '2clr')
 				{
@@ -521,6 +521,13 @@ class PageRegular extends \Frontend
 		// External style sheets
 		if (is_array($arrExternal) && !empty($arrExternal))
 		{
+			// Consider the sorting order (see #5038)
+			if ($objLayout->orderExt != '')
+			{
+				$arrOrdered = array_map('intval', explode(',', $objLayout->orderExt));
+				$arrExternal = array_merge($arrOrdered, array_diff($arrExternal, $arrOrdered));
+			}
+
 			// Get the file entries from the database
 			$objFiles = \FilesModel::findMultipleByIds($arrExternal);
 

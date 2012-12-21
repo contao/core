@@ -698,9 +698,9 @@ abstract class System
 	 */
 	public static function getReadableSize($intSize, $intDecimals=1)
 	{
-		for ($i=0; $intSize>=1000; $i++)
+		for ($i=0; $intSize>=1024; $i++)
 		{
-			$intSize /= 1000;
+			$intSize /= 1024;
 		}
 
 		return static::getFormattedNumber($intSize, $intDecimals) . ' ' . $GLOBALS['TL_LANG']['UNITS'][$i];

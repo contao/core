@@ -164,7 +164,8 @@ var MooToolsCompat = (function(window){
             for (var i = 0; i < this.length; i++){
                 if (this[i] === null) continue;
                 if (eventName == 'popstate' || eventName == 'hashchange' || !this[i].addEvent){
-                    this[i].addEventListener(eventName, method);
+                    if (this[i].addEventListener)
+                        this[i].addEventListener(eventName, method);
                 } else {
                     this[i].addEvent(eventName, function(e) {
                         if (e){

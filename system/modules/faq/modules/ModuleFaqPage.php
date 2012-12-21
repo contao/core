@@ -130,7 +130,7 @@ class ModuleFaqPage extends \Module
 
 			// Order by PID
 			$arrFaq[$objFaq->pid]['items'][] = $objTemp;
-			$arrFaq[$objFaq->pid]['headline'] = $objFaq->category;
+			$arrFaq[$objFaq->pid]['headline'] = $objFaq->getRelated('pid')->headline;
 		}
 
 		$arrFaq = array_values(array_filter($arrFaq));

@@ -37,12 +37,13 @@ class NewsletterModel extends \Model
 	/**
 	 * Find sent newsletters by their parent IDs and their ID or alias
 	 * 
-	 * @param integer $varId   The numeric ID or alias name
-	 * @param array   $arrPids An array of newsletter channel IDs
+	 * @param integer $varId      The numeric ID or alias name
+	 * @param array   $arrPids    An array of newsletter channel IDs
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no sent newsletters
 	 */
-	public static function findSentByParentAndIdOrAlias($varId, $arrPids)
+	public static function findSentByParentAndIdOrAlias($varId, $arrPids, array $arrOptions=array())
 	{
 		if (!is_array($arrPids) || empty($arrPids))
 		{
@@ -57,18 +58,19 @@ class NewsletterModel extends \Model
 			$arrColumns[] = "$t.sent=1";
 		}
 
-		return static::findBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId));
+		return static::findBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
 	}
 
 
 	/**
 	 * Find sent newsletters by their parent ID
 	 * 
-	 * @param integer $intPid The newsletter channel ID
+	 * @param integer $intPid     The newsletter channel ID
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no sent newsletters
 	 */
-	public static function findSentByPid($intPid)
+	public static function findSentByPid($intPid, array $arrOptions=array())
 	{
 		$t = static::$strTable;
 		$arrColumns = array("$t.pid=?");
@@ -78,18 +80,21 @@ class NewsletterModel extends \Model
 			$arrColumns[] = "$t.sent=1";
 		}
 
-		return static::findBy($arrColumns, $intPid, array('order'=>"$t.date DESC"));
+		$arrOptions['order'] = "$t.date DESC";
+
+		return static::findBy($arrColumns, $intPid, $arrOptions);
 	}
 
 
 	/**
 	 * Find sent newsletters by multiple parent IDs
 	 * 
-	 * @param array $arrPids An array of newsletter channel IDs
+	 * @param array $arrPids    An array of newsletter channel IDs
+	 * @param array $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no sent newsletters
 	 */
-	public static function findSentByPids($arrPids)
+	public static function findSentByPids($arrPids, array $arrOptions=array())
 	{
 		if (!is_array($arrPids) || empty($arrPids))
 		{
@@ -104,6 +109,8 @@ class NewsletterModel extends \Model
 			$arrColumns[] = "$t.sent=1";
 		}
 
-		return static::findBy($arrColumns, null, array('order'=>"$t.date DESC"));
+		$arrOptions['order'] = "$t.date DESC";
+
+		return static::findBy($arrColumns, null, $arrOptions);
 	}
 }

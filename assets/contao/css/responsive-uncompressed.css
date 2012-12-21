@@ -45,6 +45,14 @@
 }
 
 /**
+ * Automatically clear the floats in the main column, so you do not have to add
+ * a clearing div to each article
+ */
+#main .inside {
+	overflow:hidden;
+}
+
+/**
  * Grid column widths
  */
 .grid1  { width:60px;  }

@@ -37,15 +37,16 @@ class CommentsModel extends \Model
 	/**
 	 * Find published comments by their source table and parent ID
 	 * 
-	 * @param string  $strSource The source element
-	 * @param integer $intParent The parent ID
-	 * @param boolean $blnDesc   If true, comments will be sorted descending
-	 * @param integer $intLimit  An optional limit
-	 * @param integer $intOffset An optional offset
+	 * @param string  $strSource  The source element
+	 * @param integer $intParent  The parent ID
+	 * @param boolean $blnDesc    If true, comments will be sorted descending
+	 * @param integer $intLimit   An optional limit
+	 * @param integer $intOffset  An optional offset
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no comments
 	 */
-	public static function findPublishedBySourceAndParent($strSource, $intParent, $blnDesc=false, $intLimit=0, $intOffset=0)
+	public static function findPublishedBySourceAndParent($strSource, $intParent, $blnDesc=false, $intLimit=0, $intOffset=0, array $arrOptions=array())
 	{
 		$t = static::$strTable;
 		$arrColumns = array("$t.source=? AND $t.parent=?");
@@ -55,12 +56,9 @@ class CommentsModel extends \Model
 			$arrColumns[] = "$t.published=1";
 		}
 
-		$arrOptions = array
-		(
-			'order'  => ($blnDesc ? "$t.date DESC" : "$t.date"),
-			'limit'  => $intLimit,
-			'offset' => $intOffset
-		);
+		$arrOptions['order']  = ($blnDesc ? "$t.date DESC" : "$t.date");
+		$arrOptions['limit']  = $intLimit;
+		$arrOptions['offset'] = $intOffset;
 
 		return static::findBy($arrColumns, array($strSource, $intParent), $arrOptions);
 	}

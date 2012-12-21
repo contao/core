@@ -37,25 +37,27 @@ class CalendarFeedModel extends \Model
 	/**
 	 * Find all feeds which include a certain calendar
 	 * 
-	 * @param integer $intId The calendar ID
+	 * @param integer $intId      The calendar ID
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model|null The model or null if the calendar is not part of a feed
 	 */
-	public static function findByCalendar($intId)
+	public static function findByCalendar($intId, array $arrOptions=array())
 	{
 		$t = static::$strTable;
-		return static::findOneBy(array("$t.calendars LIKE '%\"" . intval($intId) . "\"%'"), null);
+		return static::findOneBy(array("$t.calendars LIKE '%\"" . intval($intId) . "\"%'"), null, $arrOptions);
 	}
 
 
 	/**
 	 * Find calendar feeds by their IDs
 	 * 
-	 * @param array $arrIds An array of calendar feed IDs
+	 * @param array $arrIds     An array of calendar feed IDs
+	 * @param array $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no feeds
 	 */
-	public static function findByIds($arrIds)
+	public static function findByIds($arrIds, array $arrOptions=array())
 	{
 		if (!is_array($arrIds) || empty($arrIds))
 		{
@@ -63,6 +65,6 @@ class CalendarFeedModel extends \Model
 		}
 
 		$t = static::$strTable;
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null);
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, $arrOptions);
 	}
 }

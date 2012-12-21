@@ -51,24 +51,27 @@ abstract class ModuleNews extends \Module
 		$objArchive = \NewsArchiveModel::findMultipleByIds($arrArchives);
 		$arrArchives = array();
 
-		while ($objArchive->next())
+		if ($objArchive !== null)
 		{
-			if ($objArchive->protected)
+			while ($objArchive->next())
 			{
-				if (!FE_USER_LOGGED_IN)
+				if ($objArchive->protected)
 				{
-					continue;
+					if (!FE_USER_LOGGED_IN)
+					{
+						continue;
+					}
+
+					$groups = deserialize($objArchive->groups);
+
+					if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
+					{
+						continue;
+					}
 				}
 
-				$groups = deserialize($objArchive->groups);
-
-				if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
-				{
-					continue;
-				}
+				$arrArchives[] = $objArchive->id;
 			}
-
-			$arrArchives[] = $objArchive->id;
 		}
 
 		return $arrArchives;

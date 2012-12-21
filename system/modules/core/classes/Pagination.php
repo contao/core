@@ -138,9 +138,9 @@ class Pagination extends \Frontend
 		parent::__construct();
 
 		$this->intPage = 1;
-		$this->intRows = (int)$intRows;
-		$this->intRowsPerPage = (int)$intPerPage;
-		$this->intNumberOfLinks = (int)$intNumberOfLinks;
+		$this->intRows = (int) $intRows;
+		$this->intRowsPerPage = (int) $intPerPage;
+		$this->intNumberOfLinks = (int) $intNumberOfLinks;
 
 		// Initialize default labels
 		$this->lblFirst = $GLOBALS['TL_LANG']['MSC']['first'];

@@ -199,7 +199,7 @@ abstract class Result
 	 */
 	public function fetchRow()
 	{
-		if (!$this->arrCache[++$this->intIndex])
+		if (!isset($this->arrCache[++$this->intIndex]))
 		{
 			if (($arrRow = $this->fetch_row()) == false)
 			{
@@ -221,7 +221,7 @@ abstract class Result
 	 */
 	public function fetchAssoc()
 	{
-		if (!$this->arrCache[++$this->intIndex])
+		if (!isset($this->arrCache[++$this->intIndex]))
 		{
 			if (($arrRow = $this->fetch_assoc()) == false)
 			{
@@ -351,7 +351,7 @@ abstract class Result
 			return false;
 		}
 
-		if (!$this->arrCache[++$this->intIndex])
+		if (!isset($this->arrCache[++$this->intIndex]))
 		{
 			--$this->intIndex; // see #3762
 

@@ -52,7 +52,7 @@ class ContentGallery extends \ContentElement
 		{
 			$this->import('FrontendUser', 'User');
 
-			if ($this->User->assignDir && is_dir(TL_ROOT . '/' . $this->User->homeDir))
+			if ($this->User->assignDir && $this->User->homeDir)
 			{
 				$this->multiSRC = array($this->User->homeDir);
 			}

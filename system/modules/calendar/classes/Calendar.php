@@ -397,15 +397,12 @@ class Calendar extends \Frontend
 			$objEvent->teaser = \String::toHtml5($objEvent->teaser);
 		}
 
-		$arrEvent = array
-		(
-			'title' => $title,
-			'description' => $objEvent->details,
-			'teaser' => $objEvent->teaser,
-			'link' => $link,
-			'published' => $objEvent->tstamp,
-			'authorName' => $objEvent->authorName
-		);
+		// Store the whole row (see #5085)
+		$arrEvent = $objEvent->row();
+
+		// Override link and title
+		$arrEvent['link'] = $link;
+		$arrEvent['title'] = $title;
 
 		// Add the article image as enclosure
 		if ($objEvent->addImage)

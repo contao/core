@@ -12,7 +12,9 @@ $GLOBALS['TL_CSS'][] = 'assets/jquery/colorbox/'. COLORBOX .'/css/colorbox.min.c
   $(document).ready(function() {
     $('a[rel^=lightbox]').colorbox({
       // Put custom options here
-      loop:false
+      loop:false,
+      maxWidth:'95%',
+      maxHeight:'95%'
     });
   });
 })(jQuery);

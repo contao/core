@@ -37,14 +37,15 @@ class SessionModel extends \Model
 	/**
 	 * Find a session by its hash and name
 	 * 
-	 * @param string $strHash The session hash
-	 * @param string $strName The session name
+	 * @param string $strHash    The session hash
+	 * @param string $strName    The session name
+	 * @param array  $arrOptions An optional options array
 	 * 
 	 * @return \Model|null The model or null if there is no session
 	 */
-	public static function findByHashAndName($strHash, $strName)
+	public static function findByHashAndName($strHash, $strName, array $arrOptions=array())
 	{
 		$t = static::$strTable;
-		return static::findOneBy(array("$t.hash=?", "$t.name=?"), array($strHash, $strName));
+		return static::findOneBy(array("$t.hash=?", "$t.name=?"), array($strHash, $strName), $arrOptions);
 	}
 }

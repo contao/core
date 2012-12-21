@@ -595,6 +595,10 @@ class tl_settings extends Backend
 			}
 		}
 
+		// Purge the internal cache (see #5016)
+		$this->import('Automator');
+		$this->Automator->purgeInternalCache();
+
 		return $varValue;
 	}
 

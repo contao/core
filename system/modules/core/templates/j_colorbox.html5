@@ -13,7 +13,9 @@ $GLOBALS['TL_CSS'][] = 'assets/jquery/colorbox/'. COLORBOX .'/css/colorbox.min.c
       $(this).colorbox({
         // Put custom options here
         loop:false,
-        rel:$(this).attr('data-lightbox')
+        rel:$(this).attr('data-lightbox'),
+        maxWidth:'95%',
+        maxHeight:'95%'
       });
     });
   });

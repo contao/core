@@ -37,12 +37,13 @@ class ArticleModel extends \Model
 	/**
 	 * Find an article by its ID or alias and its page
 	 * 
-	 * @param mixed   $varId  The numeric ID or alias name
-	 * @param integer $intPid The page ID
+	 * @param mixed   $varId      The numeric ID or alias name
+	 * @param integer $intPid     The page ID
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model|null The model or null if there is no article
 	 */
-	public static function findByIdOrAliasAndPid($varId, $intPid)
+	public static function findByIdOrAliasAndPid($varId, $intPid, array $arrOptions=array())
 	{
 		$t = static::$strTable;
 		$arrColumns = array("($t.id=? OR $t.alias=?)");
@@ -54,18 +55,19 @@ class ArticleModel extends \Model
 			$arrValues[] = $intPid;
 		}
 
-		return static::findOneBy($arrColumns, $arrValues);
+		return static::findOneBy($arrColumns, $arrValues, $arrOptions);
 	}
 
 
 	/**
 	 * Find a published article by its ID
 	 * 
-	 * @param integer $intId The article ID
+	 * @param integer $intId      The article ID
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model|null The model or null if there is no published article
 	 */
-	public static function findPublishedById($intId)
+	public static function findPublishedById($intId, array $arrOptions=array())
 	{
 		$t = static::$strTable;
 		$arrColumns = array("$t.id=?");
@@ -76,19 +78,20 @@ class ArticleModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, $intId);
+		return static::findOneBy($arrColumns, $intId, $arrOptions);
 	}
 
 
 	/**
 	 * Find all published articles by their parent ID and column
 	 * 
-	 * @param integer $intPid    The page ID
-	 * @param string  $strColumn The column name
+	 * @param integer $intPid     The page ID
+	 * @param string  $strColumn  The column name
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no articles in the given column
 	 */
-	public static function findPublishedByPidAndColumn($intPid, $strColumn)
+	public static function findPublishedByPidAndColumn($intPid, $strColumn, array $arrOptions=array())
 	{
 		$t = static::$strTable;
 		$arrColumns = array("$t.pid=? AND $t.inColumn=?");
@@ -100,19 +103,22 @@ class ArticleModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findBy($arrColumns, $arrValues, array('order'=>"$t.sorting"));
+		$arrOptions['order'] = "$t.sorting";
+
+		return static::findBy($arrColumns, $arrValues, $arrOptions);
 	}
 
 
 	/**
 	 * Find all published articles with teaser by their parent ID and column
 	 * 
-	 * @param integer $intPid    The page ID
-	 * @param string  $strColumn The column name
+	 * @param integer $intPid     The page ID
+	 * @param string  $strColumn  The column name
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no articles in the given column
 	 */
-	public static function findPublishedWithTeaserByPidAndColumn($intPid, $strColumn)
+	public static function findPublishedWithTeaserByPidAndColumn($intPid, $strColumn, array $arrOptions=array())
 	{
 		$t = static::$strTable;
 		$arrColumns = array("$t.pid=? AND $t.inColumn=? AND $t.showTeaser=1");
@@ -124,6 +130,8 @@ class ArticleModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findBy($arrColumns, $arrValues, array('order'=>"$t.sorting"));
+		$arrOptions['order'] = "$t.sorting";
+
+		return static::findBy($arrColumns, $arrValues, $arrOptions);
 	}
 }
