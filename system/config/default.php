@@ -128,6 +128,7 @@ $GLOBALS['TL_CONFIG']['requestTokenWhitelist'] = array();
  *   dbHost     = database host (might be "localhost" or "127.0.0.1")
  *   dbDatabase = name of the database
  *   dbPort     = database port number (e.g. 3306 for MySQL)
+ *   dbSocket   = database socket path (e.g. /tmp/mysql.sock for MySQL)
  *   dbPconnect = set to true if you want to use persistent connections
  *
  * Make sure that the database character set 'dbCharset' matches the character
@@ -140,6 +141,7 @@ $GLOBALS['TL_CONFIG']['dbPass']      = '';
 $GLOBALS['TL_CONFIG']['dbHost']      = 'localhost';
 $GLOBALS['TL_CONFIG']['dbDatabase']  = '';
 $GLOBALS['TL_CONFIG']['dbPort']      = 3306;
+$GLOBALS['TL_CONFIG']['dbSocket']    = null;
 $GLOBALS['TL_CONFIG']['dbPconnect']  = false;
 $GLOBALS['TL_CONFIG']['dbCharset']   = 'UTF8';
 $GLOBALS['TL_CONFIG']['dbCollation'] = 'utf8_general_ci';

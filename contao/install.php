@@ -463,6 +463,7 @@ class InstallTool extends Backend
 		$this->Template->user = $GLOBALS['TL_CONFIG']['dbUser'];
 		$this->Template->pass = ($GLOBALS['TL_CONFIG']['dbPass'] != '') ? '*****' : '';
 		$this->Template->port = $GLOBALS['TL_CONFIG']['dbPort'];
+        $this->Template->socket = $GLOBALS['TL_CONFIG']['dbSocket'];
 		$this->Template->pconnect = $GLOBALS['TL_CONFIG']['dbPconnect'];
 		$this->Template->dbcharset = $GLOBALS['TL_CONFIG']['dbCharset'];
 		$this->Template->database = $GLOBALS['TL_CONFIG']['dbDatabase'];
