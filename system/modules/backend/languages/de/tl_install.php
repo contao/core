@@ -69,6 +69,7 @@ $GLOBALS['TL_LANG']['tl_install']['dbPersistent']   = 'Dauerhafte Verbindung';
 $GLOBALS['TL_LANG']['tl_install']['dbCharset']      = 'Zeichensatz';
 $GLOBALS['TL_LANG']['tl_install']['dbCollation']    = 'Kollation';
 $GLOBALS['TL_LANG']['tl_install']['dbPort']         = 'Portnummer';
+$GLOBALS['TL_LANG']['tl_install']['dbSocket']       = 'Socket';
 $GLOBALS['TL_LANG']['tl_install']['dbSave']         = 'Einstellungen speichern';
 $GLOBALS['TL_LANG']['tl_install']['collationInfo']  = 'Das Ändern der Kollation betrifft alle Tabellen mit <em>tl_</em>-Prefix.';
 $GLOBALS['TL_LANG']['tl_install']['updateError']    = 'Die Datenbank ist nicht aktuell!';
