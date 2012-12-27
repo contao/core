@@ -317,34 +317,6 @@ class PageRegular extends \Frontend
 				}
 			}
 
-			// Special adjustments if the layout builder is combined with the responsive grid (see #4824)
-			if (in_array('responsive.css', $arrFramework))
-			{
-				if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
-				{
-					$arrSize = deserialize($objLayout->widthLeft);
-					$strFramework .= sprintf('#left{right:%s}', ($arrSize['value'] - 10) . $arrSize['unit']);
-				}
-				if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
-				{
-					$arrSize = deserialize($objLayout->widthRight);
-					$strFramework .= sprintf('#container{padding-right:%s}', ($arrSize['value'] + 10) . $arrSize['unit']);
-				}
-
-				if ($objLayout->cols == '2cll')
-				{
-					$strFramework .= '#main .inside{margin-left:20px;margin-right:0}';
-				}
-				if ($objLayout->cols == '3cl')
-				{
-					$strFramework .= '#main .inside{margin-left:20px;margin-right:10px}';
-				}
-				if ($objLayout->cols == '2clr')
-				{
-					$strFramework .= '#main .inside{margin-left:10px;margin-right:20px}';
-				}
-			}
-
 			// Add the layout specific CSS
 			if ($strFramework != '')
 			{
