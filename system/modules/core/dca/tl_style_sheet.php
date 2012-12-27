@@ -305,19 +305,25 @@ class tl_style_sheet extends Backend
 	 */
 	public function listStyleSheet($row)
 	{
+		$cc = '';
 		$media = deserialize($row['media']);
+
+		if ($row['cc'] != '')
+		{
+			$cc = ' &lt;!--['. $row['cc'] .']&gt;';
+		}
 
 		if ($row['mediaQuery'] != '')
 		{
-			return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">['. $row['mediaQuery'] .']</span>' . "</div>\n";
+			return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">@media '. $row['mediaQuery'] . $cc .'</span>' . "</div>\n";
 		}
 		elseif (is_array($media) && !empty($media))
 		{
-			return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">['. implode(', ', $media) .']</span>' . "</div>\n";
+			return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">@media '. implode(', ', $media) . $cc .'</span>' . "</div>\n";
 		}
 		else
 		{
-			return '<div style="float:left">'. $row['name'] ."</div>\n";
+			return '<div style="float:left">'. $row['name'] . $cc ."</div>\n";
 		}
 	}
 

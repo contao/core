@@ -223,7 +223,7 @@ class StyleSheets extends \Backend
 			$search = array('@^\s*/\*+@', '@\*+/\s*$@');
 			$comment = preg_replace($search, '', $row['comment']);
 			$comment = wordwrap(trim($comment), 72);
-			$return .= "\n/* " . $comment . " */\n";
+			$return .= "\n" . '<span class="comment">' . $comment . '</span>' . "\n";
 		}
 
 		// Selector
