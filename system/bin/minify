@@ -47,18 +47,27 @@ usage()
 ##
 contao()
 {
+	# Single file only
+	if [ "$1" != "" ]; then
+		jsgrep="$1"
+		cssgrep="$1"
+	else
+		jsgrep=""
+		cssgrep=""
+	fi
+
 	version=$folder/assets/contao
 	copyright="/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */"
 
 	# CSS
-	for file in `ls $version/css | grep "\-uncompressed"`; do
+	for file in `ls $version/css | grep "$cssgrep\-uncompressed"`; do
 		echo "$copyright" > $version/css/${file/-uncompressed/}
 		$css $version/css/$file >> $version/css/${file/-uncompressed/}
 		echo "  Created $version/css/${file/-uncompressed/}"
 	done
 
 	# JavaScript
-	for file in `ls $version/js | grep "\-uncompressed"`; do
+	for file in `ls $version/js | grep "$jsgrep\-uncompressed"`; do
 		echo "$copyright" > $version/js/${file/-uncompressed/}
 		$js $version/js/$file >> $version/js/${file/-uncompressed/}
 		echo "  Created $version/js/${file/-uncompressed/}"
