@@ -35,10 +35,10 @@ input[type="number"],input[type="search"],input[type="tel"],input[type="time"],i
 	-moz-box-shadow:inset 0 1px 1px #eee;
 	-webkit-box-shadow:inset 0 1px 1px #eee;
 	box-shadow:inset 0 1px 1px #eee;
-	-moz-transition:background .2s ease-in-out;
-	-webkit-transition:background .2s ease-in-out;
-	-o-transition:background .2s ease-in-out;
-	transition:background .2s ease-in-out;
+	-moz-transition:background .15s linear;
+	-webkit-transition:background .15s linear;
+	-o-transition:background .15s linear;
+	transition:background .15s linear;
 }
 input[type="text"]:focus,input[type="password"]:focus,input[type="date"]:focus,input[type="datetime"]:focus,input[type="email"]:focus,
 input[type="number"]:focus,input[type="search"]:focus,input[type="tel"]:focus,input[type="time"]:focus,input[type="url"]:focus,textarea:focus {
@@ -90,34 +90,39 @@ input[type="submit"],.button {
 	text-align:center;
 	vertical-align:middle;
 	line-height:16px;
+	font-size:11px;
+	color:#000;
+	cursor:pointer;
 	border:1px solid #ccc;
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
 	border-radius:3px;
-	background:#f3f3f3;
-	background-image:-moz-linear-gradient(top, #fff, #e6e6e6);
-	background-image:-webkit-linear-gradient(top, #fff, #e6e6e6);
-	background-image:-ms-linear-gradient(top, #fff, #e6e6e6);
-	background-image:-o-linear-gradient(top, #fff, #e6e6e6);
-	background-image:linear-gradient(to bottom, #fff, #e6e6e6);
-	font-size:11px;
-	color:#000;
-	cursor:pointer;
+	background-color:#ececec;
+	background-image:-moz-linear-gradient(top, #fff, #ececec);
+	background-image:-webkit-linear-gradient(top, #fff, #ececec);
+	background-image:-ms-linear-gradient(top, #fff, #ececec);
+	background-image:-o-linear-gradient(top, #fff, #ececec);
+	background-image:linear-gradient(to bottom, #fff, #ececec);
+	background-repeat:repeat-x;
+	-moz-transition:background .15s linear;
+	-webkit-transition:background .15s linear;
+	-o-transition:background .15s linear;
+	transition:background .15s linear;
 }
 input[type="submit"]:hover,.button:hover {
 	text-decoration:none;
-	background-image:none !important;
+	background-position:0 -15px !important;
 }
 input[type="submit"]:active,.button:active {
 	background-color:#e6e6e6;
-	background-image:none !important;
+	background-position:0 -30px !important;
 }
 
 /**
  * Blue buttons
  */
 input[type="submit"].blue,.button.blue {
-	background:#49afcd;
+	background-color:#2f96b4;
 	background-image:-moz-linear-gradient(top, #5bc0de, #2f96b4);
 	background-image:-webkit-linear-gradient(top, #5bc0de, #2f96b4);
 	background-image:-ms-linear-gradient(top, #5bc0de, #2f96b4);
@@ -134,7 +139,7 @@ input[type="submit"].blue:active,.button.blue:active {
  * Green buttons
  */
 input[type="submit"].green,.button.green {
-	background:#5bb75b;
+	background-color:#51a351;
 	background-image:-moz-linear-gradient(top, #62c462, #51a351);
 	background-image:-webkit-linear-gradient(top, #62c462, #51a351);
 	background-image:-ms-linear-gradient(top, #62c462, #51a351);
@@ -151,7 +156,7 @@ input[type="submit"].green:active,.button.green:active {
  * Orange buttons
  */
 input[type="submit"].orange,.button.orange {
-	background:#faa732;
+	background-color:#f89406;
 	background-image:-moz-linear-gradient(top, #fbb450, #f89406);
 	background-image:-webkit-linear-gradient(top, #fbb450, #f89406);
 	background-image:-ms-linear-gradient(top, #fbb450, #f89406);
@@ -168,7 +173,7 @@ input[type="submit"].orange:active,.button.orange:active {
  * Red buttons
  */
 input[type="submit"].red,.button.red {
-	background:#da4f49;
+	background-color:#bd362f;
 	background-image:-moz-linear-gradient(top, #ee5f5b, #bd362f);
 	background-image:-webkit-linear-gradient(top, #ee5f5b, #bd362f);
 	background-image:-ms-linear-gradient(top, #ee5f5b, #bd362f);
