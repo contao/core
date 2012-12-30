@@ -968,10 +968,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				// Consider the dynamic parent table (see #4867)
 				if ($GLOBALS['TL_DCA'][$v]['config']['dynamicPtable'])
 				{
-					$cond = ($v == 'tl_content') ? "(ptable=? OR ptable='')" : "ptable=?"; // backwards compatibility
+					$ptable = $GLOBALS['TL_DCA'][$v]['config']['ptable'];
+					$cond = ($ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?"; // backwards compatibility
 
 					$objCTable = $this->Database->prepare("SELECT * FROM $v WHERE pid=? AND $cond" . ($this->Database->fieldExists('sorting', $v) ? " ORDER BY sorting" : ""))
-												->execute($id, $GLOBALS['TL_DCA'][$v]['config']['ptable']);
+												->execute($id, $ptable);
 				}
 				else
 				{
@@ -1467,10 +1468,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			// Consider the dynamic parent table (see #4867)
 			if ($GLOBALS['TL_DCA'][$v]['config']['dynamicPtable'])
 			{
-				$cond = ($v == 'tl_content') ? "(ptable=? OR ptable='')" : "ptable=?"; // backwards compatibility
+				$ptable = $GLOBALS['TL_DCA'][$v]['config']['ptable'];
+				$cond = ($ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?"; // backwards compatibility
 
 				$objDelete = $this->Database->prepare("SELECT id FROM $v WHERE pid=? AND $cond")
-											->execute($id, $GLOBALS['TL_DCA'][$v]['config']['ptable']);
+											->execute($id, $ptable);
 			}
 			else
 			{
