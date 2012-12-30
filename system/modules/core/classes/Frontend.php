@@ -395,7 +395,7 @@ abstract class Frontend extends \Controller
 		foreach ($arrGet as $k=>$v)
 		{
 			// Omit the key if it is an auto_item key (see #5037)
-			if (!$GLOBALS['TL_CONFIG']['disableAlias'] && $GLOBALS['TL_CONFIG']['useAutoItem'] && in_array($k, $GLOBALS['TL_AUTO_ITEM']))
+			if (!$GLOBALS['TL_CONFIG']['disableAlias'] && $GLOBALS['TL_CONFIG']['useAutoItem'] && ($k == 'auto_item' || in_array($k, $GLOBALS['TL_AUTO_ITEM'])))
 			{
 				$strParams .= $strConnector . urlencode($v);
 			}
