@@ -77,6 +77,12 @@ class QueryBuilder
 			$strQuery .= " WHERE " . (is_array($arrOptions['column']) ? implode(" AND ", $arrOptions['column']) : $arrOptions['table'] . '.' . $arrOptions['column'] . "=?");
 		}
 
+		// Group by
+		if ($arrOptions['group'] !== null)
+		{
+			$strQuery .= " GROUP BY " . $arrOptions['group'];
+		}
+
 		// Order by
 		if ($arrOptions['order'] !== null)
 		{
