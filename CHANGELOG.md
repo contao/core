@@ -1,8 +1,11 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.11.8 (20XX-XX-XX)
+Version 2.11.8 (2013-XX-XX)
 ---------------------------
+
+### Reverted
+Handle dependencies when updating extensions (see #3804).
 
 ### Fixed
 Fixed the unprefixed CSS gradient output (see #4569). 

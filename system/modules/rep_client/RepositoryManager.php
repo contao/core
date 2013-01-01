@@ -384,78 +384,26 @@ class RepositoryManager extends RepositoryBackendModule
 					'<div class="subtitle">'.
 						sprintf($label, $ext->extension, Repository::formatVersion($ext->upd_version), $ext->upd_build).
 					"</div>\n";
-				$act = '';
-				$actions = array();
-				$this->addActions($ext->extension, $ext->upd_version, $actions, $act);
-				if ($act=='ok') {
-					$rep->log .= '<div class="title">'.$text['installlogtitle'].'</div>'."\n";
-					$lickey = $ext->lickey;
-					$checkdb = false;
-					foreach ($actions as $act) {
-						$updinst = $error = false;
-						$record = '';
-						switch ($act->action) {
-							case 'validate':
-								$rep->log .=
-									'<div class="subtitle">'.
-										sprintf($text['validatingext'], $act->extension, Repository::formatVersion($act->version), $act->build).
-									"</div>\n";
-								$error = $this->updateExtension($act->extension, $act->version, $lickey);
-								$checkdb = $updinst = true;
-								break;
-							case 'install':
-								$rep->log .=
-									'<div class="subtitle">'.
-										sprintf($text['installingext'], $act->extension, Repository::formatVersion($act->version), $act->build).
-									"</div>\n";
-								$st = $act->version % 10;
-								$params = array(
-									'tstamp'	=> time(),
-									'extension'	=> $act->extension,
-									'version'	=> $act->version,
-									'build'		=> $act->build,
-									'alpha'		=> $st <= 2 ? '1' : 0,
-									'beta'		=> $st <= 5 ? '1' : 0,
-									'rc'		=> $st <= 8 ? '1' : 0,
-									'stable'	=> '1',
-									'error'		=> '1'
-								);
-								$q = $db->prepare("insert into `tl_repository_installs` %s")->set($params)->executeUncached();
-								$error = $this->installExtension($act->extension, $act->version, $lickey);
-								$checkdb = $updinst = true;
-								$record = 'install';
-								break;
-							case 'update':
-								$rep->log .=
-									'<div class="subtitle">'.
-										sprintf($text['updatingext'], $act->extension, Repository::formatVersion($act->version), $act->build).
-									"</div>\n";
-								$error = $this->updateExtension($act->extension, $act->version, $lickey);
-								$checkdb = $updinst = true;
-								$record = 'update';
-								break;
-							default:;
-						} // if
-						if ($updinst) {
-							$params = array(
-								'tstamp'	=> time(),
-								'version'	=> $act->version,
-								'build'		=> $act->build,
-								'error'		=> $error ? '1' : ''
-							);
-							if ($lickey != '') $params['lickey'] = $lickey;
-							$db->prepare("update `tl_repository_installs` %s where `extension`=?")->set($params)->executeUncached($act->extension);
-						} // if
-						if ($record != '')
-							$this->recordAction(array(
-								'name'		=> $act->extension,
-								'version'	=> $act->version,
-								'action'	=> $record
-							));
-						$lickey = '';
-						if ($error) break;
-					} // foreach
-				} // if
+				$error = $this->updateExtension($ext->extension, $ext->upd_version, $ext->lickey);
+
+				// update db
+				$params = array(
+					'tstamp'	=> time(),
+					'version'	=> $ext->upd_version,
+					'build'		=> $ext->upd_build,
+					'error'		=> $error ? '1' : ''
+				);
+				$db->prepare("update `tl_repository_installs` %s where `extension`=?")
+					->set($params)
+					->executeUncached($ext->extension);
+
+				// update server stats
+				if (intval($ext->version / 10000) < intval($ext->upd_version / 10000))
+					$this->recordAction(array(
+						'name'		=> $ext->extension,
+						'version'	=> $ext->upd_version,
+						'action'	=> 'update'
+					));
 			} // if
 		} // foreach
 	} // upgrade
