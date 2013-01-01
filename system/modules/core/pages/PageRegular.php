@@ -390,6 +390,19 @@ class PageRegular extends \Frontend
 			}
 		}
 
+		// Load MooTools core for the debug bar and the command scheduler (see #5195)
+		if (!$objLayout->addJQuery && !$objLayout->addMooTools)
+		{
+			if ($GLOBALS['TL_CONFIG']['debugMode'])
+			{
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js|static';
+			}
+			elseif (!$GLOBALS['TL_CONFIG']['disableCron'])
+			{
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-request.js|static';
+			}
+		}
+
 		// Initialize the sections
 		$this->Template->header = '';
 		$this->Template->left = '';

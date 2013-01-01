@@ -5,6 +5,10 @@ Version 3.0.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Make sure there is a minimal MooTools core version for the command scheduler
+(see #5195).
+
+### Fixed
 Made `Model::getPk()` and `Model::getTable()` static (see #5128).
 
 ### Fixed
