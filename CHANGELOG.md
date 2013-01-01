@@ -5,6 +5,9 @@ Version 2.11.8 (2013-XX-XX)
 ---------------------------
 
 ### Fixed
+Fixed the MySQLi field count (see #5182).
+
+### Fixed
 The Date class should return `00:00` for `Date(0)->time` (see #4249).
 
 ### Reverted
