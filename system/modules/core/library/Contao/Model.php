@@ -511,7 +511,15 @@ abstract class Model extends \System
 		}
 
 		$objResult = static::postFind($objResult);
-		return ($arrOptions['return'] == 'Model') ? new static($objResult) : new \Model\Collection($objResult, static::$strTable);
+
+		if ($arrOptions['return'] == 'Model')
+		{
+			return new static($objResult);
+		}
+		else
+		{
+			return new \Model\Collection($objResult, static::$strTable);
+		}
 	}
 
 

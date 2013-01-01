@@ -85,7 +85,10 @@ class FaqModel extends \Model
 			$arrColumns[] = "$t.published=1";
 		}
 
-		$arrOptions['order'] = "$t.pid, $t.sorting";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.pid, $t.sorting";
+		}
 
 		return static::findBy($arrColumns, null, $arrOptions);
 	}

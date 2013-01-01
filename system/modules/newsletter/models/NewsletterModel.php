@@ -80,7 +80,10 @@ class NewsletterModel extends \Model
 			$arrColumns[] = "$t.sent=1";
 		}
 
-		$arrOptions['order'] = "$t.date DESC";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.date DESC";
+		}
 
 		return static::findBy($arrColumns, $intPid, $arrOptions);
 	}
@@ -109,7 +112,10 @@ class NewsletterModel extends \Model
 			$arrColumns[] = "$t.sent=1";
 		}
 
-		$arrOptions['order'] = "$t.date DESC";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.date DESC";
+		}
 
 		return static::findBy($arrColumns, null, $arrOptions);
 	}

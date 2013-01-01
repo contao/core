@@ -52,7 +52,10 @@ class FormFieldModel extends \Model
 			$arrColumns[] = "$t.invisible=''";
 		}
 
-		$arrOptions['order'] = "$t.sorting";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.sorting";
+		}
 
 		return static::findBy($arrColumns, $intPid, $arrOptions);
 	}

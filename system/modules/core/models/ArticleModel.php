@@ -103,7 +103,10 @@ class ArticleModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		$arrOptions['order'] = "$t.sorting";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.sorting";
+		}
 
 		return static::findBy($arrColumns, $arrValues, $arrOptions);
 	}
@@ -130,7 +133,10 @@ class ArticleModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		$arrOptions['order'] = "$t.sorting";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.sorting";
+		}
 
 		return static::findBy($arrColumns, $arrValues, $arrOptions);
 	}

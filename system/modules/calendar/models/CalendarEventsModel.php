@@ -155,11 +155,14 @@ class CalendarEventsModel extends \Model
 		// Get upcoming events using endTime instead of startTime (see #3917)
 		$arrColumns = array("($t.endTime>=$time OR ($t.recurring=1 AND ($t.recurrences=0 OR $t.repeatEnd>=$time))) AND $t.pid IN(" . implode(',', array_map('intval', $arrIds)) . ") AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1");
 
-		$arrOptions['order'] = "$t.startTime";
-
 		if ($intLimit > 0)
 		{
 			$arrOptions['limit'] = $intLimit;
+		}
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.startTime";
 		}
 
 		return static::findBy($arrColumns, null, $arrOptions);

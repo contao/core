@@ -84,7 +84,10 @@ class PageModel extends \Model
 				$arrColumns[] = "$t.fallback=1";
 			}
 
-			$arrOptions['order'] = "$t.dns DESC" . (!empty($varLanguage) ? ", " . $objDatabase->findInSet("$t.language", array_reverse($varLanguage)) . " DESC" : "") . ", $t.sorting";
+			if (!isset($arrOptions['order']))
+			{
+				$arrOptions['order'] = "$t.dns DESC" . (!empty($varLanguage) ? ", " . $objDatabase->findInSet("$t.language", array_reverse($varLanguage)) . " DESC" : "") . ", $t.sorting";
+			}
 
 			if (!BE_USER_LOGGED_IN)
 			{
@@ -98,7 +101,11 @@ class PageModel extends \Model
 		{
 			$arrColumns = array("$t.type='root' AND ($t.dns=? OR $t.dns='') AND $t.language=?");
 			$arrValues = array($strHost, $varLanguage);
-			$arrOptions['order'] = "$t.dns DESC, $t.fallback";
+
+			if (!isset($arrOptions['order']))
+			{
+				$arrOptions['order'] = "$t.dns DESC, $t.fallback";
+			}
 
 			if (!BE_USER_LOGGED_IN)
 			{
@@ -130,7 +137,10 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		$arrOptions['order'] = "$t.sorting";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.sorting";
+		}
 
 		return static::findOneBy($arrColumns, $intPid, $arrOptions);
 	}
@@ -155,7 +165,10 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		$arrOptions['order'] = "$t.sorting";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.sorting";
+		}
 
 		return static::findOneBy($arrColumns, $intPid, $arrOptions);
 	}
@@ -180,7 +193,10 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		$arrOptions['order'] = "$t.sorting";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.sorting";
+		}
 
 		return static::findOneBy($arrColumns, $intPid, $arrOptions);
 	}
@@ -205,7 +221,10 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		$arrOptions['order'] = "$t.sorting";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.sorting";
+		}
 
 		return static::findOneBy($arrColumns, $intPid, $arrOptions);
 	}
@@ -247,7 +266,10 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		$arrOptions['order'] = \Database::getInstance()->findInSet("$t.alias", $arrAliases);
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.alias", $arrAliases);
+		}
 
 		return static::findBy($arrColumns, null, $arrOptions);
 	}
@@ -331,7 +353,10 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+		}
 
 		return static::findBy($arrColumns, null, $arrOptions);
 	}
@@ -361,7 +386,10 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		$arrOptions['order'] = "$t.sorting";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.sorting";
+		}
 
 		return static::findBy($arrColumns, $intPid, $arrOptions);
 	}

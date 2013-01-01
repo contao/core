@@ -50,7 +50,11 @@ class NewsletterChannelModel extends \Model
 		}
 
 		$t = static::$strTable;
-		$arrOptions['order'] = "$t.title";
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.title";
+		}
 
 		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, $arrOptions);
 	}

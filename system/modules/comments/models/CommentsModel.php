@@ -56,9 +56,13 @@ class CommentsModel extends \Model
 			$arrColumns[] = "$t.published=1";
 		}
 
-		$arrOptions['order']  = ($blnDesc ? "$t.date DESC" : "$t.date");
 		$arrOptions['limit']  = $intLimit;
 		$arrOptions['offset'] = $intOffset;
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order']  = ($blnDesc ? "$t.date DESC" : "$t.date");
+		}
 
 		return static::findBy($arrColumns, array($strSource, $intParent), $arrOptions);
 	}
