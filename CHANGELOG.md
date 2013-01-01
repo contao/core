@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.8 (2013-XX-XX)
 ---------------------------
 
+### Fixed
+The Date class should return `00:00` for `Date(0)->time` (see #4249).
+
 ### Reverted
 Handle dependencies when updating extensions (see #3804).
 

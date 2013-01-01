@@ -84,8 +84,8 @@ class Date extends System
 	 */
 	public function __construct($intTstamp=false, $strFormat=false)
 	{
-		$this->intTstamp = $intTstamp ? $intTstamp : time();
-		$this->strFormat = $strFormat ? $strFormat : $GLOBALS['TL_CONFIG']['dateFormat'];
+		$this->intTstamp = ($intTstamp !== false) ? $intTstamp : time();
+		$this->strFormat = ($strFormat !== false) ? $strFormat : $GLOBALS['TL_CONFIG']['dateFormat'];
 
 		if (!preg_match('/^\-?[0-9]+$/', $this->intTstamp) || preg_match('/^[a-zA-Z]+$/', $this->strFormat))
 		{
