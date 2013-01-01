@@ -545,10 +545,6 @@ abstract class System
 		{
 			return '';
 		}
-		elseif ($intTstamp == 0)
-		{
-			return '-'; // see #4249
-		}
 		else
 		{
 			$strDate = date($strModified, $intTstamp);

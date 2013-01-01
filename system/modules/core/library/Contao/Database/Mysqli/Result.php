@@ -63,7 +63,7 @@ class Result extends \Database\Result
 	 */
 	protected function num_fields()
 	{
-		return @$this->resResult->field_countmysql;
+		return @$this->resResult->field_count;
 	}
 
 
