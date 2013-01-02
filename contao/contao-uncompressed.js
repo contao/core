@@ -1,6 +1,6 @@
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -19,7 +19,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Request.Contao
  * 
  * Extend the basic Request.JSON class.
- * @copyright  Leo Feyer 2011-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  */
@@ -91,7 +91,7 @@ Request.Mixed = Request.Contao;
  * Class AjaxRequest
  *
  * Provide methods to handle Ajax requests.
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  */
@@ -739,7 +739,7 @@ var AjaxRequest =
  * Class Backend
  *
  * Provide methods to handle back end tasks.
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  */
@@ -1583,7 +1583,7 @@ window.addEvent('load', function() {
  * Class ContextMenu
  *
  * Provide methods to handle context menus
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  */
@@ -1668,7 +1668,7 @@ window.addEvent('structure', function() {
  * Class TinyCallback
  *
  * Provide callback functions for TinyMCE.
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  */

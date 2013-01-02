@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
@@ -33,7 +33,7 @@
  * Class DB_Sybase
  *
  * Driver class for Sybase databases.
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
@@ -240,7 +240,7 @@ class DB_Sybase extends Database
  * Class DB_Sybase_Statement
  *
  * Driver class for Sybase databases.
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
@@ -345,7 +345,7 @@ class DB_Sybase_Statement extends Database_Statement
  * Class DB_Sybase_Result
  *
  * Driver class for Sybase databases.
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */

@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
@@ -40,7 +40,7 @@ require_once('../system/initialize.php');
  * Class Main
  *
  * Main back end controller.
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
