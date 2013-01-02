@@ -1,7 +1,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Core
  * @link    http://contao.org

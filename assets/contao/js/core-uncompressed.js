@@ -1,7 +1,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Core
  * @link    http://contao.org
@@ -13,7 +13,7 @@
  * Class AjaxRequest
  *
  * Provide methods to handle Ajax requests.
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://contao.org>
  */
 var AjaxRequest =
@@ -666,7 +666,7 @@ var AjaxRequest =
  * Class Backend
  *
  * Provide methods to handle back end tasks.
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://contao.org>
  */
 var Backend =
@@ -1716,7 +1716,7 @@ window.addEvent('ajax_change', function() {
  * Class TinyCallback
  *
  * Provide callback functions for TinyMCE.
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://contao.org>
  */
 var TinyCallback =

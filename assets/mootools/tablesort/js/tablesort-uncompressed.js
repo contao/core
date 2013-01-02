@@ -1,7 +1,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Tablesort
  * @link    http://contao.org
@@ -21,7 +21,7 @@ var DECIMAL_SEPARATOR = '.';
  * Class TableSort
  *
  * Provide methods to sort tables keeping the Contao class names intact.
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://contao.org>
  */
 var TableSort = new Class(

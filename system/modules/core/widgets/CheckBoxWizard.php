@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Core
  * @link    http://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class CheckBoxWizard
  *
  * Provide methods to handle sortable checkboxes.
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     John Brand <http://www.thyon.com>
  * @author     Leo Feyer <http://contao.org>
  * @package    Core

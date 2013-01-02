@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Library
  * @link    http://contao.org
@@ -379,7 +379,7 @@ abstract class System
 					   . "/**\n"
 					   . " * Contao Open Source CMS\n"
 					   . " * \n"
-					   . " * Copyright (C) 2005-2012 Leo Feyer\n"
+					   . " * Copyright (c) 2005-2013 Leo Feyer\n"
 					   . " * \n"
 					   . " * Core translations are managed using Transifex. To create a new translation\n"
 					   . " * or to help to maintain an existing one, please register at transifex.com.\n"
