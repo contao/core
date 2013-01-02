@@ -178,7 +178,9 @@ class ModuleRandomImage extends \Module
 		$i = mt_rand(0, (count($images)-1));
 
 		$arrImage = $images[$i];
+
 		$arrImage['size'] = $this->imgSize;
+		$arrImage['fullsize'] = $this->fullsize;
 
 		if (!$this->useCaption)
 		{

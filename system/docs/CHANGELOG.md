@@ -5,6 +5,9 @@ Version 3.0.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Random images now open in the lightbox if configured (see #5191).
+
+### Fixed
 Find e-mail addresse like `a@b.com` in `String::encodeEmail()` (see #5175).
 
 ### Fixed
