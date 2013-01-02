@@ -5,6 +5,9 @@ Version 3.0.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Find e-mail addresse like `a@b.com` in `String::encodeEmail()` (see #5175).
+
+### Fixed
 Make sure there is a minimal MooTools core version for the command scheduler
 (see #5195).
 

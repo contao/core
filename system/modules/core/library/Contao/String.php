@@ -278,7 +278,7 @@ class String
 	public static function encodeEmail($strString)
 	{
 		$arrEmails = array();
-		preg_match_all('/\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,6}/', $strString, $arrEmails);
+		preg_match_all('/\w([-._\w]*\w)?@\w([-._\w]*\w)?\.\w{2,6}/', $strString, $arrEmails);
 
 		foreach ((array) $arrEmails[0] as $strEmail)
 		{
