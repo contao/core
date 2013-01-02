@@ -34,6 +34,7 @@ $GLOBALS['TL_LANG']['ERR']['folderalias'] = 'Please enter only alphanumeric char
 $GLOBALS['TL_LANG']['ERR']['date'] = 'Please enter the date as "%s"!';
 $GLOBALS['TL_LANG']['ERR']['time'] = 'Please enter the time as "%s"!';
 $GLOBALS['TL_LANG']['ERR']['dateTime'] = 'Please enter date and time as "%s"!';
+$GLOBALS['TL_LANG']['ERR']['invalidDate'] = 'Invalid date "%s"!';
 $GLOBALS['TL_LANG']['ERR']['noSpace'] = 'Field "%s" must not contain any whitespace characters!';
 $GLOBALS['TL_LANG']['ERR']['filesize'] = 'The maximum size for file uploads is %s (Contao or php.ini settings)!';
 $GLOBALS['TL_LANG']['ERR']['filetype'] = 'File type "%s" is not allowed to be uploaded!';

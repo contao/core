@@ -81,6 +81,10 @@
         <source>Please enter date and time as &quot;%s&quot;!</source>
         <target>Bitte geben Sie Datum und Uhrzeit im Format &quot;%s&quot; ein!</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
+        <target>Ungültiges Datum &quot;%s&quot;!</target>
+      </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
         <target>Das Feld &quot;%s&quot; darf keine Leerzeichen enthalten!</target>

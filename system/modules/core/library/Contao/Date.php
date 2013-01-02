@@ -436,6 +436,12 @@ class Date extends \System
 			$intYear = 1970;
 		}
 
+		// Validate the date (see #5086)
+		if (checkdate($intMonth, $intDay, $intYear) === false)
+		{
+			throw new \Exception(sprintf('Invalid date "%s"', $this->strDate));
+		}
+
 		$this->strDate =  mktime((int) $intHour, (int) $intMinute, (int) $intSecond, (int) $intMonth, (int) $intDay, (int) $intYear);
 	}
 

@@ -62,6 +62,9 @@
       <trans-unit id="ERR.dateTime">
         <source>Please enter date and time as "%s"!</source>
       </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date "%s"!</source>
+      </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field "%s" must not contain any whitespace characters!</source>
       </trans-unit>

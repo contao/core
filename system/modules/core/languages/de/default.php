@@ -34,6 +34,7 @@ $GLOBALS['TL_LANG']['ERR']['folderalias'] = 'Bitte geben Sie nur Buchstaben und 
 $GLOBALS['TL_LANG']['ERR']['date'] = 'Bitte geben Sie das Datum im Format "%s" ein!';
 $GLOBALS['TL_LANG']['ERR']['time'] = 'Bitte geben Sie die Uhrzeit im Format "%s" ein!';
 $GLOBALS['TL_LANG']['ERR']['dateTime'] = 'Bitte geben Sie Datum und Uhrzeit im Format "%s" ein!';
+$GLOBALS['TL_LANG']['ERR']['invalidDate'] = 'Ungültiges Datum "%s"!';
 $GLOBALS['TL_LANG']['ERR']['noSpace'] = 'Das Feld "%s" darf keine Leerzeichen enthalten!';
 $GLOBALS['TL_LANG']['ERR']['filesize'] = 'Die maximale Größe für Datei-Uploads beträgt %s (Contao- oder php.ini-Einstellungen)!';
 $GLOBALS['TL_LANG']['ERR']['filetype'] = 'Der Dateityp "%s" darf nicht hochgeladen werden!';
