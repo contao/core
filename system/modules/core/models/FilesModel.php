@@ -25,7 +25,7 @@ namespace Contao;
  * 
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class FilesModel extends \Model
 {
@@ -53,7 +53,11 @@ class FilesModel extends \Model
 		}
 
 		$t = static::$strTable;
-		$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+		}
 
 		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, $arrOptions);
 	}
@@ -99,7 +103,11 @@ class FilesModel extends \Model
 		}
 
 		$t = static::$strTable;
-		$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+		}
 
 		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ") AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, $arrOptions);
 	}

@@ -22,7 +22,7 @@ namespace Contao;
  * 
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class CommentsModel extends \Model
 {
@@ -56,9 +56,13 @@ class CommentsModel extends \Model
 			$arrColumns[] = "$t.published=1";
 		}
 
-		$arrOptions['order']  = ($blnDesc ? "$t.date DESC" : "$t.date");
 		$arrOptions['limit']  = $intLimit;
 		$arrOptions['offset'] = $intOffset;
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order']  = ($blnDesc ? "$t.date DESC" : "$t.date");
+		}
 
 		return static::findBy($arrColumns, array($strSource, $intParent), $arrOptions);
 	}

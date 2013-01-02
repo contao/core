@@ -473,15 +473,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'date')
 			{
-				$row[$i] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value);
+				$row[$i] = $value ? $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value) : '-';
 			}
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'time')
 			{
-				$row[$i] = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $value);
+				$row[$i] = $value ? $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $value) : '-';
 			}
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'datim' || in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['flag'], array(5, 6, 7, 8, 9, 10)) || $i == 'tstamp')
 			{
-				$row[$i] = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $value);
+				$row[$i] = $value ? $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $value) : '-';
 			}
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['multiple'])
 			{
@@ -968,10 +968,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				// Consider the dynamic parent table (see #4867)
 				if ($GLOBALS['TL_DCA'][$v]['config']['dynamicPtable'])
 				{
-					$cond = ($v == 'tl_content') ? "(ptable=? OR ptable='')" : "ptable=?"; // backwards compatibility
+					$ptable = $GLOBALS['TL_DCA'][$v]['config']['ptable'];
+					$cond = ($ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?"; // backwards compatibility
 
 					$objCTable = $this->Database->prepare("SELECT * FROM $v WHERE pid=? AND $cond" . ($this->Database->fieldExists('sorting', $v) ? " ORDER BY sorting" : ""))
-												->execute($id, $GLOBALS['TL_DCA'][$v]['config']['ptable']);
+												->execute($id, $ptable);
 				}
 				else
 				{
@@ -1467,10 +1468,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			// Consider the dynamic parent table (see #4867)
 			if ($GLOBALS['TL_DCA'][$v]['config']['dynamicPtable'])
 			{
-				$cond = ($v == 'tl_content') ? "(ptable=? OR ptable='')" : "ptable=?"; // backwards compatibility
+				$ptable = $GLOBALS['TL_DCA'][$v]['config']['ptable'];
+				$cond = ($ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?"; // backwards compatibility
 
 				$objDelete = $this->Database->prepare("SELECT id FROM $v WHERE pid=? AND $cond")
-											->execute($id, $GLOBALS['TL_DCA'][$v]['config']['ptable']);
+											->execute($id, $ptable);
 			}
 			else
 			{
@@ -3593,17 +3595,17 @@ window.addEvent(\'domready\', function() {
 				{
 					$_v = ($_v != '') ? $GLOBALS['TL_LANG']['MSC']['yes'] : $GLOBALS['TL_LANG']['MSC']['no'];
 				}
-				elseif ($_v && $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'date')
+				elseif ($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'date')
 				{
-					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $_v);
+					$_v = $_v ? $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $_v) : '-';
 				}
-				elseif ($_v && $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'time')
+				elseif ($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'time')
 				{
-					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $_v);
+					$_v = $_v ? $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $_v) : '-';
 				}
-				elseif ($_v && $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'datim')
+				elseif ($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'datim')
 				{
-					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $_v);
+					$_v = $_v ? $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $_v) : '-';
 				}
 				elseif ($v == 'tstamp')
 				{
@@ -4118,15 +4120,15 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					{
 						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['rgxp'] == 'date')
 						{
-							$args[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $row[$v]);
+							$args[$k] = $row[$v] ? $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $row[$v]) : '-';
 						}
 						elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['rgxp'] == 'time')
 						{
-							$args[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $row[$v]);
+							$args[$k] = $row[$v] ? $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $row[$v]) : '-';
 						}
 						else
 						{
-							$args[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $row[$v]);
+							$args[$k] = $row[$v] ? $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $row[$v]) : '-';
 						}
 					}
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['multiple'])

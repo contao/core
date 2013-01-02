@@ -34,7 +34,7 @@ if (!class_exists('idna_convert', false))
  * 
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class Idna
 {

@@ -22,7 +22,7 @@ namespace Contao;
  * 
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class NewsModel extends \Model
 {
@@ -100,7 +100,11 @@ class NewsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		$arrOptions['order']  = "$t.date DESC";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order']  = "$t.date DESC";
+		}
+
 		$arrOptions['limit']  = $intLimit;
 		$arrOptions['offset'] = $intOffset;
 
@@ -165,7 +169,10 @@ class NewsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		$arrOptions['order'] = "$t.date DESC";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.date DESC";
+		}
 
 		return static::findBy($arrColumns, $intPid, $arrOptions);
 	}
@@ -187,7 +194,10 @@ class NewsModel extends \Model
 
 		$arrColumns = array("$t.pid=? AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1");
 
-		$arrOptions['order'] = "$t.date DESC";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.date DESC";
+		}
 
 		if ($intLimit > 0)
 		{
@@ -226,7 +236,11 @@ class NewsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		$arrOptions['order']  = "$t.date DESC";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order']  = "$t.date DESC";
+		}
+
 		$arrOptions['limit']  = $intLimit;
 		$arrOptions['offset'] = $intOffset;
 

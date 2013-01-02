@@ -31,7 +31,7 @@ namespace Contao;
  * 
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class Date extends \System
 {
@@ -81,8 +81,8 @@ class Date extends \System
 	 */
 	public function __construct($strDate=null, $strFormat=null)
 	{
-		$this->strDate = $strDate ?: time();
-		$this->strFormat = $strFormat ?: $GLOBALS['TL_CONFIG']['dateFormat'];
+		$this->strDate = ($strDate !== null) ? $strDate : time();
+		$this->strFormat = ($strFormat !== null) ? $strFormat : $GLOBALS['TL_CONFIG']['dateFormat'];
 
 		if (!preg_match('/^\-?[0-9]+$/', $this->strDate) || preg_match('/^[a-zA-Z]+$/', $this->strFormat))
 		{

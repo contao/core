@@ -39,7 +39,8 @@
  * Remove the margin from floated articles, because the margin is already
  * applied to its content elements (see above)
  */
-.inside>*[class*="grid"] {
+.mod_article.grid1,.mod_article.grid2,.mod_article.grid3,.mod_article.grid4,.mod_article.grid5,.mod_article.grid6,
+.mod_article.grid7,.mod_article.grid8,.mod_article.grid9,.mod_article.grid10,.mod_article.grid11,.mod_article.grid12 {
 	margin-left:0;
 	margin-right:0;
 }

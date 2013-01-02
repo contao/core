@@ -555,6 +555,11 @@ h2.sub_headline_index {
 .tl_content pre.disabled {
 	color:#a6a6a6;
 }
+.tl_content span.comment {
+	color:#5c9ac9;
+	display:inline-block;
+	margin-bottom:3px;
+}
 .tl_content_left {
 	float:left;
 }

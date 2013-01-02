@@ -270,7 +270,7 @@ class ModuleAutoload extends \BackendModule
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-$intYear Leo Feyer
+ * Copyright (c) 2005-$intYear Leo Feyer
  * 
  * @package $strPackage
  * @link    http://contao.org
@@ -473,7 +473,7 @@ EOT
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-$intYear Leo Feyer
+ * Copyright (c) 2005-$intYear Leo Feyer
  * 
  * @package Core
  * @link    http://contao.org

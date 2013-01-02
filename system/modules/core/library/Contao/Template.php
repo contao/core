@@ -28,7 +28,7 @@ namespace Contao;
  * 
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 abstract class Template extends \Controller
 {
@@ -331,7 +331,6 @@ abstract class Template extends \Controller
 			}
 
 			$strDebug .= '</pre></div></div>'
-				. $strScriptOpen . 'window.MooTools || document.write(\'<script' . (($this->strFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_ASSETS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')' . $strScriptClose
 				. $strScriptOpen
 					. "(function($) {"
 						. "$$('#debug p','#debug div').setStyle('width',window.getSize().x);"

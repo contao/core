@@ -22,7 +22,7 @@ namespace Contao;
  * 
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class FormFieldModel extends \Model
 {
@@ -52,7 +52,10 @@ class FormFieldModel extends \Model
 			$arrColumns[] = "$t.invisible=''";
 		}
 
-		$arrOptions['order'] = "$t.sorting";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.sorting";
+		}
 
 		return static::findBy($arrColumns, $intPid, $arrOptions);
 	}

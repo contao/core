@@ -22,7 +22,7 @@ require_once '../system/initialize.php';
  * Class ChangePassword
  *
  * Handle back end password changes.
- * @copyright  Leo Feyer 2011-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://contao.org>
  * @package    Core
  */

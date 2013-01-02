@@ -58,8 +58,12 @@ The pageTree widget is now sortable just like the fileTree widget and the custom
 and quick navigation modules consider the custom order (see #4936).
 
 
-Version 3.0.2 (201X-XX-XX)
+Version 3.0.2 (2013-XX-XX)
 --------------------------
+
+### Fixed
+Make sure there is a minimal MooTools core version for the command scheduler
+(see #5195).
 
 ### Fixed
 Made `Model::getPk()` and `Model::getTable()` static (see #5128).

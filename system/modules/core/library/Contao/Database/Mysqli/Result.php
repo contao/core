@@ -18,7 +18,7 @@ namespace Contao\Database\Mysqli;
  * 
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class Result extends \Database\Result
 {
@@ -63,7 +63,7 @@ class Result extends \Database\Result
 	 */
 	protected function num_fields()
 	{
-		return @$this->resResult->field_countmysql;
+		return @$this->resResult->field_count;
 	}
 
 

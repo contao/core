@@ -32,7 +32,7 @@ namespace Contao;
  * 
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 abstract class System
 {
@@ -574,10 +574,6 @@ abstract class System
 		elseif (!is_numeric($intTstamp))
 		{
 			return '';
-		}
-		elseif ($intTstamp == 0)
-		{
-			return '-'; // see #4249
 		}
 		else
 		{

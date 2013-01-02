@@ -22,7 +22,7 @@ namespace Contao;
  * 
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class FaqModel extends \Model
 {
@@ -85,7 +85,10 @@ class FaqModel extends \Model
 			$arrColumns[] = "$t.published=1";
 		}
 
-		$arrOptions['order'] = "$t.pid, $t.sorting";
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.pid, $t.sorting";
+		}
 
 		return static::findBy($arrColumns, null, $arrOptions);
 	}
