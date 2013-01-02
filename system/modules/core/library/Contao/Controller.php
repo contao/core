@@ -3070,21 +3070,7 @@ abstract class Controller extends \System
 				}
 			}
 
-			// Do not index or cache the page
-			global $objPage;
-			$objPage->noSearch = 1;
-			$objPage->cache = 0;
-
-			// Send a 404 header
-			header('HTTP/1.1 404 Not Found');
-
-			foreach (array('details', 'answer', 'text') as $key)
-			{
-				if (isset($objTemplate->$key))
-				{
-					$objTemplate->$key = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['ERR']['download'], $file) . '</p>';
-				}
-			}
+			// Do not send a 404 header (see #5178)
 		}
 
 		$arrEnclosures = array();

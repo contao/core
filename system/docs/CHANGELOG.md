@@ -5,6 +5,10 @@ Version 3.0.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not send a 404 header if an enclosure is requested and cannot be find by a
+module; there might be another module which can (see #5178).
+
+### Fixed
 Consider the `save_callback` of the password field in `tl_user` when a back end
 user is forced to change his password (see #5138).
 
