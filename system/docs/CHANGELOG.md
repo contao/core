@@ -5,6 +5,10 @@ Version 3.0.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Consider the `save_callback` of the password field in `tl_user` when a back end
+user is forced to change his password (see #5138).
+
+### Fixed
 Random images now open in the lightbox if configured (see #5191).
 
 ### Fixed

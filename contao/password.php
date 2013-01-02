@@ -87,6 +87,18 @@ class ChangePassword extends Backend
 				}
 				else
 				{
+					$this->loadDataContainer('tl_user');
+
+					// Trigger the save_callback
+					if (is_array($GLOBALS['TL_DCA']['tl_user']['fields']['password']['save_callback']))
+					{
+						foreach ($GLOBALS['TL_DCA']['tl_user']['fields']['password']['save_callback'] as $callback)
+						{
+							$this->import($callback[0]);
+							$pw = $this->$callback[0]->$callback[1]($pw);
+						}
+					}
+
 					$objUser = UserModel::findByPk($this->User->id);
 					$objUser->pwChange = '';
 					$objUser->password = Encryption::hash($pw);
