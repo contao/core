@@ -5,6 +5,9 @@ Version 3.0.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Update the database if a file is being uploaded in the front end (see #5137).
+
+### Fixed
 Do not send a 404 header if an enclosure is requested and cannot be find by a
 module; there might be another module which can (see #5178).
 
