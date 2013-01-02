@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Faq
  * @link    http://contao.org
@@ -20,7 +20,7 @@ namespace Contao;
 /**
  * Class ModuleFaqReader
  *
- * @copyright  Leo Feyer 2008-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://contao.org>
  * @package    Faq
  */

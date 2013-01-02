@@ -4,7 +4,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Core
  * @link    http://contao.org
@@ -23,7 +23,7 @@ define('TL_ROOT', dirname(dirname(__DIR__)));
  *
  * @package   Core
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class Transifex
 {
@@ -252,7 +252,7 @@ class Transifex
 					fputs($fh, "/**\n");
 					fputs($fh, " * Contao Open Source CMS\n");
 					fputs($fh, " * \n");
-					fputs($fh, " * Copyright (C) 2005-2012 Leo Feyer\n");
+					fputs($fh, " * Copyright (C) 2005-2013 Leo Feyer\n");
 					fputs($fh, " * \n");
 					fputs($fh, " * Core translations are managed using Transifex. To create a new translation\n");
 					fputs($fh, " * or to help to maintain an existing one, please register at transifex.com.\n");

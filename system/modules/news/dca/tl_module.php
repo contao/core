@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package News
  * @link    http://contao.org
@@ -152,7 +152,7 @@ if (in_array('comments', Config::getInstance()->getActiveModules()))
  * Class tl_module_news
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <http://contao.org>
  * @package    News
  */
