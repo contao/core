@@ -419,6 +419,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 		),
 		'currentLogin' => array
 		(
+			'eval'                    => array('rgxp'=>'datim'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'loginCount' => array
@@ -427,6 +428,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 		),
 		'locked' => array
 		(
+			'eval'                    => array('rgxp'=>'datim'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		)
 	)

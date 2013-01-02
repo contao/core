@@ -384,6 +384,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		),
 		'currentLogin' => array
 		(
+			'eval'                    => array('rgxp'=>'datim'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'loginCount' => array
@@ -392,6 +393,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		),
 		'locked' => array
 		(
+			'eval'                    => array('rgxp'=>'datim'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'session' => array
@@ -404,6 +406,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		),
 		'createdOn' => array
 		(
+			'eval'                    => array('rgxp'=>'datim'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'activation' => array
