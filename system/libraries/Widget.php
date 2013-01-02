@@ -720,6 +720,16 @@ abstract class Widget extends Controller
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['dateFormat'])));
 					}
+
+					// Validate the date (see #5086)
+					try
+					{
+						new Date($varInput);
+					}
+					catch (Exception $e)
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
+					}
 					break;
 
 				// Check whether the current value is a valid time format
@@ -739,6 +749,16 @@ abstract class Widget extends Controller
 					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['datimFormat'])));
+					}
+
+					// Validate the date (see #5086)
+					try
+					{
+						new Date($varInput);
+					}
+					catch (Exception $e)
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
 					}
 					break;
 

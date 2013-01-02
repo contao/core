@@ -5,6 +5,9 @@ Version 2.11.8 (2013-XX-XX)
 ---------------------------
 
 ### Fixed
+Make sure entered dates map to an existing date (see #5086).
+
+### Fixed
 Fixed the MySQLi field count (see #5182).
 
 ### Fixed
