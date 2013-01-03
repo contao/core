@@ -22,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Frontend
  * @license    LGPL
  * @filesource
@@ -34,7 +34,7 @@
  *
  * Parent class for objects that can be modules or content elements.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Controller
  */
 abstract class Hybrid extends Frontend

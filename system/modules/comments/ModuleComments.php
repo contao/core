@@ -22,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Comments
  * @license    LGPL
  * @filesource
@@ -33,7 +33,7 @@
  * Class ModuleComments
  *
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Controller
  */
 class ModuleComments extends Module

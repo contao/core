@@ -22,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Calendar
  * @license    LGPL
  * @filesource
@@ -34,7 +34,7 @@
  *
  * Provide methods to get all events of a certain period from the database.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Controller
  */
 abstract class Events extends Module

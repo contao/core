@@ -22,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -34,7 +34,7 @@
  *
  * Provide methods to generate RSS/Atom feeds.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Library
  */
 class Feed extends System
@@ -221,7 +221,7 @@ class Feed extends System
  *
  * Provide methods to generate RSS/Atom feed items.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Library
  */
 class FeedItem extends System

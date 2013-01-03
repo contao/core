@@ -22,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Faq
  * @license    LGPL
  * @filesource
@@ -74,7 +74,7 @@ if (in_array('comments', Config::getInstance()->getActiveModules()))
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Controller
  */
 class tl_module_faq extends Backend

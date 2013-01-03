@@ -22,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Registration
  * @license    LGPL
  * @filesource
@@ -155,7 +155,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['reg_password'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Controller
  */
 class tl_module_registration extends Backend

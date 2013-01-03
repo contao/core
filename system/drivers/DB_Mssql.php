@@ -22,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -34,7 +34,7 @@
  *
  * Driver class for MSSQL databases.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Driver
  */
 class DB_Mssql extends Database
@@ -240,7 +240,7 @@ class DB_Mssql extends Database
  *
  * Driver class for MSSQL databases.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Driver
  */
 class DB_Mssql_Statement extends Database_Statement
@@ -345,7 +345,7 @@ class DB_Mssql_Statement extends Database_Statement
  *
  * Driver class for MSSQL databases.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Driver
  */
 class DB_Mssql_Result extends Database_Result

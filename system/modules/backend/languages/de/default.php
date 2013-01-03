@@ -22,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -325,7 +325,7 @@ $GLOBALS['TL_LANG']['MSC']['move_down']     = array('Nach unten', 'Den Eintrag e
 $GLOBALS['TL_LANG']['MSC']['staticFiles']   = array('Datei-URL', 'Die Datei-URL gilt für das <em>tl_files</em>-Verzeichnis sowie alle Vorschaubilder (Page-Speed-Optimierung).');
 $GLOBALS['TL_LANG']['MSC']['staticSystem']  = array('Skript-URL', 'Die Skript-URL gilt für alle JavaScript- und CSS-Dateien inklusive eingebundener Hintergrundbilder (Page-Speed-Optimierung).');
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'] = array('Plugins-URL', 'Die Plugins-URL gilt für alle Ressourcen im <em>plugins</em>-Verzeichnis (Page-Speed-Optimierung).');
-$GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Backend-Tastaturkürzel', 'Wie Sie Ihren Arbeitsablauf durch die Verwendung von <a href="http://www.contao.org/tastaturkuerzel.html" target="_blank">Tastaturkürzeln</a> beschleunigen.');
+$GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Backend-Tastaturkürzel', 'Wie Sie Ihren Arbeitsablauf durch die Verwendung von <a href="https://contao.org/de/manual/2.11/administration-area.html#backend-tastaturk%C3%BCrzel" target="_blank">Tastaturkürzeln</a> beschleunigen.');
 
 
 /**

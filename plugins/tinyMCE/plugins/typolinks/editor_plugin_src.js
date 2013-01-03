@@ -20,7 +20,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Plugins
  * @license    LGPL
  * @filesource
@@ -82,7 +82,7 @@
 				longname : 'Contao plugin',
 				author : 'Leo Feyer',
 				authorurl : 'http://www.inetrobots.com',
-				infourl : 'http://www.contao.org',
+				infourl : 'https://contao.org',
 				version : '3.4.6'
 			};
 		}

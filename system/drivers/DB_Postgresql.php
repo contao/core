@@ -22,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -34,7 +34,7 @@
  *
  * Driver class for PostgreSQL databases.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Driver
  */
 class DB_Postgresql extends Database
@@ -241,7 +241,7 @@ class DB_Postgresql extends Database
  *
  * Driver class for PostgreSQL databases.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Driver
  */
 class DB_Postgresql_Statement extends Database_Statement
@@ -353,7 +353,7 @@ class DB_Postgresql_Statement extends Database_Statement
  *
  * Driver class for PostgreSQL databases.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Driver
  */
 class DB_Postgresql_Result extends Database_Result

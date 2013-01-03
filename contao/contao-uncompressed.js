@@ -20,7 +20,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -32,7 +32,7 @@
  * 
  * Extend the basic Request.JSON class.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Backend
  */
 Request.Contao = new Class(
@@ -92,7 +92,7 @@ Request.Mixed = Request.Contao;
  *
  * Provide methods to handle Ajax requests.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Backend
  */
 var AjaxRequest =
@@ -740,7 +740,7 @@ var AjaxRequest =
  *
  * Provide methods to handle back end tasks.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Backend
  */
 var Backend =
@@ -1584,7 +1584,7 @@ window.addEvent('load', function() {
  *
  * Provide methods to handle context menus
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Backend
  */
 var ContextMenu =
@@ -1669,7 +1669,7 @@ window.addEvent('structure', function() {
  *
  * Provide callback functions for TinyMCE.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Backend
  */
 var TinyCallback =

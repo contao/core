@@ -22,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -34,7 +34,7 @@
  *
  * Driver class for MySQL databases.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Driver
  */
 class DB_Mysql extends Database
@@ -328,7 +328,7 @@ class DB_Mysql extends Database
  *
  * Driver class for MySQL databases.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Driver
  */
 class DB_Mysql_Statement extends Database_Statement
@@ -441,7 +441,7 @@ class DB_Mysql_Statement extends Database_Statement
  *
  * Driver class for MySQL databases.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://www.contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Driver
  */
 class DB_Mysql_Result extends Database_Result
