@@ -812,7 +812,7 @@ abstract class Widget extends \Controller
 					{
 						new \Date($varInput);
 					}
-					catch (\Exception $e)
+					catch (\OutOfBoundsException $e)
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
 					}
@@ -838,7 +838,7 @@ abstract class Widget extends \Controller
 					{
 						new \Date($varInput);
 					}
-					catch (\Exception $e)
+					catch (\OutOfBoundsException $e)
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
 					}

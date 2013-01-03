@@ -324,7 +324,8 @@ class Date extends \System
 	/**
 	 * Convert a date string into a Unix timestamp using the format string
 	 * 
-	 * @throws \Exception If the format string is invalid
+	 * @throws \Exception            If the format string is invalid
+	 * @throws \OutOfBoundsException If the timestamp does not map to a valid date
 	 */
 	protected function dateToUnix()
 	{
@@ -439,7 +440,7 @@ class Date extends \System
 		// Validate the date (see #5086)
 		if (checkdate($intMonth, $intDay, $intYear) === false)
 		{
-			throw new \Exception(sprintf('Invalid date "%s"', $this->strDate));
+			throw new \OutOfBoundsException(sprintf('Invalid date "%s"', $this->strDate));
 		}
 
 		$this->strDate =  mktime((int) $intHour, (int) $intMinute, (int) $intSecond, (int) $intMonth, (int) $intDay, (int) $intYear);
