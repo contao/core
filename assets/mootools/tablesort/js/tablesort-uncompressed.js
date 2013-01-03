@@ -133,7 +133,7 @@ var TableSort = new Class(
 			i++;
 		}
 
-		var tbody = new Array();
+		var tbody = [];
 
 		for (var i=0; i<table.tBodies[0].rows.length; i++)
 		{
