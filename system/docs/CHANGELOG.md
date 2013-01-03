@@ -5,6 +5,9 @@ Version 3.0.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly build the comments subscription confirmation URL (see #5201).
+
+### Fixed
 Update the database if a file is being uploaded in the front end (see #5137).
 
 ### Fixed
