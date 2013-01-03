@@ -59,7 +59,18 @@ class PageTree extends \Widget
 	 */
 	protected function validator($varInput)
 	{
-		if (strpos($varInput, ',') === false)
+		if ($varInput == '')
+		{
+			if (!$this->mandatory)
+			{
+				return '';
+			}
+			else
+			{
+				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel));
+			}
+		}
+		elseif (strpos($varInput, ',') === false)
 		{
 			return $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'] ? array(intval($varInput)) : intval($varInput);
 		}

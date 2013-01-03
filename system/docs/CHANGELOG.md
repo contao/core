@@ -5,6 +5,10 @@ Version 3.0.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Throw an error if FileTree or PageTree widgets are left blank although they are
+marked as mandatory in the DCA (see #5131).
+
+### Fixed
 Modules and Hybrids included via content element were shown even if the content
 element was invisible or not published (see #5203).
 

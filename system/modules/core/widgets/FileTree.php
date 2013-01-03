@@ -123,7 +123,18 @@ class FileTree extends \Widget
 		}
 
 		// Return the value as usual
-		if (strpos($varInput, ',') === false)
+		if ($varInput == '')
+		{
+			if (!$this->mandatory)
+			{
+				return '';
+			}
+			else
+			{
+				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel));
+			}
+		}
+		elseif (strpos($varInput, ',') === false)
 		{
 			return $this->blnIsMultiple ? array(intval($varInput)) : intval($varInput);
 		}
