@@ -5,6 +5,10 @@ Version 3.0.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Modules and Hybrids included via content element were shown even if the content
+element was invisible or not published (see #5203).
+
+### Fixed
 Do not try to limit the template selection to a particular theme but show all
 available themes instead (see #5095).
 
