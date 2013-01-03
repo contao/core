@@ -294,7 +294,7 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'The files URL applies to the <em
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'Assets URL';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'The assets URL applies to the <em>assets</em> directory (page speed optimization).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Back end keyboard shortcuts';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Learn more about speeding up your workflow by using <a href="http://contao.org/en/keyboard-shortcuts.html" title="Keyboard shortcuts overview on contao.org" target="_blank">keyboard shortcuts</a>.';
+$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Learn more about speeding up your workflow by using <a href="https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts" title="Keyboard shortcuts overview on contao.org" target="_blank">keyboard shortcuts</a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Toggle all';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Expand or collapse all nodes';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'A Contao account has been locked';
@@ -501,6 +501,7 @@ $GLOBALS['TL_LANG']['MSC']['invalidTokenUrl'] = 'Invalid token';
 $GLOBALS['TL_LANG']['MSC']['changelog'] = 'Changelog';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Disable';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Drag the items to re-order them';
+$GLOBALS['TL_LANG']['MSC']['templatesTheme'] = 'Theme %s';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
 $GLOBALS['TL_LANG']['UNITS'][1] = 'KiB';
 $GLOBALS['TL_LANG']['UNITS'][2] = 'MiB';

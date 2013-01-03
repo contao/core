@@ -80,37 +80,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['com_template'] = array
 	'default'                 => 'com_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('tl_module_comments', 'getCommentTemplates'),
+	'options'                 => $this->getTemplateGroup('com_'),
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
-
-
-/**
- * Class tl_module
- *
- * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <https://contao.org>
- * @package    Comments
- */
-class tl_module_comments extends Backend
-{
-
-	/**
-	 * Return all navigation templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getCommentTemplates(DataContainer $dc)
-	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('com_', $intPid);
-	}
-}

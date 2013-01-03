@@ -85,7 +85,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_template'] = array
 	'default'                 => 'news_latest',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('tl_module_news', 'getNewsTemplates'),
+	'options'                 => $this->getTemplateGroup('news_'),
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
@@ -239,23 +239,5 @@ class tl_module_news extends Backend
     }
   });
   </script>';
-	}
-
-
-	/**
-	 * Return all news templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getNewsTemplates(DataContainer $dc)
-	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('news_', $intPid);
 	}
 }

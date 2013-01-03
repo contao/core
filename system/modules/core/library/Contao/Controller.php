@@ -96,40 +96,52 @@ abstract class Controller extends \System
 	/**
 	 * Return all template files of a particular group as array
 	 * 
-	 * @param string  $strPrefix The template name prefix (e.g. "ce_")
-	 * @param integer $intTheme  The ID of the theme
+	 * @param string $strPrefix The template name prefix (e.g. "ce_")
 	 * 
 	 * @return array An array of template names
 	 */
-	public static function getTemplateGroup($strPrefix, $intTheme=0)
+	public static function getTemplateGroup($strPrefix)
 	{
-		$strTplFolder = 'templates';
-		$arrTemplates = \TemplateLoader::getPrefixedFiles($strPrefix);
+		$arrTemplates = array();
 
-		// Check for a theme templates folder
-		if ($intTheme > 0)
+		// Get the default templates
+		foreach (\TemplateLoader::getPrefixedFiles($strPrefix) as $strTemplate)
 		{
-			$objTheme = \ThemeModel::findByPk($intTheme);
+			$arrTemplates[$strTemplate] = $strTemplate;
+		}
 
-			if ($objTheme !== null && $objTheme->templates != '')
+		// Add the customized templates
+		foreach (glob(TL_ROOT . '/templates/' . $strPrefix . '*') as $strFile)
+		{
+			$strTemplate = basename($strFile, strrchr($strFile, '.'));
+
+			if (!isset($arrTemplates[$strTemplate]))
 			{
-				$strTplFolder = $objTheme->templates;
+				$arrTemplates[$strTemplate] = $strTemplate;
 			}
 		}
 
-		// Scan the templates directory
-		$arrFiles = array_values(preg_grep('/^' . $strPrefix . '/', scan(TL_ROOT . '/' . $strTplFolder)));
+		// Add the theme templates
+		$objTheme = \ThemeModel::findAll(array('order'=>'name'));
 
-		if (!empty($arrFiles))
+		if ($objTheme !== null)
 		{
-			foreach ($arrFiles as $strFile)
+			while ($objTheme->next())
 			{
-				$arrTemplates[] = basename($strFile, strrchr($strFile, '.'));
+				if ($objTheme->templates != '')
+				{
+					foreach (glob(TL_ROOT . '/' . $objTheme->templates . '/' . $strPrefix . '*') as $strFile)
+					{
+						$strTemplate = basename($strFile, strrchr($strFile, '.'));
+
+						if (!isset($arrTemplates[$strTemplate]))
+						{
+							$arrTemplates[$strTemplate] = $strTemplate . ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
+						}
+					}
+				}
 			}
 		}
-
-		natcasesort($arrTemplates);
-		$arrTemplates = array_values(array_unique($arrTemplates));
 
 		return $arrTemplates;
 	}

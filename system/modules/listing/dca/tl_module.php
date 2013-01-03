@@ -90,7 +90,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_layout'] = array
 	'default'                 => 'list_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('tl_module_listing', 'getListTemplates'),
+	'options'                 => $this->getTemplateGroup('list_'),
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_layout'] = array
 	'default'                 => 'info_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('tl_module_listing', 'getInfoTemplates'),
+	'options'                 => $this->getTemplateGroup('info_'),
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
@@ -125,41 +125,5 @@ class tl_module_listing extends Backend
 	public function getAllTables()
 	{
 		return $this->Database->listTables();
-	}
-
-
-	/**
-	 * Return all list templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getListTemplates(DataContainer $dc)
-	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('list_', $intPid);
-	}
-
-
-	/**
-	 * Return all info templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getInfoTemplates(DataContainer $dc)
-	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('info_', $intPid);
 	}
 }

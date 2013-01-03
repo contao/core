@@ -83,57 +83,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_template'] = array
 	'default'                 => 'com_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('tl_content_comments', 'getCommentsTemplates'),
+	'options'                 => $this->getTemplateGroup('com_'),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
-
-
-/**
- * Class tl_content_comments
- *
- * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <https://contao.org>
- * @package    Comments
- */
-class tl_content_comments extends Backend
-{
-
-	/**
-	 * Return all comments templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getCommentsTemplates(DataContainer $dc)
-	{
-		// Only look for a theme in the articles module (see #4808)
-		if (Input::get('do') == 'article')
-		{
-			$intPid = $dc->activeRecord->pid;
-
-			if (Input::get('act') == 'overrideAll')
-			{
-				$intPid = Input::get('id');
-			}
-
-			// Get the page ID
-			$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
-										 ->limit(1)
-										 ->execute($intPid);
-
-			// Inherit the page settings
-			$objPage = $this->getPageDetails($objArticle->pid);
-
-			// Get the theme ID
-			$objLayout = LayoutModel::findByPk($objPage->layout);
-
-			if ($objLayout === null)
-			{
-				return array();
-			}
-		}
-
-		// Return all gallery templates
-		return $this->getTemplateGroup('com_', $objLayout->pid);
-	}
-}

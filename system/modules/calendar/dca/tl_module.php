@@ -116,7 +116,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_template'] = array
 	'default'                 => 'event_full',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('tl_module_calendar', 'getEventTemplates'),
+	'options'                 => $this->getTemplateGroup('event_'),
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
@@ -127,7 +127,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_ctemplate'] = array
 	'default'                 => 'cal_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('tl_module_calendar', 'getCalendarTemplates'),
+	'options'                 => $this->getTemplateGroup('cal_'),
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
@@ -262,41 +262,5 @@ class tl_module_calendar extends Backend
     }
   });
   </script>';
-	}
-
-
-	/**
-	 * Return all event templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getEventTemplates(DataContainer $dc)
-	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('event_', $intPid);
-	}
-
-
-	/**
-	 * Return all calendar templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getCalendarTemplates(DataContainer $dc)
-	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('cal_', $intPid);
 	}
 }

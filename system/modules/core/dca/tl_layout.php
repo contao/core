@@ -297,7 +297,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'sorting'                 => true,
 			'flag'                    => 11,
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_layout', 'getPageTemplates'),
+			'options'                 => $this->getTemplateGroup('fe_'),
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -374,7 +374,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'filter'                  => true,
 			'search'                  => true,
 			'inputType'               => 'checkboxWizard',
-			'options_callback'        => array('tl_layout', 'getJqueryTemplates'),
+			'options'                 => $this->getTemplateGroup('j_'),
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "text NULL"
 		),
@@ -403,7 +403,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'filter'                  => true,
 			'search'                  => true,
 			'inputType'               => 'checkboxWizard',
-			'options_callback'        => array('tl_layout', 'getMooToolsTemplates'),
+			'options'                 => $this->getTemplateGroup('moo_'),
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "text NULL"
 		),
@@ -413,7 +413,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'checkboxWizard',
-			'options_callback'        => array('tl_layout', 'getAnalyticsTemplates'),
+			'options'                 => $this->getTemplateGroup('analytics_'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "varchar(64) NOT NULL default ''"
@@ -586,78 +586,6 @@ class tl_layout extends Backend
 		}
 
 		return $return;
-	}
-
-
-	/**
-	 * Return all page templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getPageTemplates(DataContainer $dc)
-	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('fe_', $intPid);
-	}
-
-
-	/**
-	 * Return all MooTools templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getMooToolsTemplates(DataContainer $dc)
-	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('moo_', $intPid);
-	}
-
-
-	/**
-	 * Return all jQuery templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getJqueryTemplates(DataContainer $dc)
-	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('j_', $intPid);
-	}
-
-
-	/**
-	 * Return all analytics templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getAnalyticsTemplates(DataContainer $dc)
-	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('analytics_', $intPid);
 	}
 
 

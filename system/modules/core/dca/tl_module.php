@@ -244,7 +244,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['navigationTpl'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_module', 'getNavigationTemplates'),
+			'options'                 => $this->getTemplateGroup('nav_'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'pages' => array
@@ -322,7 +322,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['memberTpl'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_module', 'getMemberTemplates'),
+			'options'                 => $this->getTemplateGroup('member_'),
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -405,7 +405,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['searchTpl'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_module', 'getSearchTemplates'),
+			'options'                 => $this->getTemplateGroup('search_'),
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -592,7 +592,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'default'                 => 'rss_default',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_module', 'getRssTemplates'),
+			'options'                 => $this->getTemplateGroup('rss_'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'numberOfItems' => array
@@ -854,78 +854,6 @@ class tl_module extends Backend
 		}
 
 		return $arrForms;
-	}
-
-
-	/**
-	 * Return all navigation templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getNavigationTemplates(DataContainer $dc)
-	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('nav_', $intPid);
-	}
-
-
-	/**
-	 * Return all member templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getMemberTemplates(DataContainer $dc)
-	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('member_', $intPid);
-	}
-
-
-	/**
-	 * Return all search templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getSearchTemplates(DataContainer $dc)
-	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('search_', $intPid);
-	}
-
-
-	/**
-	 * Return all navigation templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getRssTemplates(DataContainer $dc)
-	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('rss_', $intPid);
 	}
 
 

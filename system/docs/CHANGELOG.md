@@ -5,6 +5,10 @@ Version 3.0.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not try to limit the template selection to a particular theme but show all
+available themes instead (see #5095).
+
+### Fixed
 Correctly build the comments subscription confirmation URL (see #5201).
 
 ### Fixed
