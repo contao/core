@@ -292,7 +292,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'La URL da la datoteca vala per l
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL da resursas';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'La URL da resursas vala per l\'ordinatur <em>assets</em> (optimar per Page-Speed).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Scursanidas da tastas per il back-end';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Legia dapli davart <a href="http://contao.org/de/keyboard-shortcuts.html" title="Survista davart las scursanidas da tastas sin contao.org" target="_blank">scursanidas da tastas</a> per pudair lavurar anc pli spert.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Midar tuts';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Avrir u serrar tut ils nufs';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'In conto da Contao è vegnì bloccà';

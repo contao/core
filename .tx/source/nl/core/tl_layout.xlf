@@ -161,14 +161,6 @@
         <source>Here you can activate the components of the Contao CSS framework.</source>
         <target>Activeer hier de componenten van het Contao CSS framework.</target>
       </trans-unit>
-      <trans-unit id="tl_layout.reset.css.0">
-        <source>CSS reset</source>
-        <target>CSS reset</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.reset.css.1">
-        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
-        <target>Verwijdert de inconsistente standaard styling van HTML-elementen in verschillende browsers.</target>
-      </trans-unit>
       <trans-unit id="tl_layout.layout.css.0">
         <source>Layout builder</source>
         <target>Layout builder</target>
@@ -179,11 +171,27 @@
       </trans-unit>
       <trans-unit id="tl_layout.responsive.css.0">
         <source>Responsive grid</source>
-        <target>Responsief raster</target>
+        <target>Responsief grid</target>
       </trans-unit>
       <trans-unit id="tl_layout.responsive.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
-        <target>Voegt een responsief 12-koloms raster toe dat wordt geactiveerd door de CSS-classes &quot;grid1&quot; naar &quot;grid12&quot; en &quot;offset1&quot; naar &quot;offset12&quot;.</target>
+        <target>Voegt een responsief 12-koloms grid toe dat wordt geactiveerd door de CSS-classes &quot;grid1&quot; naar &quot;grid12&quot; en &quot;offset1&quot; naar &quot;offset12&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.0">
+        <source>CSS reset</source>
+        <target>CSS reset</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.1">
+        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
+        <target>Verwijdert de inconsistente standaard styling van HTML-elementen in verschillende browsers.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.0">
+        <source>Basic forms</source>
+        <target>Formulieren</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.1">
+        <source>Adds basic form elements and buttons formatting.</source>
+        <target>Basis opmaak van formulieren en knoppen.</target>
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.0">
         <source>TinyMCE style sheet</source>
@@ -203,7 +211,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
-        <target>Sorteevolgorde</target>
+        <target>Sorteervolgorde</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.1">
         <source>The sort order of the style sheets.</source>
@@ -455,7 +463,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.before">
         <source>After the page header</source>
-        <target>Na het titel element</target>
+        <target>Na de pagina header</target>
       </trans-unit>
       <trans-unit id="tl_layout.main">
         <source>Inside the main column</source>

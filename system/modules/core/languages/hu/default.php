@@ -292,7 +292,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'A fájlok URL címe vonatkozik a
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'Eszközök URL címe';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'Az eszközök URL címe vonatkozik az összes erőforrásra a <em>assets</em> könyvtárban (oldal sebesség optimalizálás).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Adminisztrációs felület gyorsbillentyű';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Tanulja meg, hogyan gyorsíthatja fel a munkafolyamatát a <a href="http://contao.org/en/keyboard-shortcuts.html" title="Keyboard shortcuts overview on contao.org" target="_blank">gyorsbillentyűk</a> által.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Összes váltása';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Összes csomópont összecsukása vagy kibontása';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'A Contao fiók lezárva';

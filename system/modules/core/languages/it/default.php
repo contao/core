@@ -292,7 +292,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'L\'URL file si applica alla cart
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL Plugins';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'L\'URL plugin si applica a tutte le risorse nella cartella <em>plugins</em> (ottimizzazione del caricamento della pagina).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Scorciatoie da tastiera del backend';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Per ulteriori informazioni sulle scorciatoie da tastiera visita la guida sui <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank"> tasti di scelta rapida</a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Espandi/chiudi i nodi  ';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Espandi o chiudi tutti i nodi';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Un account Contao è stato bloccato';

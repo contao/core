@@ -291,7 +291,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'URL-ul fişierelor se aplică la
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL plugin-uri';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'URL-ul de plugin-uri se aplică la toate resursele din directorul <em>plugins</em> (optimizare de viteză).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Comenzi rapide de back end';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Aflaţi mai multe detalii despre accelerarea operaţiilor prin <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">comenzi rapide</a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Comută tot';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Expandează sau restrănge toate nodurile';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Un cont de utilizator a fost blocat';

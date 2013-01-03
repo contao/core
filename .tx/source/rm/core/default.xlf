@@ -81,6 +81,9 @@
         <source>Please enter date and time as &quot;%s&quot;!</source>
         <target>Endatescha p. pl. la data ed il temps en il format &quot;%s&quot;!</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
+      </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
         <target>Il champ &quot;%s&quot; na dastga betg cuntegnair caracters da spazi vid!</target>
@@ -1117,8 +1120,7 @@
         <target>Scursanidas da tastas per il back-end</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;http://contao.org/en/keyboard-shortcuts.html&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>Legia dapli davart &lt;a href=&quot;http://contao.org/de/keyboard-shortcuts.html&quot; title=&quot;Survista davart las scursanidas da tastas sin contao.org&quot; target=&quot;_blank&quot;&gt;scursanidas da tastas&lt;/a&gt; per pudair lavurar anc pli spert.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1961,6 +1963,9 @@ Quest e-mail è vegnì generà da Contao. Ti na pos betg respunder directamain s
       <trans-unit id="MSC.dragItemsHint">
         <source>Drag the items to re-order them</source>
         <target>Tira ils elements per midar la successiun</target>
+      </trans-unit>
+      <trans-unit id="MSC.templatesTheme">
+        <source>Theme %s</source>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

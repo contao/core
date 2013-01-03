@@ -291,7 +291,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'URL plików dotyczy katalogu <em
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL pluginów';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'URL plików dotyczy wszystkich źródeł w katalogu <em>plugins</em> (optymalizacja czasu ładowania strony).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Skróty klawiszowe';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Dowiedz się więcej o przyspieszeniu swojej pracy dzięki <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">skrótom klawiszowym</a>';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Rozwiń wszystkie';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Rozwiń lub zwiń wszystkie węzły';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Kontao Contao zostało zablokowane';

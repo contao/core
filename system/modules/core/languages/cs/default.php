@@ -292,7 +292,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'Dotkne se všech souborů v adre
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL-adresa rozšíření';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'URL-adresa rozšíření se dotkne všech souborů v adresáři <em>rozšíření</em> (zvýší rychlost načítání stránky).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Klávesové zkratky backendu';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Vice o zrychlení vašeho work-flow a klávesových zkratkách se dozvite <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">zde</a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Rozevřít všechny';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Rozevřít nebo zavřít všechny uzly';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Jeden z účtů Contaa byl uzamčen';

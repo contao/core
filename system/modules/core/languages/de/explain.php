@@ -17,7 +17,7 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'Rich Text Editor';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'Weitere Informationen zu TinyMCE finden Sie unter <a href="http://www.tinymce.com/" title="TinyMCE by moxiecode" target="_blank">http://www.tinymce.com/</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Inserttags';
-$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'Weitere Informationen zu Inserttags finden Sie unter <a href="http://contao.org/de/insert-tags.html" title="Contao Online-Dokumentation" target="_blank">http://contao.org/de/insert-tags.html</a>.';
+$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'Weitere Informationen zu Inserttags finden Sie unter <a href="https://contao.org/de/manual/3.0/managing-content.html#inserttags" title="Contao Online-Dokumentation" target="_blank">https://contao.org/de/manual/3.0/managing-content.html#inserttags</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'Code Editor';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'Weitere Informationen zu CodeMirror finden Sie unter <a href="http://codemirror.net" title="CodeMirror by Marijn Haverbeke" target="_blank">http://codemirror.net</a>.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';

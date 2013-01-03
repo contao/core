@@ -17,7 +17,6 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'Editor de text';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'pentru mai multe informaţii despre TinyMCE vizitaţi <a <a href="http://tinymce.moxiecode.com" title="TinyMCE de moxiecode" target="_blank">http://tinymce.moxiecode.com</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Inserare tag-uri';
-$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'pentru mai multe informaţii despre inserarea de tag-uri vizitaţi <a href="http://www.contao.org/insert-tags.html" title="Documentaţie online Contao" target="_blank">http://www.contao.org/insert-tags.html</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'Editor sursă';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'Pentru mai multe informaţii despre EditArea accesaţi <a href="http://codemirror.net" title="EditArea de Marijn Haverbeke" target="_blank">http://codemirror.net</a>.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';

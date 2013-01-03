@@ -17,7 +17,6 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'RTF textový editor';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'Viac informácií o TinyMCE získate na adrese <a href="http://tinymce.moxiecode.com" title="Otvor http://tinymce.moxiecode.com v novom okne" onclick="window.open(this.href); return false;">moxiecode.com</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Značky (Insert tags)';
-$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'Značky (Insert tags) môžete vložiť kdekoľvek v Contao. Nahradia sa určitými hodnotami pred tým, ako sa stránka zobrazí na obrazovke. Viac info: <a href="http://www.contao.org/insert-tags.html" title="Contao online documentation" onclick="window.open(this.href); return false;">http://www.contao.org/insert-tags.html</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'Editor zrojového kódu';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'Viac informácií o EditArea získate na adrese <a href="http://www.cdolivet.com/index.php?page=editArea" title="EditArea by Christophe Dolivet" onclick="window.open(this.href); return false;">http://www.cdolivet.com/index.php?page=editArea</a>.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';

@@ -291,7 +291,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'La URL de archivos aplica al dir
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL de plugins';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'La URL de plugins aplica a todos los recursos en el directorio <em>plugins</em> (optimización de descarga de páginas).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Teclas de acceso rápido del Backend';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Aprende más sobre accelerar tu proceso de trabajo usando <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">keyboard shortcuts</a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Cambiar todos';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Expandir o plegar todos los nodos';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Una cuenta Contao ha sido bloqueada';

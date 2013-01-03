@@ -17,7 +17,6 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'Editur da Text ritg';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'Visita  <a href="http://www.tinymce.com/" title="TinyMCE da moxiecode" target="_blank">http://www.tinymce.com/</a> per retschaiver ulteriuras infurmaziuns davart TinyMCE.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Insert-tags';
-$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'Visita <a href="http://contao.org/en/insert-tags.html" title="Documentaziun online da Contao" target="_blank">http://contao.org/en/insert-tags.html</a> per retschaiver ulteriuras infurmaziuns davart insert-tags.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'Editur da code';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'Visita <a href="http://codemirror.net" title="EditArea da Marijn Haverbeke" target="_blank">http://codemirror.net</a> per retschaiver ulteriuras infurmaziuns davart CodeMirror.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';

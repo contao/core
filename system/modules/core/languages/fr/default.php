@@ -292,7 +292,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'L\'URL des fichiers s\'applique 
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL des ressources';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'L\'URL des ressources  s\'applique à toutes les ressources se trouvant dans le répertoire <em>assets</em> (optimisation de la vitesse de chargement des pages).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Raccourcis clavier du back office';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'En savoir plus sur l\'accélération de votre flux de travail en utilisant des <a href="http://www.contao.fr/raccourcis-clavier.html" target="_blank">raccourcis clavier</a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Tout basculer';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Développer ou réduire tous les nœuds';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Un compte Contao a été bloqué';

@@ -159,7 +159,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.description.1">
         <source>Please enter a short description of the news feed.</source>
-        <target>Введите краткое описание канала календаря.</target>
+        <target>Введите краткое описание канала.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.tstamp.0">
         <source>Revision date</source>

@@ -292,7 +292,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'Filarkivets URL gælder for <em>
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'Assets URL';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'Assets URLen gælder for <em>assets</em> mappen og kan f.eks. pege til et CDN (Page Speed optimering).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Back end genvejstaster';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Lær mere om at arbejde hurtigere ved at benytte <a href="http://contao.org/en/keyboard-shortcuts.html" title="Oversigt over genvejstaster på contao.org" target="_blank">genvejstaster</a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Skift alle';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Åbn eller luk alle';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'En konto er blevet låst';

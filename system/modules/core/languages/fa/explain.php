@@ -17,7 +17,6 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'ویرایشگر متن پیشرفته';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'برای اطلاعات بیشتر درباره TinyMCE <a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" onclick="window.open(this.href); return false;">http://tinymce.moxiecode.com</a> را ببینید.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'درج تگ‌ها';
-$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'برای اطلاعات بیشتر درباره درج تگ‌ها <a href="http://www.contao.org/insert-tags.html" title="Contao online documentation" onclick="window.open(this.href); return false;">http://www.contao.org/insert-tags.html</a> را ببنید.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'ویرایشگر کد';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'برای اطلاعات بیشتر در مورد CodeMirror <a href="http://codemirror.net" title="EditArea by Marijn Haverbeke" onclick="window.open(this.href); return false;">http://codemirror.net</a> را ملاحظه فرمایید.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';

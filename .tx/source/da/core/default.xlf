@@ -81,6 +81,9 @@
         <source>Please enter date and time as &quot;%s&quot;!</source>
         <target>Indtast venligst dato og tidspunkt som &quot;%s&quot;!</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
+      </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
         <target>Feltet &quot;%s&quot; må ikke indeholde mellemrum!</target>
@@ -1117,8 +1120,7 @@
         <target>Back end genvejstaster</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;http://contao.org/en/keyboard-shortcuts.html&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>Lær mere om at arbejde hurtigere ved at benytte &lt;a href=&quot;http://contao.org/en/keyboard-shortcuts.html&quot; title=&quot;Oversigt over genvejstaster på contao.org&quot; target=&quot;_blank&quot;&gt;genvejstaster&lt;/a&gt;.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1961,6 +1963,9 @@ Denne e-mail er blevet genereret af systemet og kan ikke besvares direkte.
       <trans-unit id="MSC.dragItemsHint">
         <source>Drag the items to re-order them</source>
         <target>Træk elementerne for at sortere dem</target>
+      </trans-unit>
+      <trans-unit id="MSC.templatesTheme">
+        <source>Theme %s</source>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

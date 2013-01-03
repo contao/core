@@ -17,7 +17,6 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'Rich Text Editor';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'Per maggiori informazioni su TinyMCE visita il sito <a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" target="_blank">http://tinymce.moxiecode.com</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Inserisci tag';
-$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'I tags sono caratteri speciali che potete inserire dovunque in Contao. Questi caratteri speciali saranno sostituiti da determinati valori prima che una pagina venga stampata a video. Per maggiori informazioni <a href="http://www.contao.org/insert-tags.html" title="Contao online documentation" target="_blank">http://www.contao.org/insert-tags.html</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'Editor Codice';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'Per maggiori informazioni relativamente a CodeMirror visita <a href="http://codemirror.net" title="EditArea by Marijn Haverbeke" target="_blank">http://codemirror.net</a>.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';

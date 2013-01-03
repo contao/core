@@ -292,7 +292,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'نشانی وب فایل‌ها 
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'نشانی وب افزونه‌ها';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'نشانی وب افزونه‌ها به همه منابع در شاخه <em>plugins</em> اعمال خواهد شد (بهینه‌سازی سرعت صفحه)';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'کلید‌های میانبر بخش مدیریت';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'سرعت کارهای خود را با استفاده از <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">کلید‌های میانبر</a> افزایش دهید..';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'بستن همه';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'گسترش یا باز کردن همه گره‌ها';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'یک حساب کاربری کانتائو قفل شده است';

@@ -17,7 +17,6 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'Bagātināta teksta redaktors';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'Lai iegūtu papildinformāciju par TinyMCE, lūdzu, apskatiet <a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" onclick="window.open(this.href); return false;">http://tinymce.moxiecode.com</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Insert tags';
-$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'Lai iegūtu papildinformāciju par Insert tags, lūdzu, apskatiet <a href="http://www.contao.org/insert-tags.html" title="Contao online documentation" onclick="window.open(this.href); return false;">http://www.contao.org/insert-tags.html</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'Koda redaktors';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'Lai iegūtu papildinformāciju par Koda redaktoru, lūdzu, apskatiet <a href="http://codemirror.net" title="EditArea by Marijn Haverbeke" onclick="window.open(this.href); return false;">http://codemirror.net</a>.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';

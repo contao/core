@@ -292,7 +292,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'Fil-URL appliceras på <em>tl_fi
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'Plugin-URL';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'Plugin-URL appliceras på alla resurser i <em>plugins</em>-mappen (optimering av sidladdningshastighet).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Backend snabbtangenter';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Lär dig mer om att snabba upp ditt arbete i backend genom att använda <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">snabbtangenter</a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Växla alla';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Expandera eller kollapsa alla noder';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Ett Contao-konto har låsts';

@@ -14,8 +14,7 @@
         <target>Umetni tagove</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.1">
-        <source>For more information on insert tags please visit &lt;a href=&quot;http://contao.org/en/insert-tags.html&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;http://contao.org/en/insert-tags.html&lt;/a&gt;.</source>
-        <target>Za dodatne informacije o umetanje tagova posjetite &lt;a href=&quot;http://dev.typolight.org/wiki/EnglishInserttags&quot; title=&quot;TYPOlight online dokumentaciju&quot; onclick=&quot;window.open(this.href); return false;&quot;&gt;http://dev.typolight.org/wiki/EnglishInserttags&lt;/a&gt;.</target>
+        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</source>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.0">
         <source>Code Editor</source>

@@ -289,7 +289,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'Faila URL attiecas uz <em>tl_fil
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'Papildinājuma URL';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'Papildinājuma URL attiecas uz visiem resursiem <em>plugins</em> direktorijā (lapas ātruma optimizācija).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Aizmugures īsinājumtaustiņi';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Uzziniet vairāk par to kā paātrināt savu darbplūsmu izmantojot <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">īsinājumtaustiņus</>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Pārslēgt visus';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Izvērst vai sakļaut visus mezglus';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Contao konts ir bloķēts';

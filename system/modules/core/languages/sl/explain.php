@@ -17,7 +17,6 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'Urejevalnik obogatenega besedila';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'za več informacij o TinyMCE prosimo obiščite <a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" onclick="window.open(this.href); return false;">http://tinymce.moxiecode.com</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Vstavi značke';
-$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'za več informacij o vstavljanju znač prosimo obiščite <a href="http://dev.typolight.org/wiki/EnglishInserttags" title="TYPOlight online documentation" onclick="window.open(this.href); return false;">http://dev.typolight.org/wiki/EnglishInserttags</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'Urejevalnik kode';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'Za več informacij o urejevalniku kode (EditArea) obiščite <a href="http://www.cdolivet.com/index.php?page=editArea" title="EditArea by Christophe Dolivet" onclick="window.open(this.href); return false;">http://www.cdolivet.com/index.php?page=editArea</a>.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';
