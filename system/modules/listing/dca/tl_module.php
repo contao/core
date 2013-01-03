@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Listing
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -112,7 +112,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_layout'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Listing
  */
 class tl_module_listing extends Backend

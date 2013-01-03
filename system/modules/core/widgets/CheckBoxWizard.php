@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -23,7 +23,7 @@ namespace Contao;
  * Provide methods to handle sortable checkboxes.
  * @copyright  Leo Feyer 2005-2013
  * @author     John Brand <http://www.thyon.com>
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
 class CheckBoxWizard extends \Widget

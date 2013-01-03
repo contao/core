@@ -16,7 +16,7 @@
  * Implements the extension manager
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Repository
  */
 class RepositoryManager extends RepositoryBackendModule

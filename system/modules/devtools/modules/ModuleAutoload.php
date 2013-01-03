@@ -6,7 +6,7 @@
  * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Devtools
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -22,7 +22,7 @@ namespace Contao;
  *
  * Back end module "autoload files".
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Devtools
  */
 class ModuleAutoload extends \BackendModule
@@ -273,7 +273,7 @@ class ModuleAutoload extends \BackendModule
  * Copyright (C) 2005-$intYear Leo Feyer
  * 
  * @package $strPackage
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -476,7 +476,7 @@ EOT
  * Copyright (C) 2005-$intYear Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 

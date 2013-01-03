@@ -4,7 +4,7 @@
  * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -14,7 +14,7 @@
  *
  * Provide methods to handle Ajax requests.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  */
 var AjaxRequest =
 {
@@ -659,7 +659,7 @@ var AjaxRequest =
  *
  * Provide methods to handle back end tasks.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  */
 var Backend =
 {
@@ -1703,7 +1703,7 @@ window.addEvent('ajax_change', function() {
  *
  * Provide callback functions for TinyMCE.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  */
 var TinyCallback =
 {
