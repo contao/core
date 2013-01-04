@@ -297,7 +297,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'sorting'                 => true,
 			'flag'                    => 11,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('fe_'),
+			'options_callback'        => array('tl_layout', 'getPageTemplates'),
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -374,7 +374,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'filter'                  => true,
 			'search'                  => true,
 			'inputType'               => 'checkboxWizard',
-			'options'                 => $this->getTemplateGroup('j_'),
+			'options_callback'        => array('tl_layout', 'getJqueryTemplates'),
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "text NULL"
 		),
@@ -403,7 +403,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'filter'                  => true,
 			'search'                  => true,
 			'inputType'               => 'checkboxWizard',
-			'options'                 => $this->getTemplateGroup('moo_'),
+			'options_callback'        => array('tl_layout', 'getMooToolsTemplates'),
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "text NULL"
 		),
@@ -413,7 +413,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'checkboxWizard',
-			'options'                 => $this->getTemplateGroup('analytics_'),
+			'options_callback'        => array('tl_layout', 'getAnalyticsTemplates'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "varchar(64) NOT NULL default ''"
@@ -586,6 +586,46 @@ class tl_layout extends Backend
 		}
 
 		return $return;
+	}
+
+
+	/**
+	 * Return all page templates as array
+	 * @return array
+	 */
+	public function getPageTemplates()
+	{
+		return $this->getTemplateGroup('fe_');
+	}
+
+
+	/**
+	 * Return all MooTools templates as array
+	 * @return array
+	 */
+	public function getMooToolsTemplates()
+	{
+		return $this->getTemplateGroup('moo_');
+	}
+
+
+	/**
+	 * Return all jQuery templates as array
+	 * @return array
+	 */
+	public function getJqueryTemplates()
+	{
+		return $this->getTemplateGroup('j_');
+	}
+
+
+	/**
+	 * Return all analytics templates as array
+	 * @return array
+	 */
+	public function getAnalyticsTemplates()
+	{
+		return $this->getTemplateGroup('analytics_');
 	}
 
 

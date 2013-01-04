@@ -116,7 +116,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_template'] = array
 	'default'                 => 'event_full',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('event_'),
+	'options_callback'        => array('tl_module_calendar', 'getEventTemplates'),
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
@@ -127,7 +127,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_ctemplate'] = array
 	'default'                 => 'cal_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('cal_'),
+	'options_callback'        => array('tl_module_calendar', 'getCalendarTemplates'),
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
@@ -262,5 +262,25 @@ class tl_module_calendar extends Backend
     }
   });
   </script>';
+	}
+
+
+	/**
+	 * Return all event templates as array
+	 * @return array
+	 */
+	public function getEventTemplates()
+	{
+		return $this->getTemplateGroup('event_');
+	}
+
+
+	/**
+	 * Return all calendar templates as array
+	 * @return array
+	 */
+	public function getCalendarTemplates()
+	{
+		return $this->getTemplateGroup('cal_');
 	}
 }

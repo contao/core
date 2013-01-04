@@ -90,7 +90,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_layout'] = array
 	'default'                 => 'list_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('list_'),
+	'options_callback'        => array('tl_module_listing', 'getListTemplates'),
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_layout'] = array
 	'default'                 => 'info_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('info_'),
+	'options_callback'        => array('tl_module_listing', 'getInfoTemplates'),
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
@@ -125,5 +125,25 @@ class tl_module_listing extends Backend
 	public function getAllTables()
 	{
 		return $this->Database->listTables();
+	}
+
+
+	/**
+	 * Return all list templates as array
+	 * @return array
+	 */
+	public function getListTemplates()
+	{
+		return $this->getTemplateGroup('list_');
+	}
+
+
+	/**
+	 * Return all info templates as array
+	 * @return array
+	 */
+	public function getInfoTemplates()
+	{
+		return $this->getTemplateGroup('info_');
 	}
 }

@@ -85,7 +85,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_template'] = array
 	'default'                 => 'news_latest',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('news_'),
+	'options_callback'        => array('tl_module_news', 'getNewsTemplates'),
 	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
@@ -239,5 +239,15 @@ class tl_module_news extends Backend
     }
   });
   </script>';
+	}
+
+
+	/**
+	 * Return all news templates as array
+	 * @return array
+	 */
+	public function getNewsTemplates()
+	{
+		return $this->getTemplateGroup('news_');
 	}
 }

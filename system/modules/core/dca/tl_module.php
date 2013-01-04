@@ -244,7 +244,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['navigationTpl'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('nav_'),
+			'options_callback'        => array('tl_module', 'getNavigationTemplates'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'pages' => array
@@ -322,7 +322,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['memberTpl'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('member_'),
+			'options_callback'        => array('tl_module', 'getMemberTemplates'),
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -405,7 +405,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['searchTpl'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('search_'),
+			'options_callback'        => array('tl_module', 'getSearchTemplates'),
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -592,7 +592,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'default'                 => 'rss_default',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('rss_'),
+			'options_callback'        => array('tl_module', 'getRssTemplates'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'numberOfItems' => array
@@ -854,6 +854,46 @@ class tl_module extends Backend
 		}
 
 		return $arrForms;
+	}
+
+
+	/**
+	 * Return all navigation templates as array
+	 * @return array
+	 */
+	public function getNavigationTemplates()
+	{
+		return $this->getTemplateGroup('nav_');
+	}
+
+
+	/**
+	 * Return all member templates as array
+	 * @return array
+	 */
+	public function getMemberTemplates()
+	{
+		return $this->getTemplateGroup('member_');
+	}
+
+
+	/**
+	 * Return all search templates as array
+	 * @return array
+	 */
+	public function getSearchTemplates()
+	{
+		return $this->getTemplateGroup('search_');
+	}
+
+
+	/**
+	 * Return all navigation templates as array
+	 * @return array
+	 */
+	public function getRssTemplates()
+	{
+		return $this->getTemplateGroup('rss_');
 	}
 
 

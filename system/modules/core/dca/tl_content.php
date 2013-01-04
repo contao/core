@@ -587,7 +587,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['galleryTpl'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('gallery_'),
+			'options_callback'        => array('tl_content', 'getGalleryTemplates'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'playerSRC' => array
@@ -1197,6 +1197,16 @@ class tl_content extends Backend
 		}
 
 		return $arrModules;
+	}
+
+
+	/**
+	 * Return all gallery templates as array
+	 * @return array
+	 */
+	public function getGalleryTemplates()
+	{
+		return $this->getTemplateGroup('gallery_');
 	}
 
 
