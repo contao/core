@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -33,8 +33,8 @@
  * Class Date
  *
  * Provide methods to handle different date formats.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Library
  */
 class Date extends System
@@ -84,8 +84,8 @@ class Date extends System
 	 */
 	public function __construct($intTstamp=false, $strFormat=false)
 	{
-		$this->intTstamp = $intTstamp ? $intTstamp : time();
-		$this->strFormat = $strFormat ? $strFormat : $GLOBALS['TL_CONFIG']['dateFormat'];
+		$this->intTstamp = ($intTstamp !== false) ? $intTstamp : time();
+		$this->strFormat = ($strFormat !== false) ? $strFormat : $GLOBALS['TL_CONFIG']['dateFormat'];
 
 		if (!preg_match('/^\-?[0-9]+$/', $this->intTstamp) || preg_match('/^[a-zA-Z]+$/', $this->strFormat))
 		{
@@ -419,6 +419,12 @@ class Date extends System
 		if ($intYear == '')
 		{
 			$intYear = 1970;
+		}
+
+		// Validate the date (see #5086)
+		if (checkdate($intMonth, $intDay, $intYear) === false)
+		{
+			throw new Exception(sprintf('Invalid date "%s"', $this->intTstamp));
 		}
 
 		$this->intTstamp =  mktime((int) $intHour, (int) $intMinute, (int) $intSecond, (int) $intMonth, (int) $intDay, (int) $intYear);

@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -33,8 +33,8 @@
  * Class Widget
  *
  * Provide methods to handle form widgets.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Controller
  */
 abstract class Widget extends Controller
@@ -720,6 +720,16 @@ abstract class Widget extends Controller
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['dateFormat'])));
 					}
+
+					// Validate the date (see #5086)
+					try
+					{
+						new Date($varInput);
+					}
+					catch (Exception $e)
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
+					}
 					break;
 
 				// Check whether the current value is a valid time format
@@ -739,6 +749,16 @@ abstract class Widget extends Controller
 					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['datimFormat'])));
+					}
+
+					// Validate the date (see #5086)
+					try
+					{
+						new Date($varInput);
+					}
+					catch (Exception $e)
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
 					}
 					break;
 

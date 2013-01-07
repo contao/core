@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -50,6 +50,7 @@ $GLOBALS['TL_LANG']['ERR']['url']               = 'Bitte geben Sie ein gültiges
 $GLOBALS['TL_LANG']['ERR']['date']              = 'Bitte geben Sie das Datum im Format "%s" ein!';
 $GLOBALS['TL_LANG']['ERR']['time']              = 'Bitte geben Sie die Uhrzeit im Format "%s" ein!';
 $GLOBALS['TL_LANG']['ERR']['dateTime']          = 'Bitte geben Sie Datum und Uhrzeit im Format "%s" ein!';
+$GLOBALS['TL_LANG']['ERR']['invalidDate']       = 'Ungültiges Datum "%s"!';
 $GLOBALS['TL_LANG']['ERR']['noSpace']           = 'Das Feld "%s" darf keine Leerzeichen enthalten!';
 $GLOBALS['TL_LANG']['ERR']['filesize']          = 'Die maximale Größe für Datei-Uploads beträgt %s (Contao- oder php.ini-Einstellungen)!';
 $GLOBALS['TL_LANG']['ERR']['filetype']          = 'Der Dateityp "%s" darf nicht hochgeladen werden!';
@@ -206,14 +207,14 @@ $GLOBALS['TL_LANG']['MSC']['thousandsSeparator'] = '.';
  * Units
  */
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
-$GLOBALS['TL_LANG']['UNITS'][1] = 'kB';
-$GLOBALS['TL_LANG']['UNITS'][2] = 'MB';
-$GLOBALS['TL_LANG']['UNITS'][3] = 'GB';
-$GLOBALS['TL_LANG']['UNITS'][4] = 'TB';
-$GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
-$GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
-$GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
-$GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
+$GLOBALS['TL_LANG']['UNITS'][1] = 'KiB';
+$GLOBALS['TL_LANG']['UNITS'][2] = 'MiB';
+$GLOBALS['TL_LANG']['UNITS'][3] = 'GiB';
+$GLOBALS['TL_LANG']['UNITS'][4] = 'TiB';
+$GLOBALS['TL_LANG']['UNITS'][5] = 'PiB';
+$GLOBALS['TL_LANG']['UNITS'][6] = 'EiB';
+$GLOBALS['TL_LANG']['UNITS'][7] = 'ZiB';
+$GLOBALS['TL_LANG']['UNITS'][8] = 'YiB';
 
 
 /**
@@ -324,7 +325,7 @@ $GLOBALS['TL_LANG']['MSC']['move_down']     = array('Nach unten', 'Den Eintrag e
 $GLOBALS['TL_LANG']['MSC']['staticFiles']   = array('Datei-URL', 'Die Datei-URL gilt für das <em>tl_files</em>-Verzeichnis sowie alle Vorschaubilder (Page-Speed-Optimierung).');
 $GLOBALS['TL_LANG']['MSC']['staticSystem']  = array('Skript-URL', 'Die Skript-URL gilt für alle JavaScript- und CSS-Dateien inklusive eingebundener Hintergrundbilder (Page-Speed-Optimierung).');
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'] = array('Plugins-URL', 'Die Plugins-URL gilt für alle Ressourcen im <em>plugins</em>-Verzeichnis (Page-Speed-Optimierung).');
-$GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Backend-Tastaturkürzel', 'Wie Sie Ihren Arbeitsablauf durch die Verwendung von <a href="http://www.contao.org/tastaturkuerzel.html" target="_blank">Tastaturkürzeln</a> beschleunigen.');
+$GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Backend-Tastaturkürzel', 'Wie Sie Ihren Arbeitsablauf durch die Verwendung von <a href="https://contao.org/de/manual/2.11/administration-area.html#backend-tastaturk%C3%BCrzel" target="_blank">Tastaturkürzeln</a> beschleunigen.');
 
 
 /**

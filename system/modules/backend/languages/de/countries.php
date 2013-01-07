@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -39,7 +39,6 @@ $GLOBALS['TL_LANG']['CNT']['ag'] = 'Antigua und Barbuda';
 $GLOBALS['TL_LANG']['CNT']['ai'] = 'Anguilla';
 $GLOBALS['TL_LANG']['CNT']['al'] = 'Albanien';
 $GLOBALS['TL_LANG']['CNT']['am'] = 'Armenien';
-$GLOBALS['TL_LANG']['CNT']['an'] = 'Niederländische Antillen';
 $GLOBALS['TL_LANG']['CNT']['ao'] = 'Angola';
 $GLOBALS['TL_LANG']['CNT']['aq'] = 'Antarktis';
 $GLOBALS['TL_LANG']['CNT']['ar'] = 'Argentinien';
@@ -259,7 +258,6 @@ $GLOBALS['TL_LANG']['CNT']['tr'] = 'Türkei';
 $GLOBALS['TL_LANG']['CNT']['tt'] = 'Trinidad und Tobago';
 $GLOBALS['TL_LANG']['CNT']['tv'] = 'Tuvalu';
 $GLOBALS['TL_LANG']['CNT']['tw'] = 'Taiwan';
-$GLOBALS['TL_LANG']['CNT']['ty'] = 'Tahiti';
 $GLOBALS['TL_LANG']['CNT']['tz'] = 'Tansania';
 $GLOBALS['TL_LANG']['CNT']['ua'] = 'Ukraine';
 $GLOBALS['TL_LANG']['CNT']['ug'] = 'Uganda';

@@ -1,6 +1,50 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.8 (2013-01-07)
+---------------------------
+
+### Fixed
+Make sure entered dates map to an existing date (see #5086).
+
+### Fixed
+Fixed the MySQLi field count (see #5182).
+
+### Fixed
+The Date class should return `00:00` for `Date(0)->time` (see #4249).
+
+### Reverted
+Handle dependencies when updating extensions (see #3804).
+
+### Fixed
+Fixed the unprefixed CSS gradient output (see #4569). 
+
+### Fixed
+Fixed a small formatting issue in the Music Academy theme (see #5160).
+
+### Fixed
+Show all extensions in the log when updating multiple at once (see #5144).
+
+### Fixed
+Standardize RSS feed aliases (see #5096).
+
+### Fixed
+Make the `FileUpload` constructor public (see #5054).
+
+### Fixed
+Use `isset()` in the `Database::fetch*()` methods (see #4990).
+
+### Fixed
+Changed the `System::getReadableSize()` algorithm to powers of two (see #4283).
+
+### Fixed
+Removed Tahiti and the Netherlands Antilles from the countries list (see #3791).
+
+### Fixed
+Also adjust the `be_navigation.html5` template to the new "getUserNavigation"
+hook changes (see #3411).
+
+
 Version 2.11.7 (2012-11-29)
 ---------------------------
 

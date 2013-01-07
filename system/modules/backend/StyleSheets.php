@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -33,8 +33,8 @@
  * Class StyleSheets
  *
  * Provide methods to handle style sheets.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Controller
  */
 class StyleSheets extends Backend
@@ -534,66 +534,6 @@ class StyleSheets extends Backend
 						$row['gradientAngle'] = 'top';
 					}
 
-					$webkitAngle = $row['gradientAngle'];
-
-					// Convert the starting point to degrees
-					$arrMapper = array
-					(
-						'left'         => '0deg',
-						'top'          => '270deg',
-						'right'        => '180deg',
-						'bottom'       => '90deg',
-						'top left'     => '315deg', 
-						'left top'     => '315deg', 
-						'bottom left'  => '45deg', 
-						'left bottom'  => '45deg', 
-						'top right'    => '225deg', 
-						'right top'    => '225deg', 
-						'bottom right' => '135deg', 
-						'right bottom' => '135deg' 
-					);
-
-					if (isset($arrMapper[$webkitAngle]))
-					{
-						$webkitAngle = $arrMapper[$webkitAngle];
-					}
-
-					$angle = floatval($webkitAngle);
-					$multi = 50 / 45; // 45 degree == 50 %
-
-					// Make angle a positive value
-					while ($angle < 0)
-					{
-						$angle += 360;
-					}
-
-					// Convert the angle to points in percentage from the top left corner 
-					if ($angle >= 0 && $angle < 45)
-					{
-						$offset = round(($angle * $multi), 2);
-						$webkitAngle = '0% ' . (50 + $offset) . '%,100% ' . (50 - $offset) .'%';
-					}
-					elseif ($angle >= 45 && $angle < 135)
-					{
-						$offset = round((($angle - 45) * $multi), 2);
-						$webkitAngle = $offset . '% 100%,' . (100 - $offset) .'% 0%';
-					}
-					elseif ($angle >= 135 && $angle < 225)
-					{
-						$offset = round((($angle - 135) * $multi), 2);
-						$webkitAngle = '100% ' . (100 - $offset) . '%,0% ' . $offset .'%';
-					}
-					elseif ($angle >= 225 && $angle < 315)
-					{
-						$offset = round((($angle - 225) * $multi), 2);
-						$webkitAngle = (100 - $offset) . '% 0%,' . $offset .'% 100%';
-					}
-					elseif ($angle >= 315 && $angle <= 360)
-					{
-						$offset = round((($angle - 315) * $multi), 2);
-						$webkitAngle = '0% ' . $offset . '%,100% ' . (100 - $offset) .'%';
-					}
-
 					$row['gradientColors'] = array_values(array_filter($row['gradientColors']));
 
 					// Add a hash tag to the color values
@@ -602,71 +542,35 @@ class StyleSheets extends Backend
 						$row['gradientColors'][$k] = '#' . $v;
 					}
 
-					$webkitColors = $row['gradientColors'];
-
-					// Convert #ffc 10% to color-stop(0.1,#ffc)
-					foreach ($webkitColors as $k=>$v)
+					// Convert the angle for the legacy commands (see #4569)
+					if (strpos($row['gradientAngle'], 'deg') !== false)
 					{
-						// Split #ffc 10%
-						list($col, $pct) = explode(' ', $v, 2);
-
-						// Convert 10% to 0.1
-						if ($pct != '')
+						$angle = (abs(intval($row['gradientAngle']) - 450) % 360) . 'deg';
+					}
+					else
+					{
+						switch ($row['gradientAngle'])
 						{
-							$pct = intval($pct) / 100;
+							case 'bottom':       $angle = 'to top';          break;
+							case 'left':         $angle = 'to right';        break;
+							case 'top':          $angle = 'to bottom';       break;
+							case 'right':        $angle = 'to left';         break;
+							case 'bottom right': $angle = 'to top left';     break;
+							case 'bottom left':  $angle = 'to top right';    break;
+							case 'top right':    $angle = 'to bottom left';  break;
+							case 'top left':     $angle = 'to bottom right'; break;
 						}
-						else
-						{
-							// Default values: 0, 0.33, 0.66, 1
-							switch ($k)
-							{
-								case 0:
-									$pct = 0;
-									break;
-
-								case 1:
-									if (count($webkitColors) == 2)
-									{
-										$pct = 1;
-									}
-									elseif (count($webkitColors) == 3)
-									{
-										$pct = 0.5;
-									}
-									elseif (count($webkitColors) == 4)
-									{
-										$pct = 0.33;
-									}
-									break;
-
-								case 2:
-									if (count($webkitColors) == 3)
-									{
-										$pct = 1;
-									}
-									elseif (count($webkitColors) == 4)
-									{
-										$pct = 0.66;
-									}
-									break;
-
-								case 3:
-									$pct = 1;
-									break;
-							}
-						}
-
-						// The syntax is: color-stop(0.1,#ffc)
-						$webkitColors[$k] = 'color-stop(' . $pct . ',' . $col . ')';
 					}
 
-					$gradient = $row['gradientAngle'] . ',' . implode(',', $row['gradientColors']);
-					$webkitGradient = $webkitAngle . ',' . implode(',', $webkitColors);
+					$colors = implode(',', $row['gradientColors']);
+
+					$future = $angle . ',' . $colors;
+					$gradient = $row['gradientAngle'] . ',' . $colors;
 
 					$return .= $lb . 'background:' . $bgImage . '-moz-linear-gradient(' . $gradient . ');';
-					$return .= $lb . 'background:' . $bgImage . '-webkit-gradient(linear,' . $webkitGradient . ');';
+					$return .= $lb . 'background:' . $bgImage . '-webkit-linear-gradient(' . $gradient . ');';
 					$return .= $lb . 'background:' . $bgImage . '-o-linear-gradient(' . $gradient . ');';
-					$return .= $lb . 'background:' . $bgImage . 'linear-gradient(' . $gradient . ');';
+					$return .= $lb . 'background:' . $bgImage . 'linear-gradient(' . $future . ');';
 					$return .= $lb . '-pie-background:' . $bgImage . 'linear-gradient(' . $gradient . ');';
 				}
 			}

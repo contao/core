@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Config
  * @license    LGPL
  * @filesource
@@ -41,7 +41,6 @@ $countries = array
 	'ai' => 'Anguilla',
 	'al' => 'Albania',
 	'am' => 'Armenia',
-	'an' => 'Netherlands Antilles',
 	'ao' => 'Angola',
 	'aq' => 'Antarctica',
 	'ar' => 'Argentina',
@@ -261,7 +260,6 @@ $countries = array
 	'tt' => 'Trinidad and Tobago',
 	'tv' => 'Tuvalu',
 	'tw' => 'Taiwan',
-	'ty' => 'Tahiti',
 	'tz' => 'Tanzania',
 	'ua' => 'Ukraine',
 	'ug' => 'Uganda',

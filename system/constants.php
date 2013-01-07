@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -57,7 +57,7 @@ define('SWITCH_ORDER', true);
  * the web browser reload those resources after a Contao update.
  */
 define('VERSION', '2.11');
-define('BUILD', '7');
+define('BUILD', '8');
 define('LONG_TERM_SUPPORT', true);
 define('CODEMIRROR', '2.2');
 define('DATEPICKER', '2.1.1');

@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -33,8 +33,8 @@
  * Class DB_Mysqli
  *
  * Driver class for MySQLi databases.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Driver
  */
 class DB_Mysqli extends Database
@@ -302,8 +302,8 @@ class DB_Mysqli extends Database
  * Class DB_Mysqli_Statement
  *
  * Driver class for MySQLi databases.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Driver
  */
 class DB_Mysqli_Statement extends Database_Statement
@@ -414,8 +414,8 @@ class DB_Mysqli_Statement extends Database_Statement
  * Class DB_Mysqli_Result
  *
  * Driver class for MySQLi databases.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Driver
  */
 class DB_Mysqli_Result extends Database_Result
@@ -457,7 +457,7 @@ class DB_Mysqli_Result extends Database_Result
 	 */
 	protected function num_fields()
 	{
-		return @$this->resResult->field_countmysql;
+		return @$this->resResult->field_count;
 	}
 
 

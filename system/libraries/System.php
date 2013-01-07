@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -33,8 +33,8 @@
  * Class System
  *
  * Provide default methods that are required in all models and controllers.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Library
  */
 abstract class System
@@ -470,10 +470,6 @@ abstract class System
 		elseif (!is_numeric($intTstamp))
 		{
 			return '';
-		}
-		elseif ($intTstamp == 0)
-		{
-			return '-'; // see #4249
 		}
 		else
 		{
@@ -912,9 +908,9 @@ abstract class System
 	 */
 	protected function getReadableSize($intSize, $intDecimals=1)
 	{
-		for ($i=0; $intSize>=1000; $i++)
+		for ($i=0; $intSize>=1024; $i++)
 		{
-			$intSize /= 1000;
+			$intSize /= 1024;
 		}
 
 		return $this->getFormattedNumber($intSize, $intDecimals) . ' ' . $GLOBALS['TL_LANG']['UNITS'][$i];

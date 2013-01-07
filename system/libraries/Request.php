@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -34,8 +34,8 @@
  *
  * Provide methods to handle HTTP request. This class uses some functions of
  * Drupal's HTTP request class that you can find on http://drupal.org.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Library
  */
 class Request
@@ -240,7 +240,7 @@ class Request
 		$default = array
 		(
 			'Host' => 'Host: ' . $host,
-			'User-Agent' => 'User-Agent: Contao (+http://www.contao.org/)',
+			'User-Agent' => 'User-Agent: Contao (+https://contao.org/)',
 			'Content-Length' => 'Content-Length: '. strlen($this->strData),
 			'Connection' => 'Connection: close'
 		);
