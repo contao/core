@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.0.3 (2013-XX-XX)
+--------------------------
+
+### Fixed
+Correctly handle empty newsletter channel selections.
+
+
 Version 3.0.2 (2013-01-07)
 --------------------------
 
