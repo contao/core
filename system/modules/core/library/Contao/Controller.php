@@ -6,7 +6,7 @@
  * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Library
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -78,40 +78,52 @@ abstract class Controller extends \System
 	/**
 	 * Return all template files of a particular group as array
 	 * 
-	 * @param string  $strPrefix The template name prefix (e.g. "ce_")
-	 * @param integer $intTheme  The ID of the theme
+	 * @param string $strPrefix The template name prefix (e.g. "ce_")
 	 * 
 	 * @return array An array of template names
 	 */
-	public static function getTemplateGroup($strPrefix, $intTheme=0)
+	public static function getTemplateGroup($strPrefix)
 	{
-		$strTplFolder = 'templates';
-		$arrTemplates = \TemplateLoader::getPrefixedFiles($strPrefix);
+		$arrTemplates = array();
 
-		// Check for a theme templates folder
-		if ($intTheme > 0)
+		// Get the default templates
+		foreach (\TemplateLoader::getPrefixedFiles($strPrefix) as $strTemplate)
 		{
-			$objTheme = \ThemeModel::findByPk($intTheme);
+			$arrTemplates[$strTemplate] = $strTemplate;
+		}
 
-			if ($objTheme !== null && $objTheme->templates != '')
+		// Add the customized templates
+		foreach (glob(TL_ROOT . '/templates/' . $strPrefix . '*') as $strFile)
+		{
+			$strTemplate = basename($strFile, strrchr($strFile, '.'));
+
+			if (!isset($arrTemplates[$strTemplate]))
 			{
-				$strTplFolder = $objTheme->templates;
+				$arrTemplates[$strTemplate] = $strTemplate;
 			}
 		}
 
-		// Scan the templates directory
-		$arrFiles = array_values(preg_grep('/^' . $strPrefix . '/', scan(TL_ROOT . '/' . $strTplFolder)));
+		// Add the theme templates
+		$objTheme = \ThemeModel::findAll(array('order'=>'name'));
 
-		if (!empty($arrFiles))
+		if ($objTheme !== null)
 		{
-			foreach ($arrFiles as $strFile)
+			while ($objTheme->next())
 			{
-				$arrTemplates[] = basename($strFile, strrchr($strFile, '.'));
+				if ($objTheme->templates != '')
+				{
+					foreach (glob(TL_ROOT . '/' . $objTheme->templates . '/' . $strPrefix . '*') as $strFile)
+					{
+						$strTemplate = basename($strFile, strrchr($strFile, '.'));
+
+						if (!isset($arrTemplates[$strTemplate]))
+						{
+							$arrTemplates[$strTemplate] = $strTemplate . ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
+						}
+					}
+				}
 			}
 		}
-
-		natcasesort($arrTemplates);
-		$arrTemplates = array_values(array_unique($arrTemplates));
 
 		return $arrTemplates;
 	}
@@ -2671,21 +2683,7 @@ abstract class Controller extends \System
 				}
 			}
 
-			// Do not index or cache the page
-			global $objPage;
-			$objPage->noSearch = 1;
-			$objPage->cache = 0;
-
-			// Send a 404 header
-			header('HTTP/1.1 404 Not Found');
-
-			foreach (array('details', 'answer', 'text') as $key)
-			{
-				if (isset($objTemplate->$key))
-				{
-					$objTemplate->$key = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['ERR']['download'], $file) . '</p>';
-				}
-			}
+			// Do not send a 404 header (see #5178)
 		}
 
 		$arrEnclosures = array();

@@ -6,7 +6,7 @@
  * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Comments
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -93,7 +93,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_template'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Comments
  */
 class tl_content_comments extends Backend
@@ -101,41 +101,10 @@ class tl_content_comments extends Backend
 
 	/**
 	 * Return all comments templates as array
-	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getCommentsTemplates(DataContainer $dc)
+	public function getCommentsTemplates()
 	{
-		// Only look for a theme in the articles module (see #4808)
-		if (Input::get('do') == 'article')
-		{
-			$intPid = $dc->activeRecord->pid;
-
-			if (Input::get('act') == 'overrideAll')
-			{
-				$intPid = Input::get('id');
-			}
-
-			// Get the page ID
-			$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
-										 ->limit(1)
-										 ->execute($intPid);
-
-			// Load the page
-			$objPage = PageModel::findWithDetails($objArticle->pid);
-
-			// Get the theme ID
-			$objLayout = LayoutModel::findByPk($objPage->layout);
-
-			if ($objLayout === null)
-			{
-				return array();
-			}
-
-			return $this->getTemplateGroup('com_', $objLayout->pid);
-		}
-
-		// Return all gallery templates
 		return $this->getTemplateGroup('com_');
 	}
 }

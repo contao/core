@@ -6,7 +6,7 @@
  * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Comments
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -241,7 +241,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Comments
  */
 class tl_comments extends Backend

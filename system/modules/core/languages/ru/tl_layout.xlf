@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.3cl.0">
         <source>Main, left and right column</source>
-        <target>Основная левая и правая колонка</target>
+        <target>Левая, основная и правая колонка</target>
       </trans-unit>
       <trans-unit id="tl_layout.3cl.1">
         <source>Show three columns with the main column in the middle.</source>
@@ -383,7 +383,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.sections_legend">
         <source>Custom sections</source>
-        <target>Выбор секции</target>
+        <target>Пользовательские секции</target>
       </trans-unit>
       <trans-unit id="tl_layout.style_legend">
         <source>Style sheets</source>

@@ -83,7 +83,7 @@
 
 <p>Contao Open Source CMS (fka TYPOlight) :: Copyright ©2005-<?php echo date('Y'); ?> by 
   Leo Feyer :: Extensions are copyright of their respective owners :: Visit 
-  <a href="http://contao.org" target="_blank">contao.org</a> for more information :: 
+  <a href="https://contao.org" target="_blank">contao.org</a> for more information :: 
   Obstructing the appearance of this notice is prohibited by law!</p>
 
 <p>Contao is distributed in the hope that it will be useful but WITHOUT ANY 

@@ -58,8 +58,40 @@ The pageTree widget is now sortable just like the fileTree widget and the custom
 and quick navigation modules consider the custom order (see #4936).
 
 
-Version 3.0.2 (2013-XX-XX)
+Version 3.0.2 (2013-01-07)
 --------------------------
+
+### Fixed
+Throw an error if FileTree or PageTree widgets are left blank although they are
+marked as mandatory in the DCA (see #5131).
+
+### Fixed
+Modules and Hybrids included via content element were shown even if the content
+element was invisible or not published (see #5203).
+
+### Fixed
+Do not try to limit the template selection to a particular theme but show all
+available themes instead (see #5095).
+
+### Fixed
+Correctly build the comments subscription confirmation URL (see #5201).
+
+### Fixed
+Update the database if a file is being uploaded in the front end (see #5137).
+
+### Fixed
+Do not send a 404 header if an enclosure is requested and cannot be find by a
+module; there might be another module which can (see #5178).
+
+### Fixed
+Consider the `save_callback` of the password field in `tl_user` when a back end
+user is forced to change his password (see #5138).
+
+### Fixed
+Random images now open in the lightbox if configured (see #5191).
+
+### Fixed
+Find e-mail addresse like `a@b.com` in `String::encodeEmail()` (see #5175).
 
 ### Fixed
 Make sure there is a minimal MooTools core version for the command scheduler

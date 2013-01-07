@@ -6,7 +6,7 @@
  * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package News
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -153,7 +153,7 @@ if (in_array('comments', Config::getInstance()->getActiveModules()))
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    News
  */
 class tl_module_news extends Backend
@@ -244,18 +244,10 @@ class tl_module_news extends Backend
 
 	/**
 	 * Return all news templates as array
-	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getNewsTemplates(DataContainer $dc)
+	public function getNewsTemplates()
 	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('news_', $intPid);
+		return $this->getTemplateGroup('news_');
 	}
 }

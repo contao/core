@@ -6,7 +6,7 @@
  * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -22,7 +22,7 @@ namespace Contao;
  *
  * File upload field.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
 class FormFileUpload extends \Widget implements \uploadable
@@ -177,21 +177,31 @@ class FormFileUpload extends \Widget implements \uploadable
 
 			if ($this->storeFile)
 			{
-				$strUploadFolder = $this->uploadFolder;
+				$intUploadFolder = $this->uploadFolder;
 
-				// Overwrite upload folder with user home directory
+				// Overwrite the upload folder with user's home directory
 				if ($this->useHomeDir && FE_USER_LOGGED_IN)
 				{
 					$this->import('FrontendUser', 'User');
 
-					if ($this->User->assignDir && $this->User->homeDir && is_dir(TL_ROOT . '/' . $this->User->homeDir))
+					if ($this->User->assignDir && $this->User->homeDir)
 					{
-						$strUploadFolder = $this->User->homeDir;
+						$intUploadFolder = $this->User->homeDir;
 					}
 				}
 
+				$objUploadFolder = \FilesModel::findByPk($intUploadFolder);
+
+				// The upload folder could not be found
+				if ($objUploadFolder === null)
+				{
+					throw new \Exception("Invalid upload folder ID $intUploadFolder");
+				}
+
+				$strUploadFolder = $objUploadFolder->path;
+
 				// Store the file if the upload folder exists
-				if (strlen($strUploadFolder) && is_dir(TL_ROOT . '/' . $strUploadFolder))
+				if ($strUploadFolder != '' && is_dir(TL_ROOT . '/' . $strUploadFolder))
 				{
 					$this->import('Files');
 
@@ -231,6 +241,43 @@ class FormFileUpload extends \Widget implements \uploadable
 						'size' => $file['size'],
 						'uploaded' => true
 					);
+
+					$this->loadDataContainer('tl_files');
+
+					// Generate the DB entries
+					if ($GLOBALS['TL_DCA']['tl_files']['config']['databaseAssisted'])
+					{
+						$strFile = $strUploadFolder . '/' . $file['name'];
+						$objFile = \FilesModel::findByPath($strFile);
+
+						// Existing file is being replaced (see #4818)
+						if ($objFile !== null)
+						{
+							$objFile->tstamp = time();
+							$objFile->path   = $strFile;
+							$objFile->hash   = md5_file(TL_ROOT . '/' . $strFile);
+							$objFile->save();
+						}
+						else
+						{
+							$objFile = new \File($strFile);
+
+							$objNew = new \FilesModel();
+							$objNew->pid       = $objUploadFolder->id;
+							$objNew->tstamp    = time();
+							$objNew->type      = 'file';
+							$objNew->path      = $strFile;
+							$objNew->extension = $objFile->extension;
+							$objNew->hash      = md5_file(TL_ROOT . '/' . $strFile);
+							$objNew->name      = $objFile->basename;
+							$objNew->save();
+						}
+
+						// Update the hash of the target folder
+						$objFolder = new \Folder($strUploadFolder);
+						$objUploadFolder->hash = $objFolder->hash;
+						$objUploadFolder->save();
+					}
 
 					$this->log('File "'.$file['name'].'" has been moved to "'.$strUploadFolder.'"', 'FormFileUpload validate()', TL_FILES);
 				}

@@ -4,7 +4,7 @@
  * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Typolinks
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -65,7 +65,7 @@
 				longname : 'Contao plugin',
 				author : 'Leo Feyer',
 				authorurl : 'http://www.inetrobots.com',
-				infourl : 'http://contao.org',
+				infourl : 'https://contao.org',
 				version : '3.4.6'
 			};
 		}

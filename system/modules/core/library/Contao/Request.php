@@ -6,7 +6,7 @@
  * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Library
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -254,7 +254,7 @@ class Request
 		$default = array
 		(
 			'Host' => 'Host: ' . $host,
-			'User-Agent' => 'User-Agent: Contao (+http://contao.org/)',
+			'User-Agent' => 'User-Agent: Contao (+https://contao.org/)',
 			'Content-Length' => 'Content-Length: '. strlen($this->strData),
 			'Connection' => 'Connection: close'
 		);

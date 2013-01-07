@@ -4,7 +4,7 @@
  * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -25,7 +25,7 @@ legend {
 input[type="text"],input[type="password"],input[type="date"],input[type="datetime"],input[type="email"],
 input[type="number"],input[type="search"],input[type="tel"],input[type="time"],input[type="url"],textarea {
 	width:100%;
-	display:block;
+	display:inline-block;
 	padding:3px 6px;
 	background:#fff;
 	border:1px solid #ccc;
@@ -35,20 +35,27 @@ input[type="number"],input[type="search"],input[type="tel"],input[type="time"],i
 	-moz-box-shadow:inset 0 1px 1px #eee;
 	-webkit-box-shadow:inset 0 1px 1px #eee;
 	box-shadow:inset 0 1px 1px #eee;
-	-moz-transition:background .15s linear;
-	-webkit-transition:background .15s linear;
-	-o-transition:background .15s linear;
-	transition:background .15s linear;
+	-moz-transition:all .15s linear;
+	-webkit-transition:all .15s linear;
+	-o-transition:all .15s linear;
+	transition:all .15s linear;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
 input[type="text"]:focus,input[type="password"]:focus,input[type="date"]:focus,input[type="datetime"]:focus,input[type="email"]:focus,
 input[type="number"]:focus,input[type="search"]:focus,input[type="tel"]:focus,input[type="time"]:focus,input[type="url"]:focus,textarea:focus {
 	outline:0;
 	background:#fcfcfc;
+	border-color:#bbb;
 }
 
 /**
  * Fix some width and height settings 
  */
+input[type="file"] {
+	cursor:pointer;
+}
 select,input[type="file"] {
 	display:block;
 }

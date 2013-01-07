@@ -14,7 +14,7 @@ modern CSS framework and many already integrated modules (news, calendar, forms,
 etc.) have quickly made Contao one of the most popular open source content
 management systems on the market.
 
-Visit the project website at http://contao.org.
+Visit the project website at https://contao.org.
 
 
 System requirements
@@ -51,5 +51,5 @@ Troubleshooting
 ---------------
 
 If you are having problems installing or using Contao, please visit the project
-website at http://contao.org/support.html and read the user's guide or post your
-question in the Contao forum.
+website at https://contao.org/support.html and read the user's guide or post
+your question in the Contao forum.

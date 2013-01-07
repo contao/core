@@ -507,7 +507,7 @@
       </trans-unit>
       <trans-unit id="tl_content.start.0">
         <source>Show from</source>
-        <target>Toon vanaf</target>
+        <target>Weergeven vanaf</target>
       </trans-unit>
       <trans-unit id="tl_content.start.1">
         <source>Do not show the element on the website before this day.</source>
@@ -515,7 +515,7 @@
       </trans-unit>
       <trans-unit id="tl_content.stop.0">
         <source>Show until</source>
-        <target>Invoeg stop</target>
+        <target>Weergeven tot</target>
       </trans-unit>
       <trans-unit id="tl_content.stop.1">
         <source>Do not show the element on the website on and after this day.</source>

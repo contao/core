@@ -6,7 +6,7 @@
  * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Comments
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Comments
  *
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Comments
  */
 class Comments extends \Frontend
@@ -543,13 +543,14 @@ class Comments extends \Frontend
 		$objNotify->setRow($arrSet)->save();
 
 		$strUrl = \Environment::get('base') . \Environment::get('request');
+		$strConnector = (strpos($strUrl, '?') !== false) ? '&' : '?';
 
 		// Send the activation mail
 		$objEmail = new \Email();
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_optInSubject'], \Environment::get('host'));
-		$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_optInMessage'], $objComment->name, $strUrl, $strUrl . '?token=' . $objNotify->tokenConfirm, $strUrl . '?token=' . $objNotify->tokenRemove);
+		$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_optInMessage'], $objComment->name, $strUrl, $strUrl . $strConnector . 'token=' . $objNotify->tokenConfirm, $strUrl . $strConnector . 'token=' . $objNotify->tokenRemove);
 		$objEmail->sendTo($objComment->email);
 	}
 

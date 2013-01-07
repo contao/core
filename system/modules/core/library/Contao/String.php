@@ -6,7 +6,7 @@
  * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Library
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -278,7 +278,7 @@ class String
 	public static function encodeEmail($strString)
 	{
 		$arrEmails = array();
-		preg_match_all('/\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,6}/', $strString, $arrEmails);
+		preg_match_all('/\w([-._\w]*\w)?@\w([-._\w]*\w)?\.\w{2,6}/', $strString, $arrEmails);
 
 		foreach ((array) $arrEmails[0] as $strEmail)
 		{

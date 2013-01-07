@@ -6,7 +6,7 @@
  * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -22,7 +22,7 @@ namespace Contao;
  *
  * Front end module "random image".
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
 class ModuleRandomImage extends \Module
@@ -178,7 +178,9 @@ class ModuleRandomImage extends \Module
 		$i = mt_rand(0, (count($images)-1));
 
 		$arrImage = $images[$i];
+
 		$arrImage['size'] = $this->imgSize;
+		$arrImage['fullsize'] = $this->fullsize;
 
 		if (!$this->useCaption)
 		{

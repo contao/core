@@ -6,7 +6,7 @@
  * Copyright (c) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -782,7 +782,7 @@ if (Input::get('do') == 'article')
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
 class tl_content extends Backend
@@ -1202,81 +1202,11 @@ class tl_content extends Backend
 
 	/**
 	 * Return all gallery templates as array
-	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getGalleryTemplates(DataContainer $dc)
+	public function getGalleryTemplates()
 	{
-		// Only look for a theme in the articles module (see #4808)
-		if (Input::get('do') == 'article')
-		{
-			$intPid = $dc->activeRecord->pid;
-
-			// Override multiple
-			if (Input::get('act') == 'overrideAll')
-			{
-				$intPid = Input::get('id');
-			}
-
-			// Get the page ID
-			$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
-										 ->limit(1)
-										 ->execute($intPid);
-
-			// Load the page
-			$objPage = PageModel::findWithDetails($objArticle->pid);
-
-			// Get the theme ID
-			$objLayout = LayoutModel::findByPk($objPage->layout);
-
-			if ($objLayout === null)
-			{
-				return array();
-			}
-		}
-
-		// Return all gallery templates
-		return $this->getTemplateGroup('gallery_', $objLayout->pid);
-	}
-
-
-	/**
-	 * Return all player templates as array
-	 * @param \DataContainer
-	 * @return array
-	 */
-	public function getPlayerTemplates(DataContainer $dc)
-	{
-		// Only look for a theme in the articles module (see #4808)
-		if (Input::get('do') == 'article')
-		{
-			$intPid = $dc->activeRecord->pid;
-
-			// Override multiple
-			if (Input::get('act') == 'overrideAll')
-			{
-				$intPid = Input::get('id');
-			}
-
-			// Get the page ID
-			$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
-										 ->limit(1)
-										 ->execute($intPid);
-
-			// Load the page
-			$objPage = PageModel::findWithDetails($objArticle->pid);
-
-			// Get the theme ID
-			$objLayout = LayoutModel::findByPk($objPage->layout);
-
-			if ($objLayout === null)
-			{
-				return array();
-			}
-		}
-
-		// Return all gallery templates
-		return $this->getTemplateGroup('player_', $objLayout->pid);
+		return $this->getTemplateGroup('gallery_');
 	}
 
 
