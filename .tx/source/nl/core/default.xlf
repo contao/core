@@ -1969,6 +1969,7 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
       </trans-unit>
       <trans-unit id="MSC.templatesTheme">
         <source>Theme %s</source>
+        <target>Thema %s</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

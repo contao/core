@@ -17,6 +17,7 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'Текстовый редактор';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'Для получения дополнительной информации о TinyMCE, посетите <a href="http://www.tinymce.com/" title="TinyMCE от moxiecode" target="_blank">http://www.tinymce.com/</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Вставка тегов';
+$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'Для получения дополнительной информации о вставке тегов, посетите <a href="https://contao.org/en/manual/3.0/managing-content.html#insert-tags" title="Онлайн документация Contao" target="_blank">https://contao.org/en/manual/3.0/managing-content.html#insert-tags</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'Редактор кода';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'Для получения дополнительной информации о CodeMirror посетите <a href="http://codemirror.net" title="EditArea от Marijn Haverbeke" target="_blank">http://codemirror.net</a>.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'Атрибут colspan';

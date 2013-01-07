@@ -17,6 +17,7 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'リッチテキストエディター';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'リッチテキストエディター、TinyMCEのさらに詳しい情報は<a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" target="_blank">http://tinymce.moxiecode.com</a>を参照してください。';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = '挿入タグ';
+$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = '挿入タグのさらに詳しい情報は<a href="http://contao.org/en/manual/3.0/managing-content.html#insert-tags" title="Contaoオンラインドキュメント" target="_blank">http://contao.org/en/manual/3.0/managing-content.html#insert-tags</a>を参照してください。';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'コードエディター';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'コードエディター、CodeMirrorのさらに詳しい情報は<a href="http://codemirror.net" title="EditArea by Marijn Haverbeke" target="_blank">http://codemirror.net</a>を参照して下さい。';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';

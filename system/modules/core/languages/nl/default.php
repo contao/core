@@ -501,6 +501,7 @@ $GLOBALS['TL_LANG']['MSC']['invalidTokenUrl'] = 'Ongeldig token';
 $GLOBALS['TL_LANG']['MSC']['changelog'] = 'Changelog';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Uitschakelen';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'U kunt items anders rangschikken door ze te slepen';
+$GLOBALS['TL_LANG']['MSC']['templatesTheme'] = 'Thema %s';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
 $GLOBALS['TL_LANG']['UNITS'][1] = 'KiB';
 $GLOBALS['TL_LANG']['UNITS'][2] = 'MiB';
