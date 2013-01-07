@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_faq_category.title.0">
         <source>Title</source>
-        <target>Cím</target>
+        <target>Megnevezés</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.title.1">
         <source>Please enter the category title.</source>
-        <target>Adja meg a kategória címét.</target>
+        <target>Adja meg a kategória nevét.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.headline.0">
         <source>Headline</source>
@@ -115,7 +115,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.notify_both">
         <source>Author and system administrator</source>
-        <target>Szerző és Rendszer adminisztrátor</target>
+        <target>Szerző és rendszer adminisztrátor</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.deleteConfirm">
         <source>Deleting category ID %s will also delete all its FAQs! Continue?</source>

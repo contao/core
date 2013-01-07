@@ -161,14 +161,6 @@
         <source>Here you can activate the components of the Contao CSS framework.</source>
         <target>Qua pos ti activar las cumponentas dal framework da CSS da Contao.</target>
       </trans-unit>
-      <trans-unit id="tl_layout.reset.css.0">
-        <source>CSS reset</source>
-        <target>Reset da CSS</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.reset.css.1">
-        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
-        <target>Allontanescha ils stils da standard inconsistents dals differents navigaturs.</target>
-      </trans-unit>
       <trans-unit id="tl_layout.layout.css.0">
         <source>Layout builder</source>
         <target>Constructur da layouts</target>
@@ -184,6 +176,20 @@
       <trans-unit id="tl_layout.responsive.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
         <target>Agiunta in grid adaptiv da 12 colonnas che vegn controllà da las classas da CSS &quot;grid1&quot; enfin &quot;grid12&quot; sco era &quot;offset1&quot; enfin &quot;offset12&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.0">
+        <source>CSS reset</source>
+        <target>Reset da CSS</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.1">
+        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
+        <target>Allontanescha ils stils da standard inconsistents dals differents navigaturs.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.0">
+        <source>Basic forms</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.1">
+        <source>Adds basic form elements and buttons formatting.</source>
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.0">
         <source>TinyMCE style sheet</source>

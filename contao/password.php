@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -22,8 +22,8 @@ require_once '../system/initialize.php';
  * Class ChangePassword
  *
  * Handle back end password changes.
- * @copyright  Leo Feyer 2011-2012
- * @author     Leo Feyer <http://contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
 class ChangePassword extends Backend
@@ -87,6 +87,18 @@ class ChangePassword extends Backend
 				}
 				else
 				{
+					$this->loadDataContainer('tl_user');
+
+					// Trigger the save_callback
+					if (is_array($GLOBALS['TL_DCA']['tl_user']['fields']['password']['save_callback']))
+					{
+						foreach ($GLOBALS['TL_DCA']['tl_user']['fields']['password']['save_callback'] as $callback)
+						{
+							$this->import($callback[0]);
+							$pw = $this->$callback[0]->$callback[1]($pw);
+						}
+					}
+
 					$objUser = UserModel::findByPk($this->User->id);
 					$objUser->pwChange = '';
 					$objUser->password = Encryption::hash($pw);

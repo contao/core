@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Calendar
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -21,8 +21,8 @@ namespace Contao;
  * Class Events
  *
  * Provide methods to get all events of a certain period from the database.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Calendar
  */
 abstract class Events extends \Module

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -92,7 +92,7 @@ $GLOBALS['TL_LANG']['tl_settings']['editableFiles'][0] = 'Редактируем
 $GLOBALS['TL_LANG']['tl_settings']['editableFiles'][1] = 'Вы можете ввести разделенный запятыми список расширений файлов доступных для редактирования в редакторе кода.';
 $GLOBALS['TL_LANG']['tl_settings']['templateFiles'][0] = 'Типы файлов шаблонов';
 $GLOBALS['TL_LANG']['tl_settings']['templateFiles'][1] = 'Вы можете ввести разделенный запятыми список расширений поддерживаемых типов файлов шаблонов Contao.';
-$GLOBALS['TL_LANG']['tl_settings']['maxImageWidth'][0] = 'Максимальная ширина внешнего интерфейса';
+$GLOBALS['TL_LANG']['tl_settings']['maxImageWidth'][0] = 'Максимальная ширина во внешнем интерфейсе';
 $GLOBALS['TL_LANG']['tl_settings']['maxImageWidth'][1] = 'Если ширина изображения или ролика превысит это значение, то он будет автоматически масштабирован.';
 $GLOBALS['TL_LANG']['tl_settings']['jpgQuality'][0] = 'Качество JPG миниатюр';
 $GLOBALS['TL_LANG']['tl_settings']['jpgQuality'][1] = 'Вы можете ввести качество JPG миниатюр в процентах.';

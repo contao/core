@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_user.calendars.1">
         <source>Here you can grant access to one or more calendars.</source>
-        <target>Válassza ki azokat a naptárakat, melyek elérését engedélyezni szeretné a felhasználó részére.</target>
+        <target>Hozzáférést biztosíthat egy vagy több naptárhoz.</target>
       </trans-unit>
       <trans-unit id="tl_user.calendarp.0">
         <source>Calendar permissions</source>
@@ -15,19 +15,23 @@
       </trans-unit>
       <trans-unit id="tl_user.calendarp.1">
         <source>Here you can define the calendar permissions.</source>
-        <target>Adja meg a naptár hozzáféréséhez szükséges jogokat.</target>
+        <target>Beállíthatja a naptár jogosultságokat.</target>
       </trans-unit>
       <trans-unit id="tl_user.calendarfeeds.0">
         <source>Allowed RSS feeds</source>
+        <target>Engedélyezett RSS hírfolyam</target>
       </trans-unit>
       <trans-unit id="tl_user.calendarfeeds.1">
         <source>Here you can grant access to one or more calendar feeds.</source>
+        <target>Hozzáférést biztosíthat egy vagy több naptár hírfolyamhoz.</target>
       </trans-unit>
       <trans-unit id="tl_user.calendarfeedp.0">
         <source>RSS feed permissions</source>
+        <target>RSS hírfolyam jogosultságok</target>
       </trans-unit>
       <trans-unit id="tl_user.calendarfeedp.1">
         <source>Here you can define the calendar feed permissions.</source>
+        <target>Beállíthatja a naptár hírfolyam jogosultságait.</target>
       </trans-unit>
       <trans-unit id="tl_user.calendars_legend">
         <source>Calendar permissions</source>

@@ -1,6 +1,108 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.0.2 (2013-01-07)
+--------------------------
+
+### Fixed
+Throw an error if FileTree or PageTree widgets are left blank although they are
+marked as mandatory in the DCA (see #5131).
+
+### Fixed
+Modules and Hybrids included via content element were shown even if the content
+element was invisible or not published (see #5203).
+
+### Fixed
+Do not try to limit the template selection to a particular theme but show all
+available themes instead (see #5095).
+
+### Fixed
+Correctly build the comments subscription confirmation URL (see #5201).
+
+### Fixed
+Update the database if a file is being uploaded in the front end (see #5137).
+
+### Fixed
+Do not send a 404 header if an enclosure is requested and cannot be find by a
+module; there might be another module which can (see #5178).
+
+### Fixed
+Consider the `save_callback` of the password field in `tl_user` when a back end
+user is forced to change his password (see #5138).
+
+### Fixed
+Random images now open in the lightbox if configured (see #5191).
+
+### Fixed
+Find e-mail addresse like `a@b.com` in `String::encodeEmail()` (see #5175).
+
+### Fixed
+Make sure there is a minimal MooTools core version for the command scheduler
+(see #5195).
+
+### Fixed
+Made `Model::getPk()` and `Model::getTable()` static (see #5128).
+
+### Fixed
+Do not move resources in the file manager if the targets exist. Otherwise the
+database might get out of sync with the file system (see #5145).
+
+### Fixed
+Convert automatically generated article alias names if the page uses folder URL
+style alias names (see #5168).
+
+### Fixed
+The newsletter system did not yet handle file ID attachments (see #5118).
+
+### Fixed
+The gallery and downloads element now support using the user's home directory
+again (see #5113).
+
+### Fixed
+Added an option to load models uncached (see #5102).
+
+### Fixed
+Added support for `CURRENT_DATE`, `CURRENT_TIME` and `CURRENT_TIMESTAMP` to the
+database installer (see #5089).
+
+### Fixed
+Store the whole database row in `Calendar::addEvent()` so e.g. RSS feeds with
+the event text instead of just the teaser are being rendered (see #5085).
+
+### Fixed
+Purge the internal cache after a module has been (de)activated (see #5016).
+
+### Fixed
+Do not cache the `system/cron/cron.txt` file (see #5105).
+
+### Fixed
+Do not create content elements for news and events which redirect to articles,
+pages or external URLs during the version 3 update (see #5117). 
+
+### Fixed
+Handle incorrectly closed indexer comments (see #5119).
+
+### Fixed
+The table content element did not assign the correct CSS class names when there
+was only one row and one column (see #5140).
+
+### Fixed
+Consider the dynamic ptable when copying/deleting content elements (see #5041).
+
+### Fixed
+Scan templates in the autoload creator even if there are no classes (see #5158).
+
+### Fixed
+Corrected the main column margin when using the layout builder in combination
+with the responsive grid (see #5170).
+
+### Fixed
+Consider the sorting order of external style sheets (see #5038).
+
+### Fixed
+The numeric file mounts of a user were overridden by the real paths (see #5083).
+
+
 Version 3.0.1 (2012-11-29)
 --------------------------
 

@@ -11,9 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_module.faq_readerModule.0">
         <source>FAQ reader module</source>
+        <target>Modul FAQ bralnik</target>
       </trans-unit>
       <trans-unit id="tl_module.faq_readerModule.1">
         <source>Automatically switch to the FAQ reader if an item has been selected.</source>
+        <target>Samodejno preklopi na FAQ bralnik, v kolikor je element izbran.</target>
       </trans-unit>
     </body>
   </file>

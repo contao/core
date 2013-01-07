@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="tl_install.installTool.0">
         <source>Installation</source>
-        <target>Contao telepítő eszköz</target>
+        <target>Telepítés</target>
       </trans-unit>
       <trans-unit id="tl_install.installTool.1">
         <source>Install tool login</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_install.password.1">
         <source>Please enter the install tool password. The install tool password is not the same as the Contao back end password.</source>
-        <target>Adja meg a telepítő eszköz jelszavát. A telepítő eszköz jelszava nem azonos a Contao back end jelszavával.</target>
+        <target>Adja meg a telepítő eszköz jelszavát. A telepítő eszköz jelszava nem azonos a Contao adminisztrációs felület jelszavával.</target>
       </trans-unit>
       <trans-unit id="tl_install.changePass.0">
         <source>Install tool password</source>
@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="tl_install.encryption.0">
         <source>Generate an encryption key</source>
-        <target>Generált titkosítási kulcs</target>
+        <target>Titkosítási kulcs létrehozása</target>
       </trans-unit>
       <trans-unit id="tl_install.encryption.1">
         <source>This key is used to store encrypted data. Please note that encrypted data can only be decrypted with this key! Therefore note it down and do not change it if there is encrypted data already. Leave empty to generate a random key.</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_install.collation.1">
         <source>For more information see the &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;MySQL manual&lt;/a&gt;.</source>
-        <target>További információkért lásd a &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; onclick=&quot;window.open(this.href); return false;&quot;&gt;MySQL kézikönyvet&lt;/a&gt;.</target>
+        <target>További információkért lásd a&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;MySQL kézikönyvet&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_install.update.0">
         <source>Update database tables</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_install.update.1">
         <source>Please note that the update assistant has only been tested with MySQL and MySQLi drivers. If you are using a different database (e.g. Oracle), you might have to install or update your database manually.</source>
-        <target>Kérjük vegye figyelembe, hogy a frissítési asszisztenst csak MySQL és MySQLi rendszerekkel tesztelték. Amennyiben ön más adatbázis-kezelőt használ (pl. Oracle), előfordulhat, hogy manuálisan kell telepítenie vagy frissítenie. Ebben az esetben navigáljon a &lt;strong&gt;system/modules&lt;/strong&gt; könyvtárba, és keresse minden alkönyvtárban a &lt;strong&gt;config/database.sql&lt;/strong&gt; fájlokat.</target>
+        <target>Kérjük vegye figyelembe, hogy a frissítési asszisztenst csak MySQL és MySQLi rendszerekkel tesztelték. Amennyiben ön más adatbázis-kezelőt használ (pl. Oracle), előfordulhat, hogy manuálisan kell telepítenie vagy frissítenie.</target>
       </trans-unit>
       <trans-unit id="tl_install.template.0">
         <source>Import a template</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_install.template.1">
         <source>Here you can import an &lt;em&gt;.sql&lt;/em&gt; file from the &lt;em&gt;templates&lt;/em&gt; directory with a pre-configured example website. Existing data will be deleted! If you only want to import a theme, please use the theme manager in the Contao back end instead.</source>
-        <target>Kérjük válasszon egy &lt;em&gt;.sql&lt;/em&gt; fájlt a &lt;em&gt;templates&lt;/em&gt; könyvtárból egy előre konfigurált példa honlaphoz. A meglévő adatok törlésre kerülnek! Ha csak a témát kívánja importálni, akkor használja a back end téma kezelő menüpontját.</target>
+        <target>Kérjük válasszon egy &lt;em&gt;.sql&lt;/em&gt; fájlt a &lt;em&gt;templates&lt;/em&gt; könyvtárból egy előre konfigurált példa honlaphoz. A meglévő adatok törlésre kerülnek! Ha csak a témát kívánja importálni, akkor használja az adminisztrációs felület téma kezelő menüpontját.</target>
       </trans-unit>
       <trans-unit id="tl_install.admin.0">
         <source>Create an admin user</source>
@@ -79,15 +79,15 @@
       </trans-unit>
       <trans-unit id="tl_install.admin.1">
         <source>If you have imported the example website, the admin's username is &lt;strong&gt;k.jones&lt;/strong&gt; and the password is &lt;strong&gt;kevinjones&lt;/strong&gt;. See the example website (front end) for more information.</source>
-        <target>Ha ön importálta a példa honlapot, az adminisztrátor felhasználónév &lt;strong&gt; k.jones &lt;/ strong&gt; és a jelszó &lt;strong&gt; kevinjones &lt;/ strong&gt;. Tekintse meg a példa honlapot (front end) további információért.</target>
+        <target>Ha ön importálta a példa honlapot, az adminisztrátor felhasználónév &lt;strong&gt;k.jones&lt;/strong&gt; és a jelszó &lt;strong&gt;kevinjones&lt;/strong&gt;. Tekintse meg a példa honlapot (felhasználói felület) további információért.</target>
       </trans-unit>
       <trans-unit id="tl_install.completed.0">
         <source>Congratulations!</source>
-        <target>Gratulálok!</target>
+        <target>Gratulálunk!</target>
       </trans-unit>
       <trans-unit id="tl_install.completed.1">
         <source>Now please log into the &lt;a href=&quot;contao/&quot;&gt;Contao back end&lt;/a&gt; and check the system settings. Then visit your website to make sure that Contao is working correctly.</source>
-        <target>Kérjük most jelentkezzen be a Contao back end-be és ellenőrizze a rendszer beállításait. Látogassa meg a weboldalát, hogy ellenőrizze a Contao megfelelő működését.</target>
+        <target>Kérjük most jelentkezzen be a &lt;a href=&quot;contao/&quot;&gt;Contao adminisztrációs felületre&lt;/a&gt; és ellenőrizze a rendszer beállításait. Látogassa meg a weboldalát, hogy ellenőrizze a Contao megfelelő működését.</target>
       </trans-unit>
       <trans-unit id="tl_install.ftp.0">
         <source>Modify files via FTP</source>
@@ -103,7 +103,7 @@
       </trans-unit>
       <trans-unit id="tl_install.beLogin">
         <source>Contao back end login</source>
-        <target>Contao back end belépés</target>
+        <target>Contao adminisztrációs felület belépés</target>
       </trans-unit>
       <trans-unit id="tl_install.passError">
         <source>Please enter a password to prevent unauthorized access!</source>
@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_install.collationInfo">
         <source>Changing the collation will affect all tables with a &lt;em&gt;tl_&lt;/em&gt; prefix.</source>
-        <target>Az egybevetés megváltoztatása hatással lesz az összes &lt;em&gt; tl_ &lt;/ em&gt; előtagú táblára.</target>
+        <target>Az egybevetés megváltoztatása hatással lesz az összes &lt;em&gt;tl_&lt;/em&gt; előtagú táblára.</target>
       </trans-unit>
       <trans-unit id="tl_install.updateError">
         <source>The database is not up to date!</source>
@@ -199,6 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_install.saveCollation">
         <source>Change collation</source>
+        <target>Módosítás egybevetése</target>
       </trans-unit>
       <trans-unit id="tl_install.updateX">
         <source>It seems that you are upgrading from a Contao version prior to version %s. If that is the case, &lt;strong&gt;it is required to run the version %s update&lt;/strong&gt; to ensure the integrity of your data!</source>
@@ -210,9 +211,11 @@
       </trans-unit>
       <trans-unit id="tl_install.updateXrunStep">
         <source>Run version %s update - step %s</source>
+        <target>Folyamatban a %s verzióra frissítés - lépés: %s</target>
       </trans-unit>
       <trans-unit id="tl_install.importException">
         <source>The import failed! Is the database structure up to date and is the template file compatible with your Contao version?</source>
+        <target>Az importálás sikertelen! Az adatbázis szerkezete naprakész és a sablon kompatibilis az ön Contao verziójával?</target>
       </trans-unit>
       <trans-unit id="tl_install.importError">
         <source>Please choose a template file!</source>
@@ -256,7 +259,7 @@
       </trans-unit>
       <trans-unit id="tl_install.installConfirm">
         <source>You have successfully installed Contao.</source>
-        <target>Sikeresen telepítette a Contao-t.</target>
+        <target>Sikeresen telepítette a Contao rendszert.</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpHost">
         <source>FTP hostname</source>
@@ -276,7 +279,7 @@
       </trans-unit>
       <trans-unit id="tl_install.ftpSSLh4">
         <source>Secure connection</source>
-        <target>Biztonságos összeköttetés</target>
+        <target>Biztonságos kapcsolat</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpSSL">
         <source>Connect via FTP-SSL</source>
@@ -304,9 +307,11 @@
       </trans-unit>
       <trans-unit id="tl_install.filesRenamed">
         <source>The configured files directory does not exist!</source>
+        <target>A beállított fájl könyvtár nem létezik!</target>
       </trans-unit>
       <trans-unit id="tl_install.filesWarning">
         <source>Did you rename the &lt;strong&gt;tl_files&lt;/strong&gt; folder to &lt;strong&gt;files&lt;/strong&gt;? You cannot just rename the folder, because all the file references in the database and your style sheets will still point to the old location. If you want to rename the folder, please do so after the version 3 update and make sure to adjust your database data with the following script: %s.</source>
+        <target>Átnevezte a &lt;strong&gt;tl_files&lt;/strong&gt; mappát &lt;strong&gt;files&lt;/strong&gt; mappává? Nem elegendő csupán átnevezni a könyvtárat, mert a fájl hivatkozások az adatbázisban, és az ön stíluslapjain továbbra is a régi helyre mutatnak. Ha át szeretné nevezni, kérjük a 3-as verzióra frissítés futtatását követően az adatbázis adatait a következő script használatával aktualizálja: %s.</target>
       </trans-unit>
       <trans-unit id="tl_install.CREATE">
         <source>Create new tables</source>

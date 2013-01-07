@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Library
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -32,7 +32,7 @@ namespace Contao;
  * 
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 abstract class System
 {
@@ -545,10 +545,6 @@ abstract class System
 		{
 			return '';
 		}
-		elseif ($intTstamp == 0)
-		{
-			return '-'; // see #4249
-		}
 		else
 		{
 			$strDate = date($strModified, $intTstamp);
@@ -692,9 +688,9 @@ abstract class System
 	 */
 	public static function getReadableSize($intSize, $intDecimals=1)
 	{
-		for ($i=0; $intSize>=1000; $i++)
+		for ($i=0; $intSize>=1024; $i++)
 		{
-			$intSize /= 1000;
+			$intSize /= 1024;
 		}
 
 		return static::getFormattedNumber($intSize, $intDecimals) . ' ' . $GLOBALS['TL_LANG']['UNITS'][$i];

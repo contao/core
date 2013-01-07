@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_calendar_events.title.0">
         <source>Title</source>
-        <target>Cím</target>
+        <target>Megnevezés</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.title.1">
         <source>Please enter the event title.</source>
-        <target>Adja meg az esemény címét.</target>
+        <target>Adja meg az esemény megnevezését.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.alias.0">
         <source>Event alias</source>
@@ -179,11 +179,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.articleId.0">
         <source>Article</source>
-        <target>Cikk</target>
+        <target>Tartalom</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.articleId.1">
         <source>Please choose the article to which visitors will be redirected when clicking the event.</source>
-        <target>Válassza ki a cikket ahová a látogatók át lesznek irányítva, ha rákattintanak az eseményre.</target>
+        <target>Válassza ki a tartalmat ahová a látogatók át lesznek irányítva, ha rákattintanak az eseményre.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.cssClass.0">
         <source>CSS class</source>
@@ -227,13 +227,15 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.tstamp.0">
         <source>Revision date</source>
+        <target>Módosítás dátum</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>A legutóbbi módosítás dátuma és időpontja</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.title_legend">
         <source>Title and author</source>
-        <target>Cím és szerző</target>
+        <target>Megnevezés és szerző</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.date_legend">
         <source>Date and time</source>
@@ -353,9 +355,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.editmeta.0">
         <source>Edit event settings</source>
+        <target>Esemény beállításainak módosítása</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.editmeta.1">
         <source>Edit the event settings</source>
+        <target>Az esemény beállításainak módosítása.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.pasteafter.0">
         <source>Paste into this calendar</source>

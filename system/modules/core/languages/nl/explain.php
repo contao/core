@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -17,7 +17,7 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'Rich Text Editor';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'Voor meer informatie over TinyMCE ga naar <a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" target="_blank">http://tinymce.moxiecode.com</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Tags invoegen';
-$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'Voor meer informatie over het invoegen van tags kijk op <a href="http://contao.org/en/insert-tags.html" title="Contao online documentation" target="_blank">http://contao.org/en/insert-tags.html</a>.';
+$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'Voor meer informatie over insert tags kunt u terecht op <a href="https://contao.org/en/manual/3.0/managing-content.html#insert-tags" title="Contao online documentation" target="_blank">https://contao.org/en/manual/3.0/managing-content.html#insert-tags</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'Code Editor';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'Voor meer informatie over CodeMirror ga naar <a href="http://codemirror.net" title="EditArea by Marijn Haverbeke" target="_blank">http://codemirror.net</a>.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';

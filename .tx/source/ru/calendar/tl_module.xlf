@@ -131,7 +131,7 @@
       </trans-unit>
       <trans-unit id="tl_module.next_180">
         <source>+ 6 months</source>
-        <target>+ 6 месяцов</target>
+        <target>+ 6 месяцев</target>
       </trans-unit>
       <trans-unit id="tl_module.next_365">
         <source>+ 1 year</source>
@@ -175,7 +175,7 @@
       </trans-unit>
       <trans-unit id="tl_module.past_180">
         <source>- 6 months</source>
-        <target>- 6 месяцов</target>
+        <target>- 6 месяцев</target>
       </trans-unit>
       <trans-unit id="tl_module.past_365">
         <source>- 1 year</source>

@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Library
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -21,7 +21,7 @@ namespace Contao\Database;
  * 
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class Installer extends \Controller
 {
@@ -399,6 +399,12 @@ class Installer extends \Controller
 					{
 						unset($field['default']);
 					}
+					// Date/time constants (see #5089)
+					elseif (in_array(strtolower($field['default']), array('current_date', 'current_time', 'current_timestamp')))
+					{
+						$field['default'] = "default " . $field['default'];
+					}
+					// Everything else
 					else
 					{
 						$field['default'] = "default '" . $field['default'] . "'";

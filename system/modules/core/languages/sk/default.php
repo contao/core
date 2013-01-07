@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -34,12 +34,14 @@ $GLOBALS['TL_LANG']['ERR']['folderalias'] = 'Zadajte iba abecedné znaky, čísl
 $GLOBALS['TL_LANG']['ERR']['date'] = 'Zadajte dátum ako "%s"!';
 $GLOBALS['TL_LANG']['ERR']['time'] = 'Zadajte čas ako "%s"!';
 $GLOBALS['TL_LANG']['ERR']['dateTime'] = 'Zadajte dátum a čas ako "%s"!';
+$GLOBALS['TL_LANG']['ERR']['invalidDate'] = 'Neplatný dátum "%s"!';
 $GLOBALS['TL_LANG']['ERR']['noSpace'] = 'Pole "%s" nesmie obsahovať medzery!';
 $GLOBALS['TL_LANG']['ERR']['filesize'] = 'Maximálna povolená veľkosť súboru je %s kB! (Contao alebo php.ini nastavenia)!';
 $GLOBALS['TL_LANG']['ERR']['filetype'] = 'Typ súboru "%s" nie je povolené nahrávať!';
 $GLOBALS['TL_LANG']['ERR']['filepartial'] = 'Súbor %s bol nahraný iba čiastočne!';
 $GLOBALS['TL_LANG']['ERR']['filewidth'] = 'Súbor %s presahuje maximálnu šírku %d bodov!';
 $GLOBALS['TL_LANG']['ERR']['fileheight'] = 'Súbor %s presahuje maximálnu výšku %d bodov!';
+$GLOBALS['TL_LANG']['ERR']['filetarget'] = 'Nemôžte premiestniť %s do %s pretože cieľ existuje!';
 $GLOBALS['TL_LANG']['ERR']['invalidReferer'] = 'Prístup zamietnutý! Aktuálna adresa (%s) nesúhlasí s odkazovanou adresou (%s)!';
 $GLOBALS['TL_LANG']['ERR']['invalidPass'] = 'Nespávne heslo!';
 $GLOBALS['TL_LANG']['ERR']['passwordLength'] = 'Heslo musí byť dlhé aspoň %d znakov!';
@@ -292,7 +294,7 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'URL adresa k súborom platí pre
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL adresa rozšírení';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'URL adresa rozšírení platí pre všetky zdroje v adresári <em>plugins</em> (zvýši rýchlosť načítania stránky)';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Klávesové skratky backendu';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Viac o zrýchlení vašeho work-flow a klávesových skratkách sa dozviete <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">tu</a>.';
+$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Získajte viac informácií ako urýchliť svoju prácu používaním <a href="https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts" title="Prehľad klávesových skratiek na contao.org" target="_blank">klávesových skratiek</a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Rozbaliť všetky';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Rozbaliť alebo zavrieť všetky uzly';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Jeden z Contao účtov bol uzamknutý';
@@ -499,15 +501,16 @@ $GLOBALS['TL_LANG']['MSC']['invalidTokenUrl'] = 'Neplatný kľúč / token';
 $GLOBALS['TL_LANG']['MSC']['changelog'] = 'Zoznam zmien';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Neaktívny';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Vyňať položky pre ich znovuzoradenie';
+$GLOBALS['TL_LANG']['MSC']['templatesTheme'] = 'Téma vzhľadu %s';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
-$GLOBALS['TL_LANG']['UNITS'][1] = 'kB';
-$GLOBALS['TL_LANG']['UNITS'][2] = 'MB';
-$GLOBALS['TL_LANG']['UNITS'][3] = 'GB';
-$GLOBALS['TL_LANG']['UNITS'][4] = 'TB';
-$GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
-$GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
-$GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
-$GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
+$GLOBALS['TL_LANG']['UNITS'][1] = 'KiB';
+$GLOBALS['TL_LANG']['UNITS'][2] = 'MiB';
+$GLOBALS['TL_LANG']['UNITS'][3] = 'GiB';
+$GLOBALS['TL_LANG']['UNITS'][4] = 'TiB';
+$GLOBALS['TL_LANG']['UNITS'][5] = 'PiB';
+$GLOBALS['TL_LANG']['UNITS'][6] = 'EiB';
+$GLOBALS['TL_LANG']['UNITS'][7] = 'ZiB';
+$GLOBALS['TL_LANG']['UNITS'][8] = 'YiB';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'Modul';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Ovplyvnená tabuľka';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = 'Akcia';

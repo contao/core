@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -25,7 +25,7 @@ namespace Contao;
  * 
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class FilesModel extends \Model
 {
@@ -40,11 +40,12 @@ class FilesModel extends \Model
 	/**
 	 * Find multiple files by their IDs
 	 * 
-	 * @param array $arrIds An array of file IDs
+	 * @param array $arrIds     An array of file IDs
+	 * @param array $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no files
 	 */
-	public static function findMultipleByIds($arrIds)
+	public static function findMultipleByIds($arrIds, array $arrOptions=array())
 	{
 		if (!is_array($arrIds) || empty($arrIds))
 		{
@@ -52,21 +53,28 @@ class FilesModel extends \Model
 		}
 
 		$t = static::$strTable;
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, array('order'=>\Database::getInstance()->findInSet("$t.id", $arrIds)));
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+		}
+
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, $arrOptions);
 	}
 
 
 	/**
 	 * Find multiple files with the same base path
 	 * 
-	 * @param string $strPath The base path
+	 * @param string $strPath    The base path
+	 * @param array  $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no matching files
 	 */
-	public static function findMultipleByBasepath($strPath)
+	public static function findMultipleByBasepath($strPath, array $arrOptions=array())
 	{
 		$t = static::$strTable;
-		return static::findBy(array("$t.path LIKE ?"), $strPath . '%');
+		return static::findBy(array("$t.path LIKE ?"), $strPath . '%', $arrOptions);
 	}
 
 
@@ -75,10 +83,11 @@ class FilesModel extends \Model
 	 * 
 	 * @param array $arrIds        An array of file IDs
 	 * @param array $arrExtensions An array of file extensions
+	 * @param array $arrOptions    An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null of there are no matching files
 	 */
-	public static function findMultipleByIdsAndExtensions($arrIds, $arrExtensions)
+	public static function findMultipleByIdsAndExtensions($arrIds, $arrExtensions, array $arrOptions=array())
 	{
 		if (!is_array($arrIds) || empty($arrIds) || !is_array($arrExtensions) || empty($arrExtensions))
 		{
@@ -94,6 +103,12 @@ class FilesModel extends \Model
 		}
 
 		$t = static::$strTable;
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ") AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, array('order'=>\Database::getInstance()->findInSet("$t.id", $arrIds)));
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+		}
+
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ") AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, $arrOptions);
 	}
 }

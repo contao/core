@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.stylesheet.1">
         <source>Please select the style sheets you want to add to the layout.</source>
-        <target>Sélectionner les feuilles de style à inclure dans cette présentation .</target>
+        <target>Sélectionner les feuilles de style à inclure dans cette présentation.</target>
       </trans-unit>
       <trans-unit id="tl_layout.framework.0">
         <source>CSS framework</source>
@@ -160,14 +160,6 @@
       <trans-unit id="tl_layout.framework.1">
         <source>Here you can activate the components of the Contao CSS framework.</source>
         <target>Activer les éléments du framework CSS de Contao.</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.reset.css.0">
-        <source>CSS reset</source>
-        <target>CSS reset</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.reset.css.1">
-        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
-        <target>Retirer les styles par défaut des éléments HTML incohérents dans différents navigateurs.</target>
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.0">
         <source>Layout builder</source>
@@ -184,6 +176,22 @@
       <trans-unit id="tl_layout.responsive.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
         <target>Ajoute une grille responsive de 12 colonnes qui est déclenchée par les classes CSS &quot;grid1&quot; à grid12&quot; et &quot;offset1&quot; à &quot;offset12&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.0">
+        <source>CSS reset</source>
+        <target>CSS reset</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.1">
+        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
+        <target>Retirer les styles par défaut des éléments HTML incohérents dans différents navigateurs.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.0">
+        <source>Basic forms</source>
+        <target>Formulaires</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.1">
+        <source>Adds basic form elements and buttons formatting.</source>
+        <target>Mise en forme de base des éléments de formulaire et des boutons.</target>
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.0">
         <source>TinyMCE style sheet</source>
@@ -219,7 +227,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.newsfeeds.0">
         <source>News feeds</source>
-        <target>Flux RSS d'actualités</target>
+        <target>Flux RSS des actualités</target>
       </trans-unit>
       <trans-unit id="tl_layout.newsfeeds.1">
         <source>Please select the news feeds you want to add to the layout.</source>
@@ -227,7 +235,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.calendarfeeds.0">
         <source>Calendar feeds</source>
-        <target>Flux RSS de calendriers</target>
+        <target>Flux RSS des calendriers</target>
       </trans-unit>
       <trans-unit id="tl_layout.calendarfeeds.1">
         <source>Please select the calendar feeds you want to add to the layout.</source>
@@ -255,7 +263,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.doctype.1">
         <source>Here you can set the output format.</source>
-        <target>Définir le format de sortie, HTML5, XHTML</target>
+        <target>Définir le format de sortie, HTML5, XHTML.</target>
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.0">
         <source>Body class</source>

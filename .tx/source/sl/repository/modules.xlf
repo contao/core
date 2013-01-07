@@ -3,9 +3,11 @@
     <body>
       <trans-unit id="MOD.repository.0">
         <source>Extension Repository</source>
+        <target>Katalog razširitev</target>
       </trans-unit>
       <trans-unit id="MOD.repository.1">
         <source>The back end module of the Extension Repository</source>
+        <target>Modul v administraciji za Katalog razširitev</target>
       </trans-unit>
       <trans-unit id="MOD.repository_catalog.0">
         <source>Extension catalog</source>

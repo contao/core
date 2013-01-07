@@ -27,19 +27,19 @@
       </trans-unit>
       <trans-unit id="tl_user.language.0">
         <source>Back end language</source>
-        <target>Back end nyelve</target>
+        <target>Adminisztrációd felület nyelve</target>
       </trans-unit>
       <trans-unit id="tl_user.language.1">
         <source>Here you can choose the back end language.</source>
-        <target>Válassza ki a back end nyelvét</target>
+        <target>Válassza ki az adminisztrációs felület nyelvét</target>
       </trans-unit>
       <trans-unit id="tl_user.backendTheme.0">
         <source>Back end theme</source>
-        <target>Back end téma</target>
+        <target>Adminisztrációs felület téma</target>
       </trans-unit>
       <trans-unit id="tl_user.backendTheme.1">
         <source>Here you can override the global back end theme.</source>
-        <target>Itt változtathatja meg a globális back end témát.</target>
+        <target>Itt változtathatja meg a globális adminisztrációs felület témát.</target>
       </trans-unit>
       <trans-unit id="tl_user.uploader.0">
         <source>File uploader</source>
@@ -139,11 +139,11 @@
       </trans-unit>
       <trans-unit id="tl_user.modules.0">
         <source>Back end modules</source>
-        <target>Back end modulok</target>
+        <target>Adminisztrációs felület modulok</target>
       </trans-unit>
       <trans-unit id="tl_user.modules.1">
         <source>Here you can grant access to one or more back end modules.</source>
-        <target>Itt engedélyezhet hozzáférést egy vagy több back end modul használatához.</target>
+        <target>Itt engedélyezhet hozzáférést egy vagy több adminisztrációs felület modul használatához.</target>
       </trans-unit>
       <trans-unit id="tl_user.themes.0">
         <source>Theme modules</source>
@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_user.forms.1">
         <source>Here you can grant access to one or more forms.</source>
-        <target>Itt engedélyezheti egy vagy több űrlaphoz.</target>
+        <target>Itt engedélyezheti a hozzáférést egy vagy több űrlaphoz.</target>
       </trans-unit>
       <trans-unit id="tl_user.formp.0">
         <source>Form permissions</source>
@@ -231,11 +231,11 @@
       </trans-unit>
       <trans-unit id="tl_user.backend_legend">
         <source>Back end settings</source>
-        <target>back end beállítások</target>
+        <target>Adminisztrációs felület beállítások</target>
       </trans-unit>
       <trans-unit id="tl_user.theme_legend">
         <source>Back end theme</source>
-        <target>Back end téma</target>
+        <target>Adminisztrációs felület téma</target>
       </trans-unit>
       <trans-unit id="tl_user.password_legend">
         <source>Password settings</source>

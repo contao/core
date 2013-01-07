@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_module.newsletters.1">
         <source>Show these channels in the front end form.</source>
-        <target>Ezeket a csatornákat mutatja a front end-en</target>
+        <target>Ezeket a csatornákat mutatja a felhasználói felületen.</target>
       </trans-unit>
       <trans-unit id="tl_module.nl_channels.0">
         <source>Channels</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_module.nl_template.1">
         <source>Here you can select the newsletter template.</source>
-        <target>Válasszon egy hírlevél sablont. A &lt;em&gt;templates&lt;/em&gt; könyvtárba tehet saját sablonokat. A hírlevél sablonok neve &lt;em&gt;nl_&lt;/em&gt; kezdetűek, és &lt;em&gt;.tpl&lt;/em&gt; kiterjesztésűek legyenek!</target>
+        <target>Válasszon egy hírlevél sablont.</target>
       </trans-unit>
       <trans-unit id="tl_module.text_subscribe.0">
         <source>Your subscription on %s</source>

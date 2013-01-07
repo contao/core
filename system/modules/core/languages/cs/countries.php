@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -21,7 +21,6 @@ $GLOBALS['TL_LANG']['CNT']['ag'] = 'Antugua a Barbuda';
 $GLOBALS['TL_LANG']['CNT']['ai'] = 'Anguilla';
 $GLOBALS['TL_LANG']['CNT']['al'] = 'Albánie';
 $GLOBALS['TL_LANG']['CNT']['am'] = 'Arménie';
-$GLOBALS['TL_LANG']['CNT']['an'] = 'Nizozemské Antily';
 $GLOBALS['TL_LANG']['CNT']['ao'] = 'Angola';
 $GLOBALS['TL_LANG']['CNT']['aq'] = 'Antarktida';
 $GLOBALS['TL_LANG']['CNT']['ar'] = 'Argentina';
@@ -241,7 +240,6 @@ $GLOBALS['TL_LANG']['CNT']['tr'] = 'Turecko';
 $GLOBALS['TL_LANG']['CNT']['tt'] = 'Trinidad a Tobago';
 $GLOBALS['TL_LANG']['CNT']['tv'] = 'Tuvalu';
 $GLOBALS['TL_LANG']['CNT']['tw'] = 'Tchaj-wan';
-$GLOBALS['TL_LANG']['CNT']['ty'] = 'Tahiti';
 $GLOBALS['TL_LANG']['CNT']['tz'] = 'Tanzánie';
 $GLOBALS['TL_LANG']['CNT']['ua'] = 'Ukrajina';
 $GLOBALS['TL_LANG']['CNT']['ug'] = 'Uganda';

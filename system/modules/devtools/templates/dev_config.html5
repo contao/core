@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package   <?php echo $this->package; ?> 
  * @author    <?php echo $this->author; ?> 
@@ -248,7 +248,7 @@
  *
  * Hooks allow you to add functionality to the core without having to modify the
  * source code by registering callback functions to be executed on a particular
- * event. For more information see http://contao.org/hooks.html.
+ * event. For more information see https://contao.org/manual.html.
  */
 
 

@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Newsletter
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -210,8 +210,8 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
  * Class tl_newsletter_channel
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Newsletter
  */
 class tl_newsletter_channel extends Backend

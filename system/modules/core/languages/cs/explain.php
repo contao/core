@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -17,7 +17,6 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'Obsáhlý textový editor';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'Více informací o TinyMCE najdete na <a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" onclick="window.open(this.href); return false;">http://tinymce.moxiecode.com</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Vložit tagy';
-$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'Více informací najdete na <a href="http://www.contao.org/insert-tags.html" title="Contao online documentation" onclick="window.open(this.href); return false;">http://www.contao.org/insert-tags.html</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'Editor kódu';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'Pro další informace k EditArea navštivte prosím <a href="http://www.cdolivet.com/index.php?page=editArea" title="EditArea by Christophe Dolivet" onclick="window.open(this.href); return false;">http://www.cdolivet.com/index.php?page=editArea</a>.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';

@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -23,7 +23,6 @@ $countries = array
 	'ai' => 'Anguilla',
 	'al' => 'Albania',
 	'am' => 'Armenia',
-	'an' => 'Netherlands Antilles',
 	'ao' => 'Angola',
 	'aq' => 'Antarctica',
 	'ar' => 'Argentina',
@@ -243,7 +242,6 @@ $countries = array
 	'tt' => 'Trinidad and Tobago',
 	'tv' => 'Tuvalu',
 	'tw' => 'Taiwan',
-	'ty' => 'Tahiti',
 	'tz' => 'Tanzania',
 	'ua' => 'Ukraine',
 	'ug' => 'Uganda',

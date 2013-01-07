@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Faq
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -21,8 +21,8 @@ namespace Contao;
  * Class ModuleFaq
  *
  * Provide methods regarding FAQs.
- * @copyright  Leo Feyer 2008-2012
- * @author     Leo Feyer <http://contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Faq
  */
 class ModuleFaq extends \Frontend

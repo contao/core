@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -291,7 +291,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'URL-ul fişierelor se aplică la
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL plugin-uri';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'URL-ul de plugin-uri se aplică la toate resursele din directorul <em>plugins</em> (optimizare de viteză).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Comenzi rapide de back end';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Aflaţi mai multe detalii despre accelerarea operaţiilor prin <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">comenzi rapide</a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Comută tot';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Expandează sau restrănge toate nodurile';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Un cont de utilizator a fost blocat';
@@ -499,14 +498,6 @@ $GLOBALS['TL_LANG']['MSC']['changelog'] = 'Jurnal de schimbări';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Dezactivare';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Trageţi de elemente pentru a le reordona.';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
-$GLOBALS['TL_LANG']['UNITS'][1] = 'kB';
-$GLOBALS['TL_LANG']['UNITS'][2] = 'MB';
-$GLOBALS['TL_LANG']['UNITS'][3] = 'GB';
-$GLOBALS['TL_LANG']['UNITS'][4] = 'TB';
-$GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
-$GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
-$GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
-$GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'Modul';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Tabel afectat';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = 'Acţiune';

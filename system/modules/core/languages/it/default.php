@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -292,7 +292,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'L\'URL file si applica alla cart
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL Plugins';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'L\'URL plugin si applica a tutte le risorse nella cartella <em>plugins</em> (ottimizzazione del caricamento della pagina).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Scorciatoie da tastiera del backend';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Per ulteriori informazioni sulle scorciatoie da tastiera visita la guida sui <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank"> tasti di scelta rapida</a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Espandi/chiudi i nodi  ';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Espandi o chiudi tutti i nodi';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Un account Contao è stato bloccato';
@@ -500,14 +499,14 @@ $GLOBALS['TL_LANG']['MSC']['changelog'] = 'Changelog';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Disabilita';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Trascina gli elementi per riordinarli';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
-$GLOBALS['TL_LANG']['UNITS'][1] = 'kB';
-$GLOBALS['TL_LANG']['UNITS'][2] = 'MB';
-$GLOBALS['TL_LANG']['UNITS'][3] = 'GB';
-$GLOBALS['TL_LANG']['UNITS'][4] = 'TB';
-$GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
-$GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
-$GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
-$GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
+$GLOBALS['TL_LANG']['UNITS'][1] = 'KiB';
+$GLOBALS['TL_LANG']['UNITS'][2] = 'MiB';
+$GLOBALS['TL_LANG']['UNITS'][3] = 'GiB';
+$GLOBALS['TL_LANG']['UNITS'][4] = 'TiB';
+$GLOBALS['TL_LANG']['UNITS'][5] = 'PiB';
+$GLOBALS['TL_LANG']['UNITS'][6] = 'EiB';
+$GLOBALS['TL_LANG']['UNITS'][7] = 'ZiB';
+$GLOBALS['TL_LANG']['UNITS'][8] = 'YiB';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'Modulo';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Tabella interessata';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = 'Azione';

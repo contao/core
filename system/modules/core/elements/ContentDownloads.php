@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -21,8 +21,8 @@ namespace Contao;
  * Class ContentDownloads
  *
  * Front end content element "downloads".
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
 class ContentDownloads extends \ContentElement
@@ -52,7 +52,7 @@ class ContentDownloads extends \ContentElement
 		{
 			$this->import('FrontendUser', 'User');
 
-			if ($this->User->assignDir && is_dir(TL_ROOT . '/' . $this->User->homeDir))
+			if ($this->User->assignDir && $this->User->homeDir)
 			{
 				$this->multiSRC = array($this->User->homeDir);
 			}

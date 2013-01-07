@@ -39,11 +39,11 @@
       </trans-unit>
       <trans-unit id="tl_page.language.1">
         <source>Please enter the page language according to the ISO-639-1 standard (e.g. &quot;en&quot; for English).</source>
-        <target>Adja meg az oldal nyelvet az ISO-639-1 szabványnak megfelelően(pl.: &quot;hu&quot; a magyar nyelv).</target>
+        <target>Adja meg az oldal nyelvét az ISO-639-1 szabványnak megfelelően(pl.: &quot;hu&quot; a magyar nyelv).</target>
       </trans-unit>
       <trans-unit id="tl_page.robots.0">
         <source>Robots tag</source>
-        <target>Robotok címke</target>
+        <target>Robot címkék</target>
       </trans-unit>
       <trans-unit id="tl_page.robots.1">
         <source>Here you can define how search engines handle the page.</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_page.createSitemap.1">
         <source>Create a Google XML sitemap in the &lt;em&gt;share/&lt;/em&gt; directory.</source>
-        <target>Létrehoz egy Google XML oldaltérképet a gyökér könyvtárba.</target>
+        <target>Létrehoz egy Google XML oldaltérképet a &lt;em&gt;share/&lt;/em&gt; könyvtárba.</target>
       </trans-unit>
       <trans-unit id="tl_page.sitemapName.0">
         <source>Sitemap file name</source>
@@ -139,7 +139,7 @@
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
         <source>Use HTTPS in sitemaps</source>
-        <target>Használja a HTTPS-t az oldaltérképeken</target>
+        <target>Használja a HTTPS-t az oldaltérképben</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
         <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
@@ -183,13 +183,15 @@
       </trans-unit>
       <trans-unit id="tl_page.layout.1">
         <source>You can manage page layouts with the &quot;themes&quot; module.</source>
-        <target>Az oldal elrendezését az &quot;témák&quot; modulban módosíthatja.</target>
+        <target>Az oldal elrendezését a &quot;témák&quot; modulban módosíthatja.</target>
       </trans-unit>
       <trans-unit id="tl_page.mobileLayout.0">
         <source>Mobile page layout</source>
+        <target>Mobil oldal elrendezés</target>
       </trans-unit>
       <trans-unit id="tl_page.mobileLayout.1">
         <source>This layout will be used if the visitor uses a mobile device.</source>
+        <target>Ez az elrendezés látható, ha a látogató mobil eszközt használ.</target>
       </trans-unit>
       <trans-unit id="tl_page.includeCache.0">
         <source>Set cache timeout</source>
@@ -341,9 +343,11 @@
       </trans-unit>
       <trans-unit id="tl_page.global_legend">
         <source>Global settings</source>
+        <target>Globális beállítások</target>
       </trans-unit>
       <trans-unit id="tl_page.mobile_legend">
         <source>Mobile settings</source>
+        <target>Mobil beállítások</target>
       </trans-unit>
       <trans-unit id="tl_page.sitemap_legend">
         <source>XML sitemap</source>

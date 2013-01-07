@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -21,8 +21,8 @@ namespace Contao;
  * Class PageRegular
  *
  * Provide methods to handle a regular front end page.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
 class PageRegular extends \Frontend
@@ -317,34 +317,6 @@ class PageRegular extends \Frontend
 				}
 			}
 
-			// Special adjustments if the layout builder is combined with the responsive grid (see #4824)
-			if (in_array('responsive.css', $arrFramework))
-			{
-				if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
-				{
-					$arrSize = deserialize($objLayout->widthLeft);
-					$strFramework .= sprintf('#left{right:%s}', ($arrSize['value'] - 10) . $arrSize['unit']);
-				}
-				if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
-				{
-					$arrSize = deserialize($objLayout->widthRight);
-					$strFramework .= sprintf('#container{padding-right:%s}', ($arrSize['value'] + 10) . $arrSize['unit']);
-				}
-
-				if ($objLayout->cols == '2cll')
-				{
-					$strFramework .= '#main .inside{margin-left:30px;margin-right:10px}';
-				}
-				if ($objLayout->cols == '3cl')
-				{
-					$strFramework .= '#main .inside{margin-left:30px;margin-right:20px}';
-				}
-				if ($objLayout->cols == '2clr')
-				{
-					$strFramework .= '#main .inside{margin-left:10px;margin-right:20px}';
-				}
-			}
-
 			// Add the layout specific CSS
 			if ($strFramework != '')
 			{
@@ -415,6 +387,19 @@ class PageRegular extends \Frontend
 			else
 			{
 				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools.js|static';
+			}
+		}
+
+		// Load MooTools core for the debug bar and the command scheduler (see #5195)
+		if (!$objLayout->addJQuery && !$objLayout->addMooTools)
+		{
+			if ($GLOBALS['TL_CONFIG']['debugMode'])
+			{
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js|static';
+			}
+			elseif (!$GLOBALS['TL_CONFIG']['disableCron'])
+			{
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-request.js|static';
 			}
 		}
 
@@ -521,6 +506,13 @@ class PageRegular extends \Frontend
 		// External style sheets
 		if (is_array($arrExternal) && !empty($arrExternal))
 		{
+			// Consider the sorting order (see #5038)
+			if ($objLayout->orderExt != '')
+			{
+				$arrOrdered = array_map('intval', explode(',', $objLayout->orderExt));
+				$arrExternal = array_merge($arrOrdered, array_diff($arrExternal, $arrOrdered));
+			}
+
 			// Get the file entries from the database
 			$objFiles = \FilesModel::findMultipleByIds($arrExternal);
 

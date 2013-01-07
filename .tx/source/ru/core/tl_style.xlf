@@ -211,7 +211,7 @@
       </trans-unit>
       <trans-unit id="tl_style.bgimage.0">
         <source>Background image</source>
-        <target>Свойство Background image (Фоновое изображение)</target>
+        <target>Background image (Фоновое изображение)</target>
       </trans-unit>
       <trans-unit id="tl_style.bgimage.1">
         <source>Here you can enter the path to a background image.</source>
@@ -263,7 +263,7 @@
       </trans-unit>
       <trans-unit id="tl_style.gradientColors.1">
         <source>Here you can enter up to four colors with an optional percentage (e.g. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;).</source>
-        <target>Вы можете ввести до четырех цветов процентах (напр. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;).</target>
+        <target>Вы можете ввести до четырех цветов в процентах (напр. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_style.border.0">
         <source>Border</source>
@@ -419,7 +419,7 @@
       </trans-unit>
       <trans-unit id="tl_style.liststyletype.0">
         <source>List symbol</source>
-        <target>Свойство List-Style-Type (Стиль отображения списка)</target>
+        <target>List-Style-Type (Стиль отображения списка)</target>
       </trans-unit>
       <trans-unit id="tl_style.liststyletype.1">
         <source>Here you can choose a list symbol.</source>
@@ -427,7 +427,7 @@
       </trans-unit>
       <trans-unit id="tl_style.liststyleimage.0">
         <source>Custom symbol</source>
-        <target>Свойство List-Style-Image (Маркер списка в виде изображения)</target>
+        <target>List-Style-Image (Маркер списка в виде изображения)</target>
       </trans-unit>
       <trans-unit id="tl_style.liststyleimage.1">
         <source>Here you can enter the path to an individual symbol.</source>
@@ -447,7 +447,7 @@
       </trans-unit>
       <trans-unit id="tl_style.size_legend">
         <source>Size</source>
-        <target>Свойство Size (Размер)</target>
+        <target>Size (Размер)</target>
       </trans-unit>
       <trans-unit id="tl_style.position_legend">
         <source>Position</source>

@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Library
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -28,7 +28,7 @@ namespace Contao;
  * 
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class Combiner extends \System
 {
@@ -235,8 +235,8 @@ class Combiner extends \System
 
 					$strData = $chunks[$i+1];
 
-					// Skip absolute links and embedded images
-					if (strncmp($strData, 'data:', 5) !== 0 && strncmp($strData, 'http://', 7) !== 0 && strncmp($strData, 'https://', 8) !== 0)
+					// Skip absolute links and embedded images (see #5082)
+					if (strncmp($strData, 'data:', 5) !== 0 && strncmp($strData, 'http://', 7) !== 0 && strncmp($strData, 'https://', 8) !== 0 && strncmp($strData, '/', 1) !== 0)
 					{
 						// Make the paths relative to the root (see #4161)
 						if (strncmp($strData, '../', 3) !== 0)

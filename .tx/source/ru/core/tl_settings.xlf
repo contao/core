@@ -315,7 +315,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.maxImageWidth.0">
         <source>Maximum front end width</source>
-        <target>Максимальная ширина внешнего интерфейса</target>
+        <target>Максимальная ширина во внешнем интерфейсе</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxImageWidth.1">
         <source>If the width of an image or movie exceeds this value, it will be adjusted automatically.</source>

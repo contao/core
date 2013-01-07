@@ -81,6 +81,9 @@
         <source>Please enter date and time as &quot;%s&quot;!</source>
         <target>Veuillez saisir la date et l'heure &quot;%s&quot; !</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
+      </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
         <target>Le champ &quot;%s&quot; ne doit pas contenir d'espace !</target>
@@ -104,6 +107,9 @@
       <trans-unit id="ERR.fileheight">
         <source>File %s exceeds the maximum image height of %d pixels!</source>
         <target>L'image %s dépasse la hauteur maximale qui est de %d pixels !</target>
+      </trans-unit>
+      <trans-unit id="ERR.filetarget">
+        <source>Cannot move %s to %s because the target exists!</source>
       </trans-unit>
       <trans-unit id="ERR.invalidReferer">
         <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
@@ -1114,8 +1120,7 @@
         <target>Raccourcis clavier du back office</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;http://contao.org/en/keyboard-shortcuts.html&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>En savoir plus sur l'accélération de votre flux de travail en utilisant des &lt;a href=&quot;http://www.contao.fr/raccourcis-clavier.html&quot; target=&quot;_blank&quot;&gt;raccourcis clavier&lt;/a&gt;.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1959,41 +1964,36 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
         <source>Drag the items to re-order them</source>
         <target>Faites glisser les éléments pour les ré-ordonner</target>
       </trans-unit>
+      <trans-unit id="MSC.templatesTheme">
+        <source>Theme %s</source>
+      </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>
         <target>Byte</target>
       </trans-unit>
       <trans-unit id="UNITS.1">
-        <source>kB</source>
-        <target>kB</target>
+        <source>KiB</source>
       </trans-unit>
       <trans-unit id="UNITS.2">
-        <source>MB</source>
-        <target>MB</target>
+        <source>MiB</source>
       </trans-unit>
       <trans-unit id="UNITS.3">
-        <source>GB</source>
-        <target>GB</target>
+        <source>GiB</source>
       </trans-unit>
       <trans-unit id="UNITS.4">
-        <source>TB</source>
-        <target>TB</target>
+        <source>TiB</source>
       </trans-unit>
       <trans-unit id="UNITS.5">
-        <source>PB</source>
-        <target>PB</target>
+        <source>PiB</source>
       </trans-unit>
       <trans-unit id="UNITS.6">
-        <source>EB</source>
-        <target>EB</target>
+        <source>EiB</source>
       </trans-unit>
       <trans-unit id="UNITS.7">
-        <source>ZB</source>
-        <target>ZB</target>
+        <source>ZiB</source>
       </trans-unit>
       <trans-unit id="UNITS.8">
-        <source>YB</source>
-        <target>YB</target>
+        <source>YiB</source>
       </trans-unit>
       <trans-unit id="CONFIRM.do">
         <source>Module</source>

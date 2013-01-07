@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -34,12 +34,14 @@ $GLOBALS['TL_LANG']['ERR']['folderalias'] = 'Введите только бук�
 $GLOBALS['TL_LANG']['ERR']['date'] = 'Введите дату как "%s"!';
 $GLOBALS['TL_LANG']['ERR']['time'] = 'Введите время как "%s"!';
 $GLOBALS['TL_LANG']['ERR']['dateTime'] = 'Введите дату и время как "%s"!';
+$GLOBALS['TL_LANG']['ERR']['invalidDate'] = 'Неверная дата "%s"!';
 $GLOBALS['TL_LANG']['ERR']['noSpace'] = 'Поле "%s" не должно содержать пробелов!';
 $GLOBALS['TL_LANG']['ERR']['filesize'] = 'Максимальный размер файла для загрузки %s. (см. настройки Contao или php.ini)!';
 $GLOBALS['TL_LANG']['ERR']['filetype'] = 'Тип файла "%s" не разрешен для загрузки!';
 $GLOBALS['TL_LANG']['ERR']['filepartial'] = 'Файл %s был загружен частично!';
 $GLOBALS['TL_LANG']['ERR']['filewidth'] = 'В файле %s превышена максимальная ширина изображения в %d пикселей!';
 $GLOBALS['TL_LANG']['ERR']['fileheight'] = 'В файле %s превышена максимальная высота изображения в %d пикселей!';
+$GLOBALS['TL_LANG']['ERR']['filetarget'] = 'Невозможно переместить %s в %s потому, что цель уже существует!';
 $GLOBALS['TL_LANG']['ERR']['invalidReferer'] = 'Доступ запрещен! Текущий адрес хоста (%s) не соответствует представленному адресу (%s)!';
 $GLOBALS['TL_LANG']['ERR']['invalidPass'] = 'Неверный пароль!';
 $GLOBALS['TL_LANG']['ERR']['passwordLength'] = 'Пароль должен содержать минимум %d символов!';
@@ -292,7 +294,7 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'URL файлов применя�
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL ресурсов';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'URL ресурсов применяется к каталогу <em>assets</em> и всем ресурсам внутри (оптимизация скорости страниц).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Комбинации клавиш панели управления';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Узнайте больше об ускорении рабочего процесса при помощи <a href="http://contao.org/en/keyboard-shortcuts.html" title="Обзор сочетаний клавиш на contao.org" target="_blank">комбинаций клавиш</a>.';
+$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Узнайте больше об ускорении рабочего процесса при помощи <a href="https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts" title="Обзор сочетаний клавиш на contao.org" target="_blank">комбинаций клавиш</a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Переключить все';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Развернуть или свернуть все узлы';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Учетная запись Contao заблокирована';
@@ -382,7 +384,7 @@ $GLOBALS['TL_LANG']['MSC']['backendModules'] = 'Панель управлени�
 $GLOBALS['TL_LANG']['MSC']['welcomeTo'] = '%s панель управления';
 $GLOBALS['TL_LANG']['MSC']['updateVersion'] = 'Доступна Contao версии %s';
 $GLOBALS['TL_LANG']['MSC']['wordWrap'] = 'Переход на новую строку';
-$GLOBALS['TL_LANG']['MSC']['saveAlert'] = 'Внимание! Все несохраненные изменения будут потеряны. Продолжить?';
+$GLOBALS['TL_LANG']['MSC']['saveAlert'] = 'Внимание! Все не сохраненные изменения будут потеряны. Продолжить?';
 $GLOBALS['TL_LANG']['MSC']['toggleNodes'] = 'Все узлы';
 $GLOBALS['TL_LANG']['MSC']['expandNode'] = 'Развернуть узел';
 $GLOBALS['TL_LANG']['MSC']['collapseNode'] = 'Свернуть узел';
@@ -443,7 +445,7 @@ $GLOBALS['TL_LANG']['MSC']['showDifferences'] = 'Показать отличия
 $GLOBALS['TL_LANG']['MSC']['editElement'] = 'Редактировать элемент';
 $GLOBALS['TL_LANG']['MSC']['table'] = 'Таблица';
 $GLOBALS['TL_LANG']['MSC']['description'] = 'Описание';
-$GLOBALS['TL_LANG']['MSC']['noVersions'] = 'В настоящее время нет версий.';
+$GLOBALS['TL_LANG']['MSC']['noVersions'] = 'В настоящее время новых версий нет.';
 $GLOBALS['TL_LANG']['MSC']['latestChanges'] = 'Последние изменения';
 $GLOBALS['TL_LANG']['MSC']['identicalVersions'] = 'Две выбранные версии идентичны.';
 $GLOBALS['TL_LANG']['MSC']['selectNewPosition'] = 'Выберите (новое) расположение элемента';
@@ -499,15 +501,16 @@ $GLOBALS['TL_LANG']['MSC']['invalidTokenUrl'] = 'Неверный токен';
 $GLOBALS['TL_LANG']['MSC']['changelog'] = 'Журнал изменений';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Отключить';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Перетащите элементы для изменения их порядка';
+$GLOBALS['TL_LANG']['MSC']['templatesTheme'] = 'Тема %s';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Байт';
-$GLOBALS['TL_LANG']['UNITS'][1] = 'Кбайт';
-$GLOBALS['TL_LANG']['UNITS'][2] = 'Мбайт';
-$GLOBALS['TL_LANG']['UNITS'][3] = 'Гбайт';
-$GLOBALS['TL_LANG']['UNITS'][4] = 'Тбайт';
-$GLOBALS['TL_LANG']['UNITS'][5] = 'Пбайт';
-$GLOBALS['TL_LANG']['UNITS'][6] = 'Эбайт';
-$GLOBALS['TL_LANG']['UNITS'][7] = 'Збайт';
-$GLOBALS['TL_LANG']['UNITS'][8] = 'Йбайт';
+$GLOBALS['TL_LANG']['UNITS'][1] = 'КиБ';
+$GLOBALS['TL_LANG']['UNITS'][2] = 'МиБ';
+$GLOBALS['TL_LANG']['UNITS'][3] = 'ГиБ';
+$GLOBALS['TL_LANG']['UNITS'][4] = 'ТиБ';
+$GLOBALS['TL_LANG']['UNITS'][5] = 'ПиБ';
+$GLOBALS['TL_LANG']['UNITS'][6] = 'ЭиБ';
+$GLOBALS['TL_LANG']['UNITS'][7] = 'ЗиБ';
+$GLOBALS['TL_LANG']['UNITS'][8] = 'ЙиБ';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'Модуль';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Задействованная таблица';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = 'Действие';

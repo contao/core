@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -292,7 +292,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'L\'URL des fichiers s\'applique 
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL des ressources';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'L\'URL des ressources  s\'applique à toutes les ressources se trouvant dans le répertoire <em>assets</em> (optimisation de la vitesse de chargement des pages).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Raccourcis clavier du back office';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'En savoir plus sur l\'accélération de votre flux de travail en utilisant des <a href="http://www.contao.fr/raccourcis-clavier.html" target="_blank">raccourcis clavier</a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Tout basculer';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Développer ou réduire tous les nœuds';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Un compte Contao a été bloqué';
@@ -500,14 +499,6 @@ $GLOBALS['TL_LANG']['MSC']['changelog'] = 'Journal des modifications';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Désactivé';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Faites glisser les éléments pour les ré-ordonner';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
-$GLOBALS['TL_LANG']['UNITS'][1] = 'kB';
-$GLOBALS['TL_LANG']['UNITS'][2] = 'MB';
-$GLOBALS['TL_LANG']['UNITS'][3] = 'GB';
-$GLOBALS['TL_LANG']['UNITS'][4] = 'TB';
-$GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
-$GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
-$GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
-$GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'Module';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Table affectée';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = 'Action';

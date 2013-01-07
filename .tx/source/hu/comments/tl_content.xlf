@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="tl_content.com_template.0">
         <source>Comments template</source>
-        <target>Hozzászólás elrendezése</target>
+        <target>Hozzászólás sablonja</target>
       </trans-unit>
       <trans-unit id="tl_content.com_template.1">
         <source>Here you can select the comments template.</source>

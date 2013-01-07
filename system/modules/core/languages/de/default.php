@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -34,12 +34,14 @@ $GLOBALS['TL_LANG']['ERR']['folderalias'] = 'Bitte geben Sie nur Buchstaben und 
 $GLOBALS['TL_LANG']['ERR']['date'] = 'Bitte geben Sie das Datum im Format "%s" ein!';
 $GLOBALS['TL_LANG']['ERR']['time'] = 'Bitte geben Sie die Uhrzeit im Format "%s" ein!';
 $GLOBALS['TL_LANG']['ERR']['dateTime'] = 'Bitte geben Sie Datum und Uhrzeit im Format "%s" ein!';
+$GLOBALS['TL_LANG']['ERR']['invalidDate'] = 'Ungültiges Datum "%s"!';
 $GLOBALS['TL_LANG']['ERR']['noSpace'] = 'Das Feld "%s" darf keine Leerzeichen enthalten!';
 $GLOBALS['TL_LANG']['ERR']['filesize'] = 'Die maximale Größe für Datei-Uploads beträgt %s (Contao- oder php.ini-Einstellungen)!';
 $GLOBALS['TL_LANG']['ERR']['filetype'] = 'Der Dateityp "%s" darf nicht hochgeladen werden!';
 $GLOBALS['TL_LANG']['ERR']['filepartial'] = 'Die Datei %s wurde nur teilweise hochgeladen!';
 $GLOBALS['TL_LANG']['ERR']['filewidth'] = 'Die Datei %s übersteigt die maximale Bildbreite von %d Pixel!';
 $GLOBALS['TL_LANG']['ERR']['fileheight'] = 'Die Datei %s übersteigt die maximale Bildhöhe von %d Pixel!';
+$GLOBALS['TL_LANG']['ERR']['filetarget'] = '%s kann nicht nach %s verschoben werden, da das Ziel existiert!';
 $GLOBALS['TL_LANG']['ERR']['invalidReferer'] = 'Zugriff verweigert! Die aktuelle Hostadresse (%s) stimmt nicht mit der verweisenden Hostadresse (%s) überein!';
 $GLOBALS['TL_LANG']['ERR']['invalidPass'] = 'Ungültiges Passwort!';
 $GLOBALS['TL_LANG']['ERR']['passwordLength'] = 'Ein Passwort muss mindestens %d Zeichen lang sein!';
@@ -292,7 +294,7 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'Die Datei-URL gilt für das <em>
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'Assets-URL';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'Die Assets-URL gilt für das <em>assets</em>-Verzeichnis (Page-Speed-Optimierung).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Backend-Tastaturkürzel';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Wie Sie Ihren Arbeitsablauf durch die Verwendung von <a href="http://contao.org/de/keyboard-shortcuts.html" title="Übersicht der Tastaturkürzel auf contao.org" target="_blank">Tastaturkürzeln</a> beschleunigen.';
+$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Wie Sie Ihren Arbeitsablauf durch die Verwendung von <a href="https://contao.org/de/manual/3.0/administration-area.html#backend-tastaturk%C3%BCrzel" title="Übersicht der Tastaturkürzel auf contao.org" target="_blank">Tastaturkürzeln</a> beschleunigen.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Alle umschalten';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Alle Knoten öffnen bzw. schließen';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Ein Contao-Konto wurde gesperrt';
@@ -499,15 +501,16 @@ $GLOBALS['TL_LANG']['MSC']['invalidTokenUrl'] = 'Ungültiges Token';
 $GLOBALS['TL_LANG']['MSC']['changelog'] = 'Änderungsliste';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Deaktivieren';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Elemente können durch Ziehen umsortiert werden';
+$GLOBALS['TL_LANG']['MSC']['templatesTheme'] = 'Theme %s';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
-$GLOBALS['TL_LANG']['UNITS'][1] = 'kB';
-$GLOBALS['TL_LANG']['UNITS'][2] = 'MB';
-$GLOBALS['TL_LANG']['UNITS'][3] = 'GB';
-$GLOBALS['TL_LANG']['UNITS'][4] = 'TB';
-$GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
-$GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
-$GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
-$GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
+$GLOBALS['TL_LANG']['UNITS'][1] = 'KiB';
+$GLOBALS['TL_LANG']['UNITS'][2] = 'MiB';
+$GLOBALS['TL_LANG']['UNITS'][3] = 'GiB';
+$GLOBALS['TL_LANG']['UNITS'][4] = 'TiB';
+$GLOBALS['TL_LANG']['UNITS'][5] = 'PiB';
+$GLOBALS['TL_LANG']['UNITS'][6] = 'EiB';
+$GLOBALS['TL_LANG']['UNITS'][7] = 'ZiB';
+$GLOBALS['TL_LANG']['UNITS'][8] = 'YiB';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'Modul';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Betroffene Tabelle';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = 'Aktion';

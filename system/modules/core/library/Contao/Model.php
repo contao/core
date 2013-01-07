@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Library
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -38,7 +38,7 @@ namespace Contao;
  * 
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 abstract class Model extends \System
 {
@@ -170,7 +170,7 @@ abstract class Model extends \System
 	 * 
 	 * @return string The primary key
 	 */
-	public function getPk()
+	public static function getPk()
 	{
 		return static::$strPk;
 	}
@@ -181,7 +181,7 @@ abstract class Model extends \System
 	 * 
 	 * @return string The table name
 	 */
-	public function getTable()
+	public static function getTable()
 	{
 		return static::$strTable;
 	}
@@ -436,11 +436,13 @@ abstract class Model extends \System
 	{
 		if (strncmp($name, 'findBy', 6) === 0)
 		{
-			return call_user_func('static::findBy', lcfirst(substr($name, 6)), array_shift($args), $args);
+			array_unshift($args, lcfirst(substr($name, 6)));
+			return call_user_func_array('static::findBy', $args);
 		}
 		elseif (strncmp($name, 'findOneBy', 9) === 0)
 		{
-			return call_user_func('static::findOneBy', lcfirst(substr($name, 9)), array_shift($args), $args);
+			array_unshift($args, lcfirst(substr($name, 9)));
+			return call_user_func_array('static::findOneBy', $args);
 		}
 
 		return null;
@@ -492,7 +494,16 @@ abstract class Model extends \System
 		}
 
 		$objStatement = static::preFind($objStatement);
-		$objResult = $objStatement->execute($arrOptions['value']);
+
+		// Optionally execute uncached (see #5102)
+		if (isset($arrOptions['uncached']) && $arrOptions['uncached'])
+		{
+			$objResult = $objStatement->executeUncached($arrOptions['value']);
+		}
+		else
+		{
+			$objResult = $objStatement->execute($arrOptions['value']);
+		}
 
 		if ($objResult->numRows < 1)
 		{
@@ -500,7 +511,15 @@ abstract class Model extends \System
 		}
 
 		$objResult = static::postFind($objResult);
-		return ($arrOptions['return'] == 'Model') ? new static($objResult) : new \Model\Collection($objResult, static::$strTable);
+
+		if ($arrOptions['return'] == 'Model')
+		{
+			return new static($objResult);
+		}
+		else
+		{
+			return new \Model\Collection($objResult, static::$strTable);
+		}
 	}
 
 
@@ -552,7 +571,7 @@ abstract class Model extends \System
 			'value'  => $varValue
 		));
 
-		return \Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
+		return (int) \Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
 	}
 
 

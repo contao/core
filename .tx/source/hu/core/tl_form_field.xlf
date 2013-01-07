@@ -347,7 +347,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.fsStart.0">
         <source>Wrapper start</source>
-        <target>Wrapper start</target>
+        <target>Csoport kezdete</target>
       </trans-unit>
       <trans-unit id="tl_form_field.fsStart.1">
         <source>Marks the beginning of a fieldset and can contain a legend.</source>
@@ -355,7 +355,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.fsStop.0">
         <source>Wrapper stop</source>
-        <target>Wrapper stop</target>
+        <target>Csoport vége</target>
       </trans-unit>
       <trans-unit id="tl_form_field.fsStop.1">
         <source>Marks the end of a fieldset.</source>
@@ -383,7 +383,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.accesskey.1">
         <source>A form field can be focused by pressing the [ALT] or [CTRL] key and the access key simultaneously.</source>
-        <target>Az űrlapmezőre lehet ugrani vele. Nyomja meg a [ALT] vagy [Ctrl] billentyűt, és a hozzáférési kulcsot egyszerre.</target>
+        <target>Az űrlapmezőre lehet ugrani vele. Nyomja meg a [ALT] vagy [Ctrl] billentyűt, és a hozzáférési kulcsot (karaktert) egyszerre.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.tabindex.0">
         <source>Tab index</source>

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -54,8 +54,8 @@ $GLOBALS['TL_LANG']['tl_layout']['stylesheet'][0] = 'Stila lapas';
 $GLOBALS['TL_LANG']['tl_layout']['stylesheet'][1] = 'Lūdzu atlasiet stilu lapas, kuras vēlaties ietvert aktuālajā salikumā.';
 $GLOBALS['TL_LANG']['tl_layout']['framework'][0] = 'CSS sistēma';
 $GLOBALS['TL_LANG']['tl_layout']['framework'][1] = 'Šeit jūs varat aktivizēt Contao CSS sistēmas komponentus.';
-$GLOBALS['TL_LANG']['tl_layout']['reset.css'][0] = 'CSS atiestatīšana';
 $GLOBALS['TL_LANG']['tl_layout']['layout.css'][0] = 'Salikuma veidotājs';
+$GLOBALS['TL_LANG']['tl_layout']['reset.css'][0] = 'CSS atiestatīšana';
 $GLOBALS['TL_LANG']['tl_layout']['tinymce.css'][0] = 'TinyMCE stila lapa';
 $GLOBALS['TL_LANG']['tl_layout']['external'][0] = 'Papildus stila lapas';
 $GLOBALS['TL_LANG']['tl_layout']['orderExt'][0] = 'Kārtošanas kārtība';

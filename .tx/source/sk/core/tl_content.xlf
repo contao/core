@@ -507,19 +507,19 @@
       </trans-unit>
       <trans-unit id="tl_content.start.0">
         <source>Show from</source>
-        <target>Začiatok rozbaľovacej sekcie</target>
+        <target>Zobraziť od</target>
       </trans-unit>
       <trans-unit id="tl_content.start.1">
         <source>Do not show the element on the website before this day.</source>
-        <target>Označuje začiatok rozbaľovacej sekcie, ktorá obsahuje niekoľko obsahových elementov.</target>
+        <target>Ak zadáte dátum, tento element nebude na stránkach zobrazený skôr, ako v tento deň.</target>
       </trans-unit>
       <trans-unit id="tl_content.stop.0">
         <source>Show until</source>
-        <target>Koniec rozbaľovacej sekcie</target>
+        <target>Zobraziť do</target>
       </trans-unit>
       <trans-unit id="tl_content.stop.1">
         <source>Do not show the element on the website on and after this day.</source>
-        <target>Označuje koniec rozbaľovacej sekcie, ktorá obsahuje niekoľko obsahových elementov.</target>
+        <target>Ak zadáte dátum, tento element nebude po tomto dátume na stránkach zobrazovaný.</target>
       </trans-unit>
       <trans-unit id="tl_content.type_legend">
         <source>Element type</source>

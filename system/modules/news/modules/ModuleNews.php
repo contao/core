@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package News
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -21,8 +21,8 @@ namespace Contao;
  * Class ModuleNews
  *
  * Parent class for news modules.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    News
  */
 abstract class ModuleNews extends \Module
@@ -51,24 +51,27 @@ abstract class ModuleNews extends \Module
 		$objArchive = \NewsArchiveModel::findMultipleByIds($arrArchives);
 		$arrArchives = array();
 
-		while ($objArchive->next())
+		if ($objArchive !== null)
 		{
-			if ($objArchive->protected)
+			while ($objArchive->next())
 			{
-				if (!FE_USER_LOGGED_IN)
+				if ($objArchive->protected)
 				{
-					continue;
+					if (!FE_USER_LOGGED_IN)
+					{
+						continue;
+					}
+
+					$groups = deserialize($objArchive->groups);
+
+					if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
+					{
+						continue;
+					}
 				}
 
-				$groups = deserialize($objArchive->groups);
-
-				if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
-				{
-					continue;
-				}
+				$arrArchives[] = $objArchive->id;
 			}
-
-			$arrArchives[] = $objArchive->id;
 		}
 
 		return $arrArchives;

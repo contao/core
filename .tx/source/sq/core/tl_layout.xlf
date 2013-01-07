@@ -161,14 +161,6 @@
         <source>Here you can activate the components of the Contao CSS framework.</source>
         <target>Këtu mund të aktivizohen komponentët e CSS framework të Contao-së.</target>
       </trans-unit>
-      <trans-unit id="tl_layout.reset.css.0">
-        <source>CSS reset</source>
-        <target>CSS reset</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.reset.css.1">
-        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
-        <target>Heq stilin standard në shfletues të ndryshm që jan në kundërshtim me elemente të HTML.</target>
-      </trans-unit>
       <trans-unit id="tl_layout.layout.css.0">
         <source>Layout builder</source>
         <target>Layout builder</target>
@@ -182,6 +174,20 @@
       </trans-unit>
       <trans-unit id="tl_layout.responsive.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.0">
+        <source>CSS reset</source>
+        <target>CSS reset</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.1">
+        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
+        <target>Heq stilin standard në shfletues të ndryshm që jan në kundërshtim me elemente të HTML.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.0">
+        <source>Basic forms</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.1">
+        <source>Adds basic form elements and buttons formatting.</source>
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.0">
         <source>TinyMCE style sheet</source>

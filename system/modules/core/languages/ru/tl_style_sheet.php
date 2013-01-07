@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -35,7 +35,7 @@ $GLOBALS['TL_LANG']['tl_style_sheet']['config_legend'] = 'Конфигураци
 $GLOBALS['TL_LANG']['tl_style_sheet']['media_legend'] = 'Медиа настройки';
 $GLOBALS['TL_LANG']['tl_style_sheet']['vars_legend'] = 'Глобальные переменные';
 $GLOBALS['TL_LANG']['tl_style_sheet']['css_imported'] = 'Таблица стилей "%s" успешно импортирована.';
-$GLOBALS['TL_LANG']['tl_style_sheet']['css_renamed'] = 'Стиль "%s" успешно импортирован как "%s".';
+$GLOBALS['TL_LANG']['tl_style_sheet']['css_renamed'] = 'Таблица стилей "%s" успешно импортирована как "%s".';
 $GLOBALS['TL_LANG']['tl_style_sheet']['new'][0] = 'Новая таблица стилей';
 $GLOBALS['TL_LANG']['tl_style_sheet']['new'][1] = 'Создать новую таблицу стилей';
 $GLOBALS['TL_LANG']['tl_style_sheet']['show'][0] = 'Детали таблицы стилей';

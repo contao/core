@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -292,7 +292,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'La URL da la datoteca vala per l
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL da resursas';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'La URL da resursas vala per l\'ordinatur <em>assets</em> (optimar per Page-Speed).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Scursanidas da tastas per il back-end';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Legia dapli davart <a href="http://contao.org/de/keyboard-shortcuts.html" title="Survista davart las scursanidas da tastas sin contao.org" target="_blank">scursanidas da tastas</a> per pudair lavurar anc pli spert.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Midar tuts';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Avrir u serrar tut ils nufs';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'In conto da Contao è vegnì bloccà';
@@ -500,14 +499,6 @@ $GLOBALS['TL_LANG']['MSC']['changelog'] = 'Glista da las midadas';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Deactivar';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Tira ils elements per midar la successiun';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
-$GLOBALS['TL_LANG']['UNITS'][1] = 'kB';
-$GLOBALS['TL_LANG']['UNITS'][2] = 'MB';
-$GLOBALS['TL_LANG']['UNITS'][3] = 'GB';
-$GLOBALS['TL_LANG']['UNITS'][4] = 'TB';
-$GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
-$GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
-$GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
-$GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'Modul';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Tabella pertutgada';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = 'Acziun';

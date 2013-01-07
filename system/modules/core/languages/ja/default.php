@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -34,12 +34,14 @@ $GLOBALS['TL_LANG']['ERR']['folderalias'] = '英数字の文字と次の特殊�
 $GLOBALS['TL_LANG']['ERR']['date'] = '日付を"%s"の書式で入力してください。';
 $GLOBALS['TL_LANG']['ERR']['time'] = '時刻を"%s"の書式で入力してください。';
 $GLOBALS['TL_LANG']['ERR']['dateTime'] = '日付と時刻を"%s"の書式で入力してください。';
+$GLOBALS['TL_LANG']['ERR']['invalidDate'] = '"%s"は正しくない日付です。';
 $GLOBALS['TL_LANG']['ERR']['noSpace'] = '"%s"の欄に空白文字を含めてないでください。';
 $GLOBALS['TL_LANG']['ERR']['filesize'] = 'アップロードできるファイルは(Contaoまたはphp.iniの設定により)最大%sまでの大きさです。';
 $GLOBALS['TL_LANG']['ERR']['filetype'] = 'ファイル形式"%s"はアップロードを許可していない形式です。';
 $GLOBALS['TL_LANG']['ERR']['filepartial'] = '%sというファイルは一部だけがアップロードできました。';
 $GLOBALS['TL_LANG']['ERR']['filewidth'] = '%sという画像ファイルは最大の幅の%dピクセルを超えています。';
 $GLOBALS['TL_LANG']['ERR']['fileheight'] = '%sという画像ファイルは最大の高さの%dピクセルを超えています。';
+$GLOBALS['TL_LANG']['ERR']['filetarget'] = '移動先が存在するため%sを%sに移動できません。';
 $GLOBALS['TL_LANG']['ERR']['invalidReferer'] = 'アクセスを拒否しました。現在のホストのアドレス(%s)がリファラーのホストのアドレス(%s)と一致していません。';
 $GLOBALS['TL_LANG']['ERR']['invalidPass'] = 'パスワードが正しくありません。';
 $GLOBALS['TL_LANG']['ERR']['passwordLength'] = 'パスワードは少なくとも%d文字以上を入力してください。';
@@ -292,7 +294,7 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'ファイルのURLは<em>files</
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'assetsのURL';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'asstesのURLは<em>assets</em>のディレクトリに適用します。(Page Speed最適化)';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'バックエンドのキーボードのショートカット';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = '<a href="http://contao.org/en/keyboard-shortcuts.html" target="_blank">キーボードのショートカット</a>の使用を学んで、作業の流れを速くしましょう。';
+$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = '<a href="https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts" title="contao.orgのキーモードのショートカットの概要" target="_blank">キーボードのショートカット</a>を使って、作業の流れを速くする方法を学びましょう';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'すべてを切り替え';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'すべてのノードの展開または折り畳み';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Contaoのアカウントはロック中';
@@ -499,15 +501,16 @@ $GLOBALS['TL_LANG']['MSC']['invalidTokenUrl'] = '不正なトークン';
 $GLOBALS['TL_LANG']['MSC']['changelog'] = '変更履歴';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = '解除';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = '項目をドラッグして並べ替え';
+$GLOBALS['TL_LANG']['MSC']['templatesTheme'] = 'テーマ %s';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'byte';
-$GLOBALS['TL_LANG']['UNITS'][1] = 'kB';
-$GLOBALS['TL_LANG']['UNITS'][2] = 'MB';
-$GLOBALS['TL_LANG']['UNITS'][3] = 'GB';
-$GLOBALS['TL_LANG']['UNITS'][4] = 'TB';
-$GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
-$GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
-$GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
-$GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
+$GLOBALS['TL_LANG']['UNITS'][1] = 'KiB';
+$GLOBALS['TL_LANG']['UNITS'][2] = 'MiB';
+$GLOBALS['TL_LANG']['UNITS'][3] = 'GiB';
+$GLOBALS['TL_LANG']['UNITS'][4] = 'TiB';
+$GLOBALS['TL_LANG']['UNITS'][5] = 'PiB';
+$GLOBALS['TL_LANG']['UNITS'][6] = 'EiB';
+$GLOBALS['TL_LANG']['UNITS'][7] = 'ZiB';
+$GLOBALS['TL_LANG']['UNITS'][8] = 'YiB';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'モジュール';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = '影響を受けたテーブル';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = '操作';

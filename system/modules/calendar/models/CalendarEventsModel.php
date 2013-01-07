@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Calendar
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -22,7 +22,7 @@ namespace Contao;
  * 
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class CalendarEventsModel extends \Model
 {
@@ -37,12 +37,13 @@ class CalendarEventsModel extends \Model
 	/**
 	 * Find a published event from one or more calendars by its ID or alias
 	 * 
-	 * @param mixed $varId   The numeric ID or alias name
-	 * @param array $arrPids An array of calendar IDs
+	 * @param mixed $varId      The numeric ID or alias name
+	 * @param array $arrPids    An array of calendar IDs
+	 * @param array $arrOptions An optional options array
 	 * 
 	 * @return \Model|null The model or null if there is no event
 	 */
-	public static function findPublishedByParentAndIdOrAlias($varId, $arrPids)
+	public static function findPublishedByParentAndIdOrAlias($varId, $arrPids, array $arrOptions=array())
 	{
 		if (!is_array($arrPids) || empty($arrPids))
 		{
@@ -58,7 +59,7 @@ class CalendarEventsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId));
+		return static::findOneBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
 	}
 
 
@@ -84,13 +85,14 @@ class CalendarEventsModel extends \Model
 	/**
 	 * Find events of the current period by their parent ID
 	 * 
-	 * @param integer $intPid   The calendar ID
-	 * @param integer $intStart The start date as Unix timestamp
-	 * @param integer $intEnd   The end date as Unix timestamp
+	 * @param integer $intPid     The calendar ID
+	 * @param integer $intStart   The start date as Unix timestamp
+	 * @param integer $intEnd     The end date as Unix timestamp
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no events
 	 */
-	public static function findCurrentByPid($intPid, $intStart, $intEnd)
+	public static function findCurrentByPid($intPid, $intStart, $intEnd, array $arrOptions=array())
 	{
 		$t = static::$strTable;
 		$intStart = intval($intStart);
@@ -104,18 +106,19 @@ class CalendarEventsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findBy($arrColumns, $intPid, array('order'=>"$t.startTime"));
+		return static::findBy($arrColumns, $intPid, array('order'=>"$t.startTime"), $arrOptions);
 	}
 
 
 	/**
 	 * Find published events with the default redirect target by their parent ID
 	 * 
-	 * @param integer $intPid The calendar ID
+	 * @param integer $intPid     The calendar ID
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no events
 	 */
-	public static function findPublishedDefaultByPid($intPid)
+	public static function findPublishedDefaultByPid($intPid, array $arrOptions=array())
 	{
 		$t = static::$strTable;
 		$arrColumns = array("$t.pid=? AND $t.source='default'");
@@ -126,19 +129,20 @@ class CalendarEventsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findBy($arrColumns, $intPid, array('order'=>"$t.startTime DESC"));
+		return static::findBy($arrColumns, $intPid, array('order'=>"$t.startTime DESC"), $arrOptions);
 	}
 
 
 	/**
 	 * Find upcoming events by their parent IDs
 	 * 
-	 * @param array   $arrIds   An array of calendar IDs
-	 * @param integer $intLimit An optional limit
+	 * @param array   $arrIds     An array of calendar IDs
+	 * @param integer $intLimit   An optional limit
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no events
 	 */
-	public static function findUpcomingByPids($arrIds, $intLimit=0)
+	public static function findUpcomingByPids($arrIds, $intLimit=0, array $arrOptions=array())
 	{
 		if (!is_array($arrIds) || empty($arrIds))
 		{
@@ -153,11 +157,14 @@ class CalendarEventsModel extends \Model
 
 		if ($intLimit > 0)
 		{
-			return static::findBy($arrColumns, null, array('order'=>"$t.startTime", 'limit'=>$intLimit));
+			$arrOptions['limit'] = $intLimit;
 		}
-		else
+
+		if (!isset($arrOptions['order']))
 		{
-			return static::findBy($arrColumns, null, array('order'=>"$t.startTime"));
+			$arrOptions['order'] = "$t.startTime";
 		}
+
+		return static::findBy($arrColumns, null, $arrOptions);
 	}
 }

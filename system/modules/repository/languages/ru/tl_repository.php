@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -32,7 +32,7 @@ $GLOBALS['TL_LANG']['tl_repository']['popularity'][0] = 'Популярност�
 $GLOBALS['TL_LANG']['tl_repository']['popularity'][1] = '%s/%s (загрузок/установок)';
 $GLOBALS['TL_LANG']['tl_repository']['quality'][0] = 'Качество';
 $GLOBALS['TL_LANG']['tl_repository']['quality'][1] = 'Насколько надежным является расширение и как безболезненна его установка и техническое обслуживание?';
-$GLOBALS['TL_LANG']['tl_repository']['releasedate'][0] = 'Дата версии';
+$GLOBALS['TL_LANG']['tl_repository']['releasedate'][0] = 'Дата релиза';
 $GLOBALS['TL_LANG']['tl_repository']['releasedate'][1] = 'Введите дату публикации этой версии в формате %s';
 $GLOBALS['TL_LANG']['tl_repository']['selversion'][0] = 'Версия';
 $GLOBALS['TL_LANG']['tl_repository']['selversion'][1] = 'Выберите версию';
@@ -47,7 +47,7 @@ $GLOBALS['TL_LANG']['tl_repository']['lickey'][1] = 'Введите лиценз
 $GLOBALS['TL_LANG']['tl_repository']['uninstprotect'][0] = 'Защита от деинсталляции';
 $GLOBALS['TL_LANG']['tl_repository']['uninstprotect'][1] = 'Защита расширения от случайной деинсталляции.';
 $GLOBALS['TL_LANG']['tl_repository']['updateprotect'][0] = 'Защита от обновления';
-$GLOBALS['TL_LANG']['tl_repository']['updateprotect'][1] = 'Защита засширения от случайного обновления.';
+$GLOBALS['TL_LANG']['tl_repository']['updateprotect'][1] = 'Защита расширения от случайного обновления.';
 $GLOBALS['TL_LANG']['tl_repository']['author'] = 'Автор';
 $GLOBALS['TL_LANG']['tl_repository']['build'] = 'Build';
 $GLOBALS['TL_LANG']['tl_repository']['cancel'] = 'Отмена';
@@ -129,7 +129,7 @@ $GLOBALS['TL_LANG']['tl_repository']['status'] = 'Статус';
 $GLOBALS['TL_LANG']['tl_repository']['success'] = 'успешно';
 $GLOBALS['TL_LANG']['tl_repository']['uninstallextension'] = 'Деинсталлировать расширение';
 $GLOBALS['TL_LANG']['tl_repository']['updatedatabase'] = 'Обновление базы данных';
-$GLOBALS['TL_LANG']['tl_repository']['updateextension'] = 'Обновление расширение';
+$GLOBALS['TL_LANG']['tl_repository']['updateextension'] = 'Обновление расширений';
 $GLOBALS['TL_LANG']['tl_repository']['updateextensions'] = 'Обновление выбранных расширений';
 $GLOBALS['TL_LANG']['tl_repository']['update'] = 'Обновить';
 $GLOBALS['TL_LANG']['tl_repository']['updates'] = 'Обновления';
@@ -162,7 +162,7 @@ $GLOBALS['TL_LANG']['tl_repository_category_options']['translation'] = 'Лока
 $GLOBALS['TL_LANG']['tl_repository_category_options']['bundle'] = 'Комплект';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['other'] = 'Другое';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['core'] = 'Ядро';
-$GLOBALS['TL_LANG']['tl_repository_order_options']['reldate'] = 'Дата версии';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['reldate'] = 'Дата релиза';
 $GLOBALS['TL_LANG']['tl_repository_order_options']['rating'] = 'Рейтинг';
 $GLOBALS['TL_LANG']['tl_repository_order_options']['popular'] = 'Популярность';
 $GLOBALS['TL_LANG']['tl_repository_order_options']['name'] = 'Имя';

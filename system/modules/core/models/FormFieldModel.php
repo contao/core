@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -22,7 +22,7 @@ namespace Contao;
  * 
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class FormFieldModel extends \Model
 {
@@ -37,11 +37,12 @@ class FormFieldModel extends \Model
 	/**
 	 * Find published form fields by their parent ID
 	 * 
-	 * @param integer $intPid The form ID
+	 * @param integer $intPid     The form ID
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no form fields
 	 */
-	public static function findPublishedByPid($intPid)
+	public static function findPublishedByPid($intPid, array $arrOptions=array())
 	{
 		$t = static::$strTable;
 		$arrColumns = array("$t.pid=?");
@@ -51,6 +52,11 @@ class FormFieldModel extends \Model
 			$arrColumns[] = "$t.invisible=''";
 		}
 
-		return static::findBy($arrColumns, $intPid, array('order'=>"$t.sorting"));
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.sorting";
+		}
+
+		return static::findBy($arrColumns, $intPid, $arrOptions);
 	}
 }

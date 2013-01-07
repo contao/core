@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Library
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -18,7 +18,7 @@ namespace Contao\Database;
  * 
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class Updater extends \Controller
 {
@@ -293,7 +293,7 @@ class Updater extends \Controller
 		$this->Database->query("ALTER TABLE `tl_content` ADD ptable varchar(64) NOT NULL default ''");
 
 		// Create a content element for each news article
-		$objNews = $this->Database->execute("SELECT * FROM tl_news WHERE text!=''");
+		$objNews = $this->Database->execute("SELECT * FROM tl_news WHERE text!='' AND source='default'");
 
 		while ($objNews->next())
 		{
@@ -301,7 +301,7 @@ class Updater extends \Controller
 		}
 
 		// Create a content element for each event
-		$objEvents = $this->Database->execute("SELECT * FROM tl_calendar_events WHERE details!=''");
+		$objEvents = $this->Database->execute("SELECT * FROM tl_calendar_events WHERE details!='' AND source='default'");
 
 		while ($objEvents->next())
 		{

@@ -23,7 +23,7 @@ li { line-height:24px; }
   <li>If you are a Contao user, contact the administrator of your website.</li>
   <li>Open the file <em>system/logs/error.log</em> and search for a corresponding entry.</li>
   <li>Open the file <em>system/config/localconfig.php</em> and add the following line:<pre>$GLOBALS['TL_CONFIG']['displayErrors'] = true;</pre></li>
-  <li>Read the <a href="http://contao.org/faq.html" target="_blank">Contao FAQs</a> or visit the <a href="http://contao.org/support.html" target="_blank">Contao support page</a>.</li>
+  <li>Read the <a href="https://contao.org/faq.html" target="_blank">Contao FAQs</a> or visit the <a href="https://contao.org/support.html" target="_blank">Contao support page</a>.</li>
 </ol>
 
 </div>

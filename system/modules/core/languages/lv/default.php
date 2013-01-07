@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -289,7 +289,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'Faila URL attiecas uz <em>tl_fil
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'Papildinājuma URL';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'Papildinājuma URL attiecas uz visiem resursiem <em>plugins</em> direktorijā (lapas ātruma optimizācija).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Aizmugures īsinājumtaustiņi';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Uzziniet vairāk par to kā paātrināt savu darbplūsmu izmantojot <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">īsinājumtaustiņus</>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Pārslēgt visus';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Izvērst vai sakļaut visus mezglus';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Contao konts ir bloķēts';
@@ -496,14 +495,6 @@ $GLOBALS['TL_LANG']['MSC']['changelog'] = 'Izmaiņu saraksts';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Atspējot';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Vilkt elementus, lai tos pārkārtotu';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'baits';
-$GLOBALS['TL_LANG']['UNITS'][1] = 'kB';
-$GLOBALS['TL_LANG']['UNITS'][2] = 'MB';
-$GLOBALS['TL_LANG']['UNITS'][3] = 'GB';
-$GLOBALS['TL_LANG']['UNITS'][4] = 'TB';
-$GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
-$GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
-$GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
-$GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'Modulis';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Ietekmētā tabula';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = 'Darbība';

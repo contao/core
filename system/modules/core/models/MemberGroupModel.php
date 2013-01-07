@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -22,7 +22,7 @@ namespace Contao;
  * 
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class MemberGroupModel extends \Model
 {
@@ -37,11 +37,12 @@ class MemberGroupModel extends \Model
 	/**
 	 * Find a published group by its ID
 	 * 
-	 * @param integer $intId The member group ID
+	 * @param integer $intId      The member group ID
+	 * @param array   $arrOptions An optional options array
 	 * 
 	 * @return \Model|null The model or null if there is no member group
 	 */
-	public static function findPublishedById($intId)
+	public static function findPublishedById($intId, array $arrOptions=array())
 	{
 		$t = static::$strTable;
 		$arrColumns = array("$t.id=?");
@@ -52,7 +53,7 @@ class MemberGroupModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.disable=''";
 		}
 
-		return static::findOneBy($arrColumns, $intId);
+		return static::findOneBy($arrColumns, $intId, $arrOptions);
 	}
 
 
@@ -90,13 +91,15 @@ class MemberGroupModel extends \Model
 	/**
 	 * Find all active groups
 	 * 
+	 * @param array $arrOptions An optional options array
+	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no member groups
 	 */
-	public static function findAllActive()
+	public static function findAllActive(array $arrOptions=array())
 	{
 		$time = time();
 		$t = static::$strTable;
 
-		return static::findBy(array("$t.disable='' AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time)"), null);
+		return static::findBy(array("$t.disable='' AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time)"), null, $arrOptions);
 	}
 }

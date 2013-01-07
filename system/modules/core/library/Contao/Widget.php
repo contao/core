@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Library
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -38,7 +38,7 @@ namespace Contao;
  * 
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 abstract class Widget extends \Controller
 {
@@ -806,6 +806,16 @@ abstract class Widget extends \Controller
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], \Date::getInputFormat($GLOBALS['TL_CONFIG']['dateFormat'])));
 					}
+
+					// Validate the date (see #5086)
+					try
+					{
+						new \Date($varInput);
+					}
+					catch (\OutOfBoundsException $e)
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
+					}
 					break;
 
 				// Check whether the current value is a valid time format
@@ -821,6 +831,16 @@ abstract class Widget extends \Controller
 					if (!\Validator::isDatim($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], \Date::getInputFormat($GLOBALS['TL_CONFIG']['datimFormat'])));
+					}
+
+					// Validate the date (see #5086)
+					try
+					{
+						new \Date($varInput);
+					}
+					catch (\OutOfBoundsException $e)
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
 					}
 					break;
 

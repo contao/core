@@ -14,8 +14,7 @@
         <target>Inserir tags</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.1">
-        <source>For more information on insert tags please visit &lt;a href=&quot;http://contao.org/en/insert-tags.html&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;http://contao.org/en/insert-tags.html&lt;/a&gt;.</source>
-        <target>tags são referências que você pode inserir em qualquer lugar no Contao. Estas tags serão substituídas por certos valores antes de a página ser mostrada na tela do usuário.</target>
+        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</source>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.0">
         <source>Code Editor</source>

@@ -1,10 +1,10 @@
 ##
 # Contao Open Source CMS
 # 
-# Copyright (C) 2005-2012 Leo Feyer
+# Copyright (C) 2005-2013 Leo Feyer
 # 
 # @package Core
-# @link    http://contao.org
+# @link    https://contao.org
 # @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
 ##
 
@@ -143,30 +143,41 @@ FileETag None
 </IfModule>
 
 ##
-# Disable caching during development
-# @see https://github.com/contao/core/issues/4364
-##
-#<IfModule mod_headers.c>
-#  Header unset Cache-Control
-#  Header append Cache-Control must-revalidate
-#</IfModule>
-
-##
-# Add a Vary Accept-Encoding header for the compressed resources. If you
-# modify the file types above, make sure to change them here accordingly.
-# @see http://developer.yahoo.com/performance/rules.html#gzip
-#
-# Note: If you are using a case-sensitive file system like HFS+ or ext4, you
-# have to change the <FilesMatch> directive as follows:
-#
-# <FilesMatch "\.(?i:js|css|xml|gz)$">
-#
-# For more information see: https://github.com/contao/core/issues/4364
+# Header adjustments
 ##
 <IfModule mod_headers.c>
+
+  ##
+  # Disable caching during development
+  # @see https://github.com/contao/core/issues/4364
+  ##
+  #Header unset Cache-Control
+  #Header append Cache-Control must-revalidate
+
+  ##
+  # Do not cache the cron.txt file
+  # @see https://github.com/contao/core/issues/5105
+  ##
+  <FilesMatch "cron\.txt$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0, proxy-revalidate, no-transform"
+  </FilesMatch>
+
+  ##
+  # Add a Vary Accept-Encoding header for the compressed resources. If you
+  # modify the file types above, make sure to change them here accordingly.
+  # @see http://developer.yahoo.com/performance/rules.html#gzip
+  #
+  # Note: If you are using a case-sensitive file system like HFS+ or ext4, you
+  # have to change the <FilesMatch> directive as follows:
+  #
+  # <FilesMatch "\.(?i:js|css|xml|gz)$">
+  #
+  # For more information see: https://github.com/contao/core/issues/4364
+  ##
   <FilesMatch "\.(js|css|xml|gz)$">
     Header append Vary Accept-Encoding
   </FilesMatch>
+
 </IfModule>
 
 ##

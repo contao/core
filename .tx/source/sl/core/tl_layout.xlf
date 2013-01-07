@@ -19,33 +19,43 @@
       </trans-unit>
       <trans-unit id="tl_layout.rows.0">
         <source>Rows</source>
+        <target>Vrstice</target>
       </trans-unit>
       <trans-unit id="tl_layout.rows.1">
         <source>Please choose the number of rows.</source>
+        <target>Prosim, izberite število vrstic</target>
       </trans-unit>
       <trans-unit id="tl_layout.1rw.0">
         <source>Main row only</source>
+        <target>Samo osnovna vrstica</target>
       </trans-unit>
       <trans-unit id="tl_layout.1rw.1">
         <source>Show only one row.</source>
+        <target>Prikaži eno samo vrstico.</target>
       </trans-unit>
       <trans-unit id="tl_layout.2rwh.0">
         <source>Header and main row</source>
+        <target>Glava in osnovna vrstica</target>
       </trans-unit>
       <trans-unit id="tl_layout.2rwh.1">
         <source>Show a header above the main row.</source>
+        <target>Prikaži glavo nad osnovno vrstico.</target>
       </trans-unit>
       <trans-unit id="tl_layout.2rwf.0">
         <source>Main row and footer</source>
+        <target>Osnovna vrstica in noga</target>
       </trans-unit>
       <trans-unit id="tl_layout.2rwf.1">
         <source>Show a footer below the main row.</source>
+        <target>Prikaži nogo pod osnovno vrstico.</target>
       </trans-unit>
       <trans-unit id="tl_layout.3rw.0">
         <source>Header, main row and footer</source>
+        <target>Glava, osnovna vrstica in noga</target>
       </trans-unit>
       <trans-unit id="tl_layout.3rw.1">
         <source>Show a header above and a footer below the main row.</source>
+        <target>Prikaži glavo nad in nogo pod osnovno vrstico.</target>
       </trans-unit>
       <trans-unit id="tl_layout.headerHeight.0">
         <source>Header height</source>
@@ -145,15 +155,10 @@
       </trans-unit>
       <trans-unit id="tl_layout.framework.0">
         <source>CSS framework</source>
+        <target>CSS ogrodje</target>
       </trans-unit>
       <trans-unit id="tl_layout.framework.1">
         <source>Here you can activate the components of the Contao CSS framework.</source>
-      </trans-unit>
-      <trans-unit id="tl_layout.reset.css.0">
-        <source>CSS reset</source>
-      </trans-unit>
-      <trans-unit id="tl_layout.reset.css.1">
-        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.0">
         <source>Layout builder</source>
@@ -167,23 +172,40 @@
       <trans-unit id="tl_layout.responsive.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
       </trans-unit>
+      <trans-unit id="tl_layout.reset.css.0">
+        <source>CSS reset</source>
+        <target>CSS reset</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.1">
+        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.0">
+        <source>Basic forms</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.1">
+        <source>Adds basic form elements and buttons formatting.</source>
+      </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.0">
         <source>TinyMCE style sheet</source>
+        <target>Slogovna predloga za urejevalnik TinyMCE</target>
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.1">
         <source>Includes the &lt;em&gt;tinymce.css&lt;/em&gt; style sheet from your upload directory.</source>
       </trans-unit>
       <trans-unit id="tl_layout.external.0">
         <source>Additional style sheets</source>
+        <target>Dodatne slogovne predloge</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
         <source>Here you can add style sheets from the file system (e.g. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
+        <target>Razvrščanje</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.1">
         <source>The sort order of the style sheets.</source>
+        <target>Vrstni red slogovnih predlog</target>
       </trans-unit>
       <trans-unit id="tl_layout.webfonts.0">
         <source>Google web fonts</source>
@@ -259,27 +281,35 @@
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>
+        <target>Vključi jQuery</target>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.1">
         <source>Include the jQuery library in the layout.</source>
+        <target>Dodaj knjižnico jQuery v postavitev strani.</target>
       </trans-unit>
       <trans-unit id="tl_layout.jSource.0">
         <source>jQuery source</source>
+        <target>Vir knjižnice jQuery</target>
       </trans-unit>
       <trans-unit id="tl_layout.jSource.1">
         <source>Here you can select from where to load the jQuery script.</source>
+        <target>Tu lahko izberete, iz katerega vira naj se naloži knjižnica jQuery.</target>
       </trans-unit>
       <trans-unit id="tl_layout.jquery.0">
         <source>jQuery templates</source>
+        <target>Predloge jQuery</target>
       </trans-unit>
       <trans-unit id="tl_layout.jquery.1">
         <source>Here you can select one or more jQuery templates.</source>
+        <target>Tu lahko izberete eno ali več predlog jQuery.</target>
       </trans-unit>
       <trans-unit id="tl_layout.addMooTools.0">
         <source>Include MooTools</source>
+        <target>Vključi knjižnico MooTools</target>
       </trans-unit>
       <trans-unit id="tl_layout.addMooTools.1">
         <source>Include the MooTools library in the layout.</source>
+        <target>Dodaj knjižnico MooTools v postavitev strani.</target>
       </trans-unit>
       <trans-unit id="tl_layout.mooSource.0">
         <source>MooTools source</source>
@@ -299,6 +329,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.analytics.0">
         <source>Analytics templates</source>
+        <target>Predloga za merjenje obiskanosti - Analytics</target>
       </trans-unit>
       <trans-unit id="tl_layout.analytics.1">
         <source>Here you can activate the analytics templates (e.g. for Google Analytics or Piwik). Note that you have to adjust those templates and add your analytics ID before you can use them!</source>
@@ -377,18 +408,23 @@
       </trans-unit>
       <trans-unit id="tl_layout.jquery_legend">
         <source>jQuery</source>
+        <target>jQuery</target>
       </trans-unit>
       <trans-unit id="tl_layout.mootools_legend">
         <source>MooTools</source>
+        <target>MooTools</target>
       </trans-unit>
       <trans-unit id="tl_layout.j_local">
         <source>jQuery - local file</source>
+        <target>jQuery - krajevna datoteka</target>
       </trans-unit>
       <trans-unit id="tl_layout.j_googleapis">
         <source>jQuery - googleapis.com</source>
+        <target>jQuery - googleapis.com</target>
       </trans-unit>
       <trans-unit id="tl_layout.j_fallback">
         <source>jQuery - googleapis.com with local fallback</source>
+        <target>jQuery - googleapis.com s krajevnim nadomestkom</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_local">
         <source>MooTools - local file</source>
@@ -436,9 +472,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.analytics_google">
         <source>Google</source>
+        <target>Google</target>
       </trans-unit>
       <trans-unit id="tl_layout.analytics_piwik">
         <source>Piwik</source>
+        <target>Piwik</target>
       </trans-unit>
       <trans-unit id="tl_layout.new.0">
         <source>New layout</source>

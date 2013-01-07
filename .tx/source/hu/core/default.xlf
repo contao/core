@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="ERR.extnd">
         <source>For security reasons you can not use the following characters here: =&lt;&gt;&amp;/()#</source>
-        <target>Biztonsági megfontolásból a következő karaktereket nem használhatja itt: (=&amp;/()#)</target>
+        <target>Biztonsági megfontolásból a következő karaktereket nem használhatja itt: =&amp;/()#</target>
       </trans-unit>
       <trans-unit id="ERR.email">
         <source>Please enter a valid e-mail address!</source>
@@ -63,9 +63,11 @@
       </trans-unit>
       <trans-unit id="ERR.alias">
         <source>Please enter only alphanumeric characters and the following special characters: .-_</source>
+        <target>Bevitelnél csak az alfanumerikus karaktereket és a következő speciális karaktereket használja: .-_</target>
       </trans-unit>
       <trans-unit id="ERR.folderalias">
         <source>Please enter only alphanumeric characters and the following special characters: .-/_</source>
+        <target>Bevitelnél csak az alfanumerikus karaktereket és a következő speciális karaktereket használja: .-/_</target>
       </trans-unit>
       <trans-unit id="ERR.date">
         <source>Please enter the date as &quot;%s&quot;!</source>
@@ -78,6 +80,9 @@
       <trans-unit id="ERR.dateTime">
         <source>Please enter date and time as &quot;%s&quot;!</source>
         <target>A dátumot és időt a következő formában adja meg: &quot;%s&quot;!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
       </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
@@ -102,6 +107,9 @@
       <trans-unit id="ERR.fileheight">
         <source>File %s exceeds the maximum image height of %d pixels!</source>
         <target>A %s nevű képfájl magasabb mint %d pixel!</target>
+      </trans-unit>
+      <trans-unit id="ERR.filetarget">
+        <source>Cannot move %s to %s because the target exists!</source>
       </trans-unit>
       <trans-unit id="ERR.invalidReferer">
         <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
@@ -141,7 +149,7 @@
       </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
-        <target>&quot;%s&quot; nevű oldal alias már létezik!</target>
+        <target>&quot;%s&quot; álnév már létezik!</target>
       </trans-unit>
       <trans-unit id="ERR.importFolder">
         <source>The folder &quot;%s&quot; cannot be imported!</source>
@@ -169,7 +177,7 @@
       </trans-unit>
       <trans-unit id="ERR.ie6warning">
         <source>&lt;strong&gt;Attention!&lt;/strong&gt; Your web browser is %sout of date%s and &lt;strong&gt;you cannot use all features of this website&lt;/strong&gt;.</source>
-        <target>%s&lt;strong&gt;Figyelem!&lt;/strong&gt; Webböngészője %selavult %s és &lt;strong&gt;nem képes a weboldal minden funkcióját használni&lt;/strong&gt;.%s</target>
+        <target>&lt;strong&gt;Figyelem!&lt;/strong&gt; Webböngészője %selavult%s és &lt;strong&gt;nem képes a weboldal minden funkcióját kihasználni&lt;/strong&gt;.</target>
       </trans-unit>
       <trans-unit id="ERR.noFallbackEmpty">
         <source>None of the active website root pages without an explicit DNS setting has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
@@ -193,9 +201,11 @@
       </trans-unit>
       <trans-unit id="ERR.invalidTokenUrl">
         <source>The link you were trying to open could not be verified. If you have clicked the link yourself or have received it by a trustworthy person, you can confirm the process below.</source>
+        <target>A megnyitni kívánt linket nem lehet ellenőrizni. Ha ön kattintott a linkre vagy megbízható személytől kapta, akkor megerősítheti a folyamat alatt.</target>
       </trans-unit>
       <trans-unit id="ERR.version2format">
         <source>This element still uses the old Contao 2 SRC format. Did you upgrade the database?</source>
+        <target>Ez az elem továbbra is a régi Contao 2 SRC formátumú. Kívánja frissíteni az adatbázist?</target>
       </trans-unit>
       <trans-unit id="ERR.form">
         <source>The form could not be sent</source>
@@ -207,12 +217,15 @@
       </trans-unit>
       <trans-unit id="ERR.download">
         <source>File &quot;%s&quot; is not available for download!</source>
+        <target>&quot;%s&quot; fájl nem tölthető le!</target>
       </trans-unit>
       <trans-unit id="ERR.invalid">
         <source>Invalid input: %s</source>
+        <target>Érvénytelen bevitel: %s</target>
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
         <source>No database entry found for %s. Please synchronize the file system.</source>
+        <target>Nem található adatbázis bejegyzés: %s. Szinkronizálja a fájlrendszert.</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
@@ -244,7 +257,7 @@
       </trans-unit>
       <trans-unit id="CTE.text.1">
         <source>Generates a rich text element.</source>
-        <target>Ez az elem formázott szöveget tartalmaz hivatkozásokkal. Ezenkívül egy képet is hozzáadhat ehhez az elemhez.</target>
+        <target>Létrehoz egy formázott szöveg elemet.</target>
       </trans-unit>
       <trans-unit id="CTE.html.0">
         <source>HTML</source>
@@ -252,7 +265,7 @@
       </trans-unit>
       <trans-unit id="CTE.html.1">
         <source>Allows you to add custom HTML code.</source>
-        <target>Lehetővé teszi HTML kód használatát. Az alkalmazható HTML tag-ek listáját a back end beállítások menüpontjában módosíthatja.</target>
+        <target>Lehetővé teszi egyedi HTML kód használatát.</target>
       </trans-unit>
       <trans-unit id="CTE.list.0">
         <source>List</source>
@@ -260,7 +273,7 @@
       </trans-unit>
       <trans-unit id="CTE.list.1">
         <source>Generates an ordered or unordered list.</source>
-        <target>Ez az elem egy számozott vagy egy számozatlan listát tartalmaz.</target>
+        <target>Létrehoz egy számozott vagy egy számozatlan listát.</target>
       </trans-unit>
       <trans-unit id="CTE.table.0">
         <source>Table</source>
@@ -268,7 +281,7 @@
       </trans-unit>
       <trans-unit id="CTE.table.1">
         <source>Generates an optionally sortable table.</source>
-        <target>Ez az elem egy táblázatot tartalmaz.</target>
+        <target>Létrehoz egy opcionálisan rendezhető táblázatot.</target>
       </trans-unit>
       <trans-unit id="CTE.accordion.0">
         <source>Accordion</source>
@@ -276,7 +289,7 @@
       </trans-unit>
       <trans-unit id="CTE.accordion.1">
         <source>Generates a MooTools accordion pane.</source>
-        <target>Ez az elem egy tartalmi blokkot generál a moofx harmonika effektusával. Ez az effektus használja a mootools JavaScript template-et, amit az Oldal elrendezés modulban tud kiválasztani.</target>
+        <target>Létrehoz egy MooTools harmonika panelt.</target>
       </trans-unit>
       <trans-unit id="CTE.code.0">
         <source>Code</source>
@@ -308,6 +321,7 @@
       </trans-unit>
       <trans-unit id="CTE.media">
         <source>Media elements</source>
+        <target>Média elem</target>
       </trans-unit>
       <trans-unit id="CTE.image.0">
         <source>Image</source>
@@ -327,15 +341,19 @@
       </trans-unit>
       <trans-unit id="CTE.player.0">
         <source>Video/audio</source>
+        <target>Videó/audio</target>
       </trans-unit>
       <trans-unit id="CTE.player.1">
         <source>Generates a video or audio player.</source>
+        <target>Videó vagy audio lejátszó készítése</target>
       </trans-unit>
       <trans-unit id="CTE.youtube.0">
         <source>YouTube</source>
+        <target>YouTube</target>
       </trans-unit>
       <trans-unit id="CTE.youtube.1">
         <source>Adds a YouTube video.</source>
+        <target>YouTube videó hozzáadása.</target>
       </trans-unit>
       <trans-unit id="CTE.files">
         <source>File elements</source>
@@ -391,7 +409,7 @@
       </trans-unit>
       <trans-unit id="CTE.module.1">
         <source>Includes a front end module.</source>
-        <target>Beszúr egy front end modult.</target>
+        <target>Beszúr egy felhasználói felület modult.</target>
       </trans-unit>
       <trans-unit id="CTE.teaser.0">
         <source>Article teaser</source>
@@ -679,7 +697,7 @@
       </trans-unit>
       <trans-unit id="MSC.titleFormat">
         <source>%B %d%o, %Y</source>
-        <target>l, dS / F Y</target>
+        <target>%B %d%o, %Y</target>
       </trans-unit>
       <trans-unit id="MSC.url.0">
         <source>Link target</source>
@@ -871,18 +889,23 @@
       </trans-unit>
       <trans-unit id="MSC.aw_title">
         <source>Title</source>
+        <target>Megnevezés</target>
       </trans-unit>
       <trans-unit id="MSC.aw_link">
         <source>Link</source>
+        <target>Link</target>
       </trans-unit>
       <trans-unit id="MSC.aw_caption">
         <source>Caption</source>
+        <target>Képaláírás</target>
       </trans-unit>
       <trans-unit id="MSC.aw_delete">
         <source>Delete the language</source>
+        <target>Nyelv törlése</target>
       </trans-unit>
       <trans-unit id="MSC.aw_new">
         <source>Add language</source>
+        <target>Nyelv hozzáadása</target>
       </trans-unit>
       <trans-unit id="MSC.relative">
         <source>Relative dimensions</source>
@@ -986,7 +1009,7 @@
       </trans-unit>
       <trans-unit id="MSC.id.1">
         <source>Note that changing the ID can break data integrity!</source>
-        <target>Az azonosító egy adatbázistábla egyetlen bejegyzésének egyedi sorszáma. Az azonosítókat általában automatikusan rendeli hozzá a rendszer. Mivel ezek az azonosítók használatosak az adatok összekapcsolásához, módosításuk adatvesztéssel járhat!</target>
+        <target>Ne feledje, az azonosító (ID) módosítása adatvesztéssel járhat!</target>
       </trans-unit>
       <trans-unit id="MSC.pid.0">
         <source>Parent ID</source>
@@ -994,7 +1017,7 @@
       </trans-unit>
       <trans-unit id="MSC.pid.1">
         <source>Note that changing the parent ID can break data integrity!</source>
-        <target>A szülő azonosítója annak a felsőbbrendű bejegyzésnek a sorszáma, amelyhez a jelen bejegyzés kapcsolódik. A szülők azonosítóit általában automatikusan rendeli hozzá a rendszer. Mivel ezek az azonosítók használatosak az adatok összekapcsolásához, módosításuk adatvesztéssel járhat!</target>
+        <target>Ne feledje, a szülő azonosító módosítása adatvesztéssel járhat!</target>
       </trans-unit>
       <trans-unit id="MSC.sorting.0">
         <source>Sorting value</source>
@@ -1002,7 +1025,7 @@
       </trans-unit>
       <trans-unit id="MSC.sorting.1">
         <source>The sorting value is usually assigned automatically.</source>
-        <target>A rendezési értékkel lehet a bejegyzéseket egy adott sorrendbe állítani. A rendezési értékeket általában automatikusan rendeli hozzá a rendszer.</target>
+        <target>A rendezési értékeket általában automatikusan rendeli hozzá a rendszer.</target>
       </trans-unit>
       <trans-unit id="MSC.all.0">
         <source>Edit multiple</source>
@@ -1014,9 +1037,11 @@
       </trans-unit>
       <trans-unit id="MSC.all_override.0">
         <source>Override multiple</source>
+        <target>Több módosítása</target>
       </trans-unit>
       <trans-unit id="MSC.all_override.1">
         <source>Override multiple records at once</source>
+        <target>Több rekord egyidejű módosítása</target>
       </trans-unit>
       <trans-unit id="MSC.all_fields.0">
         <source>Available fields</source>
@@ -1076,36 +1101,38 @@
       </trans-unit>
       <trans-unit id="MSC.staticFiles.0">
         <source>Files URL</source>
-        <target>Fileok URL címe</target>
+        <target>Fájlok URL címe</target>
       </trans-unit>
       <trans-unit id="MSC.staticFiles.1">
         <source>The files URL applies to the &lt;em&gt;files&lt;/em&gt; directory (page speed optimization).</source>
-        <target>A fájlok URL címe vonatkozik a &lt;em&gt;tl_files&lt;/em&gt; könyvtárra és az összes kép miniatűrre (oldal sebesség optimalizálás).</target>
+        <target>A fájlok URL címe vonatkozik a &lt;em&gt;files&lt;/em&gt; könyvtárra (oldal sebesség optimalizálás).</target>
       </trans-unit>
       <trans-unit id="MSC.staticPlugins.0">
         <source>Assets URL</source>
-        <target>Pluginok URL címe</target>
+        <target>Eszközök URL címe</target>
       </trans-unit>
       <trans-unit id="MSC.staticPlugins.1">
         <source>The assets URL applies to the &lt;em&gt;assets&lt;/em&gt; directory (page speed optimization).</source>
-        <target>A Pluginok URL címe vonatkozik az összes erőforrásra a &lt;em&gt;plugins&lt;/em&gt; könyvtárban (oldal sebesség optimalizálás).</target>
+        <target>Az eszközök URL címe vonatkozik az összes erőforrásra a &lt;em&gt;assets&lt;/em&gt; könyvtárban (oldal sebesség optimalizálás).</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.0">
         <source>Back end keyboard shortcuts</source>
-        <target>Back end gyorsbillentyű</target>
+        <target>Adminisztrációs felület gyorsbillentyű</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;http://contao.org/en/keyboard-shortcuts.html&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>Tanulja meg, hogyan gyorsíthatja fel a munkafolyamatát a &lt;a href=&quot;http://www.contao.org/keyboard-shortcuts.html&quot; target=&quot;_blank&quot;&gt;gyorsbillentyűk&lt;/a&gt; által.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
+        <target>Összes váltása</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.1">
         <source>Expand or collapse all nodes</source>
+        <target>Összes csomópont összecsukása vagy kibontása</target>
       </trans-unit>
       <trans-unit id="MSC.lockedAccount.0">
         <source>A Contao account has been locked</source>
+        <target>A Contao fiók lezárva</target>
       </trans-unit>
       <trans-unit id="MSC.lockedAccount.1">
         <source>The following Contao account has been locked for security reasons.
@@ -1118,33 +1145,48 @@ The account has been locked for %d minutes, because the user has entered an inva
 
 This e-mail has been generated by Contao. You can not reply to it directly.
 </source>
+        <target>Ez a Contao fiók zárolva lett biztonsági okokból.
+
+Felhasználónév: %s
+Valódi név: %s
+Weboldal: %s
+
+A fiók zárolva lett %d percre, mert a felhasználó helytelen jelszót adott meg három egymást követő alkalommal. Ezen időszak után a fiók zárolása automatikusan fel lesz oldva.
+
+Ezt az e-mail a Contao rendszer generálta. Nem tud rá közvetlenül válaszolni.
+</target>
       </trans-unit>
       <trans-unit id="MSC.toggleMobile.0">
         <source>Mobile version</source>
+        <target>Mobil verzió</target>
       </trans-unit>
       <trans-unit id="MSC.toggleMobile.1">
         <source>Go to the mobile version</source>
+        <target>Váltás a mobil verzióra</target>
       </trans-unit>
       <trans-unit id="MSC.toggleDesktop.0">
         <source>Desktop version</source>
+        <target>Teljes verzió</target>
       </trans-unit>
       <trans-unit id="MSC.toggleDesktop.1">
         <source>Go to the desktop version</source>
+        <target>Váltás a teljes verzióra</target>
       </trans-unit>
       <trans-unit id="MSC.feLink">
         <source>Go to front end</source>
-        <target>Front end megtekintése</target>
+        <target>Felhasználói felület megtekintése</target>
       </trans-unit>
       <trans-unit id="MSC.fePreview">
         <source>Front end preview</source>
-        <target>Front end előnézete</target>
+        <target>Felhasználói felület előnézete</target>
       </trans-unit>
       <trans-unit id="MSC.fePreviewTitle">
         <source>Preview of the website in a new window</source>
+        <target>Weboldal előnézete új ablakban</target>
       </trans-unit>
       <trans-unit id="MSC.feUser">
         <source>Front end user</source>
-        <target>Front end felhasználó</target>
+        <target>Felhasználói felület felhasználó</target>
       </trans-unit>
       <trans-unit id="MSC.backToTop">
         <source>Back to top</source>
@@ -1152,6 +1194,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.backToTopTitle">
         <source>Go to the top of the page</source>
+        <target>Ugrás a lap tetejére</target>
       </trans-unit>
       <trans-unit id="MSC.home">
         <source>Home</source>
@@ -1159,6 +1202,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.homeTitle">
         <source>Back to the back end start page</source>
+        <target>Vissza az adminisztrációs felület nyitó oldalára</target>
       </trans-unit>
       <trans-unit id="MSC.user">
         <source>User</source>
@@ -1178,6 +1222,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.logoutBTTitle">
         <source>Close the current session</source>
+        <target>Aktuális munkamenet bezárása</target>
       </trans-unit>
       <trans-unit id="MSC.backBT">
         <source>Go back</source>
@@ -1185,6 +1230,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.backBTTitle">
         <source>Back to the previous page</source>
+        <target>Vissza az előző oldalra</target>
       </trans-unit>
       <trans-unit id="MSC.cancelBT">
         <source>Cancel</source>
@@ -1264,6 +1310,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.close">
         <source>Close</source>
+        <target>Bezár</target>
       </trans-unit>
       <trans-unit id="MSC.skipNavigation">
         <source>Skip navigation</source>
@@ -1275,6 +1322,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.pw_new">
         <source>Change password</source>
+        <target>Jelszócsere</target>
       </trans-unit>
       <trans-unit id="MSC.pw_change">
         <source>Please enter a new password</source>
@@ -1298,18 +1346,19 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.datepicker">
         <source>Date picker</source>
+        <target>Dátum választó</target>
       </trans-unit>
       <trans-unit id="MSC.colorpicker">
         <source>Color picker</source>
-        <target>Színválasztó (JavaScript szükséges)</target>
+        <target>Színválasztó</target>
       </trans-unit>
       <trans-unit id="MSC.pagepicker">
         <source>Page picker</source>
-        <target>Oldalválasztó (JavaScript szükséges)</target>
+        <target>Oldalválasztó</target>
       </trans-unit>
       <trans-unit id="MSC.filepicker">
         <source>File picker</source>
-        <target>Állomány választó (JavaScript szükséges)</target>
+        <target>Fájválasztó</target>
       </trans-unit>
       <trans-unit id="MSC.ppHeadline">
         <source>Contao pages</source>
@@ -1349,7 +1398,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.tstamp">
         <source>Revision date</source>
-        <target>Dátum</target>
+        <target>Módosítási dátum</target>
       </trans-unit>
       <trans-unit id="MSC.entry">
         <source>%s entry</source>
@@ -1361,6 +1410,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.files">
         <source>%s file(s)</source>
+        <target>%s fájl(ok)</target>
       </trans-unit>
       <trans-unit id="MSC.left">
         <source>left</source>
@@ -1412,6 +1462,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.fileDownloadTitle">
         <source>Download this file</source>
+        <target>Fájl letöltése</target>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
@@ -1431,11 +1482,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.backendModules">
         <source>Back end modules</source>
-        <target>Back end modulok</target>
+        <target>Adminisztrációs felület modulok</target>
       </trans-unit>
       <trans-unit id="MSC.welcomeTo">
         <source>%s back end</source>
-        <target>%s back end</target>
+        <target>%s adminisztrációs felület</target>
       </trans-unit>
       <trans-unit id="MSC.updateVersion">
         <source>Contao version %s available</source>
@@ -1467,11 +1518,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.deleteSelected">
         <source>Delete</source>
-        <target>Kijelölt elem törlése</target>
+        <target>Törlés</target>
       </trans-unit>
       <trans-unit id="MSC.editSelected">
         <source>Edit</source>
-        <target>Kijelölt elem módosítása</target>
+        <target>Szerkesztés</target>
       </trans-unit>
       <trans-unit id="MSC.overrideSelected">
         <source>Override</source>
@@ -1487,6 +1538,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.aliasSelected">
         <source>Generate aliases</source>
+        <target>Álnév generálása</target>
       </trans-unit>
       <trans-unit id="MSC.changeSelected">
         <source>Change selection</source>
@@ -1526,6 +1578,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.applyTitle">
         <source>Apply the changes</source>
+        <target>Változtatás alkalmazása</target>
       </trans-unit>
       <trans-unit id="MSC.mandatory">
         <source>Mandatory field</source>
@@ -1541,11 +1594,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.protected">
         <source>protected</source>
-        <target>Védett</target>
+        <target>védett</target>
       </trans-unit>
       <trans-unit id="MSC.guests">
         <source>guests only</source>
-        <target>Csak vendégek</target>
+        <target>csak vendégek</target>
       </trans-unit>
       <trans-unit id="MSC.updateMode">
         <source>Update mode</source>
@@ -1553,23 +1606,23 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.updateAdd">
         <source>Add the selected values</source>
-        <target>Kiválasztott csoport hozzáadása</target>
+        <target>Kiválasztott érték hozzáadása</target>
       </trans-unit>
       <trans-unit id="MSC.updateRemove">
         <source>Remove the selected values</source>
-        <target>Kiválasztott csoport törlése</target>
+        <target>Kiválasztott érték törlése</target>
       </trans-unit>
       <trans-unit id="MSC.updateReplace">
         <source>Replace the existing entries</source>
-        <target>Már létező bejegyzés</target>
+        <target>Már létező bejegyzés cseréje</target>
       </trans-unit>
       <trans-unit id="MSC.ascending">
         <source>ascending</source>
-        <target>Növekvő</target>
+        <target>növekvő</target>
       </trans-unit>
       <trans-unit id="MSC.descending">
         <source>descending</source>
-        <target>Csökkenő</target>
+        <target>csökkenő</target>
       </trans-unit>
       <trans-unit id="MSC.default">
         <source>Default</source>
@@ -1577,10 +1630,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.helpWizard">
         <source>Open the help wizard</source>
-        <target>Segítő varázsló</target>
+        <target>Segítő varázsló megnyitása</target>
       </trans-unit>
       <trans-unit id="MSC.helpWizardTitle">
         <source>Help wizard</source>
+        <target>Segítő varázsló</target>
       </trans-unit>
       <trans-unit id="MSC.noCookies">
         <source>You have to allow cookies to use Contao.</source>
@@ -1592,10 +1646,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.coreOnlyMode">
         <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>
-        <target>Contao jelenleg a &lt;strong&gt;biztonsági üzemmód&lt;/strong&gt;-ban fut, amelyben csak a rendszer modulok vannak betöltve. Ez az üzemmod például egy Live Update után kacsolódik be, hogy esetleges összeférhetetlenségeket elkerüljön a harmadik felek által írt bővítményekkel. A back end béállításoknal kikapcsolhatja ezt az üzemmódot miután ellenőrizte a telepített bővíményeket.</target>
+        <target>A Contao jelenleg &lt;strong&gt;biztonságos módban&lt;/strong&gt; fut, amelyben csak alapvető modulok vannak betöltve, hogy elkerüljük az esetleges inkompatibilitást külső bővítményekkel (pl. az Online Frissítés után). Miután ellenőrizte a telepített kiterjesztéseket, kapcsolja ki a biztonságos módot.</target>
       </trans-unit>
       <trans-unit id="MSC.name">
         <source>Name</source>
+        <target>Név</target>
       </trans-unit>
       <trans-unit id="MSC.emailAddress">
         <source>E-mail address</source>
@@ -1619,11 +1674,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.adminSubject">
         <source>New registration on %s</source>
-        <target>Contao :: Új regisztráció %s</target>
+        <target>Új regisztráció: %s</target>
       </trans-unit>
       <trans-unit id="MSC.adminText">
         <source>A new member (ID %s) has registered at your website.%sIf you did not allow e-mail activation, you have to enable the account manually in the back end.</source>
-        <target>Egy új tag (ID %s) regisztrált a honlapon. %s Ha nem tette lehetővé az e-mail aktiválást, akkor manuálisan kell jóváhagynia a fiókot a back end-en.</target>
+        <target>Egy új tag (ID %s) regisztrált a honlapon. %s Ha nem tette lehetővé az e-mail aktiválást, akkor manuálisan kell jóváhagynia a fiókot az adminisztrációs felületen.</target>
       </trans-unit>
       <trans-unit id="MSC.requestPassword">
         <source>Request password</source>
@@ -1655,39 +1710,51 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.changeSelection">
         <source>Change selection</source>
+        <target>Kiválasztás módosítása</target>
       </trans-unit>
       <trans-unit id="MSC.currentlySelected">
         <source>Selected</source>
+        <target>Kiválasztott</target>
       </trans-unit>
       <trans-unit id="MSC.selectNode">
         <source>Only show this node</source>
+        <target>Csak ennek a csomópontnak a mutatása</target>
       </trans-unit>
       <trans-unit id="MSC.selectAllNodes">
         <source>Show all nodes</source>
+        <target>Összes csomópont mutatása</target>
       </trans-unit>
       <trans-unit id="MSC.showDifferences">
         <source>Show differences</source>
+        <target>Különbségek mutatása</target>
       </trans-unit>
       <trans-unit id="MSC.editElement">
         <source>Edit the element</source>
+        <target>Elem módosítása</target>
       </trans-unit>
       <trans-unit id="MSC.table">
         <source>Table</source>
+        <target>Tábla</target>
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>
+        <target>Leírás</target>
       </trans-unit>
       <trans-unit id="MSC.noVersions">
         <source>Currently there are no versions.</source>
+        <target>Jelenleg nem található verzió.</target>
       </trans-unit>
       <trans-unit id="MSC.latestChanges">
         <source>Latest changes</source>
+        <target>Legutóbbi módosítás</target>
       </trans-unit>
       <trans-unit id="MSC.identicalVersions">
         <source>The two selected versions are identical.</source>
+        <target>A két kiválasztott verzió azonos.</target>
       </trans-unit>
       <trans-unit id="MSC.selectNewPosition">
         <source>Next, please choose the (new) position of the element</source>
+        <target>Következő, válassza ki az elem (új) pozícióját.</target>
       </trans-unit>
       <trans-unit id="MSC.go">
         <source>Go</source>
@@ -1783,11 +1850,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.fileResized">
         <source>Image %s uploaded successfully and was scaled down to the maximum dimensions.</source>
-        <target>A %s képt sikeresen fel lett töltve és át lett méretezve a maximálisan megengedett méretre.</target>
+        <target>A %s kép sikeresen fel lett töltve és át lett méretezve a maximálisan megengedett méretre.</target>
       </trans-unit>
       <trans-unit id="MSC.searchLabel">
         <source>Search</source>
-        <target>Kersés</target>
+        <target>Keresés</target>
       </trans-unit>
       <trans-unit id="MSC.keywords">
         <source>Keywords</source>
@@ -1819,14 +1886,15 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.facebookShare">
         <source>Share on Facebook</source>
-        <target>Megosztás a Facebook-on</target>
+        <target>Facebook megosztás</target>
       </trans-unit>
       <trans-unit id="MSC.twitterShare">
         <source>Share on Twitter</source>
-        <target>Megosztás a Twitter-en</target>
+        <target>Twitter megosztás</target>
       </trans-unit>
       <trans-unit id="MSC.gplusShare">
         <source>Share on Google+</source>
+        <target>Google+ megosztás</target>
       </trans-unit>
       <trans-unit id="MSC.pleaseWait">
         <source>Please wait</source>
@@ -1882,63 +1950,66 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.invalidTokenUrl">
         <source>Invalid token</source>
+        <target>Invalid token</target>
       </trans-unit>
       <trans-unit id="MSC.changelog">
         <source>Changelog</source>
+        <target>Változásnapló</target>
       </trans-unit>
       <trans-unit id="MSC.coreOnlyOff">
         <source>Disable</source>
+        <target>Letiltás</target>
       </trans-unit>
       <trans-unit id="MSC.dragItemsHint">
         <source>Drag the items to re-order them</source>
+        <target>Húzza az elemeket azok átrendezéséhez</target>
+      </trans-unit>
+      <trans-unit id="MSC.templatesTheme">
+        <source>Theme %s</source>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>
-        <target>bájt</target>
+        <target>Byte</target>
       </trans-unit>
       <trans-unit id="UNITS.1">
-        <source>kB</source>
-        <target>KB</target>
+        <source>KiB</source>
       </trans-unit>
       <trans-unit id="UNITS.2">
-        <source>MB</source>
-        <target>MB</target>
+        <source>MiB</source>
       </trans-unit>
       <trans-unit id="UNITS.3">
-        <source>GB</source>
-        <target>GB</target>
+        <source>GiB</source>
       </trans-unit>
       <trans-unit id="UNITS.4">
-        <source>TB</source>
-        <target>TB</target>
+        <source>TiB</source>
       </trans-unit>
       <trans-unit id="UNITS.5">
-        <source>PB</source>
-        <target>PB</target>
+        <source>PiB</source>
       </trans-unit>
       <trans-unit id="UNITS.6">
-        <source>EB</source>
-        <target>EB</target>
+        <source>EiB</source>
       </trans-unit>
       <trans-unit id="UNITS.7">
-        <source>ZB</source>
-        <target>ZB</target>
+        <source>ZiB</source>
       </trans-unit>
       <trans-unit id="UNITS.8">
-        <source>YB</source>
-        <target>YB</target>
+        <source>YiB</source>
       </trans-unit>
       <trans-unit id="CONFIRM.do">
         <source>Module</source>
+        <target>Modul</target>
       </trans-unit>
       <trans-unit id="CONFIRM.table">
         <source>Affected table</source>
+        <target>Érintett tábla</target>
       </trans-unit>
       <trans-unit id="CONFIRM.act">
         <source>Action</source>
+        <target>Művelet</target>
       </trans-unit>
       <trans-unit id="CONFIRM.id">
         <source>Affected record</source>
+        <target>Érintett rekord</target>
       </trans-unit>
       <trans-unit id="DP.select_a_time">
         <source>Select a time</source>

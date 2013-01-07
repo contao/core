@@ -11,11 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_member.newsletter_legend">
         <source>Subscriptions</source>
-        <target>Előfizetés</target>
+        <target>Előfizetések</target>
       </trans-unit>
       <trans-unit id="tl_member.newsletterDetails">
         <source>Subscriptions</source>
-        <target>Előfizetés</target>
+        <target>Előfizetések</target>
       </trans-unit>
     </body>
   </file>

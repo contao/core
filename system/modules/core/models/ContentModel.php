@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -22,7 +22,7 @@ namespace Contao;
  * 
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2011-2012
+ * @copyright Leo Feyer 2005-2013
  */
 class ContentModel extends \Model
 {
@@ -39,10 +39,11 @@ class ContentModel extends \Model
 	 * 
 	 * @param integer $intPid         The article ID
 	 * @param string  $strParentTable The parent table name
+	 * @param array   $arrOptions     An optional options array
 	 * 
 	 * @return \Model\Collection|null A collection of models or null if there are no content elements
 	 */
-	public static function findPublishedByPidAndTable($intPid, $strParentTable)
+	public static function findPublishedByPidAndTable($intPid, $strParentTable, array $arrOptions=array())
 	{
 		$t = static::$strTable;
 
@@ -61,6 +62,11 @@ class ContentModel extends \Model
 			$arrColumns[] = "$t.invisible=''";
 		}
 
-		return static::findBy($arrColumns, array($intPid, $strParentTable), array('order'=>"$t.sorting"));
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.sorting";
+		}
+
+		return static::findBy($arrColumns, array($intPid, $strParentTable), $arrOptions);
 	}
 }

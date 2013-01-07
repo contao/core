@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -292,7 +292,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'Dotkne se všech souborů v adre
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL-adresa rozšíření';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'URL-adresa rozšíření se dotkne všech souborů v adresáři <em>rozšíření</em> (zvýší rychlost načítání stránky).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Klávesové zkratky backendu';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Vice o zrychlení vašeho work-flow a klávesových zkratkách se dozvite <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">zde</a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Rozevřít všechny';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Rozevřít nebo zavřít všechny uzly';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Jeden z účtů Contaa byl uzamčen';
@@ -500,14 +499,6 @@ $GLOBALS['TL_LANG']['MSC']['changelog'] = 'Seznam změn';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Neaktivní';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Vyjmout položky pro jejich opětovné seřazení';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
-$GLOBALS['TL_LANG']['UNITS'][1] = 'kB';
-$GLOBALS['TL_LANG']['UNITS'][2] = 'MB';
-$GLOBALS['TL_LANG']['UNITS'][3] = 'GB';
-$GLOBALS['TL_LANG']['UNITS'][4] = 'TB';
-$GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
-$GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
-$GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
-$GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'Modul';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Příslušející tabulka';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = 'Akce';

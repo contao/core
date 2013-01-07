@@ -243,7 +243,7 @@
       </trans-unit>
       <trans-unit id="tl_style.shadowcolor.0">
         <source>Shadow color and opacity</source>
-        <target>Árnyék széle (Shadow color)</target>
+        <target>Árnyék színe és átlátszósága (Shadow color and opacity)</target>
       </trans-unit>
       <trans-unit id="tl_style.shadowcolor.1">
         <source>Here you can enter a hexadecimal shadow color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
@@ -255,7 +255,7 @@
       </trans-unit>
       <trans-unit id="tl_style.gradientAngle.1">
         <source>Here you can enter the gradient angle (e.g. &lt;em&gt;0deg&lt;/em&gt;) or the direction (e.g. &lt;em&gt;to bottom&lt;/em&gt; or &lt;em&gt;to top right&lt;/em&gt;).</source>
-        <target>Itt adja meg a színátmenet szögét (pl.: &lt;em&gt;-45 fok&lt;/em&gt;) vagy a kezdő pontot (pl.: &lt;em&gt;top&lt;/em&gt; vagy &lt;em&gt;left bottom&lt;/em&gt;).</target>
+        <target>Itt adja meg a színátmenet szögét (pl.: &lt;em&gt;0 fok&lt;/em&gt;) vagy a kezdő pontot (pl.: &lt;em&gt;to bottom&lt;/em&gt; vagy &lt;em&gt;top right&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_style.gradientColors.0">
         <source>Gradient colors</source>
@@ -291,7 +291,7 @@
       </trans-unit>
       <trans-unit id="tl_style.bordercolor.0">
         <source>Border color and opacity</source>
-        <target>Szegély szín (Border color)</target>
+        <target>Szegély szín és átlátszóság(Border color and opacity)</target>
       </trans-unit>
       <trans-unit id="tl_style.bordercolor.1">
         <source>Here you can enter a hexadecimal border color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
@@ -347,7 +347,7 @@
       </trans-unit>
       <trans-unit id="tl_style.fontcolor.0">
         <source>Font color and opacity</source>
-        <target>Betű szín (Font color)</target>
+        <target>Betű szín és átlátszóság (Font color and opacity)</target>
       </trans-unit>
       <trans-unit id="tl_style.fontcolor.1">
         <source>Here you can enter a hexadecimal font color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>

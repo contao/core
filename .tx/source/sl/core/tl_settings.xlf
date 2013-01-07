@@ -115,6 +115,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
         <source>Exclude folders from synchronisation</source>
+        <target>Izvzemi mape iz sinhronizacije</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronisation (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
@@ -177,6 +178,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>
+        <target>Ne preusmeri praznih URL naslovov</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.1">
         <source>For an empty URL display the website instead of redirecting to the language root page (not recommended).</source>
@@ -249,15 +251,19 @@
       </trans-unit>
       <trans-unit id="tl_settings.logErrors.0">
         <source>Log error messages</source>
+        <target>Napake zapisuj v dnevniško datoteko</target>
       </trans-unit>
       <trans-unit id="tl_settings.logErrors.1">
         <source>Write error messages to the error log file (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</source>
+        <target>Zapiši sporočila o napakah v dnevniško datoteko (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.coreOnlyMode.0">
         <source>Run in safe mode</source>
+        <target>Zaženi v safe mode</target>
       </trans-unit>
       <trans-unit id="tl_settings.coreOnlyMode.1">
         <source>Run Contao in safe mode and load only core modules.</source>
+        <target>Zaženi Contao v varnem načinu in naloži le osnovne module</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableIpCheck.0">
         <source>Disable IP check</source>

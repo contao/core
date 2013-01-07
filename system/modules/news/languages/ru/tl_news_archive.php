@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -53,7 +53,7 @@ $GLOBALS['TL_LANG']['tl_news_archive']['feedBase'][1] = 'Введите базо
 $GLOBALS['TL_LANG']['tl_news_archive']['alias'][0] = 'Алиас канала';
 $GLOBALS['TL_LANG']['tl_news_archive']['alias'][1] = 'Введите уникальное имя файла (без расширения). В корневом каталоге Contao автоматически будет создан XML-файл, напр. <em>name.xml</em>.';
 $GLOBALS['TL_LANG']['tl_news_archive']['description'][0] = 'Описание канала';
-$GLOBALS['TL_LANG']['tl_news_archive']['description'][1] = 'Введите краткое описание канала календаря.';
+$GLOBALS['TL_LANG']['tl_news_archive']['description'][1] = 'Введите краткое описание канала.';
 $GLOBALS['TL_LANG']['tl_news_archive']['tstamp'][0] = 'Дата изменения';
 $GLOBALS['TL_LANG']['tl_news_archive']['tstamp'][1] = 'Дата и время последнего изменения';
 $GLOBALS['TL_LANG']['tl_news_archive']['title_legend'] = 'Название и перенаправление';

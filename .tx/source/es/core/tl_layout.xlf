@@ -161,14 +161,6 @@
         <source>Here you can activate the components of the Contao CSS framework.</source>
         <target>Aquí puede activar los componentes del marco CSS de Contao .</target>
       </trans-unit>
-      <trans-unit id="tl_layout.reset.css.0">
-        <source>CSS reset</source>
-        <target>CSS reset</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.reset.css.1">
-        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
-        <target>Elimina el estilo por defecto de elementos HTML en distintos navegadores.</target>
-      </trans-unit>
       <trans-unit id="tl_layout.layout.css.0">
         <source>Layout builder</source>
         <target>Constructor de diseño </target>
@@ -184,6 +176,20 @@
       <trans-unit id="tl_layout.responsive.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
         <target>Añade una rejilla sensible de 12 columnas que se activa mediante las clases CSS &quot;grid1&quot; a &quot;grid12&quot; y &quot;offset1&quot; a &quot;offset12&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.0">
+        <source>CSS reset</source>
+        <target>CSS reset</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.1">
+        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
+        <target>Elimina el estilo por defecto de elementos HTML en distintos navegadores.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.0">
+        <source>Basic forms</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.1">
+        <source>Adds basic form elements and buttons formatting.</source>
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.0">
         <source>TinyMCE style sheet</source>

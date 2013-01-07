@@ -27,9 +27,6 @@
         <source>Armenia</source>
         <target>ஆர்மேனியா</target>
       </trans-unit>
-      <trans-unit id="CNT.an">
-        <source>Netherlands Antilles</source>
-      </trans-unit>
       <trans-unit id="CNT.ao">
         <source>Angola</source>
         <target>அங்கோலா</target>
@@ -839,10 +836,6 @@
       <trans-unit id="CNT.tw">
         <source>Taiwan</source>
         <target>தாய்வான்</target>
-      </trans-unit>
-      <trans-unit id="CNT.ty">
-        <source>Tahiti</source>
-        <target>தகிற்றி</target>
       </trans-unit>
       <trans-unit id="CNT.tz">
         <source>Tanzania</source>

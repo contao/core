@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package   Repository
  * @author    Peter Koch, IBK Software AG
@@ -16,7 +16,7 @@
  * Implements the extension manager
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Repository
  */
 class RepositoryManager extends RepositoryBackendModule
@@ -372,7 +372,7 @@ class RepositoryManager extends RepositoryBackendModule
 				$actions = array();
 				$this->addActions($ext->extension, $ext->upd_version, $actions, $act);
 				if ($act=='ok') {
-					$rep->log = '<div class="title">'.$text['installlogtitle'].'</div>'."\n";
+					$rep->log .= '<div class="title">'.$text['installlogtitle'].'</div>'."\n";
 					$lickey = $ext->lickey;
 					$checkdb = false;
 					foreach ($actions as $act) {

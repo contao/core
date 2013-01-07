@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -753,8 +753,8 @@ $GLOBALS['TL_DCA']['tl_module'] = array
  * Class tl_module
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
 class tl_module extends Backend
@@ -859,73 +859,41 @@ class tl_module extends Backend
 
 	/**
 	 * Return all navigation templates as array
-	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getNavigationTemplates(DataContainer $dc)
+	public function getNavigationTemplates()
 	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('nav_', $intPid);
+		return $this->getTemplateGroup('nav_');
 	}
 
 
 	/**
 	 * Return all member templates as array
-	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getMemberTemplates(DataContainer $dc)
+	public function getMemberTemplates()
 	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('member_', $intPid);
+		return $this->getTemplateGroup('member_');
 	}
 
 
 	/**
 	 * Return all search templates as array
-	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getSearchTemplates(DataContainer $dc)
+	public function getSearchTemplates()
 	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('search_', $intPid);
+		return $this->getTemplateGroup('search_');
 	}
 
 
 	/**
 	 * Return all navigation templates as array
-	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getRssTemplates(DataContainer $dc)
+	public function getRssTemplates()
 	{
-		$intPid = $dc->activeRecord->pid;
-
-		if (Input::get('act') == 'overrideAll')
-		{
-			$intPid = Input::get('id');
-		}
-
-		return $this->getTemplateGroup('rss_', $intPid);
+		return $this->getTemplateGroup('rss_');
 	}
 
 

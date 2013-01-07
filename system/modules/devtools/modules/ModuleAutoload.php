@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Devtools
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -21,8 +21,8 @@ namespace Contao;
  * Class ModuleAutoload
  *
  * Back end module "autoload files".
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Devtools
  */
 class ModuleAutoload extends \BackendModule
@@ -154,78 +154,81 @@ class ModuleAutoload extends \BackendModule
 			}
 
 			// Scan for classes
-			foreach ($arrFiles as $strFile)
+			if ($arrDefaultConfig['register_namespaces'] || $arrDefaultConfig['register_classes'])
 			{
-				$strBuffer = '';
-				$arrMatches = array();
-
-				// Store the file size for fread()
-				$size = filesize(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile);
-				$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
-
-				// Read until a class or interface definition has been found
-				while ($size > 0 && !feof($fh) && !preg_match('/(class|interface) ' . preg_quote(basename($strFile, '.php'), '/') . '/', $strBuffer, $arrMatches))
+				foreach ($arrFiles as $strFile)
 				{
-					$length = min(512, $size);
-					$strBuffer .= fread($fh, $length);
-					$size -= $length; // see #4876
-				}
+					$strBuffer = '';
+					$arrMatches = array();
 
-				fclose($fh);
+					// Store the file size for fread()
+					$size = filesize(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile);
+					$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
 
-				// The file does not contain a class or interface
-				if (empty($arrMatches))
-				{
-					continue;
-				}
-
-				$strNamespace = preg_replace('/^.*namespace ([^; ]+);.*$/s', '$1', $strBuffer);
-
-				// No namespace declaration found
-				if ($strNamespace == $strBuffer)
-				{
-					$strNamespace = '';
-				}
-
-				unset($strBuffer);
-				$arrConfig = $arrDefaultConfig;
-
-				// Search for a path configuration
-				foreach ($arrDefaultConfig as $strPattern=>$arrPathConfig)
-				{
-					// Merge the path configuration with the global configuration
-					if (is_array($arrPathConfig) && fnmatch($strPattern, $strFile))
+					// Read until a class or interface definition has been found
+					while (!preg_match('/(class|interface) ' . preg_quote(basename($strFile, '.php'), '/') . '/', $strBuffer, $arrMatches) && $size > 0 && !feof($fh))
 					{
-						$arrConfig = array_merge($arrDefaultConfig, $arrPathConfig);
-						break;
+						$length = min(512, $size);
+						$strBuffer .= fread($fh, $length);
+						$size -= $length; // see #4876
 					}
-				}
 
-				// Register the namespace
-				if ($strNamespace != '')
-				{
-					if ($arrConfig['register_namespaces'] && $strNamespace != 'Contao')
+					fclose($fh);
+
+					// The file does not contain a class or interface
+					if (empty($arrMatches))
 					{
-						// Register only the first chunk as namespace
-						if (strpos($strNamespace, '\\') !== false)
+						continue;
+					}
+
+					$strNamespace = preg_replace('/^.*namespace ([^; ]+);.*$/s', '$1', $strBuffer);
+
+					// No namespace declaration found
+					if ($strNamespace == $strBuffer)
+					{
+						$strNamespace = '';
+					}
+
+					unset($strBuffer);
+					$arrConfig = $arrDefaultConfig;
+
+					// Search for a path configuration
+					foreach ($arrDefaultConfig as $strPattern=>$arrPathConfig)
+					{
+						// Merge the path configuration with the global configuration
+						if (is_array($arrPathConfig) && fnmatch($strPattern, $strFile))
 						{
-							$arrNamespaces[] = substr($strNamespace, 0, strpos($strNamespace, '\\'));
-						}
-						else
-						{
-							$arrNamespaces[] = $strNamespace;
+							$arrConfig = array_merge($arrDefaultConfig, $arrPathConfig);
+							break;
 						}
 					}
 
-					$strNamespace .=  '\\';
-				}
+					// Register the namespace
+					if ($strNamespace != '')
+					{
+						if ($arrConfig['register_namespaces'] && $strNamespace != 'Contao')
+						{
+							// Register only the first chunk as namespace
+							if (strpos($strNamespace, '\\') !== false)
+							{
+								$arrNamespaces[] = substr($strNamespace, 0, strpos($strNamespace, '\\'));
+							}
+							else
+							{
+								$arrNamespaces[] = $strNamespace;
+							}
+						}
 
-				// Register the class
-				if ($arrConfig['register_classes'])
-				{
-					$strKey = $strNamespace . basename($strFile, '.php');
-					$arrClassLoader[$strKey] = 'system/modules/' . $strModule . '/' . $strFile;
-					$intClassWidth = max(strlen($strKey), $intClassWidth);
+						$strNamespace .=  '\\';
+					}
+
+					// Register the class
+					if ($arrConfig['register_classes'])
+					{
+						$strKey = $strNamespace . basename($strFile, '.php');
+						$arrClassLoader[$strKey] = 'system/modules/' . $strModule . '/' . $strFile;
+						$intClassWidth = max(strlen($strKey), $intClassWidth);
+					}
 				}
 			}
 
@@ -233,7 +236,7 @@ class ModuleAutoload extends \BackendModule
 			$arrTplLoader = array();
 
 			// Scan for templates
-			if ($arrConfig['register_templates'])
+			if ($arrDefaultConfig['register_templates'])
 			{
 				if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
 				{
@@ -270,7 +273,7 @@ class ModuleAutoload extends \BackendModule
  * Copyright (C) 2005-$intYear Leo Feyer
  * 
  * @package $strPackage
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -473,7 +476,7 @@ EOT
  * Copyright (C) 2005-$intYear Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 

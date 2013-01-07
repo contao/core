@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -292,7 +292,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'نشانی وب فایل‌ها 
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'نشانی وب افزونه‌ها';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'نشانی وب افزونه‌ها به همه منابع در شاخه <em>plugins</em> اعمال خواهد شد (بهینه‌سازی سرعت صفحه)';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'کلید‌های میانبر بخش مدیریت';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'سرعت کارهای خود را با استفاده از <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">کلید‌های میانبر</a> افزایش دهید..';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'بستن همه';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'گسترش یا باز کردن همه گره‌ها';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'یک حساب کاربری کانتائو قفل شده است';
@@ -500,14 +499,6 @@ $GLOBALS['TL_LANG']['MSC']['changelog'] = 'تغییرات';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'غیرفعال';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'آیتم‌ها را برای چیدن دوباره‌شان بکشید';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
-$GLOBALS['TL_LANG']['UNITS'][1] = 'kB';
-$GLOBALS['TL_LANG']['UNITS'][2] = 'MB';
-$GLOBALS['TL_LANG']['UNITS'][3] = 'GB';
-$GLOBALS['TL_LANG']['UNITS'][4] = 'TB';
-$GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
-$GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
-$GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
-$GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'ماژول';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = 'جدول متاثر';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = 'عمل';

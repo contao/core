@@ -1,0 +1,174 @@
+<?php
+
+/**
+ * Contao Open Source CMS
+ * 
+ * Copyright (C) 2005-2013 Leo Feyer
+ * 
+ * Core translations are managed using Transifex. To create a new translation
+ * or to help to maintain an existing one, please register at transifex.com.
+ * 
+ * @link http://help.transifex.com/intro/translating.html
+ * @link https://www.transifex.com/projects/p/contao/language/hu/
+ * 
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$GLOBALS['TL_LANG']['tl_repository']['category'][0] = 'Kategória';
+$GLOBALS['TL_LANG']['tl_repository']['category'][1] = 'Válassza ki a kiterjesztés kategóriáját.';
+$GLOBALS['TL_LANG']['tl_repository']['copyright'][0] = 'Szerzői jog';
+$GLOBALS['TL_LANG']['tl_repository']['copyright'][1] = 'Itt lehet megadni a szerzői jogi figyelmeztetést. (e.g. © 2007,2008 Jerry Miller Webservices Inc).';
+$GLOBALS['TL_LANG']['tl_repository']['description'][0] = 'Leírás';
+$GLOBALS['TL_LANG']['tl_repository']['description'][1] = 'Ezen HTML elemek használata megengedett: %s';
+$GLOBALS['TL_LANG']['tl_repository']['extension'][0] = 'Kiterjesztés';
+$GLOBALS['TL_LANG']['tl_repository']['extension'][1] = 'Kiterjesztés neve.';
+$GLOBALS['TL_LANG']['tl_repository']['functionality'][0] = 'Funkcionalitás';
+$GLOBALS['TL_LANG']['tl_repository']['functionality'][1] = 'A kiterjesztés biztosítja a várt funkciót?';
+$GLOBALS['TL_LANG']['tl_repository']['license'][0] = 'Engedély';
+$GLOBALS['TL_LANG']['tl_repository']['license'][1] = 'Adjon meg egy rövid engedély információt. Lehetőség van teljes licenc adatok megadására egy fájlban: LICENSE.txt.';
+$GLOBALS['TL_LANG']['tl_repository']['name'][0] = 'Név';
+$GLOBALS['TL_LANG']['tl_repository']['name'][1] = 'Kiterjesztés neve csak a-z, A-Z és 0-9 karakterekkel kezdődhet, kisbetűs nevek használata javasolt. Emellett a _ és a - karakterek is megengedettek a névben.';
+$GLOBALS['TL_LANG']['tl_repository']['popularity'][0] = 'Népszerűség';
+$GLOBALS['TL_LANG']['tl_repository']['popularity'][1] = '%s/%s (letöltés/telepítés)';
+$GLOBALS['TL_LANG']['tl_repository']['quality'][0] = 'Minőség';
+$GLOBALS['TL_LANG']['tl_repository']['quality'][1] = 'Milyen erős a kiterjesztés, és mennyire felhasználóbarát a telepítés és karbantartás?';
+$GLOBALS['TL_LANG']['tl_repository']['releasedate'][0] = 'Kiadás dátuma';
+$GLOBALS['TL_LANG']['tl_repository']['releasedate'][1] = 'A kiadás megjelenési dátumának megadása ebben a formában: %s';
+$GLOBALS['TL_LANG']['tl_repository']['selversion'][0] = 'Verzió';
+$GLOBALS['TL_LANG']['tl_repository']['selversion'][1] = 'Válassza ki a verziót.';
+$GLOBALS['TL_LANG']['tl_repository']['type'][0] = 'Típus';
+$GLOBALS['TL_LANG']['tl_repository']['type'][1] = 'Válassza ki a kiterjesztés típusát.';
+$GLOBALS['TL_LANG']['tl_repository']['usability'][0] = 'Használhatóság';
+$GLOBALS['TL_LANG']['tl_repository']['usability'][1] = 'A kiterjesztés mennyire felel meg a Contao használhatósági és hozzáférhetőségi irányelveinek?';
+$GLOBALS['TL_LANG']['tl_repository']['version'][0] = 'Verzió';
+$GLOBALS['TL_LANG']['tl_repository']['version'][1] = 'Verziószám a következő formátumú kell legyen: n.n.n s, ahol n egy egész szám, s pedig a következők egyike: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable';
+$GLOBALS['TL_LANG']['tl_repository']['lickey'][0] = 'Licenc kulcs';
+$GLOBALS['TL_LANG']['tl_repository']['lickey'][1] = 'Adja meg a licenc kulcsot amit az eladótól kapott.';
+$GLOBALS['TL_LANG']['tl_repository']['uninstprotect'][0] = 'Eltávolítás védelem';
+$GLOBALS['TL_LANG']['tl_repository']['uninstprotect'][1] = 'Védelem a kiterjesztés véletlen eltávolítása ellen.';
+$GLOBALS['TL_LANG']['tl_repository']['updateprotect'][0] = 'Frissítés védelem';
+$GLOBALS['TL_LANG']['tl_repository']['updateprotect'][1] = 'Védelem a kiterjesztés véletlen frissítése ellen.';
+$GLOBALS['TL_LANG']['tl_repository']['author'] = 'Szerző';
+$GLOBALS['TL_LANG']['tl_repository']['build'] = 'Build';
+$GLOBALS['TL_LANG']['tl_repository']['cancel'] = 'Mégsem';
+$GLOBALS['TL_LANG']['tl_repository']['continue'] = 'Tovább';
+$GLOBALS['TL_LANG']['tl_repository']['dependencies'] = 'Kiterjesztés függőségei';
+$GLOBALS['TL_LANG']['tl_repository']['dependents'] = 'Más kiterjesztések függnek ettől';
+$GLOBALS['TL_LANG']['tl_repository']['dependentsdel'] = 'A következő kiterjesztések állnak függőségben <em>% s </em>, és tönkre is tehetik::';
+$GLOBALS['TL_LANG']['tl_repository']['donate'] = 'Adomány';
+$GLOBALS['TL_LANG']['tl_repository']['downloads'] = 'Csomag letöltések';
+$GLOBALS['TL_LANG']['tl_repository']['extensionnotfound'] = 'Kiterjesztés nem található';
+$GLOBALS['TL_LANG']['tl_repository']['forum'] = 'Fórum';
+$GLOBALS['TL_LANG']['tl_repository']['installs'] = 'Online telepítés';
+$GLOBALS['TL_LANG']['tl_repository']['langtrans'] = '%s fordító';
+$GLOBALS['TL_LANG']['tl_repository']['manual'] = 'Kézikönyv';
+$GLOBALS['TL_LANG']['tl_repository']['no'] = 'nem';
+$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = 'Nem megfelelő kiterjesztést találtam.';
+$GLOBALS['TL_LANG']['tl_repository']['orderby'] = 'Rendezés';
+$GLOBALS['TL_LANG']['tl_repository']['otherlanguages'] = 'Egyéb nyelvek';
+$GLOBALS['TL_LANG']['tl_repository']['pageof'] = '%s . oldal a %s-ból';
+$GLOBALS['TL_LANG']['tl_repository']['ratingfmt'] = '%.2f (%d szavazat)';
+$GLOBALS['TL_LANG']['tl_repository']['reldownloads'] = 'Kiadás letöltése';
+$GLOBALS['TL_LANG']['tl_repository']['releasenotesfor'] = 'Kiadási megjegyzések és változtatási napló: %s';
+$GLOBALS['TL_LANG']['tl_repository']['relfunctionality'] = 'Kiadás funkcionalitása';
+$GLOBALS['TL_LANG']['tl_repository']['relinstalls'] = 'Kiadás telepítés';
+$GLOBALS['TL_LANG']['tl_repository']['relquality'] = 'Kiadás minősége';
+$GLOBALS['TL_LANG']['tl_repository']['relrating'] = 'Kiadás értékelése';
+$GLOBALS['TL_LANG']['tl_repository']['relupdates'] = 'Kiadás frissítések';
+$GLOBALS['TL_LANG']['tl_repository']['relusability'] = 'Kiadás használhatósága';
+$GLOBALS['TL_LANG']['tl_repository']['save'] = 'Ment';
+$GLOBALS['TL_LANG']['tl_repository']['shop'] = 'Bolt';
+$GLOBALS['TL_LANG']['tl_repository']['showpicture'] = 'Teljes méretű kép megtekintése';
+$GLOBALS['TL_LANG']['tl_repository']['state'] = 'Kiadás típusa';
+$GLOBALS['TL_LANG']['tl_repository']['tag'] = 'Címke';
+$GLOBALS['TL_LANG']['tl_repository']['thumbnail'] = 'Indexkép';
+$GLOBALS['TL_LANG']['tl_repository']['totdownloads'] = 'Összes letöltés';
+$GLOBALS['TL_LANG']['tl_repository']['totfunctionality'] = 'Teljes funkcionalitása';
+$GLOBALS['TL_LANG']['tl_repository']['totinstalls'] = 'Összes telepítés';
+$GLOBALS['TL_LANG']['tl_repository']['totquality'] = 'Teljes minősége';
+$GLOBALS['TL_LANG']['tl_repository']['totrating'] = 'Teljes értékelése';
+$GLOBALS['TL_LANG']['tl_repository']['totupdates'] = 'Összes frissítések';
+$GLOBALS['TL_LANG']['tl_repository']['totusability'] = 'Teljes használhatósága';
+$GLOBALS['TL_LANG']['tl_repository']['versionfrom'] = 'Verziótól';
+$GLOBALS['TL_LANG']['tl_repository']['versions'] = 'Egyéb verziók';
+$GLOBALS['TL_LANG']['tl_repository']['versionto'] = 'Verzióig';
+$GLOBALS['TL_LANG']['tl_repository']['yes'] = 'igen';
+$GLOBALS['TL_LANG']['tl_repository']['action'] = 'Művelet';
+$GLOBALS['TL_LANG']['tl_repository']['actionsummary'] = 'Művelet összefoglaló';
+$GLOBALS['TL_LANG']['tl_repository']['actionsuccess'] = 'Művelet elkészült.';
+$GLOBALS['TL_LANG']['tl_repository']['actionfailed'] = 'Egy vagy több művelet meghíusult.';
+$GLOBALS['TL_LANG']['tl_repository']['apply'] = 'Alkalmaz';
+$GLOBALS['TL_LANG']['tl_repository']['byorder'] = '%s';
+$GLOBALS['TL_LANG']['tl_repository']['checkextension'] = 'Kiterjesztés ellenőrzés';
+$GLOBALS['TL_LANG']['tl_repository']['dbuptodate'] = 'Adatbázis frissítve';
+$GLOBALS['TL_LANG']['tl_repository']['deletingdirs'] = 'Könyvtárak törlése';
+$GLOBALS['TL_LANG']['tl_repository']['deletingfiles'] = 'Fájlok törlése';
+$GLOBALS['TL_LANG']['tl_repository']['editextension'] = 'Beállítások szerkesztése';
+$GLOBALS['TL_LANG']['tl_repository']['extinstrecntf'] = 'Kiterjesztés telepítési rekord nem található';
+$GLOBALS['TL_LANG']['tl_repository']['errdldpkg'] = 'Csomag letöltése a tárolóból sikertelen';
+$GLOBALS['TL_LANG']['tl_repository']['failed'] = 'sikertelen';
+$GLOBALS['TL_LANG']['tl_repository']['fileerrwrite'] = 'Fájl írási hiba: %s';
+$GLOBALS['TL_LANG']['tl_repository']['filesdeleted'] = '%s fájl(ok) törölve';
+$GLOBALS['TL_LANG']['tl_repository']['filesinstalled'] = '%s fájl(ok) telepítve';
+$GLOBALS['TL_LANG']['tl_repository']['filesunchanged'] = '%s fájl(ok) változatlan(ok)';
+$GLOBALS['TL_LANG']['tl_repository']['filesupdated'] = '%s fájl(ok) frissítve';
+$GLOBALS['TL_LANG']['tl_repository']['ftsearch'] = 'Teljes szöveges keresés';
+$GLOBALS['TL_LANG']['tl_repository']['goback'] = 'Vissza';
+$GLOBALS['TL_LANG']['tl_repository']['install'] = 'Telepítés';
+$GLOBALS['TL_LANG']['tl_repository']['installextension'] = 'Kiterjesztés telepítése';
+$GLOBALS['TL_LANG']['tl_repository']['installingext'] = 'Telepítés %s %s build %s';
+$GLOBALS['TL_LANG']['tl_repository']['installlogtitle'] = 'Fájl telepítési/frissítési napló';
+$GLOBALS['TL_LANG']['tl_repository']['lickeyrequired'] = 'Ehhez a kiterjesztéshez engedély kulcs szükséges. Kérem látogasson el az eladó boltjába a vásárláshoz.';
+$GLOBALS['TL_LANG']['tl_repository']['none'] = 'nincs';
+$GLOBALS['TL_LANG']['tl_repository']['notfound'] = 'Nem található';
+$GLOBALS['TL_LANG']['tl_repository']['ok'] = 'OK';
+$GLOBALS['TL_LANG']['tl_repository']['okuninstextension'] = 'Ok, eltávolítja most ezt: <em>%s</em>?';
+$GLOBALS['TL_LANG']['tl_repository']['showdetails'] = 'Részletek megtekintése';
+$GLOBALS['TL_LANG']['tl_repository']['stateshint'] = 'Ellenőrizze a kiadás tartalmát.';
+$GLOBALS['TL_LANG']['tl_repository']['status'] = 'Státusz';
+$GLOBALS['TL_LANG']['tl_repository']['success'] = 'siker';
+$GLOBALS['TL_LANG']['tl_repository']['uninstallextension'] = 'Kiterjesztés eltávolítása';
+$GLOBALS['TL_LANG']['tl_repository']['updatedatabase'] = 'Adatbázis frissítés';
+$GLOBALS['TL_LANG']['tl_repository']['updateextension'] = 'Kiterjesztés frissítés';
+$GLOBALS['TL_LANG']['tl_repository']['updateextensions'] = 'Kijelölt kiterjesztés(ek) frissítése';
+$GLOBALS['TL_LANG']['tl_repository']['update'] = 'Frissítés';
+$GLOBALS['TL_LANG']['tl_repository']['updates'] = 'Frissítések';
+$GLOBALS['TL_LANG']['tl_repository']['updatehint'] = 'Ellenőrizze a kiadást tartalmaz e frissítést.';
+$GLOBALS['TL_LANG']['tl_repository']['updatingext'] = 'Frissítés %s %s build %s';
+$GLOBALS['TL_LANG']['tl_repository']['validate'] = 'Javítás';
+$GLOBALS['TL_LANG']['tl_repository']['validatingext'] = 'Ellenőrzés/javítás %s %s build %s';
+$GLOBALS['TL_LANG']['tl_repository']['approvedForLabel'] = 'Jóváhagyva';
+$GLOBALS['TL_LANG']['tl_repository']['approvedForText'] = 'Contao %s - %s';
+$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule'] = 'SOAP kiterjesztés nem töltődött be (módosítsa a PHP beállításokat így: --enable-soap)';
+$GLOBALS['TL_LANG']['tl_repository_statext']['uptodate'] = 'Frissítve';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapproved'] = 'Nem engedélyezett: %s %s';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapprovedwith'] = 'Nem jóváhagyott: %s %s';
+$GLOBALS['TL_LANG']['tl_repository_statext']['shouldwork'] = 'Várhatóan összeegyeztethető ezzel: %s %s';
+$GLOBALS['TL_LANG']['tl_repository_statext']['newversion'] = 'Verzió: %s build %s elérhető';
+$GLOBALS['TL_LANG']['tl_repository_statext']['depmissing'] = 'Hiányzik a szükséges kiterjesztés: %s';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extnotfound'] = 'Kiterjesztés nem található a tárolóban';
+$GLOBALS['TL_LANG']['tl_repository_statext']['vernotfound'] = 'Telepített verzió nem található a tárolóan';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extneedkey'] = 'Licenc kulcs szükséges, telepítés annak beszerzése előtt';
+$GLOBALS['TL_LANG']['tl_repository_statext']['errorinstall'] = 'Sérült! Frissítés/javítás szükséges';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['free'] = 'Ingyenes';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['private'] = 'Privát';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['commercial'] = 'Kereskedelmi';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['application'] = 'Application (alkalmazás)';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['plugin'] = 'Plugin (beépülő)';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['template'] = 'Téma';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['utility'] = 'Utility (kiegészítés)';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['widget'] = 'Widget';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['translation'] = 'Fordítás';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['bundle'] = 'Csomag';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['other'] = 'Egyéb';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['core'] = 'Core';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['reldate'] = 'Kiadási dátum';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['rating'] = 'Értékelés';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['popular'] = 'Népszerűség';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['name'] = 'Név';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['title'] = 'Megnevezés';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['author'] = 'Szerző';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['alpha'] = 'Alpha (korai teszt változat)';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['beta'] = 'Beta (teszt változat)';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['rc'] = 'RC (kiadásra jelölt változat)';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['stable'] = 'Stabil (végleges stabil verzió)';

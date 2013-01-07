@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -46,7 +46,7 @@ $GLOBALS['TL_LANG']['tl_module']['next_7'] = '+ 1 неделя';
 $GLOBALS['TL_LANG']['tl_module']['next_14'] = '+ 2 недели';
 $GLOBALS['TL_LANG']['tl_module']['next_30'] = '+ 1 месяц';
 $GLOBALS['TL_LANG']['tl_module']['next_90'] = '+ 3 месяца';
-$GLOBALS['TL_LANG']['tl_module']['next_180'] = '+ 6 месяцов';
+$GLOBALS['TL_LANG']['tl_module']['next_180'] = '+ 6 месяцев';
 $GLOBALS['TL_LANG']['tl_module']['next_365'] = '+ 1 год';
 $GLOBALS['TL_LANG']['tl_module']['next_two'] = '+ 2 года';
 $GLOBALS['TL_LANG']['tl_module']['next_cur_month'] = 'за текущий месяц';
@@ -57,7 +57,7 @@ $GLOBALS['TL_LANG']['tl_module']['past_7'] = '- 1 неделя';
 $GLOBALS['TL_LANG']['tl_module']['past_14'] = '- 2 недели';
 $GLOBALS['TL_LANG']['tl_module']['past_30'] = '- 1 месяц';
 $GLOBALS['TL_LANG']['tl_module']['past_90'] = '- 3 месяца';
-$GLOBALS['TL_LANG']['tl_module']['past_180'] = '- 6 месяцов';
+$GLOBALS['TL_LANG']['tl_module']['past_180'] = '- 6 месяцев';
 $GLOBALS['TL_LANG']['tl_module']['past_365'] = '- 1 год';
 $GLOBALS['TL_LANG']['tl_module']['past_two'] = '- 2 года';
 $GLOBALS['TL_LANG']['tl_module']['past_cur_month'] = 'за текущий месяц';

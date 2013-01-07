@@ -81,6 +81,10 @@
         <source>Please enter date and time as &quot;%s&quot;!</source>
         <target>Zadajte dátum a čas ako &quot;%s&quot;!</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
+        <target>Neplatný dátum &quot;%s&quot;!</target>
+      </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
         <target>Pole &quot;%s&quot; nesmie obsahovať medzery!</target>
@@ -104,6 +108,10 @@
       <trans-unit id="ERR.fileheight">
         <source>File %s exceeds the maximum image height of %d pixels!</source>
         <target>Súbor %s presahuje maximálnu výšku %d bodov!</target>
+      </trans-unit>
+      <trans-unit id="ERR.filetarget">
+        <source>Cannot move %s to %s because the target exists!</source>
+        <target>Nemôžte premiestniť %s do %s pretože cieľ existuje!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidReferer">
         <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
@@ -1114,8 +1122,8 @@
         <target>Klávesové skratky backendu</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;http://contao.org/en/keyboard-shortcuts.html&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>Viac o zrýchlení vašeho work-flow a klávesových skratkách sa dozviete &lt;a href=&quot;http://www.contao.org/keyboard-shortcuts.html&quot; target=&quot;_blank&quot;&gt;tu&lt;/a&gt;.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>Získajte viac informácií ako urýchliť svoju prácu používaním &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Prehľad klávesových skratiek na contao.org&quot; target=&quot;_blank&quot;&gt;klávesových skratiek&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1959,41 +1967,45 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
         <source>Drag the items to re-order them</source>
         <target>Vyňať položky pre ich znovuzoradenie</target>
       </trans-unit>
+      <trans-unit id="MSC.templatesTheme">
+        <source>Theme %s</source>
+        <target>Téma vzhľadu %s</target>
+      </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>
         <target>Byte</target>
       </trans-unit>
       <trans-unit id="UNITS.1">
-        <source>kB</source>
-        <target>kB</target>
+        <source>KiB</source>
+        <target>KiB</target>
       </trans-unit>
       <trans-unit id="UNITS.2">
-        <source>MB</source>
-        <target>MB</target>
+        <source>MiB</source>
+        <target>MiB</target>
       </trans-unit>
       <trans-unit id="UNITS.3">
-        <source>GB</source>
-        <target>GB</target>
+        <source>GiB</source>
+        <target>GiB</target>
       </trans-unit>
       <trans-unit id="UNITS.4">
-        <source>TB</source>
-        <target>TB</target>
+        <source>TiB</source>
+        <target>TiB</target>
       </trans-unit>
       <trans-unit id="UNITS.5">
-        <source>PB</source>
-        <target>PB</target>
+        <source>PiB</source>
+        <target>PiB</target>
       </trans-unit>
       <trans-unit id="UNITS.6">
-        <source>EB</source>
-        <target>EB</target>
+        <source>EiB</source>
+        <target>EiB</target>
       </trans-unit>
       <trans-unit id="UNITS.7">
-        <source>ZB</source>
-        <target>ZB</target>
+        <source>ZiB</source>
+        <target>ZiB</target>
       </trans-unit>
       <trans-unit id="UNITS.8">
-        <source>YB</source>
-        <target>YB</target>
+        <source>YiB</source>
+        <target>YiB</target>
       </trans-unit>
       <trans-unit id="CONFIRM.do">
         <source>Module</source>

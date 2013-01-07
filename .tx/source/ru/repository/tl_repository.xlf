@@ -75,7 +75,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.releasedate.0">
         <source>Release date</source>
-        <target>Дата версии</target>
+        <target>Дата релиза</target>
       </trans-unit>
       <trans-unit id="tl_repository.releasedate.1">
         <source>Enter the publishing date of this release in format %s</source>
@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.updateprotect.1">
         <source>Protect extension against accidental update.</source>
-        <target>Защита засширения от случайного обновления.</target>
+        <target>Защита расширения от случайного обновления.</target>
       </trans-unit>
       <trans-unit id="tl_repository.author">
         <source>Author</source>
@@ -463,7 +463,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.updateextension">
         <source>Update extension</source>
-        <target>Обновление расширение</target>
+        <target>Обновление расширений</target>
       </trans-unit>
       <trans-unit id="tl_repository.updateextensions">
         <source>Update checked extensions</source>
@@ -595,7 +595,7 @@
       </trans-unit>
       <trans-unit id="tl_repository_order_options.reldate">
         <source>Releasedate</source>
-        <target>Дата версии</target>
+        <target>Дата релиза</target>
       </trans-unit>
       <trans-unit id="tl_repository_order_options.rating">
         <source>Rating</source>

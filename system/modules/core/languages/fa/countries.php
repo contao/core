@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -21,7 +21,6 @@ $GLOBALS['TL_LANG']['CNT']['ag'] = 'آنتیگوا و باربودا';
 $GLOBALS['TL_LANG']['CNT']['ai'] = 'آنگولا';
 $GLOBALS['TL_LANG']['CNT']['al'] = 'آلبانیا';
 $GLOBALS['TL_LANG']['CNT']['am'] = 'ارمنستان';
-$GLOBALS['TL_LANG']['CNT']['an'] = 'آنتیل هلند';
 $GLOBALS['TL_LANG']['CNT']['ao'] = 'آنگولا';
 $GLOBALS['TL_LANG']['CNT']['aq'] = 'آنتاریکا';
 $GLOBALS['TL_LANG']['CNT']['ar'] = 'آرژانتین';
@@ -241,7 +240,6 @@ $GLOBALS['TL_LANG']['CNT']['tr'] = 'ترکیه';
 $GLOBALS['TL_LANG']['CNT']['tt'] = 'ترینیداد و توباگو';
 $GLOBALS['TL_LANG']['CNT']['tv'] = 'تووالو';
 $GLOBALS['TL_LANG']['CNT']['tw'] = 'تایوان';
-$GLOBALS['TL_LANG']['CNT']['ty'] = 'تاهیتی';
 $GLOBALS['TL_LANG']['CNT']['tz'] = 'تانزانیا';
 $GLOBALS['TL_LANG']['CNT']['ua'] = 'اوکراین';
 $GLOBALS['TL_LANG']['CNT']['ug'] = 'اوگاندا';

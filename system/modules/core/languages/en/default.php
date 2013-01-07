@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -34,12 +34,14 @@ $GLOBALS['TL_LANG']['ERR']['folderalias'] = 'Please enter only alphanumeric char
 $GLOBALS['TL_LANG']['ERR']['date'] = 'Please enter the date as "%s"!';
 $GLOBALS['TL_LANG']['ERR']['time'] = 'Please enter the time as "%s"!';
 $GLOBALS['TL_LANG']['ERR']['dateTime'] = 'Please enter date and time as "%s"!';
+$GLOBALS['TL_LANG']['ERR']['invalidDate'] = 'Invalid date "%s"!';
 $GLOBALS['TL_LANG']['ERR']['noSpace'] = 'Field "%s" must not contain any whitespace characters!';
 $GLOBALS['TL_LANG']['ERR']['filesize'] = 'The maximum size for file uploads is %s (Contao or php.ini settings)!';
 $GLOBALS['TL_LANG']['ERR']['filetype'] = 'File type "%s" is not allowed to be uploaded!';
 $GLOBALS['TL_LANG']['ERR']['filepartial'] = 'File %s was only partially uploaded!';
 $GLOBALS['TL_LANG']['ERR']['filewidth'] = 'File %s exceeds the maximum image width of %d pixels!';
 $GLOBALS['TL_LANG']['ERR']['fileheight'] = 'File %s exceeds the maximum image height of %d pixels!';
+$GLOBALS['TL_LANG']['ERR']['filetarget'] = 'Cannot move %s to %s because the target exists!';
 $GLOBALS['TL_LANG']['ERR']['invalidReferer'] = 'Access denied! The current host address (%s) does not match the referer host address (%s)!';
 $GLOBALS['TL_LANG']['ERR']['invalidPass'] = 'Invalid password!';
 $GLOBALS['TL_LANG']['ERR']['passwordLength'] = 'A password has to be at least %d characters long!';
@@ -292,7 +294,7 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'The files URL applies to the <em
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'Assets URL';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'The assets URL applies to the <em>assets</em> directory (page speed optimization).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Back end keyboard shortcuts';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Learn more about speeding up your workflow by using <a href="http://contao.org/en/keyboard-shortcuts.html" title="Keyboard shortcuts overview on contao.org" target="_blank">keyboard shortcuts</a>.';
+$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Learn more about speeding up your workflow by using <a href="https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts" title="Keyboard shortcuts overview on contao.org" target="_blank">keyboard shortcuts</a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Toggle all';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Expand or collapse all nodes';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'A Contao account has been locked';
@@ -499,15 +501,16 @@ $GLOBALS['TL_LANG']['MSC']['invalidTokenUrl'] = 'Invalid token';
 $GLOBALS['TL_LANG']['MSC']['changelog'] = 'Changelog';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Disable';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Drag the items to re-order them';
+$GLOBALS['TL_LANG']['MSC']['templatesTheme'] = 'Theme %s';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
-$GLOBALS['TL_LANG']['UNITS'][1] = 'kB';
-$GLOBALS['TL_LANG']['UNITS'][2] = 'MB';
-$GLOBALS['TL_LANG']['UNITS'][3] = 'GB';
-$GLOBALS['TL_LANG']['UNITS'][4] = 'TB';
-$GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
-$GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
-$GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
-$GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
+$GLOBALS['TL_LANG']['UNITS'][1] = 'KiB';
+$GLOBALS['TL_LANG']['UNITS'][2] = 'MiB';
+$GLOBALS['TL_LANG']['UNITS'][3] = 'GiB';
+$GLOBALS['TL_LANG']['UNITS'][4] = 'TiB';
+$GLOBALS['TL_LANG']['UNITS'][5] = 'PiB';
+$GLOBALS['TL_LANG']['UNITS'][6] = 'EiB';
+$GLOBALS['TL_LANG']['UNITS'][7] = 'ZiB';
+$GLOBALS['TL_LANG']['UNITS'][8] = 'YiB';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'Module';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Affected table';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = 'Action';

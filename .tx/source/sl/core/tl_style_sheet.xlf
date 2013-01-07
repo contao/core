@@ -11,9 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.embedImages.0">
         <source>Embed images up to</source>
+        <target>Vdelaj slike do</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.embedImages.1">
         <source>Here you can enter the file size in bytes up to which images will be embedded in the style sheet as data: string. Set to 0 to disable the feature.</source>
+        <target>Tu lahko vnesete največjo velikost datoteke v bajtih, ki bo še lahko vdelana v slogovno predlogo kot data: string. Vrednost 0 onemogoči to funkcijo.</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.cc.0">
         <source>Conditional comment</source>
@@ -69,6 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.config_legend">
         <source>Configuration</source>
+        <target>Nastavitve</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.media_legend">
         <source>Media settings</source>

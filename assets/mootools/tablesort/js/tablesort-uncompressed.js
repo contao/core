@@ -1,10 +1,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Tablesort
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -133,7 +133,7 @@ var TableSort = new Class(
 			i++;
 		}
 
-		var tbody = new Array();
+		var tbody = [];
 
 		for (var i=0; i<table.tBodies[0].rows.length; i++)
 		{

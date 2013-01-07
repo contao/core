@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Core
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -21,8 +21,8 @@ namespace Contao;
  * Class StyleSheets
  *
  * Provide methods to handle style sheets.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
 class StyleSheets extends \Backend
@@ -223,7 +223,7 @@ class StyleSheets extends \Backend
 			$search = array('@^\s*/\*+@', '@\*+/\s*$@');
 			$comment = preg_replace($search, '', $row['comment']);
 			$comment = wordwrap(trim($comment), 72);
-			$return .= "\n/* " . $comment . " */\n";
+			$return .= "\n" . '<span class="comment">' . $comment . '</span>' . "\n";
 		}
 
 		// Selector
@@ -2009,7 +2009,7 @@ class StyleSheets extends \Backend
 
 				case 'list-style-image':
 					$arrSet['list'] = 1;
-					$arrSet['liststyleimage'] = preg_replace('/url\("?([^"\)]+)"?\)/i', '$1', $arrChunks[1]);
+					$arrSet['liststyleimage'] = preg_replace('/url\(["\']?([^"\'\)]+)["\']?\)/i', '$1', $arrChunks[1]);
 					break;
 
 				case 'behavior':

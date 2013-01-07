@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.email.1">
         <source>The e-mail address will not be published.</source>
-        <target>Adja meg a szerző e-mail címét (nem fog megjelenni).</target>
+        <target>Az e-mail cím nem lesz publikus.</target>
       </trans-unit>
       <trans-unit id="tl_comments.website.0">
         <source>Website</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.website.1">
         <source>Here you can enter a website address.</source>
-        <target>Ada meg egy opcionális weboldal címét.</target>
+        <target>Itt megadhat egy weboldal címet.</target>
       </trans-unit>
       <trans-unit id="tl_comments.comment.0">
         <source>Comment</source>
@@ -87,19 +87,23 @@
       </trans-unit>
       <trans-unit id="tl_comments.published.1">
         <source>Make the comment publicly visible on the website.</source>
-        <target>Csak az engedélyezett hozzászólások fognak megjelenni az oldalon.</target>
+        <target>Tegye nyilvánosan elérhetővé a hozzászólást a weboldalon.</target>
       </trans-unit>
       <trans-unit id="tl_comments.ip.0">
         <source>IP address</source>
+        <target>IP cím</target>
       </trans-unit>
       <trans-unit id="tl_comments.ip.1">
         <source>The IP address of the author.</source>
+        <target>A szerző IP címe</target>
       </trans-unit>
       <trans-unit id="tl_comments.notified.0">
         <source>Notified</source>
+        <target>Értesítés</target>
       </trans-unit>
       <trans-unit id="tl_comments.notified.1">
         <source>The notification of this comment has been sent.</source>
+        <target>Az értesítés a hozzászólásról el lett küldve.</target>
       </trans-unit>
       <trans-unit id="tl_comments.author_legend">
         <source>Author</source>
@@ -107,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.comment_legend">
         <source>Comment</source>
-        <target>Megjegyzés</target>
+        <target>Hozzászólás</target>
       </trans-unit>
       <trans-unit id="tl_comments.reply_legend">
         <source>Reply</source>
@@ -123,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.pending">
         <source>Awaiting moderation</source>
-        <target>Jóváhagyásra vár</target>
+        <target>Moderálásra vár</target>
       </trans-unit>
       <trans-unit id="tl_comments.tl_content">
         <source>Article</source>
@@ -139,7 +143,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.tl_faq">
         <source>FAQ</source>
-        <target>GYIK</target>
+        <target>GyIK</target>
       </trans-unit>
       <trans-unit id="tl_comments.tl_calendar_events">
         <source>Event</source>

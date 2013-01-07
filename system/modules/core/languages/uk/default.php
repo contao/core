@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -291,7 +291,6 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles'][1] = 'URL файлів застосо�
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][0] = 'URL плагінів';
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'][1] = 'URL плагінів застосовується до всіх ресурсів каталогу <em>plugins</em> (оптимізація швидкості завантаження сторінок).';
 $GLOBALS['TL_LANG']['MSC']['shortcuts'][0] = 'Комбінації клавіш панелі управління';
-$GLOBALS['TL_LANG']['MSC']['shortcuts'][1] = 'Дізнайтеся більше про прискорення робочого процесу за допомогою <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">комбінацій клавіш</ a>.';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][0] = 'Переключити всі';
 $GLOBALS['TL_LANG']['MSC']['toggleAll'][1] = 'Розгорнути або згорнути всі вузли';
 $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0] = 'Обліковий запис Contao заблокован';
@@ -499,14 +498,6 @@ $GLOBALS['TL_LANG']['MSC']['changelog'] = 'Журнал змін';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Відключити';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Перетягніть елементи для зміни їх порядку';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Байт';
-$GLOBALS['TL_LANG']['UNITS'][1] = 'Кбайт';
-$GLOBALS['TL_LANG']['UNITS'][2] = 'Мбайт';
-$GLOBALS['TL_LANG']['UNITS'][3] = 'Гбайт';
-$GLOBALS['TL_LANG']['UNITS'][4] = 'Тбайт';
-$GLOBALS['TL_LANG']['UNITS'][5] = 'Пбайт';
-$GLOBALS['TL_LANG']['UNITS'][6] = 'Эбайт';
-$GLOBALS['TL_LANG']['UNITS'][7] = 'Збайт';
-$GLOBALS['TL_LANG']['UNITS'][8] = 'Йбайт';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'Модуль';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Задіяні таблиці';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = 'Дія';

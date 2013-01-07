@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package   Repository
  * @author    Peter Koch, IBK Software AG
@@ -22,7 +22,7 @@ require_once dirname(__FILE__).'/RepositorySettings.php';
  * Basic general functions of the central repository
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
- * @author     Leo Feyer <http://contao.org>
+ * @author     Leo Feyer <https://contao.org>
  * @package    Repository
  */
 class Repository

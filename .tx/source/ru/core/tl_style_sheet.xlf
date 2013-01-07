@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.css_renamed">
         <source>Style sheet &quot;%s&quot; has been imported as &quot;%s&quot;.</source>
-        <target>Стиль &quot;%s&quot; успешно импортирован как &quot;%s&quot;.</target>
+        <target>Таблица стилей &quot;%s&quot; успешно импортирована как &quot;%s&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.new.0">
         <source>New style sheet</source>

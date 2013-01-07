@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
@@ -17,7 +17,6 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'Rich Text Editor';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'para más información sobre TinyMCE por favor visita <a href="http://tinymce.moxiecode.com" title="Abrir http://tinymce.moxiecode.com" onclick="window.open(this.href); return false;">http://tinymce.moxiecode.com</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Etiquetas inserción';
-$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'Las etiquetas de inserción son comodines que puedes insertar en cualquier lugar en Contao. Para más información visita <a href="http://www.contao.org/insert-tags.html" title="Documentación en linea de Contao" onclick="window.open(this.href); return false;">http://www.contao.org/insert-tags.html</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'Editor de código';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'Para más información sobre EditArea visita <a href="http://www.cdolivet.com/index.php?page=editArea" title="EditArea by Christophe Dolivet" onclick="window.open(this.href); return false;">http://www.cdolivet.com/index.php?page=editArea</a>.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';

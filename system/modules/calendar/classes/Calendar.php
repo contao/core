@@ -3,10 +3,10 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Calendar
- * @link    http://contao.org
+ * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -21,8 +21,8 @@ namespace Contao;
  * Class Calendar
  *
  * Provide methods regarding calendars.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Calendar
  */
 class Calendar extends \Frontend
@@ -397,15 +397,12 @@ class Calendar extends \Frontend
 			$objEvent->teaser = \String::toHtml5($objEvent->teaser);
 		}
 
-		$arrEvent = array
-		(
-			'title' => $title,
-			'description' => $objEvent->details,
-			'teaser' => $objEvent->teaser,
-			'link' => $link,
-			'published' => $objEvent->tstamp,
-			'authorName' => $objEvent->authorName
-		);
+		// Store the whole row (see #5085)
+		$arrEvent = $objEvent->row();
+
+		// Override link and title
+		$arrEvent['link'] = $link;
+		$arrEvent['title'] = $title;
 
 		// Add the article image as enclosure
 		if ($objEvent->addImage)
