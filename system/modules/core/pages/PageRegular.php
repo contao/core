@@ -481,12 +481,8 @@ class PageRegular extends \Frontend
 						$media = $objStylesheets->mediaQuery;
 					}
 
-					// Aggregate regular style sheets
-					if (!$objStylesheets->cc && !$objStylesheets->hasFontFace)
-					{
-						$GLOBALS['TL_USER_CSS'][] = 'assets/css/' . $objStylesheets->name . '.css|' . $media . '|static|' . max($objStylesheets->tstamp, $objStylesheets->tstamp2, $objStylesheets->tstamp3);
-					}
-					else
+					// Style sheets with a CC or a combination of font-face and media-type != all cannot be aggregated (see #5216)
+					if ($objStylesheets->cc || ($objStylesheets->hasFontFace && $media != 'all'))
 					{
 						$strStyleSheet = '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_ASSETS_URL . 'assets/css/' . $objStylesheets->name . '.css"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding;
 
@@ -496,6 +492,10 @@ class PageRegular extends \Frontend
 						}
 
 						$strCcStyleSheets .= $strStyleSheet . "\n";
+					}
+					else
+					{
+						$GLOBALS['TL_USER_CSS'][] = 'assets/css/' . $objStylesheets->name . '.css|' . $media . '|static|' . max($objStylesheets->tstamp, $objStylesheets->tstamp2, $objStylesheets->tstamp3);
 					}
 				}
 			}
