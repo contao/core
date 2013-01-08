@@ -95,6 +95,7 @@ $GLOBALS['TL_LANG']['tl_content']['useImage'][1] = 'Użyj obrazka jako odnośnik
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][0] = 'Pliki źródłowe';
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][1] = 'Zaznacz jeden lub więcej plików lub folderów (pliki z zaznaczonego folderu będą załączone automatycznie).';
 $GLOBALS['TL_LANG']['tl_content']['orderSRC'][0] = 'Porządek sortowania';
+$GLOBALS['TL_LANG']['tl_content']['orderSRC'][1] = 'Kolejność sortowania rzeczy.';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][0] = 'Użyj katalogu użytkownika';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][1] = 'Jeśli użytkownik jest zalogowany, użyj jego katalogu domowego jako źródła pliku.';
 $GLOBALS['TL_LANG']['tl_content']['perRow'][0] = 'Ilość miniaturek w wierszu';

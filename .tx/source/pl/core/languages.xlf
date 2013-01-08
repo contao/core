@@ -99,6 +99,7 @@
       </trans-unit>
       <trans-unit id="LNG.dz">
         <source>Dzongkha</source>
+        <target>Dzongkha</target>
       </trans-unit>
       <trans-unit id="LNG.el">
         <source>Greek</source>
@@ -406,6 +407,7 @@
       </trans-unit>
       <trans-unit id="LNG.si">
         <source>Sinhala</source>
+        <target>Sinhala</target>
       </trans-unit>
       <trans-unit id="LNG.sk">
         <source>Slovak</source>
@@ -441,6 +443,7 @@
       </trans-unit>
       <trans-unit id="LNG.st">
         <source>Sotho</source>
+        <target>Sotho</target>
       </trans-unit>
       <trans-unit id="LNG.su">
         <source>Sudanese</source>
@@ -460,6 +463,7 @@
       </trans-unit>
       <trans-unit id="LNG.te">
         <source>Telugu</source>
+        <target>Telugu</target>
       </trans-unit>
       <trans-unit id="LNG.tg">
         <source>Tajik</source>

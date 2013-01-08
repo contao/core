@@ -17,6 +17,7 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'Editor med advanceret formatering';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'mere information om TinyMCE findes hos <a href="http://tinymce.moxiecode.com" title="Åbn http://tinymce.moxiecode.com i et nyt vindue" onclick="window.open(this.href); return false;">moxiecode.com</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Insert tags';
+$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'For mere information om insert tags se venligst <a href="https://contao.org/en/manual/3.0/managing-content.html#insert-tags" title="Contao online dokumentation" target="_blank">https://contao.org/en/manual/3.0/managing-content.html#insert-tags</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'Kode editor';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'For mere information om EditArea besøg <a href="http://www.cdolivet.com/index.php?page=editArea" title="EditArea by Christophe Dolivet" onclick="window.open(this.href); return false;">http://www.cdolivet.com/index.php?page=editArea</a>.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';

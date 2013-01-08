@@ -90,6 +90,7 @@ $GLOBALS['TL_LANG']['tl_install']['ftpSave'] = 'Zapisz hasło FTP';
 $GLOBALS['TL_LANG']['tl_install']['ftpHostError'] = 'Nie można się połączyć z serwerem FTP: %s';
 $GLOBALS['TL_LANG']['tl_install']['ftpUserError'] = 'Nie można się zalogować jako "%s"';
 $GLOBALS['TL_LANG']['tl_install']['ftpPathError'] = 'Nie można zlokalizować katalogu Contao: %s';
+$GLOBALS['TL_LANG']['tl_install']['filesRenamed'] = 'Skonfigurowany katalog plików nie istnieje!';
 $GLOBALS['TL_LANG']['tl_install']['filesWarning'] = 'Czy zmieniłeś nazwę katalogu <strong>tl_files</strong> na <strong>files</strong>? Nie możesz po prostu zmienić nazwę katalogu ponieważ wszystkie odniesienia do plików w bazie danych oraz arkusze stylów wciąż będą wskazywły poprzednią lokalizację. Jeśli chcesz zmienić nazwę tego katalogu, prosimy to zrobić po wcześniejszej aktualizacji do wersji 3 oraz dostosować bazę danych tym skryptem: %s.';
 $GLOBALS['TL_LANG']['tl_install']['CREATE'] = 'Utwórz nowe tabele';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD'] = 'Dodaj nowe kolumny';
