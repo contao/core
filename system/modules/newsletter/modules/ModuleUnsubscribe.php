@@ -135,6 +135,13 @@ class ModuleUnsubscribe extends \Module
 	protected function removeRecipient()
 	{
 		$arrChannels = \Input::post('channels');
+
+		if (!is_array($arrChannels))
+		{
+			$_SESSION['UNSUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['noChannels'];
+			$this->reload();
+		}
+
 		$arrChannels = array_intersect($arrChannels, $this->nl_channels); // see #3240
 
 		// Check the selection

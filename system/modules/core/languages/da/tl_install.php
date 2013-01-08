@@ -67,6 +67,7 @@ $GLOBALS['TL_LANG']['tl_install']['saveCollation'] = 'Ændre sortering (collatio
 $GLOBALS['TL_LANG']['tl_install']['updateX'] = 'Det ser ud til at du opdaterer fra en ældre version end %s. Er dette tilfældet, <strong>påkræves det at køre version %s opdateringen</strong> for at sikre integriteten af dine data!';
 $GLOBALS['TL_LANG']['tl_install']['updateXrun'] = 'Kør version %s opdateringen';
 $GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'Kør version %s opdatering - trin %s';
+$GLOBALS['TL_LANG']['tl_install']['importException'] = 'Importeringen fejlede! Er database strukturen up to date og er skabelon filen kompatibel med din version af Contao?';
 $GLOBALS['TL_LANG']['tl_install']['importError'] = 'Vælg venligst en skabelon!';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm'] = 'Skabelon importeret i %s';
 $GLOBALS['TL_LANG']['tl_install']['importWarn'] = 'Al eksisterende data til blive slettet!';

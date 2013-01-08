@@ -121,9 +121,17 @@ abstract class Controller extends \System
 			}
 		}
 
-		// Add the theme templates
-		$objTheme = \ThemeModel::findAll(array('order'=>'name'));
+		// Wrap into a try-catch block (see #5210)
+		try
+		{
+			$objTheme = \ThemeModel::findAll(array('order'=>'name'));
+		}
+		catch (\Exception $e)
+		{
+			$objTheme = null;
+		}
 
+		// Add the theme templates
 		if ($objTheme !== null)
 		{
 			while ($objTheme->next())

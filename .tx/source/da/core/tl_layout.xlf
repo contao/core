@@ -187,9 +187,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.form.css.0">
         <source>Basic forms</source>
+        <target>Basis formularer</target>
       </trans-unit>
       <trans-unit id="tl_layout.form.css.1">
         <source>Adds basic form elements and buttons formatting.</source>
+        <target>Tilføjer basis formatering af formular elementer og knapper.</target>
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.0">
         <source>TinyMCE style sheet</source>

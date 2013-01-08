@@ -1,6 +1,20 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.0.3 (2013-01-08)
+--------------------------
+
+### Fixed
+Do not separate a style sheet with a font-face selector if the definition is
+invisible or the media type of the style sheet is "all" (see #5216).
+
+### Fixed
+Looking for theme templates broke the install routine (see #5210).
+
+### Fixed
+Correctly handle empty newsletter channel selections.
+
+
 Version 3.0.2 (2013-01-07)
 --------------------------
 
