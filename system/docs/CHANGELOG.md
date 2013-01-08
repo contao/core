@@ -5,6 +5,9 @@ Version 3.0.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Looking for theme templates broke the install routine (see #5210).
+
+### Fixed
 Correctly handle empty newsletter channel selections.
 
 
