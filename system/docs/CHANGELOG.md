@@ -4,6 +4,8 @@ Contao Open Source CMS Changelog
 Version 3.0.4 (2013-XX-XX)
 --------------------------
 
+### Fixed
+Added lazy template loading for newsletter mail templates.
 
 
 Version 3.0.3 (2013-01-08)
