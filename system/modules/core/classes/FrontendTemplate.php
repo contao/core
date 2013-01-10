@@ -60,10 +60,6 @@ class FrontendTemplate extends \Template
 		// Ignore certain URL parameters
 		$arrIgnore = array('id', 'file', 'token', 'day', 'month', 'year');
 
-		if ($GLOBALS['TL_CONFIG']['useAutoItem'])
-		{
-			$arrIgnore[] = 'auto_item';
-		}
 		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 		{
 			$arrIgnore[] = 'language';
@@ -83,7 +79,7 @@ class FrontendTemplate extends \Template
 					continue; // see #4141
 				}
 
-				if ($GLOBALS['TL_CONFIG']['useAutoItem'] && in_array($key, $GLOBALS['TL_AUTO_ITEM']))
+				if ($GLOBALS['TL_CONFIG']['useAutoItem'] && ($key == 'auto_item' || in_array($key, $GLOBALS['TL_AUTO_ITEM'])))
 				{
 					$strParams .= '/' . \Input::get($key);
 				}
