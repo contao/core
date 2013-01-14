@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Added the missing `UserGroupModel` class (see #5218).
+
+### Fixed
 Handle the case that `glob()` returns `false` (see #5226).
 
 ### Fixed
