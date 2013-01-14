@@ -110,18 +110,23 @@ abstract class Controller extends \System
 			$arrTemplates[$strTemplate] = $strTemplate;
 		}
 
-		// Add the customized templates
-		foreach (glob(TL_ROOT . '/templates/' . $strPrefix . '*') as $strFile)
-		{
-			$strTemplate = basename($strFile, strrchr($strFile, '.'));
+		$arrCustomized = glob(TL_ROOT . '/templates/' . $strPrefix . '*');
 
-			if (!isset($arrTemplates[$strTemplate]))
+		// Add the customized templates
+		if (is_array($arrCustomized))
+		{
+			foreach ($arrCustomized as $strFile)
 			{
-				$arrTemplates[$strTemplate] = $strTemplate;
+				$strTemplate = basename($strFile, strrchr($strFile, '.'));
+
+				if (!isset($arrTemplates[$strTemplate]))
+				{
+					$arrTemplates[$strTemplate] = $strTemplate;
+				}
 			}
 		}
 
-		// Wrap into a try-catch block (see #5210)
+		// Try to select the themes (see #5210)
 		try
 		{
 			$objTheme = \ThemeModel::findAll(array('order'=>'name'));
@@ -138,13 +143,18 @@ abstract class Controller extends \System
 			{
 				if ($objTheme->templates != '')
 				{
-					foreach (glob(TL_ROOT . '/' . $objTheme->templates . '/' . $strPrefix . '*') as $strFile)
-					{
-						$strTemplate = basename($strFile, strrchr($strFile, '.'));
+					$arrThemeTemplates = glob(TL_ROOT . '/' . $objTheme->templates . '/' . $strPrefix . '*');
 
-						if (!isset($arrTemplates[$strTemplate]))
+					if (is_array($arrThemeTemplates))
+					{
+						foreach ($arrThemeTemplates as $strFile)
 						{
-							$arrTemplates[$strTemplate] = $strTemplate . ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
+							$strTemplate = basename($strFile, strrchr($strFile, '.'));
+
+							if (!isset($arrTemplates[$strTemplate]))
+							{
+								$arrTemplates[$strTemplate] = $strTemplate . ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
+							}
 						}
 					}
 				}

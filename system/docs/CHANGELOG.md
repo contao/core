@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Handle the case that `glob()` returns `false` (see #5226).
+
+### Fixed
 The table sorter did not work if jQuery and MooTools were active (see #5228).
 
 ### Fixed
