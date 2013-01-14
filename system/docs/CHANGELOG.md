@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+The table sorter did not work if jQuery and MooTools were active (see #5228).
+
+### Fixed
 Copy all content elements if pages are duplicated with childs (see #5241).
 
 ### Fixed
