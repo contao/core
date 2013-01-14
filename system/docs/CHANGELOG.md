@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Copy all content elements if pages are duplicated with childs (see #5241).
+
+### Fixed
 Added lazy template loading for newsletter mail templates.
 
 
