@@ -604,6 +604,8 @@ abstract class Widget extends Controller
 	 */
 	protected function validator($varInput)
 	{
+		global $objPage;
+
 		if (is_array($varInput))
 		{
 			foreach ($varInput as $k=>$v)
@@ -715,50 +717,57 @@ abstract class Widget extends Controller
 				// Check whether the current value is a valid date format
 				case 'date':
 					$objDate = new Date();
+					$strFormat = (TL_MODE == 'FE') ? $objPage->dateFormat : $GLOBALS['TL_CONFIG']['dateFormat'];
 
-					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'$~i', $varInput))
+					if (!preg_match('~^'. $objDate->getRegexp($strFormat) .'$~i', $varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['dateFormat'])));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], $objDate->getInputFormat($strFormat)));
 					}
-
-					// Validate the date (see #5086)
-					try
+					else
 					{
-						new Date($varInput);
-					}
-					catch (Exception $e)
-					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
+						// Validate the date (see #5086)
+						try
+						{
+							new Date($varInput);
+						}
+						catch (Exception $e)
+						{
+							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
+						}
 					}
 					break;
 
 				// Check whether the current value is a valid time format
 				case 'time':
 					$objDate = new Date();
+					$strFormat = (TL_MODE == 'FE') ? $objPage->timeFormat : $GLOBALS['TL_CONFIG']['timeFormat'];
 
-					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'$~i', $varInput))
+					if (!preg_match('~^'. $objDate->getRegexp($strFormat) .'$~i', $varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['timeFormat'])));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], $objDate->getInputFormat($strFormat)));
 					}
 					break;
 
 				// Check whether the current value is a valid date and time format
 				case 'datim':
 					$objDate = new Date();
+					$strFormat = (TL_MODE == 'FE') ? $objPage->datimFormat : $GLOBALS['TL_CONFIG']['datimFormat'];
 
-					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varInput))
+					if (!preg_match('~^'. $objDate->getRegexp($strFormat) .'$~i', $varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['datimFormat'])));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], $objDate->getInputFormat($strFormat)));
 					}
-
-					// Validate the date (see #5086)
-					try
+					else
 					{
-						new Date($varInput);
-					}
-					catch (Exception $e)
-					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
+						// Validate the date (see #5086)
+						try
+						{
+							new Date($varInput);
+						}
+						catch (Exception $e)
+						{
+							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
+						}
 					}
 					break;
 

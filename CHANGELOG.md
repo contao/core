@@ -5,6 +5,9 @@ Version 2.11.9 (2013-XX-XX)
 ---------------------------
 
 ### Fixed
+Show the correct date/time format when validating front end forms (see #5238).
+
+### Fixed
 Unset non-existing fields when restoring versions (see #5219).
 
 
