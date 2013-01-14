@@ -712,6 +712,8 @@ abstract class Widget extends \Controller
 	 */
 	protected function validator($varInput)
 	{
+		global $objPage;
+
 		if (is_array($varInput))
 		{
 			foreach ($varInput as $k=>$v)
@@ -804,17 +806,20 @@ abstract class Widget extends \Controller
 				case 'date':
 					if (!\Validator::isDate($varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], \Date::getInputFormat($GLOBALS['TL_CONFIG']['dateFormat'])));
+						$strFormat = (TL_MODE == 'FE') ? $objPage->dateFormat : $GLOBALS['TL_CONFIG']['dateFormat'];
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], \Date::getInputFormat($strFormat)));
 					}
-
-					// Validate the date (see #5086)
-					try
+					else
 					{
-						new \Date($varInput);
-					}
-					catch (\OutOfBoundsException $e)
-					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
+						// Validate the date (see #5086)
+						try
+						{
+							new \Date($varInput);
+						}
+						catch (\OutOfBoundsException $e)
+						{
+							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
+						}
 					}
 					break;
 
@@ -822,7 +827,8 @@ abstract class Widget extends \Controller
 				case 'time':
 					if (!\Validator::isTime($varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], \Date::getInputFormat($GLOBALS['TL_CONFIG']['timeFormat'])));
+						$strFormat = (TL_MODE == 'FE') ? $objPage->timeFormat : $GLOBALS['TL_CONFIG']['timeFormat'];
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], \Date::getInputFormat($strFormat)));
 					}
 					break;
 
@@ -830,17 +836,20 @@ abstract class Widget extends \Controller
 				case 'datim':
 					if (!\Validator::isDatim($varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], \Date::getInputFormat($GLOBALS['TL_CONFIG']['datimFormat'])));
+						$strFormat = (TL_MODE == 'FE') ? $objPage->datimFormat : $GLOBALS['TL_CONFIG']['datimFormat'];
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], \Date::getInputFormat($strFormat)));
 					}
-
-					// Validate the date (see #5086)
-					try
+					else
 					{
-						new \Date($varInput);
-					}
-					catch (\OutOfBoundsException $e)
-					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
+						// Validate the date (see #5086)
+						try
+						{
+							new \Date($varInput);
+						}
+						catch (\OutOfBoundsException $e)
+						{
+							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
+						}
 					}
 					break;
 
