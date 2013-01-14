@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.9 (2013-XX-XX)
 ---------------------------
 
+### Fixed
+Unset non-existing fields when restoring versions (see #5219).
+
 
 Version 2.11.8 (2013-01-07)
 ---------------------------
