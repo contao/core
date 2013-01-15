@@ -270,10 +270,11 @@ class Input
 	/**
 	 * Set a $_GET variable
 	 * 
-	 * @param string $strKey   The variable name
-	 * @param mixed  $varValue The variable value
+	 * @param string  $strKey       The variable name
+	 * @param mixed   $varValue     The variable value
+	 * @param boolean $blnAddUnused If true, the value usage will be checked
 	 */
-	public static function setGet($strKey, $varValue)
+	public static function setGet($strKey, $varValue, $blnAddUnused=false)
 	{
 		$strKey = static::cleanKey($strKey);
 
@@ -287,7 +288,11 @@ class Input
 		else
 		{
 			$_GET[$strKey] = $varValue;
-			static::$arrUnusedGet[$strKey] = $varValue; // see #4277
+
+			if ($blnAddUnused)
+			{
+				static::$arrUnusedGet[$strKey] = $varValue; // see #4277
+			}
 		}
 	}
 
