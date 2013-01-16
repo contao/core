@@ -110,7 +110,7 @@ class Main extends Backend
 			$this->Template->title = $GLOBALS['TL_LANG']['ERR']['general'];
 		}
 		// Navigation customizer
-		elseif (Input::get('act') == 'nav_customizer')
+		elseif (Input::get('act') == 'customize_nav')
 		{
 			$this->Template->main .= $this->getNavigationCustomizer();
 			$this->Template->title = $GLOBALS['TL_LANG']['MSC']['home'];
@@ -243,6 +243,23 @@ class Main extends Backend
 
 		return $objTemplate->parse();
 	}
+
+
+    /**
+     * Returns the back end navigation customizer
+     * @return string
+     */
+    protected function getNavigationCustomizer()
+    {
+        $GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/tree/powertools-tree.js';
+        $objTemplate = new \BackendTemplate('be_nav_customizer');
+        $arrModules =  $this->User->navigation(true);
+        $objTemplate->originalModules = $arrModules;
+        $objTemplate->personalizedModules = $this->User->personalizeNavigation($arrModules);
+        $objTemplate->originalLabel = 'Default navigation';
+        $objTemplate->personalizedLabel = 'Your personal navigation';
+        return $objTemplate->parse();
+    }
 
 
 	/**

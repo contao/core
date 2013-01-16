@@ -1,21 +1,41 @@
-<ul id="nav_customizer" class="level_1">
-	<?php foreach ($this->modules as $strGroup=>$arrModules): ?>
-	<li><span><?php echo $arrModules['label']; ?></span>
-		<?php if ($arrModules['modules']): ?>
-			<ul class="level_2">
-				<?php foreach ($arrModules['modules'] as $arrConfig): ?>
-				<li><span><?php echo $arrConfig['label']; ?></span></li>
-				<?php endforeach; ?>
-			</ul>
-		<?php endif; ?>
-		</li>
-	<?php endforeach; ?>
-</ul>
-
+<div id="navigation_customizer">
+    <div class="original">
+        <h2><?php echo $this->originalLabel; ?></h2>
+        <ul id="original_nav" class="level_1">
+            <?php foreach ($this->originalModules as $strGroup=>$arrModules): ?>
+            <li><span><?php echo $arrModules['label']; ?></span>
+                <?php if ($arrModules['modules']): ?>
+                <ul class="level_2">
+                    <?php foreach ($arrModules['modules'] as $arrConfig): ?>
+                    <li <?php echo $arrConfig['icon']; ?>><span><?php echo $arrConfig['label']; ?></span></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <div class="personal">
+        <h2><?php echo $this->personalizedLabel; ?></h2>
+        <ul id="personal_nav" class="level_1">
+            <?php foreach ($this->personalizedModules as $strGroup=>$arrModules): ?>
+            <li><span><?php echo $arrModules['label']; ?></span>
+                <?php if ($arrModules['modules']): ?>
+                <ul class="level_2">
+                    <?php foreach ($arrModules['modules'] as $arrConfig): ?>
+                    <li <?php echo $arrConfig['icon']; ?>><span><?php echo $arrConfig['label']; ?></span></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
 <script>
 (function() {
 	window.addEvent('domready', function() {
-		new Tree('nav_customizer', {
+		new Tree('original_nav', {
 
 			checkDrag: function(element) {
 			return true;

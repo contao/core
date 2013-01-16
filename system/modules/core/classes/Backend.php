@@ -720,17 +720,4 @@ abstract class Backend extends \Controller
 
 		return $strFiles . $strFolders;
 	}
-
-
-	/**
-	 * Returns the back end navigation customizer
-	 * @return string
-	 */
-	public function getNavigationCustomizer()
-	{
-		$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/tree/powertools-tree.js';
-		$objTemplate = new \BackendTemplate('be_nav_customizer');
-		$objTemplate->modules = $this->User->navigation();
-		return $objTemplate->parse();
-	}
 }
