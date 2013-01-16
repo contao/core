@@ -295,7 +295,7 @@ class Main extends Backend
 
         // Default or personalized navigation?
         $session = $this->Session->getData();
-        $blnPersonalizedNav = (isset($session['customized_nav'])) ?: false;
+        $blnPersonalizedNav = (boolean) $session['customized_nav'];
         $this->Template->customizedNav = $blnPersonalizedNav;
 
 		// Back end navigation
