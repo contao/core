@@ -1076,59 +1076,6 @@ ul.sgallery .gimage {
 	padding-right:1px;
 }
 
-/* Navigation icons */
-a.navigation.article {
-	background-image:url("images/article.gif");
-}
-a.navigation.news {
-	background-image:url("images/news.gif");
-}
-a.navigation.flash {
-	background-image:url("images/flash.gif");
-}
-a.navigation.form {
-	background-image:url("images/form.gif");
-}
-a.navigation.themes {
-	background-image:url("images/themes.gif");
-}
-a.navigation.page {
-	background-image:url("images/page.gif");
-}
-a.navigation.member {
-	background-image:url("images/member.gif");
-}
-a.navigation.mgroup {
-	background-image:url("images/mgroup.gif");
-}
-a.navigation.user {
-	background-image:url("images/user.gif");
-}
-a.navigation.group {
-	background-image:url("images/group.gif");
-}
-a.navigation.files {
-	background-image:url("images/files.gif");
-}
-a.navigation.log {
-	background-image:url("images/log.gif");
-}
-a.navigation.settings {
-	background-image:url("images/settings.gif");
-}
-a.navigation.maintenance {
-	background-image:url("images/cache.gif");
-}
-a.navigation.undo {
-	background-image:url("images/undo.gif");
-}
-a.navigation.login {
-	background-image:url("images/login.gif");
-}
-a.navigation.tpl_editor {
-	background-image:url("images/template_editor.gif");
-}
-
 /* Default icon classes */
 a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header_logout,.header_back,.header_new,.header_rss,
 .header_edit_all,.header_delete_all,.header_new_folder,.header_css_import,.header_theme_import,.header_toggle,.header_sync {

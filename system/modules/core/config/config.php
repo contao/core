@@ -22,12 +22,14 @@ $GLOBALS['BE_MOD'] = array
 		'article' => array
 		(
 			'tables' => array('tl_article', 'tl_content'),
-			'table' => array('TableWizard', 'importTable'),
-			'list' => array('ListWizard', 'importList')
+			'table'  => array('TableWizard', 'importTable'),
+			'list'   => array('ListWizard', 'importList'),
+            'icon'   => 'system/themes/default/images/article.gif' // @todo: do we have to put those into the core folder? it's not consistent anyway (e.g. devtools, calendar, faq etc. can't be overriden by CSS anyway)
 		),
 		'form' => array
 		(
-			'tables' => array('tl_form', 'tl_form_field')
+			'tables' => array('tl_form', 'tl_form_field'),
+            'icon'   => 'system/themes/default/images/form.gif' // @todo: do we have to put those into the core folder? it's not consistent anyway (e.g. devtools, calendar, faq etc. can't be overriden by CSS anyway)
 		)
 	),
 
@@ -39,17 +41,20 @@ $GLOBALS['BE_MOD'] = array
 			'tables' => array('tl_theme', 'tl_module', 'tl_style_sheet', 'tl_style', 'tl_layout'),
 			'importTheme' => array('Theme', 'importTheme'),
 			'exportTheme' => array('Theme', 'exportTheme'),
-			'import' => array('StyleSheets', 'importStyleSheet')
+			'import' => array('StyleSheets', 'importStyleSheet'),
+            'icon'   => 'system/themes/default/images/themes.gif' // @todo: do we have to put those into the core folder? it's not consistent anyway (e.g. devtools, calendar, faq etc. can't be overriden by CSS anyway)
 		),
 		'page' => array
 		(
-			'tables' => array('tl_page')
-		),
+			'tables' => array('tl_page'),
+            'icon'   => 'system/themes/default/images/page.gif' // @todo: do we have to put those into the core folder? it's not consistent anyway (e.g. devtools, calendar, faq etc. can't be overriden by CSS anyway)
+        ),
 		'tpl_editor' => array
 		(
 			'tables' => array('tl_templates'),
-			'new_tpl' => array('tl_templates', 'addNewTemplate')
-		)
+			'new_tpl' => array('tl_templates', 'addNewTemplate'),
+            'icon'   => 'system/themes/default/images/template_editor.gif' // @todo: do we have to put those into the core folder? it's not consistent anyway (e.g. devtools, calendar, faq etc. can't be overriden by CSS anyway)
+        )
 	),
 
 	// Account modules
@@ -57,20 +62,24 @@ $GLOBALS['BE_MOD'] = array
 	(
 		'member' => array
 		(
-			'tables' => array('tl_member')
-		),
+			'tables' => array('tl_member'),
+            'icon'   => 'system/themes/default/images/member.gif' // @todo: do we have to put those into the core folder? it's not consistent anyway (e.g. devtools, calendar, faq etc. can't be overriden by CSS anyway)
+        ),
 		'mgroup' => array
 		(
-			'tables' => array('tl_member_group')
-		),
+			'tables' => array('tl_member_group'),
+            'icon'   => 'system/themes/default/images/mgroup.gif' // @todo: do we have to put those into the core folder? it's not consistent anyway (e.g. devtools, calendar, faq etc. can't be overriden by CSS anyway)
+        ),
 		'user' => array
 		(
-			'tables' => array('tl_user')
-		),
+			'tables' => array('tl_user'),
+            'icon'   => 'system/themes/default/images/user.gif' // @todo: do we have to put those into the core folder? it's not consistent anyway (e.g. devtools, calendar, faq etc. can't be overriden by CSS anyway)
+        ),
 		'group' => array
 		(
-			'tables' => array('tl_user_group')
-		)
+			'tables' => array('tl_user_group'),
+            'icon'   => 'system/themes/default/images/group.gif' // @todo: do we have to put those into the core folder? it's not consistent anyway (e.g. devtools, calendar, faq etc. can't be overriden by CSS anyway)
+        )
 	),
 
 	// System modules
@@ -78,24 +87,29 @@ $GLOBALS['BE_MOD'] = array
 	(
 		'files' => array
 		(
-			'tables' => array('tl_files')
-		),
+			'tables' => array('tl_files'),
+            'icon'   => 'system/themes/default/images/files.gif' // @todo: do we have to put those into the core folder? it's not consistent anyway (e.g. devtools, calendar, faq etc. can't be overriden by CSS anyway)
+        ),
 		'log' => array
 		(
-			'tables' => array('tl_log')
-		),
+			'tables' => array('tl_log'),
+            'icon'   => 'system/themes/default/images/log.gif' // @todo: do we have to put those into the core folder? it's not consistent anyway (e.g. devtools, calendar, faq etc. can't be overriden by CSS anyway)
+        ),
 		'settings' => array
 		(
-			'tables' => array('tl_settings')
-		),
+			'tables' => array('tl_settings'),
+            'icon'   => 'system/themes/default/images/settings.gif' // @todo: do we have to put those into the core folder? it's not consistent anyway (e.g. devtools, calendar, faq etc. can't be overriden by CSS anyway)
+        ),
 		'maintenance' => array
 		(
-			'callback' => 'ModuleMaintenance'
-		),
+			'callback' => 'ModuleMaintenance',
+            'icon'   => 'system/themes/default/images/cache.gif' // @todo: do we have to put those into the core folder? it's not consistent anyway (e.g. devtools, calendar, faq etc. can't be overriden by CSS anyway)
+        ),
 		'undo' => array
 		(
-			'tables' => array('tl_undo')
-		)
+			'tables' => array('tl_undo'),
+            'icon'   => 'system/themes/default/images/undo.gif' // @todo: do we have to put those into the core folder? it's not consistent anyway (e.g. devtools, calendar, faq etc. can't be overriden by CSS anyway)
+        )
 	)
 );
 
