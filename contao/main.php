@@ -293,19 +293,23 @@ class Main extends Backend
 
 		// Back end navigation
 		$objNavigationTpl = new \BackendTemplate('be_navigation');
+        $objNavigationTpl->level = 'tl_level_1';
 		$arrModules = $this->User->navigation();
+
 		foreach ($arrModules as $strGroup => $arrModuleConfig)
 		{
+            // use image
+            $arrModules[$strGroup]['label'] = $arrModules[$strGroup]['img'] . $arrModules[$strGroup]['label'];
+
 			if ($arrModuleConfig['modules'])
 			{
-				$arrModules[$strGroup]['hasSubItems'] = true;
-				$objSubNavigationTpl = new \BackendTemplate('be_navigation_item');
+				$objSubNavigationTpl = new \BackendTemplate('be_navigation');
+                $objSubNavigationTpl->level = 'tl_level_2';
 				$objSubNavigationTpl->modules = $arrModuleConfig['modules'];
-				$arrModules[$strGroup]['subItemHtml'] = $objSubNavigationTpl->parse();
+				$arrModules[$strGroup]['subitems'] = $objSubNavigationTpl->parse();
 			}
 		}
 		$objNavigationTpl->modules = $arrModules;
-		$objNavigationTpl->theme = Backend::getTheme();
 		$this->Template->navigation = $objNavigationTpl->parse();
 
 		// Front end preview links

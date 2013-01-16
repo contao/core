@@ -92,7 +92,8 @@ class Ajax extends \Backend
 
 				$this->import('BackendUser', 'User');
 
-				$objTemplate = new \BackendTemplate('be_navigation_item');
+				$objTemplate = new \BackendTemplate('be_navigation');
+                $objTemplate->level = 'tl_level_2';
 				$navigation = $this->User->navigation();
 				$objTemplate->modules = $navigation[\Input::post('id')]['modules'];
 
@@ -186,23 +187,29 @@ class Ajax extends \Backend
 			case 'loadPersonalNavigation':
 				$this->import('BackendUser', 'User');
 
-				$objNavigationTpl = new \BackendTemplate('be_navigation');
-				$arrModules = $this->User->navigation(true);
-				$arrModules = $this->User->personalizeNavigation($arrModules);
-				foreach ($arrModules as $strGroup => $arrModuleConfig)
-				{
-					if ($arrModuleConfig['modules'])
-					{
-						$arrModules[$strGroup]['hasSubItems'] = true;
-						$objSubNavigationTpl = new \BackendTemplate('be_navigation_item');
-						$objSubNavigationTpl->modules = $arrModuleConfig['modules'];
-						$arrModules[$strGroup]['subItemHtml'] = $objSubNavigationTpl->parse();
-					}
-				}
-				$objNavigationTpl->modules = $arrModules;
-				$objNavigationTpl->theme = Backend::getTheme();
-				echo json_encode($objNavigationTpl->parse());
-				exit; break;
+                // Back end navigation
+                $objNavigationTpl = new \BackendTemplate('be_navigation');
+                $objNavigationTpl->level = 'tl_level_1';
+                $arrModules = $this->User->navigation(true);
+                $arrModules = $this->User->personalizeNavigation($arrModules);
+
+                foreach ($arrModules as $strGroup => $arrModuleConfig)
+                {
+                    // use image
+                    $arrModules[$strGroup]['label'] = $arrModules[$strGroup]['img'] . $arrModules[$strGroup]['label'];
+
+                    if ($arrModuleConfig['modules'])
+                    {
+                        $objSubNavigationTpl = new \BackendTemplate('be_navigation');
+                        $objSubNavigationTpl->level = 'tl_level_2';
+                        $objSubNavigationTpl->modules = $arrModuleConfig['modules'];
+                        $arrModules[$strGroup]['subitems'] = $objSubNavigationTpl->parse();
+                    }
+                }
+
+                $objNavigationTpl->modules = $arrModules;
+                echo json_encode($objNavigationTpl->parse());
+                exit; break;
 
 			// HOOK: pass unknown actions to callback functions
 			default:

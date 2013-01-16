@@ -434,10 +434,11 @@ class BackendUser extends \User
 		{
 			if (!empty($arrGroupModules) && ($strGroupName == 'system' || $this->hasAccess(array_keys($arrGroupModules), 'modules')))
 			{
-				$arrModules[$strGroupName]['icon'] = 'modMinus.gif';
+				$arrModules[$strGroupName]['icon']  = 'modMinus.gif';
 				$arrModules[$strGroupName]['title'] = specialchars($GLOBALS['TL_LANG']['MSC']['collapseNode']);
 				$arrModules[$strGroupName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strGroupName]) ? $GLOBALS['TL_LANG']['MOD'][$strGroupName][0] : $GLOBALS['TL_LANG']['MOD'][$strGroupName]) != false) ? $label : $strGroupName;
-				$arrModules[$strGroupName]['href'] = $this->addToUrl('mtg=' . $strGroupName);
+				$arrModules[$strGroupName]['href']  = $this->addToUrl('mtg=' . $strGroupName);
+				$arrModules[$strGroupName]['class'] = 'tl_level_1_group';
 
 				// Do not show the modules if the group is closed
 				if (!$blnShowAll && isset($session['backend_modules'][$strGroupName]) && $session['backend_modules'][$strGroupName] < 1)
@@ -469,12 +470,13 @@ class BackendUser extends \User
 							// Mark the active module and its group
 							if (\Input::get('do') == $strModuleName)
 							{
-								$arrModules[$strGroupName]['class'] = ' trail';
+								$arrModules[$strGroupName]['class'] .= ' trail';
 								$arrModules[$strGroupName]['modules'][$strModuleName]['class'] .= ' active';
 							}
 						}
 					}
 				}
+                $arrModules[$strGroupName]['img']   = \Image::getHtml($arrModules[$strGroupName]['icon']);
 			}
 		}
 
@@ -500,6 +502,8 @@ class BackendUser extends \User
 	public function personalizeNavigation(&$arrModules)
 	{
 		unset($arrModules['content']);
+		unset($arrModules['user']);
+		unset($arrModules['system']);
 		return $arrModules;
 	}
 }
