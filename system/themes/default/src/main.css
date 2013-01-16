@@ -149,13 +149,13 @@ body.popup {
 	top: 5px;
 	left: 175px;
 }
-#switch_nav.default {
+.default #switch_nav {
 	background: url("images/be_navi-icon_default.png") no-repeat;
 }
-#switch_nav.personal {
+.personal #switch_nav {
 	background: url("images/be_navi-icon_user.png") no-repeat;
 }
-#switch_nav:hover, #switch_nav.animated {
+#switch_nav:hover, .animated #switch_nav {
 	background: url("images/be_navi-icon_ani.gif") no-repeat;
 }
 /* Buttons */
@@ -1369,4 +1369,15 @@ fieldset.collapsed > legend {
 /* Navigation customizer */
 #nav_customizer li ul li {
 	margin-left: 15px;
+}
+#tl_navigation .customize_nav {
+	display:block;
+	margin: 0 1px 1px;
+	padding: 4px 8px 6px;
+	background: #b3b6b3;
+	color: #fff;
+	border-radius: 0 0 3px 3px;
+}
+#tl_navigation.default .customize_nav {
+	display:none;
 }

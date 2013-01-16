@@ -1687,7 +1687,7 @@ var Backend =
 			var newEl = placeholder.getFirst();
 
 			// show personal
-			if (this.get('class') == 'default') {
+			if (document.id('tl_navigation').get('class') == 'default') {
 				if (!newEl) {
 					new Request.JSON({
 						url: window.location.href,
@@ -1696,7 +1696,7 @@ var Backend =
 							newEl = placeholder.getFirst();
 							newEl.store('contao_height', Number.from(newEl.getStyle('height'))).setStyles({'opacity': 0, 'height': 0});
 
-							Backend.swapNavigations('personal', oldEl, newEl, wrapper, placeholder, self);
+							Backend.swapNavigations('personal', oldEl, newEl, wrapper, placeholder);
 
 							// HOOK
 							window.fireEvent('ajax_change');
@@ -1704,16 +1704,16 @@ var Backend =
 					}).post({'action':'loadPersonalNavigation', 'REQUEST_TOKEN':Contao.request_token});
 				}
 				else {
-					Backend.swapNavigations('personal', oldEl, newEl, wrapper, placeholder, self);
+					Backend.swapNavigations('personal', oldEl, newEl, wrapper, placeholder);
 				}
 			}
 			else {
-				Backend.swapNavigations('default', oldEl, newEl, wrapper, placeholder, self);
+				Backend.swapNavigations('default', oldEl, newEl, wrapper, placeholder);
 			}
 		});
 	},
 
-	swapNavigations: function(newClass, oldEl, newEl, wrapper, placeholder, switchEl) {
+	swapNavigations: function(newClass, oldEl, newEl, wrapper, placeholder) {
 		var oldElHeight = Number.from(oldEl.getStyle('height'));
 		var newElHeight = Number.from(newEl.retrieve('contao_height'));
 
@@ -1729,7 +1729,7 @@ var Backend =
 		new Fx.Morph(oldEl, {
 			duration: durationOld,
 			onStart: function() {
-				switchEl.set('class', 'animated');
+				document.id('tl_navigation').set('class', 'animated');
 			},
 			onComplete: function() {
 				// inject new element
@@ -1744,7 +1744,7 @@ var Backend =
 				oldEl.inject(placeholder);
 
 				// update class
-				switchEl.set('class', newClass);
+				document.id('tl_navigation').set('class', newClass);
 			}
 		}).start({
 			'height': 0,

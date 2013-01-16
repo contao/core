@@ -61,15 +61,16 @@
 <div id="container">
 <div id="left">
 
-<div id="tl_navigation">
+<div id="tl_navigation" class="default">
 
 <h1><?php echo $this->backendModules; ?></h1>
-<a href="#" id="switch_nav" class="default"></a>
+<a href="#" id="switch_nav"></a>
 
 <a href="<?php echo $this->request; ?>#skipNavigation" class="invisible"><?php echo $this->skipNavigation; ?></a>
 
 <div id="navigation_wrapper">
 <?php echo $this->navigation; ?>
+<a class="customize_nav" href="<?php echo $this->customizeNavLink; ?>"><?php echo $this->customizeNavLabel; ?></a>
 <div class="ajax_placeholder"></div>
 </div>
 

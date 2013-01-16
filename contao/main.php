@@ -290,6 +290,8 @@ class Main extends Backend
 		$this->Template->isAdmin = $this->User->isAdmin;
 		$this->Template->coreOnlyOff = specialchars($GLOBALS['TL_LANG']['MSC']['coreOnlyOff']);
 		$this->Template->coreOnlyHref = $this->addToUrl('smo=1');
+		$this->Template->customizeNavLink = 'contao/main.php?act=customize_nav';
+		$this->Template->customizeNavLabel = $GLOBALS['TL_LANG']['MSC']['customizeNavigation'];
 
 		// Back end navigation
 		$objNavigationTpl = new \BackendTemplate('be_navigation');

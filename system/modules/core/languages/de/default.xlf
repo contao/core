@@ -1971,6 +1971,10 @@ Diese E-Mail wurde von Contao generiert. Sie können nicht darauf antworten.
         <source>Drag the items to re-order them</source>
         <target>Elemente können durch Ziehen umsortiert werden</target>
       </trans-unit>
+      <trans-unit id="MSC.customizeNavigation">
+        <source>Customize navigation</source>
+        <target>Navigation personalisieren</target>
+      </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>
         <target>Byte</target>
