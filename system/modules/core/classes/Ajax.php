@@ -183,15 +183,25 @@ class Ajax extends \Backend
 				$this->Session->set('checkbox_groups', $state);
 				break;
 
+            // Toggle personal back end navigation
+            case 'togglePersonalNavigation':
+                $this->Session->set('customized_nav', (\Input::post('state') == 'personal') ? true : false);
+                exit; break;
+
 			// Get personal back end navigation
-			case 'loadPersonalNavigation':
+			case 'loadBackendNavigation':
 				$this->import('BackendUser', 'User');
 
                 // Back end navigation
                 $objNavigationTpl = new \BackendTemplate('be_navigation');
                 $objNavigationTpl->level = 'tl_level_1';
                 $arrModules = $this->User->navigation(true);
-                $arrModules = $this->User->personalizeNavigation($arrModules);
+                $session = $this->Session->getData();
+
+                if (\Input::post('state') == 'personal')
+                {
+                    $arrModules = $this->User->personalizeNavigation($arrModules);
+                }
 
                 foreach ($arrModules as $strGroup => $arrModuleConfig)
                 {

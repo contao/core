@@ -293,10 +293,19 @@ class Main extends Backend
 		$this->Template->customizeNavLink = 'contao/main.php?act=customize_nav';
 		$this->Template->customizeNavLabel = $GLOBALS['TL_LANG']['MSC']['customizeNavigation'];
 
+        // Default or personalized navigation?
+        $session = $this->Session->getData();
+        $blnPersonalizedNav = (isset($session['customized_nav'])) ?: false;
+        $this->Template->customizedNav = $blnPersonalizedNav;
+
 		// Back end navigation
 		$objNavigationTpl = new \BackendTemplate('be_navigation');
         $objNavigationTpl->level = 'tl_level_1';
 		$arrModules = $this->User->navigation();
+        if ($blnPersonalizedNav)
+        {
+            $arrModules = $this->User->personalizeNavigation($arrModules);
+        }
 
 		foreach ($arrModules as $strGroup => $arrModuleConfig)
 		{

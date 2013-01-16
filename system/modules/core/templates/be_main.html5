@@ -61,7 +61,7 @@
 <div id="container">
 <div id="left">
 
-<div id="tl_navigation" class="default">
+<div id="tl_navigation" class="<?php if ($this->customizedNav): ?>personal<?php else: ?>default<?php endif; ?>">
 
 <h1><?php echo $this->backendModules; ?></h1>
 <a href="#" id="switch_nav"></a>

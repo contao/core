@@ -1686,29 +1686,25 @@ var Backend =
 			var oldEl = wrapper.getFirst();
 			var newEl = placeholder.getFirst();
 
-			// show personal
-			if (document.id('tl_navigation').get('class') == 'default') {
-				if (!newEl) {
-					new Request.JSON({
-						url: window.location.href,
-						onSuccess: function(html) {
-							placeholder.set('html', html);
-							newEl = placeholder.getFirst();
-							newEl.store('contao_height', Number.from(newEl.getStyle('height'))).setStyles({'opacity': 0, 'height': 0});
+			// toggle
+			var newClass = (document.id('tl_navigation').get('class') == 'default') ? 'personal' : 'default';
+			if (!newEl) {
+				new Request.JSON({
+					url: window.location.href,
+					onSuccess: function(html) {
+						placeholder.set('html', html);
+						newEl = placeholder.getFirst();
+						newEl.store('contao_height', Number.from(newEl.getStyle('height'))).setStyles({'opacity': 0, 'height': 0});
 
-							Backend.swapNavigations('personal', oldEl, newEl, wrapper, placeholder);
+						Backend.swapNavigations(newClass, oldEl, newEl, wrapper, placeholder);
 
-							// HOOK
-							window.fireEvent('ajax_change');
-						}
-					}).post({'action':'loadPersonalNavigation', 'REQUEST_TOKEN':Contao.request_token});
-				}
-				else {
-					Backend.swapNavigations('personal', oldEl, newEl, wrapper, placeholder);
-				}
+						// HOOK
+						window.fireEvent('ajax_change');
+					}
+				}).post({'action':'loadBackendNavigation','state':newClass, 'REQUEST_TOKEN':Contao.request_token});
 			}
 			else {
-				Backend.swapNavigations('default', oldEl, newEl, wrapper, placeholder);
+				Backend.swapNavigations(newClass, oldEl, newEl, wrapper, placeholder);
 			}
 		});
 	},
@@ -1745,6 +1741,11 @@ var Backend =
 
 				// update class
 				document.id('tl_navigation').set('class', newClass);
+
+				// update session
+				new Request.JSON({
+					url: window.location.href,
+				}).post({'action':'togglePersonalNavigation', 'state':newClass, 'REQUEST_TOKEN':Contao.request_token});
 			}
 		}).start({
 			'height': 0,
