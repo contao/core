@@ -1328,10 +1328,21 @@ fieldset.collapsed > legend {
 #tl_navigation.default .customize_nav {
 	display:none;
 }
+#navigation_customizer ul.level_1 > li > span {
+	font-weight: bold;
+}
+#navigation_customizer ul.level_2 {
+	padding: 0 0 9px 0;
+}
 #navigation_customizer ul.level_2 li {
 	background-repeat: no-repeat;
+	padding: 2px 0 3px 20px;
+	background-position: left center;
+}
+#navigation_customizer > div {
+	float:left;
+	padding: 20px;
 }
 #navigation_customizer .original {
-	float:left;
 	width: 50%;
 }
