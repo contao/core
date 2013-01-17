@@ -204,28 +204,17 @@ class ClassLoader
 	 */
 	public static function scanAndRegister()
 	{
-		// Load core modules first
-		$arrCoreModules = array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository');
-		foreach($arrCoreModules as $strModule)
+		$arrModules = array_unique
+		(
+			array_merge
+			(
+				array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository'),
+				scan(TL_ROOT . '/system/modules')
+			)
+		);
+
+		foreach ($arrModules as $file)
 		{
-			$path = TL_ROOT . '/system/modules/' . $strModule;
-
-			if (file_exists($path . '/.skip') || !file_exists($path . '/config/autoload.php'))
-			{
-				continue;
-			}
-
-			include $path . '/config/autoload.php';
-		}
-
-		// Than load the extension modules
-		foreach (scan(TL_ROOT . '/system/modules') as $file)
-		{
-			if(in_array($file,$arrCoreModules))
-			{
-				continue;
-			}
-
 			$path = TL_ROOT . '/system/modules/' . $file;
 
 			if (strncmp($file, '.', 1) === 0 || !is_dir($path))
