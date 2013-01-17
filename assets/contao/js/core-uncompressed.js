@@ -1744,7 +1744,7 @@ var Backend =
 
 				// update session
 				new Request.JSON({
-					url: window.location.href,
+					url: window.location.href
 				}).post({'action':'togglePersonalNavigation', 'state':newClass, 'REQUEST_TOKEN':Contao.request_token});
 			}
 		}).start({
