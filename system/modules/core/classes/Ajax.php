@@ -221,6 +221,13 @@ class Ajax extends \Backend
                 echo json_encode($objNavigationTpl->parse());
                 exit; break;
 
+            // Store personal back end navigation
+            case 'storePersonalNavigation':
+                $this->import('BackendUser', 'User');
+                $this->User->personalized_navigation = \Input::post('data');
+                $this->User->save();
+                exit; break;
+
 			// HOOK: pass unknown actions to callback functions
 			default:
 				if (isset($GLOBALS['TL_HOOKS']['executePreActions']) && is_array($GLOBALS['TL_HOOKS']['executePreActions']))

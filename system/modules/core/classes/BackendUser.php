@@ -499,11 +499,48 @@ class BackendUser extends \User
 	 * @param array
 	 * @return array
 	 */
-	public function personalizeNavigation(&$arrModules)
+	public function personalizeNavigation($arrOriginalModules)
 	{
-		unset($arrModules['content']);
-		unset($arrModules['user']);
-		unset($arrModules['system']);
-		return $arrModules;
+        $this->import('BackendUser', 'User');
+        if (!$this->User->personalized_navigation)
+        {
+            return $arrOriginalModules;
+        }
+
+        $arrNewModules = array();
+        foreach ($this->User->personalized_navigation as $strGroup => $arrModules)
+        {
+            // groups
+            $chunks = explode('.', $strGroup);
+            // @todo somehow handle custom things
+            if ($chunks[0] == 'custom')
+            {
+                $arrNewModules['custom_' . $chunks[1]] = array
+                (
+                    'icon' => ''
+                );
+            }
+            else
+            {
+                // ...
+            }
+
+            // modules
+            foreach (array_keys($arrModules) as $strModule)
+            {
+                $modchunks = explode('.', $strModule);
+                // @todo somehow handle custom things
+                if ($modchunks[0] == 'custom')
+                {
+                    // $arrNewModules....
+                }
+                else
+                {
+                    $arrNewModules[$modchunks[0]]['modules'][$modchunks[1]] = $arrOriginalModules[$modchunks[0]]['modules'][$modchunks[1]];
+                }
+            }
+        }
+
+		return $arrNewModules;
 	}
 }

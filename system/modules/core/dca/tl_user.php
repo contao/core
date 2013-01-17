@@ -137,6 +137,10 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
+        'personalized_navigation' => array
+		(
+			'sql'                     => "blob NULL"
+		),
 		'username' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['username'],
