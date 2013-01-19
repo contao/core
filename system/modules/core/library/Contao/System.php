@@ -424,7 +424,7 @@ abstract class System
 				}
 				elseif (file_exists(TL_ROOT . '/' . $strFile . '.php'))
 				{
-					$objCacheFallback->append(static::readPhpFileWithoutTags($strFile . '.php'));
+					$objCacheFile->append(static::readPhpFileWithoutTags($strFile . '.php'));
 				}
 			}
 
