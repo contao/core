@@ -146,15 +146,6 @@ class PageRegular extends \Frontend
 		$this->Template->onload = trim($objLayout->onload);
 		$this->Template->class = trim($objLayout->cssClass . ' ' . $objPage->cssClass);
 
-		// HOOK: extension "bodyclass"
-		if (in_array('bodyclass', $this->Config->getActiveModules()))
-		{
-			if (strlen($objPage->cssBody))
-			{
-				$this->Template->class .= ' ' . $objPage->cssBody;
-			}
-		}
-
 		// Execute AFTER the modules have been generated and create footer scripts first
 		$this->createFooterScripts($objLayout);
 		$this->createHeaderScripts($objPage, $objLayout);
