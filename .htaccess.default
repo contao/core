@@ -243,7 +243,7 @@ FileETag None
   #
   # For more information see: https://github.com/contao/core/issues/4364
   ##
-  <FilesMatch "\.(htm|php|js|css|htc|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|eot|woff|svg|ttf|pdf|gz)$">
+  <FilesMatch "\.(htm|php|js|css|htc|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|mp4|webm|ogv|eot|woff|svg|ttf|pdf|gz)$">
     RewriteEngine Off
   </FilesMatch>
 
