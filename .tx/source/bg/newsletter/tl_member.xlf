@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_member.php" source-language="en">
+    <body>
+      <trans-unit id="tl_member.newsletter.0">
+        <source>Newsletters</source>
+        <target>Информационни бюлетини</target>
+      </trans-unit>
+      <trans-unit id="tl_member.newsletter.1">
+        <source>Here you can manage the member's subscriptions.</source>
+        <target>Тук може да променяте абонаментите на потребителя</target>
+      </trans-unit>
+      <trans-unit id="tl_member.newsletter_legend">
+        <source>Subscriptions</source>
+        <target>Абонаменти</target>
+      </trans-unit>
+      <trans-unit id="tl_member.newsletterDetails">
+        <source>Subscriptions</source>
+        <target>Абонаменти</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

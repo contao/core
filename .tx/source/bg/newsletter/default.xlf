@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/default.php" source-language="en">
+    <body>
+      <trans-unit id="MSC.subscribe">
+        <source>Subscribe</source>
+        <target>Абонамент</target>
+      </trans-unit>
+      <trans-unit id="MSC.unsubscribe">
+        <source>Unsubscribe</source>
+        <target>Отписване</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

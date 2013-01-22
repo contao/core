@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/modules.php" source-language="en">
+    <body>
+      <trans-unit id="MOD.newsletter.0">
+        <source>Newsletters</source>
+        <target>Информационни бюлетини</target>
+      </trans-unit>
+      <trans-unit id="MOD.newsletter.1">
+        <source>Manage subscriptions and send newsletters</source>
+        <target>Управлява абонаменти и изпраща информационни бюлетини</target>
+      </trans-unit>
+      <trans-unit id="FMD.newsletter">
+        <source>Newsletter</source>
+        <target>Информационен бюлетин</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_list.0">
+        <source>Newsletter list</source>
+        <target>Списък с Информационни бюлетини</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_list.1">
+        <source>Adds a list of newsletters to the page</source>
+        <target>добавя списък с бюлетини към страници.</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_reader.0">
+        <source>Newsletter reader</source>
+        <target>Четец за Информационни бюлетини</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_reader.1">
+        <source>Shows the details of a newsletter</source>
+        <target>показва подробности за бюлетин</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

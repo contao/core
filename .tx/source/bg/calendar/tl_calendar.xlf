@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_calendar.php" source-language="en">
+    <body>
+      <trans-unit id="tl_calendar.title.0">
+        <source>Title</source>
+        <target>Заглавие</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.title.1">
+        <source>Please enter the calendar title.</source>
+        <target>Моля, въведете заглавие за календара.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.language.0">
+        <source>Feed language</source>
+        <target>Език</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.language.1">
+        <source>Please enter the feed language according to the ISO-639 standard (e.g. &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;).</source>
+        <target>Моля, въведете езика съгласно RCF1766 (т.е. &lt;em&gt;en&lt;/em&gt;, &lt;em&gt;en-us&lt;/em&gt; или &lt;em&gt;en-cockney&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.tstamp.0">
+        <source>Revision date</source>
+        <target>Дата на ревизия</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Дата и време на последната ревизия</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

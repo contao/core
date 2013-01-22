@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/faq/languages/en/modules.php" source-language="en">
+    <body>
+      <trans-unit id="MOD.faq.0">
+        <source>FAQ</source>
+        <target>FAQ</target>
+      </trans-unit>
+      <trans-unit id="MOD.faq.1">
+        <source>Manage frequently asked questions</source>
+        <target>Този модул е за управление на "Често Задавани Въпроси"</target>
+      </trans-unit>
+      <trans-unit id="FMD.faq">
+        <source>FAQ</source>
+        <target>FAQ</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqlist.0">
+        <source>FAQ list</source>
+        <target>FAQ списък</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqlist.1">
+        <source>Adds a list of frequently asked questions to the page</source>
+        <target>С този модул можете да показвате списък от често задавани въпроси в сайта.</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqreader.0">
+        <source>FAQ reader</source>
+        <target>FAQ четец</target>
+      </trans-unit>
+      <trans-unit id="FMD.faqreader.1">
+        <source>Shows the answer to a frequently asked question</source>
+        <target>С този модул можете да показвате отделен въпрос в сайта.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

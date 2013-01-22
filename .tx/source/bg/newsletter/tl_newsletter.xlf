@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_newsletter.php" source-language="en">
+    <body>
+      <trans-unit id="tl_newsletter.title_legend">
+        <source>Title and subject</source>
+        <target>Заглавие и Относно</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sent">
+        <source>Sent</source>
+        <target>Изпратено</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.from">
+        <source>From</source>
+        <target>От</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.attachments">
+        <source>Attachments</source>
+        <target>Прикачени файлове</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

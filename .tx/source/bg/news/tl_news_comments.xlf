@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_news_comments.php" source-language="en">
+    <body>
+      <trans-unit id="tl_news_comments.name.0">
+        <source>Author</source>
+        <target>Автор</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.name.1">
+        <source>Please enter the author's name.</source>
+        <target>Моля, въведете име за автор.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.author_legend">
+        <source>Author</source>
+        <target>Автор</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.comment_legend">
+        <source>Comment</source>
+        <target>Коментар</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.publish_legend">
+        <source>Publish settings</source>
+        <target>Настройки за публикуване</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.pending">
+        <source>Awaiting moderation</source>
+        <target>Очаква модерация</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.editheader.0">
+        <source>Edit archive</source>
+        <target>Редакция на архива</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.editheader.1">
+        <source>Edit the current archive</source>
+        <target>Редакция на текущия архив</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_templates.php" source-language="en">
+    <body>
+      <trans-unit id="tl_templates.original.0">
+        <source>Original template</source>
+        <target>Оригинални шаблони</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.original.1">
+        <source>Here you can select the template that you want to customize.</source>
+        <target>Изберете оригиналния шаблон, който искате да промените. ще бъде създадено локално копие в директория &lt;em&gt;templates&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.headline">
+        <source>Add a new template</source>
+        <target>Редактор на шаблони</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.newTpl">
+        <source>Create template</source>
+        <target>Създаване на шаблон</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.exists">
+        <source>Template "%s" exists already!</source>
+        <target>Потребителски шаблон с име "%s" вече съществува!</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new.0">
+        <source>New folder</source>
+        <target>Нов шаблон</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new.1">
+        <source>Create a new folder</source>
+        <target>Създаване на нов шаблон</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
