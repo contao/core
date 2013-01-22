@@ -1992,6 +1992,7 @@ abstract class Controller extends \System
 
 		$strCacheFile = 'system/cache/dca/' . $strName . '.php';
 
+		// Load the cache file or generate it if it does not yet exist
 		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
 		{
 			include TL_ROOT . '/' . $strCacheFile;
@@ -2002,7 +2003,7 @@ abstract class Controller extends \System
 			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php');
 			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
 
-			// Parse all module folders
+			// Parse all active modules
 			foreach ($this->Config->getActiveModules() as $strModule)
 			{
 				$strFile = 'system/modules/' . $strModule . '/dca/' . $strName . '.php';

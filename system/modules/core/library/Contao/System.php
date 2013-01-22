@@ -371,8 +371,13 @@ abstract class System
 		$strCacheFallback = 'system/cache/language/en/' . $strName . '.php';
 		$strCacheFile = 'system/cache/language/' . $strLanguage . '/' . $strName . '.php';
 
-		// Generate the cache files
-		if ($GLOBALS['TL_CONFIG']['bypassCache'] || !file_exists($strCacheFile))
+		// Load the cache files or generate them if they do not yet exist
+		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
+		{
+			include TL_ROOT . '/' . $strCacheFallback;
+			include TL_ROOT . '/' . $strCacheFile;
+		}
+		else
 		{
 			// Add a short header with links to transifex.com
 			$strHeader = "<?php\n\n"
@@ -402,6 +407,7 @@ abstract class System
 			{
 				$strFallback = 'system/modules/' . $strModule . '/languages/en/' . $strName;
 
+				// Fallback language
 				if (file_exists(TL_ROOT . '/' . $strFallback . '.xlf'))
 				{
 					$objCacheFallback->append(static::convertXlfToPhp($strFallback . '.xlf', 'en'));
@@ -409,37 +415,31 @@ abstract class System
 				elseif (file_exists(TL_ROOT . '/' . $strFallback . '.php'))
 				{
 					$objCacheFallback->append(static::readPhpFileWithoutTags($strFallback . '.php'));
+					include TL_ROOT . '/' . $strFallback;
 				}
 
-				if ($strLanguage == 'en')
+				// Only process if the current language is not English
+				if ($strLanguage != 'en')
 				{
-					continue;
-				}
+					$strFile = 'system/modules/' . $strModule . '/languages/' . $strLanguage . '/' . $strName;
 
-				$strFile = 'system/modules/' . $strModule . '/languages/' . $strLanguage . '/' . $strName;
-
-				if (file_exists(TL_ROOT . '/' . $strFile . '.xlf'))
-				{
-					$objCacheFile->append(static::convertXlfToPhp($strFile . '.xlf', $strLanguage));
-				}
-				elseif (file_exists(TL_ROOT . '/' . $strFile . '.php'))
-				{
-					$objCacheFile->append(static::readPhpFileWithoutTags($strFile . '.php'));
+					// Current language
+					if (file_exists(TL_ROOT . '/' . $strFile . '.xlf'))
+					{
+						$objCacheFile->append(static::convertXlfToPhp($strFile . '.xlf', $strLanguage));
+					}
+					elseif (file_exists(TL_ROOT . '/' . $strFile . '.php'))
+					{
+						$objCacheFile->append(static::readPhpFileWithoutTags($strFile . '.php'));
+						include TL_ROOT . '/' . $strFile;
+					}
 				}
 			}
 
-			// Close the files
+			// Write the files
 			$objCacheFallback->close();
 			$objCacheFile->close();
-
-			// Override the paths
-			$strCacheFallback = $objCacheFallback->path;
-			$strCacheFile = $objCacheFile->path;
 		}
-
-		// Load the PHP array with the labels
-		include TL_ROOT . '/' . $strCacheFallback;
-		include TL_ROOT . '/' . $strCacheFile;
 
 		// HOOK: allow to load custom labels
 		if (isset($GLOBALS['TL_HOOKS']['loadLanguageFile']) && is_array($GLOBALS['TL_HOOKS']['loadLanguageFile']))
@@ -829,6 +829,36 @@ abstract class System
 		$return = "\n// $strName\n";
 		$units = $xml->getElementsByTagName('trans-unit');
 
+		// Set up the quotekey function
+		$quotekey = function($key)
+		{
+			if ($key === '0')
+			{
+				return 0;
+			}
+			elseif (is_numeric($key))
+			{
+				return intval($key);
+			}
+			else
+			{
+				return "'$key'";
+			}
+		};
+
+		// Set up the quoteval function
+		$quoteval = function($val)
+		{
+			if (strpos($val, '\n') !== false)
+			{
+				return '"' . str_replace('"', '\\"', $val) . '"';
+			}
+			else
+			{
+				return "'" . str_replace("'", "\\'", $val) . "'";
+			}
+		};
+
 		// Add the labels
 		foreach ($units as $unit)
 		{
@@ -840,16 +870,6 @@ abstract class System
 			}
 
 			$value = str_replace("\n", '\n', $node->nodeValue);
-
-			// Quote the value depending on whether there are line breaks
-			if (strpos($value, '\n') !== false)
-			{
-				$value = '"' . str_replace('"', '\\"', $value) . '"';
-			}
-			else
-			{
-				$value = "'" . str_replace("'", "\\'", $value) . "'";
-			}
 
 			// Some closing </em> tags oddly have an extra space in
 			if (strpos($value, '</ em>') !== false)
@@ -865,36 +885,22 @@ abstract class System
 				$chunks = array($chunks[0], $chunks[1] . '.' . $chunks[2], $chunks[3]);
 			}
 
-			// Set up the quote function
-			$quote = function($key)
-			{
-				if ($key === '0')
-				{
-					return 0;
-				}
-				elseif (is_numeric($key))
-				{
-					return intval($key);
-				}
-				else
-				{
-					return "'$key'";
-				}
-			};
-
 			// Create the array entries
 			switch (count($chunks))
 			{
 				case 2:
-					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quote($chunks[1]) . "] = $value;\n";
+					$GLOBALS['TL_LANG'][$chunks[0]][$chunks[1]] = $value;
+					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "] = " . $quoteval($value) . ";\n";
 					break;
 
 				case 3:
-					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quote($chunks[1]) . "][" . $quote($chunks[2]) . "] = $value;\n";
+					$GLOBALS['TL_LANG'][$chunks[0]][$chunks[1]][$chunks[2]] = $value;
+					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "][" . $quotekey($chunks[2]) . "] = " . $quoteval($value) . ";\n";
 					break;
 
 				case 4:
-					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quote($chunks[1]) . "][" . $quote($chunks[2]) . "][" . $quote($chunks[3]) . "] = $value;\n";
+					$GLOBALS['TL_LANG'][$chunks[0]][$chunks[1]][$chunks[2]][$chunks[3]] = $value;
+					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "][" . $quotekey($chunks[2]) . "][" . $quotekey($chunks[3]) . "] = " . $quoteval($value) . ";\n";
 					break;
 			}
 		}
