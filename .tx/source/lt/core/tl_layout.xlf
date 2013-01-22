@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_layout.php" source-language="en">
+    <body>
+      <trans-unit id="tl_layout.name.0">
+        <source>Title</source>
+        <target>Pavadinimas</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.name.1">
+        <source>Please enter the layout title.</source>
+        <target>Įrašykite išdėstymo pavadinimą.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.fallback.0">
+        <source>Default layout</source>
+        <target>Numatytasis išdėstymas</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.fallback.1">
+        <source>Make the layout the default layout.</source>
+        <target>Skirti išdėstymą numatytuoju.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.headerHeight.0">
+        <source>Header height</source>
+        <target>Antraštės aukštis</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.headerHeight.1">
+        <source>Please enter the height of the page header.</source>
+        <target>Įrašykite puslapio antraštės aukštį.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.footerHeight.0">
+        <source>Footer height</source>
+        <target>Apačios aukštis</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.footerHeight.1">
+        <source>Please enter the height of the page footer.</source>
+        <target>Įrašykite puslapio apačios aukštį.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cols.0">
+        <source>Columns</source>
+        <target>Stulpeliai</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cols.1">
+        <source>Please choose the number of columns.</source>
+        <target>Pasirinkite stulpelių skaičių.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1cl.0">
+        <source>Main column only</source>
+        <target>Tik pagrindinis stulpelis</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1cl.1">
+        <source>Show only one column.</source>
+        <target>rodyti tik vieną stulpelį.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2cll.0">
+        <source>Left and main column</source>
+        <target>Kairysis ir pagrindinis stulpeliai</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2cll.1">
+        <source>Show two columns with the main column on the right side.</source>
+        <target>rodyti du stulpelius, pagrindinis stulpelis dešinėje.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2clr.0">
+        <source>Main and right column</source>
+        <target>Pagrindinis ir dešinysis stulpeliai</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2clr.1">
+        <source>Show two columns with the main column on the left side.</source>
+        <target>rodyti du stulpelius, pagrindinis stulpelis kairėje.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3cl.0">
+        <source>Main, left and right column</source>
+        <target>Pagrindinis, kairysis ir dešinysis stulpeliai</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3cl.1">
+        <source>Show three columns with the main column in the middle.</source>
+        <target>rodyti tris stulpelius, pagrindinis stulpelis centre.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthLeft.0">
+        <source>Left column width</source>
+        <target>Kairiojo stulpelio plotis</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthLeft.1">
+        <source>Please enter the width of the left column.</source>
+        <target>Įrašykite kairiojo stulpelio plotį.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthRight.0">
+        <source>Right column width</source>
+        <target>Dešiniojo stulpelio plotis</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthRight.1">
+        <source>Please enter the width of the right column.</source>
+        <target>Įrašykite dešiniojo stulpelio plotį.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections.0">
+        <source>Custom layout sections</source>
+        <target>Individualūs išdėstymo blokai</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections.1">
+        <source>Custom layout sections can be defined in the back end settings.</source>
+        <target>Individualūs išdėstymo blokai gali būti nurodyti administravimo srities nustatymuose.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sPosition.0">
+        <source>Custom sections position</source>
+        <target>Individualių blokų pozicija</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sPosition.1">
+        <source>Please select the position of the custom layout sections.</source>
+        <target>Parinkite vietą individualiems išdėstymo blokams.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.stylesheet.0">
+        <source>Style sheets</source>
+        <target>Stiliai</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.stylesheet.1">
+        <source>Please select the style sheets you want to add to the layout.</source>
+        <target>Pasirinkite stilius (CSS), kuriuos norite naudoti išdėstyme.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts.0">
+        <source>Google web fonts</source>
+        <target>Google web šriftai</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts.1">
+        <source>Here you can add Google web fonts to your website. Specify the font families without the base URL (e.g. &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</source>
+        <target>Čia galite į savo tinklalapį pridėti Google web šriftus. Nurodykite šriftų šeimas be šakninio URL (pvz.: &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.newsfeeds.0">
+        <source>News feeds</source>
+        <target>Naujienų srautai</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.newsfeeds.1">
+        <source>Please select the news feeds you want to add to the layout.</source>
+        <target>Pasirinkite naujienų srautus, kuriuos norite pridėti į išdėstymą.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.calendarfeeds.0">
+        <source>Calendar feeds</source>
+        <target>Kalendorių srautai</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.calendarfeeds.1">
+        <source>Please select the calendar feeds you want to add to the layout.</source>
+        <target>Pasirinkite kalendorių srautus, kuriuos norite pridėti į išdėstymą.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules.0">
+        <source>Included modules</source>
+        <target>Įterpti moduliai</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Jei JavaScript išjungtas, prieš keisdami tvarką įsitikinkite, ar išsaugojote pakeitimus.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.template.0">
+        <source>Page template</source>
+        <target>Puslapio šablonas</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.template.1">
+        <source>Here you can select the page template.</source>
+        <target>Čia galite pasirinkti puslapio šabloną.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.doctype.0">
+        <source>Output format</source>
+        <target>Dokumento tipas</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.doctype.1">
+        <source>Here you can set the output format.</source>
+        <target>Nurodykite dokumento tipą.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mooSource.0">
+        <source>MooTools source</source>
+        <target>MooTools šaltinis</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mooSource.1">
+        <source>Here you can select from where to load the MooTools scripts.</source>
+        <target>Galite pasirinkti, kurį MooTools failą norite naudoti - vietinį ar išorinį.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cssClass.0">
+        <source>Body class</source>
+        <target>Body elemento klasė(s)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cssClass.1">
+        <source>Here you can add custom classes to the body tag.</source>
+        <target>Čia galite įrašyti savo sukurtas body žymos klases.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.onload.0">
+        <source>Body onload</source>
+        <target>Body onload</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.onload.1">
+        <source>Here you can add a body onload attribute.</source>
+        <target>Čia galite pridėti body onload atributą.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.head.0">
+        <source>Additional &amp;lt;head&amp;gt; tags</source>
+        <target>Papildomos žymos</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.head.1">
+        <source>Here you can add individual tags to the head section of the page.</source>
+        <target>Čia galite prdėti individualias puslapio head sekcijai taikomas žymas.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools.0">
+        <source>MooTools templates</source>
+        <target>Mootools šablonas</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools.1">
+        <source>Here you can select one or more MooTools templates.</source>
+        <target>Čia galite pasirinkti mootools šabloną</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script.0">
+        <source>Custom JavaScript code</source>
+        <target>Papildomas JavaScript kodas</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script.1">
+        <source>The JavaScript code which will be inserted at the bottom of the page.</source>
+        <target>JavaScript kodas, kuris bus įkeltas į puslapio apačią.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static.0">
+        <source>Static layout</source>
+        <target>Stacionarus išdėstymas</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static.1">
+        <source>Create a static layout with a fixed width and alignment.</source>
+        <target>Sukurti stacionarų fiksuoto pločio bei lygiavimo išdėstymą.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.width.0">
+        <source>Overall width</source>
+        <target>Bendras plotis</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.width.1">
+        <source>The overall width will be applied to the wrapper element.</source>
+        <target>Bendro pločio reikšmė bus taikoma kėlimo elementui.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.align.0">
+        <source>Alignment</source>
+        <target>Lygiavimas</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.align.1">
+        <source>Please select the alignment of the page.</source>
+        <target>Pasirinkite puslapio lygiavimą.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.title_legend">
+        <source>Title</source>
+        <target>Pavadinimas ir numatytasis</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.header_legend">
+        <source>Rows</source>
+        <target>Antraštė ir apačia</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.column_legend">
+        <source>Columns</source>
+        <target>Stulpelio nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections_legend">
+        <source>Custom sections</source>
+        <target>Individualūs blokai</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.style_legend">
+        <source>Style sheets</source>
+        <target>Stiliai (CSS)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.feed_legend">
+        <source>RSS/Atom feeds</source>
+        <target>RSS/Atom</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules_legend">
+        <source>Front end modules</source>
+        <target>Lankytojų srities moduliai</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.expert_legend">
+        <source>Expert settings</source>
+        <target>Eksperto nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script_legend">
+        <source>Script settings</source>
+        <target>Scenarijų nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static_legend">
+        <source>Static layout</source>
+        <target>Stacionarus išdėstymas</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_local">
+        <source>MooTools - local file</source>
+        <target>Naudoti vietinį failą</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_googleapis">
+        <source>MooTools - googleapis.com</source>
+        <target>Įkrauti iš googleapis.com</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_fallback">
+        <source>MooTools - googleapis.com with local fallback</source>
+        <target>Krauti iš googleapis.com su lokaliu palaikymu</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.html5">
+        <source>HTML</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.xhtml_strict">
+        <source>XHTML Strict</source>
+        <target>XHTML Strict</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.xhtml_trans">
+        <source>XHTML Transitional</source>
+        <target>XHTML Transitional</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.before">
+        <source>After the page header</source>
+        <target>Po puslapio antrašte</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.main">
+        <source>Inside the main column</source>
+        <target>Pagrindiniame stulpelyje</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.after">
+        <source>Before the page footer</source>
+        <target>Prieš puslapio apačią</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit_styles">
+        <source>Edit the style sheets</source>
+        <target>Redaguoti CSS stilius</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit_module">
+        <source>Edit the module</source>
+        <target>Redaguoti modulį</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.new.0">
+        <source>New layout</source>
+        <target>Naujas išdėstymas</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.new.1">
+        <source>Create a new layout</source>
+        <target>Sukurti naują išdėstymą</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.show.0">
+        <source>Layout details</source>
+        <target>Išdėstymo informacija</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.show.1">
+        <source>Show the details of layout ID %s</source>
+        <target>Rodyti išsamią išdėstymo ID %s informaciją</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit.0">
+        <source>Edit layout</source>
+        <target>Redaguoti išdėstymą</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit.1">
+        <source>Edit layout ID %s</source>
+        <target>Redaguoti išdėstymą ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cut.0">
+        <source>Move layout</source>
+        <target>Perkelti išdėstymą</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cut.1">
+        <source>Move layout ID %s</source>
+        <target>Perkelti išdėstymą ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.copy.0">
+        <source>Duplicate layout</source>
+        <target>Dubliuoti išdėstymą</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.copy.1">
+        <source>Duplicate layout ID %s</source>
+        <target>Sukurti išdėstymo ID %s kopiją</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.delete.0">
+        <source>Delete layout</source>
+        <target>Šalinti išdėstymą</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.delete.1">
+        <source>Delete layout ID %s</source>
+        <target>Šalinti išdėstymą ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.editheader.0">
+        <source>Edit theme</source>
+        <target>Redaguoti temą</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.editheader.1">
+        <source>Edit the theme settings</source>
+        <target>Redaguoti temos nustatymus</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

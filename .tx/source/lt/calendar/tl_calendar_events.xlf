@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_calendar_events.php" source-language="en">
+    <body>
+      <trans-unit id="tl_calendar_events.title.0">
+        <source>Title</source>
+        <target>Pavadinimas</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.title.1">
+        <source>Please enter the event title.</source>
+        <target>Įrašykite įvykio pavadinimą.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.alias.0">
+        <source>Event alias</source>
+        <target>Įvykio sąsaja</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.alias.1">
+        <source>The event alias is a unique reference to the event which can be called instead of its numeric ID.</source>
+        <target>Tai unikali nuoroda į įvykį, kuri gali būti naudojama vietoje ID.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.author.0">
+        <source>Author</source>
+        <target>Autorius</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.author.1">
+        <source>Here you can change the author of the event.</source>
+        <target>Čia galite keisti įvykio autorių.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addTime.0">
+        <source>Add time</source>
+        <target>Pridėti laiką</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addTime.1">
+        <source>Add a start and end time to the event.</source>
+        <target>Pridėti įvykio pradžios ir pabaigos laiką.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startTime.0">
+        <source>Start time</source>
+        <target>Pradžios laikas</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startTime.1">
+        <source>Please enter the start time according to the global time format.</source>
+        <target>Nustatykite pradžios laiką.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endTime.0">
+        <source>End time</source>
+        <target>Pabaigos laikas</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endTime.1">
+        <source>Use the same value for start and end time to create an open-ended event.</source>
+        <target>Nustatykite pabaigos laiką.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startDate.0">
+        <source>Start date</source>
+        <target>Pradžios data</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startDate.1">
+        <source>Please enter the start date according to the global date format.</source>
+        <target>Nustatykite pradžios datą.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endDate.0">
+        <source>End date</source>
+        <target>Pabaigos data</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endDate.1">
+        <source>Leave blank to create a single day event.</source>
+        <target>Nustatykite pabaigos datą. Palikite lauką tuščią, jei įvykis trunka vieną dieną.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.teaser.0">
+        <source>Event teaser</source>
+        <target>Įvykio anonsas</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.teaser.1">
+        <source>The event teaser can be shown in an event list instead of the full article. A "read more …" link will be added automatically.</source>
+        <target>Įvykio anonsas gali būti rodomas įvykių sąraše vietoje pilno straipsnio. Nuoroda "Plačiau..." bus pridėta automatiškai.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.details.0">
+        <source>Event text</source>
+        <target>Įvykio tekstas</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.details.1">
+        <source>Here you can enter the event text.</source>
+        <target>Čia įrašykite įvykio tekstą.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addImage.0">
+        <source>Add an image</source>
+        <target>Pridėti paveikslėlį</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addImage.1">
+        <source>Add an image to the event.</source>
+        <target>Pridėti paveikslėlį prie įvykio.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurring.0">
+        <source>Repeat event</source>
+        <target>Kartoti įvykį</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurring.1">
+        <source>Create a recurring event.</source>
+        <target>Sukurti pasikartojantį įvykį.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.repeatEach.0">
+        <source>Interval</source>
+        <target>Intervalas</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.repeatEach.1">
+        <source>Here you can set the recurrence interval.</source>
+        <target>Čia galite nustatyti pasikartojimo intervalą.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurrences.0">
+        <source>Recurrences</source>
+        <target>Pasikartojimai</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurrences.1">
+        <source>Set to 0 for unlimited recurrences.</source>
+        <target>Nustatykite 0, jei įvykis kartojasi nuolat.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addEnclosure.0">
+        <source>Add enclosures</source>
+        <target>Pridėti priedus</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addEnclosure.1">
+        <source>Add one or more downloadable files to the event.</source>
+        <target>Pridėti vieną ar kelis atsisiunčiamus failus prie įvykio.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.enclosure.0">
+        <source>Enclosures</source>
+        <target>Priedai</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.enclosure.1">
+        <source>Please choose the files you want to attach.</source>
+        <target>Pasirinkite failus, kuriuos norite prisegti.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.source.0">
+        <source>Redirect target</source>
+        <target>Nukreipimo tikslas</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.source.1">
+        <source>Here you can override the default redirect target.</source>
+        <target>Galite nepaisyti numatytojo nukreipimo tikslo ir nukreipti į vidinį ar išorinį puslapį.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.default.0">
+        <source>Use default</source>
+        <target>Naudoti numatytąjį</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.default.1">
+        <source>By clicking the "read more …" button, visitors will be redirected to the default page of the calendar.</source>
+        <target>Spustelėję "Plačiau..." lankytojai bus nukreipti į numatytąjį kalendoriaus puslapį.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.internal.0">
+        <source>Page</source>
+        <target>Vidinis puslapis</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.internal.1">
+        <source>By clicking the "read more …" button, visitors will be redirected to an internal page.</source>
+        <target>Spustelėję "Plačiau..." lankytojai bus nukreipti į vidinį puslapį.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.article.0">
+        <source>Article</source>
+        <target>Straipsnis</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.article.1">
+        <source>By clicking the "read more …" button, visitors will be redirected to an article.</source>
+        <target>Paspaudę "skaityti daugiau ..." mygtuką lankytojai bus nukreipti į straipsnį.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.external.0">
+        <source>External URL</source>
+        <target>Išorinis tinklalapis</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.external.1">
+        <source>By clicking the "read more …" button, visitors will be redirected to an external website.</source>
+        <target>Spustelėję "Plačiau..." lankytojai bus nukreipti į išorinį tinklalapį.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Nukreipimo puslapis</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected when clicking the event.</source>
+        <target>Pasirinkite puslapį, į kurį bus nukreipiami lankytojai, spustelėję įvykį.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.articleId.0">
+        <source>Article</source>
+        <target>Straipsnis</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.articleId.1">
+        <source>Please choose the article to which visitors will be redirected when clicking the event.</source>
+        <target>Pasirinkite straipsnį, į kurį lankytojai bus nukreipti, kai pasirinks įvykį.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cssClass.0">
+        <source>CSS class</source>
+        <target>CSS klasė</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cssClass.1">
+        <source>Here you can enter one or more classes.</source>
+        <target>Čia galite įrašyti vieną ar kelias klases.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.noComments.0">
+        <source>Disable comments</source>
+        <target>Uždrausti komentarus</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.noComments.1">
+        <source>Do not allow comments for this particular event.</source>
+        <target>Neleisti komentuoti šio renginio.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.published.0">
+        <source>Publish event</source>
+        <target>Publikuoti įvykį</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.published.1">
+        <source>Make the event publicly visible on the website.</source>
+        <target>Viešai skelbti įvykį tinklalapyje.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.start.0">
+        <source>Show from</source>
+        <target>Rodyti nuo</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.start.1">
+        <source>Do not show the event on the website before this day.</source>
+        <target>Nerodyti įvykio iki nustatytos dienos.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.stop.0">
+        <source>Show until</source>
+        <target>Rodyti iki</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.stop.1">
+        <source>Do not show the event on the website on and after this day.</source>
+        <target>Nerodyti įvykio po nustatytos dienos.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.title_legend">
+        <source>Title and author</source>
+        <target>Pavadinimas ir autorius</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.date_legend">
+        <source>Date and time</source>
+        <target>Data ir laikas</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.teaser_legend">
+        <source>Teaser</source>
+        <target>Anonsas</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.text_legend">
+        <source>Event text</source>
+        <target>Įvykio tekstas</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.image_legend">
+        <source>Image settings</source>
+        <target>Paveikslėlio nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurring_legend">
+        <source>Recurrence settings</source>
+        <target>Pasikartojimo nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.enclosure_legend">
+        <source>Enclosures</source>
+        <target>Priedai</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.source_legend">
+        <source>Redirect target</source>
+        <target>Nukreipimo tikslas</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.expert_legend">
+        <source>Expert settings</source>
+        <target>Eksperto nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.publish_legend">
+        <source>Publish settings</source>
+        <target>Publikavimo nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.days">
+        <source>day(s)</source>
+        <target>diena(-os)</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.weeks">
+        <source>week(s)</source>
+        <target>savaitė(-ės)</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.months">
+        <source>month(s)</source>
+        <target>mėnesis(-iai)</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.years">
+        <source>year(s)</source>
+        <target>metai</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.new.0">
+        <source>New event</source>
+        <target>Naujas įvykis</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.new.1">
+        <source>Create a new event</source>
+        <target>Sukurti naują įvykį</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.show.0">
+        <source>Event details</source>
+        <target>Įvykio informacija</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.show.1">
+        <source>Show the details of event ID %s</source>
+        <target>Rodyti išsamią įvykio ID %s informaciją</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.edit.0">
+        <source>Edit event</source>
+        <target>Redaguoti įvykį</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.edit.1">
+        <source>Edit event ID %s</source>
+        <target>Redaguoti įvykį ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.copy.0">
+        <source>Duplicate event</source>
+        <target>Kopijuoti įvykį</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.copy.1">
+        <source>Duplicate event ID %s</source>
+        <target>Kopijuoti įvykį ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cut.0">
+        <source>Move event</source>
+        <target>Perkelti įvykį</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cut.1">
+        <source>Move event ID %s</source>
+        <target>Perkelti įvykį ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.delete.0">
+        <source>Delete event</source>
+        <target>Šalinti įvykį</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.delete.1">
+        <source>Delete event ID %s</source>
+        <target>Šalinti įvykį ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.toggle.0">
+        <source>Publish/unpublish event</source>
+        <target>Skelbit/neskelbti renginį</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.toggle.1">
+        <source>Publish/unpublish event ID %s</source>
+        <target>Skelbit/neskelbti renginį %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.editheader.0">
+        <source>Edit calendar</source>
+        <target>Redaguoti kalendorių</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.editheader.1">
+        <source>Edit the calendar settings</source>
+        <target>Redaguoti kalendoriaus nustatymus</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.pasteafter.0">
+        <source>Paste into this calendar</source>
+        <target>Įterpti į šį kalendorių</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.pasteafter.1">
+        <source>Paste after event ID %s</source>
+        <target>Įterpti po įvykiu ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

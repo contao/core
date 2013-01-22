@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_page.php" source-language="en">
+    <body>
+      <trans-unit id="tl_page.title.0">
+        <source>Page name</source>
+        <target>Puslapio pavadinimas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.title.1">
+        <source>Please enter the page name.</source>
+        <target>Įrašykite puslapio pavadinimą.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.alias.0">
+        <source>Page alias</source>
+        <target>Puslapio sąsaja</target>
+      </trans-unit>
+      <trans-unit id="tl_page.alias.1">
+        <source>The page alias is a unique reference to the page which can be called instead of its numeric ID.</source>
+        <target>Tai unikali nuoroda į puslapį, kuri gali būti naudojama vietoje ID.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.type.0">
+        <source>Page type</source>
+        <target>Puslapio tipas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.type.1">
+        <source>Please choose the page type.</source>
+        <target>Pasirinkite puslapio tipą.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pageTitle.0">
+        <source>Page title</source>
+        <target>Puslapio antraštė</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pageTitle.1">
+        <source>Please enter the page title.</source>
+        <target>Įrašykite puslapio antraštę</target>
+      </trans-unit>
+      <trans-unit id="tl_page.language.0">
+        <source>Language</source>
+        <target>Kalba</target>
+      </trans-unit>
+      <trans-unit id="tl_page.language.1">
+        <source>Please enter the page language according to the ISO-639-1 standard (e.g. "en" for English).</source>
+        <target>Pagal ISO-639-1 standartą nurodykite puslapio kalbą (pvz. "lt" - lietuvių, "en" - anglų).</target>
+      </trans-unit>
+      <trans-unit id="tl_page.robots.0">
+        <source>Robots tag</source>
+        <target>Robotų žyma</target>
+      </trans-unit>
+      <trans-unit id="tl_page.robots.1">
+        <source>Here you can define how search engines handle the page.</source>
+        <target>Čia galite nurodyti paieškos sistemoms kaip elgtis su puslapiu.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.description.0">
+        <source>Page description</source>
+        <target>Puslapio aprašymas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.description.1">
+        <source>Here you can enter a short description of the page which will be evaluated by search engines like Google or Yahoo. Search engines usually indicate between 150 and 300 characters.</source>
+        <target>Čia galite trumpai aprašyti puslapį bei jame pateikiamą turinį. Aprašymas skirtas paieškos sistemoms, tokioms kaip Google ar Yahoo. Paprastai paieškos sistemos pasižymi 150-300 simbolių.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.redirect.0">
+        <source>Redirect type</source>
+        <target>Nukreipimo tipas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.redirect.1">
+        <source>Please choose the redirect type.</source>
+        <target>Pasirinkite nukreipimo tipą.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Nukreipimo puslapis</target>
+      </trans-unit>
+      <trans-unit id="tl_page.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected. Leave blank to redirect to the first regular subpage.</source>
+        <target>Pasirinkite puslapį, į kurį nukreipsite lankytojus.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.fallback.0">
+        <source>Language fallback</source>
+        <target>Atsarginės kalbos</target>
+      </trans-unit>
+      <trans-unit id="tl_page.fallback.1">
+        <source>Show this page if there is none that matches the visitor's language.</source>
+        <target>Nurodykite kalbas prioriteto tvarka.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.dns.0">
+        <source>Domain name</source>
+        <target>Srities (domain) pavadinimas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.dns.1">
+        <source>Here you can restrict the access to the website to a certain domain name.</source>
+        <target>Čia galite riboti prieigą prie tinklalapio ar visos srities.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.adminEmail.0">
+        <source>E-mail address of the website administrator</source>
+        <target>Tinklalapio administratoriaus el. paštas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.adminEmail.1">
+        <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
+        <target>Automatiškai sugeneruotos žinutės, tokios kaip registracija/prenumerata, bus siunčiamos šiuo elektroninio pašto adresu.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.dateFormat.0">
+        <source>Date format</source>
+        <target>Datos formatas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.dateFormat.1">
+        <source>The date format string will be parsed with the PHP date() function.</source>
+        <target>Datos formato reikšmės bus analizuojamos PHP date() funkcijos.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.timeFormat.0">
+        <source>Time format</source>
+        <target>Laiko formatas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.timeFormat.1">
+        <source>The time format string will be parsed with the PHP date() function.</source>
+        <target>Laiko formato reikšmės bus analizuojamos PHP date() funkcijos.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.datimFormat.0">
+        <source>Date and time format</source>
+        <target>Datos ir laiko formatas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.datimFormat.1">
+        <source>The date and time format string will be parsed with the PHP date() function.</source>
+        <target>Datos ir laiko formato reikšmės bus analizuojamos PHP date() funkcijos.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.createSitemap.0">
+        <source>Create an XML sitemap</source>
+        <target>Sukurti XML svetainės žemėlapį</target>
+      </trans-unit>
+      <trans-unit id="tl_page.createSitemap.1">
+        <source>Create a Google XML sitemap in the &lt;em&gt;share/&lt;/em&gt; directory.</source>
+        <target>Šakniniame aplanke sukurti XML svetainės žemėlapį Google paieškos sistemai.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemapName.0">
+        <source>Sitemap file name</source>
+        <target>Svetainės žemėlapio pavadinimas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemapName.1">
+        <source>Please enter the name of the sitemap file without extension.</source>
+        <target>Įrašykite svetainės žemėlapio failo pavadinimą be plėtinio.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.useSSL.0">
+        <source>Use HTTPS in sitemaps</source>
+        <target>Naudoti HTTPS svetainės žemėlapiuose</target>
+      </trans-unit>
+      <trans-unit id="tl_page.useSSL.1">
+        <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
+        <target>Generuoti svetainės žemėlapio nuorodas su &lt;em&gt;https://&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.autoforward.0">
+        <source>Forward to another page</source>
+        <target>Persiųsti į kita puslapį</target>
+      </trans-unit>
+      <trans-unit id="tl_page.autoforward.1">
+        <source>Redirect visitors to another page (e.g. a login page).</source>
+        <target>Persiųsti lankytojus į kitą puslapį (pvz. prisijungimo puslapį).</target>
+      </trans-unit>
+      <trans-unit id="tl_page.protected.0">
+        <source>Protect page</source>
+        <target>Apsaugoti puslapį</target>
+      </trans-unit>
+      <trans-unit id="tl_page.protected.1">
+        <source>Restrict page access to certain member groups.</source>
+        <target>Riboti puslapio prieigą tam tikroms narių grupėms.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.groups.0">
+        <source>Allowed member groups</source>
+        <target>Leidžiamos narių grupės</target>
+      </trans-unit>
+      <trans-unit id="tl_page.groups.1">
+        <source>These groups will be able to access the page.</source>
+        <target>Šios grupės galės patekti į puslapį.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeLayout.0">
+        <source>Assign a layout</source>
+        <target>Priskirti išdėstymą</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeLayout.1">
+        <source>Assign a page layout to the page and its subpages.</source>
+        <target>Priskirti puslapio išdėstymą šiam ir gilesniems puslapiams (subpages).</target>
+      </trans-unit>
+      <trans-unit id="tl_page.layout.0">
+        <source>Page layout</source>
+        <target>Puslapio išdėstymas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.layout.1">
+        <source>You can manage page layouts with the "themes" module.</source>
+        <target>Galite tvarkyti puslapių išdėstymus modulyje "puslapių išdėstymai".</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeCache.0">
+        <source>Set cache timeout</source>
+        <target>Leisti sparčiąją atmintį (cache)</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeCache.1">
+        <source>Set a cache timeout value for the page and its subpages.</source>
+        <target>Leisti sparčiąją atminį šiam ir gilesniems puslapiams.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cache.0">
+        <source>Cache timeout</source>
+        <target>Sparčiosios atminties laikas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cache.1">
+        <source>After this period, the cached version of the page will expire.</source>
+        <target>Praėjus šiam laikui puslapis turės būti patalpintas į sparčiąją atmintį iš naujo.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeChmod.0">
+        <source>Assign access rights</source>
+        <target>Priskirti prieigos teises</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeChmod.1">
+        <source>Access rights determine what back end users can do with the page.</source>
+        <target>Prieigos teisės nurodo, ką administravimo srities vartotojas gali daryti su puslapiu.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cuser.0">
+        <source>Owner</source>
+        <target>Savininkas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cuser.1">
+        <source>Please select a user as the owner of the page.</source>
+        <target>Pasirinkite vartotoją kaip puslapio savininką.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cgroup.0">
+        <source>Group</source>
+        <target>Grupė</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cgroup.1">
+        <source>Please select a group as the owner of the page.</source>
+        <target>Pasirinkite grupę kaip puslapio savininką.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.chmod.0">
+        <source>Access rights</source>
+        <target>Prieigos teisės</target>
+      </trans-unit>
+      <trans-unit id="tl_page.chmod.1">
+        <source>Please assign the access rights for the page and its subpages.</source>
+        <target>Priskirkite prieigos teises šiam ir gilesniems puslapiams.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.noSearch.0">
+        <source>Do not search</source>
+        <target>Neieškoti</target>
+      </trans-unit>
+      <trans-unit id="tl_page.noSearch.1">
+        <source>Exclude the page from the search index.</source>
+        <target>Neįtraukti šio puslapio į paieškos indeksą.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cssClass.0">
+        <source>CSS class</source>
+        <target>CSS klasė</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cssClass.1">
+        <source>The class(es) will be used in the navigation menu and the body tag.</source>
+        <target>Klasė(ės) bus naudojamos navigacijos meniu ir body žymoje.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemap.0">
+        <source>Show in sitemap</source>
+        <target>Rodyti svetainės medyja</target>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemap.1">
+        <source>Here you can define whether the page is shown in the sitemap.</source>
+        <target>Čia galite nustatyti ar puslapis bus rodomas svetainės medyje.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.hide.0">
+        <source>Hide from navigation</source>
+        <target>Paslėpti iš navigacijos</target>
+      </trans-unit>
+      <trans-unit id="tl_page.hide.1">
+        <source>Hide the page from the navigation menu.</source>
+        <target>Nerodyti šio puslapio navigacijos meniu.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.guests.0">
+        <source>Show to guests only</source>
+        <target>Rodyti tik svečiams</target>
+      </trans-unit>
+      <trans-unit id="tl_page.guests.1">
+        <source>Hide the page if there is an authenticated user.</source>
+        <target>Paslepti puslapį, jei naršo prisijungęs vartotojas.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.tabindex.0">
+        <source>Tab index</source>
+        <target>Skirtukas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.tabindex.1">
+        <source>The position of the navigation item in the tabbing order.</source>
+        <target>Navigacijos meniu pozicija atskyrimo tvarkoje.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.accesskey.0">
+        <source>Access key</source>
+        <target>Prieigos klavišas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.accesskey.1">
+        <source>A navigation item can be focused by pressing the [ALT] or [CTRL] key and the access key simultaneously.</source>
+        <target>Navigacijos meniu punktas gali būti aktyvuotas paspaudus [ALT] arba [CTRL] ir prieigos klavišą vienu metu.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.published.0">
+        <source>Publish page</source>
+        <target>Publikuoti puslapį</target>
+      </trans-unit>
+      <trans-unit id="tl_page.published.1">
+        <source>Make the page publicly visible on the website.</source>
+        <target>Viešai rodyti puslapį tinklalapyje.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.start.0">
+        <source>Show from</source>
+        <target>Rodyti nuo</target>
+      </trans-unit>
+      <trans-unit id="tl_page.start.1">
+        <source>Do not show the page on the website before this day.</source>
+        <target>Nerodyti puslapio iki nustatytos datos</target>
+      </trans-unit>
+      <trans-unit id="tl_page.stop.0">
+        <source>Show until</source>
+        <target>Rodyti iki</target>
+      </trans-unit>
+      <trans-unit id="tl_page.stop.1">
+        <source>Do not show the page on the website on and after this day.</source>
+        <target>Nerodyti puslapio po nustatytos datos.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.title_legend">
+        <source>Name and type</source>
+        <target>Pavadinimas ir tipas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.meta_legend">
+        <source>Meta information</source>
+        <target>Meta informacija</target>
+      </trans-unit>
+      <trans-unit id="tl_page.system_legend">
+        <source>System settings</source>
+        <target>Sisteminiai nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_page.redirect_legend">
+        <source>Redirect settings</source>
+        <target>Nukreipimo nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_page.dns_legend">
+        <source>DNS settings</source>
+        <target>DNS nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemap_legend">
+        <source>XML sitemap</source>
+        <target>XML svetainės žemėlapis</target>
+      </trans-unit>
+      <trans-unit id="tl_page.forward_legend">
+        <source>Auto-forward</source>
+        <target>Automatinis persiuntimas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.protected_legend">
+        <source>Access protection</source>
+        <target>Prieigos apsauga</target>
+      </trans-unit>
+      <trans-unit id="tl_page.layout_legend">
+        <source>Layout settings</source>
+        <target>Išdėstymo nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cache_legend">
+        <source>Cache settings</source>
+        <target>Sparčiosios atminties (cache) nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_page.chmod_legend">
+        <source>Access rights</source>
+        <target>Prieigos teisės</target>
+      </trans-unit>
+      <trans-unit id="tl_page.search_legend">
+        <source>Search settings</source>
+        <target>Paieškos nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_page.expert_legend">
+        <source>Expert settings</source>
+        <target>Eksperto nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_page.tabnav_legend">
+        <source>Keyboard navigation</source>
+        <target>Klaviatūros navigacija</target>
+      </trans-unit>
+      <trans-unit id="tl_page.publish_legend">
+        <source>Publish settings</source>
+        <target>Publikavimo nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_page.permanent">
+        <source>301 Permanent redirect</source>
+        <target>301 Nuolatinis nukreipimas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.temporary">
+        <source>302 Temporary redirect</source>
+        <target>302 Laikinas nukreipimas</target>
+      </trans-unit>
+      <trans-unit id="tl_page.map_default">
+        <source>Default</source>
+        <target>Pagal nutylėjimą</target>
+      </trans-unit>
+      <trans-unit id="tl_page.map_always">
+        <source>Show always</source>
+        <target>Rodyti visada</target>
+      </trans-unit>
+      <trans-unit id="tl_page.map_never">
+        <source>Show never</source>
+        <target>Niekada nerodyti</target>
+      </trans-unit>
+      <trans-unit id="tl_page.new.0">
+        <source>New page</source>
+        <target>Naujas puslapis</target>
+      </trans-unit>
+      <trans-unit id="tl_page.new.1">
+        <source>Create a new page</source>
+        <target>Sukurti naują puslapį</target>
+      </trans-unit>
+      <trans-unit id="tl_page.show.0">
+        <source>Page details</source>
+        <target>Puslapio informacija</target>
+      </trans-unit>
+      <trans-unit id="tl_page.show.1">
+        <source>Show the details of page ID %s</source>
+        <target>Rodyti išsamią puslapio ID %s informaciją.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.edit.0">
+        <source>Edit page</source>
+        <target>Redaguoti puslapį</target>
+      </trans-unit>
+      <trans-unit id="tl_page.edit.1">
+        <source>Edit page ID %s</source>
+        <target>Redaguoti puslapį ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cut.0">
+        <source>Move page</source>
+        <target>Perkelti puslapį</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cut.1">
+        <source>Move page ID %s</source>
+        <target>Perkelti puslapį ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.copy.0">
+        <source>Duplicate page</source>
+        <target>Dubliuoti pualspį</target>
+      </trans-unit>
+      <trans-unit id="tl_page.copy.1">
+        <source>Duplicate page ID %s</source>
+        <target>Sukurti puslapio ID %s kopiją</target>
+      </trans-unit>
+      <trans-unit id="tl_page.copyChilds.0">
+        <source>Duplicate with subpages</source>
+        <target>Dubliuoti su gilesniais puslapiais</target>
+      </trans-unit>
+      <trans-unit id="tl_page.copyChilds.1">
+        <source>Duplicate page ID %s with its subpages</source>
+        <target>Sukurti puslapio ID %s bei gilesnių jo puslapių (subpages) kopiją</target>
+      </trans-unit>
+      <trans-unit id="tl_page.delete.0">
+        <source>Delete page</source>
+        <target>Šalinti puslapį</target>
+      </trans-unit>
+      <trans-unit id="tl_page.delete.1">
+        <source>Delete page ID %s</source>
+        <target>Šalinti puslapį ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.toggle.0">
+        <source>Publish/unpublish page</source>
+        <target>Skelbti/neskelbti puslapį.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.toggle.1">
+        <source>Publish/unpublish page ID %s</source>
+        <target>Skelbti/neskelbti puslapį %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteafter.0">
+        <source>Paste after</source>
+        <target>Įklijuoti po</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteafter.1">
+        <source>Paste after page ID %s</source>
+        <target>Įklijuoti po puspaiu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteinto.0">
+        <source>Paste into</source>
+        <target>Įklijuoti į</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteinto.1">
+        <source>Paste into page ID %s</source>
+        <target>Įklijuoti į puslapį ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.articles.0">
+        <source>Edit articles</source>
+        <target>Redaguoti straipsnius</target>
+      </trans-unit>
+      <trans-unit id="tl_page.articles.1">
+        <source>Edit the articles of page ID %s</source>
+        <target>Redaguoti straipsnius puslapyję %s</target>
+      </trans-unit>
+      <trans-unit id="CACHE.0">
+        <source>0 (do not cache)</source>
+        <target>Nenaudoti sparčiosios atminties</target>
+      </trans-unit>
+      <trans-unit id="CACHE.5">
+        <source>5 seconds</source>
+        <target>5 sekundės</target>
+      </trans-unit>
+      <trans-unit id="CACHE.15">
+        <source>15 seconds</source>
+        <target>15 sekundžių</target>
+      </trans-unit>
+      <trans-unit id="CACHE.30">
+        <source>30 seconds</source>
+        <target>30 sekundžių</target>
+      </trans-unit>
+      <trans-unit id="CACHE.60">
+        <source>60 seconds</source>
+        <target>1 minutė</target>
+      </trans-unit>
+      <trans-unit id="CACHE.300">
+        <source>5 minutes</source>
+        <target>5 minutės</target>
+      </trans-unit>
+      <trans-unit id="CACHE.900">
+        <source>15 minutes</source>
+        <target>15 minučių</target>
+      </trans-unit>
+      <trans-unit id="CACHE.1800">
+        <source>30 minutes</source>
+        <target>30 minučių</target>
+      </trans-unit>
+      <trans-unit id="CACHE.3600">
+        <source>60 minutes</source>
+        <target>1 valanda</target>
+      </trans-unit>
+      <trans-unit id="CACHE.10800">
+        <source>3 hours</source>
+        <target>3 valandos</target>
+      </trans-unit>
+      <trans-unit id="CACHE.21600">
+        <source>6 hours</source>
+        <target>6 valandos</target>
+      </trans-unit>
+      <trans-unit id="CACHE.43200">
+        <source>12 hours</source>
+        <target>12 valandų</target>
+      </trans-unit>
+      <trans-unit id="CACHE.86400">
+        <source>24 hours</source>
+        <target>1 diena</target>
+      </trans-unit>
+      <trans-unit id="CACHE.259200">
+        <source>3 days</source>
+        <target>3 dienos</target>
+      </trans-unit>
+      <trans-unit id="CACHE.604800">
+        <source>7 days</source>
+        <target>7 dienos</target>
+      </trans-unit>
+      <trans-unit id="CACHE.2592000">
+        <source>30 days</source>
+        <target>30 dienų</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

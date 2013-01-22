@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/comments/languages/en/modules.php" source-language="en">
+    <body>
+      <trans-unit id="CTE.comments.0">
+        <source>Comments</source>
+        <target>Komentarai</target>
+      </trans-unit>
+      <trans-unit id="CTE.comments.1">
+        <source>Adds a comment form to the page</source>
+        <target>Šis turinio elementas leidžia jūsų lankytojams rašyti komentarus</target>
+      </trans-unit>
+      <trans-unit id="FMD.comments.0">
+        <source>Comments</source>
+        <target>Komentarai</target>
+      </trans-unit>
+      <trans-unit id="FMD.comments.1">
+        <source>Manage comments or guestbook entries</source>
+        <target>Valdyti komentarus arba svečių knygos įrašus.</target>
+      </trans-unit>
+      <trans-unit id="MOD.comments.0">
+        <source>Comments</source>
+        <target>Komentarai</target>
+      </trans-unit>
+      <trans-unit id="MOD.comments.1">
+        <source>Manage comments or guestbook entries</source>
+        <target>Šis modulis leidžia jums valdyti lankytojų komentarus</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

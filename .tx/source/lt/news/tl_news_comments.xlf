@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_news_comments.php" source-language="en">
+    <body>
+      <trans-unit id="tl_news_comments.pid.0">
+        <source>News item</source>
+        <target>Naujienų įrašas</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.pid.1">
+        <source>The associated news item.</source>
+        <target>Susietas naujienų įrašas.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.date.0">
+        <source>Date</source>
+        <target>Data</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.date.1">
+        <source>Please enter the comment date.</source>
+        <target>Įveskite komentaro datą.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.name.0">
+        <source>Author</source>
+        <target>Vardas</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.name.1">
+        <source>Please enter the author's name.</source>
+        <target>Įvekite autoriaus vardą</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.email.0">
+        <source>E-mail address</source>
+        <target>El. paštas</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.email.1">
+        <source>The e-mail address will not be published.</source>
+        <target>Įveskite autoriaus elektroninio pašto adresą (nebus rodomas viešai).</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.website.0">
+        <source>Website</source>
+        <target>Svetainė</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.website.1">
+        <source>Here you can enter a website address.</source>
+        <target>Galite įvesti tinklalapio adresą.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.comment.0">
+        <source>Comment</source>
+        <target>Komentaras</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.comment.1">
+        <source>Please enter the comment.</source>
+        <target>Įrašykite komentarą</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.published.0">
+        <source>Publish comment</source>
+        <target>Publikuoti komentarą</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.published.1">
+        <source>Make the comment publicly visible on the website.</source>
+        <target>Viešai rodyti komentarą tinklalapyje.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.author_legend">
+        <source>Author</source>
+        <target>Autorius</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.comment_legend">
+        <source>Comment</source>
+        <target>Komentaras</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.publish_legend">
+        <source>Publish settings</source>
+        <target>Publikavimo nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.approved">
+        <source>Approved</source>
+        <target>Patvirtintas</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.pending">
+        <source>Awaiting moderation</source>
+        <target>Laukia peržiūros</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.show.0">
+        <source>Comment details</source>
+        <target>Komentaro informacija</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.show.1">
+        <source>Show the details of comment ID %s</source>
+        <target>Rodyti išsamią komentaro ID %s informaciją</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.edit.0">
+        <source>Edit comment</source>
+        <target>Redaguoti komentarą</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.edit.1">
+        <source>Edit comment ID %s</source>
+        <target>Redaguoti komentarą ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.delete.0">
+        <source>Delete comment</source>
+        <target>Šalinti komentarą</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.delete.1">
+        <source>Delete comment ID %s</source>
+        <target>Šalinti komentarą ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.toggle.0">
+        <source>Publish/unpublish comment</source>
+        <target>Rodyti/Nerodyti komentaro</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.toggle.1">
+        <source>Publish/unpublish comment ID %s</source>
+        <target>Rodyti/Nerodyti komentaro kutio ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.editheader.0">
+        <source>Edit archive</source>
+        <target>Redaguoti archyvą</target>
+      </trans-unit>
+      <trans-unit id="tl_news_comments.editheader.1">
+        <source>Edit the current archive</source>
+        <target>Redaguoti esamą archyvą</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

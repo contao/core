@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/default.php" source-language="en">
+    <body>
+      <trans-unit id="ERR.subscribed">
+        <source>You are subscribed to the selected channels already.</source>
+        <target>Šias naujienas jau esate užsisakęs(iusi).</target>
+      </trans-unit>
+      <trans-unit id="ERR.unsubscribed">
+        <source>You are not subscribed to the selected channels.</source>
+        <target>Šių naujienų esate neužsisakęs(iusi).</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidToken">
+        <source>The activation link is invalid or outdated.</source>
+        <target>Aktyvacijos nuoroda neteisinga arba baigėsi aktyvacijai skirtas laikas.</target>
+      </trans-unit>
+      <trans-unit id="ERR.noChannels">
+        <source>Please select at least one channel.</source>
+        <target>Prašome pasirinkti bent vieną naujienų grupę.</target>
+      </trans-unit>
+      <trans-unit id="MSC.subscribe">
+        <source>Subscribe</source>
+        <target>Užsisakyti</target>
+      </trans-unit>
+      <trans-unit id="MSC.unsubscribe">
+        <source>Unsubscribe</source>
+        <target>Atsisakyti</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_subject">
+        <source>Your subscription on %s</source>
+        <target>Jūsų registracija %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_confirm">
+        <source>Thank you for your subscription. You will receive a confirmation e-mail.</source>
+        <target>Ačiū, kad užsiregistravote. Netrukus gausite patvirtinimo laišką.</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_activate">
+        <source>Your subscription has been activated.</source>
+        <target>Jūsų registracija aktyvuota.</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_removed">
+        <source>Your subscription has been cancelled.</source>
+        <target>Jūsų registracija atšaukta.</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_channels">
+        <source>Channels</source>
+        <target>Kanalai</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_maintenance.php" source-language="en">
+    <body>
+      <trans-unit id="tl_maintenance.cacheTables.0">
+        <source>Purge data</source>
+        <target>Išvalyti duomenis</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.cacheTables.1">
+        <source>Please select the data you want to purge or rebuild.</source>
+        <target>Pasirinkite duomenis, kuriuos norite išvalyti.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.frontendUser.0">
+        <source>Front end user</source>
+        <target>Išorinis vartotojas</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.frontendUser.1">
+        <source>Automatically log in a front end user to index protected pages.</source>
+        <target>Automatiškai prijungti išorinį (front end) vartotoją prie apsaugotų puslapių.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.clearCache">
+        <source>Purge data</source>
+        <target>Išvalyti duomenis</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.cacheCleared">
+        <source>The data has been purged</source>
+        <target>Duomenys buvo išvalyti</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.liveUpdate">
+        <source>Live Update</source>
+        <target>Tiesioginis atnaujinimas</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.liveUpdateId">
+        <source>Live Update ID</source>
+        <target>Tiesioginio atnaujinimo ID</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.upToDate">
+        <source>Your Contao version %s is up to date</source>
+        <target>Contao versija %s nereikalauja atnaujinimo</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.newVersion">
+        <source>A newer Contao version %s is available</source>
+        <target>Pasirodė nauja Contao %s versija</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.emptyLuId">
+        <source>Please enter your Live Update ID</source>
+        <target>Įrašykite tiesioginio atnaujinimo ID</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.notWriteable">
+        <source>The temporary folder (system/tmp) is not writeable</source>
+        <target>Įrašymas į laikinų failų aplanką (system/tmp) negalimas</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.changelog">
+        <source>View the change log</source>
+        <target>Rodyti pakeitimų istoriją</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.runLiveUpdate">
+        <source>Run the update</source>
+        <target>Vykdyti atnaujinimą</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.toc">
+        <source>Content of the update archive</source>
+        <target>Naujinimo archyvo turinys</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.backup">
+        <source>Backuped files</source>
+        <target>Išsaugoti failai</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.update">
+        <source>Updated files</source>
+        <target>Atnaujinti failai</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.searchIndex">
+        <source>Rebuild the search index</source>
+        <target>Perrašyti paieškos indeksą</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexSubmit">
+        <source>Rebuild index</source>
+        <target>Perrašyti indeksą</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.noSearchable">
+        <source>No searchable pages found</source>
+        <target>Nerasta paieškai leistinų puslapių</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexNote">
+        <source>Please wait for the page to load completely before you proceed!</source>
+        <target>Prieš pradedant palaukite, kol puslapis visiškai užsikraus!</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexLoading">
+        <source>Please wait while the search index is being rebuilt.</source>
+        <target>Palaukite kol paieškos indeksas bus perrašytas.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexComplete">
+        <source>The search index has been rebuilt. You can now proceed.</source>
+        <target>Paieškos indeksas perrašytas. Galite tęsti.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.updateHelp">
+        <source>Please enter your %s here.</source>
+        <target>Įrašykite savo %s čia.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

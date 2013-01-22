@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/default.php" source-language="en">
+    <body>
+      <trans-unit id="MSC.open">
+        <source>Read more on %s</source>
+        <target>Skaityti daugiau %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.author">
+        <source>Author</source>
+        <target>Autorius</target>
+      </trans-unit>
+      <trans-unit id="MSC.by">
+        <source>by</source>
+        <target>::</target>
+      </trans-unit>
+      <trans-unit id="MSC.empty">
+        <source>There are no news items for this period.</source>
+        <target>Šiuo laikotarpiu naujienų nėra.</target>
+      </trans-unit>
+      <trans-unit id="MSC.emptyList">
+        <source>Currently there are no news items.</source>
+        <target>Šiuo metu naujienų nėra.</target>
+      </trans-unit>
+      <trans-unit id="MSC.comments">
+        <source>Comments</source>
+        <target>Komentarai</target>
+      </trans-unit>
+      <trans-unit id="MSC.commentCount">
+        <source>(comments: %s)</source>
+        <target>(komentarų: %s)</target>
+      </trans-unit>
+      <trans-unit id="MSC.news_items">
+        <source>%d item(s)</source>
+        <target>įrašų: %d</target>
+      </trans-unit>
+      <trans-unit id="MSC.news_previous">
+        <source>&amp;lt;</source>
+        <target>&lt;</target>
+      </trans-unit>
+      <trans-unit id="MSC.news_next">
+        <source>&amp;gt;</source>
+        <target>&gt;</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
