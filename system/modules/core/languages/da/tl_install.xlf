@@ -215,6 +215,7 @@
       </trans-unit>
       <trans-unit id="tl_install.importException">
         <source>The import failed! Is the database structure up to date and is the template file compatible with your Contao version?</source>
+        <target>Fejl ved importeringen! Er database strukturen up to date og er skabelon filen kompatibel med din version af Contao?</target>
       </trans-unit>
       <trans-unit id="tl_install.importError">
         <source>Please choose a template file!</source>

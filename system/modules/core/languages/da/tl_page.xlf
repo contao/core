@@ -39,6 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_page.language.1">
         <source>Please enter the page language according to the ISO-639-1 standard (e.g. &quot;en&quot; for English or &quot;en-US&quot; for American English).</source>
+        <target>Indtast venligst sidens sprog i henhold til ISO-639-1 standarden (f.eks. &quot;da&quot; for Dansk, &quot;en&quot; for Engelsk eller &quot;en-US&quot; for Amerikans Engelsk).</target>
       </trans-unit>
       <trans-unit id="tl_page.robots.0">
         <source>Robots tag</source>
@@ -126,6 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_page.createSitemap.1">
         <source>Create a Google XML sitemap in the &lt;em&gt;share/&lt;/em&gt; directory.</source>
+        <target>Opret et Google XML sitemap i &lt;em&gt;share&lt;/em&gt; mappen.</target>
       </trans-unit>
       <trans-unit id="tl_page.sitemapName.0">
         <source>Sitemap file name</source>

@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_user.name.1">
         <source>Please enter the first and last name.</source>
-        <target>لطفاً نام و نام خانوادگی را وارد کنید.</target>
+        <target>لطفا نام و نام خانوادگی را وارد کنید.</target>
       </trans-unit>
       <trans-unit id="tl_user.email.0">
         <source>E-mail address</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_user.email.1">
         <source>Please enter a valid e-mail address.</source>
-        <target>لطفاً یک آدرس پست الکترونیک معتبر وارد کنید.</target>
+        <target>لطفا یک آدرس پست الکترونیک معتبر وارد کنید.</target>
       </trans-unit>
       <trans-unit id="tl_user.language.0">
         <source>Back end language</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_user.language.1">
         <source>Here you can choose the back end language.</source>
-        <target>لطفاً زبان بخش مدیریت را انتخاب نمائید.</target>
+        <target>لطفا زبان بخش مدیریت را انتخاب نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_user.backendTheme.0">
         <source>Back end theme</source>
@@ -83,11 +83,11 @@
       </trans-unit>
       <trans-unit id="tl_user.pwChange.0">
         <source>Password change required</source>
-        <target>تغییر رمزعبور نیاز است</target>
+        <target>تغییر گذرواژه نیاز است</target>
       </trans-unit>
       <trans-unit id="tl_user.pwChange.1">
         <source>Make the user change his password upon the next login.</source>
-        <target>وادار کردن کاربر به تغییر رمزعبور در ورود بعدی.</target>
+        <target>وادار کردن کاربر به تغییرگذرواژه در ورود بعدی.</target>
       </trans-unit>
       <trans-unit id="tl_user.admin.0">
         <source>Make the user an administrator</source>
@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_user.custom.1">
         <source>Only individual permissions are applied.</source>
-        <target>فقط مجوزهای شخصی اعمال می شوند.</target>
+        <target>فقط مجوزهای شخصی اعمال می‌شوند.</target>
       </trans-unit>
       <trans-unit id="tl_user.modules.0">
         <source>Back end modules</source>
@@ -239,7 +239,7 @@
       </trans-unit>
       <trans-unit id="tl_user.password_legend">
         <source>Password settings</source>
-        <target>تنظیمات رمزعبور</target>
+        <target>تنظیمات گذرواژه</target>
       </trans-unit>
       <trans-unit id="tl_user.admin_legend">
         <source>Administrator</source>

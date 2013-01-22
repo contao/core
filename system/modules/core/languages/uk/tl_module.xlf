@@ -419,9 +419,11 @@
       </trans-unit>
       <trans-unit id="tl_module.orderSRC.0">
         <source>Sort order</source>
+        <target>Порядок сортування</target>
       </trans-unit>
       <trans-unit id="tl_module.orderSRC.1">
         <source>The sort order of the items.</source>
+        <target>Порядок сортування елементів.</target>
       </trans-unit>
       <trans-unit id="tl_module.html.0">
         <source>HTML code</source>
