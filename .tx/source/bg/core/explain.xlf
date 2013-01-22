@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/explain.php" source-language="en">
     <body>
       <trans-unit id="XPL.insertTags.0.0">
@@ -7,15 +6,15 @@
         <target>Rich Text Editor</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.0.1">
-        <source>For more information about TinyMCE please visit &lt;a href="http://www.tinymce.com/" title="TinyMCE by moxiecode" target="_blank"&gt;http://www.tinymce.com/&lt;/a&gt;.</source>
-        <target>За повече информация относно TinyMCE моля, посетете &lt;a href="http://tinymce.moxiecode.com" title="Open http://tinymce.moxiecode.com (в нов прозорец)" onclick="window.open(this.href); return false;"&gt;moxiecode.com&lt;/a&gt;.</target>
+        <source>For more information about TinyMCE please visit &lt;a href=&quot;http://www.tinymce.com/&quot; title=&quot;TinyMCE by moxiecode&quot; target=&quot;_blank&quot;&gt;http://www.tinymce.com/&lt;/a&gt;.</source>
+        <target>За повече информация относно TinyMCE моля, посетете &lt;a href=&quot;http://tinymce.moxiecode.com&quot; title=&quot;Open http://tinymce.moxiecode.com (в нов прозорец)&quot; onclick=&quot;window.open(this.href); return false;&quot;&gt;moxiecode.com&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.0">
         <source>Insert tags</source>
         <target>Въвеждане на тагове</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.1">
-        <source>For more information on insert tags please visit &lt;a href="https://contao.org/en/manual/3.0/managing-content.html#insert-tags" title="Contao online documentation" target="_blank"&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</source>
+        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</source>
         <target>Таговете могат да се въвейдат навсякъде в TYPOlight. Те ще бъдат заместени с определени стойности преди страницата да бъде отпечатана на екрана.</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.0">
@@ -23,8 +22,8 @@
         <target>Редактор на изходен код</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.1">
-        <source>For more information about CodeMirror please visit &lt;a href="http://codemirror.net" title="EditArea by Marijn Haverbeke" target="_blank"&gt;http://codemirror.net&lt;/a&gt;.</source>
-        <target>За повече информация относно EditArea, моля посетете &lt;a href="http://www.cdolivet.com/index.php?page=editArea" title="EditArea by Christophe Dolivet" onclick="window.open(this.href); return false;"&gt;http://www.cdolivet.com/index.php?page=editArea&lt;/a&gt;</target>
+        <source>For more information about CodeMirror please visit &lt;a href=&quot;http://codemirror.net&quot; title=&quot;EditArea by Marijn Haverbeke&quot; target=&quot;_blank&quot;&gt;http://codemirror.net&lt;/a&gt;.</source>
+        <target>За повече информация относно EditArea, моля посетете &lt;a href=&quot;http://www.cdolivet.com/index.php?page=editArea&quot; title=&quot;EditArea by Christophe Dolivet&quot; onclick=&quot;window.open(this.href); return false;&quot;&gt;http://www.cdolivet.com/index.php?page=editArea&lt;/a&gt;</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.0.0">
         <source>colspan</source>
@@ -95,8 +94,8 @@
         <target>Редкатор на текст с богато офрмление</target>
       </trans-unit>
       <trans-unit id="XPL.highlighter.0.1">
-        <source>For more information about how to configure the syntax highlighter please visit &lt;a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults" title="SyntaxHighlighter by Alex Gorbatchev" target="_blank"&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
-        <target>за повече информация как да конфигурирате синтактичния оцветител, моля посетете &lt;a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults" title="SyntaxHighlighter by Alex Gorbatchev" onclick="window.open(this.href); return false;"&gt;http://alexgorbatchev.com&lt;/a&gt;.</target>
+        <source>For more information about how to configure the syntax highlighter please visit &lt;a href=&quot;http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
+        <target>за повече информация как да конфигурирате синтактичния оцветител, моля посетете &lt;a href=&quot;http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; onclick=&quot;window.open(this.href); return false;&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</target>
       </trans-unit>
     </body>
   </file>

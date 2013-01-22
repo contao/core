@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/default.php" source-language="en">
     <body>
       <trans-unit id="ERR.general">
@@ -7,24 +6,24 @@
         <target>Došlo je do greške!</target>
       </trans-unit>
       <trans-unit id="ERR.unique">
-        <source>Duplicate entry in field "%s"!</source>
-        <target>Dvostruki unos u polju "%s"!</target>
+        <source>Duplicate entry in field &quot;%s&quot;!</source>
+        <target>Dvostruki unos u polju &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.mandatory">
-        <source>Field "%s" must not be empty!</source>
-        <target>Ispunite polje "%s"!</target>
+        <source>Field &quot;%s&quot; must not be empty!</source>
+        <target>Ispunite polje &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.mdtryNoLabel">
         <source>This field must not be empty!</source>
         <target>Polje ne smije biti prazno</target>
       </trans-unit>
       <trans-unit id="ERR.minlength">
-        <source>Field "%s" has to be at least %d characters long!</source>
-        <target>U polju "%s" je %d najmanji dopušteni broj znakova!</target>
+        <source>Field &quot;%s&quot; has to be at least %d characters long!</source>
+        <target>U polju &quot;%s&quot; je %d najmanji dopušteni broj znakova!</target>
       </trans-unit>
       <trans-unit id="ERR.maxlength">
-        <source>Field "%s" must not be longer than %d characters!</source>
-        <target>Polje "%s" ne smije biti dulje od %d znakova!</target>
+        <source>Field &quot;%s&quot; must not be longer than %d characters!</source>
+        <target>Polje &quot;%s&quot; ne smije biti dulje od %d znakova!</target>
       </trans-unit>
       <trans-unit id="ERR.digit">
         <source>Please enter digits only!</source>
@@ -54,33 +53,45 @@
         <source>Please enter a valid e-mail address!</source>
         <target>Upišite valjanu email adresu!</target>
       </trans-unit>
+      <trans-unit id="ERR.emails">
+        <source>There is at least one invalid e-mail address!</source>
+      </trans-unit>
       <trans-unit id="ERR.url">
         <source>Please enter a valid URL format and encode special characters!</source>
         <target>Upišite valjani URL format i kodirajte specijalne znakove!</target>
       </trans-unit>
+      <trans-unit id="ERR.alias">
+        <source>Please enter only alphanumeric characters and the following special characters: .-_</source>
+      </trans-unit>
+      <trans-unit id="ERR.folderalias">
+        <source>Please enter only alphanumeric characters and the following special characters: .-/_</source>
+      </trans-unit>
       <trans-unit id="ERR.date">
-        <source>Please enter the date as "%s"!</source>
-        <target>Upišite datum kao "%s"!</target>
+        <source>Please enter the date as &quot;%s&quot;!</source>
+        <target>Upišite datum kao &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.time">
-        <source>Please enter the time as "%s"!</source>
-        <target>Upišite vrijeme kao "%s"!</target>
+        <source>Please enter the time as &quot;%s&quot;!</source>
+        <target>Upišite vrijeme kao &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.dateTime">
-        <source>Please enter date and time as "%s"!</source>
-        <target>Upišite vrijeme i datum kao "%s"!</target>
+        <source>Please enter date and time as &quot;%s&quot;!</source>
+        <target>Upišite vrijeme i datum kao &quot;%s&quot;!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
       </trans-unit>
       <trans-unit id="ERR.noSpace">
-        <source>Field "%s" must not contain any whitespace characters!</source>
-        <target>Polje "%s" me smije sadržati razmake!</target>
+        <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
+        <target>Polje &quot;%s&quot; me smije sadržati razmake!</target>
       </trans-unit>
       <trans-unit id="ERR.filesize">
         <source>The maximum size for file uploads is %s (Contao or php.ini settings)!</source>
         <target>Najveća dozvoljena veličina datoteke za upload je %s kB!</target>
       </trans-unit>
       <trans-unit id="ERR.filetype">
-        <source>File type "%s" is not allowed to be uploaded!</source>
-        <target>Nije dozvoljen upload datoteke tipa "%s" !</target>
+        <source>File type &quot;%s&quot; is not allowed to be uploaded!</source>
+        <target>Nije dozvoljen upload datoteke tipa &quot;%s&quot; !</target>
       </trans-unit>
       <trans-unit id="ERR.filepartial">
         <source>File %s was only partially uploaded!</source>
@@ -93,6 +104,9 @@
       <trans-unit id="ERR.fileheight">
         <source>File %s exceeds the maximum image height of %d pixels!</source>
         <target>Slika % prekoračuje najveću dozvoljenu visinu od %d piksela!</target>
+      </trans-unit>
+      <trans-unit id="ERR.filetarget">
+        <source>Cannot move %s to %s because the target exists!</source>
       </trans-unit>
       <trans-unit id="ERR.invalidReferer">
         <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
@@ -131,28 +145,28 @@
         <target>Odaberite barem jedno polje!</target>
       </trans-unit>
       <trans-unit id="ERR.aliasExists">
-        <source>The alias "%s" already exists!</source>
-        <target>Alias "%s" vec postoji!</target>
+        <source>The alias &quot;%s&quot; already exists!</source>
+        <target>Alias &quot;%s&quot; vec postoji!</target>
       </trans-unit>
       <trans-unit id="ERR.importFolder">
-        <source>The folder "%s" cannot be imported!</source>
-        <target>Nije moguće importirati mapu "%s" !</target>
+        <source>The folder &quot;%s&quot; cannot be imported!</source>
+        <target>Nije moguće importirati mapu &quot;%s&quot; !</target>
       </trans-unit>
       <trans-unit id="ERR.notWriteable">
-        <source>The file "%s" is not writeable and can therefore not be updated!</source>
-        <target>Datoteka "%s" nije otvorena za zapisivanje pa vaše izmjene neće imati efekta!</target>
+        <source>The file &quot;%s&quot; is not writeable and can therefore not be updated!</source>
+        <target>Datoteka &quot;%s&quot; nije otvorena za zapisivanje pa vaše izmjene neće imati efekta!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidName">
         <source>This file or folder name is invalid!</source>
         <target>Ova datoteka ili njezin naziv nije valjan!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidFile">
-        <source>The file or folder "%s" is invalid!</source>
-        <target>Datoteka ili mapa "%" nije valjana!</target>
+        <source>The file or folder &quot;%s&quot; is invalid!</source>
+        <target>Datoteka ili mapa &quot;%&quot; nije valjana!</target>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
-        <source>The file "%s" already exists!</source>
-        <target>Datoteka "%s" već postoji!</target>
+        <source>The file &quot;%s&quot; already exists!</source>
+        <target>Datoteka &quot;%s&quot; već postoji!</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -174,6 +188,18 @@
         <source>You can only define one website root page per domain as language fallback.</source>
         <target>Na pojedinoj domeni možete definirati samo jednu osnovnu stranicu kao drugi jezik.</target>
       </trans-unit>
+      <trans-unit id="ERR.topLevelRoot">
+        <source>Top-level pages must be website root pages!</source>
+      </trans-unit>
+      <trans-unit id="ERR.topLevelRegular">
+        <source>There are pages on the top-level which are not website root pages. Creating websites without a website root page is no longer supported, so please ensure that all pages are grouped under a website root page.</source>
+      </trans-unit>
+      <trans-unit id="ERR.invalidTokenUrl">
+        <source>The link you were trying to open could not be verified. If you have clicked the link yourself or have received it by a trustworthy person, you can confirm the process below.</source>
+      </trans-unit>
+      <trans-unit id="ERR.version2format">
+        <source>This element still uses the old Contao 2 SRC format. Did you upgrade the database?</source>
+      </trans-unit>
       <trans-unit id="ERR.form">
         <source>The form could not be sent</source>
         <target>Slanje obrasca nije bilo moguće</target>
@@ -181,6 +207,202 @@
       <trans-unit id="ERR.captcha">
         <source>Please answer the security question!</source>
         <target>Molimo vas da odgovorite na sigurnosno pitanje!</target>
+      </trans-unit>
+      <trans-unit id="ERR.download">
+        <source>File &quot;%s&quot; is not available for download!</source>
+      </trans-unit>
+      <trans-unit id="ERR.invalid">
+        <source>Invalid input: %s</source>
+      </trans-unit>
+      <trans-unit id="ERR.fileNotFoundSync">
+        <source>No database entry found for %s. Please synchronize the file system.</source>
+      </trans-unit>
+      <trans-unit id="SEC.question1">
+        <source>Please add %d and %d.</source>
+        <target>Zbrojite %d i %d.</target>
+      </trans-unit>
+      <trans-unit id="SEC.question2">
+        <source>What is the sum of %d and %d?</source>
+        <target>Koji je zbroj %d i %d?</target>
+      </trans-unit>
+      <trans-unit id="SEC.question3">
+        <source>Please calculate %d plus %d.</source>
+        <target>Izračunajte %d plus %d.</target>
+      </trans-unit>
+      <trans-unit id="CTE.texts">
+        <source>Text elements</source>
+        <target>Tekstovni elementi</target>
+      </trans-unit>
+      <trans-unit id="CTE.headline.0">
+        <source>Headline</source>
+        <target>Naslov</target>
+      </trans-unit>
+      <trans-unit id="CTE.headline.1">
+        <source>Generates a headline (h1 - h6).</source>
+        <target>Generira naslov (h1 - h6).</target>
+      </trans-unit>
+      <trans-unit id="CTE.text.0">
+        <source>Text</source>
+        <target>Tekst</target>
+      </trans-unit>
+      <trans-unit id="CTE.text.1">
+        <source>Generates a rich text element.</source>
+        <target>Generira element bogatog teksta (rich text).</target>
+      </trans-unit>
+      <trans-unit id="CTE.html.0">
+        <source>HTML</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="CTE.html.1">
+        <source>Allows you to add custom HTML code.</source>
+        <target>Dozvoljava da dodate standardni HTML kod.</target>
+      </trans-unit>
+      <trans-unit id="CTE.list.0">
+        <source>List</source>
+        <target>Lista</target>
+      </trans-unit>
+      <trans-unit id="CTE.list.1">
+        <source>Generates an ordered or unordered list.</source>
+        <target>Generira uređenu ili neuređenu listu.</target>
+      </trans-unit>
+      <trans-unit id="CTE.table.0">
+        <source>Table</source>
+        <target>Tablica</target>
+      </trans-unit>
+      <trans-unit id="CTE.table.1">
+        <source>Generates an optionally sortable table.</source>
+        <target>Generira tablicu s opcionalnim redoslijedom.</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordion.0">
+        <source>Accordion</source>
+        <target>Harmonika</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordion.1">
+        <source>Generates a MooTools accordion pane.</source>
+        <target>Generira mootools ploču s harmonikom (na razvlačenje).</target>
+      </trans-unit>
+      <trans-unit id="CTE.code.0">
+        <source>Code</source>
+        <target>Kod</target>
+      </trans-unit>
+      <trans-unit id="CTE.code.1">
+        <source>Highlights code snippets and prints them to the screen.</source>
+        <target>Ističe dijeliće koda i ispisuje ih na ekranu.</target>
+      </trans-unit>
+      <trans-unit id="CTE.links">
+        <source>Link elements</source>
+        <target>Link elementi</target>
+      </trans-unit>
+      <trans-unit id="CTE.hyperlink.0">
+        <source>Hyperlink</source>
+        <target>Hiperveza</target>
+      </trans-unit>
+      <trans-unit id="CTE.hyperlink.1">
+        <source>Generates a link to another website.</source>
+        <target>Generira link za drugi sajt.</target>
+      </trans-unit>
+      <trans-unit id="CTE.toplink.0">
+        <source>Top link</source>
+        <target>Gornji link</target>
+      </trans-unit>
+      <trans-unit id="CTE.toplink.1">
+        <source>Generates a link to jump to the top of the page.</source>
+        <target>Generira link za skok na vrh stranice.</target>
+      </trans-unit>
+      <trans-unit id="CTE.media">
+        <source>Media elements</source>
+      </trans-unit>
+      <trans-unit id="CTE.image.0">
+        <source>Image</source>
+        <target>Slika</target>
+      </trans-unit>
+      <trans-unit id="CTE.image.1">
+        <source>Generates a stand-alone image.</source>
+        <target>Generira samostalnu sliku.</target>
+      </trans-unit>
+      <trans-unit id="CTE.gallery.0">
+        <source>Gallery</source>
+        <target>Galerija slika</target>
+      </trans-unit>
+      <trans-unit id="CTE.gallery.1">
+        <source>Generates a lightbox image gallery.</source>
+        <target>Generira lightbox galeriju slika.</target>
+      </trans-unit>
+      <trans-unit id="CTE.player.0">
+        <source>Video/audio</source>
+      </trans-unit>
+      <trans-unit id="CTE.player.1">
+        <source>Generates a video or audio player.</source>
+      </trans-unit>
+      <trans-unit id="CTE.youtube.0">
+        <source>YouTube</source>
+      </trans-unit>
+      <trans-unit id="CTE.youtube.1">
+        <source>Adds a YouTube video.</source>
+      </trans-unit>
+      <trans-unit id="CTE.files">
+        <source>File elements</source>
+        <target>Elementi datoteke</target>
+      </trans-unit>
+      <trans-unit id="CTE.download.0">
+        <source>Download</source>
+        <target>Download</target>
+      </trans-unit>
+      <trans-unit id="CTE.download.1">
+        <source>Generates a link to download a file.</source>
+        <target>Generira link za download datoteke.</target>
+      </trans-unit>
+      <trans-unit id="CTE.downloads.0">
+        <source>Downloads</source>
+        <target>Downloadi</target>
+      </trans-unit>
+      <trans-unit id="CTE.downloads.1">
+        <source>Generates multiple links to download files.</source>
+        <target>Generira višestruke linkove za download datoteka.</target>
+      </trans-unit>
+      <trans-unit id="CTE.includes">
+        <source>Include elements</source>
+        <target>Uključi elemente</target>
+      </trans-unit>
+      <trans-unit id="CTE.article.0">
+        <source>Article</source>
+        <target>Članak</target>
+      </trans-unit>
+      <trans-unit id="CTE.article.1">
+        <source>Includes another article.</source>
+        <target>Uključuje drugi članak.</target>
+      </trans-unit>
+      <trans-unit id="CTE.alias.0">
+        <source>Content element</source>
+        <target>Element sadržaja</target>
+      </trans-unit>
+      <trans-unit id="CTE.alias.1">
+        <source>Includes another content element.</source>
+        <target>Uključuje drugi element sadržaja.</target>
+      </trans-unit>
+      <trans-unit id="CTE.form.0">
+        <source>Form</source>
+        <target>Obrazac</target>
+      </trans-unit>
+      <trans-unit id="CTE.form.1">
+        <source>Includes a form.</source>
+        <target>Uključuje obrazac.</target>
+      </trans-unit>
+      <trans-unit id="CTE.module.0">
+        <source>Module</source>
+        <target>Modul</target>
+      </trans-unit>
+      <trans-unit id="CTE.module.1">
+        <source>Includes a front end module.</source>
+        <target>Uključuje modul za korisničko sučelje.</target>
+      </trans-unit>
+      <trans-unit id="CTE.teaser.0">
+        <source>Article teaser</source>
+        <target>Najava članka</target>
+      </trans-unit>
+      <trans-unit id="CTE.teaser.1">
+        <source>Displays the teaser text of an article.</source>
+        <target>Prikazuje najavni tekst članka.</target>
       </trans-unit>
       <trans-unit id="PTY.regular.0">
         <source>Regular page</source>
@@ -322,6 +544,27 @@
         <source>Saturday</source>
         <target>Subota</target>
       </trans-unit>
+      <trans-unit id="DAYS_SHORT.0">
+        <source>Sun</source>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.1">
+        <source>Mon</source>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.2">
+        <source>Tue</source>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.3">
+        <source>Wed</source>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.4">
+        <source>Thu</source>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.5">
+        <source>Fri</source>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.6">
+        <source>Sat</source>
+      </trans-unit>
       <trans-unit id="MONTHS.0">
         <source>January</source>
         <target>Siječanj</target>
@@ -369,6 +612,42 @@
       <trans-unit id="MONTHS.11">
         <source>December</source>
         <target>Prosinac</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.0">
+        <source>Jan</source>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.1">
+        <source>Feb</source>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.2">
+        <source>Mar</source>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.3">
+        <source>Apr</source>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.4">
+        <source>May</source>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.5">
+        <source>Jun</source>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.6">
+        <source>Jul</source>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.7">
+        <source>Aug</source>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.8">
+        <source>Sep</source>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.9">
+        <source>Oct</source>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.10">
+        <source>Nov</source>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.11">
+        <source>Dec</source>
       </trans-unit>
       <trans-unit id="MSC.dayShortLength">
         <source>3</source>
@@ -574,6 +853,94 @@
         <source>Column</source>
         <target>Stupac</target>
       </trans-unit>
+      <trans-unit id="MSC.aw_title">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="MSC.aw_link">
+        <source>Link</source>
+      </trans-unit>
+      <trans-unit id="MSC.aw_caption">
+        <source>Caption</source>
+      </trans-unit>
+      <trans-unit id="MSC.aw_delete">
+        <source>Delete the language</source>
+      </trans-unit>
+      <trans-unit id="MSC.aw_new">
+        <source>Add language</source>
+      </trans-unit>
+      <trans-unit id="MSC.relative">
+        <source>Relative dimensions</source>
+      </trans-unit>
+      <trans-unit id="MSC.proportional.0">
+        <source>Proportional</source>
+      </trans-unit>
+      <trans-unit id="MSC.proportional.1">
+        <source>The longer side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+      </trans-unit>
+      <trans-unit id="MSC.box.0">
+        <source>Fit the box</source>
+      </trans-unit>
+      <trans-unit id="MSC.box.1">
+        <source>The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+      </trans-unit>
+      <trans-unit id="MSC.crop">
+        <source>Exact dimensions</source>
+        <target>Točne dimenzije</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_top.0">
+        <source>Left | Top</source>
+      </trans-unit>
+      <trans-unit id="MSC.left_top.1">
+        <source>Preserves the left part of a landscape image and the top part of a portrait image.</source>
+      </trans-unit>
+      <trans-unit id="MSC.center_top.0">
+        <source>Center | Top</source>
+      </trans-unit>
+      <trans-unit id="MSC.center_top.1">
+        <source>Preserves the center part of a landscape image and the top part of a portrait image.</source>
+      </trans-unit>
+      <trans-unit id="MSC.right_top.0">
+        <source>Right | Top</source>
+      </trans-unit>
+      <trans-unit id="MSC.right_top.1">
+        <source>Preserves the right part of a landscape image and the top part of a portrait image.</source>
+      </trans-unit>
+      <trans-unit id="MSC.left_center.0">
+        <source>Left | Center</source>
+      </trans-unit>
+      <trans-unit id="MSC.left_center.1">
+        <source>Preserves the left part of a landscape image and the center part of a portrait image.</source>
+      </trans-unit>
+      <trans-unit id="MSC.center_center.0">
+        <source>Center | Center</source>
+      </trans-unit>
+      <trans-unit id="MSC.center_center.1">
+        <source>Preserves the center part of a landscape image and the center part of a portrait image.</source>
+      </trans-unit>
+      <trans-unit id="MSC.right_center.0">
+        <source>Right | Center</source>
+      </trans-unit>
+      <trans-unit id="MSC.right_center.1">
+        <source>Preserves the right part of a landscape image and the center part of a portrait image.</source>
+      </trans-unit>
+      <trans-unit id="MSC.left_bottom.0">
+        <source>Left | Bottom</source>
+      </trans-unit>
+      <trans-unit id="MSC.left_bottom.1">
+        <source>Preserves the left part of a landscape image and the bottom part of a portrait image.</source>
+      </trans-unit>
+      <trans-unit id="MSC.center_bottom.0">
+        <source>Center | Bottom</source>
+      </trans-unit>
+      <trans-unit id="MSC.center_bottom.1">
+        <source>Preserves the center part of a landscape image and the bottom part of a portrait image.</source>
+      </trans-unit>
+      <trans-unit id="MSC.right_bottom.0">
+        <source>Right | Bottom</source>
+      </trans-unit>
+      <trans-unit id="MSC.right_bottom.1">
+        <source>Preserves the right part of a landscape image and the bottom part of a portrait image.</source>
+      </trans-unit>
       <trans-unit id="MSC.id.0">
         <source>ID</source>
         <target>ID</target>
@@ -605,6 +972,12 @@
       <trans-unit id="MSC.all.1">
         <source>Edit multiple records at once</source>
         <target>Istovremeno uređivanje više podataka</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_override.0">
+        <source>Override multiple</source>
+      </trans-unit>
+      <trans-unit id="MSC.all_override.1">
+        <source>Override multiple records at once</source>
       </trans-unit>
       <trans-unit id="MSC.all_fields.0">
         <source>Available fields</source>
@@ -678,6 +1051,45 @@
         <source>The assets URL applies to the &lt;em&gt;assets&lt;/em&gt; directory (page speed optimization).</source>
         <target>URL plugina primjenjuje se na sve resurse u direktoriju &lt;em&gt;plugins&lt;/em&gt; (optimizacija brzine stranice)</target>
       </trans-unit>
+      <trans-unit id="MSC.shortcuts.0">
+        <source>Back end keyboard shortcuts</source>
+      </trans-unit>
+      <trans-unit id="MSC.shortcuts.1">
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+      </trans-unit>
+      <trans-unit id="MSC.toggleAll.0">
+        <source>Toggle all</source>
+      </trans-unit>
+      <trans-unit id="MSC.toggleAll.1">
+        <source>Expand or collapse all nodes</source>
+      </trans-unit>
+      <trans-unit id="MSC.lockedAccount.0">
+        <source>A Contao account has been locked</source>
+      </trans-unit>
+      <trans-unit id="MSC.lockedAccount.1">
+        <source>The following Contao account has been locked for security reasons.
+
+Username: %s
+Real name: %s
+Website: %s
+
+The account has been locked for %d minutes, because the user has entered an invalid password three times in a row. After this period of time, the account will be unlocked automatically.
+
+This e-mail has been generated by Contao. You can not reply to it directly.
+</source>
+      </trans-unit>
+      <trans-unit id="MSC.toggleMobile.0">
+        <source>Mobile version</source>
+      </trans-unit>
+      <trans-unit id="MSC.toggleMobile.1">
+        <source>Go to the mobile version</source>
+      </trans-unit>
+      <trans-unit id="MSC.toggleDesktop.0">
+        <source>Desktop version</source>
+      </trans-unit>
+      <trans-unit id="MSC.toggleDesktop.1">
+        <source>Go to the desktop version</source>
+      </trans-unit>
       <trans-unit id="MSC.feLink">
         <source>Go to front end</source>
         <target>Otiđi u korisničko sučelje</target>
@@ -685,6 +1097,9 @@
       <trans-unit id="MSC.fePreview">
         <source>Front end preview</source>
         <target>Pregled korisničkog sučelja</target>
+      </trans-unit>
+      <trans-unit id="MSC.fePreviewTitle">
+        <source>Preview of the website in a new window</source>
       </trans-unit>
       <trans-unit id="MSC.feUser">
         <source>Front end user</source>
@@ -694,9 +1109,15 @@
         <source>Back to top</source>
         <target>Natrag na vrh</target>
       </trans-unit>
+      <trans-unit id="MSC.backToTopTitle">
+        <source>Go to the top of the page</source>
+      </trans-unit>
       <trans-unit id="MSC.home">
         <source>Home</source>
         <target>Naslovnica</target>
+      </trans-unit>
+      <trans-unit id="MSC.homeTitle">
+        <source>Back to the back end start page</source>
       </trans-unit>
       <trans-unit id="MSC.user">
         <source>User</source>
@@ -714,9 +1135,15 @@
         <source>Logout</source>
         <target>Odjava</target>
       </trans-unit>
+      <trans-unit id="MSC.logoutBTTitle">
+        <source>Close the current session</source>
+      </trans-unit>
       <trans-unit id="MSC.backBT">
         <source>Go back</source>
         <target>Natrag</target>
+      </trans-unit>
+      <trans-unit id="MSC.backBTTitle">
+        <source>Back to the previous page</source>
       </trans-unit>
       <trans-unit id="MSC.cancelBT">
         <source>Cancel</source>
@@ -794,6 +1221,9 @@
         <source>Continue</source>
         <target>Nastavak</target>
       </trans-unit>
+      <trans-unit id="MSC.close">
+        <source>Close</source>
+      </trans-unit>
       <trans-unit id="MSC.skipNavigation">
         <source>Skip navigation</source>
         <target>Preskoči navigaciju</target>
@@ -801,6 +1231,12 @@
       <trans-unit id="MSC.selectAll">
         <source>Select all</source>
         <target>Odaberi sve</target>
+      </trans-unit>
+      <trans-unit id="MSC.pw_new">
+        <source>Change password</source>
+      </trans-unit>
+      <trans-unit id="MSC.pw_change">
+        <source>Please enter a new password</source>
       </trans-unit>
       <trans-unit id="MSC.pw_changed">
         <source>The password has been updated.</source>
@@ -817,6 +1253,9 @@
       <trans-unit id="MSC.fullsize">
         <source>Open full size image in a new window</source>
         <target>Otvori sliku u punoj veličini u novom prozoru</target>
+      </trans-unit>
+      <trans-unit id="MSC.datepicker">
+        <source>Date picker</source>
       </trans-unit>
       <trans-unit id="MSC.colorpicker">
         <source>Color picker</source>
@@ -878,6 +1317,9 @@
         <source>%s entries</source>
         <target>%s unosa</target>
       </trans-unit>
+      <trans-unit id="MSC.files">
+        <source>%s file(s)</source>
+      </trans-unit>
       <trans-unit id="MSC.left">
         <source>left</source>
         <target>lijevo</target>
@@ -925,6 +1367,9 @@
       <trans-unit id="MSC.fileDownload">
         <source>Download</source>
         <target>Download</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileDownloadTitle">
+        <source>Download this file</source>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
@@ -974,6 +1419,9 @@
         <source>Collapse node</source>
         <target>Skupi čvorište</target>
       </trans-unit>
+      <trans-unit id="MSC.loadingData">
+        <source>Loading data</source>
+      </trans-unit>
       <trans-unit id="MSC.deleteSelected">
         <source>Delete</source>
         <target>Briši odabrano</target>
@@ -993,6 +1441,9 @@
       <trans-unit id="MSC.copySelected">
         <source>Copy</source>
         <target>Kopiraj</target>
+      </trans-unit>
+      <trans-unit id="MSC.aliasSelected">
+        <source>Generate aliases</source>
       </trans-unit>
       <trans-unit id="MSC.changeSelected">
         <source>Change selection</source>
@@ -1030,6 +1481,9 @@
         <source>Apply</source>
         <target>Primjeni</target>
       </trans-unit>
+      <trans-unit id="MSC.applyTitle">
+        <source>Apply the changes</source>
+      </trans-unit>
       <trans-unit id="MSC.mandatory">
         <source>Mandatory field</source>
         <target>Obvezno polje</target>
@@ -1041,10 +1495,6 @@
       <trans-unit id="MSC.delete">
         <source>Delete</source>
         <target>Izbriši</target>
-      </trans-unit>
-      <trans-unit id="MSC.crop">
-        <source>Exact dimensions</source>
-        <target>Točne dimenzije</target>
       </trans-unit>
       <trans-unit id="MSC.protected">
         <source>protected</source>
@@ -1086,6 +1536,9 @@
         <source>Open the help wizard</source>
         <target>Čarobnjak za pomoć</target>
       </trans-unit>
+      <trans-unit id="MSC.helpWizardTitle">
+        <source>Help wizard</source>
+      </trans-unit>
       <trans-unit id="MSC.noCookies">
         <source>You have to allow cookies to use Contao.</source>
         <target>Morate dozvoliti cookies upotrebu da bi mogli koristiti Contao</target>
@@ -1093,6 +1546,104 @@
       <trans-unit id="MSC.copyOf">
         <source>%s (copy)</source>
         <target>%s (kopiraj)</target>
+      </trans-unit>
+      <trans-unit id="MSC.coreOnlyMode">
+        <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>
+      </trans-unit>
+      <trans-unit id="MSC.name">
+        <source>Name</source>
+      </trans-unit>
+      <trans-unit id="MSC.emailAddress">
+        <source>E-mail address</source>
+        <target>E-mail adresa</target>
+      </trans-unit>
+      <trans-unit id="MSC.register">
+        <source>Register</source>
+        <target>Registriraj se</target>
+      </trans-unit>
+      <trans-unit id="MSC.accountActivated">
+        <source>Your account has been activated.</source>
+        <target>Vaš račun je aktiviran</target>
+      </trans-unit>
+      <trans-unit id="MSC.accountError">
+        <source>Unable to process the current request.</source>
+        <target>Nismo u mogućnosti obraditi sadašnji zahtijev</target>
+      </trans-unit>
+      <trans-unit id="MSC.emailSubject">
+        <source>Your registration on %s</source>
+        <target>Vaša registracija na %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.adminSubject">
+        <source>New registration on %s</source>
+        <target>TYPOlight :: Nova registracija na %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.adminText">
+        <source>A new member (ID %s) has registered at your website.%sIf you did not allow e-mail activation, you have to enable the account manually in the back end.</source>
+        <target>Novi korisnik (ID %s) registrirao se na vašim web stranicama.%sAko niste dozvolili e-mail aktivaciju, morate ručno uključiti ovaj korisnički račun u Backend-u.</target>
+      </trans-unit>
+      <trans-unit id="MSC.requestPassword">
+        <source>Request password</source>
+        <target>Zatraži šifru</target>
+      </trans-unit>
+      <trans-unit id="MSC.setNewPassword">
+        <source>Set new password</source>
+        <target>Postavi novu šifru</target>
+      </trans-unit>
+      <trans-unit id="MSC.newPasswordSet">
+        <source>Your password has been updated.</source>
+        <target>Vaša šifra je ažurirana.</target>
+      </trans-unit>
+      <trans-unit id="MSC.passwordSubject">
+        <source>Your password request for %s</source>
+        <target>Vaš zahtijev za šifru na %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.accountNotFound">
+        <source>No matching account found</source>
+        <target>Nije pronađen odgovarajući korisnički račun.</target>
+      </trans-unit>
+      <trans-unit id="MSC.securityQuestion">
+        <source>Security question</source>
+        <target>Sigurnosno pitanje</target>
+      </trans-unit>
+      <trans-unit id="MSC.closeAccount">
+        <source>Close account</source>
+        <target>Zatvori račun</target>
+      </trans-unit>
+      <trans-unit id="MSC.changeSelection">
+        <source>Change selection</source>
+      </trans-unit>
+      <trans-unit id="MSC.currentlySelected">
+        <source>Selected</source>
+      </trans-unit>
+      <trans-unit id="MSC.selectNode">
+        <source>Only show this node</source>
+      </trans-unit>
+      <trans-unit id="MSC.selectAllNodes">
+        <source>Show all nodes</source>
+      </trans-unit>
+      <trans-unit id="MSC.showDifferences">
+        <source>Show differences</source>
+      </trans-unit>
+      <trans-unit id="MSC.editElement">
+        <source>Edit the element</source>
+      </trans-unit>
+      <trans-unit id="MSC.table">
+        <source>Table</source>
+      </trans-unit>
+      <trans-unit id="MSC.description">
+        <source>Description</source>
+      </trans-unit>
+      <trans-unit id="MSC.noVersions">
+        <source>Currently there are no versions.</source>
+      </trans-unit>
+      <trans-unit id="MSC.latestChanges">
+        <source>Latest changes</source>
+      </trans-unit>
+      <trans-unit id="MSC.identicalVersions">
+        <source>The two selected versions are identical.</source>
+      </trans-unit>
+      <trans-unit id="MSC.selectNewPosition">
+        <source>Next, please choose the (new) position of the element</source>
       </trans-unit>
       <trans-unit id="MSC.go">
         <source>Go</source>
@@ -1230,6 +1781,9 @@
         <source>Share on Twitter</source>
         <target>Podijeli na Twitteru</target>
       </trans-unit>
+      <trans-unit id="MSC.gplusShare">
+        <source>Share on Google+</source>
+      </trans-unit>
       <trans-unit id="MSC.pleaseWait">
         <source>Please wait</source>
         <target>Molimo pričekajte</target>
@@ -1251,7 +1805,7 @@
         <target>Ciljana stranica</target>
       </trans-unit>
       <trans-unit id="MSC.invalidPage">
-        <source>Sorry, item "%s" does not exist.</source>
+        <source>Sorry, item &quot;%s&quot; does not exist.</source>
         <target>Žao nam je ali objekt %s ne postoji.</target>
       </trans-unit>
       <trans-unit id="MSC.list_orderBy">
@@ -1282,61 +1836,20 @@
         <source>%s relevance</source>
         <target>%s relevantnost</target>
       </trans-unit>
-      <trans-unit id="MSC.register">
-        <source>Register</source>
-        <target>Registriraj se</target>
+      <trans-unit id="MSC.invalidTokenUrl">
+        <source>Invalid token</source>
       </trans-unit>
-      <trans-unit id="MSC.emailAddress">
-        <source>E-mail address</source>
-        <target>E-mail adresa</target>
+      <trans-unit id="MSC.changelog">
+        <source>Changelog</source>
       </trans-unit>
-      <trans-unit id="MSC.accountActivated">
-        <source>Your account has been activated.</source>
-        <target>Vaš račun je aktiviran</target>
+      <trans-unit id="MSC.coreOnlyOff">
+        <source>Disable</source>
       </trans-unit>
-      <trans-unit id="MSC.accountError">
-        <source>Unable to process the current request.</source>
-        <target>Nismo u mogućnosti obraditi sadašnji zahtijev</target>
+      <trans-unit id="MSC.dragItemsHint">
+        <source>Drag the items to re-order them</source>
       </trans-unit>
-      <trans-unit id="MSC.emailSubject">
-        <source>Your registration on %s</source>
-        <target>Vaša registracija na %s</target>
-      </trans-unit>
-      <trans-unit id="MSC.adminSubject">
-        <source>New registration on %s</source>
-        <target>TYPOlight :: Nova registracija na %s</target>
-      </trans-unit>
-      <trans-unit id="MSC.adminText">
-        <source>A new member (ID %s) has registered at your website.%sIf you did not allow e-mail activation, you have to enable the account manually in the back end.</source>
-        <target>Novi korisnik (ID %s) registrirao se na vašim web stranicama.%sAko niste dozvolili e-mail aktivaciju, morate ručno uključiti ovaj korisnički račun u Backend-u.</target>
-      </trans-unit>
-      <trans-unit id="MSC.requestPassword">
-        <source>Request password</source>
-        <target>Zatraži šifru</target>
-      </trans-unit>
-      <trans-unit id="MSC.setNewPassword">
-        <source>Set new password</source>
-        <target>Postavi novu šifru</target>
-      </trans-unit>
-      <trans-unit id="MSC.newPasswordSet">
-        <source>Your password has been updated.</source>
-        <target>Vaša šifra je ažurirana.</target>
-      </trans-unit>
-      <trans-unit id="MSC.passwordSubject">
-        <source>Your password request for %s</source>
-        <target>Vaš zahtijev za šifru na %s</target>
-      </trans-unit>
-      <trans-unit id="MSC.accountNotFound">
-        <source>No matching account found</source>
-        <target>Nije pronađen odgovarajući korisnički račun.</target>
-      </trans-unit>
-      <trans-unit id="MSC.securityQuestion">
-        <source>Security question</source>
-        <target>Sigurnosno pitanje</target>
-      </trans-unit>
-      <trans-unit id="MSC.closeAccount">
-        <source>Close account</source>
-        <target>Zatvori račun</target>
+      <trans-unit id="MSC.templatesTheme">
+        <source>Theme %s</source>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>
@@ -1374,177 +1887,35 @@
         <source>YiB</source>
         <target>YB</target>
       </trans-unit>
-      <trans-unit id="SEC.question1">
-        <source>Please add %d and %d.</source>
-        <target>Zbrojite %d i %d.</target>
-      </trans-unit>
-      <trans-unit id="SEC.question2">
-        <source>What is the sum of %d and %d?</source>
-        <target>Koji je zbroj %d i %d?</target>
-      </trans-unit>
-      <trans-unit id="SEC.question3">
-        <source>Please calculate %d plus %d.</source>
-        <target>Izračunajte %d plus %d.</target>
-      </trans-unit>
-      <trans-unit id="CTE.texts">
-        <source>Text elements</source>
-        <target>Tekstovni elementi</target>
-      </trans-unit>
-      <trans-unit id="CTE.headline.0">
-        <source>Headline</source>
-        <target>Naslov</target>
-      </trans-unit>
-      <trans-unit id="CTE.headline.1">
-        <source>Generates a headline (h1 - h6).</source>
-        <target>Generira naslov (h1 - h6).</target>
-      </trans-unit>
-      <trans-unit id="CTE.text.0">
-        <source>Text</source>
-        <target>Tekst</target>
-      </trans-unit>
-      <trans-unit id="CTE.text.1">
-        <source>Generates a rich text element.</source>
-        <target>Generira element bogatog teksta (rich text).</target>
-      </trans-unit>
-      <trans-unit id="CTE.html.0">
-        <source>HTML</source>
-        <target>HTML</target>
-      </trans-unit>
-      <trans-unit id="CTE.html.1">
-        <source>Allows you to add custom HTML code.</source>
-        <target>Dozvoljava da dodate standardni HTML kod.</target>
-      </trans-unit>
-      <trans-unit id="CTE.list.0">
-        <source>List</source>
-        <target>Lista</target>
-      </trans-unit>
-      <trans-unit id="CTE.list.1">
-        <source>Generates an ordered or unordered list.</source>
-        <target>Generira uređenu ili neuređenu listu.</target>
-      </trans-unit>
-      <trans-unit id="CTE.table.0">
-        <source>Table</source>
-        <target>Tablica</target>
-      </trans-unit>
-      <trans-unit id="CTE.table.1">
-        <source>Generates an optionally sortable table.</source>
-        <target>Generira tablicu s opcionalnim redoslijedom.</target>
-      </trans-unit>
-      <trans-unit id="CTE.accordion.0">
-        <source>Accordion</source>
-        <target>Harmonika</target>
-      </trans-unit>
-      <trans-unit id="CTE.accordion.1">
-        <source>Generates a MooTools accordion pane.</source>
-        <target>Generira mootools ploču s harmonikom (na razvlačenje).</target>
-      </trans-unit>
-      <trans-unit id="CTE.code.0">
-        <source>Code</source>
-        <target>Kod</target>
-      </trans-unit>
-      <trans-unit id="CTE.code.1">
-        <source>Highlights code snippets and prints them to the screen.</source>
-        <target>Ističe dijeliće koda i ispisuje ih na ekranu.</target>
-      </trans-unit>
-      <trans-unit id="CTE.links">
-        <source>Link elements</source>
-        <target>Link elementi</target>
-      </trans-unit>
-      <trans-unit id="CTE.hyperlink.0">
-        <source>Hyperlink</source>
-        <target>Hiperveza</target>
-      </trans-unit>
-      <trans-unit id="CTE.hyperlink.1">
-        <source>Generates a link to another website.</source>
-        <target>Generira link za drugi sajt.</target>
-      </trans-unit>
-      <trans-unit id="CTE.toplink.0">
-        <source>Top link</source>
-        <target>Gornji link</target>
-      </trans-unit>
-      <trans-unit id="CTE.toplink.1">
-        <source>Generates a link to jump to the top of the page.</source>
-        <target>Generira link za skok na vrh stranice.</target>
-      </trans-unit>
-      <trans-unit id="CTE.image.0">
-        <source>Image</source>
-        <target>Slika</target>
-      </trans-unit>
-      <trans-unit id="CTE.image.1">
-        <source>Generates a stand-alone image.</source>
-        <target>Generira samostalnu sliku.</target>
-      </trans-unit>
-      <trans-unit id="CTE.gallery.0">
-        <source>Gallery</source>
-        <target>Galerija slika</target>
-      </trans-unit>
-      <trans-unit id="CTE.gallery.1">
-        <source>Generates a lightbox image gallery.</source>
-        <target>Generira lightbox galeriju slika.</target>
-      </trans-unit>
-      <trans-unit id="CTE.files">
-        <source>File elements</source>
-        <target>Elementi datoteke</target>
-      </trans-unit>
-      <trans-unit id="CTE.download.0">
-        <source>Download</source>
-        <target>Download</target>
-      </trans-unit>
-      <trans-unit id="CTE.download.1">
-        <source>Generates a link to download a file.</source>
-        <target>Generira link za download datoteke.</target>
-      </trans-unit>
-      <trans-unit id="CTE.downloads.0">
-        <source>Downloads</source>
-        <target>Downloadi</target>
-      </trans-unit>
-      <trans-unit id="CTE.downloads.1">
-        <source>Generates multiple links to download files.</source>
-        <target>Generira višestruke linkove za download datoteka.</target>
-      </trans-unit>
-      <trans-unit id="CTE.includes">
-        <source>Include elements</source>
-        <target>Uključi elemente</target>
-      </trans-unit>
-      <trans-unit id="CTE.article.0">
-        <source>Article</source>
-        <target>Članak</target>
-      </trans-unit>
-      <trans-unit id="CTE.article.1">
-        <source>Includes another article.</source>
-        <target>Uključuje drugi članak.</target>
-      </trans-unit>
-      <trans-unit id="CTE.alias.0">
-        <source>Content element</source>
-        <target>Element sadržaja</target>
-      </trans-unit>
-      <trans-unit id="CTE.alias.1">
-        <source>Includes another content element.</source>
-        <target>Uključuje drugi element sadržaja.</target>
-      </trans-unit>
-      <trans-unit id="CTE.form.0">
-        <source>Form</source>
-        <target>Obrazac</target>
-      </trans-unit>
-      <trans-unit id="CTE.form.1">
-        <source>Includes a form.</source>
-        <target>Uključuje obrazac.</target>
-      </trans-unit>
-      <trans-unit id="CTE.module.0">
+      <trans-unit id="CONFIRM.do">
         <source>Module</source>
-        <target>Modul</target>
       </trans-unit>
-      <trans-unit id="CTE.module.1">
-        <source>Includes a front end module.</source>
-        <target>Uključuje modul za korisničko sučelje.</target>
+      <trans-unit id="CONFIRM.table">
+        <source>Affected table</source>
       </trans-unit>
-      <trans-unit id="CTE.teaser.0">
-        <source>Article teaser</source>
-        <target>Najava članka</target>
+      <trans-unit id="CONFIRM.act">
+        <source>Action</source>
       </trans-unit>
-      <trans-unit id="CTE.teaser.1">
-        <source>Displays the teaser text of an article.</source>
-        <target>Prikazuje najavni tekst članka.</target>
+      <trans-unit id="CONFIRM.id">
+        <source>Affected record</source>
+      </trans-unit>
+      <trans-unit id="DP.select_a_time">
+        <source>Select a time</source>
+      </trans-unit>
+      <trans-unit id="DP.use_mouse_wheel">
+        <source>Use the mouse wheel to quickly change value</source>
+      </trans-unit>
+      <trans-unit id="DP.time_confirm_button">
+        <source>OK</source>
+      </trans-unit>
+      <trans-unit id="DP.apply_range">
+        <source>Apply</source>
+      </trans-unit>
+      <trans-unit id="DP.cancel">
+        <source>Cancel</source>
+      </trans-unit>
+      <trans-unit id="DP.week">
+        <source>Wk</source>
       </trans-unit>
     </body>
   </file>

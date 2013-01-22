@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/repository/languages/en/tl_repository.php" source-language="en">
     <body>
       <trans-unit id="tl_repository.category.0">
@@ -113,6 +112,30 @@
       <trans-unit id="tl_repository.version.1">
         <source>Version numbers must be in format n.n.n s, where n are integers and s is one of: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</source>
         <target>Versijos numeriai turi būti įrašyti kaip n.n.n s (n - sveikieji skaičiai, s - vienas iš: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable).</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.0">
+        <source>License key</source>
+        <target>Licencijos raktas</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.1">
+        <source>Enter the license key that you got from the extension vendor.</source>
+        <target>Įrašykite licencijos raktą, kurį Jums suteikė priedo pardavėjas.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.0">
+        <source>Uninstall protection</source>
+        <target>Šalinimo apsauga</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.1">
+        <source>Protect extension against accidental uninstallation.</source>
+        <target>Apsaugoti priedą nuo netyčinio šalinimo.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.0">
+        <source>Update protection</source>
+        <target>Atnaujinimo apsauga</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.1">
+        <source>Protect extension against accidental update.</source>
+        <target>Apsaugoti plėtinį nuo netyčinio atnaujinimo.</target>
       </trans-unit>
       <trans-unit id="tl_repository.author">
         <source>Author</source>
@@ -294,30 +317,6 @@
         <source>yes</source>
         <target>taip</target>
       </trans-unit>
-      <trans-unit id="tl_repository.lickey.0">
-        <source>License key</source>
-        <target>Licencijos raktas</target>
-      </trans-unit>
-      <trans-unit id="tl_repository.lickey.1">
-        <source>Enter the license key that you got from the extension vendor.</source>
-        <target>Įrašykite licencijos raktą, kurį Jums suteikė priedo pardavėjas.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository.uninstprotect.0">
-        <source>Uninstall protection</source>
-        <target>Šalinimo apsauga</target>
-      </trans-unit>
-      <trans-unit id="tl_repository.uninstprotect.1">
-        <source>Protect extension against accidental uninstallation.</source>
-        <target>Apsaugoti priedą nuo netyčinio šalinimo.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository.updateprotect.0">
-        <source>Update protection</source>
-        <target>Atnaujinimo apsauga</target>
-      </trans-unit>
-      <trans-unit id="tl_repository.updateprotect.1">
-        <source>Protect extension against accidental update.</source>
-        <target>Apsaugoti plėtinį nuo netyčinio atnaujinimo.</target>
-      </trans-unit>
       <trans-unit id="tl_repository.action">
         <source>Action</source>
         <target>Veiksmas</target>
@@ -494,9 +493,57 @@
         <source>Verify/repair %s %s build %s</source>
         <target>Sutikrinti/Taisyti %s %s build %s</target>
       </trans-unit>
+      <trans-unit id="tl_repository.approvedForLabel">
+        <source>Approved for</source>
+        <target>Patvirtinta versijai</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.approvedForText">
+        <source>Contao %s to %s</source>
+        <target>Contao nuo %s iki %s</target>
+      </trans-unit>
       <trans-unit id="tl_repository.missingSoapModule">
         <source>SOAP extension not loaded (configure PHP with --enable-soap).</source>
         <target>Neužkrautas SOAP plėtinys (sukonfigūruokite PHP su --enable-soap).</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.uptodate">
+        <source>Up to date</source>
+        <target>Nereikalauja atnaujinimo.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapproved">
+        <source>Not approved for %s %s</source>
+        <target>Nepatvirtinta %s %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapprovedwith">
+        <source>Not approved with %s %s</source>
+        <target>Nepatvirtinta su %s %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.shouldwork">
+        <source>Expected to be compatible with %s %s</source>
+        <target>Tikėtina kad veiks su %s %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.newversion">
+        <source>Version %s build %s available</source>
+        <target>Nauja versija %s build %s prieinama</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.depmissing">
+        <source>Missing required extension %s</source>
+        <target>Pasigendu reikalaujamo priedo %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extnotfound">
+        <source>Extension not found in repository</source>
+        <target>Priedas talpykloje nerastas.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.vernotfound">
+        <source>Installed version not found in repository</source>
+        <target>Įdiegta versija talpykloje nerasta.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extneedkey">
+        <source>License key required, install extension in advance</source>
+        <target>Reikalingas licencijos raktas, priedą galite įdiegti dabar.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.errorinstall">
+        <source>Corrupted, update/repair required</source>
+        <target>Diegimas nepavyko, pameginkite atnaujinti/taisyti.</target>
       </trans-unit>
       <trans-unit id="tl_repository_type_options.free">
         <source>Free</source>
@@ -585,46 +632,6 @@
       <trans-unit id="tl_repository_state_options.stable">
         <source>Stable</source>
         <target>Stable</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.uptodate">
-        <source>Up to date</source>
-        <target>Nereikalauja atnaujinimo.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.notapproved">
-        <source>Not approved for %s %s</source>
-        <target>Nepatvirtinta %s %s.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.notapprovedwith">
-        <source>Not approved with %s %s</source>
-        <target>Nepatvirtinta su %s %s.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.shouldwork">
-        <source>Expected to be compatible with %s %s</source>
-        <target>Tikėtina kad veiks su %s %s</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.newversion">
-        <source>Version %s build %s available</source>
-        <target>Nauja versija %s build %s prieinama</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.depmissing">
-        <source>Missing required extension %s</source>
-        <target>Pasigendu reikalaujamo priedo %s.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.extnotfound">
-        <source>Extension not found in repository</source>
-        <target>Priedas talpykloje nerastas.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.vernotfound">
-        <source>Installed version not found in repository</source>
-        <target>Įdiegta versija talpykloje nerasta.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.extneedkey">
-        <source>License key required, install extension in advance</source>
-        <target>Reikalingas licencijos raktas, priedą galite įdiegti dabar.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.errorinstall">
-        <source>Corrupted, update/repair required</source>
-        <target>Diegimas nepavyko, pameginkite atnaujinti/taisyti.</target>
       </trans-unit>
     </body>
   </file>

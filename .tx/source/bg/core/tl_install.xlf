@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_install.php" source-language="en">
     <body>
       <trans-unit id="tl_install.installTool.0">
@@ -55,16 +54,40 @@
         <target>Колация</target>
       </trans-unit>
       <trans-unit id="tl_install.collation.1">
-        <source>For more information see the &lt;a href="http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html" target="_blank"&gt;MySQL manual&lt;/a&gt;.</source>
-        <target>За повече информация, прегледайте &lt;a href="http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html" target="_blank"&gt;Наръчника на MySQL&lt;/a&gt;</target>
+        <source>For more information see the &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;MySQL manual&lt;/a&gt;.</source>
+        <target>За повече информация, прегледайте &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;Наръчника на MySQL&lt;/a&gt;</target>
+      </trans-unit>
+      <trans-unit id="tl_install.update.0">
+        <source>Update database tables</source>
+      </trans-unit>
+      <trans-unit id="tl_install.update.1">
+        <source>Please note that the update assistant has only been tested with MySQL and MySQLi drivers. If you are using a different database (e.g. Oracle), you might have to install or update your database manually.</source>
+      </trans-unit>
+      <trans-unit id="tl_install.template.0">
+        <source>Import a template</source>
+      </trans-unit>
+      <trans-unit id="tl_install.template.1">
+        <source>Here you can import an &lt;em&gt;.sql&lt;/em&gt; file from the &lt;em&gt;templates&lt;/em&gt; directory with a pre-configured example website. Existing data will be deleted! If you only want to import a theme, please use the theme manager in the Contao back end instead.</source>
+      </trans-unit>
+      <trans-unit id="tl_install.admin.0">
+        <source>Create an admin user</source>
+      </trans-unit>
+      <trans-unit id="tl_install.admin.1">
+        <source>If you have imported the example website, the admin's username is &lt;strong&gt;k.jones&lt;/strong&gt; and the password is &lt;strong&gt;kevinjones&lt;/strong&gt;. See the example website (front end) for more information.</source>
       </trans-unit>
       <trans-unit id="tl_install.completed.0">
         <source>Congratulations!</source>
         <target>Поздравления!</target>
       </trans-unit>
       <trans-unit id="tl_install.completed.1">
-        <source>Now please log into the &lt;a href="contao/"&gt;Contao back end&lt;/a&gt; and check the system settings. Then visit your website to make sure that Contao is working correctly.</source>
-        <target>Сега влезте в &lt;a href="contao/index.php"&gt;В административното приложение за Contao&lt;/a&gt; и проверете системните настройки! След като настроите системата, посетете сайта, за да се уверите, че Contao работи правилно.</target>
+        <source>Now please log into the &lt;a href=&quot;contao/&quot;&gt;Contao back end&lt;/a&gt; and check the system settings. Then visit your website to make sure that Contao is working correctly.</source>
+        <target>Сега влезте в &lt;a href=&quot;contao/index.php&quot;&gt;В административното приложение за Contao&lt;/a&gt; и проверете системните настройки! След като настроите системата, посетете сайта, за да се уверите, че Contao работи правилно.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftp.0">
+        <source>Modify files via FTP</source>
+      </trans-unit>
+      <trans-unit id="tl_install.ftp.1">
+        <source>Your server does not support file access via PHP; most likely PHP runs as Apache module under a different user. Therefore please enter your FTP login details, so Contao can modify files via FTP (Safe Mode Hack).</source>
       </trans-unit>
       <trans-unit id="tl_install.accept">
         <source>Accept license</source>
@@ -166,9 +189,21 @@
         <source>Update database</source>
         <target>Обновяване на базата данни</target>
       </trans-unit>
+      <trans-unit id="tl_install.saveCollation">
+        <source>Change collation</source>
+      </trans-unit>
+      <trans-unit id="tl_install.updateX">
+        <source>It seems that you are upgrading from a Contao version prior to version %s. If that is the case, &lt;strong&gt;it is required to run the version %s update&lt;/strong&gt; to ensure the integrity of your data!</source>
+      </trans-unit>
       <trans-unit id="tl_install.updateXrun">
         <source>Run version %s update</source>
         <target>Стартиране на надграждане до версия %s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateXrunStep">
+        <source>Run version %s update - step %s</source>
+      </trans-unit>
+      <trans-unit id="tl_install.importException">
+        <source>The import failed! Is the database structure up to date and is the template file compatible with your Contao version?</source>
       </trans-unit>
       <trans-unit id="tl_install.importError">
         <source>Please choose a template file!</source>
@@ -251,12 +286,18 @@
         <target>Не може да бъде установена връзка с FTP съръвъра %s.</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpUserError">
-        <source>Could not login as "%s"</source>
-        <target>Не може да се автентикира като "%s"</target>
+        <source>Could not login as &quot;%s&quot;</source>
+        <target>Не може да се автентикира като &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpPathError">
         <source>Could not locate Contao directory %s</source>
         <target>Не може д абуде намерена директорията на Contao %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.filesRenamed">
+        <source>The configured files directory does not exist!</source>
+      </trans-unit>
+      <trans-unit id="tl_install.filesWarning">
+        <source>Did you rename the &lt;strong&gt;tl_files&lt;/strong&gt; folder to &lt;strong&gt;files&lt;/strong&gt;? You cannot just rename the folder, because all the file references in the database and your style sheets will still point to the old location. If you want to rename the folder, please do so after the version 3 update and make sure to adjust your database data with the following script: %s.</source>
       </trans-unit>
       <trans-unit id="tl_install.CREATE">
         <source>Create new tables</source>

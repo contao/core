@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_user.php" source-language="en">
     <body>
       <trans-unit id="tl_user.username.0">
@@ -42,6 +41,12 @@
         <source>Here you can override the global back end theme.</source>
         <target>Ovdje možete zamijeniti globalnu temu administratorskog sučelja.</target>
       </trans-unit>
+      <trans-unit id="tl_user.uploader.0">
+        <source>File uploader</source>
+      </trans-unit>
+      <trans-unit id="tl_user.uploader.1">
+        <source>Here you can chose a file uploader.</source>
+      </trans-unit>
       <trans-unit id="tl_user.showHelp.0">
         <source>Show explanation</source>
         <target>Prikaži objašnjenje</target>
@@ -73,6 +78,12 @@
       <trans-unit id="tl_user.useCE.1">
         <source>Use the code editor to modify code elements.</source>
         <target>Koristite editor koda kako bi modificirali elemente koda.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.pwChange.0">
+        <source>Password change required</source>
+      </trans-unit>
+      <trans-unit id="tl_user.pwChange.1">
+        <source>Make the user change his password upon the next login.</source>
       </trans-unit>
       <trans-unit id="tl_user.admin.0">
         <source>Make the user an administrator</source>
@@ -218,6 +229,9 @@
         <source>Back end settings</source>
         <target>Postavke administratorskog sučelja</target>
       </trans-unit>
+      <trans-unit id="tl_user.theme_legend">
+        <source>Back end theme</source>
+      </trans-unit>
       <trans-unit id="tl_user.password_legend">
         <source>Password settings</source>
         <target>Postavke šifre</target>
@@ -277,6 +291,9 @@
       <trans-unit id="tl_user.tempPurged">
         <source>The page cache has been purged</source>
         <target>Privremena mapa je očišćena.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.FileUpload">
+        <source>Default uploader</source>
       </trans-unit>
       <trans-unit id="tl_user.new.0">
         <source>New user</source>

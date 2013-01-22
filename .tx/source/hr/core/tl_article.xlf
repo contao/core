@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_article.php" source-language="en">
     <body>
       <trans-unit id="tl_article.title.0">
@@ -63,8 +62,8 @@
         <target>Uvod članka</target>
       </trans-unit>
       <trans-unit id="tl_article.teaser.1">
-        <source>The article teaser can also be displayed with the content element "article teaser".</source>
-        <target>Uvod članka može također biti prikazan i s elementom sadržaja "uvod članka".</target>
+        <source>The article teaser can also be displayed with the content element &quot;article teaser&quot;.</source>
+        <target>Uvod članka može također biti prikazan i s elementom sadržaja &quot;uvod članka&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_article.printable.0">
         <source>Syndication</source>
@@ -157,6 +156,9 @@
       <trans-unit id="tl_article.twitter">
         <source>Share on Twitter</source>
         <target>Podijeli na Twitteru</target>
+      </trans-unit>
+      <trans-unit id="tl_article.gplus">
+        <source>Share on Google+</source>
       </trans-unit>
       <trans-unit id="tl_article.header">
         <source>Header</source>

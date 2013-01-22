@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_templates.php" source-language="en">
     <body>
       <trans-unit id="tl_templates.original.0">
@@ -27,12 +26,12 @@
         <target>Kreiraj predložak</target>
       </trans-unit>
       <trans-unit id="tl_templates.exists">
-        <source>Template "%s" exists already!</source>
-        <target>Predložak "%s" već postoji!</target>
+        <source>Template &quot;%s&quot; exists already!</source>
+        <target>Predložak &quot;%s&quot; već postoji!</target>
       </trans-unit>
       <trans-unit id="tl_templates.invalid">
-        <source>Invalid target directory "%s"!</source>
-        <target>Neispravan odredišni direktorij "%s"!</target>
+        <source>Invalid target directory &quot;%s&quot;!</source>
+        <target>Neispravan odredišni direktorij &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="tl_templates.new_tpl.0">
         <source>New template</source>

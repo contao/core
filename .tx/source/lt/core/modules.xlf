@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/modules.php" source-language="en">
     <body>
       <trans-unit id="MOD.content">
@@ -41,6 +40,14 @@
       <trans-unit id="MOD.page.1">
         <source>Set up the site structure of your website(s)</source>
         <target>Sukurkite tinklalapio struktūrą.</target>
+      </trans-unit>
+      <trans-unit id="MOD.tpl_editor.0">
+        <source>Templates</source>
+        <target>Šablonai</target>
+      </trans-unit>
+      <trans-unit id="MOD.tpl_editor.1">
+        <source>Edit templates in the back end</source>
+        <target>Šis modulis leidžia Jums redaguoti šablonų failus.</target>
       </trans-unit>
       <trans-unit id="MOD.accounts">
         <source>Account manager</source>
@@ -130,13 +137,26 @@
         <source>Change your personal data or set a new password</source>
         <target>Keiskite savo asmeninę informaciją ar nustatykite naują slaptažodį.</target>
       </trans-unit>
-      <trans-unit id="MOD.tpl_editor.0">
-        <source>Templates</source>
-        <target>Šablonai</target>
+      <trans-unit id="MOD.tl_style">
+        <source>Style sheets</source>
       </trans-unit>
-      <trans-unit id="MOD.tpl_editor.1">
-        <source>Edit templates in the back end</source>
-        <target>Šis modulis leidžia Jums redaguoti šablonų failus.</target>
+      <trans-unit id="MOD.tl_style_sheet">
+        <source>Style sheets</source>
+      </trans-unit>
+      <trans-unit id="MOD.tl_module">
+        <source>Front end modules</source>
+      </trans-unit>
+      <trans-unit id="MOD.tl_layout">
+        <source>Page layouts</source>
+      </trans-unit>
+      <trans-unit id="MOD.css">
+        <source>Style sheets</source>
+      </trans-unit>
+      <trans-unit id="MOD.modules">
+        <source>Front end modules</source>
+      </trans-unit>
+      <trans-unit id="MOD.layout">
+        <source>Page layouts</source>
       </trans-unit>
       <trans-unit id="FMD.navigationMenu">
         <source>Navigation</source>
@@ -234,6 +254,30 @@
         <source>Generates a form to edit a user's personal data</source>
         <target>Sukuria formą asmeninės vartotojo informacijos redagavimui.</target>
       </trans-unit>
+      <trans-unit id="FMD.registration.0">
+        <source>Registration</source>
+        <target>Registracija</target>
+      </trans-unit>
+      <trans-unit id="FMD.registration.1">
+        <source>Generates a user registration form</source>
+        <target>Šis modulis sukuria formas, kurios leidžia naujiems nariams užsiregistruoti jūsų tinklalapyje.</target>
+      </trans-unit>
+      <trans-unit id="FMD.lostPassword.0">
+        <source>Lost password</source>
+        <target>Pamirštas slaptažodis</target>
+      </trans-unit>
+      <trans-unit id="FMD.lostPassword.1">
+        <source>Generates a form to request a new password</source>
+        <target>Šis modulis sukuria formas, kurios leidžia nariams prašyti naujo slaptažodžio.</target>
+      </trans-unit>
+      <trans-unit id="FMD.closeAccount.0">
+        <source>Close account</source>
+        <target>Naikinti vartotoją</target>
+      </trans-unit>
+      <trans-unit id="FMD.closeAccount.1">
+        <source>Generates a form to delete a member account</source>
+        <target>Sukuria vartotojo trynimo formą.</target>
+      </trans-unit>
       <trans-unit id="FMD.application">
         <source>Applications</source>
         <target>Aplikacijos</target>
@@ -266,14 +310,6 @@
         <source>Miscellaneous</source>
         <target>Įvairūs</target>
       </trans-unit>
-      <trans-unit id="FMD.html.0">
-        <source>Custom HTML</source>
-        <target>Papildomas HTML</target>
-      </trans-unit>
-      <trans-unit id="FMD.html.1">
-        <source>Allows you to add custom HTML code</source>
-        <target>Leidžia pridėti papildomą HTML kodą.</target>
-      </trans-unit>
       <trans-unit id="FMD.flash.0">
         <source>Flash movie</source>
         <target>Flash animacija</target>
@@ -290,29 +326,13 @@
         <source>Adds a random image to the page</source>
         <target>Į puslapį įterpiamas atsitiktinis paveikslėlis.</target>
       </trans-unit>
-      <trans-unit id="FMD.registration.0">
-        <source>Registration</source>
-        <target>Registracija</target>
+      <trans-unit id="FMD.html.0">
+        <source>Custom HTML</source>
+        <target>Papildomas HTML</target>
       </trans-unit>
-      <trans-unit id="FMD.registration.1">
-        <source>Generates a user registration form</source>
-        <target>Šis modulis sukuria formas, kurios leidžia naujiems nariams užsiregistruoti jūsų tinklalapyje.</target>
-      </trans-unit>
-      <trans-unit id="FMD.lostPassword.0">
-        <source>Lost password</source>
-        <target>Pamirštas slaptažodis</target>
-      </trans-unit>
-      <trans-unit id="FMD.lostPassword.1">
-        <source>Generates a form to request a new password</source>
-        <target>Šis modulis sukuria formas, kurios leidžia nariams prašyti naujo slaptažodžio.</target>
-      </trans-unit>
-      <trans-unit id="FMD.closeAccount.0">
-        <source>Close account</source>
-        <target>Naikinti vartotoją</target>
-      </trans-unit>
-      <trans-unit id="FMD.closeAccount.1">
-        <source>Generates a form to delete a member account</source>
-        <target>Sukuria vartotojo trynimo formą.</target>
+      <trans-unit id="FMD.html.1">
+        <source>Allows you to add custom HTML code</source>
+        <target>Leidžia pridėti papildomą HTML kodą.</target>
       </trans-unit>
       <trans-unit id="FMD.rss_reader.0">
         <source>RSS reader</source>

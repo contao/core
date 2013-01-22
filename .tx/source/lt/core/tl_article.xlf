@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_article.php" source-language="en">
     <body>
       <trans-unit id="tl_article.title.0">
@@ -63,7 +62,7 @@
         <target>Straipsnio anonsas</target>
       </trans-unit>
       <trans-unit id="tl_article.teaser.1">
-        <source>The article teaser can also be displayed with the content element "article teaser".</source>
+        <source>The article teaser can also be displayed with the content element &quot;article teaser&quot;.</source>
         <target>Anonsas taipogi gali būti rodomas kaip turinio elementas „Straipsnio anonsas“.</target>
       </trans-unit>
       <trans-unit id="tl_article.printable.0">
@@ -157,6 +156,10 @@
       <trans-unit id="tl_article.twitter">
         <source>Share on Twitter</source>
         <target>Dalintis Twitter</target>
+      </trans-unit>
+      <trans-unit id="tl_article.gplus">
+        <source>Share on Google+</source>
+        <target>Dalintis Google+</target>
       </trans-unit>
       <trans-unit id="tl_article.header">
         <source>Header</source>

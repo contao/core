@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/modules.php" source-language="en">
     <body>
       <trans-unit id="MOD.content">
@@ -41,6 +40,14 @@
       <trans-unit id="MOD.page.1">
         <source>Set up the site structure of your website(s)</source>
         <target>Създадавате структурата на сайта и страниците в него, както и някои параметри като език, кеширане или разрешения за достъп.</target>
+      </trans-unit>
+      <trans-unit id="MOD.tpl_editor.0">
+        <source>Templates</source>
+        <target>Шаблони</target>
+      </trans-unit>
+      <trans-unit id="MOD.tpl_editor.1">
+        <source>Edit templates in the back end</source>
+        <target>Този модул ви позволява да редактирате файлове шаблони.</target>
       </trans-unit>
       <trans-unit id="MOD.accounts">
         <source>Account manager</source>
@@ -130,13 +137,26 @@
         <source>Change your personal data or set a new password</source>
         <target>Промяна на лични данни като име, електронна поща или парола.</target>
       </trans-unit>
-      <trans-unit id="MOD.tpl_editor.0">
-        <source>Templates</source>
-        <target>Шаблони</target>
+      <trans-unit id="MOD.tl_style">
+        <source>Style sheets</source>
       </trans-unit>
-      <trans-unit id="MOD.tpl_editor.1">
-        <source>Edit templates in the back end</source>
-        <target>Този модул ви позволява да редактирате файлове шаблони.</target>
+      <trans-unit id="MOD.tl_style_sheet">
+        <source>Style sheets</source>
+      </trans-unit>
+      <trans-unit id="MOD.tl_module">
+        <source>Front end modules</source>
+      </trans-unit>
+      <trans-unit id="MOD.tl_layout">
+        <source>Page layouts</source>
+      </trans-unit>
+      <trans-unit id="MOD.css">
+        <source>Style sheets</source>
+      </trans-unit>
+      <trans-unit id="MOD.modules">
+        <source>Front end modules</source>
+      </trans-unit>
+      <trans-unit id="MOD.layout">
+        <source>Page layouts</source>
       </trans-unit>
       <trans-unit id="FMD.navigationMenu">
         <source>Navigation</source>
@@ -234,6 +254,30 @@
         <source>Generates a form to edit a user's personal data</source>
         <target>Този модул вгражда форма за сайта, коиято позволява на потребителите да променят личните си данни.</target>
       </trans-unit>
+      <trans-unit id="FMD.registration.0">
+        <source>Registration</source>
+        <target>Регистрация на потребител</target>
+      </trans-unit>
+      <trans-unit id="FMD.registration.1">
+        <source>Generates a user registration form</source>
+        <target>Генерира форма за регистрация.</target>
+      </trans-unit>
+      <trans-unit id="FMD.lostPassword.0">
+        <source>Lost password</source>
+        <target>Загубена парола</target>
+      </trans-unit>
+      <trans-unit id="FMD.lostPassword.1">
+        <source>Generates a form to request a new password</source>
+        <target>Генерира форма за искане на нова парола.</target>
+      </trans-unit>
+      <trans-unit id="FMD.closeAccount.0">
+        <source>Close account</source>
+        <target>Закриване на сметката</target>
+      </trans-unit>
+      <trans-unit id="FMD.closeAccount.1">
+        <source>Generates a form to delete a member account</source>
+        <target>Генерира форма за закриване на сметка на потребител от сайта.</target>
+      </trans-unit>
       <trans-unit id="FMD.application">
         <source>Applications</source>
         <target>Приложения</target>
@@ -266,14 +310,6 @@
         <source>Miscellaneous</source>
         <target>Разни</target>
       </trans-unit>
-      <trans-unit id="FMD.html.0">
-        <source>Custom HTML</source>
-        <target>Потребителски HTML код</target>
-      </trans-unit>
-      <trans-unit id="FMD.html.1">
-        <source>Allows you to add custom HTML code</source>
-        <target>Този модул ви позволява да включите потребителски HTML код.</target>
-      </trans-unit>
       <trans-unit id="FMD.flash.0">
         <source>Flash movie</source>
         <target>Flash филм</target>
@@ -290,29 +326,13 @@
         <source>Adds a random image to the page</source>
         <target>Този модул включва случайно избрана картинка в страницата.</target>
       </trans-unit>
-      <trans-unit id="FMD.registration.0">
-        <source>Registration</source>
-        <target>Регистрация на потребител</target>
+      <trans-unit id="FMD.html.0">
+        <source>Custom HTML</source>
+        <target>Потребителски HTML код</target>
       </trans-unit>
-      <trans-unit id="FMD.registration.1">
-        <source>Generates a user registration form</source>
-        <target>Генерира форма за регистрация.</target>
-      </trans-unit>
-      <trans-unit id="FMD.lostPassword.0">
-        <source>Lost password</source>
-        <target>Загубена парола</target>
-      </trans-unit>
-      <trans-unit id="FMD.lostPassword.1">
-        <source>Generates a form to request a new password</source>
-        <target>Генерира форма за искане на нова парола.</target>
-      </trans-unit>
-      <trans-unit id="FMD.closeAccount.0">
-        <source>Close account</source>
-        <target>Закриване на сметката</target>
-      </trans-unit>
-      <trans-unit id="FMD.closeAccount.1">
-        <source>Generates a form to delete a member account</source>
-        <target>Генерира форма за закриване на сметка на потребител от сайта.</target>
+      <trans-unit id="FMD.html.1">
+        <source>Allows you to add custom HTML code</source>
+        <target>Този модул ви позволява да включите потребителски HTML код.</target>
       </trans-unit>
       <trans-unit id="FMD.rss_reader.0">
         <source>RSS reader</source>

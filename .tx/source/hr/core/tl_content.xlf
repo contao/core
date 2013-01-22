@@ -1,15 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_content.php" source-language="en">
     <body>
-      <trans-unit id="tl_content.invisible.0">
-        <source>Invisible</source>
-        <target>Nevidljivo</target>
-      </trans-unit>
-      <trans-unit id="tl_content.invisible.1">
-        <source>Hide the element on the website.</source>
-        <target>Sakrijte ovaj element na sajtu.</target>
-      </trans-unit>
       <trans-unit id="tl_content.type.0">
         <source>Element type</source>
         <target>Vrsta elementa</target>
@@ -57,6 +48,12 @@
       <trans-unit id="tl_content.alt.1">
         <source>Here you can enter an alternate text for the image (&lt;em&gt;alt&lt;/em&gt; attribute).</source>
         <target>Pristupačan sajt uvijek mora pružiti alternativni tekst za slike i filmove s kratkim opisom njihovog sadržaja.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.title.0">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="tl_content.title.1">
+        <source>Here you can enter the image title (&lt;em&gt;title&lt;/em&gt; attribute).</source>
       </trans-unit>
       <trans-unit id="tl_content.size.0">
         <source>Image width and height</source>
@@ -202,21 +199,23 @@
         <source>Please select the operation mode of the accordion element.</source>
         <target>Odaberite način rada elementa harmonike.</target>
       </trans-unit>
-      <trans-unit id="tl_content.start.0">
-        <source>Show from</source>
-        <target>Početak omotača</target>
+      <trans-unit id="tl_content.mooStart.0">
+        <source>Wrapper start</source>
       </trans-unit>
-      <trans-unit id="tl_content.start.1">
-        <source>Do not show the element on the website before this day.</source>
-        <target>Označava početak ploče harmonike koja obuhvaća nekoliko elemenata sadržaja.</target>
+      <trans-unit id="tl_content.mooStart.1">
+        <source>Marks the beginning of an accordion pane that spans several content elements.</source>
       </trans-unit>
-      <trans-unit id="tl_content.stop.0">
-        <source>Show until</source>
-        <target>Završetak omotača</target>
+      <trans-unit id="tl_content.mooStop.0">
+        <source>Wrapper stop</source>
       </trans-unit>
-      <trans-unit id="tl_content.stop.1">
-        <source>Do not show the element on the website on and after this day.</source>
-        <target>Označava kraj ploče harmonike koja obuhvaća nekoliko elemenata sadržaja.</target>
+      <trans-unit id="tl_content.mooStop.1">
+        <source>Marks the end of an accordion pane that spans several content elements.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.mooSingle.0">
+        <source>Single element</source>
+      </trans-unit>
+      <trans-unit id="tl_content.mooSingle.1">
+        <source>Behaves like a single text element that is inside an accordion pane.</source>
       </trans-unit>
       <trans-unit id="tl_content.mooHeadline.0">
         <source>Section headline</source>
@@ -274,13 +273,19 @@
         <source>The link text will be displayed instead of the target URL.</source>
         <target>Prikazivat će se link u naslovu umjesto ciljanog URL-a.</target>
       </trans-unit>
+      <trans-unit id="tl_content.titleText.0">
+        <source>Link title</source>
+      </trans-unit>
+      <trans-unit id="tl_content.titleText.1">
+        <source>The link title is added as title attribute in the HTML markup.</source>
+      </trans-unit>
       <trans-unit id="tl_content.embed.0">
         <source>Embed the link</source>
         <target>Ugrađeni link</target>
       </trans-unit>
       <trans-unit id="tl_content.embed.1">
-        <source>Use the wildcard "%s" to embed the link in a phrase (e.g. &lt;em&gt;For more information please visit %s&lt;/em&gt;).</source>
-        <target>Koristite zamjenski znak "%s" kako bi ugradili link u izraz (npr. &lt;em&gt;Za dodatne informacije posjetite %s&lt;/em&gt;).</target>
+        <source>Use the wildcard &quot;%s&quot; to embed the link in a phrase (e.g. &lt;em&gt;For more information please visit %s&lt;/em&gt;).</source>
+        <target>Koristite zamjenski znak &quot;%s&quot; kako bi ugradili link u izraz (npr. &lt;em&gt;Za dodatne informacije posjetite %s&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_content.rel.0">
         <source>Lightbox</source>
@@ -306,6 +311,12 @@
         <source>Please select one or more files or folders from the files directory. If you select a folder, its files will be included automatically.</source>
         <target>Odaberite jednu ili više datoteka ili mapa iz direktorija datoteka. Ako odaberete mapu, njene će datoteke automatski biti uključene.</target>
       </trans-unit>
+      <trans-unit id="tl_content.orderSRC.0">
+        <source>Sort order</source>
+      </trans-unit>
+      <trans-unit id="tl_content.orderSRC.1">
+        <source>The sort order of the items.</source>
+      </trans-unit>
       <trans-unit id="tl_content.useHomeDir.0">
         <source>Use home directory</source>
         <target>Koristi temeljni direktorij</target>
@@ -330,6 +341,12 @@
         <source>The number of items per page. Set to 0 to disable pagination.</source>
         <target>Broj objekata po stranici. Postavite na 0 ako želite isključiti numeriranje stranica.</target>
       </trans-unit>
+      <trans-unit id="tl_content.numberOfItems.0">
+        <source>Total number of images</source>
+      </trans-unit>
+      <trans-unit id="tl_content.numberOfItems.1">
+        <source>Here you can limit the total number of images. Set to 0 to show all.</source>
+      </trans-unit>
       <trans-unit id="tl_content.sortBy.0">
         <source>Order by</source>
         <target>Redoslijed po</target>
@@ -345,6 +362,36 @@
       <trans-unit id="tl_content.galleryTpl.1">
         <source>Here you can select the gallery template.</source>
         <target>Ovdje možete odabrati predložak galerije.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSRC.0">
+        <source>Video/audio files</source>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSRC.1">
+        <source>Here you can add the video/audio file or multiple files if you are using different codecs.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.youtube.0">
+        <source>YouTube ID</source>
+      </trans-unit>
+      <trans-unit id="tl_content.youtube.1">
+        <source>Please enter the YouTube video ID (e.g. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_content.posterSRC.0">
+        <source>Preview image</source>
+      </trans-unit>
+      <trans-unit id="tl_content.posterSRC.1">
+        <source>Show this image instead of the first frame of the video before playback (videos only).</source>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSize.0">
+        <source>Player size</source>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSize.1">
+        <source>Width and height of the media player in pixels (videos only).</source>
+      </trans-unit>
+      <trans-unit id="tl_content.autoplay.0">
+        <source>Autoplay</source>
+      </trans-unit>
+      <trans-unit id="tl_content.autoplay.1">
+        <source>Automatically play the video when the page loads.</source>
       </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>
@@ -426,6 +473,30 @@
         <source>Here you can enter the spacing in front of and after the content element in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
         <target>Ovdje možete upisati razmak ispred i nakon elementa sadržaja, u pikselima. Trebali bi ste izbjegavati inline stilove i definirati razmak u CSS datoteci.</target>
       </trans-unit>
+      <trans-unit id="tl_content.invisible.0">
+        <source>Invisible</source>
+        <target>Nevidljivo</target>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible.1">
+        <source>Hide the element on the website.</source>
+        <target>Sakrijte ovaj element na sajtu.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.start.0">
+        <source>Show from</source>
+        <target>Početak omotača</target>
+      </trans-unit>
+      <trans-unit id="tl_content.start.1">
+        <source>Do not show the element on the website before this day.</source>
+        <target>Označava početak ploče harmonike koja obuhvaća nekoliko elemenata sadržaja.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.stop.0">
+        <source>Show until</source>
+        <target>Završetak omotača</target>
+      </trans-unit>
+      <trans-unit id="tl_content.stop.1">
+        <source>Do not show the element on the website on and after this day.</source>
+        <target>Označava kraj ploče harmonike koja obuhvaća nekoliko elemenata sadržaja.</target>
+      </trans-unit>
       <trans-unit id="tl_content.type_legend">
         <source>Element type</source>
         <target>Vrsta elementa</target>
@@ -490,6 +561,15 @@
         <source>Template settings</source>
         <target>Predložak komentara</target>
       </trans-unit>
+      <trans-unit id="tl_content.player_legend">
+        <source>Player settings</source>
+      </trans-unit>
+      <trans-unit id="tl_content.poster_legend">
+        <source>Preview image</source>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible_legend">
+        <source>Visibility</source>
+      </trans-unit>
       <trans-unit id="tl_content.ordered">
         <source>ordered list</source>
         <target>popis s poretkom</target>
@@ -513,6 +593,9 @@
       <trans-unit id="tl_content.date_desc">
         <source>Date (descending)</source>
         <target>Datum (silazno)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.custom">
+        <source>Custom order</source>
       </trans-unit>
       <trans-unit id="tl_content.random">
         <source>Random order</source>

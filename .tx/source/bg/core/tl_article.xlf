@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_article.php" source-language="en">
     <body>
       <trans-unit id="tl_article.title.0">
@@ -63,8 +62,8 @@
         <target>Кратък текст</target>
       </trans-unit>
       <trans-unit id="tl_article.teaser.1">
-        <source>The article teaser can also be displayed with the content element "article teaser".</source>
-        <target>Краткият текст може също да се покзва с елемента за съдържание "Кратък Текст"</target>
+        <source>The article teaser can also be displayed with the content element &quot;article teaser&quot;.</source>
+        <target>Краткият текст може също да се покзва с елемента за съдържание &quot;Кратък Текст&quot;</target>
       </trans-unit>
       <trans-unit id="tl_article.printable.0">
         <source>Syndication</source>
@@ -72,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_article.printable.1">
         <source>Here you can choose which options are available.</source>
-        <target>Показва връзка "отпечати като PDF" стиловите таблици с медия тип "print" или "all" ще бъдат разпознати.</target>
+        <target>Показва връзка &quot;отпечати като PDF&quot; стиловите таблици с медия тип &quot;print&quot; или &quot;all&quot; ще бъдат разпознати.</target>
       </trans-unit>
       <trans-unit id="tl_article.cssID.0">
         <source>CSS ID/class</source>
@@ -157,6 +156,9 @@
       <trans-unit id="tl_article.twitter">
         <source>Share on Twitter</source>
         <target>Споделяне в Twitter</target>
+      </trans-unit>
+      <trans-unit id="tl_article.gplus">
+        <source>Share on Google+</source>
       </trans-unit>
       <trans-unit id="tl_article.header">
         <source>Header</source>

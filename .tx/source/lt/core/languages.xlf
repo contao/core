@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/languages.php" source-language="en">
     <body>
       <trans-unit id="LNG.aa">
@@ -206,6 +205,9 @@
         <source>Indonesian</source>
         <target>Indoneziečių</target>
       </trans-unit>
+      <trans-unit id="LNG.ik">
+        <source>Inupiak</source>
+      </trans-unit>
       <trans-unit id="LNG.is">
         <source>Icelandic</source>
         <target>Islandų</target>
@@ -250,9 +252,21 @@
         <source>Korean</source>
         <target>Korejiečių</target>
       </trans-unit>
+      <trans-unit id="LNG.ks">
+        <source>Kashmiri</source>
+      </trans-unit>
+      <trans-unit id="LNG.ku">
+        <source>Kurdish</source>
+      </trans-unit>
+      <trans-unit id="LNG.ky">
+        <source>Kirghiz</source>
+      </trans-unit>
       <trans-unit id="LNG.la">
         <source>Latin</source>
         <target>Lotynų</target>
+      </trans-unit>
+      <trans-unit id="LNG.ln">
+        <source>Lingala</source>
       </trans-unit>
       <trans-unit id="LNG.lo">
         <source>Lao</source>
@@ -266,6 +280,42 @@
         <source>Latvian</source>
         <target>Latvių</target>
       </trans-unit>
+      <trans-unit id="LNG.mg">
+        <source>Malagasy</source>
+      </trans-unit>
+      <trans-unit id="LNG.mi">
+        <source>Maori</source>
+      </trans-unit>
+      <trans-unit id="LNG.mk">
+        <source>Macedonian</source>
+      </trans-unit>
+      <trans-unit id="LNG.ml">
+        <source>Malayalam</source>
+      </trans-unit>
+      <trans-unit id="LNG.mn">
+        <source>Mongolian</source>
+      </trans-unit>
+      <trans-unit id="LNG.mo">
+        <source>Moldavian</source>
+      </trans-unit>
+      <trans-unit id="LNG.mr">
+        <source>Marathi</source>
+      </trans-unit>
+      <trans-unit id="LNG.ms">
+        <source>Malay</source>
+      </trans-unit>
+      <trans-unit id="LNG.mt">
+        <source>Maltese</source>
+      </trans-unit>
+      <trans-unit id="LNG.my">
+        <source>Burmese</source>
+      </trans-unit>
+      <trans-unit id="LNG.na">
+        <source>Nauru</source>
+      </trans-unit>
+      <trans-unit id="LNG.ne">
+        <source>Nepali</source>
+      </trans-unit>
       <trans-unit id="LNG.nl">
         <source>Dutch</source>
         <target>Danų</target>
@@ -274,13 +324,34 @@
         <source>Norwegian</source>
         <target>Norvegų</target>
       </trans-unit>
+      <trans-unit id="LNG.oc">
+        <source>Occitan</source>
+      </trans-unit>
+      <trans-unit id="LNG.or">
+        <source>Oriya</source>
+      </trans-unit>
+      <trans-unit id="LNG.pa">
+        <source>Punjabi</source>
+      </trans-unit>
       <trans-unit id="LNG.pl">
         <source>Polish</source>
         <target>Lenkų</target>
       </trans-unit>
+      <trans-unit id="LNG.ps">
+        <source>Pashto, Pushto</source>
+      </trans-unit>
       <trans-unit id="LNG.pt">
         <source>Portuguese</source>
         <target>Portugalų</target>
+      </trans-unit>
+      <trans-unit id="LNG.qu">
+        <source>Quechua</source>
+      </trans-unit>
+      <trans-unit id="LNG.rm">
+        <source>Romansh</source>
+      </trans-unit>
+      <trans-unit id="LNG.rn">
+        <source>Kirundi</source>
       </trans-unit>
       <trans-unit id="LNG.ro">
         <source>Romanian</source>
@@ -290,9 +361,24 @@
         <source>Russian</source>
         <target>Rusų</target>
       </trans-unit>
+      <trans-unit id="LNG.rw">
+        <source>Kinyarwanda</source>
+      </trans-unit>
       <trans-unit id="LNG.sa">
         <source>Sanskrit</source>
         <target>Sanskritas</target>
+      </trans-unit>
+      <trans-unit id="LNG.sd">
+        <source>Sindhi</source>
+      </trans-unit>
+      <trans-unit id="LNG.sg">
+        <source>Sango</source>
+      </trans-unit>
+      <trans-unit id="LNG.sh">
+        <source>Serbo-Croatian</source>
+      </trans-unit>
+      <trans-unit id="LNG.si">
+        <source>Sinhala</source>
       </trans-unit>
       <trans-unit id="LNG.sk">
         <source>Slovak</source>
@@ -306,6 +392,9 @@
         <source>Samoan</source>
         <target>Samoa</target>
       </trans-unit>
+      <trans-unit id="LNG.sn">
+        <source>Shona</source>
+      </trans-unit>
       <trans-unit id="LNG.so">
         <source>Somali</source>
         <target>Somalių</target>
@@ -318,9 +407,27 @@
         <source>Serbian</source>
         <target>Serbų</target>
       </trans-unit>
+      <trans-unit id="LNG.ss">
+        <source>Siswati</source>
+      </trans-unit>
+      <trans-unit id="LNG.st">
+        <source>Sotho</source>
+      </trans-unit>
+      <trans-unit id="LNG.su">
+        <source>Sudanese</source>
+      </trans-unit>
       <trans-unit id="LNG.sv">
         <source>Swedish</source>
         <target>Švedų</target>
+      </trans-unit>
+      <trans-unit id="LNG.sw">
+        <source>Swahili</source>
+      </trans-unit>
+      <trans-unit id="LNG.ta">
+        <source>Tamil</source>
+      </trans-unit>
+      <trans-unit id="LNG.te">
+        <source>Telugu</source>
       </trans-unit>
       <trans-unit id="LNG.tg">
         <source>Tajik</source>
@@ -330,9 +437,18 @@
         <source>Thai</source>
         <target>Tailandiečių</target>
       </trans-unit>
+      <trans-unit id="LNG.ti">
+        <source>Tigrinya</source>
+      </trans-unit>
       <trans-unit id="LNG.tk">
         <source>Turkmen</source>
         <target>Turkmėnų</target>
+      </trans-unit>
+      <trans-unit id="LNG.tl">
+        <source>Tagalog</source>
+      </trans-unit>
+      <trans-unit id="LNG.tn">
+        <source>Setswana</source>
       </trans-unit>
       <trans-unit id="LNG.to">
         <source>Tonga</source>
@@ -342,9 +458,18 @@
         <source>Turkish</source>
         <target>Turkų</target>
       </trans-unit>
+      <trans-unit id="LNG.ts">
+        <source>Tsonga</source>
+      </trans-unit>
       <trans-unit id="LNG.tt">
         <source>Tatar</source>
         <target>Totorių</target>
+      </trans-unit>
+      <trans-unit id="LNG.tw">
+        <source>Twi</source>
+      </trans-unit>
+      <trans-unit id="LNG.ug">
+        <source>Uigur</source>
       </trans-unit>
       <trans-unit id="LNG.uk">
         <source>Ukrainian</source>
@@ -361,6 +486,24 @@
       <trans-unit id="LNG.vi">
         <source>Vietnamese</source>
         <target>Vienamiečių</target>
+      </trans-unit>
+      <trans-unit id="LNG.vo">
+        <source>Volapuk</source>
+      </trans-unit>
+      <trans-unit id="LNG.wo">
+        <source>Wolof</source>
+      </trans-unit>
+      <trans-unit id="LNG.xh">
+        <source>Xhosa</source>
+      </trans-unit>
+      <trans-unit id="LNG.yi">
+        <source>Yiddish</source>
+      </trans-unit>
+      <trans-unit id="LNG.yo">
+        <source>Yoruba</source>
+      </trans-unit>
+      <trans-unit id="LNG.za">
+        <source>Zhuang</source>
       </trans-unit>
       <trans-unit id="LNG.zh">
         <source>Chinese</source>

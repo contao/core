@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/faq/languages/en/tl_faq.php" source-language="en">
     <body>
       <trans-unit id="tl_faq.question.0">
@@ -58,6 +57,12 @@
         <source>Please choose the files you want to attach.</source>
         <target>Моля, изберете файловете, които искате да прикачите</target>
       </trans-unit>
+      <trans-unit id="tl_faq.noComments.0">
+        <source>Disable comments</source>
+      </trans-unit>
+      <trans-unit id="tl_faq.noComments.1">
+        <source>Do not allow comments for this particular FAQ.</source>
+      </trans-unit>
       <trans-unit id="tl_faq.published.0">
         <source>Publish the FAQ</source>
         <target>Публикуван</target>
@@ -65,6 +70,24 @@
       <trans-unit id="tl_faq.published.1">
         <source>Make the FAQ publicly visible on the website.</source>
         <target>Списъкът няма да се вижда докато не е публикуван.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.title_legend">
+        <source>Title and author</source>
+      </trans-unit>
+      <trans-unit id="tl_faq.answer_legend">
+        <source>Answer</source>
+      </trans-unit>
+      <trans-unit id="tl_faq.image_legend">
+        <source>Image settings</source>
+      </trans-unit>
+      <trans-unit id="tl_faq.enclosure_legend">
+        <source>Enclosures</source>
+      </trans-unit>
+      <trans-unit id="tl_faq.expert_legend">
+        <source>Expert settings</source>
+      </trans-unit>
+      <trans-unit id="tl_faq.publish_legend">
+        <source>Publish settings</source>
       </trans-unit>
       <trans-unit id="tl_faq.new.0">
         <source>New question</source>
@@ -113,6 +136,12 @@
       <trans-unit id="tl_faq.delete.1">
         <source>Delete question ID %s</source>
         <target>Изтриване на въпрос с ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.toggle.0">
+        <source>Publish/unpublish question</source>
+      </trans-unit>
+      <trans-unit id="tl_faq.toggle.1">
+        <source>Publish/unpublish question ID %s</source>
       </trans-unit>
       <trans-unit id="tl_faq.editheader.0">
         <source>Edit category</source>

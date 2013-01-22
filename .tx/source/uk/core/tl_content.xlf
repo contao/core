@@ -327,6 +327,7 @@
       </trans-unit>
       <trans-unit id="tl_content.orderSRC.1">
         <source>The sort order of the items.</source>
+        <target>Порядок сортування елементів.</target>
       </trans-unit>
       <trans-unit id="tl_content.useHomeDir.0">
         <source>Use home directory</source>

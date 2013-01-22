@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/repository/languages/en/tl_settings.php" source-language="en">
     <body>
       <trans-unit id="tl_settings.repository_wsdl.0">
@@ -9,10 +8,6 @@
       <trans-unit id="tl_settings.repository_wsdl.1">
         <source>Here you can enter the URL of the extension repository WSDL file.</source>
         <target>Ovdje možete upisati URL WSDL datoteke repozitorija ekstenzija.</target>
-      </trans-unit>
-      <trans-unit id="tl_settings.repository_legend">
-        <source>Extension repository</source>
-        <target>Repozitorij ekstenzija</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_languages.0">
         <source>Fallback languages</source>
@@ -37,6 +32,10 @@
       <trans-unit id="tl_settings.repository_unsafe_catalog.1">
         <source>Show incompatible extensions in the extension catalog. Note that installing incompatible extensions can break your Contao installation!</source>
         <target>Prikazati nekompatibilne ekstenzije u katalogu ekstenzija. Ne zaboravite da instalacija nekompatibilnih ekstenzija može razbiti vašu Contao instalaciju.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.repository_legend">
+        <source>Extension repository</source>
+        <target>Repozitorij ekstenzija</target>
       </trans-unit>
     </body>
   </file>

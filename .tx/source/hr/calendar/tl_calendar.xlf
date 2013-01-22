@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/calendar/languages/en/tl_calendar.php" source-language="en">
     <body>
       <trans-unit id="tl_calendar.title.0">
@@ -253,6 +252,12 @@
       <trans-unit id="tl_calendar.delete.1">
         <source>Delete calendar ID %s</source>
         <target>Izbrišite kalendar ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feeds.0">
+        <source>RSS feeds</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feeds.1">
+        <source>Manage RSS feeds</source>
       </trans-unit>
     </body>
   </file>

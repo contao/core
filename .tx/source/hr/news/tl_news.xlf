@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/news/languages/en/tl_news.php" source-language="en">
     <body>
       <trans-unit id="tl_news.headline.0">
@@ -55,8 +54,8 @@
         <target>Najava novosti</target>
       </trans-unit>
       <trans-unit id="tl_news.teaser.1">
-        <source>The news teaser can be shown in a news list instead of the full article. A "read more …" link will be added automatically.</source>
-        <target>Najava novosti može biti prikazana u popisu novosti umjesto cijelog članka. Automatski će se dodati link "Opširnije ...".</target>
+        <source>The news teaser can be shown in a news list instead of the full article. A &quot;read more …&quot; link will be added automatically.</source>
+        <target>Najava novosti može biti prikazana u popisu novosti umjesto cijelog članka. Automatski će se dodati link &quot;Opširnije ...&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_news.text.0">
         <source>News text</source>
@@ -103,32 +102,32 @@
         <target>Koristi standardnu</target>
       </trans-unit>
       <trans-unit id="tl_news.default.1">
-        <source>By clicking the "read more …" button, visitors will be redirected to the default page of the news archive.</source>
-        <target>Klikom na link "Opširnije ..." posjetitelji će biti preusmjereni na standardnu stranicu arhive novosti.</target>
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to the default page of the news archive.</source>
+        <target>Klikom na link &quot;Opširnije ...&quot; posjetitelji će biti preusmjereni na standardnu stranicu arhive novosti.</target>
       </trans-unit>
       <trans-unit id="tl_news.internal.0">
         <source>Page</source>
         <target>Interna stranica</target>
       </trans-unit>
       <trans-unit id="tl_news.internal.1">
-        <source>By clicking the "read more …" button, visitors will be redirected to a page.</source>
-        <target>Klikom na link "Opširnije ..." posjetitelji će biti preusmjereni na internu stranicu.</target>
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to a page.</source>
+        <target>Klikom na link &quot;Opširnije ...&quot; posjetitelji će biti preusmjereni na internu stranicu.</target>
       </trans-unit>
       <trans-unit id="tl_news.article.0">
         <source>Article</source>
         <target>Članak</target>
       </trans-unit>
       <trans-unit id="tl_news.article.1">
-        <source>By clicking the "read more …" button, visitors will be redirected to an article.</source>
-        <target>Klikom na dugme "pročitaj više...", posjetitelje će biti preusmjereni na članak.</target>
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an article.</source>
+        <target>Klikom na dugme &quot;pročitaj više...&quot;, posjetitelje će biti preusmjereni na članak.</target>
       </trans-unit>
       <trans-unit id="tl_news.external.0">
         <source>External URL</source>
         <target>Vanjske web stranice</target>
       </trans-unit>
       <trans-unit id="tl_news.external.1">
-        <source>By clicking the "read more …" button, visitors will be redirected to an external website.</source>
-        <target>Klikom na link "Opširnije ..." posjetitelji će biti preusmjereni na vanjske web stranice.</target>
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an external website.</source>
+        <target>Klikom na link &quot;Opširnije ...&quot; posjetitelji će biti preusmjereni na vanjske web stranice.</target>
       </trans-unit>
       <trans-unit id="tl_news.jumpTo.0">
         <source>Redirect page</source>
@@ -193,6 +192,12 @@
       <trans-unit id="tl_news.stop.1">
         <source>Do not show the news item on the website on and after this day.</source>
         <target>Ne prikazivati članak na i nakon ovog dana.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.tstamp.0">
+        <source>Revision date</source>
+      </trans-unit>
+      <trans-unit id="tl_news.tstamp.1">
+        <source>Date and time of the latest revision</source>
       </trans-unit>
       <trans-unit id="tl_news.title_legend">
         <source>Title and author</source>
@@ -301,6 +306,12 @@
       <trans-unit id="tl_news.editheader.1">
         <source>Edit the archive settings</source>
         <target>Uredite naziv arhive novosti.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editmeta.0">
+        <source>Edit article settings</source>
+      </trans-unit>
+      <trans-unit id="tl_news.editmeta.1">
+        <source>Edit the article settings</source>
       </trans-unit>
       <trans-unit id="tl_news.pasteafter.0">
         <source>Paste into this archive</source>

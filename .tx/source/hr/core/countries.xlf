@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/countries.php" source-language="en">
     <body>
       <trans-unit id="CNT.ad">
@@ -205,6 +204,9 @@
       <trans-unit id="CNT.cv">
         <source>Cape Verde</source>
         <target>Kape Verde</target>
+      </trans-unit>
+      <trans-unit id="CNT.cw">
+        <source>Curaçao</source>
       </trans-unit>
       <trans-unit id="CNT.cx">
         <source>Christmas Island</source>
@@ -481,6 +483,9 @@
       <trans-unit id="CNT.kr">
         <source>South Korea</source>
         <target>Južna Koreja</target>
+      </trans-unit>
+      <trans-unit id="CNT.kv">
+        <source>Kosovo</source>
       </trans-unit>
       <trans-unit id="CNT.kw">
         <source>Kuwait</source>

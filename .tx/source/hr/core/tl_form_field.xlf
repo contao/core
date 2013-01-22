@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_form_field.php" source-language="en">
     <body>
       <trans-unit id="FFL.headline.0">
@@ -258,6 +257,12 @@
         <source>Checks whether the input is a valid URL.</source>
         <target>Provjerava da li je upisan valjani URL.</target>
       </trans-unit>
+      <trans-unit id="tl_form_field.placeholder.0">
+        <source>Placeholder</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.placeholder.1">
+        <source>Show this text as long as the field is empty (requires HTML5).</source>
+      </trans-unit>
       <trans-unit id="tl_form_field.maxlength.0">
         <source>Maximum length</source>
         <target>Max. duljina</target>
@@ -377,6 +382,18 @@
       <trans-unit id="tl_form_field.accesskey.1">
         <source>A form field can be focused by pressing the [ALT] or [CTRL] key and the access key simultaneously.</source>
         <target>Polje obrasca može se fokusirati istovremenim pritiskom na [ALT] ili [CTRL] ključ i pristupni ključ.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.tabindex.0">
+        <source>Tab index</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.tabindex.1">
+        <source>The position of the form field in the tabbing order.</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fSize.0">
+        <source>Field size</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fSize.1">
+        <source>Here you can enter the size of the upload field (size attribute).</source>
       </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>

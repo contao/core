@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/news/languages/en/tl_news_archive.php" source-language="en">
     <body>
       <trans-unit id="tl_news_archive.title.0">
@@ -261,6 +260,12 @@
       <trans-unit id="tl_news_archive.comments.1">
         <source>Show comments of archive ID %s</source>
         <target>Rodyto archyvo ID %s komentarus</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feeds.0">
+        <source>RSS feeds</source>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feeds.1">
+        <source>Manage RSS feeds</source>
       </trans-unit>
     </body>
   </file>

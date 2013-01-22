@@ -19,21 +19,21 @@ $GLOBALS['TL_LANG']['tl_settings']['websiteTitle'][1] = 'لطفا عنوان و�
 $GLOBALS['TL_LANG']['tl_settings']['adminEmail'][0] = 'آدرس پست‌الکترونیک مدیر وب‌سایت';
 $GLOBALS['TL_LANG']['tl_settings']['adminEmail'][1] = 'پیغام‌های خودکار مانند ایمیل تایید عضویت به این آدرس فرستاده خواهند شد.';
 $GLOBALS['TL_LANG']['tl_settings']['dateFormat'][0] = 'ساختار تاریخ';
-$GLOBALS['TL_LANG']['tl_settings']['dateFormat'][1] = 'رشته ساختار تاریخ که توسط تابع PHP date () استفاده خواهد شد.';
+$GLOBALS['TL_LANG']['tl_settings']['dateFormat'][1] = 'رشته ساختار تاریخ که توسط تابع PHP date() استفاده خواهد شد.';
 $GLOBALS['TL_LANG']['tl_settings']['timeFormat'][0] = 'ساختار زمان';
-$GLOBALS['TL_LANG']['tl_settings']['timeFormat'][1] = 'رشته ساختار زمان که توسط تابع PHP date () استفاده خواهد شد.';
+$GLOBALS['TL_LANG']['tl_settings']['timeFormat'][1] = 'رشته ساختار زمان که توسط تابع PHP date() استفاده خواهد شد.';
 $GLOBALS['TL_LANG']['tl_settings']['datimFormat'][0] = 'ساختار تاریخ و زمان';
-$GLOBALS['TL_LANG']['tl_settings']['datimFormat'][1] = 'رشته ساختار تاریخ و زمان که توسط تابع PHP date () استفاده خواهد شد.';
+$GLOBALS['TL_LANG']['tl_settings']['datimFormat'][1] = 'رشته ساختار تاریخ و زمان که توسط تابع PHP date() استفاده خواهد شد.';
 $GLOBALS['TL_LANG']['tl_settings']['timeZone'][0] = 'منطقه زمانی';
-$GLOBALS['TL_LANG']['tl_settings']['timeZone'][1] = 'لطفا سرور منطقه زمانی را انتخاب نمائید.';
+$GLOBALS['TL_LANG']['tl_settings']['timeZone'][1] = 'لطفا منطقه زمانی سرور را انتخاب نمائید.';
 $GLOBALS['TL_LANG']['tl_settings']['websitePath'][0] = 'مسیر نسبی پوشه کانتائو';
-$GLOBALS['TL_LANG']['tl_settings']['websitePath'][1] = 'مسیر نسبی پوشه کانتائو معمولاً به صورت خودکار توسط ابزار نصب تنظیم می‌شود.';
+$GLOBALS['TL_LANG']['tl_settings']['websitePath'][1] = 'مسیر نسبی پوشه کانتائو معمولا به صورت خودکار توسط ابزار نصب تنظیم می‌شود.';
 $GLOBALS['TL_LANG']['tl_settings']['characterSet'][0] = 'مجموعه کاراکتر';
 $GLOBALS['TL_LANG']['tl_settings']['characterSet'][1] = 'استفاده از UTF-8 به خاطر اینکه کاراکترهای ویژه درست نمایش داده می‌شوند توصیه می‌شود.';
 $GLOBALS['TL_LANG']['tl_settings']['customSections'][0] = 'بخش‌های چیدمان اختصاصی';
 $GLOBALS['TL_LANG']['tl_settings']['customSections'][1] = 'می‌توانید لیست جدا شده با کاما از بخش‌های چیدمان اختصاصی را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_settings']['disableCron'][0] = 'غیرفعال کردن زمان‌بندی دستور';
-$GLOBALS['TL_LANG']['tl_settings']['disableCron'][1] = 'زمان‌بندی دستور دوره‌ای را غیرفعال کرده و اسکریپت cron.php را توسط کار کرن واقعی اجرا می کند (که شما باید به صورت دستی تنظیم نمایید).';
+$GLOBALS['TL_LANG']['tl_settings']['disableCron'][1] = 'زمان‌بندی دستور دوره‌ای را غیرفعال کرده و اسکریپت cron.php را توسط کار کرن واقعی اجرا می‌کند (که شما باید به صورت دستی تنظیم نمایید).';
 $GLOBALS['TL_LANG']['tl_settings']['minifyMarkup'][0] = 'کوچک کردن نشانه‌گذاری';
 $GLOBALS['TL_LANG']['tl_settings']['minifyMarkup'][1] = 'کوچک کردن نشانه‌گذاری اچ‌تی‌ام‌ال قبل از فرستادن به مرورگر (نیازمند افزونه tidy در PHP)';
 $GLOBALS['TL_LANG']['tl_settings']['gzipScripts'][0] = 'فشرده کردن اسکریپ‌ها';
@@ -47,7 +47,7 @@ $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse'][0] = 'جمع نکردن ال
 $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse'][1] = 'المان‌ها را در پیش‌نمایش بخش مدیریت جمع نمی‌کند.';
 $GLOBALS['TL_LANG']['tl_settings']['urlSuffix'][0] = 'پسوند نشانی وب';
 $GLOBALS['TL_LANG']['tl_settings']['urlSuffix'][1] = 'پسوند نشانی وب که باید به رشته نشانی وب اضافه شود تا اسناد ایستا را شبیه‌سازی نماید.';
-$GLOBALS['TL_LANG']['tl_settings']['cacheMode'][0] = 'حال نهانگاه';
+$GLOBALS['TL_LANG']['tl_settings']['cacheMode'][0] = 'نوع نهانگاه';
 $GLOBALS['TL_LANG']['tl_settings']['cacheMode'][1] = 'اینجا می‌توانید نوع نهان‌گاه را انتخاب نمایید.';
 $GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeIp'][0] = 'آدرس‌های آی‌پی ناشناس';
 $GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeIp'][1] = 'نشناس کردن هر آی‌پی که در پایگاه داده ذخیره می شود، به غیر از جدول <em>tl_session</em> (نشانی آی‌پی به دلایل امنیتی به نشست مربوط است).';
@@ -98,18 +98,18 @@ $GLOBALS['TL_LANG']['tl_settings']['smtpPass'][1] = 'می‌توانید رمز�
 $GLOBALS['TL_LANG']['tl_settings']['smtpEnc'][0] = 'رمزگذاری SMTP';
 $GLOBALS['TL_LANG']['tl_settings']['smtpPort'][0] = 'شماره درگاه SMTP';
 $GLOBALS['TL_LANG']['tl_settings']['inactiveModules'][0] = 'افزونه‌های غیرفعال';
-$GLOBALS['TL_LANG']['tl_settings']['inactiveModules'][1] = 'می‌توانید افزونه‌های غیر لازم را غیرفعال نمائید.';
+$GLOBALS['TL_LANG']['tl_settings']['inactiveModules'][1] = 'می‌توانید افزونه‌های غیرلازم را غیرفعال نمائید.';
 $GLOBALS['TL_LANG']['tl_settings']['versionPeriod'][0] = 'زمان ذخیره مانند برای نسخه‌ها';
 $GLOBALS['TL_LANG']['tl_settings']['logPeriod'][0] = 'مدت زمان ذخیره برای ورودی های لاگ';
 $GLOBALS['TL_LANG']['tl_settings']['sessionTimeout'][0] = 'مهلت نشست';
 $GLOBALS['TL_LANG']['tl_settings']['autologin'][0] = 'زمان ورود خودکار';
-$GLOBALS['TL_LANG']['tl_settings']['defaultUser'][0] = 'صاحب پیشفرض صفحه';
+$GLOBALS['TL_LANG']['tl_settings']['defaultUser'][0] = 'صاحب پیش‌فرض صفحه';
 $GLOBALS['TL_LANG']['tl_settings']['defaultUser'][1] = 'می‌توانید کاربری را به عنوان صاحب پیش‌فرض هر صفحه انتخاب نمایید.';
-$GLOBALS['TL_LANG']['tl_settings']['defaultGroup'][0] = 'گروه پیشفرض صفحه';
+$GLOBALS['TL_LANG']['tl_settings']['defaultGroup'][0] = 'گروه پیش‌فرض صفحه';
 $GLOBALS['TL_LANG']['tl_settings']['defaultGroup'][1] = 'می‌توانید گروهی را به عنوان صاحب پیش‌فرض هر صفحه انتخاب نمایید.';
 $GLOBALS['TL_LANG']['tl_settings']['defaultChmod'][0] = 'حقوق دسترسی پیش‌فرض';
 $GLOBALS['TL_LANG']['tl_settings']['defaultChmod'][1] = 'اختصاص قوانین دسترسی پیش‌فرض به صفحه‌ها و مقاله‌ها.';
-$GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase'][0] = 'نشانی وب بروزرسانی Live';
+$GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase'][0] = 'نشانی وب بروزرسانی لایو';
 $GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase'][1] = 'اینجا می‌توانید نشانی وب بروزرسانی لایو را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_settings']['title_legend'] = 'عنوان وب‌سایت';
 $GLOBALS['TL_LANG']['tl_settings']['date_legend'] = 'تاریخ و ساعت';
@@ -127,7 +127,7 @@ $GLOBALS['TL_LANG']['tl_settings']['ftp_legend'] = 'هک حالت سالم';
 $GLOBALS['TL_LANG']['tl_settings']['modules_legend'] = 'افزونه‌های غیرفعال';
 $GLOBALS['TL_LANG']['tl_settings']['timeout_legend'] = 'مقادیر انقضاء';
 $GLOBALS['TL_LANG']['tl_settings']['chmod_legend'] = 'سطوح دسترسی پیش‌فرض';
-$GLOBALS['TL_LANG']['tl_settings']['update_legend'] = 'بروزرسانی Live';
+$GLOBALS['TL_LANG']['tl_settings']['update_legend'] = 'بروزرسانی لایو';
 $GLOBALS['TL_LANG']['tl_settings']['static_legend'] = 'منابع استاتیک';
 $GLOBALS['TL_LANG']['tl_settings']['edit'] = 'ویرایش پیکربندی محلی';
 $GLOBALS['TL_LANG']['tl_settings']['both'] = 'استفاده از نهانگاه سرور و مرورگر';

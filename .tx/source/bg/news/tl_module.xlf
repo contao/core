@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/news/languages/en/tl_module.php" source-language="en">
     <body>
       <trans-unit id="tl_module.news_archives.0">
@@ -25,6 +24,12 @@
       <trans-unit id="tl_module.news_jumpToCurrent.1">
         <source>Here you can define what to display if no period is selected.</source>
         <target>Тук определяте какво да се показва когато не е избран период.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_readerModule.0">
+        <source>News reader module</source>
+      </trans-unit>
+      <trans-unit id="tl_module.news_readerModule.1">
+        <source>Automatically switch to the news reader if an item has been selected.</source>
       </trans-unit>
       <trans-unit id="tl_module.news_metaFields.0">
         <source>Meta fields</source>

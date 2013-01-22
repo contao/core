@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_theme.php" source-language="en">
     <body>
       <trans-unit id="tl_theme.name.0">
@@ -42,6 +41,12 @@
         <source>Here you can choose a screenshot of the theme.</source>
         <target>Odabeite sliku teme.</target>
       </trans-unit>
+      <trans-unit id="tl_theme.vars.0">
+        <source>Global variables</source>
+      </trans-unit>
+      <trans-unit id="tl_theme.vars.1">
+        <source>Here you can define global variables for the style sheets of the theme (e.g. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</source>
+      </trans-unit>
       <trans-unit id="tl_theme.source.0">
         <source>Source files</source>
         <target>Izvorne datoteke</target>
@@ -66,9 +71,12 @@
         <source>Configuration</source>
         <target>Konfiguracija</target>
       </trans-unit>
+      <trans-unit id="tl_theme.vars_legend">
+        <source>Global variables</source>
+      </trans-unit>
       <trans-unit id="tl_theme.theme_imported">
-        <source>Theme "%s" has been imported.</source>
-        <target>Tema "%s" je uvezena.</target>
+        <source>Theme &quot;%s&quot; has been imported.</source>
+        <target>Tema &quot;%s&quot; je uvezena.</target>
       </trans-unit>
       <trans-unit id="tl_theme.checking_theme">
         <source>The theme data is being checked</source>
@@ -99,16 +107,16 @@
         <target>Sekcije izgleda uspješno su provjerene.</target>
       </trans-unit>
       <trans-unit id="tl_theme.missing_xml">
-        <source>Theme "%s" is corrupt and cannot be imported.</source>
-        <target>Tema "%s" je oštećena pa ju se ne može uvesti.</target>
+        <source>Theme &quot;%s&quot; is corrupt and cannot be imported.</source>
+        <target>Tema &quot;%s&quot; je oštećena pa ju se ne može uvesti.</target>
       </trans-unit>
       <trans-unit id="tl_theme.custom_templates">
         <source>Custom templates</source>
         <target>Posebni predlošci</target>
       </trans-unit>
       <trans-unit id="tl_theme.template_exists">
-        <source>The template &lt;strong&gt;"%s"&lt;/strong&gt; exists and will be overwritten.</source>
-        <target>Predložak &lt;strong&gt;"%s"&lt;/strong&gt; postoji i bit će zamijenjen.</target>
+        <source>The template &lt;strong&gt;&quot;%s&quot;&lt;/strong&gt; exists and will be overwritten.</source>
+        <target>Predložak &lt;strong&gt;&quot;%s&quot;&lt;/strong&gt; postoji i bit će zamijenjen.</target>
       </trans-unit>
       <trans-unit id="tl_theme.templates_ok">
         <source>No conflicts detected.</source>

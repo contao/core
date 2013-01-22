@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/calendar/languages/en/tl_module.php" source-language="en">
     <body>
       <trans-unit id="tl_module.cal_calendar.0">
@@ -18,6 +17,14 @@
         <source>Show events only once even if they span multiple days.</source>
         <target>Ako se događanja protežu kroz nekoliko dana, prikažite ih samo jednom.</target>
       </trans-unit>
+      <trans-unit id="tl_module.cal_startDay.0">
+        <source>Week start day</source>
+        <target>Dan početka tjedna</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_startDay.1">
+        <source>Here you can choose the week start day.</source>
+        <target>Odaberite s kojim će danom započeti tjedan.</target>
+      </trans-unit>
       <trans-unit id="tl_module.cal_format.0">
         <source>Event list format</source>
         <target>Format liste događanja</target>
@@ -26,6 +33,14 @@
         <source>Here you can choose the event list format.</source>
         <target>Odaberite format liste događanja.</target>
       </trans-unit>
+      <trans-unit id="tl_module.cal_ignoreDynamic.0">
+        <source>Ignore URL parameters</source>
+        <target>Ignorirati URL parametre</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ignoreDynamic.1">
+        <source>Do not switch the time period based on the date/month/year URL parameters.</source>
+        <target>Ne izmijeniti vremenski period temeljem URL parametara za dan/mjesec/godinu.</target>
+      </trans-unit>
       <trans-unit id="tl_module.cal_order.0">
         <source>Sort order</source>
         <target>Redoslijed</target>
@@ -33,6 +48,12 @@
       <trans-unit id="tl_module.cal_order.1">
         <source>Here you can choose the sort order.</source>
         <target>Odredite redoslijed.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_readerModule.0">
+        <source>Event reader module</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_readerModule.1">
+        <source>Automatically switch to the event reader if an event has been selected.</source>
       </trans-unit>
       <trans-unit id="tl_module.cal_limit.0">
         <source>Number of events</source>
@@ -58,14 +79,6 @@
         <source>Here you can select the calendar template.</source>
         <target>Ovdje možete odabrati predložak kalendara.</target>
       </trans-unit>
-      <trans-unit id="tl_module.cal_startDay.0">
-        <source>Week start day</source>
-        <target>Dan početka tjedna</target>
-      </trans-unit>
-      <trans-unit id="tl_module.cal_startDay.1">
-        <source>Here you can choose the week start day.</source>
-        <target>Odaberite s kojim će danom započeti tjedan.</target>
-      </trans-unit>
       <trans-unit id="tl_module.cal_showQuantity.0">
         <source>Show number of events</source>
         <target>Prikazati broj događanja</target>
@@ -73,14 +86,6 @@
       <trans-unit id="tl_module.cal_showQuantity.1">
         <source>Show the number of events of each month in the menu.</source>
         <target>U izborniku prikazati broj događanja u svakom mjesecu</target>
-      </trans-unit>
-      <trans-unit id="tl_module.cal_ignoreDynamic.0">
-        <source>Ignore URL parameters</source>
-        <target>Ignorirati URL parametre</target>
-      </trans-unit>
-      <trans-unit id="tl_module.cal_ignoreDynamic.1">
-        <source>Do not switch the time period based on the date/month/year URL parameters.</source>
-        <target>Ne izmijeniti vremenski period temeljem URL parametara za dan/mjesec/godinu.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_list">
         <source>Event list</source>
@@ -134,6 +139,12 @@
         <source>+ 2 years</source>
         <target>+ 2 godine</target>
       </trans-unit>
+      <trans-unit id="tl_module.next_cur_month">
+        <source>of the current month</source>
+      </trans-unit>
+      <trans-unit id="tl_module.next_cur_year">
+        <source>of the current year</source>
+      </trans-unit>
       <trans-unit id="tl_module.next_all">
         <source>All upcoming events</source>
         <target>Sva nadolazeća događanja</target>
@@ -169,6 +180,12 @@
       <trans-unit id="tl_module.past_two">
         <source>- 2 years</source>
         <target>- 2 godine</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_cur_month">
+        <source>of the current month</source>
+      </trans-unit>
+      <trans-unit id="tl_module.past_cur_year">
+        <source>of the current year</source>
       </trans-unit>
       <trans-unit id="tl_module.past_all">
         <source>All past events</source>

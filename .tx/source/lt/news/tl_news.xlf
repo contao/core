@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/news/languages/en/tl_news.php" source-language="en">
     <body>
       <trans-unit id="tl_news.headline.0">
@@ -55,8 +54,8 @@
         <target>Naujienų anonsas</target>
       </trans-unit>
       <trans-unit id="tl_news.teaser.1">
-        <source>The news teaser can be shown in a news list instead of the full article. A "read more …" link will be added automatically.</source>
-        <target>Naujienų anonsas gali būti rodomas naujienų sąraše vietoje pilno straipsnio. Nuoroda "Plačiau..." bus pridėta automatiškai.</target>
+        <source>The news teaser can be shown in a news list instead of the full article. A &quot;read more …&quot; link will be added automatically.</source>
+        <target>Naujienų anonsas gali būti rodomas naujienų sąraše vietoje pilno straipsnio. Nuoroda &quot;Plačiau...&quot; bus pridėta automatiškai.</target>
       </trans-unit>
       <trans-unit id="tl_news.text.0">
         <source>News text</source>
@@ -103,23 +102,23 @@
         <target>Naudoti numatytus</target>
       </trans-unit>
       <trans-unit id="tl_news.default.1">
-        <source>By clicking the "read more …" button, visitors will be redirected to the default page of the news archive.</source>
-        <target>Spustelėję "Plačiau..." lankytojai bus nukreipti į numatytąjį naujienų archyvo puslapį.</target>
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to the default page of the news archive.</source>
+        <target>Spustelėję &quot;Plačiau...&quot; lankytojai bus nukreipti į numatytąjį naujienų archyvo puslapį.</target>
       </trans-unit>
       <trans-unit id="tl_news.internal.0">
         <source>Page</source>
         <target>Vidinis puslapis</target>
       </trans-unit>
       <trans-unit id="tl_news.internal.1">
-        <source>By clicking the "read more …" button, visitors will be redirected to a page.</source>
-        <target>Spustelėję "Plačiau..." lankytojai bus nukreipti į vidinį puslapį.</target>
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to a page.</source>
+        <target>Spustelėję &quot;Plačiau...&quot; lankytojai bus nukreipti į vidinį puslapį.</target>
       </trans-unit>
       <trans-unit id="tl_news.article.0">
         <source>Article</source>
         <target>Straipsnis</target>
       </trans-unit>
       <trans-unit id="tl_news.article.1">
-        <source>By clicking the "read more …" button, visitors will be redirected to an article.</source>
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an article.</source>
         <target>Nuspaudus „skaityti daugiau ...” mygtuką vartotojas bus nukreiptas į straipsnį.</target>
       </trans-unit>
       <trans-unit id="tl_news.external.0">
@@ -127,8 +126,8 @@
         <target>Išorinis tinklalapis</target>
       </trans-unit>
       <trans-unit id="tl_news.external.1">
-        <source>By clicking the "read more …" button, visitors will be redirected to an external website.</source>
-        <target>Spustelėję "Plačiau..." lankytojai bus nukreipti į išorinį tinklalapį.</target>
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an external website.</source>
+        <target>Spustelėję &quot;Plačiau...&quot; lankytojai bus nukreipti į išorinį tinklalapį.</target>
       </trans-unit>
       <trans-unit id="tl_news.jumpTo.0">
         <source>Redirect page</source>
@@ -193,6 +192,12 @@
       <trans-unit id="tl_news.stop.1">
         <source>Do not show the news item on the website on and after this day.</source>
         <target>Nerodyti naujienų įrašo po nustatytos dienos.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.tstamp.0">
+        <source>Revision date</source>
+      </trans-unit>
+      <trans-unit id="tl_news.tstamp.1">
+        <source>Date and time of the latest revision</source>
       </trans-unit>
       <trans-unit id="tl_news.title_legend">
         <source>Title and author</source>
@@ -301,6 +306,12 @@
       <trans-unit id="tl_news.editheader.1">
         <source>Edit the archive settings</source>
         <target>Redaguoti naujienų archyvo antraštę</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editmeta.0">
+        <source>Edit article settings</source>
+      </trans-unit>
+      <trans-unit id="tl_news.editmeta.1">
+        <source>Edit the article settings</source>
       </trans-unit>
       <trans-unit id="tl_news.pasteafter.0">
         <source>Paste into this archive</source>

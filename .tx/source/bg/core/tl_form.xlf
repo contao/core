@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_form.php" source-language="en">
     <body>
       <trans-unit id="tl_form.title.0">
@@ -10,13 +9,19 @@
         <source>Please enter the form title.</source>
         <target>Моля, въведете заглавие на формата</target>
       </trans-unit>
+      <trans-unit id="tl_form.alias.0">
+        <source>Form alias</source>
+      </trans-unit>
+      <trans-unit id="tl_form.alias.1">
+        <source>The form alias is a unique reference to the form which can be called instead of its numeric ID.</source>
+      </trans-unit>
       <trans-unit id="tl_form.jumpTo.0">
         <source>Redirect page</source>
         <target>Към страница</target>
       </trans-unit>
       <trans-unit id="tl_form.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected after submitting the form.</source>
-        <target>Всяка форма обикновено препраща към друга страница, която обработва данните от формата или показва "Благодарим Ви" съобщение. тук можете да изберете тази страница.</target>
+        <target>Всяка форма обикновено препраща към друга страница, която обработва данните от формата или показва &quot;Благодарим Ви&quot; съобщение. тук можете да изберете тази страница.</target>
       </trans-unit>
       <trans-unit id="tl_form.sendViaEmail.0">
         <source>Send form data via e-mail</source>
@@ -32,7 +37,7 @@
       </trans-unit>
       <trans-unit id="tl_form.recipient.1">
         <source>Separate multiple e-mail addresses with comma.</source>
-        <target>Моля, въведете един или повече e-mail адреси за получатели. разделете адресите със запетая. Може също да използвате формат "Име [ime@domain.com]</target>
+        <target>Моля, въведете един или повече e-mail адреси за получатели. разделете адресите със запетая. Може също да използвате формат &quot;Име [ime@domain.com]</target>
       </trans-unit>
       <trans-unit id="tl_form.subject.0">
         <source>Subject</source>

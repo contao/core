@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_form_field.php" source-language="en">
     <body>
       <trans-unit id="FFL.headline.0">
@@ -184,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.digit.1">
         <source>Allows numeric characters, minus (-), full stop (.) and space ( ).</source>
-        <target>разрешава цифри, минус "-", точка "." и пауза</target>
+        <target>разрешава цифри, минус &quot;-&quot;, точка &quot;.&quot; и пауза</target>
       </trans-unit>
       <trans-unit id="tl_form_field.alpha.0">
         <source>Alphabetic characters</source>
@@ -240,7 +239,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.phone.1">
         <source>Allows numeric characters, plus (+), minus (-), slash (/), parentheses () and space ( ).</source>
-        <target>Позволава въвеждането на цифри, плюс "+", минус "-", наклонена черта "/", скоби "()" и празно пространство " ".</target>
+        <target>Позволава въвеждането на цифри, плюс &quot;+&quot;, минус &quot;-&quot;, наклонена черта &quot;/&quot;, скоби &quot;()&quot; и празно пространство &quot; &quot;.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.email.0">
         <source>E-mail address</source>
@@ -257,6 +256,12 @@
       <trans-unit id="tl_form_field.url.1">
         <source>Checks whether the input is a valid URL.</source>
         <target>проверява дали въведеното е валиден URL(адрес за връзка в интернет)</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.placeholder.0">
+        <source>Placeholder</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.placeholder.1">
+        <source>Show this text as long as the field is empty (requires HTML5).</source>
       </trans-unit>
       <trans-unit id="tl_form_field.maxlength.0">
         <source>Maximum length</source>
@@ -322,6 +327,30 @@
         <source>Store the file in the home directory if there is an authenticated user.</source>
         <target>Съхраняване на файла в домашната директория ако има влязъл в системата потребител.</target>
       </trans-unit>
+      <trans-unit id="tl_form_field.doNotOverwrite.0">
+        <source>Preserve existing files</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.doNotOverwrite.1">
+        <source>Add a numeric suffix to the new file if the file name already exists.</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsType.0">
+        <source>Operation mode</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsType.1">
+        <source>Please select the operation mode of the fieldset element.</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStart.0">
+        <source>Wrapper start</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStart.1">
+        <source>Marks the beginning of a fieldset and can contain a legend.</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStop.0">
+        <source>Wrapper stop</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStop.1">
+        <source>Marks the end of a fieldset.</source>
+      </trans-unit>
       <trans-unit id="tl_form_field.value.0">
         <source>Default value</source>
         <target>Сойност по подразбиране</target>
@@ -337,6 +366,24 @@
       <trans-unit id="tl_form_field.class.1">
         <source>Here you can enter one or more classes.</source>
         <target>Тук можете да въведете един или повече CSS класове.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.accesskey.0">
+        <source>Access key</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.accesskey.1">
+        <source>A form field can be focused by pressing the [ALT] or [CTRL] key and the access key simultaneously.</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.tabindex.0">
+        <source>Tab index</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.tabindex.1">
+        <source>The position of the form field in the tabbing order.</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fSize.0">
+        <source>Field size</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fSize.1">
+        <source>Here you can enter the size of the upload field (size attribute).</source>
       </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>

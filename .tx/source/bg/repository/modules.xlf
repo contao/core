@@ -1,7 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/repository/languages/en/modules.php" source-language="en">
     <body>
+      <trans-unit id="MOD.repository.0">
+        <source>Extension Repository</source>
+      </trans-unit>
+      <trans-unit id="MOD.repository.1">
+        <source>The back end module of the Extension Repository</source>
+      </trans-unit>
       <trans-unit id="MOD.repository_catalog.0">
         <source>Extension catalog</source>
         <target>Каталог с разширения</target>

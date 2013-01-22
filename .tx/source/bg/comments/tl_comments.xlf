@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/comments/languages/en/tl_comments.php" source-language="en">
     <body>
       <trans-unit id="tl_comments.source.0">
@@ -89,6 +88,18 @@
       <trans-unit id="tl_comments.published.1">
         <source>Make the comment publicly visible on the website.</source>
         <target>Нека коментара е видим в сайта.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.ip.0">
+        <source>IP address</source>
+      </trans-unit>
+      <trans-unit id="tl_comments.ip.1">
+        <source>The IP address of the author.</source>
+      </trans-unit>
+      <trans-unit id="tl_comments.notified.0">
+        <source>Notified</source>
+      </trans-unit>
+      <trans-unit id="tl_comments.notified.1">
+        <source>The notification of this comment has been sent.</source>
       </trans-unit>
       <trans-unit id="tl_comments.author_legend">
         <source>Author</source>

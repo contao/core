@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_page.php" source-language="en">
     <body>
       <trans-unit id="tl_page.title.0">
@@ -39,8 +38,8 @@
         <target>Kalba</target>
       </trans-unit>
       <trans-unit id="tl_page.language.1">
-        <source>Please enter the page language according to the ISO-639-1 standard (e.g. "en" for English).</source>
-        <target>Pagal ISO-639-1 standartą nurodykite puslapio kalbą (pvz. "lt" - lietuvių, "en" - anglų).</target>
+        <source>Please enter the page language according to the ISO-639-1 standard (e.g. &quot;en&quot; for English).</source>
+        <target>Pagal ISO-639-1 standartą nurodykite puslapio kalbą (pvz. &quot;lt&quot; - lietuvių, &quot;en&quot; - anglų).</target>
       </trans-unit>
       <trans-unit id="tl_page.robots.0">
         <source>Robots tag</source>
@@ -183,8 +182,14 @@
         <target>Puslapio išdėstymas</target>
       </trans-unit>
       <trans-unit id="tl_page.layout.1">
-        <source>You can manage page layouts with the "themes" module.</source>
-        <target>Galite tvarkyti puslapių išdėstymus modulyje "puslapių išdėstymai".</target>
+        <source>You can manage page layouts with the &quot;themes&quot; module.</source>
+        <target>Galite tvarkyti puslapių išdėstymus modulyje &quot;puslapių išdėstymai&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.mobileLayout.0">
+        <source>Mobile page layout</source>
+      </trans-unit>
+      <trans-unit id="tl_page.mobileLayout.1">
+        <source>This layout will be used if the visitor uses a mobile device.</source>
       </trans-unit>
       <trans-unit id="tl_page.includeCache.0">
         <source>Set cache timeout</source>
@@ -333,6 +338,12 @@
       <trans-unit id="tl_page.dns_legend">
         <source>DNS settings</source>
         <target>DNS nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_page.global_legend">
+        <source>Global settings</source>
+      </trans-unit>
+      <trans-unit id="tl_page.mobile_legend">
+        <source>Mobile settings</source>
       </trans-unit>
       <trans-unit id="tl_page.sitemap_legend">
         <source>XML sitemap</source>

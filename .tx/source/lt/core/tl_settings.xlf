@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_settings.php" source-language="en">
     <body>
       <trans-unit id="tl_settings.websiteTitle.0">
@@ -74,6 +73,24 @@
         <source>Here you can enter a comma separated list of custom layout sections.</source>
         <target>Čia galite surašyti individualius išdėstymo blokus, atskirtus kableliais.</target>
       </trans-unit>
+      <trans-unit id="tl_settings.disableCron.0">
+        <source>Disable the command scheduler</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableCron.1">
+        <source>Disable the periodic command scheduler and execute the cron.php script by a real cron job (which you have to set up manually).</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.minifyMarkup.0">
+        <source>Minify the markup</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.minifyMarkup.1">
+        <source>Minify the HTML markup before it is sent to the browser (requires the PHP tidy extension).</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.gzipScripts.0">
+        <source>Compress scripts</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.gzipScripts.1">
+        <source>Create a compressed version of the combined CSS and JavaScript files. Requires adjustments of the .htaccess file.</source>
+      </trans-unit>
       <trans-unit id="tl_settings.resultsPerPage.0">
         <source>Items per page</source>
         <target>Įrašų puslapyje</target>
@@ -87,8 +104,14 @@
         <target>Daugiausia elementų puslapyje</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxResultsPerPage.1">
-        <source>This overall limit takes effect if a user chooses the "show all records" option.</source>
-        <target>Šis ribojimas įgalinamas tada, kai opcija "rodyti visus įrašus" yra pasirinkta</target>
+        <source>This overall limit takes effect if a user chooses the &quot;show all records&quot; option.</source>
+        <target>Šis ribojimas įgalinamas tada, kai opcija &quot;rodyti visus įrašus&quot; yra pasirinkta</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.fileSyncExclude.0">
+        <source>Exclude folders from synchronisation</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.fileSyncExclude.1">
+        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronisation (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
@@ -114,13 +137,43 @@
         <source>Here you can select the cache mode.</source>
         <target>Čia jūs galite pasirinkti kešavimo rėžimą.</target>
       </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeIp.0">
+        <source>Anonymize IP addresses</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeIp.1">
+        <source>Anonymize any IP address that is stored in the database, except in the &lt;em&gt;tl_session&lt;/em&gt; table (the IP address is bound to the session for security reasons).</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeGA.0">
+        <source>Anonymize Google Analytics</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeGA.1">
+        <source>Anonymize the IP addresses that are sent to Google Analytics.</source>
+      </trans-unit>
       <trans-unit id="tl_settings.rewriteURL.0">
         <source>Rewrite URLs</source>
         <target>Perrašyti URL</target>
       </trans-unit>
       <trans-unit id="tl_settings.rewriteURL.1">
-        <source>Make Contao generate static URLs without the index.php fragment. This feature requires "mod_rewrite", renaming the ".htaccess.default" file to ".htaccess" and adjusting the RewriteBase as necessary.</source>
-        <target>Leisti TYPOlight generuoti stacionarius URL be index.php fragmento (reikalinga "mod_rewrite" funkcija).</target>
+        <source>Make Contao generate static URLs without the index.php fragment. This feature requires &quot;mod_rewrite&quot;, renaming the &quot;.htaccess.default&quot; file to &quot;.htaccess&quot; and adjusting the RewriteBase as necessary.</source>
+        <target>Leisti TYPOlight generuoti stacionarius URL be index.php fragmento (reikalinga &quot;mod_rewrite&quot; funkcija).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.addLanguageToUrl.0">
+        <source>Add the language to the URL</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.addLanguageToUrl.1">
+        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotRedirectEmpty.0">
+        <source>Do not redirect empty URLs</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotRedirectEmpty.1">
+        <source>For an empty URL display the website instead of redirecting to the language root page (not recommended).</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.useAutoItem.0">
+        <source>Enable auto_item</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.useAutoItem.1">
+        <source>Skip the &lt;em&gt;items/&lt;/em&gt; or &lt;em&gt;events/&lt;/em&gt; fragment in the URL and automatically discover the item based on the &lt;em&gt;auto_item&lt;/em&gt; parameter.</source>
       </trans-unit>
       <trans-unit id="tl_settings.disableAlias.0">
         <source>Disable page alias usage</source>
@@ -129,6 +182,12 @@
       <trans-unit id="tl_settings.disableAlias.1">
         <source>Use the numeric ID of a page or article instead of its alias.</source>
         <target>Naudoti puslapio ID vietoje sąsajos (alias).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.folderUrl.0">
+        <source>Enable folder URLs</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.folderUrl.1">
+        <source>Here you can enable folder-style page aliases like &lt;em&gt;docs/install/download.html&lt;/em&gt; instead of &lt;em&gt;docs-install-download.html&lt;/em&gt;.</source>
       </trans-unit>
       <trans-unit id="tl_settings.allowedTags.0">
         <source>Allowed HTML tags</source>
@@ -146,6 +205,20 @@
         <source>Print certain runtime information like database queries to the screen.</source>
         <target>Rodyti veiksmų, pvz. duomenų bazės užklausų, informaciją ekrane.</target>
       </trans-unit>
+      <trans-unit id="tl_settings.bypassCache.0">
+        <source>Bypass the internal cache</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.bypassCache.1">
+        <source>Do not use the internal cache files (e.g. useful when developing extensions).</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableRefererCheck.0">
+        <source>Disable request tokens</source>
+        <target>Išjungti kreipties tikrinimą</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableRefererCheck.1">
+        <source>Do not check the request token when a form is submitted. Attention: potential security risk!</source>
+        <target>Netikrinti kreipties adreso pildant formą. Pasirinkus šią opciją kyla pavojus tinklalapio bei jo duomenų saugumui!</target>
+      </trans-unit>
       <trans-unit id="tl_settings.lockPeriod.0">
         <source>Account locking time</source>
         <target>Sąskaitos blokavimo laikas</target>
@@ -162,13 +235,17 @@
         <source>Print error messages to the screen (not recommended for productional sites).</source>
         <target>Rodyti klaidų pranešimus ekrane (daugumai svetainių nerekomenduojama).</target>
       </trans-unit>
-      <trans-unit id="tl_settings.disableRefererCheck.0">
-        <source>Disable request tokens</source>
-        <target>Išjungti kreipties tikrinimą</target>
+      <trans-unit id="tl_settings.logErrors.0">
+        <source>Log error messages</source>
       </trans-unit>
-      <trans-unit id="tl_settings.disableRefererCheck.1">
-        <source>Do not check the request token when a form is submitted. Attention: potential security risk!</source>
-        <target>Netikrinti kreipties adreso pildant formą. Pasirinkus šią opciją kyla pavojus tinklalapio bei jo duomenų saugumui!</target>
+      <trans-unit id="tl_settings.logErrors.1">
+        <source>Write error messages to the error log file (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.coreOnlyMode.0">
+        <source>Run in safe mode</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.coreOnlyMode.1">
+        <source>Run Contao in safe mode and load only core modules.</source>
       </trans-unit>
       <trans-unit id="tl_settings.disableIpCheck.0">
         <source>Disable IP check</source>
@@ -202,6 +279,12 @@
         <source>Here you can enter a comma separated list of file types that can be edited in the source editor.</source>
         <target>Čia galite sudaryti šaltinio (source) redaktoriumi redaguojamų failų tipų, atskirtų kableliais, sąrašą.</target>
       </trans-unit>
+      <trans-unit id="tl_settings.templateFiles.0">
+        <source>Template file types</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.templateFiles.1">
+        <source>Here you can enter a comma separated list of supported template file types.</source>
+      </trans-unit>
       <trans-unit id="tl_settings.maxImageWidth.0">
         <source>Maximum front end width</source>
         <target>Maksimalus lankytojo srities plotis</target>
@@ -217,6 +300,18 @@
       <trans-unit id="tl_settings.jpgQuality.1">
         <source>Here you can enter the JPG thumbnail quality in percent.</source>
         <target>Čia galite nurodyti JPG glausto paveikslėlio (thumbnail) kokybę procentais.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgWidth.0">
+        <source>Maximum GD image width</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgWidth.1">
+        <source>Here you can enter the maximum image width that the GD library shall try to handle.</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgHeight.0">
+        <source>Maximum GD image height</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgHeight.1">
+        <source>Here you can enter the maximum image height that the GD library shall try to handle.</source>
       </trans-unit>
       <trans-unit id="tl_settings.uploadPath.0">
         <source>Files directory</source>
@@ -430,6 +525,9 @@
         <source>Front end configuration</source>
         <target>Lankytojų srities konfigūracija</target>
       </trans-unit>
+      <trans-unit id="tl_settings.sections_legend">
+        <source>Layout sections</source>
+      </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>
         <target>Privatumo nuostatos</target>
@@ -473,6 +571,9 @@
       <trans-unit id="tl_settings.update_legend">
         <source>Live Update</source>
         <target>Gyvas atnaujinimas</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.static_legend">
+        <source>Static resources</source>
       </trans-unit>
       <trans-unit id="tl_settings.edit">
         <source>Edit the local configuration</source>

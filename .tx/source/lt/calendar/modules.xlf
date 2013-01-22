@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/calendar/languages/en/modules.php" source-language="en">
     <body>
       <trans-unit id="MOD.calendar.0">
@@ -9,6 +8,9 @@
       <trans-unit id="MOD.calendar.1">
         <source>Manage events and display them in a calendar or event list</source>
         <target>Šis modulis leidžia jums valdyti įvykius ir rodyti juos įvykių sąrašę ar kalendoriuje.</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_calendar_feed">
+        <source>Calendar feeds</source>
       </trans-unit>
       <trans-unit id="FMD.events">
         <source>Events</source>

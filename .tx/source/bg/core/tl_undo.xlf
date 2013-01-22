@@ -1,7 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_undo.php" source-language="en">
     <body>
+      <trans-unit id="tl_undo.pid.0">
+        <source>User</source>
+      </trans-unit>
+      <trans-unit id="tl_undo.pid.1">
+        <source>Name of the associated user</source>
+      </trans-unit>
       <trans-unit id="tl_undo.fromTable.0">
         <source>Source table</source>
         <target>Таблица</target>

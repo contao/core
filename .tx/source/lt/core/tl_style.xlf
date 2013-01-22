@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_style.php" source-language="en">
     <body>
       <trans-unit id="tl_style.invisible.0">
@@ -57,6 +56,36 @@
       <trans-unit id="tl_style.height.1">
         <source>Here you can enter the element's height.</source>
         <target>Čia galite įrašyti elemento aukštį.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minwidth.0">
+        <source>Minimum width</source>
+      </trans-unit>
+      <trans-unit id="tl_style.minwidth.1">
+        <source>Here you can enter the element's minimum width.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.minheight.0">
+        <source>Minimum height</source>
+      </trans-unit>
+      <trans-unit id="tl_style.minheight.1">
+        <source>Here you can enter the element's minimum height.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.maxwidth.0">
+        <source>Maximum width</source>
+      </trans-unit>
+      <trans-unit id="tl_style.maxwidth.1">
+        <source>Here you can enter the element's maximum width.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.maxheight.0">
+        <source>Maximum height</source>
+      </trans-unit>
+      <trans-unit id="tl_style.maxheight.1">
+        <source>Here you can enter the element's maximum height.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.positioning.0">
+        <source>Position</source>
+      </trans-unit>
+      <trans-unit id="tl_style.positioning.1">
+        <source>Position, float, clear, overflow and display.</source>
       </trans-unit>
       <trans-unit id="tl_style.trbl.0">
         <source>Position</source>
@@ -194,6 +223,30 @@
         <source>Here you can select the repeating mode.</source>
         <target>Čia galite pasirinkti fono paveiksliuko kartojimo tvarką.</target>
       </trans-unit>
+      <trans-unit id="tl_style.shadowsize.0">
+        <source>Shadow size</source>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowsize.1">
+        <source>Here you can enter the X and Y offset, an optional blur size and an optional spread radius.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowcolor.0">
+        <source>Shadow color and opacity</source>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowcolor.1">
+        <source>Here you can enter a hexadecimal shadow color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientAngle.0">
+        <source>Gradient angle</source>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientAngle.1">
+        <source>Here you can enter the gradient angle (e.g. &lt;em&gt;0deg&lt;/em&gt;) or the direction (e.g. &lt;em&gt;to bottom&lt;/em&gt; or &lt;em&gt;to top right&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientColors.0">
+        <source>Gradient colors</source>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientColors.1">
+        <source>Here you can enter up to four colors with an optional percentage (e.g. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;).</source>
+      </trans-unit>
       <trans-unit id="tl_style.border.0">
         <source>Border</source>
         <target>Rėmelis</target>
@@ -226,6 +279,12 @@
         <source>Here you can enter a hexadecimal border color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
         <target>Čia galite nustatyti rėmelio spalvą (šešioliktainiu kodu).</target>
       </trans-unit>
+      <trans-unit id="tl_style.borderradius.0">
+        <source>Border radius</source>
+      </trans-unit>
+      <trans-unit id="tl_style.borderradius.1">
+        <source>Here you can enter the top, right, bottom and left border radius.</source>
+      </trans-unit>
       <trans-unit id="tl_style.bordercollapse.0">
         <source>Border handling</source>
         <target>Rėmelio išvaizda</target>
@@ -233,6 +292,12 @@
       <trans-unit id="tl_style.bordercollapse.1">
         <source>Here you can choose the border handling.</source>
         <target>Čia galite pasirinkti rėmelio išvaizdą.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderspacing.0">
+        <source>Border spacing</source>
+      </trans-unit>
+      <trans-unit id="tl_style.borderspacing.1">
+        <source>Here you can enter the border spacing.</source>
       </trans-unit>
       <trans-unit id="tl_style.font.0">
         <source>Font</source>
@@ -290,6 +355,30 @@
         <source>Do not wrap words automatically.</source>
         <target>Automatiškai neperkelti teksto į kitą eilutę.</target>
       </trans-unit>
+      <trans-unit id="tl_style.texttransform.0">
+        <source>Text transform</source>
+      </trans-unit>
+      <trans-unit id="tl_style.texttransform.1">
+        <source>Here you can choose a text transformation mode.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.textindent.0">
+        <source>Text indent</source>
+      </trans-unit>
+      <trans-unit id="tl_style.textindent.1">
+        <source>Here you can enter a text indentation.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.letterspacing.0">
+        <source>Letter spacing</source>
+      </trans-unit>
+      <trans-unit id="tl_style.letterspacing.1">
+        <source>Here you can modify the letter spacing (default: 0px).</source>
+      </trans-unit>
+      <trans-unit id="tl_style.wordspacing.0">
+        <source>Word spacing</source>
+      </trans-unit>
+      <trans-unit id="tl_style.wordspacing.1">
+        <source>Here you can modify the word spacing (default: 0px).</source>
+      </trans-unit>
       <trans-unit id="tl_style.list.0">
         <source>List</source>
         <target>Sąrašas</target>
@@ -329,6 +418,9 @@
       <trans-unit id="tl_style.size_legend">
         <source>Size</source>
         <target>Dydis ir vieta</target>
+      </trans-unit>
+      <trans-unit id="tl_style.position_legend">
+        <source>Position</source>
       </trans-unit>
       <trans-unit id="tl_style.align_legend">
         <source>Margin and alignment</source>
@@ -417,6 +509,15 @@
       <trans-unit id="tl_style.lower-alpha">
         <source>lower characters</source>
         <target>mažosios raidės</target>
+      </trans-unit>
+      <trans-unit id="tl_style.uppercase">
+        <source>uppercase</source>
+      </trans-unit>
+      <trans-unit id="tl_style.lowercase">
+        <source>lowercase</source>
+      </trans-unit>
+      <trans-unit id="tl_style.capitalize">
+        <source>capitalize</source>
       </trans-unit>
       <trans-unit id="tl_style.none">
         <source>none</source>

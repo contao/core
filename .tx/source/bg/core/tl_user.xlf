@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_user.php" source-language="en">
     <body>
       <trans-unit id="tl_user.username.0">
@@ -42,6 +41,12 @@
         <source>Here you can override the global back end theme.</source>
         <target>Тук можете да смените настройките за административния интерфейс.</target>
       </trans-unit>
+      <trans-unit id="tl_user.uploader.0">
+        <source>File uploader</source>
+      </trans-unit>
+      <trans-unit id="tl_user.uploader.1">
+        <source>Here you can chose a file uploader.</source>
+      </trans-unit>
       <trans-unit id="tl_user.showHelp.0">
         <source>Show explanation</source>
         <target>Покажи обяснение</target>
@@ -73,6 +78,12 @@
       <trans-unit id="tl_user.useCE.1">
         <source>Use the code editor to modify code elements.</source>
         <target>Да се ползва редактора за программен код за промяна на елементи.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.pwChange.0">
+        <source>Password change required</source>
+      </trans-unit>
+      <trans-unit id="tl_user.pwChange.1">
+        <source>Make the user change his password upon the next login.</source>
       </trans-unit>
       <trans-unit id="tl_user.admin.0">
         <source>Make the user an administrator</source>
@@ -130,6 +141,12 @@
         <source>Here you can grant access to one or more back end modules.</source>
         <target>Моля, изберете модулите, които искате да включите за този потребител.</target>
       </trans-unit>
+      <trans-unit id="tl_user.themes.0">
+        <source>Theme modules</source>
+      </trans-unit>
+      <trans-unit id="tl_user.themes.1">
+        <source>Here you can grant access to the theme modules.</source>
+      </trans-unit>
       <trans-unit id="tl_user.pagemounts.0">
         <source>Pagemounts</source>
         <target>Монтиране на страници</target>
@@ -161,6 +178,12 @@
       <trans-unit id="tl_user.forms.1">
         <source>Here you can grant access to one or more forms.</source>
         <target>Моля изберете форми, които желаете да разрешите за този потребител.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.formp.0">
+        <source>Form permissions</source>
+      </trans-unit>
+      <trans-unit id="tl_user.formp.1">
+        <source>Here you can define the form permissions.</source>
       </trans-unit>
       <trans-unit id="tl_user.disable.0">
         <source>Deactivate</source>
@@ -201,6 +224,9 @@
       <trans-unit id="tl_user.backend_legend">
         <source>Back end settings</source>
         <target>Настройки на административния интерфейс</target>
+      </trans-unit>
+      <trans-unit id="tl_user.theme_legend">
+        <source>Back end theme</source>
       </trans-unit>
       <trans-unit id="tl_user.password_legend">
         <source>Password settings</source>
@@ -261,6 +287,9 @@
       <trans-unit id="tl_user.tempPurged">
         <source>The page cache has been purged</source>
         <target>Временната директория бе изпразнена</target>
+      </trans-unit>
+      <trans-unit id="tl_user.FileUpload">
+        <source>Default uploader</source>
       </trans-unit>
       <trans-unit id="tl_user.new.0">
         <source>New user</source>

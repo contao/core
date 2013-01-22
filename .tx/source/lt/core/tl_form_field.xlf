@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_form_field.php" source-language="en">
     <body>
       <trans-unit id="FFL.headline.0">
@@ -385,6 +384,12 @@
       <trans-unit id="tl_form_field.accesskey.1">
         <source>A form field can be focused by pressing the [ALT] or [CTRL] key and the access key simultaneously.</source>
         <target>Formos laukas gali būti aktyvuotas paspaudus [ALT] arba [CTRL] bei prieigos klavišą vienu metu.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.tabindex.0">
+        <source>Tab index</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.tabindex.1">
+        <source>The position of the form field in the tabbing order.</source>
       </trans-unit>
       <trans-unit id="tl_form_field.fSize.0">
         <source>Field size</source>

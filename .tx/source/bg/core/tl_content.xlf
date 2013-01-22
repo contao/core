@@ -1,15 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_content.php" source-language="en">
     <body>
-      <trans-unit id="tl_content.invisible.0">
-        <source>Invisible</source>
-        <target>Невидим</target>
-      </trans-unit>
-      <trans-unit id="tl_content.invisible.1">
-        <source>Hide the element on the website.</source>
-        <target>Текущият елемент не се вижда в сайта.</target>
-      </trans-unit>
       <trans-unit id="tl_content.type.0">
         <source>Element type</source>
         <target>Тип на елемента</target>
@@ -210,21 +201,23 @@
         <source>Please select the operation mode of the accordion element.</source>
         <target>Моля, изберете оперативен режим на елемента.</target>
       </trans-unit>
-      <trans-unit id="tl_content.start.0">
-        <source>Show from</source>
-        <target>Начало на обвивката</target>
+      <trans-unit id="tl_content.mooStart.0">
+        <source>Wrapper start</source>
       </trans-unit>
-      <trans-unit id="tl_content.start.1">
-        <source>Do not show the element on the website before this day.</source>
-        <target>Отбелязва началото на разгъващ се панел, обхващащ няколко елемента със съдържание.</target>
+      <trans-unit id="tl_content.mooStart.1">
+        <source>Marks the beginning of an accordion pane that spans several content elements.</source>
       </trans-unit>
-      <trans-unit id="tl_content.stop.0">
-        <source>Show until</source>
-        <target>Край на обвивката</target>
+      <trans-unit id="tl_content.mooStop.0">
+        <source>Wrapper stop</source>
       </trans-unit>
-      <trans-unit id="tl_content.stop.1">
-        <source>Do not show the element on the website on and after this day.</source>
-        <target>Определя къде свършва обвивката</target>
+      <trans-unit id="tl_content.mooStop.1">
+        <source>Marks the end of an accordion pane that spans several content elements.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.mooSingle.0">
+        <source>Single element</source>
+      </trans-unit>
+      <trans-unit id="tl_content.mooSingle.1">
+        <source>Behaves like a single text element that is inside an accordion pane.</source>
       </trans-unit>
       <trans-unit id="tl_content.mooHeadline.0">
         <source>Section headline</source>
@@ -282,13 +275,19 @@
         <source>The link text will be displayed instead of the target URL.</source>
         <target>Заглавието на връзката ще бъде показвано на посетителите на сайта вместо URL-то на изходния файл. ако генерирате връзка-картинка, картинката ще бъде показвана вместо заглавието на връзката.</target>
       </trans-unit>
+      <trans-unit id="tl_content.titleText.0">
+        <source>Link title</source>
+      </trans-unit>
+      <trans-unit id="tl_content.titleText.1">
+        <source>The link title is added as title attribute in the HTML markup.</source>
+      </trans-unit>
       <trans-unit id="tl_content.embed.0">
         <source>Embed the link</source>
         <target>Внедри връзката</target>
       </trans-unit>
       <trans-unit id="tl_content.embed.1">
-        <source>Use the wildcard "%s" to embed the link in a phrase (e.g. &lt;em&gt;For more information please visit %s&lt;/em&gt;).</source>
-        <target>Използвайте маската "%s", за да внедрите връзката във фраза (например: &lt;em&gt;За повече информация, посетете %s&lt;/em&gt;).</target>
+        <source>Use the wildcard &quot;%s&quot; to embed the link in a phrase (e.g. &lt;em&gt;For more information please visit %s&lt;/em&gt;).</source>
+        <target>Използвайте маската &quot;%s&quot;, за да внедрите връзката във фраза (например: &lt;em&gt;За повече информация, посетете %s&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_content.rel.0">
         <source>Lightbox</source>
@@ -296,7 +295,7 @@
       </trans-unit>
       <trans-unit id="tl_content.rel.1">
         <source>To trigger the lightbox, enter a rel attribute here.</source>
-        <target>Въведете "rel" атрибут тук, за да стартирате Lightbox.</target>
+        <target>Въведете &quot;rel&quot; атрибут тук, за да стартирате Lightbox.</target>
       </trans-unit>
       <trans-unit id="tl_content.useImage.0">
         <source>Create an image link</source>
@@ -313,6 +312,12 @@
       <trans-unit id="tl_content.multiSRC.1">
         <source>Please select one or more files or folders from the files directory. If you select a folder, its files will be included automatically.</source>
         <target>Моля изберете един или повече фалйлове или директории (файловете в дадена директория ще бъдат включени автоматично).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.orderSRC.0">
+        <source>Sort order</source>
+      </trans-unit>
+      <trans-unit id="tl_content.orderSRC.1">
+        <source>The sort order of the items.</source>
       </trans-unit>
       <trans-unit id="tl_content.useHomeDir.0">
         <source>Use home directory</source>
@@ -344,7 +349,7 @@
       </trans-unit>
       <trans-unit id="tl_content.numberOfItems.1">
         <source>Here you can limit the total number of images. Set to 0 to show all.</source>
-        <target>Тук можете да ограничите броя на изображенията, които да се показват. Задайте "0", за да се показват всички.</target>
+        <target>Тук можете да ограничите броя на изображенията, които да се показват. Задайте &quot;0&quot;, за да се показват всички.</target>
       </trans-unit>
       <trans-unit id="tl_content.sortBy.0">
         <source>Order by</source>
@@ -361,6 +366,36 @@
       <trans-unit id="tl_content.galleryTpl.1">
         <source>Here you can select the gallery template.</source>
         <target>Тук можете да изберете шаблон за галерия.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSRC.0">
+        <source>Video/audio files</source>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSRC.1">
+        <source>Here you can add the video/audio file or multiple files if you are using different codecs.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.youtube.0">
+        <source>YouTube ID</source>
+      </trans-unit>
+      <trans-unit id="tl_content.youtube.1">
+        <source>Please enter the YouTube video ID (e.g. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_content.posterSRC.0">
+        <source>Preview image</source>
+      </trans-unit>
+      <trans-unit id="tl_content.posterSRC.1">
+        <source>Show this image instead of the first frame of the video before playback (videos only).</source>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSize.0">
+        <source>Player size</source>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSize.1">
+        <source>Width and height of the media player in pixels (videos only).</source>
+      </trans-unit>
+      <trans-unit id="tl_content.autoplay.0">
+        <source>Autoplay</source>
+      </trans-unit>
+      <trans-unit id="tl_content.autoplay.1">
+        <source>Automatically play the video when the page loads.</source>
       </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>
@@ -442,6 +477,30 @@
         <source>Here you can enter the spacing in front of and after the content element in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
         <target>Моля въведете разстоянието преди и след елемента съдържание в пиксели.</target>
       </trans-unit>
+      <trans-unit id="tl_content.invisible.0">
+        <source>Invisible</source>
+        <target>Невидим</target>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible.1">
+        <source>Hide the element on the website.</source>
+        <target>Текущият елемент не се вижда в сайта.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.start.0">
+        <source>Show from</source>
+        <target>Начало на обвивката</target>
+      </trans-unit>
+      <trans-unit id="tl_content.start.1">
+        <source>Do not show the element on the website before this day.</source>
+        <target>Отбелязва началото на разгъващ се панел, обхващащ няколко елемента със съдържание.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.stop.0">
+        <source>Show until</source>
+        <target>Край на обвивката</target>
+      </trans-unit>
+      <trans-unit id="tl_content.stop.1">
+        <source>Do not show the element on the website on and after this day.</source>
+        <target>Определя къде свършва обвивката</target>
+      </trans-unit>
       <trans-unit id="tl_content.type_legend">
         <source>Element type</source>
         <target>Тип елемент</target>
@@ -506,6 +565,15 @@
         <source>Template settings</source>
         <target>Настройки на шаблона.</target>
       </trans-unit>
+      <trans-unit id="tl_content.player_legend">
+        <source>Player settings</source>
+      </trans-unit>
+      <trans-unit id="tl_content.poster_legend">
+        <source>Preview image</source>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible_legend">
+        <source>Visibility</source>
+      </trans-unit>
       <trans-unit id="tl_content.ordered">
         <source>ordered list</source>
         <target>подреден списък</target>
@@ -529,6 +597,9 @@
       <trans-unit id="tl_content.date_desc">
         <source>Date (descending)</source>
         <target>Дата (низходящо)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.custom">
+        <source>Custom order</source>
       </trans-unit>
       <trans-unit id="tl_content.random">
         <source>Random order</source>

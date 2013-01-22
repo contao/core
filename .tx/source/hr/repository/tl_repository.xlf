@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.1">
+<?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/repository/languages/en/tl_repository.php" source-language="en">
     <body>
       <trans-unit id="tl_repository.category.0">
@@ -113,6 +112,30 @@
       <trans-unit id="tl_repository.version.1">
         <source>Version numbers must be in format n.n.n s, where n are integers and s is one of: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</source>
         <target>Brojevi verzije moraju biti u formatu n.n.n s, gdje su n cijeli brojevi a s je jedan od: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.0">
+        <source>License key</source>
+        <target>Ključ licence</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.1">
+        <source>Enter the license key that you got from the extension vendor.</source>
+        <target>Upišite ključ licence kojeg ste dobili od prodavatelja ekstenzije</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.0">
+        <source>Uninstall protection</source>
+        <target>Zaštita od deinstalacije</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.1">
+        <source>Protect extension against accidental uninstallation.</source>
+        <target>Zaštitite ekstenziju od slučajne deinstalacije</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.0">
+        <source>Update protection</source>
+        <target>Zaštita nadogradnje</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.1">
+        <source>Protect extension against accidental update.</source>
+        <target>Zaštitite ekstenziju od slučajne nadogradnje.</target>
       </trans-unit>
       <trans-unit id="tl_repository.author">
         <source>Author</source>
@@ -294,30 +317,6 @@
         <source>yes</source>
         <target>da</target>
       </trans-unit>
-      <trans-unit id="tl_repository.lickey.0">
-        <source>License key</source>
-        <target>Ključ licence</target>
-      </trans-unit>
-      <trans-unit id="tl_repository.lickey.1">
-        <source>Enter the license key that you got from the extension vendor.</source>
-        <target>Upišite ključ licence kojeg ste dobili od prodavatelja ekstenzije</target>
-      </trans-unit>
-      <trans-unit id="tl_repository.uninstprotect.0">
-        <source>Uninstall protection</source>
-        <target>Zaštita od deinstalacije</target>
-      </trans-unit>
-      <trans-unit id="tl_repository.uninstprotect.1">
-        <source>Protect extension against accidental uninstallation.</source>
-        <target>Zaštitite ekstenziju od slučajne deinstalacije</target>
-      </trans-unit>
-      <trans-unit id="tl_repository.updateprotect.0">
-        <source>Update protection</source>
-        <target>Zaštita nadogradnje</target>
-      </trans-unit>
-      <trans-unit id="tl_repository.updateprotect.1">
-        <source>Protect extension against accidental update.</source>
-        <target>Zaštitite ekstenziju od slučajne nadogradnje.</target>
-      </trans-unit>
       <trans-unit id="tl_repository.action">
         <source>Action</source>
         <target>Radnja</target>
@@ -494,6 +493,55 @@
         <source>Verify/repair %s %s build %s</source>
         <target>Potvrdi/popravi %s %s build %s</target>
       </trans-unit>
+      <trans-unit id="tl_repository.approvedForLabel">
+        <source>Approved for</source>
+      </trans-unit>
+      <trans-unit id="tl_repository.approvedForText">
+        <source>Contao %s to %s</source>
+      </trans-unit>
+      <trans-unit id="tl_repository.missingSoapModule">
+        <source>SOAP extension not loaded (configure PHP with --enable-soap).</source>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.uptodate">
+        <source>Up to date</source>
+        <target>Ažurirano</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapproved">
+        <source>Not approved for %s %s</source>
+        <target>Nije odobreno za %s %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapprovedwith">
+        <source>Not approved with %s %s</source>
+        <target>Nije odobreno s %s %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.shouldwork">
+        <source>Expected to be compatible with %s %s</source>
+        <target>Očekuje se da bude kompatibilno s %s %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.newversion">
+        <source>Version %s build %s available</source>
+        <target>Nova verzija %s build %s dostupna</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.depmissing">
+        <source>Missing required extension %s</source>
+        <target>Nedostaje potrebna ekstenzija %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extnotfound">
+        <source>Extension not found in repository</source>
+        <target>Ekstenzija nije pronađena u repozitoriju.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.vernotfound">
+        <source>Installed version not found in repository</source>
+        <target>Instalirana verzija nije pronađena u repozitoriju.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extneedkey">
+        <source>License key required, install extension in advance</source>
+        <target>Potreban je ključ licence, instaliraj ekstenziju unaprijed.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.errorinstall">
+        <source>Corrupted, update/repair required</source>
+        <target>Neuspješna instalacija, preporuča se ažuriuranje/popravak.</target>
+      </trans-unit>
       <trans-unit id="tl_repository_type_options.free">
         <source>Free</source>
         <target>Besplatna</target>
@@ -581,46 +629,6 @@
       <trans-unit id="tl_repository_state_options.stable">
         <source>Stable</source>
         <target>Stable</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.uptodate">
-        <source>Up to date</source>
-        <target>Ažurirano</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.notapproved">
-        <source>Not approved for %s %s</source>
-        <target>Nije odobreno za %s %s.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.notapprovedwith">
-        <source>Not approved with %s %s</source>
-        <target>Nije odobreno s %s %s.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.shouldwork">
-        <source>Expected to be compatible with %s %s</source>
-        <target>Očekuje se da bude kompatibilno s %s %s</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.newversion">
-        <source>Version %s build %s available</source>
-        <target>Nova verzija %s build %s dostupna</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.depmissing">
-        <source>Missing required extension %s</source>
-        <target>Nedostaje potrebna ekstenzija %s.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.extnotfound">
-        <source>Extension not found in repository</source>
-        <target>Ekstenzija nije pronađena u repozitoriju.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.vernotfound">
-        <source>Installed version not found in repository</source>
-        <target>Instalirana verzija nije pronađena u repozitoriju.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.extneedkey">
-        <source>License key required, install extension in advance</source>
-        <target>Potreban je ključ licence, instaliraj ekstenziju unaprijed.</target>
-      </trans-unit>
-      <trans-unit id="tl_repository_statext.errorinstall">
-        <source>Corrupted, update/repair required</source>
-        <target>Neuspješna instalacija, preporuča se ažuriuranje/popravak.</target>
       </trans-unit>
     </body>
   </file>
