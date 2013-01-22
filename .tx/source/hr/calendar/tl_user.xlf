@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_user.php" source-language="en">
+    <body>
+      <trans-unit id="tl_user.calendars.0">
+        <source>Allowed calendars</source>
+        <target>Dozvoljeni kalendari</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendars.1">
+        <source>Here you can grant access to one or more calendars.</source>
+        <target>Ovdje možete dati dozvole pristupa jednom ili više kalendara.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarp.0">
+        <source>Calendar permissions</source>
+        <target>Dozvole kalendara</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarp.1">
+        <source>Here you can define the calendar permissions.</source>
+        <target>Definirajte dozvole kalendara</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendars_legend">
+        <source>Calendar permissions</source>
+        <target>Dozvole za kalendar</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_maintenance.php" source-language="en">
+    <body>
+      <trans-unit id="tl_maintenance.cacheTables.0">
+        <source>Purge data</source>
+        <target>Očisti podatke</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.cacheTables.1">
+        <source>Please select the data you want to purge or rebuild.</source>
+        <target>Odaberite podatke koje želite očistiti.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.frontendUser.0">
+        <source>Front end user</source>
+        <target>Korisnik korisničkog sučelja</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.frontendUser.1">
+        <source>Automatically log in a front end user to index protected pages.</source>
+        <target>Automatski prijaviti korisnika korisničkog sučelja radi indeksiranja zaštićenih stranica.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.clearCache">
+        <source>Purge data</source>
+        <target>Čišćenje podataka</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.cacheCleared">
+        <source>The data has been purged</source>
+        <target>Podaci su očišćeni</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.liveUpdate">
+        <source>Live Update</source>
+        <target>Ažuriranje uživo</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.liveUpdateId">
+        <source>Live Update ID</source>
+        <target>ID ažuriranja uživo</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.upToDate">
+        <source>Your Contao version %s is up to date</source>
+        <target>Vaša TYPOlight verzija %s je najnovijeg datuma</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.newVersion">
+        <source>A newer Contao version %s is available</source>
+        <target>Dostupna je novija TYPOlight verzija %s</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.emptyLuId">
+        <source>Please enter your Live Update ID</source>
+        <target>Upišite ID vašeg ažuriranja uživo.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.notWriteable">
+        <source>The temporary folder (system/tmp) is not writeable</source>
+        <target>Privremena mapa (system/tmp) nije otvorena za zapisivanje.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.changelog">
+        <source>View the change log</source>
+        <target>Pregledaj dnevnik izmjena</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.runLiveUpdate">
+        <source>Run the update</source>
+        <target>Pokreni ažuriranje</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.toc">
+        <source>Content of the update archive</source>
+        <target>Sadržaj ažurirane arhive</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.backup">
+        <source>Backuped files</source>
+        <target>Backup datoteke</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.update">
+        <source>Updated files</source>
+        <target>Ažurirane datoteke</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.searchIndex">
+        <source>Rebuild the search index</source>
+        <target>Ponovno napravi indeks pretraživanja</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexSubmit">
+        <source>Rebuild index</source>
+        <target>Ponovno napravi indeks</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.noSearchable">
+        <source>No searchable pages found</source>
+        <target>Nisu pronađene pretražive stranice</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexNote">
+        <source>Please wait for the page to load completely before you proceed!</source>
+        <target>Prije nastavka pričekajte da se stranica u potpunosti učita.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexLoading">
+        <source>Please wait while the search index is being rebuilt.</source>
+        <target>Pričekajte dok se pravi indeks pretraživanja.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexComplete">
+        <source>The search index has been rebuilt. You can now proceed.</source>
+        <target>Indeks pretraživanja ponovno je napravljen. Sad možete nastaviti.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
