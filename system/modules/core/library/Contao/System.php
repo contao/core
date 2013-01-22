@@ -415,7 +415,7 @@ abstract class System
 				elseif (file_exists(TL_ROOT . '/' . $strFallback . '.php'))
 				{
 					$objCacheFallback->append(static::readPhpFileWithoutTags($strFallback . '.php'));
-					include TL_ROOT . '/' . $strFallback;
+					include TL_ROOT . '/' . $strFallback . '.php';
 				}
 
 				// Only process if the current language is not English
@@ -431,7 +431,7 @@ abstract class System
 					elseif (file_exists(TL_ROOT . '/' . $strFile . '.php'))
 					{
 						$objCacheFile->append(static::readPhpFileWithoutTags($strFile . '.php'));
-						include TL_ROOT . '/' . $strFile;
+						include TL_ROOT . '/' . $strFile . '.php';
 					}
 				}
 			}
