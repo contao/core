@@ -2131,6 +2131,12 @@ abstract class Controller extends \System
 	 */
 	public static function generateMargin($arrValues, $strType='margin')
 	{
+		// Initialize an empty array (see #5217)
+		if (!is_array($arrValues))
+		{
+			$arrValues = array('top'=>'', 'right'=>'', 'bottom'=>'', 'left'=>'', 'unit'=>'');
+		}
+
 		$top = $arrValues['top'];
 		$right = $arrValues['right'];
 		$bottom = $arrValues['bottom'];
@@ -2157,15 +2163,8 @@ abstract class Controller extends \System
 			}
 		}
 
-		$arrDir = array
-		(
-			'top'=>$top,
-			'right'=>$right,
-			'bottom'=>$bottom,
-			'left'=>$left
-		);
-
 		$return = array();
+		$arrDir = array('top'=>$top, 'right'=>$right, 'bottom'=>$bottom, 'left'=>$left);
 
 		foreach ($arrDir as $k=>$v)
 		{
