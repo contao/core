@@ -124,7 +124,7 @@ define('REPOSITORY_FILEROOT', 'tl_files/repository');
 define('REPOSITORY_DOWNLOADS', 'system/modules/rep_server/RepositoryDownload.php?token=');
 
 // HTML tags allowed in long texts
-define('REPOSITORY_TEXTTAGS', '<h3><h4><h5><h6><p><br><ol><ul><li><em><strong>');
+define('REPOSITORY_TEXTTAGS', '<h3><h4><h5><h6><p><pre><blockquote><br><ol><ul><li><em><strong>');
 
 // # of searchtags allowed
 define('REPOSITORY_SEARCHTAGS', 5);

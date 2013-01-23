@@ -55,9 +55,37 @@
 .mod_repository .col_functions { text-align:right; }
 
 /* Details view */
+.mod_repository_view li
+{
+	margin-top:3px;
+	margin-bottom:3px;
+}
 .mod_repository_view tr.description td { background-color:#fff; line-height:inherit; }
 .mod_repository_view td.releasenotes { line-height:inherit !important; }
 .mod_repository_view tr.description h2 { margin-top:0; }
+.mod_repository_view tr.description h3,.mod_repository_view tr.description h4,.mod_repository_view tr.description h5,.mod_repository_view tr.description h6
+{
+	margin-top:1.5em;
+}
+.mod_repository_view tr.description pre
+{
+	max-width:670px;
+	overflow:auto;
+	margin:0 3px 13px;
+	padding:6px;
+	background-color:#f6f6f6;
+	border-radius:3px;
+	font-family:Courier,monospace;
+	line-height:1.25;
+}
+.mod_repository_view tr.description blockquote
+{
+	margin:0 0 12px;
+	padding:6px;
+	background-color:#ffc;
+	border:1px solid #f90;
+	border-radius:3px;
+}
 .mod_repository_view tr.description .image_container
 {
 	float:right;
