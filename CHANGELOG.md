@@ -5,6 +5,9 @@ Version 2.11.9 (2013-XX-XX)
 ---------------------------
 
 ### Fixed
+Anonymize IP addresses in `Form::processFormData()` (see #5255).
+
+### Fixed
 Replaced the 1200 pixel limit when resizing images with the values defined in
 the system settings (see #5268).
 
