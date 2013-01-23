@@ -5,6 +5,10 @@ Version 2.11.9 (2013-XX-XX)
 ---------------------------
 
 ### Fixed
+Replaced the 1200 pixel limit when resizing images with the values defined in
+the system settings (see #5268).
+
+### Fixed
 Make sure there is an array in `Controller::generateMargin()` (see #5217).
 
 ### Fixed

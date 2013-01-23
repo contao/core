@@ -1006,7 +1006,7 @@ abstract class Controller extends System
 		}
 
 		// Return the path to the original image if the GDlib cannot handle it
-		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $objFile->height > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] || (!$width && !$height) || $width > 1200 || $height > 1200)
+		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $objFile->height > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] || (!$width && !$height) || $width > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $height > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'])
 		{
 			return $this->urlEncode($image);
 		}
