@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Make the jQuery accordion behave like the MooTools version (see #5251).
+
+### Fixed
 Added support for more advanced media queries (see #5236).
 
 ### Fixed
