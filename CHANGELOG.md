@@ -5,6 +5,9 @@ Version 2.11.9 (2013-XX-XX)
 ---------------------------
 
 ### Fixed
+Make sure there is an array in `Controller::generateMargin()` (see #5217).
+
+### Fixed
 More robust input validation in the back end filter menu and no more absolute
 paths in error messages printed to the screen (thanks to aulmn) (see #4971).
 
