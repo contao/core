@@ -191,11 +191,11 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		'mediaQuery' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['mediaQuery'],
-			'inputType'               => 'text',
+			'inputType'               => 'textarea',
 			'exclude'                 => true,
 			'search'                  => true,
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'clr long'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'eval'                    => array('decodeEntities'=>true, 'style'=>'height:60px'),
+			'sql'                     => "text NULL"
 		),
 		'vars' => array
 		(
@@ -315,7 +315,7 @@ class tl_style_sheet extends Backend
 
 		if ($row['mediaQuery'] != '')
 		{
-			return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">@media '. $row['mediaQuery'] . $cc .'</span>' . "</div>\n";
+			return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">@media '. String::substr($row['mediaQuery'], 64) . $cc .'</span>' . "</div>\n";
 		}
 		elseif (is_array($media) && !empty($media))
 		{

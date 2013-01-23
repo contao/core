@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Added support for more advanced media queries (see #5236).
+
+### Fixed
 Added the missing `UserGroupModel` class (see #5218).
 
 ### Fixed
