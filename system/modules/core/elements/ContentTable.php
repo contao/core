@@ -57,19 +57,19 @@ class ContentTable extends \ContentElement
 		// Add the CSS and JavaScript files
 		if ($this->sortable)
 		{
-			if ($objPage->hasMooTools)
-			{
-				$this->Template->sortable = true;
-				$this->Template->hasMooTools = true;
-				$GLOBALS['TL_CSS'][] = 'assets/mootools/tablesort/css/tablesort.css';
-				$GLOBALS['TL_MOOTOOLS'][] = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_ASSETS_URL . 'assets/mootools/tablesort/js/tablesort.js"></script>';
-			}
-			elseif ($objPage->hasJQuery)
+			if ($objPage->hasJQuery)
 			{
 				$this->Template->sortable = true;
 				$this->Template->hasJQuery = true;
 				$GLOBALS['TL_CSS'][] = 'assets/jquery/tablesorter/' . TABLESORTER . '/css/tablesorter.css';
 				$GLOBALS['TL_JQUERY'][] = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_ASSETS_URL . 'assets/jquery/tablesorter/' . TABLESORTER . '/js/tablesorter.js"></script>';
+			}
+			elseif ($objPage->hasMooTools)
+			{
+				$this->Template->sortable = true;
+				$this->Template->hasMooTools = true;
+				$GLOBALS['TL_CSS'][] = 'assets/mootools/tablesort/css/tablesort.css';
+				$GLOBALS['TL_MOOTOOLS'][] = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_ASSETS_URL . 'assets/mootools/tablesort/js/tablesort.js"></script>';
 			}
 		}
 

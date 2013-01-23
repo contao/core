@@ -1628,6 +1628,18 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 				if (is_array($data))
 				{
+					// Get the currently available fields
+					$arrFields = array_flip($this->Database->getFieldnames($this->strTable));
+
+					// Unset fields that do not exist (see #5219)
+					foreach (array_keys($data) as $k)
+					{
+						if (!isset($arrFields[$k]))
+						{
+							unset($data[$k]);
+						}
+					}
+
 					$this->Database->prepare("UPDATE " . $objData->fromTable . " %s WHERE id=?")
 								   ->set($data)
 								   ->execute($this->intId);
@@ -4496,8 +4508,14 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		// Set sorting from user input
 		if (\Input::post('FORM_SUBMIT') == 'tl_filters')
 		{
-			$session['sorting'][$this->strTable] = in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][\Input::post('tl_sort')]['flag'], array(2, 4, 6, 8, 10, 12)) ? \Input::post('tl_sort').' DESC' : \Input::post('tl_sort');
-			$this->Session->setData($session);
+			$strSort = \Input::post('tl_sort');
+
+			// Validate the user input (thanks to aulmn) (see #4971)
+			if (in_array($strSort, $sortingFields))
+			{
+				$session['sorting'][$this->strTable] = in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$strSort]['flag'], array(2, 4, 6, 8, 10, 12)) ? "$strSort DESC" : $strSort;
+				$this->Session->setData($session);
+			}
 		}
 
 		// Overwrite the "orderBy" value with the session value
@@ -4555,13 +4573,19 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		// Set limit from user input
 		if (\Input::post('FORM_SUBMIT') == 'tl_filters' || \Input::post('FORM_SUBMIT') == 'tl_filters_limit')
 		{
-			if (\Input::post('tl_limit') != 'tl_limit')
+			$strLimit = \Input::post('tl_limit');
+
+			if ($strLimit == 'tl_limit')
 			{
-				$session['filter'][$filter]['limit'] = \Input::post('tl_limit');
+				unset($session['filter'][$filter]['limit']);
 			}
 			else
 			{
-				unset($session['filter'][$filter]['limit']);
+				// Validate the user input (thanks to aulmn) (see #4971)
+				if ($strLimit == 'all' || preg_match('/^[0-9]+,[0-9]+$/', $strLimit))
+				{
+					$session['filter'][$filter]['limit'] = $strLimit;
+				}
 			}
 
 			$this->Session->setData($session);

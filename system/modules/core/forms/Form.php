@@ -474,7 +474,7 @@ class Form extends \Hybrid
 		}
 		else
 		{
-			$this->log('Form "' . $this->title . '" has been submitted by ' . \Environment::get('ip') . '.', 'Form processFormData()', TL_FORMS);
+			$this->log('Form "' . $this->title . '" has been submitted by ' . \System::anonymizeIp(\Environment::get('ip')) . '.', 'Form processFormData()', TL_FORMS);
 		}
 
 		$this->jumpToOrReload($this->objModel->getRelated('jumpTo')->row());

@@ -58,6 +58,31 @@ The pageTree widget is now sortable just like the fileTree widget and the custom
 and quick navigation modules consider the custom order (see #4936).
 
 
+Version 3.0.4 (2013-XX-XX)
+--------------------------
+
+### Fixed
+Make the jQuery accordion behave like the MooTools version (see #5251).
+
+### Fixed
+Added support for more advanced media queries (see #5236).
+
+### Fixed
+Added the missing `UserGroupModel` class (see #5218).
+
+### Fixed
+Handle the case that `glob()` returns `false` (see #5226).
+
+### Fixed
+The table sorter did not work if jQuery and MooTools were active (see #5228).
+
+### Fixed
+Copy all content elements if pages are duplicated with childs (see #5241).
+
+### Fixed
+Added lazy template loading for newsletter mail templates.
+
+
 Version 3.0.3 (2013-01-08)
 --------------------------
 

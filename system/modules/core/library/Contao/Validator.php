@@ -105,7 +105,15 @@ class Validator
 	 */
 	public static function isDate($varValue)
 	{
-		return preg_match('~^'. \Date::getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'$~i', $varValue);
+		$strFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
+
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+			$strFormat = $objPage->dateFormat;
+		}
+
+		return preg_match('~^'. \Date::getRegexp($strFormat) .'$~i', $varValue);
 	}
 
 
@@ -118,7 +126,15 @@ class Validator
 	 */
 	public static function isTime($varValue)
 	{
-		return preg_match('~^'. \Date::getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'$~i', $varValue);
+		$strFormat = $GLOBALS['TL_CONFIG']['timeFormat'];
+
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+			$strFormat = $objPage->timeFormat;
+		}
+
+		return preg_match('~^'. \Date::getRegexp($strFormat) .'$~i', $varValue);
 	}
 
 
@@ -131,7 +147,15 @@ class Validator
 	 */
 	public static function isDatim($varValue)
 	{
-		return preg_match('~^'. \Date::getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varValue);
+		$strFormat = $GLOBALS['TL_CONFIG']['datimFormat'];
+
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+			$strFormat = $objPage->datimFormat;
+		}
+
+		return preg_match('~^'. \Date::getRegexp($strFormat) .'$~i', $varValue);
 	}
 
 

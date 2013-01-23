@@ -200,7 +200,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'default'                 => 'mail_default',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('mail_'),
+			'options_callback'        => array('tl_newsletter', 'getMailTemplates'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'sendText' => array
@@ -471,5 +471,15 @@ class tl_newsletter extends Backend
 		}
 
 		return $varValue;
+	}
+
+
+	/**
+	 * Return all mail templates as array
+	 * @return array
+	 */
+	public function getMailTemplates()
+	{
+		return $this->getTemplateGroup('mail_');
 	}
 }

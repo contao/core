@@ -95,4 +95,4 @@ define('REPOSITORY_COREVERSIONS',
 );
 
 // HTML tags allowed in long texts
-define('REPOSITORY_TEXTTAGS', '<h3><h4><h5><h6><p><br><ol><ul><li><em><strong>');
+define('REPOSITORY_TEXTTAGS', '<h3><h4><h5><h6><p><pre><blockquote><br><ol><ul><li><em><strong>');
