@@ -5,6 +5,9 @@ Version 2.11.9 (2013-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not group standalone lightbox elements on HTML5 pages (see #3742).
+
+### Fixed
 Anonymize IP addresses in `Form::processFormData()` (see #5255).
 
 ### Fixed
