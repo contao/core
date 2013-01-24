@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+The jQuery accordion script did not work with minified markup (see #5245).
+
+### Fixed
 Removed the "spaceToUnderscore" option from all alias fields (see #5266).
 
 ### Fixed
