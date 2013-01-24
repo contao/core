@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Contao Open Source CMS</title>
+<title>An error occurred</title>
+<meta name="generator" content="Contao Open Source CMS">
 <style>
 a { text-decoration:none; }
 div { width:520px; margin:64px auto 18px; padding:24px; background:#ffc; border:1px solid #fc0; font-family:Verdana,sans-serif; font-size:12px; }
