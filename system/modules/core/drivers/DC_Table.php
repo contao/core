@@ -1092,6 +1092,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				if ($insertInto)
 				{
 					$newPID = $pid;
+
 					$objSorting = $this->Database->prepare("SELECT MIN(sorting) AS sorting FROM " . $this->strTable . " WHERE pid=?")
 												 ->executeUncached($pid);
 
@@ -1103,7 +1104,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						// Resort if the new sorting value is not an integer or smaller than 1
 						if (($curSorting % 2) != 0 || $curSorting < 1)
 						{
-							$objNewSorting = $this->Database->prepare("SELECT id, sorting FROM " . $this->strTable . " WHERE pid=? ORDER BY sorting" )
+							$objNewSorting = $this->Database->prepare("SELECT id FROM " . $this->strTable . " WHERE pid=? ORDER BY sorting" )
 															->executeUncached($pid);
 
 							$count = 2;
@@ -1128,7 +1129,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				// Else insert the current record after the parent record
 				elseif ($pid > 0)
 				{
-					$objSorting = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
+					$objSorting = $this->Database->prepare("SELECT pid, sorting FROM " . $this->strTable . " WHERE id=?")
 												 ->limit(1)
 												 ->executeUncached($pid);
 
@@ -1213,7 +1214,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				// Else insert the current record after the parent record
 				elseif ($pid > 0)
 				{
-					$objParentRecord = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
+					$objParentRecord = $this->Database->prepare("SELECT pid FROM " . $this->strTable . " WHERE id=?")
 													  ->limit(1)
 													  ->executeUncached($pid);
 
