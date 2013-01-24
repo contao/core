@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.4 (2013-XX-XX)
 --------------------------
 
+### Updated
+Updated SwiftMailer to version 4.3.0 (see #5263).
+
 ### Fixed
 The jQuery accordion script did not work with minified markup (see #5245).
 
