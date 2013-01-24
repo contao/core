@@ -188,9 +188,12 @@ class News extends \Frontend
 					{
 						$objFile = \FilesModel::findMultipleByIds($arrEnclosure);
 
-						while ($objFile->next())
+						if ($objFile !== null)
 						{
-							$objItem->addEnclosure($objFile->path);
+							while ($objFile->next())
+							{
+								$objItem->addEnclosure($objFile->path);
+							}
 						}
 					}
 				}

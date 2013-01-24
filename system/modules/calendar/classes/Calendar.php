@@ -424,9 +424,12 @@ class Calendar extends \Frontend
 			{
 				$objFile = \FilesModel::findMultipleByIds($arrEnclosure);
 
-				while ($objFile->next())
+				if ($objFile !== null)
 				{
-					$arrEvent['enclosure'][] = $objFile->path;
+					while ($objFile->next())
+					{
+						$arrEvent['enclosure'][] = $objFile->path;
+					}
 				}
 			}
 		}
