@@ -495,6 +495,7 @@ class File extends \System
 			'wma'   => array('audio/wma', 'iconAUDIO.gif'),
 			'mpeg'  => array('audio/mpeg', 'iconAUDIO.gif'),
 			'wav'   => array('audio/wav', 'iconAUDIO.gif'),
+			'ogg'   => array('audio/ogg','iconAUDIO.gif'),
 			'mid'   => array('audio/midi', 'iconAUDIO.gif'),
 			'midi'  => array('audio/midi', 'iconAUDIO.gif'),
 			'aif'   => array('audio/x-aiff', 'iconAUDIO.gif'),

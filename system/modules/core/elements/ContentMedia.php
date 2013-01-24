@@ -59,7 +59,7 @@ class ContentMedia extends \ContentElement
 			return '';
 		}
 
-		$objFiles = \FilesModel::findMultipleByIdsAndExtensions($source, array('mp4','m4v','mov','wmv','webm','ogv','m4a','mp3','wma','mpeg','wav'));
+		$objFiles = \FilesModel::findMultipleByIdsAndExtensions($source, array('mp4','m4v','mov','wmv','webm','ogv','m4a','mp3','wma','mpeg','wav','ogg'));
 
 		if ($objFiles === null)
 		{
@@ -123,7 +123,7 @@ class ContentMedia extends \ContentElement
 		else
 		{
 			$this->Template->isVideo = false;
-			$arrFiles = array('m4a'=>null, 'mp3'=>null, 'wma'=>null, 'mpeg'=>null, 'wav'=>null);
+			$arrFiles = array('m4a'=>null, 'mp3'=>null, 'wma'=>null, 'mpeg'=>null, 'wav'=>null, 'ogg'=>null);
 		}
 
 		$this->objFiles->reset();
