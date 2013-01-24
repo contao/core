@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not rewrite requests for .mp3, .mp4, .webm or .ogv files (see #5258, #5284).
+
+### Fixed
 Correctly determin the last run of the command scheduler (see #5278).
 
 ### Fixed
