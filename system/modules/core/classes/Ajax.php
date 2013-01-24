@@ -93,6 +93,7 @@ class Ajax extends \Backend
 				$this->import('BackendUser', 'User');
 
 				$objTemplate = new \BackendTemplate('be_navigation');
+                $objTemplate->level = 'tl_level_2';
 				$navigation = $this->User->navigation();
 				$objTemplate->modules = $navigation[\Input::post('id')]['modules'];
 
@@ -181,6 +182,51 @@ class Ajax extends \Backend
 				$state[\Input::post('id')] = intval(\Input::post('state'));
 				$this->Session->set('checkbox_groups', $state);
 				break;
+
+            // Toggle personal back end navigation
+            case 'togglePersonalNavigation':
+                $this->Session->set('customized_nav', (\Input::post('state') == 'personal') ? true : false);
+                exit; break;
+
+			// Get personal back end navigation
+			case 'loadBackendNavigation':
+				$this->import('BackendUser', 'User');
+
+                // Back end navigation
+                $objNavigationTpl = new \BackendTemplate('be_navigation');
+                $objNavigationTpl->level = 'tl_level_1';
+                $arrModules = $this->User->navigation(true);
+                $session = $this->Session->getData();
+
+                if (\Input::post('state') == 'personal')
+                {
+                    $arrModules = $this->User->personalizeNavigation($arrModules);
+                }
+
+                foreach ($arrModules as $strGroup => $arrModuleConfig)
+                {
+                    // use image
+                    $arrModules[$strGroup]['label'] = $arrModules[$strGroup]['img'] . $arrModules[$strGroup]['label'];
+
+                    if ($arrModuleConfig['modules'])
+                    {
+                        $objSubNavigationTpl = new \BackendTemplate('be_navigation');
+                        $objSubNavigationTpl->level = 'tl_level_2';
+                        $objSubNavigationTpl->modules = $arrModuleConfig['modules'];
+                        $arrModules[$strGroup]['subitems'] = $objSubNavigationTpl->parse();
+                    }
+                }
+
+                $objNavigationTpl->modules = $arrModules;
+                echo json_encode($objNavigationTpl->parse());
+                exit; break;
+
+            // Store personal back end navigation
+            case 'storePersonalNavigation':
+                $this->import('BackendUser', 'User');
+                $this->User->personalized_navigation = \Input::post('data');
+                $this->User->save();
+                exit; break;
 
 			// HOOK: pass unknown actions to callback functions
 			default:

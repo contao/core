@@ -1671,6 +1671,86 @@ var Backend =
 			td.getElement('a.module_link').setStyle('display', 'none');
 			td.getElement('img.module_image').setStyle('display', 'inline');
 		}
+	},
+
+	/**
+	 * Init custom back end navigation
+	 */
+	initCustomNavigation: function() {
+		document.id('switch_nav').addEvent('click', function(e) {
+			e.preventDefault();
+			var self = this;
+
+			var wrapper = document.id('navigation_wrapper');
+			var placeholder = wrapper.getElement('.ajax_placeholder');
+			var oldEl = wrapper.getFirst();
+			var newEl = placeholder.getFirst();
+
+			// toggle
+			var newClass = (document.id('tl_navigation').get('class') == 'default') ? 'personal' : 'default';
+			if (!newEl) {
+				new Request.JSON({
+					url: window.location.href,
+					onSuccess: function(html) {
+						placeholder.set('html', html);
+						newEl = placeholder.getFirst();
+						newEl.store('contao_height', Number.from(newEl.getStyle('height'))).setStyles({'opacity': 0, 'height': 0});
+
+						Backend.swapNavigations(newClass, oldEl, newEl, wrapper, placeholder);
+
+						// HOOK
+						window.fireEvent('ajax_change');
+					}
+				}).post({'action':'loadBackendNavigation','state':newClass, 'REQUEST_TOKEN':Contao.request_token});
+			}
+			else {
+				Backend.swapNavigations(newClass, oldEl, newEl, wrapper, placeholder);
+			}
+		});
+	},
+
+	swapNavigations: function(newClass, oldEl, newEl, wrapper, placeholder) {
+		var oldElHeight = Number.from(oldEl.getStyle('height'));
+		var newElHeight = Number.from(newEl.retrieve('contao_height'));
+
+		// calculate duration with a ratio so it doesn't look slow on small navigations and not too fast on huge
+		// @todo: probably add a nice algorithm with max and min numbers?
+		var durationOld = (oldElHeight > 400) ? 2000 : 1000;
+		var durationNew = (newElHeight > 400) ? 2000 : 1000;
+
+		// store original sizes to retrieve later on
+		oldEl.store('contao_height', oldElHeight);
+
+		// animate
+		new Fx.Morph(oldEl, {
+			duration: durationOld,
+			onStart: function() {
+				document.id('tl_navigation').set('class', 'animated');
+			},
+			onComplete: function() {
+				// inject new element
+				newEl.inject(wrapper, 'top');
+				new Fx.Morph(newEl, {
+					duration: durationNew
+				}).start({
+					'height': newElHeight,
+					'opacity': 1
+				});
+				// place the old one
+				oldEl.inject(placeholder);
+
+				// update class
+				document.id('tl_navigation').set('class', newClass);
+
+				// update session
+				new Request.JSON({
+					url: window.location.href
+				}).post({'action':'togglePersonalNavigation', 'state':newClass, 'REQUEST_TOKEN':Contao.request_token});
+			}
+		}).start({
+			'height': 0,
+			'opacity': 0
+		});
 	}
 };
 
@@ -1694,6 +1774,7 @@ window.addEvent('domready', function() {
 	Backend.collapsePalettes();
 	Backend.addInteractiveHelp();
 	Backend.addColorPicker();
+	Backend.initCustomNavigation();
 });
 
 // Limit the height of the preview fields

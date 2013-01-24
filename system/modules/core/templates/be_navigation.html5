@@ -1,5 +1,5 @@
-<ul class="tl_level_2">
+<ul class="<?php echo $this->level; ?>">
 <?php foreach ($this->modules as $strModule=>$arrConfig): ?>
-  <li><a href="<?php echo $arrConfig['href']; ?>" class="<?php echo $arrConfig['class']; ?>" title="<?php echo $arrConfig['title']; ?>"<?php echo $arrConfig['icon']; ?>><?php echo $arrConfig['label']; ?></a></li>
+  <li><a href="<?php echo $arrConfig['href']; ?>" class="<?php echo $arrConfig['class']; ?>" title="<?php echo $arrConfig['title']; ?>"<?php echo $arrConfig['icon']; ?>><?php echo $arrConfig['label']; ?></a><?php echo $arrConfig['subitems']; ?></li>
 <?php endforeach; ?>
 </ul>

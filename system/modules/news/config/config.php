@@ -18,7 +18,8 @@ array_insert($GLOBALS['BE_MOD']['content'], 1, array
 (
 	'news' => array
 	(
-		'tables' => array('tl_news_archive', 'tl_news', 'tl_news_feed', 'tl_content')
+		'tables' => array('tl_news_archive', 'tl_news', 'tl_news_feed', 'tl_content'),
+        'icon'   => 'system/themes/default/images/news.gif' // @todo: do we have to put those into the core folder? it's not consistent anyway (e.g. devtools, calendar, faq etc. can't be overriden by CSS anyway)
 	)
 ));
 

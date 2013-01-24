@@ -30,7 +30,7 @@
   $objCombiner->add('assets/mootools/simplemodal/'. SIMPLEMODAL .'/js/simplemodal.js', SIMPLEMODAL);
   $objCombiner->add('assets/mootools/datepicker/'. DATEPICKER .'/datepicker.js', DATEPICKER);
   $objCombiner->add('assets/mootools/mootao/Mootao.js');
-  $objCombiner->add('assets/contao/js/core.js');
+  $objCombiner->add('assets/contao/js/core-uncompressed.js');
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>
@@ -61,26 +61,18 @@
 <div id="container">
 <div id="left">
 
-<div id="tl_navigation">
+<div id="tl_navigation" class="<?php if ($this->customizedNav): ?>personal<?php else: ?>default<?php endif; ?>">
 
 <h1><?php echo $this->backendModules; ?></h1>
+<a href="#" id="switch_nav"></a>
 
 <a href="<?php echo $this->request; ?>#skipNavigation" class="invisible"><?php echo $this->skipNavigation; ?></a>
 
-<ul class="tl_level_1">
-<?php foreach ($this->modules as $strGroup=>$arrModules): ?>
-  <li class="tl_level_1_group<?php echo $arrModules['class']; ?>"><a href="<?php echo $arrModules['href']; ?>" title="<?php echo $arrModules['title']; ?>" onclick="return AjaxRequest.toggleNavigation(this,'<?php echo $strGroup; ?>')"><img src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" width="16" height="16" alt=""><?php echo $arrModules['label']; ?></a></li>
-<?php if ($arrModules['modules']): ?>
-  <li class="tl_parent" id="<?php echo $strGroup; ?>">
-  <ul class="tl_level_2">
-<?php foreach ($arrModules['modules'] as $arrConfig): ?>
-    <li><a href="<?php echo $arrConfig['href']; ?>" class="<?php echo $arrConfig['class']; ?>" title="<?php echo $arrConfig['title']; ?>"<?php echo $arrConfig['icon']; ?>><?php echo $arrConfig['label']; ?></a></li>
-<?php endforeach; ?>
-  </ul>
-  </li>
-<?php endif; ?>
-<?php endforeach; ?>
-</ul>
+<div id="navigation_wrapper">
+<?php echo $this->navigation; ?>
+<a class="customize_nav" href="<?php echo $this->customizeNavLink; ?>"><?php echo $this->customizeNavLabel; ?></a>
+<div class="ajax_placeholder"></div>
+</div>
 
 <a id="skipNavigation" class="invisible">&nbsp;</a>
 

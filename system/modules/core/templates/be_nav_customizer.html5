@@ -1,0 +1,113 @@
+<div id="navigation_customizer">
+    <div class="original">
+        <h2><?php echo $this->originalLabel; ?></h2>
+        <ul id="original_nav" class="level_1">
+            <?php foreach ($this->originalModules as $strGroup=>$arrModules): ?>
+            <li><span><?php echo $arrModules['label']; ?></span>
+                <?php if ($arrModules['modules']): ?>
+                <ul class="level_2">
+                    <?php foreach ($arrModules['modules'] as $k => $arrConfig): ?>
+                    <li data-type="item" data-id="<?php echo $strGroup; ?>.<?php echo $k; ?>" <?php echo $arrConfig['icon']; ?>><span><?php echo $arrConfig['label']; ?></span></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <div class="personal">
+        <h2><?php echo $this->personalizedLabel; ?></h2>
+        <ul id="personal_nav" class="level_1">
+            <?php foreach ($this->personalizedModules as $strGroup=>$arrModules): ?>
+            <?php continue; ?>
+            <li><span><?php echo $arrModules['label']; ?></span>
+                <?php if ($arrModules['modules']): ?>
+                <ul class="level_2">
+                    <?php foreach ($arrModules['modules'] as $arrConfig): ?>
+                    <li data-id="<?php echo $strGroup; ?>.<?php echo $k; ?>" <?php echo $arrConfig['icon']; ?>><span><?php echo $arrConfig['label']; ?></span></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    <input id="newGroupText" type="text" value="">
+    <input id="newGroupAdd" type="submit" value="ok">
+    </div>
+</div>
+<script>
+(function() {
+	window.addEvent('domready', function() {
+        document.getElements('#original_nav .level_2 > li').forEach(function(el, i) {
+            // tree instance
+            var tree = new Tree('personal_nav', {
+
+                checkDrag: function(element) {
+                    console.log(element);
+                    return true;
+                    //console.log(element);
+                },
+
+                checkDrop: function(element) {
+                    return true;
+                    //console.log(element);
+                }
+            });
+
+            // support for dragging from original to custom
+            el.addEvent('mousedown', function(event) {
+                if (!document.getElements('#personal_nav .level_2').length) {
+                    alert('you can\'t drag an item if you haven\'t defined any group yet, do you?');
+                    return false;
+                }
+                var allgroups = document.id('personal_nav').getElements('.level_2');
+                var target = allgroups[allgroups.length-1];
+
+                el.clone().addClass('clone').setStyles({
+                    position: 'absolute',
+                    top: event.page.y,
+                    left:event.page.x
+                }).inject(target).makeDraggable({
+                    droppables: [document.id('personal_nav')],
+                    onDrop: function(clone, droppable) {
+                        if (!droppable) {
+                            clone.destroy();
+                        }
+                        else {
+                            clone.setStyles({
+                                position: 'static',
+                                top: 'auto',
+                                left: 'auto'
+                            });
+                            new Request.JSON({
+                                url: window.location.href
+                            }).post({
+                                'action':           'storePersonalNavigation',
+                                'data':             tree.serialize(function(el) {
+                                                        return el.get('data-id');
+                                                    }),
+                                'REQUEST_TOKEN':    Contao.request_token
+                            });
+                        }
+                    }
+                }).start(event);
+            });
+        });
+
+        // dummy example for adding a group
+        document.id('newGroupAdd').addEvent('click', function(e) {
+            e.preventDefault();
+            var ul = new Element('ul', {
+                'class': 'level_2'
+            });
+            var li = new Element('li', {
+                'html': '<span>' + document.id('newGroupText').get('value') + '</span>',
+                'data-id': 'custom.' + String.uniqueID(), // @todo will not work - find something intelligent
+                'data-type': 'group'
+            });
+            ul.inject(li);
+            li.inject(document.id('personal_nav'));
+        });
+	});
+})()
+</script>

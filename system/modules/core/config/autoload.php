@@ -239,6 +239,8 @@ TemplateLoader::addFiles(array
 	'be_main'             => 'system/modules/core/templates',
 	'be_maintenance'      => 'system/modules/core/templates',
 	'be_navigation'       => 'system/modules/core/templates',
+	'be_navigation_item'  => 'system/modules/core/templates',
+	'be_nav_customizer'   => 'system/modules/core/templates',
 	'be_pagination'       => 'system/modules/core/templates',
 	'be_password'         => 'system/modules/core/templates',
 	'be_picker'           => 'system/modules/core/templates',

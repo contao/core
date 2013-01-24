@@ -109,6 +109,12 @@ class Main extends Backend
 			$this->Template->error = $GLOBALS['TL_LANG']['ERR']['general'];
 			$this->Template->title = $GLOBALS['TL_LANG']['ERR']['general'];
 		}
+		// Navigation customizer
+		elseif (Input::get('act') == 'customize_nav')
+		{
+			$this->Template->main .= $this->getNavigationCustomizer();
+			$this->Template->title = $GLOBALS['TL_LANG']['MSC']['home'];
+		}
 		// Welcome screen
 		elseif (!Input::get('do') && !Input::get('act'))
 		{
@@ -239,6 +245,23 @@ class Main extends Backend
 	}
 
 
+    /**
+     * Returns the back end navigation customizer
+     * @return string
+     */
+    protected function getNavigationCustomizer()
+    {
+        $GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/tree/powertools-tree.js';
+        $objTemplate = new \BackendTemplate('be_nav_customizer');
+        $arrModules =  $this->User->navigation(true);
+        $objTemplate->originalModules = $arrModules;
+        $objTemplate->personalizedModules = $this->User->personalizeNavigation($arrModules);
+        $objTemplate->originalLabel = 'Default navigation';
+        $objTemplate->personalizedLabel = 'Your personal navigation';
+        return $objTemplate->parse();
+    }
+
+
 	/**
 	 * Output the template file
 	 */
@@ -272,7 +295,6 @@ class Main extends Backend
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
 		$this->Template->request = ampersand(Environment::get('request'));
 		$this->Template->top = $GLOBALS['TL_LANG']['MSC']['backToTop'];
-		$this->Template->modules = $this->User->navigation();
 		$this->Template->home = $GLOBALS['TL_LANG']['MSC']['home'];
 		$this->Template->homeTitle = $GLOBALS['TL_LANG']['MSC']['homeTitle'];
 		$this->Template->backToTop = specialchars($GLOBALS['TL_LANG']['MSC']['backToTopTitle']);
@@ -285,6 +307,38 @@ class Main extends Backend
 		$this->Template->isAdmin = $this->User->isAdmin;
 		$this->Template->coreOnlyOff = specialchars($GLOBALS['TL_LANG']['MSC']['coreOnlyOff']);
 		$this->Template->coreOnlyHref = $this->addToUrl('smo=1');
+		$this->Template->customizeNavLink = 'contao/main.php?act=customize_nav';
+		$this->Template->customizeNavLabel = $GLOBALS['TL_LANG']['MSC']['customizeNavigation'];
+
+        // Default or personalized navigation?
+        $session = $this->Session->getData();
+        $blnPersonalizedNav = (boolean) $session['customized_nav'];
+        $this->Template->customizedNav = $blnPersonalizedNav;
+
+		// Back end navigation
+		$objNavigationTpl = new \BackendTemplate('be_navigation');
+        $objNavigationTpl->level = 'tl_level_1';
+		$arrModules = $this->User->navigation();
+        if ($blnPersonalizedNav)
+        {
+            $arrModules = $this->User->personalizeNavigation($arrModules);
+        }
+
+		foreach ($arrModules as $strGroup => $arrModuleConfig)
+		{
+            // use image
+            $arrModules[$strGroup]['label'] = $arrModules[$strGroup]['img'] . $arrModules[$strGroup]['label'];
+
+			if ($arrModuleConfig['modules'])
+			{
+				$objSubNavigationTpl = new \BackendTemplate('be_navigation');
+                $objSubNavigationTpl->level = 'tl_level_2';
+				$objSubNavigationTpl->modules = $arrModuleConfig['modules'];
+				$arrModules[$strGroup]['subitems'] = $objSubNavigationTpl->parse();
+			}
+		}
+		$objNavigationTpl->modules = $arrModules;
+		$this->Template->navigation = $objNavigationTpl->parse();
 
 		// Front end preview links
 		if (CURRENT_ID != '')
