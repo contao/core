@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Updated
+Updated SimplePie to version 1.3.1 (see #5207).
+
+### Updated
 Updated SwiftMailer to version 4.3.0 (see #5263).
 
 ### Fixed
