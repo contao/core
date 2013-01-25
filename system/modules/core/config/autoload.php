@@ -155,6 +155,7 @@ ClassLoader::addClasses(array
 	'Contao\StyleModel'                => 'system/modules/core/models/StyleModel.php',
 	'Contao\StyleSheetModel'           => 'system/modules/core/models/StyleSheetModel.php',
 	'Contao\ThemeModel'                => 'system/modules/core/models/ThemeModel.php',
+	'Contao\UserGroupModel'            => 'system/modules/core/models/UserGroupModel.php',
 	'Contao\UserModel'                 => 'system/modules/core/models/UserModel.php',
 
 	// Modules
