@@ -3055,10 +3055,11 @@ abstract class Controller extends \System
 	 * 
 	 * @param object $objTemplate The template object to add the enclosures to
 	 * @param array  $arrItem     The element or module as array
+	 * @param string $strKey      The name of the enclosures field in $arrItem
 	 */
-	public static function addEnclosuresToTemplate($objTemplate, $arrItem)
+	public static function addEnclosuresToTemplate($objTemplate, $arrItem, $strKey='enclosure')
 	{
-		$arrEnclosures = deserialize($arrItem['enclosure']);
+		$arrEnclosures = deserialize($arrItem[$strKey]);
 
 		if (!is_array($arrEnclosures) || empty($arrEnclosures))
 		{

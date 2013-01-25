@@ -115,48 +115,10 @@ class ModuleNewsletterReader extends \Module
 			$objPage->pageTitle = strip_tags(strip_insert_tags($objNewsletter->subject));
 		}
 
-		$arrEnclosures = array();
-
 		// Add enclosure
 		if ($objNewsletter->addFile)
 		{
-			$arrEnclosure = deserialize($objNewsletter->files, true);
-			$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
-
-			if (is_array($arrEnclosure))
-			{
-				// Send the file to the browser and do not send a 404 header (see #4632)
-				if (\Input::get('file', true) != '' && in_array(\Input::get('file', true), $arrEnclosure))
-				{
-					$this->sendFileToBrowser(\Input::get('file', true));
-				}
-
-				// Add download links
-				for ($i=0; $i<count($arrEnclosure); $i++)
-				{
-					if (is_file(TL_ROOT . '/' . $arrEnclosure[$i]))
-					{
-						$objFile = new \File($arrEnclosure[$i]);
-
-						if (in_array($objFile->extension, $allowedDownload))
-						{
-							$src = 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
-
-							if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
-							{
-								$arrEnclosures[$i]['size'] = ' ' . $imgSize[3];
-							}
-
-							$arrEnclosures[$i]['icon'] = TL_FILES_URL . $src;
-							$arrEnclosures[$i]['link'] = basename($arrEnclosure[$i]);
-							$arrEnclosures[$i]['filesize'] = $this->getReadableSize($objFile->filesize);
-							$arrEnclosures[$i]['title'] = ucfirst(str_replace('_', ' ', $objFile->filename));
-							$arrEnclosures[$i]['href'] = \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
-							$arrEnclosures[$i]['enclosure'] = $arrEnclosure[$i];
-						}
-					}
-				}
-			}
+			$this->addEnclosuresToTemplate($this->Template, $objNewsletter->row(), 'files');
 		}
 
 		// Support plain text newsletters (thanks to Hagen Klemp)
@@ -179,6 +141,5 @@ class ModuleNewsletterReader extends \Module
 
 		$this->Template->content = $strContent;
 		$this->Template->subject = $objNewsletter->subject;
-		$this->Template->enclosure = $arrEnclosures;
 	}
 }

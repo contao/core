@@ -5,6 +5,10 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Show the newsletter list even if there is no jumpTo page configured in the
+channel and show the enclosures in the newsletter reader (see #5233).
+
+### Fixed
 Added an option to load model relations uncached (see #5248, #5102). Also fixed
 the `array_merge()` order so the default options can be overriden.
 
