@@ -1,8 +1,11 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 3.1.beta1 (XXXX-XX-XX)
+Version 3.1.beta1 (2013-03-XX)
 ------------------------------
+
+### Changed
+Always show the mandatory star in the field labels (see #4730).
 
 ### Fixed
 Trigger the error 404 page if a request parameter is set twice (see #4277).

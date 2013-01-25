@@ -132,7 +132,7 @@ class ModulePersonalData extends \Module
 			$strGroup = $arrData['eval']['feGroup'];
 
 			$arrData['eval']['tableless'] = $this->tableless;
-			$arrData['eval']['required'] = ($this->User->$field == '' && $arrData['eval']['mandatory']) ? true : false;
+			$arrData['eval']['required'] = $arrData['eval']['mandatory'];
 
 			$varValue = $this->User->$field;
 
