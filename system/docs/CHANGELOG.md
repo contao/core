@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.4 (2013-XX-XX)
 --------------------------
 
+### Fixed
+Added an option to load model relations uncached (see #5248, #5102). Also fixed
+the `array_merge()` order so the default options can be overriden.
+
 ### Updated
 Updated SimplePie to version 1.3.1 (see #5207).
 

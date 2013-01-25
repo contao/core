@@ -274,13 +274,14 @@ abstract class Model extends \System
 	/**
 	 * Lazy load related records
 	 * 
-	 * @param string $strKey The property name
+	 * @param string $strKey     The property name
+	 * @param array  $arrOptions An optional options array
 	 * 
 	 * @return \Model|\Model\Collection The model or a model collection if there are multiple rows
 	 * 
 	 * @throws \Exception If $strKey is not a related field
 	 */
-	public function getRelated($strKey)
+	public function getRelated($strKey, array $arrOptions=array())
 	{
 		// The related model has been loaded before
 		if (isset($this->arrRelated[$strKey]))
@@ -300,14 +301,25 @@ abstract class Model extends \System
 		// Load the related record(s)
 		if ($arrRelation['type'] == 'hasOne' || $arrRelation['type'] == 'belongsTo')
 		{
-			$objModel = $strClass::findOneBy($arrRelation['field'], $this->$strKey);
+			$objModel = $strClass::findOneBy($arrRelation['field'], $this->$strKey, $arrOptions);
 			$this->arrRelated[$strKey] = $objModel;
 		}
 		elseif ($arrRelation['type'] == 'hasMany' || $arrRelation['type'] == 'belongsToMany')
 		{
 			$arrValues = deserialize($this->$strKey, true);
 			$strField = $arrRelation['table'] . '.' . $arrRelation['field'];
-			$objModel = $strClass::findBy(array($strField . " IN('" . implode("','", $arrValues) . "')"), null, array('order'=>\Database::getInstance()->findInSet($strField, $arrValues)));
+
+			$arrOptions = array_merge
+			(
+				array
+				(
+					'order' => \Database::getInstance()->findInSet($strField, $arrValues)
+				),
+
+				$arrOptions
+			);
+
+			$objModel = $strClass::findBy(array($strField . " IN('" . implode("','", $arrValues) . "')"), null, $arrOptions);
 			$this->arrRelated[$strKey] = $objModel;
 		}
 
@@ -325,13 +337,18 @@ abstract class Model extends \System
 	 */
 	public static function findByPk($varValue, array $arrOptions=array())
 	{
-		$arrOptions = array_merge($arrOptions, array
+		$arrOptions = array_merge
 		(
-			'limit'  => 1,
-			'column' => static::$strPk,
-			'value'  => $varValue,
-			'return' => 'Model'
-		));
+			array
+			(
+				'limit'  => 1,
+				'column' => static::$strPk,
+				'value'  => $varValue,
+				'return' => 'Model'
+			),
+
+			$arrOptions
+		);
 
 		return static::find($arrOptions);
 	}
@@ -349,13 +366,18 @@ abstract class Model extends \System
 	{
 		$t = static::$strTable;
 
-		$arrOptions = array_merge($arrOptions, array
+		$arrOptions = array_merge
 		(
-			'limit'  => 1,
-			'column' => array("($t.id=? OR $t.alias=?)"),
-			'value'  => array((is_numeric($varId) ? $varId : 0), $varId),
-			'return' => 'Model'
-		));
+			array
+			(
+				'limit'  => 1,
+				'column' => array("($t.id=? OR $t.alias=?)"),
+				'value'  => array((is_numeric($varId) ? $varId : 0), $varId),
+				'return' => 'Model'
+			),
+
+			$arrOptions
+		);
 
 		return static::find($arrOptions);
 	}
@@ -372,13 +394,18 @@ abstract class Model extends \System
 	 */
 	public static function findOneBy($strColumn, $varValue, array $arrOptions=array())
 	{
-		$arrOptions = array_merge($arrOptions, array
+		$arrOptions = array_merge
 		(
-			'limit'  => 1,
-			'column' => $strColumn,
-			'value'  => $varValue,
-			'return' => 'Model'
-		));
+			array
+			(
+				'limit'  => 1,
+				'column' => $strColumn,
+				'value'  => $varValue,
+				'return' => 'Model'
+			),
+
+			$arrOptions
+		);
 
 		return static::find($arrOptions);
 	}
@@ -395,12 +422,17 @@ abstract class Model extends \System
 	 */
 	public static function findBy($strColumn, $varValue, array $arrOptions=array())
 	{
-		$arrOptions = array_merge($arrOptions, array
+		$arrOptions = array_merge
 		(
-			'column' => $strColumn,
-			'value'  => $varValue,
-			'return' => 'Collection'
-		));
+			array
+			(
+				'column' => $strColumn,
+				'value'  => $varValue,
+				'return' => 'Collection'
+			),
+
+			$arrOptions
+		);
 
 		return static::find($arrOptions);
 	}
@@ -415,10 +447,15 @@ abstract class Model extends \System
 	 */
 	public static function findAll(array $arrOptions=array())
 	{
-		$arrOptions = array_merge($arrOptions, array
+		$arrOptions = array_merge
 		(
-			'return' => 'Collection'
-		));
+			array
+			(
+				'return' => 'Collection'
+			),
+
+			$arrOptions
+		);
 
 		return static::find($arrOptions);
 	}
