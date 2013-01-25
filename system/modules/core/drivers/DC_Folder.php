@@ -59,6 +59,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	protected $arrMessages = array();
 
 	/**
+	 * Counts
+	 * @var array
+	 */
+	protected $arrCounts = array();
+
+	/**
 	 * True if a new version has to be created
 	 * @param boolean
 	 */
@@ -2103,6 +2109,9 @@ window.addEvent(\'domready\', function() {
 			}, trimsplit(',', $GLOBALS['TL_CONFIG']['fileSyncExclude']));
 		}
 
+		// Initialize the counts
+		$this->arrCounts = array('added'=>0, 'changed'=>0, 'unchanged'=>0, 'moved'=>0, 'deleted'=>0);
+
 		// Traverse the file system
 		$this->execSync($GLOBALS['TL_CONFIG']['uploadPath'], 0, $arrExempt);
 
@@ -2133,6 +2142,7 @@ window.addEvent(\'domready\', function() {
 
 				if ($objFound !== null)
 				{
+					++$this->arrCounts['moved'];
 					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFound'], $objFolder->path, $objFound->path) . '</p>';
 
 					// Update the original entry
@@ -2164,6 +2174,8 @@ window.addEvent(\'domready\', function() {
 				{
 					// Delete the entry if the folder has gone
 					$objFolder->delete();
+
+					++$this->arrCounts['deleted'];
 					$this->arrMessages[] = '<p class="tl_error">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncRemoved'], $objFolder->path) . '</p>';
 				}
 			}
@@ -2175,6 +2187,7 @@ window.addEvent(\'domready\', function() {
 
 				if ($objFound !== null)
 				{
+					++$this->arrCounts['moved'];
 					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFound'], $objFile->path, $objFound->path) . '</p>';
 
 					// Update the original entry
@@ -2194,10 +2207,14 @@ window.addEvent(\'domready\', function() {
 				{
 					// Delete the entry if the file has gone
 					$objFile->delete();
+
+					++$this->arrCounts['deleted'];
 					$this->arrMessages[] = '<p class="tl_error">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncRemoved'], $objFile->path) . '</p>';
 				}
 			}
 		}
+
+		\Message::addConfirmation($GLOBALS['TL_LANG']['tl_files']['syncComplete']);
 
 		$return = '
 <div id="tl_buttons">
@@ -2206,7 +2223,12 @@ window.addEvent(\'domready\', function() {
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_files']['sync'][1].'</h2>
 '.\Message::generate().'
-<div class="tl_message nobg" style="margin-bottom:2em">';
+<div id="sync-results">
+  <p class="left">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncResult'], \System::getFormattedNumber($this->arrCounts['added'], 0), \System::getFormattedNumber($this->arrCounts['changed'], 0), \System::getFormattedNumber($this->arrCounts['unchanged'], 0), \System::getFormattedNumber($this->arrCounts['moved'], 0), \System::getFormattedNumber($this->arrCounts['deleted'], 0)) . '</p>
+  <p class="right"><input type="checkbox" id="show-hidden" onclick="Backend.toggleUnchanged()"> <label for="show-hidden">' . $GLOBALS['TL_LANG']['tl_files']['syncShowUnchanged'] . '</label></p>
+  <div class="clear"></div>
+</div>
+<div class="tl_message nobg" id="result-list" style="margin-bottom:2em">';
 
 		// Add the messages
 		foreach ($this->arrMessages as $strMessage)
@@ -2292,21 +2314,34 @@ window.addEvent(\'domready\', function() {
 				$objModel->found  = 1;
 				$objModel->save();
 
+				++$this->arrCounts['added'];
 				$this->arrMessages[] = '<p class="tl_new">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderC'], $strFolder) . '</p>';
 			}
 			else
 			{
+				$blnChanged = false;
+
 				// Update the hash if the folder has changed
 				if ($objModel->hash != $objFolder->hash)
 				{
+					$blnChanged = true;
 					$objModel->hash = $objFolder->hash;
-					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncHash'], $strFolder) . '</p>';
 				}
 
 				$objModel->found = 1;
 				$objModel->save();
 
-				$this->arrMessages[] = '<p class="tl_confirm">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderF'], $strFolder) . '</p>';
+				// Confirm
+				if ($blnChanged)
+				{
+					++$this->arrCounts['changed'];
+					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncHash'], $strFolder) . '</p>';
+				}
+				else
+				{
+					++$this->arrCounts['unchanged'];
+					$this->arrMessages[] = '<p class="tl_confirm hide">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderF'], $strFolder) . '</p>';
+				}
 			}
 
 			$this->execSync($strFolder, $objModel->id, $arrExempt);
@@ -2332,21 +2367,34 @@ window.addEvent(\'domready\', function() {
 				$objModel->found     = 1;
 				$objModel->save();
 
+				++$this->arrCounts['added'];
 				$this->arrMessages[] = '<p class="tl_new">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileC'], $strFile) . '</p>';
 			}
 			else
 			{
+				$blnChanged = false;
+
 				// Update the hash if the file has changed
 				if ($objModel->hash != $objFile->hash)
 				{
+					$blnChanged = true;
 					$objModel->hash = $objFile->hash;
-					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncHash'], $strFile) . '</p>';
 				}
 
 				$objModel->found = 1;
 				$objModel->save();
 
-				$this->arrMessages[] = '<p class="tl_confirm">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileF'], $strFile) . '</p>';
+				// Confirm
+				if ($blnChanged)
+				{
+					++$this->arrCounts['changed'];
+					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncHash'], $strFile) . '</p>';
+				}
+				else
+				{
+					++$this->arrCounts['unchanged'];
+					$this->arrMessages[] = '<p class="tl_confirm hide">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileF'], $strFile) . '</p>';
+				}
 			}
 		}
 	}

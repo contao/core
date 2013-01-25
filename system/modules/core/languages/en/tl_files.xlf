@@ -71,6 +71,15 @@
       <trans-unit id="tl_files.syncHash">
         <source>Updated the hash of the file "%s"</source>
       </trans-unit>
+      <trans-unit id="tl_files.syncComplete">
+        <source>The synchronization has been completed</source>
+      </trans-unit>
+      <trans-unit id="tl_files.syncResult">
+        <source>&lt;strong&gt;Result:&lt;/strong&gt; %s added | %s modified | %s unchanged | %s moved | %s deleted</source>
+      </trans-unit>
+      <trans-unit id="tl_files.syncShowUnchanged">
+        <source>Show unchanged</source>
+      </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>
       </trans-unit>

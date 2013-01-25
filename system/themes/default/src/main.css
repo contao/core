@@ -1346,3 +1346,19 @@ fieldset.collapsed > legend {
 .pagination .current {
 	color:#999;
 }
+
+/* File synchronization */
+#sync-results {
+	overflow:hidden;
+	margin:6px 18px 0;
+}
+#sync-results p {
+	margin-bottom:0;
+}
+#sync-results .left {
+	float:left;
+	padding-top:2px;
+}
+#sync-results .right {
+	float:right;
+}

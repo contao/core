@@ -89,6 +89,9 @@ p {
 	margin:0 0 12px;
 	padding:0;
 }
+.hide {
+	display:none;
+}
 
 /* Sortable lists */
 ul.sortable li {

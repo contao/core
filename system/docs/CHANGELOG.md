@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Improved
+Better file synchronization statistics (see #4908).
+
 ### Changed
 Always show the mandatory star in the field labels (see #4730).
 

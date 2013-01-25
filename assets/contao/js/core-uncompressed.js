@@ -984,6 +984,7 @@ var Backend =
 	/**
 	 * Toggle checkbox elements
 	 * @param string
+	 * @param string
 	 */
 	toggleCheckboxElements: function(el, cls) {
 		var status = $(el).checked ? 'checked' : '';
@@ -1008,8 +1009,16 @@ var Backend =
 	},
 
 	/**
+	 * Toggle the synchronization results
+	 */
+	toggleUnchanged: function() {
+		$$('#result-list .tl_confirm').each(function(el) {
+			el.toggleClass('hide');
+		});
+	},
+
+	/**
 	 * Toggle opacity
-	 * @param string
 	 */
 	blink: function() {
 		// Keep for backwards compatibility
