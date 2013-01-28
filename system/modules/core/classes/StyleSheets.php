@@ -1114,93 +1114,164 @@ class StyleSheets extends \Backend
 					throw new \Exception('Invalid insert ID');
 				}
 
-				$intSorting  = 0;
-				$strComment  = '';
-				$strCategory = '';
-
+				// Read the file and remove carriage returns
 				$strFile = $objFile->getContent();
 				$strFile = str_replace("\r", '', $strFile);
 
-				// Parse the CSS code
-				require TL_ROOT . '/system/vendor/cssmin/cssmin.php';
-				$arrTokens = \CssMin::parse($strFile);
+				$arrTokens   = array();
+				$strBuffer   = '';
+				$intSorting  = 0;
+				$strComment  = '';
+				$strCategory = '';
+				$intLength   = strlen($strFile);
 
-				for ($i=0; $i<count($arrTokens); $i++)
+				// Tokenize
+				for ($i=0; $i<$intLength; $i++)
 				{
-					$objToken = $arrTokens[$i];
+					$char = $strFile[$i];
 
-					// Comments
-					if ($objToken instanceof \CssCommentToken)
+					// Whitespace
+					if ($char == '' || $char == "\n" || $char == "\t")
 					{
-						$strToken = (string) $objToken;
+						// Ignore
+					}
 
-						// Category (comments start with /** and contain only one line)
-						if (strncmp($strToken, '/**', 3) === 0 && substr_count($strToken, "\n") == 2)
+					// Comment
+					elseif ($char == '/')
+					{
+						if ($strFile[$i+1] == '*')
 						{
-							$strCategory = trim(str_replace(array('/*', '*/', '*'), '', $strToken));
+							while ($i<$intLength)
+							{
+								$strBuffer .= $strFile[$i++];
+
+								if ($strFile[$i] == '/' && $strFile[$i-1] == '*')
+								{
+									$arrTokens[] = array
+									(
+										'type'    => 'comment',
+										'content' => $strBuffer . $strFile[$i]
+									);
+
+									$strBuffer = '';
+									break;
+								}
+							}
+						}
+					}
+
+					// At block
+					elseif ($char == '@')
+					{
+						$intLevel = 0;
+						$strSelector = '';
+
+						while ($i<$intLength)
+						{
+							$strBuffer .= $strFile[$i++];
+
+							if ($strFile[$i] == '{')
+							{
+								if (++$intLevel == 1)
+								{
+									++$i;
+									$strSelector = $strBuffer;
+									$strBuffer = '';
+								}
+							}
+							elseif ($strFile[$i] == '}')
+							{
+								if (--$intLevel == 0)
+								{
+									$arrTokens[] = array
+									(
+										'type'     => 'atblock',
+										'selector' => $strSelector,
+										'content'  => $strBuffer
+									);
+
+									$strBuffer = '';
+									break;
+								}
+							}
+						}
+					}
+
+					// Regular block
+					else
+					{
+						while ($i<$intLength)
+						{
+							$strBuffer .= $strFile[$i++];
+
+							if ($strFile[$i] == '{')
+							{
+								++$i;
+								$strSelector = $strBuffer;
+								$strBuffer = '';
+							}
+							elseif ($strFile[$i] == '}')
+							{
+								$arrTokens[] = array
+								(
+									'type'     => 'block',
+									'selector' => $strSelector,
+									'content'  => $strBuffer
+								);
+
+								$strBuffer = '';
+								break;
+							}
+						}
+					}
+				}
+
+				foreach ($arrTokens as $arrToken)
+				{
+					// Comments
+					if ($arrToken['type'] == 'comment')
+					{
+						// Category (comments start with /** and contain only one line)
+						if (strncmp($arrToken['content'], '/**', 3) === 0 && substr_count($arrToken['content'], "\n") == 2)
+						{
+							$strCategory = trim(str_replace(array('/*', '*/', '*'), '', $arrToken['content']));
 						}
 
 						// Declaration comment
-						elseif (!$blnInsideDeclaration && strpos($strToken, "\n") === false)
+						elseif (strpos($arrToken['content'], "\n") === false)
 						{
-							$strComment = trim(str_replace(array('/*', '*/', '*'), '', $strToken));
+							$strComment = trim(str_replace(array('/*', '*/', '*'), '', $arrToken['content']));
 						}
 					}
 
 					// At blocks like @media or @-webkit-keyframe
-					elseif ($objToken instanceof \aCssAtBlockStartToken)
+					elseif ($arrToken['type'] == 'atblock')
 					{
-						$strToken = (string) $objToken;
-						$strDefinition = '';
-
-						while (!$arrTokens[$i+1] instanceof \aCssAtBlockEndToken)
-						{
-							if (!$arrTokens[$i+1] instanceof \CssCommentToken)
-							{
-								$strDefinition .= (string) $arrTokens[$i+1];
-							}
-
-							++$i;
-						}
-
 						$arrSet = array
 						(
 							'pid'        => $insertId,
 							'category'   => $strCategory,
 							'comment'    => $strComment,
 							'sorting'    => $intSorting += 128,
-							'selector'   => substr($strToken, 0, -1),
-							'own'        => $strDefinition
+							'selector'   => trim($arrToken['selector']),
+							'own'        => $arrToken['content']
 						);
 
 						$this->Database->prepare("INSERT INTO tl_style %s")->set($arrSet)->execute();
 						$strComment = '';
 					}
 
-					//
-					elseif ($objToken instanceof \aCssRulesetStartToken)
+					// Regular blocks
+					else
 					{
-						$strToken = (string) $objToken;
-						$strDefinition = '';
-
-						while (!$arrTokens[$i+1] instanceof \aCssRulesetEndToken)
-						{
-							if (!$arrTokens[$i+1] instanceof \CssCommentToken)
-							{
-								$strDefinition .= (string) $arrTokens[$i+1];
-							}
-
-							++$i;
-						}
-
 						$arrDefinition = array
 						(
 							'pid'        => $insertId,
 							'category'   => $strCategory,
 							'comment'    => $strComment,
 							'sorting'    => $intSorting += 128,
-							'selector'   => substr($strToken, 0, -1),
-							'attributes' => $strDefinition
+							'selector'   => trim($arrToken['selector']),
+							'attributes' => $arrToken['content']
 						);
 
 						$this->createDefinition($arrDefinition);
