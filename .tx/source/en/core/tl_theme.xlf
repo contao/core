@@ -95,6 +95,9 @@
       <trans-unit id="tl_theme.templates_ok">
         <source>No conflicts detected.</source>
       </trans-unit>
+      <trans-unit id="tl_theme.store">
+        <source>Contao theme store</source>
+      </trans-unit>
       <trans-unit id="tl_theme.new.0">
         <source>New theme</source>
       </trans-unit>

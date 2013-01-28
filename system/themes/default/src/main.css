@@ -1003,7 +1003,7 @@ ul.sgallery .gimage {
 	opacity: 0.5;
 }
 
-/* Galleries */
+/* Misc */
 .ce_gallery ul {
 	overflow:hidden;
 }
@@ -1011,32 +1011,9 @@ ul.sgallery .gimage {
 	float:left;
 	margin:0 6px 6px 0;
 }
-
-/* Context menu */
-#contextmenu {
-	display:block;
-	position:absolute;
-	z-index:99999999;
-	background:#fff;
-	border:1px solid #ccc;
-	padding:3px 6px;
-	border-radius:4px;
-	margin-right:12px;
-}
-.webkit #contextmenu {
-	padding:4px 6px 2px;
-}
-#contextmenu a {
-	display:block;
-	padding:3px 0 2px 0;
-	white-space:nowrap;
-}
-#contextmenu img {
-	vertical-align:top;
-}
-#contextmenu img[width="12"] {
-	padding-left:1px;
-	padding-right:1px;
+#theme-store {
+	margin-top:24px;
+	text-align:right;
 }
 
 /* Navigation icons */
