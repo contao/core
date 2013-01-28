@@ -65,6 +65,7 @@ $GLOBALS['TL_LANG']['tl_theme']['missing_xml']      = 'Theme "%s" is corrupt and
 $GLOBALS['TL_LANG']['tl_theme']['custom_templates'] = 'Custom templates';
 $GLOBALS['TL_LANG']['tl_theme']['template_exists']  = 'The template <strong>"%s"</strong> exists and will be overwritten.';
 $GLOBALS['TL_LANG']['tl_theme']['templates_ok']     = 'No conflicts detected.';
+$GLOBALS['TL_LANG']['tl_theme']['store']            = 'Contao theme store';
 
 
 /**

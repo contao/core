@@ -905,6 +905,12 @@ label.tl_change_selected {
 	opacity: 0.5;
 }
 
+/* Misc */
+#theme-store {
+	margin-top:24px;
+	text-align:right;
+}
+
 /* Context menu */
 #contextmenu {
 	display:block;
