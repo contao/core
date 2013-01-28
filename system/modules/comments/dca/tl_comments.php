@@ -345,17 +345,6 @@ class tl_comments extends Backend
 			return Cache::get($strKey);
 		}
 
-		// Get the pagemounts
-		$pagemounts = array();
-
-		foreach ($this->User->pagemounts as $root)
-		{
-			$pagemounts[] = $root;
-			$pagemounts = array_merge($pagemounts, $this->Database->getChildRecords($root, 'tl_page'));
-		}
-
-		$pagemounts = array_unique($pagemounts);
-
 		// Order deny,allow
 		Cache::set($strKey, false);
 
@@ -366,8 +355,8 @@ class tl_comments extends Backend
 										  ->limit(1)
 										  ->execute($intParent);
 
-				// Check whether the page is mounted and the user is allowed to edit its articles
-				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(4, $objPage->row()))
+				// Do not check whether the page is mounted (see #5174)
+				if ($objPage->numRows > 0 && $this->User->isAllowed(4, $objPage->row()))
 				{
 					Cache::set($strKey, true);
 				}
@@ -378,51 +367,40 @@ class tl_comments extends Backend
 										  ->limit(1)
 										  ->execute($intParent);
 
-				// Check whether the page is mounted and the user is allowed to edit it
-				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(1, $objPage->row()))
+				// Do not check whether the page is mounted (see #5174)
+				if ($objPage->numRows > 0 && $this->User->isAllowed(1, $objPage->row()))
 				{
 					Cache::set($strKey, true);
 				}
 				break;
 
 			case 'tl_news':
-				// Check the access to the news module
-				if ($this->User->hasAccess('news', 'modules'))
-				{
-					$objArchive = $this->Database->prepare("SELECT pid FROM tl_news WHERE id=?")
-												 ->limit(1)
-												 ->execute($intParent);
+				$objArchive = $this->Database->prepare("SELECT pid FROM tl_news WHERE id=?")
+											 ->limit(1)
+											 ->execute($intParent);
 
-					// Check the access to the news archive
-					if ($objArchive->numRows > 0 && $this->User->hasAccess($objArchive->pid, 'news'))
-					{
-						Cache::set($strKey, true);
-					}
+				// Do not check the access to the news module (see #5174)
+				if ($objArchive->numRows > 0 && $this->User->hasAccess($objArchive->pid, 'news'))
+				{
+					Cache::set($strKey, true);
 				}
 				break;
 
 			case 'tl_calendar_events':
-				// Check the access to the calendar module
-				if ($this->User->hasAccess('calendar', 'modules'))
-				{
-					$objCalendar = $this->Database->prepare("SELECT pid FROM tl_calendar_events WHERE id=?")
-												  ->limit(1)
-												  ->execute($intParent);
+				$objCalendar = $this->Database->prepare("SELECT pid FROM tl_calendar_events WHERE id=?")
+											  ->limit(1)
+											  ->execute($intParent);
 
-					// Check the access to the calendar
-					if ($objCalendar->numRows > 0 && $this->User->hasAccess($objCalendar->pid, 'calendars'))
-					{
+				// Do not check the access to the calendar module (see #5174)
+				if ($objCalendar->numRows > 0 && $this->User->hasAccess($objCalendar->pid, 'calendars'))
+				{
 						Cache::set($strKey, true);
-					}
 				}
 				break;
 
 			case 'tl_faq':
-				// Check the access to the FAQ module
-				if ($this->User->hasAccess('faq', 'modules'))
-				{
-					Cache::set($strKey, true);
-				}
+				// Do not check the access to the FAQ module (see #5174)
+				Cache::set($strKey, true);
 				break;
 
 			default:

@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Fixed
+Allow users to edit comments of news archives and calendars even if they are not
+allowed to access the news or calendar module (see #5174).
+
 ### Improved
 Better file synchronization statistics (see #4908).
 
