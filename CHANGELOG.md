@@ -5,6 +5,10 @@ Version 2.11.9 (2013-XX-XX)
 ---------------------------
 
 ### Fixed
+Consider the `save_callback` of the password field in `tl_user` when a back end
+user is forced to change his password (see #5138).
+
+### Fixed
 Do not group standalone lightbox elements on HTML5 pages (see #3742).
 
 ### Fixed
