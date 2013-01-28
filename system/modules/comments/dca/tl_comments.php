@@ -386,34 +386,28 @@ class tl_comments extends Backend
 				break;
 
 			case 'tl_news':
-				// Check the access to the news module
-				if ($this->User->hasAccess('news', 'modules'))
-				{
-					$objArchive = $this->Database->prepare("SELECT pid FROM tl_news WHERE id=?")
-												 ->limit(1)
-												 ->execute($intParent);
+				// Do not check the access to the news module (see #5174)
+				$objArchive = $this->Database->prepare("SELECT pid FROM tl_news WHERE id=?")
+											 ->limit(1)
+											 ->execute($intParent);
 
-					// Check the access to the news archive
-					if ($objArchive->numRows > 0 && $this->User->hasAccess($objArchive->pid, 'news'))
-					{
-						Cache::set($strKey, true);
-					}
+				// Check the access to the news archive
+				if ($objArchive->numRows > 0 && $this->User->hasAccess($objArchive->pid, 'news'))
+				{
+					Cache::set($strKey, true);
 				}
 				break;
 
 			case 'tl_calendar_events':
-				// Check the access to the calendar module
-				if ($this->User->hasAccess('calendar', 'modules'))
-				{
-					$objCalendar = $this->Database->prepare("SELECT pid FROM tl_calendar_events WHERE id=?")
-												  ->limit(1)
-												  ->execute($intParent);
+				// Do not check the access to the calendar module (see #5174)
+				$objCalendar = $this->Database->prepare("SELECT pid FROM tl_calendar_events WHERE id=?")
+											  ->limit(1)
+											  ->execute($intParent);
 
-					// Check the access to the calendar
-					if ($objCalendar->numRows > 0 && $this->User->hasAccess($objCalendar->pid, 'calendars'))
-					{
+				// Check the access to the calendar
+				if ($objCalendar->numRows > 0 && $this->User->hasAccess($objCalendar->pid, 'calendars'))
+				{
 						Cache::set($strKey, true);
-					}
 				}
 				break;
 

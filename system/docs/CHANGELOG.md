@@ -5,6 +5,10 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Allow users to edit comments of news archives and calendars even if they are not
+allowed to access the news or calendar module (see #5174).
+
+### Fixed
 Show the newsletter list even if there is no jumpTo page configured in the
 channel and show the enclosures in the newsletter reader (see #5233).
 
