@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Handle `@` blocks when importing style sheets (see #5250).
+
+### Fixed
 Allow users to edit comments of news archives and calendars even if they are not
 allowed to access the news or calendar module (see #5174).
 

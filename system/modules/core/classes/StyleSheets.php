@@ -1099,8 +1099,7 @@ class StyleSheets extends \Backend
 					continue;
 				}
 
-				$strFile = $objFile->getContent();
-				$strFile = str_replace("\r", '', $strFile);
+				// Check the file name
 				$strName = preg_replace('/\.css$/i', '', basename($strCssFile));
 				$strName = $this->checkStyleSheetName($strName);
 
@@ -1109,72 +1108,102 @@ class StyleSheets extends \Backend
 												->execute(\Input::get('id'), time(), $strName, array('all'));
 
 				$insertId = $objStyleSheet->insertId;
-				$intSorting = 0;
-				$strComment = '';
-				$strCategory = '';
 
 				if (!is_numeric($insertId) || $insertId < 0)
 				{
 					throw new \Exception('Invalid insert ID');
 				}
 
-				$strFile = str_replace('/**/', '[__]', $strFile);
-				$strFile = preg_replace
-				(
-					array
-					(
-						'/\/\*\*\n( *\*.*\n){2,} *\*\//', // see #2974
-						'/\/\*[^\*]+\{[^\}]+\}[^\*]+\*\//' // see #3478
-					),
-					'', $strFile
-				);
+				$intSorting  = 0;
+				$strComment  = '';
+				$strCategory = '';
 
-				$arrChunks = preg_split('/\{([^\}]*)\}|\*\//U', $strFile, -1, PREG_SPLIT_DELIM_CAPTURE);
+				$strFile = $objFile->getContent();
+				$strFile = str_replace("\r", '', $strFile);
 
-				for ($i=0; $i<count($arrChunks); $i++)
+				// Parse the CSS code
+				require TL_ROOT . '/system/vendor/cssmin/cssmin.php';
+				$arrTokens = \CssMin::parse($strFile);
+
+				for ($i=0; $i<count($arrTokens); $i++)
 				{
-					$strChunk = trim($arrChunks[$i]);
+					$objToken = $arrTokens[$i];
 
-					if ($strChunk == '')
+					// Comments
+					if ($objToken instanceof \CssCommentToken)
 					{
-						continue;
+						$strToken = (string) $objToken;
+
+						// Category (comments start with /** and contain only one line)
+						if (strncmp($strToken, '/**', 3) === 0 && substr_count($strToken, "\n") == 2)
+						{
+							$strCategory = trim(str_replace(array('/*', '*/', '*'), '', $strToken));
+						}
+
+						// Declaration comment
+						elseif (!$blnInsideDeclaration && strpos($strToken, "\n") === false)
+						{
+							$strComment = trim(str_replace(array('/*', '*/', '*'), '', $strToken));
+						}
 					}
 
-					$strChunk = preg_replace('/[\n\r\t]+/', ' ', $strChunk);
-
-					// Category
-					if (strncmp($strChunk, '/**', 3) === 0)
+					// At blocks like @media or @-webkit-keyframe
+					elseif ($objToken instanceof \aCssAtBlockStartToken)
 					{
-						$strCategory = str_replace(array('/*', '*/', '*', '[__]'), '', $strChunk);
-						$strCategory = trim(preg_replace('/\s+/', ' ', $strCategory));
+						$strToken = (string) $objToken;
+						$strDefinition = '';
+
+						while (!$arrTokens[$i+1] instanceof \aCssAtBlockEndToken)
+						{
+							if (!$arrTokens[$i+1] instanceof \CssCommentToken)
+							{
+								$strDefinition .= (string) $arrTokens[$i+1];
+							}
+
+							++$i;
+						}
+
+						$arrSet = array
+						(
+							'pid'        => $insertId,
+							'category'   => $strCategory,
+							'comment'    => $strComment,
+							'sorting'    => $intSorting += 128,
+							'selector'   => substr($strToken, 0, -1),
+							'own'        => $strDefinition
+						);
+
+						$this->Database->prepare("INSERT INTO tl_style %s")->set($arrSet)->execute();
+						$strComment = '';
 					}
 
-					// Comment
-					elseif (strncmp($strChunk, '/*', 2) === 0)
+					//
+					elseif ($objToken instanceof \aCssRulesetStartToken)
 					{
-						$strComment = str_replace(array('/*', '*/', '*', '[__]'), '', $strChunk);
-						$strComment = trim(preg_replace('/\s+/', ' ', $strComment));
-					}
+						$strToken = (string) $objToken;
+						$strDefinition = '';
 
-					// Format definition
-					else
-					{
-						$strNext = trim($arrChunks[$i+1]);
-						$strNext = preg_replace('/[\n\r\t]+/', ' ', $strNext);
+						while (!$arrTokens[$i+1] instanceof \aCssRulesetEndToken)
+						{
+							if (!$arrTokens[$i+1] instanceof \CssCommentToken)
+							{
+								$strDefinition .= (string) $arrTokens[$i+1];
+							}
+
+							++$i;
+						}
 
 						$arrDefinition = array
 						(
-							'pid' => $insertId,
-							'category' => $strCategory,
-							'comment' => $strComment,
-							'sorting' => $intSorting += 128,
-							'selector' => $strChunk,
-							'attributes' => $strNext
+							'pid'        => $insertId,
+							'category'   => $strCategory,
+							'comment'    => $strComment,
+							'sorting'    => $intSorting += 128,
+							'selector'   => substr($strToken, 0, -1),
+							'attributes' => $strDefinition
 						);
 
 						$this->createDefinition($arrDefinition);
-
-						++$i;
 						$strComment = '';
 					}
 				}
@@ -1262,10 +1291,10 @@ class StyleSheets extends \Backend
 	{
 		$arrSet = array
 		(
-			'pid' => $arrDefinition['pid'],
-			'sorting' => $arrDefinition['sorting'],
-			'tstamp' => time(),
-			'comment' => $arrDefinition['comment'],
+			'pid'      => $arrDefinition['pid'],
+			'sorting'  => $arrDefinition['sorting'],
+			'tstamp'   => time(),
+			'comment'  => $arrDefinition['comment'],
 			'category' => $arrDefinition['category'],
 			'selector' => $arrDefinition['selector']
 		);
