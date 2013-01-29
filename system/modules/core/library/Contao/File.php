@@ -44,6 +44,12 @@ class File extends \System
 	protected $strFile;
 
 	/**
+	 * Tmp name
+	 * @var string
+	 */
+	protected $strTmp;
+
+	/**
 	 * Pathinfo
 	 * @var array
 	 */
@@ -57,11 +63,11 @@ class File extends \System
 
 
 	/**
-	 * Check whether a file exists
+	 * Instantiate a new file object
 	 * 
 	 * @param string $strFile The file path
 	 * 
-	 * @throws \Exception If $strFile is not writeable or not a file
+	 * @throws \Exception If $strFile is a directory
 	 */
 	public function __construct($strFile)
 	{
@@ -71,7 +77,7 @@ class File extends \System
 			$strFile = '';
 		}
 
-		// Check whether it is a file
+		// Make sure we are not pointing to a directory
 		if (is_dir(TL_ROOT . '/' . $strFile))
 		{
 			throw new \Exception(sprintf('Directory "%s" is not a file', $strFile));
@@ -79,28 +85,6 @@ class File extends \System
 
 		$this->import('Files');
 		$this->strFile = $strFile;
-
-		// Create the file if it does not exist
-		if (!file_exists(TL_ROOT . '/' . $this->strFile))
-		{
-			// Handle open_basedir restrictions
-			if (($strFolder = dirname($this->strFile)) == '.')
-			{
-				$strFolder = '';
-			}
-
-			// Create folder
-			if (!is_dir(TL_ROOT . '/' . $strFolder))
-			{
-				new \Folder($strFolder);
-			}
-
-			// Open file
-			if (($this->resFile = $this->Files->fopen($this->strFile, 'wb')) == false)
-			{
-				throw new \Exception(sprintf('Cannot create file "%s"', $this->strFile));
-			}
-		}
 	}
 
 
@@ -252,6 +236,17 @@ class File extends \System
 
 
 	/**
+	 * Check whether the file exists
+	 * 
+	 * @return boolean True if the file exists
+	 */
+	public function exists()
+	{
+		return file_exists(TL_ROOT . '/' . $this->strFile);
+	}
+
+
+	/**
 	 * Truncate the file
 	 * 
 	 * @return boolean True if the operation was successful
@@ -266,12 +261,10 @@ class File extends \System
 	 * Write data to the file
 	 * 
 	 * @param mixed $varData The data to be written
-	 * 
-	 * @return boolean True if the operation was successful
 	 */
 	public function write($varData)
 	{
-		return $this->fputs($varData, 'wb');
+		$this->fputs($varData, 'wb');
 	}
 
 
@@ -280,12 +273,10 @@ class File extends \System
 	 * 
 	 * @param mixed  $varData The data to be appended
 	 * @param string $strLine The line ending (defaults to LF)
-	 * 
-	 * @return boolean True if the operation was successful
 	 */
 	public function append($varData, $strLine="\n")
 	{
-		return $this->fputs($varData . $strLine, 'ab');
+		$this->fputs($varData . $strLine, 'ab');
 	}
 
 
@@ -320,7 +311,29 @@ class File extends \System
 	 */
 	public function close()
 	{
-		return $this->Files->fclose($this->resFile);
+		if (!is_resource($this->resFile))
+		{
+			return false;
+		}
+
+		// Create the path
+		if (!file_exists(TL_ROOT . '/' . $this->strFile))
+		{
+			// Handle open_basedir restrictions
+			if (($strFolder = dirname($this->strFile)) == '.')
+			{
+				$strFolder = '';
+			}
+
+			// Create the parent folder
+			if (!is_dir(TL_ROOT . '/' . $strFolder))
+			{
+				new \Folder($strFolder);
+			}
+		}
+
+		$this->Files->fclose($this->resFile);
+		return $this->Files->rename($this->strTmp, $this->strFile);
 	}
 
 
@@ -402,20 +415,21 @@ class File extends \System
 	 * @param mixed  $varData The data to be written
 	 * @param string $strMode The operation mode
 	 * 
-	 * @return boolean True if the operation was successful
+	 * @throws \Exception If $strFile is not writeable
 	 */
 	protected function fputs($varData, $strMode)
 	{
 		if (!is_resource($this->resFile))
 		{
-			if (($this->resFile = $this->Files->fopen($this->strFile, $strMode)) == false)
+			$this->strTmp = 'system/tmp/' . md5(uniqid(mt_rand(), true));
+
+			if (($this->resFile = $this->Files->fopen($this->strTmp, $strMode)) == false)
 			{
-				return false;
+				throw new \Exception(sprintf('Cannot create file "%s"', $this->strFile));
 			}
 		}
 
 		fputs($this->resFile, $varData);
-		return true;
 	}
 
 
