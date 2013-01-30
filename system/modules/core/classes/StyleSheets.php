@@ -101,7 +101,7 @@ class StyleSheets extends \Backend
 				continue;
 			}
 
-			$objFile = new \File('assets/css/' . $file);
+			$objFile = new \File('assets/css/' . $file, true);
 
 			// Delete the old style sheet
 			if ($objFile->extension == 'css' && !in_array($objFile->filename, $arrStyleSheets))
@@ -174,7 +174,8 @@ class StyleSheets extends \Backend
 		// Sort by key length (see #3316)
 		uksort($vars, 'length_sort_desc');
 
-		$objFile = new \File('assets/css/' . $row['name'] . '.css');
+		// Create the file
+		$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
 		$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
 
 		$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? AND invisible!=1 ORDER BY sorting")
@@ -1090,7 +1091,7 @@ class StyleSheets extends \Backend
 					continue;
 				}
 
-				$objFile = new \File($strCssFile);
+				$objFile = new \File($strCssFile, true);
 
 				// Check the file extension
 				if ($objFile->extension != 'css')
@@ -2166,7 +2167,7 @@ class StyleSheets extends \Backend
 	{
 		if ($arrParent['embedImages'] > 0 && file_exists(TL_ROOT . '/' . $strImage))
 		{
-			$objImage = new \File($strImage);
+			$objImage = new \File($strImage, true);
 			$strExtension = $objImage->extension;
 
 			// Fix the jpg mime type

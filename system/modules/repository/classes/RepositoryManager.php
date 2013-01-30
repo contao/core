@@ -637,7 +637,7 @@ class RepositoryManager extends RepositoryBackendModule
 						}
 						$req->send($file->url);
 						if ($req->hasError()) throw new Exception($req->error);
-						$f = new File($filerel);
+						$f = new File($filerel, true);
 						if (!$f->write($req->response))
 							throw new Exception(sprintf($text['fileerrwrite'], $filerel));
 						$f->close();
@@ -725,7 +725,7 @@ class RepositoryManager extends RepositoryBackendModule
 			}
 			$req->send($pkg->url);
 			if ($req->hasError()) throw new Exception($req->error);
-			$dstfile = new File($zipname);
+			$dstfile = new File($zipname, true);
 			if (!$dstfile->write($req->response))
 				throw new Exception(sprintf($text['fileerrwrite'], $zipname));
 			$dstfile->close();
@@ -780,7 +780,7 @@ class RepositoryManager extends RepositoryBackendModule
 							} // while
 
 							// save new or changed file
-							$f = new File($filerel);
+							$f = new File($filerel, true);
 							if (!$f->write($zip->unzip()))
 								throw new Exception(sprintf($text['fileerrwrite'], $filerel));
 							$f->close();

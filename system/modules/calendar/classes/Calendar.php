@@ -233,8 +233,8 @@ class Calendar extends \Frontend
 			}
 		}
 
-		// Create file
-		$objRss = new \File('share/' . $strFile . '.xml');
+		// Create the file
+		$objRss = new \File('share/' . $strFile . '.xml', true);
 		$objRss->write($this->replaceInsertTags($objFeed->$strType()));
 		$objRss->close();
 	}

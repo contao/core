@@ -2322,7 +2322,7 @@ abstract class Controller extends \System
 			die('File not found');
 		}
 
-		$objFile = new \File($strFile);
+		$objFile = new \File($strFile, true);
 		$arrAllowedTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
 
 		if (!in_array($objFile->extension, $arrAllowedTypes))
@@ -2389,7 +2389,7 @@ abstract class Controller extends \System
 		else
 		{
 			// Generate the cache file
-			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php');
+			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php', true);
 			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
 
 			// Parse all module folders
@@ -3116,7 +3116,7 @@ abstract class Controller extends \System
 					continue;
 				}
 
-				$objFile = new \File($objFiles->path);
+				$objFile = new \File($objFiles->path, true);
 
 				$arrEnclosures[] = array
 				(

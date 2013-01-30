@@ -155,7 +155,7 @@ class CronJob extends Frontend
 	 */
 	protected function updateCronTxt($time)
 	{
-		$objFile = new File('system/cron/cron.txt');
+		$objFile = new File('system/cron/cron.txt', true);
 		$objFile->write($time);
 		$objFile->close();
 	}
