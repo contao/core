@@ -47,7 +47,7 @@ class File extends \System
 	 * Temp name
 	 * @var string
 	 */
-	protected $strTmp;
+	protected $strTemp;
 
 	/**
 	 * Pathinfo
@@ -61,15 +61,22 @@ class File extends \System
 	 */
 	protected $arrImageSize = array();
 
+	/**
+	 * Do not create the file
+	 * @var string
+	 */
+	protected $blnDoNotCreate = false;
+
 
 	/**
 	 * Instantiate a new file object
 	 * 
-	 * @param string $strFile The file path
+	 * @param string  $strFile        The file path
+	 * @param boolean $blnDoNotCreate If true, the file will not be autocreated
 	 * 
 	 * @throws \Exception If $strFile is a directory
 	 */
-	public function __construct($strFile)
+	public function __construct($strFile, $blnDoNotCreate=false)
 	{
 		// Handle open_basedir restrictions
 		if ($strFile == '.')
@@ -84,7 +91,14 @@ class File extends \System
 		}
 
 		$this->import('Files');
+
 		$this->strFile = $strFile;
+		$this->blnDoNotCreate = $blnDoNotCreate;
+
+		if (!$blnDoNotCreate)
+		{
+			$this->createIfNotExists();
+		}
 	}
 
 
@@ -236,13 +250,46 @@ class File extends \System
 
 
 	/**
+	 * Create the file if it does not yet exist
+	 * 
+	 * @throws \Exception If the file cannot be written
+	 */
+	protected function createIfNotExists()
+	{
+		// The file exists
+		if (file_exists(TL_ROOT . '/' . $this->strFile))
+		{
+			return;
+		}
+
+		// Handle open_basedir restrictions
+		if (($strFolder = dirname($this->strFile)) == '.')
+		{
+			$strFolder = '';
+		}
+
+		// Create the folder
+		if (!is_dir(TL_ROOT . '/' . $strFolder))
+		{
+			new \Folder($strFolder);
+		}
+
+		// Open the file
+		if (($this->resFile = $this->Files->fopen($this->strFile, 'wb')) == false)
+		{
+			throw new \Exception(sprintf('Cannot create file "%s"', $this->strFile));
+		}
+	}
+
+
+	/**
 	 * Check whether the file exists
 	 * 
 	 * @return boolean True if the file exists
 	 */
 	public function exists()
 	{
-		return file_exists(TL_ROOT . '/' . $this->strFile);
+		return $this->blnDoNotCreate ? file_exists(TL_ROOT . '/' . $this->strFile) : true;
 	}
 
 
@@ -261,10 +308,12 @@ class File extends \System
 	 * Write data to the file
 	 * 
 	 * @param mixed $varData The data to be written
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function write($varData)
 	{
-		$this->fputs($varData, 'wb');
+		return $this->fputs($varData, 'wb');
 	}
 
 
@@ -273,10 +322,12 @@ class File extends \System
 	 * 
 	 * @param mixed  $varData The data to be appended
 	 * @param string $strLine The line ending (defaults to LF)
+	 * 
+	 * @return boolean True if the operation was successful
 	 */
 	public function append($varData, $strLine="\n")
 	{
-		$this->fputs($varData . $strLine, 'ab');
+		return $this->fputs($varData . $strLine, 'ab');
 	}
 
 
@@ -311,12 +362,14 @@ class File extends \System
 	 */
 	public function close()
 	{
-		if (!is_resource($this->resFile))
+		$return = $this->Files->fclose($this->resFile);
+
+		if (!$this->blnDoNotCreate)
 		{
-			return false;
+			return $return;
 		}
 
-		// Create the path
+		// Create the file path
 		if (!file_exists(TL_ROOT . '/' . $this->strFile))
 		{
 			// Handle open_basedir restrictions
@@ -332,7 +385,6 @@ class File extends \System
 			}
 		}
 
-		$this->Files->fclose($this->resFile);
 		return $this->Files->rename($this->strTmp, $this->strFile);
 	}
 
@@ -415,21 +467,40 @@ class File extends \System
 	 * @param mixed  $varData The data to be written
 	 * @param string $strMode The operation mode
 	 * 
-	 * @throws \Exception If $strFile is not writeable
+	 * @return boolean True if the operation was successful
 	 */
 	protected function fputs($varData, $strMode)
 	{
 		if (!is_resource($this->resFile))
 		{
-			$this->strTmp = 'system/tmp/' . md5(uniqid(mt_rand(), true));
-
-			if (($this->resFile = $this->Files->fopen($this->strTmp, $strMode)) == false)
+			if (!$this->blnDoNotCreate)
 			{
-				throw new \Exception(sprintf('Cannot create file "%s"', $this->strFile));
+				// Open the original file
+				if (($this->resFile = $this->Files->fopen($this->strFile, $strMode)) == false)
+				{
+					return false;
+				}
+			}
+			else
+			{
+				$this->strTmp = 'system/tmp/' . md5(uniqid(mt_rand(), true));
+
+				// Copy the contents of the original file to append data
+				if (strncmp($strMode, 'a', 1) === 0 && file_exists(TL_ROOT . '/' . $this->strFile))
+				{
+					$this->Files->copy($this->strFile, $this->strTmp);
+				}
+
+				// Open the temporary file
+				if (($this->resFile = $this->Files->fopen($this->strTmp, $strMode)) == false)
+				{
+					return false;
+				}
 			}
 		}
 
 		fputs($this->resFile, $varData);
+		return true;
 	}
 
 
