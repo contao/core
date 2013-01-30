@@ -90,10 +90,10 @@ class Popup extends Backend
 			die('Permission denied');
 		}
 
-		// Open download dialogue
+		// Open the download dialogue
 		if (Input::get('download') && $this->strFile)
 		{
-			$objFile = new File($this->strFile);
+			$objFile = new File($this->strFile, true);
 
 			header('Content-Type: ' . $objFile->mime);
 			header('Content-Transfer-Encoding: binary');
@@ -112,9 +112,9 @@ class Popup extends Backend
 		}
 
 		$this->Template = new BackendTemplate('be_popup');
-		$objFile = new File($this->strFile);
+		$objFile = new File($this->strFile, true);
 
-		// Add file info
+		// Add the file info
 		$this->Template->icon = $objFile->icon;
 		$this->Template->mime = $objFile->mime;
 		$this->Template->ctime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->ctime);

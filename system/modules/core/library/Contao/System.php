@@ -396,10 +396,10 @@ abstract class System
 					   . " */\n";
 
 			// Generate the cache files
-			$objCacheFallback = new \File($strCacheFallback);
+			$objCacheFallback = new \File($strCacheFallback, true);
 			$objCacheFallback->write(sprintf($strHeader, 'en'));
 
-			$objCacheFile = new \File($strCacheFile);
+			$objCacheFile = new \File($strCacheFile, true);
 			$objCacheFile->write(sprintf($strHeader, $strLanguage));
 
 			// Parse all active modules

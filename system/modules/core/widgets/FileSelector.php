@@ -347,7 +347,7 @@ class FileSelector extends \Widget
 		}
 		else
 		{
-			$file = new \File($objFile->path);
+			$file = new \File($objFile->path, true);
 			$image = $file->icon;
 		}
 

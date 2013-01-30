@@ -260,7 +260,7 @@ class FormFileUpload extends \Widget implements \uploadable
 						}
 						else
 						{
-							$objFile = new \File($strFile);
+							$objFile = new \File($strFile, true);
 
 							$objNew = new \FilesModel();
 							$objNew->pid       = $objUploadFolder->id;

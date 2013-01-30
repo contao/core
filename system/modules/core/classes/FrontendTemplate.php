@@ -163,7 +163,7 @@ class FrontendTemplate extends \Template
 			$strMd5CacheKey = md5($strCacheKey);
 
 			// Create the cache file
-			$objFile = new \File('system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html');
+			$objFile = new \File('system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html', true);
 			$objFile->write('<?php' . " /* $strCacheKey */ \$expire = $intCache; \$content = '{$this->strContentType}'; ?>\n");
 			$objFile->append($this->minifyHtml($strBuffer), '');
 			$objFile->close();

@@ -707,7 +707,7 @@ class InstallTool extends Backend
 		{
 			if (!file_exists(TL_ROOT . '/system/config/' . $file . '.php'))
 			{
-				$objFile = new File('system/config/'. $file .'.php');
+				$objFile = new File('system/config/'. $file .'.php', true);
 				$objFile->write('<?php' . "\n\n// Put your custom configuration here\n");
 				$objFile->close();
 			}
@@ -869,7 +869,7 @@ class InstallTool extends Backend
 			// Disable the tasks extension (see #4907)
 			if (is_dir(TL_ROOT . '/system/modules/tasks'))
 			{
-				$objFile = new File('system/modules/tasks/.skip');
+				$objFile = new File('system/modules/tasks/.skip', true);
 				$objFile->write('Disabled during the version 3 update (see #4907)');
 				$objFile->close();
 			}

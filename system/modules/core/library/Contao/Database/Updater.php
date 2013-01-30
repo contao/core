@@ -315,7 +315,7 @@ class Updater extends \Controller
 			{
 				if (!file_exists(TL_ROOT . '/system/modules/' . $strFolder . '/html/.htaccess'))
 				{
-					$objFile = new \File('system/modules/' . $strFolder . '/html/.htaccess');
+					$objFile = new \File('system/modules/' . $strFolder . '/html/.htaccess', true);
 					$objFile->write("order deny,allow\nallow from all");
 					$objFile->close();
 				}
@@ -425,7 +425,7 @@ class Updater extends \Controller
 				}
 			}
 
-			$objFile = new \File($strFile);
+			$objFile = new \File($strFile, true);
 
 			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, extension, hash) VALUES (?, ?, ?, 'file', ?, ?, ?)")
 								 ->execute($pid, time(), basename($strFile), $strFile, $objFile->extension, $objFile->hash)

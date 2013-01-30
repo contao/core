@@ -111,7 +111,7 @@ class Automator extends \Backend
 				$objFolder->purge();
 
 				// Restore the index.html file
-				$objFile = new \File('templates/index.html');
+				$objFile = new \File('templates/index.html', true);
 				$objFile->copyTo('assets/images/' . $dir . '/index.html');
 			}
 		}
@@ -137,7 +137,7 @@ class Automator extends \Backend
 			$objFolder->purge();
 
 			// Restore the index.html file
-			$objFile = new \File('templates/index.html');
+			$objFile = new \File('templates/index.html', true);
 			$objFile->copyTo($dir . '/index.html');
 		}
 
@@ -203,7 +203,7 @@ class Automator extends \Backend
 		$objFolder->purge();
 
 		// Restore the .htaccess file
-		$objFile = new \File('system/logs/.htaccess');
+		$objFile = new \File('system/logs/.htaccess', true);
 		$objFile->copyTo('system/tmp/.htaccess');
 
 		// Add a log entry
@@ -271,14 +271,12 @@ class Automator extends \Backend
 		{
 			foreach (scan(TL_ROOT . '/share') as $file)
 			{
-				$objFile = new \File('share/' . $file);
+				$objFile = new \File('share/' . $file, true);
 
 				if ($objFile->extension == 'xml' && !in_array($objFile->filename, $arrFeeds))
 				{
 					$objFile->delete();
 				}
-
-				$objFile->close();
 			}
 		}
 
@@ -346,9 +344,9 @@ class Automator extends \Backend
 		// Create the XML file
 		while($objRoot->next())
 		{
-			$objFile = new \File('share/' . $objRoot->sitemapName . '.xml');
+			$objFile = new \File('share/' . $objRoot->sitemapName . '.xml', true);
 
-			$objFile->write('');
+			$objFile->truncate();
 			$objFile->append('<?xml version="1.0" encoding="UTF-8"?>');
 			$objFile->append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">');
 
@@ -400,10 +398,11 @@ class Automator extends \Backend
 
 		foreach ($arrFiles as $strFile)
 		{
+			$objFile = new \File('system/logs/' . $strFile . '.9', true);
+
 			// Delete the oldest file
-			if (file_exists(TL_ROOT . '/system/logs/' . $strFile . '.9'))
+			if ($objFile->exists())
 			{
-				$objFile = new \File('system/logs/' . $strFile . '.9');
 				$objFile->delete();
 			}
 
@@ -414,13 +413,13 @@ class Automator extends \Backend
 
 				if (file_exists(TL_ROOT . '/' . $strGzName))
 				{
-					$objFile = new \File($strGzName);
+					$objFile = new \File($strGzName, true);
 					$objFile->renameTo('system/logs/' . $strFile . '.' . ($i+1));
 				}
 			}
 
 			// Add .1 to the latest file
-			$objFile = new \File('system/logs/' . $strFile);
+			$objFile = new \File('system/logs/' . $strFile, true);
 			$objFile->renameTo('system/logs/' . $strFile . '.1');
 		}
 	}

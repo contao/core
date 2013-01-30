@@ -126,7 +126,7 @@ class ContentDownloads extends \ContentElement
 			// Single files
 			if ($objFiles->type == 'file')
 			{
-				$objFile = new \File($objFiles->path);
+				$objFile = new \File($objFiles->path, true);
 
 				if (!in_array($objFile->extension, $allowedDownload) || preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
 				{
@@ -180,7 +180,7 @@ class ContentDownloads extends \ContentElement
 						continue;
 					}
 
-					$objFile = new \File($objSubfiles->path);
+					$objFile = new \File($objSubfiles->path, true);
 
 					if (!in_array($objFile->extension, $allowedDownload) || preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
 					{

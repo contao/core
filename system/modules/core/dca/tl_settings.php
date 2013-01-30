@@ -579,7 +579,7 @@ class tl_settings extends Backend
 			{
 				if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
 				{
-					$objFile = new File('system/modules/' . $strModule . '/.skip');
+					$objFile = new File('system/modules/' . $strModule . '/.skip', true);
 					$objFile->write('As long as this file exists, the module will be ignored.');
 					$objFile->close();
 				}
@@ -587,9 +587,10 @@ class tl_settings extends Backend
 			// Remove the .skip if it exists
 			else
 			{
-				if (file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
+				$objFile = new File('system/modules/' . $strModule . '/.skip', true);
+
+				if ($objFile->exists())
 				{
-					$objFile = new File('system/modules/' . $strModule . '/.skip');
 					$objFile->delete();
 				}
 			}

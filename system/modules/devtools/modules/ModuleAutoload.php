@@ -128,7 +128,7 @@ class ModuleAutoload extends \BackendModule
 			// Create the autoload.ini file if it does not yet exist
 			if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini'))
 			{
-				$objIni = new \File('system/modules/devtools/config/autoload.ini');
+				$objIni = new \File('system/modules/devtools/config/autoload.ini', true);
 				$objIni->copyTo('system/modules/' . $strModule . '/config/autoload.ini');
 			}
 
@@ -262,7 +262,7 @@ class ModuleAutoload extends \BackendModule
 
 			$strPackage = ucfirst($strModule);
 
-			$objFile = new \File('system/modules/' . $strModule . '/config/autoload.php');
+			$objFile = new \File('system/modules/' . $strModule . '/config/autoload.php', true);
 			$objFile->write(
 <<<EOT
 <?php
@@ -465,7 +465,7 @@ EOT
 		$intYear = date('Y');
 
 		// Write the file
-		$objFile = new \File('system/helper/ide_compat.php');
+		$objFile = new \File('system/helper/ide_compat.php', true);
 		$objFile->write(
 <<<EOT
 <?php

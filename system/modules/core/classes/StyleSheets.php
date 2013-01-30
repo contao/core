@@ -101,7 +101,7 @@ class StyleSheets extends \Backend
 				continue;
 			}
 
-			$objFile = new \File('assets/css/' . $file);
+			$objFile = new \File('assets/css/' . $file, true);
 
 			// Delete the old style sheet
 			if ($objFile->extension == 'css' && !in_array($objFile->filename, $arrStyleSheets))
@@ -174,7 +174,8 @@ class StyleSheets extends \Backend
 		// Sort by key length (see #3316)
 		uksort($vars, 'length_sort_desc');
 
-		$objFile = new \File('assets/css/' . $row['name'] . '.css');
+		// Create the file
+		$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
 		$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
 
 		$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? AND invisible!=1 ORDER BY sorting")
@@ -1090,7 +1091,7 @@ class StyleSheets extends \Backend
 					continue;
 				}
 
-				$objFile = new \File($strCssFile);
+				$objFile = new \File($strCssFile, true);
 
 				// Check the file extension
 				if ($objFile->extension != 'css')
@@ -1099,8 +1100,7 @@ class StyleSheets extends \Backend
 					continue;
 				}
 
-				$strFile = $objFile->getContent();
-				$strFile = str_replace("\r", '', $strFile);
+				// Check the file name
 				$strName = preg_replace('/\.css$/i', '', basename($strCssFile));
 				$strName = $this->checkStyleSheetName($strName);
 
@@ -1109,72 +1109,173 @@ class StyleSheets extends \Backend
 												->execute(\Input::get('id'), time(), $strName, array('all'));
 
 				$insertId = $objStyleSheet->insertId;
-				$intSorting = 0;
-				$strComment = '';
-				$strCategory = '';
 
 				if (!is_numeric($insertId) || $insertId < 0)
 				{
 					throw new \Exception('Invalid insert ID');
 				}
 
-				$strFile = str_replace('/**/', '[__]', $strFile);
-				$strFile = preg_replace
-				(
-					array
-					(
-						'/\/\*\*\n( *\*.*\n){2,} *\*\//', // see #2974
-						'/\/\*[^\*]+\{[^\}]+\}[^\*]+\*\//' // see #3478
-					),
-					'', $strFile
-				);
+				// Read the file and remove carriage returns
+				$strFile = $objFile->getContent();
+				$strFile = str_replace("\r", '', $strFile);
 
-				$arrChunks = preg_split('/\{([^\}]*)\}|\*\//U', $strFile, -1, PREG_SPLIT_DELIM_CAPTURE);
+				$arrTokens   = array();
+				$strBuffer   = '';
+				$intSorting  = 0;
+				$strComment  = '';
+				$strCategory = '';
+				$intLength   = strlen($strFile);
 
-				for ($i=0; $i<count($arrChunks); $i++)
+				// Tokenize
+				for ($i=0; $i<$intLength; $i++)
 				{
-					$strChunk = trim($arrChunks[$i]);
+					$char = $strFile[$i];
 
-					if ($strChunk == '')
+					// Whitespace
+					if ($char == '' || $char == "\n" || $char == "\t")
 					{
-						continue;
-					}
-
-					$strChunk = preg_replace('/[\n\r\t]+/', ' ', $strChunk);
-
-					// Category
-					if (strncmp($strChunk, '/**', 3) === 0)
-					{
-						$strCategory = str_replace(array('/*', '*/', '*', '[__]'), '', $strChunk);
-						$strCategory = trim(preg_replace('/\s+/', ' ', $strCategory));
+						// Ignore
 					}
 
 					// Comment
-					elseif (strncmp($strChunk, '/*', 2) === 0)
+					elseif ($char == '/')
 					{
-						$strComment = str_replace(array('/*', '*/', '*', '[__]'), '', $strChunk);
-						$strComment = trim(preg_replace('/\s+/', ' ', $strComment));
+						if ($strFile[$i+1] == '*')
+						{
+							while ($i<$intLength)
+							{
+								$strBuffer .= $strFile[$i++];
+
+								if ($strFile[$i] == '/' && $strFile[$i-1] == '*')
+								{
+									$arrTokens[] = array
+									(
+										'type'    => 'comment',
+										'content' => $strBuffer . $strFile[$i]
+									);
+
+									$strBuffer = '';
+									break;
+								}
+							}
+						}
 					}
 
-					// Format definition
+					// At block
+					elseif ($char == '@')
+					{
+						$intLevel = 0;
+						$strSelector = '';
+
+						while ($i<$intLength)
+						{
+							$strBuffer .= $strFile[$i++];
+
+							if ($strFile[$i] == '{')
+							{
+								if (++$intLevel == 1)
+								{
+									++$i;
+									$strSelector = $strBuffer;
+									$strBuffer = '';
+								}
+							}
+							elseif ($strFile[$i] == '}')
+							{
+								if (--$intLevel == 0)
+								{
+									$arrTokens[] = array
+									(
+										'type'     => 'atblock',
+										'selector' => $strSelector,
+										'content'  => $strBuffer
+									);
+
+									$strBuffer = '';
+									break;
+								}
+							}
+						}
+					}
+
+					// Regular block
 					else
 					{
-						$strNext = trim($arrChunks[$i+1]);
-						$strNext = preg_replace('/[\n\r\t]+/', ' ', $strNext);
+						while ($i<$intLength)
+						{
+							$strBuffer .= $strFile[$i++];
 
+							if ($strFile[$i] == '{')
+							{
+								++$i;
+								$strSelector = $strBuffer;
+								$strBuffer = '';
+							}
+							elseif ($strFile[$i] == '}')
+							{
+								$arrTokens[] = array
+								(
+									'type'     => 'block',
+									'selector' => $strSelector,
+									'content'  => $strBuffer
+								);
+
+								$strBuffer = '';
+								break;
+							}
+						}
+					}
+				}
+
+				foreach ($arrTokens as $arrToken)
+				{
+					// Comments
+					if ($arrToken['type'] == 'comment')
+					{
+						// Category (comments start with /** and contain only one line)
+						if (strncmp($arrToken['content'], '/**', 3) === 0 && substr_count($arrToken['content'], "\n") == 2)
+						{
+							$strCategory = trim(str_replace(array('/*', '*/', '*'), '', $arrToken['content']));
+						}
+
+						// Declaration comment
+						elseif (strpos($arrToken['content'], "\n") === false)
+						{
+							$strComment = trim(str_replace(array('/*', '*/', '*'), '', $arrToken['content']));
+						}
+					}
+
+					// At blocks like @media or @-webkit-keyframe
+					elseif ($arrToken['type'] == 'atblock')
+					{
+						$arrSet = array
+						(
+							'pid'        => $insertId,
+							'category'   => $strCategory,
+							'comment'    => $strComment,
+							'sorting'    => $intSorting += 128,
+							'selector'   => trim($arrToken['selector']),
+							'own'        => $arrToken['content']
+						);
+
+						$this->Database->prepare("INSERT INTO tl_style %s")->set($arrSet)->execute();
+						$strComment = '';
+					}
+
+					// Regular blocks
+					else
+					{
 						$arrDefinition = array
 						(
-							'pid' => $insertId,
-							'category' => $strCategory,
-							'comment' => $strComment,
-							'sorting' => $intSorting += 128,
-							'selector' => $strChunk,
-							'attributes' => $strNext
+							'pid'        => $insertId,
+							'category'   => $strCategory,
+							'comment'    => $strComment,
+							'sorting'    => $intSorting += 128,
+							'selector'   => trim($arrToken['selector']),
+							'attributes' => $arrToken['content']
 						);
 
 						$this->createDefinition($arrDefinition);
-
-						++$i;
 						$strComment = '';
 					}
 				}
@@ -1262,10 +1363,10 @@ class StyleSheets extends \Backend
 	{
 		$arrSet = array
 		(
-			'pid' => $arrDefinition['pid'],
-			'sorting' => $arrDefinition['sorting'],
-			'tstamp' => time(),
-			'comment' => $arrDefinition['comment'],
+			'pid'      => $arrDefinition['pid'],
+			'sorting'  => $arrDefinition['sorting'],
+			'tstamp'   => time(),
+			'comment'  => $arrDefinition['comment'],
 			'category' => $arrDefinition['category'],
 			'selector' => $arrDefinition['selector']
 		);
@@ -2066,7 +2167,7 @@ class StyleSheets extends \Backend
 	{
 		if ($arrParent['embedImages'] > 0 && file_exists(TL_ROOT . '/' . $strImage))
 		{
-			$objImage = new \File($strImage);
+			$objImage = new \File($strImage, true);
 			$strExtension = $objImage->extension;
 
 			// Fix the jpg mime type

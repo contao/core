@@ -196,7 +196,7 @@ class Combiner extends \System
 		}
 
 		// Create the file
-		$objFile = new \File('assets/' . $strTarget . '/' . $strKey . $this->strMode);
+		$objFile = new \File('assets/' . $strTarget . '/' . $strKey . $this->strMode, true);
 		$objFile->truncate();
 
 		foreach ($this->arrFiles as $arrFile)
@@ -280,7 +280,7 @@ class Combiner extends \System
 		// Create a gzipped version
 		if ($GLOBALS['TL_CONFIG']['gzipScripts'] && function_exists('gzencode'))
 		{
-			$objFile = new \File('assets/' . $strTarget . '/' . $strKey . $this->strMode . '.gz');
+			$objFile = new \File('assets/' . $strTarget . '/' . $strKey . $this->strMode . '.gz', true);
 			$objFile->write(gzencode(file_get_contents(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode), 9));
 			$objFile->close();
 		}

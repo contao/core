@@ -95,7 +95,7 @@ class Image
 			return null;
 		}
 
-		$objFile = new \File($image);
+		$objFile = new \File($image, true);
 		$arrAllowedTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['validImageTypes']));
 
 		// Check the file type

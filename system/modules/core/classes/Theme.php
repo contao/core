@@ -68,7 +68,7 @@ class Theme extends \Backend
 						continue;
 					}
 
-					$objFile = new \File($strFile);
+					$objFile = new \File($strFile, true);
 
 					// Skip anything but .cto files
 					if ($objFile->extension != 'cto')
@@ -393,7 +393,7 @@ class Theme extends \Backend
 						$strFileName = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $strFileName);
 					}
 
-					$objFile = new \File($strFileName);
+					$objFile = new \File($strFileName, true);
 					$objFile->write($objArchive->unzip());
 					$objFile->close();
 				}
@@ -809,7 +809,7 @@ class Theme extends \Backend
 		$objArchive->close();
 
 		// Open the "save as …" dialogue
-		$objFile = new \File('system/tmp/'. $strTmp);
+		$objFile = new \File('system/tmp/'. $strTmp, true);
 
 		header('Content-Type: application/octet-stream');
 		header('Content-Transfer-Encoding: binary');
@@ -1158,7 +1158,7 @@ class Theme extends \Backend
 		// Files
 		foreach ($arrFiles as $strFile)
 		{
-			$objFile = new \File($strFile);
+			$objFile = new \File($strFile, true);
 			$objModel = \FilesModel::findByPath($strFile);
 
 			// Create the entry if it does not yet exist

@@ -1941,7 +1941,7 @@ abstract class Controller extends \System
 			die('File not found');
 		}
 
-		$objFile = new \File($strFile);
+		$objFile = new \File($strFile, true);
 		$arrAllowedTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
 
 		if (!in_array($objFile->extension, $arrAllowedTypes))
@@ -2009,7 +2009,7 @@ abstract class Controller extends \System
 		else
 		{
 			// Generate the cache file
-			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php');
+			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php', true);
 			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
 
 			// Parse all active modules
@@ -2657,10 +2657,11 @@ abstract class Controller extends \System
 	 * 
 	 * @param object $objTemplate The template object to add the enclosures to
 	 * @param array  $arrItem     The element or module as array
+	 * @param string $strKey      The name of the enclosures field in $arrItem
 	 */
-	public static function addEnclosuresToTemplate($objTemplate, $arrItem)
+	public static function addEnclosuresToTemplate($objTemplate, $arrItem, $strKey='enclosure')
 	{
-		$arrEnclosures = deserialize($arrItem['enclosure']);
+		$arrEnclosures = deserialize($arrItem[$strKey]);
 
 		if (!is_array($arrEnclosures) || empty($arrEnclosures))
 		{
@@ -2717,7 +2718,7 @@ abstract class Controller extends \System
 					continue;
 				}
 
-				$objFile = new \File($objFiles->path);
+				$objFile = new \File($objFiles->path, true);
 
 				$arrEnclosures[] = array
 				(

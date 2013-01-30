@@ -215,7 +215,7 @@ class Folder extends \System
 	{
 		if (!file_exists(TL_ROOT . '/' . $this->strFolder . '/.htaccess'))
 		{
-			$objFile = new \File($this->strFolder . '/.htaccess');
+			$objFile = new \File($this->strFolder . '/.htaccess', true);
 			$objFile->write("order deny,allow\ndeny from all");
 			$objFile->close();
 		}
@@ -285,7 +285,7 @@ class Folder extends \System
 			}
 			else
 			{
-				$objFile = new \File($this->strFolder . '/' . $strFile);
+				$objFile = new \File($this->strFolder . '/' . $strFile, true);
 				$intSize += $objFile->size;
 			}
 		}

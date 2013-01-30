@@ -71,6 +71,43 @@ and quick navigation modules consider the custom order (see #4936).
 Version 3.0.4 (2013-XX-XX)
 --------------------------
 
+### New
+Added the `$blnDoNotCreate` option to the `Files` class, which makes the class
+write to a temporary file first and then move it to its destination in one
+atomic operation. This fixes some cache issues (see #5307).
+
+### Fixed
+Handle `@` blocks when importing style sheets (see #5250).
+
+### Fixed
+Show the newsletter list even if there is no jumpTo page configured in the
+channel and show the enclosures in the newsletter reader (see #5233).
+
+### Fixed
+Added an option to load model relations uncached (see #5248, #5102). Also fixed
+the `array_merge()` order so the default options can be overriden.
+
+### Updated
+Updated SimplePie to version 1.3.1 (see #5207).
+
+### Updated
+Updated SwiftMailer to version 4.3.0 (see #5263).
+
+### Fixed
+The jQuery accordion script did not work with minified markup (see #5245).
+
+### Fixed
+Removed the "spaceToUnderscore" option from all alias fields (see #5266).
+
+### Fixed
+The media content element now supports .ogg files (see #5282).
+
+### Fixed
+Do not rewrite requests for .mp3, .mp4, .webm or .ogv files (see #5258, #5284).
+
+### Fixed
+Correctly determin the last run of the command scheduler (see #5278).
+
 ### Fixed
 Make the jQuery accordion behave like the MooTools version (see #5251).
 
