@@ -61,12 +61,6 @@ class File extends \System
 	 */
 	protected $arrImageSize = array();
 
-	/**
-	 * Autocreate the file
-	 * @var array
-	 */
-	protected $blnCreateFile = true;
-
 
 	/**
 	 * Instantiate a new file object
@@ -103,38 +97,6 @@ class File extends \System
 		{
 			$this->Files->fclose($this->resFile);
 		}
-
-		// Backwards compatibility (remove in Contao 4)
-		elseif ($this->blnCreateFile)
-		{
-			// Create the path
-			if (!file_exists(TL_ROOT . '/' . $this->strFile))
-			{
-				// Handle open_basedir restrictions
-				if (($strFolder = dirname($this->strFile)) == '.')
-				{
-					$strFolder = '';
-				}
-
-				// Create the parent folder
-				if (!is_dir(TL_ROOT . '/' . $strFolder))
-				{
-					$strPath = '';
-					$arrChunks = explode('/', $strFolder);
-
-					foreach ($arrChunks as $strChunk)
-					{
-						$strPath .= $strChunk . '/';
-						$this->Files->mkdir($strPath);
-					}
-				}
-			}
-
-			// Create an empty file
-			$resFile = $this->Files->fopen($this->strFile, 'wb');
-			fputs($resFile, '');
-			$this->Files->fclose($resFile);
-		}
 	}
 
 
@@ -166,7 +128,6 @@ class File extends \System
 	 */
 	public function __get($strKey)
 	{
-		$this->blnCreateFile = false;
 		$strCacheKey = __METHOD__ . '-' . $this->strFile . '-' . $strKey;
 
 		if (!\Cache::has($strCacheKey))
@@ -326,7 +287,6 @@ class File extends \System
 	 */
 	public function delete()
 	{
-		$this->blnCreateFile = false;
 		return $this->Files->delete($this->strFile);
 	}
 
@@ -340,7 +300,6 @@ class File extends \System
 	 */
 	public function chmod($intChmod)
 	{
-		$this->blnCreateFile = false;
 		return $this->Files->chmod($this->strFile, $intChmod);
 	}
 
@@ -352,8 +311,6 @@ class File extends \System
 	 */
 	public function close()
 	{
-		$this->blnCreateFile = false;
-
 		if (!is_resource($this->resFile))
 		{
 			return false;
@@ -387,7 +344,6 @@ class File extends \System
 	 */
 	public function getContent()
 	{
-		$this->blnCreateFile = false;
 		$strContent = file_get_contents(TL_ROOT . '/' . $this->strFile);
 
 		// Remove BOMs (see #4469)
@@ -415,7 +371,6 @@ class File extends \System
 	 */
 	public function getContentAsArray()
 	{
-		$this->blnCreateFile = false;
 		return array_map('rtrim', file(TL_ROOT . '/' . $this->strFile));
 	}
 
@@ -429,7 +384,6 @@ class File extends \System
 	 */
 	public function renameTo($strNewName)
 	{
-		$this->blnCreateFile = false;
 		$return = $this->Files->rename($this->strFile, $strNewName);
 
 		if ($return)
@@ -451,7 +405,6 @@ class File extends \System
 	 */
 	public function copyTo($strNewName)
 	{
-		$this->blnCreateFile = false;
 		return $this->Files->copy($this->strFile, $strNewName);
 	}
 
@@ -466,8 +419,6 @@ class File extends \System
 	 */
 	protected function fputs($varData, $strMode)
 	{
-		$this->blnCreateFile = false;
-
 		if (!is_resource($this->resFile))
 		{
 			$this->strTmp = 'system/tmp/' . md5(uniqid(mt_rand(), true));
