@@ -256,7 +256,7 @@ class TableWizard extends \Widget
 
 			foreach ($arrUploaded as $strCsvFile)
 			{
-				$objFile = new \File($strCsvFile);
+				$objFile = new \File($strCsvFile, true);
 
 				if ($objFile->extension != 'csv')
 				{

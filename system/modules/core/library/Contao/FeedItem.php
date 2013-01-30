@@ -116,7 +116,7 @@ class FeedItem extends \System
 			return;
 		}
 
-		$objFile = new \File($strFile);
+		$objFile = new \File($strFile, true);
 
 		$this->arrData['enclosure'][] = array
 		(

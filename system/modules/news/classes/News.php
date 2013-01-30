@@ -203,7 +203,7 @@ class News extends \Frontend
 		}
 
 		// Create the file
-		$objRss = new \File('share/' . $strFile . '.xml');
+		$objRss = new \File('share/' . $strFile . '.xml', true);
 		$objRss->write($this->replaceInsertTags($objFeed->$strType()));
 		$objRss->close();
 	}

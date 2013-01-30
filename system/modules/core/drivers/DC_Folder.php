@@ -992,7 +992,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					}
 					else
 					{
-						$objFile = new \File($strFile);
+						$objFile = new \File($strFile, true);
 
 						$objNew = new \FilesModel();
 						$objNew->pid       = $pid;
@@ -1690,7 +1690,7 @@ window.addEvent(\'domready\', function() {
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$objFile = new \File($this->intId);
+		$objFile = new \File($this->intId, true);
 
 		// Check whether file type is editable
 		if (!in_array($objFile->extension, trimsplit(',', $GLOBALS['TL_CONFIG']['editableFiles'])))
@@ -2315,7 +2315,7 @@ window.addEvent(\'domready\', function() {
 		// Files
 		foreach ($arrFiles as $strFile)
 		{
-			$objFile = new \File($strFile);
+			$objFile = new \File($strFile, true);
 			$objModel = \FilesModel::findByPath($strFile);
 
 			// Create the entry if it does not yet exist
@@ -2537,7 +2537,7 @@ window.addEvent(\'domready\', function() {
 			$popupHeight = 260;
 			$currentFile = str_replace(TL_ROOT.'/', '', $files[$h]);
 
-			$objFile = new \File($currentFile);
+			$objFile = new \File($currentFile, true);
 
 			if (!empty($this->arrValidFileTypes) && !in_array($objFile->extension, $this->arrValidFileTypes))
 			{

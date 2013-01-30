@@ -71,13 +71,13 @@ class ModuleExtension extends \BackendModule
 
 			// config/config.php
 			$tplConfig = $this->newTemplate('dev_config', $objModule);
-			$objConfig = new \File('system/modules/' . $objModule->folder . '/config/config.php');
+			$objConfig = new \File('system/modules/' . $objModule->folder . '/config/config.php', true);
 			$objConfig->write($tplConfig->parse());
 			$objConfig->close();
 
 			// config/autoload.ini
 			$tplConfig = $this->newTemplate('dev_ini', $objModule);
-			$objConfig = new \File('system/modules/' . $objModule->folder . '/config/autoload.ini');
+			$objConfig = new \File('system/modules/' . $objModule->folder . '/config/autoload.ini', true);
 			$objConfig->write($tplConfig->parse());
 			$objConfig->close();
 
@@ -92,7 +92,7 @@ class ModuleExtension extends \BackendModule
 					$tplClass = $this->newTemplate('dev_beClass', $objModule);
 					$tplClass->class = $strClass;
 
-					$objClass = new \File('system/modules/' . $objModule->folder . '/' . $this->guessSubfolder($strClass) . '/' . $strClass . '.php');
+					$objClass = new \File('system/modules/' . $objModule->folder . '/' . $this->guessSubfolder($strClass) . '/' . $strClass . '.php', true);
 					$objClass->write($tplClass->parse());
 					$objClass->close();
 				}
@@ -105,7 +105,7 @@ class ModuleExtension extends \BackendModule
 					$tplTable = $this->newTemplate('dev_dca', $objModule);
 					$tplTable->table = $strTable;
 
-					$objTable = new \File('system/modules/' . $objModule->folder . '/dca/' . $strTable . '.php');
+					$objTable = new \File('system/modules/' . $objModule->folder . '/dca/' . $strTable . '.php', true);
 					$objTable->write($tplTable->parse());
 					$objTable->close();
 				}
@@ -116,7 +116,7 @@ class ModuleExtension extends \BackendModule
 				foreach ($arrTemplates as $strTemplate)
 				{
 					$tplTemplate = $this->newTemplate('dev_beTemplate', $objModule);
-					$objTemplate = new \File('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.html5');
+					$objTemplate = new \File('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.html5', true);
 					$objTemplate->write($tplTemplate->parse());
 					$objTemplate->close();
 				}
@@ -134,7 +134,7 @@ class ModuleExtension extends \BackendModule
 					$tplClass->class = $strClass;
 					$tplClass->extends = $this->guessParentClass($strClass);
 
-					$objClass = new \File('system/modules/' . $objModule->folder . '/' . $this->guessSubfolder($strClass) . '/' . $strClass . '.php');
+					$objClass = new \File('system/modules/' . $objModule->folder . '/' . $this->guessSubfolder($strClass) . '/' . $strClass . '.php', true);
 					$objClass->write($tplClass->parse());
 					$objClass->close();
 				}
@@ -147,7 +147,7 @@ class ModuleExtension extends \BackendModule
 					$tplTable = $this->newTemplate('dev_feDca', $objModule);
 					$tplTable->table = $strTable;
 
-					$objTable = new \File('system/modules/' . $objModule->folder . '/dca/' . $strTable . '.php');
+					$objTable = new \File('system/modules/' . $objModule->folder . '/dca/' . $strTable . '.php', true);
 					$objTable->write($tplTable->parse());
 					$objTable->close();
 				}
@@ -161,7 +161,7 @@ class ModuleExtension extends \BackendModule
 					$tplTable->table = $strTable;
 					$tplTable->class = $strModel;
 
-					$objTable = new \File('system/modules/' . $objModule->folder . '/models/' . $strModel . 'Model.php');
+					$objTable = new \File('system/modules/' . $objModule->folder . '/models/' . $strModel . 'Model.php', true);
 					$objTable->write($tplTable->parse());
 					$objTable->close();
 				}
@@ -172,7 +172,7 @@ class ModuleExtension extends \BackendModule
 				foreach ($arrTemplates as $strTemplate)
 				{
 					$tplTemplate = $this->newTemplate('dev_feTemplate', $objModule);
-					$objTemplate = new \File('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.html5');
+					$objTemplate = new \File('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.html5', true);
 					$objTemplate->write($tplTemplate->parse());
 					$objTemplate->close();
 					$objTemplate->copyTo('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.xhtml');
@@ -189,14 +189,14 @@ class ModuleExtension extends \BackendModule
 					// languages/xx/default.php
 					$tplLanguage = $this->newTemplate('dev_default', $objModule);
 					$tplLanguage->language = $strLanguage;
-					$objLanguage = new \File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/default.php');
+					$objLanguage = new \File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/default.php', true);
 					$objLanguage->write($tplLanguage->parse());
 					$objLanguage->close();
 
 					// languages/xx/modules.php
 					$tplLanguage = $this->newTemplate('dev_modules', $objModule);
 					$tplLanguage->language = $strLanguage;
-					$objLanguage = new \File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/modules.php');
+					$objLanguage = new \File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/modules.php', true);
 					$objLanguage->write($tplLanguage->parse());
 					$objLanguage->close();
 
@@ -206,7 +206,7 @@ class ModuleExtension extends \BackendModule
 						$tplLanguage->language = $strLanguage;
 						$tplLanguage->table = $strTable;
 
-						$objLanguage = new \File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/' . $strTable . '.php');
+						$objLanguage = new \File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/' . $strTable . '.php', true);
 						$objLanguage->write($tplLanguage->parse());
 						$objLanguage->close();
 					}
@@ -215,7 +215,7 @@ class ModuleExtension extends \BackendModule
 
 			// Public folder
 			$tplConfig = $this->newTemplate('dev_htaccess', $objModule);
-			$objConfig = new \File('system/modules/' . $objModule->folder . '/assets/.htaccess');
+			$objConfig = new \File('system/modules/' . $objModule->folder . '/assets/.htaccess', true);
 			$objConfig->write($tplConfig->parse());
 			$objConfig->close();
 
