@@ -47,7 +47,7 @@ class File extends \System
 	 * Temp name
 	 * @var string
 	 */
-	protected $strTemp;
+	protected $strTmp;
 
 	/**
 	 * Pathinfo
@@ -142,8 +142,12 @@ class File extends \System
 	 */
 	public function __get($strKey)
 	{
-		$strCacheKey = __METHOD__ . '-' . $this->strFile . '-' . $strKey;
+		if ($strKey == 'tmpname')
+		{
+			return basename($this->strTmp);
+		}
 
+		$strCacheKey = __METHOD__ . '-' . $this->strFile . '-' . $strKey;
 		if (!\Cache::has($strCacheKey))
 		{
 			switch ($strKey)

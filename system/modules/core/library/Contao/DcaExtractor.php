@@ -102,15 +102,15 @@ class DcaExtractor extends \Database\Installer
 		parent::__construct();
 
 		$this->strTable = $strTable;
-		$this->strFile = TL_ROOT . '/system/cache/sql/' . $strTable . '.php';
+		$this->strFile = 'system/cache/sql/' . $strTable . '.php';
 
-		if ($GLOBALS['TL_CONFIG']['bypassCache'] || !file_exists($this->strFile))
+		if ($GLOBALS['TL_CONFIG']['bypassCache'] || !file_exists(TL_ROOT . '/' . $this->strFile))
 		{
 			$this->createExtract();
 		}
 		else
 		{
-			include	$this->strFile;
+			include TL_ROOT . '/' . $this->strFile;
 			$this->blnIsDbTable = true;
 		}
 	}
@@ -419,11 +419,12 @@ class DcaExtractor extends \Database\Installer
 			$objFile->append(');', "\n");
 		}
 
-		$objFile->close();
+		// Include the aggregated file before it is closed
+		include TL_ROOT . '/system/tmp/' . $objFile->tmpname;
 		$this->blnIsDbTable = true;
 
-		// Include the file so the class properties are filled
-		include TL_ROOT . '/system/cache/sql/' . $this->strTable . '.php';
+		// Close the file (moves it to its final destination)
+		$objFile->close();
 	}
 
 

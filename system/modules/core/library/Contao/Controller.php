@@ -2020,10 +2020,13 @@ abstract class Controller extends \System
 				if (file_exists(TL_ROOT . '/' . $strFile))
 				{
 					$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
-					include TL_ROOT . '/' . $strFile;
 				}
 			}
 
+			// Include the aggregated file before it is closed
+			include TL_ROOT . '/system/tmp/' . $objCacheFile->tmpname;
+
+			// Close the file (moves it to its final destination)
 			$objCacheFile->close();
 		}
 

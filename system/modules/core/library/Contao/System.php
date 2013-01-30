@@ -368,77 +368,61 @@ abstract class System
 			}
 		}
 
-		$strCacheFallback = 'system/cache/language/en/' . $strName . '.php';
-		$strCacheFile = 'system/cache/language/' . $strLanguage . '/' . $strName . '.php';
+		$arrCreateLangs = ($strLanguage == 'en') ? array('en') : array('en', $strLanguage);
 
-		// Load the cache files or generate them if they do not yet exist
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
+		// Load the language(s)
+		foreach ($arrCreateLangs as $strCreateLang)
 		{
-			include TL_ROOT . '/' . $strCacheFallback;
-			include TL_ROOT . '/' . $strCacheFile;
-		}
-		else
-		{
-			// Add a short header with links to transifex.com
-			$strHeader = "<?php\n\n"
-					   . "/**\n"
-					   . " * Contao Open Source CMS\n"
-					   . " * \n"
-					   . " * Copyright (c) 2005-2013 Leo Feyer\n"
-					   . " * \n"
-					   . " * Core translations are managed using Transifex. To create a new translation\n"
-					   . " * or to help to maintain an existing one, please register at transifex.com.\n"
-					   . " * \n"
-					   . " * @link http://help.transifex.com/intro/translating.html\n"
-					   . " * @link https://www.transifex.com/projects/p/contao/language/%s/\n"
-					   . " * \n"
-					   . " * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL\n"
-					   . " */\n";
+			$strCacheFile = 'system/cache/language/' . $strCreateLang . '/' . $strName . '.php';
 
-			// Generate the cache files
-			$objCacheFallback = new \File($strCacheFallback, true);
-			$objCacheFallback->write(sprintf($strHeader, 'en'));
-
-			$objCacheFile = new \File($strCacheFile, true);
-			$objCacheFile->write(sprintf($strHeader, $strLanguage));
-
-			// Parse all active modules
-			foreach (\Config::getInstance()->getActiveModules() as $strModule)
+			// Load the cache files or generate it if it does not yet exist
+			if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
 			{
-				$strFallback = 'system/modules/' . $strModule . '/languages/en/' . $strName;
+				include TL_ROOT . '/' . $strCacheFile;
+			}
+			else
+			{
+				// Add a short header with links to transifex.com
+				$strHeader = "<?php\n\n"
+						   . "/**\n"
+						   . " * Contao Open Source CMS\n"
+						   . " * \n"
+						   . " * Copyright (c) 2005-2013 Leo Feyer\n"
+						   . " * \n"
+						   . " * Core translations are managed using Transifex. To create a new translation\n"
+						   . " * or to help to maintain an existing one, please register at transifex.com.\n"
+						   . " * \n"
+						   . " * @link http://help.transifex.com/intro/translating.html\n"
+						   . " * @link https://www.transifex.com/projects/p/contao/language/%s/\n"
+						   . " * \n"
+						   . " * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL\n"
+						   . " */\n";
 
-				// Fallback language
-				if (file_exists(TL_ROOT . '/' . $strFallback . '.xlf'))
-				{
-					$objCacheFallback->append(static::convertXlfToPhp($strFallback . '.xlf', 'en'));
-				}
-				elseif (file_exists(TL_ROOT . '/' . $strFallback . '.php'))
-				{
-					$objCacheFallback->append(static::readPhpFileWithoutTags($strFallback . '.php'));
-					include TL_ROOT . '/' . $strFallback . '.php';
-				}
+				// Generate the cache file
+				$objCacheFile = new \File($strCacheFile, true);
+				$objCacheFile->write(sprintf($strHeader, $strCreateLang));
 
-				// Only process if the current language is not English
-				if ($strLanguage != 'en')
+				// Parse all active modules and append to the cache file
+				foreach (\Config::getInstance()->getActiveModules() as $strModule)
 				{
-					$strFile = 'system/modules/' . $strModule . '/languages/' . $strLanguage . '/' . $strName;
+					$strFile = 'system/modules/' . $strModule . '/languages/' . $strCreateLang . '/' . $strName;
 
-					// Current language
 					if (file_exists(TL_ROOT . '/' . $strFile . '.xlf'))
 					{
-						$objCacheFile->append(static::convertXlfToPhp($strFile . '.xlf', $strLanguage));
+						$objCacheFile->append(static::convertXlfToPhp($strFile . '.xlf', $strCreateLang));
 					}
 					elseif (file_exists(TL_ROOT . '/' . $strFile . '.php'))
 					{
 						$objCacheFile->append(static::readPhpFileWithoutTags($strFile . '.php'));
-						include TL_ROOT . '/' . $strFile . '.php';
 					}
 				}
-			}
 
-			// Write the files
-			$objCacheFallback->close();
-			$objCacheFile->close();
+				// Include the aggregated file before it is closed
+				include TL_ROOT . '/system/tmp/' . $objCacheFile->tmpname;
+
+				// Close the file (moves it to its final destination)
+				$objCacheFile->close();
+			}
 		}
 
 		// HOOK: allow to load custom labels
@@ -846,19 +830,6 @@ abstract class System
 			}
 		};
 
-		// Set up the quoteval function
-		$quoteval = function($val)
-		{
-			if (strpos($val, '\n') !== false)
-			{
-				return '"' . str_replace('"', '\\"', $val) . '"';
-			}
-			else
-			{
-				return "'" . str_replace("'", "\\'", $val) . "'";
-			}
-		};
-
 		// Add the labels
 		foreach ($units as $unit)
 		{
@@ -877,6 +848,16 @@ abstract class System
 				$value = str_replace('</ em>', '</em>', $value);
 			}
 
+			// Quote the value
+			if (strpos($value, '\n') !== false)
+			{
+				$value = '"' . str_replace('"', '\\"', $value) . '"';
+			}
+			else
+			{
+				$value = "'" . str_replace("'", "\\'", $value) . "'";
+			}
+
 			$chunks = explode('.', $unit->getAttribute('id'));
 
 			// Handle keys with dots
@@ -889,18 +870,15 @@ abstract class System
 			switch (count($chunks))
 			{
 				case 2:
-					$GLOBALS['TL_LANG'][$chunks[0]][$chunks[1]] = $value;
-					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "] = " . $quoteval($value) . ";\n";
+					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "] = " . $value . ";\n";
 					break;
 
 				case 3:
-					$GLOBALS['TL_LANG'][$chunks[0]][$chunks[1]][$chunks[2]] = $value;
-					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "][" . $quotekey($chunks[2]) . "] = " . $quoteval($value) . ";\n";
+					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "][" . $quotekey($chunks[2]) . "] = " . $value . ";\n";
 					break;
 
 				case 4:
-					$GLOBALS['TL_LANG'][$chunks[0]][$chunks[1]][$chunks[2]][$chunks[3]] = $value;
-					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "][" . $quotekey($chunks[2]) . "][" . $quotekey($chunks[3]) . "] = " . $quoteval($value) . ";\n";
+					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "][" . $quotekey($chunks[2]) . "][" . $quotekey($chunks[3]) . "] = " . $value . ";\n";
 					break;
 			}
 		}
