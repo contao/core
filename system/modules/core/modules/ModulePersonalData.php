@@ -183,8 +183,8 @@ class ModulePersonalData extends \Module
 					$objWidget->addError(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $arrData['label'][0] ?: $field));
 				}
 
-				// Trigger the save_callback
-				if (is_array($arrData['save_callback']))
+				// Trigger the save_callback (see #5247)
+				if (!$objWidget->hasErrors() && is_array($arrData['save_callback']))
 				{
 					foreach ($arrData['save_callback'] as $callback)
 					{
