@@ -184,8 +184,8 @@ class ModulePersonalData extends Module
 					}
 				}
 
-				// Save callback
-				if (is_array($arrData['save_callback']))
+				// Save callback (see #5247)
+				if (!$objWidget->hasErrors() && is_array($arrData['save_callback']))
 				{
 					foreach ($arrData['save_callback'] as $callback)
 					{

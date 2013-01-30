@@ -5,6 +5,9 @@ Version 2.11.9 (2013-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly trigger the "saveNewPassword" hook (see #5247).
+
+### Fixed
 Consider the `save_callback` of the password field in `tl_user` when a back end
 user is forced to change his password (see #5138).
 
