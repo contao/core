@@ -4,6 +4,11 @@ Contao Open Source CMS Changelog
 Version 3.0.4 (2013-XX-XX)
 --------------------------
 
+### New
+Added the `$blnDoNotCreate` option to the `Files` class, which makes the class
+write to a temporary file first and then move it to its destination in one
+atomic operation. This fixes some cache issues (see #5307).
+
 ### Fixed
 Handle `@` blocks when importing style sheets (see #5250).
 
