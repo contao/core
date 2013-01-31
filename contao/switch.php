@@ -53,6 +53,11 @@ class PreviewSwitch extends Backend
 	 */
 	public function run()
 	{
+		if (Environment::get('isAjaxRequest'))
+		{
+			$this->getDatalistOptions();
+		}
+
 		$strUser = '';
 		$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? Environment::get('ip') : '') . 'FE_USER_AUTH');
 
@@ -130,22 +135,7 @@ class PreviewSwitch extends Backend
 			$this->Template->update = true;
 		}
 
-		$arrUser = array();
-
-		// Switch the user accounts
-		if ($this->User->isAdmin)
-		{
-			// Get the active front end users
-			$objUser = $this->Database->execute("SELECT id, username FROM tl_member WHERE login=1 AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time) ORDER BY username");
-
-			while ($objUser->next())
-			{
-				$arrUser[$objUser->id] = $objUser->username;
-			}
-		}
-
 		// Default variables
-		$this->Template->users = $arrUser;
 		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
@@ -163,6 +153,35 @@ class PreviewSwitch extends Backend
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
+	}
+
+
+	/**
+	 * Find ten matching usernames and return them as JSON
+	 */
+	protected function getDatalistOptions()
+	{
+		if (!$this->User->isAdmin)
+		{
+			header('HTTP/1.1 400 Bad Request');
+			die('You must be an administartor to use the script');
+		}
+
+		$time = time();
+		$arrUsers = array();
+
+		// Get the active front end users
+		$objUsers = $this->Database->prepare("SELECT username FROM tl_member WHERE username LIKE ? AND login=1 AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time) ORDER BY username")
+								   ->limit(10)
+								   ->execute(str_replace('%', '', Input::post('value')) . '%');
+
+		if ($objUsers->numRows)
+		{
+			$arrUsers = $objUsers->fetchEach('username');
+		}
+
+		header('Content-type: application/json');
+		die(json_encode($arrUsers));
 	}
 }
 

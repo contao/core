@@ -20,7 +20,6 @@
   $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
   $objCombiner->add('assets/mootools/stylect/js/stylect.js');
   $objCombiner->add('assets/mootools/mootao/Mootao.js');
-  $objCombiner->add('assets/contao/js/core.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>
 <script><?php echo $this->getDateString(); ?></script>
@@ -42,12 +41,8 @@
 <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 <?php if ($this->isAdmin): ?>
 <label for="ctrl_user"><?php echo $this->feUser; ?>:</label> 
-<input type="text" name="user" id="ctrl_user" list="userlist" class="tl_text user" value="<?php echo $this->user; ?>">
-<datalist id="userlist">
-<?php foreach ($this->users as $id=>$name): ?>
-  <option value="<?php echo $name; ?>"></option>
-<?php endforeach; ?>
-</datalist>
+<input type="text" name="user" id="ctrl_user" list="userlist" class="tl_text user" value="<?php echo $this->user; ?>" autocomplete="off">
+<datalist id="userlist"></datalist>
 <?php endif; ?>
 <label for="ctrl_unpublished"><?php echo $this->hiddenElements; ?>:</label> 
 <select name="unpublished" id="ctrl_unpublished" class="tl_select">
@@ -69,5 +64,20 @@ parent.frames[1].location.href=parent.frames[1].location.href;
 </script>
 <?php endif; ?>
 
+<script>
+window.addEvent('domready', function() {
+  $('ctrl_user').addEvent('keyup', function() {
+    var u = $('ctrl_user'), l = $('userlist');
+    if (u.value.length > 1) return;
+    new Request.JSON({
+      onSuccess: function(txt, json) {
+        l.empty() && JSON.decode(json).each(function(v) {
+          var o = new Element('option', {'value':v}).inject(l);
+        });
+      }
+    }).post({'value':u.value,'REQUEST_TOKEN':Contao.request_token});
+  });
+});
+</script>
 </body>
 </html>
