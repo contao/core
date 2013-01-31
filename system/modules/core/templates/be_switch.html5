@@ -66,17 +66,19 @@ parent.frames[1].location.href=parent.frames[1].location.href;
 
 <script>
 window.addEvent('domready', function() {
-  $('ctrl_user').addEvent('keyup', function() {
-    var u = $('ctrl_user'), l = $('userlist');
-    if (u.value.length > 1) return;
-    new Request.JSON({
-      onSuccess: function(txt, json) {
-        l.empty() && JSON.decode(json).each(function(v) {
-          var o = new Element('option', {'value':v}).inject(l);
-        });
-      }
-    }).post({'value':u.value,'REQUEST_TOKEN':Contao.request_token});
-  });
+  if (document.createElement('datalist') && window.HTMLDataListElement) {
+    $('ctrl_user').addEvent('keyup', function() {
+      var u = $('ctrl_user'), l = $('userlist');
+      if (u.value.length > 1) return;
+      new Request.JSON({
+        onSuccess: function(txt, json) {
+          l.empty() && JSON.decode(json).each(function(v) {
+            var o = new Element('option', {'value':v}).inject(l);
+          });
+        }
+      }).post({'value':u.value,'REQUEST_TOKEN':Contao.request_token});
+    });
+  }
 });
 </script>
 </body>
