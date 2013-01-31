@@ -164,7 +164,7 @@ class PreviewSwitch extends Backend
 		if (!$this->User->isAdmin)
 		{
 			header('HTTP/1.1 400 Bad Request');
-			die('You must be an administartor to use the script');
+			die('You must be an administrator to use the script');
 		}
 
 		$time = time();
