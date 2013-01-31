@@ -37,14 +37,14 @@ p {
 
 /* Left */
 #left {
-	width:22%;
+	width:16%;
 	float:left;
 	padding:7px 0 5px;
 }
 
 /* Right */
 #right {
-	width:78%;
+	width:84%;
 	float:right;
 	text-align:right;
 }
@@ -99,5 +99,11 @@ input,select,label {
 @media (max-width:1023px) {
 	label {
 		display:none;
+	}
+	#left {
+		width:22%;
+	}
+	#right {
+		width:78%;
 	}
 }
