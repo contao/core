@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### Fixed
+Fixed the `moo_mediaelement.xhtml` template (see #5309).
+
+### Fixed
 Allow users to edit comments of news archives and calendars even if they are not
 allowed to access the news or calendar module (see #5174).
 
