@@ -142,114 +142,107 @@ class File extends \System
 	 */
 	public function __get($strKey)
 	{
-		if ($strKey == 'tmpname')
+		switch ($strKey)
 		{
-			return basename($this->strTmp);
+			case 'size':
+			case 'filesize':
+				return filesize(TL_ROOT . '/' . $this->strFile);
+				break;
+
+			case 'name':
+			case 'basename':
+				if (!isset($this->arrPathinfo[$strKey]))
+				{
+					$this->arrPathinfo = pathinfo(TL_ROOT . '/' . $this->strFile);
+				}
+				return $this->arrPathinfo['basename'];
+				break;
+
+			case 'dirname':
+				if (!isset($this->arrPathinfo[$strKey]))
+				{
+					$this->arrPathinfo = pathinfo(TL_ROOT . '/' . $this->strFile);
+				}
+				return $this->arrPathinfo['dirname'];
+				break;
+
+			case 'extension':
+				if (!isset($this->arrPathinfo['extension']))
+				{
+					$this->arrPathinfo = pathinfo(TL_ROOT . '/' . $this->strFile);
+				}
+				return strtolower($this->arrPathinfo['extension']);
+				break;
+
+			case 'filename':
+				return basename($this->basename, '.' . $this->extension);
+				break;
+
+			case 'tmpname':
+				return basename($this->strTmp);
+				break;
+
+			case 'path':
+			case 'value':
+				return $this->strFile;
+				break;
+
+			case 'mime':
+				return $this->getMimeType();
+				break;
+
+			case 'hash':
+				return $this->getHash();
+				break;
+
+			case 'ctime':
+				return filectime(TL_ROOT . '/' . $this->strFile);
+				break;
+
+			case 'mtime':
+				return filemtime(TL_ROOT . '/' . $this->strFile);
+				break;
+
+			case 'atime':
+				return fileatime(TL_ROOT . '/' . $this->strFile);
+				break;
+
+			case 'icon':
+				return $this->getIcon();
+				break;
+
+			case 'width':
+				if (empty($this->arrImageSize))
+				{
+					$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
+				}
+				return $this->arrImageSize[0];
+				break;
+
+			case 'height':
+				if (empty($this->arrImageSize))
+				{
+					$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
+				}
+				return $this->arrImageSize[1];
+				break;
+
+			case 'isGdImage':
+				return in_array($this->extension, array('gif', 'jpg', 'jpeg', 'png'));
+				break;
+
+			case 'handle':
+				if (!is_resource($this->resFile))
+				{
+					$this->resFile = fopen(TL_ROOT . '/' . $this->strFile, 'rb');
+				}
+				return $this->resFile;
+				break;
+
+			default:
+				return parent::__get($strKey);
+				break;
 		}
-
-		$strCacheKey = __METHOD__ . '-' . $this->strFile . '-' . $strKey;
-		if (!\Cache::has($strCacheKey))
-		{
-			switch ($strKey)
-			{
-				case 'size':
-				case 'filesize':
-					\Cache::set($strCacheKey, filesize(TL_ROOT . '/' . $this->strFile));
-					break;
-
-				case 'name':
-				case 'basename':
-					if (!isset($this->arrPathinfo[$strKey]))
-					{
-						$this->arrPathinfo = pathinfo(TL_ROOT . '/' . $this->strFile);
-					}
-					\Cache::set($strCacheKey, $this->arrPathinfo['basename']);
-					break;
-
-				case 'dirname':
-					if (!isset($this->arrPathinfo[$strKey]))
-					{
-						$this->arrPathinfo = pathinfo(TL_ROOT . '/' . $this->strFile);
-					}
-					\Cache::set($strCacheKey, $this->arrPathinfo['dirname']);
-					break;
-
-				case 'extension':
-					if (!isset($this->arrPathinfo['extension']))
-					{
-						$this->arrPathinfo = pathinfo(TL_ROOT . '/' . $this->strFile);
-					}
-					\Cache::set($strCacheKey, strtolower($this->arrPathinfo['extension']));
-					break;
-
-				case 'filename':
-					\Cache::set($strCacheKey, basename($this->basename, '.' . $this->extension));
-					break;
-
-				case 'mime':
-					\Cache::set($strCacheKey, $this->getMimeType());
-					break;
-
-				case 'hash':
-					\Cache::set($strCacheKey, $this->getHash());
-					break;
-
-				case 'ctime':
-					\Cache::set($strCacheKey, filectime(TL_ROOT . '/' . $this->strFile));
-					break;
-
-				case 'mtime':
-					\Cache::set($strCacheKey, filemtime(TL_ROOT . '/' . $this->strFile));
-					break;
-
-				case 'atime':
-					\Cache::set($strCacheKey, fileatime(TL_ROOT . '/' . $this->strFile));
-					break;
-
-				case 'icon':
-					\Cache::set($strCacheKey, $this->getIcon());
-					break;
-
-				case 'path':
-				case 'value':
-					\Cache::set($strCacheKey, $this->strFile);
-					break;
-
-				case 'width':
-					if (empty($this->arrImageSize))
-					{
-						$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
-					}
-					\Cache::set($strCacheKey, $this->arrImageSize[0]);
-					break;
-
-				case 'height':
-					if (empty($this->arrImageSize))
-					{
-						$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
-					}
-					\Cache::set($strCacheKey, $this->arrImageSize[1]);
-					break;
-
-				case 'isGdImage':
-					\Cache::set($strCacheKey, in_array($this->extension, array('gif', 'jpg', 'jpeg', 'png')));
-					break;
-
-				case 'handle':
-					if (!is_resource($this->resFile))
-					{
-						$this->resFile = fopen(TL_ROOT . '/' . $this->strFile, 'rb');
-					}
-					return $this->resFile;
-					break;
-
-				default:
-					return parent::__get($strKey);
-					break;
-			}
-		}
-
-		return \Cache::get($strCacheKey);
 	}
 
 
@@ -445,6 +438,7 @@ class File extends \System
 		if ($return)
 		{
 			$this->strFile = $strNewName;
+			$this->arrImageSize = array();
 			$this->arrPathinfo = array();
 		}
 
