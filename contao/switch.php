@@ -53,25 +53,25 @@ class PreviewSwitch extends Backend
 	 */
 	public function run()
 	{
-		$intUser = null;
+		$strUser = '';
 		$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? Environment::get('ip') : '') . 'FE_USER_AUTH');
 
 		// Get the front end user
 		if (FE_USER_LOGGED_IN)
 		{
-			$objUser = $this->Database->prepare("SELECT id FROM tl_member WHERE id=(SELECT pid FROM tl_session WHERE hash=?)")
+			$objUser = $this->Database->prepare("SELECT username FROM tl_member WHERE id=(SELECT pid FROM tl_session WHERE hash=?)")
 									  ->limit(1)
 									  ->execute($strHash);
 
 			if ($objUser->numRows)
 			{
-				$intUser = $objUser->id;
+				$strUser = $objUser->username;
 			}
 		}
 
 		// Create the template object
 		$this->Template = new BackendTemplate('be_switch');
-		$this->Template->user = $intUser;
+		$this->Template->user = $strUser;
 		$this->Template->show = Input::cookie('FE_PREVIEW');
 		$this->Template->update = false;
 
@@ -102,15 +102,20 @@ class PreviewSwitch extends Backend
 							   ->execute(($time - $GLOBALS['TL_CONFIG']['sessionTimeout']), $strHash);
 
 			   // Log in the front end user
-				if (is_numeric(Input::post('user')) && Input::post('user') > 0)
+				if (Input::post('user') != '')
 				{
-					// Insert new session
-					$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
-								   ->execute(Input::post('user'), $time, 'FE_USER_AUTH', session_id(), Environment::get('ip'), $strHash);
+					$objUser = MemberModel::findByUsername(Input::post('user'));
 
-					// Set cookie
-					$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
-					$this->Template->user = Input::post('user');
+					if ($objUser !== null)
+					{
+						// Insert the new session
+						$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
+									   ->execute($objUser->id, $time, 'FE_USER_AUTH', session_id(), Environment::get('ip'), $strHash);
+
+						// Set the cookie
+						$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
+						$this->Template->user = Input::post('user');
+					}
 				}
 
 				// Log out the front end user
@@ -118,14 +123,14 @@ class PreviewSwitch extends Backend
 				{
 					// Remove cookie
 					$this->setCookie('FE_USER_AUTH', $strHash, ($time - 86400), null, null, false, true);
-					$this->Template->user = 0;
+					$this->Template->user = '';
 				}
 			}
 
 			$this->Template->update = true;
 		}
 
-		$arrUser = array(''=>'-');
+		$arrUser = array();
 
 		// Switch the user accounts
 		if ($this->User->isAdmin)
@@ -135,7 +140,7 @@ class PreviewSwitch extends Backend
 
 			while ($objUser->next())
 			{
-				$arrUser[$objUser->id] = $objUser->username . ' (' . $objUser->id . ')';
+				$arrUser[$objUser->id] = $objUser->username;
 			}
 		}
 

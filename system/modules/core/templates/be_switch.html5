@@ -42,11 +42,12 @@
 <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 <?php if ($this->isAdmin): ?>
 <label for="ctrl_user"><?php echo $this->feUser; ?>:</label> 
-<select name="user" id="ctrl_user" class="tl_select user">
+<input type="text" name="user" id="ctrl_user" list="userlist" class="tl_text user" value="<?php echo $this->user; ?>">
+<datalist id="userlist">
 <?php foreach ($this->users as $id=>$name): ?>
-  <option value="<?php echo $id; ?>"<?php if ($id == $this->user): ?> selected="selected"<?php endif; ?>><?php echo $name; ?></option>
+  <option value="<?php echo $name; ?>"></option>
 <?php endforeach; ?>
-</select> 
+</datalist>
 <?php endif; ?>
 <label for="ctrl_unpublished"><?php echo $this->hiddenElements; ?>:</label> 
 <select name="unpublished" id="ctrl_unpublished" class="tl_select">
