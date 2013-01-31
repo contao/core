@@ -53,25 +53,30 @@ class PreviewSwitch extends Backend
 	 */
 	public function run()
 	{
-		$intUser = null;
+		if (Environment::get('isAjaxRequest'))
+		{
+			$this->getDatalistOptions();
+		}
+
+		$strUser = '';
 		$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? Environment::get('ip') : '') . 'FE_USER_AUTH');
 
 		// Get the front end user
 		if (FE_USER_LOGGED_IN)
 		{
-			$objUser = $this->Database->prepare("SELECT id FROM tl_member WHERE id=(SELECT pid FROM tl_session WHERE hash=?)")
+			$objUser = $this->Database->prepare("SELECT username FROM tl_member WHERE id=(SELECT pid FROM tl_session WHERE hash=?)")
 									  ->limit(1)
 									  ->execute($strHash);
 
 			if ($objUser->numRows)
 			{
-				$intUser = $objUser->id;
+				$strUser = $objUser->username;
 			}
 		}
 
 		// Create the template object
 		$this->Template = new BackendTemplate('be_switch');
-		$this->Template->user = $intUser;
+		$this->Template->user = $strUser;
 		$this->Template->show = Input::cookie('FE_PREVIEW');
 		$this->Template->update = false;
 
@@ -102,15 +107,20 @@ class PreviewSwitch extends Backend
 							   ->execute(($time - $GLOBALS['TL_CONFIG']['sessionTimeout']), $strHash);
 
 			   // Log in the front end user
-				if (is_numeric(Input::post('user')) && Input::post('user') > 0)
+				if (Input::post('user') != '')
 				{
-					// Insert new session
-					$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
-								   ->execute(Input::post('user'), $time, 'FE_USER_AUTH', session_id(), Environment::get('ip'), $strHash);
+					$objUser = MemberModel::findByUsername(Input::post('user'));
 
-					// Set cookie
-					$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
-					$this->Template->user = Input::post('user');
+					if ($objUser !== null)
+					{
+						// Insert the new session
+						$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
+									   ->execute($objUser->id, $time, 'FE_USER_AUTH', session_id(), Environment::get('ip'), $strHash);
+
+						// Set the cookie
+						$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
+						$this->Template->user = Input::post('user');
+					}
 				}
 
 				// Log out the front end user
@@ -118,29 +128,14 @@ class PreviewSwitch extends Backend
 				{
 					// Remove cookie
 					$this->setCookie('FE_USER_AUTH', $strHash, ($time - 86400), null, null, false, true);
-					$this->Template->user = 0;
+					$this->Template->user = '';
 				}
 			}
 
 			$this->Template->update = true;
 		}
 
-		$arrUser = array(''=>'-');
-
-		// Switch the user accounts
-		if ($this->User->isAdmin)
-		{
-			// Get the active front end users
-			$objUser = $this->Database->execute("SELECT id, username FROM tl_member WHERE login=1 AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time) ORDER BY username");
-
-			while ($objUser->next())
-			{
-				$arrUser[$objUser->id] = $objUser->username . ' (' . $objUser->id . ')';
-			}
-		}
-
 		// Default variables
-		$this->Template->users = $arrUser;
 		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
@@ -158,6 +153,35 @@ class PreviewSwitch extends Backend
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
+	}
+
+
+	/**
+	 * Find ten matching usernames and return them as JSON
+	 */
+	protected function getDatalistOptions()
+	{
+		if (!$this->User->isAdmin)
+		{
+			header('HTTP/1.1 400 Bad Request');
+			die('You must be an administrator to use the script');
+		}
+
+		$time = time();
+		$arrUsers = array();
+
+		// Get the active front end users
+		$objUsers = $this->Database->prepare("SELECT username FROM tl_member WHERE username LIKE ? AND login=1 AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time) ORDER BY username")
+								   ->limit(10)
+								   ->execute(str_replace('%', '', Input::post('value')) . '%');
+
+		if ($objUsers->numRows)
+		{
+			$arrUsers = $objUsers->fetchEach('username');
+		}
+
+		header('Content-type: application/json');
+		die(json_encode($arrUsers));
 	}
 }
 
