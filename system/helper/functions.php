@@ -90,11 +90,12 @@ function __error($intType, $strMessage, $strFile, $intLine)
  */
 function __exception($e)
 {
-	error_log(sprintf("PHP Fatal error: Uncaught exception '%s' with message '%s' thrown in %s on line %s",
+	error_log(sprintf("PHP Fatal error: Uncaught exception '%s' with message '%s' thrown in %s on line %s\n%s",
 					get_class($e),
 					$e->getMessage(),
 					$e->getFile(),
-					$e->getLine()));
+					$e->getLine(),
+					$e->getTraceAsString()));
 
 	// Display the exception
 	if (ini_get('display_errors'))
