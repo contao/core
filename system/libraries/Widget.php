@@ -604,8 +604,6 @@ abstract class Widget extends Controller
 	 */
 	protected function validator($varInput)
 	{
-		global $objPage;
-
 		if (is_array($varInput))
 		{
 			foreach ($varInput as $k=>$v)
@@ -717,11 +715,10 @@ abstract class Widget extends Controller
 				// Check whether the current value is a valid date format
 				case 'date':
 					$objDate = new Date();
-					$strFormat = (TL_MODE == 'FE') ? $objPage->dateFormat : $GLOBALS['TL_CONFIG']['dateFormat'];
 
-					if (!preg_match('~^'. $objDate->getRegexp($strFormat) .'$~i', $varInput))
+					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'$~i', $varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], $objDate->getInputFormat($strFormat)));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['dateFormat'])));
 					}
 					else
 					{
@@ -740,22 +737,20 @@ abstract class Widget extends Controller
 				// Check whether the current value is a valid time format
 				case 'time':
 					$objDate = new Date();
-					$strFormat = (TL_MODE == 'FE') ? $objPage->timeFormat : $GLOBALS['TL_CONFIG']['timeFormat'];
 
-					if (!preg_match('~^'. $objDate->getRegexp($strFormat) .'$~i', $varInput))
+					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'$~i', $varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], $objDate->getInputFormat($strFormat)));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['timeFormat'])));
 					}
 					break;
 
 				// Check whether the current value is a valid date and time format
 				case 'datim':
 					$objDate = new Date();
-					$strFormat = (TL_MODE == 'FE') ? $objPage->datimFormat : $GLOBALS['TL_CONFIG']['datimFormat'];
 
-					if (!preg_match('~^'. $objDate->getRegexp($strFormat) .'$~i', $varInput))
+					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], $objDate->getInputFormat($strFormat)));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['datimFormat'])));
 					}
 					else
 					{

@@ -29,9 +29,6 @@ More robust input validation in the back end filter menu and no more absolute
 paths in error messages printed to the screen (thanks to aulmn) (see #4971).
 
 ### Fixed
-Show the correct date/time format when validating front end forms (see #5238).
-
-### Fixed
 Unset non-existing fields when restoring versions (see #5219).
 
 
