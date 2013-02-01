@@ -197,9 +197,16 @@ class ModuleRegistration extends \Module
 				// Convert date formats into timestamps (check the eval setting first -> #3063)
 				if (($rgxp == 'date' || $rgxp == 'time' || $rgxp == 'datim') && $varValue != '')
 				{
-					// Use the numeric back end format here!
-					$objDate = new \Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
-					$varValue = $objDate->tstamp;
+					try
+					{
+						// Use the numeric back end format here!
+						$objDate = new \Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
+						$varValue = $objDate->tstamp;
+					}
+					catch (\OutOfBoundsException $e)
+					{
+						$objWidget->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varValue));
+					}
 				}
 
 				// Make sure that unique fields are unique (check the eval setting first -> #3063)
