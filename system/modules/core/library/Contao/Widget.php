@@ -712,8 +712,6 @@ abstract class Widget extends \Controller
 	 */
 	protected function validator($varInput)
 	{
-		global $objPage;
-
 		if (is_array($varInput))
 		{
 			foreach ($varInput as $k=>$v)
@@ -806,8 +804,7 @@ abstract class Widget extends \Controller
 				case 'date':
 					if (!\Validator::isDate($varInput))
 					{
-						$strFormat = (TL_MODE == 'FE') ? $objPage->dateFormat : $GLOBALS['TL_CONFIG']['dateFormat'];
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], \Date::getInputFormat($strFormat)));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], \Date::getInputFormat($GLOBALS['TL_CONFIG']['dateFormat'])));
 					}
 					else
 					{
@@ -827,8 +824,7 @@ abstract class Widget extends \Controller
 				case 'time':
 					if (!\Validator::isTime($varInput))
 					{
-						$strFormat = (TL_MODE == 'FE') ? $objPage->timeFormat : $GLOBALS['TL_CONFIG']['timeFormat'];
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], \Date::getInputFormat($strFormat)));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], \Date::getInputFormat($GLOBALS['TL_CONFIG']['timeFormat'])));
 					}
 					break;
 
@@ -836,8 +832,7 @@ abstract class Widget extends \Controller
 				case 'datim':
 					if (!\Validator::isDatim($varInput))
 					{
-						$strFormat = (TL_MODE == 'FE') ? $objPage->datimFormat : $GLOBALS['TL_CONFIG']['datimFormat'];
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], \Date::getInputFormat($strFormat)));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], \Date::getInputFormat($GLOBALS['TL_CONFIG']['datimFormat'])));
 					}
 					else
 					{
