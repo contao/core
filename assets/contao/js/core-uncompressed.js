@@ -1013,7 +1013,7 @@ var Backend =
 	 */
 	toggleUnchanged: function() {
 		$$('#result-list .tl_confirm').each(function(el) {
-			el.toggleClass('hide');
+			el.toggleClass('hidden');
 		});
 	},
 

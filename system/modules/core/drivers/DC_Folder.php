@@ -2340,7 +2340,7 @@ window.addEvent(\'domready\', function() {
 				else
 				{
 					++$this->arrCounts['unchanged'];
-					$this->arrMessages[] = '<p class="tl_confirm hide">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderF'], $strFolder) . '</p>';
+					$this->arrMessages[] = '<p class="tl_confirm hidden">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderF'], $strFolder) . '</p>';
 				}
 			}
 
@@ -2393,7 +2393,7 @@ window.addEvent(\'domready\', function() {
 				else
 				{
 					++$this->arrCounts['unchanged'];
-					$this->arrMessages[] = '<p class="tl_confirm hide">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileF'], $strFile) . '</p>';
+					$this->arrMessages[] = '<p class="tl_confirm hidden">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileF'], $strFile) . '</p>';
 				}
 			}
 		}
