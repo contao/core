@@ -38,15 +38,15 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'cal_default'        => 'system/modules/calendar/templates',
-	'cal_mini'           => 'system/modules/calendar/templates',
-	'event_full'         => 'system/modules/calendar/templates',
-	'event_list'         => 'system/modules/calendar/templates',
-	'event_teaser'       => 'system/modules/calendar/templates',
-	'event_upcoming'     => 'system/modules/calendar/templates',
-	'mod_calendar'       => 'system/modules/calendar/templates',
-	'mod_event'          => 'system/modules/calendar/templates',
-	'mod_eventlist'      => 'system/modules/calendar/templates',
-	'mod_eventmenu'      => 'system/modules/calendar/templates',
-	'mod_eventmenu_year' => 'system/modules/calendar/templates',
+	'cal_default'        => 'system/modules/calendar/templates/calendar',
+	'cal_mini'           => 'system/modules/calendar/templates/calendar',
+	'event_full'         => 'system/modules/calendar/templates/events',
+	'event_list'         => 'system/modules/calendar/templates/events',
+	'event_teaser'       => 'system/modules/calendar/templates/events',
+	'event_upcoming'     => 'system/modules/calendar/templates/events',
+	'mod_calendar'       => 'system/modules/calendar/templates/modules',
+	'mod_event'          => 'system/modules/calendar/templates/modules',
+	'mod_eventlist'      => 'system/modules/calendar/templates/modules',
+	'mod_eventmenu'      => 'system/modules/calendar/templates/modules',
+	'mod_eventmenu_year' => 'system/modules/calendar/templates/modules',
 ));

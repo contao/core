@@ -26,6 +26,6 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'info_default' => 'system/modules/listing/templates',
-	'list_default' => 'system/modules/listing/templates',
+	'info_default' => 'system/modules/listing/templates/info',
+	'list_default' => 'system/modules/listing/templates/listing',
 ));

@@ -240,16 +240,24 @@ class ModuleAutoload extends \BackendModule
 			{
 				if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
 				{
-					foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates') as $strFile)
-					{
-						if (strrchr($strFile, '.') != '.html5' && strrchr($strFile, '.') != '.xhtml')
-						{
-							continue;
-						}
+					$objFiles = new \RecursiveIteratorIterator(
+						new \RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule . '/templates', \FilesystemIterator::UNIX_PATHS)
+					);
 
-						$strKey = basename($strFile, strrchr($strFile, '.'));
-						$arrTplLoader[$strKey] = 'system/modules/' . $strModule . '/templates';
-						$intTplWidth = max(strlen($strKey), $intTplWidth);
+					foreach ($objFiles as $objFile)
+					{
+						if ($objFile->isFile())
+						{
+							$strExtension = pathinfo($objFile->getFilename(), PATHINFO_EXTENSION);
+
+							if ($strExtension == 'html5' || $strExtension == 'xhtml')
+							{
+								$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
+								$strKey = basename($strRelpath, strrchr($strRelpath, '.'));
+								$arrTplLoader[$strKey] = dirname($strRelpath);
+								$intTplWidth = max(strlen($strKey), $intTplWidth);
+							}
+						}
 					}
 				}
 			}

@@ -210,30 +210,38 @@ class tl_templates extends Backend
 		$strError = '';
 
 		// Copy an existing template
-		if (Input::post('FORM_SUBMIT') == 'tl_create_template' && file_exists(TL_ROOT . '/system/modules/' . Input::post('original')))
+		if (Input::post('FORM_SUBMIT') == 'tl_create_template')
 		{
 			$strOriginal = Input::post('original');
 			$strTarget = str_replace('../', '', Input::post('target'));
 
-			// Validate the target path
-			if (strncmp($strTarget, 'templates', 9) !== 0 || !is_dir(TL_ROOT . '/' . $strTarget))
+			// Validate the source path
+			if (strncmp($strOriginal, 'system/modules/', 15) !== 0 || !file_exists(TL_ROOT . '/' . $strOriginal))
 			{
-				$strError = sprintf($GLOBALS['TL_LANG']['tl_templates']['invalid'], $strTarget);
+				$strError = sprintf($GLOBALS['TL_LANG']['tl_templates']['invalid'], $strOriginal);
 			}
 			else
 			{
-				$strTarget .= '/' . basename($strOriginal);
-
-				// Check whether the target file exists
-				if (file_exists(TL_ROOT . '/' . $strTarget))
+				// Validate the target path
+				if (strncmp($strTarget, 'templates', 9) !== 0 || !is_dir(TL_ROOT . '/' . $strTarget))
 				{
-					$strError = sprintf($GLOBALS['TL_LANG']['tl_templates']['exists'], $strTarget);
+					$strError = sprintf($GLOBALS['TL_LANG']['tl_templates']['invalid'], $strTarget);
 				}
 				else
 				{
-					$this->import('Files');
-					$this->Files->copy('system/modules/' . $strOriginal, $strTarget);
-					$this->redirect($this->getReferer());
+					$strTarget .= '/' . basename($strOriginal);
+
+					// Check whether the target file exists
+					if (file_exists(TL_ROOT . '/' . $strTarget))
+					{
+						$strError = sprintf($GLOBALS['TL_LANG']['tl_templates']['exists'], $strTarget);
+					}
+					else
+					{
+						$this->import('Files');
+						$this->Files->copy($strOriginal, $strTarget);
+						$this->redirect($this->getReferer());
+					}
 				}
 			}
 		}
@@ -251,15 +259,22 @@ class tl_templates extends Backend
 			}
 
 			// Find all templates
-			foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates') as $strTemplate)
-			{
-				// Ignore non-template files
-				if (strncmp($strTemplate, '.', 1) === 0 || $strTemplate == 'tpl_editor.html5' || !preg_match('/\.(' . implode('|', $arrAllowed) . ')$/', $strTemplate))
-				{
-					continue;
-				}
+			$objFiles = new RecursiveIteratorIterator(
+				new RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule . '/templates', FilesystemIterator::UNIX_PATHS)
+			);
 
-				$arrAllTemplates[$strModule][$strTemplate] = $strModule . '/templates/' . $strTemplate;
+			foreach ($objFiles as $objFile)
+			{
+				if ($objFile->isFile())
+				{
+					$strExtension = pathinfo($objFile->getFilename(), PATHINFO_EXTENSION);
+
+					if (in_array($strExtension, $arrAllowed))
+					{
+						$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
+						$arrAllTemplates[$strModule][basename($strRelpath)] = $strRelpath;
+					}
+				}
 			}
 		}
 
@@ -272,7 +287,7 @@ class tl_templates extends Backend
 
 			foreach ($v as $kk=>$vv)
 			{
-				$strAllTemplates .= sprintf('<option value="%s" class="%s"%s>%s</option>', $vv, ((strpos($vv, '.html5') === false) ? 'tl_gray' : ''), ((Input::post('original') == $vv) ? ' selected="selected"' : ''), $kk);
+				$strAllTemplates .= sprintf('<option value="%s"%s>%s</option>', $vv, ((Input::post('original') == $vv) ? ' selected="selected"' : ''), $kk);
 			}
 
 			$strAllTemplates .= '</optgroup>';
