@@ -1089,7 +1089,7 @@ a.navigation.tpl_editor {
 
 /* Default icon classes */
 a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header_logout,.header_back,.header_new,.header_rss,
-.header_edit_all,.header_delete_all,.header_new_folder,.header_css_import,.header_theme_import,.header_toggle,.header_sync {
+.header_edit_all,.header_delete_all,.header_new_folder,.header_css_import,.header_theme_import,.header_store,.header_toggle,.header_sync {
 	padding:2px 0 3px 20px;
 	background-position:left center;
 	background-repeat:no-repeat;
@@ -1153,6 +1153,10 @@ a.navigation {
 }
 .header_theme_import {
 	background-image:url("images/theme_import.gif");
+}
+.header_store {
+	padding-left:18px;
+	background-image:url("images/store.gif");
 }
 .header_toggle {
 	background:url("images/folPlus.gif") no-repeat -1px center;

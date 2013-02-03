@@ -4262,20 +4262,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 			// Close the table
 			$return .= '
-</table>';
-
-			// Theme store link
-			if (\Input::get('do') == 'themes' && !isset($_GET['act']) && !isset($_GET['table']) && !isset($_GET['key']))
-			{
-				$return .= '
-
-<div id="theme-store">
-  <a href="https://themes.contao.org" target="_blank" class="tl_submit">' . $GLOBALS['TL_LANG']['tl_theme']['store'] . '</a>
-</div>';
-			}
-
-			// Close the container
-			$return .= '
+</table>
 
 </div>';
 
