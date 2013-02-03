@@ -45,6 +45,7 @@ $GLOBALS['TL_LANG']['tl_theme']['missing_xml'] = 'Das Theme "%s" ist fehlerhaft 
 $GLOBALS['TL_LANG']['tl_theme']['custom_templates'] = 'Eigene Templates';
 $GLOBALS['TL_LANG']['tl_theme']['template_exists'] = 'Das Template <strong>"%s"</strong> existiert bereits und wird überschrieben.';
 $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] = 'Keine Konflikte festgestellt.';
+$GLOBALS['TL_LANG']['tl_theme']['store'] = 'Contao Theme-Store';
 $GLOBALS['TL_LANG']['tl_theme']['new'][0] = 'Neues Theme';
 $GLOBALS['TL_LANG']['tl_theme']['new'][1] = 'Ein neues Theme anlegen';
 $GLOBALS['TL_LANG']['tl_theme']['show'][0] = 'Themedetails';

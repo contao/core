@@ -125,6 +125,10 @@
         <source>No conflicts detected.</source>
         <target>Geen conflicten aangetroffen.</target>
       </trans-unit>
+      <trans-unit id="tl_theme.store">
+        <source>Contao theme store</source>
+        <target>Contao theme store</target>
+      </trans-unit>
       <trans-unit id="tl_theme.new.0">
         <source>New theme</source>
         <target>Nieuw thema</target>

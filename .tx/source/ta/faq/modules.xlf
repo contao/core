@@ -23,6 +23,7 @@
       </trans-unit>
       <trans-unit id="FMD.faqreader.0">
         <source>FAQ reader</source>
+        <target>FAQ வாசிப்பான்</target>
       </trans-unit>
       <trans-unit id="FMD.faqreader.1">
         <source>Shows the answer to a frequently asked question</source>
@@ -34,6 +35,7 @@
       </trans-unit>
       <trans-unit id="FMD.faqpage.1">
         <source>Shows the FAQ list and FAQ reader on the same page</source>
+        <target>FAQ பட்டியலையும் FAQ வாசிப்பானையும் ஒரே பக்கத்தில் காட்டு</target>
       </trans-unit>
     </body>
   </file>

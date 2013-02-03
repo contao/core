@@ -15,6 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_user.faqp.1">
         <source>Here you can define the FAQ category permissions.</source>
+        <target>இங்கே நீங்கள் FAQ பிரிவுகளுக்கான அனுமதிகளை வரையறுக்க முடியும்</target>
       </trans-unit>
       <trans-unit id="tl_user.faq_legend">
         <source>FAQ permissions</source>

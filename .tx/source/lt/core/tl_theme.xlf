@@ -123,6 +123,9 @@
         <source>No conflicts detected.</source>
         <target>Konfliktų neaptikta.</target>
       </trans-unit>
+      <trans-unit id="tl_theme.store">
+        <source>Contao theme store</source>
+      </trans-unit>
       <trans-unit id="tl_theme.new.0">
         <source>New theme</source>
         <target>Nauja tema</target>

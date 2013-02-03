@@ -45,6 +45,7 @@ $GLOBALS['TL_LANG']['tl_theme']['missing_xml'] = 'Thema "%s" is beschadigd en ka
 $GLOBALS['TL_LANG']['tl_theme']['custom_templates'] = 'Aangepaste templates';
 $GLOBALS['TL_LANG']['tl_theme']['template_exists'] = 'Template <strong>"%s"</strong> bestaat reeds en zal worden overschreven.';
 $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] = 'Geen conflicten aangetroffen.';
+$GLOBALS['TL_LANG']['tl_theme']['store'] = 'Contao theme store';
 $GLOBALS['TL_LANG']['tl_theme']['new'][0] = 'Nieuw thema';
 $GLOBALS['TL_LANG']['tl_theme']['new'][1] = 'Maak een nieuw thema';
 $GLOBALS['TL_LANG']['tl_theme']['show'][0] = 'Thema details';

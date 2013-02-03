@@ -159,6 +159,7 @@
       </trans-unit>
       <trans-unit id="tl_article.gplus">
         <source>Share on Google+</source>
+        <target>Podijeli na Google+</target>
       </trans-unit>
       <trans-unit id="tl_article.header">
         <source>Header</source>

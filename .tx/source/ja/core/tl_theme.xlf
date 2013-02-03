@@ -125,6 +125,10 @@
         <source>No conflicts detected.</source>
         <target>競合を検出しませんでした。</target>
       </trans-unit>
+      <trans-unit id="tl_theme.store">
+        <source>Contao theme store</source>
+        <target>Contaoテーマストア</target>
+      </trans-unit>
       <trans-unit id="tl_theme.new.0">
         <source>New theme</source>
         <target>新しいテーマ</target>

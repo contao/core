@@ -45,6 +45,7 @@ $GLOBALS['TL_LANG']['tl_theme']['missing_xml'] = 'Тема "%s" поврежде
 $GLOBALS['TL_LANG']['tl_theme']['custom_templates'] = 'Пользовательские шаблоны';
 $GLOBALS['TL_LANG']['tl_theme']['template_exists'] = 'Шаблон <strong>"%s"</strong> уже существует и будет перезаписан.';
 $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] = 'Конфликты не обнаружены.';
+$GLOBALS['TL_LANG']['tl_theme']['store'] = 'Магазин шаблонов Contao';
 $GLOBALS['TL_LANG']['tl_theme']['new'][0] = 'Новая тема';
 $GLOBALS['TL_LANG']['tl_theme']['new'][1] = 'Создать новую тему';
 $GLOBALS['TL_LANG']['tl_theme']['show'][0] = 'Детали темы';

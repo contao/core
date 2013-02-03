@@ -499,7 +499,7 @@
       </trans-unit>
       <trans-unit id="tl_content.invisible.0">
         <source>Invisible</source>
-        <target>Niwidoczny</target>
+        <target>Niewidoczny</target>
       </trans-unit>
       <trans-unit id="tl_content.invisible.1">
         <source>Hide the element on the website.</source>

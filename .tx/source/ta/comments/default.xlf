@@ -58,6 +58,18 @@ View: %s
 Edit: %s
 
 If you are moderating comments, you have to log in to the back end to publish it.</source>
+        <target>%s ஒரு புதிய பின்னூட்டத்தை உங்கள் தளத்தில் அளித்துள்ளார்.
+
+---
+
+%s
+
+---
+
+பார்க்க : %s
+தொகுக்க : %s
+
+நீங்கள் பின்னூட்டங்களை மட்டறுப்பவராயின், அதனை வெளியிட நீங்கள் நிருவாக முகப்பினுள் உள்நுழைய வேண்டும்.</target>
       </trans-unit>
       <trans-unit id="MSC.com_confirm">
         <source>Your comment has been added and is now pending for approval.</source>
@@ -106,6 +118,17 @@ a new comment has been added on a page you have subscribed to:
 To cancel your subscription, please click here:
 %s
 </source>
+        <target>வணக்கம் %s,
+
+நீங்கள் சந்தாதாரராயுள்ள பக்கமொன்றில் புதிய பின்னூட்டமொன்று இடப்பட்டுள்ளது:
+
+%s
+
+---
+
+உங்கள் சந்தாவினை இடைநிறுத்த, தயவுசெய்து இங்கே சொடுக்கவும்:
+%s
+</target>
       </trans-unit>
     </body>
   </file>

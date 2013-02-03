@@ -83,6 +83,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidDate">
         <source>Invalid date &quot;%s&quot;!</source>
+        <target>Érvénytelen dátum: &quot;%s&quot;.</target>
       </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
@@ -110,6 +111,7 @@
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
+        <target>Nem lehet áthelyezni: %s -t %s helyre, mert a cél létezik!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidReferer">
         <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
@@ -1121,6 +1123,7 @@
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
         <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>Tudjon meg többet, hogyan gyorsíthatja fel a munkafolyamatot a &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;gyorsbillentyűk&lt;/a&gt; használatával.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1742,7 +1745,7 @@ Ezt az e-mail a Contao rendszer generálta. Nem tud rá közvetlenül válaszoln
       </trans-unit>
       <trans-unit id="MSC.noVersions">
         <source>Currently there are no versions.</source>
-        <target>Jelenleg nem található verzió.</target>
+        <target>Jelenleg nem található korábbi verzió.</target>
       </trans-unit>
       <trans-unit id="MSC.latestChanges">
         <source>Latest changes</source>
@@ -1966,6 +1969,7 @@ Ezt az e-mail a Contao rendszer generálta. Nem tud rá közvetlenül válaszoln
       </trans-unit>
       <trans-unit id="MSC.templatesTheme">
         <source>Theme %s</source>
+        <target>Téma: %s</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>
@@ -1973,27 +1977,35 @@ Ezt az e-mail a Contao rendszer generálta. Nem tud rá közvetlenül válaszoln
       </trans-unit>
       <trans-unit id="UNITS.1">
         <source>KiB</source>
+        <target>KiB</target>
       </trans-unit>
       <trans-unit id="UNITS.2">
         <source>MiB</source>
+        <target>MiB</target>
       </trans-unit>
       <trans-unit id="UNITS.3">
         <source>GiB</source>
+        <target>GiB</target>
       </trans-unit>
       <trans-unit id="UNITS.4">
         <source>TiB</source>
+        <target>TiB</target>
       </trans-unit>
       <trans-unit id="UNITS.5">
         <source>PiB</source>
+        <target>PiB</target>
       </trans-unit>
       <trans-unit id="UNITS.6">
         <source>EiB</source>
+        <target>EiB</target>
       </trans-unit>
       <trans-unit id="UNITS.7">
         <source>ZiB</source>
+        <target>ZiB</target>
       </trans-unit>
       <trans-unit id="UNITS.8">
         <source>YiB</source>
+        <target>YiB</target>
       </trans-unit>
       <trans-unit id="CONFIRM.do">
         <source>Module</source>

@@ -45,6 +45,7 @@ $GLOBALS['TL_LANG']['tl_theme']['missing_xml'] = 'テーマ"%s"は破損して�
 $GLOBALS['TL_LANG']['tl_theme']['custom_templates'] = 'カスタムテンプレート';
 $GLOBALS['TL_LANG']['tl_theme']['template_exists'] = '既存のテンプレート<strong>"%s"</strong>を上書きします。';
 $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] = '競合を検出しませんでした。';
+$GLOBALS['TL_LANG']['tl_theme']['store'] = 'Contaoテーマストア';
 $GLOBALS['TL_LANG']['tl_theme']['new'][0] = '新しいテーマ';
 $GLOBALS['TL_LANG']['tl_theme']['new'][1] = '新しくテーマを作成';
 $GLOBALS['TL_LANG']['tl_theme']['show'][0] = 'テーマの詳細';

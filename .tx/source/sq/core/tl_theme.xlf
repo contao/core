@@ -125,6 +125,10 @@
         <source>No conflicts detected.</source>
         <target>Asnjë konflikt i zbuluar.</target>
       </trans-unit>
+      <trans-unit id="tl_theme.store">
+        <source>Contao theme store</source>
+        <target>Depo e motiveve të Cantao-së</target>
+      </trans-unit>
       <trans-unit id="tl_theme.new.0">
         <source>New theme</source>
         <target>Paraqitje të re</target>
