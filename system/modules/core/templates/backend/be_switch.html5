@@ -41,7 +41,7 @@
 <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 <?php if ($this->isAdmin): ?>
 <label for="ctrl_user"><?php echo $this->feUser; ?>:</label> 
-<input type="text" name="user" id="ctrl_user" list="userlist" class="tl_text user" value="<?php echo $this->user; ?>" autocomplete="off">
+<input type="text" name="user" id="ctrl_user" list="userlist" class="tl_text user" placeholder="<?php echo $this->username; ?>" value="<?php echo $this->user; ?>" autocomplete="off">
 <datalist id="userlist"></datalist>
 <?php endif; ?>
 <label for="ctrl_unpublished"><?php echo $this->hiddenElements; ?>:</label> 
@@ -51,7 +51,7 @@
 </select> 
 <input type="submit" class="tl_submit" value="<?php echo $this->apply; ?>"> 
 <input type="button" class="tl_submit" value="<?php echo $this->reload; ?>" onclick="parent.frames[1].location.reload()"> 
-<img src="<?php echo $this->closeSrc; ?>" width="12" height="12" alt="Close preview bar" class="close" onclick="parent.location.href=parent.frames[1].location.href">
+<a href="javascript:parent.location.href=parent.frames[1].location.href" class="close">&times;</a>
 </div>
 </form>
 </div>
