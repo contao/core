@@ -675,7 +675,7 @@ class Theme extends \Backend
 						}
 
 						// Replace the file paths in multiSRC fields with their tl_files ID
-						elseif (($table == 'tl_theme' && $name == 'folders') || ($table == 'tl_module' && $name == 'multiSRC') || ($table == 'tl_layout' && $name == 'external'))
+						elseif (($table == 'tl_theme' && $name == 'folders') || ($table == 'tl_module' && ($name == 'multiSRC' || $name == 'orderSRC')) || ($table == 'tl_layout' && ($name == 'external' || $name == 'orderExt')))
 						{
 							$tmp = deserialize($value);
 
@@ -697,7 +697,14 @@ class Theme extends \Backend
 									$tmp[$kk] = $objFile->id;
 								}
 
-								$value = serialize($tmp);
+								if (substr($name, 0, 5) == 'order')
+								{
+									$value = implode(',', $tmp);
+								}
+								else
+								{
+									$value = serialize($tmp);
+								}
 							}
 						}
 
@@ -983,9 +990,20 @@ class Theme extends \Backend
 			}
 
 			// Replace the IDs of multiSRC fields with their paths (see #4952)
-			elseif (($table->getAttribute('name') == 'tl_theme' && $k == 'folders') || ($table->getAttribute('name') == 'tl_module' && $k == 'multiSRC') || ($table->getAttribute('name') == 'tl_layout' && $k == 'external'))
+			elseif (($table->getAttribute('name') == 'tl_theme' && $k == 'folders') || ($table->getAttribute('name') == 'tl_module' && ($k == 'multiSRC' || $k == 'orderSRC')) || ($table->getAttribute('name') == 'tl_layout' && ($k == 'external' || $k == 'orderExt')))
 			{
-				$arrFiles = deserialize($v);
+				if (substr($k, 0, 5) == 'order')
+				{
+					$arrFiles = array();
+					if (!empty($v))
+					{
+						$arrFiles = array_map('intval', explode(',', $v));
+					}
+				}
+				else
+				{
+					$arrFiles = deserialize($v);
+				}
 
 				if (is_array($arrFiles) && !empty($arrFiles))
 				{
