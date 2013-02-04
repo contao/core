@@ -204,7 +204,16 @@ class ClassLoader
 	 */
 	public static function scanAndRegister()
 	{
-		foreach (scan(TL_ROOT . '/system/modules') as $file)
+		$arrModules = array_unique
+		(
+			array_merge
+			(
+				array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository'),
+				scan(TL_ROOT . '/system/modules')
+			)
+		);
+
+		foreach ($arrModules as $file)
 		{
 			$path = TL_ROOT . '/system/modules/' . $file;
 
