@@ -446,11 +446,6 @@ class tl_files extends Backend
 			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}
 
-		if (is_file(TL_ROOT .'/'. $dc->path .'/'. $varValue . $dc->extension))
-		{
-			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['fileExists'], $dc->path .'/'. $varValue . $dc->extension));
-		}
-
 		return $varValue;
 	}
 

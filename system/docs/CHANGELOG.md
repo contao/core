@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Also check whether the target exists when creating new folders (see #5260).
+
+### Fixed
 Load the core `autoload.php` files first (see #5261).
 
 ### Fixed

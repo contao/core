@@ -129,7 +129,7 @@
         <source>The file or folder "%s" is invalid!</source>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
-        <source>The file "%s" already exists!</source>
+        <source>The file or folder "%s" already exists!</source>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>

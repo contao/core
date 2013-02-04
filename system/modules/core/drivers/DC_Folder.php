@@ -1889,6 +1889,12 @@ window.addEvent(\'domready\', function() {
 				}
 			}
 
+			// The target exists
+			if (file_exists(TL_ROOT . '/' . $this->strPath . '/' . $varValue . $this->strExtension))
+			{
+				throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['fileExists'], $varValue));
+			}
+
 			$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
 
 			// Update the database
@@ -1906,7 +1912,7 @@ window.addEvent(\'domready\', function() {
 				}
 
 				// New folders
-				if (stristr($this->intId, '__new__') == true)
+				if (stristr($this->intId, '__new__') !== false)
 				{
 					// Create the DB entry
 					$objFile = new \FilesModel();
@@ -1917,6 +1923,7 @@ window.addEvent(\'domready\', function() {
 					$objFile->name   = $varValue;
 					$objFile->hash   = md5('');
 					$objFile->save();
+
 					$this->objActiveRecord = $objFile;
 
 					// Add a log entry
@@ -1932,6 +1939,7 @@ window.addEvent(\'domready\', function() {
 					$objFile->path = $this->strPath . '/' . $varValue . $this->strExtension;
 					$objFile->name = $varValue . $this->strExtension;
 					$objFile->save();
+
 					$this->objActiveRecord = $objFile;
 
 					// Add a log entry
@@ -1978,7 +1986,7 @@ window.addEvent(\'domready\', function() {
 
 			$this->varValue = $varValue;
 		}
-		elseif ($this->blnIsDbAssisted)
+		elseif ($this->blnIsDbAssisted && $this->objActiveRecord !== null)
 		{
 			// Convert date formats into timestamps
 			if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
