@@ -80,6 +80,13 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 				'class'               => 'header_theme_import',
 				'attributes'          => 'onclick="Backend.getScrollOffset()"'
 			),
+			'store' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_theme']['store'],
+				'href'                => 'key=themeStore',
+				'class'               => 'header_store',
+				'button_callback'     => array('tl_theme', 'getThemeStoreLink')
+			),
 			'all' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
@@ -267,6 +274,16 @@ class tl_theme extends Backend
 	public function scheduleUpdate()
 	{
 		$this->Session->set('style_sheet_update_all', true);
+	}
+
+
+	/**
+	 * Return the theme store link
+	 * @return array
+	 */
+	public function getThemeStoreLink()
+	{
+		return ' &nbsp; :: &nbsp; <a href="https://themes.contao.org" target="_blank" title="' . specialchars($GLOBALS['TL_LANG']['tl_theme']['store'][1]) . '" class="header_store">' . $GLOBALS['TL_LANG']['tl_theme']['store'][0] . '</a>';
 	}
 
 

@@ -65,7 +65,6 @@ $GLOBALS['TL_LANG']['tl_theme']['missing_xml']      = 'Das Theme "%s" ist fehler
 $GLOBALS['TL_LANG']['tl_theme']['custom_templates'] = 'Eigene Templates';
 $GLOBALS['TL_LANG']['tl_theme']['template_exists']  = 'Das Template <strong>"%s"</strong> existiert bereits und wird überschrieben.';
 $GLOBALS['TL_LANG']['tl_theme']['templates_ok']     = 'Keine Konflikte festgestellt.';
-$GLOBALS['TL_LANG']['tl_theme']['store']            = 'Contao Theme-Store';
 
 
 /**
@@ -80,5 +79,6 @@ $GLOBALS['TL_LANG']['tl_theme']['modules']     = array('Module', 'Die Frontend-M
 $GLOBALS['TL_LANG']['tl_theme']['layout']      = array('Seitenlayouts', 'Die Seitenlayouts des Theme ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_theme']['importTheme'] = array('Theme importieren', 'Ein neues Theme importieren');
 $GLOBALS['TL_LANG']['tl_theme']['exportTheme'] = array('Exportieren', 'Theme ID %s exportieren');
+$GLOBALS['TL_LANG']['tl_theme']['store']       = array('Theme-Store', 'Weitere Themes im Contao Theme-Store finden');
 
 ?>

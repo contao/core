@@ -65,7 +65,6 @@ $GLOBALS['TL_LANG']['tl_theme']['missing_xml']      = 'Theme "%s" is corrupt and
 $GLOBALS['TL_LANG']['tl_theme']['custom_templates'] = 'Custom templates';
 $GLOBALS['TL_LANG']['tl_theme']['template_exists']  = 'The template <strong>"%s"</strong> exists and will be overwritten.';
 $GLOBALS['TL_LANG']['tl_theme']['templates_ok']     = 'No conflicts detected.';
-$GLOBALS['TL_LANG']['tl_theme']['store']            = 'Contao theme store';
 
 
 /**
@@ -80,5 +79,6 @@ $GLOBALS['TL_LANG']['tl_theme']['modules']     = array('Modules', 'Edit the fron
 $GLOBALS['TL_LANG']['tl_theme']['layout']      = array('Layouts', 'Edit the page layouts of theme ID %s');
 $GLOBALS['TL_LANG']['tl_theme']['importTheme'] = array('Theme import', 'Import new themes');
 $GLOBALS['TL_LANG']['tl_theme']['exportTheme'] = array('Export', 'Export theme ID %s');
+$GLOBALS['TL_LANG']['tl_theme']['store']       = array('Theme store', 'Find more themes in the Contao theme store');
 
 ?>
