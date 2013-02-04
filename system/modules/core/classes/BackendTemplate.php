@@ -188,8 +188,8 @@ class BackendTemplate extends \Template
 	 */
 	protected function getDateString()
 	{
-		return 'window.addEvent("domready",function(){'
-			. 'Locale.define("en-US","Date",{'
+		return
+			'Locale.define("en-US","Date",{'
 				. 'months:["' . implode('","', $GLOBALS['TL_LANG']['MONTHS']) . '"],'
 				. 'days:["' . implode('","', $GLOBALS['TL_LANG']['DAYS']) . '"],'
 				. 'months_abbr:["' . implode('","', $GLOBALS['TL_LANG']['MONTHS_SHORT']) . '"],'
@@ -202,7 +202,6 @@ class BackendTemplate extends \Template
 				. 'apply_range:"' . $GLOBALS['TL_LANG']['DP']['apply_range'] . '",'
 				. 'cancel:"' . $GLOBALS['TL_LANG']['DP']['cancel'] . '",'
 				. 'week:"' . $GLOBALS['TL_LANG']['DP']['week'] . '"'
-			. '});'
-		. '});';
+			. '});';
 	}
 }
