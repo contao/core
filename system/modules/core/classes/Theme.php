@@ -675,7 +675,7 @@ class Theme extends \Backend
 						}
 
 						// Replace the file paths in multiSRC fields with their tl_files ID
-						elseif (($table == 'tl_theme' && $name == 'folders') || ($table == 'tl_module' && $name == 'multiSRC') || ($table == 'tl_layout' && $name == 'external'))
+						elseif (($table == 'tl_theme' && $name == 'folders') || ($table == 'tl_module' && $name == 'multiSRC') || ($table == 'tl_module' && $name == 'orderSRC') || ($table == 'tl_layout' && $name == 'external') || ($table == 'tl_layout' && $name == 'orderExt'))
 						{
 							$tmp = deserialize($value);
 
@@ -697,7 +697,7 @@ class Theme extends \Backend
 									$tmp[$kk] = $objFile->id;
 								}
 
-								$value = serialize($tmp);
+								$value = ($name == 'orderSRC' || $name == 'orderExt') ? implode(',', $tmp) : serialize($tmp);
 							}
 						}
 
@@ -949,6 +949,8 @@ class Theme extends \Backend
 	 */
 	protected function addDataRow(\DOMDocument $xml, \DOMElement $table, \Database\Result $objData)
 	{
+		$t = $table->getAttribute('name');
+
 		$row = $xml->createElement('row');
 		$row = $table->appendChild($row);
 
@@ -964,7 +966,7 @@ class Theme extends \Backend
 			}
 
 			// Replace the IDs of singleSRC fields with their path (see #4952)
-			elseif (($table->getAttribute('name') == 'tl_theme' && $k == 'screenshot') || ($table->getAttribute('name') == 'tl_module' && $k == 'singleSRC') || ($table->getAttribute('name') == 'tl_module' && $k == 'reg_homeDir'))
+			elseif (($t == 'tl_theme' && $k == 'screenshot') || ($t == 'tl_module' && $k == 'singleSRC') || ($t == 'tl_module' && $k == 'reg_homeDir'))
 			{
 				$objFile = \FilesModel::findByPk($v);
 
@@ -983,9 +985,9 @@ class Theme extends \Backend
 			}
 
 			// Replace the IDs of multiSRC fields with their paths (see #4952)
-			elseif (($table->getAttribute('name') == 'tl_theme' && $k == 'folders') || ($table->getAttribute('name') == 'tl_module' && $k == 'multiSRC') || ($table->getAttribute('name') == 'tl_layout' && $k == 'external'))
+			elseif (($t == 'tl_theme' && $k == 'folders') || ($t == 'tl_module' && $k == 'multiSRC') || ($t == 'tl_module' && $k == 'orderSRC') || ($t == 'tl_layout' && $k == 'external') || ($t == 'tl_layout' && $k == 'orderExt'))
 			{
-				$arrFiles = deserialize($v);
+				$arrFiles = ($k == 'orderSRC' || $k == 'orderExt') ? explode(',', $v) : deserialize($v);
 
 				if (is_array($arrFiles) && !empty($arrFiles))
 				{

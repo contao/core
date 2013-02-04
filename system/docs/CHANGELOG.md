@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Preserve the order of multi source fields when exporting a theme (see #5237).
+
+### Fixed
 Also check whether the target exists when creating new folders (see #5260).
 
 ### Fixed
