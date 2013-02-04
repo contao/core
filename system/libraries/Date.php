@@ -85,7 +85,7 @@ class Date extends System
 	public function __construct($intTstamp=false, $strFormat=false)
 	{
 		$this->intTstamp = ($intTstamp !== false) ? $intTstamp : time();
-		$this->strFormat = ($strFormat !== false) ? $strFormat : $GLOBALS['TL_CONFIG']['dateFormat'];
+		$this->strFormat = ($strFormat !== false) ? $strFormat : $this->getNumericDateFormat();
 
 		if (!preg_match('/^\-?[0-9]+$/', $this->intTstamp) || preg_match('/^[a-zA-Z]+$/', $this->strFormat))
 		{
@@ -93,9 +93,9 @@ class Date extends System
 		}
 
 		// Create dates
-		$this->strDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->intTstamp);
-		$this->strTime = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $this->intTstamp);
-		$this->strDatim = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $this->intTstamp);
+		$this->strDate = $this->parseDate($this->getNumericDateFormat(), $this->intTstamp);
+		$this->strTime = $this->parseDate($this->getNumericTimeFormat(), $this->intTstamp);
+		$this->strDatim = $this->parseDate($this->getNumericDatimFormat(), $this->intTstamp);
 
 		$intYear = date('Y', $this->intTstamp);
 		$intMonth = date('m', $this->intTstamp);
@@ -211,10 +211,10 @@ class Date extends System
 	{
 		if (!$strFormat)
 		{
-			$strFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
+			$strFormat = $this->getNumericDateFormat();
 		}
 
-		if (preg_match('/[BbCcDEeFfIJKkLlMNOoPpQqRrSTtUuVvWwXxZz]+/', $strFormat))
+		if (!$this->isNumericFormat($strFormat))
 		{
 			throw new Exception(sprintf('Invalid date format "%s"', $strFormat));
 		}
@@ -263,10 +263,10 @@ class Date extends System
 	{
 		if (!$strFormat)
 		{
-			$strFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
+			$strFormat = $this->getNumericDateFormat();
 		}
 
-		if (preg_match('/[BbCcDEeFfIJKkLlMNOoPpQqRrSTtUuVvWwXxZz]+/', $strFormat))
+		if (!$this->isNumericFormat($strFormat))
 		{
 			throw new Exception(sprintf('Invalid date format "%s"', $strFormat));
 		}
@@ -297,10 +297,11 @@ class Date extends System
 			if (isset($arrCharacterMapper[$strCharacter]))
 			{
 				$arrInputFormat[$strFormat] .= $arrCharacterMapper[$strCharacter];
-				continue;
 			}
-
-			$arrInputFormat[$strFormat] .= $strCharacter;
+			else
+			{
+				$arrInputFormat[$strFormat] .= $strCharacter;
+			}
 		}
 
 		return $arrInputFormat[$strFormat];
@@ -313,7 +314,7 @@ class Date extends System
 	 */
 	protected function dateToUnix()
 	{
-		if (preg_match('/[BbCcDEeFfIJKkLlMNOoPpQqRrSTtUuVvWwXxZz]+/', $this->strFormat))
+		if (!$this->isNumericFormat($this->strFormat))
 		{
 			throw new Exception(sprintf('Invalid date format "%s"', $this->strFormat));
 		}
@@ -461,6 +462,77 @@ class Date extends System
 		}
 
 		return preg_replace('/([a-zA-Z])/', '%$1', implode($chunks));
+	}
+
+
+	/**
+	 * Check for a numeric date format
+	 * @param string
+	 * @return boolean
+	 */
+	public function isNumericFormat($strFormat)
+	{
+		return !preg_match('/[BbCcDEeFfIJKkLlMNOoPpQqRrSTtUuVvWwXxZz]+/', $strFormat);
+	}
+
+
+	/**
+	 * Return the numeric date format string
+	 * @return string
+	 */
+	public function getNumericDateFormat()
+	{
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->dateFormat != '' && $this->isNumericFormat($objPage->dateFormat))
+			{
+				return $objPage->dateFormat;
+			}
+		}
+
+		return $GLOBALS['TL_CONFIG']['dateFormat'];
+	}
+
+
+	/**
+	 * Return the numeric time format string
+	 * @return string
+	 */
+	public function getNumericTimeFormat()
+	{
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->timeFormat != '' && $this->isNumericFormat($objPage->timeFormat))
+			{
+				return $objPage->timeFormat;
+			}
+		}
+
+		return $GLOBALS['TL_CONFIG']['timeFormat'];
+	}
+
+
+	/**
+	 * Return the numeric datim format string
+	 * @return string
+	 */
+	public function getNumericDatimFormat()
+	{
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->datimFormat != '' && $this->isNumericFormat($objPage->datimFormat))
+			{
+				return $objPage->datimFormat;
+			}
+		}
+
+		return $GLOBALS['TL_CONFIG']['datimFormat'];
 	}
 }
 

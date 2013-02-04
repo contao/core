@@ -5,6 +5,9 @@ Version 2.11.9 (2013-XX-XX)
 ---------------------------
 
 ### Fixed
+Support numeric front end dates in the form generator (see #5238).
+
+### Fixed
 Support whitespace characters when parsing simple tokens (see #5323).
 
 ### Fixed
