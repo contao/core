@@ -5,6 +5,9 @@ Version 2.11.9 (2013-XX-XX)
 ---------------------------
 
 ### Fixed
+Support whitespace characters when parsing simple tokens (see #5323).
+
+### Fixed
 Allow to run multiple TinyMCE instances with different configurations on the
 same page (thanks to Andreas Schempp) (see #4453).
 
