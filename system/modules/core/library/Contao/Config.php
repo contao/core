@@ -290,9 +290,9 @@ class Config
 			return (array) $this->arrCache['activeModules']; // (array) = PHP 5.1.2 fix
 		}
 
-		$arrActiveModules = array();
-		$arrCoreModules = array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository');
-		$arrDeprecatedModules = array('backend', 'frontend', 'rep_base', 'rep_client', 'registration', 'rss_reader', 'tpl_editor');
+		$arrActiveModules    = array();
+		$arrCoreModules      = explode(',', TL_CORE_MODULES);
+		$arrLegacyModules    = explode(',', TL_LEGACY_MODULES);
 		$arrExtensionModules = scan(TL_ROOT . '/system/modules');
 
 		// Load the core modules first
@@ -309,7 +309,7 @@ class Config
 		{
 			foreach ($arrExtensionModules as $strModule)
 			{
-				if (in_array($strModule, $arrDeprecatedModules))
+				if (in_array($strModule, $arrLegacyModules))
 				{
 					continue; // see #4907
 				}

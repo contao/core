@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Load the core `autoload.php` files first (see #5261).
+
+### Fixed
 Support `null` as column default value in the DCA (see #5252).
 
 ### New
