@@ -5,6 +5,10 @@ Version 2.11.9 (2013-XX-XX)
 ---------------------------
 
 ### Fixed
+Allow to run multiple TinyMCE instances with different configurations on the
+same page (thanks to Andreas Schempp) (see #4453).
+
+### Fixed
 Correctly trigger the "saveNewPassword" hook (see #5247).
 
 ### Fixed
