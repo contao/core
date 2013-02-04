@@ -597,7 +597,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Get all default values for the new entry
 		foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'] as $k=>$v)
 		{
-			if (isset($v['default']))
+			// Use array_key_exists here (see #5252)
+			if (array_key_exists('default', $v))
 			{
 				$this->set[$k] = is_array($v['default']) ? serialize($v['default']) : $v['default'];
 
@@ -805,7 +806,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					// Reset doNotCopy and fallback fields to their default value
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['doNotCopy'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['fallback'])
 					{
-						$v = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default'] ? (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) ? serialize($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) : '';
+						// Use array_key_exists to allow NULL (see #5252)
+						if (array_key_exists('default', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]))
+						{
+							$v = is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) ? serialize($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default'];
+						}
 
 						// Encrypt the default value (see #3740)
 						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['encrypt'])
@@ -998,7 +1003,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						// Reset all unique, doNotCopy and fallback fields to their default value
 						if ($GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['unique'] || $GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['doNotCopy'] || $GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['fallback'])
 						{
-							$vv = $GLOBALS['TL_DCA'][$v]['fields'][$kk]['default'] ? ((is_array($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default'])) ? serialize($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) : $GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) : '';
+							// Use array_key_exists to allow NULL (see #5252)
+							if (array_key_exists('default', $GLOBALS['TL_DCA'][$v]['fields'][$kk]))
+							{
+								$vv = is_array($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) ? serialize($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) : $GLOBALS['TL_DCA'][$v]['fields'][$kk]['default'];
+							}
 
 							// Encrypt the default value (see #3740)
 							if ($GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['encrypt'])
@@ -2157,8 +2166,11 @@ window.addEvent(\'domready\', function() {
 					$this->strInputName = $v.'_'.$this->intId;
 					$formFields[] = $v.'_'.$this->intId;
 
-					// Set the default value and try to load the current value from DB
-					$this->varValue = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default'] ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default'] : '';
+					// Set the default value and try to load the current value from DB (see #5252)
+					if (array_key_exists('default', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]))
+					{
+						$this->varValue = is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default']) ? serialize($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default']) : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default'];
+					}
 
 					if ($objRow->$v !== false)
 					{
