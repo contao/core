@@ -45,7 +45,6 @@ $GLOBALS['TL_LANG']['tl_theme']['missing_xml'] = 'Vzhled "%s" je poškozený a n
 $GLOBALS['TL_LANG']['tl_theme']['custom_templates'] = 'Vlastní šablony';
 $GLOBALS['TL_LANG']['tl_theme']['template_exists'] = 'Šablona <strong>"%s"</strong> existuje a bude přepsána.';
 $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] = 'Nejsou zjištěny žádné konflikty.';
-$GLOBALS['TL_LANG']['tl_theme']['store'] = 'Obchod vzhledů pro Contao';
 $GLOBALS['TL_LANG']['tl_theme']['new'][0] = 'Nový vzhled';
 $GLOBALS['TL_LANG']['tl_theme']['new'][1] = 'Vytvořit nový vzhled';
 $GLOBALS['TL_LANG']['tl_theme']['show'][0] = 'Podrobnosti';
