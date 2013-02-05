@@ -254,12 +254,36 @@ class Installer extends \Controller
 	 */
 	protected function getFromDca()
 	{
+		$included = array();
 		$arrReturn = array();
-		$arrTables = \DcaExtractor::createAllExtracts();
 
-		foreach ($arrTables as $strTable=>$objTable)
+		// Only check the active modules (see #4541)
+		foreach ($this->Config->getActiveModules() as $strModule)
 		{
-			$arrReturn[$strTable] = $objTable->getDbInstallerArray();
+			$strDir = 'system/modules/' . $strModule . '/dca';
+
+			if (!is_dir(TL_ROOT . '/' . $strDir))
+			{
+				continue;
+			}
+
+			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
+			{
+				if (in_array($strFile, $included) || $strFile == '.htaccess')
+				{
+					continue;
+				}
+
+				$strTable = substr($strFile, 0, -4);
+				$objExtract = new \DcaExtractor($strTable);
+
+				if ($objExtract->isDbTable())
+				{
+					$arrReturn[$strTable] = $objExtract->getDbInstallerArray();
+				}
+
+				$included[] = $strFile;
+			}
 		}
 
 		return $arrReturn;

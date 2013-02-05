@@ -40,17 +40,6 @@ body.popup {
 	text-align:right;
 	color:#666966;
 }
-#safe_mode {
-	margin:0;
-	background-image:none;
-	padding:8px 12px 10px;
-	border-top:1px solid #ccc;
-}
-#safe_mode a {
-	float:right;
-	margin:1px 3px 0 24px;
-	color:#666966;
-}
 
 /* Container */
 #container {
@@ -230,6 +219,17 @@ h2.sub_headline_index {
 }
 .nobg .tl_error,.nobg .tl_confirm,.nobg .tl_info,.nobg .tl_new {
 	background-color:transparent;
+}
+.tl_permalert {
+	margin:0;
+	background-image:none;
+	padding:8px 12px 10px;
+	border-top:1px solid #ccc;
+}
+.tl_permalert a {
+	float:right;
+	margin:1px 3px 0 24px;
+	color:#666966;
 }
 
 /* Filter */

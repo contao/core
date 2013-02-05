@@ -250,9 +250,6 @@ class Updater extends \Controller
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
 		);
 
-		// Create the DCA extracts (will also create the DCA cache)
-		\DcaExtractor::createAllExtracts();
-
 		// Add the "numberOfItems" field
 		$this->Database->query("ALTER TABLE `tl_module` ADD `numberOfItems` smallint(5) unsigned NOT NULL default '0'");
 		$this->Database->query("UPDATE `tl_module` SET `numberOfItems`=`rss_numberOfItems` WHERE `rss_numberOfItems`>0");
@@ -454,37 +451,56 @@ class Updater extends \Controller
 	 */
 	public function updateFileTreeFields()
 	{
+		$arrFiles = array();
+
+		// Parse all active modules
+		foreach ($this->Config->getActiveModules() as $strModule)
+		{
+			$strDir = 'system/modules/' . $strModule . '/dca';
+
+			if (!is_dir(TL_ROOT . '/' . $strDir))
+			{
+				continue;
+			}
+
+			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
+			{
+				if (in_array($strFile, $arrFiles) || $strFile == '.htaccess')
+				{
+					continue;
+				}
+
+				$arrFiles[] = substr($strFile, 0, -4);
+			}
+		}
+
 		$arrFields = array();
 
 		// Find all fileTree fields
-		foreach (scan(TL_ROOT . '/system/cache/dca') as $strFile)
+		foreach ($arrFiles as $strTable)
 		{
-			if ($strFile != '.htaccess')
+			$this->loadDataContainer($strTable);
+			$arrConfig = &$GLOBALS['TL_DCA'][$strTable]['config'];
+
+			// Skip non-database DCAs
+			if ($arrConfig['dataContainer'] == 'File')
 			{
-				$strTable = str_replace('.php', '', $strFile);
-				$this->loadDataContainer($strTable);
-				$arrConfig = &$GLOBALS['TL_DCA'][$strTable]['config'];
+				continue;
+			}
+			if ($arrConfig['dataContainer'] == 'Folder' && !$arrConfig['databaseAssisted'])
+			{
+				continue;
+			}
 
-				// Skip non-database DCAs
-				if ($arrConfig['dataContainer'] == 'File')
+			foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $strField=>$arrField)
+			{
+				// FIXME: support other field types
+				if ($arrField['inputType'] == 'fileTree')
 				{
-					continue;
-				}
-				if ($arrConfig['dataContainer'] == 'Folder' && !$arrConfig['databaseAssisted'])
-				{
-					continue;
-				}
-
-				foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $strField=>$arrField)
-				{
-					// FIXME: support other field types
-					if ($arrField['inputType'] == 'fileTree')
+					if ($this->Database->fieldExists($strField, $strTable))
 					{
-						if ($this->Database->fieldExists($strField, $strTable))
-						{
-							$key = $arrField['eval']['multiple'] ? 'multiple' : 'single';
-							$arrFields[$key][] = $strTable . '.' . $strField;
-						}
+						$key = $arrField['eval']['multiple'] ? 'multiple' : 'single';
+						$arrFields[$key][] = $strTable . '.' . $strField;
 					}
 				}
 			}

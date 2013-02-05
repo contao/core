@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### Changed
+Do not build the internal cache automatically (see #5307).
+
+### Changed
 Replaced the member select menu in the front end preview pane with a text field
 to enter a username (see #5320). The text field supports autocompletion based on
 an HTML5 data list which is dynamically filled via Ajax.

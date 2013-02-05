@@ -2001,33 +2001,22 @@ abstract class Controller extends \System
 
 		$strCacheFile = 'system/cache/dca/' . $strName . '.php';
 
-		// Load the cache file or generate it if it does not yet exist
+		// Try to load from cache
 		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
 		{
 			include TL_ROOT . '/' . $strCacheFile;
 		}
 		else
 		{
-			// Generate the cache file
-			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php', true);
-			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
-
-			// Parse all active modules
 			foreach ($this->Config->getActiveModules() as $strModule)
 			{
 				$strFile = 'system/modules/' . $strModule . '/dca/' . $strName . '.php';
 
 				if (file_exists(TL_ROOT . '/' . $strFile))
 				{
-					$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
+					include TL_ROOT . '/' . $strFile;
 				}
 			}
-
-			// Include the aggregated file before it is closed
-			include TL_ROOT . '/system/tmp/' . $objCacheFile->tmpname;
-
-			// Close the file (moves it to its final destination)
-			$objCacheFile->close();
 		}
 
 		// HOOK: allow to load custom settings

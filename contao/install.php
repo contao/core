@@ -98,18 +98,10 @@ class InstallTool extends Backend
 			$this->reload();
 		}
 
-		// Store the license acception
-		if (Input::post('FORM_SUBMIT') == 'tl_license')
-		{
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['licenseAccepted']", true);
-			$this->reload();
-		}
-
 		// Show the license text
 		if (!$GLOBALS['TL_CONFIG']['licenseAccepted'])
 		{
-			$this->Template->license = true;
-			$this->outputAndExit();
+			$this->acceptLicense();
 		}
 
 		// Log in the user
@@ -123,12 +115,14 @@ class InstallTool extends Backend
 		{
 			$this->setAuthCookie();
 		}
+
 		// Login required
 		elseif (!Input::cookie('TL_INSTALL_AUTH') || $_SESSION['TL_INSTALL_AUTH'] == '' || Input::cookie('TL_INSTALL_AUTH') != $_SESSION['TL_INSTALL_AUTH'] || $_SESSION['TL_INSTALL_EXPIRE'] < time())
 		{
 			$this->Template->login = true;
 			$this->outputAndExit();
 		}
+
 		// Authenticated, so renew the cookie
 		else
 		{
@@ -172,6 +166,10 @@ class InstallTool extends Backend
 			$this->outputAndExit();
 		}
 
+		// Purge the internal cache
+		$this->import('Automator');
+		$this->Automator->purgeInternalCache();
+
 		// Set up the database connection
 		$this->setUpDatabaseConnection();
 
@@ -205,15 +203,6 @@ class InstallTool extends Backend
 
 			$_SESSION['sql_commands'] = array();
 			$this->reload();
-		}
-		// Clear the internal cache
-		else
-		{
-			foreach (array('dca', 'language', 'sql') as $folder)
-			{
-				$objFolder = new Folder('system/cache/' . $folder);
-				$objFolder->delete();
-			}
 		}
 
 		// Wait for the tables to be created (see #5061)
@@ -359,6 +348,22 @@ class InstallTool extends Backend
 
 			$this->reload();
 		}
+	}
+
+
+	/**
+	 * Accept the license
+	 */
+	protected function acceptLicense()
+	{
+		if (Input::post('FORM_SUBMIT') == 'tl_license')
+		{
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['licenseAccepted']", true);
+			$this->reload();
+		}
+
+		$this->Template->license = true;
+		$this->outputAndExit();
 	}
 
 
@@ -634,7 +639,6 @@ class InstallTool extends Backend
 			{
 				$this->Template->adminCreated = true;
 			}
-			// Create an admin account
 			elseif (Input::post('FORM_SUBMIT') == 'tl_admin')
 			{
 				// Do not allow special characters in usernames

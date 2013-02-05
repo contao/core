@@ -277,6 +277,9 @@ class RepositoryManager extends RepositoryBackendModule
 						$lickey = '';
 						if ($error) break;
 					} // foreach
+					// PATCH: purge the internal cache
+					$this->import('Automator');
+					$this->Automator->purgeInternalCache();
 				} // if
 			} // if
 
@@ -439,6 +442,9 @@ class RepositoryManager extends RepositoryBackendModule
 						$lickey = '';
 						if ($error) break;
 					} // foreach
+					// PATCH: purge the internal cache
+					$this->import('Automator');
+					$this->Automator->purgeInternalCache();
 				} // if
 			} // if
 		} // foreach
@@ -462,11 +468,6 @@ class RepositoryManager extends RepositoryBackendModule
 				} // foreach
 			} // if
 			$_SESSION['sql_commands'] = array();
-		} else {
-			foreach (array('dca', 'language', 'sql') as $folder) {
-				$objFolder = new Folder('system/cache/' . $folder);
-				$objFolder->delete();
-			} // foreach
 		} // if
 		$this->handleRunOnce(); // PATCH
 		$this->import('Database\\Installer', 'Installer');
@@ -507,6 +508,9 @@ class RepositoryManager extends RepositoryBackendModule
 					$rep->f_stage = $rep->uist_error;
 				else
 					$rep->f_stage = $rep->uist_showlog;
+				// PATCH: purge the internal cache
+				$this->import('Automator');
+				$this->Automator->purgeInternalCache();
 			} // if
 		} else {
 			$rep->f_stage = $rep->uist_confirm;

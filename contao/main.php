@@ -76,11 +76,23 @@ class Main extends Backend
 			$this->redirectToFrontendPage(Input::get('page'), Input::get('article'));
 		}
 
-		// Safe mode off
-		if (Input::get('smo') && $this->User->isAdmin)
+		// Convenience functions
+		if ($this->User->isAdmin)
 		{
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", false);
-			$this->redirect($this->getReferer());
+			// Safe mode off
+			if (Input::get('smo'))
+			{
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", false);
+				$this->redirect($this->getReferer());
+			}
+
+			// Build internal cache
+			if (Input::get('bic'))
+			{
+				$this->import('Automator');
+				$this->Automator->generateInternalCache();
+				$this->redirect($this->getReferer());
+			}
 		}
 
 		$this->loadLanguageFile('default');
@@ -279,12 +291,16 @@ class Main extends Backend
 		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
 		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
-		$this->Template->coreOnlyMode = $GLOBALS['TL_LANG']['MSC']['coreOnlyMode'];
-		$this->Template->isCoreOnlyMode = $GLOBALS['TL_CONFIG']['coreOnlyMode'];
 		$this->Template->loadFonts = $GLOBALS['TL_CONFIG']['loadGoogleFonts'];
 		$this->Template->isAdmin = $this->User->isAdmin;
+		$this->Template->isCoreOnlyMode = $GLOBALS['TL_CONFIG']['coreOnlyMode'];
+		$this->Template->coreOnlyMode = $GLOBALS['TL_LANG']['MSC']['coreOnlyMode'];
 		$this->Template->coreOnlyOff = specialchars($GLOBALS['TL_LANG']['MSC']['coreOnlyOff']);
 		$this->Template->coreOnlyHref = $this->addToUrl('smo=1');
+		$this->Template->needsCacheBuild = (!$GLOBALS['TL_CONFIG']['bypassCache'] && !is_dir(TL_ROOT . '/system/cache/dca'));
+		$this->Template->buildCacheHref = $this->addToUrl('bic=1');
+		$this->Template->buildCacheLink = $GLOBALS['TL_LANG']['MSC']['buildCacheLink'];
+		$this->Template->buildCacheText = $GLOBALS['TL_LANG']['MSC']['buildCacheText'];
 
 		// Front end preview links
 		if (CURRENT_ID != '')

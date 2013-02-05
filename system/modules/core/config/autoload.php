@@ -27,7 +27,6 @@ ClassLoader::addClasses(array
 (
 	// Classes
 	'Contao\Ajax'                      => 'system/modules/core/classes/Ajax.php',
-	'Contao\Automator'                 => 'system/modules/core/classes/Automator.php',
 	'Contao\Backend'                   => 'system/modules/core/classes/Backend.php',
 	'Contao\BackendModule'             => 'system/modules/core/classes/BackendModule.php',
 	'Contao\BackendTemplate'           => 'system/modules/core/classes/BackendTemplate.php',
@@ -91,6 +90,7 @@ ClassLoader::addClasses(array
 	'Contao\FormTextField'             => 'system/modules/core/forms/FormTextField.php',
 
 	// Library
+	'Contao\Automator'                 => 'system/modules/core/library/Contao/Automator.php',
 	'Contao\Cache'                     => 'system/modules/core/library/Contao/Cache.php',
 	'Contao\ClassLoader'               => 'system/modules/core/library/Contao/ClassLoader.php',
 	'Contao\Combiner'                  => 'system/modules/core/library/Contao/Combiner.php',

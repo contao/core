@@ -172,19 +172,11 @@ class Automator extends \Backend
 	 */
 	public function purgeInternalCache()
 	{
-		// system/cache/dca and system/cache/sql
-		foreach (array('system/cache/dca', 'system/cache/sql') as $dir)
+		// Purge
+		foreach (array('dca', 'language', 'sql') as $dir)
 		{
 			// Purge the folder
-			$objFolder = new \Folder($dir);
-			$objFolder->purge();
-		}
-
-		// Walk through the language subfolders
-		foreach (scan(TL_ROOT . '/system/cache/language') as $dir)
-		{
-			// Remove the folder
-			$objFolder = new \Folder('system/cache/language/' . $dir);
+			$objFolder = new \Folder('system/cache/' . $dir);
 			$objFolder->delete();
 		}
 
@@ -383,7 +375,7 @@ class Automator extends \Backend
 			$objFile->append('</urlset>');
 			$objFile->close();
 
-			// Add log entry
+			// Add a log entry
 			$this->log('Generated sitemap "' . $objRoot->sitemapName . '.xml"', 'Automator generateSitemap()', TL_CRON);
 		}
 	}
@@ -422,5 +414,261 @@ class Automator extends \Backend
 			$objFile = new \File('system/logs/' . $strFile, true);
 			$objFile->renameTo('system/logs/' . $strFile . '.1');
 		}
+	}
+
+
+	/**
+	 * Build the internal cache
+	 */
+	public function generateInternalCache()
+	{
+		// Purge
+		$this->purgeInternalCache();
+
+		// Rebuild
+		$this->generateDcaCache();
+		$this->generateLanguageCache();
+		$this->generateDcaExtracts();
+	}
+
+
+	/**
+	 * Create the data container cache files
+	 */
+	public function generateDcaCache()
+	{
+		$arrFiles = array();
+
+		// Parse all active modules
+		foreach ($this->Config->getActiveModules() as $strModule)
+		{
+			$strDir = 'system/modules/' . $strModule . '/dca';
+
+			if (!is_dir(TL_ROOT . '/' . $strDir))
+			{
+				continue;
+			}
+
+			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
+			{
+				if (in_array($strFile, $arrFiles) || $strFile == '.htaccess')
+				{
+					continue;
+				}
+
+				$arrFiles[] = substr($strFile, 0, -4);
+			}
+		}
+
+		// Create one file per table
+		foreach ($arrFiles as $strName)
+		{
+			// Generate the cache file
+			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php', true);
+			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
+
+			// Parse all active modules
+			foreach ($this->Config->getActiveModules() as $strModule)
+			{
+				$strFile = 'system/modules/' . $strModule . '/dca/' . $strName . '.php';
+
+				if (file_exists(TL_ROOT . '/' . $strFile))
+				{
+					$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
+				}
+			}
+
+			// Close the file (moves it to its final destination)
+			$objCacheFile->close();
+		}
+
+		// Add a log entry
+		$this->log('Generated the DCA cache', 'Automator generateDcaCache()', TL_CRON);
+	}
+
+
+	/**
+	 * Create the language cache files
+	 */
+	public function generateLanguageCache()
+	{
+		$arrLanguages = scan(TL_ROOT . '/system/modules/core/languages');
+
+		foreach ($arrLanguages as $strLanguage)
+		{
+			$arrFiles = array();
+
+			// Parse all active modules
+			foreach ($this->Config->getActiveModules() as $strModule)
+			{
+				$strDir = 'system/modules/' . $strModule . '/languages/' . $strLanguage;
+
+				if (!is_dir(TL_ROOT . '/' . $strDir))
+				{
+					continue;
+				}
+
+				foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
+				{
+					if (in_array($strFile, $arrFiles) || $strFile == '.htaccess')
+					{
+						continue;
+					}
+
+					$arrFiles[] = substr($strFile, 0, -4);
+				}
+			}
+
+			// Create one file per table
+			foreach ($arrFiles as $strName)
+			{
+				$strCacheFile = 'system/cache/language/' . $strLanguage . '/' . $strName . '.php';
+
+				// Add a short header with links to transifex.com
+				$strHeader = "<?php\n\n"
+						   . "/**\n"
+						   . " * Contao Open Source CMS\n"
+						   . " * \n"
+						   . " * Copyright (c) 2005-2013 Leo Feyer\n"
+						   . " * \n"
+						   . " * Core translations are managed using Transifex. To create a new translation\n"
+						   . " * or to help to maintain an existing one, please register at transifex.com.\n"
+						   . " * \n"
+						   . " * @link http://help.transifex.com/intro/translating.html\n"
+						   . " * @link https://www.transifex.com/projects/p/contao/language/%s/\n"
+						   . " * \n"
+						   . " * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL\n"
+						   . " */\n";
+
+				// Generate the cache file
+				$objCacheFile = new \File($strCacheFile, true);
+				$objCacheFile->write(sprintf($strHeader, $strLanguage));
+
+				// Parse all active modules and append to the cache file
+				foreach ($this->Config->getActiveModules() as $strModule)
+				{
+					$strFile = 'system/modules/' . $strModule . '/languages/' . $strLanguage . '/' . $strName;
+
+					if (file_exists(TL_ROOT . '/' . $strFile . '.xlf'))
+					{
+						$objCacheFile->append(static::convertXlfToPhp($strFile . '.xlf', $strLanguage));
+					}
+					elseif (file_exists(TL_ROOT . '/' . $strFile . '.php'))
+					{
+						$objCacheFile->append(static::readPhpFileWithoutTags($strFile . '.php'));
+					}
+				}
+
+				// Close the file (moves it to its final destination)
+				$objCacheFile->close();
+			}
+		}
+
+		// Add a log entry
+		$this->log('Generated the language cache', 'Automator generateLanguageCache()', TL_CRON);
+	}
+
+
+	/**
+	 * Create the DCA extract cache files
+	 */
+	public function generateDcaExtracts()
+	{
+		$included = array();
+		$arrExtracts = array();
+
+		// Only check the active modules (see #4541)
+		foreach ($this->Config->getActiveModules() as $strModule)
+		{
+			$strDir = 'system/modules/' . $strModule . '/dca';
+
+			if (!is_dir(TL_ROOT . '/' . $strDir))
+			{
+				continue;
+			}
+
+			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
+			{
+				if (in_array($strFile, $included) || $strFile == '.htaccess')
+				{
+					continue;
+				}
+
+				$strTable = substr($strFile, 0, -4);
+				$objExtract = new \DcaExtractor($strTable);
+
+				if ($objExtract->isDbTable())
+				{
+					$arrExtracts[$strTable] = $objExtract;
+				}
+
+				$included[] = $strFile;
+			}
+		}
+
+		// Create one file per table
+		foreach ($arrExtracts as $strTable=>$objExtract)
+		{
+			// Create the file
+			$objFile = new \File('system/cache/sql/' . $strTable . '.php', true);
+			$objFile->write("<?php\n\n");
+
+			// Meta
+			$arrMeta = $objExtract->getMeta();
+
+			$objFile->append("\$this->arrMeta = array\n(");
+			$objFile->append("\t'engine' => '{$arrMeta['engine']}',");
+			$objFile->append("\t'charset' => '{$arrMeta['charset']}',");
+			$objFile->append(');', "\n\n");
+
+			// Fields
+			$arrFields = $objExtract->getFields();
+			$objFile->append("\$this->arrFields = array\n(");
+
+			foreach ($arrFields as $field=>$sql)
+			{
+				$objFile->append("\t'$field' => \"$sql\",");
+			}
+	
+			$objFile->append(');', "\n\n");
+	
+			// Keys
+			$arrKeys = $objExtract->getKeys();
+			$objFile->append("\$this->arrKeys = array\n(");
+	
+			foreach ($arrKeys as $field=>$type)
+			{
+				$objFile->append("\t'$field' => '$type',");
+			}
+
+			$objFile->append(');', "\n\n");
+	
+			// Relations
+			$arrRelations = $objExtract->getRelations();
+			$objFile->append("\$this->arrRelations = array\n(");
+	
+			foreach ($arrRelations as $field=>$config)
+			{
+				$objFile->append("\t'$field' => array\n\t(");
+
+				foreach ($config as $k=>$v)
+				{
+					$objFile->append("\t\t'$k' => '$v',");
+				}
+	
+				$objFile->append("\t),");
+			}
+	
+			$objFile->append(');', "\n\n");
+	
+			// Set the database table flag
+			$objFile->append("\$this->blnIsDbTable = true;", "\n");
+	
+			// Close the file (moves it to its final destination)
+			$objFile->close();
+		}
+
+		// Add a log entry
+		$this->log('Generated the DCA extracts', 'Automator generateDcaExtracts()', TL_CRON);
 	}
 }

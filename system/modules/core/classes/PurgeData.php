@@ -123,25 +123,23 @@ class PurgeData extends \Backend implements \executable
 			// Get the current folder size
 			foreach ($config['affected'] as $folder)
 			{
-				// Create the folder if it does not yet exist
-				if (!is_dir(TL_ROOT . '/' . $folder))
-				{
-					\Files::getInstance()->mkdir($folder);
-				}
-
 				$total = 0;
 
-				// Recursively scan all subfolders
-				$objFiles = new \RecursiveIteratorIterator(
-					new \RecursiveDirectoryIterator(TL_ROOT . '/' . $folder, \FilesystemIterator::UNIX_PATHS)
-				);
-
-				// Ignore the index.html and .htaccess files
-				foreach ($objFiles as $objFile)
+				// Only check existing folders
+				if (is_dir(TL_ROOT . '/' . $folder))
 				{
-					if ($objFile->isFile() && $objFile->getFilename() != '.htaccess' && $objFile->getFilename() != 'index.html')
+					// Recursively scan all subfolders
+					$objFiles = new \RecursiveIteratorIterator(
+						new \RecursiveDirectoryIterator(TL_ROOT . '/' . $folder, \FilesystemIterator::UNIX_PATHS)
+					);
+
+					// Ignore the index.html and .htaccess files
+					foreach ($objFiles as $objFile)
 					{
-						++$total;
+						if ($objFile->isFile() && $objFile->getFilename() != '.htaccess' && $objFile->getFilename() != 'index.html')
+						{
+							++$total;
+						}
 					}
 				}
 

@@ -104,14 +104,14 @@ class DcaExtractor extends \Database\Installer
 		$this->strTable = $strTable;
 		$this->strFile = 'system/cache/sql/' . $strTable . '.php';
 
-		if ($GLOBALS['TL_CONFIG']['bypassCache'] || !file_exists(TL_ROOT . '/' . $this->strFile))
+		// Try to load from cache
+		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $this->strFile))
 		{
-			$this->createExtract();
+			include TL_ROOT . '/' . $this->strFile;
 		}
 		else
 		{
-			include TL_ROOT . '/' . $this->strFile;
-			$this->blnIsDbTable = true;
+			$this->createExtract();
 		}
 	}
 
@@ -274,7 +274,7 @@ class DcaExtractor extends \Database\Installer
 	 */
 	protected function createExtract()
 	{
-		// Load the DataContainer
+		// Load the data container
 		if (!isset($GLOBALS['loadDataContainer'][$this->strTable]))
 		{
 			$this->loadDataContainer($this->strTable);
@@ -363,109 +363,54 @@ class DcaExtractor extends \Database\Installer
 			$sql['charset'] = 'utf8';
 		}
 
-		// Create the file
-		$objFile = new \File('system/cache/sql/' . $this->strTable . '.php', true);
-		$objFile->write("<?php\n\n");
-
 		// Meta
-		$objFile->append("\$this->arrMeta = array\n(");
-		$objFile->append("\t'engine' => '{$sql['engine']}',");
-		$objFile->append("\t'charset' => '{$sql['charset']}',");
-		$objFile->append(');', "\n\n");
+		$this->arrMeta = array
+		(
+			'engine'  => $sql['engine'],
+			'charset' => $sql['charset']
+		);
 
 		// Fields
-		$objFile->append("\$this->arrFields = array\n(");
-
-		foreach ($fields as $field=>$config)
+		if (!empty($fields))
 		{
-			if (isset($config['sql']))
+			$this->arrFields = array();
+
+			foreach ($fields as $field=>$config)
 			{
-				$objFile->append("\t'$field' => \"{$config['sql']}\",");
+				if (isset($config['sql']))
+				{
+					$this->arrFields[$field] = $config['sql'];
+				}
 			}
 		}
-
-		$objFile->append(');', "\n\n");
 
 		// Keys
 		if (is_array($sql['keys']) && !empty($sql['keys']))
 		{
-			$objFile->append("\$this->arrKeys = array\n(");
+			$this->arrKeys = array();
 
 			foreach ($sql['keys'] as $field=>$type)
 			{
-				$objFile->append("\t'$field' => '$type',");
+				$this->arrKeys[$field] = $type;
 			}
-
-			$objFile->append(');', "\n\n");
 		}
 
 		// Relations
 		if (!empty($arrRelations))
 		{
-			$objFile->append("\$this->arrRelations = array\n(");
+			$this->arrRelations = array();
 
 			foreach ($arrRelations as $field=>$config)
 			{
-				$objFile->append("\t'$field' => array\n\t(");
+				$this->arrRelations[$field] = array();
 
 				foreach ($config as $k=>$v)
 				{
-					$objFile->append("\t\t'$k'=>'$v',");
+					$this->arrRelations[$field][$k] = $v;
 				}
-
-				$objFile->append("\t),");
 			}
-
-			$objFile->append(');', "\n");
 		}
 
-		// Include the aggregated file before it is closed
-		include TL_ROOT . '/system/tmp/' . $objFile->tmpname;
 		$this->blnIsDbTable = true;
-
-		// Close the file (moves it to its final destination)
-		$objFile->close();
-	}
-
-
-	/**
-	 * Create all extracts
-	 * 
-	 * @return array An array of DcaExtractors
-	 */
-	public static function createAllExtracts()
-	{
-		$included = array();
-		$arrExtracts = array();
-
-		// Only check the active modules (see #4541)
-		foreach (\Config::getInstance()->getActiveModules() as $strModule)
-		{
-			$strDir = TL_ROOT . '/system/modules/' . $strModule . '/dca';
-
-			if (!is_dir($strDir))
-			{
-				continue;
-			}
-
-			foreach (scan($strDir) as $strFile)
-			{
-				if (in_array($strFile, $included) || $strFile == '.htaccess')
-				{
-					continue;
-				}
-
-				$included[] = $strFile;
-				$strTable = str_replace('.php', '', $strFile);
-				$objExtract = new \DcaExtractor($strTable);
-
-				if ($objExtract->isDbTable())
-				{
-					$arrExtracts[$strTable] = $objExtract;
-				}
-			}
-		}
-
-		return $arrExtracts;
 	}
 }

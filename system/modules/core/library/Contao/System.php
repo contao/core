@@ -375,53 +375,26 @@ abstract class System
 		{
 			$strCacheFile = 'system/cache/language/' . $strCreateLang . '/' . $strName . '.php';
 
-			// Load the cache files or generate it if it does not yet exist
+			// Try to load from cache
 			if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
 			{
 				include TL_ROOT . '/' . $strCacheFile;
 			}
 			else
 			{
-				// Add a short header with links to transifex.com
-				$strHeader = "<?php\n\n"
-						   . "/**\n"
-						   . " * Contao Open Source CMS\n"
-						   . " * \n"
-						   . " * Copyright (c) 2005-2013 Leo Feyer\n"
-						   . " * \n"
-						   . " * Core translations are managed using Transifex. To create a new translation\n"
-						   . " * or to help to maintain an existing one, please register at transifex.com.\n"
-						   . " * \n"
-						   . " * @link http://help.transifex.com/intro/translating.html\n"
-						   . " * @link https://www.transifex.com/projects/p/contao/language/%s/\n"
-						   . " * \n"
-						   . " * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL\n"
-						   . " */\n";
-
-				// Generate the cache file
-				$objCacheFile = new \File($strCacheFile, true);
-				$objCacheFile->write(sprintf($strHeader, $strCreateLang));
-
-				// Parse all active modules and append to the cache file
 				foreach (\Config::getInstance()->getActiveModules() as $strModule)
 				{
 					$strFile = 'system/modules/' . $strModule . '/languages/' . $strCreateLang . '/' . $strName;
 
 					if (file_exists(TL_ROOT . '/' . $strFile . '.xlf'))
 					{
-						$objCacheFile->append(static::convertXlfToPhp($strFile . '.xlf', $strCreateLang));
+						eval(static::convertXlfToPhp($strFile . '.xlf', $strCreateLang));
 					}
 					elseif (file_exists(TL_ROOT . '/' . $strFile . '.php'))
 					{
-						$objCacheFile->append(static::readPhpFileWithoutTags($strFile . '.php'));
+						include TL_ROOT . '/' . $strFile . '.php';
 					}
 				}
-
-				// Include the aggregated file before it is closed
-				include TL_ROOT . '/system/tmp/' . $objCacheFile->tmpname;
-
-				// Close the file (moves it to its final destination)
-				$objCacheFile->close();
 			}
 		}
 

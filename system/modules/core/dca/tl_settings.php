@@ -560,6 +560,7 @@ class tl_settings extends Backend
 	 */
 	public function updateInactiveModules($varValue)
 	{
+		$blnPurgeCache = false;
 		$arrModules = deserialize($varValue);
 
 		if (!is_array($arrModules))
@@ -582,6 +583,8 @@ class tl_settings extends Backend
 					$objFile = new File('system/modules/' . $strModule . '/.skip', true);
 					$objFile->write('As long as this file exists, the module will be ignored.');
 					$objFile->close();
+
+					$blnPurgeCache = true;
 				}
 			}
 			// Remove the .skip if it exists
@@ -592,13 +595,17 @@ class tl_settings extends Backend
 				if ($objFile->exists())
 				{
 					$objFile->delete();
+					$blnPurgeCache = true;
 				}
 			}
 		}
 
 		// Purge the internal cache (see #5016)
-		$this->import('Automator');
-		$this->Automator->purgeInternalCache();
+		if ($blnPurgeCache)
+		{
+			$this->import('Automator');
+			$this->Automator->purgeInternalCache();
+		}
 
 		return $varValue;
 	}
