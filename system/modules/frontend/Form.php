@@ -479,7 +479,7 @@ class Form extends Hybrid
 		}
 		else
 		{
-			$this->log('Form "' . $this->title . '" has been submitted by ' . $this->Environment->ip . '.', 'Form processFormData()', TL_FORMS);
+			$this->log('Form "' . $this->title . '" has been submitted by ' . $this->anonymizeIp($this->Environment->ip) . '.', 'Form processFormData()', TL_FORMS);
 		}
 
 		$this->jumpToOrReload($this->jumpTo);

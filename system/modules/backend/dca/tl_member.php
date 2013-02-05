@@ -223,7 +223,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>64, 'rgxp'=>'phone', 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'contact', 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>64, 'rgxp'=>'phone', 'decodeEntities'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'contact', 'tl_class'=>'w50')
 		),
 		'mobile' => array
 		(
@@ -408,8 +408,8 @@ class tl_member extends Backend
 	 */
 	public function setNewPassword($strPassword, $user)
 	{
-		// Return if there is no user (e.g. upon registration)
-		if (!$user)
+		// Return if there is no user (e.g. upon registration) (see #5247)
+		if (TL_MODE != 'FE' || !$user)
 		{
 			return $strPassword;
 		}

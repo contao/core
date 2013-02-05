@@ -716,19 +716,21 @@ abstract class Widget extends Controller
 				case 'date':
 					$objDate = new Date();
 
-					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'$~i', $varInput))
+					if (!preg_match('~^'. $objDate->getRegexp($objDate->getNumericDateFormat()) .'$~i', $varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['dateFormat'])));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], $objDate->getInputFormat($objDate->getNumericDateFormat())));
 					}
-
-					// Validate the date (see #5086)
-					try
+					else
 					{
-						new Date($varInput);
-					}
-					catch (Exception $e)
-					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
+						// Validate the date (see #5086)
+						try
+						{
+							new Date($varInput);
+						}
+						catch (Exception $e)
+						{
+							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
+						}
 					}
 					break;
 
@@ -736,9 +738,9 @@ abstract class Widget extends Controller
 				case 'time':
 					$objDate = new Date();
 
-					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'$~i', $varInput))
+					if (!preg_match('~^'. $objDate->getRegexp($objDate->getNumericTimeFormat()) .'$~i', $varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['timeFormat'])));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], $objDate->getInputFormat($objDate->getNumericTimeFormat())));
 					}
 					break;
 
@@ -748,17 +750,19 @@ abstract class Widget extends Controller
 
 					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['datimFormat'])));
+						$this->addError(sprintf($objDate->getNumericDatimFormat(), $objDate->getInputFormat($objDate->getNumericDatimFormat())));
 					}
-
-					// Validate the date (see #5086)
-					try
+					else
 					{
-						new Date($varInput);
-					}
-					catch (Exception $e)
-					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
+						// Validate the date (see #5086)
+						try
+						{
+							new Date($varInput);
+						}
+						catch (Exception $e)
+						{
+							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varInput));
+						}
 					}
 					break;
 

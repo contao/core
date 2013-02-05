@@ -905,6 +905,12 @@ label.tl_change_selected {
 	opacity: 0.5;
 }
 
+/* Misc */
+#theme-store {
+	margin-top:24px;
+	text-align:right;
+}
+
 /* Context menu */
 #contextmenu {
 	display:block;
@@ -986,7 +992,7 @@ a.navigation.login {
 
 /* Default icon classes */
 a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header_logout,.header_back,.header_new,
-.header_edit_all,.header_delete_all,.header_new_folder,.header_css_import,.header_theme_import,.header_toggle {
+.header_edit_all,.header_delete_all,.header_new_folder,.header_css_import,.header_theme_import,.header_store,.header_toggle {
 	padding:2px 0 3px 20px;
 	background-position:left center;
 	background-repeat:no-repeat;
@@ -1040,6 +1046,10 @@ a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header
 }
 .header_theme_import {
 	background:url("images/theme_import.gif") no-repeat left center;
+}
+.header_store {
+	padding-left:18px;
+	background-image:url("images/store.gif");
 }
 .header_toggle {
 	background:url("images/folPlus.gif") no-repeat left center;

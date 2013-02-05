@@ -13,7 +13,8 @@ Slimbox.scanPage = function() {
   }).slimbox({
     // Put custom options here
   }, null, function(el) {
-    return (this == el) || el.getAttribute('data-lightbox').match(this.getAttribute('data-lightbox'));
+    var attr = this.getAttribute('data-lightbox');
+    return (this == el) || (attr && el.getAttribute('data-lightbox').match(attr));
   });
 };
 window.addEvent('domready', Slimbox.scanPage);

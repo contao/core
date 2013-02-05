@@ -1006,7 +1006,7 @@ abstract class Controller extends System
 		}
 
 		// Return the path to the original image if the GDlib cannot handle it
-		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $objFile->height > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] || (!$width && !$height) || $width > 1200 || $height > 1200)
+		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $objFile->height > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] || (!$width && !$height) || $width > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $height > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'])
 		{
 			return $this->urlEncode($image);
 		}
@@ -2486,11 +2486,11 @@ abstract class Controller extends System
 		{
 			if (strncmp($strTag, '{if', 3) === 0)
 			{
-				$strReturn .= preg_replace('/\{if ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\] ]+).*\}/i', '<?php if ($arrData[\'$1\'] $2 $3): ?>', $strTag);
+				$strReturn .= preg_replace('/\{if ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\]\}]+).*\}/i', '<?php if ($arrData[\'$1\'] $2 $3): ?>', $strTag);
 			}
 			elseif (strncmp($strTag, '{elseif', 7) === 0)
 			{
-				$strReturn .= preg_replace('/\{elseif ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\] ]+).*\}/i', '<?php elseif ($arrData[\'$1\'] $2 $3): ?>', $strTag);
+				$strReturn .= preg_replace('/\{elseif ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\]\}]+).*\}/i', '<?php elseif ($arrData[\'$1\'] $2 $3): ?>', $strTag);
 			}
 			elseif (strncmp($strTag, '{else', 5) === 0)
 			{
@@ -2561,6 +2561,12 @@ abstract class Controller extends System
 	 */
 	protected function generateMargin($arrValues, $strType='margin')
 	{
+		// Initialize an empty array (see #5217)
+		if (!is_array($arrValues))
+		{
+			$arrValues = array('top'=>'', 'right'=>'', 'bottom'=>'', 'left'=>'', 'unit'=>'');
+		}
+
 		$top = $arrValues['top'];
 		$right = $arrValues['right'];
 		$bottom = $arrValues['bottom'];
@@ -2587,15 +2593,8 @@ abstract class Controller extends System
 			}
 		}
 
-		$arrDir = array
-		(
-			'top'=>$top,
-			'right'=>$right,
-			'bottom'=>$bottom,
-			'left'=>$left
-		);
-
 		$return = array();
+		$arrDir = array('top'=>$top, 'right'=>$right, 'bottom'=>$bottom, 'left'=>$left);
 
 		foreach ($arrDir as $k=>$v)
 		{
@@ -3088,6 +3087,11 @@ abstract class Controller extends System
 		if (!is_array($arrParentIds))
 		{
 			$arrParentIds = array($arrParentIds);
+		}
+
+		if (empty($arrParentIds))
+		{
+			return $arrReturn;
 		}
 
 		$arrParentIds = array_map('intval', $arrParentIds);

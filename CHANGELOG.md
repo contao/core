@@ -1,6 +1,47 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.9 (2013-02-05)
+---------------------------
+
+### Fixed
+Support numeric front end dates in the form generator (see #5238).
+
+### Fixed
+Support whitespace characters when parsing simple tokens (see #5323).
+
+### Fixed
+Allow to run multiple TinyMCE instances with different configurations on the
+same page (thanks to Andreas Schempp) (see #4453).
+
+### Fixed
+Correctly trigger the "saveNewPassword" hook (see #5247).
+
+### Fixed
+Consider the `save_callback` of the password field in `tl_user` when a back end
+user is forced to change his password (see #5138).
+
+### Fixed
+Do not group standalone lightbox elements on HTML5 pages (see #3742).
+
+### Fixed
+Anonymize IP addresses in `Form::processFormData()` (see #5255).
+
+### Fixed
+Replaced the 1200 pixel limit when resizing images with the values defined in
+the system settings (see #5268).
+
+### Fixed
+Make sure there is an array in `Controller::generateMargin()` (see #5217).
+
+### Fixed
+More robust input validation in the back end filter menu and no more absolute
+paths in error messages printed to the screen (thanks to aulmn) (see #4971).
+
+### Fixed
+Unset non-existing fields when restoring versions (see #5219).
+
+
 Version 2.11.8 (2013-01-07)
 ---------------------------
 
