@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,19 +15,19 @@ namespace Contao;
 
 /**
  * Generates and validates request tokens
- * 
+ *
  * The class tries to read and validate the request token from the user session
  * and creates a new token if there is none.
- * 
+ *
  * Usage:
- * 
+ *
  *     echo RequestToken::get();
- * 
+ *
  *     if (!RequestToken::validate('TOKEN'))
  *     {
  *         throw new Exception("Invalid request token");
  *     }
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -79,7 +79,7 @@ class RequestToken extends \System
 
 	/**
 	 * Return the token
-	 * 
+	 *
 	 * @return string The request token
 	 */
 	public static function get()
@@ -90,9 +90,9 @@ class RequestToken extends \System
 
 	/**
 	 * Validate a token
-	 * 
+	 *
 	 * @param string $strToken The request token
-	 * 
+	 *
 	 * @return boolean True if the token matches the stored one
 	 */
 	public static function validate($strToken)
@@ -129,7 +129,7 @@ class RequestToken extends \System
 
 	/**
 	 * Load the token or generate a new one
-	 * 
+	 *
 	 * @deprecated RequestToken is now a static class
 	 */
 	protected function __construct()
@@ -140,7 +140,7 @@ class RequestToken extends \System
 
 	/**
 	 * Prevent cloning of the object (Singleton)
-	 * 
+	 *
 	 * @deprecated RequestToken is now a static class
 	 */
 	final public function __clone() {}
@@ -148,9 +148,9 @@ class RequestToken extends \System
 
 	/**
 	 * Return the object instance (Singleton)
-	 * 
+	 *
 	 * @return \RequestToken The object instance
-	 * 
+	 *
 	 * @deprecated RequestToken is now a static class
 	 */
 	public static function getInstance()

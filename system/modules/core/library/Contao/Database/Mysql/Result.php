@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,7 +15,7 @@ namespace Contao\Database\Mysql;
 
 /**
  * MySQL-specific database result class
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -25,7 +25,7 @@ class Result extends \Database\Result
 
 	/**
 	 * Fetch the current row as enumerated array
-	 * 
+	 *
 	 * @return array The row as array
 	 */
 	protected function fetch_row()
@@ -36,7 +36,7 @@ class Result extends \Database\Result
 
 	/**
 	 * Fetch the current row as associative array
-	 * 
+	 *
 	 * @return array The row as associative array
 	 */
 	protected function fetch_assoc()
@@ -47,7 +47,7 @@ class Result extends \Database\Result
 
 	/**
 	 * Return the number of rows in the result set
-	 * 
+	 *
 	 * @return integer The number of rows
 	 */
 	protected function num_rows()
@@ -58,7 +58,7 @@ class Result extends \Database\Result
 
 	/**
 	 * Return the number of fields of the result set
-	 * 
+	 *
 	 * @return integer The number of fields
 	 */
 	protected function num_fields()
@@ -69,9 +69,9 @@ class Result extends \Database\Result
 
 	/**
 	 * Get the column information and return it as array
-	 * 
+	 *
 	 * @param integer $intOffset The field offset
-	 * 
+	 *
 	 * @return array An array with the column information
 	 */
 	protected function fetch_field($intOffset)

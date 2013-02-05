@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,13 +15,13 @@ namespace Contao;
 
 /**
  * A static class to store non-persistent data
- * 
+ *
  * The class functions as a global cache container where you can store data
  * that is reused by the application. The cache content is not persisted, so
  * once the process is completed, the data is gone.
- * 
+ *
  * Usage:
- * 
+ *
  *     public function getResult()
  *     {
  *         if (!Cache::has('result'))
@@ -30,7 +30,7 @@ namespace Contao;
  *         }
  *         return Cache::get('result');
  *     }
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -53,9 +53,9 @@ class Cache extends \System
 
 	/**
 	 * Check whether a key is set
-	 * 
+	 *
 	 * @param string $strKey The cache key
-	 * 
+	 *
 	 * @return boolean True if the key is set
 	 */
 	public static function has($strKey)
@@ -66,9 +66,9 @@ class Cache extends \System
 
 	/**
 	 * Return a cache entry
-	 * 
+	 *
 	 * @param string $strKey The cache key
-	 * 
+	 *
 	 * @return mixed The cached data
 	 */
 	public static function get($strKey)
@@ -79,7 +79,7 @@ class Cache extends \System
 
 	/**
 	 * Add a cache entry
-	 * 
+	 *
 	 * @param string $strKey   The cache key
 	 * @param mixed  $varValue The data to be cached
 	 */
@@ -91,7 +91,7 @@ class Cache extends \System
 
 	/**
 	 * Remove a cache entry
-	 * 
+	 *
 	 * @param string $strKey The cache key
 	 */
 	public function remove($strKey)
@@ -102,7 +102,7 @@ class Cache extends \System
 
 	/**
 	 * Prevent direct instantiation (Singleton)
-	 * 
+	 *
 	 * @deprecated Cache is now a static class
 	 */
 	protected function __construct() {}
@@ -110,7 +110,7 @@ class Cache extends \System
 
 	/**
 	 * Prevent cloning of the object (Singleton)
-	 * 
+	 *
 	 * @deprecated Cache is now a static class
 	 */
 	final public function __clone() {}
@@ -118,11 +118,11 @@ class Cache extends \System
 
 	/**
 	 * Check whether a key is set
-	 * 
+	 *
 	 * @param string $strKey The cache key
-	 * 
+	 *
 	 * @return boolean True if the key is set
-	 * 
+	 *
 	 * @deprecated Use Cache::has() instead
 	 */
 	public function __isset($strKey)
@@ -133,11 +133,11 @@ class Cache extends \System
 
 	/**
 	 * Return a cache entry
-	 * 
+	 *
 	 * @param string $strKey The cache key
-	 * 
+	 *
 	 * @return mixed|null The cached data
-	 * 
+	 *
 	 * @deprecated Use Cache::get() instead
 	 */
 	public function __get($strKey)
@@ -153,10 +153,10 @@ class Cache extends \System
 
 	/**
 	 * Add a cache entry
-	 * 
+	 *
 	 * @param string $strKey   The cache key
 	 * @param mixed  $varValue The data to be stored
-	 * 
+	 *
 	 * @deprecated Use Cache::set() instead
 	 */
 	public function __set($strKey, $varValue)
@@ -167,9 +167,9 @@ class Cache extends \System
 
 	/**
 	 * Remove a cache entry
-	 * 
+	 *
 	 * @param string $strKey The cache key
-	 * 
+	 *
 	 * @deprecated Use Cache::remove() instead
 	 */
 	public function __unset($strKey)
@@ -180,9 +180,9 @@ class Cache extends \System
 
 	/**
 	 * Instantiate the cache object (Factory)
-	 * 
+	 *
 	 * @return \Cache The object instance
-	 * 
+	 *
 	 * @deprecated Cache is now a static class
 	 */
 	public static function getInstance()

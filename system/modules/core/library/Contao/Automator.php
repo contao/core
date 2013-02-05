@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -231,9 +231,9 @@ class Automator extends \Backend
 
 	/**
 	 * Remove old XML files from the share directory
-	 * 
+	 *
 	 * @param boolean $blnReturn If true, only return the finds and don't delete
-	 * 
+	 *
 	 * @return array An array of old XML files
 	 */
 	public function purgeXmlFiles($blnReturn=false)

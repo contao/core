@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,19 +15,19 @@ namespace Contao;
 
 /**
  * Safely read the user input
- * 
+ *
  * The class functions as an adapter for the global input arrays ($_GET, $_POST,
  * $_COOKIE) and safely returns their values. To prevent XSS vulnerabilities,
  * you should always use the class when reading user input.
- * 
+ *
  * Usage:
- * 
+ *
  *     if (Input::get('action') == 'register')
  *     {
  *         $username = Input::post('username');
  *         $password = Input::post('password');
  *     }
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -70,10 +70,10 @@ class Input
 
 	/**
 	 * Return a $_GET variable
-	 * 
+	 *
 	 * @param string  $strKey            The variable name
 	 * @param boolean $blnDecodeEntities If true, all entities will be decoded
-	 * 
+	 *
 	 * @return mixed The cleaned variable value
 	 */
 	public static function get($strKey, $blnDecodeEntities=false)
@@ -108,10 +108,10 @@ class Input
 
 	/**
 	 * Return a $_POST variable
-	 * 
+	 *
 	 * @param string  $strKey            The variable name
 	 * @param boolean $blnDecodeEntities If true, all entities will be decoded
-	 * 
+	 *
 	 * @return mixed The cleaned variable value
 	 */
 	public static function post($strKey, $blnDecodeEntities=false)
@@ -146,10 +146,10 @@ class Input
 
 	/**
 	 * Return a $_POST variable preserving allowed HTML tags
-	 * 
+	 *
 	 * @param string  $strKey            The variable name
 	 * @param boolean $blnDecodeEntities If true, all entities will be decoded
-	 * 
+	 *
 	 * @return mixed The cleaned variable value
 	 */
 	public static function postHtml($strKey, $blnDecodeEntities=false)
@@ -184,9 +184,9 @@ class Input
 
 	/**
 	 * Return a raw, unsafe $_POST variable
-	 * 
+	 *
 	 * @param string $strKey The variable name
-	 * 
+	 *
 	 * @return mixed The raw variable value
 	 */
 	public static function postRaw($strKey)
@@ -215,10 +215,10 @@ class Input
 
 	/**
 	 * Return a $_COOKIE variable
-	 * 
+	 *
 	 * @param string  $strKey            The variable name
 	 * @param boolean $blnDecodeEntities If true, all entities will be decoded
-	 * 
+	 *
 	 * @return mixed The cleaned variable value
 	 */
 	public static function cookie($strKey, $blnDecodeEntities=false)
@@ -253,7 +253,7 @@ class Input
 
 	/**
 	 * Set a $_GET variable
-	 * 
+	 *
 	 * @param string $strKey   The variable name
 	 * @param mixed  $varValue The variable value
 	 */
@@ -277,7 +277,7 @@ class Input
 
 	/**
 	 * Set a $_POST variable
-	 * 
+	 *
 	 * @param string $strKey   The variable name
 	 * @param mixed  $varValue The variable value
 	 */
@@ -304,7 +304,7 @@ class Input
 
 	/**
 	 * Set a $_COOKIE variable
-	 * 
+	 *
 	 * @param string $strKey   The variable name
 	 * @param mixed  $varValue The variable value
 	 */
@@ -337,9 +337,9 @@ class Input
 
 	/**
 	 * Sanitize the variable names (thanks to Andreas Schempp)
-	 * 
+	 *
 	 * @param mixed $varValue A variable name or an array of variable names
-	 * 
+	 *
 	 * @return mixed The clean name or array of names
 	 */
 	protected static function cleanKey($varValue)
@@ -375,9 +375,9 @@ class Input
 
 	/**
 	 * Strip slashes
-	 * 
+	 *
 	 * @param mixed $varValue A string or array
-	 * 
+	 *
 	 * @return mixed The string or array without slashes
 	 */
 	protected static function stripSlashes($varValue)
@@ -404,10 +404,10 @@ class Input
 
 	/**
 	 * Strip HTML and PHP tags preserving HTML comments
-	 * 
+	 *
 	 * @param mixed  $varValue       A string or array
 	 * @param string $strAllowedTags A string of tags to preserve
-	 * 
+	 *
 	 * @return mixed The cleaned string or array
 	 */
 	protected static function stripTags($varValue, $strAllowedTags='')
@@ -438,10 +438,10 @@ class Input
 
 	/**
 	 * Clean a value and try to prevent XSS attacks
-	 * 
+	 *
 	 * @param mixed   $varValue      A string or array
 	 * @param boolean $blnStrictMode If true, the function removes also JavaScript event handlers
-	 * 
+	 *
 	 * @return mixed The cleaned string or array
 	 */
 	protected static function xssClean($varValue, $blnStrictMode=false)
@@ -550,9 +550,9 @@ class Input
 
 	/**
 	 * Decode HTML entities
-	 * 
+	 *
 	 * @param mixed $varValue A string or array
-	 * 
+	 *
 	 * @return mixed The decoded string or array
 	 */
 	protected static function decodeEntities($varValue)
@@ -583,9 +583,9 @@ class Input
 
 	/**
 	 * Preserve basic entities by replacing them with square brackets (e.g. &amp; becomes [amp])
-	 * 
+	 *
 	 * @param mixed $varValue A string or array
-	 * 
+	 *
 	 * @return mixed The string or array with the converted entities
 	 */
 	protected static function preserveBasicEntities($varValue)
@@ -619,9 +619,9 @@ class Input
 
 	/**
 	 * Encode special characters which are potentially dangerous
-	 * 
+	 *
 	 * @param mixed $varValue A string or array
-	 * 
+	 *
 	 * @return mixed The encoded string or array
 	 */
 	protected static function encodeSpecialChars($varValue)
@@ -651,9 +651,9 @@ class Input
 
 	/**
 	 * Fallback to the session form data if there is no post data
-	 * 
+	 *
 	 * @param string $strKey The variable name
-	 * 
+	 *
 	 * @return mixed The variable value
 	 */
 	protected static function findPost($strKey)
@@ -674,7 +674,7 @@ class Input
 
 	/**
 	 * Clean the keys of the request arrays
-	 * 
+	 *
 	 * @deprecated Input is now a static class
 	 */
 	protected function __construct()
@@ -685,7 +685,7 @@ class Input
 
 	/**
 	 * Prevent cloning of the object (Singleton)
-	 * 
+	 *
 	 * @deprecated Input is now a static class
 	 */
 	final public function __clone() {}
@@ -693,9 +693,9 @@ class Input
 
 	/**
 	 * Return the object instance (Singleton)
-	 * 
+	 *
 	 * @return \Input The object instance
-	 * 
+	 *
 	 * @deprecated Input is now a static class
 	 */
 	public static function getInstance()

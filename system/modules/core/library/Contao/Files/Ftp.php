@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,7 +15,7 @@ namespace Contao\Files;
 
 /**
  * Manage files via FTP ("Safe Mode Hack")
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -56,7 +56,7 @@ class Ftp extends \Files
 
 	/**
 	 * Establish an FTP connection
-	 * 
+	 *
 	 * @throws \Exception If an FTP connection cannot be established
 	 */
 	public function connect()
@@ -104,9 +104,9 @@ class Ftp extends \Files
 
 	/**
 	 * Create a directory
-	 * 
+	 *
 	 * @param string $strDirectory The directory name
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function mkdir($strDirectory)
@@ -122,9 +122,9 @@ class Ftp extends \Files
 
 	/**
 	 * Remove a directory
-	 * 
+	 *
 	 * @param string $strDirectory The directory name
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function rmdir($strDirectory)
@@ -138,10 +138,10 @@ class Ftp extends \Files
 
 	/**
 	 * Open a file and return the handle
-	 * 
+	 *
 	 * @param string $strFile The file name
 	 * @param string $strMode The operation mode
-	 * 
+	 *
 	 * @return resource|boolean The file handle or false if there was an error
 	 */
 	public function fopen($strFile, $strMode)
@@ -169,7 +169,7 @@ class Ftp extends \Files
 
 	/**
 	 * Write content to a file
-	 * 
+	 *
 	 * @param resource $resFile    The file handle
 	 * @param string   $strContent The content to store in the file
 	 */
@@ -181,9 +181,9 @@ class Ftp extends \Files
 
 	/**
 	 * Close a file handle
-	 * 
+	 *
 	 * @param resource $resFile The file handle
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function fclose($resFile)
@@ -208,10 +208,10 @@ class Ftp extends \Files
 
 	/**
 	 * Rename a file or folder
-	 * 
+	 *
 	 * @param string $strOldName The old name
 	 * @param string $strNewName The new name
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function rename($strOldName, $strNewName)
@@ -259,10 +259,10 @@ class Ftp extends \Files
 
 	/**
 	 * Copy a file or folder
-	 * 
+	 *
 	 * @param string $strSource      The source file or folder
 	 * @param string $strDestination The new file or folder path
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function copy($strSource, $strDestination)
@@ -286,9 +286,9 @@ class Ftp extends \Files
 
 	/**
 	 * Delete a file
-	 * 
+	 *
 	 * @param string $strFile The file name
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function delete($strFile)
@@ -302,10 +302,10 @@ class Ftp extends \Files
 
 	/**
 	 * Change the file mode
-	 * 
+	 *
 	 * @param string $strFile The file name
 	 * @param mixed  $varMode The new file mode
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function chmod($strFile, $varMode)
@@ -319,9 +319,9 @@ class Ftp extends \Files
 
 	/**
 	 * Check whether a file is writeable
-	 * 
+	 *
 	 * @param string $strFile The file name
-	 * 
+	 *
 	 * @return boolean True if the file is writeable
 	 */
 	public function is_writeable($strFile)
@@ -332,10 +332,10 @@ class Ftp extends \Files
 
 	/**
 	 * Move an uploaded file to a folder
-	 * 
+	 *
 	 * @param string $strSource      The source file
 	 * @param string $strDestination The new file path
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function move_uploaded_file($strSource, $strDestination)

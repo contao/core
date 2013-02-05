@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,17 +15,17 @@ namespace Contao;
 
 /**
  * A SwiftMailer adapter class
- * 
+ *
  * The class functions as an adapter for the Swift mailer framework. It can be
  * used to send e-mails via the PHP mail function or an SMTP server.
- * 
+ *
  * Usage:
- * 
+ *
  *     $email = new Email();
  *     $email->subject = 'Hello';
  *     $email->text = 'Is it me you are looking for?';
  *     $email->sendTo('lionel@richie.com');
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -156,9 +156,9 @@ class Email
 
 	/**
 	 * Set an object property
-	 * 
+	 *
 	 * Supported keys:
-	 * 
+	 *
 	 * * subject:     the e-mail subject
 	 * * text:        the text part of the mail
 	 * * html:        the HTML part of the mail
@@ -169,10 +169,10 @@ class Email
 	 * * imageDir:    the base directory to look for internal images
 	 * * embedImages: whether to embed images inline
 	 * * logFile:     the log file path
-	 * 
+	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
-	 * 
+	 *
 	 * @throws \Exception If $strKey is unknown
 	 */
 	public function __set($strKey, $varValue)
@@ -250,9 +250,9 @@ class Email
 
 	/**
 	 * Return an object property
-	 * 
+	 *
 	 * Supported keys:
-	 * 
+	 *
 	 * * subject:     the e-mail subject
 	 * * text:        the text part of the mail
 	 * * html:        the HTML part of the mail
@@ -264,9 +264,9 @@ class Email
 	 * * embedImages: whether to embed images inline
 	 * * logFile:     the log file path
 	 * * failures:    an array of rejected e-mail addresses
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return mixed The property value
 	 */
 	public function __get($strKey)
@@ -324,7 +324,7 @@ class Email
 
 	/**
 	 * Return true if there are failures
-	 * 
+	 *
 	 * @return boolean True if there are failures
 	 */
 	public function hasFailures()
@@ -335,7 +335,7 @@ class Email
 
 	/**
 	 * Add a custom text header
-	 * 
+	 *
 	 * @param string $strKey   The header name
 	 * @param string $strValue The header value
 	 */
@@ -383,7 +383,7 @@ class Email
 
 	/**
 	 * Attach a file
-	 * 
+	 *
 	 * @param string $strFile The file path
 	 * @param string $strMime The MIME type (defaults to "application/octet-stream")
 	 */
@@ -395,7 +395,7 @@ class Email
 
 	/**
 	 * Attach a file from a string
-	 * 
+	 *
 	 * @param string $strContent  The file content
 	 * @param string $strFilename The file name
 	 * @param string $strMime     The MIME type (defaults to "application/octet-stream")
@@ -411,7 +411,7 @@ class Email
 	 *
 	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed. The
 	 * method takes an unlimited number of recipient addresses.
-	 * 
+	 *
 	 * @return boolean True if the e-mail was sent successfully
 	 */
 	public function sendTo()
@@ -551,9 +551,9 @@ class Email
 
 	/**
 	 * Extract the e-mail addresses from the func_get_args() arguments
-	 * 
+	 *
 	 * @param array $arrRecipients The recipients array
-	 * 
+	 *
 	 * @return array An array of e-mail addresses
 	 */
 	protected function compileRecipients($arrRecipients)

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Devtools
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -277,9 +277,9 @@ class ModuleAutoload extends \BackendModule
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-$intYear Leo Feyer
- * 
+ *
  * @package $strPackage
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -480,9 +480,9 @@ EOT
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-$intYear Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL

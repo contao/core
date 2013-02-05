@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -41,7 +41,7 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Return the current theme as string
-	 * 
+	 *
 	 * @return string The name of the theme
 	 */
 	public static function getTheme()
@@ -59,7 +59,7 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Return the back end themes as array
-	 * 
+	 *
 	 * @return array An array of available back end themes
 	 */
 	public static function getThemes()

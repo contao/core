@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Typolinks
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -13,7 +13,7 @@
 
 /**
  * Class typolib
- * 
+ *
  * Provide methods to render TinyMCE page and file drop down menus.
  * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <https://contao.org>
@@ -23,7 +23,7 @@ class typolib extends Backend
 
 	/**
 	 * Initialize the controller
-	 * 
+	 *
 	 * 1. Import user
 	 * 2. Call parent constructor
 	 * 3. Authenticate user

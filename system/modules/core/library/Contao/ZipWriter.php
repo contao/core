@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,13 +15,13 @@ namespace Contao;
 
 /**
  * Creates .zip files and stores them on the disk
- * 
+ *
  * Usage:
- * 
+ *
  *     $zip = new ZipWriter('test.zip');
  *     $zip->addFile('test.txt');
  *     $zip->close();
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -82,9 +82,9 @@ class ZipWriter extends \System
 
 	/**
 	 * Create a new zip archive
-	 * 
+	 *
 	 * @param string $strFile The file path
-	 * 
+	 *
 	 * @throws \Exception If the temporary file cannot be created or opened
 	 */
 	public function __construct($strFile)
@@ -125,10 +125,10 @@ class ZipWriter extends \System
 
 	/**
 	 * Add a file to the archive
-	 * 
+	 *
 	 * @param string $strFile The file path
 	 * @param string $strName An optional file name
-	 * 
+	 *
 	 * @throws \Exception If $strFile does not exist
 	 */
 	public function addFile($strFile, $strName=null)
@@ -150,7 +150,7 @@ class ZipWriter extends \System
 
 	/**
 	 * Add a file from a string to the archive
-	 * 
+	 *
 	 * @param string  $strData The data to be added
 	 * @param string  $strName The file path
 	 * @param integer $intTime An optional modification timestamp
@@ -263,9 +263,9 @@ class ZipWriter extends \System
 
 	/**
 	 * Convert a Unix timestamp to a hexadecimal value
-	 * 
+	 *
 	 * @param integer $intTime The Unix timestamp
-	 * 
+	 *
 	 * @return integer The hexadecimal value
 	 */
 	protected function unixToHex($intTime=0)

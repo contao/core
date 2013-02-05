@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -271,7 +271,7 @@ class tl_theme extends Backend
 
 	/**
 	 * Schedule a style sheet update
-	 * 
+	 *
 	 * This method is triggered when a single theme or multiple themes are
 	 * modified (edit/editAll) or duplicated (copy/copyAll).
 	 */

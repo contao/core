@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,22 +15,22 @@ namespace Contao;
 
 /**
  * Creates RSS or Atom feeds
- * 
+ *
  * The class provides an interface to create RSS or Atom feeds. You can add the
  * feed item objects and the class will generate the XML markup.
- * 
+ *
  * Usage:
- * 
+ *
  *     $feed = new Feed('news');
  *     $feed->title = 'News feed';
- * 
+ *
  *     $item = new FeedItem();
  *     $item->title = 'Latest news';
  *     $item->author = 'Leo Feyer';
- * 
+ *
  *     $feed->addItem($item);
  *     echo $feed->generateRss();
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -59,7 +59,7 @@ class Feed extends \System
 
 	/**
 	 * Store the feed name (without file extension)
-	 * 
+	 *
 	 * @param string $strName The feed name
 	 */
 	public function __construct($strName)
@@ -71,7 +71,7 @@ class Feed extends \System
 
 	/**
 	 * Set an object property
-	 * 
+	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
 	 */
@@ -83,9 +83,9 @@ class Feed extends \System
 
 	/**
 	 * Return an object property
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return mixed The property value
 	 */
 	public function __get($strKey)
@@ -101,9 +101,9 @@ class Feed extends \System
 
 	/**
 	 * Check whether a property is set
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return boolean True if the property is set
 	 */
 	public function __isset($strKey)
@@ -114,7 +114,7 @@ class Feed extends \System
 
 	/**
 	 * Add an item
-	 * 
+	 *
 	 * @param \FeedItem $objItem The feed item object
 	 */
 	public function addItem(\FeedItem $objItem)
@@ -125,7 +125,7 @@ class Feed extends \System
 
 	/**
 	 * Generate an RSS 2.0 feed and return it as XML string
-	 * 
+	 *
 	 * @return string The RSS feed markup
 	 */
 	public function generateRss()
@@ -190,7 +190,7 @@ class Feed extends \System
 
 	/**
 	 * Generate an Atom feed and return it as XML string
-	 * 
+	 *
 	 * @return string The Atom feed markup
 	 */
 	public function generateAtom()

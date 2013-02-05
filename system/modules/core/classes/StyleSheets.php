@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -2160,7 +2160,7 @@ class StyleSheets extends \Backend
 	/**
 	 * Return an image as data: string
 	 * @param string
-	 * @param array   
+	 * @param array
 	 * @return string|boolean
 	 */
 	protected function generateBase64Image($strImage, $arrParent)

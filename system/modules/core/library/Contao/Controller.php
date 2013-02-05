@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,21 +15,21 @@ namespace Contao;
 
 /**
  * Abstract parent class for Controllers
- * 
+ *
  * Some of the methods have been made static in Contao 3 and can be used in
  * non-object context as well.
- * 
+ *
  * Usage:
- * 
+ *
  *     echo Controller::getTheme();
- * 
+ *
  * Inside a controller:
- * 
+ *
  *     public function generate()
  *     {
  *         return $this->getArticle(2);
  *     }
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -39,12 +39,12 @@ abstract class Controller extends \System
 
 	/**
 	 * Find a particular template file and return its path
-	 * 
+	 *
 	 * @param string $strTemplate The name of the template
 	 * @param string $strFormat   The file extension
-	 * 
+	 *
 	 * @return string The path to the template file
-	 * 
+	 *
 	 * @throws \Exception If $strFormat is unknown
 	 */
 	public static function getTemplate($strTemplate, $strFormat='html5')
@@ -77,9 +77,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Return all template files of a particular group as array
-	 * 
+	 *
 	 * @param string $strPrefix The template name prefix (e.g. "ce_")
-	 * 
+	 *
 	 * @return array An array of template names
 	 */
 	public static function getTemplateGroup($strPrefix)
@@ -149,10 +149,10 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate a front end module and return it as string
-	 * 
+	 *
 	 * @param mixed  $intId     A module ID or a Model object
 	 * @param string $strColumn The name of the column
-	 * 
+	 *
 	 * @return string The module HTML markup
 	 */
 	protected function getFrontendModule($intId, $strColumn='main')
@@ -298,13 +298,13 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate an article and return it as string
-	 * 
+	 *
 	 * @param mixed   $varId          The article ID or a Model object
 	 * @param boolean $blnMultiMode   If true, only teasers will be shown
 	 * @param boolean $blnIsInsertTag If true, there will be no page relation
 	 * @param string  $strColumn      The name of the column
-	 * 
-	 * @return string|boolean The article HTML markup or false 
+	 *
+	 * @return string|boolean The article HTML markup or false
 	 */
 	protected function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main')
 	{
@@ -371,9 +371,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate a content element and return it as string
-	 * 
+	 *
 	 * @param mixed $intId A content element ID or a Model object
-	 * 
+	 *
 	 * @return string The content element HTML markup
 	 */
 	protected function getContentElement($intId)
@@ -461,9 +461,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate a form and return it as string
-	 * 
+	 *
 	 * @param mixed $varId A form ID or a Model object
-	 * 
+	 *
 	 * @return string The form HTML markup
 	 */
 	protected function getForm($varId)
@@ -508,7 +508,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Return the timezones as array
-	 * 
+	 *
 	 * @return array An array of timezones
 	 */
 	public static function getTimeZones()
@@ -532,7 +532,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Return the languages for the TinyMCE spellchecker
-	 * 
+	 *
 	 * @return string The TinyMCE spellchecker language string
 	 */
 	protected function getSpellcheckerString()
@@ -559,9 +559,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Calculate the page status icon name based on the page parameters
-	 * 
+	 *
 	 * @param object A page object
-	 * 
+	 *
 	 * @return string The status icon name
 	 */
 	public static function getPageStatusIcon($objPage)
@@ -599,10 +599,10 @@ abstract class Controller extends \System
 
 	/**
 	 * Replace insert tags with their values
-	 * 
+	 *
 	 * @param string  $strBuffer The text with the tags to be replaced
 	 * @param boolean $blnCache  If false, non-cacheable tags will be replaced
-	 * 
+	 *
 	 * @return string The text with the replaced tags
 	 */
 	protected function replaceInsertTags($strBuffer, $blnCache=true)
@@ -1567,9 +1567,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Replace the dynamic script tags (see #4203)
-	 * 
+	 *
 	 * @param string $strBuffer The string with the tags to be replaced
-	 * 
+	 *
 	 * @return string The string with the replaced tags
 	 */
 	public static function replaceDynamicScriptTags($strBuffer)
@@ -1742,10 +1742,10 @@ abstract class Controller extends \System
 
 	/**
 	 * Compile the margin format definition based on an array of values
-	 * 
+	 *
 	 * @param array  $arrValues An array of four values and a unit
 	 * @param string $strType   Either "margin" or "padding"
-	 * 
+	 *
 	 * @return string The CSS markup
 	 */
 	public static function generateMargin($arrValues, $strType='margin')
@@ -1799,11 +1799,11 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate an URL depending on the current rewriteURL setting
-	 * 
+	 *
 	 * @param array  $arrRow       An array of page parameters
 	 * @param string $strParams    An optional string of URL parameters
 	 * @param string $strForceLang Force a certain language
-	 * 
+	 *
 	 * @return string An URL that can be used in the front end
 	 */
 	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null)
@@ -1871,11 +1871,11 @@ abstract class Controller extends \System
 
 	/**
 	 * Convert relative URLs in href and src attributes to absolute URLs
-	 * 
+	 *
 	 * @param string  $strContent  The text with the URLs to be converted
 	 * @param string  $strBase     An optional base URL
 	 * @param boolean $blnHrefOnly If true, only href attributes will be converted
-	 * 
+	 *
 	 * @return string The text with the replaced URLs
 	 */
 	public static function convertRelativeUrls($strContent, $strBase='', $blnHrefOnly=false)
@@ -1915,7 +1915,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Send a file to the browser so the "save as …" dialogue opens
-	 * 
+	 *
 	 * @param string $strFile The file path
 	 */
 	public static function sendFileToBrowser($strFile)
@@ -1987,7 +1987,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Load a set of DCA files
-	 * 
+	 *
 	 * @param string  $strName    The table name
 	 * @param boolean $blnNoCache If true, the cache will be bypassed
 	 */
@@ -2042,13 +2042,13 @@ abstract class Controller extends \System
 
 	/**
 	 * Convert a DCA file configuration to be used with widgets
-	 * 
+	 *
 	 * @param array  $arrData  The field configuration array
 	 * @param string $strName  The field name in the form
 	 * @param mixed  $varValue The field value
 	 * @param string $strField The field name in the database
 	 * @param string $strTable The table name
-	 * 
+	 *
 	 * @return array An array that can be passed to a widget
 	 */
 	protected function prepareForWidget($arrData, $strName, $varValue=null, $strField='', $strTable='')
@@ -2177,7 +2177,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Create an initial version of a record
-	 * 
+	 *
 	 * @param string  $strTable The table name
 	 * @param integer $intId    The ID of the element to be versioned
 	 */
@@ -2201,7 +2201,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Create a new version of a record
-	 * 
+	 *
 	 * @param string  $strTable The table name
 	 * @param integer $intId    The ID of the element to be versioned
 	 */
@@ -2274,11 +2274,11 @@ abstract class Controller extends \System
 
 	/**
 	 * Redirect to a front end page
-	 * 
+	 *
 	 * @param integer $intPage    The page ID
 	 * @param mixed   $varArticle An optional article alias
 	 * @param boolean $blnReturn  If true, return the URL and don't redirect
-	 * 
+	 *
 	 * @return string The URL of the target page
 	 */
 	protected function redirectToFrontendPage($intPage, $varArticle=null, $blnReturn=false)
@@ -2315,10 +2315,10 @@ abstract class Controller extends \System
 	/**
 	 * Get the parent records of an entry and return them as string which can
 	 * be used in a log message
-	 * 
+	 *
 	 * @param string  $strTable The table name
 	 * @param integer $intId    The record ID
-	 * 
+	 *
 	 * @return string A string that can be used in a log message
 	 */
 	protected function getParentEntries($strTable, $intId)
@@ -2366,9 +2366,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Take an array of file paths and eliminate the nested ones
-	 * 
+	 *
 	 * @param array $arrPaths The array of file paths
-	 * 
+	 *
 	 * @return array The file paths array without the nested paths
 	 */
 	protected function eliminateNestedPaths($arrPaths)
@@ -2391,11 +2391,11 @@ abstract class Controller extends \System
 
 	/**
 	 * Take an array of pages and eliminate the nested ones
-	 * 
+	 *
 	 * @param array   $arrPages   The array of page IDs
 	 * @param string  $strTable   The table name
 	 * @param boolean $blnSorting True if the table has a sorting field
-	 * 
+	 *
 	 * @return array The page IDs array without the nested IDs
 	 */
 	protected function eliminateNestedPages($arrPages, $strTable=null, $blnSorting=false)
@@ -2420,9 +2420,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Return the current theme as string
-	 * 
+	 *
 	 * @return string The name of the theme
-	 * 
+	 *
 	 * @deprecated Use Backend::getTheme() instead
 	 */
 	public static function getTheme()
@@ -2433,9 +2433,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Return the back end themes as array
-	 * 
+	 *
 	 * @return array An array of available back end themes
-	 * 
+	 *
 	 * @deprecated Use Backend::getThemes() instead
 	 */
 	public static function getBackendThemes()
@@ -2446,11 +2446,11 @@ abstract class Controller extends \System
 
 	/**
 	 * Get the details of a page including inherited parameters
-	 * 
+	 *
 	 * @param mixed $intId A page ID or a Model object
-	 * 
+	 *
 	 * @return \Model|null The page model or null
-	 * 
+	 *
 	 * @deprecated Use PageModel::findWithDetails() or PageModel->loadDetails() instead
 	 */
 	public static function getPageDetails($intId)
@@ -2507,11 +2507,11 @@ abstract class Controller extends \System
 
 	/**
 	 * Remove old XML files from the share directory
-	 * 
+	 *
 	 * @param boolean $blnReturn If true, only return the finds and don't delete
-	 * 
+	 *
 	 * @return array An array of old XML files
-	 * 
+	 *
 	 * @deprecated Use Automator::purgeXmlFiles() instead
 	 */
 	protected function removeOldFeeds($blnReturn=false)
@@ -2523,7 +2523,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Add an image to a template
-	 * 
+	 *
 	 * @param object  $objTemplate   The template object to add the image to
 	 * @param array   $arrItem       The element or module as array
 	 * @param integer $intMaxWidth   An optional maximum width of the image
@@ -2646,7 +2646,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Add enclosures to a template
-	 * 
+	 *
 	 * @param object $objTemplate The template object to add the enclosures to
 	 * @param array  $arrItem     The element or module as array
 	 * @param string $strKey      The name of the enclosures field in $arrItem
@@ -2731,7 +2731,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Set the static URL constants
-	 * 
+	 *
 	 * @param object $objPage An optional page object
 	 */
 	public static function setStaticUrls($objPage=null)
@@ -2776,9 +2776,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Add a static URL to a script
-	 * 
+	 *
 	 * @param string $script The script path
-	 * 
+	 *
 	 * @return string The script path with the static URL
 	 */
 	public static function addStaticUrlTo($script)
@@ -2801,11 +2801,11 @@ abstract class Controller extends \System
 
 	/**
 	 * Return true if a class exists (tries to autoload the class)
-	 * 
+	 *
 	 * @param string $strClass The class name
-	 * 
+	 *
 	 * @return boolean True if the class exists
-	 * 
+	 *
 	 * @deprecated Use the PHP function class_exists() instead
 	 */
 	protected function classFileExists($strClass)
@@ -2816,11 +2816,11 @@ abstract class Controller extends \System
 
 	/**
 	 * Restore basic entities
-	 * 
+	 *
 	 * @param string $strBuffer The string with the tags to be replaced
-	 * 
+	 *
 	 * @return string The string with the original entities
-	 * 
+	 *
 	 * @deprecated Use String::restoreBasicEntities() instead
 	 */
 	public static function restoreBasicEntities($strBuffer)
@@ -2831,14 +2831,14 @@ abstract class Controller extends \System
 
 	/**
 	 * Resize an image and crop it if necessary
-	 * 
+	 *
 	 * @param string  $image  The image path
 	 * @param integer $width  The target width
 	 * @param integer $height The target height
 	 * @param string  $mode   An optional resize mode
-	 * 
+	 *
 	 * @return boolean True if the image has been resized correctly
-	 * 
+	 *
 	 * @deprecated Use Image::resize() instead
 	 */
 	protected function resizeImage($image, $width, $height, $mode='')
@@ -2849,16 +2849,16 @@ abstract class Controller extends \System
 
 	/**
 	 * Resize an image and crop it if necessary
-	 * 
+	 *
 	 * @param string  $image  The image path
 	 * @param integer $width  The target width
 	 * @param integer $height The target height
 	 * @param string  $mode   An optional resize mode
 	 * @param string  $target An optional target to be replaced
 	 * @param boolean $force  Override existing target images
-	 * 
+	 *
 	 * @return string|null The image path or null
-	 * 
+	 *
 	 * @deprecated Use Image::get() instead
 	 */
 	protected function getImage($image, $width, $height, $mode='', $target=null, $force=false)
@@ -2869,13 +2869,13 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate an image tag and return it as string
-	 * 
+	 *
 	 * @param string $src        The image path
 	 * @param string $alt        An optional alt attribute
 	 * @param string $attributes A string of other attributes
-	 * 
+	 *
 	 * @return string The image HTML tag
-	 * 
+	 *
 	 * @deprecated Use Image::getHtml() instead
 	 */
 	public static function generateImage($src, $alt='', $attributes='')
@@ -2886,9 +2886,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Return true for backwards compatibility (see #3218)
-	 * 
+	 *
 	 * @return boolean
-	 * 
+	 *
 	 * @deprecated Specify 'datepicker'=>true in your DCA file instead
 	 */
 	protected function getDatePickerString()
@@ -2899,9 +2899,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Return the installed back end languages as array
-	 * 
+	 *
 	 * @return array An array of available back end languages
-	 * 
+	 *
 	 * @deprecated Use System::getLanguages(true) instead
 	 */
 	protected function getBackendLanguages()
@@ -2912,12 +2912,12 @@ abstract class Controller extends \System
 
 	/**
 	 * Parse simple tokens that can be used to personalize newsletters
-	 * 
+	 *
 	 * @param string $strBuffer The text with the tokens to be replaced
 	 * @param array  $arrData   The replacement data as array
-	 * 
+	 *
 	 * @return string The text with the replaced tokens
-	 * 
+	 *
 	 * @deprecated Use String::parseSimpleTokens() instead
 	 */
 	protected function parseSimpleTokens($strBuffer, $arrData)
@@ -2928,17 +2928,17 @@ abstract class Controller extends \System
 
 	/**
 	 * Return the IDs of all child records of a particular record (see #2475)
-	 * 
+	 *
 	 * @author Andreas Schempp
-	 * 
+	 *
 	 * @param mixed   $arrParentIds An array of parent IDs
 	 * @param string  $strTable     The table name
 	 * @param boolean $blnSorting   True if the table has a sorting field
 	 * @param array   $arrReturn    The array to be returned
 	 * @param string  $strWhere     Additional WHERE condition
-	 * 
+	 *
 	 * @return array An array of child record IDs
-	 * 
+	 *
 	 * @deprecated Use Database::getChildRecords() instead
 	 */
 	protected function getChildRecords($arrParentIds, $strTable, $blnSorting=false, $arrReturn=array(), $strWhere='')
@@ -2949,12 +2949,12 @@ abstract class Controller extends \System
 
 	/**
 	 * Return the IDs of all parent records of a particular record
-	 * 
+	 *
 	 * @param integer $intId    The ID of the record
 	 * @param string  $strTable The table name
-	 * 
+	 *
 	 * @return array An array of parent record IDs
-	 * 
+	 *
 	 * @deprecated Use Database::getParentRecords() instead
 	 */
 	protected function getParentRecords($intId, $strTable)
@@ -2965,9 +2965,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Print an article as PDF and stream it to the browser
-	 * 
+	 *
 	 * @param object $objArticle An article object
-	 * 
+	 *
 	 * @deprecated Use ModuleArticle->generatePdf() instead
 	 */
 	protected function printArticleAsPdf($objArticle)
@@ -2979,9 +2979,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Return all page sections as array
-	 * 
+	 *
 	 * @return array An array of active page sections
-	 * 
+	 *
 	 * @deprecated See #4693
 	 */
 	public static function getPageSections()
@@ -2992,12 +2992,12 @@ abstract class Controller extends \System
 
 	/**
 	 * Return a "selected" attribute if the option is selected
-	 * 
+	 *
 	 * @param string $strOption The option to check
 	 * @param mixed  $varValues One or more values to check against
-	 * 
+	 *
 	 * @return string The attribute or an empty string
-	 * 
+	 *
 	 * @deprecated Use Widget::optionSelected() instead
 	 */
 	public static function optionSelected($strOption, $varValues)
@@ -3008,12 +3008,12 @@ abstract class Controller extends \System
 
 	/**
 	 * Return a "checked" attribute if the option is checked
-	 * 
+	 *
 	 * @param string $strOption The option to check
 	 * @param mixed  $varValues One or more values to check against
-	 * 
+	 *
 	 * @return string The attribute or an empty string
-	 * 
+	 *
 	 * @deprecated Use Widget::optionChecked() instead
 	 */
 	public static function optionChecked($strOption, $varValues)
@@ -3024,11 +3024,11 @@ abstract class Controller extends \System
 
 	/**
 	 * Find a content element in the TL_CTE array and return the class name
-	 * 
+	 *
 	 * @param string $strName The content element name
-	 * 
+	 *
 	 * @return string The class name
-	 * 
+	 *
 	 * @deprecated Use ContentElement::findClass() instead
 	 */
 	public static function findContentElement($strName)
@@ -3039,11 +3039,11 @@ abstract class Controller extends \System
 
 	/**
 	 * Find a front end module in the FE_MOD array and return the class name
-	 * 
+	 *
 	 * @param string $strName The front end module name
-	 * 
+	 *
 	 * @return string The class name
-	 * 
+	 *
 	 * @deprecated Use Module::findClass() instead
 	 */
 	public static function findFrontendModule($strName)

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,21 +15,21 @@ namespace Contao;
 
 /**
  * Authenticates and initializes user objects
- * 
+ *
  * The class supports user authentication, login and logout, persisting the
  * session data and initializing the user object from a database row. It
  * functions as abstract parent class for the "BackendUser" and "FrontendUser"
  * classes of the core.
- * 
+ *
  * Usage:
- * 
+ *
  *     $user = BackendUser::getInstance();
- * 
+ *
  *     if ($user->findBy('username', 'leo'))
  *     {
  *         echo $user->name;
  *     }
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -98,7 +98,7 @@ abstract class User extends \System
 
 	/**
 	 * Set an object property
-	 * 
+	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
 	 */
@@ -110,9 +110,9 @@ abstract class User extends \System
 
 	/**
 	 * Return an object property
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return mixed The property value
 	 */
 	public function __get($strKey)
@@ -128,9 +128,9 @@ abstract class User extends \System
 
 	/**
 	 * Check whether a property is set
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return boolean True if the property is set
 	 */
 	public function __isset($strKey)
@@ -141,7 +141,7 @@ abstract class User extends \System
 
 	/**
 	 * Instantiate a new user object (Factory)
-	 * 
+	 *
 	 * @return \User The object instance
 	 */
 	public static function getInstance()
@@ -157,7 +157,7 @@ abstract class User extends \System
 
 	/**
 	 * Authenticate a user
-	 * 
+	 *
 	 * @return boolean True if the user could be authenticated
 	 */
 	public function authenticate()
@@ -209,7 +209,7 @@ abstract class User extends \System
 
 	/**
 	 * Try to login the current user
-	 * 
+	 *
 	 * @return boolean True if the user could be logged in
 	 */
 	public function login()
@@ -363,7 +363,7 @@ abstract class User extends \System
 
 	/**
 	 * Check the account status and return true if it is active
-	 * 
+	 *
 	 * @return boolean True if the account is active
 	 */
 	protected function checkAccountStatus()
@@ -417,10 +417,10 @@ abstract class User extends \System
 
 	/**
 	 * Find a user in the database
-	 * 
+	 *
 	 * @param string $strColumn The field name
 	 * @param mixed  $varValue  The field value
-	 * 
+	 *
 	 * @return boolean True if the user was found
 	 */
 	public function findBy($strColumn, $varValue)
@@ -478,7 +478,7 @@ abstract class User extends \System
 
 	/**
 	 * Remove the authentication cookie and destroy the current session
-	 * 
+	 *
 	 * @return boolean True if the user could be logged out
 	 */
 	public function logout()
@@ -543,9 +543,9 @@ abstract class User extends \System
 
 	/**
 	 * Return true if the user is member of a particular group
-	 * 
+	 *
 	 * @param integer $id The group ID
-	 * 
+	 *
 	 * @return boolean True if the user is a member of the group
 	 */
 	public function isMemberOf($id)

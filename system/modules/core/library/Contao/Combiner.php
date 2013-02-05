@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,17 +15,17 @@ namespace Contao;
 
 /**
  * Combines .css or .js files into one single file
- * 
+ *
  * Usage:
- * 
+ *
  *     $combiner = new Combiner();
- * 
+ *
  *     $combiner->add('css/style.css');
  *     $combiner->add('css/fonts.css');
  *     $combiner->add('css/print.css');
- * 
+ *
  *     echo $combiner->getCombinedFile();
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -73,11 +73,11 @@ class Combiner extends \System
 
 	/**
 	 * Add a file to the combined file
-	 * 
+	 *
 	 * @param string $strFile    The file to be added
 	 * @param string $strVersion An optional version number
 	 * @param string $strMedia   The media type of the file (.css only)
-	 * 
+	 *
 	 * @throws \Exception If $strFile is invalid
 	 */
 	public function add($strFile, $strVersion=null, $strMedia='all')
@@ -147,7 +147,7 @@ class Combiner extends \System
 
 	/**
 	 * Add multiple files from an array
-	 * 
+	 *
 	 * @param array  $arrFiles   An array of files to be added
 	 * @param string $strVersion An optional version number
 	 * @param string $strMedia   The media type of the file (.css only)
@@ -163,7 +163,7 @@ class Combiner extends \System
 
 	/**
 	 * Check whether files have been added
-	 * 
+	 *
 	 * @return boolean True if there are files
 	 */
 	public function hasEntries()
@@ -174,9 +174,9 @@ class Combiner extends \System
 
 	/**
 	 * Generate the combined file and return its path
-	 * 
+	 *
 	 * @param string $strUrl An optional URL to prepend
-	 * 
+	 *
 	 * @return string The path to the combined file
 	 */
 	public function getCombinedFile($strUrl=null)

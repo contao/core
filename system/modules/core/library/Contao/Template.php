@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,17 +15,17 @@ namespace Contao;
 
 /**
  * Parses and outputs template files
- * 
+ *
  * The class supports loading template files, adding variables to them and then
  * printing them to the screen. It functions as abstract parent class for the
  * two core classes "BackendTemplate" and "FrontendTemplate".
- * 
+ *
  * Usage:
- * 
+ *
  *     $template = new BackendTemplate();
  *     $template->name = 'Leo Feyer';
  *     $template->output();
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -72,7 +72,7 @@ abstract class Template extends \Controller
 
 	/**
 	 * Create a new template object
-	 * 
+	 *
 	 * @param string $strTemplate    The template name
 	 * @param string $strContentType The content type (defaults to "text/html")
 	 */
@@ -87,7 +87,7 @@ abstract class Template extends \Controller
 
 	/**
 	 * Set an object property
-	 * 
+	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
 	 */
@@ -99,9 +99,9 @@ abstract class Template extends \Controller
 
 	/**
 	 * Return an object property
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return mixed The property value
 	 */
 	public function __get($strKey)
@@ -117,9 +117,9 @@ abstract class Template extends \Controller
 
 	/**
 	 * Check whether a property is set
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return boolean True if the property is set
 	 */
 	public function __isset($strKey)
@@ -130,7 +130,7 @@ abstract class Template extends \Controller
 
 	/**
 	 * Set the template data from an array
-	 * 
+	 *
 	 * @param array $arrData The data array
 	 */
 	public function setData($arrData)
@@ -141,7 +141,7 @@ abstract class Template extends \Controller
 
 	/**
 	 * Return the template data as array
-	 * 
+	 *
 	 * @return array The data array
 	 */
 	public function getData()
@@ -152,7 +152,7 @@ abstract class Template extends \Controller
 
 	/**
 	 * Set the template name
-	 * 
+	 *
 	 * @param string $strTemplate The template name
 	 */
 	public function setName($strTemplate)
@@ -163,7 +163,7 @@ abstract class Template extends \Controller
 
 	/**
 	 * Return the template name
-	 * 
+	 *
 	 * @return string The template name
 	 */
 	public function getName()
@@ -174,7 +174,7 @@ abstract class Template extends \Controller
 
 	/**
 	 * Set the output format
-	 * 
+	 *
 	 * @param string $strFormat The output format
 	 */
 	public function setFormat($strFormat)
@@ -185,7 +185,7 @@ abstract class Template extends \Controller
 
 	/**
 	 * Return the output format
-	 * 
+	 *
 	 * @return string The output format
 	 */
 	public function getFormat()
@@ -218,7 +218,7 @@ abstract class Template extends \Controller
 
 	/**
 	 * Parse the template file and return it as string
-	 * 
+	 *
 	 * @return string The template markup
 	 */
 	public function parse()
@@ -356,9 +356,9 @@ abstract class Template extends \Controller
 
 	/**
 	 * Minify the HTML markup preserving pre, script, style and textarea tags
-	 * 
+	 *
 	 * @param string $strHtml The HTML markup
-	 * 
+	 *
 	 * @return string The minified HTML markup
 	 */
 	public function minifyHtml($strHtml)
@@ -425,9 +425,9 @@ abstract class Template extends \Controller
 
 	/**
 	 * Print the IE6 warning
-	 * 
+	 *
 	 * @return string The warning message
-	 * 
+	 *
 	 * @deprecated The IE6 warning is now in the templates (e.g. be_install)
 	 */
 	public function showIE6warning()

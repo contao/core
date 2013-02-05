@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Comments
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -19,7 +19,7 @@ namespace Contao;
 
 /**
  * Reads and writes comments
- * 
+ *
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -36,14 +36,14 @@ class CommentsModel extends \Model
 
 	/**
 	 * Find published comments by their source table and parent ID
-	 * 
+	 *
 	 * @param string  $strSource  The source element
 	 * @param integer $intParent  The parent ID
 	 * @param boolean $blnDesc    If true, comments will be sorted descending
 	 * @param integer $intLimit   An optional limit
 	 * @param integer $intOffset  An optional offset
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no comments
 	 */
 	public static function findPublishedBySourceAndParent($strSource, $intParent, $blnDesc=false, $intLimit=0, $intOffset=0, array $arrOptions=array())
@@ -70,10 +70,10 @@ class CommentsModel extends \Model
 
 	/**
 	 * Count published comments by their source table and parent ID
-	 * 
+	 *
 	 * @param string  $strSource The source element
 	 * @param integer $intParent The parent ID
-	 * 
+	 *
 	 * @return integer The number of comments
 	 */
 	public static function countPublishedBySourceAndParent($strSource, $intParent)

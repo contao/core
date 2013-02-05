@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -22,16 +22,16 @@ if (!class_exists('idna_convert', false))
 
 /**
  * An idna_encode adapter class
- * 
+ *
  * The class encodes and decodes internationalized domain names according to RFC
  * 3490. It also contains two helper methods to encode e-mails and URLs.
- * 
+ *
  * Usage:
- * 
+ *
  *     echo Idna::encode('bürger.de');
  *     echo Idna::encodeEmail('mit@bürger.de');
  *     echo Idna::encodeUrl('http://www.bürger.de');
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -41,9 +41,9 @@ class Idna
 
 	/**
 	 * Encode an internationalized domain name
-	 * 
+	 *
 	 * @param string $strDomain The domain name
-	 * 
+	 *
 	 * @return string The encoded domain name
 	 */
 	public static function encode($strDomain)
@@ -55,9 +55,9 @@ class Idna
 
 	/**
 	 * Decode an internationalized domain name
-	 * 
+	 *
 	 * @param string $strDomain The domain name
-	 * 
+	 *
 	 * @return string The decoded domain name
 	 */
 	public static function decode($strDomain)
@@ -69,9 +69,9 @@ class Idna
 
 	/**
 	 * Encode the domain in an e-mail address
-	 * 
+	 *
 	 * @param string $strEmail The e-mail address
-	 * 
+	 *
 	 * @return string The encoded e-mail address
 	 */
 	public static function encodeEmail($strEmail)
@@ -88,9 +88,9 @@ class Idna
 
 	/**
 	 * Encode the domain in an URL
-	 * 
+	 *
 	 * @param string $strUrl The URL
-	 * 
+	 *
 	 * @return string The encoded URL
 	 */
 	public static function encodeUrl($strUrl)

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,21 +15,21 @@ namespace Contao;
 
 /**
  * Sends HTTP requests and reads the response
- * 
+ *
  * The class can be used to communitcate with services that are available via
  * HTTP (e.g. the Contao Extension Repository or the Live Update Service). It
  * uses some of Drupal's HTTP request class methods ({@see http://drupal.org}).
- * 
+ *
  * Usage:
- * 
+ *
  *     $request = new Request();
  *     $request->send('http://www.inetrobots.com/liveupdate/version.txt');
- * 
+ *
  *     if (!$request->hasError())
  *     {
  *         echo "The latest Contao version is " . $request->response;
  *     }
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -98,15 +98,15 @@ class Request
 
 	/**
 	 * Set an object property
-	 * 
+	 *
 	 * Supported keys:
-	 * 
+	 *
 	 * * data:   the request data
 	 * * method: the request method
-	 * 
+	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
-	 * 
+	 *
 	 * @throws \Exception If $strKey is unknown
 	 */
 	public function __set($strKey, $varValue)
@@ -130,17 +130,17 @@ class Request
 
 	/**
 	 * Return an object property
-	 * 
+	 *
 	 * Supported keys:
-	 * 
+	 *
 	 * * error:    the error message or an empty string
 	 * * code:     the response code
 	 * * request:  the request string
 	 * * response: the response string
 	 * * headers:  the response headers array
-	 * 
+	 *
 	 * @param string $strKey The property key
-	 * 
+	 *
 	 * @return mixed|null The property value or null
 	 */
 	public function __get($strKey)
@@ -174,7 +174,7 @@ class Request
 
 	/**
 	 * Add request headers
-	 * 
+	 *
 	 * @param string $strKey   The header name
 	 * @param mixed  $varValue The header value
 	 */
@@ -186,7 +186,7 @@ class Request
 
 	/**
 	 * Return true if there was an error
-	 * 
+	 *
 	 * @return boolean True if there was an error
 	 */
 	public function hasError()
@@ -197,7 +197,7 @@ class Request
 
 	/**
 	 * Send the HTTP request
-	 * 
+	 *
 	 * @param string $strUrl    The target URL
 	 * @param string $strData   Optional request data
 	 * @param string $strMethod An optional request method

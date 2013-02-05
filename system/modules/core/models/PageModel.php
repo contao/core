@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -19,7 +19,7 @@ namespace Contao;
 
 /**
  * Reads and writes pages
- * 
+ *
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -42,10 +42,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find a published page by its ID
-	 * 
+	 *
 	 * @param integer $intId      The page ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no published page
 	 */
 	public static function findPublishedById($intId, array $arrOptions=array())
@@ -65,11 +65,11 @@ class PageModel extends \Model
 
 	/**
 	 * Find the first published root page by its host name and language
-	 * 
+	 *
 	 * @param string $strHost     The host name
 	 * @param mixed  $varLanguage An ISO language code or an array of ISO language codes
 	 * @param array  $arrOptions  An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no matching root page
 	 */
 	public static function findFirstPublishedRootByHostAndLanguage($strHost, $varLanguage, array $arrOptions=array())
@@ -126,10 +126,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find the first published page by its parent ID
-	 * 
+	 *
 	 * @param integer $intPid     The parent page's ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no published page
 	 */
 	public static function findFirstPublishedByPid($intPid, array $arrOptions=array())
@@ -154,10 +154,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find the first published regular page by its parent ID
-	 * 
+	 *
 	 * @param integer $intPid The parent page's ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no published regular page
 	 */
 	public static function findFirstPublishedRegularByPid($intPid, array $arrOptions=array())
@@ -182,10 +182,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find an error 403 page by its parent ID
-	 * 
+	 *
 	 * @param integer $intPid     The parent page's ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no 403 page
 	 */
 	public static function find403ByPid($intPid, array $arrOptions=array())
@@ -210,10 +210,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find an error 404 page by its parent ID
-	 * 
+	 *
 	 * @param integer $intPid     The parent page's ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no 404 page
 	 */
 	public static function find404ByPid($intPid, array $arrOptions=array())
@@ -238,10 +238,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find pages matching a list of possible alias names
-	 * 
+	 *
 	 * @param array $arrAliases An array of possible alias names
 	 * @param array $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model_Collection|null A collection of Models or null if there is no matching pages
 	 */
 	public static function findByAliases($arrAliases, array $arrOptions=array())
@@ -283,10 +283,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find published pages by their ID or aliases
-	 * 
+	 *
 	 * @param mixed $varId      The numeric ID or the alias name
 	 * @param array $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedByIdOrAlias($varId, array $arrOptions=array())
@@ -307,11 +307,11 @@ class PageModel extends \Model
 
 	/**
 	 * Find all published subpages by their parent ID and exclude pages only visible for guests
-	 * 
+	 *
 	 * @param integer $intPid        The parent page's ID
 	 * @param boolean $blnShowHidden If true, hidden pages will be included
 	 * @param boolean $blnIsSitemap  If true, the sitemap settings apply
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedSubpagesWithoutGuestsByPid($intPid, $blnShowHidden=false, $blnIsSitemap=false)
@@ -332,10 +332,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find all published regular pages by their IDs and exclude pages only visible for guests
-	 * 
+	 *
 	 * @param integer $arrIds     An array of page IDs
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedRegularWithoutGuestsByIds($arrIds, array $arrOptions=array())
@@ -370,10 +370,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find all published regular pages by their parent IDs and exclude pages only visible for guests
-	 * 
+	 *
 	 * @param integer $intPid     The parent page's ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedRegularWithoutGuestsByPid($intPid, array $arrOptions=array())
@@ -403,9 +403,9 @@ class PageModel extends \Model
 
 	/**
 	 * Find the parent pages of a page
-	 * 
+	 *
 	 * @param integer $intId The page's ID
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no parent pages
 	 */
 	public static function findParentsById($intId)
@@ -424,9 +424,9 @@ class PageModel extends \Model
 
 	/**
 	 * Find a page by its ID and return it with the inherited details
-	 * 
+	 *
 	 * @param integer $intId The page's ID
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no matching page
 	 */
 	public static function findWithDetails($intId)
@@ -444,7 +444,7 @@ class PageModel extends \Model
 
 	/**
 	 * Get the details of a page including inherited parameters
-	 * 
+	 *
 	 * @return \Model The page model
 	 */
 	public function loadDetails()

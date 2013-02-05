@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Calendar
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -12,7 +12,7 @@
 
 
 /**
- * Dynamically add the permission check and parent table 
+ * Dynamically add the permission check and parent table
  */
 if (Input::get('do') == 'calendar')
 {

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,24 +15,24 @@ namespace Contao;
 
 /**
  * A wrapper class for accessing the file system
- * 
+ *
  * The class handles file operations, either directly via the PHP functions or
  * through an FTP connection. The latter is a workaround for insufficient file
  * permissions when the PHP process runs under a different user than the file
  * owner (referred to as "Safe Mode Hack").
- * 
+ *
  * Usage:
- * 
+ *
  *     $files = Files::getInstance();
- * 
+ *
  *     $files->mkdir('test');
- * 
+ *
  *     $files->fopen('test/one.txt', 'wb');
  *     $files->fputs('My test');
  *     $files->fclose();
- * 
+ *
  *     $files->rrdir('test');
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -61,7 +61,7 @@ abstract class Files
 
 	/**
 	 * Instantiate the object (Factory)
-	 * 
+	 *
 	 * @return \Files The files object
 	 */
 	public static function getInstance()
@@ -93,9 +93,9 @@ abstract class Files
 
 	/**
 	 * Create a directory
-	 * 
+	 *
 	 * @param string $strDirectory The directory name
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	abstract public function mkdir($strDirectory);
@@ -103,9 +103,9 @@ abstract class Files
 
 	/**
 	 * Remove a directory
-	 * 
+	 *
 	 * @param string $strDirectory The directory name
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	abstract public function rmdir($strDirectory);
@@ -113,7 +113,7 @@ abstract class Files
 
 	/**
 	 * Recursively remove a directory
-	 * 
+	 *
 	 * @param string  $strFolder       The directory name
 	 * @param boolean $blnPreserveRoot If true, the root folder will not be removed
 	 */
@@ -143,10 +143,10 @@ abstract class Files
 
 	/**
 	 * Open a file and return the handle
-	 * 
+	 *
 	 * @param string $strFile The file name
 	 * @param string $strMode The operation mode
-	 * 
+	 *
 	 * @return resource The file handle
 	 */
 	abstract public function fopen($strFile, $strMode);
@@ -154,7 +154,7 @@ abstract class Files
 
 	/**
 	 * Write content to a file
-	 * 
+	 *
 	 * @param resource $resFile    The file handle
 	 * @param string   $strContent The content to store in the file
 	 */
@@ -163,9 +163,9 @@ abstract class Files
 
 	/**
 	 * Close a file handle
-	 * 
+	 *
 	 * @param resource $resFile The file handle
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	abstract public function fclose($resFile);
@@ -173,10 +173,10 @@ abstract class Files
 
 	/**
 	 * Rename a file or folder
-	 * 
+	 *
 	 * @param string $strOldName The old name
 	 * @param string $strNewName The new name
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	abstract public function rename($strOldName, $strNewName);
@@ -184,10 +184,10 @@ abstract class Files
 
 	/**
 	 * Copy a file or folder
-	 * 
+	 *
 	 * @param string $strSource      The source file or folder
 	 * @param string $strDestination The new file or folder path
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	abstract public function copy($strSource, $strDestination);
@@ -195,9 +195,9 @@ abstract class Files
 
 	/**
 	 * Delete a file
-	 * 
+	 *
 	 * @param string $strFile The file name
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	abstract public function delete($strFile);
@@ -205,10 +205,10 @@ abstract class Files
 
 	/**
 	 * Change the file mode
-	 * 
+	 *
 	 * @param string $strFile The file name
 	 * @param mixed  $varMode The new file mode
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	abstract public function chmod($strFile, $varMode);
@@ -216,9 +216,9 @@ abstract class Files
 
 	/**
 	 * Check whether a file is writeable
-	 * 
+	 *
 	 * @param string $strFile The file name
-	 * 
+	 *
 	 * @return boolean True if the file is writeable
 	 */
 	abstract public function is_writeable($strFile);
@@ -226,10 +226,10 @@ abstract class Files
 
 	/**
 	 * Move an uploaded file to a folder
-	 * 
+	 *
 	 * @param string $strSource      The source file
 	 * @param string $strDestination The new file path
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	abstract public function move_uploaded_file($strSource, $strDestination);
@@ -237,7 +237,7 @@ abstract class Files
 
 	/**
 	 * Validate a path (must not contain ../ fragments)
-	 * 
+	 *
 	 * @throws \Exception If the given paths are not valid
 	 */
 	protected function validate()

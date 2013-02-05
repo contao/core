@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -19,10 +19,10 @@ namespace Contao;
 
 /**
  * Reads and writes file entries
- * 
+ *
  * The files themselves reside in the files directory. This class only handles
  * the corresponding database entries (database aided file system).
- * 
+ *
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -39,10 +39,10 @@ class FilesModel extends \Model
 
 	/**
 	 * Find multiple files by their IDs
-	 * 
+	 *
 	 * @param array $arrIds     An array of file IDs
 	 * @param array $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no files
 	 */
 	public static function findMultipleByIds($arrIds, array $arrOptions=array())
@@ -65,10 +65,10 @@ class FilesModel extends \Model
 
 	/**
 	 * Find multiple files with the same base path
-	 * 
+	 *
 	 * @param string $strPath    The base path
 	 * @param array  $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no matching files
 	 */
 	public static function findMultipleByBasepath($strPath, array $arrOptions=array())
@@ -80,11 +80,11 @@ class FilesModel extends \Model
 
 	/**
 	 * Find multiple files by ID and a list of extensions
-	 * 
+	 *
 	 * @param array $arrIds        An array of file IDs
 	 * @param array $arrExtensions An array of file extensions
 	 * @param array $arrOptions    An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null of there are no matching files
 	 */
 	public static function findMultipleByIdsAndExtensions($arrIds, $arrExtensions, array $arrOptions=array())

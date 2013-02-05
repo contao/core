@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,15 +15,15 @@ namespace Contao;
 
 /**
  * Creates, reads, writes and deletes files
- * 
+ *
  * Usage:
- * 
+ *
  *     $file = new File('test.txt');
  *     $file->write('This is a test');
  *     $file->close();
- * 
+ *
  *     $file->delete();
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -70,10 +70,10 @@ class File extends \System
 
 	/**
 	 * Instantiate a new file object
-	 * 
+	 *
 	 * @param string  $strFile        The file path
 	 * @param boolean $blnDoNotCreate If true, the file will not be autocreated
-	 * 
+	 *
 	 * @throws \Exception If $strFile is a directory
 	 */
 	public function __construct($strFile, $blnDoNotCreate=false)
@@ -116,9 +116,9 @@ class File extends \System
 
 	/**
 	 * Return an object property
-	 * 
+	 *
 	 * Supported keys:
-	 * 
+	 *
 	 * * size:      the file size
 	 * * name:      the file name without extension
 	 * * dirname:   the path of the parent folder
@@ -135,9 +135,9 @@ class File extends \System
 	 * * height:    the file height (images only)
 	 * * isGdImage: true if the file can be handled by the GDlib
 	 * * handle:    the file handle (returned by fopen())
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return mixed The property value
 	 */
 	public function __get($strKey)
@@ -248,7 +248,7 @@ class File extends \System
 
 	/**
 	 * Create the file if it does not yet exist
-	 * 
+	 *
 	 * @throws \Exception If the file cannot be written
 	 */
 	protected function createIfNotExists()
@@ -281,7 +281,7 @@ class File extends \System
 
 	/**
 	 * Check whether the file exists
-	 * 
+	 *
 	 * @return boolean True if the file exists
 	 */
 	public function exists()
@@ -292,7 +292,7 @@ class File extends \System
 
 	/**
 	 * Truncate the file
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function truncate()
@@ -303,9 +303,9 @@ class File extends \System
 
 	/**
 	 * Write data to the file
-	 * 
+	 *
 	 * @param mixed $varData The data to be written
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function write($varData)
@@ -316,10 +316,10 @@ class File extends \System
 
 	/**
 	 * Append data to the file
-	 * 
+	 *
 	 * @param mixed  $varData The data to be appended
 	 * @param string $strLine The line ending (defaults to LF)
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function append($varData, $strLine="\n")
@@ -330,7 +330,7 @@ class File extends \System
 
 	/**
 	 * Delete the file
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function delete()
@@ -341,9 +341,9 @@ class File extends \System
 
 	/**
 	 * Set the file permissions
-	 * 
+	 *
 	 * @param integer $intChmod The CHMOD settings
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function chmod($intChmod)
@@ -354,7 +354,7 @@ class File extends \System
 
 	/**
 	 * Close the file handle
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function close()
@@ -388,7 +388,7 @@ class File extends \System
 
 	/**
 	 * Return the file content as string
-	 * 
+	 *
 	 * @return string The file content without BOM
 	 */
 	public function getContent()
@@ -415,7 +415,7 @@ class File extends \System
 
 	/**
 	 * Return the file content as array
-	 * 
+	 *
 	 * @return array The file content as array
 	 */
 	public function getContentAsArray()
@@ -426,9 +426,9 @@ class File extends \System
 
 	/**
 	 * Rename the file
-	 * 
+	 *
 	 * @param string $strNewName The new path
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function renameTo($strNewName)
@@ -448,9 +448,9 @@ class File extends \System
 
 	/**
 	 * Copy the file
-	 * 
+	 *
 	 * @param string $strNewName The target path
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function copyTo($strNewName)
@@ -461,10 +461,10 @@ class File extends \System
 
 	/**
 	 * Write data to a file
-	 * 
+	 *
 	 * @param mixed  $varData The data to be written
 	 * @param string $strMode The operation mode
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	protected function fputs($varData, $strMode)
@@ -504,7 +504,7 @@ class File extends \System
 
 	/**
 	 * Return the mime type and icon of the file based on its extension
-	 * 
+	 *
 	 * @return array An array with mime type and icon name
 	 */
 	protected function getMimeInfo()
@@ -646,7 +646,7 @@ class File extends \System
 
 	/**
 	 * Get the mime type of the file based on its extension
-	 *  
+	 * 
 	 * @return string The mime type
 	 */
 	protected function getMimeType()
@@ -658,7 +658,7 @@ class File extends \System
 
 	/**
 	 * Return the file icon depending on the file type
-	 * 
+	 *
 	 * @return string The icon name
 	 */
 	protected function getIcon()
@@ -670,7 +670,7 @@ class File extends \System
 
 	/**
 	 * Return the MD5 hash of the file
-	 * 
+	 *
 	 * @return string The MD5 hash
 	 */
 	protected function getHash()

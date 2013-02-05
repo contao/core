@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,27 +15,27 @@ namespace Contao;
 
 /**
  * Reads objects from and writes them to to the database
- * 
+ *
  * The class allows you to find and automatically join database records and to
  * convert the result into objects. It also supports creating new objects and
  * persisting them in the database.
- * 
+ *
  * Usage:
- * 
+ *
  *     // Write
  *     $user = new UserModel();
  *     $user->name = 'Leo Feyer';
  *     $user->city = 'Wuppertal';
  *     $user->save();
- * 
+ *
  *     // Read
  *     $user = UserModel::findByCity('Wuppertal');
- * 
+ *
  *     while ($user->next())
  *     {
  *         echo $user->name;
  *     }
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -76,7 +76,7 @@ abstract class Model extends \System
 
 	/**
 	 * Load the relations and optionally process a result set
-	 * 
+	 *
 	 * @param \Database\Result $objResult An optional database result
 	 */
 	public function __construct(\Database\Result $objResult=null)
@@ -124,7 +124,7 @@ abstract class Model extends \System
 
 	/**
 	 * Set an object property
-	 * 
+	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
 	 */
@@ -136,9 +136,9 @@ abstract class Model extends \System
 
 	/**
 	 * Return an object property
-	 * 
+	 *
 	 * @param string $strKey The property key
-	 * 
+	 *
 	 * @return mixed|null The property value or null
 	 */
 	public function __get($strKey)
@@ -154,9 +154,9 @@ abstract class Model extends \System
 
 	/**
 	 * Check whether a property is set
-	 * 
+	 *
 	 * @param string $strKey The property key
-	 * 
+	 *
 	 * @return boolean True if the property is set
 	 */
 	public function __isset($strKey)
@@ -167,7 +167,7 @@ abstract class Model extends \System
 
 	/**
 	 * Return the name of the primary key
-	 * 
+	 *
 	 * @return string The primary key
 	 */
 	public static function getPk()
@@ -178,7 +178,7 @@ abstract class Model extends \System
 
 	/**
 	 * Return the name of the related table
-	 * 
+	 *
 	 * @return string The table name
 	 */
 	public static function getTable()
@@ -189,7 +189,7 @@ abstract class Model extends \System
 
 	/**
 	 * Return the current record as associative array
-	 * 
+	 *
 	 * @return array The data record
 	 */
 	public function row()
@@ -200,9 +200,9 @@ abstract class Model extends \System
 
 	/**
 	 * Set the current record from an array
-	 * 
+	 *
 	 * @param array $arrData The data record
-	 * 
+	 *
 	 * @return \Model The model object
 	 */
 	public function setRow(array $arrData)
@@ -214,9 +214,9 @@ abstract class Model extends \System
 
 	/**
 	 * Save the current record
-	 * 
+	 *
 	 * @param boolean $blnForceInsert Force creating a new record
-	 * 
+	 *
 	 * @return \Model The model object
 	 */
 	public function save($blnForceInsert=false)
@@ -247,9 +247,9 @@ abstract class Model extends \System
 
 	/**
 	 * Modify the current row before it is stored in the database
-	 * 
+	 *
 	 * @param array $arrSet The data array
-	 * 
+	 *
 	 * @return array The modified data array
 	 */
 	protected function preSave(array $arrSet)
@@ -260,7 +260,7 @@ abstract class Model extends \System
 
 	/**
 	 * Delete the current record and return the number of affected rows
-	 * 
+	 *
 	 * @return integer The number of affected rows
 	 */
 	public function delete()
@@ -273,12 +273,12 @@ abstract class Model extends \System
 
 	/**
 	 * Lazy load related records
-	 * 
+	 *
 	 * @param string $strKey     The property name
 	 * @param array  $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|\Model\Collection The model or a model collection if there are multiple rows
-	 * 
+	 *
 	 * @throws \Exception If $strKey is not a related field
 	 */
 	public function getRelated($strKey, array $arrOptions=array())
@@ -329,10 +329,10 @@ abstract class Model extends \System
 
 	/**
 	 * Find a single record by its primary key
-	 * 
+	 *
 	 * @param mixed $varValue   The property value
 	 * @param array $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if the result is empty
 	 */
 	public static function findByPk($varValue, array $arrOptions=array())
@@ -356,10 +356,10 @@ abstract class Model extends \System
 
 	/**
 	 * Find a single record by its ID or alias
-	 * 
+	 *
 	 * @param mixed $varId      The ID or alias
 	 * @param array $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if the result is empty
 	 */
 	public static function findByIdOrAlias($varId, array $arrOptions=array())
@@ -385,11 +385,11 @@ abstract class Model extends \System
 
 	/**
 	 * Find a single record by various criteria
-	 * 
+	 *
 	 * @param mixed $strColumn  The property name
 	 * @param mixed $varValue   The property value
 	 * @param array $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if the result is empty
 	 */
 	public static function findOneBy($strColumn, $varValue, array $arrOptions=array())
@@ -413,11 +413,11 @@ abstract class Model extends \System
 
 	/**
 	 * Find records by various criteria
-	 * 
+	 *
 	 * @param mixed $strColumn  The property name
 	 * @param mixed $varValue   The property value
 	 * @param array $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null The model collection or null if the result is empty
 	 */
 	public static function findBy($strColumn, $varValue, array $arrOptions=array())
@@ -440,9 +440,9 @@ abstract class Model extends \System
 
 	/**
 	 * Find all records
-	 * 
+	 *
 	 * @param array $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null The model collection or null if the result is empty
 	 */
 	public static function findAll(array $arrOptions=array())
@@ -463,10 +463,10 @@ abstract class Model extends \System
 
 	/**
 	 * Magic method to map Model::findByName() to Model::findBy('name')
-	 * 
+	 *
 	 * @param string $name The method name
 	 * @param array  $args The passed arguments
-	 * 
+	 *
 	 * @return \Model|\Model\Collection|null A model, model collection or null if the result is empty
 	 */
 	public static function __callStatic($name, $args)
@@ -488,18 +488,18 @@ abstract class Model extends \System
 
 	/**
 	 * Find records and return the model or model collection
-	 * 
+	 *
 	 * Supported options:
-	 * 
+	 *
 	 * * column: the field name
 	 * * value:  the field value
 	 * * limit:  the maximum number of rows
 	 * * offset: the number of rows to skip
 	 * * order:  the sorting order
 	 * * eager:  load all related records eagerly
-	 * 
+	 *
 	 * @param array $arrOptions The options array
-	 * 
+	 *
 	 * @return \Model|\Model\Collection|null A model, model collection or null if the result is empty
 	 */
 	protected static function find(array $arrOptions)
@@ -562,9 +562,9 @@ abstract class Model extends \System
 
 	/**
 	 * Modify the database statement before it is executed
-	 * 
+	 *
 	 * @param \Database\Statement $objStatement The database statement object
-	 * 
+	 *
 	 * @return \Database\Statement The database statement object
 	 */
 	protected static function preFind(\Database\Statement $objStatement)
@@ -575,9 +575,9 @@ abstract class Model extends \System
 
 	/**
 	 * Modify the database result before the model is created
-	 * 
+	 *
 	 * @param \Database\Result $objResult The database result object
-	 * 
+	 *
 	 * @return \Database\Result The database result object
 	 */
 	protected static function postFind(\Database\Result $objResult)
@@ -588,10 +588,10 @@ abstract class Model extends \System
 
 	/**
 	 * Return the number of records matching certain criteria
-	 * 
+	 *
 	 * @param mixed $strColumn An optional property name
 	 * @param mixed $varValue  An optional property value
-	 * 
+	 *
 	 * @return integer The number of matching rows
 	 */
 	public static function countBy($strColumn=null, $varValue=null)
@@ -614,7 +614,7 @@ abstract class Model extends \System
 
 	/**
 	 * Return the total number of rows
-	 * 
+	 *
 	 * @return integer The total number of rows
 	 */
 	public static function countAll()

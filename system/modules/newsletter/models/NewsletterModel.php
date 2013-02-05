@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Newsletter
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -19,7 +19,7 @@ namespace Contao;
 
 /**
  * Reads and writes newsletters
- * 
+ *
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -36,11 +36,11 @@ class NewsletterModel extends \Model
 
 	/**
 	 * Find sent newsletters by their parent IDs and their ID or alias
-	 * 
+	 *
 	 * @param integer $varId      The numeric ID or alias name
 	 * @param array   $arrPids    An array of newsletter channel IDs
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no sent newsletters
 	 */
 	public static function findSentByParentAndIdOrAlias($varId, $arrPids, array $arrOptions=array())
@@ -64,10 +64,10 @@ class NewsletterModel extends \Model
 
 	/**
 	 * Find sent newsletters by their parent ID
-	 * 
+	 *
 	 * @param integer $intPid     The newsletter channel ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no sent newsletters
 	 */
 	public static function findSentByPid($intPid, array $arrOptions=array())
@@ -91,10 +91,10 @@ class NewsletterModel extends \Model
 
 	/**
 	 * Find sent newsletters by multiple parent IDs
-	 * 
+	 *
 	 * @param array $arrPids    An array of newsletter channel IDs
 	 * @param array $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no sent newsletters
 	 */
 	public static function findSentByPids($arrPids, array $arrOptions=array())
