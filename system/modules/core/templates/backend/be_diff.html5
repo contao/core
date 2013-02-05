@@ -38,7 +38,7 @@
 <?php foreach ($this->versions as $k=>$v): ?>
   <option value="<?php echo $k; ?>"<?php if ($v['version'] == $this->from): ?> selected="selected"<?php endif; ?>><?php echo $v['info']; ?></option>
 <?php endforeach; ?>
-</select> 
+</select>
 
 <span class="arrow">→</span>
 
@@ -46,7 +46,7 @@
 <?php foreach ($this->versions as $k=>$v): ?>
   <option value="<?php echo $k; ?>"<?php if ($v['version'] == $this->to): ?> selected="selected"<?php endif; ?>><?php echo $v['info']; ?></option>
 <?php endforeach; ?>
-</select> 
+</select>
 
 <input type="submit" class="tl_submit" value="<?php echo $this->showLabel; ?>">
 </div>

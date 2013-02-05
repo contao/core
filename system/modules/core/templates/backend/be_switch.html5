@@ -40,17 +40,17 @@
 <input type="hidden" name="FORM_SUBMIT" value="tl_switch">
 <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 <?php if ($this->isAdmin): ?>
-<label for="ctrl_user"><?php echo $this->feUser; ?>:</label> 
+<label for="ctrl_user"><?php echo $this->feUser; ?>:</label>
 <input type="text" name="user" id="ctrl_user" list="userlist" class="tl_text user" placeholder="<?php echo $this->username; ?>" value="<?php echo $this->user; ?>" autocomplete="off">
 <datalist id="userlist"></datalist>
 <?php endif; ?>
-<label for="ctrl_unpublished"><?php echo $this->hiddenElements; ?>:</label> 
+<label for="ctrl_unpublished"><?php echo $this->hiddenElements; ?>:</label>
 <select name="unpublished" id="ctrl_unpublished" class="tl_select">
   <option value="hide"><?php echo $this->lblHide; ?></option>
   <option value="show"<?php if ($this->show) echo ' selected="selected"'; ?>><?php echo $this->lblShow; ?></option>
-</select> 
-<input type="submit" class="tl_submit" value="<?php echo $this->apply; ?>"> 
-<input type="button" class="tl_submit" value="<?php echo $this->reload; ?>" onclick="parent.frames[1].location.reload()"> 
+</select>
+<input type="submit" class="tl_submit" value="<?php echo $this->apply; ?>">
+<input type="button" class="tl_submit" value="<?php echo $this->reload; ?>" onclick="parent.frames[1].location.reload()">
 <a href="javascript:parent.location.href=parent.frames[1].location.href" class="close">&times;</a>
 </div>
 </form>

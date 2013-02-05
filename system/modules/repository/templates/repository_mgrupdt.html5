@@ -27,7 +27,7 @@ $tabindex = 1;
 <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 
 <div class="tl_tbox">
-<?php echo ($rep->dbUpdate != '') ? $rep->dbUpdate : '<div class="color_green">'.$text['dbuptodate'].'</div>'; ?> 
+<?php echo ($rep->dbUpdate != '') ? $rep->dbUpdate : '<div class="color_green">'.$text['dbuptodate'].'</div>'; ?>
 </div>
 
 </div>
@@ -36,7 +36,7 @@ $tabindex = 1;
 
 <div class="tl_submit_container">
 <?php if (property_exists($rep, 'f_submit')): ?>
-  <input type="submit" name="repository_submitbutton" class="tl_submit" value="<?php echo $text[$rep->f_submit]; ?>"> 
+  <input type="submit" name="repository_submitbutton" class="tl_submit" value="<?php echo $text[$rep->f_submit]; ?>">
 <?php endif; ?>
   <input type="submit" name="repository_cancelbutton" class="tl_submit" value="<?php echo $text[$rep->f_cancel]; ?>">
 </div>

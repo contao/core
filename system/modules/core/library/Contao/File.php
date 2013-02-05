@@ -646,7 +646,7 @@ class File extends \System
 
 	/**
 	 * Get the mime type of the file based on its extension
-	 * 
+	 *
 	 * @return string The mime type
 	 */
 	protected function getMimeType()

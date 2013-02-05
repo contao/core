@@ -40,7 +40,7 @@
 </div>
 </div>
 <div class="tl_submit_container">
-  <input type="submit" name="clear" class="tl_submit" value="<?php echo $this->submit; ?>"> 
+  <input type="submit" name="clear" class="tl_submit" value="<?php echo $this->submit; ?>">
 </div>
 </form>
 

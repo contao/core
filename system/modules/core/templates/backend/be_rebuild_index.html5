@@ -35,7 +35,7 @@ window.addEvent('load', function() {
 <form action="<?php echo $this->action; ?>" class="tl_form" method="get">
 <div class="tl_submit_container">
   <input type="hidden" name="do" value="maintenance">
-  <input type="submit" id="index" class="tl_submit" value="<?php echo $this->indexContinue; ?>"> 
+  <input type="submit" id="index" class="tl_submit" value="<?php echo $this->indexContinue; ?>">
 </div>
 </form>
 <?php else: ?>
@@ -58,7 +58,7 @@ window.addEvent('load', function() {
   </div>
 </div>
 <div class="tl_submit_container">
-  <input type="submit" id="index" class="tl_submit" value="<?php echo $this->indexSubmit; ?>"> 
+  <input type="submit" id="index" class="tl_submit" value="<?php echo $this->indexSubmit; ?>">
 </div>
 </form>
 <?php endif; ?>

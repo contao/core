@@ -29,11 +29,11 @@ $text = &$GLOBALS['TL_LANG']['tl_repository'];
 
 <div class="tl_tbox">
 
-<?php echo $theme->createImage('stop128', 'STOP!'); ?> 
+<?php echo $theme->createImage('stop128', 'STOP!'); ?>
 <?php if (count($rep->deps)): ?>
 
 <div class="warning">
-  <?php echo sprintf($text['dependentsdel'], $rep->f_extension); ?> 
+  <?php echo sprintf($text['dependentsdel'], $rep->f_extension); ?>
 </div>
 <table class="autowidth">
   <tr>
@@ -53,7 +53,7 @@ $text = &$GLOBALS['TL_LANG']['tl_repository'];
 <?php if ($rep->f_stage==$rep->uist_confirm): ?>
 
 <div class="question">
-<?php echo sprintf($text['okuninstextension'], $rep->f_extension); ?> 
+<?php echo sprintf($text['okuninstextension'], $rep->f_extension); ?>
 </div>
 <?php endif; ?>
 
@@ -61,7 +61,7 @@ $text = &$GLOBALS['TL_LANG']['tl_repository'];
 <?php if ($rep->f_stage>=$rep->uist_showlog): ?>
 
 <div class="installlog">
-<?php echo $rep->log; ?> 
+<?php echo $rep->log; ?>
 </div>
 <?php endif; ?>
 
@@ -71,7 +71,7 @@ $text = &$GLOBALS['TL_LANG']['tl_repository'];
 
 <div class="tl_submit_container">
 <?php if (property_exists($rep, 'f_submit')): ?>
-  <input type="submit" name="repository_submitbutton" class="tl_submit" value="<?php echo $text[$rep->f_submit]; ?>"> 
+  <input type="submit" name="repository_submitbutton" class="tl_submit" value="<?php echo $text[$rep->f_submit]; ?>">
 <?php endif; ?>
   <input type="submit" name="repository_cancelbutton" class="tl_submit" value="<?php echo $text['cancel']; ?>">
 </div>

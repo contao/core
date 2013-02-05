@@ -201,12 +201,12 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
 
 <div class="mod_repository_submit tl_formbody_submit">
 <div class="tl_submit_container">
-  <input type="submit" name="repository_installbutton" class="tl_submit" value="<?php echo $text['install']; ?>"> 
+  <input type="submit" name="repository_installbutton" class="tl_submit" value="<?php echo $text['install']; ?>">
 <?php if (property_exists($ext, 'manual')): ?>
-  <input type="submit" name="repository_manualbutton" class="tl_submit" value="<?php echo $text['manual']; ?>" onclick="window.open('<?php echo ampersand($ext->manual); ?>');return false"> 
+  <input type="submit" name="repository_manualbutton" class="tl_submit" value="<?php echo $text['manual']; ?>" onclick="window.open('<?php echo ampersand($ext->manual); ?>');return false">
 <?php endif; ?>
 <?php if (property_exists($ext, 'forum')): ?>
-  <input type="submit" name="repository_forumbutton" class="tl_submit" value="<?php echo $text['forum']; ?>" onclick="window.open('<?php echo ampersand($ext->forum); ?>');return false"> 
+  <input type="submit" name="repository_forumbutton" class="tl_submit" value="<?php echo $text['forum']; ?>" onclick="window.open('<?php echo ampersand($ext->forum); ?>');return false">
 <?php endif; ?>
 <?php if (property_exists($ext, 'shop')): ?>
   <input type="submit" name="repository_shopbutton" class="tl_submit" value="<?php echo $text[$ext->type=='free' ? 'donate' : 'shop']; ?>" onclick="window.open('<?php echo ampersand($ext->shop); ?>');return false">

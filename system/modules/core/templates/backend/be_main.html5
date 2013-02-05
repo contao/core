@@ -111,7 +111,7 @@
 <div id="footer">
 
 <div>
-<span class="footer_top_container"><a href="<?php echo $this->request; ?>#top" class="footer_top" title="<?php echo $this->backToTop; ?>" accesskey="t"><?php echo $this->top; ?></a></span> 
+<span class="footer_top_container"><a href="<?php echo $this->request; ?>#top" class="footer_top" title="<?php echo $this->backToTop; ?>" accesskey="t"><?php echo $this->top; ?></a></span>
 <span class="footer_preview_container"><a href="contao/preview.php<?php echo $this->frontendFile; ?>" target="_blank" class="footer_preview" title="<?php echo $this->previewTitle; ?>"><?php echo $this->preview; ?></a></span>
 </div>
 
