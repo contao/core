@@ -168,8 +168,7 @@ class ModulePersonalData extends Module
 				{
 					try
 					{
-						// Use the numeric back end format here!
-						$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
+						$objDate = new Date($varValue);
 						$varValue = $objDate->tstamp;
 					}
 					catch (Exception $e)
