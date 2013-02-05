@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly check for nested arrays in `Widget::isValidOption()` (see #5328).
+
+### Fixed
 Preserve the order of multi source fields when exporting a theme (see #5237).
 
 ### Fixed

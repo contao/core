@@ -1036,10 +1036,10 @@ abstract class Widget extends \Controller
 
 		foreach ($varInput as $strInput)
 		{
-			foreach ($this->arrOptions as $k=>$v)
+			foreach ($this->arrOptions as $v)
 			{
 				// Single dimensional array
-				if (is_numeric($k))
+				if (array_key_exists('value', $v))
 				{
 					if ($strInput == $v['value'])
 					{
