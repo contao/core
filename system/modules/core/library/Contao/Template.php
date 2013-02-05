@@ -404,11 +404,13 @@ abstract class Template extends \Controller
 			{
 				$arrReplace = array
 				(
-					'/\n ?\n+/'      => "\n",   // Convert multiple line-breaks
-					'/^[\t ]+</m'    => '<',    // Remove tag indentation
-					'/>( )?\n</'     => '>$1<', // Remove line-breaks between tags
-					'/\n/'           => '',     // Remove all remaining line-breaks
-					'/ <\/(div|p)>/' => '</$1>' // Remove spaces before closing DIV and P tags
+					'/\n ?\n+/'                   => "\n",    // Convert multiple line-breaks
+					'/^[\t ]+</m'                 => '<',     // Remove tag indentation
+					'/>\n<(a|input|select|span)/' => '> <$1', // Remove line-breaks between tags
+					'/([^>])\n/'                  => '$1 ',   // Remove line-breaks of wrapped text
+					'/  +/'                       => ' ',     // Remove redundant whitespace characters
+					'/\n/'                        => '',      // Remove all remaining line-breaks
+					'/ <\/(div|p)>/'              => '</$1>'  // Remove spaces before closing DIV and P tags
 				);
 
 				$strChunk = str_replace("\r", '', $strChunk);
