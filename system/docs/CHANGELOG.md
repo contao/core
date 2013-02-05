@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.4 (2013-XX-XX)
 --------------------------
 
+### Updated
+Update TinyMCE to version 3.5.8 (see #5273).
+
 ### Fixed
 Correctly check for nested arrays in `Widget::isValidOption()` (see #5328).
 
