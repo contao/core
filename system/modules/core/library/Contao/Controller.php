@@ -1944,6 +1944,7 @@ abstract class Controller extends \System
 		$objFile = new \File($strFile, true);
 		$arrAllowedTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
 
+		// Check whether the file type is allowed to be downloaded
 		if (!in_array($objFile->extension, $arrAllowedTypes))
 		{
 			header('HTTP/1.1 403 Forbidden');
