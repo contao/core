@@ -231,7 +231,7 @@ Do not cache the `system/cron/cron.txt` file (see #5105).
 
 ### Fixed
 Do not create content elements for news and events which redirect to articles,
-pages or external URLs during the version 3 update (see #5117). 
+pages or external URLs during the version 3 update (see #5117).
 
 ### Fixed
 Handle incorrectly closed indexer comments (see #5119).
@@ -385,7 +385,7 @@ Readded the default value for textareas to the form generator (see #4932).
 Readded the option to limit the file tree to a certain path (see #4926).
 
 ### Improved
-Added a hint that selected files can be dragged to re-order them (see #4838). 
+Added a hint that selected files can be dragged to re-order them (see #4838).
 
 ### Fixed
 Correctly add news and event images as RSS feed enclosures (see #4928).
@@ -696,7 +696,7 @@ which is not stored in there are HTML files.
 ### New
 Moved all vendor PHP libraries to `system/vendor` and the Contao library to
 `system/modules/core/library`. Also moved all vendor JavaScript plugins to the
-`assets` folder. 
+`assets` folder.
 
 ### New
 Added the "indexPage" hook (see #4506).
@@ -826,7 +826,7 @@ Added a YouTube content element based on mediaplayer.js (see #4363).
 
 ### New
 Added an additional routine to check boxes, radio buttons and select menus,
-which compares the user input with the given options (see #4383). 
+which compares the user input with the given options (see #4383).
 
 ### Fixed
 Ignore DCA files which do not relate to a database table when building the DCA
@@ -1001,7 +1001,7 @@ column (see #23).
 
 ### New
 Also add the classes "float_above" and "float_below" to image containers (which
-now can only have the classes "float_left" and "float_right") (see #4157). 
+now can only have the classes "float_left" and "float_right") (see #4157).
 
 ### Improved
 Do not generate links to previous and next months in the calendar if they do not

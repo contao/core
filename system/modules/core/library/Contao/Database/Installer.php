@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,10 +15,10 @@ namespace Contao\Database;
 
 /**
  * Handles database updates
- * 
+ *
  * Compares the existing database structure with the DCA table settings and
  * calculates the queries needed to update the database.
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -28,7 +28,7 @@ class Installer extends \Controller
 
 	/**
 	 * Generate a HTML form with queries and return it as string
-	 * 
+	 *
 	 * @return string The form HTML markup
 	 */
 	public function generateSqlForm()
@@ -93,7 +93,7 @@ class Installer extends \Controller
 
 	/**
 	 * Compile a command array for each database modification
-	 * 
+	 *
 	 * @return array An array of commands
 	 */
 	protected function compileCommands()
@@ -249,7 +249,7 @@ class Installer extends \Controller
 
 	/**
 	 * Get the DCA table settings from the DCA cache
-	 * 
+	 *
 	 * @return array An array of DCA table settings
 	 */
 	protected function getFromDca()
@@ -292,7 +292,7 @@ class Installer extends \Controller
 
 	/**
 	 * Get the DCA table settings from the database.sql files
-	 * 
+	 *
 	 * @return array An array of DCA table settings
 	 */
 	protected function getFromFile()
@@ -381,7 +381,7 @@ class Installer extends \Controller
 
 	/**
 	 * Get the current database structure
-	 * 
+	 *
 	 * @return array An array of tables and fields
 	 */
 	protected function getFromDB()

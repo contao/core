@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,16 +15,16 @@ namespace Contao;
 
 /**
  * Handles reading and updating the session data
- * 
+ *
  * The class functions as an adapter for the PHP $_SESSION array and separates
  * back end from front end session data.
- * 
+ *
  * Usage:
- * 
+ *
  *     $session = Session::getInstance();
  *     $session->set('foo', 'bar');
  *     echo $session::->('foo');
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -97,7 +97,7 @@ class Session
 
 	/**
 	 * Return the object instance (Singleton)
-	 * 
+	 *
 	 * @return \Session The object instance
 	 */
 	public static function getInstance()
@@ -113,9 +113,9 @@ class Session
 
 	/**
 	 * Return a session variable
-	 * 
+	 *
 	 * @param string $strKey The variable name
-	 * 
+	 *
 	 * @return mixed The variable value
 	 */
 	public function get($strKey)
@@ -126,7 +126,7 @@ class Session
 
 	/**
 	 * Set a session variable
-	 * 
+	 *
 	 * @param string $strKey   The variable name
 	 * @param mixed  $varValue The variable value
 	 */
@@ -138,7 +138,7 @@ class Session
 
 	/**
 	 * Remove a session variable
-	 * 
+	 *
 	 * @param string $strKey The variable name
 	 */
 	public function remove($strKey)
@@ -149,7 +149,7 @@ class Session
 
 	/**
 	 * Return the session data as array
-	 * 
+	 *
 	 * @return array The session data
 	 */
 	public function getData()
@@ -160,9 +160,9 @@ class Session
 
 	/**
 	 * Set the session data from an array
-	 * 
+	 *
 	 * @param array $arrData The session data
-	 * 
+	 *
 	 * @throws \Exception If $arrData is not an array
 	 */
 	public function setData($arrData)
@@ -178,9 +178,9 @@ class Session
 
 	/**
 	 * Append data to the session
-	 * 
+	 *
 	 * @param mixed $varData The data object or array
-	 * 
+	 *
 	 * @throws \Exception If $varData is not an array or object
 	 */
 	public function appendData($varData)

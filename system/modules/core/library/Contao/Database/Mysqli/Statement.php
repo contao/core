@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,7 +15,7 @@ namespace Contao\Database\Mysqli;
 
 /**
  * MySQLi-specific database statement class
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -25,9 +25,9 @@ class Statement extends \Database\Statement
 
 	/**
 	 * Prepare a query string and return it
-	 * 
+	 *
 	 * @param string $strQuery The query string
-	 * 
+	 *
 	 * @return string The modified query string
 	 */
 	protected function prepare_query($strQuery)
@@ -38,9 +38,9 @@ class Statement extends \Database\Statement
 
 	/**
 	 * Escape a string
-	 * 
+	 *
 	 * @param string $strString The unescaped string
-	 * 
+	 *
 	 * @return string The escaped string
 	 */
 	protected function string_escape($strString)
@@ -51,7 +51,7 @@ class Statement extends \Database\Statement
 
 	/**
 	 * Add limit and offset to the query string
-	 * 
+	 *
 	 * @param integer $intRows   The maximum number of rows
 	 * @param integer $intOffset The number of rows to skip
 	 */
@@ -70,7 +70,7 @@ class Statement extends \Database\Statement
 
 	/**
 	 * Execute the query
-	 * 
+	 *
 	 * @return resource The result resource
 	 */
 	protected function execute_query()
@@ -81,7 +81,7 @@ class Statement extends \Database\Statement
 
 	/**
 	 * Return the last error message
-	 * 
+	 *
 	 * @return string The error message
 	 */
 	protected function get_error()
@@ -92,7 +92,7 @@ class Statement extends \Database\Statement
 
 	/**
 	 * Return the number of affected rows
-	 * 
+	 *
 	 * @return integer The number of affected rows
 	 */
 	protected function affected_rows()
@@ -103,7 +103,7 @@ class Statement extends \Database\Statement
 
 	/**
 	 * Return the last insert ID
-	 * 
+	 *
 	 * @return integer The last insert ID
 	 */
 	protected function insert_id()
@@ -114,7 +114,7 @@ class Statement extends \Database\Statement
 
 	/**
 	 * Explain the current query
-	 * 
+	 *
 	 * @return array The information array
 	 */
 	protected function explain_query()
@@ -125,10 +125,10 @@ class Statement extends \Database\Statement
 
 	/**
 	 * Create a Database\Result object
-	 * 
+	 *
 	 * @param resource $resResult The database result
 	 * @param string   $strQuery  The query string
-	 * 
+	 *
 	 * @return \Database\Mysqli\Result The result object
 	 */
 	protected function createResult($resResult, $strQuery)

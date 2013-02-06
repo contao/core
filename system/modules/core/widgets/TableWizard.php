@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -210,7 +210,7 @@ class TableWizard extends \Widget
   </table>
   </div>
   <script>
-  Backend.tableWizardResize();
+    Backend.tableWizardResize();
   </script>';
 
 		return $return;

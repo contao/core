@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,18 +15,18 @@ namespace Contao\Database;
 
 /**
  * Lazy load the result set rows
- * 
+ *
  * The class functions as a wrapper for the database result set and lazy loads
  * the result rows when they are first requested.
- * 
+ *
  * Usage:
- * 
+ *
  *     while ($result->next())
  *     {
  *         echo $result->name;
  *         print_r($result->row());
  *     }
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -79,10 +79,10 @@ abstract class Result
 
 	/**
 	 * Validate the connection resource and store the query string
-	 * 
+	 *
 	 * @param resource $resResult The database result
 	 * @param string   $strQuery  The query string
-	 * 
+	 *
 	 * @throws \Exception If $resResult is not a valid resource
 	 */
 	public function __construct($resResult, $strQuery)
@@ -108,7 +108,7 @@ abstract class Result
 
 	/**
 	 * Set a particular field of the current row
-	 * 
+	 *
 	 * @param mixed  $strKey   The field name
 	 * @param string $varValue The field value
 	 */
@@ -126,9 +126,9 @@ abstract class Result
 
 	/**
 	 * Check whether a field exists
-	 * 
+	 *
 	 * @param mixed $strKey The field name
-	 * 
+	 *
 	 * @return boolean True if the field exists
 	 */
 	public function __isset($strKey)
@@ -146,14 +146,14 @@ abstract class Result
 	 * Return an object property or a field of the current row
 	 *
 	 * Supported parameters:
-	 * 
+	 *
 	 * * query:      the corresponding query string
 	 * * numRows:    the number of rows of the current result
 	 * * numFields:  the number of fields of the current result
 	 * * isModified: true if the row has been modified
 	 *
 	 * @param string $strKey The field name
-	 * 
+	 *
 	 * @return mixed|null The field value or null
 	 */
 	public function __get($strKey)
@@ -194,7 +194,7 @@ abstract class Result
 
 	/**
 	 * Fetch the current row as enumerated array
-	 * 
+	 *
 	 * @return array The row as array
 	 */
 	public function fetchRow()
@@ -216,7 +216,7 @@ abstract class Result
 
 	/**
 	 * Fetch the current row as associative array
-	 * 
+	 *
 	 * @return array The row as associative array
 	 */
 	public function fetchAssoc()
@@ -238,9 +238,9 @@ abstract class Result
 
 	/**
 	 * Fetch a particular field of each row of the result
-	 * 
+	 *
 	 * @param string $strKey The field name
-	 * 
+	 *
 	 * @return array An array of field values
 	 */
 	public function fetchEach($strKey)
@@ -270,7 +270,7 @@ abstract class Result
 
 	/**
 	 * Fetch all rows as associative array
-	 * 
+	 *
 	 * @return array An array with all rows
 	 */
 	public function fetchAllAssoc()
@@ -287,9 +287,9 @@ abstract class Result
 
 	/**
 	 * Get the column information and return it as array
-	 * 
+	 *
 	 * @param integer $intOffset The field offset
-	 * 
+	 *
 	 * @return array An array with the column information
 	 */
 	public function fetchField($intOffset=0)
@@ -307,7 +307,7 @@ abstract class Result
 
 	/**
 	 * Go to the first row of the current result
-	 * 
+	 *
 	 * @return \Database\Result The result object
 	 */
 	public function first()
@@ -324,7 +324,7 @@ abstract class Result
 
 	/**
 	 * Go to the previous row of the current result
-	 * 
+	 *
 	 * @return \Database\Result|boolean The result object or false if there is no previous row
 	 */
 	public function prev()
@@ -341,7 +341,7 @@ abstract class Result
 
 	/**
 	 * Go to the next row of the current result
-	 * 
+	 *
 	 * @return \Database\Result|boolean The result object or false if there is no next row
 	 */
 	public function next()
@@ -373,7 +373,7 @@ abstract class Result
 
 	/**
 	 * Go to the last row of the current result
-	 * 
+	 *
 	 * @return \Database\Result The result object
 	 */
 	public function last()
@@ -392,7 +392,7 @@ abstract class Result
 
 	/**
 	 * Return the number of rows in the result set
-	 * 
+	 *
 	 * @return integer The number of rows
 	 */
 	public function count()
@@ -403,9 +403,9 @@ abstract class Result
 
 	/**
 	 * Return the current row as associative array
-	 * 
+	 *
 	 * @param boolean $blnEnumerated If true, an enumerated array will be returned
-	 * 
+	 *
 	 * @return array The row as array
 	 */
 	public function row($blnEnumerated=false)
@@ -421,7 +421,7 @@ abstract class Result
 
 	/**
 	 * Reset the current result
-	 * 
+	 *
 	 * @return \Database\Result The result object
 	 */
 	public function reset()
@@ -434,7 +434,7 @@ abstract class Result
 
 	/**
 	 * Fetch the current row as enumerated array
-	 * 
+	 *
 	 * @return array The row as array
 	 */
 	abstract protected function fetch_row();
@@ -442,7 +442,7 @@ abstract class Result
 
 	/**
 	 * Fetch the current row as associative array
-	 * 
+	 *
 	 * @return array The row as associative array
 	 */
 	abstract protected function fetch_assoc();
@@ -450,7 +450,7 @@ abstract class Result
 
 	/**
 	 * Return the number of rows in the result set
-	 * 
+	 *
 	 * @return integer The number of rows
 	 */
 	abstract protected function num_rows();
@@ -458,7 +458,7 @@ abstract class Result
 
 	/**
 	 * Return the number of fields of the result set
-	 * 
+	 *
 	 * @return integer The number of fields
 	 */
 	abstract protected function num_fields();
@@ -466,9 +466,9 @@ abstract class Result
 
 	/**
 	 * Get the column information and return it as array
-	 * 
+	 *
 	 * @param integer $intOffset The field offset
-	 * 
+	 *
 	 * @return array An array with the column information
 	 */
 	abstract protected function fetch_field($intOffset);

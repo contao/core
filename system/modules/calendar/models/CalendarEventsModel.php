@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Calendar
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -19,7 +19,7 @@ namespace Contao;
 
 /**
  * Reads and writes events
- * 
+ *
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -36,11 +36,11 @@ class CalendarEventsModel extends \Model
 
 	/**
 	 * Find a published event from one or more calendars by its ID or alias
-	 * 
+	 *
 	 * @param mixed $varId      The numeric ID or alias name
 	 * @param array $arrPids    An array of calendar IDs
 	 * @param array $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no event
 	 */
 	public static function findPublishedByParentAndIdOrAlias($varId, $arrPids, array $arrOptions=array())
@@ -65,9 +65,9 @@ class CalendarEventsModel extends \Model
 
 	/**
 	 * Find the first and last event in one or more calendars
-	 * 
+	 *
 	 * @param array $arrPids An array of calendar IDs
-	 * 
+	 *
 	 * @return \Model The model
 	 */
 	public static function findBoundaries($arrPids)
@@ -84,12 +84,12 @@ class CalendarEventsModel extends \Model
 
 	/**
 	 * Find events of the current period by their parent ID
-	 * 
+	 *
 	 * @param integer $intPid     The calendar ID
 	 * @param integer $intStart   The start date as Unix timestamp
 	 * @param integer $intEnd     The end date as Unix timestamp
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no events
 	 */
 	public static function findCurrentByPid($intPid, $intStart, $intEnd, array $arrOptions=array())
@@ -112,10 +112,10 @@ class CalendarEventsModel extends \Model
 
 	/**
 	 * Find published events with the default redirect target by their parent ID
-	 * 
+	 *
 	 * @param integer $intPid     The calendar ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no events
 	 */
 	public static function findPublishedDefaultByPid($intPid, array $arrOptions=array())
@@ -135,11 +135,11 @@ class CalendarEventsModel extends \Model
 
 	/**
 	 * Find upcoming events by their parent IDs
-	 * 
+	 *
 	 * @param array   $arrIds     An array of calendar IDs
 	 * @param integer $intLimit   An optional limit
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no events
 	 */
 	public static function findUpcomingByPids($arrIds, $intLimit=0, array $arrOptions=array())

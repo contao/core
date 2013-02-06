@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -355,9 +355,9 @@ abstract class Module extends \Frontend
 
 	/**
 	 * Find a front end module in the FE_MOD array and return the class name
-	 * 
+	 *
 	 * @param string $strName The front end module name
-	 * 
+	 *
 	 * @return string The class name
 	 */
 	public static function findClass($strName)

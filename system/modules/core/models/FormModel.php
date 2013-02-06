@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -19,7 +19,7 @@ namespace Contao;
 
 /**
  * Reads and writes forms
- * 
+ *
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -36,7 +36,7 @@ class FormModel extends \Model
 
 	/**
 	 * Get the maximum file size that is allowed for file uploads
-	 * 
+	 *
 	 * @return integer The maximum file size in bytes
 	 */
 	public function getMaxUploadFileSize()

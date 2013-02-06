@@ -1,8 +1,8 @@
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -51,7 +51,7 @@ input[type="number"]:focus,input[type="search"]:focus,input[type="tel"]:focus,in
 }
 
 /**
- * Fix some width and height settings 
+ * Fix some width and height settings
  */
 input[type="file"] {
 	cursor:pointer;

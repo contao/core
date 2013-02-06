@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Faq
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -19,7 +19,7 @@ namespace Contao;
 
 /**
  * Reads and writes FAQs
- * 
+ *
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -36,11 +36,11 @@ class FaqModel extends \Model
 
 	/**
 	 * Find a published FAQ from one or more categories by its ID or alias
-	 * 
+	 *
 	 * @param mixed $varId      The numeric ID or alias name
 	 * @param array $arrPids    An array of parent IDs
 	 * @param array $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The FaqModel or null if there is no FAQ
 	 */
 	public static function findPublishedByParentAndIdOrAlias($varId, $arrPids, array $arrOptions=array())
@@ -64,10 +64,10 @@ class FaqModel extends \Model
 
 	/**
 	 * Find all published FAQs by their parent IDs
-	 * 
+	 *
 	 * @param array $arrPids    An array of FAQ category IDs
 	 * @param array $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no FAQs
 	 */
 	public static function findPublishedByPids($arrPids, array $arrOptions=array())

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,16 +15,16 @@ namespace Contao;
 
 /**
  * Creates, reads, writes and deletes folders
- * 
+ *
  * Usage:
- * 
+ *
  *     $folder = new Folder('test');
- * 
+ *
  *     if (!$folder->isEmpty())
  *     {
  *         $folder->purge();
  *     }
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -41,9 +41,9 @@ class Folder extends \System
 
 	/**
 	 * Check whether the folder exists
-	 * 
+	 *
 	 * @param string $strFolder The folder path
-	 * 
+	 *
 	 * @throws \Exception If $strFolder is not a folder
 	 */
 	public function __construct($strFolder)
@@ -80,15 +80,15 @@ class Folder extends \System
 
 	/**
 	 * Return an object property
-	 * 
+	 *
 	 * Supported keys:
-	 * 
+	 *
 	 * * hash: the folder's MD5 hash
 	 * * path: the path to the folder
 	 * * size: the folder size
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return mixed The property value
 	 */
 	public function __get($strKey)
@@ -124,7 +124,7 @@ class Folder extends \System
 
 	/**
 	 * Return true if the folder is empty
-	 * 
+	 *
 	 * @return boolean True if the folder is empty
 	 */
 	public function isEmpty()
@@ -144,7 +144,7 @@ class Folder extends \System
 
 	/**
 	 * Purge the folder
-	 * 
+	 *
 	 * @deprecated Use $this->purge() instead
 	 */
 	public function clear()
@@ -164,9 +164,9 @@ class Folder extends \System
 
 	/**
 	 * Set the folder permissions
-	 * 
+	 *
 	 * @param string $intChmod The CHMOD settings
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function chmod($intChmod)
@@ -177,9 +177,9 @@ class Folder extends \System
 
 	/**
 	 * Rename the folder
-	 * 
+	 *
 	 * @param string $strNewName The new path
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function renameTo($strNewName)
@@ -197,9 +197,9 @@ class Folder extends \System
 
 	/**
 	 * Copy the folder
-	 * 
+	 *
 	 * @param string $strNewName The target path
-	 * 
+	 *
 	 * @return boolean True if the operation was successful
 	 */
 	public function copyTo($strNewName)
@@ -236,7 +236,7 @@ class Folder extends \System
 
 	/**
 	 * Return the MD5 hash of the folder
-	 * 
+	 *
 	 * @return string The MD5 has
 	 */
 	protected function getHash()
@@ -264,7 +264,7 @@ class Folder extends \System
 
 	/**
 	 * Return the size of the folder
-	 * 
+	 *
 	 * @return integer The folder size in bytes
 	 */
 	protected function getSize()

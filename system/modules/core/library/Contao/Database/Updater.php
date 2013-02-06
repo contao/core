@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,7 +15,7 @@ namespace Contao\Database;
 
 /**
  * Adjust the database if the system is updated
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -357,7 +357,7 @@ class Updater extends \Controller
 
 	/**
 	 * Scan the upload folder and create the database entries
-	 * 
+	 *
 	 * @param string  $strPath The target folder
 	 * @param integer $pid     The parent ID
 	 */
@@ -557,7 +557,7 @@ class Updater extends \Controller
 
 	/**
 	 * Create a content element
-	 * 
+	 *
 	 * @param \Database\Result $objElement A database result object
 	 * @param string           $strPtable  The name of the parent table
 	 * @param string           $strField   The name of the text column

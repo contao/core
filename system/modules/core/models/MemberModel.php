@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -19,7 +19,7 @@ namespace Contao;
 
 /**
  * Reads and writes members
- * 
+ *
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -36,11 +36,11 @@ class MemberModel extends \Model
 
 	/**
 	 * Find an active member by his/her e-mail-address and username
-	 * 
+	 *
 	 * @param string $strEmail    The e-mail address
 	 * @param string $strUsername The username
 	 * @param array  $arrOptions  An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no member
 	 */
 	public static function findActiveByEmailAndUsername($strEmail, $strUsername=null, array $arrOptions=array())

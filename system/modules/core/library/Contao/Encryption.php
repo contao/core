@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,15 +15,15 @@ namespace Contao;
 
 /**
  * Encrypts and decrypts data
- * 
+ *
  * The class can be used to encrypt and decrypt data based on the encryption
  * string that is set during the Contao installation.
- * 
+ *
  * Usage:
- * 
+ *
  *     $encrypted = Encryption::encrypt('Leo Feyer');
  *     $decrypted = Encryption::decrypt($encrypted);
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -46,10 +46,10 @@ class Encryption
 
 	/**
 	 * Encrypt a value
-	 * 
+	 *
 	 * @param mixed  $varValue The value to encrypt
 	 * @param string $strKey   An optional encryption key
-	 * 
+	 *
 	 * @return string The encrypted value
 	 */
 	public static function encrypt($varValue, $strKey=null)
@@ -92,10 +92,10 @@ class Encryption
 
 	/**
 	 * Decrypt a value
-	 * 
+	 *
 	 * @param mixed  $varValue The value to decrypt
 	 * @param string $strKey   An optional encryption key
-	 * 
+	 *
 	 * @return string The decrypted value
 	 */
 	public static function decrypt($varValue, $strKey=null)
@@ -146,7 +146,7 @@ class Encryption
 
 	/**
 	 * Initialize the encryption module
-	 * 
+	 *
 	 * @throws \Exception If the encryption module cannot be initialized
 	 */
 	protected static function initialize()
@@ -170,11 +170,11 @@ class Encryption
 
 	/**
 	 * Generate a password hash
-	 * 
+	 *
 	 * @param string $strPassword The unencrypted password
-	 * 
+	 *
 	 * @return string The encrypted password
-	 * 
+	 *
 	 * @throws \Exception If none of the algorithms is available
 	 */
 	public static function hash($strPassword)
@@ -228,7 +228,7 @@ class Encryption
 
 	/**
 	 * Initialize the encryption module
-	 * 
+	 *
 	 * @deprecated Encryption is now a static class
 	 */
 	protected function __construct()
@@ -239,7 +239,7 @@ class Encryption
 
 	/**
 	 * Prevent cloning of the object (Singleton)
-	 * 
+	 *
 	 * @deprecated Encryption is now a static class
 	 */
 	final public function __clone() {}
@@ -247,9 +247,9 @@ class Encryption
 
 	/**
 	 * Return the object instance (Singleton)
-	 * 
+	 *
 	 * @return \Encryption
-	 * 
+	 *
 	 * @deprecated Encryption is now a static class
 	 */
 	public static function getInstance()

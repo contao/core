@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,16 +15,16 @@ namespace Contao;
 
 /**
  * Reads .zip files and unpacks their content
- * 
+ *
  * Usage:
- * 
+ *
  *     $zip = new ZipReader('test.zip');
- * 
+ *
  *     while ($zip->next())
  *     {
  *         echo $zip->->file_name;
  *     }
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -86,9 +86,9 @@ class ZipReader
 
 	/**
 	 * Open the archive and return the file handle
-	 * 
+	 *
 	 * @param string $strFile The file path
-	 * 
+	 *
 	 * @throws \Exception If $strFile does not exist or cannot be opened
 	 */
 	public function __construct($strFile)
@@ -132,7 +132,7 @@ class ZipReader
 	 * Return a property of the archive header or the current file
 	 *
 	 * Supported header parameters:
-	 * 
+	 *
 	 * * number_of_this_disk:       the number of this disk
 	 * * number_of_disk_with_cd:    the number of the disk with thestart of the central directory
 	 * * total_cd_entries_disk:     the total number of entries in the central directory on this disk
@@ -143,7 +143,7 @@ class ZipReader
 	 * * zipfile_comment:           the ZIP file comment
 	 *
 	 * Supported file parameters:
-	 * 
+	 *
 	 * * version_made_by:           the version made by
 	 * * version_needed_to_extract: the version needed to extract
 	 * * general_purpose_bit_flag:  general purpose bit flag
@@ -168,7 +168,7 @@ class ZipReader
 	 * * file_comment:              the file comment
 	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return mixed|null The property value or null
 	 */
 	public function __get($strKey)
@@ -206,7 +206,7 @@ class ZipReader
 
 	/**
 	 * Return a list of all files in the archive
-	 * 
+	 *
 	 * @return array The files array
 	 */
 	public function getFileList()
@@ -224,9 +224,9 @@ class ZipReader
 
 	/**
 	 * Set the internal pointer to a particular file
-	 * 
+	 *
 	 * @param string $strName The file name
-	 * 
+	 *
 	 * @return boolean True if the file was found
 	 */
 	public function getFile($strName)
@@ -246,7 +246,7 @@ class ZipReader
 
 	/**
 	 * Go to the first file of the archive
-	 * 
+	 *
 	 * @return \ZipReader The object instance
 	 */
 	public function first()
@@ -258,7 +258,7 @@ class ZipReader
 
 	/**
 	 * Go to the next file of the archive
-	 * 
+	 *
 	 * @return \ZipReader|boolean The object instance or false if there is no next file
 	 */
 	public function next()
@@ -275,7 +275,7 @@ class ZipReader
 
 	/**
 	 * Go to the previous file of the archive
-	 * 
+	 *
 	 * @return \ZipReader|boolean The object instance or false if there is no previous file
 	 */
 	public function prev()
@@ -292,7 +292,7 @@ class ZipReader
 
 	/**
 	 * Go to the last file of the archive
-	 * 
+	 *
 	 * @return \ZipReader The object instance
 	 */
 	public function last()
@@ -304,7 +304,7 @@ class ZipReader
 
 	/**
 	 * Return the current file as array
-	 * 
+	 *
 	 * @return array The current file array
 	 */
 	public function current()
@@ -320,7 +320,7 @@ class ZipReader
 
 	/**
 	 * Reset the archive
-	 * 
+	 *
 	 * @return \ZipReader The object instance
 	 */
 	public function reset()
@@ -332,9 +332,9 @@ class ZipReader
 
 	/**
 	 * Unzip the current file and return its contents as string
-	 * 
+	 *
 	 * @return string The file content
-	 * 
+	 *
 	 * @throws \Exception If the current file is encrypted or not a compressed file
 	 */
 	public function unzip()
@@ -427,9 +427,9 @@ class ZipReader
 
 	/**
 	 * Return a list of all files in the archive
-	 * 
+	 *
 	 * @return array The files array
-	 * 
+	 *
 	 * @throws \Exception If the central directory cannot be found
 	 */
 	protected function readCentralDirectory()
@@ -538,10 +538,10 @@ class ZipReader
 
 	/**
 	 * Calculate the Unix timestamp from two hexadecimal values
-	 * 
+	 *
 	 * @param integer $intTime The time integer
 	 * @param integer $intDate The date integer
-	 * 
+	 *
 	 * @return integer The Unix timestamp
 	 */
 	protected function decToUnix($intTime, $intDate)

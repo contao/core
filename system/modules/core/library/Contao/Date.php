@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,20 +15,20 @@ namespace Contao;
 
 /**
  * Converts dates and date format string
- * 
+ *
  * The class converts arbitrary date strings to Unix timestamps and provides
- * extended information like the begin or end of the day, week, month or year. 
- * 
+ * extended information like the begin or end of the day, week, month or year.
+ *
  * Usage:
- * 
+ *
  *     $date = new Date();
  *     echo $date->datim;
- * 
+ *
  *     $date = new Date('2011-09-18', 'Y-m-d');
  *     echo $date->monthBegin;
- * 
+ *
  *     Date::formatToJs('m/d/Y H:i');
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -75,7 +75,7 @@ class Date extends \System
 
 	/**
 	 * Create the object properties and date ranges
-	 * 
+	 *
 	 * @param integer $strDate   An optional date string
 	 * @param string  $strFormat An optional format string
 	 */
@@ -110,9 +110,9 @@ class Date extends \System
 
 	/**
 	 * Return an object property
-	 * 
+	 *
 	 * Supported keys:
-	 * 
+	 *
 	 * * timestamp:  the Unix timestamp
 	 * * date:       the formatted date
 	 * * time:       the formatted time
@@ -124,9 +124,9 @@ class Date extends \System
 	 * * yearBegin:  the beginning of the current year
 	 * * yearEnd:    the end of the current year
 	 * * format:     the date format string
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return mixed The property value
 	 */
 	public function __get($strKey)
@@ -185,9 +185,9 @@ class Date extends \System
 
 	/**
 	 * Return the begin of the week as timestamp
-	 * 
+	 *
 	 * @param integer $intStartDay The week start day
-	 * 
+	 *
 	 * @return integer The Unix timestamp
 	 */
 	public function getWeekBegin($intStartDay=0)
@@ -205,9 +205,9 @@ class Date extends \System
 
 	/**
 	 * Return the end of the week as timestamp
-	 * 
+	 *
 	 * @param integer $intStartDay The week start day
-	 * 
+	 *
 	 * @return integer The Unix timestamp
 	 */
 	public function getWeekEnd($intStartDay=0)
@@ -218,11 +218,11 @@ class Date extends \System
 
 	/**
 	 * Return a regular expression to check a date
-	 * 
+	 *
 	 * @param string $strFormat An optional format string
-	 * 
+	 *
 	 * @return string The regular expression string
-	 * 
+	 *
 	 * @throws \Exception If $strFormat is invalid
 	 */
 	public static function getRegexp($strFormat=null)
@@ -266,11 +266,11 @@ class Date extends \System
 
 	/**
 	 * Return an input format string for a particular date (e.g. YYYY-MM-DD)
-	 * 
+	 *
 	 * @param string $strFormat An optional format string
-	 * 
+	 *
 	 * @return string The input format string
-	 * 
+	 *
 	 * @throws \Exception If $strFormat is invalid
 	 */
 	public static function getInputFormat($strFormat=null)
@@ -323,7 +323,7 @@ class Date extends \System
 
 	/**
 	 * Convert a date string into a Unix timestamp using the format string
-	 * 
+	 *
 	 * @throws \Exception            If the format string is invalid
 	 * @throws \OutOfBoundsException If the timestamp does not map to a valid date
 	 */
@@ -449,9 +449,9 @@ class Date extends \System
 
 	/**
 	 * Convert a PHP format string into a JavaScript format string
-	 * 
+	 *
 	 * @param string $strFormat The PHP format string
-	 * 
+	 *
 	 * @return mixed The JavaScript format string
 	 */
 	public static function formatToJs($strFormat)

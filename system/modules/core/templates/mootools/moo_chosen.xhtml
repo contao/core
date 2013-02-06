@@ -13,11 +13,11 @@ $objCombiner->add('assets/mootools/stylect/js/stylect.js');
 
 <script type="text/javascript" src="<?php echo $objCombiner->getCombinedFile(); ?>"></script>
 <script type="text/javascript">
-/* <![CDATA[ */
-(function($) {
-  window.addEvent('domready', function() {
-    $$('select.tl_chosen').chosen();
-  });
-})(document.id);
-/* ]]> */
+  /* <![CDATA[ */
+  (function($) {
+    window.addEvent('domready', function() {
+      $$('select.tl_chosen').chosen();
+    });
+  })(document.id);
+  /* ]]> */
 </script>

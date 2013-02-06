@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,10 +15,10 @@ namespace Contao;
 
 /**
  * Loads and writes the local configuration file
- * 
+ *
  * Custom settings above or below the `### INSTALL SCRIPT ###` markers will be
  * preserved.
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -101,7 +101,7 @@ class Config
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * 
+	 *
 	 * @return \Config The object instance
 	 */
 	public static function getInstance()
@@ -267,7 +267,7 @@ class Config
 
 	/**
 	 * Return true if the installation is completed
-	 * 
+	 *
 	 * @return boolean True if the local configuration file exists
 	 */
 	public function isComplete()
@@ -278,9 +278,9 @@ class Config
 
 	/**
 	 * Return all active modules (starting with "core") as array
-	 * 
+	 *
 	 * @param boolean $blnNoCache Override the cache
-	 * 
+	 *
 	 * @return array An array of active modules
 	 */
 	public function getActiveModules($blnNoCache=false)
@@ -328,7 +328,7 @@ class Config
 
 	/**
 	 * Add a configuration variable to the local configuration file
-	 * 
+	 *
 	 * @param string $strKey   The full variable name
 	 * @param mixed  $varValue The configuration value
 	 */
@@ -342,7 +342,7 @@ class Config
 
 	/**
 	 * Alias for Config::add()
-	 * 
+	 *
 	 * @param string $strKey   The full variable name
 	 * @param mixed  $varValue The configuration value
 	 */
@@ -354,9 +354,9 @@ class Config
 
 	/**
 	 * Return a configuration value
-	 * 
+	 *
 	 * @param string $strKey The short key (e.g. "displayErrors")
-	 * 
+	 *
 	 * @return mixed|null The configuration value
 	 */
 	public function get($strKey)
@@ -372,7 +372,7 @@ class Config
 
 	/**
 	 * Remove a configuration variable
-	 * 
+	 *
 	 * @param string $strKey The full variable name
 	 */
 	public function delete($strKey)
@@ -385,9 +385,9 @@ class Config
 
 	/**
 	 * Escape a value depending on its type
-	 * 
+	 *
 	 * @param mixed $varValue The value
-	 * 
+	 *
 	 * @return mixed The escaped value
 	 */
 	protected function escape($varValue)

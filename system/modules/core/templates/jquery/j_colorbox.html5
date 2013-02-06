@@ -7,17 +7,17 @@ $GLOBALS['TL_CSS'][] = 'assets/jquery/colorbox/'. COLORBOX .'/css/colorbox.min.c
 
 <script src="<?php echo TL_ASSETS_URL; ?>assets/jquery/colorbox/<?php echo COLORBOX; ?>/js/colorbox.min.js"></script>
 <script>
-(function($) {
-  $(document).ready(function() {
-    $('a[data-lightbox]').map(function() {
-      $(this).colorbox({
-        // Put custom options here
-        loop:false,
-        rel:$(this).attr('data-lightbox'),
-        maxWidth:'95%',
-        maxHeight:'95%'
+  (function($) {
+    $(document).ready(function() {
+      $('a[data-lightbox]').map(function() {
+        $(this).colorbox({
+          // Put custom options here
+          loop:false,
+          rel:$(this).attr('data-lightbox'),
+          maxWidth:'95%',
+          maxHeight:'95%'
+        });
       });
     });
-  });
-})(jQuery);
+  })(jQuery);
 </script>

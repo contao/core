@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,21 +15,21 @@ namespace Contao;
 
 /**
  * Creates and queries the search index
- * 
+ *
  * The class takes the HTML markup of a page, exctracts the content and writes
  * it to the database (search index). It also provides a method to query the
  * seach index, returning the matching entries.
- * 
+ *
  * Usage:
- * 
+ *
  *     Search::indexPage($objPage->row());
  *     $result = Search::searchFor('keyword');
- * 
+ *
  *     while ($result->next())
  *     {
  *         echo $result->url;
  *     }
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -46,9 +46,9 @@ class Search extends \System
 
 	/**
 	 * Index a page
-	 * 
+	 *
 	 * @param array $arrData The data array
-	 * 
+	 *
 	 * @return boolean True if a new record was created
 	 */
 	public static function indexPage($arrData)
@@ -307,16 +307,16 @@ class Search extends \System
 
 	/**
 	 * Search the index and return the result object
-	 * 
+	 *
 	 * @param string  $strKeywords The keyword string
 	 * @param boolean $blnOrSearch If true, the result can contain any keyword
 	 * @param array   $arrPid      An optional array of page IDs to limit the result to
 	 * @param integer $intRows     An optional maximum number of result rows
 	 * @param integer $intOffset   An optional result offset
 	 * @param boolean $blnFuzzy    If true, the search will be fuzzy
-	 * 
+	 *
 	 * @return \Database\Result The database result object
-	 * 
+	 *
 	 * @throws \Exception If the cleaned keyword string is empty
 	 */
 	public static function searchFor($strKeywords, $blnOrSearch=false, $arrPid=array(), $intRows=0, $intOffset=0, $blnFuzzy=false)
@@ -537,7 +537,7 @@ class Search extends \System
 
 	/**
 	 * Remove an entry from the search index
-	 * 
+	 *
 	 * @param string $strUrl The URL to be removed
 	 */
 	public static function removeEntry($strUrl)
@@ -561,7 +561,7 @@ class Search extends \System
 
 	/**
 	 * Prevent cloning of the object (Singleton)
-	 * 
+	 *
 	 * @deprecated Search is now a static class
 	 */
 	final public function __clone() {}
@@ -569,9 +569,9 @@ class Search extends \System
 
 	/**
 	 * Return the object instance (Singleton)
-	 * 
+	 *
 	 * @return \Search The object instance
-	 * 
+	 *
 	 * @deprecated Search is now a static class
 	 */
 	public static function getInstance()

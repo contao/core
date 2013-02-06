@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,17 +15,17 @@ namespace Contao;
 
 /**
  * Stores and outputs messages
- * 
+ *
  * The class handles system messages which are shown to the user. You can add
  * messages from anywhere in the application.
- * 
+ *
  * Usage:
- * 
+ *
  *     Message::addError('Please enter your name');
  *     Message::addConfirm('The data has been stored');
  *     Message::addInfo('You can upload only two files');
  *     Message::addNew('There are two new messages');
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -35,7 +35,7 @@ class Message
 
 	/**
 	 * Add an error message
-	 * 
+	 *
 	 * @param string $strMessage The error message
 	 */
 	public static function addError($strMessage)
@@ -46,7 +46,7 @@ class Message
 
 	/**
 	 * Add a confirmation message
-	 * 
+	 *
 	 * @param string $strMessage The confirmation message
 	 */
 	public static function addConfirmation($strMessage)
@@ -57,7 +57,7 @@ class Message
 
 	/**
 	 * Add a new message
-	 * 
+	 *
 	 * @param string $strMessage The new message
 	 */
 	public static function addNew($strMessage)
@@ -68,7 +68,7 @@ class Message
 
 	/**
 	 * Add an info message
-	 * 
+	 *
 	 * @param string $strMessage The info message
 	 */
 	public static function addInfo($strMessage)
@@ -79,7 +79,7 @@ class Message
 
 	/**
 	 * Add a preformatted message
-	 * 
+	 *
 	 * @param string $strMessage The preformatted message
 	 */
 	public static function addRaw($strMessage)
@@ -90,10 +90,10 @@ class Message
 
 	/**
 	 * Add a message
-	 * 
+	 *
 	 * @param string $strMessage The message text
 	 * @param string $strType    The message type
-	 * 
+	 *
 	 * @throws \Exception If $strType is not a valid message type
 	 */
 	public static function add($strMessage, $strType)
@@ -119,10 +119,10 @@ class Message
 
 	/**
 	 * Return all messages as HTML
-	 * 
+	 *
 	 * @param boolean $blnDcLayout If true, the line breaks are different
 	 * @param boolean $blnNoWrapper If true, there will be no wrapping DIV
-	 * 
+	 *
 	 * @return string The messages HTML markup
 	 */
 	public static function generate($blnDcLayout=false, $blnNoWrapper=false)
@@ -184,7 +184,7 @@ class Message
 
 	/**
 	 * Return all available message types
-	 * 
+	 *
 	 * @return array An array of message types
 	 */
 	public static function getTypes()

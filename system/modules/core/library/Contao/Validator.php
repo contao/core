@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,14 +15,14 @@ namespace Contao;
 
 /**
  * Validates arbitrary data
- * 
+ *
  * Usage:
- * 
+ *
  *     if (Validator::isEmail($recipient))
  *     {
  *         $email->sendTo($recipient);
  *     }
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -32,9 +32,9 @@ class Validator
 
 	/**
 	 * Numeric characters (including full stop [.] minus [-] and space [ ])
-	 * 
+	 *
 	 * @param mixed $varValue The value to be validated
-	 * 
+	 *
 	 * @return boolean True if the value is numeric
 	 */
 	public static function isNumeric($varValue)
@@ -45,9 +45,9 @@ class Validator
 
 	/**
 	 * Alphabetic characters (including full stop [.] minus [-] and space [ ])
-	 * 
+	 *
 	 * @param mixed $varValue The value to be validated
-	 * 
+	 *
 	 * @return boolean True if the value is alphabetic
 	 */
 	public static function isAlphabetic($varValue)
@@ -65,9 +65,9 @@ class Validator
 
 	/**
 	 * Alphanumeric characters (including full stop [.] minus [-], underscore [_] and space [ ])
-	 * 
+	 *
 	 * @param mixed $varValue The value to be validated
-	 * 
+	 *
 	 * @return boolean True if the value is alphanumeric
 	 */
 	public static function isAlphanumeric($varValue)
@@ -85,9 +85,9 @@ class Validator
 
 	/**
 	 * Characters that are usually encoded by class Input [=<>()#/])
-	 * 
+	 *
 	 * @param mixed $varValue The value to be validated
-	 * 
+	 *
 	 * @return boolean True if the value does not match the characters
 	 */
 	public static function isExtendedAlphanumeric($varValue)
@@ -98,9 +98,9 @@ class Validator
 
 	/**
 	 * Valid date formats
-	 * 
+	 *
 	 * @param mixed $varValue The value to be validated
-	 * 
+	 *
 	 * @return boolean True if the value is a valid date format
 	 */
 	public static function isDate($varValue)
@@ -111,9 +111,9 @@ class Validator
 
 	/**
 	 * Valid time formats
-	 * 
+	 *
 	 * @param mixed $varValue The value to be validated
-	 * 
+	 *
 	 * @return boolean True if the value is a valid time format
 	 */
 	public static function isTime($varValue)
@@ -124,9 +124,9 @@ class Validator
 
 	/**
 	 * Valid date and time formats
-	 * 
+	 *
 	 * @param mixed $varValue The value to be validated
-	 * 
+	 *
 	 * @return boolean True if the value is a valid date and time format
 	 */
 	public static function isDatim($varValue)
@@ -137,9 +137,9 @@ class Validator
 
 	/**
 	 * Valid e-mail address
-	 * 
+	 *
 	 * @param mixed $varValue The value to be validated
-	 * 
+	 *
 	 * @return boolean True if the value is a valid e-mail address
 	 */
 	public static function isEmail($varValue)
@@ -150,9 +150,9 @@ class Validator
 
 	/**
 	 * Valid URL
-	 * 
+	 *
 	 * @param mixed $varValue The value to be validated
-	 * 
+	 *
 	 * @return boolean True if the value is a valid URL
 	 */
 	public static function isUrl($varValue)
@@ -163,9 +163,9 @@ class Validator
 
 	/**
 	 * Valid alias name
-	 * 
+	 *
 	 * @param mixed $varValue The value to be validated
-	 * 
+	 *
 	 * @return boolean True if the value is a valid alias name
 	 */
 	public static function isAlias($varValue)
@@ -183,9 +183,9 @@ class Validator
 
 	/**
 	 * Valid folder alias name
-	 * 
+	 *
 	 * @param mixed $varValue The value to be validated
-	 * 
+	 *
 	 * @return boolean True if the value is a valid folder alias name
 	 */
 	public static function isFolderAlias($varValue)
@@ -203,9 +203,9 @@ class Validator
 
 	/**
 	 * Valid phone number
-	 * 
+	 *
 	 * @param mixed $varValue The value to be validated
-	 * 
+	 *
 	 * @return boolean True if the value is a valid phone number
 	 */
 	public static function isPhone($varValue)
@@ -216,9 +216,9 @@ class Validator
 
 	/**
 	 * Valid percentage
-	 * 
+	 *
 	 * @param mixed $varValue The value to be validated
-	 * 
+	 *
 	 * @return boolean True if the value is a valid percentage
 	 */
 	public static function isPercent($varValue)
@@ -229,9 +229,9 @@ class Validator
 
 	/**
 	 * Valid locale
-	 * 
+	 *
 	 * @param mixed $varValue The value to be validated
-	 * 
+	 *
 	 * @return boolean True if the value is a valid locale
 	 */
 	public static function isLocale($varValue)
@@ -242,9 +242,9 @@ class Validator
 
 	/**
 	 * Valid language code
-	 * 
+	 *
 	 * @param mixed $varValue The value to be validated
-	 * 
+	 *
 	 * @return boolean True if the value is a valid language code
 	 */
 	public static function isLanguage($varValue)

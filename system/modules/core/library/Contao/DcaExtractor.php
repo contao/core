@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,20 +15,20 @@ namespace Contao;
 
 /**
  * Extracts DCA information and cache it
- * 
+ *
  * The class parses the DCA files and stores various extracts like relations in
  * the system/cache directory. This meta data can then be loaded and used in the
  * application (e.g. the Model classes).
- * 
+ *
  * Usage:
- * 
+ *
  *     $user = new DcaExtractor('tl_user');
- * 
+ *
  *     if ($user->hasRelations())
  *     {
  *         print_r($user->getRelations());
  *     }
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -87,9 +87,9 @@ class DcaExtractor extends \Database\Installer
 
 	/**
 	 * Load or create the extract
-	 * 
+	 *
 	 * @param string $strTable The table name
-	 * 
+	 *
 	 * @throws \Exception If $strTable is empty
 	 */
 	public function __construct($strTable)
@@ -118,7 +118,7 @@ class DcaExtractor extends \Database\Installer
 
 	/**
 	 * Return the meta data as array
-	 * 
+	 *
 	 * @return array The meta data
 	 */
 	public function getMeta()
@@ -129,7 +129,7 @@ class DcaExtractor extends \Database\Installer
 
 	/**
 	 * Return true if there is meta data
-	 * 
+	 *
 	 * @return boolean True if there is meta data
 	 */
 	public function hasMeta()
@@ -140,7 +140,7 @@ class DcaExtractor extends \Database\Installer
 
 	/**
 	 * Return the fields as array
-	 * 
+	 *
 	 * @return array The fields array
 	 */
 	public function getFields()
@@ -151,7 +151,7 @@ class DcaExtractor extends \Database\Installer
 
 	/**
 	 * Return true if there are fields
-	 * 
+	 *
 	 * @return boolean True if there are fields
 	 */
 	public function hasFields()
@@ -162,7 +162,7 @@ class DcaExtractor extends \Database\Installer
 
 	/**
 	 * Return the keys as array
-	 * 
+	 *
 	 * @return array The keys array
 	 */
 	public function getKeys()
@@ -173,7 +173,7 @@ class DcaExtractor extends \Database\Installer
 
 	/**
 	 * Return true if there are keys
-	 * 
+	 *
 	 * @return boolean True if there are keys
 	 */
 	public function hasKeys()
@@ -184,7 +184,7 @@ class DcaExtractor extends \Database\Installer
 
 	/**
 	 * Return the relations as array
-	 * 
+	 *
 	 * @return array The relations array
 	 */
 	public function getRelations()
@@ -195,7 +195,7 @@ class DcaExtractor extends \Database\Installer
 
 	/**
 	 * Return true if there are relations
-	 * 
+	 *
 	 * @return boolean True if there are relations
 	 */
 	public function hasRelations()
@@ -206,7 +206,7 @@ class DcaExtractor extends \Database\Installer
 
 	/**
 	 * Return true if the extract relates to a database table
-	 * 
+	 *
 	 * @return boolean True if the extract relates to a database table
 	 */
 	public function isDbTable()
@@ -217,7 +217,7 @@ class DcaExtractor extends \Database\Installer
 
 	/**
 	 * Return an array that can be used by the database installer
-	 * 
+	 *
 	 * @return array The data array
 	 */
 	public function getDbInstallerArray()

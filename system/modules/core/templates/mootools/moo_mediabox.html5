@@ -7,23 +7,23 @@ $GLOBALS['TL_CSS'][] = 'assets/mootools/mediabox/'. MEDIABOX .'/css/mediaboxAdvB
 
 <script src="<?php echo TL_ASSETS_URL; ?>assets/mootools/mediabox/<?php echo MEDIABOX; ?>/js/mediabox.js"></script>
 <script>
-(function($) {
-  window.addEvent('domready', function() {
-    var links = $$('a').filter(function(el) {
-      return el.getAttribute('data-lightbox') != null;
+  (function($) {
+    window.addEvent('domready', function() {
+      var links = $$('a').filter(function(el) {
+        return el.getAttribute('data-lightbox') != null;
+      });
+      $$(links).mediabox({
+        // Put custom options here
+      }, function(el) {
+    	  return [el.href, el.title, el.getAttribute('data-lightbox')];
+      }, function(el) {
+        var data = this.getAttribute('data-lightbox').split(' ');
+        return (this == el) || (data[0] && el.getAttribute('data-lightbox').match(data[0]));
+      });
+      // Support swiping on mobile devices
+      $('mbImage').addEvent('swipe', function(e) {
+        (e.direction == 'left') ? $('mbNextLink').fireEvent('click') : $('mbPrevLink').fireEvent('click');
+      });
     });
-    $$(links).mediabox({
-      // Put custom options here
-    }, function(el) {
-  	  return [el.href, el.title, el.getAttribute('data-lightbox')];
-    }, function(el) {
-      var data = this.getAttribute('data-lightbox').split(' ');
-      return (this == el) || (data[0] && el.getAttribute('data-lightbox').match(data[0]));
-    });
-    // Support swiping on mobile devices
-    $('mbImage').addEvent('swipe', function(e) {
-      (e.direction == 'left') ? $('mbNextLink').fireEvent('click') : $('mbPrevLink').fireEvent('click');
-    });
-  });
-})(document.id);
+  })(document.id);
 </script>

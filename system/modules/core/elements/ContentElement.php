@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -176,9 +176,9 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Find a content element in the TL_CTE array and return the class name
-	 * 
+	 *
 	 * @param string $strName The content element name
-	 * 
+	 *
 	 * @return string The class name
 	 */
 	public static function findClass($strName)

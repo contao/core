@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -19,7 +19,7 @@ namespace Contao;
 
 /**
  * Reads and writes articles
- * 
+ *
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -36,11 +36,11 @@ class ArticleModel extends \Model
 
 	/**
 	 * Find an article by its ID or alias and its page
-	 * 
+	 *
 	 * @param mixed   $varId      The numeric ID or alias name
 	 * @param integer $intPid     The page ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no article
 	 */
 	public static function findByIdOrAliasAndPid($varId, $intPid, array $arrOptions=array())
@@ -61,10 +61,10 @@ class ArticleModel extends \Model
 
 	/**
 	 * Find a published article by its ID
-	 * 
+	 *
 	 * @param integer $intId      The article ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no published article
 	 */
 	public static function findPublishedById($intId, array $arrOptions=array())
@@ -84,11 +84,11 @@ class ArticleModel extends \Model
 
 	/**
 	 * Find all published articles by their parent ID and column
-	 * 
+	 *
 	 * @param integer $intPid     The page ID
 	 * @param string  $strColumn  The column name
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no articles in the given column
 	 */
 	public static function findPublishedByPidAndColumn($intPid, $strColumn, array $arrOptions=array())
@@ -114,11 +114,11 @@ class ArticleModel extends \Model
 
 	/**
 	 * Find all published articles with teaser by their parent ID and column
-	 * 
+	 *
 	 * @param integer $intPid     The page ID
 	 * @param string  $strColumn  The column name
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no articles in the given column
 	 */
 	public static function findPublishedWithTeaserByPidAndColumn($intPid, $strColumn, array $arrOptions=array())

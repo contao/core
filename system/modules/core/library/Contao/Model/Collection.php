@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,10 +15,10 @@ namespace Contao\Model;
 
 /**
  * Handles a set models
- * 
+ *
  * The class handles traversing a set of models and lazy loads the database
  * result rows upon their first usage.
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -59,7 +59,7 @@ class Collection extends \System
 
 	/**
 	 * Store the database result and table name
-	 * 
+	 *
 	 * @param \Database\Result $objResult The database result object
 	 * @param string           $strTable  The table name
 	 */
@@ -73,7 +73,7 @@ class Collection extends \System
 
 	/**
 	 * Set an object property
-	 * 
+	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
 	 */
@@ -90,9 +90,9 @@ class Collection extends \System
 
 	/**
 	 * Return an object property
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return mixed|null The property value or null
 	 */
 	public function __get($strKey)
@@ -113,9 +113,9 @@ class Collection extends \System
 
 	/**
 	 * Check whether a property is set
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return boolean True if the property is set
 	 */
 	public function __isset($strKey)
@@ -131,7 +131,7 @@ class Collection extends \System
 
 	/**
 	 * Return the current row as associative array
-	 * 
+	 *
 	 * @return array The current row as array
 	 */
 	public function row()
@@ -147,9 +147,9 @@ class Collection extends \System
 
 	/**
 	 * Set the current row from an array
-	 * 
+	 *
 	 * @param array $arrData The row data as array
-	 * 
+	 *
 	 * @return \Model\Collection The model collection object
 	 */
 	public function setRow(array $arrData)
@@ -166,7 +166,7 @@ class Collection extends \System
 
 	/**
 	 * Save the current model
-	 * 
+	 *
 	 * @return \Model\Collection The model collection object
 	 */
 	public function save()
@@ -183,7 +183,7 @@ class Collection extends \System
 
 	/**
 	 * Delete the current model and return the number of affected rows
-	 * 
+	 *
 	 * @return integer The number of affected rows
 	 */
 	public function delete()
@@ -199,9 +199,9 @@ class Collection extends \System
 
 	/**
 	 * Lazy load related records
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return \Model|\Model\Collection The model or a model collection if there are multiple rows
 	 */
 	public function getRelated($strKey)
@@ -217,7 +217,7 @@ class Collection extends \System
 
 	/**
 	 * Return the number of rows in the result set
-	 * 
+	 *
 	 * @return integer The number of rows
 	 */
 	public function count()
@@ -228,7 +228,7 @@ class Collection extends \System
 
 	/**
 	 * Go to the first row
-	 * 
+	 *
 	 * @return \Model\Collection The model collection object
 	 */
 	public function first()
@@ -245,7 +245,7 @@ class Collection extends \System
 
 	/**
 	 * Go to the previous row
-	 * 
+	 *
 	 * @return \Model\Collection|false The model collection object or false if there is no previous row
 	 */
 	public function prev()
@@ -262,7 +262,7 @@ class Collection extends \System
 
 	/**
 	 * Return the current model
-	 * 
+	 *
 	 * @return \Model The model object
 	 */
 	public function current()
@@ -278,7 +278,7 @@ class Collection extends \System
 
 	/**
 	 * Go to the next row
-	 * 
+	 *
 	 * @return \Model\Collection|boolean The model collection object or false if there is no next row
 	 */
 	public function next()
@@ -304,7 +304,7 @@ class Collection extends \System
 
 	/**
 	 * Go to the last row
-	 * 
+	 *
 	 * @return \Model\Collection The model collection object
 	 */
 	public function last()
@@ -322,7 +322,7 @@ class Collection extends \System
 
 	/**
 	 * Reset the model
-	 * 
+	 *
 	 * @return \Model\Collection The model collection object
 	 */
 	public function reset()
@@ -335,9 +335,9 @@ class Collection extends \System
 
 	/**
 	 * Fetch a column of each row
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return array An array with all property values
 	 */
 	public function fetchEach($strKey)
@@ -365,7 +365,7 @@ class Collection extends \System
 
 	/**
 	 * Fetch the next result row and create the model
-	 * 
+	 *
 	 * @return boolean True if there was another row
 	 */
 	protected function fetchNext()

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,17 +15,17 @@ namespace Contao;
 
 /**
  * Resizes images
- * 
+ *
  * The class resizes images and stores them in the assets/images folder.
- * 
+ *
  * The following resize modes are supported:
- * 
+ *
  * * Proportional:  proportional resize
  * * Fit-the-box:   proportional resize that fits in the given dimensions
  * * Crop:          the image will be cropped to fit
- * 
+ *
  * You can specify which part of the image will be preserved:
- * 
+ *
  * * left_top:      the left side of a landscape image and the top of a portrait image
  * * center_top:    the center of a landscape image and the top of a portrait image
  * * right_top:     the right side of a landscape image and the top of a portrait image
@@ -35,15 +35,15 @@ namespace Contao;
  * * left_bottom:   the left side of a landscape image and the bottom of a portrait image
  * * center_bottom: the center of a landscape image and the bottom of a portrait image
  * * right_bottm:   the right side of a landscape image and the bottom of a portrait image
- * 
+ *
  * Usage:
- * 
+ *
  *     // Stores the image in the assets/images folder
  *     $src = Image::get('example.jpg', 640, 480, 'center_center');
- * 
+ *
  *     // Resizes the original image
  *     Image::resize('example.jpg', 640, 480);
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -53,12 +53,12 @@ class Image
 
 	/**
 	 * Resize or crop an image and replace the original with the resized version
-	 * 
+	 *
 	 * @param string  $image  The image path
 	 * @param integer $width  The target width
 	 * @param integer $height The target height
 	 * @param string  $mode   The resize mode
-	 * 
+	 *
 	 * @return boolean True if the image could be resized successfully
 	 */
 	public static function resize($image, $width, $height, $mode='')
@@ -69,14 +69,14 @@ class Image
 
 	/**
 	 * Resize an image and store the resized version in the assets/images folder
-	 * 
+	 *
 	 * @param string  $image  The image path
 	 * @param integer $width  The target width
 	 * @param integer $height The target height
 	 * @param string  $mode   The resize mode
 	 * @param string  $target An optional target path
 	 * @param boolean $force  Override existing target images
-	 * 
+	 *
 	 * @return string|null The path of the resized image or null
 	 */
 	public static function get($image, $width, $height, $mode='', $target=null, $force=false)
@@ -435,11 +435,11 @@ class Image
 
 	/**
 	 * Generate an image tag and return it as string
-	 * 
+	 *
 	 * @param string $src        The image path
 	 * @param string $alt        An optional alt attribute
 	 * @param string $attributes A string of other attributes
-	 * 
+	 *
 	 * @return string The image HTML tag
 	 */
 	public static function getHtml($src, $alt='', $attributes='')

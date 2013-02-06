@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2005-2013 Leo Feyer
- * 
+ *
  * @package Typolinks
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -19,17 +19,14 @@ require '../../../../system/initialize.php';
 
 
 /**
- * Include library class
+ * Include the library class
  */
 require 'typolib.php';
+$objLib = new typolib();
 
 
 /**
- * Create image list
+ * Create the image list
  */
-$objLib = new typolib();
 header('Content-Type: text/javascript'); ?>
-
-var tinyMCEImageList = new Array(
-<?php echo substr($objLib->createImageList(), 0, -2); ?> 
-);
+var tinyMCEImageList = [<?php echo substr($objLib->createImageList(), 0, -1); ?>];

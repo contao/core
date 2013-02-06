@@ -1,8 +1,8 @@
 ##
 # Contao Open Source CMS
-# 
+#
 # Copyright (c) 2005-2013 Leo Feyer
-# 
+#
 # @package Core
 # @link    https://contao.org
 # @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -200,7 +200,7 @@ FileETag None
   #   RewriteBase /contao-3.0.0
   #   RewriteBase /path/to/contao
   #
-  # Depending on your server, you might have to remove the line entirely. 
+  # Depending on your server, you might have to remove the line entirely.
   ##
   RewriteBase /
 
@@ -264,7 +264,7 @@ FileETag None
   #
   # If you are using mod_cache, it is recommended to use the RewriteRule below,
   # which adds the query string to the internal URL:
-  # 
+  #
   #   RewriteRule (.*\.html)$ index.php/$1 [L]
   #
   # Note that not all environments support mod_rewrite and mod_cache.
