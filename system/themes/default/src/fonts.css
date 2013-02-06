@@ -8,7 +8,13 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-@import url("http://fonts.googleapis.com/css?family=Architects+Daughter");
+/* Architects Daughter */
+@font-face {
+	font-family:"Architects Daughter";
+	font-style:normal;
+	font-weight:400;
+	src:local("Architects Daughter"), url("../../../assets/fonts/ArchitectsDaughter.woff") format("woff");
+}
 
 /* Paste */
 #paste_hint {

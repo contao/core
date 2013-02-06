@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Improved
+Use a local version of "Architects Daughter" in the back end (see #5312).
+
 ### Changed
 Do not build the internal cache automatically (see #5307).
 
