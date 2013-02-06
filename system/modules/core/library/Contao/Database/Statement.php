@@ -236,7 +236,7 @@ abstract class Statement
 
 
 	/**
-	 * Replace the wildcards and execute the query
+	 * Load from cache or execute the query and cache the result
 	 *
 	 * @return \Database\Result The result object
 	 */
@@ -252,7 +252,7 @@ abstract class Statement
 		$this->replaceWildcards($arrParams);
 		$strKey = md5($this->strQuery);
 
-		// Try to load the result from the cache
+		// Try to load the result from cache
 		if (isset(self::$arrCache[$strKey]) && !self::$arrCache[$strKey]->isModified)
 		{
 			return self::$arrCache[$strKey]->reset();
@@ -271,7 +271,7 @@ abstract class Statement
 
 
 	/**
-	 * Execute the query uncached
+	 * Bypass the cache and always execute the query
 	 *
 	 * @return \Database\Result The result object
 	 */
@@ -286,6 +286,35 @@ abstract class Statement
 
 		$this->replaceWildcards($arrParams);
 		return $this->query();
+	}
+
+
+	/**
+	 * Always execute the query and add or replace an existing cache entry
+	 *
+	 * @return \Database\Result The result object
+	 */
+	public function executeCached()
+	{
+		$arrParams = func_get_args();
+
+		if (is_array($arrParams[0]))
+		{
+			$arrParams = array_values($arrParams[0]);
+		}
+
+		$this->replaceWildcards($arrParams);
+
+		$objResult = $this->query();
+		$strKey = md5($this->strQuery);
+
+		// Cache the result object
+		if ($objResult instanceof \Database\Result)
+		{
+			self::$arrCache[$strKey] = $objResult;
+		}
+
+		return $objResult;
 	}
 
 

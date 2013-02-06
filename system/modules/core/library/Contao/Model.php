@@ -532,8 +532,12 @@ abstract class Model extends \System
 
 		$objStatement = static::preFind($objStatement);
 
-		// Optionally execute uncached (see #5102)
-		if (isset($arrOptions['uncached']) && $arrOptions['uncached'])
+		// Optionally execute (un)cached (see #5102)
+		if (isset($arrOptions['cached']) && $arrOptions['cached'])
+		{
+			$objResult = $objStatement->executeCached($arrOptions['value']);
+		}
+		elseif (isset($arrOptions['uncached']) && $arrOptions['uncached'])
 		{
 			$objResult = $objStatement->executeUncached($arrOptions['value']);
 		}
