@@ -195,15 +195,15 @@ class FileUpload extends \Backend
   <div id="upload-fields">'.$fields.'
   </div>
   <script>
-  window.addEvent("domready", function() {
-    if ("multiple" in document.createElement("input")) {
-      var div = $("upload-fields");
-      var input = div.getElement("input");
-      div.empty();
-      input.set("multiple", true);
-      input.inject(div);
-    }
-  });
+    window.addEvent("domready", function() {
+      if ("multiple" in document.createElement("input")) {
+        var div = $("upload-fields");
+        var input = div.getElement("input");
+        div.empty();
+        input.set("multiple", true);
+        input.inject(div);
+      }
+    });
   </script>';
 	}
 

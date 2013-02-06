@@ -1,34 +1,33 @@
 
 <div id="tl_maintenance_update" class="maintenance_<?php echo $this->isActive ? 'active' : 'inactive'; ?>">
 
-<h2 class="sub_headline_update"><?php echo $this->updateHeadline; ?></h2>
+  <h2 class="sub_headline_update"><?php echo $this->updateHeadline; ?></h2>
 
-<div class="tl_message" id="lu_message">
-  <p class="<?php echo $this->updateClass; ?>"><?php echo $this->updateMessage; ?></p>
-</div>
-<?php if ($this->phar): ?>
+  <div class="tl_message" id="lu_message">
+    <p class="<?php echo $this->updateClass; ?>"><?php echo $this->updateMessage; ?></p>
+  </div>
 
-<div class="tl_formbody_edit">
-  <p style="margin-top:19px"><a href="contao/update.phar.php/index.php" class="tl_submit"><?php echo $this->toLiveUpdate; ?></a></p>
-</div>
-<?php else: ?>
-
-<form action="<?php echo $this->updateServer; ?>" class="tl_form" method="post" onsubmit="AjaxRequest.liveUpdate(this,'ctrl_liveUpdate');return false">
-<div class="tl_formbody_edit">
-<input type="hidden" name="ver" value="<?php echo $this->version; ?>">
-<input type="hidden" name="ref" value="<?php echo $this->referer; ?>">
-<div class="tl_tbox">
-  <h3 style="padding-top:9px"><label for="ctrl_liveUpdate"><?php echo $this->liveUpdateId; ?></label></h3>
-  <input type="text" name="uid" id="ctrl_liveUpdate" value="<?php echo $this->uid; ?>" class="tl_text" onfocus="Backend.getScrollOffset()">
-<?php if ($GLOBALS['TL_CONFIG']['showHelp']): ?>
-  <p class="tl_help tl_tip"><?php echo $this->updateHelp; ?></p>
-<?php endif; ?>
-</div>
-</div>
-<div class="tl_submit_container">
-  <input type="submit" class="tl_submit" value="<?php echo $this->runLiveUpdate; ?>">
-</div>
-</form>
-<?php endif; ?>
+  <?php if ($this->phar): ?>
+    <div class="tl_formbody_edit">
+      <p style="margin-top:19px"><a href="contao/update.phar.php/index.php" class="tl_submit"><?php echo $this->toLiveUpdate; ?></a></p>
+    </div>
+  <?php else: ?>
+  <form action="<?php echo $this->updateServer; ?>" class="tl_form" method="post" onsubmit="AjaxRequest.liveUpdate(this,'ctrl_liveUpdate');return false">
+    <div class="tl_formbody_edit">
+      <input type="hidden" name="ver" value="<?php echo $this->version; ?>">
+      <input type="hidden" name="ref" value="<?php echo $this->referer; ?>">
+      <div class="tl_tbox">
+        <h3 style="padding-top:9px"><label for="ctrl_liveUpdate"><?php echo $this->liveUpdateId; ?></label></h3>
+        <input type="text" name="uid" id="ctrl_liveUpdate" value="<?php echo $this->uid; ?>" class="tl_text" onfocus="Backend.getScrollOffset()">
+        <?php if ($GLOBALS['TL_CONFIG']['showHelp']): ?>
+          <p class="tl_help tl_tip"><?php echo $this->updateHelp; ?></p>
+        <?php endif; ?>
+      </div>
+    </div>
+    <div class="tl_submit_container">
+      <input type="submit" class="tl_submit" value="<?php echo $this->runLiveUpdate; ?>">
+    </div>
+  </form>
+  <?php endif; ?>
 
 </div>

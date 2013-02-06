@@ -1,128 +1,113 @@
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>">
 <head>
-<meta charset="<?php echo $this->charset; ?>">
-<title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
-<base href="<?php echo $this->base; ?>">
-<meta name="generator" content="Contao Open Source CMS">
-<link rel="stylesheet" href="<?php
-  $objCombiner = new Combiner();
-  $objCombiner->add('assets/mootools/stylect/css/stylect.css');
-  $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
-  $objCombiner->add('system/themes/'. $this->theme .'/login.css');
-  echo $objCombiner->getCombinedFile();
-?>">
-<!--[if IE]><link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
-<?php echo $this->stylesheets; ?>
-<script><?php echo $this->getLocaleString(); ?></script>
-<script src="<?php
-  $objCombiner = new Combiner();
-  $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
-  $objCombiner->add('assets/mootools/stylect/js/stylect.js');
-  $objCombiner->add('assets/mootools/mootao/Mootao.js');
-  $objCombiner->add('assets/contao/js/core.js');
-  echo $objCombiner->getCombinedFile();
-?>"></script>
-<script><?php echo $this->getDateString(); ?></script>
-<?php echo $this->javascripts; ?>
-<!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+
+  <meta charset="<?php echo $this->charset; ?>">
+  <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
+  <base href="<?php echo $this->base; ?>">
+  <meta name="generator" content="Contao Open Source CMS">
+
+  <link rel="stylesheet" href="<?php
+    $objCombiner = new Combiner();
+    $objCombiner->add('assets/mootools/stylect/css/stylect.css');
+    $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
+    $objCombiner->add('system/themes/'. $this->theme .'/login.css');
+    echo $objCombiner->getCombinedFile();
+  ?>">
+  <!--[if IE]><link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
+  <?php echo $this->stylesheets; ?>
+
+  <script><?php echo $this->getLocaleString(); ?></script>
+  <script src="<?php
+    $objCombiner = new Combiner();
+    $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
+    $objCombiner->add('assets/mootools/stylect/js/stylect.js');
+    $objCombiner->add('assets/mootools/mootao/Mootao.js');
+    $objCombiner->add('assets/contao/js/core.js');
+    echo $objCombiner->getCombinedFile();
+  ?>"></script>
+  <script><?php echo $this->getDateString(); ?></script>
+  <?php echo $this->javascripts; ?>
+  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+
 </head>
 <body class="__ua__">
 
-<!--[if lte IE 6]>
-<div id="ie6warning"><?php echo $this->ie6warning; ?></div>
-<![endif]-->
+  <!--[if lte IE 6]>
+    <div id="ie6warning"><?php echo $this->ie6warning; ?></div>
+  <![endif]-->
 
-<div id="header">
-<h1>Contao Open Source CMS <?php echo VERSION; ?></h1>
-</div>
+  <div id="header">
+    <h1>Contao Open Source CMS <?php echo VERSION; ?></h1>
+  </div>
 
-<div id="container">
-<div id="main">
+  <div id="container">
 
-<h2><?php echo $this->headline; ?></h2>
+    <div id="main">
+      <h2><?php echo $this->headline; ?></h2>
+      <form action="<?php echo $this->action; ?>" class="tl_login_form" method="post">
+        <div class="formbody">
+          <input type="hidden" name="FORM_SUBMIT" value="tl_login">
+          <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
+          <?php echo $this->messages; ?>
+          <?php if ($this->noCookies): ?>
+            <p class="tl_error"><?php echo $this->noCookies; ?></p>
+          <?php endif; ?>
+          <table class="tl_login_table">
+            <tr>
+              <td<?php echo $this->uClass; ?>><label for="username"><?php echo $this->username; ?></label></td>
+              <td style="text-align:right"><input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->curUsername; ?>" maxlength="64" required></td>
+            </tr>
+            <tr>
+              <td<?php echo $this->pClass; ?>><label for="password"><?php echo $this->password; ?></label></td>
+              <td style="text-align:right"><input type="password" name="password" id="password" class="tl_text" value="" maxlength="64" required></td>
+            </tr>
+            <tr>
+              <td><label for="language"><?php echo $this->userLanguage; ?></label></td>
+              <td style="text-align:right">
+                <select name="language" id="language" class="tl_select">
+                  <?php foreach ($this->languages as $key=>$lang): ?>
+                    <option value="<?php echo specialchars($key); ?>"<?php if ($this->curLanguage == $key) echo ' selected="selected"'; ?>><?php echo $lang; ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </td>
+            </tr>
+          </table>
+          <div class="tl_login_submit_container">
+            <input type="submit" name="login" id="login" class="tl_submit" value="<?php echo $this->loginButton; ?>">
+          </div>
+        </div>
+      </form>
+      <div id="tl_license">
+        <p>Contao Open Source CMS (fka TYPOlight) :: Copyright ©2005-<?php echo date('Y'); ?> by Leo Feyer :: Extensions are copyright of their respective owners :: Visit <a href="https://contao.org" target="_blank">contao.org</a> for more information :: Obstructing the appearance of this notice is prohibited by law!</p>
+	    <p>Contao is distributed in the hope that it will be useful but WITHOUT ANY WARRANTY. Without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details. Contao is free software. You can redistribute it and/or modify it under the terms of the GNU/LGPL as published by the Free Software Foundation.</p>
+	  </div>
+      <p id="go_to_frontend"><a href="<?php echo $this->frontendFile; ?>" class="footer_preview" title="<?php echo $this->feLink; ?>"><?php echo $this->feLink; ?></a></p>
+    </div>
+  </div>
 
-<form action="<?php echo $this->action; ?>" class="tl_login_form" method="post">
-<div class="formbody">
-<input type="hidden" name="FORM_SUBMIT" value="tl_login">
-<input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
-<?php echo $this->messages; ?>
-<?php if ($this->noCookies): ?>
+  <script>
+    window.addEvent('domready', function() {
+      if (parent.frames[0] && parent.frames[0].name == 'switch') {
+        parent.location.reload();
+      }
+      $('username').focus();
+    });
+  </script>
 
-<p class="tl_error"><?php echo $this->noCookies; ?></p>
-<?php endif; ?>
-
-<table class="tl_login_table">
-<tr>
-  <td<?php echo $this->uClass; ?>><label for="username"><?php echo $this->username; ?></label></td>
-  <td style="text-align:right"><input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->curUsername; ?>" maxlength="64" required></td>
-</tr>
-<tr>
-  <td<?php echo $this->pClass; ?>><label for="password"><?php echo $this->password; ?></label></td>
-  <td style="text-align:right"><input type="password" name="password" id="password" class="tl_text" value="" maxlength="64" required></td>
-</tr>
-<tr>
-  <td><label for="language"><?php echo $this->userLanguage; ?></label></td>
-  <td style="text-align:right">
-    <select name="language" id="language" class="tl_select">
-<?php foreach ($this->languages as $key=>$lang): ?>
-      <option value="<?php echo specialchars($key); ?>"<?php if ($this->curLanguage == $key) echo ' selected="selected"'; ?>><?php echo $lang; ?></option>
-<?php endforeach; ?>
-    </select>
-  </td>
-</tr>
-</table>
-
-<div class="tl_login_submit_container">
-  <input type="submit" name="login" id="login" class="tl_submit" value="<?php echo $this->loginButton; ?>">
-</div>
-
-</div>
-</form>
-
-<div id="tl_license">
-
-<p>Contao Open Source CMS (fka TYPOlight) :: Copyright ©2005-<?php echo date('Y'); ?> by
-  Leo Feyer :: Extensions are copyright of their respective owners :: Visit
-  <a href="https://contao.org" target="_blank">contao.org</a> for more information ::
-  Obstructing the appearance of this notice is prohibited by law!</p>
-
-<p>Contao is distributed in the hope that it will be useful but WITHOUT ANY
-  WARRANTY. Without even the implied warranty of MERCHANTABILITY or FITNESS FOR
-  A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
-  details. Contao is free software. You can redistribute it and/or modify it
-  under the terms of the GNU/LGPL as published by the Free Software Foundation.</p>
-
-</div>
-
-<p id="go_to_frontend"><a href="<?php echo $this->frontendFile; ?>" class="footer_preview" title="<?php echo $this->feLink; ?>"><?php echo $this->feLink; ?></a></p>
-
-</div>
-
-</div>
-
-<script>
-window.addEvent('domready', function() {
-  if (parent.frames[0] && parent.frames[0].name == 'switch') {
-    parent.location.reload();
-  }
-  $('username').focus();
-});
-</script>
-<?php if (!$this->disableCron): ?>
-
-<script>
-new Request({
-  url:'system/cron/cron.txt',
-  onComplete: function(txt) {
-    if (!txt) txt = 0;
-    if (parseInt(txt) < (Date.now()/1000 - 300)) {
-      new Request({url:'system/cron/cron.php'}).send();
-    }
-  }
-}).send();
-</script>
-<?php endif; ?>
+  <?php if (!$this->disableCron): ?>
+    <script>
+      new Request({
+        url:'system/cron/cron.txt',
+        onComplete: function(txt) {
+          if (!txt) txt = 0;
+          if (parseInt(txt) < (Date.now()/1000 - 300)) {
+            new Request({url:'system/cron/cron.php'}).send();
+          }
+        }
+      }).send();
+    </script>
+  <?php endif; ?>
 
 </body>
 </html>

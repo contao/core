@@ -210,7 +210,7 @@ class TableWizard extends \Widget
   </table>
   </div>
   <script>
-  Backend.tableWizardResize();
+    Backend.tableWizardResize();
   </script>';
 
 		return $return;

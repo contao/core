@@ -1876,9 +1876,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 </form>
 
 <script>
-window.addEvent(\'domready\', function() {
-  (inp = $(\''.$this->strTable.'\').getElement(\'input[class^="tl_text"]\')) && inp.focus();
-});
+  window.addEvent(\'domready\', function() {
+    (inp = $(\''.$this->strTable.'\').getElement(\'input[class^="tl_text"]\')) && inp.focus();
+  });
 </script>';
 
 		// Begin the form (-> DO NOT CHANGE THIS ORDER -> this way the onsubmit attribute of the form can be changed by a field)
@@ -2021,9 +2021,9 @@ window.addEvent(\'domready\', function() {
 			$return .= '
 
 <script>
-window.addEvent(\'domready\', function() {
-  Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
-});
+  window.addEvent(\'domready\', function() {
+    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
+  });
 </script>';
 		}
 
@@ -2264,9 +2264,9 @@ window.addEvent(\'domready\', function() {
 </form>
 
 <script>
-window.addEvent(\'domready\', function() {
-  (inp = $(\''.$this->strTable.'\').getElement(\'input[class^="tl_text"]\')) && inp.focus();
-});
+  window.addEvent(\'domready\', function() {
+    (inp = $(\''.$this->strTable.'\').getElement(\'input[class^="tl_text"]\')) && inp.focus();
+  });
 </script>';
 
 			// Set the focus if there is an error
@@ -2275,9 +2275,9 @@ window.addEvent(\'domready\', function() {
 				$return .= '
 
 <script>
-window.addEvent(\'domready\', function() {
-  Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
-});
+  window.addEvent(\'domready\', function() {
+    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
+  });
 </script>';
 			}
 
@@ -2561,9 +2561,9 @@ window.addEvent(\'domready\', function() {
 				$return .= '
 
 <script>
-window.addEvent(\'domready\', function() {
-  Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
-});
+  window.addEvent(\'domready\', function() {
+    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
+  });
 </script>';
 			}
 
@@ -3897,7 +3897,7 @@ window.addEvent(\'domready\', function() {
 </ul>
 
 <script>
-Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
+  Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 </script>';
 		}
 

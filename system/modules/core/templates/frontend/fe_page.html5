@@ -1,75 +1,80 @@
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>">
 <head>
-<meta charset="<?php echo $this->charset; ?>">
-<title><?php echo $this->pageTitle; ?> - <?php echo $this->mainTitle; ?></title>
-<base href="<?php echo $this->base; ?>">
-<meta name="robots" content="<?php echo $this->robots; ?>">
-<meta name="description" content="<?php echo $this->description; ?>">
-<meta name="keywords" content="<?php echo $this->keywords; ?>">
-<meta name="generator" content="Contao Open Source CMS">
-<?php echo $this->viewport; ?>
-<?php echo $this->framework; ?>
-<?php echo $this->stylesheets; ?>
-<?php echo $this->mooScripts; ?>
-<?php echo $this->head; ?>
-<!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+
+  <meta charset="<?php echo $this->charset; ?>">
+  <title><?php echo $this->pageTitle; ?> - <?php echo $this->mainTitle; ?></title>
+  <base href="<?php echo $this->base; ?>">
+
+  <meta name="robots" content="<?php echo $this->robots; ?>">
+  <meta name="description" content="<?php echo $this->description; ?>">
+  <meta name="keywords" content="<?php echo $this->keywords; ?>">
+  <meta name="generator" content="Contao Open Source CMS">
+
+  <?php echo $this->viewport; ?>
+  <?php echo $this->framework; ?>
+  <?php echo $this->stylesheets; ?>
+  <?php echo $this->mooScripts; ?>
+  <?php echo $this->head; ?>
+  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+
 </head>
 <body id="top" class="{{ua::class}}<?php if ($this->class): ?> <?php echo $this->class; ?><?php endif; ?>"<?php if ($this->onload): ?> onload="<?php echo $this->onload; ?>"<?php endif; ?>>
 
-<div id="wrapper">
-<?php if ($this->header): ?>
+  <div id="wrapper">
 
-<header id="header">
-<div class="inside">
-<?php echo $this->header; ?> 
-</div>
-</header>
-<?php endif; ?>
-<?php echo $this->getCustomSections('before'); ?>
+    <?php if ($this->header): ?>
+      <header id="header">
+        <div class="inside">
+          <?php echo $this->header; ?>
+        </div>
+      </header>
+    <?php endif; ?>
 
-<div id="container">
+    <?php echo $this->getCustomSections('before'); ?>
 
-<div id="main">
-<div class="inside">
-<?php echo $this->main; ?> 
-</div>
-<?php echo $this->getCustomSections('main'); ?> 
-</div>
-<?php if ($this->left): ?>
+    <div id="container">
+      <div id="main">
+        <div class="inside">
+          <?php echo $this->main; ?>
+        </div>
+        <?php echo $this->getCustomSections('main'); ?>
+      </div>
 
-<aside id="left">
-<div class="inside">
-<?php echo $this->left; ?> 
-</div>
-</aside>
-<?php endif; ?>
-<?php if ($this->right): ?>
+      <?php if ($this->left): ?>
+        <aside id="left">
+          <div class="inside">
+            <?php echo $this->left; ?>
+          </div>
+        </aside>
+      <?php endif; ?>
 
-<aside id="right">
-<div class="inside">
-<?php echo $this->right; ?> 
-</div>
-</aside>
-<?php endif; ?>
+      <?php if ($this->right): ?>
+        <aside id="right">
+          <div class="inside">
+            <?php echo $this->right; ?>
+          </div>
+        </aside>
+      <?php endif; ?>
+    </div>
 
-</div>
-<?php echo $this->getCustomSections('after'); ?>
-<?php if ($this->footer): ?>
+    <?php echo $this->getCustomSections('after'); ?>
 
-<footer id="footer">
-<div class="inside">
-<?php echo $this->footer; ?> 
-</div>
-</footer>
-<?php endif; ?>
+    <?php if ($this->footer): ?>
+      <footer id="footer">
+        <div class="inside">
+          <?php echo $this->footer; ?>
+        </div>
+      </footer>
+    <?php endif; ?>
 
-</div>
-<?php echo $this->mootools; ?>
-<?php if (!$this->disableCron): ?>
+  </div>
 
-<script src="<?php echo TL_ASSETS_URL; ?>assets/contao/js/scheduler.js?t=<?php echo $this->cronTimeout; ?>" id="cron"></script>
-<?php endif; ?>
+  <?php echo $this->mootools; ?>
+
+  <?php if (!$this->disableCron): ?>
+    <script src="<?php echo TL_ASSETS_URL; ?>assets/contao/js/scheduler.js?t=<?php echo $this->cronTimeout; ?>" id="cron"></script>
+  <?php endif; ?>
 
 </body>
 </html>

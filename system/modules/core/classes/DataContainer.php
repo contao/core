@@ -319,18 +319,18 @@ class DataContainer extends \Backend
 
 			$wizard .= ' <img src="assets/mootools/datepicker/' . DATEPICKER . '/icon.gif" width="20" height="20" alt="" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['datepicker']).'" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px;cursor:pointer">
   <script>
-  window.addEvent("domready", function() {
-    new Picker.Date($$("#ctrl_' . $objWidget->id . '"), {
-      draggable:false,
-      toggle:$$("#toggle_' . $objWidget->id . '"),
-      format:"' . $format . '",
-      positionOffset:{x:-197,y:-182}' . $time . ',
-      pickerClass:"datepicker_dashboard",
-      useFadeInOut:!Browser.ie,
-      startDay:' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
-      titleFormat:"' . $GLOBALS['TL_LANG']['MSC']['titleFormat'] . '"
+    window.addEvent("domready", function() {
+      new Picker.Date($$("#ctrl_' . $objWidget->id . '"), {
+        draggable:false,
+        toggle:$$("#toggle_' . $objWidget->id . '"),
+        format:"' . $format . '",
+        positionOffset:{x:-197,y:-182}' . $time . ',
+        pickerClass:"datepicker_dashboard",
+        useFadeInOut:!Browser.ie,
+        startDay:' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
+        titleFormat:"' . $GLOBALS['TL_LANG']['MSC']['titleFormat'] . '"
+      });
     });
-  });
   </script>';
 		}
 
@@ -339,16 +339,16 @@ class DataContainer extends \Backend
 		{
 			$wizard .= ' ' . \Image::getHtml('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['colorpicker']).'" id="moo_' . $this->strField . '"') . '
   <script>
-  window.addEvent("domready", function() {
-    new MooRainbow("moo_' . $this->strField . '", {
-      id:"ctrl_' . $this->strField . '_0",
-      startColor:((cl = $("ctrl_' . $this->strField . '_0").value.hexToRgb(true)) ? cl : [255, 0, 0]),
-      imgPath:"assets/mootools/colorpicker/'.COLORPICKER.'/images/",
-      onComplete: function(color) {
-        $("ctrl_' . $this->strField . '_0").value = color.hex.replace("#", "");
-      }
+    window.addEvent("domready", function() {
+      new MooRainbow("moo_' . $this->strField . '", {
+        id:"ctrl_' . $this->strField . '_0",
+        startColor:((cl = $("ctrl_' . $this->strField . '_0").value.hexToRgb(true)) ? cl : [255, 0, 0]),
+        imgPath:"assets/mootools/colorpicker/'.COLORPICKER.'/images/",
+        onComplete: function(color) {
+          $("ctrl_' . $this->strField . '_0").value = color.hex.replace("#", "");
+        }
+      });
     });
-  });
   </script>';
 		}
 
