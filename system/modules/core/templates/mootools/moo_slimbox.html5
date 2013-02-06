@@ -7,20 +7,20 @@ $GLOBALS['TL_CSS'][] = 'assets/mootools/slimbox/' . SLIMBOX . '/css/slimbox.css|
 
 <script src="<?php echo TL_ASSETS_URL; ?>assets/mootools/slimbox/<?php echo SLIMBOX; ?>/js/slimbox.js"></script>
 <script>
-(function($) {
-  window.addEvent('domready', function() {
-    $$(document.links).filter(function(el) {
-      return el.getAttribute('data-lightbox') != null;
-    }).slimbox({
-      // Put custom options here
-    }, null, function(el) {
-      var attr = this.getAttribute('data-lightbox');
-      return (this == el) || (attr && el.getAttribute('data-lightbox').match(attr));
+  (function($) {
+    window.addEvent('domready', function() {
+      $$(document.links).filter(function(el) {
+        return el.getAttribute('data-lightbox') != null;
+      }).slimbox({
+        // Put custom options here
+      }, null, function(el) {
+        var attr = this.getAttribute('data-lightbox');
+        return (this == el) || (attr && el.getAttribute('data-lightbox').match(attr));
+      });
+      // Support swiping on mobile devices
+      $('lbImage').addEvent('swipe', function(e) {
+        (e.direction == 'left') ? $('lbNextLink').fireEvent('click') : $('lbPrevLink').fireEvent('click');
+      });
     });
-    // Support swiping on mobile devices
-    $('lbImage').addEvent('swipe', function(e) {
-      (e.direction == 'left') ? $('lbNextLink').fireEvent('click') : $('lbPrevLink').fireEvent('click');
-    });
-  });
-})(document.id);
+  })(document.id);
 </script>
