@@ -1,14 +1,14 @@
-<?php echo '<?php'; ?> 
+<?php echo '<?php' . "\n"; ?>
 
 /**
  * Contao Open Source CMS
  *
  * Copyright (c) 2005-2013 Leo Feyer
  *
- * @package   <?php echo $this->package; ?> 
- * @author    <?php echo $this->author; ?> 
- * @license   <?php echo $this->license; ?> 
- * @copyright <?php echo $this->copyright; ?> 
+ * @package   <?php echo $this->package . "\n"; ?>
+ * @author    <?php echo $this->author . "\n"; ?>
+ * @license   <?php echo $this->license . "\n"; ?>
+ * @copyright <?php echo $this->copyright . "\n"; ?>
  */
 
 
@@ -19,13 +19,13 @@ namespace <?php echo $this->package; ?>;
 
 
 /**
- * Class <?php echo $this->class; ?> 
+ * Class <?php echo $this->class . "\n"; ?>
  *
- * @copyright  <?php echo $this->copyright; ?> 
- * @author     <?php echo $this->author; ?> 
+ * @copyright  <?php echo $this->copyright . "\n"; ?>
+ * @author     <?php echo $this->author . "\n"; ?>
  * @package    Devtools
  */
-class <?php echo $this->class; ?> extends \<?php echo $this->extends; ?> 
+class <?php echo $this->class; ?> extends \<?php echo $this->extends . "\n"; ?>
 {
 
 	/**
@@ -40,6 +40,6 @@ class <?php echo $this->class; ?> extends \<?php echo $this->extends; ?>
 	 */
 	protected function compile()
 	{
-		
+
 	}
 }
