@@ -280,9 +280,7 @@ class Combiner extends \System
 		// Create a gzipped version
 		if ($GLOBALS['TL_CONFIG']['gzipScripts'] && function_exists('gzencode'))
 		{
-			$objFile = new \File('assets/' . $strTarget . '/' . $strKey . $this->strMode . '.gz', true);
-			$objFile->write(gzencode(file_get_contents(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode), 9));
-			$objFile->close();
+			\File::putContent('assets/' . $strTarget . '/' . $strKey . $this->strMode . '.gz', gzencode(file_get_contents(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode), 9));
 		}
 
 		return $strUrl . 'assets/' . $strTarget . '/' . $strKey . $this->strMode;

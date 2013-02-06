@@ -215,9 +215,7 @@ class Folder extends \System
 	{
 		if (!file_exists(TL_ROOT . '/' . $this->strFolder . '/.htaccess'))
 		{
-			$objFile = new \File($this->strFolder . '/.htaccess', true);
-			$objFile->write("order deny,allow\ndeny from all");
-			$objFile->close();
+			\File::putContent($this->strFolder . '/.htaccess', "order deny,allow\ndeny from all");
 		}
 	}
 

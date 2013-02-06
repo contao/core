@@ -312,9 +312,7 @@ class Updater extends \Controller
 			{
 				if (!file_exists(TL_ROOT . '/system/modules/' . $strFolder . '/html/.htaccess'))
 				{
-					$objFile = new \File('system/modules/' . $strFolder . '/html/.htaccess', true);
-					$objFile->write("order deny,allow\nallow from all");
-					$objFile->close();
+					\File::putContent('system/modules/' . $strFolder . '/html/.htaccess', "order deny,allow\nallow from all");
 				}
 			}
 		}

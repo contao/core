@@ -24,6 +24,8 @@ namespace Contao;
  *
  *     $file->delete();
  *
+ *     File::putContent('test.txt', 'This is a test');
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -410,6 +412,20 @@ class File extends \System
 		}
 
 		return $strContent;
+	}
+
+
+	/**
+	 * Write to a file
+	 *
+	 * @param string $strFile    Relative file name
+	 * @param string $strContent Content to be written
+	 */
+	public static function putContent($strFile, $strContent)
+	{
+		$objFile = new static($strFile, true);
+		$objFile->write($strContent);
+		$objFile->close();
 	}
 
 

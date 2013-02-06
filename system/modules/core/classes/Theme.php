@@ -393,9 +393,7 @@ class Theme extends \Backend
 						$strFileName = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $strFileName);
 					}
 
-					$objFile = new \File($strFileName, true);
-					$objFile->write($objArchive->unzip());
-					$objFile->close();
+					\File::putContent($strFileName, $objArchive->unzip());
 				}
 				catch (\Exception $e)
 				{

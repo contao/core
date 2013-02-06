@@ -711,9 +711,7 @@ class InstallTool extends Backend
 		{
 			if (!file_exists(TL_ROOT . '/system/config/' . $file . '.php'))
 			{
-				$objFile = new File('system/config/'. $file .'.php', true);
-				$objFile->write('<?php' . "\n\n// Put your custom configuration here\n");
-				$objFile->close();
+				File::putContent('system/config/'. $file .'.php', '<?php' . "\n\n// Put your custom configuration here\n");
 			}
 		}
 	}
@@ -873,9 +871,7 @@ class InstallTool extends Backend
 			// Disable the tasks extension (see #4907)
 			if (is_dir(TL_ROOT . '/system/modules/tasks'))
 			{
-				$objFile = new File('system/modules/tasks/.skip', true);
-				$objFile->write('Disabled during the version 3 update (see #4907)');
-				$objFile->close();
+				File::putContent('system/modules/tasks/.skip', 'Disabled during the version 3 update (see #4907)');
 			}
 
 			// Save the old upload path in the localconfig.php

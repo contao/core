@@ -163,9 +163,7 @@ class ModuleSearch extends \Module
 					$arrResult = array();
 				}
 
-				$objFile = new \File($strCacheFile, true);
-				$objFile->write(json_encode($arrResult));
-				$objFile->close();
+				\File::putContent($strCacheFile, json_encode($arrResult));
 			}
 
 			$query_endtime = microtime(true);

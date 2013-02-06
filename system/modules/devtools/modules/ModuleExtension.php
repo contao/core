@@ -71,15 +71,11 @@ class ModuleExtension extends \BackendModule
 
 			// config/config.php
 			$tplConfig = $this->newTemplate('dev_config', $objModule);
-			$objConfig = new \File('system/modules/' . $objModule->folder . '/config/config.php', true);
-			$objConfig->write($tplConfig->parse());
-			$objConfig->close();
+			\File::putContent('system/modules/' . $objModule->folder . '/config/config.php', $tplConfig->parse());
 
 			// config/autoload.ini
 			$tplConfig = $this->newTemplate('dev_ini', $objModule);
-			$objConfig = new \File('system/modules/' . $objModule->folder . '/config/autoload.ini', true);
-			$objConfig->write($tplConfig->parse());
-			$objConfig->close();
+			\File::putContent('system/modules/' . $objModule->folder . '/config/autoload.ini', $tplConfig->parse());
 
 			// Back end
 			if ($objModule->addBeMod)
@@ -92,9 +88,7 @@ class ModuleExtension extends \BackendModule
 					$tplClass = $this->newTemplate('dev_beClass', $objModule);
 					$tplClass->class = $strClass;
 
-					$objClass = new \File('system/modules/' . $objModule->folder . '/' . $this->guessSubfolder($strClass) . '/' . $strClass . '.php', true);
-					$objClass->write($tplClass->parse());
-					$objClass->close();
+					\File::putContent('system/modules/' . $objModule->folder . '/' . $this->guessSubfolder($strClass) . '/' . $strClass . '.php', $tplClass->parse());
 				}
 
 				$arrTables = array_filter(trimsplit(',', $objModule->beTables));
@@ -105,9 +99,7 @@ class ModuleExtension extends \BackendModule
 					$tplTable = $this->newTemplate('dev_dca', $objModule);
 					$tplTable->table = $strTable;
 
-					$objTable = new \File('system/modules/' . $objModule->folder . '/dca/' . $strTable . '.php', true);
-					$objTable->write($tplTable->parse());
-					$objTable->close();
+					\File::putContent('system/modules/' . $objModule->folder . '/dca/' . $strTable . '.php', $tplTable->parse());
 				}
 
 				$arrTemplates = array_filter(trimsplit(',', $objModule->beTemplates));
@@ -116,9 +108,7 @@ class ModuleExtension extends \BackendModule
 				foreach ($arrTemplates as $strTemplate)
 				{
 					$tplTemplate = $this->newTemplate('dev_beTemplate', $objModule);
-					$objTemplate = new \File('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.html5', true);
-					$objTemplate->write($tplTemplate->parse());
-					$objTemplate->close();
+					\File::putContent('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.html5', $tplTemplate->parse());
 				}
 			}
 
@@ -134,9 +124,7 @@ class ModuleExtension extends \BackendModule
 					$tplClass->class = $strClass;
 					$tplClass->extends = $this->guessParentClass($strClass);
 
-					$objClass = new \File('system/modules/' . $objModule->folder . '/' . $this->guessSubfolder($strClass) . '/' . $strClass . '.php', true);
-					$objClass->write($tplClass->parse());
-					$objClass->close();
+					\File::putContent('system/modules/' . $objModule->folder . '/' . $this->guessSubfolder($strClass) . '/' . $strClass . '.php', $tplClass->parse());
 				}
 
 				$arrTables = array_filter(trimsplit(',', $objModule->feTables));
@@ -147,9 +135,7 @@ class ModuleExtension extends \BackendModule
 					$tplTable = $this->newTemplate('dev_feDca', $objModule);
 					$tplTable->table = $strTable;
 
-					$objTable = new \File('system/modules/' . $objModule->folder . '/dca/' . $strTable . '.php', true);
-					$objTable->write($tplTable->parse());
-					$objTable->close();
+					\File::putContent('system/modules/' . $objModule->folder . '/dca/' . $strTable . '.php', $tplTable->parse());
 				}
 
 				// Models
@@ -161,9 +147,7 @@ class ModuleExtension extends \BackendModule
 					$tplTable->table = $strTable;
 					$tplTable->class = $strModel;
 
-					$objTable = new \File('system/modules/' . $objModule->folder . '/models/' . $strModel . 'Model.php', true);
-					$objTable->write($tplTable->parse());
-					$objTable->close();
+					\File::putContent('system/modules/' . $objModule->folder . '/models/' . $strModel . 'Model.php', $tplTable->parse());
 				}
 
 				$arrTemplates = array_filter(trimsplit(',', $objModule->feTemplates));
@@ -189,36 +173,32 @@ class ModuleExtension extends \BackendModule
 					// languages/xx/default.php
 					$tplLanguage = $this->newTemplate('dev_default', $objModule);
 					$tplLanguage->language = $strLanguage;
-					$objLanguage = new \File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/default.php', true);
-					$objLanguage->write($tplLanguage->parse());
-					$objLanguage->close();
+
+					\File::putContent('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/default.php', $tplLanguage->parse());
 
 					// languages/xx/modules.php
 					$tplLanguage = $this->newTemplate('dev_modules', $objModule);
 					$tplLanguage->language = $strLanguage;
-					$objLanguage = new \File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/modules.php', true);
-					$objLanguage->write($tplLanguage->parse());
-					$objLanguage->close();
 
+					\File::putContent('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/modules.php', $tplLanguage->parse());
+
+					// languages/xx/<table>.php
 					foreach ($arrTables as $strTable)
 					{
 						$tplLanguage = $this->newTemplate('dev_table', $objModule);
 						$tplLanguage->language = $strLanguage;
 						$tplLanguage->table = $strTable;
 
-						$objLanguage = new \File('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/' . $strTable . '.php', true);
-						$objLanguage->write($tplLanguage->parse());
-						$objLanguage->close();
+						\File::putContent('system/modules/' . $objModule->folder . '/languages/' . $strLanguage . '/' . $strTable . '.php', $tplLanguage->parse());
 					}
 				}
 			}
 
 			// Public folder
 			$tplConfig = $this->newTemplate('dev_htaccess', $objModule);
-			$objConfig = new \File('system/modules/' . $objModule->folder . '/assets/.htaccess', true);
-			$objConfig->write($tplConfig->parse());
-			$objConfig->close();
+			\File::putContent('system/modules/' . $objModule->folder . '/assets/.htaccess', $tplConfig->parse());
 
+			// Confirm and reload
 			\Message::addConfirmation($GLOBALS['TL_LANG']['tl_extension']['confirm']);
 			$this->reload();
 		}

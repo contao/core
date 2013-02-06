@@ -580,10 +580,7 @@ class tl_settings extends Backend
 			{
 				if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
 				{
-					$objFile = new File('system/modules/' . $strModule . '/.skip', true);
-					$objFile->write('As long as this file exists, the module will be ignored.');
-					$objFile->close();
-
+					File::putContent('system/modules/' . $strModule . '/.skip', 'As long as this file exists, the module will be ignored.');
 					$blnPurgeCache = true;
 				}
 			}
