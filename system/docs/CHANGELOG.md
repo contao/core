@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Improved
+Allow to scroll the page when moving elements via drag and drop (see #5081).
+
 ### New
 Added the `Database\Statement::executeCached()` method, which replaces existing
 cache entries with the new result set (see #5310).

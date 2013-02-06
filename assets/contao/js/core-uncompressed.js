@@ -1112,11 +1112,25 @@ var Backend =
 	/**
 	 * Make parent view items sortable
 	 * @param object
+	 * @author Joe Ray Gregory
 	 */
 	makeParentViewSortable: function(ul) {
+		var ds = new Scroller(document.getElement('body'), {
+			onChange: function(x, y) {
+				var sc = this.element.getScroll();
+				this.element.scrollTo(sc.x, y);
+			}
+		});
+
 		var list = new Sortables(ul, {
 			contstrain: true,
-			opacity: 0.6
+			opacity: 0.6,
+			onStart: function(){
+				ds.start();
+			},
+			onComplete: function(){
+				ds.stop();
+    		}
 		});
 
 		list.active = false;
