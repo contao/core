@@ -4,6 +4,6 @@
   </tr>
 <?php else: ?>
   <div class="<?php echo $this->rowClass; ?> headline">
-    <?php echo $this->generate(); ?> 
+    <?php echo $this->generate(); ?>
   </div>
 <?php endif; ?>

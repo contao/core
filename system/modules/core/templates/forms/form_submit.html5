@@ -5,6 +5,6 @@
   </tr>
 <?php else: ?>
   <div class="submit_container">
-    <?php echo $this->generate(); ?> 
+    <?php echo $this->generate(); ?>
   </div>
 <?php endif; ?>
