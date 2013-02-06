@@ -12,7 +12,7 @@
 
 
 /**
- * Dynamically add the permission check and parent table 
+ * Dynamically add the permission check and parent table
  */
 if (Input::get('do') == 'news')
 {

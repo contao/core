@@ -69,24 +69,22 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 </div>
 
 <script>
-function enableSelectFunctions() {
-  var sel = false;
-  var cbs = document.getElementsByName('selectedids[]');
-  for (var i = 0; i < cbs.length; ++i) {
-    if (cbs[i].checked) {
-      sel = true;
-      break;
+  function enableSelectFunctions() {
+    var sel = false;
+    var cbs = document.getElementsByName('selectedids[]');
+    for (var i = 0; i < cbs.length; ++i) {
+      if (cbs[i].checked) {
+        sel = true;
+        break;
+      }
     }
+    document.getElementById('repository_upgradebutton').disabled = !sel;
   }
-  document.getElementById('repository_upgradebutton').disabled = !sel;
-}
-
-function selectUnselectAll() {
-  var chk = document.getElementById('selectall').checked;
-  var cbs = document.getElementsByName('selectedids[]');
-  for (var i = 0; i < cbs.length; ++i) cbs[i].checked = chk;
+  function selectUnselectAll() {
+    var chk = document.getElementById('selectall').checked;
+    var cbs = document.getElementsByName('selectedids[]');
+    for (var i = 0; i < cbs.length; ++i) cbs[i].checked = chk;
+    enableSelectFunctions();
+  }
   enableSelectFunctions();
-}
-
-enableSelectFunctions();
 </script>

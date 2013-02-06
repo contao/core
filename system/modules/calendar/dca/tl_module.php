@@ -244,23 +244,23 @@ class tl_module_calendar extends Backend
 	{
 		return '
   <script>
-  var enableStartDay = function() {
-    var e1 = $("ctrl_cal_startDay").getParent("div");
-    var e2 = $("ctrl_cal_order").getParent("div");
-    if ($("ctrl_cal_format").value == "cal_day") {
-      e1.setStyle("display", "block");
-      e2.setStyle("display", "none");
-	} else {
-      e1.setStyle("display", "none");
-      e2.setStyle("display", "block");
-	}
-  };
-  window.addEvent("domready", function() {
-    if ($("ctrl_cal_startDay")) {
-      enableStartDay();
-      $("ctrl_cal_format").addEvent("change", enableStartDay);
-    }
-  });
+    var enableStartDay = function() {
+      var e1 = $("ctrl_cal_startDay").getParent("div");
+      var e2 = $("ctrl_cal_order").getParent("div");
+      if ($("ctrl_cal_format").value == "cal_day") {
+        e1.setStyle("display", "block");
+        e2.setStyle("display", "none");
+	  } else {
+        e1.setStyle("display", "none");
+        e2.setStyle("display", "block");
+	  }
+    };
+    window.addEvent("domready", function() {
+      if ($("ctrl_cal_startDay")) {
+        enableStartDay();
+        $("ctrl_cal_format").addEvent("change", enableStartDay);
+      }
+    });
   </script>';
 	}
 

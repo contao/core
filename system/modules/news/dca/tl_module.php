@@ -221,23 +221,23 @@ class tl_module_news extends Backend
 	{
 		return '
   <script>
-  var enableStartDay = function() {
-    var e1 = $("ctrl_news_startDay").getParent("div");
-    var e2 = $("ctrl_news_order").getParent("div");
-    if ($("ctrl_news_format").value == "news_day") {
-      e1.setStyle("display", "block");
-      e2.setStyle("display", "none");
-	} else {
-      e1.setStyle("display", "none");
-      e2.setStyle("display", "block");
-	}
-  };
-  window.addEvent("domready", function() {
-    if ($("ctrl_news_startDay")) {
-      enableStartDay();
-      $("ctrl_news_format").addEvent("change", enableStartDay);
-    }
-  });
+    var enableStartDay = function() {
+      var e1 = $("ctrl_news_startDay").getParent("div");
+      var e2 = $("ctrl_news_order").getParent("div");
+      if ($("ctrl_news_format").value == "news_day") {
+        e1.setStyle("display", "block");
+        e2.setStyle("display", "none");
+	  } else {
+        e1.setStyle("display", "none");
+        e2.setStyle("display", "block");
+	  }
+    };
+    window.addEvent("domready", function() {
+      if ($("ctrl_news_startDay")) {
+        enableStartDay();
+        $("ctrl_news_format").addEvent("change", enableStartDay);
+      }
+    });
   </script>';
 	}
 

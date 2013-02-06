@@ -154,11 +154,11 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 </div>
 
 <?php if ($rep->pageOffset): ?>
-<script>
-function repositoryGetScrollOffset() {
-  var top = this.pageYOffset || document.documentElement.scrollTop;
-  document.cookie = "REPOSITORY_PAGE_OFFSET=" + top + "; path=/";
-}
-onload = self.scrollTo(0, <?php echo $rep->pageOffset; ?>);
-</script>
+  <script>
+    function repositoryGetScrollOffset() {
+      var top = this.pageYOffset || document.documentElement.scrollTop;
+      document.cookie = "REPOSITORY_PAGE_OFFSET=" + top + "; path=/";
+    }
+    onload = self.scrollTo(0, <?php echo $rep->pageOffset; ?>);
+  </script>
 <?php endif; ?>
