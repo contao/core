@@ -31,7 +31,7 @@
 <?php echo $this->javascripts; ?>
 <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
 <?php echo $this->rteConfig; ?>
-<script>parent.Contao.enableFiletreeReload()</script>
+<script>window.frameElement && parent.Contao.enableFiletreeReload()</script>
 </head>
 <body class="__ua__ popup">
 
