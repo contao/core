@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.4 (2013-XX-XX)
 --------------------------
 
+### Fixed
+Correctly close the SimpleModal overlay with the escape key (see #5297).
+
 ### Updated
 Update TinyMCE to version 3.5.8 (see #5273).
 
