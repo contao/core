@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Make sure the drag'n'drop hints do not overlay the field labels (see #5338).
+
+### Fixed
 Apply the color picker to single fields as well (see #5240).
 
 ### Fixed
