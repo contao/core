@@ -66,6 +66,15 @@ class Combiner extends System
 
 
 	/**
+	 * Public constructor required
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+
+	/**
 	 * Add a file
 	 * @param string
 	 * @param string
