@@ -37,14 +37,8 @@
 	font-family:"Architects Daughter",cursive;
 	font-size:15px;
 	color:#838990;
-	top:-30px;
+	top:-48px;
 	left:300px;
-	padding:0 0 30px 42px;
-	background:#fff url("images/arrow_left_down.png") 9px 18px no-repeat;
-}
-.sort_hint.above {
-	top:-50px;
-	left:240px;
-	padding:0 0 20px 42px;
+	padding:0 6px 20px 42px;
 	background:#fff url("images/arrow_left.png") 6px bottom no-repeat;
 }
