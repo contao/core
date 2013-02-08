@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Apply the color picker to single fields as well (see #5240).
+
+### Fixed
 Correctly close the SimpleModal overlay with the escape key (see #5297).
 
 ### Updated
