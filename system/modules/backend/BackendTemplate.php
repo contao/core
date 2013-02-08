@@ -173,6 +173,7 @@ class BackendTemplate extends Template
 			. 'CONTAO_EXPAND="' . $GLOBALS['TL_LANG']['MSC']['expandNode'] . '",'
 			. 'CONTAO_LOADING="' . $GLOBALS['TL_LANG']['MSC']['loadingData'] . '",'
 			. 'CONTAO_SCRIPT_URL="' . TL_SCRIPT_URL . '",'
+			. 'CONTAO_PATH="' . TL_PATH . '",'
 			. 'REQUEST_TOKEN="' . REQUEST_TOKEN . '";';
 	}
 

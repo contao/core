@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.10 (2013-XX-XX)
+----------------------------
+
+### Fixed
+Correctly set the cookie paths (see #5339).
+
+
 Version 2.11.9 (2013-02-05)
 ---------------------------
 

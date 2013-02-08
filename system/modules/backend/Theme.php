@@ -588,7 +588,7 @@ class Theme extends Backend
 		}
 
 		// Redirect
-		setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+		$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 		$this->redirect(str_replace('&key=importTheme', '', $this->Environment->request));
 	}
 

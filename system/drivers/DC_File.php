@@ -335,7 +335,7 @@ window.addEvent(\'domready\', function() {
 			if ($this->Input->post('saveNclose'))
 			{
 				$this->resetMessages();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 				$this->redirect($this->getReferer());
 			}
 

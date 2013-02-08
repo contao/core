@@ -292,7 +292,7 @@ class TableWizard extends Widget
 			$this->Database->prepare("UPDATE " . $dc->table . " SET tableitems=? WHERE id=?")
 						   ->execute(serialize($arrTable), $this->Input->get('id'));
 
-			setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+			$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 			$this->redirect(str_replace('&key=table', '', $this->Environment->request));
 		}
 

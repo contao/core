@@ -227,7 +227,7 @@ class ListWizard extends Widget
 			$this->Database->prepare("UPDATE " . $dc->table . " SET listitems=? WHERE id=?")
 						   ->execute(serialize($arrList), $this->Input->get('id'));
 
-			setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+			$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 			$this->redirect(str_replace('&key=list', '', $this->Environment->request));
 		}
 

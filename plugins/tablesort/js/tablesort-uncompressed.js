@@ -186,6 +186,10 @@ var TableSort = new Class(
 			tbody.sort(this.sortCaseInsensitive);
 		}
 
+		// Get the cookie path
+		var base = $$('base').get('href');
+		var cpath = base[0].replace(window.location.protocol + '//', '').replace(window.location.host, '').replace(/\/$/, '') || '/';
+
 		// Sort ascending
 		if (el.className.indexOf('asc') == -1)
 		{
@@ -198,7 +202,7 @@ var TableSort = new Class(
 			}
 
 			el.addClass('asc');
-			Cookie.write('TS_' + table.id.toUpperCase(), index + '|asc', { path: '/' });
+			Cookie.write('TS_' + table.id.toUpperCase(), index + '|asc', { path: cpath });
 		}
 
 		// Sort descending
@@ -213,7 +217,7 @@ var TableSort = new Class(
 			}
 
 			el.addClass('desc');
-			Cookie.write('TS_' + table.id.toUpperCase(), index + '|desc', { path: '/' });
+			Cookie.write('TS_' + table.id.toUpperCase(), index + '|desc', { path: cpath });
 
 			tbody.reverse();
 		}

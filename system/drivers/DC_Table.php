@@ -1884,13 +1884,13 @@ window.addEvent(\'domready\', function() {
 			if (isset($_POST['saveNclose']))
 			{
 				$this->resetMessages();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 				$this->redirect($this->getReferer());
 			}
 			elseif (isset($_POST['saveNedit']))
 			{
 				$this->resetMessages();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 				$strUrl = $this->addToUrl($GLOBALS['TL_DCA'][$this->strTable]['list']['operations']['edit']['href']);
 
 				$strUrl = preg_replace('/(&amp;)?s2e=[^&]*/i', '', $strUrl);
@@ -1901,7 +1901,7 @@ window.addEvent(\'domready\', function() {
 			elseif (isset($_POST['saveNback']))
 			{
 				$this->resetMessages();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 
 				if ($this->ptable == '')
 				{
@@ -1919,7 +1919,7 @@ window.addEvent(\'domready\', function() {
 			elseif (isset($_POST['saveNcreate']))
 			{
 				$this->resetMessages();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 				$strUrl = $this->Environment->script . '?do=' . $this->Input->get('do');
 
 				if (isset($_GET['table']))
@@ -2216,7 +2216,7 @@ window.addEvent(\'domready\', function() {
 			{
 				if ($this->Input->post('saveNclose'))
 				{
-					setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+					$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 					$this->redirect($this->getReferer());
 				}
 
@@ -2494,7 +2494,7 @@ window.addEvent(\'domready\', function() {
 			{
 				if ($this->Input->post('saveNclose'))
 				{
-					setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+					$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 					$this->redirect($this->getReferer());
 				}
 
