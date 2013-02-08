@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Define the login status constants in the back end (see #4099, #5279).
+
+### Fixed
 Make sure the drag'n'drop hints do not overlay the field labels (see #5338).
 
 ### Fixed

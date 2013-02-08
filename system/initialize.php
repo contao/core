@@ -24,6 +24,16 @@ define('TL_ROOT', dirname(__DIR__));
 
 
 /**
+ * Define the login status constants in the back end (see #4099, #5279)
+ */
+if (TL_MODE == 'BE')
+{
+	define('BE_USER_LOGGED_IN', false);
+	define('FE_USER_LOGGED_IN', false);
+}
+
+
+/**
  * Include functions, constants and interfaces
  */
 require TL_ROOT . '/system/helper/functions.php';
