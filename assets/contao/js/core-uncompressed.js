@@ -823,7 +823,7 @@ var Backend =
 	 * Get the current scroll offset and store it in a cookie
 	 */
 	getScrollOffset: function() {
-		document.cookie = "BE_PAGE_OFFSET=" + window.getScroll().y + "; path=/";
+		document.cookie = "BE_PAGE_OFFSET=" + window.getScroll().y + "; path=" + (Contao.path || '/');
 	},
 
 	/**

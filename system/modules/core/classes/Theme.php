@@ -735,7 +735,7 @@ class Theme extends \Backend
 			\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));
 		}
 
-		setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+		\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 		$this->Session->remove('uploaded_themes');
 
 		// Redirect

@@ -174,6 +174,7 @@ class BackendTemplate extends \Template
 					. 'apply:"' . $GLOBALS['TL_LANG']['MSC']['apply'] . '"'
 				. '},'
 				. 'script_url:"' . TL_ASSETS_URL . '",'
+				. 'path:"' . TL_PATH . '",'
 				. 'request_token:"' . REQUEST_TOKEN . '"'
 			. '};';
 	}
