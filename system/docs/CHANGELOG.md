@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly sort values by an external order field (see #5322).
+
+### Fixed
 Define the login status constants in the back end (see #4099, #5279).
 
 ### Fixed
