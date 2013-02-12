@@ -172,10 +172,10 @@ class FrontendTemplate extends \Template
 		// Send cache headers
 		if (!headers_sent())
 		{
-			if ($intCache !== null && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
+			if (intval($objPage->cache) > 0 && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
 			{
-				header('Cache-Control: public, max-age=' . ($intCache -  time()));
-				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');
+				header('Cache-Control: public, max-age=' . intval($objPage->cache));
+				header('Expires: ' . gmdate('D, d M Y H:i:s', (intval($objPage->cache) + time())) . ' GMT');
 				header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 				header('Pragma: public');
 			}
