@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly show the "empty news list" note (see #5304).
+
+### Fixed
 Correctly sort values by an external order field (see #5322).
 
 ### Fixed
