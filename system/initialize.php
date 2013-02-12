@@ -66,7 +66,7 @@ require(TL_ROOT . '/system/interface.php');
  * Define the relative path to the installation (see #5339)
  */
 $objEnvironment = Environment::getInstance();
-define('TL_PATH', str_replace($objEnvironment->documentRoot, '', dirname(dirname(__FILE__))));
+define('TL_PATH', str_replace($objEnvironment->documentRoot, '', str_replace('\\', '/',  dirname(dirname(__FILE__)))));
 
 
 /**
