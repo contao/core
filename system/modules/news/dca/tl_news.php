@@ -201,7 +201,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 		'author' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['author'],
-			'default'                 => $this->User->id,
+			'default'                 => BackendUser::getInstance()->id,
 			'exclude'                 => true,
 			'filter'                  => true,
 			'sorting'                 => true,

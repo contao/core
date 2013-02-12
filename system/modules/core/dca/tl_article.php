@@ -192,7 +192,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 		'author' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['author'],
-			'default'                 => $this->User->id,
+			'default'                 => BackendUser::getInstance()->id,
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',

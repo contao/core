@@ -195,7 +195,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		'author' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['author'],
-			'default'                 => $this->User->id,
+			'default'                 => BackendUser::getInstance()->id,
 			'exclude'                 => true,
 			'filter'                  => true,
 			'sorting'                 => true,
