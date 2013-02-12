@@ -5,6 +5,9 @@ Version 2.11.10 (2013-XX-XX)
 ----------------------------
 
 ### Fixed
+Remove the session of deleted or disabled users (see #5353).
+
+### Fixed
 Correctly set the cookie paths (see #5339).
 
 
