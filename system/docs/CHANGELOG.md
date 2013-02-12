@@ -5,6 +5,10 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Return an associative array in `Model_Collection::fetchEach()` if the requested
+field is **not** `id` (see #5134).
+
+### Fixed
 Make eagerly loaded "pageTree" fields mandatory again (see #4866).
 
 ### Fixed

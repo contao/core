@@ -349,7 +349,7 @@ class Collection extends \System
 		{
 			$strPk = $this->current()->getPk();
 
-			if ($strKey == 'id' && isset($this->$strPk))
+			if ($strKey != 'id' && isset($this->$strPk))
 			{
 				$return[$this->$strPk] = $this->$strKey;
 			}
