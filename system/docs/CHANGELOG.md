@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Make eagerly loaded "pageTree" fields mandatory again (see #4866).
+
+### Fixed
 Do not use forward pages as upper page in the book navigation (see #5074).
 
 ### Fixed
