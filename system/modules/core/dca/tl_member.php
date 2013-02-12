@@ -24,7 +24,12 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		'enableVersioning'            => true,
 		'onsubmit_callback' => array
 		(
+			array('tl_member', 'removeSession'),
 			array('tl_member', 'storeDateAdded')
+		),
+		'ondelete_callback' => array
+		(
+			array('tl_member', 'removeSession')
 		),
 		'sql' => array
 		(
@@ -529,6 +534,20 @@ class tl_member extends Backend
 
 
 	/**
+	 * Remove the session if a user is deleted (see #5353)
+	 * @param \DataContainer
+	 */
+	public function removeSession(DataContainer $dc)
+	{
+		if ($dc->activeRecord)
+		{
+			$this->Database->prepare("DELETE FROM tl_session WHERE name='FE_USER_AUTH' AND pid=?")
+						   ->execute($dc->activeRecord->id);
+		}
+	}
+
+
+	/**
 	 * Return the "toggle visibility" button
 	 * @param array
 	 * @param string
@@ -596,6 +615,13 @@ class tl_member extends Backend
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_member', $intId);
+
+		// Remove the session if the user is disabled (see #5353)
+		if (!$blnVisible)
+		{
+			$this->Database->prepare("DELETE FROM tl_session WHERE name='FE_USER_AUTH' AND pid=?")
+						   ->execute($intId);
+		}
 
 		// HOOK: update newsletter subscriptions
 		if (in_array('newsletter', $this->Config->getActiveModules()))

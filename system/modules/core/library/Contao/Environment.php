@@ -131,21 +131,21 @@ class Environment
 		$strDocumentRoot = '';
 		$arrUriSegments = array();
 		$scriptName = static::get('scriptName');
-		$scriptFileName = static::get('scriptFileName');
+		$scriptFilename = static::get('scriptFilename');
 
 		// Fallback to DOCUMENT_ROOT if SCRIPT_FILENAME and SCRIPT_NAME point to different files
-		if (basename($scriptName) != basename($scriptFileName))
+		if (basename($scriptName) != basename($scriptFilename))
 		{
 			return str_replace('//', '/', str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT'])));
 		}
 
-		if (substr($scriptFileName, 0, 1) == '/')
+		if (substr($scriptFilename, 0, 1) == '/')
 		{
 			$strDocumentRoot = '/';
 		}
 
 		$arrSnSegments = explode('/', strrev($scriptName));
-		$arrSfnSegments = explode('/', strrev($scriptFileName));
+		$arrSfnSegments = explode('/', strrev($scriptFilename));
 
 		foreach ($arrSfnSegments as $k=>$v)
 		{
@@ -159,7 +159,7 @@ class Environment
 
 		if (strlen($strDocumentRoot) < 2)
 		{
-			$strDocumentRoot = substr($scriptFileName, 0, -(strlen($strDocumentRoot) + 1));
+			$strDocumentRoot = substr($scriptFilename, 0, -(strlen($strDocumentRoot) + 1));
 		}
 
 		return str_replace('//', '/', str_replace('\\', '/', realpath($strDocumentRoot)));
