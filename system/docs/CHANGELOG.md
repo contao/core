@@ -5,6 +5,10 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Throw an exception if the file system and the database are out of sync and
+show a meaningful error message (see #5101).
+
+### Fixed
 Return an associative array in `Model_Collection::fetchEach()` if the requested
 field is **not** `id` (see #5134).
 
