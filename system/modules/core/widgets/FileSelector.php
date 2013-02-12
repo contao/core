@@ -127,7 +127,7 @@ class FileSelector extends \Widget
 
 					while ($objRoot->next())
 					{
-						if (count(array_intersect($this->User->filemounts, $this->Database->getParentRecords($objRoot->id, 'tl_files'))) > 0)
+						if (count(array_intersect($this->User->filemountIds, $this->Database->getParentRecords($objRoot->id, 'tl_files'))) > 0)
 						{
 							$arrRoot[] = $objRoot->id;
 						}
