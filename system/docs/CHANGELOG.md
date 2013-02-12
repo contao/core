@@ -5,6 +5,9 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not use forward pages as upper page in the book navigation (see #5074).
+
+### Fixed
 Correctly show the "empty news list" note (see #5304).
 
 ### Fixed
