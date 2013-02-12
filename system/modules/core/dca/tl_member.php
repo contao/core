@@ -468,8 +468,8 @@ class tl_member extends Backend
 	 */
 	public function setNewPassword($strPassword, $user)
 	{
-		// Return if there is no user (e.g. upon registration) (see #5247)
-		if (TL_MODE != 'FE' || !$user)
+		// Return if there is no user (e.g. upon registration)
+		if (!$user)
 		{
 			return $strPassword;
 		}
