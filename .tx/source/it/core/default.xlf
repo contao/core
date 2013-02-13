@@ -170,8 +170,8 @@
         <target>Il file o la cartella &quot;%s&quot; non è valido!</target>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
-        <source>The file &quot;%s&quot; already exists!</source>
-        <target>Il file &quot;%s&quot; è già presente!</target>
+        <source>The file or folder &quot;%s&quot; already exists!</source>
+        <target>Il file o la cartella &quot;%s&quot; è già presente!</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -226,8 +226,10 @@
         <target>Input non valido: %s</target>
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
-        <source>No database entry found for %s. Please synchronize the file system.</source>
-        <target>Nel database non è stata trovata nessuna informazione per %s. È necessario risincronizzare il file system.</target>
+        <source>No database entry found for %s.</source>
+      </trans-unit>
+      <trans-unit id="ERR.dbOutOfSync">
+        <source>The database and the file system have to be synchronized to continue.</source>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
@@ -1821,7 +1823,7 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
       </trans-unit>
       <trans-unit id="MSC.first">
         <source>&amp;#171; First</source>
-        <target>« Primo</target>
+        <target>« Prima</target>
       </trans-unit>
       <trans-unit id="MSC.previous">
         <source>Previous</source>
@@ -1829,11 +1831,11 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
       </trans-unit>
       <trans-unit id="MSC.next">
         <source>Next</source>
-        <target>Prossimo</target>
+        <target>Seguente</target>
       </trans-unit>
       <trans-unit id="MSC.last">
         <source>Last &amp;#187;</source>
-        <target>Ultimo »</target>
+        <target>Ultima »</target>
       </trans-unit>
       <trans-unit id="MSC.goToPage">
         <source>Go to page %s</source>

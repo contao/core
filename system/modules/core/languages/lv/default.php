@@ -54,7 +54,6 @@ $GLOBALS['TL_LANG']['ERR']['importFolder'] = 'Mapi "%s" nevar importēt!';
 $GLOBALS['TL_LANG']['ERR']['notWriteable'] = 'Datne "% s" nav rakstāma, tāpēc jūsu veiktās izmaiņas nebūs spēkā!';
 $GLOBALS['TL_LANG']['ERR']['invalidName'] = 'Datnes vai mapes vārds ir nederīgs!';
 $GLOBALS['TL_LANG']['ERR']['invalidFile'] = 'Datne vai mape "%s" ir nederīga!';
-$GLOBALS['TL_LANG']['ERR']['fileExists'] = 'Datne "%s" jau eksistē!';
 $GLOBALS['TL_LANG']['ERR']['circularReference'] = 'Nederīgs novirzīšanas mērķis (riņķveida atsauce)!';
 $GLOBALS['TL_LANG']['ERR']['ie6warning'] = '<strong>Uzmanību!</strong> Jūsu pārlūks ir %novecojis%s un <strong>jūs nevarēsiet izmantot šis lapas visas iespējas</strong>.';
 $GLOBALS['TL_LANG']['ERR']['noFallbackEmpty'] = 'Nevienai aktīvās tīmekļa saknes lapai bez skaidra DNS iestatījuma nav iestatīta valodu atpazīšanas opcija, kas nozīmē, ka šīs mājas lapas ir pieejamas tikai vienā valodā, kas jums ir noteiktas lappuses iestatījumos! Apmeklētāji un meklētājprogrammas, ar atšķirīgiem valodas uzstādījumiem, nevarēs pārlūkot jūsu mājas lapu.';

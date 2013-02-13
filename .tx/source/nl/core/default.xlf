@@ -170,8 +170,8 @@
         <target>Bestand of map &quot;%s&quot; is ongeldig!</target>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
-        <source>The file &quot;%s&quot; already exists!</source>
-        <target>Bestand &quot;%s&quot; bestaat al!</target>
+        <source>The file or folder &quot;%s&quot; already exists!</source>
+        <target>Bestand of map &quot;%s&quot; bestaat al!</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -226,8 +226,10 @@
         <target>Foutieve invoer %s</target>
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
-        <source>No database entry found for %s. Please synchronize the file system.</source>
-        <target>Geen database toegang gevonden voor %s. Gelieve  het bestandssysteem te synchroniseren.</target>
+        <source>No database entry found for %s.</source>
+      </trans-unit>
+      <trans-unit id="ERR.dbOutOfSync">
+        <source>The database and the file system have to be synchronized to continue.</source>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>

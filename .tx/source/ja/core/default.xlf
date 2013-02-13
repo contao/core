@@ -170,8 +170,8 @@
         <target>&quot;%s&quot;というファイルまたはフォルダーは無効です。</target>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
-        <source>The file &quot;%s&quot; already exists!</source>
-        <target>&quot;%s&quot;というファイルは既に存在します。</target>
+        <source>The file or folder &quot;%s&quot; already exists!</source>
+        <target>&quot;%s&quot;という名前のファイルまたはフォルダーが既に存在します。</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -226,8 +226,12 @@
         <target>正しくない入力: %s</target>
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
-        <source>No database entry found for %s. Please synchronize the file system.</source>
-        <target>%sに対応するデータベースの項目がありません。ファイルシステムと同期してください。</target>
+        <source>No database entry found for %s.</source>
+        <target>%sに対応するデータベースの項目がありません。</target>
+      </trans-unit>
+      <trans-unit id="ERR.dbOutOfSync">
+        <source>The database and the file system have to be synchronized to continue.</source>
+        <target>続けるにはデータベースとファイルシステムを同期しなければなりません。</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>

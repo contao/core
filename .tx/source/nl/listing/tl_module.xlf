@@ -59,11 +59,11 @@
       </trans-unit>
       <trans-unit id="tl_module.list_layout.0">
         <source>List template</source>
-        <target>Opsomming template</target>
+        <target>List template</target>
       </trans-unit>
       <trans-unit id="tl_module.list_layout.1">
         <source>Here you can select the list template.</source>
-        <target>Kies een opsomming lay-out. </target>
+        <target>Kies een list template. </target>
       </trans-unit>
       <trans-unit id="tl_module.list_info_layout.0">
         <source>Details page template</source>
