@@ -166,10 +166,6 @@ class InstallTool extends Backend
 			$this->outputAndExit();
 		}
 
-		// Purge the internal cache
-		$this->import('Automator');
-		$this->Automator->purgeInternalCache();
-
 		// Set up the database connection
 		$this->setUpDatabaseConnection();
 
@@ -203,6 +199,13 @@ class InstallTool extends Backend
 
 			$_SESSION['sql_commands'] = array();
 			$this->reload();
+		}
+
+		// Purge the internal cache
+		if (is_dir(TL_ROOT . '/system/cache/dca'))
+		{
+			$this->import('Automator');
+			$this->Automator->purgeInternalCache();
 		}
 
 		// Wait for the tables to be created (see #5061)
