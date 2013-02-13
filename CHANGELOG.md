@@ -5,6 +5,9 @@ Version 2.11.10 (2013-XX-XX)
 ----------------------------
 
 ### Fixed
+Send the correct cache headers in "client cache only" mode (see #5358).
+
+### Fixed
 Remove the session of deleted or disabled users (see #5353).
 
 ### Fixed
