@@ -5,6 +5,10 @@ Version 3.0.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+If an eagerly loaded relation does not exist, return `null` instead of an empty
+model in `Model::getRelated()` (see #5356).
+
+### Fixed
 Throw an exception if the file system and the database are out of sync and
 show a meaningful error message (see #5101).
 

@@ -88,6 +88,7 @@ abstract class Model extends \System
 
 		if ($objResult !== null)
 		{
+			$arrRelated = array();
 			$this->arrData = $objResult->row();
 
 			// Look for joined fields
@@ -97,16 +98,31 @@ abstract class Model extends \System
 				{
 					list($key, $field) = explode('__', $k, 2);
 
-					// Create the related model
-					if (!isset($this->arrRelated[$key]))
+					if (!isset($arrRelated[$key]))
 					{
-						$table = $this->arrRelations[$key]['table'];
-						$strClass = $this->getModelClassFromTable($table);
-						$this->arrRelated[$key] = new $strClass();
+						$arrRelated[$key] = array();
 					}
 
-					$this->arrRelated[$key]->$field = $v;
+					$arrRelated[$key][$field] = $v;
 					unset($this->arrData[$k]);
+				}
+			}
+
+			// Create the related models
+			foreach ($arrRelated as $key=>$row)
+			{
+				$table = $this->arrRelations[$key]['table'];
+				$strClass = $this->getModelClassFromTable($table);
+
+				// If the primary key is empty, set null (see #5356)
+				if (!isset($row[$strClass::getPk()]))
+				{
+					$this->arrRelated[$key] = null;
+				}
+				else
+				{
+					$this->arrRelated[$key] = new $strClass();
+					$this->arrRelated[$key]->setRow($row);
 				}
 			}
 		}
@@ -284,7 +300,7 @@ abstract class Model extends \System
 	public function getRelated($strKey, array $arrOptions=array())
 	{
 		// The related model has been loaded before
-		if (isset($this->arrRelated[$strKey]))
+		if (array_key_exists($strKey, $this->arrRelated))
 		{
 			return $this->arrRelated[$strKey];
 		}
