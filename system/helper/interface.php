@@ -62,12 +62,3 @@ interface executable
  * @package    Core
  */
 interface uploadable {}
-
-
-/**
- * Class OutOfSyncException
- * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
- */
-class OutOfSyncException extends RuntimeException {}

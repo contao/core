@@ -34,11 +34,12 @@ if (TL_MODE == 'BE')
 
 
 /**
- * Include functions, constants and interfaces
+ * Include the helpers
  */
 require TL_ROOT . '/system/helper/functions.php';
 require TL_ROOT . '/system/config/constants.php';
 require TL_ROOT . '/system/helper/interface.php';
+require TL_ROOT . '/system/helper/exception.php';
 
 
 /**
