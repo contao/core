@@ -171,6 +171,7 @@
       </trans-unit>
       <trans-unit id="ERR.fileExists">
         <source>The file or folder &quot;%s&quot; already exists!</source>
+        <target>Файл або папка &quot;%s&quot; вже існує!</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -226,9 +227,11 @@
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
         <source>No database entry found for %s.</source>
+        <target>Записів не зайдено для %s.</target>
       </trans-unit>
       <trans-unit id="ERR.dbOutOfSync">
         <source>The database and the file system have to be synchronized to continue.</source>
+        <target>Для продовження, необхідно щоб база даних та файлова система були синхронизовані.</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>

@@ -227,9 +227,11 @@
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
         <source>No database entry found for %s.</source>
+        <target>Не найдена запись базы данных для %s.</target>
       </trans-unit>
       <trans-unit id="ERR.dbOutOfSync">
         <source>The database and the file system have to be synchronized to continue.</source>
+        <target>Для продолжения синхронизируйте базу данных и файловую систему.</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>

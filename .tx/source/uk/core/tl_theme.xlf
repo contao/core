@@ -127,9 +127,11 @@
       </trans-unit>
       <trans-unit id="tl_theme.store.0">
         <source>Theme store</source>
+        <target>Магазин тем</target>
       </trans-unit>
       <trans-unit id="tl_theme.store.1">
         <source>Find more themes in the Contao theme store</source>
+        <target>Більше тем можливо знайти в Contao магазині тем</target>
       </trans-unit>
       <trans-unit id="tl_theme.new.0">
         <source>New theme</source>

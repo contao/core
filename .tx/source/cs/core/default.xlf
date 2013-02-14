@@ -171,6 +171,7 @@
       </trans-unit>
       <trans-unit id="ERR.fileExists">
         <source>The file or folder &quot;%s&quot; already exists!</source>
+        <target>Soubor nebo složka &quot;%s&quot; už existují!</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -226,9 +227,11 @@
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
         <source>No database entry found for %s.</source>
+        <target>V databance nebyly nalezeny žádné záznamy pro %s.</target>
       </trans-unit>
       <trans-unit id="ERR.dbOutOfSync">
         <source>The database and the file system have to be synchronized to continue.</source>
+        <target>Databáze a systém souborů musí být synchronizované, aby se dalo pokračovat.</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
