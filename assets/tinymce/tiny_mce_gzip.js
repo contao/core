@@ -152,110 +152,107 @@ var tinyMCE_GZ = {
  *
  * @copyright Andreas Schempp, 2013
  */
-var tinyMCE_GZ_shim = tinyMCE_GZ_shim || (function() {
-    "use strict";
+if (Object.create) {
+	var tinyMCE_GZ_shim = tinyMCE_GZ_shim || (function() {
+		"use strict";
 
-    var tinyMCE_GZ = window.tinyMCE_GZ,
-        tinyMCE = null,
-        initialized = false,
-        config_gz = [],
-        config_tiny = {};
+		var tinyMCE_GZ = window.tinyMCE_GZ,
+			tinyMCE = null,
+			initialized = false,
+			config_gz = [],
+			config_tiny = {};
 
-    var create_shim = function(t, s) {
-        var shim, k;
+		var create_shim = function(t, s) {
+			var shim = Object.create(t),
+				k;
 
-        if (Object.create) {
-            shim = Object.create(t);
-            for (k in s) {
-                if (s.hasOwnProperty(k)) {
-                    shim[k] = s[k];
-                }
-            }
-        } else {
-            shim = s;
-            shim.__proto__ = t;
-        }
+			for (k in s) {
+				if (s.hasOwnProperty(k)) {
+					shim[k] = s[k];
+				}
+			}
 
-        return shim;
-    }
+			return shim;
+		}
 
-    var array_unique = function(arr) {
-        var unique = [],
-            i, total;
+		var array_unique = function(arr) {
+			var unique = [],
+				i, total;
 
-        arr = arr.sort();
+			arr = arr.sort();
 
-        for (i=0, total=arr.length; i<total; i++) {
-            if (arr[i + 1] != arr[i]) {
-                unique.push(arr[i]);
-            }
-        }
+			for (i=0, total=arr.length; i<total; i++) {
+				if (arr[i + 1] != arr[i]) {
+					unique.push(arr[i]);
+				}
+			}
 
-        return unique;
-    }
+			return unique;
+		}
 
-    var tinyMCE_GZ_shim = {
-        init: function(s) {
-            config_gz.push(s)
-        }
-    }
+		var tinyMCE_GZ_shim = {
+			init: function(s) {
+				config_gz.push(s);
+			}
+		}
 
-    var tinyMCE_shim = {
-        init: function(s) {
-            var elements = s.elements.split(','),
-                i, total;
+		var tinyMCE_shim = {
+			init: function(s) {
+				var elements = s.elements.split(','),
+					i, total;
 
-            for (i=0, total=elements.length; i<total; i++) {
-                config_tiny[elements[i]] = s;
-            }
-        },
-        execCommand: function(c, u, v) {
-            initialize();
+				for (i=0, total=elements.length; i<total; i++) {
+					config_tiny[elements[i]] = s;
+				}
+			},
+			execCommand: function(c, u, v) {
+				initialize();
 
-            if (tinyMCE && typeof config_tiny[v] != 'undefined') {
-                tinyMCE.init(config_tiny[v]);
-                tinyMCE.execCommand(c, u, v);
-            }
-        }
-    }
+				if (tinyMCE && typeof config_tiny[v] != 'undefined') {
+					tinyMCE.init(config_tiny[v]);
+					tinyMCE.execCommand(c, u, v);
+				}
+			}
+		}
 
-    var initialize = function() {
-        if (initialized) return;
+		var initialize = function() {
+			if (initialized) return;
 
-        var settings = {plugins:[], themes:[], languages:[]},
-            i, s, k, total;
+			var settings = {plugins:[], themes:[], languages:[]},
+				i, s, k, total;
 
-        for (i=0, total=config_gz.length;i<total; i++) {
-            s = config_gz[i];
+			for (i=0, total=config_gz.length;i<total; i++) {
+				s = config_gz[i];
 
-            for (k in s) {
-                if (k == 'plugins' || k == 'themes' || k == 'languages') {
-                    [].push.apply(settings[k], s[k].split(','));
-                }
-                else if (s.hasOwnProperty(k)) {
-                    settings[k] = s[k];
-                }
-            }
-        }
+				for (k in s) {
+					if (k == 'plugins' || k == 'themes' || k == 'languages') {
+						[].push.apply(settings[k], s[k].split(','));
+					}
+					else if (s.hasOwnProperty(k)) {
+						settings[k] = s[k];
+					}
+				}
+			}
 
-        settings.plugins = array_unique(settings.plugins).join(',');
-        settings.themes = array_unique(settings.themes).join(',');
-        settings.languages = array_unique(settings.languages).join(',');
+			settings.plugins = array_unique(settings.plugins).join(',');
+			settings.themes = array_unique(settings.themes).join(',');
+			settings.languages = array_unique(settings.languages).join(',');
 
-        // load tinyMCE
-        tinyMCE_GZ.init(settings);
+			// load tinyMCE
+			tinyMCE_GZ.init(settings);
 
-        tinyMCE = window.tinyMCE;
-        tinyMCE_shim = create_shim(tinyMCE, tinyMCE_shim);
-        window.tinyMCE = tinyMCE_shim;
+			tinyMCE = window.tinyMCE;
+			tinyMCE_shim = create_shim(tinyMCE, tinyMCE_shim);
+			window.tinyMCE = tinyMCE_shim;
 
-        initialized = true;
-    }
+			initialized = true;
+		}
 
-    window.tinyMCE = tinyMCE_shim;
-    tinyMCE_GZ_shim = create_shim(tinyMCE_GZ, tinyMCE_GZ_shim);
+		window.tinyMCE = tinyMCE_shim;
+		tinyMCE_GZ_shim = create_shim(tinyMCE_GZ, tinyMCE_GZ_shim);
 
-    return tinyMCE_GZ_shim;
-})();
+		return tinyMCE_GZ_shim;
+	})();
 
-window.tinyMCE_GZ = tinyMCE_GZ_shim;
+	window.tinyMCE_GZ = tinyMCE_GZ_shim;
+}
