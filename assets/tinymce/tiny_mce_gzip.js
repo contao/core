@@ -1,3 +1,12 @@
+/**
+ * tiny_mce_gzip.js
+ *
+ * Copyright 2010, Moxiecode Systems AB
+ * Released under LGPL License.
+ *
+ * License: http://tinymce.moxiecode.com/license
+ * Contributing: http://tinymce.moxiecode.com/contributing
+ */
 var tinyMCE_GZ = {
 	settings : {
 		themes : '',
@@ -135,3 +144,115 @@ var tinyMCE_GZ = {
 		se.parentNode.removeChild(se);
 	}
 };
+
+
+/**
+ * Allow to run multiple TinyMCE instances with different
+ * configurations on the same page 
+ *
+ * @copyright Andreas Schempp, 2013
+ */
+if (Object.create) {
+	var tinyMCE_GZ_shim = tinyMCE_GZ_shim || (function() {
+		"use strict";
+
+		var tinyMCE_GZ = window.tinyMCE_GZ,
+			tinyMCE = null,
+			initialized = false,
+			config_gz = [],
+			config_tiny = {};
+
+		var create_shim = function(t, s) {
+			var shim = Object.create(t),
+				k;
+
+			for (k in s) {
+				if (s.hasOwnProperty(k)) {
+					shim[k] = s[k];
+				}
+			}
+
+			return shim;
+		}
+
+		var array_unique = function(arr) {
+			var unique = [],
+				i, total;
+
+			arr = arr.sort();
+
+			for (i=0, total=arr.length; i<total; i++) {
+				if (arr[i + 1] != arr[i]) {
+					unique.push(arr[i]);
+				}
+			}
+
+			return unique;
+		}
+
+		var tinyMCE_GZ_shim = {
+			init: function(s) {
+				config_gz.push(s);
+			}
+		}
+
+		var tinyMCE_shim = {
+			init: function(s) {
+				var elements = s.elements.split(','),
+					i, total;
+
+				for (i=0, total=elements.length; i<total; i++) {
+					config_tiny[elements[i]] = s;
+				}
+			},
+			execCommand: function(c, u, v) {
+				initialize();
+
+				if (tinyMCE && typeof config_tiny[v] != 'undefined') {
+					tinyMCE.init(config_tiny[v]);
+					tinyMCE.execCommand(c, u, v);
+				}
+			}
+		}
+
+		var initialize = function() {
+			if (initialized) return;
+
+			var settings = {plugins:[], themes:[], languages:[]},
+				i, s, k, total;
+
+			for (i=0, total=config_gz.length;i<total; i++) {
+				s = config_gz[i];
+
+				for (k in s) {
+					if (k == 'plugins' || k == 'themes' || k == 'languages') {
+						[].push.apply(settings[k], s[k].split(','));
+					}
+					else if (s.hasOwnProperty(k)) {
+						settings[k] = s[k];
+					}
+				}
+			}
+
+			settings.plugins = array_unique(settings.plugins).join(',');
+			settings.themes = array_unique(settings.themes).join(',');
+			settings.languages = array_unique(settings.languages).join(',');
+
+			// load tinyMCE
+			tinyMCE_GZ.init(settings);
+
+			tinyMCE = window.tinyMCE;
+			tinyMCE_shim = create_shim(tinyMCE, tinyMCE_shim);
+			window.tinyMCE = tinyMCE_shim;
+
+			initialized = true;
+		}
+
+		window.tinyMCE = tinyMCE_shim;
+		tinyMCE_GZ_shim = create_shim(tinyMCE_GZ, tinyMCE_GZ_shim);
+
+		return tinyMCE_GZ_shim;
+	})();
+
+	window.tinyMCE_GZ = tinyMCE_GZ_shim;
+}

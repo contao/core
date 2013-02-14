@@ -1,6 +1,125 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.0.4 (2013-02-14)
+--------------------------
+
+### Fixed
+Correctly split the words when adding to the search index (see #5363).
+
+### Fixed
+If an eagerly loaded relation does not exist, return `null` instead of an empty
+model in `Model::getRelated()` (see #5356).
+
+### Fixed
+Throw an exception if the file system and the database are out of sync and
+show a meaningful error message (see #5101).
+
+### Fixed
+Return an associative array in `Model_Collection::fetchEach()` if the requested
+field is **not** `id` (see #5134).
+
+### Fixed
+Make eagerly loaded "pageTree" fields mandatory again (see #4866).
+
+### Fixed
+Do not use forward pages as upper page in the book navigation (see #5074).
+
+### Fixed
+Correctly show the "empty news list" note (see #5304).
+
+### Fixed
+Correctly sort values by an external order field (see #5322).
+
+### Fixed
+Define the login status constants in the back end (see #4099, #5279).
+
+### Fixed
+Make sure the drag'n'drop hints do not overlay the field labels (see #5338).
+
+### Fixed
+Apply the color picker to single fields as well (see #5240).
+
+### Fixed
+Correctly close the SimpleModal overlay with the escape key (see #5297).
+
+### Updated
+Update TinyMCE to version 3.5.8 (see #5273).
+
+### Fixed
+Correctly check for nested arrays in `Widget::isValidOption()` (see #5328).
+
+### Fixed
+Preserve the order of multi source fields when exporting a theme (see #5237).
+
+### Fixed
+Also check whether the target exists when creating new folders (see #5260).
+
+### Fixed
+Load the core `autoload.php` files first (see #5261).
+
+### Fixed
+Support `null` as column default value in the DCA (see #5252).
+
+### New
+Added the `$blnDoNotCreate` option to the `Files` class, which makes the class
+write to a temporary file first and then move it to its destination in one
+atomic operation. This fixes some cache issues (see #5307).
+
+### Fixed
+Handle `@` blocks when importing style sheets (see #5250).
+
+### Fixed
+Show the newsletter list even if there is no jumpTo page configured in the
+channel and show the enclosures in the newsletter reader (see #5233).
+
+### Fixed
+Added an option to load model relations uncached (see #5248, #5102). Also fixed
+the `array_merge()` order so the default options can be overriden.
+
+### Updated
+Updated SimplePie to version 1.3.1 (see #5207).
+
+### Updated
+Updated SwiftMailer to version 4.3.0 (see #5263).
+
+### Fixed
+The jQuery accordion script did not work with minified markup (see #5245).
+
+### Fixed
+Removed the "spaceToUnderscore" option from all alias fields (see #5266).
+
+### Fixed
+The media content element now supports .ogg files (see #5282).
+
+### Fixed
+Do not rewrite requests for .mp3, .mp4, .webm or .ogv files (see #5258, #5284).
+
+### Fixed
+Correctly determin the last run of the command scheduler (see #5278).
+
+### Fixed
+Make the jQuery accordion behave like the MooTools version (see #5251).
+
+### Fixed
+Added support for more advanced media queries (see #5236).
+
+### Fixed
+Added the missing `UserGroupModel` class (see #5218).
+
+### Fixed
+Handle the case that `glob()` returns `false` (see #5226).
+
+### Fixed
+The table sorter did not work if jQuery and MooTools were active (see #5228).
+
+### Fixed
+Copy all content elements if pages are duplicated with childs (see #5241).
+
+### Fixed
+Added lazy template loading for newsletter mail templates.
+
+
 Version 3.0.3 (2013-01-08)
 --------------------------
 

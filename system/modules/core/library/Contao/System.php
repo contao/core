@@ -376,10 +376,10 @@ abstract class System
 		else
 		{
 			// Generate the cache files
-			$objCacheFallback = new \File('system/cache/language/en/' . $strName . '.php');
+			$objCacheFallback = new \File('system/cache/language/en/' . $strName . '.php', true);
 			$objCacheFallback->write('<?php '); // add one space to prevent the "unexpected $end" error
 
-			$objCacheFile = new \File('system/cache/language/' . $strLanguage . '/' . $strName . '.php');
+			$objCacheFile = new \File('system/cache/language/' . $strLanguage . '/' . $strName . '.php', true);
 			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
 
 			// Parse all active modules

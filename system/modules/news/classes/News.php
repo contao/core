@@ -188,9 +188,12 @@ class News extends \Frontend
 					{
 						$objFile = \FilesModel::findMultipleByIds($arrEnclosure);
 
-						while ($objFile->next())
+						if ($objFile !== null)
 						{
-							$objItem->addEnclosure($objFile->path);
+							while ($objFile->next())
+							{
+								$objItem->addEnclosure($objFile->path);
+							}
 						}
 					}
 				}
@@ -200,7 +203,7 @@ class News extends \Frontend
 		}
 
 		// Create the file
-		$objRss = new \File('share/' . $strFile . '.xml');
+		$objRss = new \File('share/' . $strFile . '.xml', true);
 		$objRss->write($this->replaceInsertTags($objFeed->$strType()));
 		$objRss->close();
 	}

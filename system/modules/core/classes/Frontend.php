@@ -83,6 +83,12 @@ abstract class Frontend extends \Controller
 			list($strRequest) = explode('?', str_replace('index.php/', '', \Environment::get('request')), 2);
 		}
 
+		// The request string must not contain "auto_item" (see #4012)
+		if (strpos($strRequest, '/auto_item/') !== false)
+		{
+			return false;
+		}
+
 		// Remove the URL suffix if not just a language root (e.g. en/) is requested
 		if ($strRequest != '' && (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'] || !preg_match('@^[a-z]{2}/$@', $strRequest)))
 		{

@@ -170,8 +170,8 @@
         <target>Неверное имя файла или каталога &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
-        <source>The file &quot;%s&quot; already exists!</source>
-        <target>Файл &quot;%s&quot; уже существует!</target>
+        <source>The file or folder &quot;%s&quot; already exists!</source>
+        <target>Файл или папка &quot;%s&quot; уже существует!</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -226,8 +226,12 @@
         <target>Неверный ввод: %s</target>
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
-        <source>No database entry found for %s. Please synchronize the file system.</source>
-        <target>Не найдена запись базы данных для %s. Синхронизируйте файловую систему.</target>
+        <source>No database entry found for %s.</source>
+        <target>Не найдена запись базы данных для %s.</target>
+      </trans-unit>
+      <trans-unit id="ERR.dbOutOfSync">
+        <source>The database and the file system have to be synchronized to continue.</source>
+        <target>Для продолжения синхронизируйте базу данных и файловую систему.</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>

@@ -4,6 +4,7 @@
 <meta charset="<?php echo $this->charset; ?>">
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
 <base href="<?php echo $this->base; ?>">
+<meta name="generator" content="Contao Open Source CMS">
 <?php if ($this->loadFonts): ?>
 <link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/fonts.css">
 <?php endif; ?>
@@ -116,7 +117,7 @@
 <script>
 Backend.vScrollTo(<?php echo $this->pageOffset; ?>);
 </script>
-<?php setcookie('BE_PAGE_OFFSET', 0, 0, '/'); endif; ?>
+<?php System::setCookie('BE_PAGE_OFFSET', 0, 0); endif; ?>
 
 <script>
 Contao.enableFiletreeReload = function() {

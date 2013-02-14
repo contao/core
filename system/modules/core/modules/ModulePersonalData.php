@@ -172,9 +172,15 @@ class ModulePersonalData extends \Module
 				// Convert date formats into timestamps (check the eval setting first -> #3063)
 				if (($rgxp == 'date' || $rgxp == 'time' || $rgxp == 'datim') && $varValue != '')
 				{
-					// Use the numeric back end format here!
-					$objDate = new \Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
-					$varValue = $objDate->tstamp;
+					try
+					{
+						$objDate = new \Date($varValue);
+						$varValue = $objDate->tstamp;
+					}
+					catch (\OutOfBoundsException $e)
+					{
+						$objWidget->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varValue));
+					}
 				}
 
 				// Make sure that unique fields are unique (check the eval setting first -> #3063)
@@ -183,8 +189,8 @@ class ModulePersonalData extends \Module
 					$objWidget->addError(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $arrData['label'][0] ?: $field));
 				}
 
-				// Trigger the save_callback
-				if (is_array($arrData['save_callback']))
+				// Trigger the save_callback (see #5247)
+				if (!$objWidget->hasErrors() && is_array($arrData['save_callback']))
 				{
 					foreach ($arrData['save_callback'] as $callback)
 					{

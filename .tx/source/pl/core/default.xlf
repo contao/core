@@ -170,8 +170,8 @@
         <target>Plik lub folder jest nieprawidłowy!</target>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
-        <source>The file &quot;%s&quot; already exists!</source>
-        <target>Plik &quot;%s&quot; już istnieje!</target>
+        <source>The file or folder &quot;%s&quot; already exists!</source>
+        <target>Plik lub folder &quot;%s&quot; musi istnieć!</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -226,8 +226,12 @@
         <target>Nieprawidłow dane: %s</target>
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
-        <source>No database entry found for %s. Please synchronize the file system.</source>
-        <target>Nie znaleziono rekordu w bazie dla %s. Uruchom synchronizację systemu plików.</target>
+        <source>No database entry found for %s.</source>
+        <target>Nie znaleziono rekordu w bazie dla %s.</target>
+      </trans-unit>
+      <trans-unit id="ERR.dbOutOfSync">
+        <source>The database and the file system have to be synchronized to continue.</source>
+        <target>Baza danych i system plików muszą zostać zsynchronizowane, aby kontynuować.</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>

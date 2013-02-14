@@ -1,8 +1,8 @@
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -946,7 +946,7 @@ ul.sgallery .gimage {
 }
 .tl_metawizard .tl_text {
 	float:left;
-	width:580px;
+	width:550px;
 }
 .tl_metawizard br {
 	clear:left;
@@ -1003,7 +1003,7 @@ ul.sgallery .gimage {
 	opacity: 0.5;
 }
 
-/* Galleries */
+/* Misc */
 .ce_gallery ul {
 	overflow:hidden;
 }
@@ -1011,32 +1011,9 @@ ul.sgallery .gimage {
 	float:left;
 	margin:0 6px 6px 0;
 }
-
-/* Context menu */
-#contextmenu {
-	display:block;
-	position:absolute;
-	z-index:99999999;
-	background:#fff;
-	border:1px solid #ccc;
-	padding:3px 6px;
-	border-radius:4px;
-	margin-right:12px;
-}
-.webkit #contextmenu {
-	padding:4px 6px 2px;
-}
-#contextmenu a {
-	display:block;
-	padding:3px 0 2px 0;
-	white-space:nowrap;
-}
-#contextmenu img {
-	vertical-align:top;
-}
-#contextmenu img[width="12"] {
-	padding-left:1px;
-	padding-right:1px;
+#theme-store {
+	margin-top:24px;
+	text-align:right;
 }
 
 /* Navigation icons */
@@ -1094,7 +1071,7 @@ a.navigation.tpl_editor {
 
 /* Default icon classes */
 a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header_logout,.header_back,.header_new,.header_rss,
-.header_edit_all,.header_delete_all,.header_new_folder,.header_css_import,.header_theme_import,.header_toggle,.header_sync {
+.header_edit_all,.header_delete_all,.header_new_folder,.header_css_import,.header_theme_import,.header_store,.header_toggle,.header_sync {
 	padding:2px 0 3px 20px;
 	background-position:left center;
 	background-repeat:no-repeat;
@@ -1158,6 +1135,10 @@ a.navigation {
 }
 .header_theme_import {
 	background-image:url("images/theme_import.gif");
+}
+.header_store {
+	padding-left:18px;
+	background-image:url("images/store.gif");
 }
 .header_toggle {
 	background:url("images/folPlus.gif") no-repeat -1px center;

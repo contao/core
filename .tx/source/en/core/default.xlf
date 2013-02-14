@@ -129,7 +129,7 @@
         <source>The file or folder "%s" is invalid!</source>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
-        <source>The file "%s" already exists!</source>
+        <source>The file or folder "%s" already exists!</source>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -171,7 +171,10 @@
         <source>Invalid input: %s</source>
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
-        <source>No database entry found for %s. Please synchronize the file system.</source>
+        <source>No database entry found for %s.</source>
+      </trans-unit>
+      <trans-unit id="ERR.dbOutOfSync">
+        <source>The database and the file system have to be synchronized to continue.</source>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>

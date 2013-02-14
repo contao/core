@@ -4,6 +4,7 @@
 <meta charset="<?php echo $this->charset; ?>">
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
 <base href="<?php echo $this->base; ?>">
+<meta name="generator" content="Contao Open Source CMS">
 <link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>assets/mootools/stylect/css/stylect.css">
 <link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/basic.css">
 <link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/install.css">
@@ -1276,7 +1277,7 @@ window.addEvent('domready', function() {
 <script>
 Backend.vScrollTo(<?php echo $this->pageOffset; ?>);
 </script>
-<?php setcookie('BE_PAGE_OFFSET', 0, 0, '/'); endif; ?>
+<?php System::setCookie('BE_PAGE_OFFSET', 0, 0); endif; ?>
 
 </body>
 </html>

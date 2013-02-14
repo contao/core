@@ -83,6 +83,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidDate">
         <source>Invalid date &quot;%s&quot;!</source>
+        <target>Data non valida &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
@@ -110,6 +111,7 @@
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
+        <target>Non è possibile spostare %s su %s in quanto l'elemento esiste già!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidReferer">
         <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
@@ -168,8 +170,8 @@
         <target>Il file o la cartella &quot;%s&quot; non è valido!</target>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
-        <source>The file &quot;%s&quot; already exists!</source>
-        <target>Il file &quot;%s&quot; è già presente!</target>
+        <source>The file or folder &quot;%s&quot; already exists!</source>
+        <target>Il file o la cartella &quot;%s&quot; è già presente!</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -224,8 +226,12 @@
         <target>Input non valido: %s</target>
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
-        <source>No database entry found for %s. Please synchronize the file system.</source>
-        <target>Nel database non è stata trovata nessuna informazione per %s. È necessario risincronizzare il file system.</target>
+        <source>No database entry found for %s.</source>
+        <target>Non è stata trovato alcun riferimento nel database per %s.</target>
+      </trans-unit>
+      <trans-unit id="ERR.dbOutOfSync">
+        <source>The database and the file system have to be synchronized to continue.</source>
+        <target>Il database ed il file system devono essere sincronizzati per poter continuare.</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
@@ -1121,6 +1127,7 @@
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
         <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>Per maggiori informazioni su come aumentare la velocità di lavoro consulta le &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Scorciatoie da tastiera su  contao.org&quot; target=&quot;_blank&quot;&gt;scorciatoie da tastiera&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1818,7 +1825,7 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
       </trans-unit>
       <trans-unit id="MSC.first">
         <source>&amp;#171; First</source>
-        <target>« Primo</target>
+        <target>« Prima</target>
       </trans-unit>
       <trans-unit id="MSC.previous">
         <source>Previous</source>
@@ -1826,11 +1833,11 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
       </trans-unit>
       <trans-unit id="MSC.next">
         <source>Next</source>
-        <target>Prossimo</target>
+        <target>Seguente</target>
       </trans-unit>
       <trans-unit id="MSC.last">
         <source>Last &amp;#187;</source>
-        <target>Ultimo »</target>
+        <target>Ultima »</target>
       </trans-unit>
       <trans-unit id="MSC.goToPage">
         <source>Go to page %s</source>
@@ -1966,6 +1973,7 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
       </trans-unit>
       <trans-unit id="MSC.templatesTheme">
         <source>Theme %s</source>
+        <target>Tema %s</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

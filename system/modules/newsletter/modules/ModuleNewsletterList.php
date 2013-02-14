@@ -75,36 +75,38 @@ class ModuleNewsletterList extends \Module
 		$arrJumpTo = array();
 		$arrNewsletter = array();
 
+		$strRequest = ampersand(\Environment::get('request'), true);
 		$objNewsletter = \NewsletterModel::findSentByPids($this->nl_channels);
 
 		if ($objNewsletter !== null)
 		{
 			while ($objNewsletter->next())
 			{
-				if (($objTarget = $objNewsletter->getRelated('pid')) === null || !$objTarget->jumpTo)
+				if (($objTarget = $objNewsletter->getRelated('pid')) === null)
 				{
 					continue;
 				}
 
-				if (!isset($arrJumpTo[$objTarget->jumpTo]))
+				// Show the module even if there is no jumpTo page (see #5233)
+				$strUrl = $strRequest;
+
+				if ($objTarget->jumpTo > 0)
 				{
-					$objJumpTo = \PageModel::findPublishedById($objTarget->jumpTo);
-
-					if ($objJumpTo !== null)
+					if (!isset($arrJumpTo[$objTarget->jumpTo]))
 					{
-						$arrJumpTo[$objTarget->jumpTo] = $this->generateFrontendUrl($objJumpTo->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
-					}
-					else
-					{
-						$arrJumpTo[$objTarget->jumpTo] = null;
-					}
-				}
+						$objJumpTo = \PageModel::findPublishedById($objTarget->jumpTo);
 
-				$strUrl = $arrJumpTo[$objTarget->jumpTo];
+						if ($objJumpTo !== null)
+						{
+							$arrJumpTo[$objTarget->jumpTo] = $this->generateFrontendUrl($objJumpTo->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
+						}
+						else
+						{
+							$arrJumpTo[$objTarget->jumpTo] = $strUrl;
+						}
+					}
 
-				if ($strUrl === null)
-				{
-					continue;
+					$strUrl = $arrJumpTo[$objTarget->jumpTo];
 				}
 
 				$strAlias = ($objNewsletter->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objNewsletter->alias : $objNewsletter->id;

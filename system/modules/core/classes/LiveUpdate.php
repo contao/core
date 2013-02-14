@@ -116,7 +116,7 @@ class LiveUpdate extends \Backend implements \executable
 				return;
 			}
 
-			$objFile = new \File($archive);
+			$objFile = new \File($archive, true);
 			$objFile->write($objRequest->response);
 			$objFile->close();
 		}
@@ -130,7 +130,7 @@ class LiveUpdate extends \Backend implements \executable
 			{
 				try
 				{
-					$objFile = new \File($objArchive->file_name);
+					$objFile = new \File($objArchive->file_name, true);
 					$objFile->write($objArchive->unzip());
 					$objFile->close();
 				}

@@ -181,8 +181,8 @@ class Search extends \System
 			$arrData['keywords'] .= ' ' . implode(', ', array_unique($tags[2]));
 		}
 
-		// Make sure <br /> tags are always followed by a line break
-		$strBody = str_ireplace(array('<br>', '<br />'), "<br>\n", $strBody);
+		// Add a whitespace character before line-breaks and between consecutive tags (see #5363)
+		$strBody = str_ireplace(array('<br', '><'), array(' <br', '> <'), $strBody);
 		$strBody = strip_tags($strBody);
 
 		// Put everything together

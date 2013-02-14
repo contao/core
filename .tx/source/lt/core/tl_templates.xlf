@@ -1,0 +1,62 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_templates.php" source-language="en">
+    <body>
+      <trans-unit id="tl_templates.original.0">
+        <source>Original template</source>
+        <target>Origanalūs šablonai</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.original.1">
+        <source>Here you can select the template that you want to customize.</source>
+        <target>Pasirinkite originalų šabloną, kurį norėsite redaguoti. Kopija bus sukurta &lt;em&gt;templates&lt;/em&gt; kataloge.</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.target.0">
+        <source>Target folder</source>
+        <target>Aplankas</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.target.1">
+        <source>A copy of the selected template will be stored in the target folder.</source>
+        <target>Pasirinkto šablono kopija bus saugoma numatytame aplanke.</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.headline">
+        <source>Add a new template</source>
+        <target>Pridėti naują šabloną</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.newTpl">
+        <source>Create template</source>
+        <target>Sukurti šabloną</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.exists">
+        <source>Template &quot;%s&quot; exists already!</source>
+        <target>Šablonas &quot;%s&quot; jau yra!</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.invalid">
+        <source>Invalid target directory &quot;%s&quot;!</source>
+        <target>Neteisinga direktorija &quot;%s&quot;!</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new_tpl.0">
+        <source>New template</source>
+        <target>Naujas šablonas</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new_tpl.1">
+        <source>Create a new template</source>
+        <target>Sukurti naują šabloną</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new.0">
+        <source>New folder</source>
+        <target>Naujas šablonas</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new.1">
+        <source>Create a new folder</source>
+        <target>Sukurti naują šabloną</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.pasteinto.0">
+        <source>Paste into</source>
+        <target>Įterpti į</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.pasteinto.1">
+        <source>Paste into this folder</source>
+        <target>Įterpti į šį aplanką</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

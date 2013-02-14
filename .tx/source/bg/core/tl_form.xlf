@@ -1,0 +1,232 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_form.php" source-language="en">
+    <body>
+      <trans-unit id="tl_form.title.0">
+        <source>Title</source>
+        <target>Заглавие</target>
+      </trans-unit>
+      <trans-unit id="tl_form.title.1">
+        <source>Please enter the form title.</source>
+        <target>Моля, въведете заглавие на формата</target>
+      </trans-unit>
+      <trans-unit id="tl_form.alias.0">
+        <source>Form alias</source>
+      </trans-unit>
+      <trans-unit id="tl_form.alias.1">
+        <source>The form alias is a unique reference to the form which can be called instead of its numeric ID.</source>
+      </trans-unit>
+      <trans-unit id="tl_form.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Към страница</target>
+      </trans-unit>
+      <trans-unit id="tl_form.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected after submitting the form.</source>
+        <target>Всяка форма обикновено препраща към друга страница, която обработва данните от формата или показва &quot;Благодарим Ви&quot; съобщение. тук можете да изберете тази страница.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.sendViaEmail.0">
+        <source>Send form data via e-mail</source>
+        <target>Изпрати данните от формат по e-mail</target>
+      </trans-unit>
+      <trans-unit id="tl_form.sendViaEmail.1">
+        <source>Send the submitted data to an e-mail address.</source>
+        <target>Ако изберете тази опция, данните от формата ще бъдат изпратени по електронната поща.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.recipient.0">
+        <source>Recipient address</source>
+        <target>Получател</target>
+      </trans-unit>
+      <trans-unit id="tl_form.recipient.1">
+        <source>Separate multiple e-mail addresses with comma.</source>
+        <target>Моля, въведете един или повече e-mail адреси за получатели. разделете адресите със запетая. Може също да използвате формат &quot;Име [ime@domain.com]</target>
+      </trans-unit>
+      <trans-unit id="tl_form.subject.0">
+        <source>Subject</source>
+        <target>Тема</target>
+      </trans-unit>
+      <trans-unit id="tl_form.subject.1">
+        <source>Please enter the e-mail subject.</source>
+        <target>Моля, въведете темата на писмото. Ако не въведете тема, вероятността, писмото да бъде идентифицирано като СПАМ нараства</target>
+      </trans-unit>
+      <trans-unit id="tl_form.format.0">
+        <source>Data format</source>
+        <target>Формат на данните</target>
+      </trans-unit>
+      <trans-unit id="tl_form.format.1">
+        <source>Defines how the form data will be forwarded.</source>
+        <target>Моля, изберете формат за данните.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.raw.0">
+        <source>Raw data</source>
+        <target>Сурови данни</target>
+      </trans-unit>
+      <trans-unit id="tl_form.raw.1">
+        <source>The form data will be sent as plain text message with each field in a new line.</source>
+        <target>Данните от формата се изпращат като текстово съобщение, като всяко поле е на нов ред.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.xml.0">
+        <source>XML file</source>
+        <target>XML файл</target>
+      </trans-unit>
+      <trans-unit id="tl_form.xml.1">
+        <source>The form data will be attached to the e-mail as an XML file.</source>
+        <target>Данните от формата ще бъдат прикачени към писмото като XML файл.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.csv.0">
+        <source>CSV file</source>
+        <target>CSV файл</target>
+      </trans-unit>
+      <trans-unit id="tl_form.csv.1">
+        <source>The form data will be attached to the e-mail as a CSV file.</source>
+        <target>Данните от формата ще бъдат прикачени към писмото като CSV (comma separated values) файл.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.email.0">
+        <source>E-mail</source>
+        <target>E-mail формат</target>
+      </trans-unit>
+      <trans-unit id="tl_form.email.1">
+        <source>Ignores all fields except &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
+        <target>Този формат очаква полетата &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt; and &lt;em&gt;message&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.skipEmtpy.0">
+        <source>Skip empty fields</source>
+        <target>Пропусни празните полета</target>
+      </trans-unit>
+      <trans-unit id="tl_form.skipEmtpy.1">
+        <source>Hide empty fields in the e-mail.</source>
+        <target>Не вмъквай празните полета в писмото.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.storeValues.0">
+        <source>Store data</source>
+        <target>Запазване стойностите</target>
+      </trans-unit>
+      <trans-unit id="tl_form.storeValues.1">
+        <source>Store the submitted data in the database.</source>
+        <target>Ако изберете тази опция, изпратените стойности ще бъдат запазени и въведени отново в съответните им полета.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.targetTable.0">
+        <source>Target table</source>
+        <target>Целева таблица</target>
+      </trans-unit>
+      <trans-unit id="tl_form.targetTable.1">
+        <source>The target table must contain a column for every form field.</source>
+        <target>Моля изберете таблицата, в която искате да съхранявате стойностите на полетата от формата.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.method.0">
+        <source>Submission method</source>
+        <target>Метод на изпращане на формата</target>
+      </trans-unit>
+      <trans-unit id="tl_form.method.1">
+        <source>The default form submission method is POST.</source>
+        <target>Моля, изберте метод на изпращане на формата (по подразбиране:POST).</target>
+      </trans-unit>
+      <trans-unit id="tl_form.attributes.0">
+        <source>CSS ID/class</source>
+        <target>ID на стилов набор и клас</target>
+      </trans-unit>
+      <trans-unit id="tl_form.attributes.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>Тук можете да въведете ID (id-атрибут) на стилов набор и и един или повече класове (class-атрибути), за да зададете стил формата, като използвате CSS.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.formID.0">
+        <source>Form ID</source>
+        <target>ID на формата</target>
+      </trans-unit>
+      <trans-unit id="tl_form.formID.1">
+        <source>The form ID is required to trigger a Contao module.</source>
+        <target>Тук може да въведете ID на формата (някои разширения на TYPOlight може да изискват ID на формата).</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tableless.0">
+        <source>Tableless layout</source>
+        <target>Изглед без таблици</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tableless.1">
+        <source>Render the form without HTML tables.</source>
+        <target>Ако изберете тази опция, формата ще бъде генерирана без помощта на таблици.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.allowTags.0">
+        <source>Allow HTML tags</source>
+        <target>Разрешени HTML тагове</target>
+      </trans-unit>
+      <trans-unit id="tl_form.allowTags.1">
+        <source>Allow HTML tags in form fields.</source>
+        <target>Ако изберете тази опция, някои HTML тагове няма да бъдат премахнати(вижте &lt;em&gt;allowedTags&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tstamp.0">
+        <source>Revision date</source>
+        <target>Дата на промяната</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Дата и време на последната промяна</target>
+      </trans-unit>
+      <trans-unit id="tl_form.title_legend">
+        <source>Title and redirect page</source>
+        <target>Заглавие и страница към която се препраща</target>
+      </trans-unit>
+      <trans-unit id="tl_form.email_legend">
+        <source>Send form data</source>
+        <target>Изпращане на данните от формата</target>
+      </trans-unit>
+      <trans-unit id="tl_form.store_legend">
+        <source>Store form data</source>
+        <target>Съхраняване на данните от формата</target>
+      </trans-unit>
+      <trans-unit id="tl_form.expert_legend">
+        <source>Expert settings</source>
+        <target>Експертни настройки</target>
+      </trans-unit>
+      <trans-unit id="tl_form.config_legend">
+        <source>Form configuration</source>
+        <target>Конфигуриране на формата</target>
+      </trans-unit>
+      <trans-unit id="tl_form.new.0">
+        <source>New form</source>
+        <target>Нова форма</target>
+      </trans-unit>
+      <trans-unit id="tl_form.new.1">
+        <source>Create a new form</source>
+        <target>Създай нова форма</target>
+      </trans-unit>
+      <trans-unit id="tl_form.show.0">
+        <source>Form details</source>
+        <target>Подробности за формата</target>
+      </trans-unit>
+      <trans-unit id="tl_form.show.1">
+        <source>Show the details of form ID %s</source>
+        <target>Покажи подробности за форма с ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form.edit.0">
+        <source>Edit form</source>
+        <target>Редакция на форма</target>
+      </trans-unit>
+      <trans-unit id="tl_form.edit.1">
+        <source>Edit form ID %s</source>
+        <target>Редактирай форма с ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form.editheader.0">
+        <source>Edit form settings</source>
+        <target>Редакция на настройките на формата</target>
+      </trans-unit>
+      <trans-unit id="tl_form.editheader.1">
+        <source>Edit the settings of form ID %s</source>
+        <target>Редакция на настройките на форма с ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form.copy.0">
+        <source>Duplicate form</source>
+        <target>Дублиране на форма</target>
+      </trans-unit>
+      <trans-unit id="tl_form.copy.1">
+        <source>Duplicate form ID %s</source>
+        <target>Дублирай форма с ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form.delete.0">
+        <source>Delete form</source>
+        <target>Изтриване на форма</target>
+      </trans-unit>
+      <trans-unit id="tl_form.delete.1">
+        <source>Delete form ID %s</source>
+        <target>Изтрий форма с ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

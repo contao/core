@@ -170,8 +170,8 @@
         <target>Filen eller mappen &quot;%s&quot; er ugyldig!</target>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
-        <source>The file &quot;%s&quot; already exists!</source>
-        <target>Filen &quot;%s&quot; findes allerede!</target>
+        <source>The file or folder &quot;%s&quot; already exists!</source>
+        <target>Filen eller mappen &quot;%s&quot; eksisterer allerede</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -226,8 +226,12 @@
         <target>Ugyldig indtastning: %s</target>
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
-        <source>No database entry found for %s. Please synchronize the file system.</source>
-        <target>Der blev ikke fundet nogen data for %s i databasen. Synkroniser venligst filsystemet.</target>
+        <source>No database entry found for %s.</source>
+        <target>Ingen post i databasen for %s blev fundet.</target>
+      </trans-unit>
+      <trans-unit id="ERR.dbOutOfSync">
+        <source>The database and the file system have to be synchronized to continue.</source>
+        <target>Databasen og filarkivet skal synkroniseres før der kan fortsættes.</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>

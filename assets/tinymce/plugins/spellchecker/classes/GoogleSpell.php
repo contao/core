@@ -52,7 +52,9 @@ class GoogleSpell extends SpellChecker {
 		return $osug;
 	}
 
-	function &_getMatches($lang, $str) {
+	protected function &_getMatches($lang, $str) {
+		$lang = preg_replace('/[^a-z\-]/i', '', $lang); // Sanitize, remove everything but a-z or -
+		$str = preg_replace('/[\x00-\x1F\x7F]/', '', $str); // Sanitize, remove all control characters
 		$server = "www.google.com";
 		$port = 443;
 		$path = "/tbproxy/spell?lang=" . $lang . "&hl=en";
@@ -107,7 +109,7 @@ class GoogleSpell extends SpellChecker {
 		return $matches;
 	}
 
-	function _unhtmlentities($string) {
+	protected function _unhtmlentities($string) {
 		$string = preg_replace('~&#x([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $string);
 		$string = preg_replace('~&#([0-9]+);~e', 'chr(\\1)', $string);
 

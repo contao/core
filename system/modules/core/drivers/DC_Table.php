@@ -597,7 +597,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Get all default values for the new entry
 		foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'] as $k=>$v)
 		{
-			if (isset($v['default']))
+			// Use array_key_exists here (see #5252)
+			if (array_key_exists('default', $v))
 			{
 				$this->set[$k] = is_array($v['default']) ? serialize($v['default']) : $v['default'];
 
@@ -805,7 +806,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					// Reset doNotCopy and fallback fields to their default value
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['doNotCopy'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['fallback'])
 					{
-						$v = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default'] ? (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) ? serialize($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) : '';
+						// Use array_key_exists to allow NULL (see #5252)
+						if (array_key_exists('default', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]))
+						{
+							$v = is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) ? serialize($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default'];
+						}
 
 						// Encrypt the default value (see #3740)
 						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['encrypt'])
@@ -998,7 +1003,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						// Reset all unique, doNotCopy and fallback fields to their default value
 						if ($GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['unique'] || $GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['doNotCopy'] || $GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['fallback'])
 						{
-							$vv = $GLOBALS['TL_DCA'][$v]['fields'][$kk]['default'] ? ((is_array($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default'])) ? serialize($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) : $GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) : '';
+							// Use array_key_exists to allow NULL (see #5252)
+							if (array_key_exists('default', $GLOBALS['TL_DCA'][$v]['fields'][$kk]))
+							{
+								$vv = is_array($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) ? serialize($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) : $GLOBALS['TL_DCA'][$v]['fields'][$kk]['default'];
+							}
 
 							// Encrypt the default value (see #3740)
 							if ($GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['encrypt'])
@@ -1092,6 +1101,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				if ($insertInto)
 				{
 					$newPID = $pid;
+
 					$objSorting = $this->Database->prepare("SELECT MIN(sorting) AS sorting FROM " . $this->strTable . " WHERE pid=?")
 												 ->executeUncached($pid);
 
@@ -1103,7 +1113,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						// Resort if the new sorting value is not an integer or smaller than 1
 						if (($curSorting % 2) != 0 || $curSorting < 1)
 						{
-							$objNewSorting = $this->Database->prepare("SELECT id, sorting FROM " . $this->strTable . " WHERE pid=? ORDER BY sorting" )
+							$objNewSorting = $this->Database->prepare("SELECT id FROM " . $this->strTable . " WHERE pid=? ORDER BY sorting" )
 															->executeUncached($pid);
 
 							$count = 2;
@@ -1128,7 +1138,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				// Else insert the current record after the parent record
 				elseif ($pid > 0)
 				{
-					$objSorting = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
+					$objSorting = $this->Database->prepare("SELECT pid, sorting FROM " . $this->strTable . " WHERE id=?")
 												 ->limit(1)
 												 ->executeUncached($pid);
 
@@ -1213,7 +1223,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				// Else insert the current record after the parent record
 				elseif ($pid > 0)
 				{
-					$objParentRecord = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
+					$objParentRecord = $this->Database->prepare("SELECT pid FROM " . $this->strTable . " WHERE id=?")
 													  ->limit(1)
 													  ->executeUncached($pid);
 
@@ -1628,6 +1638,18 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 				if (is_array($data))
 				{
+					// Get the currently available fields
+					$arrFields = array_flip($this->Database->getFieldnames($this->strTable));
+
+					// Unset fields that do not exist (see #5219)
+					foreach (array_keys($data) as $k)
+					{
+						if (!isset($arrFields[$k]))
+						{
+							unset($data[$k]);
+						}
+					}
+
 					$this->Database->prepare("UPDATE " . $objData->fromTable . " %s WHERE id=?")
 								   ->set($data)
 								   ->execute($this->intId);
@@ -1934,13 +1956,13 @@ window.addEvent(\'domready\', function() {
 			if (isset($_POST['saveNclose']))
 			{
 				\Message::reset();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 				$this->redirect($this->getReferer());
 			}
 			elseif (isset($_POST['saveNedit']))
 			{
 				\Message::reset();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 				$strUrl = $this->addToUrl($GLOBALS['TL_DCA'][$this->strTable]['list']['operations']['edit']['href']);
 
 				$strUrl = preg_replace('/(&amp;)?s2e=[^&]*/i', '', $strUrl);
@@ -1951,7 +1973,7 @@ window.addEvent(\'domready\', function() {
 			elseif (isset($_POST['saveNback']))
 			{
 				\Message::reset();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 
 				if ($this->ptable == '')
 				{
@@ -1970,7 +1992,7 @@ window.addEvent(\'domready\', function() {
 			elseif (isset($_POST['saveNcreate']))
 			{
 				\Message::reset();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 				$strUrl = \Environment::get('script') . '?do=' . \Input::get('do');
 
 				if (isset($_GET['table']))
@@ -2144,8 +2166,11 @@ window.addEvent(\'domready\', function() {
 					$this->strInputName = $v.'_'.$this->intId;
 					$formFields[] = $v.'_'.$this->intId;
 
-					// Set the default value and try to load the current value from DB
-					$this->varValue = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default'] ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default'] : '';
+					// Set the default value and try to load the current value from DB (see #5252)
+					if (array_key_exists('default', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]))
+					{
+						$this->varValue = is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default']) ? serialize($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default']) : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default'];
+					}
 
 					if ($objRow->$v !== false)
 					{
@@ -2273,7 +2298,7 @@ window.addEvent(\'domready\', function() {
 			{
 				if (\Input::post('saveNclose'))
 				{
-					setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+					\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 					$this->redirect($this->getReferer());
 				}
 
@@ -2559,7 +2584,7 @@ window.addEvent(\'domready\', function() {
 			{
 				if (\Input::post('saveNclose'))
 				{
-					setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+					\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 					$this->redirect($this->getReferer());
 				}
 
@@ -4496,8 +4521,14 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		// Set sorting from user input
 		if (\Input::post('FORM_SUBMIT') == 'tl_filters')
 		{
-			$session['sorting'][$this->strTable] = in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][\Input::post('tl_sort')]['flag'], array(2, 4, 6, 8, 10, 12)) ? \Input::post('tl_sort').' DESC' : \Input::post('tl_sort');
-			$this->Session->setData($session);
+			$strSort = \Input::post('tl_sort');
+
+			// Validate the user input (thanks to aulmn) (see #4971)
+			if (in_array($strSort, $sortingFields))
+			{
+				$session['sorting'][$this->strTable] = in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$strSort]['flag'], array(2, 4, 6, 8, 10, 12)) ? "$strSort DESC" : $strSort;
+				$this->Session->setData($session);
+			}
 		}
 
 		// Overwrite the "orderBy" value with the session value
@@ -4555,13 +4586,19 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		// Set limit from user input
 		if (\Input::post('FORM_SUBMIT') == 'tl_filters' || \Input::post('FORM_SUBMIT') == 'tl_filters_limit')
 		{
-			if (\Input::post('tl_limit') != 'tl_limit')
+			$strLimit = \Input::post('tl_limit');
+
+			if ($strLimit == 'tl_limit')
 			{
-				$session['filter'][$filter]['limit'] = \Input::post('tl_limit');
+				unset($session['filter'][$filter]['limit']);
 			}
 			else
 			{
-				unset($session['filter'][$filter]['limit']);
+				// Validate the user input (thanks to aulmn) (see #4971)
+				if ($strLimit == 'all' || preg_match('/^[0-9]+,[0-9]+$/', $strLimit))
+				{
+					$session['filter'][$filter]['limit'] = $strLimit;
+				}
 			}
 
 			$this->Session->setData($session);

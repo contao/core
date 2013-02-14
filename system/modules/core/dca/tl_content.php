@@ -768,9 +768,9 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 
 
 /**
- * Dynamically add the permission check and parent table
+ * Dynamically add the permission check and parent table (see #5241)
  */
-if (Input::get('do') == 'article')
+if (Input::get('do') == 'article' || Input::get('do') == 'page')
 {
 	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_article';
 	$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('tl_content', 'checkPermission');

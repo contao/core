@@ -143,7 +143,7 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['alias'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alias', 'doNotCopy'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'alias', 'doNotCopy'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_form', 'generateAlias')
@@ -479,7 +479,7 @@ class tl_form extends Backend
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || count(preg_grep('/^tl_form::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : '';
+		return ($this->User->isAdmin || count(preg_grep('/^tl_form::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 

@@ -110,18 +110,23 @@ abstract class Controller extends \System
 			$arrTemplates[$strTemplate] = $strTemplate;
 		}
 
-		// Add the customized templates
-		foreach (glob(TL_ROOT . '/templates/' . $strPrefix . '*') as $strFile)
-		{
-			$strTemplate = basename($strFile, strrchr($strFile, '.'));
+		$arrCustomized = glob(TL_ROOT . '/templates/' . $strPrefix . '*');
 
-			if (!isset($arrTemplates[$strTemplate]))
+		// Add the customized templates
+		if (is_array($arrCustomized))
+		{
+			foreach ($arrCustomized as $strFile)
 			{
-				$arrTemplates[$strTemplate] = $strTemplate;
+				$strTemplate = basename($strFile, strrchr($strFile, '.'));
+
+				if (!isset($arrTemplates[$strTemplate]))
+				{
+					$arrTemplates[$strTemplate] = $strTemplate;
+				}
 			}
 		}
 
-		// Wrap into a try-catch block (see #5210)
+		// Try to select the themes (see #5210)
 		try
 		{
 			$objTheme = \ThemeModel::findAll(array('order'=>'name'));
@@ -138,13 +143,18 @@ abstract class Controller extends \System
 			{
 				if ($objTheme->templates != '')
 				{
-					foreach (glob(TL_ROOT . '/' . $objTheme->templates . '/' . $strPrefix . '*') as $strFile)
-					{
-						$strTemplate = basename($strFile, strrchr($strFile, '.'));
+					$arrThemeTemplates = glob(TL_ROOT . '/' . $objTheme->templates . '/' . $strPrefix . '*');
 
-						if (!isset($arrTemplates[$strTemplate]))
+					if (is_array($arrThemeTemplates))
+					{
+						foreach ($arrThemeTemplates as $strFile)
 						{
-							$arrTemplates[$strTemplate] = $strTemplate . ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
+							$strTemplate = basename($strFile, strrchr($strFile, '.'));
+
+							if (!isset($arrTemplates[$strTemplate]))
+							{
+								$arrTemplates[$strTemplate] = $strTemplate . ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
+							}
 						}
 					}
 				}
@@ -2121,6 +2131,12 @@ abstract class Controller extends \System
 	 */
 	public static function generateMargin($arrValues, $strType='margin')
 	{
+		// Initialize an empty array (see #5217)
+		if (!is_array($arrValues))
+		{
+			$arrValues = array('top'=>'', 'right'=>'', 'bottom'=>'', 'left'=>'', 'unit'=>'');
+		}
+
 		$top = $arrValues['top'];
 		$right = $arrValues['right'];
 		$bottom = $arrValues['bottom'];
@@ -2147,15 +2163,8 @@ abstract class Controller extends \System
 			}
 		}
 
-		$arrDir = array
-		(
-			'top'=>$top,
-			'right'=>$right,
-			'bottom'=>$bottom,
-			'left'=>$left
-		);
-
 		$return = array();
+		$arrDir = array('top'=>$top, 'right'=>$right, 'bottom'=>$bottom, 'left'=>$left);
 
 		foreach ($arrDir as $k=>$v)
 		{
@@ -2313,7 +2322,7 @@ abstract class Controller extends \System
 			die('File not found');
 		}
 
-		$objFile = new \File($strFile);
+		$objFile = new \File($strFile, true);
 		$arrAllowedTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
 
 		if (!in_array($objFile->extension, $arrAllowedTypes))
@@ -2380,7 +2389,7 @@ abstract class Controller extends \System
 		else
 		{
 			// Generate the cache file
-			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php');
+			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php', true);
 			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
 
 			// Parse all module folders
@@ -3046,10 +3055,11 @@ abstract class Controller extends \System
 	 * 
 	 * @param object $objTemplate The template object to add the enclosures to
 	 * @param array  $arrItem     The element or module as array
+	 * @param string $strKey      The name of the enclosures field in $arrItem
 	 */
-	public static function addEnclosuresToTemplate($objTemplate, $arrItem)
+	public static function addEnclosuresToTemplate($objTemplate, $arrItem, $strKey='enclosure')
 	{
-		$arrEnclosures = deserialize($arrItem['enclosure']);
+		$arrEnclosures = deserialize($arrItem[$strKey]);
 
 		if (!is_array($arrEnclosures) || empty($arrEnclosures))
 		{
@@ -3106,7 +3116,7 @@ abstract class Controller extends \System
 					continue;
 				}
 
-				$objFile = new \File($objFiles->path);
+				$objFile = new \File($objFiles->path, true);
 
 				$arrEnclosures[] = array
 				(

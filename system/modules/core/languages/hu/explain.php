@@ -17,6 +17,7 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'Rich Text Editor';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'Bővebb információért a TinyMCE-ről látogasson el ide: <a href="http://www.tinymce.com/" title="TinyMCE by moxiecode" target="_blank">http://www.tinymce.com/</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Címkék beszúrása';
+$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'Bővebb információért látogasson el ide: <a href="https://contao.org/en/manual/3.0/managing-content.html#insert-tags" title="Contao online documentation" target="_blank">https://contao.org/en/manual/3.0/managing-content.html#insert-tags</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'Kód szerkesztő';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'Bővebb információért a CodeMirror-ról látogasson el ide: <a href="http://codemirror.net" title="EditArea by Marijn Haverbeke" onclick="window.open(this.href); return false;">http://codemirror.net</a>.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';

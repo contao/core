@@ -54,7 +54,6 @@ $GLOBALS['TL_LANG']['ERR']['importFolder'] = 'Directorul "%s" nu poate fi import
 $GLOBALS['TL_LANG']['ERR']['notWriteable'] = 'Fişierul "%s" nu poate fi scris, aşadar modificările nu pot fi făcute!';
 $GLOBALS['TL_LANG']['ERR']['invalidName'] = 'Acest nume de folder sau fişier este invalid.';
 $GLOBALS['TL_LANG']['ERR']['invalidFile'] = 'Directorul "%s" este invalid!';
-$GLOBALS['TL_LANG']['ERR']['fileExists'] = 'Fişierul "%s" existsă deja!';
 $GLOBALS['TL_LANG']['ERR']['circularReference'] = 'Redirecţionare spre o destinaţie invalidă (referinţă circulară)!';
 $GLOBALS['TL_LANG']['ERR']['ie6warning'] = '%s<strong>Atenţie!</strong> Browserul dumneavoastră este %sout of date%s şi <strong>nu puteţi folosi toate facilităţile acestui website</strong>.%s';
 $GLOBALS['TL_LANG']['ERR']['noFallbackEmpty'] = 'Niciuna dintre paginile rădăcină active ale website-ului, fără o setare explicită DNS, nu are opţiunea de limbă de rezervă stabilită, ceea ce înseamnă că aceste website-uri sunt disponibile numai în limba pe care o aveti definită în setări la pagină! Utilizatori şi motoarele de căutare care nu acceptă această limbă nu vor putea accesa website-ul.';

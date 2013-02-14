@@ -206,6 +206,7 @@
       </trans-unit>
       <trans-unit id="CNT.cz">
         <source>Czech Republic</source>
+        <target>செக் குடியரசு</target>
       </trans-unit>
       <trans-unit id="CNT.de">
         <source>Germany</source>
@@ -224,6 +225,7 @@
       </trans-unit>
       <trans-unit id="CNT.do">
         <source>Dominican Republic</source>
+        <target>டொமினிக்கன் குடியரசு</target>
       </trans-unit>
       <trans-unit id="CNT.dz">
         <source>Algeria</source>
@@ -284,6 +286,7 @@
       </trans-unit>
       <trans-unit id="CNT.gb">
         <source>United Kingdom</source>
+        <target>ஐக்கிய இராச்சியம்</target>
       </trans-unit>
       <trans-unit id="CNT.gd">
         <source>Grenada</source>
@@ -315,6 +318,7 @@
       </trans-unit>
       <trans-unit id="CNT.gn">
         <source>Guinea</source>
+        <target>கினியா</target>
       </trans-unit>
       <trans-unit id="CNT.gp">
         <source>Guadeloupe</source>
@@ -387,6 +391,7 @@
       </trans-unit>
       <trans-unit id="CNT.io">
         <source>British Indian Ocean Territory</source>
+        <target>பிரித்தானிய இந்து சமுத்திர பிரதேசங்கள்</target>
       </trans-unit>
       <trans-unit id="CNT.iq">
         <source>Iraq</source>
@@ -461,6 +466,7 @@
       </trans-unit>
       <trans-unit id="CNT.ky">
         <source>Cayman Islands</source>
+        <target>கேமான் தீவுகள்</target>
       </trans-unit>
       <trans-unit id="CNT.kz">
         <source>Kazakhstan</source>
@@ -517,6 +523,7 @@
       </trans-unit>
       <trans-unit id="CNT.md">
         <source>Moldova, Republic of</source>
+        <target>மோல்டோவா குடியரசு</target>
       </trans-unit>
       <trans-unit id="CNT.me">
         <source>Montenegro</source>
@@ -553,6 +560,7 @@
       </trans-unit>
       <trans-unit id="CNT.mp">
         <source>Northern Mariana Islands</source>
+        <target>வட மரியானா தீவுகள்</target>
       </trans-unit>
       <trans-unit id="CNT.mq">
         <source>Martinique</source>
@@ -604,6 +612,7 @@
       </trans-unit>
       <trans-unit id="CNT.nf">
         <source>Norfolk Island</source>
+        <target>நோவாக் தீவுகள்</target>
       </trans-unit>
       <trans-unit id="CNT.ng">
         <source>Nigeria</source>
@@ -774,6 +783,7 @@
       </trans-unit>
       <trans-unit id="CNT.sv">
         <source>El Salvador</source>
+        <target>எல் சல்வடோர்</target>
       </trans-unit>
       <trans-unit id="CNT.sy">
         <source>Syrian Arab Republic</source>

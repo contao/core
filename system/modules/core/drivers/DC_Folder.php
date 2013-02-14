@@ -446,12 +446,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 		else
 		{
-			$this->Files->rename($this->intId, $destination);
-
 			// Find the corresponding DB entries
 			if ($this->blnIsDbAssisted)
 			{
 				$objFile = \FilesModel::findByPath($this->intId);
+
+				if ($objFile === null)
+				{
+					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $this->intId));
+				}
 
 				// Set the parent ID
 				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
@@ -461,8 +464,17 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				else
 				{
 					$objFolder = \FilesModel::findByPath($strFolder);
+
+					if ($objFolder === null)
+					{
+						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
+					}
+
 					$objFile->pid = $objFolder->id;
 				}
+
+				// Move the file
+				$this->Files->rename($this->intId, $destination);
 
 				// Update the database
 				$objFile->path = $destination;
@@ -489,11 +501,22 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
 					{
 						$objModel = \FilesModel::findByPath($strPath);
+
+						if ($objModel === null)
+						{
+							throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strPath));
+						}
+
 						$objFolder = new \Folder($objModel->path);
 						$objModel->hash = $objFolder->hash;
 						$objModel->save();
 					}
 				}
+			}
+			else
+			{
+				// Not DB-assisted, so just move the file
+				$this->Files->rename($this->intId, $destination);
 			}
 
 			// Add a log entry
@@ -594,13 +617,18 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			$destination = $new;
-			$this->Files->mkdir($destination);
 			$strFolder = dirname($destination);
 
 			// Find the corresponding DB entries
 			if ($this->blnIsDbAssisted)
 			{
 				$objFolder = \FilesModel::findByPath($source);
+
+				if ($objFolder === null)
+				{
+					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
+				}
+
 				$objNewFolder = clone $objFolder->current();
 
 				// Set the parent ID
@@ -611,14 +639,28 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				else
 				{
 					$objFolder = \FilesModel::findByPath($strFolder);
+
+					if ($objFolder === null)
+					{
+						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
+					}
+
 					$objNewFolder->pid = $objFolder->id;
 				}
+
+				// Create the target folder
+				$this->Files->mkdir($destination);
 
 				// Update the database
 				$objNewFolder->tstamp = time();
 				$objNewFolder->path = $destination;
 				$objNewFolder->name = basename($destination); // see #4628
 				$objNewFolder->save();
+			}
+			else
+			{
+				// Not DB-assisted, so just create the target folder
+				$this->Files->mkdir($destination);
 			}
 
 			// Files
@@ -637,19 +679,31 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				}
 				else
 				{
-					$this->Files->copy($source . '/' . $file, $destination . '/' . $file);
-
 					// Find the corresponding DB entries
 					if ($this->blnIsDbAssisted)
 					{
 						$objFile = \FilesModel::findByPath($source . '/' . $file);
+
+						if ($objFile === null)
+						{
+							throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source . '/' . $file));
+						}
+
 						$objNewFile = clone $objFile->current();
+
+						// Copy the file
+						$this->Files->copy($source . '/' . $file, $destination . '/' . $file);
 
 						// Update the database
 						$objNewFile->pid = $objNewFolder->id;
 						$objNewFile->tstamp = time();
 						$objNewFile->path = $destination . '/' . $file;
 						$objNewFile->save();
+					}
+					else
+					{
+						// Not DB-assisted, so just copy the file
+						$this->Files->copy($source . '/' . $file, $destination . '/' . $file);
 					}
 				}
 			}
@@ -668,13 +722,18 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			$destination = $new;
-			$this->Files->copy($source, $destination);
 			$strFolder = dirname($destination);
 
 			// Find the corresponding DB entries
 			if ($this->blnIsDbAssisted)
 			{
 				$objFile = \FilesModel::findByPath($source);
+
+				if ($objFile === null)
+				{
+					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
+				}
+
 				$objNewFile = clone $objFile->current();
 
 				// Set the parent ID
@@ -685,31 +744,50 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				else
 				{
 					$objFolder = \FilesModel::findByPath($strFolder);
+
+					if ($objFile === null)
+					{
+						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
+					}
+
 					$objNewFile->pid = $objFolder->id;
 				}
+
+				// Copy the file
+				$this->Files->copy($source, $destination);
 
 				// Update the database
 				$objNewFile->tstamp = time();
 				$objNewFile->path = $destination;
 				$objNewFile->name = basename($destination); // see #4628
 				$objNewFile->save();
-
-				$strPath = dirname($destination);
-
-				// Update the MD5 hash of the parent folder
-				if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					$objModel = \FilesModel::findByPath($strPath);
-					$objFolder = new \Folder($objModel->path);
-					$objModel->hash = $objFolder->hash;
-					$objModel->save();
-				}
+			}
+			else
+			{
+				// Not DB-assisted, so just copy the file
+				$this->Files->copy($source, $destination);
 			}
 		}
 
-		// Do not reload on recursive calls
+		// Do not update the database or redirect upon a recursive call
 		if (!$noReload)
 		{
+			// Update the MD5 hash of the parent folder
+			if ($this->blnIsDbAssisted && $strFolder != $GLOBALS['TL_CONFIG']['uploadPath'])
+			{
+				$objModel = \FilesModel::findByPath($strFolder);
+
+				if ($objModel === null)
+				{
+					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
+				}
+
+				$objFolder = new \Folder($objModel->path);
+				$objModel->hash = $objFolder->hash;
+				$objModel->save();
+			}
+
+			// Add a log entry
 			if (file_exists(TL_ROOT . '/' . $source) && $this->isMounted($source))
 			{
 				$this->log('File or folder "'.$source.'" has been duplicated', 'DC_Folder copy()', TL_FILES);
@@ -787,6 +865,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		$this->import('Files');
+		$strPath = dirname($source);
 
 		// Delete folders
 		if (is_dir(TL_ROOT . '/' . $source))
@@ -801,81 +880,89 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				}
 				else
 				{
-					$this->Files->delete($source . '/' . $file);
-
 					// Find the corresponding DB entries
 					if ($this->blnIsDbAssisted && $file != '.DS_Store')
 					{
 						$objFile = \FilesModel::findByPath($source . '/' . $file);
 
-						if ($objFile !== null)
+						if ($objFile === null)
 						{
-							$objFile->delete();
+							throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source . '/' . $file));
 						}
-						else
-						{
-							\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source . '/' . $file));
-						}
+
+						$this->Files->delete($source . '/' . $file);
+						$objFile->delete();
+					}
+					else
+					{
+						// Not DB-assisted, so just delete the file
+						$this->Files->delete($source . '/' . $file);
 					}
 				}
 			}
-
-			$this->Files->rmdir($source);
 
 			// Find the corresponding DB entries
 			if ($this->blnIsDbAssisted && $source != '.svn')
 			{
 				$objFile = \FilesModel::findByPath($source);
 
-				if ($objFile !== null)
+				if ($objFile === null)
 				{
-					$objFile->delete();
+					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
 				}
-				else
-				{
-					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
-				}
+
+				$this->Files->rmdir($source);
+				$objFile->delete();
+			}
+			else
+			{
+				// Not DB-assisted, so just remove the folder
+				$this->Files->rmdir($source);
 			}
 		}
 
 		// Delete a file
 		else
 		{
-			$this->Files->delete($source);
-
 			// Find the corresponding DB entries
 			if ($this->blnIsDbAssisted)
 			{
 				$objFile = \FilesModel::findByPath($source);
 
-				if ($objFile !== null)
+				if ($objFile === null)
 				{
-					$objFile->delete();
+					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
 				}
-				else
-				{
-					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
-				}
+
+				$this->Files->delete($source);
+				$objFile->delete();
+			}
+			else
+			{
+				// Not DB-assisted, so just delete the file
+				$this->Files->delete($source);
 			}
 		}
 
-		// Update the MD5 hash of the parent folder
-		if ($this->blnIsDbAssisted)
+		// Do not update the database or redirect upon a recursive call
+		if (!$noReload)
 		{
-			$strPath = dirname($source);
-
-			if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
+			// Update the MD5 hash of the parent folder
+			if ($this->blnIsDbAssisted && $strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
 			{
 				$objModel = \FilesModel::findByPath($strPath);
+
+				if ($objModel === null)
+				{
+					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strPath));
+				}
+
 				$objFolder = new \Folder($objModel->path);
 				$objModel->hash = $objFolder->hash;
 				$objModel->save();
 			}
-		}
 
-		// Do not reload on recursive calls
-		if (!$noReload)
-		{
+			// Add a log entry
 			$this->log('File or folder "'.str_replace(TL_ROOT.'/', '', $source).'" has been deleted', 'DC_Folder delete()', TL_FILES);
 			$this->redirect($this->getReferer());
 		}
@@ -962,8 +1049,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Process the uploaded files
 		if (\Input::post('FORM_SUBMIT') == 'tl_upload')
 		{
-			$arrUploaded = $objUploader->uploadTo($strFolder);
-
 			// Generate the DB entries
 			if ($this->blnIsDbAssisted)
 			{
@@ -975,8 +1060,17 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				else
 				{
 					$objModel = \FilesModel::findByPath($strFolder);
+
+					if ($objModel === null)
+					{
+						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
+					}
+
 					$pid = $objModel->id;
 				}
+
+				// Upload the files
+				$arrUploaded = $objUploader->uploadTo($strFolder);
 
 				foreach ($arrUploaded as $strFile)
 				{
@@ -992,7 +1086,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					}
 					else
 					{
-						$objFile = new \File($strFile);
+						$objFile = new \File($strFile, true);
 
 						$objNew = new \FilesModel();
 						$objNew->pid       = $pid;
@@ -1006,6 +1100,11 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					}
 				}
 			}
+			else
+			{
+				// Not DB-assisted, so just upload the file
+				$arrUploaded = $objUploader->uploadTo($strFolder);
+			}
 
 			// HOOK: post upload callback
 			if (isset($GLOBALS['TL_HOOKS']['postUpload']) && is_array($GLOBALS['TL_HOOKS']['postUpload']))
@@ -1018,15 +1117,18 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			// Update the hash of the target folder
-			if ($this->blnIsDbAssisted)
+			if ($this->blnIsDbAssisted && $strFolder != $GLOBALS['TL_CONFIG']['uploadPath'])
 			{
-				if ($strFolder != $GLOBALS['TL_CONFIG']['uploadPath'])
+				$objModel = \FilesModel::findByPath($strFolder);
+
+				if ($objModel === null)
 				{
-					$objModel = \FilesModel::findByPath($strFolder);
-					$objFolder = new \Folder($objModel->path);
-					$objModel->hash = $objFolder->hash;
-					$objModel->save();
+					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
 				}
+
+				$objFolder = new \Folder($objModel->path);
+				$objModel->hash = $objFolder->hash;
+				$objModel->save();
 			}
 
 			// Redirect or reload
@@ -1094,9 +1196,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Get the DB entry
-		if ($this->blnIsDbAssisted)
+		if ($this->blnIsDbAssisted && stristr($this->intId, '__new__') === false)
 		{
 			$objFile = \FilesModel::findByPath($this->intId);
+
+			if ($objFile === null)
+			{
+				throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $this->intId));
+			}
+
 			$this->objActiveRecord = $objFile;
 		}
 
@@ -1364,7 +1472,7 @@ window.addEvent(\'domready\', function() {
 			if (\Input::post('saveNclose'))
 			{
 				\Message::reset();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 				$this->redirect($this->getReferer());
 			}
 
@@ -1438,6 +1546,12 @@ window.addEvent(\'domready\', function() {
 				if ($this->blnIsDbAssisted)
 				{
 					$objFile = \FilesModel::findByPath($id);
+
+					if ($objFile === null)
+					{
+						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $id));
+					}
+
 					$this->objActiveRecord = $objFile;
 				}
 
@@ -1592,7 +1706,7 @@ window.addEvent(\'domready\', function() {
 			{
 				if (\Input::post('saveNclose'))
 				{
-					setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+					\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 					$this->redirect($this->getReferer());
 				}
 
@@ -1690,7 +1804,7 @@ window.addEvent(\'domready\', function() {
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$objFile = new \File($this->intId);
+		$objFile = new \File($this->intId, true);
 
 		// Check whether file type is editable
 		if (!in_array($objFile->extension, trimsplit(',', $GLOBALS['TL_CONFIG']['editableFiles'])))
@@ -1707,21 +1821,35 @@ window.addEvent(\'domready\', function() {
 			// Save the file
 			if (md5($strContent) != md5(\Input::postRaw('source')))
 			{
-				$objFile->write(\Input::postRaw('source'));
-				$objFile->close();
-
 				// Update the md5 hash
 				if ($this->blnIsDbAssisted)
 				{
 					$objMeta = \FilesModel::findByPath($objFile->value);
+
+					if ($objMeta === null)
+					{
+						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $objFile->value));
+					}
+
+					// Write the file
+					$objFile->write(\Input::postRaw('source'));
+					$objFile->close();
+
+					// Update the database
 					$objMeta->hash = md5_file(TL_ROOT . '/' . $objFile->value);
 					$objMeta->save();
+				}
+				else
+				{
+					// Not DB-assisted, so just write the file
+					$objFile->write(\Input::postRaw('source'));
+					$objFile->close();
 				}
 			}
 
 			if (\Input::post('saveNclose'))
 			{
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 				$this->redirect($this->getReferer());
 			}
 
@@ -1889,7 +2017,11 @@ window.addEvent(\'domready\', function() {
 				}
 			}
 
-			$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
+			// The target exists
+			if (file_exists(TL_ROOT . '/' . $this->strPath . '/' . $varValue . $this->strExtension))
+			{
+				throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['fileExists'], $varValue));
+			}
 
 			// Update the database
 			if ($this->blnIsDbAssisted)
@@ -1902,12 +2034,21 @@ window.addEvent(\'domready\', function() {
 				else
 				{
 					$objFolder = \FilesModel::findByPath($this->strPath);
+
+					if ($objFolder === null)
+					{
+						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $this->strPath));
+					}
+
 					$pid = $objFolder->id;
 				}
 
 				// New folders
-				if (stristr($this->intId, '__new__') == true)
+				if (stristr($this->intId, '__new__') !== false)
 				{
+					// Rename the file
+					$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
+
 					// Create the DB entry
 					$objFile = new \FilesModel();
 					$objFile->pid    = $pid;
@@ -1917,6 +2058,7 @@ window.addEvent(\'domready\', function() {
 					$objFile->name   = $varValue;
 					$objFile->hash   = md5('');
 					$objFile->save();
+
 					$this->objActiveRecord = $objFile;
 
 					// Add a log entry
@@ -1927,11 +2069,20 @@ window.addEvent(\'domready\', function() {
 					// Find the corresponding DB entry
 					$objFile = \FilesModel::findByPath($this->strPath . '/' . $this->varValue . $this->strExtension);
 
+					if ($objFile === null)
+					{
+						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $this->strPath . '/' . $this->varValue . $this->strExtension));
+					}
+
+					// Rename the file
+					$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
+
 					// Update the data
 					$objFile->pid  = $pid;
 					$objFile->path = $this->strPath . '/' . $varValue . $this->strExtension;
 					$objFile->name = $varValue . $this->strExtension;
 					$objFile->save();
+
 					$this->objActiveRecord = $objFile;
 
 					// Add a log entry
@@ -1958,10 +2109,21 @@ window.addEvent(\'domready\', function() {
 				if ($objFile->pid > 0)
 				{
 					$objModel = \FilesModel::findByPk($objFile->pid);
+
+					if ($objModel === null)
+					{
+						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $objFile->pid));
+					}
+
 					$objFolder = new \Folder($objModel->path);
 					$objModel->hash = $objFolder->hash;
 					$objModel->save();
 				}
+			}
+			else
+			{
+				// Not DB-assisted, so just rename the file
+				$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
 			}
 
 			// Set the new value so the input field can show it
@@ -1978,7 +2140,7 @@ window.addEvent(\'domready\', function() {
 
 			$this->varValue = $varValue;
 		}
-		elseif ($this->blnIsDbAssisted)
+		elseif ($this->blnIsDbAssisted && $this->objActiveRecord !== null)
 		{
 			// Convert date formats into timestamps
 			if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
@@ -2315,7 +2477,7 @@ window.addEvent(\'domready\', function() {
 		// Files
 		foreach ($arrFiles as $strFile)
 		{
-			$objFile = new \File($strFile);
+			$objFile = new \File($strFile, true);
 			$objModel = \FilesModel::findByPath($strFile);
 
 			// Create the entry if it does not yet exist
@@ -2537,7 +2699,7 @@ window.addEvent(\'domready\', function() {
 			$popupHeight = 260;
 			$currentFile = str_replace(TL_ROOT.'/', '', $files[$h]);
 
-			$objFile = new \File($currentFile);
+			$objFile = new \File($currentFile, true);
 
 			if (!empty($this->arrValidFileTypes) && !in_array($objFile->extension, $this->arrValidFileTypes))
 			{

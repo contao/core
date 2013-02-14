@@ -148,7 +148,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'foreignKey'              => 'tl_page.title',
-			'eval'                    => array('fieldType'=>'radio'),
+			'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
 		),
@@ -364,7 +364,7 @@ class tl_newsletter_channel extends Backend
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || count(preg_grep('/^tl_newsletter_channel::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : '';
+		return ($this->User->isAdmin || count(preg_grep('/^tl_newsletter_channel::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 

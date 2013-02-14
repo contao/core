@@ -137,7 +137,7 @@ class ModuleSearch extends \Module
 			// Load the cached result
 			if (file_exists(TL_ROOT . '/' . $strCacheFile))
 			{
-				$objFile = new \File($strCacheFile);
+				$objFile = new \File($strCacheFile, true);
 
 				if ($objFile->mtime > time() - 1800)
 				{
@@ -163,7 +163,7 @@ class ModuleSearch extends \Module
 					$arrResult = array();
 				}
 
-				$objFile = new \File($strCacheFile);
+				$objFile = new \File($strCacheFile, true);
 				$objFile->write(json_encode($arrResult));
 				$objFile->close();
 			}

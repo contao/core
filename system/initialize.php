@@ -24,11 +24,22 @@ define('TL_ROOT', dirname(__DIR__));
 
 
 /**
- * Include functions, constants and interfaces
+ * Define the login status constants in the back end (see #4099, #5279)
+ */
+if (TL_MODE == 'BE')
+{
+	define('BE_USER_LOGGED_IN', false);
+	define('FE_USER_LOGGED_IN', false);
+}
+
+
+/**
+ * Include the helpers
  */
 require TL_ROOT . '/system/helper/functions.php';
 require TL_ROOT . '/system/config/constants.php';
 require TL_ROOT . '/system/helper/interface.php';
+require TL_ROOT . '/system/helper/exception.php';
 
 
 /**
@@ -49,12 +60,6 @@ require TL_ROOT . '/system/helper/interface.php';
  * Log PHP errors
  */
 @ini_set('error_log', TL_ROOT . '/system/logs/error.log');
-
-
-/**
- * Start the session
- */
-@session_start();
 
 
 /**
@@ -79,6 +84,19 @@ Swift::registerAutoload(function() {
 });
 
 require_once TL_ROOT . '/system/vendor/simplepie/autoloader.php';
+
+
+/**
+ * Define the relative path to the installation (see #5339)
+ */
+define('TL_PATH', str_replace(Environment::get('documentRoot'), '', str_replace('\\', '/',  dirname(__DIR__))));
+
+
+/**
+ * Start the session
+ */
+@session_set_cookie_params(0, (TL_PATH ?: '/')); // see #5339
+@session_start();
 
 
 /**
@@ -109,23 +127,20 @@ error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']
 
 
 /**
- * Define the relativ path to the Contao installation
+ * Store the relative path (backwards compatibility)
  */
 if ($GLOBALS['TL_CONFIG']['websitePath'] === null)
 {
-	$path = preg_replace('/\/contao\/[^\/]*$/', '', Environment::get('requestUri'));
-	$path = preg_replace('/\/$/', '', $path);
-
 	try
 	{
-		$GLOBALS['TL_CONFIG']['websitePath'] = $path;
+		$GLOBALS['TL_CONFIG']['websitePath'] = TL_PATH;
 
 		// Only store this value if the temp directory is writable and the local configuration
 		// file exists, otherwise it will initialize a Files object and prevent the install tool
 		// from loading the Safe Mode Hack (see #3215).
 		if (is_writable(TL_ROOT . '/system/tmp') && file_exists(TL_ROOT . '/system/config/localconfig.php'))
 		{
-			$objConfig->update("\$GLOBALS['TL_CONFIG']['websitePath']", $path);
+			$objConfig->update("\$GLOBALS['TL_CONFIG']['websitePath']", TL_PATH);
 		}
 	}
 	catch (Exception $e)
@@ -133,8 +148,6 @@ if ($GLOBALS['TL_CONFIG']['websitePath'] === null)
 		log_message($e->getMessage());
 	}
 }
-
-define('TL_PATH', $GLOBALS['TL_CONFIG']['websitePath']);
 
 
 /**

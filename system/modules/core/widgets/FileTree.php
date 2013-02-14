@@ -178,7 +178,7 @@ class FileTree extends \Widget
 					}
 					else
 					{
-						$objFile = new \File($objFiles->path);
+						$objFile = new \File($objFiles->path, true);
 						$arrValues[$objFiles->id] = $this->generateImage($objFile->icon) . ' ' . $objFiles->path;
 					}
 				}
@@ -203,7 +203,7 @@ class FileTree extends \Widget
 								continue;
 							}
 
-							$objFile = new \File($objSubfiles->path);
+							$objFile = new \File($objSubfiles->path, true);
 							$strInfo = $objSubfiles->path . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
 
 							if ($this->blnIsGallery)
@@ -226,7 +226,7 @@ class FileTree extends \Widget
 					}
 					else
 					{
-						$objFile = new \File($objFiles->path);
+						$objFile = new \File($objFiles->path, true);
 
 						if ($this->blnIsGallery)
 						{

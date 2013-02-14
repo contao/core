@@ -170,8 +170,8 @@
         <target>Die Datei bzw. das Verzeichnis &quot;%s&quot; ist ungültig!</target>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
-        <source>The file &quot;%s&quot; already exists!</source>
-        <target>Die Datei &quot;%s&quot; existiert bereits!</target>
+        <source>The file or folder &quot;%s&quot; already exists!</source>
+        <target>Die Datei bzw. das Verzeichnis &quot;%s&quot; existiert bereits!</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -226,8 +226,12 @@
         <target>Ungültige Eingabe: %s</target>
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
-        <source>No database entry found for %s. Please synchronize the file system.</source>
-        <target>Kein Datenbank-Eintrag zu %s gefunden. Bitte synchronisieren Sie das Dateisystem.</target>
+        <source>No database entry found for %s.</source>
+        <target>Kein Datenbankeintrag für %s gefunden.</target>
+      </trans-unit>
+      <trans-unit id="ERR.dbOutOfSync">
+        <source>The database and the file system have to be synchronized to continue.</source>
+        <target>Die Datenbank und das Dateisystem müssen synchronisiert werden, um fortzufahren.</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>

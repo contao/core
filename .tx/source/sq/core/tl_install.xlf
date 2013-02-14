@@ -55,6 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_install.collation.1">
         <source>For more information see the &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;MySQL manual&lt;/a&gt;.</source>
+        <target>Për më shumë informacione shiqo &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;MySQL udhëzuesin &lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_install.update.0">
         <source>Update database tables</source>
@@ -198,6 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_install.importException">
         <source>The import failed! Is the database structure up to date and is the template file compatible with your Contao version?</source>
+        <target>Importit dështoi! Kontrolloni përditshmërinë e strukturës së bazës së të dhënave dhe shiqoni a është shabllona kompatibil me versionin tuaj të Contao-së?</target>
       </trans-unit>
       <trans-unit id="tl_install.importError">
         <source>Please choose a template file!</source>
@@ -221,21 +223,27 @@
       </trans-unit>
       <trans-unit id="tl_install.importSave">
         <source>Import template</source>
+        <target>Importo shabllonën</target>
       </trans-unit>
       <trans-unit id="tl_install.importContinue">
         <source>Any existing data will be deleted! Do you really want to continue?</source>
+        <target>Të gjitha të dhënat do të fshihen! A dëshironi të vazhdoni?</target>
       </trans-unit>
       <trans-unit id="tl_install.adminError">
         <source>Please fill in all fields to create an admin user!</source>
+        <target>Plotësoni të gjitha fushat për ta krijuar një llogari administruese!</target>
       </trans-unit>
       <trans-unit id="tl_install.adminConfirm">
         <source>An admin user has been created.</source>
+        <target>Një llogari administruese është krijuar.</target>
       </trans-unit>
       <trans-unit id="tl_install.adminSave">
         <source>Create admin account</source>
+        <target>Krijo llogari administruese</target>
       </trans-unit>
       <trans-unit id="tl_install.installConfirm">
         <source>You have successfully installed Contao.</source>
+        <target>Ju keni instaluar me sukses Contao-në.</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpHost">
         <source>FTP hostname</source>
@@ -245,30 +253,39 @@
       </trans-unit>
       <trans-unit id="tl_install.ftpUser">
         <source>FTP username</source>
+        <target>FTP përdoruesi</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpPass">
         <source>FTP password</source>
+        <target>FTP fjalëkalimi</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpSSLh4">
         <source>Secure connection</source>
+        <target>Lidhje e sigurt</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpSSL">
         <source>Connect via FTP-SSL</source>
+        <target>Lidhu nëpërmjet FTP-SSL</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpPort">
         <source>FTP port</source>
+        <target>FTP port</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpSave">
         <source>Save FTP settings</source>
+        <target>Ruaj konfigurimet e FTP-së</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpHostError">
         <source>Could not connect to FTP server %s</source>
+        <target>Nuk mund të lidhet me FTP shërbyesin %s</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpUserError">
         <source>Could not login as &quot;%s&quot;</source>
+        <target>Nuk mund të kyçet si &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpPathError">
         <source>Could not locate Contao directory %s</source>
+        <target>Nuk mund të gjej dosjen e Contao-së %s</target>
       </trans-unit>
       <trans-unit id="tl_install.filesRenamed">
         <source>The configured files directory does not exist!</source>
@@ -278,18 +295,23 @@
       </trans-unit>
       <trans-unit id="tl_install.CREATE">
         <source>Create new tables</source>
+        <target>Shto tabel të re</target>
       </trans-unit>
       <trans-unit id="tl_install.ALTER_ADD">
         <source>Add new columns</source>
+        <target>Shto kolona të reja</target>
       </trans-unit>
       <trans-unit id="tl_install.ALTER_CHANGE">
         <source>Change existing columns</source>
+        <target>Përpuno kolonat egzistuese</target>
       </trans-unit>
       <trans-unit id="tl_install.ALTER_DROP">
         <source>Drop existing columns</source>
+        <target>Fshij kolonat egzistuese</target>
       </trans-unit>
       <trans-unit id="tl_install.DROP">
         <source>Drop existing tables</source>
+        <target>Fshij tabelat egzistuese</target>
       </trans-unit>
     </body>
   </file>

@@ -115,11 +115,11 @@
       </trans-unit>
       <trans-unit id="MOD.maintenance.0">
         <source>Maintenance</source>
-        <target>نگهداری و به‌روز رسانی</target>
+        <target>نگهداشت</target>
       </trans-unit>
       <trans-unit id="MOD.maintenance.1">
         <source>Maintain or update Contao</source>
-        <target>نگهداری یا به‌روز رسانی کانتائو.</target>
+        <target>نگهداری یا بروزرسانی کانتائو.</target>
       </trans-unit>
       <trans-unit id="MOD.undo.0">
         <source>Restore</source>
@@ -175,7 +175,7 @@
       </trans-unit>
       <trans-unit id="FMD.navigation.1">
         <source>Generates a navigation menu from the site structure</source>
-        <target>منوی اصلی را از ساختار سایت ایجاد می کند.</target>
+        <target>منوی اصلی را از ساختار سایت ایجاد می‌کند.</target>
       </trans-unit>
       <trans-unit id="FMD.customnav.0">
         <source>Custom navigation</source>
@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="FMD.customnav.1">
         <source>Generates a custom navigation menu</source>
-        <target>این ماژول به شما امکان ساخت یک منو سفارشی با آیتم های مورد نیازتان را می دهد .</target>
+        <target>این ماژول به شما امکان ساخت یک منو سفارشی با آیتم‌های مورد نیازتان را می دهد.</target>
       </trans-unit>
       <trans-unit id="FMD.breadcrumb.0">
         <source>Breadcrumb navigation</source>
@@ -215,15 +215,15 @@
       </trans-unit>
       <trans-unit id="FMD.booknav.1">
         <source>Generates a book navigation menu</source>
-        <target>یک منوی ناوبری کتاب ایجاد می کند.</target>
+        <target>یک منوی ناوبری کتاب ایجاد می‌کند.</target>
       </trans-unit>
       <trans-unit id="FMD.articlenav.0">
         <source>Article navigation</source>
-        <target>ناوبری مقاله ها</target>
+        <target>ناوبری نوشته‌ها</target>
       </trans-unit>
       <trans-unit id="FMD.articlenav.1">
         <source>Generates a pagination menu to navigate articles</source>
-        <target>یک منوی صفحه ای برای مقاله ها ایجاد می کند.</target>
+        <target>یک منوی صفحه‌ای برای نوشته‌ها ایجاد می‌کند.</target>
       </trans-unit>
       <trans-unit id="FMD.sitemap.0">
         <source>Sitemap</source>
@@ -231,7 +231,7 @@
       </trans-unit>
       <trans-unit id="FMD.sitemap.1">
         <source>Generates a list of all pages in the site structure</source>
-        <target>این ماژول امکان نمایش لینک تمامی صفحات فعال سایت را در یک صفحه به شما می دهد .</target>
+        <target>این ماژول امکان نمایش لینک تمامی صفحات فعال سایت را در یک صفحه به شما می‌دهد.</target>
       </trans-unit>
       <trans-unit id="FMD.user">
         <source>User</source>
@@ -243,7 +243,7 @@
       </trans-unit>
       <trans-unit id="FMD.login.1">
         <source>Generates a login form</source>
-        <target>این ماژول به شما امکان ساخت یک فرم ورود به سیستم را در بخش کاربری می دهد . تنها کاربرانی که به آنها نام کاربری و رمزعبور اختصاص داده شده می توانند از این بخش استفاده نمایند.</target>
+        <target>این ماژول به شما امکان ساخت یک فرم ورود به سیستم را در بخش کاربری می‌دهد. تنها کاربرانی که به آنها نام کاربری و گذرواژه اختصاص داده شده می‌توانند از این بخش استفاده نمایند.</target>
       </trans-unit>
       <trans-unit id="FMD.logout.0">
         <source>Automatic logout</source>
@@ -251,7 +251,7 @@
       </trans-unit>
       <trans-unit id="FMD.logout.1">
         <source>Automatically logs out a user</source>
-        <target>این ماژول به شما امکان ساخت یک بخش برای خروج اتوماتیک یک کاربر را می دهد .</target>
+        <target>این ماژول به شما امکان ساخت یک بخش برای خروج خودکار یک کاربر را می‌دهد.</target>
       </trans-unit>
       <trans-unit id="FMD.personalData.0">
         <source>Personal data</source>
@@ -271,11 +271,11 @@
       </trans-unit>
       <trans-unit id="FMD.lostPassword.0">
         <source>Lost password</source>
-        <target>فراموشی رمزعبور</target>
+        <target>فراموشی گذرواژه</target>
       </trans-unit>
       <trans-unit id="FMD.lostPassword.1">
         <source>Generates a form to request a new password</source>
-        <target>ایجاد یک فرم برای درخواست رمزعبور جدید.</target>
+        <target>ایجاد یک فرم برای درخواست گذرواژه جدید.</target>
       </trans-unit>
       <trans-unit id="FMD.closeAccount.0">
         <source>Close account</source>
@@ -295,7 +295,7 @@
       </trans-unit>
       <trans-unit id="FMD.form.1">
         <source>Adds a form to the page</source>
-        <target>این ماژول به شما امکان افزودن یک فرم را به سایتتان می دهد . اطلاعات فرم می توانند به یک پست الکترونیک ارسال شوند و یا توسط بخش های دیگر سایت مورد استفاده قرار بگیرند.</target>
+        <target>این ماژول به شما امکان افزودن یک فرم را به سایت‌تان می‌دهد. اطلاعات فرم می‌توانند به یک پست الکترونیک ارسال شوند و یا توسط بخش‌های دیگر سایت مورد استفاده قرار بگیرند.</target>
       </trans-unit>
       <trans-unit id="FMD.search.0">
         <source>Search engine</source>
@@ -303,7 +303,7 @@
       </trans-unit>
       <trans-unit id="FMD.search.1">
         <source>Adds a search form to the page</source>
-        <target>این ماژول به شما امکان جستجوی محلی در محتوای سایت را می دهد.</target>
+        <target>این ماژول به شما امکان جستجوی محلی در محتوای سایت را می‌دهد.</target>
       </trans-unit>
       <trans-unit id="FMD.articleList.0">
         <source>Article list</source>
@@ -311,7 +311,7 @@
       </trans-unit>
       <trans-unit id="FMD.articleList.1">
         <source>Generates a list of articles of a column</source>
-        <target>این ماژول به شما امکان نمایش لیست کاملی از تمامی مطالب و محتوای سایت را می دهد.</target>
+        <target>این ماژول به شما امکان نمایش لیست کاملی از تمامی مطالب و محتوای سایت را می‌دهد.</target>
       </trans-unit>
       <trans-unit id="FMD.miscellaneous">
         <source>Miscellaneous</source>
@@ -347,7 +347,7 @@
       </trans-unit>
       <trans-unit id="FMD.rss_reader.1">
         <source>Adds an RSS feed to the page</source>
-        <target>توسط این ماژول می‌توانید RSS Feed ها را به سایت وارد نمائید .</target>
+        <target>توسط این ماژول می‌توانید RSS Feed ها را به سایت وارد نمائید.</target>
       </trans-unit>
     </body>
   </file>

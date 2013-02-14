@@ -54,7 +54,6 @@ $GLOBALS['TL_LANG']['ERR']['importFolder'] = '!No se puede importar la carpeta "
 $GLOBALS['TL_LANG']['ERR']['notWriteable'] = '¡El archivo "%s" no es modificable, sus cambios no tendran efecto!';
 $GLOBALS['TL_LANG']['ERR']['invalidName'] = '¡Este nombre de archivo o carpeta no es válido!';
 $GLOBALS['TL_LANG']['ERR']['invalidFile'] = '¡Este archivo o carpeta no es válido!';
-$GLOBALS['TL_LANG']['ERR']['fileExists'] = '¡El archivo "%s" ya existe!';
 $GLOBALS['TL_LANG']['ERR']['circularReference'] = '¡Objetivo de redirección no válido (referencia circular)!';
 $GLOBALS['TL_LANG']['ERR']['ie6warning'] = '%s<strong>¡Atención!</strong> Su navegador esta %sobsoleto%s y <strong>no puede utilizar todas las características de este sitio web</strong>.%s';
 $GLOBALS['TL_LANG']['ERR']['noFallbackEmpty'] = 'Ninguna de las páginas principales de los sitios activos sin DNS explícito tienen establecida la opción de idioma de respaldo, esto significa que estos sitios están disponibles únicamente en el idioma definido en las características de la página. Los visitantes y buscadores que no entiendan dicho idioma no podrán navegar el sitio.';

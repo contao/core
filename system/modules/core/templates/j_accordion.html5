@@ -6,7 +6,8 @@
     $(document).accordion({
       // Put custom options here
       autoHeight: false,
-      header:'div.toggler'
+      header:'div.toggler',
+      collapsible: true
     });
     var activate = function(tog) {
       var tgs = $('div.toggler');
@@ -14,7 +15,7 @@
       tog.addClass('active');
       tgs.next('div.accordion').attr('aria-hidden', 'true');
       tog.next('div.accordion').attr('aria-hidden', 'false');
-    }
+    };
     $('div.toggler').focus(function(e) {
       $('div.toggler').attr('tabindex', 0);
       $(this).attr('tabindex', -1);

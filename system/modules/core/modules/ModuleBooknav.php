@@ -102,6 +102,12 @@ class ModuleBooknav extends \Module
 		{
 			$intKey = $objPage->pid;
 
+			// Skip forward pages (see #5074)
+			while ($this->arrPages[$intKey]['type'] == 'forward' && isset($this->arrPages[$intKey]['pid']))
+			{
+				$intKey = $this->arrPages[$intKey]['pid'];
+			}
+
 			$this->Template->upHref = $this->generateFrontendUrl($this->arrPages[$intKey]);
 			$this->Template->upTitle = specialchars($this->arrPages[$intKey]['title'], true);
 			$this->Template->upPageTitle = specialchars($this->arrPages[$intKey]['pageTitle'], true);

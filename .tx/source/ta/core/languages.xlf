@@ -187,6 +187,7 @@
       </trans-unit>
       <trans-unit id="LNG.is">
         <source>Icelandic</source>
+        <target>ஐஸ்லாண்டிக்</target>
       </trans-unit>
       <trans-unit id="LNG.it">
         <source>Italian</source>
@@ -212,6 +213,7 @@
       </trans-unit>
       <trans-unit id="LNG.kl">
         <source>Greenlandic</source>
+        <target>கிறீன்லான்டிக்</target>
       </trans-unit>
       <trans-unit id="LNG.km">
         <source>Cambodian</source>
@@ -227,6 +229,7 @@
       </trans-unit>
       <trans-unit id="LNG.ks">
         <source>Kashmiri</source>
+        <target>காஸ்மீரி</target>
       </trans-unit>
       <trans-unit id="LNG.ku">
         <source>Kurdish</source>
@@ -241,6 +244,7 @@
       </trans-unit>
       <trans-unit id="LNG.ln">
         <source>Lingala</source>
+        <target>லின்காலா</target>
       </trans-unit>
       <trans-unit id="LNG.lo">
         <source>Lao</source>
@@ -263,6 +267,7 @@
       </trans-unit>
       <trans-unit id="LNG.mk">
         <source>Macedonian</source>
+        <target>மேசிடோனியன்</target>
       </trans-unit>
       <trans-unit id="LNG.ml">
         <source>Malayalam</source>
@@ -293,6 +298,7 @@
       </trans-unit>
       <trans-unit id="LNG.na">
         <source>Nauru</source>
+        <target>நவுரு</target>
       </trans-unit>
       <trans-unit id="LNG.ne">
         <source>Nepali</source>
@@ -359,18 +365,21 @@
       </trans-unit>
       <trans-unit id="LNG.sg">
         <source>Sango</source>
+        <target>சாங்கோ</target>
       </trans-unit>
       <trans-unit id="LNG.sh">
         <source>Serbo-Croatian</source>
       </trans-unit>
       <trans-unit id="LNG.si">
         <source>Sinhala</source>
+        <target>சிங்களம்</target>
       </trans-unit>
       <trans-unit id="LNG.sk">
         <source>Slovak</source>
       </trans-unit>
       <trans-unit id="LNG.sl">
         <source>Slovenian</source>
+        <target>ஸ்லோவேனியன்</target>
       </trans-unit>
       <trans-unit id="LNG.sm">
         <source>Samoan</source>
@@ -392,12 +401,14 @@
       </trans-unit>
       <trans-unit id="LNG.ss">
         <source>Siswati</source>
+        <target>சிஸ்வாதி</target>
       </trans-unit>
       <trans-unit id="LNG.st">
         <source>Sotho</source>
       </trans-unit>
       <trans-unit id="LNG.su">
         <source>Sudanese</source>
+        <target>சூடானீஸ்</target>
       </trans-unit>
       <trans-unit id="LNG.sv">
         <source>Swedish</source>
@@ -413,6 +424,7 @@
       </trans-unit>
       <trans-unit id="LNG.te">
         <source>Telugu</source>
+        <target>தெலுங்கு</target>
       </trans-unit>
       <trans-unit id="LNG.tg">
         <source>Tajik</source>
@@ -456,6 +468,7 @@
       </trans-unit>
       <trans-unit id="LNG.uk">
         <source>Ukrainian</source>
+        <target>உக்ரேனியன்</target>
       </trans-unit>
       <trans-unit id="LNG.ur">
         <source>Urdu</source>
@@ -492,6 +505,7 @@
       </trans-unit>
       <trans-unit id="LNG.zu">
         <source>Zulu</source>
+        <target>ஸூலு</target>
       </trans-unit>
     </body>
   </file>

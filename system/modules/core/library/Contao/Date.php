@@ -82,7 +82,7 @@ class Date extends \System
 	public function __construct($strDate=null, $strFormat=null)
 	{
 		$this->strDate = ($strDate !== null) ? $strDate : time();
-		$this->strFormat = ($strFormat !== null) ? $strFormat : $GLOBALS['TL_CONFIG']['dateFormat'];
+		$this->strFormat = ($strFormat !== null) ? $strFormat : static::getNumericDateFormat();
 
 		if (!preg_match('/^\-?[0-9]+$/', $this->strDate) || preg_match('/^[a-zA-Z]+$/', $this->strFormat))
 		{
@@ -90,9 +90,9 @@ class Date extends \System
 		}
 
 		// Create the formatted dates
-		$this->strToDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->strDate);
-		$this->strToTime = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $this->strDate);
-		$this->strToDatim = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $this->strDate);
+		$this->strToDate = $this->parseDate(static::getNumericDateFormat(), $this->strDate);
+		$this->strToTime = $this->parseDate(static::getNumericTimeFormat(), $this->strDate);
+		$this->strToDatim = $this->parseDate(static::getNumericDatimFormat(), $this->strDate);
 
 		$intYear = date('Y', $this->strDate);
 		$intMonth = date('m', $this->strDate);
@@ -229,10 +229,10 @@ class Date extends \System
 	{
 		if ($strFormat === null)
 		{
-			$strFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
+			$strFormat = static::getNumericDateFormat();
 		}
 
-		if (preg_match('/[BbCcDEeFfIJKkLlMNOoPpQqRrSTtUuVvWwXxZz]+/', $strFormat))
+		if (!static::isNumericFormat($strFormat))
 		{
 			throw new \Exception(sprintf('Invalid date format "%s"', $strFormat));
 		}
@@ -277,10 +277,10 @@ class Date extends \System
 	{
 		if ($strFormat === null)
 		{
-			$strFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
+			$strFormat = static::getNumericDateFormat();
 		}
 
-		if (preg_match('/[BbCcDEeFfIJKkLlMNOoPpQqRrSTtUuVvWwXxZz]+/', $strFormat))
+		if (!static::isNumericFormat($strFormat))
 		{
 			throw new \Exception(sprintf('Invalid date format "%s"', $strFormat));
 		}
@@ -311,10 +311,11 @@ class Date extends \System
 			if (isset($arrCharacterMapper[$strCharacter]))
 			{
 				$arrInputFormat[$strFormat] .= $arrCharacterMapper[$strCharacter];
-				continue;
 			}
-
-			$arrInputFormat[$strFormat] .= $strCharacter;
+			else
+			{
+				$arrInputFormat[$strFormat] .= $strCharacter;
+			}
 		}
 
 		return $arrInputFormat[$strFormat];
@@ -329,7 +330,7 @@ class Date extends \System
 	 */
 	protected function dateToUnix()
 	{
-		if (preg_match('/[BbCcDEeFfIJKkLlMNOoPpQqRrSTtUuVvWwXxZz]+/', $this->strFormat))
+		if (!static::isNumericFormat($this->strFormat))
 		{
 			throw new \Exception(sprintf('Invalid date format "%s"', $this->strFormat));
 		}
@@ -480,5 +481,81 @@ class Date extends \System
 		}
 
 		return preg_replace('/([a-zA-Z])/', '%$1', implode('', $chunks));
+	}
+
+
+	/**
+	 * Check for a numeric date format
+	 * 
+	 * @param string $strFormat The PHP format string
+	 * 
+	 * @return boolean True if the date format is numeric
+	 */
+	public static function isNumericFormat($strFormat)
+	{
+		return !preg_match('/[BbCcDEeFfIJKkLlMNOoPpQqRrSTtUuVvWwXxZz]+/', $strFormat);
+	}
+
+
+	/**
+	 * Return the numeric date format string
+	 * 
+	 * @return string The numeric date format string
+	 */
+	public static function getNumericDateFormat()
+	{
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->dateFormat != '' && static::isNumericFormat($objPage->dateFormat))
+			{
+				return $objPage->dateFormat;
+			}
+		}
+
+		return $GLOBALS['TL_CONFIG']['dateFormat'];
+	}
+
+
+	/**
+	 * Return the numeric time format string
+	 * 
+	 * @return string The numeric time format string
+	 */
+	public static function getNumericTimeFormat()
+	{
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->timeFormat != '' && static::isNumericFormat($objPage->timeFormat))
+			{
+				return $objPage->timeFormat;
+			}
+		}
+
+		return $GLOBALS['TL_CONFIG']['timeFormat'];
+	}
+
+
+	/**
+	 * Return the numeric datim format string
+	 * 
+	 * @return string The numeric datim format string
+	 */
+	public static function getNumericDatimFormat()
+	{
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->datimFormat != '' && static::isNumericFormat($objPage->datimFormat))
+			{
+				return $objPage->datimFormat;
+			}
+		}
+
+		return $GLOBALS['TL_CONFIG']['datimFormat'];
 	}
 }

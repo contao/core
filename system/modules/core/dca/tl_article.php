@@ -181,7 +181,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'search'                  => true,
-			'eval'                    => array('rgxp'=>'alias', 'doNotCopy'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'alias', 'doNotCopy'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_article', 'generateAlias')
@@ -192,7 +192,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 		'author' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['author'],
-			'default'                 => $this->User->id,
+			'default'                 => BackendUser::getInstance()->id,
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
@@ -671,14 +671,14 @@ class tl_article extends Backend
 	{
 		if (!$this->User->isAdmin && count(preg_grep('/^tl_article::/', $this->User->alexf)) < 1)
 		{
-			return '';
+			return $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 		}
 
 		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		return ($this->User->isAdmin || $this->User->isAllowed(4, $objPage->row())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : '';
+		return ($this->User->isAdmin || $this->User->isAllowed(4, $objPage->row())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 

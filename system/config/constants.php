@@ -18,7 +18,7 @@
  * the web browser reload those resources after a Contao update.
  */
 define('VERSION', '3.0');
-define('BUILD', '3');
+define('BUILD', '4');
 define('LONG_TERM_SUPPORT', false);
 define('CODEMIRROR', '2.32');
 define('CSS3PIE', '1.0.0');
@@ -68,3 +68,10 @@ define('TL_FORMS', 'FORMS');
 define('TL_CONFIGURATION', 'CONFIGURATION');
 define('TL_NEWSLETTER', 'NEWSLETTER');
 define('TL_REPOSITORY', 'REPOSITORY');
+
+
+/**
+ * Core and legacy modules
+ */
+define('TL_CORE_MODULES', 'core,calendar,comments,devtools,faq,listing,news,newsletter,repository');
+define('TL_LEGACY_MODULES', 'backend,frontend,rep_base,rep_client,registration,rss_reader,tpl_editor');

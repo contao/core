@@ -162,7 +162,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alias', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'alias', 'unique'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_faq', 'generateAlias')
@@ -172,7 +172,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 		'author' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_faq']['author'],
-			'default'                 => $this->User->id,
+			'default'                 => BackendUser::getInstance()->id,
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,

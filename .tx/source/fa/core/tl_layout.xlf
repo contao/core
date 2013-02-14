@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.stylesheet.1">
         <source>Please select the style sheets you want to add to the layout.</source>
-        <target>شیوه‌نامه‌ها که میخواهید به چیدمان اضافه شود را انتخاب نمایید.</target>
+        <target>شیوه‌نامه‌ها که می‌خواهید به چیدمان اضافه شود را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.framework.0">
         <source>CSS framework</source>

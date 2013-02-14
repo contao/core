@@ -168,8 +168,7 @@
         <target>文件或文件夹 &quot;%s&quot; 非法！</target>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
-        <source>The file &quot;%s&quot; already exists!</source>
-        <target>文件 &quot;%s&quot; 已存在！</target>
+        <source>The file or folder &quot;%s&quot; already exists!</source>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -219,8 +218,10 @@
         <target>无效输入：%s</target>
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
-        <source>No database entry found for %s. Please synchronize the file system.</source>
-        <target>没有为%s 发现数据库实体。请同步文件系统。</target>
+        <source>No database entry found for %s.</source>
+      </trans-unit>
+      <trans-unit id="ERR.dbOutOfSync">
+        <source>The database and the file system have to be synchronized to continue.</source>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>

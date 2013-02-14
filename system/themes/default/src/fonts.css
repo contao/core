@@ -37,9 +37,8 @@
 	font-family:"Architects Daughter",cursive;
 	font-size:15px;
 	color:#838990;
-	top:-42px;
-	left:180px;
-	padding:0 18px 20px 42px;
+	top:-48px;
+	left:300px;
+	padding:0 6px 20px 42px;
 	background:#fff url("images/arrow_left.png") 6px bottom no-repeat;
-	margin-bottom:6px;
 }

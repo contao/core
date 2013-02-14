@@ -233,8 +233,8 @@ class Calendar extends \Frontend
 			}
 		}
 
-		// Create file
-		$objRss = new \File('share/' . $strFile . '.xml');
+		// Create the file
+		$objRss = new \File('share/' . $strFile . '.xml', true);
 		$objRss->write($this->replaceInsertTags($objFeed->$strType()));
 		$objRss->close();
 	}
@@ -424,9 +424,12 @@ class Calendar extends \Frontend
 			{
 				$objFile = \FilesModel::findMultipleByIds($arrEnclosure);
 
-				while ($objFile->next())
+				if ($objFile !== null)
 				{
-					$arrEvent['enclosure'][] = $objFile->path;
+					while ($objFile->next())
+					{
+						$arrEvent['enclosure'][] = $objFile->path;
+					}
 				}
 			}
 		}

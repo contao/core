@@ -1,0 +1,265 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_article.php" source-language="en">
+    <body>
+      <trans-unit id="tl_article.title.0">
+        <source>Title</source>
+        <target>Заглавие</target>
+      </trans-unit>
+      <trans-unit id="tl_article.title.1">
+        <source>Please enter the article title.</source>
+        <target>Моля, въведете заглавието на статията.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.alias.0">
+        <source>Article alias</source>
+        <target>Псевдоним на статията</target>
+      </trans-unit>
+      <trans-unit id="tl_article.alias.1">
+        <source>The article alias is a unique reference to the article which can be called instead of its numeric ID.</source>
+        <target>Псевдонимът на статията е уникална референция към него,с която може да бъде извикан вместо с ID.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.author.0">
+        <source>Author</source>
+        <target>Автор</target>
+      </trans-unit>
+      <trans-unit id="tl_article.author.1">
+        <source>Here you can change the author of the article.</source>
+        <target>Моля, въведете името на автора.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.inColumn.0">
+        <source>Display in</source>
+        <target>Покажи в</target>
+      </trans-unit>
+      <trans-unit id="tl_article.inColumn.1">
+        <source>Please choose the layout section you want the article to be displayed in.</source>
+        <target>Моля присвойте на статията колона или секция от страницата, в която да се показва.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.keywords.0">
+        <source>Meta keywords</source>
+        <target>Ключови думи</target>
+      </trans-unit>
+      <trans-unit id="tl_article.keywords.1">
+        <source>Here you can enter a list of comma separated keywords. Keywords, however, are no longer relevant to most search engines (including Google).</source>
+        <target>Може да въведете няколко думи, разделени със запетаи, които ще бъдат използвани от търсещите машини като Google или Yahoo. Търсещите машини обикновено индексират до 800 символа.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaserCssID.0">
+        <source>Teaser CSS ID/class</source>
+        <target>CSS ID/клас за кратък текст</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaserCssID.1">
+        <source>Here you can set an ID and one or more classes for the teaser element.</source>
+        <target>Тук можете да зададете идентификатор и един или повече класове за краткия текст</target>
+      </trans-unit>
+      <trans-unit id="tl_article.showTeaser.0">
+        <source>Show teaser</source>
+        <target>Покажи кратък текст</target>
+      </trans-unit>
+      <trans-unit id="tl_article.showTeaser.1">
+        <source>Show the article teaser if there are multiple articles.</source>
+        <target>Покажи кратък текст на статията ако има повече от една статия</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaser.0">
+        <source>Article teaser</source>
+        <target>Кратък текст</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaser.1">
+        <source>The article teaser can also be displayed with the content element &quot;article teaser&quot;.</source>
+        <target>Краткият текст може също да се покзва с елемента за съдържание &quot;Кратък Текст&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_article.printable.0">
+        <source>Syndication</source>
+        <target>Печатаем</target>
+      </trans-unit>
+      <trans-unit id="tl_article.printable.1">
+        <source>Here you can choose which options are available.</source>
+        <target>Показва връзка &quot;отпечати като PDF&quot; стиловите таблици с медия тип &quot;print&quot; или &quot;all&quot; ще бъдат разпознати.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cssID.0">
+        <source>CSS ID/class</source>
+        <target>ID на Стил и клас</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cssID.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>Тук можете да въведете идентификатор (id атрибут на таг) и един или повече класове (class атрибути на тагове).</target>
+      </trans-unit>
+      <trans-unit id="tl_article.space.0">
+        <source>Space in front and after</source>
+        <target>Празно място преди и след</target>
+      </trans-unit>
+      <trans-unit id="tl_article.space.1">
+        <source>Here you can enter the spacing in front of and after the article in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
+        <target>Моля въведете размери за празното пространство преди и след статията в пиксели. Избягвайте стиловете дефинирани директно в таговете(inline styles).</target>
+      </trans-unit>
+      <trans-unit id="tl_article.published.0">
+        <source>Publish article</source>
+        <target>Публикувана</target>
+      </trans-unit>
+      <trans-unit id="tl_article.published.1">
+        <source>Make the article publicly visible on the website.</source>
+        <target>Докато не изберете тази опция, статията няма да е видима за потребителите в сайта.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.start.0">
+        <source>Show from</source>
+        <target>Показвай от</target>
+      </trans-unit>
+      <trans-unit id="tl_article.start.1">
+        <source>Do not show the article on the website before this day.</source>
+        <target>Ако тук въведете дата, текущата статия няма да се вижда в сайта преди тази дата.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.stop.0">
+        <source>Show until</source>
+        <target>Показвай до</target>
+      </trans-unit>
+      <trans-unit id="tl_article.stop.1">
+        <source>Do not show the article on the website on and after this day.</source>
+        <target>Текущата статия няма да се вижда в сайта след въведената дата.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.tstamp.0">
+        <source>Revision date</source>
+        <target>Дата на промяна</target>
+      </trans-unit>
+      <trans-unit id="tl_article.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Дата и време на последната промяна</target>
+      </trans-unit>
+      <trans-unit id="tl_article.title_legend">
+        <source>Title and author</source>
+        <target>Заглавиие и автор</target>
+      </trans-unit>
+      <trans-unit id="tl_article.layout_legend">
+        <source>Section and keywords</source>
+        <target>Секция и ключови думи</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaser_legend">
+        <source>Article teaser</source>
+        <target>Кратък текст</target>
+      </trans-unit>
+      <trans-unit id="tl_article.expert_legend">
+        <source>Expert settings</source>
+        <target>Експертни настройки</target>
+      </trans-unit>
+      <trans-unit id="tl_article.publish_legend">
+        <source>Publish settings</source>
+        <target>Настройки за публикуване</target>
+      </trans-unit>
+      <trans-unit id="tl_article.print">
+        <source>Print the page</source>
+        <target>Отпечатване на страницата</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pdf">
+        <source>Export as PDF</source>
+        <target>Изнасяне като PDF</target>
+      </trans-unit>
+      <trans-unit id="tl_article.facebook">
+        <source>Share on Facebook</source>
+        <target>Споделяне във Facebook</target>
+      </trans-unit>
+      <trans-unit id="tl_article.twitter">
+        <source>Share on Twitter</source>
+        <target>Споделяне в Twitter</target>
+      </trans-unit>
+      <trans-unit id="tl_article.gplus">
+        <source>Share on Google+</source>
+      </trans-unit>
+      <trans-unit id="tl_article.header">
+        <source>Header</source>
+        <target>Горен колонтитул</target>
+      </trans-unit>
+      <trans-unit id="tl_article.left">
+        <source>Left column</source>
+        <target>Лява колона</target>
+      </trans-unit>
+      <trans-unit id="tl_article.main">
+        <source>Main column</source>
+        <target>Главна Колона</target>
+      </trans-unit>
+      <trans-unit id="tl_article.right">
+        <source>Right column</source>
+        <target>Дясна колона</target>
+      </trans-unit>
+      <trans-unit id="tl_article.footer">
+        <source>Footer</source>
+        <target>Долен колонтитул</target>
+      </trans-unit>
+      <trans-unit id="tl_article.new.0">
+        <source>New article</source>
+        <target>Нова статия</target>
+      </trans-unit>
+      <trans-unit id="tl_article.new.1">
+        <source>Create a new article</source>
+        <target>Създайте нова статия</target>
+      </trans-unit>
+      <trans-unit id="tl_article.show.0">
+        <source>Article details</source>
+        <target>Подробности</target>
+      </trans-unit>
+      <trans-unit id="tl_article.show.1">
+        <source>Show the details of article ID %s</source>
+        <target>Показване подробности за статия с ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.edit.0">
+        <source>Edit article</source>
+        <target>Редакция на статията</target>
+      </trans-unit>
+      <trans-unit id="tl_article.edit.1">
+        <source>Edit article ID %s</source>
+        <target>Редакция на статия с ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.editheader.0">
+        <source>Edit article settings</source>
+        <target>Редкация на настройките на статията</target>
+      </trans-unit>
+      <trans-unit id="tl_article.editheader.1">
+        <source>Edit the settings of article ID %s</source>
+        <target>Редкация на настройките на статията с ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.copy.0">
+        <source>Duplicate article</source>
+        <target>Дублиране на статията</target>
+      </trans-unit>
+      <trans-unit id="tl_article.copy.1">
+        <source>Duplicate article ID %s</source>
+        <target>Дублиране на статия с ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cut.0">
+        <source>Move article</source>
+        <target>Преместване на статията</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cut.1">
+        <source>Move article ID %s</source>
+        <target>Преместване на статия с ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.delete.0">
+        <source>Delete article</source>
+        <target>Изтриване на статията</target>
+      </trans-unit>
+      <trans-unit id="tl_article.delete.1">
+        <source>Delete article ID %s</source>
+        <target>Изтриване на статия с ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.toggle.0">
+        <source>Publish/unpublish article</source>
+        <target>Публикуване на статията</target>
+      </trans-unit>
+      <trans-unit id="tl_article.toggle.1">
+        <source>Publish/unpublish article ID %s</source>
+        <target>Публикуване на статия с ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteafter.0">
+        <source>Paste after</source>
+        <target>Постави след</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteafter.1">
+        <source>Paste after article ID %s</source>
+        <target>Постави след статия с ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteinto.0">
+        <source>Paste into</source>
+        <target>Постави в</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteinto.1">
+        <source>Paste into page ID %s</source>
+        <target>Постави в страница с ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

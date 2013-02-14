@@ -17,7 +17,8 @@ define('REPOSITORY_SOAPCACHE', true);
 
 // valid core versions in descending order
 define('REPOSITORY_COREVERSIONS',
-		'30100003,30100003;'.	// 3.1.0 beta1
+		'30010003,30010003;'.	// 3.1.0 beta1
+		'30000049,30000049;'.	// 3.0.4 stable
 		'30000039,30000039;'.	// 3.0.3 stable
 		'30000029,30000029;'.	// 3.0.2 stable
 		'30000019,30000019;'.	// 3.0.1 stable
@@ -25,6 +26,8 @@ define('REPOSITORY_COREVERSIONS',
 		'30000007,30000007;'.	// 3.0.0 RC2
 		'30000006,30000006;'.	// 3.0.0 RC1
 		'30000003,30000003;'.	// 3.0.0 beta1
+		'20110109,20110109;'.	// 2.11.10 stable
+		'20110099,20110099;'.	// 2.11.9 stable
 		'20110089,20110089;'.	// 2.11.8 stable
 		'20110079,20110079;'.	// 2.11.7 stable
 		'20110069,20110069;'.	// 2.11.6 stable
@@ -95,4 +98,4 @@ define('REPOSITORY_COREVERSIONS',
 );
 
 // HTML tags allowed in long texts
-define('REPOSITORY_TEXTTAGS', '<h3><h4><h5><h6><p><br><ol><ul><li><em><strong>');
+define('REPOSITORY_TEXTTAGS', '<h3><h4><h5><h6><p><pre><blockquote><br><ol><ul><li><em><strong>');

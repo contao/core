@@ -168,8 +168,7 @@
         <target>پرونده یا پوشه &quot;%s&quot; غیرمعتبر است!</target>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
-        <source>The file &quot;%s&quot; already exists!</source>
-        <target>پرونده &quot;%s&quot; موجود است!</target>
+        <source>The file or folder &quot;%s&quot; already exists!</source>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -224,8 +223,10 @@
         <target>ورودی نامعتبر: %s</target>
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
-        <source>No database entry found for %s. Please synchronize the file system.</source>
-        <target>ورودی پایگاه داده‌ای برای %s یافت نشد. سیستم پرونده را همزمان‌سازی نمایید.</target>
+        <source>No database entry found for %s.</source>
+      </trans-unit>
+      <trans-unit id="ERR.dbOutOfSync">
+        <source>The database and the file system have to be synchronized to continue.</source>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>

@@ -364,7 +364,7 @@ class DcaExtractor extends \Database\Installer
 		}
 
 		// Create the file
-		$objFile = new \File('system/cache/sql/' . $this->strTable . '.php');
+		$objFile = new \File('system/cache/sql/' . $this->strTable . '.php', true);
 		$objFile->write("<?php\n\n");
 
 		// Meta

@@ -62,10 +62,10 @@ function __error($intType, $strMessage, $strFile, $intLine)
 				$strMessage = sprintf('<strong>%s</strong>: %s in <strong>%s</strong> on line <strong>%s</strong>',
 									$arrErrors[$intType],
 									$strMessage,
-									$strFile,
+									str_replace(TL_ROOT, '…', $strFile), // see #4971
 									$intLine);
 
-				$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . $e->getTraceAsString() . "\n" . '</pre>';
+				$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT, '…', $e->getTraceAsString()) . "\n" . '</pre>';
 				echo '<br>' . $strMessage;
 			}
 		}
@@ -90,11 +90,12 @@ function __error($intType, $strMessage, $strFile, $intLine)
  */
 function __exception($e)
 {
-	error_log(sprintf("PHP Fatal error: Uncaught exception '%s' with message '%s' thrown in %s on line %s",
+	error_log(sprintf("PHP Fatal error: Uncaught exception '%s' with message '%s' thrown in %s on line %s\n%s",
 					get_class($e),
 					$e->getMessage(),
 					$e->getFile(),
-					$e->getLine()));
+					$e->getLine(),
+					$e->getTraceAsString()));
 
 	// Display the exception
 	if (ini_get('display_errors'))
@@ -102,10 +103,10 @@ function __exception($e)
 		$strMessage = sprintf('<strong>Fatal error</strong>: Uncaught exception <strong>%s</strong> with message <strong>%s</strong> thrown in <strong>%s</strong> on line <strong>%s</strong>',
 							get_class($e),
 							$e->getMessage(),
-							$e->getFile(),
+							str_replace(TL_ROOT, '…', $e->getFile()),
 							$e->getLine());
 
-		$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . $e->getTraceAsString() . "\n" . '</pre>';
+		$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT, '…', $e->getTraceAsString()) . "\n" . '</pre>';
 		echo '<br>' . $strMessage;
 	}
 

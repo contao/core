@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_style.size.1">
         <source>Width, height, min-width, min-height, max-width and max-height.</source>
-        <target>šířka, výška (width, height, min-width, min-height, max-width a max-height)</target>
+        <target>max., min. a běžná šířka (min-width, max-width, width), max., min. a běžná výška (min-height, max-height, height)</target>
       </trans-unit>
       <trans-unit id="tl_style.width.0">
         <source>Width</source>
@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_style.alignment.1">
         <source>Margin, padding, align, vertical-align and text-align.</source>
-        <target>Margin, padding, align, vertical-align a text-align.</target>
+        <target>Odsazení zvenčí (margin), uvnitř (padding), zarovnání elementu (align), vertikální zarovnání (vertical-align) a zarovnání textu (text-align).</target>
       </trans-unit>
       <trans-unit id="tl_style.margin.0">
         <source>Margin</source>
@@ -199,7 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_style.background.1">
         <source>Background-color, background-image, background-position, background-repeat, linear-gradient and box-shadow.</source>
-        <target>Background-color, background-image, background-position a background-repeat.</target>
+        <target>barva pozadí (background-color), obrázek pozadí (background-image), umístění pozadí (background-position) a opakování pozadí (background-repeat).</target>
       </trans-unit>
       <trans-unit id="tl_style.bgcolor.0">
         <source>Background color and opacity</source>
@@ -267,15 +267,15 @@
       </trans-unit>
       <trans-unit id="tl_style.border.0">
         <source>Border</source>
-        <target>Rám</target>
+        <target>Rámeček</target>
       </trans-unit>
       <trans-unit id="tl_style.border.1">
         <source>Border-width, border-style, border-color, border-radius, border-collapse and border-spacing.</source>
-        <target>Border-width, border-style, border-color a border-collapse.</target>
+        <target>Šířka rámečku (border-width), Druh rámečku (border-style), barva rámečku (border-color) a chování rámečku (border-collapse).</target>
       </trans-unit>
       <trans-unit id="tl_style.borderwidth.0">
         <source>Border width</source>
-        <target>Velikost rámu</target>
+        <target>Velikost rámečku</target>
       </trans-unit>
       <trans-unit id="tl_style.borderwidth.1">
         <source>Here you can enter the top, right, bottom and left border width.</source>
@@ -283,43 +283,43 @@
       </trans-unit>
       <trans-unit id="tl_style.borderstyle.0">
         <source>Border style</source>
-        <target>Styl rámu</target>
+        <target>Styl rámečku</target>
       </trans-unit>
       <trans-unit id="tl_style.borderstyle.1">
         <source>Here you can choose the border style.</source>
-        <target>Zde můžete zvolit styl rámu.</target>
+        <target>Zde můžete zvolit styl rámečku.</target>
       </trans-unit>
       <trans-unit id="tl_style.bordercolor.0">
         <source>Border color and opacity</source>
-        <target>Barva rámu</target>
+        <target>Barva rámečku</target>
       </trans-unit>
       <trans-unit id="tl_style.bordercolor.1">
         <source>Here you can enter a hexadecimal border color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
-        <target>Zde můžete zadat hexidecimální barvu rámu (např. ff0000 pro červenou).</target>
+        <target>Zde můžete zadat hexidecimální barvu rámečku (např. ff0000 pro červenou).</target>
       </trans-unit>
       <trans-unit id="tl_style.borderradius.0">
         <source>Border radius</source>
-        <target>Zaoblení rohů rámu</target>
+        <target>Zaoblení rohů rámečku</target>
       </trans-unit>
       <trans-unit id="tl_style.borderradius.1">
         <source>Here you can enter the top, right, bottom and left border radius.</source>
-        <target>Zde můžete určit poměr zabolení rohů rámu</target>
+        <target>Zde můžete určit poměr zabolení rohů rámečku</target>
       </trans-unit>
       <trans-unit id="tl_style.bordercollapse.0">
         <source>Border handling</source>
-        <target>Model rámu</target>
+        <target>Model rámečku</target>
       </trans-unit>
       <trans-unit id="tl_style.bordercollapse.1">
         <source>Here you can choose the border handling.</source>
-        <target>Zde můžete zvolit model rámu.</target>
+        <target>Zde můžete zvolit model rámečku.</target>
       </trans-unit>
       <trans-unit id="tl_style.borderspacing.0">
         <source>Border spacing</source>
-        <target>Odsazení rámu</target>
+        <target>Odsazení rámečku</target>
       </trans-unit>
       <trans-unit id="tl_style.borderspacing.1">
         <source>Here you can enter the border spacing.</source>
-        <target>Zde můžete určit odsazení rámu</target>
+        <target>Zde můžete určit odsazení rámečku</target>
       </trans-unit>
       <trans-unit id="tl_style.font.0">
         <source>Font</source>
@@ -327,7 +327,7 @@
       </trans-unit>
       <trans-unit id="tl_style.font.1">
         <source>Font-family, font-size, font-color, line-height, font-style and white-space.</source>
-        <target>Font-family, font-size, font-color, line-height, font-style a white-space.</target>
+        <target>Druh písma (font-family), velkost písma (font-size), barva písma (font-color), výška řádku (line-height), formát písma (font-style) a odazení písma (white-space).</target>
       </trans-unit>
       <trans-unit id="tl_style.fontfamily.0">
         <source>Font family</source>
@@ -415,7 +415,7 @@
       </trans-unit>
       <trans-unit id="tl_style.list.1">
         <source>List-style-type and list-style-image.</source>
-        <target>List-style-type a list-style-image.</target>
+        <target>Druh vzhledu seznamu (list-style-type) a obrázek místo běžných zarážek (list-style-image).</target>
       </trans-unit>
       <trans-unit id="tl_style.liststyletype.0">
         <source>List symbol</source>

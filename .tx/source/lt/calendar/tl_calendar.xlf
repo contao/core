@@ -1,0 +1,264 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_calendar.php" source-language="en">
+    <body>
+      <trans-unit id="tl_calendar.title.0">
+        <source>Title</source>
+        <target>Pavadinimas</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.title.1">
+        <source>Please enter the calendar title.</source>
+        <target>Įrašykite kalendoriaus pavadinimą</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Nukreipimo puslapis</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.jumpTo.1">
+        <source>Please choose the event reader page to which visitors will be redirected when clicking an event.</source>
+        <target>Nurodykite įvykių skaitlio puslapį, į kurį bus nukreipiami lankytojai, spustelėję įvykį.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.allowComments.0">
+        <source>Enable comments</source>
+        <target>Įjungti komentarus</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.allowComments.1">
+        <source>Allow visitors to comment events.</source>
+        <target>Leisti lankytojams komentuoti įvykius.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify.0">
+        <source>Notify</source>
+        <target>Pranešti</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+        <target>Pasirinkite, kam pranešti, kai pridedami nauji komentarai.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.sortOrder.0">
+        <source>Sort order</source>
+        <target>Rūšiavimo tvarka</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+        <target>Pagal nutylėjima komentarai yra rūšiuojami didėjančiai, pradedant pačiu seniausiu.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.perPage.0">
+        <source>Comments per page</source>
+        <target>Komentarų kiekis puslapyje.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>Komentarų kiekis puslapyje. Rašykite 0, kad išjungtumėte puslapiavimą.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.moderate.0">
+        <source>Moderate comments</source>
+        <target>Valdyti komentarus</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>Patvirtinti komentarus prieš juos įdedant į puslapį.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.bbcode.0">
+        <source>Allow BBCode</source>
+        <target>Leisti BB kodą</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Leisti lankytojams formuoti komentarus naudojant BB kodą.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.requireLogin.0">
+        <source>Require login to comment</source>
+        <target>Reikalauti prisijungimo norint komentuoti.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>Leisti komentuoti tik prisijungusiems vartotojams.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Atjungti saugos klausimą</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+        <target>Naudokite šį punktą jeigu leidžiate komentuoti tik prisijungusiems vartotojams.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.protected.0">
+        <source>Protect calendar</source>
+        <target>Apsaugoti kalendorių</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.protected.1">
+        <source>Show events to certain member groups only.</source>
+        <target>Rodyti įvykius tik tam tikroms narių grupėms.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.groups.0">
+        <source>Allowed member groups</source>
+        <target>Leidžiamos narių grupės</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.groups.1">
+        <source>These groups will be able to see the events in this calendar.</source>
+        <target>Šios grupės galės matyti įvykius šiame kalendoriuje.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.makeFeed.0">
+        <source>Generate feed</source>
+        <target>Generuoti srautą</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.makeFeed.1">
+        <source>Generate an RSS or Atom feed from the calendar.</source>
+        <target>Generuoti RSS ar Atom srautą iš kalendoriaus.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.format.0">
+        <source>Feed format</source>
+        <target>Srauto formatas</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.format.1">
+        <source>Please choose a feed format.</source>
+        <target>Nustatykite srauto formatą.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.language.0">
+        <source>Feed language</source>
+        <target>Srauto kalba</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.language.1">
+        <source>Please enter the feed language according to the ISO-639 standard (e.g. &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;).</source>
+        <target>Atsižvelgiant į ISO-639 formatą nustatykite puslapio kalbą (pvz. &lt;em&gt;lt&lt;/em&gt; ar &lt;em&gt;en-us&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.source.0">
+        <source>Export settings</source>
+        <target>Eksportavimo nustatymai</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.source.1">
+        <source>Here you can choose what will be exported.</source>
+        <target>Čia galite nurodyti ką eksportuoti.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.maxItems.0">
+        <source>Maximum number of items</source>
+        <target>Maksimalus įrašų skaičius</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.maxItems.1">
+        <source>Here you can limit the number of events. Set to 0 to export all.</source>
+        <target>Čia galite riboti įvykių skaičių (jei nustatyta 0, bus eksportuojami visi įrašai).</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feedBase.0">
+        <source>Base URL</source>
+        <target>Bazinis URL</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feedBase.1">
+        <source>Please enter the base URL with protocol (e.g. &lt;em&gt;http://&lt;/em&gt;).</source>
+        <target>Įrašykite bazinį URL adresą su protokolu (pvz. &lt;em&gt;http://&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.alias.0">
+        <source>Feed alias</source>
+        <target>Srauto sąsaja</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.alias.1">
+        <source>Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the root directory of your Contao installation, e.g. as &lt;em&gt;name.xml&lt;/em&gt;.</source>
+        <target>Čia galite įrašyti unikalų failo pavadinimą (be plėtinio). Srauto XML failas bus automatiškai sugeneruotas šakniniame TYPOlight įdiegimo aplanke (pvz. &lt;em&gt;pavadinimas.xml&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.description.0">
+        <source>Feed description</source>
+        <target>Srauto aprašymas</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.description.1">
+        <source>Please enter a short description of the calendar feed.</source>
+        <target>Trumpai aprašykite kalendoriaus srautą.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.tstamp.0">
+        <source>Revision date</source>
+        <target>Peržiūros data</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Paskutinės peržiūros data ir laikas.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.title_legend">
+        <source>Title and redirect page</source>
+        <target>Pavadinimas ir nukreipimo puslapis</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.comments_legend">
+        <source>Comments</source>
+        <target>Komentarai</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.protected_legend">
+        <source>Access protection</source>
+        <target>Prieigos apsauga</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feed_legend">
+        <source>RSS/Atom feed</source>
+        <target>RSS/Atom srautas</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify_admin">
+        <source>System administrator</source>
+        <target>Sistemos administratorius</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify_author">
+        <source>Author of the event</source>
+        <target>Naujienos autorius</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify_both">
+        <source>Author and system administrator</source>
+        <target>Autorius ir sistemos administratorius</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.source_teaser">
+        <source>Event teasers</source>
+        <target>Įvykių anonsai</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.source_text">
+        <source>Full articles</source>
+        <target>Pilni straipsniai</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.new.0">
+        <source>New calendar</source>
+        <target>Naujas kalendorius</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.new.1">
+        <source>Create a new calendar</source>
+        <target>Sukurti naują kalendorių</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.show.0">
+        <source>Calendar details</source>
+        <target>Kalendoriaus informacija</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.show.1">
+        <source>Show the details of calendar ID %s</source>
+        <target>Rodyti išsamią kalendoriaus ID %s informaciją</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.edit.0">
+        <source>Edit calendar</source>
+        <target>Redaguoti kalendorių</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.edit.1">
+        <source>Edit calendar ID %s</source>
+        <target>Redaguoti kalendorių ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.editheader.0">
+        <source>Edit calendar settings</source>
+        <target>Keisti kalendoriaus nustatytmus</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.editheader.1">
+        <source>Edit the settings of calendar ID %s</source>
+        <target>Keisti nustatymus kalendoriui su ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.copy.0">
+        <source>Duplicate calendar</source>
+        <target>Kopijuoti kalendorių</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.copy.1">
+        <source>Duplicate calendar ID %s</source>
+        <target>Kopijuoti kalendorių ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.delete.0">
+        <source>Delete calendar</source>
+        <target>Šalinti kalendorių</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.delete.1">
+        <source>Delete calendar ID %s</source>
+        <target>Šalinti kalendorių ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feeds.0">
+        <source>RSS feeds</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feeds.1">
+        <source>Manage RSS feeds</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

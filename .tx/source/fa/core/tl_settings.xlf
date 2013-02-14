@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.dateFormat.1">
         <source>The date format string will be parsed with the PHP date() function.</source>
-        <target>رشته ساختار تاریخ که توسط تابع PHP date () استفاده خواهد شد.</target>
+        <target>رشته ساختار تاریخ که توسط تابع PHP date() استفاده خواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeFormat.0">
         <source>Time format</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.timeFormat.1">
         <source>The time format string will be parsed with the PHP date() function.</source>
-        <target>رشته ساختار زمان که توسط تابع PHP date () استفاده خواهد شد.</target>
+        <target>رشته ساختار زمان که توسط تابع PHP date() استفاده خواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_settings.datimFormat.0">
         <source>Date and time format</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.datimFormat.1">
         <source>The date and time format string will be parsed with the PHP date() function.</source>
-        <target>رشته ساختار تاریخ و زمان که توسط تابع PHP date () استفاده خواهد شد.</target>
+        <target>رشته ساختار تاریخ و زمان که توسط تابع PHP date() استفاده خواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeZone.0">
         <source>Time zone</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.timeZone.1">
         <source>Please select the server time zone.</source>
-        <target>لطفا سرور منطقه زمانی را انتخاب نمائید.</target>
+        <target>لطفا منطقه زمانی سرور را انتخاب نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.websitePath.0">
         <source>Relative path to the Contao directory</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.websitePath.1">
         <source>The relative path to the Contao directory is usually set automatically by the install tool.</source>
-        <target>مسیر نسبی پوشه کانتائو معمولاً به صورت خودکار توسط ابزار نصب تنظیم می‌شود.</target>
+        <target>مسیر نسبی پوشه کانتائو معمولا به صورت خودکار توسط ابزار نصب تنظیم می‌شود.</target>
       </trans-unit>
       <trans-unit id="tl_settings.characterSet.0">
         <source>Character set</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.disableCron.1">
         <source>Disable the periodic command scheduler and execute the cron.php script by a real cron job (which you have to set up manually).</source>
-        <target>زمان‌بندی دستور دوره‌ای را غیرفعال کرده و اسکریپت cron.php را توسط کار کرن واقعی اجرا می کند (که شما باید به صورت دستی تنظیم نمایید).</target>
+        <target>زمان‌بندی دستور دوره‌ای را غیرفعال کرده و اسکریپت cron.php را توسط کار کرن واقعی اجرا می‌کند (که شما باید به صورت دستی تنظیم نمایید).</target>
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.0">
         <source>Minify the markup</source>
@@ -138,7 +138,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.cacheMode.0">
         <source>Cache mode</source>
-        <target>حال نهانگاه</target>
+        <target>نوع نهانگاه</target>
       </trans-unit>
       <trans-unit id="tl_settings.cacheMode.1">
         <source>Here you can select the cache mode.</source>
@@ -432,7 +432,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.inactiveModules.1">
         <source>Here you can deactivate unneeded extensions.</source>
-        <target>می‌توانید افزونه‌های غیر لازم را غیرفعال نمائید.</target>
+        <target>می‌توانید افزونه‌های غیرلازم را غیرفعال نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.undoPeriod.0">
         <source>Storage time for undo steps</source>
@@ -470,7 +470,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.defaultUser.0">
         <source>Default page owner</source>
-        <target>صاحب پیشفرض صفحه</target>
+        <target>صاحب پیش‌فرض صفحه</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultUser.1">
         <source>Here you can select a user as the default owner of a page.</source>
@@ -478,7 +478,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.defaultGroup.0">
         <source>Default page group</source>
-        <target>گروه پیشفرض صفحه</target>
+        <target>گروه پیش‌فرض صفحه</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultGroup.1">
         <source>Here you can select a group as the default owner of a page.</source>
@@ -494,7 +494,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.0">
         <source>Live Update URL</source>
-        <target>نشانی وب بروزرسانی Live</target>
+        <target>نشانی وب بروزرسانی لایو</target>
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
         <source>Here you can enter the live update URL.</source>
@@ -566,7 +566,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.update_legend">
         <source>Live Update</source>
-        <target>بروزرسانی Live</target>
+        <target>بروزرسانی لایو</target>
       </trans-unit>
       <trans-unit id="tl_settings.static_legend">
         <source>Static resources</source>

@@ -125,6 +125,14 @@
         <source>No conflicts detected.</source>
         <target>Nejsou zjištěny žádné konflikty.</target>
       </trans-unit>
+      <trans-unit id="tl_theme.store.0">
+        <source>Theme store</source>
+        <target>Obchod vzhledů</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.store.1">
+        <source>Find more themes in the Contao theme store</source>
+        <target>Najít více vzhledů v obchodě vzhledů pro Contao</target>
+      </trans-unit>
       <trans-unit id="tl_theme.new.0">
         <source>New theme</source>
         <target>Nový vzhled</target>

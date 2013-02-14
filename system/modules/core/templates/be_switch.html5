@@ -4,6 +4,7 @@
 <meta charset="<?php echo $this->charset; ?>">
 <title>Contao Open Source CMS <?php echo VERSION; ?></title>
 <base href="<?php echo $this->base; ?>">
+<meta name="generator" content="Contao Open Source CMS">
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('assets/mootools/stylect/css/stylect.css');
@@ -54,7 +55,7 @@
 </select> 
 <input type="submit" class="tl_submit" value="<?php echo $this->apply; ?>"> 
 <input type="button" class="tl_submit" value="<?php echo $this->reload; ?>" onclick="parent.frames[1].location.reload()"> 
-<img src="<?php echo $this->closeSrc; ?>" width="12" height="12" alt="Close preview bar" class="close" onclick="parent.location=parent.frames[1].location">
+<img src="<?php echo $this->closeSrc; ?>" width="12" height="12" alt="Close preview bar" class="close" onclick="parent.location.href=parent.frames[1].location.href">
 </div>
 </form>
 </div>
