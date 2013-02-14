@@ -5,6 +5,9 @@ Version 2.11.10 (2013-XX-XX)
 ----------------------------
 
 ### Fixed
+Correctly load TinyMCE in IE7 and IE8 (see #5346).
+
+### Fixed
 Send the correct cache headers in "client cache only" mode (see #5358).
 
 ### Fixed
