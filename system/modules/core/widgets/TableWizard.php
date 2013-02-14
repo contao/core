@@ -293,7 +293,7 @@ class TableWizard extends \Widget
 			$this->Database->prepare("UPDATE " . $dc->table . " SET tableitems=? WHERE id=?")
 						   ->execute(serialize($arrTable), \Input::get('id'));
 
-			setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+			\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 			$this->redirect(str_replace('&key=table', '', \Environment::get('request')));
 		}
 

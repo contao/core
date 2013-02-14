@@ -172,7 +172,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 		'author' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_faq']['author'],
-			'default'                 => $this->User->id,
+			'default'                 => BackendUser::getInstance()->id,
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,

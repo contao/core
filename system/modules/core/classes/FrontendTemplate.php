@@ -124,10 +124,16 @@ class FrontendTemplate extends \Template
 			}
 		}
 
-		$intCache = null;
+		$intCache = 0;
 
-		// Cache the page if it is not protected
-		if (!isset($_GET['file']) && !isset($_GET['token']) && empty($_POST) && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && !$_SESSION['DISABLE_CACHE'] && !isset($_SESSION['LOGIN_ERROR']) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'server') && intval($objPage->cache) > 0 && !$objPage->protected)
+		// Decide whether the page shall be cached
+		if (!isset($_GET['file']) && !isset($_GET['token']) && empty($_POST) && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && !$_SESSION['DISABLE_CACHE'] && !isset($_SESSION['LOGIN_ERROR']) && intval($objPage->cache) > 0 && !$objPage->protected)
+		{
+			$intCache = time() + intval($objPage->cache);
+		}
+
+		// Server-side cache
+		if ($intCache > 0 && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'server'))
 		{
 			// If the request string is empty, use a special cache tag which considers the page language
 			if (\Environment::get('request') == '' || \Environment::get('request') == 'index.php')
@@ -159,22 +165,20 @@ class FrontendTemplate extends \Template
 			$strBuffer = $this->replaceInsertTags($strBuffer);
 			$strBuffer = $this->replaceDynamicScriptTags($strBuffer); // see #4203
 
-			$intCache = intval($objPage->cache) + time();
-			$strMd5CacheKey = md5($strCacheKey);
-
 			// Create the cache file
+			$strMd5CacheKey = md5($strCacheKey);
 			$objFile = new \File('system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html', true);
 			$objFile->write('<?php' . " /* $strCacheKey */ \$expire = $intCache; \$content = '{$this->strContentType}'; ?>\n");
 			$objFile->append($this->minifyHtml($strBuffer), '');
 			$objFile->close();
 		}
 
-		// Send cache headers
+		// Client-side cache
 		if (!headers_sent())
 		{
-			if ($intCache !== null && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
+			if ($intCache > 0 && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
 			{
-				header('Cache-Control: public, max-age=' . ($intCache -  time()));
+				header('Cache-Control: public, max-age=' . ($intCache - time()));
 				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');
 				header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 				header('Pragma: public');

@@ -89,8 +89,65 @@ The pageTree widget is now sortable just like the fileTree widget and the custom
 and quick navigation modules consider the custom order (see #4936).
 
 
-Version 3.0.4 (2013-XX-XX)
+Version 3.0.4 (2013-02-14)
 --------------------------
+
+### Fixed
+Correctly split the words when adding to the search index (see #5363).
+
+### Fixed
+If an eagerly loaded relation does not exist, return `null` instead of an empty
+model in `Model::getRelated()` (see #5356).
+
+### Fixed
+Throw an exception if the file system and the database are out of sync and
+show a meaningful error message (see #5101).
+
+### Fixed
+Return an associative array in `Model_Collection::fetchEach()` if the requested
+field is **not** `id` (see #5134).
+
+### Fixed
+Make eagerly loaded "pageTree" fields mandatory again (see #4866).
+
+### Fixed
+Do not use forward pages as upper page in the book navigation (see #5074).
+
+### Fixed
+Correctly show the "empty news list" note (see #5304).
+
+### Fixed
+Correctly sort values by an external order field (see #5322).
+
+### Fixed
+Define the login status constants in the back end (see #4099, #5279).
+
+### Fixed
+Make sure the drag'n'drop hints do not overlay the field labels (see #5338).
+
+### Fixed
+Apply the color picker to single fields as well (see #5240).
+
+### Fixed
+Correctly close the SimpleModal overlay with the escape key (see #5297).
+
+### Updated
+Update TinyMCE to version 3.5.8 (see #5273).
+
+### Fixed
+Correctly check for nested arrays in `Widget::isValidOption()` (see #5328).
+
+### Fixed
+Preserve the order of multi source fields when exporting a theme (see #5237).
+
+### Fixed
+Also check whether the target exists when creating new folders (see #5260).
+
+### Fixed
+Load the core `autoload.php` files first (see #5261).
+
+### Fixed
+Support `null` as column default value in the DCA (see #5252).
 
 ### New
 Added the `$blnDoNotCreate` option to the `Files` class, which makes the class

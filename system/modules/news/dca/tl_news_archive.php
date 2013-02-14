@@ -156,7 +156,7 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'foreignKey'              => 'tl_page.title',
-			'eval'                    => array('fieldType'=>'radio'),
+			'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
 		),

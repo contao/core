@@ -107,7 +107,7 @@
 
   <?php if ($this->pageOffset): ?>
     <script>Backend.vScrollTo(<?php echo $this->pageOffset; ?>)</script>
-    <?php setcookie('BE_PAGE_OFFSET', 0, 0, '/'); ?>
+    <?php System::setCookie('BE_PAGE_OFFSET', 0, 0); ?>
   <?php endif; ?>
 
   <script>

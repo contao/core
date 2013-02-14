@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_templates.invalid">
         <source>Invalid target directory &quot;%s&quot;!</source>
-        <target>保存先のディレクトリ&quot;%s&quot;が無効です。</target>
+        <target>保存先のディレクトリ&quot;%s&quot;が不正です。</target>
       </trans-unit>
       <trans-unit id="tl_templates.new_tpl.0">
         <source>New template</source>

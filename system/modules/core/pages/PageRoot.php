@@ -49,7 +49,8 @@ class PageRoot extends \Frontend
 
 		if (!$blnReturn)
 		{
-			$this->redirect($this->generateFrontendUrl($objNextPage->row()));
+			global $objPage;
+			$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objPage->language));
 		}
 
 		return $objNextPage->id;

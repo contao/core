@@ -515,7 +515,7 @@ class Newsletter extends \Backend
 				\Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['invalid'], $intInvalid));
 			}
 
-			setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+			\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 			$this->reload();
 		}
 

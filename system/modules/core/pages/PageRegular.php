@@ -500,8 +500,27 @@ class PageRegular extends \Frontend
 			// Consider the sorting order (see #5038)
 			if ($objLayout->orderExt != '')
 			{
-				$arrOrdered = array_map('intval', explode(',', $objLayout->orderExt));
-				$arrExternal = array_merge($arrOrdered, array_diff($arrExternal, $arrOrdered));
+				// Turn the order string into an array and remove all values
+				$arrOrder = explode(',', $objLayout->orderExt);
+				$arrOrder = array_flip(array_map('intval', $arrOrder));
+				$arrOrder = array_map(function(){}, $arrOrder);
+
+				// Move the matching elements to their position in $arrOrder
+				foreach ($arrExternal as $k=>$v)
+				{
+					$arrOrder[$v] = $v;
+					unset($arrExternal[$k]);
+				}
+
+				// Append the left-over style sheets at the end
+				if (!empty($arrExternal))
+				{
+					$arrOrder = array_merge($arrOrder, array_values($arrExternal));
+				}
+
+				// Remove empty (unreplaced) entries
+				$arrExternal = array_filter($arrOrder);
+				unset($arrOrder);
 			}
 
 			// Get the file entries from the database

@@ -19,11 +19,11 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.cc.0">
         <source>Conditional comment</source>
-        <target>Conditional comment</target>
+        <target>Podmíněný komentář</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.cc.1">
         <source>Conditional comments allow you to create Internet Explorer specific style sheets (e.g. &lt;em&gt;if lt IE 9&lt;/em&gt;).</source>
-        <target>Conditional comment umožňuje nadefinování specifických stylů pro Internet Expolover.</target>
+        <target>Podmíněný komentář umožňuje nadefinování specifických stylů pro Internet Expolover.</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.media.0">
         <source>Media types</source>

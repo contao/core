@@ -421,7 +421,16 @@ abstract class Backend extends \Controller
 				}
 			}
 
-			return $dc->$act();
+			try
+			{
+				return $dc->$act();
+			}
+			catch (\OutOfSyncException $e)
+			{
+				\Message::addError($e->getMessage());
+				\Message::addInfo($GLOBALS['TL_LANG']['ERR']['dbOutOfSync']);
+				$this->redirect($this->getReferer());
+			}
 		}
 
 		return null;
@@ -479,7 +488,7 @@ abstract class Backend extends \Controller
 			elseif ($objPages->type == 'regular')
 			{
 				// Searchable and not protected
-				if (!$objPages->noSearch && (!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
+				if (!$objPages->noSearch && (!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected'] && (!$blnIsSitemap || $objPages->sitemap == 'map_always')) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
 				{
 					// Published
 					if ($objPages->published && (!$objPages->start || $objPages->start < $time) && (!$objPages->stop || $objPages->stop > $time))

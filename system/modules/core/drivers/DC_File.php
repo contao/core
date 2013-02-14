@@ -323,7 +323,7 @@ class DC_File extends \DataContainer implements \editable
 			if (\Input::post('saveNclose'))
 			{
 				\Message::reset();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 				$this->redirect($this->getReferer());
 			}
 

@@ -375,6 +375,9 @@ a.tl_submit:hover {
 .long .tl_text {
 	width:663px;
 }
+.long .tl_select {
+	width:670px;
+}
 .m12 {
 	margin:12px 0;
 }

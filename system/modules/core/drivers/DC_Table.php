@@ -597,7 +597,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Get all default values for the new entry
 		foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'] as $k=>$v)
 		{
-			if (isset($v['default']))
+			// Use array_key_exists here (see #5252)
+			if (array_key_exists('default', $v))
 			{
 				$this->set[$k] = is_array($v['default']) ? serialize($v['default']) : $v['default'];
 
@@ -805,7 +806,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					// Reset doNotCopy and fallback fields to their default value
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['doNotCopy'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['fallback'])
 					{
-						$v = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default'] ? (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) ? serialize($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) : '';
+						// Use array_key_exists to allow NULL (see #5252)
+						if (array_key_exists('default', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]))
+						{
+							$v = is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) ? serialize($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default'];
+						}
 
 						// Encrypt the default value (see #3740)
 						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['encrypt'])
@@ -998,7 +1003,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						// Reset all unique, doNotCopy and fallback fields to their default value
 						if ($GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['unique'] || $GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['doNotCopy'] || $GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['fallback'])
 						{
-							$vv = $GLOBALS['TL_DCA'][$v]['fields'][$kk]['default'] ? ((is_array($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default'])) ? serialize($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) : $GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) : '';
+							// Use array_key_exists to allow NULL (see #5252)
+							if (array_key_exists('default', $GLOBALS['TL_DCA'][$v]['fields'][$kk]))
+							{
+								$vv = is_array($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) ? serialize($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) : $GLOBALS['TL_DCA'][$v]['fields'][$kk]['default'];
+							}
 
 							// Encrypt the default value (see #3740)
 							if ($GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['encrypt'])
@@ -1947,13 +1956,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			if (isset($_POST['saveNclose']))
 			{
 				\Message::reset();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 				$this->redirect($this->getReferer());
 			}
 			elseif (isset($_POST['saveNedit']))
 			{
 				\Message::reset();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 				$strUrl = $this->addToUrl($GLOBALS['TL_DCA'][$this->strTable]['list']['operations']['edit']['href']);
 
 				$strUrl = preg_replace('/(&amp;)?s2e=[^&]*/i', '', $strUrl);
@@ -1964,7 +1973,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			elseif (isset($_POST['saveNback']))
 			{
 				\Message::reset();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 
 				if ($this->ptable == '')
 				{
@@ -1983,7 +1992,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			elseif (isset($_POST['saveNcreate']))
 			{
 				\Message::reset();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 				$strUrl = \Environment::get('script') . '?do=' . \Input::get('do');
 
 				if (isset($_GET['table']))
@@ -2157,8 +2166,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					$this->strInputName = $v.'_'.$this->intId;
 					$formFields[] = $v.'_'.$this->intId;
 
-					// Set the default value and try to load the current value from DB
-					$this->varValue = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default'] ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default'] : '';
+					// Set the default value and try to load the current value from DB (see #5252)
+					if (array_key_exists('default', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]))
+					{
+						$this->varValue = is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default']) ? serialize($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default']) : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default'];
+					}
 
 					if ($objRow->$v !== false)
 					{
@@ -2286,7 +2298,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				if (\Input::post('saveNclose'))
 				{
-					setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+					\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 					$this->redirect($this->getReferer());
 				}
 
@@ -2572,7 +2584,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				if (\Input::post('saveNclose'))
 				{
-					setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+					\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 					$this->redirect($this->getReferer());
 				}
 

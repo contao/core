@@ -268,8 +268,7 @@ var SimpleModal = new Class({
                window.removeEvent("resize", this._display);
                // Remove Event Resize
                if(this.options.keyEsc){
-                 var fixEV = Browser.name != 'ie' ? "keydown" : "onkeydown";
-                 window.removeEvent(fixEV, this._removeSM);
+                 window.removeEvent("keydown", this._removeSM);
                }
                
                // Remove Overlay
@@ -440,13 +439,19 @@ var SimpleModal = new Class({
        if(this.options.keyEsc){
          this._removeSM = function(e){
            if( e.key == "esc" ) this.hide();
-         }.bind(this)
+         }.bind(this);
           // Remove Event Resize
          if(this.options.keyEsc){
-           var fixEV = Browser.name != 'ie' ? "keydown" : "onkeydown";
-           window.addEvent(fixEV, this._removeSM );
+           window.addEvent("keydown", this._removeSM );
+           // PATCH: also listen to the event from within the iframe (see #5297)
+           if (iframe = $("simple-modal").getElement('iframe')) {
+             iframe.addEvent('load', function() {
+               iframe.contentWindow.addEvent("keydown", this._removeSM);
+			 }.bind(this));
+           }
+           // PATCH EOF
          }
-  		  }
+       }
      },
       
     /**

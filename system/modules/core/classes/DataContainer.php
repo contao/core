@@ -337,15 +337,18 @@ class DataContainer extends \Backend
 		// Color picker
 		if ($arrData['eval']['colorpicker'])
 		{
+			// Support single fields as well (see #5240)
+			$strKey = $arrData['eval']['multiple'] ? $this->strField . '_0' : $this->strField;
+
 			$wizard .= ' ' . \Image::getHtml('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['colorpicker']).'" id="moo_' . $this->strField . '"') . '
   <script>
     window.addEvent("domready", function() {
       new MooRainbow("moo_' . $this->strField . '", {
-        id:"ctrl_' . $this->strField . '_0",
-        startColor:((cl = $("ctrl_' . $this->strField . '_0").value.hexToRgb(true)) ? cl : [255, 0, 0]),
+        id:"ctrl_' . $strKey . '",
+        startColor:((cl = $("ctrl_' . $strKey . '").value.hexToRgb(true)) ? cl : [255, 0, 0]),
         imgPath:"assets/mootools/colorpicker/'.COLORPICKER.'/images/",
         onComplete: function(color) {
-          $("ctrl_' . $this->strField . '_0").value = color.hex.replace("#", "");
+          $("ctrl_' . $strKey . '").value = color.hex.replace("#", "");
         }
       });
     });

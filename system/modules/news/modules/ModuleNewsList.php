@@ -100,7 +100,8 @@ class ModuleNewsList extends \ModuleNews
 
 		if ($intTotal < 1)
 		{
-			$this->Template->articles = array();
+			$this->Template = new \FrontendTemplate('mod_newsarchive_empty');
+			$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyList'];
 			return;
 		}
 
@@ -160,6 +161,7 @@ class ModuleNewsList extends \ModuleNews
 		if ($objArticles === null)
 		{
 			$this->Template = new \FrontendTemplate('mod_newsarchive_empty');
+			$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyList'];
 		}
 		else
 		{
@@ -167,6 +169,5 @@ class ModuleNewsList extends \ModuleNews
 		}
 
 		$this->Template->archives = $this->news_archives;
-		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyList'];
 	}
 }

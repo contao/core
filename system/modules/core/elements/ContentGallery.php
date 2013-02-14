@@ -214,13 +214,15 @@ class ContentGallery extends \ContentElement
 			case 'custom':
 				if ($this->orderSRC != '')
 				{
-					// Turn the order string into an array
-					$arrOrder = array_flip(array_map('intval', explode(',', $this->orderSRC)));
+					// Turn the order string into an array and remove all values
+					$arrOrder = explode(',', $this->orderSRC);
+					$arrOrder = array_flip(array_map('intval', $arrOrder));
+					$arrOrder = array_map(function(){}, $arrOrder);
 
 					// Move the matching elements to their position in $arrOrder
 					foreach ($images as $k=>$v)
 					{
-						if (isset($arrOrder[$v['id']]))
+						if (array_key_exists($v['id'], $arrOrder))
 						{
 							$arrOrder[$v['id']] = $v;
 							unset($images[$k]);
@@ -230,19 +232,11 @@ class ContentGallery extends \ContentElement
 					// Append the left-over images at the end
 					if (!empty($images))
 					{
-						$arrOrder = array_merge($arrOrder, $images);
+						$arrOrder = array_merge($arrOrder, array_values($images));
 					}
 
-					// Remove empty or numeric (not replaced) entries
-					foreach ($arrOrder as $k=>$v)
-					{
-						if ($v == '' || is_numeric($v))
-						{
-							unset($arrOrder[$k]);
-						}
-					}
-
-					$images = $arrOrder;
+					// Remove empty (unreplaced) entries
+					$images = array_filter($arrOrder);
 					unset($arrOrder);
 				}
 				break;

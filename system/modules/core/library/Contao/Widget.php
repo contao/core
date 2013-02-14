@@ -804,7 +804,7 @@ abstract class Widget extends \Controller
 				case 'date':
 					if (!\Validator::isDate($varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], \Date::getInputFormat($GLOBALS['TL_CONFIG']['dateFormat'])));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], \Date::getInputFormat(\Date::getNumericDateFormat())));
 					}
 					else
 					{
@@ -824,7 +824,7 @@ abstract class Widget extends \Controller
 				case 'time':
 					if (!\Validator::isTime($varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], \Date::getInputFormat($GLOBALS['TL_CONFIG']['timeFormat'])));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], \Date::getInputFormat(\Date::getNumericTimeFormat())));
 					}
 					break;
 
@@ -832,7 +832,7 @@ abstract class Widget extends \Controller
 				case 'datim':
 					if (!\Validator::isDatim($varInput))
 					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], \Date::getInputFormat($GLOBALS['TL_CONFIG']['datimFormat'])));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], \Date::getInputFormat(\Date::getNumericDatimFormat())));
 					}
 					else
 					{
@@ -1114,10 +1114,10 @@ abstract class Widget extends \Controller
 
 		foreach ($varInput as $strInput)
 		{
-			foreach ($this->arrOptions as $k=>$v)
+			foreach ($this->arrOptions as $v)
 			{
 				// Single dimensional array
-				if (is_numeric($k))
+				if (array_key_exists('value', $v))
 				{
 					if ($strInput == $v['value'])
 					{
