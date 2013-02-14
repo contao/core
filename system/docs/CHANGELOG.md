@@ -1,8 +1,11 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 3.0.4 (2013-XX-XX)
+Version 3.0.4 (2013-02-14)
 --------------------------
+
+### Fixed
+Correctly split the words when adding to the search index (see #5363).
 
 ### Fixed
 If an eagerly loaded relation does not exist, return `null` instead of an empty
