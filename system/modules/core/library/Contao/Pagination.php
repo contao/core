@@ -25,7 +25,7 @@ namespace Contao;
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
-class Pagination extends \Frontend
+class Pagination
 {
 
 	/**
@@ -135,8 +135,6 @@ class Pagination extends \Frontend
 	 */
 	public function __construct($intRows, $intPerPage, $intNumberOfLinks=7, $strParameter='page', \Template $objTemplate=null)
 	{
-		parent::__construct();
-
 		$this->intPage = 1;
 		$this->intRows = (int) $intRows;
 		$this->intRowsPerPage = (int) $intPerPage;
