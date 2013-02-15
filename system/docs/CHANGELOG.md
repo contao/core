@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### New
+Optionally connect to the database via socket (see #5181).
+
 ### Improved
 Allow to scroll the page when moving elements via drag and drop (see #5081).
 
