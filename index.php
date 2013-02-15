@@ -253,9 +253,13 @@ class Index extends Frontend
 				break;
 
 			default:
-				$objHandler->generate($objPage);
+				$objHandler->generate($objPage, true);
 				break;
 		}
+
+		// If we get here, something went wrong (see #4277)
+		$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+		$objHandler->generate($pageId);
 
 		// Stop the script (see #4565)
 		exit;

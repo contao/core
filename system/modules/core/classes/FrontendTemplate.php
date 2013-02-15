@@ -52,8 +52,9 @@ class FrontendTemplate extends \Template
 
 	/**
 	 * Parse the template file, replace insert tags and print it to the screen
+	 * @param boolean
 	 */
-	public function output()
+	public function output($blnCheckRequest=false)
 	{
 		global $objPage;
 
@@ -81,11 +82,11 @@ class FrontendTemplate extends \Template
 
 				if ($GLOBALS['TL_CONFIG']['useAutoItem'] && ($key == 'auto_item' || in_array($key, $GLOBALS['TL_AUTO_ITEM'])))
 				{
-					$strParams .= '/' . \Input::get($key);
+					$strParams .= '/' . \Input::get($key, false, true);
 				}
 				else
 				{
-					$strParams .= '/' . $key . '/' . \Input::get($key);
+					$strParams .= '/' . $key . '/' . \Input::get($key, false, true);
 				}
 			}
 		}
@@ -196,6 +197,12 @@ class FrontendTemplate extends \Template
 		$this->strBuffer = $this->replaceInsertTags($strBuffer, false);
 		$this->strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $this->strBuffer);
 		$this->strBuffer = $this->replaceDynamicScriptTags($this->strBuffer); // see #4203
+
+		// Not all $_GET parameters have been used (see #4277)
+		if ($blnCheckRequest && \Input::hasUnusedGet())
+		{
+			return;
+		}
 
 		// Index page if searching is allowed and there is no back end user
 		if ($GLOBALS['TL_CONFIG']['enableSearch'] && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)
