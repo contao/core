@@ -263,6 +263,10 @@ abstract class System
 			case 303:
 				header('HTTP/1.1 303 See Other');
 				break;
+
+			case 307:
+				header('HTTP/1.1 307 Temporary Redirect');
+				break;
 		}
 
 		// Check the target address

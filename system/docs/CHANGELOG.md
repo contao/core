@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### New
+Added the redirect status code 307 to `System::redirect()` (see #5375).
+
+### New
 Added the `File::sendToBrowser()` method (see #4696).
 
 ### Changed
