@@ -1959,18 +1959,7 @@ abstract class Controller extends \System
 		session_write_close();
 
 		// Open the "save as …" dialogue
-		header('Content-Type: ' . $objFile->mime);
-		header('Content-Transfer-Encoding: binary');
-		header('Content-Disposition: attachment; filename="' . $objFile->basename . '"');
-		header('Content-Length: ' . $objFile->filesize);
-		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-		header('Pragma: public');
-		header('Expires: 0');
-		header('Connection: close');
-
-		$resFile = fopen(TL_ROOT . '/' . $strFile, 'rb');
-		fpassthru($resFile);
-		fclose($resFile);
+		$objFile->sendToBrowser();
 
 		// HOOK: post download callback
 		if (isset($GLOBALS['TL_HOOKS']['postDownload']) && is_array($GLOBALS['TL_HOOKS']['postDownload']))

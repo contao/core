@@ -476,6 +476,26 @@ class File extends \System
 
 
 	/**
+	 * Send the file to the browser
+	 */
+	public function sendToBrowser()
+	{
+		header('Content-Type: ' . $this->mime);
+		header('Content-Transfer-Encoding: binary');
+		header('Content-Disposition: attachment; filename="' . $this->basename . '"');
+		header('Content-Length: ' . $this->filesize);
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Pragma: public');
+		header('Expires: 0');
+		header('Connection: close');
+
+		$resFile = fopen(TL_ROOT . '/' . $this->strFile, 'rb');
+		fpassthru($resFile);
+		fclose($resFile);
+	}
+
+
+	/**
 	 * Write data to a file
 	 *
 	 * @param mixed  $varData The data to be written
