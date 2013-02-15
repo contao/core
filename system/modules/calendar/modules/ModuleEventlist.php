@@ -121,14 +121,14 @@ class ModuleEventlist extends \Events
 		{
 			$this->Date = new \Date(\Input::get('month'), 'Ym');
 			$this->cal_format = 'cal_month';
-			$this->headline .= ' ' . $this->parseDate('F Y', $this->Date->tstamp);
+			$this->headline .= ' ' . \Date::parse('F Y', $this->Date->tstamp);
 		}
 		// Display day
 		elseif ($blnDynamicFormat && \Input::get('day'))
 		{
 			$this->Date = new \Date(\Input::get('day'), 'Ymd');
 			$this->cal_format = 'cal_day';
-			$this->headline .= ' ' . $this->parseDate($objPage->dateFormat, $this->Date->tstamp);
+			$this->headline .= ' ' . \Date::parse($objPage->dateFormat, $this->Date->tstamp);
 		}
 		// Display all events or upcoming/past events
 		else
@@ -168,7 +168,7 @@ class ModuleEventlist extends \Events
 				foreach ($events as $event)
 				{
 					$event['firstDay'] = $GLOBALS['TL_LANG']['DAYS'][date('w', $day)];
-					$event['firstDate'] = $this->parseDate($objPage->dateFormat, $day);
+					$event['firstDate'] = \Date::parse($objPage->dateFormat, $day);
 					$event['datetime'] = date('Y-m-d', $day);
 
 					$arrEvents[] = $event;

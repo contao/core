@@ -512,86 +512,6 @@ abstract class System
 
 
 	/**
-	 * Parse a date format string and translate textual representations
-	 *
-	 * @param string  $strFormat The date format string
-	 * @param integer $intTstamp An optional timestamp
-	 *
-	 * @return string The textual representation of the date
-	 */
-	public static function parseDate($strFormat, $intTstamp=null)
-	{
-		$strModified = str_replace
-		(
-			array('l', 'D', 'F', 'M'),
-			array('w::1', 'w::2', 'n::3', 'n::4'),
-			$strFormat
-		);
-
-		if ($intTstamp === null)
-		{
-			$strDate = date($strModified);
-		}
-		elseif (!is_numeric($intTstamp))
-		{
-			return '';
-		}
-		else
-		{
-			$strDate = date($strModified, $intTstamp);
-		}
-
-		if (strpos($strDate, '::') === false)
-		{
-			return $strDate;
-		}
-
-		if (!$GLOBALS['TL_LANG']['MSC']['dayShortLength'])
-		{
-			$GLOBALS['TL_LANG']['MSC']['dayShortLength'] = 3;
-		}
-
-		if (!$GLOBALS['TL_LANG']['MSC']['monthShortLength'])
-		{
-			$GLOBALS['TL_LANG']['MSC']['monthShortLength'] = 3;
-		}
-
-		$strReturn = '';
-		$chunks = preg_split("/([0-9]{1,2}::[1-4])/", $strDate, -1, PREG_SPLIT_DELIM_CAPTURE);
-
-		foreach ($chunks as $chunk)
-		{
-			list($index, $flag) = explode('::', $chunk);
-
-			switch ($flag)
-			{
-				case 1:
-					$strReturn .= $GLOBALS['TL_LANG']['DAYS'][$index];
-					break;
-
-				case 2:
-					$strReturn .= $GLOBALS['TL_LANG']['DAYS_SHORT'][$index];
-					break;
-
-				case 3:
-					$strReturn .= $GLOBALS['TL_LANG']['MONTHS'][($index - 1)];
-					break;
-
-				case 4:
-					$strReturn .= $GLOBALS['TL_LANG']['MONTHS_SHORT'][($index - 1)];
-					break;
-
-				default:
-					$strReturn .= $chunk;
-					break;
-			}
-		}
-
-		return $strReturn;
-	}
-
-
-	/**
 	 * Urlencode a file path preserving slashes
 	 *
 	 * @param string $strPath The file path
@@ -861,6 +781,22 @@ abstract class System
 		}
 
 		return rtrim($return);
+	}
+
+
+	/**
+	 * Parse a date format string and translate textual representations
+	 *
+	 * @param string  $strFormat The date format string
+	 * @param integer $intTstamp An optional timestamp
+	 *
+	 * @return string The textual representation of the date
+	 *
+	 * @deprecated Use Date::parse() instead
+	 */
+	public static function parseDate($strFormat, $intTstamp=null)
+	{
+		return \Date::parse($strFormat, $intTstamp);
 	}
 
 

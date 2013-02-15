@@ -734,15 +734,15 @@ class tl_calendar_events extends Backend
 
 		if ($span > 0)
 		{
-			$date = $this->parseDate($GLOBALS['TL_CONFIG'][($arrRow['addTime'] ? 'datimFormat' : 'dateFormat')], $arrRow['startTime']) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG'][($arrRow['addTime'] ? 'datimFormat' : 'dateFormat')], $arrRow['endTime']);
+			$date = Date::parse($GLOBALS['TL_CONFIG'][($arrRow['addTime'] ? 'datimFormat' : 'dateFormat')], $arrRow['startTime']) . ' - ' . Date::parse($GLOBALS['TL_CONFIG'][($arrRow['addTime'] ? 'datimFormat' : 'dateFormat')], $arrRow['endTime']);
 		}
 		elseif ($arrRow['startTime'] == $arrRow['endTime'])
 		{
-			$date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $arrRow['startTime']) . ($arrRow['addTime'] ? ' ' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['startTime']) : '');
+			$date = Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $arrRow['startTime']) . ($arrRow['addTime'] ? ' ' . Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['startTime']) : '');
 		}
 		else
 		{
-			$date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $arrRow['startTime']) . ($arrRow['addTime'] ? ' ' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['startTime']) . '-' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['endTime']) : '');
+			$date = Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $arrRow['startTime']) . ($arrRow['addTime'] ? ' ' . Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['startTime']) . '-' . Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['endTime']) : '');
 		}
 
 		return '<div class="tl_content_left">' . $arrRow['title'] . ' <span style="color:#b3b3b3;padding-left:3px">[' . $date . ']</span></div>';

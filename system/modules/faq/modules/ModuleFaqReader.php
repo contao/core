@@ -156,7 +156,7 @@ class ModuleFaqReader extends \Module
 			$this->addEnclosuresToTemplate($this->Template, $objFaq->row());
 		}
 
-		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($objPage->dateFormat, $objFaq->tstamp), $objFaq->getRelated('author')->name);
+		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], \Date::parse($objPage->dateFormat, $objFaq->tstamp), $objFaq->getRelated('author')->name);
 
 		// HOOK: comments extension required
 		if ($objFaq->noComments || !in_array('comments', $this->Config->getActiveModules()))

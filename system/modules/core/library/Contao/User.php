@@ -399,14 +399,14 @@ abstract class User extends \System
 			if ($this->start != '' && $this->start > $time)
 			{
 				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-				$this->log('The account was not active yet (activation date: ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->start) . ')', get_class($this) . ' login()', TL_ACCESS);
+				$this->log('The account was not active yet (activation date: ' . \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $this->start) . ')', get_class($this) . ' login()', TL_ACCESS);
 				return false;
 			}
 
 			if ($this->stop != '' && $this->stop < $time)
 			{
 				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-				$this->log('The account was not active anymore (deactivation date: ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->stop) . ')', get_class($this) . ' login()', TL_ACCESS);
+				$this->log('The account was not active anymore (deactivation date: ' . \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $this->stop) . ')', get_class($this) . ' login()', TL_ACCESS);
 				return false;
 			}
 		}

@@ -116,9 +116,9 @@ class ModuleNewsletterList extends \Module
 					'subject' => $objNewsletter->subject,
 					'title' => strip_insert_tags($objNewsletter->subject),
 					'href' => sprintf($strUrl, $strAlias),
-					'date' => $this->parseDate($objPage->dateFormat, $objNewsletter->date),
-					'datim' => $this->parseDate($objPage->datimFormat, $objNewsletter->date),
-					'time' => $this->parseDate($objPage->timeFormat, $objNewsletter->date),
+					'date' => \Date::parse($objPage->dateFormat, $objNewsletter->date),
+					'datim' => \Date::parse($objPage->datimFormat, $objNewsletter->date),
+					'time' => \Date::parse($objPage->timeFormat, $objNewsletter->date),
 					'channel' => $objNewsletter->channel
 				);
 			}

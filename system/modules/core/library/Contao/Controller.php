@@ -663,7 +663,7 @@ abstract class Controller extends \System
 			{
 				// Date
 				case 'date':
-					$arrCache[$strTag] = $this->parseDate($elements[1] ?: $GLOBALS['TL_CONFIG']['dateFormat']);
+					$arrCache[$strTag] = \Date::parse($elements[1] ?: $GLOBALS['TL_CONFIG']['dateFormat']);
 					break;
 
 				// Accessibility tags
@@ -761,15 +761,15 @@ abstract class Controller extends \System
 
 						if ($rgxp == 'date')
 						{
-							$arrCache[$strTag] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value);
+							$arrCache[$strTag] = \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $value);
 						}
 						elseif ($rgxp == 'time')
 						{
-							$arrCache[$strTag] = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $value);
+							$arrCache[$strTag] = \Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $value);
 						}
 						elseif ($rgxp == 'datim')
 						{
-							$arrCache[$strTag] = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $value);
+							$arrCache[$strTag] = \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $value);
 						}
 						elseif (is_array($value))
 						{
@@ -1203,7 +1203,7 @@ abstract class Controller extends \System
 
 					if ($objUpdate->numRows)
 					{
-						$arrCache[$strTag] = $this->parseDate($elements[1] ?: $GLOBALS['TL_CONFIG']['datimFormat'], max($objUpdate->tc, $objUpdate->tn, $objUpdate->te));
+						$arrCache[$strTag] = \Date::parse($elements[1] ?: $GLOBALS['TL_CONFIG']['datimFormat'], max($objUpdate->tc, $objUpdate->tn, $objUpdate->te));
 					}
 					break;
 

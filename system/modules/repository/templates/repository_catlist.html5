@@ -131,7 +131,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
           </tr>
           <tr class="info">
             <th><?php echo $text['releasedate'][0]; ?></th>
-            <td><?php echo $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $ext->releasedate); ?></td>
+            <td><?php echo Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $ext->releasedate); ?></td>
             <th><?php echo $text['approvedForLabel']; ?></th>
             <td><?php printf($text['approvedForText'], Repository::formatShortCoreVersion($ext->coreminversion), Repository::formatShortCoreVersion($ext->coremaxversion)); ?></td>
           </tr>

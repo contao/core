@@ -347,11 +347,11 @@ class Calendar extends \Frontend
 		// Add date
 		if ($span > 0)
 		{
-			$title = $this->parseDate($objPage->$format, $intStart) . ' - ' . $this->parseDate($objPage->$format, $intEnd);
+			$title = \Date::parse($objPage->$format, $intStart) . ' - ' . \Date::parse($objPage->$format, $intEnd);
 		}
 		else
 		{
-			$title = $this->parseDate($objPage->dateFormat, $intStart) . ($objEvent->addTime ? ' (' . $this->parseDate($objPage->timeFormat, $intStart) . (($intStart < $intEnd) ? ' - ' . $this->parseDate($objPage->timeFormat, $intEnd) : '') . ')' : '');
+			$title = \Date::parse($objPage->dateFormat, $intStart) . ($objEvent->addTime ? ' (' . \Date::parse($objPage->timeFormat, $intStart) . (($intStart < $intEnd) ? ' - ' . \Date::parse($objPage->timeFormat, $intEnd) : '') . ')' : '');
 		}
 
 		// Add title and link

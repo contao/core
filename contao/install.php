@@ -626,7 +626,7 @@ class InstallTool extends Backend
 			}
 		}
 
-		$this->Template->dateImported = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $GLOBALS['TL_CONFIG']['exampleWebsite']);
+		$this->Template->dateImported = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $GLOBALS['TL_CONFIG']['exampleWebsite']);
 	}
 
 

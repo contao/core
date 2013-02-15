@@ -636,7 +636,7 @@ class tl_news extends Backend
 	 */
 	public function listNewsArticles($arrRow)
 	{
-		return '<div class="tl_content_left">' . $arrRow['headline'] . ' <span style="color:#b3b3b3;padding-left:3px">[' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']) . ']</span></div>';
+		return '<div class="tl_content_left">' . $arrRow['headline'] . ' <span style="color:#b3b3b3;padding-left:3px">[' . Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']) . ']</span></div>';
 	}
 
 

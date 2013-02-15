@@ -251,7 +251,7 @@ abstract class ModuleNews extends \Module
 			switch ($field)
 			{
 				case 'date':
-					$return['date'] = $this->parseDate($objPage->datimFormat, $objArticle->date);
+					$return['date'] = \Date::parse($objPage->datimFormat, $objArticle->date);
 					break;
 
 				case 'author':

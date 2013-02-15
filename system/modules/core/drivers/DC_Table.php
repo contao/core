@@ -473,15 +473,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'date')
 			{
-				$row[$i] = $value ? $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value) : '-';
+				$row[$i] = $value ? \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $value) : '-';
 			}
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'time')
 			{
-				$row[$i] = $value ? $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $value) : '-';
+				$row[$i] = $value ? \Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $value) : '-';
 			}
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'datim' || in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['flag'], array(5, 6, 7, 8, 9, 10)) || $i == 'tstamp')
 			{
-				$row[$i] = $value ? $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $value) : '-';
+				$row[$i] = $value ? \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $value) : '-';
 			}
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['multiple'])
 			{
@@ -1845,7 +1845,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				while ($objVersion->next())
 				{
 					$versions .= '
-  <option value="'.$objVersion->version.'"'.($objVersion->active ? ' selected="selected"' : '').'>'.$GLOBALS['TL_LANG']['MSC']['version'].' '.$objVersion->version.' ('.$this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objVersion->tstamp).') '.$objVersion->username.'</option>';
+  <option value="'.$objVersion->version.'"'.($objVersion->active ? ' selected="selected"' : '').'>'.$GLOBALS['TL_LANG']['MSC']['version'].' '.$objVersion->version.' ('.\Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objVersion->tstamp).') '.$objVersion->username.'</option>';
 				}
 
 				$version = '
@@ -3394,7 +3394,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 			elseif (in_array($GLOBALS['TL_DCA'][$table]['fields'][$v]['flag'], array(5, 6, 7, 8, 9, 10)))
 			{
-				$args[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objRow->$v);
+				$args[$k] = \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objRow->$v);
 			}
 			elseif ($GLOBALS['TL_DCA'][$table]['fields'][$v]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$table]['fields'][$v]['eval']['multiple'])
 			{
@@ -3622,15 +3622,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				}
 				elseif ($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'date')
 				{
-					$_v = $_v ? $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $_v) : '-';
+					$_v = $_v ? \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $_v) : '-';
 				}
 				elseif ($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'time')
 				{
-					$_v = $_v ? $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $_v) : '-';
+					$_v = $_v ? \Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $_v) : '-';
 				}
 				elseif ($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'datim')
 				{
-					$_v = $_v ? $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $_v) : '-';
+					$_v = $_v ? \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $_v) : '-';
 				}
 				elseif ($v == 'tstamp')
 				{
@@ -3642,7 +3642,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						$objMaxTstamp->tstamp = $objParent->tstamp;
 					}
 
-					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], max($objParent->tstamp, $objMaxTstamp->tstamp));
+					$_v = \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], max($objParent->tstamp, $objMaxTstamp->tstamp));
 				}
 				elseif (isset($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['foreignKey']))
 				{
@@ -4145,15 +4145,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					{
 						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['rgxp'] == 'date')
 						{
-							$args[$k] = $row[$v] ? $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $row[$v]) : '-';
+							$args[$k] = $row[$v] ? \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $row[$v]) : '-';
 						}
 						elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['rgxp'] == 'time')
 						{
-							$args[$k] = $row[$v] ? $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $row[$v]) : '-';
+							$args[$k] = $row[$v] ? \Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $row[$v]) : '-';
 						}
 						else
 						{
-							$args[$k] = $row[$v] ? $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $row[$v]) : '-';
+							$args[$k] = $row[$v] ? \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $row[$v]) : '-';
 						}
 					}
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['multiple'])
@@ -4868,7 +4868,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						}
 						else
 						{
-							$options[$v] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $v);
+							$options[$v] = \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $v);
 						}
 
 						unset($options[$k]);
@@ -5119,7 +5119,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 		elseif (in_array($mode, array(5, 6)))
 		{
-			$remoteNew = ($value != '') ? $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value) : '-';
+			$remoteNew = ($value != '') ? \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $value) : '-';
 		}
 		elseif (in_array($mode, array(7, 8)))
 		{

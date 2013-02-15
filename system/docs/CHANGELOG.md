@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### Changed
+Moved `System::parseDate()` to `Date::parse()`.
+
+### Changed
 Moved `Controller::prepareForWidget()` to `Widget::setAttributesFromDca()`.
 
 Make sure to always call the inherited method of the specific widget class and

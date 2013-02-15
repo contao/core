@@ -126,7 +126,7 @@ class ModuleNewsArchive extends \ModuleNews
 			$objDate = new \Date($strDate, 'Ym');
 			$intBegin = $objDate->monthBegin;
 			$intEnd = $objDate->monthEnd;
-			$this->headline .= ' ' . $this->parseDate('F Y', $objDate->tstamp);
+			$this->headline .= ' ' . \Date::parse('F Y', $objDate->tstamp);
 		}
 		// Display day
 		elseif (\Input::get('day'))
@@ -135,7 +135,7 @@ class ModuleNewsArchive extends \ModuleNews
 			$objDate = new \Date($strDate, 'Ymd');
 			$intBegin = $objDate->dayBegin;
 			$intEnd = $objDate->dayEnd;
-			$this->headline .= ' ' . $this->parseDate($objPage->dateFormat, $objDate->tstamp);
+			$this->headline .= ' ' . \Date::parse($objPage->dateFormat, $objDate->tstamp);
 		}
 		// Show all items
 		elseif ($this->news_jumpToCurrent == 'all_items')

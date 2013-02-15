@@ -175,7 +175,7 @@ class ModuleLogin extends \Module
 			if ($this->User->lastLogin > 0)
 			{
 				global $objPage;
-				$this->Template->lastLogin = sprintf($GLOBALS['TL_LANG']['MSC']['lastLogin'][1], $this->parseDate($objPage->datimFormat, $this->User->lastLogin));
+				$this->Template->lastLogin = sprintf($GLOBALS['TL_LANG']['MSC']['lastLogin'][1], \Date::parse($objPage->datimFormat, $this->User->lastLogin));
 			}
 
 			return;

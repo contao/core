@@ -551,7 +551,7 @@ class ModuleRegistration extends \Module
 
 			if ($k == 'dateOfBirth' && strlen($v))
 			{
-				$v = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $v);
+				$v = \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $v);
 			}
 
 			$strData .= $GLOBALS['TL_LANG']['tl_member'][$k][0] . ': ' . (is_array($v) ? implode(', ', $v) : $v) . "\n";

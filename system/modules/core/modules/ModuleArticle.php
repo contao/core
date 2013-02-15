@@ -92,7 +92,7 @@ class ModuleArticle extends \Module
 
 		// Add the modification date
 		$this->Template->timestamp = $this->tstamp;
-		$this->Template->date = $this->parseDate($objPage->datimFormat, $this->tstamp);
+		$this->Template->date = \Date::parse($objPage->datimFormat, $this->tstamp);
 
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')

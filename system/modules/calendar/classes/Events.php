@@ -207,13 +207,13 @@ abstract class Events extends \Module
 		$intDate = $intStart;
 		$intKey = date('Ymd', $intStart);
 		$span = \Calendar::calculateSpan($intStart, $intEnd);
-		$strDate = $this->parseDate($objPage->dateFormat, $intStart);
+		$strDate = \Date::parse($objPage->dateFormat, $intStart);
 		$strDay = $GLOBALS['TL_LANG']['DAYS'][date('w', $intStart)];
 		$strMonth = $GLOBALS['TL_LANG']['MONTHS'][(date('n', $intStart)-1)];
 
 		if ($span > 0)
 		{
-			$strDate = $this->parseDate($objPage->dateFormat, $intStart) . ' - ' . $this->parseDate($objPage->dateFormat, $intEnd);
+			$strDate = \Date::parse($objPage->dateFormat, $intStart) . ' - ' . \Date::parse($objPage->dateFormat, $intEnd);
 			$strDay = '';
 		}
 
@@ -223,15 +223,15 @@ abstract class Events extends \Module
 		{
 			if ($span > 0)
 			{
-				$strDate = $this->parseDate($objPage->datimFormat, $intStart) . ' - ' . $this->parseDate($objPage->datimFormat, $intEnd);
+				$strDate = \Date::parse($objPage->datimFormat, $intStart) . ' - ' . \Date::parse($objPage->datimFormat, $intEnd);
 			}
 			elseif ($intStart == $intEnd)
 			{
-				$strTime = $this->parseDate($objPage->timeFormat, $intStart);
+				$strTime = \Date::parse($objPage->timeFormat, $intStart);
 			}
 			else
 			{
-				$strTime = $this->parseDate($objPage->timeFormat, $intStart) . ' - ' . $this->parseDate($objPage->timeFormat, $intEnd);
+				$strTime = \Date::parse($objPage->timeFormat, $intStart) . ' - ' . \Date::parse($objPage->timeFormat, $intEnd);
 			}
 		}
 

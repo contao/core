@@ -398,7 +398,7 @@ class tl_faq extends Backend
 	public function listQuestions($arrRow)
 	{
 		$key = $arrRow['published'] ? 'published' : 'unpublished';
-		$date = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['tstamp']);
+		$date = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['tstamp']);
 
 		return '
 <div class="cte_type ' . $key . '"><strong>' . $arrRow['question'] . '</strong> - ' . $date . '</div>

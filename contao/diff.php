@@ -89,7 +89,7 @@ class DiffController extends Backend
 					}
 
 					$arrVersions[$objVersions->version] = $objVersions->row();
-					$arrVersions[$objVersions->version]['info'] = $GLOBALS['TL_LANG']['MSC']['version'].' '.$objVersions->version.' ('.$this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objVersions->tstamp).') '.$objVersions->username;
+					$arrVersions[$objVersions->version]['info'] = $GLOBALS['TL_LANG']['MSC']['version'].' '.$objVersions->version.' ('.Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objVersions->tstamp).') '.$objVersions->username;
 				}
 
 				// To
@@ -145,18 +145,18 @@ class DiffController extends Backend
 						// Convert date fields
 						if ($arrFields[$k]['eval']['rgxp'] == 'date')
 						{
-							$to[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $to[$k] ?: '');
-							$from[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $from[$k] ?: '');
+							$to[$k] = Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $to[$k] ?: '');
+							$from[$k] = Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $from[$k] ?: '');
 						}
 						elseif ($arrFields[$k]['eval']['rgxp'] == 'time')
 						{
-							$to[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $to[$k] ?: '');
-							$from[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $from[$k] ?: '');
+							$to[$k] = Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $to[$k] ?: '');
+							$from[$k] = Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $from[$k] ?: '');
 						}
 						elseif ($arrFields[$k]['eval']['rgxp'] == 'datim')
 						{
-							$to[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $to[$k] ?: '');
-							$from[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $from[$k] ?: '');
+							$to[$k] = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $to[$k] ?: '');
+							$from[$k] = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $from[$k] ?: '');
 						}
 
 						// Convert strings into arrays

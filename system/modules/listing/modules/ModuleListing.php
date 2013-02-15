@@ -413,19 +413,19 @@ class ModuleListing extends \Module
 		// Date
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'date')
 		{
-			$value = $this->parseDate($objPage->dateFormat, $value);
+			$value = \Date::parse($objPage->dateFormat, $value);
 		}
 
 		// Time
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'time')
 		{
-			$value = $this->parseDate($objPage->timeFormat, $value);
+			$value = \Date::parse($objPage->timeFormat, $value);
 		}
 
 		// Date and time
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'datim')
 		{
-			$value = $this->parseDate($objPage->datimFormat, $value);
+			$value = \Date::parse($objPage->datimFormat, $value);
 		}
 
 		// URLs
