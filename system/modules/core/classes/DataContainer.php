@@ -207,7 +207,7 @@ class DataContainer extends \Backend
 		$arrData['activeRecord'] = $this->activeRecord;
 		$arrData['eval']['required'] = $arrData['eval']['mandatory'];
 
-		$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable));
+		$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable, $this));
 
 		$objWidget->xlabel = $xlabel;
 		$objWidget->currentRecord = $this->intId;

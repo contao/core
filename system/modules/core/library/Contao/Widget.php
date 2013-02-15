@@ -1149,11 +1149,12 @@ abstract class Widget extends \Controller
 	 * @param string $strName  The field name in the form
 	 * @param mixed  $varValue The field value
 	 * @param string $strField The field name in the database
-	 * @param string $strTable The table name
+	 * @param string $strTable The table name in the database
+	 * @param object $objDca   An optional DataContainer object
 	 *
 	 * @return array An attributes array that can be passed to a widget
 	 */
-	public static function getAttributesFromDca($arrData, $strName, $varValue=null, $strField='', $strTable='')
+	public static function getAttributesFromDca($arrData, $strName, $varValue=null, $strField='', $strTable='', $objDca=null)
 	{
 		$arrAttributes = $arrData['eval'];
 
@@ -1197,7 +1198,7 @@ abstract class Widget extends \Controller
 		if (is_array($arrData['options_callback']))
 		{
 			$arrCallback = $arrData['options_callback'];
-			$arrData['options'] = static::importStatic($arrCallback[0])->$arrCallback[1]();
+			$arrData['options'] = static::importStatic($arrCallback[0])->$arrCallback[1]($objDca);
 		}
 
 		// Foreign key
