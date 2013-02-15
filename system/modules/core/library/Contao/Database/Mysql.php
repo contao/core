@@ -48,6 +48,11 @@ class Mysql extends \Database
 			$strHost .= ':' . $this->arrConfig['dbPort'];
 		}
 
+		if ($this->arrConfig['dbSocket'])
+		{
+			$strHost .= ':' . $this->arrConfig['dbSocket'];
+		}
+
 		if ($this->arrConfig['dbPconnect'])
 		{
 			$this->resConnection = @mysql_pconnect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass']);
