@@ -35,7 +35,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
  */
-class Cache extends \System
+class Cache
 {
 
 	/**
