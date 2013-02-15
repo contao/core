@@ -372,7 +372,7 @@ class Input
 	 *
 	 * @return mixed The clean name or array of names
 	 */
-	protected static function cleanKey($varValue)
+	public static function cleanKey($varValue)
 	{
 		// Recursively clean arrays
 		if (is_array($varValue))
@@ -410,7 +410,7 @@ class Input
 	 *
 	 * @return mixed The string or array without slashes
 	 */
-	protected static function stripSlashes($varValue)
+	public static function stripSlashes($varValue)
 	{
 		if ($varValue == '' || !static::$blnMagicQuotes)
 		{
@@ -440,7 +440,7 @@ class Input
 	 *
 	 * @return mixed The cleaned string or array
 	 */
-	protected static function stripTags($varValue, $strAllowedTags='')
+	public static function stripTags($varValue, $strAllowedTags='')
 	{
 		if ($varValue === null || $varValue == '')
 		{
@@ -474,7 +474,7 @@ class Input
 	 *
 	 * @return mixed The cleaned string or array
 	 */
-	protected static function xssClean($varValue, $blnStrictMode=false)
+	public static function xssClean($varValue, $blnStrictMode=false)
 	{
 		if ($varValue === null || $varValue == '')
 		{
@@ -585,7 +585,7 @@ class Input
 	 *
 	 * @return mixed The decoded string or array
 	 */
-	protected static function decodeEntities($varValue)
+	public static function decodeEntities($varValue)
 	{
 		if ($varValue === null || $varValue == '')
 		{
@@ -618,7 +618,7 @@ class Input
 	 *
 	 * @return mixed The string or array with the converted entities
 	 */
-	protected static function preserveBasicEntities($varValue)
+	public static function preserveBasicEntities($varValue)
 	{
 		if ($varValue === null || $varValue == '')
 		{
@@ -654,7 +654,7 @@ class Input
 	 *
 	 * @return mixed The encoded string or array
 	 */
-	protected static function encodeSpecialChars($varValue)
+	public static function encodeSpecialChars($varValue)
 	{
 		if ($varValue === null || $varValue == '')
 		{
@@ -686,7 +686,7 @@ class Input
 	 *
 	 * @return mixed The variable value
 	 */
-	protected static function findPost($strKey)
+	public static function findPost($strKey)
 	{
 		if (isset($_POST[$strKey]))
 		{
