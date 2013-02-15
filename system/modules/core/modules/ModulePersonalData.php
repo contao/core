@@ -149,7 +149,7 @@ class ModulePersonalData extends \Module
 				}
 			}
 
-			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $varValue));
+			$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $field, $varValue));
 
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');

@@ -80,7 +80,7 @@ class ModuleCloseAccount extends \Module
 			'eval' => array('hideInput'=>true, 'mandatory'=>true, 'required'=>true, 'tableless'=>$this->tableless)
 		);
 
-		$objWidget = new \FormTextField($this->prepareForWidget($arrField, $arrField['name']));
+		$objWidget = new \FormTextField(\FormTextField::getAttributesFromDca($arrField, $arrField['name']));
 		$objWidget->rowClass = 'row_0 row_first even';
 
 		// Validate widget

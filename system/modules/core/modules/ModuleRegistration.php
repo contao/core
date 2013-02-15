@@ -170,7 +170,8 @@ class ModuleRegistration extends \Module
 			$arrData['eval']['tableless'] = $this->tableless;
 			$arrData['eval']['required'] = $arrData['eval']['mandatory'];
 
-			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $arrData['default']));
+			$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $field, $arrData['default']));
+
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_' . $i . (($i == 0) ? ' row_first' : '') . ((($i % 2) == 0) ? ' even' : ' odd');
 

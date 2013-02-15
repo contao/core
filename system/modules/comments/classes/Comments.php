@@ -275,7 +275,7 @@ class Comments extends \Frontend
 			}
 
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
-			$objWidget = new $strClass($this->prepareForWidget($arrField, $arrField['name'], $arrField['value']));
+			$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, $arrField['name'], $arrField['value']));
 
 			// Validate the widget
 			if (\Input::post('FORM_SUBMIT') == $strFormId)

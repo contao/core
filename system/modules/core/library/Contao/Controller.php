@@ -2031,141 +2031,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Convert a DCA file configuration to be used with widgets
-	 *
-	 * @param array  $arrData  The field configuration array
-	 * @param string $strName  The field name in the form
-	 * @param mixed  $varValue The field value
-	 * @param string $strField The field name in the database
-	 * @param string $strTable The table name
-	 *
-	 * @return array An array that can be passed to a widget
-	 */
-	protected function prepareForWidget($arrData, $strName, $varValue=null, $strField='', $strTable='')
-	{
-		$arrNew = $arrData['eval'];
-
-		$arrNew['id'] = $strName;
-		$arrNew['name'] = $strName;
-		$arrNew['strField'] = $strField;
-		$arrNew['strTable'] = $strTable;
-		$arrNew['label'] = (($label = is_array($arrData['label']) ? $arrData['label'][0] : $arrData['label']) != false) ? $label : $strField;
-		$arrNew['description'] = $arrData['label'][1];
-		$arrNew['type'] = $arrData['inputType'];
-		$arrNew['activeRecord'] = $arrData['activeRecord'];
-
-		// Internet Explorer does not support onchange for checkboxes and radio buttons
-		if ($arrData['eval']['submitOnChange'])
-		{
-			if ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard' || $arrData['inputType'] == 'radio' || $arrData['inputType'] == 'radioTable')
-			{
-				$arrNew['onclick'] = trim($arrNew['onclick'] . " Backend.autoSubmit('".$strTable."')");
-			}
-			else
-			{
-				$arrNew['onchange'] = trim($arrNew['onchange'] . " Backend.autoSubmit('".$strTable."')");
-			}
-		}
-
-		$arrNew['allowHtml'] = ($arrData['eval']['allowHtml'] || strlen($arrData['eval']['rte']) || $arrData['eval']['preserveTags']) ? true : false;
-
-		// Decode entities if HTML is allowed
-		if ($arrNew['allowHtml'] || $arrData['inputType'] == 'fileTree')
-		{
-			$arrNew['decodeEntities'] = true;
-		}
-
-		// Add Ajax event
-		if ($arrData['inputType'] == 'checkbox' && is_array($GLOBALS['TL_DCA'][$strTable]['subpalettes']) && in_array($strField, array_keys($GLOBALS['TL_DCA'][$strTable]['subpalettes'])) && $arrData['eval']['submitOnChange'])
-		{
-			$arrNew['onclick'] = "AjaxRequest.toggleSubpalette(this, 'sub_".$strName."', '".$strField."')";
-		}
-
-		// Options callback
-		if (is_array($arrData['options_callback']))
-		{
-			if (!is_object($arrData['options_callback'][0]))
-			{
-				$this->import($arrData['options_callback'][0]);
-			}
-
-			$arrData['options'] = $this->$arrData['options_callback'][0]->$arrData['options_callback'][1]($this);
-		}
-
-		// Foreign key
-		elseif (isset($arrData['foreignKey']))
-		{
-			$arrKey = explode('.', $arrData['foreignKey'], 2);
-			$objOptions = $this->Database->execute("SELECT id, " . $arrKey[1] . " AS value FROM " . $arrKey[0] . " WHERE tstamp>0 ORDER BY value");
-
-			if ($objOptions->numRows)
-			{
-				$arrData['options'] = array();
-
-				while($objOptions->next())
-				{
-					$arrData['options'][$objOptions->id] = $objOptions->value;
-				}
-			}
-		}
-
-		// Add default option to single checkbox
-		if ($arrData['inputType'] == 'checkbox' && !isset($arrData['options']) && !isset($arrData['options_callback']) && !isset($arrData['foreignKey']))
-		{
-			if (TL_MODE == 'FE' && isset($arrNew['description']))
-			{
-				$arrNew['options'][] = array('value'=>1, 'label'=>$arrNew['description']);
-			}
-			else
-			{
-				$arrNew['options'][] = array('value'=>1, 'label'=>$arrNew['label']);
-			}
-		}
-
-		// Add options
-		if (is_array($arrData['options']))
-		{
-			$blnIsAssociative = ($arrData['eval']['isAssociative'] || array_is_assoc($arrData['options']));
-			$blnUseReference = isset($arrData['reference']);
-
-			if ($arrData['eval']['includeBlankOption'] && !$arrData['eval']['multiple'])
-			{
-				$strLabel = isset($arrData['eval']['blankOptionLabel']) ? $arrData['eval']['blankOptionLabel'] : '-';
-				$arrNew['options'][] = array('value'=>'', 'label'=>$strLabel);
-			}
-
-			foreach ($arrData['options'] as $k=>$v)
-			{
-				if (!is_array($v))
-				{
-					$arrNew['options'][] = array('value'=>($blnIsAssociative ? $k : $v), 'label'=>($blnUseReference ? ((($ref = (is_array($arrData['reference'][$v]) ? $arrData['reference'][$v][0] : $arrData['reference'][$v])) != false) ? $ref : $v) : $v));
-					continue;
-				}
-
-				$key = $blnUseReference ? ((($ref = (is_array($arrData['reference'][$k]) ? $arrData['reference'][$k][0] : $arrData['reference'][$k])) != false) ? $ref : $k) : $k;
-				$blnIsAssoc = array_is_assoc($v);
-
-				foreach ($v as $kk=>$vv)
-				{
-					$arrNew['options'][$key][] = array('value'=>($blnIsAssoc ? $kk : $vv), 'label'=>($blnUseReference ? ((($ref = (is_array($arrData['reference'][$vv]) ? $arrData['reference'][$vv][0] : $arrData['reference'][$vv])) != false) ? $ref : $vv) : $vv));
-				}
-			}
-		}
-
-		$arrNew['value'] = deserialize($varValue);
-
-		// Convert timestamps
-		if ($varValue != '' && ($arrData['eval']['rgxp'] == 'date' || $arrData['eval']['rgxp'] == 'time' || $arrData['eval']['rgxp'] == 'datim'))
-		{
-			$objDate = new \Date($varValue);
-			$arrNew['value'] = $objDate->{$arrData['eval']['rgxp']};
-		}
-
-		return $arrNew;
-	}
-
-
-	/**
 	 * Create an initial version of a record
 	 *
 	 * @param string  $strTable The table name
@@ -2913,6 +2778,25 @@ abstract class Controller extends \System
 	protected function parseSimpleTokens($strBuffer, $arrData)
 	{
 		return \String::parseSimpleTokens($strBuffer, $arrData);
+	}
+
+
+	/**
+	 * Convert a DCA file configuration to be used with widgets
+	 *
+	 * @param array  $arrData  The field configuration array
+	 * @param string $strName  The field name in the form
+	 * @param mixed  $varValue The field value
+	 * @param string $strField The field name in the database
+	 * @param string $strTable The table name
+	 *
+	 * @return array An array that can be passed to a widget
+	 *
+	 * @deprecated Use Widget::getAttributesFromDca() instead
+	 */
+	protected function prepareForWidget($arrData, $strName, $varValue=null, $strField='', $strTable='')
+	{
+		return \Widget::getAttributesFromDca($arrData, $strName, $varValue, $strField, $strTable);
 	}
 
 

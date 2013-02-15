@@ -196,8 +196,10 @@ class DataContainer extends \Backend
 			return $this->$arrData['input_field_callback'][0]->$arrData['input_field_callback'][1]($this, $xlabel);
 		}
 
+		$strClass = $GLOBALS['BE_FFL'][$arrData['inputType']];
+
 		// Return if the widget class does not exists
-		if (!isset($GLOBALS['BE_FFL'][$arrData['inputType']]))
+		if (!class_exists($strClass))
 		{
 			return '';
 		}
@@ -205,8 +207,7 @@ class DataContainer extends \Backend
 		$arrData['activeRecord'] = $this->activeRecord;
 		$arrData['eval']['required'] = $arrData['eval']['mandatory'];
 
-		$arrWidget = $this->prepareForWidget($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable);
-		$objWidget = new $GLOBALS['BE_FFL'][$arrData['inputType']]($arrWidget);
+		$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable));
 
 		$objWidget->xlabel = $xlabel;
 		$objWidget->currentRecord = $this->intId;

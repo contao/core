@@ -4,6 +4,22 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Changed
+Moved `Controller::prepareForWidget()` to `Widget::setAttributesFromDca()`.
+
+Make sure to always call the inherited method of the specific widget class and
+not the one of the parent class:
+
+```
+// Wrong
+new TextField(Widget::setAttributesFromDca(…));
+
+// Correct
+new TextField(TextField::setAttributesFromDca(…));
+```
+
+See #4697 for more information.
+
 ### New
 Added the redirect status code 307 to `System::redirect()` (see #5375).
 

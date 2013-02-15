@@ -1140,4 +1140,135 @@ abstract class Widget extends \Controller
 
 		return false;
 	}
+
+
+	/**
+	 * Extract the Widget attributes from a Data Container array
+	 *
+	 * @param array  $arrData  The field configuration array
+	 * @param string $strName  The field name in the form
+	 * @param mixed  $varValue The field value
+	 * @param string $strField The field name in the database
+	 * @param string $strTable The table name
+	 *
+	 * @return array An attributes array that can be passed to a widget
+	 */
+	public static function getAttributesFromDca($arrData, $strName, $varValue=null, $strField='', $strTable='')
+	{
+		$arrAttributes = $arrData['eval'];
+
+		$arrAttributes['id'] = $strName;
+		$arrAttributes['name'] = $strName;
+		$arrAttributes['strField'] = $strField;
+		$arrAttributes['strTable'] = $strTable;
+		$arrAttributes['label'] = (($label = is_array($arrData['label']) ? $arrData['label'][0] : $arrData['label']) != false) ? $label : $strField;
+		$arrAttributes['description'] = $arrData['label'][1];
+		$arrAttributes['type'] = $arrData['inputType'];
+		$arrAttributes['activeRecord'] = $arrData['activeRecord'];
+
+		// Internet Explorer does not support onchange for checkboxes and radio buttons
+		if ($arrData['eval']['submitOnChange'])
+		{
+			if ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard' || $arrData['inputType'] == 'radio' || $arrData['inputType'] == 'radioTable')
+			{
+				$arrAttributes['onclick'] = trim($arrAttributes['onclick'] . " Backend.autoSubmit('".$strTable."')");
+			}
+			else
+			{
+				$arrAttributes['onchange'] = trim($arrAttributes['onchange'] . " Backend.autoSubmit('".$strTable."')");
+			}
+		}
+
+		$arrAttributes['allowHtml'] = ($arrData['eval']['allowHtml'] || strlen($arrData['eval']['rte']) || $arrData['eval']['preserveTags']) ? true : false;
+
+		// Decode entities if HTML is allowed
+		if ($arrAttributes['allowHtml'] || $arrData['inputType'] == 'fileTree')
+		{
+			$arrAttributes['decodeEntities'] = true;
+		}
+
+		// Add Ajax event
+		if ($arrData['inputType'] == 'checkbox' && is_array($GLOBALS['TL_DCA'][$strTable]['subpalettes']) && in_array($strField, array_keys($GLOBALS['TL_DCA'][$strTable]['subpalettes'])) && $arrData['eval']['submitOnChange'])
+		{
+			$arrAttributes['onclick'] = "AjaxRequest.toggleSubpalette(this, 'sub_".$strName."', '".$strField."')";
+		}
+
+		// Options callback
+		if (is_array($arrData['options_callback']))
+		{
+			$arrCallback = $arrData['options_callback'];
+			$arrData['options'] = static::importStatic($arrCallback[0])->$arrCallback[1]();
+		}
+
+		// Foreign key
+		elseif (isset($arrData['foreignKey']))
+		{
+			$arrKey = explode('.', $arrData['foreignKey'], 2);
+			$objOptions = \Database::getInstance()->query("SELECT id, " . $arrKey[1] . " AS value FROM " . $arrKey[0] . " WHERE tstamp>0 ORDER BY value");
+
+			if ($objOptions->numRows)
+			{
+				$arrData['options'] = array();
+
+				while($objOptions->next())
+				{
+					$arrData['options'][$objOptions->id] = $objOptions->value;
+				}
+			}
+		}
+
+		// Add default option to single checkbox
+		if ($arrData['inputType'] == 'checkbox' && !isset($arrData['options']) && !isset($arrData['options_callback']) && !isset($arrData['foreignKey']))
+		{
+			if (TL_MODE == 'FE' && isset($arrAttributes['description']))
+			{
+				$arrAttributes['options'][] = array('value'=>1, 'label'=>$arrAttributes['description']);
+			}
+			else
+			{
+				$arrAttributes['options'][] = array('value'=>1, 'label'=>$arrAttributes['label']);
+			}
+		}
+
+		// Add options
+		if (is_array($arrData['options']))
+		{
+			$blnIsAssociative = ($arrData['eval']['isAssociative'] || array_is_assoc($arrData['options']));
+			$blnUseReference = isset($arrData['reference']);
+
+			if ($arrData['eval']['includeBlankOption'] && !$arrData['eval']['multiple'])
+			{
+				$strLabel = isset($arrData['eval']['blankOptionLabel']) ? $arrData['eval']['blankOptionLabel'] : '-';
+				$arrAttributes['options'][] = array('value'=>'', 'label'=>$strLabel);
+			}
+
+			foreach ($arrData['options'] as $k=>$v)
+			{
+				if (!is_array($v))
+				{
+					$arrAttributes['options'][] = array('value'=>($blnIsAssociative ? $k : $v), 'label'=>($blnUseReference ? ((($ref = (is_array($arrData['reference'][$v]) ? $arrData['reference'][$v][0] : $arrData['reference'][$v])) != false) ? $ref : $v) : $v));
+					continue;
+				}
+
+				$key = $blnUseReference ? ((($ref = (is_array($arrData['reference'][$k]) ? $arrData['reference'][$k][0] : $arrData['reference'][$k])) != false) ? $ref : $k) : $k;
+				$blnIsAssoc = array_is_assoc($v);
+
+				foreach ($v as $kk=>$vv)
+				{
+					$arrAttributes['options'][$key][] = array('value'=>($blnIsAssoc ? $kk : $vv), 'label'=>($blnUseReference ? ((($ref = (is_array($arrData['reference'][$vv]) ? $arrData['reference'][$vv][0] : $arrData['reference'][$vv])) != false) ? $ref : $vv) : $vv));
+				}
+			}
+		}
+
+		$arrAttributes['value'] = deserialize($varValue);
+
+		// Convert timestamps
+		if ($varValue != '' && ($arrData['eval']['rgxp'] == 'date' || $arrData['eval']['rgxp'] == 'time' || $arrData['eval']['rgxp'] == 'datim'))
+		{
+			$objDate = new \Date($varValue);
+			$arrAttributes['value'] = $objDate->{$arrData['eval']['rgxp']};
+		}
+
+		return $arrAttributes;
+	}
 }

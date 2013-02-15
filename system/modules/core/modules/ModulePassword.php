@@ -117,7 +117,8 @@ class ModulePassword extends \Module
 			$arrField['eval']['tableless'] = $this->tableless;
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
 
-			$objWidget = new $strClass($this->prepareForWidget($arrField, $arrField['name']));
+			$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, $arrField['name']));
+
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
 			++$row;
@@ -202,7 +203,7 @@ class ModulePassword extends \Module
 			$strClass = 'FormPassword';
 		}
 
-		$objWidget = new $strClass($this->prepareForWidget($arrField, 'password'));
+		$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, 'password'));
 
 		// Set row classes
 		$objWidget->rowClass = 'row_0 row_first even';
