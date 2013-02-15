@@ -1015,6 +1015,8 @@ Library.
                     <input type="text" name="dbCharset" id="dbCharset" class="tl_text" value="<?php echo $this->dbcharset; ?>">
                     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbPort']; ?></h4>
                     <input type="text" name="dbPort" id="dbPort" class="tl_text" value="<?php echo $this->port; ?>">
+                    <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbSocket']; ?></h4>
+                    <input type="text" name="dbSocket" id="dbSocket" class="tl_text" value="<?php echo $this->socket; ?>">
                   </div>
                   <div class="tl_formbody_submit">
                     <div class="tl_submit_container">

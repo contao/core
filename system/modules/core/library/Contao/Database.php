@@ -142,6 +142,7 @@ abstract class Database
 			'dbPconnect' => $GLOBALS['TL_CONFIG']['dbPconnect'],
 			'dbCharset'  => $GLOBALS['TL_CONFIG']['dbCharset'],
 			'dbPort'     => $GLOBALS['TL_CONFIG']['dbPort'],
+			'dbSocket'   => $GLOBALS['TL_CONFIG']['dbSocket']
 		);
 
 		if (is_array($arrCustom))
