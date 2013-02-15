@@ -141,7 +141,7 @@ class ModuleExtension extends \BackendModule
 				// Models
 				foreach ($arrTables as $strTable)
 				{
-					$strModel = $this->getModelClassFromTable($strTable);
+					$strModel = \Model::getClassFromTable($strTable);
 
 					$tplTable = $this->newTemplate('dev_model', $objModule);
 					$tplTable->table = $strTable;

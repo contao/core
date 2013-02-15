@@ -633,33 +633,6 @@ abstract class System
 
 
 	/**
-	 * Compile a Model class name from a table name (e.g. tl_form_field becomes FormFieldModel)
-	 *
-	 * @param string $strTable The table name
-	 *
-	 * @return string The model class name
-	 */
-	public static function getModelClassFromTable($strTable)
-	{
-		if (isset($GLOBALS['TL_MODELS'][$strTable]))
-		{
-			return $GLOBALS['TL_MODELS'][$strTable]; // see 4796
-		}
-		else
-		{
-			$arrChunks = explode('_', $strTable);
-
-			if ($arrChunks[0] == 'tl')
-			{
-				array_shift($arrChunks);
-			}
-
-			return implode('', array_map('ucfirst', $arrChunks)) . 'Model';
-		}
-	}
-
-
-	/**
 	 * Read the contents of a PHP file, stripping the opening and closing PHP tags
 	 *
 	 * @param string $strName The name of the PHP file
@@ -1021,5 +994,20 @@ abstract class System
 	public static function getIndexFreeRequest($blnAmpersand=true)
 	{
 		return ampersand(\Environment::get('indexFreeRequest'), $blnAmpersand);
+	}
+
+
+	/**
+	 * Compile a Model class name from a table name (e.g. tl_form_field becomes FormFieldModel)
+	 *
+	 * @param string $strTable The table name
+	 *
+	 * @return string The model class name
+	 *
+	 * @deprecated Use Model::getClassFromTable() instead
+	 */
+	public static function getModelClassFromTable($strTable)
+	{
+		return \Model::getClassFromTable($strTable);
 	}
 }

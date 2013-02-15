@@ -23,7 +23,7 @@ namespace Contao\Model;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
  */
-class Collection extends \System
+class Collection
 {
 
 	/**
@@ -65,7 +65,6 @@ class Collection extends \System
 	 */
 	public function __construct(\Database\Result $objResult, $strTable)
 	{
-		parent::__construct();
 		$this->objResult = $objResult;
 		$this->strTable = $strTable;
 	}
@@ -375,7 +374,7 @@ class Collection extends \System
 			return false;
 		}
 
-		$strClass = $this->getModelClassFromTable($this->strTable);
+		$strClass = \Model::getClassFromTable($this->strTable);
 		$this->arrModels[$this->intIndex + 1] = new $strClass($this->objResult);
 
 		return true;

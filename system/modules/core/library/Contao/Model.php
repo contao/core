@@ -40,7 +40,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
  */
-abstract class Model extends \System
+abstract class Model
 {
 
 	/**
@@ -81,8 +81,6 @@ abstract class Model extends \System
 	 */
 	public function __construct(\Database\Result $objResult=null)
 	{
-		parent::__construct();
-
 		$objRelations = new \DcaExtractor(static::$strTable);
 		$this->arrRelations = $objRelations->getRelations();
 
@@ -112,7 +110,7 @@ abstract class Model extends \System
 			foreach ($arrRelated as $key=>$row)
 			{
 				$table = $this->arrRelations[$key]['table'];
-				$strClass = $this->getModelClassFromTable($table);
+				$strClass = static::getClassFromTable($table);
 
 				// If the primary key is empty, set null (see #5356)
 				if (!isset($row[$strClass::getPk()]))
@@ -312,7 +310,7 @@ abstract class Model extends \System
 		}
 
 		$arrRelation = $this->arrRelations[$strKey];
-		$strClass = $this->getModelClassFromTable($arrRelation['table']);
+		$strClass = static::getClassFromTable($arrRelation['table']);
 
 		// Load the related record(s)
 		if ($arrRelation['type'] == 'hasOne' || $arrRelation['type'] == 'belongsTo')
@@ -640,5 +638,32 @@ abstract class Model extends \System
 	public static function countAll()
 	{
 		return static::countBy();
+	}
+
+
+	/**
+	 * Compile a Model class name from a table name (e.g. tl_form_field becomes FormFieldModel)
+	 *
+	 * @param string $strTable The table name
+	 *
+	 * @return string The model class name
+	 */
+	public static function getClassFromTable($strTable)
+	{
+		if (isset($GLOBALS['TL_MODELS'][$strTable]))
+		{
+			return $GLOBALS['TL_MODELS'][$strTable]; // see 4796
+		}
+		else
+		{
+			$arrChunks = explode('_', $strTable);
+
+			if ($arrChunks[0] == 'tl')
+			{
+				array_shift($arrChunks);
+			}
+
+			return implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+		}
 	}
 }

@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### Changed
+Moved `System::getModelClassFromTable()` to `Model::getClassFromTable()`.
+
+### Changed
 Moved `System::parseDate()` to `Date::parse()`.
 
 ### Changed
