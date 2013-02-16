@@ -117,7 +117,7 @@ class DiffController extends Backend
 				}
 
 				$this->loadLanguageFile(Input::get('table'));
-				$this->loadDataContainer(Input::get('table'));
+				Controller::loadDataContainer(Input::get('table'));
 
 				$arrFields = $GLOBALS['TL_DCA'][Input::get('table')]['fields'];
 

@@ -211,7 +211,7 @@ class FileSelector extends \Widget
 		}
 
 		$this->strField = $strField;
-		$this->loadDataContainer($this->strTable);
+		\Controller::loadDataContainer($this->strTable);
 
 		// Load the current values
 		switch ($GLOBALS['TL_DCA'][$this->strTable]['config']['dataContainer'])

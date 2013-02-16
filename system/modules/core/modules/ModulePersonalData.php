@@ -77,7 +77,7 @@ class ModulePersonalData extends \Module
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 
 		$this->loadLanguageFile('tl_member');
-		$this->loadDataContainer('tl_member');
+		\Controller::loadDataContainer('tl_member');
 
 		// Call onload_callback (e.g. to check permissions)
 		if (is_array($GLOBALS['TL_DCA']['tl_member']['config']['onload_callback']))
