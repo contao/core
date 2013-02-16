@@ -240,11 +240,11 @@ class Search
 		// Remove special characters
 		if (function_exists('mb_eregi_replace'))
 		{
-			$strText = mb_eregi_replace('[^[:alnum:]\'\.:,_-]|- | -|\' | \'|\. |\.$|: |:$|, |,$', ' ', $strText);
+			$strText = mb_eregi_replace('[^[:alnum:]\'\.:,\+_-]|- | -|\' | \'|\. |\.$|: |:$|, |,$', ' ', $strText);
 		}
 		else
 		{
-			$strText = preg_replace(array('/- /', '/ -/', "/' /", "/ '/", '/\. /', '/\.$/', '/: /', '/:$/', '/, /', '/,$/', '/[^\pN\pL\'\.:,_-]/u'), ' ', $strText);
+			$strText = preg_replace(array('/- /', '/ -/', "/' /", "/ '/", '/\. /', '/\.$/', '/: /', '/:$/', '/, /', '/,$/', '/[^\pN\pL\'\.:,\+_-]/u'), ' ', $strText);
 		}
 
 		// Split words
@@ -254,6 +254,12 @@ class Search
 		// Index words
 		foreach ($arrWords as $strWord)
 		{
+			// Strip a leading plus (see #4497)
+			if (strncmp($strWord, '+', 1) === 0)
+			{
+				$strWord = substr($strWord, 1);
+			}
+
 			$strWord = trim($strWord);
 
 			if (!strlen($strWord) || preg_match('/^[\.:,\'_-]+$/', $strWord))

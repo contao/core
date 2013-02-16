@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Changed
+Handle the plus in words like "Google+" or "A+B" in the seach (see #4497). This
+will require to rebuild the search index after the update!
+
 ### Fixed
 Decouple the `Automator` class from `Backend`, so the database connection is not
 established by default (see #5362).
