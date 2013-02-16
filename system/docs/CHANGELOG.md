@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Fixed
+Decouple the `Automator` class from `Backend`, so the database connection is not
+established by default (see #5362).
+
 ### Changed
 Moved `Controller::getTimeZones()` to `System::getTimeZones()`.
 

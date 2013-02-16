@@ -445,13 +445,14 @@ abstract class Backend extends \Controller
 	 * @param string
 	 * @return array
 	 */
-	protected function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false, $strLanguage='')
+	public static function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false, $strLanguage='')
 	{
 		$time = time();
+		$objDatabase = \Database::getInstance();
 
 		// Get published pages
-		$objPages = $this->Database->prepare("SELECT * FROM tl_page WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY sorting")
-								   ->execute($pid);
+		$objPages = $objDatabase->prepare("SELECT * FROM tl_page WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY sorting")
+								->execute($pid);
 
 		if ($objPages->numRows < 1)
 		{
@@ -493,22 +494,22 @@ abstract class Backend extends \Controller
 					// Published
 					if ($objPages->published && (!$objPages->start || $objPages->start < $time) && (!$objPages->stop || $objPages->stop > $time))
 					{
-						$arrPages[] = $domain . $this->generateFrontendUrl($objPages->row(), null, $strLanguage);
+						$arrPages[] = $domain . static::generateFrontendUrl($objPages->row(), null, $strLanguage);
 
 						// Get articles with teaser
-						$objArticle = $this->Database->prepare("SELECT * FROM tl_article WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND showTeaser=1 ORDER BY sorting")
-													 ->execute($objPages->id);
+						$objArticle = $objDatabase->prepare("SELECT * FROM tl_article WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND showTeaser=1 ORDER BY sorting")
+												  ->execute($objPages->id);
 
 						while ($objArticle->next())
 						{
-							$arrPages[] = $domain . $this->generateFrontendUrl($objPages->row(), '/articles/' . (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id), $strLanguage);
+							$arrPages[] = $domain . static::generateFrontendUrl($objPages->row(), '/articles/' . (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id), $strLanguage);
 						}
 					}
 				}
 			}
 
 			// Get subpages
-			if ((!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && ($arrSubpages = $this->findSearchablePages($objPages->id, $domain, $blnIsSitemap, $strLanguage)) != false)
+			if ((!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && ($arrSubpages = static::findSearchablePages($objPages->id, $domain, $blnIsSitemap, $strLanguage)) != false)
 			{
 				$arrPages = array_merge($arrPages, $arrSubpages);
 			}

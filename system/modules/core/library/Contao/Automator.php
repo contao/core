@@ -25,7 +25,7 @@ namespace Contao;
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
-class Automator extends \Backend
+class Automator extends \System
 {
 
 	/**
@@ -57,9 +57,11 @@ class Automator extends \Backend
 	 */
 	public function purgeSearchTables()
 	{
+		$objDatabase = \Database::getInstance();
+
 		// Truncate the tables
-		$this->Database->execute("TRUNCATE TABLE tl_search");
-		$this->Database->execute("TRUNCATE TABLE tl_search_index");
+		$objDatabase->execute("TRUNCATE TABLE tl_search");
+		$objDatabase->execute("TRUNCATE TABLE tl_search_index");
 
 		// Purge the cache folder
 		$objFolder = new \Folder('system/cache/search');
@@ -75,8 +77,10 @@ class Automator extends \Backend
 	 */
 	public function purgeUndoTable()
 	{
+		$objDatabase = \Database::getInstance();
+
 		// Truncate the table
-		$this->Database->execute("TRUNCATE TABLE tl_undo");
+		$objDatabase->execute("TRUNCATE TABLE tl_undo");
 
 		// Add a log entry
 		$this->log('Purged the undo table', 'Automator purgeUndoTable()', TL_CRON);
@@ -88,8 +92,10 @@ class Automator extends \Backend
 	 */
 	public function purgeVersionTable()
 	{
+		$objDatabase = \Database::getInstance();
+
 		// Truncate the table
-		$this->Database->execute("TRUNCATE TABLE tl_version");
+		$objDatabase->execute("TRUNCATE TABLE tl_version");
 
 		// Add a log entry
 		$this->log('Purged the undo table', 'Automator purgeVersionTable()', TL_CRON);
@@ -172,12 +178,15 @@ class Automator extends \Backend
 	 */
 	public function purgeInternalCache()
 	{
-		// Purge
-		foreach (array('dca', 'language', 'sql') as $dir)
+		// Check whether the cache exists
+		if (is_dir(TL_ROOT . '/system/cache/dca'))
 		{
-			// Purge the folder
-			$objFolder = new \Folder('system/cache/' . $dir);
-			$objFolder->delete();
+			foreach (array('dca', 'language', 'sql') as $dir)
+			{
+				// Purge the folder
+				$objFolder = new \Folder('system/cache/' . $dir);
+				$objFolder->delete();
+			}
 		}
 
 		// Add a log entry
@@ -239,9 +248,10 @@ class Automator extends \Backend
 	public function purgeXmlFiles($blnReturn=false)
 	{
 		$arrFeeds = array();
+		$objDatabase = \Database::getInstance();
 
 		// XML sitemaps
-		$objFeeds = $this->Database->execute("SELECT sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!=''");
+		$objFeeds = $objDatabase->execute("SELECT sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!=''");
 
 		while ($objFeeds->next())
 		{
@@ -283,19 +293,21 @@ class Automator extends \Backend
 	public function generateSitemap($intId=0)
 	{
 		$time = time();
+		$objDatabase = \Database::getInstance();
+
 		$this->purgeXmlFiles();
 
 		// Only root pages should have sitemap names
-		$this->Database->execute("UPDATE tl_page SET createSitemap='', sitemapName='' WHERE type!='root'");
+		$objDatabase->execute("UPDATE tl_page SET createSitemap='', sitemapName='' WHERE type!='root'");
 
 		// Get a particular root page
 		if ($intId > 0)
 		{
 			do
 			{
-				$objRoot = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
-										  ->limit(1)
-										  ->execute($intId);
+				$objRoot = $objDatabase->prepare("SELECT * FROM tl_page WHERE id=?")
+									   ->limit(1)
+									   ->execute($intId);
 
 				if ($objRoot->numRows < 1)
 				{
@@ -324,7 +336,7 @@ class Automator extends \Backend
 		// Get all published root pages
 		else
 		{
-			$objRoot = $this->Database->execute("SELECT id, dns, language, useSSL, sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!='' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1");
+			$objRoot = $objDatabase->execute("SELECT id, dns, language, useSSL, sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!='' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1");
 		}
 
 		// Return if there are no pages
@@ -350,7 +362,7 @@ class Automator extends \Backend
 				$strDomain = ($objRoot->useSSL ? 'https://' : 'http://') . $objRoot->dns . TL_PATH . '/';
 			}
 
-			$arrPages = $this->findSearchablePages($objRoot->id, $strDomain, true, $objRoot->language);
+			$arrPages = \Backend::findSearchablePages($objRoot->id, $strDomain, true, $objRoot->language);
 
 			// HOOK: take additional pages
 			if (isset($GLOBALS['TL_HOOKS']['getSearchablePages']) && is_array($GLOBALS['TL_HOOKS']['getSearchablePages']))

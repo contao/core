@@ -202,11 +202,8 @@ class InstallTool extends Backend
 		}
 
 		// Purge the internal cache
-		if (is_dir(TL_ROOT . '/system/cache/dca'))
-		{
-			$this->import('Automator');
-			$this->Automator->purgeInternalCache();
-		}
+		$this->import('Automator');
+		$this->Automator->purgeInternalCache();
 
 		// Wait for the tables to be created (see #5061)
 		if ($this->Database->tableExists('tl_log'))
