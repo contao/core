@@ -33,7 +33,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
  */
-class DcaExtractor extends \Database\Installer
+class DcaExtractor extends \Controller
 {
 
 	/**
@@ -311,7 +311,8 @@ class DcaExtractor extends \Database\Installer
 		{
 			if (!isset(static::$arrSql[$this->strTable]))
 			{
-				static::$arrSql = $this->getFromFile();
+				$objInstaller = new \Database\Installer();
+				static::$arrSql = $objInstaller->getFromFile();
 			}
 
 			$arrTable = static::$arrSql[$this->strTable];

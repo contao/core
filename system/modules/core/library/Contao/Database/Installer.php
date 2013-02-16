@@ -252,7 +252,7 @@ class Installer extends \Controller
 	 *
 	 * @return array An array of DCA table settings
 	 */
-	protected function getFromDca()
+	public function getFromDca()
 	{
 		$included = array();
 		$arrReturn = array();
@@ -295,7 +295,7 @@ class Installer extends \Controller
 	 *
 	 * @return array An array of DCA table settings
 	 */
-	protected function getFromFile()
+	public function getFromFile()
 	{
 		$table = '';
 		$return = array();
@@ -384,7 +384,7 @@ class Installer extends \Controller
 	 *
 	 * @return array An array of tables and fields
 	 */
-	protected function getFromDB()
+	public function getFromDB()
 	{
 		$this->import('Database');
 		$tables = preg_grep('/^tl_/', $this->Database->listTables(null, true));
