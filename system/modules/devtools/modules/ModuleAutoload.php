@@ -417,7 +417,7 @@ EOT
 				{
 					$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
 
-					if (strncmp($strRelpath, 'assets/', 7) !== 0 && strncmp($strRelpath, 'config/', 7) !== 0 && strncmp($strRelpath, 'dca/', 4) !== 0 && strncmp($strRelpath, 'languages/', 10) !== 0 && strncmp($strRelpath, 'templates/', 10) !== 0)
+					if (strncmp($strRelpath, 'assets/', 7) !== 0 && strncmp($strRelpath, 'config/', 7) !== 0 && strncmp($strRelpath, 'dca/', 4) !== 0 && strncmp($strRelpath, 'languages/', 10) !== 0 && strncmp($strRelpath, 'templates/', 10) !== 0 && strncmp($strRelpath, 'vendor/', 7) !== 0)
 					{
 						$arrFiles[] = $strRelpath;
 					}

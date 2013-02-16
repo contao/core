@@ -42,7 +42,6 @@ namespace  {
 // core
 namespace  {
 	class Ajax extends Contao\Ajax {}
-	class Automator extends Contao\Automator {}
 	abstract class Backend extends Contao\Backend {}
 	abstract class BackendModule extends Contao\BackendModule {}
 	class BackendTemplate extends Contao\BackendTemplate {}
@@ -55,7 +54,6 @@ namespace  {
 	abstract class Hybrid extends Contao\Hybrid {}
 	class LiveUpdate extends Contao\LiveUpdate {}
 	class Messages extends Contao\Messages {}
-	class Pagination extends Contao\Pagination {}
 	class PurgeData extends Contao\PurgeData {}
 	class RebuildIndex extends Contao\RebuildIndex {}
 	class StyleSheets extends Contao\StyleSheets {}
@@ -98,6 +96,7 @@ namespace  {
 	class FormSubmit extends Contao\FormSubmit {}
 	class FormTextArea extends Contao\FormTextArea {}
 	class FormTextField extends Contao\FormTextField {}
+	class Automator extends Contao\Automator {}
 	class Cache extends Contao\Cache {}
 	class ClassLoader extends Contao\ClassLoader {}
 	class Combiner extends Contao\Combiner {}
@@ -119,6 +118,7 @@ namespace  {
 	class Input extends Contao\Input {}
 	class Message extends Contao\Message {}
 	abstract class Model extends Contao\Model {}
+	class Pagination extends Contao\Pagination {}
 	class Request extends Contao\Request {}
 	class RequestToken extends Contao\RequestToken {}
 	class Search extends Contao\Search {}
@@ -146,6 +146,7 @@ namespace  {
 	class StyleModel extends Contao\StyleModel {}
 	class StyleSheetModel extends Contao\StyleSheetModel {}
 	class ThemeModel extends Contao\ThemeModel {}
+	class UserGroupModel extends Contao\UserGroupModel {}
 	class UserModel extends Contao\UserModel {}
 	abstract class Module extends Contao\Module {}
 	class ModuleArticle extends Contao\ModuleArticle {}
