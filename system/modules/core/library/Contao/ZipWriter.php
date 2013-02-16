@@ -26,7 +26,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
  */
-class ZipWriter extends \System
+class ZipWriter
 {
 
 	/**
@@ -89,7 +89,6 @@ class ZipWriter extends \System
 	 */
 	public function __construct($strFile)
 	{
-		$this->import('Files');
 		$this->strFile = $strFile;
 
 		// Create temporary file
@@ -257,7 +256,7 @@ class ZipWriter extends \System
 		}
 
 		// Rename file
-		$this->Files->rename(self::TEMPORARY_FOLDER . '/' . basename($this->strTemp), $this->strFile);
+		\Files::getInstance()->rename(self::TEMPORARY_FOLDER . '/' . basename($this->strTemp), $this->strFile);
 	}
 
 
