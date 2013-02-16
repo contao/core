@@ -229,7 +229,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'filter'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getCountries(),
+			'options'                 => System::getCountries(),
 			'eval'                    => array('includeBlankOption'=>true, 'chosen'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'address', 'tl_class'=>'w50'),
 			'sql'                     => "varchar(2) NOT NULL default ''"
 		),

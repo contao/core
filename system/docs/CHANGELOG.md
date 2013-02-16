@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### Changed
+Moved `Controller::getTimeZones()` to `System::getTimeZones()`.
+
+### Changed
 Made `Controller::loadDataContainer()` public static.
 
 ### Changed

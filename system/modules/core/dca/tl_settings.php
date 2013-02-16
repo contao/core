@@ -75,7 +75,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['timeZone'],
 			'inputType'               => 'select',
-			'options'                 => $this->getTimezones(),
+			'options'                 => System::getTimeZones(),
 			'eval'                    => array('chosen'=>true, 'tl_class'=>'w50')
 		),
 		'websitePath' => array

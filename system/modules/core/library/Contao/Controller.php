@@ -507,30 +507,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Return the timezones as array
-	 *
-	 * @return array An array of timezones
-	 */
-	public static function getTimeZones()
-	{
-		$arrReturn = array();
-		$timezones = array();
-
-		require TL_ROOT . '/system/config/timezones.php';
-
-		foreach ($timezones as $strGroup=>$arrTimezones)
-		{
-			foreach ($arrTimezones as $strTimezone)
-			{
-				$arrReturn[$strGroup][] = $strTimezone;
-			}
-		}
-
-		return $arrReturn;
-	}
-
-
-	/**
 	 * Return the languages for the TinyMCE spellchecker
 	 *
 	 * @return string The TinyMCE spellchecker language string
