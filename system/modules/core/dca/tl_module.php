@@ -822,7 +822,7 @@ class tl_module extends Backend
 	{
 		$return = array();
 
-		$this->loadLanguageFile('tl_member');
+		System::loadLanguageFile('tl_member');
 		Controller::loadDataContainer('tl_member');
 
 		foreach ($GLOBALS['TL_DCA']['tl_member']['fields'] as $k=>$v)

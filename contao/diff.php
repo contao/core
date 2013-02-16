@@ -44,7 +44,7 @@ class DiffController extends Backend
 		parent::__construct();
 
 		$this->User->authenticate();
-		$this->loadLanguageFile('default');
+		System::loadLanguageFile('default');
 
 		// Include the PhpDiff library
 		require TL_ROOT . '/system/modules/core/vendor/phpdiff/Diff.php';
@@ -116,7 +116,7 @@ class DiffController extends Backend
 					$from = deserialize($arrVersions[$intFrom]['data']);
 				}
 
-				$this->loadLanguageFile(Input::get('table'));
+				System::loadLanguageFile(Input::get('table'));
 				Controller::loadDataContainer(Input::get('table'));
 
 				$arrFields = $GLOBALS['TL_DCA'][Input::get('table')]['fields'];

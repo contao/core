@@ -75,7 +75,7 @@ class ModuleRegistration extends \Module
 
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 
-		$this->loadLanguageFile('tl_member');
+		\System::loadLanguageFile('tl_member');
 		\Controller::loadDataContainer('tl_member');
 
 		// Call onload_callback (e.g. to check permissions)

@@ -84,8 +84,8 @@ class RepositoryBackendModule extends BackendModule
 		// load other helpers
 		$this->tl_root = str_replace("\\",'/',TL_ROOT).'/';
 		$this->tl_files = str_replace("\\",'/',$GLOBALS['TL_CONFIG']['uploadPath']).'/';
-		$this->loadLanguageFile('tl_repository');
-		$this->loadLanguageFile('languages');
+		System::loadLanguageFile('tl_repository');
+		System::loadLanguageFile('languages');
 		$this->Template->rep = $this->rep;
 		$this->languages = rtrim(str_replace('-', '_', $GLOBALS['TL_LANGUAGE']).','.trim($GLOBALS['TL_CONFIG']['repository_languages']),',');
 		$this->languages = implode(',',array_unique(explode(',',$this->languages)));

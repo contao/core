@@ -40,7 +40,7 @@ class ModuleLabels extends \BackendModule
 	 */
 	protected function compile()
 	{
-		$this->loadLanguageFile('tl_labels');
+		\System::loadLanguageFile('tl_labels');
 
 		$this->Template->label = $GLOBALS['TL_LANG']['tl_labels']['label'][0];
 		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['tl_labels']['headline'], \Input::get('id'));

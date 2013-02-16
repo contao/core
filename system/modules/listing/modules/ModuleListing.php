@@ -90,7 +90,7 @@ class ModuleListing extends \Module
 	 */
 	protected function compile()
 	{
-		$this->loadLanguageFile($this->list_table);
+		\System::loadLanguageFile($this->list_table);
 		\Controller::loadDataContainer($this->list_table);
 
 		// List a single record

@@ -537,7 +537,7 @@ abstract class Controller extends \System
 	 */
 	protected function getSpellcheckerString()
 	{
-		$this->loadLanguageFile('languages');
+		\System::loadLanguageFile('languages');
 
 		$return = array();
 		$langs = scan(TL_ROOT . '/system/modules/core/languages');
@@ -721,7 +721,7 @@ abstract class Controller extends \System
 						break;
 					}
 
-					$this->loadLanguageFile($keys[0]);
+					\System::loadLanguageFile($keys[0]);
 
 					if (count($keys) == 2)
 					{

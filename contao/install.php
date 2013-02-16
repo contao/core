@@ -49,8 +49,8 @@ class InstallTool extends Backend
 
 		$this->setStaticUrls();
 
-		$this->loadLanguageFile('default');
-		$this->loadLanguageFile('tl_install');
+		System::loadLanguageFile('default');
+		System::loadLanguageFile('tl_install');
 	}
 
 

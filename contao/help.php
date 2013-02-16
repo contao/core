@@ -45,8 +45,8 @@ class Help extends Backend
 
 		$this->User->authenticate();
 
-		$this->loadLanguageFile('default');
-		$this->loadLanguageFile('modules');
+		System::loadLanguageFile('default');
+		System::loadLanguageFile('modules');
 	}
 
 
@@ -58,7 +58,7 @@ class Help extends Backend
 		$table = Input::get('table');
 		$field = Input::get('field');
 
-		$this->loadLanguageFile($table);
+		System::loadLanguageFile($table);
 		Controller::loadDataContainer($table);
 
 		$this->Template = new BackendTemplate('be_help');
@@ -157,7 +157,7 @@ class Help extends Backend
 		// Add an explanation
 		if (isset($arrData['explanation']))
 		{
-			$this->loadLanguageFile('explain');
+			System::loadLanguageFile('explain');
 			$key = $arrData['explanation'];
 
 			if (!is_array($GLOBALS['TL_LANG']['XPL'][$key]))

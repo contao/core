@@ -38,7 +38,7 @@ class PageRegular extends \Frontend
 		$GLOBALS['TL_KEYWORDS'] = '';
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 
-		$this->loadLanguageFile('default');
+		\System::loadLanguageFile('default');
 
 		// Static URLs
 		$this->setStaticUrls();

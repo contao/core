@@ -14,7 +14,7 @@
 /**
  * Load default language file
  */
-$this->loadLanguageFile('tl_files');
+System::loadLanguageFile('tl_files');
 
 
 /**

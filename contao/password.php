@@ -45,8 +45,8 @@ class ChangePassword extends Backend
 
 		$this->User->authenticate();
 
-		$this->loadLanguageFile('default');
-		$this->loadLanguageFile('modules');
+		System::loadLanguageFile('default');
+		System::loadLanguageFile('modules');
 	}
 
 

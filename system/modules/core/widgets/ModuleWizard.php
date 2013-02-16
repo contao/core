@@ -170,7 +170,7 @@ class ModuleWizard extends \Widget
   <tbody>';
 
 		// Load the tl_article language file
-		$this->loadLanguageFile('tl_article');
+		\System::loadLanguageFile('tl_article');
 		$tabindex = 0;
 
 		// Add the input fields

@@ -375,7 +375,7 @@ class Index extends Frontend
 
 		// Load the default language file (see #2644)
 		$this->import('Config');
-		$this->loadLanguageFile('default');
+		System::loadLanguageFile('default');
 
 		// Replace the insert tags and then re-replace the request_token
 		// tag in case a form element has been loaded via insert tag

@@ -1046,7 +1046,7 @@ class tl_content extends Backend
 
 		if ($objAlias->numRows)
 		{
-			$this->loadLanguageFile('tl_article');
+			System::loadLanguageFile('tl_article');
 
 			while ($objAlias->next())
 			{
@@ -1281,7 +1281,7 @@ class tl_content extends Backend
 		// Edit the result
 		if ($objArticle->numRows)
 		{
-			$this->loadLanguageFile('tl_article');
+			System::loadLanguageFile('tl_article');
 
 			while ($objArticle->next())
 			{

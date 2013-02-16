@@ -66,7 +66,7 @@ class ModulePassword extends \Module
 		global $objPage;
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 
-		$this->loadLanguageFile('tl_member');
+		\System::loadLanguageFile('tl_member');
 		\Controller::loadDataContainer('tl_member');
 
 		// Set new password

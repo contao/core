@@ -14,7 +14,7 @@
 /**
  * Load tl_user language file
  */
-$this->loadLanguageFile('tl_user');
+System::loadLanguageFile('tl_user');
 
 
 /**
@@ -327,7 +327,7 @@ class tl_user_group extends Backend
 				$included[] = $strFile;
 				$strTable = str_replace('.php', '', $strFile);
 
-				$this->loadLanguageFile($strTable);
+				System::loadLanguageFile($strTable);
 				Controller::loadDataContainer($strTable);
 			}
 		}

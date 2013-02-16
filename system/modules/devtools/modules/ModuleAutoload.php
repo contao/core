@@ -40,7 +40,7 @@ class ModuleAutoload extends \BackendModule
 	 */
 	protected function compile()
 	{
-		$this->loadLanguageFile('tl_autoload');
+		\System::loadLanguageFile('tl_autoload');
 
 		// Process the request
 		if (\Input::post('FORM_SUBMIT') == 'tl_autoload')

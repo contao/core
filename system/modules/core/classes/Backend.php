@@ -219,7 +219,7 @@ abstract class Backend extends \Controller
 			}
 
 			// Load the language and DCA file
-			$this->loadLanguageFile($strTable);
+			\System::loadLanguageFile($strTable);
 			\Controller::loadDataContainer($strTable);
 
 			// Include all excluded fields which are allowed for the current user

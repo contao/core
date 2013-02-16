@@ -529,7 +529,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 			foreach ($arrData as $strTable=>$arrTableData)
 			{
-				$this->loadLanguageFile($strTable);
+				\System::loadLanguageFile($strTable);
 				\Controller::loadDataContainer($strTable);
 
 				foreach ($arrTableData as $arrRow)
@@ -2997,7 +2997,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$table = $this->ptable;
 			$treeClass = 'tl_tree_xtnd';
 
-			$this->loadLanguageFile($table);
+			\System::loadLanguageFile($table);
 			\Controller::loadDataContainer($table);
 		}
 
@@ -3236,7 +3236,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		{
 			$table = $this->ptable;
 
-			$this->loadLanguageFile($table);
+			\System::loadLanguageFile($table);
 			\Controller::loadDataContainer($table);
 
 			$blnPtable = true;
@@ -3555,7 +3555,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		$GLOBALS['TL_CONFIG']['loadGoogleFonts'] = $blnClipboard;
 
 		// Load the language file and data container array of the parent table
-		$this->loadLanguageFile($this->ptable);
+		\System::loadLanguageFile($this->ptable);
 		\Controller::loadDataContainer($this->ptable);
 
 		$return = '

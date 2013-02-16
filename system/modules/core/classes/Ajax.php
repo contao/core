@@ -160,7 +160,7 @@ class Ajax extends \Backend
 				{
 					if ($e->getCode() == 0)
 					{
-						$this->loadLanguageFile('tl_maintenance');
+						\System::loadLanguageFile('tl_maintenance');
 						echo '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['notWriteable'] . '</p>';
 						exit; break;
 					}
@@ -169,7 +169,7 @@ class Ajax extends \Backend
 				// Empty live update ID
 				if (!strlen(\Input::post('id')))
 				{
-					$this->loadLanguageFile('tl_maintenance');
+					\System::loadLanguageFile('tl_maintenance');
 					echo '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['emptyLuId'] . '</p>';
 					exit; break;
 				}

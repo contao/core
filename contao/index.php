@@ -75,8 +75,8 @@ class Index extends Backend
 			$this->reload();
 		}
 
-		$this->loadLanguageFile('default');
-		$this->loadLanguageFile('tl_user');
+		System::loadLanguageFile('default');
+		System::loadLanguageFile('tl_user');
 	}
 
 

@@ -95,8 +95,8 @@ class Main extends Backend
 			}
 		}
 
-		$this->loadLanguageFile('default');
-		$this->loadLanguageFile('modules');
+		System::loadLanguageFile('default');
+		System::loadLanguageFile('modules');
 	}
 
 
@@ -144,7 +144,7 @@ class Main extends Backend
 	 */
 	protected function welcomeScreen()
 	{
-		$this->loadLanguageFile('explain');
+		System::loadLanguageFile('explain');
 
 		$objTemplate = new BackendTemplate('be_welcome');
 		$objTemplate->messages = Message::generate(false, true);

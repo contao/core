@@ -214,7 +214,7 @@ abstract class User extends \System
 	 */
 	public function login()
 	{
-		$this->loadLanguageFile('default');
+		\System::loadLanguageFile('default');
 
 		// Do not continue if username or password are missing
 		if (!\Input::post('username', true) || !\Input::post('password', true))

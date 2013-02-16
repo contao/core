@@ -30,7 +30,7 @@ class RepositoryManager extends RepositoryBackendModule
 	public function generate()
 	{
 		if (Input::get('update') != 'database' && !extension_loaded('soap')) {
-			$this->loadLanguageFile('tl_repository');
+			System::loadLanguageFile('tl_repository');
 			$theme = new RepositoryBackendTheme();
 			return '
 <div id="tl_buttons" class="buttonwrapper">

@@ -51,7 +51,7 @@ class Popup extends Backend
 		parent::__construct();
 
 		$this->User->authenticate();
-		$this->loadLanguageFile('default');
+		System::loadLanguageFile('default');
 
 		$strFile = Input::get('src', true);
 		$strFile = base64_decode($strFile);

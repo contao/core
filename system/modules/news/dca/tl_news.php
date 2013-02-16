@@ -14,7 +14,7 @@
 /**
  * Load tl_content language file
  */
-$this->loadLanguageFile('tl_content');
+System::loadLanguageFile('tl_content');
 
 
 /**
@@ -674,7 +674,7 @@ class tl_news extends Backend
 
 		if ($objAlias->numRows)
 		{
-			$this->loadLanguageFile('tl_article');
+			System::loadLanguageFile('tl_article');
 
 			while ($objAlias->next())
 			{

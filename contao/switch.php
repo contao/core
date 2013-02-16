@@ -44,7 +44,7 @@ class PreviewSwitch extends Backend
 		parent::__construct();
 
 		$this->User->authenticate();
-		$this->loadLanguageFile('default');
+		System::loadLanguageFile('default');
 	}
 
 

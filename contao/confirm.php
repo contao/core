@@ -45,8 +45,8 @@ class Confirm extends Backend
 
 		$this->User->authenticate();
 
-		$this->loadLanguageFile('default');
-		$this->loadLanguageFile('modules');
+		System::loadLanguageFile('default');
+		System::loadLanguageFile('modules');
 	}
 
 
@@ -112,7 +112,7 @@ class Confirm extends Backend
 			}
 		}
 
-		$this->loadLanguageFile($arrInfo['table']);
+		System::loadLanguageFile($arrInfo['table']);
 
 		// Override the action label
 		if (isset($arrInfo['clipboard']))
