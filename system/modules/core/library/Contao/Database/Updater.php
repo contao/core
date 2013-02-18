@@ -354,6 +354,19 @@ class Updater extends \Controller
 
 
 	/**
+	 * Version 3.1.0 update
+	 */
+	public function run31Update()
+	{
+		$this->Database->query("UPDATE `tl_content` SET `type`='accordionStart' WHERE `type`='accordion' AND `mooType`='mooStart'");
+		$this->Database->query("UPDATE `tl_content` SET `type`='accordionStop' WHERE `type`='accordion' AND `mooType`='mooStop'");
+		$this->Database->query("UPDATE `tl_content` SET `type`='accordionSingle' WHERE `type`='accordion' AND `mooType`='mooSingle'");
+
+		$this->Database->query("ALTER TABLE `tl_content` DROP `mooType`");
+	}
+
+
+	/**
 	 * Scan the upload folder and create the database entries
 	 *
 	 * @param string  $strPath The target folder

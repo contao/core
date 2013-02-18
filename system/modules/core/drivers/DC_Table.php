@@ -3832,19 +3832,22 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						}
 					}
 
-					// Accordion wrapper
-					if ($row[$i]['type'] == 'accordion' && $row[$i]['mooType'] == 'mooStop')
+					$blnWrapperStart = in_array($row[$i]['type'], $GLOBALS['TL_WRAPPERS']['start']);
+					$blnWrapperStop = in_array($row[$i]['type'], $GLOBALS['TL_WRAPPERS']['stop']);
+
+					// Closing wrappers
+					if ($blnWrapperStop)
 					{
 						$blnIndent = false;
 					}
 
 					$return .= '
 
-<div class="tl_content'.((($row[$i]['type'] == 'accordion' && $row[$i]['mooType'] != 'mooSingle')) ? ' '.$row[$i]['mooType'] : '').($blnIndent ? ' indent' : '').(($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] != '') ? ' ' . $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] : '').(($i%2 == 0) ? ' even' : ' odd').'" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)">
+<div class="tl_content'.($blnWrapperStart ? ' wrapper_start' : '').($blnWrapperStop ? ' wrapper_stop' : '').($blnIndent ? ' indent' : '').(($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] != '') ? ' ' . $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] : '').(($i%2 == 0) ? ' even' : ' odd').'" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)">
 <div class="tl_content_right">';
 
-					// Accordion wrapper
-					if ($row[$i]['type'] == 'accordion' && $row[$i]['mooType'] == 'mooStart')
+					// Opening wrappers
+					if ($blnWrapperStart)
 					{
 						$blnIndent = true;
 					}

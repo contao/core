@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### New
+Added a content element slider (see #4600).
+
 ### Improved
 Replaced the up and down arrows with a drag handle where applicable and made
 the items sortable via drag and drop (see 4434). This includes:

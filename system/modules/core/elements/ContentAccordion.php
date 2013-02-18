@@ -40,73 +40,36 @@ class ContentAccordion extends \ContentElement
 	 */
 	protected function compile()
 	{
-		// Accordion start
-		if ($this->mooType == 'mooStart')
-		{
-			if (TL_MODE == 'FE')
-			{
-				$this->strTemplate = 'ce_accordion_start';
-				$this->Template = new \FrontendTemplate($this->strTemplate);
-				$this->Template->setData($this->arrData);
-			}
-			else
-			{
-				$this->strTemplate = 'be_wildcard';
-				$this->Template = new \BackendTemplate($this->strTemplate);
-				$this->Template->title = $this->mooHeadline;
-			}
-		}
+		global $objPage;
 
-		// Accordion end
-		elseif ($this->mooType == 'mooStop')
+		// Clean RTE output
+		if ($objPage->outputFormat == 'xhtml')
 		{
-			if (TL_MODE == 'FE')
-			{
-				$this->strTemplate = 'ce_accordion_stop';
-				$this->Template = new \FrontendTemplate($this->strTemplate);
-				$this->Template->setData($this->arrData);
-			}
-			else
-			{
-				$this->strTemplate = 'be_wildcard';
-				$this->Template = new \BackendTemplate($this->strTemplate);
-			}
+			$this->text = \String::toXhtml($this->text);
 		}
-
-		// Accordion default
 		else
 		{
-			global $objPage;
+			$this->text = \String::toHtml5($this->text);
+		}
 
-			// Clean RTE output
-			if ($objPage->outputFormat == 'xhtml')
+		$this->Template->text = \String::encodeEmail($this->text);
+		$this->Template->addImage = false;
+
+		// Add an image
+		if ($this->addImage && $this->singleSRC != '')
+		{
+			if (!is_numeric($this->singleSRC))
 			{
-				$this->text = \String::toXhtml($this->text);
+				$this->Template->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 			}
 			else
 			{
-				$this->text = \String::toHtml5($this->text);
-			}
+				$objModel = \FilesModel::findByPk($this->singleSRC);
 
-			$this->Template->text = \String::encodeEmail($this->text);
-			$this->Template->addImage = false;
-
-			// Add an image
-			if ($this->addImage && $this->singleSRC != '')
-			{
-				if (!is_numeric($this->singleSRC))
+				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 				{
-					$this->Template->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-				else
-				{
-					$objModel = \FilesModel::findByPk($this->singleSRC);
-
-					if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
-					{
-						$this->singleSRC = $objModel->path;
-						$this->addImageToTemplate($this->Template, $this->arrData);
-					}
+					$this->singleSRC = $objModel->path;
+					$this->addImageToTemplate($this->Template, $this->arrData);
 				}
 			}
 		}

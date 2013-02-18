@@ -522,16 +522,16 @@ h2.sub_headline_index {
 	overflow:hidden;
 	position:relative;
 }
-.tl_content.mooStart,.tl_content.mooStop {
+.tl_content.wrapper_start,.tl_content.wrapper_stop {
 	background:#f3f3f3;
 }
-.tl_content.mooStart {
+.tl_content.wrapper_start {
 	border-bottom:0;
 }
-.tl_content.mooStop {
+.tl_content.wrapper_stop {
 	border-top:0;
 }
-.tl_content.mooStart h1 {
+.tl_content.wrapper_start h1 {
 	margin:0 0 9px 6px;
 }
 .tl_content.indent {
