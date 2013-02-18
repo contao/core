@@ -1280,6 +1280,37 @@ var Backend =
 		});
 	},
 
+	/**
+	 * Make the options wizard items sortable
+	 * @param string
+	 */
+	makeOptionsWizardsSortable: function(id) {
+		var img = Backend.getDragHandle();
+
+		$$('.tl_optionwizard').each(function(el) {
+			var els = el.getElement('.sortable');
+
+			els.getElements('a[onclick]').each(function(a) {
+				var oc = a.get('onclick');
+
+				if (oc.indexOf('optionsWizard') != -1) {
+					if (oc.indexOf("'up'") != -1) {
+						img.clone().inject(a, 'before');
+						a.destroy();
+					} else if (oc.indexOf("'down'") != -1) {
+						a.destroy();
+					}
+				}
+			});
+
+			new Sortables(els, {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle'
+			});
+		});
+	},
+
     /**
 	 * List wizard
 	 * @param object
@@ -1836,6 +1867,7 @@ window.addEvent('domready', function() {
 	Backend.makeCheckboxWizardsSortable();
 	Backend.makeListWizardsSortable();
 	Backend.makeModuleWizardsSortable();
+	Backend.makeOptionsWizardsSortable();
 });
 
 // Limit the height of the preview fields

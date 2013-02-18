@@ -143,7 +143,7 @@ class OptionWizard extends \Widget
       <th>&nbsp;</th>
     </tr>
   </thead>
-  <tbody>';
+  <tbody class="sortable">';
 
 		$tabindex = 0;
 
