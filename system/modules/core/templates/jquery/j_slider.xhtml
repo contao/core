@@ -1,0 +1,27 @@
+
+<script type="text/javascript" src="<?php echo TL_ASSETS_URL; ?>assets/jquery/revolver/<?php echo J_REVOLVER; ?>/revolver.min.js"></script>
+<script type="text/javascript">
+  /* <![CDATA[ */
+    $(document).ready(function() {
+      setTimeout(function() {
+        $('.content-slider').each(function(i, slider) {
+          var h = 0;
+          $('.ce_text', slider).each(function(i, el) {
+            h = Math.max(h, $(el).height());
+            $(el).css('position', 'absolute');
+            i && $(el).css('display', 'none');
+          });
+          $(slider).css({
+            'height':h + 'px',
+            'position':'relative'
+          });
+          $(slider).revolver({
+            // Put custom options here
+            slideClass:'ce_text'
+          });
+        });
+      }, 4);
+    });
+  })(jQuery);
+  /* ]]> */
+</script>
