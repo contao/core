@@ -927,6 +927,26 @@ class InstallTool extends Backend
 			$this->outputAndExit();
 		}
 	}
+
+
+	/**
+	 * Version 3.1.0 update
+	 */
+	protected function update31()
+	{
+		if ($this->Database->tableExists('tl_content') && $this->Database->fieldExists('mooType', 'tl_content'))
+		{
+			if (Input::post('FORM_SUBMIT') == 'tl_31update')
+			{
+				$this->import('Database\\Updater', 'Updater');
+				$this->Updater->run31Update();
+				$this->reload();
+			}
+
+			$this->Template->is31Update = true;
+			$this->outputAndExit();
+		}
+	}
 }
 
 
