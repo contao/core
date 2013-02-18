@@ -17,7 +17,6 @@ $GLOBALS['TL_CSS'][] = 'assets/mootools/slimbox/' . SLIMBOX . '/css/slimbox.css|
       }, null, function(el) {
         return (this == el) || ((this.rel.length > 8) && (this.rel == el.rel));
       });
-      // Support swiping on mobile devices
       $('lbImage').addEvent('swipe', function(e) {
         (e.direction == 'left') ? $('lbNextLink').fireEvent('click') : $('lbPrevLink').fireEvent('click');
       });

@@ -20,7 +20,6 @@ $GLOBALS['TL_CSS'][] = 'assets/mootools/mediabox/'. MEDIABOX .'/css/mediaboxAdvB
         var relsize = rel0.split(' ');
         return (this == el) || ((this.rel.length > 8) && el.rel.match(relsize[1]));
       });
-      // Support swiping on mobile devices
       $('mbImage').addEvent('swipe', function(e) {
         (e.direction == 'left') ? $('mbNextLink').fireEvent('click') : $('mbPrevLink').fireEvent('click');
       });
