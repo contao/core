@@ -1037,8 +1037,10 @@ ul.sgallery .gimage {
 .drag-handle {
 	position:relative;
 	top:1px;
-	vertical-align:bottom;
 	cursor:move;
+}
+.tl_checkbox_wizard .drag-handle {
+	vertical-align:bottom;
 }
 
 /* Navigation icons */

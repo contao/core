@@ -1179,7 +1179,7 @@ var Backend =
     },
 
 	/**
-	 * Make checkboxWizard items sortable
+	 * Make checkbox wizard items sortable
 	 * @param string
 	 */
 	makeCheckboxWizardsSortable: function(id) {
@@ -1192,13 +1192,15 @@ var Backend =
 		});
 		$$('.tl_checkbox_wizard').each(function(el) {
 			var els = el.getElement('.sortable');
-			els.getElements('span a').each(function(a) {
+			els.getElements('a[onclick]').each(function(a) {
 				var oc = a.get('onclick');
 				if (oc.indexOf('checkboxWizard') != -1) {
 					if (oc.indexOf("'up'") != -1) {
 						img.clone().inject(a, 'before');
+						a.destroy();
+					} else if (oc.indexOf("'down'") != -1) {
+						a.destroy();
 					}
-					a.destroy();
 				}
 			});
 			new Sortables(els, {
@@ -1209,6 +1211,44 @@ var Backend =
 			els.getElements('label').each(function(l) {
 				l.setStyle('padding-left', (Browser.ie ? '40px' : '34px'));
 			});
+		});
+	},
+
+	/**
+	 * Make module wizard items sortable
+	 * @param string
+	 */
+	makeModuleWizardsSortable: function(id) {
+		var img = new Element('img', {
+			'class': 'drag-handle',
+			'src': 'system/themes/' + Contao.theme + '/images/drag.gif',
+			'width': 14,
+			'height': 16,
+			'alt': ''
+		});
+		$$('.tl_modulewizard').each(function(el) {
+			var els = el.getElement('.sortable');
+			els.getElements('a[onclick]').each(function(a) {
+				var oc = a.get('onclick');
+				if (oc.indexOf('moduleWizard') != -1) {
+					if (oc.indexOf("'up'") != -1) {
+						img.clone().inject(a, 'before');
+						a.destroy();
+					} else if (oc.indexOf("'down'") != -1) {
+						a.destroy();
+					}
+				}
+			});
+			new Sortables(els, {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle'
+			});
+			/*
+			els.getElements('label').each(function(l) {
+				l.setStyle('padding-left', (Browser.ie ? '40px' : '34px'));
+			});
+			*/
 		});
 	},
 
@@ -1752,6 +1792,7 @@ window.addEvent('domready', function() {
 	Backend.addInteractiveHelp();
 	Backend.addColorPicker();
 	Backend.makeCheckboxWizardsSortable();
+	Backend.makeModuleWizardsSortable();
 });
 
 // Limit the height of the preview fields

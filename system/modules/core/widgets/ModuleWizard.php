@@ -167,7 +167,7 @@ class ModuleWizard extends \Widget
     <th>&nbsp;</th>
   </tr>
   </thead>
-  <tbody>';
+  <tbody class="sortable">';
 
 		// Load the tl_article language file
 		\System::loadLanguageFile('tl_article');
