@@ -1122,6 +1122,12 @@ var Backend =
 			}
 		});
 
+		var img = Backend.getDragHandle();
+
+		$(ul).getElements('.tl_content_right').each(function(el) {
+			img.clone().inject(el);
+		});
+
 		var list = new Sortables(ul, {
 			contstrain: true,
 			opacity: 0.6,
@@ -1130,7 +1136,8 @@ var Backend =
 			},
 			onComplete: function(){
 				ds.stop();
-    		}
+    		},
+			handle: '.drag-handle'
 		});
 
 		list.active = false;
@@ -1179,21 +1186,18 @@ var Backend =
     },
 
 	/**
-	 * Make checkbox wizard items sortable
+	 * Make the checkbox wizard items sortable
 	 * @param string
 	 */
 	makeCheckboxWizardsSortable: function(id) {
-		var img = new Element('img', {
-			'class': 'drag-handle',
-			'src': 'system/themes/' + Contao.theme + '/images/drag.gif',
-			'width': 14,
-			'height': 16,
-			'alt': ''
-		});
+		var img = Backend.getDragHandle();
+
 		$$('.tl_checkbox_wizard').each(function(el) {
 			var els = el.getElement('.sortable');
+
 			els.getElements('a[onclick]').each(function(a) {
 				var oc = a.get('onclick');
+
 				if (oc.indexOf('checkboxWizard') != -1) {
 					if (oc.indexOf("'up'") != -1) {
 						img.clone().inject(a, 'before');
@@ -1203,11 +1207,13 @@ var Backend =
 					}
 				}
 			});
+
 			new Sortables(els, {
 				contstrain: true,
 				opacity: 0.6,
 				handle: '.drag-handle'
 			});
+
 			els.getElements('label').each(function(l) {
 				l.setStyle('padding-left', (Browser.ie ? '40px' : '34px'));
 			});
@@ -1215,21 +1221,18 @@ var Backend =
 	},
 
 	/**
-	 * Make module wizard items sortable
+	 * Make the module wizard items sortable
 	 * @param string
 	 */
 	makeModuleWizardsSortable: function(id) {
-		var img = new Element('img', {
-			'class': 'drag-handle',
-			'src': 'system/themes/' + Contao.theme + '/images/drag.gif',
-			'width': 14,
-			'height': 16,
-			'alt': ''
-		});
+		var img = Backend.getDragHandle();
+
 		$$('.tl_modulewizard').each(function(el) {
 			var els = el.getElement('.sortable');
+
 			els.getElements('a[onclick]').each(function(a) {
 				var oc = a.get('onclick');
+
 				if (oc.indexOf('moduleWizard') != -1) {
 					if (oc.indexOf("'up'") != -1) {
 						img.clone().inject(a, 'before');
@@ -1239,16 +1242,12 @@ var Backend =
 					}
 				}
 			});
+
 			new Sortables(els, {
 				contstrain: true,
 				opacity: 0.6,
 				handle: '.drag-handle'
 			});
-			/*
-			els.getElements('label').each(function(l) {
-				l.setStyle('padding-left', (Browser.ie ? '40px' : '34px'));
-			});
-			*/
 		});
 	},
 
@@ -1768,6 +1767,20 @@ var Backend =
 			td.getElement('a.module_link').setStyle('display', 'none');
 			td.getElement('img.module_image').setStyle('display', 'inline');
 		}
+	},
+
+	/**
+	 * Return the drag handle image object
+	 * @return object
+	 */
+	getDragHandle: function() {
+		return new Element('img', {
+			'class': 'drag-handle',
+			'src': 'system/themes/' + Contao.theme + '/images/drag.gif',
+			'width': 14,
+			'height': 16,
+			'alt': ''
+		});
 	}
 };
 

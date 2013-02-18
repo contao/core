@@ -1039,6 +1039,9 @@ ul.sgallery .gimage {
 	top:1px;
 	cursor:move;
 }
+.parent_view .drag-handle {
+	top:0;
+}
 .tl_checkbox_wizard .drag-handle {
 	vertical-align:bottom;
 }

@@ -93,11 +93,6 @@ p {
 	display:none;
 }
 
-/* Sortable lists */
-ul.sortable li {
-	cursor:move;
-}
-
 /* Invisible elements */
 .clear {
 	clear:both;
