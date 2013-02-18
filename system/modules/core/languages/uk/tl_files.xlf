@@ -93,6 +93,18 @@
         <source>Updated the hash of the file &quot;%s&quot;</source>
         <target>Оновлений хеш файлу &quot;%s&quot;</target>
       </trans-unit>
+      <trans-unit id="tl_files.syncComplete">
+        <source>The synchronization has been completed</source>
+        <target>Синхронизація завершена</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncResult">
+        <source>&lt;strong&gt;Result:&lt;/strong&gt; %s added | %s modified | %s unchanged | %s moved | %s deleted</source>
+        <target>&lt;strong&gt;Результат:&lt;/strong&gt; додано %s | модифіковано %s | без змін %s | переміщено %s | видалено %s</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncShowUnchanged">
+        <source>Show unchanged</source>
+        <target>Показати те що не було змінено</target>
+      </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>
         <target>Створити папку</target>

@@ -30,8 +30,8 @@
         <target>Un template personalizzato di nome &quot;%s&quot; esiste già!</target>
       </trans-unit>
       <trans-unit id="tl_templates.invalid">
-        <source>Invalid target directory &quot;%s&quot;!</source>
-        <target>La cartella di destinazione &quot;%s&quot; non è valida!</target>
+        <source>Invalid source or target directory &quot;%s&quot;!</source>
+        <target>La cartella di origine o di destinazione &quot;%s&quot; non è valida!</target>
       </trans-unit>
       <trans-unit id="tl_templates.new_tpl.0">
         <source>New template</source>

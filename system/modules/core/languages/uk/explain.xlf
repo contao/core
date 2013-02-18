@@ -14,8 +14,8 @@
         <target>Вставка тегів</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.1">
-        <source>For more information on insert tags please visit &lt;a href=&quot;http://contao.org/en/insert-tags.html&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;http://contao.org/en/insert-tags.html&lt;/a&gt;.</source>
-        <target>Вставлення тегів, як спецсимволів, є доступною в будь-якому місці Contao. Ці теги будуть замінені визначеним способом, перш ніж будуть відображені на сайті. Більш детальніше про вставлення тегів перейдіть на сторінку &lt;a href=&quot;http://www.contao.org/insert-tags.html&quot; title=&quot;Онлайн документація Contao&quot; onclick=&quot;window.open(this.href); return false;&quot;&gt;http://www.contao.org/insert-tags.html&lt;/a&gt;.</target>
+        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</source>
+        <target>Детальніше про інсерт-теги (insert tags) ви можете продивитись за наступною адресою: &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Онлайн документація Contao&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.0">
         <source>Code Editor</source>

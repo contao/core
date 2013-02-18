@@ -89,6 +89,10 @@
         <source>Please enter date and time as &quot;%s&quot;!</source>
         <target>Geef datum en tijd op als &quot;%s&quot;!</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
+        <target>Ongeldige datum &quot;%s&quot;!</target>
+      </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
         <target>Het veld &quot;%s&quot; mag geen spaties bevatten!</target>
@@ -203,7 +207,7 @@
       </trans-unit>
       <trans-unit id="ERR.topLevelRegular">
         <source>There are pages on the top-level which are not website root pages. Creating websites without a website root page is no longer supported, so please ensure that all pages are grouped under a website root page.</source>
-        <target>Er zijn pagina's op het top-level die geen website root pagina's zijn. Aanmaken van websites zonder een website root pagina wordt niet langer ondersteund, zorg ervoor dat alle pagina's zijn gegroepeerd onder een website root pagina.</target>
+        <target>Er bevinden zich pagina's in het top-level welke geen website root pagina's zijn. Aanmaken van websites zonder een website root pagina wordt niet langer ondersteund, zorg ervoor dat alle pagina's zijn gegroepeerd onder een website root pagina.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidTokenUrl">
         <source>The link you were trying to open could not be verified. If you have clicked the link yourself or have received it by a trustworthy person, you can confirm the process below.</source>
@@ -1126,8 +1130,8 @@
         <target>Back-end sneltoetsen</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;http://contao.org/en/keyboard-shortcuts.html&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>Meer informatie over het versnellen van uw workflow door gebruik te maken van &lt;a href=&quot;http://www.contao.org/keyboard-shortcuts.html&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>Meer leren over het versnellen van uw workflow door gebruik te maken van &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Overzicht sneltoetsen op contao.org&quot; target=&quot;_blank&quot;&gt;sneltoetsen&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1655,6 +1659,18 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
         <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>
         <target>Contao draait momenteel in de &lt;strong&gt;veilige modus&lt;/strong&gt;, waarin alleen core modules worden geladen. Deze instelling is bijvoorbeeld geactiveerd na een Live Update om mogelijke incompatibiliteit te voorkomen met third-party extensies. U kunt dit deactiveren in de back-end instellingen na controle van de geïnstalleerde third-party extensies.</target>
       </trans-unit>
+      <trans-unit id="MSC.coreOnlyOff">
+        <source>Disable</source>
+        <target>Uitschakelen</target>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheText">
+        <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
+        <target>De &lt;strong&gt;interne cache&lt;/strong&gt; moet nog worden opgebouwd. Opbouwen van de cache zorgt ervoor dat de prestatie van de applicatie verbetert en wordt dan ook aanbevolen. Indien u hiervan geen gebruik wenst te maken, kunt u dit uitschakelen in de back-end instellingen.</target>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheLink">
+        <source>Build the cache</source>
+        <target>Opbouwen van de cache</target>
+      </trans-unit>
       <trans-unit id="MSC.name">
         <source>Name</source>
         <target>Naam</target>
@@ -1963,13 +1979,13 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
         <source>Changelog</source>
         <target>Changelog</target>
       </trans-unit>
-      <trans-unit id="MSC.coreOnlyOff">
-        <source>Disable</source>
-        <target>Uitschakelen</target>
-      </trans-unit>
       <trans-unit id="MSC.dragItemsHint">
         <source>Drag the items to re-order them</source>
         <target>U kunt items anders rangschikken door ze te slepen</target>
+      </trans-unit>
+      <trans-unit id="MSC.templatesTheme">
+        <source>Theme %s</source>
+        <target>Thema %s</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

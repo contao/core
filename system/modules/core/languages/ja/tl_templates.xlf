@@ -30,7 +30,7 @@
         <target>&quot;%s&quot;というテンプレートは既に存在します。</target>
       </trans-unit>
       <trans-unit id="tl_templates.invalid">
-        <source>Invalid target directory &quot;%s&quot;!</source>
+        <source>Invalid source or target directory &quot;%s&quot;!</source>
         <target>保存先のディレクトリ&quot;%s&quot;が不正です。</target>
       </trans-unit>
       <trans-unit id="tl_templates.new_tpl.0">

@@ -93,6 +93,18 @@
         <source>Updated the hash of the file &quot;%s&quot;</source>
         <target>&quot;%s&quot;というファイルのハッシュ値を更新しました。</target>
       </trans-unit>
+      <trans-unit id="tl_files.syncComplete">
+        <source>The synchronization has been completed</source>
+        <target>同期を完了しました</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncResult">
+        <source>&lt;strong&gt;Result:&lt;/strong&gt; %s added | %s modified | %s unchanged | %s moved | %s deleted</source>
+        <target>&lt;strong&gt;結果:&lt;/strong&gt; %s個を追加 | %s個を修正 | %s個は変更なし | %s個を移動 | %s個を削除</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncShowUnchanged">
+        <source>Show unchanged</source>
+        <target>無変更を表示</target>
+      </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>
         <target>新しいフォルダー</target>

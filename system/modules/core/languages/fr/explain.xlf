@@ -14,8 +14,8 @@
         <target>Balises d'insertion</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.1">
-        <source>For more information on insert tags please visit &lt;a href=&quot;http://contao.org/en/insert-tags.html&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;http://contao.org/en/insert-tags.html&lt;/a&gt;.</source>
-        <target>Pour plus d'information voir l'aide sur le site Contao.fr visiter &lt;a href=&quot;http://www.contao.fr/balises-insertion.html&quot; title=&quot;Contao documentation&quot; target=&quot;_blank&quot;&gt;http://www.contao.fr/balises-insertion.html&lt;/a&gt;.</target>
+        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</source>
+        <target>Pour plus d'informations sur les balises d'insertion : &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.0">
         <source>Code Editor</source>

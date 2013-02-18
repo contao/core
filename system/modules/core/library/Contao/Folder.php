@@ -63,7 +63,7 @@ class Folder extends \System
 		$this->import('Files');
 		$this->strFolder = $strFolder;
 
-		// Create folder if it does not exist
+		// Create the folder if it does not exist
 		if (!is_dir(TL_ROOT . '/' . $this->strFolder))
 		{
 			$strPath = '';

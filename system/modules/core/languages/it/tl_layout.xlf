@@ -161,14 +161,6 @@
         <source>Here you can activate the components of the Contao CSS framework.</source>
         <target>Qui è possibile attivare i componenti del framework CSS di Contao.</target>
       </trans-unit>
-      <trans-unit id="tl_layout.reset.css.0">
-        <source>CSS reset</source>
-        <target>Reset CSS</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.reset.css.1">
-        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
-        <target>Rimuove lo stile predefinito di elementi HTML non coerente in diversi browser.</target>
-      </trans-unit>
       <trans-unit id="tl_layout.layout.css.0">
         <source>Layout builder</source>
         <target>Generatore layout</target>
@@ -184,6 +176,22 @@
       <trans-unit id="tl_layout.responsive.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
         <target>Aggiunge un responsive grid a 12 colonne che viene attivato dalle classi CSS &quot;grid1&quot; a &quot;grid12&quot; e &quot;offset1&quot; a &quot;offset12&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.0">
+        <source>CSS reset</source>
+        <target>Reset CSS</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.1">
+        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
+        <target>Rimuove lo stile predefinito di elementi HTML non coerente in diversi browser.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.0">
+        <source>Basic forms</source>
+        <target>Form di base</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.1">
+        <source>Adds basic form elements and buttons formatting.</source>
+        <target>Aggiunge elementi del form di base e la formattazione per pulsanti.</target>
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.0">
         <source>TinyMCE style sheet</source>

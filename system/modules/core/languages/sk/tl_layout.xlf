@@ -161,14 +161,6 @@
         <source>Here you can activate the components of the Contao CSS framework.</source>
         <target>Tu môžete aktivovať komponenty Contao mechanizmu CSS.</target>
       </trans-unit>
-      <trans-unit id="tl_layout.reset.css.0">
-        <source>CSS reset</source>
-        <target>Vynulovať CSS</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.reset.css.1">
-        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
-        <target>Odstráni nekonzistentné východzie štýly HTML elementov v rôznych prehliadačoch.</target>
-      </trans-unit>
       <trans-unit id="tl_layout.layout.css.0">
         <source>Layout builder</source>
         <target>Editor vzhľadu</target>
@@ -184,6 +176,22 @@
       <trans-unit id="tl_layout.responsive.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
         <target>Pridá flexibilnú mriežku s 12 stĺpcami, ktorá bude označená CSS triedami &quot;grid1&quot; až &quot;grid12&quot; a &quot;offset1&quot; až &quot;offset12&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.0">
+        <source>CSS reset</source>
+        <target>Vynulovať CSS</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.1">
+        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
+        <target>Odstráni nekonzistentné východzie štýly HTML elementov v rôznych prehliadačoch.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.0">
+        <source>Basic forms</source>
+        <target>Štandardné formuláre</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.1">
+        <source>Adds basic form elements and buttons formatting.</source>
+        <target>Pridáva základné elementy formulára, vrátane formátovania tlačidiel.</target>
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.0">
         <source>TinyMCE style sheet</source>

@@ -155,7 +155,7 @@
       </trans-unit>
       <trans-unit id="tl_style.margin.0">
         <source>Margin</source>
-        <target>Margin (vnější odsazení)</target>
+        <target>Vnější odsazení (margin)</target>
       </trans-unit>
       <trans-unit id="tl_style.margin.1">
         <source>Here you can enter the top, right, bottom and left margin.</source>
@@ -163,7 +163,7 @@
       </trans-unit>
       <trans-unit id="tl_style.padding.0">
         <source>Padding</source>
-        <target>Padding (vnitřní odsazení)</target>
+        <target>Vnitřní odsazení (padding)</target>
       </trans-unit>
       <trans-unit id="tl_style.padding.1">
         <source>Here you can enter the top, right, bottom and left padding.</source>
@@ -279,7 +279,7 @@
       </trans-unit>
       <trans-unit id="tl_style.borderwidth.1">
         <source>Here you can enter the top, right, bottom and left border width.</source>
-        <target>Zde můžete zadat šířku rámu nahoře, vpravo, dole a vlevo.</target>
+        <target>Zde můžete zadat šířku rámečku nahoře, vpravo, dole a vlevo.</target>
       </trans-unit>
       <trans-unit id="tl_style.borderstyle.0">
         <source>Border style</source>

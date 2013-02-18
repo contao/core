@@ -30,8 +30,8 @@
         <target>Er bestaat al een template met de naam &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="tl_templates.invalid">
-        <source>Invalid target directory &quot;%s&quot;!</source>
-        <target>Ongeldige map &quot;%s&quot;!</target>
+        <source>Invalid source or target directory &quot;%s&quot;!</source>
+        <target>Ongeldige bron of doelmap &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="tl_templates.new_tpl.0">
         <source>New template</source>

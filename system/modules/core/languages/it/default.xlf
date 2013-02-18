@@ -89,6 +89,10 @@
         <source>Please enter date and time as &quot;%s&quot;!</source>
         <target>Inserisci data e ora nel formato &quot;%s&quot;!</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
+        <target>La data &quot;%s&quot; non è valida!</target>
+      </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
         <target>Il campo &quot;%s&quot; non deve contenere spazi!</target>
@@ -1126,8 +1130,8 @@
         <target>Scorciatoie da tastiera del backend</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;http://contao.org/en/keyboard-shortcuts.html&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>Per ulteriori informazioni sulle scorciatoie da tastiera visita la guida sui &lt;a href=&quot;http://www.contao.org/keyboard-shortcuts.html&quot; target=&quot;_blank&quot;&gt; tasti di scelta rapida&lt;/a&gt;.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>Per ulteriori informazioni sulle scorciatoie da tastiera visita la guida sui &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Sommario delle scorciatoie da tastiera su contao.org&quot; target=&quot;_blank&quot;&gt;tasti di scelta rapida&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1655,6 +1659,18 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
         <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>
         <target>Contao è in esecuzione in &lt;strong&gt;modalità provvisoria&lt;/strong&gt;, in cui vengono caricati solo i moduli di base. Questa modalità di funzionamento è attivata, per esempio, dopo un Live Update per prevenire possibili incompatibilità con le estensioni di terze parti. È possibile disattivare questa modalità nelle impostazioni del backend dopo aver controllato tutte le estensioni di terze parti installate.</target>
       </trans-unit>
+      <trans-unit id="MSC.coreOnlyOff">
+        <source>Disable</source>
+        <target>Disabilita</target>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheText">
+        <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
+        <target>La &lt;strong&gt;cache interna&lt;/ strong&gt; non è ancora stata creata. Creare una cache migliora le prestazioni dell'applicazione ed è altamente raccomandato. Se non si desidera utilizzare la cache, è possibile disattivarla in modo permanente nelle impostazioni del backend.</target>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheLink">
+        <source>Build the cache</source>
+        <target>Creare la cache</target>
+      </trans-unit>
       <trans-unit id="MSC.name">
         <source>Name</source>
         <target>Nome</target>
@@ -1963,13 +1979,13 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
         <source>Changelog</source>
         <target>Changelog</target>
       </trans-unit>
-      <trans-unit id="MSC.coreOnlyOff">
-        <source>Disable</source>
-        <target>Disabilita</target>
-      </trans-unit>
       <trans-unit id="MSC.dragItemsHint">
         <source>Drag the items to re-order them</source>
         <target>Trascina gli elementi per riordinarli</target>
+      </trans-unit>
+      <trans-unit id="MSC.templatesTheme">
+        <source>Theme %s</source>
+        <target>Tema %s</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

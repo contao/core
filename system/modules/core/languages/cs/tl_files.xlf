@@ -93,6 +93,18 @@
         <source>Updated the hash of the file &quot;%s&quot;</source>
         <target>Aktulizovaný hash souboru &quot;%s&quot;</target>
       </trans-unit>
+      <trans-unit id="tl_files.syncComplete">
+        <source>The synchronization has been completed</source>
+        <target>Synchronizace byla dokončena</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncResult">
+        <source>&lt;strong&gt;Result:&lt;/strong&gt; %s added | %s modified | %s unchanged | %s moved | %s deleted</source>
+        <target>&lt;strong&gt;Výsledek:&lt;/strong&gt; přidáno %s | upraveno %s | nezměněno %s  | přesunuto %s | smazáno %s</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncShowUnchanged">
+        <source>Show unchanged</source>
+        <target>Zobrazit nezměněné</target>
+      </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>
         <target>Nový adresář</target>

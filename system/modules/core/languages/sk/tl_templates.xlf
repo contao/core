@@ -30,8 +30,8 @@
         <target>Vlastná šablóna s názvom &quot;%s&quot; už existuje&quot;!</target>
       </trans-unit>
       <trans-unit id="tl_templates.invalid">
-        <source>Invalid target directory &quot;%s&quot;!</source>
-        <target>Neplatný cieľový adresár &quot;%s&quot;!</target>
+        <source>Invalid source or target directory &quot;%s&quot;!</source>
+        <target>Neplatný zdroj alebo cieľový adresár &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="tl_templates.new_tpl.0">
         <source>New template</source>

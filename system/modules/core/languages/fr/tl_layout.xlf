@@ -147,7 +147,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.stylesheet.0">
         <source>Style sheets</source>
-        <target>Feuilles de styles</target>
+        <target>Feuilles de style</target>
       </trans-unit>
       <trans-unit id="tl_layout.stylesheet.1">
         <source>Please select the style sheets you want to add to the layout.</source>
@@ -160,14 +160,6 @@
       <trans-unit id="tl_layout.framework.1">
         <source>Here you can activate the components of the Contao CSS framework.</source>
         <target>Activer les éléments du framework CSS de Contao.</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.reset.css.0">
-        <source>CSS reset</source>
-        <target>CSS reset</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.reset.css.1">
-        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
-        <target>Retirer les styles par défaut des éléments HTML incohérents dans différents navigateurs.</target>
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.0">
         <source>Layout builder</source>
@@ -184,6 +176,22 @@
       <trans-unit id="tl_layout.responsive.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
         <target>Ajoute une grille responsive de 12 colonnes qui est déclenchée par les classes CSS &quot;grid1&quot; à &quot;grid12&quot; et &quot;offset1&quot; à &quot;offset12&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.0">
+        <source>CSS reset</source>
+        <target>CSS reset</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.1">
+        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
+        <target>Retirer les styles par défaut des éléments HTML incohérents dans différents navigateurs.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.0">
+        <source>Basic forms</source>
+        <target>Formulaires de base</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.1">
+        <source>Adds basic form elements and buttons formatting.</source>
+        <target>Ajoute une mise en forme de base des éléments et boutons de formulaire.</target>
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.0">
         <source>TinyMCE style sheet</source>

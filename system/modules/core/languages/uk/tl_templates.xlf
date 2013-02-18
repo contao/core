@@ -30,8 +30,8 @@
         <target>Шаблон із даним ім'ям «%s» вже існує, вкажіть іншу назву!</target>
       </trans-unit>
       <trans-unit id="tl_templates.invalid">
-        <source>Invalid target directory &quot;%s&quot;!</source>
-        <target>Не вірна папка призначення «%s»!</target>
+        <source>Invalid source or target directory &quot;%s&quot;!</source>
+        <target>Невірна папка істочник або папка призначення &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="tl_templates.new_tpl.0">
         <source>New template</source>

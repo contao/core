@@ -195,7 +195,7 @@
       </trans-unit>
       <trans-unit id="FMD.quicknav.0">
         <source>Quick navigation</source>
-        <target>Snelnavigatie</target>
+        <target>Snelle navigatie</target>
       </trans-unit>
       <trans-unit id="FMD.quicknav.1">
         <source>Generates a drop-down menu from the site structure</source>
@@ -259,7 +259,7 @@
       </trans-unit>
       <trans-unit id="FMD.personalData.1">
         <source>Generates a form to edit a user's personal data</source>
-        <target>Genereert een frontend formulier om persoonlijke gegevens te wijzigen.</target>
+        <target>Genereert een frontend formulier, dat een gebruiker toelaat om zijn persoonlijke gegevens te veranderen.</target>
       </trans-unit>
       <trans-unit id="FMD.registration.0">
         <source>Registration</source>

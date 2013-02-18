@@ -89,6 +89,10 @@
         <source>Please enter date and time as &quot;%s&quot;!</source>
         <target>Veuillez saisir la date et l'heure &quot;%s&quot; !</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
+        <target>Date non valide &quot;%s&quot;!</target>
+      </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
         <target>Le champ &quot;%s&quot; ne doit pas contenir d'espace !</target>
@@ -1126,8 +1130,8 @@
         <target>Raccourcis clavier du back office</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;http://contao.org/en/keyboard-shortcuts.html&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>En savoir plus sur l'accélération de votre flux de travail en utilisant des &lt;a href=&quot;http://www.contao.fr/raccourcis-clavier.html&quot; target=&quot;_blank&quot;&gt;raccourcis clavier&lt;/a&gt;.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>En savoir plus sur l'accélération de votre flux de travail en utilisant &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;les raccourcis clavier&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1655,6 +1659,16 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
         <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>
         <target>Contao fonctionne actuellement en &lt;strong&gt;mode sans échec&lt;/strong&gt;, dans lequel seuls les modules de base sont chargés. Ce mode de fonctionnement est par ex. activé après une mise à jour avec Live Update pour éviter les incompatibilités possibles avec des extensions tierces. Vous pouvez le désactiver dans les paramètres du back office après avoir vérifié les extensions tierces installées.</target>
       </trans-unit>
+      <trans-unit id="MSC.coreOnlyOff">
+        <source>Disable</source>
+        <target>Désactivé</target>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheText">
+        <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheLink">
+        <source>Build the cache</source>
+      </trans-unit>
       <trans-unit id="MSC.name">
         <source>Name</source>
         <target>Nom</target>
@@ -1963,13 +1977,13 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
         <source>Changelog</source>
         <target>Journal des modifications</target>
       </trans-unit>
-      <trans-unit id="MSC.coreOnlyOff">
-        <source>Disable</source>
-        <target>Désactivé</target>
-      </trans-unit>
       <trans-unit id="MSC.dragItemsHint">
         <source>Drag the items to re-order them</source>
         <target>Faites glisser les éléments pour les ré-ordonner</target>
+      </trans-unit>
+      <trans-unit id="MSC.templatesTheme">
+        <source>Theme %s</source>
+        <target>Thème %s</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

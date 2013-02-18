@@ -87,6 +87,9 @@
         <source>Please enter date and time as &quot;%s&quot;!</source>
         <target>Endatescha p. pl. la data ed il temps en il format &quot;%s&quot;!</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
+      </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
         <target>Il champ &quot;%s&quot; na dastga betg cuntegnair caracters da spazi vid!</target>
@@ -1123,8 +1126,7 @@
         <target>Scursanidas da tastas per il back-end</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;http://contao.org/en/keyboard-shortcuts.html&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>Legia dapli davart &lt;a href=&quot;http://contao.org/de/keyboard-shortcuts.html&quot; title=&quot;Survista davart las scursanidas da tastas sin contao.org&quot; target=&quot;_blank&quot;&gt;scursanidas da tastas&lt;/a&gt; per pudair lavurar anc pli spert.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1652,6 +1654,16 @@ Quest e-mail è vegnì generà da Contao. Ti na pos betg respunder directamain s
         <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>
         <target>Contao è actualmain en il &lt;strong&gt;modus segirà&lt;/strong&gt;, en il qual be moduls dal core vegnan chargiads per impedir eventualas incumpatibilitads cun extensiuns da terz (p.ex. suenter ina actualisaziun directa). Suenter che ti has controllà las extensiuns installadas pos ti puspè deactivar il modus segirà.</target>
       </trans-unit>
+      <trans-unit id="MSC.coreOnlyOff">
+        <source>Disable</source>
+        <target>Deactivar</target>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheText">
+        <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheLink">
+        <source>Build the cache</source>
+      </trans-unit>
       <trans-unit id="MSC.name">
         <source>Name</source>
         <target>Num</target>
@@ -1960,13 +1972,12 @@ Quest e-mail è vegnì generà da Contao. Ti na pos betg respunder directamain s
         <source>Changelog</source>
         <target>Glista da las midadas</target>
       </trans-unit>
-      <trans-unit id="MSC.coreOnlyOff">
-        <source>Disable</source>
-        <target>Deactivar</target>
-      </trans-unit>
       <trans-unit id="MSC.dragItemsHint">
         <source>Drag the items to re-order them</source>
         <target>Tira ils elements per midar la successiun</target>
+      </trans-unit>
+      <trans-unit id="MSC.templatesTheme">
+        <source>Theme %s</source>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

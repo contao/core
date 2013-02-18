@@ -30,8 +30,8 @@
         <target>Le modèle &quot;%s&quot; existe déjà !</target>
       </trans-unit>
       <trans-unit id="tl_templates.invalid">
-        <source>Invalid target directory &quot;%s&quot;!</source>
-        <target>Répertoire cible &quot;%s&quot; non valide !</target>
+        <source>Invalid source or target directory &quot;%s&quot;!</source>
+        <target>Le répertoire source ou cible &quot;%s&quot; n'est pas valide !</target>
       </trans-unit>
       <trans-unit id="tl_templates.new_tpl.0">
         <source>New template</source>

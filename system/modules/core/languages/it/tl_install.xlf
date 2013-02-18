@@ -177,6 +177,10 @@
         <source>Port number</source>
         <target>Numero porta</target>
       </trans-unit>
+      <trans-unit id="tl_install.dbSocket">
+        <source>Socket file</source>
+        <target>File socket</target>
+      </trans-unit>
       <trans-unit id="tl_install.dbSave">
         <source>Save database settings</source>
         <target>Salva le impostazioni del database</target>

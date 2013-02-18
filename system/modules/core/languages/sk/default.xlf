@@ -89,6 +89,10 @@
         <source>Please enter date and time as &quot;%s&quot;!</source>
         <target>Zadajte dátum a čas ako &quot;%s&quot;!</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
+        <target>Neplatný dátum &quot;%s&quot;!</target>
+      </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
         <target>Pole &quot;%s&quot; nesmie obsahovať medzery!</target>
@@ -1126,8 +1130,8 @@
         <target>Klávesové skratky backendu</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;http://contao.org/en/keyboard-shortcuts.html&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>Viac o zrýchlení vašeho work-flow a klávesových skratkách sa dozviete &lt;a href=&quot;http://www.contao.org/keyboard-shortcuts.html&quot; target=&quot;_blank&quot;&gt;tu&lt;/a&gt;.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>Získajte viac informácií ako urýchliť svoju prácu používaním &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;klávesových skratiek&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1655,6 +1659,16 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
         <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>
         <target>Contao práve beží v &lt;strong&gt;bezpečnostnom režime&lt;/strong&gt;, v ktorom fungujú len základné moduly. Tento režim sa aktivuje napr. pri online aktualizácii systému (Live Update), aby sa zabránilo chybám zo strany nekompatibilných rozšírení. Môžete to vypnúť v nastaveniach systému po tom, ako ste skontrolovali nainštalované rozšírenia od &quot;tretích&quot; strán.</target>
       </trans-unit>
+      <trans-unit id="MSC.coreOnlyOff">
+        <source>Disable</source>
+        <target>Neaktívny</target>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheText">
+        <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheLink">
+        <source>Build the cache</source>
+      </trans-unit>
       <trans-unit id="MSC.name">
         <source>Name</source>
         <target>Meno</target>
@@ -1963,13 +1977,13 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
         <source>Changelog</source>
         <target>Zoznam zmien</target>
       </trans-unit>
-      <trans-unit id="MSC.coreOnlyOff">
-        <source>Disable</source>
-        <target>Neaktívny</target>
-      </trans-unit>
       <trans-unit id="MSC.dragItemsHint">
         <source>Drag the items to re-order them</source>
         <target>Vyňať položky pre ich znovuzoradenie</target>
+      </trans-unit>
+      <trans-unit id="MSC.templatesTheme">
+        <source>Theme %s</source>
+        <target>Téma vzhľadu %s</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

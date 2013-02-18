@@ -177,6 +177,9 @@
         <source>Port number</source>
         <target>Číslo portu</target>
       </trans-unit>
+      <trans-unit id="tl_install.dbSocket">
+        <source>Socket file</source>
+      </trans-unit>
       <trans-unit id="tl_install.dbSave">
         <source>Save database settings</source>
         <target>Uložiť nastavenia pripojenia k databáze</target>
