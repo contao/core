@@ -221,11 +221,26 @@
       <trans-unit id="CTE.table.1">
         <source>Generates an optionally sortable table.</source>
       </trans-unit>
-      <trans-unit id="CTE.accordion.0">
+      <trans-unit id="CTE.accordion">
         <source>Accordion</source>
       </trans-unit>
-      <trans-unit id="CTE.accordion.1">
-        <source>Generates a MooTools accordion pane.</source>
+      <trans-unit id="CTE.accordionStart.0">
+        <source>Wrapper start</source>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.1">
+        <source>Generates the opening part of the accordion wrapper.</source>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.0">
+        <source>Wrapper stop</source>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.1">
+        <source>Generates the closing part of the accordion wrapper.</source>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.0">
+        <source>Single element</source>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.1">
+        <source>Generates a single accordion element.</source>
       </trans-unit>
       <trans-unit id="CTE.code.0">
         <source>Code</source>

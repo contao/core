@@ -106,17 +106,16 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('type', 'mooType', 'addImage', 'sortable', 'useImage', 'protected'),
+		'__selector__'                => array('type', 'addImage', 'sortable', 'useImage', 'protected'),
 		'default'                     => '{type_legend},type',
 		'headline'                    => '{type_legend},type,headline;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'text'                        => '{type_legend},type,headline;{text_legend},text;{image_legend},addImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'html'                        => '{type_legend},type;{text_legend},html;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop',
 		'list'                        => '{type_legend},type,headline;{list_legend},listtype,listitems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'table'                       => '{type_legend},type,headline;{table_legend},tableitems;{tconfig_legend},summary,thead,tfoot,tleft;{sortable_legend:hide},sortable;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
-		'accordion'                   => '{type_legend},type,mooType',
-		'accordionmooSingle'          => '{type_legend},type,mooType;{moo_legend},mooHeadline,mooStyle,mooClasses;{text_legend},text;{image_legend},addImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
-		'accordionmooStart'           => '{type_legend},type,mooType;{moo_legend},mooHeadline,mooStyle,mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
-		'accordionmooStop'            => '{type_legend},type,mooType;{moo_legend},mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop',
+		'accordionStart'              => '{type_legend},type;{moo_legend},mooHeadline,mooStyle,mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
+		'accordionStop'               => '{type_legend},type;{moo_legend},mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop',
+		'accordionSingle'             => '{type_legend},type;{moo_legend},mooHeadline,mooStyle,mooClasses;{text_legend},text;{image_legend},addImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'sliderStart'                 => '{type_legend},type,headline;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'sliderStop'                  => '{type_legend},type,headline;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop',
 		'code'                        => '{type_legend},type,headline;{text_legend},highlight,shClass,code;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
@@ -393,17 +392,6 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'options'                 => array('ascending', 'descending'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 			'eval'                    => array('tl_class'=>'w50'),
-			'sql'                     => "varchar(32) NOT NULL default ''"
-		),
-		'mooType' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['mooType'],
-			'default'                 => 'mooStart',
-			'exclude'                 => true,
-			'inputType'               => 'radio',
-			'options'                 => array('mooStart', 'mooStop', 'mooSingle'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
-			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'mooHeadline' => array
@@ -956,6 +944,28 @@ class tl_content extends Backend
 
 
 	/**
+	 * Return the group of a content element
+	 * @param string
+	 * @return string
+	 */
+	public function getContentElementGroup($element)
+	{
+		foreach ($GLOBALS['TL_CTE'] as $k=>$v)
+		{
+			foreach (array_keys($v) as $kk)
+			{
+				if ($kk == $element)
+				{
+					return $k;
+				}
+			}
+		}
+
+		return null;
+	}
+
+
+	/**
 	 * Add the type of content element
 	 * @param array
 	 * @return string
@@ -966,11 +976,15 @@ class tl_content extends Backend
 		$type = $GLOBALS['TL_LANG']['CTE'][$arrRow['type']][0] ?: '&nbsp;';
 		$class = 'limit_height';
 
-		// Add the type of accordion element
-		if ($arrRow['type'] == 'accordion' && $arrRow['mooType'] != 'mooSingle')
+		// Remove the class if it is a wrapper element
+		if (in_array($arrRow['type'], $GLOBALS['TL_WRAPPERS']['start']) || in_array($arrRow['type'], $GLOBALS['TL_WRAPPERS']['stop']))
 		{
 			$class = '';
-			$type .= ' [' . $GLOBALS['TL_LANG']['tl_content'][$arrRow['mooType']][0] . ']';
+
+			if (($group = $this->getContentElementGroup($arrRow['type'])) !== null)
+			{
+				$type = $GLOBALS['TL_LANG']['CTE'][$group] . ' (' . $type . ')';
+			}
 		}
 
 		// Add the ID of the aliased element

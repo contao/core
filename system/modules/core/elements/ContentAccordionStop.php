@@ -18,21 +18,21 @@ namespace Contao;
 
 
 /**
- * Class ContentSliderStop
+ * Class ContentAccordionStop
  *
- * Front end content element "slider" (wrapper stop).
+ * Front end content element "accordion" (wrapper stop).
  * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
-class ContentSliderStop extends \ContentElement
+class ContentAccordionStop extends \ContentElement
 {
 
 	/**
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'ce_slider_stop';
+	protected $strTemplate = 'ce_accordion_stop';
 
 
 	/**
@@ -42,7 +42,7 @@ class ContentSliderStop extends \ContentElement
 	{
 		if (TL_MODE == 'FE')
 		{
-			$this->strTemplate = 'ce_slider_stop';
+			$this->strTemplate = 'ce_accordion_stop';
 			$this->Template = new \FrontendTemplate($this->strTemplate);
 			$this->Template->setData($this->arrData);
 		}

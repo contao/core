@@ -50,7 +50,7 @@ class ContentSliderStart extends \ContentElement
 		{
 			$this->strTemplate = 'be_wildcard';
 			$this->Template = new \BackendTemplate($this->strTemplate);
-			$this->Template->title = '### SLIDER START ###';
+			$this->Template->title = $this->headline;
 		}
 	}
 }

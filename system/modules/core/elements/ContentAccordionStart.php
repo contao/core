@@ -18,21 +18,21 @@ namespace Contao;
 
 
 /**
- * Class ContentSliderStop
+ * Class ContentAccordionStart
  *
- * Front end content element "slider" (wrapper stop).
+ * Front end content element "accordion" (wrapper start).
  * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
-class ContentSliderStop extends \ContentElement
+class ContentAccordionStart extends \ContentElement
 {
 
 	/**
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'ce_slider_stop';
+	protected $strTemplate = 'ce_accordion_start';
 
 
 	/**
@@ -42,7 +42,7 @@ class ContentSliderStop extends \ContentElement
 	{
 		if (TL_MODE == 'FE')
 		{
-			$this->strTemplate = 'ce_slider_stop';
+			$this->strTemplate = 'ce_accordion_start';
 			$this->Template = new \FrontendTemplate($this->strTemplate);
 			$this->Template->setData($this->arrData);
 		}
@@ -50,6 +50,14 @@ class ContentSliderStop extends \ContentElement
 		{
 			$this->strTemplate = 'be_wildcard';
 			$this->Template = new \BackendTemplate($this->strTemplate);
+			$this->Template->title = $this->headline;
 		}
+
+		$classes = deserialize($this->mooClasses);
+
+		$this->Template->toggler = $classes[0] ?: 'toggler';
+		$this->Template->accordion = $classes[1] ?: 'accordion';
+		$this->Template->headlineStyle = $this->mooStyle;
+		$this->Template->headline = $this->mooHeadline;
 	}
 }

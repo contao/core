@@ -51,6 +51,8 @@ ClassLoader::addClasses(array
 
 	// Elements
 	'Contao\ContentAccordion'          => 'system/modules/core/elements/ContentAccordion.php',
+	'Contao\ContentAccordionStart'     => 'system/modules/core/elements/ContentAccordionStart.php',
+	'Contao\ContentAccordionStop'      => 'system/modules/core/elements/ContentAccordionStop.php',
 	'Contao\ContentAlias'              => 'system/modules/core/elements/ContentAlias.php',
 	'Contao\ContentArticle'            => 'system/modules/core/elements/ContentArticle.php',
 	'Contao\ContentCode'               => 'system/modules/core/elements/ContentCode.php',

@@ -148,43 +148,48 @@ $GLOBALS['TL_CTE'] = array
 (
 	'texts' => array
 	(
-		'headline'    => 'ContentHeadline',
-		'text'        => 'ContentText',
-		'html'        => 'ContentHtml',
-		'list'        => 'ContentList',
-		'table'       => 'ContentTable',
-		'accordion'   => 'ContentAccordion',
-		'code'        => 'ContentCode'
+		'headline'        => 'ContentHeadline',
+		'text'            => 'ContentText',
+		'html'            => 'ContentHtml',
+		'list'            => 'ContentList',
+		'table'           => 'ContentTable',
+		'code'            => 'ContentCode'
+	),
+	'accordion' => array
+	(
+		'accordionSingle' => 'ContentAccordion',
+		'accordionStart'  => 'ContentAccordionStart',
+		'accordionStop'   => 'ContentAccordionStop'
 	),
 	'slider' => array
 	(
-		'sliderStart' => 'ContentSliderStart',
-		'sliderStop'  => 'ContentSliderStop'
+		'sliderStart'     => 'ContentSliderStart',
+		'sliderStop'      => 'ContentSliderStop'
 	),
 	'links' => array
 	(
-		'hyperlink'   => 'ContentHyperlink',
-		'toplink'     => 'ContentToplink'
+		'hyperlink'       => 'ContentHyperlink',
+		'toplink'         => 'ContentToplink'
 	),
 	'media' => array
 	(
-		'image'       => 'ContentImage',
-		'gallery'     => 'ContentGallery',
-		'player'      => 'ContentMedia',
-		'youtube'     => 'ContentYouTube'
+		'image'           => 'ContentImage',
+		'gallery'         => 'ContentGallery',
+		'player'          => 'ContentMedia',
+		'youtube'         => 'ContentYouTube'
 	),
 	'files' => array
 	(
-		'download'    => 'ContentDownload',
-		'downloads'   => 'ContentDownloads'
+		'download'        => 'ContentDownload',
+		'downloads'       => 'ContentDownloads'
 	),
 	'includes' => array
 	(
-		'article'     => 'ContentArticle',
-		'alias'       => 'ContentAlias',
-		'form'        => 'Form',
-		'module'      => 'ContentModule',
-		'teaser'      => 'ContentTeaser'
+		'article'         => 'ContentArticle',
+		'alias'           => 'ContentAlias',
+		'form'            => 'Form',
+		'module'          => 'ContentModule',
+		'teaser'          => 'ContentTeaser'
 	)
 );
 
@@ -392,6 +397,24 @@ $GLOBALS['TL_HOOKS'] = array
  * Ignore the auto_item keywords when rebuilding the search index URLs
  */
 $GLOBALS['TL_AUTO_ITEM'] = array('items', 'events');
+
+
+/**
+ * Wrapper elements
+ */
+$GLOBALS['TL_WRAPPERS'] = array
+(
+	'start' => array
+	(
+		'accordionStart',
+		'sliderStart'
+	),
+	'stop' => array
+	(
+		'accordionStop',
+		'sliderStop'
+	)
+);
 
 
 /**
