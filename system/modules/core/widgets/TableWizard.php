@@ -155,7 +155,7 @@ class TableWizard extends \Widget
 		// Begin the table
 		$return = '<div id="tl_tablewizard">
   <table id="ctrl_'.$this->strId.'" class="tl_tablewizard">
-  <tbody>
+  <thead>
     <tr>';
 
 		// Add column buttons
@@ -175,7 +175,9 @@ class TableWizard extends \Widget
 
 		$return .= '
       <td></td>
-    </tr>';
+    </tr>
+  </thead>
+  <tbody class="sortable">';
 
 		$tabindex = 0;
 

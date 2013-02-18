@@ -1039,7 +1039,7 @@ ul.sgallery .gimage {
 	top:1px;
 	cursor:move;
 }
-.parent_view .drag-handle {
+.parent_view .drag-handle,.tl_tablewizard .drag-handle {
 	top:0;
 }
 .tl_listwizard .drag-handle {
