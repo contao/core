@@ -233,6 +233,21 @@
       <trans-unit id="CTE.code.1">
         <source>Highlights code snippets and prints them to the screen.</source>
       </trans-unit>
+      <trans-unit id="CTE.slider">
+        <source>Content slider</source>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.0">
+        <source>Wrapper start</source>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.1">
+        <source>Generates the opening part of the slider wrapper.</source>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.0">
+        <source>Wrapper stop</source>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.1">
+        <source>Generates the closing part of the slider wrapper.</source>
+      </trans-unit>
       <trans-unit id="CTE.links">
         <source>Link elements</source>
       </trans-unit>
