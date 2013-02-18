@@ -1182,10 +1182,33 @@ var Backend =
 	 * Make checkboxWizard items sortable
 	 * @param string
 	 */
-	makeCheckboxWizardSortable: function(id) {
-		var list = new Sortables($(id).getElement('.sortable'), {
-			contstrain: true,
-			opacity: 0.6
+	makeCheckboxWizardsSortable: function(id) {
+		var img = new Element('img', {
+			'class': 'drag-handle',
+			'src': 'system/themes/' + Contao.theme + '/images/drag.gif',
+			'width': 14,
+			'height': 16,
+			'alt': ''
+		});
+		$$('.tl_checkbox_wizard').each(function(el) {
+			var els = el.getElement('.sortable');
+			els.getElements('span a').each(function(a) {
+				var oc = a.get('onclick');
+				if (oc.indexOf('checkboxWizard') != -1) {
+					if (oc.indexOf("'up'") != -1) {
+						img.clone().inject(a, 'before');
+					}
+					a.destroy();
+				}
+			});
+			new Sortables(els, {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle'
+			});
+			els.getElements('label').each(function(l) {
+				l.setStyle('padding-left', (Browser.ie ? '40px' : '34px'));
+			});
 		});
 	},
 
@@ -1582,14 +1605,14 @@ var Backend =
 	 * @param string
 	 */
 	checkboxWizard: function(el, command, id) {
-		var container = $(id),
-			parent = $(el).getParent('span');
+		var container = $(id).getElement('.sortable'),
+			parent = $(el).getParent('span'), span;
 
 		Backend.getScrollOffset();
 
 		switch (command) {
 			case 'up':
-				if ((span = parent.getPrevious('span')) && !span.hasClass('fixed')) {
+				if ((span = parent.getPrevious('span'))) {
 					parent.inject(span, 'before');
 				} else {
 					parent.inject(container, 'bottom');
@@ -1598,8 +1621,8 @@ var Backend =
 			case 'down':
 				if (span = parent.getNext('span')) {
 					parent.inject(span, 'after');
-				} else if (all = container.getFirst('span.fixed')) {
-					parent.inject(all, 'after');
+				} else {
+					parent.inject(container, 'top');
 				}
 				break;
 		}
@@ -1728,6 +1751,7 @@ window.addEvent('domready', function() {
 	Backend.collapsePalettes();
 	Backend.addInteractiveHelp();
 	Backend.addColorPicker();
+	Backend.makeCheckboxWizardsSortable();
 });
 
 // Limit the height of the preview fields

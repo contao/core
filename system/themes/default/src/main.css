@@ -914,29 +914,26 @@ ul.sgallery .gimage {
 }
 
 /* Checkbox wizard */
+.tl_checkbox_wizard {
+	padding-top:2px;
+}
 .tl_checkbox_wizard_img {
 	margin-top:-1px;
 	position:relative;
 	top:3px;
 }
-.tl_checkbox_wizard span.fixed {
+.tl_checkbox_wizard .fixed {
 	display:block;
 	margin-top:1px;
 }
 .tl_checkbox_wizard .sortable span {
 	display:block;
-	margin:-2px 0 0;
-}
-.tl_checkbox_wizard {
-	padding-top:2px;
+	margin:-1px 0 0;
 }
 .tl_checkbox_wizard label {
 	display:block;
 	margin:-14px 0;
 	padding-left:48px;
-}
-.tl_checkbox_wizard label span {
-	cursor:move;
 }
 .tl_checkbox_wizard label:last-child {
 	margin-bottom:0;
@@ -1036,6 +1033,12 @@ ul.sgallery .gimage {
 #theme-store {
 	margin-top:24px;
 	text-align:right;
+}
+.drag-handle {
+	position:relative;
+	top:1px;
+	vertical-align:bottom;
+	cursor:move;
 }
 
 /* Navigation icons */
