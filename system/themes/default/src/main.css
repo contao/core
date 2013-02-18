@@ -1042,6 +1042,9 @@ ul.sgallery .gimage {
 .parent_view .drag-handle {
 	top:0;
 }
+.tl_listwizard .drag-handle {
+	top:3px;
+}
 .tl_checkbox_wizard .drag-handle {
 	vertical-align:bottom;
 }
