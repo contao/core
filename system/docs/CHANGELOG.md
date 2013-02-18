@@ -4,6 +4,19 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Improved
+Replaced the up and down arrows with a drag handle where applicable and made
+the items sortable via drag and drop (see 4434). This includes:
+
+ * the checkbox wizard
+ * the list wizard (content element)
+ * the table wizard (content element)
+ * the module wizard (page layout)
+ * the options wizard (form generator)
+ * the key/value wizard
+
+The parent view now uses the drag handle to move items, too.
+
 ### Changed
 Handle the plus in words like "Google+" or "A+B" in the seach (see #4497). This
 will require to rebuild the search index after the update!
