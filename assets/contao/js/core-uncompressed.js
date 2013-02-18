@@ -1122,6 +1122,12 @@ var Backend =
 			}
 		});
 
+		var img = Backend.getDragHandle();
+
+		$(ul).getElements('.tl_content_right').each(function(el) {
+			img.clone().inject(el);
+		});
+
 		var list = new Sortables(ul, {
 			contstrain: true,
 			opacity: 0.6,
@@ -1130,7 +1136,8 @@ var Backend =
 			},
 			onComplete: function(){
 				ds.stop();
-    		}
+    		},
+			handle: '.drag-handle'
 		});
 
 		list.active = false;
@@ -1177,6 +1184,166 @@ var Backend =
         });
         list.fireEvent("complete"); // Initial sorting
     },
+
+	/**
+	 * Make the checkbox wizard items sortable
+	 * @param string
+	 */
+	makeCheckboxWizardsSortable: function(id) {
+		var img = Backend.getDragHandle();
+
+		$$('.tl_checkbox_wizard').each(function(el) {
+			var els = el.getElement('.sortable');
+
+			els.getElements('a[onclick]').each(function(a) {
+				var oc = a.get('onclick');
+
+				if (oc.indexOf('checkboxWizard') != -1) {
+					if (oc.indexOf("'up'") != -1) {
+						img.clone().inject(a, 'before');
+						a.destroy();
+					} else if (oc.indexOf("'down'") != -1) {
+						a.destroy();
+					}
+				}
+			});
+
+			new Sortables(els, {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle'
+			});
+
+			els.getElements('label').each(function(l) {
+				l.setStyle('padding-left', (Browser.ie ? '40px' : '34px'));
+			});
+		});
+	},
+
+	/**
+	 * Make the list wizard items sortable
+	 * @param string
+	 */
+	makeListWizardsSortable: function(id) {
+		var img = Backend.getDragHandle();
+
+		$$('.tl_listwizard').each(function(el) {
+			el.getElements('a[onclick]').each(function(a) {
+				var oc = a.get('onclick');
+
+				if (oc.indexOf('listWizard') != -1) {
+					if (oc.indexOf("'up'") != -1) {
+						img.clone().inject(a, 'before');
+						a.destroy();
+					} else if (oc.indexOf("'down'") != -1) {
+						a.destroy();
+					}
+				}
+			});
+
+			new Sortables(el, {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle'
+			});
+		});
+	},
+
+	/**
+	 * Make the module wizard items sortable
+	 * @param string
+	 */
+	makeModuleWizardsSortable: function(id) {
+		var img = Backend.getDragHandle();
+
+		$$('.tl_modulewizard').each(function(el) {
+			var els = el.getElement('.sortable');
+
+			els.getElements('a[onclick]').each(function(a) {
+				var oc = a.get('onclick');
+
+				if (oc.indexOf('moduleWizard') != -1) {
+					if (oc.indexOf("'up'") != -1) {
+						img.clone().inject(a, 'before');
+						a.destroy();
+					} else if (oc.indexOf("'down'") != -1) {
+						a.destroy();
+					}
+				}
+			});
+
+			new Sortables(els, {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle'
+			});
+		});
+	},
+
+	/**
+	 * Make the options wizard items sortable
+	 * @param string
+	 */
+	makeOptionsWizardsSortable: function(id) {
+		var img = Backend.getDragHandle();
+
+		$$('.tl_optionwizard').each(function(el) {
+			var els = el.getElement('.sortable');
+
+			els.getElements('a[onclick]').each(function(a) {
+				var oc = a.get('onclick');
+
+				if (oc.indexOf('optionsWizard') != -1 || oc.indexOf('keyValueWizard') != -1) {
+					if (oc.indexOf("'up'") != -1) {
+						img.clone().inject(a, 'before');
+						a.destroy();
+					} else if (oc.indexOf("'down'") != -1) {
+						a.destroy();
+					}
+				}
+			});
+
+			new Sortables(els, {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle'
+			});
+		});
+	},
+
+	/**
+	 * Make the table wizard items sortable
+	 * @param string
+	 */
+	makeTableWizardsSortable: function(id) {
+		var img = Backend.getDragHandle();
+
+		$$('.tl_tablewizard').each(function(el) {
+			var els = el.getElement('.sortable');
+
+			els.getElements('a[onclick]').each(function(a) {
+				var oc = a.get('onclick');
+
+				if (oc.indexOf('tableWizard') != -1) {
+					if (oc.indexOf("'rup'") != -1) {
+						img.clone().inject(a, 'before');
+						a.destroy();
+					} else if (oc.indexOf("'rdown'") != -1) {
+						a.destroy();
+					}
+				}
+			});
+
+			new Sortables(els, {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle',
+				onComplete: function() {
+					Backend.tableWizardResort(els);
+				}
+			});
+		});
+	},
 
     /**
 	 * List wizard
@@ -1242,7 +1409,7 @@ var Backend =
 			parentTd = $(el).getParent('td'),
 			parentTr = parentTd.getParent('tr'),
 			cols = parentTr.getChildren(),
-			index = 0;
+			index = 0, previous, next;
 
 		for (var i=0; i<cols.length; i++) {
 			if (cols[i] == parentTd) {
@@ -1265,8 +1432,7 @@ var Backend =
 				tr.inject(parentTr, 'after');
 				break;
 			case 'rup':
-				var previous = parentTr.getPrevious('tr');
-				if (previous.getPrevious('tr')) {
+				if (previous = parentTr.getPrevious('tr')) {
 					parentTr.inject(previous, 'before');
 				} else {
 					parentTr.inject(tbody, 'bottom')
@@ -1276,11 +1442,11 @@ var Backend =
 				if (next = parentTr.getNext('tr')) {
 					parentTr.inject(next, 'after');
 				} else {
-					parentTr.inject(tbody.getFirst('tr').getNext('tr'), 'before');
+					parentTr.inject(tbody, 'top');
 				}
 				break;
 			case 'rdelete':
-				if (rows.length > 2) {
+				if (rows.length > 1) {
 					parentTr.destroy();
 				}
 				break;
@@ -1328,6 +1494,15 @@ var Backend =
 				break;
 		}
 
+		Backend.tableWizardResort(tbody);
+		Backend.tableWizardResize();
+	},
+
+	/**
+	 * Resort the table wizard fields
+	 * @param object
+	 */
+	tableWizardResort: function(tbody) {
 		rows = tbody.getChildren();
 		var tabindex = 1;
 
@@ -1336,12 +1511,10 @@ var Backend =
 			for (var j=0; j<childs.length; j++) {
 				if (textarea = childs[j].getFirst('textarea')) {
 					textarea.set('tabindex', tabindex++);
-					textarea.name = textarea.name.replace(/\[[0-9]+\][[0-9]+\]/g, '[' + (i-1) + '][' + j + ']')
+					textarea.name = textarea.name.replace(/\[[0-9]+\][[0-9]+\]/g, '[' + i + '][' + j + ']')
 				}
 			}
 		}
-
-		Backend.tableWizardResize();
 	},
 
 	/**
@@ -1571,14 +1744,14 @@ var Backend =
 	 * @param string
 	 */
 	checkboxWizard: function(el, command, id) {
-		var container = $(id),
-			parent = $(el).getParent('span');
+		var container = $(id).getElement('.sortable'),
+			parent = $(el).getParent('span'), span;
 
 		Backend.getScrollOffset();
 
 		switch (command) {
 			case 'up':
-				if ((span = parent.getPrevious('span')) && !span.hasClass('fixed')) {
+				if ((span = parent.getPrevious('span'))) {
 					parent.inject(span, 'before');
 				} else {
 					parent.inject(container, 'bottom');
@@ -1587,8 +1760,8 @@ var Backend =
 			case 'down':
 				if (span = parent.getNext('span')) {
 					parent.inject(span, 'after');
-				} else if (all = container.getFirst('span.fixed')) {
-					parent.inject(all, 'after');
+				} else {
+					parent.inject(container, 'top');
 				}
 				break;
 		}
@@ -1694,6 +1867,20 @@ var Backend =
 			td.getElement('a.module_link').setStyle('display', 'none');
 			td.getElement('img.module_image').setStyle('display', 'inline');
 		}
+	},
+
+	/**
+	 * Return the drag handle image object
+	 * @return object
+	 */
+	getDragHandle: function() {
+		return new Element('img', {
+			'class': 'drag-handle',
+			'src': 'system/themes/' + Contao.theme + '/images/drag.gif',
+			'width': 14,
+			'height': 16,
+			'alt': ''
+		});
 	}
 };
 
@@ -1717,6 +1904,13 @@ window.addEvent('domready', function() {
 	Backend.collapsePalettes();
 	Backend.addInteractiveHelp();
 	Backend.addColorPicker();
+
+	// Sortables
+	Backend.makeCheckboxWizardsSortable();
+	Backend.makeListWizardsSortable();
+	Backend.makeModuleWizardsSortable();
+	Backend.makeOptionsWizardsSortable();
+	Backend.makeTableWizardsSortable();
 });
 
 // Limit the height of the preview fields
