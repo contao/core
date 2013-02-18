@@ -755,7 +755,7 @@ abstract class System
 			$chunks = explode('.', $unit->getAttribute('id'));
 
 			// Handle keys with dots
-			if (preg_match('/tl_layout\.(reset|layout|responsive|tinymce)\.css\./', $unit->getAttribute('id')))
+			if (preg_match('/tl_layout\.(reset|layout|form|responsive|tinymce)\.css\./', $unit->getAttribute('id')))
 			{
 				$chunks = array($chunks[0], $chunks[1] . '.' . $chunks[2], $chunks[3]);
 			}

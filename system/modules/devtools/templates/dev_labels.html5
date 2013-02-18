@@ -40,8 +40,8 @@
               <table>
                 <?php foreach ($arrFile as $strKey=>$arrLabels): ?>
                   <tr class="<?php echo (($i%2) == 0) ? 'even' : 'odd'; ?>">
-                    <td><?php echo $strKey; ?></td>
-                    <td><?php echo implode('<br>', (array)$arrLabels); ?></td>
+                    <td style="white-space:nowrap;padding-right:6px"><?php echo $strKey; ?></td>
+                    <td><?php echo implode('<br>', (array) $arrLabels); ?></td>
                   </tr>
                 <?php endforeach; ?>
               </table>
