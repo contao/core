@@ -1293,7 +1293,7 @@ var Backend =
 			els.getElements('a[onclick]').each(function(a) {
 				var oc = a.get('onclick');
 
-				if (oc.indexOf('optionsWizard') != -1) {
+				if (oc.indexOf('optionsWizard') != -1 || oc.indexOf('keyValueWizard') != -1) {
 					if (oc.indexOf("'up'") != -1) {
 						img.clone().inject(a, 'before');
 						a.destroy();
