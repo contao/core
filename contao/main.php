@@ -314,11 +314,9 @@ class Main extends Backend
 			// Articles
 			elseif (Input::get('do') == 'article')
 			{
-				$objArticle = ArticleModel::findByPk(CURRENT_ID);
-
-				if ($objArticle !== null)
+				if (($objArticle = ArticleModel::findByPk(CURRENT_ID)) !== null)
 				{
-					$this->Template->frontendFile = '?page=' . $objArticle->pid . '&amp;article=' . (($objArticle->inColumn != 'main') ? $objArticle->inColumn . ':' : '') . (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id);
+					$this->Template->frontendFile = '?page=' . $objArticle->pid;
 				}
 			}
 		}
