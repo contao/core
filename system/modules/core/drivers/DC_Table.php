@@ -4327,8 +4327,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			return '';
 		}
 
-		$arrPanels = array();
 		$intFilterPanel = 0;
+		$arrPanels = array();
 
 		foreach (trimsplit(';', $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout']) as $strPanel)
 		{
@@ -4350,10 +4350,12 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				{
 					$panel = $this->{$strSubPanel . 'Menu'}(++$intFilterPanel);
 				}
-				// call the panel_callback
+
+				// Call the panel_callback
 				else
 				{
 					$arrCallback = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panel_callback'][$strSubPanel];
+
 					if (is_array($arrCallback))
 					{
 						$this->import($arrCallback[0]);
@@ -4361,12 +4363,14 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					}
 				}
 
+				// Add the panel if it is not empty
 				if ($panel != '')
 				{
 					$panels = $panel . $panels;
 				}
 			}
 
+			// Add the group if it is not empty
 			if ($panels != '')
 			{
 				$arrPanels[] = $panels;
@@ -4401,7 +4405,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 			
 			$return .= '
-<div class="tl_panel">'.$submit.$arrPanels[$i].'
+<div class="tl_panel">' . $submit . $arrPanels[$i] . '
 
 <div class="clear"></div>
 			
@@ -4731,13 +4735,14 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Generate the filter panel and return it as HTML string
-	 * @param int
+	 * @param integer
 	 * @return string
 	 */
 	protected function filterMenu($intFilterPanel)
 	{
 		$fields = '';
 		$this->bid = 'tl_buttons_a';
+		$sortingFields = array();
 		$session = $this->Session->getData();
 		$filter = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4) ? $this->strTable.'_'.CURRENT_ID : $this->strTable;
 
