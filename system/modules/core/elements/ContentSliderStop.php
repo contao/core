@@ -51,5 +51,9 @@ class ContentSliderStop extends \ContentElement
 			$this->strTemplate = 'be_wildcard';
 			$this->Template = new \BackendTemplate($this->strTemplate);
 		}
+
+		// Previous and next labels
+		$this->Template->previous = $GLOBALS['TL_LANG']['MSC']['previous'];
+		$this->Template->next = $GLOBALS['TL_LANG']['MSC']['next'];
 	}
 }

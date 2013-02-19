@@ -1,27 +1,38 @@
 
-<script type="text/javascript" src="<?php echo TL_ASSETS_URL; ?>assets/mootools/revolver/<?php echo MOO_REVOLVER; ?>/revolver.min.js"></script>
+<script type="text/javascript" src="<?php echo TL_ASSETS_URL; ?>assets/swipe/<?php echo SWIPE; ?>/swipe.min.js"></script>
 <script type="text/javascript">
   /* <![CDATA[ */
   (function($) {
     window.addEvent('domready', function() {
-      setTimeout(function() {
-        $$('.content-slider').each(function(slider) {
-          var h = 0;
-          slider.getElements('.ce_text').each(function(el, i) {
-            h = Math.max(h, el.getSize().y);
-            el.setStyle('position', 'absolute');
-            i && el.setStyle('display', 'none');
-          });
-          slider.setStyles({
-            'height':h + 'px',
+      $$('.ce_sliderStart').each(function(cte) {
+        var slider = cte.getElement('.content-slider'),
+            wrap = slider.getElement('.slider-wrapper');
+        slider.setStyles({
+          'overflow':'hidden',
+          'visibility':'hidden',
+          'position':'relative'
+        });
+        wrap.setStyles({
+          'overflow':'hidden',
+          'position':'relative'
+        });
+        wrap.getElements('.ce_text').each(function(el) {
+          el.setStyles({
+            'float':'left',
+            'width':'100%',
             'position':'relative'
           });
-          slider.revolver({
-            // Put custom options here
-            slideClass:'ce_text'
+        });
+        var swipe = new Swipe(slider, {
+          // Put custom options here
+        });
+        cte.getElements('.slider-control a').each(function(el) {
+          el.addEvent('click', function(e) {
+            e.preventDefault();
+            el.hasClass('slider-prev') ? swipe.prev() : swipe.next();
           });
         });
-      }, 4);
+      });
     });
   })(document.id);
   /* ]]> */

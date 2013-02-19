@@ -3,24 +3,35 @@
 <script type="text/javascript">
   /* <![CDATA[ */
     $(document).ready(function() {
-      setTimeout(function() {
-        $('.content-slider').each(function(i, slider) {
-          var h = 0;
-          $('.ce_text', slider).each(function(i, el) {
-            h = Math.max(h, $(el).height());
-            $(el).css('position', 'absolute');
-            i && $(el).css('display', 'none');
-          });
-          $(slider).css({
-            'height':h + 'px',
+      $('.ce_sliderStart').each(function(i, cte) {
+        var slider = $('.content-slider', cte),
+            wrap = $('.slider-wrapper', slider);
+        $(slider).css({
+          'overflow':'hidden',
+          'visibility':'hidden',
+          'position':'relative'
+        });
+        $(wrap).css({
+          'overflow':'hidden',
+          'position':'relative'
+        });
+        $('.ce_text', wrap).each(function(i, el) {
+          $(el).css({
+            'float':'left',
+            'width':'100%',
             'position':'relative'
           });
-          $(slider).revolver({
-            // Put custom options here
-            slideClass:'ce_text'
+        });
+        var swipe = new Swipe(slider[0], {
+          // Put custom options here
+        });
+        $('.slider-control a', cte).each(function(i, el) {
+          $(el).click(function(e) {
+            e.preventDefault();
+            $(el).hasClass('slider-prev') ? swipe.prev() : swipe.next();
           });
         });
-      }, 4);
+      });
     });
   })(jQuery);
   /* ]]> */

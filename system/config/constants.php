@@ -29,14 +29,13 @@ define('JQUERY_UI', '1.9.1');
 define('COLORBOX', '1.3.20');
 define('MEDIAELEMENT', '2.9.5');
 define('TABLESORTER', '2.0.5');
-define('J_REVOLVER', '1.0.9');
 define('MOOTOOLS', '1.4.5');
 define('COLORPICKER', '1.3');
 define('DATEPICKER', '2.1.1');
 define('MEDIABOX', '1.4.6');
 define('SIMPLEMODAL', '1.2');
 define('SLIMBOX', '1.71');
-define('MOO_REVOLVER', '1.0.4');
+define('SWIPE', '2.0');
 
 
 /**

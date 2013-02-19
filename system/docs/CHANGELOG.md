@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Changed
+Replaced revolver.js with slide.js (see #4600).
+
 ### New
 Support multiple filter panels in the DCA (see #4542).
 
