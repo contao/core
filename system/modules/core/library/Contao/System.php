@@ -365,50 +365,37 @@ abstract class System
 			return;
 		}
 
-		$strCacheFallback = TL_ROOT . '/system/cache/language/en/' . $strName . '.php';
-		$strCacheFile = TL_ROOT . '/system/cache/language/' . $strLanguage . '/' . $strName . '.php';
+		$arrLanguages = ($strLanguage == 'en') ? array('en') : array('en', $strLanguage);
 
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists($strCacheFile))
+		// Load the language(s)
+		foreach ($arrLanguages as $strLang)
 		{
-			include $strCacheFallback;
-			include $strCacheFile;
-		}
-		else
-		{
-			// Generate the cache files
-			$objCacheFallback = new \File('system/cache/language/en/' . $strName . '.php', true);
-			$objCacheFallback->write('<?php '); // add one space to prevent the "unexpected $end" error
+			$strCacheFile = 'system/cache/language/' . $strLang . '/' . $strName . '.php';
 
-			$objCacheFile = new \File('system/cache/language/' . $strLanguage . '/' . $strName . '.php', true);
-			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
-
-			// Parse all active modules
-			foreach (\Config::getInstance()->getActiveModules() as $strModule)
+			if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
 			{
-				$strFallback = TL_ROOT . '/system/modules/' . $strModule . '/languages/en/' . $strName . '.php';
-
-				if (file_exists($strFallback))
-				{
-					$objCacheFallback->append(static::readPhpFileWithoutTags($strFallback));
-					include $strFallback;
-				}
-
-				if ($strLanguage == 'en')
-				{
-					continue;
-				}
-
-				$strFile = TL_ROOT . '/system/modules/' . $strModule . '/languages/' . $strLanguage . '/' . $strName . '.php';
-
-				if (file_exists($strFile))
-				{
-					$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
-					include $strFile;
-				}
+				include TL_ROOT . '/' . $strCacheFile;
 			}
+			else
+			{
+				// Generate the cache file
+				$objCacheFile = new \File($strCacheFile, true);
+				$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
 
-			$objCacheFallback->close();
-			$objCacheFile->close();
+				// Parse all active modules
+				foreach (\Config::getInstance()->getActiveModules() as $strModule)
+				{
+					$strFile = 'system/modules/' . $strModule . '/languages/' . $strLang . '/' . $strName . '.php';
+
+					if (file_exists(TL_ROOT . '/' . $strFile))
+					{
+						$objCacheFile->append(static::readPhpFileWithoutTags(TL_ROOT . '/' . $strFile));
+						include TL_ROOT . '/' . $strFile;
+					}
+				}
+
+				$objCacheFile->close();
+			}
 		}
 
 		// HOOK: allow to load custom labels
