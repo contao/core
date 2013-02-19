@@ -127,7 +127,7 @@ class Date
 	 *
 	 * @param string $strKey The property name
 	 *
-	 * @return mixed The property value
+	 * @return mixed|null The property value
 	 */
 	public function __get($strKey)
 	{
@@ -179,7 +179,7 @@ class Date
 				break;
 		}
 
-		return parent::__get($strKey);
+		return null;
 	}
 
 

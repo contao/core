@@ -64,7 +64,6 @@ class Feed
 	 */
 	public function __construct($strName)
 	{
-		parent::__construct();
 		$this->strName = $strName;
 	}
 
@@ -86,7 +85,7 @@ class Feed
 	 *
 	 * @param string $strKey The property name
 	 *
-	 * @return mixed The property value
+	 * @return mixed|null The property value
 	 */
 	public function __get($strKey)
 	{
@@ -95,7 +94,7 @@ class Feed
 			return $this->arrData[$strKey];
 		}
 
-		return parent::__get($strKey);
+		return null;
 	}
 
 

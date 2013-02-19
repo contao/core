@@ -52,8 +52,6 @@ class FeedItem
 	 */
 	public function __construct($arrData=null)
 	{
-		parent::__construct();
-
 		if (is_array($arrData))
 		{
 			$this->arrData = $arrData;
@@ -78,7 +76,7 @@ class FeedItem
 	 *
 	 * @param string $strKey The property name
 	 *
-	 * @return mixed The property value
+	 * @return mixed|null The property value
 	 */
 	public function __get($strKey)
 	{
@@ -87,7 +85,7 @@ class FeedItem
 			return $this->arrData[$strKey];
 		}
 
-		return parent::__get($strKey);
+		return null;
 	}
 
 

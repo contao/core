@@ -147,7 +147,7 @@ class Cache
 			return static::get($strKey);
 		}
 
-		return parent::__get($strKey);
+		return null;
 	}
 
 
