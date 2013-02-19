@@ -4327,12 +4327,53 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			return '';
 		}
 
-		$filter = $this->filterMenu();
-		$search = $this->searchMenu();
-		$limit = $this->limitMenu();
-		$sort = $this->sortMenu();
+		$arrPanels = array();
+		$intFilterPanel = 0;
 
-		if ($filter == '' && $search == '' && $limit == '' && $sort == '')
+		foreach (trimsplit(';', $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout']) as $strPanel)
+		{
+			$panels = '';
+			$arrSubPanels = trimsplit(',', $strPanel);
+
+			foreach ($arrSubPanels as $strSubPanel)
+			{
+				$panel = '';
+
+				// Regular panels
+				if ($strSubPanel == 'search' || $strSubPanel == 'limit' || $strSubPanel == 'sort')
+				{
+					$panel = $this->{$strSubPanel . 'Menu'}();
+				}
+
+				// Multiple filter subpanels can be defined to split the fields across panels
+				elseif ($strSubPanel == 'filter')
+				{
+					$panel = $this->{$strSubPanel . 'Menu'}(++$intFilterPanel);
+				}
+				// call the panel_callback
+				else
+				{
+					$arrCallback = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panel_callback'][$strSubPanel];
+					if (is_array($arrCallback))
+					{
+						$this->import($arrCallback[0]);
+						$panel = $this->$arrCallback[0]->$arrCallback[1]($this);
+					}
+				}
+
+				if ($panel != '')
+				{
+					$panels = $panel . $panels;
+				}
+			}
+
+			if ($panels != '')
+			{
+				$arrPanels[] = $panels;
+			}
+		}
+
+		if (empty($arrPanels))
 		{
 			return '';
 		}
@@ -4343,24 +4384,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		$return = '';
-		$panelLayout = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout'];
-		$arrPanels = trimsplit(';', $panelLayout);
-		$intLast = count($arrPanels) - 1;
+		$intTotal = count($arrPanels);
+		$intLast = $intTotal - 1;
 
-		for ($i=0; $i<count($arrPanels); $i++)
+		for ($i=0; $i<$intTotal; $i++)
 		{
-			$panels = '';
 			$submit = '';
-			$arrSubPanels = trimsplit(',', $arrPanels[$i]);
-
-			foreach ($arrSubPanels as $strSubPanel)
-			{
-				if ($$strSubPanel != '')
-				{
-					$panels = $$strSubPanel . $panels;
-				}
-			}
-
+	
 			if ($i == $intLast)
 			{
 				$submit = '
@@ -4369,16 +4399,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 <input type="image" name="filter" id="filter" src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/reload.gif" class="tl_img_submit" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['applyTitle']) . '" alt="' . specialchars($GLOBALS['TL_LANG']['MSC']['apply']) . '">
 </div>';
 			}
-
-			if ($panels != '')
-			{
-				$return .= '
-<div class="tl_panel">'.$submit.$panels.'
+			
+			$return .= '
+<div class="tl_panel">'.$submit.$arrPanels[$i].'
 
 <div class="clear"></div>
-
+			
 </div>';
-			}
 		}
 
 		$return = '
@@ -4704,20 +4731,20 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Generate the filter panel and return it as HTML string
+	 * @param int
 	 * @return string
 	 */
-	protected function filterMenu()
+	protected function filterMenu($intFilterPanel)
 	{
 		$fields = '';
 		$this->bid = 'tl_buttons_a';
-		$sortingFields = array();
 		$session = $this->Session->getData();
 		$filter = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4) ? $this->strTable.'_'.CURRENT_ID : $this->strTable;
 
 		// Get the sorting fields
 		foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'] as $k=>$v)
 		{
-			if ($v['filter'])
+			if (intval($v['filter']) == $intFilterPanel)
 			{
 				$sortingFields[] = $k;
 			}
