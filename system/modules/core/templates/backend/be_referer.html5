@@ -21,7 +21,7 @@
     <h1>Invalid request token!</h1>
     <p>The request token could not be verified. Please <a href="javascript:window.location.href=window.location.href">go back</a> and try again.</p>
     <p>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</p>
-    <p>For more information, visit the <a href="https://contao.org/faq.html" target="_blank">Contao FAQ page</a> or search the <a href="http://www.contao-community.org" target="_blank">Contao forum</a>.</p>
+    <p>For more information, visit the <a href="https://contao.org/faq.html" target="_blank">Contao FAQ page</a> or search the <a href="https://community.contao.org" target="_blank">Contao forum</a>.</p>
   </div>
 
   <p class="hint">To customize this notice, create a custom template file named <em>templates/be_referer.html5</em>.</p>
