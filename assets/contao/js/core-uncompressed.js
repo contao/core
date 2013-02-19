@@ -1195,6 +1195,10 @@ var Backend =
 		$$('.tl_checkbox_wizard').each(function(el) {
 			var els = el.getElement('.sortable');
 
+			if (els.hasClass('done')) {
+				return;
+			}
+
 			els.getElements('a[onclick]').each(function(a) {
 				var oc = a.get('onclick');
 
@@ -1217,6 +1221,8 @@ var Backend =
 			els.getElements('label').each(function(l) {
 				l.setStyle('padding-left', (Browser.ie ? '40px' : '34px'));
 			});
+
+			els.addClass('done');
 		});
 	},
 
@@ -1904,8 +1910,6 @@ window.addEvent('domready', function() {
 	Backend.collapsePalettes();
 	Backend.addInteractiveHelp();
 	Backend.addColorPicker();
-
-	// Sortables
 	Backend.makeCheckboxWizardsSortable();
 	Backend.makeListWizardsSortable();
 	Backend.makeModuleWizardsSortable();
@@ -1926,6 +1930,7 @@ window.addEvent('ajax_change', function() {
 		}).chosen();
 	}
 	Backend.addInteractiveHelp();
+	Backend.makeCheckboxWizardsSortable();
 });
 
 
