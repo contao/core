@@ -1,6 +1,16 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.0.5 (2013-02-19)
+--------------------------
+
+### Fixed
+Removed the pixel unit from the video width and height attributes (see #5383).
+
+### Fixed
+Correctly load the language files (see #5384).
+
+
 Version 3.0.4 (2013-02-14)
 --------------------------
 
