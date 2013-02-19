@@ -755,7 +755,12 @@ class tl_user extends Backend
 	 */
 	public function removeSession(DataContainer $dc)
 	{
-		if ($dc->activeRecord)
+		if (!$dc->activeRecord)
+		{
+			return;
+		}
+
+		if ($dc->activeRecord->disable || Input::get('act') == 'delete' || Input::get('act') == 'deleteAll')
 		{
 			$this->Database->prepare("DELETE FROM tl_session WHERE name='BE_USER_AUTH' AND pid=?")
 						   ->execute($dc->activeRecord->id);
