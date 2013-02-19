@@ -5,6 +5,21 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### New
+Support multiple filter panels in the DCA (see #4542).
+
+```
+// Define the panel layout
+$GLOBALS['TL_DCA']['…']['panelLayout'] = 'filter;filter;sort,limit';
+
+// Assign the filters to the panels
+$GLOBALS['TL_DCA']['…']['fields']['country']['filter'] = 1; // or true
+$GLOBALS['TL_DCA']['…']['fields']['groups']['filter'] = 2;
+```
+
+### New
+Added the "panel_callback" to add custom panels to a DCA view (see #4542).
+
+### New
 Added a content element slider (see #4600).
 
 ### Improved
