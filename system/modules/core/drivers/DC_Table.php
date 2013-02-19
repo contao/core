@@ -3892,7 +3892,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						}
 					}
 
-					$return .= ' </div>'.$this->$strClass->$strMethod($row[$i]).'</div>';
+					$return .= '</div>'.$this->$strClass->$strMethod($row[$i]).'</div>';
 
 					// Make items sortable
 					if ($blnHasSorting)

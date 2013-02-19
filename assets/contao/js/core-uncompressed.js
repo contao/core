@@ -1125,7 +1125,7 @@ var Backend =
 		var img = Backend.getDragHandle();
 
 		$(ul).getElements('.tl_content_right').each(function(el) {
-			img.clone().inject(el);
+			img.clone().inject(el).appendText(' ', 'before');
 		});
 
 		var list = new Sortables(ul, {
