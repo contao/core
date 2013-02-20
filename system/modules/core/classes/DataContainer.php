@@ -204,8 +204,27 @@ class DataContainer extends \Backend
 			return '';
 		}
 
+		$arrData['eval']['required'] = false;
 		$arrData['activeRecord'] = $this->activeRecord;
-		$arrData['eval']['required'] = $arrData['eval']['mandatory'];
+
+		// Use strlen() here (see #3277)
+		if ($arrData['eval']['mandatory'])
+		{
+			if (is_array($this->varValue))
+			{
+				 if (empty($this->varValue))
+				 {
+				 	$arrData['eval']['required'] = true;
+				 }
+			}
+			else
+			{
+				if (!strlen($this->varValue))
+				{
+					$arrData['eval']['required'] = true;
+				}
+			}
+		}
 
 		$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable, $this));
 

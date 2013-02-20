@@ -131,8 +131,27 @@ class ModulePersonalData extends \Module
 
 			$strGroup = $arrData['eval']['feGroup'];
 
+			$arrData['eval']['required'] = false;
 			$arrData['eval']['tableless'] = $this->tableless;
-			$arrData['eval']['required'] = $arrData['eval']['mandatory'];
+
+			// Use strlen() here (see #3277)
+			if ($arrData['eval']['mandatory'])
+			{
+				if (is_array($this->User->$field))
+				{
+					 if (empty($this->User->$field))
+					 {
+					 	$arrData['eval']['required'] = true;
+					 }
+				}
+				else
+				{
+					if (!strlen($this->User->$field))
+					{
+						$arrData['eval']['required'] = true;
+					}
+				}
+			}
 
 			$varValue = $this->User->$field;
 

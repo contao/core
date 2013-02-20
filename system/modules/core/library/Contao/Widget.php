@@ -532,12 +532,11 @@ abstract class Widget extends \Controller
 			return '';
 		}
 
-		return sprintf('<label%s%s>%s%s%s</label>',
+		return sprintf('<label%s%s><span class="invisible">%s</span> %s<span class="mandatory">*</span></label>',
 						($this->blnForAttribute ? ' for="ctrl_' . $this->strId . '"' : ''),
 						(($this->strClass != '') ? ' class="' . $this->strClass . '"' : ''),
-						($this->required ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
-						$this->strLabel,
-						($this->required ? '<span class="mandatory">*</span>' : ''));
+						$GLOBALS['TL_LANG']['MSC']['mandatory'],
+						$this->strLabel);
 	}
 
 
