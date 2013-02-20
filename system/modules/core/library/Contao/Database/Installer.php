@@ -257,6 +257,10 @@ class Installer extends \Controller
 		$included = array();
 		$arrReturn = array();
 
+		// Ignore the internal cache
+		$blnBypassCache = $GLOBALS['TL_CONFIG']['bypassCache'];
+		$GLOBALS['TL_CONFIG']['bypassCache'] = true;
+
 		// Only check the active modules (see #4541)
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
@@ -285,6 +289,9 @@ class Installer extends \Controller
 				$included[] = $strFile;
 			}
 		}
+
+		// Restore the cache settings
+		$GLOBALS['TL_CONFIG']['bypassCache'] = $blnBypassCache;
 
 		return $arrReturn;
 	}

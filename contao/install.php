@@ -201,10 +201,6 @@ class InstallTool extends Backend
 			$this->reload();
 		}
 
-		// Purge the internal cache
-		$this->import('Automator');
-		$this->Automator->purgeInternalCache();
-
 		// Wait for the tables to be created (see #5061)
 		if ($this->Database->tableExists('tl_log'))
 		{
