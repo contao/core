@@ -1,10 +1,10 @@
-/*
+/**
  * Swipe 2.0
  *
  * Brad Birdsall
  * Copyright 2012, Licensed GPL & MIT
  *
-*/
+ */
 
 window.Swipe = function(element, options) {
 
@@ -375,7 +375,7 @@ Swipe.prototype = {
       this._animate(from*-this.width, to * -this.width, speed)
     }
 
-    this.index = to;
+    this.index = to.toInt(); // PATCH: make this an integer
 
     this.callback(this.index, this.slides[this.index]);
 
@@ -487,4 +487,67 @@ Swipe.prototype = {
 
   }
 
+};
+
+
+/**
+ * Add controls to the slider
+ *
+ * @package   Assets
+ * @author    Leo Feyer <https://github.com/leofeyer>
+ * @copyright Leo Feyer 2005-2013
+ */
+
+Swipe.prototype.addControl = function(control) {
+	var _this = this, i;
+
+	for (i=0; i<control.children.length; i++) {
+		switch (control.children[i].className) {
+			case 'slider-prev': this.ctrlPrev = control.children[i]; break;
+			case 'slider-menu': this.ctrlMenu = control.children[i]; break;
+			case 'slider-next': this.ctrlNext = control.children[i]; break;
+		}
+	}
+
+	this.ctrlPrev.addEventListener('click', function(e) {
+		e.preventDefault();
+		_this.prev();
+		_this.updateMenu(_this.getPos());
+	});
+
+	this.ctrlNext.addEventListener('click', function(e) {
+		e.preventDefault();
+		_this.next();
+		_this.updateMenu(_this.getPos());
+	});
+
+	for (i=0; i<this.length; i++) {
+		var b = document.createElement('b');
+		b.innerHTML = '•';
+		b.setAttribute('data-index', i);
+
+		if (i == this.index) b.className = 'active';
+
+		b.addEventListener('click', function(e) {
+			e.preventDefault();
+			_this.updateMenu(this.getAttribute('data-index'));
+		});
+
+		this.ctrlMenu.appendChild(b);
+	}
+};
+
+Swipe.prototype.updateMenu = function(idx)
+{
+	if (typeof this.ctrlMenu === "undefined") return;
+
+	for (var i=0; i<this.ctrlMenu.children.length; i++) {
+		if (this.ctrlMenu.children[i].getAttribute('data-index') == idx) {
+			this.ctrlMenu.children[i].className = 'active';
+		} else {
+			this.ctrlMenu.children[i].className = '';
+		}
+	}
+
+	this.slide(idx);
 };

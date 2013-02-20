@@ -1,36 +1,18 @@
+<?php
 
-<script type="text/javascript" src="<?php echo TL_ASSETS_URL; ?>assets/jquery/revolver/<?php echo J_REVOLVER; ?>/revolver.min.js"></script>
+// Add the swipe style sheet
+$GLOBALS['TL_CSS'][] = 'assets/swipe/'. SWIPE .'/css/swipe.min.css||static';
+
+?>
+
+<script type="text/javascript" src="<?php echo TL_ASSETS_URL; ?>assets/swipe/<?php echo SWIPE; ?>/js/swipe.min.js"></script>
 <script type="text/javascript">
   /* <![CDATA[ */
     $(document).ready(function() {
       $('.ce_sliderStart').each(function(i, cte) {
-        var slider = $('.content-slider', cte),
-            wrap = $('.slider-wrapper', slider);
-        $(slider).css({
-          'overflow':'hidden',
-          'visibility':'hidden',
-          'position':'relative'
-        });
-        $(wrap).css({
-          'overflow':'hidden',
-          'position':'relative'
-        });
-        $('.ce_text', wrap).each(function(i, el) {
-          $(el).css({
-            'float':'left',
-            'width':'100%',
-            'position':'relative'
-          });
-        });
-        var swipe = new Swipe(slider[0], {
+        new Swipe($('.content-slider', cte)[0], {
           // Put custom options here
-        });
-        $('.slider-control a', cte).each(function(i, el) {
-          $(el).click(function(e) {
-            e.preventDefault();
-            $(el).hasClass('slider-prev') ? swipe.prev() : swipe.next();
-          });
-        });
+        }).addControl($('.slider-control', cte)[0]);
       });
     });
   })(jQuery);

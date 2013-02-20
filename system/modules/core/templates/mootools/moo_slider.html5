@@ -1,36 +1,18 @@
+<?php
 
-<script src="<?php echo TL_ASSETS_URL; ?>assets/swipe/<?php echo SWIPE; ?>/swipe.min.js"></script>
+// Add the swipe style sheet
+$GLOBALS['TL_CSS'][] = 'assets/swipe/'. SWIPE .'/css/swipe.min.css||static';
+
+?>
+
+<script src="<?php echo TL_ASSETS_URL; ?>assets/swipe/<?php echo SWIPE; ?>/js/swipe.min.js"></script>
 <script>
   (function($) {
     window.addEvent('domready', function() {
       $$('.ce_sliderStart').each(function(cte) {
-        var slider = cte.getElement('.content-slider'),
-            wrap = slider.getElement('.slider-wrapper');
-        slider.setStyles({
-          'overflow':'hidden',
-          'visibility':'hidden',
-          'position':'relative'
-        });
-        wrap.setStyles({
-          'overflow':'hidden',
-          'position':'relative'
-        });
-        wrap.getElements('.ce_text').each(function(el) {
-          el.setStyles({
-            'float':'left',
-            'width':'100%',
-            'position':'relative'
-          });
-        });
-        var swipe = new Swipe(slider, {
+        new Swipe(cte.getElement('.content-slider'), {
           // Put custom options here
-        });
-        cte.getElements('.slider-control a').each(function(el) {
-          el.addEvent('click', function(e) {
-            e.preventDefault();
-            el.hasClass('slider-prev') ? swipe.prev() : swipe.next();
-          });
-        });
+        }).addControl(cte.getElement('.slider-control'));
       });
     });
   })(document.id);
