@@ -874,22 +874,6 @@ var Backend =
 	},
 
 	/**
-	 * Hide all pagetree and filetree nodes
-	 */
-	hideTreeBody: function() {
-		var lists = $$('ul'),
-			parent = null;
-
-		for (var i=0; i<lists.length; i++) {
-			if (lists[i].hasClass('mandatory')) {
-				$('ctrl_' + lists[i].id).checked = 'checked';
-			} else if (lists[i].hasClass('tl_listing') && (parent = lists[i].getFirst('li').getNext('li')) && parent.hasClass('parent')) {
-				parent.setStyle('display', 'none');
-			}
-		}
-	},
-
-	/**
 	 * Limit the height of the preview pane
 	 */
 	limitPreviewHeight: function() {
