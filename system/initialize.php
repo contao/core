@@ -89,7 +89,7 @@ require_once TL_ROOT . '/system/vendor/simplepie/autoloader.php';
 /**
  * Define the relative path to the installation (see #5339)
  */
-define('TL_PATH', str_replace(Environment::get('documentRoot'), '', str_replace('\\', '/',  dirname(__DIR__))));
+define('TL_PATH', Environment::get('websitePath'));
 
 
 /**
