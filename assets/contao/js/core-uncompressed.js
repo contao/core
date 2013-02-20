@@ -1754,6 +1754,11 @@ document.addEvent('mousedown', function(event) {
 window.addEvent('domready', function() {
 	$(document.body).addClass('js');
 
+	Backend.collapsePalettes();
+	Backend.addInteractiveHelp();
+	Backend.addColorPicker();
+	Backend.makeWizardsSortable();
+
 	// Chosen
 	if (Elements.chosen != undefined) {
 		$$('select.tl_chosen').chosen();
@@ -1763,11 +1768,6 @@ window.addEvent('domready', function() {
 	$$('textarea.monospace').each(function(el) {
 		Backend.toggleWrap(el);
 	});
-
-	Backend.collapsePalettes();
-	Backend.addInteractiveHelp();
-	Backend.addColorPicker();
-	Backend.makeWizardsSortable();
 });
 
 // Limit the height of the preview fields
@@ -1775,15 +1775,17 @@ window.addEvent('load', function() {
 	Backend.limitPreviewHeight();
 });
 
-// Re-apply the interactive help and Chosen upon Ajax changes
+// Re-apply certain changes upon ajax_change
 window.addEvent('ajax_change', function() {
+	Backend.addInteractiveHelp();
+	Backend.makeWizardsSortable();
+
+	// Chosen
 	if (Elements.chosen != undefined) {
 		$$('select.tl_chosen').filter(function(el) {
 			return el.getStyle('display') != 'none';
 		}).chosen();
 	}
-	Backend.addInteractiveHelp();
-	Backend.makeWizardsSortable();
 });
 
 
