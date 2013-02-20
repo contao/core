@@ -935,6 +935,9 @@ ul.sgallery .gimage {
 	margin:-14px 0;
 	padding-left:48px;
 }
+.js .tl_checkbox_wizard label {
+	padding-left:34px;
+}
 .tl_checkbox_wizard label:last-child {
 	margin-bottom:0;
 }
@@ -1038,6 +1041,10 @@ ul.sgallery .gimage {
 	position:relative;
 	top:1px;
 	cursor:move;
+	display:none;
+}
+.js .drag-handle {
+	display:inline;
 }
 .parent_view .drag-handle,.tl_tablewizard .drag-handle {
 	top:0;
@@ -1047,6 +1054,9 @@ ul.sgallery .gimage {
 }
 .tl_checkbox_wizard .drag-handle {
 	vertical-align:bottom;
+}
+.js .button-move {
+	display:none;
 }
 
 /* Navigation icons */

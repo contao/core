@@ -851,6 +851,9 @@
       <trans-unit id="MSC.lastLogin.1">
         <source>Last login: %s</source>
       </trans-unit>
+      <trans-unit id="MSC.move">
+        <source>Move the item via drag and drop</source>
+      </trans-unit>
       <trans-unit id="MSC.move_up.0">
         <source>Move up</source>
       </trans-unit>

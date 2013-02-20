@@ -338,33 +338,6 @@ var AjaxRequest =
 	},
 
 	/**
-	 * Reload all file trees (input field)
-	 */
-	reloadFiletrees: function () {
-		$$('.filetree').each(function(el) {
-			var name = el.id,
-				field = name.replace(/_[0-9]+$/, '');
-
-			new Request.Contao({
-				evalScripts: true,
-				onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-				onSuccess: function(txt, json) {
-
-					// Preserve the "reset selection" entry
-					var ul = $(el.id + '_parent').getFirst('ul'),
-						li = ul.getLast('li');
-					ul.set('html', txt);
-					li.inject(ul, 'bottom');
-					AjaxRequest.hideBox();
-
-					// HOOK
-					window.fireEvent('ajax_change');
-				}
-			}).post({'action':'loadFiletree', 'field':field, 'name':name, 'REQUEST_TOKEN':Contao.request_token});
-		});
-	},
-
-	/**
 	 * Toggle subpalettes in edit mode
 	 * @param object
 	 * @param string
@@ -658,6 +631,33 @@ var AjaxRequest =
 		if (box) {
 			box.setStyle('display', 'none');
 		}
+	},
+
+	/**
+	 * Reload all file trees (input field)
+	 */
+	reloadFiletrees: function () {
+		$$('.filetree').each(function(el) {
+			var name = el.id,
+				field = name.replace(/_[0-9]+$/, '');
+
+			new Request.Contao({
+				evalScripts: true,
+				onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
+				onSuccess: function(txt, json) {
+
+					// Preserve the "reset selection" entry
+					var ul = $(el.id + '_parent').getFirst('ul'),
+						li = ul.getLast('li');
+					ul.set('html', txt);
+					li.inject(ul, 'bottom');
+					AjaxRequest.hideBox();
+
+					// HOOK
+					window.fireEvent('ajax_change');
+				}
+			}).post({'action':'loadFiletree', 'field':field, 'name':name, 'REQUEST_TOKEN':Contao.request_token});
+		});
 	}
 };
 
@@ -1019,6 +1019,7 @@ var Backend =
 
 	/**
 	 * Toggle opacity
+	 * @deprecated
 	 */
 	blink: function() {
 		// Keep for backwards compatibility
@@ -1026,6 +1027,7 @@ var Backend =
 
 	/**
 	 * Initialize the mootools color picker (backwards compatibility)
+	 * @deprecated
 	 */
 	addColorPicker: function() {
 		return true;
@@ -1122,12 +1124,6 @@ var Backend =
 			}
 		});
 
-		var img = Backend.getDragHandle();
-
-		$(ul).getElements('.tl_content_right').each(function(el) {
-			img.clone().inject(el).appendText(' ', 'before');
-		});
-
 		var list = new Sortables(ul, {
 			contstrain: true,
 			opacity: 0.6,
@@ -1186,160 +1182,20 @@ var Backend =
     },
 
 	/**
-	 * Make the checkbox wizard items sortable
+	 * Make the wizards sortable
 	 * @param string
 	 */
-	makeCheckboxWizardsSortable: function(id) {
-		var img = Backend.getDragHandle();
-
-		$$('.tl_checkbox_wizard').each(function(el) {
-			var els = el.getElement('.sortable');
-
-			if (els.hasClass('done')) {
-				return;
-			}
-
-			els.getElements('a[onclick]').each(function(a) {
-				var oc = a.get('onclick');
-
-				if (oc.indexOf('checkboxWizard') != -1) {
-					if (oc.indexOf("'up'") != -1) {
-						img.clone().inject(a, 'before');
-						a.destroy();
-					} else if (oc.indexOf("'down'") != -1) {
-						a.destroy();
-					}
-				}
-			});
-
-			new Sortables(els, {
-				contstrain: true,
-				opacity: 0.6,
-				handle: '.drag-handle'
-			});
-
-			els.getElements('label').each(function(l) {
-				l.setStyle('padding-left', (Browser.ie ? '40px' : '34px'));
-			});
-
-			els.addClass('done');
-		});
-	},
-
-	/**
-	 * Make the list wizard items sortable
-	 * @param string
-	 */
-	makeListWizardsSortable: function(id) {
-		var img = Backend.getDragHandle();
-
+	makeWizardsSortable: function(id) {
 		$$('.tl_listwizard').each(function(el) {
-			el.getElements('a[onclick]').each(function(a) {
-				var oc = a.get('onclick');
-
-				if (oc.indexOf('listWizard') != -1) {
-					if (oc.indexOf("'up'") != -1) {
-						img.clone().inject(a, 'before');
-						a.destroy();
-					} else if (oc.indexOf("'down'") != -1) {
-						a.destroy();
-					}
-				}
-			});
-
 			new Sortables(el, {
 				contstrain: true,
 				opacity: 0.6,
 				handle: '.drag-handle'
 			});
 		});
-	},
-
-	/**
-	 * Make the module wizard items sortable
-	 * @param string
-	 */
-	makeModuleWizardsSortable: function(id) {
-		var img = Backend.getDragHandle();
-
-		$$('.tl_modulewizard').each(function(el) {
-			var els = el.getElement('.sortable');
-
-			els.getElements('a[onclick]').each(function(a) {
-				var oc = a.get('onclick');
-
-				if (oc.indexOf('moduleWizard') != -1) {
-					if (oc.indexOf("'up'") != -1) {
-						img.clone().inject(a, 'before');
-						a.destroy();
-					} else if (oc.indexOf("'down'") != -1) {
-						a.destroy();
-					}
-				}
-			});
-
-			new Sortables(els, {
-				contstrain: true,
-				opacity: 0.6,
-				handle: '.drag-handle'
-			});
-		});
-	},
-
-	/**
-	 * Make the options wizard items sortable
-	 * @param string
-	 */
-	makeOptionsWizardsSortable: function(id) {
-		var img = Backend.getDragHandle();
-
-		$$('.tl_optionwizard').each(function(el) {
-			var els = el.getElement('.sortable');
-
-			els.getElements('a[onclick]').each(function(a) {
-				var oc = a.get('onclick');
-
-				if (oc.indexOf('optionsWizard') != -1 || oc.indexOf('keyValueWizard') != -1) {
-					if (oc.indexOf("'up'") != -1) {
-						img.clone().inject(a, 'before');
-						a.destroy();
-					} else if (oc.indexOf("'down'") != -1) {
-						a.destroy();
-					}
-				}
-			});
-
-			new Sortables(els, {
-				contstrain: true,
-				opacity: 0.6,
-				handle: '.drag-handle'
-			});
-		});
-	},
-
-	/**
-	 * Make the table wizard items sortable
-	 * @param string
-	 */
-	makeTableWizardsSortable: function(id) {
-		var img = Backend.getDragHandle();
 
 		$$('.tl_tablewizard').each(function(el) {
 			var els = el.getElement('.sortable');
-
-			els.getElements('a[onclick]').each(function(a) {
-				var oc = a.get('onclick');
-
-				if (oc.indexOf('tableWizard') != -1) {
-					if (oc.indexOf("'rup'") != -1) {
-						img.clone().inject(a, 'before');
-						a.destroy();
-					} else if (oc.indexOf("'rdown'") != -1) {
-						a.destroy();
-					}
-				}
-			});
-
 			new Sortables(els, {
 				contstrain: true,
 				opacity: 0.6,
@@ -1348,6 +1204,35 @@ var Backend =
 					Backend.tableWizardResort(els);
 				}
 			});
+		});
+
+		$$('.tl_modulewizard').each(function(el) {
+			new Sortables(el.getElement('.sortable'), {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle'
+			});
+		});
+
+		$$('.tl_optionwizard').each(function(el) {
+			new Sortables(el.getElement('.sortable'), {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle'
+			});
+		});
+
+		$$('.tl_checkbox_wizard').each(function(el) {
+			var els = el.getElement('.sortable');
+			if (els.hasClass('sortable-done')) return;
+
+			new Sortables(els, {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle'
+			});
+
+			els.addClass('sortable-done');
 		});
 	},
 
@@ -1873,20 +1758,6 @@ var Backend =
 			td.getElement('a.module_link').setStyle('display', 'none');
 			td.getElement('img.module_image').setStyle('display', 'inline');
 		}
-	},
-
-	/**
-	 * Return the drag handle image object
-	 * @return object
-	 */
-	getDragHandle: function() {
-		return new Element('img', {
-			'class': 'drag-handle',
-			'src': 'system/themes/' + Contao.theme + '/images/drag.gif',
-			'width': 14,
-			'height': 16,
-			'alt': ''
-		});
 	}
 };
 
@@ -1897,6 +1768,8 @@ document.addEvent('mousedown', function(event) {
 
 // Initialize the back end script
 window.addEvent('domready', function() {
+	$(document.body).addClass('js');
+
 	// Chosen
 	if (Elements.chosen != undefined) {
 		$$('select.tl_chosen').chosen();
@@ -1910,11 +1783,7 @@ window.addEvent('domready', function() {
 	Backend.collapsePalettes();
 	Backend.addInteractiveHelp();
 	Backend.addColorPicker();
-	Backend.makeCheckboxWizardsSortable();
-	Backend.makeListWizardsSortable();
-	Backend.makeModuleWizardsSortable();
-	Backend.makeOptionsWizardsSortable();
-	Backend.makeTableWizardsSortable();
+	Backend.makeWizardsSortable();
 });
 
 // Limit the height of the preview fields
@@ -1930,7 +1799,7 @@ window.addEvent('ajax_change', function() {
 		}).chosen();
 	}
 	Backend.addInteractiveHelp();
-	Backend.makeCheckboxWizardsSortable();
+	Backend.makeWizardsSortable();
 });
 
 

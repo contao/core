@@ -4,9 +4,6 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
-### Changed
-Replaced revolver.js with slide.js (see #4600).
-
 ### New
 Support multiple filter panels in the DCA (see #4542).
 
@@ -23,7 +20,7 @@ $GLOBALS['TL_DCA']['…']['fields']['groups']['filter'] = 2;
 Added the "panel_callback" to add custom panels to a DCA view (see #4542).
 
 ### New
-Added a content element slider (see #4600).
+Added a content element slider based on swipe.js (see #4600).
 
 ### Improved
 Replaced the up and down arrows with a drag handle where applicable and made
