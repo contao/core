@@ -213,7 +213,7 @@ class Config
 
 		if ($this->strBottom != '')
 		{
-			$strFile .= $this->strBottom . "\n";
+			$strFile .= "\n" . $this->strBottom . "\n";
 		}
 
 		$strTemp = md5(uniqid(mt_rand(), true));
