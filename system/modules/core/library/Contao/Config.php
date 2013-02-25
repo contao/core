@@ -352,7 +352,7 @@ class Config
 	 *
 	 * @return mixed|null The configuration value
 	 */
-	public function get($strKey)
+	public static function get($strKey)
 	{
 		if (isset($GLOBALS['TL_CONFIG'][$strKey]))
 		{
