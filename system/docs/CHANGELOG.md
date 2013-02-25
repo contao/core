@@ -5,6 +5,9 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Show all articles if the article list module is in the same column (see #5373).
+
+### Fixed
 Do not show `mail_` templates from theme folders (see #5379).
 
 ### Fixed
