@@ -5,6 +5,10 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Consider only published events when finding the calendar boundaries and only
+render the previous and next links if there are events (see #5426).
+
+### Fixed
 Do not override the header and footer height in the layout builder (see #5368).
 
 ### Fixed
