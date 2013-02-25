@@ -5,6 +5,9 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not override the header and footer height in the layout builder (see #5368).
+
+### Fixed
 Correctly reset fallback, default and "do not copy" fields (see #5252).
 
 
