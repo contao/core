@@ -63,13 +63,16 @@ require TL_ROOT . '/system/helper/exception.php';
 
 
 /**
- * Register the class and template loader
+ * Register the class, template and module loaders
  */
 require TL_ROOT . '/system/modules/core/library/Contao/ClassLoader.php';
 class_alias('Contao\\ClassLoader', 'ClassLoader');
 
 require TL_ROOT . '/system/modules/core/library/Contao/TemplateLoader.php';
 class_alias('Contao\\TemplateLoader', 'TemplateLoader');
+
+require TL_ROOT . '/system/modules/core/library/Contao/ModuleLoader.php';
+class_alias('Contao\\ModuleLoader', 'ModuleLoader');
 
 ClassLoader::scanAndRegister(); // config/autoload.php
 

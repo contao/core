@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### New
+Added the `ModuleLoader` class to read the `autoload.ini` files of the modules
+and load the active ones with their dependencies resolved.
+
 ### Changed
 Store whether a module is enabled or not in the `autoload.ini` file instead of
 adding a `.skip` file.

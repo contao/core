@@ -204,38 +204,14 @@ class ClassLoader
 	 */
 	public static function scanAndRegister()
 	{
-		// Load the core modules first (see #5261)
-		$modules = array_unique(array_merge(explode(',', TL_CORE_MODULES), scan(TL_ROOT . '/system/modules')));
-
-		foreach ($modules as $file)
+		foreach (\ModuleLoader::getActive() as $module)
 		{
-			$path = TL_ROOT . '/system/modules/' . $file;
+			$file = 'system/modules/' . $module . '/config/autoload.php';
 
-			// Ignore files
-			if (strncmp($file, '.', 1) === 0 || !is_dir($path))
+			if (file_exists(TL_ROOT . '/' . $file))
 			{
-				continue;
+				include TL_ROOT . '/' . $file;
 			}
-
-			// No autoload file available
-			if (!file_exists($path . '/config/autoload.php'))
-			{
-				continue;
-			}
-
-			// Read the autoload.ini if any
-			if (file_exists($path . '/config/autoload.ini'))
-			{
-				$config = parse_ini_file($path . '/config/autoload.ini');
-
-				// Ignore disabled modules
-				if (isset($config['enabled']) && !$config['enabled'])
-				{
-					continue;
-				}
-			}
-
-			include $path . '/config/autoload.php';
 		}
 
 		self::register();

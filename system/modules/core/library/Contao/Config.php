@@ -277,77 +277,13 @@ class Config
 
 
 	/**
-	 * Return all active modules (starting with "core") as array
-	 *
-	 * @param boolean $blnNoCache Override the cache
+	 * Return all active modules as array
 	 *
 	 * @return array An array of active modules
 	 */
-	public function getActiveModules($blnNoCache=false)
+	public function getActiveModules()
 	{
-		if (!$blnNoCache && isset($this->arrCache['activeModules']))
-		{
-			return (array) $this->arrCache['activeModules']; // (array) = PHP 5.1.2 fix
-		}
-
-		$arrActiveModules    = array();
-		$arrCoreModules      = explode(',', TL_CORE_MODULES);
-		$arrLegacyModules    = explode(',', TL_LEGACY_MODULES);
-		$arrExtensionModules = scan(TL_ROOT . '/system/modules');
-
-		// Load the core modules first
-		foreach ($arrCoreModules as $strModule)
-		{
-			// Read the autoload.ini if any
-			if (file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini'))
-			{
-				$config = parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini');
-
-				// Ignore disabled modules
-				if (isset($config['enabled']) && !$config['enabled'])
-				{
-					continue;
-				}
-			}
-
-			$arrActiveModules[] = $strModule;
-		}
-
-		// Then load the extension modules
-		if (!$GLOBALS['TL_CONFIG']['coreOnlyMode'])
-		{
-			foreach ($arrExtensionModules as $strModule)
-			{
-				// Ignore core modules including legacy modules (see #4907)
-				if (in_array($strModule, $arrCoreModules) || in_array($strModule, $arrLegacyModules))
-				{
-					continue;
-				}
-
-				// Ignore files
-				if (strncmp($strModule, '.', 1) === 0 || !is_dir(TL_ROOT . '/system/modules/' . $strModule))
-				{
-					continue;
-				}
-
-				// Read the autoload.ini if any
-				if (file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini'))
-				{
-					$config = parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini');
-
-					// Ignore disabled modules
-					if (isset($config['enabled']) && !$config['enabled'])
-					{
-						continue;
-					}
-				}
-
-				$arrActiveModules[] = $strModule;
-			}
-		}
-
-		$this->arrCache['activeModules'] = $arrActiveModules;
-		return $arrActiveModules;
+		return \ModuleLoader::getActive();
 	}
 
 
