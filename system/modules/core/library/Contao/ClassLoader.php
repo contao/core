@@ -204,13 +204,23 @@ class ClassLoader
 	 */
 	public static function scanAndRegister()
 	{
-		foreach (\ModuleLoader::getActive() as $module)
-		{
-			$file = 'system/modules/' . $module . '/config/autoload.php';
+		$strCacheFile = 'system/cache/autoload/autoload.php';
 
-			if (file_exists(TL_ROOT . '/' . $file))
+		// Try to load from cache
+		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists(TL_ROOT . '/' . $strCacheFile))
+		{
+			include TL_ROOT . '/' . $strCacheFile;
+		}
+		else
+		{
+			foreach (\ModuleLoader::getActive() as $module)
 			{
-				include TL_ROOT . '/' . $file;
+				$file = 'system/modules/' . $module . '/config/autoload.php';
+
+				if (file_exists(TL_ROOT . '/' . $file))
+				{
+					include TL_ROOT . '/' . $file;
+				}
 			}
 		}
 

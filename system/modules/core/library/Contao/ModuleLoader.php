@@ -83,86 +83,96 @@ class ModuleLoader
 	 */
 	protected static function scanAndResolve()
 	{
-		$load = array();
+		$strCacheFile = 'system/cache/autoload/modules.php';
 
-		static::$active = array();
-		static::$disabled = array();
-
-		// Load the core modules first (see #5261)
-		$modules = array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository');
-
-		// Ignore non-core modules if the system runs in safe mode
-		if (!$GLOBALS['TL_CONFIG']['coreOnlyMode'])
+		// Try to load from cache
+		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists(TL_ROOT . '/' . $strCacheFile))
 		{
-			$modules = array_unique(array_merge($modules, scan(TL_ROOT . '/system/modules')));
+			include TL_ROOT . '/' . $strCacheFile;
 		}
-
-		// Walk through the modules
-		foreach ($modules as $file)
+		else
 		{
-			$path = TL_ROOT . '/system/modules/' . $file;
+			$load = array();
 
-			// Ignore files
-			if (strncmp($file, '.', 1) === 0 || !is_dir($path))
+			static::$active = array();
+			static::$disabled = array();
+
+			// Load the core modules first (see #5261)
+			$modules = array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository');
+
+			// Ignore non-core modules if the system runs in safe mode
+			if (!$GLOBALS['TL_CONFIG']['coreOnlyMode'])
 			{
-				continue;
+				$modules = array_unique(array_merge($modules, scan(TL_ROOT . '/system/modules')));
 			}
 
-			// Ignore legacy modules
-			if (in_array($file, array('backend', 'frontend', 'rep_base', 'rep_client', 'registration', 'rss_reader', 'tpl_editor')))
+			// Walk through the modules
+			foreach ($modules as $file)
 			{
-				continue;
-			}
+				$path = TL_ROOT . '/system/modules/' . $file;
 
-			// Read the autoload.ini if any
-			if (file_exists($path . '/config/autoload.ini'))
-			{
-				$config = parse_ini_file($path . '/config/autoload.ini', true);
-
-				// Ignore disabled modules
-				if (isset($config['enabled']) && !$config['enabled'])
+				// Ignore files
+				if (strncmp($file, '.', 1) === 0 || !is_dir($path))
 				{
-					static::$disabled[] = $file;
-				}
-				else
-				{
-					$load[$file] = $config['requires'];
-				}
-			}
-		}
-
-		// Resolve the dependencies
-		while (!empty($load))
-		{
-			$matched = false;
-
-			foreach ($load as $name=>$requires)
-			{
-				if (empty($requires))
-				{
-					$matched = true;
-				}
-				else
-				{
-					$matched = count(array_diff($requires, static::$active)) === 0;
+					continue;
 				}
 
-				if ($matched === true)
+				// Ignore legacy modules
+				if (in_array($file, array('backend', 'frontend', 'rep_base', 'rep_client', 'registration', 'rss_reader', 'tpl_editor')))
 				{
-					unset($load[$name]);
-					static::$active[] = $name;
+					continue;
+				}
+
+				// Read the autoload.ini if any
+				if (file_exists($path . '/config/autoload.ini'))
+				{
+					$config = parse_ini_file($path . '/config/autoload.ini', true);
+
+					// Ignore disabled modules
+					if (isset($config['enabled']) && !$config['enabled'])
+					{
+						static::$disabled[] = $file;
+					}
+					else
+					{
+						$load[$file] = $config['requires'];
+					}
 				}
 			}
 
-			// The dependencies cannot be resolved
-			if ($matched === false)
+			// Resolve the dependencies
+			while (!empty($load))
 			{
-				ob_start();
-				dump($load);
-				$buffer = ob_get_contents();
-				ob_end_clean();
+				$matched = false;
 
-				throw new \Exception('The module dependencies could not be resolved: </strong>' . $buffer . '<strong>');
+				foreach ($load as $name=>$requires)
+				{
+					if (empty($requires))
+					{
+						$matched = true;
+					}
+					else
+					{
+						$matched = count(array_diff($requires, static::$active)) === 0;
+					}
+
+					if ($matched === true)
+					{
+						unset($load[$name]);
+						static::$active[] = $name;
+					}
+				}
+
+				// The dependencies cannot be resolved
+				if ($matched === false)
+				{
+					ob_start();
+					dump($load);
+					$buffer = ob_get_contents();
+					ob_end_clean();
+
+					throw new \Exception('The module dependencies could not be resolved: </strong>' . $buffer . '<strong>');
+				}
 			}
 		}
 	}

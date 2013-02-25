@@ -181,7 +181,7 @@ class Automator extends \System
 		// Check whether the cache exists
 		if (is_dir(TL_ROOT . '/system/cache/dca'))
 		{
-			foreach (array('dca', 'language', 'sql') as $dir)
+			foreach (array('autoload', 'dca', 'language', 'sql') as $dir)
 			{
 				// Purge the folder
 				$objFolder = new \Folder('system/cache/' . $dir);
@@ -438,9 +438,67 @@ class Automator extends \System
 		$this->purgeInternalCache();
 
 		// Rebuild
+		$this->generateAutoloadCache();
 		$this->generateDcaCache();
 		$this->generateLanguageCache();
 		$this->generateDcaExtracts();
+	}
+
+
+	/**
+	 * Create the autoload cache file
+	 */
+	public function generateAutoloadCache()
+	{
+		// Generate the class/template laoder cache file
+		$objCacheFile = new \File('system/cache/autoload/autoload.php', true);
+		$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
+
+		foreach (\ModuleLoader::getActive() as $strModule)
+		{
+			$strFile = 'system/modules/' . $strModule . '/config/autoload.php';
+
+			if (file_exists(TL_ROOT . '/' . $strFile))
+			{
+				$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
+			}
+		}
+
+		// Close the file (moves it to its final destination)
+		$objCacheFile->close();
+
+		// Generate the module loader cache file
+		$objCacheFile = new \File('system/cache/autoload/modules.php', true);
+		$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
+
+		$strContent = "\n\n";
+		$strContent .= "/**\n * Active modules\n */\n";
+		$strContent .= "static::\$active = array\n";
+		$strContent .= "(\n";
+
+		foreach (\ModuleLoader::getActive() as $strModule)
+		{
+			$strContent .= "\t'$strModule',\n";
+		}
+
+		$strContent .= ");\n\n";
+		$strContent .= "/**\n * Disabled modules\n */\n";
+		$strContent .= "static::\$disabled = array\n";
+		$strContent .= "(\n";
+
+		foreach (\ModuleLoader::getDisabled() as $strModule)
+		{
+			$strContent .= "\t'$strModule',\n";
+		}
+
+		$strContent .= ");";
+		$objCacheFile->append($strContent);
+
+		// Close the file (moves it to its final destination)
+		$objCacheFile->close();
+
+		// Add a log entry
+		$this->log('Generated the autoload cache', 'Automator generateDcaCache()', TL_CRON);
 	}
 
 
@@ -641,24 +699,24 @@ class Automator extends \System
 			{
 				$objFile->append("\t'$field' => \"$sql\",");
 			}
-	
+
 			$objFile->append(');', "\n\n");
-	
+
 			// Keys
 			$arrKeys = $objExtract->getKeys();
 			$objFile->append("\$this->arrKeys = array\n(");
-	
+
 			foreach ($arrKeys as $field=>$type)
 			{
 				$objFile->append("\t'$field' => '$type',");
 			}
 
 			$objFile->append(');', "\n\n");
-	
+
 			// Relations
 			$arrRelations = $objExtract->getRelations();
 			$objFile->append("\$this->arrRelations = array\n(");
-	
+
 			foreach ($arrRelations as $field=>$config)
 			{
 				$objFile->append("\t'$field' => array\n\t(");
@@ -667,15 +725,15 @@ class Automator extends \System
 				{
 					$objFile->append("\t\t'$k' => '$v',");
 				}
-	
+
 				$objFile->append("\t),");
 			}
-	
+
 			$objFile->append(');', "\n\n");
-	
+
 			// Set the database table flag
 			$objFile->append("\$this->blnIsDbTable = true;", "\n");
-	
+
 			// Close the file (moves it to its final destination)
 			$objFile->close();
 		}
