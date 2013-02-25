@@ -181,7 +181,7 @@ class Automator extends \System
 		// Check whether the cache exists
 		if (is_dir(TL_ROOT . '/system/cache/dca'))
 		{
-			foreach (array('autoload', 'dca', 'language', 'sql') as $dir)
+			foreach (array('config', 'dca', 'language', 'sql') as $dir)
 			{
 				// Purge the folder
 				$objFolder = new \Folder('system/cache/' . $dir);
@@ -438,7 +438,7 @@ class Automator extends \System
 		$this->purgeInternalCache();
 
 		// Rebuild
-		$this->generateAutoloadCache();
+		$this->generateConfigCache();
 		$this->generateDcaCache();
 		$this->generateLanguageCache();
 		$this->generateDcaExtracts();
@@ -446,12 +446,12 @@ class Automator extends \System
 
 
 	/**
-	 * Create the autoload cache file
+	 * Create the config cache files
 	 */
-	public function generateAutoloadCache()
+	public function generateConfigCache()
 	{
 		// Generate the class/template laoder cache file
-		$objCacheFile = new \File('system/cache/autoload/autoload.php', true);
+		$objCacheFile = new \File('system/cache/config/autoload.php', true);
 		$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
 
 		foreach (\ModuleLoader::getActive() as $strModule)
@@ -468,7 +468,7 @@ class Automator extends \System
 		$objCacheFile->close();
 
 		// Generate the module loader cache file
-		$objCacheFile = new \File('system/cache/autoload/modules.php', true);
+		$objCacheFile = new \File('system/cache/config/modules.php', true);
 		$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
 
 		$strContent = "\n\n";
@@ -493,6 +493,27 @@ class Automator extends \System
 
 		$strContent .= ");";
 		$objCacheFile->append($strContent);
+
+		// Close the file (moves it to its final destination)
+		$objCacheFile->close();
+
+		// Generate the config cache file
+		$objCacheFile = new \File('system/cache/config/config.php', true);
+		$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
+
+		// Load the default files
+		$objCacheFile->append(static::readPhpFileWithoutTags('system/config/default.php'));
+		$objCacheFile->append(static::readPhpFileWithoutTags('system/config/agents.php'));
+
+		foreach (\ModuleLoader::getActive() as $strModule)
+		{
+			$strFile = 'system/modules/' . $strModule . '/config/config.php';
+
+			if (file_exists(TL_ROOT . '/' . $strFile))
+			{
+				$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
+			}
+		}
 
 		// Close the file (moves it to its final destination)
 		$objCacheFile->close();

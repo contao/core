@@ -83,10 +83,10 @@ class ModuleLoader
 	 */
 	protected static function scanAndResolve()
 	{
-		$strCacheFile = 'system/cache/autoload/modules.php';
+		$strCacheFile = 'system/cache/config/modules.php';
 
 		// Try to load from cache
-		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists(TL_ROOT . '/' . $strCacheFile))
+		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
 		{
 			include TL_ROOT . '/' . $strCacheFile;
 		}

@@ -121,31 +121,64 @@ class Config
 	 */
 	protected function initialize()
 	{
-		// Load the default files
-		include TL_ROOT . '/system/config/default.php';
-		include TL_ROOT . '/system/config/agents.php';
+		$this->blnHasLcf = file_exists(TL_ROOT . '/system/config/localconfig.php');
 
-		// Get the module configuration files
-		foreach ($this->getActiveModules() as $strModule)
+		// Include the local configuration file
+		if ($this->blnHasLcf)
 		{
-			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/config/config.php';
+			include TL_ROOT . '/system/config/localconfig.php';
+		}
 
-			if (file_exists($strFile))
+		$strCacheFile = 'system/cache/config/config.php';
+
+		// Try to load from cache
+		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
+		{
+			include TL_ROOT . '/' . $strCacheFile;
+		}
+		else
+		{
+			// Load the default files
+			include TL_ROOT . '/system/config/default.php';
+			include TL_ROOT . '/system/config/agents.php';
+
+			// Get the module configuration files
+			foreach ($this->getActiveModules() as $strModule)
 			{
-				include $strFile;
+				$strFile = TL_ROOT . '/system/modules/' . $strModule . '/config/config.php';
+
+				if (file_exists($strFile))
+				{
+					include $strFile;
+				}
 			}
 		}
 
-		// Return if there is no local configuration file yet
-		if (!file_exists(TL_ROOT . '/system/config/localconfig.php'))
+		// // Include the local configuration file again
+		if ($this->blnHasLcf)
+		{
+			include TL_ROOT . '/system/config/localconfig.php';
+		}
+	}
+
+
+	/**
+	 * Mark the object as modified
+	 */
+	protected function markModified()
+	{
+		// Return if marked as modified already
+		if ($this->blnIsModified === true)
 		{
 			return;
 		}
 
-		$this->blnHasLcf = true;
-		include TL_ROOT . '/system/config/localconfig.php';
+		$this->blnIsModified = true;
 
-		// Read the local configuration file
+		// Import the Files object (required in the destructor)
+		$this->Files = \Files::getInstance();
+
+		// Parse the local configuration file
 		$strMode = 'top';
 		$resFile = fopen(TL_ROOT . '/system/config/localconfig.php', 'rb');
 
@@ -295,8 +328,7 @@ class Config
 	 */
 	public function add($strKey, $varValue)
 	{
-		$this->blnIsModified = true;
-		$this->Files = \Files::getInstance(); // Required in the destructor
+		$this->markModified();
 		$this->arrData[$strKey] = $this->escape($varValue) . ';';
 	}
 
@@ -338,8 +370,7 @@ class Config
 	 */
 	public function delete($strKey)
 	{
-		$this->blnIsModified = true;
-		$this->Files = \Files::getInstance(); // Required in the destructor
+		$this->markModified();
 		unset($this->arrData[$strKey]);
 	}
 
