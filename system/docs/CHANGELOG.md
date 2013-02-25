@@ -5,6 +5,9 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not show `mail_` templates from theme folders (see #5379).
+
+### Fixed
 Consider only published events when finding the calendar boundaries and only
 render the previous and next links if there are events (see #5426).
 

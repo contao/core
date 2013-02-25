@@ -126,6 +126,12 @@ abstract class Controller extends \System
 			}
 		}
 
+		// Do not look for back end templates in theme folders (see #5379)
+		if ($strPrefix == 'be_' || $strPrefix == 'mail_')
+		{
+			return $arrTemplates;
+		}
+
 		// Try to select the themes (see #5210)
 		try
 		{
