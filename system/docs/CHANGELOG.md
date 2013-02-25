@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.0.6 (2013-XX-XX)
+--------------------------
+
+### Fixed
+Correctly reset fallback, default and "do not copy" fields (see #5252).
+
+
 Version 3.0.5 (2013-02-19)
 --------------------------
 
