@@ -240,7 +240,7 @@ abstract class Controller extends \System
 
 			while ($objArticles->next())
 			{
-				$return .= $this->getArticle($objArticles, $blnMultiMode, false, $strColumn);
+				$return .= $this->getArticle($objArticles->current(), $blnMultiMode, false, $strColumn);
 			}
 
 			return $return;
