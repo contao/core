@@ -868,7 +868,7 @@ class InstallTool extends Backend
 			// Disable the tasks extension (see #4907)
 			if (is_dir(TL_ROOT . '/system/modules/tasks'))
 			{
-				File::putContent('system/modules/tasks/.skip', 'Disabled during the version 3 update (see #4907)');
+				System::disableModule('tasks');
 			}
 
 			// Save the old upload path in the localconfig.php

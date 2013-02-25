@@ -331,6 +331,20 @@ class File extends \System
 
 
 	/**
+	 * Prepend data to the file
+	 *
+	 * @param mixed  $varData The data to be prepended
+	 * @param string $strLine The line ending (defaults to LF)
+	 *
+	 * @return boolean True if the operation was successful
+	 */
+	public function prepend($varData, $strLine="\n")
+	{
+		return $this->fputs($varData . $strLine . $this->getContent(), 'wb');
+	}
+
+
+	/**
 	 * Delete the file
 	 *
 	 * @return boolean True if the operation was successful

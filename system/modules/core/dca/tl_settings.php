@@ -575,25 +575,14 @@ class tl_settings extends Backend
 				continue;
 			}
 
-			// Add the .skip file to disable the module
+			// Disable the module
 			if (in_array($strModule, $arrModules))
 			{
-				if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
-				{
-					File::putContent('system/modules/' . $strModule . '/.skip', 'As long as this file exists, the module will be ignored.');
-					$blnPurgeCache = true;
-				}
+				$blnPurgeCache = System::disableModule($strModule);
 			}
-			// Remove the .skip if it exists
 			else
 			{
-				$objFile = new File('system/modules/' . $strModule . '/.skip', true);
-
-				if ($objFile->exists())
-				{
-					$objFile->delete();
-					$blnPurgeCache = true;
-				}
+				$blnPurgeCache = System::enableModule($strModule);
 			}
 		}
 

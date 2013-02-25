@@ -62,6 +62,8 @@ namespace  {
 	class DC_Folder extends Contao\DC_Folder {}
 	class DC_Table extends Contao\DC_Table {}
 	class ContentAccordion extends Contao\ContentAccordion {}
+	class ContentAccordionStart extends Contao\ContentAccordionStart {}
+	class ContentAccordionStop extends Contao\ContentAccordionStop {}
 	class ContentAlias extends Contao\ContentAlias {}
 	class ContentArticle extends Contao\ContentArticle {}
 	class ContentCode extends Contao\ContentCode {}
@@ -76,6 +78,8 @@ namespace  {
 	class ContentList extends Contao\ContentList {}
 	class ContentMedia extends Contao\ContentMedia {}
 	class ContentModule extends Contao\ContentModule {}
+	class ContentSliderStart extends Contao\ContentSliderStart {}
+	class ContentSliderStop extends Contao\ContentSliderStop {}
 	class ContentTable extends Contao\ContentTable {}
 	class ContentTeaser extends Contao\ContentTeaser {}
 	class ContentText extends Contao\ContentText {}

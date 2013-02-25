@@ -211,14 +211,28 @@ class ClassLoader
 		{
 			$path = TL_ROOT . '/system/modules/' . $file;
 
+			// Ignore files
 			if (strncmp($file, '.', 1) === 0 || !is_dir($path))
 			{
 				continue;
 			}
 
-			if (file_exists($path . '/.skip') || !file_exists($path . '/config/autoload.php'))
+			// No autoload file available
+			if (!file_exists($path . '/config/autoload.php'))
 			{
 				continue;
+			}
+
+			// Read the autoload.ini if any
+			if (file_exists($path . '/config/autoload.ini'))
+			{
+				$config = parse_ini_file($path . '/config/autoload.ini');
+
+				// Ignore disabled modules
+				if (isset($config['enabled']) && !$config['enabled'])
+				{
+					continue;
+				}
 			}
 
 			include $path . '/config/autoload.php';

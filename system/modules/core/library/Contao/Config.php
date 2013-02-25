@@ -298,10 +298,19 @@ class Config
 		// Load the core modules first
 		foreach ($arrCoreModules as $strModule)
 		{
-			if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
+			// Read the autoload.ini if any
+			if (file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini'))
 			{
-				$arrActiveModules[] = $strModule;
+				$config = parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini');
+
+				// Ignore disabled modules
+				if (isset($config['enabled']) && !$config['enabled'])
+				{
+					continue;
+				}
 			}
+
+			$arrActiveModules[] = $strModule;
 		}
 
 		// Then load the extension modules
@@ -309,15 +318,31 @@ class Config
 		{
 			foreach ($arrExtensionModules as $strModule)
 			{
-				if (in_array($strModule, $arrLegacyModules))
+				// Ignore core modules including legacy modules (see #4907)
+				if (in_array($strModule, $arrCoreModules) || in_array($strModule, $arrLegacyModules))
 				{
-					continue; // see #4907
+					continue;
 				}
 
-				if (strncmp($strModule, '.', 1) !== 0 && !in_array($strModule, $arrCoreModules) && is_dir(TL_ROOT . '/system/modules/' . $strModule) && !file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
+				// Ignore files
+				if (strncmp($strModule, '.', 1) === 0 || !is_dir(TL_ROOT . '/system/modules/' . $strModule))
 				{
-					$arrActiveModules[] = $strModule;
+					continue;
 				}
+
+				// Read the autoload.ini if any
+				if (file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini'))
+				{
+					$config = parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini');
+
+					// Ignore disabled modules
+					if (isset($config['enabled']) && !$config['enabled'])
+					{
+						continue;
+					}
+				}
+
+				$arrActiveModules[] = $strModule;
 			}
 		}
 
