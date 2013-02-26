@@ -34,7 +34,7 @@ Added a content element slider based on swipe.js (see #4600).
 
 ### Improved
 Replaced the up and down arrows with a drag handle where applicable and made
-the items sortable via drag and drop (see 4434). This includes:
+the items sortable via drag and drop (see #4434). This includes:
 
  * the checkbox wizard
  * the list wizard (content element)
