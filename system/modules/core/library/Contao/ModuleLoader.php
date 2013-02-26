@@ -109,10 +109,8 @@ class ModuleLoader
 			// Walk through the modules
 			foreach ($modules as $file)
 			{
-				$path = TL_ROOT . '/system/modules/' . $file;
-
-				// Ignore files
-				if (strncmp($file, '.', 1) === 0 || !is_dir($path))
+				// Ignore dot resources
+				if (strncmp($file, '.', 1) === 0)
 				{
 					continue;
 				}
@@ -123,20 +121,21 @@ class ModuleLoader
 					continue;
 				}
 
+				$path = TL_ROOT . '/system/modules/' . $file;
+
+				// Ignore files and disabled module
+				if (!is_dir($path) || file_exists($path . '/.skip'))
+				{
+					continue;
+				}
+
+				$load[$file] = array();
+
 				// Read the autoload.ini if any
 				if (file_exists($path . '/config/autoload.ini'))
 				{
 					$config = parse_ini_file($path . '/config/autoload.ini', true);
-
-					// Ignore disabled modules
-					if (isset($config['enabled']) && !$config['enabled'])
-					{
-						static::$disabled[] = $file;
-					}
-					else
-					{
-						$load[$file] = $config['requires'];
-					}
+					$load[$file] = $config['requires'];
 				}
 			}
 

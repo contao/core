@@ -14,10 +14,6 @@ Add the autoloader files to the internal cache.
 Added the `ModuleLoader` class to read the `autoload.ini` files of the modules
 and load the active ones with their dependencies resolved.
 
-### Changed
-Store whether a module is enabled or not in the `autoload.ini` file instead of
-adding a `.skip` file.
-
 ### New
 Support multiple filter panels in the DCA (see #4542).
 

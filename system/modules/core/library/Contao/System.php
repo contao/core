@@ -788,35 +788,15 @@ abstract class System
 	 */
 	public static function enableModule($strName)
 	{
-		if (!file_exists(TL_ROOT . '/system/modules/' . $strName . '/config/autoload.ini'))
-		{
-			$objFile = new \File('system/modules/' . $strName . '/config/autoload.ini');
-			$objFile->write(";;\n; Enable the module\n;;\nenabled = true\n");
-			$objFile->close();
+		$objFile = new \File('system/modules/' . $strName . '/.skip', true);
 
-			return true;
+		if (!$objFile->exists())
+		{
+			return false;
 		}
 
-		$arrConfig = parse_ini_file(TL_ROOT . '/system/modules/' . $strName . '/config/autoload.ini');
-
-		if (!isset($arrConfig['enabled']))
-		{
-			$objFile = new \File('system/modules/' . $strName . '/config/autoload.ini');
-			$objFile->prepend(";;\n; Enable the module\n;;\nenabled = true\n");
-			$objFile->close();
-
-			return true;
-		}
-		elseif (!$arrConfig['enabled'])
-		{
-			$objFile = new \File('system/modules/' . $strName . '/config/autoload.ini');
-			$objFile->write(preg_replace('/^enabled = false/m', 'enabled = true', $objFile->getContent()));
-			$objFile->close();
-
-			return true;
-		}
-
-		return false;
+		$objFile->delete();
+		return true;
 	}
 
 
@@ -827,35 +807,17 @@ abstract class System
 	 */
 	public static function disableModule($strName)
 	{
-		if (!file_exists(TL_ROOT . '/system/modules/' . $strName . '/config/autoload.ini'))
-		{
-			$objFile = new \File('system/modules/' . $strName . '/config/autoload.ini');
-			$objFile->write(";;\n; Enable the module\n;;\nenabled = false\n");
-			$objFile->close();
+		$objFile = new \File('system/modules/' . $strName . '/.skip', true);
 
-			return true;
+		if ($objFile->exists())
+		{
+			return false;
 		}
 
-		$arrConfig = parse_ini_file(TL_ROOT . '/system/modules/' . $strName . '/config/autoload.ini');
+		$objFile->write('Remove this file to enable the module');
+		$objFile->close();
 
-		if (!isset($arrConfig['enabled']))
-		{
-			$objFile = new \File('system/modules/' . $strName . '/config/autoload.ini');
-			$objFile->prepend(";;\n; Enable the module\n;;\nenabled = false\n");
-			$objFile->close();
-
-			return true;
-		}
-		elseif ($arrConfig['enabled'])
-		{
-			$objFile = new \File('system/modules/' . $strName . '/config/autoload.ini');
-			$objFile->write(preg_replace('/^enabled = true/m', 'enabled = false', $objFile->getContent()));
-			$objFile->close();
-
-			return true;
-		}
-
-		return false;
+		return true;
 	}
 
 
