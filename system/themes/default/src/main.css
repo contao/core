@@ -1058,6 +1058,9 @@ ul.sgallery .gimage {
 .js .button-move {
 	display:none;
 }
+ul.sortable li {
+	cursor:move;
+}
 
 /* Navigation icons */
 a.navigation.article {
