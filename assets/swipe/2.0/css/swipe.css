@@ -8,7 +8,7 @@
 	overflow:hidden;
 	position:relative;
 }
-.slider-wrapper .ce_text {
+.slider-wrapper>* {
 	float:left;
 	width:100%;
 	position:relative;
