@@ -1103,20 +1103,53 @@ var Backend =
 	makeParentViewSortable: function(ul) {
 		var ds = new Scroller(document.getElement('body'), {
 			onChange: function(x, y) {
-				var sc = this.element.getScroll();
-				this.element.scrollTo(sc.x, y);
+				this.element.scrollTo(this.element.getScroll().x, y);
 			}
 		});
 
 		var list = new Sortables(ul, {
 			contstrain: true,
 			opacity: 0.6,
-			onStart: function(){
+			onStart: function() {
 				ds.start();
 			},
-			onComplete: function(){
+			onComplete: function() {
 				ds.stop();
     		},
+			onSort: function(el) {
+				var div = el.getFirst('div'),
+					prev, next, first;
+
+				if (!div) return;
+
+				if (div.hasClass('wrapper_start')) {
+					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div'))) {
+						first.removeClass('indent');
+					}
+					if ((next = el.getNext('li')) && (first = next.getFirst('div'))) {
+						first.addClass('indent');
+					}
+				} else if (div.hasClass('wrapper_stop')) {
+					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div'))) {
+						first.addClass('indent');
+					}
+					if ((next = el.getNext('li')) && (first = next.getFirst('div'))) {
+						first.removeClass('indent');
+					}
+				} else if (div.hasClass('indent')) {
+					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div')) && first.hasClass('wrapper_stop')) {
+						div.removeClass('indent');
+					} else if ((next = el.getNext('li')) && (first = next.getFirst('div')) && first.hasClass('wrapper_start')) {
+						div.removeClass('indent');
+					}
+				} else {
+					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div')) && first.hasClass('wrapper_start')) {
+						div.addClass('indent');
+					} else if ((next = el.getNext('li')) && (first = next.getFirst('div')) && first.hasClass('wrapper_stop')) {
+						div.addClass('indent');
+					}
+				}
+			},
 			handle: '.drag-handle'
 		});
 
