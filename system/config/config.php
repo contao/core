@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Config
  * @license    LGPL
  * @filesource
@@ -308,7 +308,7 @@ $GLOBALS['TL_CONFIG']['templateFiles']        = 'tpl,html5,xhtml';
 $GLOBALS['TL_CONFIG']['allowedDownload']      = 'jpg,jpeg,gif,png,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov';
 $GLOBALS['TL_CONFIG']['installPassword']      = '4d19f112e30930cbe278de966e9b2d907568d1c8';
 $GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'http://www.inetrobots.com/liveupdate/';
-$GLOBALS['TL_CONFIG']['repository_wsdl']      = 'http://www.contao.org/services/repository.wsdl';
+$GLOBALS['TL_CONFIG']['repository_wsdl']      = 'http://contao.org/services/repository.wsdl';
 $GLOBALS['TL_CONFIG']['repository_languages'] = 'en,de';
 $GLOBALS['TL_CONFIG']['repository_listsize']  = 10;
 $GLOBALS['TL_CONFIG']['backendTheme']         = 'default';

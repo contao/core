@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -153,11 +153,11 @@ function __error($intType, $strMessage, $strFile, $intLine)
 				$strMessage = sprintf('<strong>%s</strong>: %s in <strong>%s</strong> on line <strong>%s</strong>',
 									$arrErrors[$intType],
 									$strMessage,
-									$strFile,
+									str_replace(TL_ROOT, '…', $strFile), // see #4971
 									$intLine);
 
 				$e = new Exception();
-				$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . $e->getTraceAsString() . "\n" . '</pre>';
+				$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT, '…', $e->getTraceAsString()) . "\n" . '</pre>';
 				echo '<br>' . $strMessage;
 			}
 		}
@@ -194,10 +194,10 @@ function __exception($e)
 		$strMessage = sprintf('<strong>Fatal error</strong>: Uncaught exception <strong>%s</strong> with message <strong>%s</strong> thrown in <strong>%s</strong> on line <strong>%s</strong>',
 							get_class($e),
 							$e->getMessage(),
-							$e->getFile(),
+							str_replace(TL_ROOT, '…', $e->getFile()), // see #4971
 							$e->getLine());
 
-		$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . $e->getTraceAsString() . "\n" . '</pre>';
+		$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT, '…', $e->getTraceAsString()) . "\n" . '</pre>';
 		echo '<br>' . $strMessage;
 	}
 

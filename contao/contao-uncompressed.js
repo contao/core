@@ -1,6 +1,6 @@
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -19,8 +19,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -31,8 +31,8 @@
  * Class Request.Contao
  * 
  * Extend the basic Request.JSON class.
- * @copyright  Leo Feyer 2011-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Backend
  */
 Request.Contao = new Class(
@@ -91,8 +91,8 @@ Request.Mixed = Request.Contao;
  * Class AjaxRequest
  *
  * Provide methods to handle Ajax requests.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Backend
  */
 var AjaxRequest =
@@ -739,8 +739,8 @@ var AjaxRequest =
  * Class Backend
  *
  * Provide methods to handle back end tasks.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Backend
  */
 var Backend =
@@ -1583,8 +1583,8 @@ window.addEvent('load', function() {
  * Class ContextMenu
  *
  * Provide methods to handle context menus
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Backend
  */
 var ContextMenu =
@@ -1668,8 +1668,8 @@ window.addEvent('structure', function() {
  * Class TinyCallback
  *
  * Provide callback functions for TinyMCE.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Backend
  */
 var TinyCallback =

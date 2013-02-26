@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -33,8 +33,8 @@
  * Class DC_Table
  *
  * Provide methods to modify the database.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Controller
  */
 class DC_Table extends DataContainer implements listable, editable
@@ -466,15 +466,15 @@ class DC_Table extends DataContainer implements listable, editable
 			}
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'date')
 			{
-				$row[$i] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value);
+				$row[$i] = $value ? $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value) : '-';
 			}
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'time')
 			{
-				$row[$i] = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $value);
+				$row[$i] = $value ? $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $value) : '-';
 			}
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'datim' || in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['flag'], array(5, 6, 7, 8, 9, 10)) || $i == 'tstamp')
 			{
-				$row[$i] = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $value);
+				$row[$i] = $value ? $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $value) : '-';
 			}
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['multiple'])
 			{
@@ -1575,6 +1575,18 @@ class DC_Table extends DataContainer implements listable, editable
 
 				if (is_array($data))
 				{
+					// Get the currently available fields
+					$arrFields = array_flip($this->Database->getFieldnames($this->strTable));
+
+					// Unset fields that do not exist (see #5219)
+					foreach (array_keys($data) as $k)
+					{
+						if (!isset($arrFields[$k]))
+						{
+							unset($data[$k]);
+						}
+					}
+
 					$this->Database->prepare("UPDATE " . $objData->fromTable . " %s WHERE id=?")
 								   ->set($data)
 								   ->execute($this->intId);
@@ -3434,17 +3446,17 @@ window.addEvent(\'domready\', function() {
 				{
 					$_v = strlen($_v) ? $GLOBALS['TL_LANG']['MSC']['yes'] : $GLOBALS['TL_LANG']['MSC']['no'];
 				}
-				elseif ($_v && $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'date')
+				elseif ($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'date')
 				{
-					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $_v);
+					$_v = $_v ? $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $_v) : '-';
 				}
-				elseif ($_v && $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'time')
+				elseif ($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'time')
 				{
-					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $_v);
+					$_v = $_v ? $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $_v) : '-';
 				}
-				elseif ($_v && $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'datim')
+				elseif ($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'datim')
 				{
-					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $_v);
+					$_v = $_v ? $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $_v) : '-';
 				}
 				elseif ($v == 'tstamp')
 				{
@@ -3930,15 +3942,15 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					{
 						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['rgxp'] == 'date')
 						{
-							$args[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $row[$v]);
+							$args[$k] = $row[$v] ? $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $row[$v]) : '-';
 						}
 						elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['rgxp'] == 'time')
 						{
-							$args[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $row[$v]);
+							$args[$k] = $row[$v] ? $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $row[$v]) : '-';
 						}
 						else
 						{
-							$args[$k] = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $row[$v]);
+							$args[$k] = $row[$v] ? $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $row[$v]) : '-';
 						}
 					}
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['multiple'])
@@ -4295,8 +4307,14 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		// Set sorting from user input
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters')
 		{
-			$session['sorting'][$this->strTable] = in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->Input->post('tl_sort')]['flag'], array(2, 4, 6, 8, 10, 12)) ? $this->Input->post('tl_sort').' DESC' : $this->Input->post('tl_sort');
-			$this->Session->setData($session);
+			$strSort = $this->Input->post('tl_sort');
+
+			// Validate the user input (thanks to aulmn) (see #4971)
+			if (in_array($strSort, $sortingFields))
+			{
+				$session['sorting'][$this->strTable] = in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$strSort]['flag'], array(2, 4, 6, 8, 10, 12)) ? "$strSort DESC" : $strSort;
+				$this->Session->setData($session);
+			}
 		}
 
 		// Overwrite the "orderBy" value with the session value
@@ -4354,13 +4372,19 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		// Set limit from user input
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters' || $this->Input->post('FORM_SUBMIT') == 'tl_filters_limit')
 		{
-			if ($this->Input->post('tl_limit') != 'tl_limit')
+			$strLimit = $this->Input->post('tl_limit');
+
+			if ($strLimit == 'tl_limit')
 			{
-				$session['filter'][$filter]['limit'] = $this->Input->post('tl_limit');
+				unset($session['filter'][$filter]['limit']);
 			}
 			else
 			{
-				unset($session['filter'][$filter]['limit']);
+				// Validate the user input (thanks to aulmn) (see #4971)
+				if ($strLimit == 'all' || preg_match('/^[0-9]+,[0-9]+$/', $strLimit))
+				{
+					$session['filter'][$filter]['limit'] = $strLimit;
+				}
 			}
 
 			$this->Session->setData($session);

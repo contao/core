@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -79,6 +79,13 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 				'href'                => 'key=importTheme',
 				'class'               => 'header_theme_import',
 				'attributes'          => 'onclick="Backend.getScrollOffset()"'
+			),
+			'store' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_theme']['store'],
+				'href'                => 'key=themeStore',
+				'class'               => 'header_store',
+				'button_callback'     => array('tl_theme', 'getThemeStoreLink')
 			),
 			'all' => array
 			(
@@ -209,8 +216,8 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
  * Class tl_theme
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Controller
  */
 class tl_theme extends Backend
@@ -267,6 +274,16 @@ class tl_theme extends Backend
 	public function scheduleUpdate()
 	{
 		$this->Session->set('style_sheet_update_all', true);
+	}
+
+
+	/**
+	 * Return the theme store link
+	 * @return array
+	 */
+	public function getThemeStoreLink()
+	{
+		return ' &nbsp; :: &nbsp; <a href="https://themes.contao.org" target="_blank" title="' . specialchars($GLOBALS['TL_LANG']['tl_theme']['store'][1]) . '" class="header_store">' . $GLOBALS['TL_LANG']['tl_theme']['store'][0] . '</a>';
 	}
 
 

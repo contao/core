@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Frontend
  * @license    LGPL
  * @filesource
@@ -33,8 +33,8 @@
  * Class ModulePersonalData
  *
  * Front end module "personal data".
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Controller
  */
 class ModulePersonalData extends Module
@@ -166,9 +166,15 @@ class ModulePersonalData extends Module
 				// Convert date formats into timestamps (check the eval setting first -> #3063)
 				if (($rgxp == 'date' || $rgxp == 'time' || $rgxp == 'datim') && $varValue != '')
 				{
-					// Use the numeric back end format here!
-					$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
-					$varValue = $objDate->tstamp;
+					try
+					{
+						$objDate = new Date($varValue);
+						$varValue = $objDate->tstamp;
+					}
+					catch (Exception $e)
+					{
+						$objWidget->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varValue));
+					}
 				}
 
 				// Make sure that unique fields are unique (check the eval setting first -> #3063)
@@ -184,8 +190,8 @@ class ModulePersonalData extends Module
 					}
 				}
 
-				// Save callback
-				if (is_array($arrData['save_callback']))
+				// Save callback (see #5247)
+				if (!$objWidget->hasErrors() && is_array($arrData['save_callback']))
 				{
 					foreach ($arrData['save_callback'] as $callback)
 					{

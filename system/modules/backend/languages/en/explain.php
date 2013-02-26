@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -35,7 +35,7 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'] = array
 (
 	array('Rich Text Editor', 'For more information about TinyMCE please visit <a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" target="_blank">http://tinymce.moxiecode.com</a>.'),
-	array('Insert tags', 'For more information on insert tags please visit <a href="http://www.contao.org/insert-tags.html" title="Contao online documentation" target="_blank">http://www.contao.org/insert-tags.html</a>.'),
+	array('Insert tags', 'For more information on insert tags please visit <a href="https://contao.org/en/manual/2.11/managing-content.html#insert-tags" title="Contao online documentation" target="_blank">https://contao.org/en/manual/2.11/managing-content.html#insert-tags</a>.'),
 	array('Code Editor', 'For more information about CodeMirror please visit <a href="http://codemirror.net" title="EditArea by Marijn Haverbeke" target="_blank">http://codemirror.net</a>.')
 );
 

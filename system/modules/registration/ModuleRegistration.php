@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Registration
  * @license    LGPL
  * @filesource
@@ -33,8 +33,8 @@
  * Class ModuleRegistration
  *
  * Front end module "registration".
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Controller
  */
 class ModuleRegistration extends Module
@@ -208,9 +208,15 @@ class ModuleRegistration extends Module
 				// Convert date formats into timestamps (check the eval setting first -> #3063)
 				if (($rgxp == 'date' || $rgxp == 'time' || $rgxp == 'datim') && $varValue != '')
 				{
-					// Use the numeric back end format here!
-					$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
-					$varValue = $objDate->tstamp;
+					try
+					{
+						$objDate = new Date($varValue);
+						$varValue = $objDate->tstamp;
+					}
+					catch (Exception $e)
+					{
+						$objWidget->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidDate'], $varValue));
+					}
 				}
 
 				// Make sure that unique fields are unique (check the eval setting first -> #3063)

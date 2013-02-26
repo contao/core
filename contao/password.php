@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -40,8 +40,8 @@ require_once('../system/initialize.php');
  * Class Index
  *
  * Provides a form to change the back end password.
- * @copyright  Leo Feyer 2011-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Controller
  */
 class Index extends Backend
@@ -113,6 +113,18 @@ class Index extends Backend
 				}
 				else
 				{
+					$this->loadDataContainer('tl_user');
+
+					// Trigger the save_callback
+					if (is_array($GLOBALS['TL_DCA']['tl_user']['fields']['password']['save_callback']))
+					{
+						foreach ($GLOBALS['TL_DCA']['tl_user']['fields']['password']['save_callback'] as $callback)
+						{
+							$this->import($callback[0]);
+							$pw = $this->$callback[0]->$callback[1]($pw);
+						}
+					}
+
 					$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
 					$strPassword = sha1($strSalt . $pw);
 

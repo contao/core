@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -50,6 +50,7 @@ $GLOBALS['TL_LANG']['ERR']['url']               = 'Please enter a valid URL form
 $GLOBALS['TL_LANG']['ERR']['date']              = 'Please enter the date as "%s"!';
 $GLOBALS['TL_LANG']['ERR']['time']              = 'Please enter the time as "%s"!';
 $GLOBALS['TL_LANG']['ERR']['dateTime']          = 'Please enter date and time as "%s"!';
+$GLOBALS['TL_LANG']['ERR']['invalidDate']       = 'Invalid date "%s"!';
 $GLOBALS['TL_LANG']['ERR']['noSpace']           = 'Field "%s" must not contain any whitespace characters!';
 $GLOBALS['TL_LANG']['ERR']['filesize']          = 'The maximum size for file uploads is %s (Contao or php.ini settings)!';
 $GLOBALS['TL_LANG']['ERR']['filetype']          = 'File type "%s" is not allowed to be uploaded!';
@@ -324,7 +325,7 @@ $GLOBALS['TL_LANG']['MSC']['move_down']     = array('Move down', 'Move the item 
 $GLOBALS['TL_LANG']['MSC']['staticFiles']   = array('Files URL', 'The files URL applies to the <em>tl_files</em> directory and all image thumbnails (page speed optimization).');
 $GLOBALS['TL_LANG']['MSC']['staticSystem']  = array('Script URL', 'The script URL applies to all JavaScript and CSS files including embedded background images (page speed optimization).');
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'] = array('Plugins URL', 'The plugins URL applies to all resources in the <em>plugins</em> directory (page speed optimization).');
-$GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Back end keyboard shortcuts', 'Learn more about speeding up your workflow by using <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">keyboard shortcuts</a>.');
+$GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Back end keyboard shortcuts', 'Learn more about speeding up your workflow by using <a href="https://contao.org/en/manual/2.11/administration-area.html#keyboard-shortcuts" target="_blank">keyboard shortcuts</a>.');
 
 
 /**

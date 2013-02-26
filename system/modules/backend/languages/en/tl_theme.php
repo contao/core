@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
+ * @copyright  Leo Feyer 2005-2013
+ * @author     Leo Feyer <https://contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -79,5 +79,6 @@ $GLOBALS['TL_LANG']['tl_theme']['modules']     = array('Modules', 'Edit the fron
 $GLOBALS['TL_LANG']['tl_theme']['layout']      = array('Layouts', 'Edit the page layouts of theme ID %s');
 $GLOBALS['TL_LANG']['tl_theme']['importTheme'] = array('Theme import', 'Import new themes');
 $GLOBALS['TL_LANG']['tl_theme']['exportTheme'] = array('Export', 'Export theme ID %s');
+$GLOBALS['TL_LANG']['tl_theme']['store']       = array('Theme store', 'Find more themes in the Contao theme store');
 
 ?>
