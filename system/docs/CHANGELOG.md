@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Improved
+Show the database ID of a file in the file popup (see #5211).
+
 ### Changed
 Made `Config::get()` static (see #3135).
 
