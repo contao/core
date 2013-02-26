@@ -65,6 +65,11 @@ class DB_Mysql extends Database
 			$strHost .= ':' . $GLOBALS['TL_CONFIG']['dbPort'];
 		}
 
+		if ($GLOBALS['TL_CONFIG']['dbSocket'])
+		{
+			$strHost .= ':' . $GLOBALS['TL_CONFIG']['dbSocket'];
+		}
+
 		if ($GLOBALS['TL_CONFIG']['dbPconnect'])
 		{
 			$this->resConnection = @mysql_pconnect($strHost, $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass']);

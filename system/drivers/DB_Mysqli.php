@@ -58,7 +58,7 @@ class DB_Mysqli extends Database
 	 */
 	protected function connect()
 	{
-		@$this->resConnection = new mysqli($GLOBALS['TL_CONFIG']['dbHost'], $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $GLOBALS['TL_CONFIG']['dbDatabase'], $GLOBALS['TL_CONFIG']['dbPort']);
+		@$this->resConnection = new mysqli($GLOBALS['TL_CONFIG']['dbHost'], $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $GLOBALS['TL_CONFIG']['dbDatabase'], $GLOBALS['TL_CONFIG']['dbPort'], $GLOBALS['TL_CONFIG']['dbSocket']);
 		@$this->resConnection->set_charset($GLOBALS['TL_CONFIG']['dbCharset']);
 	}
 
@@ -197,7 +197,7 @@ class DB_Mysqli extends Database
 	 */
 	protected function set_database($strDatabase)
 	{
-		@$this->resConnection = new mysqli($GLOBALS['TL_CONFIG']['dbHost'], $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $strDatabase, $GLOBALS['TL_CONFIG']['dbPort']);
+		@$this->resConnection = new mysqli($GLOBALS['TL_CONFIG']['dbHost'], $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $strDatabase, $GLOBALS['TL_CONFIG']['dbPort'], $GLOBALS['TL_CONFIG']['dbSocket']);
 	}
 
 
