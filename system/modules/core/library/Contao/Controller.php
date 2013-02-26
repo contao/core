@@ -722,7 +722,7 @@ abstract class Controller extends \System
 							break;
 						}
 
-						static::loadDataContainer('tl_member');
+						$this->loadDataContainer('tl_member');
 
 						if ($GLOBALS['TL_DCA']['tl_member']['fields'][$elements[1]]['inputType'] == 'password')
 						{
@@ -1957,7 +1957,7 @@ abstract class Controller extends \System
 	 * @param string  $strName    The table name
 	 * @param boolean $blnNoCache If true, the cache will be bypassed
 	 */
-	public static function loadDataContainer($strName, $blnNoCache=false)
+	public function loadDataContainer($strName, $blnNoCache=false)
 	{
 		// Return if the data has been loaded already
 		if (isset($GLOBALS['loadDataContainer'][$strName]) && !$blnNoCache)
@@ -1974,7 +1974,7 @@ abstract class Controller extends \System
 		}
 		else
 		{
-			foreach (\Config::getInstance()->getActiveModules() as $strModule)
+			foreach ($this->Config->getActiveModules() as $strModule)
 			{
 				$strFile = 'system/modules/' . $strModule . '/dca/' . $strName . '.php';
 
@@ -1990,7 +1990,8 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['loadDataContainer'] as $callback)
 			{
-				static::importStatic($callback[0])->$callback[1]($strName);
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($strName);
 			}
 		}
 
@@ -2181,7 +2182,7 @@ abstract class Controller extends \System
 			$arrParent[] = $strTable .'.id=' . $intId;
 
 			// Load the data container of the parent table
-			static::loadDataContainer($strTable);
+			$this->loadDataContainer($strTable);
 		}
 		while ($intId && isset($GLOBALS['TL_DCA'][$strTable]['config']['ptable']));
 

@@ -80,7 +80,7 @@ class Form extends \Hybrid
 		$doNotSubmit = false;
 		$arrSubmitted = array();
 
-		\Controller::loadDataContainer('tl_form_field');
+		$this->loadDataContainer('tl_form_field');
 		$formId = ($this->formID != '') ? 'auto_'.$this->formID : 'auto_form_'.$this->id;
 
 		$this->Template->fields = '';

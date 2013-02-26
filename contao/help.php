@@ -59,7 +59,7 @@ class Help extends Backend
 		$field = Input::get('field');
 
 		System::loadLanguageFile($table);
-		Controller::loadDataContainer($table);
+		$this->loadDataContainer($table);
 
 		$this->Template = new BackendTemplate('be_help');
 		$this->Template->rows = array();

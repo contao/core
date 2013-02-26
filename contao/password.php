@@ -87,7 +87,7 @@ class ChangePassword extends Backend
 				}
 				else
 				{
-					Controller::loadDataContainer('tl_user');
+					$this->loadDataContainer('tl_user');
 
 					// Trigger the save_callback
 					if (is_array($GLOBALS['TL_DCA']['tl_user']['fields']['password']['save_callback']))

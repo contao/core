@@ -67,7 +67,7 @@ class ModulePassword extends \Module
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 
 		\System::loadLanguageFile('tl_member');
-		\Controller::loadDataContainer('tl_member');
+		$this->loadDataContainer('tl_member');
 
 		// Set new password
 		if (strlen(\Input::get('token')))

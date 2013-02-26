@@ -202,7 +202,7 @@ class PageSelector extends \Widget
 		}
 
 		$this->strField = $strField;
-		\Controller::loadDataContainer($this->strTable);
+		$this->loadDataContainer($this->strTable);
 
 		// Load current values
 		switch ($GLOBALS['TL_DCA'][$this->strTable]['config']['dataContainer'])

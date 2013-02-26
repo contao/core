@@ -242,7 +242,7 @@ class FormFileUpload extends \Widget implements \uploadable
 						'uploaded' => true
 					);
 
-					\Controller::loadDataContainer('tl_files');
+					$this->loadDataContainer('tl_files');
 
 					// Generate the DB entries
 					if ($GLOBALS['TL_DCA']['tl_files']['config']['databaseAssisted'])

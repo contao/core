@@ -490,7 +490,7 @@ class Updater extends \Controller
 		// Find all fileTree fields
 		foreach ($arrFiles as $strTable)
 		{
-			\Controller::loadDataContainer($strTable);
+			$this->loadDataContainer($strTable);
 			$arrConfig = &$GLOBALS['TL_DCA'][$strTable]['config'];
 
 			// Skip non-database DCAs

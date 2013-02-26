@@ -91,7 +91,7 @@ class ModuleListing extends \Module
 	protected function compile()
 	{
 		\System::loadLanguageFile($this->list_table);
-		\Controller::loadDataContainer($this->list_table);
+		$this->loadDataContainer($this->list_table);
 
 		// List a single record
 		if (\Input::get('show'))

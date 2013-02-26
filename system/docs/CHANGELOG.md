@@ -57,9 +57,6 @@ established by default (see #5362).
 Moved `Controller::getTimeZones()` to `System::getTimeZones()`.
 
 ### Changed
-Made `Controller::loadDataContainer()` public static.
-
-### Changed
 Moved `System::getModelClassFromTable()` to `Model::getClassFromTable()`.
 
 ### Changed

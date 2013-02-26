@@ -14,7 +14,7 @@
 /**
  * Load class tl_page
  */
-Controller::loadDataContainer('tl_page');
+$this->loadDataContainer('tl_page');
 
 
 /**

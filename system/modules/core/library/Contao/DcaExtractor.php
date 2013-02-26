@@ -277,7 +277,7 @@ class DcaExtractor extends \Controller
 		// Load the data container
 		if (!isset($GLOBALS['loadDataContainer'][$this->strTable]))
 		{
-			\Controller::loadDataContainer($this->strTable);
+			$this->loadDataContainer($this->strTable);
 		}
 
 		$blnFromFile = false;

@@ -328,7 +328,7 @@ class tl_user_group extends Backend
 				$strTable = str_replace('.php', '', $strFile);
 
 				System::loadLanguageFile($strTable);
-				Controller::loadDataContainer($strTable);
+				$this->loadDataContainer($strTable);
 			}
 		}
 

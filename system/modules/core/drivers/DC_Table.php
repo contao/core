@@ -530,7 +530,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			foreach ($arrData as $strTable=>$arrTableData)
 			{
 				\System::loadLanguageFile($strTable);
-				\Controller::loadDataContainer($strTable);
+				$this->loadDataContainer($strTable);
 
 				foreach ($arrTableData as $arrRow)
 				{
@@ -967,7 +967,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Walk through each child table
 		foreach ($ctable as $v)
 		{
-			\Controller::loadDataContainer($v);
+			$this->loadDataContainer($v);
 			$cctable[$v] = $GLOBALS['TL_DCA'][$v]['config']['ctable'];
 
 			if (!$GLOBALS['TL_DCA'][$v]['config']['doNotCopyRecords'] && strlen($v))
@@ -1476,7 +1476,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Walk through each child table
 		foreach ($ctable as $v)
 		{
-			\Controller::loadDataContainer($v);
+			$this->loadDataContainer($v);
 			$cctable[$v] = $GLOBALS['TL_DCA'][$v]['config']['ctable'];
 
 			// Consider the dynamic parent table (see #4867)
@@ -2959,7 +2959,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					// Load the DCA configuration so we can check for "dynamicPtable"
 					if (!isset($GLOBALS['loadDataContainer'][$v]))
 					{
-						\Controller::loadDataContainer($v);
+						$this->loadDataContainer($v);
 					}
 
 					if ($GLOBALS['TL_DCA'][$v]['config']['dynamicPtable'])
@@ -3002,7 +3002,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$treeClass = 'tl_tree_xtnd';
 
 			\System::loadLanguageFile($table);
-			\Controller::loadDataContainer($table);
+			$this->loadDataContainer($table);
 		}
 
 		$session = $this->Session->getData();
@@ -3241,7 +3241,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$table = $this->ptable;
 
 			\System::loadLanguageFile($table);
-			\Controller::loadDataContainer($table);
+			$this->loadDataContainer($table);
 
 			$blnPtable = true;
 		}
@@ -3560,7 +3560,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 		// Load the language file and data container array of the parent table
 		\System::loadLanguageFile($this->ptable);
-		\Controller::loadDataContainer($this->ptable);
+		$this->loadDataContainer($this->ptable);
 
 		$return = '
 <div id="tl_buttons">
@@ -5044,7 +5044,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					// Get the name of the parent record (see #2703)
 					elseif ($field == 'pid')
 					{
-						\Controller::loadDataContainer($this->ptable);
+						$this->loadDataContainer($this->ptable);
 						$showFields = $GLOBALS['TL_DCA'][$this->ptable]['list']['label']['fields'];
 
 						if (!$showFields[0])

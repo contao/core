@@ -220,7 +220,7 @@ abstract class Backend extends \Controller
 
 			// Load the language and DCA file
 			\System::loadLanguageFile($strTable);
-			\Controller::loadDataContainer($strTable);
+			$this->loadDataContainer($strTable);
 
 			// Include all excluded fields which are allowed for the current user
 			if ($GLOBALS['TL_DCA'][$strTable]['fields'])
