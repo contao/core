@@ -49,12 +49,20 @@ function __autoload($strClassName)
 	// Try to load the class name from the session cache
 	if (!$GLOBALS['TL_CONFIG']['debugMode'] && isset($objCache->$strClassName))
 	{
-		if (@include_once(TL_ROOT . '/' . $objCache->$strClassName))
+		if (include_once(TL_ROOT . '/' . $objCache->$strClassName))
 		{
 			return; // The class could be loaded
 		}
 		else
 		{
+			trigger_error(
+				sprintf(
+					'Class cache not up to date, class file %s for class %s does not exists anymore',
+					$objCache->$strClassName,
+					$strClassName
+				),
+				E_USER_WARNING
+			);
 			unset($objCache->$strClassName); // The class has been removed
 		}
 	}
@@ -134,6 +142,23 @@ function __error($intType, $strMessage, $strFile, $intLine)
 		4096                => 'Recoverable error',
 		8192                => 'Deprecated notice'
 	);
+
+	if (($intType == E_WARNING || $intType == E_USER_WARNING) &&
+		$strFile == __FILE__ &&
+		$intLine >= 50 && $intLine <= 68)
+	{
+		// Log the error
+		error_log(
+			sprintf(
+				'PHP %s: %s in %s on line %s',
+				$arrErrors[$intType],
+				$strMessage,
+				$strFile,
+				$intLine
+			)
+		);
+		return;
+	}
 
 	// Ignore functions with an error control operator (@function_name)
 	if (ini_get('error_reporting') > 0)
