@@ -143,6 +143,23 @@ function __error($intType, $strMessage, $strFile, $intLine)
 		8192                => 'Deprecated notice'
 	);
 
+	if (($intType == E_WARNING || $intType == E_USER_WARNING) &&
+		$strFile == __FILE__ &&
+		$intLine >= 50 && $intLine <= 68)
+	{
+		// Log the error
+		error_log(
+			sprintf(
+				'PHP %s: %s in %s on line %s',
+				$arrErrors[$intType],
+				$strMessage,
+				$strFile,
+				$intLine
+			)
+		);
+		return;
+	}
+
 	// Ignore functions with an error control operator (@function_name)
 	if (ini_get('error_reporting') > 0)
 	{
