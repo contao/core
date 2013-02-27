@@ -5,6 +5,9 @@ Version 2.11.10 (2013-XX-XX)
 ----------------------------
 
 ### Fixed
+Correctly split the words when adding to the search index (see #5363).
+
+### Fixed
 Correctly load TinyMCE in IE7 and IE8 (see #5346).
 
 ### Fixed
