@@ -55,6 +55,14 @@ function __autoload($strClassName)
 		}
 		else
 		{
+			trigger_error(
+				sprintf(
+					'Class cache not up to date, class file %s for class %s does not exists anymore',
+					$objCache->$strClassName,
+					$strClassName
+				),
+				E_USER_WARNING
+			);
 			unset($objCache->$strClassName); // The class has been removed
 		}
 	}
