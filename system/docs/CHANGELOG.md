@@ -5,6 +5,9 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Updated the TinyMCE typolinks plugin (see #5329).
+
+### Fixed
 Correctly initialize the user's pagemounts (see #5454).
 
 ### Fixed
