@@ -5,6 +5,9 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Support loading static JavaScripts in the `config.php` files (see #4890).
+
+### Fixed
 Show all articles if the article list module is in the same column (see #5373).
 
 ### Fixed
