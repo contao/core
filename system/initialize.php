@@ -34,6 +34,14 @@ if (TL_MODE == 'BE')
 
 
 /**
+ * Set temporary directory
+ */
+putenv('TMP=' . TL_ROOT . '/system/tmp');
+putenv('TEMP=' . TL_ROOT . '/system/tmp');
+putenv('TMPDIR=' . TL_ROOT . '/system/tmp');
+
+
+/**
  * Include the helpers
  */
 require TL_ROOT . '/system/helper/functions.php';
@@ -89,7 +97,7 @@ require_once TL_ROOT . '/system/vendor/simplepie/autoloader.php';
 /**
  * Define the relative path to the installation (see #5339)
  */
-define('TL_PATH', str_replace(Environment::get('documentRoot'), '', str_replace('\\', '/',  dirname(__DIR__))));
+define('TL_PATH', Environment::get('websitePath'));
 
 
 /**

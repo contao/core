@@ -86,6 +86,50 @@ class Environment
 
 
 	/**
+	 * Return the relative website path (e.g. /website)
+	 *
+	 * @return string The relative path to the website
+	 */
+	protected static function websitePath()
+	{
+		$documentRoot = static::get('documentRoot');
+		$scriptName = static::get('scriptName');
+		$websitePath = str_replace(Environment::get('documentRoot'), '', str_replace('\\', '/',  TL_ROOT));
+
+		$position = strpos($scriptName, $websitePath);
+
+		// there must be an alias, because $scriptName does not start with $websitePath
+		if ($position > 0)
+		{
+			$websitePath = substr($scriptName, 0, $position) . $websitePath;
+		}
+
+		// the determinated $websitePath is not in $scriptName, the full contao installation may be aliased
+		else if ($position === false)
+		{
+			if (TL_MODE == 'BE' && preg_match('#/contao/\w+\.php#', $scriptName))
+			{
+				$websitePath = dirname($scriptName);
+			}
+			if (TL_MODE == 'FE')
+			{
+				if (
+					($position = strpos($scriptName, '/system/modules/')) !== false ||
+					($position = strpos($scriptName, '/share/index.php')) !== false
+				) {
+					$websitePath = substr($scriptName, 0, $position);
+				}
+				else
+				{
+					$websitePath = dirname($scriptName);
+				}
+			}
+		}
+
+		return $websitePath;
+	}
+
+	/**
 	 * Return the absolute path to the script (e.g. /home/www/html/website/index.php)
 	 * 
 	 * @return string The absolute path to the script
