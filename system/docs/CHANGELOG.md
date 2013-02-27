@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Changed
+Added a "default" option to the login language select menu (see #5088).
+
 ### Improved
 Show the database ID of a file in the file popup (see #5211).
 
