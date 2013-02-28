@@ -77,25 +77,24 @@ class BackendUser extends \User
 	public function __destruct()
 	{
 		$session = $this->Session->getData();
-		$lastref = end($session['referer']);
 
-		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && \Input::get('do') != 'feRedirect' && $lastref['current'] != \Environment::get('requestUri'))
+		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && \Input::get('do') != 'feRedirect')
 		{
 			// Main script
 			if (\Environment::get('script') == 'contao/main.php')
 			{
-				if (count($session['referer']) >= 10)
+				if (count($session['referer']) >= 25)
 				{
 					array_shift($session['referer']);
 				}
 
-				$session['referer'][TL_REFERER_ID]['last'] = $session['referer'][TL_REFERER_ID]['current'];
+				$session['referer'][TL_REFERER_ID]['last'] = $session['referer'][\Input::get('ref')]['current'];
 				$session['referer'][TL_REFERER_ID]['current'] = \Environment::get('requestUri');
 			}
 			// File manager
 			elseif (\Environment::get('script') == 'contao/files.php')
 			{
-				if (count($session['fileReferer']) >= 10)
+				if (count($session['fileReferer']) >= 25)
 				{
 					array_shift($session['fileReferer']);
 				}
@@ -475,7 +474,7 @@ class BackendUser extends \User
 							$arrModules[$strGroupName]['modules'][$strModuleName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strModuleName]) ? $GLOBALS['TL_LANG']['MOD'][$strModuleName][0] : $GLOBALS['TL_LANG']['MOD'][$strModuleName]) != false) ? $label : $strModuleName;
 							$arrModules[$strGroupName]['modules'][$strModuleName]['icon'] = ($arrModuleConfig['icon'] != '') ? sprintf(' style="background-image:url(\'%s%s\')"', TL_ASSETS_URL, $arrModuleConfig['icon']) : '';
 							$arrModules[$strGroupName]['modules'][$strModuleName]['class'] = 'navigation ' . $strModuleName;
-							$arrModules[$strGroupName]['modules'][$strModuleName]['href']  = \Environment::get('script') . '?do=' . $strModuleName;
+							$arrModules[$strGroupName]['modules'][$strModuleName]['href']  = \Environment::get('script') . '?do=' . $strModuleName . '&amp;ref=' . TL_REFERER_ID;
 
 							// Mark the active module and its group
 							if (\Input::get('do') == $strModuleName)
