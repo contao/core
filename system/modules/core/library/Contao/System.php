@@ -308,7 +308,7 @@ abstract class System
 		{
 			$session = $session[$ref];
 		}
-		elseif (is_array($session))
+		elseif (TL_MODE == 'BE' && is_array($session))
 		{
 			$session = end($session);
 		}
