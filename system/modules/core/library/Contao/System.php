@@ -300,11 +300,17 @@ abstract class System
 	public static function getReferer($blnEncodeAmpersands=false, $strTable=null)
 	{
 		$key = (\Environment::get('script') == 'contao/files.php') ? 'fileReferer' : 'referer';
+
+		$ref = \Input::get('ref');
 		$session = \Session::getInstance()->get($key);
 
-		if (\Input::get('ref'))
+		if ($ref && isset($session[$ref]))
 		{
-			$session = $session[\Input::get('ref')];
+			$session = $session[$ref];
+		}
+		elseif (is_array($session))
+		{
+			$session = end($session);
 		}
 
 		// Use a specific referer

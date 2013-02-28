@@ -78,37 +78,44 @@ class BackendUser extends \User
 	{
 		$session = $this->Session->getData();
 
-		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && \Input::get('do') != 'feRedirect')
+		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && \Input::get('do') != 'feRedirect' && !\Environment::get('isAjaxRequest'))
 		{
-			// Main script
+			$key = null;
+
 			if (\Environment::get('script') == 'contao/main.php')
 			{
-				if (count($session['referer']) >= 25)
-				{
-					array_shift($session['referer']);
-				}
-
-				if (isset($session['referer'][\Input::get('ref')]))
-				{
-					$session['referer'][TL_REFERER_ID] = array_merge((array) $session['referer'][TL_REFERER_ID], $session['referer'][\Input::get('ref')]);
-				}
-
-				$session['referer'][TL_REFERER_ID]['current'] = \Environment::get('requestUri');
+				$key = 'referer';
 			}
-			// File manager
 			elseif (\Environment::get('script') == 'contao/files.php')
 			{
-				if (count($session['fileReferer']) >= 25)
+				$key = 'fileReferer';
+			}
+
+			if ($key !== null)
+			{
+				if (!is_array($session[$key]) || !is_array($session[$key][TL_REFERER_ID]))
 				{
-					array_shift($session['fileReferer']);
+					$session[$key][TL_REFERER_ID]['last'] = '';
 				}
 
-				if (isset($session['fileReferer'][\Input::get('ref')]))
+				if (count($session[$key]) >= 25)
 				{
-					$session['fileReferer'][TL_REFERER_ID] = array_merge((array) $session['fileReferer'][TL_REFERER_ID], $session['fileReferer'][\Input::get('ref')]);
+					array_shift($session[$key]);
 				}
 
-				$session['fileReferer'][TL_REFERER_ID]['current'] = \Environment::get('requestUri');
+				$ref = \Input::get('ref');
+
+				if ($ref != '' && isset($session[$key][$ref]))
+				{
+					$session[$key][TL_REFERER_ID] = array_merge($session[$key][TL_REFERER_ID], $session[$key][$ref]);
+					$session[$key][TL_REFERER_ID]['last'] = $session[$key][$ref]['current'];
+				}
+				elseif (count($session[$key]) > 1)
+				{
+					$session[$key][TL_REFERER_ID] = end($session[$key]);
+				}
+
+				$session[$key][TL_REFERER_ID]['current'] = \Environment::get('requestUri');
 			}
 		}
 
