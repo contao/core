@@ -100,7 +100,8 @@ class FrontendUser extends \User
 
 		if ($this->intId)
 		{
-			$this->Database->prepare("UPDATE " . $this->strTable . " SET session=? WHERE id=?")->execute(serialize($session), $this->intId);
+			$this->Database->prepare("UPDATE " . $this->strTable . " SET session=? WHERE id=?")
+						   ->execute(serialize($session), $this->intId);
 		}
 	}
 
