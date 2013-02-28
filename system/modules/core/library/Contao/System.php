@@ -179,6 +179,12 @@ abstract class System
 	public static function addToUrl($strRequest)
 	{
 		$strRequest = preg_replace('/^&(amp;)?/i', '', $strRequest);
+
+		if ($strRequest != '')
+		{
+			$strRequest .= '&amp;ref=' . TL_REFERER_ID;
+		}
+
 		$queries = preg_split('/&(amp;)?/i', \Environment::get('queryString'));
 
 		// Overwrite existing parameters
@@ -295,6 +301,11 @@ abstract class System
 	{
 		$key = (\Environment::get('script') == 'contao/files.php') ? 'fileReferer' : 'referer';
 		$session = \Session::getInstance()->get($key);
+
+		if (\Input::get('ref'))
+		{
+			$session = $session[\Input::get('ref')];
+		}
 
 		// Use a specific referer
 		if ($strTable != '' && isset($session[$strTable]) && \Input::get('act') != 'select')

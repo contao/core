@@ -32,6 +32,8 @@ if (TL_MODE == 'BE')
 	define('FE_USER_LOGGED_IN', false);
 }
 
+define('TL_REFERER_ID', substr(md5(TL_START), 0, 6));
+
 
 /**
  * Include the helpers

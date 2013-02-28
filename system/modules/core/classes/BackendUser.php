@@ -77,20 +77,31 @@ class BackendUser extends \User
 	public function __destruct()
 	{
 		$session = $this->Session->getData();
+		$lastref = end($session['referer']);
 
-		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && \Input::get('do') != 'feRedirect' && $session['referer']['current'] != \Environment::get('requestUri'))
+		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && \Input::get('do') != 'feRedirect' && $lastref['current'] != \Environment::get('requestUri'))
 		{
 			// Main script
 			if (\Environment::get('script') == 'contao/main.php')
 			{
-				$session['referer']['last'] = $session['referer']['current'];
-				$session['referer']['current'] = \Environment::get('requestUri');
+				if (count($session['referer']) >= 10)
+				{
+					array_shift($session['referer']);
+				}
+
+				$session['referer'][TL_REFERER_ID]['last'] = $session['referer'][TL_REFERER_ID]['current'];
+				$session['referer'][TL_REFERER_ID]['current'] = \Environment::get('requestUri');
 			}
 			// File manager
 			elseif (\Environment::get('script') == 'contao/files.php')
 			{
-				$session['fileReferer']['last'] = $session['referer']['current'];
-				$session['fileReferer']['current'] = \Environment::get('requestUri');
+				if (count($session['fileReferer']) >= 10)
+				{
+					array_shift($session['fileReferer']);
+				}
+
+				$session['fileReferer'][TL_REFERER_ID]['last'] = $session['referer'][TL_REFERER_ID]['current'];
+				$session['fileReferer'][TL_REFERER_ID]['current'] = \Environment::get('requestUri');
 			}
 		}
 
