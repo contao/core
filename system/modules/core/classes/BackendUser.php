@@ -88,7 +88,11 @@ class BackendUser extends \User
 					array_shift($session['referer']);
 				}
 
-				$session['referer'][TL_REFERER_ID]['last'] = $session['referer'][\Input::get('ref')]['current'];
+				if (isset($session['referer'][\Input::get('ref')]))
+				{
+					$session['referer'][TL_REFERER_ID] = array_merge((array) $session['referer'][TL_REFERER_ID], $session['referer'][\Input::get('ref')]);
+				}
+
 				$session['referer'][TL_REFERER_ID]['current'] = \Environment::get('requestUri');
 			}
 			// File manager
@@ -99,7 +103,11 @@ class BackendUser extends \User
 					array_shift($session['fileReferer']);
 				}
 
-				$session['fileReferer'][TL_REFERER_ID]['last'] = $session['referer'][TL_REFERER_ID]['current'];
+				if (isset($session['fileReferer'][\Input::get('ref')]))
+				{
+					$session['fileReferer'][TL_REFERER_ID] = array_merge((array) $session['fileReferer'][TL_REFERER_ID], $session['fileReferer'][\Input::get('ref')]);
+				}
+
 				$session['fileReferer'][TL_REFERER_ID]['current'] = \Environment::get('requestUri');
 			}
 		}
