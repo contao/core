@@ -3797,7 +3797,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				{
 					$return .= '
 
-<ul id="ul_' . CURRENT_ID . '" class="sortable">';
+<ul id="ul_' . CURRENT_ID . '">';
 				}
 
 				for ($i=0; $i<count($row); $i++)
