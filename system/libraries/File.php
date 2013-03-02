@@ -232,7 +232,16 @@ class File extends System
 	 */
 	public function truncate()
 	{
-		return $this->write('');
+		if (!is_resource($this->resFile))
+		{
+			if (($this->resFile = $this->Files->fopen($this->strFile, $strMode)) == false)
+			{
+				return false;
+			}
+		}
+
+		ftruncate($this->resFile, 0);
+		return true;
 	}
 
 
