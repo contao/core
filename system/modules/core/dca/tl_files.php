@@ -91,13 +91,6 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 				'attributes'          => 'onclick="Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_files', 'cutFile')
 			),
-			'source' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_files']['source'],
-				'href'                => 'act=source',
-				'icon'                => 'editor.gif',
-				'button_callback'     => array('tl_files', 'editSource')
-			),
 			'protect' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['protect'],
@@ -112,6 +105,13 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_files', 'deleteFile')
+			),
+			'source' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_files']['source'],
+				'href'                => 'act=source',
+				'icon'                => 'editor.gif',
+				'button_callback'     => array('tl_files', 'editSource')
 			)
 		)
 	),
