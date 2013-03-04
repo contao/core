@@ -586,7 +586,8 @@ class tl_files extends Backend
 				if (!$blnProtected)
 				{
 					$blnProtected = true;
-					File::putContent($dc->id . '/.htaccess', "order deny,allow\ndeny from all");
+					$objFolder = new Folder($dc->id);
+					$objFolder->protect();
 				}
 			}
 			else
@@ -594,8 +595,8 @@ class tl_files extends Backend
 				if ($blnProtected)
 				{
 					$blnProtected = false;
-					$objFile = new File($dc->id . '/.htaccess', true);
-					$objFile->delete();
+					$objFolder = new Folder($dc->id);
+					$objFolder->unprotect();
 				}
 			}
 		}
