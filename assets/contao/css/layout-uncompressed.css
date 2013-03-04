@@ -67,9 +67,6 @@ select,input,textarea {
 		margin:0;
 		width:auto;
 	}
-	#header,#footer {
-		height:auto;
-	}
 	#container {
 		padding-left:0;
 		padding-right:0;

@@ -325,6 +325,12 @@ class PageRegular extends \Frontend
 
 		$this->Template->mooScripts = '';
 
+		// Make sure TL_JAVASCRIPT exists (see #4890)
+		if (!is_array($GLOBALS['TL_JAVASCRIPT']))
+		{
+			$GLOBALS['TL_JAVASCRIPT'] = array();
+		}
+
 		// jQuery scripts
 		if ($objLayout->addJQuery)
 		{
@@ -348,7 +354,7 @@ class PageRegular extends \Frontend
 			}
 			else
 			{
-				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/jquery/core/' . JQUERY . '/jquery.min.js|static';
+				array_unshift($GLOBALS['TL_JAVASCRIPT'], 'assets/jquery/core/' . JQUERY . '/jquery.min.js|static');
 			}
 		}
 
@@ -373,12 +379,12 @@ class PageRegular extends \Frontend
 					}
 				}
 
-				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-more.js|static';
-				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-mobile.js|static';
+				array_unshift($GLOBALS['TL_JAVASCRIPT'], 'assets/mootools/core/' . MOOTOOLS . '/mootools-mobile.js|static');
+				array_unshift($GLOBALS['TL_JAVASCRIPT'], 'assets/mootools/core/' . MOOTOOLS . '/mootools-more.js|static');
 			}
 			else
 			{
-				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools.js|static';
+				array_unshift($GLOBALS['TL_JAVASCRIPT'], 'assets/mootools/core/' . MOOTOOLS . '/mootools.js|static');
 			}
 		}
 
@@ -387,11 +393,11 @@ class PageRegular extends \Frontend
 		{
 			if ($GLOBALS['TL_CONFIG']['debugMode'])
 			{
-				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js|static';
+				array_unshift($GLOBALS['TL_JAVASCRIPT'], 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js|static');
 			}
 			elseif (!$GLOBALS['TL_CONFIG']['disableCron'])
 			{
-				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-request.js|static';
+				array_unshift($GLOBALS['TL_JAVASCRIPT'], 'assets/mootools/core/' . MOOTOOLS . '/mootools-request.js|static');
 			}
 		}
 

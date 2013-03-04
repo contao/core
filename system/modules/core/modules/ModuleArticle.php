@@ -176,7 +176,7 @@ class ModuleArticle extends \Module
 		{
 			while ($objCte->next())
 			{
-				$arrElements[] = $this->getContentElement($objCte);
+				$arrElements[] = $this->getContentElement($objCte->current());
 			}
 		}
 

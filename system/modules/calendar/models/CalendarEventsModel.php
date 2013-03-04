@@ -77,7 +77,15 @@ class CalendarEventsModel extends \Model
 			return null;
 		}
 
-		$objMinMax = \Database::getInstance()->query("SELECT MIN(startTime) AS dateFrom, MAX(endTime) AS dateTo, MAX(repeatEnd) AS repeatUntil FROM tl_calendar_events WHERE pid IN(". implode(',', array_map('intval', $arrPids)) .")");
+		$strQuery = "SELECT MIN(startTime) AS dateFrom, MAX(endTime) AS dateTo, MAX(repeatEnd) AS repeatUntil FROM tl_calendar_events WHERE pid IN(". implode(',', array_map('intval', $arrPids)) .")";
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$strQuery .= " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+		}
+
+		$objMinMax = \Database::getInstance()->query($strQuery);
 		return new static($objMinMax);
 	}
 

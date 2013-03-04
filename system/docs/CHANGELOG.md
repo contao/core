@@ -192,6 +192,35 @@ The pageTree widget is now sortable just like the fileTree widget and the custom
 and quick navigation modules consider the custom order (see #4936).
 
 
+Version 3.0.6 (2013-XX-XX)
+--------------------------
+
+### Fixed
+Updated the TinyMCE typolinks plugin (see #5329).
+
+### Fixed
+Correctly initialize the user's pagemounts (see #5454).
+
+### Fixed
+Support loading static JavaScripts in the `config.php` files (see #4890).
+
+### Fixed
+Show all articles if the article list module is in the same column (see #5373).
+
+### Fixed
+Do not show `mail_` templates from theme folders (see #5379).
+
+### Fixed
+Consider only published events when finding the calendar boundaries and only
+render the previous and next links if there are events (see #5426).
+
+### Fixed
+Do not override the header and footer height in the layout builder (see #5368).
+
+### Fixed
+Correctly reset fallback, default and "do not copy" fields (see #5252).
+
+
 Version 3.0.5 (2013-02-19)
 --------------------------
 

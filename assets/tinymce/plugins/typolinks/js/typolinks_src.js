@@ -45,7 +45,7 @@ var LinkDialog = {
 	},
 
 	update : function() {
-		var f = document.forms[0], ed = tinyMCEPopup.editor, e, b;
+		var f = document.forms[0], ed = tinyMCEPopup.editor, e, b, href = f.href.value.replace(/ /g, '%20');
 
 		tinyMCEPopup.restoreSelection();
 		e = ed.dom.getParent(ed.selection.getNode(), 'A');
@@ -53,7 +53,6 @@ var LinkDialog = {
 		// Remove element if there is no href
 		if (!f.href.value) {
 			if (e) {
-				tinyMCEPopup.execCommand("mceBeginUndoLevel");
 				b = ed.selection.getBookmark();
 				ed.dom.remove(e, 1);
 				ed.selection.moveToBookmark(b);
@@ -63,12 +62,10 @@ var LinkDialog = {
 			}
 		}
 
-		tinyMCEPopup.execCommand("mceBeginUndoLevel");
-
 		// Create new anchor elements
 		if (e == null) {
 			ed.getDoc().execCommand("unlink", false, null);
-			tinyMCEPopup.execCommand("CreateLink", false, "#mce_temp_url#", {skip_undo : 1});
+			tinyMCEPopup.execCommand("mceInsertLink", false, "#mce_temp_url#", {skip_undo : 1});
 			var t = this;
 
 			tinymce.each(ed.dom.select("a"), function(n) {
@@ -76,7 +73,7 @@ var LinkDialog = {
 					e = n;
 
 					ed.dom.setAttribs(e, {
-						href : f.href.value,
+						href : href,
 						title : f.linktitle.value,
 						target : f.target_list ? getSelectValue(f, "target_list") : null,
 						'rel' : f.rel_list ? getSelectValue(f, "rel_list") : null,
@@ -89,7 +86,7 @@ var LinkDialog = {
 			});
 		} else {
 			ed.dom.setAttribs(e, {
-				href : f.href.value,
+				href : href,
 				title : f.linktitle.value,
 				target : f.target_list ? getSelectValue(f, "target_list") : null,
 				'rel' : f.rel_list ? getSelectValue(f, "rel_list") : null,
