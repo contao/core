@@ -5,6 +5,10 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### Improved
+Moved the "protect folder" settings to the edit screen (see #5376). Also, Contao
+now shows a "possibly not working" note if not an Apache server is used.
+
+### Improved
 Added a "file upload" button to each folder in the file manager (see #3432).
 
 ### Changed

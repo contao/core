@@ -540,7 +540,6 @@ class DataContainer extends \Backend
 			{
 				$this->import($v['button_callback'][0]);
 				$return .= $this->$v['button_callback'][0]->$v['button_callback'][1]($arrRow, $v['href'], $label, $title, $v['icon'], $attributes, $strTable, $arrRootIds, $arrChildRecordIds, $blnCircularReference, $strPrevious, $strNext);
-
 				continue;
 			}
 

@@ -91,13 +91,6 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 				'attributes'          => 'onclick="Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_files', 'cutFile')
 			),
-			'protect' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_files']['protect'],
-				'href'                => 'act=protect',
-				'icon'                => 'protect.gif',
-				'button_callback'     => array('tl_files', 'protectFolder')
-			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['delete'],
@@ -119,7 +112,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'name,meta'
+		'default'                     => 'name,protected,meta'
 	),
 
 	// Fields
@@ -161,18 +154,24 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['name'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'decodeEntities'=>true),
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'decodeEntities'=>true, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_files', 'checkFilename')
 			),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
+		'protected' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['protected'],
+			'input_field_callback'    => array('tl_files', 'protectFolder'),
+			'eval'                    => array('tl_class'=>'w50 m12')
+		),
 		'meta' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['meta'],
 			'inputType'               => 'metaWizard',
-			'eval'                    => array('allowHtml'=>true),
+			'eval'                    => array('allowHtml'=>true, 'tl_class'=>'clr'),
 			'sql'                     => "blob NULL"
 		)
 	)
@@ -571,34 +570,48 @@ class tl_files extends Backend
 
 
 	/**
-	 * Return the edit file source button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 * Return a checkbox to delete session data
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function protectFolder($row, $href, $label, $title, $icon, $attributes)
+	public function protectFolder(DataContainer $dc)
 	{
-		$strDecoded = urldecode($row['id']);
+		$blnProtected = file_exists(TL_ROOT . '/' . $dc->id . '/.htaccess');
 
-		if (!is_dir(TL_ROOT . '/' . $strDecoded))
+		// Protect or unprotect the folder
+		if (Input::post('FORM_SUBMIT') == 'tl_files')
 		{
-			return '';
+			if (Input::post('protected'))
+			{
+				if (!$blnProtected)
+				{
+					$blnProtected = true;
+					File::putContent($dc->id . '/.htaccess', "order deny,allow\ndeny from all");
+				}
+			}
+			else
+			{
+				if ($blnProtected)
+				{
+					$blnProtected = false;
+					$objFile = new File($dc->id . '/.htaccess', true);
+					$objFile->delete();
+				}
+			}
 		}
 
-		// Remove protection
-		if (count(preg_grep('/^\.htaccess/i', scan(TL_ROOT . '/' . $strDecoded))) > 0)
+		// Show a note for non-Apache servers
+		if (strpos(Environment::get('serverSoftware'), 'Apache') !== false)
 		{
-			$label = $GLOBALS['TL_LANG']['tl_files']['unlock'][0];
-			$title = sprintf($GLOBALS['TL_LANG']['tl_files']['unlock'][1], $row['id']);
-
-			return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon), $label).'</a> ';
+			Message::addInfo($GLOBALS['TL_LANG']['tl_files']['htaccessInfo']);
 		}
 
-		// Protect folder
-		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
+		return '
+<div class="' . $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['tl_class'] . ' cbx">
+  <div id="ctrl_' . $dc->field . '" class="tl_checkbox_single_container">
+    <input type="hidden" name="' . $dc->inputName . '" value=""><input type="checkbox" name="' . $dc->inputName . '" id="opt_' . $dc->field . '_0" class="tl_checkbox" value="1"' . ($blnProtected ? ' checked="checked"' : '') . ' onfocus="Backend.getScrollOffset()"> <label for="opt_' . $dc->field . '_0">' . $GLOBALS['TL_LANG']['tl_files']['protected'][0] . '</label>
+  </div>' . ($GLOBALS['TL_CONFIG']['showHelp'] ? '
+  <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_files']['protected'][1] . '</p>' : '') . '
+</div>';
 	}
 }
