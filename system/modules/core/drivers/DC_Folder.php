@@ -2062,7 +2062,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$objFile->type   = 'folder';
 					$objFile->path   = $this->strPath . '/' . $varValue;
 					$objFile->name   = $varValue;
-					$objFile->hash   = md5('');
+					$objFile->hash   = '';
 					$objFile->save();
 
 					$this->objActiveRecord = $objFile;

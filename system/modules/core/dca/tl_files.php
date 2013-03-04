@@ -602,7 +602,7 @@ class tl_files extends Backend
 		}
 
 		// Show a note for non-Apache servers
-		if (strpos(Environment::get('serverSoftware'), 'Apache') !== false)
+		if (strpos(Environment::get('serverSoftware'), 'Apache') === false)
 		{
 			Message::addInfo($GLOBALS['TL_LANG']['tl_files']['htaccessInfo']);
 		}

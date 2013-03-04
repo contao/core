@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### New
+Automatically synchronize the database when working on a file or folder in the
+upload directory with the `File` or `Folder` class (see #4991).
+
 ### Improved
 Moved the "protect folder" settings to the edit screen (see #5376). Also, Contao
 now shows a "possibly not working" note if not an Apache server is used.
