@@ -122,6 +122,7 @@ namespace  {
 	class Input extends Contao\Input {}
 	class Message extends Contao\Message {}
 	abstract class Model extends Contao\Model {}
+	class ModuleLoader extends Contao\ModuleLoader {}
 	class Pagination extends Contao\Pagination {}
 	class Request extends Contao\Request {}
 	class RequestToken extends Contao\RequestToken {}

@@ -129,6 +129,7 @@ ClassLoader::addClasses(array
 	'Contao\Model\Collection'          => 'system/modules/core/library/Contao/Model/Collection.php',
 	'Contao\Model\QueryBuilder'        => 'system/modules/core/library/Contao/Model/QueryBuilder.php',
 	'Contao\Model'                     => 'system/modules/core/library/Contao/Model.php',
+	'Contao\ModuleLoader'              => 'system/modules/core/library/Contao/ModuleLoader.php',
 	'Contao\Pagination'                => 'system/modules/core/library/Contao/Pagination.php',
 	'Contao\Request'                   => 'system/modules/core/library/Contao/Request.php',
 	'Contao\RequestToken'              => 'system/modules/core/library/Contao/RequestToken.php',
