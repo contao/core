@@ -304,6 +304,7 @@ abstract class System
 		$ref = \Input::get('ref');
 		$session = \Session::getInstance()->get($key);
 
+		// Unique referer ID
 		if ($ref && isset($session[$ref]))
 		{
 			$session = $session[$ref];
@@ -319,9 +320,11 @@ abstract class System
 			$session['current'] = $session[$strTable];
 		}
 
-		// Get the default referer
-		$return = preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', (($session['current'] != \Environment::get('requestUri')) ? $session['current'] : $session['last']));
-		$return = preg_replace('/^'.preg_quote(TL_PATH, '/').'\//', '', $return);
+		// Determine current or last
+		$strUrl = ($session['current'] != \Environment::get('request')) ? $session['current'] : $session['last'];
+
+		// Remove "toggle" and "toggle all" parameters
+		$return = preg_replace('/(&(amp;)?|\?)p?tg=[^& ]*/i', '', $strUrl);
 
 		// Fallback to the generic referer in the front end
 		if ($return == '' && TL_MODE == 'FE')

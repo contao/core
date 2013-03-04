@@ -115,7 +115,7 @@ class BackendUser extends \User
 					$session[$key][TL_REFERER_ID] = end($session[$key]);
 				}
 
-				$session[$key][TL_REFERER_ID]['current'] = \Environment::get('requestUri');
+				$session[$key][TL_REFERER_ID]['current'] = substr(\Environment::get('requestUri'), strlen(TL_PATH) + 1);
 			}
 		}
 

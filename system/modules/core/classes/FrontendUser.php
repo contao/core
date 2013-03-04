@@ -93,7 +93,7 @@ class FrontendUser extends \User
 		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != \Environment::get('requestUri'))
 		{
 			$session['referer']['last'] = $session['referer']['current'];
-			$session['referer']['current'] = \Environment::get('requestUri');
+			$session['referer']['current'] = substr(\Environment::get('requestUri'), strlen(TL_PATH) + 1);
 		}
 
 		$this->Session->setData($session);

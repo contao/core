@@ -367,7 +367,7 @@ class Index extends Frontend
 		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != Environment::get('requestUri'))
 		{
 			$session['referer']['last'] = $session['referer']['current'];
-			$session['referer']['current'] = Environment::get('requestUri');
+			$session['referer']['current'] = substr(Environment::get('requestUri'), strlen(TL_PATH) + 1);
 		}
 
 		// Store the session data
