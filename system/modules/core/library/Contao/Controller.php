@@ -1312,16 +1312,12 @@ abstract class Controller extends \System
 				case 'article_open':
 				case 'article_url':
 				case 'article_title':
-					$objArticle = \ArticleModel::findByIdOrAlias($elements[1]);
-
-					if ($objArticle === null)
+					if (($objArticle = \ArticleModel::findByIdOrAlias($elements[1])) === null || ($objPid = $objArticle->getRelated('pid')) === null)
 					{
 						break;
 					}
-					else
-					{
-						$strUrl = $this->generateFrontendUrl($objArticle->getRelated('pid')->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id));
-					}
+
+					$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id));
 
 					// Replace the tag
 					switch (strtolower($elements[0]))
@@ -1350,16 +1346,12 @@ abstract class Controller extends \System
 				case 'faq_open':
 				case 'faq_url':
 				case 'faq_title':
-					$objFaq = \FaqModel::findByIdOrAlias($elements[1]);
-
-					if ($objFaq === null)
+					if (($objFaq = \FaqModel::findByIdOrAlias($elements[1])) === null || ($objPid = $objFaq->getRelated('pid')) === null)
 					{
 						break;
 					}
-					else
-					{
-						$strUrl = $this->generateFrontendUrl($objFaq->getRelated('pid')->getRelated('jumpTo')->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
-					}
+
+					$strUrl = $this->generateFrontendUrl($objPid->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
 
 					// Replace the tag
 					switch (strtolower($elements[0]))
@@ -1388,28 +1380,35 @@ abstract class Controller extends \System
 				case 'news_open':
 				case 'news_url':
 				case 'news_title':
-					$objNews = \NewsModel::findByIdOrAlias($elements[1]);
-
-					if ($objNews === null)
+					if (($objNews = \NewsModel::findByIdOrAlias($elements[1])) === null)
 					{
 						break;
 					}
-					elseif ($objNews->source == 'internal')
-					{
-						$strUrl = $this->generateFrontendUrl($objNews->getRelated('jumpTo')->row());
-					}
-					elseif ($objNews->source == 'article')
-					{
-						$objArticle = \ArticleModel::findByPk($objNews->articleId, array('eager'=>true));
-						$strUrl = $this->generateFrontendUrl($objArticle->getRelated('pid')->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
-					}
-					elseif ($objNews->source == 'external')
+
+					if ($objNews->source == 'external')
 					{
 						$strUrl = $objNews->url;
 					}
+					elseif ($objNews->source == 'internal')
+					{
+						if (($objJumpTo = $objNews->getRelated('jumpTo')) !== null)
+						{
+							$strUrl = $this->generateFrontendUrl($objJumpTo->row());
+						}
+					}
+					elseif ($objNews->source == 'article')
+					{
+						if (($objArticle = \ArticleModel::findByPk($objNews->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
+						{
+							$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
+						}
+					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objNews->getRelated('pid')->getRelated('jumpTo')->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->alias != '') ? $objNews->alias : $objNews->id));
+						if (($objArchive = $objNews->getRelated('pid')) !== null && ($objJumpTo = $objArchive->getRelated('jumpTo')) !== null)
+						{
+							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->alias != '') ? $objNews->alias : $objNews->id));
+						}
 					}
 
 					// Replace the tag
@@ -1439,28 +1438,35 @@ abstract class Controller extends \System
 				case 'event_open':
 				case 'event_url':
 				case 'event_title':
-					$objEvent = \CalendarEventsModel::findByIdOrAlias($elements[1]);
-
-					if ($objEvent === null)
+					if (($objEvent = \CalendarEventsModel::findByIdOrAlias($elements[1])) === null)
 					{
 						break;
 					}
-					elseif ($objEvent->source == 'internal')
-					{
-						$strUrl = $this->generateFrontendUrl($objEvent->getRelated('jumpTo')->row());
-					}
-					elseif ($objEvent->source == 'article')
-					{
-						$objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true));
-						$strUrl = $this->generateFrontendUrl($objArticle->getRelated('pid')->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
-					}
-					elseif ($objEvent->source == 'external')
+
+					if ($objEvent->source == 'external')
 					{
 						$strUrl = $objEvent->url;
 					}
+					elseif ($objEvent->source == 'internal')
+					{
+						if (($objJumpTo = $objEvent->getRelated('jumpTo')) !== null)
+						{
+							$strUrl = $this->generateFrontendUrl($objJumpTo->row());
+						}
+					}
+					elseif ($objEvent->source == 'article')
+					{
+						if (($objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
+						{
+							$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
+						}
+					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objEvent->getRelated('pid')->getRelated('jumpTo')->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/events/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id));
+						if (($objCalendar = $objEvent->getRelated('pid')) !== null && ($objJumpTo = $objCalendar->getRelated('jumpTo')) !== null)
+						{
+							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/events/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id));
+						}
 					}
 
 					// Replace the tag

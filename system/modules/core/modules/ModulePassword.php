@@ -317,6 +317,13 @@ class ModulePassword extends \Module
 		$objEmail->sendTo($objMember->email);
 
 		$this->log('A new password has been requested for user ID ' . $objMember->id . ' (' . $objMember->email . ')', 'ModulePassword sendPasswordLink()', TL_ACCESS);
-		$this->jumpToOrReload($this->objModel->getRelated('jumpTo')->row());
+
+		// Check whether there is a jumpTo page
+		if (($objJumpTo = $this->objModel->getRelated('jumpTo')) !== null)
+		{
+			$this->jumpToOrReload($objJumpTo->row());
+		}
+
+		$this->reload();
 	}
 }
