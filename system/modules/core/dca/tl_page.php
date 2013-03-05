@@ -292,7 +292,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'foreignKey'              => 'tl_page.title',
-			'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio'),
+			'eval'                    => array('fieldType'=>'radio'), // do not set mandatory (see #5453)
 			'save_callback' => array
 			(
 				array('tl_page', 'checkJumpTo')

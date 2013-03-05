@@ -5,6 +5,9 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Allow to create forward pages without a specific target (see #5453).
+
+### Fixed
 Updated the TinyMCE typolinks plugin (see #5329).
 
 ### Fixed
