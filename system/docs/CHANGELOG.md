@@ -5,6 +5,9 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Show invisible elements in the back end preview (see #5449).
+
+### Fixed
 Allow to create forward pages without a specific target (see #5453).
 
 ### Fixed
