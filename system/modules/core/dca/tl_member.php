@@ -24,8 +24,8 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		'enableVersioning'            => true,
 		'onsubmit_callback' => array
 		(
-			array('tl_member', 'removeSession'),
-			array('tl_member', 'storeDateAdded')
+			array('tl_member', 'storeDateAdded'),
+			array('tl_member', 'checkRemoveSession')
 		),
 		'ondelete_callback' => array
 		(
@@ -534,12 +534,28 @@ class tl_member extends Backend
 
 
 	/**
-	 * Remove the session if a user is deleted (see #5353)
-	 * @param \DataContainer
+	 * Check whether the user session should be removed
+	 * @param object
 	 */
-	public function removeSession(DataContainer $dc)
+	public function checkRemoveSession($dc)
 	{
-		if ($dc->activeRecord)
+		if ($dc instanceof \DataContainer && $dc->activeRecord)
+		{
+			if ($dc->activeRecord->disable || ($dc->activeRecord->start != '' && $dc->activeRecord->start > time()) || ($dc->activeRecord->stop != '' && $dc->activeRecord->stop <= time()))
+			{
+				$this->removeSession($dc);
+			}
+		}
+	}
+
+
+	/**
+	 * Remove the session if a user is deleted (see #5353)
+	 * @param object
+	 */
+	public function removeSession($dc)
+	{
+		if ($dc instanceof \DataContainer && $dc->activeRecord)
 		{
 			$this->Database->prepare("DELETE FROM tl_session WHERE name='FE_USER_AUTH' AND pid=?")
 						   ->execute($dc->activeRecord->id);
