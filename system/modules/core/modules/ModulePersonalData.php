@@ -300,7 +300,13 @@ class ModulePersonalData extends \Module
 				}
 			}
 
-			$this->jumpToOrReload($this->objModel->getRelated('jumpTo')->row());
+			// Check whether there is a jumpTo page
+			if (($objJumpTo = $this->objModel->getRelated('jumpTo')) !== null)
+			{
+				$this->jumpToOrReload($objJumpTo->row());
+			}
+
+			$this->reload();
 		}
 
 		$this->Template->loginDetails = $GLOBALS['TL_LANG']['tl_member']['loginDetails'];

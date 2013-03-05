@@ -139,7 +139,14 @@ class ModuleCloseAccount extends \Module
 				}
 
 				$this->User->logout();
-				$this->jumpToOrReload($this->objModel->getRelated('jumpTo')->row());
+
+				// Check whether there is a jumpTo page
+				if (($objJumpTo = $this->objModel->getRelated('jumpTo')) !== null)
+				{
+					$this->jumpToOrReload($objJumpTo->row());
+				}
+
+				$this->reload();
 			}
 		}
 

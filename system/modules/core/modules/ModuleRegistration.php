@@ -459,7 +459,13 @@ class ModuleRegistration extends \Module
 			$this->sendAdminNotification($insertId, $arrData);
 		}
 
-		$this->jumpToOrReload($this->objModel->getRelated('jumpTo')->row());
+		// Check whether there is a jumpTo page
+		if (($objJumpTo = $this->objModel->getRelated('jumpTo')) !== null)
+		{
+			$this->jumpToOrReload($objJumpTo->row());
+		}
+
+		$this->reload();
 	}
 
 
