@@ -1328,7 +1328,7 @@ var Backend =
 					size = el.getStyle('width') + '|' + el.getStyle('height');
 				}
 			});
-			Cookie.write('BE_CELL_SIZE', size);
+			Cookie.write('BE_CELL_SIZE', size, { path: Contao.path });
 		} else if (size != null) {
 			var chunks = size.split('|');
 			$$('.tl_tablewizard textarea').each(function(el) {
