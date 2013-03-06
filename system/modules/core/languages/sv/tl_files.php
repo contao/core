@@ -36,7 +36,6 @@ $GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'Skapade foldern "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'Hittade foldern "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileC'] = 'Skapade filen "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileF'] = 'Hittade filen "%s"';
-$GLOBALS['TL_LANG']['tl_files']['syncHash'] = 'Uppdaterade hash-nummer för filen "%s"';
 $GLOBALS['TL_LANG']['tl_files']['new'][0] = 'Skapa mapp';
 $GLOBALS['TL_LANG']['tl_files']['new'][1] = 'Skapa en ny mapp';
 $GLOBALS['TL_LANG']['tl_files']['cut'][0] = 'Flytta fil eller mapp';

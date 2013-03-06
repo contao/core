@@ -36,7 +36,6 @@ $GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'Izveidoja mapi "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'Atrada mapi "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileC'] = 'Izveidoja datni "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileF'] = 'Atrada datni "%s"';
-$GLOBALS['TL_LANG']['tl_files']['syncHash'] = 'Atjaunināja datnes "%s" jaucējatslēgu';
 $GLOBALS['TL_LANG']['tl_files']['new'][0] = 'Jauna mape';
 $GLOBALS['TL_LANG']['tl_files']['new'][1] = 'Izveidot jaunu mapi';
 $GLOBALS['TL_LANG']['tl_files']['cut'][0] = 'Pārvietot datni vai mapi';

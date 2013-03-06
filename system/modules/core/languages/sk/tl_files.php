@@ -36,7 +36,6 @@ $GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'Vytvorený priečinok "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'Nájdený priečinok "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileC'] = 'Vytvorený súbor "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileF'] = 'Nájdený súbor "%s"';
-$GLOBALS['TL_LANG']['tl_files']['syncHash'] = 'Aktulizovaný hash súboru "%s"';
 $GLOBALS['TL_LANG']['tl_files']['new'][0] = 'Nový priečinok';
 $GLOBALS['TL_LANG']['tl_files']['new'][1] = 'Vytvoriť nový priečinok';
 $GLOBALS['TL_LANG']['tl_files']['cut'][0] = 'Premiestniť súbor alebo priečinok';

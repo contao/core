@@ -36,7 +36,6 @@ $GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'Создан каталог "%
 $GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'Найден каталог "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileC'] = 'Создан файл "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileF'] = 'Найден файл "%s"';
-$GLOBALS['TL_LANG']['tl_files']['syncHash'] = 'Обновлен хеш файла "%s"';
 $GLOBALS['TL_LANG']['tl_files']['new'][0] = 'Новый каталог';
 $GLOBALS['TL_LANG']['tl_files']['new'][1] = 'Создать новый каталог';
 $GLOBALS['TL_LANG']['tl_files']['cut'][0] = 'Переместить файл или каталог';

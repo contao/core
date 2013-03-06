@@ -363,7 +363,7 @@
       </trans-unit>
       <trans-unit id="CTE.files">
         <source>File elements</source>
-        <target>Datei Elemente</target>
+        <target>Datei-Elemente</target>
       </trans-unit>
       <trans-unit id="CTE.download.0">
         <source>Download</source>

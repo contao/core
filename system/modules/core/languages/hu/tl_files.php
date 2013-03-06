@@ -35,7 +35,6 @@ $GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = '"%s" könyvtár létrehozva';
 $GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = '"%s" könyvtár megtalálva';
 $GLOBALS['TL_LANG']['tl_files']['syncFileC'] = '"%s" fájl létrehozva';
 $GLOBALS['TL_LANG']['tl_files']['syncFileF'] = '"%s" fájl megtalálva';
-$GLOBALS['TL_LANG']['tl_files']['syncHash'] = '"%s" fájl hash információja frissült';
 $GLOBALS['TL_LANG']['tl_files']['new'][0] = 'Új mappa';
 $GLOBALS['TL_LANG']['tl_files']['new'][1] = 'Új mappa létrehozása';
 $GLOBALS['TL_LANG']['tl_files']['cut'][0] = 'Fájl vagy mappa mozgatása';

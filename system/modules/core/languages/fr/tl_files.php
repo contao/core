@@ -36,7 +36,6 @@ $GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'Le répertoire "%s" a été cr
 $GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'Le répertoire "%s" a été trouvé';
 $GLOBALS['TL_LANG']['tl_files']['syncFileC'] = 'Le fichier "%s" a été créé';
 $GLOBALS['TL_LANG']['tl_files']['syncFileF'] = 'Le fichier "%s" a été trouvé';
-$GLOBALS['TL_LANG']['tl_files']['syncHash'] = 'Le hash du fichier "%s" a été mis à jour';
 $GLOBALS['TL_LANG']['tl_files']['new'][0] = 'Nouveau répertoire';
 $GLOBALS['TL_LANG']['tl_files']['new'][1] = 'Créer un nouveau répertoire.';
 $GLOBALS['TL_LANG']['tl_files']['cut'][0] = 'Déplacer un fichier ou un répertoire';

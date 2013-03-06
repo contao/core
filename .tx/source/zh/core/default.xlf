@@ -83,6 +83,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidDate">
         <source>Invalid date &quot;%s&quot;!</source>
+        <target>无效日期 &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
@@ -110,6 +111,7 @@
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
+        <target>因目标已经存在，不能移动 %s 到 %s！ </target>
       </trans-unit>
       <trans-unit id="ERR.invalidReferer">
         <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
@@ -169,6 +171,7 @@
       </trans-unit>
       <trans-unit id="ERR.fileExists">
         <source>The file or folder &quot;%s&quot; already exists!</source>
+        <target> &quot;%s&quot;文件或文件夹已经存在!</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -180,12 +183,15 @@
       </trans-unit>
       <trans-unit id="ERR.noFallbackEmpty">
         <source>None of the active website root pages without an explicit DNS setting has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
+        <target>不具备显式域名的活动网站的首页没有语言后备选项设置，这意味着这些网站仅可使用您在页面设置中定义的那一种语言！使用其他语种的访问者和搜索引擎将无法浏览您的网站。</target>
       </trans-unit>
       <trans-unit id="ERR.noFallbackDns">
         <source>None of the active website root pages for &lt;strong&gt;%s&lt;/strong&gt; has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
+        <target>&lt;strong&gt;%s&lt;/strong&gt;的活动网站首页没有后备语言设置，这意味着这些网站仅可使用您在页面设置中定义的那一种语言！使用其他语种的访问者和搜索引擎将无法浏览您的网站。</target>
       </trans-unit>
       <trans-unit id="ERR.multipleFallback">
         <source>You can only define one website root page per domain as language fallback.</source>
+        <target>每个域名只能定义一个网站跟页面作为语言回退。</target>
       </trans-unit>
       <trans-unit id="ERR.topLevelRoot">
         <source>Top-level pages must be website root pages!</source>
@@ -219,9 +225,11 @@
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
         <source>No database entry found for %s.</source>
+        <target>没有发现关于%s的数据库条目。</target>
       </trans-unit>
       <trans-unit id="ERR.dbOutOfSync">
         <source>The database and the file system have to be synchronized to continue.</source>
+        <target>数据库和文件系统必须同步进行。</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
@@ -921,6 +929,7 @@
       </trans-unit>
       <trans-unit id="MSC.box.1">
         <source>The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>图片的短边调整到给定的尺寸，按比例调整图片大小。</target>
       </trans-unit>
       <trans-unit id="MSC.crop">
         <source>Exact dimensions</source>
@@ -932,6 +941,7 @@
       </trans-unit>
       <trans-unit id="MSC.left_top.1">
         <source>Preserves the left part of a landscape image and the top part of a portrait image.</source>
+        <target>保留横向图片的左侧部分和纵向图片的顶部。</target>
       </trans-unit>
       <trans-unit id="MSC.center_top.0">
         <source>Center | Top</source>
@@ -939,6 +949,7 @@
       </trans-unit>
       <trans-unit id="MSC.center_top.1">
         <source>Preserves the center part of a landscape image and the top part of a portrait image.</source>
+        <target>保留横向图片的中部和纵向图片的顶部。</target>
       </trans-unit>
       <trans-unit id="MSC.right_top.0">
         <source>Right | Top</source>
@@ -946,6 +957,7 @@
       </trans-unit>
       <trans-unit id="MSC.right_top.1">
         <source>Preserves the right part of a landscape image and the top part of a portrait image.</source>
+        <target>保留横向图片的右侧部分和纵向图片的顶部。</target>
       </trans-unit>
       <trans-unit id="MSC.left_center.0">
         <source>Left | Center</source>
@@ -953,6 +965,7 @@
       </trans-unit>
       <trans-unit id="MSC.left_center.1">
         <source>Preserves the left part of a landscape image and the center part of a portrait image.</source>
+        <target>保留横向图片的左侧部分和纵向图片的中部。</target>
       </trans-unit>
       <trans-unit id="MSC.center_center.0">
         <source>Center | Center</source>
@@ -960,6 +973,7 @@
       </trans-unit>
       <trans-unit id="MSC.center_center.1">
         <source>Preserves the center part of a landscape image and the center part of a portrait image.</source>
+        <target>保留横向图片的中部和纵向图片的中部。</target>
       </trans-unit>
       <trans-unit id="MSC.right_center.0">
         <source>Right | Center</source>
@@ -967,6 +981,7 @@
       </trans-unit>
       <trans-unit id="MSC.right_center.1">
         <source>Preserves the right part of a landscape image and the center part of a portrait image.</source>
+        <target>保留横向图片的右侧部分和纵向图片的中部。</target>
       </trans-unit>
       <trans-unit id="MSC.left_bottom.0">
         <source>Left | Bottom</source>
@@ -974,6 +989,7 @@
       </trans-unit>
       <trans-unit id="MSC.left_bottom.1">
         <source>Preserves the left part of a landscape image and the bottom part of a portrait image.</source>
+        <target>保留横向图片的左侧部分和纵向图片的底部。</target>
       </trans-unit>
       <trans-unit id="MSC.center_bottom.0">
         <source>Center | Bottom</source>
@@ -981,6 +997,7 @@
       </trans-unit>
       <trans-unit id="MSC.center_bottom.1">
         <source>Preserves the center part of a landscape image and the bottom part of a portrait image.</source>
+        <target>保留横向图片的中部和纵向图片的底部。</target>
       </trans-unit>
       <trans-unit id="MSC.right_bottom.0">
         <source>Right | Bottom</source>
@@ -988,6 +1005,7 @@
       </trans-unit>
       <trans-unit id="MSC.right_bottom.1">
         <source>Preserves the right part of a landscape image and the bottom part of a portrait image.</source>
+        <target>保留横向图片的右侧部分和纵向图片的底部。</target>
       </trans-unit>
       <trans-unit id="MSC.id.0">
         <source>ID</source>
@@ -1023,9 +1041,11 @@
       </trans-unit>
       <trans-unit id="MSC.all_override.0">
         <source>Override multiple</source>
+        <target>重写多个</target>
       </trans-unit>
       <trans-unit id="MSC.all_override.1">
         <source>Override multiple records at once</source>
+        <target>一次重写多条记录</target>
       </trans-unit>
       <trans-unit id="MSC.all_fields.0">
         <source>Available fields</source>
@@ -1089,6 +1109,7 @@
       </trans-unit>
       <trans-unit id="MSC.staticFiles.1">
         <source>The files URL applies to the &lt;em&gt;files&lt;/em&gt; directory (page speed optimization).</source>
+        <target>这些文件的URL适用于&lt;em&gt;文件&lt;/em&gt;目录 (页面速度优化)。</target>
       </trans-unit>
       <trans-unit id="MSC.staticPlugins.0">
         <source>Assets URL</source>
@@ -1096,6 +1117,7 @@
       </trans-unit>
       <trans-unit id="MSC.staticPlugins.1">
         <source>The assets URL applies to the &lt;em&gt;assets&lt;/em&gt; directory (page speed optimization).</source>
+        <target>这些资料的URL适用于&lt;em&gt;资料&lt;/em&gt; 目录 (页面速度优化)。</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.0">
         <source>Back end keyboard shortcuts</source>
@@ -1103,6 +1125,7 @@
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
         <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>了解更多&lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;键盘快捷键概述来自于contao.org&quot; target=&quot;_blank&quot;&gt;键盘快捷键&lt;/a&gt;，以加快您的工作流程。</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1935,6 +1958,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.templatesTheme">
         <source>Theme %s</source>
+        <target>主题%s</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>
@@ -1942,27 +1966,35 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="UNITS.1">
         <source>KiB</source>
+        <target>KiB</target>
       </trans-unit>
       <trans-unit id="UNITS.2">
         <source>MiB</source>
+        <target>MiB</target>
       </trans-unit>
       <trans-unit id="UNITS.3">
         <source>GiB</source>
+        <target>GiB</target>
       </trans-unit>
       <trans-unit id="UNITS.4">
         <source>TiB</source>
+        <target>TiB</target>
       </trans-unit>
       <trans-unit id="UNITS.5">
         <source>PiB</source>
+        <target>PiB</target>
       </trans-unit>
       <trans-unit id="UNITS.6">
         <source>EiB</source>
+        <target>EiB</target>
       </trans-unit>
       <trans-unit id="UNITS.7">
         <source>ZiB</source>
+        <target>ZiB</target>
       </trans-unit>
       <trans-unit id="UNITS.8">
         <source>YiB</source>
+        <target>YiB</target>
       </trans-unit>
       <trans-unit id="CONFIRM.do">
         <source>Module</source>

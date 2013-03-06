@@ -36,7 +36,6 @@ $GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'Oprettet mappen "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'Fundet mappen "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileC'] = 'Oprettet filen "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileF'] = 'Fundet filen "%s"';
-$GLOBALS['TL_LANG']['tl_files']['syncHash'] = 'Opdateret hash for filen "%s"';
 $GLOBALS['TL_LANG']['tl_files']['new'][0] = 'Ny mappe';
 $GLOBALS['TL_LANG']['tl_files']['new'][1] = 'Opret en ny mappe';
 $GLOBALS['TL_LANG']['tl_files']['cut'][0] = 'Flyt fil eller mappe';

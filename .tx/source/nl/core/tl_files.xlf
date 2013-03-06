@@ -81,6 +81,9 @@
         <source>Found the folder &quot;%s&quot;</source>
         <target>Map &quot;%s&quot; gevonden</target>
       </trans-unit>
+      <trans-unit id="tl_files.syncFolderH">
+        <source>Updated the hash of the folder &quot;%s&quot;</source>
+      </trans-unit>
       <trans-unit id="tl_files.syncFileC">
         <source>Created the file &quot;%s&quot;</source>
         <target>Het bestand &quot;%s&quot; is aangemaakt</target>
@@ -89,9 +92,8 @@
         <source>Found the file &quot;%s&quot;</source>
         <target>Bestand &quot;%s&quot; gevonden</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncHash">
+      <trans-unit id="tl_files.syncFileH">
         <source>Updated the hash of the file &quot;%s&quot;</source>
-        <target>De Hash van bestand &quot;%s&quot; werd bijgewerkt</target>
       </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>

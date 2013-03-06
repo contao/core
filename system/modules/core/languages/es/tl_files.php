@@ -36,7 +36,6 @@ $GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'Ha creado la carpeta \'"%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'Ha encontrado la carpeta "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileC'] = 'Ha creado el archivo"%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileF'] = 'Ha encontrado el archivo "%s"';
-$GLOBALS['TL_LANG']['tl_files']['syncHash'] = 'Ha actualizado el hash del archivo "%s" ';
 $GLOBALS['TL_LANG']['tl_files']['new'][0] = 'Carpeta nueva';
 $GLOBALS['TL_LANG']['tl_files']['new'][1] = 'Crear una carpeta nueva';
 $GLOBALS['TL_LANG']['tl_files']['cut'][0] = 'Mover archivo o carpeta';

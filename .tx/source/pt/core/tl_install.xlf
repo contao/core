@@ -199,6 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_install.saveCollation">
         <source>Change collation</source>
+        <target>Alterar collation</target>
       </trans-unit>
       <trans-unit id="tl_install.updateX">
         <source>It seems that you are upgrading from a Contao version prior to version %s. If that is the case, &lt;strong&gt;it is required to run the version %s update&lt;/strong&gt; to ensure the integrity of your data!</source>
@@ -210,9 +211,11 @@
       </trans-unit>
       <trans-unit id="tl_install.updateXrunStep">
         <source>Run version %s update - step %s</source>
+        <target>Executar atualização da versão %s - passo %s</target>
       </trans-unit>
       <trans-unit id="tl_install.importException">
         <source>The import failed! Is the database structure up to date and is the template file compatible with your Contao version?</source>
+        <target>A importação falhou! A estrutura da base de dados está atualizada e o arquivo de template é compatível com a sua versão do Contao?</target>
       </trans-unit>
       <trans-unit id="tl_install.importError">
         <source>Please choose a template file!</source>
@@ -304,9 +307,11 @@
       </trans-unit>
       <trans-unit id="tl_install.filesRenamed">
         <source>The configured files directory does not exist!</source>
+        <target>A pasta de arquivos configurada não existe!</target>
       </trans-unit>
       <trans-unit id="tl_install.filesWarning">
         <source>Did you rename the &lt;strong&gt;tl_files&lt;/strong&gt; folder to &lt;strong&gt;files&lt;/strong&gt;? You cannot just rename the folder, because all the file references in the database and your style sheets will still point to the old location. If you want to rename the folder, please do so after the version 3 update and make sure to adjust your database data with the following script: %s.</source>
+        <target>Você renomeou a pasta &lt;strong&gt;tl_files&lt;/strong&gt; para &lt;strong&gt;files&lt;/strong&gt;? Você não pode apenas renomear a pasta, porque todas as referências na base de dados aos arquivos e às folhas de estilo ainda apontarão para o caminho antigo. Se quiser renomear a pasta, por favor renomeie após a atualização para a versão 3 e tenha certeza que acertou os dados da sua base de dados com o seguinte script: %s.</target>
       </trans-unit>
       <trans-unit id="tl_install.CREATE">
         <source>Create new tables</source>

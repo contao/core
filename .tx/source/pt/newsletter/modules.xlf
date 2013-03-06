@@ -11,6 +11,7 @@
       </trans-unit>
       <trans-unit id="MOD.tl_newsletter_recipients">
         <source>Recipients</source>
+        <target>Destinatários</target>
       </trans-unit>
       <trans-unit id="FMD.newsletter">
         <source>Newsletter</source>

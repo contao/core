@@ -23,6 +23,7 @@ $GLOBALS['TL_LANG']['tl_page']['type'][1] = 'لطفا نوع صفحه را مش�
 $GLOBALS['TL_LANG']['tl_page']['pageTitle'][0] = 'عنوان صفحه';
 $GLOBALS['TL_LANG']['tl_page']['pageTitle'][1] = 'لطفا عنوان صفحه را وارد نمائید.';
 $GLOBALS['TL_LANG']['tl_page']['language'][0] = 'زبان';
+$GLOBALS['TL_LANG']['tl_page']['language'][1] = 'لطفا زبان صفحه را براساس استاندارد ISO-639-1 (مانند "fa" برای پارسی) وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_page']['robots'][0] = 'برچسب روبوت‌ها';
 $GLOBALS['TL_LANG']['tl_page']['robots'][1] = 'می‌توانید نحوه برخورد موتورهای جستجو را با صفحه مشخص کنید.';
 $GLOBALS['TL_LANG']['tl_page']['description'][0] = 'توضیحات صفحه';
@@ -44,6 +45,7 @@ $GLOBALS['TL_LANG']['tl_page']['timeFormat'][1] = 'رشته ساختار ساع�
 $GLOBALS['TL_LANG']['tl_page']['datimFormat'][0] = 'ساختار تاریخ و ساعت';
 $GLOBALS['TL_LANG']['tl_page']['datimFormat'][1] = 'رشته ساختار تاریخ و ساعت با تابع PHP date() تحویل خواهد شد.';
 $GLOBALS['TL_LANG']['tl_page']['createSitemap'][0] = 'ساخت نقشه وب‌سایت XML';
+$GLOBALS['TL_LANG']['tl_page']['createSitemap'][1] = 'ایجاد یک نقشه وب‌سایت XML گوگل در فهرست <em>share/</em>.';
 $GLOBALS['TL_LANG']['tl_page']['sitemapName'][0] = 'نام فایل نقشه وب‌سایت';
 $GLOBALS['TL_LANG']['tl_page']['sitemapName'][1] = 'لطفا نام فایل نقشه وب‌سایت را بدون پسوند وارد نمتئید.';
 $GLOBALS['TL_LANG']['tl_page']['useSSL'][0] = 'استفاده از HTTPS در نقشه وب‌سایت';

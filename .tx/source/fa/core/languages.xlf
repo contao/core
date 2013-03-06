@@ -406,6 +406,7 @@
       </trans-unit>
       <trans-unit id="LNG.si">
         <source>Sinhala</source>
+        <target>سینهالی</target>
       </trans-unit>
       <trans-unit id="LNG.sk">
         <source>Slovak</source>
@@ -441,6 +442,7 @@
       </trans-unit>
       <trans-unit id="LNG.st">
         <source>Sotho</source>
+        <target>سوتو</target>
       </trans-unit>
       <trans-unit id="LNG.su">
         <source>Sudanese</source>
@@ -460,6 +462,7 @@
       </trans-unit>
       <trans-unit id="LNG.te">
         <source>Telugu</source>
+        <target>تلوگو</target>
       </trans-unit>
       <trans-unit id="LNG.tg">
         <source>Tajik</source>

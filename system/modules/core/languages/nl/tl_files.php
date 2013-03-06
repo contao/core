@@ -36,7 +36,6 @@ $GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'Map "%s" aangemaakt';
 $GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'Map "%s" gevonden';
 $GLOBALS['TL_LANG']['tl_files']['syncFileC'] = 'Het bestand "%s" is aangemaakt';
 $GLOBALS['TL_LANG']['tl_files']['syncFileF'] = 'Bestand "%s" gevonden';
-$GLOBALS['TL_LANG']['tl_files']['syncHash'] = 'De Hash van bestand "%s" werd bijgewerkt';
 $GLOBALS['TL_LANG']['tl_files']['new'][0] = 'Nieuwe map';
 $GLOBALS['TL_LANG']['tl_files']['new'][1] = 'Maak een nieuwe map';
 $GLOBALS['TL_LANG']['tl_files']['cut'][0] = 'Verplaats bestand of map';

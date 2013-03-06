@@ -36,7 +36,6 @@ $GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'Utworzono folder "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'Znaleziono folder "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileC'] = 'Utworzono plik "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileF'] = 'Znaleziono plik "%s"';
-$GLOBALS['TL_LANG']['tl_files']['syncHash'] = 'Zaktualizowana hash pliku "%s"';
 $GLOBALS['TL_LANG']['tl_files']['new'][0] = 'Nowy katalog';
 $GLOBALS['TL_LANG']['tl_files']['new'][1] = 'Utwórz nowy katalog';
 $GLOBALS['TL_LANG']['tl_files']['cut'][0] = 'Przenieś plik lub katalog';

@@ -3,9 +3,11 @@
     <body>
       <trans-unit id="tl_news.headline.0">
         <source>Title</source>
+        <target>தலைப்பு</target>
       </trans-unit>
       <trans-unit id="tl_news.headline.1">
         <source>Please enter the news title.</source>
+        <target>தயவுசெய்து செய்தித் தலைப்பை உள்ளிடுங்கள்.</target>
       </trans-unit>
       <trans-unit id="tl_news.alias.0">
         <source>News alias</source>

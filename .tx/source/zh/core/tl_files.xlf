@@ -81,6 +81,9 @@
         <source>Found the folder &quot;%s&quot;</source>
         <target>找到文件夹“%s”</target>
       </trans-unit>
+      <trans-unit id="tl_files.syncFolderH">
+        <source>Updated the hash of the folder &quot;%s&quot;</source>
+      </trans-unit>
       <trans-unit id="tl_files.syncFileC">
         <source>Created the file &quot;%s&quot;</source>
         <target>创建文件“%s”</target>
@@ -89,9 +92,8 @@
         <source>Found the file &quot;%s&quot;</source>
         <target>找到文件“%s”</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncHash">
+      <trans-unit id="tl_files.syncFileH">
         <source>Updated the hash of the file &quot;%s&quot;</source>
-        <target>更新文件“%s”的哈希值</target>
       </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>

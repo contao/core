@@ -36,7 +36,6 @@ $GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'فایل «%s» ایجاد ش�
 $GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'پوشه «%s» یافت شد';
 $GLOBALS['TL_LANG']['tl_files']['syncFileC'] = 'پرونده «%s» ایجاد شد';
 $GLOBALS['TL_LANG']['tl_files']['syncFileF'] = 'پرونده «%s» یافت شد';
-$GLOBALS['TL_LANG']['tl_files']['syncHash'] = 'بروزرسانی hash پرونده «%s»';
 $GLOBALS['TL_LANG']['tl_files']['new'][0] = 'پوشه جدید';
 $GLOBALS['TL_LANG']['tl_files']['new'][1] = 'ساخت یک پوشه جدید';
 $GLOBALS['TL_LANG']['tl_files']['cut'][0] = 'جابجایی پرونده یا پوشه';
