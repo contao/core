@@ -5,6 +5,9 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+The submit button label was not shown in the `FormSubmit` widget (see #5434).
+
+### Fixed
 Show invisible elements in the back end preview (see #5449).
 
 ### Fixed

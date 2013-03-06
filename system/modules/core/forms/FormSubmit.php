@@ -61,6 +61,10 @@ class FormSubmit extends \Widget
 				$this->arrAttributes['name'] = $varValue;
 				break;
 
+			case 'label':
+				$this->slabel = $varValue;
+				break;
+
 			default:
 				parent::__set($strKey, $varValue);
 				break;
