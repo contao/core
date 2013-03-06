@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.6 (2013-XX-XX)
 --------------------------
 
+### Fixed
+Correctly create the user home directory upon registration (see #5437).
+
 ### Improved
 Made the `.htaccess` files Apache 2.4 ready (see #5032).
 
