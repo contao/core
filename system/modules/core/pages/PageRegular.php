@@ -339,6 +339,33 @@ class PageRegular extends \Frontend
 			$GLOBALS['TL_JAVASCRIPT'] = array();
 		}
 
+		// jQuery scripts
+		if ($objLayout->addJQuery)
+		{
+			if ($objLayout->jSource == 'j_googleapis' || $objLayout->jSource == 'j_fallback')
+			{
+				$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
+				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/jquery/' . JQUERY . '/jquery.min.js"></script>' . "\n";
+
+				// Local fallback (thanks to DyaGa)
+				if ($objLayout->jSource == 'j_fallback')
+				{
+					if ($blnXhtml)
+					{
+						$this->Template->mooScripts .= '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . 'window.jQuery || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/jquery/core/' . JQUERY . '/jquery.min.js">\x3C/script>\')' . "\n/* ]]> */\n" . '</script>' . "\n";
+					}
+					else
+					{
+						$this->Template->mooScripts .= '<script>window.jQuery || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/jquery/core/' . JQUERY . '/jquery.min.js">\x3C/script>\')</script>' . "\n";
+					}
+				}
+			}
+			else
+			{
+				array_unshift($GLOBALS['TL_JAVASCRIPT'], 'assets/jquery/core/' . JQUERY . '/jquery.min.js|static');
+			}
+		}
+
 		// MooTools scripts
 		if ($objLayout->addMooTools)
 		{
@@ -366,33 +393,6 @@ class PageRegular extends \Frontend
 			else
 			{
 				array_unshift($GLOBALS['TL_JAVASCRIPT'], 'assets/mootools/core/' . MOOTOOLS . '/mootools.js|static');
-			}
-		}
-
-		// jQuery scripts
-		if ($objLayout->addJQuery)
-		{
-			if ($objLayout->jSource == 'j_googleapis' || $objLayout->jSource == 'j_fallback')
-			{
-				$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/jquery/' . JQUERY . '/jquery.min.js"></script>' . "\n";
-
-				// Local fallback (thanks to DyaGa)
-				if ($objLayout->jSource == 'j_fallback')
-				{
-					if ($blnXhtml)
-					{
-						$this->Template->mooScripts .= '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . 'window.jQuery || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/jquery/core/' . JQUERY . '/jquery.min.js">\x3C/script>\')' . "\n/* ]]> */\n" . '</script>' . "\n";
-					}
-					else
-					{
-						$this->Template->mooScripts .= '<script>window.jQuery || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/jquery/core/' . JQUERY . '/jquery.min.js">\x3C/script>\')</script>' . "\n";
-					}
-				}
-			}
-			else
-			{
-				array_unshift($GLOBALS['TL_JAVASCRIPT'], 'assets/jquery/core/' . JQUERY . '/jquery.min.js|static');
 			}
 		}
 
