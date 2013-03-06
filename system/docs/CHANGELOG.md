@@ -5,6 +5,9 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Added the "allowTransparency" attribute to the mediabox script (see #5077).
+
+### Fixed
 The submit button label was not shown in the `FormSubmit` widget (see #5434).
 
 ### Fixed

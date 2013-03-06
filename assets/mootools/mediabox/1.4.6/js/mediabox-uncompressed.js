@@ -715,7 +715,8 @@ var Mediabox;
 						'id': mediaId,
 						'width': mediaWidth,
 						'height': mediaHeight,
-						'frameborder': 0
+						'frameborder': 0,
+						'allowTransparency': true // PATCH: see #5077
 						});
 					startEffect();
 				} else {
@@ -817,7 +818,8 @@ var Mediabox;
 						'id': mediaId,
 						'width': mediaWidth,
 						'height': mediaHeight,
-						'frameborder': 0
+						'frameborder': 0,
+						'allowTransparency': true // PATCH: see #5077
 						});
 					startEffect();
 				} else {
@@ -864,7 +866,8 @@ var Mediabox;
 					'id': mediaId,
 					'width': mediaWidth,
 					'height': mediaHeight,
-					'frameborder': 0
+					'frameborder': 0,
+					'allowTransparency': true // PATCH: see #5077
 					});
 				startEffect();
 			}
