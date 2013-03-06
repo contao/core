@@ -334,8 +334,14 @@ class PageRegular extends \Frontend
 		$this->Template->mooScripts = '';
 
 		// Make sure TL_JAVASCRIPT exists (see #4890)
-		if (!is_array($GLOBALS['TL_JAVASCRIPT']))
+		if (isset($GLOBALS['TL_JAVASCRIPT']) && is_array($GLOBALS['TL_JAVASCRIPT']))
 		{
+			$arrAppendJs = $GLOBALS['TL_JAVASCRIPT'];
+			$GLOBALS['TL_JAVASCRIPT'] = array();
+		}
+		else
+		{
+			$arrAppendJs = array();
 			$GLOBALS['TL_JAVASCRIPT'] = array();
 		}
 
@@ -362,7 +368,7 @@ class PageRegular extends \Frontend
 			}
 			else
 			{
-				array_unshift($GLOBALS['TL_JAVASCRIPT'], 'assets/jquery/core/' . JQUERY . '/jquery.min.js|static');
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/jquery/core/' . JQUERY . '/jquery.min.js|static';
 			}
 		}
 
@@ -387,12 +393,12 @@ class PageRegular extends \Frontend
 					}
 				}
 
-				array_unshift($GLOBALS['TL_JAVASCRIPT'], 'assets/mootools/core/' . MOOTOOLS . '/mootools-mobile.js|static');
-				array_unshift($GLOBALS['TL_JAVASCRIPT'], 'assets/mootools/core/' . MOOTOOLS . '/mootools-more.js|static');
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-more.js|static';
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-mobile.js|static';
 			}
 			else
 			{
-				array_unshift($GLOBALS['TL_JAVASCRIPT'], 'assets/mootools/core/' . MOOTOOLS . '/mootools.js|static');
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools.js|static';
 			}
 		}
 
@@ -401,12 +407,18 @@ class PageRegular extends \Frontend
 		{
 			if ($GLOBALS['TL_CONFIG']['debugMode'])
 			{
-				array_unshift($GLOBALS['TL_JAVASCRIPT'], 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js|static');
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js|static';
 			}
 			elseif (!$GLOBALS['TL_CONFIG']['disableCron'])
 			{
-				array_unshift($GLOBALS['TL_JAVASCRIPT'], 'assets/mootools/core/' . MOOTOOLS . '/mootools-request.js|static');
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-request.js|static';
 			}
+		}
+
+		// Check whether TL_APPEND_JS exists (see #4890)
+		if (!empty($arrAppendJs))
+		{
+			$GLOBALS['TL_JAVASCRIPT'] = array_merge($GLOBALS['TL_JAVASCRIPT'], $arrAppendJs);
 		}
 
 		// Initialize the sections
