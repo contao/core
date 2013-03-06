@@ -108,10 +108,14 @@ class ModuleBooknav extends \Module
 				$intKey = $this->arrPages[$intKey]['pid'];
 			}
 
-			$this->Template->upHref = $this->generateFrontendUrl($this->arrPages[$intKey]);
-			$this->Template->upTitle = specialchars($this->arrPages[$intKey]['title'], true);
-			$this->Template->upPageTitle = specialchars($this->arrPages[$intKey]['pageTitle'], true);
-			$this->Template->upLink = $GLOBALS['TL_LANG']['MSC']['up'];
+			// Hide the link if the reference page is a forward page (see #5374)
+			if (isset($this->arrPages[$intKey]))
+			{
+				$this->Template->upHref = $this->generateFrontendUrl($this->arrPages[$intKey]);
+				$this->Template->upTitle = specialchars($this->arrPages[$intKey]['title'], true);
+				$this->Template->upPageTitle = specialchars($this->arrPages[$intKey]['pageTitle'], true);
+				$this->Template->upLink = $GLOBALS['TL_LANG']['MSC']['up'];
+			}
 		}
 
 		$arrLookup = array_keys($this->arrPages);
