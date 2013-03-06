@@ -2462,7 +2462,7 @@ window.addEvent(\'domready\', function() {
 				if ($objModel->hash != $objFolder->hash)
 				{
 					$objModel->hash = $objFolder->hash;
-					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncHash'], $strFolder) . '</p>';
+					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderH'], $strFolder) . '</p>';
 				}
 
 				$objModel->found = 1;
@@ -2502,7 +2502,7 @@ window.addEvent(\'domready\', function() {
 				if ($objModel->hash != $objFile->hash)
 				{
 					$objModel->hash = $objFile->hash;
-					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncHash'], $strFile) . '</p>';
+					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileH'], $strFile) . '</p>';
 				}
 
 				$objModel->found = 1;
