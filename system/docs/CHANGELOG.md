@@ -5,6 +5,9 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Also truncate opened files in `File::truncate()` (see #5459).
+
+### Fixed
 Added the "allowTransparency" attribute to the mediabox script (see #5077).
 
 ### Fixed
