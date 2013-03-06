@@ -216,7 +216,7 @@ class Folder extends \System
 		if (!file_exists(TL_ROOT . '/' . $this->strFolder . '/.htaccess'))
 		{
 			$objFile = new \File($this->strFolder . '/.htaccess', true);
-			$objFile->write("order deny,allow\ndeny from all");
+			$objFile->write("<IfModule !mod_authz_core.c>\n  Order deny,allow\n  Deny from all\n</IfModule>\n<IfModule mod_authz_core.c>\n  Require all denied\n</IfModule>");
 			$objFile->close();
 		}
 	}

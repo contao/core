@@ -316,7 +316,7 @@ class Updater extends \Controller
 				if (!file_exists(TL_ROOT . '/system/modules/' . $strFolder . '/html/.htaccess'))
 				{
 					$objFile = new \File('system/modules/' . $strFolder . '/html/.htaccess', true);
-					$objFile->write("order deny,allow\nallow from all");
+					$objFile->write("<IfModule !mod_authz_core.c>\n  Order allow,deny\n  Allow from all\n</IfModule>\n<IfModule mod_authz_core.c>\n  Require all granted\n</IfModule>");
 					$objFile->close();
 				}
 			}
