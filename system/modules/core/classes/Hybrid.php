@@ -189,7 +189,7 @@ abstract class Hybrid extends \Frontend
 	 */
 	public function generate()
 	{
-		if ($this->objParent instanceof \ContentModel && !BE_USER_LOGGED_IN && ($this->objParent->invisible || ($this->objParent->start > 0 && $this->objParent->start > time()) || ($this->objParent->stop > 0 && $this->objParent->stop < time())))
+		if ($this->objParent instanceof \ContentModel && TL_MODE == 'FE' && !BE_USER_LOGGED_IN && ($this->objParent->invisible || ($this->objParent->start > 0 && $this->objParent->start > time()) || ($this->objParent->stop > 0 && $this->objParent->stop < time())))
 		{
 			return '';
 		}

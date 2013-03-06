@@ -312,7 +312,7 @@ class Updater extends \Controller
 			{
 				if (!file_exists(TL_ROOT . '/system/modules/' . $strFolder . '/html/.htaccess'))
 				{
-					\File::putContent('system/modules/' . $strFolder . '/html/.htaccess', "order deny,allow\nallow from all");
+					\File::putContent('system/modules/' . $strFolder . '/html/.htaccess', "<IfModule !mod_authz_core.c>\n  Order allow,deny\n  Allow from all\n</IfModule>\n<IfModule mod_authz_core.c>\n  Require all granted\n</IfModule>");
 				}
 			}
 		}

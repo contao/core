@@ -2497,7 +2497,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				if ($blnChanged)
 				{
 					++$this->arrCounts['changed'];
-					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncHash'], $strFolder) . '</p>';
+					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderH'], $strFolder) . '</p>';
 				}
 				else
 				{
@@ -2550,7 +2550,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				if ($blnChanged)
 				{
 					++$this->arrCounts['changed'];
-					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncHash'], $strFile) . '</p>';
+					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileH'], $strFile) . '</p>';
 				}
 				else
 				{

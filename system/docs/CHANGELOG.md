@@ -196,6 +196,27 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly create the user home directory upon registration (see #5437).
+
+### Improved
+Made the `.htaccess` files Apache 2.4 ready (see #5032).
+
+### Fixed
+Also truncate opened files in `File::truncate()` (see #5459).
+
+### Fixed
+Added the "allowTransparency" attribute to the mediabox script (see #5077).
+
+### Fixed
+The submit button label was not shown in the `FormSubmit` widget (see #5434).
+
+### Fixed
+Show invisible elements in the back end preview (see #5449).
+
+### Fixed
+Allow to create forward pages without a specific target (see #5453).
+
+### Fixed
 Updated the TinyMCE typolinks plugin (see #5329).
 
 ### Fixed

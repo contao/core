@@ -321,6 +321,11 @@ class File extends \System
 	 */
 	public function truncate()
 	{
+		if (is_resource($this->resFile))
+		{
+			ftruncate($this->resFile, 0);
+		}
+
 		return $this->write('');
 	}
 

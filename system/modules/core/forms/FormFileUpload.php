@@ -242,42 +242,37 @@ class FormFileUpload extends \Widget implements \uploadable
 						'uploaded' => true
 					);
 
-					$this->loadDataContainer('tl_files');
-
 					// Generate the DB entries
-					if ($GLOBALS['TL_DCA']['tl_files']['config']['databaseAssisted'])
+					$strFile = $strUploadFolder . '/' . $file['name'];
+					$objFile = \FilesModel::findByPath($strFile);
+
+					// Existing file is being replaced (see #4818)
+					if ($objFile !== null)
 					{
-						$strFile = $strUploadFolder . '/' . $file['name'];
-						$objFile = \FilesModel::findByPath($strFile);
-
-						// Existing file is being replaced (see #4818)
-						if ($objFile !== null)
-						{
-							$objFile->tstamp = time();
-							$objFile->path   = $strFile;
-							$objFile->hash   = md5_file(TL_ROOT . '/' . $strFile);
-							$objFile->save();
-						}
-						else
-						{
-							$objFile = new \File($strFile, true);
-
-							$objNew = new \FilesModel();
-							$objNew->pid       = $objUploadFolder->id;
-							$objNew->tstamp    = time();
-							$objNew->type      = 'file';
-							$objNew->path      = $strFile;
-							$objNew->extension = $objFile->extension;
-							$objNew->hash      = md5_file(TL_ROOT . '/' . $strFile);
-							$objNew->name      = $objFile->basename;
-							$objNew->save();
-						}
-
-						// Update the hash of the target folder
-						$objFolder = new \Folder($strUploadFolder);
-						$objUploadFolder->hash = $objFolder->hash;
-						$objUploadFolder->save();
+						$objFile->tstamp = time();
+						$objFile->path   = $strFile;
+						$objFile->hash   = md5_file(TL_ROOT . '/' . $strFile);
+						$objFile->save();
 					}
+					else
+					{
+						$objFile = new \File($strFile, true);
+
+						$objNew = new \FilesModel();
+						$objNew->pid       = $objUploadFolder->id;
+						$objNew->tstamp    = time();
+						$objNew->type      = 'file';
+						$objNew->path      = $strFile;
+						$objNew->extension = $objFile->extension;
+						$objNew->hash      = md5_file(TL_ROOT . '/' . $strFile);
+						$objNew->name      = $objFile->basename;
+						$objNew->save();
+					}
+
+					// Update the hash of the target folder
+					$objFolder = new \Folder($strUploadFolder);
+					$objUploadFolder->hash = $objFolder->hash;
+					$objUploadFolder->save();
 
 					$this->log('File "'.$file['name'].'" has been moved to "'.$strUploadFolder.'"', 'FormFileUpload validate()', TL_FILES);
 				}

@@ -587,7 +587,7 @@ class Folder extends \System
 	{
 		if (!file_exists(TL_ROOT . '/' . $this->strFolder . '/.htaccess'))
 		{
-			\File::putContent($this->strFolder . '/.htaccess', "order deny,allow\ndeny from all");
+			\File::putContent($this->strFolder . '/.htaccess', "<IfModule !mod_authz_core.c>\n  Order deny,allow\n  Deny from all\n</IfModule>\n<IfModule mod_authz_core.c>\n  Require all denied\n</IfModule>");
 		}
 	}
 

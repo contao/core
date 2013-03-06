@@ -130,7 +130,7 @@ abstract class ContentElement extends \Frontend
 	 */
 	public function generate()
 	{
-		if (!BE_USER_LOGGED_IN && ($this->invisible || ($this->start > 0 && $this->start > time()) || ($this->stop > 0 && $this->stop < time())))
+		if (TL_MODE == 'FE' && !BE_USER_LOGGED_IN && ($this->invisible || ($this->start > 0 && $this->start > time()) || ($this->stop > 0 && $this->stop < time())))
 		{
 			return '';
 		}

@@ -422,25 +422,39 @@ class ModuleRegistration extends \Module
 		$objNewUser = new \MemberModel();
 		$objNewUser->setRow($arrData);
 		$objNewUser->save();
+
 		$insertId = $objNewUser->id;
 
 		// Assign home directory
-		if ($this->reg_assignDir && is_dir(TL_ROOT . '/' . $this->reg_homeDir))
+		if ($this->reg_assignDir)
 		{
-			$this->import('Files');
-			$strUserDir = $arrData['username'] ?: 'user_' . $insertId;
+			$objHomeDir = \FilesModel::findByPk($this->reg_homeDir);
 
-			// Add the user ID if the directory exists
-			if (is_dir(TL_ROOT . '/' . $this->reg_homeDir . '/' . $strUserDir))
+			if ($objHomeDir !== null)
 			{
-				$strUserDir .= '_' . $insertId;
+				$this->import('Files');
+				$strUserDir = $arrData['username'] ?: 'user_' . $insertId;
+
+				// Add the user ID if the directory exists
+				if (is_dir(TL_ROOT . '/' . $objHomeDir->path . '/' . $strUserDir))
+				{
+					$strUserDir .= '_' . $insertId;
+				}
+
+				// Create the user folder
+				new \Folder($objHomeDir->path . '/' . $strUserDir);
+				$objUserDir = \FilesModel::findByPath($objHomeDir->path . '/' . $strUserDir);
+
+				// Save the folder ID
+				$objNewUser->assignDir = 1;
+				$objNewUser->homeDir = $objUserDir->id;
+				$objNewUser->save();
+
+				// Update the hash of the target folder
+				$objFolder = new \Folder($objHomeDir->path);
+				$objHomeDir->hash = $objFolder->hash;
+				$objHomeDir->save();
 			}
-
-			new \Folder($this->reg_homeDir . '/' . $strUserDir);
-
-			$objNewUser->assignDir = 1;
-			$objNewUser->homeDir = $this->reg_homeDir . '/' . $strUserDir;
-			$objNewUser->save();
 		}
 
 		// HOOK: send insert ID and user data
