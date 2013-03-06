@@ -5,6 +5,9 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly send the comment moderation mails (see #5443).
+
+### Fixed
 Correctly create the user home directory upon registration (see #5437).
 
 ### Improved
