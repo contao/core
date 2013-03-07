@@ -5,6 +5,9 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly set the RSS feed self-reference (see #5478).
+
+### Fixed
 Remove `&shy;` and `&nbsp;` from RSS and Atom feeds (see #5473).
 
 ### Fixed
