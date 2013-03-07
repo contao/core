@@ -5,6 +5,9 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not remove the grid column margin on mobile devices (see #5475).
+
+### Fixed
 Store the relative path to the installation in the `pathconfig.php` (see #5339).
 
 ### Fixed
