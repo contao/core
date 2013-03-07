@@ -5,6 +5,9 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Remove `&shy;` and `&nbsp;` from RSS and Atom feeds (see #5473).
+
+### Fixed
 Do not remove the grid column margin on mobile devices (see #5475).
 
 ### Fixed

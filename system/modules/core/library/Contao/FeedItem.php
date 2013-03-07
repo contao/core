@@ -69,7 +69,7 @@ class FeedItem extends \System
 	 */
 	public function __set($strKey, $varValue)
 	{
-		$this->arrData[$strKey] = $varValue;
+		$this->arrData[$strKey] = str_replace(array('[-]', '&shy;', '[nbsp]', '&nbsp;'), array('', '', ' ', ' '), $varValue);
 	}
 
 
