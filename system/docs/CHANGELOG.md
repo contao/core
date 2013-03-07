@@ -5,6 +5,9 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Store the relative path to the installation in the `pathconfig.php` (see #5339).
+
+### Fixed
 Correctly send the comment moderation mails (see #5443).
 
 ### Fixed
