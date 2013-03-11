@@ -99,7 +99,7 @@ elseif (TL_MODE == 'BE')
 }
 else
 {
-	define('TL_PATH', preg_replace('/\/$/i', '', Environment::get('requestUri')));
+	define('TL_PATH', preg_replace('/\/[^\/]*$/i', '', Environment::get('requestUri')));
 }
 
 $GLOBALS['TL_CONFIG']['websitePath'] = TL_PATH; // backwards compatibility
