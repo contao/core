@@ -199,6 +199,26 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Include the local configuration file twice, once before and once after the
+module configuration files are parsed (see #5490). This will make settings like
+the debug or safe mode work properly.
+
+### Fixed
+Correctly set the RSS feed self-reference (see #5478).
+
+### Fixed
+Remove `&shy;` and `&nbsp;` from RSS and Atom feeds (see #5473).
+
+### Fixed
+Do not remove the grid column margin on mobile devices (see #5475).
+
+### Fixed
+Store the relative path to the installation in the `pathconfig.php` (see #5339).
+
+### Fixed
+Correctly send the comment moderation mails (see #5443).
+
+### Fixed
 Correctly create the user home directory upon registration (see #5437).
 
 ### Improved

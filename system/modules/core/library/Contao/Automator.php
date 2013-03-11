@@ -501,10 +501,6 @@ class Automator extends \System
 		$objCacheFile = new \File('system/cache/config/config.php', true);
 		$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
 
-		// Load the default files
-		$objCacheFile->append(static::readPhpFileWithoutTags('system/config/default.php'));
-		$objCacheFile->append(static::readPhpFileWithoutTags('system/config/agents.php'));
-
 		foreach (\ModuleLoader::getActive() as $strModule)
 		{
 			$strFile = 'system/modules/' . $strModule . '/config/config.php';

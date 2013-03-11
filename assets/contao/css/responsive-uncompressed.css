@@ -179,10 +179,9 @@
 	/**
 	 * Show all columns underneath each other
 	 */
-	*[class*="grid"],.inside>*[class*="grid"] {
+	*[class*="grid"] {
 		float:none;
 		display:block;
 		width:auto;
-		margin:0;
 	}
 }
