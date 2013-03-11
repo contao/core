@@ -176,7 +176,8 @@ class BackendTemplate extends \Template
 				. '},'
 				. 'script_url:"' . TL_ASSETS_URL . '",'
 				. 'path:"' . TL_PATH . '",'
-				. 'request_token:"' . REQUEST_TOKEN . '"'
+				. 'request_token:"' . REQUEST_TOKEN . '",'
+				. 'referer_id:"' . TL_REFERER_ID . '"'
 			. '};';
 	}
 
