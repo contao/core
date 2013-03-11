@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Improved
+Improved the back end referer management to support multiple tabs (see #5436).
+
 ### New
 Automatically synchronize the database when working on a file or folder in the
 upload directory with the `File` or `Folder` class (see #4991).

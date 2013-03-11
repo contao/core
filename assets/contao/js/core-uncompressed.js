@@ -49,7 +49,7 @@ var AjaxRequest =
 			evalScripts: true,
 			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
 			onSuccess: function(txt, json) {
-				item = new Element('li', {
+				var li = new Element('li', {
 					'id': id,
 					'class': 'tl_parent',
 					'html': txt,
@@ -57,6 +57,11 @@ var AjaxRequest =
 						'display': 'inline'
 					}
 				}).inject($(el).getParent('li'), 'after');
+
+				// Update the referer ID
+				li.getElements('a').each(function(el) {
+					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
@@ -138,6 +143,11 @@ var AjaxRequest =
 					}
 				}
 
+				// Update the referer ID
+				li.getElements('a').each(function(el) {
+					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+				});
+
 				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				window.fireEvent('structure');
@@ -202,6 +212,12 @@ var AjaxRequest =
 				}).inject(li, 'bottom');
 
 				li.inject($(el).getParent('li'), 'after');
+
+				// Update the referer ID
+				li.getElements('a').each(function(el) {
+					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+				});
+
 				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				icon.src = icon.src.replace('folderC.gif', 'folderO.gif');
@@ -264,6 +280,12 @@ var AjaxRequest =
 				}).inject(li, 'bottom');
 
 				li.inject($(el).getParent('li'), 'after');
+
+				// Update the referer ID
+				li.getElements('a').each(function(el) {
+					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+				});
+
 				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
@@ -325,6 +347,12 @@ var AjaxRequest =
 				}).inject(li, 'bottom');
 
 				li.inject($(el).getParent('li'), 'after');
+
+				// Update the referer ID
+				li.getElements('a').each(function(el) {
+					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+				});
+
 				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
@@ -380,6 +408,11 @@ var AjaxRequest =
 
 				el.value = 1;
 				el.checked = 'checked';
+
+				// Update the referer ID
+				div.getElements('a').each(function(el) {
+					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+				});
 
 				AjaxRequest.hideBox();
 				Backend.addInteractiveHelp();
@@ -649,6 +682,7 @@ var AjaxRequest =
 					// Preserve the "reset selection" entry
 					var ul = $(el.id + '_parent').getFirst('ul'),
 						li = ul.getLast('li');
+
 					ul.set('html', txt);
 					li.inject(ul, 'bottom');
 					AjaxRequest.hideBox();

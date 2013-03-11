@@ -179,6 +179,12 @@ abstract class System
 	public static function addToUrl($strRequest)
 	{
 		$strRequest = preg_replace('/^&(amp;)?/i', '', $strRequest);
+
+		if ($strRequest != '')
+		{
+			$strRequest .= '&amp;ref=' . TL_REFERER_ID;
+		}
+
 		$queries = preg_split('/&(amp;)?/i', \Environment::get('queryString'));
 
 		// Overwrite existing parameters
@@ -294,7 +300,19 @@ abstract class System
 	public static function getReferer($blnEncodeAmpersands=false, $strTable=null)
 	{
 		$key = (\Environment::get('script') == 'contao/files.php') ? 'fileReferer' : 'referer';
+
+		$ref = \Input::get('ref');
 		$session = \Session::getInstance()->get($key);
+
+		// Unique referer ID
+		if ($ref && isset($session[$ref]))
+		{
+			$session = $session[$ref];
+		}
+		elseif (TL_MODE == 'BE' && is_array($session))
+		{
+			$session = end($session);
+		}
 
 		// Use a specific referer
 		if ($strTable != '' && isset($session[$strTable]) && \Input::get('act') != 'select')
@@ -302,9 +320,11 @@ abstract class System
 			$session['current'] = $session[$strTable];
 		}
 
-		// Get the default referer
-		$return = preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', (($session['current'] != \Environment::get('requestUri')) ? $session['current'] : $session['last']));
-		$return = preg_replace('/^'.preg_quote(TL_PATH, '/').'\//', '', $return);
+		// Determine current or last
+		$strUrl = ($session['current'] != \Environment::get('request')) ? $session['current'] : $session['last'];
+
+		// Remove "toggle" and "toggle all" parameters
+		$return = preg_replace('/(&(amp;)?|\?)p?tg=[^& ]*/i', '', $strUrl);
 
 		// Fallback to the generic referer in the front end
 		if ($return == '' && TL_MODE == 'FE')

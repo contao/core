@@ -2671,7 +2671,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Folders
 		for ($f=0; $f<count($folders); $f++)
 		{
-			$md5 = md5($folders[$f]);
+			$md5 = substr(md5($folders[$f]), 0, 8);
 			$content = scan($folders[$f]);
 			$currentFolder = str_replace(TL_ROOT.'/', '', $folders[$f]);
 			$session['filetree'][$md5] = is_numeric($session['filetree'][$md5]) ? $session['filetree'][$md5] : 0;
@@ -2922,7 +2922,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				continue;
 			}
 
-			$arrFiles[md5(TL_ROOT . '/' . $strPath . '/' . $strFile)] = 1;
+			$strHash = md5(TL_ROOT . '/' . $strPath . '/' . $strFile);
+
+			$arrFiles[substr($strHash, 0, 8)] = 1;
 			$arrFiles = array_merge($arrFiles, $this->getMD5Folders($strPath . '/' . $strFile));
 		}
 

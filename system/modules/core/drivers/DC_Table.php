@@ -244,7 +244,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		if (!empty($this->ctable) && !\Input::get('act') && !\Input::get('key') && !\Input::get('token') && \Environment::get('script') == 'contao/main.php')
 		{
 			$session = $this->Session->get('referer');
-			$session[$this->strTable] = \Environment::get('requestUri');
+			$session[TL_REFERER_ID][$this->strTable] = substr(\Environment::get('requestUri'), strlen(TL_PATH) + 1);
 			$this->Session->set('referer', $session);
 		}
 	}
