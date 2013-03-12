@@ -152,7 +152,7 @@ if (TL_PATH !== null && !file_exists(TL_ROOT . '/system/config/pathconfig.php'))
 	{
 		try
 		{
-			$objFile = new File('system/config/pathconfig.php');
+			$objFile = new File('system/config/pathconfig.php', true);
 			$objFile->write("<?php\n\n// Relative path to the installation\nreturn '" . TL_PATH . "';\n");
 			$objFile->close();
 		}
