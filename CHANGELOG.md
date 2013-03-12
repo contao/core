@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.10 (2013-XX-XX)
 ----------------------------
 
+### Updated
+Updated TinyMCE to version 3.5.8 (see #5329).
+
 ### Fixed
 Correctly show the "invalid date and time" error message (see #5480).
 
