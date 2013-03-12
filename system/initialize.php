@@ -66,7 +66,21 @@ require(TL_ROOT . '/system/interface.php');
  * Define the relative path to the installation (see #5339)
  */
 $objEnvironment = Environment::getInstance();
-define('TL_PATH', str_replace($objEnvironment->documentRoot, '', str_replace('\\', '/',  dirname(dirname(__FILE__)))));
+
+if (file_exists(TL_ROOT . '/system/config/pathconfig.php'))
+{
+	define('TL_PATH', include TL_ROOT . '/system/config/pathconfig.php');
+}
+elseif (TL_MODE == 'BE')
+{
+	define('TL_PATH', preg_replace('/\/contao\/[^\/]*$/i', '', $objEnvironment->requestUri));
+}
+else
+{
+	define('TL_PATH', null); // cannot be reliably determined
+}
+
+$GLOBALS['TL_CONFIG']['websitePath'] = TL_PATH; // backwards compatibility
 
 
 /**
@@ -99,25 +113,26 @@ error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']
 
 
 /**
- * Store the relative path (backwards compatibility)
+ * Store the relative path
+ *
+ * Only store this value if the temp directory is writable and the local
+ * configuration file exists, otherwise it will initialize a Files object and
+ * prevent the install tool from loading the Safe Mode Hack (see #3215).
  */
-if ($GLOBALS['TL_CONFIG']['websitePath'] === null)
+if (TL_PATH !== null && !file_exists(TL_ROOT . '/system/config/pathconfig.php'))
 {
-	try
+	if (is_writable(TL_ROOT . '/system/tmp') && file_exists(TL_ROOT . '/system/config/localconfig.php'))
 	{
-		$GLOBALS['TL_CONFIG']['websitePath'] = TL_PATH;
-
-		// Only store this value if the temp directory is writable and the local configuration
-		// file exists, otherwise it will initialize a Files object and prevent the install tool
-		// from loading the Safe Mode Hack (see #3215).
-		if (is_writable(TL_ROOT . '/system/tmp') && file_exists(TL_ROOT . '/system/config/localconfig.php'))
+		try
 		{
-			$objConfig->update("\$GLOBALS['TL_CONFIG']['websitePath']", TL_PATH);
+			$objFile = new File('system/config/pathconfig.php');
+			$objFile->write("<?php\n\n// Relative path to the installation\nreturn '" . TL_PATH . "';\n");
+			$objFile->close();
 		}
-	}
-	catch (Exception $e)
-	{
-		log_message($e->getMessage());
+		catch (Exception $e)
+		{
+			log_message($e->getMessage());
+		}
 	}
 }
 
