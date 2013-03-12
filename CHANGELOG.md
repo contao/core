@@ -5,6 +5,9 @@ Version 2.11.10 (2013-XX-XX)
 ----------------------------
 
 ### Fixed
+Correctly show the "invalid date and time" error message (see #5480).
+
+### Fixed
 Correctly split the words when adding to the search index (see #5363).
 
 ### Fixed

@@ -748,9 +748,9 @@ abstract class Widget extends Controller
 				case 'datim':
 					$objDate = new Date();
 
-					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varInput))
+					if (!preg_match('~^'. $objDate->getRegexp($objDate->getNumericDatimFormat()) .'$~i', $varInput))
 					{
-						$this->addError(sprintf($objDate->getNumericDatimFormat(), $objDate->getInputFormat($objDate->getNumericDatimFormat())));
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], $objDate->getInputFormat($objDate->getNumericDatimFormat())));
 					}
 					else
 					{
