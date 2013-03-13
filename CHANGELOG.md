@@ -5,6 +5,9 @@ Version 2.11.10 (2013-XX-XX)
 ----------------------------
 
 ### Fixed
+Only unset POST variables if `Widget::submitInput()` returns `true` (see #5474).
+
+### Fixed
 Strictly compare values when determining whether to save or not (see #5471).
 
 ### Updated
