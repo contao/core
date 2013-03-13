@@ -415,7 +415,7 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Save the value if there was no error
-		if ((strlen($varValue) || !$arrData['eval']['doNotSaveEmpty']) && $strCurrent != $varValue)
+		if ((strlen($varValue) || !$arrData['eval']['doNotSaveEmpty']) && $strCurrent !== $varValue)
 		{
 			$strKey = sprintf("\$GLOBALS['TL_CONFIG']['%s']", $this->strField);
 			$this->Config->update($strKey, $varValue);
