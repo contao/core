@@ -114,6 +114,9 @@ var Stylect =
 				div.addClass('active');
 			}
 
+			// Apply the elements width
+			div.setStyle('width', el.getStyle('width'));
+
 			// Add the CSS class and inject
 			div.addClass(cls).inject(el, 'before');
 
