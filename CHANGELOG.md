@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.10 (2013-XX-XX)
 ----------------------------
 
+### Fixed
+Strictly compare values when determining whether to save or not (see #5471).
+
 ### Updated
 Updated TinyMCE to version 3.5.8 (see #5329).
 

@@ -1385,7 +1385,7 @@ window.addEvent(\'domready\', function() {
 	 */
 	protected function save($varValue)
 	{
-		if ($this->Input->post('FORM_SUBMIT') != $this->strTable || !file_exists(TL_ROOT . '/' . $this->strPath . '/' . $this->varValue . $this->strExtension) || !$this->isMounted($this->strPath . '/' . $this->varValue . $this->strExtension) || $this->varValue == $varValue)
+		if ($this->Input->post('FORM_SUBMIT') != $this->strTable || !file_exists(TL_ROOT . '/' . $this->strPath . '/' . $this->varValue . $this->strExtension) || !$this->isMounted($this->strPath . '/' . $this->varValue . $this->strExtension) || $this->varValue === $varValue)
 		{
 			return;
 		}
