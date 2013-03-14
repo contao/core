@@ -5,6 +5,9 @@ Version 2.11.10 (2013-XX-XX)
 ----------------------------
 
 ### Fixed
+Cast varchar date fields to int when selecting from the database (see #5503).
+
+### Fixed
 Only unset POST variables if `Widget::submitInput()` returns `true` (see #5474).
 
 ### Fixed
