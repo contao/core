@@ -776,6 +776,14 @@ class File extends \System
 	 */
 	public function sendToBrowser()
 	{
+		// Make sure no output buffer is active
+		// @see http://ch2.php.net/manual/en/function.fpassthru.php#74080
+		while (@ob_end_clean());
+
+		// Prevent session locking (see #2804)
+		session_write_close();
+
+		// Open the "save as …" dialogue
 		header('Content-Type: ' . $this->mime);
 		header('Content-Transfer-Encoding: binary');
 		header('Content-Disposition: attachment; filename="' . $this->basename . '"');
@@ -785,9 +793,13 @@ class File extends \System
 		header('Expires: 0');
 		header('Connection: close');
 
+		// Output the file
 		$resFile = fopen(TL_ROOT . '/' . $this->strFile, 'rb');
 		fpassthru($resFile);
 		fclose($resFile);
+
+		// Stop the script
+		exit;
 	}
 
 

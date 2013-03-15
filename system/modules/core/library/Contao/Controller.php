@@ -1948,16 +1948,6 @@ abstract class Controller extends \System
 			die(sprintf('File type "%s" is not allowed', $objFile->extension));
 		}
 
-		// Make sure no output buffer is active
-		// @see http://ch2.php.net/manual/en/function.fpassthru.php#74080
-		while (@ob_end_clean());
-
-		// Prevent session locking (see #2804)
-		session_write_close();
-
-		// Open the "save as …" dialogue
-		$objFile->sendToBrowser();
-
 		// HOOK: post download callback
 		if (isset($GLOBALS['TL_HOOKS']['postDownload']) && is_array($GLOBALS['TL_HOOKS']['postDownload']))
 		{
@@ -1967,8 +1957,8 @@ abstract class Controller extends \System
 			}
 		}
 
-		// Stop the script
-		exit;
+		// Send the file (will stop the script execution)
+		$objFile->sendToBrowser();
 	}
 
 
