@@ -179,9 +179,8 @@ class Form extends \Hybrid
 					{
 						$arrSubmitted[$objFields->name] = $objWidget->value;
 						$_SESSION['FORM_DATA'][$objFields->name] = $objWidget->value;
+						unset($_POST[$objFields->name]); // see #5474
 					}
-
-					unset($_POST[$objFields->name]);
 				}
 
 				if ($objWidget instanceof \uploadable)

@@ -179,47 +179,50 @@ class Config
 		$this->Files = \Files::getInstance();
 
 		// Parse the local configuration file
-		$strMode = 'top';
-		$resFile = fopen(TL_ROOT . '/system/config/localconfig.php', 'rb');
-
-		while (!feof($resFile))
+		if ($this->blnHasLcf)
 		{
-			$strLine = fgets($resFile);
-			$strTrim = trim($strLine);
+			$strMode = 'top';
+			$resFile = fopen(TL_ROOT . '/system/config/localconfig.php', 'rb');
 
-			if ($strTrim == '?>')
+			while (!feof($resFile))
 			{
-				continue;
+				$strLine = fgets($resFile);
+				$strTrim = trim($strLine);
+
+				if ($strTrim == '?>')
+				{
+					continue;
+				}
+
+				if ($strTrim == '### INSTALL SCRIPT START ###')
+				{
+					$strMode = 'data';
+					continue;
+				}
+
+				if ($strTrim == '### INSTALL SCRIPT STOP ###')
+				{
+					$strMode = 'bottom';
+					continue;
+				}
+
+				if ($strMode == 'top')
+				{
+					$this->strTop .= $strLine;
+				}
+				elseif ($strMode == 'bottom')
+				{
+					$this->strBottom .= $strLine;
+				}
+				elseif ($strTrim != '')
+				{
+					$arrChunks = array_map('trim', explode('=', $strLine, 2));
+					$this->arrData[$arrChunks[0]] = $arrChunks[1];
+				}
 			}
 
-			if ($strTrim == '### INSTALL SCRIPT START ###')
-			{
-				$strMode = 'data';
-				continue;
-			}
-
-			if ($strTrim == '### INSTALL SCRIPT STOP ###')
-			{
-				$strMode = 'bottom';
-				continue;
-			}
-
-			if ($strMode == 'top')
-			{
-				$this->strTop .= $strLine;
-			}
-			elseif ($strMode == 'bottom')
-			{
-				$this->strBottom .= $strLine;
-			}
-			elseif ($strTrim != '')
-			{
-				$arrChunks = array_map('trim', explode('=', $strLine, 2));
-				$this->arrData[$arrChunks[0]] = $arrChunks[1];
-			}
+			fclose($resFile);
 		}
-
-		fclose($resFile);
 	}
 
 

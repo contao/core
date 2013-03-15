@@ -210,16 +210,18 @@ FileETag None
   RewriteBase /
 
   ##
-  # Uncomment to redirect domains without "www" to the "www" subdomain.
+  # Uncomment the following lines to add "www." to the domain:
+  #
+  #   RewriteCond %{HTTP_HOST} ^domain\.com$ [NC]
+  #   RewriteRule (.*) http://www.domain.com/$1 [R=301,L]
+  #
+  # Uncomment the following lines to remove "www." from the domain:
+  #
+  #   RewriteCond %{HTTP_HOST} ^www\.domain\.com$ [NC]
+  #   RewriteRule (.*) http://domain.com/$1 [R=301,L]
+  #
+  # Make sure to replace "domain.com" with your domain name.
   ##
-  #RewriteCond %{HTTP_HOST} !^www\..+$ [NC]
-  #RewriteRule ^ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-
-  ##
-  # Uncomment to redirect domains with "www" to the empty domain.
-  ##
-  #RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-  #RewriteRule ^ http://%1%{REQUEST_URI} [R=301,L]
 
   ##
   # If you cannot use mod_deflate, uncomment the following lines to load a

@@ -104,7 +104,7 @@ elseif (TL_MODE == 'BE')
 }
 else
 {
-	define('TL_PATH', preg_replace('/\/[^\/]*$/i', '', Environment::get('requestUri')));
+	define('TL_PATH', null); // cannot be reliably determined
 }
 
 $GLOBALS['TL_CONFIG']['websitePath'] = TL_PATH; // backwards compatibility
@@ -151,13 +151,13 @@ error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']
  * configuration file exists, otherwise it will initialize a Files object and
  * prevent the install tool from loading the Safe Mode Hack (see #3215).
  */
-if (!file_exists(TL_ROOT . '/system/config/pathconfig.php'))
+if (TL_PATH !== null && !file_exists(TL_ROOT . '/system/config/pathconfig.php'))
 {
 	if (is_writable(TL_ROOT . '/system/tmp') && file_exists(TL_ROOT . '/system/config/localconfig.php'))
 	{
 		try
 		{
-			$objFile = new File('system/config/pathconfig.php');
+			$objFile = new File('system/config/pathconfig.php', true);
 			$objFile->write("<?php\n\n// Relative path to the installation\nreturn '" . TL_PATH . "';\n");
 			$objFile->close();
 		}

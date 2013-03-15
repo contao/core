@@ -2005,7 +2005,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// File names
 		if ($this->strField == 'name')
 		{
-			if (!file_exists(TL_ROOT . '/' . $this->strPath . '/' . $this->varValue . $this->strExtension) || !$this->isMounted($this->strPath . '/' . $this->varValue . $this->strExtension) || $this->varValue == $varValue)
+			if (!file_exists(TL_ROOT . '/' . $this->strPath . '/' . $this->varValue . $this->strExtension) || !$this->isMounted($this->strPath . '/' . $this->varValue . $this->strExtension) || $this->varValue === $varValue)
 			{
 				return;
 			}

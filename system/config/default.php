@@ -312,7 +312,11 @@ $GLOBALS['TL_CONFIG']['defaultChmod']         = array('u1', 'u2', 'u3', 'u4', 'u
 $GLOBALS['TL_CONFIG']['validImageTypes']      = 'jpg,jpeg,gif,png,tif,tiff,bmp';
 $GLOBALS['TL_CONFIG']['editableFiles']        = 'htm,html,css,js,txt,log,xml';
 $GLOBALS['TL_CONFIG']['templateFiles']        = 'tpl,html5,xhtml';
-$GLOBALS['TL_CONFIG']['allowedDownload']      = 'jpg,jpeg,gif,png,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov,zip,rar,7z';
+$GLOBALS['TL_CONFIG']['allowedDownload']
+	= 'jpg,jpeg,gif,png,'
+	. 'doc,docx,xls,xlsx,ppt,pptx,odt,ods,odp,pdf,'
+	. 'mp3,mp4,m4a,m4v,webm,ogg,wma,wmv,ram,rm,mov,'
+	. 'zip,rar,7z';
 $GLOBALS['TL_CONFIG']['installPassword']      = '';
 $GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'http://www.inetrobots.com/liveupdate/';
 $GLOBALS['TL_CONFIG']['repository_wsdl']      = 'http://contao.org/services/repository.wsdl';
