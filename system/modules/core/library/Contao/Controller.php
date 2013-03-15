@@ -1241,7 +1241,16 @@ abstract class Controller extends \System
 								// DO NOT ADD A break; STATEMENT
 
 							default:
-								$strUrl = $this->generateFrontendUrl($objNextPage->row());
+								$strForceLang = null;
+
+								// Check the target page language (see #4706, #5465)
+								if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+								{
+									$objNextPage = $this->getPageDetails($objNextPage); // see #3983
+									$strForceLang = $objNextPage->language;
+								}
+
+								$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $strForceLang);
 								break;
 						}
 
