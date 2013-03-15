@@ -301,6 +301,7 @@ class Main extends Backend
 		$this->Template->buildCacheHref = $this->addToUrl('bic=1');
 		$this->Template->buildCacheLink = $GLOBALS['TL_LANG']['MSC']['buildCacheLink'];
 		$this->Template->buildCacheText = $GLOBALS['TL_LANG']['MSC']['buildCacheText'];
+		$this->Template->isPopup = Input::get('popup');
 
 		// Front end preview links
 		if (CURRENT_ID != '')

@@ -546,7 +546,15 @@ class DataContainer extends \Backend
 			// Generate all buttons except "move up" and "move down" buttons
 			if ($k != 'move' && $v != 'move')
 			{
-				$return .= '<a href="'.$this->addToUrl($v['href'].'&amp;id='.$arrRow['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.\Image::getHtml($v['icon'], $label).'</a> ';
+				if ($k == 'show')
+				{
+					$return .= '<a href="'.$this->addToUrl($v['href'].'&amp;id='.$arrRow['id'].'&amp;popup=1').'" title="'.specialchars($title).'" onclick="Backend.openModalIframe({\'width\':765,\'title\':\'' . sprintf($GLOBALS['TL_LANG'][$strTable]['show'][1], $arrRow['id']) . '\',\'url\':this.href});return false"'.$attributes.'>'.\Image::getHtml($v['icon'], $label).'</a> ';
+				}
+				else
+				{
+					$return .= '<a href="'.$this->addToUrl($v['href'].'&amp;id='.$arrRow['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.\Image::getHtml($v['icon'], $label).'</a> ';
+				}
+
 				continue;
 			}
 

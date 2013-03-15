@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### Changed
+The "show details" link now opens in a modal window (see #5188).
+
+### Changed
 The search index is now rebuilt via Ajax requests.
 
 ### Improved
