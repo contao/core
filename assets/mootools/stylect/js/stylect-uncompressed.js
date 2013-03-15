@@ -78,7 +78,7 @@ var Stylect =
 
 			// Clone the template
 			var div = Stylect.template.clone(),
-				cls = el.get('class');
+				cls = el.get('class'), s;
 
 			// Hide the original select menu
 			el.setStyle('opacity', 0);
@@ -112,6 +112,11 @@ var Stylect =
 			// Mark active elements
 			if (el.hasClass('active')) {
 				div.addClass('active');
+			}
+
+			// Apply the inline width if any (see #5487)
+			if ((s = el.get('style')) && s.test('(^width|[^-]width)')) {
+				div.setStyle('width', el.getStyle('width'));
 			}
 
 			// Add the CSS class and inject
