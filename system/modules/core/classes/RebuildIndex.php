@@ -130,7 +130,7 @@ class RebuildIndex extends \Backend implements \executable
 			// Display the pages
 			for ($i=0; $i<count($arrPages); $i++)
 			{
-				$strBuffer .= '<img src="' . $arrPages[$i] . '#' . $rand . $i . '" alt="" class="invisible">' . \String::substr($arrPages[$i], 100) . "<br>\n";
+				$strBuffer .= '<span class="page_url" data-url="' . $arrPages[$i] . '#' . $rand . $i . '">' . \String::substr($arrPages[$i], 100) . '</span><br>';
 			}
 
 			$objTemplate->content = $strBuffer;

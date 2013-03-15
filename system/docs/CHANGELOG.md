@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Changed
+The search index is now rebuilt via Ajax requests.
+
 ### Improved
 Improved the back end referer management to support multiple tabs (see #5436).
 

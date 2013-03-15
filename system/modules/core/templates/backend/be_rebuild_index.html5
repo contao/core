@@ -11,21 +11,27 @@
 
   <?php if ($this->isRunning): ?>
     <div id="tl_rebuild_index">
-      <p id="index_note"><?php echo $this->note; ?></p>
-      <p id="index_loading" style="display:none"><?php echo $this->loading; ?></p>
+      <p id="index_loading"><?php echo $this->loading; ?></p>
       <p id="index_complete" style="display:none"><?php echo $this->complete; ?></p>
-      <?php echo $this->content; ?>
+      <p style="margin-bottom:0"><?php echo $this->content; ?></p>
     </div>
 
     <script>
       window.addEvent('domready', function() {
-        $('index_note').setStyle('display', 'none');
-        $$('h2.sub_headline_index').setStyle('display', 'none');
-        $('index_loading').setStyle('display', 'block');
-      });
-      window.addEvent('load', function() {
-        $('index_loading').setStyle('display', 'none');
-        $('index_complete').setStyle('display', 'block');
+        var urls = $$('.page_url'),
+            last = urls.length-1, url;
+        urls.each(function(el, i) {
+          el.getAttribute('data-url') && new Request({
+            'url': el.getAttribute('data-url'),
+            onComplete: function() {
+              el.addClass('tl_green');
+              if (i == last) {
+                $('index_loading').setStyle('display', 'none');
+                $('index_complete').setStyle('display', 'block');
+              }
+            }
+          }).get();
+        });
       });
     </script>
 
