@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_article.title.0">
         <source>Title</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="tl_article.title.1">
         <source>Please enter the article title.</source>
@@ -15,6 +16,7 @@
       </trans-unit>
       <trans-unit id="tl_article.author.0">
         <source>Author</source>
+        <target>Autor</target>
       </trans-unit>
       <trans-unit id="tl_article.author.1">
         <source>Here you can change the author of the article.</source>
@@ -45,6 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_article.teaser.0">
         <source>Article teaser</source>
+        <target>Artikli tutvustustekst</target>
       </trans-unit>
       <trans-unit id="tl_article.teaser.1">
         <source>The article teaser can also be displayed with the content element &quot;article teaser&quot;.</source>
@@ -87,6 +90,7 @@
       </trans-unit>
       <trans-unit id="tl_article.tstamp.0">
         <source>Revision date</source>
+        <target>Kuupäev</target>
       </trans-unit>
       <trans-unit id="tl_article.tstamp.1">
         <source>Date and time of the latest revision</source>
@@ -99,6 +103,7 @@
       </trans-unit>
       <trans-unit id="tl_article.teaser_legend">
         <source>Article teaser</source>
+        <target>Artikli tutvustustekst</target>
       </trans-unit>
       <trans-unit id="tl_article.expert_legend">
         <source>Expert settings</source>
@@ -114,9 +119,11 @@
       </trans-unit>
       <trans-unit id="tl_article.facebook">
         <source>Share on Facebook</source>
+        <target>Jaga Facebookis</target>
       </trans-unit>
       <trans-unit id="tl_article.twitter">
         <source>Share on Twitter</source>
+        <target>Jaga Twitteris</target>
       </trans-unit>
       <trans-unit id="tl_article.gplus">
         <source>Share on Google+</source>

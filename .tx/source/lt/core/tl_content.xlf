@@ -203,12 +203,14 @@
       </trans-unit>
       <trans-unit id="tl_content.mooStart.0">
         <source>Wrapper start</source>
+        <target>Laukelių rinkinio pradžia</target>
       </trans-unit>
       <trans-unit id="tl_content.mooStart.1">
         <source>Marks the beginning of an accordion pane that spans several content elements.</source>
       </trans-unit>
       <trans-unit id="tl_content.mooStop.0">
         <source>Wrapper stop</source>
+        <target>Laukelių rinkinio pabaiga</target>
       </trans-unit>
       <trans-unit id="tl_content.mooStop.1">
         <source>Marks the end of an accordion pane that spans several content elements.</source>
@@ -315,6 +317,7 @@
       </trans-unit>
       <trans-unit id="tl_content.orderSRC.0">
         <source>Sort order</source>
+        <target>Rūšiavimo tvarka</target>
       </trans-unit>
       <trans-unit id="tl_content.orderSRC.1">
         <source>The sort order of the items.</source>

@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_newsletter.subject.0">
         <source>Subject</source>
+        <target>Тема</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.subject.1">
         <source>Please enter the newsletter subject.</source>
@@ -33,6 +34,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.files.0">
         <source>Attachments</source>
+        <target>Прикачени файлове</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.files.1">
         <source>Please choose the files to be attached from the files directory.</source>
@@ -103,12 +105,15 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.attachment_legend">
         <source>Attachments</source>
+        <target>Прикачени файлове</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.template_legend">
         <source>Template settings</source>
+        <target>Настройки на шаблона.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.expert_legend">
         <source>Expert settings</source>
+        <target>Експертни настройки</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.sent">
         <source>Sent</source>

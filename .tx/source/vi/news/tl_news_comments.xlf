@@ -15,6 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_news_comments.name.0">
         <source>Author</source>
+        <target>Tác giả</target>
       </trans-unit>
       <trans-unit id="tl_news_comments.name.1">
         <source>Please enter the author's name.</source>
@@ -45,6 +46,7 @@
       </trans-unit>
       <trans-unit id="tl_news_comments.author_legend">
         <source>Author</source>
+        <target>Tác giả</target>
       </trans-unit>
       <trans-unit id="tl_news_comments.comment_legend">
         <source>Comment</source>

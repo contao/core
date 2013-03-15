@@ -165,12 +165,14 @@
       </trans-unit>
       <trans-unit id="tl_page.cuser.0">
         <source>Owner</source>
+        <target>Kasutaja</target>
       </trans-unit>
       <trans-unit id="tl_page.cuser.1">
         <source>Please select a user as the owner of the page.</source>
       </trans-unit>
       <trans-unit id="tl_page.cgroup.0">
         <source>Group</source>
+        <target>Grupp</target>
       </trans-unit>
       <trans-unit id="tl_page.cgroup.1">
         <source>Please select a group as the owner of the page.</source>
@@ -321,6 +323,7 @@
       </trans-unit>
       <trans-unit id="tl_page.edit.0">
         <source>Edit page</source>
+        <target>Redigeeri leht</target>
       </trans-unit>
       <trans-unit id="tl_page.edit.1">
         <source>Edit page ID %s</source>
@@ -345,6 +348,7 @@
       </trans-unit>
       <trans-unit id="tl_page.delete.0">
         <source>Delete page</source>
+        <target>Kustuta leht</target>
       </trans-unit>
       <trans-unit id="tl_page.delete.1">
         <source>Delete page ID %s</source>
@@ -369,6 +373,7 @@
       </trans-unit>
       <trans-unit id="tl_page.articles.0">
         <source>Edit articles</source>
+        <target>Redigeeri artikel</target>
       </trans-unit>
       <trans-unit id="tl_page.articles.1">
         <source>Edit the articles of page ID %s</source>

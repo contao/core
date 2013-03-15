@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_user_group.name.0">
         <source>Title</source>
+        <target>தலைப்பு</target>
       </trans-unit>
       <trans-unit id="tl_user_group.name.1">
         <source>Please enter the group title.</source>
@@ -33,6 +34,7 @@
       </trans-unit>
       <trans-unit id="tl_user_group.title_legend">
         <source>Title</source>
+        <target>தலைப்பு</target>
       </trans-unit>
       <trans-unit id="tl_user_group.modules_legend">
         <source>Allowed modules</source>
@@ -45,9 +47,11 @@
       </trans-unit>
       <trans-unit id="tl_user_group.forms_legend">
         <source>Form permissions</source>
+        <target>படிவ அனுமதிகள்</target>
       </trans-unit>
       <trans-unit id="tl_user_group.account_legend">
         <source>Account settings</source>
+        <target>கணக்கு அமைப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_user_group.alexf_legend">
         <source>Allowed fields</source>

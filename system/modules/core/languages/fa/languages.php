@@ -38,6 +38,7 @@ $GLOBALS['TL_LANG']['LNG']['cs'] = 'چکوسلواکی';
 $GLOBALS['TL_LANG']['LNG']['cy'] = 'ویلزی';
 $GLOBALS['TL_LANG']['LNG']['da'] = 'دانمارکی';
 $GLOBALS['TL_LANG']['LNG']['de'] = 'آلمانی';
+$GLOBALS['TL_LANG']['LNG']['dz'] = 'دزونگخا';
 $GLOBALS['TL_LANG']['LNG']['el'] = 'یونانی';
 $GLOBALS['TL_LANG']['LNG']['en'] = 'انگلیسی';
 $GLOBALS['TL_LANG']['LNG']['eo'] = 'اسپرانتو';

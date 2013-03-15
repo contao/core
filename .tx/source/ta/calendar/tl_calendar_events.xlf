@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_calendar_events.title.0">
         <source>Title</source>
+        <target>தலைப்பு</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.title.1">
         <source>Please enter the event title.</source>
@@ -15,6 +16,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.author.0">
         <source>Author</source>
+        <target>ஆசிரியர்</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.author.1">
         <source>Here you can change the author of the event.</source>
@@ -63,6 +65,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.addImage.0">
         <source>Add an image</source>
+        <target>படமொன்றை சேருங்கள்</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.addImage.1">
         <source>Add an image to the event.</source>
@@ -96,6 +99,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.enclosure.1">
         <source>Please choose the files you want to attach.</source>
+        <target>நீங்கள் இணைக்க விரும்புகின்ற கோப்புக்களை தேர்ந்தெடுங்கள்</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.source.0">
         <source>Redirect target</source>
@@ -105,18 +109,21 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.default.0">
         <source>Use default</source>
+        <target>இயல்பிருப்பானதை பயன்படுத்துங்கள்</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.default.1">
         <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to the default page of the calendar.</source>
       </trans-unit>
       <trans-unit id="tl_calendar_events.internal.0">
         <source>Page</source>
+        <target>பக்கம்</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.internal.1">
         <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an internal page.</source>
       </trans-unit>
       <trans-unit id="tl_calendar_events.article.0">
         <source>Article</source>
+        <target>ஆக்கம்</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.article.1">
         <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an article.</source>
@@ -129,24 +136,28 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.jumpTo.0">
         <source>Redirect page</source>
+        <target>மீள்திருப்பும் பக்கம்</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected when clicking the event.</source>
       </trans-unit>
       <trans-unit id="tl_calendar_events.articleId.0">
         <source>Article</source>
+        <target>ஆக்கம்</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.articleId.1">
         <source>Please choose the article to which visitors will be redirected when clicking the event.</source>
       </trans-unit>
       <trans-unit id="tl_calendar_events.cssClass.0">
         <source>CSS class</source>
+        <target>CSS class</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.cssClass.1">
         <source>Here you can enter one or more classes.</source>
       </trans-unit>
       <trans-unit id="tl_calendar_events.noComments.0">
         <source>Disable comments</source>
+        <target>பின்னூட்டங்களை தடைசெய்</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.noComments.1">
         <source>Do not allow comments for this particular event.</source>
@@ -159,27 +170,33 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.start.0">
         <source>Show from</source>
+        <target>இலிருந்து காட்டு</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.start.1">
         <source>Do not show the event on the website before this day.</source>
       </trans-unit>
       <trans-unit id="tl_calendar_events.stop.0">
         <source>Show until</source>
+        <target>இதுவரை காட்டு</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.stop.1">
         <source>Do not show the event on the website on and after this day.</source>
       </trans-unit>
       <trans-unit id="tl_calendar_events.tstamp.0">
         <source>Revision date</source>
+        <target>மீள்திருத்த திகதி</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>பிந்திய மீள்திருத்தத்தின் நேரமும் திகதியும்</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.title_legend">
         <source>Title and author</source>
+        <target>தலைப்பும் ஆசிரியரும்</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.date_legend">
         <source>Date and time</source>
+        <target>திகதியும் நேரமும்</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.teaser_legend">
         <source>Teaser</source>
@@ -189,6 +206,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.image_legend">
         <source>Image settings</source>
+        <target>பட அமைப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.recurring_legend">
         <source>Recurrence settings</source>
@@ -201,9 +219,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.expert_legend">
         <source>Expert settings</source>
+        <target>சிறப்பு அமைப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.publish_legend">
         <source>Publish settings</source>
+        <target>வெளியிடும் அமைப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.days">
         <source>day(s)</source>

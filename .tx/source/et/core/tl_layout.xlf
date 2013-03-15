@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_layout.name.0">
         <source>Title</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="tl_layout.name.1">
         <source>Please enter the layout title.</source>
@@ -285,6 +286,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.title_legend">
         <source>Title</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="tl_layout.header_legend">
         <source>Rows</source>
@@ -339,6 +341,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.html5">
         <source>HTML</source>
+        <target>HTML</target>
       </trans-unit>
       <trans-unit id="tl_layout.xhtml_strict">
         <source>XHTML Strict</source>

@@ -3,12 +3,14 @@
     <body>
       <trans-unit id="tl_faq_category.title.0">
         <source>Title</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.title.1">
         <source>Please enter the category title.</source>
       </trans-unit>
       <trans-unit id="tl_faq_category.headline.0">
         <source>Headline</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.headline.1">
         <source>Please enter the category headline.</source>
@@ -69,6 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.tstamp.0">
         <source>Revision date</source>
+        <target>Kuupäev</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.tstamp.1">
         <source>Date and time of the latest revision</source>
@@ -78,6 +81,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.comments_legend">
         <source>Comments</source>
+        <target>Kommenteeri</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.notify_admin">
         <source>System administrator</source>

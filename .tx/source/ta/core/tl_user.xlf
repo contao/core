@@ -216,6 +216,7 @@
       </trans-unit>
       <trans-unit id="tl_user.forms_legend">
         <source>Form permissions</source>
+        <target>படிவ அனுமதிகள்</target>
       </trans-unit>
       <trans-unit id="tl_user.account_legend">
         <source>Account settings</source>

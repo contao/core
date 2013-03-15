@@ -125,6 +125,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.tstamp.0">
         <source>Revision date</source>
+        <target>Kuupäev</target>
       </trans-unit>
       <trans-unit id="tl_calendar.tstamp.1">
         <source>Date and time of the latest revision</source>
@@ -134,6 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.comments_legend">
         <source>Comments</source>
+        <target>Kommenteeri</target>
       </trans-unit>
       <trans-unit id="tl_calendar.protected_legend">
         <source>Access protection</source>

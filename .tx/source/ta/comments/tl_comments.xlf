@@ -15,30 +15,35 @@
       </trans-unit>
       <trans-unit id="tl_comments.date.0">
         <source>Date</source>
+        <target>திகதி</target>
       </trans-unit>
       <trans-unit id="tl_comments.date.1">
         <source>Please enter the comment date.</source>
       </trans-unit>
       <trans-unit id="tl_comments.name.0">
         <source>Author</source>
+        <target>ஆசிரியர்</target>
       </trans-unit>
       <trans-unit id="tl_comments.name.1">
         <source>Please enter the author's name.</source>
       </trans-unit>
       <trans-unit id="tl_comments.email.0">
         <source>E-mail address</source>
+        <target>மின்னஞ்சல் முகவரி</target>
       </trans-unit>
       <trans-unit id="tl_comments.email.1">
         <source>The e-mail address will not be published.</source>
       </trans-unit>
       <trans-unit id="tl_comments.website.0">
         <source>Website</source>
+        <target>இணையத்தளம்</target>
       </trans-unit>
       <trans-unit id="tl_comments.website.1">
         <source>Here you can enter a website address.</source>
       </trans-unit>
       <trans-unit id="tl_comments.comment.0">
         <source>Comment</source>
+        <target>பின்னூட்டம்</target>
       </trans-unit>
       <trans-unit id="tl_comments.comment.1">
         <source>Please enter the comment.</source>
@@ -51,6 +56,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.author.0">
         <source>Author</source>
+        <target>ஆசிரியர்</target>
       </trans-unit>
       <trans-unit id="tl_comments.author.1">
         <source>Here you can change the author of the reply.</source>
@@ -81,15 +87,18 @@
       </trans-unit>
       <trans-unit id="tl_comments.author_legend">
         <source>Author</source>
+        <target>ஆசிரியர்</target>
       </trans-unit>
       <trans-unit id="tl_comments.comment_legend">
         <source>Comment</source>
+        <target>பின்னூட்டம்</target>
       </trans-unit>
       <trans-unit id="tl_comments.reply_legend">
         <source>Reply</source>
       </trans-unit>
       <trans-unit id="tl_comments.publish_legend">
         <source>Publish settings</source>
+        <target>வெளியிடும் அமைப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_comments.approved">
         <source>Approved</source>
@@ -99,15 +108,18 @@
       </trans-unit>
       <trans-unit id="tl_comments.tl_content">
         <source>Article</source>
+        <target>ஆக்கம்</target>
       </trans-unit>
       <trans-unit id="tl_comments.tl_page">
         <source>Page</source>
+        <target>பக்கம்</target>
       </trans-unit>
       <trans-unit id="tl_comments.tl_news">
         <source>News item</source>
       </trans-unit>
       <trans-unit id="tl_comments.tl_faq">
         <source>FAQ</source>
+        <target>FAQ</target>
       </trans-unit>
       <trans-unit id="tl_comments.tl_calendar_events">
         <source>Event</source>

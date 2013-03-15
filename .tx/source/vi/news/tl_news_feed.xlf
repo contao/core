@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_news_feed.title.0">
         <source>Title</source>
+        <target>Tiêu đề</target>
       </trans-unit>
       <trans-unit id="tl_news_feed.title.1">
         <source>Please enter a feed title.</source>

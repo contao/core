@@ -95,6 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_module.jumpTo.0">
         <source>Redirect page</source>
+        <target>Страница за показване</target>
       </trans-unit>
       <trans-unit id="tl_module.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected when clicking a link or submitting a form.</source>
@@ -137,15 +138,19 @@
       </trans-unit>
       <trans-unit id="tl_module.tableless.0">
         <source>Tableless layout</source>
+        <target>Изглед без таблици</target>
       </trans-unit>
       <trans-unit id="tl_module.tableless.1">
         <source>Render the form without HTML tables.</source>
+        <target>Ако изберете тази опция, формата ще бъде генерирана без помощта на таблици.</target>
       </trans-unit>
       <trans-unit id="tl_module.form.0">
         <source>Form</source>
+        <target>Форма</target>
       </trans-unit>
       <trans-unit id="tl_module.form.1">
         <source>Please select a form.</source>
+        <target>Моля, изберете форма.</target>
       </trans-unit>
       <trans-unit id="tl_module.queryType.0">
         <source>Default query type</source>
@@ -197,9 +202,11 @@
       </trans-unit>
       <trans-unit id="tl_module.perPage.0">
         <source>Items per page</source>
+        <target>Записи на страница</target>
       </trans-unit>
       <trans-unit id="tl_module.perPage.1">
         <source>The number of items per page. Set to 0 to disable pagination.</source>
+        <target>Брой елементи в старница. Задайте 0 за да изключите странирането.</target>
       </trans-unit>
       <trans-unit id="tl_module.searchType.0">
         <source>Search form layout</source>
@@ -215,6 +222,7 @@
       </trans-unit>
       <trans-unit id="tl_module.inColumn.0">
         <source>Column</source>
+        <target>Колона</target>
       </trans-unit>
       <trans-unit id="tl_module.inColumn.1">
         <source>Please choose the column whose articles you want to list.</source>
@@ -301,15 +309,19 @@
       </trans-unit>
       <trans-unit id="tl_module.fullsize.0">
         <source>Full-size view/new window</source>
+        <target>Изглед в пълен размер</target>
       </trans-unit>
       <trans-unit id="tl_module.fullsize.1">
         <source>Open the full-size image in a lightbox or the link in a new browser window.</source>
+        <target>Ако изберете тази опция, картинката ще може да бъде разглеждана в пълен размер като се щракне върху нея.</target>
       </trans-unit>
       <trans-unit id="tl_module.imgSize.0">
         <source>Image width and height</source>
+        <target>Ширина и височина на картинката</target>
       </trans-unit>
       <trans-unit id="tl_module.imgSize.1">
         <source>Here you can set the image dimensions and the resize mode.</source>
+        <target>Тук можете да въведете размерите на картинката, както и начина на преоразмеряване.</target>
       </trans-unit>
       <trans-unit id="tl_module.useCaption.0">
         <source>Show caption</source>
@@ -319,21 +331,25 @@
       </trans-unit>
       <trans-unit id="tl_module.multiSRC.0">
         <source>Source files</source>
+        <target>Изходни файлове</target>
       </trans-unit>
       <trans-unit id="tl_module.multiSRC.1">
         <source>Please select one or more files from the files directory.</source>
       </trans-unit>
       <trans-unit id="tl_module.orderSRC.0">
         <source>Sort order</source>
+        <target>Подреждане</target>
       </trans-unit>
       <trans-unit id="tl_module.orderSRC.1">
         <source>The sort order of the items.</source>
       </trans-unit>
       <trans-unit id="tl_module.html.0">
         <source>HTML code</source>
+        <target>HTML</target>
       </trans-unit>
       <trans-unit id="tl_module.html.1">
         <source>You can modify the list of allowed HTML tags in the back end settings.</source>
+        <target>Моля въведете HTML кода.</target>
       </trans-unit>
       <trans-unit id="tl_module.rss_cache.0">
         <source>Cache timeout</source>
@@ -373,24 +389,29 @@
       </trans-unit>
       <trans-unit id="tl_module.groups.0">
         <source>Allowed member groups</source>
+        <target>Разрешени групи</target>
       </trans-unit>
       <trans-unit id="tl_module.groups.1">
         <source>These groups will be able to see the module.</source>
       </trans-unit>
       <trans-unit id="tl_module.guests.0">
         <source>Show to guests only</source>
+        <target>Покажи само на гостите</target>
       </trans-unit>
       <trans-unit id="tl_module.guests.1">
         <source>Hide the module if a member is logged in.</source>
       </trans-unit>
       <trans-unit id="tl_module.cssID.0">
         <source>CSS ID/class</source>
+        <target>ID на стилов набор и клас</target>
       </trans-unit>
       <trans-unit id="tl_module.cssID.1">
         <source>Here you can set an ID and one or more classes.</source>
+        <target>Тук можете да въведете ID (id-атрибут) на стилов набор и и един или повече класове (class-атрибути), за да зададете стил формата, като използвате CSS.</target>
       </trans-unit>
       <trans-unit id="tl_module.space.0">
         <source>Space in front and after</source>
+        <target>Разстояние преди и след</target>
       </trans-unit>
       <trans-unit id="tl_module.space.1">
         <source>Here you can enter the spacing in front of and after the module in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
@@ -491,33 +512,40 @@
       </trans-unit>
       <trans-unit id="tl_module.reference_legend">
         <source>Reference page</source>
+        <target>Страница за референция</target>
       </trans-unit>
       <trans-unit id="tl_module.redirect_legend">
         <source>Redirect settings</source>
       </trans-unit>
       <trans-unit id="tl_module.template_legend">
         <source>Template settings</source>
+        <target>Настройки на шаблона.</target>
       </trans-unit>
       <trans-unit id="tl_module.config_legend">
         <source>Module configuration</source>
       </trans-unit>
       <trans-unit id="tl_module.include_legend">
         <source>Include settings</source>
+        <target>Настройки на вмъкванията</target>
       </trans-unit>
       <trans-unit id="tl_module.source_legend">
         <source>Files and folders</source>
+        <target>Файлове и директории</target>
       </trans-unit>
       <trans-unit id="tl_module.interact_legend">
         <source>Interactive Flash movie</source>
       </trans-unit>
       <trans-unit id="tl_module.html_legend">
         <source>Text/HTML</source>
+        <target>Text/HTML</target>
       </trans-unit>
       <trans-unit id="tl_module.protected_legend">
         <source>Access protection</source>
+        <target>Защита на достъпа</target>
       </trans-unit>
       <trans-unit id="tl_module.expert_legend">
         <source>Expert settings</source>
+        <target>Експертни настройки</target>
       </trans-unit>
       <trans-unit id="tl_module.email_legend">
         <source>E-mail settings</source>

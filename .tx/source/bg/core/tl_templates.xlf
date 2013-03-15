@@ -11,6 +11,7 @@
       </trans-unit>
       <trans-unit id="tl_templates.target.0">
         <source>Target folder</source>
+        <target>Директория за качване</target>
       </trans-unit>
       <trans-unit id="tl_templates.target.1">
         <source>A copy of the selected template will be stored in the target folder.</source>
@@ -46,9 +47,11 @@
       </trans-unit>
       <trans-unit id="tl_templates.pasteinto.0">
         <source>Paste into</source>
+        <target>Постави в</target>
       </trans-unit>
       <trans-unit id="tl_templates.pasteinto.1">
         <source>Paste into this folder</source>
+        <target>Поставяне в тази директория</target>
       </trans-unit>
     </body>
   </file>

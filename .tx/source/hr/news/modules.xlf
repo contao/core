@@ -11,6 +11,7 @@
       </trans-unit>
       <trans-unit id="MOD.tl_news_feed">
         <source>News feeds</source>
+        <target>Ubačene vijesti</target>
       </trans-unit>
       <trans-unit id="FMD.news">
         <source>News</source>

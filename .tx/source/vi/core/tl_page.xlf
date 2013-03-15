@@ -231,12 +231,14 @@
       </trans-unit>
       <trans-unit id="tl_page.start.0">
         <source>Show from</source>
+        <target>Hiển thị biểu mẫu</target>
       </trans-unit>
       <trans-unit id="tl_page.start.1">
         <source>Do not show the page on the website before this day.</source>
       </trans-unit>
       <trans-unit id="tl_page.stop.0">
         <source>Show until</source>
+        <target>Hiện cho tới</target>
       </trans-unit>
       <trans-unit id="tl_page.stop.1">
         <source>Do not show the page on the website on and after this day.</source>

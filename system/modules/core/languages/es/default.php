@@ -496,6 +496,7 @@ $GLOBALS['TL_LANG']['MSC']['invalidTokenUrl'] = 'Vale invalido';
 $GLOBALS['TL_LANG']['MSC']['changelog'] = 'Cambios';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Desactivado';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
+$GLOBALS['TL_LANG']['UNITS'][3] = 'Ir';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'Módulo';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Tabla afectada';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = 'Acción ';

@@ -237,6 +237,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.uploadFolder.0">
         <source>Target folder</source>
+        <target>Målmappe</target>
       </trans-unit>
       <trans-unit id="tl_form_field.uploadFolder.1">
         <source>Please select the target folder from the files directory.</source>

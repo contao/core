@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_user_group.name.0">
         <source>Title</source>
+        <target>Tiêu đề</target>
       </trans-unit>
       <trans-unit id="tl_user_group.name.1">
         <source>Please enter the group title.</source>
@@ -33,6 +34,7 @@
       </trans-unit>
       <trans-unit id="tl_user_group.title_legend">
         <source>Title</source>
+        <target>Tiêu đề</target>
       </trans-unit>
       <trans-unit id="tl_user_group.modules_legend">
         <source>Allowed modules</source>

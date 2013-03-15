@@ -31,6 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.sortOrder.0">
         <source>Sort order</source>
+        <target>Подреждане</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.sortOrder.1">
         <source>By default, comments are sorted ascending, starting with the oldest one.</source>
@@ -46,21 +47,27 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.moderate.1">
         <source>Approve comments before they are published on the website.</source>
+        <target>Одобряване на коментарите преди да са публикувани.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.bbcode.0">
         <source>Allow BBCode</source>
+        <target>Разрешаване на BB-Код</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.bbcode.1">
         <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Разрешаване на посетителите да форматират коментарите си като използват BB-Код.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.requireLogin.0">
         <source>Require login to comment</source>
+        <target>Изискване на влязъл потребител.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.requireLogin.1">
         <source>Allow only authenticated users to create comments.</source>
+        <target>Разрешаване само на идентифицирани потребители да въвеждат коментари.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.disableCaptcha.0">
         <source>Disable the security question</source>
+        <target>Изключване на защитния въпрос</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.disableCaptcha.1">
         <source>Use this option only if you have limited comments to authenticated users.</source>
@@ -73,6 +80,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.groups.0">
         <source>Allowed member groups</source>
+        <target>Разрешени групи</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.groups.1">
         <source>These groups will be able to see the news items in this archive.</source>
@@ -91,9 +99,11 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.language.0">
         <source>Feed language</source>
+        <target>Език</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.language.1">
         <source>Please enter the feed language according to the ISO-639 standard (e.g. &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;).</source>
+        <target>Моля, въведете езика съгласно RCF1766 (т.е. &lt;em&gt;en&lt;/em&gt;, &lt;em&gt;en-us&lt;/em&gt; или &lt;em&gt;en-cockney&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.source.0">
         <source>Export settings</source>
@@ -129,12 +139,15 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.tstamp.0">
         <source>Revision date</source>
+        <target>Дата на промяната</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>Дата и време на последната промяна</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.title_legend">
         <source>Title and redirect page</source>
+        <target>Заглавие и страница към която се препраща</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.comments_legend">
         <source>Comments</source>
@@ -177,6 +190,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.edit.0">
         <source>Edit archive</source>
+        <target>Редакция на архива</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.edit.1">
         <source>Edit archive ID %s</source>
@@ -201,6 +215,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.comments.0">
         <source>Comments</source>
+        <target>Коментари</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.comments.1">
         <source>Show comments of archive ID %s</source>

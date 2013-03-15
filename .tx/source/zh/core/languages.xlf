@@ -132,6 +132,7 @@
       </trans-unit>
       <trans-unit id="LNG.fj">
         <source>Fiji</source>
+        <target>斐济</target>
       </trans-unit>
       <trans-unit id="LNG.fo">
         <source>Faroese</source>
@@ -250,6 +251,7 @@
       </trans-unit>
       <trans-unit id="LNG.lo">
         <source>Lao</source>
+        <target>老挝</target>
       </trans-unit>
       <trans-unit id="LNG.lt">
         <source>Lithuanian</source>
@@ -291,6 +293,7 @@
       </trans-unit>
       <trans-unit id="LNG.na">
         <source>Nauru</source>
+        <target>瑙鲁</target>
       </trans-unit>
       <trans-unit id="LNG.ne">
         <source>Nepali</source>
@@ -429,6 +432,7 @@
       </trans-unit>
       <trans-unit id="LNG.to">
         <source>Tonga</source>
+        <target>汤加</target>
       </trans-unit>
       <trans-unit id="LNG.tr">
         <source>Turkish</source>

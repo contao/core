@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_extension.title.0">
         <source>Title</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="tl_extension.title.1">
         <source>Please enter the extension title.</source>
@@ -15,6 +16,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.author.0">
         <source>Author</source>
+        <target>Autor</target>
       </trans-unit>
       <trans-unit id="tl_extension.author.1">
         <source>Please enter the author's name and an optional e-mail address (e.g. &lt;em&gt;Name [e-mail@address.com]&lt;/em&gt;).</source>

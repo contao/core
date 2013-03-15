@@ -99,6 +99,7 @@
       </trans-unit>
       <trans-unit id="LNG.dz">
         <source>Dzongkha</source>
+        <target>دزونگخا</target>
       </trans-unit>
       <trans-unit id="LNG.el">
         <source>Greek</source>

@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_calendar_events.title.0">
         <source>Title</source>
+        <target>Tiêu đề</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.title.1">
         <source>Please enter the event title.</source>
@@ -15,6 +16,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.author.0">
         <source>Author</source>
+        <target>Tác giả</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.author.1">
         <source>Here you can change the author of the event.</source>
@@ -159,21 +161,25 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.start.0">
         <source>Show from</source>
+        <target>Hiển thị biểu mẫu</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.start.1">
         <source>Do not show the event on the website before this day.</source>
       </trans-unit>
       <trans-unit id="tl_calendar_events.stop.0">
         <source>Show until</source>
+        <target>Hiện cho tới</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.stop.1">
         <source>Do not show the event on the website on and after this day.</source>
       </trans-unit>
       <trans-unit id="tl_calendar_events.tstamp.0">
         <source>Revision date</source>
+        <target>Ngày phiên bản</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>Thời gian của bản mới nhất</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.title_legend">
         <source>Title and author</source>

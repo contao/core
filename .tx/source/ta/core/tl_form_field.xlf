@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="FFL.headline.0">
         <source>Headline</source>
+        <target>பிரதான தலைப்பு</target>
       </trans-unit>
       <trans-unit id="FFL.headline.1">
         <source>A custom field to insert a section headline.</source>
@@ -63,6 +64,7 @@
       </trans-unit>
       <trans-unit id="FFL.upload.0">
         <source>File upload</source>
+        <target>கோப்பு தரவேற்றம்</target>
       </trans-unit>
       <trans-unit id="FFL.upload.1">
         <source>A single-line input field to upload a local file to the server.</source>
@@ -75,6 +77,7 @@
       </trans-unit>
       <trans-unit id="FFL.captcha.0">
         <source>Security question</source>
+        <target>பாதுகாப்புக் கேள்வி</target>
       </trans-unit>
       <trans-unit id="FFL.captcha.1">
         <source>A simple math question to verify that the form is being submitted by a human (CAPTCHA).</source>
@@ -117,6 +120,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.options.0">
         <source>Options</source>
+        <target>அமைப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_form_field.options.1">
         <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
@@ -159,18 +163,21 @@
       </trans-unit>
       <trans-unit id="tl_form_field.date.0">
         <source>Date</source>
+        <target>திகதி</target>
       </trans-unit>
       <trans-unit id="tl_form_field.date.1">
         <source>Checks whether the input matches the global date format.</source>
       </trans-unit>
       <trans-unit id="tl_form_field.time.0">
         <source>Time</source>
+        <target>நேரம்</target>
       </trans-unit>
       <trans-unit id="tl_form_field.time.1">
         <source>Checks whether the input matches the global time format.</source>
       </trans-unit>
       <trans-unit id="tl_form_field.datim.0">
         <source>Date and time</source>
+        <target>திகதியும் நேரமும்</target>
       </trans-unit>
       <trans-unit id="tl_form_field.datim.1">
         <source>Checks whether the input matches the global date and time format.</source>
@@ -183,6 +190,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.email.0">
         <source>E-mail address</source>
+        <target>மின்னஞ்சல் முகவரி</target>
       </trans-unit>
       <trans-unit id="tl_form_field.email.1">
         <source>Checks whether the input is a valid e-mail address.</source>
@@ -279,6 +287,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.class.0">
         <source>CSS class</source>
+        <target>CSS class</target>
       </trans-unit>
       <trans-unit id="tl_form_field.class.1">
         <source>Here you can enter one or more classes.</source>
@@ -336,12 +345,14 @@
       </trans-unit>
       <trans-unit id="tl_form_field.options_legend">
         <source>Options</source>
+        <target>அமைப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_form_field.store_legend">
         <source>Store file</source>
       </trans-unit>
       <trans-unit id="tl_form_field.expert_legend">
         <source>Expert settings</source>
+        <target>சிறப்பு அமைப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_form_field.submit_legend">
         <source>Submit button</source>
@@ -393,12 +404,14 @@
       </trans-unit>
       <trans-unit id="tl_form_field.pasteafter.0">
         <source>Paste at the top</source>
+        <target>மேலே ஒட்டு</target>
       </trans-unit>
       <trans-unit id="tl_form_field.pasteafter.1">
         <source>Paste after field ID %s</source>
       </trans-unit>
       <trans-unit id="tl_form_field.pastenew.0">
         <source>Add new at the top</source>
+        <target>மேலே புதியதொன்றை சேருங்கள்</target>
       </trans-unit>
       <trans-unit id="tl_form_field.pastenew.1">
         <source>Add new after field ID %s</source>

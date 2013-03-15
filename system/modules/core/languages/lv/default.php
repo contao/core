@@ -498,6 +498,7 @@ $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Atspējot';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Vilkt elementus, lai tos pārkārtotu';
 $GLOBALS['TL_LANG']['MSC']['templatesTheme'] = 'Tēma %s';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'baits';
+$GLOBALS['TL_LANG']['UNITS'][3] = 'Iet';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'Modulis';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Ietekmētā tabula';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = 'Darbība';

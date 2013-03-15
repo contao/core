@@ -36,6 +36,7 @@ $GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'Vytvořit složku "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'Nalezená složka "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileC'] = 'Vytvořený soubor "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileF'] = 'Nalezený soubor "%s"';
+$GLOBALS['TL_LANG']['tl_files']['syncFileH'] = 'Aktulizovaný hash souboru "%s"';
 $GLOBALS['TL_LANG']['tl_files']['new'][0] = 'Nový adresář';
 $GLOBALS['TL_LANG']['tl_files']['new'][1] = 'Vytvořit nový adresář';
 $GLOBALS['TL_LANG']['tl_files']['cut'][0] = 'Přesunout soubor nebo adresář';

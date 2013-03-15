@@ -15,6 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_style.selector.1">
         <source>The selector defines to which element(s) the format definition applies.</source>
+        <target>选择器定义该格式定义将应用于哪个元素。</target>
       </trans-unit>
       <trans-unit id="tl_style.category.0">
         <source>Category</source>
@@ -22,6 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_style.category.1">
         <source>Categories can be used to group format definitions in the back end.</source>
+        <target>分类可在后台用来分组格式定义。</target>
       </trans-unit>
       <trans-unit id="tl_style.comment.0">
         <source>Comment</source>
@@ -173,6 +175,7 @@
       </trans-unit>
       <trans-unit id="tl_style.align.1">
         <source>To align an element, its left and right margin will be overwritten.</source>
+        <target>要对齐一个元素，其左右空白将被重写。</target>
       </trans-unit>
       <trans-unit id="tl_style.verticalalign.0">
         <source>Vertical alignment</source>
@@ -188,6 +191,7 @@
       </trans-unit>
       <trans-unit id="tl_style.textalign.1">
         <source>Here you can choose the horizontal text alignment.</source>
+        <target>此处您可以选择水平对齐文本。</target>
       </trans-unit>
       <trans-unit id="tl_style.background.0">
         <source>Background</source>
@@ -199,9 +203,11 @@
       </trans-unit>
       <trans-unit id="tl_style.bgcolor.0">
         <source>Background color and opacity</source>
+        <target>背景颜色和透明度</target>
       </trans-unit>
       <trans-unit id="tl_style.bgcolor.1">
         <source>Here you can enter a hexadecimal background color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>此处您可以输入一个十六进制的背景颜色代码(例如FF0000表示红色)以及一个可选的透明度百分比(例如75)。</target>
       </trans-unit>
       <trans-unit id="tl_style.bgimage.0">
         <source>Background image</source>
@@ -213,15 +219,19 @@
       </trans-unit>
       <trans-unit id="tl_style.bgposition.0">
         <source>Background position</source>
+        <target>背景位置</target>
       </trans-unit>
       <trans-unit id="tl_style.bgposition.1">
         <source>Here you can select the position of the background image.</source>
+        <target>此处您可以选择背景图片的位置。</target>
       </trans-unit>
       <trans-unit id="tl_style.bgrepeat.0">
         <source>Background repeat</source>
+        <target>背景重复</target>
       </trans-unit>
       <trans-unit id="tl_style.bgrepeat.1">
         <source>Here you can select the repeating mode.</source>
+        <target>此处您可以选择重复类型。</target>
       </trans-unit>
       <trans-unit id="tl_style.shadowsize.0">
         <source>Shadow size</source>
@@ -229,12 +239,15 @@
       </trans-unit>
       <trans-unit id="tl_style.shadowsize.1">
         <source>Here you can enter the X and Y offset, an optional blur size and an optional spread radius.</source>
+        <target>此处您可以输入X和Y偏移量，一个可选的模糊大小和扩展半径。</target>
       </trans-unit>
       <trans-unit id="tl_style.shadowcolor.0">
         <source>Shadow color and opacity</source>
+        <target>阴影颜色和透明度</target>
       </trans-unit>
       <trans-unit id="tl_style.shadowcolor.1">
         <source>Here you can enter a hexadecimal shadow color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>此处您可以输入一个十六进制的阴影颜色代码(例如FF0000表示红色)以及一个可选的透明度百分比(例如75)。</target>
       </trans-unit>
       <trans-unit id="tl_style.gradientAngle.0">
         <source>Gradient angle</source>
@@ -321,9 +334,11 @@
       </trans-unit>
       <trans-unit id="tl_style.fontsize.0">
         <source>Font size</source>
+        <target>字体尺寸</target>
       </trans-unit>
       <trans-unit id="tl_style.fontsize.1">
         <source>Here you can enter the font size.</source>
+        <target>您可以在这里输入字体尺寸。</target>
       </trans-unit>
       <trans-unit id="tl_style.fontcolor.0">
         <source>Font color and opacity</source>
@@ -347,48 +362,63 @@
       </trans-unit>
       <trans-unit id="tl_style.whitespace.0">
         <source>Disable automatic line feed</source>
+        <target>禁用自动行补充</target>
       </trans-unit>
       <trans-unit id="tl_style.whitespace.1">
         <source>Do not wrap words automatically.</source>
+        <target>文本不要自动换行</target>
       </trans-unit>
       <trans-unit id="tl_style.texttransform.0">
         <source>Text transform</source>
+        <target>文本变形</target>
       </trans-unit>
       <trans-unit id="tl_style.texttransform.1">
         <source>Here you can choose a text transformation mode.</source>
+        <target>此处您可以选择一种文本变形模式。</target>
       </trans-unit>
       <trans-unit id="tl_style.textindent.0">
         <source>Text indent</source>
+        <target>文本缩进</target>
       </trans-unit>
       <trans-unit id="tl_style.textindent.1">
         <source>Here you can enter a text indentation.</source>
+        <target>此处您可以输入一个文本缩进值。</target>
       </trans-unit>
       <trans-unit id="tl_style.letterspacing.0">
         <source>Letter spacing</source>
+        <target>字母空白</target>
       </trans-unit>
       <trans-unit id="tl_style.letterspacing.1">
         <source>Here you can modify the letter spacing (default: 0px).</source>
+        <target>此处您可以修改字母空白(默认:0px).</target>
       </trans-unit>
       <trans-unit id="tl_style.wordspacing.0">
         <source>Word spacing</source>
+        <target>单词空白</target>
       </trans-unit>
       <trans-unit id="tl_style.wordspacing.1">
         <source>Here you can modify the word spacing (default: 0px).</source>
+        <target>此处您可以修改单词空白(默认:0px).</target>
       </trans-unit>
       <trans-unit id="tl_style.list.0">
         <source>List</source>
+        <target>列表</target>
       </trans-unit>
       <trans-unit id="tl_style.list.1">
         <source>List-style-type and list-style-image.</source>
+        <target>List-style-type和 list-style-image。</target>
       </trans-unit>
       <trans-unit id="tl_style.liststyletype.0">
         <source>List symbol</source>
+        <target>列表前导符号</target>
       </trans-unit>
       <trans-unit id="tl_style.liststyletype.1">
         <source>Here you can choose a list symbol.</source>
+        <target>此处您可以选择一个列表前导符号。</target>
       </trans-unit>
       <trans-unit id="tl_style.liststyleimage.0">
         <source>Custom symbol</source>
+        <target>定制符号</target>
       </trans-unit>
       <trans-unit id="tl_style.liststyleimage.1">
         <source>Here you can enter the path to an individual symbol.</source>
@@ -543,24 +573,28 @@
       </trans-unit>
       <trans-unit id="tl_style.editheader.0">
         <source>Edit style sheet</source>
+        <target>编辑样式表</target>
       </trans-unit>
       <trans-unit id="tl_style.editheader.1">
         <source>Edit the style sheet settings</source>
       </trans-unit>
       <trans-unit id="tl_style.pasteafter.0">
         <source>Paste at the top</source>
+        <target>粘帖到顶部</target>
       </trans-unit>
       <trans-unit id="tl_style.pasteafter.1">
         <source>Paste after format definition ID %s</source>
       </trans-unit>
       <trans-unit id="tl_style.pastenew.0">
         <source>Add new at the top</source>
+        <target>添加新问题到顶部</target>
       </trans-unit>
       <trans-unit id="tl_style.pastenew.1">
         <source>Add new after format definition ID %s</source>
       </trans-unit>
       <trans-unit id="tl_style.toggle.0">
         <source>Toggle visibility</source>
+        <target>切换可见性</target>
       </trans-unit>
       <trans-unit id="tl_style.toggle.1">
         <source>Toggle the visibility of format definition ID %s</source>

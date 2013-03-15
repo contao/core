@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_undo.pid.0">
         <source>User</source>
+        <target>Потребител</target>
       </trans-unit>
       <trans-unit id="tl_undo.pid.1">
         <source>Name of the associated user</source>

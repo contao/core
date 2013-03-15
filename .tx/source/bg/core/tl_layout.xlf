@@ -187,6 +187,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
+        <target>Подреждане</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.1">
         <source>The sort order of the style sheets.</source>
@@ -216,6 +217,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.modules.1">
         <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Ако JavaScript е изключен, уверете се, че сте записали промените преди да промените заявката.</target>
       </trans-unit>
       <trans-unit id="tl_layout.template.0">
         <source>Page template</source>
@@ -319,18 +321,21 @@
       </trans-unit>
       <trans-unit id="tl_layout.title_legend">
         <source>Title</source>
+        <target>Заглавие</target>
       </trans-unit>
       <trans-unit id="tl_layout.header_legend">
         <source>Rows</source>
       </trans-unit>
       <trans-unit id="tl_layout.column_legend">
         <source>Columns</source>
+        <target>Колони</target>
       </trans-unit>
       <trans-unit id="tl_layout.sections_legend">
         <source>Custom sections</source>
       </trans-unit>
       <trans-unit id="tl_layout.style_legend">
         <source>Style sheets</source>
+        <target>Стилове</target>
       </trans-unit>
       <trans-unit id="tl_layout.feed_legend">
         <source>RSS/Atom feeds</source>
@@ -340,6 +345,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.expert_legend">
         <source>Expert settings</source>
+        <target>Експертни настройки</target>
       </trans-unit>
       <trans-unit id="tl_layout.script_legend">
         <source>Script settings</source>
@@ -373,6 +379,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.html5">
         <source>HTML</source>
+        <target>HTML</target>
       </trans-unit>
       <trans-unit id="tl_layout.xhtml_strict">
         <source>XHTML Strict</source>

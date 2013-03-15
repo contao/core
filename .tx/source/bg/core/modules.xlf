@@ -139,9 +139,11 @@
       </trans-unit>
       <trans-unit id="MOD.tl_style">
         <source>Style sheets</source>
+        <target>Стилове</target>
       </trans-unit>
       <trans-unit id="MOD.tl_style_sheet">
         <source>Style sheets</source>
+        <target>Стилове</target>
       </trans-unit>
       <trans-unit id="MOD.tl_module">
         <source>Front end modules</source>
@@ -151,6 +153,7 @@
       </trans-unit>
       <trans-unit id="MOD.css">
         <source>Style sheets</source>
+        <target>Стилове</target>
       </trans-unit>
       <trans-unit id="MOD.modules">
         <source>Front end modules</source>

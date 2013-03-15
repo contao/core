@@ -220,6 +220,7 @@
       </trans-unit>
       <trans-unit id="tl_page.cssClass.0">
         <source>CSS class</source>
+        <target>CSS class</target>
       </trans-unit>
       <trans-unit id="tl_page.cssClass.1">
         <source>The class(es) will be used in the navigation menu and the body tag.</source>
@@ -426,6 +427,7 @@
       </trans-unit>
       <trans-unit id="tl_page.pasteinto.0">
         <source>Paste into</source>
+        <target>இனுள் ஒட்டு</target>
       </trans-unit>
       <trans-unit id="tl_page.pasteinto.1">
         <source>Paste into page ID %s</source>

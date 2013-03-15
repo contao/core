@@ -123,6 +123,7 @@
       </trans-unit>
       <trans-unit id="tl_article.teaser_legend">
         <source>Article teaser</source>
+        <target>Teaser bài viết</target>
       </trans-unit>
       <trans-unit id="tl_article.expert_legend">
         <source>Expert settings</source>

@@ -73,21 +73,27 @@
       </trans-unit>
       <trans-unit id="tl_faq.title_legend">
         <source>Title and author</source>
+        <target>Заглавие и автор</target>
       </trans-unit>
       <trans-unit id="tl_faq.answer_legend">
         <source>Answer</source>
+        <target>Отговор</target>
       </trans-unit>
       <trans-unit id="tl_faq.image_legend">
         <source>Image settings</source>
+        <target>Настройки за изображение</target>
       </trans-unit>
       <trans-unit id="tl_faq.enclosure_legend">
         <source>Enclosures</source>
+        <target>Прикачен файл</target>
       </trans-unit>
       <trans-unit id="tl_faq.expert_legend">
         <source>Expert settings</source>
+        <target>Експертни настройки</target>
       </trans-unit>
       <trans-unit id="tl_faq.publish_legend">
         <source>Publish settings</source>
+        <target>Настройки за публикуване</target>
       </trans-unit>
       <trans-unit id="tl_faq.new.0">
         <source>New question</source>

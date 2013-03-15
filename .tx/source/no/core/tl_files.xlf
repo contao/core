@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_files.name.0">
         <source>Name</source>
+        <target>Navn</target>
       </trans-unit>
       <trans-unit id="tl_files.name.1">
         <source>Contao automatically adds the file extension.</source>
@@ -75,9 +76,11 @@
       </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>
+        <target>Ny mappe</target>
       </trans-unit>
       <trans-unit id="tl_files.new.1">
         <source>Create a new folder</source>
+        <target>Lag en ny mappe</target>
       </trans-unit>
       <trans-unit id="tl_files.cut.0">
         <source>Move file or folder</source>
@@ -129,9 +132,11 @@
       </trans-unit>
       <trans-unit id="tl_files.pasteinto.0">
         <source>Paste into</source>
+        <target>Lim inn</target>
       </trans-unit>
       <trans-unit id="tl_files.pasteinto.1">
         <source>Paste into this folder</source>
+        <target>Lim inn i mappen</target>
       </trans-unit>
       <trans-unit id="tl_files.sync.0">
         <source>Synchronize</source>

@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_calendar_events.title.0">
         <source>Title</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.title.1">
         <source>Please enter the event title.</source>
@@ -15,6 +16,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.author.0">
         <source>Author</source>
+        <target>Autor</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.author.1">
         <source>Here you can change the author of the event.</source>
@@ -117,6 +119,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.article.0">
         <source>Article</source>
+        <target>Artikkel</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.article.1">
         <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an article.</source>
@@ -135,6 +138,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.articleId.0">
         <source>Article</source>
+        <target>Artikkel</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.articleId.1">
         <source>Please choose the article to which visitors will be redirected when clicking the event.</source>
@@ -171,6 +175,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.tstamp.0">
         <source>Revision date</source>
+        <target>Kuupäev</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.tstamp.1">
         <source>Date and time of the latest revision</source>

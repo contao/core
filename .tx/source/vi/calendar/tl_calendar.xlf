@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_calendar.title.0">
         <source>Title</source>
+        <target>Tiêu đề</target>
       </trans-unit>
       <trans-unit id="tl_calendar.title.1">
         <source>Please enter the calendar title.</source>
@@ -123,9 +124,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar.tstamp.0">
         <source>Revision date</source>
+        <target>Ngày phiên bản</target>
       </trans-unit>
       <trans-unit id="tl_calendar.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>Thời gian của bản mới nhất</target>
       </trans-unit>
       <trans-unit id="tl_calendar.title_legend">
         <source>Title and redirect page</source>

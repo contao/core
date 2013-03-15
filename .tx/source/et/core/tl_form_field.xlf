@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="FFL.headline.0">
         <source>Headline</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="FFL.headline.1">
         <source>A custom field to insert a section headline.</source>
@@ -75,6 +76,7 @@
       </trans-unit>
       <trans-unit id="FFL.captcha.0">
         <source>Security question</source>
+        <target>Turvalisuse küsimus</target>
       </trans-unit>
       <trans-unit id="FFL.captcha.1">
         <source>A simple math question to verify that the form is being submitted by a human (CAPTCHA).</source>
@@ -105,24 +107,28 @@
       </trans-unit>
       <trans-unit id="tl_form_field.text.0">
         <source>Text</source>
+        <target>Tekst</target>
       </trans-unit>
       <trans-unit id="tl_form_field.text.1">
         <source>You can use HTML tags to format the text.</source>
       </trans-unit>
       <trans-unit id="tl_form_field.html.0">
         <source>HTML</source>
+        <target>HTML</target>
       </trans-unit>
       <trans-unit id="tl_form_field.html.1">
         <source>You can modify the list of allowed HTML tags in the back end settings.</source>
       </trans-unit>
       <trans-unit id="tl_form_field.options.0">
         <source>Options</source>
+        <target>Valikud</target>
       </trans-unit>
       <trans-unit id="tl_form_field.options.1">
         <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
       </trans-unit>
       <trans-unit id="tl_form_field.mandatory.0">
         <source>Mandatory field</source>
+        <target>Vajalik väli</target>
       </trans-unit>
       <trans-unit id="tl_form_field.mandatory.1">
         <source>The form will not submit if the field is empty.</source>
@@ -159,6 +165,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.date.0">
         <source>Date</source>
+        <target>Kuupäev</target>
       </trans-unit>
       <trans-unit id="tl_form_field.date.1">
         <source>Checks whether the input matches the global date format.</source>
@@ -183,6 +190,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.email.0">
         <source>E-mail address</source>
+        <target>E-maili aadress</target>
       </trans-unit>
       <trans-unit id="tl_form_field.email.1">
         <source>Checks whether the input is a valid e-mail address.</source>
@@ -336,6 +344,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.options_legend">
         <source>Options</source>
+        <target>Valikud</target>
       </trans-unit>
       <trans-unit id="tl_form_field.store_legend">
         <source>Store file</source>

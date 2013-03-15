@@ -43,7 +43,7 @@
       </trans-unit>
       <trans-unit id="tl_member.street.0">
         <source>Street</source>
-        <target>Gadenavn</target>
+        <target>Gadenavn og nr.</target>
       </trans-unit>
       <trans-unit id="tl_member.street.1">
         <source>Please enter the street name and number.</source>
@@ -83,7 +83,7 @@
       </trans-unit>
       <trans-unit id="tl_member.phone.0">
         <source>Phone number</source>
-        <target>Telefonnr.</target>
+        <target>Telefon nr.</target>
       </trans-unit>
       <trans-unit id="tl_member.phone.1">
         <source>Please enter the phone number.</source>
@@ -91,11 +91,11 @@
       </trans-unit>
       <trans-unit id="tl_member.mobile.0">
         <source>Cell phone number</source>
-        <target>Mobiltlf.</target>
+        <target>Mobil nr.</target>
       </trans-unit>
       <trans-unit id="tl_member.mobile.1">
         <source>Please enter the cell phone number.</source>
-        <target>Indtast mobiltelefonnummer.</target>
+        <target>Indtast mobil telefonnummer.</target>
       </trans-unit>
       <trans-unit id="tl_member.fax.0">
         <source>Fax number</source>
@@ -107,19 +107,19 @@
       </trans-unit>
       <trans-unit id="tl_member.email.0">
         <source>E-mail address</source>
-        <target>E-postadresse</target>
+        <target>E-mail adresse</target>
       </trans-unit>
       <trans-unit id="tl_member.email.1">
         <source>Please enter a valid e-mail address.</source>
-        <target>Angiv en gyldig e-postadresse.</target>
+        <target>Indtast venligst en gyldig e-mail adresse.</target>
       </trans-unit>
       <trans-unit id="tl_member.website.0">
         <source>Website</source>
-        <target>Hjemmeside</target>
+        <target>Website</target>
       </trans-unit>
       <trans-unit id="tl_member.website.1">
         <source>Here you can enter a web address.</source>
-        <target>Her kan du skrive URLen på en hjemmeside.</target>
+        <target>Her kan du indtaste adressen på et website.</target>
       </trans-unit>
       <trans-unit id="tl_member.language.0">
         <source>Language</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_member.language.1">
         <source>Please select the language.</source>
-        <target>Vælg sprog.</target>
+        <target>Vælg venligst sprog.</target>
       </trans-unit>
       <trans-unit id="tl_member.groups.0">
         <source>Member groups</source>
@@ -135,15 +135,15 @@
       </trans-unit>
       <trans-unit id="tl_member.groups.1">
         <source>Here you can assign the user to one or more groups.</source>
-        <target>Tilmeld brugeren til en eller flere medlemsgrupper.</target>
+        <target>Her kan du tilknytte medlemmet en eller flere medlemsgrupper.</target>
       </trans-unit>
       <trans-unit id="tl_member.login.0">
         <source>Allow login</source>
-        <target>Tillad indlogning</target>
+        <target>Tillad at logge ind</target>
       </trans-unit>
       <trans-unit id="tl_member.login.1">
         <source>Allow the user to log into the front end.</source>
-        <target>Vælger du denne indstilling får du mulighed for at tildele medlemmet et brugernavn og en adgangskode.</target>
+        <target>Tillad medlemmet at logge ind i front-enden.</target>
       </trans-unit>
       <trans-unit id="tl_member.username.0">
         <source>Username</source>

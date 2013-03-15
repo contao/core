@@ -9,6 +9,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.author.0">
         <source>Author</source>
+        <target>Autor</target>
       </trans-unit>
       <trans-unit id="tl_theme.author.1">
         <source>Please enter the name of the theme designer.</source>
@@ -45,6 +46,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.tstamp.0">
         <source>Revision date</source>
+        <target>Kuupäev</target>
       </trans-unit>
       <trans-unit id="tl_theme.tstamp.1">
         <source>Date and time of the latest revision</source>

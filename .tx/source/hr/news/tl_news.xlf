@@ -195,9 +195,11 @@
       </trans-unit>
       <trans-unit id="tl_news.tstamp.0">
         <source>Revision date</source>
+        <target>Datum revizije</target>
       </trans-unit>
       <trans-unit id="tl_news.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>Datum i vrijeme posljednje revizije</target>
       </trans-unit>
       <trans-unit id="tl_news.title_legend">
         <source>Title and author</source>
@@ -309,6 +311,7 @@
       </trans-unit>
       <trans-unit id="tl_news.editmeta.0">
         <source>Edit article settings</source>
+        <target>Uredi glavni naslov članka</target>
       </trans-unit>
       <trans-unit id="tl_news.editmeta.1">
         <source>Edit the article settings</source>

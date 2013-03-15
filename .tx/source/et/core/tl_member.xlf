@@ -51,6 +51,7 @@
       </trans-unit>
       <trans-unit id="tl_member.state.0">
         <source>State</source>
+        <target>Staatus</target>
       </trans-unit>
       <trans-unit id="tl_member.state.1">
         <source>Plase enter the name of the state.</source>
@@ -81,9 +82,11 @@
       </trans-unit>
       <trans-unit id="tl_member.email.0">
         <source>E-mail address</source>
+        <target>E-maili aadress</target>
       </trans-unit>
       <trans-unit id="tl_member.email.1">
         <source>Please enter a valid e-mail address.</source>
+        <target>Palun sisesta kehtiv e-maili aadress.</target>
       </trans-unit>
       <trans-unit id="tl_member.website.0">
         <source>Website</source>
@@ -111,6 +114,7 @@
       </trans-unit>
       <trans-unit id="tl_member.username.0">
         <source>Username</source>
+        <target>Kasutajanimi</target>
       </trans-unit>
       <trans-unit id="tl_member.username.1">
         <source>Please enter a unique username.</source>

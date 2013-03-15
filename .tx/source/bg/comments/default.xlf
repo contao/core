@@ -3,15 +3,18 @@
     <body>
       <trans-unit id="MSC.com_name">
         <source>Name</source>
+        <target>Име</target>
       </trans-unit>
       <trans-unit id="MSC.com_email">
         <source>E-mail (not published)</source>
       </trans-unit>
       <trans-unit id="MSC.com_website">
         <source>Website</source>
+        <target>Сайт</target>
       </trans-unit>
       <trans-unit id="MSC.com_comment">
         <source>Comment</source>
+        <target>Коментар</target>
       </trans-unit>
       <trans-unit id="MSC.com_notify">
         <source>Notify me of new comments by e-mail</source>

@@ -18,12 +18,14 @@
       </trans-unit>
       <trans-unit id="FMD.subscribe.0">
         <source>Subscribe</source>
+        <target>Абонамент</target>
       </trans-unit>
       <trans-unit id="FMD.subscribe.1">
         <source>Generates a form to subscribe to one or more channels</source>
       </trans-unit>
       <trans-unit id="FMD.unsubscribe.0">
         <source>Unsubscribe</source>
+        <target>Отписване</target>
       </trans-unit>
       <trans-unit id="FMD.unsubscribe.1">
         <source>Generates a form to unsubscribe from one or more channels</source>

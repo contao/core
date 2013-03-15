@@ -17,12 +17,16 @@
 $GLOBALS['TL_LANG']['tl_calendar_feed']['title'][0] = 'Nosaukums';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['title'][1] = 'Lūdzu ievadiet barotnes nosaukumu.';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['alias'][0] = 'Barotnes aizstājvārds';
+$GLOBALS['TL_LANG']['tl_calendar_feed']['alias'][1] = 'Šeit jūs varat ievadīt unikālu datnes nosaukumu (bez paplašinājuma). XML barotnes datne tiks automātiski ģenerēta jūsu Contao instalācijas <em>kopīgošanas</em> direktorijā, piem. <em>kopigot/nosaukums.xml</em>.';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['language'][0] = 'Barotnes valoda';
+$GLOBALS['TL_LANG']['tl_calendar_feed']['language'][1] = 'Lūdzu ievadiet barotnes valodu atbilstoši ISO-639 standartam (piem. <em>en</em> vai <em>en-us</em>).';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['calendars'][0] = 'Kalendāri';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['format'][0] = 'Barotnes formāts';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['format'][1] = 'Lūdzu izvēlieties barotnes formātu.';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['source'][0] = 'Eksportēšanas iestatījumi';
+$GLOBALS['TL_LANG']['tl_calendar_feed']['source'][1] = 'Šeit jūs varat izvēlēties, kas tiks eksportēts.';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['maxItems'][0] = 'Vienumu maksimālais skaits';
+$GLOBALS['TL_LANG']['tl_calendar_feed']['maxItems'][1] = 'Šeit jūs varar ierobežot barotnes vienumu skaitu. Iestatiet uz 0, lai eksportētu visus.';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['feedBase'][0] = 'Pamata URL';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['feedBase'][1] = 'Lūdzu ievadiet pamata URL ar protokolu (piem. <em>http://</em>).';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['description'][0] = 'Barotnes apraksts';

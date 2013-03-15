@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_calendar_events.title.0">
         <source>Title</source>
+        <target>Tittel</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.title.1">
         <source>Please enter the event title.</source>

@@ -19,6 +19,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.jumpTo.0">
         <source>Redirect page</source>
+        <target>Страница за показване</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.jumpTo.1">
         <source>Please choose the FAQ reader page to which visitors will be redirected when clicking a FAQ.</source>
@@ -37,6 +38,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.sortOrder.0">
         <source>Sort order</source>
+        <target>Подреждане</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.sortOrder.1">
         <source>By default, comments are sorted ascending, starting with the oldest one.</source>
@@ -52,39 +54,49 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.moderate.1">
         <source>Approve comments before they are published on the website.</source>
+        <target>Одобряване на коментарите преди да са публикувани.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.bbcode.0">
         <source>Allow BBCode</source>
+        <target>Разрешаване на BB-Код</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.bbcode.1">
         <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Разрешаване на посетителите да форматират коментарите си като използват BB-Код.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.requireLogin.0">
         <source>Require login to comment</source>
+        <target>Изискване на влязъл потребител.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.requireLogin.1">
         <source>Allow only authenticated users to create comments.</source>
+        <target>Разрешаване само на идентифицирани потребители да въвеждат коментари.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.disableCaptcha.0">
         <source>Disable the security question</source>
+        <target>Изключване на защитния въпрос</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.disableCaptcha.1">
         <source>Use this option only if you have limited comments to authenticated users.</source>
       </trans-unit>
       <trans-unit id="tl_faq_category.tstamp.0">
         <source>Revision date</source>
+        <target>Дата на промяната</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>Дата и време на последната промяна</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.title_legend">
         <source>Title and redirect</source>
       </trans-unit>
       <trans-unit id="tl_faq_category.comments_legend">
         <source>Comments</source>
+        <target>Коментари</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.notify_admin">
         <source>System administrator</source>
+        <target>Системен администратор</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.notify_author">
         <source>Author of the FAQ</source>

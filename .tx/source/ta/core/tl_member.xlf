@@ -81,24 +81,29 @@
       </trans-unit>
       <trans-unit id="tl_member.email.0">
         <source>E-mail address</source>
+        <target>மின்னஞ்சல் முகவரி</target>
       </trans-unit>
       <trans-unit id="tl_member.email.1">
         <source>Please enter a valid e-mail address.</source>
+        <target>தயவுசெய்து சரியான ஒரு மின்னஞ்சல் முகவரியை உள்ளிடுங்கள்</target>
       </trans-unit>
       <trans-unit id="tl_member.website.0">
         <source>Website</source>
+        <target>இணையத்தளம்</target>
       </trans-unit>
       <trans-unit id="tl_member.website.1">
         <source>Here you can enter a web address.</source>
       </trans-unit>
       <trans-unit id="tl_member.language.0">
         <source>Language</source>
+        <target>மொழி</target>
       </trans-unit>
       <trans-unit id="tl_member.language.1">
         <source>Please select the language.</source>
       </trans-unit>
       <trans-unit id="tl_member.groups.0">
         <source>Member groups</source>
+        <target>பயனர் குழுக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_member.groups.1">
         <source>Here you can assign the user to one or more groups.</source>
@@ -111,9 +116,11 @@
       </trans-unit>
       <trans-unit id="tl_member.username.0">
         <source>Username</source>
+        <target>பயனர் பெயர்</target>
       </trans-unit>
       <trans-unit id="tl_member.username.1">
         <source>Please enter a unique username.</source>
+        <target>தயவுசெய்து ஒரு தனித்துவமான பயனர் பெயரை உள்ளிடவும்</target>
       </trans-unit>
       <trans-unit id="tl_member.assignDir.0">
         <source>Set home directory</source>
@@ -147,6 +154,7 @@
       </trans-unit>
       <trans-unit id="tl_member.personal_legend">
         <source>Personal data</source>
+        <target>தனிப்பட்ட தரவு</target>
       </trans-unit>
       <trans-unit id="tl_member.address_legend">
         <source>Address details</source>
@@ -156,6 +164,7 @@
       </trans-unit>
       <trans-unit id="tl_member.groups_legend">
         <source>User groups</source>
+        <target>பயனர் குழுக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_member.login_legend">
         <source>Login details</source>
@@ -165,9 +174,11 @@
       </trans-unit>
       <trans-unit id="tl_member.account_legend">
         <source>Account settings</source>
+        <target>கணக்கு அமைப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_member.personalData">
         <source>Personal data</source>
+        <target>தனிப்பட்ட தரவு</target>
       </trans-unit>
       <trans-unit id="tl_member.addressDetails">
         <source>Address details</source>

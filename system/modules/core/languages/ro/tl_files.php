@@ -36,6 +36,7 @@ $GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'S-a creat directorul "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'S-a regăsit directorul "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileC'] = 'S-a creat fişierul "%s"';
 $GLOBALS['TL_LANG']['tl_files']['syncFileF'] = 'S-a regăsit fişierul "%s"';
+$GLOBALS['TL_LANG']['tl_files']['syncFileH'] = 'S-a actualizat hash-ul fişierului "%s"';
 $GLOBALS['TL_LANG']['tl_files']['new'][0] = 'Director nou';
 $GLOBALS['TL_LANG']['tl_files']['new'][1] = 'Creează director nou';
 $GLOBALS['TL_LANG']['tl_files']['cut'][0] = 'Mută fişier sau director';

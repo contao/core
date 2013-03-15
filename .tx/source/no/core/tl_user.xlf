@@ -9,6 +9,7 @@
       </trans-unit>
       <trans-unit id="tl_user.name.0">
         <source>Name</source>
+        <target>Navn</target>
       </trans-unit>
       <trans-unit id="tl_user.name.1">
         <source>Please enter the first and last name.</source>

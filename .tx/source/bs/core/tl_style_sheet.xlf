@@ -65,6 +65,7 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.config_legend">
         <source>Configuration</source>
+        <target>Konfiguracija</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.media_legend">
         <source>Media settings</source>

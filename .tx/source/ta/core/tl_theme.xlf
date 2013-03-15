@@ -9,6 +9,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.author.0">
         <source>Author</source>
+        <target>ஆசிரியர்</target>
       </trans-unit>
       <trans-unit id="tl_theme.author.1">
         <source>Please enter the name of the theme designer.</source>
@@ -45,12 +46,15 @@
       </trans-unit>
       <trans-unit id="tl_theme.tstamp.0">
         <source>Revision date</source>
+        <target>மீள்திருத்த திகதி</target>
       </trans-unit>
       <trans-unit id="tl_theme.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>பிந்திய மீள்திருத்தத்தின் நேரமும் திகதியும்</target>
       </trans-unit>
       <trans-unit id="tl_theme.title_legend">
         <source>Title and author</source>
+        <target>தலைப்பும் ஆசிரியரும்</target>
       </trans-unit>
       <trans-unit id="tl_theme.config_legend">
         <source>Configuration</source>
@@ -126,6 +130,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.css.0">
         <source>Style sheets</source>
+        <target>ஒப்பனைக் கோப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_theme.css.1">
         <source>Edit the style sheets of theme ID %s</source>

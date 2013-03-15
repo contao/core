@@ -21,6 +21,7 @@
       </trans-unit>
       <trans-unit id="tl_style.comment.0">
         <source>Comment</source>
+        <target>பின்னூட்டம்</target>
       </trans-unit>
       <trans-unit id="tl_style.comment.1">
         <source>Here you can add a comment.</source>
@@ -462,12 +463,14 @@
       </trans-unit>
       <trans-unit id="tl_style.pasteafter.0">
         <source>Paste at the top</source>
+        <target>மேலே ஒட்டு</target>
       </trans-unit>
       <trans-unit id="tl_style.pasteafter.1">
         <source>Paste after format definition ID %s</source>
       </trans-unit>
       <trans-unit id="tl_style.pastenew.0">
         <source>Add new at the top</source>
+        <target>மேலே புதியதொன்றை சேருங்கள்</target>
       </trans-unit>
       <trans-unit id="tl_style.pastenew.1">
         <source>Add new after format definition ID %s</source>

@@ -15,6 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.alias.1">
         <source>Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the &lt;em&gt;share&lt;/em&gt; directory of your Contao installation, e.g. as &lt;em&gt;share/name.xml&lt;/em&gt;.</source>
+        <target>Šeit jūs varat ievadīt unikālu datnes nosaukumu (bez paplašinājuma). XML barotnes datne tiks automātiski ģenerēta jūsu Contao instalācijas &lt;em&gt;kopīgošanas&lt;/em&gt; direktorijā, piem. &lt;em&gt;kopigot/nosaukums.xml&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.language.0">
         <source>Feed language</source>
@@ -22,6 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.language.1">
         <source>Please enter the feed language according to the ISO-639 standard (e.g. &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;).</source>
+        <target>Lūdzu ievadiet barotnes valodu atbilstoši ISO-639 standartam (piem. &lt;em&gt;en&lt;/em&gt; vai &lt;em&gt;en-us&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.calendars.0">
         <source>Calendars</source>
@@ -44,6 +46,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.source.1">
         <source>Here you can choose what will be exported.</source>
+        <target>Šeit jūs varat izvēlēties, kas tiks eksportēts.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.maxItems.0">
         <source>Maximum number of items</source>
@@ -51,6 +54,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.maxItems.1">
         <source>Here you can limit the number of feed items. Set to 0 to export all.</source>
+        <target>Šeit jūs varar ierobežot barotnes vienumu skaitu. Iestatiet uz 0, lai eksportētu visus.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.feedBase.0">
         <source>Base URL</source>

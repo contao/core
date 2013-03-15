@@ -43,6 +43,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.vars.0">
         <source>Global variables</source>
+        <target>Globalne varijable</target>
       </trans-unit>
       <trans-unit id="tl_theme.vars.1">
         <source>Here you can define global variables for the style sheets of the theme (e.g. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</source>
@@ -73,6 +74,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.vars_legend">
         <source>Global variables</source>
+        <target>Globalne varijable</target>
       </trans-unit>
       <trans-unit id="tl_theme.theme_imported">
         <source>Theme &quot;%s&quot; has been imported.</source>

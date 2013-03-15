@@ -17,6 +17,7 @@
       </trans-unit>
       <trans-unit id="tl_style.category.0">
         <source>Category</source>
+        <target>Категория</target>
       </trans-unit>
       <trans-unit id="tl_style.category.1">
         <source>Categories can be used to group format definitions in the back end.</source>
@@ -124,6 +125,7 @@
       </trans-unit>
       <trans-unit id="tl_style.margin.1">
         <source>Here you can enter the top, right, bottom and left margin.</source>
+        <target>Тук можете да въведете отстоянията отгоре, отдолу, отляво и отдясно, и мерната единица.</target>
       </trans-unit>
       <trans-unit id="tl_style.padding.0">
         <source>Padding</source>
@@ -313,6 +315,7 @@
       </trans-unit>
       <trans-unit id="tl_style.list.0">
         <source>List</source>
+        <target>Списък</target>
       </trans-unit>
       <trans-unit id="tl_style.list.1">
         <source>List-style-type and list-style-image.</source>
@@ -466,18 +469,21 @@
       </trans-unit>
       <trans-unit id="tl_style.pasteafter.0">
         <source>Paste at the top</source>
+        <target>Поставяне в началото</target>
       </trans-unit>
       <trans-unit id="tl_style.pasteafter.1">
         <source>Paste after format definition ID %s</source>
       </trans-unit>
       <trans-unit id="tl_style.pastenew.0">
         <source>Add new at the top</source>
+        <target>Създаване на въпрос в началото</target>
       </trans-unit>
       <trans-unit id="tl_style.pastenew.1">
         <source>Add new after format definition ID %s</source>
       </trans-unit>
       <trans-unit id="tl_style.toggle.0">
         <source>Toggle visibility</source>
+        <target>Смяна на видимостта</target>
       </trans-unit>
       <trans-unit id="tl_style.toggle.1">
         <source>Toggle the visibility of format definition ID %s</source>

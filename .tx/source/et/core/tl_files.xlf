@@ -75,9 +75,11 @@
       </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>
+        <target>Uus kujundus</target>
       </trans-unit>
       <trans-unit id="tl_files.new.1">
         <source>Create a new folder</source>
+        <target>Loo uus kujundus</target>
       </trans-unit>
       <trans-unit id="tl_files.cut.0">
         <source>Move file or folder</source>
@@ -126,6 +128,7 @@
       </trans-unit>
       <trans-unit id="tl_files.move.1">
         <source>Upload files to the server</source>
+        <target>Lae failid serverisse!</target>
       </trans-unit>
       <trans-unit id="tl_files.pasteinto.0">
         <source>Paste into</source>

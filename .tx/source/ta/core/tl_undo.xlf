@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_undo.pid.0">
         <source>User</source>
+        <target>பயனர்</target>
       </trans-unit>
       <trans-unit id="tl_undo.pid.1">
         <source>Name of the associated user</source>
@@ -39,6 +40,7 @@
       </trans-unit>
       <trans-unit id="tl_undo.undo.0">
         <source>Restore</source>
+        <target>மீட்டெடு</target>
       </trans-unit>
       <trans-unit id="tl_undo.undo.1">
         <source>Restore entry ID %s</source>

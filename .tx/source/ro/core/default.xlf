@@ -1980,6 +1980,7 @@ Acest mesaj a fost generat de Contao. Nu puteţi face reply direct la acest emai
       </trans-unit>
       <trans-unit id="UNITS.3">
         <source>GiB</source>
+        <target>Mergi la</target>
       </trans-unit>
       <trans-unit id="UNITS.4">
         <source>TiB</source>

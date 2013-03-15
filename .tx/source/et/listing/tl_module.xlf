@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_module.list_table.0">
         <source>Table</source>
+        <target>Tabel</target>
       </trans-unit>
       <trans-unit id="tl_module.list_table.1">
         <source>Please choose the source table.</source>

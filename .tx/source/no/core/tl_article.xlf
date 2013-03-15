@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_article.title.0">
         <source>Title</source>
+        <target>Tittel</target>
       </trans-unit>
       <trans-unit id="tl_article.title.1">
         <source>Please enter the article title.</source>
@@ -192,6 +193,7 @@
       </trans-unit>
       <trans-unit id="tl_article.pasteinto.0">
         <source>Paste into</source>
+        <target>Lim inn</target>
       </trans-unit>
       <trans-unit id="tl_article.pasteinto.1">
         <source>Paste into page ID %s</source>

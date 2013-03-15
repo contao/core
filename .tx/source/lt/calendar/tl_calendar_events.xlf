@@ -227,9 +227,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.tstamp.0">
         <source>Revision date</source>
+        <target>Peržiūros data</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>Paskutinės peržiūros data ir laikas</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.title_legend">
         <source>Title and author</source>

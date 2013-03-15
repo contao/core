@@ -51,6 +51,7 @@
       </trans-unit>
       <trans-unit id="tl_content.title.0">
         <source>Title</source>
+        <target>Naslov</target>
       </trans-unit>
       <trans-unit id="tl_content.title.1">
         <source>Here you can enter the image title (&lt;em&gt;title&lt;/em&gt; attribute).</source>
@@ -199,12 +200,14 @@
       </trans-unit>
       <trans-unit id="tl_content.mooStart.0">
         <source>Wrapper start</source>
+        <target>Omotač (Wrapper) start</target>
       </trans-unit>
       <trans-unit id="tl_content.mooStart.1">
         <source>Marks the beginning of an accordion pane that spans several content elements.</source>
       </trans-unit>
       <trans-unit id="tl_content.mooStop.0">
         <source>Wrapper stop</source>
+        <target>Omotač (Wrapper) stop</target>
       </trans-unit>
       <trans-unit id="tl_content.mooStop.1">
         <source>Marks the end of an accordion pane that spans several content elements.</source>
@@ -311,6 +314,7 @@
       </trans-unit>
       <trans-unit id="tl_content.orderSRC.0">
         <source>Sort order</source>
+        <target>Redoslijed razvrstavanja</target>
       </trans-unit>
       <trans-unit id="tl_content.orderSRC.1">
         <source>The sort order of the items.</source>
@@ -557,6 +561,7 @@
       </trans-unit>
       <trans-unit id="tl_content.template_legend">
         <source>Template settings</source>
+        <target>Konfiguracija templejta</target>
       </trans-unit>
       <trans-unit id="tl_content.player_legend">
         <source>Player settings</source>

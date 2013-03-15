@@ -11,6 +11,7 @@
       </trans-unit>
       <trans-unit id="MOD.tl_calendar_feed">
         <source>Calendar feeds</source>
+        <target>Ubačeni kalendar (Calendar feeds)</target>
       </trans-unit>
       <trans-unit id="FMD.events">
         <source>Events</source>

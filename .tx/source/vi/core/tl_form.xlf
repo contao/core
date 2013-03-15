@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_form.title.0">
         <source>Title</source>
+        <target>Tiêu đề</target>
       </trans-unit>
       <trans-unit id="tl_form.title.1">
         <source>Please enter the form title.</source>
@@ -93,6 +94,7 @@
       </trans-unit>
       <trans-unit id="tl_form.attributes.0">
         <source>CSS ID/class</source>
+        <target>CSS ID/class</target>
       </trans-unit>
       <trans-unit id="tl_form.attributes.1">
         <source>Here you can set an ID and one or more classes.</source>
@@ -117,9 +119,11 @@
       </trans-unit>
       <trans-unit id="tl_form.tstamp.0">
         <source>Revision date</source>
+        <target>Ngày phiên bản</target>
       </trans-unit>
       <trans-unit id="tl_form.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>Thời gian của bản mới nhất</target>
       </trans-unit>
       <trans-unit id="tl_form.title_legend">
         <source>Title and redirect page</source>

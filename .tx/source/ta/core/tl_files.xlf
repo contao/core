@@ -154,6 +154,7 @@
       </trans-unit>
       <trans-unit id="tl_files.pasteinto.0">
         <source>Paste into</source>
+        <target>இனுள் ஒட்டு</target>
       </trans-unit>
       <trans-unit id="tl_files.pasteinto.1">
         <source>Paste into this folder</source>

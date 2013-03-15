@@ -6,6 +6,7 @@
       </trans-unit>
       <trans-unit id="MSC.author">
         <source>Author</source>
+        <target>Tác giả</target>
       </trans-unit>
       <trans-unit id="MSC.by">
         <source>by</source>

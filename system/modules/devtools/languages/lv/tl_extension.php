@@ -14,3 +14,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
+$GLOBALS['TL_LANG']['tl_extension']['title'][0] = 'Nosaukums';
+$GLOBALS['TL_LANG']['tl_extension']['author'][0] = 'Autors';
+$GLOBALS['TL_LANG']['tl_extension']['copyright'][0] = 'Autortiesības';
+$GLOBALS['TL_LANG']['tl_extension']['license'][0] = 'Licence';

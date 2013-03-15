@@ -15,6 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.author.0">
         <source>Author</source>
+        <target>Autor</target>
       </trans-unit>
       <trans-unit id="tl_faq.author.1">
         <source>Here you can change the author of the FAQ.</source>

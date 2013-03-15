@@ -11,24 +11,28 @@
       </trans-unit>
       <trans-unit id="tl_user_group.alexf.0">
         <source>Allowed fields</source>
+        <target>Изключени полета</target>
       </trans-unit>
       <trans-unit id="tl_user_group.alexf.1">
         <source>Here you can choose which fields will be editable.</source>
       </trans-unit>
       <trans-unit id="tl_user_group.disable.0">
         <source>Deactivate</source>
+        <target>Деактивирай</target>
       </trans-unit>
       <trans-unit id="tl_user_group.disable.1">
         <source>Temporarily disable the group.</source>
       </trans-unit>
       <trans-unit id="tl_user_group.start.0">
         <source>Activate on</source>
+        <target>Активирай на</target>
       </trans-unit>
       <trans-unit id="tl_user_group.start.1">
         <source>Automatically activate the group on this day.</source>
       </trans-unit>
       <trans-unit id="tl_user_group.stop.0">
         <source>Deactivate on</source>
+        <target>Деактивирай на</target>
       </trans-unit>
       <trans-unit id="tl_user_group.stop.1">
         <source>Automatically deactivate the group on this day.</source>
@@ -43,12 +47,15 @@
       </trans-unit>
       <trans-unit id="tl_user_group.pagemounts_legend">
         <source>Pagemounts</source>
+        <target>Монтиране на страници</target>
       </trans-unit>
       <trans-unit id="tl_user_group.filemounts_legend">
         <source>Filemounts</source>
+        <target>Монтиране на файлове</target>
       </trans-unit>
       <trans-unit id="tl_user_group.forms_legend">
         <source>Form permissions</source>
+        <target>Разрешения на формите</target>
       </trans-unit>
       <trans-unit id="tl_user_group.account_legend">
         <source>Account settings</source>
@@ -72,9 +79,11 @@
       </trans-unit>
       <trans-unit id="tl_user_group.edit.0">
         <source>Edit group</source>
+        <target>Редактиране на групата</target>
       </trans-unit>
       <trans-unit id="tl_user_group.edit.1">
         <source>Edit group ID %s</source>
+        <target>Редактиране на група с ID %s</target>
       </trans-unit>
       <trans-unit id="tl_user_group.copy.0">
         <source>Duplicate group</source>

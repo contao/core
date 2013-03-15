@@ -497,6 +497,7 @@ $GLOBALS['TL_LANG']['MSC']['changelog'] = 'Jurnal de schimbări';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyOff'] = 'Dezactivare';
 $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] = 'Trageţi de elemente pentru a le reordona.';
 $GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
+$GLOBALS['TL_LANG']['UNITS'][3] = 'Mergi la';
 $GLOBALS['TL_LANG']['CONFIRM']['do'] = 'Modul';
 $GLOBALS['TL_LANG']['CONFIRM']['table'] = 'Tabel afectat';
 $GLOBALS['TL_LANG']['CONFIRM']['act'] = 'Acţiune';

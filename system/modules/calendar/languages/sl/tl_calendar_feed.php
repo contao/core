@@ -17,6 +17,7 @@
 $GLOBALS['TL_LANG']['tl_calendar_feed']['title'][0] = 'Naziv';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['title'][1] = 'Prosim, vnesite naziv vira.';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['alias'][0] = 'Alias vira';
+$GLOBALS['TL_LANG']['tl_calendar_feed']['alias'][1] = 'Tukaj lahko vpišete edinstveno ime datoteke (brez podaljška). Datoteka XML izvleček bo samodejno ustvarjena v <em>share</em> mapi vaše Contao namestitve, npr. kot <em>share/ime.xml</em>.';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['language'][0] = 'Jezik vira';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['language'][1] = 'Prosim, vnesite jezik vira v skladu z ISO-639 standardom (npr. <em>en</em> ali <em>en-us</em>).';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['calendars'][0] = 'Koledarji';
@@ -27,6 +28,8 @@ $GLOBALS['TL_LANG']['tl_calendar_feed']['source'][0] = 'Nastavitve izvoza';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['source'][1] = 'Tu lahko izberete, kaj se bo izvozilo';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['maxItems'][0] = 'Največje število elementov';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['maxItems'][1] = 'Tu lahko omejite največje število elementov v viru. Nastavite 0 za izvoz vseh.';
+$GLOBALS['TL_LANG']['tl_calendar_feed']['feedBase'][0] = 'Osnovni URL';
+$GLOBALS['TL_LANG']['tl_calendar_feed']['feedBase'][1] = 'Prosimo, vnesite osnovni URL s protokolom (npr. <em>http://</em>).';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['description'][0] = 'Opis vira';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['description'][1] = 'Tu vnesite kratek opis koledarjevega vira.';
 $GLOBALS['TL_LANG']['tl_calendar_feed']['title_legend'] = 'Naziv in jezik';

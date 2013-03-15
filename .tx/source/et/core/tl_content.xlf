@@ -9,12 +9,14 @@
       </trans-unit>
       <trans-unit id="tl_content.headline.0">
         <source>Headline</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="tl_content.headline.1">
         <source>Here you can add a headline to the content element.</source>
       </trans-unit>
       <trans-unit id="tl_content.text.0">
         <source>Text</source>
+        <target>Tekst</target>
       </trans-unit>
       <trans-unit id="tl_content.text.1">
         <source>You can use HTML tags to format the text.</source>
@@ -39,6 +41,7 @@
       </trans-unit>
       <trans-unit id="tl_content.title.0">
         <source>Title</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="tl_content.title.1">
         <source>Here you can enter the image title (&lt;em&gt;title&lt;/em&gt; attribute).</source>
@@ -201,6 +204,7 @@
       </trans-unit>
       <trans-unit id="tl_content.code.0">
         <source>Code</source>
+        <target>Kood</target>
       </trans-unit>
       <trans-unit id="tl_content.code.1">
         <source>Note that the code will not be executed. Use F11 to toggle the fullscreen mode if you are using the code editor.</source>
@@ -327,18 +331,21 @@
       </trans-unit>
       <trans-unit id="tl_content.article.0">
         <source>Article</source>
+        <target>Artikkel</target>
       </trans-unit>
       <trans-unit id="tl_content.article.1">
         <source>Please select an article.</source>
       </trans-unit>
       <trans-unit id="tl_content.form.0">
         <source>Form</source>
+        <target>Vorm</target>
       </trans-unit>
       <trans-unit id="tl_content.form.1">
         <source>Please select a form.</source>
       </trans-unit>
       <trans-unit id="tl_content.module.0">
         <source>Module</source>
+        <target>Moodul</target>
       </trans-unit>
       <trans-unit id="tl_content.module.1">
         <source>Please select a module.</source>

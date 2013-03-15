@@ -94,6 +94,7 @@
       </trans-unit>
       <trans-unit id="tl_files.syncFileH">
         <source>Updated the hash of the file &quot;%s&quot;</source>
+        <target>更新文件“%s”的哈希值</target>
       </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>

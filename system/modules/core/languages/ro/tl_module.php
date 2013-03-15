@@ -118,6 +118,7 @@ $GLOBALS['TL_LANG']['tl_module']['useCaption'][0] = 'Arată numele imaginii ca s
 $GLOBALS['TL_LANG']['tl_module']['useCaption'][1] = 'Dacă alegeţi această opţiune, numele imaginii va fi afişat dedesubtul ei..';
 $GLOBALS['TL_LANG']['tl_module']['multiSRC'][0] = 'Sursa fişiere';
 $GLOBALS['TL_LANG']['tl_module']['multiSRC'][1] = 'Alegeţi unul sau mai multe fişiere din directorul de fişiere.';
+$GLOBALS['TL_LANG']['tl_module']['orderSRC'][0] = 'Ordine de sortare';
 $GLOBALS['TL_LANG']['tl_module']['html'][0] = 'Cod HTML';
 $GLOBALS['TL_LANG']['tl_module']['html'][1] = 'Introduceţi codul HTML.';
 $GLOBALS['TL_LANG']['tl_module']['rss_cache'][0] = 'Expirare cache';

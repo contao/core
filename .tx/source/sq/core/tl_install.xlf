@@ -40,6 +40,7 @@
       </trans-unit>
       <trans-unit id="tl_install.encryption.1">
         <source>This key is used to store encrypted data. Please note that encrypted data can only be decrypted with this key! Therefore note it down and do not change it if there is encrypted data already. Leave empty to generate a random key.</source>
+        <target>Ky çelës është përdorur për të ruajtur të dhënat e koduara. Ju lutem vini re se të dhënat e koduara mund të dekodohen vetëm me këtë çelës! Prandaj shënoni atë dhe mos e ndryshoni nëse tashmë ekzistojnë të dhëna të koduara. Lerëni bosh për të gjeneruar një çelës të rastësishëm/rendomt.</target>
       </trans-unit>
       <trans-unit id="tl_install.database.0">
         <source>Check database connection</source>
@@ -147,6 +148,7 @@
       </trans-unit>
       <trans-unit id="tl_install.dbUsername">
         <source>Username</source>
+        <target>Përdoruesi</target>
       </trans-unit>
       <trans-unit id="tl_install.dbDatabase">
         <source>Database</source>
@@ -157,6 +159,7 @@
       </trans-unit>
       <trans-unit id="tl_install.dbCharset">
         <source>Character set</source>
+        <target>Kompleti shenjave</target>
       </trans-unit>
       <trans-unit id="tl_install.dbCollation">
         <source>Collation</source>

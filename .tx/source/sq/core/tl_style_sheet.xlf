@@ -39,6 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.vars.0">
         <source>Global variables</source>
+        <target>Variablat globale</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.vars.1">
         <source>Here you can define global variables for the style sheet (e.g. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</source>
@@ -65,12 +66,14 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.config_legend">
         <source>Configuration</source>
+        <target>Konfigurim</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.media_legend">
         <source>Media settings</source>
       </trans-unit>
       <trans-unit id="tl_style_sheet.vars_legend">
         <source>Global variables</source>
+        <target>Variablat globale</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.css_imported">
         <source>Style sheet &quot;%s&quot; has been imported.</source>

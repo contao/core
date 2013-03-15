@@ -231,6 +231,7 @@
       </trans-unit>
       <trans-unit id="tl_user.theme_legend">
         <source>Back end theme</source>
+        <target>Backend tema</target>
       </trans-unit>
       <trans-unit id="tl_user.password_legend">
         <source>Password settings</source>

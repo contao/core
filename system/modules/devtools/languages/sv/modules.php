@@ -19,5 +19,5 @@ $GLOBALS['TL_LANG']['MOD']['extension'][0] = 'Modulbyggaren';
 $GLOBALS['TL_LANG']['MOD']['extension'][1] = 'Skapa en egen Contao-modul';
 $GLOBALS['TL_LANG']['MOD']['labels'][0] = 'Saknade etiketter';
 $GLOBALS['TL_LANG']['MOD']['labels'][1] = 'Hitta saknade språketiketter i ett språkpaket';
-$GLOBALS['TL_LANG']['MOD']['autoload'][0] = 'Ladda modulbyggaren automatiskt';
+$GLOBALS['TL_LANG']['MOD']['autoload'][0] = 'Autoload-byggaren';
 $GLOBALS['TL_LANG']['MOD']['autoload'][1] = 'Skapa "config/autoload.php"-filer automatiskt';

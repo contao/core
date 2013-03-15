@@ -95,6 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_style.positioning.1">
         <source>Position, float, clear, overflow and display.</source>
+        <target>Pozicion, pluskues, qartë, sipërfaqe dhe shfaqje.</target>
       </trans-unit>
       <trans-unit id="tl_style.trbl.0">
         <source>Position</source>
@@ -238,6 +239,7 @@
       </trans-unit>
       <trans-unit id="tl_style.shadowsize.1">
         <source>Here you can enter the X and Y offset, an optional blur size and an optional spread radius.</source>
+        <target>Këtu ju mund të epeni X dhe Y, një madhësi opsionale dhe një radius të përhapur opsionale.</target>
       </trans-unit>
       <trans-unit id="tl_style.shadowcolor.0">
         <source>Shadow color and opacity</source>
@@ -245,6 +247,7 @@
       </trans-unit>
       <trans-unit id="tl_style.shadowcolor.1">
         <source>Here you can enter a hexadecimal shadow color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>Këtu mund të epeni ngjyrën heksadecimale të hijës (p.sh. ff0000 për kuq) dhe përqindjen e një perde opsionale (p.sh. 75).</target>
       </trans-unit>
       <trans-unit id="tl_style.gradientAngle.0">
         <source>Gradient angle</source>
@@ -252,6 +255,7 @@
       </trans-unit>
       <trans-unit id="tl_style.gradientAngle.1">
         <source>Here you can enter the gradient angle (e.g. &lt;em&gt;0deg&lt;/em&gt;) or the direction (e.g. &lt;em&gt;to bottom&lt;/em&gt; or &lt;em&gt;to top right&lt;/em&gt;).</source>
+        <target>Ketu mund të epeni pjerrësin e këndit (p.sh. &lt;em&gt;0deg&lt;/em&gt;) ose drejtimin (p.sh. &lt;em&gt;në fund&lt;/em&gt; ose &lt;em&gt;lart djathtas&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_style.gradientColors.0">
         <source>Gradient colors</source>
@@ -295,9 +299,11 @@
       </trans-unit>
       <trans-unit id="tl_style.borderradius.0">
         <source>Border radius</source>
+        <target>Kufiri radius.</target>
       </trans-unit>
       <trans-unit id="tl_style.borderradius.1">
         <source>Here you can enter the top, right, bottom and left border radius.</source>
+        <target>Këtu mund të epeni kufirin e radius më lart, djatht, fund ose majtas</target>
       </trans-unit>
       <trans-unit id="tl_style.bordercollapse.0">
         <source>Border handling</source>
@@ -373,15 +379,19 @@
       </trans-unit>
       <trans-unit id="tl_style.texttransform.0">
         <source>Text transform</source>
+        <target>Transformimi tekstit</target>
       </trans-unit>
       <trans-unit id="tl_style.texttransform.1">
         <source>Here you can choose a text transformation mode.</source>
+        <target>Zgjedhimi i menyrës së transformimit të tekstit.</target>
       </trans-unit>
       <trans-unit id="tl_style.textindent.0">
         <source>Text indent</source>
+        <target>Dhëmbëzimi tekstit</target>
       </trans-unit>
       <trans-unit id="tl_style.textindent.1">
         <source>Here you can enter a text indentation.</source>
+        <target>Këtu mund të epeni dhëmbëzimin e tekstit.</target>
       </trans-unit>
       <trans-unit id="tl_style.letterspacing.0">
         <source>Letter spacing</source>
@@ -433,6 +443,7 @@
       </trans-unit>
       <trans-unit id="tl_style.selector_legend">
         <source>Selector and category</source>
+        <target>Përzgjedhës dhe kategori</target>
       </trans-unit>
       <trans-unit id="tl_style.size_legend">
         <source>Size</source>
@@ -488,6 +499,7 @@
       </trans-unit>
       <trans-unit id="tl_style.line-through">
         <source>line-through</source>
+        <target>vijë-përmes</target>
       </trans-unit>
       <trans-unit id="tl_style.overline">
         <source>overlined</source>

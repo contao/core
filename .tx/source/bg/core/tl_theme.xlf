@@ -9,6 +9,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.author.0">
         <source>Author</source>
+        <target>Автор</target>
       </trans-unit>
       <trans-unit id="tl_theme.author.1">
         <source>Please enter the name of the theme designer.</source>
@@ -39,21 +40,26 @@
       </trans-unit>
       <trans-unit id="tl_theme.source.0">
         <source>Source files</source>
+        <target>Изходни файлове</target>
       </trans-unit>
       <trans-unit id="tl_theme.source.1">
         <source>Here you can upload one or more .cto files to be imported.</source>
       </trans-unit>
       <trans-unit id="tl_theme.tstamp.0">
         <source>Revision date</source>
+        <target>Дата на промяната</target>
       </trans-unit>
       <trans-unit id="tl_theme.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>Дата и време на последната промяна</target>
       </trans-unit>
       <trans-unit id="tl_theme.title_legend">
         <source>Title and author</source>
+        <target>Заглавие и автор</target>
       </trans-unit>
       <trans-unit id="tl_theme.config_legend">
         <source>Configuration</source>
+        <target>Конфигурация</target>
       </trans-unit>
       <trans-unit id="tl_theme.vars_legend">
         <source>Global variables</source>
@@ -75,6 +81,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.custom_sections">
         <source>Custom layout sections</source>
+        <target>Потребителски секции с изглед</target>
       </trans-unit>
       <trans-unit id="tl_theme.missing_section">
         <source>The layout section &lt;strong&gt;%s&lt;/strong&gt; is not defined in the back end settings.</source>
@@ -126,6 +133,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.css.0">
         <source>Style sheets</source>
+        <target>Стилове</target>
       </trans-unit>
       <trans-unit id="tl_theme.css.1">
         <source>Edit the style sheets of theme ID %s</source>

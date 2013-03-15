@@ -49,6 +49,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.moderate.1">
         <source>Approve comments before they are published on the website.</source>
+        <target>Godkjenn kommentarer før de publiseres på nettstedet.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.bbcode.0">
         <source>Allow BBCode</source>
@@ -56,12 +57,15 @@
       </trans-unit>
       <trans-unit id="tl_calendar.bbcode.1">
         <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Tillat besøkende å formatere kommentarer med BBCode.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.requireLogin.0">
         <source>Require login to comment</source>
+        <target>Krev innlogging for å kommentere</target>
       </trans-unit>
       <trans-unit id="tl_calendar.requireLogin.1">
         <source>Allow only authenticated users to create comments.</source>
+        <target>Tillat bare at godkjente brukere kan lage kommentarer.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.disableCaptcha.0">
         <source>Disable the security question</source>
@@ -142,6 +146,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.comments_legend">
         <source>Comments</source>
+        <target>Kommentarer</target>
       </trans-unit>
       <trans-unit id="tl_calendar.protected_legend">
         <source>Access protection</source>

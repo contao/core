@@ -33,15 +33,19 @@
       </trans-unit>
       <trans-unit id="tl_templates.new.0">
         <source>New folder</source>
+        <target>புதிய கோப்புறை</target>
       </trans-unit>
       <trans-unit id="tl_templates.new.1">
         <source>Create a new folder</source>
+        <target>புதிய கோப்புறை ஒன்றை உருவாக்கு</target>
       </trans-unit>
       <trans-unit id="tl_templates.pasteinto.0">
         <source>Paste into</source>
+        <target>இனுள் ஒட்டு</target>
       </trans-unit>
       <trans-unit id="tl_templates.pasteinto.1">
         <source>Paste into this folder</source>
+        <target>இக்கோப்புறையினுள் ஒட்டு</target>
       </trans-unit>
     </body>
   </file>

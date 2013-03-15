@@ -1979,6 +1979,7 @@ Este e-mail ha sido generado por Contao. No puedes contestar directamente.
       </trans-unit>
       <trans-unit id="UNITS.3">
         <source>GiB</source>
+        <target>Ir</target>
       </trans-unit>
       <trans-unit id="UNITS.4">
         <source>TiB</source>

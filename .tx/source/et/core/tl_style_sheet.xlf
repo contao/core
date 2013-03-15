@@ -45,6 +45,7 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.tstamp.0">
         <source>Revision date</source>
+        <target>Kuupäev</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.tstamp.1">
         <source>Date and time of the latest revision</source>

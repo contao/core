@@ -17,36 +17,42 @@
       </trans-unit>
       <trans-unit id="tl_member_group.jumpTo.0">
         <source>Redirect page</source>
+        <target>Страница за показване</target>
       </trans-unit>
       <trans-unit id="tl_member_group.jumpTo.1">
         <source>Please choose the page to which the group members will be redirected.</source>
       </trans-unit>
       <trans-unit id="tl_member_group.disable.0">
         <source>Deactivate</source>
+        <target>Деактивирай</target>
       </trans-unit>
       <trans-unit id="tl_member_group.disable.1">
         <source>Temporarily disable the group.</source>
       </trans-unit>
       <trans-unit id="tl_member_group.start.0">
         <source>Activate on</source>
+        <target>Активирай на</target>
       </trans-unit>
       <trans-unit id="tl_member_group.start.1">
         <source>Automatically activate the group on this day.</source>
       </trans-unit>
       <trans-unit id="tl_member_group.stop.0">
         <source>Deactivate on</source>
+        <target>Деактивирай на</target>
       </trans-unit>
       <trans-unit id="tl_member_group.stop.1">
         <source>Automatically deactivate the group on this day.</source>
       </trans-unit>
       <trans-unit id="tl_member_group.title_legend">
         <source>Title</source>
+        <target>Заглавие</target>
       </trans-unit>
       <trans-unit id="tl_member_group.redirect_legend">
         <source>Auto-redirect</source>
       </trans-unit>
       <trans-unit id="tl_member_group.disable_legend">
         <source>Account settings</source>
+        <target>Настройки на сметките</target>
       </trans-unit>
       <trans-unit id="tl_member_group.new.0">
         <source>New group</source>

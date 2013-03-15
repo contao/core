@@ -181,6 +181,7 @@
       </trans-unit>
       <trans-unit id="tl_user.formp.0">
         <source>Form permissions</source>
+        <target>Разрешения на формите</target>
       </trans-unit>
       <trans-unit id="tl_user.formp.1">
         <source>Here you can define the form permissions.</source>
@@ -227,6 +228,7 @@
       </trans-unit>
       <trans-unit id="tl_user.theme_legend">
         <source>Back end theme</source>
+        <target>Тема за административния интерфейс</target>
       </trans-unit>
       <trans-unit id="tl_user.password_legend">
         <source>Password settings</source>

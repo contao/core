@@ -335,6 +335,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.fsType.0">
         <source>Operation mode</source>
+        <target>Оперативен режим</target>
       </trans-unit>
       <trans-unit id="tl_form_field.fsType.1">
         <source>Please select the operation mode of the fieldset element.</source>

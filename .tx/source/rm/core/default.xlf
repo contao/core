@@ -83,6 +83,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidDate">
         <source>Invalid date &quot;%s&quot;!</source>
+        <target>Data nunvalida: &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
@@ -110,6 +111,7 @@
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
+        <target>Impussibel da spustar %s a %s perquai che questa destinaziun exista gia!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidReferer">
         <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
@@ -169,6 +171,7 @@
       </trans-unit>
       <trans-unit id="ERR.fileExists">
         <source>The file or folder &quot;%s&quot; already exists!</source>
+        <target>La datoteca u l'ordinatur &quot;%s&quot; exista gia!</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -224,9 +227,11 @@
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
         <source>No database entry found for %s.</source>
+        <target>Chattà nagina endataziun en la banca da datas per %s.</target>
       </trans-unit>
       <trans-unit id="ERR.dbOutOfSync">
         <source>The database and the file system have to be synchronized to continue.</source>
+        <target>La banca da datas ed il sistem da datotecas ston vegnir sincronisads per cuntinuar.</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
@@ -1122,6 +1127,7 @@
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
         <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>Emprenda co che ti pos lavurar pli spert cun utilisar &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;scursanidas da tastas&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1967,6 +1973,7 @@ Quest e-mail è vegnì generà da Contao. Ti na pos betg respunder directamain s
       </trans-unit>
       <trans-unit id="MSC.templatesTheme">
         <source>Theme %s</source>
+        <target>Theme %s</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>
@@ -1974,27 +1981,35 @@ Quest e-mail è vegnì generà da Contao. Ti na pos betg respunder directamain s
       </trans-unit>
       <trans-unit id="UNITS.1">
         <source>KiB</source>
+        <target>KiB</target>
       </trans-unit>
       <trans-unit id="UNITS.2">
         <source>MiB</source>
+        <target>MiB</target>
       </trans-unit>
       <trans-unit id="UNITS.3">
         <source>GiB</source>
+        <target>GiB</target>
       </trans-unit>
       <trans-unit id="UNITS.4">
         <source>TiB</source>
+        <target>TiB</target>
       </trans-unit>
       <trans-unit id="UNITS.5">
         <source>PiB</source>
+        <target>PiB</target>
       </trans-unit>
       <trans-unit id="UNITS.6">
         <source>EiB</source>
+        <target>EiB</target>
       </trans-unit>
       <trans-unit id="UNITS.7">
         <source>ZiB</source>
+        <target>ZiB</target>
       </trans-unit>
       <trans-unit id="UNITS.8">
         <source>YiB</source>
+        <target>YiB</target>
       </trans-unit>
       <trans-unit id="CONFIRM.do">
         <source>Module</source>

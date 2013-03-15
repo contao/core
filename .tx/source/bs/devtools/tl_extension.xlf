@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_extension.title.0">
         <source>Title</source>
+        <target>Naslov</target>
       </trans-unit>
       <trans-unit id="tl_extension.title.1">
         <source>Please enter the extension title.</source>
@@ -15,12 +16,14 @@
       </trans-unit>
       <trans-unit id="tl_extension.author.0">
         <source>Author</source>
+        <target>Autor</target>
       </trans-unit>
       <trans-unit id="tl_extension.author.1">
         <source>Please enter the author's name and an optional e-mail address (e.g. &lt;em&gt;Name [e-mail@address.com]&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_extension.copyright.0">
         <source>Copyright</source>
+        <target>Autorsko pravo</target>
       </trans-unit>
       <trans-unit id="tl_extension.copyright.1">
         <source>Please enter the copyright notice (e.g. &lt;em&gt;Name 2012&lt;/em&gt;).</source>
@@ -33,6 +36,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.license.0">
         <source>License</source>
+        <target>Licenca</target>
       </trans-unit>
       <trans-unit id="tl_extension.license.1">
         <source>Please enter the license type (e.g. &lt;em&gt;GNU/LGPL&lt;/em&gt;).</source>

@@ -108,6 +108,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.expert_legend">
         <source>Expert settings</source>
+        <target>சிறப்பு அமைப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.sent">
         <source>Sent</source>

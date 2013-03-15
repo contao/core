@@ -11,6 +11,7 @@
       </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
+        <target>Meta informacije</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.1">
         <source>Here you can enter the file meta information.</source>

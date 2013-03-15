@@ -317,6 +317,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.mooSource.0">
         <source>MooTools source</source>
+        <target>MooTools</target>
       </trans-unit>
       <trans-unit id="tl_layout.mooSource.1">
         <source>Here you can select from where to load the MooTools scripts.</source>
@@ -434,6 +435,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.html5">
         <source>HTML</source>
+        <target>HTML</target>
       </trans-unit>
       <trans-unit id="tl_layout.xhtml_strict">
         <source>XHTML Strict</source>
@@ -515,9 +517,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.editheader.0">
         <source>Edit theme</source>
+        <target>Përpuno paraqitjen</target>
       </trans-unit>
       <trans-unit id="tl_layout.editheader.1">
         <source>Edit the theme settings</source>
+        <target>Përpuno konfigurimin e motiveve</target>
       </trans-unit>
     </body>
   </file>

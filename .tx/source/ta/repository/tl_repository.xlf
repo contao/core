@@ -15,6 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.description.0">
         <source>Description</source>
+        <target>விபரம்</target>
       </trans-unit>
       <trans-unit id="tl_repository.description.1">
         <source>These HTML tags are allowed: %s</source>
@@ -39,6 +40,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.name.0">
         <source>Name</source>
+        <target>பெயர்</target>
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
         <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are prefered. Additionally, the characters _ and - are allowed within the name.</source>
@@ -63,6 +65,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.selversion.0">
         <source>Version</source>
+        <target>பதிப்பு</target>
       </trans-unit>
       <trans-unit id="tl_repository.selversion.1">
         <source>Please select the version</source>
@@ -81,6 +84,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
         <source>Version</source>
+        <target>பதிப்பு</target>
       </trans-unit>
       <trans-unit id="tl_repository.version.1">
         <source>Version numbers must be in format n.n.n s, where n are integers and s is one of: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</source>
@@ -105,15 +109,18 @@
       </trans-unit>
       <trans-unit id="tl_repository.author">
         <source>Author</source>
+        <target>ஆசிரியர்</target>
       </trans-unit>
       <trans-unit id="tl_repository.build">
         <source>Build</source>
       </trans-unit>
       <trans-unit id="tl_repository.cancel">
         <source>Cancel</source>
+        <target>நிராகரி</target>
       </trans-unit>
       <trans-unit id="tl_repository.continue">
         <source>Continue</source>
+        <target>தொடர்</target>
       </trans-unit>
       <trans-unit id="tl_repository.dependencies">
         <source>Dependencies of this extension</source>
@@ -147,6 +154,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.no">
         <source>no</source>
+        <target>இல்லை</target>
       </trans-unit>
       <trans-unit id="tl_repository.noextensionsfound">
         <source>No matching extensions found.</source>
@@ -237,9 +245,11 @@
       </trans-unit>
       <trans-unit id="tl_repository.yes">
         <source>yes</source>
+        <target>ஓம்</target>
       </trans-unit>
       <trans-unit id="tl_repository.action">
         <source>Action</source>
+        <target>செயற்பாடு</target>
       </trans-unit>
       <trans-unit id="tl_repository.actionsummary">
         <source>Action summary</source>
@@ -300,6 +310,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.goback">
         <source>Go back</source>
+        <target>முன்செல்</target>
       </trans-unit>
       <trans-unit id="tl_repository.install">
         <source>Install</source>
@@ -324,6 +335,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.ok">
         <source>OK</source>
+        <target>சரி</target>
       </trans-unit>
       <trans-unit id="tl_repository.okuninstextension">
         <source>OK to uninstall &lt;em&gt;%s&lt;/em&gt; now?</source>
@@ -456,12 +468,15 @@
       </trans-unit>
       <trans-unit id="tl_repository_order_options.name">
         <source>Name</source>
+        <target>பெயர்</target>
       </trans-unit>
       <trans-unit id="tl_repository_order_options.title">
         <source>Title</source>
+        <target>தலைப்பு</target>
       </trans-unit>
       <trans-unit id="tl_repository_order_options.author">
         <source>Author</source>
+        <target>ஆசிரியர்</target>
       </trans-unit>
       <trans-unit id="tl_repository_state_options.alpha">
         <source>Alpha</source>

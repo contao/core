@@ -105,6 +105,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.author">
         <source>Author</source>
+        <target>Tác giả</target>
       </trans-unit>
       <trans-unit id="tl_repository.build">
         <source>Build</source>
@@ -459,9 +460,11 @@
       </trans-unit>
       <trans-unit id="tl_repository_order_options.title">
         <source>Title</source>
+        <target>Tiêu đề</target>
       </trans-unit>
       <trans-unit id="tl_repository_order_options.author">
         <source>Author</source>
+        <target>Tác giả</target>
       </trans-unit>
       <trans-unit id="tl_repository_state_options.alpha">
         <source>Alpha</source>
