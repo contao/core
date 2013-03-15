@@ -329,6 +329,7 @@ Swipe.prototype = {
           _this._slide([_this.index-1,_this.index],_this.width,_this.speed);
           _this.index += -1;
         }
+        _this.updateMenu(this.index); // PATCH: also update the menu on swipe
         _this.callback(_this.index, _this.slides[_this.index]);
       } else {
         _this._slide([_this.index-1,_this.index,_this.index+1],0,_this.speed);

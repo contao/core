@@ -39,6 +39,7 @@ usage()
 	echo -e "  Other"
 	echo -e "  \033[0;36mcodemirror\033[0m    Minify the CodeMirror plugin (assets/codemirror)"
 	echo -e "  \033[0;36mhighlighter\033[0m   Minify the SyntaxHighlighter plugin (assets/highlighter)"
+	echo -e "  \033[0;36mswipe\033[0m         Minify the swipe.js plugin (assets/swipe)"
 	echo ""
 }
 
@@ -491,6 +492,26 @@ highlighter()
 			$js $version/src/$file >> $version/$file
 			echo "  Created $version/$file"
 		done
+	done
+}
+
+##
+# assets/swipe
+##
+swipe()
+{
+	for version in `ls -d $folder/assets/swipe/*`; do
+		copyright="/* Swipe $(basename $version), (C) Brad Birdsall 2012, MIT license */"
+
+		# CSS
+		echo "$copyright" > $version/css/swipe.min.css
+		$css $version/css/swipe.css >> $version/css/swipe.min.css
+		echo "  Created $version/css/swipe.min.css"
+
+		# JavaScript
+		echo "$copyright" > $version/js/swipe.min.js
+		$js $version/js/swipe.js >> $version/js/swipe.min.js
+		echo "  Created $version/js/swipe.min.js"
 	done
 }
 
