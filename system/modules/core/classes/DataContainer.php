@@ -277,9 +277,10 @@ class DataContainer extends \Backend
 			}
 
 			$paletteFields = array_intersect($postPaletteFields, $newPaletteFields);
+			$blnSave = (\Input::post('SUBMIT_TYPE') != 'auto' || $arrData['eval']['submitOnChange']);
 
 			// Validate and save the field
-			if (in_array($this->strInputName, $paletteFields) || \Input::get('act') == 'overrideAll')
+			if ($blnSave && in_array($this->strInputName, $paletteFields) || \Input::get('act') == 'overrideAll')
 			{
 				$objWidget->validate();
 

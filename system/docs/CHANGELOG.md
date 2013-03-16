@@ -5,6 +5,10 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### Changed
+Back end forms are no longer saved if the form is auto-submitted (see #4077).
+This will prevent empty field warnings when switching element types.
+
+### Changed
 The "show details" link now opens in a modal window (see #5188).
 
 ### Changed
