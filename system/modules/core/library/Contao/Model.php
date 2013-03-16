@@ -87,7 +87,7 @@ abstract class Model
 		if ($objResult !== null)
 		{
 			$arrRelated = array();
-			$this->arrData = $objResult->row();
+			$this->setRow($objResult->row()); // see #5439
 
 			// Look for joined fields
 			foreach ($this->arrData as $k=>$v)
