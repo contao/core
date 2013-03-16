@@ -140,7 +140,14 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,alias,author;{layout_legend},inColumn,keywords;{teaser_legend:hide},teaserCssID,showTeaser,teaser;{expert_legend:hide},printable,cssID,space;{publish_legend},published,start,stop'
+		'__selector__'                => array('protected'),
+		'default'                     => '{title_legend},title,alias,author;{layout_legend},inColumn,keywords;{teaser_legend:hide},teaserCssID,showTeaser,teaser;{syndication_legend},printable;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{publish_legend},published,start,stop'
+	),
+
+	// Subpalettes
+	'subpalettes' => array
+	(
+		'protected'                   => 'groups'
 	),
 
 	// Fields
@@ -254,12 +261,40 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'reference'               => &$GLOBALS['TL_LANG']['tl_article'],
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
+		'protected' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['protected'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'groups' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['groups'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'foreignKey'              => 'tl_member_group.name',
+			'eval'                    => array('mandatory'=>true, 'multiple'=>true),
+			'sql'                     => "blob NULL",
+			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
+		),
+		'guests' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['guests'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
 		'cssID' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['cssID'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>2, 'tl_class'=>'w50'),
+			'eval'                    => array('multiple'=>true, 'size'=>2, 'tl_class'=>'w50 clr'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'space' => array

@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### New
+Added access protection for articles (see #1869).
+
+### New
 Added the `Widget::addAttribute()` method (see #4744).
 
 ### Changed

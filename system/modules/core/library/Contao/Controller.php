@@ -336,6 +336,29 @@ abstract class Controller extends \System
 			return false;
 		}
 
+		// Show to guests only
+		if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
+		{
+			return '';
+		}
+
+		// Protected the element
+		if ($objRow->protected && !BE_USER_LOGGED_IN)
+		{
+			if (!FE_USER_LOGGED_IN)
+			{
+				return '';
+			}
+
+			$this->import('FrontendUser', 'User');
+			$groups = deserialize($objRow->groups);
+
+			if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
+			{
+				return '';
+			}
+		}
+
 		// Print the article as PDF
 		if (isset($_GET['pdf']) && \Input::get('pdf') == $objRow->id)
 		{
@@ -371,7 +394,15 @@ abstract class Controller extends \System
 		}
 
 		$objArticle = new \ModuleArticle($objRow, $strColumn);
-		return $objArticle->generate($blnIsInsertTag);
+		$strBuffer = $objArticle->generate($blnIsInsertTag);
+
+		// Disable indexing if protected
+		if ($objArticle->protected && !preg_match('/^\s*<!-- indexer::stop/', $strBuffer))
+		{
+			$strBuffer = "\n<!-- indexer::stop -->". $strBuffer ."<!-- indexer::continue -->\n";
+		}
+
+		return $strBuffer;
 	}
 
 
