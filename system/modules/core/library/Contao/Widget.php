@@ -407,6 +407,18 @@ abstract class Widget extends \Controller
 
 
 	/**
+	 * Add an attribute
+	 *
+	 * @param string $strName  The attribute name
+	 * @param mixed  $varValue The attribute value
+	 */
+	public function addAttribute($strName, $varValue)
+	{
+		$this->arrAttributes[$strName] = $varValue;
+	}
+
+
+	/**
 	 * Add an error message
 	 *
 	 * @param string $strError The error message
