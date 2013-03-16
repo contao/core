@@ -107,6 +107,11 @@ class BackendUser extends \User
 
 				if ($ref != '' && isset($session[$key][$ref]))
 				{
+					if (!isset($session[$key][TL_REFERER_ID]))
+					{
+						$session[$key][TL_REFERER_ID] = array();
+					}
+
 					$session[$key][TL_REFERER_ID] = array_merge($session[$key][TL_REFERER_ID], $session[$key][$ref]);
 					$session[$key][TL_REFERER_ID]['last'] = $session[$key][$ref]['current'];
 				}
