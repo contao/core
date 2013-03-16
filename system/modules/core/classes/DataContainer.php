@@ -277,16 +277,19 @@ class DataContainer extends \Backend
 			}
 
 			$paletteFields = array_intersect($postPaletteFields, $newPaletteFields);
-			$blnSave = (\Input::post('SUBMIT_TYPE') != 'auto' || $arrData['eval']['submitOnChange']);
 
 			// Validate and save the field
-			if ($blnSave && in_array($this->strInputName, $paletteFields) || \Input::get('act') == 'overrideAll')
+			if (in_array($this->strInputName, $paletteFields) || \Input::get('act') == 'overrideAll')
 			{
 				$objWidget->validate();
 
 				if ($objWidget->hasErrors())
 				{
-					$this->noReload = true;
+					// Skip mandatory fields on auto-submit (see #4077)
+					if (\Input::post('SUBMIT_TYPE') != 'auto' || !$objWidget->mandatory || $objWidget->value != '')
+					{
+						$this->noReload = true;
+					}
 				}
 				elseif ($objWidget->submitInput())
 				{
