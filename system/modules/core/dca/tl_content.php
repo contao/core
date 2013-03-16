@@ -977,7 +977,7 @@ class tl_content extends Backend
 		$class = 'limit_height';
 
 		// Remove the class if it is a wrapper element
-		if (in_array($arrRow['type'], $GLOBALS['TL_WRAPPERS']['start']) || in_array($arrRow['type'], $GLOBALS['TL_WRAPPERS']['stop']))
+		if (in_array($arrRow['type'], $GLOBALS['TL_WRAPPERS']['start']) || in_array($arrRow['type'], $GLOBALS['TL_WRAPPERS']['separator']) || in_array($arrRow['type'], $GLOBALS['TL_WRAPPERS']['stop']))
 		{
 			$class = '';
 

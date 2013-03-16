@@ -522,13 +522,13 @@ h2.sub_headline_index {
 	overflow:hidden;
 	position:relative;
 }
-.tl_content.wrapper_start,.tl_content.wrapper_stop {
+.tl_content.wrapper_start,.tl_content.wrapper_separator,.tl_content.wrapper_stop {
 	background:#f3f3f3;
 }
-.tl_content.wrapper_start {
+.tl_content.wrapper_start,.tl_content.wrapper_separator {
 	border-bottom:0;
 }
-.tl_content.wrapper_stop {
+.tl_content.wrapper_stop,.tl_content.wrapper_separator {
 	border-top:0;
 }
 .tl_content.wrapper_start h1 {

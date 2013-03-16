@@ -413,7 +413,8 @@ $GLOBALS['TL_WRAPPERS'] = array
 	(
 		'accordionStop',
 		'sliderStop'
-	)
+	),
+	'separator' => array()
 );
 
 
