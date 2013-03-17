@@ -386,7 +386,7 @@ class DcaExtractor extends \Controller
 		}
 
 		// Keys
-		if (is_array($sql['keys']) && !empty($sql['keys']))
+		if (!empty($sql['keys']) && is_array($sql['keys']))
 		{
 			$this->arrKeys = array();
 

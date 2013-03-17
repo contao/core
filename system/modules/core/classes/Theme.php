@@ -433,7 +433,7 @@ class Theme extends \Backend
 			}
 
 			// Sync the new folder(s)
-			if (is_array($arrNewFolders) && !empty($arrNewFolders))
+			if (!empty($arrNewFolders) && is_array($arrNewFolders))
 			{
 				foreach ($arrNewFolders as $strFolder)
 				{
@@ -787,7 +787,7 @@ class Theme extends \Backend
 		// Add the folders
 		$arrFolders = deserialize($objTheme->folders);
 
-		if (is_array($arrFolders) && !empty($arrFolders))
+		if (!empty($arrFolders) && is_array($arrFolders))
 		{
 			$objFolders = \FilesModel::findMultipleByIds($arrFolders);
 
@@ -987,7 +987,7 @@ class Theme extends \Backend
 			{
 				$arrFiles = ($k == 'orderSRC' || $k == 'orderExt') ? explode(',', $v) : deserialize($v);
 
-				if (is_array($arrFiles) && !empty($arrFiles))
+				if (!empty($arrFiles) && is_array($arrFiles))
 				{
 					$objFiles = \FilesModel::findMultipleByIds($arrFiles);
 

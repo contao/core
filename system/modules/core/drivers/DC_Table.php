@@ -324,7 +324,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		// Custom filter
-		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter']) && !empty($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter']))
+		if (!empty($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter']) && is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter']))
 		{
 			foreach ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter'] as $filter)
 			{
@@ -611,7 +611,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		// Set passed values
-		if (is_array($set) && !empty($set))
+		if (!empty($set) && is_array($set))
 		{
 			$this->set = array_merge($this->set, $set);
 		}
@@ -2080,7 +2080,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Add fields
 		$fields = $session['CURRENT'][$this->strTable];
 
-		if (is_array($fields) && !empty($fields) && \Input::get('fields'))
+		if (!empty($fields) && is_array($fields) && \Input::get('fields'))
 		{
 			$class = 'tl_tbox';
 			$this->checkForTinyMce();
@@ -2416,7 +2416,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Add fields
 		$fields = $session['CURRENT'][$this->strTable];
 
-		if (is_array($fields) && !empty($fields) && \Input::get('fields'))
+		if (!empty($fields) && is_array($fields) && \Input::get('fields'))
 		{
 			$class = 'tl_tbox';
 			$formFields = array();
@@ -2921,7 +2921,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		// Delete all new but incomplete records (tstamp=0)
-		if (is_array($new_records[$this->strTable]) && !empty($new_records[$this->strTable]))
+		if (!empty($new_records[$this->strTable]) && is_array($new_records[$this->strTable]))
 		{
 			$objStmt = $this->Database->execute("DELETE FROM " . $this->strTable . " WHERE id IN(" . implode(',', array_map('intval', $new_records[$this->strTable])) . ") AND tstamp=0");
 
@@ -2950,7 +2950,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		// Delete all records of the child table that are not related to the current table
-		if (is_array($ctable) && !empty($ctable))
+		if (!empty($ctable) && is_array($ctable))
 		{
 			foreach ($ctable as $v)
 			{
@@ -3752,13 +3752,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				$query .= " WHERE " . implode(' AND ', $this->procedure);
 			}
-			if (is_array($this->root) && !empty($this->root))
+			if (!empty($this->root) && is_array($this->root))
 			{
 				$query .= (!empty($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
 			}
 
 			// ORDER BY
-			if (is_array($orderBy) && !empty($orderBy))
+			if (!empty($orderBy) && is_array($orderBy))
 			{
 				$query .= " ORDER BY " . implode(', ', $orderBy);
 			}
@@ -3988,7 +3988,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$query .= " WHERE " . implode(' AND ', $this->procedure);
 		}
 
-		if (is_array($this->root) && !empty($this->root))
+		if (!empty($this->root) && is_array($this->root))
 		{
 			$query .= (!empty($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
 		}
@@ -4663,7 +4663,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$this->limit = ($session['filter'][$filter]['limit'] != '') ? (($session['filter'][$filter]['limit'] == 'all') ? null : $session['filter'][$filter]['limit']) : '0,' . $GLOBALS['TL_CONFIG']['resultsPerPage'];
 			$query = "SELECT COUNT(*) AS count FROM " . $this->strTable;
 
-			if (is_array($this->root) && !empty($this->root))
+			if (!empty($this->root) && is_array($this->root))
 			{
 				$this->procedure[] = 'id IN(' . implode(',', $this->root) . ')';
 			}
@@ -4886,7 +4886,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$arrValues[] = CURRENT_ID;
 			}
 
-			if (is_array($this->root) && !empty($this->root))
+			if (!empty($this->root) && is_array($this->root))
 			{
 				$arrProcedure[] = "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
 			}
@@ -5043,7 +5043,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					}
 
 					// Options callback
-					elseif (is_array($options_callback) && !empty($options_callback))
+					elseif (!empty($options_callback) && is_array($options_callback))
 					{
 						$vv = $options_callback[$vv];
 					}

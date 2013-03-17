@@ -56,7 +56,7 @@ class PurgeData extends \Backend implements \executable
 		}
 
 		// Add potential error messages
-		if (is_array($_SESSION['TL_ERROR']) && !empty($_SESSION['TL_ERROR']))
+		if (!empty($_SESSION['TL_ERROR']) && is_array($_SESSION['TL_ERROR']))
 		{
 			foreach ($_SESSION['TL_ERROR'] as $message)
 			{
@@ -71,7 +71,7 @@ class PurgeData extends \Backend implements \executable
 		{
 			$purge = \Input::post('purge');
 
-			if (is_array($purge) && !empty($purge))
+			if (!empty($purge) && is_array($purge))
 			{
 				foreach ($purge as $group=>$jobs)
 				{

@@ -663,7 +663,7 @@ class tl_article extends Backend
 		}
 
 		// Add the custom layout sections
-		if (is_array($arrCustom) && !empty($arrCustom))
+		if (!empty($arrCustom) && is_array($arrCustom))
 		{
 			$arrSections = array_merge($arrSections, $arrCustom);
 		}

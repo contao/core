@@ -973,7 +973,7 @@ class File extends \System
 		);
 
 		// Extend the default lookup array
-		if (is_array($GLOBALS['TL_MIME']) && !empty($GLOBALS['TL_MIME']))
+		if (!empty($GLOBALS['TL_MIME']) && is_array($GLOBALS['TL_MIME']))
 		{
 			$arrMimeTypes = array_merge($arrMimeTypes, $GLOBALS['TL_MIME']);
 		}

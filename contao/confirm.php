@@ -137,6 +137,7 @@ class Confirm extends Backend
 
 		unset($arrInfo['pid']);
 		unset($arrInfo['clipboard']);
+		unset($arrInfo['ref']);
 		unset($arrInfo['mode']);
 
 		// Template variables

@@ -260,9 +260,11 @@ class Environment
 	 */
 	protected static function httpHost()
 	{
-		$host = $_SERVER['HTTP_HOST'];
-
-		if (empty($host))
+		if (!empty($_SERVER['HTTP_HOST']))
+		{
+			$host = $_SERVER['HTTP_HOST'];
+		}
+		else
 		{
 			$host = $_SERVER['SERVER_NAME'];
 

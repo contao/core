@@ -93,7 +93,7 @@ class ModuleLogin extends \Module
 				{
 					$arrGroups = deserialize($objMember->groups);
 
-					if (is_array($arrGroups) && !empty($arrGroups))
+					if (!empty($arrGroups) && is_array($arrGroups))
 					{
 						$objGroupPage = \MemberGroupModel::findFirstActiveWithJumpToByIds($arrGroups);
 

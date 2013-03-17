@@ -200,7 +200,7 @@ class ModuleArticle extends \Module
 		{
 			$options = deserialize($this->printable);
 
-			if (is_array($options) && !empty($options))
+			if (!empty($options) && is_array($options))
 			{
 				$this->Template->printable = true;
 				$this->Template->printButton = in_array('print', $options);

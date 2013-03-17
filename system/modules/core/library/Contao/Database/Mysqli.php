@@ -119,25 +119,25 @@ class Mysqli extends \Database
 			$arrReturn[$k]['name'] = $v['Field'];
 			$arrReturn[$k]['type'] = $arrChunks[0];
 
-			if (strlen($arrChunks[1]))
+			if (!empty($arrChunks[1]))
 			{
 				$arrChunks[1] = str_replace(array('(', ')'), array('', ''), $arrChunks[1]);
 				$arrSubChunks = explode(',', $arrChunks[1]);
 
 				$arrReturn[$k]['length'] = trim($arrSubChunks[0]);
 
-				if (strlen($arrSubChunks[1]))
+				if (!empty($arrSubChunks[1]))
 				{
 					$arrReturn[$k]['precision'] = trim($arrSubChunks[1]);
 				}
 			}
 
-			if (strlen($arrChunks[2]))
+			if (!empty($arrChunks[2]))
 			{
 				$arrReturn[$k]['attributes'] = trim($arrChunks[2]);
 			}
 
-			if (strlen($v['Key']))
+			if (!empty($v['Key']))
 			{
 				switch ($v['Key'])
 				{

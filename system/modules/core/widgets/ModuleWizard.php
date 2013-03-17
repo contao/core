@@ -105,7 +105,7 @@ class ModuleWizard extends \Widget
 		$arrSections = deserialize($objRow->sections);
 
 		// Add custom page sections
-		if (is_array($arrSections) && !empty($arrSections))
+		if (!empty($arrSections) && is_array($arrSections))
 		{
 			$cols = array_merge($cols, $arrSections);
 		}

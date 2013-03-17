@@ -304,7 +304,7 @@ class Main extends Backend
 		$this->Template->isPopup = Input::get('popup');
 
 		// Front end preview links
-		if (CURRENT_ID != '')
+		if (defined('CURRENT_ID') && CURRENT_ID != '')
 		{
 			// Pages
 			if (Input::get('do') == 'page')

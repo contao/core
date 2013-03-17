@@ -1619,7 +1619,7 @@ abstract class Controller extends \System
 		$strScripts = '';
 
 		// Add the internal jQuery scripts
-		if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
+		if (!empty($GLOBALS['TL_JQUERY']) && is_array($GLOBALS['TL_JQUERY']))
 		{
 			foreach (array_unique($GLOBALS['TL_JQUERY']) as $script)
 			{
@@ -1631,7 +1631,7 @@ abstract class Controller extends \System
 		$strScripts = '';
 
 		// Add the internal MooTools scripts
-		if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
+		if (!empty($GLOBALS['TL_MOOTOOLS']) && is_array($GLOBALS['TL_MOOTOOLS']))
 		{
 			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
 			{
@@ -1643,7 +1643,7 @@ abstract class Controller extends \System
 		$strScripts = '';
 
 		// Add the syntax highlighter scripts
-		if (is_array($GLOBALS['TL_HIGHLIGHTER']) && !empty($GLOBALS['TL_HIGHLIGHTER']))
+		if (!empty($GLOBALS['TL_HIGHLIGHTER']) && is_array($GLOBALS['TL_HIGHLIGHTER']))
 		{
 			$objCombiner = new \Combiner();
 
@@ -1670,7 +1670,7 @@ abstract class Controller extends \System
 		$objCombiner = new \Combiner();
 
 		// Add the CSS framework style sheets
-		if (is_array($GLOBALS['TL_FRAMEWORK_CSS']) && !empty($GLOBALS['TL_FRAMEWORK_CSS']))
+		if (!empty($GLOBALS['TL_FRAMEWORK_CSS']) && is_array($GLOBALS['TL_FRAMEWORK_CSS']))
 		{
 			foreach (array_unique($GLOBALS['TL_FRAMEWORK_CSS']) as $stylesheet)
 			{
@@ -1679,7 +1679,7 @@ abstract class Controller extends \System
 		}
 
 		// Add the internal style sheets
-		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
+		if (!empty($GLOBALS['TL_CSS']) && is_array($GLOBALS['TL_CSS']))
 		{
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
@@ -1697,7 +1697,7 @@ abstract class Controller extends \System
 		}
 
 		// Add the user style sheets
-		if (is_array($GLOBALS['TL_USER_CSS']) && !empty($GLOBALS['TL_USER_CSS']))
+		if (!empty($GLOBALS['TL_USER_CSS']) && is_array($GLOBALS['TL_USER_CSS']))
 		{
 			foreach (array_unique($GLOBALS['TL_USER_CSS']) as $stylesheet)
 			{
@@ -1729,7 +1729,7 @@ abstract class Controller extends \System
 		$strScripts = '';
 
 		// Add the internal scripts
-		if (is_array($GLOBALS['TL_JAVASCRIPT']) && !empty($GLOBALS['TL_JAVASCRIPT']))
+		if (!empty($GLOBALS['TL_JAVASCRIPT']) && is_array($GLOBALS['TL_JAVASCRIPT']))
 		{
 			$objCombiner = new \Combiner();
 
@@ -1755,7 +1755,7 @@ abstract class Controller extends \System
 		}
 
 		// Add the internal <head> tags
-		if (is_array($GLOBALS['TL_HEAD']) && !empty($GLOBALS['TL_HEAD']))
+		if (!empty($GLOBALS['TL_HEAD']) && is_array($GLOBALS['TL_HEAD']))
 		{
 			foreach (array_unique($GLOBALS['TL_HEAD']) as $head)
 			{

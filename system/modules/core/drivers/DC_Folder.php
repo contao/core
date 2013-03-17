@@ -1537,7 +1537,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$fields = $session['CURRENT'][$this->strTable];
 
 		// Add fields
-		if (is_array($fields) && !empty($fields) && \Input::get('fields'))
+		if (!empty($fields) && is_array($fields) && \Input::get('fields'))
 		{
 			$class = 'tl_tbox';
 

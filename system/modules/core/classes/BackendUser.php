@@ -354,7 +354,7 @@ class BackendUser extends \User
 		$depends = array('modules', 'themes', 'pagemounts', 'alpty', 'filemounts', 'fop', 'forms', 'formp');
 
 		// HOOK: Take custom permissions
-		if (is_array($GLOBALS['TL_PERMISSIONS']) && !empty($GLOBALS['TL_PERMISSIONS']))
+		if (!empty($GLOBALS['TL_PERMISSIONS']) && is_array($GLOBALS['TL_PERMISSIONS']))
 		{
 		    $depends = array_merge($depends, $GLOBALS['TL_PERMISSIONS']);
 		}
@@ -492,7 +492,7 @@ class BackendUser extends \User
 							$arrModules[$strGroupName]['modules'][$strModuleName] = $arrModuleConfig;
 							$arrModules[$strGroupName]['modules'][$strModuleName]['title'] = specialchars($GLOBALS['TL_LANG']['MOD'][$strModuleName][1]);
 							$arrModules[$strGroupName]['modules'][$strModuleName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strModuleName]) ? $GLOBALS['TL_LANG']['MOD'][$strModuleName][0] : $GLOBALS['TL_LANG']['MOD'][$strModuleName]) != false) ? $label : $strModuleName;
-							$arrModules[$strGroupName]['modules'][$strModuleName]['icon'] = ($arrModuleConfig['icon'] != '') ? sprintf(' style="background-image:url(\'%s%s\')"', TL_ASSETS_URL, $arrModuleConfig['icon']) : '';
+							$arrModules[$strGroupName]['modules'][$strModuleName]['icon'] = !empty($arrModuleConfig['icon']) ? sprintf(' style="background-image:url(\'%s%s\')"', TL_ASSETS_URL, $arrModuleConfig['icon']) : '';
 							$arrModules[$strGroupName]['modules'][$strModuleName]['class'] = 'navigation ' . $strModuleName;
 							$arrModules[$strGroupName]['modules'][$strModuleName]['href']  = \Environment::get('script') . '?do=' . $strModuleName . '&amp;ref=' . TL_REFERER_ID;
 

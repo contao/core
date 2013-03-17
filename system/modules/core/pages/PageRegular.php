@@ -514,7 +514,7 @@ class PageRegular extends \Frontend
 		$arrExternal = deserialize($objLayout->external);
 
 		// External style sheets
-		if (is_array($arrExternal) && !empty($arrExternal))
+		if (!empty($arrExternal) && is_array($arrExternal))
 		{
 			// Consider the sorting order (see #5038)
 			if ($objLayout->orderExt != '')
@@ -573,7 +573,7 @@ class PageRegular extends \Frontend
 		$calendarfeeds = deserialize($objLayout->calendarfeeds);
 
 		// Add newsfeeds
-		if (is_array($newsfeeds) && !empty($newsfeeds))
+		if (!empty($newsfeeds) && is_array($newsfeeds))
 		{
 			$objFeeds = \NewsFeedModel::findByIds($newsfeeds);
 
@@ -588,7 +588,7 @@ class PageRegular extends \Frontend
 		}
 
 		// Add calendarfeeds
-		if (is_array($calendarfeeds) && !empty($calendarfeeds))
+		if (!empty($calendarfeeds) && is_array($calendarfeeds))
 		{
 			$objFeeds = \CalendarFeedModel::findByIds($calendarfeeds);
 
