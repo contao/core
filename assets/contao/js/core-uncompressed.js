@@ -664,34 +664,6 @@ var AjaxRequest =
 		if (box) {
 			box.setStyle('display', 'none');
 		}
-	},
-
-	/**
-	 * Reload all file trees (input field)
-	 */
-	reloadFiletrees: function () {
-		$$('.filetree').each(function(el) {
-			var name = el.id,
-				field = name.replace(/_[0-9]+$/, '');
-
-			new Request.Contao({
-				evalScripts: true,
-				onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-				onSuccess: function(txt, json) {
-
-					// Preserve the "reset selection" entry
-					var ul = $(el.id + '_parent').getFirst('ul'),
-						li = ul.getLast('li');
-
-					ul.set('html', txt);
-					li.inject(ul, 'bottom');
-					AjaxRequest.hideBox();
-
-					// HOOK
-					window.fireEvent('ajax_change');
-				}
-			}).post({'action':'loadFiletree', 'field':field, 'name':name, 'REQUEST_TOKEN':Contao.request_token});
-		});
 	}
 };
 

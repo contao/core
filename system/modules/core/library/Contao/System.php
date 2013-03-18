@@ -299,9 +299,8 @@ abstract class System
 	 */
 	public static function getReferer($blnEncodeAmpersands=false, $strTable=null)
 	{
-		$key = (\Environment::get('script') == 'contao/files.php') ? 'fileReferer' : 'referer';
-
 		$ref = \Input::get('ref');
+		$key = \Input::get('popup') ? 'popupReferer' : 'referer';
 		$session = \Session::getInstance()->get($key);
 
 		// Unique referer ID

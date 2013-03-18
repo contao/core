@@ -34,6 +34,9 @@
 
   <div id="container">
     <div id="main">
+      <div id="manager">
+        <a href="<?php echo $this->managerHref; ?>" class="open"><?php echo $this->manager; ?></a>
+      </div>
       <form action="<?php echo $this->action; ?>" method="post">
         <div id="search">
           <input type="hidden" name="FORM_SUBMIT" value="item_selector">

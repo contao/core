@@ -202,6 +202,13 @@ class Main extends Backend
 			$this->Template->title = $this->Template->headline;
 		}
 
+		// File picker reference
+		if (\Input::get('popup') && $this->Session->get('filePickerRef'))
+		{
+			$this->Template->managerHref = $this->Session->get('filePickerRef');
+			$this->Template->manager = $GLOBALS['TL_LANG']['MSC']['goBack'];
+		}
+
 		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];

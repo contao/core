@@ -365,7 +365,7 @@ h2.sub_headline_index {
 	margin-top:0;
 }
 #search {
-	margin:9px 18px -9px;
+	margin:18px 18px -9px;
 	text-align:right;
 }
 #search .tl_text {
@@ -1060,6 +1060,20 @@ ul.sgallery .gimage {
 }
 ul.sortable li {
 	cursor:move;
+}
+#manager {
+	margin-top:9px;
+	background:#f3f3f3;
+	border-bottom:1px solid #bbb;
+	padding:3px 3px 4px;
+}
+#manager .open {
+	padding:2px 0 3px 20px;
+	background:url("images/manager.gif") left center no-repeat;
+}
+#manager .close {
+	padding:2px 0 3px 20px;
+	background:url("images/back.gif") left center no-repeat;
 }
 
 /* Navigation icons */

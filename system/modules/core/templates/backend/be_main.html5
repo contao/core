@@ -92,6 +92,11 @@
 
 	<div id="main">
       <h1 class="main_headline"><?php echo $this->headline; ?></h1>
+      <?php if ($this->managerHref): ?>
+        <div id="manager">
+          <a href="<?php echo $this->managerHref; ?>" class="close"><?php echo $this->manager; ?></a>
+        </div>
+      <?php endif; ?>
       <?php if ($this->error): ?>
         <p class="tl_gerror"><?php echo $this->error; ?></p>
       <?php endif; ?>
@@ -114,15 +119,6 @@
       <script>Backend.vScrollTo(<?php echo $this->pageOffset; ?>)</script>
       <?php System::setCookie('BE_PAGE_OFFSET', 0, 0); ?>
     <?php endif; ?>
-
-    <script>
-      Contao.enableFiletreeReload = function() {
-        window.addEvent('sm_hide', function() {
-          AjaxRequest.reloadFiletrees();
-          window.removeEvents('sm_hide');
-        });
-      };
-    </script>
   <?php endif; ?>
 
   <?php echo $this->mootools; ?>

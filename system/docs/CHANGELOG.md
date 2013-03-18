@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Improved
+Link the file/page picker and file/page manager (see #4856).
+
 ### Changed
 Moved `DC_Folder::sync()` to `Automator::syncFiles()` (see #5099).
 

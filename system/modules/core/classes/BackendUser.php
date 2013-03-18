@@ -84,11 +84,7 @@ class BackendUser extends \User
 
 			if (\Environment::get('script') == 'contao/main.php')
 			{
-				$key = 'referer';
-			}
-			elseif (\Environment::get('script') == 'contao/files.php')
-			{
-				$key = 'fileReferer';
+				$key = \Input::get('popup') ? 'popupReferer' : 'referer';
 			}
 
 			if ($key !== null)

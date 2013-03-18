@@ -85,6 +85,9 @@ class PagePicker extends Backend
 			$this->objAjax->executePostActions($objDca);
 		}
 
+		$this->Session->set('filePickerRef', \Environment::get('request'));
+
+		// Prepare the widget
 		$objPageTree = new $GLOBALS['BE_FFL']['pageSelector'](array(
 			'strId'    => $strField,
 			'strTable' => $strTable,
@@ -107,6 +110,8 @@ class PagePicker extends Backend
 		$this->Template->search = $GLOBALS['TL_LANG']['MSC']['search'];
 		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->value = $this->Session->get('page_selector_search');
+		$this->Template->manager = $GLOBALS['TL_LANG']['MSC']['pageManager'];
+		$this->Template->managerHref = 'contao/main.php?do=page&amp;popup=1';
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
