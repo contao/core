@@ -906,7 +906,7 @@ class StyleSheets extends \Backend
 		}
 
 		// CSS3PIE
-		if ($blnNeedsPie)
+		if ($blnNeedsPie && !$parent['disablePie'])
 		{
 			$return .= $lb . 'behavior:url(\'assets/css3pie/'.CSS3PIE.'/PIE.htc\');';
 		}

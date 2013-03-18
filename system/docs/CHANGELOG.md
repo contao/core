@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### New
+Added an option to disable CSS3PIE in the style sheet settings (see #4985).
+
 ### Improved
 Link the file/page picker and file/page manager (see #4856).
 
