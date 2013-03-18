@@ -2049,30 +2049,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Create an initial version of a record
-	 *
-	 * @param string  $strTable The table name
-	 * @param integer $intId    The ID of the element to be versioned
-	 */
-	protected function createInitialVersion($strTable, $intId)
-	{
-		if (!$GLOBALS['TL_DCA'][$strTable]['config']['enableVersioning'])
-		{
-			return;
-		}
-
-		$objVersion = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_version WHERE fromTable=? AND pid=?")
-									 ->limit(1)
-									 ->executeUncached($strTable, $intId);
-
-		if ($objVersion->count < 1)
-		{
-			$this->createNewVersion($strTable, $intId);
-		}
-	}
-
-
-	/**
 	 * Redirect to a front end page
 	 *
 	 * @param integer $intPage    The page ID
@@ -2868,6 +2844,21 @@ abstract class Controller extends \System
 	public static function findFrontendModule($strName)
 	{
 		return \Module::findClass($strName);
+	}
+
+
+	/**
+	 * Create an initial version of a record
+	 *
+	 * @param string  $strTable The table name
+	 * @param integer $intId    The ID of the element to be versioned
+	 *
+	 * @deprecated Use Versions->initialize() instead
+	 */
+	protected function createInitialVersion($strTable, $intId)
+	{
+		$objVersions = new \Versions($strTable, $intId);
+		$objVersions->initialize();
 	}
 
 

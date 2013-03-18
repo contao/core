@@ -670,7 +670,8 @@ class tl_form_field extends Backend
 		Input::setGet('act', 'toggle');
 		$this->checkPermission();
 
-		$this->createInitialVersion('tl_form_field', $intId);
+		$objVersions = new Versions('tl_form_field', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_form_field']['fields']['invisible']['save_callback']))
@@ -686,7 +687,7 @@ class tl_form_field extends Backend
 		$this->Database->prepare("UPDATE tl_form_field SET tstamp=". time() .", invisible='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_form_field', $intId);
+		$objVersions->create();
 		$this->log('A new version of record "tl_form_field.id='.$intId.'" has been created'.$this->getParentEntries('tl_form_field', $intId), 'tl_form_field toggleVisibility()', TL_GENERAL);
 	}
 }

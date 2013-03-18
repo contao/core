@@ -1656,8 +1656,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		$this->objActiveRecord = $objRow;
-		$this->createInitialVersion($this->strTable, $this->intId);
 		$this->checkForTinyMce();
+
+		$objVersions = new Versions($this->strTable, $this->intId);
+		$objVersions->initialize();
 
 		// Build an array from boxes and rows
 		$this->strPalette = $this->getPalette();
@@ -1861,7 +1863,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			// Save the current version
 			if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
 			{
-				$this->createNewVersion($this->strTable, $this->intId);
+				$objVersions->create();
 
 				// Call the onversion_callback
 				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
@@ -2026,7 +2028,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$this->blnCreateNewVersion = false;
 				$this->strPalette = trimsplit('[;,]', $this->getPalette());
 
-				$this->createInitialVersion($this->strTable, $this->intId);
+				$objVersions = new Versions($this->strTable, $this->intId);
+				$objVersions->initialize();
 
 				// Add meta fields if the current user is an administrator
 				if ($this->User->isAdmin)
@@ -2158,7 +2161,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					// Create a new version
 					if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
 					{
-						$this->createNewVersion($this->strTable, $this->intId);
+						$objVersions->create();
 
 						// Call the onversion_callback
 						if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
@@ -2371,7 +2374,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 					// Store the active record
 					$this->objActiveRecord = $objRow;
-					$this->createInitialVersion($this->strTable, $this->intId);
+
+					$objVersions = new Versions($this->strTable, $this->intId);
+					$objVersions->initialize();
 
 					// Store all fields
 					foreach ($fields as $v)
@@ -2409,7 +2414,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						// Create a new version
 						if ($this->blnCreateNewVersion)
 						{
-							$this->createNewVersion($this->strTable, $this->intId);
+							$objVersions->create();
 
 							// Call the onversion_callback
 							if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))

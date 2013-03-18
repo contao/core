@@ -975,7 +975,8 @@ class tl_calendar_events extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->createInitialVersion('tl_calendar_events', $intId);
+		$objVersions = new Versions('tl_calendar_events', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_calendar_events']['fields']['published']['save_callback']))
@@ -991,7 +992,8 @@ class tl_calendar_events extends Backend
 		$this->Database->prepare("UPDATE tl_calendar_events SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_calendar_events', $intId);
+		$objVersions->create();
+		$this->log('A new version of record "tl_calendar_events.id='.$intId.'" has been created'.$this->getParentEntries('tl_calendar_events', $intId), 'tl_calendar_events toggleVisibility()', TL_GENERAL);
 
 		// Update the RSS feed (for some reason it does not work without sleep(1))
 		sleep(1);

@@ -1666,7 +1666,8 @@ class tl_page extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->createInitialVersion('tl_page', $intId);
+		$objVersions = new Versions('tl_page', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_page']['fields']['published']['save_callback']))
@@ -1682,6 +1683,7 @@ class tl_page extends Backend
 		$this->Database->prepare("UPDATE tl_page SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_page', $intId);
+		$objVersions->create();
+		$this->log('A new version of record "tl_page.id='.$intId.'" has been created'.$this->getParentEntries('tl_page', $intId), 'tl_page toggleVisibility()', TL_GENERAL);
 	}
 }

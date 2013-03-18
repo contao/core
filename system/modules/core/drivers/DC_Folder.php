@@ -1396,7 +1396,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Save the current version
 			if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
 			{
-				$this->createNewVersion($this->strTable, $objFile->id);
+				$objVersions->create();
 
 				// Call the onversion_callback
 				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
@@ -1505,7 +1505,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->objActiveRecord = $objFile;
 				}
 
-				$this->createInitialVersion($this->strTable, $objFile->id);
+				$objVersions = new Versions($this->strTable, $objFile->id);
+				$objVersions->initialize();
 
 				$return .= '
 <div class="'.$class.'">';
@@ -1585,7 +1586,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					// Create a new version
 					if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
 					{
-						$this->createNewVersion($this->strTable, $objFile->id);
+						$objVersions->create();
 
 						// Call the onversion_callback
 						if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))

@@ -232,7 +232,8 @@ class ListWizard extends \Widget
 				}
 			}
 
-			$this->createNewVersion($dc->table, \Input::get('id'));
+			$objVersions = new \Versions($dc->table, \Input::get('id'));
+			$objVersions->create();
 
 			$this->Database->prepare("UPDATE " . $dc->table . " SET listitems=? WHERE id=?")
 						   ->execute(serialize($arrList), \Input::get('id'));

@@ -55,6 +55,27 @@ class Versions extends \Backend
 
 
 	/**
+	 * Create the initial version of a record
+	 */
+	public function initialize()
+	{
+		if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
+		{
+			return;
+		}
+
+		$objVersion = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_version WHERE fromTable=? AND pid=?")
+									 ->limit(1)
+									 ->executeUncached($this->strTable, $this->intPid);
+
+		if ($objVersion->count < 1)
+		{
+			$this->create();
+		}
+	}
+
+
+	/**
 	 * Create a new version of a record
 	 */
 	public function create()
