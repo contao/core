@@ -817,7 +817,8 @@ class tl_news extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->createInitialVersion('tl_news', $intId);
+		$objVersions = new Versions('tl_news', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_news']['fields']['featured']['save_callback']))
@@ -833,7 +834,8 @@ class tl_news extends Backend
 		$this->Database->prepare("UPDATE tl_news SET tstamp=". time() .", featured='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_news', $intId);
+		$objVersions->create();
+		$this->log('A new version of record "tl_news.id='.$intId.'" has been created'.$this->getParentEntries('tl_news', $intId), 'tl_news toggleFeatured()', TL_GENERAL);
 	}
 
 
@@ -891,7 +893,8 @@ class tl_news extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->createInitialVersion('tl_news', $intId);
+		$objVersions = new Versions('tl_news', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_news']['fields']['published']['save_callback']))
@@ -907,7 +910,8 @@ class tl_news extends Backend
 		$this->Database->prepare("UPDATE tl_news SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_news', $intId);
+		$objVersions->create();
+		$this->log('A new version of record "tl_news.id='.$intId.'" has been created'.$this->getParentEntries('tl_news', $intId), 'tl_news toggleVisibility()', TL_GENERAL);
 
 		// Update the RSS feed (for some reason it does not work without sleep(1))
 		sleep(1);

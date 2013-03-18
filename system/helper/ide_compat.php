@@ -58,6 +58,7 @@ namespace  {
 	class RebuildIndex extends Contao\RebuildIndex {}
 	class StyleSheets extends Contao\StyleSheets {}
 	class Theme extends Contao\Theme {}
+	class Versions extends Contao\Versions {}
 	class DC_File extends Contao\DC_File {}
 	class DC_Folder extends Contao\DC_Folder {}
 	class DC_Table extends Contao\DC_Table {}

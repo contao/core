@@ -171,75 +171,9 @@ class Main extends Backend
 			}
 		}
 
-		$arrVersions = array();
+		// Add the versions overview
+		Versions::addToTemplate($objTemplate);
 
-		// Get the total number of versions
-		$objTotal = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_version" . (!$this->User->isAdmin ? " WHERE userid=?" : ""))
-								   ->execute($this->User->id);
-
-		$intPage   = Input::get('vp') ?: 1;
-		$intOffset = ($intPage - 1) * 30;
-		$intLast   = ceil($objTotal->count / 30);
-
-		// Validate the page number
-		if ($intPage < 1 || $intPage > $intLast)
-		{
-			header('HTTP/1.1 404 Not Found');
-		}
-
-		// Create the pagination menu
-		$objPagination = new Pagination($objTotal->count, 30, 7, 'vp', new \BackendTemplate('be_pagination'));
-		$objTemplate->pagination = $objPagination->generate();
-
-		// Get the versions
-		$objVersions = $this->Database->prepare("SELECT pid, tstamp, version, fromTable, username, userid, description, editUrl FROM tl_version v" . (!$this->User->isAdmin ? " WHERE userid=?" : "") . " ORDER BY tstamp DESC, pid, version DESC")
-									  ->limit(30, $intOffset)
-									  ->execute($this->User->id);
-
-		while ($objVersions->next())
-		{
-			$arrRow = $objVersions->row();
-
-			// Add some parameters
-			$arrRow['from'] = max(($objVersions->version - 1), 1); // see #4828
-			$arrRow['to'] = $objVersions->version;
-			$arrRow['date'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objVersions->tstamp);
-			$arrRow['description'] = String::substr($arrRow['description'], 32);
-
-			if ($arrRow['editUrl'] != '')
-			{
-				$arrRow['editUrl'] = preg_replace('/&(amp;)?rt=[a-f0-9]+/', '&amp;rt=' . REQUEST_TOKEN, ampersand($arrRow['editUrl']));
-			}
-
-			$arrVersions[] = $arrRow;
-		}
-
-		$intCount = -1;
-		$arrVersions = array_values($arrVersions);
-
-		// Add the "even" and "odd" classes
-		foreach ($arrVersions as $k=>$v)
-		{
-			$arrVersions[$k]['class'] = (++$intCount%2 == 0) ? 'even' : 'odd';
-
-			try
-			{
-				// Mark deleted versions (see #4336)
-				$objDeleted = $this->Database->prepare("SELECT COUNT(*) AS count FROM " . $v['fromTable'] . " WHERE id=?")
-											 ->execute($v['pid']);
-
-				$arrVersions[$k]['deleted'] = ($objDeleted->count < 1);
-			}
-			catch (Exception $e)
-			{
-				// Probably a disabled module
-				--$intCount;
-				unset($arrVersions[$k]);
-			}
-
-		}
-
-		$objTemplate->versions = $arrVersions;
 		$objTemplate->welcome = sprintf($GLOBALS['TL_LANG']['MSC']['welcomeTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
 		$objTemplate->showDifferences = specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['showDifferences']));
 		$objTemplate->systemMessages = $GLOBALS['TL_LANG']['MSC']['systemMessages'];

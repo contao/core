@@ -873,7 +873,8 @@ class tl_article extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->createInitialVersion('tl_article', $intId);
+		$objVersions = new Versions('tl_article', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_article']['fields']['published']['save_callback']))
@@ -889,6 +890,7 @@ class tl_article extends Backend
 		$this->Database->prepare("UPDATE tl_article SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_article', $intId);
+		$objVersions->create();
+		$this->log('A new version of record "tl_article.id='.$intId.'" has been created'.$this->getParentEntries('tl_article', $intId), 'tl_article toggleVisibility()', TL_GENERAL);
 	}
 }

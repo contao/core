@@ -785,7 +785,8 @@ class tl_style extends Backend
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{
-		$this->createInitialVersion('tl_style', $intId);
+		$objVersions = new Versions('tl_style', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_style']['fields']['invisible']['save_callback']))
@@ -801,7 +802,7 @@ class tl_style extends Backend
 		$this->Database->prepare("UPDATE tl_style SET tstamp=". time() .", invisible='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_style', $intId);
+		$objVersions->create();
 		$this->log('A new version of record "tl_style.id='.$intId.'" has been created'.$this->getParentEntries('tl_style', $intId), 'tl_style toggleVisibility()', TL_GENERAL);
 
 		// Recreate the style sheet

@@ -623,7 +623,8 @@ class tl_comments extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->createInitialVersion('tl_comments', $intId);
+		$objVersions = new Versions('tl_comments', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_comments']['fields']['published']['save_callback']))
@@ -639,6 +640,7 @@ class tl_comments extends Backend
 		$this->Database->prepare("UPDATE tl_comments SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_comments', $intId);
+		$objVersions->create();
+		$this->log('A new version of record "tl_comments.id='.$intId.'" has been created'.$this->getParentEntries('tl_comments', $intId), 'tl_comments toggleVisibility()', TL_GENERAL);
 	}
 }

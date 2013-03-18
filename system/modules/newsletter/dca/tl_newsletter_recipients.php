@@ -395,7 +395,8 @@ class tl_newsletter_recipients extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->createInitialVersion('tl_newsletter_recipients', $intId);
+		$objVersions = new Versions('tl_newsletter_recipients', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_newsletter_recipients']['fields']['active']['save_callback']))
@@ -411,6 +412,7 @@ class tl_newsletter_recipients extends Backend
 		$this->Database->prepare("UPDATE tl_newsletter_recipients SET tstamp=". time() .", active='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_newsletter_recipients', $intId);
+		$objVersions->create();
+		$this->log('A new version of record "tl_newsletter_recipients.id='.$intId.'" has been created'.$this->getParentEntries('tl_newsletter_recipients', $intId), 'tl_newsletter_recipients toggleVisibility()', TL_GENERAL);
 	}
 }
