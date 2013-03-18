@@ -1215,47 +1215,18 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		$this->blnCreateNewVersion = false;
+		$objVersions = new \Versions($this->strTable, $objFile->id);
 
-		// Change version
-		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && \Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
+		// Compare versions
+		if (\Input::get('versions'))
 		{
-			$objData = $this->Database->prepare("SELECT * FROM tl_version WHERE fromTable=? AND pid=? AND version=?")
-									  ->limit(1)
-									  ->execute($this->strTable, $objFile->id, \Input::post('version'));
+			$objVersions->compare();
+		}
 
-			if ($objData->numRows)
-			{
-				$data = deserialize($objData->data);
-
-				if (is_array($data))
-				{
-					$this->Database->prepare("UPDATE " . $objData->fromTable . " %s WHERE id=?")
-								   ->set($data)
-								   ->execute($objFile->id);
-
-					$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=?")
-								   ->execute($objFile->id);
-
-					$this->Database->prepare("UPDATE tl_version SET active=1 WHERE pid=? AND version=?")
-								   ->execute($objFile->id, \Input::post('version'));
-
-					$this->log('Version '.\Input::post('version').' of record "'.$this->strTable.'.id='.$objFile->id.'" has been restored', 'DC_Table edit()', TL_GENERAL);
-
-					// Trigger the onrestore_callback
-					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback']))
-					{
-						foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback'] as $callback)
-						{
-							if (is_array($callback))
-							{
-								$this->import($callback[0]);
-								$this->$callback[0]->$callback[1]($objFile->id, $this->strTable, $data, \Input::post('version'));
-							}
-						}
-					}
-				}
-			}
-
+		// Restore a version
+		if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
+		{
+			$objVersions->restore(\Input::post('version'));
 			$this->reload();
 		}
 
@@ -1365,41 +1336,14 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 		}
 
-		$version = '';
-
-		// Check versions
+		// Versions overview
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
 		{
-			$objVersion = $this->Database->prepare("SELECT tstamp, version, username, active FROM tl_version WHERE fromTable=? AND pid=? ORDER BY version DESC")
-									     ->execute($this->strTable, $objFile->id);
-
-			if ($objVersion->numRows > 1)
-			{
-				$versions = '';
-
-				while ($objVersion->next())
-				{
-					$versions .= '
-  <option value="'.$objVersion->version.'"'.($objVersion->active ? ' selected="selected"' : '').'>'.$GLOBALS['TL_LANG']['MSC']['version'].' '.$objVersion->version.' ('.\Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objVersion->tstamp).') '.$objVersion->username.'</option>';
-				}
-
-				$version = '
-<div class="tl_version_panel">
-
-<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_version" class="tl_form" method="post">
-<div class="tl_formbody">
-<input type="hidden" name="FORM_SUBMIT" value="tl_version">
-<input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
-<select name="version" class="tl_select">'.$versions.'
-</select>
-<input type="submit" name="showVersion" id="showVersion" class="tl_submit" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['restore']).'">
-<a href="contao/diff.php?table='.$this->strTable.'&amp;pid='.$objFile->id.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']).'" onclick="Backend.openModalIframe({\'width\':860,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['showDifferences'])).'\',\'url\':this.href});return false">'.\Image::getHtml('diff.gif').'</a>
-</div>
-</form>
-
-</div>
-';
-			}
+			$version = $objVersions->renderDropdown();
+		}
+		else
+		{
+			$version = '';
 		}
 
 		// Add some buttons and end the form

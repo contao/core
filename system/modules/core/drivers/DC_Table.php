@@ -1628,66 +1628,18 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		$this->values[] = $this->intId;
 		$this->procedure[] = 'id=?';
 		$this->blnCreateNewVersion = false;
+		$objVersions = new \Versions($this->strTable, $this->intId);
 
 		// Compare versions
 		if (\Input::get('versions'))
 		{
-			$this->import('Versions');
-			$this->Versions->compare($this->strTable, $this->intId);
+			$objVersions->compare();
 		}
 
-		// Change version
-		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && \Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
+		// Restore a version
+		if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
 		{
-			$objData = $this->Database->prepare("SELECT * FROM tl_version WHERE fromTable=? AND pid=? AND version=?")
-									  ->limit(1)
-									  ->execute($this->strTable, $this->intId, \Input::post('version'));
-
-			if ($objData->numRows)
-			{
-				$data = deserialize($objData->data);
-
-				if (is_array($data))
-				{
-					// Get the currently available fields
-					$arrFields = array_flip($this->Database->getFieldnames($this->strTable));
-
-					// Unset fields that do not exist (see #5219)
-					foreach (array_keys($data) as $k)
-					{
-						if (!isset($arrFields[$k]))
-						{
-							unset($data[$k]);
-						}
-					}
-
-					$this->Database->prepare("UPDATE " . $objData->fromTable . " %s WHERE id=?")
-								   ->set($data)
-								   ->execute($this->intId);
-
-					$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=?")
-								   ->execute($this->intId);
-
-					$this->Database->prepare("UPDATE tl_version SET active=1 WHERE pid=? AND version=?")
-								   ->execute($this->intId, \Input::post('version'));
-
-					$this->log('Version '.\Input::post('version').' of record "'.$this->strTable.'.id='.$this->intId.'" has been restored'.$this->getParentEntries($this->strTable, $this->intId), 'DC_Table edit()', TL_GENERAL);
-
-					// Trigger the onrestore_callback
-					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback']))
-					{
-						foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback'] as $callback)
-						{
-							if (is_array($callback))
-							{
-								$this->import($callback[0]);
-								$this->$callback[0]->$callback[1]($this->intId, $this->strTable, $data, \Input::post('version'));
-							}
-						}
-					}
-				}
-			}
-
+			$objVersions->restore(\Input::post('version'));
 			$this->reload();
 		}
 
@@ -1841,41 +1793,14 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 		}
 
-		$version = '';
-
-		// Check versions
+		// Versions overview
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
 		{
-			$objVersion = $this->Database->prepare("SELECT tstamp, version, username, active FROM tl_version WHERE fromTable=? AND pid=? ORDER BY version DESC")
-									     ->execute($this->strTable, $this->intId);
-
-			if ($objVersion->numRows > 1)
-			{
-				$versions = '';
-
-				while ($objVersion->next())
-				{
-					$versions .= '
-  <option value="'.$objVersion->version.'"'.($objVersion->active ? ' selected="selected"' : '').'>'.$GLOBALS['TL_LANG']['MSC']['version'].' '.$objVersion->version.' ('.\Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objVersion->tstamp).') '.$objVersion->username.'</option>';
-				}
-
-				$version = '
-<div class="tl_version_panel">
-
-<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_version" class="tl_form" method="post">
-<div class="tl_formbody">
-<input type="hidden" name="FORM_SUBMIT" value="tl_version">
-<input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
-<select name="version" class="tl_select">'.$versions.'
-</select>
-<input type="submit" name="showVersion" id="showVersion" class="tl_submit" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['restore']).'">
-<a href="'.$this->addToUrl('versions=1&popup=1').'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']).'" onclick="Backend.openModalIframe({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['showDifferences'])).'\',\'url\':this.href});return false">'.\Image::getHtml('diff.gif').'</a>
-</div>
-</form>
-
-</div>
-';
-			}
+			$version = $objVersions->renderDropdown();
+		}
+		else
+		{
+			$version = '';
 		}
 
 		// Add some buttons and end the form

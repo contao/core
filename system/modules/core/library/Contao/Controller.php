@@ -2073,79 +2073,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Create a new version of a record
-	 *
-	 * @param string  $strTable The table name
-	 * @param integer $intId    The ID of the element to be versioned
-	 */
-	protected function createNewVersion($strTable, $intId)
-	{
-		if (!$GLOBALS['TL_DCA'][$strTable]['config']['enableVersioning'])
-		{
-			return;
-		}
-
-		// Delete old versions from the database
-		$this->Database->prepare("DELETE FROM tl_version WHERE tstamp<?")
-					   ->execute((time() - $GLOBALS['TL_CONFIG']['versionPeriod']));
-
-		// Get the new record
-		$objRecord = $this->Database->prepare("SELECT * FROM " . $strTable . " WHERE id=?")
-									->limit(1)
-									->executeUncached($intId);
-
-		if ($objRecord->numRows < 1 || $objRecord->tstamp < 1)
-		{
-			return;
-		}
-
-		$intVersion = 1;
-		$this->import('BackendUser', 'User');
-
-		$objVersion = $this->Database->prepare("SELECT MAX(version) AS version FROM tl_version WHERE pid=? AND fromTable=?")
-									 ->executeUncached($intId, $strTable);
-
-		if ($objVersion->version !== null)
-		{
-			$intVersion = $objVersion->version + 1;
-		}
-
-		$strDescription = '';
-
-		if (isset($objRecord->title))
-		{
-			$strDescription = $objRecord->title;
-		}
-		elseif (isset($objRecord->name))
-		{
-			$strDescription = $objRecord->name;
-		}
-		elseif (isset($objRecord->headline))
-		{
-			$strDescription = $objRecord->headline;
-		}
-		elseif (isset($objRecord->selector))
-		{
-			$strDescription = $objRecord->selector;
-		}
-
-		$strUrl = \Environment::get('request');
-
-		// Do not save the URL if the visibility is toggled via Ajax
-		if (preg_match('/&(amp;)?state=/', $strUrl))
-		{
-			$strUrl = '';
-		}
-
-		$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=? AND fromTable=?")
-					   ->execute($intId, $strTable);
-
-		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, editUrl, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)")
-					   ->execute($intId, time(), $intVersion, $strTable, $this->User->username, $this->User->id, $strDescription, $strUrl, serialize($objRecord->row()));
-	}
-
-
-	/**
 	 * Redirect to a front end page
 	 *
 	 * @param integer $intPage    The page ID
@@ -2941,5 +2868,20 @@ abstract class Controller extends \System
 	public static function findFrontendModule($strName)
 	{
 		return \Module::findClass($strName);
+	}
+
+
+	/**
+	 * Create a new version of a record
+	 *
+	 * @param string  $strTable The table name
+	 * @param integer $intId    The ID of the element to be versioned
+	 *
+	 * @deprecated Use Versions->create() instead
+	 */
+	protected function createNewVersion($strTable, $intId)
+	{
+		$objVersions = new \Versions($strTable, $intId);
+		$objVersions->create();
 	}
 }
