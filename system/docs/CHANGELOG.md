@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### New
+The form generator now supports the "novalidate" attribute (see #4263).
+
+### New
 Added access protection for articles (see #1869).
 
 ### New

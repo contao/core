@@ -6,7 +6,7 @@
     <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
   <?php endif; ?>
 
-  <form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?> id="<?php echo $this->formId; ?>" method="<?php echo $this->method; ?>" enctype="<?php echo $this->enctype; ?>"<?php echo $this->attributes; ?>>
+  <form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?> id="<?php echo $this->formId; ?>" method="<?php echo $this->method; ?>" enctype="<?php echo $this->enctype; ?>"<?php echo $this->attributes; ?><?php echo $this->novalidate; ?>>
     <div class="formbody">
       <?php if ($this->method != 'get'): ?>
         <input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formSubmit; ?>">
