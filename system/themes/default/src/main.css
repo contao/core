@@ -986,7 +986,7 @@ ul.sgallery .gimage {
 	cursor:pointer;
 }
 .tl_metawizard_new .tl_select {
-	width:inherit;
+	width:300px;
 }
 .tl_metawizard_new .tl_submit {
 	margin-top:1px;
