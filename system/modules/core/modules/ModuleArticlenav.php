@@ -90,13 +90,16 @@ class ModuleArticlenav extends \Module
 	 */
 	protected function compile()
 	{
+		global $objPage;
+
 		$intActive = null;
 		$articles = array();
 		$intCount = 1;
+		$strKey = ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/articles/');
 
 		while ($this->objArticles->next())
 		{
-			$strAlias = (strlen($this->objArticles->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $this->objArticles->alias : $this->objArticles->id;
+			$strAlias = (($this->inColumn != 'main') ? $this->inColumn . ':' : '') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $this->objArticles->alias != '') ? $this->objArticles->alias : $this->objArticles->id);
 
 			// Active article
 			if (\Input::get('articles') == $strAlias)
@@ -104,7 +107,7 @@ class ModuleArticlenav extends \Module
 				$articles[] = array
 				(
 					'isActive' => true,
-					'href' => $this->addToUrl('articles=' . $strAlias),
+					'href' => $this->generateFrontendUrl($objPage->row(), $strKey . $strAlias),
 					'title' => specialchars($this->objArticles->title, true),
 					'link' => $intCount
 				);
@@ -118,7 +121,7 @@ class ModuleArticlenav extends \Module
 				$articles[] = array
 				(
 					'isActive' => false,
-					'href' => $this->addToUrl('articles=' . $strAlias),
+					'href' => $this->generateFrontendUrl($objPage->row(), $strKey . $strAlias),
 					'title' => specialchars($this->objArticles->title, true),
 					'link' => $intCount
 				);

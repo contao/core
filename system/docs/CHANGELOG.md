@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### New
+The article module now responds to the `auto_item` parameter (see #4823).
+
+### New
 Made the number of pagination links configurable (see #4601).
 
 ### New
