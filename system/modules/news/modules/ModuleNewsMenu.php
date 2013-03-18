@@ -203,6 +203,8 @@ class ModuleNewsMenu extends \ModuleNews
 
 		$this->Template->items = $arrItems;
 		$this->Template->showQuantity = ($this->news_showQuantity != '') ? true : false;
+		$this->Template->url = $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?');
+		$this->Template->activeYear = \Input::get('year');
 	}
 
 

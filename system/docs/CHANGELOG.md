@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Changed
+Made the years in monthly archive menus clickable (see #4450).
+
 ### New
 The form generator now supports the "novalidate" attribute (see #4263).
 

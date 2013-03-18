@@ -159,7 +159,7 @@ class ModuleEventMenu extends \ModuleCalendar
 		// Get the current "jumpTo" page
 		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
 		{
-			$strUrl = $this->generateFrontendUrl($objTarget->row(), '/month/%s');
+			$strUrl = $this->generateFrontendUrl($objTarget->row());
 		}
 
 		// Prepare the navigation
@@ -177,7 +177,7 @@ class ModuleEventMenu extends \ModuleCalendar
 
 				$arrItems[$intYear][$intMonth]['date'] = $intDate;
 				$arrItems[$intYear][$intMonth]['link'] = $GLOBALS['TL_LANG']['MONTHS'][$intMonth] . ' ' . $intYear;
-				$arrItems[$intYear][$intMonth]['href'] = sprintf($strUrl, $intDate);
+				$arrItems[$intYear][$intMonth]['href'] = $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $intDate;
 				$arrItems[$intYear][$intMonth]['title'] = specialchars($GLOBALS['TL_LANG']['MONTHS'][$intMonth].' '.$intYear . ' (' . $quantity . ')');
 				$arrItems[$intYear][$intMonth]['class'] = trim(((++$count == 1) ? 'first ' : '') . (($count == $limit) ? 'last' : ''));
 				$arrItems[$intYear][$intMonth]['isActive'] = (\Input::get('month') == $intDate);
@@ -187,5 +187,7 @@ class ModuleEventMenu extends \ModuleCalendar
 
 		$this->Template->items = $arrItems;
 		$this->Template->showQuantity = ($this->cal_showQuantity != '') ? true : false;
+		$this->Template->url = $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?');
+		$this->Template->activeYear = \Input::get('year');
 	}
 }
