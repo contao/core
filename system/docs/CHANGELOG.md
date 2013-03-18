@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### Changed
+Moved `DC_Folder::sync()` to `Automator::syncFiles()` (see #5099).
+
+### Changed
 Made the years in monthly archive menus clickable (see #4450).
 
 ### New

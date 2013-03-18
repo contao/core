@@ -71,14 +71,17 @@
       <trans-unit id="tl_files.syncFolderF">
         <source>Found the folder "%s"</source>
       </trans-unit>
+      <trans-unit id="tl_files.syncFolderH">
+        <source>Updated the hash of the folder "%s"</source>
+      </trans-unit>
       <trans-unit id="tl_files.syncFileC">
         <source>Created the file "%s"</source>
       </trans-unit>
       <trans-unit id="tl_files.syncFileF">
         <source>Found the file "%s"</source>
       </trans-unit>
-      <trans-unit id="tl_files.syncHash">
-        <source>Updated the hash of the file "%s"</source>
+      <trans-unit id="tl_files.syncFileH">
+        <source>Updated the hash of the folder "%s"</source>
       </trans-unit>
       <trans-unit id="tl_files.syncComplete">
         <source>The synchronization has been completed</source>
