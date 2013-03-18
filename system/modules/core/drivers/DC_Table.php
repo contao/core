@@ -1629,6 +1629,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		$this->procedure[] = 'id=?';
 		$this->blnCreateNewVersion = false;
 
+		// Compare versions
+		if (\Input::get('versions'))
+		{
+			$this->import('Versions');
+			$this->Versions->compare($this->strTable, $this->intId);
+		}
+
 		// Change version
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && \Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
 		{
@@ -1862,7 +1869,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 <select name="version" class="tl_select">'.$versions.'
 </select>
 <input type="submit" name="showVersion" id="showVersion" class="tl_submit" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['restore']).'">
-<a href="contao/diff.php?table='.$this->strTable.'&amp;pid='.$this->intId.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']).'" onclick="Backend.openModalIframe({\'width\':860,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['showDifferences'])).'\',\'url\':this.href});return false">'.\Image::getHtml('diff.gif').'</a>
+<a href="'.$this->addToUrl('versions=1&popup=1').'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']).'" onclick="Backend.openModalIframe({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['showDifferences'])).'\',\'url\':this.href});return false">'.\Image::getHtml('diff.gif').'</a>
 </div>
 </form>
 

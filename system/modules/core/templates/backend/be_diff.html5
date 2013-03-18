@@ -33,10 +33,9 @@
   <div id="container">
 
     <div id="main">
-      <form action="<?php echo $this->action; ?>" method="get">
+      <form action="<?php echo $this->action; ?>" method="post">
         <div class="formbody">
-          <input type="hidden" name="table" value="<?php echo $this->table; ?>">
-          <input type="hidden" name="pid" value="<?php echo $this->pid; ?>">
+          <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
           <select name="from" id="ctrl_from" class="tl_select">
             <?php foreach ($this->versions as $k=>$v): ?>
               <option value="<?php echo $k; ?>"<?php if ($v['version'] == $this->from): ?> selected="selected"<?php endif; ?>><?php echo $v['info']; ?></option>

@@ -43,6 +43,7 @@ ClassLoader::addClasses(array
 	'Contao\RebuildIndex'              => 'system/modules/core/classes/RebuildIndex.php',
 	'Contao\StyleSheets'               => 'system/modules/core/classes/StyleSheets.php',
 	'Contao\Theme'                     => 'system/modules/core/classes/Theme.php',
+	'Contao\Versions'                  => 'system/modules/core/classes/Versions.php',
 
 	// Drivers
 	'Contao\DC_File'                   => 'system/modules/core/drivers/DC_File.php',
