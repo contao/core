@@ -84,7 +84,7 @@ class Comments extends \Frontend
 			$offset = ($page - 1) * $objConfig->perPage;
 
 			// Initialize the pagination menu
-			$objPagination = new \Pagination($total, $objConfig->perPage, 7, $id);
+			$objPagination = new \Pagination($total, $objConfig->perPage, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
 			$objTemplate->pagination = $objPagination->generate("\n  ");
 		}
 

@@ -177,7 +177,7 @@ class ModuleNewsArchive extends \ModuleNews
 				$offset = (max($page, 1) - 1) * $this->perPage;
 
 				// Add the pagination menu
-				$objPagination = new \Pagination($total, $this->perPage, 7, $id);
+				$objPagination = new \Pagination($total, $this->perPage, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
 				$this->Template->pagination = $objPagination->generate("\n  ");
 			}
 		}

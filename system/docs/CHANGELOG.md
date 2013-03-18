@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### New
+Made the number of pagination links configurable (see #4601).
+
+### New
 Added an option to disable CSS3PIE in the style sheet settings (see #4985).
 
 ### Improved

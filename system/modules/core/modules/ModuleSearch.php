@@ -241,7 +241,7 @@ class ModuleSearch extends \Module
 				// Pagination menu
 				if ($to < $count || $from > 1)
 				{
-					$objPagination = new \Pagination($count, $per_page, 7, $id);
+					$objPagination = new \Pagination($count, $per_page, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
 					$this->Template->pagination = $objPagination->generate("\n  ");
 				}
 			}

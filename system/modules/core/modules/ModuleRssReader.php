@@ -155,7 +155,7 @@ class ModuleRssReader extends \Module
 			$offset = (($page - 1) * $this->perPage);
 			$limit = $this->perPage + $offset;
 
-			$objPagination = new \Pagination(count($arrItems), $this->perPage, 7, $id);
+			$objPagination = new \Pagination(count($arrItems), $this->perPage, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 

@@ -306,7 +306,7 @@ class ModuleListing extends \Module
 		/**
 		 * Pagination
 		 */
-		$objPagination = new \Pagination($objTotal->count, $per_page, 7, $id);
+		$objPagination = new \Pagination($objTotal->count, $per_page, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
 		$this->Template->pagination = $objPagination->generate("\n  ");
 		$this->Template->per_page = $per_page;
 

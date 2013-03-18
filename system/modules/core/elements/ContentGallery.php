@@ -281,7 +281,7 @@ class ContentGallery extends \ContentElement
 			$offset = ($page - 1) * $this->perPage;
 			$limit = min($this->perPage + $offset, $total);
 
-			$objPagination = new \Pagination($total, $this->perPage, 7, $id);
+			$objPagination = new \Pagination($total, $this->perPage, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
