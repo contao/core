@@ -2319,7 +2319,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded), $this->strTable);
 
 				// Create new button
-				if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'])
+				if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && \Input::get('act') != 'select')
 				{
 					$return .= ' <a href="'.$this->addToUrl('&amp;act=move&amp;mode=2&amp;pid='.$currentEncoded).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG']['tl_files']['uploadFF'], $currentEncoded)).'">'.\Image::getHtml('new.gif', $GLOBALS['TL_LANG'][$this->strTable]['move'][0]).'</a>';
 				}
