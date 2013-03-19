@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### New
+The newsletter subscription module now also stores the confirmation date of
+the double opt-in subscription (see #5200).
+
 ### Improved
 Comments with a reply now have a special icon (see #3202).
 

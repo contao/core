@@ -165,6 +165,15 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 			'eval'                    => array('rgxp'=>'datim'),
 			'sql'                     => "varchar(10) NOT NULL default ''"
 		),
+		'confirmed' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['confirmed'],
+			'filter'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 8,
+			'eval'                    => array('rgxp'=>'datim'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
+		),
 		'ip' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['ip'],

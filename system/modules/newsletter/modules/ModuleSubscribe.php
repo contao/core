@@ -153,6 +153,7 @@ class ModuleSubscribe extends \Module
 			return;
 		}
 
+		$time = time();
 		$arrAdd = array();
 		$arrChannels = array();
 		$arrCids = array();
@@ -169,6 +170,7 @@ class ModuleSubscribe extends \Module
 			$objRecipient->active = 1;
 			$objRecipient->token = '';
 			$objRecipient->pid = $objChannel->id;
+			$objRecipient->confirmed = $time;
 			$objRecipient->save();
 		}
 
@@ -263,6 +265,7 @@ class ModuleSubscribe extends \Module
 			$objRecipient->addedOn = $time;
 			$objRecipient->ip = $this->anonymizeIp(\Environment::get('ip'));
 			$objRecipient->token = $strToken;
+			$objRecipient->confirmed = '';
 
 			$objRecipient->save();
 		}
