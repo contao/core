@@ -358,6 +358,21 @@ class Updater extends \Controller
 	 */
 	public function run31Update()
 	{
+		$objCss = $this->Database->query("SELECT `id`, `framework` FROM `tl_layout` WHERE `framework`!=''");
+
+		while ($objCss->next())
+		{
+			$arrCss = deserialize($objCss->framework);
+
+			if (($key = array_search('responsive.css', $arrCss)) !== false)
+			{
+				$arrCss[$key] = 'grid.css';
+			}
+
+			$this->Database->prepare("UPDATE `tl_layout` SET `framework`=? WHERE `id`=?")
+						   ->execute(serialize($arrCss), $objCss->id);
+		}
+
 		$this->Database->query("UPDATE `tl_content` SET `type`='accordionStart' WHERE `type`='accordion' AND `mooType`='mooStart'");
 		$this->Database->query("UPDATE `tl_content` SET `type`='accordionStop' WHERE `type`='accordion' AND `mooType`='mooStop'");
 		$this->Database->query("UPDATE `tl_content` SET `type`='accordionSingle' WHERE `type`='accordion' AND `mooType`='mooSingle'");

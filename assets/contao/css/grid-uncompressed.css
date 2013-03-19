@@ -21,16 +21,29 @@
  */
 *[class*="grid"] {
 	float:left;
-	display:inline;
-	margin-right:10px;
 	margin-left:10px;
+	margin-right:10px;
+	display:inline;
 }
 
 /**
  * Add a default margin to all content elements, so they align with the floatet
  * ones (otherwise you would have to add "grid12" to every element)
  */
-.mod_article>* {
+.mod_article *[class*="ce_"],.mod_article *[class*="mod_"] {
+	margin-left:10px;
+	margin-right:10px;
+}
+
+/**
+ * Handle news and event reader modules which are added via content element and
+ * contain content elements themselves (see #5331)
+ */
+.mod_article .mod_newsreader,.mod_article .mod_eventreader {
+	margin-left:0;
+	margin-right:0;
+}
+.mod_article *[class*="layout_"]>*,.mod_article *[class*="event_"]>* {
 	margin-left:10px;
 	margin-right:10px;
 }

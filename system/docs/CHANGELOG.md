@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Changed
+Renamed `responsive.css` to `grid.css` (see #5475).
+
 ### Updated
 Updated mediaelement.js to version 2.11.0 (see #5495).
 
