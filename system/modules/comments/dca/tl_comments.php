@@ -520,7 +520,7 @@ class tl_comments extends Backend
 				break;
 		}
 
-		$key = $arrRow['published'] ? 'published' : 'unpublished';
+		$key = ($arrRow['published'] ? 'published' : 'unpublished') . ($arrRow['addReply'] ? ' replied' : '');
 
 		return '
 <div class="comment_wrap">

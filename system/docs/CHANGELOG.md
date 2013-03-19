@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Improved
+Comments with a reply now have a special icon (see #3202).
+
 ### Changed
 Renamed `responsive.css` to `grid.css` (see #5475).
 
