@@ -1075,6 +1075,19 @@ ul.sortable li {
 	padding:2px 0 3px 20px;
 	background:url("images/back.gif") left center no-repeat;
 }
+.ace_editor * {
+	font-family:Courier,monospace;
+	font-size:12px;
+}
+.ace_editor.fullsize {
+	position:absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	width:100%;
+	height:100% !important;
+}
 
 /* Navigation icons */
 a.navigation.article {

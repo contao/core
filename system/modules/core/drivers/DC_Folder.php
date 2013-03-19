@@ -1812,63 +1812,17 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Prepare the code editor
 		if ($GLOBALS['TL_CONFIG']['useCE'])
 		{
-			$type = '';
-
-			// The following types are supported by CodeMirror
-			switch ($objFile->extension)
-			{
-				case 'c': case 'cc': case 'cpp': case 'c++':
-				case 'h': case 'hh': case 'hpp': case 'h++':
-					$type = 'clike';
-					break;
-
-				case 'css':
-					$type = 'css';
-					break;
-
-				case 'patch':
-					$type = 'diff';
-					break;
-
-				case 'htm': case 'html':
-				case 'tpl': case 'html5': case 'xhtml':
-					$type = 'htmlmixed';
-					break;
-
-				case 'js':
-					$type = 'javascript';
-					break;
-
-				case 'php': case 'inc':
-					$type = 'php';
-					break;
-
-				case 'sql':
-					$type = 'sql';
-					break;
-
-				case 'xml':
-					$type = 'xml';
-					break;
-			}
-
-			// Fall back to HTML
-			if ($type == '')
-			{
-				$type = 'htmlmixed';
-			}
-
 			$this->ceFields = array(array
 			(
 				'id' => 'ctrl_source',
-				'type' => $type
+				'type' => $objFile->extension
 			));
 
 			$this->language = $GLOBALS['TL_LANGUAGE'];
 
 			// Load the code editor configuration
 			ob_start();
-			include TL_ROOT . '/system/config/codeMirror.php';
+			include TL_ROOT . '/system/config/ace.php';
 			$codeEditor = ob_get_contents();
 			ob_end_clean();
 		}
