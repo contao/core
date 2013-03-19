@@ -90,6 +90,7 @@ class ContentMedia extends \ContentElement
 	 */
 	protected function compile()
 	{
+		global $objPage;
 		$this->Template->size = '';
 
 		// Set the size
@@ -131,7 +132,20 @@ class ContentMedia extends \ContentElement
 		// Pass File objects to the template
 		while ($this->objFiles->next())
 		{
+			$arrMeta = deserialize($this->objFiles->meta);
+
+			if (is_array($arrMeta) && isset($arrMeta[$objPage->language]))
+			{
+				$strTitle = $arrMeta[$objPage->language]['title'];
+			}
+			else
+			{
+				$strTitle = $this->objFiles->name;
+			}
+
 			$objFile = new \File($this->objFiles->path, true);
+			$objFile->title = specialchars($strTitle);
+
 			$arrFiles[$objFile->extension] = $objFile;
 		}
 

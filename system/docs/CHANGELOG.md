@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Updated
+Updated mediaelement.js to version 2.11.0 (see #5495).
+
 ### New
 The article module now responds to the `auto_item` parameter (see #4823).
 

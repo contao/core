@@ -9,13 +9,13 @@
   <?php if ($this->isVideo): ?>
     <video<?php echo $this->size; ?><?php if ($this->poster): ?> poster="<?php echo $this->poster; ?>" preload="none"<?php endif; ?><?php if ($this->autoplay): ?> autoplay<?php endif; ?> controls>
       <?php foreach ($this->files as $file): ?>
-        <source type="<?php echo $file->mime; ?>" src="<?php echo $file->path; ?>" />
+        <source type="<?php echo $file->mime; ?>" src="<?php echo $file->path; ?>" title="<?php echo $file->title; ?>" />
       <?php endforeach; ?>
     </video>
   <?php else: ?>
     <audio preload="none"<?php if ($this->autoplay): ?> autoplay<?php endif; ?> controls>
       <?php foreach ($this->files as $file): ?>
-        <source type="<?php echo $file->mime; ?>" src="<?php echo $file->path; ?>" />
+        <source type="<?php echo $file->mime; ?>" src="<?php echo $file->path; ?>" title="<?php echo $file->title; ?>" />
       <?php endforeach; ?>
     </audio>
   <?php endif; ?>
