@@ -423,9 +423,7 @@ var Locale = this.Locale = {
 
 		if (set) locale.define(set, key, value);
 
-		/*<1.2compat>*/
-		if (set == 'cascade') return Locale.inherit(name, key);
-		/*</1.2compat>*/
+		
 
 		if (!current) current = locale;
 
@@ -440,9 +438,7 @@ var Locale = this.Locale = {
 
 			this.fireEvent('change', locale);
 
-			/*<1.2compat>*/
-			this.fireEvent('langChange', locale.name);
-			/*</1.2compat>*/
+			
 		}
 
 		return this;
@@ -539,25 +535,7 @@ Locale.Set = new Class({
 
 });
 
-/*<1.2compat>*/
-var lang = MooTools.lang = {};
 
-Object.append(lang, Locale, {
-	setLanguage: Locale.use,
-	getCurrentLanguage: function(){
-		var current = Locale.getCurrent();
-		return (current) ? current.name : null;
-	},
-	set: function(){
-		Locale.define.apply(this, arguments);
-		return this;
-	},
-	get: function(set, key, args){
-		if (key) set += '.' + key;
-		return Locale.get(set, args);
-	}
-});
-/*</1.2compat>*/
 
 })();
 
@@ -1039,9 +1017,7 @@ Date.extend({
 		return this;
 	},
 
-	//<1.2compat>
-	parsePatterns: parsePatterns,
-	//</1.2compat>
+	
 
 	defineParser: function(pattern){
 		parsePatterns.push((pattern.re && pattern.handler) ? pattern : build(pattern));
@@ -1177,13 +1153,6 @@ var handle = function(key, value){
 	return this;
 };
 
-//PATCH: correctly parse German dates
-Date.defineParsers(
-	'%Y(-%m(-%d( %H:%M(:%S)?( ?%p)?)?)?)?', // 1999-12-31, 1999-12-31 11:59pm, 1999-12-31 23:59:59, ISO8601
-	'%m(/%d(/%Y( %H:%M(:%S)?( ?%p)?)?)?)?', // 12/31/1999, 12/31/1999 11:59pm, 12/31/1999 23:59:59
-	'%d(.%m(.%Y( %H:%M(:%S)?)?)?)?'         // 31.12.1999, 31.12.1999 11:59, 31.12.1999 23:59:59
-);
-/*
 Date.defineParsers(
 	'%Y([-./]%m([-./]%d((T| )%X)?)?)?', // "1999-12-31", "1999-12-31 11:59pm", "1999-12-31 23:59:59", ISO8601
 	'%Y%m%d(T%H(%M%S?)?)?', // "19991231", "19991231T1159", compact
@@ -1195,8 +1164,6 @@ Date.defineParsers(
 	'%T', // %H:%M:%S
 	'%H:%M( ?%p)?' // "11:05pm", "11:05 am" and "11:05"
 );
-*/
-// PATCH EOF
 
 Locale.addEvent('change', function(language){
 	if (Locale.get('Date')) recompile(language);
@@ -2119,10 +2086,7 @@ Element.implement({
 	},
 
 	getComputedSize: function(options){
-		//<1.2compat>
-		//legacy support for my stupid spelling error
-		if (options && options.plains) options.planes = options.plains;
-		//</1.2compat>
+		
 
 		options = Object.merge({
 			styles: ['padding','border'],
@@ -4324,39 +4288,7 @@ Fx.Accordion = new Class({
 
 });
 
-/*<1.2compat>*/
-/*
-	Compatibility with 1.2.0
-*/
-var Accordion = new Class({
 
-	Extends: Fx.Accordion,
-
-	initialize: function(){
-		this.parent.apply(this, arguments);
-		var params = Array.link(arguments, {'container': Type.isElement});
-		this.container = params.container;
-	},
-
-	addSection: function(toggler, element, pos){
-		toggler = document.id(toggler);
-		element = document.id(element);
-
-		var test = this.togglers.contains(toggler);
-		var len = this.togglers.length;
-		if (len && (!test || pos)){
-			pos = pos != null ? pos : len - 1;
-			toggler.inject(this.togglers[pos], 'before');
-			element.inject(toggler, 'after');
-		} else if (this.container && !test){
-			toggler.inject(this.container);
-			element.inject(this.container);
-		}
-		return this.parent.apply(this, arguments);
-	}
-
-});
-/*</1.2compat>*/
 
 
 /*
@@ -4523,16 +4455,7 @@ Fx.Scroll = new Class({
 
 });
 
-//<1.2compat>
-Fx.Scroll.implement({
-	scrollToCenter: function(){
-		return this.toElementCenter.apply(this, arguments);
-	},
-	scrollIntoView: function(){
-		return this.toElementEdge.apply(this, arguments);
-	}
-});
-//</1.2compat>
+
 
 function isBody(element){
 	return (/^(?:body|html)$/i).test(element.tagName);
@@ -4736,7 +4659,7 @@ provides: [Fx.SmoothScroll]
 ...
 */
 
-/*<1.2compat>*/var SmoothScroll = /*</1.2compat>*/Fx.SmoothScroll = new Class({
+Fx.SmoothScroll = new Class({
 
 	Extends: Fx.Scroll,
 
@@ -5429,11 +5352,7 @@ var Sortables = new Class({
 		clone: false,
 		revert: false,
 		handle: false,
-		dragOptions: {}/*<1.2compat>*/,
-		snap: 4,
-		constrain: false,
-		preventDefault: false
-		/*</1.2compat>*/
+		dragOptions: {}
 	},
 
 	initialize: function(lists, options){
@@ -5554,11 +5473,7 @@ var Sortables = new Class({
 		this.clone = this.getClone(event, element);
 
 		this.drag = new Drag.Move(this.clone, Object.merge({
-			/*<1.2compat>*/
-			preventDefault: this.options.preventDefault,
-			snap: this.options.snap,
-			container: this.options.constrain && this.element.getParent(),
-			/*</1.2compat>*/
+			
 			droppables: this.getDroppables()
 		}, this.options.dragOptions)).addEvents({
 			onSnap: function(){
