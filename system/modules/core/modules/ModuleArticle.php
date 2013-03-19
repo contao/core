@@ -124,10 +124,11 @@ class ModuleArticle extends \Module
 				$this->cssID = $arrCss;
 			}
 
-			$href = ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/articles/') . (($this->inColumn != 'main') ? $this->inColumn . ':' : '') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $this->alias != '') ? $this->alias : $this->id);
+			$article = (!$GLOBALS['TL_CONFIG']['disableAlias'] && $this->alias != '') ? $this->alias : $this->id;
+			$href = 'articles=' . (($this->inColumn != 'main') ? $this->inColumn . ':' : '') . $article;
 
 			$this->Template->headline = $this->headline;
-			$this->Template->href = $this->generateFrontendUrl($objPage->row(), $href);
+			$this->Template->href = $this->addToUrl($href);
 			$this->Template->teaser = $this->teaser;
 			$this->Template->readMore = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $this->headline), true);
 			$this->Template->more = $GLOBALS['TL_LANG']['MSC']['more'];

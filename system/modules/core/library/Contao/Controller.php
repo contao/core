@@ -173,12 +173,6 @@ abstract class Controller extends \System
 		// Articles
 		if ($intId == 0)
 		{
-			// Respond to the auto_item parameter (see #4823)
-			if (!isset($_GET['articles']) && $GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
-			{
-				\Input::setGet('articles', \Input::get('auto_item'));
-			}
-
 			// Show a particular article only
 			if ($objPage->type == 'regular' && \Input::get('articles'))
 			{

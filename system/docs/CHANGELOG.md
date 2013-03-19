@@ -11,9 +11,6 @@ Renamed `responsive.css` to `grid.css` (see #5475).
 Updated mediaelement.js to version 2.11.0 (see #5495).
 
 ### New
-The article module now responds to the `auto_item` parameter (see #4823).
-
-### New
 Made the number of pagination links configurable (see #4601).
 
 ### New
