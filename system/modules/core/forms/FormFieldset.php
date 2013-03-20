@@ -57,11 +57,11 @@ class FormFieldset extends \Widget
 
 			if ($this->fsType == 'fsStart')
 			{
-				$objTemplate->wildcard = '### FIELDSET START' . ($this->label ? ': ' . $this->label : '') . ' ###';
+				$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['tl_form_field']['fsStart'][0]) . ' ###' . ($this->label ? '<br>' . $this->label : '');
 			}
 			else
 			{
-				$objTemplate->wildcard = '### FIELDSET END ###';
+				$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['tl_form_field']['fsStop'][0]) . ' ###';
 			}
 
 			return $objTemplate->parse();
