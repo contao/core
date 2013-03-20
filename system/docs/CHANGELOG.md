@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Improved
+Use the new HTML5 form fields in the front end (see #4138).
+
 ### New
 Added the "getPageLayout" hook (see #4736).
 

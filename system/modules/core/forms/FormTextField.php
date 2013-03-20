@@ -114,8 +114,55 @@ class FormTextField extends \Widget
 			$this->varValue = \Idna::decode($this->varValue);
 		}
 
+		if ($this->hideInput)
+		{
+			$strType = 'password';
+		}
+		elseif ($this->strFormat != 'xhtml')
+		{
+			// Use the HTML5 types (see #4138)
+			switch ($this->rgxp)
+			{
+				case 'digit':
+					$strType = 'number';
+					break;
+
+				case 'date':
+					$strType = 'date';
+					break;
+
+				case 'time':
+					$strType = 'time';
+					break;
+
+				case 'datim':
+					$strType = 'datetime';
+					break;
+
+				case 'phone':
+					$strType = 'tel';
+					break;
+
+				case 'email':
+					$strType = 'email';
+					break;
+
+				case 'url':
+					$strType = 'url';
+					break;
+
+				default:
+					$strType = 'text';
+					break;
+			}
+		}
+		else
+		{
+			$strType = 'text';
+		}
+
 		return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="text%s%s" value="%s"%s%s',
-						($this->hideInput ? 'password' : 'text'),
+						$strType,
 						$this->strName,
 						$this->strId,
 						($this->hideInput ? ' password' : ''),

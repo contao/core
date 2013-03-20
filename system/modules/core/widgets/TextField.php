@@ -123,7 +123,7 @@ class TextField extends \Widget
 	 */
 	public function generate()
 	{
-		$type = $this->hideInput ? 'password' : 'text';
+		$strType = $this->hideInput ? 'password' : 'text';
 
 		if (!$this->multiple)
 		{
@@ -134,7 +134,7 @@ class TextField extends \Widget
 			}
 
 			return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="tl_text%s" value="%s"%s onfocus="Backend.getScrollOffset()">%s',
-							$type,
+							$strType,
 							$this->strName,
 							$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
@@ -159,7 +159,7 @@ class TextField extends \Widget
 		for ($i=0; $i<$this->size; $i++)
 		{
 			$arrFields[] = sprintf('<input type="%s" name="%s[]" id="ctrl_%s" class="tl_text_%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
-									$type,
+									$strType,
 									$this->strName,
 									$this->strId.'_'.$i,
 									$this->size,
