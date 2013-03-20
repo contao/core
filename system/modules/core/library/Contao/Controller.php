@@ -657,12 +657,13 @@ abstract class Controller extends \System
 				continue;
 			}
 
-			$elements = explode('::', $strTag);
+			$flags = explode('|', $strTag);
+			$elements = explode('::', array_shift($flags));
 
 			// Skip certain elements if the output will be cached
 			if ($blnCache)
 			{
-				if ($elements[0] == 'date' || $elements[0] == 'ua' || $elements[0] == 'post' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer' || $elements[0] == 'request_token' || strncmp($elements[0], 'cache_', 6) === 0)
+				if ($elements[0] == 'date' || $elements[0] == 'ua' || $elements[0] == 'post' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer' || $elements[0] == 'request_token' || strncmp($elements[0], 'cache_', 6) === 0 || in_array('uncached', $flags))
 				{
 					$strBuffer .= '{{' . $strTag . '}}';
 					continue;
@@ -1584,6 +1585,74 @@ abstract class Controller extends \System
 						}
 					}
 					break;
+			}
+
+			// Handle the flags
+			if (!empty($flags))
+			{
+				foreach ($flags as $flag)
+				{
+					switch ($flag)
+					{
+						case 'addslashes':
+						case 'stripslashes':
+						case 'standardize':
+						case 'ampersand':
+						case 'specialchars':
+						case 'nl2br':
+						case 'nl2br_pre':
+						case 'strtolower':
+						case 'utf8_strtolower':
+						case 'strtoupper':
+						case 'utf8_strtoupper':
+						case 'ucfirst':
+						case 'lcfirst':
+						case 'ucwords':
+						case 'trim':
+						case 'rtrim':
+						case 'ltrim':
+						case 'utf8_romanize':
+						case 'strrev':
+							$arrCache[$strTag] = $flag($arrCache[$strTag]);
+							break;
+
+						case 'encodeEmail':
+						case 'decodeEntities':
+							$arrCache[$strTag] = \String::$flag($arrCache[$strTag]);
+							break;
+
+						case 'number_format':
+							$arrCache[$strTag] = \System::getFormattedNumber($arrCache[$strTag], 0);
+							break;
+
+						case 'currency_format':
+							$arrCache[$strTag] = \System::getFormattedNumber($arrCache[$strTag], 2);
+							break;
+
+						case 'readable_size':
+							$arrCache[$strTag] = \System::getReadableSize($arrCache[$strTag]);
+							break;
+
+						// HOOK: pass unknown flags to callback functions
+						default:
+							if (isset($GLOBALS['TL_HOOKS']['insertTagFlags']) && is_array($GLOBALS['TL_HOOKS']['insertTagFlags']))
+							{
+								foreach ($GLOBALS['TL_HOOKS']['insertTagFlags'] as $callback)
+								{
+									$this->import($callback[0]);
+									$varValue = $this->$callback[0]->$callback[1]($strTag, $arrCache[$strTag], $flags, $blnCache);
+
+									// Replace the tag and stop the loop
+									if ($varValue !== false)
+									{
+										$arrCache[$strTag] = $varValue;
+										break;
+									}
+								}
+							}
+							break;
+					}
+				}
 			}
 
 			$strBuffer .= $arrCache[$strTag];

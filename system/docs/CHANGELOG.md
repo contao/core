@@ -5,6 +5,43 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### New
+Insert tags now support flags (see #4717). Usage example:
+
+ * `{{ua::browser|uncached}}`
+ * `{{page::title|decodeEntities|strtoupper}}`
+
+Currently supported flags are:
+
+ * `uncached`:        preserve the tag when writing the cache file
+ * `addslashes`:      quote the output with slashes
+ * `stripslashes`:    un-quote the output
+ * `standardize`:     standardize the output
+ * `ampersand`:       convert ampersands to entities
+ * `specialchars`:    convert special characters to entities
+ * `nl2br`:           new line to `<br>`
+ * `nl2br_pre`:       new line to `<br>` except in preformatted text
+ * `strtolower`:      string to lower case
+ * `utf8_strtolower`: Unicode aware string to lowercase
+ * `strtoupper`:      string to upper case
+ * `utf8_strtoupper`: Unicode aware string to uppercase
+ * `ucfirst`:         make first character uppercase
+ * `lcfirst`:         make first character lowercase
+ * `ucwords`:         uppercase the first characeter of each word
+ * `trim`:            strip whitespace from the beginning and end
+ * `rtrim`:           strip whitespace from the beginning
+ * `ltrim`:           strip whitespace from the end
+ * `utf8_romanize`:   romanize the output
+ * `strrev`:          reverse the output string
+ * `encodeEmail`:     decode encoded e-mail addresses
+ * `decodeEntities`:  decode entities
+ * `number_format`:   format a number (`System::getFormattedNumber()`)
+ * `currency_format`: format a currency (`System::getFormattedNumber()`)
+ * `readable_size`:   convert the output to a human readable size
+
+Custom flags can be added via the "insertTagFlags" hook.
+
+
+### New
 Added an option to purge the system log to the maintenance module (see #4701).
 
 ### New
