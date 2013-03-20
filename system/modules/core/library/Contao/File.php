@@ -772,6 +772,34 @@ class File extends \System
 
 
 	/**
+	 * Resize the file if it is an image
+	 *
+	 * @param integer $width  The target width
+	 * @param integer $height The target height
+	 * @param string  $mode   The resize mode
+	 *
+	 * @return boolean True if the image could be resized successfully
+	 */
+	public function resizeTo($width, $height, $mode='')
+	{
+		if (!$this->isGdImage)
+		{
+			return false;
+		}
+
+		$return = \Image::resize($this->strFile, $width, $height, $mode);
+
+		if ($return)
+		{
+			$this->arrPathinfo = array();
+			$this->arrImageSize = array();
+		}
+
+		return $return;
+	}
+
+
+	/**
 	 * Send the file to the browser
 	 */
 	public function sendToBrowser()
