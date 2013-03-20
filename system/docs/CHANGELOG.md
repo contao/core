@@ -5,6 +5,12 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### New
+Added more options to the event list module (see #5481):
+
+ * show upcoming events of the next month/year
+ * show past events of the previous month/year
+
+### New
 Added the "modifyFrontendPage" hook (see #4291).
 
 ### New
