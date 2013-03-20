@@ -103,6 +103,21 @@ class Automator extends \System
 
 
 	/**
+	 * Purge the system log
+	 */
+	public function purgeSystemLog()
+	{
+		$objDatabase = \Database::getInstance();
+
+		// Truncate the table
+		$objDatabase->execute("TRUNCATE TABLE tl_log");
+
+		// Add a log entry
+		$this->log('Purged the system log', 'Automator purgeSystemLog()', TL_CRON);
+	}
+
+
+	/**
 	 * Purge the image cache
 	 */
 	public function purgeImageCache()

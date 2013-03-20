@@ -295,6 +295,11 @@ $GLOBALS['TL_PURGE'] = array
 		(
 			'callback' => array('Automator', 'purgeVersionTable'),
 			'affected' => array('tl_version')
+		),
+		'log' => array
+		(
+			'callback' => array('Automator', 'purgeSystemLog'),
+			'affected' => array('tl_log')
 		)
 	),
 	'folders' => array

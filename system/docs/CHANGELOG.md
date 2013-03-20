@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### New
+Added an option to purge the system log to the maintenance module (see #4701).
+
+### New
 Added the `File::resizeTo()` method (see #3883).
 
 ### Improved
