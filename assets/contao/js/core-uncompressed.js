@@ -695,7 +695,7 @@ var Backend =
 	},
 
 	/**
-	 * Open a new window (used by file trees and the help wizard)
+	 * Open a new window (backwards compatibility)
 	 * @param object
 	 * @param integer
 	 * @param integer
@@ -870,16 +870,6 @@ var Backend =
 	},
 
 	/**
-	 * Show all pagetree and filetree nodes
-	 * @param object
-	 * @param string
-	 */
-	showTreeBody: function(el, id) {
-		el.blur();
-		$(id).setStyle('display', ($(el).checked ? 'inline' : 'none'));
-	},
-
-	/**
 	 * Limit the height of the preview pane
 	 */
 	limitPreviewHeight: function() {
@@ -891,12 +881,12 @@ var Backend =
 		$$('div.limit_height').each(function(div) {
 			size = div.getCoordinates();
 
-			if (hgt == 0) {
+			if (hgt === 0) {
 				hgt = div.className.replace(/[^0-9]*/, '').toInt();
 			}
 
 			// Return if there is no height value
-			if (!$chk(hgt)) return;
+			if (!hgt) return;
 
 			div.setStyle('height', hgt);
 			var path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
@@ -1268,7 +1258,9 @@ var Backend =
 	listWizard: function(el, command, id) {
 		var list = $(id),
 			parent = $(el).getParent('li'),
-			items = list.getChildren();
+			items = list.getChildren(),
+			tabindex = 1,
+			input, previous, next, rows, i;
 
 		Backend.getScrollOffset();
 
@@ -1296,18 +1288,25 @@ var Backend =
 			case 'delete':
 				if (items.length > 1) {
 					parent.destroy();
+				} else {
+					parent.getFirst('input').set('value', '');
 				}
 				break;
 		}
 
 		rows = list.getChildren();
-		var tabindex = 1;
 
-		for (var i=0; i<rows.length; i++) {
+		for (i=0; i<rows.length; i++) {
 			if (input = rows[i].getFirst('input[type="text"]')) {
 				input.set('tabindex', tabindex++);
 			}
 		}
+
+		new Sortables(list, {
+			contstrain: true,
+			opacity: 0.6,
+			handle: '.drag-handle'
+		});
 	},
 
 	/**
@@ -1322,10 +1321,12 @@ var Backend =
 			rows = tbody.getChildren(),
 			parentTd = $(el).getParent('td'),
 			parentTr = parentTd.getParent('tr'),
+			headTr = table.getElement('thead').getFirst('tr'),
 			cols = parentTr.getChildren(),
-			index = 0, previous, next;
+			index = 0,
+			textarea, previous, next, i;
 
-		for (var i=0; i<cols.length; i++) {
+		for (i=0; i<cols.length; i++) {
 			if (cols[i] == parentTd) {
 				break;
 			}
@@ -1337,7 +1338,7 @@ var Backend =
 		switch (command) {
 			case 'rcopy':
 				var tr = new Element('tr');
-				for (var i=0; i<cols.length; i++) {
+				for (i=0; i<cols.length; i++) {
 					var next = cols[i].clone(true).inject(tr, 'bottom');
 					if (textarea = cols[i].getFirst('textarea')) {
 						next.getFirst('textarea').value = textarea.value;
@@ -1362,25 +1363,28 @@ var Backend =
 			case 'rdelete':
 				if (rows.length > 1) {
 					parentTr.destroy();
+				} else {
+					parentTr.getElements('textarea').set('text', '');
 				}
 				break;
 			case 'ccopy':
-				for (var i=0; i<rows.length; i++) {
+				for (i=0; i<rows.length; i++) {
 					var current = rows[i].getChildren()[index],
 						next = current.clone(true).inject(current, 'after');
 					if (textarea = current.getFirst('textarea')) {
 						next.getFirst('textarea').value = textarea.value;
 					}
 				}
+				headTr.getFirst('td').clone(true).inject(headTr.getLast('td'), 'before');
 				break;
 			case 'cmovel':
 				if (index > 0) {
-					for (var i=0; i<rows.length; i++) {
+					for (i=0; i<rows.length; i++) {
 						var current = rows[i].getChildren()[index];
 						current.inject(current.getPrevious(), 'before');
 					}
 				} else {
-					for (var i=0; i<rows.length; i++) {
+					for (i=0; i<rows.length; i++) {
 						var current = rows[i].getChildren()[index];
 						current.inject(rows[i].getLast(), 'before');
 					}
@@ -1388,12 +1392,12 @@ var Backend =
 				break;
 			case 'cmover':
 				if (index < (cols.length - 2)) {
-					for (var i=0; i<rows.length; i++) {
+					for (i=0; i<rows.length; i++) {
 						var current = rows[i].getChildren()[index];
 						current.inject(current.getNext(), 'after');
 					}
 				} else {
-					for (var i=0; i<rows.length; i++) {
+					for (i=0; i<rows.length; i++) {
 						var current = rows[i].getChildren()[index];
 						current.inject(rows[i].getFirst(), 'before');
 					}
@@ -1401,14 +1405,27 @@ var Backend =
 				break;
 			case 'cdelete':
 				if (cols.length > 2) {
-					for (var i=0; i<rows.length; i++) {
+					for (i=0; i<rows.length; i++) {
 						rows[i].getChildren()[index].destroy();
+					}
+					headTr.getFirst('td').destroy();
+				} else {
+					for (i=0; i<rows.length; i++) {
+						rows[i].getElements('textarea').set('text', '');
 					}
 				}
 				break;
 		}
 
-		Backend.tableWizardResort(tbody);
+		new Sortables(tbody, {
+			contstrain: true,
+			opacity: 0.6,
+			handle: '.drag-handle',
+			onComplete: function() {
+				Backend.tableWizardResort(tbody);
+			}
+		});
+
 		Backend.tableWizardResize();
 	},
 
@@ -1417,12 +1434,13 @@ var Backend =
 	 * @param object
 	 */
 	tableWizardResort: function(tbody) {
-		rows = tbody.getChildren();
-		var tabindex = 1;
+		var rows = tbody.getChildren(),
+			tabindex = 1,
+			textarea, childs, i, j;
 
-		for (var i=0; i<rows.length; i++) {
-			var childs = rows[i].getChildren();
-			for (var j=0; j<childs.length; j++) {
+		for (i=0; i<rows.length; i++) {
+			childs = rows[i].getChildren();
+			for (j=0; j<childs.length; j++) {
 				if (textarea = childs[j].getFirst('textarea')) {
 					textarea.set('tabindex', tabindex++);
 					textarea.name = textarea.name.replace(/\[[0-9]+\][[0-9]+\]/g, '[' + i + '][' + j + ']')
@@ -1440,7 +1458,7 @@ var Backend =
 		if (size == null && factor == null) return;
 
 		if (factor != null) {
-			var size = '';
+			size = '';
 			$$('.tl_tablewizard textarea').each(function(el) {
 				el.setStyle('width', (el.getStyle('width').toInt() * factor).round().limit(142, 284));
 				el.setStyle('height', (el.getStyle('height').toInt() * factor).round().limit(66, 132));
@@ -1468,7 +1486,9 @@ var Backend =
 		var table = $(id),
 			tbody = table.getElement('tbody'),
 			parent = $(el).getParent('tr'),
-			rows = tbody.getChildren();
+			rows = tbody.getChildren(),
+			tabindex = 1,
+			select, childs, i, j;
 
 		Backend.getScrollOffset();
 
@@ -1476,7 +1496,7 @@ var Backend =
 			case 'copy':
 				var tr = new Element('tr'),
 					childs = parent.getChildren();
-				for (var i=0; i<childs.length; i++) {
+				for (i=0; i<childs.length; i++) {
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (select = childs[i].getFirst('select')) {
 						next.getFirst('select').value = select.value;
@@ -1509,17 +1529,22 @@ var Backend =
 		}
 
 		rows = tbody.getChildren();
-		var tabindex = 1;
 
-		for (var i=0; i<rows.length; i++) {
-			var childs = rows[i].getChildren();
-			for (var j=0; j<childs.length; j++) {
+		for (i=0; i<rows.length; i++) {
+			childs = rows[i].getChildren();
+			for (j=0; j<childs.length; j++) {
 				if (select = childs[j].getFirst('select')) {
 					select.set('tabindex', tabindex++);
 					select.name = select.name.replace(/\[[0-9]+\]/g, '[' + i + ']');
 				}
 			}
 		}
+
+		new Sortables(tbody, {
+			contstrain: true,
+			opacity: 0.6,
+			handle: '.drag-handle'
+		});
 	},
 
 	/**
@@ -1532,7 +1557,9 @@ var Backend =
 		var table = $(id),
 			tbody = table.getElement('tbody'),
 			parent = $(el).getParent('tr'),
-			rows = tbody.getChildren();
+			rows = tbody.getChildren(),
+			tabindex = 1,
+			input, childs, i, j;
 
 		Backend.getScrollOffset();
 
@@ -1540,7 +1567,7 @@ var Backend =
 			case 'copy':
 				var tr = new Element('tr'),
 					childs = parent.getChildren();
-				for (var i=0; i<childs.length; i++) {
+				for (i=0; i<childs.length; i++) {
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (input = childs[i].getFirst('input')) {
 						next.getFirst('input').value = input.value;
@@ -1573,11 +1600,10 @@ var Backend =
 		}
 
 		rows = tbody.getChildren();
-		var tabindex = 1;
 
-		for (var i=0; i<rows.length; i++) {
-			var childs = rows[i].getChildren();
-			for (var j=0; j<childs.length; j++) {
+		for (i=0; i<rows.length; i++) {
+			childs = rows[i].getChildren();
+			for (j=0; j<childs.length; j++) {
 				if (input = childs[j].getFirst('input')) {
 					input.set('tabindex', tabindex++);
 					input.name = input.name.replace(/\[[0-9]+\]/g, '[' + i + ']');
@@ -1588,6 +1614,12 @@ var Backend =
 				}
 			}
 		}
+
+		new Sortables(tbody, {
+			contstrain: true,
+			opacity: 0.6,
+			handle: '.drag-handle'
+		});
 	},
 
 	/**
@@ -1600,7 +1632,9 @@ var Backend =
 		var table = $(id),
 			tbody = table.getElement('tbody'),
 			parent = $(el).getParent('tr'),
-			rows = tbody.getChildren();
+			rows = tbody.getChildren(),
+			tabindex = 1,
+			input, childs, i, j;
 
 		Backend.getScrollOffset();
 
@@ -1608,7 +1642,7 @@ var Backend =
 			case 'copy':
 				var tr = new Element('tr'),
 					childs = parent.getChildren();
-				for (var i=0; i<childs.length; i++) {
+				for (i=0; i<childs.length; i++) {
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (input = childs[i].getFirst('input')) {
 						next.getFirst().value = input.value;
@@ -1638,17 +1672,22 @@ var Backend =
 		}
 
 		rows = tbody.getChildren();
-		var tabindex = 1;
 
-		for (var i=0; i<rows.length; i++) {
-			var childs = rows[i].getChildren();
-			for (var j=0; j<childs.length; j++) {
+		for (i=0; i<rows.length; i++) {
+			childs = rows[i].getChildren();
+			for (j=0; j<childs.length; j++) {
 				if (input = first = childs[j].getFirst('input')) {
 					input.set('tabindex', tabindex++);
 					input.name = input.name.replace(/\[[0-9]+\]/g, '[' + i + ']')
 				}
 			}
 		}
+
+		new Sortables(tbody, {
+			contstrain: true,
+			opacity: 0.6,
+			handle: '.drag-handle'
+		});
 	},
 
 	/**

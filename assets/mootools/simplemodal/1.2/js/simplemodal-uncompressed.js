@@ -444,11 +444,12 @@ var SimpleModal = new Class({
          if(this.options.keyEsc){
            window.addEvent("keydown", this._removeSM );
            // PATCH: also listen to the event from within the iframe (see #5297)
-           if (iframe = $("simple-modal").getElement('iframe')) {
-             iframe.addEvent('load', function() {
+           var iframe = $("simple-modal").getElement('iframe');
+           iframe && iframe.addEvent('load', function() {
+             if (iframe.contentWindow.MooTools) {
                iframe.contentWindow.addEvent("keydown", this._removeSM);
-			 }.bind(this));
-           }
+             }
+           }.bind(this));
            // PATCH EOF
          }
        }
