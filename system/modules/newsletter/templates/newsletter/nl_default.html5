@@ -22,7 +22,7 @@
       <?php endif; ?>
 
       <label for="ctrl_email_<?php echo $this->id; ?>" class="invisible"><?php echo $this->emailLabel; ?></label>
-      <input type="text" name="email" id="ctrl_email_<?php echo $this->id; ?>" class="text" value="<?php echo $this->email; ?>">
+      <input type="text" name="email" id="ctrl_email_<?php echo $this->id; ?>" class="text" value="<?php echo $this->email; ?>" placeholder="<?php echo $this->emailLabel; ?>">
 
       <?php if ($this->showChannels): ?>
         <label for="ctrl_channels_<?php echo $this->id; ?>" class="invisible"><?php echo $this->channelsLabel; ?></label>
