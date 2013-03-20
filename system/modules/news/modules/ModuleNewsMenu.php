@@ -51,7 +51,7 @@ class ModuleNewsMenu extends \ModuleNews
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### NEWS ARCHIVE MENU ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['newsmenu'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;

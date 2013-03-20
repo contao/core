@@ -45,7 +45,7 @@ class ModuleNavigation extends \Module
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### NAVIGATION MENU ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['navigation'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;

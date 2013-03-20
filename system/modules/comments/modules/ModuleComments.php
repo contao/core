@@ -44,7 +44,7 @@ class ModuleComments extends \Module
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### COMMENTS ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['comments'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;

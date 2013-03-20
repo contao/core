@@ -44,7 +44,7 @@ class ContentComments extends \ContentElement
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### COMMENTS ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['comments'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 
 			return $objTemplate->parse();
