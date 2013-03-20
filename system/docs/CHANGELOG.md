@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### New
+Added the "getPageLayout" hook (see #4736).
+
+### New
 Added more options to the event list module (see #5481):
 
  * show upcoming events of the next month/year
