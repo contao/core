@@ -142,22 +142,26 @@ class File extends \System
 	 *
 	 * Supported keys:
 	 *
-	 * * size:      the file size
-	 * * name:      the file name without extension
-	 * * dirname:   the path of the parent folder
-	 * * extension: the file extension
-	 * * filename:  the file name and extension
-	 * * mime:      the file's mime type
-	 * * hash:      the file's MD5 checksum
-	 * * ctime:     the file's ctime
-	 * * mtime:     the file's mtime
-	 * * atime:     the file's atime
-	 * * icon:      the name of the corresponding mime icon
-	 * * path:      the path to the file
-	 * * width:     the file width (images only)
-	 * * height:    the file height (images only)
-	 * * isGdImage: true if the file can be handled by the GDlib
-	 * * handle:    the file handle (returned by fopen())
+	 * * size:        the file size
+	 * * name:        the file name without extension
+	 * * dirname:     the path of the parent folder
+	 * * extension:   the file extension
+	 * * filename:    the file name and extension
+	 * * mime:        the file's mime type
+	 * * hash:        the file's MD5 checksum
+	 * * ctime:       the file's ctime
+	 * * mtime:       the file's mtime
+	 * * atime:       the file's atime
+	 * * icon:        the name of the corresponding mime icon
+	 * * path:        the path to the file
+	 * * width:       the file width (images only)
+	 * * height:      the file height (images only)
+	 * * isGdImage:   true if the file can be handled by the GDlib
+	 * * channels:    the number of channels (images only)
+	 * * bits:        the number of bits for each color (images only)
+	 * * isRgbImage:  true if the file is an RGB image
+	 * * isCmykImage: true if the file is a CMYK image
+	 * * handle:      the file handle (returned by fopen())
 	 *
 	 * @param string $strKey The property name
 	 *
@@ -253,6 +257,30 @@ class File extends \System
 			case 'isGdImage':
 				return in_array($this->extension, array('gif', 'jpg', 'jpeg', 'png'));
 				break;
+
+            case 'channels':
+                if (empty($this->arrImageSize))
+                {
+                    $this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
+                }
+                return $this->arrImageSize['channels'];
+                break;
+
+            case 'bits':
+                if (empty($this->arrImageSize))
+                {
+                    $this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
+                }
+                return $this->arrImageSize['bits'];
+                break;
+
+            case 'isRgbImage':
+                return ($this->channels == 3);
+                break;
+
+            case 'isCmykImage':
+                return ($this->channels == 4);
+                break;
 
 			case 'handle':
 				if (!is_resource($this->resFile))
