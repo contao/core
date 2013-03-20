@@ -221,7 +221,7 @@ class Combiner extends \System
 				$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
 
 				$strBuffer = '';
-				$chunks = preg_split('/url\("([^"]+)"\)/', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
+				$chunks = preg_split('/url\(["\'](.+)["\']\)/U', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 				// Check the URLs
 				for ($i=0; $i<count($chunks); $i=$i+2)
