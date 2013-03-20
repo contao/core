@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### New
+Added the "modifyFrontendPage" hook (see #4291).
+
+### New
 Replaced CodeMirror with ACE (see #5332).
 
 ### New

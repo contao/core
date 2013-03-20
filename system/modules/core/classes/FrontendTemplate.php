@@ -203,6 +203,16 @@ class FrontendTemplate extends \Template
 		$this->strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $this->strBuffer);
 		$this->strBuffer = $this->replaceDynamicScriptTags($this->strBuffer); // see #4203
 
+		// HOOK: allow to modify the compiled markup (see #4291)
+		if (isset($GLOBALS['TL_HOOKS']['modifyFrontendPage']) && is_array($GLOBALS['TL_HOOKS']['modifyFrontendPage']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['modifyFrontendPage'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->strBuffer = $this->$callback[0]->$callback[1]($this->strBuffer, $this->strTemplate);
+			}
+		}
+
 		// Not all $_GET parameters have been used (see #4277)
 		if ($blnCheckRequest && \Input::hasUnusedGet())
 		{
