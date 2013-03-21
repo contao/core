@@ -129,6 +129,17 @@ class Collection
 
 
 	/**
+	 * Return the database result
+	 *
+	 * @return \Database\Result|null The database result object or null
+	 */
+	public function getResult()
+	{
+		return $this->objResult;
+	}
+
+
+	/**
 	 * Return the current row as associative array
 	 *
 	 * @return array The current row as array
@@ -378,5 +389,24 @@ class Collection
 		$this->arrModels[$this->intIndex + 1] = new $strClass($this->objResult);
 
 		return true;
+	}
+
+
+	/**
+	 * Fetch all column of each row
+	 *
+	 * @return array An array with all rows and columns
+	 */
+	public function fetchAll()
+	{
+		$this->reset();
+		$return = array();
+
+		while ($this->next())
+		{
+			$return[] = $this->row();
+		}
+
+		return $return;
 	}
 }

@@ -5,6 +5,13 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### New
+Added new methods to models and model collections:
+
+ * `Model::getResult()`:      returns the database object
+ * `Collection::fetchAll()`:  returns the data of all models as array
+ * `Collection::getResult()`: returns the database object
+
+### New
 Insert tags now support flags (see #4717). Usage example:
 
  * `{{ua::browser|uncached}}`

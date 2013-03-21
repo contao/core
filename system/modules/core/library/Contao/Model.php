@@ -56,6 +56,12 @@ abstract class Model
 	protected static $strPk = 'id';
 
 	/**
+	 * Database result
+	 * @var \Database\Result
+	 */
+	protected $objResult;
+
+	/**
 	 * Data
 	 * @var array
 	 */
@@ -124,6 +130,8 @@ abstract class Model
 				}
 			}
 		}
+
+		$this->objResult = $objResult;
 	}
 
 
@@ -202,6 +210,17 @@ abstract class Model
 
 
 	/**
+	 * Return the database result
+	 *
+	 * @return \Database\Result|null The database result object or null
+	 */
+	public function getResult()
+	{
+		return $this->objResult;
+	}
+
+
+	/**
 	 * Return the current record as associative array
 	 *
 	 * @return array The data record
@@ -240,14 +259,14 @@ abstract class Model
 		if (isset($this->{static::$strPk}) && !$blnForceInsert)
 		{
 			\Database::getInstance()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
-								   ->set($arrSet)
-								   ->execute($this->{static::$strPk});
+									->set($arrSet)
+									->execute($this->{static::$strPk});
 		}
 		else
 		{
 			$stmt = \Database::getInstance()->prepare("INSERT INTO " . static::$strTable . " %s")
-										   ->set($arrSet)
-										   ->execute();
+											->set($arrSet)
+											->execute();
 
 			if (static::$strPk == 'id')
 			{
@@ -255,6 +274,11 @@ abstract class Model
 			}
 		}
 
+		// Update the model data from the DB record (might be modified by default values or triggers)
+		$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+									   ->execute($this->{static::$strPk});
+
+		$this->setRow($res->row());
 		return $this;
 	}
 
