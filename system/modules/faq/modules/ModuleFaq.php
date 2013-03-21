@@ -44,6 +44,7 @@ class ModuleFaq extends \Frontend
 			$arrRoot = $this->Database->getChildRecords($intRoot, 'tl_page');
 		}
 
+		$time = time();
 		$arrProcessed = array();
 
 		// Get all categories
@@ -74,6 +75,12 @@ class ModuleFaq extends \Frontend
 
 					// The target page does not exist
 					if ($objParent === null)
+					{
+						continue;
+					}
+
+					// The target page has not been published (see #5520)
+					if (!$objParent->published || ($objParent->start != '' && $objParent->start > $time) || ($objParent->stop != '' && $objParent->stop < $time))
 					{
 						continue;
 					}

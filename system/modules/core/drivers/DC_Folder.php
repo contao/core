@@ -1923,7 +1923,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			// The target exists
-			if (file_exists(TL_ROOT . '/' . $this->strPath . '/' . $varValue . $this->strExtension))
+			if (strcasecmp($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension) !== 0 && file_exists(TL_ROOT . '/' . $this->strPath . '/' . $varValue . $this->strExtension))
 			{
 				throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['fileExists'], $varValue));
 			}

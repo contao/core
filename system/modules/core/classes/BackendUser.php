@@ -314,7 +314,12 @@ class BackendUser extends \User
 	public function save()
 	{
 		$filemounts = $this->filemounts;
-		$this->arrData['filemounts'] = $this->arrFilemountIds;
+
+		if (!empty($this->arrFilemountIds))
+		{
+			$this->arrData['filemounts'] = $this->arrFilemountIds;
+		}
+
 		parent::save();
 		$this->filemounts = $filemounts;
 	}
