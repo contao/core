@@ -39,7 +39,9 @@ class GoogleSpell extends SpellChecker {
 		$matches = $this->_getMatches($lang, $word);
 
 		if (count($matches) > 0)
-			$sug = explode("\t", utf8_encode($this->_unhtmlentities($matches[0][4])));
+			// PATCH: do not utf8_encode() here
+			//$sug = explode("\t", utf8_encode($this->_unhtmlentities($matches[0][4])));
+			$sug = explode("\t", $this->_unhtmlentities($matches[0][4]));
 
 		// Remove empty
 		foreach ($sug as $item) {
