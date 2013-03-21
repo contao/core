@@ -958,7 +958,7 @@ window.addEvent(\'domready\', function() {
 			if ($this->Input->post('saveNclose'))
 			{
 				$this->resetMessages();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 				$this->redirect($this->getReferer());
 			}
 
@@ -1124,7 +1124,7 @@ window.addEvent(\'domready\', function() {
 			{
 				if ($this->Input->post('saveNclose'))
 				{
-					setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+					$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 					$this->redirect($this->getReferer());
 				}
 
@@ -1245,7 +1245,7 @@ window.addEvent(\'domready\', function() {
 
 			if ($this->Input->post('saveNclose'))
 			{
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 				$this->redirect($this->getReferer());
 			}
 
@@ -1385,7 +1385,7 @@ window.addEvent(\'domready\', function() {
 	 */
 	protected function save($varValue)
 	{
-		if ($this->Input->post('FORM_SUBMIT') != $this->strTable || !file_exists(TL_ROOT . '/' . $this->strPath . '/' . $this->varValue . $this->strExtension) || !$this->isMounted($this->strPath . '/' . $this->varValue . $this->strExtension) || $this->varValue == $varValue)
+		if ($this->Input->post('FORM_SUBMIT') != $this->strTable || !file_exists(TL_ROOT . '/' . $this->strPath . '/' . $this->varValue . $this->strExtension) || !$this->isMounted($this->strPath . '/' . $this->varValue . $this->strExtension) || $this->varValue === $varValue)
 		{
 			return;
 		}

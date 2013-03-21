@@ -63,8 +63,30 @@ require(TL_ROOT . '/system/interface.php');
 
 
 /**
+ * Define the relative path to the installation (see #5339)
+ */
+$objEnvironment = Environment::getInstance();
+
+if (file_exists(TL_ROOT . '/system/config/pathconfig.php'))
+{
+	define('TL_PATH', include TL_ROOT . '/system/config/pathconfig.php');
+}
+elseif (TL_MODE == 'BE')
+{
+	define('TL_PATH', preg_replace('/\/contao\/[^\/]*$/i', '', $objEnvironment->requestUri));
+}
+else
+{
+	define('TL_PATH', null); // cannot be reliably determined
+}
+
+$GLOBALS['TL_CONFIG']['websitePath'] = TL_PATH; // backwards compatibility
+
+
+/**
  * Start the session
  */
+@session_set_cookie_params(0, (TL_PATH ? TL_PATH : '/')); // see #5339
 @session_start();
 
 
@@ -72,7 +94,6 @@ require(TL_ROOT . '/system/interface.php');
  * Load the basic classes
  */
 $objConfig = Config::getInstance();
-$objEnvironment = Environment::getInstance();
 $objInput = Input::getInstance();
 $objToken = RequestToken::getInstance();
 
@@ -92,32 +113,28 @@ error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']
 
 
 /**
- * Define the relativ path to the Contao installation
+ * Store the relative path
+ *
+ * Only store this value if the temp directory is writable and the local
+ * configuration file exists, otherwise it will initialize a Files object and
+ * prevent the install tool from loading the Safe Mode Hack (see #3215).
  */
-if ($GLOBALS['TL_CONFIG']['websitePath'] === null)
+if (TL_PATH !== null && !file_exists(TL_ROOT . '/system/config/pathconfig.php'))
 {
-	$path = preg_replace('/\/contao\/[^\/]*$/i', '', $objEnvironment->requestUri);
-	$path = preg_replace('/\/$/i', '', $path);
-
-	try
+	if (is_writable(TL_ROOT . '/system/tmp') && file_exists(TL_ROOT . '/system/config/localconfig.php'))
 	{
-		$GLOBALS['TL_CONFIG']['websitePath'] = $path;
-
-		// Only store this value if the temp directory is writable and the local configuration
-		// file exists, otherwise it will initialize a Files object and prevent the install tool
-		// from loading the Safe Mode Hack (see #3215).
-		if (is_writable(TL_ROOT . '/system/tmp') && file_exists(TL_ROOT . '/system/config/localconfig.php'))
+		try
 		{
-			$objConfig->update("\$GLOBALS['TL_CONFIG']['websitePath']", $path);
+			$objFile = new File('system/config/pathconfig.php');
+			$objFile->write("<?php\n\n// Relative path to the installation\nreturn '" . TL_PATH . "';\n");
+			$objFile->close();
+		}
+		catch (Exception $e)
+		{
+			log_message($e->getMessage());
 		}
 	}
-	catch (Exception $e)
-	{
-		log_message($e->getMessage());
-	}
 }
-
-define('TL_PATH', $GLOBALS['TL_CONFIG']['websitePath']);
 
 
 /**

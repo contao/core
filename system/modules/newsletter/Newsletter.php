@@ -492,7 +492,7 @@ class Newsletter extends Backend
 				$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['invalid'], $intInvalid));
 			}
 
-			setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+			$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 			$this->reload();
 		}
 

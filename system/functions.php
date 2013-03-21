@@ -49,8 +49,9 @@ function __autoload($strClassName)
 	// Try to load the class name from the session cache
 	if (!$GLOBALS['TL_CONFIG']['debugMode'] && isset($objCache->$strClassName))
 	{
-		if (@include_once(TL_ROOT . '/' . $objCache->$strClassName))
+		if (file_exists(TL_ROOT . '/' . $objCache->$strClassName))
 		{
+			include_once(TL_ROOT . '/' . $objCache->$strClassName);
 			return; // The class could be loaded
 		}
 		else

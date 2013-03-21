@@ -42,7 +42,12 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		'enableVersioning'            => true,
 		'onsubmit_callback' => array
 		(
-			array('tl_member', 'storeDateAdded')
+			array('tl_member', 'storeDateAdded'),
+			array('tl_member', 'checkRemoveSession')
+		),
+		'ondelete_callback' => array
+		(
+			array('tl_member', 'removeSession')
 		)
 	),
 
@@ -408,8 +413,8 @@ class tl_member extends Backend
 	 */
 	public function setNewPassword($strPassword, $user)
 	{
-		// Return if there is no user (e.g. upon registration) (see #5247)
-		if (TL_MODE != 'FE' || !$user)
+		// Return if there is no user (e.g. upon registration)
+		if (!$user)
 		{
 			return $strPassword;
 		}
@@ -459,6 +464,36 @@ class tl_member extends Backend
 
 		$this->Database->prepare("UPDATE tl_member SET dateAdded=? WHERE id=?")
 					   ->execute($time, $dc->id);
+	}
+
+
+	/**
+	 * Check whether the user session should be removed
+	 * @param object
+	 */
+	public function checkRemoveSession($dc)
+	{
+		if ($dc instanceof DataContainer && $dc->activeRecord)
+		{
+			if ($dc->activeRecord->disable || ($dc->activeRecord->start != '' && $dc->activeRecord->start > time()) || ($dc->activeRecord->stop != '' && $dc->activeRecord->stop <= time()))
+			{
+				$this->removeSession($dc);
+			}
+		}
+	}
+
+
+	/**
+	 * Remove the session if a user is deleted (see #5353)
+	 * @param object
+	 */
+	public function removeSession($dc)
+	{
+		if ($dc instanceof DataContainer && $dc->activeRecord)
+		{
+			$this->Database->prepare("DELETE FROM tl_session WHERE name='FE_USER_AUTH' AND pid=?")
+						   ->execute($dc->activeRecord->id);
+		}
 	}
 
 
@@ -530,6 +565,13 @@ class tl_member extends Backend
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_member', $intId);
+
+		// Remove the session if the user is disabled (see #5353)
+		if (!$blnVisible)
+		{
+			$this->Database->prepare("DELETE FROM tl_session WHERE name='FE_USER_AUTH' AND pid=?")
+						   ->execute($intId);
+		}
 
 		// HOOK: update newsletter subscriptions
 		if (in_array('newsletter', $this->Config->getActiveModules()))

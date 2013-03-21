@@ -1884,13 +1884,13 @@ window.addEvent(\'domready\', function() {
 			if (isset($_POST['saveNclose']))
 			{
 				$this->resetMessages();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 				$this->redirect($this->getReferer());
 			}
 			elseif (isset($_POST['saveNedit']))
 			{
 				$this->resetMessages();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 				$strUrl = $this->addToUrl($GLOBALS['TL_DCA'][$this->strTable]['list']['operations']['edit']['href']);
 
 				$strUrl = preg_replace('/(&amp;)?s2e=[^&]*/i', '', $strUrl);
@@ -1901,7 +1901,7 @@ window.addEvent(\'domready\', function() {
 			elseif (isset($_POST['saveNback']))
 			{
 				$this->resetMessages();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 
 				if ($this->ptable == '')
 				{
@@ -1919,7 +1919,7 @@ window.addEvent(\'domready\', function() {
 			elseif (isset($_POST['saveNcreate']))
 			{
 				$this->resetMessages();
-				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+				$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 				$strUrl = $this->Environment->script . '?do=' . $this->Input->get('do');
 
 				if (isset($_GET['table']))
@@ -2216,7 +2216,7 @@ window.addEvent(\'domready\', function() {
 			{
 				if ($this->Input->post('saveNclose'))
 				{
-					setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+					$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 					$this->redirect($this->getReferer());
 				}
 
@@ -2494,7 +2494,7 @@ window.addEvent(\'domready\', function() {
 			{
 				if ($this->Input->post('saveNclose'))
 				{
-					setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+					$this->setCookie('BE_PAGE_OFFSET', 0, 0);
 					$this->redirect($this->getReferer());
 				}
 
@@ -2670,7 +2670,7 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Save the value if there was no error
-		if (($varValue != '' || !$arrData['eval']['doNotSaveEmpty']) && ($this->varValue != $varValue || $arrData['eval']['alwaysSave']))
+		if (($varValue != '' || !$arrData['eval']['doNotSaveEmpty']) && ($this->varValue !== $varValue || $arrData['eval']['alwaysSave']))
 		{
 			// If the field is a fallback field, empty all other columns
 			if ($arrData['eval']['fallback'] && $varValue != '')
@@ -3781,27 +3781,33 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		{
 			foreach ($orderBy as $k=>$v)
 			{
-				if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['findInSet'])
+				list($key, $direction) = explode(' ', $v, 2);
+
+				if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['eval']['findInSet'])
 				{
-					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options_callback']))
+					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['options_callback']))
 					{
-						$strClass = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options_callback'][0];
-						$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options_callback'][1];
+						$strClass = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['options_callback'][0];
+						$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['options_callback'][1];
 
 						$this->import($strClass);
 						$keys = $this->$strClass->$strMethod($this);
 					}
 					else
 					{
-						$keys = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options'];
+						$keys = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['options'];
 					}
 
-					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['isAssociative'] || array_is_assoc($keys))
+					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['eval']['isAssociative'] || array_is_assoc($keys))
 					{
 						$keys = array_keys($keys);
 					}
 
-					$orderBy[$k] = $this->Database->findInSet($v, $keys);
+					$orderBy[$k] = $this->Database->findInSet($key, $keys);
+				}
+				elseif (in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['flag'], array(5, 6, 7, 8, 9, 10)))
+				{
+					$orderBy[$k] = "CAST($key AS SIGNED)" . ($direction ? " $direction" : ""); // see #5503
 				}
 			}
 

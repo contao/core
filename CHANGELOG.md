@@ -1,6 +1,40 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.10 (2013-03-21)
+----------------------------
+
+### Fixed
+Cast varchar date fields to int when selecting from the database (see #5503).
+
+### Fixed
+Only unset POST variables if `Widget::submitInput()` returns `true` (see #5474).
+
+### Fixed
+Strictly compare values when determining whether to save or not (see #5471).
+
+### Updated
+Updated TinyMCE to version 3.5.8 (see #5329).
+
+### Fixed
+Correctly show the "invalid date and time" error message (see #5480).
+
+### Fixed
+Correctly split the words when adding to the search index (see #5363).
+
+### Fixed
+Correctly load TinyMCE in IE7 and IE8 (see #5346).
+
+### Fixed
+Send the correct cache headers in "client cache only" mode (see #5358).
+
+### Fixed
+Remove the session of deleted or disabled users (see #5353).
+
+### Fixed
+Correctly set the cookie paths (see #5339).
+
+
 Version 2.11.9 (2013-02-05)
 ---------------------------
 

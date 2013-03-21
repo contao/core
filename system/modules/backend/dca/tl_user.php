@@ -46,7 +46,12 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 		),
 		'onsubmit_callback' => array
 		(
-			array('tl_user', 'storeDateAdded')
+			array('tl_user', 'storeDateAdded'),
+			array('tl_user', 'checkRemoveSession')
+		),
+		'ondelete_callback' => array
+		(
+			array('tl_user', 'removeSession')
 		)
 	),
 
@@ -683,6 +688,35 @@ class tl_user extends Backend
 
 
 	/**
+	 * Check whether the user session should be removed
+	 * @param DataContainer
+	 */
+	public function checkRemoveSession(DataContainer $dc)
+	{
+		if ($dc->activeRecord)
+		{
+			if ($dc->activeRecord->disable || ($dc->activeRecord->start != '' && $dc->activeRecord->start > time()) || ($dc->activeRecord->stop != '' && $dc->activeRecord->stop <= time()))
+			{
+				$this->removeSession($dc);
+			}
+		}
+	}
+
+
+	/**
+	 * Remove the session if a user is deleted (see #5353)
+	 */
+	public function removeSession(DataContainer $dc)
+	{
+		if ($dc->activeRecord)
+		{
+			$this->Database->prepare("DELETE FROM tl_session WHERE name='BE_USER_AUTH' AND pid=?")
+						   ->execute($dc->activeRecord->id);
+		}
+	}
+
+
+	/**
 	 * Return the "toggle visibility" button
 	 * @param array
 	 * @param string
@@ -765,6 +799,13 @@ class tl_user extends Backend
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_user', $intId);
+
+		// Remove the session if the user is disabled (see #5353)
+		if (!$blnVisible)
+		{
+			$this->Database->prepare("DELETE FROM tl_session WHERE name='BE_USER_AUTH' AND pid=?")
+						   ->execute($intId);
+		}
 	}
 }
 

@@ -696,11 +696,11 @@ abstract class System
 	 * @param string
 	 * @param boolean
 	 */
-	protected function setCookie($strName, $varValue, $intExpires, $strPath='/', $strDomain=null, $blnSecure=false)
+	protected function setCookie($strName, $varValue, $intExpires, $strPath=null, $strDomain=null, $blnSecure=false)
 	{
 		if ($strPath == '')
 		{
-			$strPath = '/';
+			$strPath = $GLOBALS['TL_CONFIG']['websitePath'] ? $GLOBALS['TL_CONFIG']['websitePath'] : '/'; // see #4390
 		}
 
 		$objCookie = new stdClass();

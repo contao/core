@@ -91,7 +91,7 @@ class ContentTable extends ContentElement
 
 					if (!strlen($this->Input->cookie($co)))
 					{
-						setcookie($co, $i . '|' . $so, 0, '/');
+						$this->setCookie($co, $i . '|' . $so, 0);
 					}
 				}
 
