@@ -1640,7 +1640,7 @@ abstract class Controller extends \System
 								foreach ($GLOBALS['TL_HOOKS']['insertTagFlags'] as $callback)
 								{
 									$this->import($callback[0]);
-									$varValue = $this->$callback[0]->$callback[1]($strTag, $arrCache[$strTag], $flags, $blnCache);
+									$varValue = $this->$callback[0]->$callback[1]($flag, $strTag, $arrCache[$strTag], $flags, $blnCache);
 
 									// Replace the tag and stop the loop
 									if ($varValue !== false)
@@ -1650,6 +1650,7 @@ abstract class Controller extends \System
 									}
 								}
 							}
+							trigger_error('Unknown insert tag flag "' . $flag . '"', E_USER_WARNING);
 							break;
 					}
 				}
