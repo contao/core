@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="MSC.open">
         <source>Read more on %s</source>
+        <target>%s တွင်နောက်ထပ်ဖတ်ရှု</target>
       </trans-unit>
       <trans-unit id="MSC.author">
         <source>Author</source>
@@ -10,12 +11,15 @@
       </trans-unit>
       <trans-unit id="MSC.by">
         <source>by</source>
+        <target>ဖြင့်</target>
       </trans-unit>
       <trans-unit id="MSC.empty">
         <source>There are no news items for this period.</source>
+        <target>ယခုအတော်အတွင်းသတင်းမရှိပါ။</target>
       </trans-unit>
       <trans-unit id="MSC.emptyList">
         <source>Currently there are no news items.</source>
+        <target>လောလောဆယ်တွင်သတင်းမရှိ။</target>
       </trans-unit>
       <trans-unit id="MSC.comments">
         <source>Comments</source>
@@ -23,9 +27,11 @@
       </trans-unit>
       <trans-unit id="MSC.commentCount">
         <source>(comments: %s)</source>
+        <target>(မှတ်ချက်များ: %s)</target>
       </trans-unit>
       <trans-unit id="MSC.news_items">
         <source>%d item(s)</source>
+        <target>%d ပစ္စည်း(များ)</target>
       </trans-unit>
       <trans-unit id="MSC.news_previous">
         <source>&amp;lt;</source>

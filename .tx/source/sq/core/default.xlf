@@ -751,9 +751,11 @@
       </trans-unit>
       <trans-unit id="MSC.lw_copy">
         <source>Duplicate the element</source>
+        <target>Dyfisho elementin</target>
       </trans-unit>
       <trans-unit id="MSC.lw_up">
         <source>Move the element one position up</source>
+        <target>Leviz elementin një pozitë më lartë</target>
       </trans-unit>
       <trans-unit id="MSC.lw_down">
         <source>Move the element one position down</source>

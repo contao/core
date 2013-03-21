@@ -21,6 +21,7 @@
       </trans-unit>
       <trans-unit id="tl_labels.submitBT">
         <source>Search</source>
+        <target>ရှာဖွေ</target>
       </trans-unit>
     </body>
   </file>

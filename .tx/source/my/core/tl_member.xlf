@@ -63,6 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_member.phone.0">
         <source>Phone number</source>
+        <target>ဖုန်းနံပါတ်</target>
       </trans-unit>
       <trans-unit id="tl_member.phone.1">
         <source>Please enter the phone number.</source>
@@ -85,9 +86,11 @@
       </trans-unit>
       <trans-unit id="tl_member.email.1">
         <source>Please enter a valid e-mail address.</source>
+        <target>တရားဝင်အီးမေးလ်လိပ်စာထည့်သွင်း။</target>
       </trans-unit>
       <trans-unit id="tl_member.website.0">
         <source>Website</source>
+        <target>ဝဘ်ဆိုက်</target>
       </trans-unit>
       <trans-unit id="tl_member.website.1">
         <source>Here you can enter a web address.</source>
@@ -100,12 +103,15 @@
       </trans-unit>
       <trans-unit id="tl_member.groups.0">
         <source>Member groups</source>
+        <target>အဖွဲ့ဝင်အုပ်စုများ</target>
       </trans-unit>
       <trans-unit id="tl_member.groups.1">
         <source>Here you can assign the user to one or more groups.</source>
+        <target>တစ်ခု(သို့)အုပ်စုများသို့အသံုးပြုသူကိုသတ်မှတ်နိုင်။</target>
       </trans-unit>
       <trans-unit id="tl_member.login.0">
         <source>Allow login</source>
+        <target>ဖွင့်ဝင်ခွင့်ပြု</target>
       </trans-unit>
       <trans-unit id="tl_member.login.1">
         <source>Allow the user to log into the front end.</source>
@@ -116,6 +122,7 @@
       </trans-unit>
       <trans-unit id="tl_member.username.1">
         <source>Please enter a unique username.</source>
+        <target>အသံုးပြုသူနာမည်ထည့်သွင်း။</target>
       </trans-unit>
       <trans-unit id="tl_member.assignDir.0">
         <source>Set home directory</source>
@@ -131,24 +138,31 @@
       </trans-unit>
       <trans-unit id="tl_member.disable.0">
         <source>Deactivate</source>
+        <target>အသက်မသွင်း</target>
       </trans-unit>
       <trans-unit id="tl_member.disable.1">
         <source>Temporarily disable the account.</source>
+        <target>စာရင်းကိုယာယီမလုပ်ဆောင်စေ။</target>
       </trans-unit>
       <trans-unit id="tl_member.start.0">
         <source>Activate on</source>
+        <target>အသက်သွင်းစေ</target>
       </trans-unit>
       <trans-unit id="tl_member.start.1">
         <source>Automatically activate the account on this day.</source>
+        <target>ယခုနေ့တွင်စာရင်းကိုလိုလျောက်အသက်သွင်းစေ။</target>
       </trans-unit>
       <trans-unit id="tl_member.stop.0">
         <source>Deactivate on</source>
+        <target>အသက်မသွင်း</target>
       </trans-unit>
       <trans-unit id="tl_member.stop.1">
         <source>Automatically deactivate the account on this day.</source>
+        <target>ယခုနေ့တွင်စာရင်းကိုလိုလျောက်အသက်မသွင်းစေ။</target>
       </trans-unit>
       <trans-unit id="tl_member.personal_legend">
         <source>Personal data</source>
+        <target>ကိုယ်ရေးအချက်အလက်</target>
       </trans-unit>
       <trans-unit id="tl_member.address_legend">
         <source>Address details</source>
@@ -158,6 +172,7 @@
       </trans-unit>
       <trans-unit id="tl_member.groups_legend">
         <source>User groups</source>
+        <target>အသံုးပြုသူအုပ်စုများ</target>
       </trans-unit>
       <trans-unit id="tl_member.login_legend">
         <source>Login details</source>
@@ -167,9 +182,11 @@
       </trans-unit>
       <trans-unit id="tl_member.account_legend">
         <source>Account settings</source>
+        <target>စာရင်းချိန်ညှိချက်</target>
       </trans-unit>
       <trans-unit id="tl_member.personalData">
         <source>Personal data</source>
+        <target>ကိုယ်ရေးအချက်အလက်</target>
       </trans-unit>
       <trans-unit id="tl_member.addressDetails">
         <source>Address details</source>

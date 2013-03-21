@@ -189,30 +189,35 @@
       </trans-unit>
       <trans-unit id="CTE.headline.0">
         <source>Headline</source>
+        <target>ခေါင်းစဉ်</target>
       </trans-unit>
       <trans-unit id="CTE.headline.1">
         <source>Generates a headline (h1 - h6).</source>
       </trans-unit>
       <trans-unit id="CTE.text.0">
         <source>Text</source>
+        <target>စာသား</target>
       </trans-unit>
       <trans-unit id="CTE.text.1">
         <source>Generates a rich text element.</source>
       </trans-unit>
       <trans-unit id="CTE.html.0">
         <source>HTML</source>
+        <target>ဟိစ်တီအမ်အလ်</target>
       </trans-unit>
       <trans-unit id="CTE.html.1">
         <source>Allows you to add custom HTML code.</source>
       </trans-unit>
       <trans-unit id="CTE.list.0">
         <source>List</source>
+        <target>စာရင်း</target>
       </trans-unit>
       <trans-unit id="CTE.list.1">
         <source>Generates an ordered or unordered list.</source>
       </trans-unit>
       <trans-unit id="CTE.table.0">
         <source>Table</source>
+        <target>စားပွဲ</target>
       </trans-unit>
       <trans-unit id="CTE.table.1">
         <source>Generates an optionally sortable table.</source>
@@ -225,6 +230,7 @@
       </trans-unit>
       <trans-unit id="CTE.code.0">
         <source>Code</source>
+        <target>ကုဒ်</target>
       </trans-unit>
       <trans-unit id="CTE.code.1">
         <source>Highlights code snippets and prints them to the screen.</source>
@@ -249,6 +255,7 @@
       </trans-unit>
       <trans-unit id="CTE.image.0">
         <source>Image</source>
+        <target>ပံု</target>
       </trans-unit>
       <trans-unit id="CTE.image.1">
         <source>Generates a stand-alone image.</source>
@@ -261,12 +268,14 @@
       </trans-unit>
       <trans-unit id="CTE.player.0">
         <source>Video/audio</source>
+        <target>ဗီဒီယို/အသံ</target>
       </trans-unit>
       <trans-unit id="CTE.player.1">
         <source>Generates a video or audio player.</source>
       </trans-unit>
       <trans-unit id="CTE.youtube.0">
         <source>YouTube</source>
+        <target>ယူကျူ့</target>
       </trans-unit>
       <trans-unit id="CTE.youtube.1">
         <source>Adds a YouTube video.</source>
@@ -276,12 +285,14 @@
       </trans-unit>
       <trans-unit id="CTE.download.0">
         <source>Download</source>
+        <target>ကူးဆွဲ</target>
       </trans-unit>
       <trans-unit id="CTE.download.1">
         <source>Generates a link to download a file.</source>
       </trans-unit>
       <trans-unit id="CTE.downloads.0">
         <source>Downloads</source>
+        <target>ကူးဆွဲများ</target>
       </trans-unit>
       <trans-unit id="CTE.downloads.1">
         <source>Generates multiple links to download files.</source>
@@ -304,18 +315,21 @@
       </trans-unit>
       <trans-unit id="CTE.form.0">
         <source>Form</source>
+        <target>ပံုစံ</target>
       </trans-unit>
       <trans-unit id="CTE.form.1">
         <source>Includes a form.</source>
       </trans-unit>
       <trans-unit id="CTE.module.0">
         <source>Module</source>
+        <target>အပိုင်း</target>
       </trans-unit>
       <trans-unit id="CTE.module.1">
         <source>Includes a front end module.</source>
       </trans-unit>
       <trans-unit id="CTE.teaser.0">
         <source>Article teaser</source>
+        <target>ဆောင်းပါးပဟေဠိ</target>
       </trans-unit>
       <trans-unit id="CTE.teaser.1">
         <source>Displays the teaser text of an article.</source>
@@ -397,33 +411,43 @@
       </trans-unit>
       <trans-unit id="CHMOD.cuser">
         <source>Owner</source>
+        <target>ပိုင်ရှင်</target>
       </trans-unit>
       <trans-unit id="CHMOD.cgroup">
         <source>Group</source>
+        <target>အုပ်စု</target>
       </trans-unit>
       <trans-unit id="CHMOD.cworld">
         <source>Everybody</source>
+        <target>လူအားလံုး</target>
       </trans-unit>
       <trans-unit id="DAYS.0">
         <source>Sunday</source>
+        <target>တနင်္ဂနွေ</target>
       </trans-unit>
       <trans-unit id="DAYS.1">
         <source>Monday</source>
+        <target>တနင်္လာ</target>
       </trans-unit>
       <trans-unit id="DAYS.2">
         <source>Tuesday</source>
+        <target>အင်္ဂါ</target>
       </trans-unit>
       <trans-unit id="DAYS.3">
         <source>Wednesday</source>
+        <target>ဗုဒ္ဓဟူး</target>
       </trans-unit>
       <trans-unit id="DAYS.4">
         <source>Thursday</source>
+        <target>ကြာသပတေး</target>
       </trans-unit>
       <trans-unit id="DAYS.5">
         <source>Friday</source>
+        <target>သောကြာ</target>
       </trans-unit>
       <trans-unit id="DAYS.6">
         <source>Saturday</source>
+        <target>စနေ</target>
       </trans-unit>
       <trans-unit id="DAYS_SHORT.0">
         <source>Sun</source>
@@ -556,6 +580,7 @@
       </trans-unit>
       <trans-unit id="MSC.source.0">
         <source>Source files</source>
+        <target>ရင်းမြစ်ဖိုင်များ</target>
       </trans-unit>
       <trans-unit id="MSC.source.1">
         <source>Please upload the CSV files to be imported.</source>
@@ -574,6 +599,7 @@
       </trans-unit>
       <trans-unit id="MSC.lw_import.0">
         <source>CSV import</source>
+        <target>စီအက်စ်ဗီတင်သွင်း</target>
       </trans-unit>
       <trans-unit id="MSC.lw_import.1">
         <source>Import list items from a CSV file</source>
@@ -592,6 +618,7 @@
       </trans-unit>
       <trans-unit id="MSC.tw_import.0">
         <source>CSV import</source>
+        <target>စီအက်စ်ဗီတင်သွင်း</target>
       </trans-unit>
       <trans-unit id="MSC.tw_import.1">
         <source>Import table items from a CSV file</source>
@@ -652,6 +679,7 @@
       </trans-unit>
       <trans-unit id="MSC.ow_group">
         <source>Group</source>
+        <target>အုပ်စု</target>
       </trans-unit>
       <trans-unit id="MSC.mw_copy">
         <source>Duplicate the row</source>
@@ -667,9 +695,11 @@
       </trans-unit>
       <trans-unit id="MSC.mw_module">
         <source>Module</source>
+        <target>အပိုင်း</target>
       </trans-unit>
       <trans-unit id="MSC.mw_column">
         <source>Column</source>
+        <target>ကော်လံ</target>
       </trans-unit>
       <trans-unit id="MSC.aw_title">
         <source>Title</source>
@@ -761,12 +791,14 @@
       </trans-unit>
       <trans-unit id="MSC.id.0">
         <source>ID</source>
+        <target>အိုင်ဒီ</target>
       </trans-unit>
       <trans-unit id="MSC.id.1">
         <source>Note that changing the ID can break data integrity!</source>
       </trans-unit>
       <trans-unit id="MSC.pid.0">
         <source>Parent ID</source>
+        <target>မိခင်အိုင်ဒီ</target>
       </trans-unit>
       <trans-unit id="MSC.pid.1">
         <source>Note that changing the parent ID can break data integrity!</source>
@@ -797,6 +829,7 @@
       </trans-unit>
       <trans-unit id="MSC.password.0">
         <source>Password</source>
+        <target>စကားဝှက်</target>
       </trans-unit>
       <trans-unit id="MSC.password.1">
         <source>Please enter a password.</source>
@@ -872,6 +905,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.toggleMobile.0">
         <source>Mobile version</source>
+        <target>မိုဘိုင်းပံုစံ</target>
       </trans-unit>
       <trans-unit id="MSC.toggleMobile.1">
         <source>Go to the mobile version</source>
@@ -893,6 +927,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.feUser">
         <source>Front end user</source>
+        <target>အပြင်ပိုင်းအသံုးပြုသူ</target>
       </trans-unit>
       <trans-unit id="MSC.backToTop">
         <source>Back to top</source>
@@ -902,12 +937,14 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.home">
         <source>Home</source>
+        <target>ပင်မ</target>
       </trans-unit>
       <trans-unit id="MSC.homeTitle">
         <source>Back to the back end start page</source>
       </trans-unit>
       <trans-unit id="MSC.user">
         <source>User</source>
+        <target>အသံုးပြုသူ</target>
       </trans-unit>
       <trans-unit id="MSC.loginTo">
         <source>Log into %s</source>
@@ -959,9 +996,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.filter">
         <source>Filter</source>
+        <target>စိစစ်သူ</target>
       </trans-unit>
       <trans-unit id="MSC.search">
         <source>Search</source>
+        <target>ရှာဖွေ</target>
       </trans-unit>
       <trans-unit id="MSC.noResult">
         <source>No records found.</source>
@@ -1031,9 +1070,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.yes">
         <source>yes</source>
+        <target>ဟုတ်</target>
       </trans-unit>
       <trans-unit id="MSC.no">
         <source>no</source>
+        <target>မဟုတ်</target>
       </trans-unit>
       <trans-unit id="MSC.goBack">
         <source>Go back</source>
@@ -1049,9 +1090,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.date">
         <source>Date</source>
+        <target>နေ့စွဲ</target>
       </trans-unit>
       <trans-unit id="MSC.tstamp">
         <source>Revision date</source>
+        <target>ပြင်ဆင်နေ့စွဲ</target>
       </trans-unit>
       <trans-unit id="MSC.entry">
         <source>%s entry</source>
@@ -1079,9 +1122,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.male">
         <source>Male</source>
+        <target>ယောကျာ်း</target>
       </trans-unit>
       <trans-unit id="MSC.female">
         <source>Female</source>
+        <target>မိန်းမ</target>
       </trans-unit>
       <trans-unit id="MSC.fileSize">
         <source>File size</source>
@@ -1097,6 +1142,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
         <source>Download</source>
+        <target>ကူးဆွဲ</target>
       </trans-unit>
       <trans-unit id="MSC.fileDownloadTitle">
         <source>Download this file</source>
@@ -1109,12 +1155,15 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.version">
         <source>Version</source>
+        <target>ပံုစံ</target>
       </trans-unit>
       <trans-unit id="MSC.restore">
         <source>Restore</source>
+        <target>ပြန်လည်ဖော်ထုတ်</target>
       </trans-unit>
       <trans-unit id="MSC.backendModules">
         <source>Back end modules</source>
+        <target>အတွင်းပိုင်းအပိုင်းများ</target>
       </trans-unit>
       <trans-unit id="MSC.welcomeTo">
         <source>%s back end</source>
@@ -1142,6 +1191,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.deleteSelected">
         <source>Delete</source>
+        <target>ပယ်ဖျက်</target>
       </trans-unit>
       <trans-unit id="MSC.editSelected">
         <source>Edit</source>
@@ -1190,12 +1240,14 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.mandatory">
         <source>Mandatory field</source>
+        <target>မဖြစ်မနေလုပ်နယ်ပယ်</target>
       </trans-unit>
       <trans-unit id="MSC.create">
         <source>Create</source>
       </trans-unit>
       <trans-unit id="MSC.delete">
         <source>Delete</source>
+        <target>ပယ်ဖျက်</target>
       </trans-unit>
       <trans-unit id="MSC.protected">
         <source>protected</source>
@@ -1258,6 +1310,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.emailSubject">
         <source>Your registration on %s</source>
+        <target>%s တွင်မှတ်ပံုတင်ခြင်း</target>
       </trans-unit>
       <trans-unit id="MSC.adminSubject">
         <source>New registration on %s</source>
@@ -1282,9 +1335,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.securityQuestion">
         <source>Security question</source>
+        <target>လံုခြုံရေးမေးခွန်း</target>
       </trans-unit>
       <trans-unit id="MSC.closeAccount">
         <source>Close account</source>
+        <target>စာရင်းပိတ်သိမ်း</target>
       </trans-unit>
       <trans-unit id="MSC.changeSelection">
         <source>Change selection</source>
@@ -1306,9 +1361,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.table">
         <source>Table</source>
+        <target>စားပွဲ</target>
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>
+        <target>ဖော်ပြချက်</target>
       </trans-unit>
       <trans-unit id="MSC.noVersions">
         <source>Currently there are no versions.</source>
@@ -1327,9 +1384,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.quicknav">
         <source>Quick navigation</source>
+        <target>အမြန်ဖော်ပြသွားလာခြင်း</target>
       </trans-unit>
       <trans-unit id="MSC.quicklink">
         <source>Quick link</source>
+        <target>အမြန်ဖော်ပြကွန်ဆက်</target>
       </trans-unit>
       <trans-unit id="MSC.username">
         <source>Username</source>
@@ -1397,12 +1456,14 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.searchLabel">
         <source>Search</source>
+        <target>ရှာဖွေ</target>
       </trans-unit>
       <trans-unit id="MSC.keywords">
         <source>Keywords</source>
       </trans-unit>
       <trans-unit id="MSC.options">
         <source>Options</source>
+        <target>ရွေးပိုင်ခွင့်များ</target>
       </trans-unit>
       <trans-unit id="MSC.matchAll">
         <source>match all words</source>
@@ -1421,12 +1482,15 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.facebookShare">
         <source>Share on Facebook</source>
+        <target>ဖေ့စ်ဘုတ်တွင်မျှဝေ</target>
       </trans-unit>
       <trans-unit id="MSC.twitterShare">
         <source>Share on Twitter</source>
+        <target>တွစ်တာတွင်မျှဝေ</target>
       </trans-unit>
       <trans-unit id="MSC.gplusShare">
         <source>Share on Google+</source>
+        <target>ဂူးဂယ်ပလပ်စ်တွင်မျှဝေ</target>
       </trans-unit>
       <trans-unit id="MSC.pleaseWait">
         <source>Please wait</source>
@@ -1511,6 +1575,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="CONFIRM.do">
         <source>Module</source>
+        <target>အပိုင်း</target>
       </trans-unit>
       <trans-unit id="CONFIRM.table">
         <source>Affected table</source>

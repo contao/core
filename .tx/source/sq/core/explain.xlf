@@ -7,12 +7,15 @@
       </trans-unit>
       <trans-unit id="XPL.insertTags.0.1">
         <source>For more information about TinyMCE please visit &lt;a href=&quot;http://www.tinymce.com/&quot; title=&quot;TinyMCE by moxiecode&quot; target=&quot;_blank&quot;&gt;http://www.tinymce.com/&lt;/a&gt;.</source>
+        <target>Për më shumë informacion në lidhje me TinyMCE ju lutem vizitoni &lt;a href=&quot;http://www.tinymce.com/&quot; title=&quot;TinyMCE by moxiecode&quot; target=&quot;_blank&quot;&gt;http://www.tinymce.com/&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.0">
         <source>Insert tags</source>
+        <target>Fut tags</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.1">
         <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</source>
+        <target>Për më shumë informacion mbi futjen e tags-ve ju lutem vizitoni &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.0">
         <source>Code Editor</source>
@@ -20,12 +23,15 @@
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.1">
         <source>For more information about CodeMirror please visit &lt;a href=&quot;http://codemirror.net&quot; title=&quot;EditArea by Marijn Haverbeke&quot; target=&quot;_blank&quot;&gt;http://codemirror.net&lt;/a&gt;.</source>
+        <target>Për më shumë informacion në lidhje me CodeMirror ju lutem vizitoni&lt;a href=&quot;http://codemirror.net&quot; title=&quot;EditArea by Marijn Haverbeke&quot; target=&quot;_blank&quot;&gt;http://codemirror.net&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.0.0">
         <source>colspan</source>
+        <target>colspan</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.0.1">
         <source>Contao supports all date and time formats that can be parsed with the PHP date() function. However, to ensure that any input can be transformed into a UNIX timestamp, you can only use numeric date and time formats (j, d, m, n, y, Y, g, G, h, H, i, s) in the back end.&lt;br&gt;&lt;br&gt;&lt;strong&gt;You can enter variant front end formats in the site structure (website root pages).&lt;/strong&gt;&lt;br&gt;&lt;br&gt;&lt;em&gt;Here are some examples of valid date and time formats&lt;/em&gt;:</source>
+        <target>Contao mbështet të gjitha formatet e datave dhe kohërave që mund të analizohet me PHP funksionin date(). Megjithatë, për të siguruar se të gjitha të dhënat mund të transformohet në një UNIX timestamp , ju mund të përdorni vetëm të dhëna numerike dhe formate kohore (j, d, m, n, y, Y, g, G, H, H, I, s) në back end. &lt;br&gt; &lt;br&gt; &lt;strong&gt; Ju mund të epeni variacione të llojllojshme të front end në strukturën e faqes (faqet rrënjë). &lt;/strong&gt; &lt;br&gt;&lt;br&gt;&lt;em&gt;  Këtu janë disa shembuj të datave të vlefshme dhe formatet kohore &lt;/ em&gt;:</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.1.0">
         <source>Y-m-d</source>

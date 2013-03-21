@@ -3,15 +3,19 @@
     <body>
       <trans-unit id="MOD.listing.0">
         <source>Listing</source>
+        <target>စာရင်းလုပ်နေ</target>
       </trans-unit>
       <trans-unit id="MOD.listing.1">
         <source>List the records of any table</source>
+        <target>စားပွဲတစ်ခုခုမှမှတ်တမ်းများစာရင်းလုပ်</target>
       </trans-unit>
       <trans-unit id="FMD.listing.0">
         <source>Listing</source>
+        <target>စာရင်းလုပ်နေ</target>
       </trans-unit>
       <trans-unit id="FMD.listing.1">
         <source>Lists the records of any table</source>
+        <target>စားပွဲတစ်ခုခုမှမှတ်တမ်းများစာရင်းလုပ်</target>
       </trans-unit>
     </body>
   </file>

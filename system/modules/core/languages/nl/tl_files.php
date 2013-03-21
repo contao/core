@@ -34,6 +34,7 @@ $GLOBALS['TL_LANG']['tl_files']['syncFound'] = 'Origineel bestand "%s" op "%s" g
 $GLOBALS['TL_LANG']['tl_files']['syncRemoved'] = 'Bestand of map "%s" verwijderd';
 $GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'Map "%s" aangemaakt';
 $GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'Map "%s" gevonden';
+$GLOBALS['TL_LANG']['tl_files']['syncFolderH'] = 'De Hash van map "%s" werd bijgewerkt';
 $GLOBALS['TL_LANG']['tl_files']['syncFileC'] = 'Het bestand "%s" is aangemaakt';
 $GLOBALS['TL_LANG']['tl_files']['syncFileF'] = 'Bestand "%s" gevonden';
 $GLOBALS['TL_LANG']['tl_files']['syncFileH'] = 'De Hash van bestand "%s" werd bijgewerkt';

@@ -7,57 +7,74 @@
       </trans-unit>
       <trans-unit id="tl_files.name.1">
         <source>Contao automatically adds the file extension.</source>
+        <target>ဖိုင်နောက်ဆက်တွဲကိုကွန်တောင်မှလိုလျောက်ထည့်။</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
+        <target>ရှေ့ဆက်အချက်အလက်</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.1">
         <source>Here you can enter the file meta information.</source>
+        <target>ရှေ့ဆက်အချက်အလက်ထည့်သွင်းနိုင်။</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
+        <target>ဖိုင်ကူးတင်</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.1">
         <source>Browse your local computer and select the files you want to upload to the server.</source>
       </trans-unit>
       <trans-unit id="tl_files.editor.0">
         <source>Source editor</source>
+        <target>ရင်းမြစ်တည်းဖြတ်သူ</target>
       </trans-unit>
       <trans-unit id="tl_files.editor.1">
         <source>Here you can edit the file source.</source>
+        <target>ဖိုင်ရင်းမြစ်တည်းဖြတ်နိုင်။</target>
       </trans-unit>
       <trans-unit id="tl_files.upload">
         <source>Upload files</source>
+        <target>ကူးတင်ဖိုင်များ</target>
       </trans-unit>
       <trans-unit id="tl_files.uploadNback">
         <source>Upload files and go back</source>
+        <target>ဖိုင်များကူးတင်ပြီးပြန်သွား</target>
       </trans-unit>
       <trans-unit id="tl_files.editFF">
         <source>Edit a file or folder</source>
+        <target>ဖိုင်(သို့)ဖိုင်တွဲတည်းဖြတ်</target>
       </trans-unit>
       <trans-unit id="tl_files.uploadFF">
         <source>Upload files to folder &quot;%s&quot;</source>
+        <target>ဖိုင်တွဲ &quot;%s&quot; သို့ဖိုင်များကူးတင်</target>
       </trans-unit>
       <trans-unit id="tl_files.editFile">
         <source>Edit file &quot;%s&quot;</source>
+        <target>ဖိုင် &quot;%s&quot; တည်းဖြတ်</target>
       </trans-unit>
       <trans-unit id="tl_files.browseFiles">
         <source>Browse files</source>
+        <target>ဖိုင်များရှာဖွေ</target>
       </trans-unit>
       <trans-unit id="tl_files.clearList">
         <source>Clear list</source>
+        <target>စာရင်းဖယ်ရှား</target>
       </trans-unit>
       <trans-unit id="tl_files.startUpload">
         <source>Start upload</source>
+        <target>ကူးတင်စတင်</target>
       </trans-unit>
       <trans-unit id="tl_files.syncFound">
         <source>Found the original file &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>&quot;%s&quot; တွင် &quot;%s&quot; မူလဖိုင်ရှာတွေ့</target>
       </trans-unit>
       <trans-unit id="tl_files.syncRemoved">
         <source>Removed the file or folder &quot;%s&quot;</source>
+        <target>ဖိုင်(သို့)ဖိုင်တွဲ &quot;%s&quot; ဖယ်ရှားပြီး</target>
       </trans-unit>
       <trans-unit id="tl_files.syncFolderC">
         <source>Created the folder &quot;%s&quot;</source>
+        <target>ဖိုင်တွဲ &quot;%s&quot; ဖန်တီးပြီး</target>
       </trans-unit>
       <trans-unit id="tl_files.syncFolderF">
         <source>Found the folder &quot;%s&quot;</source>
@@ -76,9 +93,11 @@
       </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>
+        <target>ဖိုင်တွဲအသစ်</target>
       </trans-unit>
       <trans-unit id="tl_files.new.1">
         <source>Create a new folder</source>
+        <target>ဖိုင်တွဲအသစ်ဖန်တီး</target>
       </trans-unit>
       <trans-unit id="tl_files.cut.0">
         <source>Move file or folder</source>
@@ -109,6 +128,7 @@
       </trans-unit>
       <trans-unit id="tl_files.source.1">
         <source>Edit file &quot;%s&quot;</source>
+        <target>ဖိုင် &quot;%s&quot; တည်းဖြတ်</target>
       </trans-unit>
       <trans-unit id="tl_files.protect.0">
         <source>Protect folder</source>
@@ -124,15 +144,18 @@
       </trans-unit>
       <trans-unit id="tl_files.move.0">
         <source>File upload</source>
+        <target>ဖိုင်ကူးတင်</target>
       </trans-unit>
       <trans-unit id="tl_files.move.1">
         <source>Upload files to the server</source>
       </trans-unit>
       <trans-unit id="tl_files.pasteinto.0">
         <source>Paste into</source>
+        <target>ထဲသို့ထုတ်ထား</target>
       </trans-unit>
       <trans-unit id="tl_files.pasteinto.1">
         <source>Paste into this folder</source>
+        <target>ယခုဖိုင်တွဲထဲသို့ထုတ်ထား</target>
       </trans-unit>
       <trans-unit id="tl_files.sync.0">
         <source>Synchronize</source>

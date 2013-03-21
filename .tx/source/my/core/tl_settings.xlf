@@ -3,54 +3,65 @@
     <body>
       <trans-unit id="tl_settings.websiteTitle.0">
         <source>Website title</source>
+        <target>ဝဘ်ဆိုက်ခေါင်းစဉ်</target>
       </trans-unit>
       <trans-unit id="tl_settings.websiteTitle.1">
         <source>Please enter the title of the website.</source>
+        <target>ဝဘ်ဆိုက်ခေါင်းစဉ်ထည့်သွင်း။</target>
       </trans-unit>
       <trans-unit id="tl_settings.adminEmail.0">
         <source>E-mail address of the system administrator</source>
+        <target>စက်စနစ်စီမံခန့်ခွဲသူအီးမေးလ်လိပ်စာ</target>
       </trans-unit>
       <trans-unit id="tl_settings.adminEmail.1">
         <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
       </trans-unit>
       <trans-unit id="tl_settings.dateFormat.0">
         <source>Date format</source>
+        <target>ရက်စွဲအချိုးအစား</target>
       </trans-unit>
       <trans-unit id="tl_settings.dateFormat.1">
         <source>The date format string will be parsed with the PHP date() function.</source>
       </trans-unit>
       <trans-unit id="tl_settings.timeFormat.0">
         <source>Time format</source>
+        <target>အချိန်အချိုးအစား</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeFormat.1">
         <source>The time format string will be parsed with the PHP date() function.</source>
       </trans-unit>
       <trans-unit id="tl_settings.datimFormat.0">
         <source>Date and time format</source>
+        <target>နေ့စွဲနှင့်အချိန်အချိုးအစား</target>
       </trans-unit>
       <trans-unit id="tl_settings.datimFormat.1">
         <source>The date and time format string will be parsed with the PHP date() function.</source>
       </trans-unit>
       <trans-unit id="tl_settings.timeZone.0">
         <source>Time zone</source>
+        <target>ဒေသစံတော်ချိန်</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeZone.1">
         <source>Please select the server time zone.</source>
+        <target>ဆာဗာစံတော်ချိန်ကိုရွေး။</target>
       </trans-unit>
       <trans-unit id="tl_settings.websitePath.0">
         <source>Relative path to the Contao directory</source>
+        <target>ကွန်တောင်ဖိုင်လမ်းညွှန်သို့ပတ်သက်သောလမ်းကြောင်း</target>
       </trans-unit>
       <trans-unit id="tl_settings.websitePath.1">
         <source>The relative path to the Contao directory is usually set automatically by the install tool.</source>
       </trans-unit>
       <trans-unit id="tl_settings.characterSet.0">
         <source>Character set</source>
+        <target>စာလံုးအစုံ</target>
       </trans-unit>
       <trans-unit id="tl_settings.characterSet.1">
         <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
       </trans-unit>
       <trans-unit id="tl_settings.customSections.0">
         <source>Custom layout sections</source>
+        <target>စိတ်ကြိုက်အခင်းအကျင်းအပိုင်းများ</target>
       </trans-unit>
       <trans-unit id="tl_settings.customSections.1">
         <source>Here you can enter a comma separated list of custom layout sections.</source>
@@ -75,12 +86,14 @@
       </trans-unit>
       <trans-unit id="tl_settings.resultsPerPage.0">
         <source>Items per page</source>
+        <target>စာမျက်နှာရှိပစ္စည်းများ</target>
       </trans-unit>
       <trans-unit id="tl_settings.resultsPerPage.1">
         <source>Here you can define the number of items per page in the back end.</source>
       </trans-unit>
       <trans-unit id="tl_settings.maxResultsPerPage.0">
         <source>Maximum items per page</source>
+        <target>အများဆံုးစာမျက်နှာရှိပစ္စည်းများ</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxResultsPerPage.1">
         <source>This overall limit takes effect if a user chooses the &quot;show all records&quot; option.</source>
@@ -111,6 +124,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
+        <target>အမည်မဖော်လိုအို်င်ပီလိပ်စာများ</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.1">
         <source>Anonymize any IP address that is stored in the database, except in the &lt;em&gt;tl_session&lt;/em&gt; table (the IP address is bound to the session for security reasons).</source>
@@ -123,12 +137,14 @@
       </trans-unit>
       <trans-unit id="tl_settings.rewriteURL.0">
         <source>Rewrite URLs</source>
+        <target>ယူအာအယ်များပြန်ရေး</target>
       </trans-unit>
       <trans-unit id="tl_settings.rewriteURL.1">
         <source>Make Contao generate static URLs without the index.php fragment. This feature requires &quot;mod_rewrite&quot;, renaming the &quot;.htaccess.default&quot; file to &quot;.htaccess&quot; and adjusting the RewriteBase as necessary.</source>
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.0">
         <source>Add the language to the URL</source>
+        <target>ယူအာအယ်သို့ဘာသာစကားထည့်</target>
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
         <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</source>
@@ -141,6 +157,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.0">
         <source>Enable auto_item</source>
+        <target>auto_item လုပ်ဆောင်စေ</target>
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.1">
         <source>Skip the &lt;em&gt;items/&lt;/em&gt; or &lt;em&gt;events/&lt;/em&gt; fragment in the URL and automatically discover the item based on the &lt;em&gt;auto_item&lt;/em&gt; parameter.</source>
@@ -153,12 +170,14 @@
       </trans-unit>
       <trans-unit id="tl_settings.folderUrl.0">
         <source>Enable folder URLs</source>
+        <target>ဖိုင်တွဲယူအာအယ်များလုပ်ဆောင်စေ</target>
       </trans-unit>
       <trans-unit id="tl_settings.folderUrl.1">
         <source>Here you can enable folder-style page aliases like &lt;em&gt;docs/install/download.html&lt;/em&gt; instead of &lt;em&gt;docs-install-download.html&lt;/em&gt;.</source>
       </trans-unit>
       <trans-unit id="tl_settings.allowedTags.0">
         <source>Allowed HTML tags</source>
+        <target>ခွင့်ပြုပြီးဟိပ်စ်တီအမ်အယ်အမည်များ</target>
       </trans-unit>
       <trans-unit id="tl_settings.allowedTags.1">
         <source>Here you can enter a list of allowed HTML tags that will not be stripped.</source>
@@ -189,12 +208,14 @@
       </trans-unit>
       <trans-unit id="tl_settings.displayErrors.0">
         <source>Display error messages</source>
+        <target>အမှားပြမှာကြားချက်များပြသ</target>
       </trans-unit>
       <trans-unit id="tl_settings.displayErrors.1">
         <source>Print error messages to the screen (not recommended for productional sites).</source>
       </trans-unit>
       <trans-unit id="tl_settings.logErrors.0">
         <source>Log error messages</source>
+        <target>စာရင်းမှာကြားချက်များပြသ</target>
       </trans-unit>
       <trans-unit id="tl_settings.logErrors.1">
         <source>Write error messages to the error log file (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</source>
@@ -213,24 +234,28 @@
       </trans-unit>
       <trans-unit id="tl_settings.allowedDownload.0">
         <source>Download file types</source>
+        <target>ဖိုင်အမျိုးအစားများကူးဆွဲ</target>
       </trans-unit>
       <trans-unit id="tl_settings.allowedDownload.1">
         <source>Here you can enter a comma separated list of downloadable file types.</source>
       </trans-unit>
       <trans-unit id="tl_settings.validImageTypes.0">
         <source>Image file types</source>
+        <target>ပံုဖိုင်အမျိုးအစားများ</target>
       </trans-unit>
       <trans-unit id="tl_settings.validImageTypes.1">
         <source>Here you can enter a comma separated list of file types that can be handled by the image class.</source>
       </trans-unit>
       <trans-unit id="tl_settings.editableFiles.0">
         <source>Editable file types</source>
+        <target>တည်းဖြတ်နိုင်သောဖိုင်အမျိုးအစားများ</target>
       </trans-unit>
       <trans-unit id="tl_settings.editableFiles.1">
         <source>Here you can enter a comma separated list of file types that can be edited in the source editor.</source>
       </trans-unit>
       <trans-unit id="tl_settings.templateFiles.0">
         <source>Template file types</source>
+        <target>ပံုစံပြားဖိုင်အမျိုးအစားများ</target>
       </trans-unit>
       <trans-unit id="tl_settings.templateFiles.1">
         <source>Here you can enter a comma separated list of supported template file types.</source>
@@ -261,12 +286,14 @@
       </trans-unit>
       <trans-unit id="tl_settings.uploadPath.0">
         <source>Files directory</source>
+        <target>ဖိုင်များဖိုင်လမ်းညွန်</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploadPath.1">
         <source>Here you can set the relative path to the Contao files directory.</source>
       </trans-unit>
       <trans-unit id="tl_settings.uploadTypes.0">
         <source>Upload file types</source>
+        <target>ကူးတင်ဖိုင်အမျိုးအစားများ</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploadTypes.1">
         <source>Here you can enter a comma separated list of uploadable file types.</source>
@@ -315,33 +342,43 @@
       </trans-unit>
       <trans-unit id="tl_settings.smtpHost.0">
         <source>SMTP hostname</source>
+        <target>အက်စ်အမ်တီပီလက်ခံနာမည်</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpHost.1">
         <source>Please enter the host name of the SMTP server.</source>
+        <target>အက်စ်အမ်တီပီလက်ခံနာမည်ထည့်သွင်း။</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpUser.0">
         <source>SMTP username</source>
+        <target>အက်စ်အမ်တီပီအသံုးပြုသူနာမည်</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpUser.1">
         <source>Here you can enter the SMTP username.</source>
+        <target>အက်စ်အမ်တီပီအသံုးပြုသူနာမည်ထည့်သွင်းနိုင်။</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpPass.0">
         <source>SMTP password</source>
+        <target>အက်စ်အမ်တီပီစကားဝှက်</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpPass.1">
         <source>Here you can enter the SMTP password.</source>
+        <target>အက်စ်အမ်တီပီစကားဝှက်ထည့်သွင်းနိုင်။</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpEnc.0">
         <source>SMTP encryption</source>
+        <target>အက်စ်အမ်တီပီကုဒ်ဝှက်</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpEnc.1">
         <source>Here you can choose an encryption method (SSL or TLS).</source>
+        <target>ကုဒ်ဝှက်နည်းလမ်းရွေးနိုင် (အက်စ်အက်စ်အလ်(သို့)တီအလ်အက်စ်)</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpPort.0">
         <source>SMTP port number</source>
+        <target>အက်စ်အမ်တီပီနံပါတ်ပေါက်</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpPort.1">
         <source>Please enter the port number of the SMTP server.</source>
+        <target>အက်စ်အမ်တီပီဆာဗာနံပါတ်ပေါက်ထည့်နိုင်။</target>
       </trans-unit>
       <trans-unit id="tl_settings.inactiveModules.0">
         <source>Inactive extensions</source>
@@ -405,39 +442,51 @@
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>
+        <target>ဝဘ်ဆိုက်ခေါင်းစဉ်</target>
       </trans-unit>
       <trans-unit id="tl_settings.date_legend">
         <source>Date and time</source>
+        <target>နေ့စွဲနှင့်အချိန်</target>
       </trans-unit>
       <trans-unit id="tl_settings.global_legend">
         <source>Global configuration</source>
+        <target>အများသံုးပံုစံပြင်ခြင်း</target>
       </trans-unit>
       <trans-unit id="tl_settings.backend_legend">
         <source>Back end configuration</source>
+        <target>အတွင်းပိုင်းပံုစံပြင်ခြင်း</target>
       </trans-unit>
       <trans-unit id="tl_settings.frontend_legend">
         <source>Front end configuration</source>
+        <target>အပြင်ပိုင်းပံုစံပြင်ခြင်း</target>
       </trans-unit>
       <trans-unit id="tl_settings.sections_legend">
         <source>Layout sections</source>
+        <target>အခင်းအကျင်းအပိုင်းများ</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>
+        <target>ကိုယ်ရေးကိုယ်တာချိန်ညှိချက်</target>
       </trans-unit>
       <trans-unit id="tl_settings.security_legend">
         <source>Security settings</source>
+        <target>လံုခြုံရေးချိန်ညှိချက်</target>
       </trans-unit>
       <trans-unit id="tl_settings.files_legend">
         <source>Files and images</source>
+        <target>ဖိုင်များနှင့်ပံုများ</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploads_legend">
         <source>Upload settings</source>
+        <target>ကူးတင်ချိန်ညှိချက်</target>
       </trans-unit>
       <trans-unit id="tl_settings.search_legend">
         <source>Search engine settings</source>
+        <target>ရှာဖွေအင်ဂျင်ချိန်ညှိချက်</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtp_legend">
         <source>SMTP configuration</source>
+        <target>အက်စ်အမ်တီပီပံုစံပြင်ခြင်း</target>
       </trans-unit>
       <trans-unit id="tl_settings.ftp_legend">
         <source>Safe Mode Hack</source>
@@ -453,6 +502,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.update_legend">
         <source>Live Update</source>
+        <target>တိုက်ရိုက်မွမ်းမံ</target>
       </trans-unit>
       <trans-unit id="tl_settings.static_legend">
         <source>Static resources</source>

@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_user_group.calendars_legend">
         <source>Calendar permissions</source>
+        <target>ပြက္ခဒိန်ခွင့်ပြုချက်များ</target>
       </trans-unit>
     </body>
   </file>

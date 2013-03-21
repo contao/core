@@ -51,6 +51,7 @@
       </trans-unit>
       <trans-unit id="tl_page.jumpTo.0">
         <source>Redirect page</source>
+        <target>ဦးတည်ရာပြောင်းစာမျက်နှာ</target>
       </trans-unit>
       <trans-unit id="tl_page.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected. Leave blank to redirect to the first regular subpage.</source>
@@ -75,18 +76,21 @@
       </trans-unit>
       <trans-unit id="tl_page.dateFormat.0">
         <source>Date format</source>
+        <target>ရက်စွဲအချိုးအစား</target>
       </trans-unit>
       <trans-unit id="tl_page.dateFormat.1">
         <source>The date format string will be parsed with the PHP date() function.</source>
       </trans-unit>
       <trans-unit id="tl_page.timeFormat.0">
         <source>Time format</source>
+        <target>အချိန်အချိုးအစား</target>
       </trans-unit>
       <trans-unit id="tl_page.timeFormat.1">
         <source>The time format string will be parsed with the PHP date() function.</source>
       </trans-unit>
       <trans-unit id="tl_page.datimFormat.0">
         <source>Date and time format</source>
+        <target>နေ့စွဲနှင့်အချိန်အချိုးအစား</target>
       </trans-unit>
       <trans-unit id="tl_page.datimFormat.1">
         <source>The date and time format string will be parsed with the PHP date() function.</source>
@@ -123,6 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_page.groups.0">
         <source>Allowed member groups</source>
+        <target>ခွင့်ပြုပြီးအဖွဲ့ဝင်အုပ်စုများ</target>
       </trans-unit>
       <trans-unit id="tl_page.groups.1">
         <source>These groups will be able to access the page.</source>
@@ -153,6 +158,7 @@
       </trans-unit>
       <trans-unit id="tl_page.cache.0">
         <source>Cache timeout</source>
+        <target>မှတ်ဥာဏ်အသေးစားအချိန်ကုန်</target>
       </trans-unit>
       <trans-unit id="tl_page.cache.1">
         <source>After this period, the cached version of the page will expire.</source>
@@ -165,12 +171,14 @@
       </trans-unit>
       <trans-unit id="tl_page.cuser.0">
         <source>Owner</source>
+        <target>ပိုင်ရှင်</target>
       </trans-unit>
       <trans-unit id="tl_page.cuser.1">
         <source>Please select a user as the owner of the page.</source>
       </trans-unit>
       <trans-unit id="tl_page.cgroup.0">
         <source>Group</source>
+        <target>အုပ်စု</target>
       </trans-unit>
       <trans-unit id="tl_page.cgroup.1">
         <source>Please select a group as the owner of the page.</source>
@@ -189,6 +197,7 @@
       </trans-unit>
       <trans-unit id="tl_page.cssClass.0">
         <source>CSS class</source>
+        <target>စီအက်အက်စ်အမျိုးအစား</target>
       </trans-unit>
       <trans-unit id="tl_page.cssClass.1">
         <source>The class(es) will be used in the navigation menu and the body tag.</source>
@@ -207,18 +216,21 @@
       </trans-unit>
       <trans-unit id="tl_page.guests.0">
         <source>Show to guests only</source>
+        <target>ဧည့်သည်များကိုသာပြသ</target>
       </trans-unit>
       <trans-unit id="tl_page.guests.1">
         <source>Hide the page if there is an authenticated user.</source>
       </trans-unit>
       <trans-unit id="tl_page.tabindex.0">
         <source>Tab index</source>
+        <target>အညွှန်းမျက်နှာစာ</target>
       </trans-unit>
       <trans-unit id="tl_page.tabindex.1">
         <source>The position of the navigation item in the tabbing order.</source>
       </trans-unit>
       <trans-unit id="tl_page.accesskey.0">
         <source>Access key</source>
+        <target>ဝင်ကြည့်ခွင့်သော့</target>
       </trans-unit>
       <trans-unit id="tl_page.accesskey.1">
         <source>A navigation item can be focused by pressing the [ALT] or [CTRL] key and the access key simultaneously.</source>
@@ -231,12 +243,14 @@
       </trans-unit>
       <trans-unit id="tl_page.start.0">
         <source>Show from</source>
+        <target>မှပြသ</target>
       </trans-unit>
       <trans-unit id="tl_page.start.1">
         <source>Do not show the page on the website before this day.</source>
       </trans-unit>
       <trans-unit id="tl_page.stop.0">
         <source>Show until</source>
+        <target>အထိပြသ</target>
       </trans-unit>
       <trans-unit id="tl_page.stop.1">
         <source>Do not show the page on the website on and after this day.</source>
@@ -246,12 +260,14 @@
       </trans-unit>
       <trans-unit id="tl_page.meta_legend">
         <source>Meta information</source>
+        <target>ရှေ့ဆက်အချက်အလက်</target>
       </trans-unit>
       <trans-unit id="tl_page.system_legend">
         <source>System settings</source>
       </trans-unit>
       <trans-unit id="tl_page.redirect_legend">
         <source>Redirect settings</source>
+        <target>ဦးတည်ရာပြောင်းချိန်ညှိချက်</target>
       </trans-unit>
       <trans-unit id="tl_page.dns_legend">
         <source>DNS settings</source>
@@ -270,6 +286,7 @@
       </trans-unit>
       <trans-unit id="tl_page.protected_legend">
         <source>Access protection</source>
+        <target>ကာကွယ်မှုဝင်ကြည့်</target>
       </trans-unit>
       <trans-unit id="tl_page.layout_legend">
         <source>Layout settings</source>
@@ -285,12 +302,14 @@
       </trans-unit>
       <trans-unit id="tl_page.expert_legend">
         <source>Expert settings</source>
+        <target>ကျွမ်းကျင်သူချိန်ညှိချက်</target>
       </trans-unit>
       <trans-unit id="tl_page.tabnav_legend">
         <source>Keyboard navigation</source>
       </trans-unit>
       <trans-unit id="tl_page.publish_legend">
         <source>Publish settings</source>
+        <target>ထုတ်ဝေချိန်ညှိချက်</target>
       </trans-unit>
       <trans-unit id="tl_page.permanent">
         <source>301 Permanent redirect</source>
@@ -357,15 +376,18 @@
       </trans-unit>
       <trans-unit id="tl_page.pasteafter.0">
         <source>Paste after</source>
+        <target>ပြီးနောက်ထုတ်ထား</target>
       </trans-unit>
       <trans-unit id="tl_page.pasteafter.1">
         <source>Paste after page ID %s</source>
       </trans-unit>
       <trans-unit id="tl_page.pasteinto.0">
         <source>Paste into</source>
+        <target>ထဲသို့ထုတ်ထား</target>
       </trans-unit>
       <trans-unit id="tl_page.pasteinto.1">
         <source>Paste into page ID %s</source>
+        <target>စာမျက်နှာအိုင်ဒီ %s သို့ထုတ်ထား</target>
       </trans-unit>
       <trans-unit id="tl_page.articles.0">
         <source>Edit articles</source>

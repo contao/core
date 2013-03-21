@@ -3,18 +3,21 @@
     <body>
       <trans-unit id="LNG.aa">
         <source>Afar</source>
+        <target>အဖာ</target>
       </trans-unit>
       <trans-unit id="LNG.ab">
         <source>Abkhazian</source>
       </trans-unit>
       <trans-unit id="LNG.af">
         <source>Afrikaans</source>
+        <target>အာဖရိကန်။</target>
       </trans-unit>
       <trans-unit id="LNG.am">
         <source>Amharic</source>
       </trans-unit>
       <trans-unit id="LNG.ar">
         <source>Arabic</source>
+        <target>အာရဗီ</target>
       </trans-unit>
       <trans-unit id="LNG.as">
         <source>Assamese</source>
@@ -30,9 +33,11 @@
       </trans-unit>
       <trans-unit id="LNG.be">
         <source>Belarusian</source>
+        <target>ဘီလာရုဇ်</target>
       </trans-unit>
       <trans-unit id="LNG.bg">
         <source>Bulgarian</source>
+        <target>ဘူဂေးရီးယား</target>
       </trans-unit>
       <trans-unit id="LNG.bh">
         <source>Bihari</source>
@@ -102,12 +107,14 @@
       </trans-unit>
       <trans-unit id="LNG.fj">
         <source>Fiji</source>
+        <target>ဖီဂျီ</target>
       </trans-unit>
       <trans-unit id="LNG.fo">
         <source>Faroese</source>
       </trans-unit>
       <trans-unit id="LNG.fr">
         <source>French</source>
+        <target>ပြင်သစ်</target>
       </trans-unit>
       <trans-unit id="LNG.fy">
         <source>Frisian</source>
@@ -207,6 +214,7 @@
       </trans-unit>
       <trans-unit id="LNG.lo">
         <source>Lao</source>
+        <target>လာအို</target>
       </trans-unit>
       <trans-unit id="LNG.lt">
         <source>Lithuanian</source>
@@ -246,6 +254,7 @@
       </trans-unit>
       <trans-unit id="LNG.na">
         <source>Nauru</source>
+        <target>နောက်ရူး</target>
       </trans-unit>
       <trans-unit id="LNG.ne">
         <source>Nepali</source>
@@ -369,6 +378,7 @@
       </trans-unit>
       <trans-unit id="LNG.to">
         <source>Tonga</source>
+        <target>တုန်ဂါ</target>
       </trans-unit>
       <trans-unit id="LNG.tr">
         <source>Turkish</source>

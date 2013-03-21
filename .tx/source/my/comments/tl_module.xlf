@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_module.comment_legend">
         <source>Comment settings</source>
+        <target>မှတ်ချက်ချိန်ညှိချက်</target>
       </trans-unit>
     </body>
   </file>

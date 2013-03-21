@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_user_group.news_legend">
         <source>News permissions</source>
+        <target>သတင်းခွင့်ပြုချက်များ</target>
       </trans-unit>
     </body>
   </file>

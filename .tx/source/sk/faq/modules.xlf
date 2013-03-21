@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="MOD.faq.0">
         <source>FAQ</source>
-        <target>FAQ (často kladené otázky)</target>
+        <target>FAQ</target>
       </trans-unit>
       <trans-unit id="MOD.faq.1">
         <source>Manage frequently asked questions</source>
@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="FMD.faq">
         <source>FAQ</source>
-        <target>FAQ (často kladené otázky)</target>
+        <target>FAQ</target>
       </trans-unit>
       <trans-unit id="FMD.faqlist.0">
         <source>FAQ list</source>

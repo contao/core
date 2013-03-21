@@ -12,6 +12,7 @@
       </trans-unit>
       <trans-unit id="tl_autoload.available">
         <source>Available modules</source>
+        <target>ရနိုင်သောအပိုင်းများ</target>
       </trans-unit>
       <trans-unit id="tl_autoload.xplAvailable">
         <source>Please select the modules you want to modify.</source>

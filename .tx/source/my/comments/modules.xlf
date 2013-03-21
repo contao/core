@@ -7,6 +7,7 @@
       </trans-unit>
       <trans-unit id="CTE.comments.1">
         <source>Adds a comment form to the page</source>
+        <target>စာမျက်နှာသို့မှတ်ချက်ပံုစံထည့်</target>
       </trans-unit>
       <trans-unit id="FMD.comments.0">
         <source>Comments</source>
@@ -14,6 +15,7 @@
       </trans-unit>
       <trans-unit id="FMD.comments.1">
         <source>Manage comments or guestbook entries</source>
+        <target>မှတ်ချက်များ(သို့)ဧည့်စာအုပ်အဝင်များစီမံ</target>
       </trans-unit>
       <trans-unit id="MOD.comments.0">
         <source>Comments</source>
@@ -21,6 +23,7 @@
       </trans-unit>
       <trans-unit id="MOD.comments.1">
         <source>Manage comments or guestbook entries</source>
+        <target>မှတ်ချက်များ(သို့)ဧည့်စာအုပ်အဝင်များစီမံ</target>
       </trans-unit>
     </body>
   </file>
