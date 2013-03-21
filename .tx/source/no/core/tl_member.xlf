@@ -87,6 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_member.website.0">
         <source>Website</source>
+        <target>Nettsted</target>
       </trans-unit>
       <trans-unit id="tl_member.website.1">
         <source>Here you can enter a web address.</source>

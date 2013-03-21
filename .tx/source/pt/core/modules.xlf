@@ -139,24 +139,31 @@
       </trans-unit>
       <trans-unit id="MOD.tl_style">
         <source>Style sheets</source>
+        <target>Folhas de estilo</target>
       </trans-unit>
       <trans-unit id="MOD.tl_style_sheet">
         <source>Style sheets</source>
+        <target>Folhas de estilo</target>
       </trans-unit>
       <trans-unit id="MOD.tl_module">
         <source>Front end modules</source>
+        <target>Módulos do site</target>
       </trans-unit>
       <trans-unit id="MOD.tl_layout">
         <source>Page layouts</source>
+        <target>Layouts de página</target>
       </trans-unit>
       <trans-unit id="MOD.css">
         <source>Style sheets</source>
+        <target>Folhas de estilo</target>
       </trans-unit>
       <trans-unit id="MOD.modules">
         <source>Front end modules</source>
+        <target>Módulos do site</target>
       </trans-unit>
       <trans-unit id="MOD.layout">
         <source>Page layouts</source>
+        <target>Layouts de página</target>
       </trans-unit>
       <trans-unit id="FMD.navigationMenu">
         <source>Navigation</source>
@@ -272,9 +279,11 @@
       </trans-unit>
       <trans-unit id="FMD.closeAccount.0">
         <source>Close account</source>
+        <target>Encerrar conta</target>
       </trans-unit>
       <trans-unit id="FMD.closeAccount.1">
         <source>Generates a form to delete a member account</source>
+        <target>Cria um formulário para apagar uma conta de membro</target>
       </trans-unit>
       <trans-unit id="FMD.application">
         <source>Applications</source>

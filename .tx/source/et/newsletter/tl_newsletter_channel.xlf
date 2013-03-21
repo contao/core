@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_newsletter_channel.title.0">
         <source>Title</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.title.1">
         <source>Please enter the title of the channel.</source>
@@ -51,6 +52,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.tstamp.0">
         <source>Revision date</source>
+        <target>Kuupäev</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.tstamp.1">
         <source>Date and time of the latest revision</source>

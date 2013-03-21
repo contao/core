@@ -21,6 +21,7 @@
       </trans-unit>
       <trans-unit id="MSC.nl_subject">
         <source>Your subscription on %s</source>
+        <target>Ditt abonnementet på %s</target>
       </trans-unit>
       <trans-unit id="MSC.nl_confirm">
         <source>Thank you for your subscription. You will receive a confirmation e-mail.</source>

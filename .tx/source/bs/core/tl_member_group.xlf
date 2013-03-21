@@ -103,9 +103,11 @@
       </trans-unit>
       <trans-unit id="tl_member_group.toggle.0">
         <source>Activate/deactivate group</source>
+        <target>Aktiviraj/deaktiviraj grupu</target>
       </trans-unit>
       <trans-unit id="tl_member_group.toggle.1">
         <source>Activate/deactivate group ID %s</source>
+        <target>Aktivirajte/deaktivirajte grupu s ID %s</target>
       </trans-unit>
     </body>
   </file>

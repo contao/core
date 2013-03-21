@@ -39,9 +39,11 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_order.0">
         <source>Sort order</source>
+        <target>Подреждане</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_order.1">
         <source>Here you can choose the sort order.</source>
+        <target>Тук можете да изберете начина на подреждане.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_readerModule.0">
         <source>Event reader module</source>
@@ -77,6 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_list">
         <source>Event list</source>
+        <target>Списък със събития</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_day">
         <source>Day</source>
@@ -88,6 +91,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_year">
         <source>Year</source>
+        <target>Година</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_all">
         <source>All events</source>

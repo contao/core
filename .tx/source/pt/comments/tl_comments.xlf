@@ -91,15 +91,19 @@
       </trans-unit>
       <trans-unit id="tl_comments.ip.0">
         <source>IP address</source>
+        <target>Endereço IP</target>
       </trans-unit>
       <trans-unit id="tl_comments.ip.1">
         <source>The IP address of the author.</source>
+        <target>O endereço IP do autor.</target>
       </trans-unit>
       <trans-unit id="tl_comments.notified.0">
         <source>Notified</source>
+        <target>Notificado</target>
       </trans-unit>
       <trans-unit id="tl_comments.notified.1">
         <source>The notification of this comment has been sent.</source>
+        <target>A notificação deste comentário foi enviada.</target>
       </trans-unit>
       <trans-unit id="tl_comments.author_legend">
         <source>Author</source>

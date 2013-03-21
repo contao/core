@@ -177,6 +177,7 @@
       </trans-unit>
       <trans-unit id="tl_user.formp.0">
         <source>Form permissions</source>
+        <target>Lejet e formularit</target>
       </trans-unit>
       <trans-unit id="tl_user.formp.1">
         <source>Here you can define the form permissions.</source>
@@ -232,21 +233,27 @@
       </trans-unit>
       <trans-unit id="tl_user.groups_legend">
         <source>User groups</source>
+        <target>Grupet</target>
       </trans-unit>
       <trans-unit id="tl_user.modules_legend">
         <source>Allowed modules</source>
+        <target>Modulet e lejuara</target>
       </trans-unit>
       <trans-unit id="tl_user.pagemounts_legend">
         <source>Pagemounts</source>
+        <target>Faqe të bashkangjitura</target>
       </trans-unit>
       <trans-unit id="tl_user.filemounts_legend">
         <source>Filemounts</source>
+        <target>Skedarë të bashkangjitur</target>
       </trans-unit>
       <trans-unit id="tl_user.forms_legend">
         <source>Form permissions</source>
+        <target>Lejet e formularit</target>
       </trans-unit>
       <trans-unit id="tl_user.account_legend">
         <source>Account settings</source>
+        <target>Konfigurimi llogarisë</target>
       </trans-unit>
       <trans-unit id="tl_user.session_legend">
         <source>Clear cache</source>

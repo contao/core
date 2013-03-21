@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_user.username.0">
         <source>Username</source>
+        <target>Kasutajanimi</target>
       </trans-unit>
       <trans-unit id="tl_user.username.1">
         <source>Please enter a unique username.</source>

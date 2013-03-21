@@ -18,6 +18,7 @@
       </trans-unit>
       <trans-unit id="MSC.comments">
         <source>Comments</source>
+        <target>Kommentarer</target>
       </trans-unit>
       <trans-unit id="MSC.commentCount">
         <source>(comments: %s)</source>
@@ -27,9 +28,11 @@
       </trans-unit>
       <trans-unit id="MSC.news_previous">
         <source>&amp;lt;</source>
+        <target>&amp;lt;</target>
       </trans-unit>
       <trans-unit id="MSC.news_next">
         <source>&amp;gt;</source>
+        <target>&amp;gt;</target>
       </trans-unit>
     </body>
   </file>

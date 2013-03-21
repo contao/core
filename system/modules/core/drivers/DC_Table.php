@@ -806,6 +806,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					// Reset doNotCopy and fallback fields to their default value
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['doNotCopy'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['fallback'])
 					{
+						$v = '';
+
 						// Use array_key_exists to allow NULL (see #5252)
 						if (array_key_exists('default', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]))
 						{
@@ -1003,6 +1005,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						// Reset all unique, doNotCopy and fallback fields to their default value
 						if ($GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['unique'] || $GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['doNotCopy'] || $GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['fallback'])
 						{
+							$vv = '';
+
 							// Use array_key_exists to allow NULL (see #5252)
 							if (array_key_exists('default', $GLOBALS['TL_DCA'][$v]['fields'][$kk]))
 							{
@@ -2750,7 +2754,7 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Save the value if there was no error
-		if (($varValue != '' || !$arrData['eval']['doNotSaveEmpty']) && ($this->varValue != $varValue || $arrData['eval']['alwaysSave']))
+		if (($varValue != '' || !$arrData['eval']['doNotSaveEmpty']) && ($this->varValue !== $varValue || $arrData['eval']['alwaysSave']))
 		{
 			// If the field is a fallback field, empty all other columns
 			if ($arrData['eval']['fallback'] && $varValue != '')
@@ -3986,27 +3990,33 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		{
 			foreach ($orderBy as $k=>$v)
 			{
-				if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['findInSet'])
+				list($key, $direction) = explode(' ', $v, 2);
+
+				if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['eval']['findInSet'])
 				{
-					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options_callback']))
+					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['options_callback']))
 					{
-						$strClass = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options_callback'][0];
-						$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options_callback'][1];
+						$strClass = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['options_callback'][0];
+						$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['options_callback'][1];
 
 						$this->import($strClass);
 						$keys = $this->$strClass->$strMethod($this);
 					}
 					else
 					{
-						$keys = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options'];
+						$keys = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['options'];
 					}
 
-					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['isAssociative'] || array_is_assoc($keys))
+					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['eval']['isAssociative'] || array_is_assoc($keys))
 					{
 						$keys = array_keys($keys);
 					}
 
 					$orderBy[$k] = $this->Database->findInSet($v, $keys);
+				}
+				elseif (in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['flag'], array(5, 6, 7, 8, 9, 10)))
+				{
+					$orderBy[$k] = "CAST($key AS SIGNED)" . ($direction ? " $direction" : ""); // see #5503
 				}
 			}
 

@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_log.tstamp.0">
         <source>Date</source>
+        <target>திகதி</target>
       </trans-unit>
       <trans-unit id="tl_log.tstamp.1">
         <source>Date and time of the log entry</source>
@@ -21,6 +22,7 @@
       </trans-unit>
       <trans-unit id="tl_log.username.0">
         <source>User</source>
+        <target>பயனர்</target>
       </trans-unit>
       <trans-unit id="tl_log.username.1">
         <source>Name of the authenticated user</source>

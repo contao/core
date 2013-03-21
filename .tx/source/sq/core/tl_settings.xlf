@@ -397,9 +397,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.smtpEnc.0">
         <source>SMTP encryption</source>
+        <target>Deshifrimi SMTP-së</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpEnc.1">
         <source>Here you can choose an encryption method (SSL or TLS).</source>
+        <target>Zgjedhoni metodën e deshifrimit (SSL ose TLS).</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpPort.0">
         <source>SMTP port number</source>
@@ -487,9 +489,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>
+        <target>Titulli i ueb-faqes</target>
       </trans-unit>
       <trans-unit id="tl_settings.date_legend">
         <source>Date and time</source>
+        <target>Data dhe koha</target>
       </trans-unit>
       <trans-unit id="tl_settings.global_legend">
         <source>Global configuration</source>
@@ -520,21 +524,25 @@
       </trans-unit>
       <trans-unit id="tl_settings.smtp_legend">
         <source>SMTP configuration</source>
+        <target>Konfigurimi SMTP</target>
       </trans-unit>
       <trans-unit id="tl_settings.ftp_legend">
         <source>Safe Mode Hack</source>
       </trans-unit>
       <trans-unit id="tl_settings.modules_legend">
         <source>Inactive extensions</source>
+        <target>Modulet Backend të çaktivizuar</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeout_legend">
         <source>Timeout values</source>
       </trans-unit>
       <trans-unit id="tl_settings.chmod_legend">
         <source>Default access rights</source>
+        <target>Drejtat standarde për qasje</target>
       </trans-unit>
       <trans-unit id="tl_settings.update_legend">
         <source>Live Update</source>
+        <target>Live-Update (freskim drejtë për drejtë)</target>
       </trans-unit>
       <trans-unit id="tl_settings.static_legend">
         <source>Static resources</source>

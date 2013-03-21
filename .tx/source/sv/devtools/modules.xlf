@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="MOD.autoload.0">
         <source>Autoload creator</source>
-        <target>Ladda modulbyggaren automatiskt</target>
+        <target>Autoload-byggaren</target>
       </trans-unit>
       <trans-unit id="MOD.autoload.1">
         <source>Automatically create the &quot;config/autoload.php&quot; files</source>

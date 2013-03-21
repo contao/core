@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_layout.name.0">
         <source>Title</source>
+        <target>Tittel</target>
       </trans-unit>
       <trans-unit id="tl_layout.name.1">
         <source>Please enter the layout title.</source>
@@ -159,6 +160,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
+        <target>Sorteringsrekkefølge</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.1">
         <source>The sort order of the style sheets.</source>
@@ -177,6 +179,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.calendarfeeds.0">
         <source>Calendar feeds</source>
+        <target>Kalender feeder</target>
       </trans-unit>
       <trans-unit id="tl_layout.calendarfeeds.1">
         <source>Please select the calendar feeds you want to add to the layout.</source>
@@ -285,6 +288,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.title_legend">
         <source>Title</source>
+        <target>Tittel</target>
       </trans-unit>
       <trans-unit id="tl_layout.header_legend">
         <source>Rows</source>

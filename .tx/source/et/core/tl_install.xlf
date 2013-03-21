@@ -15,6 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_install.password.0">
         <source>Password</source>
+        <target>Salasõna</target>
       </trans-unit>
       <trans-unit id="tl_install.password.1">
         <source>Please enter the install tool password. The install tool password is not the same as the Contao back end password.</source>
@@ -117,6 +118,7 @@
       </trans-unit>
       <trans-unit id="tl_install.dbUsername">
         <source>Username</source>
+        <target>Kasutajanimi</target>
       </trans-unit>
       <trans-unit id="tl_install.dbDatabase">
         <source>Database</source>
@@ -174,6 +176,7 @@
       </trans-unit>
       <trans-unit id="tl_install.templates">
         <source>Templates</source>
+        <target>Kujundused</target>
       </trans-unit>
       <trans-unit id="tl_install.doNotTruncate">
         <source>Do not truncate tables</source>

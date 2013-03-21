@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_repository.category.0">
         <source>Category</source>
+        <target>Kategooria</target>
       </trans-unit>
       <trans-unit id="tl_repository.category.1">
         <source>Please select the extension category.</source>
@@ -63,6 +64,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.selversion.0">
         <source>Version</source>
+        <target>Versiooon</target>
       </trans-unit>
       <trans-unit id="tl_repository.selversion.1">
         <source>Please select the version</source>
@@ -81,6 +83,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
         <source>Version</source>
+        <target>Versiooon</target>
       </trans-unit>
       <trans-unit id="tl_repository.version.1">
         <source>Version numbers must be in format n.n.n s, where n are integers and s is one of: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</source>
@@ -105,15 +108,18 @@
       </trans-unit>
       <trans-unit id="tl_repository.author">
         <source>Author</source>
+        <target>Autor</target>
       </trans-unit>
       <trans-unit id="tl_repository.build">
         <source>Build</source>
       </trans-unit>
       <trans-unit id="tl_repository.cancel">
         <source>Cancel</source>
+        <target>Tühista</target>
       </trans-unit>
       <trans-unit id="tl_repository.continue">
         <source>Continue</source>
+        <target>Jätka</target>
       </trans-unit>
       <trans-unit id="tl_repository.dependencies">
         <source>Dependencies of this extension</source>
@@ -147,6 +153,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.no">
         <source>no</source>
+        <target>ei</target>
       </trans-unit>
       <trans-unit id="tl_repository.noextensionsfound">
         <source>No matching extensions found.</source>
@@ -159,6 +166,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.pageof">
         <source>Page %s of %s</source>
+        <target>Leht %s %s -st</target>
       </trans-unit>
       <trans-unit id="tl_repository.ratingfmt">
         <source>%.2f (%d votes)</source>
@@ -189,6 +197,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.save">
         <source>Save</source>
+        <target>Salvesta</target>
       </trans-unit>
       <trans-unit id="tl_repository.shop">
         <source>Shop</source>
@@ -198,6 +207,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.state">
         <source>State</source>
+        <target>Staatus</target>
       </trans-unit>
       <trans-unit id="tl_repository.tag">
         <source>Tag</source>
@@ -237,6 +247,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.yes">
         <source>yes</source>
+        <target>jah</target>
       </trans-unit>
       <trans-unit id="tl_repository.action">
         <source>Action</source>
@@ -253,6 +264,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.apply">
         <source>Apply</source>
+        <target>Rakenda</target>
       </trans-unit>
       <trans-unit id="tl_repository.byorder">
         <source>By %s</source>
@@ -472,9 +484,11 @@
       </trans-unit>
       <trans-unit id="tl_repository_order_options.title">
         <source>Title</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="tl_repository_order_options.author">
         <source>Author</source>
+        <target>Autor</target>
       </trans-unit>
       <trans-unit id="tl_repository_state_options.alpha">
         <source>Alpha</source>

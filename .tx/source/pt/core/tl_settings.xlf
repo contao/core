@@ -115,9 +115,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
         <source>Exclude folders from synchronisation</source>
+        <target>Excluir pastas da sincronização</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronisation (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <target>Aqui você pode inserir uma lista de pastas separadas por vírgulas que não serão sincronizadas (ex: &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note que itens excluídos não poderão ser utilizados em conteúdos de download e imagens, por exemplo.</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
@@ -201,9 +203,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.folderUrl.0">
         <source>Enable folder URLs</source>
+        <target>Habilitar URLs de pastas</target>
       </trans-unit>
       <trans-unit id="tl_settings.folderUrl.1">
         <source>Here you can enable folder-style page aliases like &lt;em&gt;docs/install/download.html&lt;/em&gt; instead of &lt;em&gt;docs-install-download.html&lt;/em&gt;.</source>
+        <target>Aqui você pode habilitar pseudônimos de páginas no formato de pastas como &lt;em&gt;docs/install/download.html&lt;/em&gt; ao invés de &lt;em&gt;docs-install-download.html&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_settings.allowedTags.0">
         <source>Allowed HTML tags</source>
@@ -223,9 +227,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
+        <target>Ignorar o cache interno</target>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.1">
         <source>Do not use the internal cache files (e.g. useful when developing extensions).</source>
+        <target>Não utilizar o cache interno de arquivos (útil no desenvolvimento de extensões)</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableRefererCheck.0">
         <source>Disable request tokens</source>
@@ -553,6 +559,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.sections_legend">
         <source>Layout sections</source>
+        <target>Seções de layout</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>

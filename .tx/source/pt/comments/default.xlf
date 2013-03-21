@@ -3,15 +3,18 @@
     <body>
       <trans-unit id="MSC.com_name">
         <source>Name</source>
+        <target>Nome</target>
       </trans-unit>
       <trans-unit id="MSC.com_email">
         <source>E-mail (not published)</source>
       </trans-unit>
       <trans-unit id="MSC.com_website">
         <source>Website</source>
+        <target>Website</target>
       </trans-unit>
       <trans-unit id="MSC.com_comment">
         <source>Comment</source>
+        <target>Comentário</target>
       </trans-unit>
       <trans-unit id="MSC.com_notify">
         <source>Notify me of new comments by e-mail</source>
@@ -59,6 +62,7 @@ If you are moderating comments, you have to log in to the back end to publish it
       </trans-unit>
       <trans-unit id="MSC.com_optInSubject">
         <source>Your subscription on %s</source>
+        <target>Sua assinatura no %s</target>
       </trans-unit>
       <trans-unit id="MSC.com_optInMessage">
         <source>Hello %s,

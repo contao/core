@@ -81,6 +81,9 @@
         <source>Found the folder &quot;%s&quot;</source>
         <target>S-a regăsit directorul &quot;%s&quot;</target>
       </trans-unit>
+      <trans-unit id="tl_files.syncFolderH">
+        <source>Updated the hash of the folder &quot;%s&quot;</source>
+      </trans-unit>
       <trans-unit id="tl_files.syncFileC">
         <source>Created the file &quot;%s&quot;</source>
         <target>S-a creat fişierul &quot;%s&quot;</target>
@@ -89,7 +92,7 @@
         <source>Found the file &quot;%s&quot;</source>
         <target>S-a regăsit fişierul &quot;%s&quot;</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncHash">
+      <trans-unit id="tl_files.syncFileH">
         <source>Updated the hash of the file &quot;%s&quot;</source>
         <target>S-a actualizat hash-ul fişierului &quot;%s&quot;</target>
       </trans-unit>

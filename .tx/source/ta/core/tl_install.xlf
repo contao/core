@@ -117,6 +117,7 @@
       </trans-unit>
       <trans-unit id="tl_install.dbUsername">
         <source>Username</source>
+        <target>பயனர் பெயர்</target>
       </trans-unit>
       <trans-unit id="tl_install.dbDatabase">
         <source>Database</source>
@@ -126,6 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_install.dbCharset">
         <source>Character set</source>
+        <target>எழுத்துக்குறி தொகுதி</target>
       </trans-unit>
       <trans-unit id="tl_install.dbCollation">
         <source>Collation</source>

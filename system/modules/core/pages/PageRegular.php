@@ -333,6 +333,18 @@ class PageRegular extends \Frontend
 
 		$this->Template->mooScripts = '';
 
+		// Make sure TL_JAVASCRIPT exists (see #4890)
+		if (isset($GLOBALS['TL_JAVASCRIPT']) && is_array($GLOBALS['TL_JAVASCRIPT']))
+		{
+			$arrAppendJs = $GLOBALS['TL_JAVASCRIPT'];
+			$GLOBALS['TL_JAVASCRIPT'] = array();
+		}
+		else
+		{
+			$arrAppendJs = array();
+			$GLOBALS['TL_JAVASCRIPT'] = array();
+		}
+
 		// jQuery scripts
 		if ($objLayout->addJQuery)
 		{
@@ -390,17 +402,22 @@ class PageRegular extends \Frontend
 			}
 		}
 
-		// Load MooTools core for the debug bar and the command scheduler (see #5195)
-		if (!$objLayout->addJQuery && !$objLayout->addMooTools)
+		// Load MooTools core for the debug bar (see #5195)
+		if ($GLOBALS['TL_CONFIG']['debugMode'] && !$objLayout->addMooTools)
 		{
-			if ($GLOBALS['TL_CONFIG']['debugMode'])
-			{
-				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js|static';
-			}
-			elseif (!$GLOBALS['TL_CONFIG']['disableCron'])
-			{
-				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-request.js|static';
-			}
+			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js|static';
+		}
+
+		// Load MooTools request for the command scheduler (see #5195)
+		if (!$GLOBALS['TL_CONFIG']['disableCron'] && !$objLayout->addJQuery && !$objLayout->addMooTools)
+		{
+			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-request.js|static';
+		}
+
+		// Check whether TL_APPEND_JS exists (see #4890)
+		if (!empty($arrAppendJs))
+		{
+			$GLOBALS['TL_JAVASCRIPT'] = array_merge($GLOBALS['TL_JAVASCRIPT'], $arrAppendJs);
 		}
 
 		// Initialize the sections

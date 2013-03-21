@@ -75,6 +75,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.resultsPerPage.0">
         <source>Items per page</source>
+        <target>Elementer per side</target>
       </trans-unit>
       <trans-unit id="tl_settings.resultsPerPage.1">
         <source>Here you can define the number of items per page in the back end.</source>

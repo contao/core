@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_page.sitemapName.1">
         <source>Please enter the name of the sitemap file without extension.</source>
-        <target>Zadejte jméno XML souboru</target>
+        <target>Zadejte jméno XML souboru bez přípony</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
         <source>Use HTTPS in sitemaps</source>

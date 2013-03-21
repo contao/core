@@ -95,6 +95,7 @@
       </trans-unit>
       <trans-unit id="MOD.undo.0">
         <source>Restore</source>
+        <target>Taasta</target>
       </trans-unit>
       <trans-unit id="MOD.undo.1">
         <source>Restore deleted records</source>
@@ -149,12 +150,14 @@
       </trans-unit>
       <trans-unit id="FMD.quicknav.0">
         <source>Quick navigation</source>
+        <target>Kiirmenüü</target>
       </trans-unit>
       <trans-unit id="FMD.quicknav.1">
         <source>Generates a drop-down menu from the site structure</source>
       </trans-unit>
       <trans-unit id="FMD.quicklink.0">
         <source>Quick link</source>
+        <target>Kiirlink</target>
       </trans-unit>
       <trans-unit id="FMD.quicklink.1">
         <source>Generates a custom drop-down menu</source>
@@ -179,6 +182,7 @@
       </trans-unit>
       <trans-unit id="FMD.user">
         <source>User</source>
+        <target>Kasutaja</target>
       </trans-unit>
       <trans-unit id="FMD.login.0">
         <source>Login form</source>
@@ -221,6 +225,7 @@
       </trans-unit>
       <trans-unit id="FMD.form.0">
         <source>Form</source>
+        <target>Vorm</target>
       </trans-unit>
       <trans-unit id="FMD.form.1">
         <source>Adds a form to the page</source>

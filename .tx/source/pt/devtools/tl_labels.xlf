@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_labels.label.0">
         <source>Language</source>
+        <target>Língua</target>
       </trans-unit>
       <trans-unit id="tl_labels.label.1">
         <source>Please choose the translation you want to check.</source>
@@ -21,6 +22,7 @@
       </trans-unit>
       <trans-unit id="tl_labels.submitBT">
         <source>Search</source>
+        <target>Buscar</target>
       </trans-unit>
     </body>
   </file>

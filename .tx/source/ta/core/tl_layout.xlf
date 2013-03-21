@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_layout.name.0">
         <source>Title</source>
+        <target>தலைப்பு</target>
       </trans-unit>
       <trans-unit id="tl_layout.name.1">
         <source>Please enter the layout title.</source>
@@ -111,6 +112,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.stylesheet.0">
         <source>Style sheets</source>
+        <target>ஒப்பனைக் கோப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_layout.stylesheet.1">
         <source>Please select the style sheets you want to add to the layout.</source>
@@ -159,6 +161,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
+        <target>ஒழுங்குபடுத்தும் முறை</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.1">
         <source>The sort order of the style sheets.</source>
@@ -171,12 +174,14 @@
       </trans-unit>
       <trans-unit id="tl_layout.newsfeeds.0">
         <source>News feeds</source>
+        <target>செய்தி ஓடைகள்</target>
       </trans-unit>
       <trans-unit id="tl_layout.newsfeeds.1">
         <source>Please select the news feeds you want to add to the layout.</source>
       </trans-unit>
       <trans-unit id="tl_layout.calendarfeeds.0">
         <source>Calendar feeds</source>
+        <target>நாட்காட்டி செய்தியோடை</target>
       </trans-unit>
       <trans-unit id="tl_layout.calendarfeeds.1">
         <source>Please select the calendar feeds you want to add to the layout.</source>
@@ -285,6 +290,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.title_legend">
         <source>Title</source>
+        <target>தலைப்பு</target>
       </trans-unit>
       <trans-unit id="tl_layout.header_legend">
         <source>Rows</source>
@@ -297,6 +303,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.style_legend">
         <source>Style sheets</source>
+        <target>ஒப்பனைக் கோப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_layout.feed_legend">
         <source>RSS/Atom feeds</source>
@@ -306,6 +313,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.expert_legend">
         <source>Expert settings</source>
+        <target>சிறப்பு அமைப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_layout.script_legend">
         <source>Script settings</source>

@@ -15,7 +15,7 @@
  */
 
 $GLOBALS['TL_LANG']['MOD']['devtools'] = 'Ontwikkeltools';
-$GLOBALS['TL_LANG']['MOD']['extension'][0] = 'Ontwikkelaar van extensies';
+$GLOBALS['TL_LANG']['MOD']['extension'][0] = 'Extensies ontwikkelen';
 $GLOBALS['TL_LANG']['MOD']['extension'][1] = 'Maak standaard Contao extensies aan';
 $GLOBALS['TL_LANG']['MOD']['labels'][0] = 'Ontbrekende labels';
 $GLOBALS['TL_LANG']['MOD']['labels'][1] = 'Zoek ontbrekende labels in een taalpakket';

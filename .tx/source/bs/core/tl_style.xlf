@@ -83,6 +83,7 @@
       </trans-unit>
       <trans-unit id="tl_style.positioning.0">
         <source>Position</source>
+        <target>Pozicija</target>
       </trans-unit>
       <trans-unit id="tl_style.positioning.1">
         <source>Position, float, clear, overflow and display.</source>
@@ -421,6 +422,7 @@
       </trans-unit>
       <trans-unit id="tl_style.position_legend">
         <source>Position</source>
+        <target>Pozicija</target>
       </trans-unit>
       <trans-unit id="tl_style.align_legend">
         <source>Margin and alignment</source>

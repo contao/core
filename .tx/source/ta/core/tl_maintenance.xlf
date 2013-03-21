@@ -18,6 +18,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.description">
         <source>Description</source>
+        <target>விபரம்</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.clearCache">
         <source>Purge data</source>

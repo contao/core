@@ -67,6 +67,7 @@ $GLOBALS['TL_LANG']['tl_install']['saveCollation'] = 'تغییر تطبیق';
 $GLOBALS['TL_LANG']['tl_install']['updateX'] = 'به نظر می‌رسد که شما می‌خواهید از کانتائو ویرایش قبل از ویرایش %s ارتقاء دهید. اگر این طور است، <strong>توصیه می‌شود که بروزرسانی ویرایش %s را اجراء نمایید</strong> تا از درستی داده‌های خود مطمئن شوید.';
 $GLOBALS['TL_LANG']['tl_install']['updateXrun'] = 'اجرای بروزسانی ویرایش %s';
 $GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'اجرای بروزرسانی ویرایش %s - مرحله %s';
+$GLOBALS['TL_LANG']['tl_install']['importException'] = 'وارد کردن ناموفق بود! آیا ساختار پایگاه داده بروز است و آیا پرونده الگو با ویرایش کانتائو شما سازگار است؟';
 $GLOBALS['TL_LANG']['tl_install']['importError'] = 'یک فایل قالب انتخاب کنید!';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm'] = 'قالب %s وارد شد.';
 $GLOBALS['TL_LANG']['tl_install']['importWarn'] = 'هر داده‌ی موجودی حذف خواهد شد!';

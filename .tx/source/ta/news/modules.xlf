@@ -3,15 +3,18 @@
     <body>
       <trans-unit id="MOD.news.0">
         <source>News</source>
+        <target>செய்திகள்</target>
       </trans-unit>
       <trans-unit id="MOD.news.1">
         <source>Manage news and export them as RSS or Atom feed</source>
       </trans-unit>
       <trans-unit id="MOD.tl_news_feed">
         <source>News feeds</source>
+        <target>செய்தி ஓடைகள்</target>
       </trans-unit>
       <trans-unit id="FMD.news">
         <source>News</source>
+        <target>செய்திகள்</target>
       </trans-unit>
       <trans-unit id="FMD.newslist.0">
         <source>Newslist</source>

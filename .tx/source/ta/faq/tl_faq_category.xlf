@@ -19,6 +19,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.jumpTo.0">
         <source>Redirect page</source>
+        <target>மீள்திருப்பும் பக்கம்</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.jumpTo.1">
         <source>Please choose the FAQ reader page to which visitors will be redirected when clicking a FAQ.</source>
@@ -52,6 +53,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.perPage.1">
         <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>ஒவ்வொரு பக்கத்திலுமான பின்னூட்டங்கள். ஒரே பக்கத்தில் காட்ட 0 இனை உள்ளிடவும்</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.moderate.0">
         <source>Moderate comments</source>
@@ -92,6 +94,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.title_legend">
         <source>Title and redirect</source>
+        <target>தலைப்பும் மீள்திருப்புகையும்</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.comments_legend">
         <source>Comments</source>

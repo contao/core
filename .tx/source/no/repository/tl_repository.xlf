@@ -39,6 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.name.0">
         <source>Name</source>
+        <target>Navn</target>
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
         <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are prefered. Additionally, the characters _ and - are allowed within the name.</source>
@@ -456,9 +457,11 @@
       </trans-unit>
       <trans-unit id="tl_repository_order_options.name">
         <source>Name</source>
+        <target>Navn</target>
       </trans-unit>
       <trans-unit id="tl_repository_order_options.title">
         <source>Title</source>
+        <target>Tittel</target>
       </trans-unit>
       <trans-unit id="tl_repository_order_options.author">
         <source>Author</source>

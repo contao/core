@@ -3,51 +3,67 @@
     <body>
       <trans-unit id="tl_settings.websiteTitle.0">
         <source>Website title</source>
+        <target>இணையத்தள தலைப்பு</target>
       </trans-unit>
       <trans-unit id="tl_settings.websiteTitle.1">
         <source>Please enter the title of the website.</source>
+        <target>தயவுசெய்து இணையத்தளத்தில் தலைப்பை உள்ளிடுங்கள்</target>
       </trans-unit>
       <trans-unit id="tl_settings.adminEmail.0">
         <source>E-mail address of the system administrator</source>
+        <target>தள நிருவாகியின் மின்னஞ்சல் முகவரி</target>
       </trans-unit>
       <trans-unit id="tl_settings.adminEmail.1">
         <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
+        <target>சந்தாக்களை உறுதிப்படுத்தும் மின்னஞ்சல் போன்ற தன்னியக்கமாக உருவாக்கப்படும் மின்னஞ்சல்கள் இம்முகவரிக்கு அனுப்பப்படும்.</target>
       </trans-unit>
       <trans-unit id="tl_settings.dateFormat.0">
         <source>Date format</source>
+        <target>திகதி வடிவம்</target>
       </trans-unit>
       <trans-unit id="tl_settings.dateFormat.1">
         <source>The date format string will be parsed with the PHP date() function.</source>
+        <target>திகதி வடிவத்திற்கான உங்கள் உள்ளீடு PHP date() function இனால் பாகுபடுத்தப்படும்.</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeFormat.0">
         <source>Time format</source>
+        <target>நேர வடிவம்</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeFormat.1">
         <source>The time format string will be parsed with the PHP date() function.</source>
+        <target>நேர வடிவத்திற்கான உங்கள் உள்ளீடு PHP date() function இனால் பாகுபடுத்தப்படும்.</target>
       </trans-unit>
       <trans-unit id="tl_settings.datimFormat.0">
         <source>Date and time format</source>
+        <target>திகதி மற்றும் நேர வடிவம்</target>
       </trans-unit>
       <trans-unit id="tl_settings.datimFormat.1">
         <source>The date and time format string will be parsed with the PHP date() function.</source>
+        <target>திகதி மற்றும் நேர வடிவத்திற்கான உங்கள் உள்ளீடு PHP date() function இனால் பாகுபடுத்தப்படும்.</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeZone.0">
         <source>Time zone</source>
+        <target>நேர வலயம்</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeZone.1">
         <source>Please select the server time zone.</source>
+        <target>தயவுசெய்து இணையவழங்கியின் நேரவலயத்தை தேர்ந்தெடுங்கள்</target>
       </trans-unit>
       <trans-unit id="tl_settings.websitePath.0">
         <source>Relative path to the Contao directory</source>
+        <target>Contao கோப்புறைக்கான ஒப்புமை பாதை</target>
       </trans-unit>
       <trans-unit id="tl_settings.websitePath.1">
         <source>The relative path to the Contao directory is usually set automatically by the install tool.</source>
+        <target>Contao கோப்புறைக்கான ஒப்புமை பாதை சாதாரணமாக நிறுவானினால் தன்னியக்கமாக உள்ளிடப்படும்.</target>
       </trans-unit>
       <trans-unit id="tl_settings.characterSet.0">
         <source>Character set</source>
+        <target>எழுத்துக்குறி தொகுதி</target>
       </trans-unit>
       <trans-unit id="tl_settings.characterSet.1">
         <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
+        <target>விசேட குறியீடுகள் சரியாய் வெளித்தெரிவதற்காய், UTF-8 இனை பயன்படுத்துவது பரிந்துரைக்கப்படுகின்றது.</target>
       </trans-unit>
       <trans-unit id="tl_settings.customSections.0">
         <source>Custom layout sections</source>
@@ -129,12 +145,14 @@
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.0">
         <source>Add the language to the URL</source>
+        <target>முகவரியில் மொழியினை இணை</target>
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
         <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>
+        <target>வெறுமையான முகவரிகளை திசைதிருப்பாதே</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.1">
         <source>For an empty URL display the website instead of redirecting to the language root page (not recommended).</source>
@@ -405,9 +423,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>
+        <target>இணையத்தள தலைப்பு</target>
       </trans-unit>
       <trans-unit id="tl_settings.date_legend">
         <source>Date and time</source>
+        <target>திகதியும் நேரமும்</target>
       </trans-unit>
       <trans-unit id="tl_settings.global_legend">
         <source>Global configuration</source>

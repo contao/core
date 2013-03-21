@@ -1,0 +1,174 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/faq/languages/en/tl_faq_category.php" source-language="en">
+    <body>
+      <trans-unit id="tl_faq_category.title.0">
+        <source>Title</source>
+        <target>ခေါင်းစဉ်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.title.1">
+        <source>Please enter the category title.</source>
+        <target>အမျိုးအစားခေါင်းစဉ်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.headline.0">
+        <source>Headline</source>
+        <target>ခေါင်းစဉ်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.headline.1">
+        <source>Please enter the category headline.</source>
+        <target>အမျိုးအစားခေါင်းစဉ်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.jumpTo.0">
+        <source>Redirect page</source>
+        <target>ဦးတည်ရာပြောင်းစာမျက်နှာ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.jumpTo.1">
+        <source>Please choose the FAQ reader page to which visitors will be redirected when clicking a FAQ.</source>
+        <target>မကြာခဏမေးမေးခွန်းများကိုကလစ်နှိပ်သောအခါလည်ပတ်သူများရောက်သွားမည့်မကြာခဏမေးမေးခွန်းများဖတ်ရှုသူစာမျက်နှာကိုရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.allowComments.0">
+        <source>Enable comments</source>
+        <target>မှတ်ချက်များလုပ်ဆောင်စေ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.allowComments.1">
+        <source>Allow visitors to comment FAQs.</source>
+        <target>မကြာခဏမေးမေးခွန်းများကိုမှတ်ချက်ချရန်လည်ပတ်သူများကိုခွင့်ပြု</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify.0">
+        <source>Notify</source>
+        <target>အကြောင်းကြား</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+        <target>မှတ်ချက်များထည့်သောအခါမည်သူ့ကိုအကြောင်းကြားရမည်ဟုရွေးချယ်ပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.sortOrder.0">
+        <source>Sort order</source>
+        <target>အစဉ်အားဖြင့်မျိုးတူစု</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+        <target>မူလအားဖြင့်မှတ်ချက်များသည်အဟောင်းဆံုးကိုအရင်မျိုးတူစုလေ့ရှိ။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.perPage.0">
+        <source>Comments per page</source>
+        <target>စာမျက်နှာရှိမှတ်ချက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>စာမျက်နှာရှိမှတ်ချက်များအရေအတွက်။ စာမျက်နှာများမလုပ်ဆောင်စေရန် ၀ ကိုသတ်မှတ်ပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.moderate.0">
+        <source>Moderate comments</source>
+        <target>မှတ်ချက်များကြပ်မတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>ဝဘ်ဆိုက်တွင်မထုတ်ပြန်ခင်မှတ်ချက်များအတည်ပြု။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.bbcode.0">
+        <source>Allow BBCode</source>
+        <target>ဘီဘီကုဒ်ခွင့်ပြု</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>ဘီဘီကုဒ်ဖြင့်မှတ်ချက်များအချိုးအစားချရန်လည်ပတ်သူများကိုခွင့်ပြု</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.requireLogin.0">
+        <source>Require login to comment</source>
+        <target>မှတ်ချက်ချရန်ဖွင့်ဝင်ရန်လို</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>မှတ်ချက်များဖန်တီးရန်စစ်ဆေးပြီးအသံုးပြုသူများသာလျှင်ခွင့်ပြု</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>လံုခြုံရေးမေးခွန်းမလုပ်ဆောင်စေ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+        <target>စစ်ဆေးပြီးအသံုးပြုသူများသို့ကန့်သတ်ပြီးမှတ်ချက်များရှိခဲ့လျှင်ယခုရွေးပိုင်ခွင့်သာလျှင်သံုး။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.tstamp.0">
+        <source>Revision date</source>
+        <target>ပြင်ဆင်နေ့စွဲ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>နောက်ဆံုးပံုစံ၏နေ့စွဲနှင့်အချိန်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.title_legend">
+        <source>Title and redirect</source>
+        <target>ခေါင်းစဉ်နှင့်ဦးတည်ရာပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.comments_legend">
+        <source>Comments</source>
+        <target>မှတ်ချက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify_admin">
+        <source>System administrator</source>
+        <target>စက်စနစ်စီမံခန့်ခွဲသူ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify_author">
+        <source>Author of the FAQ</source>
+        <target>မကြာခဏမေးမေးခွန်းများရေးသားသူ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify_both">
+        <source>Author and system administrator</source>
+        <target>ရေးသားသူနှင့်စက်စနစ်စီမံခန့်ခွဲသူ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.deleteConfirm">
+        <source>Deleting category ID %s will also delete all its FAQs! Continue?</source>
+        <target>အမျိုးအစားအိုင်ဒီ %s ပယ်ဖျက်ခြင်းသည်မကြာခဏမေးမေးခွန်းများကိုပါပယ်ဖျက်လိမ့်မည်! ဆက်လက်လုပ်ဆောင်?</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.new.0">
+        <source>New category</source>
+        <target>အမျိုးအစားအသစ်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.new.1">
+        <source>Create a new category</source>
+        <target>အမျိုးအစားအသစ်ဖန်တီး</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.show.0">
+        <source>Category details</source>
+        <target>အမျိုးအစားအချက်အလက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.show.1">
+        <source>Show the details of category ID %s</source>
+        <target>အမျိုးအစားအိုင်ဒီ %s အချက်အလက်များပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.edit.0">
+        <source>Edit category</source>
+        <target>အမျိုးအစားတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.edit.1">
+        <source>Edit category ID %s</source>
+        <target>အမျိုးအစားအိုင်ဒီ %s တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.editheader.0">
+        <source>Edit category settings</source>
+        <target>အမျိုးအစားချိန်ညှိချက်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.editheader.1">
+        <source>Edit the settings of category ID %s</source>
+        <target>အမျိုးအစားအိုင်ဒီ %s ချိန်ညှိချက်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.copy.0">
+        <source>Duplicate category</source>
+        <target>အမျိုးအစားပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.copy.1">
+        <source>Duplicate category ID %s</source>
+        <target>အမျိုးအစားအိုင်ဒီ %s ပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.delete.0">
+        <source>Delete category</source>
+        <target>အမျိုးအစားပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.delete.1">
+        <source>Delete category ID %s</source>
+        <target>အမျိုးအစားအိုင်ဒီ %s ပယ်ဖျက်</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

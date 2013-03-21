@@ -195,9 +195,11 @@
       </trans-unit>
       <trans-unit id="tl_news.tstamp.0">
         <source>Revision date</source>
+        <target>Data da revisão.</target>
       </trans-unit>
       <trans-unit id="tl_news.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>Data e hora da última revisão</target>
       </trans-unit>
       <trans-unit id="tl_news.title_legend">
         <source>Title and author</source>
@@ -309,9 +311,11 @@
       </trans-unit>
       <trans-unit id="tl_news.editmeta.0">
         <source>Edit article settings</source>
+        <target>Editar configurações do artigo</target>
       </trans-unit>
       <trans-unit id="tl_news.editmeta.1">
         <source>Edit the article settings</source>
+        <target>Editar as configurações do artigo</target>
       </trans-unit>
       <trans-unit id="tl_news.pasteafter.0">
         <source>Paste into this archive</source>

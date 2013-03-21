@@ -15,6 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_style.category.0">
         <source>Category</source>
+        <target>Kategooria</target>
       </trans-unit>
       <trans-unit id="tl_style.category.1">
         <source>Categories can be used to group format definitions in the back end.</source>
@@ -309,6 +310,7 @@
       </trans-unit>
       <trans-unit id="tl_style.list.0">
         <source>List</source>
+        <target>Loend</target>
       </trans-unit>
       <trans-unit id="tl_style.list.1">
         <source>List-style-type and list-style-image.</source>

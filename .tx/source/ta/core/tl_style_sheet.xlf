@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_style_sheet.name.0">
         <source>Name</source>
+        <target>பெயர்</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.name.1">
         <source>Please enter the style sheet name.</source>
@@ -45,12 +46,15 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.tstamp.0">
         <source>Revision date</source>
+        <target>மீள்திருத்த திகதி</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>பிந்திய மீள்திருத்தத்தின் நேரமும் திகதியும்</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.title_legend">
         <source>Name</source>
+        <target>பெயர்</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.config_legend">
         <source>Configuration</source>

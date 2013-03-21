@@ -3,12 +3,14 @@
     <body>
       <trans-unit id="tl_module.name.0">
         <source>Title</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="tl_module.name.1">
         <source>Please enter the module title.</source>
       </trans-unit>
       <trans-unit id="tl_module.headline.0">
         <source>Headline</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="tl_module.headline.1">
         <source>Here you can add a headline to the module.</source>
@@ -135,6 +137,7 @@
       </trans-unit>
       <trans-unit id="tl_module.form.0">
         <source>Form</source>
+        <target>Vorm</target>
       </trans-unit>
       <trans-unit id="tl_module.form.1">
         <source>Please select a form.</source>
@@ -489,6 +492,7 @@
       </trans-unit>
       <trans-unit id="tl_module.emailText.0">
         <source>Your registration on %s</source>
+        <target>Sinu registreerimine on %s</target>
       </trans-unit>
       <trans-unit id="tl_module.emailText.1">
         <source>Thank you for your registration on ##domain##.

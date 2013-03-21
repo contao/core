@@ -255,6 +255,7 @@ class Calendar extends \Frontend
 			$arrRoot = $this->Database->getChildRecords($intRoot, 'tl_page');
 		}
 
+		$time = time();
 		$arrProcessed = array();
 
 		// Get all calendars
@@ -285,6 +286,12 @@ class Calendar extends \Frontend
 
 					// The target page does not exist
 					if ($objParent === null)
+					{
+						continue;
+					}
+
+					// The target page has not been published (see #5520)
+					if (!$objParent->published || ($objParent->start != '' && $objParent->start > $time) || ($objParent->stop != '' && $objParent->stop < $time))
 					{
 						continue;
 					}
@@ -374,9 +381,9 @@ class Calendar extends \Frontend
 				break;
 
 			case 'article':
-				if (($objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true))) !== null)
+				if (($objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 				{
-					$link = $strBase . ampersand($this->generateFrontendUrl($objArticle->getRelated('pid')->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					$link = $strBase . ampersand($this->generateFrontendUrl($objPid->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}

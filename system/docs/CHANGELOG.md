@@ -1,6 +1,80 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.0.6 (2013-03-21)
+--------------------------
+
+### Fixed
+Do not add links to news, events, FAQs or newsletters to the sitemap if the
+target page has not been published (see #5520).
+
+### Fixed
+Include the local configuration file twice, once before and once after the
+module configuration files are parsed (see #5490). This will make settings like
+the debug or safe mode work properly.
+
+### Fixed
+Correctly set the RSS feed self-reference (see #5478).
+
+### Fixed
+Remove `&shy;` and `&nbsp;` from RSS and Atom feeds (see #5473).
+
+### Fixed
+Do not remove the grid column margin on mobile devices (see #5475).
+
+### Fixed
+Store the relative path to the installation in the `pathconfig.php` (see #5339).
+
+### Fixed
+Correctly send the comment moderation mails (see #5443).
+
+### Fixed
+Correctly create the user home directory upon registration (see #5437).
+
+### Improved
+Made the `.htaccess` files Apache 2.4 ready (see #5032).
+
+### Fixed
+Also truncate opened files in `File::truncate()` (see #5459).
+
+### Fixed
+Added the "allowTransparency" attribute to the mediabox script (see #5077).
+
+### Fixed
+The submit button label was not shown in the `FormSubmit` widget (see #5434).
+
+### Fixed
+Show invisible elements in the back end preview (see #5449).
+
+### Fixed
+Allow to create forward pages without a specific target (see #5453).
+
+### Fixed
+Updated the TinyMCE typolinks plugin (see #5329).
+
+### Fixed
+Correctly initialize the user's pagemounts (see #5454).
+
+### Fixed
+Support loading static JavaScripts in the `config.php` files (see #4890).
+
+### Fixed
+Show all articles if the article list module is in the same column (see #5373).
+
+### Fixed
+Do not show `mail_` templates from theme folders (see #5379).
+
+### Fixed
+Consider only published events when finding the calendar boundaries and only
+render the previous and next links if there are events (see #5426).
+
+### Fixed
+Do not override the header and footer height in the layout builder (see #5368).
+
+### Fixed
+Correctly reset fallback, default and "do not copy" fields (see #5252).
+
+
 Version 3.0.5 (2013-02-19)
 --------------------------
 

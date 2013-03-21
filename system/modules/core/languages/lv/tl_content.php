@@ -95,6 +95,7 @@ $GLOBALS['TL_LANG']['tl_content']['useImage'][1] = 'Izmantot attēlu saites virs
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][0] = 'Avota datnes';
 $GLOBALS['TL_LANG']['tl_content']['multiSRC'][1] = 'Lūdzu izvēlieties vienu vai vairākas datnes vai mapes (datnes mapē tiks iekļautas automātiski).';
 $GLOBALS['TL_LANG']['tl_content']['orderSRC'][0] = 'Kārtošanas kārtība';
+$GLOBALS['TL_LANG']['tl_content']['orderSRC'][1] = 'Vienumu kārtošanas kārtība.';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][0] = 'Izmantot mājas direktoriju';
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir'][1] = 'Ja priekšpuses lietotājs ir pieslēdzies, izmantot tā mājas direktoriju kā datņu avotu.';
 $GLOBALS['TL_LANG']['tl_content']['perRow'][0] = 'Sīktēli rindā';

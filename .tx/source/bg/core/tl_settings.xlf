@@ -443,6 +443,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.defaultChmod.0">
         <source>Default access rights</source>
+        <target>Подразбиращи се права за достъп</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultChmod.1">
         <source>Please assign the default access rights for pages and articles.</source>
@@ -459,6 +460,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.date_legend">
         <source>Date and time</source>
+        <target>Дата и време</target>
       </trans-unit>
       <trans-unit id="tl_settings.global_legend">
         <source>Global configuration</source>

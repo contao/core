@@ -12,8 +12,13 @@
 # Prevent access to the Contao template files
 ##
 <FilesMatch "\.(tpl|html5|xhtml)$">
-  Order allow,deny
-  Deny from all
+  <IfModule !mod_authz_core.c>
+    Order deny,allow
+    Deny from all
+  </IfModule>
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
 </FilesMatch>
 
 ##
@@ -205,16 +210,18 @@ FileETag None
   RewriteBase /
 
   ##
-  # Uncomment to redirect domains without "www" to the "www" subdomain.
+  # Uncomment the following lines to add "www." to the domain:
+  #
+  #   RewriteCond %{HTTP_HOST} ^domain\.com$ [NC]
+  #   RewriteRule (.*) http://www.domain.com/$1 [R=301,L]
+  #
+  # Uncomment the following lines to remove "www." from the domain:
+  #
+  #   RewriteCond %{HTTP_HOST} ^www\.domain\.com$ [NC]
+  #   RewriteRule (.*) http://domain.com/$1 [R=301,L]
+  #
+  # Make sure to replace "domain.com" with your domain name.
   ##
-  #RewriteCond %{HTTP_HOST} !^www\..+$ [NC]
-  #RewriteRule ^ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-
-  ##
-  # Uncomment to redirect domains with "www" to the empty domain.
-  ##
-  #RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-  #RewriteRule ^ http://%1%{REQUEST_URI} [R=301,L]
 
   ##
   # If you cannot use mod_deflate, uncomment the following lines to load a
@@ -243,7 +250,7 @@ FileETag None
   #
   # For more information see: https://github.com/contao/core/issues/4364
   ##
-  <FilesMatch "\.(htm|php|js|css|htc|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|mp3|mp4|webm|ogv|eot|woff|svg|ttf|pdf|gz)$">
+  <FilesMatch "\.(htm|php|js|css|htc|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|mp4|webm|ogv|mp3|ogg|oga|eot|woff|svg|ttf|pdf|gz)$">
     RewriteEngine Off
   </FilesMatch>
 

@@ -203,12 +203,14 @@
       </trans-unit>
       <trans-unit id="tl_content.mooStart.0">
         <source>Wrapper start</source>
+        <target>Začetek ovoja</target>
       </trans-unit>
       <trans-unit id="tl_content.mooStart.1">
         <source>Marks the beginning of an accordion pane that spans several content elements.</source>
       </trans-unit>
       <trans-unit id="tl_content.mooStop.0">
         <source>Wrapper stop</source>
+        <target>Konec ovoja</target>
       </trans-unit>
       <trans-unit id="tl_content.mooStop.1">
         <source>Marks the end of an accordion pane that spans several content elements.</source>

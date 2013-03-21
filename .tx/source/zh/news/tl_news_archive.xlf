@@ -30,6 +30,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.notify.1">
         <source>Please choose who to notify when comments are added.</source>
+        <target>请选择有评论时需要通知的人。</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.sortOrder.0">
         <source>Sort order</source>
@@ -61,6 +62,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.bbcode.1">
         <source>Allow visitors to format their comments with BBCode.</source>
+        <target>允许访问者使用BBCode格式的评论。</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.requireLogin.0">
         <source>Require login to comment</source>
@@ -107,6 +109,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.format.1">
         <source>Please choose a feed format.</source>
+        <target>请选择源格式。</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.language.0">
         <source>Feed language</source>
@@ -122,12 +125,15 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.source.1">
         <source>Here you can choose what will be exported.</source>
+        <target>您可以在这里选择将要被导出的新闻记录。</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.maxItems.0">
         <source>Maximum number of items</source>
+        <target>最大记录数</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.maxItems.1">
         <source>Here you can limit the number of feed items. Set to 0 to export all.</source>
+        <target>您可以在这里输入将要导出的源记录数，设置为0将会导出所有记录。</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.feedBase.0">
         <source>Base URL</source>
@@ -135,15 +141,19 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.feedBase.1">
         <source>Please enter the base URL with protocol (e.g. &lt;em&gt;http://&lt;/em&gt;).</source>
+        <target>请输入带网络协议的base URL(如：&lt;em&gt;http://&lt;/em&gt;)。</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.alias.0">
         <source>Feed alias</source>
+        <target>源别名</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.alias.1">
         <source>Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the root directory of your Contao installation, e.g. as &lt;em&gt;name.xml&lt;/em&gt;.</source>
+        <target>您可以在这里输入一个唯一的文件名(不带扩展名)。源XML文件将会被自动生成到Contao安装目录中的&lt;em&gt;share&lt;/em&gt;文件夹下，如：&lt;em&gt;share/name.xml&lt;/em&gt;。</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.description.0">
         <source>Feed description</source>
+        <target>源描述</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.description.1">
         <source>Please enter a short description of the news feed.</source>
@@ -158,6 +168,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.title_legend">
         <source>Title and redirect page</source>
+        <target>标题和重定向页面</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.comments_legend">
         <source>Comments</source>
@@ -169,21 +180,26 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.feed_legend">
         <source>RSS/Atom feed</source>
+        <target>RSS/Atom源</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.notify_admin">
         <source>System administrator</source>
+        <target>系统管理员</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.notify_author">
         <source>Author of the news item</source>
       </trans-unit>
       <trans-unit id="tl_news_archive.notify_both">
         <source>Author and system administrator</source>
+        <target>作者和系统管理员</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.source_teaser">
         <source>News teasers</source>
+        <target>新闻广告</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.source_text">
         <source>Full articles</source>
+        <target>全部文章</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.new.0">
         <source>New archive</source>
@@ -199,12 +215,14 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.edit.0">
         <source>Edit archive</source>
+        <target>编辑存档</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.edit.1">
         <source>Edit archive ID %s</source>
       </trans-unit>
       <trans-unit id="tl_news_archive.editheader.0">
         <source>Edit archive settings</source>
+        <target>编辑存档设置</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.editheader.1">
         <source>Edit the settings of archive ID %s</source>
@@ -223,6 +241,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.comments.0">
         <source>Comments</source>
+        <target>评论</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.comments.1">
         <source>Show comments of archive ID %s</source>
@@ -233,6 +252,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.feeds.1">
         <source>Manage RSS feeds</source>
+        <target>管理RSS源</target>
       </trans-unit>
     </body>
   </file>

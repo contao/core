@@ -15,18 +15,21 @@
       </trans-unit>
       <trans-unit id="tl_comments.date.0">
         <source>Date</source>
+        <target>Kuupäev</target>
       </trans-unit>
       <trans-unit id="tl_comments.date.1">
         <source>Please enter the comment date.</source>
       </trans-unit>
       <trans-unit id="tl_comments.name.0">
         <source>Author</source>
+        <target>Autor</target>
       </trans-unit>
       <trans-unit id="tl_comments.name.1">
         <source>Please enter the author's name.</source>
       </trans-unit>
       <trans-unit id="tl_comments.email.0">
         <source>E-mail address</source>
+        <target>E-maili aadress</target>
       </trans-unit>
       <trans-unit id="tl_comments.email.1">
         <source>The e-mail address will not be published.</source>
@@ -51,6 +54,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.author.0">
         <source>Author</source>
+        <target>Autor</target>
       </trans-unit>
       <trans-unit id="tl_comments.author.1">
         <source>Here you can change the author of the reply.</source>
@@ -69,6 +73,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.ip.0">
         <source>IP address</source>
+        <target>IP aadress</target>
       </trans-unit>
       <trans-unit id="tl_comments.ip.1">
         <source>The IP address of the author.</source>
@@ -81,6 +86,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.author_legend">
         <source>Author</source>
+        <target>Autor</target>
       </trans-unit>
       <trans-unit id="tl_comments.comment_legend">
         <source>Comment</source>
@@ -99,6 +105,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.tl_content">
         <source>Article</source>
+        <target>Artikkel</target>
       </trans-unit>
       <trans-unit id="tl_comments.tl_page">
         <source>Page</source>

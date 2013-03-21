@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_news.headline.0">
         <source>Title</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="tl_news.headline.1">
         <source>Please enter the news title.</source>
@@ -15,12 +16,14 @@
       </trans-unit>
       <trans-unit id="tl_news.author.0">
         <source>Author</source>
+        <target>Autor</target>
       </trans-unit>
       <trans-unit id="tl_news.author.1">
         <source>Here you can change the author of the news item.</source>
       </trans-unit>
       <trans-unit id="tl_news.date.0">
         <source>Date</source>
+        <target>Kuupäev</target>
       </trans-unit>
       <trans-unit id="tl_news.date.1">
         <source>Please enter the date according to the global date format.</source>
@@ -87,6 +90,7 @@
       </trans-unit>
       <trans-unit id="tl_news.article.0">
         <source>Article</source>
+        <target>Artikkel</target>
       </trans-unit>
       <trans-unit id="tl_news.article.1">
         <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an article.</source>
@@ -105,6 +109,7 @@
       </trans-unit>
       <trans-unit id="tl_news.articleId.0">
         <source>Article</source>
+        <target>Artikkel</target>
       </trans-unit>
       <trans-unit id="tl_news.articleId.1">
         <source>Please choose the article to which visitors will be redirected when clicking the news item.</source>
@@ -147,6 +152,7 @@
       </trans-unit>
       <trans-unit id="tl_news.tstamp.0">
         <source>Revision date</source>
+        <target>Kuupäev</target>
       </trans-unit>
       <trans-unit id="tl_news.tstamp.1">
         <source>Date and time of the latest revision</source>

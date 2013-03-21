@@ -203,21 +203,27 @@
       </trans-unit>
       <trans-unit id="tl_content.mooStart.0">
         <source>Wrapper start</source>
+        <target>Iniciar wrapper</target>
       </trans-unit>
       <trans-unit id="tl_content.mooStart.1">
         <source>Marks the beginning of an accordion pane that spans several content elements.</source>
+        <target>Marca o início de um painel de acordeão com vários elementos de conteúdo.</target>
       </trans-unit>
       <trans-unit id="tl_content.mooStop.0">
         <source>Wrapper stop</source>
+        <target>Terminar wrapper</target>
       </trans-unit>
       <trans-unit id="tl_content.mooStop.1">
         <source>Marks the end of an accordion pane that spans several content elements.</source>
+        <target>Marca o fim de um painel de acordeão com vários elementos de conteúdo.</target>
       </trans-unit>
       <trans-unit id="tl_content.mooSingle.0">
         <source>Single element</source>
+        <target>Elemento único</target>
       </trans-unit>
       <trans-unit id="tl_content.mooSingle.1">
         <source>Behaves like a single text element that is inside an accordion pane.</source>
+        <target>Comporta-se como um elemento de texto único que está dentro de um painel de acordeão.</target>
       </trans-unit>
       <trans-unit id="tl_content.mooHeadline.0">
         <source>Section headline</source>
@@ -277,9 +283,11 @@
       </trans-unit>
       <trans-unit id="tl_content.titleText.0">
         <source>Link title</source>
+        <target>Título do link</target>
       </trans-unit>
       <trans-unit id="tl_content.titleText.1">
         <source>The link title is added as title attribute in the HTML markup.</source>
+        <target>O título do link foi adicionado como um atributo &lt;em&gt;title&lt;/em&gt; no HTML.</target>
       </trans-unit>
       <trans-unit id="tl_content.embed.0">
         <source>Embed the link</source>
@@ -315,9 +323,11 @@
       </trans-unit>
       <trans-unit id="tl_content.orderSRC.0">
         <source>Sort order</source>
+        <target>Ordem de classificação</target>
       </trans-unit>
       <trans-unit id="tl_content.orderSRC.1">
         <source>The sort order of the items.</source>
+        <target>A ordem de classificação dos itens.</target>
       </trans-unit>
       <trans-unit id="tl_content.useHomeDir.0">
         <source>Use home directory</source>
@@ -369,33 +379,43 @@
       </trans-unit>
       <trans-unit id="tl_content.playerSRC.0">
         <source>Video/audio files</source>
+        <target>Arquivos de vídeo/áudio</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSRC.1">
         <source>Here you can add the video/audio file or multiple files if you are using different codecs.</source>
+        <target>Aqui você pode adicionar o arquivo de vídeo/áudio, ou vários arquivos, se você estiver utilizando codecs diferentes.</target>
       </trans-unit>
       <trans-unit id="tl_content.youtube.0">
         <source>YouTube ID</source>
+        <target>ID do YouTube</target>
       </trans-unit>
       <trans-unit id="tl_content.youtube.1">
         <source>Please enter the YouTube video ID (e.g. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</source>
+        <target>Por favor insira o ID do vídeo do YouTube (ex: &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_content.posterSRC.0">
         <source>Preview image</source>
+        <target>Visualizar imagem</target>
       </trans-unit>
       <trans-unit id="tl_content.posterSRC.1">
         <source>Show this image instead of the first frame of the video before playback (videos only).</source>
+        <target>Mostre esta imagem ao invés do primeiro quadro do vídeo antes da reprodução (vídeos apenas).</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.0">
         <source>Player size</source>
+        <target>Tamanho do reprodutor</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
         <source>Width and height of the media player in pixels (videos only).</source>
+        <target>Largura e altura do reprodutor de mídia em pixels (apenas vídeos).</target>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>
+        <target>Reproduzir automaticamente</target>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.1">
         <source>Automatically play the video when the page loads.</source>
+        <target>Reproduzir automaticamente o vídeo ao carregar a página.</target>
       </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>
@@ -567,12 +587,15 @@
       </trans-unit>
       <trans-unit id="tl_content.player_legend">
         <source>Player settings</source>
+        <target>Configurações do reprodutor</target>
       </trans-unit>
       <trans-unit id="tl_content.poster_legend">
         <source>Preview image</source>
+        <target>Visualizar imagem</target>
       </trans-unit>
       <trans-unit id="tl_content.invisible_legend">
         <source>Visibility</source>
+        <target>Visibilidade</target>
       </trans-unit>
       <trans-unit id="tl_content.ordered">
         <source>ordered list</source>
@@ -600,6 +623,7 @@
       </trans-unit>
       <trans-unit id="tl_content.custom">
         <source>Custom order</source>
+        <target>Ordem personalizada</target>
       </trans-unit>
       <trans-unit id="tl_content.random">
         <source>Random order</source>

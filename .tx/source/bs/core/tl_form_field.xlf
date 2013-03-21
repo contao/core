@@ -385,6 +385,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.tabindex.0">
         <source>Tab index</source>
+        <target>Kartični indeks (Tab index)</target>
       </trans-unit>
       <trans-unit id="tl_form_field.tabindex.1">
         <source>The position of the form field in the tabbing order.</source>

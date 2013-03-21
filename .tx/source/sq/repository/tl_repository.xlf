@@ -431,12 +431,14 @@
       </trans-unit>
       <trans-unit id="tl_repository.ok">
         <source>OK</source>
+        <target>Ani</target>
       </trans-unit>
       <trans-unit id="tl_repository.okuninstextension">
         <source>OK to uninstall &lt;em&gt;%s&lt;/em&gt; now?</source>
       </trans-unit>
       <trans-unit id="tl_repository.showdetails">
         <source>Show details</source>
+        <target>Trego</target>
       </trans-unit>
       <trans-unit id="tl_repository.stateshint">
         <source>Check the states to be included.</source>
@@ -452,6 +454,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.updatedatabase">
         <source>Update database</source>
+        <target>Fresko bazën e të dhënave</target>
       </trans-unit>
       <trans-unit id="tl_repository.updateextension">
         <source>Update extension</source>
@@ -560,15 +563,19 @@
       </trans-unit>
       <trans-unit id="tl_repository_order_options.popular">
         <source>Popularity</source>
+        <target>Popullariteti</target>
       </trans-unit>
       <trans-unit id="tl_repository_order_options.name">
         <source>Name</source>
+        <target>Emri</target>
       </trans-unit>
       <trans-unit id="tl_repository_order_options.title">
         <source>Title</source>
+        <target>Titulli</target>
       </trans-unit>
       <trans-unit id="tl_repository_order_options.author">
         <source>Author</source>
+        <target>Autori</target>
       </trans-unit>
       <trans-unit id="tl_repository_state_options.alpha">
         <source>Alpha</source>

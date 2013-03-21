@@ -171,9 +171,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.responsive.css.0">
         <source>Responsive grid</source>
+        <target>Rrjet përgjegjës</target>
       </trans-unit>
       <trans-unit id="tl_layout.responsive.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
+        <target>Shton një rrjet përgjegjshës me 12-kolonë që do të shkaktohet nga klasa CSS &quot;grid1&quot; në &quot;grid12&quot; dhe &quot;offset1&quot; në &quot;offset12&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_layout.reset.css.0">
         <source>CSS reset</source>
@@ -185,9 +187,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.form.css.0">
         <source>Basic forms</source>
+        <target>Formular themelor</target>
       </trans-unit>
       <trans-unit id="tl_layout.form.css.1">
         <source>Adds basic form elements and buttons formatting.</source>
+        <target>Shton elemente të formulareve themelor dhe forma të dygmave.</target>
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.0">
         <source>TinyMCE style sheet</source>
@@ -203,6 +207,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
         <source>Here you can add style sheets from the file system (e.g. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</source>
+        <target>Këtu mund të shtoni style sheets nga systemi skedarëve (p.sh. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
@@ -218,6 +223,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.webfonts.1">
         <source>Here you can add Google web fonts to your website. Specify the font families without the base URL (e.g. &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</source>
+        <target>Këtu mund të shtoni ueb germa të Google për faqen tuaj. Epeni familjen e germava pa URL-në (p.sh. &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.newsfeeds.0">
         <source>News feeds</source>
@@ -317,9 +323,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.mooSource.0">
         <source>MooTools source</source>
+        <target>MooTools</target>
       </trans-unit>
       <trans-unit id="tl_layout.mooSource.1">
         <source>Here you can select from where to load the MooTools scripts.</source>
+        <target>Këtu mund të zgjedhoni nga të ngarkohet MooTools script.</target>
       </trans-unit>
       <trans-unit id="tl_layout.mootools.0">
         <source>MooTools templates</source>
@@ -331,9 +339,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.analytics.0">
         <source>Analytics templates</source>
+        <target>Shabllona alalitikë</target>
       </trans-unit>
       <trans-unit id="tl_layout.analytics.1">
         <source>Here you can activate the analytics templates (e.g. for Google Analytics or Piwik). Note that you have to adjust those templates and add your analytics ID before you can use them!</source>
+        <target>Këtu ju mund të aktivizoni shabllone alalitike (p.sh. për Google Analytics apo Piwik). Vini re se ju duhet të përshtateni këto shabllone dhe të shtoni ID-në tuaj para se të përdorni ato!</target>
       </trans-unit>
       <trans-unit id="tl_layout.script.0">
         <source>Custom JavaScript code</source>
@@ -341,6 +351,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.script.1">
         <source>The JavaScript code which will be inserted at the bottom of the page.</source>
+        <target>Kodi JavaScript i cili do të futet në fund të faqes.</target>
       </trans-unit>
       <trans-unit id="tl_layout.static.0">
         <source>Static layout</source>
@@ -416,24 +427,31 @@
       </trans-unit>
       <trans-unit id="tl_layout.j_local">
         <source>jQuery - local file</source>
+        <target>jQuery - skedari vendor</target>
       </trans-unit>
       <trans-unit id="tl_layout.j_googleapis">
         <source>jQuery - googleapis.com</source>
+        <target>jQuery - googleapis.com</target>
       </trans-unit>
       <trans-unit id="tl_layout.j_fallback">
         <source>jQuery - googleapis.com with local fallback</source>
+        <target>jQuery - googleapis.com me fallback vendor</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_local">
         <source>MooTools - local file</source>
+        <target>MooTools - skedar vendor</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_googleapis">
         <source>MooTools - googleapis.com</source>
+        <target>MooTools - googleapis.com</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_fallback">
         <source>MooTools - googleapis.com with local fallback</source>
+        <target>MooTools - googleapis.com me fallback vendor</target>
       </trans-unit>
       <trans-unit id="tl_layout.html5">
         <source>HTML</source>
+        <target>HTML</target>
       </trans-unit>
       <trans-unit id="tl_layout.xhtml_strict">
         <source>XHTML Strict</source>
@@ -457,15 +475,19 @@
       </trans-unit>
       <trans-unit id="tl_layout.edit_styles">
         <source>Edit the style sheets</source>
+        <target>Përpuno stylesheet</target>
       </trans-unit>
       <trans-unit id="tl_layout.edit_module">
         <source>Edit the module</source>
+        <target>Përpuno modulin</target>
       </trans-unit>
       <trans-unit id="tl_layout.analytics_google">
         <source>Google</source>
+        <target>Google</target>
       </trans-unit>
       <trans-unit id="tl_layout.analytics_piwik">
         <source>Piwik</source>
+        <target>Piwik</target>
       </trans-unit>
       <trans-unit id="tl_layout.new.0">
         <source>New layout</source>
@@ -493,9 +515,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.cut.0">
         <source>Move layout</source>
+        <target>Lëviz strukturën</target>
       </trans-unit>
       <trans-unit id="tl_layout.cut.1">
         <source>Move layout ID %s</source>
+        <target>Lëviz strukturën ID %s</target>
       </trans-unit>
       <trans-unit id="tl_layout.copy.0">
         <source>Duplicate layout</source>
@@ -515,9 +539,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.editheader.0">
         <source>Edit theme</source>
+        <target>Përpuno paraqitjen</target>
       </trans-unit>
       <trans-unit id="tl_layout.editheader.1">
         <source>Edit the theme settings</source>
+        <target>Përpuno konfigurimin e motiveve</target>
       </trans-unit>
     </body>
   </file>

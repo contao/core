@@ -39,6 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_module.text_subscribe.0">
         <source>Your subscription on %s</source>
+        <target>%s இல் உங்கள் சந்தா</target>
       </trans-unit>
       <trans-unit id="tl_module.text_subscribe.1">
         <source>You have subscribed to the following channels on ##domain##:
@@ -50,6 +51,7 @@ Please click ##link## to activate your subscription. If you did not subscribe yo
       </trans-unit>
       <trans-unit id="tl_module.text_unsubscribe.0">
         <source>Your subscription on %s</source>
+        <target>%s இல் உங்கள் சந்தா</target>
       </trans-unit>
       <trans-unit id="tl_module.text_unsubscribe.1">
         <source>You have unsubscribed from the following channels on ##domain##:

@@ -69,12 +69,14 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.config_legend">
         <source>Configuration</source>
+        <target>Konfiguracija</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.media_legend">
         <source>Media settings</source>
       </trans-unit>
       <trans-unit id="tl_style_sheet.vars_legend">
         <source>Global variables</source>
+        <target>Globalne varijable</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.css_imported">
         <source>Style sheet &quot;%s&quot; has been imported.</source>

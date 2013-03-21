@@ -435,7 +435,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.okuninstextension">
         <source>OK to uninstall &lt;em&gt;%s&lt;/em&gt; now?</source>
-        <target>OK per installar ussa &lt;em&gt;%s&lt;/em&gt;?</target>
+        <target>OK per deinstallar ussa &lt;em&gt;%s&lt;/em&gt;?</target>
       </trans-unit>
       <trans-unit id="tl_repository.showdetails">
         <source>Show details</source>

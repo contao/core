@@ -419,6 +419,7 @@
       </trans-unit>
       <trans-unit id="tl_module.orderSRC.0">
         <source>Sort order</source>
+        <target>Ordine de sortare</target>
       </trans-unit>
       <trans-unit id="tl_module.orderSRC.1">
         <source>The sort order of the items.</source>

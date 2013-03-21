@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_article.keywords.1">
         <source>Here you can enter a list of comma separated keywords. Keywords, however, are no longer relevant to most search engines (including Google).</source>
-        <target>GoogleやYahooのような検索エンジンが評価する、コンマで区切ったキーワードを入力できます。しかし、(Googleを含んだ)殆どの検索エンジンでは、もうキーワードは意味を持ちません。</target>
+        <target>コンマで区切ったキーワードを入力できます。しかし、(Googleを含む)殆どの検索エンジンでは、もうキーワードは意味を持ちません。</target>
       </trans-unit>
       <trans-unit id="tl_article.teaserCssID.0">
         <source>Teaser CSS ID/class</source>

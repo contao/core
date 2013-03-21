@@ -115,6 +115,7 @@
       </trans-unit>
       <trans-unit id="tl_article.expert_legend">
         <source>Expert settings</source>
+        <target>சிறப்பு அமைப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_article.publish_legend">
         <source>Publish settings</source>
@@ -189,6 +190,7 @@
       </trans-unit>
       <trans-unit id="tl_article.copy.0">
         <source>Duplicate article</source>
+        <target>ஆக்கத்தை பிரதிசெய்</target>
       </trans-unit>
       <trans-unit id="tl_article.copy.1">
         <source>Duplicate article ID %s</source>
@@ -209,6 +211,7 @@
       </trans-unit>
       <trans-unit id="tl_article.toggle.0">
         <source>Publish/unpublish article</source>
+        <target>பக்கத்தை வெளியிடு/வெளியிடவேண்டாம்</target>
       </trans-unit>
       <trans-unit id="tl_article.toggle.1">
         <source>Publish/unpublish article ID %s</source>

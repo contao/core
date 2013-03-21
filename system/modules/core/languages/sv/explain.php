@@ -17,6 +17,7 @@
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][0] = 'Rich Text Editor (TinyMCE)';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][0][1] = 'För mer information om TinyMCE besök <a href="http://tinymce.moxiecode.com" title="TinyMCE från moxiecode" target="_blank">http://tinymce.moxiecode.com</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][1][0] = 'Insert taggar';
+$GLOBALS['TL_LANG']['XPL']['insertTags'][1][1] = 'För mer information om Insert-taggar besök  <a href="https://contao.org/en/manual/3.0/managing-content.html#insert-tags" title="Contao online-dokumentation" target="_blank">https://contao.org/en/manual/3.0/managing-content.html#insert-tags</a>.';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][0] = 'Kodeditorn';
 $GLOBALS['TL_LANG']['XPL']['insertTags'][2][1] = 'För mer information om CodeMirror besök <a href="http://codemirror.net" title="EditArea från Marijn Haverbeke" target="_blank">http://codemirror.net</a>.';
 $GLOBALS['TL_LANG']['XPL']['dateFormat'][0][0] = 'colspan';

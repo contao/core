@@ -121,11 +121,19 @@ class Config
 	 */
 	protected function initialize()
 	{
+		$this->blnHasLcf = file_exists(TL_ROOT . '/system/config/localconfig.php');
+
 		// Load the default files
 		include TL_ROOT . '/system/config/default.php';
 		include TL_ROOT . '/system/config/agents.php';
 
-		// Get the module configuration files
+		// Include the local configuration file
+		if ($this->blnHasLcf)
+		{
+			include TL_ROOT . '/system/config/localconfig.php';
+		}
+
+		// Include the module configuration files
 		foreach ($this->getActiveModules() as $strModule)
 		{
 			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/config/config.php';
@@ -136,57 +144,75 @@ class Config
 			}
 		}
 
-		// Return if there is no local configuration file yet
-		if (!file_exists(TL_ROOT . '/system/config/localconfig.php'))
+		// Include the local configuration file again
+		if ($this->blnHasLcf)
+		{
+			include TL_ROOT . '/system/config/localconfig.php';
+		}
+	}
+
+
+	/**
+	 * Mark the object as modified
+	 */
+	protected function markModified()
+	{
+		// Return if marked as modified already
+		if ($this->blnIsModified === true)
 		{
 			return;
 		}
 
-		$this->blnHasLcf = true;
-		include TL_ROOT . '/system/config/localconfig.php';
+		$this->blnIsModified = true;
 
-		// Read the local configuration file
-		$strMode = 'top';
-		$resFile = fopen(TL_ROOT . '/system/config/localconfig.php', 'rb');
+		// Import the Files object (required in the destructor)
+		$this->Files = \Files::getInstance();
 
-		while (!feof($resFile))
+		// Parse the local configuration file
+		if ($this->blnHasLcf)
 		{
-			$strLine = fgets($resFile);
-			$strTrim = trim($strLine);
+			$strMode = 'top';
+			$resFile = fopen(TL_ROOT . '/system/config/localconfig.php', 'rb');
 
-			if ($strTrim == '?>')
+			while (!feof($resFile))
 			{
-				continue;
+				$strLine = fgets($resFile);
+				$strTrim = trim($strLine);
+
+				if ($strTrim == '?>')
+				{
+					continue;
+				}
+
+				if ($strTrim == '### INSTALL SCRIPT START ###')
+				{
+					$strMode = 'data';
+					continue;
+				}
+
+				if ($strTrim == '### INSTALL SCRIPT STOP ###')
+				{
+					$strMode = 'bottom';
+					continue;
+				}
+
+				if ($strMode == 'top')
+				{
+					$this->strTop .= $strLine;
+				}
+				elseif ($strMode == 'bottom')
+				{
+					$this->strBottom .= $strLine;
+				}
+				elseif ($strTrim != '')
+				{
+					$arrChunks = array_map('trim', explode('=', $strLine, 2));
+					$this->arrData[$arrChunks[0]] = $arrChunks[1];
+				}
 			}
 
-			if ($strTrim == '### INSTALL SCRIPT START ###')
-			{
-				$strMode = 'data';
-				continue;
-			}
-
-			if ($strTrim == '### INSTALL SCRIPT STOP ###')
-			{
-				$strMode = 'bottom';
-				continue;
-			}
-
-			if ($strMode == 'top')
-			{
-				$this->strTop .= $strLine;
-			}
-			elseif ($strMode == 'bottom')
-			{
-				$this->strBottom .= $strLine;
-			}
-			elseif ($strTrim != '')
-			{
-				$arrChunks = array_map('trim', explode('=', $strLine, 2));
-				$this->arrData[$arrChunks[0]] = $arrChunks[1];
-			}
+			fclose($resFile);
 		}
-
-		fclose($resFile);
 	}
 
 
@@ -213,7 +239,7 @@ class Config
 
 		if ($this->strBottom != '')
 		{
-			$strFile .= $this->strBottom . "\n";
+			$strFile .= "\n" . $this->strBottom . "\n";
 		}
 
 		$strTemp = md5(uniqid(mt_rand(), true));
@@ -334,8 +360,7 @@ class Config
 	 */
 	public function add($strKey, $varValue)
 	{
-		$this->blnIsModified = true;
-		$this->Files = \Files::getInstance(); // Required in the destructor
+		$this->markModified();
 		$this->arrData[$strKey] = $this->escape($varValue) . ';';
 	}
 
@@ -377,8 +402,7 @@ class Config
 	 */
 	public function delete($strKey)
 	{
-		$this->blnIsModified = true;
-		$this->Files = \Files::getInstance(); // Required in the destructor
+		$this->markModified();
 		unset($this->arrData[$strKey]);
 	}
 

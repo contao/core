@@ -21,6 +21,7 @@
       </trans-unit>
       <trans-unit id="tl_style.comment.0">
         <source>Comment</source>
+        <target>Kommentar</target>
       </trans-unit>
       <trans-unit id="tl_style.comment.1">
         <source>Here you can add a comment.</source>

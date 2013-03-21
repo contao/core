@@ -307,9 +307,11 @@
       </trans-unit>
       <trans-unit id="tl_style.bordercollapse.0">
         <source>Border handling</source>
+        <target>هندلینگ حاشیه</target>
       </trans-unit>
       <trans-unit id="tl_style.bordercollapse.1">
         <source>Here you can choose the border handling.</source>
+        <target>هندلینگ حاشیه را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style.borderspacing.0">
         <source>Border spacing</source>

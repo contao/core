@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_module.name.0">
         <source>Title</source>
+        <target>Tittel</target>
       </trans-unit>
       <trans-unit id="tl_module.name.1">
         <source>Please enter the module title.</source>
@@ -189,6 +190,7 @@
       </trans-unit>
       <trans-unit id="tl_module.perPage.0">
         <source>Items per page</source>
+        <target>Elementer per side</target>
       </trans-unit>
       <trans-unit id="tl_module.perPage.1">
         <source>The number of items per page. Set to 0 to disable pagination.</source>
@@ -315,6 +317,7 @@
       </trans-unit>
       <trans-unit id="tl_module.orderSRC.0">
         <source>Sort order</source>
+        <target>Sorteringsrekkefølge</target>
       </trans-unit>
       <trans-unit id="tl_module.orderSRC.1">
         <source>The sort order of the items.</source>
@@ -381,9 +384,11 @@
       </trans-unit>
       <trans-unit id="tl_module.disableCaptcha.0">
         <source>Disable the security question</source>
+        <target>Deaktiver sikkerhetsspørsmålet</target>
       </trans-unit>
       <trans-unit id="tl_module.disableCaptcha.1">
         <source>Here you can disable the security question (not recommended).</source>
+        <target>Her kan du deaktivere sikkerhetsspørsmålet (ikke anbefalt).</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_groups.0">
         <source>Member groups</source>

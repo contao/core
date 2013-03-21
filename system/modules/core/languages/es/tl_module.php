@@ -118,6 +118,7 @@ $GLOBALS['TL_LANG']['tl_module']['useCaption'][0] = 'Mostrar nombre de imagen en
 $GLOBALS['TL_LANG']['tl_module']['useCaption'][1] = 'Si seleccionas esta opción, el nombre de la imagen se mostrará justo debajo de la misma.';
 $GLOBALS['TL_LANG']['tl_module']['multiSRC'][0] = 'Archivos fuente';
 $GLOBALS['TL_LANG']['tl_module']['multiSRC'][1] = 'Por favor selecciona uno o más archivos de la carpeta de archivos.';
+$GLOBALS['TL_LANG']['tl_module']['orderSRC'][0] = 'Tipo orden';
 $GLOBALS['TL_LANG']['tl_module']['html'][0] = 'Código HTML';
 $GLOBALS['TL_LANG']['tl_module']['html'][1] = 'Por favor introduce tu código HTML.';
 $GLOBALS['TL_LANG']['tl_module']['rss_cache'][0] = 'Tiempo en caché';

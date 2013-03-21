@@ -179,9 +179,8 @@ class Form extends \Hybrid
 					{
 						$arrSubmitted[$objFields->name] = $objWidget->value;
 						$_SESSION['FORM_DATA'][$objFields->name] = $objWidget->value;
+						unset($_POST[$objFields->name]); // see #5474
 					}
-
-					unset($_POST[$objFields->name]);
 				}
 
 				if ($objWidget instanceof \uploadable)
@@ -477,7 +476,13 @@ class Form extends \Hybrid
 			$this->log('Form "' . $this->title . '" has been submitted by ' . \System::anonymizeIp(\Environment::get('ip')) . '.', 'Form processFormData()', TL_FORMS);
 		}
 
-		$this->jumpToOrReload($this->objModel->getRelated('jumpTo')->row());
+		// Check whether there is a jumpTo page
+		if (($objJumpTo = $this->objModel->getRelated('jumpTo')) !== null)
+		{
+			$this->jumpToOrReload($objJumpTo->row());
+		}
+
+		$this->reload();
 	}
 
 

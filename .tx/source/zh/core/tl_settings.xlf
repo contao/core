@@ -111,12 +111,15 @@
       </trans-unit>
       <trans-unit id="tl_settings.maxResultsPerPage.1">
         <source>This overall limit takes effect if a user chooses the &quot;show all records&quot; option.</source>
+        <target>如果用户选择“显示全部记录”选项，将会影响到全部限制设定。</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
         <source>Exclude folders from synchronisation</source>
+        <target>同步中排除的文件夹</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronisation (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <target>您可以在这里录入以逗号分割的文件夹列表，该列表中的文件夹不会被同步 (如：&lt;em&gt;attachments,music_academy&lt;/em&gt;)。请注意被排除的资源不能用在如：图片或下载元素！</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
@@ -136,21 +139,27 @@
       </trans-unit>
       <trans-unit id="tl_settings.cacheMode.0">
         <source>Cache mode</source>
+        <target>缓存模式</target>
       </trans-unit>
       <trans-unit id="tl_settings.cacheMode.1">
         <source>Here you can select the cache mode.</source>
+        <target>您可以在这里选择缓存模式。</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
+        <target>匿名IP地址</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.1">
         <source>Anonymize any IP address that is stored in the database, except in the &lt;em&gt;tl_session&lt;/em&gt; table (the IP address is bound to the session for security reasons).</source>
+        <target>匿名的任何IP地址存储在数据库中，&lt;em&gt;tl_session&lt;/em&gt;表中除外 (由于安全原因，IP地址绑定到session)。</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeGA.0">
         <source>Anonymize Google Analytics</source>
+        <target>Google Analytics 数据匿名化处理</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeGA.1">
         <source>Anonymize the IP addresses that are sent to Google Analytics.</source>
+        <target>匿名发送到Google Analytics的IP地址。</target>
       </trans-unit>
       <trans-unit id="tl_settings.rewriteURL.0">
         <source>Rewrite URLs</source>
@@ -162,21 +171,27 @@
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.0">
         <source>Add the language to the URL</source>
+        <target>在URL中添加语言</target>
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
         <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</source>
+        <target>添加语言字符串作为URL第一个参数 (如：&lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>
+        <target>不重定向空URLs</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.1">
         <source>For an empty URL display the website instead of redirecting to the language root page (not recommended).</source>
+        <target>对于空URL，显示网站而不是重定向到语言根页面 (不推荐)。</target>
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.0">
         <source>Enable auto_item</source>
+        <target>允许auto_item</target>
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.1">
         <source>Skip the &lt;em&gt;items/&lt;/em&gt; or &lt;em&gt;events/&lt;/em&gt; fragment in the URL and automatically discover the item based on the &lt;em&gt;auto_item&lt;/em&gt; parameter.</source>
+        <target>跳过URL中&lt;em&gt;items/&lt;/em&gt;或&lt;em&gt;events/&lt;/em&gt;片段接着自动找到基于 &lt;em&gt;auto_item&lt;/em&gt;参数的记录。</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableAlias.0">
         <source>Disable page alias usage</source>
@@ -188,9 +203,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.folderUrl.0">
         <source>Enable folder URLs</source>
+        <target>允许文件夹URLs</target>
       </trans-unit>
       <trans-unit id="tl_settings.folderUrl.1">
         <source>Here you can enable folder-style page aliases like &lt;em&gt;docs/install/download.html&lt;/em&gt; instead of &lt;em&gt;docs-install-download.html&lt;/em&gt;.</source>
+        <target>您可以在这里允许文件夹格式页面别名像：&lt;em&gt;docs/install/download.html&lt;/em&gt;而不是：&lt;em&gt;docs-install-download.html&lt;/em&gt;。</target>
       </trans-unit>
       <trans-unit id="tl_settings.allowedTags.0">
         <source>Allowed HTML tags</source>
@@ -210,9 +227,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
+        <target>避免内部缓存</target>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.1">
         <source>Do not use the internal cache files (e.g. useful when developing extensions).</source>
+        <target>不使用内部缓存文件 (如：有利于开发扩展插件)。</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableRefererCheck.0">
         <source>Disable request tokens</source>
@@ -240,15 +259,19 @@
       </trans-unit>
       <trans-unit id="tl_settings.logErrors.0">
         <source>Log error messages</source>
+        <target>日志错误消息</target>
       </trans-unit>
       <trans-unit id="tl_settings.logErrors.1">
         <source>Write error messages to the error log file (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</source>
+        <target>记录错误信息到错误日志文件 (&lt;em&gt;system/logs/error.log&lt;/em&gt;)。</target>
       </trans-unit>
       <trans-unit id="tl_settings.coreOnlyMode.0">
         <source>Run in safe mode</source>
+        <target>在安全模式下运行</target>
       </trans-unit>
       <trans-unit id="tl_settings.coreOnlyMode.1">
         <source>Run Contao in safe mode and load only core modules.</source>
+        <target>在安全模式下运行Contao，仅加载核心模块。</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableIpCheck.0">
         <source>Disable IP check</source>
@@ -284,9 +307,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.templateFiles.0">
         <source>Template file types</source>
+        <target>模板文件类型</target>
       </trans-unit>
       <trans-unit id="tl_settings.templateFiles.1">
         <source>Here you can enter a comma separated list of supported template file types.</source>
+        <target>您可以在这里录入所支持的模板文件类型列表，该列表用逗号分割。</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxImageWidth.0">
         <source>Maximum front end width</source>
@@ -306,15 +331,19 @@
       </trans-unit>
       <trans-unit id="tl_settings.gdMaxImgWidth.0">
         <source>Maximum GD image width</source>
+        <target>GD图片最大宽度</target>
       </trans-unit>
       <trans-unit id="tl_settings.gdMaxImgWidth.1">
         <source>Here you can enter the maximum image width that the GD library shall try to handle.</source>
+        <target>您可以在这里输入GD库应处理的图片最大宽度。</target>
       </trans-unit>
       <trans-unit id="tl_settings.gdMaxImgHeight.0">
         <source>Maximum GD image height</source>
+        <target>GD图片最大高度</target>
       </trans-unit>
       <trans-unit id="tl_settings.gdMaxImgHeight.1">
         <source>Here you can enter the maximum image height that the GD library shall try to handle.</source>
+        <target>您可以在这里输入GD库应处理的图片最大高度。</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploadPath.0">
         <source>Files directory</source>
@@ -414,9 +443,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.smtpEnc.0">
         <source>SMTP encryption</source>
+        <target>SMTP加密</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpEnc.1">
         <source>Here you can choose an encryption method (SSL or TLS).</source>
+        <target>您可以在这里选择一种加密方式(SSL 或 TLS)。</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpPort.0">
         <source>SMTP port number</source>
@@ -468,9 +499,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.autologin.0">
         <source>Auto login period</source>
+        <target>自动登录时间</target>
       </trans-unit>
       <trans-unit id="tl_settings.autologin.1">
         <source>Here you can set the front end auto login period (90 days = 7776000 seconds).</source>
+        <target>您可以在这里设置前端自动登录时间 (90 天 = 7776000 秒)。</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultUser.0">
         <source>Default page owner</source>
@@ -526,9 +559,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.sections_legend">
         <source>Layout sections</source>
+        <target>布局区域</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>
+        <target>隐私设置</target>
       </trans-unit>
       <trans-unit id="tl_settings.security_legend">
         <source>Security settings</source>
@@ -568,9 +603,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.update_legend">
         <source>Live Update</source>
+        <target>在线更新</target>
       </trans-unit>
       <trans-unit id="tl_settings.static_legend">
         <source>Static resources</source>
+        <target>静态资源</target>
       </trans-unit>
       <trans-unit id="tl_settings.edit">
         <source>Edit the local configuration</source>
@@ -578,15 +615,19 @@
       </trans-unit>
       <trans-unit id="tl_settings.both">
         <source>Use the server and the browser cache</source>
+        <target>使用服务器和浏览器缓存</target>
       </trans-unit>
       <trans-unit id="tl_settings.server">
         <source>Use only the server cache</source>
+        <target>仅使用服务器缓存</target>
       </trans-unit>
       <trans-unit id="tl_settings.browser">
         <source>Use only the browser cache</source>
+        <target>仅使用浏览器缓存</target>
       </trans-unit>
       <trans-unit id="tl_settings.none">
         <source>Disable caching</source>
+        <target>禁用缓存</target>
       </trans-unit>
     </body>
   </file>

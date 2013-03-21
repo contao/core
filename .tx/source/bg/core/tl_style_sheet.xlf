@@ -41,21 +41,26 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.source.0">
         <source>Source files</source>
+        <target>Изходни файлове</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.source.1">
         <source>Here you can upload one or more .css files to be imported.</source>
       </trans-unit>
       <trans-unit id="tl_style_sheet.tstamp.0">
         <source>Revision date</source>
+        <target>Дата на промяната</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>Дата и време на последната промяна</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.title_legend">
         <source>Name</source>
+        <target>Име</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.config_legend">
         <source>Configuration</source>
+        <target>Конфигурация</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.media_legend">
         <source>Media settings</source>

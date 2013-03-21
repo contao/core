@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_undo.pid.0">
         <source>User</source>
+        <target>用户</target>
       </trans-unit>
       <trans-unit id="tl_undo.pid.1">
         <source>Name of the associated user</source>
@@ -23,6 +24,7 @@
       </trans-unit>
       <trans-unit id="tl_undo.query.0">
         <source>Details</source>
+        <target>详情</target>
       </trans-unit>
       <trans-unit id="tl_undo.query.1">
         <source>Details of the undo step</source>
@@ -37,12 +39,15 @@
       </trans-unit>
       <trans-unit id="tl_undo.show.0">
         <source>Show details</source>
+        <target>查看详细</target>
       </trans-unit>
       <trans-unit id="tl_undo.show.1">
         <source>Show the details of entry ID %s</source>
+        <target>显示ID为%s的记录详情</target>
       </trans-unit>
       <trans-unit id="tl_undo.undo.0">
         <source>Restore</source>
+        <target>撤销</target>
       </trans-unit>
       <trans-unit id="tl_undo.undo.1">
         <source>Restore entry ID %s</source>

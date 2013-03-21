@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_repository.category.0">
         <source>Category</source>
+        <target>Категория</target>
       </trans-unit>
       <trans-unit id="tl_repository.category.1">
         <source>Please select the extension category.</source>
@@ -39,12 +40,14 @@
       </trans-unit>
       <trans-unit id="tl_repository.name.0">
         <source>Name</source>
+        <target>Име</target>
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
         <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are prefered. Additionally, the characters _ and - are allowed within the name.</source>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
         <source>Popularity</source>
+        <target>Популярност</target>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.1">
         <source>%s/%s (downloads/installs)</source>
@@ -63,6 +66,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.selversion.0">
         <source>Version</source>
+        <target>Версия</target>
       </trans-unit>
       <trans-unit id="tl_repository.selversion.1">
         <source>Please select the version</source>
@@ -81,6 +85,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
         <source>Version</source>
+        <target>Версия</target>
       </trans-unit>
       <trans-unit id="tl_repository.version.1">
         <source>Version numbers must be in format n.n.n s, where n are integers and s is one of: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</source>
@@ -154,6 +159,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.no">
         <source>no</source>
+        <target>Не</target>
       </trans-unit>
       <trans-unit id="tl_repository.noextensionsfound">
         <source>No matching extensions found.</source>
@@ -168,6 +174,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.pageof">
         <source>Page %s of %s</source>
+        <target>Страница %s от %s</target>
       </trans-unit>
       <trans-unit id="tl_repository.ratingfmt">
         <source>%.2f (%d votes)</source>
@@ -254,6 +261,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.yes">
         <source>yes</source>
+        <target>Да</target>
       </trans-unit>
       <trans-unit id="tl_repository.action">
         <source>Action</source>
@@ -269,6 +277,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.apply">
         <source>Apply</source>
+        <target>Прилагане</target>
       </trans-unit>
       <trans-unit id="tl_repository.byorder">
         <source>By %s</source>
@@ -317,6 +326,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.goback">
         <source>Go back</source>
+        <target>Обратно</target>
       </trans-unit>
       <trans-unit id="tl_repository.install">
         <source>Install</source>
@@ -341,12 +351,14 @@
       </trans-unit>
       <trans-unit id="tl_repository.ok">
         <source>OK</source>
+        <target>ОК</target>
       </trans-unit>
       <trans-unit id="tl_repository.okuninstextension">
         <source>OK to uninstall &lt;em&gt;%s&lt;/em&gt; now?</source>
       </trans-unit>
       <trans-unit id="tl_repository.showdetails">
         <source>Show details</source>
+        <target>Показване на подробности</target>
       </trans-unit>
       <trans-unit id="tl_repository.stateshint">
         <source>Check the states to be included.</source>
@@ -362,6 +374,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.updatedatabase">
         <source>Update database</source>
+        <target>Обновяване на базата данни</target>
       </trans-unit>
       <trans-unit id="tl_repository.updateextension">
         <source>Update extension</source>

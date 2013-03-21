@@ -33,12 +33,14 @@
       </trans-unit>
       <trans-unit id="tl_comments.website.0">
         <source>Website</source>
+        <target>Nettsted</target>
       </trans-unit>
       <trans-unit id="tl_comments.website.1">
         <source>Here you can enter a website address.</source>
       </trans-unit>
       <trans-unit id="tl_comments.comment.0">
         <source>Comment</source>
+        <target>Kommentar</target>
       </trans-unit>
       <trans-unit id="tl_comments.comment.1">
         <source>Please enter the comment.</source>
@@ -84,6 +86,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.comment_legend">
         <source>Comment</source>
+        <target>Kommentar</target>
       </trans-unit>
       <trans-unit id="tl_comments.reply_legend">
         <source>Reply</source>

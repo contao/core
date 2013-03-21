@@ -55,9 +55,11 @@
       </trans-unit>
       <trans-unit id="tl_faq.noComments.0">
         <source>Disable comments</source>
+        <target>பின்னூட்டங்களை தடைசெய்</target>
       </trans-unit>
       <trans-unit id="tl_faq.noComments.1">
         <source>Do not allow comments for this particular FAQ.</source>
+        <target>இக்குறிப்பிட்ட FAQ இற்கு பின்னூட்டங்களை அனுமதிக்க வேண்டாம்.</target>
       </trans-unit>
       <trans-unit id="tl_faq.published.0">
         <source>Publish the FAQ</source>
@@ -83,6 +85,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.expert_legend">
         <source>Expert settings</source>
+        <target>சிறப்பு அமைப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_faq.publish_legend">
         <source>Publish settings</source>
@@ -155,6 +158,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.pastenew.0">
         <source>Add new at the top</source>
+        <target>மேலே புதியதொன்றை சேருங்கள்</target>
       </trans-unit>
       <trans-unit id="tl_faq.pastenew.1">
         <source>Add new after question ID %s</source>

@@ -363,6 +363,7 @@
       </trans-unit>
       <trans-unit id="tl_page.pasteinto.0">
         <source>Paste into</source>
+        <target>Lim inn</target>
       </trans-unit>
       <trans-unit id="tl_page.pasteinto.1">
         <source>Paste into page ID %s</source>

@@ -33,9 +33,9 @@ class Comments extends \Frontend
 	 * @param \stdClass
 	 * @param string
 	 * @param integer
-	 * @param array
+	 * @param mixed
 	 */
-	public function addCommentsToTemplate(\FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $arrNotifies)
+	public function addCommentsToTemplate(\FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $varNotifies)
 	{
 		global $objPage;
 
@@ -172,7 +172,7 @@ class Comments extends \Frontend
 		$objTemplate->commentsTotal = $limit ? $gtotal : $total;
 
 		// Add a form to create new comments
-		$this->renderCommentForm($objTemplate, $objConfig, $strSource, $intParent, $arrNotifies);
+		$this->renderCommentForm($objTemplate, $objConfig, $strSource, $intParent, $varNotifies);
 	}
 
 
@@ -182,9 +182,9 @@ class Comments extends \Frontend
 	 * @param \stdClass
 	 * @param string
 	 * @param integer
-	 * @param array
+	 * @param mixed
 	 */
-	protected function renderCommentForm(\FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $arrNotifies)
+	protected function renderCommentForm(\FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $varNotifies)
 	{
 		$this->import('FrontendUser', 'User');
 
@@ -392,9 +392,13 @@ class Comments extends \Frontend
 									  \Environment::get('base') . 'contao/main.php?do=comments&act=edit&id=' . $objComment->id);
 
 			// Do not send notifications twice
-			if (is_array($arrNotifies))
+			if (is_array($varNotifies))
 			{
-				$objEmail->sendTo(array_unique($arrNotifies));
+				$objEmail->sendTo(array_unique($varNotifies));
+			}
+			elseif ($varNotifies != '')
+			{
+				$objEmail->sendTo($varNotifies); // see #5443
 			}
 
 			// Pending for approval

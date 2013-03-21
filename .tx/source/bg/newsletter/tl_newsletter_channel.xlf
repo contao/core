@@ -3,12 +3,14 @@
     <body>
       <trans-unit id="tl_newsletter_channel.title.0">
         <source>Title</source>
+        <target>Заглавие</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.title.1">
         <source>Please enter the title of the channel.</source>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.jumpTo.0">
         <source>Redirect page</source>
+        <target>Страница за показване</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.jumpTo.1">
         <source>Please choose the newsletter reader page to which visitors will be redirected when clicking a newsletter.</source>
@@ -21,21 +23,27 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpHost.0">
         <source>SMTP hostname</source>
+        <target>Име на SMTP хоста</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpHost.1">
         <source>Please enter the host name of the SMTP server.</source>
+        <target>Моля въведете името на хоста на вашия SMTP-сървър.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpUser.0">
         <source>SMTP username</source>
+        <target>Потребителско име за SMTP</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpUser.1">
         <source>Here you can enter the SMTP username.</source>
+        <target>Ако SMTP-сървърът изисква автентикация, моля въведете потребителско име тук.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpPass.0">
         <source>SMTP password</source>
+        <target>Парола за SMTP</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpPass.1">
         <source>Here you can enter the SMTP password.</source>
+        <target>Ако SMTP-сървърът изисква автентикация, моля въведете парола тук.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpEnc.0">
         <source>SMTP encryption</source>
@@ -45,15 +53,19 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpPort.0">
         <source>SMTP port number</source>
+        <target>Порт на SMTP сървъра</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpPort.1">
         <source>Please enter the port number of the SMTP server.</source>
+        <target>Моля въведете номера на порта на вашия SMTP-сървър (по подразбиране 25 или 465 за SSL).</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.tstamp.0">
         <source>Revision date</source>
+        <target>Дата на промяната</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>Дата и време на последната промяна</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.title_legend">
         <source>Title and redirect</source>

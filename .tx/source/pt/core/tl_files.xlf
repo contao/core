@@ -11,6 +11,7 @@
       </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
+        <target>Informação meta</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.1">
         <source>Here you can enter the file meta information.</source>
@@ -75,13 +76,16 @@
       <trans-unit id="tl_files.syncFolderF">
         <source>Found the folder &quot;%s&quot;</source>
       </trans-unit>
+      <trans-unit id="tl_files.syncFolderH">
+        <source>Updated the hash of the folder &quot;%s&quot;</source>
+      </trans-unit>
       <trans-unit id="tl_files.syncFileC">
         <source>Created the file &quot;%s&quot;</source>
       </trans-unit>
       <trans-unit id="tl_files.syncFileF">
         <source>Found the file &quot;%s&quot;</source>
       </trans-unit>
-      <trans-unit id="tl_files.syncHash">
+      <trans-unit id="tl_files.syncFileH">
         <source>Updated the hash of the file &quot;%s&quot;</source>
       </trans-unit>
       <trans-unit id="tl_files.new.0">

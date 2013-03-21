@@ -39,6 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_content.title.0">
         <source>Title</source>
+        <target>Tittel</target>
       </trans-unit>
       <trans-unit id="tl_content.title.1">
         <source>Here you can enter the image title (&lt;em&gt;title&lt;/em&gt; attribute).</source>
@@ -141,9 +142,11 @@
       </trans-unit>
       <trans-unit id="tl_content.sortOrder.0">
         <source>Sort order</source>
+        <target>Sorteringsrekkefølge</target>
       </trans-unit>
       <trans-unit id="tl_content.sortOrder.1">
         <source>Please choose the sort order.</source>
+        <target>Vennligst velg sorteringsrekkefølge</target>
       </trans-unit>
       <trans-unit id="tl_content.mooType.0">
         <source>Operation mode</source>
@@ -243,6 +246,7 @@
       </trans-unit>
       <trans-unit id="tl_content.orderSRC.0">
         <source>Sort order</source>
+        <target>Sorteringsrekkefølge</target>
       </trans-unit>
       <trans-unit id="tl_content.orderSRC.1">
         <source>The sort order of the items.</source>
@@ -261,6 +265,7 @@
       </trans-unit>
       <trans-unit id="tl_content.perPage.0">
         <source>Items per page</source>
+        <target>Elementer per side</target>
       </trans-unit>
       <trans-unit id="tl_content.perPage.1">
         <source>The number of items per page. Set to 0 to disable pagination.</source>
@@ -276,6 +281,7 @@
       </trans-unit>
       <trans-unit id="tl_content.sortBy.1">
         <source>Please choose the sort order.</source>
+        <target>Vennligst velg sorteringsrekkefølge</target>
       </trans-unit>
       <trans-unit id="tl_content.galleryTpl.0">
         <source>Gallery template</source>

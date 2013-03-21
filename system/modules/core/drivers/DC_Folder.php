@@ -1999,7 +1999,7 @@ window.addEvent(\'domready\', function() {
 		// File names
 		if ($this->strField == 'name')
 		{
-			if (!file_exists(TL_ROOT . '/' . $this->strPath . '/' . $this->varValue . $this->strExtension) || !$this->isMounted($this->strPath . '/' . $this->varValue . $this->strExtension) || $this->varValue == $varValue)
+			if (!file_exists(TL_ROOT . '/' . $this->strPath . '/' . $this->varValue . $this->strExtension) || !$this->isMounted($this->strPath . '/' . $this->varValue . $this->strExtension) || $this->varValue === $varValue)
 			{
 				return;
 			}
@@ -2018,7 +2018,7 @@ window.addEvent(\'domready\', function() {
 			}
 
 			// The target exists
-			if (file_exists(TL_ROOT . '/' . $this->strPath . '/' . $varValue . $this->strExtension))
+			if (strcasecmp($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension) !== 0 && file_exists(TL_ROOT . '/' . $this->strPath . '/' . $varValue . $this->strExtension))
 			{
 				throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['fileExists'], $varValue));
 			}
@@ -2462,7 +2462,7 @@ window.addEvent(\'domready\', function() {
 				if ($objModel->hash != $objFolder->hash)
 				{
 					$objModel->hash = $objFolder->hash;
-					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncHash'], $strFolder) . '</p>';
+					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderH'], $strFolder) . '</p>';
 				}
 
 				$objModel->found = 1;
@@ -2502,7 +2502,7 @@ window.addEvent(\'domready\', function() {
 				if ($objModel->hash != $objFile->hash)
 				{
 					$objModel->hash = $objFile->hash;
-					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncHash'], $strFile) . '</p>';
+					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileH'], $strFile) . '</p>';
 				}
 
 				$objModel->found = 1;

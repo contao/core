@@ -25,6 +25,7 @@
       </trans-unit>
       <trans-unit id="tl_log.username.0">
         <source>User</source>
+        <target>Kasutaja</target>
       </trans-unit>
       <trans-unit id="tl_log.username.1">
         <source>Name of the authenticated user</source>

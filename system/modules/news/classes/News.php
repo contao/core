@@ -225,6 +225,7 @@ class News extends \Frontend
 			$arrRoot = $this->Database->getChildRecords($intRoot, 'tl_page');
 		}
 
+		$time = time();
 		$arrProcessed = array();
 
 		// Get all news archives
@@ -255,6 +256,12 @@ class News extends \Frontend
 
 					// The target page does not exist
 					if ($objParent === null)
+					{
+						continue;
+					}
+
+					// The target page has not been published (see #5520)
+					if (!$objParent->published || ($objParent->start != '' && $objParent->start > $time) || ($objParent->stop != '' && $objParent->stop < $time))
 					{
 						continue;
 					}
@@ -312,9 +319,9 @@ class News extends \Frontend
 
 			// Link to an article
 			case 'article':
-				if (($objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true))) !== null)
+				if (($objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 				{
-					return $strBase . ampersand($this->generateFrontendUrl($objArticle->getRelated('pid')->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					return $strBase . ampersand($this->generateFrontendUrl($objPid->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}

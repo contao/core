@@ -139,21 +139,26 @@
       </trans-unit>
       <trans-unit id="MOD.tl_style">
         <source>Style sheets</source>
+        <target>CSS fajlovi</target>
       </trans-unit>
       <trans-unit id="MOD.tl_style_sheet">
         <source>Style sheets</source>
+        <target>CSS fajlovi</target>
       </trans-unit>
       <trans-unit id="MOD.tl_module">
         <source>Front end modules</source>
+        <target>Frontend moduli</target>
       </trans-unit>
       <trans-unit id="MOD.tl_layout">
         <source>Page layouts</source>
       </trans-unit>
       <trans-unit id="MOD.css">
         <source>Style sheets</source>
+        <target>CSS fajlovi</target>
       </trans-unit>
       <trans-unit id="MOD.modules">
         <source>Front end modules</source>
+        <target>Frontend moduli</target>
       </trans-unit>
       <trans-unit id="MOD.layout">
         <source>Page layouts</source>

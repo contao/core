@@ -51,6 +51,7 @@
       </trans-unit>
       <trans-unit id="tl_module.news_order.0">
         <source>Sort order</source>
+        <target>Sorteringsrekkefølge</target>
       </trans-unit>
       <trans-unit id="tl_module.news_order.1">
         <source>Here you can choose the sort order.</source>

@@ -19,6 +19,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.rows.0">
         <source>Rows</source>
+        <target>Zaglavlje i dno</target>
       </trans-unit>
       <trans-unit id="tl_layout.rows.1">
         <source>Please choose the number of rows.</source>
@@ -187,6 +188,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
+        <target>Redoslijed razvrstavanja</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.1">
         <source>The sort order of the style sheets.</source>
@@ -407,6 +409,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.html5">
         <source>HTML</source>
+        <target>HTML</target>
       </trans-unit>
       <trans-unit id="tl_layout.xhtml_strict">
         <source>XHTML Strict</source>

@@ -3,18 +3,21 @@
     <body>
       <trans-unit id="CTE.comments.0">
         <source>Comments</source>
+        <target>பின்னூட்டங்கள்</target>
       </trans-unit>
       <trans-unit id="CTE.comments.1">
         <source>Adds a comment form to the page</source>
       </trans-unit>
       <trans-unit id="FMD.comments.0">
         <source>Comments</source>
+        <target>பின்னூட்டங்கள்</target>
       </trans-unit>
       <trans-unit id="FMD.comments.1">
         <source>Manage comments or guestbook entries</source>
       </trans-unit>
       <trans-unit id="MOD.comments.0">
         <source>Comments</source>
+        <target>பின்னூட்டங்கள்</target>
       </trans-unit>
       <trans-unit id="MOD.comments.1">
         <source>Manage comments or guestbook entries</source>

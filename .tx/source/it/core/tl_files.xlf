@@ -81,6 +81,10 @@
         <source>Found the folder &quot;%s&quot;</source>
         <target>Trovato la cartella &quot;%s&quot;</target>
       </trans-unit>
+      <trans-unit id="tl_files.syncFolderH">
+        <source>Updated the hash of the folder &quot;%s&quot;</source>
+        <target>Aggiornato l'hash della cartella &quot;%s&quot;</target>
+      </trans-unit>
       <trans-unit id="tl_files.syncFileC">
         <source>Created the file &quot;%s&quot;</source>
         <target>Creato il file &quot;%s&quot;</target>
@@ -89,7 +93,7 @@
         <source>Found the file &quot;%s&quot;</source>
         <target>Trovato il file &quot;%s&quot;</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncHash">
+      <trans-unit id="tl_files.syncFileH">
         <source>Updated the hash of the file &quot;%s&quot;</source>
         <target>Aggiornato l'hash del file &quot;%s&quot;</target>
       </trans-unit>

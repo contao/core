@@ -1,0 +1,138 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_calendar_feed.php" source-language="en">
+    <body>
+      <trans-unit id="tl_calendar_feed.title.0">
+        <source>Title</source>
+        <target>ခေါင်းစဉ်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.title.1">
+        <source>Please enter a feed title.</source>
+        <target>ကုန်ကြမ်းခေါင်းစဉ်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.alias.0">
+        <source>Feed alias</source>
+        <target>ကုန်ကြမ်းနာမည်ပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.alias.1">
+        <source>Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the &lt;em&gt;share&lt;/em&gt; directory of your Contao installation, e.g. as &lt;em&gt;share/name.xml&lt;/em&gt;.</source>
+        <target>ထူးခြားသောဖိုင်နာမည်ထည့်သွင်းနိုင် (ဖိုင်အမျိုးအစားမပါဘဲ)။ ကွန်တောင်းသွင်းပြီး &lt;em&gt;မျှဝေ&lt;/em&gt; တွင်ဟိတ်စ်အမ်အလ်ကုန်ကြမ်းဖိုင်ကိုအလိုအလျောက်ထုတ်လုပ်။ ဉပမာ &lt;em&gt;မျှဝေ/name.xml&lt;/em&gt;။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.language.0">
+        <source>Feed language</source>
+        <target>ကုန်ကြမ်းဘာသာစကား</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.language.1">
+        <source>Please enter the feed language according to the ISO-639 standard (e.g. &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;).</source>
+        <target>အိုင်အက်စ်အို-၆၃၉စံအရကုန်ကြမ်းဘာသာစကားထည့်ပါ (ဉပမာ  &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;)။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.calendars.0">
+        <source>Calendars</source>
+        <target>ပြက္ခဒိန်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.calendars.1">
+        <source>Here you can choose the calendars to be included in the feed.</source>
+        <target>ကုန်ကြမ်းတွင်ပါဝင်ရန်ပြက္ခဒိန်များကိုရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.format.0">
+        <source>Feed format</source>
+        <target>ကုန်ကြမ်းအချိုးအစား</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.format.1">
+        <source>Please choose a feed format.</source>
+        <target>ကုန်ကြမ်းအချိုးအစားရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.source.0">
+        <source>Export settings</source>
+        <target>တင်ပို့ချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.source.1">
+        <source>Here you can choose what will be exported.</source>
+        <target>ဘယ်အရာကိုတင်ပို့မည်ကိုရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.maxItems.0">
+        <source>Maximum number of items</source>
+        <target>ပစ္စည်းများအရေအတွက်အများဆံုး</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.maxItems.1">
+        <source>Here you can limit the number of feed items. Set to 0 to export all.</source>
+        <target>ကုန်ကြမ်းများအရေအတွက်ကိုကန့်သတ်နိုင်။ အားလံုးတင်ပို့ရန် ၀ သို့သတ်မှတ်။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.feedBase.0">
+        <source>Base URL</source>
+        <target>အခြေယူအာအလ်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.feedBase.1">
+        <source>Please enter the base URL with protocol (e.g. &lt;em&gt;http://&lt;/em&gt;).</source>
+        <target>စံစည်းမျဉ်းနှင့်အညီအခြေယူအာအယ်ကိုထည့်ပါ (ဉပမာ &lt;em&gt;http://&lt;/em&gt;)။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.description.0">
+        <source>Feed description</source>
+        <target>ကုန်ကြမ်းဖော်ပြချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.description.1">
+        <source>Here you can enter a short description of the calendar feed.</source>
+        <target>ပြက္ခဒိန်ကုန်ကြမ်း၏ဖော်ပြချက်အတိုကိုထည့်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.title_legend">
+        <source>Title and language</source>
+        <target>ခေါင်းစဉ်နှင့်ဘာသာစကား</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.calendars_legend">
+        <source>Calendars</source>
+        <target>ပြက္ခဒိန်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.config_legend">
+        <source>Feed settings</source>
+        <target>ကုန်ကြမ်းချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.source_teaser">
+        <source>Event teasers</source>
+        <target>အဖြစ်အပျက်ပဟေဠိများ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.source_text">
+        <source>Full articles</source>
+        <target>ဆောင်းပါးများအပြည့်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.new.0">
+        <source>New feed</source>
+        <target>ကုန်ကြမ်းအသစ်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.new.1">
+        <source>Create a new feed</source>
+        <target>ကုန်ကြမ်းအသစ်ဖန်တီး</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.show.0">
+        <source>Feed details</source>
+        <target>ကုန်ကြမ်းအချက်အလက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.show.1">
+        <source>Show the details of feed ID %s</source>
+        <target>ကုန်ကြမ်းအိုင်ဒီ %s အချက်အလက်များပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.edit.0">
+        <source>Edit feed</source>
+        <target>ကုန်ကြမ်းတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.edit.1">
+        <source>Edit feed ID %s</source>
+        <target>ကုန်ကြမ်းအိုင်ဒီ %s တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.copy.0">
+        <source>Duplicate feed</source>
+        <target>ကုန်ကြမ်းပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.copy.1">
+        <source>Duplicate feed ID %s</source>
+        <target>ကုန်ကြမ်းအိုင်ဒီ %s ပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.delete.0">
+        <source>Delete feed</source>
+        <target>ကုန်ကြမ်းပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.delete.1">
+        <source>Delete feed ID %s</source>
+        <target>ကုန်ကြမ်းအိုင်ဒီ %s ပယ်ဖျက်</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

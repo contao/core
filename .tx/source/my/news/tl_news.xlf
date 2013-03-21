@@ -1,0 +1,330 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_news.php" source-language="en">
+    <body>
+      <trans-unit id="tl_news.headline.0">
+        <source>Title</source>
+        <target>ခေါင်းစဉ်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.headline.1">
+        <source>Please enter the news title.</source>
+        <target>သတင်းခေါင်းစဉ်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.alias.0">
+        <source>News alias</source>
+        <target>သတင်းနာမည်ပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_news.alias.1">
+        <source>The news alias is a unique reference to the article which can be called instead of its numeric ID.</source>
+        <target>နံပါတ်အိုင်ဒီအစားသတင်းနာမည်ပွားမှာသတင်းသို့တစ်ခုတည်းရည်ညွှန်းချက်ဖြစ်။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.author.0">
+        <source>Author</source>
+        <target>ရေးသားသူ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.author.1">
+        <source>Here you can change the author of the news item.</source>
+        <target>သတင်းရေးသားသူပြောင်းလဲနိုင်။ </target>
+      </trans-unit>
+      <trans-unit id="tl_news.date.0">
+        <source>Date</source>
+        <target>နေ့စွဲ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.date.1">
+        <source>Please enter the date according to the global date format.</source>
+        <target>ကမ္ဘာစံတော်ချိန်အတိုင်းစတင်မယ့်နေ့ရက်ကိုရိုက်။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.time.0">
+        <source>Time</source>
+        <target>စံတော်ချိန်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.time.1">
+        <source>Please enter the time according to the global time format.</source>
+        <target>ကမ္ဘာစံတော်ချိန်အတိုင်းစတင်မယ့်အချိန်ကိုရိုက်။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.subheadline.0">
+        <source>Subheadline</source>
+        <target>သတင်းခေါင်းစဉ်ခွဲ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.subheadline.1">
+        <source>Here you can enter a subheadline.</source>
+        <target>သတင်းခေါင်းစဉ်ခွဲကိုထည့်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.teaser.0">
+        <source>News teaser</source>
+        <target>သတင်းပဟေဠိ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.teaser.1">
+        <source>The news teaser can be shown in a news list instead of the full article. A &quot;read more …&quot; link will be added automatically.</source>
+        <target>ဆောင်းပါးအပြည့်အစားသတင်းပဟေဠိကိုသတင်းစာရင်းတွင်ပြသနိုင်။ &quot;နောက်ထပ်ဖတ်ရှု...&quot; ကွန်ဆက်ကိုအလိုအလျောက်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.text.0">
+        <source>News text</source>
+        <target>သတင်းစာသား</target>
+      </trans-unit>
+      <trans-unit id="tl_news.text.1">
+        <source>Here you can enter the news text.</source>
+        <target>သတင်းစာသားထည့်သွင်းနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addImage.0">
+        <source>Add an image</source>
+        <target>ပံုထည့်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addImage.1">
+        <source>Add an image to the news item.</source>
+        <target>သတင်းသို့ပံုထည့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addEnclosure.0">
+        <source>Add enclosures</source>
+        <target>ပူးတွဲများထည့်သွင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addEnclosure.1">
+        <source>Add one or more downloadable files to the news item.</source>
+        <target>သတင်းသို့တစ်ခု(သို့)ကူးဆွဲနိုင်ဖိုင်များထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.enclosure.0">
+        <source>Enclosures</source>
+        <target>ပူးတွဲများ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.enclosure.1">
+        <source>Please choose the files you want to attach.</source>
+        <target>ပူးတွဲပါစေလိုသောဖိုင်များကိုရွေး။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.source.0">
+        <source>Redirect target</source>
+        <target>ဦးတည်ရာပြောင်းရည်မှန်းချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.source.1">
+        <source>Here you can override the default redirect target.</source>
+        <target>မူလဦးတည်ရာပြောင်းရည်မှန်းချက်ကိုအစားထိုး။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.default.0">
+        <source>Use default</source>
+        <target>မူလပံုစံသံုး</target>
+      </trans-unit>
+      <trans-unit id="tl_news.default.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to the default page of the news archive.</source>
+        <target>&quot;နောက်ထပ်ဖတ်ရှု...&quot; ခလုတ်ကိုနှိပ်ပါကသတင်းဖိုင်ထုပ်စာမျက်နှာသို့လည်ပတ်သူများကိုခေါ်ဆောင်သွား။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.internal.0">
+        <source>Page</source>
+        <target>စာမျက်နှာ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.internal.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to a page.</source>
+        <target>&quot;နောက်ထပ်ဖတ်ရှု...&quot; ခလုတ်ကိုနှိပ်ပါကလည်ပတ်သူများကိုစာမျက်နှာသို့ဦးတည်ရာပြောင်းခေါ်ဆောင်သွား။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.article.0">
+        <source>Article</source>
+        <target>ဆောင်းပါး</target>
+      </trans-unit>
+      <trans-unit id="tl_news.article.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an article.</source>
+        <target>&quot;နောက်ထပ်ဖတ်ရှု...&quot; ခလုတ်ကိုနှိပ်ပါကဆောင်းပါးသို့လည်ပတ်သူများကိုဦးတည်ရာပြောင်းခေါ်ဆောင်သွား။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.external.0">
+        <source>External URL</source>
+        <target>ပြင်ပယူအာအယ်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.external.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an external website.</source>
+        <target>&quot;နောက်ထပ်ဖတ်ရှု...&quot; ခလုတ်ကိုနှိပ်ပါကပြင်ပဝဘ်ဆိုက်သို့လည်ပတ်သူများကိုဦးတည်ရာပြောင်းခေါ်ဆောင်သွား။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.jumpTo.0">
+        <source>Redirect page</source>
+        <target>ဦးတည်ရာပြောင်းစာမျက်နှာ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected when clicking the news item.</source>
+        <target>သတင်းကိုကလစ်နှိပ်သောအခါလည်ပတ်သူများရောက်သွားမည့်စာမျက်နှာကိုရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.articleId.0">
+        <source>Article</source>
+        <target>ဆောင်းပါး</target>
+      </trans-unit>
+      <trans-unit id="tl_news.articleId.1">
+        <source>Please choose the article to which visitors will be redirected when clicking the news item.</source>
+        <target>သတင်းကိုကလစ်နှိပ်သောအခါလည်ပတ်သူများရောက်သွားမည့်ဆောင်းပါးကိုရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cssClass.0">
+        <source>CSS class</source>
+        <target>စီအက်အက်စ်အမျိုးအစား</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cssClass.1">
+        <source>Here you can enter one or more classes.</source>
+        <target>တစ်ခု(သို့)စီအက်အက်စ်အမျိုးအစားများထည့်သွင်းနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.noComments.0">
+        <source>Disable comments</source>
+        <target>မှတ်ချက်များမလုပ်ဆောင်စေ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.noComments.1">
+        <source>Do not allow comments for this particular news item.</source>
+        <target>ယခုသတင်းအတွက်မှတ်ချက်များခွင့်မပြုစေ။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.featured.0">
+        <source>Feature item</source>
+        <target>အသားပေးပစ္စည်း</target>
+      </trans-unit>
+      <trans-unit id="tl_news.featured.1">
+        <source>Show the news item in a featured news list.</source>
+        <target>အသားပေးသတင်းစာရင်းတွင်သတင်းပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.published.0">
+        <source>Publish item</source>
+        <target>သတင်းထုတ်ဝေ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.published.1">
+        <source>Make the news item publicly visible on the website.</source>
+        <target>ဝဘ်ဆိုက်ပေါ်တွင်သတင်းကိုလူအများမြင်စေရန်လုပ်ဆောင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.start.0">
+        <source>Show from</source>
+        <target>မှပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.start.1">
+        <source>Do not show the news item on the website before this day.</source>
+        <target>ဒီနေ့မတိုင်မီဝဘ်ဆိုက်တွင်သတင်းမပြသ။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.stop.0">
+        <source>Show until</source>
+        <target>အထိပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.stop.1">
+        <source>Do not show the news item on the website on and after this day.</source>
+        <target>ဒီနေ့ပြီးနောက်ဝဘ်ဆိုက်တွင်သတင်းမပြသ။</target>
+      </trans-unit>
+      <trans-unit id="tl_news.tstamp.0">
+        <source>Revision date</source>
+        <target>ပြင်ဆင်နေ့စွဲ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>နောက်ဆံုးပံုစံ၏နေ့စွဲနှင့်အချိန်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.title_legend">
+        <source>Title and author</source>
+        <target>ခေါင်းစဉ်နှင့်ရေးသားသူ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.date_legend">
+        <source>Date and time</source>
+        <target>နေ့စွဲနှင့်အချိန်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.teaser_legend">
+        <source>Subheadline and teaser</source>
+        <target>သတင်းခေါင်းစဉ်ခွဲနှင့်ပဟေဠိ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.text_legend">
+        <source>News text</source>
+        <target>သတင်းစာသား</target>
+      </trans-unit>
+      <trans-unit id="tl_news.image_legend">
+        <source>Image settings</source>
+        <target>ပံုချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.enclosure_legend">
+        <source>Enclosures</source>
+        <target>ပူးတွဲများ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.source_legend">
+        <source>Redirect target</source>
+        <target>ဦးတည်ရာပြောင်းရည်မှန်းချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.expert_legend">
+        <source>Expert settings</source>
+        <target>ကျွမ်းကျင်သူချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.publish_legend">
+        <source>Publish settings</source>
+        <target>ထုတ်ဝေချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.new.0">
+        <source>New article</source>
+        <target>ဆောင်းပါးအသစ်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.new.1">
+        <source>Create a new news article</source>
+        <target>သတင်းဆောင်းပါးအသစ်ဖန်တီး</target>
+      </trans-unit>
+      <trans-unit id="tl_news.show.0">
+        <source>Article details</source>
+        <target>ဆောင်းပါးအချက်အလက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.show.1">
+        <source>Show the details of news article ID %s</source>
+        <target>သတင်းဆောင်းပါးအိုင်ဒီ %s အချက်အလက်များပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.edit.0">
+        <source>Edit article</source>
+        <target>ဆောင်းပါးတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.edit.1">
+        <source>Edit news article ID %s</source>
+        <target>သတင်းဆောင်းပါးအိုင်ဒီ %s တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.copy.0">
+        <source>Duplicate article</source>
+        <target>ဆောင်းပါးပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_news.copy.1">
+        <source>Duplicate news article ID %s</source>
+        <target>သတင်းဆောင်းပါးအိုင်ဒီ %s ပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cut.0">
+        <source>Move article</source>
+        <target>ဆောင်းပါးရွေ့ပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cut.1">
+        <source>Move news article ID %s</source>
+        <target>သတင်းဆောင်းပါးအိုင်ဒီ %s ရွေ့ပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_news.delete.0">
+        <source>Delete article</source>
+        <target>ဆောင်းပါးပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.delete.1">
+        <source>Delete news article ID %s</source>
+        <target>သတင်းဆောင်းပါးအိုင်ဒီ %s ပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.toggle.0">
+        <source>Publish/unpublish article</source>
+        <target>ဆောင်းပါးထုတ်ဝေ/မထုတ်ဝေ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.toggle.1">
+        <source>Publish/unpublish news article ID %s</source>
+        <target>သတင်းဆောင်းပါးအိုင်ဒီ %s ထုတ်ဝေ/မထုတ်ဝေ</target>
+      </trans-unit>
+      <trans-unit id="tl_news.feature.0">
+        <source>Feature/unfeature article</source>
+        <target>ဆောင်းပါးအသားပေး/မပေး</target>
+      </trans-unit>
+      <trans-unit id="tl_news.feature.1">
+        <source>Feature/unfeature news article ID %s</source>
+        <target>သတင်းဆောင်းပါးအိုင်ဒီ %s အသားပေး/မပေး</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editheader.0">
+        <source>Edit archive settings</source>
+        <target>ဖိုင်ထုပ်ချိန်ညှိချက်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editheader.1">
+        <source>Edit the archive settings</source>
+        <target>ဖိုင်ထုပ်ချိန်ညှိချက်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editmeta.0">
+        <source>Edit article settings</source>
+        <target>ဆောင်းပါးချိန်ညှိချက်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editmeta.1">
+        <source>Edit the article settings</source>
+        <target>ဆောင်းပါးချိန်ညှိချက်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_news.pasteafter.0">
+        <source>Paste into this archive</source>
+        <target>ယခုဖိုင်ထုပ်သို့ထုတ်ထား</target>
+      </trans-unit>
+      <trans-unit id="tl_news.pasteafter.1">
+        <source>Paste after news article ID %s</source>
+        <target>သတင်းဆောင်းပါးအိုင်ဒီ %s ပြီးနောက်ထုတ်ထား</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

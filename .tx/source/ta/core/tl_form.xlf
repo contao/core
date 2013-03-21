@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_form.title.0">
         <source>Title</source>
+        <target>தலைப்பு</target>
       </trans-unit>
       <trans-unit id="tl_form.title.1">
         <source>Please enter the form title.</source>
@@ -15,6 +16,7 @@
       </trans-unit>
       <trans-unit id="tl_form.jumpTo.0">
         <source>Redirect page</source>
+        <target>மீள்திருப்பும் பக்கம்</target>
       </trans-unit>
       <trans-unit id="tl_form.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected after submitting the form.</source>
@@ -117,9 +119,11 @@
       </trans-unit>
       <trans-unit id="tl_form.tstamp.0">
         <source>Revision date</source>
+        <target>மீள்திருத்த திகதி</target>
       </trans-unit>
       <trans-unit id="tl_form.tstamp.1">
         <source>Date and time of the latest revision</source>
+        <target>பிந்திய மீள்திருத்தத்தின் நேரமும் திகதியும்</target>
       </trans-unit>
       <trans-unit id="tl_form.title_legend">
         <source>Title and redirect page</source>
@@ -132,6 +136,7 @@
       </trans-unit>
       <trans-unit id="tl_form.expert_legend">
         <source>Expert settings</source>
+        <target>சிறப்பு அமைப்புக்கள்</target>
       </trans-unit>
       <trans-unit id="tl_form.config_legend">
         <source>Form configuration</source>

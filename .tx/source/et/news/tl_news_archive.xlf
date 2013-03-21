@@ -3,6 +3,7 @@
     <body>
       <trans-unit id="tl_news_archive.title.0">
         <source>Title</source>
+        <target>Pealkiri</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.title.1">
         <source>Please enter a news archive title.</source>
@@ -123,6 +124,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.tstamp.0">
         <source>Revision date</source>
+        <target>Kuupäev</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.tstamp.1">
         <source>Date and time of the latest revision</source>
@@ -132,6 +134,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.comments_legend">
         <source>Comments</source>
+        <target>Kommenteeri</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.protected_legend">
         <source>Access protection</source>
@@ -192,6 +195,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.comments.0">
         <source>Comments</source>
+        <target>Kommenteeri</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.comments.1">
         <source>Show comments of archive ID %s</source>

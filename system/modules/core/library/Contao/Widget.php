@@ -770,6 +770,11 @@ abstract class Widget extends \Controller
 
 				// Numeric characters (including full stop [.] minus [-] and space [ ])
 				case 'digit':
+					// Support decimal commas and convert them automatically (see #3488)
+					if (substr_count($varInput, ',') == 1 && strpos($varInput, '.') === false)
+					{
+						$varInput = str_replace(',', '.', $varInput);
+					}
 					if (!\Validator::isNumeric($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['digit'], $this->strLabel));

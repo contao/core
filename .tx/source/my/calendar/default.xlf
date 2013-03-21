@@ -1,0 +1,58 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/default.php" source-language="en">
+    <body>
+      <trans-unit id="MSC.cal_events">
+        <source>%d event(s)</source>
+        <target>%d အဖြစ်အပျက်(များ)</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_previous">
+        <source>&amp;lt;</source>
+        <target>&amp;lt;</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_next">
+        <source>&amp;gt;</source>
+        <target>&amp;gt;</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyDay">
+        <source>There are no events on this day.</source>
+        <target>ယနေ့တွင်အဖြစ်အပျက်မရှိ။</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyWeek">
+        <source>There are no events for this week.</source>
+        <target>ယခုအပတ်တွင်တွင်အဖြစ်အပျက်မရှိ။</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyMonth">
+        <source>There are no events for this month.</source>
+        <target>ယခုလတွင်အဖြစ်အပျက်မရှိ။</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyYear">
+        <source>There are no events for this year.</source>
+        <target>ယခုနှစ်တွင်အဖြစ်အပျက်မရှိ။</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_empty">
+        <source>Currently there are no events.</source>
+        <target>လောလောဆယ်တွင်အဖြစ်အပျက်မရှိ။</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_days">
+        <source>This event is repeated every %s. day</source>
+        <target>%s နေ့တိုင်းတွင်ယခုအဖြစ်အပျက်ပြန်ဖြစ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_weeks">
+        <source>This event is repeated every %s. week</source>
+        <target>%s ပတ်တိုင်းတွင်ယခုအဖြစ်အပျက်ပြန်ဖြစ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_months">
+        <source>This event is repeated every %s. month</source>
+        <target>%s လတိုင်းတွင်ယခုအဖြစ်အပျက်ပြန်ဖြစ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_years">
+        <source>This event is repeated every %s. year</source>
+        <target>%s နှစ်တိုင်းတွင်ယခုအဖြစ်အပျက်ပြန်ဖြစ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_until">
+        <source>until %s</source>
+        <target>တိုင် %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
