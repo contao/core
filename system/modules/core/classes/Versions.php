@@ -431,7 +431,7 @@ class Versions extends \Backend
 		}
 
 		// Create the pagination menu
-		$objPagination = new \Pagination($objTotal->count, 30, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], 'vp', new \BackendTemplate('be_pagination'));
+		$objPagination = new \Pagination($objTotal->count, 30, 7, 'vp', new \BackendTemplate('be_pagination'));
 		$objTemplate->pagination = $objPagination->generate();
 
 		// Get the versions
