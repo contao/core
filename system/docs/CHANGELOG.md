@@ -5,6 +5,10 @@ Version 3.0.6 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not add links to news, events, FAQs or newsletters to the sitemap if the
+target page has not been published (see #5520).
+
+### Fixed
 Include the local configuration file twice, once before and once after the
 module configuration files are parsed (see #5490). This will make settings like
 the debug or safe mode work properly.
