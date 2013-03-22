@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Changed
+Moved `System::reload()`, `System::redirect()` and `System::addToUrl()` to the
+`Controller` class (see #4698).
+
 ### Improved
 Always show the image thumbnails in the "FileTree" widget (see #4358).
 

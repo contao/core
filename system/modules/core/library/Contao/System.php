@@ -170,126 +170,6 @@ abstract class System
 
 
 	/**
-	 * Add a request string to the current URL
-	 *
-	 * @param string $strRequest The string to be added
-	 *
-	 * @return string The new URL
-	 */
-	public static function addToUrl($strRequest)
-	{
-		$strRequest = preg_replace('/^&(amp;)?/i', '', $strRequest);
-
-		if ($strRequest != '')
-		{
-			$strRequest .= '&amp;ref=' . TL_REFERER_ID;
-		}
-
-		$queries = preg_split('/&(amp;)?/i', \Environment::get('queryString'));
-
-		// Overwrite existing parameters
-		foreach ($queries as $k=>$v)
-		{
-			$explode = explode('=', $v);
-
-			if (preg_match('/(^|&(amp;)?)' . preg_quote($explode[0], '/') . '=/i', $strRequest))
-			{
-				unset($queries[$k]);
-			}
-		}
-
-		$href = '?';
-
-		if (!empty($queries))
-		{
-			$href .= implode('&amp;', $queries) . '&amp;';
-		}
-
-		return \Environment::get('script') . $href . str_replace(' ', '%20', $strRequest);
-	}
-
-
-	/**
-	 * Reload the current page
-	 */
-	public static function reload()
-	{
-		$strLocation = \Environment::get('url') . \Environment::get('requestUri');
-
-		// Ajax request
-		if (\Environment::get('isAjaxRequest'))
-		{
-			echo $strLocation;
-			exit;
-		}
-
-		if (headers_sent())
-		{
-			exit;
-		}
-
-		header('Location: ' . $strLocation);
-		exit;
-	}
-
-
-	/**
-	 * Redirect to another page
-	 *
-	 * @param string  $strLocation The target URL
-	 * @param integer $intStatus   The HTTP status code (defaults to 303)
-	 */
-	public static function redirect($strLocation, $intStatus=303)
-	{
-		$strLocation = str_replace('&amp;', '&', $strLocation);
-
-		// Ajax request
-		if (\Environment::get('isAjaxRequest'))
-		{
-			echo $strLocation;
-			exit;
-		}
-
-		if (headers_sent())
-		{
-			exit;
-		}
-
-		// Header
-		switch ($intStatus)
-		{
-			case 301:
-				header('HTTP/1.1 301 Moved Permanently');
-				break;
-
-			case 302:
-				header('HTTP/1.1 302 Found');
-				break;
-
-			case 303:
-				header('HTTP/1.1 303 See Other');
-				break;
-
-			case 307:
-				header('HTTP/1.1 307 Temporary Redirect');
-				break;
-		}
-
-		// Check the target address
-		if (preg_match('@^https?://@i', $strLocation))
-		{
-			header('Location: ' . $strLocation);
-		}
-		else
-		{
-			header('Location: ' . \Environment::get('base') . $strLocation);
-		}
-
-		exit;
-	}
-
-
-	/**
 	 * Return the referer URL and optionally encode ampersands
 	 *
 	 * @param boolean $blnEncodeAmpersands If true, ampersands will be encoded
@@ -853,6 +733,46 @@ abstract class System
 	public static function parseDate($strFormat, $intTstamp=null)
 	{
 		return \Date::parse($strFormat, $intTstamp);
+	}
+
+
+	/**
+	 * Add a request string to the current URL
+	 *
+	 * @param string $strRequest The string to be added
+	 *
+	 * @return string The new URL
+	 *
+	 * @deprecated Use Controller::addToUrl() instead
+	 */
+	public static function addToUrl($strRequest)
+	{
+		return \Controller::addToUrl($strRequest);
+	}
+
+
+	/**
+	 * Reload the current page
+	 *
+	 * @deprecated Use Controller::reload() instead
+	 */
+	public static function reload()
+	{
+		\Controller::reload();
+	}
+
+
+	/**
+	 * Redirect to another page
+	 *
+	 * @param string  $strLocation The target URL
+	 * @param integer $intStatus   The HTTP status code (defaults to 303)
+	 *
+	 * @deprecated Use Controller::redirect() instead
+	 */
+	public static function redirect($strLocation, $intStatus=303)
+	{
+		\Controller::redirect($strLocation, $intStatus);
 	}
 
 

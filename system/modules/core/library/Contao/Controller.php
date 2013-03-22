@@ -1903,6 +1903,126 @@ abstract class Controller extends \System
 
 
 	/**
+	 * Add a request string to the current URL
+	 *
+	 * @param string $strRequest The string to be added
+	 *
+	 * @return string The new URL
+	 */
+	public static function addToUrl($strRequest)
+	{
+		$strRequest = preg_replace('/^&(amp;)?/i', '', $strRequest);
+
+		if ($strRequest != '')
+		{
+			$strRequest .= '&amp;ref=' . TL_REFERER_ID;
+		}
+
+		$queries = preg_split('/&(amp;)?/i', \Environment::get('queryString'));
+
+		// Overwrite existing parameters
+		foreach ($queries as $k=>$v)
+		{
+			$explode = explode('=', $v);
+
+			if (preg_match('/(^|&(amp;)?)' . preg_quote($explode[0], '/') . '=/i', $strRequest))
+			{
+				unset($queries[$k]);
+			}
+		}
+
+		$href = '?';
+
+		if (!empty($queries))
+		{
+			$href .= implode('&amp;', $queries) . '&amp;';
+		}
+
+		return \Environment::get('script') . $href . str_replace(' ', '%20', $strRequest);
+	}
+
+
+	/**
+	 * Reload the current page
+	 */
+	public static function reload()
+	{
+		$strLocation = \Environment::get('url') . \Environment::get('requestUri');
+
+		// Ajax request
+		if (\Environment::get('isAjaxRequest'))
+		{
+			echo $strLocation;
+			exit;
+		}
+
+		if (headers_sent())
+		{
+			exit;
+		}
+
+		header('Location: ' . $strLocation);
+		exit;
+	}
+
+
+	/**
+	 * Redirect to another page
+	 *
+	 * @param string  $strLocation The target URL
+	 * @param integer $intStatus   The HTTP status code (defaults to 303)
+	 */
+	public static function redirect($strLocation, $intStatus=303)
+	{
+		$strLocation = str_replace('&amp;', '&', $strLocation);
+
+		// Ajax request
+		if (\Environment::get('isAjaxRequest'))
+		{
+			echo $strLocation;
+			exit;
+		}
+
+		if (headers_sent())
+		{
+			exit;
+		}
+
+		// Header
+		switch ($intStatus)
+		{
+			case 301:
+				header('HTTP/1.1 301 Moved Permanently');
+				break;
+
+			case 302:
+				header('HTTP/1.1 302 Found');
+				break;
+
+			case 303:
+				header('HTTP/1.1 303 See Other');
+				break;
+
+			case 307:
+				header('HTTP/1.1 307 Temporary Redirect');
+				break;
+		}
+
+		// Check the target address
+		if (preg_match('@^https?://@i', $strLocation))
+		{
+			header('Location: ' . $strLocation);
+		}
+		else
+		{
+			header('Location: ' . \Environment::get('base') . $strLocation);
+		}
+
+		exit;
+	}
+
+
+	/**
 	 * Generate an URL depending on the current rewriteURL setting
 	 *
 	 * @param array  $arrRow       An array of page parameters
@@ -2272,109 +2392,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Return the current theme as string
-	 *
-	 * @return string The name of the theme
-	 *
-	 * @deprecated Use Backend::getTheme() instead
-	 */
-	public static function getTheme()
-	{
-		return \Backend::getTheme();
-	}
-
-
-	/**
-	 * Return the back end themes as array
-	 *
-	 * @return array An array of available back end themes
-	 *
-	 * @deprecated Use Backend::getThemes() instead
-	 */
-	public static function getBackendThemes()
-	{
-		return \Backend::getThemes();
-	}
-
-
-	/**
-	 * Get the details of a page including inherited parameters
-	 *
-	 * @param mixed $intId A page ID or a Model object
-	 *
-	 * @return \Model|null The page model or null
-	 *
-	 * @deprecated Use PageModel::findWithDetails() or PageModel->loadDetails() instead
-	 */
-	public static function getPageDetails($intId)
-	{
-		if ($intId instanceof \Model)
-		{
-			return $intId->loadDetails();
-		}
-		elseif ($intId instanceof \Model\Collection)
-		{
-			return $intId->current()->loadDetails();
-		}
-		elseif (is_object($intId))
-		{
-			$strKey = __METHOD__ . '-' . $intId->id;
-
-			// Try to load from cache
-			if (\Cache::has($strKey))
-			{
-				return \Cache::get($strKey);
-			}
-
-			// Create a model from the database result
-			$objPage = new \PageModel();
-			$objPage->setRow($intId->row());
-			$objPage->loadDetails();
-
-			\Cache::set($strKey, $objPage);
-			return $objPage;
-		}
-		else
-		{
-			// Invalid ID
-			if (!strlen($intId) || $intId < 1)
-			{
-				return null;
-			}
-
-			$strKey = __METHOD__ . '-' . $intId;
-
-			// Try to load from cache
-			if (\Cache::has($strKey))
-			{
-				return \Cache::get($strKey);
-			}
-
-			$objPage = \PageModel::findWithDetails($intId);
-
-			\Cache::set($strKey, $objPage);
-			return $objPage;
-		}
-	}
-
-
-	/**
-	 * Remove old XML files from the share directory
-	 *
-	 * @param boolean $blnReturn If true, only return the finds and don't delete
-	 *
-	 * @return array An array of old XML files
-	 *
-	 * @deprecated Use Automator::purgeXmlFiles() instead
-	 */
-	protected function removeOldFeeds($blnReturn=false)
-	{
-		$this->import('Automator');
-		$this->Automator->purgeXmlFiles($blnReturn);
-	}
-
-
-	/**
 	 * Add an image to a template
 	 *
 	 * @param object  $objTemplate   The template object to add the image to
@@ -2649,6 +2666,109 @@ abstract class Controller extends \System
 		}
 
 		return TL_ASSETS_URL . $script;
+	}
+
+
+	/**
+	 * Return the current theme as string
+	 *
+	 * @return string The name of the theme
+	 *
+	 * @deprecated Use Backend::getTheme() instead
+	 */
+	public static function getTheme()
+	{
+		return \Backend::getTheme();
+	}
+
+
+	/**
+	 * Return the back end themes as array
+	 *
+	 * @return array An array of available back end themes
+	 *
+	 * @deprecated Use Backend::getThemes() instead
+	 */
+	public static function getBackendThemes()
+	{
+		return \Backend::getThemes();
+	}
+
+
+	/**
+	 * Get the details of a page including inherited parameters
+	 *
+	 * @param mixed $intId A page ID or a Model object
+	 *
+	 * @return \Model|null The page model or null
+	 *
+	 * @deprecated Use PageModel::findWithDetails() or PageModel->loadDetails() instead
+	 */
+	public static function getPageDetails($intId)
+	{
+		if ($intId instanceof \Model)
+		{
+			return $intId->loadDetails();
+		}
+		elseif ($intId instanceof \Model\Collection)
+		{
+			return $intId->current()->loadDetails();
+		}
+		elseif (is_object($intId))
+		{
+			$strKey = __METHOD__ . '-' . $intId->id;
+
+			// Try to load from cache
+			if (\Cache::has($strKey))
+			{
+				return \Cache::get($strKey);
+			}
+
+			// Create a model from the database result
+			$objPage = new \PageModel();
+			$objPage->setRow($intId->row());
+			$objPage->loadDetails();
+
+			\Cache::set($strKey, $objPage);
+			return $objPage;
+		}
+		else
+		{
+			// Invalid ID
+			if (!strlen($intId) || $intId < 1)
+			{
+				return null;
+			}
+
+			$strKey = __METHOD__ . '-' . $intId;
+
+			// Try to load from cache
+			if (\Cache::has($strKey))
+			{
+				return \Cache::get($strKey);
+			}
+
+			$objPage = \PageModel::findWithDetails($intId);
+
+			\Cache::set($strKey, $objPage);
+			return $objPage;
+		}
+	}
+
+
+	/**
+	 * Remove old XML files from the share directory
+	 *
+	 * @param boolean $blnReturn If true, only return the finds and don't delete
+	 *
+	 * @return array An array of old XML files
+	 *
+	 * @deprecated Use Automator::purgeXmlFiles() instead
+	 */
+	protected function removeOldFeeds($blnReturn=false)
+	{
+		$this->import('Automator');
+		$this->Automator->purgeXmlFiles($blnReturn);
 	}
 
 
