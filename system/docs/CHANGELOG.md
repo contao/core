@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Improved
+Always show the image thumbnails in the "FileTree" widget (see #4358).
+
 ### New
 Added a location field to the calendar module (see #1870).
 

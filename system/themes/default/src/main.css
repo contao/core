@@ -768,7 +768,7 @@ ul.sgallery li {
 	float:left;
 	margin-right:0;
 }
-ul.sgallery .gimage {
+.gimage {
 	margin:2px;
 	border:1px solid #808080;
 }
