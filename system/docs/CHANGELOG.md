@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### Improved
+Pre-fill the "alt" and "caption" fields with the file meta data (see #5225).
+
+### Improved
 Override the page description if a certain article is requested (see #4742).
 
 ### Changed

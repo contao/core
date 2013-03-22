@@ -212,7 +212,11 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'mandatory'=>true, 'files'=>true, 'tl_class'=>'clr'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "varchar(255) NOT NULL default ''",
+			'save_callback' => array
+			(
+				array('tl_content', 'storeFileMetaInformation')
+			)
 		),
 		'alt' => array
 		(
@@ -1409,6 +1413,47 @@ class tl_content extends Backend
 									 ->execute($row['id']);
 
 		return $objElement->numRows ? Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)) . ' ' : '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Pre-fill the "alt" and "caption" fields with the file meta data
+	 * @param mixed
+	 * @param \DataContainer
+	 * @return mixed
+	 */
+	public function storeFileMetaInformation($varValue, DataContainer $dc)
+	{
+		if ($dc->activeRecord->singleSRC == $varValue)
+		{
+			return $varValue;
+		}
+
+		$objFile = \FilesModel::findByPk($varValue);
+
+		if ($objFile !== null)
+		{
+			$arrMeta = deserialize($objFile->meta);
+
+			if (!empty($arrMeta))
+			{
+				$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=(SELECT pid FROM " . $dc->activeRecord->ptable . " WHERE id=?)")
+										  ->execute($dc->activeRecord->pid);
+
+				if ($objPage->numRows)
+				{
+					$objPage = $this->getPageDetails($objPage);
+
+					if (isset($arrMeta[$objPage->rootLanguage]))
+					{
+						\Input::setPost('alt', $arrMeta[$objPage->rootLanguage]['title']);
+						\Input::setPost('caption', $arrMeta[$objPage->rootLanguage]['caption']);
+					}
+				}
+			}
+		}
+
+		return $varValue;
 	}
 
 
