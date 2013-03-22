@@ -650,15 +650,15 @@ abstract class Controller extends \System
 				$strTag = $this->replaceInsertTags($strTag, $blnCache);
 			}
 
+			$flags = explode('|', $strTag);
+			$elements = explode('::', array_shift($flags));
+
 			// Load the value from cache
-			if (isset($arrCache[$strTag]))
+			if (isset($arrCache[$strTag]) && !in_array('refresh', $flags))
 			{
 				$strBuffer .= $arrCache[$strTag];
 				continue;
 			}
-
-			$flags = explode('|', $strTag);
-			$elements = explode('::', array_shift($flags));
 
 			// Skip certain elements if the output will be cached
 			if ($blnCache)

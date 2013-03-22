@@ -36,6 +36,7 @@ Insert tags now support flags (see #4717). Usage example:
 Currently supported flags are:
 
  * `uncached`:        preserve the tag when writing the cache file
+ * `refresh`:         regenerate the output ignoring any cached version
  * `addslashes`:      quote the output with slashes
  * `stripslashes`:    un-quote the output
  * `standardize`:     standardize the output
