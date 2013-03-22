@@ -103,8 +103,8 @@ class FileTree extends \Widget
 			$this->{$this->strOrderField} = $objRow->{$this->strOrderField};
 		}
 
-		$this->blnIsGallery = ($this->activeRecord->type == 'gallery');
-		$this->blnIsDownloads = ($this->activeRecord->type == 'downloads');
+		$this->blnIsGallery = (isset($GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['gallery_types']) && in_array($this->activeRecord->type, $GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['gallery_types']));
+		$this->blnIsDownloads = (isset($GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['downloads_types']) && in_array($this->activeRecord->type, $GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['downloads_types']));
 	}
 
 
