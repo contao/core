@@ -404,7 +404,7 @@ var AjaxRequest =
 				}).inject($(el).getParent('div').getParent('div'), 'after');
 
 				// Execute scripts after the DOM has been updated
-				if (json.javascript) $exec(json.javascript);
+				if (json.javascript) Browser.exec(json.javascript);
 
 				el.value = 1;
 				el.checked = 'checked';

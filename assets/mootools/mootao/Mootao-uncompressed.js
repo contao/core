@@ -64,7 +64,7 @@ Request.Contao = new Class(
 				json.javascript = script.replace(/<!--|\/\/-->|<!\[CDATA\[\/\/>|<!\]\]>/g, '');
 			});
 			if (json.javascript && this.options.evalScripts) {
-				$exec(json.javascript);
+				Browser.exec(json.javascript);
 			}
 		}
 
