@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Improved
+Override the page description if a certain article is requested (see #4742).
+
 ### Changed
 Moved `System::reload()`, `System::redirect()` and `System::addToUrl()` to the
 `Controller` class (see #4698).

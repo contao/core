@@ -148,6 +148,11 @@ class ModuleArticle extends \Module
 		if (!$this->blnNoMarkup && $strArticle != '' && ($strArticle == $this->id || $strArticle == $this->alias) && $this->title != '')
 		{
 			$objPage->pageTitle = strip_tags(strip_insert_tags($this->title));
+
+			if ($this->teaser != '')
+			{
+				$objPage->description = $this->prepareMetaDescription($this->teaser);
+			}
 		}
 
 		$this->Template->printable = false;
