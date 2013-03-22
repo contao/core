@@ -1584,6 +1584,10 @@ abstract class Controller extends \System
 							}
 						}
 					}
+					if ($GLOBALS['TL_CONFIG']['debugMode'])
+					{
+						$GLOBALS['TL_DEBUG']['unknown_insert_tags'][] = $strTag;
+					}
 					break;
 			}
 
@@ -1650,7 +1654,10 @@ abstract class Controller extends \System
 									}
 								}
 							}
-							trigger_error('Unknown insert tag flag "' . $flag . '"', E_USER_WARNING);
+							if ($GLOBALS['TL_CONFIG']['debugMode'])
+							{
+								$GLOBALS['TL_DEBUG']['unknown_insert_tag_flags'][] = $flag;
+							}
 							break;
 					}
 				}

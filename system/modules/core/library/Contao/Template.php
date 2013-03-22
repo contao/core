@@ -313,8 +313,9 @@ abstract class Template extends \Controller
 				. '<p><span class="info">Contao debug information</span> <span class="time">Execution time: ' . $this->getFormattedNumber($intTime, 0) . ' ' . $strUnit . '</span> <span class="memory">Memory usage: ' . $this->getReadableSize(memory_get_peak_usage()) . '</span> <span class="db">Database queries: ' . count($GLOBALS['TL_DEBUG']['database_queries']) . '</span> <span class="rows">Rows: ' . $intReturned . ' returned, ' . $intAffected . ' affected</span> <span id="tog">&nbsp;</span></p>' . "\n"
 				. '<div><pre>' . "\n";
 
-			ob_start();
 			ksort($GLOBALS['TL_DEBUG']);
+
+			ob_start();
 			print_r($GLOBALS['TL_DEBUG']);
 			$strDebug .= ob_get_contents();
 			ob_end_clean();
@@ -333,15 +334,15 @@ abstract class Template extends \Controller
 			$strDebug .= '</pre></div></div>'
 				. $strScriptOpen
 					. "(function($) {"
-						. "$$('#debug p','#debug div').setStyle('width',window.getSize().x);"
-						. "$(document.body).setStyle('margin-bottom', $('debug').hasClass('closed')?'60px':'320px');"
+						. "$$('#debug>*').setStyle('width',window.getSize().x);"
+						. "$(document.body).setStyle('margin-bottom',$('debug').hasClass('closed')?'60px':'320px');"
 						. "$('tog').addEvent('click',function(e) {"
 							. "$('debug').toggleClass('closed');"
 							. "Cookie.write('CONTAO_CONSOLE',$('debug').hasClass('closed')?'closed':'',{path:Contao.path});"
-							. "$(document.body).setStyle('margin-bottom', $('debug').hasClass('closed')?'60px':'320px');"
+							. "$(document.body).setStyle('margin-bottom',$('debug').hasClass('closed')?'60px':'320px');"
 						. "});"
 						. "window.addEvent('resize',function() {"
-							. "$$('#debug p','#debug div').setStyle('width',window.getSize().x);"
+							. "$$('#debug>*').setStyle('width',window.getSize().x);"
 						. "});"
 					. "})(document.id);"
 				. $strScriptClose . "\n\n";

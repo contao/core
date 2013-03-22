@@ -1054,7 +1054,7 @@ var Backend =
 		$$('fieldset.hide').each(function(el) {
 			el.addClass('collapsed');
 		});
-		$$('label.error', 'label.mandatory').each(function(el) {
+		$$('label.error, label.mandatory').each(function(el) {
 			if (fs = el.getParent('fieldset')) {
 				fs.removeClass('collapsed');
 			}
