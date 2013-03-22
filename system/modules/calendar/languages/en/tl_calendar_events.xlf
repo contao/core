@@ -50,6 +50,12 @@
       <trans-unit id="tl_calendar_events.endDate.1">
         <source>Leave blank to create a single day event.</source>
       </trans-unit>
+      <trans-unit id="tl_calendar_events.location.0">
+        <source>Event location</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.location.1">
+        <source>Here you can enter the event location.</source>
+      </trans-unit>
       <trans-unit id="tl_calendar_events.teaser.0">
         <source>Event teaser</source>
       </trans-unit>
@@ -182,8 +188,8 @@
       <trans-unit id="tl_calendar_events.date_legend">
         <source>Date and time</source>
       </trans-unit>
-      <trans-unit id="tl_calendar_events.teaser_legend">
-        <source>Teaser</source>
+      <trans-unit id="tl_calendar_events.details_legend">
+        <source>Event details</source>
       </trans-unit>
       <trans-unit id="tl_calendar_events.text_legend">
         <source>Event text</source>

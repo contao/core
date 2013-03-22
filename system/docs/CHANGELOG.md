@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### New
+Added a location field to the calendar module (see #1870).
+
+### New
 Added new methods to models and model collections:
 
  * `Model::getResult()`:      returns the database object

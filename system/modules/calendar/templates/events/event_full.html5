@@ -16,6 +16,10 @@
     </div>
   <?php endif; ?>
 
+  <?php if ($this->location): ?>
+    <p class="location"><?php echo $this->locationLabel; ?>: <?php echo $this->location; ?></p>
+  <?php endif; ?>
+
   <?php if ($this->enclosure): ?>
     <div class="enclosure">
       <?php foreach ($this->enclosure as $enclosure): ?>

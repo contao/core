@@ -187,6 +187,7 @@ class ModuleEventReader extends \Events
 		$objTemplate->class = ($objEvent->cssClass != '') ? ' ' . $objEvent->cssClass : '';
 		$objTemplate->recurring = $recurring;
 		$objTemplate->until = $until;
+		$objTemplate->locationLabel = $GLOBALS['TL_LANG']['MSC']['location'];
 
 		$objTemplate->details = '';
 		$objElement = \ContentModel::findPublishedByPidAndTable($objEvent->id, 'tl_calendar_events');
