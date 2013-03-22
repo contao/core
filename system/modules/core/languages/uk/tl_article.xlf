@@ -73,6 +73,26 @@
         <source>Here you can choose which options are available.</source>
         <target>Активуйте потрібні опції.</target>
       </trans-unit>
+      <trans-unit id="tl_article.guests.0">
+        <source>Show to guests only</source>
+        <target>Показувати тільки незареєстрованим користувачам</target>
+      </trans-unit>
+      <trans-unit id="tl_article.guests.1">
+        <source>Hide the article if a member is logged in.</source>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.0">
+        <source>Protect article</source>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.1">
+        <source>Show the article to certain member groups only.</source>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.0">
+        <source>Allowed member groups</source>
+        <target>Дозволені для групи користувачів</target>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.1">
+        <source>These groups will be able to see the article.</source>
+      </trans-unit>
       <trans-unit id="tl_article.cssID.0">
         <source>CSS ID/class</source>
         <target>CSS ID/class</target>
@@ -129,9 +149,17 @@
         <source>Section and keywords</source>
         <target>Структурні елементи та ключові слова</target>
       </trans-unit>
+      <trans-unit id="tl_article.syndication_legend">
+        <source>Syndication</source>
+        <target>Синдикація</target>
+      </trans-unit>
       <trans-unit id="tl_article.teaser_legend">
         <source>Article teaser</source>
         <target>Вступ до статті</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected_legend">
+        <source>Access protection</source>
+        <target>Обмежений доступ</target>
       </trans-unit>
       <trans-unit id="tl_article.expert_legend">
         <source>Expert settings</source>

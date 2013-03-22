@@ -114,11 +114,11 @@
         <target>「すべての項目を表示」のオプションを選択した場合の、項目の最大数となります。</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
-        <source>Exclude folders from synchronisation</source>
-        <target>同期の対称としないフォルダー</target>
+        <source>Exclude folders from synchronization</source>
+        <target>同期の対象にしないフォルダー</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
-        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronisation (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
         <target>ファイルの同期を適用しないフォルダー(例えば、&lt;em&gt;attachments、music_academy&lt;/em&gt;)をコンマで区切ったリストで指定します。指定したフォルダーに含まれるリソースはコンテンツ要素の画像やダウンロード等で使用できないことに注意してください。</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
@@ -471,7 +471,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.undoPeriod.1">
         <source>Here you can enter the storage time for undo steps in seconds (24 hours = 86400 seconds).</source>
-        <target>取り消しの項目の保管期間を秒数で入力します。(初期値: 24時間 = 86400秒)</target>
+        <target>取り消しの項目の保管期間を秒数で入力します。(初期設定: 24時間 = 86400秒)</target>
       </trans-unit>
       <trans-unit id="tl_settings.versionPeriod.0">
         <source>Storage time for versions</source>
@@ -479,7 +479,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.versionPeriod.1">
         <source>Here you can enter the storage time for different versions of a record in seconds (90 days = 7776000 seconds).</source>
-        <target>レコードの異なるバージョンの保管期間を秒数で入力します。(初期値: 90日 = 7776000秒)</target>
+        <target>レコードの異なるバージョンの保管期間を秒数で入力します。(初期設定: 90日 = 7776000秒)</target>
       </trans-unit>
       <trans-unit id="tl_settings.logPeriod.0">
         <source>Storage time for log entries</source>
@@ -487,7 +487,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.logPeriod.1">
         <source>Here you can enter the storage time for log entries in seconds (14 days = 1209600 seconds).</source>
-        <target>ログの項目の保管期間を秒数で入力します。(初期値: 14日 = 1209600秒)</target>
+        <target>ログの項目の保管期間を秒数で入力します。(初期設定: 14日 = 1209600秒)</target>
       </trans-unit>
       <trans-unit id="tl_settings.sessionTimeout.0">
         <source>Session timeout</source>
@@ -495,7 +495,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.sessionTimeout.1">
         <source>Here you can enter the maximum lifetime of a session in seconds (60 minutes = 3600 seconds).</source>
-        <target>セッションの最大の存続期間を秒数で入力します。(初期値: 60分 = 3600秒)</target>
+        <target>セッションの最大の存続期間を秒数で入力します。(初期設定: 60分 = 3600秒)</target>
       </trans-unit>
       <trans-unit id="tl_settings.autologin.0">
         <source>Auto login period</source>
@@ -503,23 +503,23 @@
       </trans-unit>
       <trans-unit id="tl_settings.autologin.1">
         <source>Here you can set the front end auto login period (90 days = 7776000 seconds).</source>
-        <target>フロントエンドの自動ログインの期間を秒数で入力します。(初期値: 90日 = 7776000秒)</target>
+        <target>フロントエンドの自動ログインの期間を秒数で入力します。(初期設定: 90日 = 7776000秒)</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultUser.0">
         <source>Default page owner</source>
-        <target>ページの所有者の初期値</target>
+        <target>ページの所有者の初期設定</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultUser.1">
         <source>Here you can select a user as the default owner of a page.</source>
-        <target>ページを所有するユーザーの初期値を選択できます。</target>
+        <target>ページを所有する初期設定とするユーザーを選択できます。</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultGroup.0">
         <source>Default page group</source>
-        <target>ページのグループの初期値</target>
+        <target>ページのグループの初期設定</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultGroup.1">
         <source>Here you can select a group as the default owner of a page.</source>
-        <target>ページを所有するグループの初期値を選択できます。</target>
+        <target>ページを所有する初期設定とするグループを選択できます。</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultChmod.0">
         <source>Default access rights</source>
@@ -527,7 +527,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.defaultChmod.1">
         <source>Please assign the default access rights for pages and articles.</source>
-        <target>ページとアーティクルの初期状態のアクセス権を割り当ててください。</target>
+        <target>ページとアーティクルに初期設定とするアクセス権を割り当ててください。</target>
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.0">
         <source>Live Update URL</source>

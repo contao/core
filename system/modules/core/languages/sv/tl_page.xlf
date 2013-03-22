@@ -39,6 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_page.language.1">
         <source>Please enter the page language according to the ISO-639-1 standard (e.g. &quot;en&quot; for English or &quot;en-US&quot; for American English).</source>
+        <target>Ange vilket språk du använder på denna sida. Ange språket med hjälp av den primära undertaggen (ISO-639 / RFC3066), t.ex. &quot;sv&quot; för svenska.</target>
       </trans-unit>
       <trans-unit id="tl_page.robots.0">
         <source>Robots tag</source>

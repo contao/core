@@ -9,6 +9,14 @@
         <source>Contao automatically adds the file extension.</source>
         <target>Contaoは自動的にファイルの拡張子を追加します。</target>
       </trans-unit>
+      <trans-unit id="tl_files.protected.0">
+        <source>Protected</source>
+        <target>保護</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protected.1">
+        <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
+        <target>HTTP経由のフォルダーのアクセスを防止します。引き続き、例えば複数ダウンロードコンテンツ要素等でファイルを利用できます、</target>
+      </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
         <target>メタ情報</target>
@@ -17,9 +25,13 @@
         <source>Here you can enter the file meta information.</source>
         <target>ファイルのメタ情報を入力できます。</target>
       </trans-unit>
+      <trans-unit id="tl_files.htaccessInfo">
+        <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
+        <target>フォルダーの保護はフォルダーのアクセスを拒否する.htaccessファイルを追加することで行っています。Apacheをサーバーに使用していないようですので、この機能はまったく動作しないか、サーバーの構成の調整が必要です。公開を制限するリソースをアップロードする前に、二重にチェックしてください。</target>
+      </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
-        <target>ファイルのアップロード</target>
+        <target>ファイルをアップロード</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.1">
         <source>Browse your local computer and select the files you want to upload to the server.</source>
@@ -30,8 +42,8 @@
         <target>ソースエディター</target>
       </trans-unit>
       <trans-unit id="tl_files.editor.1">
-        <source>Here you can edit the file source.</source>
-        <target>ファイルのソースを編集します。</target>
+        <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
+        <target>ファイルのソースを編集します。(F11を押すして全画面モードとの間を切り替え)</target>
       </trans-unit>
       <trans-unit id="tl_files.upload">
         <source>Upload files</source>
@@ -81,6 +93,10 @@
         <source>Found the folder &quot;%s&quot;</source>
         <target>&quot;%s&quot;というフォルダーを見つけました。</target>
       </trans-unit>
+      <trans-unit id="tl_files.syncFolderH">
+        <source>Updated the hash of the folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot;というフォルダーのハッシュを更新しました。</target>
+      </trans-unit>
       <trans-unit id="tl_files.syncFileC">
         <source>Created the file &quot;%s&quot;</source>
         <target>&quot;%s&quot;というファイルを作成しました。</target>
@@ -89,7 +105,7 @@
         <source>Found the file &quot;%s&quot;</source>
         <target>&quot;%s&quot;というファイルを見つけました。</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncHash">
+      <trans-unit id="tl_files.syncFileH">
         <source>Updated the hash of the file &quot;%s&quot;</source>
         <target>&quot;%s&quot;というファイルのハッシュ値を更新しました。</target>
       </trans-unit>
@@ -103,7 +119,7 @@
       </trans-unit>
       <trans-unit id="tl_files.syncShowUnchanged">
         <source>Show unchanged</source>
-        <target>無変更を表示</target>
+        <target>変更なしを表示</target>
       </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>

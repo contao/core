@@ -91,6 +91,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidDate">
         <source>Invalid date &quot;%s&quot;!</source>
+        <target>Nieprawidłowa data &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
@@ -292,13 +293,30 @@
         <source>Generates an optionally sortable table.</source>
         <target>Ten element zawiera tabelę.</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.0">
+      <trans-unit id="CTE.accordion">
         <source>Accordion</source>
         <target>Rozwinięcia</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.1">
-        <source>Generates a MooTools accordion pane.</source>
-        <target>Ten element generuje zawartość, która zostanie rozwinięta i stanie się widoczna po kliknięciu w jej tytuł. Pamiętaj, że efekt ten wymaga szablonu &quot;mootools JavaScript&quot;, który możesz wybrać w module &quot;Układ strony&quot;.</target>
+      <trans-unit id="CTE.accordionStart.0">
+        <source>Wrapper start</source>
+        <target>Początek</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.1">
+        <source>Generates the opening part of the accordion wrapper.</source>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.0">
+        <source>Wrapper stop</source>
+        <target>Stop</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.1">
+        <source>Generates the closing part of the accordion wrapper.</source>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.0">
+        <source>Single element</source>
+        <target>Pojedynczy element</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.1">
+        <source>Generates a single accordion element.</source>
       </trans-unit>
       <trans-unit id="CTE.code.0">
         <source>Code</source>
@@ -307,6 +325,23 @@
       <trans-unit id="CTE.code.1">
         <source>Highlights code snippets and prints them to the screen.</source>
         <target>Ten element zawiera kawałek kodu (np. HTML, CSS, PHP), który zostanie sformatowany w specyficzny dla siebie sposób. Osadzany kod zostanie jedynie wyświetlony a nie zostanie wykonany.</target>
+      </trans-unit>
+      <trans-unit id="CTE.slider">
+        <source>Content slider</source>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.0">
+        <source>Wrapper start</source>
+        <target>Początek</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.1">
+        <source>Generates the opening part of the slider wrapper.</source>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.0">
+        <source>Wrapper stop</source>
+        <target>Stop</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.1">
+        <source>Generates the closing part of the slider wrapper.</source>
       </trans-unit>
       <trans-unit id="CTE.links">
         <source>Link elements</source>
@@ -1092,6 +1127,9 @@
         <source>Last login: %s</source>
         <target>Ostatnie logowanie: %s</target>
       </trans-unit>
+      <trans-unit id="MSC.move">
+        <source>Move the item via drag and drop</source>
+      </trans-unit>
       <trans-unit id="MSC.move_up.0">
         <source>Move up</source>
         <target>Przenieś w górę</target>
@@ -1130,6 +1168,7 @@
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
         <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>Dowiedz się więcej o przyspieszaniu swojego miejsca i sposoby pracy używając &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;skrótów klawiaturowych&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1473,6 +1512,9 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
         <source>Download this file</source>
         <target>Pobierz ten plik</target>
       </trans-unit>
+      <trans-unit id="MSC.fileDatabaseId">
+        <source>Database ID</source>
+      </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
         <target>Szerokość/wysokość w pikselach</target>
@@ -1558,8 +1600,10 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
         <target>Zresetuj selekcję</target>
       </trans-unit>
       <trans-unit id="MSC.fileManager">
-        <source>Open file manager in a popup window</source>
-        <target>Otwórz magazyn plików w osobnym oknie</target>
+        <source>Open the file manager</source>
+      </trans-unit>
+      <trans-unit id="MSC.pageManager">
+        <source>Modify the site structure</source>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
@@ -1981,6 +2025,7 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
       </trans-unit>
       <trans-unit id="MSC.templatesTheme">
         <source>Theme %s</source>
+        <target>Motyw %s</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

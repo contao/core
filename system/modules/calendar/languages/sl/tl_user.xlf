@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_user.php" source-language="en">
+    <body>
+      <trans-unit id="tl_user.calendars.0">
+        <source>Allowed calendars</source>
+        <target>Koledarji</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendars.1">
+        <source>Here you can grant access to one or more calendars.</source>
+        <target>Izberite koledarje, ki jih želite omogočiti za uporabnika.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarp.0">
+        <source>Calendar permissions</source>
+        <target>Dovoljenja koledar</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarp.1">
+        <source>Here you can define the calendar permissions.</source>
+        <target>Tukaj lahko določite dovoljenja za koledar</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeeds.0">
+        <source>Allowed RSS feeds</source>
+        <target>Dovoljeni viri RSS</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeeds.1">
+        <source>Here you can grant access to one or more calendar feeds.</source>
+        <target>Tu lahko dovolite dostop do enega ali več virov koledarjev.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeedp.0">
+        <source>RSS feed permissions</source>
+        <target>Dovoljenja virov RSS</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeedp.1">
+        <source>Here you can define the calendar feed permissions.</source>
+        <target>Tu lahko določite dovoljenja za vir koledarja.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendars_legend">
+        <source>Calendar permissions</source>
+        <target>Dovoljenja koledar</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

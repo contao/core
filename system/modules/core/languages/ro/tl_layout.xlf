@@ -166,14 +166,12 @@
         <target>Constructor de ansamblu</target>
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.1">
-        <source>Generates the CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
-        <target>Generează stilul CSS bazat pe setările din ansamblul de pagină. Această componentă este necesară pentru ca generatorul de pagina să funcţioneze!</target>
+        <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
       </trans-unit>
-      <trans-unit id="tl_layout.responsive.css.0">
-        <source>Responsive grid</source>
-        <target>Grilă activă</target>
+      <trans-unit id="tl_layout.grid.css.0">
+        <source>12-column grid</source>
       </trans-unit>
-      <trans-unit id="tl_layout.responsive.css.1">
+      <trans-unit id="tl_layout.grid.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
         <target>Adaugă o grilă activă de 12-coloane care este activată de clasele CSS &quot;grid1&quot; până la &quot;grid12&quot; şi &quot;offset1&quot; până la &quot;offset12&quot;.</target>
       </trans-unit>

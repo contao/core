@@ -73,6 +73,26 @@
         <source>Here you can choose which options are available.</source>
         <target>Ajouter un lien pour exporter l'article dans un fichier PDF.</target>
       </trans-unit>
+      <trans-unit id="tl_article.guests.0">
+        <source>Show to guests only</source>
+        <target>Montrer aux invités seulement</target>
+      </trans-unit>
+      <trans-unit id="tl_article.guests.1">
+        <source>Hide the article if a member is logged in.</source>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.0">
+        <source>Protect article</source>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.1">
+        <source>Show the article to certain member groups only.</source>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.0">
+        <source>Allowed member groups</source>
+        <target>Groupes de membres autorisés</target>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.1">
+        <source>These groups will be able to see the article.</source>
+      </trans-unit>
       <trans-unit id="tl_article.cssID.0">
         <source>CSS ID/class</source>
         <target>ID/classe(s) CSS</target>
@@ -129,9 +149,17 @@
         <source>Section and keywords</source>
         <target>Zone et mots-clés</target>
       </trans-unit>
+      <trans-unit id="tl_article.syndication_legend">
+        <source>Syndication</source>
+        <target>Imprimable</target>
+      </trans-unit>
       <trans-unit id="tl_article.teaser_legend">
         <source>Article teaser</source>
         <target>Accroche de l'article</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected_legend">
+        <source>Access protection</source>
+        <target>Protection d'accès</target>
       </trans-unit>
       <trans-unit id="tl_article.expert_legend">
         <source>Expert settings</source>

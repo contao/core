@@ -30,8 +30,7 @@
         <target>Il template &quot;%s&quot; exista gia!</target>
       </trans-unit>
       <trans-unit id="tl_templates.invalid">
-        <source>Invalid target directory &quot;%s&quot;!</source>
-        <target>L'ordinatur da destinaziun &quot;%s&quot; n'è betg valid.</target>
+        <source>Invalid source or target directory &quot;%s&quot;!</source>
       </trans-unit>
       <trans-unit id="tl_templates.new_tpl.0">
         <source>New template</source>

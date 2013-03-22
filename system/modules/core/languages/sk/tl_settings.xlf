@@ -114,12 +114,12 @@
         <target>Táto možnosť prepíše požiadavku backend užívateľa, pokiaľ zvolí &quot;zobraziť všetky záznamy&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
-        <source>Exclude folders from synchronisation</source>
-        <target>Vylúčiť adresáre zo synchronizácie</target>
+        <source>Exclude folders from synchronization</source>
+        <target>Vynechať adresáre zo synchronizácie</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
-        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronisation (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Sem môžete zadať zoznam adresárov oddelených čiarkou, ktoré sa majú vylúčiť zo synchronizácie (napr. &lt;em&gt;prilohy,music_academy&lt;/em&gt;). Upozornenie: vylúčené zdroje sa nebudú môcť použiť ako napr. obrázky či stiahnuteľné položky!</target>
+        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <target>Tu môžete zadať zoznam adresárov oddelených čiarkou, ktoré budú vylúčené zo synchronizácie (napr. &lt;em&gt;prílohy,music_academy&lt;/em&gt;). Upozornenie: Vylúčené adresáre nemôžu byť použité ako zdroj dát pre obrázky alebo súborov na stiahnutie.</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>

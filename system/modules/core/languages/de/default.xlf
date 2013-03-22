@@ -293,13 +293,33 @@
         <source>Generates an optionally sortable table.</source>
         <target>Erzeugt eine optional sortierbare Tabelle.</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.0">
+      <trans-unit id="CTE.accordion">
         <source>Accordion</source>
         <target>Akkordeon</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.1">
-        <source>Generates a MooTools accordion pane.</source>
-        <target>Erzeugt ein MooTools Akkordeon-Element.</target>
+      <trans-unit id="CTE.accordionStart.0">
+        <source>Wrapper start</source>
+        <target>Umschlag Anfang</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.1">
+        <source>Generates the opening part of the accordion wrapper.</source>
+        <target>Erzeugt den öffnenden Teil des Akkordeon-Umschlags.</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.0">
+        <source>Wrapper stop</source>
+        <target>Umschlag Ende</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.1">
+        <source>Generates the closing part of the accordion wrapper.</source>
+        <target>Erzeugt den schließenden Teil des Akkordeon-Umschlags.</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.0">
+        <source>Single element</source>
+        <target>Einzelelement</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.1">
+        <source>Generates a single accordion element.</source>
+        <target>Erzeugt ein einzelnes Akkordeon-Element.</target>
       </trans-unit>
       <trans-unit id="CTE.code.0">
         <source>Code</source>
@@ -308,6 +328,26 @@
       <trans-unit id="CTE.code.1">
         <source>Highlights code snippets and prints them to the screen.</source>
         <target>Gibt formatierten Programmcode auf dem Bildschirm aus.</target>
+      </trans-unit>
+      <trans-unit id="CTE.slider">
+        <source>Content slider</source>
+        <target>Content-Slider</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.0">
+        <source>Wrapper start</source>
+        <target>Umschlag Anfang</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.1">
+        <source>Generates the opening part of the slider wrapper.</source>
+        <target>Erzeugt den öffnenden Teil des Slider-Umschlags.</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.0">
+        <source>Wrapper stop</source>
+        <target>Umschlag Ende</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.1">
+        <source>Generates the closing part of the slider wrapper.</source>
+        <target>Erzeugt den schließenden Teil des Slider-Umschlags.</target>
       </trans-unit>
       <trans-unit id="CTE.links">
         <source>Link elements</source>
@@ -367,7 +407,7 @@
       </trans-unit>
       <trans-unit id="CTE.files">
         <source>File elements</source>
-        <target>Datei Elemente</target>
+        <target>Datei-Elemente</target>
       </trans-unit>
       <trans-unit id="CTE.download.0">
         <source>Download</source>
@@ -1093,6 +1133,10 @@
         <source>Last login: %s</source>
         <target>Letzte Anmeldung: %s</target>
       </trans-unit>
+      <trans-unit id="MSC.move">
+        <source>Move the item via drag and drop</source>
+        <target>Das Element durch Ziehen und Ablegen verschieben</target>
+      </trans-unit>
       <trans-unit id="MSC.move_up.0">
         <source>Move up</source>
         <target>Nach oben</target>
@@ -1475,6 +1519,10 @@ Diese E-Mail wurde von Contao generiert. Sie können nicht darauf antworten.
         <source>Download this file</source>
         <target>Diese Datei herunterladen</target>
       </trans-unit>
+      <trans-unit id="MSC.fileDatabaseId">
+        <source>Database ID</source>
+        <target>Datenbank-ID</target>
+      </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
         <target>Breite/Höhe in Pixeln</target>
@@ -1560,8 +1608,12 @@ Diese E-Mail wurde von Contao generiert. Sie können nicht darauf antworten.
         <target>Auswahl aufheben</target>
       </trans-unit>
       <trans-unit id="MSC.fileManager">
-        <source>Open file manager in a popup window</source>
-        <target>Dateimanager in einem Popup-Fenster öffnen</target>
+        <source>Open the file manager</source>
+        <target>Die Dateiverwaltung öffnen</target>
+      </trans-unit>
+      <trans-unit id="MSC.pageManager">
+        <source>Modify the site structure</source>
+        <target>Die Seitenstruktur bearbeiten</target>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>

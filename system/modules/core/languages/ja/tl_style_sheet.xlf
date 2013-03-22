@@ -9,6 +9,14 @@
         <source>Please enter the style sheet name.</source>
         <target>スタイルシートの名前を入力してください。</target>
       </trans-unit>
+      <trans-unit id="tl_style_sheet.disablePie.0">
+        <source>Disable CSS3PIE</source>
+        <target>CSS3PIEを使用しない</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.disablePie.1">
+        <source>Do not include the PIE.htc behavior file (adds CSS3 support to older IE versions).</source>
+        <target>(CSS3サポートを古いバージョンのInternet Exploreに加える)動作ファイルPIE.htcを含めません。</target>
+      </trans-unit>
       <trans-unit id="tl_style_sheet.embedImages.0">
         <source>Embed images up to</source>
         <target>埋め込み画像の最大値</target>

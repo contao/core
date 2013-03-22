@@ -149,6 +149,14 @@
         <source>of the current year</source>
         <target>今年</target>
       </trans-unit>
+      <trans-unit id="tl_module.next_next_month">
+        <source>of the next month</source>
+        <target>翌月</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_next_year">
+        <source>of the next year</source>
+        <target>翌年</target>
+      </trans-unit>
       <trans-unit id="tl_module.next_all">
         <source>All upcoming events</source>
         <target>これからすべてのイベント</target>
@@ -192,6 +200,14 @@
       <trans-unit id="tl_module.past_cur_year">
         <source>of the current year</source>
         <target>今年</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_prev_month">
+        <source>of the previous month</source>
+        <target>昨月</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_prev_year">
+        <source>of the previous year</source>
+        <target>昨年</target>
       </trans-unit>
       <trans-unit id="tl_module.past_all">
         <source>All past events</source>

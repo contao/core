@@ -293,13 +293,33 @@
         <source>Generates an optionally sortable table.</source>
         <target>Maakt een tabel, die optioneel gesorteerd kan worden.</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.0">
+      <trans-unit id="CTE.accordion">
         <source>Accordion</source>
         <target>Accordeon</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.1">
-        <source>Generates a MooTools accordion pane.</source>
-        <target>Genereert een MooTools accordeon paneel.</target>
+      <trans-unit id="CTE.accordionStart.0">
+        <source>Wrapper start</source>
+        <target>Wrapper start</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.1">
+        <source>Generates the opening part of the accordion wrapper.</source>
+        <target>Markeert het beginnende gedeelte van de accordeon wrapper.</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.0">
+        <source>Wrapper stop</source>
+        <target>Wrapper stop</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.1">
+        <source>Generates the closing part of the accordion wrapper.</source>
+        <target>Markeert het afsluitende gedeelte van de accordeon wrapper.</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.0">
+        <source>Single element</source>
+        <target>Enkel element</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.1">
+        <source>Generates a single accordion element.</source>
+        <target>Maakt één enkel accordeon element aan.</target>
       </trans-unit>
       <trans-unit id="CTE.code.0">
         <source>Code</source>
@@ -308,6 +328,26 @@
       <trans-unit id="CTE.code.1">
         <source>Highlights code snippets and prints them to the screen.</source>
         <target>Markeert code fragmenten en drukt ze af op het scherm.</target>
+      </trans-unit>
+      <trans-unit id="CTE.slider">
+        <source>Content slider</source>
+        <target>Content slider</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.0">
+        <source>Wrapper start</source>
+        <target>Wrapper start</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.1">
+        <source>Generates the opening part of the slider wrapper.</source>
+        <target>Markeert het beginnende gedeelte van de slider wrapper.</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.0">
+        <source>Wrapper stop</source>
+        <target>Wrapper stop</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.1">
+        <source>Generates the closing part of the slider wrapper.</source>
+        <target>Markeert het afsluitende gedeelte van de slider wrapper.</target>
       </trans-unit>
       <trans-unit id="CTE.links">
         <source>Link elements</source>
@@ -1093,6 +1133,10 @@
         <source>Last login: %s</source>
         <target>Laatste keer ingelogd: %s</target>
       </trans-unit>
+      <trans-unit id="MSC.move">
+        <source>Move the item via drag and drop</source>
+        <target>Het item verplaatsen met drag en drop</target>
+      </trans-unit>
       <trans-unit id="MSC.move_up.0">
         <source>Move up</source>
         <target>Naar boven verplaatsen</target>
@@ -1475,6 +1519,10 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
         <source>Download this file</source>
         <target>Download dit bestand</target>
       </trans-unit>
+      <trans-unit id="MSC.fileDatabaseId">
+        <source>Database ID</source>
+        <target>Database ID</target>
+      </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
         <target>Breedte/hoogte in pixels</target>
@@ -1560,8 +1608,10 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
         <target>Selectie resetten</target>
       </trans-unit>
       <trans-unit id="MSC.fileManager">
-        <source>Open file manager in a popup window</source>
-        <target>Open bestandsmanager in een pop-up venster</target>
+        <source>Open the file manager</source>
+      </trans-unit>
+      <trans-unit id="MSC.pageManager">
+        <source>Modify the site structure</source>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
@@ -1665,7 +1715,7 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
       </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
-        <target>De &lt;strong&gt;interne cache&lt;/strong&gt; moet nog worden opgebouwd. Opbouwen van de cache zorgt ervoor dat de prestatie van de applicatie verbetert en wordt dan ook aanbevolen. Indien u hiervan geen gebruik wenst te maken, kunt u dit uitschakelen in de back-end instellingen.</target>
+        <target>De &lt;strong&gt;interne cache&lt;/strong&gt; moet nog worden opgebouwd. Opbouwen van de cache zorgt ervoor dat de prestatie van de applicatie verbetert en wordt dan ook aanbevolen. Indien u hiervan geen gebruik maakt, kunt u dit uitschakelen in de back-end instellingen.</target>
       </trans-unit>
       <trans-unit id="MSC.buildCacheLink">
         <source>Build the cache</source>

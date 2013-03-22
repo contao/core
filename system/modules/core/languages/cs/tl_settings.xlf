@@ -114,12 +114,12 @@
         <target>Tato možnost přepíše, pokud návštěvník stránek zvolí &quot;zobrazit všechny záznamy&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
-        <source>Exclude folders from synchronisation</source>
-        <target>Vypustit složky ze synchronizace</target>
+        <source>Exclude folders from synchronization</source>
+        <target>Vyloučit složky ze synchronizace</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
-        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronisation (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Sem můžete zadat seznam složek oddělených čárkou, které se mají vypustit ze synchronizace (např. &lt;em&gt;přílohy,music_academy&lt;/em&gt;). Upozornění: vyjmuté zdroje se nebudou moct použít jako např. obrázky či stáhnutelné položky!</target>
+        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <target>Zde můžete zadat čárkou oddělený seznam složek, které budou vyloučené ze synchronizace (např. &lt;em&gt;prilohy,music_academy&lt;/em&gt;). Upozornění: Vyloučené složky nemohou být použité jako zdroj dat pro obrázky, fotky nebo stahovatelné soubory!</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>

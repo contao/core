@@ -149,6 +149,12 @@
         <source>of the current year</source>
         <target>detta år</target>
       </trans-unit>
+      <trans-unit id="tl_module.next_next_month">
+        <source>of the next month</source>
+      </trans-unit>
+      <trans-unit id="tl_module.next_next_year">
+        <source>of the next year</source>
+      </trans-unit>
       <trans-unit id="tl_module.next_all">
         <source>All upcoming events</source>
         <target>Alla kommande händelser</target>
@@ -192,6 +198,12 @@
       <trans-unit id="tl_module.past_cur_year">
         <source>of the current year</source>
         <target>detta år</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_prev_month">
+        <source>of the previous month</source>
+      </trans-unit>
+      <trans-unit id="tl_module.past_prev_year">
+        <source>of the previous year</source>
       </trans-unit>
       <trans-unit id="tl_module.past_all">
         <source>All past events</source>

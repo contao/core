@@ -9,6 +9,14 @@
         <source>Contao automatically adds the file extension.</source>
         <target>Contao lägger automatiskt till filändelsen.</target>
       </trans-unit>
+      <trans-unit id="tl_files.protected.0">
+        <source>Protected</source>
+        <target>Skyddad</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protected.1">
+        <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
+        <target>Förhindra åtkomst till mappen via HTTP. Filerna kan fortfarande göras tillgängliga via t.ex. nedladdningselement.</target>
+      </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
         <target>Meta-information</target>
@@ -16,6 +24,10 @@
       <trans-unit id="tl_files.meta.1">
         <source>Here you can enter the file meta information.</source>
         <target>Här kan du ange filens meta-information.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.htaccessInfo">
+        <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
+        <target>Skydd av mappen erhålls genom att lägga till en .htaccess-fil som nekar åtkomst till mappen. Det verkar som att du inte använder en Apache-server vilket kan medföra att detta skydd inte alls fungerar eller kräver ändringar i serverkonfigurationen. Vänligen dubbelkontrollera innan känsliga resurser laddas upp!</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
@@ -30,8 +42,7 @@
         <target>Källkodseditor</target>
       </trans-unit>
       <trans-unit id="tl_files.editor.1">
-        <source>Here you can edit the file source.</source>
-        <target>Använd källkodseditorn för att ändra i filerna på din server.</target>
+        <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
       </trans-unit>
       <trans-unit id="tl_files.upload">
         <source>Upload files</source>
@@ -81,6 +92,10 @@
         <source>Found the folder &quot;%s&quot;</source>
         <target>Hittade foldern &quot;%s&quot;</target>
       </trans-unit>
+      <trans-unit id="tl_files.syncFolderH">
+        <source>Updated the hash of the folder &quot;%s&quot;</source>
+        <target>Uppdaterade hash-nummer för mappen &quot;%s&quot;</target>
+      </trans-unit>
       <trans-unit id="tl_files.syncFileC">
         <source>Created the file &quot;%s&quot;</source>
         <target>Skapade filen &quot;%s&quot;</target>
@@ -89,9 +104,21 @@
         <source>Found the file &quot;%s&quot;</source>
         <target>Hittade filen &quot;%s&quot;</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncHash">
+      <trans-unit id="tl_files.syncFileH">
         <source>Updated the hash of the file &quot;%s&quot;</source>
         <target>Uppdaterade hash-nummer för filen &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncComplete">
+        <source>The synchronization has been completed</source>
+        <target>Synkroniseringen är slutförd</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncResult">
+        <source>&lt;strong&gt;Result:&lt;/strong&gt; %s added | %s modified | %s unchanged | %s moved | %s deleted</source>
+        <target>&lt;strong&gt;Resultat:&lt;/strong&gt; %s tillagd | %s modifierad | %s oförändrad | %s flyttad | %s raderad</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncShowUnchanged">
+        <source>Show unchanged</source>
+        <target>Visa oförändrade</target>
       </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>

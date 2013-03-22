@@ -293,13 +293,33 @@
         <source>Generates an optionally sortable table.</source>
         <target>Genera una tabella (con opzioni di ordinamento).</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.0">
+      <trans-unit id="CTE.accordion">
         <source>Accordion</source>
         <target>Fisarmonica</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.1">
-        <source>Generates a MooTools accordion pane.</source>
-        <target>Genera un pannello MooTools a fisarmonica.</target>
+      <trans-unit id="CTE.accordionStart.0">
+        <source>Wrapper start</source>
+        <target>Wrapper start</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.1">
+        <source>Generates the opening part of the accordion wrapper.</source>
+        <target>Genera l'elemento di partenza di un elemento fisarmonica.</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.0">
+        <source>Wrapper stop</source>
+        <target>Wrapper stop</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.1">
+        <source>Generates the closing part of the accordion wrapper.</source>
+        <target>Genera l'elemento di chiusura di un elemento fisarmonica.</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.0">
+        <source>Single element</source>
+        <target>Elemento singolo</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.1">
+        <source>Generates a single accordion element.</source>
+        <target>Genera un pannello singolo a fisarmonica.</target>
       </trans-unit>
       <trans-unit id="CTE.code.0">
         <source>Code</source>
@@ -308,6 +328,26 @@
       <trans-unit id="CTE.code.1">
         <source>Highlights code snippets and prints them to the screen.</source>
         <target>Evidenzia pezzi di codice e li fa vedere sullo schermo.</target>
+      </trans-unit>
+      <trans-unit id="CTE.slider">
+        <source>Content slider</source>
+        <target>Contenuto slider</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.0">
+        <source>Wrapper start</source>
+        <target>Wrapper start</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.1">
+        <source>Generates the opening part of the slider wrapper.</source>
+        <target>Genera l'elemento di partenza di un elemento slider.</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.0">
+        <source>Wrapper stop</source>
+        <target>Wrapper stop</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.1">
+        <source>Generates the closing part of the slider wrapper.</source>
+        <target>Genera l'elemento di chiusura di un elemento slider.</target>
       </trans-unit>
       <trans-unit id="CTE.links">
         <source>Link elements</source>
@@ -1093,6 +1133,10 @@
         <source>Last login: %s</source>
         <target>Ultimo login: %s</target>
       </trans-unit>
+      <trans-unit id="MSC.move">
+        <source>Move the item via drag and drop</source>
+        <target>Sposta l'elemento trascinandolo in modalità drag &amp; drop</target>
+      </trans-unit>
       <trans-unit id="MSC.move_up.0">
         <source>Move up</source>
         <target>Sposta in alto</target>
@@ -1475,6 +1519,10 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
         <source>Download this file</source>
         <target>Scarica questo file</target>
       </trans-unit>
+      <trans-unit id="MSC.fileDatabaseId">
+        <source>Database ID</source>
+        <target>Database ID</target>
+      </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
         <target>Larghezza/altezza in pixel</target>
@@ -1560,8 +1608,12 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
         <target>Annulla selezione</target>
       </trans-unit>
       <trans-unit id="MSC.fileManager">
-        <source>Open file manager in a popup window</source>
-        <target>Apri la gestione dei file in una finestra popup</target>
+        <source>Open the file manager</source>
+        <target>Apri gestione file</target>
+      </trans-unit>
+      <trans-unit id="MSC.pageManager">
+        <source>Modify the site structure</source>
+        <target>Modifica la struttura del sito</target>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>

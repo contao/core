@@ -121,6 +121,14 @@
         <source>The default form submission method is POST.</source>
         <target>По умолчанию используется метод передачи POST.</target>
       </trans-unit>
+      <trans-unit id="tl_form.novalidate.0">
+        <source>Disable HTML5 validation</source>
+        <target>Отключить проверку HTML5</target>
+      </trans-unit>
+      <trans-unit id="tl_form.novalidate.1">
+        <source>Add the &quot;novalidate&quot; attribute to the form tag.</source>
+        <target>Добавить атрибут &quot;novalidate&quot; в тег form.</target>
+      </trans-unit>
       <trans-unit id="tl_form.attributes.0">
         <source>CSS ID/class</source>
         <target>CSS ID и класс</target>

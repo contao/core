@@ -166,14 +166,14 @@
         <target>Layout-Builder</target>
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.1">
-        <source>Generates the CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
-        <target>Erstellt das CSS-Layout auf Basis der Seitenlayout-Einstellungen. Diese Komponente muss aktiv sein, damit der Seitengenerator korrekt arbeitet!</target>
+        <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
+        <target>Erstellt ein responsives CSS-Layout auf Basis der Seitenlayout-Einstellungen. Diese Komponente muss aktiv sein, damit der Seitengenerator korrekt arbeitet!</target>
       </trans-unit>
-      <trans-unit id="tl_layout.responsive.css.0">
-        <source>Responsive grid</source>
-        <target>Responsive Grid</target>
+      <trans-unit id="tl_layout.grid.css.0">
+        <source>12-column grid</source>
+        <target>12-Spalten Grid</target>
       </trans-unit>
-      <trans-unit id="tl_layout.responsive.css.1">
+      <trans-unit id="tl_layout.grid.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
         <target>Erzeugt ein responsives 12-Spalten Grid, das mittels der CSS-Klassen &quot;grid1&quot; bis &quot;grid12&quot; sowie &quot;offset1&quot; bis &quot;offset12&quot; gesteuert wird.</target>
       </trans-unit>

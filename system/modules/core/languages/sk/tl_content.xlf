@@ -398,16 +398,16 @@
         <target>Náhľadový obrázok</target>
       </trans-unit>
       <trans-unit id="tl_content.posterSRC.1">
-        <source>Show this image instead of the first frame of the video before playback (videos only).</source>
-        <target>Zobraziť tento obrázok namiesto prvého snímku videa pred jeho spustením (platí iba pre video).</target>
+        <source>Show this image instead of the first frame of the video before playback.</source>
+        <target>Zobraziť tento obrázok namiesto prvého snímku videa pred jeho spustením.</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.0">
         <source>Player size</source>
         <target>Veľkosť prehrávača</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
-        <source>Width and height of the media player in pixels (videos only).</source>
-        <target>Šírka a výška mediálneho prehrávača v pixeloch (platí len pre video).</target>
+        <source>Width and height of the media player in pixels (e.g. 640x480). Applies to videos only.</source>
+        <target>Šírka a výška mediálneho prehrávača v pixeloch (napr. 640x480). Platí len pre video.</target>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>

@@ -149,6 +149,14 @@
         <source>of the current year</source>
         <target>aktuálneho roku</target>
       </trans-unit>
+      <trans-unit id="tl_module.next_next_month">
+        <source>of the next month</source>
+        <target>nasledujúceho mesiaca</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_next_year">
+        <source>of the next year</source>
+        <target>nasledujúceho roku</target>
+      </trans-unit>
       <trans-unit id="tl_module.next_all">
         <source>All upcoming events</source>
         <target>Všetky nadchádzajúce udalosti</target>
@@ -192,6 +200,14 @@
       <trans-unit id="tl_module.past_cur_year">
         <source>of the current year</source>
         <target>aktuálneho roku</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_prev_month">
+        <source>of the previous month</source>
+        <target>predchádzajúceho mesiaca</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_prev_year">
+        <source>of the previous year</source>
+        <target>predchádzajúceho roku</target>
       </trans-unit>
       <trans-unit id="tl_module.past_all">
         <source>All past events</source>

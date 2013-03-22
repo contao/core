@@ -114,12 +114,10 @@
         <target>Limita maximă are efect dacă un utilizator alege opţiunea de afişare a tuturor înregistrărilor.</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
-        <source>Exclude folders from synchronisation</source>
-        <target>Exclude directoare de le sincroniare</target>
+        <source>Exclude folders from synchronization</source>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
-        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronisation (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Aici puteţi introduce o listă de directoare separate prin virgulă care vor fi exceptate la sincronizare (spre exemplu &lt;em&gt;attachments,music_academy&lt;/em&gt;). De ştiut că resursele excluse nu mai pot fi folosite în elemente de tip imagine sau download!</target>
+        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>

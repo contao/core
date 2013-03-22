@@ -398,16 +398,16 @@
         <target>プレビューの画像</target>
       </trans-unit>
       <trans-unit id="tl_content.posterSRC.1">
-        <source>Show this image instead of the first frame of the video before playback (videos only).</source>
-        <target>再生する前の映像の最初の1コマの代わりに、この画像を表示します。(ファイルが映像の場合だけ)</target>
+        <source>Show this image instead of the first frame of the video before playback.</source>
+        <target>再生する前の映像の最初の1コマの代わりに、この画像を表示します。</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.0">
         <source>Player size</source>
         <target>プレーヤーの大きさ</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
-        <source>Width and height of the media player in pixels (videos only).</source>
-        <target>ピクセル単位のメディアプレーヤーの幅と高さです。(ファイルが映像の場合だけ)</target>
+        <source>Width and height of the media player in pixels (e.g. 640x480). Applies to videos only.</source>
+        <target>ピクセル単位のメディアプレーヤーの幅と高さです。(例: 640x480)</target>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>

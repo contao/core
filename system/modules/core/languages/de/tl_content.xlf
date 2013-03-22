@@ -398,16 +398,16 @@
         <target>Vorschaubild</target>
       </trans-unit>
       <trans-unit id="tl_content.posterSRC.1">
-        <source>Show this image instead of the first frame of the video before playback (videos only).</source>
-        <target>Das Bild statt des ersten Frame des Videos vor dem Abspielen anzeigen (nur bei Videos).</target>
+        <source>Show this image instead of the first frame of the video before playback.</source>
+        <target>Das Bild statt des ersten Frame des Videos vor dem Abspielen anzeigen.</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.0">
         <source>Player size</source>
         <target>Player-Größe</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
-        <source>Width and height of the media player in pixels (videos only).</source>
-        <target>Breite und Höhe des Mediaplayer in Pixeln (nur bei Videos).</target>
+        <source>Width and height of the media player in pixels (e.g. 640x480). Applies to videos only.</source>
+        <target>Breite und Höhe des Mediaplayers in Pixeln (z.B. 640x480). Gilt nur für Videos.</target>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>
@@ -479,7 +479,7 @@
       </trans-unit>
       <trans-unit id="tl_content.guests.1">
         <source>Hide the content element if a member is logged in.</source>
-        <target>Das Inhaltselement verstecken sobald ein Mitglied angemeldet ist.</target>
+        <target>Das Inhaltselement verstecken, sobald ein Mitglied angemeldet ist.</target>
       </trans-unit>
       <trans-unit id="tl_content.cssID.0">
         <source>CSS ID/class</source>

@@ -73,6 +73,30 @@
         <source>Here you can choose which options are available.</source>
         <target>利用できるオプションを選択します。</target>
       </trans-unit>
+      <trans-unit id="tl_article.guests.0">
+        <source>Show to guests only</source>
+        <target>ゲストだけに表示</target>
+      </trans-unit>
+      <trans-unit id="tl_article.guests.1">
+        <source>Hide the article if a member is logged in.</source>
+        <target>メンバーがログインしている場合はアーティクルを表示しない。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.0">
+        <source>Protect article</source>
+        <target>アーティクルの保護</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.1">
+        <source>Show the article to certain member groups only.</source>
+        <target>アーティクルを特定のメンバーグループだけに表示します。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.0">
+        <source>Allowed member groups</source>
+        <target>許可するメンバーグループ</target>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.1">
+        <source>These groups will be able to see the article.</source>
+        <target>これらのグループがアーティクルを見ることができます。</target>
+      </trans-unit>
       <trans-unit id="tl_article.cssID.0">
         <source>CSS ID/class</source>
         <target>CSSのIDとclass</target>
@@ -129,9 +153,17 @@
         <source>Section and keywords</source>
         <target>セクションとキーワード</target>
       </trans-unit>
+      <trans-unit id="tl_article.syndication_legend">
+        <source>Syndication</source>
+        <target>シンジケーション</target>
+      </trans-unit>
       <trans-unit id="tl_article.teaser_legend">
         <source>Article teaser</source>
         <target>アーティクルのティーザー</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected_legend">
+        <source>Access protection</source>
+        <target>アクセスの保護</target>
       </trans-unit>
       <trans-unit id="tl_article.expert_legend">
         <source>Expert settings</source>

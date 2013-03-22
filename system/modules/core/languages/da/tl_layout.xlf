@@ -166,14 +166,12 @@
         <target>Layout bygger</target>
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.1">
-        <source>Generates the CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
-        <target>Generer CSS layoutet baseret på side layout indstillingerne. Denne komponent kræves for at side layout generatoren overhovedet fungerer.</target>
+        <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
       </trans-unit>
-      <trans-unit id="tl_layout.responsive.css.0">
-        <source>Responsive grid</source>
-        <target>Responsive grid</target>
+      <trans-unit id="tl_layout.grid.css.0">
+        <source>12-column grid</source>
       </trans-unit>
-      <trans-unit id="tl_layout.responsive.css.1">
+      <trans-unit id="tl_layout.grid.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
         <target>Tilføjer et responsive 12-kolonners grid der aktiveres af følgende CSS classes &quot;grid1&quot; til &quot;grid12&quot; samt &quot;offset1&quot; til &quot;offset12&quot;.</target>
       </trans-unit>

@@ -288,13 +288,30 @@
         <source>Generates an optionally sortable table.</source>
         <target>Este elemento contiene una tabla.</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.0">
+      <trans-unit id="CTE.accordion">
         <source>Accordion</source>
         <target>Acordeon</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.1">
-        <source>Generates a MooTools accordion pane.</source>
-        <target>Este elemento crea una panel de contenido tipo moofx acordeon. Recuerda que este efecto requiere una plantilla javascript mootools que puede seleccionar en el módulo de diseño de página.</target>
+      <trans-unit id="CTE.accordionStart.0">
+        <source>Wrapper start</source>
+        <target>Inicio de contenedor</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.1">
+        <source>Generates the opening part of the accordion wrapper.</source>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.0">
+        <source>Wrapper stop</source>
+        <target>Final de contenedor</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.1">
+        <source>Generates the closing part of the accordion wrapper.</source>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.0">
+        <source>Single element</source>
+        <target>Elemento simple</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.1">
+        <source>Generates a single accordion element.</source>
       </trans-unit>
       <trans-unit id="CTE.code.0">
         <source>Code</source>
@@ -303,6 +320,23 @@
       <trans-unit id="CTE.code.1">
         <source>Highlights code snippets and prints them to the screen.</source>
         <target>Este elemento contiene fragmentos de código que estan formateados de manera especial. El código solo se imprimirá en pantalla y no será ejecutado.</target>
+      </trans-unit>
+      <trans-unit id="CTE.slider">
+        <source>Content slider</source>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.0">
+        <source>Wrapper start</source>
+        <target>Inicio de contenedor</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.1">
+        <source>Generates the opening part of the slider wrapper.</source>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.0">
+        <source>Wrapper stop</source>
+        <target>Final de contenedor</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.1">
+        <source>Generates the closing part of the slider wrapper.</source>
       </trans-unit>
       <trans-unit id="CTE.links">
         <source>Link elements</source>
@@ -1088,6 +1122,9 @@
         <source>Last login: %s</source>
         <target>Ultimo inicio de sesión: %s</target>
       </trans-unit>
+      <trans-unit id="MSC.move">
+        <source>Move the item via drag and drop</source>
+      </trans-unit>
       <trans-unit id="MSC.move_up.0">
         <source>Move up</source>
         <target>Subir</target>
@@ -1469,6 +1506,9 @@ Este e-mail ha sido generado por Contao. No puedes contestar directamente.
         <source>Download this file</source>
         <target>Descargar este archivo</target>
       </trans-unit>
+      <trans-unit id="MSC.fileDatabaseId">
+        <source>Database ID</source>
+      </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
         <target>Ancho/alto en píxeles</target>
@@ -1554,8 +1594,10 @@ Este e-mail ha sido generado por Contao. No puedes contestar directamente.
         <target>Restablecer la selección</target>
       </trans-unit>
       <trans-unit id="MSC.fileManager">
-        <source>Open file manager in a popup window</source>
-        <target>Abrir el gestor de archivos en una ventana emergente</target>
+        <source>Open the file manager</source>
+      </trans-unit>
+      <trans-unit id="MSC.pageManager">
+        <source>Modify the site structure</source>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
@@ -1989,6 +2031,7 @@ Este e-mail ha sido generado por Contao. No puedes contestar directamente.
       </trans-unit>
       <trans-unit id="UNITS.3">
         <source>GiB</source>
+        <target>Ir</target>
       </trans-unit>
       <trans-unit id="UNITS.4">
         <source>TiB</source>

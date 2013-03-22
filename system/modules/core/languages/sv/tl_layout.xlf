@@ -166,14 +166,12 @@
         <target>Layout-byggaren</target>
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.1">
-        <source>Generates the CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
-        <target>Generera CSS-layout baserat på inställningarna för sidlayout. Denna komponent krävs för att sidlayout-generatorn ska fungera.</target>
+        <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
       </trans-unit>
-      <trans-unit id="tl_layout.responsive.css.0">
-        <source>Responsive grid</source>
-        <target>Responsive grid</target>
+      <trans-unit id="tl_layout.grid.css.0">
+        <source>12-column grid</source>
       </trans-unit>
-      <trans-unit id="tl_layout.responsive.css.1">
+      <trans-unit id="tl_layout.grid.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
         <target>Skapar ett s.k responsive grid med 12 kolumner som triggas av CSS-klasserna &quot;grid1&quot; till &quot;grid12&quot; och &quot;offset1&quot; till &quot;offset12&quot;.</target>
       </trans-unit>
@@ -187,9 +185,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.form.css.0">
         <source>Basic forms</source>
+        <target>Standardformattering</target>
       </trans-unit>
       <trans-unit id="tl_layout.form.css.1">
         <source>Adds basic form elements and buttons formatting.</source>
+        <target>Lägger till formattering av grundläggande formulärelement och knappar.</target>
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.0">
         <source>TinyMCE style sheet</source>

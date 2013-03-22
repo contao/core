@@ -15,6 +15,7 @@
       </trans-unit>
       <trans-unit id="LNG.af_ZA">
         <source>Afrikaans (South Africa)</source>
+        <target>afrikaans (Africa dal Sid)</target>
       </trans-unit>
       <trans-unit id="LNG.am">
         <source>Amharic</source>
@@ -57,6 +58,7 @@
       </trans-unit>
       <trans-unit id="LNG.be">
         <source>Belarusian</source>
+        <target>bieloruss</target>
       </trans-unit>
       <trans-unit id="LNG.be_BY">
         <source>Belarusian (Belarus)</source>
@@ -155,6 +157,7 @@
       </trans-unit>
       <trans-unit id="LNG.dz">
         <source>Dzongkha</source>
+        <target>dzongkha</target>
       </trans-unit>
       <trans-unit id="LNG.dz_BT">
         <source>Dzongkha (Bhutan)</source>
@@ -684,6 +687,7 @@
       </trans-unit>
       <trans-unit id="LNG.si">
         <source>Sinhala</source>
+        <target>singalais</target>
       </trans-unit>
       <trans-unit id="LNG.si_LK">
         <source>Sinhala (Sri Lanka)</source>
@@ -734,6 +738,7 @@
       </trans-unit>
       <trans-unit id="LNG.st">
         <source>Sotho</source>
+        <target>sotho dal sid</target>
       </trans-unit>
       <trans-unit id="LNG.st_ZA">
         <source>Sotho (South Africa)</source>
@@ -771,6 +776,7 @@
       </trans-unit>
       <trans-unit id="LNG.te">
         <source>Telugu</source>
+        <target>telugu</target>
       </trans-unit>
       <trans-unit id="LNG.te_IN">
         <source>Telugu (India)</source>

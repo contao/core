@@ -114,12 +114,12 @@
         <target>Cette limite globale prend effet si un utilisateur choisit l'option &quot;Afficher tous les éléments&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
-        <source>Exclude folders from synchronisation</source>
-        <target>Exclure des répertoires de la synchronisation</target>
+        <source>Exclude folders from synchronization</source>
+        <target>Exclure les répertoires de la synchronisation</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
-        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronisation (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Saisir une liste, séparée par des virgules, des répertoires qui seront exclus de la synchronisation de fichiers (ex  : &lt;em&gt;attachments,music_academy&lt;/em&gt;). Noter que les ressources exclues ne pourront être utilisées, par exemple dans  les éléments image ou téléchargement !</target>
+        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <target>Saisir une liste séparée par des virgules des dossiers qui seront exclus de la synchronisation de fichiers (ex : &lt;em&gt;attachments,music_academy&lt;/em&gt;). Notez que les ressources exclues ne pourront être utilisés dans les éléments image ou de téléchargement !</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>

@@ -114,12 +114,10 @@
         <target>Цей ліміт можна зняти вибравши опцію &quot;показати усі записи&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
-        <source>Exclude folders from synchronisation</source>
-        <target>Виключити каталоги зі синхронізації</target>
+        <source>Exclude folders from synchronization</source>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
-        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronisation (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Ви можете ввести розділенний запятими список файлів, котрі будуть виключені зі синхронізації файлів (напр. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Зверніть увагу на те, що виключені папки не можуть будти використані в зображеннях або загрузках при виборі файлів.</target>
+        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>

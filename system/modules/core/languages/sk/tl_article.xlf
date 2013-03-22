@@ -73,6 +73,30 @@
         <source>Here you can choose which options are available.</source>
         <target>Tlačiť článok ako PDF (bude rozoznaný kaskádový štýl s media typom &quot;print&quot; alebo &quot;all&quot;)</target>
       </trans-unit>
+      <trans-unit id="tl_article.guests.0">
+        <source>Show to guests only</source>
+        <target>Zobraziť iba bežným návštevníkom</target>
+      </trans-unit>
+      <trans-unit id="tl_article.guests.1">
+        <source>Hide the article if a member is logged in.</source>
+        <target>Skryť tento článok ak je člen prihlásený.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.0">
+        <source>Protect article</source>
+        <target>Chránený článok</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.1">
+        <source>Show the article to certain member groups only.</source>
+        <target>Zobraziť tento článok iba určitým skupinám členov.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.0">
+        <source>Allowed member groups</source>
+        <target>Povolené skupiny členov</target>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.1">
+        <source>These groups will be able to see the article.</source>
+        <target>Týmto skupinám sa bude tento článok zobrazovať.</target>
+      </trans-unit>
       <trans-unit id="tl_article.cssID.0">
         <source>CSS ID/class</source>
         <target>ID kaskádového štýlu a trieda (class)</target>
@@ -129,9 +153,17 @@
         <source>Section and keywords</source>
         <target>Odsek a kľúčové slová</target>
       </trans-unit>
+      <trans-unit id="tl_article.syndication_legend">
+        <source>Syndication</source>
+        <target>Tlačiteľné</target>
+      </trans-unit>
       <trans-unit id="tl_article.teaser_legend">
         <source>Article teaser</source>
         <target>Ukážka článku</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected_legend">
+        <source>Access protection</source>
+        <target>Chránený prístup</target>
       </trans-unit>
       <trans-unit id="tl_article.expert_legend">
         <source>Expert settings</source>

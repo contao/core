@@ -131,6 +131,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.versions.1">
         <source>Truncates the &lt;em&gt;tl_version&lt;/em&gt; table which stores the previous versions of a record. This job permanently deletes these records.</source>
+        <target>بریدن جدول &lt;em&gt;tl_version&lt;/em&gt; که نسخه‌های قبلی یک رکورد را ذخیره می‌کند. این عمل این رکوردها را برای همیشه پاک خواهد کرد.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.images.0">
         <source>Purge the image cache</source>
@@ -138,6 +139,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.images.1">
         <source>Removes the automatically generated images and then purges the page cache, so there are no links to deleted resources.</source>
+        <target>تصاویری را که به صورت خودکار تولید شده‌اند را حذف  و نهانگاه صفحه را را پالایش می‌کند، بنابراین پیوندی برای منابع حذف شده وجود ندارد.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.scripts.0">
         <source>Purge the script cache</source>
@@ -145,6 +147,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.scripts.1">
         <source>Removes the automatically generated .css and .js files, recreates the internal style sheets and then purges the page cache.</source>
+        <target>پرونده‌های .css و .js را که به صورت خودکار تولید شده‌اند را حذف و برگه‌های سبک داخلی را بازتولید کرده و سپس نهان‌گاه صفحه را پالایش می نماید.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.pages.0">
         <source>Purge the page cache</source>
@@ -160,6 +163,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.internal.1">
         <source>Removes the cached versions of the DCA and language files. You can permanently disable the internal cache in the back end settings.</source>
+        <target>نسخه‌های ذخیره شده فایل‌های DCA و زبان را حذف می‌کند. شما می‌توانید نهان‌گاه داخلی را در تنظیمات مدیریت برای همیشه غیرفعال نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.temp.0">
         <source>Purge the temp folder</source>
@@ -175,6 +179,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.xml.1">
         <source>Recreates the XML files (sitemaps and feeds) and then purges the page cache, so there are no links to deleted resources.</source>
+        <target>پرونده‌های XML (نقشه‌های وب‌سایت و خوراک‌ها) را بازتولید نموده و سپس نهان‌گاه صفحه را پالایش می‌نماید، بنابراین پیوندی به منابع حذف شده وجود نخواهد داشت.</target>
       </trans-unit>
     </body>
   </file>

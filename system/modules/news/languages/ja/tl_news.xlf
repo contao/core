@@ -99,7 +99,7 @@
       </trans-unit>
       <trans-unit id="tl_news.default.0">
         <source>Use default</source>
-        <target>初期値を使用</target>
+        <target>初期設定を使用</target>
       </trans-unit>
       <trans-unit id="tl_news.default.1">
         <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to the default page of the news archive.</source>

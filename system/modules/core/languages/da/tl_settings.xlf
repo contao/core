@@ -114,12 +114,12 @@
         <target>Denne overordnede grænse træder i effekt hvis en bruger vælger valgmuligheden &quot;vis alle elementer&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
-        <source>Exclude folders from synchronisation</source>
-        <target>Udeluk mapper fra synkronisering</target>
+        <source>Exclude folders from synchronization</source>
+        <target>Ekskluder mapper fra synkronisering</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
-        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronisation (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Her kan du indtaste en kommasepareret liste af mapper der vil undtages fra fil synkroniseringen (f.eks. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Bemærk at undtagede ressourcer ikke kan benyttes i f.eks. billede eller download elementer.</target>
+        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <target>Her kan du indtaste en kommasepareret liste af mapper der vil blive undladt fra synkroniseringen af filer (f.eks. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Bemærk at ekskluderede resourcer ikke kan benyttes i f.eks. billede eller download elementer!</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>

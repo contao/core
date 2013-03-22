@@ -9,6 +9,14 @@
         <source>Contao automatically adds the file extension.</source>
         <target>Contao автоматически добавляет расширение файла.</target>
       </trans-unit>
+      <trans-unit id="tl_files.protected.0">
+        <source>Protected</source>
+        <target>Защищенный</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protected.1">
+        <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
+        <target>Предотвращение доступа к папке через HTTP. Файлы можно сделать доступными например, с помощью элемента 'Загрузка с сайта'.</target>
+      </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
         <target>Метаданные</target>
@@ -16,6 +24,10 @@
       <trans-unit id="tl_files.meta.1">
         <source>Here you can enter the file meta information.</source>
         <target>Вы можете ввести метаданные файла.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.htaccessInfo">
+        <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
+        <target>Защита папок осуществляется путем добавления файла .htaccess, который запрещает доступ к папке. Вероятно, вы не используете сервер Apache, поэтому эта функция может не работать или необходимо настроить сервер. Проверьте конфигурацию перед загрузкой любых не публичных ресурсов!</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
@@ -30,8 +42,8 @@
         <target>Редактор кода</target>
       </trans-unit>
       <trans-unit id="tl_files.editor.1">
-        <source>Here you can edit the file source.</source>
-        <target>Вы можете отредактировать исходный файл.</target>
+        <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
+        <target>Вы можете отредактировать исходный файл. Нажмите F11 для переключения в полноэкранный режим.</target>
       </trans-unit>
       <trans-unit id="tl_files.upload">
         <source>Upload files</source>
@@ -81,6 +93,10 @@
         <source>Found the folder &quot;%s&quot;</source>
         <target>Найден каталог &quot;%s&quot;</target>
       </trans-unit>
+      <trans-unit id="tl_files.syncFolderH">
+        <source>Updated the hash of the folder &quot;%s&quot;</source>
+        <target>Обновлен хеш каталога &quot;%s&quot;</target>
+      </trans-unit>
       <trans-unit id="tl_files.syncFileC">
         <source>Created the file &quot;%s&quot;</source>
         <target>Создан файл &quot;%s&quot;</target>
@@ -89,7 +105,7 @@
         <source>Found the file &quot;%s&quot;</source>
         <target>Найден файл &quot;%s&quot;</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncHash">
+      <trans-unit id="tl_files.syncFileH">
         <source>Updated the hash of the file &quot;%s&quot;</source>
         <target>Обновлен хеш файла &quot;%s&quot;</target>
       </trans-unit>

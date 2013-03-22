@@ -126,6 +126,7 @@
       </trans-unit>
       <trans-unit id="tl_page.createSitemap.1">
         <source>Create a Google XML sitemap in the &lt;em&gt;share/&lt;/em&gt; directory.</source>
+        <target>Crear in Sitemap XML da Google en l'ordinatur &lt;em&gt;share/&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_page.sitemapName.0">
         <source>Sitemap file name</source>

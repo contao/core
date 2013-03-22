@@ -30,8 +30,7 @@
         <target>قالب &quot;%s&quot; در حال حاضر وجود دارد!</target>
       </trans-unit>
       <trans-unit id="tl_templates.invalid">
-        <source>Invalid target directory &quot;%s&quot;!</source>
-        <target>پوشه مقصد غیرمعتبر &quot;%s&quot;!</target>
+        <source>Invalid source or target directory &quot;%s&quot;!</source>
       </trans-unit>
       <trans-unit id="tl_templates.new_tpl.0">
         <source>New template</source>

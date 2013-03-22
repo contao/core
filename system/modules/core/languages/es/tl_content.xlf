@@ -397,16 +397,14 @@
         <target>Previsualización de la imagen</target>
       </trans-unit>
       <trans-unit id="tl_content.posterSRC.1">
-        <source>Show this image instead of the first frame of the video before playback (videos only).</source>
-        <target>Mostrar esta imagen en lugar del primer fotograma del vídeo antes de la reproducción (sólo vídeos).</target>
+        <source>Show this image instead of the first frame of the video before playback.</source>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.0">
         <source>Player size</source>
         <target>Talla del reproductor</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
-        <source>Width and height of the media player in pixels (videos only).</source>
-        <target>Ancho y alto en píxeles del reproductor de medios (solo vídeo).</target>
+        <source>Width and height of the media player in pixels (e.g. 640x480). Applies to videos only.</source>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>

@@ -91,6 +91,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidDate">
         <source>Invalid date &quot;%s&quot;!</source>
+        <target>Felaktigt datum &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
@@ -118,6 +119,7 @@
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
+        <target>Kan inte flytta %s till %s då destinationen redan finns!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidReferer">
         <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
@@ -291,13 +293,33 @@
         <source>Generates an optionally sortable table.</source>
         <target>Skapar en valfritt sorterbar tabell.</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.0">
+      <trans-unit id="CTE.accordion">
         <source>Accordion</source>
         <target>Dragspel</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.1">
-        <source>Generates a MooTools accordion pane.</source>
-        <target>Skapar en mootools dragspelspanel.</target>
+      <trans-unit id="CTE.accordionStart.0">
+        <source>Wrapper start</source>
+        <target>Omslag börjar</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.1">
+        <source>Generates the opening part of the accordion wrapper.</source>
+        <target>Genererar den öppnande delen av ett dragspelsomslag.</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.0">
+        <source>Wrapper stop</source>
+        <target>Omslag slutar</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.1">
+        <source>Generates the closing part of the accordion wrapper.</source>
+        <target>Genererar den stängande delen av ett dragspelsomslag.</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.0">
+        <source>Single element</source>
+        <target>Enkelt omslag</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.1">
+        <source>Generates a single accordion element.</source>
+        <target>Skapar ett enkelt dragspelselement.</target>
       </trans-unit>
       <trans-unit id="CTE.code.0">
         <source>Code</source>
@@ -306,6 +328,26 @@
       <trans-unit id="CTE.code.1">
         <source>Highlights code snippets and prints them to the screen.</source>
         <target>Färgmarkerar och formatterar programkod och visar dem på sidan.</target>
+      </trans-unit>
+      <trans-unit id="CTE.slider">
+        <source>Content slider</source>
+        <target>Innehållskarusell</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.0">
+        <source>Wrapper start</source>
+        <target>Omslag börjar</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.1">
+        <source>Generates the opening part of the slider wrapper.</source>
+        <target>Genererar den öppnande delen av en innehållskarusell.</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.0">
+        <source>Wrapper stop</source>
+        <target>Omslag slutar</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.1">
+        <source>Generates the closing part of the slider wrapper.</source>
+        <target>Genererar den stängande delen av en innehållskarusell.</target>
       </trans-unit>
       <trans-unit id="CTE.links">
         <source>Link elements</source>
@@ -1091,6 +1133,10 @@
         <source>Last login: %s</source>
         <target>Senaste inloggad: %s</target>
       </trans-unit>
+      <trans-unit id="MSC.move">
+        <source>Move the item via drag and drop</source>
+        <target>Flytta genom att dra och släppa</target>
+      </trans-unit>
       <trans-unit id="MSC.move_up.0">
         <source>Move up</source>
         <target>Flytta upp</target>
@@ -1129,6 +1175,7 @@
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
         <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>Lär dig mer om att snabba upp ditt arbete i backend genom att använda  &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;snabbtangenter&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1472,6 +1519,10 @@ Detta e-postmeddelande har genererats av Contao. Du kan inte svara på det direk
         <source>Download this file</source>
         <target>Ladda hem denna fil</target>
       </trans-unit>
+      <trans-unit id="MSC.fileDatabaseId">
+        <source>Database ID</source>
+        <target>Databas-ID</target>
+      </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
         <target>Bredd/höjd i pixlar</target>
@@ -1557,8 +1608,10 @@ Detta e-postmeddelande har genererats av Contao. Du kan inte svara på det direk
         <target>Nollställ valda</target>
       </trans-unit>
       <trans-unit id="MSC.fileManager">
-        <source>Open file manager in a popup window</source>
-        <target>Öppna filhanteraren i ett popup-fönster</target>
+        <source>Open the file manager</source>
+      </trans-unit>
+      <trans-unit id="MSC.pageManager">
+        <source>Modify the site structure</source>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
@@ -1662,9 +1715,11 @@ Detta e-postmeddelande har genererats av Contao. Du kan inte svara på det direk
       </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
+        <target>Den &lt;strong&gt;interna cachen&lt;/strong&gt; har inte skapats ännu. Genom att skapa cachen ökas prestandan i applikationen vilket är starkt rekommenderat. Om du inte vill använda cache så kan den stängas av permanent i backend-inställningarna.</target>
       </trans-unit>
       <trans-unit id="MSC.buildCacheLink">
         <source>Build the cache</source>
+        <target>Skapa cache</target>
       </trans-unit>
       <trans-unit id="MSC.name">
         <source>Name</source>
@@ -1980,6 +2035,7 @@ Detta e-postmeddelande har genererats av Contao. Du kan inte svara på det direk
       </trans-unit>
       <trans-unit id="MSC.templatesTheme">
         <source>Theme %s</source>
+        <target>Tema %s</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>
@@ -1987,27 +2043,35 @@ Detta e-postmeddelande har genererats av Contao. Du kan inte svara på det direk
       </trans-unit>
       <trans-unit id="UNITS.1">
         <source>KiB</source>
+        <target>KiB</target>
       </trans-unit>
       <trans-unit id="UNITS.2">
         <source>MiB</source>
+        <target>MiB</target>
       </trans-unit>
       <trans-unit id="UNITS.3">
         <source>GiB</source>
+        <target>GiB</target>
       </trans-unit>
       <trans-unit id="UNITS.4">
         <source>TiB</source>
+        <target>TiB</target>
       </trans-unit>
       <trans-unit id="UNITS.5">
         <source>PiB</source>
+        <target>PiB</target>
       </trans-unit>
       <trans-unit id="UNITS.6">
         <source>EiB</source>
+        <target>EiB</target>
       </trans-unit>
       <trans-unit id="UNITS.7">
         <source>ZiB</source>
+        <target>ZiB</target>
       </trans-unit>
       <trans-unit id="UNITS.8">
         <source>YiB</source>
+        <target>YiB</target>
       </trans-unit>
       <trans-unit id="CONFIRM.do">
         <source>Module</source>

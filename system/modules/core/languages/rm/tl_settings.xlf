@@ -114,12 +114,10 @@
         <target>Questa limita globala vegn activa, sche l'utilisader tscherna l'opziun &quot;mussar tut ils elements&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
-        <source>Exclude folders from synchronisation</source>
-        <target>Excluder ordinaturs da la sincronisaziun</target>
+        <source>Exclude folders from synchronization</source>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
-        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronisation (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Qua pos ti endatar ina glista separada entras commas dad ordinaturs che duain vegnir exclus da la sincronisaziun  (p. ex. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Fa stim che las resursas tschernidas n'èn betg disponiblas en elements da maletgs u da telechargiar.</target>
+        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>

@@ -9,6 +9,12 @@
         <source>Please enter the style sheet name.</source>
         <target>Angiv venligst et unikt navn til stilarket.</target>
       </trans-unit>
+      <trans-unit id="tl_style_sheet.disablePie.0">
+        <source>Disable CSS3PIE</source>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.disablePie.1">
+        <source>Do not include the PIE.htc behavior file (adds CSS3 support to older IE versions).</source>
+      </trans-unit>
       <trans-unit id="tl_style_sheet.embedImages.0">
         <source>Embed images up to</source>
         <target>Integrer billeder op til</target>

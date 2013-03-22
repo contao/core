@@ -170,6 +170,7 @@
       </trans-unit>
       <trans-unit id="LNG.dz">
         <source>Dzongkha</source>
+        <target>Dzongkha</target>
       </trans-unit>
       <trans-unit id="LNG.dz_BT">
         <source>Dzongkha (Bhutan)</source>
@@ -727,6 +728,7 @@
       </trans-unit>
       <trans-unit id="LNG.si">
         <source>Sinhala</source>
+        <target>Sinhala</target>
       </trans-unit>
       <trans-unit id="LNG.si_LK">
         <source>Sinhala (Sri Lanka)</source>
@@ -777,6 +779,7 @@
       </trans-unit>
       <trans-unit id="LNG.st">
         <source>Sotho</source>
+        <target>Sotho</target>
       </trans-unit>
       <trans-unit id="LNG.st_ZA">
         <source>Sotho (South Africa)</source>
@@ -814,6 +817,7 @@
       </trans-unit>
       <trans-unit id="LNG.te">
         <source>Telugu</source>
+        <target>Telugu</target>
       </trans-unit>
       <trans-unit id="LNG.te_IN">
         <source>Telugu (India)</source>

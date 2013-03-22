@@ -9,6 +9,14 @@
         <source>Contao automatically adds the file extension.</source>
         <target>Contao ajoute automatiquement l'extension de fichier.</target>
       </trans-unit>
+      <trans-unit id="tl_files.protected.0">
+        <source>Protected</source>
+        <target>Protégé</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protected.1">
+        <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
+        <target>Empêcher l'accès au dossier via le protocole HTTP. Les fichiers peuvent toujours être disponible avec par exemple l'élément de téléchargements.</target>
+      </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
         <target>Méta-informations</target>
@@ -16,6 +24,10 @@
       <trans-unit id="tl_files.meta.1">
         <source>Here you can enter the file meta information.</source>
         <target>Saisir les méta-informations du fichier.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.htaccessInfo">
+        <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
+        <target>La protection des dossiers est effectuée en ajoutant un fichier .htaccess qui interdit l'accès au dossier. Il semble que vous n'utilisez pas de serveur Apache, la fonction peut ne pas fonctionner, ou requiert d'adapter la configuration de votre serveur. Veuillez vérifier avant de télécharger des ressources non publiques !</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
@@ -30,8 +42,7 @@
         <target>Éditeur de code source</target>
       </trans-unit>
       <trans-unit id="tl_files.editor.1">
-        <source>Here you can edit the file source.</source>
-        <target>Pour modifier le code source.</target>
+        <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
       </trans-unit>
       <trans-unit id="tl_files.upload">
         <source>Upload files</source>
@@ -81,6 +92,10 @@
         <source>Found the folder &quot;%s&quot;</source>
         <target>Le répertoire &quot;%s&quot; a été trouvé</target>
       </trans-unit>
+      <trans-unit id="tl_files.syncFolderH">
+        <source>Updated the hash of the folder &quot;%s&quot;</source>
+        <target>Le hachage du dossier &quot;%s&quot; a été mis à jour.</target>
+      </trans-unit>
       <trans-unit id="tl_files.syncFileC">
         <source>Created the file &quot;%s&quot;</source>
         <target>Le fichier &quot;%s&quot; a été créé</target>
@@ -89,7 +104,7 @@
         <source>Found the file &quot;%s&quot;</source>
         <target>Le fichier &quot;%s&quot; a été trouvé</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncHash">
+      <trans-unit id="tl_files.syncFileH">
         <source>Updated the hash of the file &quot;%s&quot;</source>
         <target>Le hash du fichier &quot;%s&quot; a été mis à jour</target>
       </trans-unit>

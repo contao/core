@@ -293,13 +293,33 @@
         <source>Generates an optionally sortable table.</source>
         <target>Tento element obsahuje tabuľku.</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.0">
+      <trans-unit id="CTE.accordion">
         <source>Accordion</source>
         <target>Harmonika</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.1">
-        <source>Generates a MooTools accordion pane.</source>
-        <target>Týmto elementom sa generuje obsah moofx harmoniky. Tento element vyžaduje šablónu s mootools JavaScript-om, čo môžete zvoliť pri vytváraní šablóny.</target>
+      <trans-unit id="CTE.accordionStart.0">
+        <source>Wrapper start</source>
+        <target>Začiatok obálky</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.1">
+        <source>Generates the opening part of the accordion wrapper.</source>
+        <target>Vygeneruje úvodnú časť skladačky (harmoniky).</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.0">
+        <source>Wrapper stop</source>
+        <target>Koniec obálky</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.1">
+        <source>Generates the closing part of the accordion wrapper.</source>
+        <target>Vygeneruje koncovú časť skladačky (harmoniky).</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.0">
+        <source>Single element</source>
+        <target>Samostatný element</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.1">
+        <source>Generates a single accordion element.</source>
+        <target>Vygeneruje samostatný element skladačky (harmoniky).</target>
       </trans-unit>
       <trans-unit id="CTE.code.0">
         <source>Code</source>
@@ -308,6 +328,26 @@
       <trans-unit id="CTE.code.1">
         <source>Highlights code snippets and prints them to the screen.</source>
         <target>Tento element obsahuje zdrojové kódy formátované špecifickým spôsobom. Zdrojový kód bude zobrazený a nebude vykonaný/preložený.</target>
+      </trans-unit>
+      <trans-unit id="CTE.slider">
+        <source>Content slider</source>
+        <target>Posúvač (slider) obsahových elementov</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.0">
+        <source>Wrapper start</source>
+        <target>Začiatok obálky</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.1">
+        <source>Generates the opening part of the slider wrapper.</source>
+        <target>Vygeneruje úvodnú časť posúvača (slider).</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.0">
+        <source>Wrapper stop</source>
+        <target>Koniec obálky</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.1">
+        <source>Generates the closing part of the slider wrapper.</source>
+        <target>Vygeneruje koncovú časť posúvača (slider).</target>
       </trans-unit>
       <trans-unit id="CTE.links">
         <source>Link elements</source>
@@ -1093,6 +1133,10 @@
         <source>Last login: %s</source>
         <target>Posledné prihlásenie: %s</target>
       </trans-unit>
+      <trans-unit id="MSC.move">
+        <source>Move the item via drag and drop</source>
+        <target>Presunúť položku pomocou drag&amp;drop</target>
+      </trans-unit>
       <trans-unit id="MSC.move_up.0">
         <source>Move up</source>
         <target>Posunúť nahor</target>
@@ -1475,6 +1519,10 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
         <source>Download this file</source>
         <target>Stiahnúť tento súbor</target>
       </trans-unit>
+      <trans-unit id="MSC.fileDatabaseId">
+        <source>Database ID</source>
+        <target>ID databázy</target>
+      </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
         <target>Šírka/výška v pixeloch</target>
@@ -1560,8 +1608,12 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
         <target>Zrušiť výber</target>
       </trans-unit>
       <trans-unit id="MSC.fileManager">
-        <source>Open file manager in a popup window</source>
-        <target>Otvoriť správcu súborov v novom okne (popup)</target>
+        <source>Open the file manager</source>
+        <target>Otvoriť správcu súborov</target>
+      </trans-unit>
+      <trans-unit id="MSC.pageManager">
+        <source>Modify the site structure</source>
+        <target>Upraviť štruktúru webu</target>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
@@ -1665,9 +1717,11 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
       </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
+        <target>&lt;strong&gt;Vnútorná cache&lt;/strong&gt; nebola ešte vytvorená. Vytvorenie cache zvýši výkon aplikácie a jej použitie je doporučované. Ak nechcete použiť cache, môžete ju natrvalo vypnúť v nastaveniach systému.</target>
       </trans-unit>
       <trans-unit id="MSC.buildCacheLink">
         <source>Build the cache</source>
+        <target>Vytvoriť cache</target>
       </trans-unit>
       <trans-unit id="MSC.name">
         <source>Name</source>

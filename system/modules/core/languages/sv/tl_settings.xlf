@@ -114,11 +114,11 @@
         <target>Denna begränsning aktiveras när användaren väljer &quot;visa alla poster&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
-        <source>Exclude folders from synchronisation</source>
+        <source>Exclude folders from synchronization</source>
         <target>Exkludera mappar från synkroniseringen</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
-        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronisation (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
         <target>Här kan du ange en kommaseparerad lista över mappar som ska undantas vid filsynkronisering (t.ex. &lt;em&gt;attachments,music_academy&lt;/em&gt;).
 Notera att exkluderade resurser inte kan användas i innehållselement som t.ex. Bild eller Nedladdning.</target>
       </trans-unit>

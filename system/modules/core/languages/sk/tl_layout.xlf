@@ -166,14 +166,14 @@
         <target>Editor vzhľadu</target>
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.1">
-        <source>Generates the CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
-        <target>Vytvorí CSS vzhľad založený na nastavení vzhľadu stránky. Tento komponent je potrebný aby fungoval generátor vzhľadu stránky!</target>
+        <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
+        <target>Generuje prispôsobujúci sa CSS vzhľad založený na nastavení vzhľadu stránky. Tento komponent je nutný, aby generátor vzhľadu stránky fungoval.</target>
       </trans-unit>
-      <trans-unit id="tl_layout.responsive.css.0">
-        <source>Responsive grid</source>
-        <target>Mriežka (responsive)</target>
+      <trans-unit id="tl_layout.grid.css.0">
+        <source>12-column grid</source>
+        <target>12-stĺpcová mriežka</target>
       </trans-unit>
-      <trans-unit id="tl_layout.responsive.css.1">
+      <trans-unit id="tl_layout.grid.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
         <target>Pridá flexibilnú mriežku s 12 stĺpcami, ktorá bude označená CSS triedami &quot;grid1&quot; až &quot;grid12&quot; a &quot;offset1&quot; až &quot;offset12&quot;.</target>
       </trans-unit>

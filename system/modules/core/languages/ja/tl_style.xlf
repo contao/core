@@ -399,7 +399,7 @@
       </trans-unit>
       <trans-unit id="tl_style.letterspacing.1">
         <source>Here you can modify the letter spacing (default: 0px).</source>
-        <target>文字の間隔を修正できます。(初期値: 0px)</target>
+        <target>文字の間隔を修正できます。(初期設定: 0px)</target>
       </trans-unit>
       <trans-unit id="tl_style.wordspacing.0">
         <source>Word spacing</source>
@@ -407,7 +407,7 @@
       </trans-unit>
       <trans-unit id="tl_style.wordspacing.1">
         <source>Here you can modify the word spacing (default: 0px).</source>
-        <target>単語の間隔を修正できます。(初期値: 0px)</target>
+        <target>単語の間隔を修正できます。(初期設定: 0px)</target>
       </trans-unit>
       <trans-unit id="tl_style.list.0">
         <source>List</source>

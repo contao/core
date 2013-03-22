@@ -114,12 +114,10 @@
         <target>Ta opcja ustala maksymalną ilość wyświetlanych rekordów w panelu jeśli użytkownik wybierze opcję &quot;Pokaż wszystkie rekordy&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
-        <source>Exclude folders from synchronisation</source>
-        <target>Wyłącz foldery z synchronizacji</target>
+        <source>Exclude folders from synchronization</source>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
-        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronisation (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Tutaj możesz wprowadźić oddzieloną przecinkami listę folderów, które zostaną wyłączone z synchronizacji (np. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Pamiętaj, że wyłączone źródła nie będą mogły być użyte np. w elementach obrazka lub elementach do pobrania.</target>
+        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>

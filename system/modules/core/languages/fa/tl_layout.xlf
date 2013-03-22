@@ -159,18 +159,21 @@
       </trans-unit>
       <trans-unit id="tl_layout.framework.1">
         <source>Here you can activate the components of the Contao CSS framework.</source>
+        <target>اینجا می‌توانید اجزاء چارچوب CSS کانتائو را فعال نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.0">
         <source>Layout builder</source>
+        <target>سازنده چیدمان</target>
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.1">
-        <source>Generates the CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
+        <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
       </trans-unit>
-      <trans-unit id="tl_layout.responsive.css.0">
-        <source>Responsive grid</source>
+      <trans-unit id="tl_layout.grid.css.0">
+        <source>12-column grid</source>
       </trans-unit>
-      <trans-unit id="tl_layout.responsive.css.1">
+      <trans-unit id="tl_layout.grid.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
+        <target>شبکه ۱۲-ستونی پاسخگو را اضافه می‌کند که با کلاس‌های CSS &quot;grid1&quot; تا &quot;grid12&quot; و &quot;offset1&quot; تا &quot;offset12&quot; مشخص می‌شوند.</target>
       </trans-unit>
       <trans-unit id="tl_layout.reset.css.0">
         <source>CSS reset</source>
@@ -178,12 +181,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.reset.css.1">
         <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
+        <target>سبک‌های پیش‌فرض متناقض المان‌های HTML را در مرورگرهای متفاوت حذف می‌نماید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.form.css.0">
         <source>Basic forms</source>
+        <target>فرم‌های ساده</target>
       </trans-unit>
       <trans-unit id="tl_layout.form.css.1">
         <source>Adds basic form elements and buttons formatting.</source>
+        <target>افزودن المان‌های فرم ساده و قالب‌های دکمه.</target>
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.0">
         <source>TinyMCE style sheet</source>
@@ -191,12 +197,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.1">
         <source>Includes the &lt;em&gt;tinymce.css&lt;/em&gt; style sheet from your upload directory.</source>
+        <target>گنجاندن برگه سبک &lt;em&gt;tinymce.css&lt;/em&gt; از فهرست بارگذاری شما.</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.0">
         <source>Additional style sheets</source>
+        <target>برگه‌های سبک اضافی</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
         <source>Here you can add style sheets from the file system (e.g. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</source>
+        <target>اینجا می‌توانید برگه‌های سبک را از سیستم پرونده (به عنوان مثال &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;) اضافه نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
@@ -212,6 +221,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.webfonts.1">
         <source>Here you can add Google web fonts to your website. Specify the font families without the base URL (e.g. &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</source>
+        <target>اینجا می‌توانید فونت‌های وب گوگل را به وب‌سایت خود اضافه نمایید. خانواده‌های فونت را بدون نشانی وب مشخص نمایید (مثلا &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.newsfeeds.0">
         <source>News feeds</source>
@@ -307,6 +317,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.addMooTools.1">
         <source>Include the MooTools library in the layout.</source>
+        <target>گنجاندن کتابخانه MooTools در چیدمان.</target>
       </trans-unit>
       <trans-unit id="tl_layout.mooSource.0">
         <source>MooTools source</source>
@@ -330,6 +341,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.analytics.1">
         <source>Here you can activate the analytics templates (e.g. for Google Analytics or Piwik). Note that you have to adjust those templates and add your analytics ID before you can use them!</source>
+        <target>اینجا می‌توانید الگوهای تحلیل را فعال نمایید (به عنوان مثال Google Analytics یا Piwik). توجه کنید که شما این الگوها را باید تنظیم نمایید و شناسه تحلیل را اضافه نمایید قبل از اینکه بتوانید از آنها استفاده نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.script.0">
         <source>Custom JavaScript code</source>

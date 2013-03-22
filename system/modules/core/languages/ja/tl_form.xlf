@@ -121,6 +121,14 @@
         <source>The default form submission method is POST.</source>
         <target>フォームの提出のメソッドの初期設定はPOSTです。</target>
       </trans-unit>
+      <trans-unit id="tl_form.novalidate.0">
+        <source>Disable HTML5 validation</source>
+        <target>HTML5の検証を使用しない</target>
+      </trans-unit>
+      <trans-unit id="tl_form.novalidate.1">
+        <source>Add the &quot;novalidate&quot; attribute to the form tag.</source>
+        <target>フォームのタグの属性に&quot;novalidate&quot;を追加します。</target>
+      </trans-unit>
       <trans-unit id="tl_form.attributes.0">
         <source>CSS ID/class</source>
         <target>CSSのIDとclass</target>

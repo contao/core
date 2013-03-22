@@ -121,6 +121,14 @@
         <source>The default form submission method is POST.</source>
         <target>Prosím vyberte metódu spracovania formulára (predvolená: POST).</target>
       </trans-unit>
+      <trans-unit id="tl_form.novalidate.0">
+        <source>Disable HTML5 validation</source>
+        <target>Deaktivovať HTML5 validáciu</target>
+      </trans-unit>
+      <trans-unit id="tl_form.novalidate.1">
+        <source>Add the &quot;novalidate&quot; attribute to the form tag.</source>
+        <target>Vloží &quot;novalidate&quot; atribút do tagu form.</target>
+      </trans-unit>
       <trans-unit id="tl_form.attributes.0">
         <source>CSS ID/class</source>
         <target>ID a class (trieda) kaskádového štýlu</target>

@@ -41,6 +41,14 @@
         <source>The confirmation token of the subscription.</source>
         <target>Das Bestätigungstoken des Abonnements.</target>
       </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.confirmed.0">
+        <source>Confirmation date</source>
+        <target>Bestätigungsdatum</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.confirmed.1">
+        <source>The date of confirmation (double opt-in).</source>
+        <target>Das Datum der Bestätigung (Double Opt-In).</target>
+      </trans-unit>
       <trans-unit id="tl_newsletter_recipients.email_legend">
         <source>E-mail address</source>
         <target>E-Mail-Adresse</target>

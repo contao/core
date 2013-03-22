@@ -166,14 +166,14 @@
         <target>Конструктор макетов</target>
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.1">
-        <source>Generates the CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
-        <target>Создает CSS макет с учетом настроек макета страницы. Компонент необходим для работы генератора макетов страницы!</target>
+        <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
+        <target>Создает адаптивный CSS макет с учетом настроек макета страницы. Компонент необходим для работы генератора макетов страницы!</target>
       </trans-unit>
-      <trans-unit id="tl_layout.responsive.css.0">
-        <source>Responsive grid</source>
-        <target>Адаптивная сетка</target>
+      <trans-unit id="tl_layout.grid.css.0">
+        <source>12-column grid</source>
+        <target>12 колоночная сетка</target>
       </trans-unit>
-      <trans-unit id="tl_layout.responsive.css.1">
+      <trans-unit id="tl_layout.grid.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
         <target>Добавляет адаптивную сетку из 12 колонок, которая создается CSS классами от &quot;grid1&quot; до &quot;grid12&quot; и от &quot;offset1&quot; до &quot;offset12&quot;.</target>
       </trans-unit>

@@ -9,6 +9,14 @@
         <source>Contao automatically adds the file extension.</source>
         <target>Contao voegt automatisch de bestandsextensie toe.</target>
       </trans-unit>
+      <trans-unit id="tl_files.protected.0">
+        <source>Protected</source>
+        <target>Beschermd</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protected.1">
+        <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
+        <target>Voorkom verkrijgen van toegang tot de map via HTTP. De bestanden kunnen nog steeds beschikbaar worden gesteld door het downloads-element.</target>
+      </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
         <target>Meta informatie</target>
@@ -16,6 +24,10 @@
       <trans-unit id="tl_files.meta.1">
         <source>Here you can enter the file meta information.</source>
         <target>Hier kunt u meta-informatie van het bestand opgeven.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.htaccessInfo">
+        <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
+        <target>Bescherming van mappen wordt tot stand gebracht door toevoegen van een .htaccess bestand welke toegang tot de map ontzegt. Het lijkt erop dat u geen gebruik maakt van een Apache server, om deze reden zou deze functie mogelijk niet kunnen werken of vereist een andere server configuratie. Gelieve nogmaals controleren voor het uploaden van alle niet-publieke bronnen!</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
@@ -30,8 +42,7 @@
         <target>Bron editor</target>
       </trans-unit>
       <trans-unit id="tl_files.editor.1">
-        <source>Here you can edit the file source.</source>
-        <target>Hier kunt u het bronbestand bewerken.</target>
+        <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
       </trans-unit>
       <trans-unit id="tl_files.upload">
         <source>Upload files</source>
@@ -81,6 +92,10 @@
         <source>Found the folder &quot;%s&quot;</source>
         <target>Map &quot;%s&quot; gevonden</target>
       </trans-unit>
+      <trans-unit id="tl_files.syncFolderH">
+        <source>Updated the hash of the folder &quot;%s&quot;</source>
+        <target>De Hash van map &quot;%s&quot; werd bijgewerkt</target>
+      </trans-unit>
       <trans-unit id="tl_files.syncFileC">
         <source>Created the file &quot;%s&quot;</source>
         <target>Het bestand &quot;%s&quot; is aangemaakt</target>
@@ -89,7 +104,7 @@
         <source>Found the file &quot;%s&quot;</source>
         <target>Bestand &quot;%s&quot; gevonden</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncHash">
+      <trans-unit id="tl_files.syncFileH">
         <source>Updated the hash of the file &quot;%s&quot;</source>
         <target>De Hash van bestand &quot;%s&quot; werd bijgewerkt</target>
       </trans-unit>

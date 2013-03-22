@@ -398,16 +398,14 @@
         <target>Obrazek poglądowy</target>
       </trans-unit>
       <trans-unit id="tl_content.posterSRC.1">
-        <source>Show this image instead of the first frame of the video before playback (videos only).</source>
-        <target>Pokaż ten obrazek zamiast pierwszej klatki filmu przed jego włączeniem (tylko video).</target>
+        <source>Show this image instead of the first frame of the video before playback.</source>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.0">
         <source>Player size</source>
         <target>Rozmiar odtwarzacza</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
-        <source>Width and height of the media player in pixels (videos only).</source>
-        <target>Szerokość i wysokość odtwarzacza mediów w pikselach (tylko video).</target>
+        <source>Width and height of the media player in pixels (e.g. 640x480). Applies to videos only.</source>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>

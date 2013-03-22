@@ -3,91 +3,91 @@
     <body>
       <trans-unit id="ERR.general">
         <source>An error occurred!</source>
-        <target>Der opstod en fejl!</target>
+        <target>Der opstod en fejl.</target>
       </trans-unit>
       <trans-unit id="ERR.unique">
         <source>Duplicate entry in field &quot;%s&quot;!</source>
-        <target>Dobbelt indtasting i feltet &quot;%s&quot;!</target>
+        <target>Indtastningen i feltet &quot;%s&quot; eksisterer allerede.</target>
       </trans-unit>
       <trans-unit id="ERR.mandatory">
         <source>Field &quot;%s&quot; must not be empty!</source>
-        <target>Udfyld venligst feltet &quot;%s&quot;!</target>
+        <target>Feltet &quot;%s&quot; skal udfyldes.</target>
       </trans-unit>
       <trans-unit id="ERR.mdtryNoLabel">
         <source>This field must not be empty!</source>
-        <target>Dette felt må ikke være tomt</target>
+        <target>Dette felt skal udfyldes.</target>
       </trans-unit>
       <trans-unit id="ERR.minlength">
         <source>Field &quot;%s&quot; has to be at least %d characters long!</source>
-        <target>Feltet &quot;%s&quot; skal indeholde mindst %d tegn!</target>
+        <target>Feltet &quot;%s&quot; skal indeholde mindst %d tegn.</target>
       </trans-unit>
       <trans-unit id="ERR.maxlength">
         <source>Field &quot;%s&quot; must not be longer than %d characters!</source>
-        <target>Feltet &quot;%s&quot; må ikke være længere end %d tegn!</target>
+        <target>Feltet &quot;%s&quot; skal være kortere end %d tegn.</target>
       </trans-unit>
       <trans-unit id="ERR.digit">
         <source>Please enter digits only!</source>
-        <target>Indtast venligst kun tal!</target>
+        <target>Indtast venligst kun tal.</target>
       </trans-unit>
       <trans-unit id="ERR.prcnt">
         <source>Please enter a percentage between 0 and 100!</source>
-        <target>Indtast venligst et procenttal mellem 0 og 100!</target>
+        <target>Indtast venligst en procent mellem 0 og 100.</target>
       </trans-unit>
       <trans-unit id="ERR.alpha">
         <source>Please enter alphabetic characters only!</source>
-        <target>Indtast venligst kun bogstaver og ikke tal!</target>
+        <target>Indtast venligst kun bogstaver.</target>
       </trans-unit>
       <trans-unit id="ERR.alnum">
         <source>Please enter alphanumeric characters only!</source>
-        <target>Indtast venligst kun bogstaver og tal!</target>
+        <target>Indtast venligst kun bogstaver og tal.</target>
       </trans-unit>
       <trans-unit id="ERR.phone">
         <source>Please enter a valid phone number!</source>
-        <target>Indtast venligst et gyldigt telefonnummer!</target>
+        <target>Indtast venligst et gyldigt telefonnummer.</target>
       </trans-unit>
       <trans-unit id="ERR.extnd">
         <source>For security reasons you can not use the following characters here: =&lt;&gt;&amp;/()#</source>
-        <target>Af sikkerhedshensyn kan disse tegn (=&amp;/()#) ikke anvendes her!</target>
+        <target>Af sikkerhedshensyn kan =&amp;/()# ikke benyttes her.</target>
       </trans-unit>
       <trans-unit id="ERR.email">
         <source>Please enter a valid e-mail address!</source>
-        <target>Indtast venligst en gyldig e-mail-adresse!</target>
+        <target>Indtast venligst en gyldig e-mail adresse.</target>
       </trans-unit>
       <trans-unit id="ERR.emails">
         <source>There is at least one invalid e-mail address!</source>
-        <target>Der er mindst en ugyldig e-mail adresse!</target>
+        <target>Der er mindst en ugyldig e-mail adresse.</target>
       </trans-unit>
       <trans-unit id="ERR.url">
         <source>Please enter a valid URL format and encode special characters!</source>
-        <target>Indtast i gyldigt URL-format og brug tegnkode til specialtegn!</target>
+        <target>Indtast i gyldigt URL-format og brug tegnkode til specialtegn.</target>
       </trans-unit>
       <trans-unit id="ERR.locale">
         <source>Please enter a valid locale such as &quot;en&quot; or &quot;en_US&quot;!</source>
-        <target>Indtast venligst en gyldig sprogkode såsom &quot;da&quot;, &quot;en&quot; eller &quot;en_US&quot;!</target>
+        <target>Indtast venligst en gyldig landestandard såsom da, en eller en_US.</target>
       </trans-unit>
       <trans-unit id="ERR.language">
         <source>Please enter a valid language code such as &quot;en&quot; or &quot;en-US&quot;!</source>
-        <target>Indtast venligst en gyldig sprogkode såsom &quot;da&quot;, &quot;en&quot; eller &quot;en-US&quot;!</target>
+        <target>Indtast venligst en gyldig sprogkode såsom da, en eller en-US.</target>
       </trans-unit>
       <trans-unit id="ERR.alias">
         <source>Please enter only alphanumeric characters and the following special characters: .-_</source>
-        <target>Indtast venligst kun alfanummeriske tegn samt følgende specielle tegn: .-_</target>
+        <target>Indtast venligst kun bogstaver, tal samt følgende specielle tegn .-_</target>
       </trans-unit>
       <trans-unit id="ERR.folderalias">
         <source>Please enter only alphanumeric characters and the following special characters: .-/_</source>
-        <target>Indtast venligst kun alfanummeriske tegn samt følgende specielle tegn: .-/_</target>
+        <target>Indtast venligst kun bogstaver, tal samt følgende specielle tegn .-/_</target>
       </trans-unit>
       <trans-unit id="ERR.date">
         <source>Please enter the date as &quot;%s&quot;!</source>
-        <target>Indtast venligst dato som &quot;%s&quot;!</target>
+        <target>Indtast venligst datoen som %s.</target>
       </trans-unit>
       <trans-unit id="ERR.time">
         <source>Please enter the time as &quot;%s&quot;!</source>
-        <target>Indtast venligst tidspunktet som &quot;%s&quot;!</target>
+        <target>Indtast venligst tidspunktet som %s.</target>
       </trans-unit>
       <trans-unit id="ERR.dateTime">
         <source>Please enter date and time as &quot;%s&quot;!</source>
-        <target>Indtast venligst dato og tidspunkt som &quot;%s&quot;!</target>
+        <target>Indtast venligst dato og tidspunkt som %s.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidDate">
         <source>Invalid date &quot;%s&quot;!</source>
@@ -95,27 +95,27 @@
       </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
-        <target>Feltet &quot;%s&quot; må ikke indeholde mellemrum!</target>
+        <target>Feltet &quot;%s&quot; må ikke indeholde mellemrum.</target>
       </trans-unit>
       <trans-unit id="ERR.filesize">
         <source>The maximum size for file uploads is %s (Contao or php.ini settings)!</source>
-        <target>Maksimumstørrelsen for fil-upload er %s!</target>
+        <target>Maks. størrelsen for uploads er &quot;%s&quot; (indstilles i Contao eller php.ini).</target>
       </trans-unit>
       <trans-unit id="ERR.filetype">
         <source>File type &quot;%s&quot; is not allowed to be uploaded!</source>
-        <target>Det er ikke tilladt at uploade filtypen &quot;%s&quot;!</target>
+        <target>Det er ikke tilladt at uploade %s filer.</target>
       </trans-unit>
       <trans-unit id="ERR.filepartial">
         <source>File %s was only partially uploaded!</source>
-        <target>Filen %s blev kun delvist uploaded!</target>
+        <target>Filen %s blev kun delvist uploaded.</target>
       </trans-unit>
       <trans-unit id="ERR.filewidth">
         <source>File %s exceeds the maximum image width of %d pixels!</source>
-        <target>Filen %s overskrider den maksimale billedbredde på %d pixels!</target>
+        <target>Billedet %s er bredere end de maks. tilladte %d pixels.</target>
       </trans-unit>
       <trans-unit id="ERR.fileheight">
         <source>File %s exceeds the maximum image height of %d pixels!</source>
-        <target>Filen %s overskrider den maksimale billedhøjde på %d pixels!</target>
+        <target>Billedet %s er højere end de maks. tilladte %d pixels.</target>
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
@@ -123,71 +123,71 @@
       </trans-unit>
       <trans-unit id="ERR.invalidReferer">
         <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
-        <target>Adgang nægtet! Den nuværende værtsadressen (%s) stemmer ikke overens med &quot;referer&quot;-værtsadressen (%s)!</target>
+        <target>Adgang nægtet. Værtsadressen %s stemmer ikke overens med den henvisende værtsadresse %s</target>
       </trans-unit>
       <trans-unit id="ERR.invalidPass">
         <source>Invalid password!</source>
-        <target>Ugyldigt kodeord!</target>
+        <target>Ugyldig adgangskode.</target>
       </trans-unit>
       <trans-unit id="ERR.passwordLength">
         <source>A password has to be at least %d characters long!</source>
-        <target>Kodeordet skal indeholde mindst %d tegn!</target>
+        <target>Adgangskoden skal indeholde mindst %d tegn.</target>
       </trans-unit>
       <trans-unit id="ERR.passwordName">
         <source>Your username and password must not be the same!</source>
-        <target>Du må ikke have samme brugernavn og kodeord!</target>
+        <target>Dit brugernavn og adgangskode må ikke være ens.</target>
       </trans-unit>
       <trans-unit id="ERR.passwordMatch">
         <source>The passwords did not match!</source>
-        <target>Kodeordene stemte ikke overens!</target>
+        <target>Adgangskoderne stemmer ikke overens.</target>
       </trans-unit>
       <trans-unit id="ERR.accountLocked">
         <source>This account has been locked! You can log in again in %d minutes.</source>
-        <target>Denne konto er blevet låst! Du kan logge ind igen om %d minutter.</target>
+        <target>Denne konto er af sikkerhedhensyn blevet låst. Du kan forsøge at logge ind igen om %d minutter.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
         <source>Login failed!</source>
-        <target>Log ind mislykkedes!</target>
+        <target>Log ind mislykkedes.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
-        <target>Ugyldigt farveformat!</target>
+        <target>Ugyldigt farveformat.</target>
       </trans-unit>
       <trans-unit id="ERR.all_fields">
         <source>Please select at least one field!</source>
-        <target>Vælg venligst mindst et felt!</target>
+        <target>Vælg venligst mindst et felt.</target>
       </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
-        <target>Sidealias &quot;%s&quot; eksisterer allerede!</target>
+        <target>Alias &quot;%s&quot; eksisterer allerede.</target>
       </trans-unit>
       <trans-unit id="ERR.importFolder">
         <source>The folder &quot;%s&quot; cannot be imported!</source>
-        <target>Mappe &quot;%s&quot; kan ikke importeres!</target>
+        <target>Mappen &quot;%s&quot; kan ikke importeres.</target>
       </trans-unit>
       <trans-unit id="ERR.notWriteable">
         <source>The file &quot;%s&quot; is not writeable and can therefore not be updated!</source>
-        <target>Filen &quot;%s&quot; er ikke skrivbar, så dine ændringer vil ikke blive gemt!</target>
+        <target>Filen &quot;%s&quot; er ikke skrivbar og kan derfor ikke opdateres.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidName">
         <source>This file or folder name is invalid!</source>
-        <target>Dette fil- eller mappenavn er ugyldig!</target>
+        <target>Navnet på denne fil eller mappe er ugyldigt.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidFile">
         <source>The file or folder &quot;%s&quot; is invalid!</source>
-        <target>Filen eller mappen &quot;%s&quot; er ugyldig!</target>
+        <target>Filen eller mappen &quot;%s&quot; er ugyldig.</target>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
         <source>The file &quot;%s&quot; already exists!</source>
-        <target>Filen &quot;%s&quot; findes allerede!</target>
+        <target>Filen &quot;%s&quot; eksisterer allerede.</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
-        <target>Ugyldigt mål for omdirigering (cirkulær reference)</target>
+        <target>Ugyldigt mål for omdirigering (vil skabe et endeløst loop).</target>
       </trans-unit>
       <trans-unit id="ERR.ie6warning">
         <source>&lt;strong&gt;Attention!&lt;/strong&gt; Your web browser is %sout of date%s and &lt;strong&gt;you cannot use all features of this website&lt;/strong&gt;.</source>
-        <target>%s&lt;strong&gt;Bemærk!&lt;/strong&gt; Din browser er %sforældet%s og &lt;strong&gt;du kan derfor ikke benytte alle funktioner på dette websted&lt;/strong&gt;.%s</target>
+        <target>&lt;strong&gt;Bemærk&lt;/strong&gt; Din browser er %sforældet%s og &lt;strong&gt;du kan derfor ikke benytte alle funktioner på dette website&lt;/strong&gt;.</target>
       </trans-unit>
       <trans-unit id="ERR.noFallbackEmpty">
         <source>None of the active website root pages without an explicit DNS setting has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
@@ -293,13 +293,33 @@
         <source>Generates an optionally sortable table.</source>
         <target>Dette element indeholder en tabel.</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.0">
+      <trans-unit id="CTE.accordion">
         <source>Accordion</source>
-        <target>Harmonika</target>
+        <target>Harmonika visning</target>
       </trans-unit>
-      <trans-unit id="CTE.accordion.1">
-        <source>Generates a MooTools accordion pane.</source>
-        <target>Dette element frembringer et indholdsområde, som er en moofx-harmonika. Bemærk venligst at denne effekt kræver et mootools JavaScript-skabelon, som du kan vælge i modulet sidelayout.</target>
+      <trans-unit id="CTE.accordionStart.0">
+        <source>Wrapper start</source>
+        <target>Indpakningen starter</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.1">
+        <source>Generates the opening part of the accordion wrapper.</source>
+        <target>Angiver starten af harmonika visningens indpakning.</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.0">
+        <source>Wrapper stop</source>
+        <target>Indpakningen slutter</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.1">
+        <source>Generates the closing part of the accordion wrapper.</source>
+        <target>Angiver slutningen af harmonika visningens indpakning.</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.0">
+        <source>Single element</source>
+        <target>Enkelt element</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.1">
+        <source>Generates a single accordion element.</source>
+        <target>Genererer et enkelt harmonika element.</target>
       </trans-unit>
       <trans-unit id="CTE.code.0">
         <source>Code</source>
@@ -308,6 +328,26 @@
       <trans-unit id="CTE.code.1">
         <source>Highlights code snippets and prints them to the screen.</source>
         <target>Dette element indeholder kodestumper, som bliver formateret på en speciel måde. Koden vil kun blive vist på skærmen og ikke blive kørt.</target>
+      </trans-unit>
+      <trans-unit id="CTE.slider">
+        <source>Content slider</source>
+        <target>Indholds slider</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.0">
+        <source>Wrapper start</source>
+        <target>Indpakningen starter</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.1">
+        <source>Generates the opening part of the slider wrapper.</source>
+        <target>Angiver starten af sliderens indpakning.</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.0">
+        <source>Wrapper stop</source>
+        <target>Indpakningen slutter</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.1">
+        <source>Generates the closing part of the slider wrapper.</source>
+        <target>Angiver slutningen af sliderens indpakning.</target>
       </trans-unit>
       <trans-unit id="CTE.links">
         <source>Link elements</source>
@@ -1093,6 +1133,10 @@
         <source>Last login: %s</source>
         <target>Sidst logget ind: %s</target>
       </trans-unit>
+      <trans-unit id="MSC.move">
+        <source>Move the item via drag and drop</source>
+        <target>Flyt objektet vha. træk og slip</target>
+      </trans-unit>
       <trans-unit id="MSC.move_up.0">
         <source>Move up</source>
         <target>Flyt op</target>
@@ -1475,6 +1519,10 @@ Denne e-mail er blevet genereret af systemet og kan ikke besvares direkte.
         <source>Download this file</source>
         <target>Download denne fil</target>
       </trans-unit>
+      <trans-unit id="MSC.fileDatabaseId">
+        <source>Database ID</source>
+        <target>Database ID</target>
+      </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
         <target>Bredde/højde i pixel</target>
@@ -1560,8 +1608,10 @@ Denne e-mail er blevet genereret af systemet og kan ikke besvares direkte.
         <target>Nulstil valgte</target>
       </trans-unit>
       <trans-unit id="MSC.fileManager">
-        <source>Open file manager in a popup window</source>
-        <target>Åbn filarkivet i et pop op vindue</target>
+        <source>Open the file manager</source>
+      </trans-unit>
+      <trans-unit id="MSC.pageManager">
+        <source>Modify the site structure</source>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
@@ -1665,9 +1715,11 @@ Denne e-mail er blevet genereret af systemet og kan ikke besvares direkte.
       </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
+        <target>Den &lt;strong&gt;interne cache&lt;/strong&gt; er endnu ikke blevet genereret. At generere cachen vil øge hastigheden på applikationen og er højst anbefalet. Hvis du ikke ønsker at benytte cache, kan du permanent deaktivere det i indstillingerne for back enden.</target>
       </trans-unit>
       <trans-unit id="MSC.buildCacheLink">
         <source>Build the cache</source>
+        <target>Generer cache</target>
       </trans-unit>
       <trans-unit id="MSC.name">
         <source>Name</source>

@@ -363,11 +363,11 @@
       </trans-unit>
       <trans-unit id="tl_form_field.value.0">
         <source>Default value</source>
-        <target>初期値</target>
+        <target>初期設定</target>
       </trans-unit>
       <trans-unit id="tl_form_field.value.1">
         <source>Here you can enter a default value for the field.</source>
-        <target>入力項目の初期値を入力できます。</target>
+        <target>入力項目の初期設定の値を入力できます。</target>
       </trans-unit>
       <trans-unit id="tl_form_field.class.0">
         <source>CSS class</source>
