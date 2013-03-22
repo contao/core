@@ -75,8 +75,14 @@ class BackendTemplate extends \Template
 					$arrRteFields[] = $field['id'];
 				}
 
+				$this->ceFields = $fields;
 				$this->rteFields = implode(',', $arrRteFields); // TinyMCE
-				$this->ceFields = $fields; // Other RTEs
+
+				if ($file == 'codeMirror')
+				{
+					$file = 'ace';
+				}
+
 				$strFile = sprintf('%s/system/config/%s.php', TL_ROOT, $file);
 
 				if (!file_exists($strFile))

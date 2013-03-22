@@ -297,7 +297,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'codeMirror|html', 'helpwizard'=>true),
+			'eval'                    => array('mandatory'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html', 'helpwizard'=>true),
 			'explanation'             => 'insertTags',
 			'sql'                     => "mediumtext NULL"
 		),
@@ -447,7 +447,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'decodeEntities'=>true, 'class'=>'monospace', 'rte'=>'codeMirror', 'helpwizard'=>true, 'tl_class'=>'clr'),
+			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'decodeEntities'=>true, 'class'=>'monospace', 'rte'=>'ace', 'helpwizard'=>true, 'tl_class'=>'clr'),
 			'explanation'             => 'insertTags',
 			'sql'                     => "text NULL"
 		),
@@ -1311,7 +1311,7 @@ class tl_content extends Backend
 
 
 	/**
-	 * Dynamically set the codeMirror syntax
+	 * Dynamically set the ace syntax
 	 * @param mixed
 	 * @param \DataContainer
 	 * @return string
@@ -1322,43 +1322,41 @@ class tl_content extends Backend
 		{
 			case 'C':
 			case 'CSharp':
-				$syntax = 'clike';
+				$syntax = 'c_cpp';
 				break;
 
 			case 'CSS':
-				$syntax = 'css';
-				break;
-
 			case 'Diff':
-				$syntax = 'diff';
-				break;
-
-			case 'XHTML':
-				$syntax = 'htmlmixed';
-				break;
-
+			case 'Groovy':
+			case 'HTML':
+			case 'Java':
 			case 'JavaScript':
-				$syntax = 'javascript';
-				break;
-
+			case 'Perl':
 			case 'PHP':
-				$syntax = 'php';
+			case 'PowerShell':
+			case 'Python':
+			case 'Ruby':
+			case 'Scala':
+			case 'SQL':
+			case 'Text':
+				$syntax = strtolower($dc->activeRecord->highlight);
 				break;
 
-			case 'SQL':
-				$syntax = 'sql';
+			case 'VB':
+				$syntax = 'vbscript';
 				break;
 
 			case 'XML':
+			case 'XHTML':
 				$syntax = 'xml';
 				break;
 
 			default:
-				$syntax = '';
+				$syntax = 'text';
 				break;
 		}
 
-		$GLOBALS['TL_DCA']['tl_content']['fields']['code']['eval']['rte'] = 'codeMirror|' . $syntax;
+		$GLOBALS['TL_DCA']['tl_content']['fields']['code']['eval']['rte'] = 'ace|' . $syntax;
 		return $varValue;
 	}
 

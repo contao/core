@@ -76,7 +76,7 @@ if ($GLOBALS['TL_CONFIG']['useCE']):
 
 ?>
 <script>
-(function() {
+window.addEvent('domready', function() {
   var ta = $('<?php echo $arrField['id']; ?>');
 
   var div = new Element('div', {
@@ -108,17 +108,18 @@ if ($GLOBALS['TL_CONFIG']['useCE']):
   editor.getSession().on('change', updateTextarea);
 
   var updateHeight = function() {
-    var newHeight =
-      editor.getSession().getScreenLength()
+    var newHeight
+      = editor.getSession().getScreenLength()
       * editor.renderer.lineHeight
       + editor.renderer.scrollBar.getWidth();
-    editor.container.setStyle('height', newHeight.toString() + 'px');
+    var setHeight = Math.max(newHeight, editor.container.getStyle('height'));
+    editor.container.setStyle('height', setHeight.toString() + 'px');
     editor.resize();
   };
 
   updateHeight();
   editor.getSession().on('change', updateHeight);
-})();
+});
 </script>
 <?php endforeach; ?>
 <?php endif; ?>
