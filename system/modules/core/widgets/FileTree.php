@@ -290,7 +290,7 @@ class FileTree extends \Widget
 
 		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.$strValues.'">' . (($this->strOrderField != '') ? '
   <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->{$this->strOrderField}.'">' : '') . '
-  <div class="selector_container" id="target_'.$this->strId.'">' . (($this->strOrderField != '' && count($arrValues)) ? '
+  <div class="selector_container">' . (($this->strOrderField != '' && count($arrValues)) ? '
     <p id="hint_'.$this->strId.'" class="sort_hint">' . $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] . '</p>' : '') . '
     <ul id="sort_'.$this->strId.'" class="'.trim((($this->strOrderField != '') ? 'sortable ' : '').($this->blnIsGallery ? 'sgallery' : '')).'">';
 

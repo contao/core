@@ -790,7 +790,6 @@ var Backend =
 		});
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
 			var val = [],
-				tls = [],
             	par = opt.id.replace(/_[0-9]+$/, '') + '_parent', // Strip the "edit multiple" suffixes
 				frm = null,
 				frms = window.frames;
@@ -807,11 +806,7 @@ var Backend =
 			var inp = frm.document.getElementById(par).getElementsByTagName('input');
 			for (var i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
-                if (!inp[i].id.match(/^reset_/)) {
-				    var div = inp[i].getParent('li').getFirst('div');
-				    tls.push('<img src="' + div.getFirst('img').src + '" width="18" height="18" alt=""> ' + div.getFirst('label').get('title'));
-				    val.push(inp[i].get('value'));
-                }
+                if (!inp[i].id.match(/^reset_/)) val.push(inp[i].get('value'));
 			}
 			if (opt.tag) {
 				$(opt.tag).value = val.join(',');
@@ -821,9 +816,7 @@ var Backend =
 				opt.self.set('href', opt.self.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
 			} else {
 				$('ctrl_'+opt.id).value = val.join(',');
-				$('target_'+opt.id).getFirst('ul').removeClass('sgallery').set('html', '<li>' + tls.join('</li><li>') + '</li>');
-				var lnk = $('target_'+opt.id).getElement('a');
-				lnk.set('href', lnk.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
+				Backend.autoSubmit($('ctrl_'+opt.id).getParent('form'));
 			}
 			this.hide();
 		});
@@ -854,7 +847,7 @@ var Backend =
 			'value': 'auto'
 		});
 
-		var form = $(el);
+		var form = $(el) || el;
 		hidden.inject(form, 'bottom');
 		form.submit();
 	},
