@@ -1146,7 +1146,7 @@ a.navigation.tpl_editor {
 }
 
 /* Default icon classes */
-a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header_logout,.header_back,.header_new,.header_rss,
+a.navigation,.header_icon,.header_home,.header_user,.header_preview,.header_clipboard,.header_logout,.header_back,.header_new,.header_rss,
 .header_edit_all,.header_delete_all,.header_new_folder,.header_css_import,.header_theme_import,.header_store,.header_toggle,.header_sync {
 	padding:2px 0 3px 20px;
 	background-position:left center;

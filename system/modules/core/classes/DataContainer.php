@@ -600,6 +600,22 @@ class DataContainer extends \Backend
 			$title = is_array($v['label']) ? $v['label'][1] : $v['label'];
 			$attributes = ($v['attributes'] != '') ? ' ' . ltrim($v['attributes']) : '';
 
+			// icon
+			if ($v['icon'])
+			{
+				$v['class'] = trim($v['class'] . ' header_icon');
+				$style = 'background-image:url(' . $v['icon'] . ');';
+
+				if (strpos($attributes, 'style="') !== false)
+				{
+					$attributes = preg_replace('/(style=")([^"]*")/','$1' . $style . '$2', $attributes);
+				}
+				else
+				{
+					$attributes .= ' style="' . $style . '"';
+				}
+			}
+
 			if ($label == '')
 			{
 				$label = $k;

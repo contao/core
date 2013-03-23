@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### Improved
+Can now use the "icon" key for global operations in DCA too (see #5394).
+
+### Improved
 Pre-fill the "alt" and "caption" fields with the file meta data (see #5225).
 
 ### Improved
