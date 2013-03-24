@@ -1,0 +1,58 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/default.php" source-language="en">
+    <body>
+      <trans-unit id="MSC.cal_events">
+        <source>%d event(s)</source>
+        <target>%d Çalakî</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_previous">
+        <source>&amp;lt;</source>
+        <target>&lt;</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_next">
+        <source>&amp;gt;</source>
+        <target>&gt;</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyDay">
+        <source>There are no events on this day.</source>
+        <target>Tu çalakî tune îro.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyWeek">
+        <source>There are no events for this week.</source>
+        <target>Tu çalakî tune bo vê heftê.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyMonth">
+        <source>There are no events for this month.</source>
+        <target>Tu çalakî tune bo vê mehê.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyYear">
+        <source>There are no events for this year.</source>
+        <target>Tu çalakî tune bo îsal.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_empty">
+        <source>Currently there are no events.</source>
+        <target>Niha tu çalakî tune.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_days">
+        <source>This event is repeated every %s. day</source>
+        <target>Ev çalakî her %s. roj tê dubarekirin.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_weeks">
+        <source>This event is repeated every %s. week</source>
+        <target>Ev çalakî her %s. hefte tê dubarekirin.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_months">
+        <source>This event is repeated every %s. month</source>
+        <target>Ev çalakî her %s. meh tê dubarekirin.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_years">
+        <source>This event is repeated every %s. year</source>
+        <target>Ev çalakî her %s. sal tê dubarekirin.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_until">
+        <source>until %s</source>
+        <target>heta %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
