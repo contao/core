@@ -69,7 +69,7 @@ class ContentYouTube extends \ContentElement
 
 			if (is_array($size))
 			{
-				$this->Template->size = ' width="' . $size[0] . 'px" height="' . $size[1] . 'px"';
+				$this->Template->size = ' width="' . $size[0] . '" height="' . $size[1] . '"';
 			}
 		}
 
