@@ -112,6 +112,7 @@ class PagePicker extends Backend
 		$this->Template->value = $this->Session->get('page_selector_search');
 		$this->Template->manager = $GLOBALS['TL_LANG']['MSC']['pageManager'];
 		$this->Template->managerHref = 'contao/main.php?do=page&amp;popup=1';
+		$this->Template->addSearch = true;
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
