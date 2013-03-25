@@ -504,6 +504,12 @@ class Environment
 			$return->class .= ' mobile';
 		}
 
+		// Android tablets are not mobile (see #4150)
+		if ($os == 'Android' && stripos('mobile', $ua) === false)
+		{
+			$mobile = false;
+		}
+
 		$return->browser  = $browser;
 		$return->shorty   = $shorty;
 		$return->version  = $version;
