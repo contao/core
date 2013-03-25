@@ -790,7 +790,6 @@ var Backend =
 		});
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
 			var val = [],
-            	par = opt.id.replace(/_[0-9]+$/, '') + '_parent', // Strip the "edit multiple" suffixes
 				frm = null,
 				frms = window.frames;
 			for (var i=0; i<frms.length; i++) {
@@ -803,10 +802,10 @@ var Backend =
 				alert('Could not find the SimpleModal frame');
 				return;
 			}
-			var inp = frm.document.getElementById(par).getElementsByTagName('input');
+			var inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
 			for (var i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
-                if (!inp[i].id.match(/^reset_/)) val.push(inp[i].get('value'));
+				if (!inp[i].id.match(/^reset_/)) val.push(inp[i].get('value'));
 			}
 			if (opt.tag) {
 				$(opt.tag).value = val.join(',');
@@ -1877,5 +1876,51 @@ var TinyCallback =
 		tinymce.dom.Event.add((tinymce.isGecko ? ed.getDoc() : ed.getWin()), 'focus', function() {
 			Backend.getScrollOffset();
 	    });
+	},
+
+	fileBrowser: function(field_name, url, type, win) {
+		var M = new SimpleModal({
+			'width': 765,
+			'btn_ok': Contao.lang.close,
+			'draggable': false,
+			'overlayOpacity': .5,
+			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
+			'onHide': function() { document.body.setStyle('overflow', 'auto'); }
+		});
+		M.addButton(Contao.lang.close, 'btn', function() {
+			this.hide();
+		});
+		M.addButton(Contao.lang.apply, 'btn primary', function() {
+			var frms = window.frames, frm, val;
+			for (var i=0; i<frms.length; i++) {
+				if (frms[i].name == 'simple-modal-iframe') {
+					frm = frms[i];
+					break;
+				}
+			}
+			if (frm === null) {
+				alert('Could not find the SimpleModal frame');
+				return;
+			}
+			var inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
+			for (var i=0; i<inp.length; i++) {
+				if (inp[i].checked && !inp[i].id.match(/^reset_/)) {
+					val = inp[i].get('value');
+					break;
+				}
+			}
+			if (type == 'page') {
+				win.document.forms[0].elements[field_name].value = '{{link_url::' + val + '}}';
+				if (win.document.forms[0].elements['linktitle']) win.document.forms[0].elements['linktitle'].value = '{{link_title::' + val + '}}';
+			} else {
+				win.document.forms[0].elements[field_name].value = val;
+			}
+			this.hide();
+		});
+		M.show({
+			'title': win.document.title,
+			'contents': '<iframe src="contao/' + ((type == 'page') ? 'page.php' : 'file.php') + '?table=tl_content&amp;field=singleSRC&amp;value=' + url.replace('{{link_url::', '').replace('}}', '') + '" name="simple-modal-iframe" width="100%" height="' + (window.getSize().y-180).toInt() + '" frameborder="0"></iframe>',
+			'model': 'modal'
+		});
 	}
 };

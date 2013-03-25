@@ -16,8 +16,8 @@
 			ed.addCommand('mceTypolinks', function() {
 				ed.windowManager.open({
 					file : url + '/typolinks.php',
-					width : 360 + parseInt(ed.getLang('typolinks.delta_width', 0)),
-					height : 256 + parseInt(ed.getLang('typolinks.delta_height', 0)),
+					width : 340 + parseInt(ed.getLang('typolinks.delta_width', 0)),
+					height : 206 + parseInt(ed.getLang('typolinks.delta_height', 0)),
 					inline : 1
 				}, {
 					plugin_url : url
@@ -44,8 +44,8 @@
 			ed.addCommand('mceTypobox', function() {
 				ed.windowManager.open({
 					file : url + '/typobox.htm',
-					width : 360 + parseInt(ed.getLang('typobox.delta_width', 0)),
-					height : 256 + parseInt(ed.getLang('typobox.delta_height', 0)),
+					width : 340 + parseInt(ed.getLang('typobox.delta_width', 0)),
+					height : 228 + parseInt(ed.getLang('typobox.delta_height', 0)),
 					inline : 1
 				}, {
 					plugin_url : url
@@ -66,7 +66,7 @@
 				author : 'Leo Feyer',
 				authorurl : 'http://www.inetrobots.com',
 				infourl : 'https://contao.org',
-				version : '3.4.6'
+				version : '3.5.0'
 			};
 		}
 	});

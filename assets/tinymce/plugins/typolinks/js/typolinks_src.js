@@ -22,7 +22,7 @@ var LinkDialog = {
 		var f = document.forms[0], ed = tinyMCEPopup.editor;
 
 		// Setup browse button
-		document.getElementById('hrefbrowsercontainer').innerHTML = getBrowserHTML('hrefbrowser', 'href', 'file', 'theme_advanced_link');
+		document.getElementById('hrefbrowsercontainer').innerHTML = getBrowserHTML('hrefbrowser', 'href', 'page', 'theme_advanced_link');
 		if (isVisible('hrefbrowser'))
 			document.getElementById('href').style.width = '180px';
 

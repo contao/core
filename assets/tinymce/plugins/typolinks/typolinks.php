@@ -19,16 +19,9 @@ require '../../../../system/initialize.php';
 
 
 /**
- * Include library class
- */
-require 'typolib.php';
-
-
-/**
  * Generate page
  */
 header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
-$objLib = new typolib();
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -50,17 +43,9 @@ $objLib = new typolib();
 		</ul>
 	</div>
 
-	<div class="panel_wrapper" style="height:178px;">
+	<div class="panel_wrapper" style="height:128px;">
 		<div id="general_panel" class="panel current">
 		<table border="0" cellpadding="4" cellspacing="0">
-          <tr>
-            <td class="nowrap"><label for="tlpage">{#typolinks_dlg.page}</label></td>
-            <td><select id="tlpage" name="tlpage" style="width: 200px" onchange="document.forms[0].tlfile.value='';document.forms[0].href.value=this.value;"><option value="">-</option><?php echo $objLib->createPageList(); ?></select></td>
-          </tr>
-          <tr>
-            <td class="nowrap"><label for="tlfile">{#typolinks_dlg.file}</label></td>
-            <td><select id="tlfile" name="tlfile" style="width: 200px" onchange="document.forms[0].tlpage.value='';document.forms[0].href.value=this.value;"><option value="">-</option><?php echo $objLib->createFileList(); ?></select></td>
-          </tr>
           <tr>
             <td class="nowrap"><label for="href">{#typolinks_dlg.link_url}</label></td>
             <td><table border="0" cellspacing="0" cellpadding="0">

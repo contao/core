@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### Improved
+Use the Contao page and file pickers in TinyMCE (see #1698).
+
+### Improved
 Pre-fill the "alt" and "caption" fields with the file meta data (see #5225).
 
 ### Improved
