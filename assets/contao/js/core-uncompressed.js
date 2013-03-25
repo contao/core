@@ -1901,7 +1901,7 @@ var TinyCallback =
 			this.hide();
 		});
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
-			var frms = window.frames, frm, val;
+			var frms = window.frames, frm, val, prev;
 			for (var i=0; i<frms.length; i++) {
 				if (frms[i].name == 'simple-modal-iframe') {
 					frm = frms[i];
@@ -1921,9 +1921,15 @@ var TinyCallback =
 			}
 			if (type == 'page') {
 				win.document.forms[0].elements[field_name].value = '{{link_url::' + val + '}}';
-				if (win.document.forms[0].elements['linktitle']) win.document.forms[0].elements['linktitle'].value = '{{link_title::' + val + '}}';
+				if (win.document.forms[0].elements['linktitle']) {
+					win.document.forms[0].elements['linktitle'].value = '{{link_title::' + val + '}}';
+				}
 			} else {
 				win.document.forms[0].elements[field_name].value = val;
+				if (prev = win.document.getElementById('prev')) {
+					var u = new URI(val);
+					prev.innerHTML = '<img id="previewImg" src="' + u.toAbsolute() + '" border="0">';
+				}
 			}
 			this.hide();
 		});
