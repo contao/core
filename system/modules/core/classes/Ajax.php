@@ -234,7 +234,16 @@ class Ajax extends \Backend
 				$arrData['name'] = \Input::post('name');
 
 				$objWidget = new $GLOBALS['BE_FFL']['fileSelector']($arrData, $dc);
-				echo $objWidget->generateAjax($this->strAjaxId, \Input::post('field'), intval(\Input::post('level')));
+
+				// Load a particular node
+				if (\Input::post('folder', true) != '')
+				{
+					echo $objWidget->generateAjax(\Input::post('folder', true), \Input::post('field'), intval(\Input::post('level')));
+				}
+				else
+				{
+					echo $objWidget->generate();
+				}
 				exit; break;
 
 			// Reload the page/file picker
@@ -271,8 +280,29 @@ class Ajax extends \Backend
 					die('Bad Request');
 				}
 
+				$varValue = \Input::post('value');
+
+				// Convert the selected paths to IDs
+				if ($varValue != '')
+				{
+					$varValue = trimsplit(',', $varValue);
+
+					foreach ($varValue as $k=>$v)
+					{
+						$objImage = \FilesModel::findByPath($v);
+
+						if ($objImage === null)
+						{
+							// TODO: create the DB entry
+						}
+
+						$varValue[$k] = $objImage->id;
+					}
+
+					$varValue = serialize($varValue);
+				}
+
 				// Set the new value
-				$varValue = serialize(trimsplit(',', \Input::post('value')));
 				$objRow->$strField = $varValue;
 
 				$arrAttribs['strTable'] = $dc->table;

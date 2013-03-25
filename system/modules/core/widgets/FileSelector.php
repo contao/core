@@ -41,33 +41,10 @@ class FileSelector extends \Widget
 	protected $arrNodes = array();
 
 	/**
-	 * Extension filter
-	 * @var string
-	 */
-	protected $strExtensions = '';
-
-	/**
-	 * Sort flag
-	 * @var string
-	 */
-	protected $strSortFlag = '';
-
-	/**
 	 * Template
 	 * @var string
 	 */
 	protected $strTemplate = 'be_widget';
-
-
-	/**
-	 * Load the database object
-	 * @param array
-	 */
-	public function __construct($arrAttributes=null)
-	{
-		$this->import('Database');
-		parent::__construct($arrAttributes);
-	}
 
 
 	/**
@@ -77,104 +54,28 @@ class FileSelector extends \Widget
 	public function generate()
 	{
 		$this->import('BackendUser', 'User');
+		$this->convertValuesToPaths();
 
-		// Store the keyword
-		if (\Input::post('FORM_SUBMIT') == 'item_selector')
+		// Show a custom path (see #4926)
+		if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']))
 		{
-			$this->Session->set('file_selector_search', \Input::post('keyword'));
-			$this->reload();
+			$tree = $this->renderFiletree(TL_ROOT . '/' . $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path'], 0);
 		}
 
-		// Extension filter
-		if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['extensions'] != '')
+		// Start from root
+		elseif ($this->User->isAdmin)
 		{
-			$this->strExtensions = " AND (type='folder' OR extension IN('" . implode("','", trimsplit(',', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['extensions'])) . "'))";
+			$tree = $this->renderFiletree(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'], 0);
 		}
 
-		// Sort descending
-		if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['flag']) && ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['flag'] % 2) == 0)
-		{
-			$this->strSortFlag = ' DESC';
-		}
-
-		$tree = '';
-		$this->getPathNodes();
-		$for = $this->Session->get('file_selector_search');
-		$arrIds = array();
-
-		// Search for a specific file
-		if ($for != '')
-		{
-			// The keyword must not start with a wildcard (see #4910)
-			if (strncmp($for, '*', 1) === 0)
-			{
-				$for = substr($for, 1);
-			}
-
-			$objRoot = $this->Database->prepare("SELECT id FROM tl_files WHERE CAST(name AS CHAR) REGEXP ?{$this->strExtensions} ORDER BY type='file', name{$this->strSortFlag}")
-									  ->execute($for);
-
-			if ($objRoot->numRows > 0)
-			{
-				// Respect existing limitations
-				if ($this->User->isAdmin)
-				{
-					$arrIds = $objRoot->fetchEach('id');
-				}
-				else
-				{
-					$arrRoot = array();
-
-					while ($objRoot->next())
-					{
-						if (count(array_intersect($this->User->filemountIds, $this->Database->getParentRecords($objRoot->id, 'tl_files'))) > 0)
-						{
-							$arrRoot[] = $objRoot->id;
-						}
-					}
-
-					$arrIds = $arrRoot;
-				}
-			}
-
-			// Build the tree
-			foreach ($arrIds as $id)
-			{
-				$tree .= $this->renderFiletree($id, -20, false, true);
-			}
-		}
+		// Show mounted files to regular users
 		else
 		{
-			// Show a custom path (see #4926)
-			if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path'] != '')
+			$tree = '';
+
+			foreach ($this->eliminateNestedPaths($this->User->filemounts) as $node)
 			{
-				$objFolder = \FilesModel::findByPath($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']);
-
-				if ($objFolder !== null)
-				{
-					$tree .= $this->renderFiletree($objFolder->id, -20);
-				}
-			}
-
-			// Show all files to admins
-			elseif ($this->User->isAdmin)
-			{
-				$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=?{$this->strExtensions} ORDER BY type='file', name{$this->strSortFlag}")
-										  ->execute(0);
-
-				while ($objFile->next())
-				{
-					$tree .= $this->renderFiletree($objFile->id, -20);
-				}
-			}
-
-			// Show mounted files to regular users
-			else
-			{
-				foreach ($this->eliminateNestedPages($this->User->filemountIds, 'tl_files') as $node)
-				{
-					$tree .= $this->renderFiletree($node, -20);
-				}
+				$tree .= $this->renderFiletree(TL_ROOT . '/' . $node, 0, true);
 			}
 		}
 
@@ -201,9 +102,10 @@ class FileSelector extends \Widget
 	 * @param integer
 	 * @param string
 	 * @param integer
+	 * @param boolean
 	 * @return string
 	 */
-	public function generateAjax($id, $strField, $level)
+	public function generateAjax($folder, $strField, $level, $mount=false)
 	{
 		if (!\Environment::get('isAjaxRequest'))
 		{
@@ -224,6 +126,8 @@ class FileSelector extends \Widget
 				break;
 
 			case 'Table':
+				$this->import('Database');
+
 				if (!$this->Database->fieldExists($this->strField, $this->strTable))
 				{
 					break;
@@ -240,46 +144,32 @@ class FileSelector extends \Widget
 				break;
 		}
 
-		// Extension filter
-		if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['extensions'] != '')
-		{
-			$this->strExtensions = " AND (type='folder' OR extension IN('" . implode("','", trimsplit(',', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['extensions'])) . "'))";
-		}
-
-		// Sort descending
-		if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['flag']) && ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['flag'] % 2) == 0)
-		{
-			$this->strSortFlag = ' DESC';
-		}
-
-		$this->getPathNodes();
-
-		// Load the requested nodes
-		$tree = '';
-		$level = $level * 20;
-
-		$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=?{$this->strExtensions} ORDER BY type='file', name{$this->strSortFlag}")
-								  ->execute($id);
-
-		while ($objFile->next())
-		{
-			$tree .= $this->renderFiletree($objFile->id, $level);
-		}
-
-		return $tree;
+		$this->convertValuesToPaths();
+		return $this->renderFiletree(TL_ROOT . '/' . $folder, ($level * 20), $mount);
 	}
 
 
 	/**
 	 * Recursively render the filetree
+	 * @param string
 	 * @param integer
-	 * @param integer
-	 * @param boolean
 	 * @param boolean
 	 * @return string
 	 */
-	protected function renderFiletree($id, $intMargin, $protectedPage=false, $blnNoRecursion=false)
+	protected function renderFiletree($path, $intMargin, $mount=false)
 	{
+		// Invalid path
+		if (!is_dir($path))
+		{
+			return '';
+		}
+
+		// Make sure that $this->varValue is an array (see #3369)
+		if (!is_array($this->varValue))
+		{
+			$this->varValue = array($this->varValue);
+		}
+
 		static $session;
 		$session = $this->Session->getData();
 
@@ -287,126 +177,174 @@ class FileSelector extends \Widget
 		$node = 'tree_' . $this->strTable . '_' . $this->strField;
 		$xtnode = 'tree_' . $this->strTable . '_' . $this->strName;
 
-		// Get the session data and toggle the nodes
-		if (\Input::get($flag.'tg'))
+		// Get session data and toggle nodes
+		if ($this->Input->get($flag.'tg'))
 		{
-			$session[$node][\Input::get($flag.'tg')] = (isset($session[$node][\Input::get($flag.'tg')]) && $session[$node][\Input::get($flag.'tg')] == 1) ? 0 : 1;
+			$session[$node][$this->Input->get($flag.'tg')] = (isset($session[$node][$this->Input->get($flag.'tg')]) && $session[$node][$this->Input->get($flag.'tg')] == 1) ? 0 : 1;
 			$this->Session->setData($session);
 			$this->redirect(preg_replace('/(&(amp;)?|\?)'.$flag.'tg=[^& ]*/i', '', \Environment::get('request')));
 		}
 
-		$strWhere = (($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly']) ? "" : " AND type='folder'") . $this->strExtensions;
-
-		// Get the current element
-		$objFile = $this->Database->prepare("SELECT id, type, name, path FROM tl_files WHERE id=?$strWhere")
-								  ->limit(1)
-								  ->execute($id);
-
-		// Return if there is no result
-		if ($objFile->numRows < 1)
-		{
-			return '';
-		}
-
 		$return = '';
 		$intSpacing = 20;
-		$childs = array();
-
-		// Check whether there are child records
-		if (!$blnNoRecursion)
-		{
-			$objNodes = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=?$strWhere ORDER BY type='file', name{$this->strSortFlag}")
-									   ->execute($id);
-
-			if ($objNodes->numRows)
-			{
-				$childs = $objNodes->fetchEach('id');
-			}
-		}
-
-		$return .= "\n    " . '<li class="'.(($objFile->type == 'folder') ? 'tl_folder' : 'tl_file').'" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
-
-		$folderAttribute = 'style="margin-left:20px"';
-		$session[$node][$id] = is_numeric($session[$node][$id]) ? $session[$node][$id] : 0;
+		$files = array();
+		$folders = array();
 		$level = ($intMargin / $intSpacing + 1);
-		$blnIsOpen = ($session[$node][$id] == 1 || in_array($id, $this->arrNodes));
 
-		if (!empty($childs))
+		// Mount folder
+		if ($mount)
 		{
-			$folderAttribute = '';
-			$img = $blnIsOpen ? 'folMinus.gif' : 'folPlus.gif';
-			$alt = $blnIsOpen ? $GLOBALS['TL_LANG']['MSC']['collapseNode'] : $GLOBALS['TL_LANG']['MSC']['expandNode'];
-			$return .= '<a href="'.$this->addToUrl($flag.'tg='.$id).'" title="'.specialchars($alt).'" onclick="Backend.getScrollOffset();return AjaxRequest.toggleFiletree(this,\''.$xtnode.'_'.$id.'\',\''.$this->strField.'\',\''.$this->strName.'\','.$level.')">'.\Image::getHtml($img, '', 'style="margin-right:2px"').'</a>';
+			$folders = array($path);
 		}
 
-		// Get the icon
-		if ($objFile->type == 'folder')
-		{
-			$file = null;
-			$image = !empty($childs) ? 'folderC.gif' : 'folderO.gif';
-		}
+		// Scan directory and sort the result
 		else
 		{
-			$file = new \File($objFile->path, true);
-			$image = $file->icon;
-		}
-
-		$thumbnail = '';
-
-		// Generate the thumbnail
-		if ($objFile->type == 'file')
-		{
-			if ($file->isGdImage && $file->height > 0)
+			foreach (scan($path) as $v)
 			{
-				$thumbnail = ' <span class="tl_gray">('.$this->getReadableSize($file->filesize).', '.$file->width.'x'.$file->height.' px)</span>';
-
-				if ($GLOBALS['TL_CONFIG']['thumbnails'] && $file->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $file->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+				if (!is_dir($path.'/'.$v) && $v != '.DS_Store')
 				{
-					$_height = ($file->height < 50) ? $file->height : 50;
-					$_width = (($file->width * $_height / $file->height) > 400) ? 90 : '';
-					$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($objFile->path, $_width, $_height) . '" alt="" style="margin-bottom:2px">';
+					$files[] = $path.'/'.$v;
+					continue;
+				}
+
+				if (substr($v, 0, 1) != '.')
+				{
+					$folders[] = $path.'/'.$v;
 				}
 			}
+		}
+
+		natcasesort($folders);
+		$folders = array_values($folders);
+
+		natcasesort($files);
+		$files = array_values($files);
+
+		$folderClass = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] ? 'tl_folder' : 'tl_file';
+
+		// Process folders
+		for ($f=0; $f<count($folders); $f++)
+		{
+			$countFiles = 0;
+			$return .= "\n    " . '<li class="'.$folderClass.'" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)"><div class="tl_left" style="padding-left:'.$intMargin.'px">';
+
+			// Check whether there are subfolders or files
+			foreach (scan($folders[$f]) as $v)
+			{
+				if (is_dir($folders[$f].'/'.$v) || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'])
+				{
+					$countFiles++;
+				}
+			}
+
+			$tid = md5($folders[$f]);
+			$folderAttribute = 'style="margin-left:20px"';
+			$session[$node][$tid] = is_numeric($session[$node][$tid]) ? $session[$node][$tid] : 0;
+			$currentFolder = str_replace(TL_ROOT.'/', '', $folders[$f]);
+			$blnIsOpen = ($session[$node][$tid] == 1 || count(preg_grep('/^' . preg_quote($currentFolder, '/') . '\//', $this->varValue)) > 0);
+
+			// Add a toggle button if there are childs
+			if ($countFiles > 0)
+			{
+				$folderAttribute = '';
+				$img = $blnIsOpen ? 'folMinus.gif' : 'folPlus.gif';
+				$alt = $blnIsOpen ? $GLOBALS['TL_LANG']['MSC']['collapseNode'] : $GLOBALS['TL_LANG']['MSC']['expandNode'];
+				$return .= '<a href="'.$this->addToUrl($flag.'tg='.$tid).'" title="'.specialchars($alt).'" onclick="return AjaxRequest.toggleFiletree(this,\''.$xtnode.'_'.$tid.'\',\''.$currentFolder.'\',\''.$this->strField.'\',\''.$this->strName.'\','.$level.')">'.\Image::getHtml($img, '', 'style="margin-right:2px"').'</a>';
+			}
+
+			$folderImg = ($blnIsOpen && $countFiles > 0) ? 'folderO.gif' : 'folderC.gif';
+			$folderLabel = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] ? '<strong>'.specialchars(basename($currentFolder)).'</strong>' : specialchars(basename($currentFolder));
+
+			// Prevent folder selection
+			if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly'])
+			{
+				$return .= \Image::getHtml($folderImg, '', $folderAttribute).' <label>'.$folderLabel.'</label></div> <div class="tl_right">&nbsp;';
+			}
+
+			// Add a checkbox or radio button
 			else
 			{
-				$thumbnail = ' <span class="tl_gray">('.$this->getReadableSize($file->filesize).')</span>';
+				$return .= \Image::getHtml($folderImg, '', $folderAttribute).' <label for="'.$this->strName.'_'.md5($currentFolder).'">'.$folderLabel.'</label></div> <div class="tl_right">';
+
+				switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])
+				{
+					case 'checkbox':
+						$return .= '<input type="checkbox" name="'.$this->strName.'[]" id="'.$this->strName.'_'.md5($currentFolder).'" class="tl_tree_checkbox" value="'.specialchars($currentFolder).'" onfocus="Backend.getScrollOffset()"'.$this->optionChecked($currentFolder, $this->varValue).'>';
+						break;
+
+					case 'radio':
+						$return .= '<input type="radio" name="'.$this->strName.'" id="'.$this->strName.'_'.md5($currentFolder).'" class="tl_tree_radio" value="'.specialchars($currentFolder).'" onfocus="Backend.getScrollOffset()"'.$this->optionChecked($currentFolder, $this->varValue).'>';
+						break;
+				}
+			}
+
+			$return .= '</div><div style="clear:both"></div></li>';
+
+			// Call the next node
+			if ($countFiles > 0 && $blnIsOpen)
+			{
+				$return .= '<li class="parent" id="'.$xtnode.'_'.$tid.'"><ul class="level_'.$level.'">';
+				$return .= $this->renderFiletree($folders[$f], ($intMargin + $intSpacing));
+				$return .= '</ul></li>';
 			}
 		}
 
-		// Add the file name
-		$return .= \Image::getHtml($image, '', $folderAttribute).' <label title="'.specialchars($objFile->path).'" for="'.$this->strName.'_'.$id.'">'.(($objFile->type == 'folder') ? '<strong>' : '').$objFile->name.(($objFile->type == 'folder') ? '</strong>' : '').'</label>'.$thumbnail.'</div> <div class="tl_right">';
-
-		// Add a checkbox or radio button
-		if ($objFile->type == 'file' || !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly'])
+		// Process files
+		if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'])
 		{
-			$value = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['paths'] ? $objFile->path : $id;
+			$allowedExtensions = null;
 
-			switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])
+			if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['extensions']))
 			{
-				case 'checkbox':
-					$return .= '<input type="checkbox" name="'.$this->strName.'[]" id="'.$this->strName.'_'.$id.'" class="tl_tree_checkbox" value="'.specialchars($value).'" onfocus="Backend.getScrollOffset()"'.static::optionChecked($value, $this->varValue).'>';
-					break;
-
-				default:
-				case 'radio':
-					$return .= '<input type="radio" name="'.$this->strName.'" id="'.$this->strName.'_'.$id.'" class="tl_tree_radio" value="'.specialchars($value).'" onfocus="Backend.getScrollOffset()"'.static::optionChecked($value, $this->varValue).'>';
-					break;
-			}
-		}
-
-		$return .= '</div><div style="clear:both"></div></li>';
-
-		// Begin a new submenu
-		if (!empty($childs) && ($blnIsOpen || $this->Session->get('file_selector_search') != ''))
-		{
-			$return .= '<li class="parent" id="'.$node.'_'.$id.'"><ul class="level_'.$level.'">';
-
-			for ($k=0; $k<count($childs); $k++)
-			{
-				$return .= $this->renderFiletree($childs[$k], ($intMargin + $intSpacing), $objFile->protected);
+				$allowedExtensions = trimsplit(',', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['extensions']);
 			}
 
-			$return .= '</ul></li>';
+			for ($h=0; $h<count($files); $h++)
+			{
+				$thumbnail = '';
+				$currentFile = str_replace(TL_ROOT . '/', '', $files[$h]);
+				$currentEncoded = $this->urlEncode($currentFile);
+
+				$objFile = new \File($currentFile);
+
+				// Check file extension
+				if (is_array($allowedExtensions) && !in_array($objFile->extension, $allowedExtensions))
+				{
+					continue;
+				}
+
+				$return .= "\n    " . '<li class="tl_file" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
+
+				// Generate thumbnail
+				if ($objFile->isGdImage && $objFile->height > 0)
+				{
+					$thumbnail .= ' <span class="tl_gray">(' . $objFile->width . 'x' . $objFile->height . ')</span>';
+
+					if ($GLOBALS['TL_CONFIG']['thumbnails'] && $objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+					{
+						$_height = ($objFile->height < 70) ? $objFile->height : 70;
+						$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';
+						$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($currentEncoded, $_width, $_height) . '" alt="" style="margin:0px 0px 2px 23px">';
+					}
+				}
+
+				$return .= \Image::getHtml($objFile->icon, $objFile->mime).' <label for="'.$this->strName.'_'.md5($currentFile).'">'.utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']).'</label>'.$thumbnail.'</div> <div class="tl_right">';
+
+				// Add checkbox or radio button
+				switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])
+				{
+					case 'checkbox':
+						$return .= '<input type="checkbox" name="'.$this->strName.'[]" id="'.$this->strName.'_'.md5($currentFile).'" class="tl_tree_checkbox" value="'.specialchars($currentFile).'" onfocus="Backend.getScrollOffset()"'.$this->optionChecked($currentFile, $this->varValue).'>';
+						break;
+
+					case 'radio':
+						$return .= '<input type="radio" name="'.$this->strName.'" id="'.$this->strName.'_'.md5($currentFile).'" class="tl_tree_radio" value="'.specialchars($currentFile).'" onfocus="Backend.getScrollOffset()"'.$this->optionChecked($currentFile, $this->varValue).'>';
+						break;
+				}
+
+				$return .= '</div><div style="clear:both"></div></li>';
+			}
 		}
 
 		return $return;
@@ -414,11 +352,11 @@ class FileSelector extends \Widget
 
 
 	/**
-	 * Get the IDs of all parent folders of the selected files, so they are expanded automatically
+	 * Translate the file IDs to file paths
 	 */
-	protected function getPathNodes()
+	protected function convertValuesToPaths()
 	{
-		if (!$this->varValue)
+		if (empty($this->varValue))
 		{
 			return;
 		}
@@ -427,12 +365,16 @@ class FileSelector extends \Widget
 		{
 			$this->varValue = array($this->varValue);
 		}
-
-		foreach ($this->varValue as $id)
+		elseif (empty($this->varValue[0]))
 		{
-			$arrPids = $this->Database->getParentRecords($id, 'tl_files');
-			array_shift($arrPids); // the first element is the ID of the page itself
-			$this->arrNodes = array_merge($this->arrNodes, $arrPids);
+			$this->varValue = array();
+		}
+
+		$objFiles = \FilesModel::findMultipleByIds($this->varValue);
+
+		if ($objFiles !== null)
+		{
+			$this->varValue = array_values($objFiles->fetchEach('path'));
 		}
 	}
 }
