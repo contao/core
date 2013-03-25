@@ -213,7 +213,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['options'],
 			'exclude'                 => true,
 			'inputType'               => 'optionWizard',
-			'eval'                    => array('mandatory'=>true),
+			'eval'                    => array('mandatory'=>true, 'allowHtml'=>true),
 			'sql'                     => "blob NULL"
 		),
 		'mandatory' => array
