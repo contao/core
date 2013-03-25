@@ -229,13 +229,61 @@ class Ajax extends \Backend
 
 			// Load nodes of the file tree
 			case 'loadFiletree':
-			case 'loadPagetree':
 				$arrData['strTable'] = $dc->table;
 				$arrData['id'] = $this->strAjaxName ?: $dc->id;
 				$arrData['name'] = \Input::post('name');
 
 				$objWidget = new $GLOBALS['BE_FFL']['fileSelector']($arrData, $dc);
 				echo $objWidget->generateAjax($this->strAjaxId, \Input::post('field'), intval(\Input::post('level')));
+				exit; break;
+
+			// Reload the page/file picker
+			case 'reloadPagetree':
+			case 'reloadFiletree':
+				$intId = \Input::get('id');
+				$strField = $strFieldName = \Input::post('name');
+
+				// Handle the keys in "edit multiple" mode
+				if (\Input::get('act') == 'editAll')
+				{
+					$intId = preg_replace('/.*_([0-9a-zA-Z]+)$/', '$1', $strField);
+					$strField = preg_replace('/(.*)_[0-9a-zA-Z]+$/', '$1', $strField);
+				}
+
+				$strKey = ($this->strAction == 'reloadPagetree') ? 'pageTree' : 'fileTree';
+
+				// The field does not exist
+				if (!$this->Database->fieldExists($strField, $dc->table))
+				{
+					$this->log('Field "' . $strField . '" does not exist in table "' . $dc->table . '"', 'Ajax executePostActions()', TL_ERROR);
+					header('HTTP/1.1 400 Bad Request');
+					die('Bad Request');
+				}
+
+				$objRow = $this->Database->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
+										 ->execute($intId);
+
+				// The record does not exist
+				if ($objRow->numRows < 1)
+				{
+					$this->log('A record with the ID "' . $intId . '" does not exist in table "' . $dc->table . '"', 'Ajax executePostActions()', TL_ERROR);
+					header('HTTP/1.1 400 Bad Request');
+					die('Bad Request');
+				}
+
+				// Set the new value
+				$varValue = serialize(trimsplit(',', \Input::post('value')));
+				$objRow->$strField = $varValue;
+
+				$arrAttribs['strTable'] = $dc->table;
+				$arrAttribs['strField'] = $strField;
+				$arrAttribs['activeRecord'] = $objRow;
+				$arrAttribs['id'] = $strFieldName;
+				$arrAttribs['name'] = $strFieldName;
+				$arrAttribs['value'] = $varValue;
+
+				$objWidget = new $GLOBALS['BE_FFL'][$strKey]($arrAttribs);
+				echo $objWidget->generate();
 				exit; break;
 
 			// Feature/unfeature an element
