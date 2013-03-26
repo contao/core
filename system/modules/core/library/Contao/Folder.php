@@ -303,81 +303,20 @@ class Folder extends \System
 	 */
 	public function copyTo($strNewName)
 	{
-		if (!$this->blnSyncDb)
+		$strParent = dirname($strNewName);
+
+		// Create the parent folder if it does not exist
+		if (!is_dir(TL_ROOT . '/' . $strParent))
 		{
-			$return = $this->Files->rcopy($this->strFolder, $strNewName);
+			new \Folder($strParent);
 		}
-		else
+
+		$return = $this->Files->rcopy($this->strFolder, $strNewName);
+
+		// Update the database AFTER the folder has been renamed
+		if ($this->blnSyncDb)
 		{
-			// Find the corresponding DB entry
-			$objFile = \FilesModel::findByPath($this->strFolder, array('uncached'=>true));
-
-			if ($objFile === null)
-			{
-				$objFile = \Dbafs::addResource($this->strFolder);
-			}
-
-			$strParent = dirname($strNewName);
-
-			// Create the parent folder if it does not exist
-			if (!is_dir(TL_ROOT . '/' . $strParent))
-			{
-				new \Folder($strParent);
-			}
-
-			$objNewFolder = clone $objFile->current();
-
-			// Set the parent ID
-			if ($strParent == $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				$objNewFolder->pid = 0;
-			}
-			else
-			{
-				$objFolder = \FilesModel::findByPath($strParent, array('uncached'=>true));
-
-				if ($objFolder === null)
-				{
-					$objFolder = \Dbafs::addResource($strParent);
-				}
-
-				$objNewFolder->pid = $objFolder->id;
-			}
-
-			// Update the database
-			$objNewFolder->tstamp = time();
-			$objNewFolder->path = $strNewName;
-			$objNewFolder->name = basename($strNewName);
-			$objNewFolder->save();
-
-			// Update all child records
-			$objFiles = \FilesModel::findMultipleByBasepath($this->strFolder . '/');
-
-			if ($objFiles !== null)
-			{
-				while ($objFiles->next())
-				{
-					$objNewFile = clone $objFiles->current();
-
-					$objNewFile->pid = $objNewFolder->id;
-					$objNewFile->tstamp = time();
-					$objNewFile->path = $strNewName . '/' . $objFiles->name;
-					$objNewFile->save();
-				}
-			}
-
-			// Copy the folder
-			$return = $this->Files->rcopy($this->strFolder, $strNewName);
-
-			// Update the MD5 hash of the parent folders
-			if ($strParent != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				\Dbafs::updateFolderHashes($strParent);
-			}
-			if (($strPath = dirname($this->strFolder)) != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				\Dbafs::updateFolderHashes($strPath);
-			}
+			\Dbafs::copyResource($this->strFolder, $strNewName);
 		}
 
 		return $return;

@@ -602,65 +602,20 @@ class File extends \System
 	 */
 	public function copyTo($strNewName)
 	{
-		if (!$this->blnSyncDb)
+		$strParent = dirname($strNewName);
+
+		// Create the parent folder if it does not exist
+		if (!is_dir(TL_ROOT . '/' . $strParent))
 		{
-			$return = $this->Files->copy($this->strFile, $strNewName);
+			new \Folder($strParent);
 		}
-		else
+
+		$return = $this->Files->copy($this->strFile, $strNewName);
+
+		// Update the database AFTER the file has been renamed
+		if ($this->blnSyncDb)
 		{
-			// Find the corresponding DB entry
-			$objFile = \FilesModel::findByPath($this->strFile, array('uncached'=>true));
-
-			if ($objFile === null)
-			{
-				$objFile = \Dbafs::addResource($this->strFile);
-			}
-
-			$strParent = dirname($strNewName);
-
-			// Create the parent folder if it does not exist
-			if (!is_dir(TL_ROOT . '/' . $strParent))
-			{
-				new \Folder($strParent);
-			}
-
-			$objNewFile = clone $objFile->current();
-
-			// Set the parent ID
-			if ($strParent == $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				$objNewFile->pid = 0;
-			}
-			else
-			{
-				$objFolder = \FilesModel::findByPath($strParent, array('uncached'=>true));
-
-				if ($objFolder === null)
-				{
-					$objFolder = \Dbafs::addResource($strParent);
-				}
-
-				$objNewFile->pid = $objFolder->id;
-			}
-
-			// Copy the file
-			$return = $this->Files->copy($this->strFile, $strNewName);
-
-			// Update the database
-			$objNewFile->tstamp = time();
-			$objNewFile->path = $strNewName;
-			$objNewFile->name = basename($strNewName);
-			$objNewFile->save();
-
-			// Update the MD5 hash of the parent folders
-			if ($strParent != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				\Dbafs::updateFolderHashes($strParent);
-			}
-			if (($strPath = dirname($this->strFile)) != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				\Dbafs::updateFolderHashes($strPath);
-			}
+			\Dbafs::copyResource($this->strFile, $strNewName);
 		}
 
 		return $return;

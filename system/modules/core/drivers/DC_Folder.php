@@ -549,64 +549,24 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Copy folders
 		if (is_dir(TL_ROOT . '/' . $source))
 		{
-			$new = $destination;
 			$count = 1;
+			$new = $destination;
 
+			// Add a suffix if the folder exists
 			while (is_dir(TL_ROOT . '/' . $new) && $count < 12)
 			{
 				$new = $destination . '_' . $count++;
 			}
 
 			$destination = $new;
-			$strFolder = dirname($destination);
 
-			// Find the corresponding DB entries
-			if ($this->blnIsDbAssisted)
-			{
-				$objFolder = \FilesModel::findByPath($source);
+			// Create the target folder
+			$this->Files->mkdir($destination);
 
-				if ($objFolder === null)
-				{
-					$objFolder = \Dbafs::addResource($source);
-				}
-
-				$objNewFolder = clone $objFolder->current();
-
-				// Set the parent ID
-				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					$objNewFolder->pid = 0;
-				}
-				else
-				{
-					$objFolder = \FilesModel::findByPath($strFolder);
-
-					if ($objFolder === null)
-					{
-						$objFolder = \Dbafs::addResource($strFolder);
-					}
-
-					$objNewFolder->pid = $objFolder->id;
-				}
-
-				// Create the target folder
-				$this->Files->mkdir($destination);
-
-				// Update the database
-				$objNewFolder->tstamp = time();
-				$objNewFolder->path = $destination;
-				$objNewFolder->name = basename($destination); // see #4628
-				$objNewFolder->save();
-			}
-			else
-			{
-				// Not DB-assisted, so just create the target folder
-				$this->Files->mkdir($destination);
-			}
-
-			// Files
+			// Scan the folder
 			$files = scan(TL_ROOT . '/' . $source);
 
+			// Walk through the files
 			foreach ($files as $file)
 			{
 				if ($file == '.svn' || $file == '.DS_Store')
@@ -620,42 +580,24 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				}
 				else
 				{
-					// Find the corresponding DB entries
-					if ($this->blnIsDbAssisted)
-					{
-						$objFile = \FilesModel::findByPath($source . '/' . $file);
-
-						if ($objFile === null)
-						{
-							$objFile = \Dbafs::addResource($source . '/' . $file);
-						}
-
-						$objNewFile = clone $objFile->current();
-
-						// Copy the file
-						$this->Files->copy($source . '/' . $file, $destination . '/' . $file);
-
-						// Update the database
-						$objNewFile->pid = $objNewFolder->id;
-						$objNewFile->tstamp = time();
-						$objNewFile->path = $destination . '/' . $file;
-						$objNewFile->save();
-					}
-					else
-					{
-						// Not DB-assisted, so just copy the file
-						$this->Files->copy($source . '/' . $file, $destination . '/' . $file);
-					}
+					$this->Files->copy($source . '/' . $file, $destination . '/' . $file);
 				}
+			}
+
+			// Update the database AFTER the folder has been copied
+			if ($this->blnIsDbAssisted)
+			{
+				\Dbafs::copyResource($source, $destination);
 			}
 		}
 
-		// Copy file
+		// Copy a file
 		else
 		{
-			$new = $destination;
 			$count = 1;
+			$new = $destination;
 
+			// Add a suffix if the file exists
 			while (file_exists(TL_ROOT . '/' . $new) && $count < 12)
 			{
 				$ext = pathinfo($destination, PATHINFO_EXTENSION);
@@ -663,50 +605,14 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			$destination = $new;
-			$strFolder = dirname($destination);
 
-			// Find the corresponding DB entries
+			// Copy the file
+			$this->Files->copy($source, $destination);
+
+			// Update the database AFTER the file has been copied
 			if ($this->blnIsDbAssisted)
 			{
-				$objFile = \FilesModel::findByPath($source);
-
-				if ($objFile === null)
-				{
-					$objFile = \Dbafs::addResource($source);
-				}
-
-				$objNewFile = clone $objFile->current();
-
-				// Set the parent ID
-				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					$objNewFile->pid = 0;
-				}
-				else
-				{
-					$objFolder = \FilesModel::findByPath($strFolder);
-
-					if ($objFile === null)
-					{
-						$objFolder = \Dbafs::addResource($strFolder);
-					}
-
-					$objNewFile->pid = $objFolder->id;
-				}
-
-				// Copy the file
-				$this->Files->copy($source, $destination);
-
-				// Update the database
-				$objNewFile->tstamp = time();
-				$objNewFile->path = $destination;
-				$objNewFile->name = basename($destination); // see #4628
-				$objNewFile->save();
-			}
-			else
-			{
-				// Not DB-assisted, so just copy the file
-				$this->Files->copy($source, $destination);
+				\Dbafs::copyResource($source, $destination);
 			}
 		}
 

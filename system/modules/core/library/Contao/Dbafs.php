@@ -161,12 +161,13 @@ class Dbafs
 	 * @param string $strSource      The source path
 	 * @param string $strDestination The target path
 	 *
-	 * @return \FilesModel The source file model
+	 * @return \FilesModel The files model
 	 */
 	public static function moveResource($strSource, $strDestination)
 	{
 		$objFile = \FilesModel::findByPath($strSource, array('cached'=>true));
 
+		// If there is no entry, directly add the destination
 		if ($objFile === null)
 		{
 			$objFile = static::addResource($strDestination);
@@ -222,6 +223,83 @@ class Dbafs
 		}
 
 		return $objFile;
+	}
+
+
+	/**
+	 * Copies a file or folder to a new location
+	 *
+	 * @param string $strSource      The source path
+	 * @param string $strDestination The target path
+	 *
+	 * @return \FilesModel The files model
+	 */
+	public static function copyResource($strSource, $strDestination)
+	{
+		$objFile = \FilesModel::findByPath($strSource, array('cached'=>true));
+
+		// Add the source entry
+		if ($objFile === null)
+		{
+			$objFile = static::addResource($strSource);
+		}
+
+		$strFolder = dirname($strDestination);
+		$objNewFile = clone $objFile->current();
+
+		// Set the new parent ID
+		if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+		{
+			$objNewFile->pid = 0;
+		}
+		else
+		{
+			$objFolder = \FilesModel::findByPath($strFolder, array('cached'=>true));
+
+			if ($objFolder === null)
+			{
+				$objFolder = static::addResource($strFolder);
+			}
+
+			$objNewFile->pid = $objFolder->id;
+		}
+
+		// Save the resource
+		$objNewFile->tstamp = time();
+		$objNewFile->path   = $strDestination;
+		$objNewFile->name   = basename($strDestination);
+		$objNewFile->save();
+
+		// Update all child records
+		if ($objFile->type == 'folder')
+		{
+			$objFiles = \FilesModel::findMultipleByBasepath($strSource . '/', array('cached'=>true));
+
+			if ($objFiles !== null)
+			{
+				while ($objFiles->next())
+				{
+					$objNew = clone $objFiles->current();
+
+					$objNew->pid    = $objNewFile->id;
+					$objNew->tstamp = time();
+					$objNew->path   = $strDestination . '/' . $objFiles->name;
+					$objNew->save();
+				}
+			}
+		}
+
+		// Update the MD5 hash of the parent folders
+		if (($strPath = dirname($strSource)) != $GLOBALS['TL_CONFIG']['uploadPath'])
+		{
+			static::updateFolderHashes($strPath);
+		}
+		if (($strPath = dirname($strDestination)) != $GLOBALS['TL_CONFIG']['uploadPath'])
+		{
+			static::updateFolderHashes($strPath);
+		}
+
+		return $objNewFile;
 	}
 
 
