@@ -289,14 +289,8 @@ class Ajax extends \Backend
 
 					foreach ($varValue as $k=>$v)
 					{
-						$objImage = \FilesModel::findByPath($v);
-
-						if ($objImage === null)
-						{
-							// TODO: create the DB entry
-						}
-
-						$varValue[$k] = $objImage->id;
+						$objResource = \Dbafs::addResource($v);
+						$varValue[$k] = $objResource->id;
 					}
 
 					$varValue = serialize($varValue);

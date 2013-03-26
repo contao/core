@@ -112,6 +112,7 @@ class FilePicker extends Backend
 		$this->Template->value = $this->Session->get('file_selector_search');
 		$this->Template->manager = $GLOBALS['TL_LANG']['MSC']['fileManager'];
 		$this->Template->managerHref = 'contao/main.php?do=files&amp;popup=1';
+		$this->Template->addSearch = false;
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
