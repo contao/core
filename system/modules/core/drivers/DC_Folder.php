@@ -459,7 +459,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 				if ($objFile === null)
 				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $this->intId));
+					$objFile = \Dbafs::addResource($this->intId);
 				}
 
 				// Set the parent ID
@@ -473,7 +473,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 					if ($objFolder === null)
 					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
+						$objFolder = \Dbafs::addResource($strFolder);
 					}
 
 					$objFile->pid = $objFolder->id;
@@ -502,21 +502,13 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				}
 
 				// Update the MD5 hash of the parent folders
-				foreach (array(dirname($this->intId), dirname($destination)) as $strPath)
+				if (($strPath = dirname($this->intId)) != $GLOBALS['TL_CONFIG']['uploadPath'])
 				{
-					if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
-					{
-						$objModel = \FilesModel::findByPath($strPath);
-
-						if ($objModel === null)
-						{
-							throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strPath));
-						}
-
-						$objFolder = new \Folder($objModel->path);
-						$objModel->hash = $objFolder->hash;
-						$objModel->save();
-					}
+					\Dbafs::updateFolderHashes($strPath);
+				}
+				if (($strPath = dirname($destination)) != $GLOBALS['TL_CONFIG']['uploadPath'])
+				{
+					\Dbafs::updateFolderHashes($strPath);
 				}
 			}
 			else
@@ -632,7 +624,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 				if ($objFolder === null)
 				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
+					$objFolder = \Dbafs::addResource($source);
 				}
 
 				$objNewFolder = clone $objFolder->current();
@@ -648,7 +640,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 					if ($objFolder === null)
 					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
+						$objFolder = \Dbafs::addResource($strFolder);
 					}
 
 					$objNewFolder->pid = $objFolder->id;
@@ -692,7 +684,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 						if ($objFile === null)
 						{
-							throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source . '/' . $file));
+							$objFile = \Dbafs::addResource($source . '/' . $file);
 						}
 
 						$objNewFile = clone $objFile->current();
@@ -737,7 +729,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 				if ($objFile === null)
 				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
+					$objFile = \Dbafs::addResource($source);
 				}
 
 				$objNewFile = clone $objFile->current();
@@ -753,7 +745,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 					if ($objFile === null)
 					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
+						$objFolder = \Dbafs::addResource($strFolder);
 					}
 
 					$objNewFile->pid = $objFolder->id;
@@ -781,16 +773,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Update the MD5 hash of the parent folder
 			if ($this->blnIsDbAssisted && $strFolder != $GLOBALS['TL_CONFIG']['uploadPath'])
 			{
-				$objModel = \FilesModel::findByPath($strFolder);
-
-				if ($objModel === null)
-				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
-				}
-
-				$objFolder = new \Folder($objModel->path);
-				$objModel->hash = $objFolder->hash;
-				$objModel->save();
+				\Dbafs::updateFolderHashes($strFolder);
 			}
 
 			// Add a log entry
@@ -891,19 +874,13 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					{
 						$objFile = \FilesModel::findByPath($source . '/' . $file);
 
-						if ($objFile === null)
+						if ($objFile !== null)
 						{
-							throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source . '/' . $file));
+							$objFile->delete();
 						}
+					}
 
-						$this->Files->delete($source . '/' . $file);
-						$objFile->delete();
-					}
-					else
-					{
-						// Not DB-assisted, so just delete the file
-						$this->Files->delete($source . '/' . $file);
-					}
+					$this->Files->delete($source . '/' . $file);
 				}
 			}
 
@@ -912,19 +889,13 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				$objFile = \FilesModel::findByPath($source);
 
-				if ($objFile === null)
+				if ($objFile !== null)
 				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
+					$objFile->delete();
 				}
+			}
 
-				$this->Files->rmdir($source);
-				$objFile->delete();
-			}
-			else
-			{
-				// Not DB-assisted, so just remove the folder
-				$this->Files->rmdir($source);
-			}
+			$this->Files->rmdir($source);
 		}
 
 		// Delete a file
@@ -935,19 +906,13 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				$objFile = \FilesModel::findByPath($source);
 
-				if ($objFile === null)
+				if ($objFile !== null)
 				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
+					$objFile->delete();
 				}
+			}
 
-				$this->Files->delete($source);
-				$objFile->delete();
-			}
-			else
-			{
-				// Not DB-assisted, so just delete the file
-				$this->Files->delete($source);
-			}
+			$this->Files->delete($source);
 		}
 
 		// Do not update the database or redirect upon a recursive call
@@ -956,16 +921,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Update the MD5 hash of the parent folder
 			if ($this->blnIsDbAssisted && $strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
 			{
-				$objModel = \FilesModel::findByPath($strPath);
-
-				if ($objModel === null)
-				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strPath));
-				}
-
-				$objFolder = new \Folder($objModel->path);
-				$objModel->hash = $objFolder->hash;
-				$objModel->save();
+				\Dbafs::updateFolderHashes($strPath);
 			}
 
 			// Add a log entry
@@ -1069,7 +1025,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 					if ($objModel === null)
 					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
+						$objModel = \Dbafs::addResource($strFolder);
 					}
 
 					$pid = $objModel->id;
@@ -1092,17 +1048,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					}
 					else
 					{
-						$objFile = new \File($strFile, true);
-
-						$objNew = new \FilesModel();
-						$objNew->pid       = $pid;
-						$objNew->tstamp    = time();
-						$objNew->type      = 'file';
-						$objNew->path      = $strFile;
-						$objNew->extension = $objFile->extension;
-						$objNew->hash      = md5_file(TL_ROOT . '/' . $strFile);
-						$objNew->name      = $objFile->basename;
-						$objNew->save();
+						\Dbafs::addResource($strFile);
 					}
 				}
 			}
@@ -1125,16 +1071,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Update the hash of the target folder
 			if ($this->blnIsDbAssisted && $strFolder != $GLOBALS['TL_CONFIG']['uploadPath'])
 			{
-				$objModel = \FilesModel::findByPath($strFolder);
-
-				if ($objModel === null)
-				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
-				}
-
-				$objFolder = new \Folder($objModel->path);
-				$objModel->hash = $objFolder->hash;
-				$objModel->save();
+				\Dbafs::updateFolderHashes($strFolder);
 			}
 
 			// Redirect or reload
@@ -1208,7 +1145,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			if ($objFile === null)
 			{
-				throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $this->intId));
+				$objFile = \Dbafs::addResource($this->intId);
 			}
 
 			$this->objActiveRecord = $objFile;
@@ -1499,7 +1436,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 					if ($objFile === null)
 					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $id));
+						$objFile = \Dbafs::addResource($id);
 					}
 
 					$this->objActiveRecord = $objFile;
@@ -1779,7 +1716,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 					if ($objMeta === null)
 					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $objFile->value));
+						$objMeta = \Dbafs::addResource($objFile->value);
 					}
 
 					// Write the file
@@ -1787,7 +1724,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$objFile->close();
 
 					// Update the database
-					$objMeta->hash = md5_file(TL_ROOT . '/' . $objFile->value);
+					$objMeta->hash = $objFile->hash;
 					$objMeta->save();
 				}
 				else
@@ -1942,7 +1879,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 					if ($objFolder === null)
 					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $this->strPath));
+						$objFolder = \Dbafs::addResource($this->strPath);
 					}
 
 					$pid = $objFolder->id;
@@ -1955,16 +1892,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
 
 					// Create the DB entry
-					$objFile = new \FilesModel();
-					$objFile->pid    = $pid;
-					$objFile->tstamp = time();
-					$objFile->type   = 'folder';
-					$objFile->path   = $this->strPath . '/' . $varValue;
-					$objFile->name   = $varValue;
-					$objFile->hash   = '';
-					$objFile->save();
-
-					$this->objActiveRecord = $objFile;
+					$this->objActiveRecord = \Dbafs::addResource($this->strPath . '/' . $varValue . $this->strExtension);
 
 					// Add a log entry
 					$this->log('Folder "'.$this->strPath.'/'.$varValue.$this->strExtension.'" has been created', 'DC_Folder save()', TL_FILES);
@@ -1976,7 +1904,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 					if ($objFile === null)
 					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $this->strPath . '/' . $this->varValue . $this->strExtension));
+						$objFile = \Dbafs::addResource($this->strPath . '/' . $this->varValue . $this->strExtension);
 					}
 
 					// Rename the file
@@ -2013,16 +1941,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				// Also update the MD5 hash of the parent folder
 				if ($objFile->pid > 0)
 				{
-					$objModel = \FilesModel::findByPk($objFile->pid);
-
-					if ($objModel === null)
-					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $objFile->pid));
-					}
-
-					$objFolder = new \Folder($objModel->path);
-					$objModel->hash = $objFolder->hash;
-					$objModel->save();
+					\Dbafs::updateFolderHashes($objFile->pid);
 				}
 			}
 			else

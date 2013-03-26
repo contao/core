@@ -67,7 +67,7 @@ class Dbafs
 		unset($arrChunks);
 
 		$objModel  = null;
-		$objModels = \FilesModel::findMultipleByPaths($arrPaths);
+		$objModels = \FilesModel::findMultipleByPaths($arrPaths, array('cached'=>true));
 
 		// Unset the entries in $arrPaths if the DB entry exists
 		if ($objModels !== null)
@@ -185,7 +185,7 @@ class Dbafs
 		foreach ($arrPaths as $strPath)
 		{
 			$objFolder = new \Folder($strPath);
-			$objModel  = \FilesModel::findByPath($strPath);
+			$objModel  = \FilesModel::findByPath($strPath, array('cached'=>true));
 
 			// The DB entry does not yet exist
 			if ($objModel === null)

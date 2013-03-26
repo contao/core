@@ -421,16 +421,7 @@ abstract class Backend extends \Controller
 				}
 			}
 
-			try
-			{
-				return $dc->$act();
-			}
-			catch (\OutOfSyncException $e)
-			{
-				\Message::addError($e->getMessage());
-				\Message::addInfo($GLOBALS['TL_LANG']['ERR']['dbOutOfSync']);
-				$this->redirect($this->getReferer());
-			}
+			return $dc->$act();
 		}
 
 		return null;

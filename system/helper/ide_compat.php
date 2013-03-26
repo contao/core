@@ -109,6 +109,7 @@ namespace  {
 	abstract class Controller extends Contao\Controller {}
 	abstract class Database extends Contao\Database {}
 	class Date extends Contao\Date {}
+	class Dbafs extends Contao\Dbafs {}
 	class DcaExtractor extends Contao\DcaExtractor {}
 	class Email extends Contao\Email {}
 	class Encryption extends Contao\Encryption {}

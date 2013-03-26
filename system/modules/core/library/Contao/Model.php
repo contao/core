@@ -246,6 +246,17 @@ abstract class Model
 
 
 	/**
+	 * Return the object instance
+	 *
+	 * @return \Model The model object
+	 */
+	public function current()
+	{
+		return $this;
+	}
+
+
+	/**
 	 * Save the current record
 	 *
 	 * @param boolean $blnForceInsert Force creating a new record
