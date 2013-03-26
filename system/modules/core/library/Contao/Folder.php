@@ -212,36 +212,12 @@ class Folder extends \System
 	 */
 	public function delete()
 	{
-		if (!$this->blnSyncDb)
+		$this->Files->rrdir($this->strFolder);
+
+		// Update the database
+		if ($this->blnSyncDb)
 		{
-			$this->Files->rrdir($this->strFolder);
-		}
-		else
-		{
-			// Remove the folder
-			$this->Files->rrdir($this->strFolder);
-
-			// Find the corresponding DB entry
-			$objModel = \FilesModel::findByPath($this->strFolder, array('uncached'=>true));
-
-			if ($objModel !== null)
-			{
-				$objModel->delete();
-			}
-
-			// Remove the DB entries of all subfolders and files
-			$objFiles = \FilesModel::findMultipleByBasepath($this->strFolder . '/');
-
-			if ($objFiles !== null)
-			{
-				while ($objFiles->next())
-				{
-					$objFiles->delete();
-				}
-			}
-
-			// Update the MD5 hash of the parent folders
-			\Dbafs::updateFolderHashes($this->strFolder);
+			\Dbafs::deleteResource($this->strFolder);
 		}
 	}
 

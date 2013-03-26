@@ -283,7 +283,7 @@ class Dbafs
 
 					$objNew->pid    = $objNewFile->id;
 					$objNew->tstamp = time();
-					$objNew->path   = $strDestination . '/' . $objFiles->name;
+					$objNew->path   = str_replace($strSource . '/', $strDestination . '/', $objFiles->path);
 					$objNew->save();
 				}
 			}
@@ -300,6 +300,37 @@ class Dbafs
 		}
 
 		return $objNewFile;
+	}
+
+
+	/**
+	 * Removes a file or folder
+	 *
+	 * @param string $strResource The path to the file or folder
+	 */
+	public static function deleteResource($strResource)
+	{
+		$objModel = \FilesModel::findByPath($strResource, array('uncached'=>true));
+
+		// Remove the resource
+		if ($objModel !== null)
+		{
+			$objModel->delete();
+		}
+
+		// Look for subfolders and files
+		$objFiles = \FilesModel::findMultipleByBasepath($strResource . '/');
+
+		// Remove subfolders and files as well
+		if ($objFiles !== null)
+		{
+			while ($objFiles->next())
+			{
+				$objFiles->delete();
+			}
+		}
+
+		static::updateFolderHashes(dirname($strResource));
 	}
 
 

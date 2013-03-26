@@ -405,28 +405,12 @@ class File extends \System
  */
 	public function delete()
 	{
-		if (!$this->blnSyncDb)
+		$return = $this->Files->delete($this->strFile);
+
+		// Update the database
+		if ($this->blnSyncDb)
 		{
-			$return = $this->Files->delete($this->strFile);
-		}
-		else
-		{
-			// Find the corresponding DB entry
-			$objModel = \FilesModel::findByPath($this->strFile, array('uncached'=>true));
-
-			if ($objModel !== null)
-			{
-				$objModel->delete();
-			}
-
-			// Delete the file
-			$return = $this->Files->delete($this->strFile);
-
-			// Update the MD5 hash of the parent folders
-			if (($strPath = dirname($this->strFile)) != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				\Dbafs::updateFolderHashes($strPath);
-			}
+			\Dbafs::deleteResource($this->strFile);
 		}
 
 		return $return;

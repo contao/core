@@ -499,23 +499,13 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Recursively duplicate files and folders
-	 * @param string
-	 * @param string
 	 */
-	public function copy($source=null, $destination=null)
+	public function copy()
 	{
-		$noReload = ($source != '');
 		$strFolder = \Input::get('pid', true);
 
-		if ($source == '')
-		{
-			$source = $this->intId;
-		}
-
-		if ($destination == '')
-		{
-			$destination = str_replace(dirname($source), $strFolder, $source);
-		}
+		$source = $this->intId;
+		$destination = str_replace(dirname($source), $strFolder, $source);
 
 		$this->isValid($source);
 		$this->isValid($destination);
@@ -559,36 +549,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			$destination = $new;
-
-			// Create the target folder
-			$this->Files->mkdir($destination);
-
-			// Scan the folder
-			$files = scan(TL_ROOT . '/' . $source);
-
-			// Walk through the files
-			foreach ($files as $file)
-			{
-				if ($file == '.svn' || $file == '.DS_Store')
-				{
-					continue;
-				}
-
-				if (is_dir(TL_ROOT . '/' . $source .'/'. $file))
-				{
-					$this->copy($source . '/' . $file, $destination . '/' . $file);
-				}
-				else
-				{
-					$this->Files->copy($source . '/' . $file, $destination . '/' . $file);
-				}
-			}
-
-			// Update the database AFTER the folder has been copied
-			if ($this->blnIsDbAssisted)
-			{
-				\Dbafs::copyResource($source, $destination);
-			}
+			$this->Files->rcopy($source, $destination);
 		}
 
 		// Copy a file
@@ -605,34 +566,22 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			$destination = $new;
-
-			// Copy the file
 			$this->Files->copy($source, $destination);
-
-			// Update the database AFTER the file has been copied
-			if ($this->blnIsDbAssisted)
-			{
-				\Dbafs::copyResource($source, $destination);
-			}
 		}
 
-		// Do not update the database or redirect upon a recursive call
-		if (!$noReload)
+		// Update the database AFTER the file has been copied
+		if ($this->blnIsDbAssisted)
 		{
-			// Update the MD5 hash of the parent folder
-			if ($this->blnIsDbAssisted && $strFolder != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				\Dbafs::updateFolderHashes($strFolder);
-			}
-
-			// Add a log entry
-			if (file_exists(TL_ROOT . '/' . $source) && $this->isMounted($source))
-			{
-				$this->log('File or folder "'.$source.'" has been duplicated', 'DC_Folder copy()', TL_FILES);
-			}
-
-			$this->redirect($this->getReferer());
+			\Dbafs::copyResource($source, $destination);
 		}
+
+		// Add a log entry
+		if (file_exists(TL_ROOT . '/' . $source) && $this->isMounted($source))
+		{
+			$this->log('File or folder "'.$source.'" has been duplicated', 'DC_Folder copy()', TL_FILES);
+		}
+
+		$this->redirect($this->getReferer());
 	}
 
 
@@ -663,9 +612,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Recursively delete files and folders
-	 * @param string
 	 */
-	public function delete($source=null)
+	public function delete()
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'])
 		{
@@ -673,19 +621,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$noReload = ($source != '');
-
-		if ($source == '')
-		{
-			$source = $this->intId;
-		}
-
-		$this->isValid($source);
+		$this->isValid($this->intId);
 
 		// Delete the file or folder
-		if (!file_exists(TL_ROOT . '/' . $source) || !$this->isMounted($source))
+		if (!file_exists(TL_ROOT . '/' . $this->intId) || !$this->isMounted($this->intId))
 		{
-			$this->log('File or folder "'.$source.'" was not mounted or could not be found', 'DC_Folder delete()', TL_ERROR);
+			$this->log('File or folder "'.$this->intId.'" was not mounted or could not be found', 'DC_Folder delete()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -697,86 +638,32 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($source, $this);
+					$this->$callback[0]->$callback[1]($this->intId, $this);
 				}
 			}
 		}
 
 		$this->import('Files');
-		$strPath = dirname($source);
 
-		// Delete folders
-		if (is_dir(TL_ROOT . '/' . $source))
+		// Delete the folder or file
+		if (is_dir(TL_ROOT . '/' . $this->intId))
 		{
-			$files = scan(TL_ROOT . '/' . $source);
-
-			foreach ($files as $file)
-			{
-				if (is_dir(TL_ROOT . '/' . $source . '/' . $file))
-				{
-					$this->delete($source . '/' . $file);
-				}
-				else
-				{
-					// Find the corresponding DB entries
-					if ($this->blnIsDbAssisted && $file != '.DS_Store')
-					{
-						$objFile = \FilesModel::findByPath($source . '/' . $file);
-
-						if ($objFile !== null)
-						{
-							$objFile->delete();
-						}
-					}
-
-					$this->Files->delete($source . '/' . $file);
-				}
-			}
-
-			// Find the corresponding DB entries
-			if ($this->blnIsDbAssisted && $source != '.svn')
-			{
-				$objFile = \FilesModel::findByPath($source);
-
-				if ($objFile !== null)
-				{
-					$objFile->delete();
-				}
-			}
-
-			$this->Files->rmdir($source);
+			$this->Files->rrdir($this->intId);
 		}
-
-		// Delete a file
 		else
 		{
-			// Find the corresponding DB entries
-			if ($this->blnIsDbAssisted)
-			{
-				$objFile = \FilesModel::findByPath($source);
-
-				if ($objFile !== null)
-				{
-					$objFile->delete();
-				}
-			}
-
-			$this->Files->delete($source);
+			$this->Files->delete($this->intId);
 		}
 
-		// Do not update the database or redirect upon a recursive call
-		if (!$noReload)
+		// Update the database
+		if ($this->blnIsDbAssisted)
 		{
-			// Update the MD5 hash of the parent folder
-			if ($this->blnIsDbAssisted && $strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				\Dbafs::updateFolderHashes($strPath);
-			}
-
-			// Add a log entry
-			$this->log('File or folder "'.str_replace(TL_ROOT.'/', '', $source).'" has been deleted', 'DC_Folder delete()', TL_FILES);
-			$this->redirect($this->getReferer());
+			\Dbafs::deleteResource($this->intId);
 		}
+
+		// Add a log entry
+		$this->log('File or folder "'.str_replace(TL_ROOT.'/', '', $this->intId).'" has been deleted', 'DC_Folder delete()', TL_FILES);
+		$this->redirect($this->getReferer());
 	}
 
 
@@ -863,23 +750,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Generate the DB entries
 			if ($this->blnIsDbAssisted)
 			{
-				// Get the parent ID
-				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					$pid = 0;
-				}
-				else
-				{
-					$objModel = \FilesModel::findByPath($strFolder);
-
-					if ($objModel === null)
-					{
-						$objModel = \Dbafs::addResource($strFolder);
-					}
-
-					$pid = $objModel->id;
-				}
-
 				// Upload the files
 				$arrUploaded = $objUploader->uploadTo($strFolder);
 
