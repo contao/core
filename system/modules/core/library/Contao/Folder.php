@@ -268,80 +268,26 @@ class Folder extends \System
 	 */
 	public function renameTo($strNewName)
 	{
-		if (!$this->blnSyncDb)
+		$strParent = dirname($strNewName);
+
+		// Create the parent folder if it does not exist
+		if (!is_dir(TL_ROOT . '/' . $strParent))
 		{
-			if (($return = $this->Files->rename($this->strFolder, $strNewName)) != false)
-			{
-				$this->strFolder = $strNewName;
-			}
+			new \Folder($strParent);
 		}
-		else
+
+		$return = $this->Files->rename($this->strFolder, $strNewName);
+
+		// Update the database AFTER the folder has been renamed
+		if ($this->blnSyncDb)
 		{
-			// Find the corresponding DB entry
-			$objFile = \FilesModel::findByPath($this->strFolder, array('uncached'=>true));
+			\Dbafs::moveResource($this->strFolder, $strNewName);
+		}
 
-			if ($objFile === null)
-			{
-				$objFile = \Dbafs::addResource($this->strFolder);
-			}
-
-			$strParent = dirname($strNewName);
-
-			// Create the parent folder if it does not exist
-			if (!is_dir(TL_ROOT . '/' . $strParent))
-			{
-				new \Folder($strParent);
-			}
-
-			// Set the parent ID
-			if ($strParent == $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				$objFile->pid = 0;
-			}
-			else
-			{
-				$objFolder = \FilesModel::findByPath($strParent, array('uncached'=>true));
-
-				if ($objFolder === null)
-				{
-					$objFolder = \Dbafs::addResource($strParent);
-				}
-
-				$objFile->pid = $objFolder->id;
-			}
-
-			// Update all child records
-			$objFiles = \FilesModel::findMultipleByBasepath($this->strFolder . '/');
-
-			if ($objFiles !== null)
-			{
-				while ($objFiles->next())
-				{
-					$objFiles->path = preg_replace('@^' . $this->strFolder . '/@', $strNewName . '/', $objFiles->path);
-					$objFiles->save();
-				}
-			}
-
-			// Move the folder
-			if (($return = $this->Files->rename($this->strFolder, $strNewName)) != false)
-			{
-				$this->strFolder = $strNewName;
-			}
-
-			// Update the database
-			$objFile->path = $strNewName;
-			$objFile->name = basename($strNewName);
-			$objFile->save();
-
-			// Update the MD5 hash of the parent folders
-			if ($strParent != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				\Dbafs::updateFolderHashes($strParent);
-			}
-			if (($strPath = dirname($this->strFolder)) != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				\Dbafs::updateFolderHashes($strPath);
-			}
+		// Reset the object AFTER the database has been updated
+		if ($return != false)
+		{
+			$this->strFolder = $strNewName;
 		}
 
 		return $return;

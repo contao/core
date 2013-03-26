@@ -565,72 +565,28 @@ class File extends \System
 	 */
 	public function renameTo($strNewName)
 	{
-		if (!$this->blnSyncDb)
+		$strParent = dirname($strNewName);
+
+		// Create the parent folder if it does not exist
+		if (!is_dir(TL_ROOT . '/' . $strParent))
 		{
-			if (($return = $this->Files->rename($this->strFile, $strNewName)) != false)
-			{
-				$this->strFile = $strNewName;
-				$this->arrImageSize = array();
-				$this->arrPathinfo = array();
-			}
+			new \Folder($strParent);
 		}
-		else
+
+		$return = $this->Files->rename($this->strFile, $strNewName);
+
+		// Update the database AFTER the file has been renamed
+		if ($this->blnSyncDb)
 		{
-			// Find the corresponding DB entry
-			$objFile = \FilesModel::findByPath($this->strFile, array('uncached'=>true));
+			\Dbafs::moveResource($this->strFile, $strNewName);
+		}
 
-			if ($objFile === null)
-			{
-				$objFile = \Dbafs::addResource($this->strFile);
-			}
-
-			$strParent = dirname($strNewName);
-
-			// Create the parent folder if it does not exist
-			if (!is_dir(TL_ROOT . '/' . $strParent))
-			{
-				new \Folder($strParent);
-			}
-
-			// Set the parent ID
-			if ($strParent == $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				$objFile->pid = 0;
-			}
-			else
-			{
-				$objFolder = \FilesModel::findByPath($strParent, array('uncached'=>true));
-
-				if ($objFolder === null)
-				{
-					$objFolder = \Dbafs::addResource($strParent);
-				}
-
-				$objFile->pid = $objFolder->id;
-			}
-
-			// Move the file
-			if (($return = $this->Files->rename($this->strFile, $strNewName)) != false)
-			{
-				$this->strFile = $strNewName;
-				$this->arrImageSize = array();
-				$this->arrPathinfo = array();
-			}
-
-			// Update the database
-			$objFile->path = $strNewName;
-			$objFile->name = basename($strNewName);
-			$objFile->save();
-
-			// Update the MD5 hash of the parent folders
-			if ($strParent != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				\Dbafs::updateFolderHashes($strParent);
-			}
-			if (($strPath = dirname($this->strFile)) != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				\Dbafs::updateFolderHashes($strPath);
-			}
+		// Reset the object AFTER the database has been updated
+		if ($return != false)
+		{
+			$this->strFile = $strNewName;
+			$this->arrImageSize = array();
+			$this->arrPathinfo = array();
 		}
 
 		return $return;

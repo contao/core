@@ -452,69 +452,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 		else
 		{
-			// Find the corresponding DB entries
+			$this->Files->rename($this->intId, $destination);
+
+			// Update the database AFTER the file has been moved
 			if ($this->blnIsDbAssisted)
 			{
-				$objFile = \FilesModel::findByPath($this->intId);
-
-				if ($objFile === null)
-				{
-					$objFile = \Dbafs::addResource($this->intId);
-				}
-
-				// Set the parent ID
-				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					$objFile->pid = 0;
-				}
-				else
-				{
-					$objFolder = \FilesModel::findByPath($strFolder);
-
-					if ($objFolder === null)
-					{
-						$objFolder = \Dbafs::addResource($strFolder);
-					}
-
-					$objFile->pid = $objFolder->id;
-				}
-
-				// Move the file
-				$this->Files->rename($this->intId, $destination);
-
-				// Update the database
-				$objFile->path = $destination;
-				$objFile->save();
-
-				// Update all child records
-				if ($objFile->type == 'folder')
-				{
-					$objFiles = \FilesModel::findMultipleByBasepath($this->intId.'/');
-
-					if ($objFiles !== null)
-					{
-						while ($objFiles->next())
-						{
-							$objFiles->path = preg_replace('@^'.$this->intId.'/@', $destination.'/', $objFiles->path);
-							$objFiles->save();
-						}
-					}
-				}
-
-				// Update the MD5 hash of the parent folders
-				if (($strPath = dirname($this->intId)) != $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					\Dbafs::updateFolderHashes($strPath);
-				}
-				if (($strPath = dirname($destination)) != $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					\Dbafs::updateFolderHashes($strPath);
-				}
-			}
-			else
-			{
-				// Not DB-assisted, so just move the file
-				$this->Files->rename($this->intId, $destination);
+				\Dbafs::moveResource($this->intId, $destination);
 			}
 
 			// Add a log entry

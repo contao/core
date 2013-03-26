@@ -156,6 +156,76 @@ class Dbafs
 
 
 	/**
+	 * Moves a file or folder to a new location
+	 *
+	 * @param string $strSource      The source path
+	 * @param string $strDestination The target path
+	 *
+	 * @return \FilesModel The source file model
+	 */
+	public static function moveResource($strSource, $strDestination)
+	{
+		$objFile = \FilesModel::findByPath($strSource, array('cached'=>true));
+
+		if ($objFile === null)
+		{
+			$objFile = static::addResource($strDestination);
+		}
+
+		$strFolder = dirname($strDestination);
+
+		// Set the new parent ID
+		if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+		{
+			$objFile->pid = 0;
+		}
+		else
+		{
+			$objFolder = \FilesModel::findByPath($strFolder, array('cached'=>true));
+
+			if ($objFolder === null)
+			{
+				$objFolder = static::addResource($strFolder);
+			}
+
+			$objFile->pid = $objFolder->id;
+		}
+
+		// Save the resource
+		$objFile->path = $strDestination;
+		$objFile->name = basename($strDestination);
+		$objFile->save();
+
+		// Update all child records
+		if ($objFile->type == 'folder')
+		{
+			$objFiles = \FilesModel::findMultipleByBasepath($strSource . '/', array('cached'=>true));
+
+			if ($objFiles !== null)
+			{
+				while ($objFiles->next())
+				{
+					$objFiles->path = preg_replace('@^' . $strSource . '/@', $strDestination . '/', $objFiles->path);
+					$objFiles->save();
+				}
+			}
+		}
+
+		// Update the MD5 hash of the parent folders
+		if (($strPath = dirname($strSource)) != $GLOBALS['TL_CONFIG']['uploadPath'])
+		{
+			static::updateFolderHashes($strPath);
+		}
+		if (($strPath = dirname($strDestination)) != $GLOBALS['TL_CONFIG']['uploadPath'])
+		{
+			static::updateFolderHashes($strPath);
+		}
+
+		return $objFile;
+	}
+
+
+	/**
 	 * Update the hashes of all parent folders of a resource
 	 *
 	 * @param string $strResource The path to the file or folder
@@ -182,7 +252,7 @@ class Dbafs
 		unset($arrChunks);
 
 		// Store the hash of each folder
-		foreach ($arrPaths as $strPath)
+		foreach (array_reverse($arrPaths) as $strPath)
 		{
 			$objFolder = new \Folder($strPath);
 			$objModel  = \FilesModel::findByPath($strPath, array('cached'=>true));
@@ -190,7 +260,7 @@ class Dbafs
 			// The DB entry does not yet exist
 			if ($objModel === null)
 			{
-				static::addResource($strPath);
+				$objModel = static::addResource($strPath);
 			}
 
 			$objModel->hash = $objFolder->hash;
