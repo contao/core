@@ -1075,6 +1075,14 @@ class File extends \System
 	 */
 	protected function getHash()
 	{
-		return md5_file(TL_ROOT . '/' . $this->strFile);
+		// Do not try to hash if bigger than 2 GB
+		if ($this->filesize >= 2147483648)
+		{
+			return '';
+		}
+		else
+		{
+			return md5_file(TL_ROOT . '/' . $this->strFile);
+		}
 	}
 }

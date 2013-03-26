@@ -623,7 +623,16 @@ class Folder extends \System
 			if ($it->isFile() && $it->getFilename() != '.DS_Store')
 			{
 				$arrFiles[] = $it->getSubPathname();
+
+				// Do not try to hash if bigger than 2 GB
+				if ($it->getSize() >= 2147483648)
+				{
+					return '';
+				}
+				else
+				{
 				$arrFiles[] = md5_file($it->getPathname());
+			}
 			}
 
 			$it->next();
