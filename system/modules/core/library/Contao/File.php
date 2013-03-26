@@ -439,9 +439,10 @@ class File extends \System
 	{
 		$return = $this->Files->fclose($this->resFile);
 
-		// Create the file path
+		// Move the temporary file to its destination
 		if ($this->blnDoNotCreate)
 		{
+			// Create the file path
 			if (!file_exists(TL_ROOT . '/' . $this->strFile))
 			{
 				// Handle open_basedir restrictions
@@ -456,32 +457,14 @@ class File extends \System
 					new \Folder($strFolder);
 				}
 			}
+
+			$return = $this->Files->rename($this->strTmp, $this->strFile);
 		}
 
-		if (!$this->blnSyncDb)
+		// Update the database
+		if ($this->blnSyncDb)
 		{
-			if ($this->blnDoNotCreate)
-			{
-				$return = $this->Files->rename($this->strTmp, $this->strFile);
-			}
-		}
-		else
-		{
-			$strFolder = dirname($this->strFile);
-
-			// Move the temporary file to its destination
-			if ($this->blnDoNotCreate)
-			{
-				$return = $this->Files->rename($this->strTmp, $this->strFile);
-			}
-
 			\Dbafs::addResource($this->strFile);
-
-			// Update the MD5 hash of the parent folders
-			if ($strFolder != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				\Dbafs::updateFolderHashes($strFolder);
-			}
 		}
 
 		return $return;

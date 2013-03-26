@@ -131,7 +131,7 @@ class Dbafs
 				$objModel->type      = 'folder';
 				$objModel->path      = $objFolder->path;
 				$objModel->extension = '';
-				$objModel->hash      = '';
+				$objModel->hash      = $objFolder->hash;
 				$objModel->save();
 
 				$arrPids[$objFolder->path] = $objModel->id;

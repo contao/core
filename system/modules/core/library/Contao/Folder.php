@@ -102,11 +102,10 @@ class Folder extends \System
 				$this->Files->mkdir($strPath);
 			}
 
-			// Update the DBAFS
+			// Update the database
 			if ($this->blnSyncDb)
 			{
 				\Dbafs::addResource($this->strFolder);
-				\Dbafs::updateFolderHashes($this->strFolder);
 			}
 		}
 	}
@@ -170,16 +169,11 @@ class Folder extends \System
 	 */
 	public function purge()
 	{
-		if (!$this->blnSyncDb)
-		{
-			$this->Files->rrdir($this->strFolder, true);
-		}
-		else
-		{
-			// Purge the folder
-			$this->Files->rrdir($this->strFolder, true);
+		$this->Files->rrdir($this->strFolder, true);
 
-			// Remove the DB entries of all subfolders and files
+		// Update the database
+		if ($this->blnSyncDb)
+		{
 			$objFiles = \FilesModel::findMultipleByBasepath($this->strFolder . '/');
 
 			if ($objFiles !== null)
@@ -190,7 +184,6 @@ class Folder extends \System
 				}
 			}
 
-			// Update the MD5 hash of the parent folders
 			\Dbafs::updateFolderHashes($this->strFolder);
 		}
 	}

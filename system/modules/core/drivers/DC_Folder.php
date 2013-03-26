@@ -1428,7 +1428,11 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Save the file
 			if (md5($strContent) != md5(\Input::postRaw('source')))
 			{
-				// Update the md5 hash
+				// Write the file
+				$objFile->write(\Input::postRaw('source'));
+				$objFile->close();
+
+				// Update the database
 				if ($this->blnIsDbAssisted)
 				{
 					$objMeta = \FilesModel::findByPath($objFile->value);
@@ -1438,19 +1442,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 						$objMeta = \Dbafs::addResource($objFile->value);
 					}
 
-					// Write the file
-					$objFile->write(\Input::postRaw('source'));
-					$objFile->close();
-
-					// Update the database
 					$objMeta->hash = $objFile->hash;
 					$objMeta->save();
-				}
-				else
-				{
-					// Not DB-assisted, so just write the file
-					$objFile->write(\Input::postRaw('source'));
-					$objFile->close();
 				}
 			}
 
@@ -1584,89 +1577,23 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['fileExists'], $varValue));
 			}
 
+			// Rename the file
+			$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
+
 			// Update the database
 			if ($this->blnIsDbAssisted)
 			{
-				// Get the parent ID
-				if ($this->strPath == $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					$pid = 0;
-				}
-				else
-				{
-					$objFolder = \FilesModel::findByPath($this->strPath);
-
-					if ($objFolder === null)
-					{
-						$objFolder = \Dbafs::addResource($this->strPath);
-					}
-
-					$pid = $objFolder->id;
-				}
-
 				// New folders
 				if (stristr($this->intId, '__new__') !== false)
 				{
-					// Rename the file
-					$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
-
-					// Create the DB entry
 					$this->objActiveRecord = \Dbafs::addResource($this->strPath . '/' . $varValue . $this->strExtension);
-
-					// Add a log entry
 					$this->log('Folder "'.$this->strPath.'/'.$varValue.$this->strExtension.'" has been created', 'DC_Folder save()', TL_FILES);
 				}
 				else
 				{
-					// Find the corresponding DB entry
-					$objFile = \FilesModel::findByPath($this->strPath . '/' . $this->varValue . $this->strExtension);
-
-					if ($objFile === null)
-					{
-						$objFile = \Dbafs::addResource($this->strPath . '/' . $this->varValue . $this->strExtension);
-					}
-
-					// Rename the file
-					$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
-
-					// Update the data
-					$objFile->pid  = $pid;
-					$objFile->path = $this->strPath . '/' . $varValue . $this->strExtension;
-					$objFile->name = $varValue . $this->strExtension;
-					$objFile->save();
-
-					$this->objActiveRecord = $objFile;
-
-					// Add a log entry
+					$this->objActiveRecord = \Dbafs::moveResource($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
 					$this->log('File or folder "'.$this->strPath.'/'.$this->varValue.$this->strExtension.'" has been renamed to "'.$this->strPath.'/'.$varValue.$this->strExtension.'"', 'DC_Folder save()', TL_FILES);
 				}
-
-				// Also update all child records
-				if ($objFile->type == 'folder')
-				{
-					$strPath = $this->strPath . '/' . $this->varValue . '/';
-					$objFiles = \FilesModel::findMultipleByBasepath($strPath);
-
-					if ($objFiles !== null)
-					{
-						while ($objFiles->next())
-						{
-							$objFiles->path = preg_replace('@^'.$strPath.'@', $this->strPath.'/'.$varValue.'/', $objFiles->path);
-							$objFiles->save();
-						}
-					}
-				}
-
-				// Also update the MD5 hash of the parent folder
-				if ($objFile->pid > 0)
-				{
-					\Dbafs::updateFolderHashes($objFile->pid);
-				}
-			}
-			else
-			{
-				// Not DB-assisted, so just rename the file
-				$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
 			}
 
 			// Set the new value so the input field can show it
