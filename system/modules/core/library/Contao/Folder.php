@@ -193,32 +193,30 @@ class Folder extends \System
 	 */
 	public function __get($strKey)
 	{
-		$strCacheKey = __METHOD__ . '-' . $this->strFolder . '-' . $strKey;
-
-		if (!\Cache::has($strCacheKey))
+		switch ($strKey)
 		{
-			switch ($strKey)
-			{
-				case 'hash':
-					\Cache::set($strCacheKey, $this->getHash());
-					break;
+			case 'hash':
+				return $this->getHash();
+				break;
 
-				case 'path':
-				case 'value':
-					\Cache::set($strCacheKey, $this->strFolder);
-					break;
+			case 'name':
+			case 'basename':
+				return basename($this->strFolder);
+				break;
 
-				case 'size':
-					\Cache::set($strCacheKey, $this->getSize());
-					break;
+			case 'path':
+			case 'value':
+				return $this->strFolder;
+				break;
 
-				default:
-					return parent::__get($strKey);
-					break;
-			}
+			case 'size':
+				return $this->getSize();
+				break;
+
+			default:
+				return parent::__get($strKey);
+				break;
 		}
-
-		return \Cache::get($strCacheKey);
 	}
 
 
@@ -631,8 +629,8 @@ class Folder extends \System
 				}
 				else
 				{
-				$arrFiles[] = md5_file($it->getPathname());
-			}
+					$arrFiles[] = md5_file($it->getPathname());
+				}
 			}
 
 			$it->next();
