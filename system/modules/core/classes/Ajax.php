@@ -289,8 +289,7 @@ class Ajax extends \Backend
 
 					foreach ($varValue as $k=>$v)
 					{
-						$objResource = \Dbafs::addResource($v);
-						$varValue[$k] = $objResource->id;
+						$varValue[$k] = \Dbafs::addResource($v)->id;
 					}
 
 					$varValue = serialize($varValue);
