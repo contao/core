@@ -29,6 +29,9 @@ database anymore. Further improvements:
 Use the Contao page and file pickers in TinyMCE (see #1698).
 
 ### Improved
+Can now use the "icon" key for global operations in DCA too (see #5394).
+
+### Improved
 Pre-fill the "alt" and "caption" fields with the file meta data (see #5225).
 
 ### Improved
