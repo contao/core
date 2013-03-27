@@ -409,16 +409,23 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Move an existing file or folder
-	 * @param boolean
+	 * @param string
 	 */
-	public function cut($blnDoNotRedirect=false)
+	public function cut($source=null)
 	{
-		$this->isValid($this->intId);
 		$strFolder = \Input::get('pid', true);
+		$blnDoNotRedirect = ($source !== null);
 
-		if (!file_exists(TL_ROOT . '/' . $this->intId) || !$this->isMounted($this->intId))
+		if ($source === null)
 		{
-			$this->log('File or folder "'.$this->intId.'" was not mounted or could not be found', 'DC_Folder cut()', TL_ERROR);
+			$source = $this->intId;
+		}
+
+		$this->isValid($source);
+
+		if (!file_exists(TL_ROOT . '/' . $source) || !$this->isMounted($source))
+		{
+			$this->log('File or folder "'.$source.'" was not mounted or could not be found', 'DC_Folder cut()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -429,9 +436,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Avoid a circular reference
-		if (preg_match('/^' . preg_quote($this->intId, '/') . '/i', $strFolder))
+		if (preg_match('/^' . preg_quote($source, '/') . '/i', $strFolder))
 		{
-			$this->log('Attempt to move the folder "'.$this->intId.'" to "'.$strFolder.'" (circular reference)', 'DC_Folder cut()', TL_ERROR);
+			$this->log('Attempt to move the folder "'.$source.'" to "'.$strFolder.'" (circular reference)', 'DC_Folder cut()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -443,27 +450,28 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$this->import('Files');
 
 		// Calculate the destination path
-		$destination = str_replace(dirname($this->intId), $strFolder, $this->intId);
+		$destination = str_replace(dirname($source), $strFolder, $source);
 
 		// Do not move if the target exists and would be overriden (not possible for folders anyway)
 		if (file_exists(TL_ROOT . '/' . $destination))
 		{
-			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetarget'], basename($this->intId), dirname($destination)));
+			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetarget'], basename($source), dirname($destination)));
 		}
 		else
 		{
-			$this->Files->rename($this->intId, $destination);
+			$this->Files->rename($source, $destination);
 
 			// Update the database AFTER the file has been moved
 			if ($this->blnIsDbAssisted)
 			{
-				\Dbafs::moveResource($this->intId, $destination);
+				\Dbafs::moveResource($source, $destination);
 			}
 
 			// Add a log entry
-			$this->log('File or folder "'.$this->intId.'" has been moved to "'.$destination.'"', 'DC_Folder cut()', TL_FILES);
+			$this->log('File or folder "'.$source.'" has been moved to "'.$destination.'"', 'DC_Folder cut()', TL_FILES);
 		}
 
+		// Redirect
 		if (!$blnDoNotRedirect)
 		{
 			$this->redirect($this->getReferer());
@@ -488,8 +496,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			foreach ($arrClipboard[$this->strTable]['id'] as $id)
 			{
-				$this->intId = urldecode($id);
-				$this->cut(true);
+				$this->cut(urldecode($id));
 			}
 		}
 
@@ -499,13 +506,23 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Recursively duplicate files and folders
+	 * @param string
+	 * @param string
 	 */
-	public function copy()
+	public function copy($source=null, $destination=null)
 	{
 		$strFolder = \Input::get('pid', true);
+		$blnDoNotRedirect = ($source !== null);
 
-		$source = $this->intId;
-		$destination = str_replace(dirname($source), $strFolder, $source);
+		if ($source === null)
+		{
+			$source = $this->intId;
+		}
+
+		if ($destination === null)
+		{
+			$destination = str_replace(dirname($source), $strFolder, $source);
+		}
 
 		$this->isValid($source);
 		$this->isValid($destination);
@@ -576,12 +593,13 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Add a log entry
-		if (file_exists(TL_ROOT . '/' . $source) && $this->isMounted($source))
-		{
-			$this->log('File or folder "'.$source.'" has been duplicated', 'DC_Folder copy()', TL_FILES);
-		}
+		$this->log('File or folder "'.$source.'" has been duplicated', 'DC_Folder copy()', TL_FILES);
 
-		$this->redirect($this->getReferer());
+		// Redirect
+		if (!$blnDoNotRedirect)
+		{
+			$this->redirect($this->getReferer());
+		}
 	}
 
 
@@ -612,8 +630,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Recursively delete files and folders
+	 * @param string
 	 */
-	public function delete()
+	public function delete($source=null)
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'])
 		{
@@ -621,12 +640,19 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->isValid($this->intId);
+		$blnDoNotRedirect = ($source !== null);
+
+		if ($source === null)
+		{
+			$source = $this->intId;
+		}
+
+		$this->isValid($source);
 
 		// Delete the file or folder
-		if (!file_exists(TL_ROOT . '/' . $this->intId) || !$this->isMounted($this->intId))
+		if (!file_exists(TL_ROOT . '/' . $source) || !$this->isMounted($source))
 		{
-			$this->log('File or folder "'.$this->intId.'" was not mounted or could not be found', 'DC_Folder delete()', TL_ERROR);
+			$this->log('File or folder "'.$source.'" was not mounted or could not be found', 'DC_Folder delete()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -638,7 +664,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($this->intId, $this);
+					$this->$callback[0]->$callback[1]($source, $this);
 				}
 			}
 		}
@@ -646,24 +672,29 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$this->import('Files');
 
 		// Delete the folder or file
-		if (is_dir(TL_ROOT . '/' . $this->intId))
+		if (is_dir(TL_ROOT . '/' . $source))
 		{
-			$this->Files->rrdir($this->intId);
+			$this->Files->rrdir($source);
 		}
 		else
 		{
-			$this->Files->delete($this->intId);
+			$this->Files->delete($source);
 		}
 
-		// Update the database
+		// Update the database AFTER the resource has been deleted
 		if ($this->blnIsDbAssisted)
 		{
-			\Dbafs::deleteResource($this->intId);
+			\Dbafs::deleteResource($source);
 		}
 
 		// Add a log entry
-		$this->log('File or folder "'.str_replace(TL_ROOT.'/', '', $this->intId).'" has been deleted', 'DC_Folder delete()', TL_FILES);
-		$this->redirect($this->getReferer());
+		$this->log('File or folder "'.str_replace(TL_ROOT.'/', '', $source).'" has been deleted', 'DC_Folder delete()', TL_FILES);
+
+		// Redirect
+		if (!$blnDoNotRedirect)
+		{
+			$this->redirect($this->getReferer());
+		}
 	}
 
 
