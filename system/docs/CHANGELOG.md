@@ -5,6 +5,21 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### Improved
+Improved the database-assisted file system:
+
+ * The file picker now shows the file system instead of the database
+ * The file picker automatically adds the selected resources to the database
+
+This means that you do not have to manually synchronize the file system and the
+database anymore. Further improvements:
+
+ * Added a breadcrumb menu to limit the nodes of the page and file picker
+ * `md5_file()` is no longer applied to files bigger than 2 GB
+ * A folder hash is now calculated of the file names instead of their hashes
+ * All DBAFS-related routines have been centralized in the `Dbafs` class
+ * Permission to synchronize the file system can be given to regular users
+
+### Improved
 Use the Contao page and file pickers in TinyMCE (see #1698).
 
 ### Improved
