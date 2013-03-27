@@ -112,6 +112,7 @@ ClassLoader::addClasses(array
 	'Contao\Database\Updater'          => 'system/modules/core/library/Contao/Database/Updater.php',
 	'Contao\Database'                  => 'system/modules/core/library/Contao/Database.php',
 	'Contao\Date'                      => 'system/modules/core/library/Contao/Date.php',
+	'Contao\Dbafs\Filter'              => 'system/modules/core/library/Contao/Dbafs/Filter.php',
 	'Contao\Dbafs'                     => 'system/modules/core/library/Contao/Dbafs.php',
 	'Contao\DcaExtractor'              => 'system/modules/core/library/Contao/DcaExtractor.php',
 	'Contao\Email'                     => 'system/modules/core/library/Contao/Email.php',

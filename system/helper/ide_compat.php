@@ -227,6 +227,9 @@ namespace Database\Mysqli {
 	class Result extends Contao\Database\Mysqli\Result {}
 	class Statement extends Contao\Database\Mysqli\Statement {}
 }
+namespace Dbafs {
+	class Filter extends Contao\Dbafs\Filter {}
+}
 namespace Files {
 	class Ftp extends Contao\Files\Ftp {}
 	class Php extends Contao\Files\Php {}

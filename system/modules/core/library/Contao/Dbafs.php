@@ -376,4 +376,120 @@ class Dbafs
 			$objModel->save();
 		}
 	}
+
+
+	/**
+	 * Synchronize the file system with the database
+	 */
+	public static function syncFiles()
+	{
+		$objDatabase = \Database::getInstance();
+
+		// Lock the files table
+		$objDatabase->lockTables(array('tl_files'));
+
+		// Reset the "found" flag
+		$objDatabase->query("UPDATE tl_files SET found=''");
+
+		// Get a filtered list of all files
+		$objFiles = new \RecursiveIteratorIterator(
+			new \Dbafs\Filter(
+				new \RecursiveDirectoryIterator(
+					TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'], \FilesystemIterator::UNIX_PATHS)
+			), \RecursiveIteratorIterator::SELF_FIRST
+		);
+
+		// Open the log file
+		$objLog = new \File('system/logs/sync.log', true);
+		$objLog->truncate();
+
+		// Create or update the database entries
+		foreach ($objFiles as $objFile)
+		{
+			$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
+			$objModel   = \FilesModel::findByPath($strRelpath);
+
+			if ($objModel === null)
+			{
+				// Add a log entry
+				$objLog->append("[Added] $strRelpath");
+
+				// Add the resource
+				static::addResource($strRelpath);
+			}
+			else
+			{
+				// Check whether the MD5 hash has changed
+				$objResource = $objFile->isDir() ? new \Folder($strRelpath) : new \File($strRelpath);
+				$strType = ($objModel->hash != $objResource->hash) ? 'Changed' : 'Unchanged';
+
+				// Add a log entry
+				$objLog->append("[$strType] $strRelpath");
+
+				// Update the record
+				$objModel->found = 1;
+				$objModel->hash  = $objResource->hash;
+				$objModel->save();
+			}
+		}
+
+		// Check for left-over entries in the DB
+		$objFiles = \FilesModel::findByFound('');
+
+		if ($objFiles !== null)
+		{
+			while ($objFiles->next())
+			{
+				$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFiles->hash);
+
+				if ($objFound !== null)
+				{
+					// Add a log entry BEFORE changing the object
+					$objLog->append("[Moved] {$objFiles->path} to {$objFound->path}");
+
+					// Update the original entry
+					$objFiles->pid    = $objFound->pid;
+					$objFiles->tstamp = $objFound->tstamp;
+					$objFiles->name   = $objFound->name;
+					$objFiles->type   = $objFound->type;
+					$objFiles->path   = $objFound->path;
+
+					// Update the PID of the child records
+					if ($objFound->type == 'folder')
+					{
+						$objChildren = \FilesModel::findByPid($objFound->id);
+
+						if ($objChildren !== null)
+						{
+							while ($objChildren->next())
+							{
+								$objChildren->pid = $objFiles->id;
+								$objChildren->save();
+							}
+						}
+					}
+
+					// Delete the newer (duplicate) entry
+					$objFound->delete();
+
+					// Then save the modified original entry (prevents duplicate key errors)
+					$objFiles->save();
+				}
+				else
+				{
+					// Add a log entry BEFORE changing the object
+					$objLog->append("[Deleted] {$objFiles->path}");
+
+					// Delete the entry if the resource has gone
+					$objFiles->delete();
+				}
+			}
+		}
+
+		// Close the log file
+		$objLog->close();
+
+		// Unlock the tables
+		$objDatabase->unlockTables();
+	}
 }
