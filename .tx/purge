@@ -1,64 +1,76 @@
-#!/bin/bash
+#!/usr/bin/env php
+<?php
 
+/**
+ * Contao Open Source CMS
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
+ * @package Core
+ * @link    https://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
 
-##
-# Usage
-##
-usage()
-{
-  echo "";
-  echo -e "  \033[1;33mPurge incomplete translations\033[0m"
-  echo "  Removes all translations which are less than 95% complete."
-  echo ""
-  echo "  Since the Transifex client does not provide a way to check the overall"
-  echo "  completion of a translation, it will download any resource which is at"
-  echo "  least 95% complete. Incomplete resources will be skipped, therefore we"
-  echo "  can assume that a translation is less than 95% complete if there is at"
-  echo "  least one missing file."
-  echo "";
-  echo "  In this case the script will remove the entire translation."
-  echo ""
+// Help
+if (in_array('-h', $argv)) {
+	echo "  Usage: {$argv[0]} [-h]\n";
+	echo "  Remove all translations which are less than 95% complete.\n\n";
+	echo "  Options:\n";
+	echo "    -h  Show this help text\n";
+	exit;
 }
 
-##
-# Purge
-##
-purge()
-{
-  # Loop through the modules
-  for i in `ls system/modules`; do
+// Include the helper functions
+define('TL_ROOT', dirname(__DIR__));
+include 'system/helper/functions.php';
 
-    # Loop through the languages
-    for j in `ls system/modules/$i/languages`; do
+// Initialize the counter
+$counter = array();
 
-      # Skip the source language
-      if [ "$j" == "en" ]; then
-        continue
-      fi
+// Loop through the modules
+foreach (scan('system/modules') as $module) {
 
-      # Check whether all language files exist
-      for k in `ls system/modules/$i/languages/en`; do
-        if [ ! -e "system/modules/$i/languages/$j/$k" ]; then
-          echo "  Removing $j ($i/languages/$j/$k does not exist)"
+	// Loop through the languages
+	foreach (scan("system/modules/$module/languages") as $language) {
 
-          # Remove the translation
-          for l in `ls -d system/modules/*/languages/$j`; do
-            rm -rf $l
-          done
+		// Initialize the language
+		if (!isset($counter[$language])) {
+			$counter[$language] = 0;
+		}
 
-          # Continue with the next language
-          continue 2
-        fi
-      done
-    done
-  done
+		// Parse all files and count the labels
+		foreach (scan("system/modules/$module/languages/$language") as $file) {
+			if (substr($file, -3) != 'xlf') {
+				die("Invalid file: $module/languages/$language/$file");
+			}
+
+			// Parse the XML document
+			$xml = new DOMDocument();
+			$xml->preserveWhiteSpace = false;
+			$xml->load("system/modules/$module/languages/$language/$file");
+			$units = $xml->getElementsByTagName('trans-unit');
+
+			// Count the translated nodes
+			foreach ($units as $unit) {
+				if ($language == 'en') {
+					++$counter['en'];
+				} elseif (($node = $unit->firstChild->nextSibling) && $node->nodeValue != '') {
+					++$counter[$language];
+				}
+			}
+		}
+	}
 }
 
-##
-# Dispatch
-##
-if [ "$1" == "-h" ]; then
-	usage
-else
-  purge
-fi
+// Calculate the completion level
+foreach ($counter as $language=>$translated) {
+	if ($language != 'en') {
+		$completion = round($translated / $counter['en'] * 100);
+
+		// Remove languages which are less than 95% complete
+		if ($completion < 95) {
+			echo "  Removing $language (only $completion% complete)\n";
+			shell_exec("rm -r system/modules/*/languages/$language");
+		}
+	}
+}
