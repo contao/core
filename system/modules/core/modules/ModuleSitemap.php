@@ -63,6 +63,9 @@ class ModuleSitemap extends \Module
 	 */
 	protected function compile()
 	{
+		$lang = null;
+		$host = null;
+
 		// Start from the website root if there is no reference page
 		if (!$this->rootPage)
 		{
@@ -70,10 +73,28 @@ class ModuleSitemap extends \Module
 			$this->rootPage = $objPage->rootId;
 		}
 
+		// Overwrite the domain and language if the reference page belongs to a differnt root page (see #3765)
+		else
+		{
+			$objRootPage = \PageModel::findWithDetails($this->rootPage);
+
+			// Set the language
+			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $objRootPage->rootLanguage != $objPage->rootLanguage)
+			{
+				$lang = $objRootPage->rootLanguage;
+			}
+
+			// Set the domain
+			if ($objRootPage->rootId != $objPage->rootId && $objRootPage->domain != '' && $objRootPage->domain != $objPage->domain)
+			{
+				$host = $objRootPage->domain;
+			}
+		}
+
 		$this->showLevel = 0;
 		$this->hardLimit = false;
 		$this->levelOffset = 0;
 
-		$this->Template->items = $this->renderNavigation($this->rootPage);
+		$this->Template->items = $this->renderNavigation($this->rootPage, 1, $host, $lang);
 	}
 }

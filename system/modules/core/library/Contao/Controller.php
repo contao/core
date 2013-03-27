@@ -901,7 +901,7 @@ abstract class Controller extends \System
 								// Check the target page language (see #4706, #5465)
 								if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 								{
-									$objNextPage = $this->getPageDetails($objNextPage); // see #3983
+									$objNextPage->loadDetails(); // see #3983
 									$strForceLang = $objNextPage->language;
 								}
 
@@ -2079,6 +2079,12 @@ abstract class Controller extends \System
 			}
 
 			$strUrl = 'index.php?id=' . $arrRow['id'] . $strRequest;
+		}
+
+		// Add the domain if it differs from the host name (see #3765)
+		if ($arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
+		{
+			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
 		}
 
 		// HOOK: add custom logic

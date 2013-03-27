@@ -176,9 +176,11 @@ abstract class Module extends \Frontend
 	 * Recursively compile the navigation menu and return it as HTML string
 	 * @param integer
 	 * @param integer
+	 * @param string
+	 * @param string
 	 * @return string
 	 */
-	protected function renderNavigation($pid, $level=1)
+	protected function renderNavigation($pid, $level=1, $host=null, $language=null)
 	{
 		// Get all active subpages
 		$objSubpages = \PageModel::findPublishedSubpagesWithoutGuestsByPid($pid, $this->showHidden, $this instanceof \ModuleSitemap);
@@ -214,7 +216,7 @@ abstract class Module extends \Frontend
 		global $objPage;
 
 		// Browse subpages
-		while($objSubpages->next())
+		while ($objSubpages->next())
 		{
 			// Skip hidden sitemap pages
 			if ($this instanceof \ModuleSitemap && $objSubpages->sitemap == 'map_never')
@@ -224,6 +226,12 @@ abstract class Module extends \Frontend
 
 			$subitems = '';
 			$_groups = deserialize($objSubpages->groups);
+
+			// Override the domain (see #3765)
+			if ($host !== null)
+			{
+				$objSubpages->domain = $host;
+			}
 
 			// Do not show protected pages unless a back end or front end user is logged in
 			if (!$objSubpages->protected || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected || ($this instanceof \ModuleSitemap && $objSubpages->sitemap == 'map_always'))
@@ -273,7 +281,7 @@ abstract class Module extends \Frontend
 						// DO NOT ADD A break; STATEMENT
 
 					default:
-						$href = $this->generateFrontendUrl($objSubpages->row());
+						$href = $this->generateFrontendUrl($objSubpages->row(), null, $language);
 						break;
 				}
 

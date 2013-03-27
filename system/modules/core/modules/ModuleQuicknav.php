@@ -68,6 +68,9 @@ class ModuleQuicknav extends \Module
 	 */
 	protected function compile()
 	{
+		$lang = null;
+		$host = null;
+
 		// Start from the website root if there is no reference page
 		if (!$this->rootPage)
 		{
@@ -75,11 +78,29 @@ class ModuleQuicknav extends \Module
 			$this->rootPage = $objPage->rootId;
 		}
 
+		// Overwrite the domain and language if the reference page belongs to a differnt root page (see #3765)
+		else
+		{
+			$objRootPage = \PageModel::findWithDetails($this->rootPage);
+
+			// Set the language
+			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $objRootPage->rootLanguage != $objPage->rootLanguage)
+			{
+				$lang = $objRootPage->rootLanguage;
+			}
+
+			// Set the domain
+			if ($objRootPage->rootId != $objPage->rootId && $objRootPage->domain != '' && $objRootPage->domain != $objPage->domain)
+			{
+				$host = $objRootPage->domain;
+			}
+		}
+
 		$this->Template->targetPage = $GLOBALS['TL_LANG']['MSC']['targetPage'];
 		$this->Template->button = specialchars($GLOBALS['TL_LANG']['MSC']['go']);
 		$this->Template->title = $this->customLabel ?: $GLOBALS['TL_LANG']['MSC']['quicknav'];
 		$this->Template->request = ampersand(\Environment::get('request'), true);
-		$this->Template->items = $this->getQuicknavPages($this->rootPage);
+		$this->Template->items = $this->getQuicknavPages($this->rootPage, 1, $host, $lang);
 	}
 
 
@@ -87,9 +108,11 @@ class ModuleQuicknav extends \Module
 	 * Recursively get all quicknav pages and return them as array
 	 * @param integer
 	 * @param integer
+	 * @param sting
+	 * @param sting
 	 * @return array
 	 */
-	protected function getQuicknavPages($pid, $level=1)
+	protected function getQuicknavPages($pid, $level=1, $host=null, $language=null)
 	{
 		global $objPage;
 
@@ -117,6 +140,12 @@ class ModuleQuicknav extends \Module
 		{
 			$_groups = deserialize($objSubpages->groups);
 
+			// Override the domain (see #3765)
+			if ($host !== null)
+			{
+				$objSubpages->domain = $host;
+			}
+
 			// Do not show protected pages unless a back end or front end user is logged in
 			if (!$objSubpages->protected || (!is_array($_groups) && FE_USER_LOGGED_IN) || BE_USER_LOGGED_IN || (is_array($_groups) && array_intersect($_groups, $groups)) || $this->showProtected)
 			{
@@ -132,7 +161,7 @@ class ModuleQuicknav extends \Module
 					(
 						'level' => ($level - 2),
 						'title' => specialchars($objSubpages->pageTitle ?: $objSubpages->title),
-						'href' => $this->generateFrontendUrl($objSubpages->row()),
+						'href' => $this->generateFrontendUrl($objSubpages->row(), null, $language),
 						'link' => $objSubpages->title
 					);
 

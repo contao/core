@@ -106,7 +106,7 @@ class ModuleCustomnav extends \Module
 		// Add the items to the pre-sorted array
 		while ($objPages->next())
 		{
-			$arrPages[$i++] = $objPages->row();
+			$arrPages[$i++] = $objPages->current()->loadDetails()->row(); // see #3765
 		}
 
 		// Set default template
@@ -137,13 +137,22 @@ class ModuleCustomnav extends \Module
 					case 'forward':
 						if (($objNext = \PageModel::findPublishedById($arrPage['jumpTo'])) !== null)
 						{
-							$href = $this->generateFrontendUrl($objNext->row());
+							$strForceLang = null;
+
+							// Check the target page language (see #4706)
+							if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+							{
+								$objNext->loadDetails(); // see #3983
+								$strForceLang = $objNext->language;
+							}
+
+							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
 							break;
 						}
 						// DO NOT ADD A break; STATEMENT
 
 					default:
-						$href = $this->generateFrontendUrl($arrPage);
+						$href = $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage']);
 						break;
 				}
 

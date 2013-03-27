@@ -66,19 +66,42 @@ class ModuleNavigation extends \Module
 	{
 		global $objPage;
 
-		$trail = $objPage->trail;
-		$level = ($this->levelOffset > 0) ? $this->levelOffset : 0;
-
-		// Overwrite with custom reference page
+		// Set the trail and level
 		if ($this->defineRoot && $this->rootPage > 0)
 		{
 			$trail = array($this->rootPage);
 			$level = 0;
 		}
+		else
+		{
+			$trail = $objPage->trail;
+			$level = ($this->levelOffset > 0) ? $this->levelOffset : 0;
+		}
+
+		$lang = null;
+		$host = null;
+
+		// Overwrite the domain and language if the reference page belongs to a differnt root page (see #3765)
+		if ($this->defineRoot && $this->rootPage > 0)
+		{
+			$objRootPage = \PageModel::findWithDetails($this->rootPage);
+
+			// Set the language
+			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $objRootPage->rootLanguage != $objPage->rootLanguage)
+			{
+				$lang = $objRootPage->rootLanguage;
+			}
+
+			// Set the domain
+			if ($objRootPage->rootId != $objPage->rootId && $objRootPage->domain != '' && $objRootPage->domain != $objPage->domain)
+			{
+				$host = $objRootPage->domain;
+			}
+		}
 
 		$this->Template->request = \Environment::get('indexFreeRequest');
 		$this->Template->skipId = 'skipNavigation' . $this->id;
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
-		$this->Template->items = $this->renderNavigation($trail[$level]);
+		$this->Template->items = $this->renderNavigation($trail[$level], 1, $host, $lang);
 	}
 }

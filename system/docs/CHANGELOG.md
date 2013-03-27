@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### Changed
+Link insert tags and navigation modules are now domain-aware (see #3765).
+
 ### Improved
 Improved the database-assisted file system:
 
@@ -1508,7 +1511,9 @@ Split the models into `Model` (single record) and `ModelCollection` (multiple
 models) to have a "cleaner" implementaion (thanks to Andreas Schempp).
 
 ### Changed
+
 Merged the "registration", "rss_reader" and "tpl_editor" module into the core
+### Changed
 modules ("backend" and "frontend").
 
 ### New

@@ -99,7 +99,7 @@ class ModuleQuicklink extends \Module
 		// Add the items to the pre-sorted array
 		while ($objPages->next())
 		{
-			$arrPages[$i++] = $objPages->row();
+			$arrPages[$i++] = $objPages->current()->loadDetails()->row(); // see #3765
 		}
 
 		$items = array();
@@ -111,7 +111,7 @@ class ModuleQuicklink extends \Module
 
 			$items[] = array
 			(
-				'href' => $this->generateFrontendUrl($arrPage),
+				'href' => $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage']),
 				'title' => specialchars($arrPage['pageTitle'] ?: $arrPage['title']),
 				'link' => $arrPage['title']
 			);
