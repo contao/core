@@ -48,6 +48,7 @@
         </form>
       <?php endif; ?>
       <div class="tl_listing_container tree_view" id="tl_listing">
+        <?php echo $this->breadcrumb; ?>
         <?php echo $this->main; ?>
       </div>
     </div>

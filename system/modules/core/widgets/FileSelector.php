@@ -56,8 +56,17 @@ class FileSelector extends \Widget
 		$this->import('BackendUser', 'User');
 		$this->convertValuesToPaths();
 
+		// Add the breadcrumb menu
+		\Backend::addFilesBreadcrumb();
+
+		// Root nodes (breadcrumb menu)
+		if (!empty($GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root']))
+		{
+			$tree = $this->renderFiletree(TL_ROOT . '/' . $GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root'][0], 0, true);
+		}
+
 		// Show a custom path (see #4926)
-		if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']))
+		elseif (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']))
 		{
 			$tree = $this->renderFiletree(TL_ROOT . '/' . $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path'], 0);
 		}
@@ -256,17 +265,12 @@ class FileSelector extends \Widget
 			$folderImg = ($blnIsOpen && $countFiles > 0) ? 'folderO.gif' : 'folderC.gif';
 			$folderLabel = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] ? '<strong>'.specialchars(basename($currentFolder)).'</strong>' : specialchars(basename($currentFolder));
 
-			// Prevent folder selection
-			if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly'])
-			{
-				$return .= \Image::getHtml($folderImg, '', $folderAttribute).' <label>'.$folderLabel.'</label></div> <div class="tl_right">&nbsp;';
-			}
+			// Add the current folder
+			$return .= \Image::getHtml($folderImg, '', $folderAttribute).' <a href="' . $this->addToUrl('node='.$this->urlEncode($currentFolder)) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">'.$folderLabel.'</a></div> <div class="tl_right">';
 
 			// Add a checkbox or radio button
-			else
+			if (!$GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly'])
 			{
-				$return .= \Image::getHtml($folderImg, '', $folderAttribute).' <label for="'.$this->strName.'_'.md5($currentFolder).'">'.$folderLabel.'</label></div> <div class="tl_right">';
-
 				switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])
 				{
 					case 'checkbox':

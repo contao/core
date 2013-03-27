@@ -870,91 +870,7 @@ class tl_page extends Backend
 	 */
 	public function addBreadcrumb()
 	{
-		// Set a new node
-		if (isset($_GET['node']))
-		{
-			$this->Session->set('tl_page_node', Input::get('node'));
-			$this->redirect(preg_replace('/&node=[^&]*/', '', Environment::get('request')));
-		}
-
-		$intNode = $this->Session->get('tl_page_node');
-
-		if ($intNode < 1)
-		{
-			return;
-		}
-
-		$arrIds = array();
-		$arrLinks = array();
-
-		// Generate breadcrumb trail
-		if ($intNode)
-		{
-			$intId = $intNode;
-
-			do
-			{
-				$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
-								->limit(1)
-								->execute($intId);
-
-				if ($objPage->numRows < 1)
-				{
-					// Currently selected page does not exits
-					if ($intId == $intNode)
-					{
-						$this->Session->set('tl_page_node', 0);
-						return;
-					}
-
-					break;
-				}
-
-				$arrIds[] = $intId;
-
-				// No link for the active page
-				if ($objPage->id == $intNode)
-				{
-					$arrLinks[] = $this->addIcon($objPage->row(), '', null, '', true) . ' ' . $objPage->title;
-				}
-				else
-				{
-					$arrLinks[] = $this->addIcon($objPage->row(), '', null, '', true) . ' <a href="' . $this->addToUrl('node='.$objPage->id) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $objPage->title . '</a>';
-				}
-
-				// Do not show the mounted pages
-				if (!$this->User->isAdmin && $this->User->hasAccess($objPage->id, 'pagemounts'))
-				{
-					break;
-				}
-
-				$intId = $objPage->pid;
-			}
-			while ($intId > 0 && $objPage->type != 'root');
-		}
-
-		// Check whether the node is mounted
-		if (!$this->User->isAdmin && !$this->User->hasAccess($arrIds, 'pagemounts'))
-		{
-			$this->Session->set('tl_page_node', 0);
-
-			$this->log('Page ID '.$intNode.' was not mounted', 'tl_page addBreadcrumb', TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
-		}
-
-		// Limit tree
-		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = array($intNode);
-
-		// Add root link
-		$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . Backend::getTheme() . '/images/pagemounts.gif" width="18" height="18" alt=""> <a href="' . $this->addToUrl('node=0') . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectAllNodes']).'">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
-		$arrLinks = array_reverse($arrLinks);
-
-		// Insert breadcrumb menu
-		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['breadcrumb'] .= '
-
-<ul id="tl_breadcrumb">
-  <li>' . implode(' &gt; </li><li>', $arrLinks) . '</li>
-</ul>';
+		Backend::addPagesBreadcrumb();
 	}
 
 
@@ -1324,30 +1240,7 @@ class tl_page extends Backend
 	 */
 	public function addIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false)
 	{
-		if ($blnProtected)
-		{
-			$row['protected'] = true;
-		}
-
-		$image = $this->getPageStatusIcon((object)$row);
-
-		// Return the image only
-		if ($blnReturnImage)
-		{
-			return Image::getHtml($image, '', $imageAttribute);
-		}
-
-		// Mark root pages
-		if ($row['type'] == 'root' || Input::get('do') == 'article')
-		{
-			$label = '<strong>' . $label . '</strong>';
-		}
-
-		// Add the breadcrumb link
-		$label = '<a href="' . $this->addToUrl('node='.$row['id']) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $label . '</a>';
-
-		// Return the image
-		return '<a href="contao/main.php?do=feRedirect&amp;page='.$row['id'].'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . ' target="_blank">'.Image::getHtml($image, '', $imageAttribute).'</a> '.$label;
+		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected);
 	}
 
 

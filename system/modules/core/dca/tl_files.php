@@ -357,74 +357,7 @@ class tl_files extends Backend
 	 */
 	public function addBreadcrumb()
 	{
-		// Set a new node
-		if (isset($_GET['node']))
-		{
-			$this->Session->set('tl_files_node', Input::get('node', true));
-			$this->redirect(preg_replace('/(&|\?)node=[^&]*/', '', Environment::get('request')));
-		}
-
-		$strNode = $this->Session->get('tl_files_node');
-
-		if ($strNode == '')
-		{
-			return;
-		}
-
-		// Currently selected folder does not exist
-		if (!is_dir(TL_ROOT . '/' . $strNode))
-		{
-			$this->Session->set('tl_files_node', '');
-			return;
-		}
-
-		$strPath = $GLOBALS['TL_CONFIG']['uploadPath'];
-		$arrNodes = explode('/', preg_replace('/^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/') . '\//', '', $strNode));
-		$arrLinks = array();
-
-		// Add root link
-		$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . Backend::getTheme() . '/images/filemounts.gif" width="18" height="18" alt=""> <a href="' . $this->addToUrl('node=') . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectAllNodes']).'">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
-
-		// Generate breadcrumb trail
-		foreach ($arrNodes as $strFolder)
-		{
-			$strPath .= '/' . $strFolder;
-
-			// Do not show pages which are not mounted
-			if (!$this->User->isAdmin && !$this->User->hasAccess($strPath, 'filemounts'))
-			{
-				continue;
-			}
-
-			// No link for the active folder
-			if ($strFolder == basename($strNode))
-			{
-				$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . Backend::getTheme() . '/images/folderC.gif" width="18" height="18" alt=""> ' . $strFolder;
-			}
-			else
-			{
-				$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . Backend::getTheme() . '/images/folderC.gif" width="18" height="18" alt=""> <a href="' . $this->addToUrl('node='.$strPath) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $strFolder . '</a>';
-			}
-		}
-
-		// Check whether the node is mounted
-		if (!$this->User->isAdmin && !$this->User->hasAccess($strNode, 'filemounts'))
-		{
-			$this->Session->set('tl_files_node', '');
-
-			$this->log('Folder ID '.$strNode.' was not mounted', 'tl_files addBreadcrumb', TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
-		}
-
-		// Limit tree
-		$GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root'] = array($strNode);
-
-		// Insert breadcrumb menu
-		$GLOBALS['TL_DCA']['tl_files']['list']['sorting']['breadcrumb'] .= '
-
-<ul id="tl_breadcrumb">
-  <li>' . implode(' &gt; </li><li>', $arrLinks) . '</li>
-</ul>';
+		Backend::addFilesBreadcrumb();
 	}
 
 
