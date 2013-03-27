@@ -138,8 +138,17 @@ class PageSelector extends \Widget
 		}
 		else
 		{
+			// Add the breadcrumb menu
+			\Backend::addPagesBreadcrumb();
+
+			// Root nodes (breadcrumb menu)
+			if (!empty($GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root']))
+			{
+				$tree = $this->renderPagetree($GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'][0], -20);
+			}
+
 			// Predefined node set (see #3563)
-			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes']))
+			elseif (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes']))
 			{
 				foreach ($this->eliminateNestedPages($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes']) as $node)
 				{
@@ -312,12 +321,14 @@ class PageSelector extends \Widget
 			$folderAttribute = '';
 			$img = $blnIsOpen ? 'folMinus.gif' : 'folPlus.gif';
 			$alt = $blnIsOpen ? $GLOBALS['TL_LANG']['MSC']['collapseNode'] : $GLOBALS['TL_LANG']['MSC']['expandNode'];
-			$return .= '<a href="'.$this->addToUrl($flag.'tg='.$id).'" title="'.specialchars($alt).'" onclick="Backend.getScrollOffset();return AjaxRequest.togglePagetree(this,\''.$xtnode.'_'.$id.'\',\''.$this->strField.'\',\''.$this->strName.'\','.$level.')">'.\Image::getHtml($img, '', 'style="margin-right:2px"').'</a>';
+			$return .= '<a href="'.$this->addToUrl($flag.'tg='.$id).'" title="'.specialchars($alt).'" onclick="return AjaxRequest.togglePagetree(this,\''.$xtnode.'_'.$id.'\',\''.$this->strField.'\',\''.$this->strName.'\','.$level.')">'.\Image::getHtml($img, '', 'style="margin-right:2px"').'</a>';
 		}
 
-		// Add the page name
+		// Set the protection status
 		$objPage->protected = ($objPage->protected || $protectedPage);
-		$return .= \Image::getHtml($this->getPageStatusIcon($objPage), '', $folderAttribute).' <label title="'.specialchars($objPage->title . ' (' . $objPage->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')').'" for="'.$this->strName.'_'.$id.'">'.(($objPage->type == 'root') ? '<strong>' : '').$objPage->title.(($objPage->type == 'root') ? '</strong>' : '').'</label></div> <div class="tl_right">';
+
+		// Add the current page
+		$return .= \Image::getHtml($this->getPageStatusIcon($objPage), '', $folderAttribute).' <a href="' . $this->addToUrl('node='.$objPage->id) . '" title="'.specialchars($objPage->title . ' (' . $objPage->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')').'">'.(($objPage->type == 'root') ? '<strong>' : '').$objPage->title.(($objPage->type == 'root') ? '</strong>' : '').'</a></div> <div class="tl_right">';
 
 		// Add checkbox or radio button
 		switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])

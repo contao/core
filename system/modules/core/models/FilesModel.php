@@ -64,6 +64,32 @@ class FilesModel extends \Model
 
 
 	/**
+	 * Find multiple files by their paths
+	 *
+	 * @param array $arrPaths   An array of file paths
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model\Collection|null A collection of models or null if there are no files
+	 */
+	public static function findMultipleByPaths($arrPaths, array $arrOptions=array())
+	{
+		if (!is_array($arrPaths) || empty($arrPaths))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.path", $arrPaths);
+		}
+
+		return static::findBy(array("$t.path IN(" . implode(',', array_fill(0, count($arrPaths), '?')) . ")"), $arrPaths, $arrOptions);
+	}
+
+
+	/**
 	 * Find multiple files with the same base path
 	 *
 	 * @param string $strPath    The base path

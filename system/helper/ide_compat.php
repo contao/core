@@ -109,6 +109,7 @@ namespace  {
 	abstract class Controller extends Contao\Controller {}
 	abstract class Database extends Contao\Database {}
 	class Date extends Contao\Date {}
+	class Dbafs extends Contao\Dbafs {}
 	class DcaExtractor extends Contao\DcaExtractor {}
 	class Email extends Contao\Email {}
 	class Encryption extends Contao\Encryption {}
@@ -225,6 +226,9 @@ namespace Database\Mysql {
 namespace Database\Mysqli {
 	class Result extends Contao\Database\Mysqli\Result {}
 	class Statement extends Contao\Database\Mysqli\Statement {}
+}
+namespace Dbafs {
+	class Filter extends Contao\Dbafs\Filter {}
 }
 namespace Files {
 	class Ftp extends Contao\Files\Ftp {}

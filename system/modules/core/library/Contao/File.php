@@ -300,8 +300,7 @@ class File extends \System
 	/**
 	 * Create the file if it does not yet exist
 	 *
-	 * @throws \Exception          If the file cannot be written
-	 * @throws \OutOfSyncException If the database is out of sync
+	 * @throws \Exception If the file cannot be written
 	 */
 	protected function createIfNotExists()
 	{
@@ -403,47 +402,15 @@ class File extends \System
 	 * Delete the file
 	 *
 	 * @return boolean True if the operation was successful
-	 *
-	 * @throws \OutOfSyncException If the database is out of sync
-	 */
+ */
 	public function delete()
 	{
-		if (!$this->blnSyncDb)
+		$return = $this->Files->delete($this->strFile);
+
+		// Update the database
+		if ($this->blnSyncDb)
 		{
-			$return = $this->Files->delete($this->strFile);
-		}
-		else
-		{
-			// Find the corresponding DB entry
-			$objModel = \FilesModel::findByPath($this->strFile, array('uncached'=>true));
-
-			if ($objModel === null)
-			{
-				throw new \OutOfSyncException("No database entry found for {$this->strFile}. Please synchronize the file system.");
-			}
-
-			// Delete the file
-			$return = $this->Files->delete($this->strFile);
-			$objModel->delete();
-
-			$strPath = dirname($this->strFile);
-
-			// Update the MD5 hash of the parent folders
-			while ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				$objFolder = new \Folder($strPath);
-				$objModel = \FilesModel::findByPath($strPath, array('uncached'=>true));
-
-				if ($objModel === null)
-				{
-					break;
-				}
-
-				$objModel->hash = $objFolder->hash;
-				$objModel->save();
-
-				$strPath = dirname($strPath);
-			}
+			\Dbafs::deleteResource($this->strFile);
 		}
 
 		return $return;
@@ -467,16 +434,15 @@ class File extends \System
 	 * Close the file handle
 	 *
 	 * @return boolean True if the operation was successful
-	 *
-	 * @throws \OutOfSyncException If the database is out of sync
 	 */
 	public function close()
 	{
 		$return = $this->Files->fclose($this->resFile);
 
-		// Create the file path
+		// Move the temporary file to its destination
 		if ($this->blnDoNotCreate)
 		{
+			// Create the file path
 			if (!file_exists(TL_ROOT . '/' . $this->strFile))
 			{
 				// Handle open_basedir restrictions
@@ -491,81 +457,14 @@ class File extends \System
 					new \Folder($strFolder);
 				}
 			}
+
+			$return = $this->Files->rename($this->strTmp, $this->strFile);
 		}
 
-		if (!$this->blnSyncDb)
+		// Update the database
+		if ($this->blnSyncDb)
 		{
-			if ($this->blnDoNotCreate)
-			{
-				$return = $this->Files->rename($this->strTmp, $this->strFile);
-			}
-		}
-		else
-		{
-			$strFolder = dirname($this->strFile);
-
-			// Get the parent ID
-			if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				$pid = 0;
-			}
-			else
-			{
-				$objParent = \FilesModel::findByPath($strFolder, array('uncached'=>true));
-
-				if ($objParent === null)
-				{
-					throw new \OutOfSyncException("No database entry found for $strFolder. Please synchronize the file system.");
-				}
-
-				$pid = $objParent->id;
-			}
-
-			// Move the temporary file to its destination
-			if ($this->blnDoNotCreate)
-			{
-				$return = $this->Files->rename($this->strTmp, $this->strFile);
-			}
-
-			// Find the corresponding DB entry
-			$objModel = \FilesModel::findByPath($this->strFile, array('uncached'=>true));
-
-			// New file
-			if ($objModel === null)
-			{
-				$objModel = new \FilesModel();
-				$objModel->pid       = $pid;
-				$objModel->tstamp    = time();
-				$objModel->name      = basename($this->strFile);
-				$objModel->type      = 'file';
-				$objModel->path      = $this->strFile;
-				$objModel->extension = $this->extension;
-				$objModel->hash      = $this->hash;
-			}
-			else
-			{
-				$objModel->hash      = $this->hash;
-				$objModel->tstamp    = time();
-			}
-
-			$objModel->save();
-
-			// Update the MD5 hash of the parent folders
-			while ($strFolder != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				$objFolder = new \Folder($strFolder);
-				$objModel = \FilesModel::findByPath($strFolder, array('uncached'=>true));
-
-				if ($objModel === null)
-				{
-					break;
-				}
-
-				$objModel->hash = $objFolder->hash;
-				$objModel->save();
-
-				$strFolder = dirname($strFolder);
-			}
+			\Dbafs::addResource($this->strFile);
 		}
 
 		return $return;
@@ -630,85 +529,31 @@ class File extends \System
 	 * @param string $strNewName The new path
 	 *
 	 * @return boolean True if the operation was successful
-	 *
-	 * @throws \OutOfSyncException If the database is out of sync
 	 */
 	public function renameTo($strNewName)
 	{
-		if (!$this->blnSyncDb)
+		$strParent = dirname($strNewName);
+
+		// Create the parent folder if it does not exist
+		if (!is_dir(TL_ROOT . '/' . $strParent))
 		{
-			if (($return = $this->Files->rename($this->strFile, $strNewName)) != false)
-			{
-				$this->strFile = $strNewName;
-				$this->arrImageSize = array();
-				$this->arrPathinfo = array();
-			}
+			new \Folder($strParent);
 		}
-		else
+
+		$return = $this->Files->rename($this->strFile, $strNewName);
+
+		// Update the database AFTER the file has been renamed
+		if ($this->blnSyncDb)
 		{
-			// Find the corresponding DB entry
-			$objFile = \FilesModel::findByPath($this->strFile, array('uncached'=>true));
+			\Dbafs::moveResource($this->strFile, $strNewName);
+		}
 
-			if ($objFile === null)
-			{
-				throw new \OutOfSyncException("No database entry found for {$this->strFile}. Please synchronize the file system.");
-			}
-
-			$strParent = dirname($strNewName);
-
-			// Create the parent folder if it does not exist
-			if (!is_dir(TL_ROOT . '/' . $strParent))
-			{
-				new \Folder($strParent);
-			}
-
-			// Set the parent ID
-			if ($strParent == $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				$objFile->pid = 0;
-			}
-			else
-			{
-				$objFolder = \FilesModel::findByPath($strParent, array('uncached'=>true));
-
-				if ($objFolder === null)
-				{
-					throw new \OutOfSyncException("No database entry found for $strParent. Please synchronize the file system.");
-				}
-
-				$objFile->pid = $objFolder->id;
-			}
-
-			// Move the file
-			if (($return = $this->Files->rename($this->strFile, $strNewName)) != false)
-			{
-				$this->strFile = $strNewName;
-				$this->arrImageSize = array();
-				$this->arrPathinfo = array();
-			}
-
-			// Update the database
-			$objFile->path = $strNewName;
-			$objFile->name = basename($strNewName);
-			$objFile->save();
-
-			// Update the MD5 hash of the parent folders
-			foreach (array(dirname($this->strFile), $strParent) as $strPath)
-			{
-				if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					$objModel = \FilesModel::findByPath($strPath, array('uncached'=>true));
-
-					if ($objModel === null)
-					{
-						throw new \OutOfSyncException("No database entry found for $strPath. Please synchronize the file system.");
-					}
-
-					$objFolder = new \Folder($objModel->path);
-					$objModel->hash = $objFolder->hash;
-					$objModel->save();
-				}
-			}
+		// Reset the object AFTER the database has been updated
+		if ($return != false)
+		{
+			$this->strFile = $strNewName;
+			$this->arrImageSize = array();
+			$this->arrPathinfo = array();
 		}
 
 		return $return;
@@ -721,78 +566,23 @@ class File extends \System
 	 * @param string $strNewName The target path
 	 *
 	 * @return boolean True if the operation was successful
-	 *
-	 * @throws \OutOfSyncException If the database is out of sync
 	 */
 	public function copyTo($strNewName)
 	{
-		if (!$this->blnSyncDb)
+		$strParent = dirname($strNewName);
+
+		// Create the parent folder if it does not exist
+		if (!is_dir(TL_ROOT . '/' . $strParent))
 		{
-			$return = $this->Files->copy($this->strFile, $strNewName);
+			new \Folder($strParent);
 		}
-		else
+
+		$return = $this->Files->copy($this->strFile, $strNewName);
+
+		// Update the database AFTER the file has been renamed
+		if ($this->blnSyncDb)
 		{
-			// Find the corresponding DB entry
-			$objFile = \FilesModel::findByPath($this->strFile, array('uncached'=>true));
-
-			if ($objFile === null)
-			{
-				throw new \OutOfSyncException("No database entry found for {$this->strFile}. Please synchronize the file system.");
-			}
-
-			$strParent = dirname($strNewName);
-
-			// Create the parent folder if it does not exist
-			if (!is_dir(TL_ROOT . '/' . $strParent))
-			{
-				new \Folder($strParent);
-			}
-
-			$objNewFile = clone $objFile->current();
-
-			// Set the parent ID
-			if ($strParent == $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				$objNewFile->pid = 0;
-			}
-			else
-			{
-				$objFolder = \FilesModel::findByPath($strParent, array('uncached'=>true));
-
-				if ($objFolder === null)
-				{
-					throw new \OutOfSyncException("No database entry found for $strParent. Please synchronize the file system.");
-				}
-
-				$objNewFile->pid = $objFolder->id;
-			}
-
-			// Update the database
-			$objNewFile->tstamp = time();
-			$objNewFile->path = $strNewName;
-			$objNewFile->name = basename($strNewName);
-			$objNewFile->save();
-
-			// Copy the file
-			$return = $this->Files->copy($this->strFile, $strNewName);
-
-			// Update the MD5 hash of the parent folders
-			foreach (array(dirname($this->strFile), $strParent) as $strPath)
-			{
-				if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					$objModel = \FilesModel::findByPath($strPath, array('uncached'=>true));
-
-					if ($objModel === null)
-					{
-						throw new \OutOfSyncException("No database entry found for $strPath. Please synchronize the file system.");
-					}
-
-					$objFolder = new \Folder($objModel->path);
-					$objModel->hash = $objFolder->hash;
-					$objModel->save();
-				}
-			}
+			\Dbafs::copyResource($this->strFile, $strNewName);
 		}
 
 		return $return;
@@ -1075,6 +865,14 @@ class File extends \System
 	 */
 	protected function getHash()
 	{
-		return md5_file(TL_ROOT . '/' . $this->strFile);
+		// Do not try to hash if bigger than 2 GB
+		if ($this->filesize >= 2147483648)
+		{
+			return '';
+		}
+		else
+		{
+			return md5_file(TL_ROOT . '/' . $this->strFile);
+		}
 	}
 }

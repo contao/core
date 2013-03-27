@@ -449,57 +449,7 @@ class Theme extends \Backend
 						$strFolder = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $strFolder);
 					}
 
-					// Index the parent folders
-					$strTmp = $strFolder;
-					$intNextPid = null;
-					$arrParents = array();
-
-					while ($strTmp != '' && $strTmp != '.' && $strTmp != $GLOBALS['TL_CONFIG']['uploadPath'])
-					{
-						$arrParents[] = $strTmp;
-						$strTmp = dirname($strTmp);
-					}
-
-					foreach (array_reverse($arrParents) as $strParent)
-					{
-						$objParent = \FilesModel::findByPath($strParent);
-
-						if ($objParent === null)
-						{
-							if ($intNextPid === null)
-							{
-								if (dirname($strParent) == $GLOBALS['TL_CONFIG']['uploadPath'])
-								{
-									$intNextPid = 0;
-								}
-								else
-								{
-									$objPid = \FilesModel::findByPath(dirname($strParent));
-									$intNextPid = $objPid->id;
-								}
-							}
-
-							$objFolder = new \Folder($strParent);
-
-							$objModel = new \FilesModel();
-							$objModel->pid    = $intNextPid;
-							$objModel->tstamp = time();
-							$objModel->name   = basename($strParent);
-							$objModel->type   = 'folder';
-							$objModel->path   = $strParent;
-							$objModel->hash   = $objFolder->hash;
-							$objModel->found  = 1;
-							$objModel->save();
-
-							$intNextPid = $objModel->id;
-						}
-						else
-						{
-							$intNextPid = $objParent->id; // see #4952
-						}
-					}
-
-					$this->syncNewFolder($strFolder, $intNextPid);
+					\Dbafs::addResource($strFolder);
 				}
 			}
 
@@ -1103,77 +1053,6 @@ class Theme extends \Backend
 			if (preg_match('/\.(' . implode('|', $arrAllowed) . ')$/', $strFile) && strncmp($strFile, 'be_', 3) !== 0 && strncmp($strFile, 'nl_', 3) !== 0)
 			{
 				$objArchive->addFile($strFolder .'/'. $strFile);
-			}
-		}
-	}
-
-
-	/**
-	 * Recursively synchronize the new folder
-	 * @param string
-	 * @param integer
-	 */
-	protected function syncNewFolder($strPath, $intPid=0)
-	{
-		$arrFiles = array();
-		$arrFolders = array();
-		$arrScan = scan(TL_ROOT . '/' . $strPath);
-
-		// Separate files from folders
-		foreach ($arrScan as $strFile)
-		{
-			if (is_dir(TL_ROOT . '/' . $strPath . '/' . $strFile))
-			{
-				$arrFolders[] = $strPath . '/' . $strFile;
-			}
-			else
-			{
-				$arrFiles[] = $strPath . '/' . $strFile;
-			}
-		}
-
-		// Folders
-		foreach ($arrFolders as $strFolder)
-		{
-			$objFolder = new \Folder($strFolder);
-			$objModel = \FilesModel::findByPath($strFolder);
-
-			// Create the entry if it does not yet exist
-			if ($objModel === null)
-			{
-				$objModel = new \FilesModel();
-				$objModel->pid    = $intPid;
-				$objModel->tstamp = time();
-				$objModel->name   = basename($strFolder);
-				$objModel->type   = 'folder';
-				$objModel->path   = $strFolder;
-				$objModel->hash   = $objFolder->hash;
-				$objModel->found  = 1;
-				$objModel->save();
-			}
-
-			$this->syncNewFolder($strFolder, $objModel->id);
-		}
-
-		// Files
-		foreach ($arrFiles as $strFile)
-		{
-			$objFile = new \File($strFile, true);
-			$objModel = \FilesModel::findByPath($strFile);
-
-			// Create the entry if it does not yet exist
-			if ($objModel === null)
-			{
-				$objModel = new \FilesModel();
-				$objModel->pid       = $intPid;
-				$objModel->tstamp    = time();
-				$objModel->name      = basename($strFile);
-				$objModel->type      = 'file';
-				$objModel->path      = $strFile;
-				$objModel->extension = $objFile->extension;
-				$objModel->hash      = $objFile->hash;
-				$objModel->found     = 1;
-				$objModel->save();
 			}
 		}
 	}

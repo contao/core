@@ -246,6 +246,17 @@ abstract class Model
 
 
 	/**
+	 * Return the object instance
+	 *
+	 * @return \Model The model object
+	 */
+	public function current()
+	{
+		return $this;
+	}
+
+
+	/**
 	 * Save the current record
 	 *
 	 * @param boolean $blnForceInsert Force creating a new record
@@ -276,7 +287,7 @@ abstract class Model
 
 		// Update the model data from the DB record (might be modified by default values or triggers)
 		$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-									   ->execute($this->{static::$strPk});
+									   ->executeUncached($this->{static::$strPk});
 
 		$this->setRow($res->row());
 		return $this;

@@ -242,6 +242,7 @@ var AjaxRequest =
 	 */
 	togglePagetree: function (el, id, field, name, level) {
 		el.blur();
+		Backend.getScrollOffset();
 
 		var item = $(id),
 			image = $(el).getFirst('img');
@@ -304,11 +305,13 @@ var AjaxRequest =
 	 * @param string
 	 * @param string
 	 * @param string
+	 * @param string
 	 * @param integer
 	 * @return boolean
 	 */
-	toggleFiletree: function (el, id, field, name, level) {
+	toggleFiletree: function (el, id, folder, field, name, level) {
 		el.blur();
+		Backend.getScrollOffset();
 
 		var item = $(id),
 			image = $(el).getFirst('img');
@@ -360,7 +363,7 @@ var AjaxRequest =
 				// HOOK
 				window.fireEvent('ajax_change');
    			}
-		}).post({'action':'loadFiletree', 'id':id, 'level':level, 'field':field, 'name':name, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
+		}).post({'action':'loadFiletree', 'id':id, 'folder':folder, 'level':level, 'field':field, 'name':name, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 
 		return false;
 	},
