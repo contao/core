@@ -327,24 +327,14 @@ class Folder extends \System
 		$arrFiles = array();
 
 		$it = new \RecursiveIteratorIterator(
-			new \RecursiveDirectoryIterator(TL_ROOT . '/' . $this->strFolder, \FilesystemIterator::UNIX_PATHS)
+			new \RecursiveDirectoryIterator(TL_ROOT . '/' . $this->strFolder, \FilesystemIterator::UNIX_PATHS), \RecursiveIteratorIterator::SELF_FIRST
 		);
 
 		while ($it->valid())
 		{
-			if ($it->isFile() && $it->getFilename() != '.DS_Store')
+			if (!$it->isDot() && $it->getFilename() != '.DS_Store')
 			{
 				$arrFiles[] = $it->getSubPathname();
-
-				// Do not try to hash if bigger than 2 GB
-				if ($it->getSize() >= 2147483648)
-				{
-					return '';
-				}
-				else
-				{
-					$arrFiles[] = md5_file($it->getPathname());
-				}
 			}
 
 			$it->next();
