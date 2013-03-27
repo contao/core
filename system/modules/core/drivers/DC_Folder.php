@@ -1713,8 +1713,93 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			return '';
 		}
 
-		$this->import('Automator');
-		return $this->Automator->syncFiles();
+		$this->import('BackendUser', 'User');
+		$this->loadLanguageFile('tl_files');
+
+		// Stop if a regular user manually triggers the file synchronisation
+		if (!$this->User->isAdmin)
+		{
+			return '<p class="tl_error">You have to be an administrator to run the file synchronisation.</p>';
+		}
+
+		// Synchronize
+		\Dbafs::syncFiles();
+
+		// Show the results
+		$arrMessages = array();
+		$arrCounts   = array('Added'=>0, 'Changed'=>0, 'Unchanged'=>0, 'Moved'=>0, 'Deleted'=>0);
+
+		// Read the log file
+		$fh = fopen(TL_ROOT . '/system/logs/sync.log', 'rb');
+
+		while (($buffer = fgets($fh)) !== false)
+		{
+			list($type, $file) = explode('] ', trim(substr($buffer, 1)), 2);
+
+			// Add a message depending on the type
+			switch ($type)
+			{
+				case 'Added';
+					$arrMessages[] = '<p class="tl_new">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncAdded'], $file) . '</p>';
+					break;
+
+				case 'Changed';
+					$arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncChanged'], $file) . '</p>';
+					break;
+
+				case 'Unchanged';
+					$arrMessages[] = '<p class="tl_confirm hidden">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncUnchanged'], $file) . '</p>';
+					break;
+
+				case 'Moved';
+					list($source, $target) = explode(' to ', $file, 2);
+					$arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncMoved'], $source, $target) . '</p>';
+					break;
+
+				case 'Deleted';
+					$arrMessages[] = '<p class="tl_error">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncDeleted'], $file) . '</p>';
+					break;
+			}
+
+			++$arrCounts[$type];
+		}
+
+		// Close the log file
+		unset($buffer);
+		fclose($fh);
+
+		// Confirm
+		\Message::addConfirmation($GLOBALS['TL_LANG']['tl_files']['syncComplete']);
+
+		$return = '
+<div id="tl_buttons">
+<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
+</div>
+
+<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_files']['sync'][1].'</h2>
+'.\Message::generate().'
+<div id="sync-results">
+  <p class="left">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncResult'], \System::getFormattedNumber($arrCounts['Added'], 0), \System::getFormattedNumber($arrCounts['Changed'], 0), \System::getFormattedNumber($arrCounts['Unchanged'], 0), \System::getFormattedNumber($arrCounts['Moved'], 0), \System::getFormattedNumber($arrCounts['Deleted'], 0)) . '</p>
+  <p class="right"><input type="checkbox" id="show-hidden" onclick="Backend.toggleUnchanged()"> <label for="show-hidden">' . $GLOBALS['TL_LANG']['tl_files']['syncShowUnchanged'] . '</label></p>
+  <div class="clear"></div>
+</div>
+<div class="tl_message nobg" id="result-list" style="margin-bottom:2em">';
+
+		// Add the messages
+		foreach ($arrMessages as $strMessage)
+		{
+			$return .= "\n  " . $strMessage;
+		}
+
+		$return .= '
+</div>
+
+<div class="tl_submit_container">
+  <a href="'.$this->getReferer(true).'" class="tl_submit" style="display:inline-block">'.$GLOBALS['TL_LANG']['MSC']['continue'].'</a>
+</div>
+';
+
+		return $return;
 	}
 
 
