@@ -1747,10 +1747,11 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$this->import('BackendUser', 'User');
 		$this->loadLanguageFile('tl_files');
 
-		// Stop if a regular user manually triggers the file synchronisation
-		if (!$this->User->isAdmin)
+		// Check the permission to synchronize
+		if (!$this->User->isAdmin && !$this->User->hasAccess('f6', 'fop'))
 		{
-			return '<p class="tl_error">You have to be an administrator to run the file synchronisation.</p>';
+			$this->log('Not enough permissions to synchronize the file system', 'DC_Folder sync()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		// Synchronize

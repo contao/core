@@ -179,7 +179,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'exclude'                 => true,
 			'default'                 => array('f1', 'f2', 'f3'),
 			'inputType'               => 'checkbox',
-			'options'                 => array('f1', 'f2', 'f3', 'f4', 'f5'),
+			'options'                 => array('f1', 'f2', 'f3', 'f4', 'f5', 'f6'),
 			'reference'               => &$GLOBALS['TL_LANG']['FOP'],
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "blob NULL"

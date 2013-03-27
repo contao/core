@@ -410,6 +410,9 @@
       <trans-unit id="FOP.f5">
         <source>Edit files in the source editor</source>
       </trans-unit>
+      <trans-unit id="FOP.f6">
+        <source>Synchronize the file system with the database</source>
+      </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
       </trans-unit>
