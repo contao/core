@@ -57,7 +57,10 @@ class FileSelector extends \Widget
 		$this->convertValuesToPaths();
 
 		// Add the breadcrumb menu
-		\Backend::addFilesBreadcrumb();
+		if (\Input::get('do') != 'files')
+		{
+			\Backend::addFilesBreadcrumb();
+		}
 
 		// Root nodes (breadcrumb menu)
 		if (!empty($GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root']))

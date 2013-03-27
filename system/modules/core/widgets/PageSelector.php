@@ -139,7 +139,10 @@ class PageSelector extends \Widget
 		else
 		{
 			// Add the breadcrumb menu
-			\Backend::addPagesBreadcrumb();
+			if (\Input::get('do') != 'page')
+			{
+				\Backend::addPagesBreadcrumb();
+			}
 
 			// Root nodes (breadcrumb menu)
 			if (!empty($GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root']))
