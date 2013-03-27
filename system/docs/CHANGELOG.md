@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
+### New
+Added the "parseWidget" hook (see #5553).
+
 ### Changed
 Link insert tags and navigation modules are now domain-aware (see #3765).
 
