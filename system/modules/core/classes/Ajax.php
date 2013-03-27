@@ -259,8 +259,6 @@ class Ajax extends \Backend
 					$strField = preg_replace('/(.*)_[0-9a-zA-Z]+$/', '$1', $strField);
 				}
 
-				$strKey = ($this->strAction == 'reloadPagetree') ? 'pageTree' : 'fileTree';
-
 				// The field does not exist
 				if (!$this->Database->fieldExists($strField, $dc->table))
 				{
@@ -281,15 +279,20 @@ class Ajax extends \Backend
 				}
 
 				$varValue = \Input::post('value');
+				$strKey = ($this->strAction == 'reloadPagetree') ? 'pageTree' : 'fileTree';
 
-				// Convert the selected paths to IDs
+				// Convert the selected values
 				if ($varValue != '')
 				{
 					$varValue = trimsplit(',', $varValue);
 
-					foreach ($varValue as $k=>$v)
+					// Automatically add resources to the DBAFS
+					if ($strKey == 'fileTree')
 					{
-						$varValue[$k] = \Dbafs::addResource($v)->id;
+						foreach ($varValue as $k=>$v)
+						{
+							$varValue[$k] = \Dbafs::addResource($v)->id;
+						}
 					}
 
 					$varValue = serialize($varValue);
