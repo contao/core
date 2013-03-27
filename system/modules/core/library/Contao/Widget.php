@@ -516,6 +516,16 @@ abstract class Widget extends \Controller
 		$strBuffer = ob_get_contents();
 		ob_end_clean();
 
+		// HOOK: add custom parse filters
+		if (isset($GLOBALS['TL_HOOKS']['parseWidget']) && is_array($GLOBALS['TL_HOOKS']['parseWidget']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['parseWidget'] as $callback)
+			{
+				$this->import($callback[0]);
+				$strBuffer = $this->$callback[0]->$callback[1]($strBuffer, $this->strTemplate);
+			}
+		}
+	
 		return $strBuffer;
 	}
 
