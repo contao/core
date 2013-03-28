@@ -197,7 +197,7 @@ class BackendUser extends \User
 			exit;
 		}
 
-		$this->redirect($strRedirect);
+		\Controller::redirect($strRedirect);
 	}
 
 
@@ -455,7 +455,7 @@ class BackendUser extends \User
 		{
 			$session['backend_modules'][\Input::get('mtg')] = (isset($session['backend_modules'][\Input::get('mtg')]) && $session['backend_modules'][\Input::get('mtg')] == 0) ? 1 : 0;
 			$this->Session->setData($session);
-			$this->redirect(preg_replace('/(&(amp;)?|\?)mtg=[^& ]*/i', '', \Environment::get('request')));
+			\Controller::redirect(preg_replace('/(&(amp;)?|\?)mtg=[^& ]*/i', '', \Environment::get('request')));
 		}
 
 		$arrInactiveModules = deserialize($GLOBALS['TL_CONFIG']['inactiveModules']);
@@ -468,7 +468,7 @@ class BackendUser extends \User
 				$arrModules[$strGroupName]['icon'] = 'modMinus.gif';
 				$arrModules[$strGroupName]['title'] = specialchars($GLOBALS['TL_LANG']['MSC']['collapseNode']);
 				$arrModules[$strGroupName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strGroupName]) ? $GLOBALS['TL_LANG']['MOD'][$strGroupName][0] : $GLOBALS['TL_LANG']['MOD'][$strGroupName]) != false) ? $label : $strGroupName;
-				$arrModules[$strGroupName]['href'] = $this->addToUrl('mtg=' . $strGroupName);
+				$arrModules[$strGroupName]['href'] = \Controller::addToUrl('mtg=' . $strGroupName);
 
 				// Do not show the modules if the group is closed
 				if (!$blnShowAll && isset($session['backend_modules'][$strGroupName]) && $session['backend_modules'][$strGroupName] < 1)

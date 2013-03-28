@@ -37,7 +37,6 @@ usage()
 	echo -e "  \033[0;36mtablesort\033[0m     Minify the tablesort plugin (assets/mootools/tablesort)"
 	echo ""
 	echo -e "  Other"
-	echo -e "  \033[0;36mcodemirror\033[0m    Minify the CodeMirror plugin (assets/codemirror)"
 	echo -e "  \033[0;36mhighlighter\033[0m   Minify the SyntaxHighlighter plugin (assets/highlighter)"
 	echo -e "  \033[0;36mswipe\033[0m         Minify the swipe.js plugin (assets/swipe)"
 	echo ""
@@ -440,29 +439,6 @@ tablesort()
 	echo "$copyright" > $version/js/tablesort.js
 	$js $version/js/tablesort-uncompressed.js >> $version/js/tablesort.js
 	echo "  Created $version/js/tablesort.js"
-}
-
-##
-# assets/codemirror
-##
-codemirror()
-{
-	for version in `ls -d $folder/assets/codemirror/*`; do
-		copyright="/* CodeMirror $(basename $version), (C) 2011 by Marijn Haverbeke, MIT-style license */"
-
-		# CSS
-		echo "$copyright" > $version/codemirror.css
-		$css $version/src/codemirror.css >> $version/codemirror.css
-		echo "  Created $version/codemirror.css"
-
-		# JavaScript
-		echo "$copyright" > $version/codemirror.js
-		files=('codemirror.js' 'runmode.js' 'overlay.js' 'clike.js' 'css.js' 'diff.js' 'htmlmixed.js' 'javascript.js' 'markdown.js' 'mysql.js' 'php.js' 'xml.js')
-		for file in ${files[@]}; do
-			$js $version/src/$file >> $version/codemirror.js
-		done
-		echo "  Created $version/codemirror.js"
-	done
 }
 
 ##

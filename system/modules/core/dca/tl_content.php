@@ -1437,17 +1437,19 @@ class tl_content extends Backend
 
 			if (!empty($arrMeta))
 			{
-				$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=(SELECT pid FROM " . $dc->activeRecord->ptable . " WHERE id=?)")
+				$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=(SELECT pid FROM " . ($dc->activeRecord->ptable ?: 'tl_article') . " WHERE id=?)")
 										  ->execute($dc->activeRecord->pid);
 
 				if ($objPage->numRows)
 				{
-					$objPage = $this->getPageDetails($objPage);
+					$objModel = new PageModel();
+					$objModel->setRow($objPage->row());
+					$objModel->loadDetails();
 
-					if (isset($arrMeta[$objPage->rootLanguage]))
+					if (isset($arrMeta[$objModel->rootLanguage]))
 					{
-						\Input::setPost('alt', $arrMeta[$objPage->rootLanguage]['title']);
-						\Input::setPost('caption', $arrMeta[$objPage->rootLanguage]['caption']);
+						\Input::setPost('alt', $arrMeta[$objModel->rootLanguage]['title']);
+						\Input::setPost('caption', $arrMeta[$objModel->rootLanguage]['caption']);
 					}
 				}
 			}
