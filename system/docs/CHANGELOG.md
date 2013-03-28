@@ -5,6 +5,9 @@ Version 3.1.beta1 (2013-03-XX)
 ------------------------------
 
 ### New
+Front end modules can now be disabled in the page layout.
+
+### New
 Added the "parseWidget" hook (see #5553).
 
 ### Changed

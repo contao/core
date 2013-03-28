@@ -164,6 +164,7 @@ class ModuleWizard extends \Widget
     <th>'.$GLOBALS['TL_LANG']['MSC']['mw_module'].'</th>
     <th>&nbsp;</th>
     <th>'.$GLOBALS['TL_LANG']['MSC']['mw_column'].'</th>
+    <th>'.$GLOBALS['TL_LANG']['MSC']['mw_disable'].'</th>
     <th>&nbsp;</th>
   </tr>
   </thead>
@@ -198,7 +199,11 @@ class ModuleWizard extends \Widget
 			}
 
 			$return .= '
-    <td><select name="'.$this->strId.'['.$i.'][col]" class="tl_select_column" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()">'.$options.'</select></td>
+    <td><select name="'.$this->strId.'['.$i.'][col]" class="tl_select_column" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()">'.$options.'</select></td>';
+
+			// disable checkbox
+			$return .= '
+    <td class="tl_mw_disable"><input name="'.$this->strId.'['.$i.'][disable]" type="checkbox" class="tl_checkbox" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()"'. (($this->varValue[$i]['disable']) ? ' checked' : '').'></td>
     <td>';
 
 			// Add buttons
