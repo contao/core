@@ -40,12 +40,6 @@ class CheckBox extends \Widget
 	 */
 	protected $strTemplate = 'be_widget_chk';
 
-	/**
-	 * Options
-	 * @var array
-	 */
-	protected $arrOptions = array();
-
 
 	/**
 	 * Add specific attributes

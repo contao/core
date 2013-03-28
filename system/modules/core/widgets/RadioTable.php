@@ -46,12 +46,6 @@ class RadioTable extends \Widget
 	 */
 	protected $strTemplate = 'be_widget';
 
-	/**
-	 * Options
-	 * @var integer
-	 */
-	protected $arrOptions = array();
-
 
 	/**
 	 * Add specific attributes

@@ -40,12 +40,6 @@ class SelectMenu extends \Widget
 	 */
 	protected $strTemplate = 'be_widget';
 
-	/**
-	 * Options
-	 * @var array
-	 */
-	protected $arrOptions = array();
-
 
 	/**
 	 * Add specific attributes

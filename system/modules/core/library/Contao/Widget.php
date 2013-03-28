@@ -116,6 +116,12 @@ abstract class Widget extends \Controller
 	protected $arrConfiguration = array();
 
 	/**
+	 * Options
+	 * @var array
+	 */
+	protected $arrOptions = array();
+
+	/**
 	 * Submit indicator
 	 * @var boolean
 	 */

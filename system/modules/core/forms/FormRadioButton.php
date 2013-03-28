@@ -46,12 +46,6 @@ class FormRadioButton extends \Widget
 	 */
 	protected $strError = '';
 
-	/**
-	 * Options
-	 * @var array
-	 */
-	protected $arrOptions = array();
-
 
 	/**
 	 * Add specific attributes

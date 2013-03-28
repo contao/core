@@ -46,12 +46,6 @@ class FormSelectMenu extends \Widget
 	 */
 	protected $strTemplate = 'form_widget';
 
-	/**
-	 * Options
-	 * @var array
-	 */
-	protected $arrOptions = array();
-
 
 	/**
 	 * Add specific attributes

@@ -40,12 +40,6 @@ class RadioButton extends \Widget
 	 */
 	protected $strTemplate = 'be_widget_rdo';
 
-	/**
-	 * Options
-	 * @var array
-	 */
-	protected $arrOptions = array();
-
 
 	/**
 	 * Add specific attributes
