@@ -18,7 +18,7 @@
  * the web browser reload those resources after a Contao update.
  */
 define('VERSION', '3.1');
-define('BUILD', 'beta1');
+define('BUILD', 'RC1');
 define('LONG_TERM_SUPPORT', false);
 define('ACE', '1.0.0');
 define('CSS3PIE', '1.0.0');
