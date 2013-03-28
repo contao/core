@@ -14,6 +14,7 @@ Link insert tags and navigation modules are now domain-aware (see #3765).
 Improved the database-assisted file system:
 
  * The file picker now shows the file system instead of the database
+ * You can switch from the file picker to the file manager in the popup dialog
  * The file picker automatically adds the selected resources to the database
 
 This means that you do not have to manually synchronize the file system and the
@@ -134,9 +135,6 @@ Added an option to disable CSS3PIE in the style sheet settings (see #4985).
 
 ### Improved
 Link the file/page picker and file/page manager (see #4856).
-
-### Changed
-Moved `DC_Folder::sync()` to `Automator::syncFiles()` (see #5099).
 
 ### Changed
 Made the years in monthly archive menus clickable (see #4450).
