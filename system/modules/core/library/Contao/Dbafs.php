@@ -395,7 +395,7 @@ class Dbafs
 		$objFiles = new \RecursiveIteratorIterator(
 			new \Dbafs\Filter(
 				new \RecursiveDirectoryIterator(
-					TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'], \FilesystemIterator::UNIX_PATHS)
+					TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'], \FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS)
 			), \RecursiveIteratorIterator::SELF_FIRST
 		);
 

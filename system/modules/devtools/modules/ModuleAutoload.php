@@ -136,7 +136,9 @@ class ModuleAutoload extends \BackendModule
 
 			// Recursively scan all subfolders
 			$objFiles = new \RecursiveIteratorIterator(
-				new \RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule, \FilesystemIterator::UNIX_PATHS)
+				new \RecursiveDirectoryIterator(
+					TL_ROOT . '/system/modules/' . $strModule, \FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS
+				)
 			);
 
 			// Get all PHP files
@@ -243,7 +245,9 @@ class ModuleAutoload extends \BackendModule
 			if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
 			{
 				$objFiles = new \RecursiveIteratorIterator(
-					new \RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule . '/templates', \FilesystemIterator::UNIX_PATHS)
+					new \RecursiveDirectoryIterator(
+						TL_ROOT . '/system/modules/' . $strModule . '/templates', \FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS
+					)
 				);
 
 				foreach ($objFiles as $objFile)
@@ -445,7 +449,9 @@ EOT
 
 			// Recursively scan all subfolders
 			$objFiles = new \RecursiveIteratorIterator(
-				new \RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule, \FilesystemIterator::UNIX_PATHS)
+				new \RecursiveDirectoryIterator(
+					TL_ROOT . '/system/modules/' . $strModule, \FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS
+				)
 			);
 
 			// Get all PHP files

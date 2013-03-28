@@ -327,7 +327,9 @@ class Folder extends \System
 		$arrFiles = array();
 
 		$it = new \RecursiveIteratorIterator(
-			new \RecursiveDirectoryIterator(TL_ROOT . '/' . $this->strFolder, \FilesystemIterator::UNIX_PATHS), \RecursiveIteratorIterator::SELF_FIRST
+			new \RecursiveDirectoryIterator(
+				TL_ROOT . '/' . $this->strFolder, \FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS
+			), \RecursiveIteratorIterator::SELF_FIRST
 		);
 
 		while ($it->valid())
