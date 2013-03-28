@@ -77,37 +77,25 @@
         <source>Start upload</source>
         <target>Upload starten</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncFound">
-        <source>Found the original file &quot;%s&quot; at &quot;%s&quot;</source>
-        <target>Die Originaldatei &quot;%s&quot; wurde als &quot;%s&quot; gefunden</target>
+      <trans-unit id="tl_files.syncAdded">
+        <source>Added the file or folder &quot;%s&quot;</source>
+        <target>Die Datei bzw. der Ordner &quot;%s&quot; wurde hinzugefügt</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncRemoved">
+      <trans-unit id="tl_files.syncChanged">
+        <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+        <target>Der Hash der Datei bzw. des Ordners &quot;%s&quot; wurde aktualisiert</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncUnchanged">
+        <source>Found the file or folder &quot;%s&quot;</source>
+        <target>Die Datei bzw. der Ordner &quot;%s&quot; wurde gefunden</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncMoved">
+        <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>Die Datei bzw. der Ordner &quot;%s&quot; wurde als &quot;%s&quot; gefunden</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncDeleted">
         <source>Removed the file or folder &quot;%s&quot;</source>
-        <target>Die Datei oder der Ordner &quot;%s&quot; wurde entfernt</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFolderC">
-        <source>Created the folder &quot;%s&quot;</source>
-        <target>Der Ordner &quot;%s&quot; wurde erstellt</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFolderF">
-        <source>Found the folder &quot;%s&quot;</source>
-        <target>Der Ordner &quot;%s&quot; wurde gefunden</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFolderH">
-        <source>Updated the hash of the folder &quot;%s&quot;</source>
-        <target>Der Hash des Ordners &quot;%s&quot; wurde aktualisiert</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFileC">
-        <source>Created the file &quot;%s&quot;</source>
-        <target>Die Datei &quot;%s&quot; wurde erstellt</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFileF">
-        <source>Found the file &quot;%s&quot;</source>
-        <target>Die Datei &quot;%s&quot; wurde gefunden</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFileH">
-        <source>Updated the hash of the file &quot;%s&quot;</source>
-        <target>Der Hash der Datei &quot;%s&quot; wurde aktualisiert</target>
+        <target>Die Datei bzw. der Ordner &quot;%s&quot; wurde gelöscht</target>
       </trans-unit>
       <trans-unit id="tl_files.syncComplete">
         <source>The synchronization has been completed</source>

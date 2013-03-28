@@ -77,37 +77,25 @@
         <source>Start upload</source>
         <target>Запустить загрузку</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncFound">
-        <source>Found the original file &quot;%s&quot; at &quot;%s&quot;</source>
-        <target>Найден исходный файл &quot;%s&quot; в &quot;%s&quot;</target>
+      <trans-unit id="tl_files.syncAdded">
+        <source>Added the file or folder &quot;%s&quot;</source>
+        <target>Добавить файл или каталог &quot;%s&quot;</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncRemoved">
+      <trans-unit id="tl_files.syncChanged">
+        <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+        <target>Обновлен хэш файла или каталога &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncUnchanged">
+        <source>Found the file or folder &quot;%s&quot;</source>
+        <target>Найден файл или каталог &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncMoved">
+        <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>Найден файл или каталог &quot;%s&quot; на &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncDeleted">
         <source>Removed the file or folder &quot;%s&quot;</source>
         <target>Удален файл или каталог &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFolderC">
-        <source>Created the folder &quot;%s&quot;</source>
-        <target>Создан каталог &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFolderF">
-        <source>Found the folder &quot;%s&quot;</source>
-        <target>Найден каталог &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFolderH">
-        <source>Updated the hash of the folder &quot;%s&quot;</source>
-        <target>Обновлен хеш каталога &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFileC">
-        <source>Created the file &quot;%s&quot;</source>
-        <target>Создан файл &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFileF">
-        <source>Found the file &quot;%s&quot;</source>
-        <target>Найден файл &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFileH">
-        <source>Updated the hash of the file &quot;%s&quot;</source>
-        <target>Обновлен хеш файла &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncComplete">
         <source>The synchronization has been completed</source>

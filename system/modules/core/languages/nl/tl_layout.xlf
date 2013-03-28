@@ -167,9 +167,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.1">
         <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
+        <target>Genereert een responsieve CSS layout gebaseerd op de pagina indeling instellingen. Deze component is vereist om de pagina layout generator te laten werken!</target>
       </trans-unit>
       <trans-unit id="tl_layout.grid.css.0">
         <source>12-column grid</source>
+        <target>12-koloms grid</target>
       </trans-unit>
       <trans-unit id="tl_layout.grid.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>

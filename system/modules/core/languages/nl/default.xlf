@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="ERR.general">
         <source>An error occurred!</source>
-        <target>Een fout is opgetreden!</target>
+        <target>Er is een fout is opgetreden!</target>
       </trans-unit>
       <trans-unit id="ERR.unique">
         <source>Duplicate entry in field &quot;%s&quot;!</source>
@@ -544,6 +544,10 @@
       <trans-unit id="FOP.f5">
         <source>Edit files in the source editor</source>
         <target>Bewerk bestanden in de editor</target>
+      </trans-unit>
+      <trans-unit id="FOP.f6">
+        <source>Synchronize the file system with the database</source>
+        <target>Synchroniseer het bestandssysteem met de database</target>
       </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
@@ -1609,9 +1613,11 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
       </trans-unit>
       <trans-unit id="MSC.fileManager">
         <source>Open the file manager</source>
+        <target>Open bestandsbeheer</target>
       </trans-unit>
       <trans-unit id="MSC.pageManager">
         <source>Modify the site structure</source>
+        <target>Aanpassen van de site-structuur</target>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
@@ -2036,6 +2042,10 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
       <trans-unit id="MSC.templatesTheme">
         <source>Theme %s</source>
         <target>Thema %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.location">
+        <source>Location</source>
+        <target>Locatie</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

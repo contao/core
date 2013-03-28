@@ -77,37 +77,25 @@
         <source>Start upload</source>
         <target>アップロードを開始</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncFound">
-        <source>Found the original file &quot;%s&quot; at &quot;%s&quot;</source>
-        <target>&quot;%s&quot;という元のファイルを&quot;%s&quot;として見つけました。</target>
+      <trans-unit id="tl_files.syncAdded">
+        <source>Added the file or folder &quot;%s&quot;</source>
+        <target>ファイルまたはフォルダー&quot;%s&quot;を追加しました。</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncRemoved">
+      <trans-unit id="tl_files.syncChanged">
+        <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+        <target>ファイルまたはフォルダー&quot;%s&quot;のハッシュを更新しました。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncUnchanged">
+        <source>Found the file or folder &quot;%s&quot;</source>
+        <target>ファイルまたはフォルダー&quot;%s&quot;を発見しました。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncMoved">
+        <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>ファイルまたはフォルダー&quot;%s&quot;を&quot;%s&quot;に発見しました。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncDeleted">
         <source>Removed the file or folder &quot;%s&quot;</source>
         <target>&quot;%s&quot;というファイルまたはディレクトリを削除しました。</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFolderC">
-        <source>Created the folder &quot;%s&quot;</source>
-        <target>&quot;%s&quot;というフォルダーを作成しました。</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFolderF">
-        <source>Found the folder &quot;%s&quot;</source>
-        <target>&quot;%s&quot;というフォルダーを見つけました。</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFolderH">
-        <source>Updated the hash of the folder &quot;%s&quot;</source>
-        <target>&quot;%s&quot;というフォルダーのハッシュを更新しました。</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFileC">
-        <source>Created the file &quot;%s&quot;</source>
-        <target>&quot;%s&quot;というファイルを作成しました。</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFileF">
-        <source>Found the file &quot;%s&quot;</source>
-        <target>&quot;%s&quot;というファイルを見つけました。</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFileH">
-        <source>Updated the hash of the file &quot;%s&quot;</source>
-        <target>&quot;%s&quot;というファイルのハッシュ値を更新しました。</target>
       </trans-unit>
       <trans-unit id="tl_files.syncComplete">
         <source>The synchronization has been completed</source>

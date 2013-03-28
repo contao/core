@@ -545,6 +545,9 @@
         <source>Edit files in the source editor</source>
         <target>Rediger filer ved hjælp af editor</target>
       </trans-unit>
+      <trans-unit id="FOP.f6">
+        <source>Synchronize the file system with the database</source>
+      </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
         <target>Redigere side</target>
@@ -2036,6 +2039,9 @@ Denne e-mail er blevet genereret af systemet og kan ikke besvares direkte.
       <trans-unit id="MSC.templatesTheme">
         <source>Theme %s</source>
         <target>Tema %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.location">
+        <source>Location</source>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

@@ -65,6 +65,12 @@
         <source>Leave blank to create a single day event.</source>
         <target>لطفاً تاریخ خاتمه رویداد را مشخص نمائید .</target>
       </trans-unit>
+      <trans-unit id="tl_calendar_events.location.0">
+        <source>Event location</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.location.1">
+        <source>Here you can enter the event location.</source>
+      </trans-unit>
       <trans-unit id="tl_calendar_events.teaser.0">
         <source>Event teaser</source>
         <target>متن خلاصه</target>
@@ -241,9 +247,9 @@
         <source>Date and time</source>
         <target>تاریخ و ساعت</target>
       </trans-unit>
-      <trans-unit id="tl_calendar_events.teaser_legend">
-        <source>Teaser</source>
-        <target>تیزر</target>
+      <trans-unit id="tl_calendar_events.details_legend">
+        <source>Event details</source>
+        <target>جزئیات رویداد</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.text_legend">
         <source>Event text</source>

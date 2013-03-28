@@ -133,6 +133,14 @@
         <source>Truncates the &lt;em&gt;tl_version&lt;/em&gt; table which stores the previous versions of a record. This job permanently deletes these records.</source>
         <target>Vyprázdnit tabulku &lt;em&gt;tl_version&lt;/em&gt;, v níž se ukládají předešlé verze záznamů. Tento krok navždy odstraní dané záznamy.</target>
       </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.log.0">
+        <source>Purge the system log</source>
+        <target>Vyčistit stémové zprávy</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.log.1">
+        <source>Truncates the &lt;em&gt;tl_log&lt;/em&gt; table which stores all the system log entries. This job permanently deletes these records.</source>
+        <target>Vyčistit tabulku &lt;e&gt;tl_log&lt;/em&gt;, která zaznamenává zprávy systému. Tento krok navždycky smaže současné záznamy v dané tabulce. </target>
+      </trans-unit>
       <trans-unit id="tl_maintenance_jobs.images.0">
         <source>Purge the image cache</source>
         <target>Vyčistit meziúložiště obrázků</target>

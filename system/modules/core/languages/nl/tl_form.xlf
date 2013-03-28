@@ -123,9 +123,11 @@
       </trans-unit>
       <trans-unit id="tl_form.novalidate.0">
         <source>Disable HTML5 validation</source>
+        <target>HTML5 validatie uitschakelen</target>
       </trans-unit>
       <trans-unit id="tl_form.novalidate.1">
         <source>Add the &quot;novalidate&quot; attribute to the form tag.</source>
+        <target>Voeg het &quot;novalidate&quot; attribuut toe aan de form tag.</target>
       </trans-unit>
       <trans-unit id="tl_form.attributes.0">
         <source>CSS ID/class</source>

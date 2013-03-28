@@ -539,6 +539,9 @@
         <source>Edit files in the source editor</source>
         <target>Edytuj pliki w edytorze</target>
       </trans-unit>
+      <trans-unit id="FOP.f6">
+        <source>Synchronize the file system with the database</source>
+      </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
         <target>Edytuj strone</target>
@@ -2026,6 +2029,9 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
       <trans-unit id="MSC.templatesTheme">
         <source>Theme %s</source>
         <target>Motyw %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.location">
+        <source>Location</source>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

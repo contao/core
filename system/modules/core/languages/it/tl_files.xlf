@@ -77,37 +77,21 @@
         <source>Start upload</source>
         <target>Inizia l'upload</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncFound">
-        <source>Found the original file &quot;%s&quot; at &quot;%s&quot;</source>
-        <target>Trovato il file originale &quot;%s&quot; in &quot;%s&quot;</target>
+      <trans-unit id="tl_files.syncAdded">
+        <source>Added the file or folder &quot;%s&quot;</source>
       </trans-unit>
-      <trans-unit id="tl_files.syncRemoved">
+      <trans-unit id="tl_files.syncChanged">
+        <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+      </trans-unit>
+      <trans-unit id="tl_files.syncUnchanged">
+        <source>Found the file or folder &quot;%s&quot;</source>
+      </trans-unit>
+      <trans-unit id="tl_files.syncMoved">
+        <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
+      </trans-unit>
+      <trans-unit id="tl_files.syncDeleted">
         <source>Removed the file or folder &quot;%s&quot;</source>
         <target>Rimosso il file o la cartella &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFolderC">
-        <source>Created the folder &quot;%s&quot;</source>
-        <target>Creato la cartella &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFolderF">
-        <source>Found the folder &quot;%s&quot;</source>
-        <target>Trovato la cartella &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFolderH">
-        <source>Updated the hash of the folder &quot;%s&quot;</source>
-        <target>Aggiornato l'hash della cartella &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFileC">
-        <source>Created the file &quot;%s&quot;</source>
-        <target>Creato il file &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFileF">
-        <source>Found the file &quot;%s&quot;</source>
-        <target>Trovato il file &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFileH">
-        <source>Updated the hash of the file &quot;%s&quot;</source>
-        <target>Aggiornato l'hash del file &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncComplete">
         <source>The synchronization has been completed</source>

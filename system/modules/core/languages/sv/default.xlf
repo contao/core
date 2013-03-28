@@ -545,6 +545,9 @@
         <source>Edit files in the source editor</source>
         <target>Redigera filer i källkodseditorn</target>
       </trans-unit>
+      <trans-unit id="FOP.f6">
+        <source>Synchronize the file system with the database</source>
+      </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
         <target>Redigera sida</target>
@@ -2036,6 +2039,9 @@ Detta e-postmeddelande har genererats av Contao. Du kan inte svara på det direk
       <trans-unit id="MSC.templatesTheme">
         <source>Theme %s</source>
         <target>Tema %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.location">
+        <source>Location</source>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

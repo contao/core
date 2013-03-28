@@ -133,6 +133,12 @@
         <source>Truncates the &lt;em&gt;tl_version&lt;/em&gt; table which stores the previous versions of a record. This job permanently deletes these records.</source>
         <target>Czyści tabelę &lt;em&gt;tl_version&lt;/em&gt;, która zawiera poprzednie wersje danego rekordu. To zadanie permanentnie usunie te wersje.</target>
       </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.log.0">
+        <source>Purge the system log</source>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.log.1">
+        <source>Truncates the &lt;em&gt;tl_log&lt;/em&gt; table which stores all the system log entries. This job permanently deletes these records.</source>
+      </trans-unit>
       <trans-unit id="tl_maintenance_jobs.images.0">
         <source>Purge the image cache</source>
         <target>Wyczyść cache obrazków</target>

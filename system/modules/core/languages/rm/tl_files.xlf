@@ -73,37 +73,21 @@
         <source>Start upload</source>
         <target>Cumenzar da transferir</target>
       </trans-unit>
-      <trans-unit id="tl_files.syncFound">
-        <source>Found the original file &quot;%s&quot; at &quot;%s&quot;</source>
-        <target>Chattà la datoteca originala &quot;%s&quot; en &quot;%s&quot;</target>
+      <trans-unit id="tl_files.syncAdded">
+        <source>Added the file or folder &quot;%s&quot;</source>
       </trans-unit>
-      <trans-unit id="tl_files.syncRemoved">
+      <trans-unit id="tl_files.syncChanged">
+        <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+      </trans-unit>
+      <trans-unit id="tl_files.syncUnchanged">
+        <source>Found the file or folder &quot;%s&quot;</source>
+      </trans-unit>
+      <trans-unit id="tl_files.syncMoved">
+        <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
+      </trans-unit>
+      <trans-unit id="tl_files.syncDeleted">
         <source>Removed the file or folder &quot;%s&quot;</source>
         <target>Allontanà la datoteca u l'ordinatur &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFolderC">
-        <source>Created the folder &quot;%s&quot;</source>
-        <target>Creà l'ordinatur &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFolderF">
-        <source>Found the folder &quot;%s&quot;</source>
-        <target>Chattà l'ordinatur &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFolderH">
-        <source>Updated the hash of the folder &quot;%s&quot;</source>
-        <target>Actualisà il hash da l'ordintaru &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFileC">
-        <source>Created the file &quot;%s&quot;</source>
-        <target>Creà la datoteca &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFileF">
-        <source>Found the file &quot;%s&quot;</source>
-        <target>Chattà la datoteca &quot;%s&quot;</target>
-      </trans-unit>
-      <trans-unit id="tl_files.syncFileH">
-        <source>Updated the hash of the file &quot;%s&quot;</source>
-        <target>Actualisà il hash da la datoteca &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncComplete">
         <source>The synchronization has been completed</source>

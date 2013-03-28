@@ -537,6 +537,9 @@
         <source>Edit files in the source editor</source>
         <target>Modifitgar datotecas en l'editur per il code da funtauna</target>
       </trans-unit>
+      <trans-unit id="FOP.f6">
+        <source>Synchronize the file system with the database</source>
+      </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
         <target>Modifitgar la pagina</target>
@@ -2024,6 +2027,9 @@ Quest e-mail è vegnì generà da Contao. Ti na pos betg respunder directamain s
       <trans-unit id="MSC.templatesTheme">
         <source>Theme %s</source>
         <target>Theme %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.location">
+        <source>Location</source>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

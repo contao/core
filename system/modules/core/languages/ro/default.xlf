@@ -534,6 +534,9 @@
         <source>Edit files in the source editor</source>
         <target>Editează fişiere în editorul sursă</target>
       </trans-unit>
+      <trans-unit id="FOP.f6">
+        <source>Synchronize the file system with the database</source>
+      </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
         <target>Editaţi pagina</target>
@@ -2019,6 +2022,9 @@ Acest mesaj a fost generat de Contao. Nu puteţi face reply direct la acest emai
       </trans-unit>
       <trans-unit id="MSC.templatesTheme">
         <source>Theme %s</source>
+      </trans-unit>
+      <trans-unit id="MSC.location">
+        <source>Location</source>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

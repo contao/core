@@ -65,6 +65,12 @@
         <source>Leave blank to create a single day event.</source>
         <target>Lascia vuoto per un evento di una giornata.</target>
       </trans-unit>
+      <trans-unit id="tl_calendar_events.location.0">
+        <source>Event location</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.location.1">
+        <source>Here you can enter the event location.</source>
+      </trans-unit>
       <trans-unit id="tl_calendar_events.teaser.0">
         <source>Event teaser</source>
         <target>Testo introduttivo</target>
@@ -241,9 +247,9 @@
         <source>Date and time</source>
         <target>Data e ora</target>
       </trans-unit>
-      <trans-unit id="tl_calendar_events.teaser_legend">
-        <source>Teaser</source>
-        <target>Teaser</target>
+      <trans-unit id="tl_calendar_events.details_legend">
+        <source>Event details</source>
+        <target>Dettagli evento</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.text_legend">
         <source>Event text</source>
