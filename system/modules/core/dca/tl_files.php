@@ -34,7 +34,6 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			(
 				'id' => 'primary',
 				'pid' => 'index',
-				'path' => 'unique',
 				'extension' => 'index'
 			)
 		)
@@ -136,7 +135,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		),
 		'path' => array
 		(
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "tinytext NULL"
 		),
 		'extension' => array
 		(
@@ -154,12 +153,12 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['name'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_files', 'checkFilename')
 			),
-			'sql'                     => "varchar(64) NOT NULL default ''"
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'protected' => array
 		(
