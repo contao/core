@@ -24,7 +24,7 @@
         <source>Fieldset</source>
       </trans-unit>
       <trans-unit id="FFL.fieldset.1">
-        <source>A container for form fields with an optional legend.</source>
+        <source>A container for form fields with an optional legend (only available for tableless forms).</source>
       </trans-unit>
       <trans-unit id="FFL.text.0">
         <source>Text field</source>
