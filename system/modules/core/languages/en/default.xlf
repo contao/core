@@ -707,6 +707,9 @@
       <trans-unit id="MSC.mw_column">
         <source>Column</source>
       </trans-unit>
+      <trans-unit id="MSC.mw_disable">
+        <source>Disable</source>
+      </trans-unit>
       <trans-unit id="MSC.aw_title">
         <source>Title</source>
       </trans-unit>
