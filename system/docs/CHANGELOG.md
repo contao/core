@@ -4,6 +4,8 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Fixed
+Added a vendor library to parse the Contao changelog file (see #5569).
 
 
 Version 3.1.beta1 (2013-03-28)

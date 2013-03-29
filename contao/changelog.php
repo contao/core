@@ -52,52 +52,17 @@ class Changelog extends Backend
 	 */
 	public function run()
 	{
+		// Load the vendor library
+		include_once TL_ROOT . '/system/modules/core/vendor/markdown/markdown.php';
+
+		// Parse the changelog file
 		$strBuffer = file_get_contents(TL_ROOT . '/system/docs/CHANGELOG.md');
-		$strBuffer = str_replace("\r", '', $strBuffer); // see #4190
+		$strBuffer = \Markdown(str_replace("\r", '', $strBuffer)); // see #4190
 
-		$strBuffer = preg_replace(
-			array(
-				'/#([0-9]+)/',
-				'/(---+\n)(?!\n)/',
-				'/([^\n]+)\n===+\n/',
-				'/\n([^\n]+)\n---+\n/',
-				'/\n### ([^\n]+)\n/',
-				'/ _(?!_)/', '/_ /',
-				'/===+\n/'
-			),
-			array(
-				'<a href="https://github.com/contao/core/issues/$1" target="_blank">#$1</a>',
-				"$1\n",
-				"<h2>$1</h2>\n\n",
-				"<h3>\$1</h3>\n",
-				"\n<h4>\$1</h4>\n",
-				' <em>', '</em> ',
-				''
-			),
-			$strBuffer
-		);
-
-		$strBuffer = str_replace(
-			array(
-				"\n\n```\n", "\n```\n\n",
-				' `', '` ',
-				'(`', '`)',
-				"\n`", "`\n",
-				'`.', '`,'
-			),
-			array(
-				"\n\n<pre>", "</pre>\n\n",
-				' <code>', '</code> ',
-				'(<code>', '</code>)',
-				"\n<code>", "</code>\n",
-				'</code>.', '</code>,'
-			),
-			trim($strBuffer)
-		);
-
+		// Add the template
 		$this->Template = new BackendTemplate('be_changelog');
 
-		// Template variables
+		// Assign the template variables
 		$this->Template->content = $strBuffer;
 		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
