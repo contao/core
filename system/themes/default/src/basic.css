@@ -437,8 +437,3 @@ a.tl_submit:hover {
 	border-right:7px solid transparent;
 	border-bottom:7px solid #666;
 }
-
-/* Module Wizard */
-.tl_mw_disable {
-	text-align:center;
-}

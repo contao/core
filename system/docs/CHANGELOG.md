@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Improved
+Added an option to disable modules in the page layout (see #5558).
+
 ### Fixed
 Added a vendor library to parse the Contao changelog file (see #5569).
 

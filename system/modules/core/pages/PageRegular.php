@@ -73,8 +73,9 @@ class PageRegular extends \Frontend
 		$arrSections = array('header', 'left', 'right', 'main', 'footer');
 		$arrModules = deserialize($objLayout->modules);
 
-		// Get all modules in a single DB query
 		$arrModuleIds = array();
+
+		// Filter the disabled modules
 		foreach ($arrModules as $module)
 		{
 			if (!$module['disable'])
@@ -83,6 +84,7 @@ class PageRegular extends \Frontend
 			}
 		}
 
+		// Get all modules in a single DB query
 		$objModules = \ModuleModel::findMultipleByIds($arrModuleIds);
 
 		if ($objModules !== null || $arrModules[0]['mod'] == 0) // see #4137
@@ -100,14 +102,16 @@ class PageRegular extends \Frontend
 
 			foreach ($arrModules as $arrModule)
 			{
+				// Disabled module
+				if ($arrModule['disable'])
+				{
+					continue;
+				}
+
 				// Replace the module ID with the module model
 				if ($arrModule['mod'] > 0 && isset($arrMapper[$arrModule['mod']]))
 				{
 					$arrModule['mod'] = $arrMapper[$arrModule['mod']];
-				}
-				else
-				{
-					continue;
 				}
 
 				// Generate the modules

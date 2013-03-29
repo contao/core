@@ -49,7 +49,7 @@ class ModuleWizard extends \Widget
 	{
 		$this->import('Database');
 
-		$arrButtons = array('copy', 'drag', 'up', 'down', 'delete');
+		$arrButtons = array('edit', 'copy', 'drag', 'up', 'down', 'delete');
 		$strCommand = 'cmd_' . $this->strField;
 
 		// Change the order
@@ -162,9 +162,8 @@ class ModuleWizard extends \Widget
   <thead>
   <tr>
     <th>'.$GLOBALS['TL_LANG']['MSC']['mw_module'].'</th>
-    <th>&nbsp;</th>
+    <th>'.\Image::getHtml('show.gif', '', 'title="'.$GLOBALS['TL_LANG']['MSC']['mw_disable'].'"').'</th>
     <th>'.$GLOBALS['TL_LANG']['MSC']['mw_column'].'</th>
-    <th>'.$GLOBALS['TL_LANG']['MSC']['mw_disable'].'</th>
     <th>&nbsp;</th>
   </tr>
   </thead>
@@ -188,7 +187,7 @@ class ModuleWizard extends \Widget
 			$return .= '
   <tr>
     <td><select name="'.$this->strId.'['.$i.'][mod]" class="tl_select tl_chosen" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()" onchange="Backend.updateModuleLink(this)">'.$options.'</select></td>
-    <td><a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->varValue[$i]['mod'] . '&amp;rt=' . REQUEST_TOKEN . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_module']) . '" class="module_link" style="display:' . (($this->varValue[$i]['mod'] > 0) ? 'inline' : 'none') . '">'.\Image::getHtml('edit.gif').'</a>'.\Image::getHtml('edit_.gif', '', 'class="module_image" style="display:' . (($this->varValue[$i]['mod'] > 0) ? 'none' : 'inline') . '"').'</td>';
+    <td style="text-align:center"><input name="'.$this->strId.'['.$i.'][disable]" type="checkbox" class="tl_checkbox" value="1" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()"'. (($this->varValue[$i]['disable']) ? ' checked' : '').'></td>';
 
 			$options = '';
 
@@ -199,11 +198,7 @@ class ModuleWizard extends \Widget
 			}
 
 			$return .= '
-    <td><select name="'.$this->strId.'['.$i.'][col]" class="tl_select_column" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()">'.$options.'</select></td>';
-
-			// disable checkbox
-			$return .= '
-    <td class="tl_mw_disable"><input name="'.$this->strId.'['.$i.'][disable]" type="checkbox" class="tl_checkbox" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()"'. (($this->varValue[$i]['disable']) ? ' checked' : '').'></td>
+    <td><select name="'.$this->strId.'['.$i.'][col]" class="tl_select_column" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()">'.$options.'</select></td>
     <td>';
 
 			// Add buttons
@@ -211,13 +206,17 @@ class ModuleWizard extends \Widget
 			{
 				$class = ($button == 'up' || $button == 'down') ? ' class="button-move"' : '';
 
-				if ($button == 'drag')
+				if ($button == 'edit')
+				{
+					$return .= ($this->varValue[$i]['mod'] > 0) ? ' <a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->varValue[$i]['mod'] . '&amp;rt=' . REQUEST_TOKEN . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_module']) . '" class="module_link">'.\Image::getHtml('edit.gif').'</a>' : ' ' . \Image::getHtml('edit_.gif', '', 'class="module_image"');
+				}
+				elseif ($button == 'drag')
 				{
 					$return .= \Image::getHtml('drag.gif', '', 'class="drag-handle" title="' . sprintf($GLOBALS['TL_LANG']['MSC']['move']) . '"');
 				}
 				else
 				{
-					$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'"' . $class . ' title="'.specialchars($GLOBALS['TL_LANG']['MSC']['mw_'.$button]).'" onclick="Backend.moduleWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.\Image::getHtml($button.'.gif', $GLOBALS['TL_LANG']['MSC']['mw_'.$button], 'class="tl_listwizard_img"').'</a> ';
+					$return .= ' <a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'"' . $class . ' title="'.specialchars($GLOBALS['TL_LANG']['MSC']['mw_'.$button]).'" onclick="Backend.moduleWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.\Image::getHtml($button.'.gif', $GLOBALS['TL_LANG']['MSC']['mw_'.$button], 'class="tl_listwizard_img"').'</a> ';
 				}
 			}
 
