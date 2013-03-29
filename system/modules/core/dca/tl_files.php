@@ -135,7 +135,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		),
 		'path' => array
 		(
-			'sql'                     => "tinytext NULL"
+			'sql'                     => "text NULL"
 		),
 		'extension' => array
 		(
