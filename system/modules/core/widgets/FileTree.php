@@ -152,75 +152,100 @@ class FileTree extends \Widget
 	 */
 	public function generate()
 	{
-		$strValues = '';
+		$arrSet = array();
 		$arrValues = array();
 
 		if (!empty($this->varValue)) // Can be an array
 		{
-			$strValues = implode(',', array_map('intval', (array)$this->varValue));
-			$objFiles = $this->Database->execute("SELECT id, path, type FROM tl_files WHERE id IN($strValues) ORDER BY " . $this->Database->findInSet('id', $strValues));
+			$objFiles = \FilesModel::findMultipleByIds((array)$this->varValue);
 			$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
 
-			while ($objFiles->next())
+			if ($objFiles !== null)
 			{
-				// File system and database seem not in sync
-				if (!file_exists(TL_ROOT . '/' . $objFiles->path))
+				while ($objFiles->next())
 				{
-					continue;
-				}
-
-				// Show files and folders
-				if (!$this->blnIsGallery && !$this->blnIsDownloads)
-				{
-					if ($objFiles->type == 'folder')
+					// File system and database seem not in sync
+					if (!file_exists(TL_ROOT . '/' . $objFiles->path))
 					{
-						$arrValues[$objFiles->id] = \Image::getHtml('folderC.gif') . ' ' . $objFiles->path;
+						continue;
 					}
-					else
-					{
-						$objFile = new \File($objFiles->path, true);
-						$strInfo = $objFiles->path . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
 
-						if ($objFile->isGdImage)
+					$arrSet[] = $objFiles->id;
+
+					// Show files and folders
+					if (!$this->blnIsGallery && !$this->blnIsDownloads)
+					{
+						if ($objFiles->type == 'folder')
 						{
-							$arrValues[$objFiles->id] = \Image::getHtml(\Image::get($objFiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
+							$arrValues[$objFiles->id] = \Image::getHtml('folderC.gif') . ' ' . $objFiles->path;
 						}
 						else
 						{
-							$arrValues[$objFiles->id] = \Image::getHtml($objFile->icon) . ' ' . $strInfo;
+							$objFile = new \File($objFiles->path, true);
+							$strInfo = $objFiles->path . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
+
+							if ($objFile->isGdImage)
+							{
+								$arrValues[$objFiles->id] = \Image::getHtml(\Image::get($objFiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
+							}
+							else
+							{
+								$arrValues[$objFiles->id] = \Image::getHtml($objFile->icon) . ' ' . $strInfo;
+							}
 						}
 					}
-				}
 
-				// Show a sortable list of files only
-				else
-				{
-					if ($objFiles->type == 'folder')
+					// Show a sortable list of files only
+					else
 					{
-						$objSubfiles = \FilesModel::findByPid($objFiles->id);
-
-						if ($objSubfiles === null)
+						if ($objFiles->type == 'folder')
 						{
-							continue;
-						}
+							$objSubfiles = \FilesModel::findByPid($objFiles->id);
 
-						while ($objSubfiles->next())
-						{
-							// Skip subfolders
-							if ($objSubfiles->type == 'folder')
+							if ($objSubfiles === null)
 							{
 								continue;
 							}
 
-							$objFile = new \File($objSubfiles->path, true);
-							$strInfo = $objSubfiles->path . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
+							while ($objSubfiles->next())
+							{
+								// Skip subfolders
+								if ($objSubfiles->type == 'folder')
+								{
+									continue;
+								}
+
+								$objFile = new \File($objSubfiles->path, true);
+								$strInfo = $objSubfiles->path . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
+
+								if ($this->blnIsGallery)
+								{
+									// Only show images
+									if ($objFile->isGdImage)
+									{
+										$arrValues[$objSubfiles->id] = \Image::getHtml(\Image::get($objSubfiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
+									}
+								}
+								else
+								{
+									// Only show allowed download types
+									if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
+									{
+										$arrValues[$objSubfiles->id] = \Image::getHtml($objFile->icon) . ' ' . $strInfo;
+									}
+								}
+							}
+						}
+						else
+						{
+							$objFile = new \File($objFiles->path, true);
 
 							if ($this->blnIsGallery)
 							{
 								// Only show images
 								if ($objFile->isGdImage)
 								{
-									$arrValues[$objSubfiles->id] = \Image::getHtml(\Image::get($objSubfiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
+									$arrValues[$objFiles->id] = \Image::getHtml(\Image::get($objFiles->path, 80, 60, 'center_center'), '', 'class="gimage"');
 								}
 							}
 							else
@@ -228,29 +253,8 @@ class FileTree extends \Widget
 								// Only show allowed download types
 								if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
 								{
-									$arrValues[$objSubfiles->id] = \Image::getHtml($objFile->icon) . ' ' . $strInfo;
+									$arrValues[$objFiles->id] = \Image::getHtml($objFile->icon) . ' ' . $objFiles->path;
 								}
-							}
-						}
-					}
-					else
-					{
-						$objFile = new \File($objFiles->path, true);
-
-						if ($this->blnIsGallery)
-						{
-							// Only show images
-							if ($objFile->isGdImage)
-							{
-								$arrValues[$objFiles->id] = \Image::getHtml(\Image::get($objFiles->path, 80, 60, 'center_center'), '', 'class="gimage"');
-							}
-						}
-						else
-						{
-							// Only show allowed download types
-							if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
-							{
-								$arrValues[$objFiles->id] = \Image::getHtml($objFile->icon) . ' ' . $objFiles->path;
 							}
 						}
 					}
@@ -288,7 +292,7 @@ class FileTree extends \Widget
 		// Load the fonts for the drag hint (see #4838)
 		$GLOBALS['TL_CONFIG']['loadGoogleFonts'] = true;
 
-		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.$strValues.'">' . (($this->strOrderField != '') ? '
+		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.implode(',', $arrSet).'">' . (($this->strOrderField != '') ? '
   <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->{$this->strOrderField}.'">' : '') . '
   <div class="selector_container">' . (($this->strOrderField != '' && count($arrValues)) ? '
     <p class="sort_hint">' . $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] . '</p>' : '') . '
