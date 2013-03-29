@@ -74,7 +74,15 @@ class PageRegular extends \Frontend
 		$arrModules = deserialize($objLayout->modules);
 
 		// Get all modules in a single DB query
-		$arrModuleIds = array_map(function($arr) { return $arr['mod']; }, $arrModules);
+		$arrModuleIds = array();
+		foreach ($arrModules as $module)
+		{
+			if (!$module['disable'])
+			{
+				$arrModuleIds[] = $module['mod'];
+			}
+		}
+
 		$objModules = \ModuleModel::findMultipleByIds($arrModuleIds);
 
 		if ($objModules !== null || $arrModules[0]['mod'] == 0) // see #4137
@@ -96,6 +104,10 @@ class PageRegular extends \Frontend
 				if ($arrModule['mod'] > 0 && isset($arrMapper[$arrModule['mod']]))
 				{
 					$arrModule['mod'] = $arrMapper[$arrModule['mod']];
+				}
+				else
+				{
+					continue;
 				}
 
 				// Generate the modules
