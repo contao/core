@@ -198,7 +198,7 @@ Swipe.prototype = {
     clearTimeout(this.interval);
 
     if (this.index < this.length - 1) this.slide(this.index+1, this.speed); // if not last slide
-    else if (this.cont) this.slide(0, this.speed); //if last slide return to start
+    else if (this.cont) this.slide(0, this.speed); // if last slide return to start
 
   },
 
@@ -209,6 +209,7 @@ Swipe.prototype = {
     this.interval = (this.delay)
       ? setTimeout(function() { 
         _this.next(_this.delay);
+        _this.updateMenu(_this.index); // PATCH: update the menu
       }, this.delay)
       : 0;
     
@@ -282,10 +283,10 @@ Swipe.prototype = {
         _this.deltaX / 
           ( (!_this.index && _this.deltaX > 0               // if first slide and sliding left
             || _this.index == _this.length - 1              // or if last slide and sliding right
-            && _this.deltaX < 0                            // and if sliding at all
+            && _this.deltaX < 0                             // and if sliding at all
           ) ?                      
           ( Math.abs(_this.deltaX) / _this.width + 1 )      // determine resistance level
-          : 1 );                                          // no resistance if false
+          : 1 );                                            // no resistance if false
       
       // translate immediately 1:1
       _this._move([_this.index-1,_this.index,_this.index+1],_this.deltaX);
@@ -307,12 +308,12 @@ Swipe.prototype = {
     var isValidSlide = 
           Number(new Date()) - _this.start.time < 250      // if slide duration is less than 250ms
           && Math.abs(_this.deltaX) > 20                   // and if slide amt is greater than 20px
-          || Math.abs(_this.deltaX) > _this.width/2,        // or if slide amt is greater than half the width
+          || Math.abs(_this.deltaX) > _this.width/2,       // or if slide amt is greater than half the width
 
-    // determine if slide attempt is past start and end
+        // determine if slide attempt is past start and end
         isPastBounds = 
           !_this.index && _this.deltaX > 0                          // if first slide and slide amt is greater than 0
-          || _this.index == _this.length - 1 && _this.deltaX < 0,    // or if last slide and slide amt is less than 0
+          || _this.index == _this.length - 1 && _this.deltaX < 0,   // or if last slide and slide amt is less than 0
         
         direction = _this.deltaX < 0; // true:right false:left
 
