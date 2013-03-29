@@ -14,7 +14,7 @@ body {
 }
 body.popup {
 	background:#fff;
-	padding:6px 12px;
+	padding:6px 0;
 }
 
 /* Header */
@@ -47,9 +47,8 @@ body.popup {
 	margin:0 auto;
 }
 .popup #container {
-	width:730px;
-	margin:0;
 	padding:0;
+	width:741px;
 }
 
 /* Left */

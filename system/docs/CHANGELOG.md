@@ -5,6 +5,9 @@ Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
 ### Improved
+Edit all related elements (e.g. alias elements) in a modal dialog.
+
+### Improved
 Added an option to disable modules in the page layout (see #5558).
 
 ### Fixed

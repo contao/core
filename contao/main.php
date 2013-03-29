@@ -203,7 +203,7 @@ class Main extends Backend
 		}
 
 		// File picker reference
-		if (\Input::get('popup') && $this->Session->get('filePickerRef'))
+		if (\Input::get('popup') && (\Input::get('do') == 'page' || \Input::get('do') == 'files') && $this->Session->get('filePickerRef'))
 		{
 			$this->Template->managerHref = $this->Session->get('filePickerRef');
 			$this->Template->manager = $GLOBALS['TL_LANG']['MSC']['goBack'];
