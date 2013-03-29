@@ -38,6 +38,7 @@ if ($GLOBALS['TL_CONFIG']['useCE']):
 				break;
 
 			case 'js':
+			case 'javascript':
 				$arrField['type'] = 'javascript';
 				break;
 
