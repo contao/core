@@ -328,13 +328,14 @@ class Folder extends \System
 
 		$it = new \RecursiveIteratorIterator(
 			new \RecursiveDirectoryIterator(
-				TL_ROOT . '/' . $this->strFolder, \FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS
+				TL_ROOT . '/' . $this->strFolder,
+				\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
 			), \RecursiveIteratorIterator::SELF_FIRST
 		);
 
 		while ($it->valid())
 		{
-			if (!$it->isDot() && $it->getFilename() != '.DS_Store')
+			if ($it->getFilename() != '.DS_Store')
 			{
 				$arrFiles[] = $it->getSubPathname();
 			}

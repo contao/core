@@ -137,14 +137,15 @@ class ModuleAutoload extends \BackendModule
 			// Recursively scan all subfolders
 			$objFiles = new \RecursiveIteratorIterator(
 				new \RecursiveDirectoryIterator(
-					TL_ROOT . '/system/modules/' . $strModule, \FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS
+					TL_ROOT . '/system/modules/' . $strModule,
+					\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
 				)
 			);
 
 			// Get all PHP files
 			foreach ($objFiles as $objFile)
 			{
-				if ($objFile->isFile() && pathinfo($objFile->getFilename(), PATHINFO_EXTENSION) == 'php')
+				if (pathinfo($objFile->getFilename(), PATHINFO_EXTENSION) == 'php')
 				{
 					$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
 
@@ -246,43 +247,41 @@ class ModuleAutoload extends \BackendModule
 			{
 				$objFiles = new \RecursiveIteratorIterator(
 					new \RecursiveDirectoryIterator(
-						TL_ROOT . '/system/modules/' . $strModule . '/templates', \FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS
+						TL_ROOT . '/system/modules/' . $strModule . '/templates',
+						\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
 					)
 				);
 
 				foreach ($objFiles as $objFile)
 				{
-					if ($objFile->isFile())
+					$arrConfig = $arrDefaultConfig;
+					$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
+
+					// Search for a path configuration (see #4776)
+					foreach ($arrDefaultConfig as $strPattern=>$arrPathConfig)
 					{
-						$arrConfig = $arrDefaultConfig;
-						$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
-
-						// Search for a path configuration (see #4776)
-						foreach ($arrDefaultConfig as $strPattern=>$arrPathConfig)
+						// Merge the path configuration with the global configuration
+						if (is_array($arrPathConfig) && fnmatch($strPattern, $strRelpath))
 						{
-							// Merge the path configuration with the global configuration
-							if (is_array($arrPathConfig) && fnmatch($strPattern, $strRelpath))
-							{
-								$arrConfig = array_merge($arrDefaultConfig, $arrPathConfig);
-								break;
-							}
+							$arrConfig = array_merge($arrDefaultConfig, $arrPathConfig);
+							break;
 						}
+					}
 
-						// Continue if templates shall not be registered
-						if (!$arrConfig['register_templates'])
-						{
-							continue;
-						}
+					// Continue if templates shall not be registered
+					if (!$arrConfig['register_templates'])
+					{
+						continue;
+					}
 
-						$strExtension = pathinfo($objFile->getFilename(), PATHINFO_EXTENSION);
+					$strExtension = pathinfo($objFile->getFilename(), PATHINFO_EXTENSION);
 
-						if ($strExtension == 'html5' || $strExtension == 'xhtml')
-						{
-							$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
-							$strKey = basename($strRelpath, strrchr($strRelpath, '.'));
-							$arrTplLoader[$strKey] = dirname($strRelpath);
-							$intTplWidth = max(strlen($strKey), $intTplWidth);
-						}
+					if ($strExtension == 'html5' || $strExtension == 'xhtml')
+					{
+						$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
+						$strKey = basename($strRelpath, strrchr($strRelpath, '.'));
+						$arrTplLoader[$strKey] = dirname($strRelpath);
+						$intTplWidth = max(strlen($strKey), $intTplWidth);
 					}
 				}
 			}
@@ -450,14 +449,15 @@ EOT
 			// Recursively scan all subfolders
 			$objFiles = new \RecursiveIteratorIterator(
 				new \RecursiveDirectoryIterator(
-					TL_ROOT . '/system/modules/' . $strModule, \FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS
+					TL_ROOT . '/system/modules/' . $strModule,
+					\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
 				)
 			);
 
 			// Get all PHP files
 			foreach ($objFiles as $objFile)
 			{
-				if ($objFile->isFile() && pathinfo($objFile->getFilename(), PATHINFO_EXTENSION) == 'php')
+				if (pathinfo($objFile->getFilename(), PATHINFO_EXTENSION) == 'php')
 				{
 					$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
 

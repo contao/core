@@ -131,14 +131,15 @@ class PurgeData extends \Backend implements \executable
 					// Recursively scan all subfolders
 					$objFiles = new \RecursiveIteratorIterator(
 						new \RecursiveDirectoryIterator(
-							TL_ROOT . '/' . $folder, \FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS
+							TL_ROOT . '/' . $folder,
+							\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
 						)
 					);
 
 					// Ignore the index.html and .htaccess files
 					foreach ($objFiles as $objFile)
 					{
-						if ($objFile->isFile() && $objFile->getFilename() != '.htaccess' && $objFile->getFilename() != 'index.html')
+						if ($objFile->getFilename() != '.htaccess' && $objFile->getFilename() != 'index.html')
 						{
 							++$total;
 						}

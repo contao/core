@@ -261,21 +261,19 @@ class tl_templates extends Backend
 			// Find all templates
 			$objFiles = new RecursiveIteratorIterator(
 				new RecursiveDirectoryIterator(
-					TL_ROOT . '/system/modules/' . $strModule . '/templates', FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS
+					TL_ROOT . '/system/modules/' . $strModule . '/templates',
+					\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
 				)
 			);
 
 			foreach ($objFiles as $objFile)
 			{
-				if ($objFile->isFile())
-				{
-					$strExtension = pathinfo($objFile->getFilename(), PATHINFO_EXTENSION);
+				$strExtension = pathinfo($objFile->getFilename(), PATHINFO_EXTENSION);
 
-					if (in_array($strExtension, $arrAllowed))
-					{
-						$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
-						$arrAllTemplates[$strModule][basename($strRelpath)] = $strRelpath;
-					}
+				if (in_array($strExtension, $arrAllowed))
+				{
+					$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
+					$arrAllTemplates[$strModule][basename($strRelpath)] = $strRelpath;
 				}
 			}
 		}
