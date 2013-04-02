@@ -33,14 +33,15 @@ class Dbafs
 	/**
 	 * Adds a file or folder with its parent folders
 	 *
-	 * @param string $strResource The path to the file or folder
+	 * @param string  $strResource      The path to the file or folder
+	 * @param boolean $blnUpdateFolders If true, the parent folders will be updated
 	 *
 	 * @return \FilesModel The files model
 	 *
 	 * @throws \Exception                If a parent ID entry is missing
 	 * @throws \InvalidArgumentException If the resource is outside the upload folder
 	 */
-	public static function addResource($strResource)
+	public static function addResource($strResource, $blnUpdateFolders=true)
 	{
 		$strUploadPath = $GLOBALS['TL_CONFIG']['uploadPath'] . '/';
 
@@ -54,6 +55,7 @@ class Dbafs
 		$arrChunks = explode('/', $strResource);
 		$strPath   = array_shift($arrChunks);
 		$arrPids   = array($strPath=>0);
+		$arrUpdate = array($strResource);
 
 		// Build the paths
 		while (count($arrChunks))
@@ -83,6 +85,35 @@ class Dbafs
 			if ($objModels->path == $strResource)
 			{
 				$objModel = $objModels->current();
+			}
+		}
+
+		$arrPaths = array_values($arrPaths);
+
+		// If the resource is a folder, also add its contents
+		if (is_dir(TL_ROOT . '/' . $strResource))
+		{
+			// Get a filtered list of all files
+			$objFiles = new \RecursiveIteratorIterator(
+				new \Dbafs\Filter(
+					new \RecursiveDirectoryIterator(
+						TL_ROOT . '/' . $strResource,
+						\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
+					)
+				), \RecursiveIteratorIterator::SELF_FIRST
+			);
+
+			// Add the relative path
+			foreach ($objFiles as $objFile)
+			{
+				$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
+
+				if ($objFile->isDir())
+				{
+					$arrUpdate[] = $strRelpath;
+				}
+
+				$arrPaths[] = $strRelpath;
 			}
 		}
 
@@ -136,17 +167,11 @@ class Dbafs
 			}
 		}
 
-		// If the resource is a folder, also add its contents
-		if ($objModel->type == 'folder')
-		{
-			foreach (scan(TL_ROOT . '/' . $strResource) as $strPath)
-			{
-				static::addResource($strResource . '/' . $strPath);
-			}
-		}
-
 		// Update the folder hashes
-		static::updateFolderHashes($strResource);
+		if ($blnUpdateFolders)
+		{
+			static::updateFolderHashes($arrUpdate);
+		}
 
 		// The last model is the resource itself
 		return $objModel;
@@ -335,28 +360,39 @@ class Dbafs
 	/**
 	 * Update the hashes of all parent folders of a resource
 	 *
-	 * @param string $strResource The path to the file or folder
+	 * @param mixed $varResource A path or an array of paths to update
 	 */
-	public static function updateFolderHashes($strResource)
+	public static function updateFolderHashes($varResource)
 	{
 		$arrPaths  = array();
-		$arrChunks = explode('/', $strResource);
-		$strPath   = array_shift($arrChunks);
 
-		// Do not check files
-		if (is_file(TL_ROOT . '/' . $strResource))
+		if (!is_array($varResource))
 		{
-			array_pop($arrChunks);
+			$varResource = array($varResource);
 		}
 
-		// Build the paths
-		while (count($arrChunks))
+		foreach ($varResource as $strResource)
 		{
-			$strPath .= '/' . array_shift($arrChunks);
-			$arrPaths[] = $strPath;
+			$arrChunks = explode('/', $strResource);
+			$strPath   = array_shift($arrChunks);
+
+			// Do not check files
+			if (is_file(TL_ROOT . '/' . $strResource))
+			{
+				array_pop($arrChunks);
+			}
+
+			// Build the paths
+			while (count($arrChunks))
+			{
+				$strPath .= '/' . array_shift($arrChunks);
+				$arrPaths[] = $strPath;
+			}
+
+			unset($arrChunks);
 		}
 
-		unset($arrChunks);
+		$arrPaths = array_values(array_unique($arrPaths));
 
 		// Store the hash of each folder
 		foreach (array_reverse($arrPaths) as $strPath)
@@ -367,7 +403,7 @@ class Dbafs
 			// The DB entry does not yet exist
 			if ($objModel === null)
 			{
-				$objModel = static::addResource($strPath);
+				$objModel = static::addResource($strPath, false);
 			}
 
 			$objModel->hash = $objFolder->hash;
@@ -378,6 +414,8 @@ class Dbafs
 
 	/**
 	 * Synchronize the file system with the database
+	 *
+	 * @throws \Exception If a parent ID entry is missing
 	 */
 	public static function syncFiles()
 	{
@@ -403,19 +441,91 @@ class Dbafs
 		$objLog = new \File('system/logs/sync.log', true);
 		$objLog->truncate();
 
+		$arrModels = array();
+
 		// Create or update the database entries
 		foreach ($objFiles as $objFile)
 		{
 			$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
-			$objModel   = \FilesModel::findByPath($strRelpath);
+
+			// Get all subfiles in a single query
+			if ($objFile->isDir())
+			{
+				$objSubfiles = \FilesModel::findMultipleFilesByFolder($strRelpath);
+
+				if ($objSubfiles !== null)
+				{
+					while ($objSubfiles->next())
+					{
+						$arrModels[$objSubfiles->path] = $objSubfiles->current();
+					}
+				}
+			}
+
+			// Get the model
+			if (isset($arrModels[$strRelpath]))
+			{
+				$objModel = $arrModels[$strRelpath];
+			}
+			else
+			{
+				$objModel = \FilesModel::findByPath($strRelpath);
+			}
 
 			if ($objModel === null)
 			{
 				// Add a log entry
 				$objLog->append("[Added] $strRelpath");
 
-				// Add the resource
-				static::addResource($strRelpath);
+				// Get the parent folder
+				$strParent = dirname($strRelpath);
+
+				// Get the parent ID
+				if ($strParent == $GLOBALS['TL_CONFIG']['uploadPath'])
+				{
+					$intPid = 0;
+				}
+				else
+				{
+					$objParent = \FilesModel::findByPath($strParent, array('cached'=>true));
+
+					if ($objParent === null)
+					{
+						throw new \Exception("No parent entry for $strParent");
+					}
+
+					$intPid = $objParent->id;
+				}
+
+				// Create the file or folder
+				if (is_file(TL_ROOT . '/' . $strRelpath))
+				{
+					$objFile = new \File($strRelpath, true);
+
+					$objModel = new \FilesModel();
+					$objModel->pid       = $intPid;
+					$objModel->tstamp    = time();
+					$objModel->name      = $objFile->name;
+					$objModel->type      = 'file';
+					$objModel->path      = $objFile->path;
+					$objModel->extension = $objFile->extension;
+					$objModel->hash      = $objFile->hash;
+					$objModel->save();
+				}
+				else
+				{
+					$objFolder = new \Folder($strRelpath);
+
+					$objModel = new \FilesModel();
+					$objModel->pid       = $intPid;
+					$objModel->tstamp    = time();
+					$objModel->name      = $objFolder->name;
+					$objModel->type      = 'folder';
+					$objModel->path      = $objFolder->path;
+					$objModel->extension = '';
+					$objModel->hash      = $objFolder->hash;
+					$objModel->save();
+				}
 			}
 			else
 			{

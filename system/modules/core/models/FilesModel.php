@@ -137,4 +137,19 @@ class FilesModel extends \Model
 
 		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ") AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, $arrOptions);
 	}
+
+
+	/**
+	 * Find all files in a folder
+	 *
+	 * @param string $strPath    The folder path
+	 * @param array  $arrOptions An optional options array
+	 *
+	 * @return \Model\Collection|null A collection of models or null if there are no matching files
+	 */
+	public static function findMultipleFilesByFolder($strPath, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+		return static::findBy(array("$t.type='file' AND $t.path REGEXP ?"), '^' . $strPath . '/[^/]+$', $arrOptions);
+	}
 }
