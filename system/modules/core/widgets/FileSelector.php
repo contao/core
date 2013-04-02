@@ -233,7 +233,7 @@ class FileSelector extends \Widget
 		natcasesort($files);
 		$files = array_values($files);
 
-		$folderClass = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] ? 'tl_folder' : 'tl_file';
+		$folderClass = ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly']) ? 'tl_folder' : 'tl_file';
 
 		// Process folders
 		for ($f=0; $f<count($folders); $f++)
@@ -244,7 +244,7 @@ class FileSelector extends \Widget
 			// Check whether there are subfolders or files
 			foreach (scan($folders[$f]) as $v)
 			{
-				if (is_dir($folders[$f].'/'.$v) || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'])
+				if (is_dir($folders[$f].'/'.$v) || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly'])
 				{
 					$countFiles++;
 				}
@@ -266,7 +266,7 @@ class FileSelector extends \Widget
 			}
 
 			$folderImg = ($blnIsOpen && $countFiles > 0) ? 'folderO.gif' : 'folderC.gif';
-			$folderLabel = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] ? '<strong>'.specialchars(basename($currentFolder)).'</strong>' : specialchars(basename($currentFolder));
+			$folderLabel = ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly']) ? '<strong>'.specialchars(basename($currentFolder)).'</strong>' : specialchars(basename($currentFolder));
 
 			// Add the current folder
 			$return .= \Image::getHtml($folderImg, '', $folderAttribute).' <a href="' . $this->addToUrl('node='.$this->urlEncode($currentFolder)) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">'.$folderLabel.'</a></div> <div class="tl_right">';
@@ -298,7 +298,7 @@ class FileSelector extends \Widget
 		}
 
 		// Process files
-		if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'])
+		if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly'])
 		{
 			$allowedExtensions = null;
 
