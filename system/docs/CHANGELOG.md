@@ -13,12 +13,12 @@ Added an option to disable modules in the page layout (see #5558).
 ### Fixed
 Added a vendor library to parse the Contao changelog file (see #5569).
 
+### New
+Front end modules can now be disabled in the page layout.
+
 
 Version 3.1.beta1 (2013-03-28)
 ------------------------------
-
-### New
-Front end modules can now be disabled in the page layout.
 
 ### New
 Added the "parseWidget" hook (see #5553).

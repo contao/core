@@ -16,14 +16,12 @@ namespace Contao;
 /**
  * Handles the database assisted file system (DBAFS)
  *
- * The class functions as an adapter for the PHP $_SESSION array and separates
- * back end from front end session data.
+ * The class provides static methods to add, move, copy and delete resources as
+ * well as a method to synchronize the file system and the database.
  *
  * Usage:
  *
- *     $session = Session::getInstance();
- *     $session->set('foo', 'bar');
- *     echo $session::->('foo');
+ *     $file = Dbafs::addResource('files/james-wilson.jpg');
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
