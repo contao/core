@@ -289,11 +289,6 @@ abstract class Model
 				$this->id = $stmt->insertId;
 			}
 
-			// Update the model data from the DB record (might be modified by default values or triggers)
-			$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-										   ->executeUncached($this->{static::$strPk});
-
-			$this->setRow($res->row());
 			$this->postSave(self::INSERT);
 		}
 
@@ -319,7 +314,17 @@ abstract class Model
 	 *
 	 * @param integer $intType The query type (Model::INSERT or Model::UPDATE)
 	 */
-	protected function postSave($intType) {}
+	protected function postSave($intType)
+	{
+		if ($intType == self::INSERT)
+		{
+			// Reload the model data (might have been modified by default values or triggers)
+			$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+										   ->executeUncached($this->{static::$strPk});
+
+			$this->setRow($res->row());
+		}
+	}
 
 
 	/**

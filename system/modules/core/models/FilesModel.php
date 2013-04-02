@@ -152,4 +152,12 @@ class FilesModel extends \Model
 		$t = static::$strTable;
 		return static::findBy(array("$t.type='file' AND $t.path REGEXP ?"), '^' . $strPath . '/[^/]+$', $arrOptions);
 	}
+
+
+	/**
+	 * Do not reload the data upon insert
+	 *
+	 * @param integer $intType The query type (Model::INSERT or Model::UPDATE)
+	 */
+	protected function postSave($intType) {}
 }
