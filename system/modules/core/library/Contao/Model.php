@@ -43,6 +43,9 @@ namespace Contao;
 abstract class Model
 {
 
+	const INSERT = 1;
+	const UPDATE = 2;
+
 	/**
 	 * Table name
 	 * @var string
@@ -272,6 +275,8 @@ abstract class Model
 			\Database::getInstance()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
 									->set($arrSet)
 									->execute($this->{static::$strPk});
+
+			$this->postSave(self::UPDATE);
 		}
 		else
 		{
@@ -283,13 +288,15 @@ abstract class Model
 			{
 				$this->id = $stmt->insertId;
 			}
+
+			// Update the model data from the DB record (might be modified by default values or triggers)
+			$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+										   ->executeUncached($this->{static::$strPk});
+
+			$this->setRow($res->row());
+			$this->postSave(self::INSERT);
 		}
 
-		// Update the model data from the DB record (might be modified by default values or triggers)
-		$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-									   ->executeUncached($this->{static::$strPk});
-
-		$this->setRow($res->row());
 		return $this;
 	}
 
@@ -305,6 +312,14 @@ abstract class Model
 	{
 		return $arrSet;
 	}
+
+
+	/**
+	 * Modify the current row after it has been stored in the database
+	 *
+	 * @param integer $intType The query type (Model::INSERT or Model::UPDATE)
+	 */
+	protected function postSave($intType) {}
 
 
 	/**
