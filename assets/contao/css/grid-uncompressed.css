@@ -193,8 +193,8 @@
 	 * Show all columns underneath each other
 	 */
 	*[class*="grid"] {
-		float:none;
-		display:block;
-		width:auto;
+		float:none !important;
+		display:block !important;
+		width:auto !important;
 	}
 }
