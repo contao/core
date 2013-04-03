@@ -103,7 +103,7 @@ class PageRegular extends \Frontend
 			foreach ($arrModules as $arrModule)
 			{
 				// Disabled module
-				if ($arrModule['disable'])
+				if (!$arrModule['enable'])
 				{
 					continue;
 				}

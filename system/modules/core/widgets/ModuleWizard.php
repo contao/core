@@ -162,7 +162,7 @@ class ModuleWizard extends \Widget
   <thead>
   <tr>
     <th>'.$GLOBALS['TL_LANG']['MSC']['mw_module'].'</th>
-    <th>'.\Image::getHtml('show.gif', '', 'title="'.$GLOBALS['TL_LANG']['MSC']['mw_disable'].'"').'</th>
+    <th>'.\Image::getHtml('show.gif', '', 'title="'.$GLOBALS['TL_LANG']['MSC']['mw_enable'].'"').'</th>
     <th>'.$GLOBALS['TL_LANG']['MSC']['mw_column'].'</th>
     <th>&nbsp;</th>
   </tr>
@@ -187,7 +187,7 @@ class ModuleWizard extends \Widget
 			$return .= '
   <tr>
     <td><select name="'.$this->strId.'['.$i.'][mod]" class="tl_select tl_chosen" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()" onchange="Backend.updateModuleLink(this)">'.$options.'</select></td>
-    <td style="text-align:center"><input name="'.$this->strId.'['.$i.'][disable]" type="checkbox" class="tl_checkbox" value="1" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()"'. (($this->varValue[$i]['disable']) ? ' checked' : '').'></td>';
+    <td style="text-align:center"><input name="'.$this->strId.'['.$i.'][enable]" type="checkbox" class="tl_checkbox" value="1" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()"'. (($this->varValue[$i]['enable']) ? ' checked' : '').'></td>';
 
 			$options = '';
 

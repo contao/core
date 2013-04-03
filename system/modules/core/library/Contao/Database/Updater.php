@@ -373,6 +373,21 @@ class Updater extends \Controller
 						   ->execute(serialize($arrCss), $objCss->id);
 		}
 
+		$objLayout = $this->Database->query("SELECT `id`, `modules` FROM `tl_layout`");
+
+		while ($objLayout->next())
+		{
+			$arrModules = deserialize($objLayout->modules);
+
+			foreach (array_keys($arrModules) as $key)
+			{
+				$arrModules[$key]['enable'] = true;
+			}
+
+			$this->Database->prepare("UPDATE `tl_layout` SET `modules`=? WHERE `id`=?")
+						   ->execute(serialize($arrModules), $objLayout->id);
+		}
+
 		$this->Database->query("UPDATE `tl_content` SET `type`='accordionStart' WHERE `type`='accordion' AND `mooType`='mooStart'");
 		$this->Database->query("UPDATE `tl_content` SET `type`='accordionStop' WHERE `type`='accordion' AND `mooType`='mooStop'");
 		$this->Database->query("UPDATE `tl_content` SET `type`='accordionSingle' WHERE `type`='accordion' AND `mooType`='mooSingle'");
