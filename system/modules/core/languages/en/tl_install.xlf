@@ -254,6 +254,9 @@
       <trans-unit id="tl_install.DROP">
         <source>Drop existing tables</source>
       </trans-unit>
+      <trans-unit id="tl_install.selectAll">
+        <source>Select all</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
