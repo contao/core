@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.11 (2013-XX-XX)
+----------------------------
+
+### Fixed
+Do not override the website path in the default config file (see #5339).
+
+
 Version 2.11.10 (2013-03-21)
 ----------------------------
 
