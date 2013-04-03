@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 03. Apr 2013 um 16:52
+-- Erstellungszeit: 03. Apr 2013 um 20:26
 -- Server Version: 5.1.66
 -- PHP-Version: 5.3.21
 
@@ -149,8 +149,8 @@ INSERT INTO `tl_content` (`id`, `pid`, `ptable`, `sorting`, `tstamp`, `type`, `h
 -- Daten für Tabelle `tl_files`
 --
 
-INSERT INTO `tl_files` (`id`, `pid`, `tstamp`, `type`, `path`, `extension`, `hash`, `found`, `name`, `meta`) VALUES(1, 0, 1339146912, 'folder', 'files/music_academy', '', '9ce7673aa561a70707a5508190296124', '1', 'music_academy', NULL);
-INSERT INTO `tl_files` (`id`, `pid`, `tstamp`, `type`, `path`, `extension`, `hash`, `found`, `name`, `meta`) VALUES(2, 1, 1339146912, 'folder', 'files/music_academy/campus', '', '92ba45d822a9beebefc5abaf1daf4a88', '1', 'campus', NULL);
+INSERT INTO `tl_files` (`id`, `pid`, `tstamp`, `type`, `path`, `extension`, `hash`, `found`, `name`, `meta`) VALUES(1, 0, 1339146912, 'folder', 'files/music_academy', '', '64a9d0ea75b7fe3c0b1d653e99febcb1', '1', 'music_academy', NULL);
+INSERT INTO `tl_files` (`id`, `pid`, `tstamp`, `type`, `path`, `extension`, `hash`, `found`, `name`, `meta`) VALUES(2, 1, 1339146912, 'folder', 'files/music_academy/campus', '', 'eeee812d7221676e227308e57b6b7d5c', '1', 'campus', NULL);
 INSERT INTO `tl_files` (`id`, `pid`, `tstamp`, `type`, `path`, `extension`, `hash`, `found`, `name`, `meta`) VALUES(3, 2, 1343475069, 'file', 'files/music_academy/campus/campus_building.jpg', 'jpg', 'a0ac423df6265537c7b1783ed9cbb698', '1', 'campus_building.jpg', 0x613a313a7b733a323a22656e223b613a333a7b733a353a227469746c65223b733a34333a22486973746f726963616c206275696c64696e67206f6e204d757369632041636164656d792063616d707573223b733a343a226c696e6b223b733a303a22223b733a373a2263617074696f6e223b733a31393a22486973746f726963616c206275696c64696e67223b7d7d);
 INSERT INTO `tl_files` (`id`, `pid`, `tstamp`, `type`, `path`, `extension`, `hash`, `found`, `name`, `meta`) VALUES(4, 2, 1343475069, 'file', 'files/music_academy/campus/campus_hall.jpg', 'jpg', '16074d6c3e3dfeb23d580715f486bff2', '1', 'campus_hall.jpg', 0x613a313a7b733a323a22656e223b613a333a7b733a353a227469746c65223b733a32363a224d757369632041636164656d79204c696e636f6c6e2048616c6c223b733a343a226c696e6b223b733a303a22223b733a373a2263617074696f6e223b733a31323a224c696e636f6c6e2048616c6c223b7d7d);
 INSERT INTO `tl_files` (`id`, `pid`, `tstamp`, `type`, `path`, `extension`, `hash`, `found`, `name`, `meta`) VALUES(5, 2, 1343475069, 'file', 'files/music_academy/campus/campus_library.jpg', 'jpg', '1795dc0db4a1efcd2c390e3969ac3d3b', '1', 'campus_library.jpg', 0x613a313a7b733a323a22656e223b613a333a7b733a353a227469746c65223b733a32383a224d757369632041636164656d792063616d707573206c696272617279223b733a343a226c696e6b223b733a303a22223b733a373a2263617074696f6e223b733a31343a2243616d707573206c696272617279223b7d7d);
@@ -167,7 +167,7 @@ INSERT INTO `tl_files` (`id`, `pid`, `tstamp`, `type`, `path`, `extension`, `has
 INSERT INTO `tl_files` (`id`, `pid`, `tstamp`, `type`, `path`, `extension`, `hash`, `found`, `name`, `meta`) VALUES(16, 1, 1339146912, 'file', 'files/music_academy/permissions.gif', 'gif', 'edc93c562d750ea9e0b20052298f4aa5', '1', 'permissions.gif', NULL);
 INSERT INTO `tl_files` (`id`, `pid`, `tstamp`, `type`, `path`, `extension`, `hash`, `found`, `name`, `meta`) VALUES(17, 1, 1339146912, 'file', 'files/music_academy/protect.gif', 'gif', '7d8c259b52dc2fe5ccd8b8ea7e8090fb', '1', 'protect.gif', NULL);
 INSERT INTO `tl_files` (`id`, `pid`, `tstamp`, `type`, `path`, `extension`, `hash`, `found`, `name`, `meta`) VALUES(18, 1, 1339146912, 'file', 'files/music_academy/screenshot.jpg', 'jpg', 'bc787a96a23265d4de60c9d1c8e21580', '1', 'screenshot.jpg', NULL);
-INSERT INTO `tl_files` (`id`, `pid`, `tstamp`, `type`, `path`, `extension`, `hash`, `found`, `name`, `meta`) VALUES(19, 0, 1339146912, 'folder', 'files/tiny_templates', '', 'eacf331f0ffc35d4b482f1d15a887d3b', '1', 'tiny_templates', NULL);
+INSERT INTO `tl_files` (`id`, `pid`, `tstamp`, `type`, `path`, `extension`, `hash`, `found`, `name`, `meta`) VALUES(19, 0, 1339146912, 'folder', 'files/tiny_templates', '', '3cb25412587bbaedd9901598abd93284', '1', 'tiny_templates', NULL);
 INSERT INTO `tl_files` (`id`, `pid`, `tstamp`, `type`, `path`, `extension`, `hash`, `found`, `name`, `meta`) VALUES(20, 19, 1339146912, 'file', 'files/tiny_templates/index.html', 'html', 'aeebec42dc0335ea1e0853f4393259b4', '1', 'index.html', NULL);
 INSERT INTO `tl_files` (`id`, `pid`, `tstamp`, `type`, `path`, `extension`, `hash`, `found`, `name`, `meta`) VALUES(21, 0, 1339146912, 'file', 'files/tinymce.css', 'css', 'e6cfd2993ed50341da010e66be287d2d', '1', 'tinymce.css', NULL);
 
