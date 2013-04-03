@@ -56,7 +56,6 @@ $GLOBALS['TL_CONFIG']['folderUrl']      = false;
 $GLOBALS['TL_CONFIG']['disableAlias']   = false;
 $GLOBALS['TL_CONFIG']['minifyMarkup']   = false;
 $GLOBALS['TL_CONFIG']['gzipScripts']    = false;
-$GLOBALS['TL_CONFIG']['websitePath']    = null;
 
 
 /**
