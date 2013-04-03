@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### New
+Added a `$GLOBALS['TL_BODY']` array to add custom code at the end of a page
+independent from MooTools or jQuery (see #5583).
+
 ### Improved
 Edit all related elements (e.g. alias elements) in a modal dialog.
 

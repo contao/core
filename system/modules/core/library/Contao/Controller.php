@@ -1719,6 +1719,15 @@ abstract class Controller extends \System
 		$arrReplace['[[TL_MOOTOOLS]]'] = $strScripts;
 		$strScripts = '';
 
+		// Add the internal <body> tags
+		if (!empty($GLOBALS['TL_BODY']) && is_array($GLOBALS['TL_BODY']))
+		{
+			foreach (array_unique($GLOBALS['TL_BODY']) as $script)
+			{
+				$strScripts .= trim($script) . "\n";
+			}
+		}
+
 		// Add the syntax highlighter scripts
 		if (!empty($GLOBALS['TL_HIGHLIGHTER']) && is_array($GLOBALS['TL_HIGHLIGHTER']))
 		{
@@ -1741,7 +1750,7 @@ abstract class Controller extends \System
 			}
 		}
 
-		$arrReplace['[[TL_HIGHLIGHTER]]'] = $strScripts;
+		$arrReplace['[[TL_BODY]]'] = $strScripts;
 		$strScripts = '';
 
 		$objCombiner = new \Combiner();
