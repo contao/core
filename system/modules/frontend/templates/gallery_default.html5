@@ -5,7 +5,7 @@
 <tr class="<?php echo $class; ?>">
 <?php foreach ($row as $col): ?>
 <?php if (!$col->addImage): ?>
-  <td class="<?php echo $col->class; ?> empty">&nbsp;</td>
+  <td class="<?php echo $col->class; ?> empty" style="width:<?php echo $col->colWidth; ?>">&nbsp;</td>
 <?php else: ?>
   <td class="<?php echo $col->class; ?>" style="width:<?php echo $col->colWidth; ?>">
   <figure class="image_container"<?php if ($col->margin): ?> style="<?php echo $col->margin; ?>"<?php endif; ?>>

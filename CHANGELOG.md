@@ -5,6 +5,9 @@ Version 2.11.11 (2013-XX-XX)
 ----------------------------
 
 ### Fixed
+Pass the style attribute to empty image gallery table cells (see #5485).
+
+### Fixed
 Do not override the website path in the default config file (see #5339).
 
 
