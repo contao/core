@@ -49,7 +49,7 @@ class ModuleWizard extends \Widget
 	{
 		$this->import('Database');
 
-		$arrButtons = array('edit', 'copy', 'drag', 'up', 'down', 'delete');
+		$arrButtons = array('edit', 'copy', 'delete', 'enable', 'drag', 'up', 'down');
 		$strCommand = 'cmd_' . $this->strField;
 
 		// Change the order
@@ -162,7 +162,6 @@ class ModuleWizard extends \Widget
   <thead>
   <tr>
     <th>'.$GLOBALS['TL_LANG']['MSC']['mw_module'].'</th>
-    <th>'.\Image::getHtml('show.gif', '', 'title="'.$GLOBALS['TL_LANG']['MSC']['mw_enable'].'"').'</th>
     <th>'.$GLOBALS['TL_LANG']['MSC']['mw_column'].'</th>
     <th>&nbsp;</th>
   </tr>
@@ -186,8 +185,7 @@ class ModuleWizard extends \Widget
 
 			$return .= '
   <tr>
-    <td><select name="'.$this->strId.'['.$i.'][mod]" class="tl_select tl_chosen" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()" onchange="Backend.updateModuleLink(this)">'.$options.'</select></td>
-    <td style="text-align:center"><input name="'.$this->strId.'['.$i.'][enable]" type="checkbox" class="tl_checkbox" value="1" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()"'. (($this->varValue[$i]['enable']) ? ' checked' : '').'></td>';
+    <td><select name="'.$this->strId.'['.$i.'][mod]" class="tl_select tl_chosen" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()" onchange="Backend.updateModuleLink(this)">'.$options.'</select></td>';
 
 			$options = '';
 
@@ -212,11 +210,15 @@ class ModuleWizard extends \Widget
 				}
 				elseif ($button == 'drag')
 				{
-					$return .= \Image::getHtml('drag.gif', '', 'class="drag-handle" title="' . sprintf($GLOBALS['TL_LANG']['MSC']['move']) . '"');
+					$return .= ' ' . \Image::getHtml('drag.gif', '', 'class="drag-handle" title="' . sprintf($GLOBALS['TL_LANG']['MSC']['move']) . '"');
+				}
+				elseif ($button == 'enable')
+				{
+					$return .= ' <input name="'.$this->strId.'['.$i.'][enable]" type="checkbox" class="tl_checkbox mw_enable" value="1" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()"'. (($this->varValue[$i]['enable']) ? ' checked' : '').'>';
 				}
 				else
 				{
-					$return .= ' <a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'"' . $class . ' title="'.specialchars($GLOBALS['TL_LANG']['MSC']['mw_'.$button]).'" onclick="Backend.moduleWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.\Image::getHtml($button.'.gif', $GLOBALS['TL_LANG']['MSC']['mw_'.$button], 'class="tl_listwizard_img"').'</a> ';
+					$return .= ' <a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'"' . $class . ' title="'.specialchars($GLOBALS['TL_LANG']['MSC']['mw_'.$button]).'" onclick="Backend.moduleWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.\Image::getHtml($button.'.gif', $GLOBALS['TL_LANG']['MSC']['mw_'.$button], 'class="tl_listwizard_img"').'</a>';
 				}
 			}
 

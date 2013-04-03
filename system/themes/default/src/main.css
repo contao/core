@@ -862,10 +862,6 @@ ul.sgallery li {
 .tl_modulewizard .tl_select {
 	width:400px;
 }
-.tl_modulewizard .tl_checkbox {
-	margin-left:0;
-	margin-right:0;
-}
 
 /* Options wizard */
 .tl_optionwizard {
