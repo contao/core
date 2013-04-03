@@ -862,6 +862,13 @@ ul.sgallery li {
 .tl_modulewizard .tl_select {
 	width:400px;
 }
+.tl_modulewizard img.mw_enable,.js .tl_modulewizard input.mw_enable {
+	display:none;
+}
+.js .tl_modulewizard img.mw_enable {
+	display:inline;
+	cursor:pointer;
+}
 
 /* Options wizard */
 .tl_optionwizard {
