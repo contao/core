@@ -5,6 +5,22 @@ Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
 ### New
+Support creating indexes on multiple columns in the DCA. Usage example:
+
+```
+'sql' => array
+(
+  'keys' => array
+  (
+    'id' => 'primary',
+    'pid,name' => 'unique',
+  )
+)
+```
+
+This will create a unique index over the `pid` and `name` columns.
+
+### New
 Added a `$GLOBALS['TL_BODY']` array to add custom code at the end of a page
 independent from MooTools or jQuery (see #5583).
 

@@ -242,6 +242,12 @@ class DcaExtractor extends \Controller
 			{
 				$v = 'KEY `' . $k . '` (`' . $k . '`)';
 			}
+			elseif(strpos($k, ',') !== false) // see #5556
+			{
+				$f = trimsplit(',', $k);
+				$k = str_replace(',', '_', $k);
+				$v = strtoupper($v) . ' KEY `' . $k . '` (`' . implode('`, `', $f) . '`)';
+			}
 			else
 			{
 				$v = strtoupper($v) . ' KEY `' . $k . '` (`' . $k . '`)';
