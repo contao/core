@@ -233,24 +233,29 @@ class DcaExtractor extends \Controller
 		// Keys
 		foreach ($this->arrKeys as $k=>$v)
 		{
-			if ($v == 'primary')
-			{
-				$v = 'PRIMARY KEY  (`' . $k . '`)';
-				$k = 'PRIMARY';
-			}
-			elseif ($v == 'index')
-			{
-				$v = 'KEY `' . $k . '` (`' . $k . '`)';
-			}
-			elseif(strpos($k, ',') !== false) // see #5556
+			// Handle multi-column indexes (see #5556)
+			if (strpos($k, ',') !== false)
 			{
 				$f = trimsplit(',', $k);
 				$k = str_replace(',', '_', $k);
-				$v = strtoupper($v) . ' KEY `' . $k . '` (`' . implode('`, `', $f) . '`)';
 			}
 			else
 			{
-				$v = strtoupper($v) . ' KEY `' . $k . '` (`' . $k . '`)';
+				$f = array($k);
+			}
+
+			if ($v == 'primary')
+			{
+				$k = 'PRIMARY';
+				$v = 'PRIMARY KEY  (`' . implode('`, `', $f) . '`)';
+			}
+			elseif ($v == 'index')
+			{
+				$v = 'KEY `' . $k . '` (`' . implode('`, `', $f) . '`)';
+			}
+			else
+			{
+				$v = strtoupper($v) . ' KEY `' . $k . '` (`' . implode('`, `', $f) . '`)';
 			}
 
 			$return['TABLE_CREATE_DEFINITIONS'][$k] = $v;
