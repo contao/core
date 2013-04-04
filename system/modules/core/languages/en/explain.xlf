@@ -18,7 +18,7 @@
         <source>Code Editor</source>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.1">
-        <source>For more information about CodeMirror please visit &lt;a href="http://codemirror.net" title="EditArea by Marijn Haverbeke" target="_blank"&gt;http://codemirror.net&lt;/a&gt;.</source>
+        <source>For more information about ACE please visit &lt;a href="http://ace.ajax.org" title="ACE (Ajax.org Cloud9 Editor)" target="_blank"&gt;http://ace.ajax.org&lt;/a&gt;.</source>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.0.0">
         <source>colspan</source>
@@ -36,13 +36,13 @@
         <source>m/d/Y</source>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.2.1">
-        <source>MM/DD/YYYY, english format, e.g. 01/28/2005</source>
+        <source>MM/DD/YYYY, English format, e.g. 01/28/2005</source>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.3.0">
         <source>d.m.Y</source>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.3.1">
-        <source>DD.MM.YYYY, german format, e.g. 28.01.2005</source>
+        <source>DD.MM.YYYY, German format, e.g. 28.01.2005</source>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.4.0">
         <source>y-n-j</source>
