@@ -1033,6 +1033,23 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$version = '';
 		}
 
+		$strPreview = '';
+
+		// Show a preview image (see #4948)
+		if ($this->objActiveRecord !== null && $this->objActiveRecord->type == 'file')
+		{
+			$objFile = new \File($this->objActiveRecord->path);
+
+			if ($objFile->isGdImage)
+			{
+				$strPreview = '
+
+<div class="tl_edit_preview">
+' . \Image::getHtml(\Image::get($objFile->path, 700, 150, 'box')) . '
+</div>';
+			}
+		}
+
 		// Add some buttons and end the form
 		$return .= '
 </div>
@@ -1060,7 +1077,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_files']['editFF'].'</h2>
-'.\Message::generate().'
+'.\Message::generate().$strPreview.'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'">

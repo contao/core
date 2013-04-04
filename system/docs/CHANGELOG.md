@@ -5,6 +5,9 @@ Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
 ### Improved
+Show a preview image when editing image meta data (see #4948).
+
+### Improved
 Merge the custom layout sections upon theme import (see #5000).
 
 ### New

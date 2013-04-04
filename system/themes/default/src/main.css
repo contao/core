@@ -377,6 +377,15 @@ h2.sub_headline_index {
 .mac #search .tl_text {
 	padding:4px 2px;
 }
+.tl_edit_preview {
+	margin:18px 18px 6px;
+}
+.tl_edit_preview img {
+	padding:2px;
+	border:1px solid #ddd;
+	background:#fff;
+	box-shadow:0 1px 3px #ddd;
+}
 
 /* Rebuild the search index */
 #tl_rebuild_index {
