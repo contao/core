@@ -175,7 +175,7 @@ class Theme extends \Backend
 		{
 			$return .= '
 
-<div class="tl_'. (($count++ < 1) ? 't' : '') .'box">
+<div class="tl_'. (($count++ < 1) ? 't' : '') .'box theme_import">
   <h3>'. basename($strFile) .'</h3>
   <h4>'.$GLOBALS['TL_LANG']['tl_theme']['tables_fields'].'</h4>';
 
@@ -284,7 +284,7 @@ class Theme extends \Backend
 						$blnHasLayout = true;
 						$arrProcessed[] = $mod['col'];
 
-						$return .= "\n  " . '<p style="margin:0;color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_section'], $mod['col']) .'</p>';
+						$return .= "\n  " . '<p style="margin:0;color:#5c9ac9">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_section'], $mod['col']) .'</p>';
 					}
 				}
 			}
@@ -453,6 +453,9 @@ class Theme extends \Backend
 				}
 			}
 
+			$arrMissing = array();
+			$arrSections = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
+
 			// Lock the tables
 			$arrLocks = array
 			(
@@ -559,11 +562,16 @@ class Theme extends \Backend
 
 							if (is_array($modules))
 							{
-								foreach (array_keys($modules) as $key)
+								foreach ($modules as $key=>$mod)
 								{
-									if ($modules[$key]['mod'] > 0)
+									if ($mod['mod'] > 0)
 									{
-										$modules[$key]['mod'] = $arrMapper['tl_module'][$modules[$key]['mod']];
+										$modules[$key]['mod'] = $arrMapper['tl_module'][$mod['mod']];
+									}
+
+									if (!in_array($mod['col'], array('header', 'left', 'right', 'main', 'footer')) && !in_array($mod['col'], $arrSections) && !in_array($mod['col'], $arrMissing))
+									{
+										$arrMissing[] = $mod['col'];
 									}
 								}
 
@@ -678,6 +686,13 @@ class Theme extends \Backend
 			// Update the style sheets
 			$this->import('StyleSheets');
 			$this->StyleSheets->updateStyleSheets();
+
+			// Add missing sections to the local configuration
+			if (count($arrMissing))
+			{
+				$GLOBALS['TL_CONFIG']['customSections'] = implode(',', array_merge($arrSections, $arrMissing));
+				$this->Config->add("\$GLOBALS['TL_CONFIG']['customSections']", $GLOBALS['TL_CONFIG']['customSections']);
+			}
 
 			// Notify the user
 			\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));

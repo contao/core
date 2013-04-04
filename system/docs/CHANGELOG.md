@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Improved
+Merge the custom layout sections upon theme import (see #5000).
+
 ### New
 Support creating indexes on multiple columns in the DCA. Usage example:
 

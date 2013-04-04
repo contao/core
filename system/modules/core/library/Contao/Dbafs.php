@@ -88,6 +88,12 @@ class Dbafs
 			}
 		}
 
+		// Return the model if it exists already
+		if (empty($arrPaths))
+		{
+			return $objModel;
+		}
+
 		$arrPaths = array_values($arrPaths);
 
 		// If the resource is a folder, also add its contents

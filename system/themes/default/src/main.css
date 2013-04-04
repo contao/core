@@ -332,6 +332,9 @@ h2.sub_headline_index {
 	font-weight:bold;
 	font-size:11px;
 }
+.tl_tbox.theme_import h3,.tl_tbox.theme_import h4,.tl_tbox.theme_import p {
+	line-height:1.5;
+}
 .tl_help,.tl_help a {
 	margin-bottom:0;
 	padding:1px 0;
