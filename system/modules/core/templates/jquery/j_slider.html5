@@ -10,8 +10,11 @@ $GLOBALS['TL_CSS'][] = 'assets/swipe/'. SWIPE .'/css/swipe.min.css||static';
   (function($) {
     $(document).ready(function() {
       $('.ce_sliderStart').each(function(i, cte) {
-        new Swipe($('.content-slider', cte)[0], {
+        var s = $('.content-slider', cte)[0];
+        new Swipe(s, {
           // Put custom options here
+          'auto':parseInt(s.getAttribute('data-delay')),
+          'speed':parseInt(s.getAttribute('data-speed'))
         }).addControl($('.slider-control', cte)[0]);
       });
     });

@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Improved
+Allow to set the slider delay and speed in the wrapper element.
+
 ### Fixed
 Always check the `/templates` folder for customized templates even if there is
 a theme-specific template folder (see #5547).

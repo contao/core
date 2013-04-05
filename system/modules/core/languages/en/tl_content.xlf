@@ -314,6 +314,18 @@
       <trans-unit id="tl_content.autoplay.1">
         <source>Automatically play the video when the page loads.</source>
       </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.0">
+        <source>Sliding interval</source>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.1">
+        <source>The time in milliseconds between slides (1000 = 1s). Set to 0 to disable auto sliding.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.0">
+        <source>Transition speed</source>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.1">
+        <source>The transition speed in milliseconds (1000 = 1s). Defaults to 300.</source>
+      </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>
       </trans-unit>

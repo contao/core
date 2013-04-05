@@ -377,7 +377,7 @@ Swipe.prototype = {
       this._animate(from*-this.width, to * -this.width, speed)
     }
 
-    this.index = to.toInt(); // PATCH: make this an integer
+    this.index = parseInt(to); // PATCH: make this an integer
 
     this.callback(this.index, this.slides[this.index]);
 
@@ -532,6 +532,8 @@ Swipe.prototype.addControl = function(control) {
 
 		b.addEventListener('click', function(e) {
 			e.preventDefault();
+			_this.delay = 0;
+			clearTimeout(_this.interval);
 			_this.updateMenu(this.getAttribute('data-index'));
 		});
 

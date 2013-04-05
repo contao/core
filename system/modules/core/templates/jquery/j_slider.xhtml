@@ -8,10 +8,22 @@ $GLOBALS['TL_CSS'][] = 'assets/swipe/'. SWIPE .'/css/swipe.min.css||static';
 <script type="text/javascript" src="<?php echo TL_ASSETS_URL; ?>assets/swipe/<?php echo SWIPE; ?>/js/swipe.min.js"></script>
 <script type="text/javascript">
   /* <![CDATA[ */
+  (function($) {
     $(document).ready(function() {
       $('.ce_sliderStart').each(function(i, cte) {
-        new Swipe($('.content-slider', cte)[0], {
+        var s = $('.content-slider', cte)[0],
+            delay, speed;
+        s.className.split(' ').map(function(cls) {
+          if (cls.indexOf('slider_delay') != -1) {
+            delay = parseInt(cls.replace('slider_delay_', ''));
+          } else if (cls.indexOf('slider_speed') != -1) {
+            speed = parseInt(cls.replace('slider_speed_', ''));
+          }
+        });
+        new Swipe(s, {
           // Put custom options here
+          'auto':delay,
+          'speed':speed
         }).addControl($('.slider-control', cte)[0]);
       });
     });

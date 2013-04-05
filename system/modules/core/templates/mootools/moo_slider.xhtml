@@ -11,8 +11,19 @@ $GLOBALS['TL_CSS'][] = 'assets/swipe/'. SWIPE .'/css/swipe.min.css||static';
   (function($) {
     window.addEvent('domready', function() {
       $$('.ce_sliderStart').each(function(cte) {
-        new Swipe(cte.getElement('.content-slider'), {
+        var s = cte.getElement('.content-slider'),
+            delay, speed;
+        s.className.split(' ').each(function(cls) {
+          if (cls.indexOf('slider_delay') != -1) {
+            delay = cls.replace('slider_delay_', '').toInt();
+          } else if (cls.indexOf('slider_speed') != -1) {
+            speed = cls.replace('slider_speed_', '').toInt();
+          }
+        });
+        new Swipe(s, {
           // Put custom options here
+          'auto':delay,
+          'speed':speed
         }).addControl(cte.getElement('.slider-control'));
       });
     });
