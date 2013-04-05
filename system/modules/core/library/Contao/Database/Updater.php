@@ -358,8 +358,10 @@ class Updater extends \Controller
 	 */
 	public function run31Update()
 	{
+		// Get all page layouts that use the CSS framework
 		$objCss = $this->Database->query("SELECT `id`, `framework` FROM `tl_layout` WHERE `framework`!=''");
 
+		// Rename "responsive.css" to "grid.css"
 		while ($objCss->next())
 		{
 			$arrCss = deserialize($objCss->framework);
@@ -373,8 +375,10 @@ class Updater extends \Controller
 						   ->execute(serialize($arrCss), $objCss->id);
 		}
 
+		// Get all page layouts
 		$objLayout = $this->Database->query("SELECT `id`, `modules` FROM `tl_layout`");
 
+		// Add the "enable" flag to all modules
 		while ($objLayout->next())
 		{
 			$arrModules = deserialize($objLayout->modules);
@@ -388,10 +392,17 @@ class Updater extends \Controller
 						   ->execute(serialize($arrModules), $objLayout->id);
 		}
 
+		// Adjust the accordion elements
 		$this->Database->query("UPDATE `tl_content` SET `type`='accordionStart' WHERE `type`='accordion' AND `mooType`='mooStart'");
 		$this->Database->query("UPDATE `tl_content` SET `type`='accordionStop' WHERE `type`='accordion' AND `mooType`='mooStop'");
 		$this->Database->query("UPDATE `tl_content` SET `type`='accordionSingle' WHERE `type`='accordion' AND `mooType`='mooSingle'");
 
+		// White-space is now in the "alignment" section (see #4519)
+		$this->Database->query("UPDATE `tl_style` SET `alignment`=1 WHERE `whitespace`!=''");
+		$this->Database->query("ALTER TABLE `tl_style` CHANGE `whitespace` `whitespace` varchar(8) NOT NULL default ''");
+		$this->Database->query("UPDATE `tl_style` SET `whitespace`='nowrap' WHERE `whitespace`!=''");
+
+		// Remove the "mooType" field (triggers the version 3.1 update)
 		$this->Database->query("ALTER TABLE `tl_content` DROP `mooType`");
 	}
 

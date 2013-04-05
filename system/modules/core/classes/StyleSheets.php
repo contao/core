@@ -442,16 +442,22 @@ class StyleSheets extends \Backend
 				}
 			}
 
+			// Vertical alignment
+			if ($row['verticalalign'] != '')
+			{
+				$return .= $lb . 'vertical-align:' . $row['verticalalign'] . ';';
+			}
+
 			// Text alignment
 			if ($row['textalign'] != '')
 			{
 				$return .= $lb . 'text-align:' . $row['textalign'] . ';';
 			}
 
-			// Vertical alignment
-			if ($row['verticalalign'] != '')
+			// White space
+			if ($row['whitespace'] != '')
 			{
-				$return .= $lb . 'vertical-align:' . $row['verticalalign'] . ';';
+				$return .= $lb . 'white-space:' . $row['whitespace'] . ';';
 			}
 		}
 
@@ -838,12 +844,6 @@ class StyleSheets extends \Backend
 			if ($fnColor[0] != '')
 			{
 				$return .= $lb . 'color:' . $this->compileColor($fnColor, $blnWriteToFile, $vars) . ';';
-			}
-
-			// White space
-			if ($row['whitespace'] != '')
-			{
-				$return .= $lb . 'white-space:nowrap;';
 			}
 
 			// Text transform
@@ -1716,6 +1716,7 @@ class StyleSheets extends \Backend
 				case 'align':
 				case 'text-align':
 				case 'vertical-align':
+				case 'white-space':
 					$arrSet['alignment'] = 1;
 					$arrSet[str_replace('-', '', $strKey)] = $arrChunks[1];
 					break;
@@ -2072,18 +2073,6 @@ class StyleSheets extends \Backend
 						'value' => preg_replace('/[^0-9\.-]+/', '', $arrChunks[1]),
 						'unit' => preg_replace('/[^ceimnptx%]/', '', $arrChunks[1])
 					);
-					break;
-
-				case 'white-space':
-					if ($arrChunks[1] == 'nowrap')
-					{
-						$arrSet['font'] = 1;
-						$arrSet['whitespace'] = 1;
-					}
-					else
-					{
-						$arrSet['own'][] = $strDefinition;
-					}
 					break;
 
 				case 'text-transform':

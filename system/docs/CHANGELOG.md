@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Fixed
+Support all `white-space` settings in the style sheet editor (see #4519).
+
 ### Improved
 Show a preview image when editing image meta data (see #4948).
 

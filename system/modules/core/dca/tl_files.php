@@ -112,7 +112,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'name,protected,meta'
+		'default'                     => 'name,protected;meta'
 	),
 
 	// Fields
@@ -171,7 +171,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['meta'],
 			'inputType'               => 'metaWizard',
-			'eval'                    => array('allowHtml'=>true, 'tl_class'=>'clr'),
+			'eval'                    => array('allowHtml'=>true),
 			'sql'                     => "blob NULL"
 		)
 	)

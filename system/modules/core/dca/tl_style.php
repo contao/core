@@ -137,10 +137,10 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 	(
 		'size'                        => 'width,height,minwidth,minheight,maxwidth,maxheight',
 		'positioning'                 => 'trbl,position,floating,clear,overflow,display',
-		'alignment'                   => 'margin,padding,align,verticalalign,textalign',
+		'alignment'                   => 'margin,padding,align,verticalalign,textalign,whitespace',
 		'background'                  => 'bgcolor,bgimage,bgposition,bgrepeat,shadowsize,shadowcolor,gradientAngle,gradientColors',
 		'border'                      => 'borderwidth,borderstyle,bordercolor,borderradius,bordercollapse,borderspacing',
-		'font'                        => 'fontfamily,fontsize,fontcolor,lineheight,fontstyle,whitespace,texttransform,textindent,letterspacing,wordspacing',
+		'font'                        => 'fontfamily,fontsize,fontcolor,lineheight,fontstyle,texttransform,textindent,letterspacing,wordspacing',
 		'list'                        => 'liststyletype,liststyleimage'
 	),
 
@@ -358,6 +358,14 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
+		'whitespace' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['whitespace'],
+			'inputType'               => 'select',
+			'options'                 => array('normal', 'nowrap', 'pre', 'pre-line', 'pre-wrap'),
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(8) NOT NULL default ''"
+		),
 		'background' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['background'],
@@ -527,12 +535,6 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'reference'               => &$GLOBALS['TL_LANG']['tl_style'],
 			'eval'                    => array('multiple'=>true, 'tl_class'=>'clr'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'whitespace' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['whitespace'],
-			'inputType'               => 'checkbox',
-			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'texttransform' => array
 		(

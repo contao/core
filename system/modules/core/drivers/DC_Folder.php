@@ -1019,6 +1019,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				$class = 'tl_box';
 				$return .= '
   <input type="hidden" name="FORM_FIELDS[]" value="'.specialchars($this->strPalette).'">
+  <div class="clear"></div>
 </div>';
 			}
 		}
