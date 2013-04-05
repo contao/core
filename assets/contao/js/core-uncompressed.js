@@ -1422,6 +1422,8 @@ var Backend =
 				break;
 		}
 
+		Backend.tableWizardResort(tbody);
+
 		new Sortables(tbody, {
 			contstrain: true,
 			opacity: 0.6,
