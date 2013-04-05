@@ -5,6 +5,10 @@ Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
 ### Fixed
+Always check the `/templates` folder for customized templates even if there is
+a theme-specific template folder (see #5547).
+
+### Fixed
 Make `$this->inColumn` available in content elements and hybrids (see #5442).
 
 ### Fixed
