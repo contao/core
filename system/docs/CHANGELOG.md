@@ -5,6 +5,9 @@ Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
 ### Fixed
+Make `$this->inColumn` available in content elements and hybrids (see #5442).
+
+### Fixed
 Support all `white-space` settings in the style sheet editor (see #4519).
 
 ### Improved

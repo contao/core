@@ -409,11 +409,12 @@ abstract class Controller extends \System
 	/**
 	 * Generate a content element and return it as string
 	 *
-	 * @param mixed $intId A content element ID or a Model object
+	 * @param mixed  $intId     A content element ID or a Model object
+	 * @param string $strColumn The column the element is in
 	 *
 	 * @return string The content element HTML markup
 	 */
-	protected function getContentElement($intId)
+	protected function getContentElement($intId, $strColumn='main')
 	{
 		if (is_object($intId))
 		{
@@ -473,7 +474,7 @@ abstract class Controller extends \System
 		}
 
 		$objRow->typePrefix = 'ce_';
-		$objElement = new $strClass($objRow);
+		$objElement = new $strClass($objRow, $strColumn);
 		$strBuffer = $objElement->generate();
 
 		// HOOK: add custom logic
@@ -499,11 +500,12 @@ abstract class Controller extends \System
 	/**
 	 * Generate a form and return it as string
 	 *
-	 * @param mixed $varId A form ID or a Model object
+	 * @param mixed  $varId     A form ID or a Model object
+	 * @param string $strColumn The column the form is in
 	 *
 	 * @return string The form HTML markup
 	 */
-	protected function getForm($varId)
+	protected function getForm($varId, $strColumn='main')
 	{
 		if (is_object($varId))
 		{
@@ -526,7 +528,7 @@ abstract class Controller extends \System
 
 		$objRow->typePrefix = 'ce_';
 		$objRow->form = $objRow->id;
-		$objElement = new \Form($objRow);
+		$objElement = new \Form($objRow, $strColumn);
 		$strBuffer = $objElement->generate();
 
 		// HOOK: add custom logic

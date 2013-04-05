@@ -60,6 +60,9 @@ class ContentModule extends \ContentElement
 		$objModule->space = $this->space;
 		$objModule->cssID = $this->cssID;
 
+		// Set the column (see #5442)
+		$objModule->inColumn = $this->strColumn;
+
 		return $objModule->generate();
 	}
 

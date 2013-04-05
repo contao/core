@@ -181,7 +181,7 @@ class ModuleArticle extends \Module
 		{
 			while ($objCte->next())
 			{
-				$arrElements[] = $this->getContentElement($objCte->current());
+				$arrElements[] = $this->getContentElement($objCte->current(), $this->strColumn);
 			}
 		}
 
