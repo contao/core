@@ -18,11 +18,11 @@ var Theme = {
 		var input = $(el).getElement('input');
 		if (input) {
 			if (input.checked) {
-				input.checked = '';
-				$(el).setStyle('background-color', '');
+				if (input.get('type') != 'radio') {
+					input.checked = '';
+				}
 			} else {
 				input.checked = 'checked';
-				$(el).setStyle('background-color', '#ebfdd7');
 			}
 		}
 	},
