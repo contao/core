@@ -403,6 +403,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		),
 		'session' => array
 		(
+			'eval'                    => array('doNotShow'=>true),
 			'sql'                     => "blob NULL"
 		),
 		'autologin' => array
