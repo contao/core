@@ -1858,6 +1858,11 @@ document.addEvent('mousedown', function(event) {
 window.addEvent('domready', function() {
 	$(document.body).addClass('js');
 
+	// Mark touch devices (see #5563)
+	if (Browser.Features.Touch) {
+		$(document.body).addClass('touch');
+	}
+
 	Backend.collapsePalettes();
 	Backend.addInteractiveHelp();
 	Backend.addColorPicker();
