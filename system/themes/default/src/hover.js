@@ -11,6 +11,18 @@ var Theme = {
 	hoverDiv: function(el, state) {
 		$(el).setStyle('background-color', (state ? '#ebfdd7' : ''));
 	},
+	toggleSelect: function(el) {
+		var input = $(el).getElement('input');
+		if (input) {
+			if (input.checked) {
+				input.checked = '';
+				$(el).setStyle('background-color', '');
+			} else {
+				input.checked = 'checked';
+				$(el).setStyle('background-color', '#ebfdd7');
+			}
+		}
+	},
 	fixLabelLastChild: function() {
 		if (Browser.ie7 || Browser.ie8) {
 			$$('.tl_checkbox_container label:last-child').each(function(el) {
@@ -20,7 +32,21 @@ var Theme = {
 	}
 };
 
-// Fix the :last-child issue (see #4017)
+// Initialize
 window.addEvent('domready', function() {
-	Theme.fixLabelLastChild();
+	Theme.fixLabelLastChild(); // see #4017
+
+	// Do not propagate the click events in the page/file selector
+	$$('.picker_selector').each(function(ul) {
+		ul.getElements('a').each(function(el) {
+			el.addEvent('click', function(e) {
+				e.stopPropagation();
+			});
+		});
+		ul.getElements('input[type="checkbox"]').each(function(el) {
+			el.addEvent('click', function(e) {
+				e.stopPropagation();
+			});
+		});
+	});
 });
