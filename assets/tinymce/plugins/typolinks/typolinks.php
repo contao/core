@@ -34,6 +34,8 @@ header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet
 	<script type="text/javascript" src="../../utils/form_utils.js"></script>
 	<script type="text/javascript" src="../../utils/validate.js"></script>
 	<script type="text/javascript" src="js/typolinks.js"></script>
+	<style>a.browse span{display:inline-block}input[name="href"]{margin-right:4px}#srcbrowser{background-position:-380px -1px}
+	</style>
 </head>
 <body id="link" style="display: none">
 <form onsubmit="LinkDialog.update();return false;" action="#">

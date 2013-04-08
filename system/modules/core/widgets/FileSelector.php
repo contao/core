@@ -336,7 +336,7 @@ class FileSelector extends \Widget
 					}
 				}
 
-				$return .= \Image::getHtml($objFile->icon, $objFile->mime).' <label for="'.$this->strName.'_'.md5($currentFile).'">'.utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']).'</label>'.$thumbnail.'</div> <div class="tl_right">';
+				$return .= \Image::getHtml($objFile->icon, $objFile->mime).' '.utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']).$thumbnail.'</div> <div class="tl_right">';
 
 				// Add checkbox or radio button
 				switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])

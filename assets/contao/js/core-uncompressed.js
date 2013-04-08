@@ -1956,6 +1956,9 @@ var TinyCallback =
 				}
 			} else {
 				win.document.forms[0].elements[field_name].value = val;
+				if (win.document.forms[0].elements['linktitle']) {
+					win.document.forms[0].elements['linktitle'].value = '';
+				}
 				if (prev = win.document.getElementById('prev')) {
 					var u = new URI(val);
 					prev.innerHTML = '<img id="previewImg" src="' + u.toAbsolute() + '" border="0">';
@@ -1965,7 +1968,7 @@ var TinyCallback =
 		});
 		M.show({
 			'title': win.document.title,
-			'contents': '<iframe src="contao/' + ((type == 'page') ? 'page.php' : 'file.php') + '?table=tl_content&amp;field=singleSRC&amp;value=' + url.replace('{{link_url::', '').replace('}}', '') + '" name="simple-modal-iframe" width="100%" height="' + (window.getSize().y-180).toInt() + '" frameborder="0"></iframe>',
+			'contents': '<iframe src="contao/' + ((type == 'page') ? 'page.php' : 'file.php') + '?table=tl_content&amp;field=singleSRC&amp;value=' + ((type == 'page') ? url.replace('{{link_url::', '').replace('}}', '') : url) + '" name="simple-modal-iframe" width="100%" height="' + (window.getSize().y-180).toInt() + '" frameborder="0"></iframe>',
 			'model': 'modal'
 		});
 	}
