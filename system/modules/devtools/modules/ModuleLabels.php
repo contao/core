@@ -55,7 +55,7 @@ class ModuleLabels extends \BackendModule
 		{
 			if ($strLanguage != 'en' && substr($strLanguage, 0, 1) != '.')
 			{
-				$strOptions .= sprintf('<option value="%s"%s>%s</option>', $strLanguage, (($strLanguage == \Input::post('language')) ? ' selected="selected"' : ''), $arrLanguages[$strLanguage]);
+				$strOptions .= sprintf('<option value="%s"%s>%s</option>', $strLanguage, (($strLanguage == \Input::post('language') || $strLanguage == $GLOBALS['TL_LANGUAGE']) ? ' selected="selected"' : ''), $arrLanguages[$strLanguage]);
 			}
 		}
 
