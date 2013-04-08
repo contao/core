@@ -41,6 +41,32 @@ class PageModel extends \Model
 
 
 	/**
+	 * Find multiple pages by their IDs
+	 *
+	 * @param array $arrIds     An array of pages IDs
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model\Collection|null A collection of models or null if there are no pages
+	 */
+	public static function findMultipleByIds($arrIds, array $arrOptions=array())
+	{
+		if (!is_array($arrIds) || empty($arrIds))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+		}
+
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, $arrOptions);
+	}
+
+
+	/**
 	 * Find a published page by its ID
 	 *
 	 * @param integer $intId      The page ID
