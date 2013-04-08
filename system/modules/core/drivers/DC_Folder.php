@@ -1991,7 +1991,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				}
 			}
 
-			$return .= "\n  " . '<li class="tl_folder" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left" style="padding-left:'.($intMargin + (($countFiles < 1) ? 20 : 0)).'px">';
+			$return .= "\n  " . '<li class="tl_folder click2edit" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left" style="padding-left:'.($intMargin + (($countFiles < 1) ? 20 : 0)).'px">';
 
 			// Add a toggle button if there are childs
 			if ($countFiles > 0)
@@ -2052,7 +2052,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			$currentEncoded = $this->urlEncode($currentFile);
-			$return .= "\n  " . '<li class="tl_file" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
+			$return .= "\n  " . '<li class="tl_file click2edit" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
 
 			// Generate the thumbnail
 			if ($objFile->isGdImage && $objFile->height > 0)

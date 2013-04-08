@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### New
+`[Alt] + click` or touch elements twice to edit them.
+
 ### Improved
 Allow to set the slider delay and speed in the wrapper element.
 

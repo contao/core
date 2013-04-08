@@ -9,6 +9,9 @@ var Theme = {
 		}
 	},
 	hoverDiv: function(el, state) {
+		if (!state) {
+			el.removeAttribute('data-visited');
+		}
 		$(el).setStyle('background-color', (state ? '#ebfdd7' : ''));
 	},
 	toggleSelect: function(el) {
@@ -48,5 +51,34 @@ window.addEvent('domready', function() {
 				e.stopPropagation();
 			});
 		});
+	});
+
+	// [Alt] + click or touch twice to edit
+	$$('.click2edit').each(function(el) {
+		if (Browser.Features.Touch) {
+			el.addEvent('click', function(e) {
+				if (!el.getAttribute('data-visited')) {
+					el.setAttribute('data-visited', 1);
+				} else {
+					el.getElements('a').each(function(a) {
+						if (a.href.indexOf('act=edit') != -1) {
+							document.location.href = a.href;
+							return;
+						}
+					});
+					el.removeAttribute('data-visited');
+				}
+			});
+		} else {
+			el.addEvent('click', function(e) {
+				if (!e.alt) return;
+				el.getElements('a').each(function(a) {
+					if (a.href.indexOf('act=edit') != -1) {
+						document.location.href = a.href;
+						return;
+					}
+				});
+			});
+		}
 	});
 });
