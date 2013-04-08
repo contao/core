@@ -331,7 +331,14 @@ class PageSelector extends \Widget
 		$objPage->protected = ($objPage->protected || $protectedPage);
 
 		// Add the current page
-		$return .= \Image::getHtml($this->getPageStatusIcon($objPage), '', $folderAttribute).' <a href="' . $this->addToUrl('node='.$objPage->id) . '" title="'.specialchars($objPage->title . ' (' . $objPage->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')').'">'.(($objPage->type == 'root') ? '<strong>' : '').$objPage->title.(($objPage->type == 'root') ? '</strong>' : '').'</a></div> <div class="tl_right">';
+		if (!empty($childs))
+		{
+			$return .= \Image::getHtml($this->getPageStatusIcon($objPage), '', $folderAttribute).' <a href="' . $this->addToUrl('node='.$objPage->id) . '" title="'.specialchars($objPage->title . ' (' . $objPage->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')').'">'.(($objPage->type == 'root') ? '<strong>' : '').$objPage->title.(($objPage->type == 'root') ? '</strong>' : '').'</a></div> <div class="tl_right">';
+		}
+		else
+		{
+			$return .= \Image::getHtml($this->getPageStatusIcon($objPage), '', $folderAttribute).' '.(($objPage->type == 'root') ? '<strong>' : '').$objPage->title.(($objPage->type == 'root') ? '</strong>' : '').'</div> <div class="tl_right">';
+		}
 
 		// Add checkbox or radio button
 		switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])
