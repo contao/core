@@ -5,8 +5,17 @@ Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
 ### New
-`[Alt]+click` or touch elements twice to edit them or `[Alt]+[Shift]+click` them
-to edit their header data (parent view).
+You can now click elements to edit them:
+
+ * `[Ctrl] + click`: edit the element
+ * `[Ctrl] + [Shift] + click`: edit the element's header
+
+On Mac OS the command key is used instead:
+
+ * `[Cmd] + click`: edit the element
+ * `[Cmd] + [Shift] + click`: edit the element's header
+
+On touch devices, you can to touch an element twice to edit it.
 
 ### Improved
 Allow to set the slider delay and speed in the wrapper element.

@@ -71,14 +71,16 @@ window.addEvent('domready', function() {
 			});
 		} else {
 			el.addEvent('click', function(e) {
-				if (e.alt && e.shift) {
+				var key = Browser.Platform.mac ?
+						e.event.metaKey : e.event.ctrlKey;
+				if (key && e.event.shiftKey) {
 					el.getElements('a').each(function(a) {
 						if (a.hasClass('editheader')) {
 							document.location.href = a.href;
 							return;
 						}
 					});
-				} else if (e.alt) {
+				} else if (key) {
 					el.getElements('a').each(function(a) {
 						if (a.hasClass('edit')) {
 							document.location.href = a.href;
