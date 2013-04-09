@@ -5,6 +5,9 @@ Version 3.0.7 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly set the end date of duplicated events (see #5608).
+
+### Fixed
 Apply the access restrictions of content elements and modules in the front end
 only (see #5603).
 

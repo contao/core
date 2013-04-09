@@ -229,6 +229,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		'endTime' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['endTime'],
+			'default'                 => time(),
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'time', 'doNotCopy'=>true, 'tl_class'=>'w50'),
@@ -250,6 +251,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		'endDate' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['endDate'],
+			'default'                 => null,
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'date', 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
