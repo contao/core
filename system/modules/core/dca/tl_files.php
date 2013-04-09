@@ -136,7 +136,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		),
 		'path' => array
 		(
-			'sql'                     => "text NULL"
+			'sql'                     => "blob NULL"
 		),
 		'extension' => array
 		(
@@ -159,7 +159,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			(
 				array('tl_files', 'checkFilename')
 			),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "varbinary(255) NOT NULL default ''"
 		),
 		'protected' => array
 		(
