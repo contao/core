@@ -5,6 +5,9 @@ Version 3.0.7 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Purge the internal cache when disabling the Contao safe mode (see #5579).
+
+### Fixed
 Correctly set the end date of duplicated events (see #5608).
 
 ### Fixed
