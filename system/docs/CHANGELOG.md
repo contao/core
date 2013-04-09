@@ -5,6 +5,9 @@ Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
 ### Updated
+Updated Colorbox to version 1.4.11.
+
+### Updated
 Updated jQuery UI to version 1.10.2.
 
 ### Updated
