@@ -1,6 +1,14 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.0.7 (2013-XX-XX)
+--------------------------
+
+### Fixed
+Apply the access restrictions of content elements and modules in the front end
+only (see #5603).
+
+
 Version 3.0.6 (2013-03-21)
 --------------------------
 
