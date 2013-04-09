@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Updated
+Updated html5shiv to version 3.6.2.
+
 ### New
 You can now click elements to edit them:
 
