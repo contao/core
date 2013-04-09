@@ -82,6 +82,8 @@ class Main extends Backend
 			// Safe mode off
 			if (Input::get('smo'))
 			{
+				$this->import('Automator');
+				$this->Automator->purgeInternalCache();
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", false);
 				$this->redirect($this->getReferer());
 			}

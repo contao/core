@@ -245,26 +245,30 @@ abstract class Controller extends \System
 				return '';
 			}
 
-			// Show to guests only
-			if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
+			// Apply the access restrictions in the front end only (see #5603)
+			if (TL_MODE == 'FE')
 			{
-				return '';
-			}
-
-			// Protected element
-			if (!BE_USER_LOGGED_IN && $objRow->protected)
-			{
-				if (!FE_USER_LOGGED_IN)
+				// Show to guests only
+				if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
 				{
 					return '';
 				}
 
-				$this->import('FrontendUser', 'User');
-				$groups = deserialize($objRow->groups);
-
-				if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
+				// Protected element
+				if (!BE_USER_LOGGED_IN && $objRow->protected)
 				{
-					return '';
+					if (!FE_USER_LOGGED_IN)
+					{
+						return '';
+					}
+
+					$this->import('FrontendUser', 'User');
+					$groups = deserialize($objRow->groups);
+
+					if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
+					{
+						return '';
+					}
 				}
 			}
 
@@ -435,26 +439,30 @@ abstract class Controller extends \System
 			}
 		}
 
-		// Show to guests only
-		if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
+		// Apply the access restrictions in the front end only (see #5603)
+		if (TL_MODE == 'FE')
 		{
-			return '';
-		}
-
-		// Protected the element
-		if ($objRow->protected && !BE_USER_LOGGED_IN)
-		{
-			if (!FE_USER_LOGGED_IN)
+			// Show to guests only
+			if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
 			{
 				return '';
 			}
 
-			$this->import('FrontendUser', 'User');
-			$groups = deserialize($objRow->groups);
-
-			if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
+			// Protected the element
+			if ($objRow->protected && !BE_USER_LOGGED_IN)
 			{
-				return '';
+				if (!FE_USER_LOGGED_IN)
+				{
+					return '';
+				}
+
+				$this->import('FrontendUser', 'User');
+				$groups = deserialize($objRow->groups);
+
+				if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
+				{
+					return '';
+				}
 			}
 		}
 

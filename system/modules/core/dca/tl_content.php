@@ -605,7 +605,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['posterSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'files'=>true),
+			'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'playerSize' => array

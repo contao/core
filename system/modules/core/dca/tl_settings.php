@@ -88,7 +88,11 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['coreOnlyMode'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_settings', 'changeCoreOnlyMode')
+			)
 		),
 		'disableCron' => array
 		(
@@ -554,6 +558,12 @@ class tl_settings extends Backend
 	 */
 	public function updateInactiveModules($varValue)
 	{
+		// The field value has not changed
+		if ($varValue == $GLOBALS['TL_CONFIG']['inactiveModules'])
+		{
+			return $varValue;
+		}
+
 		$blnPurgeCache = false;
 		$arrModules = deserialize($varValue);
 
@@ -582,6 +592,23 @@ class tl_settings extends Backend
 
 		// Purge the internal cache (see #5016)
 		if ($blnPurgeCache)
+		{
+			$this->import('Automator');
+			$this->Automator->purgeInternalCache();
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Purge the internal cache when toggling the Contao safe mode
+	 * @param mixed
+	 * @return mixed
+	 */
+	public function changeCoreOnlyMode($varValue)
+	{
+		if ($varValue != $GLOBALS['TL_CONFIG']['coreOnlyMode'])
 		{
 			$this->import('Automator');
 			$this->Automator->purgeInternalCache();

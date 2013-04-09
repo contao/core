@@ -417,6 +417,20 @@ The pageTree widget is now sortable just like the fileTree widget and the custom
 and quick navigation modules consider the custom order (see #4936).
 
 
+Version 3.0.7 (2013-XX-XX)
+--------------------------
+
+### Fixed
+Purge the internal cache when disabling the Contao safe mode (see #5579).
+
+### Fixed
+Correctly set the end date of duplicated events (see #5608).
+
+### Fixed
+Apply the access restrictions of content elements and modules in the front end
+only (see #5603).
+
+
 Version 3.0.6 (2013-03-21)
 --------------------------
 
