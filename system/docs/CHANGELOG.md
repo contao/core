@@ -5,6 +5,9 @@ Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
 ### Updated
+Updated jQuery to version 1.9.1 (see #5600).
+
+### Updated
 Updated html5shiv to version 3.6.2.
 
 ### New
