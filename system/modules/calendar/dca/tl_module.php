@@ -44,13 +44,13 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_noSpan'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_startDay'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_startDay'],
-	'default'                 => 0,
+	'default'                 => 1,
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options'                 => array(0, 1, 2, 3, 4, 5, 6),
 	'reference'               => &$GLOBALS['TL_LANG']['DAYS'],
 	'eval'                    => array('tl_class'=>'w50'),
-	'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
+	'sql'                     => "smallint(5) unsigned NOT NULL default '1'"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_format'] = array
