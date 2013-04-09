@@ -104,7 +104,8 @@
 
 /* Buttons */
 .buttonwrapper, .buttonwrapper * { vertical-align:middle; }
-.buttonwrapper a { padding-left:12px; }
+.buttonwrapper a { margin-left:15px; }
+.buttonwrapper img { position:relative; top:-1px; left:-1px; }
 .mod_repository_submit form { display:inline; }
 
 /* Status colors */
