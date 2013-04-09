@@ -5,6 +5,9 @@ Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
 ### Updated
+Updated jQuery UI to version 1.10.2.
+
+### Updated
 Updated jQuery to version 1.9.1 (see #5600).
 
 ### Updated

@@ -1,23 +1,18 @@
-/*! jQuery UI - v1.9.1 - 2012-10-26
+/*! jQuery UI - v1.10.2 - 2013-04-09
 * http://jqueryui.com
 * Includes: jquery.ui.core.js, jquery.ui.widget.js, jquery.ui.accordion.js
-* Copyright (c) 2012 jQuery Foundation and other contributors Licensed MIT */
+* Copyright 2013 jQuery Foundation and other contributors Licensed MIT */
 
 (function( $, undefined ) {
 
 var uuid = 0,
 	runiqueId = /^ui-id-\d+$/;
 
-// prevent duplicate loading
-// this is only a problem because we proxy existing functions
-// and we don't want to double proxy them
+// $.ui might exist from components with no dependencies, e.g., $.ui.position
 $.ui = $.ui || {};
-if ( $.ui.version ) {
-	return;
-}
 
 $.extend( $.ui, {
-	version: "1.9.1",
+	version: "1.10.2",
 
 	keyCode: {
 		BACKSPACE: 8,
@@ -47,34 +42,35 @@ $.extend( $.ui, {
 
 // plugins
 $.fn.extend({
-	_focus: $.fn.focus,
-	focus: function( delay, fn ) {
-		return typeof delay === "number" ?
-			this.each(function() {
-				var elem = this;
-				setTimeout(function() {
-					$( elem ).focus();
-					if ( fn ) {
-						fn.call( elem );
-					}
-				}, delay );
-			}) :
-			this._focus.apply( this, arguments );
-	},
+	focus: (function( orig ) {
+		return function( delay, fn ) {
+			return typeof delay === "number" ?
+				this.each(function() {
+					var elem = this;
+					setTimeout(function() {
+						$( elem ).focus();
+						if ( fn ) {
+							fn.call( elem );
+						}
+					}, delay );
+				}) :
+				orig.apply( this, arguments );
+		};
+	})( $.fn.focus ),
 
 	scrollParent: function() {
 		var scrollParent;
-		if (($.ui.ie && (/(static|relative)/).test(this.css('position'))) || (/absolute/).test(this.css('position'))) {
+		if (($.ui.ie && (/(static|relative)/).test(this.css("position"))) || (/absolute/).test(this.css("position"))) {
 			scrollParent = this.parents().filter(function() {
-				return (/(relative|absolute|fixed)/).test($.css(this,'position')) && (/(auto|scroll)/).test($.css(this,'overflow')+$.css(this,'overflow-y')+$.css(this,'overflow-x'));
+				return (/(relative|absolute|fixed)/).test($.css(this,"position")) && (/(auto|scroll)/).test($.css(this,"overflow")+$.css(this,"overflow-y")+$.css(this,"overflow-x"));
 			}).eq(0);
 		} else {
 			scrollParent = this.parents().filter(function() {
-				return (/(auto|scroll)/).test($.css(this,'overflow')+$.css(this,'overflow-y')+$.css(this,'overflow-x'));
+				return (/(auto|scroll)/).test($.css(this,"overflow")+$.css(this,"overflow-y")+$.css(this,"overflow-x"));
 			}).eq(0);
 		}
 
-		return (/fixed/).test(this.css('position')) || !scrollParent.length ? $(document) : scrollParent;
+		return (/fixed/).test(this.css("position")) || !scrollParent.length ? $(document) : scrollParent;
 	},
 
 	zIndex: function( zIndex ) {
@@ -120,6 +116,58 @@ $.fn.extend({
 				$( this ).removeAttr( "id" );
 			}
 		});
+	}
+});
+
+// selectors
+function focusable( element, isTabIndexNotNaN ) {
+	var map, mapName, img,
+		nodeName = element.nodeName.toLowerCase();
+	if ( "area" === nodeName ) {
+		map = element.parentNode;
+		mapName = map.name;
+		if ( !element.href || !mapName || map.nodeName.toLowerCase() !== "map" ) {
+			return false;
+		}
+		img = $( "img[usemap=#" + mapName + "]" )[0];
+		return !!img && visible( img );
+	}
+	return ( /input|select|textarea|button|object/.test( nodeName ) ?
+		!element.disabled :
+		"a" === nodeName ?
+			element.href || isTabIndexNotNaN :
+			isTabIndexNotNaN) &&
+		// the element and all of its ancestors must be visible
+		visible( element );
+}
+
+function visible( element ) {
+	return $.expr.filters.visible( element ) &&
+		!$( element ).parents().addBack().filter(function() {
+			return $.css( this, "visibility" ) === "hidden";
+		}).length;
+}
+
+$.extend( $.expr[ ":" ], {
+	data: $.expr.createPseudo ?
+		$.expr.createPseudo(function( dataName ) {
+			return function( elem ) {
+				return !!$.data( elem, dataName );
+			};
+		}) :
+		// support: jQuery <1.8
+		function( elem, i, match ) {
+			return !!$.data( elem, match[ 3 ] );
+		},
+
+	focusable: function( element ) {
+		return focusable( element, !isNaN( $.attr( element, "tabindex" ) ) );
+	},
+
+	tabbable: function( element ) {
+		var tabIndex = $.attr( element, "tabindex" ),
+			isTabIndexNaN = isNaN( tabIndex );
+		return ( isTabIndexNaN || tabIndex >= 0 ) && focusable( element, !isTabIndexNaN );
 	}
 });
 
@@ -170,95 +218,36 @@ if ( !$( "<a>" ).outerWidth( 1 ).jquery ) {
 	});
 }
 
-// selectors
-function focusable( element, isTabIndexNotNaN ) {
-	var map, mapName, img,
-		nodeName = element.nodeName.toLowerCase();
-	if ( "area" === nodeName ) {
-		map = element.parentNode;
-		mapName = map.name;
-		if ( !element.href || !mapName || map.nodeName.toLowerCase() !== "map" ) {
-			return false;
-		}
-		img = $( "img[usemap=#" + mapName + "]" )[0];
-		return !!img && visible( img );
-	}
-	return ( /input|select|textarea|button|object/.test( nodeName ) ?
-		!element.disabled :
-		"a" === nodeName ?
-			element.href || isTabIndexNotNaN :
-			isTabIndexNotNaN) &&
-		// the element and all of its ancestors must be visible
-		visible( element );
+// support: jQuery <1.8
+if ( !$.fn.addBack ) {
+	$.fn.addBack = function( selector ) {
+		return this.add( selector == null ?
+			this.prevObject : this.prevObject.filter( selector )
+		);
+	};
 }
 
-function visible( element ) {
-	return $.expr.filters.visible( element ) &&
-		!$( element ).parents().andSelf().filter(function() {
-			return $.css( this, "visibility" ) === "hidden";
-		}).length;
+// support: jQuery 1.6.1, 1.6.2 (http://bugs.jquery.com/ticket/9413)
+if ( $( "<a>" ).data( "a-b", "a" ).removeData( "a-b" ).data( "a-b" ) ) {
+	$.fn.removeData = (function( removeData ) {
+		return function( key ) {
+			if ( arguments.length ) {
+				return removeData.call( this, $.camelCase( key ) );
+			} else {
+				return removeData.call( this );
+			}
+		};
+	})( $.fn.removeData );
 }
-
-$.extend( $.expr[ ":" ], {
-	data: $.expr.createPseudo ?
-		$.expr.createPseudo(function( dataName ) {
-			return function( elem ) {
-				return !!$.data( elem, dataName );
-			};
-		}) :
-		// support: jQuery <1.8
-		function( elem, i, match ) {
-			return !!$.data( elem, match[ 3 ] );
-		},
-
-	focusable: function( element ) {
-		return focusable( element, !isNaN( $.attr( element, "tabindex" ) ) );
-	},
-
-	tabbable: function( element ) {
-		var tabIndex = $.attr( element, "tabindex" ),
-			isTabIndexNaN = isNaN( tabIndex );
-		return ( isTabIndexNaN || tabIndex >= 0 ) && focusable( element, !isTabIndexNaN );
-	}
-});
-
-// support
-$(function() {
-	var body = document.body,
-		div = body.appendChild( div = document.createElement( "div" ) );
-
-	// access offsetHeight before setting the style to prevent a layout bug
-	// in IE 9 which causes the element to continue to take up space even
-	// after it is removed from the DOM (#8026)
-	div.offsetHeight;
-
-	$.extend( div.style, {
-		minHeight: "100px",
-		height: "auto",
-		padding: 0,
-		borderWidth: 0
-	});
-
-	$.support.minHeight = div.offsetHeight === 100;
-	$.support.selectstart = "onselectstart" in div;
-
-	// set display to none to avoid a layout bug in IE
-	// http://dev.jquery.com/ticket/4014
-	body.removeChild( div ).style.display = "none";
-});
 
 
 
 
 
 // deprecated
+$.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 
-(function() {
-	var uaMatch = /msie ([\w.]+)/.exec( navigator.userAgent.toLowerCase() ) || [];
-	$.ui.ie = uaMatch.length ? true : false;
-	$.ui.ie6 = parseFloat( uaMatch[ 1 ], 10 ) === 6;
-})();
-
+$.support.selectstart = "onselectstart" in document.createElement( "div" );
 $.fn.extend({
 	disableSelection: function() {
 		return this.bind( ( $.support.selectstart ? "selectstart" : "mousedown" ) +
@@ -298,8 +287,6 @@ $.extend( $.ui, {
 		}
 	},
 
-	contains: $.contains,
-
 	// only used by resizable
 	hasScroll: function( el, a ) {
 
@@ -322,16 +309,6 @@ $.extend( $.ui, {
 		has = ( el[ scroll ] > 0 );
 		el[ scroll ] = 0;
 		return has;
-	},
-
-	// these are odd functions, fix the API or move into individual plugins
-	isOverAxis: function( x, reference, size ) {
-		//Determines when x coordinate is over "b" element axis
-		return ( x > reference ) && ( x < ( reference + size ) );
-	},
-	isOver: function( y, x, top, left, height, width ) {
-		//Determines when x, y coordinates is over "b" element
-		return $.ui.isOverAxis( y, top, height ) && $.ui.isOverAxis( x, left, width );
 	}
 });
 
@@ -353,6 +330,9 @@ $.cleanData = function( elems ) {
 
 $.widget = function( name, base, prototype ) {
 	var fullName, existingConstructor, constructor, basePrototype,
+		// proxiedPrototype allows the provided prototype to remain unmodified
+		// so that it can be used as a mixin for multiple widgets (#8876)
+		proxiedPrototype = {},
 		namespace = name.split( "." )[ 0 ];
 
 	name = name.split( "." )[ 1 ];
@@ -399,43 +379,43 @@ $.widget = function( name, base, prototype ) {
 	// inheriting from
 	basePrototype.options = $.widget.extend( {}, basePrototype.options );
 	$.each( prototype, function( prop, value ) {
-		if ( $.isFunction( value ) ) {
-			prototype[ prop ] = (function() {
-				var _super = function() {
-						return base.prototype[ prop ].apply( this, arguments );
-					},
-					_superApply = function( args ) {
-						return base.prototype[ prop ].apply( this, args );
-					};
-				return function() {
-					var __super = this._super,
-						__superApply = this._superApply,
-						returnValue;
-
-					this._super = _super;
-					this._superApply = _superApply;
-
-					returnValue = value.apply( this, arguments );
-
-					this._super = __super;
-					this._superApply = __superApply;
-
-					return returnValue;
-				};
-			})();
+		if ( !$.isFunction( value ) ) {
+			proxiedPrototype[ prop ] = value;
+			return;
 		}
+		proxiedPrototype[ prop ] = (function() {
+			var _super = function() {
+					return base.prototype[ prop ].apply( this, arguments );
+				},
+				_superApply = function( args ) {
+					return base.prototype[ prop ].apply( this, args );
+				};
+			return function() {
+				var __super = this._super,
+					__superApply = this._superApply,
+					returnValue;
+
+				this._super = _super;
+				this._superApply = _superApply;
+
+				returnValue = value.apply( this, arguments );
+
+				this._super = __super;
+				this._superApply = __superApply;
+
+				return returnValue;
+			};
+		})();
 	});
 	constructor.prototype = $.widget.extend( basePrototype, {
 		// TODO: remove support for widgetEventPrefix
 		// always use the name + a colon as the prefix, e.g., draggable:start
 		// don't prefix for widgets that aren't DOM-based
-		widgetEventPrefix: basePrototype.widgetEventPrefix || name
-	}, prototype, {
+		widgetEventPrefix: existingConstructor ? basePrototype.widgetEventPrefix : name
+	}, proxiedPrototype, {
 		constructor: constructor,
 		namespace: namespace,
 		widgetName: name,
-		// TODO remove widgetBaseClass, see #8155
-		widgetBaseClass: fullName,
 		widgetFullName: fullName
 	});
 
@@ -488,7 +468,7 @@ $.widget.extend = function( target ) {
 };
 
 $.widget.bridge = function( name, object ) {
-	var fullName = object.prototype.widgetFullName;
+	var fullName = object.prototype.widgetFullName || name;
 	$.fn[ name ] = function( options ) {
 		var isMethodCall = typeof options === "string",
 			args = slice.call( arguments, 1 ),
@@ -524,7 +504,7 @@ $.widget.bridge = function( name, object ) {
 				if ( instance ) {
 					instance.option( options || {} )._init();
 				} else {
-					new object( options, this );
+					$.data( this, fullName, new object( options, this ) );
 				}
 			});
 		}
@@ -561,11 +541,8 @@ $.Widget.prototype = {
 		this.focusable = $();
 
 		if ( element !== this ) {
-			// 1.9 BC for #7810
-			// TODO remove dual storage
-			$.data( element, this.widgetName, this );
 			$.data( element, this.widgetFullName, this );
-			this._on( this.element, {
+			this._on( true, this.element, {
 				remove: function( event ) {
 					if ( event.target === element ) {
 						this.destroy();
@@ -689,9 +666,17 @@ $.Widget.prototype = {
 		return this._setOption( "disabled", true );
 	},
 
-	_on: function( element, handlers ) {
+	_on: function( suppressDisabledCheck, element, handlers ) {
 		var delegateElement,
 			instance = this;
+
+		// no suppressDisabledCheck flag, shuffle arguments
+		if ( typeof suppressDisabledCheck !== "boolean" ) {
+			handlers = element;
+			element = suppressDisabledCheck;
+			suppressDisabledCheck = false;
+		}
+
 		// no element argument, shuffle and use this.element
 		if ( !handlers ) {
 			handlers = element;
@@ -708,8 +693,9 @@ $.Widget.prototype = {
 				// allow widgets to customize the disabled handling
 				// - disabled as an array instead of boolean
 				// - disabled class as method for disabling individual parts
-				if ( instance.options.disabled === true ||
-						$( this ).hasClass( "ui-state-disabled" ) ) {
+				if ( !suppressDisabledCheck &&
+						( instance.options.disabled === true ||
+							$( this ).hasClass( "ui-state-disabled" ) ) ) {
 					return;
 				}
 				return ( typeof handler === "string" ? instance[ handler ] : handler )
@@ -821,7 +807,7 @@ $.each( { show: "fadeIn", hide: "fadeOut" }, function( method, defaultEffect ) {
 		if ( options.delay ) {
 			element.delay( options.delay );
 		}
-		if ( hasOptions && $.effects && ( $.effects.effect[ effectName ] || $.uiBackCompat !== false && $.effects[ effectName ] ) ) {
+		if ( hasOptions && $.effects && $.effects.effect[ effectName ] ) {
 			element[ method ]( options );
 		} else if ( effectName !== method && element[ effectName ] ) {
 			element[ effectName ]( options.duration, options.easing, callback );
@@ -837,13 +823,6 @@ $.each( { show: "fadeIn", hide: "fadeOut" }, function( method, defaultEffect ) {
 	};
 });
 
-// DEPRECATED
-if ( $.uiBackCompat !== false ) {
-	$.Widget.prototype._getCreateOptions = function() {
-		return $.metadata && $.metadata.get( this.element[0] )[ this.widgetName ];
-	};
-}
-
 })( jQuery );
 (function( $, undefined ) {
 
@@ -857,7 +836,7 @@ showProps.height = showProps.paddingTop = showProps.paddingBottom =
 	showProps.borderTopWidth = showProps.borderBottomWidth = "show";
 
 $.widget( "ui.accordion", {
-	version: "1.9.1",
+	version: "1.10.2",
 	options: {
 		active: 0,
 		animate: {},
@@ -876,100 +855,29 @@ $.widget( "ui.accordion", {
 	},
 
 	_create: function() {
-		var accordionId = this.accordionId = "ui-accordion-" +
-				(this.element.attr( "id" ) || ++uid),
-			options = this.options;
-
+		var options = this.options;
 		this.prevShow = this.prevHide = $();
-		this.element.addClass( "ui-accordion ui-widget ui-helper-reset" );
-
-		this.headers = this.element.find( options.header )
-			.addClass( "ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" );
-		this._hoverable( this.headers );
-		this._focusable( this.headers );
-
-		this.headers.next()
-			.addClass( "ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" )
-			.hide();
+		this.element.addClass( "ui-accordion ui-widget ui-helper-reset" )
+			// ARIA
+			.attr( "role", "tablist" );
 
 		// don't allow collapsible: false and active: false / null
 		if ( !options.collapsible && (options.active === false || options.active == null) ) {
 			options.active = 0;
 		}
+
+		this._processPanels();
 		// handle negative values
 		if ( options.active < 0 ) {
 			options.active += this.headers.length;
 		}
-		this.active = this._findActive( options.active )
-			.addClass( "ui-accordion-header-active ui-state-active" )
-			.toggleClass( "ui-corner-all ui-corner-top" );
-		this.active.next()
-			.addClass( "ui-accordion-content-active" )
-			.show();
-
-		this._createIcons();
-		this.refresh();
-
-		// ARIA
-		this.element.attr( "role", "tablist" );
-
-		this.headers
-			.attr( "role", "tab" )
-			.each(function( i ) {
-				var header = $( this ),
-					headerId = header.attr( "id" ),
-					panel = header.next(),
-					panelId = panel.attr( "id" );
-				if ( !headerId ) {
-					headerId = accordionId + "-header-" + i;
-					header.attr( "id", headerId );
-				}
-				if ( !panelId ) {
-					panelId = accordionId + "-panel-" + i;
-					panel.attr( "id", panelId );
-				}
-				header.attr( "aria-controls", panelId );
-				panel.attr( "aria-labelledby", headerId );
-			})
-			.next()
-				.attr( "role", "tabpanel" );
-
-		this.headers
-			.not( this.active )
-			.attr({
-				"aria-selected": "false",
-				tabIndex: -1
-			})
-			.next()
-				.attr({
-					"aria-expanded": "false",
-					"aria-hidden": "true"
-				})
-				.hide();
-
-		// make sure at least one header is in the tab order
-		if ( !this.active.length ) {
-			this.headers.eq( 0 ).attr( "tabIndex", 0 );
-		} else {
-			this.active.attr({
-				"aria-selected": "true",
-				tabIndex: 0
-			})
-			.next()
-				.attr({
-					"aria-expanded": "true",
-					"aria-hidden": "false"
-				});
-		}
-
-		this._on( this.headers, { keydown: "_keydown" });
-		this._on( this.headers.next(), { keydown: "_panelKeyDown" });
-		this._setupEvents( options.event );
+		this._refresh();
 	},
 
 	_getCreateEventData: function() {
 		return {
 			header: this.active,
+			panel: !this.active.length ? $() : this.active.next(),
 			content: !this.active.length ? $() : this.active.next()
 		};
 	},
@@ -1071,6 +979,7 @@ $.widget( "ui.accordion", {
 	},
 
 	_keydown: function( event ) {
+		/*jshint maxcomplexity:15*/
 		if ( event.altKey || event.ctrlKey ) {
 			return;
 		}
@@ -1116,20 +1025,116 @@ $.widget( "ui.accordion", {
 	},
 
 	refresh: function() {
-		var maxHeight, overflow,
-			heightStyle = this.options.heightStyle,
-			parent = this.element.parent();
+		var options = this.options;
+		this._processPanels();
 
+		// was collapsed or no panel
+		if ( ( options.active === false && options.collapsible === true ) || !this.headers.length ) {
+			options.active = false;
+			this.active = $();
+		// active false only when collapsible is true
+		} if ( options.active === false ) {
+			this._activate( 0 );
+		// was active, but active panel is gone
+		} else if ( this.active.length && !$.contains( this.element[ 0 ], this.active[ 0 ] ) ) {
+			// all remaining panel are disabled
+			if ( this.headers.length === this.headers.find(".ui-state-disabled").length ) {
+				options.active = false;
+				this.active = $();
+			// activate previous panel
+			} else {
+				this._activate( Math.max( 0, options.active - 1 ) );
+			}
+		// was active, active panel still exists
+		} else {
+			// make sure active index is correct
+			options.active = this.headers.index( this.active );
+		}
+
+		this._destroyIcons();
+
+		this._refresh();
+	},
+
+	_processPanels: function() {
+		this.headers = this.element.find( this.options.header )
+			.addClass( "ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" );
+
+		this.headers.next()
+			.addClass( "ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" )
+			.filter(":not(.ui-accordion-content-active)")
+			.hide();
+	},
+
+	_refresh: function() {
+		var maxHeight,
+			options = this.options,
+			heightStyle = options.heightStyle,
+			parent = this.element.parent(),
+			accordionId = this.accordionId = "ui-accordion-" +
+				(this.element.attr( "id" ) || ++uid);
+
+		this.active = this._findActive( options.active )
+			.addClass( "ui-accordion-header-active ui-state-active ui-corner-top" )
+			.removeClass( "ui-corner-all" );
+		this.active.next()
+			.addClass( "ui-accordion-content-active" )
+			.show();
+
+		this.headers
+			.attr( "role", "tab" )
+			.each(function( i ) {
+				var header = $( this ),
+					headerId = header.attr( "id" ),
+					panel = header.next(),
+					panelId = panel.attr( "id" );
+				if ( !headerId ) {
+					headerId = accordionId + "-header-" + i;
+					header.attr( "id", headerId );
+				}
+				if ( !panelId ) {
+					panelId = accordionId + "-panel-" + i;
+					panel.attr( "id", panelId );
+				}
+				header.attr( "aria-controls", panelId );
+				panel.attr( "aria-labelledby", headerId );
+			})
+			.next()
+				.attr( "role", "tabpanel" );
+
+		this.headers
+			.not( this.active )
+			.attr({
+				"aria-selected": "false",
+				tabIndex: -1
+			})
+			.next()
+				.attr({
+					"aria-expanded": "false",
+					"aria-hidden": "true"
+				})
+				.hide();
+
+		// make sure at least one header is in the tab order
+		if ( !this.active.length ) {
+			this.headers.eq( 0 ).attr( "tabIndex", 0 );
+		} else {
+			this.active.attr({
+				"aria-selected": "true",
+				tabIndex: 0
+			})
+			.next()
+				.attr({
+					"aria-expanded": "true",
+					"aria-hidden": "false"
+				});
+		}
+
+		this._createIcons();
+
+		this._setupEvents( options.event );
 
 		if ( heightStyle === "fill" ) {
-			// IE 6 treats height like minHeight, so we need to turn off overflow
-			// in order to get a reliable height
-			// we use the minHeight support test because we assume that only
-			// browsers that don't support minHeight will treat height as minHeight
-			if ( !$.support.minHeight ) {
-				overflow = parent.css( "overflow" );
-				parent.css( "overflow", "hidden");
-			}
 			maxHeight = parent.height();
 			this.element.siblings( ":visible" ).each(function() {
 				var elem = $( this ),
@@ -1140,9 +1145,6 @@ $.widget( "ui.accordion", {
 				}
 				maxHeight -= elem.outerHeight( true );
 			});
-			if ( overflow ) {
-				parent.css( "overflow", overflow );
-			}
 
 			this.headers.each(function() {
 				maxHeight -= $( this ).outerHeight( true );
@@ -1158,7 +1160,7 @@ $.widget( "ui.accordion", {
 			maxHeight = 0;
 			this.headers.next()
 				.each(function() {
-					maxHeight = Math.max( maxHeight, $( this ).height( "" ).height() );
+					maxHeight = Math.max( maxHeight, $( this ).css( "height", "" ).height() );
 				})
 				.height( maxHeight );
 		}
@@ -1187,14 +1189,20 @@ $.widget( "ui.accordion", {
 	},
 
 	_setupEvents: function( event ) {
-		var events = {};
-		if ( !event ) {
-			return;
+		var events = {
+			keydown: "_keydown"
+		};
+		if ( event ) {
+			$.each( event.split(" "), function( index, eventName ) {
+				events[ eventName ] = "_eventHandler";
+			});
 		}
-		$.each( event.split(" "), function( index, eventName ) {
-			events[ eventName ] = "_eventHandler";
-		});
+
+		this._off( this.headers.add( this.headers.next() ) );
 		this._on( this.headers, events );
+		this._on( this.headers.next(), { keydown: "_panelKeyDown" });
+		this._hoverable( this.headers );
+		this._focusable( this.headers );
 	},
 
 	_eventHandler: function( event ) {
@@ -1372,193 +1380,5 @@ $.widget( "ui.accordion", {
 		this._trigger( "activate", null, data );
 	}
 });
-
-
-
-// DEPRECATED
-if ( $.uiBackCompat !== false ) {
-	// navigation options
-	(function( $, prototype ) {
-		$.extend( prototype.options, {
-			navigation: false,
-			navigationFilter: function() {
-				return this.href.toLowerCase() === location.href.toLowerCase();
-			}
-		});
-
-		var _create = prototype._create;
-		prototype._create = function() {
-			if ( this.options.navigation ) {
-				var that = this,
-					headers = this.element.find( this.options.header ),
-					content = headers.next(),
-					current = headers.add( content )
-						.find( "a" )
-						.filter( this.options.navigationFilter )
-						[ 0 ];
-				if ( current ) {
-					headers.add( content ).each( function( index ) {
-						if ( $.contains( this, current ) ) {
-							that.options.active = Math.floor( index / 2 );
-							return false;
-						}
-					});
-				}
-			}
-			_create.call( this );
-		};
-	}( jQuery, jQuery.ui.accordion.prototype ) );
-
-	// height options
-	(function( $, prototype ) {
-		$.extend( prototype.options, {
-			heightStyle: null, // remove default so we fall back to old values
-			autoHeight: true, // use heightStyle: "auto"
-			clearStyle: false, // use heightStyle: "content"
-			fillSpace: false // use heightStyle: "fill"
-		});
-
-		var _create = prototype._create,
-			_setOption = prototype._setOption;
-
-		$.extend( prototype, {
-			_create: function() {
-				this.options.heightStyle = this.options.heightStyle ||
-					this._mergeHeightStyle();
-
-				_create.call( this );
-			},
-
-			_setOption: function( key ) {
-				if ( key === "autoHeight" || key === "clearStyle" || key === "fillSpace" ) {
-					this.options.heightStyle = this._mergeHeightStyle();
-				}
-				_setOption.apply( this, arguments );
-			},
-
-			_mergeHeightStyle: function() {
-				var options = this.options;
-
-				if ( options.fillSpace ) {
-					return "fill";
-				}
-
-				if ( options.clearStyle ) {
-					return "content";
-				}
-
-				if ( options.autoHeight ) {
-					return "auto";
-				}
-			}
-		});
-	}( jQuery, jQuery.ui.accordion.prototype ) );
-
-	// icon options
-	(function( $, prototype ) {
-		$.extend( prototype.options.icons, {
-			activeHeader: null, // remove default so we fall back to old values
-			headerSelected: "ui-icon-triangle-1-s"
-		});
-
-		var _createIcons = prototype._createIcons;
-		prototype._createIcons = function() {
-			if ( this.options.icons ) {
-				this.options.icons.activeHeader = this.options.icons.activeHeader ||
-					this.options.icons.headerSelected;
-			}
-			_createIcons.call( this );
-		};
-	}( jQuery, jQuery.ui.accordion.prototype ) );
-
-	// expanded active option, activate method
-	(function( $, prototype ) {
-		prototype.activate = prototype._activate;
-
-		var _findActive = prototype._findActive;
-		prototype._findActive = function( index ) {
-			if ( index === -1 ) {
-				index = false;
-			}
-			if ( index && typeof index !== "number" ) {
-				index = this.headers.index( this.headers.filter( index ) );
-				if ( index === -1 ) {
-					index = false;
-				}
-			}
-			return _findActive.call( this, index );
-		};
-	}( jQuery, jQuery.ui.accordion.prototype ) );
-
-	// resize method
-	jQuery.ui.accordion.prototype.resize = jQuery.ui.accordion.prototype.refresh;
-
-	// change events
-	(function( $, prototype ) {
-		$.extend( prototype.options, {
-			change: null,
-			changestart: null
-		});
-
-		var _trigger = prototype._trigger;
-		prototype._trigger = function( type, event, data ) {
-			var ret = _trigger.apply( this, arguments );
-			if ( !ret ) {
-				return false;
-			}
-
-			if ( type === "beforeActivate" ) {
-				ret = _trigger.call( this, "changestart", event, {
-					oldHeader: data.oldHeader,
-					oldContent: data.oldPanel,
-					newHeader: data.newHeader,
-					newContent: data.newPanel
-				});
-			} else if ( type === "activate" ) {
-				ret = _trigger.call( this, "change", event, {
-					oldHeader: data.oldHeader,
-					oldContent: data.oldPanel,
-					newHeader: data.newHeader,
-					newContent: data.newPanel
-				});
-			}
-			return ret;
-		};
-	}( jQuery, jQuery.ui.accordion.prototype ) );
-
-	// animated option
-	// NOTE: this only provides support for "slide", "bounceslide", and easings
-	// not the full $.ui.accordion.animations API
-	(function( $, prototype ) {
-		$.extend( prototype.options, {
-			animate: null,
-			animated: "slide"
-		});
-
-		var _create = prototype._create;
-		prototype._create = function() {
-			var options = this.options;
-			if ( options.animate === null ) {
-				if ( !options.animated ) {
-					options.animate = false;
-				} else if ( options.animated === "slide" ) {
-					options.animate = 300;
-				} else if ( options.animated === "bounceslide" ) {
-					options.animate = {
-						duration: 200,
-						down: {
-							easing: "easeOutBounce",
-							duration: 1000
-						}
-					};
-				} else {
-					options.animate = options.animated;
-				}
-			}
-
-			_create.call( this );
-		};
-	}( jQuery, jQuery.ui.accordion.prototype ) );
-}
 
 })( jQuery );

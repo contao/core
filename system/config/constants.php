@@ -25,7 +25,7 @@ define('CSS3PIE', '1.0.0');
 define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIV', '3.6.2');
 define('JQUERY', '1.9.1');
-define('JQUERY_UI', '1.9.1');
+define('JQUERY_UI', '1.10.2');
 define('COLORBOX', '1.3.20');
 define('MEDIAELEMENT', '2.11.0');
 define('TABLESORTER', '2.0.5');
