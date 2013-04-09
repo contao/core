@@ -1,4 +1,3 @@
-/* MooRainbow 1.3 by Djamil Legato (w00fz) and Christopher Beloch, MIT-style license */
 /*
 ---
 
@@ -493,7 +492,7 @@ var MooRainbow = new Class({
 		var BR = HU.clone().inject(box).addClass(prefix + 'BrighLabel').appendText('B: ');
 		HU.appendText('H: ').addClass(prefix + 'HueLabel');
 
-		var inputHU = new Element('input').set('disabled', true);;
+		var inputHU = new Element('input').set('disabled', true);
 		var inputSA = inputHU.clone().inject(SA).addClass(prefix + 'SatuInput');
 		var inputBR = inputHU.clone().inject(BR).addClass(prefix + 'BrighInput');
 		inputHU.inject(HU).addClass(prefix + 'HueInput');
