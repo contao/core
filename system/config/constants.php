@@ -31,7 +31,7 @@ define('MEDIAELEMENT', '2.11.0');
 define('TABLESORTER', '2.0.5');
 define('MOOTOOLS', '1.4.5');
 define('COLORPICKER', '1.3');
-define('DATEPICKER', '2.1.1');
+define('DATEPICKER', '2.0.0');
 define('MEDIABOX', '1.4.6');
 define('SIMPLEMODAL', '1.2');
 define('SLIMBOX', '1.71');

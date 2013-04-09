@@ -128,11 +128,15 @@ var Picker = new Class({
 	open: function(noFx){
 		if (this.opened == true) return this;
 		this.opened = true;
-		var picker = this.picker.setStyle('display', 'block').set('aria-hidden', 'false')
+		var self = this,
+			picker = this.picker.setStyle('display', 'block').set('aria-hidden', 'false')
 		if (this.shim) this.shim.show();
 		this.fireEvent('open');
 		if (this.options.useFadeInOut && !noFx){
-			picker.fade('in').get('tween').chain(this.fireEvent.pass('show', this));
+			picker.get('tween').start('opacity', 1).chain(function(){
+				self.fireEvent('show');
+				this.callChain();
+			});
 		} else {
 			picker.setStyle('opacity', 1);
 			this.fireEvent('show');
@@ -154,7 +158,7 @@ var Picker = new Class({
 			self.fireEvent('hide');
 		};
 		if (this.options.useFadeInOut && !noFx){
-			picker.fade('out').get('tween').chain(hide);
+			picker.get('tween').start('opacity', 0).chain(hide);
 		} else {
 			picker.setStyle('opacity', 0);
 			hide();

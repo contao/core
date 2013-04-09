@@ -20,7 +20,7 @@
 
 .datepicker_dashboard .titles .day {
 	color: #ccc;
-	font-size:10px; /* see #4864 */
+	font-size:9px; /* see #4864 */
 }
 /* PATCH EOF */
 

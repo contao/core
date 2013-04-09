@@ -5,6 +5,9 @@ Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
 ### Updated
+Updated Picker.Date to version 2.0.0.
+
+### Updated
 Updated Colorbox to version 1.4.11.
 
 ### Updated
