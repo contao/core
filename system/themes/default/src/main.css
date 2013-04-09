@@ -1419,3 +1419,6 @@ fieldset.collapsed > legend {
 #sync-results .right {
 	float:right;
 }
+#sync-results .tl_checkbox {
+	top:0;
+}
