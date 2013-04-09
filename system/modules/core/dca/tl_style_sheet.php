@@ -151,7 +151,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'flag'                    => 1,
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'disablePie' => array
@@ -159,7 +159,6 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['disablePie'],
 			'inputType'               => 'checkbox',
 			'exclude'                 => true,
-			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'embedImages' => array

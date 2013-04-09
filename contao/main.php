@@ -206,6 +206,7 @@ class Main extends Backend
 		if (\Input::get('popup') && (\Input::get('do') == 'page' || \Input::get('do') == 'files') && $this->Session->get('filePickerRef'))
 		{
 			$this->Template->managerHref = $this->Session->get('filePickerRef');
+			$this->Template->managerTitle = specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']);
 			$this->Template->manager = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		}
 
