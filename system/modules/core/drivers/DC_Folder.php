@@ -784,6 +784,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				// Upload the files
 				$arrUploaded = $objUploader->uploadTo($strFolder);
 
+				if (empty($arrUploaded))
+				{
+					\Message::addError($GLOBALS['TL_LANG']['ERR']['emptyUpload']);
+					$this->reload();
+				}
+
 				foreach ($arrUploaded as $strFile)
 				{
 					$objFile = \FilesModel::findByPath($strFile);

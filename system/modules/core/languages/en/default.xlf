@@ -119,6 +119,9 @@
       <trans-unit id="ERR.all_fields">
         <source>Please select at least one field!</source>
       </trans-unit>
+      <trans-unit id="ERR.emptyUpload">
+        <source>Please select at least one file!</source>
+      </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias "%s" already exists!</source>
       </trans-unit>
