@@ -5,7 +5,8 @@ Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
 ### New
-`[Alt] + click` or touch elements twice to edit them.
+`[Alt]+click` or touch elements twice to edit them or `[Alt]+[Shift]+click` them
+to edit their header data (parent view).
 
 ### Improved
 Allow to set the slider delay and speed in the wrapper element.

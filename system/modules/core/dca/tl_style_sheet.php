@@ -83,16 +83,14 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['edit'],
 				'href'                => 'table=tl_style',
-				'icon'                => 'edit.gif',
-				'attributes'          => 'class="contextmenu"'
+				'icon'                => 'edit.gif'
 			),
 			'editheader' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['editheader'],
 				'href'                => 'table=tl_style_sheet&amp;act=edit',
 				'icon'                => 'header.gif',
-				'button_callback'     => array('tl_style_sheet', 'editHeader'),
-				'attributes'          => 'class="edit-header"'
+				'button_callback'     => array('tl_style_sheet', 'editHeader')
 			),
 			'copy' => array
 			(

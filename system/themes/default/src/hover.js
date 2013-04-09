@@ -61,7 +61,7 @@ window.addEvent('domready', function() {
 					el.setAttribute('data-visited', 1);
 				} else {
 					el.getElements('a').each(function(a) {
-						if (a.href.indexOf('act=edit') != -1) {
+						if (a.hasClass('edit')) {
 							document.location.href = a.href;
 							return;
 						}
@@ -71,13 +71,21 @@ window.addEvent('domready', function() {
 			});
 		} else {
 			el.addEvent('click', function(e) {
-				if (!e.alt) return;
-				el.getElements('a').each(function(a) {
-					if (a.href.indexOf('act=edit') != -1) {
-						document.location.href = a.href;
-						return;
-					}
-				});
+				if (e.alt && e.shift) {
+					el.getElements('a').each(function(a) {
+						if (a.hasClass('editheader')) {
+							document.location.href = a.href;
+							return;
+						}
+					});
+				} else if (e.alt) {
+					el.getElements('a').each(function(a) {
+						if (a.hasClass('edit')) {
+							document.location.href = a.href;
+							return;
+						}
+					});
+				}
 			});
 		}
 	});

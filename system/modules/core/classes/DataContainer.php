@@ -532,6 +532,16 @@ class DataContainer extends \Backend
 			$title = sprintf($v['label'][1] ?: $k, $arrRow['id']);
 			$attributes = ($v['attributes'] != '') ? ' ' . ltrim(sprintf($v['attributes'], $arrRow['id'], $arrRow['id'])) : '';
 
+			// Add the key as CSS class
+			if (strpos($attributes, 'class="') !== false)
+			{
+				$attributes = str_replace('class="', 'class="' . $k . ' ', $attributes);
+			}
+			else
+			{
+				$attributes = 'class="' . $k . '"' . $attributes;
+			}
+
 			// Call a custom function instead of using the default button
 			if (is_array($v['button_callback']))
 			{

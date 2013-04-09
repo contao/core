@@ -68,16 +68,14 @@ $GLOBALS['TL_DCA']['tl_faq_category'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_faq_category']['edit'],
 				'href'                => 'table=tl_faq',
-				'icon'                => 'edit.gif',
-				'attributes'          => 'class="contextmenu"'
+				'icon'                => 'edit.gif'
 			),
 			'editheader' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_faq_category']['editheader'],
 				'href'                => 'act=edit',
 				'icon'                => 'header.gif',
-				'button_callback'     => array('tl_faq_category', 'editHeader'),
-				'attributes'          => 'class="edit-header"'
+				'button_callback'     => array('tl_faq_category', 'editHeader')
 			),
 			'copy' => array
 			(

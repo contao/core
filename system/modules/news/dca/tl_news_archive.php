@@ -81,16 +81,14 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news_archive']['edit'],
 				'href'                => 'table=tl_news',
-				'icon'                => 'edit.gif',
-				'attributes'          => 'class="contextmenu"'
+				'icon'                => 'edit.gif'
 			),
 			'editheader' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news_archive']['editheader'],
 				'href'                => 'act=edit',
 				'icon'                => 'header.gif',
-				'button_callback'     => array('tl_news_archive', 'editHeader'),
-				'attributes'          => 'class="edit-header"'
+				'button_callback'     => array('tl_news_archive', 'editHeader')
 			),
 			'copy' => array
 			(

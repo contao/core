@@ -81,16 +81,14 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_calendar']['edit'],
 				'href'                => 'table=tl_calendar_events',
-				'icon'                => 'edit.gif',
-				'attributes'          => 'class="contextmenu"'
+				'icon'                => 'edit.gif'
 			),
 			'editheader' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_calendar']['editheader'],
 				'href'                => 'act=edit',
 				'icon'                => 'header.gif',
-				'button_callback'     => array('tl_calendar', 'editHeader'),
-				'attributes'          => 'class="edit-header"'
+				'button_callback'     => array('tl_calendar', 'editHeader')
 			),
 			'copy' => array
 			(

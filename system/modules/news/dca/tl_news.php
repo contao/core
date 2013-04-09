@@ -88,15 +88,13 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news']['edit'],
 				'href'                => 'table=tl_content',
-				'icon'                => 'edit.gif',
-				'attributes'          => 'class="contextmenu"'
+				'icon'                => 'edit.gif'
 			),
 			'editmeta' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news']['editmeta'],
 				'href'                => 'act=edit',
-				'icon'                => 'header.gif',
-				'attributes'          => 'class="edit-header"'
+				'icon'                => 'header.gif'
 			),
 			'copy' => array
 			(
