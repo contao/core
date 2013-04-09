@@ -882,14 +882,14 @@ class InstallTool extends Backend
 				$objFile->close();
 			}
 
-			// Save the old upload path in the localconfig.php
-			if ($GLOBALS['TL_CONFIG']['uploadPath'] == 'files' && is_dir(TL_ROOT . '/tl_files'))
+			// Reset the upload path if it has been changed already (see #5560)
+			if ($GLOBALS['TL_CONFIG']['uploadPath'] == 'files' && is_dir(TL_ROOT . '/tl_files') && !is_dir(TL_ROOT . '/files'))
 			{
 				$GLOBALS['TL_CONFIG']['uploadPath'] = 'tl_files';
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['uploadPath']", 'tl_files');
 			}
 
-			// Show a warning if the user has renamed the tl_files directory already (see #4626)
+			// Show a warning if the upload folder does not exist (see #4626)
 			if (!is_dir(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath']))
 			{
 				$this->Template->filesWarning = sprintf($GLOBALS['TL_LANG']['tl_install']['filesWarning'], '<a href="https://gist.github.com/3304014" target="_blank">https://gist.github.com/3304014</a>');
