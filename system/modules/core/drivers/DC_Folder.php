@@ -277,6 +277,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$GLOBALS['TL_CONFIG']['loadGoogleFonts'] = $blnClipboard;
 
 		$this->import('Files');
+		$this->import('BackendUser', 'User');
 
 		// Call recursive function tree()
 		if (empty($this->arrFilemounts) && !is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root'] !== false)
@@ -2019,12 +2020,16 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				$imagePasteInto = \Image::getHtml('pasteinto.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0]);
 				$return .= (($arrClipboard['mode'] == 'cut' || $arrClipboard['mode'] == 'copy') && preg_match('/^' . preg_quote($arrClipboard['id'], '/') . '/i', $currentFolder)) ? \Image::getHtml('pasteinto_.gif') : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$currentEncoded.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1]).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a> ';
 			}
-			// Default buttons (do not display buttons for mounted folders)
-			elseif (!$mount)
+			// Default buttons
+			else
 			{
-				$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded), $this->strTable);
+				// Do not display buttons for mounted folders
+				if ($this->User->isAdmin || !in_array($currentFolder, $this->User->filemounts))
+				{
+					$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded), $this->strTable);
+				}
 
-				// Create new button
+				// Upload button
 				if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && \Input::get('act') != 'select')
 				{
 					$return .= ' <a href="'.$this->addToUrl('&amp;act=move&amp;mode=2&amp;pid='.$currentEncoded).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG']['tl_files']['uploadFF'], $currentEncoded)).'">'.\Image::getHtml('new.gif', $GLOBALS['TL_LANG'][$this->strTable]['move'][0]).'</a>';
@@ -2192,7 +2197,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Do not allow file operations on root folders
 		if (\Input::get('act') == 'edit' || \Input::get('act') == 'paste' || \Input::get('act') == 'delete')
 		{
-			if (in_array($strFile, $this->arrFilemounts))
+			$this->import('BackendUser', 'User');
+
+			if (!$this->User->isAdmin && in_array($strFile, $this->User->filemounts))
 			{
 				$this->log('Attempt to edit, copy, move or delete the root folder "'.$strFile.'"', 'DC_Folder isValid()', TL_ERROR);
 				$this->redirect('contao/main.php?act=error');

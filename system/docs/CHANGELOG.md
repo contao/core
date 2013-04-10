@@ -5,6 +5,9 @@ Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
 ### Fixed
+Show the edit buttons of selected nodes in the file manager.
+
+### Fixed
 Do not rebuild the URLs for the search index (see #5509).
 
 ### Updated
