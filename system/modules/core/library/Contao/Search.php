@@ -212,8 +212,8 @@ class Search
 			// Keep the existing record
 			if ($objDuplicates->numRows)
 			{
-				// Update the URL if the new URL is shorter
-				if (substr_count($arrSet['url'], '/') < substr_count($objDuplicates->url, '/') || preg_match('/page=[0-9]*$/', $objDuplicates->url))
+				// Update the URL if the new URL is shorter or the current URL is not canonical
+				if (substr_count($arrSet['url'], '/') < substr_count($objDuplicates->url, '/') || strncmp($arrSet['url'] . '?', $objDuplicates->url, utf8_strlen($arrSet['url']) + 1) === 0)
 				{
 					$objDatabase->prepare("UPDATE tl_search SET url=? WHERE id=?")
 								->execute($arrSet['url'], $objDuplicates->id);

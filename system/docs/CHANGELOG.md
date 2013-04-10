@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Fixed
+Do not rebuild the URLs for the search index (see #5509).
+
 ### Updated
 Updated TCPDF to version 6.0.010 (see #5614).
 
