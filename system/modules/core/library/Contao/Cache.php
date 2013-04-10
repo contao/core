@@ -94,7 +94,7 @@ class Cache
 	 *
 	 * @param string $strKey The cache key
 	 */
-	public function remove($strKey)
+	public static function remove($strKey)
 	{
 		unset(static::$arrData[$strKey]);
 	}
