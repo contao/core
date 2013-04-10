@@ -181,7 +181,7 @@ class FrontendTemplate extends \Template
 				// Do not index the page if certain parameters are set
 				foreach (array_keys($_GET) as $key)
 				{
-					if ($key == 'id' || $key == 'file' || $key == 'token' || $key == 'day' || $key == 'month' || $key == 'year' || $key == 'page' || strncmp($key, 'page_', 5) === 0)
+					if (in_array($key, $GLOBALS['TL_NOINDEX_KEYS']) || strncmp($key, 'page_', 5) === 0)
 					{
 						$blnIndex = false;
 						break;

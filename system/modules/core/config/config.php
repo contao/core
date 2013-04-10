@@ -399,9 +399,15 @@ $GLOBALS['TL_HOOKS'] = array
 
 
 /**
- * Ignore the auto_item keywords when rebuilding the search index URLs
+ * Register the auto_item keywords
  */
 $GLOBALS['TL_AUTO_ITEM'] = array('items', 'events');
+
+
+/**
+ * Do not index a page if one of the following parameters is set
+ */
+$GLOBALS['TL_NOINDEX_KEYS'] = array('id', 'file', 'token', 'day', 'month', 'year', 'page');
 
 
 /**
