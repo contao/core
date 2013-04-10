@@ -326,6 +326,18 @@
       <trans-unit id="tl_content.sliderSpeed.1">
         <source>The transition speed in milliseconds (1000 = 1s). Defaults to 300.</source>
       </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.0">
+        <source>Slide offset</source>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.1">
+        <source>Here you can make the slider start with a particular slide (counting starts at 0).</source>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.0">
+        <source>Continuous</source>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.1">
+        <source>Make the slider continuous (start all over when reaching the end).</source>
+      </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>
       </trans-unit>
@@ -412,6 +424,9 @@
       </trans-unit>
       <trans-unit id="tl_content.image_legend">
         <source>Image settings</source>
+      </trans-unit>
+      <trans-unit id="tl_content.slider_legend">
+        <source>Slider settings</source>
       </trans-unit>
       <trans-unit id="tl_content.list_legend">
         <source>List items</source>

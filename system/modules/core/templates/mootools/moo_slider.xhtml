@@ -12,19 +12,15 @@ $GLOBALS['TL_CSS'][] = 'assets/swipe/'. SWIPE .'/css/swipe.min.css||static';
     window.addEvent('domready', function() {
       $$('.ce_sliderStart').each(function(cte) {
         var s = cte.getElement('.content-slider'),
-            delay, speed;
-        s.className.split(' ').each(function(cls) {
-          if (cls.indexOf('slider_delay') != -1) {
-            delay = cls.replace('slider_delay_', '').toInt();
-          } else if (cls.indexOf('slider_speed') != -1) {
-            speed = cls.replace('slider_speed_', '').toInt();
-          }
-        });
+            c = s.className.split(' ')[1].split('_');
         new Swipe(s, {
           // Put custom options here
-          'auto':delay,
-          'speed':speed
-        }).addControl(cte.getElement('.slider-control'));
+          'auto':parseInt(c[1]),
+          'speed':parseInt(c[2]),
+          'startSlide':parseInt(c[3]),
+          'continuous':parseInt(c[4]),
+          'menu':cte.getElement('.slider-control')
+        });
       });
     });
   })(document.id);

@@ -40,17 +40,18 @@ class ContentSliderStart extends \ContentElement
 	 */
 	protected function compile()
 	{
-		if (TL_MODE == 'FE')
-		{
-			$this->strTemplate = 'ce_slider_start';
-			$this->Template = new \FrontendTemplate($this->strTemplate);
-			$this->Template->setData($this->arrData);
-		}
-		else
+		if (TL_MODE == 'BE')
 		{
 			$this->strTemplate = 'be_wildcard';
 			$this->Template = new \BackendTemplate($this->strTemplate);
 			$this->Template->title = $this->headline;
+		}
+		else
+		{
+			$this->strTemplate = 'ce_slider_start';
+			$this->Template = new \FrontendTemplate($this->strTemplate);
+			$this->Template->setData($this->arrData);
+			$this->Template->config = $this->sliderDelay . ',' . $this->sliderSpeed . ',' . $this->sliderStartSlide . ',' . $this->sliderContinuous;
 		}
 	}
 }

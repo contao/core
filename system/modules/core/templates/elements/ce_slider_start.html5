@@ -5,5 +5,5 @@
     <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
   <?php endif; ?>
 
-  <div class="content-slider" data-delay="<?php echo $this->sliderDelay; ?>" data-speed="<?php echo $this->sliderSpeed; ?>">
+  <div class="content-slider" data-config="<?php echo $this->config; ?>">
     <div class="slider-wrapper">
