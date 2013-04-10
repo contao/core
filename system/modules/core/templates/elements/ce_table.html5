@@ -43,24 +43,4 @@
 
   </table>
 
-  <?php if ($this->sortable): ?>
-    <!-- indexer::stop -->
-    <script>
-      <?php if ($this->hasMooTools): ?>
-        (function($) {
-          window.addEvent('domready', function() {
-            new TableSort('<?php echo $this->id; ?>', '<?php echo $this->thousandsSeparator; ?>', '<?php echo $this->decimalSeparator; ?>');
-          });
-        })(document.id);
-      <?php elseif ($this->hasJQuery): ?>
-        (function($) {
-          $(document).ready(function() {
-            $('#<?php echo $this->id; ?>').tablesorter();
-          });
-        })(jQuery);
-      <?php endif; ?>
-    </script>
-    <!-- indexer::continue -->
-  <?php endif; ?>
-
 </div>

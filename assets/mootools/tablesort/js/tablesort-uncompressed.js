@@ -28,23 +28,16 @@ var TableSort = new Class(
 {
 	/**
 	 * Initialize the object
-	 * @param integer
+	 * @param object
 	 * @param string
 	 * @param string
 	 */
-	initialize: function(id, thousandsSeparator, decimalSeparator) {
-		var table = $(id);
-
+	initialize: function(table, thousandsSeparator, decimalSeparator) {
 		if (thousandsSeparator) {
 			THOUSANDS_SEPARATOR = thousandsSeparator;
 		}
 		if (decimalSeparator) {
 			DECIMAL_SEPARATOR = decimalSeparator;
-		}
-
-		// Check whether table exists
-		if (table == null) {
-			return;
 		}
 
 		// Check whether table has rows
@@ -53,7 +46,7 @@ var TableSort = new Class(
 		}
 
 		var cook = null,
-			vars = Cookie.read('TS_' + id.toUpperCase());
+			vars = Cookie.read('TS_' + table.get('id').toUpperCase());
 
 		if (vars !== null) {
 			var cook = vars.split('|');
