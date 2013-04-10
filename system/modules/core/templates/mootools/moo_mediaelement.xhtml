@@ -10,7 +10,7 @@ $GLOBALS['TL_CSS'][] = 'assets/mootools/mediaelement/'. MEDIAELEMENT .'/css/medi
   /* <![CDATA[ */
   (function($) {
     window.addEvent('domready', function() {
-      $$('video','audio').mediaelementplayer({
+      $$('video,audio').mediaelementplayer({
         // Put custom options here
         pluginPath:'<?php echo TL_PATH; ?>/assets/mootools/mediaelement/<?php echo MEDIAELEMENT; ?>/',
         flashName:'legacy/flashmediaelement.swf',
