@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Updated
+Updated TCPDF to version 6.0.010 (see #5614).
+
 ### Changed
 The tablesort script can now be added as `moo_` or `j_` template in the page
 layout, so the library can be replaced if needed.
