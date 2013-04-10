@@ -270,7 +270,7 @@ class Ajax extends \Backend
 						die('Bad Request');
 					}
 				}
-				else
+				elseif ($this->Database->tableExists($dc->table))
 				{
 					// The field does not exist
 					if (!$this->Database->fieldExists($strField, $dc->table))
@@ -318,7 +318,7 @@ class Ajax extends \Backend
 					$GLOBALS['TL_CONFIG'][$strField] = $varValue;
 					$arrAttribs['activeRecord'] = null;
 				}
-				else
+				elseif ($this->Database->tableExists($dc->table))
 				{
 					$objRow->$strField = $varValue;
 					$arrAttribs['activeRecord'] = $objRow;

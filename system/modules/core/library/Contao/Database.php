@@ -280,6 +280,11 @@ abstract class Database
 	 */
 	public function tableExists($strTable, $strDatabase=null, $blnNoCache=false)
 	{
+		if ($strTable == '')
+		{
+			return false;
+		}
+
 		return in_array($strTable, $this->listTables($strDatabase, $blnNoCache));
 	}
 
@@ -315,6 +320,11 @@ abstract class Database
 	 */
 	public function fieldExists($strField, $strTable, $blnNoCache=false)
 	{
+		if ($strField == '' || $strTable == '')
+		{
+			return false;
+		}
+
 		foreach ($this->listFields($strTable, $blnNoCache) as $arrField)
 		{
 			if ($arrField['name'] == $strField)
