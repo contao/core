@@ -133,7 +133,7 @@ $GLOBALS['TL_CONFIG']['requestTokenWhitelist'] = array();
  * set used on your HTML pages. Note that you might have to use a different
  * spelling (e.g. UTF8 instead of UTF-8 for MySQL).
  */
-$GLOBALS['TL_CONFIG']['dbDriver']    = 'MySQL';
+$GLOBALS['TL_CONFIG']['dbDriver']    = 'MySQLi';
 $GLOBALS['TL_CONFIG']['dbUser']      = '';
 $GLOBALS['TL_CONFIG']['dbPass']      = '';
 $GLOBALS['TL_CONFIG']['dbHost']      = 'localhost';
@@ -265,7 +265,7 @@ $GLOBALS['TL_CONFIG']['lockPeriod']     = 300;
  *   thumbnails  = show image thumbnails in the file manager
  *   debugMode   = debug the system and print results to the screen
  *   useRTE      = use the rich text editor (TinyMCE)
- *   useCE       = use the code editor (CodeMirror)
+ *   useCE       = use the code editor (ACE)
  */
 $GLOBALS['TL_CONFIG']['showHelp']   = true;
 $GLOBALS['TL_CONFIG']['thumbnails'] = true;
@@ -339,7 +339,7 @@ $GLOBALS['TL_CONFIG']['disableCron']          = false;
 $GLOBALS['TL_CONFIG']['coreOnlyMode']         = false;
 $GLOBALS['TL_CONFIG']['addLanguageToUrl']     = false;
 $GLOBALS['TL_CONFIG']['doNotRedirectEmpty']   = false;
-$GLOBALS['TL_CONFIG']['useAutoItem']          = false;
+$GLOBALS['TL_CONFIG']['useAutoItem']          = true;
 $GLOBALS['TL_CONFIG']['privacyAnonymizeIp']   = true;
 $GLOBALS['TL_CONFIG']['privacyAnonymizeGA']   = true;
 $GLOBALS['TL_CONFIG']['bypassCache']          = false;
