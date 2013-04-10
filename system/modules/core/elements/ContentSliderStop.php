@@ -40,16 +40,16 @@ class ContentSliderStop extends \ContentElement
 	 */
 	protected function compile()
 	{
-		if (TL_MODE == 'FE')
+		if (TL_MODE == 'BE')
+		{
+			$this->strTemplate = 'be_wildcard';
+			$this->Template = new \BackendTemplate($this->strTemplate);
+		}
+		else
 		{
 			$this->strTemplate = 'ce_slider_stop';
 			$this->Template = new \FrontendTemplate($this->strTemplate);
 			$this->Template->setData($this->arrData);
-		}
-		else
-		{
-			$this->strTemplate = 'be_wildcard';
-			$this->Template = new \BackendTemplate($this->strTemplate);
 		}
 
 		// Previous and next labels

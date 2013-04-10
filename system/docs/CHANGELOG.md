@@ -5,6 +5,9 @@ Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
 ### Updated
+Updated Swipe.js to version 2.0 and reworked the slider implementation.
+
+### Updated
 Updated Picker.Date to version 2.0.0.
 
 ### Updated
