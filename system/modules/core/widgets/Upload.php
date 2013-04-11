@@ -84,7 +84,7 @@ class Upload extends \Widget implements \uploadable
 			$strUploadTo = $this->arrConfiguration['uploadFolder'];
 		}
 
-		$this->objUploader->uploadTo($strUploadTo);
+		return $this->objUploader->uploadTo($strUploadTo);
 	}
 
 
