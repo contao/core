@@ -610,6 +610,20 @@ class DataContainer extends \Backend
 			$title = is_array($v['label']) ? $v['label'][1] : $v['label'];
 			$attributes = ($v['attributes'] != '') ? ' ' . ltrim($v['attributes']) : '';
 
+			// Custom icon (see #5541)
+			if ($v['icon'])
+			{
+				$v['class'] = trim($v['class'] . ' header_icon');
+
+				// Add the theme path if only the file name is given
+				if (strpos($v['icon'], '/') === false)
+				{
+					$v['icon'] = 'system/themes/' . \Backend::getTheme() . '/images/' . $v['icon'];
+				}
+
+				$attributes = sprintf('style="background-image:url(\'%s%s\')"', TL_ASSETS_URL, $v['icon']) . $attributes;
+			}
+
 			if ($label == '')
 			{
 				$label = $k;

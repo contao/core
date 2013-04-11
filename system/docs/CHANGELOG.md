@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Improved
+Support assigning icons for global operations in the DCA (see #5541).
+
 ### Fixed
 Show the edit buttons of selected nodes in the file manager.
 
