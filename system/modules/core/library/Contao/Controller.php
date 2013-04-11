@@ -866,6 +866,7 @@ abstract class Controller extends \System
 		$arrSearch = array
 		(
 			'@<form.*</form>@Us',
+			'@<script.*</script>@Us', // see #5626
 			'@<a [^>]*href="[^"]*javascript:[^>]+>.*</a>@Us'
 		);
 
