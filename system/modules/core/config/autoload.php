@@ -331,7 +331,6 @@ TemplateLoader::addFiles(array
 	'moo_accordion'       => 'system/modules/core/templates/mootools',
 	'moo_chosen'          => 'system/modules/core/templates/mootools',
 	'moo_mediabox'        => 'system/modules/core/templates/mootools',
-	'moo_mediaelement'    => 'system/modules/core/templates/mootools',
 	'moo_slider'          => 'system/modules/core/templates/mootools',
 	'moo_slimbox'         => 'system/modules/core/templates/mootools',
 	'moo_tablesort'       => 'system/modules/core/templates/mootools',

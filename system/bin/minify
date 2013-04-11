@@ -20,7 +20,7 @@ usage()
 	echo -e "  jQuery"
 	echo -e "  \033[0;36mjquery\033[0m        Minify the jQuery core (assets/jquery/core|ui)"
 	echo -e "  \033[0;36mcolorbox\033[0m      Minify the colorbox plugin (assets/jquery/colorbox)"
-	echo -e "  \033[0;36mmediaelement\033[0m  Minify the mediaelement plugin (assets/jquery|mootools/mediaelement)"
+	echo -e "  \033[0;36mmediaelement\033[0m  Minify the mediaelement plugin (assets/jquery/mediaelement)"
 	echo -e "  \033[0;36mtablesorter\033[0m   Minify the tablesorter plugin (assets/jquery/tablesorter)"
 	echo ""
 	echo -e "  MooTools"
@@ -29,7 +29,6 @@ usage()
 	echo -e "  \033[0;36mcolorpicker\033[0m   Minify the colorpicker plugin (assets/mootools/colorpicker)"
 	echo -e "  \033[0;36mdatepicker\033[0m    Minify the datepicker plugin (assets/mootools/datepicker)"
 	echo -e "  \033[0;36mmediabox\033[0m      Minify the mediabox plugin (assets/mootools/mediabox)"
-	echo -e "  \033[0;36mmediaelement\033[0m  Minify the mediaelement plugin (assets/jquery|mootools/mediaelement)"
 	echo -e "  \033[0;36mmootao\033[0m        Minify the Contao MooTools enhancements (assets/mootools/mootao)"
 	echo -e "  \033[0;36msimplemodal\033[0m   Minify the SimpleModal plugin (assets/mootools/simplemodal)"
 	echo -e "  \033[0;36mslimbox\033[0m       Minify the slimbox plugin (assets/mootools/slimbox)"
@@ -165,11 +164,10 @@ colorbox()
 }
 
 ##
-# assets/jquery|mootools/mediaelement
+# assets/jquery/mediaelement
 ##
 mediaelement()
 {
-	# jQuery
 	for version in `ls -d $folder/assets/jquery/mediaelement/*`; do
 		copyright="/* MediaElement.js $(basename $version), (c) 2010-2012 John Dyer <http://j.hn>, MIT/GPLv2 */"
 
@@ -190,34 +188,6 @@ mediaelement()
 		# Concat the mediaelement.js and mediaelementplayer.js files
 		{ cat $version/js/mediaelement.js; echo ""; cat $version/js/mediaelementplayer.js; } > $version/js/mediaelement-and-player.js
 		{ cat $version/js/mediaelement.min.js; echo ""; cat $version/js/mediaelementplayer.min.js; } > $version/js/mediaelement-and-player.min.js
-	done
-
-	# MooTools
-	for version in `ls -d $folder/assets/mootools/mediaelement/*`; do
-		adapter="/* MooToolsAdapter 0.1, (c) 2011 Inkling Systems, Inc. <http://github.com/inkling/backbone-mootools>, Apache License 2.0 */"
-		copyright="/* MediaElement.js $(basename $version), (c) 2010-2012 John Dyer <http://j.hn>, MIT/GPLv2 */"
-
-		# CSS
-		for file in `ls $version/css | grep -v ".min"`; do
-			echo "$copyright" > $version/css/${file/.css/.min.css}
-			$css $version/css/$file >> $version/css/${file/.css/.min.css}
-			echo "  Created $version/css/${file/.css/.min.css}"
-		done
-
-		# JavaScript
-		for file in `ls $version/js | grep -v ".min"`; do
-			if [ $file == "MooToolsAdapter.js" ]; then
-				echo "$adapter" > $version/js/${file/.js/.min.js}
-			else
-				echo "$copyright" > $version/js/${file/.js/.min.js}
-			fi
-			$js $version/js/$file >> $version/js/${file/.js/.min.js}
-			echo "  Created $version/js/${file/.js/.min.js}"
-		done
-
-		# Concat the mediaelement.js and mediaelementplayer.js files
-		{ cat $version/js/MooToolsAdapter.js; echo ""; cat $version/js/mediaelement.js; echo ""; cat $version/js/mediaelementplayer.js; } > $version/js/mediaelement-and-player.js
-		{ cat $version/js/MooToolsAdapter.min.js; echo ""; cat $version/js/mediaelement.min.js; echo ""; cat $version/js/mediaelementplayer.min.js; } > $version/js/mediaelement-and-player.min.js
 	done
 }
 
