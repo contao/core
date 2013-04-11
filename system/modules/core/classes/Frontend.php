@@ -363,7 +363,7 @@ abstract class Frontend extends \Controller
 		// Clean the $_GET values (thanks to thyon)
 		foreach (array_keys($arrGet) as $key)
 		{
-			$arrGet[$key] = \Input::get($key, true);
+			$arrGet[$key] = \Input::get($key, true, true);
 		}
 
 		$arrFragments = preg_split('/&(amp;)?/i', $strRequest);
