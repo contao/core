@@ -500,6 +500,12 @@
       <trans-unit id="tl_content.random">
         <source>Random order</source>
       </trans-unit>
+      <trans-unit id="tl_content.includeTemplate">
+        <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplates">
+        <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+      </trans-unit>
       <trans-unit id="tl_content.new.0">
         <source>New element</source>
       </trans-unit>

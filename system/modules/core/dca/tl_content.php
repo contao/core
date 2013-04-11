@@ -24,7 +24,10 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'enableVersioning'            => true,
 		'ptable'                      => '',
 		'dynamicPtable'               => true,
-		'onload_callback'             => array(),
+		'onload_callback'             => array
+		(
+			array('tl_content', 'showJsLibraryHint')
+		),
 		'sql' => array
 		(
 			'keys' => array
@@ -1000,6 +1003,56 @@ class tl_content extends Backend
 		}
 
 		return null;
+	}
+
+
+	/**
+	 * Show a hint if a JavaScript library needs to be included in the page layout
+	 * @param \DataContainer
+	 */
+	public function showJsLibraryHint(DataContainer $dc)
+	{
+		if ($_POST || Input::get('act') != 'edit')
+		{
+			return;
+		}
+
+		$objCte = ContentModel::findByPk($dc->id);
+
+		if ($objCte === null)
+		{
+			return;
+		}
+
+		switch ($objCte->type)
+		{
+			case 'gallery':
+				Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_content']['includeTemplates'], 'moo_mediabox', 'j_colorbox'));
+				break;
+
+			case 'sliderStart':
+			case 'sliderStop':
+				Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_content']['includeTemplates'], 'moo_slider', 'j_slider'));
+				break;
+
+			case 'accordionSingle':
+			case 'accordionStart':
+			case 'accordionStop':
+				Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_content']['includeTemplates'], 'moo_accordion', 'j_accordion'));
+				break;
+
+			case 'player':
+			case 'youtube':
+				Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_content']['includeTemplate'], 'j_mediaelement'));
+				break;
+
+			case 'table':
+				if ($objCte->sortable)
+				{
+					Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_content']['includeTemplates'], 'moo_tablesort', 'j_tablesort'));
+				}
+				break;
+		}
 	}
 
 
