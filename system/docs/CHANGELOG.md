@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Removed
+Removed the MooTools mediaelement.js version.
+
 ### New
 Show a hint if a content element needs a MooTools or jQuery template.
 

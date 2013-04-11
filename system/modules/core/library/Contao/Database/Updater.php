@@ -359,12 +359,12 @@ class Updater extends \Controller
 	public function run31Update()
 	{
 		// Get all page layouts that use the CSS framework
-		$objCss = $this->Database->query("SELECT `id`, `framework` FROM `tl_layout` WHERE `framework`!=''");
+		$objLayout = $this->Database->query("SELECT `id`, `framework` FROM `tl_layout` WHERE `framework`!=''");
 
 		// Rename "responsive.css" to "grid.css"
-		while ($objCss->next())
+		while ($objLayout->next())
 		{
-			$arrCss = deserialize($objCss->framework);
+			$arrCss = deserialize($objLayout->framework);
 
 			if (($key = array_search('responsive.css', $arrCss)) !== false)
 			{
@@ -372,7 +372,61 @@ class Updater extends \Controller
 			}
 
 			$this->Database->prepare("UPDATE `tl_layout` SET `framework`=? WHERE `id`=?")
-						   ->execute(serialize($arrCss), $objCss->id);
+						   ->execute(serialize($arrCss), $objLayout->id);
+		}
+
+		// Get all page layouts that use the moo_mediabox template
+		$objLayout = $this->Database->query("SELECT `id`, `addJQuery`, `jquery`, `mootools` FROM `tl_layout` WHERE `addMooTools`=1 AND `mootools` LIKE '%\"moo_mediaelement\"%'");
+
+		// Activate the "j_mediaelement" template instead
+		while ($objLayout->next())
+		{
+			$arrSet = array();
+
+			// jQuery already activated
+			if ($objLayout->addjQuery)
+			{
+				$arrJQuery = deserialize($objLayout->jquery);
+
+				// Add j_mediaelement
+				if (!is_array($arrJQuery))
+				{
+					$arrSet['jquery'] = serialize(array('j_mediaelement'));
+				}
+				elseif (!in_array('j_mediaelement', $arrJQuery))
+				{
+					$arrJQuery[] = 'j_mediaelement';
+					$arrSet['jquery'] = serialize($arrJQuery);
+				}
+			}
+			else
+			{
+				$arrSet['addJQuery'] = 1;
+				$arrSet['jSource'] = 'j_local';
+				$arrSet['jquery'] = serialize(array('j_mediaelement'));
+			}
+
+			$arrMooTools = deserialize($objLayout->mootools);
+
+			// Unset the moo_mediaelement template
+			if (($key = array_search('moo_mediaelement', $arrMooTools)) !== false)
+			{
+				unset($arrMooTools[$key]);
+			}
+
+			// Update the MooTools templates
+			if (empty($arrMooTools))
+			{
+				$arrSet['mootools'] = '';
+			}
+			else
+			{
+				$arrSet['mootools'] = serialize(array_values($arrMooTools));
+			}
+
+			$this->Database->prepare("UPDATE `tl_layout` %s WHERE `id`=?")
+						   ->set($arrSet)
+						   ->execute($objLayout->id);
 		}
 
 		// Get all page layouts
