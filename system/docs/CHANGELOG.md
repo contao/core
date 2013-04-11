@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Improved
+Support assigning icons for global operations in the DCA (see #5541).
+
 ### Fixed
 Show the edit buttons of selected nodes in the file manager.
 
@@ -127,9 +130,6 @@ database anymore. Further improvements:
 
 ### Improved
 Use the Contao page and file pickers in TinyMCE (see #1698).
-
-### Improved
-Can now use the "icon" key for global operations in DCA too (see #5394).
 
 ### Improved
 Pre-fill the "alt" and "caption" fields with the file meta data (see #5225).
