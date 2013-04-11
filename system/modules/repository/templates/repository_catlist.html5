@@ -112,6 +112,9 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
   <div class="extension_container">
     <?php if (count($rep->extensions) < 1): ?>
       <p><?php echo $text['noextensionsfound']; ?></p>
+      <?php if (!$GLOBALS['TL_CONFIG']['repository_unsafe_catalog']): ?>
+        <p class="tl_info"><?php echo $GLOBALS['TL_LANG']['tl_repository']['showIncompatible']; ?></p>
+      <?php endif; ?>
     <?php else: ?>
       <?php foreach ($rep->extensions as $ext): ?>
         <table class="extension">
