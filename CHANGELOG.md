@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.12 (2013-XX-XX)
+----------------------------
+
+### Fixed
+Delete the `pathconfig.php` file in the install tool (see #5536).
+
+
 Version 2.11.11 (2013-04-03)
 ----------------------------
 

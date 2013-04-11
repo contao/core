@@ -68,6 +68,14 @@ class InstallTool extends Backend
 		$GLOBALS['TL_CONFIG']['showHelp'] = false;
 		$GLOBALS['TL_CONFIG']['displayErrors'] = true;
 
+		// Remove the pathconfig.php file if TL_PATH is wrong (see #5428)
+		if (($strPath = preg_replace('/\/contao\/[^\/]*$/i', '', $this->Environment->requestUri)) != TL_PATH)
+		{
+			$objFile = new File('system/config/pathconfig.php');
+			$objFile->delete();
+			$this->reload();
+		}
+
 		// Static URLs
 		$this->setStaticUrl('TL_FILES_URL', $GLOBALS['TL_CONFIG']['staticFiles']);
 		$this->setStaticUrl('TL_SCRIPT_URL', $GLOBALS['TL_CONFIG']['staticSystem']);
