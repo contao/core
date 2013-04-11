@@ -1894,6 +1894,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		$this->import('Files');
+		$this->import('BackendUser', 'User');
+
 		return $this->generateTree(TL_ROOT.'/'.$strFolder, ($level * 20), false, false, ($blnClipboard ? $arrClipboard : false));
 	}
 
