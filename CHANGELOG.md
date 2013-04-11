@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.12 (2013-XX-XX)
 ----------------------------
 
+### Updated
+Updated SimplePie to version 1.3.1 (see #5604).
+
 ### Fixed
 Delete the `pathconfig.php` file in the install tool (see #5536).
 
