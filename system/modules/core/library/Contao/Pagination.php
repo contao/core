@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2005-2013 Leo Feyer
  *
- * @package Core
+ * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
@@ -23,7 +23,7 @@ namespace Contao;
  * Provide methodes to render a pagination menu.
  * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ * @package    Library
  */
 class Pagination
 {
