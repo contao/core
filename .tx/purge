@@ -29,6 +29,9 @@ $counter = array();
 
 // Loop through the modules
 foreach (scan('system/modules') as $module) {
+	if (!is_dir("system/modules/$module")) {
+		continue;
+	}
 
 	// Loop through the languages
 	foreach (scan("system/modules/$module/languages") as $language) {
