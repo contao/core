@@ -1,0 +1,142 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_newsletter_channel.php" source-language="en">
+    <body>
+      <trans-unit id="tl_newsletter_channel.title.0">
+        <source>Title</source>
+        <target>ခေါင်းစဉ်</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.title.1">
+        <source>Please enter the title of the channel.</source>
+        <target>လမ်းကြောင်းခေါင်းစဉ်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.jumpTo.0">
+        <source>Redirect page</source>
+        <target>ဦးတည်ရာပြောင်းစာမျက်နှာ</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.jumpTo.1">
+        <source>Please choose the newsletter reader page to which visitors will be redirected when clicking a newsletter.</source>
+        <target>သတင်းစာကိုကလစ်နှိပ်သောအခါလည်ပတ်သူများရောက်သွားမည့်သတင်းစာဖတ်ရှုသူစာမျက်နှာကိုရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.useSMTP.0">
+        <source>Custom SMTP server</source>
+        <target>စိတ်ကြိုက်အက်စ်အမ်တီပီဆာဗာ</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.useSMTP.1">
+        <source>Use a custom SMTP server for sending newsletters.</source>
+        <target>သတင်းစာများပေးပို့ရန်စိတ်ကြိုက်အက်စ်အမ်တီပီဆာဗာသံုး။</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpHost.0">
+        <source>SMTP hostname</source>
+        <target>အက်စ်အမ်တီပီလက်ခံနာမည်</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpHost.1">
+        <source>Please enter the host name of the SMTP server.</source>
+        <target>အက်စ်အမ်တီပီလက်ခံနာမည်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpUser.0">
+        <source>SMTP username</source>
+        <target>အက်စ်အမ်တီပီအသံုးပြုသူနာမည်</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpUser.1">
+        <source>Here you can enter the SMTP username.</source>
+        <target>အက်စ်အမ်တီပီအသံုးပြုသူနာမည်ထည့်သွင်းနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPass.0">
+        <source>SMTP password</source>
+        <target>အက်စ်အမ်တီပီစကားဝှက်</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPass.1">
+        <source>Here you can enter the SMTP password.</source>
+        <target>အက်စ်အမ်တီပီစကားဝှက်ထည့်သွင်းနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpEnc.0">
+        <source>SMTP encryption</source>
+        <target>အက်စ်အမ်တီပီကုဒ်ဝှက်</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpEnc.1">
+        <source>Here you can choose an encryption method (SSL or TLS).</source>
+        <target>ကုဒ်ဝှက်နည်းလမ်းရွေးနိုင် (အက်စ်အက်စ်အလ်(သို့)တီအလ်အက်စ်)</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPort.0">
+        <source>SMTP port number</source>
+        <target>အက်စ်အမ်တီပီနံပါတ်ပေါက်</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPort.1">
+        <source>Please enter the port number of the SMTP server.</source>
+        <target>အက်စ်အမ်တီပီဆာဗာနံပါတ်ပေါက်ထည့်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.tstamp.0">
+        <source>Revision date</source>
+        <target>ပြင်ဆင်နေ့စွဲ</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>နောက်ဆံုးပံုစံ၏နေ့စွဲနှင့်အချိန်</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.title_legend">
+        <source>Title and redirect</source>
+        <target>ခေါင်းစဉ်နှင့်ဦးတည်ရာပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtp_legend">
+        <source>SMTP configuration</source>
+        <target>အက်စ်အမ်တီပီပံုစံပြင်ခြင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.new.0">
+        <source>New channel</source>
+        <target>လမ်းကြောင်းအသစ်</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.new.1">
+        <source>Create a new channel</source>
+        <target>လမ်းကြောင်းအသစ်ဖန်တီး</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.show.0">
+        <source>Channel details</source>
+        <target>လမ်းကြောင်းအချက်အလက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.show.1">
+        <source>Show the details of channel ID %s</source>
+        <target>လမ်းကြောင်းအိုင်ဒီ %s အချက်အလက်များပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.edit.0">
+        <source>Edit channel</source>
+        <target>လမ်းကြောင်းတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.edit.1">
+        <source>Edit channel ID %s</source>
+        <target>လမ်းကြောင်းအိုင်ဒီ %s တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.editheader.0">
+        <source>Edit channel settings</source>
+        <target>လမ်းကြောင်းချိန်ညှိချက်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.editheader.1">
+        <source>Edit the settings of channel ID %s</source>
+        <target>လမ်းကြောင်းအိုင်ဒီ %s ချိန်ညှိချက်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.copy.0">
+        <source>Duplicate channel</source>
+        <target>လမ်းကြောင်းပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.copy.1">
+        <source>Duplicate channel ID %s</source>
+        <target>လမ်းကြောင်းအိုင်ဒီ %s ပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.delete.0">
+        <source>Delete channel</source>
+        <target>လမ်းကြောင်းပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.delete.1">
+        <source>Delete channel ID %s</source>
+        <target>လမ်းကြောင်းအိုင်ဒီ %s ပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.recipients.0">
+        <source>Edit recipients</source>
+        <target>လက်ခံရရှိသူများတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.recipients.1">
+        <source>Edit the recipients of channel ID %s</source>
+        <target>လမ်းကြောင်းအိုင်ဒီ %s လက်ခံရရှိသူများတည်းဖြတ်</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

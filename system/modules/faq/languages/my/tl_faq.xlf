@@ -1,0 +1,182 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/faq/languages/en/tl_faq.php" source-language="en">
+    <body>
+      <trans-unit id="tl_faq.question.0">
+        <source>Question</source>
+        <target>မေးခွန်း</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.question.1">
+        <source>Please enter the question.</source>
+        <target>မေးခွန်းထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.alias.0">
+        <source>FAQ alias</source>
+        <target>မကြာခဏမေးမေးခွန်းများနာမည်ပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.alias.1">
+        <source>The FAQ alias is a unique reference to the FAQ which can be called instead of its numeric ID.</source>
+        <target>နံပါတ်အိုင်ဒီအစားမကြာခဏမေးမေးခွန်းများနာမည်ပွားမှာမကြာခဏမေးမေးခွန်းများသို့တစ်ခုတည်းရည်ညွှန်းချက်ဖြစ်။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.author.0">
+        <source>Author</source>
+        <target>ရေးသားသူ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.author.1">
+        <source>Here you can change the author of the FAQ.</source>
+        <target>မကြာခဏမေးမေးခွန်းများရေးသားသူပြောင်းလဲနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.answer.0">
+        <source>Answer</source>
+        <target>အဖြေ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.answer.1">
+        <source>Please enter the answer.</source>
+        <target>အဖြေထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addImage.0">
+        <source>Add an image</source>
+        <target>ပံုထည့်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addImage.1">
+        <source>Add an image to the FAQ.</source>
+        <target>မကြာခဏမေးမေးခွန်းများသို့ပံုထည့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addEnclosure.0">
+        <source>Add enclosures</source>
+        <target>ပူးတွဲများထည့်သွင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addEnclosure.1">
+        <source>Add one or more downloadable files to the FAQ.</source>
+        <target>မကြာခဏမေးမေးခွန်းများသို့တစ်ခု(သို့)ကူးဆွဲနိုင်ဖိုင်များထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.enclosure.0">
+        <source>Enclosures</source>
+        <target>ပူးတွဲများ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.enclosure.1">
+        <source>Please choose the files you want to attach.</source>
+        <target>ပူးတွဲပါစေလိုသောဖိုင်များကိုရွေး။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.noComments.0">
+        <source>Disable comments</source>
+        <target>မှတ်ချက်များမလုပ်ဆောင်စေ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.noComments.1">
+        <source>Do not allow comments for this particular FAQ.</source>
+        <target>ယခုမကြာခဏမေးမေးခွန်းများအတွက်မှတ်ချက်များခွင့်မပြုစေ။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.published.0">
+        <source>Publish the FAQ</source>
+        <target>မကြာခဏမေးမေးခွန်းများထုတ်ဝေ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.published.1">
+        <source>Make the FAQ publicly visible on the website.</source>
+        <target>ဝဘ်ဆိုက်ပေါ်တွင်မကြာခဏမေးမေးခွန်းများကိုလူအများမြင်စေရန်လုပ်ဆောင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.title_legend">
+        <source>Title and author</source>
+        <target>ခေါင်းစဉ်နှင့်ရေးသားသူ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.answer_legend">
+        <source>Answer</source>
+        <target>အဖြေ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.image_legend">
+        <source>Image settings</source>
+        <target>ပံုချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.enclosure_legend">
+        <source>Enclosures</source>
+        <target>ပူးတွဲများ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.expert_legend">
+        <source>Expert settings</source>
+        <target>ကျွမ်းကျင်သူချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.publish_legend">
+        <source>Publish settings</source>
+        <target>ထုတ်ဝေချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.new.0">
+        <source>New question</source>
+        <target>မေးခွန်းအသစ်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.new.1">
+        <source>Create a new question</source>
+        <target>မေးခွန်းအသစ်ဖန်တီး</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.show.0">
+        <source>Show question details</source>
+        <target>မေးခွန်းအချက်အလက်များပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.show.1">
+        <source>Show the details of question ID %s</source>
+        <target>မေးခွန်းအိုင်ဒီ %s အချက်အလက်များပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.edit.0">
+        <source>Edit question</source>
+        <target>မေးခွန်းတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.edit.1">
+        <source>Edit question ID %s</source>
+        <target>မေးခွန်းအိုင်ဒီ %s တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.copy.0">
+        <source>Duplicate question</source>
+        <target>မေးခွန်းပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.copy.1">
+        <source>Duplicate question ID %s</source>
+        <target>မေးခွန်းအိုင်ဒီ %s ပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.cut.0">
+        <source>Move question</source>
+        <target>မေးခွန်းရွေ့ပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.cut.1">
+        <source>Move question ID %s</source>
+        <target>မေးခွန်းအိုင်ဒီ %s ရွေ့ပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.delete.0">
+        <source>Delete question</source>
+        <target>မေးခွန်းပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.delete.1">
+        <source>Delete question ID %s</source>
+        <target>မေးခွန်းအိုင်ဒီ %s ပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.toggle.0">
+        <source>Publish/unpublish question</source>
+        <target>မေးခွန်းထုတ်ဝေ/မထုတ်ဝေ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.toggle.1">
+        <source>Publish/unpublish question ID %s</source>
+        <target>မေးခွန်းအိုင်ဒီ %s ထုတ်ဝေ/မထုတ်ဝေ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.editheader.0">
+        <source>Edit category</source>
+        <target>အမျိုးအစားတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.editheader.1">
+        <source>Edit the category settings</source>
+        <target>အမျိုးအစားချိန်ညှိချက်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>အပေါ်တွင်ထုတ်ထား</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pasteafter.1">
+        <source>Paste after question ID %s</source>
+        <target>မေးခွန်းအိုင်ဒီ %s ပြီးနောက်ထုတ်ထား</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pastenew.0">
+        <source>Add new at the top</source>
+        <target>အပေါ်တွင်အသစ်ထည့်</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pastenew.1">
+        <source>Add new after question ID %s</source>
+        <target>မေးခွန်းအိုင်ဒီ %s ပြီးနောက်အသစ်ထည့်</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

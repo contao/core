@@ -1,0 +1,80 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_module.php" source-language="en">
+    <body>
+      <trans-unit id="tl_module.newsletters.0">
+        <source>Subscribable newsletters</source>
+        <target>ပုံမှန်မှာယူနိုင်သောသတင်းစာများ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.newsletters.1">
+        <source>Show these channels in the front end form.</source>
+        <target>အပြင်ပိုင်းပံုစံတွင်လမ်းကြောင်းများပြသ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.0">
+        <source>Channels</source>
+        <target>လမ်းကြောင်းများ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.1">
+        <source>Please select one or more channels.</source>
+        <target>တစ်ခု(သို့)လမ်းကြောင်းများကိုရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.0">
+        <source>Hide channel menu</source>
+        <target>လမ်းကြောင်းဇယားဖံုးကွယ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.1">
+        <source>Do not show the channel selection menu.</source>
+        <target>လမ်းကြောင်းရွေးချယ်မှုဇယားမပြသနှင့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.0">
+        <source>Subscription message</source>
+        <target>ပုံမှန်မှာယူခြင်းမှာကြားချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names), &lt;em&gt;##domain##&lt;/em&gt; (domain name) and &lt;em&gt;##link##&lt;/em&gt; (activation link).</source>
+        <target>ဝိုက်ကဒ်များကိုသံုးနိုင် &lt;em&gt;##channels##&lt;/em&gt; (လမ်းကြောင်းနာမည်များ), &lt;em&gt;##domain##&lt;/em&gt; (ဒိုမိန်းနာမည်) နှင့်&lt;em&gt;##link##&lt;/em&gt; (အသက်သွင်းခြင်းကွန်ဆက်).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.0">
+        <source>Unsubscription message</source>
+        <target>ပုံမှန်မမှာယူခြင်းမှာကြားချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names) and &lt;em&gt;##domain##&lt;/em&gt; (domain name).</source>
+        <target>ဝိုက်ကဒ်များကိုသံုးနိုင် &lt;em&gt;##channels##&lt;/em&gt; (လမ်းကြောင်းနာမည်များ) နှင့် &lt;em&gt;##domain##&lt;/em&gt; (ဒိုမိန်းနာမည်) </target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.0">
+        <source>Newsletter template</source>
+        <target>သတင်းစာပံုစံပြား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.1">
+        <source>Here you can select the newsletter template.</source>
+        <target>သတင်းစာပံုစံပြားကိုရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.0">
+        <source>Your subscription on %s</source>
+        <target>%s တွင်ပုံမှန်မှာယူခြင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.1">
+        <source>You have subscribed to the following channels on ##domain##:
+
+##channels##
+
+Please click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.
+</source>
+        <target>အောက်ဖော်ပြပါလမ်းကြောင်းများသို့ပံုမှန်မှာယူပြီး ##domain##:⏎ ⏎ ##channels##⏎ ⏎ ##link## သို့အသက်သွင်းရန်ကလစ်နှိပ်။ ပံုမှန်မမှာယူချင်ပါကယခုအီးမေးလ်ကိုမသိကျိုးကျွန်ပြု။⏎
+</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.0">
+        <source>Your subscription on %s</source>
+        <target>%s တွင်ပုံမှန်မှာယူခြင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.1">
+        <source>You have unsubscribed from the following channels on ##domain##:
+
+##channels##
+</source>
+        <target>အောက်ဖော်ပြပါလမ်းကြောင်းများသို့ပံုမှန်မမှာယူပြီး ##domain##:⏎ ⏎ ##channels##⏎
+</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

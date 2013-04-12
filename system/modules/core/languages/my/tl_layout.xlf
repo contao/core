@@ -1,0 +1,550 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_layout.php" source-language="en">
+    <body>
+      <trans-unit id="tl_layout.name.0">
+        <source>Title</source>
+        <target>ခေါင်းစဉ်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.name.1">
+        <source>Please enter the layout title.</source>
+        <target>အခင်းအကျင်းခေါင်းစဉ်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.fallback.0">
+        <source>Default layout</source>
+        <target>မူလအခင်းအကျင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.fallback.1">
+        <source>Make the layout the default layout.</source>
+        <target>အခင်းအကျင်းကိုမူလအခင်းအကျင်းလုပ်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.rows.0">
+        <source>Rows</source>
+        <target>အတန်းများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.rows.1">
+        <source>Please choose the number of rows.</source>
+        <target>အတန်းများအရေအတွက်ရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1rw.0">
+        <source>Main row only</source>
+        <target>ပင်မအတန်းသာ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1rw.1">
+        <source>Show only one row.</source>
+        <target>အတန်းတစ်ခုတည်းသာပြသ။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwh.0">
+        <source>Header and main row</source>
+        <target>ခေါင်းစီးနှင့်ပင်မအတန်း</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwh.1">
+        <source>Show a header above the main row.</source>
+        <target>ပင်မအတန်းအပေါ်တွင်ခေါင်းစီးပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwf.0">
+        <source>Main row and footer</source>
+        <target>ပင်မအတန်းနှင့်အောက်ခြေ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwf.1">
+        <source>Show a footer below the main row.</source>
+        <target>ပင်မအတန်းအောက်တွင်အောက်ခြေပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3rw.0">
+        <source>Header, main row and footer</source>
+        <target>ခေါင်းစီ၊ ပင်မအတန်းနှင့်အောက်ခြေ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3rw.1">
+        <source>Show a header above and a footer below the main row.</source>
+        <target>ပင်မအတန်းအပေါ်တွင်ခေါင်းစီးနှင့်ပင်မအတန်းအောက်တွင်အောက်ခြေပြသ။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.headerHeight.0">
+        <source>Header height</source>
+        <target>ခေါင်းစီးအမြင့်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.headerHeight.1">
+        <source>Please enter the height of the page header.</source>
+        <target>စာမျက်နှာခေါင်းစီးအမြင့်ထည့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.footerHeight.0">
+        <source>Footer height</source>
+        <target>အောက်ခြေအမြင့်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.footerHeight.1">
+        <source>Please enter the height of the page footer.</source>
+        <target>စာမျက်နှာအောက်ခြေအမြင့်ထည့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cols.0">
+        <source>Columns</source>
+        <target>ကော်လံများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cols.1">
+        <source>Please choose the number of columns.</source>
+        <target>ကော်လံများအရေအတွက်ရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1cl.0">
+        <source>Main column only</source>
+        <target>ပင်မကော်လံသာ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1cl.1">
+        <source>Show only one column.</source>
+        <target>ကော်လံတစ်ခုသာလျှင်ပြသ။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2cll.0">
+        <source>Left and main column</source>
+        <target>ဘယ်နှင့်ပင်မကော်လံ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2cll.1">
+        <source>Show two columns with the main column on the right side.</source>
+        <target>ညာဖက်တွင်ပင်မကော်လံနှင့်ကော်လံနှစ်ခုပြသ။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2clr.0">
+        <source>Main and right column</source>
+        <target>ပင်မနှင့်ညာကော်လံ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2clr.1">
+        <source>Show two columns with the main column on the left side.</source>
+        <target>ဘယ်ဖက်တွင်ပင်မကော်လံနှင့်ကော်လံနှစ်ခုပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3cl.0">
+        <source>Main, left and right column</source>
+        <target>ပင်မ၊ ဘယ်နှင့်ညာကော်လံ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3cl.1">
+        <source>Show three columns with the main column in the middle.</source>
+        <target>အလယ်တွင်ပင်မကော်လံနှင့်ကော်လံသံုးခုပြသ။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthLeft.0">
+        <source>Left column width</source>
+        <target>ဘယ်ကော်လံအနံ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthLeft.1">
+        <source>Please enter the width of the left column.</source>
+        <target>ဘယ်ကော်လံအနံထည့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthRight.0">
+        <source>Right column width</source>
+        <target>ညာကော်လံအနံ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthRight.1">
+        <source>Please enter the width of the right column.</source>
+        <target>ညာကော်လံအနံထည့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections.0">
+        <source>Custom layout sections</source>
+        <target>စိတ်ကြိုက်အခင်းအကျင်းအပိုင်းများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections.1">
+        <source>Custom layout sections can be defined in the back end settings.</source>
+        <target>အတွင်းပိုင်းချိန်ညှိချက်တွင်စိတ်ကြိုက်အခင်းအကျင်းအပိုင်းများသတ်မှတ်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sPosition.0">
+        <source>Custom sections position</source>
+        <target>စိတ်ကြိုက်အပိုင်းများတည်နေရာ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sPosition.1">
+        <source>Please select the position of the custom layout sections.</source>
+        <target>စိတ်ကြိုက်အခင်းအကျင်းအပိုင်းများတည်နေရာရွေး။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.stylesheet.0">
+        <source>Style sheets</source>
+        <target>စတိုင်အလွှာများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.stylesheet.1">
+        <source>Please select the style sheets you want to add to the layout.</source>
+        <target>အခင်းအကျင်းသို့ထည့်လိုသောစတိုင်အလွှာများရွေး။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.framework.0">
+        <source>CSS framework</source>
+        <target>စီအက်စ်အက်စ်အောက်ခံဘောင်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.framework.1">
+        <source>Here you can activate the components of the Contao CSS framework.</source>
+        <target>ကွန်တောင်စီအက်စ်အက်စ်အောက်ခံဘောင်အစိတ်အပိုင်းများအသက်သွင်းနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.layout.css.0">
+        <source>Layout builder</source>
+        <target>အခင်းအကျင်းတည်ဆောက်သူ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.layout.css.1">
+        <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
+        <target>စာမျက်နှာအခင်းအကျင်းချိန်ညှိချက်အပေါ်မူတည်၍စီအက်စ်အက်စ်အခင်းအကျင်းကိုထုတ်လုပ်။ စာမျက်နှာအခင်းအကျင်းထုတ်လုပ်သူကိုလုပ်ဆောင်ရန်ယခုအစိတ်အပိုင်းလိုအပ်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.grid.css.0">
+        <source>12-column grid</source>
+        <target>လေးထောင့်၁၂ကော်လံကွက်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.grid.css.1">
+        <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
+        <target>&quot;လေးထောင့်ကွက်၁&quot;မှ&quot;လေးထောင့်ကွက်၁၂&quot;သို့နှင့်&quot;မျှခြေထိန်းချုပ်၁&quot;မှ&quot;မျှခြေထိန်းချုပ်၁၂&quot;သို့စီအက်အက်စ်အမျိုးအစားမှအစပျိုးသောတုံ့ပြန်လေးထောင့်၁၂ကော်လံကွက်ထည့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.0">
+        <source>CSS reset</source>
+        <target>စီအက်စ်အက်စ်ပြန်လည်သတ်မှတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.1">
+        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
+        <target>မတူညီသောဘရောက်ဇာများအတွင်းရှိဟိပ်စ်တီအမ်အယ်ပစ္စည်းများမူလပံုစံများရှေ့နောက်မညီမှုဖယ်ရှား။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.0">
+        <source>Basic forms</source>
+        <target>အခြေခံပံုစံများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.1">
+        <source>Adds basic form elements and buttons formatting.</source>
+        <target>အခြေခံပံုစံပစ္စည်းများနှင့်ခလုတ်များအချိုးအစားလုပ်ခြင်းထည့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.tinymce.css.0">
+        <source>TinyMCE style sheet</source>
+        <target>တိုင်းနီးအမ်စီအီးစတိုင်အလွှာ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.tinymce.css.1">
+        <source>Includes the &lt;em&gt;tinymce.css&lt;/em&gt; style sheet from your upload directory.</source>
+        <target>ကူးတင်ဖိုင်လမ်းညွှန်မှစတိုင်အလွှာ&lt;em&gt;tinymce.css&lt;/em&gt;ပါဝင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.external.0">
+        <source>Additional style sheets</source>
+        <target>နောက်ထပ်စတိုင်အလွှာများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.external.1">
+        <source>Here you can add style sheets from the file system (e.g. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</source>
+        <target>ဖိုင်စနစ်မှစတိုင်အလွှာများထည့်နိုင် (ဥပမာ &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;)။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.orderExt.0">
+        <source>Sort order</source>
+        <target>အစဉ်အားဖြင့်မျိုးတူစု</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.orderExt.1">
+        <source>The sort order of the style sheets.</source>
+        <target>စတိုင်အလွှာများအစဉ်အားဖြင့်မျိုးတူစုခြင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts.0">
+        <source>Google web fonts</source>
+        <target>ဂူးဂယ်ဝဘ်ဖွန်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts.1">
+        <source>Here you can add Google web fonts to your website. Specify the font families without the base URL (e.g. &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</source>
+        <target>ဝဘ်ဆိုက်သို့ဂူးဂယ်ဝဘ်ဖွန်များထည့်နိုင်။ အခြေယူအာအယ်မပါဘဲဖွန်မိသားစုများကိုသတ်မှတ် (ဥပမာ &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;)။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.newsfeeds.0">
+        <source>News feeds</source>
+        <target>သတင်းကုန်ကြမ်းများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.newsfeeds.1">
+        <source>Please select the news feeds you want to add to the layout.</source>
+        <target>အခင်းအကျင်းသို့ထည့်လိုသောသတင်းကုန်ကြမ်းများရွေး။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.calendarfeeds.0">
+        <source>Calendar feeds</source>
+        <target>ပြက္ခဒိန်ကုန်ကြမ်းများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.calendarfeeds.1">
+        <source>Please select the calendar feeds you want to add to the layout.</source>
+        <target>အခင်းအကျင်းသို့ထည့်လိုသောပြက္ခဒိန်ကုန်ကြမ်းများရွေး။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules.0">
+        <source>Included modules</source>
+        <target>ပါဝင်ပြီးအပိုင်းများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>ဂျာဗားလိုလျေက်လုပ်ဆောင်ကုဒ်ကိုမလုပ်ဆောင်စေပါကအစဉ်အတိုင်းများကိုမမွမ်းမံခင်ပြောင်းလဲမှုများကိုမှတ်သိမ်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.template.0">
+        <source>Page template</source>
+        <target>စာမျက်နှာပံုစံပြား</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.template.1">
+        <source>Here you can select the page template.</source>
+        <target>စာမျက်နှာပံုစံပြားရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.doctype.0">
+        <source>Output format</source>
+        <target>ထုတ်လုပ်အချိုးအစား</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.doctype.1">
+        <source>Here you can set the output format.</source>
+        <target>ထုတ်လုပ်အချိုးအစားရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cssClass.0">
+        <source>Body class</source>
+        <target>အလယ်အမျိုးအစား</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cssClass.1">
+        <source>Here you can add custom classes to the body tag.</source>
+        <target>အလယ်အမည်သို့စိတ်ကြိုက်အမျိုးအစားများထည့်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.onload.0">
+        <source>Body onload</source>
+        <target>အလယ်တွင်ဆွဲတင်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.onload.1">
+        <source>Here you can add a body onload attribute.</source>
+        <target>အလယ်တွင်ဆွဲတင်ပါဝင်ပစ္စည်းထည့်သွင်းနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.head.0">
+        <source>Additional &amp;lt;head&amp;gt; tags</source>
+        <target>နောက်ထပ် &amp;lt;head&amp;gt; tags</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.head.1">
+        <source>Here you can add individual tags to the head section of the page.</source>
+        <target>စာမျက်နှာခေါင်းစဉ်အပိုင်းသို့အမည်များထည့်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addJQuery.0">
+        <source>Include jQuery</source>
+        <target>ဂျေကျုရီပါဝင်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addJQuery.1">
+        <source>Include the jQuery library in the layout.</source>
+        <target>အခင်းအကျင်းတွင်ဂျေကျုရီတိုက်ပါဝင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jSource.0">
+        <source>jQuery source</source>
+        <target>ဂျေကျုရီရင်းမြစ်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jSource.1">
+        <source>Here you can select from where to load the jQuery script.</source>
+        <target>ဂျေကျုရီလိုလျောက်လုပ်ဆောင်ကုဒ်ဘယ်မှာဆွဲတင်ရန်ရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jquery.0">
+        <source>jQuery templates</source>
+        <target>ဂျေကျုရီပံုစံပြားများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jquery.1">
+        <source>Here you can select one or more jQuery templates.</source>
+        <target>တစ်ခု(သို့)ဂျေကျုရီပံုစံပြားများရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addMooTools.0">
+        <source>Include MooTools</source>
+        <target>မူးတူးပါဝင်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addMooTools.1">
+        <source>Include the MooTools library in the layout.</source>
+        <target>အခင်းအကျင်းတွင်မူးတူးတိုက်ပါဝင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mooSource.0">
+        <source>MooTools source</source>
+        <target>မူးတူးပါဝင်ရင်းမြစ်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mooSource.1">
+        <source>Here you can select from where to load the MooTools scripts.</source>
+        <target>မူးတူးလိုလျောက်လုပ်ဆောင်ကုဒ်များဘယ်မှာဆွဲတင်ရန်ရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools.0">
+        <source>MooTools templates</source>
+        <target>မူးတူးပံုစံပြားများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools.1">
+        <source>Here you can select one or more MooTools templates.</source>
+        <target>တစ်ခု(သို့)မူးတူးပံုစံပြားများရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics.0">
+        <source>Analytics templates</source>
+        <target>ခွဲခြမ်းစိတ်ဖြာပံုစံပြားများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics.1">
+        <source>Here you can activate the analytics templates (e.g. for Google Analytics or Piwik). Note that you have to adjust those templates and add your analytics ID before you can use them!</source>
+        <target>ခွဲခြမ်းစိတ်ဖြာပံုစံပြားများ (ဥပမာ ဂူးဂယ်ခွဲခြမ်းစိတ်ဖြာ(သို့)ပီဝတ်)အသက်သွင်းနိုင်။ ပံုစံပြားများကိုထိန်းညှိရန်လိုအပ်ပြီးခွဲခြမ်းစိတ်ဖြာအိုင်ဒီကိုမသံုးခင်ထည့်!</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script.0">
+        <source>Custom JavaScript code</source>
+        <target>စိတ်ကြိုက်ဂျားဗားလိုလျောက်လုပ်ဆောင်ကုဒ်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script.1">
+        <source>The JavaScript code which will be inserted at the bottom of the page.</source>
+        <target>စာမျက်နှာအောက်ခြေတွင်ဂျားဗားလိုလျောက်လုပ်ဆောင်ကုဒ်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static.0">
+        <source>Static layout</source>
+        <target>အတည်အခင်းအကျင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static.1">
+        <source>Create a static layout with a fixed width and alignment.</source>
+        <target>သတ်မှတ်ပြီးအနံနှင့်ဖြောင့်တန်းမှုဖြင့်အတည်အခင်းအကျင်းဖန်တီး။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.width.0">
+        <source>Overall width</source>
+        <target>အနံအားလံုး</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.width.1">
+        <source>The overall width will be applied to the wrapper element.</source>
+        <target>အနံအားလံုးကိုထုပ်ပိုးခြင်းပစ္စည်းသို့အသံုးချ။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.align.0">
+        <source>Alignment</source>
+        <target>ဖြောင့်တန်းမှု</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.align.1">
+        <source>Please select the alignment of the page.</source>
+        <target>စာမျက်နှာဖြောင့်တန်းမှုရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.title_legend">
+        <source>Title</source>
+        <target>ခေါင်းစဉ်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.header_legend">
+        <source>Rows</source>
+        <target>အတန်းများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.column_legend">
+        <source>Columns</source>
+        <target>ကော်လံများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections_legend">
+        <source>Custom sections</source>
+        <target>စိတ်ကြိုက်အပိုင်းများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.style_legend">
+        <source>Style sheets</source>
+        <target>စတိုင်အလွှာများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.feed_legend">
+        <source>RSS/Atom feeds</source>
+        <target>အာအက်စ်အက်စ်/အက်တမ်ကုန်ကြမ်းများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules_legend">
+        <source>Front end modules</source>
+        <target>အပြင်ပိုင်းအပိုင်းများ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.expert_legend">
+        <source>Expert settings</source>
+        <target>ကျွမ်းကျင်သူချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script_legend">
+        <source>Script settings</source>
+        <target>လိုလျောက်လုပ်ဆောင်ကုဒ်ချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static_legend">
+        <source>Static layout</source>
+        <target>အတည်အခင်းအကျင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jquery_legend">
+        <source>jQuery</source>
+        <target>ဂျေကျုရီ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools_legend">
+        <source>MooTools</source>
+        <target>မူးတူး</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_local">
+        <source>jQuery - local file</source>
+        <target>ဂျေကျုရီ - စက်တွင်းဖိုင်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_googleapis">
+        <source>jQuery - googleapis.com</source>
+        <target>ဂျေကျုရီ - ဂူးဂယ်အေပီအိုင်အက်စ်.ကွန်း</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_fallback">
+        <source>jQuery - googleapis.com with local fallback</source>
+        <target>ဂျေကျုရီ - စက်တွင်းအရန်နှင့်ဂူးဂယ်အေပီအိုင်အက်စ်.ကွန်း</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_local">
+        <source>MooTools - local file</source>
+        <target>မူးတူး - စက်တွင်းဖိုင်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_googleapis">
+        <source>MooTools - googleapis.com</source>
+        <target>မူးတူး - ဂူးဂယ်အေပီအိုင်အက်စ်.ကွန်း</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_fallback">
+        <source>MooTools - googleapis.com with local fallback</source>
+        <target>မူးတူး - စက်တွင်းအရန်နှင့်ဂူးဂယ်အေပီအိုင်အက်စ်.ကွန်း</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.html5">
+        <source>HTML</source>
+        <target>ဟိစ်တီအမ်အလ်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.xhtml_strict">
+        <source>XHTML Strict</source>
+        <target>ဟိပ်စ်ဟိစ်တီအမ်အလ်အတိအကျ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.xhtml_trans">
+        <source>XHTML Transitional</source>
+        <target>ဟိပ်စ်ဟိစ်တီအမ်အလ်ကူးပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.before">
+        <source>After the page header</source>
+        <target>စာမျက်နှာခေါင်းစီးပြီးနောက်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.main">
+        <source>Inside the main column</source>
+        <target>ပင်မကော်လံထဲတွင်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.after">
+        <source>Before the page footer</source>
+        <target>စာမျက်နှာအောက်ခြေမတိုင်မီ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit_styles">
+        <source>Edit the style sheets</source>
+        <target>စတိုင်အလွှာများတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit_module">
+        <source>Edit the module</source>
+        <target>အပိုင်းတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics_google">
+        <source>Google</source>
+        <target>ဂူးဂယ်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics_piwik">
+        <source>Piwik</source>
+        <target>ပိဝိ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.new.0">
+        <source>New layout</source>
+        <target>အခင်းအကျင်းအသစ်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.new.1">
+        <source>Create a new layout</source>
+        <target>အခင်းအကျင်းအသစ်ဖန်တီး</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.show.0">
+        <source>Layout details</source>
+        <target>အခင်းအကျင်းအချက်အလက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.show.1">
+        <source>Show the details of layout ID %s</source>
+        <target>အခင်းအကျင်းအိုင်ဒီ %s အချက်အလက်များပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit.0">
+        <source>Edit layout</source>
+        <target>အခင်းအကျင်းတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit.1">
+        <source>Edit layout ID %s</source>
+        <target>အခင်းအကျင်းအိုင်ဒီ %s တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cut.0">
+        <source>Move layout</source>
+        <target>အခင်းအကျင်းရွေ့ပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cut.1">
+        <source>Move layout ID %s</source>
+        <target>အခင်းအကျင်းအိုင်ဒီ %s ရွေ့ပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.copy.0">
+        <source>Duplicate layout</source>
+        <target>အခင်းအကျင်းပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.copy.1">
+        <source>Duplicate layout ID %s</source>
+        <target>အခင်းအကျင်းအိုင်ဒီ %s ပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.delete.0">
+        <source>Delete layout</source>
+        <target>အခင်းအကျင်းပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.delete.1">
+        <source>Delete layout ID %s</source>
+        <target>အခင်းအကျင်းအိုင်ဒီ %s ပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.editheader.0">
+        <source>Edit theme</source>
+        <target>အသွင်အပြင်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.editheader.1">
+        <source>Edit the theme settings</source>
+        <target>အသွင်အပြင်ချိန်ညှိချက်တည်းဖြတ်</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

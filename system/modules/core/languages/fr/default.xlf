@@ -157,6 +157,10 @@
         <source>Please select at least one field!</source>
         <target>Veuillez choisir au moins un champ !</target>
       </trans-unit>
+      <trans-unit id="ERR.emptyUpload">
+        <source>Please select at least one file!</source>
+        <target>Sélectionner au moins un fichier !</target>
+      </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
         <target>L'alias &quot;%s&quot; existe déjà !</target>
@@ -359,7 +363,7 @@
       </trans-unit>
       <trans-unit id="CTE.hyperlink.1">
         <source>Generates a link to another website.</source>
-        <target>Génère un lien hypertexte vers un autre site Internet.</target>
+        <target>Génère un lien hypertexte vers un autre site internet.</target>
       </trans-unit>
       <trans-unit id="CTE.toplink.0">
         <source>Top link</source>
@@ -399,11 +403,11 @@
       </trans-unit>
       <trans-unit id="CTE.youtube.0">
         <source>YouTube</source>
-        <target>Youtube</target>
+        <target>YouTube</target>
       </trans-unit>
       <trans-unit id="CTE.youtube.1">
         <source>Adds a YouTube video.</source>
-        <target>Ajoute une vidéo Youtube.</target>
+        <target>Ajoute une vidéo YouTube.</target>
       </trans-unit>
       <trans-unit id="CTE.files">
         <source>File elements</source>
@@ -423,7 +427,7 @@
       </trans-unit>
       <trans-unit id="CTE.downloads.1">
         <source>Generates multiple links to download files.</source>
-        <target>Génère des liens multiples vers des fichiers à télécharger.</target>
+        <target>Génère des liens hypertextes multiples vers des fichiers à télécharger.</target>
       </trans-unit>
       <trans-unit id="CTE.includes">
         <source>Include elements</source>
@@ -483,7 +487,7 @@
       </trans-unit>
       <trans-unit id="PTY.redirect.1">
         <source>This type of page automatically redirects visitors to an external website. It works like a hyperlink.</source>
-        <target>Cette page réoriente automatiquement vers une URL externe. Cela fonctionne comme un hyperlien.</target>
+        <target>Ce type de page réoriente automatiquement les visiteurs vers une URL externe. Cela fonctionne comme un lien hypertexte.</target>
       </trans-unit>
       <trans-unit id="PTY.forward.0">
         <source>Internal redirect</source>
@@ -491,7 +495,7 @@
       </trans-unit>
       <trans-unit id="PTY.forward.1">
         <source>This type of page automatically forwards visitors to another page within the site structure.</source>
-        <target>Ce type de page réoriente automatiquement le visiteur vers une autre page de la structure de site.</target>
+        <target>Ce type de page réoriente automatiquement les visiteurs vers une autre page de la structure de site.</target>
       </trans-unit>
       <trans-unit id="PTY.root.0">
         <source>Website root</source>
@@ -531,11 +535,11 @@
       </trans-unit>
       <trans-unit id="FOP.f2">
         <source>Edit, copy or move files and folders</source>
-        <target>Éditer, copier ou déplacer des fichiers ou des répertoires</target>
+        <target>Éditer, copier ou déplacer des fichiers et des répertoires</target>
       </trans-unit>
       <trans-unit id="FOP.f3">
         <source>Delete single files and empty folders</source>
-        <target>Supprimer les fichiers seuls ou les répertoires vides</target>
+        <target>Supprimer les fichiers seuls et les répertoires vides</target>
       </trans-unit>
       <trans-unit id="FOP.f4">
         <source>Delete folders including all files and subfolders (!)</source>
@@ -547,6 +551,7 @@
       </trans-unit>
       <trans-unit id="FOP.f6">
         <source>Synchronize the file system with the database</source>
+        <target>Synchroniser les fichiers avec la base de données</target>
       </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
@@ -940,6 +945,10 @@
         <source>Column</source>
         <target>Colonne</target>
       </trans-unit>
+      <trans-unit id="MSC.mw_enable">
+        <source>Enable/disable the module</source>
+        <target>Activer/désactiver le module</target>
+      </trans-unit>
       <trans-unit id="MSC.aw_title">
         <source>Title</source>
         <target>Titre</target>
@@ -1135,6 +1144,22 @@
       <trans-unit id="MSC.lastLogin.1">
         <source>Last login: %s</source>
         <target>Dernière connexion : %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
+        <source>Current login</source>
+        <target>Connexion en cours</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.1">
+        <source>Current login: %s</source>
+        <target>Connexion en cours : %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginCount">
+        <source>Login attempts</source>
+        <target>Tentatives de connexion</target>
+      </trans-unit>
+      <trans-unit id="MSC.locked">
+        <source>Locked</source>
+        <target>Verrouillé</target>
       </trans-unit>
       <trans-unit id="MSC.move">
         <source>Move the item via drag and drop</source>
@@ -1612,9 +1637,11 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.fileManager">
         <source>Open the file manager</source>
+        <target>Ouvrir le gestionnaire de fichiers</target>
       </trans-unit>
       <trans-unit id="MSC.pageManager">
         <source>Modify the site structure</source>
+        <target>Modifier la structure du site</target>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
@@ -2020,6 +2047,14 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
         <source>Remember me</source>
         <target>Rester connecté</target>
       </trans-unit>
+      <trans-unit id="MSC.createdOn">
+        <source>Created on</source>
+        <target>Créé le</target>
+      </trans-unit>
+      <trans-unit id="MSC.activation">
+        <source>Activated on</source>
+        <target>Activé à partir du</target>
+      </trans-unit>
       <trans-unit id="MSC.relevance">
         <source>%s relevance</source>
         <target>%s pertinent</target>
@@ -2042,6 +2077,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.location">
         <source>Location</source>
+        <target>Lieu</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

@@ -1,0 +1,202 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_files.php" source-language="en">
+    <body>
+      <trans-unit id="tl_files.name.0">
+        <source>Name</source>
+        <target>နာမည်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.name.1">
+        <source>Contao automatically adds the file extension.</source>
+        <target>ဖိုင်နောက်ဆက်တွဲကိုကွန်တောင်မှလိုလျောက်ထည့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protected.0">
+        <source>Protected</source>
+        <target>ကာကွယ်ပြီး</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protected.1">
+        <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
+        <target>ဟိပ်စ်တီတီပီမှဖို်င်တွဲဝင်ကြည့်ခြင်းကာကွယ်။ယခုဖိုင်များကိုလုပ်ရယူနိုင်ပြီး(ဥပမာဆွဲယူပြီးပစ္စည်းဖြင့်)။</target>
+      </trans-unit>
+      <trans-unit id="tl_files.meta.0">
+        <source>Meta information</source>
+        <target>ရှေ့ဆက်အချက်အလက်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.meta.1">
+        <source>Here you can enter the file meta information.</source>
+        <target>ရှေ့ဆက်အချက်အလက်ထည့်သွင်းနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_files.htaccessInfo">
+        <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
+        <target>ဖိုင်တွဲကိုဝင်ကြည့်ရန်တားမြစ်သော .htaccess ဖိုင်ကိုထည့်ခြင်းဖြင့်ဖိုင်တွဲကာကွယ်ခြင်းကိုလုပ်ဆောင်နိုင်။ အပါချီဆာဗာကိုမစတင်ပါကအင်္ဂါရပ်အလုပ်မလုပ်နိုင်(သို့)ဆာဗာပံုစံပြင်ထိန်းညှိရန်လိုအပ်။ အများသံုးမဟုတ်ရင်းမြစ်များမကူးတင်ခင်သေချာစစ်ဆေးပါ!</target>
+      </trans-unit>
+      <trans-unit id="tl_files.fileupload.0">
+        <source>File upload</source>
+        <target>ဖိုင်ကူးတင်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.fileupload.1">
+        <source>Browse your local computer and select the files you want to upload to the server.</source>
+        <target>စက်တွင်းကျွန်ပျုတာကိုရှာဖွေပြီးဆာဗာသို့ကူးတင်လိုသောဖိုင်များရွေး။</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editor.0">
+        <source>Source editor</source>
+        <target>ရင်းမြစ်တည်းဖြတ်သူ</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editor.1">
+        <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
+        <target>ဖိုင်ရင်းမြစ်တည်းဖြတ်နိုင်(အက်ဖ်၁၁ကိုနိပ်၍မျက်နှာပြင်အပြည့်သို့ဖွင့်ပိတ်လုပ်ပြောင်း)။</target>
+      </trans-unit>
+      <trans-unit id="tl_files.upload">
+        <source>Upload files</source>
+        <target>ကူးတင်ဖိုင်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_files.uploadNback">
+        <source>Upload files and go back</source>
+        <target>ဖိုင်များကူးတင်ပြီးပြန်သွား</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editFF">
+        <source>Edit a file or folder</source>
+        <target>ဖိုင်(သို့)ဖိုင်တွဲတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.uploadFF">
+        <source>Upload files to folder &quot;%s&quot;</source>
+        <target>ဖိုင်တွဲ &quot;%s&quot; သို့ဖိုင်များကူးတင်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editFile">
+        <source>Edit file &quot;%s&quot;</source>
+        <target>ဖိုင် &quot;%s&quot; တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.browseFiles">
+        <source>Browse files</source>
+        <target>ဖိုင်များရှာဖွေ</target>
+      </trans-unit>
+      <trans-unit id="tl_files.clearList">
+        <source>Clear list</source>
+        <target>စာရင်းဖယ်ရှား</target>
+      </trans-unit>
+      <trans-unit id="tl_files.startUpload">
+        <source>Start upload</source>
+        <target>ကူးတင်စတင်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncAdded">
+        <source>Added the file or folder &quot;%s&quot;</source>
+        <target>ဖိုင်(သို့)ဖိုင်တွဲ &quot;%s&quot; ထည့်သွင်းပြီး</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncChanged">
+        <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+        <target>ဖိုင်(သို့)ဖိုင်တွဲ &quot;%s&quot; သင်္ကေတမွမ်းမံပြီး</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncUnchanged">
+        <source>Found the file or folder &quot;%s&quot;</source>
+        <target>ဖိုင်(သို့)ဖိုင်တွဲ &quot;%s&quot; တွေ့ရှိပြီး</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncMoved">
+        <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>ဖိုင်(သို့)ဖိုင်တွဲ &quot;%s&quot; တွေ့ရှိပြီး &quot;%s&quot; တွင်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncDeleted">
+        <source>Removed the file or folder &quot;%s&quot;</source>
+        <target>ဖိုင်(သို့)ဖိုင်တွဲ &quot;%s&quot; ဖယ်ရှားပြီး</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncComplete">
+        <source>The synchronization has been completed</source>
+        <target>ထပ်တူကျရန်လုပ်ခြင်းပြီးဆံုး</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncResult">
+        <source>&lt;strong&gt;Result:&lt;/strong&gt; %s added | %s modified | %s unchanged | %s moved | %s deleted</source>
+        <target>&lt;strong&gt;ရလဒ်များ:&lt;/strong&gt; %s ထည့်သွင်းပြီး | %s ပြုပြင်မွမ်းမံပြီး | %s မပြောင်းလဲပြီး | %s ရွေ့ပြောင်းပြီး | %s ပယ်ဖျက်ပြီး</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncShowUnchanged">
+        <source>Show unchanged</source>
+        <target>မပြောင်းလဲပြီးများပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_files.new.0">
+        <source>New folder</source>
+        <target>ဖိုင်တွဲအသစ်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.new.1">
+        <source>Create a new folder</source>
+        <target>ဖိုင်တွဲအသစ်ဖန်တီး</target>
+      </trans-unit>
+      <trans-unit id="tl_files.cut.0">
+        <source>Move file or folder</source>
+        <target>ဖိုင်(သို့)ဖိုင်တွဲရွေ့ပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_files.cut.1">
+        <source>Move file or folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot; ဖိုင်(သို့)ဖိုင်တွဲရွေ့ပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_files.copy.0">
+        <source>Duplicate file or folder</source>
+        <target>ဖိုင်(သို့)ဖိုင်တွဲပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_files.copy.1">
+        <source>Duplicate file or folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot; ဖိုင်(သို့)ဖိုင်တွဲပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_files.edit.0">
+        <source>Rename file or folder</source>
+        <target>ဖိုင်(သို့)ဖိုင်တွဲနာမည်ပြန်ပေး</target>
+      </trans-unit>
+      <trans-unit id="tl_files.edit.1">
+        <source>Rename file or folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot; ဖိုင်(သို့)ဖိုင်တွဲနာမည်ပြန်ပေး</target>
+      </trans-unit>
+      <trans-unit id="tl_files.delete.0">
+        <source>Delete file or folder</source>
+        <target>ဖိုင်(သို့)ဖိုင်တွဲပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.delete.1">
+        <source>Delete file or folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot; ဖိုင်(သို့)ဖိုင်တွဲပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.source.0">
+        <source>Edit file</source>
+        <target>ဖိုင်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.source.1">
+        <source>Edit file &quot;%s&quot;</source>
+        <target>ဖိုင် &quot;%s&quot; တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protect.0">
+        <source>Protect folder</source>
+        <target>ဖိုင်တွဲကာကွယ်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protect.1">
+        <source>Protect folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot; ဖိုင်တွဲကာကွယ်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.unlock.0">
+        <source>Remove protection</source>
+        <target>ကာကွယ်ခြင်းဖယ်ရှား</target>
+      </trans-unit>
+      <trans-unit id="tl_files.unlock.1">
+        <source>Unprotect folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot; မကာကွယ်ဖိုင်တွဲ</target>
+      </trans-unit>
+      <trans-unit id="tl_files.move.0">
+        <source>File upload</source>
+        <target>ဖိုင်ကူးတင်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.move.1">
+        <source>Upload files to the server</source>
+        <target>ဆာဗာသို့ဖိုင်များကူးတင်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.pasteinto.0">
+        <source>Paste into</source>
+        <target>ထဲသို့ထုတ်ထား</target>
+      </trans-unit>
+      <trans-unit id="tl_files.pasteinto.1">
+        <source>Paste into this folder</source>
+        <target>ယခုဖိုင်တွဲထဲသို့ထုတ်ထား</target>
+      </trans-unit>
+      <trans-unit id="tl_files.sync.0">
+        <source>Synchronize</source>
+        <target>ထပ်တူကျရန်လုပ်</target>
+      </trans-unit>
+      <trans-unit id="tl_files.sync.1">
+        <source>Synchronize the file system and the database</source>
+        <target>ဖိုင်စနစ်နှင့်အချက်အလက်အစုထပ်တူကျရန်လုပ်</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

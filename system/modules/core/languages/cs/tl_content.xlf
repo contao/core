@@ -417,6 +417,38 @@
         <source>Automatically play the video when the page loads.</source>
         <target>Automaticky spustit video, jakmile se načte daná stránka.</target>
       </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.0">
+        <source>Sliding interval</source>
+        <target>Interval posouvání</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.1">
+        <source>The time in milliseconds between slides (1000 = 1s). Set to 0 to disable auto sliding.</source>
+        <target>Doba trvání v milisetinách mezi jednotlivými jezdci (1000 = 1s). Zadejte 0, abyste vypnuli automatické posouvání.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.0">
+        <source>Transition speed</source>
+        <target>Rychlost posunu</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.1">
+        <source>The transition speed in milliseconds (1000 = 1s). Defaults to 300.</source>
+        <target>Rychlost posunu v milisetinách (1000 = 1s). Výchozí hodnota je 300.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.0">
+        <source>Slide offset</source>
+        <target>Odsazení jezdce</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.1">
+        <source>Here you can make the slider start with a particular slide (counting starts at 0).</source>
+        <target>Zde můžete určit, čím má být posun odstartovaný (odpočet začíná 0)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.0">
+        <source>Continuous</source>
+        <target>Nepřetržitý posun</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.1">
+        <source>Make the slider continuous (start all over when reaching the end).</source>
+        <target>Nechat posun nepřetržitě probíhat (začne od začátku, jakmile dosáhne konce).</target>
+      </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>
         <target>ID elementu</target>
@@ -533,6 +565,10 @@
         <source>Image settings</source>
         <target>Nastavení obrázku</target>
       </trans-unit>
+      <trans-unit id="tl_content.slider_legend">
+        <source>Slider settings</source>
+        <target>Nastavení jezdce</target>
+      </trans-unit>
       <trans-unit id="tl_content.list_legend">
         <source>List items</source>
         <target>Záznamy seznamu</target>
@@ -628,6 +664,14 @@
       <trans-unit id="tl_content.random">
         <source>Random order</source>
         <target>náhodného pořadí</target>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplate">
+        <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>Předloha &lt;em&gt;%s&lt;/em&gt; musí být začleněná do vzhledu stránky.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplates">
+        <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>Předloha &lt;em&gt;%s&lt;/em&gt; nebo &lt;em&gt;%s&lt;/em&gt; musí být začleněná do vzhledu stránky.</target>
       </trans-unit>
       <trans-unit id="tl_content.new.0">
         <source>New element</source>

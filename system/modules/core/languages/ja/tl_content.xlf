@@ -223,7 +223,7 @@
       </trans-unit>
       <trans-unit id="tl_content.mooSingle.1">
         <source>Behaves like a single text element that is inside an accordion pane.</source>
-        <target>アコーディオンの枠の中に一つのテキスト要素があるように動作します。</target>
+        <target>アコーディオンの枠の中にテキスト要素が1つあるように動作します。</target>
       </trans-unit>
       <trans-unit id="tl_content.mooHeadline.0">
         <source>Section headline</source>
@@ -417,6 +417,39 @@
         <source>Automatically play the video when the page loads.</source>
         <target>ページを読み込んだときに自動的に映像を再生します。</target>
       </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.0">
+        <source>Sliding interval</source>
+        <target>スライドする間隔</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.1">
+        <source>The time in milliseconds between slides (1000 = 1s). Set to 0 to disable auto sliding.</source>
+        <target>スライドする間隔の時間をミリ秒(1000 = 1秒)で指定します。0にすると自動的にスライドしません。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.0">
+        <source>Transition speed</source>
+        <target>推移する間隔</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.1">
+        <source>The transition speed in milliseconds (1000 = 1s). Defaults to 300.</source>
+        <target>推移する速度をミリ秒(1000 = 1秒)で指定します。初期設定の値は300です。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.0">
+        <source>Slide offset</source>
+        <target>スライドのオフセット</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.1">
+        <source>Here you can make the slider start with a particular slide (counting starts at 0).</source>
+        <target>スライダーを(最初を0から数えてた)特定のスライドから開始します。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.0">
+        <source>Continuous</source>
+        <target>連続的</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.1">
+        <source>Make the slider continuous (start all over when reaching the end).</source>
+        <target>スライダーを(最後に達すると最初からやり直して)連続的な動作にし
+ます。</target>
+      </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>
         <target>参照する要素</target>
@@ -533,6 +566,10 @@
         <source>Image settings</source>
         <target>画像の設定</target>
       </trans-unit>
+      <trans-unit id="tl_content.slider_legend">
+        <source>Slider settings</source>
+        <target>スライダーの設定</target>
+      </trans-unit>
       <trans-unit id="tl_content.list_legend">
         <source>List items</source>
         <target>箇条書きの項目</target>
@@ -628,6 +665,14 @@
       <trans-unit id="tl_content.random">
         <source>Random order</source>
         <target>ランダムな順序</target>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplate">
+        <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>ページレイアウトに&lt;em&gt;%s&lt;/em&gt;というテンプレートを含める必要があります。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplates">
+        <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>ページレイアウトに&lt;em&gt;%s&lt;/em&gt;または&lt;em&gt;%s&lt;/em&gt;というテンプレートを含める必要があります。</target>
       </trans-unit>
       <trans-unit id="tl_content.new.0">
         <source>New element</source>

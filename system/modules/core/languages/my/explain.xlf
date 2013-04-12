@@ -1,0 +1,99 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/explain.php" source-language="en">
+    <body>
+      <trans-unit id="XPL.insertTags.0.0">
+        <source>Rich Text Editor</source>
+        <target>ပြည့်နှက်စာသားတည်းဖြတ်သူ</target>
+      </trans-unit>
+      <trans-unit id="XPL.insertTags.0.1">
+        <source>For more information about TinyMCE please visit &lt;a href=&quot;http://www.tinymce.com/&quot; title=&quot;TinyMCE by moxiecode&quot; target=&quot;_blank&quot;&gt;http://www.tinymce.com/&lt;/a&gt;.</source>
+        <target>သေးငယ်သောအမ်စီအီးအချက်အလက်များအတွက်ဤတွင်လည်ပတ်ပါ &lt;a href=&quot;http://www.tinymce.com/&quot; title=&quot;TinyMCE by moxiecode&quot; target=&quot;_blank&quot;&gt;http://www.tinymce.com/&lt;/a&gt;။</target>
+      </trans-unit>
+      <trans-unit id="XPL.insertTags.1.0">
+        <source>Insert tags</source>
+        <target>အမည်များထည့်သွင်း</target>
+      </trans-unit>
+      <trans-unit id="XPL.insertTags.1.1">
+        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</source>
+        <target>အမည်များထည့်သွင်းရန်နောက်ထပ်အချက်အလက်များကြည့်ရှုရန် &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;  သို့လည်ပတ်ပါ။</target>
+      </trans-unit>
+      <trans-unit id="XPL.insertTags.2.0">
+        <source>Code Editor</source>
+        <target>ကုဒ်တည်းဖြတ်သူ</target>
+      </trans-unit>
+      <trans-unit id="XPL.insertTags.2.1">
+        <source>For more information about ACE please visit &lt;a href=&quot;http://ace.ajax.org&quot; title=&quot;ACE (Ajax.org Cloud9 Editor)&quot; target=&quot;_blank&quot;&gt;http://ace.ajax.org&lt;/a&gt;.</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.0.0">
+        <source>colspan</source>
+        <target>colspan</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.0.1">
+        <source>Contao supports all date and time formats that can be parsed with the PHP date() function. However, to ensure that any input can be transformed into a UNIX timestamp, you can only use numeric date and time formats (j, d, m, n, y, Y, g, G, h, H, i, s) in the back end.&lt;br&gt;&lt;br&gt;&lt;strong&gt;You can enter variant front end formats in the site structure (website root pages).&lt;/strong&gt;&lt;br&gt;&lt;br&gt;&lt;em&gt;Here are some examples of valid date and time formats&lt;/em&gt;:</source>
+        <target>ပီဟိုတ်စ်ပီရက်စွဲ()လုပ်ဆောင်ချက်အပါအဝင်ရက်စွဲနှင့်အချိန်ပံုစံများကိုကွန်တောင်မှထောက်ပံ့။ သို့ရာတွင်ယူးနစ်အချိန်ပံုစံသို့အသွင်ပြောင်းနိုင်ရန်လုပ်ဆောင်ပြီးအတွင်းပိုင်းတွင်ရက်စွဲနှင့်အချိန်ပံုစံများ (j, d, m, n, y, Y, g, G, h, H, i, s)ကိုသာသံုးနိုင်။ &lt;br&gt;&lt;br&gt;&lt;strong&gt;ဆိုက်ဖွဲ့စည်းပံုတွင်အပြင်ပိုင်းပံုစံများကိုကြည့်ပါ (ဝဘ်ဆိုက်ပင်မစာမျက်နှာများ)။&lt;/strong&gt;&lt;br&gt;&lt;br&gt;&lt;em&gt;တရားဝင်ရက်စွဲနှင့်အချိန်ပံုစံဥပမာများ&lt;/em&gt;:</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.1.0">
+        <source>Y-m-d</source>
+        <target>နှစ်-လ-ရက်</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.1.1">
+        <source>YYYY-MM-DD, international ISO-8601, e.g. 2005-01-28</source>
+        <target>နနနန/လလ/ရရ၊ နိုင်ငံတကာအိုင်အက်စ်အို-၈၆၀၁၊ ဥပမာ ၂၀၀၅-၀၁-၂၈</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.2.0">
+        <source>m/d/Y</source>
+        <target>လ/ရက်/နှစ်</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.2.1">
+        <source>MM/DD/YYYY, English format, e.g. 01/28/2005</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.3.0">
+        <source>d.m.Y</source>
+        <target>ရ.လ.န</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.3.1">
+        <source>DD.MM.YYYY, German format, e.g. 28.01.2005</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.4.0">
+        <source>y-n-j</source>
+        <target>န-လ-ရ</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.4.1">
+        <source>YY-M-D, without leading zeros, e.g. 05-1-28</source>
+        <target>နန-လ-ရ၊ သုညများမပါဘဲ၊ ဥပမာ ၀၅-၁-၂၈</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.5.0">
+        <source>Ymd</source>
+        <target>နလရ</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.5.1">
+        <source>YYYYMMDD, timestamp, e.g. 20050128</source>
+        <target>နနနနလလရရ၊ အချိန်ပံုစံ၊ ဥပမာ ၂၀၀၅၀၁၂၈</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.6.0">
+        <source>H:i:s</source>
+        <target>နာ:မ:စ</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.6.1">
+        <source>24 hours, minutes and seconds, e.g. 20:36:59</source>
+        <target>၂၄နာရီများ၊ မိနစ်များနှင့်စက္ကန့်များ၊ ဥပမာ ၂၀:၃၆:၅၉</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.7.0">
+        <source>g:i</source>
+        <target>၁၂နာ:မ</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.7.1">
+        <source>12 hours without leading zeros and minutes, e.g. 8:36</source>
+        <target>သုညများနှင့်မိနစ်များမပါဘဲ၁၂နာရီများ၊ ဥပမာ ၈:၃၆</target>
+      </trans-unit>
+      <trans-unit id="XPL.highlighter.0.0">
+        <source>Rich Text Editor</source>
+        <target>ပြည့်နှက်စာသားတည်းဖြတ်သူ</target>
+      </trans-unit>
+      <trans-unit id="XPL.highlighter.0.1">
+        <source>For more information about how to configure the syntax highlighter please visit &lt;a href=&quot;http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
+        <target>နောက်ထပ်အချက်အလက်များအတွက် &lt;a href=&quot;http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt; သို့ဖွဲ့ထုံးမီးမောင်းထိုးသူကိုမည်သို့ပံုစံပြင်နိုင်သည်ကိုကြည့်။</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

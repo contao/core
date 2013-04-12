@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.templates.1">
         <source>Here you can select a templates folder that will be exported with the theme.</source>
-        <target>Sélectionner le répertoire des modèles qui seront exportés avec le thème.</target>
+        <target>Sélectionner le répertoire des modèles qui sera exporté avec le thème.</target>
       </trans-unit>
       <trans-unit id="tl_theme.screenshot.0">
         <source>Screenshot</source>
@@ -102,12 +102,12 @@
         <target>Présentations de page personnalisées</target>
       </trans-unit>
       <trans-unit id="tl_theme.missing_section">
-        <source>The layout section &lt;strong&gt;%s&lt;/strong&gt; is not defined in the back end settings.</source>
-        <target>La présentation de page &lt;strong&gt;%s&lt;/strong&gt; n'est pas défini dans les paramètres du back office.</target>
+        <source>The layout section &lt;strong&gt;%s&lt;/strong&gt; will be added to the local configuration.</source>
+        <target>La présentation de page &lt;strong&gt;%s&lt;/strong&gt; sera ajoutée à la configuration locale.</target>
       </trans-unit>
       <trans-unit id="tl_theme.sections_ok">
         <source>The layout sections have been successfully checked.</source>
-        <target>Les présentations de page ont été contrôlées avec succès.</target>
+        <target>Les présentations de page ont été vérifiées avec succès.</target>
       </trans-unit>
       <trans-unit id="tl_theme.missing_xml">
         <source>Theme &quot;%s&quot; is corrupt and cannot be imported.</source>

@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_form.sendViaEmail.1">
         <source>Send the submitted data to an e-mail address.</source>
-        <target>Envoyer les données soumises vers une adresse e-mail</target>
+        <target>Envoyer les données soumises vers une adresse e-mail.</target>
       </trans-unit>
       <trans-unit id="tl_form.recipient.0">
         <source>Recipient address</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_form.recipient.1">
         <source>Separate multiple e-mail addresses with comma.</source>
-        <target>Séparer les adresses multiples par une virgule.</target>
+        <target>Séparer les adresses e-mails multiples par une virgule.</target>
       </trans-unit>
       <trans-unit id="tl_form.subject.0">
         <source>Subject</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_form.email.1">
         <source>Ignores all fields except &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
-        <target>Ignore tous les champs autres que &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; et &lt;em&gt;cc&lt;/em&gt; (copie cachée), et envoie les données du formulaire comme s'il avait été émis par un mail client. Permet le téléchargement de fichiers.</target>
+        <target>Ignore tous les champs autres que &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; et &lt;em&gt;cc&lt;/em&gt; (copie cachée), et envoie les données du formulaire comme s'il avait été émis par un mail client. Permet l'envoi de fichiers.</target>
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.0">
         <source>Skip empty fields</source>
@@ -123,9 +123,11 @@
       </trans-unit>
       <trans-unit id="tl_form.novalidate.0">
         <source>Disable HTML5 validation</source>
+        <target>Désactiver la validation HTML5</target>
       </trans-unit>
       <trans-unit id="tl_form.novalidate.1">
         <source>Add the &quot;novalidate&quot; attribute to the form tag.</source>
+        <target>Ajouter l'attribut &quot;novalidate&quot; à la balise form.</target>
       </trans-unit>
       <trans-unit id="tl_form.attributes.0">
         <source>CSS ID/class</source>

@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_user.php" source-language="en">
+    <body>
+      <trans-unit id="tl_user.news.0">
+        <source>Allowed archives</source>
+        <target>ခွင့်ပြုပြီးဖိုင်ထုပ်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_user.news.1">
+        <source>Here you can grant access to one or more news archives.</source>
+        <target>တစ်ခု(သို့)သတင်းဖိုင်ထုပ်များဝင်ကြည့်ရန်ခွင့်ပြုနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newp.0">
+        <source>News permissions</source>
+        <target>သတင်းခွင့်ပြုချက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newp.1">
+        <source>Here you can define the news permissions.</source>
+        <target>သတင်းခွင့်ပြုချက်များကိုသတ်မှတ်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeeds.0">
+        <source>Allowed RSS feeds</source>
+        <target>ခွင့်ပြုပြီးအာအက်စ်အက်စ်ကုန်ကြမ်းများ</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeeds.1">
+        <source>Here you can grant access to one or more news feeds.</source>
+        <target>တစ်ခု(သို့)သတင်းကုန်ကြမ်းများဝင်ကြည့်ရန်ခွင့်ပြုနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeedp.0">
+        <source>RSS feed permissions</source>
+        <target>အာအက်စ်အက်စ်ကုန်ကြမ်းများခွင့်ပြုချက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeedp.1">
+        <source>Here you can define the news feed permissions.</source>
+        <target>သတင်းကုန်ကြမ်းခွင့်ပြုချက်များကိုသတ်မှတ်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_user.news_legend">
+        <source>News permissions</source>
+        <target>သတင်းခွင့်ပြုချက်များ</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

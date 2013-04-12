@@ -1,0 +1,202 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_calendar.php" source-language="en">
+    <body>
+      <trans-unit id="tl_calendar.title.0">
+        <source>Title</source>
+        <target>ခေါင်းစဉ်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.title.1">
+        <source>Please enter the calendar title.</source>
+        <target>ပြက္ခဒိန်ခေါင်းစဉ်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.jumpTo.0">
+        <source>Redirect page</source>
+        <target>ဦးတည်ရာပြောင်းစာမျက်နှာ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.jumpTo.1">
+        <source>Please choose the event reader page to which visitors will be redirected when clicking an event.</source>
+        <target>အဖြစ်အပျက်ကိုကလစ်နှိပ်သောအခါလည်ပတ်သူများရောက်သွားမည့်အဖြစ်အပျက်ဖတ်ရှုသူစာမျက်နှာကိုရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.allowComments.0">
+        <source>Enable comments</source>
+        <target>မှတ်ချက်များလုပ်ဆောင်စေ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.allowComments.1">
+        <source>Allow visitors to comment events.</source>
+        <target>အဖြစ်အပျက်များကိုမှတ်ချက်ချရန်လည်ပတ်သူများကိုခွင့်ပြု</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify.0">
+        <source>Notify</source>
+        <target>အကြောင်းကြား</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+        <target>မှတ်ချက်များထည့်သောအခါမည်သူ့ကိုအကြောင်းကြားရမည်ဟုရွေးချယ်ပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.sortOrder.0">
+        <source>Sort order</source>
+        <target>အစဉ်အားဖြင့်မျိုးတူစု</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+        <target>မူလအားဖြင့်မှတ်ချက်များသည်အဟောင်းဆံုးကိုအရင်မျိုးတူစုလေ့ရှိ။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.perPage.0">
+        <source>Comments per page</source>
+        <target>စာမျက်နှာရှိမှတ်ချက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>စာမျက်နှာရှိမှတ်ချက်များအရေအတွက်။ စာမျက်နှာများမလုပ်ဆောင်စေရန် ၀ ကိုသတ်မှတ်ပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.moderate.0">
+        <source>Moderate comments</source>
+        <target>မှတ်ချက်များကြပ်မတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>ဝဘ်ဆိုက်တွင်မထုတ်ပြန်ခင်မှတ်ချက်များအတည်ပြု။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.bbcode.0">
+        <source>Allow BBCode</source>
+        <target>ဘီဘီကုဒ်ခွင့်ပြု</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>ဘီဘီကုဒ်ဖြင့်မှတ်ချက်များအချိုးအစားချရန်လည်ပတ်သူများကိုခွင့်ပြု</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.requireLogin.0">
+        <source>Require login to comment</source>
+        <target>မှတ်ချက်ချရန်ဖွင့်ဝင်ရန်လို</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>မှတ်ချက်များဖန်တီးရန်စစ်ဆေးပြီးအသံုးပြုသူများသာလျှင်ခွင့်ပြု</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>လံုခြုံရေးမေးခွန်းမလုပ်ဆောင်စေ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+        <target>စစ်ဆေးပြီးအသံုးပြုသူများသို့ကန့်သတ်ပြီးမှတ်ချက်များရှိခဲ့လျှင်ယခုရွေးပိုင်ခွင့်သာလျှင်သံုး။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.protected.0">
+        <source>Protect calendar</source>
+        <target>ပြက္ခဒိန်ကာကွယ်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.protected.1">
+        <source>Show events to certain member groups only.</source>
+        <target>သေချာသောအဖွဲ့ဝင်အုပ်စုများသာလျှင်အဖြစ်အပျက်များပြသ။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.groups.0">
+        <source>Allowed member groups</source>
+        <target>ခွင့်ပြုပြီးအဖွဲ့ဝင်အုပ်စုများ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.groups.1">
+        <source>These groups will be able to see the events in this calendar.</source>
+        <target>ယခုပြက္ခဒိန်တွင်အဖြစ်အပျက်များကိုယခုအုပ်စုအားလံုးမြင်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.tstamp.0">
+        <source>Revision date</source>
+        <target>ပြင်ဆင်နေ့စွဲ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>နောက်ဆံုးပံုစံ၏နေ့စွဲနှင့်အချိန်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.title_legend">
+        <source>Title and redirect page</source>
+        <target>ခေါင်းစဉ်နှင့်ဦးတည်ရာပြောင်းစာမျက်နှာ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.comments_legend">
+        <source>Comments</source>
+        <target>မှတ်ချက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.protected_legend">
+        <source>Access protection</source>
+        <target>ကာကွယ်မှုဝင်ကြည့်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feed_legend">
+        <source>RSS/Atom feed</source>
+        <target>အာအက်စ်အက်စ်/အက်တမ်ကုန်ကြမ်း</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify_admin">
+        <source>System administrator</source>
+        <target>စက်စနစ်စီမံခန့်ခွဲသူ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify_author">
+        <source>Author of the event</source>
+        <target>အဖြစ်အပျက်ရေးသားသူ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify_both">
+        <source>Author and system administrator</source>
+        <target>ရေးသားသူနှင့်စက်စနစ်စီမံခန့်ခွဲသူ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.source_teaser">
+        <source>Event teasers</source>
+        <target>အဖြစ်အပျက်ပဟေဠိများ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.source_text">
+        <source>Full articles</source>
+        <target>ဆောင်းပါးများအပြည့်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.new.0">
+        <source>New calendar</source>
+        <target>ပြက္ခဒိန်အသစ်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.new.1">
+        <source>Create a new calendar</source>
+        <target>ပြက္ခဒိန်အသစ်ဖန်တီး</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.show.0">
+        <source>Calendar details</source>
+        <target>ပြက္ခဒိန်အချက်အလက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.show.1">
+        <source>Show the details of calendar ID %s</source>
+        <target>ပြက္ခဒိန်အိုင်ဒီအချက်အလက်များပြသ %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.edit.0">
+        <source>Edit calendar</source>
+        <target>ပြက္ခဒိန်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.edit.1">
+        <source>Edit calendar ID %s</source>
+        <target>ပြက္ခဒိန်အိုင်ဒီတည်းဖြတ် %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.editheader.0">
+        <source>Edit calendar settings</source>
+        <target>ပြက္ခဒိန်ချိန်ညှိချက်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.editheader.1">
+        <source>Edit the settings of calendar ID %s</source>
+        <target>ပြက္ခဒိန်အိုင်ဒီချိန်ညှိချက်တည်းဖြတ် %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.copy.0">
+        <source>Duplicate calendar</source>
+        <target>ပြက္ခဒိန်ပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.copy.1">
+        <source>Duplicate calendar ID %s</source>
+        <target>ပြက္ခဒိန်အိုင်ဒီပံုစံတူပွား %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.delete.0">
+        <source>Delete calendar</source>
+        <target>ပြက္ခဒိန်ပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.delete.1">
+        <source>Delete calendar ID %s</source>
+        <target>ပြက္ခဒိန်အိုင်ဒီပယ်ဖျက် %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feeds.0">
+        <source>RSS feeds</source>
+        <target>အာအက်စ်အက်စ်ကုန်ကြမ်းများ</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feeds.1">
+        <source>Manage RSS feeds</source>
+        <target>အာအက်စ်အက်စ်ကုန်ကြမ်းများစီမံ</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.published.1">
         <source>Make the comment publicly visible on the website.</source>
-        <target>Seulement les commentaires publiés seront visibles sur le site.</target>
+        <target>Rendre le commentaire visible sur le site.</target>
       </trans-unit>
       <trans-unit id="tl_comments.ip.0">
         <source>IP address</source>

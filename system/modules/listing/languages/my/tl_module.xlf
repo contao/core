@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/listing/languages/en/tl_module.php" source-language="en">
+    <body>
+      <trans-unit id="tl_module.list_table.0">
+        <source>Table</source>
+        <target>စားပွဲ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_table.1">
+        <source>Please choose the source table.</source>
+        <target>ရင်းမြစ်စားပွဲကိုရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_fields.0">
+        <source>Fields</source>
+        <target>နယ်ပယ်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_fields.1">
+        <source>Please enter a comma separated list of the fields you want to list.</source>
+        <target>စာရင်းလုပ်ဆောင်လိုသောကော်မာခြားနားပြီးနယ်ပယ်များစာရင်းထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_where.0">
+        <source>Condition</source>
+        <target>အခြေအနေ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_where.1">
+        <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
+        <target>ရလဒ်များစိစစ်ရန်အခြေအနေထည့်သွင်း (ဥပမာ &lt;em&gt;published=1&lt;/em&gt; သို့ &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;)။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_search.0">
+        <source>Searchable fields</source>
+        <target>ရှာဖွေနိုင်သောနယ်ပယ်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_search.1">
+        <source>Here you can enter a comma seperated list of fields that you want to be searchable.</source>
+        <target>ရှာဖွေလိုသောကော်မာခြားနားပြီးနယ်ပယ်များစာရင်းထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_sort.0">
+        <source>Order by</source>
+        <target>အားဖြင့်စီစဉ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_sort.1">
+        <source>Here you can enter a comma seperated list of fields to sort the results by.</source>
+        <target>ရလဒ်များဖြင့်မျိုးတူစုလိုသောကော်မာခြားနားပြီးနယ်ပယ်များစာရင်းထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info.0">
+        <source>Details page fields</source>
+        <target>စာမျက်နှာနယ်ပယ်များအချက်အလက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info.1">
+        <source>Enter a comma separated list of the fields you want to show on the details page. Leave blank to disable the feature.</source>
+        <target>အချက်အလက်စာမျက်နှာတွင်ပြသလိုသောကော်မာခြားနားပြီးနယ်ပယ်များစာရင်းထည့်သွင်း။ ယခုအင်္ဂါရပ်ကိုမလုပ်ဆောင်စေရန်အလွတ်ထားပါ။ </target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_where.0">
+        <source>Details page condition</source>
+        <target>စာမျက်နှာအခြေအနေအချက်အလက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_where.1">
+        <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
+        <target>ရလဒ်များစိစစ်ရန်အခြေအနေထည့်သွင်း (ဥပမာ &lt;em&gt;published=1&lt;/em&gt; သို့ &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;)။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_layout.0">
+        <source>List template</source>
+        <target>စာရင်းပံုစံပြား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_layout.1">
+        <source>Here you can select the list template.</source>
+        <target>စာရင်းပံုစံပြားရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_layout.0">
+        <source>Details page template</source>
+        <target>စာမျက်နှာပံုစံပြားအချက်အလက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_layout.1">
+        <source>Here you can select the details page template.</source>
+        <target>စာမျက်နှာပံုစံပြားအချက်အလက်များရွေးနိုင်။</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

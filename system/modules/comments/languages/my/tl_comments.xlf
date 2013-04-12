@@ -1,0 +1,186 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/comments/languages/en/tl_comments.php" source-language="en">
+    <body>
+      <trans-unit id="tl_comments.source.0">
+        <source>Origin</source>
+        <target>မူရင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.source.1">
+        <source>The associated table.</source>
+        <target>ဆက်နွယ်ပြီးစားပွဲ။</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.parent.0">
+        <source>Parent ID</source>
+        <target>မိခင်အိုင်ဒီ</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.parent.1">
+        <source>The associated record.</source>
+        <target>ဆက်နွယ်ပြီးမှတ်တမ်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.date.0">
+        <source>Date</source>
+        <target>နေ့စွဲ</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.date.1">
+        <source>Please enter the comment date.</source>
+        <target>မှတ်ချက်ချရက်စွဲထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.name.0">
+        <source>Author</source>
+        <target>ရေးသားသူ</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.name.1">
+        <source>Please enter the author's name.</source>
+        <target>ရေးသားသူနာမည်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.email.0">
+        <source>E-mail address</source>
+        <target>အီးမေးလ်လိပ်စာ</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.email.1">
+        <source>The e-mail address will not be published.</source>
+        <target>အီးမေးလ်လိပ်စာမဖြန့်ဝေပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.website.0">
+        <source>Website</source>
+        <target>ဝဘ်ဆိုက်</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.website.1">
+        <source>Here you can enter a website address.</source>
+        <target>ဝဘ်လိပ်စာကိုထည့်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.comment.0">
+        <source>Comment</source>
+        <target>မှတ်ချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.comment.1">
+        <source>Please enter the comment.</source>
+        <target>မှတ်ချက်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.addReply.0">
+        <source>Add a reply</source>
+        <target>အကြောင်းပြန်ထည့်</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.addReply.1">
+        <source>Here you can reply to the comment.</source>
+        <target>မှတ်ချက်သို့အကြောင်းပြန်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.author.0">
+        <source>Author</source>
+        <target>ရေးသားသူ</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.author.1">
+        <source>Here you can change the author of the reply.</source>
+        <target>အကြောင်းပြန်ရေးသားသူပြောင်းလဲနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.reply.0">
+        <source>Reply</source>
+        <target>အကြောင်းပြန်</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.reply.1">
+        <source>Here you can enter the reply.</source>
+        <target>အကြောင်းပြန်ခြင်းထည့်သွင်းနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.published.0">
+        <source>Publish comment</source>
+        <target>မှတ်ချက်ထုတ်ဝေ</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.published.1">
+        <source>Make the comment publicly visible on the website.</source>
+        <target>ဝဘ်ဆိုက်ပေါ်တွင်မှတ်ချက်ကိုလူအများမြင်စေရန်လုပ်ဆောင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.ip.0">
+        <source>IP address</source>
+        <target>အို်င်ပီလိပ်စာ</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.ip.1">
+        <source>The IP address of the author.</source>
+        <target>ရေးသားသူအိုင်ပီလိပ်စာ။</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.notified.0">
+        <source>Notified</source>
+        <target>အကြောင်းကြားပြီး</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.notified.1">
+        <source>The notification of this comment has been sent.</source>
+        <target>ယခုမှတ်ချက်၏အကြောင်းကြားခြင်းပေးပို့ပြီး။</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.author_legend">
+        <source>Author</source>
+        <target>ရေးသားသူ</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.comment_legend">
+        <source>Comment</source>
+        <target>မှတ်ချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.reply_legend">
+        <source>Reply</source>
+        <target>အကြောင်းပြန်</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.publish_legend">
+        <source>Publish settings</source>
+        <target>ထုတ်ဝေချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.approved">
+        <source>Approved</source>
+        <target>လက်ခံပြီး</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.pending">
+        <source>Awaiting moderation</source>
+        <target>စိစစ်မှုစောင့်ဆိုင်းနေ</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.tl_content">
+        <source>Article</source>
+        <target>ဆောင်းပါး</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.tl_page">
+        <source>Page</source>
+        <target>စာမျက်နှာ</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.tl_news">
+        <source>News item</source>
+        <target>သတင်းပစ္စည်း</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.tl_faq">
+        <source>FAQ</source>
+        <target>မေးနေကြမေးခွန်းများ</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.tl_calendar_events">
+        <source>Event</source>
+        <target>အဖြစ်အပျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.show.0">
+        <source>Comment details</source>
+        <target>မှတ်ချက်အချက်အလက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.show.1">
+        <source>Show the details of comment ID %s</source>
+        <target>မှတ်ချက်အိုင်ဒီ %s အချက်အလက်များပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.edit.0">
+        <source>Edit comment</source>
+        <target>မှတ်ချက်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.edit.1">
+        <source>Edit comment ID %s</source>
+        <target>မှတ်ချက်အိုင်ဒီ %s တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.delete.0">
+        <source>Delete comment</source>
+        <target>မှတ်ချက်ပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.delete.1">
+        <source>Delete comment ID %s</source>
+        <target>မှတ်ချက်အိုင်ဒီ %s ပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.toggle.0">
+        <source>Publish/unpublish comment</source>
+        <target>မှတ်ချက်ထုတ်ဝေ/မထုတ်ဝေ</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.toggle.1">
+        <source>Publish/unpublish comment ID %s</source>
+        <target>မှတ်ချက်အိုင်ဒီ %s ထုတ်ဝေ/မထုတ်ဝေ</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

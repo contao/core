@@ -331,7 +331,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.actionfailed">
         <source>One or more actions failed.</source>
-        <target>少なくとも一つの処理に失敗しました。</target>
+        <target>少なくとも処理の1つに失敗しました。</target>
       </trans-unit>
       <trans-unit id="tl_repository.apply">
         <source>Apply</source>
@@ -504,6 +504,10 @@
       <trans-unit id="tl_repository.missingSoapModule">
         <source>SOAP extension not loaded (configure PHP with --enable-soap).</source>
         <target>SOAP拡張が読み込まれていません(--enable-soapを指定してPHPを構成してください)。</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showIncompatible">
+        <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>現在のContaoのバージョンと互換性のある機能拡張だけを表示しています。すべての機能拡張を検索結果に表示するにあは、バックエンドの設定を修正してください。</target>
       </trans-unit>
       <trans-unit id="tl_repository_statext.uptodate">
         <source>Up to date</source>

@@ -417,6 +417,38 @@
         <source>Automatically play the video when the page loads.</source>
         <target>Speelt video automatisch af tijdens laden pagina.</target>
       </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.0">
+        <source>Sliding interval</source>
+        <target>Sliding interval</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.1">
+        <source>The time in milliseconds between slides (1000 = 1s). Set to 0 to disable auto sliding.</source>
+        <target>Tijd in milliseconden tussen slides (1000 = 1s). Stel in op 0 om auto-sliding uit te schakelen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.0">
+        <source>Transition speed</source>
+        <target>Overgangs-snelheid</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.1">
+        <source>The transition speed in milliseconds (1000 = 1s). Defaults to 300.</source>
+        <target>Overgangs-snelheid in milliseconden (1000 = 1s). Standaard is 300.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.0">
+        <source>Slide offset</source>
+        <target>Slide offset</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.1">
+        <source>Here you can make the slider start with a particular slide (counting starts at 0).</source>
+        <target>Hier kunt u de slider starten met een bepaalde dia (telling begint bij 0).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.0">
+        <source>Continuous</source>
+        <target>Doorlopend</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.1">
+        <source>Make the slider continuous (start all over when reaching the end).</source>
+        <target>Start de slider doorlopend (start opnieuw als het einde bereikt is).</target>
+      </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>
         <target>Element waarnaar wordt verwezen</target>
@@ -533,6 +565,10 @@
         <source>Image settings</source>
         <target>Afbeeldingseigenschappen</target>
       </trans-unit>
+      <trans-unit id="tl_content.slider_legend">
+        <source>Slider settings</source>
+        <target>Slider instellingen</target>
+      </trans-unit>
       <trans-unit id="tl_content.list_legend">
         <source>List items</source>
         <target>Lijst items</target>
@@ -628,6 +664,12 @@
       <trans-unit id="tl_content.random">
         <source>Random order</source>
         <target>Willekeurige volgorde</target>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplate">
+        <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplates">
+        <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
       </trans-unit>
       <trans-unit id="tl_content.new.0">
         <source>New element</source>

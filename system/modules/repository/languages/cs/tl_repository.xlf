@@ -505,6 +505,10 @@
         <source>SOAP extension not loaded (configure PHP with --enable-soap).</source>
         <target>SOAP rozšíření není k dispozici (konfigurovat v nastavení PHP --enable-soap).</target>
       </trans-unit>
+      <trans-unit id="tl_repository.showIncompatible">
+        <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>Momentálně si prohlížíte rozšíření kompatabilní pouze se současnou verzí Contaa. Chcete-li zobrazit všechna rozšíření, zvolte v nastaveních systému, aby se ukázaly i nekompatabilní rozšíření. </target>
+      </trans-unit>
       <trans-unit id="tl_repository_statext.uptodate">
         <source>Up to date</source>
         <target>Aktuální.</target>

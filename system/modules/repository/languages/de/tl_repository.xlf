@@ -505,6 +505,10 @@
         <source>SOAP extension not loaded (configure PHP with --enable-soap).</source>
         <target>SOAP-Erweiterung nicht geladen (konfigurieren Sie PHP mit --enable-soap).</target>
       </trans-unit>
+      <trans-unit id="tl_repository.showIncompatible">
+        <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>Sie sehen momentan nur Erweiterungen, die mit der aktuellen Contao-Version kompatibel sind. Ändern Sie die Backend-Einstellungen, um alle Erweiterungen anzuzeigen und das Suchergebnis zu erweitern.</target>
+      </trans-unit>
       <trans-unit id="tl_repository_statext.uptodate">
         <source>Up to date</source>
         <target>Aktuell</target>

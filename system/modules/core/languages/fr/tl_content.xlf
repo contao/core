@@ -399,6 +399,7 @@
       </trans-unit>
       <trans-unit id="tl_content.posterSRC.1">
         <source>Show this image instead of the first frame of the video before playback.</source>
+        <target>Afficher cette image avant la lecture à la place de la première vue de la vidéo;</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.0">
         <source>Player size</source>
@@ -406,6 +407,7 @@
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
         <source>Width and height of the media player in pixels (e.g. 640x480). Applies to videos only.</source>
+        <target>Largeur et hauteur du &quot;player&quot; en pixels (par exemple 640x480). Ne concerne que les vidéos.</target>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>
@@ -414,6 +416,32 @@
       <trans-unit id="tl_content.autoplay.1">
         <source>Automatically play the video when the page loads.</source>
         <target>Lire automatiquement la vidéo lorsque la page se charge.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.0">
+        <source>Sliding interval</source>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.1">
+        <source>The time in milliseconds between slides (1000 = 1s). Set to 0 to disable auto sliding.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.0">
+        <source>Transition speed</source>
+        <target>Vitesse de transition</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.1">
+        <source>The transition speed in milliseconds (1000 = 1s). Defaults to 300.</source>
+        <target>La vitesse de transition en millisecondes (1000 = 1s). La valeur par défaut 300.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.0">
+        <source>Slide offset</source>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.1">
+        <source>Here you can make the slider start with a particular slide (counting starts at 0).</source>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.0">
+        <source>Continuous</source>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.1">
+        <source>Make the slider continuous (start all over when reaching the end).</source>
       </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>
@@ -531,6 +559,9 @@
         <source>Image settings</source>
         <target>Paramètres d'image</target>
       </trans-unit>
+      <trans-unit id="tl_content.slider_legend">
+        <source>Slider settings</source>
+      </trans-unit>
       <trans-unit id="tl_content.list_legend">
         <source>List items</source>
         <target>Eléments de la liste</target>
@@ -626,6 +657,12 @@
       <trans-unit id="tl_content.random">
         <source>Random order</source>
         <target>Ordre aléatoire</target>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplate">
+        <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplates">
+        <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
       </trans-unit>
       <trans-unit id="tl_content.new.0">
         <source>New element</source>

@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_user.php" source-language="en">
+    <body>
+      <trans-unit id="tl_user.calendars.0">
+        <source>Allowed calendars</source>
+        <target>ခွင့်ပြုပြီးပြက္ခဒိန်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendars.1">
+        <source>Here you can grant access to one or more calendars.</source>
+        <target>တစ်ခု(သို့)တစ်ခုထက်ပိုသောပြက္ခဒိန်များဝင်ကြည့်ရန်ခွင့်ပြုနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarp.0">
+        <source>Calendar permissions</source>
+        <target>ပြက္ခဒိန်ခွင့်ပြုချက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarp.1">
+        <source>Here you can define the calendar permissions.</source>
+        <target>ပြက္ခဒိန်ခွင့်ပြုချက်များကိုသတ်မှတ်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeeds.0">
+        <source>Allowed RSS feeds</source>
+        <target>ခွင့်ပြုပြီးအာအက်စ်အက်စ်ကုန်ကြမ်းများ</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeeds.1">
+        <source>Here you can grant access to one or more calendar feeds.</source>
+        <target>တစ်ခု(သို့)တစ်ခုထက်ပိုသောပြက္ခဒိန်ကုန်ကြမ်းများဝင်ကြည့်ရန်ခွင့်ပြုနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeedp.0">
+        <source>RSS feed permissions</source>
+        <target>အာအက်စ်အက်စ်ကုန်ကြမ်းများခွင့်ပြုချက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeedp.1">
+        <source>Here you can define the calendar feed permissions.</source>
+        <target>ပြက္ခဒိန်ကုန်ကြမ်းခွင့်ပြုချက်များကိုသတ်မှတ်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendars_legend">
+        <source>Calendar permissions</source>
+        <target>ပြက္ခဒိန်ခွင့်ပြုချက်များ</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

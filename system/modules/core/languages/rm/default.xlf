@@ -63,9 +63,11 @@
       </trans-unit>
       <trans-unit id="ERR.locale">
         <source>Please enter a valid locale such as &quot;en&quot; or &quot;en_US&quot;!</source>
+        <target>Endatescha ina lingua valida sco &quot;rm&quot; u &quot;de-CH&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.language">
         <source>Please enter a valid language code such as &quot;en&quot; or &quot;en-US&quot;!</source>
+        <target>Endatescha in code da lingua valid sco &quot;rm&quot; u &quot;de-CH&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.alias">
         <source>Please enter only alphanumeric characters and the following special characters: .-_</source>
@@ -154,6 +156,10 @@
       <trans-unit id="ERR.all_fields">
         <source>Please select at least one field!</source>
         <target>Tscherna almain in champ!</target>
+      </trans-unit>
+      <trans-unit id="ERR.emptyUpload">
+        <source>Please select at least one file!</source>
+        <target>Tscherna p. pl. almain ina datoteca!</target>
       </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
@@ -301,6 +307,7 @@
       </trans-unit>
       <trans-unit id="CTE.accordionStart.1">
         <source>Generates the opening part of the accordion wrapper.</source>
+        <target>Generescha la part da cumenzament da l'enveloppa da l'accordeon.</target>
       </trans-unit>
       <trans-unit id="CTE.accordionStop.0">
         <source>Wrapper stop</source>
@@ -308,13 +315,15 @@
       </trans-unit>
       <trans-unit id="CTE.accordionStop.1">
         <source>Generates the closing part of the accordion wrapper.</source>
+        <target>Generescha la part da finiziun da l'enveloppa da l'accordeon.</target>
       </trans-unit>
       <trans-unit id="CTE.accordionSingle.0">
         <source>Single element</source>
-        <target>Singul element</target>
+        <target>Element singul</target>
       </trans-unit>
       <trans-unit id="CTE.accordionSingle.1">
         <source>Generates a single accordion element.</source>
+        <target>Generescha in singul element d'accordeon.</target>
       </trans-unit>
       <trans-unit id="CTE.code.0">
         <source>Code</source>
@@ -326,6 +335,7 @@
       </trans-unit>
       <trans-unit id="CTE.slider">
         <source>Content slider</source>
+        <target>Slider da cuntegn</target>
       </trans-unit>
       <trans-unit id="CTE.sliderStart.0">
         <source>Wrapper start</source>
@@ -333,6 +343,7 @@
       </trans-unit>
       <trans-unit id="CTE.sliderStart.1">
         <source>Generates the opening part of the slider wrapper.</source>
+        <target>Generescha la part da cumenzament da l'enveloppa dal slider.</target>
       </trans-unit>
       <trans-unit id="CTE.sliderStop.0">
         <source>Wrapper stop</source>
@@ -340,6 +351,7 @@
       </trans-unit>
       <trans-unit id="CTE.sliderStop.1">
         <source>Generates the closing part of the slider wrapper.</source>
+        <target>Generescha la part da finiziun da l'enveloppa dal slider.</target>
       </trans-unit>
       <trans-unit id="CTE.links">
         <source>Link elements</source>
@@ -539,6 +551,7 @@
       </trans-unit>
       <trans-unit id="FOP.f6">
         <source>Synchronize the file system with the database</source>
+        <target>Sincronisar il sistem da datotecas cun la banca da datas</target>
       </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
@@ -932,6 +945,10 @@
         <source>Column</source>
         <target>Colonna</target>
       </trans-unit>
+      <trans-unit id="MSC.mw_enable">
+        <source>Enable/disable the module</source>
+        <target>Activar/deactivar il module</target>
+      </trans-unit>
       <trans-unit id="MSC.aw_title">
         <source>Title</source>
         <target>Titel</target>
@@ -1128,8 +1145,25 @@
         <source>Last login: %s</source>
         <target>Ultima annunzia: %s</target>
       </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
+        <source>Current login</source>
+        <target>Annunzia actuala</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.1">
+        <source>Current login: %s</source>
+        <target>Annunzia actuala: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginCount">
+        <source>Login attempts</source>
+        <target>Emprovas d'annunzia</target>
+      </trans-unit>
+      <trans-unit id="MSC.locked">
+        <source>Locked</source>
+        <target>Bloccà</target>
+      </trans-unit>
       <trans-unit id="MSC.move">
         <source>Move the item via drag and drop</source>
+        <target>Spustar l'element cun als trair</target>
       </trans-unit>
       <trans-unit id="MSC.move_up.0">
         <source>Move up</source>
@@ -1515,6 +1549,7 @@ Quest e-mail è vegnì generà da Contao. Ti na pos betg respunder directamain s
       </trans-unit>
       <trans-unit id="MSC.fileDatabaseId">
         <source>Database ID</source>
+        <target>ID da la banca da datas</target>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
@@ -1602,9 +1637,11 @@ Quest e-mail è vegnì generà da Contao. Ti na pos betg respunder directamain s
       </trans-unit>
       <trans-unit id="MSC.fileManager">
         <source>Open the file manager</source>
+        <target>Avrir l'administraziun da datotecas</target>
       </trans-unit>
       <trans-unit id="MSC.pageManager">
         <source>Modify the site structure</source>
+        <target>Modifitgar la structura da la pagina</target>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
@@ -1708,9 +1745,11 @@ Quest e-mail è vegnì generà da Contao. Ti na pos betg respunder directamain s
       </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
+        <target>Il &lt;strong&gt;cache intern&lt;/strong&gt; n'è anc betg vegnì creà. Crear il cache vegn a meglierar la prestaziun da l'applicaziun e vegn recumandà fermamain. Sche ti na vuls betg utilisar il cache pos ti deactivar el permanentamain en las opziuns dal back-end.</target>
       </trans-unit>
       <trans-unit id="MSC.buildCacheLink">
         <source>Build the cache</source>
+        <target>Crear il cache</target>
       </trans-unit>
       <trans-unit id="MSC.name">
         <source>Name</source>
@@ -2008,6 +2047,14 @@ Quest e-mail è vegnì generà da Contao. Ti na pos betg respunder directamain s
         <source>Remember me</source>
         <target>Memorisar las datas</target>
       </trans-unit>
+      <trans-unit id="MSC.createdOn">
+        <source>Created on</source>
+        <target>Creà ils</target>
+      </trans-unit>
+      <trans-unit id="MSC.activation">
+        <source>Activated on</source>
+        <target>Activà ils</target>
+      </trans-unit>
       <trans-unit id="MSC.relevance">
         <source>%s relevance</source>
         <target>%s relevanza</target>
@@ -2030,6 +2077,7 @@ Quest e-mail è vegnì generà da Contao. Ti na pos betg respunder directamain s
       </trans-unit>
       <trans-unit id="MSC.location">
         <source>Location</source>
+        <target>Lieu</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>
