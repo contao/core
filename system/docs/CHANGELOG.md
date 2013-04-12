@@ -1637,9 +1637,7 @@ Split the models into `Model` (single record) and `ModelCollection` (multiple
 models) to have a "cleaner" implementaion (thanks to Andreas Schempp).
 
 ### Changed
-
 Merged the "registration", "rss_reader" and "tpl_editor" module into the core
-### Changed
 modules ("backend" and "frontend").
 
 ### New
@@ -1666,14 +1664,10 @@ All core modules are now using namespaces and can thus be overriden.
 ### Changed
 Ported the news extension into its own namespace. Note that this is completely
 optional and does not have to be done with your custom modules! I am just doing
-it so the classes can be overriden by an extension
+it so the classes can be overriden by an extension.
 
 ### Changed
 Use the TemplateLoader in the `getTemplate()` and `getTemplateGroup()` methods.
-
-### New
-Added a merge script (`contao/merge.php`) which automatically prepares Contao 2
-extensions for Contao 3 by creating the `config/autoload.php` file.
 
 ### Improved
 Much nicer debug output.
