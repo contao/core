@@ -38,10 +38,18 @@ class Mysqli extends \Database
 
 	/**
 	 * Connect to the database server and select the database
+	 *
+	 * @throws \Exception If the connection cannot be established
 	 */
 	protected function connect()
 	{
 		@$this->resConnection = new \mysqli($this->arrConfig['dbHost'], $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbDatabase'], $this->arrConfig['dbPort'], $this->arrConfig['dbSocket']);
+
+		if ($this->resConnection->connect_error)
+		{
+			throw new \Exception($this->resConnection->connect_error);
+		}
+
 		@$this->resConnection->set_charset($this->arrConfig['dbCharset']);
 	}
 

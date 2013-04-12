@@ -38,6 +38,8 @@ class Mysql extends \Database
 
 	/**
 	 * Connect to the database server and select the database
+	 *
+	 * @throws \Exception If the connection cannot be established
 	 */
 	protected function connect()
 	{
@@ -62,12 +64,14 @@ class Mysql extends \Database
 			$this->resConnection = @mysql_connect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass']);
 		}
 
-		if (is_resource($this->resConnection))
+		if (mysql_error())
 		{
-			@mysql_query("SET sql_mode=''", $this->resConnection);
-			@mysql_query("SET NAMES " . $this->arrConfig['dbCharset'], $this->resConnection);
-			@mysql_select_db($this->arrConfig['dbDatabase'], $this->resConnection);
+			throw new \Exception(mysql_error());
 		}
+
+		@mysql_query("SET sql_mode=''", $this->resConnection);
+		@mysql_query("SET NAMES " . $this->arrConfig['dbCharset'], $this->resConnection);
+		@mysql_select_db($this->arrConfig['dbDatabase'], $this->resConnection);
 	}
 
 
