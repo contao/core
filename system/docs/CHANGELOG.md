@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Updated
+Updated SwiftMailer to version 4.3.1.
+
 ### Removed
 Removed the MooTools mediaelement.js version.
 
