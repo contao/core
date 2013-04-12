@@ -626,14 +626,14 @@ abstract class System
 		// Add the labels
 		foreach ($units as $unit)
 		{
-			$node = ($strLanguage == 'en') ? $unit->firstChild : $unit->firstChild->nextSibling;
+			$node = ($strLanguage == 'en') ? $unit->getElementsByTagName('source') : $unit->getElementsByTagName('target');
 
-			if ($node === null)
+			if ($node === null || $node->item(0) === null)
 			{
 				continue;
 			}
 
-			$value = str_replace("\n", '\n', $node->nodeValue);
+			$value = str_replace("\n", '\n', $node->item(0)->nodeValue);
 
 			// Some closing </em> tags oddly have an extra space in
 			if (strpos($value, '</ em>') !== false)
