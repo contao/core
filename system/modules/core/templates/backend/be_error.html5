@@ -5,34 +5,36 @@
   <meta charset="utf-8">
   <title>An error occurred</title>
   <meta name="generator" content="Contao Open Source CMS">
-
-  <style>
-    a { text-decoration:none; }
-    div { width:520px; margin:64px auto 18px; padding:24px; background:#ffc; border:1px solid #fc0; font-family:Verdana,sans-serif; font-size:12px; }
-    h1 { font-size:18px; font-weight:normal; margin:0 0 18px; }
-    pre { margin:9px; padding:0; font-size:14px; }
-    p { font-size:11px; color:#999; font-family:Verdana,sans-serif; text-align:center; }
-    ol { margin:0; padding:0 21px; }
-    li { line-height:24px; }
-  </style>
+  <link rel="stylesheet" href="system/themes/default/basic.css">
+  <link rel="stylesheet" href="system/themes/default/error.css">
 
 </head>
-<body>
+<body class="__ua__">
 
-  <div>
+  <div id="header">
+    <h1>Contao Open Source CMS</h1>
+  </div>
 
-    <h1>An error occurred while executing this script!</h1>
+  <div id="container">
 
-    <ol>
-      <li>If you are a Contao user, contact the administrator of your website.</li>
-      <li>Open the file <em>system/logs/error.log</em> and search for a corresponding entry.</li>
-      <li>Open the file <em>system/config/localconfig.php</em> and add the following line:<pre>$GLOBALS['TL_CONFIG']['displayErrors'] = true;</pre></li>
-      <li>Read the <a href="https://contao.org/faq.html" target="_blank">Contao FAQs</a> or visit the <a href="https://contao.org/support.html" target="_blank">Contao support page</a>.</li>
-    </ol>
+    <div id="main">
+      <h2>An error occurred</h2>
+
+      <h3>What's the matter?</h3>
+      <p>An error occurred while executing this script. Something does not work properly.</p>
+
+      <h3>How can I fix the issue?</h3>
+      <p>Open the <code>system/logs/error.log</code> file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</p>
+      <pre>$GLOBALS['TL_CONFIG']['displayErrors'] = true;</pre>
+      <p>However, please be aware that <strong>anyone</strong> will be able to see error messages on your website then!</p>
+
+      <h3>Tell me more, please</h3>
+      <p>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found it in the <code>system/logs/error.log</code> file (see above). If you do not understand the error message or do not know how to fix the problem, search the <a href="https://contao.org/faq.html" target="_blank">Contao FAQs</a> or visit the <a href="https://contao.org/support.html" target="_blank">Contao support page</a> and choose a support option.</p>
+    </div>
+
+    <p class="hint">To customize this notice, create a custom template file named <em>templates/be_error.html5</em>.</p>
 
   </div>
 
-  <p>To customize this notice, create a custom template file named <em>templates/be_error.html5</em>.</p>
-
- </body>
+</body>
 </html>

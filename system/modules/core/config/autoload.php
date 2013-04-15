@@ -241,6 +241,7 @@ TemplateLoader::addFiles(array
 	'be_diff'             => 'system/modules/core/templates/backend',
 	'be_error'            => 'system/modules/core/templates/backend',
 	'be_help'             => 'system/modules/core/templates/backend',
+	'be_incomplete'       => 'system/modules/core/templates/backend',
 	'be_install'          => 'system/modules/core/templates/backend',
 	'be_live_update'      => 'system/modules/core/templates/backend',
 	'be_login'            => 'system/modules/core/templates/backend',

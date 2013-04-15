@@ -5,26 +5,37 @@
   <meta charset="utf-8">
   <title>Invalid request token</title>
   <meta name="generator" content="Contao Open Source CMS">
-
-  <style>
-    a { text-decoration:none; }
-    div { width:520px; margin:64px auto 18px; padding:18px 18px 9px; background:#ffc; border:1px solid #fc0; font-family:Verdana,sans-serif; font-size:12px; }
-    h1 { font-size:18px; font-weight:normal; margin:0 0 18px; }
-    p { line-height:1.5; }
-    .hint { font-size:11px; color:#999; font-family:Verdana,sans-serif; text-align:center; }
-  </style>
+  <link rel="stylesheet" href="system/themes/default/basic.css">
+  <link rel="stylesheet" href="system/themes/default/error.css">
 
 </head>
-<body>
+<body class="__ua__">
 
-  <div>
-    <h1>Invalid request token!</h1>
-    <p>The request token could not be verified. Please <a href="javascript:window.location.href=window.location.href">go back</a> and try again.</p>
-    <p>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</p>
-    <p>For more information, visit the <a href="https://contao.org/faq.html" target="_blank">Contao FAQ page</a> or search the <a href="https://community.contao.org" target="_blank">Contao forum</a>.</p>
+  <div id="header">
+    <h1>Contao Open Source CMS</h1>
   </div>
 
-  <p class="hint">To customize this notice, create a custom template file named <em>templates/be_referer.html5</em>.</p>
+  <div id="container">
+
+    <div id="main">
+
+      <h2>Invalid request token!</h2>
+
+      <h3>What's the matter?</h3>
+      <p>The request token could not be verified.</p>
+
+      <h3>How can I fix the issue?</h3>
+      <p>Please <a href="javascript:window.location.href=window.location.href">click this link</a> and try again. Do not use the back button of your browser.</p>
+
+      <h3>Tell me more, please</h3>
+      <p>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</p>
+      <p>For more information, search the <a href="https://contao.org/faq.html" target="_blank">Contao FAQs</a> or visit the <a href="https://contao.org/support.html" target="_blank">Contao support page</a>.</p>
+
+    </div>
+
+    <p class="hint">To customize this notice, create a custom template file named <em>templates/be_referer.html5</em>.</p>
+
+  </div>
 
 </body>
 </html>

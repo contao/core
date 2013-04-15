@@ -123,6 +123,28 @@ $objConfig = Config::getInstance();
 
 
 /**
+ * Show the "incomplete installation" message
+ */
+if (!$objConfig->isComplete() && Environment::get('script') != 'contao/install.php')
+{
+	if (file_exists(TL_ROOT . '/templates/be_incomplete.html5'))
+	{
+		include TL_ROOT . '/templates/be_incomplete.html5';
+	}
+	elseif (file_exists(TL_ROOT . '/system/modules/core/templates/backend/be_incomplete.html5'))
+	{
+		include TL_ROOT . '/system/modules/core/templates/backend/be_incomplete.html5';
+	}
+	else
+	{
+		echo 'The installation has not been completed. Open the Contao install tool to continue.';
+	}
+
+	exit;
+}
+
+
+/**
  * Initialize the Input and RequestToken class
  */
 Input::initialize();

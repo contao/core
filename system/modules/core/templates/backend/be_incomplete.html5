@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <title>Incomplete installation</title>
+  <meta name="generator" content="Contao Open Source CMS">
+  <link rel="stylesheet" href="system/themes/default/basic.css">
+  <link rel="stylesheet" href="system/themes/default/error.css">
+
+</head>
+<body class="__ua__">
+
+  <div id="header">
+    <h1>Contao Open Source CMS</h1>
+  </div>
+
+  <div id="container">
+
+    <div id="main">
+
+      <h2>Incomplete installation</h2>
+
+      <h3>What's the matter?</h3>
+      <p>The installation has not been completed, therefore Contao cannot work properly.</p>
+
+      <h3>How can I fix the issue?</h3>
+      <p>Point your browser to the following URL:</p>
+      <pre>http://www.domain.com/path-to-installation<b>/contao/install.php</b></pre>
+      <p>This will open the Contao install tool, which will guide you through the installation process.</p>
+
+      <h3>Tell me more, please</h3>
+      <p>For more information, please refer to the <a href="https://contao.org/manual/3.0/installation.html" target="_blank">Contao installation manual</a>.</p>
+
+    </div>
+
+    <p class="hint">To customize this notice, create a custom template file named <em>templates/be_incomplete.html5</em>.</p>
+
+  </div>
+
+</body>
+</html>

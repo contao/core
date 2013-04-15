@@ -40,12 +40,6 @@ class Index extends Backend
 	 */
 	public function __construct()
 	{
-		// Redirect to the install tool
-		if (!Config::getInstance()->isComplete())
-		{
-			$this->redirect('install.php');
-		}
-
 		$this->import('BackendUser', 'User');
 		parent::__construct();
 
