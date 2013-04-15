@@ -169,7 +169,7 @@ colorbox()
 mediaelement()
 {
 	for version in `ls -d $folder/assets/jquery/mediaelement/*`; do
-		copyright="/* MediaElement.js $(basename $version), (c) 2010-2012 John Dyer <http://j.hn>, MIT/GPLv2 */"
+		copyright="/* MediaElement.js $(basename $version), (c) 2010-2013 John Dyer <http://j.hn>, MIT license */"
 
 		# CSS
 		for file in `ls $version/css | grep -v ".min"`; do

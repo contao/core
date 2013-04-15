@@ -236,7 +236,7 @@ Comments with a reply now have a special icon (see #3202).
 Renamed `responsive.css` to `grid.css` (see #5475).
 
 ### Updated
-Updated mediaelement.js to version 2.11.0 (see #5495).
+Updated mediaelement.js to version 2.11.3 (see #5495).
 
 ### New
 Made the number of pagination links configurable (see #4601).
