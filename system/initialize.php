@@ -233,9 +233,9 @@ if ($_POST && !RequestToken::validate(Input::post('REQUEST_TOKEN')))
 		{
 			include TL_ROOT . '/templates/be_referer.html5';
 		}
-		elseif (file_exists(TL_ROOT . '/system/modules/core/templates/be_referer.html5'))
+		elseif (file_exists(TL_ROOT . '/system/modules/core/templates/backend/be_referer.html5'))
 		{
-			include TL_ROOT . '/system/modules/core/templates/be_referer.html5';
+			include TL_ROOT . '/system/modules/core/templates/backend/be_referer.html5';
 		}
 		else
 		{
