@@ -254,8 +254,7 @@
         <target>Stilmallsklass</target>
       </trans-unit>
       <trans-unit id="tl_page.cssClass.1">
-        <source>The class(es) will be used in the navigation menu and the body tag.</source>
-        <target>Här kan du ange en eller flera stilmalls-klasser (CSS-klass) som kommer att användas i navigationsmenyn samt i body-taggen. Klasser anges utan prefix (punkt .).</target>
+        <source>The class(es) will be used in the navigation menu and the &lt;body&gt; tag.</source>
       </trans-unit>
       <trans-unit id="tl_page.sitemap.0">
         <source>Show in sitemap</source>

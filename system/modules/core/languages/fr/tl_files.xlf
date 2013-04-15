@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_files.protected.1">
         <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
-        <target>Empêcher l'accès au dossier via le protocole HTTP. Les fichiers peuvent toujours être disponible avec par exemple l'élément de téléchargements.</target>
+        <target>Empêcher l'accès au dossier via le protocole HTTP. Les fichiers peuvent toujours être disponibles avec par exemple l'élément de téléchargements.</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
@@ -43,6 +43,7 @@
       </trans-unit>
       <trans-unit id="tl_files.editor.1">
         <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
+        <target>Vous pouvez modifier ici le fichier source (pressez F11 pour passer en mode plein écran).</target>
       </trans-unit>
       <trans-unit id="tl_files.upload">
         <source>Upload files</source>
@@ -78,15 +79,19 @@
       </trans-unit>
       <trans-unit id="tl_files.syncAdded">
         <source>Added the file or folder &quot;%s&quot;</source>
+        <target>Fichier ou répertoire &quot;%s&quot; ajouté</target>
       </trans-unit>
       <trans-unit id="tl_files.syncChanged">
         <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+        <target>Hash-code du fichier ou répertoire &quot;%s&quot; mis à jour</target>
       </trans-unit>
       <trans-unit id="tl_files.syncUnchanged">
         <source>Found the file or folder &quot;%s&quot;</source>
+        <target>Fichier ou répertoire &quot;%s&quot; trouvé</target>
       </trans-unit>
       <trans-unit id="tl_files.syncMoved">
         <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>Fichier ou répertoire &quot;%s&quot; trouvé à &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncDeleted">
         <source>Removed the file or folder &quot;%s&quot;</source>
@@ -110,7 +115,7 @@
       </trans-unit>
       <trans-unit id="tl_files.new.1">
         <source>Create a new folder</source>
-        <target>Créer un nouveau répertoire.</target>
+        <target>Créer un nouveau répertoire</target>
       </trans-unit>
       <trans-unit id="tl_files.cut.0">
         <source>Move file or folder</source>

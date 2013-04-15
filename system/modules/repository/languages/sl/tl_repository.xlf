@@ -54,8 +54,7 @@
         <target>Ime</target>
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
-        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are prefered. Additionally, the characters _ and - are allowed within the name.</source>
-        <target>Imena razširitev se morajo začeti z a-z, A-Z ali 0-9, zaželene pa so male črke. V imenu pa sta dovoljena sta tudi znaka _ in - .</target>
+        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
         <source>Popularity</source>
@@ -102,8 +101,7 @@
         <target>Uporabnost</target>
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
-        <source>Does the extension meet the Contao standards for usability and accessability?</source>
-        <target>Ali ta razširitev izpolnjuje Contao standarde uporabnosti in dostopnosti?</target>
+        <source>Does the extension meet the Contao standards for usability and accessibility?</source>
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
         <source>Version</source>

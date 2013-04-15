@@ -54,8 +54,8 @@
         <target>Naam</target>
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
-        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are prefered. Additionally, the characters _ and - are allowed within the name.</source>
-        <target>Namen van extensies moeten beginnen met a-z, A-Z of 0-9, waarbij kleine letters de voorkeur verdienen. De karakters _ en - zijn ook toegestaan in de naam.</target>
+        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
+        <target>Namen van extensies moeten beginnen met a-z, A-Z of 0-9, waarbij kleine letters de voorkeur verdienen. De karakters _ en - zijn toegestaan.</target>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
         <source>Popularity</source>
@@ -102,7 +102,7 @@
         <target>Bruikbaarheid</target>
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
-        <source>Does the extension meet the Contao standards for usability and accessability?</source>
+        <source>Does the extension meet the Contao standards for usability and accessibility?</source>
         <target>Voldoet de extensie aan de Contao standaards voor bruikbaarheid en toegankelijkheid?</target>
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
@@ -507,6 +507,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.showIncompatible">
         <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>Momenteel ziet u extensies welke compatibel zijn met de huidige Contao versie. Wijzig in het back-end de instellingen om de zoekresultaten uit te breiden naar alle extensies.</target>
       </trans-unit>
       <trans-unit id="tl_repository_statext.uptodate">
         <source>Up to date</source>

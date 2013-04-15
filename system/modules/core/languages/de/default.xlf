@@ -157,6 +157,10 @@
         <source>Please select at least one field!</source>
         <target>Bitte wählen Sie mindestens ein Feld aus!</target>
       </trans-unit>
+      <trans-unit id="ERR.emptyUpload">
+        <source>Please select at least one file!</source>
+        <target>Bitte wählen Sie mindestens eine Datei aus!</target>
+      </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
         <target>Der Alias &quot;%s&quot; existiert bereits!</target>
@@ -941,6 +945,10 @@
         <source>Column</source>
         <target>Spalte</target>
       </trans-unit>
+      <trans-unit id="MSC.mw_enable">
+        <source>Enable/disable the module</source>
+        <target>Das Modul aktivieren/deaktivieren</target>
+      </trans-unit>
       <trans-unit id="MSC.aw_title">
         <source>Title</source>
         <target>Titel</target>
@@ -1136,6 +1144,22 @@
       <trans-unit id="MSC.lastLogin.1">
         <source>Last login: %s</source>
         <target>Letzte Anmeldung: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
+        <source>Current login</source>
+        <target>Aktuelle Anmeldung</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.1">
+        <source>Current login: %s</source>
+        <target>Aktuelle Anmeldung: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginCount">
+        <source>Login attempts</source>
+        <target>Anmeldeversuche</target>
+      </trans-unit>
+      <trans-unit id="MSC.locked">
+        <source>Locked</source>
+        <target>Gesperrt</target>
       </trans-unit>
       <trans-unit id="MSC.move">
         <source>Move the item via drag and drop</source>
@@ -2022,6 +2046,14 @@ Diese E-Mail wurde von Contao generiert. Sie können nicht darauf antworten.
       <trans-unit id="MSC.autologin">
         <source>Remember me</source>
         <target>Angemeldet bleiben</target>
+      </trans-unit>
+      <trans-unit id="MSC.createdOn">
+        <source>Created on</source>
+        <target>Erstellt am</target>
+      </trans-unit>
+      <trans-unit id="MSC.activation">
+        <source>Activated on</source>
+        <target>Aktiviert am</target>
       </trans-unit>
       <trans-unit id="MSC.relevance">
         <source>%s relevance</source>

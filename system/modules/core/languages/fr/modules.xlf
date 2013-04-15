@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="MOD.themes.1">
         <source>Manage front end modules, style sheets, page layouts and templates</source>
-        <target>Gérer les modules, les feuilles de styles, les présentations de page et les modèles.</target>
+        <target>Gérer les modules, les feuilles de style, les présentations de page et les modèles.</target>
       </trans-unit>
       <trans-unit id="MOD.page.0">
         <source>Site structure</source>

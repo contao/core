@@ -6,12 +6,10 @@
         <target>%d événement(s)</target>
       </trans-unit>
       <trans-unit id="MSC.cal_previous">
-        <source>&amp;lt;</source>
-        <target>&amp;lt;</target>
+        <source>&lt;</source>
       </trans-unit>
       <trans-unit id="MSC.cal_next">
-        <source>&amp;gt;</source>
-        <target>&amp;gt;</target>
+        <source>&gt;</source>
       </trans-unit>
       <trans-unit id="MSC.cal_emptyDay">
         <source>There are no events on this day.</source>
@@ -19,15 +17,15 @@
       </trans-unit>
       <trans-unit id="MSC.cal_emptyWeek">
         <source>There are no events for this week.</source>
-        <target>Il n'y a pas d'événements pour cette semaine.</target>
+        <target>Il n'y a pas d'événement pour cette semaine.</target>
       </trans-unit>
       <trans-unit id="MSC.cal_emptyMonth">
         <source>There are no events for this month.</source>
-        <target>Il n'y a pas d'événements pour ce mois.</target>
+        <target>Il n'y a pas d'événement pour ce mois.</target>
       </trans-unit>
       <trans-unit id="MSC.cal_emptyYear">
         <source>There are no events for this year.</source>
-        <target>Il n'y a pas d'événements pour cette année.</target>
+        <target>Il n'y a pas d'événement pour cette année.</target>
       </trans-unit>
       <trans-unit id="MSC.cal_empty">
         <source>Currently there are no events.</source>

@@ -286,8 +286,7 @@
         <target>链接标题</target>
       </trans-unit>
       <trans-unit id="tl_content.titleText.1">
-        <source>The link title is added as title attribute in the HTML markup.</source>
-        <target>链接标题通过设置HTML标记中的title属性来添加。</target>
+        <source>The link title is added as &lt;em&gt;title&lt;/em&gt; attribute in the HTML markup.</source>
       </trans-unit>
       <trans-unit id="tl_content.embed.0">
         <source>Embed the link</source>
@@ -302,8 +301,7 @@
         <target>高亮盒</target>
       </trans-unit>
       <trans-unit id="tl_content.rel.1">
-        <source>To trigger the lightbox, enter a rel attribute here.</source>
-        <target>要触发高亮显示，请在此处输入一个关联属性。</target>
+        <source>To trigger the lightbox, enter a &lt;em&gt;rel&lt;/em&gt; attribute here.</source>
       </trans-unit>
       <trans-unit id="tl_content.useImage.0">
         <source>Create an image link</source>

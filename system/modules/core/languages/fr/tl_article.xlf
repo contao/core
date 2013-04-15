@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_article.printable.1">
         <source>Here you can choose which options are available.</source>
-        <target>Ajouter un lien pour exporter l'article dans un fichier PDF.</target>
+        <target>Choisir les options qui sont disponibles.</target>
       </trans-unit>
       <trans-unit id="tl_article.guests.0">
         <source>Show to guests only</source>
@@ -79,12 +79,15 @@
       </trans-unit>
       <trans-unit id="tl_article.guests.1">
         <source>Hide the article if a member is logged in.</source>
+        <target>Ne pas afficher l'article si un membre est connecté.</target>
       </trans-unit>
       <trans-unit id="tl_article.protected.0">
         <source>Protect article</source>
+        <target>Protéger l'article</target>
       </trans-unit>
       <trans-unit id="tl_article.protected.1">
         <source>Show the article to certain member groups only.</source>
+        <target>Montre l'article aux membres de certains groupes seulement.</target>
       </trans-unit>
       <trans-unit id="tl_article.groups.0">
         <source>Allowed member groups</source>
@@ -92,6 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_article.groups.1">
         <source>These groups will be able to see the article.</source>
+        <target>Ces groupes seront autorisés à voir l'article.</target>
       </trans-unit>
       <trans-unit id="tl_article.cssID.0">
         <source>CSS ID/class</source>
@@ -139,7 +143,7 @@
       </trans-unit>
       <trans-unit id="tl_article.tstamp.1">
         <source>Date and time of the latest revision</source>
-        <target>Date et heure de la dernière révision.</target>
+        <target>Date et heure de la dernière révision</target>
       </trans-unit>
       <trans-unit id="tl_article.title_legend">
         <source>Title and author</source>
@@ -175,7 +179,7 @@
       </trans-unit>
       <trans-unit id="tl_article.pdf">
         <source>Export as PDF</source>
-        <target>Exporter en PDF</target>
+        <target>Exporter au format PDF</target>
       </trans-unit>
       <trans-unit id="tl_article.facebook">
         <source>Share on Facebook</source>

@@ -121,6 +121,10 @@
         <source>Set to 0 for unlimited recurrences.</source>
         <target>Geef het aantal herhalingen op (0 = onbeperkt).</target>
       </trans-unit>
+      <trans-unit id="tl_calendar_events.repeatEnd">
+        <source>End of recurring event</source>
+        <target>Einde van het huidig event</target>
+      </trans-unit>
       <trans-unit id="tl_calendar_events.addEnclosure.0">
         <source>Add enclosures</source>
         <target>Bijlage toevoegen</target>

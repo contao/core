@@ -150,8 +150,7 @@
         <target>Zamik, obroba in poravnava</target>
       </trans-unit>
       <trans-unit id="tl_style.alignment.1">
-        <source>Margin, padding, align, vertical-align and text-align.</source>
-        <target>Zamik, obroba, poravnava, navpična poravnava in poravnava besedila</target>
+        <source>Margin, padding, align, vertical-align, text-align and whitespace.</source>
       </trans-unit>
       <trans-unit id="tl_style.margin.0">
         <source>Margin</source>
@@ -192,6 +191,12 @@
       <trans-unit id="tl_style.textalign.1">
         <source>Here you can choose the horizontal text alignment.</source>
         <target>Tu lahko izberete vodoravno poravnavo besedila.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.0">
+        <source>White-space</source>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.1">
+        <source>Here you can define how white-space inside an element is handled.</source>
       </trans-unit>
       <trans-unit id="tl_style.background.0">
         <source>Background</source>
@@ -368,14 +373,6 @@
       <trans-unit id="tl_style.fontstyle.1">
         <source>Here you can choose one or more font styles.</source>
         <target>Tu lahko izberete enega ali več slogov pisave.</target>
-      </trans-unit>
-      <trans-unit id="tl_style.whitespace.0">
-        <source>Disable automatic line feed</source>
-        <target>Onemogoči samodejni preskok v novo vrstico</target>
-      </trans-unit>
-      <trans-unit id="tl_style.whitespace.1">
-        <source>Do not wrap words automatically.</source>
-        <target>Brez samodejnega ovijanja besedila (Wrap).</target>
       </trans-unit>
       <trans-unit id="tl_style.texttransform.0">
         <source>Text transform</source>

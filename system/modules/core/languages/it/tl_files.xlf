@@ -79,15 +79,19 @@
       </trans-unit>
       <trans-unit id="tl_files.syncAdded">
         <source>Added the file or folder &quot;%s&quot;</source>
+        <target>Aggiunto il file o la cartella &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncChanged">
         <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+        <target>Aggiornato l'hash del file o della cartella &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncUnchanged">
         <source>Found the file or folder &quot;%s&quot;</source>
+        <target>Trovato il file o la cartella &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncMoved">
         <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>Trovato il file o la cartella &quot;%s&quot; in &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncDeleted">
         <source>Removed the file or folder &quot;%s&quot;</source>

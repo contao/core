@@ -150,8 +150,8 @@
         <target>Marges, padding en uitlijning</target>
       </trans-unit>
       <trans-unit id="tl_style.alignment.1">
-        <source>Margin, padding, align, vertical-align and text-align.</source>
-        <target>Bewerkt margin (buitenafstand), padding (binnenafstand) en uitlijning (margin, padding, align, text-align, vertical-align).</target>
+        <source>Margin, padding, align, vertical-align, text-align and whitespace.</source>
+        <target>Marges, padding, uitlijning, verticale uitlijning, tekst uitlijning en witruimte.</target>
       </trans-unit>
       <trans-unit id="tl_style.margin.0">
         <source>Margin</source>
@@ -192,6 +192,14 @@
       <trans-unit id="tl_style.textalign.1">
         <source>Here you can choose the horizontal text alignment.</source>
         <target>Definieert de horizontale tekst uitlijning</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.0">
+        <source>White-space</source>
+        <target>Witruimte</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.1">
+        <source>Here you can define how white-space inside an element is handled.</source>
+        <target>Bepaal de witruimte binnen een element.</target>
       </trans-unit>
       <trans-unit id="tl_style.background.0">
         <source>Background</source>
@@ -368,14 +376,6 @@
       <trans-unit id="tl_style.fontstyle.1">
         <source>Here you can choose one or more font styles.</source>
         <target>Selecteer een of meerdere lettertypes.</target>
-      </trans-unit>
-      <trans-unit id="tl_style.whitespace.0">
-        <source>Disable automatic line feed</source>
-        <target>Schakel automatische terugloop uit.</target>
-      </trans-unit>
-      <trans-unit id="tl_style.whitespace.1">
-        <source>Do not wrap words automatically.</source>
-        <target>Als u deze optie kiest is er geen automatische terugloop van tekst.</target>
       </trans-unit>
       <trans-unit id="tl_style.texttransform.0">
         <source>Text transform</source>

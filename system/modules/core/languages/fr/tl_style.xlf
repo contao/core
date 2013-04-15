@@ -150,8 +150,8 @@
         <target>Marge, remplissage et alignement</target>
       </trans-unit>
       <trans-unit id="tl_style.alignment.1">
-        <source>Margin, padding, align, vertical-align and text-align.</source>
-        <target>Marge, remplissage, alignement, alignement vertical et alignement du texte.</target>
+        <source>Margin, padding, align, vertical-align, text-align and whitespace.</source>
+        <target>Marge, remplissage, alignement, alignement vertical, alignement du texte et espace blanc.</target>
       </trans-unit>
       <trans-unit id="tl_style.margin.0">
         <source>Margin</source>
@@ -192,6 +192,14 @@
       <trans-unit id="tl_style.textalign.1">
         <source>Here you can choose the horizontal text alignment.</source>
         <target>Définir l'alignement horizontal d'un texte.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.0">
+        <source>White-space</source>
+        <target>Espace blanc</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.1">
+        <source>Here you can define how white-space inside an element is handled.</source>
+        <target>Définir comment l'espace blanc intérieur d'un élément est géré.</target>
       </trans-unit>
       <trans-unit id="tl_style.background.0">
         <source>Background</source>
@@ -368,14 +376,6 @@
       <trans-unit id="tl_style.fontstyle.1">
         <source>Here you can choose one or more font styles.</source>
         <target>Choisir un ou plusieurs styles de police de caractère.</target>
-      </trans-unit>
-      <trans-unit id="tl_style.whitespace.0">
-        <source>Disable automatic line feed</source>
-        <target>Annuler le retour à la ligne automatique</target>
-      </trans-unit>
-      <trans-unit id="tl_style.whitespace.1">
-        <source>Do not wrap words automatically.</source>
-        <target>Supprimer le retour à la ligne automatique.</target>
       </trans-unit>
       <trans-unit id="tl_style.texttransform.0">
         <source>Text transform</source>

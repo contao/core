@@ -398,8 +398,7 @@
         <target>域大小</target>
       </trans-unit>
       <trans-unit id="tl_form_field.fSize.1">
-        <source>Here you can enter the size of the upload field (size attribute).</source>
-        <target>此处您可以输入上载域的大小(size属性)</target>
+        <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
       </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>

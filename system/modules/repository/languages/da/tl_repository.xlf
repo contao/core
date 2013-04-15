@@ -54,8 +54,7 @@
         <target>Navn</target>
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
-        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are prefered. Additionally, the characters _ and - are allowed within the name.</source>
-        <target>Udvidelsens navn skal starte med a-z, A-Z eller 0-9, hvor små bogstaver foretrækkes. Endvidere er karaktererne _ og - tilladt inde i navnet.</target>
+        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
         <source>Popularity</source>
@@ -102,8 +101,7 @@
         <target>Andvendelighed</target>
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
-        <source>Does the extension meet the Contao standards for usability and accessability?</source>
-        <target>Imødekommer udvidelsen TYPOlights standarder for anvendelighed og tilgængelighed?</target>
+        <source>Does the extension meet the Contao standards for usability and accessibility?</source>
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
         <source>Version</source>
@@ -507,6 +505,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.showIncompatible">
         <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>Du ser lige nu kun udvidelser der er kompatible med den nuværende Contao version. Rediger back end indstillingerne for at udvide resultaterne til at vise alle udvidelser.</target>
       </trans-unit>
       <trans-unit id="tl_repository_statext.uptodate">
         <source>Up to date</source>

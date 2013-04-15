@@ -535,8 +535,7 @@ Notera att exkluderade resurser inte kan användas i innehållselement som t.ex.
         <target>Live Update URL</target>
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
-        <source>Here you can enter the live update URL.</source>
-        <target>Här kan du ange Live Update URL:en.</target>
+        <source>Here you can enter the Live Update URL.</source>
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>

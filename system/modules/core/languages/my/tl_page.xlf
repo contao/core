@@ -254,8 +254,7 @@
         <target>စီအက်အက်စ်အမျိုးအစား</target>
       </trans-unit>
       <trans-unit id="tl_page.cssClass.1">
-        <source>The class(es) will be used in the navigation menu and the body tag.</source>
-        <target>ယခုအမျိုးအစား(များ)သွားလာခြင်းဇယားနှင့်အလယ်အမည်တွင်သံုးမည်။</target>
+        <source>The class(es) will be used in the navigation menu and the &lt;body&gt; tag.</source>
       </trans-unit>
       <trans-unit id="tl_page.sitemap.0">
         <source>Show in sitemap</source>

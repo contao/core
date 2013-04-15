@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_ignoreDynamic.1">
         <source>Do not switch the time period based on the date/month/year URL parameters.</source>
-        <target>Ne pas changer la période de temps basé sur les paramètres d'URL jour/mois/année.</target>
+        <target>Ne pas changer la période de temps basée sur les paramètres d'URL jour/mois/année.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_order.0">
         <source>Sort order</source>
@@ -67,7 +67,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_template.0">
         <source>Event template</source>
-        <target>Modèle d'événement</target>
+        <target>Modèle d'événements</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_template.1">
         <source>Here you can select the event template.</source>
@@ -151,9 +151,11 @@
       </trans-unit>
       <trans-unit id="tl_module.next_next_month">
         <source>of the next month</source>
+        <target>du mois suivant</target>
       </trans-unit>
       <trans-unit id="tl_module.next_next_year">
         <source>of the next year</source>
+        <target>de l'année suivante</target>
       </trans-unit>
       <trans-unit id="tl_module.next_all">
         <source>All upcoming events</source>
@@ -201,13 +203,15 @@
       </trans-unit>
       <trans-unit id="tl_module.past_prev_month">
         <source>of the previous month</source>
+        <target>du mois précédent</target>
       </trans-unit>
       <trans-unit id="tl_module.past_prev_year">
         <source>of the previous year</source>
+        <target>de l'année précédente</target>
       </trans-unit>
       <trans-unit id="tl_module.past_all">
         <source>All past events</source>
-        <target>Tous les évènements passés</target>
+        <target>Tous les événements passés</target>
       </trans-unit>
     </body>
   </file>

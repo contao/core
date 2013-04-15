@@ -34,12 +34,10 @@
         <target>%d artikel(ar)</target>
       </trans-unit>
       <trans-unit id="MSC.news_previous">
-        <source>&amp;lt;</source>
-        <target>«</target>
+        <source>&lt;</source>
       </trans-unit>
       <trans-unit id="MSC.news_next">
-        <source>&amp;gt;</source>
-        <target>»</target>
+        <source>&gt;</source>
       </trans-unit>
     </body>
   </file>

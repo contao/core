@@ -6,12 +6,10 @@
         <target>%d dogodek(ov)</target>
       </trans-unit>
       <trans-unit id="MSC.cal_previous">
-        <source>&amp;lt;</source>
-        <target>&lt;</target>
+        <source>&lt;</source>
       </trans-unit>
       <trans-unit id="MSC.cal_next">
-        <source>&amp;gt;</source>
-        <target>&gt;</target>
+        <source>&gt;</source>
       </trans-unit>
       <trans-unit id="MSC.cal_emptyDay">
         <source>There are no events on this day.</source>

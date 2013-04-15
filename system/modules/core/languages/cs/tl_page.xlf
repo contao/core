@@ -254,8 +254,7 @@
         <target>Kaskádovité styly</target>
       </trans-unit>
       <trans-unit id="tl_page.cssClass.1">
-        <source>The class(es) will be used in the navigation menu and the body tag.</source>
-        <target>Tyto styly budou zahrnuty do navigace a do tagu body.</target>
+        <source>The class(es) will be used in the navigation menu and the &lt;body&gt; tag.</source>
       </trans-unit>
       <trans-unit id="tl_page.sitemap.0">
         <source>Show in sitemap</source>

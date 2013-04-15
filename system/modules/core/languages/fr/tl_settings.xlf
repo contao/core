@@ -534,8 +534,8 @@
         <target>URL de la mise à jour automatique (Live Update)</target>
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
-        <source>Here you can enter the live update URL.</source>
-        <target>Saisir l'URL de la mise à jour automatique (Live Update).</target>
+        <source>Here you can enter the Live Update URL.</source>
+        <target>Saisir l'URL de la mise à jour automatique Live Update.</target>
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>

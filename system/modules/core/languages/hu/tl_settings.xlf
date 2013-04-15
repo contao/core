@@ -115,9 +115,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
         <source>Exclude folders from synchronization</source>
+        <target>Kivéve mappák szinkronizálása</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <target>Itt tudja megadni vesszővel elválasztva azon könyvtárak listáját, amelyek mentesülnek a fájlok szinkronizálása alól(pl. &lt;em&gt;mellékletek,music_academy&lt;/em&gt;). Vegye figyelembe, hogy a kizárt erőforrások nem használhatóak pl.: képként, vagy letölthető elemként!</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
@@ -177,15 +179,19 @@
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>
+        <target>Ne irányítsa át az üres URL-eket</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.1">
         <source>For an empty URL display the website instead of redirecting to the language root page (not recommended).</source>
+        <target>Egy üres URL honlapján való megjelenítése helyett irányításon át a nyelvi gyökér oldalra (nem ajánlott).</target>
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.0">
         <source>Enable auto_item</source>
+        <target>auto_item engedélyezése</target>
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.1">
         <source>Skip the &lt;em&gt;items/&lt;/em&gt; or &lt;em&gt;events/&lt;/em&gt; fragment in the URL and automatically discover the item based on the &lt;em&gt;auto_item&lt;/em&gt; parameter.</source>
+        <target>Kihagyja az &lt;em&gt;items/&lt;/em&gt; vagy &lt;em&gt;események/&lt;/ em&gt; jelöléseket az URL címből, és automatikusan beállítja az elem alapján az &lt;em&gt;auto_item&lt;/em&gt; paramétert.</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableAlias.0">
         <source>Disable page alias usage</source>
@@ -528,8 +534,7 @@
         <target>Online frissítés URL</target>
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
-        <source>Here you can enter the live update URL.</source>
-        <target>Itt lehet megadni az Online frissítés URL-t.</target>
+        <source>Here you can enter the Live Update URL.</source>
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>

@@ -157,6 +157,9 @@
         <source>Please select at least one field!</source>
         <target>Zaznacz przynajmniej jedno pole!</target>
       </trans-unit>
+      <trans-unit id="ERR.emptyUpload">
+        <source>Please select at least one file!</source>
+      </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
         <target>Alias strony &quot;%s&quot; już istnieje!</target>
@@ -303,6 +306,7 @@
       </trans-unit>
       <trans-unit id="CTE.accordionStart.1">
         <source>Generates the opening part of the accordion wrapper.</source>
+        <target>Generuje część otwierającą akordeon.</target>
       </trans-unit>
       <trans-unit id="CTE.accordionStop.0">
         <source>Wrapper stop</source>
@@ -310,6 +314,7 @@
       </trans-unit>
       <trans-unit id="CTE.accordionStop.1">
         <source>Generates the closing part of the accordion wrapper.</source>
+        <target>Generuje część zamykającą akordeon.</target>
       </trans-unit>
       <trans-unit id="CTE.accordionSingle.0">
         <source>Single element</source>
@@ -317,6 +322,7 @@
       </trans-unit>
       <trans-unit id="CTE.accordionSingle.1">
         <source>Generates a single accordion element.</source>
+        <target>Generuje pojedynczy element akordeonu.</target>
       </trans-unit>
       <trans-unit id="CTE.code.0">
         <source>Code</source>
@@ -328,6 +334,7 @@
       </trans-unit>
       <trans-unit id="CTE.slider">
         <source>Content slider</source>
+        <target>Slider</target>
       </trans-unit>
       <trans-unit id="CTE.sliderStart.0">
         <source>Wrapper start</source>
@@ -335,6 +342,7 @@
       </trans-unit>
       <trans-unit id="CTE.sliderStart.1">
         <source>Generates the opening part of the slider wrapper.</source>
+        <target>Generuje część otwierającą slider.</target>
       </trans-unit>
       <trans-unit id="CTE.sliderStop.0">
         <source>Wrapper stop</source>
@@ -342,6 +350,7 @@
       </trans-unit>
       <trans-unit id="CTE.sliderStop.1">
         <source>Generates the closing part of the slider wrapper.</source>
+        <target>Generuje część zamykającą slider.</target>
       </trans-unit>
       <trans-unit id="CTE.links">
         <source>Link elements</source>
@@ -541,6 +550,7 @@
       </trans-unit>
       <trans-unit id="FOP.f6">
         <source>Synchronize the file system with the database</source>
+        <target>Synchronizuj system plików z bazą danych</target>
       </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
@@ -934,6 +944,9 @@
         <source>Column</source>
         <target>Kolumna</target>
       </trans-unit>
+      <trans-unit id="MSC.mw_enable">
+        <source>Enable/disable the module</source>
+      </trans-unit>
       <trans-unit id="MSC.aw_title">
         <source>Title</source>
         <target>Tytuł</target>
@@ -1130,8 +1143,21 @@
         <source>Last login: %s</source>
         <target>Ostatnie logowanie: %s</target>
       </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
+        <source>Current login</source>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.1">
+        <source>Current login: %s</source>
+      </trans-unit>
+      <trans-unit id="MSC.loginCount">
+        <source>Login attempts</source>
+      </trans-unit>
+      <trans-unit id="MSC.locked">
+        <source>Locked</source>
+      </trans-unit>
       <trans-unit id="MSC.move">
         <source>Move the item via drag and drop</source>
+        <target>Przenieś rekord metodą przeciągnij i upuść</target>
       </trans-unit>
       <trans-unit id="MSC.move_up.0">
         <source>Move up</source>
@@ -1517,6 +1543,7 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
       </trans-unit>
       <trans-unit id="MSC.fileDatabaseId">
         <source>Database ID</source>
+        <target>ID bazy danych</target>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
@@ -1604,9 +1631,11 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
       </trans-unit>
       <trans-unit id="MSC.fileManager">
         <source>Open the file manager</source>
+        <target>Otwórz menadżer plików</target>
       </trans-unit>
       <trans-unit id="MSC.pageManager">
         <source>Modify the site structure</source>
+        <target>Modyfikuj strukturę stron</target>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
@@ -1710,9 +1739,11 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
       </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
+        <target>&lt;strong&gt;Podręczna pamięć wewnętrzna&lt;/strong&gt; nie została jeszcze zbudowana. Budowanie pamięci jest wysoce zalecany, gdyż zdecydowanie przyspieszy działanie aplikacji. Jeśli nie chcesz używać pamięci podręcznej, możesz ją permanentnie wyłączyć w ustawieniach panelu administratora.</target>
       </trans-unit>
       <trans-unit id="MSC.buildCacheLink">
         <source>Build the cache</source>
+        <target>Buduj pamięć podręczną</target>
       </trans-unit>
       <trans-unit id="MSC.name">
         <source>Name</source>
@@ -2010,6 +2041,12 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
         <source>Remember me</source>
         <target>Zapamiętaj mnie</target>
       </trans-unit>
+      <trans-unit id="MSC.createdOn">
+        <source>Created on</source>
+      </trans-unit>
+      <trans-unit id="MSC.activation">
+        <source>Activated on</source>
+      </trans-unit>
       <trans-unit id="MSC.relevance">
         <source>%s relevance</source>
         <target>%s znaczenie</target>
@@ -2032,6 +2069,7 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
       </trans-unit>
       <trans-unit id="MSC.location">
         <source>Location</source>
+        <target>Lokacja</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

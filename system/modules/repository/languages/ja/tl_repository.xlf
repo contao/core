@@ -54,7 +54,7 @@
         <target>名前</target>
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
-        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are prefered. Additionally, the characters _ and - are allowed within the name.</source>
+        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
         <target>機能拡張の名前は小文字で始めるのが好ましいですが、aからz、AからZ、0から9で始まめなければなりません。加えて、名前の途中には-(ハイフン)と_(下線)を使用できます。</target>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
@@ -102,7 +102,7 @@
         <target>有用性</target>
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
-        <source>Does the extension meet the Contao standards for usability and accessability?</source>
+        <source>Does the extension meet the Contao standards for usability and accessibility?</source>
         <target>この機能拡張は有用性さアクセスビリティの面でContaoの標準に合致していますか?</target>
       </trans-unit>
       <trans-unit id="tl_repository.version.0">

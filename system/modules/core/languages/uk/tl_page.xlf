@@ -254,8 +254,7 @@
         <target>CSS class</target>
       </trans-unit>
       <trans-unit id="tl_page.cssClass.1">
-        <source>The class(es) will be used in the navigation menu and the body tag.</source>
-        <target>Якщо ввести тут назву класу (class), воно буде використане як атрибут класу в меню навігації. Таким чином, Ви можете відформатувати пункти навігації індивідуально.</target>
+        <source>The class(es) will be used in the navigation menu and the &lt;body&gt; tag.</source>
       </trans-unit>
       <trans-unit id="tl_page.sitemap.0">
         <source>Show in sitemap</source>

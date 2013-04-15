@@ -11,9 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_files.protected.0">
         <source>Protected</source>
+        <target>Védett</target>
       </trans-unit>
       <trans-unit id="tl_files.protected.1">
         <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
+        <target>A könyvtár HTTP-n keresztüli elérésének megakadályozása. A fájlok továbbra is elérhetőek maradnak, pl. a letölthető elemek.</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
@@ -25,6 +27,7 @@
       </trans-unit>
       <trans-unit id="tl_files.htaccessInfo">
         <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
+        <target>Könyvtár védelmének megvalósítása .htaccess fájl hozzáadásával, amely megtagadja a hozzáférést a mappához. Amennyiben nem Apache szervert használ, előfordulhat hogy ez a módszer esetleg nem működik egyáltalán, vagy a szerver beállításainak módosítása szükséges. Kérjük duplán ellenőrizze, mielőtt feltölti a nem publikus anyagait!</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
@@ -40,6 +43,7 @@
       </trans-unit>
       <trans-unit id="tl_files.editor.1">
         <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
+        <target>Itt tudja szerkeszteni a forrás fájlt (nyomja  meg az F11 gombot a teljes képernyős módba váltáshoz).</target>
       </trans-unit>
       <trans-unit id="tl_files.upload">
         <source>Upload files</source>
@@ -75,15 +79,19 @@
       </trans-unit>
       <trans-unit id="tl_files.syncAdded">
         <source>Added the file or folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot; fájl vagy mappa hozzáadása</target>
       </trans-unit>
       <trans-unit id="tl_files.syncChanged">
         <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+        <target>Frissült a &quot;%s&quot; fájl vagy könyvtár hash információja</target>
       </trans-unit>
       <trans-unit id="tl_files.syncUnchanged">
         <source>Found the file or folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot; fájl vagy könyvtár megtalálva</target>
       </trans-unit>
       <trans-unit id="tl_files.syncMoved">
         <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>A &quot;%s&quot; fájl vagy mappa megtalálva itt: &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncDeleted">
         <source>Removed the file or folder &quot;%s&quot;</source>
@@ -91,12 +99,15 @@
       </trans-unit>
       <trans-unit id="tl_files.syncComplete">
         <source>The synchronization has been completed</source>
+        <target>A szinkronizálás elkészült</target>
       </trans-unit>
       <trans-unit id="tl_files.syncResult">
         <source>&lt;strong&gt;Result:&lt;/strong&gt; %s added | %s modified | %s unchanged | %s moved | %s deleted</source>
+        <target>&lt;strong&gt;Eredmény:&lt;/strong&gt; %s hozzáadva | %s módosítva | %s változatlan | %s áthelyezve | %s törölve</target>
       </trans-unit>
       <trans-unit id="tl_files.syncShowUnchanged">
         <source>Show unchanged</source>
+        <target>Változatlanok mutatása</target>
       </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>

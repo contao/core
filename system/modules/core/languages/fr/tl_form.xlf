@@ -126,8 +126,8 @@
         <target>Désactiver la validation HTML5</target>
       </trans-unit>
       <trans-unit id="tl_form.novalidate.1">
-        <source>Add the &quot;novalidate&quot; attribute to the form tag.</source>
-        <target>Ajouter l'attribut &quot;novalidate&quot; à la balise form.</target>
+        <source>Add the &lt;em&gt;novalidate&lt;/em&gt; attribute to the form tag.</source>
+        <target>Ajouter l'attribut &lt;em&gt;novalidate&lt;/em&gt; à la balise form.</target>
       </trans-unit>
       <trans-unit id="tl_form.attributes.0">
         <source>CSS ID/class</source>

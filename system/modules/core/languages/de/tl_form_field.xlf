@@ -30,8 +30,8 @@
         <target>Fieldset</target>
       </trans-unit>
       <trans-unit id="FFL.fieldset.1">
-        <source>A container for form fields with an optional legend.</source>
-        <target>Ein Container für Formularfelder mit einer optionalen Legende.</target>
+        <source>A container for form fields with an optional legend (only available for tableless forms).</source>
+        <target>Ein Container für Formularfelder mit einer optionalen Legende (nur für tabellenlose Formulare).</target>
       </trans-unit>
       <trans-unit id="FFL.text.0">
         <source>Text field</source>
@@ -398,8 +398,8 @@
         <target>Feldgröße</target>
       </trans-unit>
       <trans-unit id="tl_form_field.fSize.1">
-        <source>Here you can enter the size of the upload field (size attribute).</source>
-        <target>Hier können Sie die Größe des Upload-Feldes festlegen (Size-Attribut).</target>
+        <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
+        <target>Hier können Sie die Größe des Upload-Feldes festlegen (&lt;em&gt;size&lt;/em&gt;-Attribut).</target>
       </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>

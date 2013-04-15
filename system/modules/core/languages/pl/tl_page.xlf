@@ -254,8 +254,7 @@
         <target>Klasa CSS</target>
       </trans-unit>
       <trans-unit id="tl_page.cssClass.1">
-        <source>The class(es) will be used in the navigation menu and the body tag.</source>
-        <target>Jeśli wprowadzisz tu nazwę klasy, będzie ona użyta jako atrybut klasy w nawigacji. Tak więc możesz sformatować każdy element menu osobno.</target>
+        <source>The class(es) will be used in the navigation menu and the &lt;body&gt; tag.</source>
       </trans-unit>
       <trans-unit id="tl_page.sitemap.0">
         <source>Show in sitemap</source>

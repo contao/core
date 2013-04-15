@@ -134,16 +134,14 @@
         <target>Grupy</target>
       </trans-unit>
       <trans-unit id="tl_member.groups.1">
-        <source>Here you can assign the user to one or more groups.</source>
-        <target>Przypisz użytkownika do grupy.</target>
+        <source>Here you can assign the member to one or more groups.</source>
       </trans-unit>
       <trans-unit id="tl_member.login.0">
         <source>Allow login</source>
         <target>Zezwól na logowanie</target>
       </trans-unit>
       <trans-unit id="tl_member.login.1">
-        <source>Allow the user to log into the front end.</source>
-        <target>Jeśli wybierzesz tą opcję, możesz przypisać nazwę i hasło użytkownika.</target>
+        <source>Allow the member to log into the front end.</source>
       </trans-unit>
       <trans-unit id="tl_member.username.0">
         <source>Username</source>
@@ -158,8 +156,7 @@
         <target>Przypisz katalog domowy</target>
       </trans-unit>
       <trans-unit id="tl_member.assignDir.1">
-        <source>Define a home directory for the user.</source>
-        <target>Wybierz tą opcję by określić katalog domowy.</target>
+        <source>Define a home directory for the member.</source>
       </trans-unit>
       <trans-unit id="tl_member.homeDir.0">
         <source>Home directory</source>
@@ -206,7 +203,7 @@
         <target>Dane kontaktowe</target>
       </trans-unit>
       <trans-unit id="tl_member.groups_legend">
-        <source>User groups</source>
+        <source>Member groups</source>
         <target>Grupy użytkowników</target>
       </trans-unit>
       <trans-unit id="tl_member.login_legend">

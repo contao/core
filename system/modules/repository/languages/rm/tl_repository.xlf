@@ -54,8 +54,7 @@
         <target>Num</target>
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
-        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are prefered. Additionally, the characters _ and - are allowed within the name.</source>
-        <target>Ils nums d'extensiuns ston cumenzar cun a-z, A-Z u 0-9; nums che cumenzan cun letras pitschnas vegnan preferidas. Plinavant èn ils segns _ e - lubids entaifer il num.</target>
+        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
         <source>Popularity</source>
@@ -102,8 +101,7 @@
         <target>Usability</target>
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
-        <source>Does the extension meet the Contao standards for usability and accessability?</source>
-        <target>Ademplescha l'extensiun ils standards da Contao per l'usability ed accessability?</target>
+        <source>Does the extension meet the Contao standards for usability and accessibility?</source>
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
         <source>Version</source>

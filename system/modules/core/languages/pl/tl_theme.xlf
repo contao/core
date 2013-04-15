@@ -102,8 +102,7 @@
         <target>Dodatkowe sekcje układu</target>
       </trans-unit>
       <trans-unit id="tl_theme.missing_section">
-        <source>The layout section &lt;strong&gt;%s&lt;/strong&gt; is not defined in the back end settings.</source>
-        <target>Sekcje układu &lt;strong&gt;%s&lt;/strong&gt; nie jest zdefiniowana w ustawieniach.</target>
+        <source>The layout section &lt;strong&gt;%s&lt;/strong&gt; will be added to the local configuration.</source>
       </trans-unit>
       <trans-unit id="tl_theme.sections_ok">
         <source>The layout sections have been successfully checked.</source>

@@ -167,9 +167,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.1">
         <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
+        <target>Generera CSS-layout baserat på inställningarna för sidlayout. Denna komponent krävs för att sidlayout-generatorn ska fungera!</target>
       </trans-unit>
       <trans-unit id="tl_layout.grid.css.0">
         <source>12-column grid</source>
+        <target>12-kolumners indelning</target>
       </trans-unit>
       <trans-unit id="tl_layout.grid.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
@@ -268,24 +270,20 @@
         <target>Body stilmallsklass</target>
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.1">
-        <source>Here you can add custom classes to the body tag.</source>
-        <target>Här kan du lägga till en eller flera stilmallsklasser (CSS-klass) som kommer läggas till i body-taggen. Klasser anges utan prefix (punkt .).</target>
+        <source>Here you can add custom classes to the &lt;body&gt; tag.</source>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
         <target>Body onload</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.1">
-        <source>Here you can add a body onload attribute.</source>
-        <target>Om någon av dina egna script kräver en &lt;em&gt;body onload&lt;/em&gt;-händelse kan du lägga till de önskade attributen här.</target>
+        <source>Here you can add a body &lt;em&gt;onload&lt;/em&gt; attribute.</source>
       </trans-unit>
       <trans-unit id="tl_layout.head.0">
-        <source>Additional &amp;lt;head&amp;gt; tags</source>
-        <target>Egna meta-taggar</target>
+        <source>Additional &lt;head&gt; tags</source>
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
-        <source>Here you can add individual tags to the head section of the page.</source>
-        <target>Här kan du lägga till egna meta-taggar och skript som du vill inkludera inom head-taggen.&lt;br /&gt;Notera att standard meta-taggar, script och stilmallar inkluderas automatiskt vid sidgenerering.</target>
+        <source>Here you can add individual tags to the &lt;head&gt; section of the page.</source>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>

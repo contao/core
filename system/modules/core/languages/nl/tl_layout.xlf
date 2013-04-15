@@ -270,24 +270,21 @@
         <target>Body class</target>
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.1">
-        <source>Here you can add custom classes to the body tag.</source>
-        <target>Hier kunt u een class attribuut invoegen die wordt toegevoegd aan de body tag.</target>
+        <source>Here you can add custom classes to the &lt;body&gt; tag.</source>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
         <target>Body onload</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.1">
-        <source>Here you can add a body onload attribute.</source>
-        <target>Als een van uw zelfgemaakte scripts een &lt;em&gt;body onload&lt;/em&gt; event nodig heeft kunt u de code hier toevoegen.</target>
+        <source>Here you can add a body &lt;em&gt;onload&lt;/em&gt; attribute.</source>
+        <target>Voeg hier een body &lt;em&gt;onload&lt;/em&gt; attribute toe.</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.0">
-        <source>Additional &amp;lt;head&amp;gt; tags</source>
-        <target>Bijkomende head tags</target>
+        <source>Additional &lt;head&gt; tags</source>
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
-        <source>Here you can add individual tags to the head section of the page.</source>
-        <target>Hier kunt u bijkomende meta tags en scripts toevoegen die aan het einde van de paginakop worden ingevoegd.</target>
+        <source>Here you can add individual tags to the &lt;head&gt; section of the page.</source>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>
@@ -383,11 +380,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.header_legend">
         <source>Rows</source>
-        <target>Kop en voettekst</target>
+        <target>Rijen</target>
       </trans-unit>
       <trans-unit id="tl_layout.column_legend">
         <source>Columns</source>
-        <target>Kolom instellingen</target>
+        <target>Kolommen</target>
       </trans-unit>
       <trans-unit id="tl_layout.sections_legend">
         <source>Custom sections</source>

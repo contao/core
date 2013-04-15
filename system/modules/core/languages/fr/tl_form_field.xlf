@@ -30,8 +30,8 @@
         <target>Groupe de champs</target>
       </trans-unit>
       <trans-unit id="FFL.fieldset.1">
-        <source>A container for form fields with an optional legend.</source>
-        <target>Un conteneur pour grouper les champs, avec une légende facultative.</target>
+        <source>A container for form fields with an optional legend (only available for tableless forms).</source>
+        <target>Un conteneur pour les champs avec une légende en option (uniquement disponible pour les formulaires sans tableau).</target>
       </trans-unit>
       <trans-unit id="FFL.text.0">
         <source>Text field</source>
@@ -398,8 +398,8 @@
         <target>Taille du champ</target>
       </trans-unit>
       <trans-unit id="tl_form_field.fSize.1">
-        <source>Here you can enter the size of the upload field (size attribute).</source>
-        <target>Saisir la taille du champ d'envoi de fichier (attribut size).</target>
+        <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
+        <target>Saisir la taille du champ d'envoi de fichier (attribut &lt;em&gt;size&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>

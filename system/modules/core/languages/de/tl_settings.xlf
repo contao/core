@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.disableCron.1">
         <source>Disable the periodic command scheduler and execute the cron.php script by a real cron job (which you have to set up manually).</source>
-        <target>Den Periodic Command Scheduler deaktivieren und das cron.php-Skript mittels eines echten Cronjobs (den Sie selbständig einrichten müssen) ausführen.</target>
+        <target>Den Periodic Command Scheduler deaktivieren und das cron.php-Skript mittels eines echten Cronjobs (den Sie selbst einrichten müssen) ausführen.</target>
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.0">
         <source>Minify the markup</source>
@@ -534,7 +534,7 @@
         <target>Live Update-URL</target>
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
-        <source>Here you can enter the live update URL.</source>
+        <source>Here you can enter the Live Update URL.</source>
         <target>Hier können Sie die Live Update-URL eingeben.</target>
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">

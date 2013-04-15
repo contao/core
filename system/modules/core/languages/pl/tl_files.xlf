@@ -11,9 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_files.protected.0">
         <source>Protected</source>
+        <target>Chroniony</target>
       </trans-unit>
       <trans-unit id="tl_files.protected.1">
         <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
+        <target>Zablokuj dostęp do folderu przez HTTP. Pliki nadal mogą być dostępne np. poprzez element treści &quot;download&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
@@ -25,6 +27,7 @@
       </trans-unit>
       <trans-unit id="tl_files.htaccessInfo">
         <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
+        <target>Zabezpieczenie folderu polega na dodaniu pliku .htaccess, który blokuje dostęp. Wygląda na to, że nie używasz serwera Apache, więc ta funkcja może nie działać bądź wymagać odpowiedniej konfiguracji serwera. Sprawdź to dwukrotnie, zanim wgrasz prywatne pliki!</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
@@ -40,6 +43,7 @@
       </trans-unit>
       <trans-unit id="tl_files.editor.1">
         <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
+        <target>Tutaj możesz edytować źródło pliku (wciśnij F11, aby włączyć tryb pełnoekranowy).</target>
       </trans-unit>
       <trans-unit id="tl_files.upload">
         <source>Upload files</source>
@@ -75,15 +79,19 @@
       </trans-unit>
       <trans-unit id="tl_files.syncAdded">
         <source>Added the file or folder &quot;%s&quot;</source>
+        <target>Dodano plik lub folder &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncChanged">
         <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+        <target>Zaktualizowano hasha pliku lub folderu &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncUnchanged">
         <source>Found the file or folder &quot;%s&quot;</source>
+        <target>Znaleziono plik lub folder &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncMoved">
         <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>Znaleziono plik lub folder &quot;%s&quot; w &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncDeleted">
         <source>Removed the file or folder &quot;%s&quot;</source>
@@ -91,12 +99,15 @@
       </trans-unit>
       <trans-unit id="tl_files.syncComplete">
         <source>The synchronization has been completed</source>
+        <target>Synchronizacja zakończona.</target>
       </trans-unit>
       <trans-unit id="tl_files.syncResult">
         <source>&lt;strong&gt;Result:&lt;/strong&gt; %s added | %s modified | %s unchanged | %s moved | %s deleted</source>
+        <target>&lt;strong&gt;Wynik:&lt;/strong&gt; %s dodano | %s zmodyfikowano | %s niezmieniono | %s przeniesiono | %s usunięto</target>
       </trans-unit>
       <trans-unit id="tl_files.syncShowUnchanged">
         <source>Show unchanged</source>
+        <target>Pokaż niezmienione</target>
       </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>

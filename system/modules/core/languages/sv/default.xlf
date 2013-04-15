@@ -157,6 +157,9 @@
         <source>Please select at least one field!</source>
         <target>Välj minst ett fält!</target>
       </trans-unit>
+      <trans-unit id="ERR.emptyUpload">
+        <source>Please select at least one file!</source>
+      </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
         <target>Sidalias &quot;%s&quot; finns redan!</target>
@@ -547,6 +550,7 @@
       </trans-unit>
       <trans-unit id="FOP.f6">
         <source>Synchronize the file system with the database</source>
+        <target>Synkronisera filsystemet med databasen</target>
       </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
@@ -940,6 +944,10 @@
         <source>Column</source>
         <target>Kolumn</target>
       </trans-unit>
+      <trans-unit id="MSC.mw_enable">
+        <source>Enable/disable the module</source>
+        <target>Aktivera/avaktivera modulen</target>
+      </trans-unit>
       <trans-unit id="MSC.aw_title">
         <source>Title</source>
         <target>Titel</target>
@@ -1135,6 +1143,18 @@
       <trans-unit id="MSC.lastLogin.1">
         <source>Last login: %s</source>
         <target>Senaste inloggad: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
+        <source>Current login</source>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.1">
+        <source>Current login: %s</source>
+      </trans-unit>
+      <trans-unit id="MSC.loginCount">
+        <source>Login attempts</source>
+      </trans-unit>
+      <trans-unit id="MSC.locked">
+        <source>Locked</source>
       </trans-unit>
       <trans-unit id="MSC.move">
         <source>Move the item via drag and drop</source>
@@ -1612,9 +1632,11 @@ Detta e-postmeddelande har genererats av Contao. Du kan inte svara på det direk
       </trans-unit>
       <trans-unit id="MSC.fileManager">
         <source>Open the file manager</source>
+        <target>Öppna filhanteraren</target>
       </trans-unit>
       <trans-unit id="MSC.pageManager">
         <source>Modify the site structure</source>
+        <target>Modifiera hemsidans struktur</target>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
@@ -2020,6 +2042,12 @@ Detta e-postmeddelande har genererats av Contao. Du kan inte svara på det direk
         <source>Remember me</source>
         <target>Kom ihåg mig</target>
       </trans-unit>
+      <trans-unit id="MSC.createdOn">
+        <source>Created on</source>
+      </trans-unit>
+      <trans-unit id="MSC.activation">
+        <source>Activated on</source>
+      </trans-unit>
       <trans-unit id="MSC.relevance">
         <source>%s relevance</source>
         <target>%s relevans</target>
@@ -2042,6 +2070,7 @@ Detta e-postmeddelande har genererats av Contao. Du kan inte svara på det direk
       </trans-unit>
       <trans-unit id="MSC.location">
         <source>Location</source>
+        <target>Plats</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

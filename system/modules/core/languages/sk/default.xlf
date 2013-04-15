@@ -157,6 +157,9 @@
         <source>Please select at least one field!</source>
         <target>Prosím vyberte aspoň jednu položku!</target>
       </trans-unit>
+      <trans-unit id="ERR.emptyUpload">
+        <source>Please select at least one file!</source>
+      </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
         <target>Alias stránky &quot;%s&quot; už existuje!</target>
@@ -940,6 +943,9 @@
         <source>Column</source>
         <target>Stĺpec</target>
       </trans-unit>
+      <trans-unit id="MSC.mw_enable">
+        <source>Enable/disable the module</source>
+      </trans-unit>
       <trans-unit id="MSC.aw_title">
         <source>Title</source>
         <target>Názov</target>
@@ -1135,6 +1141,18 @@
       <trans-unit id="MSC.lastLogin.1">
         <source>Last login: %s</source>
         <target>Posledné prihlásenie: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
+        <source>Current login</source>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.1">
+        <source>Current login: %s</source>
+      </trans-unit>
+      <trans-unit id="MSC.loginCount">
+        <source>Login attempts</source>
+      </trans-unit>
+      <trans-unit id="MSC.locked">
+        <source>Locked</source>
       </trans-unit>
       <trans-unit id="MSC.move">
         <source>Move the item via drag and drop</source>
@@ -2021,6 +2039,12 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
       <trans-unit id="MSC.autologin">
         <source>Remember me</source>
         <target>Zapamätať si prihlásenie</target>
+      </trans-unit>
+      <trans-unit id="MSC.createdOn">
+        <source>Created on</source>
+      </trans-unit>
+      <trans-unit id="MSC.activation">
+        <source>Activated on</source>
       </trans-unit>
       <trans-unit id="MSC.relevance">
         <source>%s relevance</source>

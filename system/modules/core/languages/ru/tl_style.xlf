@@ -150,8 +150,8 @@
         <target>Margin, Padding и Alignment (Внешний, внутренний отступ и выравнивание)</target>
       </trans-unit>
       <trans-unit id="tl_style.alignment.1">
-        <source>Margin, padding, align, vertical-align and text-align.</source>
-        <target>Margin (Внешний отступ), padding (внутренний отступ), align (выравнивание), vertical-align (вертикальное выравнивание) и text-align (выравнивание текста).</target>
+        <source>Margin, padding, align, vertical-align, text-align and whitespace.</source>
+        <target>Margin (Внешний отступ), padding (внутренний отступ), align (выравнивание), vertical-align (вертикальное выравнивание), text-align (выравнивание текста) и whitespace (перевод строки).</target>
       </trans-unit>
       <trans-unit id="tl_style.margin.0">
         <source>Margin</source>
@@ -192,6 +192,14 @@
       <trans-unit id="tl_style.textalign.1">
         <source>Here you can choose the horizontal text alignment.</source>
         <target>Вы можете выбрать горизонтальное выравнивание текста.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.0">
+        <source>White-space</source>
+        <target>White-space (перевод строки)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.1">
+        <source>Here you can define how white-space inside an element is handled.</source>
+        <target>Вы можете определить, как обрабатывается перевод строки внутри элемента</target>
       </trans-unit>
       <trans-unit id="tl_style.background.0">
         <source>Background</source>
@@ -368,14 +376,6 @@
       <trans-unit id="tl_style.fontstyle.1">
         <source>Here you can choose one or more font styles.</source>
         <target>Вы можете выбрать один или несколько стилей шрифтов.</target>
-      </trans-unit>
-      <trans-unit id="tl_style.whitespace.0">
-        <source>Disable automatic line feed</source>
-        <target>Отключить автоматический перевод строки</target>
-      </trans-unit>
-      <trans-unit id="tl_style.whitespace.1">
-        <source>Do not wrap words automatically.</source>
-        <target>Вы можете отключить автоматический перевод строки.</target>
       </trans-unit>
       <trans-unit id="tl_style.texttransform.0">
         <source>Text transform</source>

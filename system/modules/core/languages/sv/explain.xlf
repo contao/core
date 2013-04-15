@@ -22,8 +22,7 @@
         <target>Kodeditorn</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.1">
-        <source>For more information about CodeMirror please visit &lt;a href=&quot;http://codemirror.net&quot; title=&quot;EditArea by Marijn Haverbeke&quot; target=&quot;_blank&quot;&gt;http://codemirror.net&lt;/a&gt;.</source>
-        <target>För mer information om CodeMirror besök &lt;a href=&quot;http://codemirror.net&quot; title=&quot;EditArea från Marijn Haverbeke&quot; target=&quot;_blank&quot;&gt;http://codemirror.net&lt;/a&gt;.</target>
+        <source>For more information about ACE please visit &lt;a href=&quot;http://ace.ajax.org&quot; title=&quot;ACE (Ajax.org Cloud9 Editor)&quot; target=&quot;_blank&quot;&gt;http://ace.ajax.org&lt;/a&gt;.</source>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.0.0">
         <source>colspan</source>
@@ -46,16 +45,14 @@
         <target>m/d/Y</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.2.1">
-        <source>MM/DD/YYYY, english format, e.g. 01/28/2005</source>
-        <target>MM/DD/YYYY, engelskt format, t.ex. 01/28/2005</target>
+        <source>MM/DD/YYYY, English format, e.g. 01/28/2005</source>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.3.0">
         <source>d.m.Y</source>
         <target>d.m.Y</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.3.1">
-        <source>DD.MM.YYYY, german format, e.g. 28.01.2005</source>
-        <target>DD.MM.YYYY, tyskt format, t.ex. 28.01.2005</target>
+        <source>DD.MM.YYYY, German format, e.g. 28.01.2005</source>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.4.0">
         <source>y-n-j</source>
@@ -94,8 +91,7 @@
         <target>Rich Text-editor</target>
       </trans-unit>
       <trans-unit id="XPL.highlighter.0.1">
-        <source>For more information about how to configure the syntax highlighter please visit &lt;a href=&quot;http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
-        <target>För mer information om hur du konfigurerar syntax-markeraren, besök &lt;a href=&quot;http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults&quot; title=&quot;SyntaxHighlighter från Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</target>
+        <source>For more information about how to configure the syntax highlighter please visit &lt;a href=&quot;http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
       </trans-unit>
     </body>
   </file>

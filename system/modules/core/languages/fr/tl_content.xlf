@@ -286,8 +286,8 @@
         <target>Le titre du lien</target>
       </trans-unit>
       <trans-unit id="tl_content.titleText.1">
-        <source>The link title is added as title attribute in the HTML markup.</source>
-        <target>Le titre du lien est ajouté comme attribut title dans le code HTML.</target>
+        <source>The link title is added as &lt;em&gt;title&lt;/em&gt; attribute in the HTML markup.</source>
+        <target>Le titre du lien est ajouté comme attribut &lt;em&gt;title&lt;/em&gt; dans le code HTML.</target>
       </trans-unit>
       <trans-unit id="tl_content.embed.0">
         <source>Embed the link</source>
@@ -302,8 +302,8 @@
         <target>Lightbox</target>
       </trans-unit>
       <trans-unit id="tl_content.rel.1">
-        <source>To trigger the lightbox, enter a rel attribute here.</source>
-        <target>Pour déclencher l'effet lightbox, saisir ici un attribut &quot;rel&quot;.</target>
+        <source>To trigger the lightbox, enter a &lt;em&gt;rel&lt;/em&gt; attribute here.</source>
+        <target>Pour déclencher l'effet lightbox, saisir ici un attribut &lt;em&gt;rel&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_content.useImage.0">
         <source>Create an image link</source>
@@ -663,6 +663,7 @@
       </trans-unit>
       <trans-unit id="tl_content.includeTemplates">
         <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>Le modèle &lt;em&gt;%s&lt;/em&gt; ou &lt;em&gt;%s&lt;/em&gt; doit être inclus dans la présentation de page.</target>
       </trans-unit>
       <trans-unit id="tl_content.new.0">
         <source>New element</source>

@@ -286,8 +286,7 @@
         <target>ကွန်ဆက်ခေါင်းစဉ်</target>
       </trans-unit>
       <trans-unit id="tl_content.titleText.1">
-        <source>The link title is added as title attribute in the HTML markup.</source>
-        <target>ဟိတ်စ်တီအမ်အလ်ကုဒ်တင်ခြင်းတွင်ကွန်ဆက်ခေါင်းစဉ်ကိုခေါင်းစဉ်ဂုဏ်ရည်အဖြစ်ထည့်။</target>
+        <source>The link title is added as &lt;em&gt;title&lt;/em&gt; attribute in the HTML markup.</source>
       </trans-unit>
       <trans-unit id="tl_content.embed.0">
         <source>Embed the link</source>
@@ -302,8 +301,7 @@
         <target>လိုက်ဘောက်စ်</target>
       </trans-unit>
       <trans-unit id="tl_content.rel.1">
-        <source>To trigger the lightbox, enter a rel attribute here.</source>
-        <target>လိုက်ဘောက်စ်ကိုအစပျိုးရန်ရီးဂုဏ်ရည်ထည့်။</target>
+        <source>To trigger the lightbox, enter a &lt;em&gt;rel&lt;/em&gt; attribute here.</source>
       </trans-unit>
       <trans-unit id="tl_content.useImage.0">
         <source>Create an image link</source>

@@ -77,6 +77,11 @@ source_file = system/modules/core/languages/en/default.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/default.xlf
 
+[contao.develop-core-exception]
+source_file = system/modules/core/languages/en/exception.xlf
+source_lang = en
+file_filter = system/modules/core/languages/<lang>/exception.xlf
+
 [contao.develop-core-explain]
 source_file = system/modules/core/languages/en/explain.xlf
 source_lang = en

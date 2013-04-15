@@ -46,8 +46,8 @@
         <target>File da utilizzare per l'upload</target>
       </trans-unit>
       <trans-unit id="tl_user.uploader.1">
-        <source>Here you can chose a file uploader.</source>
-        <target>E' possibile selezionare il file che verrà utilizzato per l'upload</target>
+        <source>Here you can choose a file uploader.</source>
+        <target>E' possibile selezionare il file che verrà utilizzato per l'upload.</target>
       </trans-unit>
       <trans-unit id="tl_user.showHelp.0">
         <source>Show explanation</source>

@@ -268,24 +268,20 @@
         <target>کلاس Body</target>
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.1">
-        <source>Here you can add custom classes to the body tag.</source>
-        <target>می‌توانید کلاس‌های اختصاصی را به برچسب body اضافه کنید.</target>
+        <source>Here you can add custom classes to the &lt;body&gt; tag.</source>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
         <target>Body onload</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.1">
-        <source>Here you can add a body onload attribute.</source>
-        <target>خصوصیت body onload را اضافه کنید.</target>
+        <source>Here you can add a body &lt;em&gt;onload&lt;/em&gt; attribute.</source>
       </trans-unit>
       <trans-unit id="tl_layout.head.0">
-        <source>Additional &amp;lt;head&amp;gt; tags</source>
-        <target>برچسب‌های اضافی &amp;lt;head&amp;gt;</target>
+        <source>Additional &lt;head&gt; tags</source>
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
-        <source>Here you can add individual tags to the head section of the page.</source>
-        <target>برچسب‌های منحصربفرد را به بخش head صفحه اضافه کنید.</target>
+        <source>Here you can add individual tags to the &lt;head&gt; section of the page.</source>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>

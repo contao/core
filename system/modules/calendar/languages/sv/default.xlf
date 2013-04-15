@@ -6,12 +6,10 @@
         <target>%d händelse(r)</target>
       </trans-unit>
       <trans-unit id="MSC.cal_previous">
-        <source>&amp;lt;</source>
-        <target>Föregående månad</target>
+        <source>&lt;</source>
       </trans-unit>
       <trans-unit id="MSC.cal_next">
-        <source>&amp;gt;</source>
-        <target>Nästa månad</target>
+        <source>&gt;</source>
       </trans-unit>
       <trans-unit id="MSC.cal_emptyDay">
         <source>There are no events on this day.</source>

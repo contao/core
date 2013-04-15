@@ -54,8 +54,7 @@
         <target>Namn</target>
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
-        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are prefered. Additionally, the characters _ and - are allowed within the name.</source>
-        <target>Plugin-namn måste börja med az, AZ eller 0-9. Namn med bara små bokstäver är att föredra. Dessutom är tecknen _ och - tillåtna i namnet.</target>
+        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
         <source>Popularity</source>
@@ -102,8 +101,7 @@
         <target>Användbarhet</target>
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
-        <source>Does the extension meet the Contao standards for usability and accessability?</source>
-        <target>Har pluginet uppfyllt Contao-standarder för användbarhet och tillgänglighet?</target>
+        <source>Does the extension meet the Contao standards for usability and accessibility?</source>
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
         <source>Version</source>

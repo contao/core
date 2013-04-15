@@ -126,8 +126,7 @@
         <target>ဟိပ်စ်တီအမ်အယ်၅တရားဝင်ခြင်းမလုပ်ဆောင်စေ</target>
       </trans-unit>
       <trans-unit id="tl_form.novalidate.1">
-        <source>Add the &quot;novalidate&quot; attribute to the form tag.</source>
-        <target>ပံုစံအမည်သို့&quot;တရားမဝင်&quot;ပစ္စည်းထည့်။</target>
+        <source>Add the &lt;em&gt;novalidate&lt;/em&gt; attribute to the form tag.</source>
       </trans-unit>
       <trans-unit id="tl_form.attributes.0">
         <source>CSS ID/class</source>

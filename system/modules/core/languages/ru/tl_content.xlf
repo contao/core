@@ -203,7 +203,7 @@
       </trans-unit>
       <trans-unit id="tl_content.mooStart.0">
         <source>Wrapper start</source>
-        <target>Начало раздвижной панели</target>
+        <target>Начало wrapper (обёртки)</target>
       </trans-unit>
       <trans-unit id="tl_content.mooStart.1">
         <source>Marks the beginning of an accordion pane that spans several content elements.</source>
@@ -211,7 +211,7 @@
       </trans-unit>
       <trans-unit id="tl_content.mooStop.0">
         <source>Wrapper stop</source>
-        <target>Конец раздвижной панели</target>
+        <target>Конец wrapper (обёртки)</target>
       </trans-unit>
       <trans-unit id="tl_content.mooStop.1">
         <source>Marks the end of an accordion pane that spans several content elements.</source>
@@ -286,8 +286,8 @@
         <target>Название ссылки</target>
       </trans-unit>
       <trans-unit id="tl_content.titleText.1">
-        <source>The link title is added as title attribute in the HTML markup.</source>
-        <target>Название ссылки добавится как атрибут title в HTML разметку.</target>
+        <source>The link title is added as &lt;em&gt;title&lt;/em&gt; attribute in the HTML markup.</source>
+        <target>Название ссылки добавится как атрибут &lt;em&gt;title&lt;/em&gt; в HTML разметку.</target>
       </trans-unit>
       <trans-unit id="tl_content.embed.0">
         <source>Embed the link</source>
@@ -302,8 +302,8 @@
         <target>Лайтбокс (Lightbox)</target>
       </trans-unit>
       <trans-unit id="tl_content.rel.1">
-        <source>To trigger the lightbox, enter a rel attribute here.</source>
-        <target>Чтобы активировать лайтбокс, введите атрибут rel.</target>
+        <source>To trigger the lightbox, enter a &lt;em&gt;rel&lt;/em&gt; attribute here.</source>
+        <target>Чтобы активировать лайтбокс, введите атрибут &lt;em&gt;rel&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_content.useImage.0">
         <source>Create an image link</source>
@@ -419,27 +419,35 @@
       </trans-unit>
       <trans-unit id="tl_content.sliderDelay.0">
         <source>Sliding interval</source>
+        <target>Интервал скольжения слайдов</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderDelay.1">
         <source>The time in milliseconds between slides (1000 = 1s). Set to 0 to disable auto sliding.</source>
+        <target>Время в миллисекундах между слайдами (1000 = 1 с). Установите 0, для отключения автоматического скольжения слайдов.</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderSpeed.0">
         <source>Transition speed</source>
+        <target>Скорость перехода</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderSpeed.1">
         <source>The transition speed in milliseconds (1000 = 1s). Defaults to 300.</source>
+        <target>Скорость перехода в миллисекундах (1000 = 1 с). По умолчанию 300.</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderStartSlide.0">
         <source>Slide offset</source>
+        <target>Смещение слайдов</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderStartSlide.1">
         <source>Here you can make the slider start with a particular slide (counting starts at 0).</source>
+        <target>Вы можете запустить слайды с определенного места (по умолчанию, отсчет начинается с 0).</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderContinuous.0">
         <source>Continuous</source>
+        <target>Непрерывный</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderContinuous.1">
         <source>Make the slider continuous (start all over when reaching the end).</source>
+        <target>Сделать слайд-шоу непрерывным (начать сначала, при достижении конца).</target>
       </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>
@@ -559,6 +567,7 @@
       </trans-unit>
       <trans-unit id="tl_content.slider_legend">
         <source>Slider settings</source>
+        <target>Настройки слайдера</target>
       </trans-unit>
       <trans-unit id="tl_content.list_legend">
         <source>List items</source>
@@ -658,9 +667,11 @@
       </trans-unit>
       <trans-unit id="tl_content.includeTemplate">
         <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>Шаблон &lt;em&gt;%s&lt;/em&gt; должен быть включен в макет страницы.</target>
       </trans-unit>
       <trans-unit id="tl_content.includeTemplates">
         <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>Шаблон &lt;em&gt;%s&lt;/em&gt; или &lt;em&gt;%s&lt;/em&gt; должен быть включен в макет страницы.</target>
       </trans-unit>
       <trans-unit id="tl_content.new.0">
         <source>New element</source>

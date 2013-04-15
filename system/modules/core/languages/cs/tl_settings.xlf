@@ -534,8 +534,7 @@
         <target>Adresa služby Live Update</target>
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
-        <source>Here you can enter the live update URL.</source>
-        <target>Sem můžete zadat adresu služby Live Update</target>
+        <source>Here you can enter the Live Update URL.</source>
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>

@@ -134,16 +134,16 @@
         <target>Skupina</target>
       </trans-unit>
       <trans-unit id="tl_member.groups.1">
-        <source>Here you can assign the user to one or more groups.</source>
-        <target>Přiřaďte uživatele do jedné či více skupin</target>
+        <source>Here you can assign the member to one or more groups.</source>
+        <target>Zde můžete přidělit člena k jedné nebo více skupinám.</target>
       </trans-unit>
       <trans-unit id="tl_member.login.0">
         <source>Allow login</source>
         <target>Povolit přihlášení</target>
       </trans-unit>
       <trans-unit id="tl_member.login.1">
-        <source>Allow the user to log into the front end.</source>
-        <target>Povolit přihlášení do front endu.</target>
+        <source>Allow the member to log into the front end.</source>
+        <target>Povolit členovi přihlášení se přes webovou stránku.</target>
       </trans-unit>
       <trans-unit id="tl_member.username.0">
         <source>Username</source>
@@ -158,8 +158,8 @@
         <target>Přiřadit domácí adresář</target>
       </trans-unit>
       <trans-unit id="tl_member.assignDir.1">
-        <source>Define a home directory for the user.</source>
-        <target>Zvolte tuto volbu k přiřazení domácího adresáře</target>
+        <source>Define a home directory for the member.</source>
+        <target>Určit výchozí složku pro člena.</target>
       </trans-unit>
       <trans-unit id="tl_member.homeDir.0">
         <source>Home directory</source>
@@ -206,8 +206,8 @@
         <target>Kontakt</target>
       </trans-unit>
       <trans-unit id="tl_member.groups_legend">
-        <source>User groups</source>
-        <target>Uživatelské skupiny</target>
+        <source>Member groups</source>
+        <target>Skupiny členů</target>
       </trans-unit>
       <trans-unit id="tl_member.login_legend">
         <source>Login details</source>

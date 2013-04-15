@@ -286,8 +286,8 @@
         <target>リンクの題名</target>
       </trans-unit>
       <trans-unit id="tl_content.titleText.1">
-        <source>The link title is added as title attribute in the HTML markup.</source>
-        <target>リンクの題名はHTMLのマークアップのtitle属性として追加します。</target>
+        <source>The link title is added as &lt;em&gt;title&lt;/em&gt; attribute in the HTML markup.</source>
+        <target>リンクの題名はHTMLのマークアップの&lt;em&gt;title&lt;/em&gt;属性として追加します。</target>
       </trans-unit>
       <trans-unit id="tl_content.embed.0">
         <source>Embed the link</source>
@@ -302,8 +302,8 @@
         <target>ライトボックス</target>
       </trans-unit>
       <trans-unit id="tl_content.rel.1">
-        <source>To trigger the lightbox, enter a rel attribute here.</source>
-        <target>ライトボックスを作動させるためのrel属性を入力してください。</target>
+        <source>To trigger the lightbox, enter a &lt;em&gt;rel&lt;/em&gt; attribute here.</source>
+        <target>ライトボックスを作動させるための&lt;em&gt;rel&lt;/em&gt;属性を入力してください。</target>
       </trans-unit>
       <trans-unit id="tl_content.useImage.0">
         <source>Create an image link</source>

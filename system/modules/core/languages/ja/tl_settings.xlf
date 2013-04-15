@@ -534,7 +534,7 @@
         <target>ライブアップデートのURL</target>
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
-        <source>Here you can enter the live update URL.</source>
+        <source>Here you can enter the Live Update URL.</source>
         <target>ライブアップデートのURLを入力できます。</target>
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">

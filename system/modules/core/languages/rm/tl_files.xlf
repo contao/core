@@ -11,9 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_files.protected.0">
         <source>Protected</source>
+        <target>Protegì</target>
       </trans-unit>
       <trans-unit id="tl_files.protected.1">
         <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
+        <target>Proteger dad acceder l'ordinatur via HTTP. Las datotecas pon tuttina vegnir distribuidas, p.ex. sur l'element download.</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
@@ -25,6 +27,7 @@
       </trans-unit>
       <trans-unit id="tl_files.htaccessInfo">
         <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
+        <target>La protecziun dad ordinaturs vegn realisada entras agiuntar ina datoteca .htaccess che na lubescha betg l'access a l'ordinatur. I para che ti n'utiliseschas betg in server dad Apache, perquai na pudess questa funczun betg funcziunar u basegnar ina adattaziun da la configuraziun da tes server. Controllescha quai avant che transferir resursas betg publicas!</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
@@ -40,6 +43,7 @@
       </trans-unit>
       <trans-unit id="tl_files.editor.1">
         <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
+        <target>Qua pos ti modifitgar la funtauna da la datoteca (clicca F11 per midar en il modus da maletg entir).</target>
       </trans-unit>
       <trans-unit id="tl_files.upload">
         <source>Upload files</source>
@@ -75,15 +79,19 @@
       </trans-unit>
       <trans-unit id="tl_files.syncAdded">
         <source>Added the file or folder &quot;%s&quot;</source>
+        <target>Agiuntà la daoteca u l'ordinatur &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncChanged">
         <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+        <target>Actualisà il hash da la datoteca u l'ordinatru &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncUnchanged">
         <source>Found the file or folder &quot;%s&quot;</source>
+        <target>Chattà la datoteca u l'ordinatur &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncMoved">
         <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>Chattà la datoteca u l'ordinatur &quot;%s&quot; en &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncDeleted">
         <source>Removed the file or folder &quot;%s&quot;</source>
@@ -91,12 +99,15 @@
       </trans-unit>
       <trans-unit id="tl_files.syncComplete">
         <source>The synchronization has been completed</source>
+        <target>La sincronisaziun è cumpletada</target>
       </trans-unit>
       <trans-unit id="tl_files.syncResult">
         <source>&lt;strong&gt;Result:&lt;/strong&gt; %s added | %s modified | %s unchanged | %s moved | %s deleted</source>
+        <target>&lt;strong&gt;Resultat:&lt;/strong&gt; agiuntà: %s | modifitgà: %s | betg midà: %s | spustà: %s | stizzà: %s</target>
       </trans-unit>
       <trans-unit id="tl_files.syncShowUnchanged">
         <source>Show unchanged</source>
+        <target>Mussar elements senza midadas</target>
       </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>

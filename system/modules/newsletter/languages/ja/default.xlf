@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="ERR.noChannels">
         <source>Please select at least one channel.</source>
-        <target>少なくとも一つのチャンネルを選択してください。</target>
+        <target>少なくともチャンネルを1つ選択してください。</target>
       </trans-unit>
       <trans-unit id="MSC.subscribe">
         <source>Subscribe</source>

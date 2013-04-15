@@ -6,12 +6,10 @@
         <target>%d အဖြစ်အပျက်(များ)</target>
       </trans-unit>
       <trans-unit id="MSC.cal_previous">
-        <source>&amp;lt;</source>
-        <target>&amp;lt;</target>
+        <source>&lt;</source>
       </trans-unit>
       <trans-unit id="MSC.cal_next">
-        <source>&amp;gt;</source>
-        <target>&amp;gt;</target>
+        <source>&gt;</source>
       </trans-unit>
       <trans-unit id="MSC.cal_emptyDay">
         <source>There are no events on this day.</source>

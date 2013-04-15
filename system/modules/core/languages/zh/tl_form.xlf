@@ -126,8 +126,7 @@
         <target>禁用HTML5验证</target>
       </trans-unit>
       <trans-unit id="tl_form.novalidate.1">
-        <source>Add the &quot;novalidate&quot; attribute to the form tag.</source>
-        <target>为表单标记增加&quot;不要验证&quot;的属性。</target>
+        <source>Add the &lt;em&gt;novalidate&lt;/em&gt; attribute to the form tag.</source>
       </trans-unit>
       <trans-unit id="tl_form.attributes.0">
         <source>CSS ID/class</source>

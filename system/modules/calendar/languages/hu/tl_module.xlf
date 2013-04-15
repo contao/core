@@ -151,9 +151,11 @@
       </trans-unit>
       <trans-unit id="tl_module.next_next_month">
         <source>of the next month</source>
+        <target>a következő hónap</target>
       </trans-unit>
       <trans-unit id="tl_module.next_next_year">
         <source>of the next year</source>
+        <target>a következő év</target>
       </trans-unit>
       <trans-unit id="tl_module.next_all">
         <source>All upcoming events</source>
@@ -201,9 +203,11 @@
       </trans-unit>
       <trans-unit id="tl_module.past_prev_month">
         <source>of the previous month</source>
+        <target>az előző hónap</target>
       </trans-unit>
       <trans-unit id="tl_module.past_prev_year">
         <source>of the previous year</source>
+        <target>az előző év</target>
       </trans-unit>
       <trans-unit id="tl_module.past_all">
         <source>All past events</source>

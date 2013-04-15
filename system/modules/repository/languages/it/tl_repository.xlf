@@ -54,7 +54,7 @@
         <target>Nome</target>
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
-        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are prefered. Additionally, the characters _ and - are allowed within the name.</source>
+        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
         <target>I nomi delle estensioni devono essere composti dai caratteri a-z, A-Z o 0-9, i nomi in minuscolo sono preferiti. Ulteriormente, i caratteri _ e - sono permessi all'interno del nome.</target>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
@@ -102,7 +102,7 @@
         <target>Usabilità</target>
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
-        <source>Does the extension meet the Contao standards for usability and accessability?</source>
+        <source>Does the extension meet the Contao standards for usability and accessibility?</source>
         <target>Questa estensione rispetta gli standard di Contao sull'usabilità e l'accessibilità?</target>
       </trans-unit>
       <trans-unit id="tl_repository.version.0">

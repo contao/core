@@ -46,8 +46,7 @@
         <target>文件上载</target>
       </trans-unit>
       <trans-unit id="tl_user.uploader.1">
-        <source>Here you can chose a file uploader.</source>
-        <target>您可以在此处选择一个文件上载器</target>
+        <source>Here you can choose a file uploader.</source>
       </trans-unit>
       <trans-unit id="tl_user.showHelp.0">
         <source>Show explanation</source>

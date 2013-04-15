@@ -134,16 +134,14 @@
         <target>Skupine članov</target>
       </trans-unit>
       <trans-unit id="tl_member.groups.1">
-        <source>Here you can assign the user to one or more groups.</source>
-        <target>Dodelite uporabnika eni ali večim skupinam.</target>
+        <source>Here you can assign the member to one or more groups.</source>
       </trans-unit>
       <trans-unit id="tl_member.login.0">
         <source>Allow login</source>
         <target>Dovoli prijavo</target>
       </trans-unit>
       <trans-unit id="tl_member.login.1">
-        <source>Allow the user to log into the front end.</source>
-        <target>Če izberete to možnost, lahko uporabniku dodelite uporabniško ime in geslo.</target>
+        <source>Allow the member to log into the front end.</source>
       </trans-unit>
       <trans-unit id="tl_member.username.0">
         <source>Username</source>
@@ -158,8 +156,7 @@
         <target>Določi mapo</target>
       </trans-unit>
       <trans-unit id="tl_member.assignDir.1">
-        <source>Define a home directory for the user.</source>
-        <target>Določi domačo mapo uporabnika</target>
+        <source>Define a home directory for the member.</source>
       </trans-unit>
       <trans-unit id="tl_member.homeDir.0">
         <source>Home directory</source>
@@ -206,8 +203,8 @@
         <target>Kontaktni podatki</target>
       </trans-unit>
       <trans-unit id="tl_member.groups_legend">
-        <source>User groups</source>
-        <target>Uporabniške skupine</target>
+        <source>Member groups</source>
+        <target>Skupine članov</target>
       </trans-unit>
       <trans-unit id="tl_member.login_legend">
         <source>Login details</source>

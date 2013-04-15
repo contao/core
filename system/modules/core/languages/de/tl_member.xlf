@@ -134,16 +134,16 @@
         <target>Mitgliedergruppen</target>
       </trans-unit>
       <trans-unit id="tl_member.groups.1">
-        <source>Here you can assign the user to one or more groups.</source>
-        <target>Weisen Sie den Benutzer einer oder mehreren Mitgliedergruppen zu.</target>
+        <source>Here you can assign the member to one or more groups.</source>
+        <target>Hier können Sie das Mitglied einer oder mehreren Gruppen zuweisen.</target>
       </trans-unit>
       <trans-unit id="tl_member.login.0">
         <source>Allow login</source>
         <target>Login erlauben</target>
       </trans-unit>
       <trans-unit id="tl_member.login.1">
-        <source>Allow the user to log into the front end.</source>
-        <target>Dem Mitglied das Anmelden im Frontend erlauben.</target>
+        <source>Allow the member to log into the front end.</source>
+        <target>Dem Mitglied die Anmeldung im Frontend erlauben.</target>
       </trans-unit>
       <trans-unit id="tl_member.username.0">
         <source>Username</source>
@@ -158,8 +158,8 @@
         <target>Ein Benutzerverzeichnis festlegen</target>
       </trans-unit>
       <trans-unit id="tl_member.assignDir.1">
-        <source>Define a home directory for the user.</source>
-        <target>Dem Benutzer ein eigenes Verzeichnis zuweisen.</target>
+        <source>Define a home directory for the member.</source>
+        <target>Dem Mitglied ein eigenes Verzeichnis zuweisen.</target>
       </trans-unit>
       <trans-unit id="tl_member.homeDir.0">
         <source>Home directory</source>
@@ -206,7 +206,7 @@
         <target>Kontaktdaten</target>
       </trans-unit>
       <trans-unit id="tl_member.groups_legend">
-        <source>User groups</source>
+        <source>Member groups</source>
         <target>Mitgliedergruppen</target>
       </trans-unit>
       <trans-unit id="tl_member.login_legend">

@@ -167,9 +167,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.1">
         <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
+        <target>Génère une présentation CSS de type &quot;responsive&quot; basée sur le paramétrage de la présentation de page. Ce composant est indispensable au fonctionnement du générateur de présentation de page.</target>
       </trans-unit>
       <trans-unit id="tl_layout.grid.css.0">
         <source>12-column grid</source>
+        <target>Grille sur 12 colonnes</target>
       </trans-unit>
       <trans-unit id="tl_layout.grid.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
@@ -268,24 +270,21 @@
         <target>Classe CSS de la balise BODY</target>
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.1">
-        <source>Here you can add custom classes to the body tag.</source>
-        <target>Ajouter des classes personnalisées qui seront insérées dans la balise &lt;em&gt;body&lt;/em&gt;.</target>
+        <source>Here you can add custom classes to the &lt;body&gt; tag.</source>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
         <target>Body onload</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.1">
-        <source>Here you can add a body onload attribute.</source>
-        <target>Ajouter un attribut body onload.</target>
+        <source>Here you can add a body &lt;em&gt;onload&lt;/em&gt; attribute.</source>
+        <target>Ajouter un attribut body &lt;em&gt;onload&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.0">
-        <source>Additional &amp;lt;head&amp;gt; tags</source>
-        <target>Balises supplémentaires</target>
+        <source>Additional &lt;head&gt; tags</source>
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
-        <source>Here you can add individual tags to the head section of the page.</source>
-        <target>Ajouter des balises à la section &lt;em&gt;head&lt;/em&gt; de la page.</target>
+        <source>Here you can add individual tags to the &lt;head&gt; section of the page.</source>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>

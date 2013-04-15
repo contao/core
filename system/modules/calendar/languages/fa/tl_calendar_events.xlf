@@ -119,6 +119,9 @@
         <source>Set to 0 for unlimited recurrences.</source>
         <target>0 را برای تکرار بی نهایت انتخاب کنید.</target>
       </trans-unit>
+      <trans-unit id="tl_calendar_events.repeatEnd">
+        <source>End of recurring event</source>
+      </trans-unit>
       <trans-unit id="tl_calendar_events.addEnclosure.0">
         <source>Add enclosures</source>
         <target>اضافه کردن ضمیمه</target>

@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="MSC.com_website">
         <source>Website</source>
-        <target>Site web</target>
+        <target>Site internet</target>
       </trans-unit>
       <trans-unit id="MSC.com_comment">
         <source>Comment</source>
@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="MSC.com_quote">
         <source>%s wrote:</source>
-        <target>%s a écris :</target>
+        <target>%s a écrit :</target>
       </trans-unit>
       <trans-unit id="MSC.com_code">
         <source>Code:</source>

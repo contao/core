@@ -134,16 +134,16 @@
         <target>Ledengroepen</target>
       </trans-unit>
       <trans-unit id="tl_member.groups.1">
-        <source>Here you can assign the user to one or more groups.</source>
-        <target>Wijs het lid aan één of meerdere groepen toe.</target>
+        <source>Here you can assign the member to one or more groups.</source>
+        <target>Wijs een lid aan één of meerdere groepen toe.</target>
       </trans-unit>
       <trans-unit id="tl_member.login.0">
         <source>Allow login</source>
         <target>Login toestaan</target>
       </trans-unit>
       <trans-unit id="tl_member.login.1">
-        <source>Allow the user to log into the front end.</source>
-        <target>Geef het lid toestemming in te loggen in het front-end.</target>
+        <source>Allow the member to log into the front end.</source>
+        <target>Geef  lid toestemming om in te loggen in het frontend.</target>
       </trans-unit>
       <trans-unit id="tl_member.username.0">
         <source>Username</source>
@@ -158,8 +158,8 @@
         <target>Home directory toewijzen</target>
       </trans-unit>
       <trans-unit id="tl_member.assignDir.1">
-        <source>Define a home directory for the user.</source>
-        <target>Kies deze optie om een home directory toe te wijzen aan het lid.</target>
+        <source>Define a home directory for the member.</source>
+        <target>Wijs een een home directory toe voor het lid.</target>
       </trans-unit>
       <trans-unit id="tl_member.homeDir.0">
         <source>Home directory</source>
@@ -206,8 +206,8 @@
         <target>Contactgegevens</target>
       </trans-unit>
       <trans-unit id="tl_member.groups_legend">
-        <source>User groups</source>
-        <target>Gebruikersgroepen</target>
+        <source>Member groups</source>
+        <target>Ledengroepen</target>
       </trans-unit>
       <trans-unit id="tl_member.login_legend">
         <source>Login details</source>

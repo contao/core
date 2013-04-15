@@ -135,9 +135,11 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.0">
         <source>Purge the system log</source>
+        <target>Wyczyść logi systemu</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.1">
         <source>Truncates the &lt;em&gt;tl_log&lt;/em&gt; table which stores all the system log entries. This job permanently deletes these records.</source>
+        <target>Czyści tabelę &lt;em&gt;tl_log&lt;/em&gt;, która zawiera wszystkie logi systemowe. To zadanie permanentnie usunie te rekordy.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.images.0">
         <source>Purge the image cache</source>

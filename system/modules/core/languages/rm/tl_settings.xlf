@@ -115,9 +115,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
         <source>Exclude folders from synchronization</source>
+        <target>Excluder ordinaturs da la sincronisaziun</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <target>Qua pos ti endatar ina glista separada entras commas dad orinaturs che na vegnan betg resguardads tar la sincronisaziun da datotecas (p.ex. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Fa stim che resursas exclusas na pon betg vegnir utilisadas en elements da maletgs u telechargiar.</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
@@ -532,8 +534,7 @@
         <target>URL per l'actualisaziun directa</target>
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
-        <source>Here you can enter the live update URL.</source>
-        <target>Qua pos ti endatar l'URL per l'actualisaziun directa (Live Update).</target>
+        <source>Here you can enter the Live Update URL.</source>
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>

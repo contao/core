@@ -150,8 +150,8 @@
         <target>Odsazení zvenčí, uvnitř a uspořádání</target>
       </trans-unit>
       <trans-unit id="tl_style.alignment.1">
-        <source>Margin, padding, align, vertical-align and text-align.</source>
-        <target>Odsazení zvenčí (margin), uvnitř (padding), zarovnání elementu (align), vertikální zarovnání (vertical-align) a zarovnání textu (text-align).</target>
+        <source>Margin, padding, align, vertical-align, text-align and whitespace.</source>
+        <target>Odsazení zvenčí, zevnitř, vertikální uspořádání, zarovnání textu a zalamování řádků</target>
       </trans-unit>
       <trans-unit id="tl_style.margin.0">
         <source>Margin</source>
@@ -192,6 +192,14 @@
       <trans-unit id="tl_style.textalign.1">
         <source>Here you can choose the horizontal text alignment.</source>
         <target>Zde můžete zvolit horizontální uspořádání textu.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.0">
+        <source>White-space</source>
+        <target>Zalamování řádků</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.1">
+        <source>Here you can define how white-space inside an element is handled.</source>
+        <target>Zde můžete určit, jak se bude řešit zalamování řádků uvnitř elementu. </target>
       </trans-unit>
       <trans-unit id="tl_style.background.0">
         <source>Background</source>
@@ -368,14 +376,6 @@
       <trans-unit id="tl_style.fontstyle.1">
         <source>Here you can choose one or more font styles.</source>
         <target>Zde můžete zvolit jeden nebo více stylů písma.</target>
-      </trans-unit>
-      <trans-unit id="tl_style.whitespace.0">
-        <source>Disable automatic line feed</source>
-        <target>Vypnout automatická zalamování řádek</target>
-      </trans-unit>
-      <trans-unit id="tl_style.whitespace.1">
-        <source>Do not wrap words automatically.</source>
-        <target>Nezalomovat řádky uvnitř elementu.</target>
       </trans-unit>
       <trans-unit id="tl_style.texttransform.0">
         <source>Text transform</source>

@@ -54,8 +54,7 @@
         <target>Név</target>
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
-        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are prefered. Additionally, the characters _ and - are allowed within the name.</source>
-        <target>Kiterjesztés neve csak a-z, A-Z és 0-9 karakterekkel kezdődhet, kisbetűs nevek használata javasolt. Emellett a _ és a - karakterek is megengedettek a névben.</target>
+        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
         <source>Popularity</source>
@@ -102,8 +101,7 @@
         <target>Használhatóság</target>
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
-        <source>Does the extension meet the Contao standards for usability and accessability?</source>
-        <target>A kiterjesztés mennyire felel meg a Contao használhatósági és hozzáférhetőségi irányelveinek?</target>
+        <source>Does the extension meet the Contao standards for usability and accessibility?</source>
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
         <source>Version</source>

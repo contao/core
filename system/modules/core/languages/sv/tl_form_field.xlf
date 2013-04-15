@@ -30,8 +30,8 @@
         <target>Formulärset</target>
       </trans-unit>
       <trans-unit id="FFL.fieldset.1">
-        <source>A container for form fields with an optional legend.</source>
-        <target>En behållare för formulärfält med en valfri legend.</target>
+        <source>A container for form fields with an optional legend (only available for tableless forms).</source>
+        <target>En behållare för formulärfält med en valfri titel (enbart tillgänglig för tabell-lösa formulär).</target>
       </trans-unit>
       <trans-unit id="FFL.text.0">
         <source>Text field</source>
@@ -398,8 +398,7 @@
         <target>Fältstorlek</target>
       </trans-unit>
       <trans-unit id="tl_form_field.fSize.1">
-        <source>Here you can enter the size of the upload field (size attribute).</source>
-        <target>Här kan du ange storleken för uppladdningsfältet.</target>
+        <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
       </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>

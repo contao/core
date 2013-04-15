@@ -121,6 +121,10 @@
         <source>Set to 0 for unlimited recurrences.</source>
         <target>0にすると無期限の繰り返しとなります。</target>
       </trans-unit>
+      <trans-unit id="tl_calendar_events.repeatEnd">
+        <source>End of recurring event</source>
+        <target>繰り返すイベントの終了</target>
+      </trans-unit>
       <trans-unit id="tl_calendar_events.addEnclosure.0">
         <source>Add enclosures</source>
         <target>エンクロージャーを追加</target>

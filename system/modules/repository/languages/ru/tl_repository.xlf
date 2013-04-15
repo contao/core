@@ -54,7 +54,7 @@
         <target>Имя</target>
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
-        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are prefered. Additionally, the characters _ and - are allowed within the name.</source>
+        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
         <target>Имена расширений должны начинаться с a-z, A-Z или 0-9, нижний регистр более предпочтителен. Символы &quot;_&quot; и &quot;-&quot; также разрешены в имени.</target>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
@@ -102,7 +102,7 @@
         <target>Удобство</target>
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
-        <source>Does the extension meet the Contao standards for usability and accessability?</source>
+        <source>Does the extension meet the Contao standards for usability and accessibility?</source>
         <target>Расширение соответствует стандартам Contao по удобству, простоте использования и доступности?</target>
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
@@ -507,6 +507,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.showIncompatible">
         <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>В настоящее время вы просматриваете расширения, совместимые только с текущей версией Contao. Измените настройки в панели управления, для просмотра полного списка расширений.</target>
       </trans-unit>
       <trans-unit id="tl_repository_statext.uptodate">
         <source>Up to date</source>

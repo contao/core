@@ -43,6 +43,7 @@
       </trans-unit>
       <trans-unit id="tl_files.editor.1">
         <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
+        <target>Här kan du redigera källkoden i filen (tryck F11 för att växla till fullskärmsläge).</target>
       </trans-unit>
       <trans-unit id="tl_files.upload">
         <source>Upload files</source>
@@ -78,15 +79,19 @@
       </trans-unit>
       <trans-unit id="tl_files.syncAdded">
         <source>Added the file or folder &quot;%s&quot;</source>
+        <target>Lade till filen eller mappen &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncChanged">
         <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+        <target>Uppdaterade hash-nummer för filen eller mappen &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncUnchanged">
         <source>Found the file or folder &quot;%s&quot;</source>
+        <target>Hittade filen eller mappen &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncMoved">
         <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>Hittade filen eller mappen &quot;%s&quot; i &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncDeleted">
         <source>Removed the file or folder &quot;%s&quot;</source>

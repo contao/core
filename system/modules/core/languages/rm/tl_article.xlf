@@ -79,12 +79,15 @@
       </trans-unit>
       <trans-unit id="tl_article.guests.1">
         <source>Hide the article if a member is logged in.</source>
+        <target>Zuppentar l'artitgel sch'in commember è s'annunzià.</target>
       </trans-unit>
       <trans-unit id="tl_article.protected.0">
         <source>Protect article</source>
+        <target>Proteger l'artitgel</target>
       </trans-unit>
       <trans-unit id="tl_article.protected.1">
         <source>Show the article to certain member groups only.</source>
+        <target>Be mussar l'artitgel per tschertgas gruppas da commembers.</target>
       </trans-unit>
       <trans-unit id="tl_article.groups.0">
         <source>Allowed member groups</source>
@@ -92,6 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_article.groups.1">
         <source>These groups will be able to see the article.</source>
+        <target>Questas gruppas vegnan ad esser ablas da vesair l'artitgel.</target>
       </trans-unit>
       <trans-unit id="tl_article.cssID.0">
         <source>CSS ID/class</source>

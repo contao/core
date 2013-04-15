@@ -157,6 +157,10 @@
         <source>Please select at least one field!</source>
         <target>Selecteer tenminste één veld!</target>
       </trans-unit>
+      <trans-unit id="ERR.emptyUpload">
+        <source>Please select at least one file!</source>
+        <target>Selecteer tenminste één bestand!</target>
+      </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
         <target>Pagina alias &quot;%s&quot; bestaat reeds!</target>
@@ -941,6 +945,10 @@
         <source>Column</source>
         <target>Kolom</target>
       </trans-unit>
+      <trans-unit id="MSC.mw_enable">
+        <source>Enable/disable the module</source>
+        <target>Inschakelen/uitschakelen van de module</target>
+      </trans-unit>
       <trans-unit id="MSC.aw_title">
         <source>Title</source>
         <target>Titel</target>
@@ -1136,6 +1144,22 @@
       <trans-unit id="MSC.lastLogin.1">
         <source>Last login: %s</source>
         <target>Laatste keer ingelogd: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
+        <source>Current login</source>
+        <target>Huidige login</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.1">
+        <source>Current login: %s</source>
+        <target>Huidige login: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginCount">
+        <source>Login attempts</source>
+        <target>Login pogingen</target>
+      </trans-unit>
+      <trans-unit id="MSC.locked">
+        <source>Locked</source>
+        <target>Vergrendeld</target>
       </trans-unit>
       <trans-unit id="MSC.move">
         <source>Move the item via drag and drop</source>
@@ -2022,6 +2046,14 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
       <trans-unit id="MSC.autologin">
         <source>Remember me</source>
         <target>Onthoud mij</target>
+      </trans-unit>
+      <trans-unit id="MSC.createdOn">
+        <source>Created on</source>
+        <target>Aangemaakt op</target>
+      </trans-unit>
+      <trans-unit id="MSC.activation">
+        <source>Activated on</source>
+        <target>Geactiveerd op</target>
       </trans-unit>
       <trans-unit id="MSC.relevance">
         <source>%s relevance</source>

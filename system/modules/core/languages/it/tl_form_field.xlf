@@ -30,8 +30,8 @@
         <target>Fieldset</target>
       </trans-unit>
       <trans-unit id="FFL.fieldset.1">
-        <source>A container for form fields with an optional legend.</source>
-        <target>Un contenitore per i campi con una eventuale leggenda.</target>
+        <source>A container for form fields with an optional legend (only available for tableless forms).</source>
+        <target>Un contenitore per i campi di un form con una eventuale leggenda (disponibile solo per i form senza tabelle).</target>
       </trans-unit>
       <trans-unit id="FFL.text.0">
         <source>Text field</source>
@@ -398,8 +398,8 @@
         <target>Dimensione campo</target>
       </trans-unit>
       <trans-unit id="tl_form_field.fSize.1">
-        <source>Here you can enter the size of the upload field (size attribute).</source>
-        <target>Qui puoi inserire la dimensione del campo carica file (attributo dimensione).</target>
+        <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
+        <target>Qui puoi inserire la dimensione del campo carica file (attributo &lt;em&gt;size&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>

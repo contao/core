@@ -121,6 +121,10 @@
         <source>Set to 0 for unlimited recurrences.</source>
         <target>Geben Sie 0 ein, um das Event unbefristet zu wiederholen.</target>
       </trans-unit>
+      <trans-unit id="tl_calendar_events.repeatEnd">
+        <source>End of recurring event</source>
+        <target>Ende des wiederkehrenden Events</target>
+      </trans-unit>
       <trans-unit id="tl_calendar_events.addEnclosure.0">
         <source>Add enclosures</source>
         <target>Anlagen hinzufügen</target>

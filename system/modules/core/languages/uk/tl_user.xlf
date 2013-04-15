@@ -46,8 +46,7 @@
         <target>Завантажувач файлів</target>
       </trans-unit>
       <trans-unit id="tl_user.uploader.1">
-        <source>Here you can chose a file uploader.</source>
-        <target>Ви можете вибрати завантажувач файлів.</target>
+        <source>Here you can choose a file uploader.</source>
       </trans-unit>
       <trans-unit id="tl_user.showHelp.0">
         <source>Show explanation</source>

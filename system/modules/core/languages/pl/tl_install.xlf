@@ -179,6 +179,7 @@
       </trans-unit>
       <trans-unit id="tl_install.dbSocket">
         <source>Socket file</source>
+        <target>Plik gniazda</target>
       </trans-unit>
       <trans-unit id="tl_install.dbSave">
         <source>Save database settings</source>

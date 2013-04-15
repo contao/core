@@ -534,8 +534,7 @@
         <target>Live-opdatinges URL</target>
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
-        <source>Here you can enter the live update URL.</source>
-        <target>Her kan du skrive URL'en til live-opdating.</target>
+        <source>Here you can enter the Live Update URL.</source>
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>

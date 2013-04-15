@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.cacheTables.1">
         <source>Please select the data you want to purge or rebuild.</source>
-        <target>Jelölje ki a törlendő adatokat.</target>
+        <target>Jelölje ki az adatokat melyeket eltávolítani vagy újraépíteni akar.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.frontendUser.0">
         <source>Front end user</source>
@@ -135,9 +135,11 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.0">
         <source>Purge the system log</source>
+        <target>Rendszer napló kiürítése</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.1">
         <source>Truncates the &lt;em&gt;tl_log&lt;/em&gt; table which stores all the system log entries. This job permanently deletes these records.</source>
+        <target>Kiüríti a &lt;em&gt;tl_log&lt;/em&gt; táblát, mely tárolja a rendszernapló bejegyzéseket. Ezzel véglegesen törli ezeket a bejegyzéseket.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.images.0">
         <source>Purge the image cache</source>

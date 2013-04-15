@@ -134,16 +134,14 @@
         <target>Tag csoportok</target>
       </trans-unit>
       <trans-unit id="tl_member.groups.1">
-        <source>Here you can assign the user to one or more groups.</source>
-        <target>Itt rendelheti hozzá a felhasználót egy vagy több csoporthoz.</target>
+        <source>Here you can assign the member to one or more groups.</source>
       </trans-unit>
       <trans-unit id="tl_member.login.0">
         <source>Allow login</source>
         <target>Belépés engedélyezése</target>
       </trans-unit>
       <trans-unit id="tl_member.login.1">
-        <source>Allow the user to log into the front end.</source>
-        <target>Engedélyezi a felhasználó részére a belépést az oldalra.</target>
+        <source>Allow the member to log into the front end.</source>
       </trans-unit>
       <trans-unit id="tl_member.username.0">
         <source>Username</source>
@@ -158,8 +156,7 @@
         <target>Saját (home) mappa beállítása</target>
       </trans-unit>
       <trans-unit id="tl_member.assignDir.1">
-        <source>Define a home directory for the user.</source>
-        <target>Adja meg a saját (home) mappát a felhasználó számára.</target>
+        <source>Define a home directory for the member.</source>
       </trans-unit>
       <trans-unit id="tl_member.homeDir.0">
         <source>Home directory</source>
@@ -206,8 +203,8 @@
         <target>Kapcsolat részletei</target>
       </trans-unit>
       <trans-unit id="tl_member.groups_legend">
-        <source>User groups</source>
-        <target>Felhasználói csoportok</target>
+        <source>Member groups</source>
+        <target>Tagok csoportjai</target>
       </trans-unit>
       <trans-unit id="tl_member.login_legend">
         <source>Login details</source>

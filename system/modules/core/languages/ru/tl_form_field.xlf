@@ -30,8 +30,8 @@
         <target>Тег Fieldset</target>
       </trans-unit>
       <trans-unit id="FFL.fieldset.1">
-        <source>A container for form fields with an optional legend.</source>
-        <target>Контейнер для полей формы с необязательной легендой.</target>
+        <source>A container for form fields with an optional legend (only available for tableless forms).</source>
+        <target>Контейнер для полей формы с необязательной легендой (доступно только для бестабличных форм).</target>
       </trans-unit>
       <trans-unit id="FFL.text.0">
         <source>Text field</source>
@@ -399,8 +399,8 @@
         <target>Размер поля</target>
       </trans-unit>
       <trans-unit id="tl_form_field.fSize.1">
-        <source>Here you can enter the size of the upload field (size attribute).</source>
-        <target>Вы можете ввести размер поля загрузки (атрибут size).</target>
+        <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
+        <target>Вы можете ввести размер поля загрузки (атрибут &lt;em&gt;size&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>

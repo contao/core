@@ -94,8 +94,7 @@
         <target>富文本编辑器</target>
       </trans-unit>
       <trans-unit id="XPL.highlighter.0.1">
-        <source>For more information about how to configure the syntax highlighter please visit &lt;a href=&quot;http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
-        <target>请访问&lt;a href=&quot;http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; onclick=&quot;window.open(this.href); return false;&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;以获取更多关于如何配置语法高亮显示的信息。</target>
+        <source>For more information about how to configure the syntax highlighter please visit &lt;a href=&quot;http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
       </trans-unit>
     </body>
   </file>

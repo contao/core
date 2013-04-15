@@ -91,8 +91,7 @@
         <target>ပြည့်နှက်စာသားတည်းဖြတ်သူ</target>
       </trans-unit>
       <trans-unit id="XPL.highlighter.0.1">
-        <source>For more information about how to configure the syntax highlighter please visit &lt;a href=&quot;http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
-        <target>နောက်ထပ်အချက်အလက်များအတွက် &lt;a href=&quot;http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt; သို့ဖွဲ့ထုံးမီးမောင်းထိုးသူကိုမည်သို့ပံုစံပြင်နိုင်သည်ကိုကြည့်။</target>
+        <source>For more information about how to configure the syntax highlighter please visit &lt;a href=&quot;http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
       </trans-unit>
     </body>
   </file>

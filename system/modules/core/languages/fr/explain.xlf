@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="XPL.insertTags.0.1">
         <source>For more information about TinyMCE please visit &lt;a href=&quot;http://www.tinymce.com/&quot; title=&quot;TinyMCE by moxiecode&quot; target=&quot;_blank&quot;&gt;http://www.tinymce.com/&lt;/a&gt;.</source>
-        <target>Pour plus d'informations sur TinyMCE visiter &lt;a href=&quot;http://www.tinymce.com/&quot; title=&quot;TinyMCE by moxiecode&quot; target=&quot;_blank&quot;&gt;http://www.tinymce.com/&lt;/a&gt;.</target>
+        <target>Pour plus d'informations sur TinyMCE, veuillez s'il vous plaît visiter &lt;a href=&quot;http://www.tinymce.com/&quot; title=&quot;TinyMCE by moxiecode&quot; target=&quot;_blank&quot;&gt;http://www.tinymce.com/&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.0">
         <source>Insert tags</source>
@@ -22,8 +22,8 @@
         <target>Éditeur de code</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.1">
-        <source>For more information about CodeMirror please visit &lt;a href=&quot;http://codemirror.net&quot; title=&quot;EditArea by Marijn Haverbeke&quot; target=&quot;_blank&quot;&gt;http://codemirror.net&lt;/a&gt;.</source>
-        <target>Pour plus d'informations sur CodeMirror visiter &lt;a href=&quot;http://codemirror.net&quot; title=&quot;EditArea by Marijn Haverbeke&quot; target=&quot;_blank&quot;&gt;http://codemirror.net&lt;/a&gt;.</target>
+        <source>For more information about ACE please visit &lt;a href=&quot;http://ace.ajax.org&quot; title=&quot;ACE (Ajax.org Cloud9 Editor)&quot; target=&quot;_blank&quot;&gt;http://ace.ajax.org&lt;/a&gt;.</source>
+        <target>Pour plus d'informations concernant ACE, veuillez s'il vous plaît visiter &lt;a href=&quot;http://ace.ajax.org&quot; title=&quot;ACE (Ajax.org Cloud9 Editor)&quot; target=&quot;_blank&quot;&gt;http://ace.ajax.org&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.0.0">
         <source>colspan</source>
@@ -46,16 +46,16 @@
         <target>m/d/Y</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.2.1">
-        <source>MM/DD/YYYY, english format, e.g. 01/28/2005</source>
-        <target>MM/DD/YYYY, format anglais ex : 01/28/2005</target>
+        <source>MM/DD/YYYY, English format, e.g. 01/28/2005</source>
+        <target>MM/ JJ/AAAA, format anglais, par exemple 01/28/2005</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.3.0">
         <source>d.m.Y</source>
         <target>d.m.Y</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.3.1">
-        <source>DD.MM.YYYY, german format, e.g. 28.01.2005</source>
-        <target>DD.MM.YYYY, format allemand ex : 28.01.2005</target>
+        <source>DD.MM.YYYY, German format, e.g. 28.01.2005</source>
+        <target>JJ.MM.AAAA, format allemand, par exemple 28.01.2005</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.4.0">
         <source>y-n-j</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="XPL.dateFormat.6.1">
         <source>24 hours, minutes and seconds, e.g. 20:36:59</source>
-        <target>24 heures, minutes et secondes ex : 20:36:59</target>
+        <target>24 heures, minutes et secondes ex. : 20:36:59</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.7.0">
         <source>g:i</source>
@@ -87,15 +87,15 @@
       </trans-unit>
       <trans-unit id="XPL.dateFormat.7.1">
         <source>12 hours without leading zeros and minutes, e.g. 8:36</source>
-        <target>12 heures sans le zéro des heures et les minutes ex : 8:36</target>
+        <target>12 heures sans le zéro des heures et des minutes ex : 8:36</target>
       </trans-unit>
       <trans-unit id="XPL.highlighter.0.0">
         <source>Rich Text Editor</source>
-        <target>Coloration synthaxique</target>
+        <target>Coloration syntaxique</target>
       </trans-unit>
       <trans-unit id="XPL.highlighter.0.1">
-        <source>For more information about how to configure the syntax highlighter please visit &lt;a href=&quot;http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
-        <target>Pour plus d'information sur la coloration syntaxique, visiter &lt;a href=&quot;http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</target>
+        <source>For more information about how to configure the syntax highlighter please visit &lt;a href=&quot;http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
+        <target>Pour plus d'information sur la façon de configurer la coloration syntaxique, visitez &lt;a href=&quot;http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</target>
       </trans-unit>
     </body>
   </file>

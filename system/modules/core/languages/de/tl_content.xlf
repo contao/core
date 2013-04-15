@@ -286,8 +286,8 @@
         <target>Link-Titel</target>
       </trans-unit>
       <trans-unit id="tl_content.titleText.1">
-        <source>The link title is added as title attribute in the HTML markup.</source>
-        <target>Der Link-Titel wird als title-Attribut im HTML-Markup eingefügt.</target>
+        <source>The link title is added as &lt;em&gt;title&lt;/em&gt; attribute in the HTML markup.</source>
+        <target>Der Link-Titel wird als &lt;em&gt;title&lt;/em&gt;-Attribut im HTML-Markup eingefügt.</target>
       </trans-unit>
       <trans-unit id="tl_content.embed.0">
         <source>Embed the link</source>
@@ -302,8 +302,8 @@
         <target>Lightbox</target>
       </trans-unit>
       <trans-unit id="tl_content.rel.1">
-        <source>To trigger the lightbox, enter a rel attribute here.</source>
-        <target>Hier können Sie ein rel-Attribut eingeben, um die Lightbox anzusteuern.</target>
+        <source>To trigger the lightbox, enter a &lt;em&gt;rel&lt;/em&gt; attribute here.</source>
+        <target>Hier können Sie ein &lt;em&gt;rel&lt;/em&gt;-Attribut eingeben, um die Lightbox anzusteuern.</target>
       </trans-unit>
       <trans-unit id="tl_content.useImage.0">
         <source>Create an image link</source>

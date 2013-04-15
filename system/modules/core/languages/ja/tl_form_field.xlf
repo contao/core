@@ -30,8 +30,8 @@
         <target>フィールドセット</target>
       </trans-unit>
       <trans-unit id="FFL.fieldset.1">
-        <source>A container for form fields with an optional legend.</source>
-        <target>オプションで見出しを付けられる、フォームの項目のコンテナです。</target>
+        <source>A container for form fields with an optional legend (only available for tableless forms).</source>
+        <target>オプションで見出しを付けられる、フォームの項目のコンテナです。(表を使用しないレイアウトのフォームでだけ理容できます。)</target>
       </trans-unit>
       <trans-unit id="FFL.text.0">
         <source>Text field</source>
@@ -398,8 +398,8 @@
         <target>項目の大きさ</target>
       </trans-unit>
       <trans-unit id="tl_form_field.fSize.1">
-        <source>Here you can enter the size of the upload field (size attribute).</source>
-        <target>アップロードの項目の大きさ(size属性)を入力できます。</target>
+        <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
+        <target>アップロードの項目の大きさ(&lt;em&gt;size&lt;/em&gt;属性)を入力できます。</target>
       </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>

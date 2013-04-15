@@ -67,9 +67,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.location.0">
         <source>Event location</source>
+        <target>Lieu de l'événement</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.location.1">
         <source>Here you can enter the event location.</source>
+        <target>Saisir le lieu de l'événement</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.teaser.0">
         <source>Event teaser</source>
@@ -118,6 +120,10 @@
       <trans-unit id="tl_calendar_events.recurrences.1">
         <source>Set to 0 for unlimited recurrences.</source>
         <target>Mettre à 0 pour un nombre illimité de répétitions.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.repeatEnd">
+        <source>End of recurring event</source>
+        <target>Fin de l'événement récurrent</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.addEnclosure.0">
         <source>Add enclosures</source>

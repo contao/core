@@ -534,8 +534,8 @@
         <target>URL онлайн обновления</target>
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
-        <source>Here you can enter the live update URL.</source>
-        <target>Вы можете ввести URL онлайн обновления.</target>
+        <source>Here you can enter the Live Update URL.</source>
+        <target>Вы можете указать URL онлайн обновления Contao</target>
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>

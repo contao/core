@@ -268,24 +268,20 @@
         <target>Клас для тега BODY</target>
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.1">
-        <source>Here you can add custom classes to the body tag.</source>
-        <target>Тут Ви можете додати назви класів, що будуть додані до тега BODY.</target>
+        <source>Here you can add custom classes to the &lt;body&gt; tag.</source>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
         <target>Body onload атрибут</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.1">
-        <source>Here you can add a body onload attribute.</source>
-        <target>Якщо, якому-небудь, сценарію потрібна подія &lt;em&gt;&amp;lt;body onload=&quot;&quot;&lt;/em&gt;, варто включити код сюди.</target>
+        <source>Here you can add a body &lt;em&gt;onload&lt;/em&gt; attribute.</source>
       </trans-unit>
       <trans-unit id="tl_layout.head.0">
-        <source>Additional &amp;lt;head&amp;gt; tags</source>
-        <target>Додаткові теги заголовку &amp;lt;head&amp;gt;</target>
+        <source>Additional &lt;head&gt; tags</source>
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
-        <source>Here you can add individual tags to the head section of the page.</source>
-        <target>Ви можете додати додаткові метатеги і скрипти, які будуть включені в кінець заголовка сторінки (перед &amp;lt;/head&amp;gt;). Зверніть увагу: метатеги за замовчуванням, теги скрипта й теги стилю генеруються автоматично.</target>
+        <source>Here you can add individual tags to the &lt;head&gt; section of the page.</source>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>

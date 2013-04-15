@@ -102,8 +102,8 @@
         <target>Eigene Layoutbereiche</target>
       </trans-unit>
       <trans-unit id="tl_theme.missing_section">
-        <source>The layout section &lt;strong&gt;%s&lt;/strong&gt; is not defined in the back end settings.</source>
-        <target>Der Layoutbereich &lt;strong&gt;%s&lt;/strong&gt; ist in den Backend-Einstellungen nicht definiert.</target>
+        <source>The layout section &lt;strong&gt;%s&lt;/strong&gt; will be added to the local configuration.</source>
+        <target>Der Layoutbereich &lt;strong&gt;%s&lt;/strong&gt; wird zur lokalen Konfiguration hinzugefügt.</target>
       </trans-unit>
       <trans-unit id="tl_theme.sections_ok">
         <source>The layout sections have been successfully checked.</source>

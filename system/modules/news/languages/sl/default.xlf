@@ -34,12 +34,10 @@
         <target>%d</target>
       </trans-unit>
       <trans-unit id="MSC.news_previous">
-        <source>&amp;lt;</source>
-        <target>&lt;</target>
+        <source>&lt;</source>
       </trans-unit>
       <trans-unit id="MSC.news_next">
-        <source>&amp;gt;</source>
-        <target>&gt;</target>
+        <source>&gt;</source>
       </trans-unit>
     </body>
   </file>

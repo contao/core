@@ -134,16 +134,14 @@
         <target>Групи учасника</target>
       </trans-unit>
       <trans-unit id="tl_member.groups.1">
-        <source>Here you can assign the user to one or more groups.</source>
-        <target>Будь ласка, призначте одну або кілька груп.</target>
+        <source>Here you can assign the member to one or more groups.</source>
       </trans-unit>
       <trans-unit id="tl_member.login.0">
         <source>Allow login</source>
         <target>Дозволити вхід</target>
       </trans-unit>
       <trans-unit id="tl_member.login.1">
-        <source>Allow the user to log into the front end.</source>
-        <target>Якщо ви виберете цей пункт, ви зможете призначити ім’я та пароль користувачеві.</target>
+        <source>Allow the member to log into the front end.</source>
       </trans-unit>
       <trans-unit id="tl_member.username.0">
         <source>Username</source>
@@ -158,8 +156,7 @@
         <target>Призначити домашню директорію</target>
       </trans-unit>
       <trans-unit id="tl_member.assignDir.1">
-        <source>Define a home directory for the user.</source>
-        <target>Виберіть цю опцію, щоб призначити домашню директорію користувачеві.</target>
+        <source>Define a home directory for the member.</source>
       </trans-unit>
       <trans-unit id="tl_member.homeDir.0">
         <source>Home directory</source>
@@ -206,8 +203,8 @@
         <target>Контакти</target>
       </trans-unit>
       <trans-unit id="tl_member.groups_legend">
-        <source>User groups</source>
-        <target>Групи користувача</target>
+        <source>Member groups</source>
+        <target>Групи учасників</target>
       </trans-unit>
       <trans-unit id="tl_member.login_legend">
         <source>Login details</source>

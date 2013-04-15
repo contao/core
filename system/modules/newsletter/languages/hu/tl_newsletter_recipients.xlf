@@ -35,15 +35,19 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.token.0">
         <source>Token key</source>
+        <target>Igazoló kulcs</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.token.1">
         <source>The confirmation token of the subscription.</source>
+        <target>Megerősítő igazolás a feliratkozáshoz.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.confirmed.0">
         <source>Confirmation date</source>
+        <target>A megerősítés időpontja</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.confirmed.1">
         <source>The date of confirmation (double opt-in).</source>
+        <target>A megerősítés dátuma (double opt-in)</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.email_legend">
         <source>E-mail address</source>

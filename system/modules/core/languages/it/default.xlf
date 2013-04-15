@@ -157,6 +157,10 @@
         <source>Please select at least one field!</source>
         <target>Seleziona almeno un campo!</target>
       </trans-unit>
+      <trans-unit id="ERR.emptyUpload">
+        <source>Please select at least one file!</source>
+        <target>Selezionare almeno un file!</target>
+      </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
         <target>L'alias di pagina &quot;%s&quot; già esistente!</target>
@@ -547,6 +551,7 @@
       </trans-unit>
       <trans-unit id="FOP.f6">
         <source>Synchronize the file system with the database</source>
+        <target>Sincronizzare il file system con il database</target>
       </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
@@ -940,6 +945,10 @@
         <source>Column</source>
         <target>Colonna</target>
       </trans-unit>
+      <trans-unit id="MSC.mw_enable">
+        <source>Enable/disable the module</source>
+        <target>Attiva/disattiva il modulo</target>
+      </trans-unit>
       <trans-unit id="MSC.aw_title">
         <source>Title</source>
         <target>Titolo</target>
@@ -1135,6 +1144,22 @@
       <trans-unit id="MSC.lastLogin.1">
         <source>Last login: %s</source>
         <target>Ultimo login: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
+        <source>Current login</source>
+        <target>Login corrente</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.1">
+        <source>Current login: %s</source>
+        <target>Login corrente: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginCount">
+        <source>Login attempts</source>
+        <target>Tentativi di accesso</target>
+      </trans-unit>
+      <trans-unit id="MSC.locked">
+        <source>Locked</source>
+        <target>Bloccato</target>
       </trans-unit>
       <trans-unit id="MSC.move">
         <source>Move the item via drag and drop</source>
@@ -1720,7 +1745,7 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
       </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
-        <target>La &lt;strong&gt;cache interna&lt;/ strong&gt; non è ancora stata creata. Creare una cache migliora le prestazioni dell'applicazione ed è altamente raccomandato. Se non si desidera utilizzare la cache, è possibile disattivarla in modo permanente nelle impostazioni del backend.</target>
+        <target>La &lt;strong&gt;cache interna&lt;/strong&gt; non è ancora stata creata. Creare una cache migliora le prestazioni dell'applicazione ed è altamente raccomandato. Se non si desidera utilizzare la cache, è possibile disattivarla in modo permanente nelle impostazioni del backend.</target>
       </trans-unit>
       <trans-unit id="MSC.buildCacheLink">
         <source>Build the cache</source>
@@ -2022,6 +2047,14 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
         <source>Remember me</source>
         <target>Ricorda</target>
       </trans-unit>
+      <trans-unit id="MSC.createdOn">
+        <source>Created on</source>
+        <target>Creato il</target>
+      </trans-unit>
+      <trans-unit id="MSC.activation">
+        <source>Activated on</source>
+        <target>Attivato dal</target>
+      </trans-unit>
       <trans-unit id="MSC.relevance">
         <source>%s relevance</source>
         <target>%s rilevanza</target>
@@ -2044,6 +2077,7 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
       </trans-unit>
       <trans-unit id="MSC.location">
         <source>Location</source>
+        <target>Posizione</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

@@ -11,11 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_user.name.0">
         <source>Name</source>
-        <target>Nom</target>
+        <target>Nom de famille</target>
       </trans-unit>
       <trans-unit id="tl_user.name.1">
         <source>Please enter the first and last name.</source>
-        <target>Saisir le prénom ainsi que le nom.</target>
+        <target>Saisir le prénom ainsi que le nom de famille.</target>
       </trans-unit>
       <trans-unit id="tl_user.email.0">
         <source>E-mail address</source>
@@ -46,7 +46,7 @@
         <target>Outil d'envoi de fichier</target>
       </trans-unit>
       <trans-unit id="tl_user.uploader.1">
-        <source>Here you can chose a file uploader.</source>
+        <source>Here you can choose a file uploader.</source>
         <target>Choisir un outil d'envoi de fichier.</target>
       </trans-unit>
       <trans-unit id="tl_user.showHelp.0">
@@ -103,7 +103,7 @@
       </trans-unit>
       <trans-unit id="tl_user.groups.1">
         <source>Here you can assign the user to one or more groups.</source>
-        <target>Vous pouvez affecter l'utilisateur à un ou plusieurs groupes.</target>
+        <target>Affecter l'utilisateur à un ou plusieurs groupes.</target>
       </trans-unit>
       <trans-unit id="tl_user.inherit.0">
         <source>Permission inheritance</source>
@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_user.themes.1">
         <source>Here you can grant access to the theme modules.</source>
-        <target>Accorder l'accès au modules du thème.</target>
+        <target>Accorder l'accès aux modules du thème.</target>
       </trans-unit>
       <trans-unit id="tl_user.pagemounts.0">
         <source>Pagemounts</source>
@@ -199,7 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_user.disable.1">
         <source>Temporarily disable the account.</source>
-        <target>Désactiver temporairement un compte.</target>
+        <target>Désactiver temporairement le compte.</target>
       </trans-unit>
       <trans-unit id="tl_user.start.0">
         <source>Activate on</source>

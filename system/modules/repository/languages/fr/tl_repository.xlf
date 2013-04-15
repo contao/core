@@ -54,8 +54,7 @@
         <target>Nom</target>
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
-        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are prefered. Additionally, the characters _ and - are allowed within the name.</source>
-        <target>Les noms d'extension doivent commencer par a-z, A-Z ou 0-9. Les noms en minuscules sont préférables. En outre, les caractères _ et - sont autorisés dans le nom.</target>
+        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
         <source>Popularity</source>
@@ -102,8 +101,8 @@
         <target>Simplicité d'utilisation</target>
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
-        <source>Does the extension meet the Contao standards for usability and accessability?</source>
-        <target>Est-ce que l'extension répond aux normes Contao pour la simplicité d'utilisation et l'accessibilité ?</target>
+        <source>Does the extension meet the Contao standards for usability and accessibility?</source>
+        <target>Est-ce que l'extension est conforme aux standards de Contao concernant l'utilisabilité et l'accessibilité ?</target>
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
         <source>Version</source>
@@ -507,6 +506,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.showIncompatible">
         <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>Vous consultez actuellement les extensions compatibles avec la version actuelle de Contao seulement. Modifiez les paramètres du back office afin d'étendre les résultats de la recherche en affichant toutes les extensions.</target>
       </trans-unit>
       <trans-unit id="tl_repository_statext.uptodate">
         <source>Up to date</source>

@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="tl_member.lastname.0">
         <source>Last name</source>
-        <target>Nom</target>
+        <target>Nom de famille</target>
       </trans-unit>
       <trans-unit id="tl_member.lastname.1">
         <source>Please enter the last name.</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_member.company.1">
         <source>Here you can enter a company name.</source>
-        <target>Saisir la société.</target>
+        <target>Saisir le nom de la société.</target>
       </trans-unit>
       <trans-unit id="tl_member.street.0">
         <source>Street</source>
@@ -134,16 +134,16 @@
         <target>Membre des groupes</target>
       </trans-unit>
       <trans-unit id="tl_member.groups.1">
-        <source>Here you can assign the user to one or more groups.</source>
-        <target>Affecter l'utilisateur à un ou plusieurs groupes.</target>
+        <source>Here you can assign the member to one or more groups.</source>
+        <target>Affecter le membre à un ou plusieurs groupes.</target>
       </trans-unit>
       <trans-unit id="tl_member.login.0">
         <source>Allow login</source>
         <target>Permettre la connexion</target>
       </trans-unit>
       <trans-unit id="tl_member.login.1">
-        <source>Allow the user to log into the front end.</source>
-        <target>Générer un identifiant et un mot de passe pour le membre.</target>
+        <source>Allow the member to log into the front end.</source>
+        <target>Permettre au membre de se connecter au front office.</target>
       </trans-unit>
       <trans-unit id="tl_member.username.0">
         <source>Username</source>
@@ -158,7 +158,7 @@
         <target>Autoriser un répertoire personnel</target>
       </trans-unit>
       <trans-unit id="tl_member.assignDir.1">
-        <source>Define a home directory for the user.</source>
+        <source>Define a home directory for the member.</source>
         <target>Affecter un répertoire personnel au membre.</target>
       </trans-unit>
       <trans-unit id="tl_member.homeDir.0">
@@ -206,8 +206,8 @@
         <target>Informations de contact</target>
       </trans-unit>
       <trans-unit id="tl_member.groups_legend">
-        <source>User groups</source>
-        <target>Groupes</target>
+        <source>Member groups</source>
+        <target>Groupes de membres</target>
       </trans-unit>
       <trans-unit id="tl_member.login_legend">
         <source>Login details</source>
