@@ -193,7 +193,7 @@ class Calendar extends \Frontend
 
 					$objItem->title = $event['title'];
 					$objItem->link = $event['link'];
-					$objItem->published = $event['published'];
+					$objItem->published = $event['tstamp'];
 					$objItem->start = $event['start'];
 					$objItem->end = $event['end'];
 					$objItem->author = $event['authorName'];
