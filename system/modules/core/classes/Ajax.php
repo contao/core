@@ -166,7 +166,7 @@ class Ajax extends \Backend
 					}
 				}
 
-				// Empty live update ID
+				// Empty Live Update ID
 				if (!strlen(\Input::post('id')))
 				{
 					\System::loadLanguageFile('tl_maintenance');

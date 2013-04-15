@@ -16,7 +16,7 @@ namespace Contao;
 /**
  * Sends HTTP requests and reads the response
  *
- * The class can be used to communitcate with services that are available via
+ * The class can be used to communicate with services that are available via
  * HTTP (e.g. the Contao Extension Repository or the Live Update Service). It
  * uses some of Drupal's HTTP request class methods ({@see http://drupal.org}).
  *

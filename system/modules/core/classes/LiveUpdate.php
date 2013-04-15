@@ -96,7 +96,7 @@ class LiveUpdate extends \Backend implements \executable
 
 
 	/**
-	 * Run the live update
+	 * Run the Live Update
 	 * @param \BackendTemplate
 	 */
 	protected function runLiveUpdate(\BackendTemplate $objTemplate)
