@@ -464,6 +464,12 @@ Version 3.0.7 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly export the `pubDate` of calendar feeds (see #5641).
+
+### Fixed
+Remove script tags when printing an article as PDF (see #5626).
+
+### Fixed
 Purge the internal cache when disabling the Contao safe mode (see #5579).
 
 ### Fixed
