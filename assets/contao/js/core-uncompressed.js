@@ -597,7 +597,7 @@ var AjaxRequest =
 	},
 
 	/**
-	 * Store the live update ID
+	 * Store the Live Update ID
 	 * @param string
 	 */
 	liveUpdate: function(el, id) {

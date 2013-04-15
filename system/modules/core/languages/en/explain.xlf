@@ -72,7 +72,7 @@
         <source>Rich Text Editor</source>
       </trans-unit>
       <trans-unit id="XPL.highlighter.0.1">
-        <source>For more information about how to configure the syntax highlighter please visit &lt;a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults" title="SyntaxHighlighter by Alex Gorbatchev" target="_blank"&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
+        <source>For more information about how to configure the syntax highlighter please visit &lt;a href="http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults" title="SyntaxHighlighter by Alex Gorbatchev" target="_blank"&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
       </trans-unit>
     </body>
   </file>
