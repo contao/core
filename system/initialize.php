@@ -123,6 +123,41 @@ $objConfig = Config::getInstance();
 
 
 /**
+ * Initialize the Input and RequestToken class
+ */
+Input::initialize();
+RequestToken::initialize();
+
+
+/**
+ * Set the default language
+ */
+if (Input::post('language') && Input::post('FORM_SUBMIT') != 'tl_filters')
+{
+	$GLOBALS['TL_LANGUAGE'] = str_replace('_', '-', Input::post('language'));
+	$_SESSION['TL_LANGUAGE'] = $GLOBALS['TL_LANGUAGE'];
+}
+elseif (isset($_SESSION['TL_LANGUAGE']))
+{
+	$GLOBALS['TL_LANGUAGE'] = $_SESSION['TL_LANGUAGE'];
+}
+else
+{
+	foreach (Environment::get('httpAcceptLanguage') as $v)
+	{
+		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . str_replace('-', '_', $v)))
+		{
+			$GLOBALS['TL_LANGUAGE'] = $v;
+			$_SESSION['TL_LANGUAGE'] = $v;
+			break;
+		}
+	}
+
+	unset($v);
+}
+
+
+/**
  * Show the "incomplete installation" message
  */
 if (!$objConfig->isComplete() && Environment::get('script') != 'contao/install.php')
@@ -142,13 +177,6 @@ if (!$objConfig->isComplete() && Environment::get('script') != 'contao/install.p
 
 	exit;
 }
-
-
-/**
- * Initialize the Input and RequestToken class
- */
-Input::initialize();
-RequestToken::initialize();
 
 
 /**
@@ -196,34 +224,6 @@ if (TL_PATH !== null && !file_exists(TL_ROOT . '/system/config/pathconfig.php'))
 if (USE_MBSTRING && function_exists('mb_regex_encoding'))
 {
 	mb_regex_encoding($GLOBALS['TL_CONFIG']['characterSet']);
-}
-
-
-/**
- * Set the default language
- */
-if (Input::post('language') && Input::post('FORM_SUBMIT') != 'tl_filters')
-{
-	$GLOBALS['TL_LANGUAGE'] = str_replace('_', '-', Input::post('language'));
-	$_SESSION['TL_LANGUAGE'] = $GLOBALS['TL_LANGUAGE'];
-}
-elseif (isset($_SESSION['TL_LANGUAGE']))
-{
-	$GLOBALS['TL_LANGUAGE'] = $_SESSION['TL_LANGUAGE'];
-}
-else
-{
-	foreach (Environment::get('httpAcceptLanguage') as $v)
-	{
-		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . str_replace('-', '_', $v)))
-		{
-			$GLOBALS['TL_LANGUAGE'] = $v;
-			$_SESSION['TL_LANGUAGE'] = $v;
-			break;
-		}
-	}
-
-	unset($v);
 }
 
 
