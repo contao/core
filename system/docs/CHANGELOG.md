@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Improved
+Made the error screens translatable.
+
 ### Updated
 Updated SwiftMailer to version 4.3.1.
 

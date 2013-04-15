@@ -1,12 +1,21 @@
+<?php
+
+System::loadLanguageFile('exception');
+$lang = (object) $GLOBALS['TL_LANG']['XPT'];
+
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 
   <meta charset="utf-8">
-  <title>Invalid request token</title>
+  <title><?php echo $lang->requestToken; ?></title>
   <meta name="generator" content="Contao Open Source CMS">
-  <link rel="stylesheet" href="system/themes/default/basic.css">
-  <link rel="stylesheet" href="system/themes/default/error.css">
+
+  <style><?php
+    include TL_ROOT . '/system/themes/default/basic.css';
+    include TL_ROOT . '/system/themes/default/error.css';
+  ?></style>
 
 </head>
 <body class="__ua__">
@@ -19,21 +28,21 @@
 
     <div id="main">
 
-      <h2>Invalid request token!</h2>
+      <h2><?php echo $lang->requestToken; ?></h2>
 
-      <h3>What's the matter?</h3>
-      <p>The request token could not be verified.</p>
+      <h3><?php echo $lang->matter; ?></h3>
+      <p><?php echo $lang->invalidToken; ?></p>
 
-      <h3>How can I fix the issue?</h3>
-      <p>Please <a href="javascript:window.location.href=window.location.href">click this link</a> and try again. Do not use the back button of your browser.</p>
+      <h3><?php echo $lang->howToFix; ?></h3>
+      <p><?php echo $lang->tokenRetry; ?></p>
 
-      <h3>Tell me more, please</h3>
-      <p>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</p>
-      <p>For more information, search the <a href="https://contao.org/faq.html" target="_blank">Contao FAQs</a> or visit the <a href="https://contao.org/support.html" target="_blank">Contao support page</a>.</p>
+      <h3><?php echo $lang->more; ?></h3>
+      <p><?php echo $lang->tokenExplainOne; ?></p>
+      <p><?php echo $lang->tokenExplainTwo; ?></p>
 
     </div>
 
-    <p class="hint">To customize this notice, create a custom template file named <em>templates/be_referer.html5</em>.</p>
+    <p class="hint"><?php printf($lang->hint, 'templates/be_referer.html5'); ?></p>
 
   </div>
 

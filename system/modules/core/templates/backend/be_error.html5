@@ -1,15 +1,24 @@
+<?php
+
+System::loadLanguageFile('exception');
+$lang = (object) $GLOBALS['TL_LANG']['XPT'];
+
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 
   <meta charset="utf-8">
-  <title>An error occurred</title>
+  <title><?php echo $lang->error; ?></title>
   <meta name="generator" content="Contao Open Source CMS">
-  <link rel="stylesheet" href="system/themes/default/basic.css">
-  <link rel="stylesheet" href="system/themes/default/error.css">
+
+  <style><?php
+    include TL_ROOT . '/system/themes/default/basic.css';
+    include TL_ROOT . '/system/themes/default/error.css';
+  ?></style>
 
 </head>
-<body class="__ua__">
+<body>
 
   <div id="header">
     <h1>Contao Open Source CMS</h1>
@@ -18,21 +27,23 @@
   <div id="container">
 
     <div id="main">
-      <h2>An error occurred</h2>
 
-      <h3>What's the matter?</h3>
-      <p>An error occurred while executing this script. Something does not work properly.</p>
+      <h2><?php echo $lang->error; ?></h2>
 
-      <h3>How can I fix the issue?</h3>
-      <p>Open the <code>system/logs/error.log</code> file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</p>
+      <h3><?php echo $lang->matter; ?></h3>
+      <p><?php echo $lang->errorOccurred; ?></p>
+
+      <h3><?php echo $lang->howToFix; ?></h3>
+      <p><?php echo $lang->errorFixOne; ?></p>
       <pre>$GLOBALS['TL_CONFIG']['displayErrors'] = true;</pre>
-      <p>However, please be aware that <strong>anyone</strong> will be able to see error messages on your website then!</p>
+      <p><?php echo $lang->errorFixTwo; ?></p>
 
-      <h3>Tell me more, please</h3>
-      <p>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found it in the <code>system/logs/error.log</code> file (see above). If you do not understand the error message or do not know how to fix the problem, search the <a href="https://contao.org/faq.html" target="_blank">Contao FAQs</a> or visit the <a href="https://contao.org/support.html" target="_blank">Contao support page</a> and choose a support option.</p>
+      <h3><?php echo $lang->more; ?></h3>
+      <p><?php echo $lang->errorExplain; ?></p>
+
     </div>
 
-    <p class="hint">To customize this notice, create a custom template file named <em>templates/be_error.html5</em>.</p>
+    <p class="hint"><?php printf($lang->hint, 'templates/be_error.html5'); ?></p>
 
   </div>
 
