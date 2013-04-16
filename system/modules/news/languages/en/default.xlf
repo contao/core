@@ -27,10 +27,10 @@
         <source>%d item(s)</source>
       </trans-unit>
       <trans-unit id="MSC.news_previous">
-        <source>&lt;</source>
+        <source>&amp;lt;</source>
       </trans-unit>
       <trans-unit id="MSC.news_next">
-        <source>&gt;</source>
+        <source>&amp;gt;</source>
       </trans-unit>
     </body>
   </file>
