@@ -5,7 +5,7 @@
     $(document).ready(function() {
       $(document).accordion({
         // Put custom options here
-        autoHeight: false,
+        heightStyle: 'content',
         header:'div.toggler',
         collapsible: true
       });
