@@ -39,6 +39,12 @@ class Folder extends \System
 	protected $strFolder;
 
 	/**
+	 * Files model
+	 * @var \FilesModel
+	 */
+	protected $objModel;
+
+	/**
 	 * Synchronize the database
 	 * @var boolean
 	 */
@@ -105,7 +111,7 @@ class Folder extends \System
 			// Update the database
 			if ($this->blnSyncDb)
 			{
-				\Dbafs::addResource($this->strFolder);
+				$this->objModel = \Dbafs::addResource($this->strFolder);
 			}
 		}
 	}
@@ -250,7 +256,7 @@ class Folder extends \System
 		// Update the database AFTER the folder has been renamed
 		if ($this->blnSyncDb)
 		{
-			\Dbafs::moveResource($this->strFolder, $strNewName);
+			$this->objModel = \Dbafs::moveResource($this->strFolder, $strNewName);
 		}
 
 		// Reset the object AFTER the database has been updated
@@ -285,7 +291,7 @@ class Folder extends \System
 		// Update the database AFTER the folder has been renamed
 		if ($this->blnSyncDb)
 		{
-			\Dbafs::copyResource($this->strFolder, $strNewName);
+			$this->objModel = \Dbafs::copyResource($this->strFolder, $strNewName);
 		}
 
 		return $return;
@@ -314,6 +320,17 @@ class Folder extends \System
 			$objFile = new \File($this->strFolder . '/.htaccess', true);
 			$objFile->delete();
 		}
+	}
+
+
+	/**
+	 * Return the files model
+	 *
+	 * @return \FilesModel The files model
+	 */
+	public function getModel()
+	{
+		return $this->objModel;
 	}
 
 

@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### New
+Added the `File::getModel()` and `Folder::getModel()` methods (see #5656).
+
 ### Improved
 Made the error screens translatable.
 

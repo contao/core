@@ -52,6 +52,12 @@ class File extends \System
 	protected $strTmp;
 
 	/**
+	 * Files model
+	 * @var \FilesModel
+	 */
+	protected $objModel;
+
+	/**
 	 * Pathinfo
 	 * @var array
 	 */
@@ -402,7 +408,7 @@ class File extends \System
 	 * Delete the file
 	 *
 	 * @return boolean True if the operation was successful
- */
+	 */
 	public function delete()
 	{
 		$return = $this->Files->delete($this->strFile);
@@ -464,10 +470,21 @@ class File extends \System
 		// Update the database
 		if ($this->blnSyncDb)
 		{
-			\Dbafs::addResource($this->strFile);
+			$this->objModel = \Dbafs::addResource($this->strFile);
 		}
 
 		return $return;
+	}
+
+
+	/**
+	 * Return the files model
+	 *
+	 * @return \FilesModel The files model
+	 */
+	public function getModel()
+	{
+		return $this->objModel;
 	}
 
 
@@ -545,7 +562,7 @@ class File extends \System
 		// Update the database AFTER the file has been renamed
 		if ($this->blnSyncDb)
 		{
-			\Dbafs::moveResource($this->strFile, $strNewName);
+			$this->objModel = \Dbafs::moveResource($this->strFile, $strNewName);
 		}
 
 		// Reset the object AFTER the database has been updated
@@ -582,7 +599,7 @@ class File extends \System
 		// Update the database AFTER the file has been renamed
 		if ($this->blnSyncDb)
 		{
-			\Dbafs::copyResource($this->strFile, $strNewName);
+			$this->objModel = \Dbafs::copyResource($this->strFile, $strNewName);
 		}
 
 		return $return;
