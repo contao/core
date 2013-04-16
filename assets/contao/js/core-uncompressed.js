@@ -1495,7 +1495,7 @@ var Backend =
 			parent = $(el).getParent('tr'),
 			rows = tbody.getChildren(),
 			tabindex = 1,
-			select, childs, i, j;
+			input, select, childs, a, i, j;
 
 		Backend.getScrollOffset();
 
@@ -1540,9 +1540,15 @@ var Backend =
 		for (i=0; i<rows.length; i++) {
 			childs = rows[i].getChildren();
 			for (j=0; j<childs.length; j++) {
+				if (a = childs[j].getFirst('a.chzn-single')) {
+					a.set('tabindex', tabindex++);
+				}
 				if (select = childs[j].getFirst('select')) {
-					select.set('tabindex', tabindex++);
 					select.name = select.name.replace(/\[[0-9]+\]/g, '[' + i + ']');
+				}
+				if (input = childs[j].getFirst('input[type="checkbox"]')) {
+					input.set('tabindex', tabindex++);
+					input.name = input.name.replace(/\[[0-9]+\]/g, '[' + i + ']');
 				}
 			}
 		}
