@@ -509,43 +509,47 @@ class tl_files extends Backend
 	 */
 	public function protectFolder(DataContainer $dc)
 	{
-		$blnProtected = file_exists(TL_ROOT . '/' . $dc->id . '/.htaccess');
+		if (is_dir(TL_ROOT . '/' . $dc->id)) {
+			$blnProtected = file_exists(TL_ROOT . '/' . $dc->id . '/.htaccess');
 
-		// Protect or unprotect the folder
-		if (Input::post('FORM_SUBMIT') == 'tl_files')
-		{
-			if (Input::post('protected'))
+			// Protect or unprotect the folder
+			if (Input::post('FORM_SUBMIT') == 'tl_files')
 			{
-				if (!$blnProtected)
+				if (Input::post('protected'))
 				{
-					$blnProtected = true;
-					$objFolder = new Folder($dc->id);
-					$objFolder->protect();
+					if (!$blnProtected)
+					{
+						$blnProtected = true;
+						$objFolder = new Folder($dc->id);
+						$objFolder->protect();
+					}
+				}
+				else
+				{
+					if ($blnProtected)
+					{
+						$blnProtected = false;
+						$objFolder = new Folder($dc->id);
+						$objFolder->unprotect();
+					}
 				}
 			}
-			else
+
+			// Show a note for non-Apache servers
+			if (strpos(Environment::get('serverSoftware'), 'Apache') === false)
 			{
-				if ($blnProtected)
-				{
-					$blnProtected = false;
-					$objFolder = new Folder($dc->id);
-					$objFolder->unprotect();
-				}
+				Message::addInfo($GLOBALS['TL_LANG']['tl_files']['htaccessInfo']);
 			}
-		}
 
-		// Show a note for non-Apache servers
-		if (strpos(Environment::get('serverSoftware'), 'Apache') === false)
-		{
-			Message::addInfo($GLOBALS['TL_LANG']['tl_files']['htaccessInfo']);
-		}
-
-		return '
+			return '
 <div class="' . $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['tl_class'] . ' cbx">
   <div id="ctrl_' . $dc->field . '" class="tl_checkbox_single_container">
     <input type="hidden" name="' . $dc->inputName . '" value=""><input type="checkbox" name="' . $dc->inputName . '" id="opt_' . $dc->field . '_0" class="tl_checkbox" value="1"' . ($blnProtected ? ' checked="checked"' : '') . ' onfocus="Backend.getScrollOffset()"> <label for="opt_' . $dc->field . '_0">' . $GLOBALS['TL_LANG']['tl_files']['protected'][0] . '</label>
   </div>' . ($GLOBALS['TL_CONFIG']['showHelp'] ? '
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_files']['protected'][1] . '</p>' : '') . '
 </div>';
+		}
+
+		return '';
 	}
 }
