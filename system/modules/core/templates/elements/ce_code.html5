@@ -5,8 +5,6 @@
     <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
   <?php endif; ?>
 
-  <pre class="<?php echo $this->shClass; ?>">
-    <?php echo $this->code; ?>
-  </pre>
+  <pre class="<?php echo $this->shClass; ?>"><?php echo $this->code; ?></pre>
 
 </div>
