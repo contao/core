@@ -14,11 +14,11 @@ $GLOBALS['TL_CSS'][] = 'assets/swipe/'. SWIPE .'/css/swipe.min.css||static';
             c = s.getAttribute('data-config').split(',');
         new Swipe(s, {
           // Put custom options here
-          'auto':parseInt(c[0]),
-          'speed':parseInt(c[1]),
-          'startSlide':parseInt(c[2]),
-          'continuous':parseInt(c[3]),
-          'menu':$('.slider-control', cte)[0]
+          'auto': parseInt(c[0]),
+          'speed': parseInt(c[1]),
+          'startSlide': parseInt(c[2]),
+          'continuous': parseInt(c[3]),
+          'menu': $('.slider-control', cte)[0]
         });
       });
     });

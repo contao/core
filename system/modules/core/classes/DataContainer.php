@@ -338,14 +338,14 @@ class DataContainer extends \Backend
   <script>
     window.addEvent("domready", function() {
       new Picker.Date($("ctrl_' . $objWidget->id . '"), {
-        draggable:false,
-        toggle:$("toggle_' . $objWidget->id . '"),
-        format:"' . $format . '",
-        positionOffset:{x:-197,y:-182}' . $time . ',
-        pickerClass:"datepicker_dashboard",
-        useFadeInOut:!Browser.ie,
-        startDay:' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
-        titleFormat:"' . $GLOBALS['TL_LANG']['MSC']['titleFormat'] . '"
+        draggable: false,
+        toggle: $("toggle_' . $objWidget->id . '"),
+        format: "' . $format . '",
+        positionOffset: {x:-197,y:-182}' . $time . ',
+        pickerClass: "datepicker_dashboard",
+        useFadeInOut: !Browser.ie,
+        startDay: ' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
+        titleFormat: "' . $GLOBALS['TL_LANG']['MSC']['titleFormat'] . '"
       });
     });
   </script>';
@@ -361,9 +361,9 @@ class DataContainer extends \Backend
   <script>
     window.addEvent("domready", function() {
       new MooRainbow("moo_' . $this->strField . '", {
-        id:"ctrl_' . $strKey . '",
-        startColor:((cl = $("ctrl_' . $strKey . '").value.hexToRgb(true)) ? cl : [255, 0, 0]),
-        imgPath:"assets/mootools/colorpicker/'.COLORPICKER.'/images/",
+        id: "ctrl_' . $strKey . '",
+        startColor: ((cl = $("ctrl_' . $strKey . '").value.hexToRgb(true)) ? cl : [255, 0, 0]),
+        imgPath: "assets/mootools/colorpicker/'.COLORPICKER.'/images/",
         onComplete: function(color) {
           $("ctrl_' . $strKey . '").value = color.hex.replace("#", "");
         }
