@@ -509,6 +509,12 @@ class tl_files extends Backend
 	 */
 	public function protectFolder(DataContainer $dc)
 	{
+		// Only show for folders (see #5660)
+		if (!is_dir(TL_ROOT . '/' . $dc->id))
+		{
+			return '';
+		}
+
 		$blnProtected = file_exists(TL_ROOT . '/' . $dc->id . '/.htaccess');
 
 		// Protect or unprotect the folder
