@@ -98,6 +98,16 @@ class FormTextField extends \Widget
 			return parent::validator($varInput);
 		}
 
+		// Convert to Punycode format (see #5571)
+		if ($this->rgxp == 'url')
+		{
+			$varInput = \Idna::encodeUrl($varInput);
+		}
+		elseif ($this->rgxp == 'email' || $this->rgxp == 'friendly')
+		{
+			$varInput = \Idna::encodeEmail($varInput);
+		}
+
 		return parent::validator(trim($varInput));
 	}
 
@@ -109,7 +119,7 @@ class FormTextField extends \Widget
 	public function generate()
 	{
 		// Hide the Punycode format (see #2750)
-		if ($this->rgxp == 'email' || $this->rgxp == 'url')
+		if ($this->rgxp == 'email' || $this->rgxp == 'friendly' || $this->rgxp == 'url')
 		{
 			$this->varValue = \Idna::decode($this->varValue);
 		}

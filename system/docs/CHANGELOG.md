@@ -5,6 +5,9 @@ Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
 ### Fixed
+Store IDN domains in Punycode format (see #5571).
+
+### Fixed
 Re-added the row classes to the image gallery (see #5658).
 
 ### New
