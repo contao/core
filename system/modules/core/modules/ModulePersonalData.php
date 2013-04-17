@@ -209,7 +209,7 @@ class ModulePersonalData extends \Module
 				}
 
 				// Trigger the save_callback (see #5247)
-				if (!$objWidget->hasErrors() && is_array($arrData['save_callback']))
+				if ($objWidget->submitInput() && !$objWidget->hasErrors() && is_array($arrData['save_callback']))
 				{
 					foreach ($arrData['save_callback'] as $callback)
 					{
@@ -241,16 +241,6 @@ class ModulePersonalData extends \Module
 					// Set the new field in the member model
 					$blnModified = true;
 					$objMember->$field = $varValue;
-
-					// HOOK: set new password callback
-					if ($objWidget instanceof \FormPassword && isset($GLOBALS['TL_HOOKS']['setNewPassword']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
-					{
-						foreach ($GLOBALS['TL_HOOKS']['setNewPassword'] as $callback)
-						{
-							$this->import($callback[0]);
-							$this->$callback[0]->$callback[1]($this->User, $varValue, $this);
-						}
-					}
 				}
 			}
 

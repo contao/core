@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Fixed
+Do not trigger the "setNewPassword" hook twice (see #5247).
+
 ### Improved
 Inject the command scheduler script inline to reduce the number of JS files.
 

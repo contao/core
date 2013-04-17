@@ -216,7 +216,7 @@ class ModuleRegistration extends \Module
 				}
 
 				// Save callback
-				if (is_array($arrData['save_callback']))
+				if ($objWidget->submitInput() && !$objWidget->hasErrors() && is_array($arrData['save_callback']))
 				{
 					foreach ($arrData['save_callback'] as $callback)
 					{
@@ -224,7 +224,7 @@ class ModuleRegistration extends \Module
 
 						try
 						{
-							$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User);
+							$varValue = $this->$callback[0]->$callback[1]($varValue, null);
 						}
 						catch (\Exception $e)
 						{
