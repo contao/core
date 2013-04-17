@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Fixed
+Correctly detect open HTML tags in `String::substrHtml()` (see #5669).
+
 ### New
 Added the "initializeSystem" hook (see #5665).
 

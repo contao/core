@@ -145,7 +145,17 @@ class String
 			{
 				foreach ($arrTagBuffer as $strTag)
 				{
-					$strTagName = strtolower(substr(trim($strTag), 1, -1));
+					$strTagName = strtolower(trim($strTag));
+
+					// Extract the tag name (see #5669)
+					if (($pos = strpos($strTagName, ' ')) !== false)
+					{
+						$strTagName = substr($strTagName, 1, $pos - 1);
+					}
+					else
+					{
+						$strTagName = substr($strTagName, 1, -1);
+					}
 
 					// Skip empty tags
 					if (in_array($strTagName, $arrEmptyTags))
@@ -154,26 +164,24 @@ class String
 					}
 
 					// Store opening tags in the open_tags array
-					if (substr($strTag, 0, 2) != '</')
+					if (strncmp($strTagName, '/', 1) !== 0)
 					{
-						if (strlen($arrChunks[$i]) || $i<count($arrChunks))
+						if (!empty($arrChunks[$i]) || $i<count($arrChunks))
 						{
-							$arrOpenTags[] = $strTag;
+							$arrOpenTags[] = $strTagName;
 						}
 
 						continue;
 					}
 
 					// Closing tags will be removed from the "open tags" array
-					if (strlen($arrChunks[$i]) || $i<count($arrChunks))
+					if (!empty($arrChunks[$i]) || $i<count($arrChunks))
 					{
 						$arrOpenTags = array_values($arrOpenTags);
 
 						for ($j=count($arrOpenTags)-1; $j>=0; $j--)
 						{
-							$strOpenTag = trim(str_replace('<', '</', $arrOpenTags[$j]));
-
-							if ($strOpenTag == $strTag)
+							if ($strTagName == '/' . $arrOpenTags[$j])
 							{
 								unset($arrOpenTags[$j]);
 								break;
