@@ -74,7 +74,15 @@
   <?php echo $this->mootools; ?>
 
   <?php if (!$this->disableCron): ?>
-    <script type="text/javascript" src="<?php echo TL_ASSETS_URL; ?>assets/contao/js/scheduler.js?t=<?php echo $this->cronTimeout; ?>" id="cron"></script>
+    <script type="text/javascript">
+      /* <![CDATA[ */
+      <?php if ($this->layout->addJQuery): ?>
+        setTimeout(function(){jQuery.ajax("system/cron/cron.txt",{complete:function(e){var t=e.responseText||0;parseInt(t)<Math.round(+(new Date)/1e3)-<?php echo $this->cronTimeout; ?>&&jQuery.ajax("system/cron/cron.php")}})},5e3)
+      <?php else: ?>
+        setTimeout(function(){(new Request({url:"system/cron/cron.txt",onComplete:function(e){e||(e=0),parseInt(e)<Math.round(+(new Date)/1e3)-<?php echo $this->cronTimeout; ?>&&(new Request({url:"system/cron/cron.php"})).get()}})).get()},5e3)
+      <?php endif; ?>
+      /* ]]> */
+    </script>
   <?php endif; ?>
 
 </body>

@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### Improved
+Inject the command scheduler script inline to reduce the number of JS files.
+
 ### Fixed
 Store IDN domains in Punycode format (see #5571).
 
