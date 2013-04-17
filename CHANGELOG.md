@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.12 (2013-XX-XX)
 ----------------------------
 
+### Fixed
+Do not trigger the "setNewPassword" hook twice (see #5247).
+
 ### Updated
 Updated SimplePie to version 1.3.1 (see #5604).
 
