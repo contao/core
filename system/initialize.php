@@ -228,6 +228,18 @@ if (USE_MBSTRING && function_exists('mb_regex_encoding'))
 
 
 /**
+ * HOOK: add custom logic (see #5665)
+ */
+if (isset($GLOBALS['TL_HOOKS']['initializeSystem']) && is_array($GLOBALS['TL_HOOKS']['initializeSystem']))
+{
+	foreach ($GLOBALS['TL_HOOKS']['initializeSystem'] as $callback)
+	{
+		System::importStatic($callback[0])->$callback[1]();
+	}
+}
+
+
+/**
  * Include the custom initialization file
  */
 if (file_exists(TL_ROOT . '/system/config/initconfig.php'))

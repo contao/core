@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.RC1 (2013-04-XX)
 ----------------------------
 
+### New
+Added the "initializeSystem" hook (see #5665).
+
 ### Fixed
 Do not trigger the "setNewPassword" hook twice (see #5247).
 
