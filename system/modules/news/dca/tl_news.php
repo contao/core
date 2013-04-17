@@ -90,7 +90,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 				'href'                => 'table=tl_content',
 				'icon'                => 'edit.gif'
 			),
-			'editmeta' => array
+			'editheader' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news']['editmeta'],
 				'href'                => 'act=edit',

@@ -89,7 +89,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 				'href'                => 'table=tl_content',
 				'icon'                => 'edit.gif'
 			),
-			'editmeta' => array
+			'editheader' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_calendar_events']['editmeta'],
 				'href'                => 'act=edit',
