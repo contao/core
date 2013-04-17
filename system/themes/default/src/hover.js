@@ -53,7 +53,7 @@ window.addEvent('domready', function() {
 		});
 	});
 
-	// [Alt] + click or touch twice to edit
+	// [Ctrl] + click or touch twice to edit
 	$$('.click2edit').each(function(el) {
 		if (Browser.Features.Touch) {
 			el.addEvent('click', function(e) {
@@ -75,7 +75,7 @@ window.addEvent('domready', function() {
 						e.event.metaKey : e.event.ctrlKey;
 				if (key && e.event.shiftKey) {
 					el.getElements('a').each(function(a) {
-						if (a.hasClass('editheader')) {
+						if (a.hasClass('editheader') || a.hasClass('editmeta')) {
 							document.location.href = a.href;
 							return;
 						}
