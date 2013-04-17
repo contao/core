@@ -554,12 +554,33 @@ class Dbafs
 
 		if ($objFiles !== null)
 		{
+			$arrPidUpdate = array();
+
 			while ($objFiles->next())
 			{
 				$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFiles->hash);
 
 				if ($objFound !== null)
 				{
+					// Check for matching file names if the result is ambiguous (see #5644)
+					if ($objFound->count() > 1)
+					{
+						while ($objFound->next())
+						{
+							if ($objFound->name == $objFiles->name)
+							{
+								$objFound = $objFound->current();
+								break;
+							}
+						}
+					}
+
+					// Store the PID change
+					if ($objFiles->type == 'folder')
+					{
+						$arrPidUpdate[$objFound->id] = $objFiles->id;
+					}
+
 					// Add a log entry BEFORE changing the object
 					$objLog->append("[Moved] {$objFiles->path} to {$objFound->path}");
 
@@ -569,21 +590,7 @@ class Dbafs
 					$objFiles->name   = $objFound->name;
 					$objFiles->type   = $objFound->type;
 					$objFiles->path   = $objFound->path;
-
-					// Update the PID of the child records
-					if ($objFound->type == 'folder')
-					{
-						$objChildren = \FilesModel::findByPid($objFound->id);
-
-						if ($objChildren !== null)
-						{
-							while ($objChildren->next())
-							{
-								$objChildren->pid = $objFiles->id;
-								$objChildren->save();
-							}
-						}
-					}
+					$objFiles->found  = 1;
 
 					// Delete the newer (duplicate) entry
 					$objFound->delete();
@@ -598,6 +605,24 @@ class Dbafs
 
 					// Delete the entry if the resource has gone
 					$objFiles->delete();
+				}
+			}
+
+			// Update the PID of the child records
+			if (!empty($arrPidUpdate))
+			{
+				foreach ($arrPidUpdate as $from=>$to)
+				{
+					$objChildren = \FilesModel::findByPid($from);
+
+					if ($objChildren !== null)
+					{
+						while ($objChildren->next())
+						{
+							$objChildren->pid = $to;
+							$objChildren->save();
+						}
+					}
 				}
 			}
 		}
