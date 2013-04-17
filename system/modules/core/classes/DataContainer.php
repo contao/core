@@ -535,11 +535,11 @@ class DataContainer extends \Backend
 			// Add the key as CSS class
 			if (strpos($attributes, 'class="') !== false)
 			{
-				$attributes = str_replace('class="', 'class="' . $k . ' ', $attributes);
+				$attributes = str_replace('class="', ' class="' . $k . ' ', $attributes);
 			}
 			else
 			{
-				$attributes = 'class="' . $k . '"' . $attributes;
+				$attributes = ' class="' . $k . '"' . $attributes;
 			}
 
 			// Call a custom function instead of using the default button
