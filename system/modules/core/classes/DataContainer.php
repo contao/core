@@ -539,7 +539,7 @@ class DataContainer extends \Backend
 			}
 			else
 			{
-				$attributes = 'class="' . $k . '"' . $attributes;
+				$attributes = ' class="' . $k . '"' . $attributes;
 			}
 
 			// Call a custom function instead of using the default button
