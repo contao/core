@@ -5,6 +5,9 @@ Version 3.0.7 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly reload or redirect upon Ajax requests (see #5647).
+
+### Fixed
 Preserve protocol relative URLs when minifying the HTML markup (see #5664).
 
 ### Fixed

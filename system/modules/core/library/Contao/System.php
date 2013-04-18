@@ -213,16 +213,13 @@ abstract class System
 		// Ajax request
 		if (\Environment::get('isAjaxRequest'))
 		{
-			echo $strLocation;
-			exit;
+			echo '<script>location.replace("' . $strLocation . '")</script>';
 		}
-
-		if (headers_sent())
+		elseif (!headers_sent())
 		{
-			exit;
+			header('Location: ' . $strLocation);
 		}
 
-		header('Location: ' . $strLocation);
 		exit;
 	}
 
@@ -240,39 +237,42 @@ abstract class System
 		// Ajax request
 		if (\Environment::get('isAjaxRequest'))
 		{
-			echo $strLocation;
-			exit;
+			if (preg_match('@^https?://@i', $strLocation))
+			{
+				echo '<script>location.replace("' . $strLocation . '")</script>';
+			}
+			else
+			{
+				echo '<script>location.replace("' . \Environment::get('base') . $strLocation . '")</script>';
+			}
 		}
-
-		if (headers_sent())
+		elseif (!headers_sent())
 		{
-			exit;
-		}
+			// Header
+			switch ($intStatus)
+			{
+				case 301:
+					header('HTTP/1.1 301 Moved Permanently');
+					break;
 
-		// Header
-		switch ($intStatus)
-		{
-			case 301:
-				header('HTTP/1.1 301 Moved Permanently');
-				break;
+				case 302:
+					header('HTTP/1.1 302 Found');
+					break;
 
-			case 302:
-				header('HTTP/1.1 302 Found');
-				break;
+				case 303:
+					header('HTTP/1.1 303 See Other');
+					break;
+			}
 
-			case 303:
-				header('HTTP/1.1 303 See Other');
-				break;
-		}
-
-		// Check the target address
-		if (preg_match('@^https?://@i', $strLocation))
-		{
-			header('Location: ' . $strLocation);
-		}
-		else
-		{
-			header('Location: ' . \Environment::get('base') . $strLocation);
+			// Check the target address
+			if (preg_match('@^https?://@i', $strLocation))
+			{
+				header('Location: ' . $strLocation);
+			}
+			else
+			{
+				header('Location: ' . \Environment::get('base') . $strLocation);
+			}
 		}
 
 		exit;
