@@ -5,6 +5,9 @@ Version 3.0.7 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Preserve protocol relative URLs when minifying the HTML markup (see #5664).
+
+### Fixed
 Correctly export the `pubDate` of calendar feeds (see #5641).
 
 ### Fixed
