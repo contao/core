@@ -1326,6 +1326,21 @@ abstract class Controller extends System
 		// Handle line breaks in preformatted text
 		$strArticle = preg_replace_callback('@(<pre.*</pre>)@Us', 'nl2br_callback', $strArticle);
 
+		// Handle base64 encoded images
+		preg_match_all('@src="data:image/(.*);base64,([^"]*)"@', $strArticle, $arrMatches);
+
+		if ($arrMatches)
+		{
+			foreach ($arrMatches[0] as $k => $match)
+			{
+				$strSrcPath = 'system/html/' . md5($arrMatches[2][$k]) . '.' . $arrMatches[1][$k];
+				$objFile = new File($strSrcPath);
+				$objFile->write(base64_decode($arrMatches[2][$k]));
+				$objFile->close();
+				$strArticle = str_replace($match, sprintf('src="%s"', $this->Environment->base . $strSrcPath), $strArticle);
+			}
+		}
+
 		// Default PDF export using TCPDF
 		$arrSearch = array
 		(
