@@ -3,83 +3,63 @@
     <body>
       <trans-unit id="XPT.error">
         <source>An error occurred</source>
-        <target>Ett fel uppstod</target>
       </trans-unit>
       <trans-unit id="XPT.matter">
         <source>What's the matter?</source>
-        <target>Vad är problemet?</target>
       </trans-unit>
       <trans-unit id="XPT.howToFix">
         <source>How can I fix the issue?</source>
-        <target>Hur kan jag åtgärda problemet?</target>
       </trans-unit>
       <trans-unit id="XPT.more">
         <source>Tell me more, please</source>
-        <target>Berätta mer</target>
       </trans-unit>
       <trans-unit id="XPT.hint">
         <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
-        <target>För att anpassa detta meddelande, skapa en anpassad mall-fil med namnet &lt;em&gt;%s&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.errorOccurred">
         <source>An error occurred while executing this script. Something does not work properly.</source>
-        <target>Ett fel uppstod under körning av skriptet. Något fungerar inte som det ska.</target>
       </trans-unit>
       <trans-unit id="XPT.errorFixOne">
         <source>Open the &lt;code&gt;system/logs/error.log&lt;/code&gt; file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</source>
-        <target>Öppna filen &lt;code&gt;system/logs/error.log&lt;/code&gt; och lokalisera filmeddelandet (vanligtvis det sista i filen). Du kan även lägga till följande rad i den lokala konfigurationsfilen och ladda om dessa sida:</target>
       </trans-unit>
       <trans-unit id="XPT.errorFixTwo">
         <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
-        <target>Observera att &lt;strong&gt;alla besökare&lt;/strong&gt; då kommer att kunna se felmeddelanden på din hemsida!</target>
       </trans-unit>
       <trans-unit id="XPT.errorExplain">
         <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
-        <target>Skriptkörningen stoppades på grund av att något inte fungerade som det ska. Detta meddelande visas istället för det riktiga felmeddelandet av säkerhetsskäl men felmeddelandet kan läsas i filen  &lt;code&gt;system/logs/error.log&lt;/code&gt; (se ovan). Om du inte förstår felmeddelandet eller inte vet hur det ska åtgärdas, sök i &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contaos FAQ&lt;/a&gt; eller besök &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contaos supportsida&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.requestToken">
         <source>Invalid request token</source>
-        <target>Felaktigt token</target>
       </trans-unit>
       <trans-unit id="XPT.invalidToken">
         <source>The request token could not be verified.</source>
-        <target>Token kunde inte verifieras.</target>
       </trans-unit>
       <trans-unit id="XPT.tokenRetry">
         <source>Please &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;click this link&lt;/a&gt; and try again. Do not use the back button of your browser.</source>
-        <target>Vänligen &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;klicka på denna länk&lt;/a&gt; och försök igen. Använd ej bakåt-knappen i webbläsaren.</target>
       </trans-unit>
       <trans-unit id="XPT.tokenExplainOne">
         <source>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</source>
-        <target>Detta felmeddelande visas om det finns en POST-förfrågan utan giltigt autentiserings-token. I Contao 2.10 så har hänvisningskontrollen ersatts av ett token-system. Om problemet kvarstår så kan det bero på en 3:e-partsmodul som inte är kompatibel eller så är din Contao-installation inte uppdaterad på ett korrekt sätt.</target>
       </trans-unit>
       <trans-unit id="XPT.tokenExplainTwo">
         <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
-        <target>För mer information, sök i  &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contaos FAQ&lt;/a&gt; eller besök &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contaos-supportsida&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.incomplete">
         <source>Incomplete installation</source>
-        <target>Ofullständig installation</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteInstallation">
         <source>The installation has not been completed, therefore Contao cannot work properly.</source>
-        <target>Installationen har inte slutförts vilket medför att Contao inte kan fungera på ett korrekt sätt.</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteFixOne">
         <source>Point your browser to the following URL:</source>
-        <target>Använd webbläsaren för att gå till följande URL:</target>
       </trans-unit>
       <trans-unit id="XPT.installPath">
         <source>path-to-installation</source>
-        <target>path-to-installation</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteFixTwo">
         <source>This will open the Contao install tool, which will guide you through the installation process.</source>
-        <target>Detta öppnar Contaos installationsverktyg som guidar dig genom installationsprocessen.</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/3.0/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
-        <target>För mer information läs &lt;a href=&quot;https://contao.org/manual/3.0/installation.html&quot; target=&quot;_blank&quot;&gt;Contaos installationsmanual&lt;/a&gt;.</target>
       </trans-unit>
     </body>
   </file>

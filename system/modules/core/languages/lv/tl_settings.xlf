@@ -3,588 +3,586 @@
     <body>
       <trans-unit id="tl_settings.websiteTitle.0">
         <source>Website title</source>
-        <target>Hemsidans titel</target>
+        <target>Mājas lapas nosaukums</target>
       </trans-unit>
       <trans-unit id="tl_settings.websiteTitle.1">
         <source>Please enter the title of the website.</source>
-        <target>Ange en titel för hemsidan.</target>
+        <target>Lūdzu ievadiet mājas lapas nosaukumu</target>
       </trans-unit>
       <trans-unit id="tl_settings.adminEmail.0">
         <source>E-mail address of the system administrator</source>
-        <target>E-postadress till systemadministratör</target>
+        <target>Sistēmas administratora e-pasts</target>
       </trans-unit>
       <trans-unit id="tl_settings.adminEmail.1">
         <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
-        <target>Automatiskt generated E-postmeddelanden, som t.ex. bekräftelser på prenumerationer, kommer att skickas till denna adress.</target>
+        <target>Lūdzu ievadiet sistēmas administratora e-pastu.</target>
       </trans-unit>
       <trans-unit id="tl_settings.dateFormat.0">
         <source>Date format</source>
-        <target>Datumformat</target>
+        <target>Datuma formāts</target>
       </trans-unit>
       <trans-unit id="tl_settings.dateFormat.1">
         <source>The date format string will be parsed with the PHP date() function.</source>
-        <target>Ange ett datumformat så som det används av PHP-funktionen date().</target>
+        <target>Lūdzu ievadiet datuma formātu kādu lieto PHP funkcija date().</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeFormat.0">
         <source>Time format</source>
-        <target>Tidsformat</target>
+        <target>Laika formāts</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeFormat.1">
         <source>The time format string will be parsed with the PHP date() function.</source>
-        <target>Ange ett tidsformat så som det används av PHP-funktionen date().</target>
+        <target>Lūdzu ievadiet laika formātu, kādu lieto PHP funkcija date().</target>
       </trans-unit>
       <trans-unit id="tl_settings.datimFormat.0">
         <source>Date and time format</source>
-        <target>Datum- och tidsformat</target>
+        <target>Datuma un laika formāts</target>
       </trans-unit>
       <trans-unit id="tl_settings.datimFormat.1">
         <source>The date and time format string will be parsed with the PHP date() function.</source>
-        <target>Ange ett datum- och tidsformat så som det används av PHP-funktionen date().</target>
+        <target>Lūdzu ievadiet datuma un laika formātu, kādu lieto PHP funkcija date().</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeZone.0">
         <source>Time zone</source>
-        <target>Tidszon</target>
+        <target>Laika zona</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeZone.1">
         <source>Please select the server time zone.</source>
-        <target>Välj tidszon för din webbserver.</target>
+        <target>Lūdzu izvēlieties savu laika zonu</target>
       </trans-unit>
       <trans-unit id="tl_settings.websitePath.0">
         <source>Relative path to the Contao directory</source>
-        <target>Relativ sökväg till Contao-mappen</target>
+        <target>Relatīvais ceļš uz Contao direktoriju</target>
       </trans-unit>
       <trans-unit id="tl_settings.websitePath.1">
         <source>The relative path to the Contao directory is usually set automatically by the install tool.</source>
-        <target>Den relativa sökvägen till Contao katalogen är vanligtvis automatiskt genererad av installationsverktyget.</target>
+        <target>Relatīvo ceļu uz Contao direktoriju parasti automātiski nosaka instalēšanas rīks.</target>
       </trans-unit>
       <trans-unit id="tl_settings.characterSet.0">
         <source>Character set</source>
-        <target>Teckenavkodning</target>
+        <target>Rakstzīmju kopa</target>
       </trans-unit>
       <trans-unit id="tl_settings.characterSet.1">
         <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
-        <target>Ange teckenavkodning (character set). UTF-8 rekommenderas för att vara säker på att specialtecken visas korrekt.&lt;br /&gt;Ändra inte teckenavkodningen såvida du inte har en god anledning att göra så.</target>
+        <target>Lūdzu ievadiet rakstzīmju kopu. Rekomendēts lietot UTF-8, lai nodrošinātu ka speciālas rakstzīmes tiek attēlotas pareizi. Nemainiet rakstzīmju kopu, izņemot gadījumus ja ir attēlošanas problēmas.</target>
       </trans-unit>
       <trans-unit id="tl_settings.customSections.0">
         <source>Custom layout sections</source>
-        <target>Egna layoutsektioner</target>
+        <target>Pielāgotās izklājuma sadaļas</target>
       </trans-unit>
       <trans-unit id="tl_settings.customSections.1">
         <source>Here you can enter a comma separated list of custom layout sections.</source>
-        <target>Här kan du skriva in en kommaseparerad lista med egna layoutsektioner. Du kan använda dessa sektioner i modulen &lt;em&gt;Sidlayout&lt;/em&gt;.</target>
+        <target>Šeit jūs varat ievadīt ar komatu atdalītu sarakstu ar pielāgotām izklājuma sadaļām.</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableCron.0">
         <source>Disable the command scheduler</source>
-        <target>Avaktivera kommandoplaneraren</target>
+        <target>Atslēgt komandu plānotāju</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableCron.1">
         <source>Disable the periodic command scheduler and execute the cron.php script by a real cron job (which you have to set up manually).</source>
-        <target>Avaktivera kommandoplaneraren och kör istället skriptet cron.php via ett äkta cron job (som du själv måste sätta upp i servern).</target>
+        <target>Izslēgt periodisko komandu plānotāju un izpildīt cron.php skriptu, ar reālu cron darbu (kas jums būs jāizveido manuāli).</target>
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.0">
         <source>Minify the markup</source>
-        <target>Minifiera HTML-kod</target>
+        <target>Minimizēt atzīmes</target>
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.1">
         <source>Minify the HTML markup before it is sent to the browser (requires the PHP tidy extension).</source>
-        <target>Minifiera (komprimera) HTML-koden innan den skickas till besökarens webbläsare (kräver ev. installation/aktivering av tidy-tillägget i PHP för att fungera).</target>
+        <target>Minimizē HTML atzīmes pirms tās tiek sūtītas uz pārlūkprogrammu (nepieciešams PHP tidy paplašinājums).</target>
       </trans-unit>
       <trans-unit id="tl_settings.gzipScripts.0">
         <source>Compress scripts</source>
-        <target>Komprimera skript</target>
+        <target>Arhivēt skriptus</target>
       </trans-unit>
       <trans-unit id="tl_settings.gzipScripts.1">
         <source>Create a compressed version of the combined CSS and JavaScript files. Requires adjustments of the .htaccess file.</source>
-        <target>Skapar en komprimerad version av kombinerade CSS- och JavaScript-filer. Kräver justering i filen .htaccess.</target>
+        <target>Izveidot arhivētu versiju no kombinētiem CSS un JavaScript failiem. Nepieciešami pielāgojumi .htaccess failā.</target>
       </trans-unit>
       <trans-unit id="tl_settings.resultsPerPage.0">
         <source>Items per page</source>
-        <target>Poster per sida</target>
+        <target>Vienumi lapā</target>
       </trans-unit>
       <trans-unit id="tl_settings.resultsPerPage.1">
         <source>Here you can define the number of items per page in the back end.</source>
-        <target>Här kan du ange ett standardvärde för hur många poster som kommer att visas i backend.</target>
+        <target>Šeit jūs varat noteikt vienumu skaitu aizmugures lapā.</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxResultsPerPage.0">
         <source>Maximum items per page</source>
-        <target>Max poster per sida</target>
+        <target>Maksimālais vienumu daudzums lapā</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxResultsPerPage.1">
         <source>This overall limit takes effect if a user chooses the &quot;show all records&quot; option.</source>
-        <target>Denna begränsning aktiveras när användaren väljer &quot;visa alla poster&quot;.</target>
+        <target>Šis vispārējais ierobežojums stājas spēkā, ja lietotājs izvēlas &quot;parādīt visus ierakstus&quot; variantu.</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
         <source>Exclude folders from synchronization</source>
-        <target>Exkludera mappar från synkroniseringen</target>
+        <target>Izslēgt mapes no sinhronizācijas</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Här kan du ange en kommaseparerad lista över mappar som ska undantas vid filsynkronisering (t.ex. &lt;em&gt;attachments,music_academy&lt;/em&gt;).
-Notera att exkluderade resurser inte kan användas i innehållselement som t.ex. Bild eller Nedladdning.</target>
+        <target>Šeit jūs varat ievadīt ar komatu atdalītu mapju sarakstu, kas būs atbrīvoti no datņu sinhronizācijas (piem. &lt;em&gt;pielikumi, music_academy&lt;/em&gt;). Ievērojiet, ka izlaistie resursi nevar tikt izmantoti, piemēram, attēlu vai lejupielādes elementos!</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
-        <target>Kollapsa inte elementen</target>
+        <target>Nesakļaut ierakstus</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.1">
         <source>Do not collapse elements in the back end preview.</source>
-        <target>Kollapsa inte innehållselementen och andra resurser när dom förhandsvisas i backend.</target>
+        <target>Nesavērst elementus administrēšanas moduļa apskates režīmā.</target>
       </trans-unit>
       <trans-unit id="tl_settings.urlSuffix.0">
         <source>URL suffix</source>
-        <target>URL-suffix</target>
+        <target>URL sufikss</target>
       </trans-unit>
       <trans-unit id="tl_settings.urlSuffix.1">
         <source>The URL suffix will be added to the URI string to simulate static documents.</source>
-        <target>Webbadressuffixet är en filtyp som har lagts till i URI-strängen för att simulera statiska dokument. Grundinställningen URL suffix är &lt;em&gt;.html&lt;/em&gt;. Observera att ingen URL suffix alls kan ha en negativ effekt på sökmotorns rankning.</target>
+        <target>URL sufikss tiks pievienots URI virkni, lai modelētu statisku dokumentu.</target>
       </trans-unit>
       <trans-unit id="tl_settings.cacheMode.0">
         <source>Cache mode</source>
-        <target>Cache-läge</target>
+        <target>Cache mode</target>
       </trans-unit>
       <trans-unit id="tl_settings.cacheMode.1">
         <source>Here you can select the cache mode.</source>
-        <target>Här kan du välja cache-läge.</target>
+        <target>Šeit jūs varat izvēlēties kešatmiņas režīmu.</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
-        <target>Anonymisera IP-adresser</target>
+        <target>Anonimizēt IP adreses</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.1">
         <source>Anonymize any IP address that is stored in the database, except in the &lt;em&gt;tl_session&lt;/em&gt; table (the IP address is bound to the session for security reasons).</source>
-        <target>Anonymisera alla IP-adresser som är lagrade i databasen förutom i &lt;em&gt;tl_session&lt;/em&gt;-tabellen (IP-adresser är bundna till sessioner av säkerhetsskäl).</target>
+        <target>Anonymize jebkuru IP adresi, kas glabājas datu bāzē, izņemot šajā &lt;em&gt;tl_session&lt;/em&gt; tabulā (IP adrese ir saistīta ar sesiju drošības apsvērumu dēļ).</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeGA.0">
         <source>Anonymize Google Analytics</source>
-        <target>Anonymisera Google Analytics</target>
+        <target>Anonimizēt Google Analytics</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeGA.1">
         <source>Anonymize the IP addresses that are sent to Google Analytics.</source>
-        <target>Anonymisera IP-adresser som skickas till Google Analytics.</target>
+        <target>Anonimizē IP adreses, kas tiek nosūtītas uz Google Analytics.</target>
       </trans-unit>
       <trans-unit id="tl_settings.rewriteURL.0">
         <source>Rewrite URLs</source>
-        <target>Omskrivna URL:er</target>
+        <target>Pārrakstīt URL adreses</target>
       </trans-unit>
       <trans-unit id="tl_settings.rewriteURL.1">
         <source>Make Contao generate static URLs without the index.php fragment. This feature requires &quot;mod_rewrite&quot;, renaming the &quot;.htaccess.default&quot; file to &quot;.htaccess&quot; and adjusting the RewriteBase as necessary.</source>
-        <target>Med detta val kan du få Contao att generera statiska URL:er utan &quot;index.php&quot;. Den här funktionen kräver &quot;mod_rewrite&quot; samt att &quot;.htaccess.default&quot;-filen döps om till &quot;.htaccess&quot; och att RewriteBase i samma fil justeras vid behov.</target>
+        <target>Likt Contao ģenerēt statisko URL bez index.php fragmenta. Šai funkcijai ir nepieciešams &quot;mod_rewrite&quot;, pārdēvējot &quot;.htaccess.default&quot; failu par &quot;.htaccess&quot;, un pielāgojot RewriteBase pēc vajadzības.</target>
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.0">
         <source>Add the language to the URL</source>
-        <target>Lägg till språkkod till URL</target>
+        <target>Pievienot valodu URL</target>
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
         <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</source>
-        <target>Lägg till språkkod som första URL-parameter (t.ex. &lt;em&gt;http://domain.tld/sv/&lt;/em&gt;).</target>
+        <target>Pievienot valodas virkni kā pirmo URL parametru (piem. &lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>
-        <target>Vidaresänd inte tomma URLer</target>
+        <target>Nepārsūtīt tukšas URL</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.1">
         <source>For an empty URL display the website instead of redirecting to the language root page (not recommended).</source>
-        <target>För tomma URLer visas webbplatsen istället för att vidaresända till språkets rotsida (ej rekommenderat).</target>
+        <target>Tukšas URL adreses parādīšanai mājas lapā, nevis novirzot uz valodas saknes lapu (nav ieteicams).</target>
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.0">
         <source>Enable auto_item</source>
-        <target>Använd auto_item-parameter</target>
+        <target>Izmantot auto_item parametru</target>
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.1">
         <source>Skip the &lt;em&gt;items/&lt;/em&gt; or &lt;em&gt;events/&lt;/em&gt; fragment in the URL and automatically discover the item based on the &lt;em&gt;auto_item&lt;/em&gt; parameter.</source>
-        <target>Hoppa över &lt;em&gt;items/&lt;/em&gt;- eller &lt;em&gt;events/&lt;/em&gt;-delarna i URLer för att istället automatiskt identifiera objektet baserat på &lt;em&gt;auto_item&lt;/em&gt;-parameter.</target>
+        <target>Izlaist &lt;em&gt;items/&lt;/em&gt;vai&lt;em&gt;events/&lt;/em&gt; fragmentu lapas adresē un automātiski atklāt objektu, pamatojoties uz &lt;em&gt;auto_item&lt;/em&gt; parametru.</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableAlias.0">
         <source>Disable page alias usage</source>
-        <target>Stäng av användningen av sidalias</target>
+        <target>Atslēgt lapas aizstājvārda pielietošanu.</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableAlias.1">
         <source>Use the numeric ID of a page or article instead of its alias.</source>
-        <target>Om du väljer detta val kommer Contao att använda sidans numeriska ID istället för sidans sidalias för att generera URL:er (d.v.s &lt;em&gt;12.html&lt;/em&gt; istället för &lt;em&gt;home.html&lt;/em&gt;).</target>
+        <target>Izmantojiet lapas vai raksta ciparu ID, lapas aizstājvārda (alias) vietā.</target>
       </trans-unit>
       <trans-unit id="tl_settings.folderUrl.0">
         <source>Enable folder URLs</source>
-        <target>Aktivera folder-URL:er</target>
+        <target>Iespējot mapju URL</target>
       </trans-unit>
       <trans-unit id="tl_settings.folderUrl.1">
         <source>Here you can enable folder-style page aliases like &lt;em&gt;docs/install/download.html&lt;/em&gt; instead of &lt;em&gt;docs-install-download.html&lt;/em&gt;.</source>
-        <target>Här kan du aktivera generering av folder-struktur för sidalias. T.ex. &lt;em&gt;docs/install/download.html&lt;/em&gt; istället för &lt;em&gt;docs-install-download.html&lt;/em&gt;.</target>
+        <target>Šeit jūs varat iespējot mapju veida lapu aizstājvārdus. Piem. &lt;em&gt;docs-install-download.html&lt;/em&gt; vietā  &lt;em&gt;docs/install/download.html&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_settings.allowedTags.0">
         <source>Allowed HTML tags</source>
-        <target>Tillåtna HTML-taggar</target>
+        <target>Atļautie HTML tagi</target>
       </trans-unit>
       <trans-unit id="tl_settings.allowedTags.1">
         <source>Here you can enter a list of allowed HTML tags that will not be stripped.</source>
-        <target>Ange en lista med tillåtna HTML-taggar. Alla andra taggar kommer att tas bort från användarnas inmatningar.</target>
+        <target>Šeit jūs varat ievadīt sarakstu ar atļautajiem HTML tagaiem, kas netiks izsvītroti.</target>
       </trans-unit>
       <trans-unit id="tl_settings.debugMode.0">
         <source>Enable debug mode</source>
-        <target>Debug-läge</target>
+        <target>Ieslēgt atkļūdošanas režīmu</target>
       </trans-unit>
       <trans-unit id="tl_settings.debugMode.1">
         <source>Print certain runtime information like database queries to the screen.</source>
-        <target>Om du väljer detta val kommer viss körningsinformation (t.ex. databasfrågor) att skrivas ut på skärmen. &lt;br /&gt;Detta val är därför bara att rekommendera för systemmodifieringar/felsökning!</target>
+        <target>Drukāt konkrētu runtime informāciju, piemēram: datu bāzes vaicājumu uz ekrāna.</target>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
-        <target>Förbikoppla intern cache</target>
+        <target>Apiet iekšējo kešatmiņu</target>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.1">
         <source>Do not use the internal cache files (e.g. useful when developing extensions).</source>
-        <target>Använd inte de interna cache-filerna (användbart vid t.ex. utveckling av moduler).</target>
+        <target>Neizmantot iekšējās kešatmiņas datnes (piem. noderīgi izstrādājot paplašinājumus).</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableRefererCheck.0">
         <source>Disable request tokens</source>
-        <target>Slå av referenskontroll</target>
+        <target>Atslēgt pieprasījumu pārbaudi</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableRefererCheck.1">
         <source>Do not check the request token when a form is submitted. Attention: potential security risk!</source>
-        <target>Välj detta val om du inte vill att Contao ska kontrollera adressreferensen när ett formulär skickas. &lt;br /&gt;Kom ihåg att detta innebär en stor säkerhetsrisk!</target>
+        <target>Nepārbauda pieprasījuma marķieri (token), kad formā ievadītie dati tiek saglabāti. Uzmanību: potenciāls drošības risks!</target>
       </trans-unit>
       <trans-unit id="tl_settings.lockPeriod.0">
         <source>Account locking time</source>
-        <target>Väntetid för ett låst konto</target>
+        <target>Konta slēgšanas laiks</target>
       </trans-unit>
       <trans-unit id="tl_settings.lockPeriod.1">
         <source>An account will be locked if a wrong password is entered three times in a row.</source>
-        <target>Ange den tid en medlem måste vänta innan han kan logga in igen efter att kontot har låsts. (standard: 5 minuter = 300 sekunder). Denna egenskap är tillför att göra 'brute force' attacker lite svårare att genomföra.</target>
+        <target>Konts tiks slēgts, ja nepareiza parole ir ievadīta trīs reizes pēc kārtas.</target>
       </trans-unit>
       <trans-unit id="tl_settings.displayErrors.0">
         <source>Display error messages</source>
-        <target>Visa felmeddelanden</target>
+        <target>Rādīt kļūdu ziņas</target>
       </trans-unit>
       <trans-unit id="tl_settings.displayErrors.1">
         <source>Print error messages to the screen (not recommended for productional sites).</source>
-        <target>Om du väljer detta val kommer felmeddelanden att skrivas ut på skärmen. &lt;br /&gt;Detta val är bara att rekommendera i samband med systemmodifieringar!</target>
+        <target>Drukāt kļūdu ziņojumus uz ekrāna (nav ieteicams darbojošām vietnēm).</target>
       </trans-unit>
       <trans-unit id="tl_settings.logErrors.0">
         <source>Log error messages</source>
-        <target>Logga felmeddelanden</target>
+        <target>Iegrāmatot kļūdu ziņojumus</target>
       </trans-unit>
       <trans-unit id="tl_settings.logErrors.1">
         <source>Write error messages to the error log file (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</source>
-        <target>Spara felmeddelanden till felloggen (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</target>
+        <target>Rakstīt kļūdu ziņojumus kļūdu žurnāla datnē (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.coreOnlyMode.0">
         <source>Run in safe mode</source>
-        <target>Kör i Safe mode</target>
+        <target>Lietot drošo režīmu</target>
       </trans-unit>
       <trans-unit id="tl_settings.coreOnlyMode.1">
         <source>Run Contao in safe mode and load only core modules.</source>
-        <target>Kör Contao i Safe mode (säkert läge) där enbart kärnans moduler laddas (3:e-partsmoduler laddas ej).</target>
+        <target>Lietot Contao drošajā režīmā un ielādēt tikai pamata moduļus.</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableIpCheck.0">
         <source>Disable IP check</source>
-        <target>Slå av IP-kontroll</target>
+        <target>Atspējot IP pārbaudi</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableIpCheck.1">
         <source>Do not bind sessions to IP addresses. Choosing this option is a potential security risk!</source>
-        <target>Välj detta val om du inte vill att sessioner knyts till IP-adresser.&lt;br /&gt;Kom ihåg att detta innebär en stor säkerhetsrisk!</target>
+        <target>Nesaistīt sesiju pie IP adreses. Izvēloties šo iespēju ir potenciāls drošības risks!</target>
       </trans-unit>
       <trans-unit id="tl_settings.allowedDownload.0">
         <source>Download file types</source>
-        <target>Godkända filtyper för nedladdning</target>
+        <target>Lejupielādējamo datņu veidi</target>
       </trans-unit>
       <trans-unit id="tl_settings.allowedDownload.1">
         <source>Here you can enter a comma separated list of downloadable file types.</source>
-        <target>Ange en kommaseparerad lista med filändelser som är godkända för nedladdning. &lt;br /&gt;Av säkerhetsskäl är filnedladdning begränsat till den mapp som filen finns i och dess undermappar.</target>
+        <target>Šeit jūs varat ievadīt ar komatu atdalītu sarakstu ar lejupielādējamo datņu veidiem.</target>
       </trans-unit>
       <trans-unit id="tl_settings.validImageTypes.0">
         <source>Image file types</source>
-        <target>Godkända filtyper för bilder</target>
+        <target>Attēla datņu veidi</target>
       </trans-unit>
       <trans-unit id="tl_settings.validImageTypes.1">
         <source>Here you can enter a comma separated list of file types that can be handled by the image class.</source>
-        <target>Ange en kommaseparerad lista med filändelser som är godkända för bilder. &lt;br /&gt;Inkludera inte filtyper som inte kan hanteras av Contao eller dina egna skript.</target>
+        <target>Šeit jūs varat ievadīt ar komatu atdalītu sarakstu ar failu tipiem, kurus var apstrādāt attēla klase.</target>
       </trans-unit>
       <trans-unit id="tl_settings.editableFiles.0">
         <source>Editable file types</source>
-        <target>Redigerbara filtyper</target>
+        <target>Rediģējamo datņu veidi</target>
       </trans-unit>
       <trans-unit id="tl_settings.editableFiles.1">
         <source>Here you can enter a comma separated list of file types that can be edited in the source editor.</source>
-        <target>Ange en kommaseparerad lista med filtyper som kan editeras i källkodseditorn.</target>
+        <target>Šeit jūs varat ievadīt sarakstu ar komatu atdalītiem datņu veidiem, kas var tikt rediģēti ar avota redaktoru.</target>
       </trans-unit>
       <trans-unit id="tl_settings.templateFiles.0">
         <source>Template file types</source>
-        <target>Mallarnas filtyper</target>
+        <target>Veidnes failu tipi</target>
       </trans-unit>
       <trans-unit id="tl_settings.templateFiles.1">
         <source>Here you can enter a comma separated list of supported template file types.</source>
-        <target>Ange en kommaseparerad lista med filtyper som stöds för mall-filer.</target>
+        <target>Šeit jūs varat ievadīt atbalstītos veidnes faila tipus sarakstā, kurā ieraksti atdalīti ar komatu.</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxImageWidth.0">
         <source>Maximum front end width</source>
-        <target>Maximal bildbredd i frontend</target>
+        <target>Maksimālais priekšgala platums</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxImageWidth.1">
         <source>If the width of an image or movie exceeds this value, it will be adjusted automatically.</source>
-        <target>Om bredden på en bild eller film överstiger detta värde, kommer objekten automatiskt att skalas ner.</target>
+        <target>Ja attēla vai filmas platums pārsniedz šo vērtību, tas automātiski tiks pielāgots.</target>
       </trans-unit>
       <trans-unit id="tl_settings.jpgQuality.0">
         <source>JPG thumbnail quality</source>
-        <target>Kvalitet på tumnaglar</target>
+        <target>Sīktēla kvalitāte</target>
       </trans-unit>
       <trans-unit id="tl_settings.jpgQuality.1">
         <source>Here you can enter the JPG thumbnail quality in percent.</source>
-        <target>Ange kvaliteten på tumnaglarna i procent (används enbart på JPG).</target>
+        <target>Lūdzu ievadiet sīktēla kvalitāte procentos (attiecas tikai uz JPG).</target>
       </trans-unit>
       <trans-unit id="tl_settings.gdMaxImgWidth.0">
         <source>Maximum GD image width</source>
-        <target>Maximal GD-bildbredd</target>
+        <target>Maksimālais GD attēla platums</target>
       </trans-unit>
       <trans-unit id="tl_settings.gdMaxImgWidth.1">
         <source>Here you can enter the maximum image width that the GD library shall try to handle.</source>
-        <target>Ange maximal bildbredd för bilder som GD library ska försöka hantera.</target>
+        <target>Šeit varat norādīt maksimālo GD attēla platumu</target>
       </trans-unit>
       <trans-unit id="tl_settings.gdMaxImgHeight.0">
         <source>Maximum GD image height</source>
-        <target>Maximal GD-bildhöjd</target>
+        <target>Maksimālais GD attēla augstums</target>
       </trans-unit>
       <trans-unit id="tl_settings.gdMaxImgHeight.1">
         <source>Here you can enter the maximum image height that the GD library shall try to handle.</source>
-        <target>Ange maximal bildhöjd för bilder som GD library ska försöka hantera.</target>
+        <target>Šeit varat norādīt maksimālo GD attēla augstumu</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploadPath.0">
         <source>Files directory</source>
-        <target>Filmapp</target>
+        <target>Datņu direktorija</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploadPath.1">
         <source>Here you can set the relative path to the Contao files directory.</source>
-        <target>Här kan du ställa in den relativa sökvägen till Contaos filkatalog.</target>
+        <target>Lūdzu ievadiet relatīvo ceļu uz datņu direktoriju (noklusējuma: tl_files).</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploadTypes.0">
         <source>Upload file types</source>
-        <target>Godkända filtyper att ladda upp</target>
+        <target>Augšupielādējamo datņu veidi</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploadTypes.1">
         <source>Here you can enter a comma separated list of uploadable file types.</source>
-        <target>Ange en kommaseparerad lista med filtyper som kan laddas upp. &lt;br /&gt;Av säkerhetsskäl är uppladdning begränsat till filmappen och dess undermappar.</target>
+        <target>Šeit jūs varat ievadīt ar komatu atdalītu sarakstu ar augšupielādējamo datņu veidiem.</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploadFields.0">
         <source>Simultaneous file uploads</source>
-        <target>Simultan filuppladdning</target>
+        <target>Datņu vienlaicīgās augšupielādes</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploadFields.1">
         <source>Here you can enter the maximum number of simultaneous file uploads.</source>
-        <target>Ange det maximala antalet filer som simultant kan laddas upp till siten.</target>
+        <target>Lūdzu ievadiet maksimālo datņu vienlaicīgo augšupielāžu skaitu.</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxFileSize.0">
         <source>Maximum upload file size</source>
-        <target>Maximal uppladdningsbar filstorlek</target>
+        <target>Maksimālais datnes augšupielādes lielums</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxFileSize.1">
         <source>Here you can enter the maximum upload file size in bytes (1 MB = 1000 kB = 1000000 byte).</source>
-        <target>Här kan du ange den maximala filstorleken i bytes som går att ladda upp (standard: 1 MB = 1000 kB = 1000000 bytes).</target>
+        <target>Šeit jūs varat ievadit maksimālo datnes augšupielādes lielumu baitos (1 MB = 1000 kB = 1000000 baiti).</target>
       </trans-unit>
       <trans-unit id="tl_settings.imageWidth.0">
         <source>Maximum image width</source>
-        <target>Maximal bildbredd</target>
+        <target>Maksimālais attēla platums</target>
       </trans-unit>
       <trans-unit id="tl_settings.imageWidth.1">
         <source>Here you can enter the maximum width for image uploads in pixels.</source>
-        <target>Ange den maximala bildbredden (i px) för bilder som laddas upp till siten.</target>
+        <target>Lūdzu ievadiet maksimālo augšupielādējamā attēla platumu pikseļos.</target>
       </trans-unit>
       <trans-unit id="tl_settings.imageHeight.0">
         <source>Maximum image height</source>
-        <target>Maximal bildhöjd</target>
+        <target>Maksimālais attēla augstums</target>
       </trans-unit>
       <trans-unit id="tl_settings.imageHeight.1">
         <source>Here you can enter the maximum height for image uploads in pixels.</source>
-        <target>Ange den maximala bildhöjden (i px) för bilder som laddas upp till siten.</target>
+        <target>Lūdzu ievadiet maksimālo augšupielādējamā attēla augstumu pikseļos.</target>
       </trans-unit>
       <trans-unit id="tl_settings.enableSearch.0">
         <source>Enable searching</source>
-        <target>Aktivera sökmotor</target>
+        <target>Iespējot meklēšanu</target>
       </trans-unit>
       <trans-unit id="tl_settings.enableSearch.1">
         <source>Index pages so they can be searched.</source>
-        <target>Indexera automatiskt framsidans sidor så att de kan hittas i sökresultaten.</target>
+        <target>Indeksēt lapas, lai tajās varētu meklēt.</target>
       </trans-unit>
       <trans-unit id="tl_settings.indexProtected.0">
         <source>Index protected pages</source>
-        <target>Indexera skyddade sidor</target>
+        <target>Indeksēt aizsargātās lapas</target>
       </trans-unit>
       <trans-unit id="tl_settings.indexProtected.1">
         <source>Use this option carefully and always exclude personalized pages from being indexed!</source>
-        <target>Använd detta val med omsorg och uteslut alltid personaliserade sidor från indexeringen!</target>
+        <target>Izmantojiet šo opciju uzmanīgi un vienmēr izslēdziet personalizētās lapas no indeksēšanas!</target>
       </trans-unit>
       <trans-unit id="tl_settings.useSMTP.0">
         <source>Send e-mails via SMTP</source>
-        <target>Använd SMTP för att skicka E-post</target>
+        <target>Sūtīt e-pastus caur SMTP</target>
       </trans-unit>
       <trans-unit id="tl_settings.useSMTP.1">
         <source>Use an SMTP server instead of the PHP mail() function to send e-mails.</source>
-        <target>Som standard använder TYPOlight PHP &lt;em&gt;mail()&lt;/em&gt; för att skicka E-post. &lt;br /&gt;Här kan du välja att använda en SMTP-server istället.</target>
+        <target>Izmantot SMTP serveri PHP mail() funkcijas vietā, lai sūtītu e-pastus.</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpHost.0">
         <source>SMTP hostname</source>
-        <target>SMTP-host</target>
+        <target>SMTP saimniekdatora nosaukums</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpHost.1">
         <source>Please enter the host name of the SMTP server.</source>
-        <target>Ange hostnamnet på din SMTP-server (standard är localhost).</target>
+        <target>Lūdzu norādiet SMTP servera nosaukumu.</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpUser.0">
         <source>SMTP username</source>
-        <target>SMTP-användarnamn</target>
+        <target>SMTP lietotājvārds</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpUser.1">
         <source>Here you can enter the SMTP username.</source>
-        <target>Om din SMTP-server kräver inloggning, ange användarnamnet här.</target>
+        <target>Šeit jūs varat ievadīt SMTP lietotājvārdu.</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpPass.0">
         <source>SMTP password</source>
-        <target>SMTP-lösenord</target>
+        <target>SMTP parole</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpPass.1">
         <source>Here you can enter the SMTP password.</source>
-        <target>Om din SMTP-server kräver inloggning, ange lösenordet här.</target>
+        <target>Šeit jūs varat ievadīt SMTP paroli.</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpEnc.0">
         <source>SMTP encryption</source>
-        <target>SMTP-kryptering</target>
+        <target>SMTP šifrēšana</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpEnc.1">
         <source>Here you can choose an encryption method (SSL or TLS).</source>
-        <target>Här kan du välja en krypteringsmetod (SSL eller TLS).</target>
+        <target>Šeit jūs varat izvēlēties šifrēšanas metodi (SSL vai TLS).</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpPort.0">
         <source>SMTP port number</source>
-        <target>SMTP-port</target>
+        <target>SMTP pieslēgvietas numurs</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpPort.1">
         <source>Please enter the port number of the SMTP server.</source>
-        <target>Ange porten på din SMTP-server (standard är 25 eller 465 för SSL).</target>
+        <target>Lūdzu, ievadiet SMTP servera pieslēgvietas numuru.</target>
       </trans-unit>
       <trans-unit id="tl_settings.inactiveModules.0">
         <source>Inactive extensions</source>
-        <target>Avaktivera backend-moduler</target>
+        <target>Neaktīvie paplašinājumi</target>
       </trans-unit>
       <trans-unit id="tl_settings.inactiveModules.1">
         <source>Here you can deactivate unneeded extensions.</source>
-        <target>Här kan du avaktivera ej använda backend-moduler.</target>
+        <target>Šeit jūs varat deaktivizēt nevajadzīgus paplašinājumus.</target>
       </trans-unit>
       <trans-unit id="tl_settings.undoPeriod.0">
         <source>Storage time for undo steps</source>
-        <target>Lagringstid för ångra</target>
+        <target>Undo soļu uzglabāšanas laika periods</target>
       </trans-unit>
       <trans-unit id="tl_settings.undoPeriod.1">
         <source>Here you can enter the storage time for undo steps in seconds (24 hours = 86400 seconds).</source>
-        <target>Ange lagringstiden för ångra i sekunder (standard: 24 timmar = 86400 sekunder).</target>
+        <target>Šeit varat ievadīt uzglabāšanas laiks undo soļiem sekundēs (24 stundas = 86400 sekundes).</target>
       </trans-unit>
       <trans-unit id="tl_settings.versionPeriod.0">
         <source>Storage time for versions</source>
-        <target>Lagringstiden för versionshanteringen</target>
+        <target>Versiju uzglabāšanas laika periods</target>
       </trans-unit>
       <trans-unit id="tl_settings.versionPeriod.1">
         <source>Here you can enter the storage time for different versions of a record in seconds (90 days = 7776000 seconds).</source>
-        <target>Ange lagringstiden (i sekunder) för olika versioner av poster (standard: 90 dagar = 7776000 sekunder).</target>
+        <target>Šeit varat ievadīt uzglabāšanas laiku dažādo versiju ierakstiem sekundēs (90 dienas = 7776000 sekundes).</target>
       </trans-unit>
       <trans-unit id="tl_settings.logPeriod.0">
         <source>Storage time for log entries</source>
-        <target>Lagringstid för loggposter</target>
+        <target>Ierakstu uzglabāšanas laika periods</target>
       </trans-unit>
       <trans-unit id="tl_settings.logPeriod.1">
         <source>Here you can enter the storage time for log entries in seconds (14 days = 1209600 seconds).</source>
-        <target>Ange lagringstiden (i sekunder) för loggposter (standard: 14 dagar = 1209600 sekunder).</target>
+        <target>Šeit varat ievadīt uzglabāšanas laiku žurnāla ierakstiem sekundēs (14 dienas = 1209600 sekundes).</target>
       </trans-unit>
       <trans-unit id="tl_settings.sessionTimeout.0">
         <source>Session timeout</source>
-        <target>Session-timeout</target>
+        <target>Sesijas ilgums</target>
       </trans-unit>
       <trans-unit id="tl_settings.sessionTimeout.1">
         <source>Here you can enter the maximum lifetime of a session in seconds (60 minutes = 3600 seconds).</source>
-        <target>Ange den maximala livslängden (i sekunder) för en session (standard: 60 minutes = 3600 seconds).</target>
+        <target>Šeit varat ievadīt maksimālo sesijas ilguma laiku sekundēs (60 minūtes = 3600 sekundes).</target>
       </trans-unit>
       <trans-unit id="tl_settings.autologin.0">
         <source>Auto login period</source>
-        <target>Period för automatisk inloggning</target>
+        <target>Auto login periods</target>
       </trans-unit>
       <trans-unit id="tl_settings.autologin.1">
         <source>Here you can set the front end auto login period (90 days = 7776000 seconds).</source>
-        <target>Här kan du ställa in perioden för automatisk inloggning (90 dagar = 7776000 sekunder).</target>
+        <target>Šeit Jūs varat iestatīt frontend-a automātisko login periodu (90 dienas = 7776000 sekundes).</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultUser.0">
         <source>Default page owner</source>
-        <target>Standard sidägare</target>
+        <target>Noklusējuma lapas īpašnieks</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultUser.1">
         <source>Here you can select a user as the default owner of a page.</source>
-        <target>Som standard tillhör en sida samma användare som sin föräldrasida. Men, om sidan inte tilldelas en ägare kommer standardsidägaren att bli sidans ägare. &lt;b&gt;Om det inte finns en ägare eller en standardägare kommer det inte att finnas några åtkomstrestriktioner på sidan!&lt;/b&gt;</target>
+        <target>Šeit jūs varat izvēlēties lietotāju kā lapas noklusējuma īpašnieku.</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultGroup.0">
         <source>Default page group</source>
-        <target>Standard sidgrupp</target>
+        <target>Noklusējuma lapas grupa</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultGroup.1">
         <source>Here you can select a group as the default owner of a page.</source>
-        <target>Som standard tillhör en sida samma grupp som sin föräldrasida. Men, om sidan inte tilldelas en grupp kommer standardgruppen att bli sidans ägare. &lt;b&gt;Om det inte finns en grupp eller en standardgrupp kommer det inte att finnas några åtkomstrestriktioner på sidan!&lt;/b&gt;!</target>
+        <target>Šeit jūs varat izvēlēties grupu kā lapas noklusējuma īpašnieku.</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultChmod.0">
         <source>Default access rights</source>
-        <target>Standard sidbehörigheter</target>
+        <target>Noklusējuma piekļuves tiesības</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultChmod.1">
         <source>Please assign the default access rights for pages and articles.</source>
-        <target>Som standard använder en sida samma behörigheter som sin föräldrasida. Men om inga behörigheter är definierade kommer dessa standardbehörigheter att användas.</target>
+        <target>Lūdzu piešķiriet lapu un rakstu noklusējuma piekļuves tiesības.</target>
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.0">
         <source>Live Update URL</source>
-        <target>Live Update URL</target>
+        <target>Tiešaites jaunināšanas URl</target>
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
         <source>Here you can enter the Live Update URL.</source>
-        <target>Här kan du ange Live Update URL.</target>
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>
-        <target>Webbsidans titel</target>
+        <target>Mājas lapas nosaukums</target>
       </trans-unit>
       <trans-unit id="tl_settings.date_legend">
         <source>Date and time</source>
-        <target>Datum och tid</target>
+        <target>Datums un laiks</target>
       </trans-unit>
       <trans-unit id="tl_settings.global_legend">
         <source>Global configuration</source>
-        <target>Global konfiguration</target>
+        <target>Globālā konfigurācija</target>
       </trans-unit>
       <trans-unit id="tl_settings.backend_legend">
         <source>Back end configuration</source>
-        <target>Backend-konfiguration</target>
+        <target>Aizmugures konfigurācija</target>
       </trans-unit>
       <trans-unit id="tl_settings.frontend_legend">
         <source>Front end configuration</source>
-        <target>Frontend-konfiguration</target>
+        <target>Priekšpuses konfigurācija</target>
       </trans-unit>
       <trans-unit id="tl_settings.sections_legend">
         <source>Layout sections</source>
-        <target>Layout-sektioner</target>
+        <target>Salikuma daļas</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>
-        <target>Integritetsinställningar</target>
+        <target>Privātuma iestatījumi</target>
       </trans-unit>
       <trans-unit id="tl_settings.security_legend">
         <source>Security settings</source>
-        <target>Säkerhetsinställningar</target>
+        <target>Drošības iestatījumi</target>
       </trans-unit>
       <trans-unit id="tl_settings.files_legend">
         <source>Files and images</source>
-        <target>Filer och bilder</target>
+        <target>Datnes un attēli</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploads_legend">
         <source>Upload settings</source>
-        <target>Uppladdningsinställningar</target>
+        <target>Augšupielādes iestatījumi</target>
       </trans-unit>
       <trans-unit id="tl_settings.search_legend">
         <source>Search engine settings</source>
-        <target>Sökmotorinställningar</target>
+        <target>Meklētājprogrammas iestatījumi</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtp_legend">
         <source>SMTP configuration</source>
-        <target>SMTP-konfiguration</target>
+        <target>SMTP konfigurācija</target>
       </trans-unit>
       <trans-unit id="tl_settings.ftp_legend">
         <source>Safe Mode Hack</source>
@@ -592,43 +590,43 @@ Notera att exkluderade resurser inte kan användas i innehållselement som t.ex.
       </trans-unit>
       <trans-unit id="tl_settings.modules_legend">
         <source>Inactive extensions</source>
-        <target>Inaktiva backendmoduler</target>
+        <target>Neaktīvie paplašinājumi</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeout_legend">
         <source>Timeout values</source>
-        <target>Timeout-värden</target>
+        <target>Noildzes vērtības</target>
       </trans-unit>
       <trans-unit id="tl_settings.chmod_legend">
         <source>Default access rights</source>
-        <target>Standardåtkomstvärden</target>
+        <target>Noklusējuma piekļuves tiesības</target>
       </trans-unit>
       <trans-unit id="tl_settings.update_legend">
         <source>Live Update</source>
-        <target>Live Update</target>
+        <target>Tiešsaites jaunināšana</target>
       </trans-unit>
       <trans-unit id="tl_settings.static_legend">
         <source>Static resources</source>
-        <target>Statiska resurser</target>
+        <target>Statiskie resursi</target>
       </trans-unit>
       <trans-unit id="tl_settings.edit">
         <source>Edit the local configuration</source>
-        <target>Redigera den lokala konfigurationen</target>
+        <target>Rediģēt lokālo konfigurāciju</target>
       </trans-unit>
       <trans-unit id="tl_settings.both">
         <source>Use the server and the browser cache</source>
-        <target>Använd serverns- och webbläsarens cache</target>
+        <target>Izmantot servera un pārlūka kešatmiņu</target>
       </trans-unit>
       <trans-unit id="tl_settings.server">
         <source>Use only the server cache</source>
-        <target>Använd enbart serverns cache</target>
+        <target>Izmantot tikai servera kešatmiņu</target>
       </trans-unit>
       <trans-unit id="tl_settings.browser">
         <source>Use only the browser cache</source>
-        <target>Använd enbart webbläsarens cache</target>
+        <target>Izmantot tikai pārlūka kešatmiņu</target>
       </trans-unit>
       <trans-unit id="tl_settings.none">
         <source>Disable caching</source>
-        <target>Avaktivera cache-funktionen</target>
+        <target>Atspējot kešdarbi</target>
       </trans-unit>
     </body>
   </file>

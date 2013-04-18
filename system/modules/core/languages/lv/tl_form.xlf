@@ -3,239 +3,237 @@
     <body>
       <trans-unit id="tl_form.title.0">
         <source>Title</source>
-        <target>Namn</target>
+        <target>Nosaukums</target>
       </trans-unit>
       <trans-unit id="tl_form.title.1">
         <source>Please enter the form title.</source>
-        <target>Ange ett namn för formuläret.</target>
+        <target>Lūdzu ievadiet formulāra nosaukumu.</target>
       </trans-unit>
       <trans-unit id="tl_form.alias.0">
         <source>Form alias</source>
-        <target>Formulär-alias</target>
+        <target>Formas aizstājvārds</target>
       </trans-unit>
       <trans-unit id="tl_form.alias.1">
         <source>The form alias is a unique reference to the form which can be called instead of its numeric ID.</source>
-        <target>Formuläralias är ett unik referensnamn som kan användas istället för formulärets numeriska ID-nummer när man refererar till formuläret.</target>
+        <target>Formas aizstājvārds ir unikāla atsauce uz formu, ko var izsaukt pēc šī aistājvārda, nevis formas cipariskā ID.</target>
       </trans-unit>
       <trans-unit id="tl_form.jumpTo.0">
         <source>Redirect page</source>
-        <target>Hoppa till sida</target>
+        <target>Virzienmaiņas lapa</target>
       </trans-unit>
       <trans-unit id="tl_form.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected after submitting the form.</source>
-        <target>Ett formulär postas vanligtvis till en annan sida, som processar datan eller visar ett &quot;Tack&quot;-meddelande. &lt;br /&gt; Du kan välja denna sida här.</target>
+        <target>Lūdzu izvēlieties lapu, uz kuru apmeklētāji tiks novirzīti pēc formulāra nosūtīšanas.</target>
       </trans-unit>
       <trans-unit id="tl_form.sendViaEmail.0">
         <source>Send form data via e-mail</source>
-        <target>Skicka formulärdata via E-post</target>
+        <target>Nosūtīt formulāru ar e-pastu</target>
       </trans-unit>
       <trans-unit id="tl_form.sendViaEmail.1">
         <source>Send the submitted data to an e-mail address.</source>
-        <target>Om du väljer detta val kommer formulärdatan att skickas med E-post.</target>
+        <target>Ja jūs izvēlēsieties šo opciju, formulāra dati tiks nosūtīti ar e-pastu.</target>
       </trans-unit>
       <trans-unit id="tl_form.recipient.0">
         <source>Recipient address</source>
-        <target>Mottagare</target>
+        <target>Saņēmējs</target>
       </trans-unit>
       <trans-unit id="tl_form.recipient.1">
         <source>Separate multiple e-mail addresses with comma.</source>
-        <target>Ange en eller flera mottagaradresser. Separera adresserna med komma.</target>
+        <target>Vairākas e-pasta adreses atdalīt ar komatu.</target>
       </trans-unit>
       <trans-unit id="tl_form.subject.0">
         <source>Subject</source>
-        <target>Ämne</target>
+        <target>Temats</target>
       </trans-unit>
       <trans-unit id="tl_form.subject.1">
         <source>Please enter the e-mail subject.</source>
-        <target>Ange ett E-postämne. Om du inte anger ett ämne så ökar du risken att detta E-postmeddelande kommer att klassas som spam.</target>
+        <target>Lūdzu ievadiet e-pasta tematu.</target>
       </trans-unit>
       <trans-unit id="tl_form.format.0">
         <source>Data format</source>
-        <target>Format</target>
+        <target>Datu formāts</target>
       </trans-unit>
       <trans-unit id="tl_form.format.1">
         <source>Defines how the form data will be forwarded.</source>
-        <target>Ange vilket format du vill använda för att skicka formulärdatat.</target>
+        <target>Lūdzu izvēlieties datu formātu.</target>
       </trans-unit>
       <trans-unit id="tl_form.raw.0">
         <source>Raw data</source>
-        <target>Rådata</target>
+        <target>Jēldati</target>
       </trans-unit>
       <trans-unit id="tl_form.raw.1">
         <source>The form data will be sent as plain text message with each field in a new line.</source>
-        <target>Formuläret kommer att skickas som ren text med varje fält på en ny rad.</target>
+        <target>Formas dati tiks nosūtīti kā vienkāršs teksts, kurā katru lauka vērtība būs jaunā rindā.</target>
       </trans-unit>
       <trans-unit id="tl_form.xml.0">
         <source>XML file</source>
-        <target>XML-fil</target>
+        <target>XML datne</target>
       </trans-unit>
       <trans-unit id="tl_form.xml.1">
         <source>The form data will be attached to the e-mail as an XML file.</source>
-        <target>Formulärdata kommer att bifogas till E-postmeddelandet som en XML-fil.</target>
+        <target>Formulāra dati tiks pievienoti e-pastam kā XML datne.</target>
       </trans-unit>
       <trans-unit id="tl_form.csv.0">
         <source>CSV file</source>
-        <target>CSV-fil</target>
+        <target>CSV datne</target>
       </trans-unit>
       <trans-unit id="tl_form.csv.1">
         <source>The form data will be attached to the e-mail as a CSV file.</source>
-        <target>Formulärdata kommer att bifogas till E-postmeddelandet som en CVS-fil (kommaseparerade värden).</target>
+        <target>Formulāra dati tiks pievienoti e-pastam kā CSV datne.</target>
       </trans-unit>
       <trans-unit id="tl_form.email.0">
         <source>E-mail</source>
-        <target>E-postformat</target>
+        <target>E-pasta formāts</target>
       </trans-unit>
       <trans-unit id="tl_form.email.1">
         <source>Ignores all fields except &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
-        <target>Detta format kräver fälten &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;cc&lt;/em&gt; (carbon copy) och &lt;em&gt;message&lt;/em&gt;. Andra fält kommer att ignoreras. Filuppladdningar är tillåtna.</target>
+        <target>Ignorē visus laukus, izņemot &lt;em&gt;e-pasts&lt;/em&gt;, &lt;em&gt;tēma&lt;/em&gt;, &lt;em&gt;ziņa&lt;/em&gt; un &lt;em&gt;cc&lt;/em&gt; (kopija) un nosūta formas datus tā, kā tika nosūtīts no pasta klientu. Failu augšupielāde ir atļauta.</target>
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.0">
         <source>Skip empty fields</source>
-        <target>Hoppa över tomma fält</target>
+        <target>Pārlēkt tukšos laukus</target>
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.1">
         <source>Hide empty fields in the e-mail.</source>
-        <target>Inkludera inte tomma fält i E-postmeddelandet.</target>
+        <target>Neiekļaut tukšos laukus e-pastā.</target>
       </trans-unit>
       <trans-unit id="tl_form.storeValues.0">
         <source>Store data</source>
-        <target>Spara värden</target>
+        <target>Saglabāt vērtības</target>
       </trans-unit>
       <trans-unit id="tl_form.storeValues.1">
         <source>Store the submitted data in the database.</source>
-        <target>Om du väljer detta val kommer valda värden att sparas och återskrivas i sina formulärfält.</target>
+        <target>Saglabā nosūtītas formulāra vērtības datubāzē.</target>
       </trans-unit>
       <trans-unit id="tl_form.targetTable.0">
         <source>Target table</source>
-        <target>Måltabell</target>
+        <target>Mērķa tabula</target>
       </trans-unit>
       <trans-unit id="tl_form.targetTable.1">
         <source>The target table must contain a column for every form field.</source>
-        <target>Ange tabellen som du vill spara formulärvärden i. Tabellen måste innehålla en kolumn för varje fält i formuläret.</target>
+        <target>Izvēlieties tabulu, kurā vēlaties saglabāt formulāra vērtības.</target>
       </trans-unit>
       <trans-unit id="tl_form.method.0">
         <source>Submission method</source>
-        <target>Metod för att skicka formulär</target>
+        <target>Formulāra nosūtīšanas metode</target>
       </trans-unit>
       <trans-unit id="tl_form.method.1">
         <source>The default form submission method is POST.</source>
-        <target>Välj metod för att skicka formulär (standard: POST).</target>
+        <target>Lūdzu izvēlieties formulāra nosūtīšanas metodi (noklusējuma: POST).</target>
       </trans-unit>
       <trans-unit id="tl_form.novalidate.0">
         <source>Disable HTML5 validation</source>
-        <target>Avaktivera HTML5-validering</target>
       </trans-unit>
       <trans-unit id="tl_form.novalidate.1">
         <source>Add the &lt;em&gt;novalidate&lt;/em&gt; attribute to the form tag.</source>
-        <target>Lägg till &lt;em&gt;novalidate&lt;/em&gt;-attribut i formulär-taggen.</target>
       </trans-unit>
       <trans-unit id="tl_form.attributes.0">
         <source>CSS ID/class</source>
-        <target>Stilmall ID och klass</target>
+        <target>CSS ID/klase</target>
       </trans-unit>
       <trans-unit id="tl_form.attributes.1">
         <source>Here you can set an ID and one or more classes.</source>
-        <target>Här kan du ange ett stilmalls-ID (CSS ID) och/eller en eller flera stilmallsklasser (CSS-klass). ID och klasser anges utan prefix (nummertecken # resp. punkt .).</target>
+        <target>Šeit jūs varat piešķirt ID un vienu vai vairākas klases.</target>
       </trans-unit>
       <trans-unit id="tl_form.formID.0">
         <source>Form ID</source>
-        <target>Formulärets ID</target>
+        <target>Formulāra ID</target>
       </trans-unit>
       <trans-unit id="tl_form.formID.1">
         <source>The form ID is required to trigger a Contao module.</source>
-        <target>Formulär-ID krävs i vissa fall för att kunna trigga en Contao-modul.</target>
+        <target>Formulāra ID ir nepieciešams, lai aktivizetu TYPOlight moduli.</target>
       </trans-unit>
       <trans-unit id="tl_form.tableless.0">
         <source>Tableless layout</source>
-        <target>Tabellfri layout</target>
+        <target>Beztabulu salikums</target>
       </trans-unit>
       <trans-unit id="tl_form.tableless.1">
         <source>Render the form without HTML tables.</source>
-        <target>Om du väljer detta val kommer formuläret att renderas utan tabeller.</target>
+        <target>Atveidot formulāru bez HTML tabulām.</target>
       </trans-unit>
       <trans-unit id="tl_form.allowTags.0">
         <source>Allow HTML tags</source>
-        <target>Tillåt HTML-taggar</target>
+        <target>Atļaut HTML tagus</target>
       </trans-unit>
       <trans-unit id="tl_form.allowTags.1">
         <source>Allow HTML tags in form fields.</source>
-        <target>Som standard raderas alla HTML-taggar från användarinmatning av säkerhetsskäl.&lt;br /&gt;Men om du ändrar detta val kommer vissa HTML-taggar inte att raderas.</target>
+        <target>Ja jūs izvēlēsieties šo opciju, noteikti HTML tagi netiks izvākti (skatīt &lt;em&gt;allowedTags&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_form.tstamp.0">
         <source>Revision date</source>
-        <target>Ändringsdatum</target>
+        <target>Pārskatīšanas datums</target>
       </trans-unit>
       <trans-unit id="tl_form.tstamp.1">
         <source>Date and time of the latest revision</source>
-        <target>Datum och tid för senaste ändringen.</target>
+        <target>Pēdējās pārskatīšanas datums un laiks.</target>
       </trans-unit>
       <trans-unit id="tl_form.title_legend">
         <source>Title and redirect page</source>
-        <target>Titel och omdirigering</target>
+        <target>Nosaukums un virzienmaiņas lapa</target>
       </trans-unit>
       <trans-unit id="tl_form.email_legend">
         <source>Send form data</source>
-        <target>Skicka formulärdata</target>
+        <target>Sūtīt formulāra datus</target>
       </trans-unit>
       <trans-unit id="tl_form.store_legend">
         <source>Store form data</source>
-        <target>Lagra formulärdata</target>
+        <target>Saglabāt formulāra datus</target>
       </trans-unit>
       <trans-unit id="tl_form.expert_legend">
         <source>Expert settings</source>
-        <target>Expertinställningar</target>
+        <target>Eksperta uzstādījumi</target>
       </trans-unit>
       <trans-unit id="tl_form.config_legend">
         <source>Form configuration</source>
-        <target>Formulärkonfiguration</target>
+        <target>Formulāra konfigurācija</target>
       </trans-unit>
       <trans-unit id="tl_form.new.0">
         <source>New form</source>
-        <target>Nytt formulär</target>
+        <target>Jauns formulārs</target>
       </trans-unit>
       <trans-unit id="tl_form.new.1">
         <source>Create a new form</source>
-        <target>Skapa ett nytt formulär</target>
+        <target>Izveidot jaunu formulāru</target>
       </trans-unit>
       <trans-unit id="tl_form.show.0">
         <source>Form details</source>
-        <target>Visa formulärdetaljer</target>
+        <target>Formulāra detaļas</target>
       </trans-unit>
       <trans-unit id="tl_form.show.1">
         <source>Show the details of form ID %s</source>
-        <target>Visa detaljer för formulär med ID %s</target>
+        <target>Rādīt formulāra ID %s detaļas</target>
       </trans-unit>
       <trans-unit id="tl_form.edit.0">
         <source>Edit form</source>
-        <target>Redigera formulär</target>
+        <target>Rediģēt formulāru</target>
       </trans-unit>
       <trans-unit id="tl_form.edit.1">
         <source>Edit form ID %s</source>
-        <target>Redigera formulär med ID %s</target>
+        <target>Rediģēt formulāru ID %s</target>
       </trans-unit>
       <trans-unit id="tl_form.editheader.0">
         <source>Edit form settings</source>
-        <target>Redigera formulärinställningar</target>
+        <target>Rediģēt formulāra uzstādījumus</target>
       </trans-unit>
       <trans-unit id="tl_form.editheader.1">
         <source>Edit the settings of form ID %s</source>
-        <target>Redigera inställningarna för formulär med ID %s</target>
+        <target>Rediģēt formulāra ID %s uzstādījumus</target>
       </trans-unit>
       <trans-unit id="tl_form.copy.0">
         <source>Duplicate form</source>
-        <target>Kopiera formulär</target>
+        <target>Dublicēt formulāru</target>
       </trans-unit>
       <trans-unit id="tl_form.copy.1">
         <source>Duplicate form ID %s</source>
-        <target>Kopiera formulär med ID %s</target>
+        <target>Dublicēt formulāru ID %s</target>
       </trans-unit>
       <trans-unit id="tl_form.delete.0">
         <source>Delete form</source>
-        <target>Ta bort formulär</target>
+        <target>Dzēst formulāru</target>
       </trans-unit>
       <trans-unit id="tl_form.delete.1">
         <source>Delete form ID %s</source>
-        <target>Ta bort formulär med ID %s</target>
+        <target>Dzēst formulāru ID %s</target>
       </trans-unit>
     </body>
   </file>
