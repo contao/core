@@ -131,10 +131,14 @@ class Versions extends \Backend
 
 		$strUrl = \Environment::get('request');
 
-		// Do not save the URL if the visibility is toggled via Ajax
+		// Save the real edit URL if the visibility is toggled via Ajax
 		if (preg_match('/&(amp;)?state=/', $strUrl))
 		{
-			$strUrl = '';
+			$strUrl = preg_replace
+			(
+				array('/&(amp;)?id=[^&]+/', '/(&(amp;)?)t(id=[^&]+)/', '/(&(amp;)?)state=[^&]*/'),
+				array('', '$1$3', '$1act=edit'), $strUrl
+			);
 		}
 
 		$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=? AND fromTable=?")
