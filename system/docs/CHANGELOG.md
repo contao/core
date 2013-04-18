@@ -324,10 +324,6 @@ Made `Config::get()` static (see #3135).
 Add the autoloader files to the internal cache.
 
 ### New
-Added the `ModuleLoader` class to read the `autoload.ini` files of the modules
-and load the active ones with their dependencies resolved.
-
-### New
 Support multiple filter panels in the DCA (see #4542).
 
 ```
