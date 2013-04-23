@@ -44,7 +44,7 @@ class ContentList extends \ContentElement
 		$items = deserialize($this->listitems);
 		$limit = count($items) - 1;
 
-		for ($i=0; $i<count($items); $i++)
+		for ($i=0, $c=count($items); $i<$c; $i++)
 		{
 			$arrItems[] = array
 			(

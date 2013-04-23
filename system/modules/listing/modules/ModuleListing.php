@@ -234,7 +234,7 @@ class ModuleListing extends \Module
 		$arrFields = trimsplit(',', $this->list_fields);
 
 		// THEAD
-		for ($i=0; $i<count($arrFields); $i++)
+		for ($i=0, $c=count($arrFields); $i<$c; $i++)
 		{
 			// Never show passwords
 			if ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$arrFields[$i]]['inputType'] == 'password')
@@ -266,7 +266,7 @@ class ModuleListing extends \Module
 		$arrRows = $objData->fetchAllAssoc();
 
 		// TBODY
-		for ($i=0; $i<count($arrRows); $i++)
+		for ($i=0, $c=count($arrRows); $i<$c; $i++)
 		{
 			$j = 0;
 			$class = 'row_' . $i . (($i == 0) ? ' row_first' : '') . ((($i + 1) == count($arrRows)) ? ' row_last' : '') . ((($i % 2) == 0) ? ' even' : ' odd');

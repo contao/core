@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Do not use `count()` in a `for` loop condition (see #5681).
+
+### Fixed
 Hide the back link and "save and back" buttons in the modal dialog.
 
 ### Fixed

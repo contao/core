@@ -251,7 +251,7 @@ abstract class Frontend extends \Controller
 		$arrFragments = array_map('urldecode', $arrFragments);
 
 		// Add the fragments to the $_GET array
-		for ($i=1; $i<count($arrFragments); $i+=2)
+		for ($i=1, $c=count($arrFragments); $i<$c; $i+=2)
 		{
 			// Skip key value pairs if the key is empty (see #4702)
 			if ($arrFragments[$i] == '')

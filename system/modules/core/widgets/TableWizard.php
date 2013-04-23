@@ -96,28 +96,28 @@ class TableWizard extends \Widget
 			switch (\Input::get($strCommand))
 			{
 					case 'ccopy':
-					for ($i=0; $i<count($this->varValue); $i++)
+					for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 					{
 						$this->varValue[$i] = array_duplicate($this->varValue[$i], \Input::get('cid'));
 					}
 					break;
 
 				case 'cmovel':
-					for ($i=0; $i<count($this->varValue); $i++)
+					for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 					{
 						$this->varValue[$i] = array_move_up($this->varValue[$i], \Input::get('cid'));
 					}
 					break;
 
 				case 'cmover':
-					for ($i=0; $i<count($this->varValue); $i++)
+					for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 					{
 						$this->varValue[$i] = array_move_down($this->varValue[$i], \Input::get('cid'));
 					}
 					break;
 
 				case 'cdelete':
-					for ($i=0; $i<count($this->varValue); $i++)
+					for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 					{
 						$this->varValue[$i] = array_delete($this->varValue[$i], \Input::get('cid'));
 					}
@@ -159,7 +159,7 @@ class TableWizard extends \Widget
     <tr>';
 
 		// Add column buttons
-		for ($i=0; $i<count($this->varValue[0]); $i++)
+		for ($i=0, $c=count($this->varValue[0]); $i<$c; $i++)
 		{
 			$return .= '
       <td style="text-align:center; white-space:nowrap">';
@@ -182,13 +182,13 @@ class TableWizard extends \Widget
 		$tabindex = 0;
 
 		// Add rows
-		for ($i=0; $i<count($this->varValue); $i++)
+		for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 		{
 			$return .= '
     <tr>';
 
 			// Add cells
-			for ($j=0; $j<count($this->varValue[$i]); $j++)
+			for ($j=0, $d=count($this->varValue[$i]); $j<$d; $j++)
 			{
 				$return .= '
       <td class="tcontainer"><textarea name="'.$this->strId.'['.$i.']['.$j.']" class="tl_textarea" tabindex="'.++$tabindex.'" rows="'.$this->intRows.'" cols="'.$this->intCols.'"'.$this->getAttributes().'>'.specialchars($this->varValue[$i][$j]).'</textarea></td>';

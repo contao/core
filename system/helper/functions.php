@@ -535,7 +535,7 @@ function array_duplicate($arrStack, $intIndex)
 		$arrStack[] = $arrBuffer[$i];
 	}
 
-	for ($i=$intIndex; $i<count($arrBuffer); $i++)
+	for ($i=$intIndex, $c=count($arrBuffer); $i<$c; $i++)
 	{
 		$arrStack[] = $arrBuffer[$i];
 	}

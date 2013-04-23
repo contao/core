@@ -360,7 +360,7 @@ class PageSelector extends \Widget
 		{
 			$return .= '<li class="parent" id="'.$node.'_'.$id.'"><ul class="level_'.$level.'">';
 
-			for ($k=0; $k<count($childs); $k++)
+			for ($k=0, $c=count($childs); $k<$c; $k++)
 			{
 				$return .= $this->renderPagetree($childs[$k], ($intMargin + $intSpacing), $objPage->protected);
 			}

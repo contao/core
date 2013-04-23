@@ -215,8 +215,9 @@ class FileUpload extends \Backend
 	protected function getFilesFromGlobal()
 	{
 		$arrFiles = array();
+		$intCount = count($_FILES[$this->strName]['name']);
 
-		for ($i=0; $i<count($_FILES[$this->strName]['name']); $i++)
+		for ($i=0; $i<$intCount; $i++)
 		{
 			if ($_FILES[$this->strName]['name'][$i] == '')
 			{

@@ -128,7 +128,7 @@ class RebuildIndex extends \Backend implements \executable
 			$rand = rand();
 
 			// Display the pages
-			for ($i=0; $i<count($arrPages); $i++)
+			for ($i=0, $c=count($arrPages); $i<$c; $i++)
 			{
 				$strBuffer .= '<span class="page_url" data-url="' . $arrPages[$i] . '#' . $rand . $i . '">' . \String::substr($arrPages[$i], 100) . '</span><br>';
 			}

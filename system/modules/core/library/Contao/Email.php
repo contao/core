@@ -456,7 +456,7 @@ class Email
 				// Check for internal images
 				if (!empty($arrMatches) && isset($arrMatches[0]))
 				{
-					for ($i=0; $i<count($arrMatches[0]); $i++)
+					for ($i=0, $c=count($arrMatches[0]); $i<$c; $i++)
 					{
 						$url = $arrMatches[3][$i];
 

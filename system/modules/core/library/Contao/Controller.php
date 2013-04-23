@@ -643,7 +643,7 @@ abstract class Controller extends \System
 		$strBuffer = '';
 		static $arrCache = array();
 
-		for ($_rit=0; $_rit<count($tags); $_rit+=3)
+		for ($_rit=0, $_cnt=count($tags); $_rit<$_cnt; $_rit+=3)
 		{
 			$strBuffer .= $tags[$_rit];
 			$strTag = $tags[$_rit+1];
@@ -1286,7 +1286,7 @@ abstract class Controller extends \System
 				case 'iflng':
 					if ($elements[1] != '' && $elements[1] != $objPage->language)
 					{
-						for ($_rit; $_rit<count($tags); $_rit+=3)
+						for (; $_rit<$_cnt; $_rit+=3)
 						{
 							if ($tags[$_rit+1] == 'iflng')
 							{
@@ -1305,7 +1305,7 @@ abstract class Controller extends \System
 
 						if (in_array($objPage->language, $langs))
 						{
-							for ($_rit; $_rit<count($tags); $_rit+=3)
+							for (; $_rit<$_cnt; $_rit+=3)
 							{
 								if ($tags[$_rit+1] == 'ifnlng')
 								{
@@ -2096,7 +2096,7 @@ abstract class Controller extends \System
 			{
 				$arrChunks = explode('/', preg_replace('@^/@', '', $strParams));
 
-				for ($i=0; $i<count($arrChunks); $i=($i+2))
+				for ($i=0, $c=count($arrChunks); $i<$c; $i=($i+2))
 				{
 					$strRequest .= sprintf('&%s=%s', $arrChunks[$i], $arrChunks[($i+1)]);
 				}
@@ -2144,7 +2144,7 @@ abstract class Controller extends \System
 		$arrUrls = preg_split('/(('.$search.')="([^"]+)")/i', $strContent, -1, PREG_SPLIT_DELIM_CAPTURE);
 		$strContent = '';
 
-		for($i=0; $i<count($arrUrls); $i=$i+4)
+		for ($i=0, $c=count($arrUrls); $i<$c; $i=$i+4)
 		{
 			$strContent .= $arrUrls[$i];
 

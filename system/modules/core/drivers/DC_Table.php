@@ -3060,7 +3060,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		// Call a recursive function that builds the tree
-		for ($i=0; $i<count($this->root); $i++)
+		for ($i=0, $c=count($this->root); $i<$c; $i++)
 		{
 			$tree .= $this->generateTree($table, $this->root[$i], array('p'=>$this->root[($i-1)], 'n'=>$this->root[($i+1)]), $blnHasSorting, -20, ($blnClipboard ? $arrClipboard : false), ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 && $blnClipboard && $this->root[$i] == $arrClipboard['id']), false, $blnNoRecursion);
 		}
@@ -3215,7 +3215,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$arrClipboard = $arrClipboard[$this->strTable];
 		}
 
-		for ($i=0; $i<count($arrIds); $i++)
+		for ($i=0, $c=count($arrIds); $i<$c; $i++)
 		{
 			$return .= ' ' . trim($this->generateTree($table, $arrIds[$i], array('p'=>$arrIds[($i-1)], 'n'=>$arrIds[($i+1)]), $hasSorting, $margin, ($blnClipboard ? $arrClipboard : false), ($id == $arrClipboard ['id'] || (is_array($arrClipboard ['id']) && in_array($id, $arrClipboard ['id'])) || (!$blnPtable && !is_array($arrClipboard['id']) && in_array($id, $this->Database->getChildRecords($arrClipboard['id'], $table)))), $blnProtected));
 		}
@@ -3429,7 +3429,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				$ids = $objChilds->fetchEach('id');
 
-				for ($j=0; $j<count($ids); $j++)
+				for ($j=0, $c=count($ids); $j<$c; $j++)
 				{
 					$return .= $this->generateTree($this->strTable, $ids[$j], array('pp'=>$ids[($j-1)], 'nn'=>$ids[($j+1)]), $blnHasSorting, ($intMargin + $intSpacing), $arrClipboard, false, ($j<(count($ids)-1) || !empty($childs)));
 				}
@@ -3449,7 +3449,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				if (is_array($childs))
 				{
-					for ($k=0; $k<count($childs); $k++)
+					for ($k=0, $c=count($childs); $k<$c; $k++)
 					{
 						$return .= $this->generateTree($table, $childs[$k], array('p'=>$childs[($k-1)], 'n'=>$childs[($k+1)]), $blnHasSorting, ($intMargin + $intSpacing), $arrClipboard, ((($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 && $childs[$k] == $arrClipboard['id']) || $blnCircularReference) ? true : false), ($blnProtected || $protectedPage));
 					}
@@ -3737,7 +3737,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 <ul id="ul_' . CURRENT_ID . '">';
 				}
 
-				for ($i=0; $i<count($row); $i++)
+				for ($i=0, $c=count($row); $i<$c; $i++)
 				{
 					$this->current[] = $row[$i]['id'];
 					$imagePasteAfter = \Image::getHtml('pasteafter.gif', sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][1], $row[$i]['id']));

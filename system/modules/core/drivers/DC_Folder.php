@@ -286,7 +286,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 		else
 		{
-			for ($i=0; $i<count($this->arrFilemounts); $i++)
+			for ($i=0, $c=count($this->arrFilemounts); $i<$c; $i++)
 			{
 				if ($this->arrFilemounts[$i] != '' && is_dir(TL_ROOT . '/' . $this->arrFilemounts[$i]))
 				{
@@ -1969,7 +1969,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Folders
-		for ($f=0; $f<count($folders); $f++)
+		for ($f=0, $c=count($folders); $f<$c; $f++)
 		{
 			$md5 = substr(md5($folders[$f]), 0, 8);
 			$content = scan($folders[$f]);
@@ -2050,7 +2050,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Process files
-		for ($h=0; $h<count($files); $h++)
+		for ($h=0, $c=count($files); $h<$c; $h++)
 		{
 			$thumbnail = '';
 			$popupWidth = 600;

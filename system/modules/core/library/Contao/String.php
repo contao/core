@@ -124,7 +124,7 @@ class String
 		// Seperate tags and text
 		$arrChunks = preg_split('/(<[^>]+>)/', $strString, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
-		for ($i=0; $i<count($arrChunks); $i++)
+		for ($i=0, $c=count($arrChunks); $i<$c; $i++)
 		{
 			// Buffer tags to include them later
 			if (preg_match('/<([^>]+)>/', $arrChunks[$i]))
@@ -166,7 +166,7 @@ class String
 					// Store opening tags in the open_tags array
 					if (strncmp($strTagName, '/', 1) !== 0)
 					{
-						if (!empty($arrChunks[$i]) || $i<count($arrChunks))
+						if (!empty($arrChunks[$i]) || $i<$c)
 						{
 							$arrOpenTags[] = $strTagName;
 						}
@@ -175,7 +175,7 @@ class String
 					}
 
 					// Closing tags will be removed from the "open tags" array
-					if (!empty($arrChunks[$i]) || $i<count($arrChunks))
+					if (!empty($arrChunks[$i]) || $i<$c)
 					{
 						$arrOpenTags = array_values($arrOpenTags);
 
@@ -191,7 +191,7 @@ class String
 				}
 
 				// If the current chunk contains text, add tags and text to the return string
-				if (strlen($arrChunks[$i]) || $i<count($arrChunks))
+				if (strlen($arrChunks[$i]) || $i<$c)
 				{
 					$strReturn .= implode('', $arrTagBuffer) . $arrChunks[$i];
 				}

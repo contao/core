@@ -173,7 +173,7 @@ class ModuleWizard extends \Widget
 		$tabindex = 0;
 
 		// Add the input fields
-		for ($i=0; $i<count($this->varValue); $i++)
+		for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 		{
 			$options = '';
 

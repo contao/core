@@ -224,7 +224,7 @@ class Combiner extends \System
 				$chunks = preg_split('/url\(["\'](.+)["\']\)/U', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 				// Check the URLs
-				for ($i=0; $i<count($chunks); $i=$i+2)
+				for ($i=0, $c=count($chunks); $i<$c; $i=$i+2)
 				{
 					$strBuffer .= $chunks[$i];
 

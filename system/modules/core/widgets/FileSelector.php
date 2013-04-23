@@ -236,7 +236,7 @@ class FileSelector extends \Widget
 		$folderClass = ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly']) ? 'tl_folder' : 'tl_file';
 
 		// Process folders
-		for ($f=0; $f<count($folders); $f++)
+		for ($f=0, $c=count($folders); $f<$c; $f++)
 		{
 			$countFiles = 0;
 			$return .= "\n    " . '<li class="'.$folderClass.'" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)" onclick="Theme.toggleSelect(this)"><div class="tl_left" style="padding-left:'.$intMargin.'px">';
@@ -307,7 +307,7 @@ class FileSelector extends \Widget
 				$allowedExtensions = trimsplit(',', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['extensions']);
 			}
 
-			for ($h=0; $h<count($files); $h++)
+			for ($h=0, $c=count($files); $h<$c; $h++)
 			{
 				$thumbnail = '';
 				$currentFile = str_replace(TL_ROOT . '/', '', $files[$h]);

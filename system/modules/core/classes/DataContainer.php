@@ -463,7 +463,7 @@ class DataContainer extends \Backend
 		$return = array('');
 		$names = array_values($names);
 
-		for ($i=0; $i<count($names); $i++)
+		for ($i=0, $c=count($names); $i<$c; $i++)
 		{
 			$buffer = array();
 

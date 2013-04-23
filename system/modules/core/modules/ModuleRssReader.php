@@ -162,7 +162,7 @@ class ModuleRssReader extends \Module
 		$items = array();
 		$last = min($limit, count($arrItems)) - 1;
 
-		for ($i=$offset; $i<$limit && $i<count($arrItems); $i++)
+		for ($i=$offset, $c=count($arrItems); $i<$limit && $i<$c; $i++)
 		{
 			$items[$i] = array
 			(
