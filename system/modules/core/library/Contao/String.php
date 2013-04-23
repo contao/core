@@ -208,7 +208,7 @@ class String
 
 		foreach ($arrOpenTags as $strTag)
 		{
-			$strReturn .= str_replace('<', '</', $strTag);
+			$strReturn .= '</' . $strTag . '>';
 		}
 
 		return trim($strReturn);
