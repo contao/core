@@ -206,7 +206,7 @@ class ModuleWizard extends \Widget
 
 				if ($button == 'edit')
 				{
-					$return .= ($this->varValue[$i]['mod'] > 0) ? ' <a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->varValue[$i]['mod'] . '&amp;popup=1&amp;rt=' . REQUEST_TOKEN . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_module']) . '" class="module_link" onclick="Backend.openModalIframe({\'width\':765,\'title\':\'' . specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['tl_layout']['edit_module'])) . '\',\'url\':this.href});return false">'.\Image::getHtml('edit.gif').'</a>' : ' ' . \Image::getHtml('edit_.gif', '', 'class="module_image"');
+					$return .= ($this->varValue[$i]['mod'] > 0) ? ' <a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->varValue[$i]['mod'] . '&amp;popup=1&amp;rt=' . REQUEST_TOKEN . '&amp;nb=1" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_module']) . '" class="module_link" onclick="Backend.openModalIframe({\'width\':765,\'title\':\'' . specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['tl_layout']['edit_module'])) . '\',\'url\':this.href});return false">'.\Image::getHtml('edit.gif').'</a>' : ' ' . \Image::getHtml('edit_.gif', '', 'class="module_image"');
 				}
 				elseif ($button == 'drag')
 				{

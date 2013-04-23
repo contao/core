@@ -1942,6 +1942,11 @@ abstract class Controller extends \System
 		// Overwrite existing parameters
 		foreach ($queries as $k=>$v)
 		{
+			if ($v == 'nb=1')
+			{
+				unset($queries[$k]);
+			}
+
 			$explode = explode('=', $v);
 
 			if (preg_match('/(^|&(amp;)?)' . preg_quote($explode[0], '/') . '=/i', $strRequest))

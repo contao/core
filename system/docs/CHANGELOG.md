@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Hide the back link and "save and back" buttons in the modal dialog.
+
+### Fixed
 Do not store an empty `tl_versions.editUrl` field upon Ajax requests.
 
 
