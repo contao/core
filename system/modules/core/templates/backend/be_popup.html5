@@ -74,7 +74,9 @@
       </div>
       <?php if ($this->isImage): ?>
         <div id="preview">
+          <div class="transparent_bg" style="width:<?php echo $this->width; ?>px;height:<?php echo $this->height; ?>px;">
           <img src="<?php echo $this->src; ?>" width="<?php echo $this->width; ?>" height="<?php echo $this->height; ?>" alt="">
+          </div>
         </div>
       <?php endif; ?>
     </div>
