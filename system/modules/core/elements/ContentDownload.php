@@ -93,9 +93,19 @@ class ContentDownload extends \ContentElement
 			$this->linkTitle = $objFile->basename;
 		}
 
+		$strHref = \Environment::get('request');
+
+		// Remove an existing file parameter (see #5683)
+		if (preg_match('/(&(amp;)?|\?)file=/', $strHref))
+		{
+			$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
+		}
+
+		$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFile->value);
+
 		$this->Template->link = $this->linkTitle;
 		$this->Template->title = specialchars($this->titleText ?: $this->linkTitle);
-		$this->Template->href = \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objFile->value);
+		$this->Template->href = $strHref;
 		$this->Template->filesize = $this->getReadableSize($objFile->filesize, 1);
 		$this->Template->icon = TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon;
 		$this->Template->mime = $objFile->mime;

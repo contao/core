@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Replace existing `file` parameters in the download elements (see #5683).
+
+### Fixed
 Do not use `count()` in a `for` loop condition (see #5681).
 
 ### Fixed

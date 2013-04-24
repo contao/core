@@ -2583,7 +2583,7 @@ abstract class Controller extends \System
 
 		$file = \Input::get('file', true);
 
-		// Send the file to the browser
+		// Send the file to the browser and do not send a 404 header (see #5178)
 		if ($file != '')
 		{
 			while ($objFiles->next())
@@ -2594,7 +2594,7 @@ abstract class Controller extends \System
 				}
 			}
 
-			// Do not send a 404 header (see #5178)
+			$objFiles->reset();
 		}
 
 		$arrEnclosures = array();
@@ -2611,13 +2611,22 @@ abstract class Controller extends \System
 				}
 
 				$objFile = new \File($objFiles->path, true);
+				$strHref = \Environment::get('request');
+
+				// Remove an existing file parameter (see #5683)
+				if (preg_match('/(&(amp;)?|\?)file=/', $strHref))
+				{
+					$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
+				}
+
+				$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFiles->path);
 
 				$arrEnclosures[] = array
 				(
 					'link'      => $objFiles->name,
 					'filesize'  => static::getReadableSize($objFile->filesize),
 					'title'     => ucfirst(str_replace('_', ' ', $objFile->filename)),
-					'href'      => \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFiles->path),
+					'href'      => $strHref,
 					'enclosure' => $objFiles->path,
 					'icon'      => TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon,
 					'mime'      => $objFile->mime
