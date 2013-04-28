@@ -668,7 +668,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			foreach ($files as $file)
 			{
-				if ($file == '.svn' || $file == '.DS_Store')
+				if (preg_match('/^\./',$file))
 				{
 					continue;
 				}
@@ -902,7 +902,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			// Find the corresponding DB entries
-			if ($this->blnIsDbAssisted && $source != '.svn')
+			if ($this->blnIsDbAssisted && !preg_match('/^\./',$source))
 			{
 				$objFile = \FilesModel::findByPath($source);
 
@@ -2414,7 +2414,7 @@ window.addEvent(\'domready\', function() {
 		// Separate files from folders
 		foreach ($arrScan as $strFile)
 		{
-			if ($strFile == '.svn' || $strFile == '.DS_Store')
+			if (preg_match('/^\./',$strFile))
 			{
 				continue;
 			}
@@ -2591,7 +2591,7 @@ window.addEvent(\'domready\', function() {
 		{
 			foreach (scan($path) as $v)
 			{
-				if ($v == '.svn' || $v == '.DS_Store')
+				if (preg_match('/^\./',$v))
 				{
 					continue;
 				}
@@ -2638,7 +2638,7 @@ window.addEvent(\'domready\', function() {
 					// Folders
 					if (is_dir($folders[$f] .'/'. $file))
 					{
-						if ($file == '.svn')
+						if (preg_match('/^\./',$file))
 						{
 							--$countFiles;
 						}
