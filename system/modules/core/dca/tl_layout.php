@@ -283,7 +283,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		'modules' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['modules'],
-			'default'                 => array(array('mod'=>0, 'col'=>'main')),
+			'default'                 => array(array('mod'=>0, 'col'=>'main', 'enable'=>1)),
 			'exclude'                 => true,
 			'inputType'               => 'moduleWizard',
 			'sql'                     => "blob NULL"

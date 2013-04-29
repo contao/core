@@ -1821,7 +1821,7 @@ var Backend =
 	 * @param object
 	 */
 	updateModuleLink: function(el) {
-		var td = el.getParent('td').getNext('td'),
+		var td = el.getParent('tr').getLast('td'),
 			a = td.getElement('a.module_link');
 
 		a.href = a.href.replace(/id=[0-9]+/, 'id=' + el.value);

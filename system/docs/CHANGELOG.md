@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Correctly update the edit links in the module wizard (see #5687).
+
+### Fixed
 Make sure the jQuery related database fields exist when the version 3.1 update
 is executed (see #5689).
 
