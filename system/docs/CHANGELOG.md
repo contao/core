@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Convert the page language to a locale when looking for meta data (see #5678).
+
+### Fixed
 Replace existing `file` parameters in the download elements (see #5683).
 
 ### Fixed

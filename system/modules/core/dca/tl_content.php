@@ -1533,10 +1533,13 @@ class tl_content extends Backend
 					$objModel->setRow($objPage->row());
 					$objModel->loadDetails();
 
-					if (isset($arrMeta[$objModel->rootLanguage]))
+					// Convert the language to a locale (see #5678)
+					$strLanguage = str_replace('-', '_', $objModel->rootLanguage);
+
+					if (isset($arrMeta[$strLanguage]))
 					{
-						\Input::setPost('alt', $arrMeta[$objModel->rootLanguage]['title']);
-						\Input::setPost('caption', $arrMeta[$objModel->rootLanguage]['caption']);
+						\Input::setPost('alt', $arrMeta[$strLanguage]['title']);
+						\Input::setPost('caption', $arrMeta[$strLanguage]['caption']);
 					}
 				}
 			}

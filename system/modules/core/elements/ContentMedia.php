@@ -129,14 +129,17 @@ class ContentMedia extends \ContentElement
 
 		$this->objFiles->reset();
 
+		// Convert the language to a locale (see #5678)
+		$strLanguage = str_replace('-', '_', $objPage->language);
+
 		// Pass File objects to the template
 		while ($this->objFiles->next())
 		{
 			$arrMeta = deserialize($this->objFiles->meta);
 
-			if (is_array($arrMeta) && isset($arrMeta[$objPage->language]))
+			if (is_array($arrMeta) && isset($arrMeta[$strLanguage]))
 			{
-				$strTitle = $arrMeta[$objPage->language]['title'];
+				$strTitle = $arrMeta[$strLanguage]['title'];
 			}
 			else
 			{

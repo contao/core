@@ -545,6 +545,9 @@ abstract class Frontend extends \Controller
 	{
 		$arrData = deserialize($strData);
 
+		// Convert the language to a locale (see #5678)
+		$strLanguage = str_replace('-', '_', $strLanguage);
+
 		if (!is_array($arrData) || !isset($arrData[$strLanguage]))
 		{
 			return array();
