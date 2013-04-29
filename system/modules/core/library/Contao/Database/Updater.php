@@ -375,6 +375,14 @@ class Updater extends \Controller
 						   ->execute(serialize($arrCss), $objLayout->id);
 		}
 
+		// Add the jQuery fields if they do not yet exist (see #5689)
+		if (!$this->Database->fieldExists('addJQuery', 'tl_layout'))
+		{
+			$this->Database->query("ALTER TABLE `tl_layout` ADD `addJQuery` char(1) NOT NULL default ''");
+			$this->Database->query("ALTER TABLE `tl_layout` ADD `jSource` varchar(16) NOT NULL default ''");
+			$this->Database->query("ALTER TABLE `tl_layout` ADD `jquery` text NULL");
+		}
+
 		// Get all page layouts that use the moo_mediabox template
 		$objLayout = $this->Database->query("SELECT `id`, `addJQuery`, `jquery`, `mootools` FROM `tl_layout` WHERE `addMooTools`=1 AND `mootools` LIKE '%\"moo_mediaelement\"%'");
 

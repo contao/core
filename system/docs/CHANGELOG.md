@@ -5,6 +5,10 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Make sure the jQuery related database fields exist when the version 3.1 update
+is executed (see #5689).
+
+### Fixed
 Convert the page language to a locale when looking for meta data (see #5678).
 
 ### Fixed
