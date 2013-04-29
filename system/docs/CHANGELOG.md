@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Detect the Silk user agent of the Kindle Fire (see #5679).
+
+### Fixed
 Correctly auto-generate folder URL aliases (see #5697).
 
 ### Fixed
