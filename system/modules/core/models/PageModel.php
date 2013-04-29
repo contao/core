@@ -493,7 +493,7 @@ class PageModel extends \Model
 		$alias = $this->alias;
 		$name = $this->title;
 		$title = $this->pageTitle ?: $this->title;
-		$folderUrl = basename($this->alias);
+		$folderUrl = '';
 		$palias = '';
 		$pname = '';
 		$ptitle = '';

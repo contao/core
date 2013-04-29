@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Correctly auto-generate folder URL aliases (see #5697).
+
+### Fixed
 Register the CSV import in the news and calendar modules (see #5701).
 
 ### Fixed

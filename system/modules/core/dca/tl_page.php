@@ -963,7 +963,7 @@ class tl_page extends Backend
 
 				if ($objPage->folderUrl != '')
 				{
-					$varValue = $objPage->folderUrl;
+					$varValue = $objPage->folderUrl . $varValue;
 				}
 			}
 		}
