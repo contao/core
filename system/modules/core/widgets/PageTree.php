@@ -136,10 +136,13 @@ class PageTree extends \Widget
 		{
 			$objPages = \PageModel::findMultipleByIds((array)$this->varValue);
 
-			while ($objPages->next())
+			if ($objPages !== null)
 			{
-				$arrSet[] = $objPages->id;
-				$arrValues[] = \Image::getHtml($this->getPageStatusIcon($objPages)) . ' ' . $objPages->title . ' (' . $objPages->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')';
+				while ($objPages->next())
+				{
+					$arrSet[] = $objPages->id;
+					$arrValues[] = \Image::getHtml($this->getPageStatusIcon($objPages)) . ' ' . $objPages->title . ' (' . $objPages->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')';
+				}
 			}
 
 			// Apply a custom sort order
