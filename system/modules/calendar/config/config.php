@@ -18,8 +18,10 @@ array_insert($GLOBALS['BE_MOD']['content'], 1, array
 (
 	'calendar' => array
 	(
-		'tables'     => array('tl_calendar', 'tl_calendar_events', 'tl_calendar_feed', 'tl_content'),
-		'icon'       => 'system/modules/calendar/assets/icon.gif'
+		'tables'      => array('tl_calendar', 'tl_calendar_events', 'tl_calendar_feed', 'tl_content'),
+		'icon'        => 'system/modules/calendar/assets/icon.gif',
+		'table'       => array('TableWizard', 'importTable'),
+		'list'        => array('ListWizard', 'importList')
 	)
 ));
 

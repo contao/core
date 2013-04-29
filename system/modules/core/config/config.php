@@ -21,13 +21,13 @@ $GLOBALS['BE_MOD'] = array
 	(
 		'article' => array
 		(
-			'tables' => array('tl_article', 'tl_content'),
-			'table' => array('TableWizard', 'importTable'),
-			'list' => array('ListWizard', 'importList')
+			'tables'      => array('tl_article', 'tl_content'),
+			'table'       => array('TableWizard', 'importTable'),
+			'list'        => array('ListWizard', 'importList')
 		),
 		'form' => array
 		(
-			'tables' => array('tl_form', 'tl_form_field')
+			'tables'      => array('tl_form', 'tl_form_field')
 		)
 	),
 
@@ -36,19 +36,19 @@ $GLOBALS['BE_MOD'] = array
 	(
 		'themes' => array
 		(
-			'tables' => array('tl_theme', 'tl_module', 'tl_style_sheet', 'tl_style', 'tl_layout'),
+			'tables'      => array('tl_theme', 'tl_module', 'tl_style_sheet', 'tl_style', 'tl_layout'),
 			'importTheme' => array('Theme', 'importTheme'),
 			'exportTheme' => array('Theme', 'exportTheme'),
-			'import' => array('StyleSheets', 'importStyleSheet')
+			'import'      => array('StyleSheets', 'importStyleSheet')
 		),
 		'page' => array
 		(
-			'tables' => array('tl_page')
+			'tables'      => array('tl_page')
 		),
 		'tpl_editor' => array
 		(
-			'tables' => array('tl_templates'),
-			'new_tpl' => array('tl_templates', 'addNewTemplate')
+			'tables'      => array('tl_templates'),
+			'new_tpl'     => array('tl_templates', 'addNewTemplate')
 		)
 	),
 
@@ -57,19 +57,19 @@ $GLOBALS['BE_MOD'] = array
 	(
 		'member' => array
 		(
-			'tables' => array('tl_member')
+			'tables'      => array('tl_member')
 		),
 		'mgroup' => array
 		(
-			'tables' => array('tl_member_group')
+			'tables'      => array('tl_member_group')
 		),
 		'user' => array
 		(
-			'tables' => array('tl_user')
+			'tables'      => array('tl_user')
 		),
 		'group' => array
 		(
-			'tables' => array('tl_user_group')
+			'tables'      => array('tl_user_group')
 		)
 	),
 
@@ -78,23 +78,23 @@ $GLOBALS['BE_MOD'] = array
 	(
 		'files' => array
 		(
-			'tables' => array('tl_files')
+			'tables'      => array('tl_files')
 		),
 		'log' => array
 		(
-			'tables' => array('tl_log')
+			'tables'      => array('tl_log')
 		),
 		'settings' => array
 		(
-			'tables' => array('tl_settings')
+			'tables'      => array('tl_settings')
 		),
 		'maintenance' => array
 		(
-			'callback' => 'ModuleMaintenance'
+			'callback'    => 'ModuleMaintenance'
 		),
 		'undo' => array
 		(
-			'tables' => array('tl_undo')
+			'tables'      => array('tl_undo')
 		)
 	)
 );

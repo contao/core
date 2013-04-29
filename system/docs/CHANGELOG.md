@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Register the CSV import in the news and calendar modules (see #5701).
+
+### Fixed
 Do not run the database updates in a fresh installation (see #5694).
 
 ### Fixed
