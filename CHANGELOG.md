@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.12 (2013-XX-XX)
 ----------------------------
 
+### Improved
+Improved the memory footprint of the search index rebuild (see #5681).
+
 ### Fixed
 Do not trigger the "setNewPassword" hook twice (see #5247).
 
