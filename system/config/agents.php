@@ -24,6 +24,7 @@ $GLOBALS['TL_CONFIG']['os'] = array
 	'iPhone'        => array('os'=>'ios',        'mobile'=>true),
 	'iPod'          => array('os'=>'ios',        'mobile'=>true),
 	'Android'       => array('os'=>'android',    'mobile'=>true),
+	'BB10'          => array('os'=>'blackberry', 'mobile'=>true),
 	'Blackberry'    => array('os'=>'blackberry', 'mobile'=>true),
 	'Symbian'       => array('os'=>'symbian',    'mobile'=>true),
 	'WebOS'         => array('os'=>'webos',      'mobile'=>true),
