@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Do not run the database updates in a fresh installation (see #5694).
+
+### Fixed
 Correctly update the edit links in the module wizard (see #5687).
 
 ### Fixed

@@ -178,13 +178,7 @@ class InstallTool extends Backend
 		$this->setUpDatabaseConnection();
 
 		// Run the version-specific database updates
-		foreach (get_class_methods($this) as $method)
-		{
-			if (strncmp($method, 'update', 6) === 0)
-			{
-				$this->$method();
-			}
-		}
+		$this->runDatabaseUpdates();
 
 		// Store the collation
 		$this->storeCollation();
@@ -505,6 +499,36 @@ class InstallTool extends Backend
 			$this->Template->dbConnection = false;
 			$this->Template->dbError = $e->getMessage();
 			$this->outputAndExit();
+		}
+	}
+
+
+	/**
+	 * Run the database updates
+	 */
+	protected function runDatabaseUpdates()
+	{
+		// Fresh installation
+		if (!$this->Database->tableExists('tl_module'))
+		{
+			return;
+		}
+
+		$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_page");
+
+		// Still a fresh installation
+		if ($objRow->count < 1)
+		{
+			return;
+		}
+
+		// Run the updates
+		foreach (get_class_methods($this) as $method)
+		{
+			if (strncmp($method, 'update', 6) === 0)
+			{
+				$this->$method();
+			}
 		}
 	}
 
@@ -849,20 +873,6 @@ class InstallTool extends Backend
 	 */
 	protected function update300()
 	{
-		// Fresh installation
-		if (!$this->Database->tableExists('tl_module'))
-		{
-			return;
-		}
-
-		$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_page");
-
-		// Still a fresh installation
-		if ($objRow->count < 1)
-		{
-			return;
-		}
-
 		// Step 1: database structure
 		if (!$this->Database->tableExists('tl_files'))
 		{
