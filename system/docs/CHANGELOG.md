@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Pass the news count to `ModuleNews::parseArticle()` (see #5708).
+
+### Fixed
 Detect the Silk user agent of the Kindle Fire (see #5679).
 
 ### Fixed
