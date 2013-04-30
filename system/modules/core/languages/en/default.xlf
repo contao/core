@@ -903,7 +903,7 @@
         <source>Back end keyboard shortcuts</source>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href="https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts" title="Keyboard shortcuts overview on contao.org" target="_blank"&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <source>Learn more about speeding up your workflow by using &lt;a href="https://contao.org/manual/administration-area.html#keyboard-shortcuts" title="Keyboard shortcuts overview on contao.org" target="_blank"&gt;keyboard shortcuts&lt;/a&gt;.</source>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>

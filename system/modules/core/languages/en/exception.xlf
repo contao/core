@@ -60,7 +60,7 @@
         <source>This will open the Contao install tool, which will guide you through the installation process.</source>
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
-        <source>For more information, please refer to the &lt;a href="https://contao.org/manual/3.0/installation.html" target="_blank"&gt;Contao installation manual&lt;/a&gt;.</source>
+        <source>For more information, please refer to the &lt;a href="https://contao.org/manual/installation.html" target="_blank"&gt;Contao installation manual&lt;/a&gt;.</source>
       </trans-unit>
     </body>
   </file>
