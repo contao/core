@@ -41,6 +41,28 @@ Hide the back link and "save and back" buttons in the modal dialog.
 ### Fixed
 Do not store an empty `tl_versions.editUrl` field upon Ajax requests.
 
+### Fixed
+Correctly reload or redirect upon Ajax requests (see #5647).
+
+### Fixed
+Preserve protocol relative URLs when minifying the HTML markup (see #5664).
+
+### Fixed
+Correctly export the `pubDate` of calendar feeds (see #5641).
+
+### Fixed
+Remove script tags when printing an article as PDF (see #5626).
+
+### Fixed
+Purge the internal cache when disabling the Contao safe mode (see #5579).
+
+### Fixed
+Correctly set the end date of duplicated events (see #5608).
+
+### Fixed
+Apply the access restrictions of content elements and modules in the front end
+only (see #5603).
+
 
 Version 3.1.RC1 (2013-04-18)
 ----------------------------
@@ -516,26 +538,6 @@ like `fr-FR` (used to define page languages).
 ### Improved
 The pageTree widget is now sortable just like the fileTree widget and the custom
 and quick navigation modules consider the custom order (see #4936).
-
-
-Version 3.0.7 (2013-XX-XX)
---------------------------
-
-### Fixed
-Correctly export the `pubDate` of calendar feeds (see #5641).
-
-### Fixed
-Remove script tags when printing an article as PDF (see #5626).
-
-### Fixed
-Purge the internal cache when disabling the Contao safe mode (see #5579).
-
-### Fixed
-Correctly set the end date of duplicated events (see #5608).
-
-### Fixed
-Apply the access restrictions of content elements and modules in the front end
-only (see #5603).
 
 
 Version 3.0.6 (2013-03-21)
