@@ -226,7 +226,7 @@ class PageRegular extends \Frontend
 		{
 			header('HTTP/1.1 501 Not Implemented');
 			$this->log('Could not find layout ID "' . $intId . '"', 'PageRegular getPageLayout()', TL_ERROR);
-			die('No layout specified');
+			die('No layout specified'); # FIXME: add an error screen
 		}
 
 		$objPage->hasJQuery = $objLayout->addJQuery;

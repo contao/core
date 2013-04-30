@@ -572,7 +572,7 @@ class PageModel extends \Model
 		{
 			header('HTTP/1.1 404 Not Found');
 			\System::log('Page ID "'. $this->id .'" does not belong to a root page', 'PageModel loadDetails()', TL_ERROR);
-			die('No root page found');
+			die('No root page found'); # FIXME: add an error screen
 		}
 
 		$this->trail = array_reverse($trail);

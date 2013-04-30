@@ -79,7 +79,7 @@ class PageError404 extends \Frontend
 		if ($obj404 === null)
 		{
 			header('HTTP/1.1 404 Not Found');
-			die('Page not found');
+			die('Page not found'); # FIXME: add an error screen
 		}
 
 		// Generate the error page
@@ -103,7 +103,7 @@ class PageError404 extends \Frontend
 		{
 			header('HTTP/1.1 404 Not Found');
 			$this->log('Forward page ID "' . $obj404->jumpTo . '" does not exist', 'PageError404 generate()', TL_ERROR);
-			die('Forward page not found');
+			die('Forward page not found'); # FIXME: add an error screen
 		}
 
 		$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objRootPage->language), (($obj404->redirect == 'temporary') ? 302 : 301));

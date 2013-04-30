@@ -49,7 +49,7 @@ class PageForward extends \Frontend
 		{
 			header('HTTP/1.1 404 Not Found');
 			$this->log('Forward page ID "' . $objPage->jumpTo . '" does not exist', 'PageForward generate()', TL_ERROR);
-			die('Forward page not found');
+			die('Forward page not found'); # FIXME: add an error screen
 		}
 
 		$strForceLang = null;
