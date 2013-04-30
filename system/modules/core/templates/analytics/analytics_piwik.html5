@@ -14,13 +14,13 @@ if ($PiwikSite > 0 && $PiwikPath != 'www.domain.tld/piwik/' && !BE_USER_LOGGED_I
 
 <script>
   var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
   (function() {
     var u = ('https:' == document.location.protocol ? 'https://' : 'http://') + '<?php echo $PiwikPath; ?>';
-    _paq.push(['setSiteId', <?php echo $PiwikSite; ?>]);
     _paq.push(['setTrackerUrl', u + 'piwik.php']);
-    _paq.push(['trackPageView']);
-    _paq.push(['enableLinkTracking']);
-    var g = document.createElement('script'); g.src = u + 'piwik.js'; g.async=true;
+    _paq.push(['setSiteId', <?php echo $PiwikSite; ?>]);
+    var g = document.createElement('script'); g.src = u + 'piwik.js'; g.async = true;
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(g, s);
   })();
 </script>
