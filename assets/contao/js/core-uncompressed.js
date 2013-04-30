@@ -805,6 +805,10 @@ var Backend =
 				alert('Could not find the SimpleModal frame');
 				return;
 			}
+			if (frm.document.location.href.indexOf('contao/main.php') != -1) {
+				this.hide();
+				return; // see #5704
+			}
 			var inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
 			for (var i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
