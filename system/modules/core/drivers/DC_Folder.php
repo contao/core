@@ -1780,14 +1780,14 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Synchronize
-		\Dbafs::syncFiles();
+		$strLog = \Dbafs::syncFiles();
 
 		// Show the results
 		$arrMessages = array();
 		$arrCounts   = array('Added'=>0, 'Changed'=>0, 'Unchanged'=>0, 'Moved'=>0, 'Deleted'=>0);
 
 		// Read the log file
-		$fh = fopen(TL_ROOT . '/system/logs/sync.log', 'rb');
+		$fh = fopen(TL_ROOT . '/' . $strLog, 'rb');
 
 		while (($buffer = fgets($fh)) !== false)
 		{

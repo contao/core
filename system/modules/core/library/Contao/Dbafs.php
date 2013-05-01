@@ -421,6 +421,8 @@ class Dbafs
 	/**
 	 * Synchronize the file system with the database
 	 *
+	 * @return string The path to the synchronization log file
+	 *
 	 * @throws \Exception If a parent ID entry is missing
 	 */
 	public static function syncFiles()
@@ -443,8 +445,10 @@ class Dbafs
 			), \RecursiveIteratorIterator::SELF_FIRST
 		);
 
+		$strLog = 'system/tmp/' . md5(uniqid(mt_rand(), true));
+
 		// Open the log file
-		$objLog = new \File('system/logs/sync.log', true);
+		$objLog = new \File($strLog, true);
 		$objLog->truncate();
 
 		$arrModels = array();
@@ -632,5 +636,8 @@ class Dbafs
 
 		// Unlock the tables
 		$objDatabase->unlockTables();
+
+		// Return the path to the log file
+		return $strLog;
 	}
 }
