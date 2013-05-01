@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Correctly add image enclosures to calendar feeds (see #5685).
+
+### Fixed
 Pass the news count to `ModuleNews::parseArticle()` (see #5708).
 
 ### Fixed

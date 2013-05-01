@@ -409,6 +409,9 @@ class Calendar extends \Frontend
 		$arrEvent['link'] = $link;
 		$arrEvent['title'] = $title;
 
+		// Reset the enclosures (see #5685)
+		$arrEvent['enclosure'] = array();
+
 		// Add the article image as enclosure
 		if ($objEvent->addImage)
 		{
