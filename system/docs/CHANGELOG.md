@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Do not show the URL encoded file name on the confirmation screen (see #5543).
+
+### Fixed
 Correctly add image enclosures to calendar feeds (see #5685).
 
 ### Fixed

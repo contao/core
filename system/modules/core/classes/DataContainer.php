@@ -528,9 +528,11 @@ class DataContainer extends \Backend
 		foreach ($GLOBALS['TL_DCA'][$strTable]['list']['operations'] as $k=>$v)
 		{
 			$v = is_array($v) ? $v : array($v);
+			$id = specialchars(rawurldecode($arrRow['id']));
+
 			$label = $v['label'][0] ?: $k;
-			$title = sprintf($v['label'][1] ?: $k, $arrRow['id']);
-			$attributes = ($v['attributes'] != '') ? ' ' . ltrim(sprintf($v['attributes'], $arrRow['id'], $arrRow['id'])) : '';
+			$title = sprintf($v['label'][1] ?: $k, $id);
+			$attributes = ($v['attributes'] != '') ? ' ' . ltrim(sprintf($v['attributes'], $id, $id)) : '';
 
 			// Add the key as CSS class
 			if (strpos($attributes, 'class="') !== false)
