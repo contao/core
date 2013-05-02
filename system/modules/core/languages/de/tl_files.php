@@ -2,15 +2,15 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
  * Core translations are managed using Transifex. To create a new translation
  * or to help to maintain an existing one, please register at transifex.com.
- * 
+ *
  * @link http://help.transifex.com/intro/translating.html
  * @link https://www.transifex.com/projects/p/contao/language/de/
- * 
+ *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -60,3 +60,7 @@ $GLOBALS['TL_LANG']['tl_files']['pasteinto'][0] = 'Einfügen in';
 $GLOBALS['TL_LANG']['tl_files']['pasteinto'][1] = 'In dieses Verzeichnis einfügen';
 $GLOBALS['TL_LANG']['tl_files']['sync'][0] = 'Synchronisieren';
 $GLOBALS['TL_LANG']['tl_files']['sync'][1] = 'Dateisystem und Datenbank synchronisieren';
+$GLOBALS['TL_LANG']['tl_files']['showHiddenFiles'][0] = 'Versteckte Dateien';
+$GLOBALS['TL_LANG']['tl_files']['showHiddenFiles'][1] = 'Zeige alle versteckten Dateien an';
+$GLOBALS['TL_LANG']['tl_files']['showNormalFiles'][0] = 'Dateien ausblenden';
+$GLOBALS['TL_LANG']['tl_files']['showNormalFiles'][1] = 'Blende alle versteckten Dateien aus';
