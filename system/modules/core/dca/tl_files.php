@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -45,6 +45,13 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	(
 		'global_operations' => array
 		(
+			'showHidden' => array
+			(
+				'href'                => 'do=files',
+				'class'               => 'header_show_hidden',
+				'attributes'          => 'onclick="Backend.getScrollOffset()"',
+				'button_callback'     => array('tl_files', 'showHidden')
+			),
 			'sync' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['sync'],
@@ -463,6 +470,31 @@ class tl_files extends Backend
 	public function syncFiles($href, $label, $title, $class, $attributes)
 	{
 		return $this->User->isAdmin ? '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'" class="'.$class.'"'.$attributes.'>'.$label.'</a> ' : '';
+	}
+
+
+	/**
+	 * Return the showHidden files button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function showHidden($href, $label, $title, $class, $attributes)
+	{
+		$showHidden = 'showHidden=0';
+		$label = $GLOBALS['TL_LANG']['tl_files']['showNormalFiles'][0];
+		$title = $GLOBALS['TL_LANG']['tl_files']['showNormalFiles'][1];
+		if (\Input::get('showHidden', true)==0)
+		{
+			$showHidden = 'showHidden=1';
+			$label = $GLOBALS['TL_LANG']['tl_files']['showHiddenFiles'][0];
+			$title = $GLOBALS['TL_LANG']['tl_files']['showHiddenFiles'][1];
+		}
+		return $this->User->isAdmin ? '<a href="'.$this->addToUrl($href.'&'.$showHidden).'" title="'.specialchars($title).'" class="'.$class.'"'.$attributes.'>'.$label.'</a> ' : '';
 	}
 
 
