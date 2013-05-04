@@ -90,6 +90,38 @@ class Calendar extends \Frontend
 
 
 	/**
+	 * Add calendar feeds to the header scripts
+	 * @param object
+	 * @param object
+	 * @param object
+	 * @return string
+	 */
+	public function getPageStyleSheets($objPage, $objLayout, $objPageRegular)
+	{
+		$strStyleSheets = '';
+
+		$calendarfeeds = deserialize($objLayout->calendarfeeds);
+
+		// Add calendarfeeds
+		if (is_array($calendarfeeds) && !empty($calendarfeeds))
+		{
+			$objFeeds = \CalendarFeedModel::findByIds($calendarfeeds);
+
+			if ($objFeeds !== null)
+			{
+				while($objFeeds->next())
+				{
+					$base = $objFeeds->feedBase ?: \Environment::get('base');
+					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+				}
+			}
+		}
+		
+		return $strStyleSheets;
+	}
+
+
+	/**
 	 * Generate an XML file and save it to the root directory
 	 * @param array
 	 */
