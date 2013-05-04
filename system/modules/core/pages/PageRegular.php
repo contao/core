@@ -573,41 +573,17 @@ class PageRegular extends \Frontend
 			$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/css/debug.css') . '"' . $strTagEnding . "\n";
 		}
 
+		if (isset($GLOBALS['TL_HOOKS']['getPageStyleSheets']) && is_array($GLOBALS['TL_HOOKS']['getPageStyleSheets']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getPageStyleSheets'] as $callback)
+			{
+				$this->import($callback[0]);
+				$strStyleSheets .= $this->$callback[0]->$callback[1]($objPage, $objLayout, $this);
+			}
+		}
+
 		// Always add conditional style sheets at the end
 		$strStyleSheets .= $strCcStyleSheets;
-
-		$newsfeeds = deserialize($objLayout->newsfeeds);
-		$calendarfeeds = deserialize($objLayout->calendarfeeds);
-
-		// Add newsfeeds
-		if (is_array($newsfeeds) && !empty($newsfeeds))
-		{
-			$objFeeds = \NewsFeedModel::findByIds($newsfeeds);
-
-			if ($objFeeds !== null)
-			{
-				while($objFeeds->next())
-				{
-					$base = $objFeeds->feedBase ?: \Environment::get('base');
-					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
-				}
-			}
-		}
-
-		// Add calendarfeeds
-		if (is_array($calendarfeeds) && !empty($calendarfeeds))
-		{
-			$objFeeds = \CalendarFeedModel::findByIds($calendarfeeds);
-
-			if ($objFeeds !== null)
-			{
-				while($objFeeds->next())
-				{
-					$base = $objFeeds->feedBase ?: \Environment::get('base');
-					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
-				}
-			}
-		}
 
 		// Add a placeholder for dynamic <head> tags (see #4203)
 		$strHeadTags = '[[TL_HEAD]]';
