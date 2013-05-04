@@ -83,6 +83,38 @@ class News extends \Frontend
 
 
 	/**
+	 * Add news feeds to the header scripts
+	 * @param object
+	 * @param object
+	 * @param object
+	 * @return string
+	 */
+	public function getPageStyleSheets($objPage, $objLayout, $objPageRegular)
+	{
+		$strStyleSheets = '';
+
+		$newsfeeds = deserialize($objLayout->newsfeeds);
+
+		// Add newsfeeds
+		if (is_array($newsfeeds) && !empty($newsfeeds))
+		{
+			$objFeeds = \NewsFeedModel::findByIds($newsfeeds);
+
+			if ($objFeeds !== null)
+			{
+				while($objFeeds->next())
+				{
+					$base = $objFeeds->feedBase ?: \Environment::get('base');
+					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+				}
+			}
+		}
+		
+		return $strStyleSheets;
+	}
+
+
+	/**
 	 * Generate an XML files and save them to the root directory
 	 * @param array
 	 */
