@@ -573,6 +573,15 @@ class PageRegular extends \Frontend
 			$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/css/debug.css') . '"' . $strTagEnding . "\n";
 		}
 
+		if (isset($GLOBALS['TL_HOOKS']['getPageStyleSheets']) && is_array($GLOBALS['TL_HOOKS']['getPageStyleSheets']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getPageStyleSheets'] as $callback)
+			{
+				$this->import($callback[0]);
+				$strStyleSheets .= $this->$callback[0]->$callback[1]($objPage, $objLayout, $this);
+			}
+		}
+
 		// Always add conditional style sheets at the end
 		$strStyleSheets .= $strCcStyleSheets;
 
