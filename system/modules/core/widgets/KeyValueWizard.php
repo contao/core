@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -116,7 +116,7 @@ class KeyValueWizard extends \Widget
 	 */
 	public function generate()
 	{
-		$arrButtons = array('copy', 'up', 'down', 'delete');
+		$arrButtons = array('copy', 'drag', 'up', 'down', 'delete');
 		$strCommand = 'cmd_' . $this->strField;
 
 		// Change the order
@@ -164,12 +164,12 @@ class KeyValueWizard extends \Widget
       <th>&nbsp;</th>
     </tr>
   </thead>
-  <tbody>';
+  <tbody class="sortable">';
 
 		$tabindex = 0;
 
 		// Add fields
-		for ($i=0; $i<count($this->varValue); $i++)
+		for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 		{
 			$return .= '
     <tr>
@@ -182,7 +182,16 @@ class KeyValueWizard extends \Widget
 
 			foreach ($arrButtons as $button)
 			{
-				$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['ow_'.$button]).'" onclick="Backend.keyValueWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.$this->generateImage($button.'.gif', $GLOBALS['TL_LANG']['MSC']['ow_'.$button]).'</a> ';
+				$class = ($button == 'up' || $button == 'down') ? ' class="button-move"' : '';
+
+				if ($button == 'drag')
+				{
+					$return .= \Image::getHtml('drag.gif', '', 'class="drag-handle" title="' . sprintf($GLOBALS['TL_LANG']['MSC']['move']) . '"');
+				}
+				else
+				{
+					$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'"' . $class . ' title="'.specialchars($GLOBALS['TL_LANG']['MSC']['ow_'.$button]).'" onclick="Backend.keyValueWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.\Image::getHtml($button.'.gif', $GLOBALS['TL_LANG']['MSC']['ow_'.$button]).'</a> ';
+				}
 			}
 
 			$return .= '</td>

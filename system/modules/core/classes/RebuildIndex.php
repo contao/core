@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -128,9 +128,10 @@ class RebuildIndex extends \Backend implements \executable
 			$rand = rand();
 
 			// Display the pages
-			for ($i=0; $i<count($arrPages); $i++)
+			for ($i=0, $c=count($arrPages); $i<$c; $i++)
 			{
-				$strBuffer .= '<img src="' . $arrPages[$i] . '#' . $rand . $i . '" alt="" class="invisible">' . \String::substr($arrPages[$i], 100) . "<br>\n";
+				$strBuffer .= '<span class="page_url" data-url="' . $arrPages[$i] . '#' . $rand . $i . '">' . \String::substr($arrPages[$i], 100) . '</span><br>';
+				unset($arrPages[$i]); // see #5681
 			}
 
 			$objTemplate->content = $strBuffer;
@@ -138,7 +139,7 @@ class RebuildIndex extends \Backend implements \executable
 			$objTemplate->loading = $GLOBALS['TL_LANG']['tl_maintenance']['indexLoading'];
 			$objTemplate->complete = $GLOBALS['TL_LANG']['tl_maintenance']['indexComplete'];
 			$objTemplate->indexContinue = $GLOBALS['TL_LANG']['MSC']['continue'];
-			$objTemplate->theme = $this->getTheme();
+			$objTemplate->theme = \Backend::getTheme();
 			$objTemplate->isRunning = true;
 
 			return $objTemplate->parse();

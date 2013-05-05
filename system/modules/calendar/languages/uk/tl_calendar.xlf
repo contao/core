@@ -1,0 +1,202 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_calendar.php" source-language="en">
+    <body>
+      <trans-unit id="tl_calendar.title.0">
+        <source>Title</source>
+        <target>Назва</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.title.1">
+        <source>Please enter the calendar title.</source>
+        <target>Будь ласка введіть назву календаря</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Перейти до сторінки</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.jumpTo.1">
+        <source>Please choose the event reader page to which visitors will be redirected when clicking an event.</source>
+        <target>Будь ласка, вкажіть сторінку на яку користувачі будуть перенаправлені натиснувши на подію.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.allowComments.0">
+        <source>Enable comments</source>
+        <target>Дозволити коментарі</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.allowComments.1">
+        <source>Allow visitors to comment events.</source>
+        <target>Дозволити відвідувачам коментувати події.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify.0">
+        <source>Notify</source>
+        <target>Повідомляти</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+        <target>Будь ласка, виберіть кого повідомляти про додавані нових коментарів.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.sortOrder.0">
+        <source>Sort order</source>
+        <target>Порядок сортування</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+        <target>За замовчуванням коментарі сортуються за зростанням, починаючи з самого старого по даті.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.perPage.0">
+        <source>Comments per page</source>
+        <target>Коментарів на сторінку</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>Кількість коментарів на сторінці. Встановіть 0, щоб відключити пагінацію.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.moderate.0">
+        <source>Moderate comments</source>
+        <target>Модерувати коментарі</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>Схвалювати коментарі перед їх публікацією на сайті.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.bbcode.0">
+        <source>Allow BBCode</source>
+        <target>Дозволити BBCode</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Дозволити відвідувачам форматувати коментарі за допомогою BBCode.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.requireLogin.0">
+        <source>Require login to comment</source>
+        <target>Вимагати вхід в систему</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>Дозволити тільки авторизованим користувачам добавляти коментарі.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Вимкнути контрольне питання</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+        <target>Використовуйте цю опцію тільки якщо Ви дозволили коментувати тільки авторизованим користувачам.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.protected.0">
+        <source>Protect calendar</source>
+        <target>Захистити календар.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.protected.1">
+        <source>Show events to certain member groups only.</source>
+        <target>Показати календар тільки для обраних груп користувачів.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.groups.0">
+        <source>Allowed member groups</source>
+        <target>Дозволені групи</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.groups.1">
+        <source>These groups will be able to see the events in this calendar.</source>
+        <target>Вкажіть групи, які матимуть доступ до перегляду подій.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.tstamp.0">
+        <source>Revision date</source>
+        <target>Дата останнього перегляду</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Дата та час останнього перегляду</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.title_legend">
+        <source>Title and redirect page</source>
+        <target>Заголовок та сторінка перенаправлення</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.comments_legend">
+        <source>Comments</source>
+        <target>Коментарі</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.protected_legend">
+        <source>Access protection</source>
+        <target>Обмеження доступу</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feed_legend">
+        <source>RSS/Atom feed</source>
+        <target>RSS/Atom стрічки</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify_admin">
+        <source>System administrator</source>
+        <target>Системний адміністратор</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify_author">
+        <source>Author of the event</source>
+        <target>Автор новини</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify_both">
+        <source>Author and system administrator</source>
+        <target>Автор і системний адміністратор</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.source_teaser">
+        <source>Event teasers</source>
+        <target>Короткий опис події</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.source_text">
+        <source>Full articles</source>
+        <target>Повний текст</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.new.0">
+        <source>New calendar</source>
+        <target>Новий календар</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.new.1">
+        <source>Create a new calendar</source>
+        <target>Створити новий календар</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.show.0">
+        <source>Calendar details</source>
+        <target>Детальна інформація календаря</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.show.1">
+        <source>Show the details of calendar ID %s</source>
+        <target>Детальна інформація календаря ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.edit.0">
+        <source>Edit calendar</source>
+        <target>Редагувати календар</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.edit.1">
+        <source>Edit calendar ID %s</source>
+        <target>Редагувати календар ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.editheader.0">
+        <source>Edit calendar settings</source>
+        <target>Змінити налаштування календаря</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.editheader.1">
+        <source>Edit the settings of calendar ID %s</source>
+        <target>Змінити налаштування календаря ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.copy.0">
+        <source>Duplicate calendar</source>
+        <target>Копіювати календар</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.copy.1">
+        <source>Duplicate calendar ID %s</source>
+        <target>Копіювати календар ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.delete.0">
+        <source>Delete calendar</source>
+        <target>Видалити календар</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.delete.1">
+        <source>Delete calendar ID %s</source>
+        <target>Видалити календар ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feeds.0">
+        <source>RSS feeds</source>
+        <target>RSS-канали</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feeds.1">
+        <source>Manage RSS feeds</source>
+        <target>Управління RSS-каналами</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

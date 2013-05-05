@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -44,7 +44,7 @@ class Preview extends Backend
 		parent::__construct();
 
 		$this->User->authenticate();
-		$this->loadLanguageFile('default');
+		System::loadLanguageFile('default');
 	}
 
 

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,22 +15,22 @@ namespace Contao;
 
 /**
  * A SwiftMailer adapter class
- * 
+ *
  * The class functions as an adapter for the Swift mailer framework. It can be
  * used to send e-mails via the PHP mail function or an SMTP server.
- * 
+ *
  * Usage:
- * 
+ *
  *     $email = new Email();
  *     $email->subject = 'Hello';
  *     $email->text = 'Is it me you are looking for?';
  *     $email->sendTo('lionel@richie.com');
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
  */
-class Email extends \System
+class Email
 {
 
 	/**
@@ -117,7 +117,6 @@ class Email extends \System
 	 */
 	public function __construct()
 	{
-		parent::__construct();
 		$this->strCharset = $GLOBALS['TL_CONFIG']['characterSet'];
 
 		// Instantiate mailer
@@ -157,9 +156,9 @@ class Email extends \System
 
 	/**
 	 * Set an object property
-	 * 
+	 *
 	 * Supported keys:
-	 * 
+	 *
 	 * * subject:     the e-mail subject
 	 * * text:        the text part of the mail
 	 * * html:        the HTML part of the mail
@@ -170,10 +169,10 @@ class Email extends \System
 	 * * imageDir:    the base directory to look for internal images
 	 * * embedImages: whether to embed images inline
 	 * * logFile:     the log file path
-	 * 
+	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
-	 * 
+	 *
 	 * @throws \Exception If $strKey is unknown
 	 */
 	public function __set($strKey, $varValue)
@@ -251,9 +250,9 @@ class Email extends \System
 
 	/**
 	 * Return an object property
-	 * 
+	 *
 	 * Supported keys:
-	 * 
+	 *
 	 * * subject:     the e-mail subject
 	 * * text:        the text part of the mail
 	 * * html:        the HTML part of the mail
@@ -265,9 +264,9 @@ class Email extends \System
 	 * * embedImages: whether to embed images inline
 	 * * logFile:     the log file path
 	 * * failures:    an array of rejected e-mail addresses
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return mixed The property value
 	 */
 	public function __get($strKey)
@@ -319,13 +318,13 @@ class Email extends \System
 				break;
 		}
 
-		return parent::__get($strKey);
+		return null;
 	}
 
 
 	/**
 	 * Return true if there are failures
-	 * 
+	 *
 	 * @return boolean True if there are failures
 	 */
 	public function hasFailures()
@@ -336,7 +335,7 @@ class Email extends \System
 
 	/**
 	 * Add a custom text header
-	 * 
+	 *
 	 * @param string $strKey   The header name
 	 * @param string $strValue The header value
 	 */
@@ -384,7 +383,7 @@ class Email extends \System
 
 	/**
 	 * Attach a file
-	 * 
+	 *
 	 * @param string $strFile The file path
 	 * @param string $strMime The MIME type (defaults to "application/octet-stream")
 	 */
@@ -396,7 +395,7 @@ class Email extends \System
 
 	/**
 	 * Attach a file from a string
-	 * 
+	 *
 	 * @param string $strContent  The file content
 	 * @param string $strFilename The file name
 	 * @param string $strMime     The MIME type (defaults to "application/octet-stream")
@@ -412,7 +411,7 @@ class Email extends \System
 	 *
 	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed. The
 	 * method takes an unlimited number of recipient addresses.
-	 * 
+	 *
 	 * @return boolean True if the e-mail was sent successfully
 	 */
 	public function sendTo()
@@ -457,7 +456,7 @@ class Email extends \System
 				// Check for internal images
 				if (!empty($arrMatches) && isset($arrMatches[0]))
 				{
-					for ($i=0; $i<count($arrMatches[0]); $i++)
+					for ($i=0, $c=count($arrMatches[0]); $i<$c; $i++)
 					{
 						$url = $arrMatches[3][$i];
 
@@ -498,7 +497,7 @@ class Email extends \System
 		// Add the administrator e-mail as default sender
 		if ($this->strSender == '')
 		{
-			list($this->strSenderName, $this->strSender) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
+			list($this->strSenderName, $this->strSender) = \String::splitFriendlyEmail($GLOBALS['TL_CONFIG']['adminEmail']);
 		}
 
 		// Sender
@@ -552,9 +551,9 @@ class Email extends \System
 
 	/**
 	 * Extract the e-mail addresses from the func_get_args() arguments
-	 * 
+	 *
 	 * @param array $arrRecipients The recipients array
-	 * 
+	 *
 	 * @return array An array of e-mail addresses
 	 */
 	protected function compileRecipients($arrRecipients)
@@ -571,7 +570,7 @@ class Email extends \System
 			// Support friendly name addresses and internationalized domain names
 			foreach ($varRecipients as $v)
 			{
-				list($strName, $strEmail) = $this->splitFriendlyName($v);
+				list($strName, $strEmail) = \String::splitFriendlyEmail($v);
 
 				$strName = trim($strName, ' "');
 				$strEmail = \Idna::encodeEmail($strEmail);

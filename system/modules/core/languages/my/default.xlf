@@ -1,0 +1,2149 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/default.php" source-language="en">
+    <body>
+      <trans-unit id="ERR.general">
+        <source>An error occurred!</source>
+        <target>အမှားပြနေ!</target>
+      </trans-unit>
+      <trans-unit id="ERR.unique">
+        <source>Duplicate entry in field &quot;%s&quot;!</source>
+        <target>နယ်ပယ် &quot;%s&quot; တွင်ထည့်သွင်းမှုပံုစံတူပွားနေ!</target>
+      </trans-unit>
+      <trans-unit id="ERR.mandatory">
+        <source>Field &quot;%s&quot; must not be empty!</source>
+        <target>နယ်ပယ် &quot;%s&quot; အလွတ်မဖြစ်ရ!</target>
+      </trans-unit>
+      <trans-unit id="ERR.mdtryNoLabel">
+        <source>This field must not be empty!</source>
+        <target>နယ်ပယ်အလွတ်မဖြစ်ရ!</target>
+      </trans-unit>
+      <trans-unit id="ERR.minlength">
+        <source>Field &quot;%s&quot; has to be at least %d characters long!</source>
+        <target>နယ်ပယ် &quot;%s&quot; သည် %d အက္ခရာများအနည်းဆံုးရှည်ပါစေ!</target>
+      </trans-unit>
+      <trans-unit id="ERR.maxlength">
+        <source>Field &quot;%s&quot; must not be longer than %d characters!</source>
+        <target>နယ်ပယ် &quot;%s&quot; သည် %d အက္ခရာများထက်မရှည်ပါစေ!</target>
+      </trans-unit>
+      <trans-unit id="ERR.digit">
+        <source>Please enter digits only!</source>
+        <target>ဂဏန်းများသာထည့်သွင်း!</target>
+      </trans-unit>
+      <trans-unit id="ERR.prcnt">
+        <source>Please enter a percentage between 0 and 100!</source>
+        <target>၀ နှင့် ၁၀၀ တန်ဖိုးအကြားရာခိုင်နှုန်းထည့်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.alpha">
+        <source>Please enter alphabetic characters only!</source>
+        <target>အက္ခရာစဉ်စာလံုးများသာထည့်သွင်း!</target>
+      </trans-unit>
+      <trans-unit id="ERR.alnum">
+        <source>Please enter alphanumeric characters only!</source>
+        <target>ကိန်းဂဏန်းအက္ခရာများသာထည့်သွင်း!</target>
+      </trans-unit>
+      <trans-unit id="ERR.phone">
+        <source>Please enter a valid phone number!</source>
+        <target>တရားဝင်ဖုန်းနံပါတ်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="ERR.extnd">
+        <source>For security reasons you can not use the following characters here: =&lt;&gt;&amp;/()#</source>
+        <target>လံုခြုံရေးအတွက်ယခုစာလံုးများမသံုးနိုင်: =&lt;&gt;&amp;/()#</target>
+      </trans-unit>
+      <trans-unit id="ERR.email">
+        <source>Please enter a valid e-mail address!</source>
+        <target>တရားဝင်အီးမေးလ်လိပ်စာထည့်သွင်း!</target>
+      </trans-unit>
+      <trans-unit id="ERR.emails">
+        <source>There is at least one invalid e-mail address!</source>
+        <target>တရားမဝင်အီးမေးလ်လိပ်စာတစ်ခုအနည်းဆံုး!</target>
+      </trans-unit>
+      <trans-unit id="ERR.url">
+        <source>Please enter a valid URL format and encode special characters!</source>
+        <target>ယူအာအယ်အချိုးအစားအမှန်ထည့်ပြီးအထူးအက္ခရာများကုဒ်ပြောင်း!</target>
+      </trans-unit>
+      <trans-unit id="ERR.locale">
+        <source>Please enter a valid locale such as &quot;en&quot; or &quot;en_US&quot;!</source>
+        <target>&quot;en&quot; (သို့) &quot;en_US&quot; ကဲ့သို့တရားဝင်ပင်ရင်းထည့်သွင်း!</target>
+      </trans-unit>
+      <trans-unit id="ERR.language">
+        <source>Please enter a valid language code such as &quot;en&quot; or &quot;en-US&quot;!</source>
+        <target>&quot;en&quot; (သို့) &quot;en_US&quot; ကဲ့သို့တရားဝင်ဘာသာစကားကုဒ်ထည့်သွင်း!</target>
+      </trans-unit>
+      <trans-unit id="ERR.alias">
+        <source>Please enter only alphanumeric characters and the following special characters: .-_</source>
+        <target>ကိန်းဂဏန်းအက္ခရာများသာနှင့်အောက်ဖော်ပြပါအထူးအက္ခရာများသာထည့်သွင်း: .-_</target>
+      </trans-unit>
+      <trans-unit id="ERR.folderalias">
+        <source>Please enter only alphanumeric characters and the following special characters: .-/_</source>
+        <target>ကိန်းဂဏန်းအက္ခရာများသာနှင့်အောက်ဖော်ပြပါအထူးအက္ခရာများသာထည့်သွင်း: .-/_</target>
+      </trans-unit>
+      <trans-unit id="ERR.date">
+        <source>Please enter the date as &quot;%s&quot;!</source>
+        <target>&quot;%s&quot; ကဲ့သို့ရက်စွဲထည့်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.time">
+        <source>Please enter the time as &quot;%s&quot;!</source>
+        <target>&quot;%s&quot; ကဲ့သို့အချိန်ထည့်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.dateTime">
+        <source>Please enter date and time as &quot;%s&quot;!</source>
+        <target>&quot;%s&quot; ကဲ့သို့ရက်စွဲနှင့်အချိန်ထည့်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
+        <target>&quot;%s&quot; မမှန်ရက်စွဲ!</target>
+      </trans-unit>
+      <trans-unit id="ERR.noSpace">
+        <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
+        <target>နယ်ပယ် &quot;%s&quot; သည်အလွတ်ဗလာအက္ခရာများမပါဝင်ရ!</target>
+      </trans-unit>
+      <trans-unit id="ERR.filesize">
+        <source>The maximum size for file uploads is %s (Contao or php.ini settings)!</source>
+        <target>%s သည်ဖိုင်ကူးတင်ရန်အတွက်ပမာဏအများဆံုး(ကွန်တောင်(သို့)php.iniချိန်ညှိချက်)!</target>
+      </trans-unit>
+      <trans-unit id="ERR.filetype">
+        <source>File type &quot;%s&quot; is not allowed to be uploaded!</source>
+        <target>&quot;%s&quot; ဖိုင်အမျိုးအစားကိုကူးတင်ရန်ခွင့်မပြု!</target>
+      </trans-unit>
+      <trans-unit id="ERR.filepartial">
+        <source>File %s was only partially uploaded!</source>
+        <target>%s ဖိုင်ကိုတစ်စိတ်တစ်ပိုင်းသာကူးတင်ပြီး!</target>
+      </trans-unit>
+      <trans-unit id="ERR.filewidth">
+        <source>File %s exceeds the maximum image width of %d pixels!</source>
+        <target> %s ဖိုင်သည် %d အစက်အပြောက်များအများဆံုးပံုအနံထက်ကျော်လွန်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileheight">
+        <source>File %s exceeds the maximum image height of %d pixels!</source>
+        <target> %s ဖိုင်သည် %d အစက်အပြောက်များအများဆံုးပံုအမြင့်ထက်ကျော်လွန်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.filetarget">
+        <source>Cannot move %s to %s because the target exists!</source>
+        <target>ရည်မှန်းချက်တည်ရှိနေ၍ %s မှ %s သို့မရွေ့နိုင်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidReferer">
+        <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
+        <target>ဝင်ကြည့်မှုတားမြစ်ထား! လက်ရှိလက်ခံလိပ်စာ (%s) သည်ကိုးကားလက်ခံလိပ်စာ (%s) နှင့်မတူညီ!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidPass">
+        <source>Invalid password!</source>
+        <target>စကားဝှက်မမှန်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.passwordLength">
+        <source>A password has to be at least %d characters long!</source>
+        <target>စကားဝှက်သည် %d အက္ခရာများအနည်းဆံုးရှည်ပါစေ!</target>
+      </trans-unit>
+      <trans-unit id="ERR.passwordName">
+        <source>Your username and password must not be the same!</source>
+        <target>အသံုးပြုသူနာမည်နှင့်စကားဝှက်မတူညီရ!</target>
+      </trans-unit>
+      <trans-unit id="ERR.passwordMatch">
+        <source>The passwords did not match!</source>
+        <target>စကားဝှက်များမတူညီပေ!</target>
+      </trans-unit>
+      <trans-unit id="ERR.accountLocked">
+        <source>This account has been locked! You can log in again in %d minutes.</source>
+        <target>ယခုစာရင်းကိုသော့ခတ်ထား! %d မိနစ်အတွင်းတွင်နောက်တစ်ကြိမ်ဖွင့်ဝင်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidLogin">
+        <source>Login failed!</source>
+        <target>ဖွင့်ဝင်မရ!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidColor">
+        <source>Invalid color format!</source>
+        <target>အရောင်အချိုးအစားမမှန်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.all_fields">
+        <source>Please select at least one field!</source>
+        <target>နယ်ပယ်တစ်ခုအနည်းဆံုးရွေးပါ!</target>
+      </trans-unit>
+      <trans-unit id="ERR.emptyUpload">
+        <source>Please select at least one file!</source>
+      </trans-unit>
+      <trans-unit id="ERR.aliasExists">
+        <source>The alias &quot;%s&quot; already exists!</source>
+        <target>&quot;%s&quot; ပံုစံတူပွားတည်ရှိပြီး!</target>
+      </trans-unit>
+      <trans-unit id="ERR.importFolder">
+        <source>The folder &quot;%s&quot; cannot be imported!</source>
+        <target>&quot;%s&quot; ဖိုင်တွဲမတင်သွင်းနိုင်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.notWriteable">
+        <source>The file &quot;%s&quot; is not writeable and can therefore not be updated!</source>
+        <target>&quot;%s&quot; ဖိုင်ကိုပြန်လည်မရေးသားနို်င်ပြီးမမွမ်းမံနို်င်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidName">
+        <source>This file or folder name is invalid!</source>
+        <target>ယခုဖိုင်(သို့)ဖိုင်တွဲနာမည်မမှန်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidFile">
+        <source>The file or folder &quot;%s&quot; is invalid!</source>
+        <target>ယခုဖိုင်(သို့)ဖိုင်တွဲ &quot;%s&quot; မမှန်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileExists">
+        <source>The file &quot;%s&quot; already exists!</source>
+        <target>&quot;%s&quot; ဖိုင်တည်ရှိပြီး!</target>
+      </trans-unit>
+      <trans-unit id="ERR.circularReference">
+        <source>Invalid redirect target (circular reference)!</source>
+        <target>ဦးတည်ရာပြောင်းရည်မှန်းချက်မမှန်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.ie6warning">
+        <source>&lt;strong&gt;Attention!&lt;/strong&gt; Your web browser is %sout of date%s and &lt;strong&gt;you cannot use all features of this website&lt;/strong&gt;.</source>
+        <target>&lt;strong&gt;သတိ!&lt;/strong&gt; သင့်ဝဘ်ဘရောက်ဇာသည် %sခေတ်နောက်ကျနေပြီး%s &lt;strong&gt;ဝဘ်ဆိုက်အင်္ဂါရပ်များအားလံုးအသံုးမပြုနိုင်&lt;/strong&gt;။</target>
+      </trans-unit>
+      <trans-unit id="ERR.noFallbackEmpty">
+        <source>None of the active website root pages without an explicit DNS setting has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
+        <target>သက်ဝင်ဝဘ်ဆိုက်အခြေစာမျက်နှာများတွင်ရှင်းလင်းဖော်ပြဒီအန်အက်စ်ချိန်ညှိချက်မရှိဘဲတစ်ခုမျှဘာသာစကားအရန်ရွေးပိုင်ခွင့်မရှိ။ စာမျက်နှာချိန်ညှိချက်ရှိဘာသာစကားတစ်ခုတည်းကိုသာယခုဝဘ်ဆိုက်များလုပ်ဆောင်နိုင်! လည်ပတ်သူများနှင့်ရှာဖွေအင်ဂျင်များယခုဘာသာစကားကိုမသံုးပါကသင့်ဝဘ်ဆိုက်ကိုမရှာဖွေနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="ERR.noFallbackDns">
+        <source>None of the active website root pages for &lt;strong&gt;%s&lt;/strong&gt; has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
+        <target>&lt;strong&gt;%s&lt;/strong&gt; အတွက်သက်ဝင်ဝဘ်ဆိုက်အခြေစာမျက်နှာများတွင်ရှင်းလင်းဖော်ပြဒီအန်အက်စ်ချိန်ညှိချက်မရှိဘဲတစ်ခုမျှဘာသာစကားအရန်ရွေးပိုင်ခွင့်မရှိ။ စာမျက်နှာချိန်ညှိချက်ရှိဘာသာစကားတစ်ခုတည်းကိုသာယခုဝဘ်ဆိုက်များလုပ်ဆောင်နိုင်! လည်ပတ်သူများနှင့်ရှာဖွေအင်ဂျင်များယခုဘာသာစကားကိုမသံုးပါကသင့်ဝဘ်ဆိုက်ကိုမရှာဖွေနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="ERR.multipleFallback">
+        <source>You can only define one website root page per domain as language fallback.</source>
+        <target>ဘာသာစကားအရန်မှာကဲ့သို့ဒိုမိန်းတစ်ခုစီတိုင်းတွင်ဝဘ်ဆိုက်အခြေစာမျက်နှာတစ်ခုသာသတ်မှတ်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="ERR.topLevelRoot">
+        <source>Top-level pages must be website root pages!</source>
+        <target>ထိပ်တန်း-အဆင့်စာမျက်နှာများသည်ဝဘ်ဆိုက်အခြေစာမျက်နှာများဖြစ်ရမည်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.topLevelRegular">
+        <source>There are pages on the top-level which are not website root pages. Creating websites without a website root page is no longer supported, so please ensure that all pages are grouped under a website root page.</source>
+        <target>ထိပ်တန်း-အဆင့်တွင်ရှိစာမျက်နှာများမှာဝဘ်ဆိုက်အခြေစာမျက်နှာများမဟုတ်။ ဝဘ်ဆိုက်အခြေစာမျက်နှာမပါဘဲဝဘ်ဆိုက်များထုတ်လုပ်ခြင်းကိုမအားပေးပါ၊ ဝဘ်ဆိုက်အခြေစာမျက်နှာအောက်တွင်စာမျက်နှာအားလံုးအုပ်စုဖွဲ့ပြီးပါစေ။</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidTokenUrl">
+        <source>The link you were trying to open could not be verified. If you have clicked the link yourself or have received it by a trustworthy person, you can confirm the process below.</source>
+        <target>ဖွင့်မည့်ကွန်ဆက်မှာအတည်မပြုနိုင်။ ကွန်ဆက်တွင်ကလစ်နှိပ်ပါက(သို့)ယံုကြည်သူတစ်ယောက်ယောက်မှပေးပို့ပါကအောက်ဖော်ပြပါလုပ်ငန်းစဉ်အတည်ပြုနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="ERR.version2format">
+        <source>This element still uses the old Contao 2 SRC format. Did you upgrade the database?</source>
+        <target>ယခုပစ္စည်းသည်ကွန်တောင်၂အက်စ်အာစီပံုစံအဟောင်းအသံုးပြုနေဆဲ။ အချက်အလက်အစုကိုအဆင့်မြင့်ပြီး?</target>
+      </trans-unit>
+      <trans-unit id="ERR.form">
+        <source>The form could not be sent</source>
+        <target>ယခုပံုစံကိုမပေးပို့နိုင်</target>
+      </trans-unit>
+      <trans-unit id="ERR.captcha">
+        <source>Please answer the security question!</source>
+        <target>လံုခြုံရေးမေးခွန်းဖြေကြား!</target>
+      </trans-unit>
+      <trans-unit id="ERR.download">
+        <source>File &quot;%s&quot; is not available for download!</source>
+        <target>&quot;%s&quot; ဖိုင်ကိုမကူးဆွဲနိုင်!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalid">
+        <source>Invalid input: %s</source>
+        <target>တရားမဝင်ထည့်သွင်းခြင်း: %s</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileNotFoundSync">
+        <source>No database entry found for %s. Please synchronize the file system.</source>
+        <target>%s အတွက်အချက်အလက်အစုထည့်သွင်းမှုမရှိ။ ဖိုင်စက်စနစ်ကိုထပ်တူကျရန်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="SEC.question1">
+        <source>Please add %d and %d.</source>
+        <target>%d နှင့် %d ထည့်။</target>
+      </trans-unit>
+      <trans-unit id="SEC.question2">
+        <source>What is the sum of %d and %d?</source>
+        <target>%d နှင့် %d ပေါင်းခြင်းရလဒ်?</target>
+      </trans-unit>
+      <trans-unit id="SEC.question3">
+        <source>Please calculate %d plus %d.</source>
+        <target>%d အပေါင်း %d တွက်ပါ။</target>
+      </trans-unit>
+      <trans-unit id="CTE.texts">
+        <source>Text elements</source>
+        <target>စာသားပစ္စည်းများ</target>
+      </trans-unit>
+      <trans-unit id="CTE.headline.0">
+        <source>Headline</source>
+        <target>ခေါင်းစဉ်</target>
+      </trans-unit>
+      <trans-unit id="CTE.headline.1">
+        <source>Generates a headline (h1 - h6).</source>
+        <target>ခေါင်းစဉ်ထုတ်လုပ်  (ဟိပ်စ်၁-ဟိပ်စ်၆)။</target>
+      </trans-unit>
+      <trans-unit id="CTE.text.0">
+        <source>Text</source>
+        <target>စာသား</target>
+      </trans-unit>
+      <trans-unit id="CTE.text.1">
+        <source>Generates a rich text element.</source>
+        <target>ပြည့်နှက်စာသားပစ္စည်းထုတ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.html.0">
+        <source>HTML</source>
+        <target>ဟိစ်တီအမ်အလ်</target>
+      </trans-unit>
+      <trans-unit id="CTE.html.1">
+        <source>Allows you to add custom HTML code.</source>
+        <target>စိတ်ကြိုက်ဟိပ်စ်တီအမ်အယ်ကုဒ်ထည့်ရန်ခွင့်ပြု။</target>
+      </trans-unit>
+      <trans-unit id="CTE.list.0">
+        <source>List</source>
+        <target>စာရင်း</target>
+      </trans-unit>
+      <trans-unit id="CTE.list.1">
+        <source>Generates an ordered or unordered list.</source>
+        <target>စီစဉ်ပြီး(သို့)မစီစဉ်ရသေးစာရင်းထုတ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.table.0">
+        <source>Table</source>
+        <target>စားပွဲ</target>
+      </trans-unit>
+      <trans-unit id="CTE.table.1">
+        <source>Generates an optionally sortable table.</source>
+        <target>ရွေးပိုင်ခွင့်ရှိမျိုးတူစုနိုင်သောစားပွဲထုတ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordion">
+        <source>Accordion</source>
+        <target>အကော်ဒီယံ</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.0">
+        <source>Wrapper start</source>
+        <target>ထုပ်ပိုးခြင်းစတင်</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.1">
+        <source>Generates the opening part of the accordion wrapper.</source>
+        <target>အကော်ဒီယံစည်းသူဖွင့်ထားသောအစိတ်အပိုင်းထုတ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.0">
+        <source>Wrapper stop</source>
+        <target>ထုပ်ပိုးခြင်းရပ်တန့်</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.1">
+        <source>Generates the closing part of the accordion wrapper.</source>
+        <target>အကော်ဒီယံစည်းသူပိတ်ထားသောအစိတ်အပိုင်းထုတ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.0">
+        <source>Single element</source>
+        <target>ပစ္စည်းတစ်ခုတည်း</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.1">
+        <source>Generates a single accordion element.</source>
+        <target>အကော်ဒီယံစည်းသူပစ္စည်းတစ်ခုထုတ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.code.0">
+        <source>Code</source>
+        <target>ကုဒ်</target>
+      </trans-unit>
+      <trans-unit id="CTE.code.1">
+        <source>Highlights code snippets and prints them to the screen.</source>
+        <target>ကုဒ်အတိုအထွာများမီးမောင်းထိုးပြီးဖန်သားပြင်သို့ပုံနှိပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.slider">
+        <source>Content slider</source>
+        <target>အကြောင်းအရာဆလိုက်</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.0">
+        <source>Wrapper start</source>
+        <target>ထုပ်ပိုးခြင်းစတင်</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.1">
+        <source>Generates the opening part of the slider wrapper.</source>
+        <target>ဆလိုက်စည်းသူဖွင့်ထားသောအစိတ်အပိုင်းထုတ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.0">
+        <source>Wrapper stop</source>
+        <target>ထုပ်ပိုးခြင်းရပ်တန့်</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.1">
+        <source>Generates the closing part of the slider wrapper.</source>
+        <target>ဆလိုက်စည်းသူပိတ်ထားသောအစိတ်အပိုင်းထုတ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.links">
+        <source>Link elements</source>
+        <target>ကွန်ဆက်ပစ္စည်းများ</target>
+      </trans-unit>
+      <trans-unit id="CTE.hyperlink.0">
+        <source>Hyperlink</source>
+        <target>ရည်ညွှန်းကွန်ဆက်</target>
+      </trans-unit>
+      <trans-unit id="CTE.hyperlink.1">
+        <source>Generates a link to another website.</source>
+        <target>အခြားဝဘ်ဆိုက်သို့ကွန်ဆက်ထုတ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.toplink.0">
+        <source>Top link</source>
+        <target>ထိပ်တန်းကွန်ဆက်</target>
+      </trans-unit>
+      <trans-unit id="CTE.toplink.1">
+        <source>Generates a link to jump to the top of the page.</source>
+        <target>စာမျက်နှာထိပ်သို့ခုန်ကျော်သောကွန်ဆက်ထုတ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.media">
+        <source>Media elements</source>
+        <target>မီဒီယာပစ္စည်းများ</target>
+      </trans-unit>
+      <trans-unit id="CTE.image.0">
+        <source>Image</source>
+        <target>ပံု</target>
+      </trans-unit>
+      <trans-unit id="CTE.image.1">
+        <source>Generates a stand-alone image.</source>
+        <target>ပံုတစ်ပံုတည်းထုတ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.gallery.0">
+        <source>Gallery</source>
+        <target>ပြခန်း</target>
+      </trans-unit>
+      <trans-unit id="CTE.gallery.1">
+        <source>Generates a lightbox image gallery.</source>
+        <target>လိုက်ဘောက်စ်ပံုပြခန်းထုတ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.player.0">
+        <source>Video/audio</source>
+        <target>ဗီဒီယို/အသံ</target>
+      </trans-unit>
+      <trans-unit id="CTE.player.1">
+        <source>Generates a video or audio player.</source>
+        <target>ဗီဒီယိုသို့အသံဖွင့်စက်ထုတ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.youtube.0">
+        <source>YouTube</source>
+        <target>ယူကျူ့</target>
+      </trans-unit>
+      <trans-unit id="CTE.youtube.1">
+        <source>Adds a YouTube video.</source>
+        <target>ယူကျူ့ဗီဒီယိုထည့်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.files">
+        <source>File elements</source>
+        <target>ဖိုင်ပစ္စည်းများ</target>
+      </trans-unit>
+      <trans-unit id="CTE.download.0">
+        <source>Download</source>
+        <target>ကူးဆွဲ</target>
+      </trans-unit>
+      <trans-unit id="CTE.download.1">
+        <source>Generates a link to download a file.</source>
+        <target>ဖိုင်ကူးဆွဲရန်ကွန်ဆက်ထုတ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.downloads.0">
+        <source>Downloads</source>
+        <target>ကူးဆွဲများ</target>
+      </trans-unit>
+      <trans-unit id="CTE.downloads.1">
+        <source>Generates multiple links to download files.</source>
+        <target>ဖိုင်များကူးဆွဲရန်ကွန်ဆက်များစွာထုတ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.includes">
+        <source>Include elements</source>
+        <target>ပစ္စည်းများပါဝင်</target>
+      </trans-unit>
+      <trans-unit id="CTE.article.0">
+        <source>Article</source>
+        <target>ဆောင်းပါး</target>
+      </trans-unit>
+      <trans-unit id="CTE.article.1">
+        <source>Includes another article.</source>
+        <target>အခြားဆောင်းပါးပါဝင်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.alias.0">
+        <source>Content element</source>
+        <target>အကြောင်းအရာပစ္စည်း</target>
+      </trans-unit>
+      <trans-unit id="CTE.alias.1">
+        <source>Includes another content element.</source>
+        <target>အခြားအကြောင်းအရာပစ္စည်းပါဝင်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.form.0">
+        <source>Form</source>
+        <target>ပံုစံ</target>
+      </trans-unit>
+      <trans-unit id="CTE.form.1">
+        <source>Includes a form.</source>
+        <target>ပံုစံပါဝင်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.module.0">
+        <source>Module</source>
+        <target>အပိုင်း</target>
+      </trans-unit>
+      <trans-unit id="CTE.module.1">
+        <source>Includes a front end module.</source>
+        <target>အပြင်ပိုင်းအပိုင်းပါဝင်။</target>
+      </trans-unit>
+      <trans-unit id="CTE.teaser.0">
+        <source>Article teaser</source>
+        <target>ဆောင်းပါးပဟေဠိ</target>
+      </trans-unit>
+      <trans-unit id="CTE.teaser.1">
+        <source>Displays the teaser text of an article.</source>
+        <target>ဆောင်းပါးပဟေဠိစာသားပြသ။</target>
+      </trans-unit>
+      <trans-unit id="PTY.regular.0">
+        <source>Regular page</source>
+        <target>ပံုမှန်စာမျက်နှာ</target>
+      </trans-unit>
+      <trans-unit id="PTY.regular.1">
+        <source>A regular page contains articles and content elements. It is the default page type.</source>
+        <target>ပံုမှန်စာမျက်နှာတွင်ဆောင်းပါးများနှင့်အကြောင်းအရာပစ္စည်းများပါဝင်။ မူလပံုစံစာမျက်နှာအမျိုးအစား။</target>
+      </trans-unit>
+      <trans-unit id="PTY.redirect.0">
+        <source>External redirect</source>
+        <target>ပြင်ပဦးတည်ရာပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="PTY.redirect.1">
+        <source>This type of page automatically redirects visitors to an external website. It works like a hyperlink.</source>
+        <target>ယခုစာမျက်နှာအမျိုးအစားသည်လိုလျောက်ပြင်ပဝဘ်ဆိုက်သို့လည်ပတ်သူများကိုဦးတည်ရာပြောင်း။ ရည်ညွှန်းကွန်ဆက်ကဲ့သို့အလုပ်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="PTY.forward.0">
+        <source>Internal redirect</source>
+        <target>အတွင်းပိုင်းဦးတည်ရာပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="PTY.forward.1">
+        <source>This type of page automatically forwards visitors to another page within the site structure.</source>
+        <target>ယခုစာမျက်နှာအမျိုးအစားသည်ဆိုက်ဖွဲ့စည်းပံုအတွင်းရှိအခြားစာမျက်နှာသို့လည်ပတ်သူများကိုလိုလျောက်တစ်ဆင့်ကမ်း။</target>
+      </trans-unit>
+      <trans-unit id="PTY.root.0">
+        <source>Website root</source>
+        <target>ဝဘ်ဆိုက်အခြေ</target>
+      </trans-unit>
+      <trans-unit id="PTY.root.1">
+        <source>This type of page marks the starting point of a new website within the site structure.</source>
+        <target>ယခုစာမျက်နှာအမျိုးအစားသည်ဆိုက်ဖွဲ့စည်းပံုအတွင်းရှိဝဘ်ဆိုက်အသစ်တစ်ခုစတင်နေရာကိုမှတ်သား။</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_403.0">
+        <source>403 Access denied</source>
+        <target>၄၀၃ ဝင်ကြည့်မှုတားမြစ်ထား</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_403.1">
+        <source>If a user requests a protected page without permission, a 403 error page will be loaded instead.</source>
+        <target>အသံုးပြုသူမှခွင့်ပြုချက်မပါဘဲကာကွယ်ပြီးစာမျက်နှာကိုတောင်းဆိုပါက၄၀၃အမှားပြစာမျက်နှာကိုကူးတင်လိမ့်မည်။</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_404.0">
+        <source>404 Page not found</source>
+        <target>၄၀၄ စာမျက်နှာရှာမတွေ့</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_404.1">
+        <source>If a user requests a non-existent page, a 404 error page will be loaded instead.</source>
+        <target>အသံုးပြုသူမှမတည်ရှိနေသောစာမျက်နှာကိုတောင်းဆိုပါက၄၀၄အမှားပြစာမျက်နှာကိုကူးတင်လိမ့်မည်။</target>
+      </trans-unit>
+      <trans-unit id="FOP.fop.0">
+        <source>File operation permissions</source>
+        <target>ဖိုင်လုပ်ဆောင်ချက်ခွင့်ပြုချက်များ</target>
+      </trans-unit>
+      <trans-unit id="FOP.fop.1">
+        <source>Here you can select the file operations you want to allow.</source>
+        <target>ခွင့်ပြုမည့်ဖိုင်လုပ်ဆောင်ချက်များရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="FOP.f1">
+        <source>Upload files to the server</source>
+        <target>ဆာဗာသို့ဖိုင်များကူးတင်</target>
+      </trans-unit>
+      <trans-unit id="FOP.f2">
+        <source>Edit, copy or move files and folders</source>
+        <target>ဖိုင်များနှင့်ဖိုင်တွဲများတည်းဖြတ်၊ကူးယူ(သို့)ရွေ့ပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="FOP.f3">
+        <source>Delete single files and empty folders</source>
+        <target>တစ်ခုတည်းဖိုင်များနှင့်အလွတ်ဖို်င်တွဲများပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="FOP.f4">
+        <source>Delete folders including all files and subfolders (!)</source>
+        <target>ဖိုင်များနှင့်ဖိုင်တွဲခွဲများအားလံုးအပါအဝင်ဖိုင်တွဲများပယ်ဖျက် (!)</target>
+      </trans-unit>
+      <trans-unit id="FOP.f5">
+        <source>Edit files in the source editor</source>
+        <target>ရင်းမြစ်တည်းဖြတ်သူတွင်ဖိုင်များတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="FOP.f6">
+        <source>Synchronize the file system with the database</source>
+        <target>အချက်အလက်အစုဖြင့်ဖိုင်စနစ်ထပ်တူကျရန်လုပ်</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.editpage">
+        <source>Edit page</source>
+        <target>စာမျက်နှာတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.editnavigation">
+        <source>Edit page hierarchy</source>
+        <target>စာမျက်နှာအဆင့်ဆင့်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.deletepage">
+        <source>Delete page</source>
+        <target>စာမျက်နှာပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.editarticles">
+        <source>Edit articles</source>
+        <target>ဆောင်းပါးများတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.movearticles">
+        <source>Edit article hierarchy</source>
+        <target>ဆောင်းပါးအဆင့်ဆင့်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.deletearticles">
+        <source>Delete articles</source>
+        <target>ဆောင်းပါးများပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.cuser">
+        <source>Owner</source>
+        <target>ပိုင်ရှင်</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.cgroup">
+        <source>Group</source>
+        <target>အုပ်စု</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.cworld">
+        <source>Everybody</source>
+        <target>လူအားလံုး</target>
+      </trans-unit>
+      <trans-unit id="DAYS.0">
+        <source>Sunday</source>
+        <target>တနင်္ဂနွေ</target>
+      </trans-unit>
+      <trans-unit id="DAYS.1">
+        <source>Monday</source>
+        <target>တနင်္လာ</target>
+      </trans-unit>
+      <trans-unit id="DAYS.2">
+        <source>Tuesday</source>
+        <target>အင်္ဂါ</target>
+      </trans-unit>
+      <trans-unit id="DAYS.3">
+        <source>Wednesday</source>
+        <target>ဗုဒ္ဓဟူး</target>
+      </trans-unit>
+      <trans-unit id="DAYS.4">
+        <source>Thursday</source>
+        <target>ကြာသပတေး</target>
+      </trans-unit>
+      <trans-unit id="DAYS.5">
+        <source>Friday</source>
+        <target>သောကြာ</target>
+      </trans-unit>
+      <trans-unit id="DAYS.6">
+        <source>Saturday</source>
+        <target>စနေ</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.0">
+        <source>Sun</source>
+        <target>တနင်္ဂနွေ</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.1">
+        <source>Mon</source>
+        <target>တနင်္လာ</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.2">
+        <source>Tue</source>
+        <target>အင်္ဂါ</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.3">
+        <source>Wed</source>
+        <target>ဗုဒ္ဓဟူး</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.4">
+        <source>Thu</source>
+        <target>ကြာသပတေး</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.5">
+        <source>Fri</source>
+        <target>သောကြာ</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.6">
+        <source>Sat</source>
+        <target>စနေ</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.0">
+        <source>January</source>
+        <target>ဇန်နဝါရီ</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.1">
+        <source>February</source>
+        <target>ဖေဖော်ဝါရီ</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.2">
+        <source>March</source>
+        <target>မတ်</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.3">
+        <source>April</source>
+        <target>ဧပြီ</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.4">
+        <source>May</source>
+        <target>မေ</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.5">
+        <source>June</source>
+        <target>ဇွန်</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.6">
+        <source>July</source>
+        <target>ဇူလိုင်</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.7">
+        <source>August</source>
+        <target>သြဂုတ်</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.8">
+        <source>September</source>
+        <target>စက်တင်ဘာ</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.9">
+        <source>October</source>
+        <target>အောက်တိုဘာ</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.10">
+        <source>November</source>
+        <target>နိုဝင်ဘာ</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.11">
+        <source>December</source>
+        <target>ဒီဇင်ဘာ</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.0">
+        <source>Jan</source>
+        <target>ဇန်</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.1">
+        <source>Feb</source>
+        <target>ဖေ</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.2">
+        <source>Mar</source>
+        <target>မတ်</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.3">
+        <source>Apr</source>
+        <target>ဧပြီ</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.4">
+        <source>May</source>
+        <target>မေ</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.5">
+        <source>Jun</source>
+        <target>ဇွန်</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.6">
+        <source>Jul</source>
+        <target>ဇူ</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.7">
+        <source>Aug</source>
+        <target>သြ</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.8">
+        <source>Sep</source>
+        <target>စက်</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.9">
+        <source>Oct</source>
+        <target>အောက်</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.10">
+        <source>Nov</source>
+        <target>နို</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.11">
+        <source>Dec</source>
+        <target>ဒီ</target>
+      </trans-unit>
+      <trans-unit id="MSC.dayShortLength">
+        <source>3</source>
+        <target>၃</target>
+      </trans-unit>
+      <trans-unit id="MSC.monthShortLength">
+        <source>3</source>
+        <target>၃</target>
+      </trans-unit>
+      <trans-unit id="MSC.weekOffset">
+        <source>0</source>
+        <target>၀</target>
+      </trans-unit>
+      <trans-unit id="MSC.titleFormat">
+        <source>%B %d%o, %Y</source>
+        <target>%B %d%o၊ %Y</target>
+      </trans-unit>
+      <trans-unit id="MSC.url.0">
+        <source>Link target</source>
+        <target>ကွန်ဆက်သတ်မှတ်ချက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.url.1">
+        <source>Please enter a web address (http://…), an e-mail address (mailto:…) or an insert tag.</source>
+        <target>ဝဘ်လိပ်စာ(http://…)၊အီးမေးလ်(mailto:…)(သို့)အမည်ထည့်သွင်းထည့်သွင်းနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="MSC.target.0">
+        <source>Open in new window</source>
+        <target>ဝင်းဒိုးအသစ်ဖွင့်</target>
+      </trans-unit>
+      <trans-unit id="MSC.target.1">
+        <source>Open the link in a new browser window.</source>
+        <target>ဘရောက်ဇာဝင်းဒိုးအသစ်တွင်ကွန်ဆက်ဖွင့်။</target>
+      </trans-unit>
+      <trans-unit id="MSC.decimalSeparator">
+        <source>.</source>
+        <target>။</target>
+      </trans-unit>
+      <trans-unit id="MSC.thousandsSeparator">
+        <source>,</source>
+        <target>၊</target>
+      </trans-unit>
+      <trans-unit id="MSC.separator.0">
+        <source>Separator</source>
+        <target>ခြားနားသူ</target>
+      </trans-unit>
+      <trans-unit id="MSC.separator.1">
+        <source>Please choose a field delimiter.</source>
+        <target>နယ်ပယ်မကန့်သတ်သူရွေး။</target>
+      </trans-unit>
+      <trans-unit id="MSC.source.0">
+        <source>Source files</source>
+        <target>ရင်းမြစ်ဖိုင်များ</target>
+      </trans-unit>
+      <trans-unit id="MSC.source.1">
+        <source>Please upload the CSV files to be imported.</source>
+        <target>တင်သွင်းမည့်စီအက်စ်ဗီဖိုင်များကူးတင်။</target>
+      </trans-unit>
+      <trans-unit id="MSC.comma">
+        <source>Comma</source>
+        <target>ပုဒ်ကလေး</target>
+      </trans-unit>
+      <trans-unit id="MSC.semicolon">
+        <source>Semicolon</source>
+        <target>ပုံဖြတ်ပံုရပ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.tabulator">
+        <source>Tabulator</source>
+        <target>ဇယားကွက်ခွဲခလုတ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.linebreak">
+        <source>Line break</source>
+        <target>လိုင်းရပ်တန့်</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_import.0">
+        <source>CSV import</source>
+        <target>စီအက်စ်ဗီတင်သွင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_import.1">
+        <source>Import list items from a CSV file</source>
+        <target>စီအက်ဗီဖိုင်မှစာရင်းပစ္စည်းများတင်သွင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_copy">
+        <source>Duplicate the element</source>
+        <target>ပစ္စည်းပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_up">
+        <source>Move the element one position up</source>
+        <target>အပေါ်တစ်နေရာသို့ပစ္စည်းကိုရွေ့</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_down">
+        <source>Move the element one position down</source>
+        <target>အောက်တစ်နေရာသို့ပစ္စည်းကိုရွေ့</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_delete">
+        <source>Delete the element</source>
+        <target>ပစ္စည်းပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_import.0">
+        <source>CSV import</source>
+        <target>စီအက်စ်ဗီတင်သွင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_import.1">
+        <source>Import table items from a CSV file</source>
+        <target>စီအက်စ်ဗီဖိုင်မှစားပွဲပစ္စည်းများတင်သွင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_expand">
+        <source>Increase the input field size</source>
+        <target>ထည့်သွင်းနယ်ပယ်အရွယ်တိုးမြှင့်</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_shrink">
+        <source>Decrease the input field size</source>
+        <target>ထည့်သွင်းနယ်ပယ်အရွယ်လျော့နည်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rcopy">
+        <source>Duplicate the row</source>
+        <target>အတန်းကိုပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rup">
+        <source>Move the row one position up</source>
+        <target>အပေါ်တစ်နေရာသို့အတန်းကိုရွေ့</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rdown">
+        <source>Move the row one position down</source>
+        <target>အောက်တစ်နေရာသို့အတန်းကိုရွေ့</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rdelete">
+        <source>Delete the row</source>
+        <target>အတန်းကိုပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_ccopy">
+        <source>Duplicate the column</source>
+        <target>ကော်လံပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_cmovel">
+        <source>Move the column one position left</source>
+        <target>ဘယ်တစ်နေရာသို့ကော်လံကိုရွေ့</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_cmover">
+        <source>Move the column one position right</source>
+        <target>ညာတစ်နေရာသို့ကော်လံကိုရွေ့</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_cdelete">
+        <source>Delete the column</source>
+        <target>ကော်လံပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_copy">
+        <source>Duplicate the row</source>
+        <target>အတန်းကိုပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_up">
+        <source>Move the row one position up</source>
+        <target>အပေါ်တစ်နေရာသို့အတန်းကိုရွေ့</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_down">
+        <source>Move the row one position down</source>
+        <target>အောက်တစ်နေရာသို့အတန်းကိုရွေ့</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_delete">
+        <source>Delete the row</source>
+        <target>အတန်းကိုပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_value">
+        <source>Value</source>
+        <target>တန်ဖိုး</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_label">
+        <source>Label</source>
+        <target>ကတ်ပြား</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_key">
+        <source>Key</source>
+        <target>ကီး</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_default">
+        <source>Default</source>
+        <target>မူလပံုစံ</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_group">
+        <source>Group</source>
+        <target>အုပ်စု</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_copy">
+        <source>Duplicate the row</source>
+        <target>အတန်းကိုပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_up">
+        <source>Move the row one position up</source>
+        <target>အပေါ်တစ်နေရာသို့အတန်းကိုရွေ့</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_down">
+        <source>Move the row one position down</source>
+        <target>အောက်တစ်နေရာသို့အတန်းကိုရွေ့</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_delete">
+        <source>Delete the row</source>
+        <target>အတန်းကိုပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_module">
+        <source>Module</source>
+        <target>အပိုင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_column">
+        <source>Column</source>
+        <target>ကော်လံ</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_enable">
+        <source>Enable/disable the module</source>
+      </trans-unit>
+      <trans-unit id="MSC.aw_title">
+        <source>Title</source>
+        <target>ခေါင်းစဉ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_link">
+        <source>Link</source>
+        <target>ကွန်ဆက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_caption">
+        <source>Caption</source>
+        <target>စာတန်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_delete">
+        <source>Delete the language</source>
+        <target>ဘာသာစကားပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_new">
+        <source>Add language</source>
+        <target>ဘာသာစကားထည့်</target>
+      </trans-unit>
+      <trans-unit id="MSC.relative">
+        <source>Relative dimensions</source>
+        <target>ပတ်သက်သောရှုထောင့်များ</target>
+      </trans-unit>
+      <trans-unit id="MSC.proportional.0">
+        <source>Proportional</source>
+        <target>အချိုးကျ</target>
+      </trans-unit>
+      <trans-unit id="MSC.proportional.1">
+        <source>The longer side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>ပေးထားသောရှုထောင့်များသို့ပံုအရှည်အစွန်းထိန်းညှိပြီးပံုကိုအချိုးကျအရွယ်ပြန်လည်သတ်မှတ်။</target>
+      </trans-unit>
+      <trans-unit id="MSC.box.0">
+        <source>Fit the box</source>
+        <target>ပံုးနှင့်အံကိုက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.box.1">
+        <source>The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>ပေးထားသောရှုထောင့်များသို့ပံုအတိုအစွန်းထိန်းညှိပြီးပံုကိုအချိုးကျအရွယ်ပြန်လည်သတ်မှတ်။</target>
+      </trans-unit>
+      <trans-unit id="MSC.crop">
+        <source>Exact dimensions</source>
+        <target>တိတိကျကျရှုထောင့်များ</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_top.0">
+        <source>Left | Top</source>
+        <target>ဘယ် | အပေါ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_top.1">
+        <source>Preserves the left part of a landscape image and the top part of a portrait image.</source>
+        <target>အလျားလိုက်ပံုဘယ်ဘက်ပိုင်းနှင့်ဒေါင်လိုက်ပံုအပေါ်ပိုင်းကိုထိန်းသိမ်း။</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_top.0">
+        <source>Center | Top</source>
+        <target>လယ် | အပေါ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_top.1">
+        <source>Preserves the center part of a landscape image and the top part of a portrait image.</source>
+        <target>အလျားလိုက်ပံုအလယ်ပိုင်းနှင့်ဒေါင်လိုက်ပံုအပေါ်ပိုင်းကိုထိန်းသိမ်း။</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_top.0">
+        <source>Right | Top</source>
+        <target>ညာ | အပေါ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_top.1">
+        <source>Preserves the right part of a landscape image and the top part of a portrait image.</source>
+        <target>အလျားလိုက်ပံုညာပိုင်းနှင့်ဒေါင်လိုက်ပံုအပေါ်ပိုင်းကိုထိန်းသိမ်း။</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_center.0">
+        <source>Left | Center</source>
+        <target>ဘယ် | လယ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_center.1">
+        <source>Preserves the left part of a landscape image and the center part of a portrait image.</source>
+        <target>အလျားလိုက်ပံုဘယ်ပိုင်းနှင့်ဒေါင်လိုက်ပံုအလယ်ပိုင်းကိုထိန်းသိမ်း။</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_center.0">
+        <source>Center | Center</source>
+        <target>လယ် | လယ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_center.1">
+        <source>Preserves the center part of a landscape image and the center part of a portrait image.</source>
+        <target>အလျားလိုက်ပံုအလယ်ပိုင်းနှင့်ဒေါင်လိုက်ပံုအလယ်ပိုင်းကိုထိန်းသိမ်း။</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_center.0">
+        <source>Right | Center</source>
+        <target>ညာ | လယ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_center.1">
+        <source>Preserves the right part of a landscape image and the center part of a portrait image.</source>
+        <target>အလျားလိုက်ပံုညာပိုင်းနှင့်ဒေါင်လိုက်ပံုအလယ်ပိုင်းကိုထိန်းသိမ်း။</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_bottom.0">
+        <source>Left | Bottom</source>
+        <target>ဘယ် | အောက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_bottom.1">
+        <source>Preserves the left part of a landscape image and the bottom part of a portrait image.</source>
+        <target>အလျားလိုက်ပံုဘယ်ပိုင်းနှင့်ဒေါင်လိုက်ပံုအောက်ပိုင်းကိုထိန်းသိမ်း။</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_bottom.0">
+        <source>Center | Bottom</source>
+        <target>လယ် | အောက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_bottom.1">
+        <source>Preserves the center part of a landscape image and the bottom part of a portrait image.</source>
+        <target>အလျားလိုက်ပံုအလယ်ပိုင်းနှင့်ဒေါင်လိုက်ပံုအောက်ပိုင်းကိုထိန်းသိမ်း။</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_bottom.0">
+        <source>Right | Bottom</source>
+        <target>ညာ | အောက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_bottom.1">
+        <source>Preserves the right part of a landscape image and the bottom part of a portrait image.</source>
+        <target>အလျားလိုက်ပံုညာပိုင်းနှင့်ဒေါင်လိုက်ပံုအောက်ပိုင်းကိုထိန်းသိမ်း။</target>
+      </trans-unit>
+      <trans-unit id="MSC.id.0">
+        <source>ID</source>
+        <target>အိုင်ဒီ</target>
+      </trans-unit>
+      <trans-unit id="MSC.id.1">
+        <source>Note that changing the ID can break data integrity!</source>
+        <target>အိုင်ဒီကိုပြောင်းလဲခြင်းသည်အချက်အလက်ခိုင်မြဲမှုကိုရပ်တန့်စေနိုင်!</target>
+      </trans-unit>
+      <trans-unit id="MSC.pid.0">
+        <source>Parent ID</source>
+        <target>မိခင်အိုင်ဒီ</target>
+      </trans-unit>
+      <trans-unit id="MSC.pid.1">
+        <source>Note that changing the parent ID can break data integrity!</source>
+        <target>မိခင်အိုင်ဒီကိုပြောင်းလဲခြင်းသည်အချက်အလက်ခိုင်မြဲမှုကိုရပ်တန့်စေနိုင်!</target>
+      </trans-unit>
+      <trans-unit id="MSC.sorting.0">
+        <source>Sorting value</source>
+        <target>တန်ဖိုးအားဖြင့်မျိုးတူစု</target>
+      </trans-unit>
+      <trans-unit id="MSC.sorting.1">
+        <source>The sorting value is usually assigned automatically.</source>
+        <target>တန်ဖိုးအားဖြင့်မျိုးတူစုလိုလျောက်သတ်မှတ်။</target>
+      </trans-unit>
+      <trans-unit id="MSC.all.0">
+        <source>Edit multiple</source>
+        <target>အများအပြားတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.all.1">
+        <source>Edit multiple records at once</source>
+        <target>တစ်ခါတည်းဖြင့်မှတ်တမ်းများအများအပြားတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_override.0">
+        <source>Override multiple</source>
+        <target>အများအပြားအစားထိုးရေးသား</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_override.1">
+        <source>Override multiple records at once</source>
+        <target>တစ်ခါတည်းဖြင့်မှတ်တမ်းများအများအပြားအစားထိုးရေးသား</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_fields.0">
+        <source>Available fields</source>
+        <target>ရနိုင်သောနယ်ပယ်များ</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_fields.1">
+        <source>Please select the fields you want to edit.</source>
+        <target>တည်းဖြတ်နိုင်သောနယ်ပယ်များရွေး။</target>
+      </trans-unit>
+      <trans-unit id="MSC.password.0">
+        <source>Password</source>
+        <target>စကားဝှက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.password.1">
+        <source>Please enter a password.</source>
+        <target>စကားဝှက်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="MSC.confirm.0">
+        <source>Confirmation</source>
+        <target>အတည်ပြုချက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.confirm.1">
+        <source>Please confirm the password.</source>
+        <target>စကားဝှက်အတည်ပြု။</target>
+      </trans-unit>
+      <trans-unit id="MSC.dateAdded.0">
+        <source>Date added</source>
+        <target>ထည့်ပြီးနေ့စွဲ</target>
+      </trans-unit>
+      <trans-unit id="MSC.dateAdded.1">
+        <source>Date added: %s</source>
+        <target>ထည့်ပြီးနေ့စွဲ: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.lastLogin.0">
+        <source>Last login</source>
+        <target>နောက်ဆံုးဖွင့်ဝင်</target>
+      </trans-unit>
+      <trans-unit id="MSC.lastLogin.1">
+        <source>Last login: %s</source>
+        <target>နောက်ဆံုးဖွင့်ဝင်: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
+        <source>Current login</source>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.1">
+        <source>Current login: %s</source>
+      </trans-unit>
+      <trans-unit id="MSC.loginCount">
+        <source>Login attempts</source>
+      </trans-unit>
+      <trans-unit id="MSC.locked">
+        <source>Locked</source>
+      </trans-unit>
+      <trans-unit id="MSC.move">
+        <source>Move the item via drag and drop</source>
+        <target>ဆွဲယူလွှတ်ချမှပစ္စည်းကိုရွေ့ပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_up.0">
+        <source>Move up</source>
+        <target>အပေါ်သို့ရွေ့</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_up.1">
+        <source>Move the item one position up</source>
+        <target>အပေါ်တစ်နေရာသို့ပစ္စည်းကိုရွေ့</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_down.0">
+        <source>Move down</source>
+        <target>အောက်သို့ရွေ့</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_down.1">
+        <source>Move the item one position down</source>
+        <target>အောက်တစ်နေရာသို့ပစ္စည်းကိုရွေ့</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticFiles.0">
+        <source>Files URL</source>
+        <target>ဖိုင်များယူအာအယ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticFiles.1">
+        <source>The files URL applies to the &lt;em&gt;files&lt;/em&gt; directory (page speed optimization).</source>
+        <target>&lt;em&gt;ဖိုင်များ&lt;/em&gt;ဖိုင်လမ်းညွှန်သို့ဖိုင်များယူအာအယ်အသံုးချ (စာမျက်နှာနှုန်းဆောင်ရွက်ခြင်း)။</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticPlugins.0">
+        <source>Assets URL</source>
+        <target>ပစ္စည်းများယူအာအယ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticPlugins.1">
+        <source>The assets URL applies to the &lt;em&gt;assets&lt;/em&gt; directory (page speed optimization).</source>
+        <target>&lt;em&gt;ပစ္စည်းများ&lt;/em&gt;ဖိုင်လမ်းညွှန်သို့ပစ္စည်းများယူအာအယ်အသံုးချ (စာမျက်နှာနှုန်းဆောင်ရွက်ခြင်း)။</target>
+      </trans-unit>
+      <trans-unit id="MSC.shortcuts.0">
+        <source>Back end keyboard shortcuts</source>
+        <target>အတွင်းပိုင်းကီးဘုတ်အတိုကောက်များ</target>
+      </trans-unit>
+      <trans-unit id="MSC.shortcuts.1">
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>&lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;ကီးဘုတ်ဖြတ်လမ်းများ&lt;/a&gt; သံုး၍အလုပ်လုပ်နှုန်းမြှင့်တင်ခြင်းလေ့လာ။</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleAll.0">
+        <source>Toggle all</source>
+        <target>အားလံုးဖွင့်ပိတ်လုပ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleAll.1">
+        <source>Expand or collapse all nodes</source>
+        <target>အစွန်းများအားလံုးပြန့်ကား(သို့)ဖြိုချ</target>
+      </trans-unit>
+      <trans-unit id="MSC.lockedAccount.0">
+        <source>A Contao account has been locked</source>
+        <target>ကွန်တောင်စာရင်းကိုသော့ခတ်ပြီး</target>
+      </trans-unit>
+      <trans-unit id="MSC.lockedAccount.1">
+        <source>The following Contao account has been locked for security reasons.
+
+Username: %s
+Real name: %s
+Website: %s
+
+The account has been locked for %d minutes, because the user has entered an invalid password three times in a row. After this period of time, the account will be unlocked automatically.
+
+This e-mail has been generated by Contao. You can not reply to it directly.
+</source>
+        <target>အောက်ဖော်ပြပါကွန်တောင်စာရင်းကိုလံုခြုံရေးအကြောင်းအရာများအတွက်သော့ခတ်ပြီး။
+အသံုးပြုသူနာမည်: %s
+နာမည်အမှန်: %s
+ဝဘ်ဆိုက်: %s
+သံုးကြိမ်ဆက်စကားဝှက်အမှားကိုထည့်သွင်းခြင်းကြောင့် %d မိနစ်အကြာစာရင်းကိုသော့ခတ်ပြီး။ ယခုကာလပြီးနောက်စာရင်းကိုလိုလျောက်ပြန်လည်သော့မခတ်။
+ကွန်တောင်မှယခုအီးမေးလ်ကိုထုတ်လုပ်။ တိုက်ရိုက်အကြောင်းပြန်ရန်မလို။
+</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleMobile.0">
+        <source>Mobile version</source>
+        <target>မိုဘိုင်းပံုစံ</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleMobile.1">
+        <source>Go to the mobile version</source>
+        <target>မိုဘိုင်းပံုစံသို့သွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleDesktop.0">
+        <source>Desktop version</source>
+        <target>မျက်နှာပြင်ပံုစံ</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleDesktop.1">
+        <source>Go to the desktop version</source>
+        <target>မျက်နှာပြင်ပံုစံသို့သွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.feLink">
+        <source>Go to front end</source>
+        <target>အပြင်ပိုင်းသို့သွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.fePreview">
+        <source>Front end preview</source>
+        <target>အပြင်ပိုင်းကြိုတင်ကြည့်ရှုခြင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.fePreviewTitle">
+        <source>Preview of the website in a new window</source>
+        <target>ဝင်းဒိုးအသစ်တွင်ဝဘ်ဆိုက်ကြိုတင်ကြည့်ရှုခြင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.feUser">
+        <source>Front end user</source>
+        <target>အပြင်ပိုင်းအသံုးပြုသူ</target>
+      </trans-unit>
+      <trans-unit id="MSC.backToTop">
+        <source>Back to top</source>
+        <target>အပေါ်သို့ပြန်သွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.backToTopTitle">
+        <source>Go to the top of the page</source>
+        <target>စာမျက်နှာထိပ်သို့သွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.home">
+        <source>Home</source>
+        <target>ပင်မ</target>
+      </trans-unit>
+      <trans-unit id="MSC.homeTitle">
+        <source>Back to the back end start page</source>
+        <target>အတွင်းပိုင်းစတင်စာမျက်နှာသိုပြန်သွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.user">
+        <source>User</source>
+        <target>အသံုးပြုသူ</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginTo">
+        <source>Log into %s</source>
+        <target>%s သို့ဖွင့်ဝင်</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginBT">
+        <source>Login</source>
+        <target>ဖွင့်ဝင်</target>
+      </trans-unit>
+      <trans-unit id="MSC.logoutBT">
+        <source>Logout</source>
+        <target>ဖွင့်ထွက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.logoutBTTitle">
+        <source>Close the current session</source>
+        <target>လက်ရှိကြာချိန်ကိုပိတ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.backBT">
+        <source>Go back</source>
+        <target>နောက်သို့ပြန်သွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.backBTTitle">
+        <source>Back to the previous page</source>
+        <target>ယခင်စာမျက်နှာသို့ပြန်သွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.cancelBT">
+        <source>Cancel</source>
+        <target>ပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.deleteConfirm">
+        <source>Do you really want to delete entry ID %s?</source>
+        <target>ထည့်သွင်းမှုအိုင်ဒီ %s ကိုပယ်ဖျက်လို?</target>
+      </trans-unit>
+      <trans-unit id="MSC.delAllConfirm">
+        <source>Do you really want to delete the selected records?</source>
+        <target>ရွေးချယ်ပြီးမှတ်တမ်းများကိုပယ်ဖျက်လို?</target>
+      </trans-unit>
+      <trans-unit id="MSC.filterRecords">
+        <source>Records</source>
+        <target>မှတ်တမ်းများ</target>
+      </trans-unit>
+      <trans-unit id="MSC.filterAll">
+        <source>All</source>
+        <target>အားလံုး</target>
+      </trans-unit>
+      <trans-unit id="MSC.showRecord">
+        <source>Show the details of record %s</source>
+        <target>%s မှတ်တမ်းအချက်အလက်များပြသ</target>
+      </trans-unit>
+      <trans-unit id="MSC.editRecord">
+        <source>Edit record %s</source>
+        <target>%s မှတ်တမ်းတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_info">
+        <source>Edit selected records of table %s</source>
+        <target>စားပွဲ %s မှရွေးချယ်ပြီးမှတ်တမ်းများတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.showOnly">
+        <source>Show</source>
+        <target>ပြသ</target>
+      </trans-unit>
+      <trans-unit id="MSC.sortBy">
+        <source>Sort</source>
+        <target>မျိုးတူစု</target>
+      </trans-unit>
+      <trans-unit id="MSC.filter">
+        <source>Filter</source>
+        <target>စိစစ်သူ</target>
+      </trans-unit>
+      <trans-unit id="MSC.search">
+        <source>Search</source>
+        <target>ရှာဖွေ</target>
+      </trans-unit>
+      <trans-unit id="MSC.noResult">
+        <source>No records found.</source>
+        <target>မှတ်တမ်းများမတွေ့ရှိ။</target>
+      </trans-unit>
+      <trans-unit id="MSC.save">
+        <source>Save</source>
+        <target>မှတ်သိမ်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNclose">
+        <source>Save and close</source>
+        <target>မှတ်သိမ်းနှင့်ပိတ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNedit">
+        <source>Save and edit</source>
+        <target>မှတ်သိမ်းနှင့်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNback">
+        <source>Save and go back</source>
+        <target>မှတ်သိမ်းနှင့်ပြန်သွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNcreate">
+        <source>Save and new</source>
+        <target>မှတ်သိမ်းနှင့်အသစ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.continue">
+        <source>Continue</source>
+        <target>ဆက်လက်လုပ်ဆောင်</target>
+      </trans-unit>
+      <trans-unit id="MSC.close">
+        <source>Close</source>
+        <target>ပိတ်သိမ်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.skipNavigation">
+        <source>Skip navigation</source>
+        <target>သွားလာခြင်းခုန်ကျော်</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectAll">
+        <source>Select all</source>
+        <target>အားလံုးရွေး</target>
+      </trans-unit>
+      <trans-unit id="MSC.pw_new">
+        <source>Change password</source>
+        <target>စကားဝှက်ပြောင်းလဲ</target>
+      </trans-unit>
+      <trans-unit id="MSC.pw_change">
+        <source>Please enter a new password</source>
+        <target>စကားဝှက်အသစ်ထည့်သွင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.pw_changed">
+        <source>The password has been updated.</source>
+        <target>စကားဝှက်မွမ်းမံပြီး။</target>
+      </trans-unit>
+      <trans-unit id="MSC.fallback">
+        <source>default</source>
+        <target>မူလပံုစံ</target>
+      </trans-unit>
+      <trans-unit id="MSC.view">
+        <source>View in a new window</source>
+        <target>ဝင်းဒိုးအသစ်တွင်ကြည့်ရှု</target>
+      </trans-unit>
+      <trans-unit id="MSC.fullsize">
+        <source>Open full size image in a new window</source>
+        <target>ဝင်းဒိုးအသစ်တွင်ပံုအရွယ်အပြည့်ဖွင့်</target>
+      </trans-unit>
+      <trans-unit id="MSC.datepicker">
+        <source>Date picker</source>
+        <target>ရက်စွဲရွေးချယ်သူ</target>
+      </trans-unit>
+      <trans-unit id="MSC.colorpicker">
+        <source>Color picker</source>
+        <target>အရောင်ရွေးချယ်သူ</target>
+      </trans-unit>
+      <trans-unit id="MSC.pagepicker">
+        <source>Page picker</source>
+        <target>စာမျက်နှာရွေးချယ်သူ</target>
+      </trans-unit>
+      <trans-unit id="MSC.filepicker">
+        <source>File picker</source>
+        <target>ဖိုင်ရွေးချယ်သူ</target>
+      </trans-unit>
+      <trans-unit id="MSC.ppHeadline">
+        <source>Contao pages</source>
+        <target>ကွန်တောင်စာမျက်နှာများ</target>
+      </trans-unit>
+      <trans-unit id="MSC.fpHeadline">
+        <source>Contao files</source>
+        <target>ကွန်တောင်ဖိုင်များ</target>
+      </trans-unit>
+      <trans-unit id="MSC.yes">
+        <source>yes</source>
+        <target>ဟုတ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.no">
+        <source>no</source>
+        <target>မဟုတ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.goBack">
+        <source>Go back</source>
+        <target>နောက်သို့ပြန်သွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.reload">
+        <source>Reload</source>
+        <target>ပြန်လည်ကူးတင်</target>
+      </trans-unit>
+      <trans-unit id="MSC.above">
+        <source>above</source>
+        <target>အပေါ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.below">
+        <source>below</source>
+        <target>အောက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.date">
+        <source>Date</source>
+        <target>နေ့စွဲ</target>
+      </trans-unit>
+      <trans-unit id="MSC.tstamp">
+        <source>Revision date</source>
+        <target>ပြင်ဆင်နေ့စွဲ</target>
+      </trans-unit>
+      <trans-unit id="MSC.entry">
+        <source>%s entry</source>
+        <target>%s ထည့်သွင်းမှု</target>
+      </trans-unit>
+      <trans-unit id="MSC.entries">
+        <source>%s entries</source>
+        <target>%s ထည့်သွင်းမှုများ</target>
+      </trans-unit>
+      <trans-unit id="MSC.files">
+        <source>%s file(s)</source>
+        <target>%s ဖိုင်(များ)</target>
+      </trans-unit>
+      <trans-unit id="MSC.left">
+        <source>left</source>
+        <target>ဘယ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.center">
+        <source>center</source>
+        <target>အလယ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.right">
+        <source>right</source>
+        <target>ညာ</target>
+      </trans-unit>
+      <trans-unit id="MSC.justify">
+        <source>justified</source>
+        <target>စာကြောင်းအပြည့်တန်းညှိ</target>
+      </trans-unit>
+      <trans-unit id="MSC.filetree">
+        <source>File system</source>
+        <target>ဖိုင်စက်စနစ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.male">
+        <source>Male</source>
+        <target>ယောကျာ်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.female">
+        <source>Female</source>
+        <target>မိန်းမ</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileSize">
+        <source>File size</source>
+        <target>ဖိုင်အရွယ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileCreated">
+        <source>Created</source>
+        <target>ဖန်တီးပြီး</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileModified">
+        <source>Last modified</source>
+        <target>နောက်ဆံုးပြုပြင်မွမ်းမံ</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileAccessed">
+        <source>Last accessed</source>
+        <target>နောက်ဆံုးဝင်ကြည့်မှု</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileDownload">
+        <source>Download</source>
+        <target>ကူးဆွဲ</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileDownloadTitle">
+        <source>Download this file</source>
+        <target>ဖိုင်ကူးဆွဲ</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileDatabaseId">
+        <source>Database ID</source>
+        <target>အချက်အလက်အစုအိုင်ဒီ</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileImageSize">
+        <source>Width/height in pixel</source>
+        <target>အစက်အပြောက်တွင်ရှိအနံ/အမြင့်</target>
+      </trans-unit>
+      <trans-unit id="MSC.filePath">
+        <source>Relative path</source>
+        <target>ပတ်သက်သောလမ်းကြောင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.version">
+        <source>Version</source>
+        <target>ပံုစံ</target>
+      </trans-unit>
+      <trans-unit id="MSC.restore">
+        <source>Restore</source>
+        <target>ပြန်လည်ဖော်ထုတ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.backendModules">
+        <source>Back end modules</source>
+        <target>အတွင်းပိုင်းအပိုင်းများ</target>
+      </trans-unit>
+      <trans-unit id="MSC.welcomeTo">
+        <source>%s back end</source>
+        <target>%s အတွင်းပိုင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateVersion">
+        <source>Contao version %s available</source>
+        <target>ကွန်တောင်ပံုစံ %s ရယူနိုင်</target>
+      </trans-unit>
+      <trans-unit id="MSC.wordWrap">
+        <source>Word wrap</source>
+        <target>စကားလံုးစည်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveAlert">
+        <source>ATTENTION! You will lose any unsaved changes. Continue?</source>
+        <target>သတိ! မမှတ်သိမ်းပြောင်းလဲမှုများဆံုးရှုံးနိုင်။ ဆက်လက်လုပ်ဆောင်?</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleNodes">
+        <source>Toggle all nodes</source>
+        <target>အစွန်းများအားလံုးဖွင့်ပိတ်လုပ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.expandNode">
+        <source>Expand node</source>
+        <target>အစွန်းပြန့်ကား</target>
+      </trans-unit>
+      <trans-unit id="MSC.collapseNode">
+        <source>Collapse node</source>
+        <target>အစွန်းဖြိုချ</target>
+      </trans-unit>
+      <trans-unit id="MSC.loadingData">
+        <source>Loading data</source>
+        <target>အချက်အလက်ဆွဲတင်နေ</target>
+      </trans-unit>
+      <trans-unit id="MSC.deleteSelected">
+        <source>Delete</source>
+        <target>ပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.editSelected">
+        <source>Edit</source>
+        <target>တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.overrideSelected">
+        <source>Override</source>
+        <target>အစားထိုးရေးသား</target>
+      </trans-unit>
+      <trans-unit id="MSC.moveSelected">
+        <source>Move</source>
+        <target>ရွေ့ပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.copySelected">
+        <source>Copy</source>
+        <target>ကူးယူ</target>
+      </trans-unit>
+      <trans-unit id="MSC.aliasSelected">
+        <source>Generate aliases</source>
+        <target>နာမည်ပွားများထုတ်လုပ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.changeSelected">
+        <source>Change selection</source>
+        <target>ရွေးချယ်မှုပြောင်းလဲ</target>
+      </trans-unit>
+      <trans-unit id="MSC.resetSelected">
+        <source>Reset selection</source>
+        <target>ရွေးချယ်မှုပြန်လည်သတ်မှတ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileManager">
+        <source>Open the file manager</source>
+        <target>ဖိုင်မန်နေဂျာဖွင့်</target>
+      </trans-unit>
+      <trans-unit id="MSC.pageManager">
+        <source>Modify the site structure</source>
+        <target>ဆိုက်ဖွဲ့စည်းပံုပြုပြင်မွမ်းမံ</target>
+      </trans-unit>
+      <trans-unit id="MSC.systemMessages">
+        <source>System messages</source>
+        <target>စက်စနစ်မှာကြားချက်များ</target>
+      </trans-unit>
+      <trans-unit id="MSC.clearClipboard">
+        <source>Clear clipboard</source>
+        <target>အောက်ခံကတ်ပြားဖယ်ရှား</target>
+      </trans-unit>
+      <trans-unit id="MSC.hiddenElements">
+        <source>Unpublished elements</source>
+        <target>မထုတ်ဝေပြီးပစ္စည်းများ</target>
+      </trans-unit>
+      <trans-unit id="MSC.hiddenHide">
+        <source>hide</source>
+        <target>ဖုံးကွယ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.hiddenShow">
+        <source>show</source>
+        <target>ပြသ</target>
+      </trans-unit>
+      <trans-unit id="MSC.apply">
+        <source>Apply</source>
+        <target>အသံုးချ</target>
+      </trans-unit>
+      <trans-unit id="MSC.applyTitle">
+        <source>Apply the changes</source>
+        <target>ပြောင်းလဲမှုများအသံုးချ</target>
+      </trans-unit>
+      <trans-unit id="MSC.mandatory">
+        <source>Mandatory field</source>
+        <target>မဖြစ်မနေလုပ်နယ်ပယ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.create">
+        <source>Create</source>
+        <target>ဖန်တီး</target>
+      </trans-unit>
+      <trans-unit id="MSC.delete">
+        <source>Delete</source>
+        <target>ပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.protected">
+        <source>protected</source>
+        <target>ကာကွယ်ပြီး</target>
+      </trans-unit>
+      <trans-unit id="MSC.guests">
+        <source>guests only</source>
+        <target>ဧည့်သည်များသာ</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateMode">
+        <source>Update mode</source>
+        <target>နည်းမွမ်းမံ</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateAdd">
+        <source>Add the selected values</source>
+        <target>ရွေးချယ်ပြီးတန်ဖိုးများထည့်သွင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateRemove">
+        <source>Remove the selected values</source>
+        <target>ရွေးချယ်ပြီးတန်ဖိုးများဖယ်ရှား</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateReplace">
+        <source>Replace the existing entries</source>
+        <target>တည်ရှိပြီးထည့်သွင်းမှုများအစားထိုး</target>
+      </trans-unit>
+      <trans-unit id="MSC.ascending">
+        <source>ascending</source>
+        <target>ငယ်စဉ်ကြီးလိုက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.descending">
+        <source>descending</source>
+        <target>ကြီးစဉ်ငယ်လိုက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.default">
+        <source>Default</source>
+        <target>မူလပံုစံ</target>
+      </trans-unit>
+      <trans-unit id="MSC.helpWizard">
+        <source>Open the help wizard</source>
+        <target>အကူအညီစုန်းထီးဖွင့်</target>
+      </trans-unit>
+      <trans-unit id="MSC.helpWizardTitle">
+        <source>Help wizard</source>
+        <target>အကူအညီစုန်းထီး</target>
+      </trans-unit>
+      <trans-unit id="MSC.noCookies">
+        <source>You have to allow cookies to use Contao.</source>
+        <target>ကွန်တောင်ကိုသံုးရန်ကွတ်ကီးများခွင့်ပြုရမည်။</target>
+      </trans-unit>
+      <trans-unit id="MSC.copyOf">
+        <source>%s (copy)</source>
+        <target>%s (ကူးယူ)</target>
+      </trans-unit>
+      <trans-unit id="MSC.coreOnlyMode">
+        <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>
+        <target>&lt;strong&gt;လုံခြုံသောနည်း&lt;/strong&gt;တွင်ကွန်တောင်ကိုလုပ်ဆောင်နေ၊ အူတိုင်အပိုင်းများဖြင့်သာဆွဲတင်ပြီးကြားလူနောက်ဆက်တွဲများနှင့်အံဝင်ခွင်ကျမှုမရှိစေခြင်းကိုကာကွယ်(ဥပမာတိုက်ရိုက်မွမ်းမံပြီးနောက်)။ ထည့်သွင်းပြီးနောက်ဆက်တွဲများကိုစစ်ဆေးပြီးပါကလုံခြုံသောနည်းကိုနောက်တစ်ကြိမ်မလုပ်ဆောင်စေရန်လုပ်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="MSC.coreOnlyOff">
+        <source>Disable</source>
+        <target>မလုပ်ဆောင်စေ</target>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheText">
+        <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
+        <target>&lt;strong&gt;အတွင်းပိုင်းမှတ်ဥာဏ်အသေးစား&lt;/strong&gt;မတည်ဆောက်ရသေး။ မှတ်ဥာဏ်အသေးစားတည်ဆောက်ခြင်းသည်လုပ်ငန်းသံုးပရိုဂရမ်လုပ်ဆောင်ချက်ကိုတိုးမြှင့်ပြီးလုပ်ဆောင်ရန်အားပေး။ မှတ်ဥာဏ်အသေးစားကိုမသံုးလိုပါက၊ အတွင်းပိုင်းချိန်ညှိချက်တွင်အမြဲတမ်းမလုပ်ဆောင်စေရန်လုပ်ဆောင်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheLink">
+        <source>Build the cache</source>
+        <target>မှတ်ဥာဏ်အသေးစားတည်ဆောက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.name">
+        <source>Name</source>
+        <target>နာမည်</target>
+      </trans-unit>
+      <trans-unit id="MSC.emailAddress">
+        <source>E-mail address</source>
+        <target>အီးမေးလ်လိပ်စာ</target>
+      </trans-unit>
+      <trans-unit id="MSC.register">
+        <source>Register</source>
+        <target>မှတ်ပံုတင်</target>
+      </trans-unit>
+      <trans-unit id="MSC.accountActivated">
+        <source>Your account has been activated.</source>
+        <target>စာရင်းကိုအသက်ဝင်ပြီး။</target>
+      </trans-unit>
+      <trans-unit id="MSC.accountError">
+        <source>Unable to process the current request.</source>
+        <target>လက်ရှိတောင်းဆိုမှုမလုပ်ဆောင်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="MSC.emailSubject">
+        <source>Your registration on %s</source>
+        <target>%s တွင်မှတ်ပံုတင်ခြင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.adminSubject">
+        <source>New registration on %s</source>
+        <target>%s တွင်မှတ်ပံုတင်အသစ်တင်ခြင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.adminText">
+        <source>A new member (ID %s) has registered at your website.%sIf you did not allow e-mail activation, you have to enable the account manually in the back end.</source>
+        <target>ဝဘ်ဆိုက်တွင်အဖွဲ့ဝင်အသစ်(အိုင်ဒီ %s)မှတ်ပံုတင်ပြီး။ %sအီးမေးလ်အသက်သွင်းခြင်းမခွင့်ပြုထားပါကအတွင်းပိုင်းတွင်ကိုယ်တိုင်စာရင်းကိုလုပ်ဆောင်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="MSC.requestPassword">
+        <source>Request password</source>
+        <target>စကားဝှက်တောင်းခံခြင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.setNewPassword">
+        <source>Set new password</source>
+        <target>စကားဝှက်အသစ်သတ်မှတ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.newPasswordSet">
+        <source>Your password has been updated.</source>
+        <target>စကားဝှက်မွမ်းမံပြီး။</target>
+      </trans-unit>
+      <trans-unit id="MSC.passwordSubject">
+        <source>Your password request for %s</source>
+        <target>%s အတွက်စကားဝှက်တောင်းခံခြင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.accountNotFound">
+        <source>No matching account found</source>
+        <target>ဟပ်စပ်စာရင်းများရှာမတွေ့။</target>
+      </trans-unit>
+      <trans-unit id="MSC.securityQuestion">
+        <source>Security question</source>
+        <target>လံုခြုံရေးမေးခွန်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.closeAccount">
+        <source>Close account</source>
+        <target>စာရင်းပိတ်သိမ်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.changeSelection">
+        <source>Change selection</source>
+        <target>ရွေးချယ်မှုပြောင်းလဲ</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentlySelected">
+        <source>Selected</source>
+        <target>ရွေးချယ်ပြီး</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectNode">
+        <source>Only show this node</source>
+        <target>ယခုအစွန်းကိုသာပြသ</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectAllNodes">
+        <source>Show all nodes</source>
+        <target>အစွန်းများအားလံုးပြသ</target>
+      </trans-unit>
+      <trans-unit id="MSC.showDifferences">
+        <source>Show differences</source>
+        <target>ခြားနားခြင်းများပြသ</target>
+      </trans-unit>
+      <trans-unit id="MSC.editElement">
+        <source>Edit the element</source>
+        <target>ပစ္စည်းတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.table">
+        <source>Table</source>
+        <target>စားပွဲ</target>
+      </trans-unit>
+      <trans-unit id="MSC.description">
+        <source>Description</source>
+        <target>ဖော်ပြချက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.noVersions">
+        <source>Currently there are no versions.</source>
+        <target>လက်ရှိအချိန်တွင်ပံုစံမရှိသေး။</target>
+      </trans-unit>
+      <trans-unit id="MSC.latestChanges">
+        <source>Latest changes</source>
+        <target>နောက်ဆံုးပြောင်းလဲမှုများ</target>
+      </trans-unit>
+      <trans-unit id="MSC.identicalVersions">
+        <source>The two selected versions are identical.</source>
+        <target>ရွေးချယ်ပြီးပံုစံများနှစ်ခုချွတ်စွပ်တူ။</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectNewPosition">
+        <source>Next, please choose the (new) position of the element</source>
+        <target>နောက်၊ ပစ္စည်းနေရာ(အသစ်)ကိုရွေး</target>
+      </trans-unit>
+      <trans-unit id="MSC.go">
+        <source>Go</source>
+        <target>သွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.quicknav">
+        <source>Quick navigation</source>
+        <target>အမြန်ဖော်ပြသွားလာခြင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.quicklink">
+        <source>Quick link</source>
+        <target>အမြန်ဖော်ပြကွန်ဆက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.username">
+        <source>Username</source>
+        <target>အသံုးပြုသူနာမည်</target>
+      </trans-unit>
+      <trans-unit id="MSC.login">
+        <source>Login</source>
+        <target>ဖွင့်ဝင်</target>
+      </trans-unit>
+      <trans-unit id="MSC.logout">
+        <source>Logout</source>
+        <target>ဖွင့်ထွက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.loggedInAs">
+        <source>You are logged in as %s.</source>
+        <target>%s ကဲ့သို့ဖွင့်ဝင်ပြီး။</target>
+      </trans-unit>
+      <trans-unit id="MSC.emptyField">
+        <source>Please enter your username and password!</source>
+        <target>အသံုးပြုသူနာမည်နှင့်စကားဝှက်ထည့်သွင်း!</target>
+      </trans-unit>
+      <trans-unit id="MSC.confirmation">
+        <source>Confirmation</source>
+        <target>အတည်ပြုချက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.sMatches">
+        <source>%s occurrences for %s</source>
+        <target>%s ဖြစ်ရပ်မှာ %s အတွက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.sEmpty">
+        <source>No matches for &lt;strong&gt;%s&lt;/strong&gt;</source>
+        <target>&lt;strong&gt;%s&lt;/strong&gt;အတွက်ရှာမတွေ့</target>
+      </trans-unit>
+      <trans-unit id="MSC.sResults">
+        <source>Results %s - %s of %s for &lt;strong&gt;%s&lt;/strong&gt;</source>
+        <target>&lt;strong&gt;%s&lt;/strong&gt;အတွက်ရလဒ်များ %s - %s မှာ %s မှ</target>
+      </trans-unit>
+      <trans-unit id="MSC.sNoResult">
+        <source>Your search for &lt;strong&gt;%s&lt;/strong&gt; returned no results.</source>
+        <target>&lt;strong&gt;%s&lt;/strong&gt;ရှာဖွေမှုရလဒ်များမတွေ့ရှိ။</target>
+      </trans-unit>
+      <trans-unit id="MSC.seconds">
+        <source>seconds</source>
+        <target>စက္ကန့်</target>
+      </trans-unit>
+      <trans-unit id="MSC.up">
+        <source>Up</source>
+        <target>အပေါ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.first">
+        <source>&amp;#171; First</source>
+        <target>&amp;#171; ပထမ</target>
+      </trans-unit>
+      <trans-unit id="MSC.previous">
+        <source>Previous</source>
+        <target>ယခင်</target>
+      </trans-unit>
+      <trans-unit id="MSC.next">
+        <source>Next</source>
+        <target>နောက်</target>
+      </trans-unit>
+      <trans-unit id="MSC.last">
+        <source>Last &amp;#187;</source>
+        <target>နောက်ဆံုး&amp;#187၊</target>
+      </trans-unit>
+      <trans-unit id="MSC.goToPage">
+        <source>Go to page %s</source>
+        <target>%s စာမျက်နှာသို့သွား</target>
+      </trans-unit>
+      <trans-unit id="MSC.totalPages">
+        <source>Page %s of %s</source>
+        <target>စာမျက်နှာ %s မှာ %s တွင်</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileUploaded">
+        <source>File %s uploaded successfully.</source>
+        <target>ဖိုင် %s အောင်မြင်စွာကူးတင်ပြီး။</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileExceeds">
+        <source>Image %s uploaded successfully, however it is too big to be resized automatically.</source>
+        <target>ပံု %s အောင်မြင်စွာကူးတင်ပြီးသော်လည်းလိုလျောက်အရွယ်ပြန်လည်သတ်မှတ်ရန်အရွယ်ကြီးနေ။</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileResized">
+        <source>Image %s uploaded successfully and was scaled down to the maximum dimensions.</source>
+        <target>ပံု %s အောင်မြင်စွာကူးတင်ပြီးအများဆံုးရှုထောင့်များသို့အတိုင်းအတာသတ်မှတ်ပြီး။</target>
+      </trans-unit>
+      <trans-unit id="MSC.searchLabel">
+        <source>Search</source>
+        <target>ရှာဖွေ</target>
+      </trans-unit>
+      <trans-unit id="MSC.keywords">
+        <source>Keywords</source>
+        <target>အဓိကစကားလံုးများ</target>
+      </trans-unit>
+      <trans-unit id="MSC.options">
+        <source>Options</source>
+        <target>ရွေးပိုင်ခွင့်များ</target>
+      </trans-unit>
+      <trans-unit id="MSC.matchAll">
+        <source>match all words</source>
+        <target>စကားလံုးများအားလံုးဟပ်စပ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.matchAny">
+        <source>match any word</source>
+        <target>စကားလံုးတစ်ခုခုဟပ်စပ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveData">
+        <source>Save data</source>
+        <target>အချက်အလက်မှတ်သိမ်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.printPage">
+        <source>Print this page</source>
+        <target>စာမျက်နှာပုံနှိပ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.printAsPdf">
+        <source>Print article as PDF</source>
+        <target>ပီဒီအက်ဖ်ကဲ့သို့ဆောင်းပါးကိုပုံနှိပ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.facebookShare">
+        <source>Share on Facebook</source>
+        <target>ဖေ့စ်ဘုတ်တွင်မျှဝေ</target>
+      </trans-unit>
+      <trans-unit id="MSC.twitterShare">
+        <source>Share on Twitter</source>
+        <target>တွစ်တာတွင်မျှဝေ</target>
+      </trans-unit>
+      <trans-unit id="MSC.gplusShare">
+        <source>Share on Google+</source>
+        <target>ဂူးဂယ်ပလပ်စ်တွင်မျှဝေ</target>
+      </trans-unit>
+      <trans-unit id="MSC.pleaseWait">
+        <source>Please wait</source>
+        <target>ခဏစောင့်ပါ</target>
+      </trans-unit>
+      <trans-unit id="MSC.loading">
+        <source>Loading …</source>
+        <target>ဆွဲတင်နေ...</target>
+      </trans-unit>
+      <trans-unit id="MSC.more">
+        <source>Read more …</source>
+        <target>နောက်ထပ်ဖတ်ရှု ...</target>
+      </trans-unit>
+      <trans-unit id="MSC.readMore">
+        <source>Read the article: %s</source>
+        <target>ဆောင်းပါးဖတ်ရှု: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.targetPage">
+        <source>Target page</source>
+        <target>ရည်မှန်းစာမျက်နှာ</target>
+      </trans-unit>
+      <trans-unit id="MSC.invalidPage">
+        <source>Sorry, item &quot;%s&quot; does not exist.</source>
+        <target>%s&quot; ပစ္စည်းမတည်ရှိ။</target>
+      </trans-unit>
+      <trans-unit id="MSC.list_orderBy">
+        <source>Order by %s</source>
+        <target>%s အားဖြင့်စီစဉ်</target>
+      </trans-unit>
+      <trans-unit id="MSC.list_perPage">
+        <source>Results per page</source>
+        <target>စာမျက်နှာရှိရလဒ်များ</target>
+      </trans-unit>
+      <trans-unit id="MSC.published">
+        <source>Published</source>
+        <target>ထုတ်ဝေပြီး</target>
+      </trans-unit>
+      <trans-unit id="MSC.unpublished">
+        <source>Unpublished</source>
+        <target>မထုတ်ဝေပြီး</target>
+      </trans-unit>
+      <trans-unit id="MSC.addComment">
+        <source>Add a comment</source>
+        <target>မှတ်ချက်ထည့်သွင်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.autologin">
+        <source>Remember me</source>
+        <target>ငါ့ကိုမှတ်ထား</target>
+      </trans-unit>
+      <trans-unit id="MSC.createdOn">
+        <source>Created on</source>
+      </trans-unit>
+      <trans-unit id="MSC.activation">
+        <source>Activated on</source>
+      </trans-unit>
+      <trans-unit id="MSC.relevance">
+        <source>%s relevance</source>
+        <target>%s သက်ဆိုင်မှု</target>
+      </trans-unit>
+      <trans-unit id="MSC.invalidTokenUrl">
+        <source>Invalid token</source>
+        <target>သင်္ကေတမမှန်</target>
+      </trans-unit>
+      <trans-unit id="MSC.changelog">
+        <source>Changelog</source>
+        <target>ပြောင်းလဲမှုမှတ်တမ်း</target>
+      </trans-unit>
+      <trans-unit id="MSC.dragItemsHint">
+        <source>Drag the items to re-order them</source>
+        <target>ပြန်လည်စီစဥ်ရန်ပစ္စည်းများကိုကလစ်ဆွဲယူ</target>
+      </trans-unit>
+      <trans-unit id="MSC.templatesTheme">
+        <source>Theme %s</source>
+        <target>အသွင်အပြင် %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.location">
+        <source>Location</source>
+        <target>တည်နေရာ</target>
+      </trans-unit>
+      <trans-unit id="UNITS.0">
+        <source>Byte</source>
+        <target>ဘိုက်</target>
+      </trans-unit>
+      <trans-unit id="UNITS.1">
+        <source>KiB</source>
+        <target>ကီလိုဘိုက်</target>
+      </trans-unit>
+      <trans-unit id="UNITS.2">
+        <source>MiB</source>
+        <target>မစ်ဂါဘိုက်</target>
+      </trans-unit>
+      <trans-unit id="UNITS.3">
+        <source>GiB</source>
+        <target>ဂစ်ဂါဘိုက်</target>
+      </trans-unit>
+      <trans-unit id="UNITS.4">
+        <source>TiB</source>
+        <target>တီရာဘိုက်</target>
+      </trans-unit>
+      <trans-unit id="UNITS.5">
+        <source>PiB</source>
+        <target>ပီတာဘိုက်</target>
+      </trans-unit>
+      <trans-unit id="UNITS.6">
+        <source>EiB</source>
+        <target>အက်စ်ဘီဘိုက်</target>
+      </trans-unit>
+      <trans-unit id="UNITS.7">
+        <source>ZiB</source>
+        <target>ဇစ်ဘီဘိုက်</target>
+      </trans-unit>
+      <trans-unit id="UNITS.8">
+        <source>YiB</source>
+        <target>ယိုဘီဘိုက်</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.do">
+        <source>Module</source>
+        <target>အပိုင်း</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.table">
+        <source>Affected table</source>
+        <target>သက်ရောက်စားပွဲ</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.act">
+        <source>Action</source>
+        <target>ဆောင်ရွက်ချက်</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.id">
+        <source>Affected record</source>
+        <target>သက်ရောက်မှတ်တမ်း</target>
+      </trans-unit>
+      <trans-unit id="DP.select_a_time">
+        <source>Select a time</source>
+        <target>အချိန်ရွေး</target>
+      </trans-unit>
+      <trans-unit id="DP.use_mouse_wheel">
+        <source>Use the mouse wheel to quickly change value</source>
+        <target>တန်ဖိုးလျင်မြန်စွာပြောင်းလဲရန်မောက်စ်ဘီးကိုသံုး</target>
+      </trans-unit>
+      <trans-unit id="DP.time_confirm_button">
+        <source>OK</source>
+        <target>အိုကေ</target>
+      </trans-unit>
+      <trans-unit id="DP.apply_range">
+        <source>Apply</source>
+        <target>အသံုးချ</target>
+      </trans-unit>
+      <trans-unit id="DP.cancel">
+        <source>Cancel</source>
+        <target>ပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="DP.week">
+        <source>Wk</source>
+        <target>အလုပ်</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

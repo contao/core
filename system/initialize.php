@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -32,6 +32,8 @@ if (TL_MODE == 'BE')
 	define('FE_USER_LOGGED_IN', false);
 }
 
+define('TL_REFERER_ID', substr(md5(TL_START), 0, 8));
+
 
 /**
  * Include the helpers
@@ -39,7 +41,6 @@ if (TL_MODE == 'BE')
 require TL_ROOT . '/system/helper/functions.php';
 require TL_ROOT . '/system/config/constants.php';
 require TL_ROOT . '/system/helper/interface.php';
-require TL_ROOT . '/system/helper/exception.php';
 
 
 /**
@@ -63,7 +64,7 @@ require TL_ROOT . '/system/helper/exception.php';
 
 
 /**
- * Register the class and template loader
+ * Register the class, template and module loaders
  */
 require TL_ROOT . '/system/modules/core/library/Contao/ClassLoader.php';
 class_alias('Contao\\ClassLoader', 'ClassLoader');
@@ -71,19 +72,22 @@ class_alias('Contao\\ClassLoader', 'ClassLoader');
 require TL_ROOT . '/system/modules/core/library/Contao/TemplateLoader.php';
 class_alias('Contao\\TemplateLoader', 'TemplateLoader');
 
+require TL_ROOT . '/system/modules/core/library/Contao/ModuleLoader.php';
+class_alias('Contao\\ModuleLoader', 'ModuleLoader');
+
 ClassLoader::scanAndRegister(); // config/autoload.php
 
 
 /**
  * Register the SwiftMailer and SimplePie autoloaders
  */
-require_once TL_ROOT . '/system/vendor/swiftmailer/classes/Swift.php';
+require_once TL_ROOT . '/system/modules/core/vendor/swiftmailer/classes/Swift.php';
 
 Swift::registerAutoload(function() {
-	require TL_ROOT . '/system/vendor/swiftmailer/swift_init.php';
+	require TL_ROOT . '/system/modules/core/vendor/swiftmailer/swift_init.php';
 });
 
-require_once TL_ROOT . '/system/vendor/simplepie/autoloader.php';
+require_once TL_ROOT . '/system/modules/core/vendor/simplepie/autoloader.php';
 
 
 /**
@@ -123,6 +127,56 @@ $objConfig = Config::getInstance();
  */
 Input::initialize();
 RequestToken::initialize();
+
+
+/**
+ * Set the default language
+ */
+if (Input::post('language') && Input::post('FORM_SUBMIT') != 'tl_filters')
+{
+	$GLOBALS['TL_LANGUAGE'] = str_replace('_', '-', Input::post('language'));
+	$_SESSION['TL_LANGUAGE'] = $GLOBALS['TL_LANGUAGE'];
+}
+elseif (isset($_SESSION['TL_LANGUAGE']))
+{
+	$GLOBALS['TL_LANGUAGE'] = $_SESSION['TL_LANGUAGE'];
+}
+else
+{
+	foreach (Environment::get('httpAcceptLanguage') as $v)
+	{
+		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . str_replace('-', '_', $v)))
+		{
+			$GLOBALS['TL_LANGUAGE'] = $v;
+			$_SESSION['TL_LANGUAGE'] = $v;
+			break;
+		}
+	}
+
+	unset($v);
+}
+
+
+/**
+ * Show the "incomplete installation" message
+ */
+if (!$objConfig->isComplete() && Environment::get('script') != 'contao/install.php')
+{
+	if (file_exists(TL_ROOT . '/templates/be_incomplete.html5'))
+	{
+		include TL_ROOT . '/templates/be_incomplete.html5';
+	}
+	elseif (file_exists(TL_ROOT . '/system/modules/core/templates/backend/be_incomplete.html5'))
+	{
+		include TL_ROOT . '/system/modules/core/templates/backend/be_incomplete.html5';
+	}
+	else
+	{
+		echo 'The installation has not been completed. Open the Contao install tool to continue.';
+	}
+
+	exit;
+}
 
 
 /**
@@ -174,29 +228,14 @@ if (USE_MBSTRING && function_exists('mb_regex_encoding'))
 
 
 /**
- * Set the default language
+ * HOOK: add custom logic (see #5665)
  */
-if (Input::post('language'))
+if (isset($GLOBALS['TL_HOOKS']['initializeSystem']) && is_array($GLOBALS['TL_HOOKS']['initializeSystem']))
 {
-	$GLOBALS['TL_LANGUAGE'] = Input::post('language');
-}
-elseif (isset($_SESSION['TL_LANGUAGE']))
-{
-	$GLOBALS['TL_LANGUAGE'] = $_SESSION['TL_LANGUAGE'];
-}
-else
-{
-	foreach (Environment::get('httpAcceptLanguage') as $v)
+	foreach ($GLOBALS['TL_HOOKS']['initializeSystem'] as $callback)
 	{
-		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . $v))
-		{
-			$GLOBALS['TL_LANGUAGE'] = $v;
-			$_SESSION['TL_LANGUAGE'] = $v;
-			break;
-		}
+		System::importStatic($callback[0])->$callback[1]();
 	}
-
-	unset($v);
 }
 
 
@@ -228,9 +267,9 @@ if ($_POST && !RequestToken::validate(Input::post('REQUEST_TOKEN')))
 		{
 			include TL_ROOT . '/templates/be_referer.html5';
 		}
-		elseif (file_exists(TL_ROOT . '/system/modules/core/templates/be_referer.html5'))
+		elseif (file_exists(TL_ROOT . '/system/modules/core/templates/backend/be_referer.html5'))
 		{
-			include TL_ROOT . '/system/modules/core/templates/be_referer.html5';
+			include TL_ROOT . '/system/modules/core/templates/backend/be_referer.html5';
 		}
 		else
 		{

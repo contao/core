@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -45,7 +45,7 @@ class ModuleSearch extends \Module
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### WEBSITE SEARCH ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['search'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -63,8 +63,15 @@ class ModuleSearch extends \Module
 	 */
 	protected function compile()
 	{
+		// Mark the x and y parameter as used (see #4277)
+		if (isset($_GET['x']))
+		{
+			\Input::get('x');
+			\Input::get('y');
+		}
+
 		// Trigger the search module from a custom form
-		if (!$_GET['keywords'] && \Input::post('FORM_SUBMIT') == 'tl_search')
+		if (!isset($_GET['keywords']) && \Input::post('FORM_SUBMIT') == 'tl_search')
 		{
 			$_GET['keywords'] = \Input::post('keywords');
 			$_GET['query_type'] = \Input::post('query_type');
@@ -92,7 +99,7 @@ class ModuleSearch extends \Module
 		$objFormTemplate->matchAll = specialchars($GLOBALS['TL_LANG']['MSC']['matchAll']);
 		$objFormTemplate->matchAny = specialchars($GLOBALS['TL_LANG']['MSC']['matchAny']);
 		$objFormTemplate->id = ($GLOBALS['TL_CONFIG']['disableAlias'] && \Input::get('id')) ? \Input::get('id') : false;
-		$objFormTemplate->action = $this->getIndexFreeRequest();
+		$objFormTemplate->action = \Environment::get('indexFreeRequest');
 
 		// Redirect page
 		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
@@ -163,9 +170,7 @@ class ModuleSearch extends \Module
 					$arrResult = array();
 				}
 
-				$objFile = new \File($strCacheFile, true);
-				$objFile->write(json_encode($arrResult));
-				$objFile->close();
+				\File::putContent($strCacheFile, json_encode($arrResult));
 			}
 
 			$query_endtime = microtime(true);
@@ -236,7 +241,7 @@ class ModuleSearch extends \Module
 				// Pagination menu
 				if ($to < $count || $from > 1)
 				{
-					$objPagination = new \Pagination($count, $per_page, 7, $id);
+					$objPagination = new \Pagination($count, $per_page, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
 					$this->Template->pagination = $objPagination->generate("\n  ");
 				}
 			}
@@ -262,7 +267,7 @@ class ModuleSearch extends \Module
 				foreach ($arrMatches as $strWord)
 				{
 					$arrChunks = array();
-					preg_match_all('/\b.{0,'.$this->contextLength.'}\PL' . $strWord . '\PL.{0,'.$this->contextLength.'}\b/ui', $arrResult[$i]['text'], $arrChunks);
+					preg_match_all('/\b.{0,'.$this->contextLength.'}\PL' . str_replace('+', '\\+', $strWord) . '\PL.{0,'.$this->contextLength.'}\b/ui', $arrResult[$i]['text'], $arrChunks);
 
 					foreach ($arrChunks[0] as $strContext)
 					{

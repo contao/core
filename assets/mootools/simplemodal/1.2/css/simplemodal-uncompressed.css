@@ -27,7 +27,7 @@
 #simple-modal-overlay {
   position: fixed ;
   display: block;
-  z-index: 99998;
+  z-index: 399998;
   top: 0;
   left: 0;
   width: 100%;
@@ -62,7 +62,7 @@
   -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
   -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
-  z-index: 99999;
+  z-index: 399999;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;

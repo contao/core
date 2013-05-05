@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -51,7 +51,7 @@ class FilePicker extends Backend
 		parent::__construct();
 
 		$this->User->authenticate();
-		$this->loadLanguageFile('default');
+		System::loadLanguageFile('default');
 	}
 
 
@@ -85,6 +85,9 @@ class FilePicker extends Backend
 			$this->objAjax->executePostActions($objDca);
 		}
 
+		$this->Session->set('filePickerRef', \Environment::get('request'));
+
+		// Prepare the widget
 		$objFileTree = new $GLOBALS['BE_FFL']['fileSelector'](array(
 			'strId'    => $strField,
 			'strTable' => $strTable,
@@ -94,7 +97,7 @@ class FilePicker extends Backend
 		), $objDca);
 
 		$this->Template->main = $objFileTree->generate();
-		$this->Template->theme = $this->getTheme();
+		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['filepicker']);
@@ -107,6 +110,11 @@ class FilePicker extends Backend
 		$this->Template->search = $GLOBALS['TL_LANG']['MSC']['search'];
 		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->value = $this->Session->get('file_selector_search');
+		$this->Template->manager = $GLOBALS['TL_LANG']['MSC']['fileManager'];
+		$this->Template->managerTitle = specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']);
+		$this->Template->managerHref = 'contao/main.php?do=files&amp;popup=1';
+		$this->Template->addSearch = false;
+		$this->Template->breadcrumb = $GLOBALS['TL_DCA']['tl_files']['list']['sorting']['breadcrumb'];
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();

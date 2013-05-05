@@ -1,8 +1,8 @@
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -25,6 +25,9 @@ h2 {
 .formbody {
 	margin:12px 0 18px;
 	text-align:right;
+}
+.formbody .tl_select {
+	width:220px;
 }
 .formbody .tl_submit {
 	margin-top:1px;

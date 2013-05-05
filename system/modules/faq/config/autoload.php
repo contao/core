@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Faq
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -33,7 +33,7 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mod_faqlist'   => 'system/modules/faq/templates',
-	'mod_faqpage'   => 'system/modules/faq/templates',
-	'mod_faqreader' => 'system/modules/faq/templates',
+	'mod_faqlist'   => 'system/modules/faq/templates/modules',
+	'mod_faqpage'   => 'system/modules/faq/templates/modules',
+	'mod_faqreader' => 'system/modules/faq/templates/modules',
 ));

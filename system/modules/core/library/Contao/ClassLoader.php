@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,16 +15,16 @@ namespace Contao;
 
 /**
  * Automatically loads class files based on a mapper array
- * 
+ *
  * The class stores namespaces and classes and automatically loads the class
  * files upon their first usage. It uses a mapper array to support complex
  * nesting and arbitrary subfolders to store the class files in.
- * 
+ *
  * Usage:
- * 
+ *
  *     ClassLoader::addNamespace('Custom');
  *     ClassLoader::addClass('Custom\\Calendar', 'calendar/Calendar.php');
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -50,7 +50,7 @@ class ClassLoader
 
 	/**
 	 * Add a new namespace
-	 * 
+	 *
 	 * @param string $name The namespace name
 	 */
 	public static function addNamespace($name)
@@ -66,7 +66,7 @@ class ClassLoader
 
 	/**
 	 * Add multiple new namespaces
-	 * 
+	 *
 	 * @param array $names An array of namespace names
 	 */
 	public static function addNamespaces($names)
@@ -80,7 +80,7 @@ class ClassLoader
 
 	/**
 	 * Return the namespaces as array
-	 * 
+	 *
 	 * @return array An array of all namespaces
 	 */
 	public static function getNamespaces()
@@ -91,7 +91,7 @@ class ClassLoader
 
 	/**
 	 * Add a new class with its file path
-	 * 
+	 *
 	 * @param string $class The class name
 	 * @param string $file  The path to the class file
 	 */
@@ -103,7 +103,7 @@ class ClassLoader
 
 	/**
 	 * Add multiple new classes with their file paths
-	 * 
+	 *
 	 * @param array $classes An array of classes
 	 */
 	public static function addClasses($classes)
@@ -117,7 +117,7 @@ class ClassLoader
 
 	/**
 	 * Return the classes as array.
-	 * 
+	 *
 	 * @return array An array of all classes
 	 */
 	public static function getClasses()
@@ -128,10 +128,10 @@ class ClassLoader
 
 	/**
 	 * Autoload a class and create an alias in the global namespace
-	 * 
+	 *
 	 * To preserve backwards compatibility with Contao 2 extensions, all core
 	 * classes will be aliased into the global namespace.
-	 * 
+	 *
 	 * @param string $class The class name
 	 */
 	public static function load($class)
@@ -170,9 +170,9 @@ class ClassLoader
 
 	/**
 	 * Search the namespaces for a matching entry
-	 * 
+	 *
 	 * @param string $class The class name
-	 * 
+	 *
 	 * @return string The full path including the namespace
 	 */
 	protected static function findClass($class)
@@ -204,24 +204,24 @@ class ClassLoader
 	 */
 	public static function scanAndRegister()
 	{
-		// Load the core modules first (see #5261)
-		$modules = array_unique(array_merge(explode(',', TL_CORE_MODULES), scan(TL_ROOT . '/system/modules')));
+		$strCacheFile = 'system/cache/config/autoload.php';
 
-		foreach ($modules as $file)
+		// Try to load from cache
+		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
 		{
-			$path = TL_ROOT . '/system/modules/' . $file;
-
-			if (strncmp($file, '.', 1) === 0 || !is_dir($path))
+			include TL_ROOT . '/' . $strCacheFile;
+		}
+		else
+		{
+			foreach (\ModuleLoader::getActive() as $module)
 			{
-				continue;
-			}
+				$file = 'system/modules/' . $module . '/config/autoload.php';
 
-			if (file_exists($path . '/.skip') || !file_exists($path . '/config/autoload.php'))
-			{
-				continue;
+				if (file_exists(TL_ROOT . '/' . $file))
+				{
+					include TL_ROOT . '/' . $file;
+				}
 			}
-
-			include $path . '/config/autoload.php';
 		}
 
 		self::register();

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -131,9 +131,9 @@ function show_help_message()
 	{
 		include TL_ROOT . '/templates/be_error.html5';
 	}
-	elseif (file_exists(TL_ROOT . '/system/modules/core/templates/be_error.html5'))
+	elseif (file_exists(TL_ROOT . '/system/modules/core/templates/backend/be_error.html5'))
 	{
-		include TL_ROOT . '/system/modules/core/templates/be_error.html5';
+		include TL_ROOT . '/system/modules/core/templates/backend/be_error.html5';
 	}
 	else
 	{
@@ -535,7 +535,7 @@ function array_duplicate($arrStack, $intIndex)
 		$arrStack[] = $arrBuffer[$i];
 	}
 
-	for ($i=$intIndex; $i<count($arrBuffer); $i++)
+	for ($i=$intIndex, $c=count($arrBuffer); $i<$c; $i++)
 	{
 		$arrStack[] = $arrBuffer[$i];
 	}

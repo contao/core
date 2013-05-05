@@ -33,6 +33,9 @@ select.chzn-select {
   box-shadow        : 0 4px 5px rgba(0,0,0,.15);
   z-index: 999;
   /* PATCH */
+  -moz-box-sizing   : border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing        : border-box;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius   : 0 0 3px 3px;
   border-radius        : 0 0 3px 3px;
@@ -66,7 +69,7 @@ select.chzn-select {
   position: relative;
   height: 20px; /* PATCH: 20px instead of 26px */
   line-height: 20px; /* PATCH: 20px instead of 26px */
-  padding: 0 0 0 6px; /* PATCH: 6px instead of 8px */
+  padding: 0 3px; /* PATCH: 3px instead of 8px */
   color: #666966; /* PATCH: #666966 instead of #444 */
   text-decoration: none;
 }
@@ -143,6 +146,11 @@ select.chzn-select {
   font-family: sans-serif;
   font-size: 1em;
   */
+  /* PATCH */
+  -moz-box-sizing   : border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing        : border-box;
+  /* PATCH EOF */
 }
 .chzn-container-single .chzn-drop {
   /* PATCH: 3px instead of 4px */

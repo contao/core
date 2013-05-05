@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -175,7 +175,7 @@ class Theme extends \Backend
 		{
 			$return .= '
 
-<div class="tl_'. (($count++ < 1) ? 't' : '') .'box">
+<div class="tl_'. (($count++ < 1) ? 't' : '') .'box theme_import">
   <h3>'. basename($strFile) .'</h3>
   <h4>'.$GLOBALS['TL_LANG']['tl_theme']['tables_fields'].'</h4>';
 
@@ -284,7 +284,7 @@ class Theme extends \Backend
 						$blnHasLayout = true;
 						$arrProcessed[] = $mod['col'];
 
-						$return .= "\n  " . '<p style="margin:0;color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_section'], $mod['col']) .'</p>';
+						$return .= "\n  " . '<p style="margin:0;color:#5c9ac9">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_section'], $mod['col']) .'</p>';
 					}
 				}
 			}
@@ -393,9 +393,7 @@ class Theme extends \Backend
 						$strFileName = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $strFileName);
 					}
 
-					$objFile = new \File($strFileName, true);
-					$objFile->write($objArchive->unzip());
-					$objFile->close();
+					\File::putContent($strFileName, $objArchive->unzip());
 				}
 				catch (\Exception $e)
 				{
@@ -435,7 +433,7 @@ class Theme extends \Backend
 			}
 
 			// Sync the new folder(s)
-			if (is_array($arrNewFolders) && !empty($arrNewFolders))
+			if (!empty($arrNewFolders) && is_array($arrNewFolders))
 			{
 				foreach ($arrNewFolders as $strFolder)
 				{
@@ -451,59 +449,12 @@ class Theme extends \Backend
 						$strFolder = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $strFolder);
 					}
 
-					// Index the parent folders
-					$strTmp = $strFolder;
-					$intNextPid = null;
-					$arrParents = array();
-
-					while ($strTmp != '' && $strTmp != '.' && $strTmp != $GLOBALS['TL_CONFIG']['uploadPath'])
-					{
-						$arrParents[] = $strTmp;
-						$strTmp = dirname($strTmp);
-					}
-
-					foreach (array_reverse($arrParents) as $strParent)
-					{
-						$objParent = \FilesModel::findByPath($strParent);
-
-						if ($objParent === null)
-						{
-							if ($intNextPid === null)
-							{
-								if (dirname($strParent) == $GLOBALS['TL_CONFIG']['uploadPath'])
-								{
-									$intNextPid = 0;
-								}
-								else
-								{
-									$objPid = \FilesModel::findByPath(dirname($strParent));
-									$intNextPid = $objPid->id;
-								}
-							}
-
-							$objFolder = new \Folder($strParent);
-
-							$objModel = new \FilesModel();
-							$objModel->pid    = $intNextPid;
-							$objModel->tstamp = time();
-							$objModel->name   = basename($strParent);
-							$objModel->type   = 'folder';
-							$objModel->path   = $strParent;
-							$objModel->hash   = $objFolder->hash;
-							$objModel->found  = 1;
-							$objModel->save();
-
-							$intNextPid = $objModel->id;
-						}
-						else
-						{
-							$intNextPid = $objParent->id; // see #4952
-						}
-					}
-
-					$this->syncNewFolder($strFolder, $intNextPid);
+					\Dbafs::addResource($strFolder);
 				}
 			}
+
+			$arrMissing = array();
+			$arrSections = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
 
 			// Lock the tables
 			$arrLocks = array
@@ -611,11 +562,16 @@ class Theme extends \Backend
 
 							if (is_array($modules))
 							{
-								foreach (array_keys($modules) as $key)
+								foreach ($modules as $key=>$mod)
 								{
-									if ($modules[$key]['mod'] > 0)
+									if ($mod['mod'] > 0)
 									{
-										$modules[$key]['mod'] = $arrMapper['tl_module'][$modules[$key]['mod']];
+										$modules[$key]['mod'] = $arrMapper['tl_module'][$mod['mod']];
+									}
+
+									if (!in_array($mod['col'], array('header', 'left', 'right', 'main', 'footer')) && !in_array($mod['col'], $arrSections) && !in_array($mod['col'], $arrMissing))
+									{
+										$arrMissing[] = $mod['col'];
 									}
 								}
 
@@ -731,6 +687,13 @@ class Theme extends \Backend
 			$this->import('StyleSheets');
 			$this->StyleSheets->updateStyleSheets();
 
+			// Add missing sections to the local configuration
+			if (count($arrMissing))
+			{
+				$GLOBALS['TL_CONFIG']['customSections'] = implode(',', array_merge($arrSections, $arrMissing));
+				$this->Config->add("\$GLOBALS['TL_CONFIG']['customSections']", $GLOBALS['TL_CONFIG']['customSections']);
+			}
+
 			// Notify the user
 			\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));
 		}
@@ -789,7 +752,7 @@ class Theme extends \Backend
 		// Add the folders
 		$arrFolders = deserialize($objTheme->folders);
 
-		if (is_array($arrFolders) && !empty($arrFolders))
+		if (!empty($arrFolders) && is_array($arrFolders))
 		{
 			$objFolders = \FilesModel::findMultipleByIds($arrFolders);
 
@@ -989,7 +952,7 @@ class Theme extends \Backend
 			{
 				$arrFiles = ($k == 'orderSRC' || $k == 'orderExt') ? explode(',', $v) : deserialize($v);
 
-				if (is_array($arrFiles) && !empty($arrFiles))
+				if (!empty($arrFiles) && is_array($arrFiles))
 				{
 					$objFiles = \FilesModel::findMultipleByIds($arrFiles);
 
@@ -1105,77 +1068,6 @@ class Theme extends \Backend
 			if (preg_match('/\.(' . implode('|', $arrAllowed) . ')$/', $strFile) && strncmp($strFile, 'be_', 3) !== 0 && strncmp($strFile, 'nl_', 3) !== 0)
 			{
 				$objArchive->addFile($strFolder .'/'. $strFile);
-			}
-		}
-	}
-
-
-	/**
-	 * Recursively synchronize the new folder
-	 * @param string
-	 * @param integer
-	 */
-	protected function syncNewFolder($strPath, $intPid=0)
-	{
-		$arrFiles = array();
-		$arrFolders = array();
-		$arrScan = scan(TL_ROOT . '/' . $strPath);
-
-		// Separate files from folders
-		foreach ($arrScan as $strFile)
-		{
-			if (is_dir(TL_ROOT . '/' . $strPath . '/' . $strFile))
-			{
-				$arrFolders[] = $strPath . '/' . $strFile;
-			}
-			else
-			{
-				$arrFiles[] = $strPath . '/' . $strFile;
-			}
-		}
-
-		// Folders
-		foreach ($arrFolders as $strFolder)
-		{
-			$objFolder = new \Folder($strFolder);
-			$objModel = \FilesModel::findByPath($strFolder);
-
-			// Create the entry if it does not yet exist
-			if ($objModel === null)
-			{
-				$objModel = new \FilesModel();
-				$objModel->pid    = $intPid;
-				$objModel->tstamp = time();
-				$objModel->name   = basename($strFolder);
-				$objModel->type   = 'folder';
-				$objModel->path   = $strFolder;
-				$objModel->hash   = $objFolder->hash;
-				$objModel->found  = 1;
-				$objModel->save();
-			}
-
-			$this->syncNewFolder($strFolder, $objModel->id);
-		}
-
-		// Files
-		foreach ($arrFiles as $strFile)
-		{
-			$objFile = new \File($strFile, true);
-			$objModel = \FilesModel::findByPath($strFile);
-
-			// Create the entry if it does not yet exist
-			if ($objModel === null)
-			{
-				$objModel = new \FilesModel();
-				$objModel->pid       = $intPid;
-				$objModel->tstamp    = time();
-				$objModel->name      = basename($strFile);
-				$objModel->type      = 'file';
-				$objModel->path      = $strFile;
-				$objModel->extension = $objFile->extension;
-				$objModel->hash      = $objFile->hash;
-				$objModel->found     = 1;
-				$objModel->save();
 			}
 		}
 	}

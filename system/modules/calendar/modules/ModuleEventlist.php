@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Calendar
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -51,7 +51,7 @@ class ModuleEventlist extends \Events
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### EVENT LIST ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['eventlist'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -121,14 +121,14 @@ class ModuleEventlist extends \Events
 		{
 			$this->Date = new \Date(\Input::get('month'), 'Ym');
 			$this->cal_format = 'cal_month';
-			$this->headline .= ' ' . $this->parseDate('F Y', $this->Date->tstamp);
+			$this->headline .= ' ' . \Date::parse('F Y', $this->Date->tstamp);
 		}
 		// Display day
 		elseif ($blnDynamicFormat && \Input::get('day'))
 		{
 			$this->Date = new \Date(\Input::get('day'), 'Ymd');
 			$this->cal_format = 'cal_day';
-			$this->headline .= ' ' . $this->parseDate($objPage->dateFormat, $this->Date->tstamp);
+			$this->headline .= ' ' . \Date::parse($objPage->dateFormat, $this->Date->tstamp);
 		}
 		// Display all events or upcoming/past events
 		else
@@ -168,7 +168,7 @@ class ModuleEventlist extends \Events
 				foreach ($events as $event)
 				{
 					$event['firstDay'] = $GLOBALS['TL_LANG']['DAYS'][date('w', $day)];
-					$event['firstDate'] = $this->parseDate($objPage->dateFormat, $day);
+					$event['firstDate'] = \Date::parse($objPage->dateFormat, $day);
 					$event['datetime'] = date('Y-m-d', $day);
 
 					$arrEvents[] = $event;
@@ -209,7 +209,7 @@ class ModuleEventlist extends \Events
 			$offset = ($page - 1) * $this->perPage;
 			$limit = min($this->perPage + $offset, $total);
 
-			$objPagination = new \Pagination($total, $this->perPage, 7, $id);
+			$objPagination = new \Pagination($total, $this->perPage, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 

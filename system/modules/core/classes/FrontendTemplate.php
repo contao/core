@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -52,60 +52,11 @@ class FrontendTemplate extends \Template
 
 	/**
 	 * Parse the template file, replace insert tags and print it to the screen
+	 * @param boolean
 	 */
-	public function output()
+	public function output($blnCheckRequest=false)
 	{
 		global $objPage;
-
-		// Ignore certain URL parameters
-		$arrIgnore = array('id', 'file', 'token', 'day', 'month', 'year');
-
-		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
-		{
-			$arrIgnore[] = 'language';
-		}
-
-		$strParams = '';
-		$arrPageParams = array();
-
-		// Rebuild the URL to eliminate duplicate parameters
-		foreach (array_keys($_GET) as $key)
-		{
-			if (!in_array($key, $arrIgnore))
-			{
-				if (preg_match('/^page/', $key))
-				{
-					$arrPageParams[] = $key;
-					continue; // see #4141
-				}
-
-				if ($key == 'auto_item')
-				{
-					continue; // see #5482
-				}
-
-				if ($GLOBALS['TL_CONFIG']['useAutoItem'] && in_array($key, $GLOBALS['TL_AUTO_ITEM']))
-				{
-					$strParams .= '/' . \Input::get($key);
-				}
-				else
-				{
-					$strParams .= '/' . $key . '/' . \Input::get($key);
-				}
-			}
-		}
-
-		$strUrl = $this->generateFrontendUrl($objPage->row(), $strParams);
-
-		sort($arrPageParams); // see #4141
-		$strGlue = (!$GLOBALS['TL_CONFIG']['disableAlias'] && strpos($strUrl, '?') === false) ? '?' : '&';
-
-		// Re-add the page numbers
-		foreach ($arrPageParams as $key)
-		{
-			$strUrl .= $strGlue . $key . '=' . \Input::get($key);
-			$strGlue = '&';
-		}
 
 		$this->keywords = '';
 		$arrKeywords = array_map('trim', explode(',', $GLOBALS['TL_KEYWORDS']));
@@ -130,6 +81,7 @@ class FrontendTemplate extends \Template
 		}
 
 		$intCache = 0;
+		$strUrl = \Environment::get('request');
 
 		// Decide whether the page shall be cached
 		if (!isset($_GET['file']) && !isset($_GET['token']) && empty($_POST) && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && !$_SESSION['DISABLE_CACHE'] && !isset($_SESSION['LOGIN_ERROR']) && intval($objPage->cache) > 0 && !$objPage->protected)
@@ -202,24 +154,55 @@ class FrontendTemplate extends \Template
 		$this->strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $this->strBuffer);
 		$this->strBuffer = $this->replaceDynamicScriptTags($this->strBuffer); // see #4203
 
+		// HOOK: allow to modify the compiled markup (see #4291)
+		if (isset($GLOBALS['TL_HOOKS']['modifyFrontendPage']) && is_array($GLOBALS['TL_HOOKS']['modifyFrontendPage']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['modifyFrontendPage'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->strBuffer = $this->$callback[0]->$callback[1]($this->strBuffer, $this->strTemplate);
+			}
+		}
+
+		// Not all $_GET parameters have been used (see #4277)
+		if ($blnCheckRequest && \Input::hasUnusedGet())
+		{
+			return;
+		}
+
 		// Index page if searching is allowed and there is no back end user
 		if ($GLOBALS['TL_CONFIG']['enableSearch'] && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)
 		{
 			// Index protected pages if enabled
 			if ($GLOBALS['TL_CONFIG']['indexProtected'] || (!FE_USER_LOGGED_IN && !$objPage->protected))
 			{
-				$arrData = array
-				(
-					'url' => $strUrl,
-					'content' => $this->strBuffer,
-					'title' => $objPage->pageTitle ?: $objPage->title,
-					'protected' => ($objPage->protected ? '1' : ''),
-					'groups' => $objPage->groups,
-					'pid' => $objPage->id,
-					'language' => $objPage->language
-				);
+				$blnIndex = true;
 
-				\Search::indexPage($arrData);
+				// Do not index the page if certain parameters are set
+				foreach (array_keys($_GET) as $key)
+				{
+					if (in_array($key, $GLOBALS['TL_NOINDEX_KEYS']) || strncmp($key, 'page_', 5) === 0)
+					{
+						$blnIndex = false;
+						break;
+					}
+				}
+
+				if ($blnIndex)
+				{
+					$arrData = array
+					(
+						'url' => $strUrl,
+						'content' => $this->strBuffer,
+						'title' => $objPage->pageTitle ?: $objPage->title,
+						'protected' => ($objPage->protected ? '1' : ''),
+						'groups' => $objPage->groups,
+						'pid' => $objPage->id,
+						'language' => $objPage->language
+					);
+
+					\Search::indexPage($arrData);
+				}
 			}
 		}
 

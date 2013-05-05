@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Devtools
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -40,7 +40,7 @@ class ModuleLabels extends \BackendModule
 	 */
 	protected function compile()
 	{
-		$this->loadLanguageFile('tl_labels');
+		\System::loadLanguageFile('tl_labels');
 
 		$this->Template->label = $GLOBALS['TL_LANG']['tl_labels']['label'][0];
 		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['tl_labels']['headline'], \Input::get('id'));
@@ -55,7 +55,7 @@ class ModuleLabels extends \BackendModule
 		{
 			if ($strLanguage != 'en' && substr($strLanguage, 0, 1) != '.')
 			{
-				$strOptions .= sprintf('<option value="%s"%s>%s</option>', $strLanguage, (($strLanguage == \Input::post('language')) ? ' selected="selected"' : ''), $arrLanguages[$strLanguage]);
+				$strOptions .= sprintf('<option value="%s"%s>%s</option>', $strLanguage, (($strLanguage == \Input::post('language') || $strLanguage == $GLOBALS['TL_LANGUAGE']) ? ' selected="selected"' : ''), $arrLanguages[$strLanguage]);
 			}
 		}
 
@@ -77,26 +77,26 @@ class ModuleLabels extends \BackendModule
 
 			foreach (scandir(TL_ROOT . '/system/modules') as $strDir)
 			{
-				$strPath = TL_ROOT . '/system/modules/' . $strDir . '/languages/en';
-				$strLang = TL_ROOT . '/system/modules/' . $strDir . '/languages/' . \Input::post('language');
+				$strPath = 'system/modules/' . $strDir . '/languages/en';
+				$strLang = 'system/modules/' . $strDir . '/languages/' . \Input::post('language');
 
 				// Continue if language folder does not exists
-				if (in_array($strDir, array('.', '..')) || !is_dir($strPath))
+				if (in_array($strDir, array('.', '..')) || !is_dir(TL_ROOT . '/' . $strPath))
 				{
 					continue;
 				}
 
 				// Scan folder
-				foreach (scandir($strPath) as $strFile)
+				foreach (scandir(TL_ROOT . '/' . $strPath) as $strFile)
 				{
 					// Continue if the file is not a language file
-					if (in_array($strFile, array('.', '..', '.htaccess')) || substr($strFile, -4) != '.php')
+					if (in_array($strFile, array('.', '..', '.htaccess')) || substr($strFile, -4) != '.xlf')
 					{
 						continue;
 					}
 
 					// Log missing files
-					if (!file_exists($strLang . '/' . $strFile))
+					if (!file_exists(TL_ROOT . '/' . $strLang . '/' . $strFile))
 					{
 						$arrLang[$strDir][$strFile] = null;
 						continue;
@@ -107,14 +107,14 @@ class ModuleLabels extends \BackendModule
 					// Include English file
 					$arrBuffer = $GLOBALS['TL_LANG'];
 					$GLOBALS['TL_LANG'] = array();
-					include $strPath . '/' . $strFile;
+					eval(\System::convertXlfToPhp($strPath . '/' . $strFile, 'en'));
 					$arrOld = $GLOBALS['TL_LANG'];
 					$GLOBALS['TL_LANG'] = $arrBuffer;
 
 					// Include foreign file
 					$arrBuffer = $GLOBALS['TL_LANG'];
 					$GLOBALS['TL_LANG'] = array();
-					include $strLang . '/' . $strFile;
+					eval(\System::convertXlfToPhp($strLang . '/' . $strFile, 'en'));
 					$arrNew = $GLOBALS['TL_LANG'];
 					$GLOBALS['TL_LANG'] = $arrBuffer;
 

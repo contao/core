@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -195,15 +195,15 @@ class FileUpload extends \Backend
   <div id="upload-fields">'.$fields.'
   </div>
   <script>
-  window.addEvent("domready", function() {
-    if ("multiple" in document.createElement("input")) {
-      var div = $("upload-fields");
-      var input = div.getElement("input");
-      div.empty();
-      input.set("multiple", true);
-      input.inject(div);
-    }
-  });
+    window.addEvent("domready", function() {
+      if ("multiple" in document.createElement("input")) {
+        var div = $("upload-fields");
+        var input = div.getElement("input");
+        div.empty();
+        input.set("multiple", true);
+        input.inject(div);
+      }
+    });
   </script>';
 	}
 
@@ -215,8 +215,9 @@ class FileUpload extends \Backend
 	protected function getFilesFromGlobal()
 	{
 		$arrFiles = array();
+		$intCount = count($_FILES[$this->strName]['name']);
 
-		for ($i=0; $i<count($_FILES[$this->strName]['name']); $i++)
+		for ($i=0; $i<$intCount; $i++)
 		{
 			if ($_FILES[$this->strName]['name'][$i] == '')
 			{

@@ -1,0 +1,17 @@
+<?php
+
+// Add the swipe style sheet
+$GLOBALS['TL_CSS'][] = 'assets/mootools/tablesort/css/tablesort.css||static';
+
+?>
+
+<script src="<?php echo TL_ASSETS_URL; ?>assets/mootools/tablesort/js/tablesort.js"></script>
+<script>
+  (function($) {
+    window.addEvent('domready', function() {
+      $$('.ce_table .sortable').each(function(table) {
+        new TableSort(table, '<?php echo $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']; ?>', '<?php echo $GLOBALS['TL_LANG']['MSC']['decimalSeparator']; ?>');
+      });
+    });
+  })(document.id);
+</script>

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -45,7 +45,7 @@ class ModuleRegistration extends \Module
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### USER REGISTRATION ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['registration'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -75,7 +75,7 @@ class ModuleRegistration extends \Module
 
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 
-		$this->loadLanguageFile('tl_member');
+		\System::loadLanguageFile('tl_member');
 		$this->loadDataContainer('tl_member');
 
 		// Call onload_callback (e.g. to check permissions)
@@ -170,7 +170,8 @@ class ModuleRegistration extends \Module
 			$arrData['eval']['tableless'] = $this->tableless;
 			$arrData['eval']['required'] = $arrData['eval']['mandatory'];
 
-			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $arrData['default']));
+			$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $field, $arrData['default']));
+
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_' . $i . (($i == 0) ? ' row_first' : '') . ((($i % 2) == 0) ? ' even' : ' odd');
 
@@ -215,7 +216,7 @@ class ModuleRegistration extends \Module
 				}
 
 				// Save callback
-				if (is_array($arrData['save_callback']))
+				if ($objWidget->submitInput() && !$objWidget->hasErrors() && is_array($arrData['save_callback']))
 				{
 					foreach ($arrData['save_callback'] as $callback)
 					{
@@ -223,7 +224,7 @@ class ModuleRegistration extends \Module
 
 						try
 						{
-							$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User);
+							$varValue = $this->$callback[0]->$callback[1]($varValue, null);
 						}
 						catch (\Exception $e)
 						{
@@ -292,7 +293,7 @@ class ModuleRegistration extends \Module
 		$this->Template->captcha = $arrFields['captcha'];
 		$this->Template->formId = 'tl_registration';
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['register']);
-		$this->Template->action = $this->getIndexFreeRequest();
+		$this->Template->action = \Environment::get('indexFreeRequest');
 
 		// HOOK: add memberlist fields
 		if (in_array('memberlist', $this->Config->getActiveModules()))
@@ -440,18 +441,11 @@ class ModuleRegistration extends \Module
 					$strUserDir .= '_' . $insertId;
 				}
 
+				// Create the user folder
 				new \Folder($objHomeDir->path . '/' . $strUserDir);
+				$objUserDir = \FilesModel::findByPath($objHomeDir->path . '/' . $strUserDir);
 
-				// Generate the DB entries
-				$objUserDir = new \FilesModel();
-				$objUserDir->pid    = $objHomeDir->id;
-				$objUserDir->tstamp = time();
-				$objUserDir->type   = 'folder';
-				$objUserDir->name   = $strUserDir;
-				$objUserDir->path   = $objHomeDir->path . '/' . $strUserDir;
-				$objUserDir->hash   = md5('');
-				$objUserDir->save();
-
+				// Save the folder ID
 				$objNewUser->assignDir = 1;
 				$objNewUser->homeDir = $objUserDir->id;
 				$objNewUser->save();
@@ -577,7 +571,7 @@ class ModuleRegistration extends \Module
 
 			if ($k == 'dateOfBirth' && strlen($v))
 			{
-				$v = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $v);
+				$v = \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $v);
 			}
 
 			$strData .= $GLOBALS['TL_LANG']['tl_member'][$k][0] . ': ' . (is_array($v) ? implode(', ', $v) : $v) . "\n";

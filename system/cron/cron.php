@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -155,9 +155,7 @@ class CronJob extends Frontend
 	 */
 	protected function updateCronTxt($time)
 	{
-		$objFile = new File('system/cron/cron.txt', true);
-		$objFile->write($time);
-		$objFile->close();
+		File::putContent('system/cron/cron.txt', $time);
 	}
 }
 

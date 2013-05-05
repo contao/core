@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,10 +15,10 @@ namespace Contao\Database;
 
 /**
  * Handles database updates
- * 
+ *
  * Compares the existing database structure with the DCA table settings and
  * calculates the queries needed to update the database.
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -28,7 +28,7 @@ class Installer extends \Controller
 
 	/**
 	 * Generate a HTML form with queries and return it as string
-	 * 
+	 *
 	 * @return string The form HTML markup
 	 */
 	public function generateSqlForm()
@@ -67,7 +67,7 @@ class Installer extends \Controller
 				$return .= '
     <tr>
       <td class="tl_col_1"><input type="checkbox" id="check_all_' . $count . '" class="tl_checkbox" onclick="Backend.toggleCheckboxElements(this, \'' . strtolower($command) . '\')"></td>
-      <td class="tl_col_2"><label for="check_all_' . $count . '" style="color:#a6a6a6"><em>Select all</em></label></td>
+      <td class="tl_col_2"><label for="check_all_' . $count . '" style="color:#a6a6a6"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label></td>
     </tr>';
 
 				// Fields
@@ -93,7 +93,7 @@ class Installer extends \Controller
 
 	/**
 	 * Compile a command array for each database modification
-	 * 
+	 *
 	 * @return array An array of commands
 	 */
 	protected function compileCommands()
@@ -249,18 +249,49 @@ class Installer extends \Controller
 
 	/**
 	 * Get the DCA table settings from the DCA cache
-	 * 
+	 *
 	 * @return array An array of DCA table settings
 	 */
-	protected function getFromDca()
+	public function getFromDca()
 	{
+		$included = array();
 		$arrReturn = array();
-		$arrTables = \DcaExtractor::createAllExtracts();
 
-		foreach ($arrTables as $strTable=>$objTable)
+		// Ignore the internal cache
+		$blnBypassCache = $GLOBALS['TL_CONFIG']['bypassCache'];
+		$GLOBALS['TL_CONFIG']['bypassCache'] = true;
+
+		// Only check the active modules (see #4541)
+		foreach ($this->Config->getActiveModules() as $strModule)
 		{
-			$arrReturn[$strTable] = $objTable->getDbInstallerArray();
+			$strDir = 'system/modules/' . $strModule . '/dca';
+
+			if (!is_dir(TL_ROOT . '/' . $strDir))
+			{
+				continue;
+			}
+
+			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
+			{
+				if (in_array($strFile, $included) || $strFile == '.htaccess')
+				{
+					continue;
+				}
+
+				$strTable = substr($strFile, 0, -4);
+				$objExtract = new \DcaExtractor($strTable);
+
+				if ($objExtract->isDbTable())
+				{
+					$arrReturn[$strTable] = $objExtract->getDbInstallerArray();
+				}
+
+				$included[] = $strFile;
+			}
 		}
+
+		// Restore the cache settings
+		$GLOBALS['TL_CONFIG']['bypassCache'] = $blnBypassCache;
 
 		return $arrReturn;
 	}
@@ -268,10 +299,10 @@ class Installer extends \Controller
 
 	/**
 	 * Get the DCA table settings from the database.sql files
-	 * 
+	 *
 	 * @return array An array of DCA table settings
 	 */
-	protected function getFromFile()
+	public function getFromFile()
 	{
 		$table = '';
 		$return = array();
@@ -357,10 +388,10 @@ class Installer extends \Controller
 
 	/**
 	 * Get the current database structure
-	 * 
+	 *
 	 * @return array An array of tables and fields
 	 */
-	protected function getFromDB()
+	public function getFromDB()
 	{
 		$this->import('Database');
 		$tables = preg_grep('/^tl_/', $this->Database->listTables(null, true));

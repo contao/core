@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -35,6 +35,12 @@ abstract class ContentElement extends \Frontend
 	protected $strTemplate;
 
 	/**
+	 * Column
+	 * @var string
+	 */
+	protected $strColumn;
+
+	/**
 	 * Model
 	 * @var Model
 	 */
@@ -62,8 +68,9 @@ abstract class ContentElement extends \Frontend
 	/**
 	 * Initialize the object
 	 * @param object
+	 * @param string
 	 */
-	public function __construct($objElement)
+	public function __construct($objElement, $strColumn='main')
 	{
 		if ($objElement instanceof \Model)
 		{
@@ -83,6 +90,7 @@ abstract class ContentElement extends \Frontend
 		$arrHeadline = deserialize($objElement->headline);
 		$this->headline = is_array($arrHeadline) ? $arrHeadline['value'] : $arrHeadline;
 		$this->hl = is_array($arrHeadline) ? $arrHeadline['unit'] : 'h1';
+		$this->strColumn = $strColumn;
 	}
 
 
@@ -154,6 +162,8 @@ abstract class ContentElement extends \Frontend
 		$this->Template->cssID = ($this->cssID[0] != '') ? ' id="' . $this->cssID[0] . '"' : '';
 		$this->Template->class = trim('ce_' . $this->type . ' ' . $this->cssID[1]);
 
+		$this->Template->inColumn = $this->strColumn;
+
 		if ($this->Template->headline == '')
 		{
 			$this->Template->headline = $this->headline;
@@ -172,4 +182,28 @@ abstract class ContentElement extends \Frontend
 	 * Compile the content element
 	 */
 	abstract protected function compile();
+
+
+	/**
+	 * Find a content element in the TL_CTE array and return the class name
+	 *
+	 * @param string $strName The content element name
+	 *
+	 * @return string The class name
+	 */
+	public static function findClass($strName)
+	{
+		foreach ($GLOBALS['TL_CTE'] as $v)
+		{
+			foreach ($v as $kk=>$vv)
+			{
+				if ($kk == $strName)
+				{
+					return $vv;
+				}
+			}
+		}
+
+		return '';
+	}
 }

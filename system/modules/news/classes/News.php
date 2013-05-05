@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package News
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -134,7 +134,7 @@ class News extends \Frontend
 				// Get the jumpTo URL
 				if (!isset($arrUrls[$jumpTo]))
 				{
-					$objParent = $this->getPageDetails($jumpTo);
+					$objParent = \PageModel::findWithDetails($jumpTo);
 					$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 
@@ -203,9 +203,7 @@ class News extends \Frontend
 		}
 
 		// Create the file
-		$objRss = new \File('share/' . $strFile . '.xml', true);
-		$objRss->write($this->replaceInsertTags($objFeed->$strType()));
-		$objRss->close();
+		\File::putContent('share/' . $strFile . '.xml', $this->replaceInsertTags($objFeed->$strType()));
 	}
 
 
@@ -252,7 +250,7 @@ class News extends \Frontend
 				if (!isset($arrProcessed[$objArchive->jumpTo]))
 				{
 					$domain = \Environment::get('base');
-					$objParent = $this->getPageDetails($objArchive->jumpTo);
+					$objParent = \PageModel::findWithDetails($objArchive->jumpTo);
 
 					// The target page does not exist
 					if ($objParent === null)

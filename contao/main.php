@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -47,12 +47,6 @@ class Main extends Backend
 	 */
 	public function __construct()
 	{
-		// Redirect to the install tool
-		if (!Config::getInstance()->isComplete())
-		{
-			$this->redirect('install.php');
-		}
-
 		$this->import('BackendUser', 'User');
 		parent::__construct();
 
@@ -76,15 +70,29 @@ class Main extends Backend
 			$this->redirectToFrontendPage(Input::get('page'), Input::get('article'));
 		}
 
-		// Safe mode off
-		if (Input::get('smo') && $this->User->isAdmin)
+		// Convenience functions
+		if ($this->User->isAdmin)
 		{
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", false);
-			$this->redirect($this->getReferer());
+			// Safe mode off
+			if (Input::get('smo'))
+			{
+				$this->import('Automator');
+				$this->Automator->purgeInternalCache();
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", false);
+				$this->redirect($this->getReferer());
+			}
+
+			// Build internal cache
+			if (Input::get('bic'))
+			{
+				$this->import('Automator');
+				$this->Automator->generateInternalCache();
+				$this->redirect($this->getReferer());
+			}
 		}
 
-		$this->loadLanguageFile('default');
-		$this->loadLanguageFile('modules');
+		System::loadLanguageFile('default');
+		System::loadLanguageFile('modules');
 	}
 
 
@@ -132,7 +140,7 @@ class Main extends Backend
 	 */
 	protected function welcomeScreen()
 	{
-		$this->loadLanguageFile('explain');
+		System::loadLanguageFile('explain');
 
 		$objTemplate = new BackendTemplate('be_welcome');
 		$objTemplate->messages = Message::generate(false, true);
@@ -159,75 +167,9 @@ class Main extends Backend
 			}
 		}
 
-		$arrVersions = array();
+		// Add the versions overview
+		Versions::addToTemplate($objTemplate);
 
-		// Get the total number of versions
-		$objTotal = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_version" . (!$this->User->isAdmin ? " WHERE userid=?" : ""))
-								   ->execute($this->User->id);
-
-		$intPage   = Input::get('vp') ?: 1;
-		$intOffset = ($intPage - 1) * 30;
-		$intLast   = ceil($objTotal->count / 30);
-
-		// Validate the page number
-		if ($intPage < 1 || $intPage > $intLast)
-		{
-			header('HTTP/1.1 404 Not Found');
-		}
-
-		// Create the pagination menu
-		$objPagination = new Pagination($objTotal->count, 30, 7, 'vp', new \BackendTemplate('be_pagination'));
-		$objTemplate->pagination = $objPagination->generate();
-
-		// Get the versions
-		$objVersions = $this->Database->prepare("SELECT pid, tstamp, version, fromTable, username, userid, description, editUrl FROM tl_version v" . (!$this->User->isAdmin ? " WHERE userid=?" : "") . " ORDER BY tstamp DESC, pid, version DESC")
-									  ->limit(30, $intOffset)
-									  ->execute($this->User->id);
-
-		while ($objVersions->next())
-		{
-			$arrRow = $objVersions->row();
-
-			// Add some parameters
-			$arrRow['from'] = max(($objVersions->version - 1), 1); // see #4828
-			$arrRow['to'] = $objVersions->version;
-			$arrRow['date'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objVersions->tstamp);
-			$arrRow['description'] = String::substr($arrRow['description'], 32);
-
-			if ($arrRow['editUrl'] != '')
-			{
-				$arrRow['editUrl'] = preg_replace('/&(amp;)?rt=[a-f0-9]+/', '&amp;rt=' . REQUEST_TOKEN, ampersand($arrRow['editUrl']));
-			}
-
-			$arrVersions[] = $arrRow;
-		}
-
-		$intCount = -1;
-		$arrVersions = array_values($arrVersions);
-
-		// Add the "even" and "odd" classes
-		foreach ($arrVersions as $k=>$v)
-		{
-			$arrVersions[$k]['class'] = (++$intCount%2 == 0) ? 'even' : 'odd';
-
-			try
-			{
-				// Mark deleted versions (see #4336)
-				$objDeleted = $this->Database->prepare("SELECT COUNT(*) AS count FROM " . $v['fromTable'] . " WHERE id=?")
-											 ->execute($v['pid']);
-
-				$arrVersions[$k]['deleted'] = ($objDeleted->count < 1);
-			}
-			catch (Exception $e)
-			{
-				// Probably a disabled module
-				--$intCount;
-				unset($arrVersions[$k]);
-			}
-
-		}
-
-		$objTemplate->versions = $arrVersions;
 		$objTemplate->welcome = sprintf($GLOBALS['TL_LANG']['MSC']['welcomeTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
 		$objTemplate->showDifferences = specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['showDifferences']));
 		$objTemplate->systemMessages = $GLOBALS['TL_LANG']['MSC']['systemMessages'];
@@ -256,7 +198,15 @@ class Main extends Backend
 			$this->Template->title = $this->Template->headline;
 		}
 
-		$this->Template->theme = $this->getTheme();
+		// File picker reference
+		if (\Input::get('popup') && (\Input::get('do') == 'page' || \Input::get('do') == 'files') && $this->Session->get('filePickerRef'))
+		{
+			$this->Template->managerHref = $this->Session->get('filePickerRef');
+			$this->Template->managerTitle = specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']);
+			$this->Template->manager = $GLOBALS['TL_LANG']['MSC']['goBack'];
+		}
+
+		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($this->Template->title);
@@ -279,15 +229,20 @@ class Main extends Backend
 		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
 		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
-		$this->Template->coreOnlyMode = $GLOBALS['TL_LANG']['MSC']['coreOnlyMode'];
-		$this->Template->isCoreOnlyMode = $GLOBALS['TL_CONFIG']['coreOnlyMode'];
 		$this->Template->loadFonts = $GLOBALS['TL_CONFIG']['loadGoogleFonts'];
 		$this->Template->isAdmin = $this->User->isAdmin;
+		$this->Template->isCoreOnlyMode = $GLOBALS['TL_CONFIG']['coreOnlyMode'];
+		$this->Template->coreOnlyMode = $GLOBALS['TL_LANG']['MSC']['coreOnlyMode'];
 		$this->Template->coreOnlyOff = specialchars($GLOBALS['TL_LANG']['MSC']['coreOnlyOff']);
 		$this->Template->coreOnlyHref = $this->addToUrl('smo=1');
+		$this->Template->needsCacheBuild = (!$GLOBALS['TL_CONFIG']['bypassCache'] && !is_dir(TL_ROOT . '/system/cache/dca'));
+		$this->Template->buildCacheHref = $this->addToUrl('bic=1');
+		$this->Template->buildCacheLink = $GLOBALS['TL_LANG']['MSC']['buildCacheLink'];
+		$this->Template->buildCacheText = $GLOBALS['TL_LANG']['MSC']['buildCacheText'];
+		$this->Template->isPopup = Input::get('popup');
 
 		// Front end preview links
-		if (CURRENT_ID != '')
+		if (defined('CURRENT_ID') && CURRENT_ID != '')
 		{
 			// Pages
 			if (Input::get('do') == 'page')
@@ -298,11 +253,9 @@ class Main extends Backend
 			// Articles
 			elseif (Input::get('do') == 'article')
 			{
-				$objArticle = ArticleModel::findByPk(CURRENT_ID);
-
-				if ($objArticle !== null)
+				if (($objArticle = ArticleModel::findByPk(CURRENT_ID)) !== null)
 				{
-					$this->Template->frontendFile = '?page=' . $objArticle->pid . '&amp;article=' . (($objArticle->inColumn != 'main') ? $objArticle->inColumn . ':' : '') . (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id);
+					$this->Template->frontendFile = '?page=' . $objArticle->pid;
 				}
 			}
 		}

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -160,16 +160,16 @@ class Ajax extends \Backend
 				{
 					if ($e->getCode() == 0)
 					{
-						$this->loadLanguageFile('tl_maintenance');
+						\System::loadLanguageFile('tl_maintenance');
 						echo '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['notWriteable'] . '</p>';
 						exit; break;
 					}
 				}
 
-				// Empty live update ID
+				// Empty Live Update ID
 				if (!strlen(\Input::post('id')))
 				{
-					$this->loadLanguageFile('tl_maintenance');
+					\System::loadLanguageFile('tl_maintenance');
 					echo '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['emptyLuId'] . '</p>';
 					exit; break;
 				}
@@ -229,13 +229,109 @@ class Ajax extends \Backend
 
 			// Load nodes of the file tree
 			case 'loadFiletree':
-			case 'loadPagetree':
 				$arrData['strTable'] = $dc->table;
 				$arrData['id'] = $this->strAjaxName ?: $dc->id;
 				$arrData['name'] = \Input::post('name');
 
 				$objWidget = new $GLOBALS['BE_FFL']['fileSelector']($arrData, $dc);
-				echo $objWidget->generateAjax($this->strAjaxId, \Input::post('field'), intval(\Input::post('level')));
+
+				// Load a particular node
+				if (\Input::post('folder', true) != '')
+				{
+					echo $objWidget->generateAjax(\Input::post('folder', true), \Input::post('field'), intval(\Input::post('level')));
+				}
+				else
+				{
+					echo $objWidget->generate();
+				}
+				exit; break;
+
+			// Reload the page/file picker
+			case 'reloadPagetree':
+			case 'reloadFiletree':
+				$intId = \Input::get('id');
+				$strField = $strFieldName = \Input::post('name');
+
+				// Handle the keys in "edit multiple" mode
+				if (\Input::get('act') == 'editAll')
+				{
+					$intId = preg_replace('/.*_([0-9a-zA-Z]+)$/', '$1', $strField);
+					$strField = preg_replace('/(.*)_[0-9a-zA-Z]+$/', '$1', $strField);
+				}
+
+				// Validate the request data
+				if ($GLOBALS['TL_DCA'][$dc->table]['config']['dataContainer'] == 'File')
+				{
+					// The field does not exist
+					if (!array_key_exists($strField, $GLOBALS['TL_CONFIG']))
+					{
+						$this->log('Field "' . $strField . '" does not exist in the global configuration', 'Ajax executePostActions()', TL_ERROR);
+						header('HTTP/1.1 400 Bad Request');
+						die('Bad Request');
+					}
+				}
+				elseif ($this->Database->tableExists($dc->table))
+				{
+					// The field does not exist
+					if (!$this->Database->fieldExists($strField, $dc->table))
+					{
+						$this->log('Field "' . $strField . '" does not exist in table "' . $dc->table . '"', 'Ajax executePostActions()', TL_ERROR);
+						header('HTTP/1.1 400 Bad Request');
+						die('Bad Request');
+					}
+
+					$objRow = $this->Database->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
+											 ->execute($intId);
+
+					// The record does not exist
+					if ($objRow->numRows < 1)
+					{
+						$this->log('A record with the ID "' . $intId . '" does not exist in table "' . $dc->table . '"', 'Ajax executePostActions()', TL_ERROR);
+						header('HTTP/1.1 400 Bad Request');
+						die('Bad Request');
+					}
+				}
+
+				$varValue = \Input::post('value');
+				$strKey = ($this->strAction == 'reloadPagetree') ? 'pageTree' : 'fileTree';
+
+				// Convert the selected values
+				if ($varValue != '')
+				{
+					$varValue = trimsplit(',', $varValue);
+
+					// Automatically add resources to the DBAFS
+					if ($strKey == 'fileTree')
+					{
+						foreach ($varValue as $k=>$v)
+						{
+							$varValue[$k] = \Dbafs::addResource($v)->id;
+						}
+					}
+
+					$varValue = serialize($varValue);
+				}
+
+				// Set the new value
+				if ($GLOBALS['TL_DCA'][$dc->table]['config']['dataContainer'] == 'File')
+				{
+					$GLOBALS['TL_CONFIG'][$strField] = $varValue;
+					$arrAttribs['activeRecord'] = null;
+				}
+				elseif ($this->Database->tableExists($dc->table))
+				{
+					$objRow->$strField = $varValue;
+					$arrAttribs['activeRecord'] = $objRow;
+				}
+
+				$arrAttribs['id'] = $strFieldName;
+				$arrAttribs['name'] = $strFieldName;
+				$arrAttribs['value'] = $varValue;
+				$arrAttribs['strTable'] = $dc->table;
+				$arrAttribs['strField'] = $strField;
+
+				$objWidget = new $GLOBALS['BE_FFL'][$strKey]($arrAttribs);
+				echo $objWidget->generate();
 				exit; break;
 
 			// Feature/unfeature an element

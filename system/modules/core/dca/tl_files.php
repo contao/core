@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -34,7 +34,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			(
 				'id' => 'primary',
 				'pid' => 'index',
-				'path' => 'unique',
+				'pid,name' => 'unique',
 				'extension' => 'index'
 			)
 		)
@@ -91,20 +91,6 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 				'attributes'          => 'onclick="Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_files', 'cutFile')
 			),
-			'source' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_files']['source'],
-				'href'                => 'act=source',
-				'icon'                => 'editor.gif',
-				'button_callback'     => array('tl_files', 'editSource')
-			),
-			'protect' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_files']['protect'],
-				'href'                => 'act=protect',
-				'icon'                => 'protect.gif',
-				'button_callback'     => array('tl_files', 'protectFolder')
-			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['delete'],
@@ -112,6 +98,13 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_files', 'deleteFile')
+			),
+			'source' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_files']['source'],
+				'href'                => 'act=source',
+				'icon'                => 'editor.gif',
+				'button_callback'     => array('tl_files', 'editSource')
 			)
 		)
 	),
@@ -119,7 +112,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'name,meta'
+		'default'                     => 'name,protected;meta'
 	),
 
 	// Fields
@@ -143,7 +136,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		),
 		'path' => array
 		(
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "blob NULL"
 		),
 		'extension' => array
 		(
@@ -161,12 +154,18 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['name'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'decodeEntities'=>true),
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_files', 'checkFilename')
 			),
-			'sql'                     => "varchar(64) NOT NULL default ''"
+			'sql'                     => "varbinary(255) NOT NULL default ''"
+		),
+		'protected' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['protected'],
+			'input_field_callback'    => array('tl_files', 'protectFolder'),
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'meta' => array
 		(
@@ -358,74 +357,7 @@ class tl_files extends Backend
 	 */
 	public function addBreadcrumb()
 	{
-		// Set a new node
-		if (isset($_GET['node']))
-		{
-			$this->Session->set('tl_files_node', Input::get('node', true));
-			$this->redirect(preg_replace('/(&|\?)node=[^&]*/', '', Environment::get('request')));
-		}
-
-		$strNode = $this->Session->get('tl_files_node');
-
-		if ($strNode == '')
-		{
-			return;
-		}
-
-		// Currently selected folder does not exist
-		if (!is_dir(TL_ROOT . '/' . $strNode))
-		{
-			$this->Session->set('tl_files_node', '');
-			return;
-		}
-
-		$strPath = $GLOBALS['TL_CONFIG']['uploadPath'];
-		$arrNodes = explode('/', preg_replace('/^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/') . '\//', '', $strNode));
-		$arrLinks = array();
-
-		// Add root link
-		$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/filemounts.gif" width="18" height="18" alt=""> <a href="' . $this->addToUrl('node=') . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectAllNodes']).'">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
-
-		// Generate breadcrumb trail
-		foreach ($arrNodes as $strFolder)
-		{
-			$strPath .= '/' . $strFolder;
-
-			// Do not show pages which are not mounted
-			if (!$this->User->isAdmin && !$this->User->hasAccess($strPath, 'filemounts'))
-			{
-				continue;
-			}
-
-			// No link for the active folder
-			if ($strFolder == basename($strNode))
-			{
-				$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/folderC.gif" width="18" height="18" alt=""> ' . $strFolder;
-			}
-			else
-			{
-				$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/folderC.gif" width="18" height="18" alt=""> <a href="' . $this->addToUrl('node='.$strPath) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $strFolder . '</a>';
-			}
-		}
-
-		// Check whether the node is mounted
-		if (!$this->User->isAdmin && !$this->User->hasAccess($strNode, 'filemounts'))
-		{
-			$this->Session->set('tl_files_node', '');
-
-			$this->log('Folder ID '.$strNode.' was not mounted', 'tl_files addBreadcrumb', TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
-		}
-
-		// Limit tree
-		$GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root'] = array($strNode);
-
-		// Insert breadcrumb menu
-		$GLOBALS['TL_DCA']['tl_files']['list']['sorting']['breadcrumb'] .= '
-
-<ul id="tl_breadcrumb">
-  <li>' . implode(' &gt; </li><li>', $arrLinks) . '</li>
-</ul>';
+		Backend::addFilesBreadcrumb();
 	}
 
 
@@ -462,7 +394,7 @@ class tl_files extends Backend
 	 */
 	public function syncFiles($href, $label, $title, $class, $attributes)
 	{
-		return $this->User->isAdmin ? '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'" class="'.$class.'"'.$attributes.'>'.$label.'</a> ' : '';
+		return ($this->User->isAdmin || $this->User->hasAccess('f6', 'fop')) ? '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'" class="'.$class.'"'.$attributes.'>'.$label.'</a> ' : '';
 	}
 
 
@@ -478,7 +410,7 @@ class tl_files extends Backend
 	 */
 	public function editFile($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || $this->User->hasAccess('f2', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->User->hasAccess('f2', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -494,7 +426,7 @@ class tl_files extends Backend
 	 */
 	public function copyFile($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || $this->User->hasAccess('f2', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->User->hasAccess('f2', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -510,7 +442,7 @@ class tl_files extends Backend
 	 */
 	public function cutFile($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || $this->User->hasAccess('f2', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->User->hasAccess('f2', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -528,10 +460,12 @@ class tl_files extends Backend
 	{
 		if (is_dir(TL_ROOT . '/' . $row['id']) && count(scan(TL_ROOT . '/' . $row['id'])) > 0)
 		{
-			return ($this->User->isAdmin || $this->User->hasAccess('f4', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+			return ($this->User->isAdmin || $this->User->hasAccess('f4', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 		}
-
-		return ($this->User->isAdmin || $this->User->hasAccess('f3', 'fop') || $this->User->hasAccess('f4', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		else
+		{
+			return ($this->User->isAdmin || $this->User->hasAccess('f3', 'fop') || $this->User->hasAccess('f4', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		}
 	}
 
 
@@ -563,42 +497,63 @@ class tl_files extends Backend
 
 		if (!in_array($objFile->extension, trimsplit(',', $GLOBALS['TL_CONFIG']['editableFiles'])))
 		{
-			return $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+			return Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 		}
 
-		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 
 	/**
-	 * Return the edit file source button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 * Return a checkbox to delete session data
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function protectFolder($row, $href, $label, $title, $icon, $attributes)
+	public function protectFolder(DataContainer $dc)
 	{
-		$strDecoded = urldecode($row['id']);
-
-		if (!is_dir(TL_ROOT . '/' . $strDecoded))
+		// Only show for folders (see #5660)
+		if (!is_dir(TL_ROOT . '/' . $dc->id))
 		{
 			return '';
 		}
 
-		// Remove protection
-		if (count(preg_grep('/^\.htaccess/i', scan(TL_ROOT . '/' . $strDecoded))) > 0)
-		{
-			$label = $GLOBALS['TL_LANG']['tl_files']['unlock'][0];
-			$title = sprintf($GLOBALS['TL_LANG']['tl_files']['unlock'][1], $row['id']);
+		$blnProtected = file_exists(TL_ROOT . '/' . $dc->id . '/.htaccess');
 
-			return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon), $label).'</a> ';
+		// Protect or unprotect the folder
+		if (Input::post('FORM_SUBMIT') == 'tl_files')
+		{
+			if (Input::post('protected'))
+			{
+				if (!$blnProtected)
+				{
+					$blnProtected = true;
+					$objFolder = new Folder($dc->id);
+					$objFolder->protect();
+				}
+			}
+			else
+			{
+				if ($blnProtected)
+				{
+					$blnProtected = false;
+					$objFolder = new Folder($dc->id);
+					$objFolder->unprotect();
+				}
+			}
 		}
 
-		// Protect folder
-		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		// Show a note for non-Apache servers
+		if (strpos(Environment::get('serverSoftware'), 'Apache') === false)
+		{
+			Message::addInfo($GLOBALS['TL_LANG']['tl_files']['htaccessInfo']);
+		}
+
+		return '
+<div class="' . $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['tl_class'] . ' cbx">
+  <div id="ctrl_' . $dc->field . '" class="tl_checkbox_single_container">
+    <input type="hidden" name="' . $dc->inputName . '" value=""><input type="checkbox" name="' . $dc->inputName . '" id="opt_' . $dc->field . '_0" class="tl_checkbox" value="1"' . ($blnProtected ? ' checked="checked"' : '') . ' onfocus="Backend.getScrollOffset()"> <label for="opt_' . $dc->field . '_0">' . $GLOBALS['TL_LANG']['tl_files']['protected'][0] . '</label>
+  </div>' . ($GLOBALS['TL_CONFIG']['showHelp'] ? '
+  <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_files']['protected'][1] . '</p>' : '') . '
+</div>';
 	}
 }

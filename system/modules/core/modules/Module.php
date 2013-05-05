@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -147,10 +147,11 @@ abstract class Module extends \Frontend
 
 		$this->compile();
 
-		$this->Template->inColumn = $this->strColumn;
 		$this->Template->style = !empty($this->arrStyle) ? implode(' ', $this->arrStyle) : '';
 		$this->Template->cssID = ($this->cssID[0] != '') ? ' id="' . $this->cssID[0] . '"' : '';
 		$this->Template->class = trim('mod_' . $this->type . ' ' . $this->cssID[1]);
+
+		$this->Template->inColumn = $this->strColumn;
 
 		if ($this->Template->headline == '')
 		{
@@ -176,9 +177,11 @@ abstract class Module extends \Frontend
 	 * Recursively compile the navigation menu and return it as HTML string
 	 * @param integer
 	 * @param integer
+	 * @param string
+	 * @param string
 	 * @return string
 	 */
-	protected function renderNavigation($pid, $level=1)
+	protected function renderNavigation($pid, $level=1, $host=null, $language=null)
 	{
 		// Get all active subpages
 		$objSubpages = \PageModel::findPublishedSubpagesWithoutGuestsByPid($pid, $this->showHidden, $this instanceof \ModuleSitemap);
@@ -214,7 +217,7 @@ abstract class Module extends \Frontend
 		global $objPage;
 
 		// Browse subpages
-		while($objSubpages->next())
+		while ($objSubpages->next())
 		{
 			// Skip hidden sitemap pages
 			if ($this instanceof \ModuleSitemap && $objSubpages->sitemap == 'map_never')
@@ -224,6 +227,12 @@ abstract class Module extends \Frontend
 
 			$subitems = '';
 			$_groups = deserialize($objSubpages->groups);
+
+			// Override the domain (see #3765)
+			if ($host !== null)
+			{
+				$objSubpages->domain = $host;
+			}
 
 			// Do not show protected pages unless a back end or front end user is logged in
 			if (!$objSubpages->protected || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected || ($this instanceof \ModuleSitemap && $objSubpages->sitemap == 'map_always'))
@@ -263,7 +272,7 @@ abstract class Module extends \Frontend
 							// Check the target page language (see #4706)
 							if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 							{
-								$objNext = $this->getPageDetails($objNext); // see #3983
+								$objNext->loadDetails(); // see #3983
 								$strForceLang = $objNext->language;
 							}
 
@@ -273,7 +282,7 @@ abstract class Module extends \Frontend
 						// DO NOT ADD A break; STATEMENT
 
 					default:
-						$href = $this->generateFrontendUrl($objSubpages->row());
+						$href = $this->generateFrontendUrl($objSubpages->row(), null, $language);
 						break;
 				}
 
@@ -350,5 +359,29 @@ abstract class Module extends \Frontend
 
 		$objTemplate->items = $items;
 		return !empty($items) ? $objTemplate->parse() : '';
+	}
+
+
+	/**
+	 * Find a front end module in the FE_MOD array and return the class name
+	 *
+	 * @param string $strName The front end module name
+	 *
+	 * @return string The class name
+	 */
+	public static function findClass($strName)
+	{
+		foreach ($GLOBALS['FE_MOD'] as $v)
+		{
+			foreach ($v as $kk=>$vv)
+			{
+				if ($kk == $strName)
+				{
+					return $vv;
+				}
+			}
+		}
+
+		return '';
 	}
 }

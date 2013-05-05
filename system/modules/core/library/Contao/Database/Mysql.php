@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,7 +15,7 @@ namespace Contao\Database;
 
 /**
  * MySQL-specific database class
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -38,6 +38,8 @@ class Mysql extends \Database
 
 	/**
 	 * Connect to the database server and select the database
+	 *
+	 * @throws \Exception If the connection cannot be established
 	 */
 	protected function connect()
 	{
@@ -46,6 +48,11 @@ class Mysql extends \Database
 		if ($this->arrConfig['dbPort'])
 		{
 			$strHost .= ':' . $this->arrConfig['dbPort'];
+		}
+
+		if ($this->arrConfig['dbSocket'])
+		{
+			$strHost .= ':' . $this->arrConfig['dbSocket'];
 		}
 
 		if ($this->arrConfig['dbPconnect'])
@@ -57,12 +64,14 @@ class Mysql extends \Database
 			$this->resConnection = @mysql_connect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass']);
 		}
 
-		if (is_resource($this->resConnection))
+		if (mysql_error())
 		{
-			@mysql_query("SET sql_mode=''", $this->resConnection);
-			@mysql_query("SET NAMES " . $this->arrConfig['dbCharset'], $this->resConnection);
-			@mysql_select_db($this->arrConfig['dbDatabase'], $this->resConnection);
+			throw new \Exception(mysql_error());
 		}
+
+		@mysql_query("SET sql_mode=''", $this->resConnection);
+		@mysql_query("SET NAMES " . $this->arrConfig['dbCharset'], $this->resConnection);
+		@mysql_select_db($this->arrConfig['dbDatabase'], $this->resConnection);
 	}
 
 
@@ -77,7 +86,7 @@ class Mysql extends \Database
 
 	/**
 	 * Return the last error message
-	 * 
+	 *
 	 * @return string The error message
 	 */
 	protected function get_error()
@@ -93,11 +102,11 @@ class Mysql extends \Database
 
 	/**
 	 * Auto-generate a FIND_IN_SET() statement
-	 * 
+	 *
 	 * @param string  $strKey     The field name
 	 * @param mixed   $varSet     The set to find the key in
 	 * @param boolean $blnIsField If true, the set will not be quoted
-	 * 
+	 *
 	 * @return string The FIND_IN_SET() statement
 	 */
 	protected function find_in_set($strKey, $varSet, $blnIsField=false)
@@ -125,11 +134,11 @@ class Mysql extends \Database
 	 * * attributes: attributes (e.g. "unsigned")
 	 * * index:      PRIMARY, UNIQUE or INDEX
 	 * * extra:      extra information (e.g. auto_increment)
-	 * 
+	 *
 	 * @param string $strTable The table name
-	 * 
+	 *
 	 * @return array An array with the field information
-	 * 
+	 *
 	 * @todo Support all kind of keys (e.g. FULLTEXT or FOREIGN)
 	 */
 	protected function list_fields($strTable)
@@ -205,9 +214,9 @@ class Mysql extends \Database
 
 	/**
 	 * Change the current database
-	 * 
+	 *
 	 * @param string $strDatabase The name of the target database
-	 * 
+	 *
 	 * @return boolean True if the database was changed successfully
 	 */
 	protected function set_database($strDatabase)
@@ -248,7 +257,7 @@ class Mysql extends \Database
 
 	/**
 	 * Lock one or more tables
-	 * 
+	 *
 	 * @param array $arrTables An array of table names
 	 */
 	protected function lock_tables($arrTables)
@@ -275,9 +284,9 @@ class Mysql extends \Database
 
 	/**
 	 * Return the table size in bytes
-	 * 
+	 *
 	 * @param string $strTable The table name
-	 * 
+	 *
 	 * @return integer The table size in bytes
 	 */
 	protected function get_size_of($strTable)
@@ -291,9 +300,9 @@ class Mysql extends \Database
 
 	/**
 	 * Return the next autoincrement ID of a table
-	 * 
+	 *
 	 * @param string The table name
-	 * 
+	 *
 	 * @return integer The autoincrement ID
 	 */
 	protected function get_next_id($strTable)
@@ -307,10 +316,10 @@ class Mysql extends \Database
 
 	/**
 	 * Create a Database\Statement object
-	 * 
+	 *
 	 * @param resource $resConnection        The connection ID
 	 * @param boolean  $blnDisableAutocommit If true, autocommitting will be disabled
-	 * 
+	 *
 	 * @return \Database\Mysql\Statement The Database\Statement object
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)

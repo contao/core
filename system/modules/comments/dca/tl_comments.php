@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Comments
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -345,17 +345,6 @@ class tl_comments extends Backend
 			return Cache::get($strKey);
 		}
 
-		// Get the pagemounts
-		$pagemounts = array();
-
-		foreach ($this->User->pagemounts as $root)
-		{
-			$pagemounts[] = $root;
-			$pagemounts = array_merge($pagemounts, $this->Database->getChildRecords($root, 'tl_page'));
-		}
-
-		$pagemounts = array_unique($pagemounts);
-
 		// Order deny,allow
 		Cache::set($strKey, false);
 
@@ -366,8 +355,8 @@ class tl_comments extends Backend
 										  ->limit(1)
 										  ->execute($intParent);
 
-				// Check whether the page is mounted and the user is allowed to edit its articles
-				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(4, $objPage->row()))
+				// Do not check whether the page is mounted (see #5174)
+				if ($objPage->numRows > 0 && $this->User->isAllowed(4, $objPage->row()))
 				{
 					Cache::set($strKey, true);
 				}
@@ -378,51 +367,40 @@ class tl_comments extends Backend
 										  ->limit(1)
 										  ->execute($intParent);
 
-				// Check whether the page is mounted and the user is allowed to edit it
-				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(1, $objPage->row()))
+				// Do not check whether the page is mounted (see #5174)
+				if ($objPage->numRows > 0 && $this->User->isAllowed(1, $objPage->row()))
 				{
 					Cache::set($strKey, true);
 				}
 				break;
 
 			case 'tl_news':
-				// Check the access to the news module
-				if ($this->User->hasAccess('news', 'modules'))
-				{
-					$objArchive = $this->Database->prepare("SELECT pid FROM tl_news WHERE id=?")
-												 ->limit(1)
-												 ->execute($intParent);
+				$objArchive = $this->Database->prepare("SELECT pid FROM tl_news WHERE id=?")
+											 ->limit(1)
+											 ->execute($intParent);
 
-					// Check the access to the news archive
-					if ($objArchive->numRows > 0 && $this->User->hasAccess($objArchive->pid, 'news'))
-					{
-						Cache::set($strKey, true);
-					}
+				// Do not check the access to the news module (see #5174)
+				if ($objArchive->numRows > 0 && $this->User->hasAccess($objArchive->pid, 'news'))
+				{
+					Cache::set($strKey, true);
 				}
 				break;
 
 			case 'tl_calendar_events':
-				// Check the access to the calendar module
-				if ($this->User->hasAccess('calendar', 'modules'))
-				{
-					$objCalendar = $this->Database->prepare("SELECT pid FROM tl_calendar_events WHERE id=?")
-												  ->limit(1)
-												  ->execute($intParent);
+				$objCalendar = $this->Database->prepare("SELECT pid FROM tl_calendar_events WHERE id=?")
+											  ->limit(1)
+											  ->execute($intParent);
 
-					// Check the access to the calendar
-					if ($objCalendar->numRows > 0 && $this->User->hasAccess($objCalendar->pid, 'calendars'))
-					{
+				// Do not check the access to the calendar module (see #5174)
+				if ($objCalendar->numRows > 0 && $this->User->hasAccess($objCalendar->pid, 'calendars'))
+				{
 						Cache::set($strKey, true);
-					}
 				}
 				break;
 
 			case 'tl_faq':
-				// Check the access to the FAQ module
-				if ($this->User->hasAccess('faq', 'modules'))
-				{
-					Cache::set($strKey, true);
-				}
+				// Do not check the access to the FAQ module (see #5174)
+				Cache::set($strKey, true);
 				break;
 
 			default:
@@ -542,11 +520,11 @@ class tl_comments extends Backend
 				break;
 		}
 
-		$key = $arrRow['published'] ? 'published' : 'unpublished';
+		$key = ($arrRow['published'] ? 'published' : 'unpublished') . ($arrRow['addReply'] ? ' replied' : '');
 
 		return '
 <div class="comment_wrap">
-<div class="cte_type ' . $key . '"><strong><a href="mailto:' . $arrRow['email'] . '" title="' . specialchars($arrRow['email']) . '">' . $arrRow['name'] . '</a></strong>' . (($arrRow['website'] != '') ? ' (<a href="' . $arrRow['website'] . '" title="' . specialchars($arrRow['website']) . '" target="_blank">' . $GLOBALS['TL_LANG']['MSC']['com_website'] . '</a>)' : '') . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']) . ' - IP ' . specialchars($arrRow['ip']) . '<br>' . $title . '</div>
+<div class="cte_type ' . $key . '"><strong><a href="mailto:' . $arrRow['email'] . '" title="' . specialchars($arrRow['email']) . '">' . $arrRow['name'] . '</a></strong>' . (($arrRow['website'] != '') ? ' (<a href="' . $arrRow['website'] . '" title="' . specialchars($arrRow['website']) . '" target="_blank">' . $GLOBALS['TL_LANG']['MSC']['com_website'] . '</a>)' : '') . ' - ' . Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']) . ' - IP ' . specialchars($arrRow['ip']) . '<br>' . $title . '</div>
 <div class="limit_height mark_links' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h52' : '') . '">
 ' . $arrRow['comment'] . '
 </div>
@@ -566,7 +544,7 @@ class tl_comments extends Backend
 	 */
 	public function editComment($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || $this->isAllowedToEditComment($row['parent'], $row['source'])) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->isAllowedToEditComment($row['parent'], $row['source'])) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -582,7 +560,7 @@ class tl_comments extends Backend
 	 */
 	public function deleteComment($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || $this->isAllowedToEditComment($row['parent'], $row['source'])) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->isAllowedToEditComment($row['parent'], $row['source'])) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -619,10 +597,10 @@ class tl_comments extends Backend
 
 		if (!$this->User->isAdmin && !$this->isAllowedToEditComment($row['parent'], $row['source']))
 		{
-			return $this->generateImage($icon) . ' ';
+			return Image::getHtml($icon) . ' ';
 		}
 
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 
@@ -645,7 +623,8 @@ class tl_comments extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->createInitialVersion('tl_comments', $intId);
+		$objVersions = new Versions('tl_comments', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_comments']['fields']['published']['save_callback']))
@@ -661,6 +640,7 @@ class tl_comments extends Backend
 		$this->Database->prepare("UPDATE tl_comments SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_comments', $intId);
+		$objVersions->create();
+		$this->log('A new version of record "tl_comments.id='.$intId.'" has been created'.$this->getParentEntries('tl_comments', $intId), 'tl_comments toggleVisibility()', TL_GENERAL);
 	}
 }

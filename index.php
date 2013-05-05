@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -36,12 +36,6 @@ class Index extends Frontend
 	{
 		// Try to read from cache
 		$this->outputFromCache();
-
-		// Redirect to the install tool
-		if (!Config::getInstance()->isComplete())
-		{
-			$this->redirect('contao/install.php');
-		}
 
 		// Load the user object before calling the parent constructor
 		$this->import('FrontendUser', 'User');
@@ -96,7 +90,7 @@ class Index extends Frontend
 			// Order by domain and language
 			while ($objPage->next())
 			{
-				$objCurrentPage = $this->getPageDetails($objPage->current());
+				$objCurrentPage = $objPage->current()->loadDetails();
 
 				$domain = $objCurrentPage->domain ?: '*';
 				$arrPages[$domain][$objCurrentPage->rootLanguage] = $objCurrentPage;
@@ -146,6 +140,12 @@ class Index extends Frontend
 			$objHandler->generate($pageId);
 		}
 
+		// Make sure $objPage is a Model
+		if ($objPage instanceof Model\Collection)
+		{
+			$objPage = $objPage->current();
+		}
+
 		// Load a website root page object (will redirect to the first active regular page)
 		if ($objPage->type == 'root')
 		{
@@ -156,7 +156,7 @@ class Index extends Frontend
 		// Inherit the settings from the parent pages if it has not been done yet
 		if (!is_bool($objPage->protected))
 		{
-			$objPage = $this->getPageDetails($objPage);
+			$objPage->loadDetails();
 		}
 
 		// Use the global date format if none is set
@@ -176,11 +176,11 @@ class Index extends Frontend
 		// Set the admin e-mail address
 		if ($objPage->adminEmail != '')
 		{
-			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($objPage->adminEmail);
+			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = String::splitFriendlyEmail($objPage->adminEmail);
 		}
 		else
 		{
-			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
+			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = String::splitFriendlyEmail($GLOBALS['TL_CONFIG']['adminEmail']);
 		}
 
 		// Exit if the root page has not been published (see #2425) and
@@ -247,9 +247,13 @@ class Index extends Frontend
 				break;
 
 			default:
-				$objHandler->generate($objPage);
+				$objHandler->generate($objPage, true);
 				break;
 		}
+
+		// If we get here, something went wrong (see #4277)
+		$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+		$objHandler->generate($pageId);
 
 		// Stop the script (see #4565)
 		exit;
@@ -357,7 +361,7 @@ class Index extends Frontend
 		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != Environment::get('requestUri'))
 		{
 			$session['referer']['last'] = $session['referer']['current'];
-			$session['referer']['current'] = Environment::get('requestUri');
+			$session['referer']['current'] = substr(Environment::get('requestUri'), strlen(TL_PATH) + 1);
 		}
 
 		// Store the session data
@@ -365,7 +369,7 @@ class Index extends Frontend
 
 		// Load the default language file (see #2644)
 		$this->import('Config');
-		$this->loadLanguageFile('default');
+		System::loadLanguageFile('default');
 
 		// Replace the insert tags and then re-replace the request_token
 		// tag in case a form element has been loaded via insert tag

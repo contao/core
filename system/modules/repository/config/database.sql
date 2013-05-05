@@ -4,7 +4,7 @@
 -- For license see accompaning file LICENSE.txt
 --
 -- NOTE: this file was edited with tabs set to 4.
--- 
+--
 -- **********************************************************
 -- *      ! ! !   I M P O R T A N T  N O T E   ! ! !        *
 -- *                                                        *
@@ -15,11 +15,11 @@
 -- * - Enter the installation password and click "Login"    *
 -- * - Scroll down and click button "Update Database"       *
 -- **********************************************************
-  
+
 -- --------------------------------------------------------
--- 
+--
 -- Table `tl_repository_installs`
--- 
+--
 CREATE TABLE `tl_repository_installs` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `tstamp` int(10) unsigned NOT NULL default '0',
@@ -38,9 +38,9 @@ CREATE TABLE `tl_repository_installs` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
--- 
+--
 -- Table `tl_repository_instfiles`
--- 
+--
 CREATE TABLE `tl_repository_instfiles` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `pid` int(10) unsigned NOT NULL default '0',

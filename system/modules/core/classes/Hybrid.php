@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -47,6 +47,12 @@ abstract class Hybrid extends \Frontend
 	protected $strTemplate;
 
 	/**
+	 * Column
+	 * @var string
+	 */
+	protected $strColumn;
+
+	/**
 	 * Model
 	 * @var Model
 	 */
@@ -74,8 +80,9 @@ abstract class Hybrid extends \Frontend
 	/**
 	 * Initialize the object
 	 * @param object
+	 * @param string
 	 */
-	public function __construct($objElement)
+	public function __construct($objElement, $strColumn='main')
 	{
 		parent::__construct();
 
@@ -94,7 +101,7 @@ abstract class Hybrid extends \Frontend
 			return;
 		}
 
-		$strModelClass = $this->getModelClassFromTable($this->strTable);
+		$strModelClass = \Model::getClassFromTable($this->strTable);
 
 		// Load the model
 		if (class_exists($strModelClass))
@@ -132,6 +139,7 @@ abstract class Hybrid extends \Frontend
 		$arrHeadline = deserialize($objElement->headline);
 		$this->headline = is_array($arrHeadline) ? $arrHeadline['value'] : $arrHeadline;
 		$this->hl = is_array($arrHeadline) ? $arrHeadline['unit'] : 'h1';
+		$this->strColumn = $strColumn;
 	}
 
 
@@ -212,6 +220,8 @@ abstract class Hybrid extends \Frontend
 		$this->Template->style = !empty($this->arrStyle) ? implode(' ', $this->arrStyle) : '';
 		$this->Template->cssID = ($this->cssID[0] != '') ? ' id="' . $this->cssID[0] . '"' : '';
 		$this->Template->class = trim($this->typePrefix . $this->strKey . ' ' . $this->cssID[1]);
+
+		$this->Template->inColumn = $this->strColumn;
 
 		if ($this->Template->headline == '')
 		{

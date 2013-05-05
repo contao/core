@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -90,7 +90,7 @@ abstract class Frontend extends \Controller
 		}
 
 		// Remove the URL suffix if not just a language root (e.g. en/) is requested
-		if ($strRequest != '' && (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'] || !preg_match('@^[a-z]{2}/$@', $strRequest)))
+		if ($strRequest != '' && (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'] || !preg_match('@^[a-z]{2}(\-[A-Z]{2})?/$@', $strRequest)))
 		{
 			$intSuffixLength = strlen($GLOBALS['TL_CONFIG']['urlSuffix']);
 
@@ -112,17 +112,17 @@ abstract class Frontend extends \Controller
 			$arrMatches = array();
 
 			// Use the matches instead of substr() (thanks to Mario Müller)
-			if (preg_match('@^([a-z]{2})/(.*)$@', $strRequest, $arrMatches))
+			if (preg_match('@^([a-z]{2}(\-[A-Z]{2})?)/(.*)$@', $strRequest, $arrMatches))
 			{
 				\Input::setGet('language', $arrMatches[1]);
 
 				// Trigger the root page if only the language was given
-				if ($arrMatches[2] == '')
+				if ($arrMatches[3] == '')
 				{
 					return null;
 				}
 
-				$strRequest = $arrMatches[2];
+				$strRequest = $arrMatches[3];
 			}
 			else
 			{
@@ -155,7 +155,7 @@ abstract class Frontend extends \Controller
 				// Order by domain and language
 				while ($objPages->next())
 				{
-					$objPage = static::getPageDetails($objPages->current());
+					$objPage = $objPages->current()->loadDetails();
 
 					$domain = $objPage->domain ?: '*';
 					$arrPages[$domain][$objPage->rootLanguage][] = $objPage;
@@ -251,12 +251,18 @@ abstract class Frontend extends \Controller
 		$arrFragments = array_map('urldecode', $arrFragments);
 
 		// Add the fragments to the $_GET array
-		for ($i=1; $i<count($arrFragments); $i+=2)
+		for ($i=1, $c=count($arrFragments); $i<$c; $i+=2)
 		{
 			// Skip key value pairs if the key is empty (see #4702)
 			if ($arrFragments[$i] == '')
 			{
 				continue;
+			}
+
+			// Return false if there is a duplicate parameter (duplicate content) (see #4277)
+			if (isset($_GET[$arrFragments[$i]]))
+			{
+				return false;
 			}
 
 			// Return false if the request contains an auto_item keyword (duplicate content) (see #4012)
@@ -265,7 +271,7 @@ abstract class Frontend extends \Controller
 				return false;
 			}
 
-			\Input::setGet($arrFragments[$i], $arrFragments[$i+1]);
+			\Input::setGet($arrFragments[$i], (string) $arrFragments[$i+1], true);
 		}
 
 		return $arrFragments[0] ?: null;
@@ -357,7 +363,7 @@ abstract class Frontend extends \Controller
 		// Clean the $_GET values (thanks to thyon)
 		foreach (array_keys($arrGet) as $key)
 		{
-			$arrGet[$key] = \Input::get($key, true);
+			$arrGet[$key] = \Input::get($key, true, true);
 		}
 
 		$arrFragments = preg_split('/&(amp;)?/i', $strRequest);
@@ -450,7 +456,7 @@ abstract class Frontend extends \Controller
 
 		if (is_array($intId))
 		{
-			if ($intId['id'] == '' || $intId['id'] == $objPage->id)
+			if ($intId['id'] == '' || ($intId['id'] == $objPage->id && $strParams === null && $strForceLang === null))
 			{
 				$this->reload();
 			}
@@ -538,6 +544,9 @@ abstract class Frontend extends \Controller
 	protected function getMetaData($strData, $strLanguage)
 	{
 		$arrData = deserialize($strData);
+
+		// Convert the language to a locale (see #5678)
+		$strLanguage = str_replace('-', '_', $strLanguage);
 
 		if (!is_array($arrData) || !isset($arrData[$strLanguage]))
 		{

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Devtools
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -40,7 +40,7 @@ class ModuleAutoload extends \BackendModule
 	 */
 	protected function compile()
 	{
-		$this->loadLanguageFile('tl_autoload');
+		\System::loadLanguageFile('tl_autoload');
 
 		// Process the request
 		if (\Input::post('FORM_SUBMIT') == 'tl_autoload')
@@ -128,7 +128,7 @@ class ModuleAutoload extends \BackendModule
 			// Create the autoload.ini file if it does not yet exist
 			if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini'))
 			{
-				$objIni = new \File('system/modules/devtools/config/autoload.ini', true);
+				$objIni = new \File('system/modules/devtools/templates/dev_ini.html5', true);
 				$objIni->copyTo('system/modules/' . $strModule . '/config/autoload.ini');
 			}
 
@@ -136,13 +136,16 @@ class ModuleAutoload extends \BackendModule
 
 			// Recursively scan all subfolders
 			$objFiles = new \RecursiveIteratorIterator(
-				new \RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule, \FilesystemIterator::UNIX_PATHS)
+				new \RecursiveDirectoryIterator(
+					TL_ROOT . '/system/modules/' . $strModule,
+					\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
+				)
 			);
 
 			// Get all PHP files
 			foreach ($objFiles as $objFile)
 			{
-				if ($objFile->isFile() && pathinfo($objFile->getFilename(), PATHINFO_EXTENSION) == 'php')
+				if (pathinfo($objFile->getFilename(), PATHINFO_EXTENSION) == 'php')
 				{
 					$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
 
@@ -154,81 +157,85 @@ class ModuleAutoload extends \BackendModule
 			}
 
 			// Scan for classes
-			if ($arrDefaultConfig['register_namespaces'] || $arrDefaultConfig['register_classes'])
+			foreach ($arrFiles as $strFile)
 			{
-				foreach ($arrFiles as $strFile)
+				$arrConfig = $arrDefaultConfig;
+
+				// Search for a path configuration (see #4776)
+				foreach ($arrDefaultConfig as $strPattern=>$arrPathConfig)
 				{
-					$strBuffer = '';
-					$arrMatches = array();
-
-					// Store the file size for fread()
-					$size = filesize(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile);
-					$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
-
-					// Read until a class or interface definition has been found
-					while (!preg_match('/(class|interface) ' . preg_quote(basename($strFile, '.php'), '/') . '/', $strBuffer, $arrMatches) && $size > 0 && !feof($fh))
+					// Merge the path configuration with the global configuration
+					if (is_array($arrPathConfig) && fnmatch($strPattern, $strFile))
 					{
-						$length = min(512, $size);
-						$strBuffer .= fread($fh, $length);
-						$size -= $length; // see #4876
+						$arrConfig = array_merge($arrDefaultConfig, $arrPathConfig);
+						break;
 					}
+				}
 
-					fclose($fh);
+				// Continue if neither namespaces nor classes shall be registered
+				if (!$arrConfig['register_namespaces'] && !$arrConfig['register_classes'])
+				{
+					continue;
+				}
 
-					// The file does not contain a class or interface
-					if (empty($arrMatches))
+				$strBuffer = '';
+				$arrMatches = array();
+
+				// Store the file size for fread()
+				$size = filesize(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile);
+				$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
+
+				// Read until a class or interface definition has been found
+				while (!preg_match('/(class|interface) ' . preg_quote(basename($strFile, '.php'), '/') . '/', $strBuffer, $arrMatches) && $size > 0 && !feof($fh))
+				{
+					$length = min(512, $size);
+					$strBuffer .= fread($fh, $length);
+					$size -= $length; // see #4876
+				}
+
+				fclose($fh);
+
+				// The file does not contain a class or interface
+				if (empty($arrMatches))
+				{
+					continue;
+				}
+
+				$strNamespace = preg_replace('/^.*namespace ([^; ]+);.*$/s', '$1', $strBuffer);
+
+				// No namespace declaration found
+				if ($strNamespace == $strBuffer)
+				{
+					$strNamespace = '';
+				}
+
+				unset($strBuffer);
+
+				// Register the namespace
+				if ($strNamespace != '')
+				{
+					if ($arrConfig['register_namespaces'] && $strNamespace != 'Contao')
 					{
-						continue;
-					}
-
-					$strNamespace = preg_replace('/^.*namespace ([^; ]+);.*$/s', '$1', $strBuffer);
-
-					// No namespace declaration found
-					if ($strNamespace == $strBuffer)
-					{
-						$strNamespace = '';
-					}
-
-					unset($strBuffer);
-					$arrConfig = $arrDefaultConfig;
-
-					// Search for a path configuration
-					foreach ($arrDefaultConfig as $strPattern=>$arrPathConfig)
-					{
-						// Merge the path configuration with the global configuration
-						if (is_array($arrPathConfig) && fnmatch($strPattern, $strFile))
+						// Register only the first chunk as namespace
+						if (strpos($strNamespace, '\\') !== false)
 						{
-							$arrConfig = array_merge($arrDefaultConfig, $arrPathConfig);
-							break;
+							$arrNamespaces[] = substr($strNamespace, 0, strpos($strNamespace, '\\'));
+						}
+						else
+						{
+							$arrNamespaces[] = $strNamespace;
 						}
 					}
 
-					// Register the namespace
-					if ($strNamespace != '')
-					{
-						if ($arrConfig['register_namespaces'] && $strNamespace != 'Contao')
-						{
-							// Register only the first chunk as namespace
-							if (strpos($strNamespace, '\\') !== false)
-							{
-								$arrNamespaces[] = substr($strNamespace, 0, strpos($strNamespace, '\\'));
-							}
-							else
-							{
-								$arrNamespaces[] = $strNamespace;
-							}
-						}
+					$strNamespace .=  '\\';
+				}
 
-						$strNamespace .=  '\\';
-					}
-
-					// Register the class
-					if ($arrConfig['register_classes'])
-					{
-						$strKey = $strNamespace . basename($strFile, '.php');
-						$arrClassLoader[$strKey] = 'system/modules/' . $strModule . '/' . $strFile;
-						$intClassWidth = max(strlen($strKey), $intClassWidth);
-					}
+				// Register the class
+				if ($arrConfig['register_classes'])
+				{
+					$strKey = $strNamespace . basename($strFile, '.php');
+					$arrClassLoader[$strKey] = 'system/modules/' . $strModule . '/' . $strFile;
+					$intClassWidth = max(strlen($strKey), $intClassWidth);
 				}
 			}
 
@@ -236,19 +243,44 @@ class ModuleAutoload extends \BackendModule
 			$arrTplLoader = array();
 
 			// Scan for templates
-			if ($arrDefaultConfig['register_templates'])
+			if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
 			{
-				if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
-				{
-					foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates') as $strFile)
-					{
-						if (strrchr($strFile, '.') != '.html5' && strrchr($strFile, '.') != '.xhtml')
-						{
-							continue;
-						}
+				$objFiles = new \RecursiveIteratorIterator(
+					new \RecursiveDirectoryIterator(
+						TL_ROOT . '/system/modules/' . $strModule . '/templates',
+						\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
+					)
+				);
 
-						$strKey = basename($strFile, strrchr($strFile, '.'));
-						$arrTplLoader[$strKey] = 'system/modules/' . $strModule . '/templates';
+				foreach ($objFiles as $objFile)
+				{
+					$arrConfig = $arrDefaultConfig;
+					$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
+
+					// Search for a path configuration (see #4776)
+					foreach ($arrDefaultConfig as $strPattern=>$arrPathConfig)
+					{
+						// Merge the path configuration with the global configuration
+						if (is_array($arrPathConfig) && fnmatch($strPattern, $strRelpath))
+						{
+							$arrConfig = array_merge($arrDefaultConfig, $arrPathConfig);
+							break;
+						}
+					}
+
+					// Continue if templates shall not be registered
+					if (!$arrConfig['register_templates'])
+					{
+						continue;
+					}
+
+					$strExtension = pathinfo($objFile->getFilename(), PATHINFO_EXTENSION);
+
+					if ($strExtension == 'html5' || $strExtension == 'xhtml')
+					{
+						$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
+						$strKey = basename($strRelpath, strrchr($strRelpath, '.'));
+						$arrTplLoader[$strKey] = dirname($strRelpath);
 						$intTplWidth = max(strlen($strKey), $intTplWidth);
 					}
 				}
@@ -269,9 +301,9 @@ class ModuleAutoload extends \BackendModule
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-$intYear Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-$intYear Leo Feyer
+ *
  * @package $strPackage
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -397,15 +429,35 @@ EOT
 		{
 			$arrFiles = array();
 
+			// Default configuration
+			$arrDefaultConfig = array
+			(
+				'register_namespaces' => true,
+				'register_classes'    => true,
+				'register_templates'  => true,
+			);
+
+			// Create the autoload.ini file if it does not yet exist
+			if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini'))
+			{
+				$objIni = new \File('system/modules/devtools/templates/dev_ini.html5', true);
+				$objIni->copyTo('system/modules/' . $strModule . '/config/autoload.ini');
+			}
+
+			$arrDefaultConfig = array_merge($arrDefaultConfig, parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini', true));
+
 			// Recursively scan all subfolders
 			$objFiles = new \RecursiveIteratorIterator(
-				new \RecursiveDirectoryIterator(TL_ROOT . '/system/modules/' . $strModule, \FilesystemIterator::UNIX_PATHS)
+				new \RecursiveDirectoryIterator(
+					TL_ROOT . '/system/modules/' . $strModule,
+					\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
+				)
 			);
 
 			// Get all PHP files
 			foreach ($objFiles as $objFile)
 			{
-				if ($objFile->isFile() && pathinfo($objFile->getFilename(), PATHINFO_EXTENSION) == 'php')
+				if (pathinfo($objFile->getFilename(), PATHINFO_EXTENSION) == 'php')
 				{
 					$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
 
@@ -419,6 +471,25 @@ EOT
 			// Scan for classes
 			foreach ($arrFiles as $strFile)
 			{
+				$arrConfig = $arrDefaultConfig;
+
+				// Search for a path configuration (see #4776)
+				foreach ($arrDefaultConfig as $strPattern=>$arrPathConfig)
+				{
+					// Merge the path configuration with the global configuration
+					if (is_array($arrPathConfig) && fnmatch($strPattern, $strFile))
+					{
+						$arrConfig = array_merge($arrDefaultConfig, $arrPathConfig);
+						break;
+					}
+				}
+
+				// Continue if neither namespaces nor classes shall be registered
+				if (!$arrConfig['register_namespaces'] && !$arrConfig['register_classes'])
+				{
+					continue;
+				}
+
 				$strBuffer = '';
 				$arrMatches = array();
 
@@ -472,9 +543,9 @@ EOT
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-$intYear Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-$intYear Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -501,7 +572,7 @@ EOT
 
 				foreach ($arrClasses as $arrClass)
 				{
-					$objFile->append("\t" . ($arrClass['abstract'] ? 'abstract ' : '') . $arrClass['type'] . ' ' . $arrClass['class'] . ' extends ' . $arrClass['namespace'] . '\\' . ($strNamespace ? $strNamespace . '\\' : '') . $arrClass['class'] . ' {}');
+					$objFile->append("\t" . ($arrClass['abstract'] ? 'abstract ' : '') . $arrClass['type'] . ' ' . $arrClass['class'] . ' extends \\' . $arrClass['namespace'] . '\\' . ($strNamespace ? $strNamespace . '\\' : '') . $arrClass['class'] . ' {}');
 				}
 
 				$objFile->append('}');

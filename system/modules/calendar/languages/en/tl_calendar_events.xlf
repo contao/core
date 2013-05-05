@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_calendar_events.php" source-language="en">
+    <body>
+      <trans-unit id="tl_calendar_events.title.0">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.title.1">
+        <source>Please enter the event title.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.alias.0">
+        <source>Event alias</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.alias.1">
+        <source>The event alias is a unique reference to the event which can be called instead of its numeric ID.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.author.0">
+        <source>Author</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.author.1">
+        <source>Here you can change the author of the event.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addTime.0">
+        <source>Add time</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addTime.1">
+        <source>Add a start and end time to the event.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startTime.0">
+        <source>Start time</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startTime.1">
+        <source>Please enter the start time according to the global time format.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endTime.0">
+        <source>End time</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endTime.1">
+        <source>Use the same value for start and end time to create an open-ended event.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startDate.0">
+        <source>Start date</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startDate.1">
+        <source>Please enter the start date according to the global date format.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endDate.0">
+        <source>End date</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endDate.1">
+        <source>Leave blank to create a single day event.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.location.0">
+        <source>Event location</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.location.1">
+        <source>Here you can enter the event location.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.teaser.0">
+        <source>Event teaser</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.teaser.1">
+        <source>The event teaser can be shown in an event list instead of the full article. A "read more …" link will be added automatically.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.details.0">
+        <source>Event text</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.details.1">
+        <source>Here you can enter the event text.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addImage.0">
+        <source>Add an image</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addImage.1">
+        <source>Add an image to the event.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurring.0">
+        <source>Repeat event</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurring.1">
+        <source>Create a recurring event.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.repeatEach.0">
+        <source>Interval</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.repeatEach.1">
+        <source>Here you can set the recurrence interval.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurrences.0">
+        <source>Recurrences</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurrences.1">
+        <source>Set to 0 for unlimited recurrences.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.repeatEnd">
+        <source>End of recurring event</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addEnclosure.0">
+        <source>Add enclosures</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addEnclosure.1">
+        <source>Add one or more downloadable files to the event.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.enclosure.0">
+        <source>Enclosures</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.enclosure.1">
+        <source>Please choose the files you want to attach.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.source.0">
+        <source>Redirect target</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.source.1">
+        <source>Here you can override the default redirect target.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.default.0">
+        <source>Use default</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.default.1">
+        <source>By clicking the "read more …" button, visitors will be redirected to the default page of the calendar.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.internal.0">
+        <source>Page</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.internal.1">
+        <source>By clicking the "read more …" button, visitors will be redirected to an internal page.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.article.0">
+        <source>Article</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.article.1">
+        <source>By clicking the "read more …" button, visitors will be redirected to an article.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.external.0">
+        <source>External URL</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.external.1">
+        <source>By clicking the "read more …" button, visitors will be redirected to an external website.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.jumpTo.0">
+        <source>Redirect page</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected when clicking the event.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.articleId.0">
+        <source>Article</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.articleId.1">
+        <source>Please choose the article to which visitors will be redirected when clicking the event.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cssClass.0">
+        <source>CSS class</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cssClass.1">
+        <source>Here you can enter one or more classes.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.noComments.0">
+        <source>Disable comments</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.noComments.1">
+        <source>Do not allow comments for this particular event.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.published.0">
+        <source>Publish event</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.published.1">
+        <source>Make the event publicly visible on the website.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.start.0">
+        <source>Show from</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.start.1">
+        <source>Do not show the event on the website before this day.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.stop.0">
+        <source>Show until</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.stop.1">
+        <source>Do not show the event on the website on and after this day.</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.tstamp.0">
+        <source>Revision date</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.tstamp.1">
+        <source>Date and time of the latest revision</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.title_legend">
+        <source>Title and author</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.date_legend">
+        <source>Date and time</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.details_legend">
+        <source>Event details</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.text_legend">
+        <source>Event text</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.image_legend">
+        <source>Image settings</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurring_legend">
+        <source>Recurrence settings</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.enclosure_legend">
+        <source>Enclosures</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.source_legend">
+        <source>Redirect target</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.expert_legend">
+        <source>Expert settings</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.publish_legend">
+        <source>Publish settings</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.days">
+        <source>day(s)</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.weeks">
+        <source>week(s)</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.months">
+        <source>month(s)</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.years">
+        <source>year(s)</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.new.0">
+        <source>New event</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.new.1">
+        <source>Create a new event</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.show.0">
+        <source>Event details</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.show.1">
+        <source>Show the details of event ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.edit.0">
+        <source>Edit event</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.edit.1">
+        <source>Edit event ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.copy.0">
+        <source>Duplicate event</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.copy.1">
+        <source>Duplicate event ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cut.0">
+        <source>Move event</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cut.1">
+        <source>Move event ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.delete.0">
+        <source>Delete event</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.delete.1">
+        <source>Delete event ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.toggle.0">
+        <source>Publish/unpublish event</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.toggle.1">
+        <source>Publish/unpublish event ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.editheader.0">
+        <source>Edit calendar</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.editheader.1">
+        <source>Edit the calendar settings</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.editmeta.0">
+        <source>Edit event settings</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.editmeta.1">
+        <source>Edit the event settings</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.pasteafter.0">
+        <source>Paste into this calendar</source>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.pasteafter.1">
+        <source>Paste after event ID %s</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

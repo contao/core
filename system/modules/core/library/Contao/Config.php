@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,10 +15,10 @@ namespace Contao;
 
 /**
  * Loads and writes the local configuration file
- * 
+ *
  * Custom settings above or below the `### INSTALL SCRIPT ###` markers will be
  * preserved.
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -101,7 +101,7 @@ class Config
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * 
+	 *
 	 * @return \Config The object instance
 	 */
 	public static function getInstance()
@@ -133,18 +133,28 @@ class Config
 			include TL_ROOT . '/system/config/localconfig.php';
 		}
 
-		// Include the module configuration files
-		foreach ($this->getActiveModules() as $strModule)
-		{
-			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/config/config.php';
+		$strCacheFile = 'system/cache/config/config.php';
 
-			if (file_exists($strFile))
+		// Try to load from cache
+		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
+		{
+			include TL_ROOT . '/' . $strCacheFile;
+		}
+		else
+		{
+			// Get the module configuration files
+			foreach ($this->getActiveModules() as $strModule)
 			{
-				include $strFile;
+				$strFile = TL_ROOT . '/system/modules/' . $strModule . '/config/config.php';
+
+				if (file_exists($strFile))
+				{
+					include $strFile;
+				}
 			}
 		}
 
-		// Include the local configuration file again
+		// // Include the local configuration file again
 		if ($this->blnHasLcf)
 		{
 			include TL_ROOT . '/system/config/localconfig.php';
@@ -259,6 +269,12 @@ class Config
 		// Then move the file to its final destination
 		$this->Files->rename('system/tmp/' . $strTemp, 'system/config/localconfig.php');
 
+		// Reset the Zend OPcache (unfortunately no API to delete just a single file)
+		if (function_exists('opcache_reset'))
+		{
+			opcache_reset();
+		}
+
 		// Reset the Zend Optimizer+ cache (unfortunately no API to delete just a single file)
 		if (function_exists('accelerator_reset'))
 		{
@@ -293,7 +309,7 @@ class Config
 
 	/**
 	 * Return true if the installation is completed
-	 * 
+	 *
 	 * @return boolean True if the local configuration file exists
 	 */
 	public function isComplete()
@@ -303,58 +319,19 @@ class Config
 
 
 	/**
-	 * Return all active modules (starting with "core") as array
-	 * 
-	 * @param boolean $blnNoCache Override the cache
-	 * 
+	 * Return all active modules as array
+	 *
 	 * @return array An array of active modules
 	 */
-	public function getActiveModules($blnNoCache=false)
+	public function getActiveModules()
 	{
-		if (!$blnNoCache && isset($this->arrCache['activeModules']))
-		{
-			return (array) $this->arrCache['activeModules']; // (array) = PHP 5.1.2 fix
-		}
-
-		$arrActiveModules    = array();
-		$arrCoreModules      = explode(',', TL_CORE_MODULES);
-		$arrLegacyModules    = explode(',', TL_LEGACY_MODULES);
-		$arrExtensionModules = scan(TL_ROOT . '/system/modules');
-
-		// Load the core modules first
-		foreach ($arrCoreModules as $strModule)
-		{
-			if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
-			{
-				$arrActiveModules[] = $strModule;
-			}
-		}
-
-		// Then load the extension modules
-		if (!$GLOBALS['TL_CONFIG']['coreOnlyMode'])
-		{
-			foreach ($arrExtensionModules as $strModule)
-			{
-				if (in_array($strModule, $arrLegacyModules))
-				{
-					continue; // see #4907
-				}
-
-				if (strncmp($strModule, '.', 1) !== 0 && !in_array($strModule, $arrCoreModules) && is_dir(TL_ROOT . '/system/modules/' . $strModule) && !file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
-				{
-					$arrActiveModules[] = $strModule;
-				}
-			}
-		}
-
-		$this->arrCache['activeModules'] = $arrActiveModules;
-		return $arrActiveModules;
+		return \ModuleLoader::getActive();
 	}
 
 
 	/**
 	 * Add a configuration variable to the local configuration file
-	 * 
+	 *
 	 * @param string $strKey   The full variable name
 	 * @param mixed  $varValue The configuration value
 	 */
@@ -367,7 +344,7 @@ class Config
 
 	/**
 	 * Alias for Config::add()
-	 * 
+	 *
 	 * @param string $strKey   The full variable name
 	 * @param mixed  $varValue The configuration value
 	 */
@@ -379,12 +356,12 @@ class Config
 
 	/**
 	 * Return a configuration value
-	 * 
+	 *
 	 * @param string $strKey The short key (e.g. "displayErrors")
-	 * 
+	 *
 	 * @return mixed|null The configuration value
 	 */
-	public function get($strKey)
+	public static function get($strKey)
 	{
 		if (isset($GLOBALS['TL_CONFIG'][$strKey]))
 		{
@@ -397,7 +374,7 @@ class Config
 
 	/**
 	 * Remove a configuration variable
-	 * 
+	 *
 	 * @param string $strKey The full variable name
 	 */
 	public function delete($strKey)
@@ -409,9 +386,9 @@ class Config
 
 	/**
 	 * Escape a value depending on its type
-	 * 
+	 *
 	 * @param mixed $varValue The value
-	 * 
+	 *
 	 * @return mixed The escaped value
 	 */
 	protected function escape($varValue)

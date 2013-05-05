@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -19,7 +19,7 @@ namespace Contao;
 
 /**
  * Reads and writes pages
- * 
+ *
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -33,13 +33,45 @@ class PageModel extends \Model
 	 */
 	protected static $strTable = 'tl_page';
 
+	/**
+	 * Details loaded
+	 * @var boolean
+	 */
+	protected $blnDetailsLoaded = false;
+
+
+	/**
+	 * Find multiple pages by their IDs
+	 *
+	 * @param array $arrIds     An array of pages IDs
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model\Collection|null A collection of models or null if there are no pages
+	 */
+	public static function findMultipleByIds($arrIds, array $arrOptions=array())
+	{
+		if (!is_array($arrIds) || empty($arrIds))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+		}
+
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, $arrOptions);
+	}
+
 
 	/**
 	 * Find a published page by its ID
-	 * 
+	 *
 	 * @param integer $intId      The page ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no published page
 	 */
 	public static function findPublishedById($intId, array $arrOptions=array())
@@ -59,11 +91,11 @@ class PageModel extends \Model
 
 	/**
 	 * Find the first published root page by its host name and language
-	 * 
+	 *
 	 * @param string $strHost     The host name
 	 * @param mixed  $varLanguage An ISO language code or an array of ISO language codes
 	 * @param array  $arrOptions  An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no matching root page
 	 */
 	public static function findFirstPublishedRootByHostAndLanguage($strHost, $varLanguage, array $arrOptions=array())
@@ -120,10 +152,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find the first published page by its parent ID
-	 * 
+	 *
 	 * @param integer $intPid     The parent page's ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no published page
 	 */
 	public static function findFirstPublishedByPid($intPid, array $arrOptions=array())
@@ -148,10 +180,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find the first published regular page by its parent ID
-	 * 
+	 *
 	 * @param integer $intPid The parent page's ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no published regular page
 	 */
 	public static function findFirstPublishedRegularByPid($intPid, array $arrOptions=array())
@@ -176,10 +208,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find an error 403 page by its parent ID
-	 * 
+	 *
 	 * @param integer $intPid     The parent page's ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no 403 page
 	 */
 	public static function find403ByPid($intPid, array $arrOptions=array())
@@ -204,10 +236,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find an error 404 page by its parent ID
-	 * 
+	 *
 	 * @param integer $intPid     The parent page's ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model|null The model or null if there is no 404 page
 	 */
 	public static function find404ByPid($intPid, array $arrOptions=array())
@@ -232,10 +264,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find pages matching a list of possible alias names
-	 * 
+	 *
 	 * @param array $arrAliases An array of possible alias names
 	 * @param array $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model_Collection|null A collection of Models or null if there is no matching pages
 	 */
 	public static function findByAliases($arrAliases, array $arrOptions=array())
@@ -277,10 +309,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find published pages by their ID or aliases
-	 * 
+	 *
 	 * @param mixed $varId      The numeric ID or the alias name
 	 * @param array $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedByIdOrAlias($varId, array $arrOptions=array())
@@ -301,11 +333,11 @@ class PageModel extends \Model
 
 	/**
 	 * Find all published subpages by their parent ID and exclude pages only visible for guests
-	 * 
+	 *
 	 * @param integer $intPid        The parent page's ID
 	 * @param boolean $blnShowHidden If true, hidden pages will be included
 	 * @param boolean $blnIsSitemap  If true, the sitemap settings apply
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedSubpagesWithoutGuestsByPid($intPid, $blnShowHidden=false, $blnIsSitemap=false)
@@ -326,10 +358,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find all published regular pages by their IDs and exclude pages only visible for guests
-	 * 
+	 *
 	 * @param integer $arrIds     An array of page IDs
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedRegularWithoutGuestsByIds($arrIds, array $arrOptions=array())
@@ -364,10 +396,10 @@ class PageModel extends \Model
 
 	/**
 	 * Find all published regular pages by their parent IDs and exclude pages only visible for guests
-	 * 
+	 *
 	 * @param integer $intPid     The parent page's ID
 	 * @param array   $arrOptions An optional options array
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedRegularWithoutGuestsByPid($intPid, array $arrOptions=array())
@@ -397,9 +429,9 @@ class PageModel extends \Model
 
 	/**
 	 * Find the parent pages of a page
-	 * 
+	 *
 	 * @param integer $intId The page's ID
-	 * 
+	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no parent pages
 	 */
 	public static function findParentsById($intId)
@@ -413,5 +445,180 @@ class PageModel extends \Model
 		}
 
 		return new \Model\Collection($objPages, 'tl_page');
+	}
+
+
+	/**
+	 * Find a page by its ID and return it with the inherited details
+	 *
+	 * @param integer $intId The page's ID
+	 *
+	 * @return \Model|null The model or null if there is no matching page
+	 */
+	public static function findWithDetails($intId)
+	{
+		$objPage = static::findByPk($intId);
+
+		if ($objPage === null)
+		{
+			return null;
+		}
+
+		return $objPage->loadDetails();
+	}
+
+
+	/**
+	 * Get the details of a page including inherited parameters
+	 *
+	 * @return \Model The page model
+	 */
+	public function loadDetails()
+	{
+		// Loaded already
+		if ($this->blnDetailsLoaded)
+		{
+			return $this;
+		}
+
+		// Set some default values
+		$this->protected = (boolean) $this->protected;
+		$this->groups = $this->protected ? deserialize($this->groups) : false;
+		$this->layout = $this->includeLayout ? $this->layout : false;
+		$this->mobileLayout = $this->includeLayout ? $this->mobileLayout : false;
+		$this->cache = $this->includeCache ? $this->cache : false;
+
+		$pid = $this->pid;
+		$type = $this->type;
+		$alias = $this->alias;
+		$name = $this->title;
+		$title = $this->pageTitle ?: $this->title;
+		$folderUrl = '';
+		$palias = '';
+		$pname = '';
+		$ptitle = '';
+		$trail = array($this->id, $pid);
+
+		// Inherit the settings
+		if ($this->type == 'root')
+		{
+			$objParentPage = $this; // see #4610
+		}
+		else
+		{
+			// Load all parent pages
+			$objParentPage = \PageModel::findParentsById($pid);
+
+			if ($objParentPage !== null)
+			{
+				while ($objParentPage->next() && $pid > 0 && $type != 'root')
+				{
+					$pid = $objParentPage->pid;
+					$type = $objParentPage->type;
+
+					// Parent title
+					if ($ptitle == '')
+					{
+						$palias = $objParentPage->alias;
+						$pname = $objParentPage->title;
+						$ptitle = $objParentPage->pageTitle ?: $objParentPage->title;
+					}
+
+					// Page title
+					if ($type != 'root')
+					{
+						$alias = $objParentPage->alias;
+						$name = $objParentPage->title;
+						$title = $objParentPage->pageTitle ?: $objParentPage->title;
+						$folderUrl = basename($alias) . '/' . $folderUrl;
+						$trail[] = $objParentPage->pid;
+					}
+
+					// Cache
+					if ($objParentPage->includeCache && $this->cache === false)
+					{
+						$this->cache = $objParentPage->cache;
+					}
+
+					// Layout
+					if ($objParentPage->includeLayout)
+					{
+						if ($this->layout === false)
+						{
+							$this->layout = $objParentPage->layout;
+						}
+						if ($this->mobileLayout === false)
+						{
+							$this->mobileLayout = $objParentPage->mobileLayout;
+						}
+					}
+
+					// Protection
+					if ($objParentPage->protected && $this->protected === false)
+					{
+						$this->protected = true;
+						$this->groups = deserialize($objParentPage->groups);
+					}
+				}
+			}
+
+			// Set the titles
+			$this->mainAlias = $alias;
+			$this->mainTitle = $name;
+			$this->mainPageTitle = $title;
+			$this->parentAlias = $palias;
+			$this->parentTitle = $pname;
+			$this->parentPageTitle = $ptitle;
+			$this->folderUrl = $folderUrl;
+		}
+
+		// Set the root ID and title
+		if ($objParentPage !== null && $objParentPage->type == 'root')
+		{
+			$this->rootId = $objParentPage->id;
+			$this->rootTitle = $objParentPage->pageTitle ?: $objParentPage->title;
+			$this->domain = $objParentPage->dns;
+			$this->rootLanguage = $objParentPage->language;
+			$this->language = $objParentPage->language;
+			$this->staticFiles = $objParentPage->staticFiles;
+			$this->staticPlugins = $objParentPage->staticPlugins;
+			$this->dateFormat = $objParentPage->dateFormat;
+			$this->timeFormat = $objParentPage->timeFormat;
+			$this->datimFormat = $objParentPage->datimFormat;
+			$this->adminEmail = $objParentPage->adminEmail;
+
+			// Store whether the root page has been published
+			$time = time();
+			$this->rootIsPublic = ($objParentPage->published && ($objParentPage->start == '' || $objParentPage->start < $time) && ($objParentPage->stop == '' || $objParentPage->stop > $time));
+			$this->rootIsFallback = ($objParentPage->fallback != '');
+		}
+
+		// No root page found
+		elseif (TL_MODE == 'FE' && $this->type != 'root')
+		{
+			header('HTTP/1.1 404 Not Found');
+			\System::log('Page ID "'. $this->id .'" does not belong to a root page', 'PageModel loadDetails()', TL_ERROR);
+			die('No root page found');
+		}
+
+		$this->trail = array_reverse($trail);
+
+		// Remove insert tags from all titles (see #2853)
+		$this->title = strip_insert_tags($this->title);
+		$this->pageTitle = strip_insert_tags($this->pageTitle);
+		$this->parentTitle = strip_insert_tags($this->parentTitle);
+		$this->parentPageTitle = strip_insert_tags($this->parentPageTitle);
+		$this->mainTitle = strip_insert_tags($this->mainTitle);
+		$this->mainPageTitle = strip_insert_tags($this->mainPageTitle);
+		$this->rootTitle = strip_insert_tags($this->rootTitle);
+
+		// Do not cache protected pages
+		if ($this->protected)
+		{
+			$this->cache = 0;
+		}
+
+		$this->blnDetailsLoaded = true;
+		return $this;
 	}
 }

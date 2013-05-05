@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Faq
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -71,7 +71,7 @@ class ModuleFaq extends \Frontend
 				if (!isset($arrProcessed[$objFaq->jumpTo]))
 				{
 					$domain = \Environment::get('base');
-					$objParent = $this->getPageDetails($objFaq->jumpTo);
+					$objParent = \PageModel::findWithDetails($objFaq->jumpTo);
 
 					// The target page does not exist
 					if ($objParent === null)

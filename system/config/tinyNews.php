@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -44,8 +44,8 @@ tinyMCE.init({
   save_enablewhendirty : true,
   save_on_tinymce_forms : true,
   advimage_update_dimensions_onchange : false,
+  file_browser_callback : "TinyCallback.fileBrowser",
   init_instance_callback : "TinyCallback.getScrollOffset",
-  external_image_list_url : "<?php echo TL_PATH; ?>/assets/tinymce/plugins/typolinks/typoimages.php",
   template_external_list_url : "<?php echo TL_PATH; ?>/assets/tinymce/plugins/typolinks/typotemplates.php",
   plugins : "advimage,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
   spellchecker_languages : "<?php echo $this->getSpellcheckerString(); ?>",

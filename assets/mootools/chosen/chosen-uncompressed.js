@@ -51,22 +51,32 @@ var Chosen = new Class({
 
 	set_up_html: function(){
 
-		var dd_top, dd_width, sf_width;
+		var dd_top, dd_width, sf_width, s;
 
 		if (!this.form_field.id) this.form_field.id = String.uniqueID();
 		this.container_id = this.form_field.id.replace(/(:|\.)/g, '_') + "_chzn";
+		/* PATCH: do not measure
 		this.f_width = this.form_field.measure(function() {
-			// PATCH: measure elements in collapsed palettes (see #3627)
-			//return this.getSize().x;
-			return (this.getSize().x > 0) ? this.getSize().x : this.getStyle('width').toInt();
+			return this.getSize().x;
 		});
+		*/
 
 		this.default_text = this.form_field.get('data-placeholder') ? this.form_field.get('data-placeholder') : Locale.get('Chosen.placeholder', this.form_field.multiple);
 
 		this.container = new Element('div', {
 			'id': 		this.container_id,
 			'class': 	'chzn-container'+ (this.is_rtl ? ' chzn-rtl' : '') + " chzn-container-" + (this.is_multiple ? "multi" : "single")
-		}).setStyle('width', this.f_width);
+		// PATCH: add the CSS class
+		//}).setStyle('width', this.f_width);
+		}).addClass(this.form_field.get('class')).setStyles({
+			'padding': 	'0',
+			'border': 	'none'
+		});
+
+		// PATCH: apply the inline width if any (see #5487)
+		if ((s = this.form_field.get('style')) && s.test('(^width|[^-]width)')) {
+			this.container.setStyle('width', this.form_field.getStyle('width'));
+		}
 
 		if (this.is_multiple){
 
@@ -81,16 +91,18 @@ var Chosen = new Class({
 		this.form_field.setStyle('display', 'none').grab(this.container, 'after');
 		this.dropdown = this.container.getElement('div.chzn-drop');
 
-		dd_top = this.container.getCoordinates().height;
-		dd_width = this.f_width - this.dropdown.get_side_border_padding();
+		// PATCH: set to 100% and use box-sizing:border-box
+		// dd_top = this.container.getCoordinates().height;
+		// dd_width = this.f_width - this.dropdown.get_side_border_padding();
 		this.dropdown.setStyles({
-			'width': 	dd_width,
-			'top': 		dd_top
+			'top': 		'10',
+			'width': 	'100%'
 		});
 
 		this.search_field = this.container.getElement('input');
 		this.search_results = this.container.getElement('ul.chzn-results');
-		this.search_field_scale();
+		// PATCH: no scaling required
+		//this.search_field_scale();
 		this.search_no_results = this.container.getElement('li.no-results');
 
 		if (this.is_multiple){
@@ -103,8 +115,9 @@ var Chosen = new Class({
 			this.search_container = this.container.getElement('div.chzn-search');
 			this.selected_item = this.container.getElement('.chzn-single');
 
-			sf_width = dd_width - this.search_container.get_side_border_padding() - this.search_field.get_side_border_padding();
-			this.search_field.setStyle('width', sf_width);
+			// PATCH: set to 100% and use box-sizing:border-box
+			//sf_width = dd_width - this.search_container.get_side_border_padding() - this.search_field.get_side_border_padding();
+			this.search_field.setStyle('width', '100%');
 
 		}
 

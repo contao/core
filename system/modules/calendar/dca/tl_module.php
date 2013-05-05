@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Calendar
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -44,13 +44,13 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_noSpan'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_startDay'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_startDay'],
-	'default'                 => 0,
+	'default'                 => 1,
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options'                 => array(0, 1, 2, 3, 4, 5, 6),
 	'reference'               => &$GLOBALS['TL_LANG']['DAYS'],
 	'eval'                    => array('tl_class'=>'w50'),
-	'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
+	'sql'                     => "smallint(5) unsigned NOT NULL default '1'"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_format'] = array
@@ -230,8 +230,8 @@ class tl_module_calendar extends Backend
 		return array
 		(
 			'cal_list'     => array('cal_day', 'cal_month', 'cal_year', 'cal_all'),
-			'cal_upcoming' => array('next_7', 'next_14', 'next_30', 'next_90', 'next_180', 'next_365', 'next_two', 'next_cur_month', 'next_cur_year', 'next_all'),
-			'cal_past'     => array('past_7', 'past_14', 'past_30', 'past_90', 'past_180', 'past_365', 'past_two', 'past_cur_month', 'past_cur_year', 'past_all')
+			'cal_upcoming' => array('next_7', 'next_14', 'next_30', 'next_90', 'next_180', 'next_365', 'next_two', 'next_cur_month', 'next_cur_year', 'next_next_month', 'next_next_year', 'next_all'),
+			'cal_past'     => array('past_7', 'past_14', 'past_30', 'past_90', 'past_180', 'past_365', 'past_two', 'past_cur_month', 'past_cur_year', 'past_prev_month', 'past_prev_year', 'past_all')
 		);
 	}
 
@@ -244,23 +244,23 @@ class tl_module_calendar extends Backend
 	{
 		return '
   <script>
-  var enableStartDay = function() {
-    var e1 = $("ctrl_cal_startDay").getParent("div");
-    var e2 = $("ctrl_cal_order").getParent("div");
-    if ($("ctrl_cal_format").value == "cal_day") {
-      e1.setStyle("display", "block");
-      e2.setStyle("display", "none");
-	} else {
-      e1.setStyle("display", "none");
-      e2.setStyle("display", "block");
-	}
-  };
-  window.addEvent("domready", function() {
-    if ($("ctrl_cal_startDay")) {
-      enableStartDay();
-      $("ctrl_cal_format").addEvent("change", enableStartDay);
-    }
-  });
+    var enableStartDay = function() {
+      var e1 = $("ctrl_cal_startDay").getParent("div");
+      var e2 = $("ctrl_cal_order").getParent("div");
+      if ($("ctrl_cal_format").value == "cal_day") {
+        e1.setStyle("display", "block");
+        e2.setStyle("display", "none");
+	  } else {
+        e1.setStyle("display", "none");
+        e2.setStyle("display", "block");
+	  }
+    };
+    window.addEvent("domready", function() {
+      if ($("ctrl_cal_startDay")) {
+        enableStartDay();
+        $("ctrl_cal_format").addEvent("change", enableStartDay);
+      }
+    });
   </script>';
 	}
 

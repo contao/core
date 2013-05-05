@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -84,7 +84,7 @@ class TableWizard extends \Widget
 	public function generate()
 	{
 		$arrColButtons = array('ccopy', 'cmovel', 'cmover', 'cdelete');
-		$arrRowButtons = array('rcopy', 'rup', 'rdown', 'rdelete');
+		$arrRowButtons = array('rcopy', 'rdrag', 'rup', 'rdown', 'rdelete');
 
 		$strCommand = 'cmd_' . $this->strField;
 
@@ -96,28 +96,28 @@ class TableWizard extends \Widget
 			switch (\Input::get($strCommand))
 			{
 					case 'ccopy':
-					for ($i=0; $i<count($this->varValue); $i++)
+					for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 					{
 						$this->varValue[$i] = array_duplicate($this->varValue[$i], \Input::get('cid'));
 					}
 					break;
 
 				case 'cmovel':
-					for ($i=0; $i<count($this->varValue); $i++)
+					for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 					{
 						$this->varValue[$i] = array_move_up($this->varValue[$i], \Input::get('cid'));
 					}
 					break;
 
 				case 'cmover':
-					for ($i=0; $i<count($this->varValue); $i++)
+					for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 					{
 						$this->varValue[$i] = array_move_down($this->varValue[$i], \Input::get('cid'));
 					}
 					break;
 
 				case 'cdelete':
-					for ($i=0; $i<count($this->varValue); $i++)
+					for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 					{
 						$this->varValue[$i] = array_delete($this->varValue[$i], \Input::get('cid'));
 					}
@@ -155,11 +155,11 @@ class TableWizard extends \Widget
 		// Begin the table
 		$return = '<div id="tl_tablewizard">
   <table id="ctrl_'.$this->strId.'" class="tl_tablewizard">
-  <tbody>
+  <thead>
     <tr>';
 
 		// Add column buttons
-		for ($i=0; $i<count($this->varValue[0]); $i++)
+		for ($i=0, $c=count($this->varValue[0]); $i<$c; $i++)
 		{
 			$return .= '
       <td style="text-align:center; white-space:nowrap">';
@@ -167,7 +167,7 @@ class TableWizard extends \Widget
 			// Add column buttons
 			foreach ($arrColButtons as $button)
 			{
-				$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['tw_'.$button]).'" onclick="Backend.tableWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.$this->generateImage(substr($button, 1).'.gif', $GLOBALS['TL_LANG']['MSC']['tw_'.$button], 'class="tl_tablewizard_img"').'</a> ';
+				$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['tw_'.$button]).'" onclick="Backend.tableWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.\Image::getHtml(substr($button, 1).'.gif', $GLOBALS['TL_LANG']['MSC']['tw_'.$button], 'class="tl_tablewizard_img"').'</a> ';
 			}
 
 			$return .= '</td>';
@@ -175,18 +175,20 @@ class TableWizard extends \Widget
 
 		$return .= '
       <td></td>
-    </tr>';
+    </tr>
+  </thead>
+  <tbody class="sortable">';
 
 		$tabindex = 0;
 
 		// Add rows
-		for ($i=0; $i<count($this->varValue); $i++)
+		for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 		{
 			$return .= '
     <tr>';
 
 			// Add cells
-			for ($j=0; $j<count($this->varValue[$i]); $j++)
+			for ($j=0, $d=count($this->varValue[$i]); $j<$d; $j++)
 			{
 				$return .= '
       <td class="tcontainer"><textarea name="'.$this->strId.'['.$i.']['.$j.']" class="tl_textarea" tabindex="'.++$tabindex.'" rows="'.$this->intRows.'" cols="'.$this->intCols.'"'.$this->getAttributes().'>'.specialchars($this->varValue[$i][$j]).'</textarea></td>';
@@ -198,7 +200,16 @@ class TableWizard extends \Widget
 			// Add row buttons
 			foreach ($arrRowButtons as $button)
 			{
-				$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['tw_'.$button]).'" onclick="Backend.tableWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.$this->generateImage(substr($button, 1).'.gif', $GLOBALS['TL_LANG']['MSC']['tw_'.$button], 'class="tl_tablewizard_img"').'</a> ';
+				$class = ($button == 'rup' || $button == 'rdown') ? ' class="button-move"' : '';
+
+				if ($button == 'rdrag')
+				{
+					$return .= \Image::getHtml('drag.gif', '', 'class="drag-handle" title="' . sprintf($GLOBALS['TL_LANG']['MSC']['move']) . '"');
+				}
+				else
+				{
+					$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'"' . $class . ' title="'.specialchars($GLOBALS['TL_LANG']['MSC']['tw_'.$button]).'" onclick="Backend.tableWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.\Image::getHtml(substr($button, 1).'.gif', $GLOBALS['TL_LANG']['MSC']['tw_'.$button], 'class="tl_tablewizard_img"').'</a> ';
+				}
 			}
 
 			$return .= '</td>
@@ -209,9 +220,7 @@ class TableWizard extends \Widget
   </tbody>
   </table>
   </div>
-  <script>
-  Backend.tableWizardResize();
-  </script>';
+  <script>Backend.tableWizardResize()</script>';
 
 		return $return;
 	}
@@ -288,7 +297,8 @@ class TableWizard extends \Widget
 				}
 			}
 
-			$this->createNewVersion($dc->table, \Input::get('id'));
+			$objVersions = new \Versions($dc->table, \Input::get('id'));
+			$objVersions->create();
 
 			$this->Database->prepare("UPDATE " . $dc->table . " SET tableitems=? WHERE id=?")
 						   ->execute(serialize($arrTable), \Input::get('id'));

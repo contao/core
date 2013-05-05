@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -256,24 +256,13 @@ class FormFileUpload extends \Widget implements \uploadable
 					}
 					else
 					{
-						$objFile = new \File($strFile, true);
-
-						$objNew = new \FilesModel();
-						$objNew->pid       = $objUploadFolder->id;
-						$objNew->tstamp    = time();
-						$objNew->type      = 'file';
-						$objNew->path      = $strFile;
-						$objNew->extension = $objFile->extension;
-						$objNew->hash      = md5_file(TL_ROOT . '/' . $strFile);
-						$objNew->name      = $objFile->basename;
-						$objNew->save();
+						\Dbafs::addResource($strFile);
 					}
 
 					// Update the hash of the target folder
-					$objFolder = new \Folder($strUploadFolder);
-					$objUploadFolder->hash = $objFolder->hash;
-					$objUploadFolder->save();
+					\Dbafs::updateFolderHashes($strUploadFolder);
 
+					// Add a log entry
 					$this->log('File "'.$file['name'].'" has been moved to "'.$strUploadFolder.'"', 'FormFileUpload validate()', TL_FILES);
 				}
 			}

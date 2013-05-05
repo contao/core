@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -28,7 +28,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useSMTP'),
-		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,minifyMarkup,gzipScripts,disableCron,coreOnlyMode;{backend_legend},resultsPerPage,maxResultsPerPage,fileSyncExclude,doNotCollapse,staticFiles,staticPlugins;{frontend_legend},urlSuffix,cacheMode,rewriteURL,useAutoItem,addLanguageToUrl,doNotRedirectEmpty,folderUrl,disableAlias;{privacy_legend:hide},privacyAnonymizeIp,privacyAnonymizeGA;{security_legend:hide},allowedTags,debugMode,bypassCache,displayErrors,logErrors,disableRefererCheck,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{sections_legend:hide},customSections;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin,lockPeriod;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
+		'default'                     => '{title_legend},websiteTitle;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},adminEmail,characterSet,minifyMarkup,gzipScripts,disableCron,coreOnlyMode,debugMode,bypassCache;{backend_legend},resultsPerPage,maxResultsPerPage,fileSyncExclude,doNotCollapse,staticFiles,staticPlugins;{frontend_legend},urlSuffix,cacheMode,rewriteURL,useAutoItem,addLanguageToUrl,doNotRedirectEmpty,folderUrl,disableAlias;{privacy_legend:hide},privacyAnonymizeIp,privacyAnonymizeGA;{security_legend:hide},allowedTags,displayErrors,logErrors,disableRefererCheck,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{sections_legend:hide},customSections;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin,lockPeriod;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
 	),
 
 	// Subpalettes
@@ -44,13 +44,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['websiteTitle'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50')
-		),
-		'adminEmail' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['adminEmail'],
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'friendly', 'decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true)
 		),
 		'dateFormat' => array
 		(
@@ -75,14 +69,14 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['timeZone'],
 			'inputType'               => 'select',
-			'options'                 => $this->getTimezones(),
+			'options'                 => System::getTimeZones(),
 			'eval'                    => array('chosen'=>true, 'tl_class'=>'w50')
 		),
-		'websitePath' => array
+		'adminEmail' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['websitePath'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['adminEmail'],
 			'inputType'               => 'text',
-			'eval'                    => array('nospace'=>'true', 'trailingSlash'=>false, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'friendly', 'decodeEntities'=>true, 'tl_class'=>'w50')
 		),
 		'characterSet' => array
 		(
@@ -94,7 +88,11 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['coreOnlyMode'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_settings', 'changeCoreOnlyMode')
+			)
 		),
 		'disableCron' => array
 		(
@@ -537,7 +535,7 @@ class tl_settings extends Backend
 
 			if ($blnCheckInactiveModules && in_array($strModule, $arrInactiveModules))
 			{
-				$strFile = sprintf('%s/system/modules/%s/languages/%s/modules.php', TL_ROOT, $strModule, $GLOBALS['TL_LANGUAGE']);
+				$strFile = sprintf('%s/system/modules/%s/languages/%s/modules.php', TL_ROOT, $strModule, str_replace('-', '_', $GLOBALS['TL_LANGUAGE']));
 
 				if (file_exists($strFile))
 				{
@@ -560,6 +558,13 @@ class tl_settings extends Backend
 	 */
 	public function updateInactiveModules($varValue)
 	{
+		// The field value has not changed
+		if ($varValue == $GLOBALS['TL_CONFIG']['inactiveModules'])
+		{
+			return $varValue;
+		}
+
+		$blnPurgeCache = false;
 		$arrModules = deserialize($varValue);
 
 		if (!is_array($arrModules))
@@ -574,31 +579,40 @@ class tl_settings extends Backend
 				continue;
 			}
 
-			// Add the .skip file to disable the module
+			// Disable the module
 			if (in_array($strModule, $arrModules))
 			{
-				if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
-				{
-					$objFile = new File('system/modules/' . $strModule . '/.skip', true);
-					$objFile->write('As long as this file exists, the module will be ignored.');
-					$objFile->close();
-				}
+				$blnPurgeCache = System::disableModule($strModule);
 			}
-			// Remove the .skip if it exists
 			else
 			{
-				$objFile = new File('system/modules/' . $strModule . '/.skip', true);
-
-				if ($objFile->exists())
-				{
-					$objFile->delete();
-				}
+				$blnPurgeCache = System::enableModule($strModule);
 			}
 		}
 
 		// Purge the internal cache (see #5016)
-		$this->import('Automator');
-		$this->Automator->purgeInternalCache();
+		if ($blnPurgeCache)
+		{
+			$this->import('Automator');
+			$this->Automator->purgeInternalCache();
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Purge the internal cache when toggling the Contao safe mode
+	 * @param mixed
+	 * @return mixed
+	 */
+	public function changeCoreOnlyMode($varValue)
+	{
+		if ($varValue != $GLOBALS['TL_CONFIG']['coreOnlyMode'])
+		{
+			$this->import('Automator');
+			$this->Automator->purgeInternalCache();
+		}
 
 		return $varValue;
 	}

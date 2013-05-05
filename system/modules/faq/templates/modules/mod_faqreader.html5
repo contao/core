@@ -1,0 +1,68 @@
+
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+
+  <?php if ($this->headline): ?>
+    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+  <?php endif; ?>
+
+  <?php if ($this->error): ?>
+    <?php echo $this->error; ?>
+  <?php else: ?>
+    <h1><?php echo $this->question; ?></h1>
+    <div class="ce_text block">
+
+      <?php if (!$this->addBefore): ?>
+        <?php echo $this->answer; ?>
+      <?php endif; ?>
+
+      <?php if ($this->addImage): ?>
+        <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin || $this->float): ?> style="<?php echo trim($this->margin . $this->float); ?>"<?php endif; ?>>
+
+          <?php if ($this->href): ?>
+            <a href="<?php echo $this->href; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
+          <?php endif; ?>
+
+          <img src="<?php echo $this->src; ?>"<?php echo $this->imgSize; ?> alt="<?php echo $this->alt; ?>">
+
+          <?php if ($this->href): ?>
+            </a>
+          <?php endif; ?>
+
+          <?php if ($this->caption): ?>
+            <figcaption class="caption" style="width:<?php echo $this->arrSize[0]; ?>px"><?php echo $this->caption; ?></figcaption>
+          <?php endif; ?>
+
+        </figure>
+      <?php endif; ?>
+
+      <?php if ($this->addBefore): ?>
+        <?php echo $this->answer; ?>
+      <?php endif; ?>
+
+    </div>
+
+    <?php if ($this->enclosure): ?>
+      <div class="enclosure">
+        <?php foreach ($this->enclosure as $enclosure): ?>
+          <p><img src="<?php echo $enclosure['icon']; ?>" width="18" height="18" alt="<?php echo $enclosure['mime']; ?>" class="mime_icon"> <a href="<?php echo $enclosure['href']; ?>" title="<?php echo $enclosure['title']; ?>"><?php echo $enclosure['link']; ?> <span class="size">(<?php echo $enclosure['filesize']; ?>)</span></a></p>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
+
+    <p class="info"><?php echo $this->info; ?></p>
+
+    <!-- indexer::stop -->
+    <p class="back"><a href="<?php echo $this->referer; ?>" title="<?php echo $this->back; ?>"><?php echo $this->back; ?></a></p>
+    <!-- indexer::continue -->
+  <?php endif; ?>
+
+  <?php if ($this->allowComments && ($this->comments || !$this->requireLogin)): ?>
+    <div class="ce_comments block">
+      <<?php echo $this->hlc; ?>><?php echo $this->addComment; ?></<?php echo $this->hlc; ?>>
+      <?php foreach ($this->comments as $comment) echo $comment; ?>
+      <?php echo $this->pagination; ?>
+      <?php include $this->getTemplate('mod_comment_form', 'html5'); ?>
+    </div>
+  <?php endif; ?>
+
+</div>

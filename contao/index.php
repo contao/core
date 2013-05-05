@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -40,12 +40,6 @@ class Index extends Backend
 	 */
 	public function __construct()
 	{
-		// Redirect to the install tool
-		if (!Config::getInstance()->isComplete())
-		{
-			$this->redirect('install.php');
-		}
-
 		$this->import('BackendUser', 'User');
 		parent::__construct();
 
@@ -75,8 +69,8 @@ class Index extends Backend
 			$this->reload();
 		}
 
-		$this->loadLanguageFile('default');
-		$this->loadLanguageFile('tl_user');
+		System::loadLanguageFile('default');
+		System::loadLanguageFile('tl_user');
 	}
 
 
@@ -93,7 +87,7 @@ class Index extends Backend
 			$this->Template->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
 		}
 
-		$this->Template->theme = $this->getTheme();
+		$this->Template->theme = Backend::getTheme();
 		$this->Template->messages = Message::generate();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
@@ -103,7 +97,7 @@ class Index extends Backend
 		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->userLanguage = $GLOBALS['TL_LANG']['tl_user']['language'][0];
 		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['MSC']['loginTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
-		$this->Template->curLanguage = Input::post('language') ?: $GLOBALS['TL_LANGUAGE'];
+		$this->Template->curLanguage = Input::post('language') ?: str_replace('-', '_', $GLOBALS['TL_LANGUAGE']);
 		$this->Template->curUsername = Input::post('username') ?: '';
 		$this->Template->uClass = ($_POST && !Input::post('username')) ? ' class="login_error"' : '';
 		$this->Template->pClass = ($_POST && !Input::post('password')) ? ' class="login_error"' : '';
@@ -114,6 +108,7 @@ class Index extends Backend
 		$this->Template->frontendFile = Environment::get('base');
 		$this->Template->disableCron = $GLOBALS['TL_CONFIG']['disableCron'];
 		$this->Template->ie6warning = sprintf($GLOBALS['TL_LANG']['ERR']['ie6warning'], '<a href="http://ie6countdown.com">', '</a>');
+		$this->Template->default = $GLOBALS['TL_LANG']['MSC']['default'];
 
 		$this->Template->output();
 	}

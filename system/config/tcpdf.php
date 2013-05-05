@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -16,8 +16,8 @@
  * system/vendor/tcpdf for more information.
  */
 define('K_TCPDF_EXTERNAL_CONFIG', true);
-define('K_PATH_MAIN', TL_ROOT . '/system/vendor/tcpdf/');
-define('K_PATH_URL', Environment::get('base') . 'system/vendor/tcpdf/');
+define('K_PATH_MAIN', TL_ROOT . '/system/modules/core/vendor/tcpdf/');
+define('K_PATH_URL', Environment::get('base') . 'system/modules/core/vendor/tcpdf/');
 define('K_PATH_FONTS', K_PATH_MAIN . 'fonts/');
 define('K_PATH_CACHE', TL_ROOT . '/system/tmp/');
 define('K_PATH_URL_CACHE', TL_ROOT . '/system/tmp/');

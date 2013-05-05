@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package   Repository
  * @author    Peter Koch, IBK Software AG
  * @license   See accompaning file LICENSE.txt
@@ -19,7 +19,7 @@ require_once dirname(dirname(__FILE__)).'/classes/RepositorySettings.php';
 
 
 /**
- * Implements the frontend interface
+ * Implements the front end interface
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
  * @author     Leo Feyer <https://contao.org>
@@ -84,10 +84,10 @@ class RepositoryBackendModule extends BackendModule
 		// load other helpers
 		$this->tl_root = str_replace("\\",'/',TL_ROOT).'/';
 		$this->tl_files = str_replace("\\",'/',$GLOBALS['TL_CONFIG']['uploadPath']).'/';
-		$this->loadLanguageFile('tl_repository');
-		$this->loadLanguageFile('languages');
+		System::loadLanguageFile('tl_repository');
+		System::loadLanguageFile('languages');
 		$this->Template->rep = $this->rep;
-		$this->languages = rtrim($GLOBALS['TL_LANGUAGE'].','.trim($GLOBALS['TL_CONFIG']['repository_languages']),',');
+		$this->languages = rtrim(str_replace('-', '_', $GLOBALS['TL_LANGUAGE']).','.trim($GLOBALS['TL_CONFIG']['repository_languages']),',');
 		$this->languages = implode(',',array_unique(explode(',',$this->languages)));
 
 		// complete rep initialization

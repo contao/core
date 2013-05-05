@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -98,6 +98,16 @@ class FormTextField extends \Widget
 			return parent::validator($varInput);
 		}
 
+		// Convert to Punycode format (see #5571)
+		if ($this->rgxp == 'url')
+		{
+			$varInput = \Idna::encodeUrl($varInput);
+		}
+		elseif ($this->rgxp == 'email' || $this->rgxp == 'friendly')
+		{
+			$varInput = \Idna::encodeEmail($varInput);
+		}
+
 		return parent::validator(trim($varInput));
 	}
 
@@ -109,13 +119,60 @@ class FormTextField extends \Widget
 	public function generate()
 	{
 		// Hide the Punycode format (see #2750)
-		if ($this->rgxp == 'email' || $this->rgxp == 'url')
+		if ($this->rgxp == 'email' || $this->rgxp == 'friendly' || $this->rgxp == 'url')
 		{
 			$this->varValue = \Idna::decode($this->varValue);
 		}
 
+		if ($this->hideInput)
+		{
+			$strType = 'password';
+		}
+		elseif ($this->strFormat != 'xhtml')
+		{
+			// Use the HTML5 types (see #4138)
+			switch ($this->rgxp)
+			{
+				case 'digit':
+					$strType = 'number';
+					break;
+
+				case 'date':
+					$strType = 'date';
+					break;
+
+				case 'time':
+					$strType = 'time';
+					break;
+
+				case 'datim':
+					$strType = 'datetime';
+					break;
+
+				case 'phone':
+					$strType = 'tel';
+					break;
+
+				case 'email':
+					$strType = 'email';
+					break;
+
+				case 'url':
+					$strType = 'url';
+					break;
+
+				default:
+					$strType = 'text';
+					break;
+			}
+		}
+		else
+		{
+			$strType = 'text';
+		}
+
 		return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="text%s%s" value="%s"%s%s',
-						($this->hideInput ? 'password' : 'text'),
+						$strType,
 						$this->strName,
 						$this->strId,
 						($this->hideInput ? ' password' : ''),

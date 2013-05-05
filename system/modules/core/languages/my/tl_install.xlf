@@ -1,0 +1,342 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_install.php" source-language="en">
+    <body>
+      <trans-unit id="tl_install.installTool.0">
+        <source>Installation</source>
+        <target>ထည့်သွင်းခြင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_install.installTool.1">
+        <source>Install tool login</source>
+        <target>ကိရိယာဖွင့်ဝင်ထည့်သွင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_install.locked.0">
+        <source>The install tool has been locked</source>
+        <target>ထည့်သွင်းကိရိယာသော့ခတ်ထား</target>
+      </trans-unit>
+      <trans-unit id="tl_install.locked.1">
+        <source>For security reasons, the install tool has been locked after a wrong password had been entered more than three times in a row. To unlock it, open the local configuration file and set &lt;em&gt;installCount&lt;/em&gt; to &lt;em&gt;0&lt;/em&gt;.</source>
+        <target>လံုခြုံရေးအတွက်စကားဝှက်အမှားကိုသံုးကြိမ်ဆက်တိုက်၍ထည့်သွင်းကိရိယာသော့ခတ်ထားပြီး။ သော့မခတ်ရန်စက်သွင်းပံုစံပြင်ခြင်းဖိုင်ဖွင့်၍ &lt;em&gt;installCount&lt;/em&gt; ကို &lt;em&gt;0&lt;/em&gt; သတ်မှတ်ပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.password.0">
+        <source>Password</source>
+        <target>စကားဝှက်</target>
+      </trans-unit>
+      <trans-unit id="tl_install.password.1">
+        <source>Please enter the install tool password. The install tool password is not the same as the Contao back end password.</source>
+        <target>ထည့်သွင်းကိရိယာစကားဝှက်ထည့်ပါ။ ထည့်သွင်းကိရိယာစကားဝှက်သည်ကွန်တောင်အတွင်းပိုင်းစကားဝှက်နှင့်မတူညီပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.changePass.0">
+        <source>Install tool password</source>
+        <target>ကိရိယာစကားဝှက်ထည့်သွင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_install.changePass.1">
+        <source>To additionally secure the Contao install tool, you can either rename or completely remove the &lt;strong&gt;contao/install.php&lt;/strong&gt; file.</source>
+        <target>ကွန်တောင်ထည့်သွင်းကိရိယာပိုမိုလံုခြုံစေရန် &lt;strong&gt;contao/install.php&lt;/strong&gt; ဖိုင်ကိုနာမည်ပြန်ပေး(သို့)လုံုးဝဖယ်ရှားပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.encryption.0">
+        <source>Generate an encryption key</source>
+        <target>ကုဒ်ဝှက်သော့ထုတ်လုပ်</target>
+      </trans-unit>
+      <trans-unit id="tl_install.encryption.1">
+        <source>This key is used to store encrypted data. Please note that encrypted data can only be decrypted with this key! Therefore note it down and do not change it if there is encrypted data already. Leave empty to generate a random key.</source>
+        <target>ကုဒ်ဝှက်ပြီးအချက်အလက်များသိုလှောင်ရန်ယခုသော့ကိုအသံုးပြုထား။ ကုဒ်ဝှက်ပြီးအချက်အလက်များကိုယခုသော့သံုး၍ကုဒ်မဝှက်နိုင်! ယခုသော့ကိုမှတ်သားပြီးကုဒ်ဝှက်ပြီးအချက်အလက်များတည်ရှိနေပါကမပြောင်းလဲပါနှင့်။ ကြုံရာသော့များထုတ်လုပ်ရန်ကွက်လပ်ထားပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.database.0">
+        <source>Check database connection</source>
+        <target>အချက်အလက်အစုချိတ်ဆက်မှုစစ်ဆေး</target>
+      </trans-unit>
+      <trans-unit id="tl_install.database.1">
+        <source>Please enter your database connection parameters.</source>
+        <target>အချက်အလက်အစုချိတ်ဆက်မှုသတ်မှတ်ချက်ဘောင်ထည့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.collation.0">
+        <source>Collation</source>
+        <target>စုစည်းစီစဉ်ခြင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_install.collation.1">
+        <source>For more information see the &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;MySQL manual&lt;/a&gt;.</source>
+        <target> &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;မိုင်အက်စ်ကျုအယ်လက်စွဲစာအုပ်&lt;/a&gt; တွင်အချက်အလက်များကိုကြည့်ပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.update.0">
+        <source>Update database tables</source>
+        <target>အချက်အလက်အစုစားပွဲများမွမ်းမံ</target>
+      </trans-unit>
+      <trans-unit id="tl_install.update.1">
+        <source>Please note that the update assistant has only been tested with MySQL and MySQLi drivers. If you are using a different database (e.g. Oracle), you might have to install or update your database manually.</source>
+        <target>မိုင်အက်စ်ကျုအယ်နှင့်မိုင်အက်စ်ကျုအယ်အိုင်ဒရိုင်ဘာများဖြင့်မွမ်းမံလက်ထောက်ကိုစမ်းသပ်ပြီး။ မတူညီသောအချက်အလက်အစု (ဥပမာ အော်ရီကယ်) ကိုသံုးပါကအချက်အလက်အစုကိုကိုယ်တိုင်ထည့်သွင်း(သို့)မွမ်းမံနိုင်ပါသည်။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.template.0">
+        <source>Import a template</source>
+        <target>ပံုစံပြားတင်သွင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_install.template.1">
+        <source>Here you can import an &lt;em&gt;.sql&lt;/em&gt; file from the &lt;em&gt;templates&lt;/em&gt; directory with a pre-configured example website. Existing data will be deleted! If you only want to import a theme, please use the theme manager in the Contao back end instead.</source>
+        <target>ကြိုတင်ပံုစံပြင်ပြီးဥပမာဝဘ်ဆိုက်ဖြင့်&lt;em&gt;ပံုစံများ&lt;/em&gt; ဖိုင်လမ်းညွှန်မှ &lt;em&gt;.အက်စ်ကျုအယ်&lt;/em&gt; ဖိုင်ကိုတင်သွင်းနိုင်။ တည်ရှိပြီးအချက်အလက်များကိုပယ်ဖျက်မည်! အသွင်အပြင်ကိုတင်သွင်းလိုပါကကွန်တောင်အတွင်းပိုင်းရှိအသွင်အပြင်မန်နေဂျာကိုသံုးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.admin.0">
+        <source>Create an admin user</source>
+        <target>စီမံခန့်ခွဲအသံုးပြုသူဖန်တီး</target>
+      </trans-unit>
+      <trans-unit id="tl_install.admin.1">
+        <source>If you have imported the example website, the admin's username is &lt;strong&gt;k.jones&lt;/strong&gt; and the password is &lt;strong&gt;kevinjones&lt;/strong&gt;. See the example website (front end) for more information.</source>
+        <target>ဥပမာဝဘ်ဆိုက်တင်သွင်းထားပါကစီမံခန့်ခွဲသူအသံုးပြုသူနာမည်မှာ  &lt;strong&gt;k.jones&lt;/strong&gt; ဖြစ်ပြီးစကားဝှက်မှာ &lt;strong&gt;kevinjones&lt;/strong&gt; ဖြစ်။ အသေးစိတ်အချက်အလက်များအတွက်ဥပမာဝဘ်ဆိုက်(အပြင်ပိုင်း)တွင်ကြည့်ပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.completed.0">
+        <source>Congratulations!</source>
+        <target>ဂုဏ်ယူဝမ်းမြောက်!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.completed.1">
+        <source>Now please log into the &lt;a href=&quot;contao/&quot;&gt;Contao back end&lt;/a&gt; and check the system settings. Then visit your website to make sure that Contao is working correctly.</source>
+        <target>&lt;a href=&quot;contao/&quot;&gt;Contao back end&lt;/a&gt; ကိုဖွင့်ဝင်ပြီးစက်စနစ်ချိန်ညှိချက်ကိုစစ်ဆေးပါ။ ကွန်တောင်ကောင်းမွန်စွာအလုပ်လုပ်ဆောင်စေရန်သင့်ဝဘ်ဆိုက်ကိုလည်ပတ်ပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftp.0">
+        <source>Modify files via FTP</source>
+        <target>အက်ဖ်တီပီမှတစ်ဆင့်ဖိုင်များပြုပြင်မွမ်းမံ</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftp.1">
+        <source>Your server does not support file access via PHP; most likely PHP runs as Apache module under a different user. Therefore please enter your FTP login details, so Contao can modify files via FTP (Safe Mode Hack).</source>
+        <target>ပီဟိပ်စ်ပီမှတစ်ဆင့်ဖိုင်ဝင်ကြည့်ရန်သင့်ဆာဗာမှမထောက်ပံ့ပါ။ ကြည့်ရသည်မှာမတူညီသောအသံုးပြုသူအောက်တွင်ပီဟိပ်စ်ပီသည်အပါချီကဲ့သို့စတင်နေခြင်းကြောင့်ဖြစ်နိုင်ပါသည်။ ဒါကြောင့်အက်ဖ်တီပီဖွင့်ဝင်အချက်အလက်များကိုထည့်ပြီးကွန်တောင်မှအက်ဖ်တီပီမှတစ်ဆင့်ဖိုင်များပြုပြင်မွမ်းမံခြင်းလုပ်ဆောင်နိုင် (လုံခြုံသောနည်းလမ်းဖြင့်ထိုးဖောက်ခြင်း)</target>
+      </trans-unit>
+      <trans-unit id="tl_install.accept">
+        <source>Accept license</source>
+        <target>လိုင်စင်လက်ခံ</target>
+      </trans-unit>
+      <trans-unit id="tl_install.beLogin">
+        <source>Contao back end login</source>
+        <target>ကွန်တောင်အတွင်းပိုင်းဖွင့်ဝင်</target>
+      </trans-unit>
+      <trans-unit id="tl_install.passError">
+        <source>Please enter a password to prevent unauthorized access!</source>
+        <target>မစိစစ်ပြီးဝင်ရောက်ခြင်းကိုကာကွယ်ရန်စကားဝှက်ထည့်သွင်းပါ!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.passConfirm">
+        <source>A custom password has been set.</source>
+        <target>စိတ်ကြိုက်စကားဝှက်သတ်မှတ်ပြီး။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.passSave">
+        <source>Save password</source>
+        <target>စကားဝှက်မှတ်သိမ်း</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyError">
+        <source>Please create an encryption key!</source>
+        <target>ကုဒ်ဝှက်သော့ဖန်တီး!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyLength">
+        <source>An encryption key has to be at least 12 characters long!</source>
+        <target>ကုဒ်ဝှက်သော့ကိုအနည်းဆံုးအက္ခရာ၁၂ခုရှည်ပါစေ!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyConfirm">
+        <source>An encryption key has been created.</source>
+        <target>ကုဒ်ဝှက်သော့ကိုဖန်တီးပြီး။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyCreate">
+        <source>Generate encryption key</source>
+        <target>ကုဒ်ဝှက်သော့ထုတ်လုပ်</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keySave">
+        <source>Generate or save key</source>
+        <target>ကုဒ်ဝှက်သော့ထုတ်လုပ်(သို့)မှတ်သိမ်း</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbConfirm">
+        <source>Database connection established.</source>
+        <target>အချက်အလက်အစုချိတ်ဆက်မှုတည်ထောင်ပြီး။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbError">
+        <source>Not connected to a database!</source>
+        <target>အချက်အလက်အစုသို့မချိတ်ဆက်ရသေး!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbDriver">
+        <source>Driver</source>
+        <target>ဒရိုက်ဗာ</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbHost">
+        <source>Host</source>
+        <target>လက်ခံ</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbUsername">
+        <source>Username</source>
+        <target>အသံုးပြုသူနာမည်</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbDatabase">
+        <source>Database</source>
+        <target>အချက်အလက်အစု</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbPersistent">
+        <source>Persistent connection</source>
+        <target>ဆက်တိုက်ချိတ်ဆက်မှု</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbCharset">
+        <source>Character set</source>
+        <target>စာလံုးအစုံ</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbCollation">
+        <source>Collation</source>
+        <target>စုစည်းစီစဉ်ခြင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbPort">
+        <source>Port number</source>
+        <target>နံပါတ်ပေါက်</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbSocket">
+        <source>Socket file</source>
+        <target>ပလတ်ပေါက်ဖိုင်</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbSave">
+        <source>Save database settings</source>
+        <target>အချက်အလက်အစုချိန်ညှိချက်မှတ်သိမ်း</target>
+      </trans-unit>
+      <trans-unit id="tl_install.collationInfo">
+        <source>Changing the collation will affect all tables with a &lt;em&gt;tl_&lt;/em&gt; prefix.</source>
+        <target>စုစည်းစီစဉ်ခြင်းပြောင်းလဲခြင်းသည် &lt;em&gt;tl_&lt;/em&gt; ရှေ့ဆက်ပါဝင်သည့်စားပွဲများအားလံုးကိုထိခိုက်စေနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateError">
+        <source>The database is not up to date!</source>
+        <target>အချက်အလက်အစုမှာအပြည့်အစံုမဟုတ်သေး!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateConfirm">
+        <source>The database is up to date.</source>
+        <target>အချက်အလက်အစုမှာပြည့်စံုပြီး။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateSave">
+        <source>Update database</source>
+        <target>အချက်အလက်အစုမွမ်းမံ</target>
+      </trans-unit>
+      <trans-unit id="tl_install.saveCollation">
+        <source>Change collation</source>
+        <target>စုစည်းစီစဉ်ခြင်းပြောင်းလဲခြင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateX">
+        <source>It seems that you are upgrading from a Contao version prior to version %s. If that is the case, &lt;strong&gt;it is required to run the version %s update&lt;/strong&gt; to ensure the integrity of your data!</source>
+        <target>%s ပံုစံသို့ကွန်တောင်လက်ရှိပံုစံမှအဆင့်မြင့်နေပံုရ။ သင့်အချက်အလက်များတည်တံ့ခိုင်မြဲစေရန် &lt;strong&gt; %s မွမ်းမံပံုစံကိုစတင်ရန်လိုအပ်&lt;/strong&gt; !</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateXrun">
+        <source>Run version %s update</source>
+        <target>ပံုစံ %s မွမ်းမံစတင်</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateXrunStep">
+        <source>Run version %s update - step %s</source>
+        <target>ပံုစံ %s မွမ်းမံစတင် - အခြေအနေ %s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importException">
+        <source>The import failed! Is the database structure up to date and is the template file compatible with your Contao version?</source>
+        <target>တင်သွင်း၍မရ! အချက်အလက်အစုဖွဲ့စည်းတည်ဆောက်ပုံမှာအပြည့်အစံုဖြစ်ပြီးပံုစံပြားဖိုင်မှာလက်ရှိကွန်တောင်ပံုစံနှင့်အံဝင်ခွင်ကျပါသလား?</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importError">
+        <source>Please choose a template file!</source>
+        <target>ပံုစံပြားဖိုင်ရွေးပါ!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importConfirm">
+        <source>Template imported on %s</source>
+        <target>%s သို့ပံုစံပြားတင်သွင်းပြီး</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importWarn">
+        <source>Any existing data will be deleted!</source>
+        <target>တည်ရှိပြီးအချက်အလက်များပယ်ဖျက်မည်!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.templates">
+        <source>Templates</source>
+        <target>ပံုစံပြားများ</target>
+      </trans-unit>
+      <trans-unit id="tl_install.doNotTruncate">
+        <source>Do not truncate tables</source>
+        <target>စားပွဲများမတိုစေ</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importSave">
+        <source>Import template</source>
+        <target>ပံုစံပြားတင်သွင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importContinue">
+        <source>Any existing data will be deleted! Do you really want to continue?</source>
+        <target>တည်ရှိပြီးအချက်အလက်များပယ်ဖျက်မည်! ဆက်လက်လုပ်ဆောင်?</target>
+      </trans-unit>
+      <trans-unit id="tl_install.adminError">
+        <source>Please fill in all fields to create an admin user!</source>
+        <target>စီမံခန့်ခွဲအသံုးပြုသူဖန်တီးရန်နယ်ပယ်များအားလံုးဖြည့်ပါ!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.adminConfirm">
+        <source>An admin user has been created.</source>
+        <target>စီမံခန့်ခွဲအသံုးပြုသူဖန်တီးပြီး။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.adminSave">
+        <source>Create admin account</source>
+        <target>စီမံခန့်ခွဲသူစာရင်းဖန်တီး</target>
+      </trans-unit>
+      <trans-unit id="tl_install.installConfirm">
+        <source>You have successfully installed Contao.</source>
+        <target>ကွန်တောင်ကိုအောင်မြင်စွာထည့်သွင်းပြီး။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpHost">
+        <source>FTP hostname</source>
+        <target>အက်ဖ်တီပီလက်ခံနာမည်</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPath">
+        <source>Relative path to Contao directory (e.g. &lt;em&gt;httpdocs/&lt;/em&gt;)</source>
+        <target>ကွန်တောင်ဖိုင်လမ်းညွှန်သို့ပတ်သက်သောလမ်းကြောင်း (ဥပမာ  &lt;em&gt;httpdocs/&lt;/em&gt;)</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpUser">
+        <source>FTP username</source>
+        <target>အက်ဖ်တီပီအသံုးပြုသူနာမည်</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPass">
+        <source>FTP password</source>
+        <target>အက်ဖ်တီပီစကားဝှက်</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpSSLh4">
+        <source>Secure connection</source>
+        <target>လုံခြုံစိတ်ချရသောချိတ်ဆက်မှု</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpSSL">
+        <source>Connect via FTP-SSL</source>
+        <target>အက်ဖ်တီပီ-အက်စ်အက်စ်အယ်မှတစ်ဆင့်ချိတ်ဆက်</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPort">
+        <source>FTP port</source>
+        <target>အက်ဖ်တီပီနံပါတ်ပေါက်</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpSave">
+        <source>Save FTP settings</source>
+        <target>အက်ဖ်တီပီချိန်ညှိချက်မှတ်သိမ်း</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpHostError">
+        <source>Could not connect to FTP server %s</source>
+        <target>အက်ဖ်တီပီဆာဗာ  %s သို့မချိတ်ဆက်နိုင်</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpUserError">
+        <source>Could not login as &quot;%s&quot;</source>
+        <target>&quot;%s&quot; ကဲ့သို့မဖွင့်ဝင်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPathError">
+        <source>Could not locate Contao directory %s</source>
+        <target>ကွန်တောင်ဖိုင်လမ်းညွှန် %s မရှာတွေ့</target>
+      </trans-unit>
+      <trans-unit id="tl_install.filesRenamed">
+        <source>The configured files directory does not exist!</source>
+        <target>ပံုစံပြင်ပြီးဖိုင်များဖိုင်လမ်းညွှန်မတည်ရှိ!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.filesWarning">
+        <source>Did you rename the &lt;strong&gt;tl_files&lt;/strong&gt; folder to &lt;strong&gt;files&lt;/strong&gt;? You cannot just rename the folder, because all the file references in the database and your style sheets will still point to the old location. If you want to rename the folder, please do so after the version 3 update and make sure to adjust your database data with the following script: %s.</source>
+        <target>&lt;strong&gt;tl_files&lt;/strong&gt; ဖိုင်တွဲကို &lt;strong&gt;files&lt;/strong&gt; အဖြစ်နာမည်ပြောင်းလဲထားပါသလား? တည်နေရာအဟောင်းသို့အချက်အလက်အစုရှိဖိုင်ကိုးကားခြင်းများနှင့်စတိုင်အလွှာများမှဆက်လက်ညွှန်နေခြင်းကြောင့်ယခုဖိုင်တွဲကိုနာမည်မပြောင်းနိုင်။ ဖိုင်တွဲကိုနာမည်ပြောင်းလိုပါကပံုစံ၃မွမ်းမံအထက်ဖြစ်ပါကလုပ်နိုင်ပြီးဖော်ပြပါလိုလျောက်ကုဒ် %s ကိုသံုးကာအချက်အလက်အစုအချက်အလက်ကိုထိန်းညှိပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_install.CREATE">
+        <source>Create new tables</source>
+        <target>စားပွဲများအသစ်ဖန်တီး</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ALTER_ADD">
+        <source>Add new columns</source>
+        <target>ကော်လံအသစ်များထည့်</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ALTER_CHANGE">
+        <source>Change existing columns</source>
+        <target>တည်ရှိပြီးကော်လံများပြောင်းလဲ</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ALTER_DROP">
+        <source>Drop existing columns</source>
+        <target>တည်ရှိပြီးကော်လံများဖြုတ်ချ</target>
+      </trans-unit>
+      <trans-unit id="tl_install.DROP">
+        <source>Drop existing tables</source>
+        <target>တည်ရှိပြီးစားပွဲများဖြုတ်ချ</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

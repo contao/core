@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -92,7 +92,7 @@ class ModuleArticle extends \Module
 
 		// Add the modification date
 		$this->Template->timestamp = $this->tstamp;
-		$this->Template->date = $this->parseDate($objPage->datimFormat, $this->tstamp);
+		$this->Template->date = \Date::parse($objPage->datimFormat, $this->tstamp);
 
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
@@ -148,6 +148,11 @@ class ModuleArticle extends \Module
 		if (!$this->blnNoMarkup && $strArticle != '' && ($strArticle == $this->id || $strArticle == $this->alias) && $this->title != '')
 		{
 			$objPage->pageTitle = strip_tags(strip_insert_tags($this->title));
+
+			if ($this->teaser != '')
+			{
+				$objPage->description = $this->prepareMetaDescription($this->teaser);
+			}
 		}
 
 		$this->Template->printable = false;
@@ -176,7 +181,7 @@ class ModuleArticle extends \Module
 		{
 			while ($objCte->next())
 			{
-				$arrElements[] = $this->getContentElement($objCte->current());
+				$arrElements[] = $this->getContentElement($objCte->current(), $this->strColumn);
 			}
 		}
 
@@ -200,7 +205,7 @@ class ModuleArticle extends \Module
 		{
 			$options = deserialize($this->printable);
 
-			if (is_array($options) && !empty($options))
+			if (!empty($options) && is_array($options))
 			{
 				$this->Template->printable = true;
 				$this->Template->printButton = in_array('print', $options);
@@ -214,7 +219,7 @@ class ModuleArticle extends \Module
 		// Add syndication variables
 		if ($this->Template->printable)
 		{
-			$request = $this->getIndexFreeRequest(true);
+			$request = \Environment::get('indexFreeRequest');
 
 			$this->Template->print = '#';
 			$this->Template->encUrl = rawurlencode(\Environment::get('base') . \Environment::get('request'));
@@ -227,5 +232,120 @@ class ModuleArticle extends \Module
 			$this->Template->twitterTitle = specialchars($GLOBALS['TL_LANG']['MSC']['twitterShare']);
 			$this->Template->gplusTitle = specialchars($GLOBALS['TL_LANG']['MSC']['gplusShare']);
 		}
+	}
+
+
+	/**
+	 * Print an article as PDF and stream it to the browser
+	 */
+	public function generatePdf()
+	{
+		$this->headline = $this->title;
+		$this->printable = false;
+
+		// Generate article
+		$strArticle = $this->replaceInsertTags($this->generate());
+		$strArticle = html_entity_decode($strArticle, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
+		$strArticle = $this->convertRelativeUrls($strArticle, '', true);
+
+		// Remove form elements and JavaScript links
+		$arrSearch = array
+		(
+			'@<form.*</form>@Us',
+			'@<a [^>]*href="[^"]*javascript:[^>]+>.*</a>@Us'
+		);
+
+		$strArticle = preg_replace($arrSearch, '', $strArticle);
+
+		// HOOK: allow individual PDF routines
+		if (isset($GLOBALS['TL_HOOKS']['printArticleAsPdf']) && is_array($GLOBALS['TL_HOOKS']['printArticleAsPdf']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['printArticleAsPdf'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($strArticle, $this);
+			}
+		}
+
+		// Handle line breaks in preformatted text
+		$strArticle = preg_replace_callback('@(<pre.*</pre>)@Us', 'nl2br_callback', $strArticle);
+
+		// Default PDF export using TCPDF
+		$arrSearch = array
+		(
+			'@<span style="text-decoration: ?underline;?">(.*)</span>@Us',
+			'@(<img[^>]+>)@',
+			'@(<div[^>]+block[^>]+>)@',
+			'@[\n\r\t]+@',
+			'@<br( /)?><div class="mod_article@',
+			'@href="([^"]+)(pdf=[0-9]*(&|&amp;)?)([^"]*)"@'
+		);
+
+		$arrReplace = array
+		(
+			'<u>$1</u>',
+			'<br>$1',
+			'<br>$1',
+			' ',
+			'<div class="mod_article',
+			'href="$1$4"'
+		);
+
+		$strArticle = preg_replace($arrSearch, $arrReplace, $strArticle);
+
+		// TCPDF configuration
+		$l['a_meta_dir'] = 'ltr';
+		$l['a_meta_charset'] = $GLOBALS['TL_CONFIG']['characterSet'];
+		$l['a_meta_language'] = substr($GLOBALS['TL_LANGUAGE'], 0, 2);
+		$l['w_page'] = 'page';
+
+		// Include library
+		require_once TL_ROOT . '/system/config/tcpdf.php';
+		require_once TL_ROOT . '/system/modules/core/vendor/tcpdf/tcpdf.php';
+
+		// Create new PDF document
+		$pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
+
+		// Set document information
+		$pdf->SetCreator(PDF_CREATOR);
+		$pdf->SetAuthor(PDF_AUTHOR);
+		$pdf->SetTitle($this->title);
+		$pdf->SetSubject($this->title);
+		$pdf->SetKeywords($this->keywords);
+
+		// Prevent font subsetting (huge speed improvement)
+		$pdf->setFontSubsetting(false);
+
+		// Remove default header/footer
+		$pdf->setPrintHeader(false);
+		$pdf->setPrintFooter(false);
+
+		// Set margins
+		$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+
+		// Set auto page breaks
+		$pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
+
+		// Set image scale factor
+		$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+		// Set some language-dependent strings
+		$pdf->setLanguageArray($l);
+
+		// Initialize document and add a page
+		$pdf->AddPage();
+
+		// Set font
+		$pdf->SetFont(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN);
+
+		// Write the HTML content
+		$pdf->writeHTML($strArticle, true, 0, true, 0);
+
+		// Close and output PDF document
+		$pdf->lastPage();
+		$pdf->Output(standardize(ampersand($this->title, false)) . '.pdf', 'D');
+
+		// Stop script execution
+		exit;
 	}
 }

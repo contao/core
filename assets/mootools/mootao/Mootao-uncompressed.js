@@ -1,8 +1,8 @@
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Mootao
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -64,7 +64,7 @@ Request.Contao = new Class(
 				json.javascript = script.replace(/<!--|\/\/-->|<!\[CDATA\[\/\/>|<!\]\]>/g, '');
 			});
 			if (json.javascript && this.options.evalScripts) {
-				$exec(json.javascript);
+				Browser.exec(json.javascript);
 			}
 		}
 
@@ -118,7 +118,8 @@ Tips.Contao = new Class(
 	position: function(event) {
 		if (!this.tip) document.id(this);
 
-		var size = window.getSize(), scroll = window.getScroll(),
+		var size = window.getSize(),
+			scroll = window.getScroll(),
 			tip = {x: this.tip.offsetWidth, y: this.tip.offsetHeight},
 			props = {x: 'left', y: 'top'},
 			bounds = {y: false, x2: false, y2: false, x: false},

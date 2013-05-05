@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -71,7 +71,7 @@ class ChmodTable extends \Widget
 			for ($j=1; $j<=6; $j++)
 			{
 				$return .= '
-      <td><input type="checkbox" name="'.$this->strName.'[]" value="'.specialchars($k.$j).'"'.$this->optionChecked($k.$j, $this->varValue).' onfocus="Backend.getScrollOffset()"></td>';
+      <td><input type="checkbox" name="'.$this->strName.'[]" value="'.specialchars($k.$j).'"'.static::optionChecked($k.$j, $this->varValue).' onfocus="Backend.getScrollOffset()"></td>';
 			}
 
 			$return .= '

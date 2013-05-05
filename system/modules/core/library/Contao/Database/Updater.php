@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,7 +15,7 @@ namespace Contao\Database;
 
 /**
  * Adjust the database if the system is updated
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -250,9 +250,6 @@ class Updater extends \Controller
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
 		);
 
-		// Create the DCA extracts (will also create the DCA cache)
-		\DcaExtractor::createAllExtracts();
-
 		// Add the "numberOfItems" field
 		$this->Database->query("ALTER TABLE `tl_module` ADD `numberOfItems` smallint(5) unsigned NOT NULL default '0'");
 		$this->Database->query("UPDATE `tl_module` SET `numberOfItems`=`rss_numberOfItems` WHERE `rss_numberOfItems`>0");
@@ -315,9 +312,7 @@ class Updater extends \Controller
 			{
 				if (!file_exists(TL_ROOT . '/system/modules/' . $strFolder . '/html/.htaccess'))
 				{
-					$objFile = new \File('system/modules/' . $strFolder . '/html/.htaccess', true);
-					$objFile->write("<IfModule !mod_authz_core.c>\n  Order allow,deny\n  Allow from all\n</IfModule>\n<IfModule mod_authz_core.c>\n  Require all granted\n</IfModule>");
-					$objFile->close();
+					\File::putContent('system/modules/' . $strFolder . '/html/.htaccess', "<IfModule !mod_authz_core.c>\n  Order allow,deny\n  Allow from all\n</IfModule>\n<IfModule mod_authz_core.c>\n  Require all granted\n</IfModule>");
 				}
 			}
 		}
@@ -359,8 +354,129 @@ class Updater extends \Controller
 
 
 	/**
+	 * Version 3.1.0 update
+	 */
+	public function run31Update()
+	{
+		// Get all page layouts that use the CSS framework
+		$objLayout = $this->Database->query("SELECT `id`, `framework` FROM `tl_layout` WHERE `framework`!=''");
+
+		// Rename "responsive.css" to "grid.css"
+		while ($objLayout->next())
+		{
+			$arrCss = deserialize($objLayout->framework);
+
+			if (($key = array_search('responsive.css', $arrCss)) !== false)
+			{
+				$arrCss[$key] = 'grid.css';
+			}
+
+			$this->Database->prepare("UPDATE `tl_layout` SET `framework`=? WHERE `id`=?")
+						   ->execute(serialize($arrCss), $objLayout->id);
+		}
+
+		// Add the jQuery fields if they do not yet exist (see #5689)
+		if (!$this->Database->fieldExists('addJQuery', 'tl_layout'))
+		{
+			$this->Database->query("ALTER TABLE `tl_layout` ADD `addJQuery` char(1) NOT NULL default ''");
+			$this->Database->query("ALTER TABLE `tl_layout` ADD `jSource` varchar(16) NOT NULL default ''");
+			$this->Database->query("ALTER TABLE `tl_layout` ADD `jquery` text NULL");
+		}
+
+		// Get all page layouts that use the moo_mediabox template
+		$objLayout = $this->Database->query("SELECT `id`, `addJQuery`, `jquery`, `mootools` FROM `tl_layout` WHERE `addMooTools`=1 AND `mootools` LIKE '%\"moo_mediaelement\"%'");
+
+		// Activate the "j_mediaelement" template instead
+		while ($objLayout->next())
+		{
+			$arrSet = array();
+
+			// jQuery already activated
+			if ($objLayout->addjQuery)
+			{
+				$arrJQuery = deserialize($objLayout->jquery);
+
+				// Add j_mediaelement
+				if (!is_array($arrJQuery))
+				{
+					$arrSet['jquery'] = serialize(array('j_mediaelement'));
+				}
+				elseif (!in_array('j_mediaelement', $arrJQuery))
+				{
+					$arrJQuery[] = 'j_mediaelement';
+					$arrSet['jquery'] = serialize($arrJQuery);
+				}
+			}
+			else
+			{
+				$arrSet['addJQuery'] = 1;
+				$arrSet['jSource'] = 'j_local';
+				$arrSet['jquery'] = serialize(array('j_mediaelement'));
+			}
+
+			$arrMooTools = deserialize($objLayout->mootools);
+
+			// Unset the moo_mediaelement template
+			if (($key = array_search('moo_mediaelement', $arrMooTools)) !== false)
+			{
+				unset($arrMooTools[$key]);
+			}
+
+			// Update the MooTools templates
+			if (empty($arrMooTools))
+			{
+				$arrSet['mootools'] = '';
+			}
+			else
+			{
+				$arrSet['mootools'] = serialize(array_values($arrMooTools));
+			}
+
+			$this->Database->prepare("UPDATE `tl_layout` %s WHERE `id`=?")
+						   ->set($arrSet)
+						   ->execute($objLayout->id);
+		}
+
+		// Get all page layouts
+		$objLayout = $this->Database->query("SELECT `id`, `modules` FROM `tl_layout`");
+
+		// Add the "enable" flag to all modules
+		while ($objLayout->next())
+		{
+			$arrModules = deserialize($objLayout->modules);
+
+			foreach (array_keys($arrModules) as $key)
+			{
+				$arrModules[$key]['enable'] = true;
+			}
+
+			$this->Database->prepare("UPDATE `tl_layout` SET `modules`=? WHERE `id`=?")
+						   ->execute(serialize($arrModules), $objLayout->id);
+		}
+
+		// Adjust the accordion elements
+		$this->Database->query("UPDATE `tl_content` SET `type`='accordionStart' WHERE `type`='accordion' AND `mooType`='mooStart'");
+		$this->Database->query("UPDATE `tl_content` SET `type`='accordionStop' WHERE `type`='accordion' AND `mooType`='mooStop'");
+		$this->Database->query("UPDATE `tl_content` SET `type`='accordionSingle' WHERE `type`='accordion' AND `mooType`='mooSingle'");
+
+		// White-space is now in the "alignment" section (see #4519)
+		$this->Database->query("UPDATE `tl_style` SET `alignment`=1 WHERE `whitespace`!=''");
+		$this->Database->query("ALTER TABLE `tl_style` CHANGE `whitespace` `whitespace` varchar(8) NOT NULL default ''");
+		$this->Database->query("UPDATE `tl_style` SET `whitespace`='nowrap' WHERE `whitespace`!=''");
+
+		// Update the tl_files table (see #5598)
+		$this->Database->query("ALTER TABLE `tl_files` DROP INDEX `path`");
+		$this->Database->query("ALTER TABLE `tl_files` CHANGE `path` `path` text NULL");
+		$this->Database->query("ALTER TABLE `tl_files` ADD UNIQUE KEY `pid_name` (`pid`, `name`)");
+
+		// Remove the "mooType" field (triggers the version 3.1 update)
+		$this->Database->query("ALTER TABLE `tl_content` DROP `mooType`");
+	}
+
+
+	/**
 	 * Scan the upload folder and create the database entries
-	 * 
+	 *
 	 * @param string  $strPath The target folder
 	 * @param integer $pid     The parent ID
 	 */
@@ -454,37 +570,56 @@ class Updater extends \Controller
 	 */
 	public function updateFileTreeFields()
 	{
+		$arrFiles = array();
+
+		// Parse all active modules
+		foreach ($this->Config->getActiveModules() as $strModule)
+		{
+			$strDir = 'system/modules/' . $strModule . '/dca';
+
+			if (!is_dir(TL_ROOT . '/' . $strDir))
+			{
+				continue;
+			}
+
+			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
+			{
+				if (in_array($strFile, $arrFiles) || $strFile == '.htaccess')
+				{
+					continue;
+				}
+
+				$arrFiles[] = substr($strFile, 0, -4);
+			}
+		}
+
 		$arrFields = array();
 
 		// Find all fileTree fields
-		foreach (scan(TL_ROOT . '/system/cache/dca') as $strFile)
+		foreach ($arrFiles as $strTable)
 		{
-			if ($strFile != '.htaccess')
+			$this->loadDataContainer($strTable);
+			$arrConfig = &$GLOBALS['TL_DCA'][$strTable]['config'];
+
+			// Skip non-database DCAs
+			if ($arrConfig['dataContainer'] == 'File')
 			{
-				$strTable = str_replace('.php', '', $strFile);
-				$this->loadDataContainer($strTable);
-				$arrConfig = &$GLOBALS['TL_DCA'][$strTable]['config'];
+				continue;
+			}
+			if ($arrConfig['dataContainer'] == 'Folder' && !$arrConfig['databaseAssisted'])
+			{
+				continue;
+			}
 
-				// Skip non-database DCAs
-				if ($arrConfig['dataContainer'] == 'File')
+			foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $strField=>$arrField)
+			{
+				// FIXME: support other field types
+				if ($arrField['inputType'] == 'fileTree')
 				{
-					continue;
-				}
-				if ($arrConfig['dataContainer'] == 'Folder' && !$arrConfig['databaseAssisted'])
-				{
-					continue;
-				}
-
-				foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $strField=>$arrField)
-				{
-					// FIXME: support other field types
-					if ($arrField['inputType'] == 'fileTree')
+					if ($this->Database->fieldExists($strField, $strTable))
 					{
-						if ($this->Database->fieldExists($strField, $strTable))
-						{
-							$key = $arrField['eval']['multiple'] ? 'multiple' : 'single';
-							$arrFields[$key][] = $strTable . '.' . $strField;
-						}
+						$key = $arrField['eval']['multiple'] ? 'multiple' : 'single';
+						$arrFields[$key][] = $strTable . '.' . $strField;
 					}
 				}
 			}
@@ -541,7 +676,7 @@ class Updater extends \Controller
 
 	/**
 	 * Create a content element
-	 * 
+	 *
 	 * @param \Database\Result $objElement A database result object
 	 * @param string           $strPtable  The name of the parent table
 	 * @param string           $strField   The name of the text column

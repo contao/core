@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -31,19 +31,32 @@ class PageRegular extends \Frontend
 	/**
 	 * Generate a regular page
 	 * @param object
+	 * @param boolean
 	 */
-	public function generate($objPage)
+	public function generate($objPage, $blnCheckRequest=false)
 	{
 		$GLOBALS['TL_KEYWORDS'] = '';
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 
-		$this->loadLanguageFile('default');
+		\System::loadLanguageFile('default');
 
 		// Static URLs
 		$this->setStaticUrls();
 
 		// Get the page layout
 		$objLayout = $this->getPageLayout($objPage);
+
+		// HOOK: modify the page or layout object (see #4736)
+		if (isset($GLOBALS['TL_HOOKS']['getPageLayout']) && is_array($GLOBALS['TL_HOOKS']['getPageLayout']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getPageLayout'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($objPage, $objLayout, $this);
+			}
+		}
+
+		// Set the layout template and template group
 		$objPage->template = $objLayout->template ?: 'fe_page';
 		$objPage->templateGroup = $objLayout->getRelated('pid')->templates;
 
@@ -60,8 +73,18 @@ class PageRegular extends \Frontend
 		$arrSections = array('header', 'left', 'right', 'main', 'footer');
 		$arrModules = deserialize($objLayout->modules);
 
+		$arrModuleIds = array();
+
+		// Filter the disabled modules
+		foreach ($arrModules as $module)
+		{
+			if (!$module['disable'])
+			{
+				$arrModuleIds[] = $module['mod'];
+			}
+		}
+
 		// Get all modules in a single DB query
-		$arrModuleIds = array_map(function($arr) { return $arr['mod']; }, $arrModules);
 		$objModules = \ModuleModel::findMultipleByIds($arrModuleIds);
 
 		if ($objModules !== null || $arrModules[0]['mod'] == 0) // see #4137
@@ -79,6 +102,12 @@ class PageRegular extends \Frontend
 
 			foreach ($arrModules as $arrModule)
 			{
+				// Disabled module
+				if (!$arrModule['enable'])
+				{
+					continue;
+				}
+
 				// Replace the module ID with the module model
 				if ($arrModule['mod'] > 0 && isset($arrMapper[$arrModule['mod']]))
 				{
@@ -146,21 +175,12 @@ class PageRegular extends \Frontend
 		$this->Template->onload = trim($objLayout->onload);
 		$this->Template->class = trim($objLayout->cssClass . ' ' . $objPage->cssClass);
 
-		// HOOK: extension "bodyclass"
-		if (in_array('bodyclass', $this->Config->getActiveModules()))
-		{
-			if (strlen($objPage->cssBody))
-			{
-				$this->Template->class .= ' ' . $objPage->cssBody;
-			}
-		}
-
 		// Execute AFTER the modules have been generated and create footer scripts first
 		$this->createFooterScripts($objLayout);
 		$this->createHeaderScripts($objPage, $objLayout);
 
 		// Print the template to the screen
-		$this->Template->output();
+		$this->Template->output($blnCheckRequest);
 	}
 
 
@@ -521,7 +541,7 @@ class PageRegular extends \Frontend
 		$arrExternal = deserialize($objLayout->external);
 
 		// External style sheets
-		if (is_array($arrExternal) && !empty($arrExternal))
+		if (!empty($arrExternal) && is_array($arrExternal))
 		{
 			// Consider the sorting order (see #5038)
 			if ($objLayout->orderExt != '')
@@ -580,7 +600,7 @@ class PageRegular extends \Frontend
 		$calendarfeeds = deserialize($objLayout->calendarfeeds);
 
 		// Add newsfeeds
-		if (is_array($newsfeeds) && !empty($newsfeeds))
+		if (!empty($newsfeeds) && is_array($newsfeeds))
 		{
 			$objFeeds = \NewsFeedModel::findByIds($newsfeeds);
 
@@ -595,7 +615,7 @@ class PageRegular extends \Frontend
 		}
 
 		// Add calendarfeeds
-		if (is_array($calendarfeeds) && !empty($calendarfeeds))
+		if (!empty($calendarfeeds) && is_array($calendarfeeds))
 		{
 			$objFeeds = \CalendarFeedModel::findByIds($calendarfeeds);
 
@@ -667,8 +687,8 @@ class PageRegular extends \Frontend
 			$strScripts .= '[[TL_MOOTOOLS]]';
 		}
 
-		// Add a placeholder for dynamic scripts (see #4203)
-		$strScripts .= '[[TL_HIGHLIGHTER]]';
+		// Add a placeholder for dynamic scripts (see #4203, #5583)
+		$strScripts .= '[[TL_BODY]]';
 
 		// Add the custom JavaScript
 		if ($objLayout->script != '')

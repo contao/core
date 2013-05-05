@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -51,7 +51,7 @@ class Popup extends Backend
 		parent::__construct();
 
 		$this->User->authenticate();
-		$this->loadLanguageFile('default');
+		System::loadLanguageFile('default');
 
 		$strFile = Input::get('src', true);
 		$strFile = base64_decode($strFile);
@@ -112,14 +112,22 @@ class Popup extends Backend
 		}
 
 		$this->Template = new BackendTemplate('be_popup');
+		$this->Template->id = null;
+
+		// Also show the database ID of the file (see #5211)
+		if (($objModel = FilesModel::findByPath($this->strFile)) !== null)
+		{
+			$this->Template->id = $objModel->id;
+		}
+
 		$objFile = new File($this->strFile, true);
 
 		// Add the file info
 		$this->Template->icon = $objFile->icon;
 		$this->Template->mime = $objFile->mime;
-		$this->Template->ctime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->ctime);
-		$this->Template->mtime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->mtime);
-		$this->Template->atime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->atime);
+		$this->Template->ctime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->ctime);
+		$this->Template->mtime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->mtime);
+		$this->Template->atime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->atime);
 		$this->Template->filesize = $this->getReadableSize($objFile->filesize) . ' (' . number_format($objFile->filesize, 0, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' Byte)';
 		$this->Template->path = $this->strFile;
 
@@ -141,13 +149,14 @@ class Popup extends Backend
 	 */
 	protected function output()
 	{
-		$this->Template->theme = $this->getTheme();
+		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($this->strFile);
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->href = ampersand(Environment::get('request'), true) . '&amp;download=1';
 		$this->Template->headline = basename(utf8_convert_encoding($this->strFile, $GLOBALS['TL_CONFIG']['characterSet']));
+		$this->Template->label_id = $GLOBALS['TL_LANG']['MSC']['fileDatabaseId'];
 		$this->Template->label_imagesize = $GLOBALS['TL_LANG']['MSC']['fileImageSize'];
 		$this->Template->label_filesize = $GLOBALS['TL_LANG']['MSC']['fileSize'];
 		$this->Template->label_ctime = $GLOBALS['TL_LANG']['MSC']['fileCreated'];

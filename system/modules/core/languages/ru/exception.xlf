@@ -1,0 +1,79 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/explain.php" source-language="en">
+    <body>
+      <trans-unit id="XPT.error">
+        <source>An error occurred</source>
+        <target>Произошла ошибка</target>
+      </trans-unit>
+      <trans-unit id="XPT.matter">
+        <source>What's the matter?</source>
+        <target>В чем дело?</target>
+      </trans-unit>
+      <trans-unit id="XPT.howToFix">
+        <source>How can I fix the issue?</source>
+        <target>Как я могу устранить проблему?</target>
+      </trans-unit>
+      <trans-unit id="XPT.more">
+        <source>Tell me more, please</source>
+        <target>Расскажите мне больше, пожалуйста</target>
+      </trans-unit>
+      <trans-unit id="XPT.hint">
+        <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
+        <target>Для настройки данного уведомления, создайте файл шаблона с именем &lt;em&gt;%s&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorOccurred">
+        <source>An error occurred while executing this script. Something does not work properly.</source>
+        <target>Произошла ошибка при выполнении этого сценария. Что-то не работает должным образом.</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorFixOne">
+        <source>Open the &lt;code&gt;system/logs/error.log&lt;/code&gt; file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</source>
+        <target>Откройте файл &lt;code&gt;system/logs/error.log&lt;/code&gt; и найдите соответствующее сообщение об ошибке (как правило последняя запись). Вы также можете добавить следующую строку в локальный файл конфигурации и перезагрузить эту страницу:</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorFixTwo">
+        <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
+        <target>Однако, имейте в виду, что &lt;strong&gt;все&lt;/strong&gt; смогут увидеть сообщения об ошибках на вашем сайте!</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorExplain">
+        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found it in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>Выполнение скрипта остановлено, потому, что что-то не работает должным образом. Фактическое сообщение об ошибке скрыто этим уведомлением по соображениям безопасности и может быть найдено в файле &lt;code&gt;system/logs/error.log&lt;/code&gt; (см. выше). Если вы не понимаете сообщение об ошибке или не знаете, как решить проблему, воспользуйтесь поиском в &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQ&lt;/a&gt; или посетите &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Страницу поддержки Contao&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.requestToken">
+        <source>Invalid request token</source>
+        <target>Ошибка запроса токена</target>
+      </trans-unit>
+      <trans-unit id="XPT.invalidToken">
+        <source>The request token could not be verified.</source>
+        <target>Запрашиваемый токен не может быть проверен.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenRetry">
+        <source>Please &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;click this link&lt;/a&gt; and try again. Do not use the back button of your browser.</source>
+        <target>Пожалуйста, &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;нажмите на эту ссылку&lt;/a&gt; и повторите попытку. Не используйте кнопку назад вашего браузера.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenExplainOne">
+        <source>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</source>
+        <target>Эта ошибка происходит, если есть POST запрос без действительного токена аутентификации. В Contao 2.10, проверка реферера была заменена системой запрос токена. Если проблема сохраняется, возможно, используются несовместимые сторонние расширения или неправильно обновлена установка Contao.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenExplainTwo">
+        <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+      </trans-unit>
+      <trans-unit id="XPT.incomplete">
+        <source>Incomplete installation</source>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteInstallation">
+        <source>The installation has not been completed, therefore Contao cannot work properly.</source>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteFixOne">
+        <source>Point your browser to the following URL:</source>
+      </trans-unit>
+      <trans-unit id="XPT.installPath">
+        <source>path-to-installation</source>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteFixTwo">
+        <source>This will open the Contao install tool, which will guide you through the installation process.</source>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteExplain">
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/3.0/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

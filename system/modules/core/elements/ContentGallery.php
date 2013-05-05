@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -281,7 +281,7 @@ class ContentGallery extends \ContentElement
 			$offset = ($page - 1) * $this->perPage;
 			$limit = min($this->perPage + $offset, $total);
 
-			$objPagination = new \Pagination($total, $this->perPage, 7, $id);
+			$objPagination = new \Pagination($total, $this->perPage, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -329,6 +329,7 @@ class ContentGallery extends \ContentElement
 				// Empty cell
 				if (!is_array($images[($i+$j)]) || ($j+$i) >= $limit)
 				{
+					$objCell->colWidth = $colwidth . '%';
 					$objCell->class = 'col_'.$j . $class_td;
 				}
 				else

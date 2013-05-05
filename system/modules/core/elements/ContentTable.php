@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -50,28 +50,7 @@ class ContentTable extends \ContentElement
 		$this->Template->useHeader = $this->thead ? true : false;
 		$this->Template->useFooter = $this->tfoot ? true : false;
 		$this->Template->useLeftTh = $this->tleft ? true : false;
-		$this->Template->sortable = false;
-		$this->Template->thousandsSeparator = $GLOBALS['TL_LANG']['MSC']['thousandsSeparator'];
-		$this->Template->decimalSeparator = $GLOBALS['TL_LANG']['MSC']['decimalSeparator'];
-
-		// Add the CSS and JavaScript files
-		if ($this->sortable)
-		{
-			if ($objPage->hasJQuery)
-			{
-				$this->Template->sortable = true;
-				$this->Template->hasJQuery = true;
-				$GLOBALS['TL_CSS'][] = 'assets/jquery/tablesorter/' . TABLESORTER . '/css/tablesorter.css';
-				$GLOBALS['TL_JQUERY'][] = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_ASSETS_URL . 'assets/jquery/tablesorter/' . TABLESORTER . '/js/tablesorter.js"></script>';
-			}
-			elseif ($objPage->hasMooTools)
-			{
-				$this->Template->sortable = true;
-				$this->Template->hasMooTools = true;
-				$GLOBALS['TL_CSS'][] = 'assets/mootools/tablesort/css/tablesort.css';
-				$GLOBALS['TL_MOOTOOLS'][] = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_ASSETS_URL . 'assets/mootools/tablesort/js/tablesort.js"></script>';
-			}
-		}
+		$this->Template->sortable = $this->sortable ? true : false;
 
 		$arrHeader = array();
 		$arrBody = array();

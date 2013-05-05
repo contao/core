@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -17,24 +17,25 @@
  * Version numbers are added to style sheets and JavaScript files to make
  * the web browser reload those resources after a Contao update.
  */
-define('VERSION', '3.0');
-define('BUILD', '6');
+define('VERSION', '3.1');
+define('BUILD', '0');
 define('LONG_TERM_SUPPORT', false);
-define('CODEMIRROR', '2.32');
+define('ACE', '1.0.0');
 define('CSS3PIE', '1.0.0');
 define('HIGHLIGHTER', '3.0.83');
-define('HTML5SHIV', '3.6.1');
-define('JQUERY', '1.8.2');
-define('JQUERY_UI', '1.9.1');
-define('COLORBOX', '1.3.20');
-define('MEDIAELEMENT', '2.9.5');
-define('COLORPICKER', '1.3');
+define('HTML5SHIV', '3.6.2');
+define('JQUERY', '1.9.1');
+define('JQUERY_UI', '1.10.2');
+define('COLORBOX', '1.4.11');
+define('MEDIAELEMENT', '2.11.3');
 define('TABLESORTER', '2.0.5');
 define('MOOTOOLS', '1.4.5');
-define('DATEPICKER', '2.1.1');
+define('COLORPICKER', '1.3');
+define('DATEPICKER', '2.0.0');
 define('MEDIABOX', '1.4.6');
 define('SIMPLEMODAL', '1.2');
 define('SLIMBOX', '1.71');
+define('SWIPE', '2.0');
 
 
 /**
@@ -68,10 +69,3 @@ define('TL_FORMS', 'FORMS');
 define('TL_CONFIGURATION', 'CONFIGURATION');
 define('TL_NEWSLETTER', 'NEWSLETTER');
 define('TL_REPOSITORY', 'REPOSITORY');
-
-
-/**
- * Core and legacy modules
- */
-define('TL_CORE_MODULES', 'core,calendar,comments,devtools,faq,listing,news,newsletter,repository');
-define('TL_LEGACY_MODULES', 'backend,frontend,rep_base,rep_client,registration,rss_reader,tpl_editor');

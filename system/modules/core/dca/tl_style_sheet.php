@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -83,16 +83,14 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['edit'],
 				'href'                => 'table=tl_style',
-				'icon'                => 'edit.gif',
-				'attributes'          => 'class="contextmenu"'
+				'icon'                => 'edit.gif'
 			),
 			'editheader' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['editheader'],
 				'href'                => 'table=tl_style_sheet&amp;act=edit',
 				'icon'                => 'header.gif',
-				'button_callback'     => array('tl_style_sheet', 'editHeader'),
-				'attributes'          => 'class="edit-header"'
+				'button_callback'     => array('tl_style_sheet', 'editHeader')
 			),
 			'copy' => array
 			(
@@ -126,7 +124,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},name;{config_legend},embedImages,cc;{media_legend},media,mediaQuery;{vars_legend},vars'
+		'default'                     => '{title_legend},name;{config_legend},disablePie,embedImages,cc;{media_legend},media,mediaQuery;{vars_legend},vars'
 	),
 
 	// Fields
@@ -153,8 +151,15 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'flag'                    => 1,
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true),
 			'sql'                     => "varchar(64) NOT NULL default ''"
+		),
+		'disablePie' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['disablePie'],
+			'inputType'               => 'checkbox',
+			'exclude'                 => true,
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'embedImages' => array
 		(
@@ -317,7 +322,7 @@ class tl_style_sheet extends Backend
 		{
 			return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">@media '. String::substr($row['mediaQuery'], 64) . $cc .'</span>' . "</div>\n";
 		}
-		elseif (is_array($media) && !empty($media))
+		elseif (!empty($media) && is_array($media))
 		{
 			return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">@media '. implode(', ', $media) . $cc .'</span>' . "</div>\n";
 		}
@@ -356,6 +361,6 @@ class tl_style_sheet extends Backend
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || count(preg_grep('/^tl_style_sheet::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || count(preg_grep('/^tl_style_sheet::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 }

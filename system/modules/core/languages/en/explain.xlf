@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/explain.php" source-language="en">
+    <body>
+      <trans-unit id="XPL.insertTags.0.0">
+        <source>Rich Text Editor</source>
+      </trans-unit>
+      <trans-unit id="XPL.insertTags.0.1">
+        <source>For more information about TinyMCE please visit &lt;a href="http://www.tinymce.com/" title="TinyMCE by moxiecode" target="_blank"&gt;http://www.tinymce.com/&lt;/a&gt;.</source>
+      </trans-unit>
+      <trans-unit id="XPL.insertTags.1.0">
+        <source>Insert tags</source>
+      </trans-unit>
+      <trans-unit id="XPL.insertTags.1.1">
+        <source>For more information on insert tags please visit &lt;a href="https://contao.org/manual/managing-content.html#insert-tags" title="Contao online documentation" target="_blank"&gt;https://contao.org/manual/managing-content.html#insert-tags&lt;/a&gt;.</source>
+      </trans-unit>
+      <trans-unit id="XPL.insertTags.2.0">
+        <source>Code Editor</source>
+      </trans-unit>
+      <trans-unit id="XPL.insertTags.2.1">
+        <source>For more information about ACE please visit &lt;a href="http://ace.ajax.org" title="ACE (Ajax.org Cloud9 Editor)" target="_blank"&gt;http://ace.ajax.org&lt;/a&gt;.</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.0.0">
+        <source>colspan</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.0.1">
+        <source>Contao supports all date and time formats that can be parsed with the PHP date() function. However, to ensure that any input can be transformed into a UNIX timestamp, you can only use numeric date and time formats (j, d, m, n, y, Y, g, G, h, H, i, s) in the back end.&lt;br&gt;&lt;br&gt;&lt;strong&gt;You can enter variant front end formats in the site structure (website root pages).&lt;/strong&gt;&lt;br&gt;&lt;br&gt;&lt;em&gt;Here are some examples of valid date and time formats&lt;/em&gt;:</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.1.0">
+        <source>Y-m-d</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.1.1">
+        <source>YYYY-MM-DD, international ISO-8601, e.g. 2005-01-28</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.2.0">
+        <source>m/d/Y</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.2.1">
+        <source>MM/DD/YYYY, English format, e.g. 01/28/2005</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.3.0">
+        <source>d.m.Y</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.3.1">
+        <source>DD.MM.YYYY, German format, e.g. 28.01.2005</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.4.0">
+        <source>y-n-j</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.4.1">
+        <source>YY-M-D, without leading zeros, e.g. 05-1-28</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.5.0">
+        <source>Ymd</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.5.1">
+        <source>YYYYMMDD, timestamp, e.g. 20050128</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.6.0">
+        <source>H:i:s</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.6.1">
+        <source>24 hours, minutes and seconds, e.g. 20:36:59</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.7.0">
+        <source>g:i</source>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.7.1">
+        <source>12 hours without leading zeros and minutes, e.g. 8:36</source>
+      </trans-unit>
+      <trans-unit id="XPL.highlighter.0.0">
+        <source>Rich Text Editor</source>
+      </trans-unit>
+      <trans-unit id="XPL.highlighter.0.1">
+        <source>For more information about how to configure the syntax highlighter please visit &lt;a href="http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults" title="SyntaxHighlighter by Alex Gorbatchev" target="_blank"&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

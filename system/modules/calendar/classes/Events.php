@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Calendar
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -207,13 +207,13 @@ abstract class Events extends \Module
 		$intDate = $intStart;
 		$intKey = date('Ymd', $intStart);
 		$span = \Calendar::calculateSpan($intStart, $intEnd);
-		$strDate = $this->parseDate($objPage->dateFormat, $intStart);
+		$strDate = \Date::parse($objPage->dateFormat, $intStart);
 		$strDay = $GLOBALS['TL_LANG']['DAYS'][date('w', $intStart)];
 		$strMonth = $GLOBALS['TL_LANG']['MONTHS'][(date('n', $intStart)-1)];
 
 		if ($span > 0)
 		{
-			$strDate = $this->parseDate($objPage->dateFormat, $intStart) . ' - ' . $this->parseDate($objPage->dateFormat, $intEnd);
+			$strDate = \Date::parse($objPage->dateFormat, $intStart) . ' - ' . \Date::parse($objPage->dateFormat, $intEnd);
 			$strDay = '';
 		}
 
@@ -223,15 +223,15 @@ abstract class Events extends \Module
 		{
 			if ($span > 0)
 			{
-				$strDate = $this->parseDate($objPage->datimFormat, $intStart) . ' - ' . $this->parseDate($objPage->datimFormat, $intEnd);
+				$strDate = \Date::parse($objPage->datimFormat, $intStart) . ' - ' . \Date::parse($objPage->datimFormat, $intEnd);
 			}
 			elseif ($intStart == $intEnd)
 			{
-				$strTime = $this->parseDate($objPage->timeFormat, $intStart);
+				$strTime = \Date::parse($objPage->timeFormat, $intStart);
 			}
 			else
 			{
-				$strTime = $this->parseDate($objPage->timeFormat, $intStart) . ' - ' . $this->parseDate($objPage->timeFormat, $intEnd);
+				$strTime = \Date::parse($objPage->timeFormat, $intStart) . ' - ' . \Date::parse($objPage->timeFormat, $intEnd);
 			}
 		}
 
@@ -451,6 +451,16 @@ abstract class Events extends \Module
 				return array($objToday->dayBegin, $objToday->yearEnd, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
+			case 'next_next_month':
+				$objToday = new \Date();
+				return array(($objToday->monthEnd + 1), strtotime('+1 month', $objToday->monthEnd), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				break;
+
+			case 'next_next_year':
+				$objToday = new \Date();
+				return array(($objToday->yearEnd + 1), strtotime('+1 year', $objToday->yearEnd), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				break;
+
 			case 'next_all': // 2038-01-01 00:00:00
 				$objToday = new \Date();
 				return array($objToday->dayBegin, 2145913200, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
@@ -499,6 +509,16 @@ abstract class Events extends \Module
 			case 'past_cur_year':
 				$objToday = new \Date();
 				return array($objToday->yearBegin, ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				break;
+
+			case 'past_prev_month':
+				$objToday = new \Date();
+				return array(strtotime('-1 month', $objToday->monthBegin), ($objToday->monthBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				break;
+
+			case 'past_prev_year':
+				$objToday = new \Date();
+				return array(strtotime('-1 year', $objToday->yearBegin), ($objToday->yearBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_all': // 1970-01-01 00:00:00

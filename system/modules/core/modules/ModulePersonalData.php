@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (C) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2013 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -45,7 +45,7 @@ class ModulePersonalData extends \Module
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### PERSONAL DATA ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['personalData'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -76,7 +76,7 @@ class ModulePersonalData extends \Module
 
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 
-		$this->loadLanguageFile('tl_member');
+		\System::loadLanguageFile('tl_member');
 		$this->loadDataContainer('tl_member');
 
 		// Call onload_callback (e.g. to check permissions)
@@ -131,8 +131,27 @@ class ModulePersonalData extends \Module
 
 			$strGroup = $arrData['eval']['feGroup'];
 
+			$arrData['eval']['required'] = false;
 			$arrData['eval']['tableless'] = $this->tableless;
-			$arrData['eval']['required'] = ($this->User->$field == '' && $arrData['eval']['mandatory']) ? true : false;
+
+			// Use strlen() here (see #3277)
+			if ($arrData['eval']['mandatory'])
+			{
+				if (is_array($this->User->$field))
+				{
+					 if (empty($this->User->$field))
+					 {
+					 	$arrData['eval']['required'] = true;
+					 }
+				}
+				else
+				{
+					if (!strlen($this->User->$field))
+					{
+						$arrData['eval']['required'] = true;
+					}
+				}
+			}
 
 			$varValue = $this->User->$field;
 
@@ -149,7 +168,7 @@ class ModulePersonalData extends \Module
 				}
 			}
 
-			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $varValue));
+			$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $field, $varValue));
 
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
@@ -190,7 +209,7 @@ class ModulePersonalData extends \Module
 				}
 
 				// Trigger the save_callback (see #5247)
-				if (!$objWidget->hasErrors() && is_array($arrData['save_callback']))
+				if ($objWidget->submitInput() && !$objWidget->hasErrors() && is_array($arrData['save_callback']))
 				{
 					foreach ($arrData['save_callback'] as $callback)
 					{
@@ -222,16 +241,6 @@ class ModulePersonalData extends \Module
 					// Set the new field in the member model
 					$blnModified = true;
 					$objMember->$field = $varValue;
-
-					// HOOK: set new password callback
-					if ($objWidget instanceof \FormPassword && isset($GLOBALS['TL_HOOKS']['setNewPassword']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
-					{
-						foreach ($GLOBALS['TL_HOOKS']['setNewPassword'] as $callback)
-						{
-							$this->import($callback[0]);
-							$this->$callback[0]->$callback[1]($this->User, $varValue, $this);
-						}
-					}
 				}
 			}
 
@@ -303,7 +312,7 @@ class ModulePersonalData extends \Module
 
 		$this->Template->formId = 'tl_member_' . $this->id;
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['saveData']);
-		$this->Template->action = $this->getIndexFreeRequest();
+		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 		$this->Template->rowLast = 'row_' . $row . ((($row % 2) == 0) ? ' even' : ' odd');
 

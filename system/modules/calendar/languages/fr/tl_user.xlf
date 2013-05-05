@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_user.php" source-language="en">
+    <body>
+      <trans-unit id="tl_user.calendars.0">
+        <source>Allowed calendars</source>
+        <target>Calendriers autorisés</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendars.1">
+        <source>Here you can grant access to one or more calendars.</source>
+        <target>Accorder l'accès à un ou plusieurs calendriers.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarp.0">
+        <source>Calendar permissions</source>
+        <target>Permissions du calendrier</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarp.1">
+        <source>Here you can define the calendar permissions.</source>
+        <target>Définir les permissions du calendrier.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeeds.0">
+        <source>Allowed RSS feeds</source>
+        <target>Flux RSS autorisés</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeeds.1">
+        <source>Here you can grant access to one or more calendar feeds.</source>
+        <target>Accorder l'accès à un ou plusieurs flux de calendrier.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeedp.0">
+        <source>RSS feed permissions</source>
+        <target>Permissions des flux RSS</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeedp.1">
+        <source>Here you can define the calendar feed permissions.</source>
+        <target>Définir les permissions du flux du calendrier.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendars_legend">
+        <source>Calendar permissions</source>
+        <target>Permissions du calendrier</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

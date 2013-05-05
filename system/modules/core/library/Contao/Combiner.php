@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,17 +15,17 @@ namespace Contao;
 
 /**
  * Combines .css or .js files into one single file
- * 
+ *
  * Usage:
- * 
+ *
  *     $combiner = new Combiner();
- * 
+ *
  *     $combiner->add('css/style.css');
  *     $combiner->add('css/fonts.css');
  *     $combiner->add('css/print.css');
- * 
+ *
  *     echo $combiner->getCombinedFile();
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -73,11 +73,11 @@ class Combiner extends \System
 
 	/**
 	 * Add a file to the combined file
-	 * 
+	 *
 	 * @param string $strFile    The file to be added
 	 * @param string $strVersion An optional version number
 	 * @param string $strMedia   The media type of the file (.css only)
-	 * 
+	 *
 	 * @throws \Exception If $strFile is invalid
 	 */
 	public function add($strFile, $strVersion=null, $strMedia='all')
@@ -147,7 +147,7 @@ class Combiner extends \System
 
 	/**
 	 * Add multiple files from an array
-	 * 
+	 *
 	 * @param array  $arrFiles   An array of files to be added
 	 * @param string $strVersion An optional version number
 	 * @param string $strMedia   The media type of the file (.css only)
@@ -163,7 +163,7 @@ class Combiner extends \System
 
 	/**
 	 * Check whether files have been added
-	 * 
+	 *
 	 * @return boolean True if there are files
 	 */
 	public function hasEntries()
@@ -174,9 +174,9 @@ class Combiner extends \System
 
 	/**
 	 * Generate the combined file and return its path
-	 * 
+	 *
 	 * @param string $strUrl An optional URL to prepend
-	 * 
+	 *
 	 * @return string The path to the combined file
 	 */
 	public function getCombinedFile($strUrl=null)
@@ -190,7 +190,7 @@ class Combiner extends \System
 		$strKey = substr(md5($this->strKey), 0, 12);
 
 		// Load the existing file
-		if (file_exists(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode))
+		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode))
 		{
 			return $strUrl . 'assets/' . $strTarget . '/' . $strKey . $this->strMode;
 		}
@@ -221,10 +221,10 @@ class Combiner extends \System
 				$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
 
 				$strBuffer = '';
-				$chunks = preg_split('/url\("([^"]+)"\)/', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
+				$chunks = preg_split('/url\(["\'](.+)["\']\)/U', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 				// Check the URLs
-				for ($i=0; $i<count($chunks); $i=$i+2)
+				for ($i=0, $c=count($chunks); $i<$c; $i=$i+2)
 				{
 					$strBuffer .= $chunks[$i];
 
@@ -280,9 +280,7 @@ class Combiner extends \System
 		// Create a gzipped version
 		if ($GLOBALS['TL_CONFIG']['gzipScripts'] && function_exists('gzencode'))
 		{
-			$objFile = new \File('assets/' . $strTarget . '/' . $strKey . $this->strMode . '.gz', true);
-			$objFile->write(gzencode(file_get_contents(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode), 9));
-			$objFile->close();
+			\File::putContent('assets/' . $strTarget . '/' . $strKey . $this->strMode . '.gz', gzencode(file_get_contents(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode), 9));
 		}
 
 		return $strUrl . 'assets/' . $strTarget . '/' . $strKey . $this->strMode;
