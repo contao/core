@@ -456,7 +456,7 @@ abstract class Frontend extends \Controller
 
 		if (is_array($intId))
 		{
-			if ($intId['id'] == '' || $intId['id'] == $objPage->id)
+			if ($intId['id'] == '' || ($intId['id'] == $objPage->id && $strParams === null && $strForceLang === null))
 			{
 				$this->reload();
 			}
