@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2013 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <https://contao.org>
+ * @copyright  Leo Feyer 2005-2012
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -33,8 +33,8 @@
  * Class Controller
  *
  * Provide methods to manage controllers.
- * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <https://contao.org>
+ * @copyright  Leo Feyer 2005-2012
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 abstract class Controller extends System
@@ -617,70 +617,63 @@ abstract class Controller extends System
 		$ptitle = '';
 		$trail = array($intId, $pid);
 
-		// Inherit the settings
-		if ($objPage->type == 'root')
+		// Inherit settings
+		do
 		{
-			$objParentPage = $objPage; // see #4610
-		}
-		else
-		{
-			do
+			$objParentPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
+											->limit(1)
+											->execute($pid);
+
+			if ($objParentPage->numRows < 1)
 			{
-				$objParentPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
-												->limit(1)
-												->execute($pid);
-
-				if ($objParentPage->numRows < 1)
-				{
-					break;
-				}
-
-				$pid = $objParentPage->pid;
-				$type = $objParentPage->type;
-
-				// Parent title
-				if ($ptitle == '')
-				{
-					$palias = $objParentPage->alias;
-					$pname = $objParentPage->title;
-					$ptitle = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
-				}
-
-				// Page title
-				if ($type != 'root')
-				{
-					$alias = $objParentPage->alias;
-					$name = $objParentPage->title;
-					$title = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
-					$trail[] = $objParentPage->pid;
-				}
-
-				if ($objPage->cache === false && $objParentPage->includeCache)
-				{
-					$objPage->cache = $objParentPage->cache;
-				}
-
-				if (!$objPage->layout && $objParentPage->includeLayout)
-				{
-					$objPage->layout = $objParentPage->layout;
-				}
-
-				if (!$objPage->protected && $objParentPage->protected)
-				{
-					$objPage->protected = true;
-					$objPage->groups = deserialize($objParentPage->groups);
-				}
+				break;
 			}
-			while ($pid > 0 && $type != 'root');
 
-			// Set the titles
-			$objPage->mainAlias = $alias;
-			$objPage->mainTitle = $name;
-			$objPage->mainPageTitle = $title;
-			$objPage->parentAlias = $palias;
-			$objPage->parentTitle = $pname;
-			$objPage->parentPageTitle = $ptitle;
+			$pid = $objParentPage->pid;
+			$type = $objParentPage->type;
+
+			// Parent title
+			if ($ptitle == '')
+			{
+				$palias = $objParentPage->alias;
+				$pname = $objParentPage->title;
+				$ptitle = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
+			}
+
+			// Page title
+			if ($type != 'root')
+			{
+				$alias = $objParentPage->alias;
+				$name = $objParentPage->title;
+				$title = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
+				$trail[] = $objParentPage->pid;
+			}
+
+			if ($objPage->cache === false && $objParentPage->includeCache)
+			{
+				$objPage->cache = $objParentPage->cache;
+			}
+
+			if (!$objPage->layout && $objParentPage->includeLayout)
+			{
+				$objPage->layout = $objParentPage->layout;
+			}
+
+			if (!$objPage->protected && $objParentPage->protected)
+			{
+				$objPage->protected = true;
+				$objPage->groups = deserialize($objParentPage->groups);
+			}
 		}
+		while ($pid > 0 && $type != 'root');
+
+		// Set titles
+		$objPage->mainAlias = $alias;
+		$objPage->mainTitle = $name;
+		$objPage->mainPageTitle = $title;
+		$objPage->parentAlias = $palias;
+		$objPage->parentTitle = $pname;
+		$objPage->parentPageTitle = $ptitle;
 
 		// Set the root ID and title
 		if ($objParentPage->numRows && $objParentPage->type == 'root')
@@ -905,8 +898,9 @@ abstract class Controller extends System
 	 * @param boolean
 	 * @return string|null
 	 */
-	protected function getImage($image, $width, $height, $mode='', $target=null, $force=false)
+	protected function getImage($image, $width, $height, $mode='', $target=null, $force=false, $intSrcX = 0, $intSrcY = 0, $intSrcWidth = null, $intSrcHeight = null)
 	{
+	
 		if ($image == '')
 		{
 			return null;
@@ -930,9 +924,46 @@ abstract class Controller extends System
 			$this->log('Image type "' . $objFile->extension . '" was not allowed to be processed', 'Controller getImage()', TL_ERROR);
 			return null;
 		}
+		
+		/* Calc the source area if no width/height is specified */
+		if($intSrcWidth === null) {
+			$intSrcWidth = $objFile->width - $intSrcX;
+		} else {
+			if($intSrcWidth < 0) {
+				
+				// Sourcefile width - y + negative source width
+				$intSrcWidth = $objFile->width - $intSrcX + $intSrcWidth;
+				
+			} else {
+		
+				if($intSrcWidth + $intSrcX > $objFile->width) {
+					$this->log('Image source area width larger than source image width using source image width', TL_ERROR);
+					return $objFile->width - $intSrcX;
+				}
+			
+			}
+		}
+			
+		if($intSrcHeight === null) {
+			$intSrcHeight = $objFile->height - $intSrcY;
+		} else {
+			if($intSrcHeight < 0) {
+				
+				// Sourcefile height - y + negative source height
+				$intSrcHeight = $objFile->height - $intSrcY + $intSrcHeight;
+								
+			} else {
+				
+				if($intSrcHeight + $intSrcY > $objFile->height) {
+					$this->log('Image source area height larger than source image height using source image height', TL_ERROR);
+					return $objFile->height - $intSrcY;
+				}
+			
+			}
+		}
 
 		// No resizing required
-		if ($objFile->width == $width && $objFile->height == $height)
+		if ($intSrcX == 0 && $intSrcY == 0 && $intSrcWidth == $width && $intSrcHeight == $height)
 		{
 			// Return the target image (thanks to Tristan Lins) (see #4166)
 			if ($target)
@@ -962,7 +993,8 @@ abstract class Controller extends System
 			$mode = 'center_center';
 		}
 
-		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8) . '.' . $objFile->extension;
+		$strSrcCacheName = 'srcX' . $intSrcX . '-srcY' - $intSrcY . '-srcWidth' - $intSrcWidth . '-srcHeight' - $intSrcHeight;
+		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime . '-' . $strSrcCacheName), 0, 8) . '.' . $objFile->extension;
 
 		// Check whether the image exists already
 		if (!$GLOBALS['TL_CONFIG']['debugMode'])
@@ -996,6 +1028,7 @@ abstract class Controller extends System
 			foreach ($GLOBALS['TL_HOOKS']['getImage'] as $callback)
 			{
 				$this->import($callback[0]);
+				// TODO: Extend the callback to pass $intSrcX, $intSrcY, $intSrcWidth & $intSrcHeight
 				$return = $this->$callback[0]->$callback[1]($image, $width, $height, $mode, $strCacheName, $objFile, $target);
 
 				if (is_string($return))
@@ -1006,7 +1039,7 @@ abstract class Controller extends System
 		}
 
 		// Return the path to the original image if the GDlib cannot handle it
-		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $objFile->height > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] || (!$width && !$height) || $width > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $height > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'])
+		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $objFile->height > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] || (!$width && !$height) || $width > 1200 || $height > 1200)
 		{
 			return $this->urlEncode($image);
 		}
@@ -1022,7 +1055,7 @@ abstract class Controller extends System
 			switch ($mode)
 			{
 				case 'proportional':
-					if ($objFile->width >= $objFile->height)
+					if ($intSrcWidth >= $intSrcHeight)
 					{
 						unset($height, $intHeight);
 					}
@@ -1033,7 +1066,7 @@ abstract class Controller extends System
 					break;
 
 				case 'box':
-					if (round($objFile->height * $width / $objFile->width) <= $intHeight)
+					if (round($intSrcHeight * $width / $intSrcWidth) <= $intHeight)
 					{
 						unset($height, $intHeight);
 					}
@@ -1048,15 +1081,15 @@ abstract class Controller extends System
 		// Resize width and height and crop the image if necessary
 		if ($intWidth && $intHeight)
 		{
-			if (($intWidth * $objFile->height) != ($intHeight * $objFile->width))
+			if (($intWidth * $intSrcHeight) != ($intHeight * $intSrcWidth))
 			{
-				$intWidth = max(round($objFile->width * $height / $objFile->height), 1);
+				$intWidth = max(round($intSrcWidth * $height / $intSrcHeight), 1);
 				$intPositionX = -intval(($intWidth - $width) / 2);
 
 				if ($intWidth < $width)
 				{
 					$intWidth = $width;
-					$intHeight = max(round($objFile->height * $width / $objFile->width), 1);
+					$intHeight = max(round($intSrcHeight * $width / $intSrcWidth), 1);
 					$intPositionX = 0;
 					$intPositionY = -intval(($intHeight - $height) / 2);
 				}
@@ -1117,14 +1150,14 @@ abstract class Controller extends System
 		// Calculate the height if only the width is given
 		elseif ($intWidth)
 		{
-			$intHeight = max(round($objFile->height * $width / $objFile->width), 1);
+			$intHeight = max(round($intSrcHeight * $width / $intSrcWidth), 1);
 			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
 		}
 
 		// Calculate the width if only the height is given
 		elseif ($intHeight)
 		{
-			$intWidth = max(round($objFile->width * $height / $objFile->height), 1);
+			$intWidth = max(round($intSrcWidth * $height / $intSrcHeight), 1);
 			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
 		}
 
@@ -1183,7 +1216,11 @@ abstract class Controller extends System
 			return null;
 		}
 
-		imagecopyresampled($strNewImage, $strSourceImage, $intPositionX, $intPositionY, 0, 0, $intWidth, $intHeight, $objFile->width, $objFile->height);
+		//echo $intSrcX . ' - ';
+		//echo $intSrcY . ' - ';
+		//echo $intSrcWidth . ' - ';
+		//echo $intSrcHeight . '<br />';
+		imagecopyresampled($strNewImage, $strSourceImage, $intPositionX, $intPositionY, $intSrcX, $intSrcY, $intWidth, $intHeight, $intSrcWidth, $intSrcHeight);
 
 		// Fallback to PNG if GIF ist not supported
 		if ($objFile->extension == 'gif' && !$arrGdinfo['GIF Create Support'])
@@ -1247,7 +1284,7 @@ abstract class Controller extends System
 		if ($GLOBALS['TL_CONFIG']['useFTP'])
 		{
 			$this->import('Files');
-			$this->Files->chmod($strCacheName, $GLOBALS['TL_CONFIG']['defaultFileChmod']);
+			$this->Files->chmod($strCacheName, 0644);
 		}
 
 		// Return the path to new image
@@ -2182,19 +2219,19 @@ abstract class Controller extends System
 							break;
 
 						case 'host':
-							$arrCache[$strTag] = $this->idnaDecode($this->Environment->host);
+							$arrCache[$strTag] = $this->Environment->host;
 							break;
 
 						case 'http_host':
-							$arrCache[$strTag] = $this->idnaDecode($this->Environment->httpHost);
+							$arrCache[$strTag] = $this->Environment->httpHost;
 							break;
 
 						case 'url':
-							$arrCache[$strTag] = $this->idnaDecode($this->Environment->url);
+							$arrCache[$strTag] = $this->Environment->url;
 							break;
 
 						case 'path':
-							$arrCache[$strTag] = $this->idnaDecode($this->Environment->base);
+							$arrCache[$strTag] = $this->Environment->base;
 							break;
 
 						case 'request':
@@ -2238,8 +2275,7 @@ abstract class Controller extends System
 						$elements[1] = 'mainTitle';
 					}
 
-					// Do not use specialchars() here (see #4687)
-					$arrCache[$strTag] = $objPage->{$elements[1]};
+					$arrCache[$strTag] = specialchars($objPage->{$elements[1]});
 					break;
 
 				// User agent
@@ -2288,6 +2324,10 @@ abstract class Controller extends System
 				case 'image':
 					$width = null;
 					$height = null;
+					$srcX = 0;
+					$srcY = 0;
+					$srcWidth = null;
+					$srcHeight = null;
 					$alt = '';
 					$class = '';
 					$rel = '';
@@ -2316,6 +2356,21 @@ abstract class Controller extends System
 
 								case 'height':
 									$height = $value;
+									break;
+									
+								case 'srcX':
+									$srcX = $value;
+									break;
+
+								case 'srcY':
+									$srcY = $value;
+									break;
+								case 'srcWidth':
+									$srcWidth = $value;
+									break;
+
+								case 'srcHeight':
+									$srcHeight = $value;
 									break;
 
 								case 'alt':
@@ -2352,7 +2407,7 @@ abstract class Controller extends System
 					// Generate the thumbnail image
 					try
 					{
-						$src = $this->getImage($strFile, $width, $height, $mode);
+						$src = $this->getImage($strFile, $width, $height, $mode, null, false, $srcX, $srcY, $srcWidth, $srcHeight);
 						$dimensions = '';
 
 						// Add the image dimensions
@@ -2486,11 +2541,11 @@ abstract class Controller extends System
 		{
 			if (strncmp($strTag, '{if', 3) === 0)
 			{
-				$strReturn .= preg_replace('/\{if ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\]\}]+).*\}/i', '<?php if ($arrData[\'$1\'] $2 $3): ?>', $strTag);
+				$strReturn .= preg_replace('/\{if ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\] ]+).*\}/i', '<?php if ($arrData[\'$1\'] $2 $3): ?>', $strTag);
 			}
 			elseif (strncmp($strTag, '{elseif', 7) === 0)
 			{
-				$strReturn .= preg_replace('/\{elseif ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\]\}]+).*\}/i', '<?php elseif ($arrData[\'$1\'] $2 $3): ?>', $strTag);
+				$strReturn .= preg_replace('/\{elseif ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\] ]+).*\}/i', '<?php elseif ($arrData[\'$1\'] $2 $3): ?>', $strTag);
 			}
 			elseif (strncmp($strTag, '{else', 5) === 0)
 			{
@@ -2561,12 +2616,6 @@ abstract class Controller extends System
 	 */
 	protected function generateMargin($arrValues, $strType='margin')
 	{
-		// Initialize an empty array (see #5217)
-		if (!is_array($arrValues))
-		{
-			$arrValues = array('top'=>'', 'right'=>'', 'bottom'=>'', 'left'=>'', 'unit'=>'');
-		}
-
 		$top = $arrValues['top'];
 		$right = $arrValues['right'];
 		$bottom = $arrValues['bottom'];
@@ -2593,8 +2642,15 @@ abstract class Controller extends System
 			}
 		}
 
+		$arrDir = array
+		(
+			'top'=>$top,
+			'right'=>$right,
+			'bottom'=>$bottom,
+			'left'=>$left
+		);
+
 		$return = array();
-		$arrDir = array('top'=>$top, 'right'=>$right, 'bottom'=>$bottom, 'left'=>$left);
 
 		foreach ($arrDir as $k=>$v)
 		{
@@ -3089,11 +3145,6 @@ abstract class Controller extends System
 			$arrParentIds = array($arrParentIds);
 		}
 
-		if (empty($arrParentIds))
-		{
-			return $arrReturn;
-		}
-
 		$arrParentIds = array_map('intval', $arrParentIds);
 		$objChilds = $this->Database->execute("SELECT id, pid FROM " . $strTable . " WHERE pid IN(" . implode(',', $arrParentIds) . ")" . ($blnSorting ? " ORDER BY " . $this->Database->findInSet('pid', $arrParentIds) . ", sorting" : ""));
 
@@ -3556,15 +3607,9 @@ abstract class Controller extends System
 
 			if ($arrItem['fullsize'])
 			{
-				// Open images in the lightbox
 				if (preg_match('/\.(jpe?g|gif|png)$/', $arrItem['imageUrl']))
 				{
-					// Do not add the TL_FILES_URL to external URLs (see #4923)
-					if (strncmp($arrItem['imageUrl'], 'http://', 7) !== 0 && strncmp($arrItem['imageUrl'], 'https://', 8) !== 0)
-					{
-						$objTemplate->href = TL_FILES_URL . $this->urlEncode($arrItem['imageUrl']);
-					}
-
+					$objTemplate->href = TL_FILES_URL . $this->urlEncode($arrItem['imageUrl']);
 					$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 				}
 				else
