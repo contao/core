@@ -365,7 +365,6 @@ a.tl_submit:hover {
 /* Floats */
 .clr {
 	clear:both;
-	overflow:hidden;
 }
 .w50 {
 	width:50%;
