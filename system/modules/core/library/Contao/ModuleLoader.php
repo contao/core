@@ -123,9 +123,16 @@ class ModuleLoader
 
 				$path = TL_ROOT . '/system/modules/' . $file;
 
-				// Ignore files and disabled module
-				if (!is_dir($path) || file_exists($path . '/.skip'))
+				// Ignore files
+				if (!is_dir($path))
 				{
+					continue;
+				}
+
+				// Ignore disabled module
+				if (file_exists($path . '/.skip'))
+				{
+					static::$disabled[] = $file;
 					continue;
 				}
 

@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Fix the return value of `ModuleLoader::getDisabled()` (see #5726).
+
+### Fixed
 Re-add the website title to the login screen (see #5749).
 
 ### Fixed
