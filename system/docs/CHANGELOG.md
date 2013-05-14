@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Store the language when creating an administrator account (see #5718).
+
+### Fixed
 Do not show the URL encoded file name on the confirmation screen (see #5543).
 
 ### Fixed
