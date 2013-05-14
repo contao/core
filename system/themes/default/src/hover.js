@@ -55,6 +55,15 @@ window.addEvent('domready', function() {
 
 	// [Alt] + click or touch twice to edit
 	$$('.click2edit').each(function(el) {
+
+		// Do not propagate the click events of the default buttons (see #5731)
+		el.getElements('a').each(function(a) {
+			a.addEvent('click', function(e) {
+				e.stopPropagation();
+			});
+		});
+
+		// Set up regular click events on touch devices
 		if (Browser.Features.Touch) {
 			el.addEvent('click', function(e) {
 				if (!el.getAttribute('data-visited')) {

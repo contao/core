@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Do not propagate the click events of the edit icons (see #5731).
+
+### Fixed
 Fix the return value of `ModuleLoader::getDisabled()` (see #5726).
 
 ### Fixed
