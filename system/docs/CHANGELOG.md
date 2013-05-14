@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Re-add the website title to the login screen (see #5749).
+
+### Fixed
 Store the language when creating an administrator account (see #5718).
 
 ### Fixed
