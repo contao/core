@@ -629,7 +629,7 @@ abstract class Frontend extends \Controller
 		}
 		elseif (!empty($GLOBALS['TL_CRON']['hourly']))
 		{
-			return 3660;
+			return 3600;
 		}
 		else
 		{
