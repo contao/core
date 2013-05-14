@@ -100,6 +100,14 @@ class PageTree extends \Widget
 	 */
 	protected function validator($varInput)
 	{
+		// Store the order value
+		if ($this->strOrderField != '')
+		{
+			$this->Database->prepare("UPDATE {$this->strTable} SET {$this->strOrderField}=? WHERE id=?")
+						   ->execute(\Input::post($this->strOrderName), \Input::get('id'));
+		}
+
+		// Return the value as usual
 		if ($varInput == '')
 		{
 			if (!$this->mandatory)
