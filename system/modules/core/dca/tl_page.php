@@ -1468,21 +1468,30 @@ class tl_page extends Backend
 				}
 
 				// Set the new alias
-				$objPage->alias = standardize(String::restoreBasicEntities($objPage->title));
+				$strAlias = standardize(String::restoreBasicEntities($objPage->title));
 
-				// Update the folderURL entry
-				if (strpos($objPage->folderUrl, '/') !== false)
+				// Prepend the folder URL
+				if ($GLOBALS['TL_CONFIG']['folderUrl'])
 				{
-					$objPage->folderUrl = dirname($objPage->folderUrl) . '/' . $objPage->alias;
+					$strAlias = $objPage->folderUrl . $strAlias;
 				}
-				else
+
+				// The alias has not changed
+				if ($strAlias == $objPage->alias)
 				{
-					$objPage->folderUrl = $objPage->alias;
+					continue;
 				}
+
+				// Initialize the version manager
+				$objVersions = new Versions('tl_page', $id);
+				$objVersions->initialize();
 
 				// Store the new alias
 				$this->Database->prepare("UPDATE tl_page SET alias=? WHERE id=?")
-							   ->execute(($GLOBALS['TL_CONFIG']['folderUrl'] ? $objPage->folderUrl : basename($objPage->alias)), $id);
+							   ->execute($strAlias, $id);
+
+				// Create a new version
+				$objVersions->create();
 			}
 
 			$this->redirect($this->getReferer());

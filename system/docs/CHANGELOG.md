@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Correctly auto-create the page aliases (see #5765).
+
+### Fixed
 Limit the width of the table names in the version overview (see #5769).
 
 ### Fixed
