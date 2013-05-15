@@ -204,6 +204,19 @@ abstract class Database
 
 
 	/**
+	 * Always execute the query and add or replace an existing cache entry
+	 *
+	 * @param string $strQuery The query string
+	 *
+	 * @return \Database\Result The Database\Result object
+	 */
+	public function executeCached($strQuery)
+	{
+		return $this->prepare($strQuery)->executeCached();
+	}
+
+
+	/**
 	 * Execute a raw query and return a Database\Result object
 	 *
 	 * @param string $strQuery The query string
@@ -328,6 +341,34 @@ abstract class Database
 		foreach ($this->listFields($strTable, $blnNoCache) as $arrField)
 		{
 			if ($arrField['name'] == $strField)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Determine if a particular index exists
+	 *
+	 * @param string  $strName    The index name
+	 * @param string  $strTable   The table name
+	 * @param boolean $blnNoCache If true, the cache will be bypassed
+	 *
+	 * @return boolean True if the index exists
+	 */
+	public function indexExists($strName, $strTable, $blnNoCache=false)
+	{
+		if ($strName == '' || $strTable == '')
+		{
+			return false;
+		}
+
+		foreach ($this->listFields($strTable, $blnNoCache) as $arrField)
+		{
+			if ($arrField['name'] == $strName && $arrField['type'] == 'index')
 			{
 				return true;
 			}
