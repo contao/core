@@ -480,7 +480,7 @@ abstract class Backend extends \Controller
 			elseif ($objPages->type == 'regular')
 			{
 				// Searchable and not protected
-				if (!$objPages->noSearch && (!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected'] && (!$blnIsSitemap || $objPages->sitemap == 'map_always')) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
+				if ((!$objPages->noSearch || $blnIsSitemap) && (!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected'] && (!$blnIsSitemap || $objPages->sitemap == 'map_always')) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
 				{
 					// Published
 					if ($objPages->published && (!$objPages->start || $objPages->start < $time) && (!$objPages->stop || $objPages->stop > $time))

@@ -361,7 +361,7 @@ class Automator extends \System
 		}
 
 		// Create the XML file
-		while($objRoot->next())
+		while ($objRoot->next())
 		{
 			$objFile = new \File('share/' . $objRoot->sitemapName . '.xml', true);
 
