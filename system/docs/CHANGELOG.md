@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Limit the width of the table names in the version overview (see #5769).
+
+### Fixed
 Urldecode file names in the file manager in "edit multiple" mode (see #5764).
 
 ### Fixed

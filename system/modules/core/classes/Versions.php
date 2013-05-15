@@ -452,6 +452,7 @@ class Versions extends \Backend
 			$arrRow['to'] = $objVersions->version;
 			$arrRow['date'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objVersions->tstamp);
 			$arrRow['description'] = \String::substr($arrRow['description'], 32);
+			$arrRow['fromTable'] = \String::substr($arrRow['fromTable'], 18); // see #5769
 
 			if ($arrRow['editUrl'] != '')
 			{
