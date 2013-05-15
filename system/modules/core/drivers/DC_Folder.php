@@ -128,6 +128,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				$this->reload();
 			}
 
+			// Decode the values (see #5764)
+			$ids = array_map('rawurldecode', $ids);
+
 			$session = $this->Session->getData();
 			$session['CURRENT']['IDS'] = $ids;
 			$this->Session->setData($session);

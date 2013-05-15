@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Urldecode file names in the file manager in "edit multiple" mode (see #5764).
+
+### Fixed
 Do not propagate the click events of the edit icons (see #5731).
 
 ### Fixed
