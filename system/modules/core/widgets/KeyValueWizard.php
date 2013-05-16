@@ -155,6 +155,14 @@ class KeyValueWizard extends \Widget
 			$this->varValue = array(array(''));
 		}
 
+		// Initialize the tab index
+		if (!\Cache::has('tabindex'))
+		{
+			\Cache::set('tabindex', 1);
+		}
+
+		$tabindex = \Cache::get('tabindex');
+
 		// Begin the table
 		$return = '<table class="tl_optionwizard" id="ctrl_'.$this->strId.'">
   <thead>
@@ -164,17 +172,15 @@ class KeyValueWizard extends \Widget
       <th>&nbsp;</th>
     </tr>
   </thead>
-  <tbody class="sortable">';
-
-		$tabindex = 0;
+  <tbody class="sortable" data-tabindex="'.$tabindex.'">';
 
 		// Add fields
 		for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 		{
 			$return .= '
     <tr>
-      <td><input type="text" name="'.$this->strId.'['.$i.'][key]" id="'.$this->strId.'_key_'.$i.'" class="tl_text_2" tabindex="'.++$tabindex.'" value="'.specialchars($this->varValue[$i]['key']).'"'.$this->getAttributes().'></td>
-      <td><input type="text" name="'.$this->strId.'['.$i.'][value]" id="'.$this->strId.'_value_'.$i.'" class="tl_text_2" tabindex="'.++$tabindex.'" value="'.specialchars($this->varValue[$i]['value']).'"'.$this->getAttributes().'></td>';
+      <td><input type="text" name="'.$this->strId.'['.$i.'][key]" id="'.$this->strId.'_key_'.$i.'" class="tl_text_2" tabindex="'.$tabindex++.'" value="'.specialchars($this->varValue[$i]['key']).'"'.$this->getAttributes().'></td>
+      <td><input type="text" name="'.$this->strId.'['.$i.'][value]" id="'.$this->strId.'_value_'.$i.'" class="tl_text_2" tabindex="'.$tabindex++.'" value="'.specialchars($this->varValue[$i]['value']).'"'.$this->getAttributes().'></td>';
 
 			// Add row buttons
 			$return .= '
@@ -197,6 +203,9 @@ class KeyValueWizard extends \Widget
 			$return .= '</td>
     </tr>';
 		}
+
+		// Store the tab index
+		\Cache::set('tabindex', $tabindex);
 
 		return $return.'
   </tbody>

@@ -157,6 +157,14 @@ class ModuleWizard extends \Widget
 			}
 		}
 
+		// Initialize the tab index
+		if (!\Cache::has('tabindex'))
+		{
+			\Cache::set('tabindex', 1);
+		}
+
+		$tabindex = \Cache::get('tabindex');
+
 		// Add the label and the return wizard
 		$return = '<table id="ctrl_'.$this->strId.'" class="tl_modulewizard">
   <thead>
@@ -166,11 +174,10 @@ class ModuleWizard extends \Widget
     <th>&nbsp;</th>
   </tr>
   </thead>
-  <tbody class="sortable">';
+  <tbody class="sortable" data-tabindex="'.$tabindex.'">';
 
 		// Load the tl_article language file
 		\System::loadLanguageFile('tl_article');
-		$tabindex = 0;
 
 		// Add the input fields
 		for ($i=0, $c=count($this->varValue); $i<$c; $i++)
@@ -185,7 +192,7 @@ class ModuleWizard extends \Widget
 
 			$return .= '
   <tr>
-    <td><select name="'.$this->strId.'['.$i.'][mod]" class="tl_select tl_chosen" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()" onchange="Backend.updateModuleLink(this)">'.$options.'</select></td>';
+    <td><select name="'.$this->strId.'['.$i.'][mod]" class="tl_select tl_chosen" tabindex="'.$tabindex++.'" onfocus="Backend.getScrollOffset()" onchange="Backend.updateModuleLink(this)">'.$options.'</select></td>';
 
 			$options = '';
 
@@ -196,7 +203,7 @@ class ModuleWizard extends \Widget
 			}
 
 			$return .= '
-    <td><select name="'.$this->strId.'['.$i.'][col]" class="tl_select_column" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()">'.$options.'</select></td>
+    <td><select name="'.$this->strId.'['.$i.'][col]" class="tl_select_column" tabindex="'.$tabindex++.'" onfocus="Backend.getScrollOffset()">'.$options.'</select></td>
     <td>';
 
 			// Add buttons
@@ -214,7 +221,7 @@ class ModuleWizard extends \Widget
 				}
 				elseif ($button == 'enable')
 				{
-					$return .= ' ' . \Image::getHtml((($this->varValue[$i]['enable']) ? 'visible.gif' : 'invisible.gif'), '', 'class="mw_enable" title="' . sprintf($GLOBALS['TL_LANG']['MSC']['mw_enable']) . '"') . '<input name="'.$this->strId.'['.$i.'][enable]" type="checkbox" class="tl_checkbox mw_enable" value="1" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()"'. (($this->varValue[$i]['enable']) ? ' checked' : '').'>';
+					$return .= ' ' . \Image::getHtml((($this->varValue[$i]['enable']) ? 'visible.gif' : 'invisible.gif'), '', 'class="mw_enable" title="' . sprintf($GLOBALS['TL_LANG']['MSC']['mw_enable']) . '"') . '<input name="'.$this->strId.'['.$i.'][enable]" type="checkbox" class="tl_checkbox mw_enable" value="1" tabindex="'.$tabindex++.'" onfocus="Backend.getScrollOffset()"'. (($this->varValue[$i]['enable']) ? ' checked' : '').'>';
 				}
 				else
 				{
@@ -225,6 +232,9 @@ class ModuleWizard extends \Widget
 			$return .= '</td>
   </tr>';
 		}
+
+		// Store the tab index
+		\Cache::set('tabindex', $tabindex);
 
 		return $return.'
   </tbody>

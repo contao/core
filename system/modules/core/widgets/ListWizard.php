@@ -125,14 +125,20 @@ class ListWizard extends \Widget
 			$this->varValue = array('');
 		}
 
-		$tabindex = 0;
-		$return = '<ul id="ctrl_'.$this->strId.'" class="tl_listwizard">';
+		// Initialize the tab index
+		if (!\Cache::has('tabindex'))
+		{
+			\Cache::set('tabindex', 1);
+		}
+
+		$tabindex = \Cache::get('tabindex');
+		$return = '<ul id="ctrl_'.$this->strId.'" class="tl_listwizard" data-tabindex="'.$tabindex.'">';
 
 		// Add input fields
 		for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 		{
 			$return .= '
-    <li><input type="text" name="'.$this->strId.'[]" class="tl_text" tabindex="'.++$tabindex.'" value="'.specialchars($this->varValue[$i]).'"' . $this->getAttributes() . '> ';
+    <li><input type="text" name="'.$this->strId.'[]" class="tl_text" tabindex="'.$tabindex++.'" value="'.specialchars($this->varValue[$i]).'"' . $this->getAttributes() . '> ';
 
 			// Add buttons
 			foreach ($arrButtons as $button)
@@ -151,6 +157,9 @@ class ListWizard extends \Widget
 
 			$return .= '</li>';
 		}
+
+		// Store the tab index
+		\Cache::set('tabindex', $tabindex);
 
 		return $return.'
   </ul>';

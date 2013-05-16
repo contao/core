@@ -1268,7 +1268,7 @@ var Backend =
 		var list = $(id),
 			parent = $(el).getParent('li'),
 			items = list.getChildren(),
-			tabindex = 1,
+			tabindex = list.get('data-tabindex'),
 			input, previous, next, rows, i;
 
 		Backend.getScrollOffset();
@@ -1446,7 +1446,7 @@ var Backend =
 	 */
 	tableWizardResort: function(tbody) {
 		var rows = tbody.getChildren(),
-			tabindex = 1,
+			tabindex = tbody.get('data-tabindex'),
 			textarea, childs, i, j;
 
 		for (i=0; i<rows.length; i++) {
@@ -1498,7 +1498,7 @@ var Backend =
 			tbody = table.getElement('tbody'),
 			parent = $(el).getParent('tr'),
 			rows = tbody.getChildren(),
-			tabindex = 1,
+			tabindex = tbody.get('data-tabindex'),
 			input, select, childs, a, i, j;
 
 		Backend.getScrollOffset();
@@ -1575,7 +1575,7 @@ var Backend =
 			tbody = table.getElement('tbody'),
 			parent = $(el).getParent('tr'),
 			rows = tbody.getChildren(),
-			tabindex = 1,
+			tabindex = tbody.get('data-tabindex'),
 			input, childs, i, j;
 
 		Backend.getScrollOffset();
@@ -1650,7 +1650,7 @@ var Backend =
 			tbody = table.getElement('tbody'),
 			parent = $(el).getParent('tr'),
 			rows = tbody.getChildren(),
-			tabindex = 1,
+			tabindex = tbody.get('data-tabindex'),
 			input, childs, i, j;
 
 		Backend.getScrollOffset();

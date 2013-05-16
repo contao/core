@@ -152,6 +152,14 @@ class TableWizard extends \Widget
 			$this->varValue = array(array(''));
 		}
 
+		// Initialize the tab index
+		if (!\Cache::has('tabindex'))
+		{
+			\Cache::set('tabindex', 1);
+		}
+
+		$tabindex = \Cache::get('tabindex');
+
 		// Begin the table
 		$return = '<div id="tl_tablewizard">
   <table id="ctrl_'.$this->strId.'" class="tl_tablewizard">
@@ -177,9 +185,7 @@ class TableWizard extends \Widget
       <td></td>
     </tr>
   </thead>
-  <tbody class="sortable">';
-
-		$tabindex = 0;
+  <tbody class="sortable" data-tabindex="'.$tabindex.'">';
 
 		// Add rows
 		for ($i=0, $c=count($this->varValue); $i<$c; $i++)
@@ -191,7 +197,7 @@ class TableWizard extends \Widget
 			for ($j=0, $d=count($this->varValue[$i]); $j<$d; $j++)
 			{
 				$return .= '
-      <td class="tcontainer"><textarea name="'.$this->strId.'['.$i.']['.$j.']" class="tl_textarea" tabindex="'.++$tabindex.'" rows="'.$this->intRows.'" cols="'.$this->intCols.'"'.$this->getAttributes().'>'.specialchars($this->varValue[$i][$j]).'</textarea></td>';
+      <td class="tcontainer"><textarea name="'.$this->strId.'['.$i.']['.$j.']" class="tl_textarea" tabindex="'.$tabindex++.'" rows="'.$this->intRows.'" cols="'.$this->intCols.'"'.$this->getAttributes().'>'.specialchars($this->varValue[$i][$j]).'</textarea></td>';
 			}
 
 			$return .= '
@@ -215,6 +221,9 @@ class TableWizard extends \Widget
 			$return .= '</td>
     </tr>';
 		}
+
+		// Store the tab index
+		\Cache::set('tabindex', $tabindex);
 
 		$return .= '
   </tbody>

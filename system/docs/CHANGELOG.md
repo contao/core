@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Fix the tabindexes if there are multiple wizards on the same apge (see #5779).
+
+### Fixed
 Also support textareas when autofocusing input fields (see #5774).
 
 ### Fixed
