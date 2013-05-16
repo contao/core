@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Also support textareas when autofocusing input fields (see #5774).
+
+### Fixed
 Add a page to the XML sitemap even if it is not indexed internally (see #5714).
 
 ### Fixed
