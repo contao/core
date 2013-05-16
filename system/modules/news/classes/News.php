@@ -135,7 +135,22 @@ class News extends \Frontend
 				if (!isset($arrUrls[$jumpTo]))
 				{
 					$objParent = \PageModel::findWithDetails($jumpTo);
-					$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
+
+					// A jumpTo page is set but does no longer exist (see #5781)
+					if ($objParent === null)
+					{
+						$arrUrls[$jumpTo] = false;
+					}
+					else
+					{
+						$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
+					}
+				}
+
+				// Skip the event if it requires a jumpTo URL but there is none
+				if ($arrUrls[$jumpTo] === false && $objArticle->source == 'default')
+				{
+					continue;
 				}
 
 				$strUrl = $arrUrls[$jumpTo];

@@ -5,6 +5,10 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Do not throw an exception during RSS feed generation if a news archive or
+calendar is linked to an invalid target page (see #5781).
+
+### Fixed
 Fix the tabindexes if there are multiple wizards on the same apge (see #5779).
 
 ### Fixed
