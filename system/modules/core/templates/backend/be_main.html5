@@ -94,7 +94,7 @@
       <h1 class="main_headline"><?php echo $this->headline; ?></h1>
       <?php if ($this->managerHref): ?>
         <div id="manager">
-          <a href="<?php echo $this->managerHref; ?>" class="close" title="<?php echo $this->managerTitle; ?>"><?php echo $this->manager; ?></a>
+          <a href="<?php echo $this->managerHref; ?>" class="close" title="<?php echo specialchars($this->manager); ?>"><?php echo $this->manager; ?></a>
         </div>
       <?php endif; ?>
       <?php if ($this->error): ?>

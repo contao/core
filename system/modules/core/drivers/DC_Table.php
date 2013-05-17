@@ -2982,7 +2982,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 6 && !strlen($this->ptable))
 		{
 			return '
-<p class="tl_empty">strTable "'.$table.'" can not be shown as extended tree!</p>';
+<p class="tl_empty">Table "'.$table.'" can not be shown as extended tree!</p>';
 		}
 
 		$blnClipboard = false;

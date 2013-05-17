@@ -35,7 +35,7 @@
   <div id="container">
     <div id="main">
       <div id="manager">
-        <a href="<?php echo $this->managerHref; ?>" class="open" title="<?php echo $this->managerTitle; ?>"><?php echo $this->manager; ?></a>
+        <a href="<?php echo $this->managerHref; ?>" class="open" title="<?php echo specialchars($this->manager); ?>"><?php echo $this->manager; ?></a>
       </div>
       <?php if ($this->addSearch): ?>
         <form action="<?php echo $this->action; ?>" method="post">

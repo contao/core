@@ -806,7 +806,7 @@ var Backend =
 				return;
 			}
 			if (frm.document.location.href.indexOf('contao/main.php') != -1) {
-				this.hide();
+				alert(Contao.lang.picker);
 				return; // see #5704
 			}
 			var inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
