@@ -269,10 +269,11 @@ abstract class Module extends \Frontend
 						{
 							$strForceLang = null;
 
+							$objNext->loadDetails(); // see #3983 and #3765
+
 							// Check the target page language (see #4706)
 							if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 							{
-								$objNext->loadDetails(); // see #3983
 								$strForceLang = $objNext->language;
 							}
 
