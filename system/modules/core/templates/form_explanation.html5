@@ -3,7 +3,7 @@
     <td colspan="2" class="colspan explanation"><?php echo $this->generate(); ?></td>
   </tr>
 <?php else: ?>
-  <div class="<?php echo $this->rowClass; ?> explanation">
+  <small class="explanation">
     <?php echo $this->generate(); ?> 
-  </div>
+  </small>
 <?php endif; ?>
