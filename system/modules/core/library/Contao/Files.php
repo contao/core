@@ -120,7 +120,7 @@ abstract class Files
 	public function rrdir($strFolder, $blnPreserveRoot=false)
 	{
 		$this->validate($strFolder);
-		$arrFiles = scan(TL_ROOT . '/' . $strFolder);
+		$arrFiles = scan(TL_ROOT . '/' . $strFolder, true);
 
 		foreach ($arrFiles as $strFile)
 		{
@@ -204,7 +204,7 @@ abstract class Files
 		$this->validate($strSource, $strDestination);
 
 		$this->mkdir($strDestination);
-		$arrFiles = scan(TL_ROOT . '/' . $strSource);
+		$arrFiles = scan(TL_ROOT . '/' . $strSource, true);
 
 		foreach ($arrFiles as $strFile)
 		{
@@ -271,7 +271,11 @@ abstract class Files
 	{
 		foreach (func_get_args() as $strPath)
 		{
-			if (strpos($strPath, '../') !== false)
+			if ($strPath == '') // see #5795
+			{
+				throw new \Exception('No file or folder name given');
+			}
+			elseif (strpos($strPath, '../') !== false)
 			{
 				throw new \Exception('Invalid file or folder name ' . $strPath);
 			}

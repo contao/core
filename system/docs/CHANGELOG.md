@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Do not used cached `scan()` results in the `Files` class (see #5795).
+
+### Fixed
 Do not throw an exception during RSS feed generation if a news archive or
 calendar is linked to an invalid target page (see #5781).
 

@@ -166,7 +166,7 @@ class Folder extends \System
 	 */
 	public function isEmpty()
 	{
-		return (count(scan(TL_ROOT . '/' . $this->strFolder)) < 1);
+		return (count(scan(TL_ROOT . '/' . $this->strFolder, true)) < 1);
 	}
 
 
@@ -373,7 +373,7 @@ class Folder extends \System
 	{
 		$intSize = 0;
 
-		foreach (scan(TL_ROOT . '/' . $this->strFolder) as $strFile)
+		foreach (scan(TL_ROOT . '/' . $this->strFolder, true) as $strFile)
 		{
 			if ($strFile == '.svn' || $strFile == '.DS_Store')
 			{
