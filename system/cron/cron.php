@@ -117,8 +117,10 @@ class CronJob extends Frontend
 	 */
 	protected function hasToWait()
 	{
-		$time = time();
 		$return = true;
+
+		// Get the timestamp without seconds (see #5775)
+		$time = strtotime(date('Y-m-d H:i'));
 
 		// Lock the table
 		$this->Database->lockTables(array('tl_cron'=>'WRITE'));
@@ -137,7 +139,7 @@ class CronJob extends Frontend
 		}
 
 		// Check the last execution time
-		elseif ($objCron->value <= (time() - $this->getCronTimeout()))
+		elseif ($objCron->value <= ($time - $this->getCronTimeout()))
 		{
 			$this->updateCronTxt($time);
 			$this->Database->query("UPDATE tl_cron SET value=$time WHERE name='lastrun'");

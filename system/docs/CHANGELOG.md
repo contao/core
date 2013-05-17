@@ -5,6 +5,10 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Improve the timeout calculation of the command scheduler to better support
+minutely jobs (see #5775).
+
+### Fixed
 Do not used cached `scan()` results in the `Files` class (see #5795).
 
 ### Fixed
