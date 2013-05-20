@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Pass the host and language to subpages when generating the menu (see #3765).
+
+### Fixed
 Improve the timeout calculation of the command scheduler to better support
 minutely jobs (see #5775).
 

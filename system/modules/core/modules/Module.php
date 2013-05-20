@@ -240,7 +240,7 @@ abstract class Module extends \Frontend
 				// Check whether there will be subpages
 				if ($objSubpages->subpages > 0 && (!$this->showLevel || $this->showLevel >= $level || (!$this->hardLimit && ($objPage->id == $objSubpages->id || in_array($objPage->id, $this->Database->getChildRecords($objSubpages->id, 'tl_page'))))))
 				{
-					$subitems = $this->renderNavigation($objSubpages->id, $level);
+					$subitems = $this->renderNavigation($objSubpages->id, $level, $host, $language);
 				}
 
 				// Get href
