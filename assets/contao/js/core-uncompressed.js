@@ -1983,7 +1983,7 @@ var TinyCallback =
 				}
 				if (prev = win.document.getElementById('prev')) {
 					var u = new URI(val);
-					prev.innerHTML = '<img id="previewImg" src="' + u.toAbsolute() + '" border="0">';
+					prev.innerHTML = '<img id="previewImg" src="' + u.toAbsolute() + '" onload="ImageDialog.updateImageData(this)" border="0">';
 				}
 			}
 			this.hide();

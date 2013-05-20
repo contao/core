@@ -5,6 +5,9 @@ Version 3.1.0 (2013-05-XX)
 --------------------------
 
 ### Fixed
+Set the image dimensions if an image is added in TinyMCE (see #5790).
+
+### Fixed
 Pass the host and language to subpages when generating the menu (see #3765).
 
 ### Fixed
