@@ -45,6 +45,14 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	(
 		'global_operations' => array
 		(
+			'showHidden' => array
+			(
+				'label'				  => &$GLOBALS['TL_LANG']['tl_files']['hiddenFiles'],
+				'href'                => 'do=files',
+				'class'               => 'header_show_hidden',
+				'attributes'          => 'onclick="Backend.getScrollOffset()"',
+				'button_callback'     => array('tl_files', 'showHidden')
+			),
 			'sync' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['sync'],
@@ -399,6 +407,27 @@ class tl_files extends Backend
 
 
 	/**
+	 * Return the showHidden files button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function showHidden($href, $label, $title, $class, $attributes)
+	{
+		$showHidden = 'showHidden=0';
+		if (\Input::get('showHidden', true)==0)
+		{
+			$showHidden = 'showHidden=1';
+		}
+		return $this->User->isAdmin ? '<a href="'.$this->addToUrl($href.'&'.$showHidden).'" title="'.specialchars($title).'" class="'.$class.'"'.$attributes.'>'.$label.'</a> ' : '';
+	}
+
+
+	/**
 	 * Return the edit file button
 	 * @param array
 	 * @param string
@@ -462,8 +491,10 @@ class tl_files extends Backend
 		{
 			return ($this->User->isAdmin || $this->User->hasAccess('f4', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 		}
-
-		return ($this->User->isAdmin || $this->User->hasAccess('f3', 'fop') || $this->User->hasAccess('f4', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		else
+		{
+			return ($this->User->isAdmin || $this->User->hasAccess('f3', 'fop') || $this->User->hasAccess('f4', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		}
 	}
 
 

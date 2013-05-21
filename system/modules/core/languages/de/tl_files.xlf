@@ -197,6 +197,14 @@
         <source>Synchronize the file system and the database</source>
         <target>Dateisystem und Datenbank synchronisieren</target>
       </trans-unit>
+	  <trans-unit id="tl_files.hiddenFiles.0">
+        <source>Hidden Elements</source>
+        <target>Ausgeblendete Elemente</target>
+      </trans-unit>
+      <trans-unit id="tl_files.hiddenFiles.1">
+        <source>Show or hide the Hidden Elements</source>
+        <target>Alle ausgeblendeten Elemente Anzeigen oder Ausblenden</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

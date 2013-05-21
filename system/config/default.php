@@ -327,6 +327,7 @@ $GLOBALS['TL_CONFIG']['liveUpdateId']         = '';
 $GLOBALS['TL_CONFIG']['disableInsertTags']    = false;
 $GLOBALS['TL_CONFIG']['rootFiles']            = array();
 $GLOBALS['TL_CONFIG']['fileSyncExclude']      = '';
+$GLOBALS['TL_CONFIG']['hiddenFiles']	      = array('/^\./');
 $GLOBALS['TL_CONFIG']['doNotCollapse']        = false;
 $GLOBALS['TL_CONFIG']['urlSuffix']            = '.html';
 $GLOBALS['TL_CONFIG']['exampleWebsite']       = '';

@@ -1939,7 +1939,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			foreach (scan($path) as $v)
 			{
-				if ($v == '.svn' || $v == '.DS_Store')
+				if ($v == '.svn' || $v == '.DS_Store' || $this->isHiddenFile($v))
 				{
 					continue;
 				}
@@ -2235,5 +2235,24 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		return $arrFiles;
+	}
+
+	/**
+	 * Check if the File is hidden
+	 * @param string
+	 * @return boolean
+	 */
+	protected function isHiddenFile($file, $forceIgnore=false)
+	{
+		$showHiddenFiles = (\Input::get('showHidden', true)==1)? true : false;
+
+		if ($showHiddenFiles && !$forceIgnore) return false;
+
+		foreach($GLOBALS['TL_CONFIG']['hiddenFiles'] as $pattern)
+		{
+			if (preg_match($pattern,$file)) return true;
+		}
+
+		return false;
 	}
 }
