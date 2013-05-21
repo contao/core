@@ -1,4 +1,3 @@
-
 <!-- indexer::stop -->
 <div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
 <?php if ($this->headline): ?>
@@ -8,9 +7,9 @@
 
 <ul>
 <?php if ($this->prevHref): ?>
-  <li class="prev"><a href="<?php echo $this->prevHref; ?>" title="<?php echo $this->prevPageTitle; ?>">&lt; <?php echo $this->prevLink; ?></a></li>
+  <li class="previous"><a href="<?php echo $this->prevHref; ?>" title="<?php echo $this->prevPageTitle; ?>">&lt; <?php echo $this->prevLink; ?></a></li>
 <?php else: ?>
-  <li class="prev empty">&nbsp;</li>
+  <li class="previous empty">&nbsp;</li>
 <?php endif; ?>
 <?php if ($this->upHref): ?>
   <li class="up"><a href="<?php echo $this->upHref; ?>" title="<?php echo $this->upPageTitle; ?>"><?php echo $this->upLink; ?></a></li>
