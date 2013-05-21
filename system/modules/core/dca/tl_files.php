@@ -45,6 +45,14 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	(
 		'global_operations' => array
 		(
+			'showHidden' => array
+			(
+				'label'				  => &$GLOBALS['TL_LANG']['tl_files']['hiddenFiles'],
+				'href'                => 'do=files',
+				'class'               => 'header_show_hidden',
+				'attributes'          => 'onclick="Backend.getScrollOffset()"',
+				'button_callback'     => array('tl_files', 'showHidden')
+			),
 			'sync' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['sync'],
@@ -395,6 +403,27 @@ class tl_files extends Backend
 	public function syncFiles($href, $label, $title, $class, $attributes)
 	{
 		return ($this->User->isAdmin || $this->User->hasAccess('f6', 'fop')) ? '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'" class="'.$class.'"'.$attributes.'>'.$label.'</a> ' : '';
+	}
+
+
+	/**
+	 * Return the showHidden files button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function showHidden($href, $label, $title, $class, $attributes)
+	{
+		$showHidden = 'showHidden=0';
+		if (\Input::get('showHidden', true)==0)
+		{
+			$showHidden = 'showHidden=1';
+		}
+		return $this->User->isAdmin ? '<a href="'.$this->addToUrl($href.'&'.$showHidden).'" title="'.specialchars($title).'" class="'.$class.'"'.$attributes.'>'.$label.'</a> ' : '';
 	}
 
 
