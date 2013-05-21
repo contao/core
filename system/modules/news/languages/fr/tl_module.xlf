@@ -11,15 +11,15 @@
       </trans-unit>
       <trans-unit id="tl_module.news_featured.0">
         <source>Featured items</source>
-        <target>Eléments vedettes</target>
+        <target>Éléments vedettes</target>
       </trans-unit>
       <trans-unit id="tl_module.news_featured.1">
         <source>Here you can choose how featured items are handled.</source>
-        <target>Choisir comment les éléments vedette sont gérés.</target>
+        <target>Choisir comment les éléments vedettes sont gérés.</target>
       </trans-unit>
       <trans-unit id="tl_module.news_jumpToCurrent.0">
         <source>No period selected</source>
-        <target>Aucune période selectionnée</target>
+        <target>Aucune période sélectionnée</target>
       </trans-unit>
       <trans-unit id="tl_module.news_jumpToCurrent.1">
         <source>Here you can define what to display if no period is selected.</source>
@@ -27,11 +27,11 @@
       </trans-unit>
       <trans-unit id="tl_module.news_readerModule.0">
         <source>News reader module</source>
-        <target>Module lecteur d'actualité</target>
+        <target>Module lecteur d'actualités</target>
       </trans-unit>
       <trans-unit id="tl_module.news_readerModule.1">
         <source>Automatically switch to the news reader if an item has been selected.</source>
-        <target>Basculer automatiquement sur le lecteur d'actualité, si un élément a été sélectionné.</target>
+        <target>Basculer automatiquement sur le lecteur d'actualités, si un élément a été sélectionné.</target>
       </trans-unit>
       <trans-unit id="tl_module.news_metaFields.0">
         <source>Meta fields</source>
@@ -43,11 +43,11 @@
       </trans-unit>
       <trans-unit id="tl_module.news_template.0">
         <source>News template</source>
-        <target>Modèle des actualités</target>
+        <target>Modèle d'actualités</target>
       </trans-unit>
       <trans-unit id="tl_module.news_template.1">
         <source>Here you can select the news template.</source>
-        <target>Choisir un modèle des actualités.</target>
+        <target>Choisir un modèle d'actualités.</target>
       </trans-unit>
       <trans-unit id="tl_module.news_format.0">
         <source>Archive format</source>
@@ -59,23 +59,23 @@
       </trans-unit>
       <trans-unit id="tl_module.news_startDay.0">
         <source>Week start day</source>
-        <target>Jour de début de semaine</target>
+        <target>Premier jour de la semaine</target>
       </trans-unit>
       <trans-unit id="tl_module.news_startDay.1">
         <source>Here you can choose the week start day.</source>
-        <target>Choisir le jour de début de semaine.</target>
+        <target>Choisir le premier jour de la semaine.</target>
       </trans-unit>
       <trans-unit id="tl_module.news_order.0">
         <source>Sort order</source>
-        <target>Ordre du tri</target>
+        <target>Ordre de tri</target>
       </trans-unit>
       <trans-unit id="tl_module.news_order.1">
         <source>Here you can choose the sort order.</source>
-        <target>Choisir l'ordre du tri.</target>
+        <target>Choisir l'ordre de tri.</target>
       </trans-unit>
       <trans-unit id="tl_module.news_showQuantity.0">
         <source>Show number of items</source>
-        <target>Afficher le nombre d'entrées</target>
+        <target>Afficher le nombre d'actualités</target>
       </trans-unit>
       <trans-unit id="tl_module.news_showQuantity.1">
         <source>Show the number of news items of each month.</source>

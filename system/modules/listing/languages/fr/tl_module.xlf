@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_module.list_where.1">
         <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
-        <target>Vous pouvez exclure certains enregistrements, saisissez une condition ici (ex : &lt;em&gt;published=1&lt;/em&gt; ou &lt;em&gt;type!='admin'&lt;/em&gt;).</target>
+        <target>Vous pouvez exclure certains enregistrements, saisissez une condition ici (ex. : &lt;em&gt;published=1&lt;/em&gt; ou &lt;em&gt;type!='admin'&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_module.list_search.0">
         <source>Searchable fields</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_module.list_search.1">
         <source>Here you can enter a comma seperated list of fields that you want to be searchable.</source>
-        <target>Saisir une liste séparée par virgule des champs qui pourront-être recherchés.</target>
+        <target>Saisir une liste séparée par des virgules des champs qui pourront être recherchés.</target>
       </trans-unit>
       <trans-unit id="tl_module.list_sort.0">
         <source>Order by</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_module.list_sort.1">
         <source>Here you can enter a comma seperated list of fields to sort the results by.</source>
-        <target>Saisir une liste séparée par des virgules des champs qui seront employés pour trier les résultats.</target>
+        <target>Saisir une liste séparée par des virgules des champs qui seront utilisés pour trier les résultats.</target>
       </trans-unit>
       <trans-unit id="tl_module.list_info.0">
         <source>Details page fields</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_module.list_info_where.1">
         <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
-        <target>Saisir une condition pour filtrer les résultats (ex: &lt;em&gt;published=1&lt;/em&gt; ou &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</target>
+        <target>Saisir une condition pour filtrer les résultats (ex. : &lt;em&gt;published=1&lt;/em&gt; ou &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_module.list_layout.0">
         <source>List template</source>

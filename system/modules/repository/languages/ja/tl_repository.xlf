@@ -491,7 +491,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.validatingext">
         <source>Verify/repair %s %s build %s</source>
-        <target>%s %sビルド%sの検証または修復</target>
+        <target>%s %sビルド%sの確認または修復</target>
       </trans-unit>
       <trans-unit id="tl_repository.approvedForLabel">
         <source>Approved for</source>

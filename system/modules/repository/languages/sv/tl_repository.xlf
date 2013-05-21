@@ -55,6 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
         <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
+        <target>Modulnamn måste börja med a-z, A-Z eller 0-9, där gemener är att föredra. Även tecknen _ och - är tillåtna i namnet.</target>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
         <source>Popularity</source>
@@ -102,6 +103,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
         <source>Does the extension meet the Contao standards for usability and accessibility?</source>
+        <target>Möte modulen Contaos standard för användbarhet och tillgänglighet?</target>
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
         <source>Version</source>
@@ -505,6 +507,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.showIncompatible">
         <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>Du visar just nu moduler som är kompatibla enbart med den nuvarande Contao-versionen. Modifiera inställningarna i backend för att visa sökresultat för alla moduler.</target>
       </trans-unit>
       <trans-unit id="tl_repository_statext.uptodate">
         <source>Up to date</source>

@@ -123,9 +123,11 @@
       </trans-unit>
       <trans-unit id="tl_form.novalidate.0">
         <source>Disable HTML5 validation</source>
+        <target>Deaktiver HTML5 validering</target>
       </trans-unit>
       <trans-unit id="tl_form.novalidate.1">
         <source>Add the &lt;em&gt;novalidate&lt;/em&gt; attribute to the form tag.</source>
+        <target>Benyt &lt;em&gt;novalidate&lt;/em&gt; attribute på form tagget.</target>
       </trans-unit>
       <trans-unit id="tl_form.attributes.0">
         <source>CSS ID/class</source>

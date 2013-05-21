@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_install.locked.1">
         <source>For security reasons, the install tool has been locked after a wrong password had been entered more than three times in a row. To unlock it, open the local configuration file and set &lt;em&gt;installCount&lt;/em&gt; to &lt;em&gt;0&lt;/em&gt;.</source>
-        <target>Pour des raisons de sécurité, l'outil d'installation a été verrouillé. Ceci arrive si vous entrez un mauvais mot de passe plus de trois fois d'affilée. Veuillez éditer le fichier de configuration locale et définissez &lt;em&gt;installCount&lt;/em&gt; à &lt;em&gt;0&lt;/em&gt;.</target>
+        <target>Pour des raisons de sécurité, l'outil d'installation a été verrouillé. Ceci arrive si vous entrez un mauvais mot de passe plus de trois fois d'affilée. Pour le déverrouiller, veuillez éditer le fichier de configuration local et définissez &lt;em&gt;installCount&lt;/em&gt; à &lt;em&gt;0&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_install.password.0">
         <source>Password</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_install.changePass.1">
         <source>To additionally secure the Contao install tool, you can either rename or completely remove the &lt;strong&gt;contao/install.php&lt;/strong&gt; file.</source>
-        <target>De plus, si vous voulez sécuriser l'outil d'installation de Contao, vous pouvez renommer ou supprimer complètement le fichier &lt;strong&gt;contao/install.php&lt;/strong&gt;</target>
+        <target>De plus, si vous voulez sécuriser l'outil d'installation de Contao, vous pouvez renommer ou supprimer complètement le fichier &lt;strong&gt;contao/install.php&lt;/strong&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_install.encryption.0">
         <source>Generate an encryption key</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_install.collation.1">
         <source>For more information see the &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;MySQL manual&lt;/a&gt;.</source>
-        <target>Pour de plus amples renseignements, consultez le &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;manuel MySQL&lt;/a&gt;.</target>
+        <target>Pour de plus amples renseignements, veuillez consulter le &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;manuel MySQL&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_install.update.0">
         <source>Update database tables</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_install.update.1">
         <source>Please note that the update assistant has only been tested with MySQL and MySQLi drivers. If you are using a different database (e.g. Oracle), you might have to install or update your database manually.</source>
-        <target>Veuillez noter que cet assistant de mise à jour a uniquement été testé avec les bases de données MySQL et MySQLi. Si vous utilisez une autre base de données (Oracle par exemple), vous pourriez avoir à installer/mettre à jour votre base de données manuellement. Dans ce cas, allez dans le répertoire &lt;strong&gt;system/modules&lt;/strong&gt; et cherchez dans tous ses sous-dossiers pour trouver les fichiers appelés &lt;strong&gt;dca/database.sql&lt;/strong&gt;.</target>
+        <target>Veuillez noter que cet assistant de mise à jour a uniquement été testé avec les bases de données MySQL et MySQLi. Si vous utilisez une autre base de données (Oracle par exemple), vous pourriez avoir à installer/mettre à jour votre base de données manuellement.</target>
       </trans-unit>
       <trans-unit id="tl_install.template.0">
         <source>Import a template</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_install.template.1">
         <source>Here you can import an &lt;em&gt;.sql&lt;/em&gt; file from the &lt;em&gt;templates&lt;/em&gt; directory with a pre-configured example website. Existing data will be deleted! If you only want to import a theme, please use the theme manager in the Contao back end instead.</source>
-        <target>Vous pouvez importer un fichier &lt;em&gt;.sql&lt;/em&gt; contenant par exemple un site web pré-configuré. Ce fichier devra se situer dans le répertoire &lt;em&gt;templates&lt;/em&gt;. Les données existantes seront effacées ! Si vous souhaitez seulement importer un thème, utilisez le gestionnaire de thème dans le back office de Contao.</target>
+        <target>Vous pouvez importer un fichier &lt;em&gt;.sql&lt;/em&gt; à partir du répertoire &lt;em&gt;templates&lt;/em&gt; contenant par exemple un site internet pré-configuré. Les données existantes seront effacées ! Si vous souhaitez seulement importer un thème, utilisez le gestionnaire de thème dans le back office de Contao.</target>
       </trans-unit>
       <trans-unit id="tl_install.admin.0">
         <source>Create an admin user</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_install.completed.1">
         <source>Now please log into the &lt;a href=&quot;contao/&quot;&gt;Contao back end&lt;/a&gt; and check the system settings. Then visit your website to make sure that Contao is working correctly.</source>
-        <target>Maintenant, veuillez vous connecter au &lt;a href=&quot;contao/&quot;&gt;back office de Contao&lt;/a&gt; et vérifiez tous les paramètres système. Puis, visitez votre site Web pour s'assurer que Contao fonctionne correctement.</target>
+        <target>Maintenant, veuillez vous connecter au &lt;a href=&quot;contao/&quot;&gt;back office de Contao&lt;/a&gt; et vérifiez tous les paramètres système. Puis, visitez votre site internet pour s'assurer que Contao fonctionne correctement.</target>
       </trans-unit>
       <trans-unit id="tl_install.ftp.0">
         <source>Modify files via FTP</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_install.ftp.1">
         <source>Your server does not support file access via PHP; most likely PHP runs as Apache module under a different user. Therefore please enter your FTP login details, so Contao can modify files via FTP (Safe Mode Hack).</source>
-        <target>Votre serveur ne supporte pas l'accès aux fichiers via PHP. PHP fonctionne probablement avec le module Apache sous un utilisateur différent. Donc, veuillez saisir vos informations de connexion FTP de sorte Contao puisse modifier des fichiers via FTP (Safe Mode Hack).</target>
+        <target>Votre serveur ne supporte pas l'accès aux fichiers via PHP. PHP fonctionne probablement avec le module Apache sous un utilisateur différent. Donc, veuillez saisir vos informations de connexion FTP de sorte que Contao puisse modifier des fichiers via FTP (Safe Mode Hack).</target>
       </trans-unit>
       <trans-unit id="tl_install.accept">
         <source>Accept license</source>
@@ -187,7 +187,7 @@
       </trans-unit>
       <trans-unit id="tl_install.collationInfo">
         <source>Changing the collation will affect all tables with a &lt;em&gt;tl_&lt;/em&gt; prefix.</source>
-        <target>La modification du classement aura une incidence sur toutes les tables avec un préfixe &lt;em&gt;tl_&lt;/em&gt;</target>
+        <target>La modification du classement aura une incidence sur toutes les tables avec un préfixe &lt;em&gt;tl_&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_install.updateError">
         <source>The database is not up to date!</source>
@@ -315,7 +315,7 @@
       </trans-unit>
       <trans-unit id="tl_install.filesWarning">
         <source>Did you rename the &lt;strong&gt;tl_files&lt;/strong&gt; folder to &lt;strong&gt;files&lt;/strong&gt;? You cannot just rename the folder, because all the file references in the database and your style sheets will still point to the old location. If you want to rename the folder, please do so after the version 3 update and make sure to adjust your database data with the following script: %s.</source>
-        <target>Avez-vous renommé le dossier &lt;strong&gt;tl_files&lt;/strong&gt; en &lt;strong&gt;files&lt;/strong&gt; ? Vous ne pouvez pas simplement renommer le dossier car toutes les références à ce dernier dans la base de données et vos feuilles de style pointeront toujours sur l'ancien nom. Si vous désirez renommer le dossier, procédez après la mise à jour vers la version 3 et assurez vous de corriger votre base de donnée avec le script suivant : %s.</target>
+        <target>Avez-vous renommé le dossier &lt;strong&gt;tl_files&lt;/strong&gt; en &lt;strong&gt;files&lt;/strong&gt; ? Vous ne pouvez pas simplement renommer le dossier car toutes les références à ce dernier dans la base de données et vos feuilles de style pointeront toujours sur l'ancien nom. Si vous désirez renommer le dossier, procédez après la mise à jour vers la version 3 et assurez-vous de corriger votre base de données avec le script suivant : %s.</target>
       </trans-unit>
       <trans-unit id="tl_install.CREATE">
         <source>Create new tables</source>

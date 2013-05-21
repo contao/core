@@ -43,7 +43,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.addEnclosure.0">
         <source>Add enclosures</source>
-        <target>Ajouter des fichiers</target>
+        <target>Joindre des fichiers</target>
       </trans-unit>
       <trans-unit id="tl_faq.addEnclosure.1">
         <source>Add one or more downloadable files to the FAQ.</source>
@@ -107,11 +107,11 @@
       </trans-unit>
       <trans-unit id="tl_faq.show.0">
         <source>Show question details</source>
-        <target>Afficher la question</target>
+        <target>Détails de la question</target>
       </trans-unit>
       <trans-unit id="tl_faq.show.1">
         <source>Show the details of question ID %s</source>
-        <target>Afficher la question ID %s</target>
+        <target>Afficher les détails de la question ID %s</target>
       </trans-unit>
       <trans-unit id="tl_faq.edit.0">
         <source>Edit question</source>
@@ -159,7 +159,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.editheader.1">
         <source>Edit the category settings</source>
-        <target>Éditer cette catégorie</target>
+        <target>Éditer les paramètres de la catégorie</target>
       </trans-unit>
       <trans-unit id="tl_faq.pasteafter.0">
         <source>Paste at the top</source>

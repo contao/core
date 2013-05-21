@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.folder.1">
         <source>Please enter a unique folder name.</source>
-        <target>Saisir le nom du répertoire.</target>
+        <target>Saisir un nom du répertoire unique.</target>
       </trans-unit>
       <trans-unit id="tl_extension.author.0">
         <source>Author</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.author.1">
         <source>Please enter the author's name and an optional e-mail address (e.g. &lt;em&gt;Name [e-mail@address.com]&lt;/em&gt;).</source>
-        <target>Saisir le nom de l'auteur et optionnellement son adresse e-mail (ex : &lt;em&gt;Nom [e-mail@adresse.com]&lt;/em&gt;).</target>
+        <target>Saisir le nom de l'auteur et optionnellement son adresse e-mail (ex. : &lt;em&gt;Nom [e-mail@adresse.com]&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_extension.copyright.0">
         <source>Copyright</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.copyright.1">
         <source>Please enter the copyright notice (e.g. &lt;em&gt;Name 2012&lt;/em&gt;).</source>
-        <target>Saisir l'information sur le copyright (ex : &lt;em&gt;Nom 2012&lt;/em&gt;).</target>
+        <target>Saisir l'information sur le copyright (ex. : &lt;em&gt;Nom 2012&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_extension.package.0">
         <source>Package</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.package.1">
         <source>Please enter the package name without spaces (e.g. &lt;em&gt;MyCustomModule&lt;/em&gt;).</source>
-        <target>Saisir le nom du paquet sans espaces (ex : &lt;em&gt;MyCustomModule&lt;/em&gt;).</target>
+        <target>Saisir le nom du paquet sans espaces (ex. : &lt;em&gt;MyCustomModule&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_extension.license.0">
         <source>License</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.license.1">
         <source>Please enter the license type (e.g. &lt;em&gt;GNU/LGPL&lt;/em&gt;).</source>
-        <target>Saisir le type de licence (ex : &lt;em&gt;GNU/LGPL&lt;/em&gt;).</target>
+        <target>Saisir le type de licence (ex. : &lt;em&gt;GNU/LGPL&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_extension.addBeMod.0">
         <source>Add a back end module</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.beTables.1">
         <source>Here you can enter a comma separated list of back end tables.</source>
-        <target>Saisir une liste séparée par des virgules des tables back office.</target>
+        <target>Saisir une liste séparée par des virgules des tables du back office.</target>
       </trans-unit>
       <trans-unit id="tl_extension.beTemplates.0">
         <source>Back end templates</source>
@@ -99,19 +99,19 @@
       </trans-unit>
       <trans-unit id="tl_extension.feTables.0">
         <source>Front end tables</source>
-        <target>Tables en front office</target>
+        <target>Tables du front office</target>
       </trans-unit>
       <trans-unit id="tl_extension.feTables.1">
         <source>Here you can enter a comma separated list of front end tables.</source>
-        <target>Saisir une liste séparée par des virgules des tables front office.</target>
+        <target>Saisir une liste séparée par des virgules des tables du front office.</target>
       </trans-unit>
       <trans-unit id="tl_extension.feTemplates.0">
         <source>Front end templates</source>
-        <target>Modèles en front office</target>
+        <target>Modèles du front office</target>
       </trans-unit>
       <trans-unit id="tl_extension.feTemplates.1">
         <source>Here you can enter a comma separated list of front end templates.</source>
-        <target>Saisir une liste séparée par des virgules des modèles front office.</target>
+        <target>Saisir une liste séparée par des virgules des modèles du front office.</target>
       </trans-unit>
       <trans-unit id="tl_extension.addLanguage.0">
         <source>Add language packs</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.languages.1">
         <source>Here you can enter a comma separated list of languages (e.g. &lt;em&gt;en,de&lt;/em&gt;).</source>
-        <target>Saisir une liste séparée par des virgules des langues (ex : &lt;em&gt;en,de&lt;/em&gt;).</target>
+        <target>Saisir une liste séparée par des virgules des langues (ex. : &lt;em&gt;en,de&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_extension.title_legend">
         <source>Title and name</source>
@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.license_legend">
         <source>License information</source>
-        <target>Informations sur la licence</target>
+        <target>Information sur la licence</target>
       </trans-unit>
       <trans-unit id="tl_extension.backend_legend">
         <source>Back end resources</source>

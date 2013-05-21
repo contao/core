@@ -270,7 +270,8 @@
         <target>bodyのclass</target>
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.1">
-        <source>Here you can add custom classes to the &lt;body&gt; tag.</source>
+        <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
+        <target>&amp;lt;body&amp;gt;タグにカスタマイズ用のclassを追加できます。</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -281,10 +282,12 @@
         <target>bodyに&lt;em&gt;onload&lt;/em&gt;属性を追加できます。</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.0">
-        <source>Additional &lt;head&gt; tags</source>
+        <source>Additional &amp;lt;head&amp;gt; tags</source>
+        <target>&amp;lt;head&amp;gt;にタグを追加</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
-        <source>Here you can add individual tags to the &lt;head&gt; section of the page.</source>
+        <source>Here you can add individual tags to the &amp;lt;head&amp;gt; section of the page.</source>
+        <target>ページの&amp;lt;head&amp;gt;の部分に個々のタグを追加できます。</target>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>

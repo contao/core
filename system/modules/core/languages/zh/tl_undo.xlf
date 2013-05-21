@@ -7,12 +7,15 @@
       </trans-unit>
       <trans-unit id="tl_undo.pid.1">
         <source>Name of the associated user</source>
+        <target>相关用户的名字</target>
       </trans-unit>
       <trans-unit id="tl_undo.fromTable.0">
         <source>Source table</source>
+        <target>源表格</target>
       </trans-unit>
       <trans-unit id="tl_undo.fromTable.1">
         <source>Name of the original table</source>
+        <target>原始表格名字</target>
       </trans-unit>
       <trans-unit id="tl_undo.affectedRows.0">
         <source>Affected rows</source>
@@ -28,6 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_undo.query.1">
         <source>Details of the undo step</source>
+        <target>撤销步骤详情</target>
       </trans-unit>
       <trans-unit id="tl_undo.data.0">
         <source>Data</source>
@@ -51,6 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_undo.undo.1">
         <source>Restore entry ID %s</source>
+        <target>还原ID为%s的记录</target>
       </trans-unit>
     </body>
   </file>

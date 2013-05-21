@@ -3,63 +3,83 @@
     <body>
       <trans-unit id="XPT.error">
         <source>An error occurred</source>
+        <target>Došlo k chybě</target>
       </trans-unit>
       <trans-unit id="XPT.matter">
         <source>What's the matter?</source>
+        <target>Co se stalo?</target>
       </trans-unit>
       <trans-unit id="XPT.howToFix">
         <source>How can I fix the issue?</source>
+        <target>Jak můžu odstranit danou chybu?</target>
       </trans-unit>
       <trans-unit id="XPT.more">
         <source>Tell me more, please</source>
+        <target>Dozvědět se více</target>
       </trans-unit>
       <trans-unit id="XPT.hint">
         <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
+        <target>Pro upravení dané poznámky vytvořte vlastní soubor předlohy nazvaný &lt;em&gt;%s&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.errorOccurred">
         <source>An error occurred while executing this script. Something does not work properly.</source>
+        <target>Došlo k chybě během spouštění tohoto skriptu. Něco nepracuje správným způsobem.</target>
       </trans-unit>
       <trans-unit id="XPT.errorFixOne">
         <source>Open the &lt;code&gt;system/logs/error.log&lt;/code&gt; file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</source>
+        <target>Otevřete soubor &lt;code&gt;system/logs/error.log&lt;/code&gt; a najděte příslušnou chybovou zprávu (převážně poslední v pořadí). Můžete také přidat následující řádek do souboru lokálního nastavení a znovu načíst tuto stránku: </target>
       </trans-unit>
       <trans-unit id="XPT.errorFixTwo">
         <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
+        <target>Buďte prosím opatrní, protože pak může &lt;strong&gt;každý&lt;/strong&gt; vidět chybová hlášení na Vaší stránce!</target>
       </trans-unit>
       <trans-unit id="XPT.errorExplain">
-        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found it in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>Spouštění skriptu bylo pozastaveno, protože něco nefunguje správně. Daná chybová zpráva je skrytá u této poznámky z bezpečnostních důvodů a lze ji najít v souboru &lt;code&gt;system/logs/error.log&lt;/code&gt; (viz výš). Pokud nerozumíte chybové zprávě nebo nevíte, jak lze daný problém opravit, prohledejte &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; nebo navštivte &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;stránku podpory Contaa&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.requestToken">
         <source>Invalid request token</source>
+        <target>Neplatný požadavek tokenu</target>
       </trans-unit>
       <trans-unit id="XPT.invalidToken">
         <source>The request token could not be verified.</source>
+        <target>Požadovaný token nemohl být ověřený.</target>
       </trans-unit>
       <trans-unit id="XPT.tokenRetry">
         <source>Please &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;click this link&lt;/a&gt; and try again. Do not use the back button of your browser.</source>
+        <target>Prosím klikněte znovu na &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;tento odkaz&lt;/a&gt;. Nepoužívejte prosím tlačítko pro krok zpět Vašeho prohlížeče. </target>
       </trans-unit>
       <trans-unit id="XPT.tokenExplainOne">
         <source>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</source>
+        <target>Chyba nastane, pokud je nastavený přenos POST bez platného potvrzovacího tokenu. V Contau 2.10 byla tato kontrola nahrazená tokenovým systémem. Přetrvává-li daný problém, nejspíš používáte nekompatibilní rozšíření třetích stran nebo není dobré zaktualizována instalace Vašeho Contaa.</target>
       </trans-unit>
       <trans-unit id="XPT.tokenExplainTwo">
         <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>Více informací najdete na &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; nebo navštivte &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;stránku podporoy Contaa&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.incomplete">
         <source>Incomplete installation</source>
+        <target>Nekompletní instalace</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteInstallation">
         <source>The installation has not been completed, therefore Contao cannot work properly.</source>
+        <target>Instalace nebyla dokončena, proto nebude moct Contao fungovat správně.</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteFixOne">
         <source>Point your browser to the following URL:</source>
+        <target>Nasměrujte Váš prohlížeč na následující stránku:</target>
       </trans-unit>
       <trans-unit id="XPT.installPath">
         <source>path-to-installation</source>
+        <target>Cesta k instalaci</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteFixTwo">
         <source>This will open the Contao install tool, which will guide you through the installation process.</source>
+        <target>Tím se otevře instalační nástroj Conta, který Vás provede instalací.</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
-        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/3.0/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
+        <target>Více informací naleznete v &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Návodu k instalaci Contaa&lt;/a&gt;.</target>
       </trans-unit>
     </body>
   </file>

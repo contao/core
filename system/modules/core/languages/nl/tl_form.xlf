@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_form.format.1">
         <source>Defines how the form data will be forwarded.</source>
-        <target>Kies een gegevensformaat.</target>
+        <target>Bepaalt hoe formulier gegevens worden doorgestuurd.</target>
       </trans-unit>
       <trans-unit id="tl_form.raw.0">
         <source>Raw data</source>
@@ -83,11 +83,11 @@
       </trans-unit>
       <trans-unit id="tl_form.email.0">
         <source>E-mail</source>
-        <target>E-mail formaat</target>
+        <target>E-mail</target>
       </trans-unit>
       <trans-unit id="tl_form.email.1">
         <source>Ignores all fields except &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
-        <target>Dit formaat aanvaardt de velden &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; en &lt;em&gt;cc&lt;/em&gt;. Andere veldnamen worden genegeerd. Bestand uploads zijn toegestaan.</target>
+        <target>Negeert alle velden behalve &lt;em&gt; email &lt;/ em&gt;, &lt;em&gt; onderwerp &lt;/ em&gt;, &lt;em&gt; bericht &lt;/ em&gt; en &lt;em&gt; cc &lt;/ em&gt; (carbon copy) en stuurt formulier gegevens alsof verzonden vanaf een e-mailclient. Bestanden uploaden is toegestaan.</target>
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.0">
         <source>Skip empty fields</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.1">
         <source>Hide empty fields in the e-mail.</source>
-        <target>Voeg geen lege velden toe in de e-mail.</target>
+        <target>Verberg lege velden in de e-mail.</target>
       </trans-unit>
       <trans-unit id="tl_form.storeValues.0">
         <source>Store data</source>
@@ -103,7 +103,7 @@
       </trans-unit>
       <trans-unit id="tl_form.storeValues.1">
         <source>Store the submitted data in the database.</source>
-        <target>Indien u deze optie kiest worden doorgegeven waardes opgeslagen en opnieuw ingevoegd in de formuliervelden.</target>
+        <target>Sla de ingediende waarden op in de database.</target>
       </trans-unit>
       <trans-unit id="tl_form.targetTable.0">
         <source>Target table</source>
@@ -159,7 +159,7 @@
       </trans-unit>
       <trans-unit id="tl_form.allowTags.1">
         <source>Allow HTML tags in form fields.</source>
-        <target>HTML tags worden standaard verwijderd uit veiligheidsoverwegingen. Indien u echter deze optie kiest, zullen bepaalde HTML tags niet verwijderd worden.</target>
+        <target>Sta HTML tags toe in formulier velden.</target>
       </trans-unit>
       <trans-unit id="tl_form.tstamp.0">
         <source>Revision date</source>
@@ -179,7 +179,7 @@
       </trans-unit>
       <trans-unit id="tl_form.store_legend">
         <source>Store form data</source>
-        <target>Data opgeslagen op formulier</target>
+        <target>Data opslaan op formulier</target>
       </trans-unit>
       <trans-unit id="tl_form.expert_legend">
         <source>Expert settings</source>

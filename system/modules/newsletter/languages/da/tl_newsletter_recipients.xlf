@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="tl_newsletter_recipients.email.0">
         <source>E-mail address</source>
-        <target>E-postadresse</target>
+        <target>E-mail adresse</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.email.1">
         <source>Please enter the recipient's e-mail address.</source>
@@ -43,9 +43,11 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.confirmed.0">
         <source>Confirmation date</source>
+        <target>Bekræftelses dato</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.confirmed.1">
         <source>The date of confirmation (double opt-in).</source>
+        <target>Datoen for bekræftelse (double opt-in).</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.email_legend">
         <source>E-mail address</source>

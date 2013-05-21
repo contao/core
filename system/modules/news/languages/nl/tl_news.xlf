@@ -43,11 +43,11 @@
       </trans-unit>
       <trans-unit id="tl_news.subheadline.0">
         <source>Subheadline</source>
-        <target>Subkop</target>
+        <target>Subtitel</target>
       </trans-unit>
       <trans-unit id="tl_news.subheadline.1">
         <source>Here you can enter a subheadline.</source>
-        <target>U kunt hier een subkop opgeven.</target>
+        <target>Geef hier een subtitel op.</target>
       </trans-unit>
       <trans-unit id="tl_news.teaser.0">
         <source>News teaser</source>

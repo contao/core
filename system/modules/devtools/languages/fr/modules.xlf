@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="MOD.labels.1">
         <source>Find missing labels in a language pack</source>
-        <target>Trouver les libellés manquants d'un pack de langue.</target>
+        <target>Trouver les libellés manquants dans un pack de langue.</target>
       </trans-unit>
       <trans-unit id="MOD.autoload.0">
         <source>Autoload creator</source>

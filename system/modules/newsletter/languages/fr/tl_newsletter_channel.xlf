@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.jumpTo.1">
         <source>Please choose the newsletter reader page to which visitors will be redirected when clicking a newsletter.</source>
-        <target>Sélectionner vers quelle page les visiteurs seront redirigés après avoir cliqué sur un bulletin d'information.</target>
+        <target>Sélectionner la page vers laquelle les visiteurs seront redirigés après avoir cliqué sur un bulletin d'information.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.useSMTP.0">
         <source>Custom SMTP server</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpUser.1">
         <source>Here you can enter the SMTP username.</source>
-        <target>Indiquer le nom de l'utilisateur SMTP.</target>
+        <target>Saisir le nom de l'utilisateur SMTP.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpPass.0">
         <source>SMTP password</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpPass.1">
         <source>Here you can enter the SMTP password.</source>
-        <target>Indiquer le mot de passe SMTP</target>
+        <target>Saisir le mot de passe SMTP</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpEnc.0">
         <source>SMTP encryption</source>

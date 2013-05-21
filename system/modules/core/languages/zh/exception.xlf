@@ -3,63 +3,83 @@
     <body>
       <trans-unit id="XPT.error">
         <source>An error occurred</source>
+        <target>发生一个错误</target>
       </trans-unit>
       <trans-unit id="XPT.matter">
         <source>What's the matter?</source>
+        <target>什么事？</target>
       </trans-unit>
       <trans-unit id="XPT.howToFix">
         <source>How can I fix the issue?</source>
+        <target>如何修复问题？</target>
       </trans-unit>
       <trans-unit id="XPT.more">
         <source>Tell me more, please</source>
+        <target>请告诉我更多信息。</target>
       </trans-unit>
       <trans-unit id="XPT.hint">
         <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
+        <target>为了自定义通知, 创建一个名称为&lt;em&gt;%s&lt;/em&gt;的自定义模板文件。</target>
       </trans-unit>
       <trans-unit id="XPT.errorOccurred">
         <source>An error occurred while executing this script. Something does not work properly.</source>
+        <target>执行这个脚本时发生了一个错误。无法正常工作。</target>
       </trans-unit>
       <trans-unit id="XPT.errorFixOne">
         <source>Open the &lt;code&gt;system/logs/error.log&lt;/code&gt; file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</source>
+        <target>打开&lt;code&gt;system/logs/error.log&lt;/code&gt;文件然后找到相关的错误信息(通常情况下会在最后一行)。你也可以在配置文件中添加一下信息并重新加载这个页面:</target>
       </trans-unit>
       <trans-unit id="XPT.errorFixTwo">
         <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
+        <target>无论如何，请小心&lt;strong&gt;任何人&lt;/strong&gt;将会看到网站上的错误信息！</target>
       </trans-unit>
       <trans-unit id="XPT.errorExplain">
-        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found it in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>脚本执行已停止，由于不能正常工作。由于安全原因真实的错误信息被隐藏，可以在&lt;code&gt;system/logs/error.log&lt;/code&gt;文件中查看(查看以上信息)。如果你不理解错误信息或不清楚如何修改问题，请搜索&lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt;或访问&lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao支持页&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.requestToken">
         <source>Invalid request token</source>
+        <target>无效的请求码</target>
       </trans-unit>
       <trans-unit id="XPT.invalidToken">
         <source>The request token could not be verified.</source>
+        <target>请求码验证失败。</target>
       </trans-unit>
       <trans-unit id="XPT.tokenRetry">
         <source>Please &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;click this link&lt;/a&gt; and try again. Do not use the back button of your browser.</source>
+        <target>请&lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;点击这里&lt;/a&gt;重试一次。不要使用浏览器中的后退按钮。</target>
       </trans-unit>
       <trans-unit id="XPT.tokenExplainOne">
         <source>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</source>
+        <target>如果是一个不带有效认证码的POST请求，会发生这个错误。在Contao 2.10中，HTTP Referer检测已经替换为请求令牌系统。如果问题依然存在，你也许使用了不兼容的第三方扩展或不正确的更新了你的Contao系统。</target>
       </trans-unit>
       <trans-unit id="XPT.tokenExplainTwo">
         <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>更多信息, 请搜索&lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt;或访问&lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao支持页&lt;/a&gt;。</target>
       </trans-unit>
       <trans-unit id="XPT.incomplete">
         <source>Incomplete installation</source>
+        <target>未完成安装</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteInstallation">
         <source>The installation has not been completed, therefore Contao cannot work properly.</source>
+        <target>安装没有完成，所以Contao不能正常工作。</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteFixOne">
         <source>Point your browser to the following URL:</source>
+        <target>浏览器指向到以下URL:</target>
       </trans-unit>
       <trans-unit id="XPT.installPath">
         <source>path-to-installation</source>
+        <target>安装位置</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteFixTwo">
         <source>This will open the Contao install tool, which will guide you through the installation process.</source>
+        <target>打开Contao安装工具，用来引导安装流程。</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
-        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/3.0/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
+        <target>更多信息，请参考&lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao安装手册&lt;/a&gt;。</target>
       </trans-unit>
     </body>
   </file>

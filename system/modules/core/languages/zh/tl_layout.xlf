@@ -270,7 +270,8 @@
         <target>Body类</target>
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.1">
-        <source>Here you can add custom classes to the &lt;body&gt; tag.</source>
+        <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
+        <target>你可以在这里给&amp;lt;body&amp;gt;标签添加自定义类。</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -278,12 +279,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.onload.1">
         <source>Here you can add a body &lt;em&gt;onload&lt;/em&gt; attribute.</source>
+        <target>你可以在这里添加一个body的&lt;em&gt;onload&lt;/em&gt;属性。</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.0">
-        <source>Additional &lt;head&gt; tags</source>
+        <source>Additional &amp;lt;head&amp;gt; tags</source>
+        <target>额外的&amp;lt;head&amp;gt;标签</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
-        <source>Here you can add individual tags to the &lt;head&gt; section of the page.</source>
+        <source>Here you can add individual tags to the &amp;lt;head&amp;gt; section of the page.</source>
+        <target>你可以在这里添加独立标签到页面的&amp;lt;head&amp;gt;位置。</target>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>

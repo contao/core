@@ -667,9 +667,11 @@
       </trans-unit>
       <trans-unit id="tl_content.includeTemplate">
         <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>Il template &lt;em&gt;%s&lt;/em&gt; deve essere incluso nel layout della pagina.</target>
       </trans-unit>
       <trans-unit id="tl_content.includeTemplates">
         <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>Il template &lt;em&gt;%s&lt;/em&gt; o &lt;em&gt;%s&lt;/em&gt; devono essere inclusi nel layout della pagina.</target>
       </trans-unit>
       <trans-unit id="tl_content.new.0">
         <source>New element</source>

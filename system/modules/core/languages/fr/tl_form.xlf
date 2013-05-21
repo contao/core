@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.1">
         <source>Hide empty fields in the e-mail.</source>
-        <target>Ne pas inclure dans l'e-mail les champs non saisis</target>
+        <target>Ne pas inclure dans l'e-mail les champs non renseignés.</target>
       </trans-unit>
       <trans-unit id="tl_form.storeValues.0">
         <source>Store data</source>

@@ -7,15 +7,15 @@
       </trans-unit>
       <trans-unit id="XPL.insertTags.0.1">
         <source>For more information about TinyMCE please visit &lt;a href=&quot;http://www.tinymce.com/&quot; title=&quot;TinyMCE by moxiecode&quot; target=&quot;_blank&quot;&gt;http://www.tinymce.com/&lt;/a&gt;.</source>
-        <target>Pour plus d'informations sur TinyMCE, veuillez s'il vous plaît visiter &lt;a href=&quot;http://www.tinymce.com/&quot; title=&quot;TinyMCE by moxiecode&quot; target=&quot;_blank&quot;&gt;http://www.tinymce.com/&lt;/a&gt;.</target>
+        <target>Pour plus d'information sur TinyMCE, veuillez s'il vous plaît visiter &lt;a href=&quot;http://www.tinymce.com/&quot; title=&quot;TinyMCE by moxiecode&quot; target=&quot;_blank&quot;&gt;http://www.tinymce.com/&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.0">
         <source>Insert tags</source>
         <target>Balises d'insertion</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.1">
-        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</source>
-        <target>Pour plus d'informations sur les balises d'insertion : &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</target>
+        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/manual/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/manual/managing-content.html#insert-tags&lt;/a&gt;.</source>
+        <target>Pour plus d'information sur les balises d'insertion : &lt;a href=&quot;https://contao.org/manual/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/manual/managing-content.html#insert-tags&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.0">
         <source>Code Editor</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.1">
         <source>For more information about ACE please visit &lt;a href=&quot;http://ace.ajax.org&quot; title=&quot;ACE (Ajax.org Cloud9 Editor)&quot; target=&quot;_blank&quot;&gt;http://ace.ajax.org&lt;/a&gt;.</source>
-        <target>Pour plus d'informations concernant ACE, veuillez s'il vous plaît visiter &lt;a href=&quot;http://ace.ajax.org&quot; title=&quot;ACE (Ajax.org Cloud9 Editor)&quot; target=&quot;_blank&quot;&gt;http://ace.ajax.org&lt;/a&gt;.</target>
+        <target>Pour plus d'information concernant ACE, veuillez s'il vous plaît visiter &lt;a href=&quot;http://ace.ajax.org&quot; title=&quot;ACE (Ajax.org Cloud9 Editor)&quot; target=&quot;_blank&quot;&gt;http://ace.ajax.org&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.0.0">
         <source>colspan</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="XPL.dateFormat.0.1">
         <source>Contao supports all date and time formats that can be parsed with the PHP date() function. However, to ensure that any input can be transformed into a UNIX timestamp, you can only use numeric date and time formats (j, d, m, n, y, Y, g, G, h, H, i, s) in the back end.&lt;br&gt;&lt;br&gt;&lt;strong&gt;You can enter variant front end formats in the site structure (website root pages).&lt;/strong&gt;&lt;br&gt;&lt;br&gt;&lt;em&gt;Here are some examples of valid date and time formats&lt;/em&gt;:</source>
-        <target>Contao supporte différents formats de date et d'heure qui sont basés sur la fonction date() de PHP. Cependant, pour s'assurer que n'importe quelle entrée utilisateur puisse être transformée en format horaire d'UNIX, vous pouvez seulement employer un format de date et d'heure numérique (j, d, m, n, y, Y, g,G, h, H, I, s) dans le back office.&lt;br /&gt;&lt;br /&gt;&lt;strong&gt;Vous pouvez utiliser des formats différents dans le front office dans la structure de site (pages racines).&lt;/strong&gt;&lt;br /&gt;&lt;br /&gt;&lt;em&gt;Voici quelques exemples de formats date et heure valides &lt;/em &gt; :</target>
+        <target>Contao supporte différents formats de date et d'heure qui sont basés sur la fonction date() de PHP. Cependant, pour s'assurer que n'importe quelle entrée utilisateur puisse être transformée en format horaire d'UNIX, vous pouvez seulement employer un format de date et d'heure numérique (j, d, m, n, y, Y, g,G, h, H, I, s) dans le back office.&lt;br /&gt;&lt;br /&gt;&lt;strong&gt;Vous pouvez utiliser des formats différents dans le front office dans la structure de site (pages racines).&lt;/strong&gt;&lt;br /&gt;&lt;br /&gt;&lt;em&gt;Voici quelques exemples de formats de date et d'heure valides &lt;/em &gt; :</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.1.0">
         <source>Y-m-d</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="XPL.dateFormat.1.1">
         <source>YYYY-MM-DD, international ISO-8601, e.g. 2005-01-28</source>
-        <target>YYYY-MM-DD, format ISO-8601 ex : 2005-01-28</target>
+        <target>YYYY-MM-DD, norme internationale ISO-8601, ex. : 2005-01-28</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.2.0">
         <source>m/d/Y</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="XPL.dateFormat.4.1">
         <source>YY-M-D, without leading zeros, e.g. 05-1-28</source>
-        <target>YY-M-D, sans le zéro des mois ex : 05-1-28</target>
+        <target>YY-M-D, sans le zéro des mois, ex. : 05-1-28</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.5.0">
         <source>Ymd</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="XPL.dateFormat.5.1">
         <source>YYYYMMDD, timestamp, e.g. 20050128</source>
-        <target>YYYYMMDD, timestamp ex : 20050128</target>
+        <target>YYYYMMDD, timestamp, ex. : 20050128</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.6.0">
         <source>H:i:s</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="XPL.dateFormat.6.1">
         <source>24 hours, minutes and seconds, e.g. 20:36:59</source>
-        <target>24 heures, minutes et secondes ex. : 20:36:59</target>
+        <target>24 heures, minutes et secondes, ex. : 20:36:59</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.7.0">
         <source>g:i</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="XPL.dateFormat.7.1">
         <source>12 hours without leading zeros and minutes, e.g. 8:36</source>
-        <target>12 heures sans le zéro des heures et des minutes ex : 8:36</target>
+        <target>12 heures sans le zéro des heures et des minutes ex. : 8:36</target>
       </trans-unit>
       <trans-unit id="XPL.highlighter.0.0">
         <source>Rich Text Editor</source>

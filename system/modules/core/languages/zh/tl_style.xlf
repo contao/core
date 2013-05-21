@@ -151,6 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_style.alignment.1">
         <source>Margin, padding, align, vertical-align, text-align and whitespace.</source>
+        <target>外边距, 内边距, 水平对齐方式, 垂直对齐方式, 文本水平对齐方式和元素内空白。</target>
       </trans-unit>
       <trans-unit id="tl_style.margin.0">
         <source>Margin</source>
@@ -194,9 +195,11 @@
       </trans-unit>
       <trans-unit id="tl_style.whitespace.0">
         <source>White-space</source>
+        <target>元素内空白</target>
       </trans-unit>
       <trans-unit id="tl_style.whitespace.1">
         <source>Here you can define how white-space inside an element is handled.</source>
+        <target>在这里你可以定义如何处理元素内空白。</target>
       </trans-unit>
       <trans-unit id="tl_style.background.0">
         <source>Background</source>
@@ -260,6 +263,7 @@
       </trans-unit>
       <trans-unit id="tl_style.gradientAngle.1">
         <source>Here you can enter the gradient angle (e.g. &lt;em&gt;0deg&lt;/em&gt;) or the direction (e.g. &lt;em&gt;to bottom&lt;/em&gt; or &lt;em&gt;to top right&lt;/em&gt;).</source>
+        <target>你可以在这里输入渐变的角度(e.g. &lt;em&gt;0deg&lt;/em&gt;)或方向(e.g. &lt;em&gt;to bottom&lt;/em&gt; 或 &lt;em&gt;to top right&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_style.gradientColors.0">
         <source>Gradient colors</source>
@@ -267,6 +271,7 @@
       </trans-unit>
       <trans-unit id="tl_style.gradientColors.1">
         <source>Here you can enter up to four colors with an optional percentage (e.g. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;).</source>
+        <target>你可以在这里输入最多四种颜色与可选百分比 (e.g. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;)。</target>
       </trans-unit>
       <trans-unit id="tl_style.border.0">
         <source>Border</source>
@@ -274,6 +279,7 @@
       </trans-unit>
       <trans-unit id="tl_style.border.1">
         <source>Border-width, border-style, border-color, border-radius, border-collapse and border-spacing.</source>
+        <target>边框宽度，边框样式，边框颜色，边框半径，边框合并和边框间距。</target>
       </trans-unit>
       <trans-unit id="tl_style.borderwidth.0">
         <source>Border width</source>
@@ -297,6 +303,7 @@
       </trans-unit>
       <trans-unit id="tl_style.bordercolor.1">
         <source>Here you can enter a hexadecimal border color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>你可以在这里录入一个十六进制边框颜色值 (e.g. ff0000 红色) 和一个可选的不透明度百分比值 (e.g. 75).</target>
       </trans-unit>
       <trans-unit id="tl_style.borderradius.0">
         <source>Border radius</source>
@@ -308,6 +315,7 @@
       </trans-unit>
       <trans-unit id="tl_style.bordercollapse.0">
         <source>Border handling</source>
+        <target>边框处理</target>
       </trans-unit>
       <trans-unit id="tl_style.bordercollapse.1">
         <source>Here you can choose the border handling.</source>
@@ -347,9 +355,11 @@
       </trans-unit>
       <trans-unit id="tl_style.fontcolor.0">
         <source>Font color and opacity</source>
+        <target>文字颜色和不透明度</target>
       </trans-unit>
       <trans-unit id="tl_style.fontcolor.1">
         <source>Here you can enter a hexadecimal font color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>你可以在这里录入一个十六进制文字颜色值 (e.g. ff0000 红色) 和一个可选的不透明度百分比值 (e.g. 75).</target>
       </trans-unit>
       <trans-unit id="tl_style.lineheight.0">
         <source>Line height</source>
@@ -361,9 +371,11 @@
       </trans-unit>
       <trans-unit id="tl_style.fontstyle.0">
         <source>Font style</source>
+        <target>文字样式</target>
       </trans-unit>
       <trans-unit id="tl_style.fontstyle.1">
         <source>Here you can choose one or more font styles.</source>
+        <target>你可以在这里选择一个或多个文字样式。</target>
       </trans-unit>
       <trans-unit id="tl_style.texttransform.0">
         <source>Text transform</source>
@@ -419,6 +431,7 @@
       </trans-unit>
       <trans-unit id="tl_style.liststyleimage.1">
         <source>Here you can enter the path to an individual symbol.</source>
+        <target>你可以这里录入指向一个单独符号的路径。</target>
       </trans-unit>
       <trans-unit id="tl_style.own.0">
         <source>Custom code</source>
@@ -490,27 +503,35 @@
       </trans-unit>
       <trans-unit id="tl_style.overline">
         <source>overlined</source>
+        <target>上划线</target>
       </trans-unit>
       <trans-unit id="tl_style.small-caps">
         <source>small-caps</source>
+        <target>小型大写字母字体</target>
       </trans-unit>
       <trans-unit id="tl_style.disc">
         <source>dot</source>
+        <target>点 (dot)</target>
       </trans-unit>
       <trans-unit id="tl_style.circle">
         <source>circle</source>
+        <target>空心圆 (circle)</target>
       </trans-unit>
       <trans-unit id="tl_style.square">
         <source>square</source>
+        <target>实心方块 (square)</target>
       </trans-unit>
       <trans-unit id="tl_style.decimal">
         <source>figures</source>
+        <target>数字</target>
       </trans-unit>
       <trans-unit id="tl_style.upper-roman">
         <source>upper latin figures</source>
+        <target>大写的拉丁文数字</target>
       </trans-unit>
       <trans-unit id="tl_style.lower-roman">
         <source>lower latin figures</source>
+        <target>小写的拉丁文数字</target>
       </trans-unit>
       <trans-unit id="tl_style.upper-alpha">
         <source>upper characters</source>
@@ -522,51 +543,67 @@
       </trans-unit>
       <trans-unit id="tl_style.uppercase">
         <source>uppercase</source>
+        <target>大写</target>
       </trans-unit>
       <trans-unit id="tl_style.lowercase">
         <source>lowercase</source>
+        <target>小写</target>
       </trans-unit>
       <trans-unit id="tl_style.capitalize">
         <source>capitalize</source>
+        <target>以大写字母</target>
       </trans-unit>
       <trans-unit id="tl_style.none">
         <source>none</source>
+        <target>无</target>
       </trans-unit>
       <trans-unit id="tl_style.new.0">
         <source>New format definition</source>
+        <target>新格式定义</target>
       </trans-unit>
       <trans-unit id="tl_style.new.1">
         <source>Create a new format definition</source>
+        <target>创建一个新格式定义</target>
       </trans-unit>
       <trans-unit id="tl_style.show.0">
         <source>Format definition details</source>
+        <target>格式定义详情</target>
       </trans-unit>
       <trans-unit id="tl_style.show.1">
         <source>Show the details of format definition ID %s</source>
+        <target>显示ID为%s的格式定义详情</target>
       </trans-unit>
       <trans-unit id="tl_style.edit.0">
         <source>Edit format definition</source>
+        <target>编辑格式定义</target>
       </trans-unit>
       <trans-unit id="tl_style.edit.1">
         <source>Edit format definition ID %s</source>
+        <target>编辑ID为%s的格式定义</target>
       </trans-unit>
       <trans-unit id="tl_style.cut.0">
         <source>Move format definition</source>
+        <target>移动格式定义</target>
       </trans-unit>
       <trans-unit id="tl_style.cut.1">
         <source>Move format definition ID %s</source>
+        <target>移动ID为%s的格式定义</target>
       </trans-unit>
       <trans-unit id="tl_style.copy.0">
         <source>Duplicate format definition</source>
+        <target>复制格式定义</target>
       </trans-unit>
       <trans-unit id="tl_style.copy.1">
         <source>Duplicate format definition ID %s</source>
+        <target>复制ID为%s的格式定义</target>
       </trans-unit>
       <trans-unit id="tl_style.delete.0">
         <source>Delete format definition</source>
+        <target>删除格式定义</target>
       </trans-unit>
       <trans-unit id="tl_style.delete.1">
         <source>Delete format definition ID %s</source>
+        <target>删除ID为%s的格式定义</target>
       </trans-unit>
       <trans-unit id="tl_style.editheader.0">
         <source>Edit style sheet</source>
@@ -574,6 +611,7 @@
       </trans-unit>
       <trans-unit id="tl_style.editheader.1">
         <source>Edit the style sheet settings</source>
+        <target>编辑样式表设置</target>
       </trans-unit>
       <trans-unit id="tl_style.pasteafter.0">
         <source>Paste at the top</source>
@@ -581,6 +619,7 @@
       </trans-unit>
       <trans-unit id="tl_style.pasteafter.1">
         <source>Paste after format definition ID %s</source>
+        <target>粘帖ID为%s的格式定义</target>
       </trans-unit>
       <trans-unit id="tl_style.pastenew.0">
         <source>Add new at the top</source>
@@ -588,6 +627,7 @@
       </trans-unit>
       <trans-unit id="tl_style.pastenew.1">
         <source>Add new after format definition ID %s</source>
+        <target>在ID为%s的格式定义后面添加一个新的格式定义</target>
       </trans-unit>
       <trans-unit id="tl_style.toggle.0">
         <source>Toggle visibility</source>
@@ -595,6 +635,7 @@
       </trans-unit>
       <trans-unit id="tl_style.toggle.1">
         <source>Toggle the visibility of format definition ID %s</source>
+        <target>切换ID为%s的格式定义的可见度</target>
       </trans-unit>
     </body>
   </file>

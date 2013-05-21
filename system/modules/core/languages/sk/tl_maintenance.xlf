@@ -135,9 +135,11 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.0">
         <source>Purge the system log</source>
+        <target>Vyprázdniť systémové správy</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.1">
         <source>Truncates the &lt;em&gt;tl_log&lt;/em&gt; table which stores all the system log entries. This job permanently deletes these records.</source>
+        <target>Vyprázdniť tabuľku &lt;e&gt;tl_log&lt;/em&gt;, ktorá zaznamenáva správy systému. Tento krok navždy odstráni súčasné záznamy z danej tabuľky. </target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.images.0">
         <source>Purge the image cache</source>

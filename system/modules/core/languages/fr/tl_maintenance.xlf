@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.cacheTables.1">
         <source>Please select the data you want to purge or rebuild.</source>
-        <target>Choisir les données à purger.</target>
+        <target>Choisir les données à purger ou à recréer.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.frontendUser.0">
         <source>Front end user</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.liveUpdateId">
         <source>Live Update ID</source>
-        <target>ID de mise à jour automatique (Live Update ID)</target>
+        <target>ID de la mise à jour automatique (Live Update ID)</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.toLiveUpdate">
         <source>Go to the Live Update</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.emptyLuId">
         <source>Please enter your Live Update ID</source>
-        <target>Saisir l'ID de mise à jour automatique</target>
+        <target>Saisir l'ID de la mise à jour automatique</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.notWriteable">
         <source>The temporary folder (system/tmp) is not writeable</source>
@@ -115,7 +115,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.index.1">
         <source>Truncates the tables &lt;em&gt;tl_search&lt;/em&gt; and &lt;em&gt;tl_search_index&lt;/em&gt;. Afterwards, you have to rebuild the search index (see above).</source>
-        <target>Vide les tables &lt;em&gt;tl_search&lt;/em&gt; et &lt;em&gt;tl_search_index&lt;/em&gt;. Ensuite, reconstruire l'index de recherche (voir ci-dessus).</target>
+        <target>Vide les tables &lt;em&gt;tl_search&lt;/em&gt; et &lt;em&gt;tl_search_index&lt;/em&gt;. Ensuite, vous devez reconstruire l'index de recherche (voir ci-dessus).</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.undo.0">
         <source>Purge the undo table</source>
@@ -139,7 +139,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.1">
         <source>Truncates the &lt;em&gt;tl_log&lt;/em&gt; table which stores all the system log entries. This job permanently deletes these records.</source>
-        <target>Supprimer les enregistrements de la table &lt;em&gt;tl_log&lt;/em&gt; qui enregistre toutes les entrées du journal système. Cette action supprime les enregistrements définitivement.</target>
+        <target>Vide la table &lt;em&gt;tl_log&lt;/em&gt; qui enregistre toutes les entrées du journal système. Ce travail supprime de façon permanente ces enregistrements.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.images.0">
         <source>Purge the image cache</source>
@@ -155,7 +155,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.scripts.1">
         <source>Removes the automatically generated .css and .js files, recreates the internal style sheets and then purges the page cache.</source>
-        <target>Supprime les fichiers .css et .js générés automatiquement, recrée la feuille de style interne et purge le cache des pages.</target>
+        <target>Supprime les fichiers .css et .js générés automatiquement, recrée les feuilles de style internes et purge le cache des pages.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.pages.0">
         <source>Purge the page cache</source>
@@ -187,7 +187,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.xml.1">
         <source>Recreates the XML files (sitemaps and feeds) and then purges the page cache, so there are no links to deleted resources.</source>
-        <target>Recrée les fichiers XML (carte du site et flux RSS) puis purge le cache des pages afin de ne plus avoir de liens vers des ressources supprimées.</target>
+        <target>Recrée les fichiers XML (cartes du site et flux RSS) puis purge le cache des pages afin de ne plus avoir de liens vers les ressources supprimées.</target>
       </trans-unit>
     </body>
   </file>

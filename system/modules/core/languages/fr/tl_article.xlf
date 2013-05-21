@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_article.alias.1">
         <source>The article alias is a unique reference to the article which can be called instead of its numeric ID.</source>
-        <target>L'alias de l'article est une référence unique qui remplace l'ID de l'article.</target>
+        <target>L'alias de l'article est une référence unique qui remplace l'ID numérique de l'article.</target>
       </trans-unit>
       <trans-unit id="tl_article.author.0">
         <source>Author</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_article.author.1">
         <source>Here you can change the author of the article.</source>
-        <target>Saisir le nom de l'auteur.</target>
+        <target>Changer l'auteur de l'article.</target>
       </trans-unit>
       <trans-unit id="tl_article.inColumn.0">
         <source>Display in</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_article.inColumn.1">
         <source>Please choose the layout section you want the article to be displayed in.</source>
-        <target>Choisir la zone dans laquelle vous voulez que l'article s'affiche.</target>
+        <target>Choisir la zone dans laquelle vous voulez afficher l'article.</target>
       </trans-unit>
       <trans-unit id="tl_article.keywords.0">
         <source>Meta keywords</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_article.keywords.1">
         <source>Here you can enter a list of comma separated keywords. Keywords, however, are no longer relevant to most search engines (including Google).</source>
-        <target>Saisir des mots-clés séparés par des virgules.  Ceux-ci ne sont plus pertinents pour la plupart des moteurs de recherche (notamment Google).</target>
+        <target>Saisir des mots-clés séparés par des virgules. Ceux-ci ne sont plus pertinents pour la plupart des moteurs de recherche (notamment Google).</target>
       </trans-unit>
       <trans-unit id="tl_article.teaserCssID.0">
         <source>Teaser CSS ID/class</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_article.teaser.1">
         <source>The article teaser can also be displayed with the content element &quot;article teaser&quot;.</source>
-        <target>Le texte de l'accroche peut être affiché avec l'élément de contenu &quot;accroche d'article&quot;.</target>
+        <target>L'accroche peut également être affichée avec l'élément de contenu &quot;Accroche d'un article&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_article.printable.0">
         <source>Syndication</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_article.printable.1">
         <source>Here you can choose which options are available.</source>
-        <target>Choisir les options qui sont disponibles.</target>
+        <target>Choisir parmi les options disponibles.</target>
       </trans-unit>
       <trans-unit id="tl_article.guests.0">
         <source>Show to guests only</source>
@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_article.space.1">
         <source>Here you can enter the spacing in front of and after the article in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
-        <target>Saisir l'espace avant et après l'article en pixel.</target>
+        <target>Saisir l'espace avant et après l'article en pixels.</target>
       </trans-unit>
       <trans-unit id="tl_article.published.0">
         <source>Publish article</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_article.start.1">
         <source>Do not show the article on the website before this day.</source>
-        <target>Ne plus afficher cet article sur le site avant ce jour.</target>
+        <target>Ne pas afficher cet article sur le site avant ce jour.</target>
       </trans-unit>
       <trans-unit id="tl_article.stop.0">
         <source>Show until</source>

@@ -34,7 +34,7 @@
         <target>Однако, имейте в виду, что &lt;strong&gt;все&lt;/strong&gt; смогут увидеть сообщения об ошибках на вашем сайте!</target>
       </trans-unit>
       <trans-unit id="XPT.errorExplain">
-        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found it in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
         <target>Выполнение скрипта остановлено, потому, что что-то не работает должным образом. Фактическое сообщение об ошибке скрыто этим уведомлением по соображениям безопасности и может быть найдено в файле &lt;code&gt;system/logs/error.log&lt;/code&gt; (см. выше). Если вы не понимаете сообщение об ошибке или не знаете, как решить проблему, воспользуйтесь поиском в &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQ&lt;/a&gt; или посетите &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Страницу поддержки Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.requestToken">
@@ -55,24 +55,31 @@
       </trans-unit>
       <trans-unit id="XPT.tokenExplainTwo">
         <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>Для получения дополнительной информации, воспользуйтесь поиском в &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQ&lt;/a&gt; или посетите &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Страницу поддержки Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.incomplete">
         <source>Incomplete installation</source>
+        <target>Незавершенная установка</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteInstallation">
         <source>The installation has not been completed, therefore Contao cannot work properly.</source>
+        <target>Установка не завершена, поэтому Contao не может работать должным образом.</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteFixOne">
         <source>Point your browser to the following URL:</source>
+        <target>Перейдите в браузере по следующему URL:</target>
       </trans-unit>
       <trans-unit id="XPT.installPath">
         <source>path-to-installation</source>
+        <target>путь к установке</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteFixTwo">
         <source>This will open the Contao install tool, which will guide you through the installation process.</source>
+        <target>Это откроет мастер установки Contao, который проведет вас через процесс установки.</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
-        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/3.0/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
+        <target>Для получения дополнительной информации, обратитесь к &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Инструкция по установке Contao&lt;/a&gt;.</target>
       </trans-unit>
     </body>
   </file>

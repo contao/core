@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_content.headline.1">
         <source>Here you can add a headline to the content element.</source>
-        <target>Saisir un titre qui sera affiché au dessus de l'élément de contenu.</target>
+        <target>Saisir un titre qui sera affiché au-dessus de l'élément de contenu.</target>
       </trans-unit>
       <trans-unit id="tl_content.text.0">
         <source>Text</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_content.imagemargin.1">
         <source>Here you can enter the top, right, bottom and left margin.</source>
-        <target>Saisir la marge supérieure, droite, inférieure et gauche.</target>
+        <target>Saisir la marge haute, droite, basse et gauche.</target>
       </trans-unit>
       <trans-unit id="tl_content.imageUrl.0">
         <source>Image link target</source>
@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_content.html.1">
         <source>You can modify the list of allowed HTML tags in the back end settings.</source>
-        <target>Saisir du texte au format HTML.</target>
+        <target>Vous pouvez modifier la liste des balises HTML autorisées dans les paramètres du back office.</target>
       </trans-unit>
       <trans-unit id="tl_content.listtype.0">
         <source>List type</source>
@@ -123,11 +123,11 @@
       </trans-unit>
       <trans-unit id="tl_content.listitems.0">
         <source>List items</source>
-        <target>Liste d'éléments</target>
+        <target>Éléments de la liste</target>
       </trans-unit>
       <trans-unit id="tl_content.listitems.1">
         <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
-        <target>Si JavaScript est désactivé, s'assurer de sauvegarder les changements avant de modifier l'ordre.</target>
+        <target>Si JavaScript est désactivé, assurez-vous de sauvegarder vos modifications avant de modifier l'ordre.</target>
       </trans-unit>
       <trans-unit id="tl_content.tableitems.0">
         <source>Table items</source>
@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_content.tableitems.1">
         <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
-        <target>Si JavaScript est désactivé, s'assurer de sauvegarder les changements avant de modifier l'ordre.</target>
+        <target>Si JavaScript est désactivé, assurez-vous de sauvegarder vos modifications avant de modifier l'ordre.</target>
       </trans-unit>
       <trans-unit id="tl_content.summary.0">
         <source>Table summary</source>
@@ -143,11 +143,11 @@
       </trans-unit>
       <trans-unit id="tl_content.summary.1">
         <source>Please enter a short summary of the table and describe its purpose or structure.</source>
-        <target>Afin de rendre les tableaux accessibles, saisir une description du contenu.</target>
+        <target>Afin de rendre les tableaux accessibles, saisir une description de son contenu.</target>
       </trans-unit>
       <trans-unit id="tl_content.thead.0">
         <source>Add table header</source>
-        <target>Entête du tableau</target>
+        <target>En-tête du tableau</target>
       </trans-unit>
       <trans-unit id="tl_content.thead.1">
         <source>Make the first row of the table the table header.</source>
@@ -159,15 +159,15 @@
       </trans-unit>
       <trans-unit id="tl_content.tfoot.1">
         <source>Make the last row of the table the table footer.</source>
-        <target>Utiliser la dernière ligne comme pied de tableau.</target>
+        <target>Utiliser la dernière ligne comme pied du tableau.</target>
       </trans-unit>
       <trans-unit id="tl_content.tleft.0">
         <source>Use row headers</source>
-        <target>Utiliser les entêtes de ligne</target>
+        <target>Utiliser les en-têtes de ligne</target>
       </trans-unit>
       <trans-unit id="tl_content.tleft.1">
         <source>Define the left column as row header.</source>
-        <target>Définir la colonne de gauche comme entête de ligne.</target>
+        <target>Définir la colonne de gauche comme en-tête de ligne.</target>
       </trans-unit>
       <trans-unit id="tl_content.sortable.0">
         <source>Sortable table</source>
@@ -175,7 +175,7 @@
       </trans-unit>
       <trans-unit id="tl_content.sortable.1">
         <source>Make the table sortable (requires JavaScript and a table header).</source>
-        <target>Rendre le tableau triable (nécessite JavaScript et un entête de tableau).</target>
+        <target>Permettre le tri des données du tableau (nécessite JavaScript et un en-tête de tableau).</target>
       </trans-unit>
       <trans-unit id="tl_content.sortIndex.0">
         <source>Sort index</source>
@@ -231,7 +231,7 @@
       </trans-unit>
       <trans-unit id="tl_content.mooHeadline.1">
         <source>Please enter the headline of the content pane. HTML tags are allowed.</source>
-        <target>Saisir le titre de l'élément accordéon (HTML permis).</target>
+        <target>Saisir le titre de l'élément accordéon (les balises HTML sont autorisées).</target>
       </trans-unit>
       <trans-unit id="tl_content.mooStyle.0">
         <source>CSS format</source>
@@ -255,7 +255,7 @@
       </trans-unit>
       <trans-unit id="tl_content.shClass.1">
         <source>Here you can configure the syntax highlighter (e.g. &lt;em&gt;gutter: false;&lt;/em&gt;).</source>
-        <target>Configurer la coloration syntaxique (ex : &lt;em&gt;gutter: false;&lt;/em&gt;).</target>
+        <target>Configurer la coloration syntaxique (ex. : &lt;em&gt;gutter: false;&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_content.highlight.0">
         <source>Syntax highlighting</source>
@@ -275,15 +275,15 @@
       </trans-unit>
       <trans-unit id="tl_content.linkTitle.0">
         <source>Link text</source>
-        <target>Titre du lien</target>
+        <target>Texte du lien</target>
       </trans-unit>
       <trans-unit id="tl_content.linkTitle.1">
         <source>The link text will be displayed instead of the target URL.</source>
-        <target>Le titre du lien sera affiché à la place de l'URL cible..</target>
+        <target>Le texte du lien sera affiché à la place de l'URL cible.</target>
       </trans-unit>
       <trans-unit id="tl_content.titleText.0">
         <source>Link title</source>
-        <target>Le titre du lien</target>
+        <target>Titre du lien</target>
       </trans-unit>
       <trans-unit id="tl_content.titleText.1">
         <source>The link title is added as &lt;em&gt;title&lt;/em&gt; attribute in the HTML markup.</source>
@@ -295,7 +295,7 @@
       </trans-unit>
       <trans-unit id="tl_content.embed.1">
         <source>Use the wildcard &quot;%s&quot; to embed the link in a phrase (e.g. &lt;em&gt;For more information please visit %s&lt;/em&gt;).</source>
-        <target>Utiliser le joker &quot;%s&quot; pour inclure le lien dans une phrase (ex : &lt;em&gt;Pour plus d'informations visitez %s!&lt;/em&gt;).</target>
+        <target>Utiliser le joker &quot;%s&quot; pour inclure le lien dans une phrase (ex. : &lt;em&gt;Pour plus d'information, veuillez visiter %s&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_content.rel.0">
         <source>Lightbox</source>
@@ -307,7 +307,7 @@
       </trans-unit>
       <trans-unit id="tl_content.useImage.0">
         <source>Create an image link</source>
-        <target>Image lien</target>
+        <target>Créer un lien avec une image</target>
       </trans-unit>
       <trans-unit id="tl_content.useImage.1">
         <source>Use an image instead of the link title.</source>
@@ -367,7 +367,7 @@
       </trans-unit>
       <trans-unit id="tl_content.sortBy.1">
         <source>Please choose the sort order.</source>
-        <target>Choisir un type de tri.</target>
+        <target>Choisir un ordre de tri.</target>
       </trans-unit>
       <trans-unit id="tl_content.galleryTpl.0">
         <source>Gallery template</source>
@@ -383,23 +383,23 @@
       </trans-unit>
       <trans-unit id="tl_content.playerSRC.1">
         <source>Here you can add the video/audio file or multiple files if you are using different codecs.</source>
-        <target>Ajouter le fichier vidéo/audio ou plusieurs fichiers pour utiliser différents codecs.</target>
+        <target>Ajouter le fichier vidéo/audio ou plusieurs fichiers si vous utilisez différents codecs.</target>
       </trans-unit>
       <trans-unit id="tl_content.youtube.0">
         <source>YouTube ID</source>
-        <target>ID Youtube</target>
+        <target>ID YouTube</target>
       </trans-unit>
       <trans-unit id="tl_content.youtube.1">
         <source>Please enter the YouTube video ID (e.g. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</source>
-        <target>Saisir l'ID de la vidéo YouTube (ex : &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</target>
+        <target>Saisir l'ID de la vidéo YouTube (ex. : &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_content.posterSRC.0">
         <source>Preview image</source>
-        <target>Prévisualiser l'image</target>
+        <target>Image de prévisualisation</target>
       </trans-unit>
       <trans-unit id="tl_content.posterSRC.1">
         <source>Show this image instead of the first frame of the video before playback.</source>
-        <target>Afficher cette image avant la lecture à la place de la première vue de la vidéo;</target>
+        <target>Afficher cette image, avant la lecture, à la place de la première vue de la vidéo.</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.0">
         <source>Player size</source>
@@ -407,11 +407,11 @@
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
         <source>Width and height of the media player in pixels (e.g. 640x480). Applies to videos only.</source>
-        <target>Largeur et hauteur du &quot;player&quot; en pixels (par exemple 640x480). Ne concerne que les vidéos.</target>
+        <target>Largeur et hauteur du lecteur multimédia en pixels (ex. : 640x480). Ne concerne que les vidéos.</target>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>
-        <target>Lire automatiquement</target>
+        <target>Lecture automatique</target>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.1">
         <source>Automatically play the video when the page loads.</source>
@@ -419,9 +419,11 @@
       </trans-unit>
       <trans-unit id="tl_content.sliderDelay.0">
         <source>Sliding interval</source>
+        <target>Intervalle de défilement</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderDelay.1">
         <source>The time in milliseconds between slides (1000 = 1s). Set to 0 to disable auto sliding.</source>
+        <target>Intervalle, en millisecondes, entre les slides (1000 = 1s). Saisir 0 pour désactiver le défilement automatique.</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderSpeed.0">
         <source>Transition speed</source>
@@ -429,19 +431,23 @@
       </trans-unit>
       <trans-unit id="tl_content.sliderSpeed.1">
         <source>The transition speed in milliseconds (1000 = 1s). Defaults to 300.</source>
-        <target>La vitesse de transition en millisecondes (1000 = 1s). La valeur par défaut 300.</target>
+        <target>La vitesse de transition en millisecondes (1000 = 1s). La valeur par défaut est : 300.</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderStartSlide.0">
         <source>Slide offset</source>
+        <target>Slide offset</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderStartSlide.1">
         <source>Here you can make the slider start with a particular slide (counting starts at 0).</source>
+        <target>Le slider débute avec un slide particulier (la numérotation commence à 0).</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderContinuous.0">
         <source>Continuous</source>
+        <target>Défilement continu</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderContinuous.1">
         <source>Make the slider continuous (start all over when reaching the end).</source>
+        <target>Régler le défilement continu (l'affichage recommence une fois qu'il a atteint la fin).</target>
       </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>
@@ -489,7 +495,7 @@
       </trans-unit>
       <trans-unit id="tl_content.protected.1">
         <source>Show the content element to certain member groups only.</source>
-        <target>L'élément sera affiché à certains groupes de membre seulement.</target>
+        <target>L'élément de contenu sera affiché à certains groupes de membres seulement.</target>
       </trans-unit>
       <trans-unit id="tl_content.groups.0">
         <source>Allowed member groups</source>
@@ -497,7 +503,7 @@
       </trans-unit>
       <trans-unit id="tl_content.groups.1">
         <source>These groups will be able to see the content element.</source>
-        <target>Ces groupes de membres seront autorisés à voir le contenu de l'élément.</target>
+        <target>Ces groupes de membres seront autorisés à voir l'élément de contenu.</target>
       </trans-unit>
       <trans-unit id="tl_content.guests.0">
         <source>Show to guests only</source>
@@ -521,7 +527,7 @@
       </trans-unit>
       <trans-unit id="tl_content.space.1">
         <source>Here you can enter the spacing in front of and after the content element in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
-        <target>Saisir l'espace avant et après l'élément en pixel. Il est conseillé de gérer ces espacements dans une feuille de style.</target>
+        <target>Saisir l'espace avant et après l'élément en pixels. Il est conseillé de gérer ces espacements dans une feuille de style.</target>
       </trans-unit>
       <trans-unit id="tl_content.invisible.0">
         <source>Invisible</source>
@@ -561,14 +567,15 @@
       </trans-unit>
       <trans-unit id="tl_content.slider_legend">
         <source>Slider settings</source>
+        <target>Paramètres du slider</target>
       </trans-unit>
       <trans-unit id="tl_content.list_legend">
         <source>List items</source>
-        <target>Eléments de la liste</target>
+        <target>Éléments de la liste</target>
       </trans-unit>
       <trans-unit id="tl_content.table_legend">
         <source>Table items</source>
-        <target>Eléments du tableau</target>
+        <target>Éléments du tableau</target>
       </trans-unit>
       <trans-unit id="tl_content.tconfig_legend">
         <source>Table configuration</source>
@@ -588,7 +595,7 @@
       </trans-unit>
       <trans-unit id="tl_content.imglink_legend">
         <source>Image link settings</source>
-        <target>Paramètres de l'image lien</target>
+        <target>Paramètres de l'image en tant que lien</target>
       </trans-unit>
       <trans-unit id="tl_content.source_legend">
         <source>Files and folders</source>
@@ -620,7 +627,7 @@
       </trans-unit>
       <trans-unit id="tl_content.poster_legend">
         <source>Preview image</source>
-        <target>Prévisualiser l'image</target>
+        <target>Image de prévisualisation</target>
       </trans-unit>
       <trans-unit id="tl_content.invisible_legend">
         <source>Visibility</source>
@@ -632,7 +639,7 @@
       </trans-unit>
       <trans-unit id="tl_content.unordered">
         <source>unordered list</source>
-        <target>liste désordonnée</target>
+        <target>liste non ordonnée</target>
       </trans-unit>
       <trans-unit id="tl_content.name_asc">
         <source>File name (ascending)</source>
@@ -660,6 +667,7 @@
       </trans-unit>
       <trans-unit id="tl_content.includeTemplate">
         <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>Le modèle &lt;em&gt;%s&lt;/em&gt; doit être inclus dans la présentation de page.</target>
       </trans-unit>
       <trans-unit id="tl_content.includeTemplates">
         <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>

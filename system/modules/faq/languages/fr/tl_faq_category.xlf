@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.disableCaptcha.1">
         <source>Use this option only if you have limited comments to authenticated users.</source>
-        <target>N'utiliser cette option que si vous avez restreint les commentaires aux utilisateurs habilités.</target>
+        <target>N'utiliser cette option que si vous avez restreint les commentaires aux utilisateurs authentifiés.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.tstamp.0">
         <source>Revision date</source>

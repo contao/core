@@ -254,8 +254,8 @@
         <target>Classe CSS</target>
       </trans-unit>
       <trans-unit id="tl_page.cssClass.1">
-        <source>The class(es) will be used in the navigation menu and the &lt;body&gt; tag.</source>
-        <target>Inserendo una classe css verrà usato come attributo &lt;em&gt;class&lt;/em&gt; nel menu di navigazione e nel &lt;body&gt; tag. In questo modo sarà possibile applicare uno stile personalizzato.</target>
+        <source>The class(es) will be used in the navigation menu and the &amp;lt;body&amp;gt; tag.</source>
+        <target>Inserendo una classe css verrà usato come attributo &lt;em&gt;class&lt;/em&gt; nel menu di navigazione e nel &amp;lt;body&amp;gt; tag. In questo modo sarà possibile applicare uno stile personalizzato.</target>
       </trans-unit>
       <trans-unit id="tl_page.sitemap.0">
         <source>Show in sitemap</source>

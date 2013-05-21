@@ -535,6 +535,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
         <source>Here you can enter the Live Update URL.</source>
+        <target>တိုက်ရိုက်မွမ်းမံယူအာအယ်ထည့်သွင်းနိုင်။</target>
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>

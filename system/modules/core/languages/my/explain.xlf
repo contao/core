@@ -14,8 +14,8 @@
         <target>အမည်များထည့်သွင်း</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.1">
-        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</source>
-        <target>အမည်များထည့်သွင်းရန်နောက်ထပ်အချက်အလက်များကြည့်ရှုရန် &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;  သို့လည်ပတ်ပါ။</target>
+        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/manual/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/manual/managing-content.html#insert-tags&lt;/a&gt;.</source>
+        <target>အမည်များထည့်သွင်းရန်နောက်ထပ်အချက်အလက်များကြည့်ရှုရန် &lt;a href=&quot;https://contao.org/manual/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/manual/managing-content.html#insert-tags&lt;/a&gt; သို့လည်ပတ်ပါ။</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.0">
         <source>Code Editor</source>
@@ -23,6 +23,7 @@
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.1">
         <source>For more information about ACE please visit &lt;a href=&quot;http://ace.ajax.org&quot; title=&quot;ACE (Ajax.org Cloud9 Editor)&quot; target=&quot;_blank&quot;&gt;http://ace.ajax.org&lt;/a&gt;.</source>
+        <target>&lt;a href=&quot;http://ace.ajax.org&quot; title=&quot;ACE (Ajax.org Cloud9 Editor)&quot; target=&quot;_blank&quot;&gt;http://ace.ajax.org&lt;/a&gt; သို့လည်ပတ်ပြီးအေစီအီးအကြောင်းကိုလေ့လာ။</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.0.0">
         <source>colspan</source>
@@ -46,6 +47,7 @@
       </trans-unit>
       <trans-unit id="XPL.dateFormat.2.1">
         <source>MM/DD/YYYY, English format, e.g. 01/28/2005</source>
+        <target>လလ/ရရ/နနနန၊ အင်္ဂလိပ်ပံုစံ၊ ဥပမာ ၀၁/၂၈/၂၀၀၅</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.3.0">
         <source>d.m.Y</source>
@@ -53,6 +55,7 @@
       </trans-unit>
       <trans-unit id="XPL.dateFormat.3.1">
         <source>DD.MM.YYYY, German format, e.g. 28.01.2005</source>
+        <target>ရရ.လလ.နနနန၊ ဂျာမန်ပံုစံ၊ ဥပမာ ၂၈.၀၁.၂၀၀၅</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.4.0">
         <source>y-n-j</source>
@@ -92,6 +95,7 @@
       </trans-unit>
       <trans-unit id="XPL.highlighter.0.1">
         <source>For more information about how to configure the syntax highlighter please visit &lt;a href=&quot;http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
+        <target>နောက်ထပ်အချက်အလက်များအတွက် &lt;a href=&quot;http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt; သို့ဖွဲ့ထုံးမီးမောင်းထိုးသူကိုမည်သို့ပံုစံပြင်နိုင်သည်ကိုကြည့်။</target>
       </trans-unit>
     </body>
   </file>

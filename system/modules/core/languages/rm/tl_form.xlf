@@ -127,6 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_form.novalidate.1">
         <source>Add the &lt;em&gt;novalidate&lt;/em&gt; attribute to the form tag.</source>
+        <target>Agiuntar l'attribut &lt;em&gt;novalidate&lt;/em&gt; al tag da formular.</target>
       </trans-unit>
       <trans-unit id="tl_form.attributes.0">
         <source>CSS ID/class</source>

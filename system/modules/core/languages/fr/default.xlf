@@ -7,67 +7,67 @@
       </trans-unit>
       <trans-unit id="ERR.unique">
         <source>Duplicate entry in field &quot;%s&quot;!</source>
-        <target>Doublon dans le champ &quot;%s&quot; !</target>
+        <target>Doublon dans le champ &quot;%s&quot;.</target>
       </trans-unit>
       <trans-unit id="ERR.mandatory">
         <source>Field &quot;%s&quot; must not be empty!</source>
-        <target>Le champ &quot;%s&quot; ne doit pas être vide !</target>
+        <target>Le champ &quot;%s&quot; ne doit pas être vide.</target>
       </trans-unit>
       <trans-unit id="ERR.mdtryNoLabel">
         <source>This field must not be empty!</source>
-        <target>Ce champ ne doit pas être vide !</target>
+        <target>Ce champ ne doit pas être vide.</target>
       </trans-unit>
       <trans-unit id="ERR.minlength">
         <source>Field &quot;%s&quot; has to be at least %d characters long!</source>
-        <target>Le champ &quot;%s&quot; doit posséder au moins %d caractères !</target>
+        <target>Le champ &quot;%s&quot; doit posséder au moins %d caractères.</target>
       </trans-unit>
       <trans-unit id="ERR.maxlength">
         <source>Field &quot;%s&quot; must not be longer than %d characters!</source>
-        <target>Le champ &quot;%s&quot; ne doit pas contenir plus de %d caractères !</target>
+        <target>Le champ &quot;%s&quot; ne doit pas contenir plus de %d caractères.</target>
       </trans-unit>
       <trans-unit id="ERR.digit">
         <source>Please enter digits only!</source>
-        <target>Veuillez seulement saisir des chiffres !</target>
+        <target>Veuillez seulement saisir des chiffres.</target>
       </trans-unit>
       <trans-unit id="ERR.prcnt">
         <source>Please enter a percentage between 0 and 100!</source>
-        <target>Veuillez saisir une valeur entre 0 et 100 !</target>
+        <target>Veuillez saisir une valeur entre 0 et 100.</target>
       </trans-unit>
       <trans-unit id="ERR.alpha">
         <source>Please enter alphabetic characters only!</source>
-        <target>Veuillez seulement saisir des caractères alphabétiques !</target>
+        <target>Veuillez seulement saisir des caractères alphabétiques.</target>
       </trans-unit>
       <trans-unit id="ERR.alnum">
         <source>Please enter alphanumeric characters only!</source>
-        <target>Veuillez seulement saisir des caractères alphanumériques !</target>
+        <target>Veuillez seulement saisir des caractères alphanumériques.</target>
       </trans-unit>
       <trans-unit id="ERR.phone">
         <source>Please enter a valid phone number!</source>
-        <target>Veuillez saisir un numéro de téléphone valide !</target>
+        <target>Veuillez saisir un numéro de téléphone valide.</target>
       </trans-unit>
       <trans-unit id="ERR.extnd">
         <source>For security reasons you can not use the following characters here: =&lt;&gt;&amp;/()#</source>
-        <target>Pour des raisons de sécurité n'utilisez pas ces caractères =&lt;&gt;&amp;/()#</target>
+        <target>Pour des raisons de sécurité n'utilisez pas ces caractères : =&lt;&gt;&amp;/()#</target>
       </trans-unit>
       <trans-unit id="ERR.email">
         <source>Please enter a valid e-mail address!</source>
-        <target>Veuillez saisir une adresse e-mail valide !</target>
+        <target>Veuillez saisir une adresse e-mail valide.</target>
       </trans-unit>
       <trans-unit id="ERR.emails">
         <source>There is at least one invalid e-mail address!</source>
-        <target>Il y a au moins une adresse e-mail non valide !</target>
+        <target>Il y a au moins une adresse e-mail non valide.</target>
       </trans-unit>
       <trans-unit id="ERR.url">
         <source>Please enter a valid URL format and encode special characters!</source>
-        <target>Veuillez saisir une URL valide et encodez les caractères spéciaux !</target>
+        <target>Veuillez saisir une URL valide et encoder les caractères spéciaux.</target>
       </trans-unit>
       <trans-unit id="ERR.locale">
         <source>Please enter a valid locale such as &quot;en&quot; or &quot;en_US&quot;!</source>
-        <target>Veuillez saisir une locale valide comme &quot;en&quot; ou &quot;en_US&quot; !</target>
+        <target>Veuillez saisir une locale valide comme &quot;en&quot; ou &quot;en_US&quot;.</target>
       </trans-unit>
       <trans-unit id="ERR.language">
         <source>Please enter a valid language code such as &quot;en&quot; or &quot;en-US&quot;!</source>
-        <target>Veuillez saisir un code de langue valide comme &quot;en&quot; ou &quot;en_US&quot; !</target>
+        <target>Veuillez saisir un code de langue valide comme &quot;en&quot; ou &quot;en-US&quot;.</target>
       </trans-unit>
       <trans-unit id="ERR.alias">
         <source>Please enter only alphanumeric characters and the following special characters: .-_</source>
@@ -79,43 +79,43 @@
       </trans-unit>
       <trans-unit id="ERR.date">
         <source>Please enter the date as &quot;%s&quot;!</source>
-        <target>Veuillez saisir la date &quot;%s&quot; !</target>
+        <target>Veuillez saisir la date telle que &quot;%s&quot;.</target>
       </trans-unit>
       <trans-unit id="ERR.time">
         <source>Please enter the time as &quot;%s&quot;!</source>
-        <target>Veuillez saisir l'heure &quot;%s&quot; !</target>
+        <target>Veuillez saisir l'heure telle que &quot;%s&quot;.</target>
       </trans-unit>
       <trans-unit id="ERR.dateTime">
         <source>Please enter date and time as &quot;%s&quot;!</source>
-        <target>Veuillez saisir la date et l'heure &quot;%s&quot; !</target>
+        <target>Veuillez saisir la date et l'heure telle que &quot;%s&quot;.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidDate">
         <source>Invalid date &quot;%s&quot;!</source>
-        <target>Date non valide &quot;%s&quot;!</target>
+        <target>Date non valide &quot;%s&quot; !</target>
       </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
-        <target>Le champ &quot;%s&quot; ne doit pas contenir d'espace !</target>
+        <target>Le champ &quot;%s&quot; ne doit pas contenir d'espace.</target>
       </trans-unit>
       <trans-unit id="ERR.filesize">
         <source>The maximum size for file uploads is %s (Contao or php.ini settings)!</source>
-        <target>La taille maximale pour l'envoi de fichier est %s (Paramètres de Contao ou du fichier php.ini)!</target>
+        <target>La taille maximale pour l'envoi de fichier est %s (paramètres de Contao ou du fichier php.ini).</target>
       </trans-unit>
       <trans-unit id="ERR.filetype">
         <source>File type &quot;%s&quot; is not allowed to be uploaded!</source>
-        <target>Le fichier de type &quot;%s&quot; n'est pas autorisé pour l'envoi !</target>
+        <target>Le fichier de type &quot;%s&quot; n'est pas autorisé pour l'envoi.</target>
       </trans-unit>
       <trans-unit id="ERR.filepartial">
         <source>File %s was only partially uploaded!</source>
-        <target>Le fichier %s a été envoyé partiellement !</target>
+        <target>Le fichier %s a été envoyé partiellement.</target>
       </trans-unit>
       <trans-unit id="ERR.filewidth">
         <source>File %s exceeds the maximum image width of %d pixels!</source>
-        <target>L'image %s dépasse la largeur maximale qui est de %d pixels !</target>
+        <target>L'image %s dépasse la largeur maximale qui est de %d pixels.</target>
       </trans-unit>
       <trans-unit id="ERR.fileheight">
         <source>File %s exceeds the maximum image height of %d pixels!</source>
-        <target>L'image %s dépasse la hauteur maximale qui est de %d pixels !</target>
+        <target>L'image %s dépasse la hauteur maximale qui est de %d pixels.</target>
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
@@ -123,7 +123,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidReferer">
         <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
-        <target>Accès interdit ! L'adresse de l'hôte courant (%s) est différente de l'adresse de l'hôte référent (%s) !</target>
+        <target>Accès interdit ! L'adresse de l'hôte courant (%s) est différente de l'adresse de l'hôte référent (%s).</target>
       </trans-unit>
       <trans-unit id="ERR.invalidPass">
         <source>Invalid password!</source>
@@ -131,15 +131,15 @@
       </trans-unit>
       <trans-unit id="ERR.passwordLength">
         <source>A password has to be at least %d characters long!</source>
-        <target>Un mot de passe doit posséder au moins %d caractères !</target>
+        <target>Un mot de passe doit posséder au moins %d caractères.</target>
       </trans-unit>
       <trans-unit id="ERR.passwordName">
         <source>Your username and password must not be the same!</source>
-        <target>Votre identifiant et votre mot de passe ne correspondent pas !</target>
+        <target>Votre identifiant et votre mot de passe ne doivent pas être identiques.</target>
       </trans-unit>
       <trans-unit id="ERR.passwordMatch">
         <source>The passwords did not match!</source>
-        <target>Les mots de passe sont différents !</target>
+        <target>Les mots de passe sont différents.</target>
       </trans-unit>
       <trans-unit id="ERR.accountLocked">
         <source>This account has been locked! You can log in again in %d minutes.</source>
@@ -147,15 +147,15 @@
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
         <source>Login failed!</source>
-        <target>La connexion a échoué !</target>
+        <target>La connexion a échoué.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
-        <target>Le format de couleur est invalide !</target>
+        <target>Le format de couleur est invalide.</target>
       </trans-unit>
       <trans-unit id="ERR.all_fields">
         <source>Please select at least one field!</source>
-        <target>Veuillez choisir au moins un champ !</target>
+        <target>Veuillez choisir au moins un champ.</target>
       </trans-unit>
       <trans-unit id="ERR.emptyUpload">
         <source>Please select at least one file!</source>
@@ -163,35 +163,35 @@
       </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
-        <target>L'alias &quot;%s&quot; existe déjà !</target>
+        <target>L'alias &quot;%s&quot; existe déjà.</target>
       </trans-unit>
       <trans-unit id="ERR.importFolder">
         <source>The folder &quot;%s&quot; cannot be imported!</source>
-        <target>Le répertoire &quot;%s&quot; ne peut être importé !</target>
+        <target>Le répertoire &quot;%s&quot; ne peut être importé.</target>
       </trans-unit>
       <trans-unit id="ERR.notWriteable">
         <source>The file &quot;%s&quot; is not writeable and can therefore not be updated!</source>
-        <target>Le fichier &quot;%s&quot; n'est pas accessible en écriture et ne peut donc pas être mis à jour !</target>
+        <target>Le fichier &quot;%s&quot; n'est pas accessible en écriture et ne peut donc pas être mis à jour.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidName">
         <source>This file or folder name is invalid!</source>
-        <target>Ce nom de fichier ou de répertoire est invalide !</target>
+        <target>Ce nom de fichier ou de répertoire est invalide.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidFile">
         <source>The file or folder &quot;%s&quot; is invalid!</source>
-        <target>Le fichier ou le répertoire est invalide !</target>
+        <target>Le fichier ou le répertoire &quot;%s&quot; est invalide.</target>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
         <source>The file &quot;%s&quot; already exists!</source>
-        <target>Le fichier &quot;%s&quot; existe déjà !</target>
+        <target>Le fichier &quot;%s&quot; existe déjà.</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
-        <target>Cible de redirection non valide (redondance cyclique) !</target>
+        <target>Cible de redirection non valide (redondance cyclique).</target>
       </trans-unit>
       <trans-unit id="ERR.ie6warning">
         <source>&lt;strong&gt;Attention!&lt;/strong&gt; Your web browser is %sout of date%s and &lt;strong&gt;you cannot use all features of this website&lt;/strong&gt;.</source>
-        <target>&lt;strong&gt;ATTENTION !&lt;/strong&gt; Votre navigateur %sn'est pas à jour%s, &lt;strong&gt;certaines fonctionnalités ne seront pas disponibles&lt;/strong&gt;.</target>
+        <target>&lt;strong&gt;Attention !&lt;/strong&gt; Votre navigateur %sn'est pas à jour%s, &lt;strong&gt;certaines fonctionnalités ne seront pas disponibles&lt;/strong&gt;.</target>
       </trans-unit>
       <trans-unit id="ERR.noFallbackEmpty">
         <source>None of the active website root pages without an explicit DNS setting has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
@@ -207,11 +207,11 @@
       </trans-unit>
       <trans-unit id="ERR.topLevelRoot">
         <source>Top-level pages must be website root pages!</source>
-        <target>Les pages de premier niveau doivent être des pages racines !</target>
+        <target>Les pages de premier niveau doivent être des pages racines.</target>
       </trans-unit>
       <trans-unit id="ERR.topLevelRegular">
         <source>There are pages on the top-level which are not website root pages. Creating websites without a website root page is no longer supported, so please ensure that all pages are grouped under a website root page.</source>
-        <target>Il y a des pages de premier niveau qui ne sont pas des pages racines. La création de site sans une page racine n'est plus supportée, faites en sorte que toutes les pages soient regroupées sous une page racine.</target>
+        <target>Il y a des pages de premier niveau qui ne sont pas des pages racines. La création de sites sans une page racine n'est plus supportée, faites en sorte que toutes les pages soient regroupées sous une page racine.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidTokenUrl">
         <source>The link you were trying to open could not be verified. If you have clicked the link yourself or have received it by a trustworthy person, you can confirm the process below.</source>
@@ -219,7 +219,7 @@
       </trans-unit>
       <trans-unit id="ERR.version2format">
         <source>This element still uses the old Contao 2 SRC format. Did you upgrade the database?</source>
-        <target>Cet élément utilise toujours l'ancien format SCR de Contao 2. Avez-vous mis à jour la base de données ?</target>
+        <target>Cet élément utilise toujours l'ancien format SRC de Contao 2. Avez-vous mis à jour la base de données ?</target>
       </trans-unit>
       <trans-unit id="ERR.form">
         <source>The form could not be sent</source>
@@ -227,11 +227,11 @@
       </trans-unit>
       <trans-unit id="ERR.captcha">
         <source>Please answer the security question!</source>
-        <target>Veuillez répondre à la question de sécurité !</target>
+        <target>Veuillez répondre à la question de sécurité.</target>
       </trans-unit>
       <trans-unit id="ERR.download">
         <source>File &quot;%s&quot; is not available for download!</source>
-        <target>Le fichier &quot;%s&quot; n'est pas disponible en téléchargement !</target>
+        <target>Le fichier &quot;%s&quot; n'est pas disponible en téléchargement.</target>
       </trans-unit>
       <trans-unit id="ERR.invalid">
         <source>Invalid input: %s</source>
@@ -351,7 +351,7 @@
       </trans-unit>
       <trans-unit id="CTE.sliderStop.1">
         <source>Generates the closing part of the slider wrapper.</source>
-        <target>Génère la partie de fermeture du conteneur du slider.</target>
+        <target>Génère la fermeture du conteneur du slider.</target>
       </trans-unit>
       <trans-unit id="CTE.links">
         <source>Link elements</source>
@@ -395,7 +395,7 @@
       </trans-unit>
       <trans-unit id="CTE.player.0">
         <source>Video/audio</source>
-        <target>Video/audio</target>
+        <target>Vidéo/audio</target>
       </trans-unit>
       <trans-unit id="CTE.player.1">
         <source>Generates a video or audio player.</source>
@@ -543,7 +543,7 @@
       </trans-unit>
       <trans-unit id="FOP.f4">
         <source>Delete folders including all files and subfolders (!)</source>
-        <target>Supprimer les répertoires contenant des fichiers ou des sous-répertoires (!)</target>
+        <target>Supprimer les répertoires y compris les fichiers ou les sous-répertoires (!)</target>
       </trans-unit>
       <trans-unit id="FOP.f5">
         <source>Edit files in the source editor</source>
@@ -759,7 +759,7 @@
       </trans-unit>
       <trans-unit id="MSC.url.0">
         <source>Link target</source>
-        <target>URL Cible</target>
+        <target>URL cible</target>
       </trans-unit>
       <trans-unit id="MSC.url.1">
         <source>Please enter a web address (http://…), an e-mail address (mailto:…) or an insert tag.</source>
@@ -791,7 +791,7 @@
       </trans-unit>
       <trans-unit id="MSC.source.0">
         <source>Source files</source>
-        <target>Fichiers source</target>
+        <target>Fichiers sources</target>
       </trans-unit>
       <trans-unit id="MSC.source.1">
         <source>Please upload the CSV files to be imported.</source>
@@ -823,7 +823,7 @@
       </trans-unit>
       <trans-unit id="MSC.lw_copy">
         <source>Duplicate the element</source>
-        <target>Copier l'élément</target>
+        <target>Dupliquer l'élément</target>
       </trans-unit>
       <trans-unit id="MSC.lw_up">
         <source>Move the element one position up</source>
@@ -1071,7 +1071,7 @@
       </trans-unit>
       <trans-unit id="MSC.id.1">
         <source>Note that changing the ID can break data integrity!</source>
-        <target>Changer les ID détruira l'uniformité des données !</target>
+        <target>Changer les ID détruira l'intégrité des données !</target>
       </trans-unit>
       <trans-unit id="MSC.pid.0">
         <source>Parent ID</source>
@@ -1079,7 +1079,7 @@
       </trans-unit>
       <trans-unit id="MSC.pid.1">
         <source>Note that changing the parent ID can break data integrity!</source>
-        <target>Changer les ID détruira l'uniformité des données !</target>
+        <target>Changer les ID parent détruira l'intégrité des données !</target>
       </trans-unit>
       <trans-unit id="MSC.sorting.0">
         <source>Sorting value</source>
@@ -1127,7 +1127,7 @@
       </trans-unit>
       <trans-unit id="MSC.confirm.1">
         <source>Please confirm the password.</source>
-        <target>Confirmer le mot de passe.</target>
+        <target>Veuillez confirmer le mot de passe.</target>
       </trans-unit>
       <trans-unit id="MSC.dateAdded.0">
         <source>Date added</source>
@@ -1195,15 +1195,15 @@
       </trans-unit>
       <trans-unit id="MSC.staticPlugins.1">
         <source>The assets URL applies to the &lt;em&gt;assets&lt;/em&gt; directory (page speed optimization).</source>
-        <target>L'URL des ressources  s'applique à toutes les ressources se trouvant dans le répertoire &lt;em&gt;assets&lt;/em&gt; (optimisation de la vitesse de chargement des pages).</target>
+        <target>L'URL des ressources s'applique à toutes les ressources se trouvant dans le répertoire &lt;em&gt;assets&lt;/em&gt; (optimisation de la vitesse de chargement des pages).</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.0">
         <source>Back end keyboard shortcuts</source>
         <target>Raccourcis clavier du back office</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>En savoir plus sur l'accélération de votre flux de travail en utilisant &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;les raccourcis clavier&lt;/a&gt;.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>En savoir plus sur l'accélération de votre flux de travail en utilisant des &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;raccourcis clavier&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1232,9 +1232,9 @@ This e-mail has been generated by Contao. You can not reply to it directly.
 
 Identifiant : %s
 Nom réel : %s
-Site web : %s
+Site internet : %s
 
-Le compte a été verrouillé pour %d minutes car l'utilisateur a saisis un mot de passe incorrect trois fois de suite. Après ce laps de temps, le compte sera automatiquement déverrouillé.
+Le compte a été verrouillé pour %d minutes car l'utilisateur a saisi un mot de passe incorrect trois fois de suite. Après ce laps de temps, le compte sera automatiquement déverrouillé.
 
 Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement.
 </target>
@@ -1353,7 +1353,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.sortBy">
         <source>Sort</source>
-        <target>Tri</target>
+        <target>Trier</target>
       </trans-unit>
       <trans-unit id="MSC.filter">
         <source>Filter</source>
@@ -1429,7 +1429,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.datepicker">
         <source>Date picker</source>
-        <target>Sélecteur de date</target>
+        <target>Sélecteur de dates</target>
       </trans-unit>
       <trans-unit id="MSC.colorpicker">
         <source>Color picker</source>
@@ -1437,11 +1437,11 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.pagepicker">
         <source>Page picker</source>
-        <target>Sélecteur de page</target>
+        <target>Sélecteur de pages</target>
       </trans-unit>
       <trans-unit id="MSC.filepicker">
         <source>File picker</source>
-        <target>Sélecteur de fichier</target>
+        <target>Sélecteur de fichiers</target>
       </trans-unit>
       <trans-unit id="MSC.ppHeadline">
         <source>Contao pages</source>
@@ -1481,7 +1481,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.tstamp">
         <source>Revision date</source>
-        <target>Date</target>
+        <target>Date de révision</target>
       </trans-unit>
       <trans-unit id="MSC.entry">
         <source>%s entry</source>
@@ -1533,7 +1533,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.fileModified">
         <source>Last modified</source>
-        <target>Modifié</target>
+        <target>Dernière modification</target>
       </trans-unit>
       <trans-unit id="MSC.fileAccessed">
         <source>Last accessed</source>
@@ -1643,13 +1643,25 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
         <source>Modify the site structure</source>
         <target>Modifier la structure du site</target>
       </trans-unit>
+      <trans-unit id="MSC.filePickerHome">
+        <source>Back to the file picker</source>
+        <target>Revenir au sélecteur de fichiers</target>
+      </trans-unit>
+      <trans-unit id="MSC.pagePickerHome">
+        <source>Back to the page picker</source>
+        <target>Revenir au sélecteur de pages</target>
+      </trans-unit>
+      <trans-unit id="MSC.pickerNoSelection">
+        <source>Please go back to the page or file picker and make a selection before you close the dialog.</source>
+        <target>Veuillez revenir au sélecteur de pages ou de fichiers et faire une sélection avant de fermer la boîte de dialogue.</target>
+      </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
         <target>Messages du système</target>
       </trans-unit>
       <trans-unit id="MSC.clearClipboard">
         <source>Clear clipboard</source>
-        <target>Vider le presse-papiers</target>
+        <target>Vider le presse-papier</target>
       </trans-unit>
       <trans-unit id="MSC.hiddenElements">
         <source>Unpublished elements</source>
@@ -1697,11 +1709,11 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.updateAdd">
         <source>Add the selected values</source>
-        <target>Ajouter les groupes sélectionnés</target>
+        <target>Ajouter les valeurs sélectionnées</target>
       </trans-unit>
       <trans-unit id="MSC.updateRemove">
         <source>Remove the selected values</source>
-        <target>Supprimer les groupes sélectionnés</target>
+        <target>Supprimer les valeurs sélectionnées</target>
       </trans-unit>
       <trans-unit id="MSC.updateReplace">
         <source>Replace the existing entries</source>
@@ -1737,7 +1749,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.coreOnlyMode">
         <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>
-        <target>Contao fonctionne actuellement en &lt;strong&gt;mode sans échec&lt;/strong&gt;, dans lequel seuls les modules de base sont chargés. Ce mode de fonctionnement est par ex. activé après une mise à jour avec Live Update pour éviter les incompatibilités possibles avec des extensions tierces. Vous pouvez le désactiver dans les paramètres du back office après avoir vérifié les extensions tierces installées.</target>
+        <target>Contao fonctionne actuellement en &lt;strong&gt;mode sans échec&lt;/strong&gt;, dans lequel seuls les modules de base sont chargés. Ce mode de fonctionnement est par exemple activé après une mise à jour avec Live Update pour éviter les incompatibilités possibles avec des extensions tierces. Vous pouvez le désactiver dans les paramètres du back office après avoir vérifié les extensions tierces installées.</target>
       </trans-unit>
       <trans-unit id="MSC.coreOnlyOff">
         <source>Disable</source>
@@ -1765,7 +1777,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.accountActivated">
         <source>Your account has been activated.</source>
-        <target>Votre compte a été activé</target>
+        <target>Votre compte a été activé.</target>
       </trans-unit>
       <trans-unit id="MSC.accountError">
         <source>Unable to process the current request.</source>
@@ -1961,7 +1973,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.keywords">
         <source>Keywords</source>
-        <target>Mots clés</target>
+        <target>Mots-clés</target>
       </trans-unit>
       <trans-unit id="MSC.options">
         <source>Options</source>
@@ -1985,7 +1997,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.printAsPdf">
         <source>Print article as PDF</source>
-        <target>Imprimer l'article en PDF</target>
+        <target>Imprimer l'article au format PDF</target>
       </trans-unit>
       <trans-unit id="MSC.facebookShare">
         <source>Share on Facebook</source>

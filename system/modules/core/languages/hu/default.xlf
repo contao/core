@@ -1196,8 +1196,7 @@
         <target>Adminisztrációs felület gyorsbillentyű</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>Tudjon meg többet, hogyan gyorsíthatja fel a munkafolyamatot a &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;gyorsbillentyűk&lt;/a&gt; használatával.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1636,6 +1635,15 @@ Ezt az e-mail a Contao rendszer generálta. Nem tud rá közvetlenül válaszoln
       <trans-unit id="MSC.pageManager">
         <source>Modify the site structure</source>
         <target>Oldalszerkezet módosítása</target>
+      </trans-unit>
+      <trans-unit id="MSC.filePickerHome">
+        <source>Back to the file picker</source>
+      </trans-unit>
+      <trans-unit id="MSC.pagePickerHome">
+        <source>Back to the page picker</source>
+      </trans-unit>
+      <trans-unit id="MSC.pickerNoSelection">
+        <source>Please go back to the page or file picker and make a selection before you close the dialog.</source>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>

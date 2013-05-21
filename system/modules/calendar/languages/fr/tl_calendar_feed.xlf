@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.alias.1">
         <source>Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the &lt;em&gt;share&lt;/em&gt; directory of your Contao installation, e.g. as &lt;em&gt;share/name.xml&lt;/em&gt;.</source>
-        <target>Saisir un nom de fichier unique (sans extension). Le fichier XML du flux sera automatiquement généré dans le répertoire &lt;em&gt;share&lt;/em&gt; de votre installation Contao, ex. : &lt;em&gt;share/name.xml&lt;/em&gt;</target>
+        <target>Saisir un nom de fichier unique (sans extension). Le fichier XML du flux sera automatiquement généré dans le répertoire &lt;em&gt;share&lt;/em&gt; de votre installation Contao, ex. : &lt;em&gt;share/name.xml&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.language.0">
         <source>Feed language</source>

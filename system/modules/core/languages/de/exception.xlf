@@ -34,7 +34,7 @@
         <target>Beachten Sie jedoch, dass in diesem Fall &lt;strong&gt;jeder&lt;/strong&gt; die Fehlermeldungen auf Ihrer Webseite sehen kann!</target>
       </trans-unit>
       <trans-unit id="XPT.errorExplain">
-        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found it in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
         <target>Die Skriptausführung wurde gestoppt, weil irgendetwas nicht korrekt funktioniert. Die eigentliche Fehlermeldung wird aus Sicherheitsgründen hinter dieser Meldung verborgen und findet sich in der Datei &lt;code&gt;system/logs/error.log&lt;/code&gt; (siehe oben). Wenn Sie die Fehlermeldung nicht verstehen oder nicht wissen, wie das Problem zu beheben ist, durchsuchen Sie die &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao-FAQs&lt;/a&gt; oder besuchen Sie die &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao-Supportseite&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.requestToken">
@@ -78,8 +78,8 @@
         <target>Dadurch kommen Sie zum Contao-Installtool, das Sie durch den Installationsprozess führen wird.</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
-        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/3.0/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
-        <target>Weitere Informationen finden Sie im &lt;a href=&quot;https://contao.org/manual/3.0/installation.html&quot; target=&quot;_blank&quot;&gt;Contao-Installationshandbuch&lt;/a&gt;.</target>
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
+        <target>Weitere Informationen finden Sie im &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao-Installationshandbuch&lt;/a&gt;.</target>
       </trans-unit>
     </body>
   </file>

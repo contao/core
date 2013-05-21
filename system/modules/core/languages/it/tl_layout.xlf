@@ -270,8 +270,8 @@
         <target>Body class</target>
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.1">
-        <source>Here you can add custom classes to the &lt;body&gt; tag.</source>
-        <target>Puoi inserire un attributo &lt;em&gt;class&lt;/em&gt; che verrà aggiunto al &lt;body&gt; tag della pagina.</target>
+        <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
+        <target>Puoi inserire un attributo &lt;em&gt;class&lt;/em&gt; che verrà aggiunto al &amp;lt;body&amp;gt; della pagina.</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -282,12 +282,12 @@
         <target>Nel caso in cui uno dei vostri script personalizzati richieda l'evento body &lt;em&gt;onload&lt;/em&gt;, puoi inserire il codice qui.</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.0">
-        <source>Additional &lt;head&gt; tags</source>
-        <target>Tag &lt;head&gt; aggiuntivi</target>
+        <source>Additional &amp;lt;head&amp;gt; tags</source>
+        <target>Tag &amp;lt;head&amp;gt; aggiuntivi</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
-        <source>Here you can add individual tags to the &lt;head&gt; section of the page.</source>
-        <target>Qui puoi aggiungere dei tag alla sezione &lt;head&gt; della pagina generata.</target>
+        <source>Here you can add individual tags to the &amp;lt;head&amp;gt; section of the page.</source>
+        <target>Qui puoi aggiungere dei tag alla sezione &amp;lt;head&amp;gt; della pagina generata.</target>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>

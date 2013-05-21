@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_module.newsletters.1">
         <source>Show these channels in the front end form.</source>
-        <target>Afficher ces bulletins dans le formulaire du front office.</target>
+        <target>Afficher ces listes de diffusion dans le formulaire du front office.</target>
       </trans-unit>
       <trans-unit id="tl_module.nl_channels.0">
         <source>Channels</source>
@@ -43,11 +43,11 @@
       </trans-unit>
       <trans-unit id="tl_module.nl_template.0">
         <source>Newsletter template</source>
-        <target>Présentation du module</target>
+        <target>Modèle du bulletin d'information</target>
       </trans-unit>
       <trans-unit id="tl_module.nl_template.1">
         <source>Here you can select the newsletter template.</source>
-        <target>Choisir une présentation de module.</target>
+        <target>Choisir un modèle du bulletin d'information.</target>
       </trans-unit>
       <trans-unit id="tl_module.text_subscribe.0">
         <source>Your subscription on %s</source>
@@ -60,11 +60,11 @@
 
 Please click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.
 </source>
-        <target>Vous avez souscrit aux listes de diffusions suivantes sur ##domain##:
+        <target>Vous avez souscrit aux listes de diffusion suivantes sur ##domain##:
 
 ##channels##
 
-Veuillez cliquer sur ##link## pour valider votre abonnement. Si vous ne vous ne souhaitez pas souscrire à ces listes de diffusion, ignorez cet e-mail.
+Veuillez cliquer sur ##link## pour valider votre abonnement. Si vous ne souhaitez pas souscrire à ces listes de diffusion, veuillez ignorer cet e-mail.
 </target>
       </trans-unit>
       <trans-unit id="tl_module.text_unsubscribe.0">
@@ -76,7 +76,7 @@ Veuillez cliquer sur ##link## pour valider votre abonnement. Si vous ne vous ne 
 
 ##channels##
 </source>
-        <target>Vous avez été désabonné des listes de diffusions suivantes sur ##domain##:
+        <target>Vous avez été désabonné des listes de diffusion suivantes sur ##domain##:
 
  ##channels##
 </target>

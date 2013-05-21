@@ -27,7 +27,7 @@
       </trans-unit>
       <trans-unit id="FMD.newsreader.0">
         <source>Newsreader</source>
-        <target>Lecteur d'actualité</target>
+        <target>Lecteur d'actualités</target>
       </trans-unit>
       <trans-unit id="FMD.newsreader.1">
         <source>Shows the details of a news item</source>

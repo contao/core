@@ -399,6 +399,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.fSize.1">
         <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
+        <target>ကူးတင်နယ်ပယ်အရွယ်ထည့်သွင်းနိုင် (&lt;em&gt;အရွယ်&lt;/em&gt; ပါဝင်ပစ္စည်း)။</target>
       </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>

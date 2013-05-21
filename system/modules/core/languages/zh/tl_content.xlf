@@ -287,6 +287,7 @@
       </trans-unit>
       <trans-unit id="tl_content.titleText.1">
         <source>The link title is added as &lt;em&gt;title&lt;/em&gt; attribute in the HTML markup.</source>
+        <target>在HTML标记中作为&lt;em&gt;标题&lt;/em&gt;属性添加链接标题。</target>
       </trans-unit>
       <trans-unit id="tl_content.embed.0">
         <source>Embed the link</source>
@@ -302,6 +303,7 @@
       </trans-unit>
       <trans-unit id="tl_content.rel.1">
         <source>To trigger the lightbox, enter a &lt;em&gt;rel&lt;/em&gt; attribute here.</source>
+        <target>在这里输入一个&lt;em&gt;rel&lt;/em&gt;属性，用来触发lightbox。</target>
       </trans-unit>
       <trans-unit id="tl_content.useImage.0">
         <source>Create an image link</source>
@@ -433,15 +435,19 @@
       </trans-unit>
       <trans-unit id="tl_content.sliderStartSlide.0">
         <source>Slide offset</source>
+        <target>滑动偏移量</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderStartSlide.1">
         <source>Here you can make the slider start with a particular slide (counting starts at 0).</source>
+        <target>你可以在这里设置一个特定滑动作为开始(从0开始计数)。</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderContinuous.0">
         <source>Continuous</source>
+        <target>连续的</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderContinuous.1">
         <source>Make the slider continuous (start all over when reaching the end).</source>
+        <target>创建连续滑动 (到达最后一张时从头开始).</target>
       </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>
@@ -561,6 +567,7 @@
       </trans-unit>
       <trans-unit id="tl_content.slider_legend">
         <source>Slider settings</source>
+        <target>滑动设置</target>
       </trans-unit>
       <trans-unit id="tl_content.list_legend">
         <source>List items</source>
@@ -660,9 +667,11 @@
       </trans-unit>
       <trans-unit id="tl_content.includeTemplate">
         <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>模版&lt;em&gt;%s&lt;/em&gt;需要被包含在页面结构中。</target>
       </trans-unit>
       <trans-unit id="tl_content.includeTemplates">
         <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>模版&lt;em&gt;%s&lt;/em&gt;或&lt;em&gt;%s&lt;/em&gt;需要被包含在页面结构中。</target>
       </trans-unit>
       <trans-unit id="tl_content.new.0">
         <source>New element</source>

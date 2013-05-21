@@ -6,10 +6,12 @@
         <target>%d события(-ий)</target>
       </trans-unit>
       <trans-unit id="MSC.cal_previous">
-        <source>&lt;</source>
+        <source>&amp;lt;</source>
+        <target>&amp;lt;</target>
       </trans-unit>
       <trans-unit id="MSC.cal_next">
-        <source>&gt;</source>
+        <source>&amp;gt;</source>
+        <target>&amp;gt;</target>
       </trans-unit>
       <trans-unit id="MSC.cal_emptyDay">
         <source>There are no events on this day.</source>

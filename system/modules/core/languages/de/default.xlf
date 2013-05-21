@@ -1202,8 +1202,8 @@
         <target>Backend-Tastaturkürzel</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>Wie Sie Ihren Arbeitsablauf durch die Verwendung von &lt;a href=&quot;https://contao.org/de/manual/3.0/administration-area.html#backend-tastaturk%C3%BCrzel&quot; title=&quot;Übersicht der Tastaturkürzel auf contao.org&quot; target=&quot;_blank&quot;&gt;Tastaturkürzeln&lt;/a&gt; beschleunigen.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>Wie Sie Ihren Arbeitsablauf durch die Verwendung von &lt;a href=&quot;https://contao.org/manual/administration-area.html#backend-tastaturkuerzel&quot; title=&quot;Übersicht der Tastaturkürzel auf contao.org&quot; target=&quot;_blank&quot;&gt;Tastaturkürzeln&lt;/a&gt; beschleunigen.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1642,6 +1642,18 @@ Diese E-Mail wurde von Contao generiert. Sie können nicht darauf antworten.
       <trans-unit id="MSC.pageManager">
         <source>Modify the site structure</source>
         <target>Die Seitenstruktur bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="MSC.filePickerHome">
+        <source>Back to the file picker</source>
+        <target>Zurück zum Dateiwähler</target>
+      </trans-unit>
+      <trans-unit id="MSC.pagePickerHome">
+        <source>Back to the page picker</source>
+        <target>Zurück zum Seitenwähler</target>
+      </trans-unit>
+      <trans-unit id="MSC.pickerNoSelection">
+        <source>Please go back to the page or file picker and make a selection before you close the dialog.</source>
+        <target>Bitte gehen Sie zurück zum Seiten- bzw. Dateiwähler und nehmen Sie dort eine Auswahl vor, bevor Sie den Dialog schließen.</target>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>

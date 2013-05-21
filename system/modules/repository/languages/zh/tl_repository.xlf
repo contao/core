@@ -55,6 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
         <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
+        <target>扩展名必须以a-z, A-Z or 0-9开头，首选是小写名字。另外，下划线 _ 和中划线 - 可以出现在扩展名里。</target>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
         <source>Popularity</source>
@@ -102,6 +103,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
         <source>Does the extension meet the Contao standards for usability and accessibility?</source>
+        <target>这个扩展是否匹配Contao的可用性和易用性标准？</target>
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
         <source>Version</source>
@@ -505,6 +507,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.showIncompatible">
         <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>你当前查看的这些扩展仅兼容与当前的Contao版本，修改后台设置，扩大搜索结果范围，显示所有扩展。</target>
       </trans-unit>
       <trans-unit id="tl_repository_statext.uptodate">
         <source>Up to date</source>

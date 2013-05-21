@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.copyright.1">
         <source>Here you can enter a copyright notice (e.g. &amp;amp;copy; 2007,2008 Jerry Miller Webservices Inc).</source>
-        <target>Entrer vos informations de droit d'auteur (ex : © 2007,2008 Jerry Miller Inc Webservices).</target>
+        <target>Saisir vos informations de droit d'auteur (ex. : &amp;copy; 2007,2008 Jerry Miller Webservices Inc).</target>
       </trans-unit>
       <trans-unit id="tl_repository.description.0">
         <source>Description</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.description.1">
         <source>These HTML tags are allowed: %s</source>
-        <target>Ces balises HTML ne sont pas autorisées : %s</target>
+        <target>Ces balises HTML sont autorisées : %s</target>
       </trans-unit>
       <trans-unit id="tl_repository.extension.0">
         <source>Extension</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.extension.1">
         <source>Name of the extension.</source>
-        <target>Sélectionner le nom de l'extension</target>
+        <target>Nom de l'extension.</target>
       </trans-unit>
       <trans-unit id="tl_repository.functionality.0">
         <source>Functionality</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.license.1">
         <source>Please enter a short license information. You may add full license information in a file LICENSE.txt.</source>
-        <target>Saisir une courte licence pour les extensions libre Vous pouvez ajouter la licence complète dans un fichier LICENSE.txt.</target>
+        <target>Saisir une courte information concernant la licence. Vous pouvez ajouter des informations plus complètes dans un fichier LICENSE.txt.</target>
       </trans-unit>
       <trans-unit id="tl_repository.name.0">
         <source>Name</source>
@@ -55,6 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
         <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
+        <target>Les noms d'extension doivent commencer par a-z, A-Z ou 0-9. Les noms en minuscules sont préférables. En outre, les caractères _ et - sont autorisés dans le nom.</target>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
         <source>Popularity</source>
@@ -70,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.quality.1">
         <source>How robust is the extension and how painless is installation and maintenance?</source>
-        <target>L'extension est-elle robuste ? L'installation et la maintenance ce font-elles facilement ?</target>
+        <target>L'extension est-elle robuste ? L'installation et la maintenance se font-elles facilement ?</target>
       </trans-unit>
       <trans-unit id="tl_repository.releasedate.0">
         <source>Release date</source>
@@ -98,7 +99,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.usability.0">
         <source>Usability</source>
-        <target>Simplicité d'utilisation</target>
+        <target>Utilisabilité</target>
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
         <source>Does the extension meet the Contao standards for usability and accessibility?</source>
@@ -110,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.version.1">
         <source>Version numbers must be in format n.n.n s, where n are integers and s is one of: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</source>
-        <target>Les numéros de version doivent-être au format n.n.n s, ou n est un entier et s un terme parmi ceux-ci : alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</target>
+        <target>Les numéros de version doivent être au format n.n.n s, ou n est un entier et s un terme parmi ceux-ci : alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</target>
       </trans-unit>
       <trans-unit id="tl_repository.lickey.0">
         <source>License key</source>
@@ -182,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.installs">
         <source>Online installs</source>
-        <target>Installation en ligne</target>
+        <target>Installations en ligne</target>
       </trans-unit>
       <trans-unit id="tl_repository.langtrans">
         <source>%s transl.</source>
@@ -226,7 +227,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.relfunctionality">
         <source>Release functionality</source>
-        <target>Fonctionnalités</target>
+        <target>Fonctionnalité</target>
       </trans-unit>
       <trans-unit id="tl_repository.relinstalls">
         <source>Release installs</source>
@@ -246,7 +247,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.relusability">
         <source>Release usability</source>
-        <target>Simplicité d'utilisation</target>
+        <target>Utilisabilité</target>
       </trans-unit>
       <trans-unit id="tl_repository.save">
         <source>Save</source>
@@ -262,7 +263,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.state">
         <source>State</source>
-        <target>Etat</target>
+        <target>État</target>
       </trans-unit>
       <trans-unit id="tl_repository.tag">
         <source>Tag</source>
@@ -358,7 +359,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.editextension">
         <source>Edit settings</source>
-        <target>Editer les paramètres</target>
+        <target>Éditer les paramètres</target>
       </trans-unit>
       <trans-unit id="tl_repository.extinstrecntf">
         <source>Extension install record not found</source>
@@ -378,15 +379,15 @@
       </trans-unit>
       <trans-unit id="tl_repository.filesdeleted">
         <source>%s file(s) deleted</source>
-        <target>%s fichier(s) supprimés</target>
+        <target>%s fichier(s) supprimé(s)</target>
       </trans-unit>
       <trans-unit id="tl_repository.filesinstalled">
         <source>%s file(s) installed</source>
-        <target>%s fichier(s) installés</target>
+        <target>%s fichier(s) installé(s)</target>
       </trans-unit>
       <trans-unit id="tl_repository.filesunchanged">
         <source>%s file(s) unchanged</source>
-        <target>%s fichier(s) inchangés</target>
+        <target>%s fichier(s) inchangé(s)</target>
       </trans-unit>
       <trans-unit id="tl_repository.filesupdated">
         <source>%s file(s) updated</source>
@@ -418,7 +419,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.lickeyrequired">
         <source>This extension requires a license key. Please visit the vendor's shop to purchase one.</source>
-        <target>Cette extension nécessite une clé d'enregistrement. Visitez le site du vendeur pour en acheter une.</target>
+        <target>Cette extension nécessite une clé d'enregistrement. Veuillez visiter le site du vendeur pour en acheter une.</target>
       </trans-unit>
       <trans-unit id="tl_repository.none">
         <source>None</source>
@@ -534,11 +535,11 @@
       </trans-unit>
       <trans-unit id="tl_repository_statext.extnotfound">
         <source>Extension not found in repository</source>
-        <target>Extension non trouvée dans le référenciel</target>
+        <target>Extension non trouvée dans le référentiel</target>
       </trans-unit>
       <trans-unit id="tl_repository_statext.vernotfound">
         <source>Installed version not found in repository</source>
-        <target>La version installée n'a pas été trouvée dans le référenciel.</target>
+        <target>La version installée n'a pas été trouvée dans le référentiel.</target>
       </trans-unit>
       <trans-unit id="tl_repository_statext.extneedkey">
         <source>License key required, install extension in advance</source>

@@ -171,23 +171,23 @@
       </trans-unit>
       <trans-unit id="tl_page.includeLayout.0">
         <source>Assign a layout</source>
-        <target>Lay-out toewijzen</target>
+        <target>Opmaak toewijzen</target>
       </trans-unit>
       <trans-unit id="tl_page.includeLayout.1">
         <source>Assign a page layout to the page and its subpages.</source>
-        <target>Wijs een lay-out toe aan een pagina en onderliggende subpagina's.</target>
+        <target>Wijs een opmaak toe aan een pagina en onderliggende subpagina's.</target>
       </trans-unit>
       <trans-unit id="tl_page.layout.0">
         <source>Page layout</source>
-        <target>Pagina lay-out</target>
+        <target>Pagina opmaak</target>
       </trans-unit>
       <trans-unit id="tl_page.layout.1">
         <source>You can manage page layouts with the &quot;themes&quot; module.</source>
-        <target>Pagina lay-outs kunt u beheren met de &quot;Thema's&quot; module.</target>
+        <target>Pagina opmaken kunt u beheren met de &quot;thema's&quot; module.</target>
       </trans-unit>
       <trans-unit id="tl_page.mobileLayout.0">
         <source>Mobile page layout</source>
-        <target>Pagina opmaak mobiel</target>
+        <target>Pagina opmaak voor mobiel</target>
       </trans-unit>
       <trans-unit id="tl_page.mobileLayout.1">
         <source>This layout will be used if the visitor uses a mobile device.</source>
@@ -254,7 +254,8 @@
         <target>CSS klasse</target>
       </trans-unit>
       <trans-unit id="tl_page.cssClass.1">
-        <source>The class(es) will be used in the navigation menu and the &lt;body&gt; tag.</source>
+        <source>The class(es) will be used in the navigation menu and the &amp;lt;body&amp;gt; tag.</source>
+        <target>De class(es) worden toegepast in het navigatie menu en de &amp;lt;body&amp;gt; tag.</target>
       </trans-unit>
       <trans-unit id="tl_page.sitemap.0">
         <source>Show in sitemap</source>

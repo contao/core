@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="MOD.newsletter.0">
         <source>Newsletters</source>
-        <target>Bulletin d'information</target>
+        <target>Bulletins d'information</target>
       </trans-unit>
       <trans-unit id="MOD.newsletter.1">
         <source>Manage subscriptions and send newsletters</source>
@@ -31,11 +31,11 @@
       </trans-unit>
       <trans-unit id="FMD.unsubscribe.1">
         <source>Generates a form to unsubscribe from one or more channels</source>
-        <target>Génère un formulaire pour se désabonner d'une ou plusieurs listes de diffusion.</target>
+        <target>Génère un formulaire pour se désabonner à une ou plusieurs listes de diffusion.</target>
       </trans-unit>
       <trans-unit id="FMD.nl_list.0">
         <source>Newsletter list</source>
-        <target>Liste de bulletins</target>
+        <target>Liste de bulletins d'information</target>
       </trans-unit>
       <trans-unit id="FMD.nl_list.1">
         <source>Adds a list of newsletters to the page</source>
@@ -43,7 +43,7 @@
       </trans-unit>
       <trans-unit id="FMD.nl_reader.0">
         <source>Newsletter reader</source>
-        <target>Lecteur de bulletin</target>
+        <target>Lecteur de bulletins d'information</target>
       </trans-unit>
       <trans-unit id="FMD.nl_reader.1">
         <source>Shows the details of a newsletter</source>

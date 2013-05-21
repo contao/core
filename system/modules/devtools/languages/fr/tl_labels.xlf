@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_labels.error">
         <source>The file does not exist.</source>
-        <target>Le fichier n'existe pas !</target>
+        <target>Le fichier n'existe pas.</target>
       </trans-unit>
       <trans-unit id="tl_labels.submitBT">
         <source>Search</source>

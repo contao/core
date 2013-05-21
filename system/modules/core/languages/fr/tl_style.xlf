@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_style.position.1">
         <source>Here you can choose the position type.</source>
-        <target>Spécifier le type de position.</target>
+        <target>Choisir le type de position.</target>
       </trans-unit>
       <trans-unit id="tl_style.floating.0">
         <source>Float</source>
@@ -175,7 +175,7 @@
       </trans-unit>
       <trans-unit id="tl_style.align.1">
         <source>To align an element, its left and right margin will be overwritten.</source>
-        <target>Pour aligner un élément, ses marges gauche et droite seront écrasées.</target>
+        <target>Pour aligner un élément, ses marges gauches et droites seront écrasées.</target>
       </trans-unit>
       <trans-unit id="tl_style.verticalalign.0">
         <source>Vertical alignment</source>
@@ -215,7 +215,7 @@
       </trans-unit>
       <trans-unit id="tl_style.bgcolor.1">
         <source>Here you can enter a hexadecimal background color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
-        <target>Saisir une couleur de fond en hexadécimal (ex. : ff0000 pour le rouge) et optionnellement un pourcentage de transparence (ex. : 75).</target>
+        <target>Saisir une valeur hexadécimale pour la couleur du fond (ex. : ff0000 pour le rouge) et optionnellement une transparence en pour-cent (ex. : 75).</target>
       </trans-unit>
       <trans-unit id="tl_style.bgimage.0">
         <source>Background image</source>
@@ -255,7 +255,7 @@
       </trans-unit>
       <trans-unit id="tl_style.shadowcolor.1">
         <source>Here you can enter a hexadecimal shadow color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
-        <target>Saisir une valeur hexadécimale de la couleur de l'ombre (ex. : ff0000 pour du rouge) et optionnellement un pourcentage de transparence (ex : 75).</target>
+        <target>Saisir une valeur hexadécimale pour la couleur de l'ombre (ex. : ff0000 pour du rouge) et optionnellement une transparence en pour-cent (ex. : 75).</target>
       </trans-unit>
       <trans-unit id="tl_style.gradientAngle.0">
         <source>Gradient angle</source>
@@ -263,7 +263,7 @@
       </trans-unit>
       <trans-unit id="tl_style.gradientAngle.1">
         <source>Here you can enter the gradient angle (e.g. &lt;em&gt;0deg&lt;/em&gt;) or the direction (e.g. &lt;em&gt;to bottom&lt;/em&gt; or &lt;em&gt;to top right&lt;/em&gt;).</source>
-        <target>Entrer l'angle (ex. :&lt;em&gt;0deg&lt;/em&gt;) ou la direction (ex. :&lt;em&gt;to bottom&lt;/em&gt; ou &lt;em&gt;to top right&lt;/em&gt;).</target>
+        <target>Saisir l'angle du dégradé (ex. :&lt;em&gt;0deg&lt;/em&gt;) ou la direction (ex. :&lt;em&gt;to bottom&lt;/em&gt; ou &lt;em&gt;to top right&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_style.gradientColors.0">
         <source>Gradient colors</source>
@@ -295,7 +295,7 @@
       </trans-unit>
       <trans-unit id="tl_style.borderstyle.1">
         <source>Here you can choose the border style.</source>
-        <target>Sélectionner le style de bordure.</target>
+        <target>Choisir le style de bordure.</target>
       </trans-unit>
       <trans-unit id="tl_style.bordercolor.0">
         <source>Border color and opacity</source>
@@ -303,7 +303,7 @@
       </trans-unit>
       <trans-unit id="tl_style.bordercolor.1">
         <source>Here you can enter a hexadecimal border color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
-        <target>Saisir une couleur de bordure en hexadécimal (ex. : ff0000 pour le rouge) et optionnellement un pourcentage de transparence (ex. : 75).</target>
+        <target>Saisir une valeur hexadécimale pour la couleur de la bordure  (ex. : ff0000 pour le rouge) et optionnellement une transparence en pour-cent (ex. : 75).</target>
       </trans-unit>
       <trans-unit id="tl_style.borderradius.0">
         <source>Border radius</source>
@@ -331,7 +331,7 @@
       </trans-unit>
       <trans-unit id="tl_style.font.0">
         <source>Font</source>
-        <target>Police de caractère</target>
+        <target>Police de caractères</target>
       </trans-unit>
       <trans-unit id="tl_style.font.1">
         <source>Font-family, font-size, font-color, line-height, font-style and white-space.</source>
@@ -343,7 +343,7 @@
       </trans-unit>
       <trans-unit id="tl_style.fontfamily.1">
         <source>Here you can enter a comma separated list of font types.</source>
-        <target>Saisir une liste séparée par virgule de polices de caractères.</target>
+        <target>Saisir une liste séparée par des virgules de polices de caractères.</target>
       </trans-unit>
       <trans-unit id="tl_style.fontsize.0">
         <source>Font size</source>
@@ -351,7 +351,7 @@
       </trans-unit>
       <trans-unit id="tl_style.fontsize.1">
         <source>Here you can enter the font size.</source>
-        <target>Saisir la taille et l'unité de la police de caractère.</target>
+        <target>Saisir la taille et l'unité de la police de caractères.</target>
       </trans-unit>
       <trans-unit id="tl_style.fontcolor.0">
         <source>Font color and opacity</source>
@@ -359,7 +359,7 @@
       </trans-unit>
       <trans-unit id="tl_style.fontcolor.1">
         <source>Here you can enter a hexadecimal font color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
-        <target>Saisir la couleur de la police de caractère en hexadécimal (ex. : ff0000 pour le rouge) et une transparence optionnelle en pourcentage (ex. : 75).</target>
+        <target>Saisir une valeur hexadécimale pour la couleur de la police de caractères (ex. : ff0000 pour le rouge) et optionnellement une transparence en pour-cent (ex. : 75).</target>
       </trans-unit>
       <trans-unit id="tl_style.lineheight.0">
         <source>Line height</source>
@@ -375,7 +375,7 @@
       </trans-unit>
       <trans-unit id="tl_style.fontstyle.1">
         <source>Here you can choose one or more font styles.</source>
-        <target>Choisir un ou plusieurs styles de police de caractère.</target>
+        <target>Choisir un ou plusieurs styles de police de caractères.</target>
       </trans-unit>
       <trans-unit id="tl_style.texttransform.0">
         <source>Text transform</source>
@@ -467,7 +467,7 @@
       </trans-unit>
       <trans-unit id="tl_style.font_legend">
         <source>Font settings</source>
-        <target>Paramètres de la police de caractère</target>
+        <target>Paramètres de la police de caractères</target>
       </trans-unit>
       <trans-unit id="tl_style.list_legend">
         <source>List settings</source>
@@ -507,7 +507,7 @@
       </trans-unit>
       <trans-unit id="tl_style.small-caps">
         <source>small-caps</source>
-        <target>petite majuscule</target>
+        <target>petites capitales</target>
       </trans-unit>
       <trans-unit id="tl_style.disc">
         <source>dot</source>
@@ -535,11 +535,11 @@
       </trans-unit>
       <trans-unit id="tl_style.upper-alpha">
         <source>upper characters</source>
-        <target>caractère majuscule</target>
+        <target>caractères majuscules</target>
       </trans-unit>
       <trans-unit id="tl_style.lower-alpha">
         <source>lower characters</source>
-        <target>caractère minuscule</target>
+        <target>caractères minuscules</target>
       </trans-unit>
       <trans-unit id="tl_style.uppercase">
         <source>uppercase</source>

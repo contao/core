@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="ERR.alias">
         <source>Please enter only alphanumeric characters and the following special characters: .-_</source>
-        <target>Voer alleen alfanumerieke tekens in en de volgende speciale tekens:.-_</target>
+        <target>Voer alleen alfanumerieke tekens in en de volgende speciale tekens: .-_</target>
       </trans-unit>
       <trans-unit id="ERR.folderalias">
         <source>Please enter only alphanumeric characters and the following special characters: .-/_</source>
@@ -111,11 +111,11 @@
       </trans-unit>
       <trans-unit id="ERR.filewidth">
         <source>File %s exceeds the maximum image width of %d pixels!</source>
-        <target>Bestand %s overschrijdt de maximum afbeeldingsbreedte met %d pixels!</target>
+        <target>Bestand %s overschrijdt de maximum afbeeldingsbreedte van %d pixels!</target>
       </trans-unit>
       <trans-unit id="ERR.fileheight">
         <source>File %s exceeds the maximum image height of %d pixels!</source>
-        <target>Bestand %s overschrijdt de maximum afbeeldingshoogte met %d pixels!</target>
+        <target>Bestand %s overschrijdt de maximum afbeeldingshoogte van %d pixels!</target>
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
@@ -215,7 +215,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidTokenUrl">
         <source>The link you were trying to open could not be verified. If you have clicked the link yourself or have received it by a trustworthy person, you can confirm the process below.</source>
-        <target>De link die u probeert te openen kon niet worden geverifieerd. Als u zelf op de link geklikt heeft of deze heeft ontvangen uit een betrouwbare bron, kunt u hieronder het proces bevestigen.</target>
+        <target>De link die u probeert te openen kon niet worden geverifieerd. Als u zelf op de link geklikt heeft of deze heeft ontvangen uit een betrouwbare bron, kunt u dit hieronder bevestigen.</target>
       </trans-unit>
       <trans-unit id="ERR.version2format">
         <source>This element still uses the old Contao 2 SRC format. Did you upgrade the database?</source>
@@ -403,7 +403,7 @@
       </trans-unit>
       <trans-unit id="CTE.youtube.0">
         <source>YouTube</source>
-        <target>You Tube</target>
+        <target>YouTube</target>
       </trans-unit>
       <trans-unit id="CTE.youtube.1">
         <source>Adds a YouTube video.</source>
@@ -579,7 +579,7 @@
       </trans-unit>
       <trans-unit id="CHMOD.cuser">
         <source>Owner</source>
-        <target>Gebruiker</target>
+        <target>Eigenaar</target>
       </trans-unit>
       <trans-unit id="CHMOD.cgroup">
         <source>Group</source>
@@ -1202,8 +1202,8 @@
         <target>Back-end sneltoetsen</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>Meer leren over het versnellen van uw workflow door gebruik te maken van &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Overzicht sneltoetsen op contao.org&quot; target=&quot;_blank&quot;&gt;sneltoetsen&lt;/a&gt;.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>Meer info over het versnellen van uw workflow door gebruik te maken van &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;sneltoetsen&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1429,19 +1429,19 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
       </trans-unit>
       <trans-unit id="MSC.datepicker">
         <source>Date picker</source>
-        <target>Datum kiezer</target>
+        <target>Datumkiezer</target>
       </trans-unit>
       <trans-unit id="MSC.colorpicker">
         <source>Color picker</source>
-        <target>Kleurkiezer (vereist JavaScript)</target>
+        <target>Kleurkiezer</target>
       </trans-unit>
       <trans-unit id="MSC.pagepicker">
         <source>Page picker</source>
-        <target>Paginakiezer (vereist JavaScript)</target>
+        <target>Paginakiezer</target>
       </trans-unit>
       <trans-unit id="MSC.filepicker">
         <source>File picker</source>
-        <target>Bestandskiezer (vereist JavaScript)</target>
+        <target>Bestandskiezer</target>
       </trans-unit>
       <trans-unit id="MSC.ppHeadline">
         <source>Contao pages</source>
@@ -1642,6 +1642,18 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
       <trans-unit id="MSC.pageManager">
         <source>Modify the site structure</source>
         <target>Aanpassen van de site-structuur</target>
+      </trans-unit>
+      <trans-unit id="MSC.filePickerHome">
+        <source>Back to the file picker</source>
+        <target>Terug naar de bestandskiezer</target>
+      </trans-unit>
+      <trans-unit id="MSC.pagePickerHome">
+        <source>Back to the page picker</source>
+        <target>Terug naar de paginakiezer</target>
+      </trans-unit>
+      <trans-unit id="MSC.pickerNoSelection">
+        <source>Please go back to the page or file picker and make a selection before you close the dialog.</source>
+        <target>Ga terug naar de pagina of bestandkiezer en maak een selectie voordat u het dialoogvenster sluit.</target>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>

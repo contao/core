@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_page.language.1">
         <source>Please enter the page language according to the ISO-639-1 standard (e.g. &quot;en&quot; for English or &quot;en-US&quot; for American English).</source>
-        <target>Saisir la langue de la page selon la norme ISO-639-1 (ex :  &quot;en&quot; pour l'anglais ou &quot;en-US&quot; pour l'anglais américain).</target>
+        <target>Saisir la langue de la page selon la norme ISO-639-1 (ex. :  &quot;en&quot; pour l'anglais ou &quot;en-US&quot; pour l'anglais américain).</target>
       </trans-unit>
       <trans-unit id="tl_page.robots.0">
         <source>Robots tag</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_page.adminEmail.1">
         <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
-        <target>Les messages générés automatiquement (ex : les e-mails de confirmation d'inscription) seront envoyés à cette adresse.</target>
+        <target>Les messages générés automatiquement (ex. : les e-mails de confirmation d'inscription) seront envoyés à cette adresse.</target>
       </trans-unit>
       <trans-unit id="tl_page.dateFormat.0">
         <source>Date format</source>
@@ -123,15 +123,15 @@
       </trans-unit>
       <trans-unit id="tl_page.createSitemap.0">
         <source>Create an XML sitemap</source>
-        <target>Créer un plan de site XML Google</target>
+        <target>Créer un plan du site XML</target>
       </trans-unit>
       <trans-unit id="tl_page.createSitemap.1">
         <source>Create a Google XML sitemap in the &lt;em&gt;share/&lt;/em&gt; directory.</source>
-        <target>Créer un sitemap XML Google dans le dossier &lt;em&gt;share/&lt;/em&gt;.</target>
+        <target>Créer un plan du site XML Google dans le répertoire &lt;em&gt;share/&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_page.sitemapName.0">
         <source>Sitemap file name</source>
-        <target>Nom de fichier du plan de site</target>
+        <target>Nom de fichier du plan du site</target>
       </trans-unit>
       <trans-unit id="tl_page.sitemapName.1">
         <source>Please enter the name of the sitemap file without extension.</source>
@@ -139,11 +139,11 @@
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
         <source>Use HTTPS in sitemaps</source>
-        <target>Utiliser HTTPS dans les sitemaps</target>
+        <target>Utiliser HTTPS dans les plans du site</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
         <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
-        <target>Générer les URLs des sitemaps du site internet avec &lt;em&gt;https://&lt;/em&gt;.</target>
+        <target>Générer les URLs du plan du site de ce site internet avec &lt;em&gt;https://&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>
@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_page.autoforward.1">
         <source>Redirect visitors to another page (e.g. a login page).</source>
-        <target>Rediriger les visiteurs vers une autre page (ex : une page de connexion).</target>
+        <target>Rediriger les visiteurs vers une autre page (ex. : une page de connexion).</target>
       </trans-unit>
       <trans-unit id="tl_page.protected.0">
         <source>Protect page</source>
@@ -179,7 +179,7 @@
       </trans-unit>
       <trans-unit id="tl_page.layout.0">
         <source>Page layout</source>
-        <target>Présentation de la page</target>
+        <target>Présentation de page</target>
       </trans-unit>
       <trans-unit id="tl_page.layout.1">
         <source>You can manage page layouts with the &quot;themes&quot; module.</source>
@@ -254,15 +254,16 @@
         <target>Classe(s) CSS</target>
       </trans-unit>
       <trans-unit id="tl_page.cssClass.1">
-        <source>The class(es) will be used in the navigation menu and the &lt;body&gt; tag.</source>
+        <source>The class(es) will be used in the navigation menu and the &amp;lt;body&amp;gt; tag.</source>
+        <target>La/les classe(s) sera(ont) utilisée(s) dans le menu de navigation et la balise &amp;lt;body&amp;gt;.</target>
       </trans-unit>
       <trans-unit id="tl_page.sitemap.0">
         <source>Show in sitemap</source>
-        <target>Afficher dans le plan de site</target>
+        <target>Afficher dans le plan du site</target>
       </trans-unit>
       <trans-unit id="tl_page.sitemap.1">
         <source>Here you can define whether the page is shown in the sitemap.</source>
-        <target>Définir si la page est affichée dans le plan de site.</target>
+        <target>Définir si la page est affichée dans le plan du site.</target>
       </trans-unit>
       <trans-unit id="tl_page.hide.0">
         <source>Hide from navigation</source>
@@ -350,7 +351,7 @@
       </trans-unit>
       <trans-unit id="tl_page.sitemap_legend">
         <source>XML sitemap</source>
-        <target>Plan de site XML</target>
+        <target>Plan du site XML</target>
       </trans-unit>
       <trans-unit id="tl_page.forward_legend">
         <source>Auto-forward</source>

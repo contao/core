@@ -123,6 +123,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.repeatEnd">
         <source>End of recurring event</source>
+        <target>ထပ်တလဲလဲအဖြစ်အပျက်ပြီးဆံုး</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.addEnclosure.0">
         <source>Add enclosures</source>

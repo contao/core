@@ -31,6 +31,7 @@
       </trans-unit>
       <trans-unit id="FFL.fieldset.1">
         <source>A container for form fields with an optional legend (only available for tableless forms).</source>
+        <target>Box pre formulárové pole s voliteľným popisom (k dispozícii iba pre beztabuľkové formuláre).</target>
       </trans-unit>
       <trans-unit id="FFL.text.0">
         <source>Text field</source>
@@ -398,6 +399,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.fSize.1">
         <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
+        <target>Tu môžete zadať veľkosť poľa pre nahrávanie súborov (&lt;em&gt;size&lt;/em&gt; atribút).</target>
       </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>

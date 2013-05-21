@@ -270,8 +270,8 @@
         <target>Body-Klasse</target>
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.1">
-        <source>Here you can add custom classes to the &lt;body&gt; tag.</source>
-        <target>Hier können Sie dem &lt;body&gt;-Tag individuelle Klassen hinzufügen.</target>
+        <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
+        <target>Hier können Sie dem &amp;lt;body&amp;gt;-Tag individuelle Klassen hinzufügen.</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -282,12 +282,12 @@
         <target>Hier können Sie dem Body-Tag ein &lt;em&gt;onload&lt;/em&gt;-Attribut hinzufügen.</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.0">
-        <source>Additional &lt;head&gt; tags</source>
-        <target>Zusätzliche &lt;head&gt;-Tags</target>
+        <source>Additional &amp;lt;head&amp;gt; tags</source>
+        <target>Zusätzliche &amp;lt;head&amp;gt;-Tags</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
-        <source>Here you can add individual tags to the &lt;head&gt; section of the page.</source>
-        <target>Hier können Sie dem &lt;head&gt;-Bereich der Seite individuelle Tags hinzufügen.</target>
+        <source>Here you can add individual tags to the &amp;lt;head&amp;gt; section of the page.</source>
+        <target>Hier können Sie dem &amp;lt;head&amp;gt;-Bereich der Seite individuelle Tags hinzufügen.</target>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>

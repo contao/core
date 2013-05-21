@@ -103,7 +103,7 @@
       </trans-unit>
       <trans-unit id="FFL.captcha.1">
         <source>A simple math question to verify that the form is being submitted by a human (CAPTCHA).</source>
-        <target>(ボットのようなプログラムではなく)人間によってフォームが提出されたことを検証するための、やさしい計算問題です。(CAPTCHA)</target>
+        <target>(ボットのようなプログラムではなく)人間によってフォームが提出されたことを確認するための、やさしい計算問題です。(CAPTCHA)</target>
       </trans-unit>
       <trans-unit id="FFL.submit.0">
         <source>Submit field</source>

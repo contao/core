@@ -23,11 +23,11 @@
       </trans-unit>
       <trans-unit id="tl_autoload.override">
         <source>Override existing files</source>
-        <target>Écraser les fichiers existant.</target>
+        <target>Écraser les fichiers existants.</target>
       </trans-unit>
       <trans-unit id="tl_autoload.xplOverride">
         <source>Override existing autoload.php files (use with care).</source>
-        <target>Écraser les fichiers autoload.php existant (à utiliser avec précaution).</target>
+        <target>Écraser les fichiers autoload.php existants (à utiliser avec précaution).</target>
       </trans-unit>
       <trans-unit id="tl_autoload.autoload">
         <source>Create the autoload files</source>

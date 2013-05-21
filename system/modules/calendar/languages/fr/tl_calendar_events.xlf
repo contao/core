@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.alias.1">
         <source>The event alias is a unique reference to the event which can be called instead of its numeric ID.</source>
-        <target>L'alias est une référence unique qui peut s'utiliser à la place de l'ID numérique de l'événement.</target>
+        <target>L'alias est une référence unique qui remplace l'ID numérique de l'événement.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.author.0">
         <source>Author</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.author.1">
         <source>Here you can change the author of the event.</source>
-        <target>Changer le nom de l'auteur de l'événement.</target>
+        <target>Changer l'auteur de l'événement.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.addTime.0">
         <source>Add time</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.teaser.1">
         <source>The event teaser can be shown in an event list instead of the full article. A &quot;read more …&quot; link will be added automatically.</source>
-        <target>Dans une liste d'événements, l'accroche sera affiché à la place du texte de l'événement. Un lien &quot;En savoir plus...&quot; sera ajouté automatiquement.</target>
+        <target>Dans une liste d'événements, l'accroche peut être affichée à la place de l'article complet. Un lien &quot;En savoir plus ...&quot; sera ajouté automatiquement.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.details.0">
         <source>Event text</source>
@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.enclosure.0">
         <source>Enclosures</source>
-        <target>Fichiers</target>
+        <target>Fichiers joints</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.enclosure.1">
         <source>Please choose the files you want to attach.</source>
@@ -187,7 +187,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected when clicking the event.</source>
-        <target>Sélectionner la page vers laquelle les visiteurs seront redirigés lors d'un clic sur l'événement.</target>
+        <target>Choisir la page vers laquelle les visiteurs seront redirigés lors d'un clic sur l'événement.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.articleId.0">
         <source>Article</source>
@@ -227,7 +227,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.start.1">
         <source>Do not show the event on the website before this day.</source>
-        <target>Ne plus afficher cet événement sur le site avant ce jour.</target>
+        <target>Ne pas afficher cet événement sur le site avant ce jour.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.stop.0">
         <source>Show until</source>
@@ -371,7 +371,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.editmeta.1">
         <source>Edit the event settings</source>
-        <target>Éditer les paramètres des événements</target>
+        <target>Éditer les paramètres de l'événement</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.pasteafter.0">
         <source>Paste into this calendar</source>

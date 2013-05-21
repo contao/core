@@ -7,60 +7,79 @@
       </trans-unit>
       <trans-unit id="XPT.matter">
         <source>What's the matter?</source>
+        <target>Qual è il problema?</target>
       </trans-unit>
       <trans-unit id="XPT.howToFix">
         <source>How can I fix the issue?</source>
+        <target>Come posso risolvere il problema?</target>
       </trans-unit>
       <trans-unit id="XPT.more">
         <source>Tell me more, please</source>
+        <target>Fornisci maggiori informazioni</target>
       </trans-unit>
       <trans-unit id="XPT.hint">
         <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
+        <target>Per personalizzare questo avviso, occorre creare un file template personalizzato denominato &lt;em&gt;%s&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.errorOccurred">
         <source>An error occurred while executing this script. Something does not work properly.</source>
+        <target>Si è verificato un errore durante l'esecuzione di questo script. Qualcosa non funziona correttamente.</target>
       </trans-unit>
       <trans-unit id="XPT.errorFixOne">
         <source>Open the &lt;code&gt;system/logs/error.log&lt;/code&gt; file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</source>
+        <target>Apri il file &lt;code&gt;system/logs/error.log&lt;/code&gt; e cerca il messaggio di errore associato (di solito in fondo al file). Si può anche aggiungere la seguente riga al file di configurazione locale e ricaricare questa pagina:</target>
       </trans-unit>
       <trans-unit id="XPT.errorFixTwo">
         <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
+        <target>Tuttavia, si sottolinea che aggiungendo questa opzione, &lt;strong&gt;chiunque&lt;/strong&gt; sarà in grado di vedere i messaggi di errore sul sito Web!</target>
       </trans-unit>
       <trans-unit id="XPT.errorExplain">
-        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found it in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>L'esecuzione dello script si è fermato, perché qualcosa sembra non funzionare correttamente. Il messaggio di errore effettivo è nascosto dal presente avviso per motivi di sicurezza e può essere trovato nel file di log &lt;code&gt;system/logs/error.log&lt;/code&gt; (vedi sopra). Se il messaggio di errore non è comprensibile o non si sa come risolvere il problema, prova a cercare un aiuto tra le  &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt; FAQ di Contao&lt;/a&gt; o visita la &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt; pagina di supporto Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.requestToken">
         <source>Invalid request token</source>
+        <target>Token non valido</target>
       </trans-unit>
       <trans-unit id="XPT.invalidToken">
         <source>The request token could not be verified.</source>
+        <target>Il token non poteva essere verificato.</target>
       </trans-unit>
       <trans-unit id="XPT.tokenRetry">
         <source>Please &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;click this link&lt;/a&gt; and try again. Do not use the back button of your browser.</source>
+        <target>Si prega di &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt; cliccare su questo link&lt;/a&gt; per riprovare. Non utilizzare il pulsante indietro del browser!!</target>
       </trans-unit>
       <trans-unit id="XPT.tokenExplainOne">
         <source>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</source>
+        <target>Questo errore si verifica se c'è una richiesta POST senza un token di autenticazione valido. In Contao 2.10, il referer check è stato sostituito con un sistema di richiesta token. Se il problema persiste, è possibile che si stia utilizzando un'estensione di terzi non compatibile o non si abbia aggiornato correttamente l'installazione di Contao.</target>
       </trans-unit>
       <trans-unit id="XPT.tokenExplainTwo">
         <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>Per ulteriori informazioni, consultare le &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt; FAQ di Contao&lt;/a&gt; o visitare la &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt; pagina di supporto Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.incomplete">
         <source>Incomplete installation</source>
+        <target>Installazione incompleta</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteInstallation">
         <source>The installation has not been completed, therefore Contao cannot work properly.</source>
+        <target>Installazione non completata. Contao non è in grado di funzionare in modo corretto.</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteFixOne">
         <source>Point your browser to the following URL:</source>
+        <target>Punta il browser sul seguente URL:</target>
       </trans-unit>
       <trans-unit id="XPT.installPath">
         <source>path-to-installation</source>
+        <target>path-to-installation</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteFixTwo">
         <source>This will open the Contao install tool, which will guide you through the installation process.</source>
+        <target>Ora si aprirà lo strumento di installazione di Contao, che ti guiderà attraverso il processo di installazione.</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
-        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/3.0/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
+        <target>Per maggiori informazioni fare riferimento al &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;manuale di installazione Contao&lt;/a&gt;.</target>
       </trans-unit>
     </body>
   </file>

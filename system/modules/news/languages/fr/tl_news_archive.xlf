@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.disableCaptcha.1">
         <source>Use this option only if you have limited comments to authenticated users.</source>
-        <target>N'utiliser cette option que si vous avez limité les commentaires aux membres connectés.</target>
+        <target>N'utiliser cette option que si vous avez limité les commentaires aux membres authentifiés.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.protected.0">
         <source>Protect archive</source>
@@ -131,7 +131,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.notify_both">
         <source>Author and system administrator</source>
-        <target>Auteur et administrateur du système</target>
+        <target>Auteur et administrateur système</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.source_teaser">
         <source>News teasers</source>

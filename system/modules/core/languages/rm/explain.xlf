@@ -14,8 +14,8 @@
         <target>Insert-tags</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.1">
-        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</source>
-        <target>Visita &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt; per retschaiver dapli infurmaziuns davart insert-tags.</target>
+        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/manual/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/manual/managing-content.html#insert-tags&lt;/a&gt;.</source>
+        <target>Dapli infurmaziuns davart insert-tags pos ti chattar sut &lt;a href=&quot;https://contao.org/manual/managing-content.html#insert-tags&quot; title=&quot;Documentaziun online da Contao&quot; target=&quot;_blank&quot;&gt;https://contao.org/manual/managing-content.html#insert-tags&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.0">
         <source>Code Editor</source>
@@ -95,6 +95,7 @@
       </trans-unit>
       <trans-unit id="XPL.highlighter.0.1">
         <source>For more information about how to configure the syntax highlighter please visit &lt;a href=&quot;http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
+        <target>Per uiteriuras infurmaziuns davart la configuraziun da la coluraziun da la sintaxa pos ti visitar &lt;a href=&quot;http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults&quot; title=&quot;Coluraziun da sintaxa, da Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</target>
       </trans-unit>
     </body>
   </file>

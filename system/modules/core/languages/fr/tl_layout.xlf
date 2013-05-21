@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.reset.css.1">
         <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
-        <target>Retirer les styles par défaut des éléments HTML incohérents dans différents navigateurs.</target>
+        <target>Retire les styles par défaut des éléments HTML incohérents dans différents navigateurs.</target>
       </trans-unit>
       <trans-unit id="tl_layout.form.css.0">
         <source>Basic forms</source>
@@ -199,7 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.1">
         <source>Includes the &lt;em&gt;tinymce.css&lt;/em&gt; style sheet from your upload directory.</source>
-        <target>Inclus la feuille de style &lt;em&gt;tinymce.css&lt;/em&gt;.</target>
+        <target>Inclut la feuille de style &lt;em&gt;tinymce.css&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.0">
         <source>Additional style sheets</source>
@@ -207,15 +207,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
         <source>Here you can add style sheets from the file system (e.g. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</source>
-        <target>Ajouter des feuilles de style à partir du système de fichier (ex. : &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</target>
+        <target>Ajouter des feuilles de style à partir de l'explorateur de fichiers (ex. : &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
-        <target>Ordre de classement</target>
+        <target>Ordre de tri</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.1">
         <source>The sort order of the style sheets.</source>
-        <target>L'ordre de classement des feuilles de style</target>
+        <target>L'ordre de tri des feuilles de style</target>
       </trans-unit>
       <trans-unit id="tl_layout.webfonts.0">
         <source>Google web fonts</source>
@@ -223,7 +223,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.webfonts.1">
         <source>Here you can add Google web fonts to your website. Specify the font families without the base URL (e.g. &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</source>
-        <target>Ajouter des polices Web de Google à votre site internet. Spécifier les familles de polices sans l'URL de base (ex : &lt;em&gt;Ubuntu | Ubuntu+Mono&lt;/em&gt;).</target>
+        <target>Ajouter des polices de caractères &quot;Google web fonts&quot; à votre site internet. Spécifier les familles de polices sans l'URL de base (ex. : &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.newsfeeds.0">
         <source>News feeds</source>
@@ -235,7 +235,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.calendarfeeds.0">
         <source>Calendar feeds</source>
-        <target>Flux RSS de calendriers</target>
+        <target>Flux RSS des calendriers</target>
       </trans-unit>
       <trans-unit id="tl_layout.calendarfeeds.1">
         <source>Please select the calendar feeds you want to add to the layout.</source>
@@ -247,7 +247,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.modules.1">
         <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
-        <target>Si JavaScript est désactivé, sauvegarder les modifications avant de changer l'ordre.</target>
+        <target>Si JavaScript est désactivé, sauvegarder les modifications avant de modifier l'ordre.</target>
       </trans-unit>
       <trans-unit id="tl_layout.template.0">
         <source>Page template</source>
@@ -263,14 +263,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.doctype.1">
         <source>Here you can set the output format.</source>
-        <target>Définir le format de sortie, HTML5, XHTML</target>
+        <target>Définir le format de sortie, HTML5 ou XHTML</target>
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.0">
         <source>Body class</source>
         <target>Classe CSS de la balise BODY</target>
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.1">
-        <source>Here you can add custom classes to the &lt;body&gt; tag.</source>
+        <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
+        <target>Ajouter des classes personnalisées qui seront insérées dans la balise &lt;em&gt;body&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -281,10 +282,12 @@
         <target>Ajouter un attribut body &lt;em&gt;onload&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.0">
-        <source>Additional &lt;head&gt; tags</source>
+        <source>Additional &amp;lt;head&amp;gt; tags</source>
+        <target>Balises supplémentaires</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
-        <source>Here you can add individual tags to the &lt;head&gt; section of the page.</source>
+        <source>Here you can add individual tags to the &amp;lt;head&amp;gt; section of the page.</source>
+        <target>Ajouter des balises à la section &lt;em&gt;head&lt;/em&gt; de la page.</target>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>
@@ -300,7 +303,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.jSource.1">
         <source>Here you can select from where to load the jQuery script.</source>
-        <target>Sélectionner la source du script jQuery</target>
+        <target>Utiliser le script local jQuery ou le charger à partir d'un réseau de distribution de contenu.</target>
       </trans-unit>
       <trans-unit id="tl_layout.jquery.0">
         <source>jQuery templates</source>
@@ -320,7 +323,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.mooSource.0">
         <source>MooTools source</source>
-        <target>Script MooTools</target>
+        <target>Source de MooTools</target>
       </trans-unit>
       <trans-unit id="tl_layout.mooSource.1">
         <source>Here you can select from where to load the MooTools scripts.</source>
@@ -444,7 +447,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.moo_fallback">
         <source>MooTools - googleapis.com with local fallback</source>
-        <target>MooTools - googleapis.com avec solution secours locale</target>
+        <target>MooTools - googleapis.com avec solution de secours locale</target>
       </trans-unit>
       <trans-unit id="tl_layout.html5">
         <source>HTML</source>

@@ -279,7 +279,7 @@
       </trans-unit>
       <trans-unit id="FMD.closeAccount.0">
         <source>Close account</source>
-        <target>Sluit account</target>
+        <target>Account sluiten</target>
       </trans-unit>
       <trans-unit id="FMD.closeAccount.1">
         <source>Generates a form to delete a member account</source>
@@ -335,7 +335,7 @@
       </trans-unit>
       <trans-unit id="FMD.html.0">
         <source>Custom HTML</source>
-        <target>Aangepaste HTML code</target>
+        <target>Eigen HTML code</target>
       </trans-unit>
       <trans-unit id="FMD.html.1">
         <source>Allows you to add custom HTML code</source>

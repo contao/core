@@ -79,11 +79,11 @@
       </trans-unit>
       <trans-unit id="tl_member_group.edit.0">
         <source>Edit group</source>
-        <target>Activer/désactiver le groupe</target>
+        <target>Éditer le groupe</target>
       </trans-unit>
       <trans-unit id="tl_member_group.edit.1">
         <source>Edit group ID %s</source>
-        <target>Activer/désactiver le groupe ID %s</target>
+        <target>Éditer le groupe ID %s</target>
       </trans-unit>
       <trans-unit id="tl_member_group.copy.0">
         <source>Duplicate group</source>
@@ -103,7 +103,7 @@
       </trans-unit>
       <trans-unit id="tl_member_group.toggle.0">
         <source>Activate/deactivate group</source>
-        <target>Activer/Désactiver le groupe</target>
+        <target>Activer/désactiver le groupe</target>
       </trans-unit>
       <trans-unit id="tl_member_group.toggle.1">
         <source>Activate/deactivate group ID %s</source>

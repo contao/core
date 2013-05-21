@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_news.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected when clicking the news item.</source>
-        <target>Choisir la page vers laquelle les visiteurs seront réorientés en cliquant sur l'actualité.</target>
+        <target>Choisir la page vers laquelle les visiteurs seront redirigés en cliquant sur l'actualité.</target>
       </trans-unit>
       <trans-unit id="tl_news.articleId.0">
         <source>Article</source>
@@ -143,7 +143,7 @@
       </trans-unit>
       <trans-unit id="tl_news.articleId.1">
         <source>Please choose the article to which visitors will be redirected when clicking the news item.</source>
-        <target>Choisir l'article sur lequel les visiteurs seront redirigés en cliquant sur l'actualité.</target>
+        <target>Choisir l'article vers lequel les visiteurs seront redirigés en cliquant sur l'actualité.</target>
       </trans-unit>
       <trans-unit id="tl_news.cssClass.0">
         <source>CSS class</source>
@@ -255,11 +255,11 @@
       </trans-unit>
       <trans-unit id="tl_news.edit.0">
         <source>Edit article</source>
-        <target>Editer l'actualité</target>
+        <target>Éditer l'actualité</target>
       </trans-unit>
       <trans-unit id="tl_news.edit.1">
         <source>Edit news article ID %s</source>
-        <target>Editer l'actualité ID %s</target>
+        <target>Éditer l'actualité ID %s</target>
       </trans-unit>
       <trans-unit id="tl_news.copy.0">
         <source>Duplicate article</source>
@@ -287,11 +287,11 @@
       </trans-unit>
       <trans-unit id="tl_news.toggle.0">
         <source>Publish/unpublish article</source>
-        <target>Publier / dé-publier l'actualité</target>
+        <target>Publier/dé-publier l'actualité</target>
       </trans-unit>
       <trans-unit id="tl_news.toggle.1">
         <source>Publish/unpublish news article ID %s</source>
-        <target>Publier / dé-publier l'actualité ID %s</target>
+        <target>Publier/dé-publier l'actualité ID %s</target>
       </trans-unit>
       <trans-unit id="tl_news.feature.0">
         <source>Feature/unfeature article</source>
@@ -303,23 +303,23 @@
       </trans-unit>
       <trans-unit id="tl_news.editheader.0">
         <source>Edit archive settings</source>
-        <target>Editer l'en-tête de l'archive</target>
+        <target>Éditer les paramètres de l'archive</target>
       </trans-unit>
       <trans-unit id="tl_news.editheader.1">
         <source>Edit the archive settings</source>
-        <target>Editer l'en-tête de cette archive</target>
+        <target>Éditer les paramètres de l'archive</target>
       </trans-unit>
       <trans-unit id="tl_news.editmeta.0">
         <source>Edit article settings</source>
-        <target>Editer les paramètres de l'article</target>
+        <target>Éditer les paramètres de l'article</target>
       </trans-unit>
       <trans-unit id="tl_news.editmeta.1">
         <source>Edit the article settings</source>
-        <target>Editer les paramètres des articles</target>
+        <target>Éditer les paramètres de l'article</target>
       </trans-unit>
       <trans-unit id="tl_news.pasteafter.0">
         <source>Paste into this archive</source>
-        <target>Coller dans l'archive</target>
+        <target>Coller dans cette archive</target>
       </trans-unit>
       <trans-unit id="tl_news.pasteafter.1">
         <source>Paste after news article ID %s</source>

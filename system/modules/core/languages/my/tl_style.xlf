@@ -151,6 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_style.alignment.1">
         <source>Margin, padding, align, vertical-align, text-align and whitespace.</source>
+        <target>အနားသတ်မျဉ်း၊ အခံ၊ ဖြောင့်တန်းမှု၊ ဒေါင်လိုက်-ဖြောင့်တန်းမှု၊ စာသားဖြောင့်တန်းမှုနှင့်ကွက်လပ်</target>
       </trans-unit>
       <trans-unit id="tl_style.margin.0">
         <source>Margin</source>
@@ -194,9 +195,11 @@
       </trans-unit>
       <trans-unit id="tl_style.whitespace.0">
         <source>White-space</source>
+        <target>ကွက်လပ်</target>
       </trans-unit>
       <trans-unit id="tl_style.whitespace.1">
         <source>Here you can define how white-space inside an element is handled.</source>
+        <target>ကွက်လပ်မှပစ္စည်းကိုဘယ်သို့ချုပ်ကိုင်ရန်သတ်မှတ်နိုင်။</target>
       </trans-unit>
       <trans-unit id="tl_style.background.0">
         <source>Background</source>

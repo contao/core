@@ -303,7 +303,7 @@
       </trans-unit>
       <trans-unit id="tl_module.size.1">
         <source>Please enter the width and height in pixel.</source>
-        <target>Saisir la largeur et la hauteur en pixel.</target>
+        <target>Saisir la largeur et la hauteur en pixels.</target>
       </trans-unit>
       <trans-unit id="tl_module.transparent.0">
         <source>Transparent movie</source>
@@ -383,7 +383,7 @@
       </trans-unit>
       <trans-unit id="tl_module.flashJS.1">
         <source>Please enter the JavaScript code.</source>
-        <target>Saisir du code Javascript.</target>
+        <target>Saisir du code JavaScript.</target>
       </trans-unit>
       <trans-unit id="tl_module.fullsize.0">
         <source>Full-size view/new window</source>
@@ -411,7 +411,7 @@
       </trans-unit>
       <trans-unit id="tl_module.multiSRC.0">
         <source>Source files</source>
-        <target>Fichiers source</target>
+        <target>Fichiers sources</target>
       </trans-unit>
       <trans-unit id="tl_module.multiSRC.1">
         <source>Please select one or more files from the files directory.</source>
@@ -431,7 +431,7 @@
       </trans-unit>
       <trans-unit id="tl_module.html.1">
         <source>You can modify the list of allowed HTML tags in the back end settings.</source>
-        <target>Les balises HTML autorisées peuvent être modifiées dans le menu &quot;Configuration&quot;.</target>
+        <target>La liste des balises HTML autorisées peut être modifiée dans le menu &quot;Configuration&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_module.rss_cache.0">
         <source>Cache timeout</source>
@@ -515,7 +515,7 @@
       </trans-unit>
       <trans-unit id="tl_module.reg_groups.0">
         <source>Member groups</source>
-        <target>Groupes de membre</target>
+        <target>Groupes de membres</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_groups.1">
         <source>Here you can assign the user to one or more groups.</source>
@@ -555,11 +555,11 @@
       </trans-unit>
       <trans-unit id="tl_module.reg_homeDir.0">
         <source>Home directory path</source>
-        <target>Chemin d'accès au répertoire</target>
+        <target>Chemin d'accès au répertoire personnel</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_homeDir.1">
         <source>Please select the parent folder from the files directory.</source>
-        <target>Choisir le dossier parent dans l'explorateur de de fichiers.</target>
+        <target>Choisir le répertoire parent dans l'explorateur de fichiers.</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_activate.0">
         <source>Send activation e-mail</source>
@@ -583,7 +583,7 @@
       </trans-unit>
       <trans-unit id="tl_module.reg_text.1">
         <source>You can use the wildcards &lt;em&gt;##domain##&lt;/em&gt; (domain name), &lt;em&gt;##link##&lt;/em&gt; (activation link) and any input field (e.g. &lt;em&gt;##lastname##&lt;/em&gt;).</source>
-        <target>Les caractères joker &lt;em&gt;##domain##&lt;/em&gt; (nom de domaine), &lt;em&gt;##link##&lt;/em&gt; (lien d'activation) et tous les champs de saisie (ex: &lt;em&gt;##lastname##&lt;/em&gt;) sont autorisés dans ce message.</target>
+        <target>Les caractères joker &lt;em&gt;##domain##&lt;/em&gt; (nom de domaine), &lt;em&gt;##link##&lt;/em&gt; (lien d'activation) et tous les champs de saisie (ex. : &lt;em&gt;##lastname##&lt;/em&gt;) sont autorisés dans ce message.</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_password.0">
         <source>Password message</source>
@@ -591,7 +591,7 @@
       </trans-unit>
       <trans-unit id="tl_module.reg_password.1">
         <source>You can use the wildcards &lt;em&gt;##domain##&lt;/em&gt; (domain name), &lt;em&gt;##link##&lt;/em&gt; (activation link) and any user property (e.g. &lt;em&gt;##lastname##&lt;/em&gt;).</source>
-        <target>Les caractères joker &lt;em&gt;##domain##&lt;/em&gt; (nom de domaine), &lt;em&gt;##link##&lt;/em&gt; (lien d'activation) et tous les attributs de l'utilisateur (ex: &lt;em&gt;##lastname##&lt;/em&gt;) sont autorisés dans ce message.</target>
+        <target>Les caractères joker &lt;em&gt;##domain##&lt;/em&gt; (nom de domaine), &lt;em&gt;##link##&lt;/em&gt; (lien d'activation) et tous les attributs de l'utilisateur (ex. : &lt;em&gt;##lastname##&lt;/em&gt;) sont autorisés dans ce message.</target>
       </trans-unit>
       <trans-unit id="tl_module.title_legend">
         <source>Title and type</source>
@@ -619,7 +619,7 @@
       </trans-unit>
       <trans-unit id="tl_module.include_legend">
         <source>Include settings</source>
-        <target>Parmètres des éléments inclus</target>
+        <target>Paramètres des éléments inclus</target>
       </trans-unit>
       <trans-unit id="tl_module.source_legend">
         <source>Files and folders</source>
@@ -674,7 +674,7 @@ Please click ##link## to set the new password. If you did not request this e-mai
 </source>
         <target>Vous avez demandé un nouveau mot de passe pour ##domain##.
 
-Veuillez cliquer sur ##link## pour saisir un nouveau mot de passe. Si vous n'avez pas demandé pas cet e-mail, merci de contacter l'administrateur du site internet.
+Veuillez cliquer sur ##link## pour saisir un nouveau mot de passe. Si vous n'avez pas demandé cet e-mail, merci de contacter l'administrateur du site internet.
 </target>
       </trans-unit>
       <trans-unit id="tl_module.header">

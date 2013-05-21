@@ -44,9 +44,11 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.confirmed.0">
         <source>Confirmation date</source>
+        <target>Dátum schválenia</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.confirmed.1">
         <source>The date of confirmation (double opt-in).</source>
+        <target>Dátum schválenia (zdvojená možnosť).</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.email_legend">
         <source>E-mail address</source>

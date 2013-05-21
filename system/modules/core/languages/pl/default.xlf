@@ -750,7 +750,7 @@
       </trans-unit>
       <trans-unit id="MSC.weekOffset">
         <source>0</source>
-        <target>0</target>
+        <target>1</target>
       </trans-unit>
       <trans-unit id="MSC.titleFormat">
         <source>%B %d%o, %Y</source>
@@ -1196,8 +1196,7 @@
         <target>Skróty klawiszowe</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>Dowiedz się więcej o przyspieszaniu swojego miejsca i sposoby pracy używając &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;skrótów klawiaturowych&lt;/a&gt;.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1636,6 +1635,15 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
       <trans-unit id="MSC.pageManager">
         <source>Modify the site structure</source>
         <target>Modyfikuj strukturę stron</target>
+      </trans-unit>
+      <trans-unit id="MSC.filePickerHome">
+        <source>Back to the file picker</source>
+      </trans-unit>
+      <trans-unit id="MSC.pagePickerHome">
+        <source>Back to the page picker</source>
+      </trans-unit>
+      <trans-unit id="MSC.pickerNoSelection">
+        <source>Please go back to the page or file picker and make a selection before you close the dialog.</source>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>

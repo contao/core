@@ -151,6 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_style.alignment.1">
         <source>Margin, padding, align, vertical-align, text-align and whitespace.</source>
+        <target>Margin, padding, align, vertical-align, text-align og whitespace.</target>
       </trans-unit>
       <trans-unit id="tl_style.margin.0">
         <source>Margin</source>
@@ -194,9 +195,11 @@
       </trans-unit>
       <trans-unit id="tl_style.whitespace.0">
         <source>White-space</source>
+        <target>White-space</target>
       </trans-unit>
       <trans-unit id="tl_style.whitespace.1">
         <source>Here you can define how white-space inside an element is handled.</source>
+        <target>Her kan du definere hvordan white-space i et element håndteres.</target>
       </trans-unit>
       <trans-unit id="tl_style.background.0">
         <source>Background</source>

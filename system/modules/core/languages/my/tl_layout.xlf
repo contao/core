@@ -270,7 +270,8 @@
         <target>အလယ်အမျိုးအစား</target>
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.1">
-        <source>Here you can add custom classes to the &lt;body&gt; tag.</source>
+        <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
+        <target>&amp;lt;အလယ်&amp;gt; အမည်သို့စိတ်ကြိုက်အမျိုးအစားများထည့်နိုင်။</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -278,12 +279,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.onload.1">
         <source>Here you can add a body &lt;em&gt;onload&lt;/em&gt; attribute.</source>
+        <target>အလယ်တွင်&lt;em&gt;ဆွဲတင်&lt;/em&gt;ပါဝင်ပစ္စည်းထည့်သွင်းနိုင်။</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.0">
-        <source>Additional &lt;head&gt; tags</source>
+        <source>Additional &amp;lt;head&amp;gt; tags</source>
+        <target>နောက်ထပ် &amp;lt;head&amp;gt; tags</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
-        <source>Here you can add individual tags to the &lt;head&gt; section of the page.</source>
+        <source>Here you can add individual tags to the &amp;lt;head&amp;gt; section of the page.</source>
+        <target>စာမျက်နှာ&amp;lt;ခေါင်းစဉ်&amp;gt; အပိုင်းသို့အမည်များထည့်နိုင်။</target>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>

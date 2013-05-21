@@ -103,6 +103,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.missing_section">
         <source>The layout section &lt;strong&gt;%s&lt;/strong&gt; will be added to the local configuration.</source>
+        <target>&lt;strong&gt;%s&lt;/strong&gt; အခင်းအကျင်းအပိုင်းကိုစက်တွင်းဖွဲ့စည်းပံုတွင်ထည့်။</target>
       </trans-unit>
       <trans-unit id="tl_theme.sections_ok">
         <source>The layout sections have been successfully checked.</source>

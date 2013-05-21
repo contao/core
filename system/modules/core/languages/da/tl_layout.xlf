@@ -167,9 +167,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.1">
         <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
+        <target>Genererer et responsive CSS layout baseret på sidens layout indstillinger. Denne komponent påkræves for at side layout generatoren kan fungere.</target>
       </trans-unit>
       <trans-unit id="tl_layout.grid.css.0">
         <source>12-column grid</source>
+        <target>12 kolonners gitter</target>
       </trans-unit>
       <trans-unit id="tl_layout.grid.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
@@ -268,7 +270,8 @@
         <target>Body klasse</target>
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.1">
-        <source>Here you can add custom classes to the &lt;body&gt; tag.</source>
+        <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
+        <target>Har kan du tilføje dine egne classes til &amp;lt;body&amp;gt; tagget.</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -276,12 +279,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.onload.1">
         <source>Here you can add a body &lt;em&gt;onload&lt;/em&gt; attribute.</source>
+        <target>Her kan du tilføje en body &lt;em&gt;onload&lt;/em&gt; attribute.</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.0">
-        <source>Additional &lt;head&gt; tags</source>
+        <source>Additional &amp;lt;head&amp;gt; tags</source>
+        <target>Yderligere -tags</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
-        <source>Here you can add individual tags to the &lt;head&gt; section of the page.</source>
+        <source>Here you can add individual tags to the &amp;lt;head&amp;gt; section of the page.</source>
+        <target>Her kan du tilføje individuelle tags til &amp;lt;head&amp;gt; sektionen på siden.</target>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>

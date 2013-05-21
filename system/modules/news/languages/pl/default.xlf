@@ -34,10 +34,12 @@
         <target>%d pozycja(i)</target>
       </trans-unit>
       <trans-unit id="MSC.news_previous">
-        <source>&lt;</source>
+        <source>&amp;lt;</source>
+        <target>&gt;</target>
       </trans-unit>
       <trans-unit id="MSC.news_next">
-        <source>&gt;</source>
+        <source>&amp;gt;</source>
+        <target>&gt;</target>
       </trans-unit>
     </body>
   </file>

@@ -287,6 +287,7 @@
       </trans-unit>
       <trans-unit id="tl_content.titleText.1">
         <source>The link title is added as &lt;em&gt;title&lt;/em&gt; attribute in the HTML markup.</source>
+        <target>Länktiteln läggs till som &lt;em&gt;title&lt;/em&gt;-attribut i HTML-koden.</target>
       </trans-unit>
       <trans-unit id="tl_content.embed.0">
         <source>Embed the link</source>
@@ -302,6 +303,7 @@
       </trans-unit>
       <trans-unit id="tl_content.rel.1">
         <source>To trigger the lightbox, enter a &lt;em&gt;rel&lt;/em&gt; attribute here.</source>
+        <target>För att trigga lightbox ange ett &lt;em&gt;rel&lt;/em&gt;-attribut här.</target>
       </trans-unit>
       <trans-unit id="tl_content.useImage.0">
         <source>Create an image link</source>
@@ -417,27 +419,35 @@
       </trans-unit>
       <trans-unit id="tl_content.sliderDelay.0">
         <source>Sliding interval</source>
+        <target>Glidintervall</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderDelay.1">
         <source>The time in milliseconds between slides (1000 = 1s). Set to 0 to disable auto sliding.</source>
+        <target>Tid i millisekunder mellan glidningar (1000 = 1s). Sätt till 0 för att slå av automatisk glidning.</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderSpeed.0">
         <source>Transition speed</source>
+        <target>Övergångshastighet</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderSpeed.1">
         <source>The transition speed in milliseconds (1000 = 1s). Defaults to 300.</source>
+        <target>Hastighet för övergångar i millisekunder (1000 = 1s). Standard är 300.</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderStartSlide.0">
         <source>Slide offset</source>
+        <target>Glidoffset</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderStartSlide.1">
         <source>Here you can make the slider start with a particular slide (counting starts at 0).</source>
+        <target>Här kan du få glidningen att börja med en specifik bild (börjar från 0).</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderContinuous.0">
         <source>Continuous</source>
+        <target>Kontinuerlig</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderContinuous.1">
         <source>Make the slider continuous (start all over when reaching the end).</source>
+        <target>Gör glidningen kontinuerlig (börjar om direkt efter slutet).</target>
       </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>
@@ -557,6 +567,7 @@
       </trans-unit>
       <trans-unit id="tl_content.slider_legend">
         <source>Slider settings</source>
+        <target>Glidningsinställningar</target>
       </trans-unit>
       <trans-unit id="tl_content.list_legend">
         <source>List items</source>
@@ -656,9 +667,11 @@
       </trans-unit>
       <trans-unit id="tl_content.includeTemplate">
         <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>Mallen &lt;em&gt;%s&lt;/em&gt; måste inkluderas i sidlayouten.</target>
       </trans-unit>
       <trans-unit id="tl_content.includeTemplates">
         <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>Mallen &lt;em&gt;%s&lt;/em&gt; eller &lt;em&gt;%s&lt;/em&gt; måste inkluderas i sidlayouten.</target>
       </trans-unit>
       <trans-unit id="tl_content.new.0">
         <source>New element</source>

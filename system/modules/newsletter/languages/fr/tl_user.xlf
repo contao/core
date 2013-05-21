@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_user.newsletters.0">
         <source>Allowed channels</source>
-        <target>Listes de diffusion</target>
+        <target>Listes de diffusion autorisées</target>
       </trans-unit>
       <trans-unit id="tl_user.newsletters.1">
         <source>Here you can grant access to one or more channels.</source>
-        <target>Choisir la/les liste(s) de diffusion que vous souhaitez activer.</target>
+        <target>Accorder l'accès à une ou plusieurs listes de diffusion.</target>
       </trans-unit>
       <trans-unit id="tl_user.newsletterp.0">
         <source>Channel permissions</source>

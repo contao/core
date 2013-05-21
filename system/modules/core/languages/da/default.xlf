@@ -159,6 +159,7 @@
       </trans-unit>
       <trans-unit id="ERR.emptyUpload">
         <source>Please select at least one file!</source>
+        <target>Vælg venligst mindst én fil.</target>
       </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
@@ -1146,15 +1147,19 @@
       </trans-unit>
       <trans-unit id="MSC.currentLogin.0">
         <source>Current login</source>
+        <target>Nuværende login</target>
       </trans-unit>
       <trans-unit id="MSC.currentLogin.1">
         <source>Current login: %s</source>
+        <target>Nuværende login: %s</target>
       </trans-unit>
       <trans-unit id="MSC.loginCount">
         <source>Login attempts</source>
+        <target>Forsøg på login</target>
       </trans-unit>
       <trans-unit id="MSC.locked">
         <source>Locked</source>
+        <target>Aflåst</target>
       </trans-unit>
       <trans-unit id="MSC.move">
         <source>Move the item via drag and drop</source>
@@ -1197,8 +1202,8 @@
         <target>Back end genvejstaster</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>Lær mere om at arbejde hurtigere og mere affektivt ved at benytte &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Genvejstaster på contao.org&quot; target=&quot;_blank&quot;&gt;Genvejstaster&lt;/a&gt;.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>Lær mere om at arbejde hurtigere ved at benytte &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Oversigt over genvejstaster på contao.org&quot; target=&quot;_blank&quot;&gt;genvejstaster&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1638,6 +1643,18 @@ Denne e-mail er blevet genereret af systemet og kan ikke besvares direkte.
         <source>Modify the site structure</source>
         <target>Ændre sidestrukturen</target>
       </trans-unit>
+      <trans-unit id="MSC.filePickerHome">
+        <source>Back to the file picker</source>
+        <target>Tilbage til filvælgeren</target>
+      </trans-unit>
+      <trans-unit id="MSC.pagePickerHome">
+        <source>Back to the page picker</source>
+        <target>Tilbage til sidevælgeren</target>
+      </trans-unit>
+      <trans-unit id="MSC.pickerNoSelection">
+        <source>Please go back to the page or file picker and make a selection before you close the dialog.</source>
+        <target>Gå venligst tilbage til side eller fil -vælgeren og foretag dit valg, inden du lukker dialogen.</target>
+      </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
         <target>Meddelelser</target>
@@ -2044,9 +2061,11 @@ Denne e-mail er blevet genereret af systemet og kan ikke besvares direkte.
       </trans-unit>
       <trans-unit id="MSC.createdOn">
         <source>Created on</source>
+        <target>Oprettet d.</target>
       </trans-unit>
       <trans-unit id="MSC.activation">
         <source>Activated on</source>
+        <target>Aktiveret d.</target>
       </trans-unit>
       <trans-unit id="MSC.relevance">
         <source>%s relevance</source>

@@ -159,6 +159,7 @@
       </trans-unit>
       <trans-unit id="ERR.emptyUpload">
         <source>Please select at least one file!</source>
+        <target>Vyberte prosím aspoň jeden súbor!</target>
       </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
@@ -550,6 +551,7 @@
       </trans-unit>
       <trans-unit id="FOP.f6">
         <source>Synchronize the file system with the database</source>
+        <target>Synchronizovať systém súborov s databázou</target>
       </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
@@ -945,6 +947,7 @@
       </trans-unit>
       <trans-unit id="MSC.mw_enable">
         <source>Enable/disable the module</source>
+        <target>Aktivovať/deaktivovať modul</target>
       </trans-unit>
       <trans-unit id="MSC.aw_title">
         <source>Title</source>
@@ -1144,15 +1147,19 @@
       </trans-unit>
       <trans-unit id="MSC.currentLogin.0">
         <source>Current login</source>
+        <target>Aktuálne prihlásenie</target>
       </trans-unit>
       <trans-unit id="MSC.currentLogin.1">
         <source>Current login: %s</source>
+        <target>Aktuálne prihlásenie: %s</target>
       </trans-unit>
       <trans-unit id="MSC.loginCount">
         <source>Login attempts</source>
+        <target>Pokusy o prihlásenie</target>
       </trans-unit>
       <trans-unit id="MSC.locked">
         <source>Locked</source>
+        <target>Uzamknuté</target>
       </trans-unit>
       <trans-unit id="MSC.move">
         <source>Move the item via drag and drop</source>
@@ -1195,8 +1202,8 @@
         <target>Klávesové skratky backendu</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
-        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>Získajte viac informácií ako urýchliť svoju prácu používaním &lt;a href=&quot;https://contao.org/en/manual/3.0/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;klávesových skratiek&lt;/a&gt;.</target>
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>Naučte sa, ako môžete urýchliť váš pracovný postup použitím &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt; klávesových skratiek.&lt;/a&gt;</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1636,6 +1643,18 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
         <source>Modify the site structure</source>
         <target>Upraviť štruktúru webu</target>
       </trans-unit>
+      <trans-unit id="MSC.filePickerHome">
+        <source>Back to the file picker</source>
+        <target>Späť do správcu súborov</target>
+      </trans-unit>
+      <trans-unit id="MSC.pagePickerHome">
+        <source>Back to the page picker</source>
+        <target>Späť do správcu stránok</target>
+      </trans-unit>
+      <trans-unit id="MSC.pickerNoSelection">
+        <source>Please go back to the page or file picker and make a selection before you close the dialog.</source>
+        <target>Vráťte sa prosím do správcu stránok alebo súborov a urobte výber, predtým než zavriete toto dialógové okno. </target>
+      </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
         <target>Systémové správy</target>
@@ -2042,9 +2061,11 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
       </trans-unit>
       <trans-unit id="MSC.createdOn">
         <source>Created on</source>
+        <target>Vytvorené</target>
       </trans-unit>
       <trans-unit id="MSC.activation">
         <source>Activated on</source>
+        <target>Aktivované</target>
       </trans-unit>
       <trans-unit id="MSC.relevance">
         <source>%s relevance</source>
@@ -2068,6 +2089,7 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
       </trans-unit>
       <trans-unit id="MSC.location">
         <source>Location</source>
+        <target>Umiestnenie</target>
       </trans-unit>
       <trans-unit id="UNITS.0">
         <source>Byte</source>

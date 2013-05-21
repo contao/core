@@ -14,8 +14,8 @@
         <target>插入标记</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.1">
-        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</source>
-        <target>更多插入标签请参考&lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao在线文档&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</target>
+        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/manual/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/manual/managing-content.html#insert-tags&lt;/a&gt;.</source>
+        <target>关于插入标记的更多信息请访问&lt;a href=&quot;https://contao.org/manual/managing-content.html#insert-tags&quot; title=&quot;Contao在线文档&quot; target=&quot;_blank&quot;&gt;https://contao.org/manual/managing-content.html#insert-tags&lt;/a&gt;。</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.0">
         <source>Code Editor</source>
@@ -95,6 +95,7 @@
       </trans-unit>
       <trans-unit id="XPL.highlighter.0.1">
         <source>For more information about how to configure the syntax highlighter please visit &lt;a href=&quot;http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
+        <target>关于如何配置语法高亮的更多信息，请访问&lt;a href=&quot;http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</target>
       </trans-unit>
     </body>
   </file>

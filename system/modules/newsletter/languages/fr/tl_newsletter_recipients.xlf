@@ -11,11 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.active.0">
         <source>Activate recipient</source>
-        <target>Activé</target>
+        <target>Activer le destinataire</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.active.1">
         <source>Recipients are usually activated automatically (double-opt-in).</source>
-        <target>Les adresses e-mail sont habituellement activées de manière automatique (double opt-in).</target>
+        <target>Les destinataires sont habituellement activés de manière automatique (double opt-in).</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.addedOn.0">
         <source>Subscription date</source>
@@ -59,7 +59,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.invalid">
         <source>%s invalid entries have been skipped.</source>
-        <target>%s entrées incorrectes ont été omises</target>
+        <target>%s entrées incorrectes ont été omises.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.subscribed">
         <source>subscribed on %s</source>

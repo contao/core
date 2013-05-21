@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_settings.repository_wsdl.0">
         <source>Extension repository URL</source>
-        <target>URL de l'extension référentiel</target>
+        <target>URL du référentiel d'extensions</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_wsdl.1">
         <source>Here you can enter the URL of the extension repository WSDL file.</source>
-        <target>Saisir l'URL du fichier WSDL de l'extension référentiel.</target>
+        <target>Saisir l'URL du fichier WSDL du référentiel d'extensions.</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_languages.0">
         <source>Fallback languages</source>
@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.repository_legend">
         <source>Extension repository</source>
-        <target>Extension référentiel</target>
+        <target>Référentiel d'extensions</target>
       </trans-unit>
     </body>
   </file>

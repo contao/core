@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.subject.1">
         <source>Please enter the newsletter subject.</source>
-        <target>Saisir le titre du bulletin d'information.</target>
+        <target>Saisir le sujet du bulletin d'information.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.alias.0">
         <source>Newsletter alias</source>
@@ -35,11 +35,11 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.addFile.0">
         <source>Add attachments</source>
-        <target>Ajout de fichier joint</target>
+        <target>Ajouter des fichiers joints</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.addFile.1">
         <source>Attach one or more files to the newsletter.</source>
-        <target>Attacher un ou plusieurs fichiers avec le bulletin d'information.</target>
+        <target>Joindre un ou plusieurs fichiers au bulletin d'information.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.files.0">
         <source>Attachments</source>
@@ -59,7 +59,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.sendText.0">
         <source>Send as plain text</source>
-        <target>Envoyer comme texte brut</target>
+        <target>Envoyer en texte brut</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.sendText.1">
         <source>Send the newsletter as plain text e-mail without the HTML content.</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.externalImages.1">
         <source>Do not embed images in HTML newsletters.</source>
-        <target>Ne pas inclure des images dans les bulletins HTML.</target>
+        <target>Ne pas inclure des images dans les bulletins d'information HTML.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.senderName.0">
         <source>Sender name</source>
@@ -83,11 +83,11 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.sender.0">
         <source>Sender address</source>
-        <target>Adresse de l'expéditeur</target>
+        <target>Adresse e-mail de l'expéditeur</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.sender.1">
         <source>Here you can enter a custom sender address.</source>
-        <target>Saisir l'adresse e-mail de l'expéditeur.</target>
+        <target>Saisir l'adresse e-mail personnalisée de l'expéditeur.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.mailsPerCycle.0">
         <source>Mails per cycle</source>
@@ -111,11 +111,11 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.start.1">
         <source>In case the sending process is interrupted, you can enter a numeric offset here to continue with a particular recipient. You can check how many mails have been sent in the &lt;em&gt;system/logs/newsletter_*.log&lt;/em&gt; file. E.g., if 120 mails have been sent, enter &quot;120&quot; to continue with the 121st recipient (counting starts at 0).</source>
-        <target>Dans le cas où le processus d'envoi est interrompu, saisir une valeur numérique de décalage pour continuer avec un destinataire particulier. Vous pouvez vérifier le nombre de mails qui ont été envoyés dans le fichier &lt;em&gt;/system/logs/log newsletter_*.log&lt;/em&gt;. Par exemple, si 120 mails ont été envoyés, saisir &quot;120&quot; pour continuer avec le 121 ème destinataire (le compteur commançant à 0).</target>
+        <target>Dans le cas où le processus d'envoi est interrompu, saisir une valeur numérique de décalage pour continuer avec un destinataire particulier. Vous pouvez vérifier le nombre de mails qui ont été envoyés dans le fichier &lt;em&gt;/system/logs/log newsletter_*.log&lt;/em&gt;. Par exemple, si 120 e-mails ont été envoyés, saisir &quot;120&quot; pour continuer avec le 121&lt;sup&gt;e&lt;/sup&gt; destinataire (le compteur commençant à 0).</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.sendPreviewTo.0">
         <source>Send preview to</source>
-        <target>Envoyer un aperçu</target>
+        <target>Envoyer un aperçu à</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.sendPreviewTo.1">
         <source>Send the preview of the newsletter to this e-mail address.</source>
@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.attachment_legend">
         <source>Attachments</source>
-        <target>Fichiers attachés</target>
+        <target>Fichiers joints</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.template_legend">
         <source>Template settings</source>
@@ -163,11 +163,11 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.confirm">
         <source>The newsletter has been sent to %s recipients.</source>
-        <target>Le bulletin d'information a été envoyé à %s destinataires.</target>
+        <target>Le bulletin d'information a été envoyé à %s destinataire(s).</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.rejected">
         <source>%s invalid e-mail address(es) has/have been disabled (see system log).</source>
-        <target>%s adresse(s) e-mail(s) non valide(s) a/ont été désactivée(s).</target>
+        <target>%s adresse(s) e-mail(s) non valide(s) a/ont été désactivée(s) (voir le journal système).</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.error">
         <source>There are no active subscribers to the channel.</source>
@@ -191,7 +191,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.new.0">
         <source>New newsletter</source>
-        <target>Nouveau bulletin</target>
+        <target>Nouveau bulletin d'information</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.new.1">
         <source>Create a new newsletter</source>
@@ -199,7 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.show.0">
         <source>Newsletter details</source>
-        <target>Détails du bulletin</target>
+        <target>Détails du bulletin d'information</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.show.1">
         <source>Show the details of newsletter ID %s</source>
@@ -207,7 +207,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.edit.0">
         <source>Edit newsletter</source>
-        <target>Éditer le bulletin</target>
+        <target>Éditer le bulletin d'information</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.edit.1">
         <source>Edit newsletter ID %s</source>
@@ -215,7 +215,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.copy.0">
         <source>Duplicate newsletter</source>
-        <target>Dupliquer le bulletin ID %s</target>
+        <target>Dupliquer le bulletin d'information</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.copy.1">
         <source>Duplicate newsletter ID %s</source>
@@ -223,7 +223,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.cut.0">
         <source>Move newsletter</source>
-        <target>Déplacer le bulletin</target>
+        <target>Déplacer le bulletin d'information</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.cut.1">
         <source>Move newsletter ID %s</source>
@@ -231,7 +231,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.delete.0">
         <source>Delete newsletter</source>
-        <target>Supprimer le bulletin ID %s</target>
+        <target>Supprimer le bulletin d'information</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.delete.1">
         <source>Delete newsletter ID %s</source>
@@ -251,7 +251,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.pasteafter.1">
         <source>Paste after newsletter ID %s</source>
-        <target>Coller après le bulletin ID %s</target>
+        <target>Coller après le bulletin d'information ID %s</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.send.0">
         <source>Send newsletter</source>

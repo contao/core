@@ -78,8 +78,8 @@
         <target>Detta öppnar Contaos installationsverktyg som guidar dig genom installationsprocessen.</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
-        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/3.0/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
-        <target>För mer information läs &lt;a href=&quot;https://contao.org/manual/3.0/installation.html&quot; target=&quot;_blank&quot;&gt;Contaos installationsmanual&lt;/a&gt;.</target>
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
+        <target>För mer information läs &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contaos installationsmanual&lt;/a&gt;.</target>
       </trans-unit>
     </body>
   </file>

@@ -51,11 +51,11 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_readerModule.0">
         <source>Event reader module</source>
-        <target>Module lecteur d'événement</target>
+        <target>Module lecteur d'événements</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_readerModule.1">
         <source>Automatically switch to the event reader if an event has been selected.</source>
-        <target>Basculer automatiquement vers le lecteur d'événement si un événement a été sélectionné.</target>
+        <target>Basculer automatiquement vers le lecteur d'événements si un événement a été sélectionné.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_limit.0">
         <source>Number of events</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_template.1">
         <source>Here you can select the event template.</source>
-        <target>Sélectionner un modèle d'événement.</target>
+        <target>Sélectionner un modèle d'événements.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_ctemplate.0">
         <source>Calendar template</source>

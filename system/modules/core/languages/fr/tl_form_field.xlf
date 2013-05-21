@@ -27,7 +27,7 @@
       </trans-unit>
       <trans-unit id="FFL.fieldset.0">
         <source>Fieldset</source>
-        <target>Groupe de champs</target>
+        <target>Fieldset</target>
       </trans-unit>
       <trans-unit id="FFL.fieldset.1">
         <source>A container for form fields with an optional legend (only available for tableless forms).</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="FFL.password.1">
         <source>A single-line input field for a password. Contao automatically adds a confirmation field.</source>
-        <target>Champ d'une ligne pour la saisie d'un mot de passe . Contao ajoute automatiquement un champ de confirmation.</target>
+        <target>Champ d'une ligne pour la saisie d'un mot de passe. Contao ajoute automatiquement un champ de confirmation.</target>
       </trans-unit>
       <trans-unit id="FFL.textarea.0">
         <source>Textarea</source>
@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.html.1">
         <source>You can modify the list of allowed HTML tags in the back end settings.</source>
-        <target>Modifier la liste des balises HTML autorisées dans la configuration du back-office.</target>
+        <target>Modifier la liste des balises HTML autorisées dans la configuration du back office.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.options.0">
         <source>Options</source>
@@ -159,7 +159,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.options.1">
         <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
-        <target>Si JavaScript est désactivé, sauvegarder les modifications avant de changer l'ordre.</target>
+        <target>Si JavaScript est désactivé, assurez-vous de sauvegarder vos changements avant de modifier l'ordre.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.mandatory.0">
         <source>Mandatory field</source>
@@ -207,7 +207,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.extnd.1">
         <source>Allows everything except special characters which are usually encoded for security reasons (#/()&lt;=&gt;).</source>
-        <target>Autorise tout caractère à l'exception des caractères spéciaux habituellement utilisés pour des raisons de sécurité (#/()&lt;=&gt;).</target>
+        <target>Autorise tout caractère à l'exception des caractères spéciaux qui sont habituellement encodés pour des raisons de sécurité (#/()&lt;=&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_form_field.date.0">
         <source>Date</source>
@@ -231,7 +231,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.datim.1">
         <source>Checks whether the input matches the global date and time format.</source>
-        <target>Contrôle si la saisie correspond au format global de date et heure.</target>
+        <target>Contrôle si la saisie correspond au format global de date et d'heure.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.phone.0">
         <source>Phone number</source>
@@ -255,7 +255,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.url.1">
         <source>Checks whether the input is a valid URL.</source>
-        <target>Contrôle si la saisie est une adresse URL valide.</target>
+        <target>Contrôle si la saisie est un URL valide.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.placeholder.0">
         <source>Placeholder</source>
@@ -271,7 +271,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.maxlength.1">
         <source>Limit the field length to a certain number of characters (text) or bytes (file uploads).</source>
-        <target>Limite la longueur du champ à un certain nombre de caractères (texte) ou octets (chargement de fichiers).</target>
+        <target>Limite la longueur du champ à un certain nombre de caractères (texte) ou octets (envoi de fichiers).</target>
       </trans-unit>
       <trans-unit id="tl_form_field.size.0">
         <source>Rows and columns</source>
@@ -287,7 +287,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.multiple.1">
         <source>Allow visitors to select more than one option.</source>
-        <target>Permet au visiteurs de sélectionner plus d'une option.</target>
+        <target>Permet aux visiteurs de sélectionner plus d'une option.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.mSize.0">
         <source>List size</source>
@@ -343,7 +343,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.fsType.1">
         <source>Please select the operation mode of the fieldset element.</source>
-        <target>Sélectionner le mode de fonctionnement de l'élément &quot;Groupe de champs&quot;.</target>
+        <target>Sélectionner le mode de fonctionnement de l'élément &quot;Fieldset&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.fsStart.0">
         <source>Wrapper start</source>
@@ -351,7 +351,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.fsStart.1">
         <source>Marks the beginning of a fieldset and can contain a legend.</source>
-        <target>Marque le début d'un 'fieldset' et peut contenir une légende.</target>
+        <target>Marque le début d'un &quot;fieldset&quot; et peut contenir une légende.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.fsStop.0">
         <source>Wrapper stop</source>
@@ -359,7 +359,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.fsStop.1">
         <source>Marks the end of a fieldset.</source>
-        <target>Marque la fin d'un &quot;Groupe de champs&quot;.</target>
+        <target>Marque la fin d'un &quot;fieldset&quot;.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.value.0">
         <source>Default value</source>

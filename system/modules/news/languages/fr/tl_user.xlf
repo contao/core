@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_user.news.1">
         <source>Here you can grant access to one or more news archives.</source>
-        <target>Choisir les archives d'actualités que vous voulez activer pour l'utilisateur.</target>
+        <target>Accorder l'accès à une ou plusieurs archives d'actualités.</target>
       </trans-unit>
       <trans-unit id="tl_user.newp.0">
         <source>News permissions</source>

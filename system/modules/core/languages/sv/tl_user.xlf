@@ -47,6 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_user.uploader.1">
         <source>Here you can choose a file uploader.</source>
+        <target>Här kan du välja en filuppladdare.</target>
       </trans-unit>
       <trans-unit id="tl_user.showHelp.0">
         <source>Show explanation</source>

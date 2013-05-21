@@ -6,10 +6,12 @@
         <target>%d evenement(en)</target>
       </trans-unit>
       <trans-unit id="MSC.cal_previous">
-        <source>&lt;</source>
+        <source>&amp;lt;</source>
+        <target>&amp;lt;</target>
       </trans-unit>
       <trans-unit id="MSC.cal_next">
-        <source>&gt;</source>
+        <source>&amp;gt;</source>
+        <target>&amp;gt;</target>
       </trans-unit>
       <trans-unit id="MSC.cal_emptyDay">
         <source>There are no events on this day.</source>
@@ -33,19 +35,19 @@
       </trans-unit>
       <trans-unit id="MSC.cal_days">
         <source>This event is repeated every %s. day</source>
-        <target>Dit evenement wordt elke %se dag herhaald.</target>
+        <target>Dit evenement herhaald zich elke %s. dag</target>
       </trans-unit>
       <trans-unit id="MSC.cal_weeks">
         <source>This event is repeated every %s. week</source>
-        <target>Dit evenement wordt elke %se week herhaald.</target>
+        <target>Dit evenement herhaald zich elke %s. week</target>
       </trans-unit>
       <trans-unit id="MSC.cal_months">
         <source>This event is repeated every %s. month</source>
-        <target>Dit evenement wordt elke %se maand herhaald.</target>
+        <target>Dit evenement herhaald zich elke %s. maand</target>
       </trans-unit>
       <trans-unit id="MSC.cal_years">
         <source>This event is repeated every %s. year</source>
-        <target>Dit evenement wordt elk %se jaar herhaald.</target>
+        <target>Dit evenement herhaald zich elke %s. jaar</target>
       </trans-unit>
       <trans-unit id="MSC.cal_until">
         <source>until %s</source>

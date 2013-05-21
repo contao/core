@@ -135,6 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_member.groups.1">
         <source>Here you can assign the member to one or more groups.</source>
+        <target>တစ်ခု(သို့)အုပ်စုများသို့အဖွဲ့ဝင်ကိုသတ်မှတ်နိုင်။</target>
       </trans-unit>
       <trans-unit id="tl_member.login.0">
         <source>Allow login</source>
@@ -142,6 +143,7 @@
       </trans-unit>
       <trans-unit id="tl_member.login.1">
         <source>Allow the member to log into the front end.</source>
+        <target>အပြင်ပိုင်းသို့ဖွင့်ဝင်ရန်အဖွဲ့ဝင်ကိုခွင့်ပြု။</target>
       </trans-unit>
       <trans-unit id="tl_member.username.0">
         <source>Username</source>
@@ -157,6 +159,7 @@
       </trans-unit>
       <trans-unit id="tl_member.assignDir.1">
         <source>Define a home directory for the member.</source>
+        <target>အဖွဲ့ဝင်အတွက်ပင်မဖိုင်လမ်းညွန်သတ်မှတ်။</target>
       </trans-unit>
       <trans-unit id="tl_member.homeDir.0">
         <source>Home directory</source>

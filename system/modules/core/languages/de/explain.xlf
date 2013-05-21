@@ -14,8 +14,8 @@
         <target>Inserttags</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.1">
-        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/en/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</source>
-        <target>Weitere Informationen zu Inserttags finden Sie unter &lt;a href=&quot;https://contao.org/de/manual/3.0/managing-content.html#inserttags&quot; title=&quot;Contao Online-Dokumentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/de/manual/3.0/managing-content.html#insert-tags&lt;/a&gt;.</target>
+        <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/manual/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/manual/managing-content.html#insert-tags&lt;/a&gt;.</source>
+        <target>Weitere Informationen zu Inserttags finden Sie unter &lt;a href=&quot;https://contao.org/manual/managing-content.html#inserttags&quot; title=&quot;Contao Online-Dokumentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/manual/managing-content.html#inserttags&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.0">
         <source>Code Editor</source>

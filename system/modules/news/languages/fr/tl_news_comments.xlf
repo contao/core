@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_news_comments.pid.0">
         <source>News item</source>
-        <target>Élément d'actualité</target>
+        <target>Élément d'actualités</target>
       </trans-unit>
       <trans-unit id="tl_news_comments.pid.1">
         <source>The associated news item.</source>
-        <target>Élément d'actualité associé.</target>
+        <target>Élément d'actualités associé.</target>
       </trans-unit>
       <trans-unit id="tl_news_comments.date.0">
         <source>Date</source>
@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="tl_news_comments.name.0">
         <source>Author</source>
-        <target>Nom</target>
+        <target>Auteur</target>
       </trans-unit>
       <trans-unit id="tl_news_comments.name.1">
         <source>Please enter the author's name.</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_news_comments.published.1">
         <source>Make the comment publicly visible on the website.</source>
-        <target>Rendre le commentaire visible sur le site.</target>
+        <target>Rendre le commentaire visible aux visiteurs de votre site.</target>
       </trans-unit>
       <trans-unit id="tl_news_comments.author_legend">
         <source>Author</source>

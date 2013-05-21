@@ -3,63 +3,81 @@
     <body>
       <trans-unit id="XPT.error">
         <source>An error occurred</source>
+        <target>အမှားပြနေ</target>
       </trans-unit>
       <trans-unit id="XPT.matter">
         <source>What's the matter?</source>
+        <target>ဘာအကြောင်းကြောင့်လဲ?</target>
       </trans-unit>
       <trans-unit id="XPT.howToFix">
         <source>How can I fix the issue?</source>
+        <target>ဘယ်လိုအဖြေရှာမလဲ?</target>
       </trans-unit>
       <trans-unit id="XPT.more">
         <source>Tell me more, please</source>
+        <target>ကျေးဇူးပြု၍များများပြော</target>
       </trans-unit>
       <trans-unit id="XPT.hint">
         <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
+        <target>ကြောငြာချက်ကိုစိတ်ကြိုက်လုပ်ဆောင်ရန်စိတ်ကြိုက်ပံုစံပြားဖိုင်နာမည် &lt;em&gt;%s&lt;/em&gt; ဖန်တီး။</target>
       </trans-unit>
       <trans-unit id="XPT.errorOccurred">
         <source>An error occurred while executing this script. Something does not work properly.</source>
+        <target>ယခုလိုလျောက်လုပ်ဆောင်ကုဒ်ကိုလုပ်ဆောင်နေစဉ်အမှားပြနေ။ တစ်ခုခုမှသေချာအလုပ်မလုပ်နေ။</target>
       </trans-unit>
       <trans-unit id="XPT.errorFixOne">
         <source>Open the &lt;code&gt;system/logs/error.log&lt;/code&gt; file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</source>
+        <target>&lt;code&gt;system/logs/error.log&lt;/code&gt; ဖိုင်ဖွင့်ပြီးဆက်နွယ်သောအမှားပြမှာကြားချက်ကိုရှာ(အများအားဖြင့်နောက်ဆံုးတစ်ခုဖြစ်လေ့ရှိ)။ ယခုဖော်ပြပါစာကြောင်းကိုစက်တွင်းပံုစံပြင်ခြင်းတွင်ထည့်သွင်းပြီးယခုစာမျက်နှာကိုပြန်လည်စတင်:</target>
       </trans-unit>
       <trans-unit id="XPT.errorFixTwo">
         <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
+        <target>သို့ရာတွင်&lt;strong&gt;မည်သူမဆို&lt;/strong&gt;သင့်ဝဘ်ဆိုက်တွင်ရှိအမှားပြမှာကြားချက်များကိုကြည့်ရှုနိုင်လိမ့်မည်!</target>
       </trans-unit>
       <trans-unit id="XPT.errorExplain">
-        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found it in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
       </trans-unit>
       <trans-unit id="XPT.requestToken">
         <source>Invalid request token</source>
+        <target>တောင်းခံသင်္ကေတမမှန်</target>
       </trans-unit>
       <trans-unit id="XPT.invalidToken">
         <source>The request token could not be verified.</source>
+        <target>တောင်းခံသင်္ကေတကိုမစစ်ဆေးနိုင်။</target>
       </trans-unit>
       <trans-unit id="XPT.tokenRetry">
         <source>Please &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;click this link&lt;/a&gt; and try again. Do not use the back button of your browser.</source>
+        <target>&lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;ယခုကွန်ဆက်ကိုကလစ်နှိုပ်&lt;/a&gt;ပြီးပြန်လုပ်ဆောင်။ ဘရောက်ဇာတွင်ရှိနောက်သို့ခုလုတ်ကိုမသံုးပါနှင့်။</target>
       </trans-unit>
       <trans-unit id="XPT.tokenExplainOne">
         <source>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</source>
+        <target>အတည်ပြုပြီးအထောက်အထားပြသင်္ကေတမရှိဘဲ POST တောင်းခံခြင်းကိုလုပ်ရာတွင်အမှားပြနေ။ ကွန်တောင်၂.၁၀တွင်တောင်းခံခြင်းစစ်ဆေးခြင်းကိုတောင်းခံသင်္ကေတစနစ်ဖြင့်အစားထိုးထား။ ပြသာနာဆက်ပြနေပါကအံဝင်ခွင်ကျမဖြစ်သောအပြင်ပိုင်းနောက်ဆက်တွဲ(သို့)ကွန်တောင်ထည့်သွင်းခြင်းကိုမှန်ကန်စွာမမွမ်းမံရသေး။</target>
       </trans-unit>
       <trans-unit id="XPT.tokenExplainTwo">
         <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>အခြားအချက်အလက်များအတွက်&lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;ကွန်တောင်မကြာခဏမေးမေးခွန်းများ&lt;/a&gt; (သို့) &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;ကွန်တောင်အကူအညီပေးစာမျက်နှာ&lt;/a&gt; သို့လည်ပတ်။</target>
       </trans-unit>
       <trans-unit id="XPT.incomplete">
         <source>Incomplete installation</source>
+        <target>ထည့်သွင်းခြင်းမပြည့်စံု့</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteInstallation">
         <source>The installation has not been completed, therefore Contao cannot work properly.</source>
+        <target>ထည့်သွင်းခြင်းမပြည့်စံု့၊ကွန်တောင်သေချာစွာအလုပ်မလုပ်နိုင်။</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteFixOne">
         <source>Point your browser to the following URL:</source>
+        <target>အောက်ဖော်ပြပါယူအာအယ်သို့ဘရောက်ဇာကိုညွှန်ပြ:</target>
       </trans-unit>
       <trans-unit id="XPT.installPath">
         <source>path-to-installation</source>
+        <target>ထည့်သွင်းခြင်းသို့လမ်းကြောင်း</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteFixTwo">
         <source>This will open the Contao install tool, which will guide you through the installation process.</source>
+        <target>ထည့်သွင်းခြင်းဖြစ်စဉ်ကိုလမ်းညွှန်မည့်ကွန်တောင်ထည့်သွင်းကိရိယာကိုဖွင့်။</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
-        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/3.0/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
       </trans-unit>
     </body>
   </file>

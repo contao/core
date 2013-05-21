@@ -67,9 +67,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.location.0">
         <source>Event location</source>
+        <target>Begivenhedens lokation</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.location.1">
         <source>Here you can enter the event location.</source>
+        <target>Her kan du indtaste hvor begivenheden finder sted.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.teaser.0">
         <source>Event teaser</source>
@@ -121,6 +123,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.repeatEnd">
         <source>End of recurring event</source>
+        <target>Slutningen på gentagende begivenhed</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.addEnclosure.0">
         <source>Add enclosures</source>

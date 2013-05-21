@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.jumpTo.1">
         <source>Please choose the event reader page to which visitors will be redirected when clicking an event.</source>
-        <target>Sélectionner la page qui permettra de lire le détail de l'événement après avoir cliqué sur celui-ci.</target>
+        <target>Sélectionner la page qui permettra aux visiteurs de lire le détail de l'événement après avoir cliqué sur celui-ci.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.allowComments.0">
         <source>Enable comments</source>

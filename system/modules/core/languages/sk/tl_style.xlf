@@ -151,6 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_style.alignment.1">
         <source>Margin, padding, align, vertical-align, text-align and whitespace.</source>
+        <target>Odsadenie zvonku (margin), odsadenie zvnútra (padding), vertikálne zarovnanie (vertical-align), zarovnanie textu (text-align) a zalamovanie riadkov (white-space).</target>
       </trans-unit>
       <trans-unit id="tl_style.margin.0">
         <source>Margin</source>
@@ -194,9 +195,11 @@
       </trans-unit>
       <trans-unit id="tl_style.whitespace.0">
         <source>White-space</source>
+        <target>Zalamovanie riadkov</target>
       </trans-unit>
       <trans-unit id="tl_style.whitespace.1">
         <source>Here you can define how white-space inside an element is handled.</source>
+        <target>Tu môžte určiť, ako bude riešené zalamovanie riadkov vnútri elementu. </target>
       </trans-unit>
       <trans-unit id="tl_style.background.0">
         <source>Background</source>
