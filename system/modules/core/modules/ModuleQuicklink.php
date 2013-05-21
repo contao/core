@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -45,7 +45,7 @@ class ModuleQuicklink extends \Module
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### QUICK LINK ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['quicklink'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -88,9 +88,18 @@ class ModuleQuicklink extends \Module
 
 		$arrPages = array();
 
+		// Sort the array keys according to the given order
+		if ($this->orderPages != '')
+		{
+			$arrPages = array_flip(trimsplit(',', $this->orderPages));
+		}
+
+		$i = 0;
+
+		// Add the items to the pre-sorted array
 		while ($objPages->next())
 		{
-			$arrPages[] = $objPages->row();
+			$arrPages[$i++] = $objPages->current()->loadDetails()->row(); // see #3765
 		}
 
 		$items = array();
@@ -102,7 +111,7 @@ class ModuleQuicklink extends \Module
 
 			$items[] = array
 			(
-				'href' => $this->generateFrontendUrl($arrPage),
+				'href' => $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage']),
 				'title' => specialchars($arrPage['pageTitle'] ?: $arrPage['title']),
 				'link' => $arrPage['title']
 			);

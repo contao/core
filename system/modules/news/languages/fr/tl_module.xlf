@@ -1,0 +1,118 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_module.php" source-language="en">
+    <body>
+      <trans-unit id="tl_module.news_archives.0">
+        <source>News archives</source>
+        <target>Archives d'actualités</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_archives.1">
+        <source>Please select one or more news archives.</source>
+        <target>Sélectionner une ou plusieurs archives d'actualités.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_featured.0">
+        <source>Featured items</source>
+        <target>Éléments vedettes</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_featured.1">
+        <source>Here you can choose how featured items are handled.</source>
+        <target>Choisir comment les éléments vedettes sont gérés.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_jumpToCurrent.0">
+        <source>No period selected</source>
+        <target>Aucune période sélectionnée</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_jumpToCurrent.1">
+        <source>Here you can define what to display if no period is selected.</source>
+        <target>Définir ce qui doit être affiché si aucune période n'est sélectionnée.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_readerModule.0">
+        <source>News reader module</source>
+        <target>Module lecteur d'actualités</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_readerModule.1">
+        <source>Automatically switch to the news reader if an item has been selected.</source>
+        <target>Basculer automatiquement sur le lecteur d'actualités, si un élément a été sélectionné.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_metaFields.0">
+        <source>Meta fields</source>
+        <target>Champs d'en-tête</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_metaFields.1">
+        <source>Here you can select the meta fields.</source>
+        <target>Choisir les champs à inclure dans l'en-tête d'une actualité.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_template.0">
+        <source>News template</source>
+        <target>Modèle d'actualités</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_template.1">
+        <source>Here you can select the news template.</source>
+        <target>Choisir un modèle d'actualités.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_format.0">
+        <source>Archive format</source>
+        <target>Format de l'archive</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_format.1">
+        <source>Here you can choose the news archive format.</source>
+        <target>Choisir le format de l'archive d'actualités.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_startDay.0">
+        <source>Week start day</source>
+        <target>Premier jour de la semaine</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_startDay.1">
+        <source>Here you can choose the week start day.</source>
+        <target>Choisir le premier jour de la semaine.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_order.0">
+        <source>Sort order</source>
+        <target>Ordre de tri</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_order.1">
+        <source>Here you can choose the sort order.</source>
+        <target>Choisir l'ordre de tri.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_showQuantity.0">
+        <source>Show number of items</source>
+        <target>Afficher le nombre d'actualités</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_showQuantity.1">
+        <source>Show the number of news items of each month.</source>
+        <target>Afficher le nombre d'actualités de chaque mois.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_day">
+        <source>Day</source>
+        <target>Jour</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_month">
+        <source>Month</source>
+        <target>Mois</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_year">
+        <source>Year</source>
+        <target>Année</target>
+      </trans-unit>
+      <trans-unit id="tl_module.hide_module">
+        <source>Hide the module</source>
+        <target>Cacher le module</target>
+      </trans-unit>
+      <trans-unit id="tl_module.show_current">
+        <source>Jump to the current period</source>
+        <target>Aller à la période courante</target>
+      </trans-unit>
+      <trans-unit id="tl_module.all_items">
+        <source>Show all news items</source>
+        <target>Afficher toutes les actualités</target>
+      </trans-unit>
+      <trans-unit id="tl_module.featured">
+        <source>Show featured news items only</source>
+        <target>Afficher seulement les actualités vedettes</target>
+      </trans-unit>
+      <trans-unit id="tl_module.unfeatured">
+        <source>Skip featured news items</source>
+        <target>Passer les actualités vedettes</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

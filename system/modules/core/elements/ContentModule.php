@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -46,7 +46,7 @@ class ContentModule extends \ContentElement
 			return '';
 		}
 
-		$strClass = $this->findFrontendModule($objModule->type);
+		$strClass = \Module::findClass($objModule->type);
 
 		if (!class_exists($strClass))
 		{
@@ -54,7 +54,7 @@ class ContentModule extends \ContentElement
 		}
 
 		$objModule->typePrefix = 'ce_';
-		$objModule = new $strClass($objModule);
+		$objModule = new $strClass($objModule, $this->strColumn);
 
 		// Overwrite spacing and CSS ID
 		$objModule->space = $this->space;

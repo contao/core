@@ -1,8 +1,8 @@
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Typolinks
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -22,9 +22,9 @@ var LinkDialog = {
 		var f = document.forms[0], ed = tinyMCEPopup.editor;
 
 		// Setup browse button
-		document.getElementById('hrefbrowsercontainer').innerHTML = getBrowserHTML('hrefbrowser', 'href', 'file', 'theme_advanced_link');
+		document.getElementById('hrefbrowsercontainer').innerHTML = this.getBrowserHTML('hrefbrowser', 'href', 'page', 'theme_advanced_link');
 		if (isVisible('hrefbrowser'))
-			document.getElementById('href').style.width = '180px';
+			document.getElementById('href').style.width = '152px';
 
 		this.fillFileList('link_list', 'tinyMCELinkList');
 		this.fillRelList('rel_list');
@@ -193,6 +193,26 @@ var LinkDialog = {
 			});
 		}/* else
 			dom.remove(dom.getParent(id, 'tr')); PATCH: do not remove */
+	},
+
+
+	getBrowserHTML : function(id, target_form_element, type, prefix) {
+		var option = prefix + "_" + type + "_browser_callback", cb, html;
+
+		cb = tinyMCEPopup.getParam(option, tinyMCEPopup.getParam("file_browser_callback"));
+
+		if (!cb)
+			return "";
+
+		html = "";
+		html += '<a id="' + id + '_link" href="javascript:openBrowser(\'' + id + '\',\'' + target_form_element + '\', \'' + type + '\',\'' + option + '\');" onmousedown="return false;" class="browse">';
+		html += '<span id="' + id + '" title="' + tinyMCEPopup.getLang('browse') + '">&nbsp;</span></a>';
+
+		id = "srcbrowser";
+		html += '<a id="' + id + '_link" href="javascript:openBrowser(\'' + id + '\',\'' + target_form_element + '\', \'image\',\'' + option + '\');" onmousedown="return false;" class="browse">';
+		html += '<span id="' + id + '" title="' + tinyMCEPopup.getLang('browse') + '">&nbsp;</span></a>';
+
+		return html;
 	}
 };
 

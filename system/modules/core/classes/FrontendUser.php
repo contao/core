@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -93,14 +93,15 @@ class FrontendUser extends \User
 		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != \Environment::get('requestUri'))
 		{
 			$session['referer']['last'] = $session['referer']['current'];
-			$session['referer']['current'] = \Environment::get('requestUri');
+			$session['referer']['current'] = substr(\Environment::get('requestUri'), strlen(TL_PATH) + 1);
 		}
 
 		$this->Session->setData($session);
 
 		if ($this->intId)
 		{
-			$this->Database->prepare("UPDATE " . $this->strTable . " SET session=? WHERE id=?")->execute(serialize($session), $this->intId);
+			$this->Database->prepare("UPDATE " . $this->strTable . " SET session=? WHERE id=?")
+						   ->execute(serialize($session), $this->intId);
 		}
 	}
 
@@ -195,7 +196,7 @@ class FrontendUser extends \User
 		$this->log('User "' . $this->username . '" was logged in automatically', get_class($this) . ' authenticate()', TL_ACCESS);
 
 		// Reload the page
-		$this->reload();
+		\Controller::reload();
 		return true;
 	}
 
@@ -304,7 +305,7 @@ class FrontendUser extends \User
 		// Set language
 		if ($this->language != '')
 		{
-			$GLOBALS['TL_LANGUAGE'] = $this->language;
+			$GLOBALS['TL_LANGUAGE'] = str_replace('_', '-', $this->language);
 		}
 
 		$GLOBALS['TL_USERNAME'] = $this->username;

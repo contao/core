@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -63,7 +63,7 @@ class PageError403 extends \Frontend
 		{
 			global $objPage;
 
-			$objPage = $this->getPageDetails($obj403);
+			$objPage = $obj403->loadDetails();
 			$objHandler = new $GLOBALS['TL_PTY']['regular']();
 
 			header('HTTP/1.1 403 Forbidden');

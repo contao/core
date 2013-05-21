@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -113,6 +113,19 @@ class TextField extends \Widget
 			return parent::validator($varInput);
 		}
 
+		if (!$this->multiple)
+		{
+			// Convert to Punycode format (see #5571)
+			if ($this->rgxp == 'url')
+			{
+				$varInput = \Idna::encodeUrl($varInput);
+			}
+			elseif ($this->rgxp == 'email' || $this->rgxp == 'friendly')
+			{
+				$varInput = \Idna::encodeEmail($varInput);
+			}
+		}
+
 		return parent::validator(trim($varInput));
 	}
 
@@ -123,18 +136,18 @@ class TextField extends \Widget
 	 */
 	public function generate()
 	{
-		$type = $this->hideInput ? 'password' : 'text';
+		$strType = $this->hideInput ? 'password' : 'text';
 
 		if (!$this->multiple)
 		{
 			// Hide the Punycode format (see #2750)
-			if ($this->rgxp == 'email' || $this->rgxp == 'url')
+			if ($this->rgxp == 'url' || $this->rgxp == 'email' || $this->rgxp == 'friendly')
 			{
 				$this->varValue = \Idna::decode($this->varValue);
 			}
 
 			return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="tl_text%s" value="%s"%s onfocus="Backend.getScrollOffset()">%s',
-							$type,
+							$strType,
 							$this->strName,
 							$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
@@ -159,7 +172,7 @@ class TextField extends \Widget
 		for ($i=0; $i<$this->size; $i++)
 		{
 			$arrFields[] = sprintf('<input type="%s" name="%s[]" id="ctrl_%s" class="tl_text_%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
-									$type,
+									$strType,
 									$this->strName,
 									$this->strId.'_'.$i,
 									$this->size,

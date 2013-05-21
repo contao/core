@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -41,7 +41,7 @@ class ModuleMaintenance extends \BackendModule
 	 */
 	protected function compile()
 	{
-		$this->loadLanguageFile('tl_maintenance');
+		\System::loadLanguageFile('tl_maintenance');
 
 		$this->Template->content = '';
 		$this->Template->href = $this->getReferer(true);

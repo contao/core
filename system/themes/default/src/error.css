@@ -1,0 +1,95 @@
+/**
+ * Contao Open Source CMS
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
+ * @package Core
+ * @link    https://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+/* Body */
+body {
+	background:#f5f5f5 url("data:image/jpg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBAQFBAYFBQYJBgUGCQsIBgYICwwKCgsKCgwQDAwMDAwMEAwODxAPDgwTExQUExMcGxsbHCAgICAgICAgICD/2wBDAQcHBw0MDRgQEBgaFREVGiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD/wAARCADIAAEDAREAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAgEDB//EABUQAQEAAAAAAAAAAAAAAAAAAAAR/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A7JGWSgHAKAsA4oUA4KcAoCwGkBYBQCgHAKAcFKKFAOAUAogcUWA//9k=") repeat-x;
+}
+
+/* Header */
+#header {
+	width:636px;
+	margin:18px auto 0;
+	padding:1px;
+	background:#fff;
+	border:1px solid #bbb;
+	border-bottom:0;
+	border-radius:3px 3px 0 0;
+}
+#header h1 {
+	margin:0;
+	padding:4px 8px 6px;
+	background:#b3b6b3 url("data:image/gif;base64,R0lGODdhAQAUAPQQAK+yr6Omo6erp66xrrGzsbCzsKSno6msqKWoprG1srK2s6eqpqSnpKyvrKuuq6msqrO2swAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAAAQAUAAAFEGAQGAyyCMfjNANQEIkCzSEAOw==") repeat-x;
+	color:#fff;
+	border-radius:3px 3px 0 0;
+}
+
+/* Container */
+#container {
+	width:640px;
+	margin:0 auto;
+	padding:0;
+}
+
+/* Main */
+#main {
+	width:602px;
+	padding:15px 18px 9px;
+	background:#fff;
+	border:1px solid #bbb;
+	border-top:0;
+	border-radius:0 0 3px 3px;
+	box-shadow:0 3px 6px #ccc;
+}
+
+/* Elements */
+h2 {
+	margin:0 0 12px;
+	padding:5px 38px 5px 0;
+	background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD90lEQVR42u2XW2hURxjHt1LbnpkTLyhEF4UIIl4QFSpS8da0KCgUg/okUVErWvugeEGhQvAhqFTMgxgqCIrigy8BC4lJsFqttTWbdFNC0NZcNteNZDeJe3attvXf/z8PQqmbzZ4E+pKFHznMfN9vvszsmZkNAPhfGSsgq+BvAoHxla6bX2Xt19XGVFQ5To3Qs9rUp5hRL6AyN9dWGvPVXWNiIWvxZPJkdCxahJ6VK9GTn4/OpUvx27RpUJ9iFKucUSnglrWffmdMVz3lXcuWIX7sGBKXL8O7du1fJK5eRd/Jk+hetQr1rgvlKHdEBVQ7zpf3HefP5mAQsePHkeBAwyF+4gSaZ86EcuXwVQDXtPChMWidPRv9587hOf/r/3DlinhrX39JCVrnzIEccmVVQJUxH95znBdNM2YgduoU+i9cgBiQ/MYNJG7ehFdeDq+iQuhZbepTzJt45cohl5zDKoCfd+44zsPGnBz0HDiA2Nmz6L94EQnKvbKyYaFY5Sg3SkfjhAmQU+6MBdx2nIJH1iKyejV6i4sxcOkSvOvXfaFcOSJr1kBOuTMWwNfo2wZWHD10CAOlpfAoGQlyRI8eRQNfXbmHLOBOIOD+wPX6ffFi9J85A+/8+VFBrqd8heXWGGkLuGftJ4+MQcfWrfCYJNoLC9G2cyfaSQfpIt0kumsXesgz0rt7N2IkzudB2D8Ic73TpyE6t22D3BojbQEPjPk85LqIHz4Mr6gIIrJvH/x++pgrh4hzGWq5tBojbQGcooN1ubnwjhxBkgmiZc8e/wVwJhN790IeOX+ZPh0aY6gZ+CLMPT25f/8bmjmVfj/xTZswwHPC41LIFWYBGiNtAdy1PtMSJDduRGrHDoim7dv9F1BQgAQPrcTy5Uhu2YIQ9xaNkX4JjAnyi/K6b948JNeuRWrzZrSsWIGn69ejacMGNK9bhxbuD61si5A2nobt/NtJukg3ieqEJM9IL7dib8ECiL65cyG3xhhyH6gx5ucIpyrF5NT8+UgtWYIUX8vUwoVq842ccmfciGqsPVjHqfLy8vBi1qxRQS455c5YQCgYNCFjOh5z5/qDR+rLESKHXHLKnbEAUcfjU5vGk0mT8JJvxSufKFcOueTM6j4Qdt1SneVhLceUKfhr6tSsUI5y5ZAr6wtJiJfLsDFlP1HwPXnsung+cSL+zoBiFKsc5cohl68rWVEgMI53weKQ47y+S9lt8oA0WIsm0kaEntWmPsUoVjnKlWPEt+Jfc3I+qjfm/uBhQqrToD7FKFY5vm/FurmQceRdMp68lxcIfHDLdT/+0doSfqEaa415VWsthJ7Vpr5y/jZQLHPeV64ccsk59tNsrIC38Q+4Hcil9UQFkgAAAABJRU5ErkJggg==") right center no-repeat;
+	font-size:15px;
+	color:#c55;
+}
+h3 {
+	margin:21px 0 12px;
+}
+pre+h3 {
+	margin-top:12px;
+}
+p {
+	line-height:1.5;
+}
+pre {
+	padding:6px 9px;
+	margin:0 0 12px;
+	border:1px solid #ddd;
+	background:#f9f9f9;
+	border-radius:3px;
+	display:inline-block;
+}
+pre * {
+	font-family:Courier,monospace;
+	font-size:12px;
+}
+code {
+	padding:0 3px;
+	white-space:nowrap;
+	background-color: #f9f9f9;
+	border:1px solid #ddd;
+	border-radius:3px;
+}
+a {
+	text-decoration:underline;
+}
+.hint {
+	margin-top:18px;
+	text-align:center;
+	color:#bbb;
+}

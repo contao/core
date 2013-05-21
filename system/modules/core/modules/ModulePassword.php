@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -45,7 +45,7 @@ class ModulePassword extends \Module
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### LOST PASSWORD ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['lostPassword'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -66,7 +66,7 @@ class ModulePassword extends \Module
 		global $objPage;
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 
-		$this->loadLanguageFile('tl_member');
+		\System::loadLanguageFile('tl_member');
 		$this->loadDataContainer('tl_member');
 
 		// Set new password
@@ -117,7 +117,8 @@ class ModulePassword extends \Module
 			$arrField['eval']['tableless'] = $this->tableless;
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
 
-			$objWidget = new $strClass($this->prepareForWidget($arrField, $arrField['name']));
+			$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, $arrField['name']));
+
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
 			++$row;
@@ -165,7 +166,7 @@ class ModulePassword extends \Module
 		$this->Template->formId = 'tl_lost_password';
 		$this->Template->username = specialchars($GLOBALS['TL_LANG']['MSC']['username']);
 		$this->Template->email = specialchars($GLOBALS['TL_LANG']['MSC']['emailAddress']);
-		$this->Template->action = $this->getIndexFreeRequest();
+		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['requestPassword']);
 		$this->Template->rowLast = 'row_' . count($arrFields) . ' row_last' . ((($row % 2) == 0) ? ' even' : ' odd');
 		$this->Template->tableless = $this->tableless;
@@ -202,7 +203,7 @@ class ModulePassword extends \Module
 			$strClass = 'FormPassword';
 		}
 
-		$objWidget = new $strClass($this->prepareForWidget($arrField, 'password'));
+		$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, 'password'));
 
 		// Set row classes
 		$objWidget->rowClass = 'row_0 row_first even';
@@ -256,7 +257,7 @@ class ModulePassword extends \Module
 
 		$this->Template->formId = $strToken;
 		$this->Template->fields = $objWidget->parse();
-		$this->Template->action = $this->getIndexFreeRequest();
+		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['setNewPassword']);
 		$this->Template->tableless = $this->tableless;
 	}

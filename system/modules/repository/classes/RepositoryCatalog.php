@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package   Repository
  * @author    Peter Koch, IBK Software AG
  * @license   See accompaning file LICENSE.txt
@@ -30,7 +30,7 @@ class RepositoryCatalog extends RepositoryBackendModule
 	public function generate()
 	{
 		if (!extension_loaded('soap')) {
-			$this->loadLanguageFile('tl_repository');
+			System::loadLanguageFile('tl_repository');
 			return '<p class="tl_empty">'.$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule'].'</p>';
 		} // if
 		$this->actions = array(

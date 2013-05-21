@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -213,7 +213,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['options'],
 			'exclude'                 => true,
 			'inputType'               => 'optionWizard',
-			'eval'                    => array('mandatory'=>true),
+			'eval'                    => array('mandatory'=>true, 'allowHtml'=>true),
 			'sql'                     => "blob NULL"
 		),
 		'mandatory' => array
@@ -654,7 +654,7 @@ class tl_form_field extends Backend
 			$icon = 'invisible.gif';
 		}
 
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 
@@ -670,7 +670,8 @@ class tl_form_field extends Backend
 		Input::setGet('act', 'toggle');
 		$this->checkPermission();
 
-		$this->createInitialVersion('tl_form_field', $intId);
+		$objVersions = new Versions('tl_form_field', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_form_field']['fields']['invisible']['save_callback']))
@@ -686,7 +687,7 @@ class tl_form_field extends Backend
 		$this->Database->prepare("UPDATE tl_form_field SET tstamp=". time() .", invisible='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_form_field', $intId);
+		$objVersions->create();
 		$this->log('A new version of record "tl_form_field.id='.$intId.'" has been created'.$this->getParentEntries('tl_form_field', $intId), 'tl_form_field toggleVisibility()', TL_GENERAL);
 	}
 }

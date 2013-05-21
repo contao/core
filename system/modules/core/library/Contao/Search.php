@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,26 +15,26 @@ namespace Contao;
 
 /**
  * Creates and queries the search index
- * 
+ *
  * The class takes the HTML markup of a page, exctracts the content and writes
  * it to the database (search index). It also provides a method to query the
  * seach index, returning the matching entries.
- * 
+ *
  * Usage:
- * 
+ *
  *     Search::indexPage($objPage->row());
  *     $result = Search::searchFor('keyword');
- * 
+ *
  *     while ($result->next())
  *     {
  *         echo $result->url;
  *     }
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
  */
-class Search extends \System
+class Search
 {
 
 	/**
@@ -46,9 +46,9 @@ class Search extends \System
 
 	/**
 	 * Index a page
-	 * 
+	 *
 	 * @param array $arrData The data array
-	 * 
+	 *
 	 * @return boolean True if a new record was created
 	 */
 	public static function indexPage($arrData)
@@ -212,8 +212,8 @@ class Search extends \System
 			// Keep the existing record
 			if ($objDuplicates->numRows)
 			{
-				// Update the URL if the new URL is shorter
-				if (substr_count($arrSet['url'], '/') < substr_count($objDuplicates->url, '/') || preg_match('/page=[0-9]*$/', $objDuplicates->url))
+				// Update the URL if the new URL is shorter or the current URL is not canonical
+				if (substr_count($arrSet['url'], '/') < substr_count($objDuplicates->url, '/') || strncmp($arrSet['url'] . '?', $objDuplicates->url, utf8_strlen($arrSet['url']) + 1) === 0)
 				{
 					$objDatabase->prepare("UPDATE tl_search SET url=? WHERE id=?")
 								->execute($arrSet['url'], $objDuplicates->id);
@@ -240,11 +240,11 @@ class Search extends \System
 		// Remove special characters
 		if (function_exists('mb_eregi_replace'))
 		{
-			$strText = mb_eregi_replace('[^[:alnum:]\'\.:,_-]|- | -|\' | \'|\. |\.$|: |:$|, |,$', ' ', $strText);
+			$strText = mb_eregi_replace('[^[:alnum:]\'\.:,\+_-]|- | -|\' | \'|\. |\.$|: |:$|, |,$', ' ', $strText);
 		}
 		else
 		{
-			$strText = preg_replace(array('/- /', '/ -/', "/' /", "/ '/", '/\. /', '/\.$/', '/: /', '/:$/', '/, /', '/,$/', '/[^\pN\pL\'\.:,_-]/u'), ' ', $strText);
+			$strText = preg_replace(array('/- /', '/ -/', "/' /", "/ '/", '/\. /', '/\.$/', '/: /', '/:$/', '/, /', '/,$/', '/[^\pN\pL\'\.:,\+_-]/u'), ' ', $strText);
 		}
 
 		// Split words
@@ -254,6 +254,12 @@ class Search extends \System
 		// Index words
 		foreach ($arrWords as $strWord)
 		{
+			// Strip a leading plus (see #4497)
+			if (strncmp($strWord, '+', 1) === 0)
+			{
+				$strWord = substr($strWord, 1);
+			}
+
 			$strWord = trim($strWord);
 
 			if (!strlen($strWord) || preg_match('/^[\.:,\'_-]+$/', $strWord))
@@ -307,16 +313,16 @@ class Search extends \System
 
 	/**
 	 * Search the index and return the result object
-	 * 
+	 *
 	 * @param string  $strKeywords The keyword string
 	 * @param boolean $blnOrSearch If true, the result can contain any keyword
 	 * @param array   $arrPid      An optional array of page IDs to limit the result to
 	 * @param integer $intRows     An optional maximum number of result rows
 	 * @param integer $intOffset   An optional result offset
 	 * @param boolean $blnFuzzy    If true, the search will be fuzzy
-	 * 
+	 *
 	 * @return \Database\Result The database result object
-	 * 
+	 *
 	 * @throws \Exception If the cleaned keyword string is empty
 	 */
 	public static function searchFor($strKeywords, $blnOrSearch=false, $arrPid=array(), $intRows=0, $intOffset=0, $blnFuzzy=false)
@@ -500,7 +506,7 @@ class Search extends \System
 		}
 
 		// Limit results to a particular set of pages
-		if (is_array($arrPid) && !empty($arrPid))
+		if (!empty($arrPid) && is_array($arrPid))
 		{
 			$strQuery .= " AND tl_search_index.pid IN(SELECT id FROM tl_search WHERE pid IN(" . implode(',', array_map('intval', $arrPid)) . "))";
 		}
@@ -537,7 +543,7 @@ class Search extends \System
 
 	/**
 	 * Remove an entry from the search index
-	 * 
+	 *
 	 * @param string $strUrl The URL to be removed
 	 */
 	public static function removeEntry($strUrl)
@@ -561,7 +567,7 @@ class Search extends \System
 
 	/**
 	 * Prevent cloning of the object (Singleton)
-	 * 
+	 *
 	 * @deprecated Search is now a static class
 	 */
 	final public function __clone() {}
@@ -569,9 +575,9 @@ class Search extends \System
 
 	/**
 	 * Return the object instance (Singleton)
-	 * 
+	 *
 	 * @return \Search The object instance
-	 * 
+	 *
 	 * @deprecated Search is now a static class
 	 */
 	public static function getInstance()

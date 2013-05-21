@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package News
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -45,7 +45,7 @@ class ModuleNewsArchive extends \ModuleNews
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### NEWS ARCHIVE ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['newsarchive'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -126,7 +126,7 @@ class ModuleNewsArchive extends \ModuleNews
 			$objDate = new \Date($strDate, 'Ym');
 			$intBegin = $objDate->monthBegin;
 			$intEnd = $objDate->monthEnd;
-			$this->headline .= ' ' . $this->parseDate('F Y', $objDate->tstamp);
+			$this->headline .= ' ' . \Date::parse('F Y', $objDate->tstamp);
 		}
 		// Display day
 		elseif (\Input::get('day'))
@@ -135,7 +135,7 @@ class ModuleNewsArchive extends \ModuleNews
 			$objDate = new \Date($strDate, 'Ymd');
 			$intBegin = $objDate->dayBegin;
 			$intEnd = $objDate->dayEnd;
-			$this->headline .= ' ' . $this->parseDate($objPage->dateFormat, $objDate->tstamp);
+			$this->headline .= ' ' . \Date::parse($objPage->dateFormat, $objDate->tstamp);
 		}
 		// Show all items
 		elseif ($this->news_jumpToCurrent == 'all_items')
@@ -177,7 +177,7 @@ class ModuleNewsArchive extends \ModuleNews
 				$offset = (max($page, 1) - 1) * $this->perPage;
 
 				// Add the pagination menu
-				$objPagination = new \Pagination($total, $this->perPage, 7, $id);
+				$objPagination = new \Pagination($total, $this->perPage, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
 				$this->Template->pagination = $objPagination->generate("\n  ");
 			}
 		}

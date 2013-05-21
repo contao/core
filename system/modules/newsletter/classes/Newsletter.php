@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Newsletter
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -60,7 +60,7 @@ class Newsletter extends \Backend
 		// Add default sender address
 		if ($objNewsletter->sender == '')
 		{
-			list($objNewsletter->senderName, $objNewsletter->sender) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
+			list($objNewsletter->senderName, $objNewsletter->sender) = \String::splitFriendlyEmail($GLOBALS['TL_CONFIG']['adminEmail']);
 		}
 
 		$arrAttachments = array();
@@ -71,7 +71,7 @@ class Newsletter extends \Backend
 		{
 			$files = deserialize($objNewsletter->files);
 
-			if (is_array($files) && !empty($files))
+			if (!empty($files) && is_array($files))
 			{
 				// Check for version 3 format
 				if (!is_numeric($files[0]))
@@ -254,7 +254,7 @@ class Newsletter extends \Backend
   <tr class="row_2">
     <td class="col_0">' . $GLOBALS['TL_LANG']['tl_newsletter']['template'][0] . '</td>
     <td class="col_1">' . $objNewsletter->template . '</td>
-  </tr>' . ((is_array($arrAttachments) && !empty($arrAttachments)) ? '
+  </tr>' . ((!empty($arrAttachments) && is_array($arrAttachments)) ? '
   <tr class="row_3">
     <td class="col_0">' . $GLOBALS['TL_LANG']['tl_newsletter']['attachments'] . '</td>
     <td class="col_1">' . implode(', ', $arrAttachments) . '</td>
@@ -338,7 +338,7 @@ class Newsletter extends \Backend
 		$objEmail->logFile = 'newsletter_' . $objNewsletter->id . '.log';
 
 		// Attachments
-		if (is_array($arrAttachments) && !empty($arrAttachments))
+		if (!empty($arrAttachments) && is_array($arrAttachments))
 		{
 			foreach ($arrAttachments as $strAttachment)
 			{
@@ -708,7 +708,7 @@ class Newsletter extends \Backend
 		$arrDelete = array_values(array_diff($arrChannel, $varValue));
 
 		// Delete existing recipients
-		if (is_array($arrDelete) && !empty($arrDelete))
+		if (!empty($arrDelete) && is_array($arrDelete))
 		{
 			$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE pid IN(" . implode(',', array_map('intval', $arrDelete)) . ") AND email=?")
 						   ->execute($objUser->email);
@@ -916,7 +916,7 @@ class Newsletter extends \Backend
 				if (!isset($arrProcessed[$objNewsletter->jumpTo]))
 				{
 					$domain = \Environment::get('base');
-					$objParent = $this->getPageDetails($objNewsletter->jumpTo);
+					$objParent = \PageModel::findWithDetails($objNewsletter->jumpTo);
 
 					// The target page does not exist
 					if ($objParent === null)

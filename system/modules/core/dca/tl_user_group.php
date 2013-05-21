@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -14,7 +14,7 @@
 /**
  * Load tl_user language file
  */
-$this->loadLanguageFile('tl_user');
+System::loadLanguageFile('tl_user');
 
 
 /**
@@ -179,7 +179,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'exclude'                 => true,
 			'default'                 => array('f1', 'f2', 'f3'),
 			'inputType'               => 'checkbox',
-			'options'                 => array('f1', 'f2', 'f3', 'f4', 'f5'),
+			'options'                 => array('f1', 'f2', 'f3', 'f4', 'f5', 'f6'),
 			'reference'               => &$GLOBALS['TL_LANG']['FOP'],
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "blob NULL"
@@ -275,7 +275,7 @@ class tl_user_group extends Backend
 			$image .= '_';
 		}
 
-		return sprintf('<div class="list_icon" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">%s</div>', TL_ASSETS_URL, $this->getTheme(), $image, $label);
+		return sprintf('<div class="list_icon" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">%s</div>', TL_ASSETS_URL, Backend::getTheme(), $image, $label);
 	}
 
 
@@ -327,7 +327,7 @@ class tl_user_group extends Backend
 				$included[] = $strFile;
 				$strTable = str_replace('.php', '', $strFile);
 
-				$this->loadLanguageFile($strTable);
+				System::loadLanguageFile($strTable);
 				$this->loadDataContainer($strTable);
 			}
 		}
@@ -385,7 +385,7 @@ class tl_user_group extends Backend
 			$icon = 'invisible.gif';
 		}
 
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 
@@ -403,7 +403,8 @@ class tl_user_group extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->createInitialVersion('tl_user_group', $intId);
+		$objVersions = new Versions('tl_user_group', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_user_group']['fields']['disable']['save_callback']))
@@ -419,6 +420,7 @@ class tl_user_group extends Backend
 		$this->Database->prepare("UPDATE tl_user_group SET tstamp=". time() .", disable='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_user_group', $intId);
+		$objVersions->create();
+		$this->log('A new version of record "tl_user_group.id='.$intId.'" has been created'.$this->getParentEntries('tl_user_group', $intId), 'tl_user_group toggleVisibility()', TL_GENERAL);
 	}
 }

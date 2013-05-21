@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -45,7 +45,7 @@ class ModuleCustomnav extends \Module
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### CUSTOM NAVIGATION MENU ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['customnav'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -95,9 +95,18 @@ class ModuleCustomnav extends \Module
 
 		$arrPages = array();
 
+		// Sort the array keys according to the given order
+		if ($this->orderPages != '')
+		{
+			$arrPages = array_flip(trimsplit(',', $this->orderPages));
+		}
+
+		$i = 0;
+
+		// Add the items to the pre-sorted array
 		while ($objPages->next())
 		{
-			$arrPages[] = $objPages->row();
+			$arrPages[$i++] = $objPages->current()->loadDetails()->row(); // see #3765
 		}
 
 		// Set default template
@@ -128,13 +137,22 @@ class ModuleCustomnav extends \Module
 					case 'forward':
 						if (($objNext = \PageModel::findPublishedById($arrPage['jumpTo'])) !== null)
 						{
-							$href = $this->generateFrontendUrl($objNext->row());
+							$strForceLang = null;
+
+							// Check the target page language (see #4706)
+							if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+							{
+								$objNext->loadDetails(); // see #3983
+								$strForceLang = $objNext->language;
+							}
+
+							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
 							break;
 						}
 						// DO NOT ADD A break; STATEMENT
 
 					default:
-						$href = $this->generateFrontendUrl($arrPage);
+						$href = $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage']);
 						break;
 				}
 
@@ -197,7 +215,7 @@ class ModuleCustomnav extends \Module
 
 		$objTemplate->items = $items;
 
-		$this->Template->request = $this->getIndexFreeRequest(true);
+		$this->Template->request = \Environment::get('indexFreeRequest');
 		$this->Template->skipId = 'skipNavigation' . $this->id;
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
 		$this->Template->items = !empty($items) ? $objTemplate->parse() : '';

@@ -1,8 +1,8 @@
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -42,7 +42,7 @@ select,input,textarea {
 /**
  * Apply the holy grail CSS layout if the screen is at least 768 pixel wide,
  * otherwise display all columns underneath each other
- * 
+ *
  * @see http://www.alistapart.com/articles/holygrail
  */
 #main,#left,#right {
@@ -95,8 +95,12 @@ select,input,textarea {
 img {
 	max-width:100%;
 	height:auto;
-	-ms-interpolation-mode:bicubic; /* IE7 */
-	width:auto\9; /* IE8 */
+}
+.ie7 img {
+	-ms-interpolation-mode:bicubic;
+}
+.ie8 img {
+	width:auto; /* see #5789 */
 }
 
 /**
@@ -107,7 +111,7 @@ img {
 	padding:0;
 	overflow:hidden;
 	list-style:none;
-}																																																																																																																																																																																																																																																						
+}
 .ce_gallery li {
 	float:left;
 }

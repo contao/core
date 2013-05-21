@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -78,19 +78,45 @@ class BackendUser extends \User
 	{
 		$session = $this->Session->getData();
 
-		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && \Input::get('do') != 'feRedirect' && $session['referer']['current'] != \Environment::get('requestUri'))
+		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && \Input::get('do') != 'feRedirect' && !\Environment::get('isAjaxRequest'))
 		{
-			// Main script
+			$key = null;
+
 			if (\Environment::get('script') == 'contao/main.php')
 			{
-				$session['referer']['last'] = $session['referer']['current'];
-				$session['referer']['current'] = \Environment::get('requestUri');
+				$key = \Input::get('popup') ? 'popupReferer' : 'referer';
 			}
-			// File manager
-			elseif (\Environment::get('script') == 'contao/files.php')
+
+			if ($key !== null)
 			{
-				$session['fileReferer']['last'] = $session['referer']['current'];
-				$session['fileReferer']['current'] = \Environment::get('requestUri');
+				if (!is_array($session[$key]) || !is_array($session[$key][TL_REFERER_ID]))
+				{
+					$session[$key][TL_REFERER_ID]['last'] = '';
+				}
+
+				if (count($session[$key]) >= 25)
+				{
+					array_shift($session[$key]);
+				}
+
+				$ref = \Input::get('ref');
+
+				if ($ref != '' && isset($session[$key][$ref]))
+				{
+					if (!isset($session[$key][TL_REFERER_ID]))
+					{
+						$session[$key][TL_REFERER_ID] = array();
+					}
+
+					$session[$key][TL_REFERER_ID] = array_merge($session[$key][TL_REFERER_ID], $session[$key][$ref]);
+					$session[$key][TL_REFERER_ID]['last'] = $session[$key][$ref]['current'];
+				}
+				elseif (count($session[$key]) > 1)
+				{
+					$session[$key][TL_REFERER_ID] = end($session[$key]);
+				}
+
+				$session[$key][TL_REFERER_ID]['current'] = substr(\Environment::get('requestUri'), strlen(TL_PATH) + 1);
 			}
 		}
 
@@ -171,7 +197,7 @@ class BackendUser extends \User
 			exit;
 		}
 
-		$this->redirect($strRedirect);
+		\Controller::redirect($strRedirect);
 	}
 
 
@@ -315,8 +341,8 @@ class BackendUser extends \User
 			}
 		}
 
-		$GLOBALS['TL_LANGUAGE'] = $this->language;
 		$GLOBALS['TL_USERNAME'] = $this->username;
+		$GLOBALS['TL_LANGUAGE'] = str_replace('_', '-', $this->language);
 
 		$GLOBALS['TL_CONFIG']['showHelp'] = $this->showHelp;
 		$GLOBALS['TL_CONFIG']['useRTE'] = $this->useRTE;
@@ -329,7 +355,7 @@ class BackendUser extends \User
 		$depends = array('modules', 'themes', 'pagemounts', 'alpty', 'filemounts', 'fop', 'forms', 'formp');
 
 		// HOOK: Take custom permissions
-		if (is_array($GLOBALS['TL_PERMISSIONS']) && !empty($GLOBALS['TL_PERMISSIONS']))
+		if (!empty($GLOBALS['TL_PERMISSIONS']) && is_array($GLOBALS['TL_PERMISSIONS']))
 		{
 		    $depends = array_merge($depends, $GLOBALS['TL_PERMISSIONS']);
 		}
@@ -429,7 +455,7 @@ class BackendUser extends \User
 		{
 			$session['backend_modules'][\Input::get('mtg')] = (isset($session['backend_modules'][\Input::get('mtg')]) && $session['backend_modules'][\Input::get('mtg')] == 0) ? 1 : 0;
 			$this->Session->setData($session);
-			$this->redirect(preg_replace('/(&(amp;)?|\?)mtg=[^& ]*/i', '', \Environment::get('request')));
+			\Controller::redirect(preg_replace('/(&(amp;)?|\?)mtg=[^& ]*/i', '', \Environment::get('request')));
 		}
 
 		$arrInactiveModules = deserialize($GLOBALS['TL_CONFIG']['inactiveModules']);
@@ -442,7 +468,7 @@ class BackendUser extends \User
 				$arrModules[$strGroupName]['icon'] = 'modMinus.gif';
 				$arrModules[$strGroupName]['title'] = specialchars($GLOBALS['TL_LANG']['MSC']['collapseNode']);
 				$arrModules[$strGroupName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strGroupName]) ? $GLOBALS['TL_LANG']['MOD'][$strGroupName][0] : $GLOBALS['TL_LANG']['MOD'][$strGroupName]) != false) ? $label : $strGroupName;
-				$arrModules[$strGroupName]['href'] = $this->addToUrl('mtg=' . $strGroupName);
+				$arrModules[$strGroupName]['href'] = \Controller::addToUrl('mtg=' . $strGroupName);
 
 				// Do not show the modules if the group is closed
 				if (!$blnShowAll && isset($session['backend_modules'][$strGroupName]) && $session['backend_modules'][$strGroupName] < 1)
@@ -467,9 +493,9 @@ class BackendUser extends \User
 							$arrModules[$strGroupName]['modules'][$strModuleName] = $arrModuleConfig;
 							$arrModules[$strGroupName]['modules'][$strModuleName]['title'] = specialchars($GLOBALS['TL_LANG']['MOD'][$strModuleName][1]);
 							$arrModules[$strGroupName]['modules'][$strModuleName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strModuleName]) ? $GLOBALS['TL_LANG']['MOD'][$strModuleName][0] : $GLOBALS['TL_LANG']['MOD'][$strModuleName]) != false) ? $label : $strModuleName;
-							$arrModules[$strGroupName]['modules'][$strModuleName]['icon'] = ($arrModuleConfig['icon'] != '') ? sprintf(' style="background-image:url(\'%s%s\')"', TL_ASSETS_URL, $arrModuleConfig['icon']) : '';
+							$arrModules[$strGroupName]['modules'][$strModuleName]['icon'] = !empty($arrModuleConfig['icon']) ? sprintf(' style="background-image:url(\'%s%s\')"', TL_ASSETS_URL, $arrModuleConfig['icon']) : '';
 							$arrModules[$strGroupName]['modules'][$strModuleName]['class'] = 'navigation ' . $strModuleName;
-							$arrModules[$strGroupName]['modules'][$strModuleName]['href']  = \Environment::get('script') . '?do=' . $strModuleName;
+							$arrModules[$strGroupName]['modules'][$strModuleName]['href']  = \Environment::get('script') . '?do=' . $strModuleName . '&amp;ref=' . TL_REFERER_ID;
 
 							// Mark the active module and its group
 							if (\Input::get('do') == $strModuleName)

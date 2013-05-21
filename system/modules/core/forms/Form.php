@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -232,8 +232,9 @@ class Form extends \Hybrid
 		$this->Template->attributes = $strAttributes;
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 		$this->Template->formId = $arrAttributes[0] ?: 'f'.$this->id;
-		$this->Template->action = $this->getIndexFreeRequest();
+		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->maxFileSize = $hasUpload ? $this->objModel->getMaxUploadFileSize() : false;
+		$this->Template->novalidate = $this->novalidate ? ' novalidate' : '';
 
 		// Get the target URL
 		if ($this->method == 'GET' && $this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)

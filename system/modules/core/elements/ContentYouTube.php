@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -69,7 +69,7 @@ class ContentYouTube extends \ContentElement
 
 			if (is_array($size))
 			{
-				$this->Template->size = ' width="' . $size[0] . 'px" height="' . $size[1] . 'px"';
+				$this->Template->size = ' width="' . $size[0] . '" height="' . $size[1] . '"';
 			}
 		}
 

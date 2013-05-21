@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_page.php" source-language="en">
+    <body>
+      <trans-unit id="tl_page.title.0">
+        <source>Page name</source>
+      </trans-unit>
+      <trans-unit id="tl_page.title.1">
+        <source>Please enter the page name.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.alias.0">
+        <source>Page alias</source>
+      </trans-unit>
+      <trans-unit id="tl_page.alias.1">
+        <source>The page alias is a unique reference to the page which can be called instead of its numeric ID.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.type.0">
+        <source>Page type</source>
+      </trans-unit>
+      <trans-unit id="tl_page.type.1">
+        <source>Please choose the page type.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.pageTitle.0">
+        <source>Page title</source>
+      </trans-unit>
+      <trans-unit id="tl_page.pageTitle.1">
+        <source>Please enter the page title.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.language.0">
+        <source>Language</source>
+      </trans-unit>
+      <trans-unit id="tl_page.language.1">
+        <source>Please enter the page language according to the ISO-639-1 standard (e.g. "en" for English or "en-US" for American English).</source>
+      </trans-unit>
+      <trans-unit id="tl_page.robots.0">
+        <source>Robots tag</source>
+      </trans-unit>
+      <trans-unit id="tl_page.robots.1">
+        <source>Here you can define how search engines handle the page.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.description.0">
+        <source>Page description</source>
+      </trans-unit>
+      <trans-unit id="tl_page.description.1">
+        <source>Here you can enter a short description of the page which will be evaluated by search engines like Google or Yahoo. Search engines usually indicate between 150 and 300 characters.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.redirect.0">
+        <source>Redirect type</source>
+      </trans-unit>
+      <trans-unit id="tl_page.redirect.1">
+        <source>Please choose the redirect type.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.jumpTo.0">
+        <source>Redirect page</source>
+      </trans-unit>
+      <trans-unit id="tl_page.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected. Leave blank to redirect to the first regular subpage.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.fallback.0">
+        <source>Language fallback</source>
+      </trans-unit>
+      <trans-unit id="tl_page.fallback.1">
+        <source>Show this page if there is none that matches the visitor's language.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.dns.0">
+        <source>Domain name</source>
+      </trans-unit>
+      <trans-unit id="tl_page.dns.1">
+        <source>Here you can restrict the access to the website to a certain domain name.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.adminEmail.0">
+        <source>E-mail address of the website administrator</source>
+      </trans-unit>
+      <trans-unit id="tl_page.adminEmail.1">
+        <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.dateFormat.0">
+        <source>Date format</source>
+      </trans-unit>
+      <trans-unit id="tl_page.dateFormat.1">
+        <source>The date format string will be parsed with the PHP date() function.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.timeFormat.0">
+        <source>Time format</source>
+      </trans-unit>
+      <trans-unit id="tl_page.timeFormat.1">
+        <source>The time format string will be parsed with the PHP date() function.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.datimFormat.0">
+        <source>Date and time format</source>
+      </trans-unit>
+      <trans-unit id="tl_page.datimFormat.1">
+        <source>The date and time format string will be parsed with the PHP date() function.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.createSitemap.0">
+        <source>Create an XML sitemap</source>
+      </trans-unit>
+      <trans-unit id="tl_page.createSitemap.1">
+        <source>Create a Google XML sitemap in the &lt;em&gt;share/&lt;/em&gt; directory.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemapName.0">
+        <source>Sitemap file name</source>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemapName.1">
+        <source>Please enter the name of the sitemap file without extension.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.useSSL.0">
+        <source>Use HTTPS in sitemaps</source>
+      </trans-unit>
+      <trans-unit id="tl_page.useSSL.1">
+        <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.autoforward.0">
+        <source>Forward to another page</source>
+      </trans-unit>
+      <trans-unit id="tl_page.autoforward.1">
+        <source>Redirect visitors to another page (e.g. a login page).</source>
+      </trans-unit>
+      <trans-unit id="tl_page.protected.0">
+        <source>Protect page</source>
+      </trans-unit>
+      <trans-unit id="tl_page.protected.1">
+        <source>Restrict page access to certain member groups.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.groups.0">
+        <source>Allowed member groups</source>
+      </trans-unit>
+      <trans-unit id="tl_page.groups.1">
+        <source>These groups will be able to access the page.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.includeLayout.0">
+        <source>Assign a layout</source>
+      </trans-unit>
+      <trans-unit id="tl_page.includeLayout.1">
+        <source>Assign a page layout to the page and its subpages.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.layout.0">
+        <source>Page layout</source>
+      </trans-unit>
+      <trans-unit id="tl_page.layout.1">
+        <source>You can manage page layouts with the "themes" module.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.mobileLayout.0">
+        <source>Mobile page layout</source>
+      </trans-unit>
+      <trans-unit id="tl_page.mobileLayout.1">
+        <source>This layout will be used if the visitor uses a mobile device.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.includeCache.0">
+        <source>Set cache timeout</source>
+      </trans-unit>
+      <trans-unit id="tl_page.includeCache.1">
+        <source>Set a cache timeout value for the page and its subpages.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.cache.0">
+        <source>Cache timeout</source>
+      </trans-unit>
+      <trans-unit id="tl_page.cache.1">
+        <source>After this period, the cached version of the page will expire.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.includeChmod.0">
+        <source>Assign access rights</source>
+      </trans-unit>
+      <trans-unit id="tl_page.includeChmod.1">
+        <source>Access rights determine what back end users can do with the page.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.cuser.0">
+        <source>Owner</source>
+      </trans-unit>
+      <trans-unit id="tl_page.cuser.1">
+        <source>Please select a user as the owner of the page.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.cgroup.0">
+        <source>Group</source>
+      </trans-unit>
+      <trans-unit id="tl_page.cgroup.1">
+        <source>Please select a group as the owner of the page.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.chmod.0">
+        <source>Access rights</source>
+      </trans-unit>
+      <trans-unit id="tl_page.chmod.1">
+        <source>Please assign the access rights for the page and its subpages.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.noSearch.0">
+        <source>Do not search</source>
+      </trans-unit>
+      <trans-unit id="tl_page.noSearch.1">
+        <source>Exclude the page from the search index.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.cssClass.0">
+        <source>CSS class</source>
+      </trans-unit>
+      <trans-unit id="tl_page.cssClass.1">
+        <source>The class(es) will be used in the navigation menu and the &amp;lt;body&amp;gt; tag.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemap.0">
+        <source>Show in sitemap</source>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemap.1">
+        <source>Here you can define whether the page is shown in the sitemap.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.hide.0">
+        <source>Hide from navigation</source>
+      </trans-unit>
+      <trans-unit id="tl_page.hide.1">
+        <source>Hide the page from the navigation menu.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.guests.0">
+        <source>Show to guests only</source>
+      </trans-unit>
+      <trans-unit id="tl_page.guests.1">
+        <source>Hide the page if there is an authenticated user.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.tabindex.0">
+        <source>Tab index</source>
+      </trans-unit>
+      <trans-unit id="tl_page.tabindex.1">
+        <source>The position of the navigation item in the tabbing order.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.accesskey.0">
+        <source>Access key</source>
+      </trans-unit>
+      <trans-unit id="tl_page.accesskey.1">
+        <source>A navigation item can be focused by pressing the [ALT] or [CTRL] key and the access key simultaneously.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.published.0">
+        <source>Publish page</source>
+      </trans-unit>
+      <trans-unit id="tl_page.published.1">
+        <source>Make the page publicly visible on the website.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.start.0">
+        <source>Show from</source>
+      </trans-unit>
+      <trans-unit id="tl_page.start.1">
+        <source>Do not show the page on the website before this day.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.stop.0">
+        <source>Show until</source>
+      </trans-unit>
+      <trans-unit id="tl_page.stop.1">
+        <source>Do not show the page on the website on and after this day.</source>
+      </trans-unit>
+      <trans-unit id="tl_page.title_legend">
+        <source>Name and type</source>
+      </trans-unit>
+      <trans-unit id="tl_page.meta_legend">
+        <source>Meta information</source>
+      </trans-unit>
+      <trans-unit id="tl_page.system_legend">
+        <source>System settings</source>
+      </trans-unit>
+      <trans-unit id="tl_page.redirect_legend">
+        <source>Redirect settings</source>
+      </trans-unit>
+      <trans-unit id="tl_page.dns_legend">
+        <source>DNS settings</source>
+      </trans-unit>
+      <trans-unit id="tl_page.global_legend">
+        <source>Global settings</source>
+      </trans-unit>
+      <trans-unit id="tl_page.mobile_legend">
+        <source>Mobile settings</source>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemap_legend">
+        <source>XML sitemap</source>
+      </trans-unit>
+      <trans-unit id="tl_page.forward_legend">
+        <source>Auto-forward</source>
+      </trans-unit>
+      <trans-unit id="tl_page.protected_legend">
+        <source>Access protection</source>
+      </trans-unit>
+      <trans-unit id="tl_page.layout_legend">
+        <source>Layout settings</source>
+      </trans-unit>
+      <trans-unit id="tl_page.cache_legend">
+        <source>Cache settings</source>
+      </trans-unit>
+      <trans-unit id="tl_page.chmod_legend">
+        <source>Access rights</source>
+      </trans-unit>
+      <trans-unit id="tl_page.search_legend">
+        <source>Search settings</source>
+      </trans-unit>
+      <trans-unit id="tl_page.expert_legend">
+        <source>Expert settings</source>
+      </trans-unit>
+      <trans-unit id="tl_page.tabnav_legend">
+        <source>Keyboard navigation</source>
+      </trans-unit>
+      <trans-unit id="tl_page.publish_legend">
+        <source>Publish settings</source>
+      </trans-unit>
+      <trans-unit id="tl_page.permanent">
+        <source>301 Permanent redirect</source>
+      </trans-unit>
+      <trans-unit id="tl_page.temporary">
+        <source>302 Temporary redirect</source>
+      </trans-unit>
+      <trans-unit id="tl_page.map_default">
+        <source>Default</source>
+      </trans-unit>
+      <trans-unit id="tl_page.map_always">
+        <source>Show always</source>
+      </trans-unit>
+      <trans-unit id="tl_page.map_never">
+        <source>Show never</source>
+      </trans-unit>
+      <trans-unit id="tl_page.new.0">
+        <source>New page</source>
+      </trans-unit>
+      <trans-unit id="tl_page.new.1">
+        <source>Create a new page</source>
+      </trans-unit>
+      <trans-unit id="tl_page.show.0">
+        <source>Page details</source>
+      </trans-unit>
+      <trans-unit id="tl_page.show.1">
+        <source>Show the details of page ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_page.edit.0">
+        <source>Edit page</source>
+      </trans-unit>
+      <trans-unit id="tl_page.edit.1">
+        <source>Edit page ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_page.cut.0">
+        <source>Move page</source>
+      </trans-unit>
+      <trans-unit id="tl_page.cut.1">
+        <source>Move page ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_page.copy.0">
+        <source>Duplicate page</source>
+      </trans-unit>
+      <trans-unit id="tl_page.copy.1">
+        <source>Duplicate page ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_page.copyChilds.0">
+        <source>Duplicate with subpages</source>
+      </trans-unit>
+      <trans-unit id="tl_page.copyChilds.1">
+        <source>Duplicate page ID %s with its subpages</source>
+      </trans-unit>
+      <trans-unit id="tl_page.delete.0">
+        <source>Delete page</source>
+      </trans-unit>
+      <trans-unit id="tl_page.delete.1">
+        <source>Delete page ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_page.toggle.0">
+        <source>Publish/unpublish page</source>
+      </trans-unit>
+      <trans-unit id="tl_page.toggle.1">
+        <source>Publish/unpublish page ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteafter.0">
+        <source>Paste after</source>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteafter.1">
+        <source>Paste after page ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteinto.0">
+        <source>Paste into</source>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteinto.1">
+        <source>Paste into page ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_page.articles.0">
+        <source>Edit articles</source>
+      </trans-unit>
+      <trans-unit id="tl_page.articles.1">
+        <source>Edit the articles of page ID %s</source>
+      </trans-unit>
+      <trans-unit id="CACHE.0">
+        <source>0 (do not cache)</source>
+      </trans-unit>
+      <trans-unit id="CACHE.5">
+        <source>5 seconds</source>
+      </trans-unit>
+      <trans-unit id="CACHE.15">
+        <source>15 seconds</source>
+      </trans-unit>
+      <trans-unit id="CACHE.30">
+        <source>30 seconds</source>
+      </trans-unit>
+      <trans-unit id="CACHE.60">
+        <source>60 seconds</source>
+      </trans-unit>
+      <trans-unit id="CACHE.300">
+        <source>5 minutes</source>
+      </trans-unit>
+      <trans-unit id="CACHE.900">
+        <source>15 minutes</source>
+      </trans-unit>
+      <trans-unit id="CACHE.1800">
+        <source>30 minutes</source>
+      </trans-unit>
+      <trans-unit id="CACHE.3600">
+        <source>60 minutes</source>
+      </trans-unit>
+      <trans-unit id="CACHE.10800">
+        <source>3 hours</source>
+      </trans-unit>
+      <trans-unit id="CACHE.21600">
+        <source>6 hours</source>
+      </trans-unit>
+      <trans-unit id="CACHE.43200">
+        <source>12 hours</source>
+      </trans-unit>
+      <trans-unit id="CACHE.86400">
+        <source>24 hours</source>
+      </trans-unit>
+      <trans-unit id="CACHE.259200">
+        <source>3 days</source>
+      </trans-unit>
+      <trans-unit id="CACHE.604800">
+        <source>7 days</source>
+      </trans-unit>
+      <trans-unit id="CACHE.2592000">
+        <source>30 days</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

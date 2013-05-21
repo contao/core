@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -74,7 +74,7 @@ class ContentMedia extends \ContentElement
 			while ($objFiles->next())
 			{
 				$objFile = new \File($objFiles->path, true);
-				$return .= '<li><img src="system/themes/' . $this->getTheme() . '/images/' . $objFile->icon . '" width="18" height="18" alt="" class="mime_icon"> <span>' . $objFile->name . '</span> <span class="size">(' . $this->getReadableSize($objFile->size) . ')</span></li>';
+				$return .= '<li><img src="' . TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon . '" width="18" height="18" alt="" class="mime_icon"> <span>' . $objFile->name . '</span> <span class="size">(' . $this->getReadableSize($objFile->size) . ')</span></li>';
 			}
 
 			return $return . '</ul>';
@@ -90,6 +90,7 @@ class ContentMedia extends \ContentElement
 	 */
 	protected function compile()
 	{
+		global $objPage;
 		$this->Template->size = '';
 
 		// Set the size
@@ -128,10 +129,26 @@ class ContentMedia extends \ContentElement
 
 		$this->objFiles->reset();
 
+		// Convert the language to a locale (see #5678)
+		$strLanguage = str_replace('-', '_', $objPage->language);
+
 		// Pass File objects to the template
 		while ($this->objFiles->next())
 		{
+			$arrMeta = deserialize($this->objFiles->meta);
+
+			if (is_array($arrMeta) && isset($arrMeta[$strLanguage]))
+			{
+				$strTitle = $arrMeta[$strLanguage]['title'];
+			}
+			else
+			{
+				$strTitle = $this->objFiles->name;
+			}
+
 			$objFile = new \File($this->objFiles->path, true);
+			$objFile->title = specialchars($strTitle);
+
 			$arrFiles[$objFile->extension] = $objFile;
 		}
 

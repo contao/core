@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package News
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -51,7 +51,7 @@ class ModuleNewsMenu extends \ModuleNews
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### NEWS ARCHIVE MENU ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['newsmenu'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -203,6 +203,8 @@ class ModuleNewsMenu extends \ModuleNews
 
 		$this->Template->items = $arrItems;
 		$this->Template->showQuantity = ($this->news_showQuantity != '') ? true : false;
+		$this->Template->url = $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?');
+		$this->Template->activeYear = \Input::get('year');
 	}
 
 

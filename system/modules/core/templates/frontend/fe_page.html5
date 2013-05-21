@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="<?php echo $this->language; ?>">
+<head>
+
+  <meta charset="<?php echo $this->charset; ?>">
+  <title><?php echo $this->pageTitle; ?> - <?php echo $this->mainTitle; ?></title>
+  <base href="<?php echo $this->base; ?>">
+
+  <meta name="robots" content="<?php echo $this->robots; ?>">
+  <meta name="description" content="<?php echo $this->description; ?>">
+  <meta name="keywords" content="<?php echo $this->keywords; ?>">
+  <meta name="generator" content="Contao Open Source CMS">
+
+  <?php echo $this->viewport; ?>
+  <?php echo $this->framework; ?>
+  <?php echo $this->stylesheets; ?>
+  <?php echo $this->mooScripts; ?>
+  <?php echo $this->head; ?>
+  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+
+</head>
+<body id="top" class="{{ua::class}}<?php if ($this->class): ?> <?php echo $this->class; ?><?php endif; ?>"<?php if ($this->onload): ?> onload="<?php echo $this->onload; ?>"<?php endif; ?>>
+
+  <div id="wrapper">
+
+    <?php if ($this->header): ?>
+      <header id="header">
+        <div class="inside">
+          <?php echo $this->header; ?>
+        </div>
+      </header>
+    <?php endif; ?>
+
+    <?php echo $this->getCustomSections('before'); ?>
+
+    <div id="container">
+      <div id="main">
+        <div class="inside">
+          <?php echo $this->main; ?>
+        </div>
+        <?php echo $this->getCustomSections('main'); ?>
+      </div>
+
+      <?php if ($this->left): ?>
+        <aside id="left">
+          <div class="inside">
+            <?php echo $this->left; ?>
+          </div>
+        </aside>
+      <?php endif; ?>
+
+      <?php if ($this->right): ?>
+        <aside id="right">
+          <div class="inside">
+            <?php echo $this->right; ?>
+          </div>
+        </aside>
+      <?php endif; ?>
+    </div>
+
+    <?php echo $this->getCustomSections('after'); ?>
+
+    <?php if ($this->footer): ?>
+      <footer id="footer">
+        <div class="inside">
+          <?php echo $this->footer; ?>
+        </div>
+      </footer>
+    <?php endif; ?>
+
+  </div>
+
+  <?php echo $this->mootools; ?>
+
+  <?php if (!$this->disableCron): ?>
+    <script>
+      <?php if ($this->layout->addJQuery): ?>
+        setTimeout(function(){jQuery.ajax("system/cron/cron.txt",{complete:function(e){var t=e.responseText||0;parseInt(t)<Math.round(+(new Date)/1e3)-<?php echo $this->cronTimeout; ?>&&jQuery.ajax("system/cron/cron.php")}})},5e3)
+      <?php else: ?>
+        setTimeout(function(){(new Request({url:"system/cron/cron.txt",onComplete:function(e){e||(e=0),parseInt(e)<Math.round(+(new Date)/1e3)-<?php echo $this->cronTimeout; ?>&&(new Request({url:"system/cron/cron.php"})).get()}})).get()},5e3)
+      <?php endif; ?>
+    </script>
+  <?php endif; ?>
+
+</body>
+</html>

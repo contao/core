@@ -1,0 +1,17 @@
+<?php
+
+// Add the swipe style sheet
+$GLOBALS['TL_CSS'][] = 'assets/jquery/tablesorter/' . TABLESORTER . '/css/tablesorter.css||static';
+
+?>
+
+<script src="<?php echo TL_ASSETS_URL; ?>assets/jquery/tablesorter/<?php echo TABLESORTER; ?>/js/tablesorter.js"></script>
+<script>
+  (function($) {
+    $(document).ready(function() {
+      $('.ce_table .sortable').each(function(i, table) {
+        $(table).tablesorter();
+      });
+    });
+  })(jQuery);
+</script>

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -45,8 +45,8 @@ class ChangePassword extends Backend
 
 		$this->User->authenticate();
 
-		$this->loadLanguageFile('default');
-		$this->loadLanguageFile('modules');
+		System::loadLanguageFile('default');
+		System::loadLanguageFile('modules');
 	}
 
 
@@ -112,7 +112,7 @@ class ChangePassword extends Backend
 			$this->reload();
 		}
 
-		$this->Template->theme = $this->getTheme();
+		$this->Template->theme = Backend::getTheme();
 		$this->Template->messages = Message::generate();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];

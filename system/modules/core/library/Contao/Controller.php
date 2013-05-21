@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,21 +15,21 @@ namespace Contao;
 
 /**
  * Abstract parent class for Controllers
- * 
+ *
  * Some of the methods have been made static in Contao 3 and can be used in
  * non-object context as well.
- * 
+ *
  * Usage:
- * 
+ *
  *     echo Controller::getTheme();
- * 
+ *
  * Inside a controller:
- * 
+ *
  *     public function generate()
  *     {
  *         return $this->getArticle(2);
  *     }
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -38,31 +38,13 @@ abstract class Controller extends \System
 {
 
 	/**
-	 * Return the current theme as string
-	 * 
-	 * @return string The name of the theme
-	 */
-	public static function getTheme()
-	{
-		$theme = $GLOBALS['TL_CONFIG']['backendTheme'];
-
-		if ($theme != '' && $theme != 'default' && is_dir(TL_ROOT . '/system/themes/' . $theme))
-		{
-			return $theme;
-		}
-
-		return 'default';
-	}
-
-
-	/**
 	 * Find a particular template file and return its path
-	 * 
+	 *
 	 * @param string $strTemplate The name of the template
 	 * @param string $strFormat   The file extension
-	 * 
+	 *
 	 * @return string The path to the template file
-	 * 
+	 *
 	 * @throws \Exception If $strFormat is unknown
 	 */
 	public static function getTemplate($strTemplate, $strFormat='html5')
@@ -95,9 +77,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Return all template files of a particular group as array
-	 * 
+	 *
 	 * @param string $strPrefix The template name prefix (e.g. "ce_")
-	 * 
+	 *
 	 * @return array An array of template names
 	 */
 	public static function getTemplateGroup($strPrefix)
@@ -173,10 +155,10 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate a front end module and return it as string
-	 * 
+	 *
 	 * @param mixed  $intId     A module ID or a Model object
 	 * @param string $strColumn The name of the column
-	 * 
+	 *
 	 * @return string The module HTML markup
 	 */
 	protected function getFrontendModule($intId, $strColumn='main')
@@ -263,30 +245,34 @@ abstract class Controller extends \System
 				return '';
 			}
 
-			// Show to guests only
-			if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
+			// Apply the access restrictions in the front end only (see #5603)
+			if (TL_MODE == 'FE')
 			{
-				return '';
-			}
-
-			// Protected element
-			if (!BE_USER_LOGGED_IN && $objRow->protected)
-			{
-				if (!FE_USER_LOGGED_IN)
+				// Show to guests only
+				if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
 				{
 					return '';
 				}
 
-				$this->import('FrontendUser', 'User');
-				$groups = deserialize($objRow->groups);
-
-				if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
+				// Protected element
+				if (!BE_USER_LOGGED_IN && $objRow->protected)
 				{
-					return '';
+					if (!FE_USER_LOGGED_IN)
+					{
+						return '';
+					}
+
+					$this->import('FrontendUser', 'User');
+					$groups = deserialize($objRow->groups);
+
+					if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
+					{
+						return '';
+					}
 				}
 			}
 
-			$strClass = $this->findFrontendModule($objRow->type);
+			$strClass = \Module::findClass($objRow->type);
 
 			// Return if the class does not exist
 			if (!class_exists($strClass))
@@ -322,13 +308,13 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate an article and return it as string
-	 * 
+	 *
 	 * @param mixed   $varId          The article ID or a Model object
 	 * @param boolean $blnMultiMode   If true, only teasers will be shown
 	 * @param boolean $blnIsInsertTag If true, there will be no page relation
 	 * @param string  $strColumn      The name of the column
-	 * 
-	 * @return string|boolean The article HTML markup or false 
+	 *
+	 * @return string|boolean The article HTML markup or false
 	 */
 	protected function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main')
 	{
@@ -354,71 +340,6 @@ abstract class Controller extends \System
 			return false;
 		}
 
-		// Print the article as PDF
-		if (\Input::get('pdf') == $objRow->id)
-		{
-			// Backwards compatibility
-			if ($objRow->printable == 1)
-			{
-				$this->printArticleAsPdf($objRow);
-			}
-			elseif ($objRow->printable != '')
-			{
-				$options = deserialize($objRow->printable);
-
-				if (is_array($options) && in_array('pdf', $options))
-				{
-					$this->printArticleAsPdf($objRow);
-				}
-			}
-		}
-
-		$objRow->headline = $objRow->title;
-		$objRow->multiMode = $blnMultiMode;
-
-		// HOOK: add custom logic
-		if (isset($GLOBALS['TL_HOOKS']['getArticle']) && is_array($GLOBALS['TL_HOOKS']['getArticle']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['getArticle'] as $callback)
-			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($objRow);
-			}
-		}
-
-		$objArticle = new \ModuleArticle($objRow, $strColumn);
-		return $objArticle->generate($blnIsInsertTag);
-	}
-
-
-	/**
-	 * Generate a content element and return it as string
-	 * 
-	 * @param mixed $intId A content element ID or a Model object
-	 * 
-	 * @return string The content element HTML markup
-	 */
-	protected function getContentElement($intId)
-	{
-		if (is_object($intId))
-		{
-			$objRow = $intId;
-		}
-		else
-		{
-			if (!strlen($intId) || $intId < 1)
-			{
-				return '';
-			}
-
-			$objRow = \ContentModel::findByPk($intId);
-
-			if ($objRow === null)
-			{
-				return '';
-			}
-		}
-
 		// Show to guests only
 		if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
 		{
@@ -442,13 +363,116 @@ abstract class Controller extends \System
 			}
 		}
 
+		// Print the article as PDF
+		if (isset($_GET['pdf']) && \Input::get('pdf') == $objRow->id)
+		{
+			// Backwards compatibility
+			if ($objRow->printable == 1)
+			{
+				$objArticle = new \ModuleArticle($objRow);
+				$objArticle->generatePdf();
+			}
+			elseif ($objRow->printable != '')
+			{
+				$options = deserialize($objRow->printable);
+
+				if (is_array($options) && in_array('pdf', $options))
+				{
+					$objArticle = new \ModuleArticle($objRow);
+					$objArticle->generatePdf();
+				}
+			}
+		}
+
+		$objRow->headline = $objRow->title;
+		$objRow->multiMode = $blnMultiMode;
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getArticle']) && is_array($GLOBALS['TL_HOOKS']['getArticle']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getArticle'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($objRow);
+			}
+		}
+
+		$objArticle = new \ModuleArticle($objRow, $strColumn);
+		$strBuffer = $objArticle->generate($blnIsInsertTag);
+
+		// Disable indexing if protected
+		if ($objArticle->protected && !preg_match('/^\s*<!-- indexer::stop/', $strBuffer))
+		{
+			$strBuffer = "\n<!-- indexer::stop -->". $strBuffer ."<!-- indexer::continue -->\n";
+		}
+
+		return $strBuffer;
+	}
+
+
+	/**
+	 * Generate a content element and return it as string
+	 *
+	 * @param mixed  $intId     A content element ID or a Model object
+	 * @param string $strColumn The column the element is in
+	 *
+	 * @return string The content element HTML markup
+	 */
+	protected function getContentElement($intId, $strColumn='main')
+	{
+		if (is_object($intId))
+		{
+			$objRow = $intId;
+		}
+		else
+		{
+			if (!strlen($intId) || $intId < 1)
+			{
+				return '';
+			}
+
+			$objRow = \ContentModel::findByPk($intId);
+
+			if ($objRow === null)
+			{
+				return '';
+			}
+		}
+
+		// Apply the access restrictions in the front end only (see #5603)
+		if (TL_MODE == 'FE')
+		{
+			// Show to guests only
+			if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
+			{
+				return '';
+			}
+
+			// Protected the element
+			if ($objRow->protected && !BE_USER_LOGGED_IN)
+			{
+				if (!FE_USER_LOGGED_IN)
+				{
+					return '';
+				}
+
+				$this->import('FrontendUser', 'User');
+				$groups = deserialize($objRow->groups);
+
+				if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
+				{
+					return '';
+				}
+			}
+		}
+
 		// Remove the spacing in the back end preview
 		if (TL_MODE == 'BE')
 		{
 			$objRow->space = null;
 		}
 
-		$strClass = $this->findContentElement($objRow->type);
+		$strClass = \ContentElement::findClass($objRow->type);
 
 		// Return if the class does not exist
 		if (!class_exists($strClass))
@@ -458,7 +482,7 @@ abstract class Controller extends \System
 		}
 
 		$objRow->typePrefix = 'ce_';
-		$objElement = new $strClass($objRow);
+		$objElement = new $strClass($objRow, $strColumn);
 		$strBuffer = $objElement->generate();
 
 		// HOOK: add custom logic
@@ -483,12 +507,13 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate a form and return it as string
-	 * 
-	 * @param mixed $varId A form ID or a Model object
-	 * 
+	 *
+	 * @param mixed  $varId     A form ID or a Model object
+	 * @param string $strColumn The column the form is in
+	 *
 	 * @return string The form HTML markup
 	 */
-	protected function getForm($varId)
+	protected function getForm($varId, $strColumn='main')
 	{
 		if (is_object($varId))
 		{
@@ -511,7 +536,7 @@ abstract class Controller extends \System
 
 		$objRow->typePrefix = 'ce_';
 		$objRow->form = $objRow->id;
-		$objElement = new \Form($objRow);
+		$objElement = new \Form($objRow, $strColumn);
 		$strBuffer = $objElement->generate();
 
 		// HOOK: add custom logic
@@ -529,258 +554,13 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Get the details of a page including inherited parameters
-	 * 
-	 * @param mixed $intId A page ID or a Model object
-	 * 
-	 * @return \Model|null The page model or null
-	 */
-	public static function getPageDetails($intId)
-	{
-		if (is_object($intId))
-		{
-			// Always return a Model (see #4428)
-			$objPage = ($intId instanceof \Model\Collection) ? $intId->current() : $intId;
-
-			$intId = $objPage->id;
-			$strKey = __METHOD__ . '-' . $objPage->id;
-
-			if (\Cache::has($strKey))
-			{
-				return \Cache::get($strKey);
-			}
-		}
-		else
-		{
-			if (!strlen($intId) || $intId < 1)
-			{
-				return null;
-			}
-
-			$strKey = __METHOD__ . '-' . $intId;
-
-			if (\Cache::has($strKey))
-			{
-				return \Cache::get($strKey);
-			}
-
-			$objPage = \PageModel::findByPk($intId);
-
-			if ($objPage === null)
-			{
-				return null;
-			}
-		}
-
-		// Set some default values
-		$objPage->protected = (boolean) $objPage->protected;
-		$objPage->groups = $objPage->protected ? deserialize($objPage->groups) : false;
-		$objPage->layout = $objPage->includeLayout ? $objPage->layout : false;
-		$objPage->mobileLayout = $objPage->includeLayout ? $objPage->mobileLayout : false;
-		$objPage->cache = $objPage->includeCache ? $objPage->cache : false;
-
-		$pid = $objPage->pid;
-		$type = $objPage->type;
-		$alias = $objPage->alias;
-		$name = $objPage->title;
-		$title = $objPage->pageTitle ?: $objPage->title;
-		$folderUrl = basename($objPage->alias);
-		$palias = '';
-		$pname = '';
-		$ptitle = '';
-		$trail = array($intId, $pid);
-
-		// Inherit the settings
-		if ($objPage->type == 'root')
-		{
-			$objParentPage = $objPage; // see #4610
-		}
-		else
-		{
-			// Load all parent pages
-			$objParentPage = \PageModel::findParentsById($pid);
-
-			if ($objParentPage !== null)
-			{
-				while ($objParentPage->next() && $pid > 0 && $type != 'root')
-				{
-					$pid = $objParentPage->pid;
-					$type = $objParentPage->type;
-
-					// Parent title
-					if ($ptitle == '')
-					{
-						$palias = $objParentPage->alias;
-						$pname = $objParentPage->title;
-						$ptitle = $objParentPage->pageTitle ?: $objParentPage->title;
-					}
-
-					// Page title
-					if ($type != 'root')
-					{
-						$alias = $objParentPage->alias;
-						$name = $objParentPage->title;
-						$title = $objParentPage->pageTitle ?: $objParentPage->title;
-						$folderUrl = basename($alias) . '/' . $folderUrl;
-						$trail[] = $objParentPage->pid;
-					}
-
-					// Cache
-					if ($objParentPage->includeCache && $objPage->cache === false)
-					{
-						$objPage->cache = $objParentPage->cache;
-					}
-
-					// Layout
-					if ($objParentPage->includeLayout)
-					{
-						if ($objPage->layout === false)
-						{
-							$objPage->layout = $objParentPage->layout;
-						}
-						if ($objPage->mobileLayout === false)
-						{
-							$objPage->mobileLayout = $objParentPage->mobileLayout;
-						}
-					}
-
-					// Protection
-					if ($objParentPage->protected && $objPage->protected === false)
-					{
-						$objPage->protected = true;
-						$objPage->groups = deserialize($objParentPage->groups);
-					}
-				}
-			}
-
-			// Set the titles
-			$objPage->mainAlias = $alias;
-			$objPage->mainTitle = $name;
-			$objPage->mainPageTitle = $title;
-			$objPage->parentAlias = $palias;
-			$objPage->parentTitle = $pname;
-			$objPage->parentPageTitle = $ptitle;
-			$objPage->folderUrl = $folderUrl;
-		}
-
-		// Set the root ID and title
-		if ($objParentPage !== null && $objParentPage->type == 'root')
-		{
-			$objPage->rootId = $objParentPage->id;
-			$objPage->rootTitle = $objParentPage->pageTitle ?: $objParentPage->title;
-			$objPage->domain = $objParentPage->dns;
-			$objPage->rootLanguage = $objParentPage->language;
-			$objPage->language = $objParentPage->language;
-			$objPage->staticFiles = $objParentPage->staticFiles;
-			$objPage->staticPlugins = $objParentPage->staticPlugins;
-			$objPage->dateFormat = $objParentPage->dateFormat;
-			$objPage->timeFormat = $objParentPage->timeFormat;
-			$objPage->datimFormat = $objParentPage->datimFormat;
-			$objPage->adminEmail = $objParentPage->adminEmail;
-
-			// Store whether the root page has been published
-			$time = time();
-			$objPage->rootIsPublic = ($objParentPage->published && ($objParentPage->start == '' || $objParentPage->start < $time) && ($objParentPage->stop == '' || $objParentPage->stop > $time));
-			$objPage->rootIsFallback = ($objParentPage->fallback != '');
-		}
-
-		// No root page found
-		elseif (TL_MODE == 'FE' && $objPage->type != 'root')
-		{
-			header('HTTP/1.1 404 Not Found');
-			\System::log('Page ID "'. $objPage->id .'" does not belong to a root page', 'Controller getPageDetails()', TL_ERROR);
-			die('No root page found');
-		}
-
-		$objPage->trail = array_reverse($trail);
-
-		// Remove insert tags from all titles (see #2853)
-		$objPage->title = strip_insert_tags($objPage->title);
-		$objPage->pageTitle = strip_insert_tags($objPage->pageTitle);
-		$objPage->parentTitle = strip_insert_tags($objPage->parentTitle);
-		$objPage->parentPageTitle = strip_insert_tags($objPage->parentPageTitle);
-		$objPage->mainTitle = strip_insert_tags($objPage->mainTitle);
-		$objPage->mainPageTitle = strip_insert_tags($objPage->mainPageTitle);
-		$objPage->rootTitle = strip_insert_tags($objPage->rootTitle);
-
-		// Do not cache protected pages
-		if ($objPage->protected)
-		{
-			$objPage->cache = 0;
-		}
-
-		\Cache::set($strKey, $objPage);
-		return $objPage;
-	}
-
-
-	/**
-	 * Return all page sections as array
-	 * 
-	 * @return array An array of active page sections
-	 */
-	public static function getPageSections()
-	{
-		return array_merge(array('header', 'left', 'right', 'main', 'footer'), trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']));
-	}
-
-
-	/**
-	 * Return the back end themes as array
-	 * 
-	 * @return array An array of available back end themes
-	 */
-	public static function getBackendThemes()
-	{
-		$arrReturn = array();
-		$arrThemes = scan(TL_ROOT . '/system/themes');
-
-		foreach ($arrThemes as $strTheme)
-		{
-			if (strncmp($strTheme, '.', 1) === 0 || !is_dir(TL_ROOT . '/system/themes/' . $strTheme))
-			{
-				continue;
-			}
-
-			$arrReturn[$strTheme] = $strTheme;
-		}
-
-		return $arrReturn;
-	}
-
-
-	/**
-	 * Return the timezones as array
-	 * 
-	 * @return array An array of timezones
-	 */
-	public static function getTimeZones()
-	{
-		$arrReturn = array();
-		$timezones = array();
-
-		require TL_ROOT . '/system/config/timezones.php';
-
-		foreach ($timezones as $strGroup=>$arrTimezones)
-		{
-			foreach ($arrTimezones as $strTimezone)
-			{
-				$arrReturn[$strGroup][] = $strTimezone;
-			}
-		}
-
-		return $arrReturn;
-	}
-
-
-	/**
 	 * Return the languages for the TinyMCE spellchecker
-	 * 
+	 *
 	 * @return string The TinyMCE spellchecker language string
 	 */
 	protected function getSpellcheckerString()
 	{
-		$this->loadLanguageFile('languages');
+		\System::loadLanguageFile('languages');
 
 		$return = array();
 		$langs = scan(TL_ROOT . '/system/modules/core/languages');
@@ -788,6 +568,8 @@ abstract class Controller extends \System
 
 		foreach ($langs as $lang)
 		{
+			$lang = substr($lang, 0, 2);
+
 			if (isset($GLOBALS['TL_LANG']['LNG'][$lang]))
 			{
 				$return[$lang] = $GLOBALS['TL_LANG']['LNG'][$lang] . '=' . $lang;
@@ -800,9 +582,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Calculate the page status icon name based on the page parameters
-	 * 
+	 *
 	 * @param object A page object
-	 * 
+	 *
 	 * @return string The status icon name
 	 */
 	public static function getPageStatusIcon($objPage)
@@ -839,129 +621,11 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Print an article as PDF and stream it to the browser
-	 * 
-	 * @param object $objArticle An article object
-	 */
-	protected function printArticleAsPdf($objArticle)
-	{
-		$objArticle->headline = $objArticle->title;
-		$objArticle->printable = false;
-
-		// Generate article
-		$objArticle = new \ModuleArticle($objArticle);
-		$strArticle = $this->replaceInsertTags($objArticle->generate());
-		$strArticle = html_entity_decode($strArticle, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
-		$strArticle = $this->convertRelativeUrls($strArticle, '', true);
-
-		// Remove form elements and JavaScript links
-		$arrSearch = array
-		(
-			'@<form.*</form>@Us',
-			'@<a [^>]*href="[^"]*javascript:[^>]+>.*</a>@Us'
-		);
-
-		$strArticle = preg_replace($arrSearch, '', $strArticle);
-
-		// HOOK: allow individual PDF routines
-		if (isset($GLOBALS['TL_HOOKS']['printArticleAsPdf']) && is_array($GLOBALS['TL_HOOKS']['printArticleAsPdf']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['printArticleAsPdf'] as $callback)
-			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($strArticle, $objArticle);
-			}
-		}
-
-		// Handle line breaks in preformatted text
-		$strArticle = preg_replace_callback('@(<pre.*</pre>)@Us', 'nl2br_callback', $strArticle);
-
-		// Default PDF export using TCPDF
-		$arrSearch = array
-		(
-			'@<span style="text-decoration: ?underline;?">(.*)</span>@Us',
-			'@(<img[^>]+>)@',
-			'@(<div[^>]+block[^>]+>)@',
-			'@[\n\r\t]+@',
-			'@<br( /)?><div class="mod_article@',
-			'@href="([^"]+)(pdf=[0-9]*(&|&amp;)?)([^"]*)"@'
-		);
-
-		$arrReplace = array
-		(
-			'<u>$1</u>',
-			'<br>$1',
-			'<br>$1',
-			' ',
-			'<div class="mod_article',
-			'href="$1$4"'
-		);
-
-		$strArticle = preg_replace($arrSearch, $arrReplace, $strArticle);
-
-		// TCPDF configuration
-		$l['a_meta_dir'] = 'ltr';
-		$l['a_meta_charset'] = $GLOBALS['TL_CONFIG']['characterSet'];
-		$l['a_meta_language'] = $GLOBALS['TL_LANGUAGE'];
-		$l['w_page'] = 'page';
-
-		// Include library
-		require_once TL_ROOT . '/system/config/tcpdf.php';
-		require_once TL_ROOT . '/system/vendor/tcpdf/tcpdf.php';
-
-		// Create new PDF document
-		$pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
-
-		// Set document information
-		$pdf->SetCreator(PDF_CREATOR);
-		$pdf->SetAuthor(PDF_AUTHOR);
-		$pdf->SetTitle($objArticle->title);
-		$pdf->SetSubject($objArticle->title);
-		$pdf->SetKeywords($objArticle->keywords);
-
-		// Prevent font subsetting (huge speed improvement)
-		$pdf->setFontSubsetting(false);
-
-		// Remove default header/footer
-		$pdf->setPrintHeader(false);
-		$pdf->setPrintFooter(false);
-
-		// Set margins
-		$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-
-		// Set auto page breaks
-		$pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
-
-		// Set image scale factor
-		$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-		// Set some language-dependent strings
-		$pdf->setLanguageArray($l);
-
-		// Initialize document and add a page
-		$pdf->AddPage();
-
-		// Set font
-		$pdf->SetFont(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN);
-
-		// Write the HTML content
-		$pdf->writeHTML($strArticle, true, 0, true, 0);
-
-		// Close and output PDF document
-		$pdf->lastPage();
-		$pdf->Output(standardize(ampersand($objArticle->title, false)) . '.pdf', 'D');
-
-		// Stop script execution
-		exit;
-	}
-
-
-	/**
 	 * Replace insert tags with their values
-	 * 
+	 *
 	 * @param string  $strBuffer The text with the tags to be replaced
 	 * @param boolean $blnCache  If false, non-cacheable tags will be replaced
-	 * 
+	 *
 	 * @return string The text with the replaced tags
 	 */
 	protected function replaceInsertTags($strBuffer, $blnCache=true)
@@ -979,7 +643,7 @@ abstract class Controller extends \System
 		$strBuffer = '';
 		static $arrCache = array();
 
-		for ($_rit=0; $_rit<count($tags); $_rit+=3)
+		for ($_rit=0, $_cnt=count($tags); $_rit<$_cnt; $_rit+=3)
 		{
 			$strBuffer .= $tags[$_rit];
 			$strTag = $tags[$_rit+1];
@@ -996,19 +660,20 @@ abstract class Controller extends \System
 				$strTag = $this->replaceInsertTags($strTag, $blnCache);
 			}
 
+			$flags = explode('|', $strTag);
+			$elements = explode('::', array_shift($flags));
+
 			// Load the value from cache
-			if (isset($arrCache[$strTag]))
+			if (isset($arrCache[$strTag]) && !in_array('refresh', $flags))
 			{
 				$strBuffer .= $arrCache[$strTag];
 				continue;
 			}
 
-			$elements = explode('::', $strTag);
-
 			// Skip certain elements if the output will be cached
 			if ($blnCache)
 			{
-				if ($elements[0] == 'date' || $elements[0] == 'ua' || $elements[0] == 'post' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer' || $elements[0] == 'request_token' || strncmp($elements[0], 'cache_', 6) === 0)
+				if ($elements[0] == 'date' || $elements[0] == 'ua' || $elements[0] == 'post' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer' || $elements[0] == 'request_token' || strncmp($elements[0], 'cache_', 6) === 0 || in_array('uncached', $flags))
 				{
 					$strBuffer .= '{{' . $strTag . '}}';
 					continue;
@@ -1022,7 +687,7 @@ abstract class Controller extends \System
 			{
 				// Date
 				case 'date':
-					$arrCache[$strTag] = $this->parseDate($elements[1] ?: $GLOBALS['TL_CONFIG']['dateFormat']);
+					$arrCache[$strTag] = \Date::parse($elements[1] ?: $GLOBALS['TL_CONFIG']['dateFormat']);
 					break;
 
 				// Accessibility tags
@@ -1080,7 +745,7 @@ abstract class Controller extends \System
 						break;
 					}
 
-					$this->loadLanguageFile($keys[0]);
+					\System::loadLanguageFile($keys[0]);
 
 					if (count($keys) == 2)
 					{
@@ -1120,15 +785,15 @@ abstract class Controller extends \System
 
 						if ($rgxp == 'date')
 						{
-							$arrCache[$strTag] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value);
+							$arrCache[$strTag] = \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $value);
 						}
 						elseif ($rgxp == 'time')
 						{
-							$arrCache[$strTag] = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $value);
+							$arrCache[$strTag] = \Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $value);
 						}
 						elseif ($rgxp == 'datim')
 						{
-							$arrCache[$strTag] = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $value);
+							$arrCache[$strTag] = \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $value);
 						}
 						elseif (is_array($value))
 						{
@@ -1231,7 +896,7 @@ abstract class Controller extends \System
 									// Check the target page language (see #4706)
 									if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 									{
-										$objNext = $this->getPageDetails($objNext); // see #3983
+										$objNext->loadDetails(); // see #3983
 										$strForceLang = $objNext->language;
 									}
 
@@ -1246,7 +911,7 @@ abstract class Controller extends \System
 								// Check the target page language (see #4706, #5465)
 								if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 								{
-									$objNextPage = $this->getPageDetails($objNextPage); // see #3983
+									$objNextPage->loadDetails(); // see #3983
 									$strForceLang = $objNextPage->language;
 								}
 
@@ -1577,7 +1242,7 @@ abstract class Controller extends \System
 
 					if ($objUpdate->numRows)
 					{
-						$arrCache[$strTag] = $this->parseDate($elements[1] ?: $GLOBALS['TL_CONFIG']['datimFormat'], max($objUpdate->tc, $objUpdate->tn, $objUpdate->te));
+						$arrCache[$strTag] = \Date::parse($elements[1] ?: $GLOBALS['TL_CONFIG']['datimFormat'], max($objUpdate->tc, $objUpdate->tn, $objUpdate->te));
 					}
 					break;
 
@@ -1609,11 +1274,11 @@ abstract class Controller extends \System
 
 					if ($objPage->isMobile)
 					{
-						$arrCache[$strTag] = '<a href="' . $strUrl . $strGlue . 'toggle_view=desktop" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['toggleDesktop'][1]) . '">' . $GLOBALS['TL_LANG']['MSC']['toggleDesktop'][0] . '</a>';
+						$arrCache[$strTag] = '<a href="' . $strUrl . $strGlue . 'toggle_view=desktop" class="toggle_desktop" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['toggleDesktop'][1]) . '">' . $GLOBALS['TL_LANG']['MSC']['toggleDesktop'][0] . '</a>';
 					}
 					else
 					{
-						$arrCache[$strTag] = '<a href="' . $strUrl . $strGlue . 'toggle_view=mobile" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['toggleMobile'][1]) . '">' . $GLOBALS['TL_LANG']['MSC']['toggleMobile'][0] . '</a>';
+						$arrCache[$strTag] = '<a href="' . $strUrl . $strGlue . 'toggle_view=mobile" class="toggle_mobile" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['toggleMobile'][1]) . '">' . $GLOBALS['TL_LANG']['MSC']['toggleMobile'][0] . '</a>';
 					}
 					break;
 
@@ -1621,7 +1286,7 @@ abstract class Controller extends \System
 				case 'iflng':
 					if ($elements[1] != '' && $elements[1] != $objPage->language)
 					{
-						for ($_rit; $_rit<count($tags); $_rit+=3)
+						for (; $_rit<$_cnt; $_rit+=3)
 						{
 							if ($tags[$_rit+1] == 'iflng')
 							{
@@ -1640,7 +1305,7 @@ abstract class Controller extends \System
 
 						if (in_array($objPage->language, $langs))
 						{
-							for ($_rit; $_rit<count($tags); $_rit+=3)
+							for (; $_rit<$_cnt; $_rit+=3)
 							{
 								if ($tags[$_rit+1] == 'ifnlng')
 								{
@@ -1673,7 +1338,7 @@ abstract class Controller extends \System
 							break;
 
 						case 'request':
-							$arrCache[$strTag] = $this->getIndexFreeRequest(true);
+							$arrCache[$strTag] = \Environment::get('indexFreeRequest');
 							break;
 
 						case 'ip':
@@ -1929,7 +1594,85 @@ abstract class Controller extends \System
 							}
 						}
 					}
+					if ($GLOBALS['TL_CONFIG']['debugMode'])
+					{
+						$GLOBALS['TL_DEBUG']['unknown_insert_tags'][] = $strTag;
+					}
 					break;
+			}
+
+			// Handle the flags
+			if (!empty($flags))
+			{
+				foreach ($flags as $flag)
+				{
+					switch ($flag)
+					{
+						case 'addslashes':
+						case 'stripslashes':
+						case 'standardize':
+						case 'ampersand':
+						case 'specialchars':
+						case 'nl2br':
+						case 'nl2br_pre':
+						case 'strtolower':
+						case 'utf8_strtolower':
+						case 'strtoupper':
+						case 'utf8_strtoupper':
+						case 'ucfirst':
+						case 'lcfirst':
+						case 'ucwords':
+						case 'trim':
+						case 'rtrim':
+						case 'ltrim':
+						case 'utf8_romanize':
+						case 'strrev':
+						case 'base64_encode':
+						case 'base64_decode':
+							$arrCache[$strTag] = $flag($arrCache[$strTag]);
+							break;
+
+						case 'encodeEmail':
+						case 'decodeEntities':
+							$arrCache[$strTag] = \String::$flag($arrCache[$strTag]);
+							break;
+
+						case 'number_format':
+							$arrCache[$strTag] = \System::getFormattedNumber($arrCache[$strTag], 0);
+							break;
+
+						case 'currency_format':
+							$arrCache[$strTag] = \System::getFormattedNumber($arrCache[$strTag], 2);
+							break;
+
+						case 'readable_size':
+							$arrCache[$strTag] = \System::getReadableSize($arrCache[$strTag]);
+							break;
+
+						// HOOK: pass unknown flags to callback functions
+						default:
+							if (isset($GLOBALS['TL_HOOKS']['insertTagFlags']) && is_array($GLOBALS['TL_HOOKS']['insertTagFlags']))
+							{
+								foreach ($GLOBALS['TL_HOOKS']['insertTagFlags'] as $callback)
+								{
+									$this->import($callback[0]);
+									$varValue = $this->$callback[0]->$callback[1]($flag, $strTag, $arrCache[$strTag], $flags, $blnCache);
+
+									// Replace the tag and stop the loop
+									if ($varValue !== false)
+									{
+										$arrCache[$strTag] = $varValue;
+										break;
+									}
+								}
+							}
+							if ($GLOBALS['TL_CONFIG']['debugMode'])
+							{
+								$GLOBALS['TL_DEBUG']['unknown_insert_tag_flags'][] = $flag;
+							}
+							break;
+					}
+				}
 			}
 
 			$strBuffer .= $arrCache[$strTag];
@@ -1941,9 +1684,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Replace the dynamic script tags (see #4203)
-	 * 
+	 *
 	 * @param string $strBuffer The string with the tags to be replaced
-	 * 
+	 *
 	 * @return string The string with the replaced tags
 	 */
 	public static function replaceDynamicScriptTags($strBuffer)
@@ -1965,7 +1708,7 @@ abstract class Controller extends \System
 		$strScripts = '';
 
 		// Add the internal jQuery scripts
-		if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
+		if (!empty($GLOBALS['TL_JQUERY']) && is_array($GLOBALS['TL_JQUERY']))
 		{
 			foreach (array_unique($GLOBALS['TL_JQUERY']) as $script)
 			{
@@ -1977,7 +1720,7 @@ abstract class Controller extends \System
 		$strScripts = '';
 
 		// Add the internal MooTools scripts
-		if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
+		if (!empty($GLOBALS['TL_MOOTOOLS']) && is_array($GLOBALS['TL_MOOTOOLS']))
 		{
 			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
 			{
@@ -1988,8 +1731,17 @@ abstract class Controller extends \System
 		$arrReplace['[[TL_MOOTOOLS]]'] = $strScripts;
 		$strScripts = '';
 
+		// Add the internal <body> tags
+		if (!empty($GLOBALS['TL_BODY']) && is_array($GLOBALS['TL_BODY']))
+		{
+			foreach (array_unique($GLOBALS['TL_BODY']) as $script)
+			{
+				$strScripts .= trim($script) . "\n";
+			}
+		}
+
 		// Add the syntax highlighter scripts
-		if (is_array($GLOBALS['TL_HIGHLIGHTER']) && !empty($GLOBALS['TL_HIGHLIGHTER']))
+		if (!empty($GLOBALS['TL_HIGHLIGHTER']) && is_array($GLOBALS['TL_HIGHLIGHTER']))
 		{
 			$objCombiner = new \Combiner();
 
@@ -2010,13 +1762,13 @@ abstract class Controller extends \System
 			}
 		}
 
-		$arrReplace['[[TL_HIGHLIGHTER]]'] = $strScripts;
+		$arrReplace['[[TL_BODY]]'] = $strScripts;
 		$strScripts = '';
 
 		$objCombiner = new \Combiner();
 
 		// Add the CSS framework style sheets
-		if (is_array($GLOBALS['TL_FRAMEWORK_CSS']) && !empty($GLOBALS['TL_FRAMEWORK_CSS']))
+		if (!empty($GLOBALS['TL_FRAMEWORK_CSS']) && is_array($GLOBALS['TL_FRAMEWORK_CSS']))
 		{
 			foreach (array_unique($GLOBALS['TL_FRAMEWORK_CSS']) as $stylesheet)
 			{
@@ -2025,7 +1777,7 @@ abstract class Controller extends \System
 		}
 
 		// Add the internal style sheets
-		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
+		if (!empty($GLOBALS['TL_CSS']) && is_array($GLOBALS['TL_CSS']))
 		{
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
@@ -2043,7 +1795,7 @@ abstract class Controller extends \System
 		}
 
 		// Add the user style sheets
-		if (is_array($GLOBALS['TL_USER_CSS']) && !empty($GLOBALS['TL_USER_CSS']))
+		if (!empty($GLOBALS['TL_USER_CSS']) && is_array($GLOBALS['TL_USER_CSS']))
 		{
 			foreach (array_unique($GLOBALS['TL_USER_CSS']) as $stylesheet)
 			{
@@ -2075,7 +1827,7 @@ abstract class Controller extends \System
 		$strScripts = '';
 
 		// Add the internal scripts
-		if (is_array($GLOBALS['TL_JAVASCRIPT']) && !empty($GLOBALS['TL_JAVASCRIPT']))
+		if (!empty($GLOBALS['TL_JAVASCRIPT']) && is_array($GLOBALS['TL_JAVASCRIPT']))
 		{
 			$objCombiner = new \Combiner();
 
@@ -2101,7 +1853,7 @@ abstract class Controller extends \System
 		}
 
 		// Add the internal <head> tags
-		if (is_array($GLOBALS['TL_HEAD']) && !empty($GLOBALS['TL_HEAD']))
+		if (!empty($GLOBALS['TL_HEAD']) && is_array($GLOBALS['TL_HEAD']))
 		{
 			foreach (array_unique($GLOBALS['TL_HEAD']) as $head)
 			{
@@ -2115,39 +1867,11 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Generate an image tag and return it as string
-	 * 
-	 * @param string $src        The image path
-	 * @param string $alt        An optional alt attribute
-	 * @param string $attributes A string of other attributes
-	 * 
-	 * @return string The image HTML tag
-	 */
-	public static function generateImage($src, $alt='', $attributes='')
-	{
-		$src = rawurldecode($src);
-
-		if (strpos($src, '/') === false)
-		{
-			$src = 'system/themes/' . static::getTheme() . '/images/' . $src;
-		}
-
-		if (!file_exists(TL_ROOT .'/'. $src))
-		{
-			return '';
-		}
-
-		$size = getimagesize(TL_ROOT .'/'. $src);
-		return '<img src="' . TL_FILES_URL . static::urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
-	}
-
-
-	/**
 	 * Compile the margin format definition based on an array of values
-	 * 
+	 *
 	 * @param array  $arrValues An array of four values and a unit
 	 * @param string $strType   Either "margin" or "padding"
-	 * 
+	 *
 	 * @return string The CSS markup
 	 */
 	public static function generateMargin($arrValues, $strType='margin')
@@ -2200,12 +1924,137 @@ abstract class Controller extends \System
 
 
 	/**
+	 * Add a request string to the current URL
+	 *
+	 * @param string $strRequest The string to be added
+	 *
+	 * @return string The new URL
+	 */
+	public static function addToUrl($strRequest)
+	{
+		$strRequest = preg_replace('/^&(amp;)?/i', '', $strRequest);
+
+		if ($strRequest != '')
+		{
+			$strRequest .= '&amp;ref=' . TL_REFERER_ID;
+		}
+
+		$queries = preg_split('/&(amp;)?/i', \Environment::get('queryString'));
+
+		// Overwrite existing parameters
+		foreach ($queries as $k=>$v)
+		{
+			if ($v == 'nb=1')
+			{
+				unset($queries[$k]);
+			}
+
+			$explode = explode('=', $v);
+
+			if (preg_match('/(^|&(amp;)?)' . preg_quote($explode[0], '/') . '=/i', $strRequest))
+			{
+				unset($queries[$k]);
+			}
+		}
+
+		$href = '?';
+
+		if (!empty($queries))
+		{
+			$href .= implode('&amp;', $queries) . '&amp;';
+		}
+
+		return \Environment::get('script') . $href . str_replace(' ', '%20', $strRequest);
+	}
+
+
+	/**
+	 * Reload the current page
+	 */
+	public static function reload()
+	{
+		$strLocation = \Environment::get('url') . \Environment::get('requestUri');
+
+		// Ajax request
+		if (\Environment::get('isAjaxRequest'))
+		{
+			echo $strLocation;
+			exit;
+		}
+
+		if (headers_sent())
+		{
+			exit;
+		}
+
+		header('Location: ' . $strLocation);
+		exit;
+	}
+
+
+	/**
+	 * Redirect to another page
+	 *
+	 * @param string  $strLocation The target URL
+	 * @param integer $intStatus   The HTTP status code (defaults to 303)
+	 */
+	public static function redirect($strLocation, $intStatus=303)
+	{
+		$strLocation = str_replace('&amp;', '&', $strLocation);
+
+		// Ajax request
+		if (\Environment::get('isAjaxRequest'))
+		{
+			echo $strLocation;
+			exit;
+		}
+
+		if (headers_sent())
+		{
+			exit;
+		}
+
+		// Header
+		switch ($intStatus)
+		{
+			case 301:
+				header('HTTP/1.1 301 Moved Permanently');
+				break;
+
+			case 302:
+				header('HTTP/1.1 302 Found');
+				break;
+
+			case 303:
+				header('HTTP/1.1 303 See Other');
+				break;
+
+			case 307:
+				header('HTTP/1.1 307 Temporary Redirect');
+				break;
+		}
+
+		// Check the target address
+		if (preg_match('@^https?://@i', $strLocation))
+		{
+			header('Location: ' . $strLocation);
+		}
+		else
+		{
+			header('Location: ' . \Environment::get('base') . $strLocation);
+		}
+
+		exit;
+	}
+
+
+	/**
 	 * Generate an URL depending on the current rewriteURL setting
-	 * 
+	 *
 	 * @param array  $arrRow       An array of page parameters
 	 * @param string $strParams    An optional string of URL parameters
 	 * @param string $strForceLang Force a certain language
-	 * 
+	 *
 	 * @return string An URL that can be used in the front end
 	 */
 	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null)
@@ -2249,13 +2098,19 @@ abstract class Controller extends \System
 			{
 				$arrChunks = explode('/', preg_replace('@^/@', '', $strParams));
 
-				for ($i=0; $i<count($arrChunks); $i=($i+2))
+				for ($i=0, $c=count($arrChunks); $i<$c; $i=($i+2))
 				{
 					$strRequest .= sprintf('&%s=%s', $arrChunks[$i], $arrChunks[($i+1)]);
 				}
 			}
 
 			$strUrl = 'index.php?id=' . $arrRow['id'] . $strRequest;
+		}
+
+		// Add the domain if it differs from the host name (see #3765)
+		if ($arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
+		{
+			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
 		}
 
 		// HOOK: add custom logic
@@ -2273,11 +2128,11 @@ abstract class Controller extends \System
 
 	/**
 	 * Convert relative URLs in href and src attributes to absolute URLs
-	 * 
+	 *
 	 * @param string  $strContent  The text with the URLs to be converted
 	 * @param string  $strBase     An optional base URL
 	 * @param boolean $blnHrefOnly If true, only href attributes will be converted
-	 * 
+	 *
 	 * @return string The text with the replaced URLs
 	 */
 	public static function convertRelativeUrls($strContent, $strBase='', $blnHrefOnly=false)
@@ -2291,7 +2146,7 @@ abstract class Controller extends \System
 		$arrUrls = preg_split('/(('.$search.')="([^"]+)")/i', $strContent, -1, PREG_SPLIT_DELIM_CAPTURE);
 		$strContent = '';
 
-		for($i=0; $i<count($arrUrls); $i=$i+4)
+		for ($i=0, $c=count($arrUrls); $i<$c; $i=$i+4)
 		{
 			$strContent .= $arrUrls[$i];
 
@@ -2317,7 +2172,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Send a file to the browser so the "save as …" dialogue opens
-	 * 
+	 *
 	 * @param string $strFile The file path
 	 */
 	public static function sendFileToBrowser($strFile)
@@ -2346,32 +2201,12 @@ abstract class Controller extends \System
 		$objFile = new \File($strFile, true);
 		$arrAllowedTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
 
+		// Check whether the file type is allowed to be downloaded
 		if (!in_array($objFile->extension, $arrAllowedTypes))
 		{
 			header('HTTP/1.1 403 Forbidden');
 			die(sprintf('File type "%s" is not allowed', $objFile->extension));
 		}
-
-		// Make sure no output buffer is active
-		// @see http://ch2.php.net/manual/en/function.fpassthru.php#74080
-		while (@ob_end_clean());
-
-		// Prevent session locking (see #2804)
-		session_write_close();
-
-		// Open the "save as …" dialogue
-		header('Content-Type: ' . $objFile->mime);
-		header('Content-Transfer-Encoding: binary');
-		header('Content-Disposition: attachment; filename="' . $objFile->basename . '"');
-		header('Content-Length: ' . $objFile->filesize);
-		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-		header('Pragma: public');
-		header('Expires: 0');
-		header('Connection: close');
-
-		$resFile = fopen(TL_ROOT . '/' . $strFile, 'rb');
-		fpassthru($resFile);
-		fclose($resFile);
 
 		// HOOK: post download callback
 		if (isset($GLOBALS['TL_HOOKS']['postDownload']) && is_array($GLOBALS['TL_HOOKS']['postDownload']))
@@ -2382,18 +2217,18 @@ abstract class Controller extends \System
 			}
 		}
 
-		// Stop the script
-		exit;
+		// Send the file (will stop the script execution)
+		$objFile->sendToBrowser();
 	}
 
 
 	/**
 	 * Load a set of DCA files
-	 * 
+	 *
 	 * @param string  $strName    The table name
 	 * @param boolean $blnNoCache If true, the cache will be bypassed
 	 */
-	protected function loadDataContainer($strName, $blnNoCache=false)
+	public function loadDataContainer($strName, $blnNoCache=false)
 	{
 		// Return if the data has been loaded already
 		if (isset($GLOBALS['loadDataContainer'][$strName]) && !$blnNoCache)
@@ -2401,31 +2236,24 @@ abstract class Controller extends \System
 			return;
 		}
 
-		$strCacheFile = TL_ROOT . '/system/cache/dca/' . $strName . '.php';
+		$strCacheFile = 'system/cache/dca/' . $strName . '.php';
 
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists($strCacheFile))
+		// Try to load from cache
+		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
 		{
-			include $strCacheFile;
+			include TL_ROOT . '/' . $strCacheFile;
 		}
 		else
 		{
-			// Generate the cache file
-			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php', true);
-			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
-
-			// Parse all module folders
 			foreach ($this->Config->getActiveModules() as $strModule)
 			{
-				$strFile = TL_ROOT . '/system/modules/' . $strModule . '/dca/' . $strName . '.php';
+				$strFile = 'system/modules/' . $strModule . '/dca/' . $strName . '.php';
 
-				if (file_exists($strFile))
+				if (file_exists(TL_ROOT . '/' . $strFile))
 				{
-					$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
-					include $strFile;
+					include TL_ROOT . '/' . $strFile;
 				}
 			}
-
-			$objCacheFile->close();
 		}
 
 		// HOOK: allow to load custom settings
@@ -2450,244 +2278,12 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Convert a DCA file configuration to be used with widgets
-	 * 
-	 * @param array  $arrData  The field configuration array
-	 * @param string $strName  The field name in the form
-	 * @param mixed  $varValue The field value
-	 * @param string $strField The field name in the database
-	 * @param string $strTable The table name
-	 * 
-	 * @return array An array that can be passed to a widget
-	 */
-	protected function prepareForWidget($arrData, $strName, $varValue=null, $strField='', $strTable='')
-	{
-		$arrNew = $arrData['eval'];
-
-		$arrNew['id'] = $strName;
-		$arrNew['name'] = $strName;
-		$arrNew['strField'] = $strField;
-		$arrNew['strTable'] = $strTable;
-		$arrNew['label'] = (($label = is_array($arrData['label']) ? $arrData['label'][0] : $arrData['label']) != false) ? $label : $strField;
-		$arrNew['description'] = $arrData['label'][1];
-		$arrNew['type'] = $arrData['inputType'];
-		$arrNew['activeRecord'] = $arrData['activeRecord'];
-
-		// Internet Explorer does not support onchange for checkboxes and radio buttons
-		if ($arrData['eval']['submitOnChange'])
-		{
-			if ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard' || $arrData['inputType'] == 'radio' || $arrData['inputType'] == 'radioTable')
-			{
-				$arrNew['onclick'] = trim($arrNew['onclick'] . " Backend.autoSubmit('".$strTable."')");
-			}
-			else
-			{
-				$arrNew['onchange'] = trim($arrNew['onchange'] . " Backend.autoSubmit('".$strTable."')");
-			}
-		}
-
-		$arrNew['allowHtml'] = ($arrData['eval']['allowHtml'] || strlen($arrData['eval']['rte']) || $arrData['eval']['preserveTags']) ? true : false;
-
-		// Decode entities if HTML is allowed
-		if ($arrNew['allowHtml'] || $arrData['inputType'] == 'fileTree')
-		{
-			$arrNew['decodeEntities'] = true;
-		}
-
-		// Add Ajax event
-		if ($arrData['inputType'] == 'checkbox' && is_array($GLOBALS['TL_DCA'][$strTable]['subpalettes']) && in_array($strField, array_keys($GLOBALS['TL_DCA'][$strTable]['subpalettes'])) && $arrData['eval']['submitOnChange'])
-		{
-			$arrNew['onclick'] = "AjaxRequest.toggleSubpalette(this, 'sub_".$strName."', '".$strField."')";
-		}
-
-		// Options callback
-		if (is_array($arrData['options_callback']))
-		{
-			if (!is_object($arrData['options_callback'][0]))
-			{
-				$this->import($arrData['options_callback'][0]);
-			}
-
-			$arrData['options'] = $this->$arrData['options_callback'][0]->$arrData['options_callback'][1]($this);
-		}
-
-		// Foreign key
-		elseif (isset($arrData['foreignKey']))
-		{
-			$arrKey = explode('.', $arrData['foreignKey'], 2);
-			$objOptions = $this->Database->execute("SELECT id, " . $arrKey[1] . " AS value FROM " . $arrKey[0] . " WHERE tstamp>0 ORDER BY value");
-
-			if ($objOptions->numRows)
-			{
-				$arrData['options'] = array();
-
-				while($objOptions->next())
-				{
-					$arrData['options'][$objOptions->id] = $objOptions->value;
-				}
-			}
-		}
-
-		// Add default option to single checkbox
-		if ($arrData['inputType'] == 'checkbox' && !isset($arrData['options']) && !isset($arrData['options_callback']) && !isset($arrData['foreignKey']))
-		{
-			if (TL_MODE == 'FE' && isset($arrNew['description']))
-			{
-				$arrNew['options'][] = array('value'=>1, 'label'=>$arrNew['description']);
-			}
-			else
-			{
-				$arrNew['options'][] = array('value'=>1, 'label'=>$arrNew['label']);
-			}
-		}
-
-		// Add options
-		if (is_array($arrData['options']))
-		{
-			$blnIsAssociative = ($arrData['eval']['isAssociative'] || array_is_assoc($arrData['options']));
-			$blnUseReference = isset($arrData['reference']);
-
-			if ($arrData['eval']['includeBlankOption'] && !$arrData['eval']['multiple'])
-			{
-				$strLabel = isset($arrData['eval']['blankOptionLabel']) ? $arrData['eval']['blankOptionLabel'] : '-';
-				$arrNew['options'][] = array('value'=>'', 'label'=>$strLabel);
-			}
-
-			foreach ($arrData['options'] as $k=>$v)
-			{
-				if (!is_array($v))
-				{
-					$arrNew['options'][] = array('value'=>($blnIsAssociative ? $k : $v), 'label'=>($blnUseReference ? ((($ref = (is_array($arrData['reference'][$v]) ? $arrData['reference'][$v][0] : $arrData['reference'][$v])) != false) ? $ref : $v) : $v));
-					continue;
-				}
-
-				$key = $blnUseReference ? ((($ref = (is_array($arrData['reference'][$k]) ? $arrData['reference'][$k][0] : $arrData['reference'][$k])) != false) ? $ref : $k) : $k;
-				$blnIsAssoc = array_is_assoc($v);
-
-				foreach ($v as $kk=>$vv)
-				{
-					$arrNew['options'][$key][] = array('value'=>($blnIsAssoc ? $kk : $vv), 'label'=>($blnUseReference ? ((($ref = (is_array($arrData['reference'][$vv]) ? $arrData['reference'][$vv][0] : $arrData['reference'][$vv])) != false) ? $ref : $vv) : $vv));
-				}
-			}
-		}
-
-		$arrNew['value'] = deserialize($varValue);
-
-		// Convert timestamps
-		if ($varValue != '' && ($arrData['eval']['rgxp'] == 'date' || $arrData['eval']['rgxp'] == 'time' || $arrData['eval']['rgxp'] == 'datim'))
-		{
-			$objDate = new \Date($varValue);
-			$arrNew['value'] = $objDate->{$arrData['eval']['rgxp']};
-		}
-
-		return $arrNew;
-	}
-
-
-	/**
-	 * Create an initial version of a record
-	 * 
-	 * @param string  $strTable The table name
-	 * @param integer $intId    The ID of the element to be versioned
-	 */
-	protected function createInitialVersion($strTable, $intId)
-	{
-		if (!$GLOBALS['TL_DCA'][$strTable]['config']['enableVersioning'])
-		{
-			return;
-		}
-
-		$objVersion = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_version WHERE fromTable=? AND pid=?")
-									 ->limit(1)
-									 ->executeUncached($strTable, $intId);
-
-		if ($objVersion->count < 1)
-		{
-			$this->createNewVersion($strTable, $intId);
-		}
-	}
-
-
-	/**
-	 * Create a new version of a record
-	 * 
-	 * @param string  $strTable The table name
-	 * @param integer $intId    The ID of the element to be versioned
-	 */
-	protected function createNewVersion($strTable, $intId)
-	{
-		if (!$GLOBALS['TL_DCA'][$strTable]['config']['enableVersioning'])
-		{
-			return;
-		}
-
-		// Delete old versions from the database
-		$this->Database->prepare("DELETE FROM tl_version WHERE tstamp<?")
-					   ->execute((time() - $GLOBALS['TL_CONFIG']['versionPeriod']));
-
-		// Get the new record
-		$objRecord = $this->Database->prepare("SELECT * FROM " . $strTable . " WHERE id=?")
-									->limit(1)
-									->executeUncached($intId);
-
-		if ($objRecord->numRows < 1 || $objRecord->tstamp < 1)
-		{
-			return;
-		}
-
-		$intVersion = 1;
-		$this->import('BackendUser', 'User');
-
-		$objVersion = $this->Database->prepare("SELECT MAX(version) AS version FROM tl_version WHERE pid=? AND fromTable=?")
-									 ->executeUncached($intId, $strTable);
-
-		if ($objVersion->version !== null)
-		{
-			$intVersion = $objVersion->version + 1;
-		}
-
-		$strDescription = '';
-
-		if (isset($objRecord->title))
-		{
-			$strDescription = $objRecord->title;
-		}
-		elseif (isset($objRecord->name))
-		{
-			$strDescription = $objRecord->name;
-		}
-		elseif (isset($objRecord->headline))
-		{
-			$strDescription = $objRecord->headline;
-		}
-		elseif (isset($objRecord->selector))
-		{
-			$strDescription = $objRecord->selector;
-		}
-
-		$strUrl = \Environment::get('request');
-
-		// Do not save the URL if the visibility is toggled via Ajax
-		if (preg_match('/&(amp;)?state=/', $strUrl))
-		{
-			$strUrl = '';
-		}
-
-		$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=? AND fromTable=?")
-					   ->execute($intId, $strTable);
-
-		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, editUrl, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)")
-					   ->execute($intId, time(), $intVersion, $strTable, $this->User->username, $this->User->id, $strDescription, $strUrl, serialize($objRecord->row()));
-	}
-
-
-	/**
 	 * Redirect to a front end page
-	 * 
+	 *
 	 * @param integer $intPage    The page ID
 	 * @param mixed   $varArticle An optional article alias
 	 * @param boolean $blnReturn  If true, return the URL and don't redirect
-	 * 
+	 *
 	 * @return string The URL of the target page
 	 */
 	protected function redirectToFrontendPage($intPage, $varArticle=null, $blnReturn=false)
@@ -2698,7 +2294,7 @@ abstract class Controller extends \System
 		}
 
 		$strDomain = \Environment::get('base');
-		$objPage = $this->getPageDetails($intPage);
+		$objPage = \PageModel::findWithDetails($intPage);
 
 		if ($objPage->domain != '')
 		{
@@ -2724,10 +2320,10 @@ abstract class Controller extends \System
 	/**
 	 * Get the parent records of an entry and return them as string which can
 	 * be used in a log message
-	 * 
+	 *
 	 * @param string  $strTable The table name
 	 * @param integer $intId    The record ID
-	 * 
+	 *
 	 * @return string A string that can be used in a log message
 	 */
 	protected function getParentEntries($strTable, $intId)
@@ -2775,9 +2371,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Take an array of file paths and eliminate the nested ones
-	 * 
+	 *
 	 * @param array $arrPaths The array of file paths
-	 * 
+	 *
 	 * @return array The file paths array without the nested paths
 	 */
 	protected function eliminateNestedPaths($arrPaths)
@@ -2800,11 +2396,11 @@ abstract class Controller extends \System
 
 	/**
 	 * Take an array of pages and eliminate the nested ones
-	 * 
+	 *
 	 * @param array   $arrPages   The array of page IDs
 	 * @param string  $strTable   The table name
 	 * @param boolean $blnSorting True if the table has a sorting field
-	 * 
+	 *
 	 * @return array The page IDs array without the nested IDs
 	 */
 	protected function eliminateNestedPages($arrPages, $strTable=null, $blnSorting=false)
@@ -2828,129 +2424,8 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Return a "selected" attribute if the current option is selected
-	 * 
-	 * @param string $strName  The option name
-	 * @param mixed  $varValue The option value
-	 * 
-	 * @return string The attribute or an empty string
-	 */
-	public static function optionSelected($strName, $varValue)
-	{
-		if ($strName === '')
-		{
-			return '';
-		}
-
-		$attribute = ' selected';
-
-		if (TL_MODE == 'FE')
-		{
-			global $objPage;
-
-			if ($objPage->outputFormat == 'xhtml')
-			{
-				$attribute = ' selected="selected"';
-			}
-		}
-
-		return (is_array($varValue) ? in_array($strName, $varValue) : $strName == $varValue) ? $attribute : '';
-	}
-
-
-	/**
-	 * Return a "checked" attribute if the current option is checked
-	 * 
-	 * @param string $strName  The option name
-	 * @param mixed  $varValue The option value
-	 * 
-	 * @return string The attribute or an empty string
-	 */
-	public static function optionChecked($strName, $varValue)
-	{
-		$attribute = ' checked';
-
-		if (TL_MODE == 'FE')
-		{
-			global $objPage;
-
-			if ($objPage->outputFormat == 'xhtml')
-			{
-				$attribute = ' checked="checked"';
-			}
-		}
-
-		return (is_array($varValue) ? in_array($strName, $varValue) : $strName == $varValue) ? $attribute : '';
-	}
-
-
-	/**
-	 * Find a content element in the TL_CTE array and return the class name
-	 * 
-	 * @param string $strName The content element name
-	 * 
-	 * @return string The class name
-	 */
-	public static function findContentElement($strName)
-	{
-		foreach ($GLOBALS['TL_CTE'] as $v)
-		{
-			foreach ($v as $kk=>$vv)
-			{
-				if ($kk == $strName)
-				{
-					return $vv;
-				}
-			}
-		}
-
-		return '';
-	}
-
-
-	/**
-	 * Find a front end module in the FE_MOD array and return the class name
-	 * 
-	 * @param string $strName The front end module name
-	 * 
-	 * @return string The class name
-	 */
-	public static function findFrontendModule($strName)
-	{
-		foreach ($GLOBALS['FE_MOD'] as $v)
-		{
-			foreach ($v as $kk=>$vv)
-			{
-				if ($kk == $strName)
-				{
-					return $vv;
-				}
-			}
-		}
-
-		return '';
-	}
-
-
-	/**
-	 * Remove old XML files from the share directory
-	 * 
-	 * @param boolean $blnReturn If true, only return the finds and don't delete
-	 * 
-	 * @return array An array of old XML files
-	 * 
-	 * @deprecated Use Automator::purgeXmlFiles() instead
-	 */
-	protected function removeOldFeeds($blnReturn=false)
-	{
-		$this->import('Automator');
-		$this->Automator->purgeXmlFiles($blnReturn);
-	}
-
-
-	/**
 	 * Add an image to a template
-	 * 
+	 *
 	 * @param object  $objTemplate   The template object to add the image to
 	 * @param array   $arrItem       The element or module as array
 	 * @param integer $intMaxWidth   An optional maximum width of the image
@@ -3038,7 +2513,7 @@ abstract class Controller extends \System
 					// Do not add the TL_FILES_URL to external URLs (see #4923)
 					if (strncmp($arrItem['imageUrl'], 'http://', 7) !== 0 && strncmp($arrItem['imageUrl'], 'https://', 8) !== 0)
 					{
-						$objTemplate->href = TL_FILES_URL . static::urlEncode($arrItem['imageUrl']);
+						$objTemplate->href = TL_FILES_URL . \System::urlEncode($arrItem['imageUrl']);
 					}
 
 					$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
@@ -3053,7 +2528,7 @@ abstract class Controller extends \System
 		// Fullsize view
 		elseif ($arrItem['fullsize'] && TL_MODE == 'FE')
 		{
-			$objTemplate->href = TL_FILES_URL . static::urlEncode($arrItem['singleSRC']);
+			$objTemplate->href = TL_FILES_URL . \System::urlEncode($arrItem['singleSRC']);
 			$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 		}
 
@@ -3073,7 +2548,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Add enclosures to a template
-	 * 
+	 *
 	 * @param object $objTemplate The template object to add the enclosures to
 	 * @param array  $arrItem     The element or module as array
 	 * @param string $strKey      The name of the enclosures field in $arrItem
@@ -3110,7 +2585,7 @@ abstract class Controller extends \System
 
 		$file = \Input::get('file', true);
 
-		// Send the file to the browser
+		// Send the file to the browser and do not send a 404 header (see #5178)
 		if ($file != '')
 		{
 			while ($objFiles->next())
@@ -3121,7 +2596,7 @@ abstract class Controller extends \System
 				}
 			}
 
-			// Do not send a 404 header (see #5178)
+			$objFiles->reset();
 		}
 
 		$arrEnclosures = array();
@@ -3138,15 +2613,24 @@ abstract class Controller extends \System
 				}
 
 				$objFile = new \File($objFiles->path, true);
+				$strHref = \Environment::get('request');
+
+				// Remove an existing file parameter (see #5683)
+				if (preg_match('/(&(amp;)?|\?)file=/', $strHref))
+				{
+					$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
+				}
+
+				$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFiles->path);
 
 				$arrEnclosures[] = array
 				(
 					'link'      => $objFiles->name,
 					'filesize'  => static::getReadableSize($objFile->filesize),
 					'title'     => ucfirst(str_replace('_', ' ', $objFile->filename)),
-					'href'      => \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . static::urlEncode($objFiles->path),
+					'href'      => $strHref,
 					'enclosure' => $objFiles->path,
-					'icon'      => TL_FILES_URL . 'system/themes/' . static::getTheme() . '/images/' . $objFile->icon,
+					'icon'      => TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon,
 					'mime'      => $objFile->mime
 				);
 			}
@@ -3158,7 +2642,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Set the static URL constants
-	 * 
+	 *
 	 * @param object $objPage An optional page object
 	 */
 	public static function setStaticUrls($objPage=null)
@@ -3203,9 +2687,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Add a static URL to a script
-	 * 
+	 *
 	 * @param string $script The script path
-	 * 
+	 *
 	 * @return string The script path with the static URL
 	 */
 	public static function addStaticUrlTo($script)
@@ -3227,12 +2711,115 @@ abstract class Controller extends \System
 
 
 	/**
+	 * Return the current theme as string
+	 *
+	 * @return string The name of the theme
+	 *
+	 * @deprecated Use Backend::getTheme() instead
+	 */
+	public static function getTheme()
+	{
+		return \Backend::getTheme();
+	}
+
+
+	/**
+	 * Return the back end themes as array
+	 *
+	 * @return array An array of available back end themes
+	 *
+	 * @deprecated Use Backend::getThemes() instead
+	 */
+	public static function getBackendThemes()
+	{
+		return \Backend::getThemes();
+	}
+
+
+	/**
+	 * Get the details of a page including inherited parameters
+	 *
+	 * @param mixed $intId A page ID or a Model object
+	 *
+	 * @return \Model|null The page model or null
+	 *
+	 * @deprecated Use PageModel::findWithDetails() or PageModel->loadDetails() instead
+	 */
+	public static function getPageDetails($intId)
+	{
+		if ($intId instanceof \Model)
+		{
+			return $intId->loadDetails();
+		}
+		elseif ($intId instanceof \Model\Collection)
+		{
+			return $intId->current()->loadDetails();
+		}
+		elseif (is_object($intId))
+		{
+			$strKey = __METHOD__ . '-' . $intId->id;
+
+			// Try to load from cache
+			if (\Cache::has($strKey))
+			{
+				return \Cache::get($strKey);
+			}
+
+			// Create a model from the database result
+			$objPage = new \PageModel();
+			$objPage->setRow($intId->row());
+			$objPage->loadDetails();
+
+			\Cache::set($strKey, $objPage);
+			return $objPage;
+		}
+		else
+		{
+			// Invalid ID
+			if (!strlen($intId) || $intId < 1)
+			{
+				return null;
+			}
+
+			$strKey = __METHOD__ . '-' . $intId;
+
+			// Try to load from cache
+			if (\Cache::has($strKey))
+			{
+				return \Cache::get($strKey);
+			}
+
+			$objPage = \PageModel::findWithDetails($intId);
+
+			\Cache::set($strKey, $objPage);
+			return $objPage;
+		}
+	}
+
+
+	/**
+	 * Remove old XML files from the share directory
+	 *
+	 * @param boolean $blnReturn If true, only return the finds and don't delete
+	 *
+	 * @return array An array of old XML files
+	 *
+	 * @deprecated Use Automator::purgeXmlFiles() instead
+	 */
+	protected function removeOldFeeds($blnReturn=false)
+	{
+		$this->import('Automator');
+		$this->Automator->purgeXmlFiles($blnReturn);
+	}
+
+
+	/**
 	 * Return true if a class exists (tries to autoload the class)
-	 * 
+	 *
 	 * @param string $strClass The class name
-	 * 
+	 *
 	 * @return boolean True if the class exists
-	 * 
+	 *
 	 * @deprecated Use the PHP function class_exists() instead
 	 */
 	protected function classFileExists($strClass)
@@ -3243,11 +2830,11 @@ abstract class Controller extends \System
 
 	/**
 	 * Restore basic entities
-	 * 
+	 *
 	 * @param string $strBuffer The string with the tags to be replaced
-	 * 
+	 *
 	 * @return string The string with the original entities
-	 * 
+	 *
 	 * @deprecated Use String::restoreBasicEntities() instead
 	 */
 	public static function restoreBasicEntities($strBuffer)
@@ -3258,14 +2845,14 @@ abstract class Controller extends \System
 
 	/**
 	 * Resize an image and crop it if necessary
-	 * 
+	 *
 	 * @param string  $image  The image path
 	 * @param integer $width  The target width
 	 * @param integer $height The target height
 	 * @param string  $mode   An optional resize mode
-	 * 
+	 *
 	 * @return boolean True if the image has been resized correctly
-	 * 
+	 *
 	 * @deprecated Use Image::resize() instead
 	 */
 	protected function resizeImage($image, $width, $height, $mode='')
@@ -3276,16 +2863,16 @@ abstract class Controller extends \System
 
 	/**
 	 * Resize an image and crop it if necessary
-	 * 
+	 *
 	 * @param string  $image  The image path
 	 * @param integer $width  The target width
 	 * @param integer $height The target height
 	 * @param string  $mode   An optional resize mode
 	 * @param string  $target An optional target to be replaced
 	 * @param boolean $force  Override existing target images
-	 * 
+	 *
 	 * @return string|null The image path or null
-	 * 
+	 *
 	 * @deprecated Use Image::get() instead
 	 */
 	protected function getImage($image, $width, $height, $mode='', $target=null, $force=false)
@@ -3295,10 +2882,27 @@ abstract class Controller extends \System
 
 
 	/**
+	 * Generate an image tag and return it as string
+	 *
+	 * @param string $src        The image path
+	 * @param string $alt        An optional alt attribute
+	 * @param string $attributes A string of other attributes
+	 *
+	 * @return string The image HTML tag
+	 *
+	 * @deprecated Use Image::getHtml() instead
+	 */
+	public static function generateImage($src, $alt='', $attributes='')
+	{
+		return \Image::getHtml($src, $alt, $attributes);
+	}
+
+
+	/**
 	 * Return true for backwards compatibility (see #3218)
-	 * 
+	 *
 	 * @return boolean
-	 * 
+	 *
 	 * @deprecated Specify 'datepicker'=>true in your DCA file instead
 	 */
 	protected function getDatePickerString()
@@ -3309,9 +2913,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Return the installed back end languages as array
-	 * 
+	 *
 	 * @return array An array of available back end languages
-	 * 
+	 *
 	 * @deprecated Use System::getLanguages(true) instead
 	 */
 	protected function getBackendLanguages()
@@ -3322,12 +2926,12 @@ abstract class Controller extends \System
 
 	/**
 	 * Parse simple tokens that can be used to personalize newsletters
-	 * 
+	 *
 	 * @param string $strBuffer The text with the tokens to be replaced
 	 * @param array  $arrData   The replacement data as array
-	 * 
+	 *
 	 * @return string The text with the replaced tokens
-	 * 
+	 *
 	 * @deprecated Use String::parseSimpleTokens() instead
 	 */
 	protected function parseSimpleTokens($strBuffer, $arrData)
@@ -3337,18 +2941,37 @@ abstract class Controller extends \System
 
 
 	/**
+	 * Convert a DCA file configuration to be used with widgets
+	 *
+	 * @param array  $arrData  The field configuration array
+	 * @param string $strName  The field name in the form
+	 * @param mixed  $varValue The field value
+	 * @param string $strField The field name in the database
+	 * @param string $strTable The table name
+	 *
+	 * @return array An array that can be passed to a widget
+	 *
+	 * @deprecated Use Widget::getAttributesFromDca() instead
+	 */
+	protected function prepareForWidget($arrData, $strName, $varValue=null, $strField='', $strTable='')
+	{
+		return \Widget::getAttributesFromDca($arrData, $strName, $varValue, $strField, $strTable);
+	}
+
+
+	/**
 	 * Return the IDs of all child records of a particular record (see #2475)
-	 * 
+	 *
 	 * @author Andreas Schempp
-	 * 
+	 *
 	 * @param mixed   $arrParentIds An array of parent IDs
 	 * @param string  $strTable     The table name
 	 * @param boolean $blnSorting   True if the table has a sorting field
 	 * @param array   $arrReturn    The array to be returned
 	 * @param string  $strWhere     Additional WHERE condition
-	 * 
+	 *
 	 * @return array An array of child record IDs
-	 * 
+	 *
 	 * @deprecated Use Database::getChildRecords() instead
 	 */
 	protected function getChildRecords($arrParentIds, $strTable, $blnSorting=false, $arrReturn=array(), $strWhere='')
@@ -3359,16 +2982,135 @@ abstract class Controller extends \System
 
 	/**
 	 * Return the IDs of all parent records of a particular record
-	 * 
+	 *
 	 * @param integer $intId    The ID of the record
 	 * @param string  $strTable The table name
-	 * 
+	 *
 	 * @return array An array of parent record IDs
-	 * 
+	 *
 	 * @deprecated Use Database::getParentRecords() instead
 	 */
 	protected function getParentRecords($intId, $strTable)
 	{
 		return $this->Database->getParentRecords($intId, $strTable);
+	}
+
+
+	/**
+	 * Print an article as PDF and stream it to the browser
+	 *
+	 * @param object $objArticle An article object
+	 *
+	 * @deprecated Use ModuleArticle->generatePdf() instead
+	 */
+	protected function printArticleAsPdf($objArticle)
+	{
+		$objArticle = new \ModuleArticle($objArticle);
+		$objArticle->generatePdf();
+	}
+
+
+	/**
+	 * Return all page sections as array
+	 *
+	 * @return array An array of active page sections
+	 *
+	 * @deprecated See #4693
+	 */
+	public static function getPageSections()
+	{
+		return array_merge(array('header', 'left', 'right', 'main', 'footer'), trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']));
+	}
+
+
+	/**
+	 * Return a "selected" attribute if the option is selected
+	 *
+	 * @param string $strOption The option to check
+	 * @param mixed  $varValues One or more values to check against
+	 *
+	 * @return string The attribute or an empty string
+	 *
+	 * @deprecated Use Widget::optionSelected() instead
+	 */
+	public static function optionSelected($strOption, $varValues)
+	{
+		return \Widget::optionSelected($strOption, $varValues);
+	}
+
+
+	/**
+	 * Return a "checked" attribute if the option is checked
+	 *
+	 * @param string $strOption The option to check
+	 * @param mixed  $varValues One or more values to check against
+	 *
+	 * @return string The attribute or an empty string
+	 *
+	 * @deprecated Use Widget::optionChecked() instead
+	 */
+	public static function optionChecked($strOption, $varValues)
+	{
+		return \Widget::optionChecked($strOption, $varValues);
+	}
+
+
+	/**
+	 * Find a content element in the TL_CTE array and return the class name
+	 *
+	 * @param string $strName The content element name
+	 *
+	 * @return string The class name
+	 *
+	 * @deprecated Use ContentElement::findClass() instead
+	 */
+	public static function findContentElement($strName)
+	{
+		return \ContentElement::findClass($strName);
+	}
+
+
+	/**
+	 * Find a front end module in the FE_MOD array and return the class name
+	 *
+	 * @param string $strName The front end module name
+	 *
+	 * @return string The class name
+	 *
+	 * @deprecated Use Module::findClass() instead
+	 */
+	public static function findFrontendModule($strName)
+	{
+		return \Module::findClass($strName);
+	}
+
+
+	/**
+	 * Create an initial version of a record
+	 *
+	 * @param string  $strTable The table name
+	 * @param integer $intId    The ID of the element to be versioned
+	 *
+	 * @deprecated Use Versions->initialize() instead
+	 */
+	protected function createInitialVersion($strTable, $intId)
+	{
+		$objVersions = new \Versions($strTable, $intId);
+		$objVersions->initialize();
+	}
+
+
+	/**
+	 * Create a new version of a record
+	 *
+	 * @param string  $strTable The table name
+	 * @param integer $intId    The ID of the element to be versioned
+	 *
+	 * @deprecated Use Versions->create() instead
+	 */
+	protected function createNewVersion($strTable, $intId)
+	{
+		$objVersions = new \Versions($strTable, $intId);
+		$objVersions->create();
 	}
 }

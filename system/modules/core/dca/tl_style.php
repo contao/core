@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -137,10 +137,10 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 	(
 		'size'                        => 'width,height,minwidth,minheight,maxwidth,maxheight',
 		'positioning'                 => 'trbl,position,floating,clear,overflow,display',
-		'alignment'                   => 'margin,padding,align,verticalalign,textalign',
+		'alignment'                   => 'margin,padding,align,verticalalign,textalign,whitespace',
 		'background'                  => 'bgcolor,bgimage,bgposition,bgrepeat,shadowsize,shadowcolor,gradientAngle,gradientColors',
 		'border'                      => 'borderwidth,borderstyle,bordercolor,borderradius,bordercollapse,borderspacing',
-		'font'                        => 'fontfamily,fontsize,fontcolor,lineheight,fontstyle,whitespace,texttransform,textindent,letterspacing,wordspacing',
+		'font'                        => 'fontfamily,fontsize,fontcolor,lineheight,fontstyle,texttransform,textindent,letterspacing,wordspacing',
 		'list'                        => 'liststyletype,liststyleimage'
 	),
 
@@ -358,6 +358,14 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
+		'whitespace' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['whitespace'],
+			'inputType'               => 'select',
+			'options'                 => array('normal', 'nowrap', 'pre', 'pre-line', 'pre-wrap'),
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(8) NOT NULL default ''"
+		),
 		'background' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['background'],
@@ -376,7 +384,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bgimage'],
 			'inputType'               => 'text',
-			'eval'                    => array('files'=>true, 'paths'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes'], 'tl_class'=>'w50 wizard'),
+			'eval'                    => array('filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes'], 'fieldType'=>'radio', 'tl_class'=>'w50 wizard'),
 			'wizard' => array
 			(
 				array('tl_style', 'filePicker')
@@ -528,12 +536,6 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'eval'                    => array('multiple'=>true, 'tl_class'=>'clr'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'whitespace' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['whitespace'],
-			'inputType'               => 'checkbox',
-			'sql'                     => "char(1) NOT NULL default ''"
-		),
 		'texttransform' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['texttransform'],
@@ -587,7 +589,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['liststyleimage'],
 			'inputType'               => 'text',
-			'eval'                    => array('files'=>true, 'paths'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes'], 'tl_class'=>'w50 wizard'),
+			'eval'                    => array('filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes'], 'fieldType'=>'radio', 'tl_class'=>'w50 wizard'),
 			'wizard' => array
 			(
 				array('tl_style', 'filePicker')
@@ -677,7 +679,7 @@ class tl_style extends Backend
 	 */
 	public function filePicker(DataContainer $dc)
 	{
-		return ' <a href="contao/file.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.$dc->value.'" title="'.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['filepicker'])).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MOD']['files'][0]).'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="contao/file.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.$dc->value.'" title="'.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['filepicker'])).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MOD']['files'][0]).'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . Image::getHtml('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
@@ -774,7 +776,7 @@ class tl_style extends Backend
 			$icon = 'invisible.gif';
 		}
 
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 
@@ -785,7 +787,8 @@ class tl_style extends Backend
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{
-		$this->createInitialVersion('tl_style', $intId);
+		$objVersions = new Versions('tl_style', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_style']['fields']['invisible']['save_callback']))
@@ -801,7 +804,7 @@ class tl_style extends Backend
 		$this->Database->prepare("UPDATE tl_style SET tstamp=". time() .", invisible='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_style', $intId);
+		$objVersions->create();
 		$this->log('A new version of record "tl_style.id='.$intId.'" has been created'.$this->getParentEntries('tl_style', $intId), 'tl_style toggleVisibility()', TL_GENERAL);
 
 		// Recreate the style sheet

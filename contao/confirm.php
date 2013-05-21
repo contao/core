@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -45,8 +45,8 @@ class Confirm extends Backend
 
 		$this->User->authenticate();
 
-		$this->loadLanguageFile('default');
-		$this->loadLanguageFile('modules');
+		System::loadLanguageFile('default');
+		System::loadLanguageFile('modules');
 	}
 
 
@@ -112,7 +112,7 @@ class Confirm extends Backend
 			}
 		}
 
-		$this->loadLanguageFile($arrInfo['table']);
+		System::loadLanguageFile($arrInfo['table']);
 
 		// Override the action label
 		if (isset($arrInfo['clipboard']))
@@ -137,6 +137,7 @@ class Confirm extends Backend
 
 		unset($arrInfo['pid']);
 		unset($arrInfo['clipboard']);
+		unset($arrInfo['ref']);
 		unset($arrInfo['mode']);
 
 		// Template variables
@@ -147,7 +148,7 @@ class Confirm extends Backend
 		$this->Template->explain = $GLOBALS['TL_LANG']['ERR']['invalidTokenUrl'];
 		$this->Template->cancel = $GLOBALS['TL_LANG']['MSC']['cancelBT'];
 		$this->Template->continue = $GLOBALS['TL_LANG']['MSC']['continue'];
-		$this->Template->theme = $this->getTheme();
+		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['invalidTokenUrl']);

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -14,7 +14,7 @@
 /**
  * Load default language file
  */
-$this->loadLanguageFile('tl_files');
+System::loadLanguageFile('tl_files');
 
 
 /**
@@ -92,19 +92,19 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 				'icon'                => 'cut.gif',
 				'attributes'          => 'onclick="Backend.getScrollOffset()"'
 			),
-			'source' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_files']['source'],
-				'href'                => 'act=source',
-				'icon'                => 'editor.gif',
-				'button_callback'     => array('tl_templates', 'editSource')
-			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
+			),
+			'source' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_files']['source'],
+				'href'                => 'act=source',
+				'icon'                => 'editor.gif',
+				'button_callback'     => array('tl_templates', 'editSource')
 			)
 		)
 	),
@@ -171,7 +171,7 @@ class tl_templates extends Backend
 		$arrLinks = array();
 
 		// Add root link
-		$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/filemounts.gif" width="18" height="18" alt=""> <a href="' . $this->addToUrl('node=') . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectAllNodes']).'">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
+		$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . Backend::getTheme() . '/images/filemounts.gif" width="18" height="18" alt=""> <a href="' . $this->addToUrl('node=') . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectAllNodes']).'">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
 
 		// Generate breadcrumb trail
 		foreach ($arrNodes as $strFolder)
@@ -181,11 +181,11 @@ class tl_templates extends Backend
 			// No link for the active folder
 			if ($strFolder == basename($strNode))
 			{
-				$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/folderC.gif" width="18" height="18" alt=""> ' . $strFolder;
+				$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . Backend::getTheme() . '/images/folderC.gif" width="18" height="18" alt=""> ' . $strFolder;
 			}
 			else
 			{
-				$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/folderC.gif" width="18" height="18" alt=""> <a href="' . $this->addToUrl('node='.$strPath) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $strFolder . '</a>';
+				$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . Backend::getTheme() . '/images/folderC.gif" width="18" height="18" alt=""> <a href="' . $this->addToUrl('node='.$strPath) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $strFolder . '</a>';
 			}
 		}
 
@@ -210,30 +210,38 @@ class tl_templates extends Backend
 		$strError = '';
 
 		// Copy an existing template
-		if (Input::post('FORM_SUBMIT') == 'tl_create_template' && file_exists(TL_ROOT . '/system/modules/' . Input::post('original')))
+		if (Input::post('FORM_SUBMIT') == 'tl_create_template')
 		{
 			$strOriginal = Input::post('original');
 			$strTarget = str_replace('../', '', Input::post('target'));
 
-			// Validate the target path
-			if (strncmp($strTarget, 'templates', 9) !== 0 || !is_dir(TL_ROOT . '/' . $strTarget))
+			// Validate the source path
+			if (strncmp($strOriginal, 'system/modules/', 15) !== 0 || !file_exists(TL_ROOT . '/' . $strOriginal))
 			{
-				$strError = sprintf($GLOBALS['TL_LANG']['tl_templates']['invalid'], $strTarget);
+				$strError = sprintf($GLOBALS['TL_LANG']['tl_templates']['invalid'], $strOriginal);
 			}
 			else
 			{
-				$strTarget .= '/' . basename($strOriginal);
-
-				// Check whether the target file exists
-				if (file_exists(TL_ROOT . '/' . $strTarget))
+				// Validate the target path
+				if (strncmp($strTarget, 'templates', 9) !== 0 || !is_dir(TL_ROOT . '/' . $strTarget))
 				{
-					$strError = sprintf($GLOBALS['TL_LANG']['tl_templates']['exists'], $strTarget);
+					$strError = sprintf($GLOBALS['TL_LANG']['tl_templates']['invalid'], $strTarget);
 				}
 				else
 				{
-					$this->import('Files');
-					$this->Files->copy('system/modules/' . $strOriginal, $strTarget);
-					$this->redirect($this->getReferer());
+					$strTarget .= '/' . basename($strOriginal);
+
+					// Check whether the target file exists
+					if (file_exists(TL_ROOT . '/' . $strTarget))
+					{
+						$strError = sprintf($GLOBALS['TL_LANG']['tl_templates']['exists'], $strTarget);
+					}
+					else
+					{
+						$this->import('Files');
+						$this->Files->copy($strOriginal, $strTarget);
+						$this->redirect($this->getReferer());
+					}
 				}
 			}
 		}
@@ -251,15 +259,22 @@ class tl_templates extends Backend
 			}
 
 			// Find all templates
-			foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates') as $strTemplate)
-			{
-				// Ignore non-template files
-				if (strncmp($strTemplate, '.', 1) === 0 || $strTemplate == 'tpl_editor.html5' || !preg_match('/\.(' . implode('|', $arrAllowed) . ')$/', $strTemplate))
-				{
-					continue;
-				}
+			$objFiles = new RecursiveIteratorIterator(
+				new RecursiveDirectoryIterator(
+					TL_ROOT . '/system/modules/' . $strModule . '/templates',
+					\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
+				)
+			);
 
-				$arrAllTemplates[$strModule][$strTemplate] = $strModule . '/templates/' . $strTemplate;
+			foreach ($objFiles as $objFile)
+			{
+				$strExtension = pathinfo($objFile->getFilename(), PATHINFO_EXTENSION);
+
+				if (in_array($strExtension, $arrAllowed))
+				{
+					$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
+					$arrAllTemplates[$strModule][basename($strRelpath)] = $strRelpath;
+				}
 			}
 		}
 
@@ -272,7 +287,7 @@ class tl_templates extends Backend
 
 			foreach ($v as $kk=>$vv)
 			{
-				$strAllTemplates .= sprintf('<option value="%s" class="%s"%s>%s</option>', $vv, ((strpos($vv, '.html5') === false) ? 'tl_gray' : ''), ((Input::post('original') == $vv) ? ' selected="selected"' : ''), $kk);
+				$strAllTemplates .= sprintf('<option value="%s"%s>%s</option>', $vv, ((Input::post('original') == $vv) ? ' selected="selected"' : ''), $kk);
 			}
 
 			$strAllTemplates .= '</optgroup>';
@@ -356,6 +371,6 @@ class tl_templates extends Backend
 	 */
 	public function editSource($row, $href, $label, $title, $icon, $attributes)
 	{
-		return is_file(TL_ROOT . '/' . $row['id']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return is_file(TL_ROOT . '/' . $row['id']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 }

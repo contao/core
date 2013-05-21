@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_module.php" source-language="en">
+    <body>
+      <trans-unit id="tl_module.cal_calendar.0">
+        <source>Calendars</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_calendar.1">
+        <source>Please select one or more calendars.</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_noSpan.0">
+        <source>Shortened view</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_noSpan.1">
+        <source>Show events only once even if they span multiple days.</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_startDay.0">
+        <source>Week start day</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_startDay.1">
+        <source>Here you can choose the week start day.</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_format.0">
+        <source>Event list format</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_format.1">
+        <source>Here you can choose the event list format.</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ignoreDynamic.0">
+        <source>Ignore URL parameters</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ignoreDynamic.1">
+        <source>Do not switch the time period based on the date/month/year URL parameters.</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_order.0">
+        <source>Sort order</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_order.1">
+        <source>Here you can choose the sort order.</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_readerModule.0">
+        <source>Event reader module</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_readerModule.1">
+        <source>Automatically switch to the event reader if an event has been selected.</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_limit.0">
+        <source>Number of events</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_limit.1">
+        <source>Here you can limit the number of events. Enter 0 to show all.</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_template.0">
+        <source>Event template</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_template.1">
+        <source>Here you can select the event template.</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ctemplate.0">
+        <source>Calendar template</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ctemplate.1">
+        <source>Here you can select the calendar template.</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_showQuantity.0">
+        <source>Show number of events</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_showQuantity.1">
+        <source>Show the number of events of each month in the menu.</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_list">
+        <source>Event list</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_day">
+        <source>Day</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_month">
+        <source>Month</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_year">
+        <source>Year</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_all">
+        <source>All events</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_upcoming">
+        <source>Upcoming events</source>
+      </trans-unit>
+      <trans-unit id="tl_module.next_7">
+        <source>+ 1 week</source>
+      </trans-unit>
+      <trans-unit id="tl_module.next_14">
+        <source>+ 2 weeks</source>
+      </trans-unit>
+      <trans-unit id="tl_module.next_30">
+        <source>+ 1 month</source>
+      </trans-unit>
+      <trans-unit id="tl_module.next_90">
+        <source>+ 3 months</source>
+      </trans-unit>
+      <trans-unit id="tl_module.next_180">
+        <source>+ 6 months</source>
+      </trans-unit>
+      <trans-unit id="tl_module.next_365">
+        <source>+ 1 year</source>
+      </trans-unit>
+      <trans-unit id="tl_module.next_two">
+        <source>+ 2 years</source>
+      </trans-unit>
+      <trans-unit id="tl_module.next_cur_month">
+        <source>of the current month</source>
+      </trans-unit>
+      <trans-unit id="tl_module.next_cur_year">
+        <source>of the current year</source>
+      </trans-unit>
+      <trans-unit id="tl_module.next_next_month">
+        <source>of the next month</source>
+      </trans-unit>
+      <trans-unit id="tl_module.next_next_year">
+        <source>of the next year</source>
+      </trans-unit>
+      <trans-unit id="tl_module.next_all">
+        <source>All upcoming events</source>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_past">
+        <source>Past events</source>
+      </trans-unit>
+      <trans-unit id="tl_module.past_7">
+        <source>- 1 week</source>
+      </trans-unit>
+      <trans-unit id="tl_module.past_14">
+        <source>- 2 weeks</source>
+      </trans-unit>
+      <trans-unit id="tl_module.past_30">
+        <source>- 1 month</source>
+      </trans-unit>
+      <trans-unit id="tl_module.past_90">
+        <source>- 3 months</source>
+      </trans-unit>
+      <trans-unit id="tl_module.past_180">
+        <source>- 6 months</source>
+      </trans-unit>
+      <trans-unit id="tl_module.past_365">
+        <source>- 1 year</source>
+      </trans-unit>
+      <trans-unit id="tl_module.past_two">
+        <source>- 2 years</source>
+      </trans-unit>
+      <trans-unit id="tl_module.past_cur_month">
+        <source>of the current month</source>
+      </trans-unit>
+      <trans-unit id="tl_module.past_cur_year">
+        <source>of the current year</source>
+      </trans-unit>
+      <trans-unit id="tl_module.past_prev_month">
+        <source>of the previous month</source>
+      </trans-unit>
+      <trans-unit id="tl_module.past_prev_year">
+        <source>of the previous year</source>
+      </trans-unit>
+      <trans-unit id="tl_module.past_all">
+        <source>All past events</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

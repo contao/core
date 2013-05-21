@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -24,6 +24,7 @@ $GLOBALS['TL_CONFIG']['os'] = array
 	'iPhone'        => array('os'=>'ios',        'mobile'=>true),
 	'iPod'          => array('os'=>'ios',        'mobile'=>true),
 	'Android'       => array('os'=>'android',    'mobile'=>true),
+	'BB10'          => array('os'=>'blackberry', 'mobile'=>true),
 	'Blackberry'    => array('os'=>'blackberry', 'mobile'=>true),
 	'Symbian'       => array('os'=>'symbian',    'mobile'=>true),
 	'WebOS'         => array('os'=>'webos',      'mobile'=>true),
@@ -35,7 +36,7 @@ $GLOBALS['TL_CONFIG']['os'] = array
 
 
 /**
- * Browsers (check OmniWeb before Safari and Opera Mini/Mobi before Opera!)
+ * Browsers (check OmniWeb and Silk before Safari and Opera Mini/Mobi before Opera!)
  */
 $GLOBALS['TL_CONFIG']['browser'] = array
 (
@@ -43,6 +44,7 @@ $GLOBALS['TL_CONFIG']['browser'] = array
 	'Firefox'    => array('browser'=>'firefox',      'shorty'=>'fx', 'engine'=>'gecko',   'version'=>'/^.*Firefox\/(\d+(\.\d+)*).*$/'),
 	'Chrome'     => array('browser'=>'chrome',       'shorty'=>'ch', 'engine'=>'webkit',  'version'=>'/^.*Chrome\/(\d+(\.\d+)*).*$/'),
 	'OmniWeb'    => array('browser'=>'omniweb',      'shorty'=>'ow', 'engine'=>'webkit',  'version'=>'/^.*Version\/(\d+(\.\d+)*).*$/'),
+	'Silk'       => array('browser'=>'silk',         'shorty'=>'si', 'engine'=>'silk',    'version'=>'/^.*Silk\/(\d+(\.\d+)*).*$/'),
 	'Safari'     => array('browser'=>'safari',       'shorty'=>'sf', 'engine'=>'webkit',  'version'=>'/^.*Version\/(\d+(\.\d+)*).*$/'),
 	'Opera Mini' => array('browser'=>'opera-mini',   'shorty'=>'oi', 'engine'=>'presto',  'version'=>'/^.*Opera Mini\/(\d+(\.\d+)*).*$/'),
 	'Opera Mobi' => array('browser'=>'opera-mobile', 'shorty'=>'om', 'engine'=>'presto',  'version'=>'/^.*Version\/(\d+(\.\d+)*).*$/'),

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package News
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -83,9 +83,10 @@ abstract class ModuleNews extends \Module
 	 * @param object
 	 * @param boolean
 	 * @param string
+	 * @param integer
 	 * @return string
 	 */
-	protected function parseArticle($objArticle, $blnAddArchive=false, $strClass='')
+	protected function parseArticle($objArticle, $blnAddArchive=false, $strClass='', $intCount=0)
 	{
 		global $objPage;
 
@@ -100,6 +101,7 @@ abstract class ModuleNews extends \Module
 		$objTemplate->more = $this->generateLink($GLOBALS['TL_LANG']['MSC']['more'], $objArticle, $blnAddArchive, true);
 		$objTemplate->link = $this->generateNewsUrl($objArticle, $blnAddArchive);
 		$objTemplate->archive = $objArticle->getRelated('pid');
+		$objTemplate->count = $intCount; // see #5708
 		$objTemplate->text = '';
 
 		// Clean the RTE output
@@ -222,7 +224,7 @@ abstract class ModuleNews extends \Module
 
 		while ($objArticles->next())
 		{
-			$arrArticles[] = $this->parseArticle($objArticles, $blnAddArchive, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'));
+			$arrArticles[] = $this->parseArticle($objArticles, $blnAddArchive, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count);
 		}
 
 		return $arrArticles;
@@ -251,7 +253,7 @@ abstract class ModuleNews extends \Module
 			switch ($field)
 			{
 				case 'date':
-					$return['date'] = $this->parseDate($objPage->datimFormat, $objArticle->date);
+					$return['date'] = \Date::parse($objPage->datimFormat, $objArticle->date);
 					break;
 
 				case 'author':

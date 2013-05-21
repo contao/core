@@ -135,7 +135,8 @@ var SimpleModal = new Class({
       }
 			   
       // Custom size Modal
-      node.setStyles({width:this.options.width});
+      // PATCH: do not exceed the display width (see #5750)
+      node.setStyles({width:Math.min(this.options.width, window.getCoordinates().width - 40)});
       
       // Hide Header &&/|| Footer
       if( this.options.hideHeader ) node.addClass("hide-header");
@@ -444,11 +445,12 @@ var SimpleModal = new Class({
          if(this.options.keyEsc){
            window.addEvent("keydown", this._removeSM );
            // PATCH: also listen to the event from within the iframe (see #5297)
-           if (iframe = $("simple-modal").getElement('iframe')) {
-             iframe.addEvent('load', function() {
+           var iframe = $("simple-modal").getElement('iframe');
+           iframe && iframe.addEvent('load', function() {
+             if (iframe.contentWindow.MooTools) {
                iframe.contentWindow.addEvent("keydown", this._removeSM);
-			 }.bind(this));
-           }
+             }
+           }.bind(this));
            // PATCH EOF
          }
        }

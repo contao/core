@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Newsletter
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -45,7 +45,7 @@ class ModuleSubscribe extends \Module
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### NEWSLETTER SUBSCRIBE ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['subscribe'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -129,7 +129,7 @@ class ModuleSubscribe extends \Module
 		$this->Template->submit = specialchars($GLOBALS['TL_LANG']['MSC']['subscribe']);
 		$this->Template->channelsLabel = $GLOBALS['TL_LANG']['MSC']['nl_channels'];
 		$this->Template->emailLabel = $GLOBALS['TL_LANG']['MSC']['emailAddress'];
-		$this->Template->action = $this->getIndexFreeRequest();
+		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->formId = 'tl_subscribe';
 		$this->Template->id = $this->id;
 		$this->Template->hasError = $blnHasError;
@@ -153,6 +153,7 @@ class ModuleSubscribe extends \Module
 			return;
 		}
 
+		$time = time();
 		$arrAdd = array();
 		$arrChannels = array();
 		$arrCids = array();
@@ -169,6 +170,7 @@ class ModuleSubscribe extends \Module
 			$objRecipient->active = 1;
 			$objRecipient->token = '';
 			$objRecipient->pid = $objChannel->id;
+			$objRecipient->confirmed = $time;
 			$objRecipient->save();
 		}
 
@@ -263,6 +265,7 @@ class ModuleSubscribe extends \Module
 			$objRecipient->addedOn = $time;
 			$objRecipient->ip = $this->anonymizeIp(\Environment::get('ip'));
 			$objRecipient->token = $strToken;
+			$objRecipient->confirmed = '';
 
 			$objRecipient->save();
 		}

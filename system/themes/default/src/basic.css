@@ -1,8 +1,8 @@
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -67,7 +67,7 @@ th,td {
 	color:#f90;
 }
 span.mandatory {
-	color:#f00;
+	color:#c55;
 }
 
 /* Basic elements */
@@ -89,10 +89,8 @@ p {
 	margin:0 0 12px;
 	padding:0;
 }
-
-/* Sortable lists */
-ul.sortable li {
-	cursor:move;
+.hidden {
+	display:none;
 }
 
 /* Invisible elements */
@@ -143,40 +141,40 @@ fieldset.checkbox_container,fieldset.radio_container {
 	margin:1px 0;
 }
 .tl_text {
-	width:314px;
+	width:312px;
 }
 .tl_text_2 {
-	width:152px;
+	width:150px;
 }
 .tl_text_3 {
-	width:99px;
+	width:97px;
 }
 .tl_text_4 {
-	width:72px;
+	width:70px;
 }
 .tl_textarea {
-	width:678px;
+	width:676px;
 	height:240px;
 }
 .tl_text_unit {
 	margin:1px 0;
-	width:250px;
+	width:248px;
 }
 .tl_text_trbl {
 	margin:1px 0;
-	width:55px;
+	width:53px;
 }
 .tl_text_interval {
 	margin:1px 0;
-	width:152px;
+	width:150px;
 }
 .tl_text,.tl_text_2,.tl_text_3,.tl_text_4,.tl_textarea,.tl_text_unit,.tl_text_trbl,.tl_text_interval {
 	border:1px solid #b8b8b8;
-	padding:2px;
+	padding:2px 3px;
 	border-radius:3px;
 }
 .mac .tl_text,.mac .tl_text_2,.mac .tl_text_3,.mac .tl_text_4,.mac .tl_textarea,.mac .tl_text_unit,.mac .tl_text_trbl,.mac .tl_text_interval {
-	padding:3px 2px;
+	padding:3px;
 }
 .tl_text:focus,.tl_text_2:focus,.tl_text_3:focus,.tl_text_4:focus,.tl_textarea:focus,.tl_text_unit:focus,.tl_text_trbl:focus,.tl_text_interval:focus {
 	background-color:#ebfdd7;
@@ -210,7 +208,7 @@ pre,.tl_textarea.monospace {
 }
 .tl_select_interval {
 	margin:1px 0;
-	width:158px;
+	width:156px;
 }
 .tl_select,.tl_mselect,.tl_select_column,.tl_select_unit,.tl_select_interval {
 	border:1px solid #b8b8b8;
@@ -233,6 +231,20 @@ pre,.tl_textarea.monospace {
 }
 .mac .tl_checkbox {
 	margin:0 3px 0 0;
+	position:relative;
+	top:-1px;
+}
+.mac .tl_checkbox_single_container .tl_checkbox {
+	top:0;
+}
+.ie .tl_checkbox {
+	margin:-3px 0 -1px -2px;
+	position:relative;
+	top:1px;
+	vertical-align:middle;
+}
+.ie .tl_checkbox_single_container .tl_checkbox {
+	top:0;
 }
 .tl_tree_checkbox {
 	margin:0 3px 0 0;
@@ -353,7 +365,6 @@ a.tl_submit:hover {
 /* Floats */
 .clr {
 	clear:both;
-	overflow:hidden;
 }
 .w50 {
 	width:50%;
@@ -364,13 +375,13 @@ a.tl_submit:hover {
 	margin-right:24px;
 }
 .wizard .tl_text {
-	width:290px;
+	width:288px;
 }
 .wizard .tl_text_2 {
-	width:140px;
+	width:138px;
 }
 .long .tl_text {
-	width:664px;
+	width:663px;
 }
 .long .tl_select {
 	width:670px;

@@ -1,0 +1,778 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_module.php" source-language="en">
+    <body>
+      <trans-unit id="tl_module.name.0">
+        <source>Title</source>
+        <target>ခေါင်းစဉ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.name.1">
+        <source>Please enter the module title.</source>
+        <target>အပိုင်းခေါင်းစဉ်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.headline.0">
+        <source>Headline</source>
+        <target>ခေါင်းစဉ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.headline.1">
+        <source>Here you can add a headline to the module.</source>
+        <target>အပိုင်းသို့ခေါင်းစဉ်ထည့်သွင်းနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.type.0">
+        <source>Module type</source>
+        <target>အပိုင်းအမျိုးအစား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.type.1">
+        <source>Please choose the type of module.</source>
+        <target>အပိုင်းအမျိုးအစားရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.levelOffset.0">
+        <source>Start level</source>
+        <target>စတင်အဆင့်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.levelOffset.1">
+        <source>Enter a value greater than 0 to show only submenu items.</source>
+        <target>ဇယားခွဲပစ္စည်းများကိုသာပြသရန် ၀ ထက်ကြီးသောတန်ဖိုးထည့်ပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showLevel.0">
+        <source>Stop level</source>
+        <target>ရပ်တန့်အဆင့်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showLevel.1">
+        <source>Enter a value greater than 0 to limit the nesting level of the menu.</source>
+        <target>ဇယားအစုံလိုက်အဆင့်ကိုကန့်သတ်ရန် ၀ ထက်ကြီးသောတန်ဖိုးထည့်ပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.hardLimit.0">
+        <source>Hard limit</source>
+        <target>ခိုင်လုံသောကန့်သတ်ချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.hardLimit.1">
+        <source>Never show any menu items beyond the stop level.</source>
+        <target>ရပ်တန့်အဆင့်ကျော်၍ဇယားပစ္စည်းများကိုမည်သည့်အချိန်မှမပြသနှင့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showProtected.0">
+        <source>Show protected items</source>
+        <target>ကာကွယ်ပြီးပစ္စည်းများပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showProtected.1">
+        <source>Show items that are usually only visible to authenticated users.</source>
+        <target>စိစစ်ပြီးအသံုးပြုသူများကိုသာလျှင်မြင်စေနိုင်သောပစ္စည်းများကိုပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.defineRoot.0">
+        <source>Set a reference page</source>
+        <target>ကိုးကားခြင်းစာမျက်နှာသတ်မှတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.defineRoot.1">
+        <source>Define a custom source or target page for the module.</source>
+        <target>ယခုအပိုင်းအတွက်စိတ်ကြိုက်ရင်းမြစ်(သို့)သတ်မှတ်ချက်စာမျက်နှာသတ်မှတ်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rootPage.0">
+        <source>Reference page</source>
+        <target>ကိုးကားခြင်းစာမျက်နှာ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rootPage.1">
+        <source>Please choose the reference page from the site structure.</source>
+        <target>ဆိုက်ဖွဲ့စည်းတည်ဆောက်ပံုမှကိုးကားခြင်းစာမျက်နှာရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.navigationTpl.0">
+        <source>Navigation template</source>
+        <target>သွားလာခြင်းပံုစံပြား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.navigationTpl.1">
+        <source>Here you can select the navigation template.</source>
+        <target>သွားလာခြင်းပံုစံပြားရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pages.0">
+        <source>Pages</source>
+        <target>စာမျက်နှာများ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pages.1">
+        <source>Please choose one or more pages from the site structure.</source>
+        <target>ဆိုက်ဖွဲ့စည်းတည်ဆောက်ပံုမှတစ်ခု(သို့)စာမျက်နှာများရွေးနိင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showHidden.0">
+        <source>Show hidden items</source>
+        <target>ဝှက်ထားပြီးပစ္စည်းများပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showHidden.1">
+        <source>Show items that are usually hidden in the navigation menu.</source>
+        <target>သွားလာခြင်းဇယားတွင်ဝှက်ထားသောပစ္စည်းများပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customLabel.0">
+        <source>Custom label</source>
+        <target>စိတ်ကြိုက်ကတ်ပြား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customLabel.1">
+        <source>Here you can enter a custom label for the drop-down menu.</source>
+        <target>ဆွဲချရွေးဇယားမှစိတ်ကြိုက်ကတ်ပြားထည့်သွင်းနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.autologin.0">
+        <source>Allow auto login</source>
+        <target>လိုလျောက်ဖွင့်ဝင်ခွင့်ပြု</target>
+      </trans-unit>
+      <trans-unit id="tl_module.autologin.1">
+        <source>Allow members to log into the front end automatically.</source>
+        <target>အပြင်ပိုင်းသို့လိုလျောက်ဖွင့်ဝင်ရန်အဖွဲ့ဝင်များကိုခွင့်ပြု</target>
+      </trans-unit>
+      <trans-unit id="tl_module.jumpTo.0">
+        <source>Redirect page</source>
+        <target>ဦးတည်ရာပြောင်းစာမျက်နှာ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected when clicking a link or submitting a form.</source>
+        <target>ကွန်ဆက်(သို့)ပံုစံတင်ရန်ကလစ်နှိပ်သောအခါလည်ပတ်သူများရောက်သွားမည့်စာမျက်နှာကိုရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.redirectBack.0">
+        <source>Redirect to last page visited</source>
+        <target>နောက်ဆံုးလည်ပတ်ပြီးစာမျက်နှာသို့ဦးတည်ရာပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_module.redirectBack.1">
+        <source>Redirect the user back to the last page visited instead of the redirect page.</source>
+        <target>ဦးတည်ရာပြောင်းစာမျက်နှာအစားနောက်ဆံုးလည်ပတ်ပြီးစာမျက်နှာသို့အသံုးပြုသူကိုဦးတည်ရာပြောင်းပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cols.0">
+        <source>Number of columns</source>
+        <target>ကော်လံများအရေအတွက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cols.1">
+        <source>Please choose the number of columns of the form.</source>
+        <target>ပံုစံမှကော်လံများအရေအတွက်ရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.1cl.0">
+        <source>One column</source>
+        <target>ကော်လံတစ်ခု</target>
+      </trans-unit>
+      <trans-unit id="tl_module.1cl.1">
+        <source>Show the label above the input field.</source>
+        <target>ထည့်သွင်းနယ်ပယ်အထက်တွင်ကတ်ပြားပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.2cl.0">
+        <source>Two columns</source>
+        <target>ကော်လံနှစ်ခု</target>
+      </trans-unit>
+      <trans-unit id="tl_module.2cl.1">
+        <source>Show the label on the left side of the input field.</source>
+        <target>ထည့်သွင်းနယ်ပယ်ဘယ်ဖက်တွင်ကတ်ပြားပြသ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editable.0">
+        <source>Editable fields</source>
+        <target>တည်းဖြတ်နိုင်သောနယ်ပယ်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editable.1">
+        <source>Show these fields in the front end form.</source>
+        <target>အပြင်ပိုင်းပံုစံတွင်နယ်ပယ်များပြသ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.memberTpl.0">
+        <source>Form template</source>
+        <target>ပံုစံပံုစံပြား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.memberTpl.1">
+        <source>Here you can select the form template.</source>
+        <target>ပံုစံပံုစံပြားရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.tableless.0">
+        <source>Tableless layout</source>
+        <target>စားပွဲမရှိအခင်းအကျင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_module.tableless.1">
+        <source>Render the form without HTML tables.</source>
+        <target>ဟိပ်စ်တီအမ်အယ်စားပွဲများမပါဘဲပံုစံကိုသရုပ်ဖော်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.form.0">
+        <source>Form</source>
+        <target>ပံုစံ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.form.1">
+        <source>Please select a form.</source>
+        <target>ပံုစံကိုရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.queryType.0">
+        <source>Default query type</source>
+        <target>မူလအမေးအမျိုးအစား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.queryType.1">
+        <source>Please select the default query type.</source>
+        <target>မူလအမေးအမျိုးအစားရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.and.0">
+        <source>Find all words</source>
+        <target>စကားလုံးများအားလံုးရှာဖွေပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.and.1">
+        <source>Returns only pages that contain all keywords.</source>
+        <target>အဓိကစကားလုံးများအားလံုးပါဝင်သောစာမျက်နှာများသို့သာပြန်သွား။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.or.0">
+        <source>Find any word</source>
+        <target>စကားလံုးတစ်ခုခုကိုသာရှာဖွေ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.or.1">
+        <source>Returns all pages that contain any of the keywords.</source>
+        <target>အဓိကစကားလံုးတစ်ခုခုကိုသာပါဝင်သောစာမျက်နှာများသို့သာပြန်သွား။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fuzzy.0">
+        <source>Fuzzy search</source>
+        <target>မှုန်ဝါးဝါးရှာဖွေ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fuzzy.1">
+        <source>Will find &quot;Contao&quot; if you search for &quot;con&quot; (equal to a wildcard search).</source>
+        <target>&quot;ကွန်&quot; ကိုရှာဖွေပါက &quot;ကွန်တောင်&quot; ကိုရှာဖွေလိမ့်မည် (ဝိုင်ကဒ်ရှာဖွေခြင်းနှင့်တူညီ)။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.simple.0">
+        <source>Simple form</source>
+        <target>ရှိးရှင်းသောပံုစံ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.simple.1">
+        <source>Contains a single input field only.</source>
+        <target>ထည့်သွင်းနယ်ပယ်တစ်ခုတည်းသာလျှင်ပါဝင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.advanced.0">
+        <source>Advanced form</source>
+        <target>အဆင့်မြင့်ပံုစံ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.advanced.1">
+        <source>Contains an input field and a radio button menu to choose the query type.</source>
+        <target>အမေးအမျိုးအစားကိုရွေးရန်ထည့်သွင်းနယ်ပယ်နှင့်ရေဒီယိုခုလုတ်ဇယားပါဝင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.contextLength.0">
+        <source>Context range</source>
+        <target>စကားစပ်အကွာအဝေး</target>
+      </trans-unit>
+      <trans-unit id="tl_module.contextLength.1">
+        <source>The number of characters on the left and right side of each keyword that are used as context.</source>
+        <target>စကားစပ်အဖြစ်သံုးသောအဓိကစကားလံုးများ၏ဘယ်နှင့်ညာဖက်တွင်ရှိအက္ခရာများအရေအတွက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.totalLength.0">
+        <source>Maximum context length</source>
+        <target>အများဆံုးစကားစပ်အလျား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.totalLength.1">
+        <source>Here you can limit the overall context length per result.</source>
+        <target>ရှာဖွေရလဒ်အရစကားစပ်အလျားအားလံုးကန့်သတ်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.perPage.0">
+        <source>Items per page</source>
+        <target>စာမျက်နှာရှိပစ္စည်းများ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.perPage.1">
+        <source>The number of items per page. Set to 0 to disable pagination.</source>
+        <target>စာမျက်နှာရှိပစ္စည်းများအရေအတွက်။ စာမျက်နှာများမလုပ်ဆောင်စေရန် ၀ ကိုသတ်မှတ်ပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchType.0">
+        <source>Search form layout</source>
+        <target>ရှာဖွေပံုစံအခင်းအကျင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchType.1">
+        <source>Here you can select the search form layout.</source>
+        <target>ရှာဖွေပံုစံအခင်းအကျင်းရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchTpl.0">
+        <source>Search results template</source>
+        <target>ရှာဖွေရလဒ်များပံုစံပြား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchTpl.1">
+        <source>Here you can select the search results template.</source>
+        <target>ရှာဖွေရလဒ်များပံုစံပြားရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.inColumn.0">
+        <source>Column</source>
+        <target>ကော်လံ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.inColumn.1">
+        <source>Please choose the column whose articles you want to list.</source>
+        <target>စာရင်းလုပ်လိုသောမည်သူ့ဆောင်းပါးများကော်လံကိုရွေး။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.skipFirst.0">
+        <source>Skip items</source>
+        <target>ပစ္စည်းများခုန်ကျော်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.skipFirst.1">
+        <source>Here you can define how many items will be skipped.</source>
+        <target>ခုန်ကျော်မည့်ပစ္စည်းများကိုသတ်မှတ်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.loadFirst.0">
+        <source>Load the first item</source>
+        <target>ပထမဆံုးပစ္စည်းဆွဲတင်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.loadFirst.1">
+        <source>Automatically redirect to the first item if none is selected.</source>
+        <target>တစ်ခုမျှမရွေးခံရပါကပထမဆံုးပစ္စည်းသို့လိုလျောက်ဦးတည်ရာပြောင်းပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.size.0">
+        <source>Width and height</source>
+        <target>အနံနှင့်အမြင့်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.size.1">
+        <source>Please enter the width and height in pixel.</source>
+        <target>အစက်အပြောက်များတွင်အနံနှင့်အမြင့်ထည့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.transparent.0">
+        <source>Transparent movie</source>
+        <target>ဖောက်ထွင်းမြင်နိုင်သောရုပ်ရှင်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.transparent.1">
+        <source>Make the Flash movie transparent (wmode = transparent).</source>
+        <target>ဖလက်ရှ်ရုပ်ရှင်ကိုဖောက်ထွင်းမြင်နိုင်လုပ် (ဒဗလျုမု = ဖောက်ထွင်းမြင်နိုင်)</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashvars.0">
+        <source>FlashVars</source>
+        <target>ဖလက်ရှ်ကိန်းရှင်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashvars.1">
+        <source>Pass variables to the Flash movie (&lt;em&gt;var1=value1&amp;amp;var2=value2&lt;/em&gt;).</source>
+        <target>ဖလက်ရှ်ရုပ်ရှင်များတွင်ကိန်းရှင်များထည့်  (&lt;em&gt;var1=value1&amp;amp;var2=value2&lt;/em&gt;)။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.version.0">
+        <source>Flash player version</source>
+        <target>ဖလပ်စ်ဖွင့်စက်ပံုစံ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.version.1">
+        <source>Please enter the required Flash player version (e.g. 6.0.12).</source>
+        <target>လိုအပ်သောဖလပ်စ်ဖွင့်စက်ပံုစံထည့် (ဥပမာ ၆.၀.၁၂)။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.altContent.0">
+        <source>Alternate content</source>
+        <target>အလှည့်ကျအကြောင်းအရာ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.altContent.1">
+        <source>The alternate content will be shown if the movie cannot be loaded. HTML tags are allowed.</source>
+        <target>ရုပ်ရှင်မဆွဲတင်နိုင်ပါကအလှည့်ကျအကြောင်းအရာပြသ။ ဟိတ်စ်တီအမ်အယ်အမည်များခွင့်ပြု။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.source.0">
+        <source>Source</source>
+        <target>ရင်းမြစ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.source.1">
+        <source>Whether to use a file on the server or point to an external URL.</source>
+        <target>ဆာဗာတွင်ရှိဖိုင်ကိုသံုး(သို့)ပြင်ပယူအာအယ်သို့ညွန်ပြ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.singleSRC.0">
+        <source>Source file</source>
+        <target>ရင်းမြစ်ဖိုင်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.singleSRC.1">
+        <source>Please select a file from the files directory.</source>
+        <target>ဖိုင်များဖိုင်လမ်းညွှန်မှဖိုင်ကိုရွေး။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.url.0">
+        <source>URL</source>
+        <target>ယူအာအယ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.url.1">
+        <source>Please enter the URL (http://…) of the Flash movie.</source>
+        <target>ဖလက်ရှ်ရုပ်ရှင်၏ယူအာအယ် (http://…) ကိုထည့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.interactive.0">
+        <source>Make interactive</source>
+        <target>သက်ဝင်လှုပ်ရှားစေရန်လုပ်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.interactive.1">
+        <source>Make the Flash movie interact with the browser (requires JavaScript).</source>
+        <target>ဘရောက်ဇာနှင့်ဖက်ရှ်ရုပ်ရှင်သက်ဝင်လှုပ်ရှားစေရန်လုပ် (ဂျားဗားလိုလျောက်လုပ်ဆောင်ကုဒ်လိုအပ်)။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashID.0">
+        <source>Flash movie ID</source>
+        <target>ဖလက်ရှ်ရုပ်ရှင်အိုင်ဒီ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashID.1">
+        <source>Please enter a unique Flash movie ID.</source>
+        <target>ဖက်ရှ်ရုပ်ရှင်အိုင်ဒီထည့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashJS.0">
+        <source>JavaScript _DoFSCommand(command, args) {</source>
+        <target>JavaScript _DoFSCommand(command, args) {</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashJS.1">
+        <source>Please enter the JavaScript code.</source>
+        <target>ဂျားဗားလိုလျောက်လုပ်ဆောင်ကုဒ်ထည့်သွင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fullsize.0">
+        <source>Full-size view/new window</source>
+        <target>အရွယ်အပြည့်ကြည့်ရှု/ဝင်းဒိုးအသစ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fullsize.1">
+        <source>Open the full-size image in a lightbox or the link in a new browser window.</source>
+        <target>လိုက်ဘောက်စ်တွင်အရွယ်အပြည့်ပံု(သို့)ဘရောက်ဇာဝင်းဒိုးအသစ်တွင်ကွန်ဆက်ဖွင့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.imgSize.0">
+        <source>Image width and height</source>
+        <target>ပံုအနံနှင့်အမြင့်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.imgSize.1">
+        <source>Here you can set the image dimensions and the resize mode.</source>
+        <target>ပံုအတိုင်းအတာများနှင့်အရွယ်ပြန်သတ်မှတ်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.useCaption.0">
+        <source>Show caption</source>
+        <target>စာတန်းပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.useCaption.1">
+        <source>Display the image name or caption below the image.</source>
+        <target>ပံုနာမည်(သို့)ပံုအောက်တွင်စာတန်းပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.multiSRC.0">
+        <source>Source files</source>
+        <target>ရင်းမြစ်ဖိုင်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.multiSRC.1">
+        <source>Please select one or more files from the files directory.</source>
+        <target>ဖိုင်များဖိုင်လမ်းညွှန်မှတစ်ခု(သို့)ဖိုင်များကိုရွေး။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.orderSRC.0">
+        <source>Sort order</source>
+        <target>အစဉ်အားဖြင့်မျိုးတူစု</target>
+      </trans-unit>
+      <trans-unit id="tl_module.orderSRC.1">
+        <source>The sort order of the items.</source>
+        <target>ပစ္စည်းများ၏အစဉ်အားဖြင့်မျိုးတူစုခြင်း။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.html.0">
+        <source>HTML code</source>
+        <target>ဟိတ်စ်တီအမ်အယ်ကုဒ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.html.1">
+        <source>You can modify the list of allowed HTML tags in the back end settings.</source>
+        <target>အတွင်းပိုင်းချိန်ညှိချက်တွင်ခွင့်ပြုပြီးဟိတ်စ်တီအမ်အယ်အမည်များစာရင်းမွမ်းမံနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_cache.0">
+        <source>Cache timeout</source>
+        <target>မှတ်ဥာဏ်အသေးစားအချိန်ကုန်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_cache.1">
+        <source>Here you can define how long the RSS feed is being cached.</source>
+        <target>အာအက်စ်အက်စ်ကုန်ကြမ်းများမည်မျှကြာအောင်မှတ်ဉာဏ်အသေးစားတွင်ထည့်နေစေရန်သတ်မှတ်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_feed.0">
+        <source>Feed URLs</source>
+        <target>ကုန်ကြမ်းယူအာအယ်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_feed.1">
+        <source>Please enter the URL of one or more RSS feeds.</source>
+        <target>တစ်ခု(သို့)အာအက်စ်အက်စ်ကုန်ကြမ်းများယူအာအယ်ထည့်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_template.0">
+        <source>Feed template</source>
+        <target>ကုန်ကြမ်းပံုစံပြား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_template.1">
+        <source>Here you can select the feed template.</source>
+        <target>ကုန်ကြမ်းပံုစံပြားရွေးနိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.numberOfItems.0">
+        <source>Number of items</source>
+        <target>ပစ္စည်းများအရေအတွက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.numberOfItems.1">
+        <source>Here you can limit the number of items. Set to 0 to show all.</source>
+        <target>ပစ္စည်းများအရေအတွက်ကန့်သတ်နိုင်။ အားလံုးပြသရန် ၀ သို့သတ်မှတ်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.protected.0">
+        <source>Protect module</source>
+        <target>အပိုင်းကာကွယ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.protected.1">
+        <source>Show the module to certain member groups only.</source>
+        <target>သေချာသောအဖွဲ့ဝင်အုပ်စုများကိုသာလျှင်အပိုင်းပြသ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.groups.0">
+        <source>Allowed member groups</source>
+        <target>ခွင့်ပြုပြီးအဖွဲ့ဝင်အုပ်စုများ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.groups.1">
+        <source>These groups will be able to see the module.</source>
+        <target>အပိုင်းကိုယခုအုပ်စုများမြင်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.guests.0">
+        <source>Show to guests only</source>
+        <target>ဧည့်သည်များကိုသာပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.guests.1">
+        <source>Hide the module if a member is logged in.</source>
+        <target>အဖွဲ့ဝင်ဖွင့်မဝင်ရသေးလျှင်အပိုင်းကိုဖံုးကွယ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cssID.0">
+        <source>CSS ID/class</source>
+        <target>စီအက်အက်စ်အိုင်ဒီ/အမျိုးအစား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cssID.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>အိုင်ဒီနှင့်တစ်ခု(သို့)အမျိုးအစားများသတ်မှတ်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.space.0">
+        <source>Space in front and after</source>
+        <target>အရှေ့နှင့်ပြီးနောက်ကွက်လပ်ခြား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.space.1">
+        <source>Here you can enter the spacing in front of and after the module in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
+        <target>အရှေ့နှင့်အပိုင်းပြီးနောက်အစက်အပြောက်များတွင်ကွက်လပ်ထည့်နိုင်။ လိုင်းတွင်းစတိုင်များကိုရှောင်သင့်ပြီးစတိုင်အပြားတွင်ကွက်လပ်ခြားခြင်းကိုသတ်မှတ်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>လံုခြုံရေးမေးခွန်းမလုပ်ဆောင်စေ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.disableCaptcha.1">
+        <source>Here you can disable the security question (not recommended).</source>
+        <target>လံုခြုံရေးမေးခွန်းကိုမလုပ်ဆောင်ထားစေသလာ? (လုပ်ရန်အားမပေး)။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_groups.0">
+        <source>Member groups</source>
+        <target>အဖွဲ့ဝင်အုပ်စုများ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_groups.1">
+        <source>Here you can assign the user to one or more groups.</source>
+        <target>တစ်ခု(သို့)အုပ်စုများသို့အသံုးပြုသူကိုသတ်မှတ်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_allowLogin.0">
+        <source>Allow login</source>
+        <target>ဖွင့်ဝင်ခွင့်ပြု</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_allowLogin.1">
+        <source>Allow the new user to log into the front end.</source>
+        <target>အပြင်ပိုင်းသို့ဖွင့်ဝင်ရန်အဖွဲ့ဝင်အသစ်ကိုခွင့်ပြု။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_skipName.0">
+        <source>Skip username</source>
+        <target>အသံုးပြုသူနာမည်ခုန်ကျော်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_skipName.1">
+        <source>Do not require the username to request a new password.</source>
+        <target>စကားဝှက်အသစ်တောင်းဆိုရန်အသံုးပြုသူနာမည်မလိုအပ်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_close.0">
+        <source>Mode</source>
+        <target>နည်း</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_close.1">
+        <source>Here you can define how to handle the deletion.</source>
+        <target>ပယ်ဖျက်ခြင်းကိုချုပ်ကိုင်ရန်သတ်မှတ်နိုင်။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_assignDir.0">
+        <source>Create a home directory</source>
+        <target>ပင်မဖိုင်လမ်းညွန်ဖန်တီး</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_assignDir.1">
+        <source>Create a home directory from the registered username.</source>
+        <target>မှတ်ပံုတင်ပြီးအသံုးပြုသူနာမည်မှပင်မဖိုင်လမ်းညွန်ဖန်တီး</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_homeDir.0">
+        <source>Home directory path</source>
+        <target>ပင်မဖိုင်လမ်းညွန်လမ်းကြောင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_homeDir.1">
+        <source>Please select the parent folder from the files directory.</source>
+        <target>ဖိုင်များဖိုင်လမ်းညွှန်မှပင်မဖိုင်တွဲကိုရွေး။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_activate.0">
+        <source>Send activation e-mail</source>
+        <target>အသက်သွင်းအီးမေးလ်ပေးပို့</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_activate.1">
+        <source>Send an activation e-mail to the registered e-mail address.</source>
+        <target>မှတ်ပံုတင်ပြီးအီးမေးလ်လိပ်စာသို့အသက်သွင်းအီးမေးလ်ပေးပို့။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_jumpTo.0">
+        <source>Confirmation page</source>
+        <target>အတည်ပြုချက်စာမျက်နှာ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_jumpTo.1">
+        <source>Please choose the page to which users will be redirected after the request has been completed.</source>
+        <target>တောင်းခံခြင်းပြီးဆံုးသောအခါလည်ပတ်သူများရောက်သွားမည့်စာမျက်နှာကိုရွေးပါ။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_text.0">
+        <source>Activation message</source>
+        <target>အသက်သွင်းမှာကြားချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_text.1">
+        <source>You can use the wildcards &lt;em&gt;##domain##&lt;/em&gt; (domain name), &lt;em&gt;##link##&lt;/em&gt; (activation link) and any input field (e.g. &lt;em&gt;##lastname##&lt;/em&gt;).</source>
+        <target>ဝိုက်ကဒ်များကိုသံုးနိုင် &lt;em&gt;##domain##&lt;/em&gt; (ဒိုမိန်းနာမည်), &lt;em&gt;##link##&lt;/em&gt; (အသက်သွင်းကွန်ဆက်)နှင့်ထည့်သွင်းနယ်ပယ်တစ်ခုခု (ဥပမာ &lt;em&gt;##lastname##&lt;/em&gt;)။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_password.0">
+        <source>Password message</source>
+        <target>စကားဝှက်မှာကြားချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_password.1">
+        <source>You can use the wildcards &lt;em&gt;##domain##&lt;/em&gt; (domain name), &lt;em&gt;##link##&lt;/em&gt; (activation link) and any user property (e.g. &lt;em&gt;##lastname##&lt;/em&gt;).</source>
+        <target>ဝိုက်ကဒ်များကိုသံုးနိုင် &lt;em&gt;##domain##&lt;/em&gt; (ဒိုမိန်းနာမည်), &lt;em&gt;##link##&lt;/em&gt; (အသက်သွင်းကွန်ဆက်)နှင့်အသံုးပြုသူပိုင်ဆိုင်မှုတစ်ခုခု (ဥပမာ &lt;em&gt;##lastname##&lt;/em&gt;)။</target>
+      </trans-unit>
+      <trans-unit id="tl_module.title_legend">
+        <source>Title and type</source>
+        <target>ခေါင်းစဉ်နှင့်အမျိုးအစား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nav_legend">
+        <source>Navigation settings</source>
+        <target>သွားလာခြင်းချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reference_legend">
+        <source>Reference page</source>
+        <target>ကိုးကားခြင်းစာမျက်နှာ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.redirect_legend">
+        <source>Redirect settings</source>
+        <target>ဦးတည်ရာပြောင်းချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.template_legend">
+        <source>Template settings</source>
+        <target>ပံုစံပြားချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.config_legend">
+        <source>Module configuration</source>
+        <target>အပိုင်းပံုစံပြင်ခြင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_module.include_legend">
+        <source>Include settings</source>
+        <target>ပါဝင်ချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.source_legend">
+        <source>Files and folders</source>
+        <target>ဖိုင်နှင်ဖိုင်တွဲများ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.interact_legend">
+        <source>Interactive Flash movie</source>
+        <target>သက်ဝင်ဖလက်ရှ်ရုပ်ရှင်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.html_legend">
+        <source>Text/HTML</source>
+        <target>စာသား/ဟိတ်စ်တီအမ်အယ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.protected_legend">
+        <source>Access protection</source>
+        <target>ကာကွယ်မှုဝင်ကြည့်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.expert_legend">
+        <source>Expert settings</source>
+        <target>ကျွမ်းကျင်သူချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.email_legend">
+        <source>E-mail settings</source>
+        <target>အီးမေးလ်ချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.account_legend">
+        <source>Account settings</source>
+        <target>စာရင်းချိန်ညှိချက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.emailText.0">
+        <source>Your registration on %s</source>
+        <target>%s တွင်မှတ်ပံုတင်ခြင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_module.emailText.1">
+        <source>Thank you for your registration on ##domain##.
+
+Please click ##link## to complete your registration and to activate your account. If you did not request an account, please ignore this e-mail.
+</source>
+        <target>မှတ်ပံုတင်ခြင်းအတွက်ကျေးဇူး ##domain##။⏎ ⏎  ##link## သို့မှတ်ပံုတင်ခြင်းပြီးဆံုးရန်ကလစ်နှိပ်ပြီးစာရင်းကိုအသက်သွင်းပါ။ စာရင်းကိုမတောင်းခံပါကယခုအီးမေးလ်ကိုမသိကျိုးကျွန်ပြု။⏎
+</target>
+      </trans-unit>
+      <trans-unit id="tl_module.passwordText.0">
+        <source>Your password request on %s</source>
+        <target>%s တွင်စကားဝှက်တောင်းခံခြင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_module.passwordText.1">
+        <source>You have requested a new password for ##domain##.
+
+Please click ##link## to set the new password. If you did not request this e-mail, please contact the website administrator.
+</source>
+        <target>##domain## အတွက်စကားဝှက်အသစ်ကိုတောင်းဆိုထား။⏎ ⏎ ##link## သို့စကားဝှက်အသစ်သတ်မှတ်ရန်ကလစ်နှိပ်ပါ။ ယခုအီးမေးလ်ကိုမတောင်းဆိုထားပါက၊ ဝဘ်ဆိုက်စီမံခန့်ခွဲသူသို့အကြောင်းကြားပါ။⏎
+</target>
+      </trans-unit>
+      <trans-unit id="tl_module.header">
+        <source>Header</source>
+        <target>ခေါင်းကြီးပိုင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_module.left">
+        <source>Left column</source>
+        <target>ဘယ်ကော်လံ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.main">
+        <source>Main column</source>
+        <target>ပင်မကော်လံ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.right">
+        <source>Right column</source>
+        <target>ညာကော်လံ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.footer">
+        <source>Footer</source>
+        <target>အောက်ခြေပိုင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_module.internal">
+        <source>Internal file</source>
+        <target>စက်အတွင်းပိုင်းဖိုင်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.external">
+        <source>External URL</source>
+        <target>ပြင်ပယူအာအယ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.close_deactivate">
+        <source>Deactivate account</source>
+        <target>စာရင်းအသက်မသွင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_module.close_delete">
+        <source>Irrevocably delete account</source>
+        <target>ယတိပြတ်စာရင်းပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.new.0">
+        <source>Add module</source>
+        <target>အပိုင်းထည့်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.new.1">
+        <source>Add a module</source>
+        <target>အပိုင်းထည့်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.show.0">
+        <source>Module details</source>
+        <target>အပိုင်းအချက်အလက်များ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.show.1">
+        <source>Show the details of module ID %s</source>
+        <target>အပိုင်းအိုင်ဒီ %s အချက်အလက်များပြသ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.edit.0">
+        <source>Edit module</source>
+        <target>အပိုင်းတည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.edit.1">
+        <source>Edit module ID %s</source>
+        <target>အပိုင်းအိုင်ဒီ %s တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cut.0">
+        <source>Move module</source>
+        <target>အပိုင်းရွေ့ပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cut.1">
+        <source>Move module ID %s</source>
+        <target>အပိုင်းအိုင်ဒီ %s ရွေ့ပြောင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_module.copy.0">
+        <source>Duplicate module</source>
+        <target>အပိုင်းပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.copy.1">
+        <source>Duplicate module ID %s</source>
+        <target>အပိုင်းအိုင်ဒီ %s ပံုစံတူပွား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.delete.0">
+        <source>Delete module</source>
+        <target>အပိုင်းပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.delete.1">
+        <source>Delete module ID %s</source>
+        <target>အပိုင်းအိုင်ဒီ %s ပယ်ဖျက်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editheader.0">
+        <source>Edit theme</source>
+        <target>အသွင်အပြင်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editheader.1">
+        <source>Edit the theme settings</source>
+        <target>အသွင်အပြင်ချိန်ညှိချက်တည်းဖြတ်</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pasteafter.0">
+        <source>Paste here</source>
+        <target>ယခုနေရာသို့ထုတ်ထား</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pasteafter.1">
+        <source>Paste after module ID %s</source>
+        <target>အပိုင်းအိုင်ဒီ %s ပြီးနောက်ထုတ်ထား</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

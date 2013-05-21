@@ -44,7 +44,7 @@ few examples:
 
  * `http://www.yourdomain.com/contao`
  * `http://www.yourdomain.com/contao/contao`
- * `http://www.yourdomain.com/contao-3.0.0/contao`
+ * `http://www.yourdomain.com/contao-3.1.0/contao`
 
 
 Troubleshooting

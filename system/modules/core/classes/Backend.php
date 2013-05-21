@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -36,6 +36,48 @@ abstract class Backend extends \Controller
 		parent::__construct();
 		$this->import('Database');
 		$this->setStaticUrls();
+	}
+
+
+	/**
+	 * Return the current theme as string
+	 *
+	 * @return string The name of the theme
+	 */
+	public static function getTheme()
+	{
+		$theme = $GLOBALS['TL_CONFIG']['backendTheme'];
+
+		if ($theme != '' && $theme != 'default' && is_dir(TL_ROOT . '/system/themes/' . $theme))
+		{
+			return $theme;
+		}
+
+		return 'default';
+	}
+
+
+	/**
+	 * Return the back end themes as array
+	 *
+	 * @return array An array of available back end themes
+	 */
+	public static function getThemes()
+	{
+		$arrReturn = array();
+		$arrThemes = scan(TL_ROOT . '/system/themes');
+
+		foreach ($arrThemes as $strTheme)
+		{
+			if (strncmp($strTheme, '.', 1) === 0 || !is_dir(TL_ROOT . '/system/themes/' . $strTheme))
+			{
+				continue;
+			}
+
+			$arrReturn[$strTheme] = $strTheme;
+		}
+
+		return $arrReturn;
 	}
 
 
@@ -177,7 +219,7 @@ abstract class Backend extends \Controller
 			}
 
 			// Load the language and DCA file
-			$this->loadLanguageFile($strTable);
+			\System::loadLanguageFile($strTable);
 			$this->loadDataContainer($strTable);
 
 			// Include all excluded fields which are allowed for the current user
@@ -379,16 +421,7 @@ abstract class Backend extends \Controller
 				}
 			}
 
-			try
-			{
-				return $dc->$act();
-			}
-			catch (\OutOfSyncException $e)
-			{
-				\Message::addError($e->getMessage());
-				\Message::addInfo($GLOBALS['TL_LANG']['ERR']['dbOutOfSync']);
-				$this->redirect($this->getReferer());
-			}
+			return $dc->$act();
 		}
 
 		return null;
@@ -403,13 +436,14 @@ abstract class Backend extends \Controller
 	 * @param string
 	 * @return array
 	 */
-	protected function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false, $strLanguage='')
+	public static function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false, $strLanguage='')
 	{
 		$time = time();
+		$objDatabase = \Database::getInstance();
 
 		// Get published pages
-		$objPages = $this->Database->prepare("SELECT * FROM tl_page WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY sorting")
-								   ->execute($pid);
+		$objPages = $objDatabase->prepare("SELECT * FROM tl_page WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY sorting")
+								->execute($pid);
 
 		if ($objPages->numRows < 1)
 		{
@@ -446,33 +480,248 @@ abstract class Backend extends \Controller
 			elseif ($objPages->type == 'regular')
 			{
 				// Searchable and not protected
-				if (!$objPages->noSearch && (!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected'] && (!$blnIsSitemap || $objPages->sitemap == 'map_always')) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
+				if ((!$objPages->noSearch || $blnIsSitemap) && (!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected'] && (!$blnIsSitemap || $objPages->sitemap == 'map_always')) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
 				{
 					// Published
 					if ($objPages->published && (!$objPages->start || $objPages->start < $time) && (!$objPages->stop || $objPages->stop > $time))
 					{
-						$arrPages[] = $domain . $this->generateFrontendUrl($objPages->row(), null, $strLanguage);
+						$arrPages[] = $domain . static::generateFrontendUrl($objPages->row(), null, $strLanguage);
 
 						// Get articles with teaser
-						$objArticle = $this->Database->prepare("SELECT * FROM tl_article WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND showTeaser=1 ORDER BY sorting")
-													 ->execute($objPages->id);
+						$objArticle = $objDatabase->prepare("SELECT * FROM tl_article WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND showTeaser=1 ORDER BY sorting")
+												  ->execute($objPages->id);
 
 						while ($objArticle->next())
 						{
-							$arrPages[] = $domain . $this->generateFrontendUrl($objPages->row(), '/articles/' . (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id), $strLanguage);
+							$arrPages[] = $domain . static::generateFrontendUrl($objPages->row(), '/articles/' . (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id), $strLanguage);
 						}
 					}
 				}
 			}
 
 			// Get subpages
-			if ((!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && ($arrSubpages = $this->findSearchablePages($objPages->id, $domain, $blnIsSitemap, $strLanguage)) != false)
+			if ((!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && ($arrSubpages = static::findSearchablePages($objPages->id, $domain, $blnIsSitemap, $strLanguage)) != false)
 			{
 				$arrPages = array_merge($arrPages, $arrSubpages);
 			}
 		}
 
 		return $arrPages;
+	}
+
+
+	/**
+	 * Add a breadcrumb menu to the page tree
+	 */
+	public static function addPagesBreadcrumb()
+	{
+		$objSession = \Session::getInstance();
+
+		// Set a new node
+		if (isset($_GET['node']))
+		{
+			$objSession->set('tl_page_node', \Input::get('node'));
+			\Controller::redirect(preg_replace('/&node=[^&]*/', '', \Environment::get('request')));
+		}
+
+		$intNode = $objSession->get('tl_page_node');
+
+		if ($intNode < 1)
+		{
+			return;
+		}
+
+		$arrIds   = array();
+		$arrLinks = array();
+		$objUser  = \BackendUser::getInstance();
+
+		// Generate breadcrumb trail
+		if ($intNode)
+		{
+			$intId = $intNode;
+			$objDatabase = \Database::getInstance();
+
+			do
+			{
+				$objPage = $objDatabase->prepare("SELECT * FROM tl_page WHERE id=?")
+									   ->limit(1)
+									   ->execute($intId);
+
+				if ($objPage->numRows < 1)
+				{
+					// Currently selected page does not exits
+					if ($intId == $intNode)
+					{
+						$objSession->set('tl_page_node', 0);
+						return;
+					}
+
+					break;
+				}
+
+				$arrIds[] = $intId;
+
+				// No link for the active page
+				if ($objPage->id == $intNode)
+				{
+					$arrLinks[] = \Backend::addPageIcon($objPage->row(), '', null, '', true) . ' ' . $objPage->title;
+				}
+				else
+				{
+					$arrLinks[] = \Backend::addPageIcon($objPage->row(), '', null, '', true) . ' <a href="' . \Controller::addToUrl('node='.$objPage->id) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $objPage->title . '</a>';
+				}
+
+				// Do not show the mounted pages
+				if (!$objUser->isAdmin && $objUser->hasAccess($objPage->id, 'pagemounts'))
+				{
+					break;
+				}
+
+				$intId = $objPage->pid;
+			}
+			while ($intId > 0 && $objPage->type != 'root');
+		}
+
+		// Check whether the node is mounted
+		if (!$objUser->isAdmin && !$objUser->hasAccess($arrIds, 'pagemounts'))
+		{
+			$objSession->set('tl_page_node', 0);
+
+			\System::log('Page ID '.$intNode.' was not mounted', 'tl_page addBreadcrumb', TL_ERROR);
+			\Controller::redirect('contao/main.php?act=error');
+		}
+
+		// Limit tree
+		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = array($intNode);
+
+		// Add root link
+		$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/pagemounts.gif" width="18" height="18" alt=""> <a href="' . \Controller::addToUrl('node=0') . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectAllNodes']).'">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
+		$arrLinks = array_reverse($arrLinks);
+
+		// Insert breadcrumb menu
+		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['breadcrumb'] .= '
+
+<ul id="tl_breadcrumb">
+  <li>' . implode(' &gt; </li><li>', $arrLinks) . '</li>
+</ul>';
+	}
+
+
+	/**
+	 * Add an image to each page in the tree
+	 * @param array
+	 * @param string
+	 * @param \DataContainer
+	 * @param string
+	 * @param boolean
+	 * @param boolean
+	 * @return string
+	 */
+	public static function addPageIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false)
+	{
+		if ($blnProtected)
+		{
+			$row['protected'] = true;
+		}
+
+		$image = \Controller::getPageStatusIcon((object) $row);
+
+		// Return the image only
+		if ($blnReturnImage)
+		{
+			return \Image::getHtml($image, '', $imageAttribute);
+		}
+
+		// Mark root pages
+		if ($row['type'] == 'root' || Input::get('do') == 'article')
+		{
+			$label = '<strong>' . $label . '</strong>';
+		}
+
+		// Add the breadcrumb link
+		$label = '<a href="' . \Controller::addToUrl('node='.$row['id']) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $label . '</a>';
+
+		// Return the image
+		return '<a href="contao/main.php?do=feRedirect&amp;page='.$row['id'].'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . ' target="_blank">'.\Image::getHtml($image, '', $imageAttribute).'</a> '.$label;
+	}
+
+
+	/**
+	 * Add a breadcrumb menu to the file tree
+	 */
+	public static function addFilesBreadcrumb()
+	{
+		$objSession = \Session::getInstance();
+
+		// Set a new node
+		if (isset($_GET['node']))
+		{
+			$objSession->set('tl_files_node', \Input::get('node', true));
+			\Controller::redirect(preg_replace('/(&|\?)node=[^&]*/', '', \Environment::get('request')));
+		}
+
+		$strNode = $objSession->get('tl_files_node');
+
+		if ($strNode == '')
+		{
+			return;
+		}
+
+		// Currently selected folder does not exist
+		if (!is_dir(TL_ROOT . '/' . $strNode))
+		{
+			$objSession->set('tl_files_node', '');
+			return;
+		}
+
+		$objUser  = \BackendUser::getInstance();
+		$strPath  = $GLOBALS['TL_CONFIG']['uploadPath'];
+		$arrNodes = explode('/', preg_replace('/^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/') . '\//', '', $strNode));
+		$arrLinks = array();
+
+		// Add root link
+		$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/filemounts.gif" width="18" height="18" alt=""> <a href="' . \Controller::addToUrl('node=') . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectAllNodes']).'">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
+
+		// Generate breadcrumb trail
+		foreach ($arrNodes as $strFolder)
+		{
+			$strPath .= '/' . $strFolder;
+
+			// Do not show pages which are not mounted
+			if (!$objUser->isAdmin && !$objUser->hasAccess($strPath, 'filemounts'))
+			{
+				continue;
+			}
+
+			// No link for the active folder
+			if ($strFolder == basename($strNode))
+			{
+				$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/folderC.gif" width="18" height="18" alt=""> ' . $strFolder;
+			}
+			else
+			{
+				$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/folderC.gif" width="18" height="18" alt=""> <a href="' . \Controller::addToUrl('node='.$strPath) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $strFolder . '</a>';
+			}
+		}
+
+		// Check whether the node is mounted
+		if (!$objUser->isAdmin && !$objUser->hasAccess($strNode, 'filemounts'))
+		{
+			$objSession->set('tl_files_node', '');
+
+			\System::log('Folder ID '.$strNode.' was not mounted', 'tl_files addBreadcrumb', TL_ERROR);
+			\Controller::redirect('contao/main.php?act=error');
+		}
+
+		// Limit tree
+		$GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root'] = array($strNode);
+
+		// Insert breadcrumb menu
+		$GLOBALS['TL_DCA']['tl_files']['list']['sorting']['breadcrumb'] .= '
+
+<ul id="tl_breadcrumb">
+  <li>' . implode(' &gt; </li><li>', $arrLinks) . '</li>
+</ul>';
 	}
 
 
@@ -494,7 +743,7 @@ abstract class Backend extends \Controller
 
 		foreach ($this->eliminateNestedPages($this->User->pagemounts) as $page)
 		{
-			$objPage = $this->getPageDetails($page);
+			$objPage = \PageModel::findWithDetails($page);
 
 			// Root page mounted
 			if ($objPage->type == 'root')

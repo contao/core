@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -161,9 +161,9 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'regular'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{search_legend},noSearch;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'forward'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,jumpTo;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'redirect'                    => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,url,target;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
-		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle;{dns_legend},dns,staticFiles,staticPlugins,language,fallback;{global_legend:hide},dateFormat,timeFormat,datimFormat,adminEmail;{sitemap_legend:hide},createSitemap;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
-		'error_403'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop',
-		'error_404'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop'
+		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle;{dns_legend},dns,staticFiles,staticPlugins,language,fallback;{global_legend:hide},dateFormat,timeFormat,datimFormat,adminEmail;{sitemap_legend:hide},createSitemap;{protected_legend:hide},protected;{layout_legend},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
+		'error_403'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{forward_legend},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop',
+		'error_404'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{forward_legend},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
@@ -250,12 +250,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'search'                  => true,
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alpha', 'maxlength'=>2, 'nospace'=>true, 'tl_class'=>'w50 clr'),
-			'save_callback' => array
-			(
-				array('tl_page', 'languageToLower')
-			),
-			'sql'                     => "varchar(2) NOT NULL default ''"
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'language', 'maxlength'=>5, 'nospace'=>true, 'tl_class'=>'w50 clr'),
+			'sql'                     => "varchar(5) NOT NULL default ''"
 		),
 		'robots' => array
 		(
@@ -322,7 +318,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'search'                  => true,
-			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255),
+			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'long'),
 			'save_callback' => array
 			(
 				array('tl_page', 'checkDns')
@@ -623,6 +619,13 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 	)
 );
 
+// Disable certain operations in the modal dialog
+if (Input::get('popup'))
+{
+	unset($GLOBALS['TL_DCA']['tl_page']['list']['operations']['show']);
+	unset($GLOBALS['TL_DCA']['tl_page']['list']['operations']['articles']);
+}
+
 
 /**
  * Class tl_page
@@ -867,91 +870,7 @@ class tl_page extends Backend
 	 */
 	public function addBreadcrumb()
 	{
-		// Set a new node
-		if (isset($_GET['node']))
-		{
-			$this->Session->set('tl_page_node', Input::get('node'));
-			$this->redirect(preg_replace('/&node=[^&]*/', '', Environment::get('request')));
-		}
-
-		$intNode = $this->Session->get('tl_page_node');
-
-		if ($intNode < 1)
-		{
-			return;
-		}
-
-		$arrIds = array();
-		$arrLinks = array();
-
-		// Generate breadcrumb trail
-		if ($intNode)
-		{
-			$intId = $intNode;
-
-			do
-			{
-				$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
-								->limit(1)
-								->execute($intId);
-
-				if ($objPage->numRows < 1)
-				{
-					// Currently selected page does not exits
-					if ($intId == $intNode)
-					{
-						$this->Session->set('tl_page_node', 0);
-						return;
-					}
-
-					break;
-				}
-
-				$arrIds[] = $intId;
-
-				// No link for the active page
-				if ($objPage->id == $intNode)
-				{
-					$arrLinks[] = $this->addIcon($objPage->row(), '', null, '', true) . ' ' . $objPage->title;
-				}
-				else
-				{
-					$arrLinks[] = $this->addIcon($objPage->row(), '', null, '', true) . ' <a href="' . $this->addToUrl('node='.$objPage->id) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $objPage->title . '</a>';
-				}
-
-				// Do not show the mounted pages
-				if (!$this->User->isAdmin && $this->User->hasAccess($objPage->id, 'pagemounts'))
-				{
-					break;
-				}
-
-				$intId = $objPage->pid;
-			}
-			while ($intId > 0 && $objPage->type != 'root');
-		}
-
-		// Check whether the node is mounted
-		if (!$this->User->isAdmin && !$this->User->hasAccess($arrIds, 'pagemounts'))
-		{
-			$this->Session->set('tl_page_node', 0);
-
-			$this->log('Page ID '.$intNode.' was not mounted', 'tl_page addBreadcrumb', TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
-		}
-
-		// Limit tree
-		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = array($intNode);
-
-		// Add root link
-		$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/pagemounts.gif" width="18" height="18" alt=""> <a href="' . $this->addToUrl('node=0') . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectAllNodes']).'">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
-		$arrLinks = array_reverse($arrLinks);
-
-		// Insert breadcrumb menu
-		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['breadcrumb'] .= '
-
-<ul id="tl_breadcrumb">
-  <li>' . implode(' &gt; </li><li>', $arrLinks) . '</li>
-</ul>';
+		Backend::addPagesBreadcrumb();
 	}
 
 
@@ -1040,16 +959,16 @@ class tl_page extends Backend
 			if ($GLOBALS['TL_CONFIG']['folderUrl'])
 			{
 				$dc->activeRecord->alias = $varValue;
-				$objPage = $this->getPageDetails($dc->activeRecord);
+				$objPage = PageModel::findWithDetails($dc->activeRecord->id);
 
 				if ($objPage->folderUrl != '')
 				{
-					$varValue = $objPage->folderUrl;
+					$varValue = $objPage->folderUrl . $varValue;
 				}
 			}
 		}
 
-		$objAlias = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? OR alias=?")
+		$objAlias = $this->Database->prepare("SELECT id FROM tl_page WHERE id=? OR alias=?")
 								   ->execute($dc->id, $varValue);
 
 		// Check whether the page alias exists
@@ -1061,7 +980,7 @@ class tl_page extends Backend
 
 			while ($objAlias->next())
 			{
-				$objCurrentPage = $this->getPageDetails($objAlias);
+				$objCurrentPage = PageModel::findWithDetails($objAlias->id);
 				$domain = $objCurrentPage->domain ?: '*';
 				$language = (!$objCurrentPage->rootIsFallback) ? $objCurrentPage->rootLanguage : '*';
 
@@ -1111,17 +1030,6 @@ class tl_page extends Backend
 		}
 
 		return $varValue;
-	}
-
-
-	/**
-	 * Convert language tags to lowercase letters
-	 * @param string
-	 * @return string
-	 */
-	public function languageToLower($varValue)
-	{
-		return strtolower($varValue);
 	}
 
 
@@ -1262,7 +1170,7 @@ class tl_page extends Backend
 	/**
 	 * Check a static URL
 	 * @param mixed
-	 * @return array
+	 * @return mixed
 	 */
 	public function checkStaticUrl($varValue)
 	{
@@ -1332,30 +1240,7 @@ class tl_page extends Backend
 	 */
 	public function addIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false)
 	{
-		if ($blnProtected)
-		{
-			$row['protected'] = true;
-		}
-
-		$image = $this->getPageStatusIcon((object)$row);
-
-		// Return the image only
-		if ($blnReturnImage)
-		{
-			return $this->generateImage($image, '', $imageAttribute);
-		}
-
-		// Mark root pages
-		if ($row['type'] == 'root' || Input::get('do') == 'article')
-		{
-			$label = '<strong>' . $label . '</strong>';
-		}
-
-		// Add the breadcrumb link
-		$label = '<a href="' . $this->addToUrl('node='.$row['id']) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $label . '</a>';
-
-		// Return the image
-		return '<a href="contao/main.php?do=feRedirect&amp;page='.$row['id'].'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . ' target="_blank">'.$this->generateImage($image, '', $imageAttribute).'</a> '.$label;
+		return Backend::addPageIcon($row, $label, $dc, $imageAttribute, $blnReturnImage, $blnProtected);
 	}
 
 
@@ -1371,7 +1256,7 @@ class tl_page extends Backend
 	 */
 	public function editPage($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(1, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(1, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -1393,7 +1278,7 @@ class tl_page extends Backend
 			return '';
 		}
 
-		return ($this->User->isAdmin || ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(2, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(2, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -1419,7 +1304,7 @@ class tl_page extends Backend
 									  ->limit(1)
 									  ->execute($row['id']);
 
-		return ($objSubpages->numRows && ($this->User->isAdmin || ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(2, $row)))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($objSubpages->numRows && ($this->User->isAdmin || ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(2, $row)))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -1435,7 +1320,7 @@ class tl_page extends Backend
 	 */
 	public function cutPage($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(2, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(2, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -1513,15 +1398,15 @@ class tl_page extends Backend
 		$return = '';
 
 		// Return the buttons
-		$imagePasteAfter = $this->generateImage('pasteafter.gif', sprintf($GLOBALS['TL_LANG'][$table]['pasteafter'][1], $row['id']));
-		$imagePasteInto = $this->generateImage('pasteinto.gif', sprintf($GLOBALS['TL_LANG'][$table]['pasteinto'][1], $row['id']));
+		$imagePasteAfter = Image::getHtml('pasteafter.gif', sprintf($GLOBALS['TL_LANG'][$table]['pasteafter'][1], $row['id']));
+		$imagePasteInto = Image::getHtml('pasteinto.gif', sprintf($GLOBALS['TL_LANG'][$table]['pasteinto'][1], $row['id']));
 
 		if ($row['id'] > 0)
 		{
-			$return = $disablePA ? $this->generateImage('pasteafter_.gif').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$table]['pasteafter'][1], $row['id'])).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a> ';
+			$return = $disablePA ? Image::getHtml('pasteafter_.gif').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$table]['pasteafter'][1], $row['id'])).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a> ';
 		}
 
-		return $return.($disablePI ? $this->generateImage('pasteinto_.gif').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$table]['pasteinto'][1], $row['id'])).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a> ');
+		return $return.($disablePI ? Image::getHtml('pasteinto_.gif').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$table]['pasteinto'][1], $row['id'])).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a> ');
 	}
 
 
@@ -1538,7 +1423,7 @@ class tl_page extends Backend
 	public function deletePage($row, $href, $label, $title, $icon, $attributes)
 	{
 		$root = func_get_arg(7);
-		return ($this->User->isAdmin || ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(3, $row) && !in_array($row['id'], $root))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(3, $row) && !in_array($row['id'], $root))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -1558,7 +1443,7 @@ class tl_page extends Backend
 			return '';
 		}
 
-		return ($row['type'] == 'regular' || $row['type'] == 'error_403' || $row['type'] == 'error_404') ? '<a href="' . $this->addToUrl($href.'&amp;node='.$row['id']) . '" title="'.specialchars($title).'">'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($row['type'] == 'regular' || $row['type'] == 'error_403' || $row['type'] == 'error_404') ? '<a href="' . $this->addToUrl($href.'&amp;node='.$row['id']) . '" title="'.specialchars($title).'">'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -1575,7 +1460,7 @@ class tl_page extends Backend
 
 			foreach ($ids as $id)
 			{
-				$objPage = $this->getPageDetails($id);
+				$objPage = PageModel::findWithDetails($id);
 
 				if ($objPage === null)
 				{
@@ -1583,21 +1468,30 @@ class tl_page extends Backend
 				}
 
 				// Set the new alias
-				$objPage->alias = standardize(String::restoreBasicEntities($objPage->title));
+				$strAlias = standardize(String::restoreBasicEntities($objPage->title));
 
-				// Update the folderURL entry
-				if (strpos($objPage->folderUrl, '/') !== false)
+				// Prepend the folder URL
+				if ($GLOBALS['TL_CONFIG']['folderUrl'])
 				{
-					$objPage->folderUrl = dirname($objPage->folderUrl) . '/' . $objPage->alias;
+					$strAlias = $objPage->folderUrl . $strAlias;
 				}
-				else
+
+				// The alias has not changed
+				if ($strAlias == $objPage->alias)
 				{
-					$objPage->folderUrl = $objPage->alias;
+					continue;
 				}
+
+				// Initialize the version manager
+				$objVersions = new Versions('tl_page', $id);
+				$objVersions->initialize();
 
 				// Store the new alias
 				$this->Database->prepare("UPDATE tl_page SET alias=? WHERE id=?")
-							   ->execute(($GLOBALS['TL_CONFIG']['folderUrl'] ? $objPage->folderUrl : basename($objPage->alias)), $id);
+							   ->execute($strAlias, $id);
+
+				// Create a new version
+				$objVersions->create();
 			}
 
 			$this->redirect($this->getReferer());
@@ -1655,10 +1549,10 @@ class tl_page extends Backend
 
 		if (!$this->User->isAdmin && !$this->User->isAllowed(2, $objPage->row()))
 		{
-			return $this->generateImage($icon) . ' ';
+			return Image::getHtml($icon) . ' ';
 		}
 
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 
@@ -1681,7 +1575,8 @@ class tl_page extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->createInitialVersion('tl_page', $intId);
+		$objVersions = new Versions('tl_page', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_page']['fields']['published']['save_callback']))
@@ -1697,6 +1592,7 @@ class tl_page extends Backend
 		$this->Database->prepare("UPDATE tl_page SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_page', $intId);
+		$objVersions->create();
+		$this->log('A new version of record "tl_page.id='.$intId.'" has been created'.$this->getParentEntries('tl_page', $intId), 'tl_page toggleVisibility()', TL_GENERAL);
 	}
 }

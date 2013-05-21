@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -45,12 +45,6 @@ class RadioTable extends \Widget
 	 * @var string
 	 */
 	protected $strTemplate = 'be_widget';
-
-	/**
-	 * Options
-	 * @var integer
-	 */
-	protected $arrOptions = array();
 
 
 	/**
@@ -123,7 +117,7 @@ class RadioTable extends \Widget
 
 				if (strlen($value))
 				{
-					$label = $this->generateImage($value.'.gif', $label, 'title="'.specialchars($label).'"');
+					$label = \Image::getHtml($value.'.gif', $label, 'title="'.specialchars($label).'"');
 					$return .= '
       <td><input type="radio" name="'.$this->strName.'" id="'.$this->strField.'_'.$i.'_'.$j.'" class="tl_radio" value="'.specialchars($value).'" onfocus="Backend.getScrollOffset()"'.$this->isChecked($this->arrOptions[$j]).$this->getAttributes().'> <label for="'.$this->strField.'_'.$i.'_'.$j.'">'.$label.'</label></td>';
 				}

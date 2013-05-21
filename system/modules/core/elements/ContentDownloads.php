@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -94,6 +94,8 @@ class ContentDownloads extends \ContentElement
 					$this->sendFileToBrowser($file);
 				}
 			}
+
+			$this->objFiles->reset();
 		}
 
 		return parent::generate();
@@ -141,6 +143,16 @@ class ContentDownloads extends \ContentElement
 					$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
 				}
 
+				$strHref = \Environment::get('request');
+
+				// Remove an existing file parameter (see #5683)
+				if (preg_match('/(&(amp;)?|\?)file=/', $strHref))
+				{
+					$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
+				}
+
+				$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFiles->path);
+
 				// Add the image
 				$files[$objFiles->path] = array
 				(
@@ -149,9 +161,9 @@ class ContentDownloads extends \ContentElement
 					'title'     => $arrMeta['title'],
 					'link'      => $arrMeta['title'],
 					'caption'   => $arrMeta['caption'],
-					'href'      => \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objFiles->path),
+					'href'      => $strHref,
 					'filesize'  => $this->getReadableSize($objFile->filesize, 1),
-					'icon'      => TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
+					'icon'      => TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon,
 					'mime'      => $objFile->mime,
 					'meta'      => $arrMeta,
 					'extension' => $objFile->extension,
@@ -195,6 +207,16 @@ class ContentDownloads extends \ContentElement
 						$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
 					}
 
+					$strHref = \Environment::get('request');
+
+					// Remove an existing file parameter (see #5683)
+					if (preg_match('/(&(amp;)?|\?)file=/', $strHref))
+					{
+						$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
+					}
+
+					$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objSubfiles->path);
+
 					// Add the image
 					$files[$objSubfiles->path] = array
 					(
@@ -203,9 +225,9 @@ class ContentDownloads extends \ContentElement
 						'title'     => $arrMeta['title'],
 						'link'      => $arrMeta['title'],
 						'caption'   => $arrMeta['caption'],
-						'href'      => \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objSubfiles->path),
+						'href'      => $strHref,
 						'filesize'  => $this->getReadableSize($objFile->filesize, 1),
-						'icon'      => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
+						'icon'      => TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon,
 						'mime'      => $objFile->mime,
 						'meta'      => $arrMeta,
 						'extension' => $objFile->extension,

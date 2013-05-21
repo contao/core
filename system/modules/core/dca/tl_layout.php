@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -228,7 +228,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'default'                 => array('layout.css'),
 			'exclude'                 => true,
 			'inputType'               => 'checkboxWizard',
-			'options'                 => array('layout.css', 'responsive.css', 'reset.css', 'form.css', 'tinymce.css'),
+			'options'                 => array('layout.css', 'grid.css', 'reset.css', 'form.css', 'tinymce.css'),
 			'eval'                    => array('multiple'=>true, 'helpwizard'=>true),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 			'sql'                     => "varchar(255) NOT NULL default ''"
@@ -283,7 +283,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		'modules' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['modules'],
-			'default'                 => array(array('mod'=>0, 'col'=>'main')),
+			'default'                 => array(array('mod'=>0, 'col'=>'main', 'enable'=>1)),
 			'exclude'                 => true,
 			'inputType'               => 'moduleWizard',
 			'sql'                     => "blob NULL"
@@ -647,6 +647,6 @@ class tl_layout extends Backend
 	 */
 	public function styleSheetLink(DataContainer $dc)
 	{
-		return ' <a href="contao/main.php?do=themes&table=tl_style_sheet&id=' . $dc->activeRecord->pid . '&amp;rt=' . REQUEST_TOKEN . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_styles']) . '"><img width="12" height="16" alt="" src="system/themes/' . $this->getTheme() . '/images/edit.gif" style="vertical-align:text-bottom"></a>';
+		return ' <a href="contao/main.php?do=themes&amp;table=tl_style_sheet&amp;id=' . $dc->activeRecord->pid . '&amp;rt=' . REQUEST_TOKEN . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_styles']) . '"><img width="12" height="16" alt="" src="system/themes/' . Backend::getTheme() . '/images/edit.gif" style="vertical-align:text-bottom"></a>';
 	}
 }

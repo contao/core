@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -442,16 +442,22 @@ class StyleSheets extends \Backend
 				}
 			}
 
+			// Vertical alignment
+			if ($row['verticalalign'] != '')
+			{
+				$return .= $lb . 'vertical-align:' . $row['verticalalign'] . ';';
+			}
+
 			// Text alignment
 			if ($row['textalign'] != '')
 			{
 				$return .= $lb . 'text-align:' . $row['textalign'] . ';';
 			}
 
-			// Vertical alignment
-			if ($row['verticalalign'] != '')
+			// White space
+			if ($row['whitespace'] != '')
 			{
-				$return .= $lb . 'vertical-align:' . $row['verticalalign'] . ';';
+				$return .= $lb . 'white-space:' . $row['whitespace'] . ';';
 			}
 		}
 
@@ -840,12 +846,6 @@ class StyleSheets extends \Backend
 				$return .= $lb . 'color:' . $this->compileColor($fnColor, $blnWriteToFile, $vars) . ';';
 			}
 
-			// White space
-			if ($row['whitespace'] != '')
-			{
-				$return .= $lb . 'white-space:nowrap;';
-			}
-
 			// Text transform
 			if ($row['texttransform'] != '')
 			{
@@ -906,7 +906,7 @@ class StyleSheets extends \Backend
 		}
 
 		// CSS3PIE
-		if ($blnNeedsPie)
+		if ($blnNeedsPie && !$parent['disablePie'])
 		{
 			$return .= $lb . 'behavior:url(\'assets/css3pie/'.CSS3PIE.'/PIE.htc\');';
 		}
@@ -1716,6 +1716,7 @@ class StyleSheets extends \Backend
 				case 'align':
 				case 'text-align':
 				case 'vertical-align':
+				case 'white-space':
 					$arrSet['alignment'] = 1;
 					$arrSet[str_replace('-', '', $strKey)] = $arrChunks[1];
 					break;
@@ -2074,18 +2075,6 @@ class StyleSheets extends \Backend
 					);
 					break;
 
-				case 'white-space':
-					if ($arrChunks[1] == 'nowrap')
-					{
-						$arrSet['font'] = 1;
-						$arrSet['whitespace'] = 1;
-					}
-					else
-					{
-						$arrSet['own'][] = $strDefinition;
-					}
-					break;
-
 				case 'text-transform':
 					$arrSet['font'] = 1;
 					$arrSet['texttransform'] = $arrChunks[1];
@@ -2160,7 +2149,7 @@ class StyleSheets extends \Backend
 	/**
 	 * Return an image as data: string
 	 * @param string
-	 * @param array   
+	 * @param array
 	 * @return string|boolean
 	 */
 	protected function generateBase64Image($strImage, $arrParent)

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -117,8 +117,10 @@ class CronJob extends Frontend
 	 */
 	protected function hasToWait()
 	{
-		$time = time();
 		$return = true;
+
+		// Get the timestamp without seconds (see #5775)
+		$time = strtotime(date('Y-m-d H:i'));
 
 		// Lock the table
 		$this->Database->lockTables(array('tl_cron'=>'WRITE'));
@@ -137,7 +139,7 @@ class CronJob extends Frontend
 		}
 
 		// Check the last execution time
-		elseif ($objCron->value <= (time() - $this->getCronTimeout()))
+		elseif ($objCron->value <= ($time - $this->getCronTimeout()))
 		{
 			$this->updateCronTxt($time);
 			$this->Database->query("UPDATE tl_cron SET value=$time WHERE name='lastrun'");
@@ -155,9 +157,7 @@ class CronJob extends Frontend
 	 */
 	protected function updateCronTxt($time)
 	{
-		$objFile = new File('system/cron/cron.txt', true);
-		$objFile->write($time);
-		$objFile->close();
+		File::putContent('system/cron/cron.txt', $time);
 	}
 }
 

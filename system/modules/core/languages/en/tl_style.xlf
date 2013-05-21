@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_style.php" source-language="en">
+    <body>
+      <trans-unit id="tl_style.invisible.0">
+        <source>Invisible</source>
+      </trans-unit>
+      <trans-unit id="tl_style.invisible.1">
+        <source>Do not export the format definition.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.selector.0">
+        <source>Selector</source>
+      </trans-unit>
+      <trans-unit id="tl_style.selector.1">
+        <source>The selector defines to which element(s) the format definition applies.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.category.0">
+        <source>Category</source>
+      </trans-unit>
+      <trans-unit id="tl_style.category.1">
+        <source>Categories can be used to group format definitions in the back end.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.comment.0">
+        <source>Comment</source>
+      </trans-unit>
+      <trans-unit id="tl_style.comment.1">
+        <source>Here you can add a comment.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.size.0">
+        <source>Size</source>
+      </trans-unit>
+      <trans-unit id="tl_style.size.1">
+        <source>Width, height, min-width, min-height, max-width and max-height.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.width.0">
+        <source>Width</source>
+      </trans-unit>
+      <trans-unit id="tl_style.width.1">
+        <source>Here you can enter the element's width.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.height.0">
+        <source>Height</source>
+      </trans-unit>
+      <trans-unit id="tl_style.height.1">
+        <source>Here you can enter the element's height.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.minwidth.0">
+        <source>Minimum width</source>
+      </trans-unit>
+      <trans-unit id="tl_style.minwidth.1">
+        <source>Here you can enter the element's minimum width.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.minheight.0">
+        <source>Minimum height</source>
+      </trans-unit>
+      <trans-unit id="tl_style.minheight.1">
+        <source>Here you can enter the element's minimum height.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.maxwidth.0">
+        <source>Maximum width</source>
+      </trans-unit>
+      <trans-unit id="tl_style.maxwidth.1">
+        <source>Here you can enter the element's maximum width.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.maxheight.0">
+        <source>Maximum height</source>
+      </trans-unit>
+      <trans-unit id="tl_style.maxheight.1">
+        <source>Here you can enter the element's maximum height.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.positioning.0">
+        <source>Position</source>
+      </trans-unit>
+      <trans-unit id="tl_style.positioning.1">
+        <source>Position, float, clear, overflow and display.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.trbl.0">
+        <source>Position</source>
+      </trans-unit>
+      <trans-unit id="tl_style.trbl.1">
+        <source>Here you can enter the top, right, bottom and left position.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.position.0">
+        <source>Position type</source>
+      </trans-unit>
+      <trans-unit id="tl_style.position.1">
+        <source>Here you can choose the position type.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.floating.0">
+        <source>Float</source>
+      </trans-unit>
+      <trans-unit id="tl_style.floating.1">
+        <source>Here you can choose the float type.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.clear.0">
+        <source>Clear</source>
+      </trans-unit>
+      <trans-unit id="tl_style.clear.1">
+        <source>Here you can choose the clear type.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.overflow.0">
+        <source>Overflow</source>
+      </trans-unit>
+      <trans-unit id="tl_style.overflow.1">
+        <source>Here you can choose the overflow behaviour.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.display.0">
+        <source>Display</source>
+      </trans-unit>
+      <trans-unit id="tl_style.display.1">
+        <source>Here you can choose the display type.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.alignment.0">
+        <source>Margin, padding and alignment</source>
+      </trans-unit>
+      <trans-unit id="tl_style.alignment.1">
+        <source>Margin, padding, align, vertical-align, text-align and whitespace.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.margin.0">
+        <source>Margin</source>
+      </trans-unit>
+      <trans-unit id="tl_style.margin.1">
+        <source>Here you can enter the top, right, bottom and left margin.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.padding.0">
+        <source>Padding</source>
+      </trans-unit>
+      <trans-unit id="tl_style.padding.1">
+        <source>Here you can enter the top, right, bottom and left padding.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.align.0">
+        <source>Element alignment</source>
+      </trans-unit>
+      <trans-unit id="tl_style.align.1">
+        <source>To align an element, its left and right margin will be overwritten.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.verticalalign.0">
+        <source>Vertical alignment</source>
+      </trans-unit>
+      <trans-unit id="tl_style.verticalalign.1">
+        <source>Here you can choose the vertical alignment.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.textalign.0">
+        <source>Text alignment</source>
+      </trans-unit>
+      <trans-unit id="tl_style.textalign.1">
+        <source>Here you can choose the horizontal text alignment.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.0">
+        <source>White-space</source>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.1">
+        <source>Here you can define how white-space inside an element is handled.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.background.0">
+        <source>Background</source>
+      </trans-unit>
+      <trans-unit id="tl_style.background.1">
+        <source>Background-color, background-image, background-position, background-repeat, linear-gradient and box-shadow.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.bgcolor.0">
+        <source>Background color and opacity</source>
+      </trans-unit>
+      <trans-unit id="tl_style.bgcolor.1">
+        <source>Here you can enter a hexadecimal background color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+      </trans-unit>
+      <trans-unit id="tl_style.bgimage.0">
+        <source>Background image</source>
+      </trans-unit>
+      <trans-unit id="tl_style.bgimage.1">
+        <source>Here you can enter the path to a background image.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.bgposition.0">
+        <source>Background position</source>
+      </trans-unit>
+      <trans-unit id="tl_style.bgposition.1">
+        <source>Here you can select the position of the background image.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.bgrepeat.0">
+        <source>Background repeat</source>
+      </trans-unit>
+      <trans-unit id="tl_style.bgrepeat.1">
+        <source>Here you can select the repeating mode.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowsize.0">
+        <source>Shadow size</source>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowsize.1">
+        <source>Here you can enter the X and Y offset, an optional blur size and an optional spread radius.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowcolor.0">
+        <source>Shadow color and opacity</source>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowcolor.1">
+        <source>Here you can enter a hexadecimal shadow color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientAngle.0">
+        <source>Gradient angle</source>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientAngle.1">
+        <source>Here you can enter the gradient angle (e.g. &lt;em&gt;0deg&lt;/em&gt;) or the direction (e.g. &lt;em&gt;to bottom&lt;/em&gt; or &lt;em&gt;to top right&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientColors.0">
+        <source>Gradient colors</source>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientColors.1">
+        <source>Here you can enter up to four colors with an optional percentage (e.g. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_style.border.0">
+        <source>Border</source>
+      </trans-unit>
+      <trans-unit id="tl_style.border.1">
+        <source>Border-width, border-style, border-color, border-radius, border-collapse and border-spacing.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.borderwidth.0">
+        <source>Border width</source>
+      </trans-unit>
+      <trans-unit id="tl_style.borderwidth.1">
+        <source>Here you can enter the top, right, bottom and left border width.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.borderstyle.0">
+        <source>Border style</source>
+      </trans-unit>
+      <trans-unit id="tl_style.borderstyle.1">
+        <source>Here you can choose the border style.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercolor.0">
+        <source>Border color and opacity</source>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercolor.1">
+        <source>Here you can enter a hexadecimal border color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+      </trans-unit>
+      <trans-unit id="tl_style.borderradius.0">
+        <source>Border radius</source>
+      </trans-unit>
+      <trans-unit id="tl_style.borderradius.1">
+        <source>Here you can enter the top, right, bottom and left border radius.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercollapse.0">
+        <source>Border handling</source>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercollapse.1">
+        <source>Here you can choose the border handling.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.borderspacing.0">
+        <source>Border spacing</source>
+      </trans-unit>
+      <trans-unit id="tl_style.borderspacing.1">
+        <source>Here you can enter the border spacing.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.font.0">
+        <source>Font</source>
+      </trans-unit>
+      <trans-unit id="tl_style.font.1">
+        <source>Font-family, font-size, font-color, line-height, font-style and white-space.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.fontfamily.0">
+        <source>Font family</source>
+      </trans-unit>
+      <trans-unit id="tl_style.fontfamily.1">
+        <source>Here you can enter a comma separated list of font types.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.fontsize.0">
+        <source>Font size</source>
+      </trans-unit>
+      <trans-unit id="tl_style.fontsize.1">
+        <source>Here you can enter the font size.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.fontcolor.0">
+        <source>Font color and opacity</source>
+      </trans-unit>
+      <trans-unit id="tl_style.fontcolor.1">
+        <source>Here you can enter a hexadecimal font color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+      </trans-unit>
+      <trans-unit id="tl_style.lineheight.0">
+        <source>Line height</source>
+      </trans-unit>
+      <trans-unit id="tl_style.lineheight.1">
+        <source>Here you can define the line height.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.fontstyle.0">
+        <source>Font style</source>
+      </trans-unit>
+      <trans-unit id="tl_style.fontstyle.1">
+        <source>Here you can choose one or more font styles.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.texttransform.0">
+        <source>Text transform</source>
+      </trans-unit>
+      <trans-unit id="tl_style.texttransform.1">
+        <source>Here you can choose a text transformation mode.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.textindent.0">
+        <source>Text indent</source>
+      </trans-unit>
+      <trans-unit id="tl_style.textindent.1">
+        <source>Here you can enter a text indentation.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.letterspacing.0">
+        <source>Letter spacing</source>
+      </trans-unit>
+      <trans-unit id="tl_style.letterspacing.1">
+        <source>Here you can modify the letter spacing (default: 0px).</source>
+      </trans-unit>
+      <trans-unit id="tl_style.wordspacing.0">
+        <source>Word spacing</source>
+      </trans-unit>
+      <trans-unit id="tl_style.wordspacing.1">
+        <source>Here you can modify the word spacing (default: 0px).</source>
+      </trans-unit>
+      <trans-unit id="tl_style.list.0">
+        <source>List</source>
+      </trans-unit>
+      <trans-unit id="tl_style.list.1">
+        <source>List-style-type and list-style-image.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyletype.0">
+        <source>List symbol</source>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyletype.1">
+        <source>Here you can choose a list symbol.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyleimage.0">
+        <source>Custom symbol</source>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyleimage.1">
+        <source>Here you can enter the path to an individual symbol.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.own.0">
+        <source>Custom code</source>
+      </trans-unit>
+      <trans-unit id="tl_style.own.1">
+        <source>Here you can enter custom CSS code.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.selector_legend">
+        <source>Selector and category</source>
+      </trans-unit>
+      <trans-unit id="tl_style.size_legend">
+        <source>Size</source>
+      </trans-unit>
+      <trans-unit id="tl_style.position_legend">
+        <source>Position</source>
+      </trans-unit>
+      <trans-unit id="tl_style.align_legend">
+        <source>Margin and alignment</source>
+      </trans-unit>
+      <trans-unit id="tl_style.background_legend">
+        <source>Background settings</source>
+      </trans-unit>
+      <trans-unit id="tl_style.border_legend">
+        <source>Border settings</source>
+      </trans-unit>
+      <trans-unit id="tl_style.font_legend">
+        <source>Font settings</source>
+      </trans-unit>
+      <trans-unit id="tl_style.list_legend">
+        <source>List settings</source>
+      </trans-unit>
+      <trans-unit id="tl_style.custom_legend">
+        <source>Custom code</source>
+      </trans-unit>
+      <trans-unit id="tl_style.normal">
+        <source>normal</source>
+      </trans-unit>
+      <trans-unit id="tl_style.bold">
+        <source>bold</source>
+      </trans-unit>
+      <trans-unit id="tl_style.italic">
+        <source>italic</source>
+      </trans-unit>
+      <trans-unit id="tl_style.underline">
+        <source>underlined</source>
+      </trans-unit>
+      <trans-unit id="tl_style.notUnderlined">
+        <source>not underlined</source>
+      </trans-unit>
+      <trans-unit id="tl_style.line-through">
+        <source>line-through</source>
+      </trans-unit>
+      <trans-unit id="tl_style.overline">
+        <source>overlined</source>
+      </trans-unit>
+      <trans-unit id="tl_style.small-caps">
+        <source>small-caps</source>
+      </trans-unit>
+      <trans-unit id="tl_style.disc">
+        <source>dot</source>
+      </trans-unit>
+      <trans-unit id="tl_style.circle">
+        <source>circle</source>
+      </trans-unit>
+      <trans-unit id="tl_style.square">
+        <source>square</source>
+      </trans-unit>
+      <trans-unit id="tl_style.decimal">
+        <source>figures</source>
+      </trans-unit>
+      <trans-unit id="tl_style.upper-roman">
+        <source>upper latin figures</source>
+      </trans-unit>
+      <trans-unit id="tl_style.lower-roman">
+        <source>lower latin figures</source>
+      </trans-unit>
+      <trans-unit id="tl_style.upper-alpha">
+        <source>upper characters</source>
+      </trans-unit>
+      <trans-unit id="tl_style.lower-alpha">
+        <source>lower characters</source>
+      </trans-unit>
+      <trans-unit id="tl_style.uppercase">
+        <source>uppercase</source>
+      </trans-unit>
+      <trans-unit id="tl_style.lowercase">
+        <source>lowercase</source>
+      </trans-unit>
+      <trans-unit id="tl_style.capitalize">
+        <source>capitalize</source>
+      </trans-unit>
+      <trans-unit id="tl_style.none">
+        <source>none</source>
+      </trans-unit>
+      <trans-unit id="tl_style.new.0">
+        <source>New format definition</source>
+      </trans-unit>
+      <trans-unit id="tl_style.new.1">
+        <source>Create a new format definition</source>
+      </trans-unit>
+      <trans-unit id="tl_style.show.0">
+        <source>Format definition details</source>
+      </trans-unit>
+      <trans-unit id="tl_style.show.1">
+        <source>Show the details of format definition ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_style.edit.0">
+        <source>Edit format definition</source>
+      </trans-unit>
+      <trans-unit id="tl_style.edit.1">
+        <source>Edit format definition ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_style.cut.0">
+        <source>Move format definition</source>
+      </trans-unit>
+      <trans-unit id="tl_style.cut.1">
+        <source>Move format definition ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_style.copy.0">
+        <source>Duplicate format definition</source>
+      </trans-unit>
+      <trans-unit id="tl_style.copy.1">
+        <source>Duplicate format definition ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_style.delete.0">
+        <source>Delete format definition</source>
+      </trans-unit>
+      <trans-unit id="tl_style.delete.1">
+        <source>Delete format definition ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_style.editheader.0">
+        <source>Edit style sheet</source>
+      </trans-unit>
+      <trans-unit id="tl_style.editheader.1">
+        <source>Edit the style sheet settings</source>
+      </trans-unit>
+      <trans-unit id="tl_style.pasteafter.0">
+        <source>Paste at the top</source>
+      </trans-unit>
+      <trans-unit id="tl_style.pasteafter.1">
+        <source>Paste after format definition ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_style.pastenew.0">
+        <source>Add new at the top</source>
+      </trans-unit>
+      <trans-unit id="tl_style.pastenew.1">
+        <source>Add new after format definition ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_style.toggle.0">
+        <source>Toggle visibility</source>
+      </trans-unit>
+      <trans-unit id="tl_style.toggle.1">
+        <source>Toggle the visibility of format definition ID %s</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

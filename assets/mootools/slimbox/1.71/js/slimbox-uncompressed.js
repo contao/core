@@ -7,7 +7,7 @@
 var Slimbox = (function() {
 
 	// Global variables, accessible to Slimbox only
-	var win = window, ie6 = Browser.Engine.trident4, options, images, activeImage = -1, activeURL, prevImage, nextImage, compatibleOverlay, middle, centerWidth, centerHeight,
+	var win = window, ie6 = Browser.ie6, options, images, activeImage = -1, activeURL, prevImage, nextImage, compatibleOverlay, middle, centerWidth, centerHeight,
 
 	// Preload images
 	preload = {}, preloadPrev = new Image(), preloadNext = new Image(),
@@ -32,14 +32,14 @@ var Slimbox = (function() {
 			).setStyle("display", "none")
 		);
 
-		image = new Element("div", {id: "lbImage"}).injectInside(center).adopt(
+		image = new Element("div", {id: "lbImage"}).inject(center).adopt(
 			sizer = new Element("div", {styles: {position: "relative"}}).adopt(
 				prevLink = new Element("a", {id: "lbPrevLink", href: "#", events: {click: previous}}),
 				nextLink = new Element("a", {id: "lbNextLink", href: "#", events: {click: next}})
 			)
 		);
 
-		bottom = new Element("div", {id: "lbBottom"}).injectInside(bottomContainer).adopt(
+		bottom = new Element("div", {id: "lbBottom"}).inject(bottomContainer).adopt(
 			new Element("a", {id: "lbCloseLink", href: "#", events: {click: close}}),
 			caption = new Element("div", {id: "lbCaption"}),
 			number = new Element("div", {id: "lbNumber"}),
@@ -150,7 +150,7 @@ var Slimbox = (function() {
 	}
 
 	function stop() {
-		preload.onload = $empty;
+		preload.onload = function() {};
 		preload.src = preloadPrev.src = preloadNext.src = activeURL;
 		fxResize.cancel();
 		fxImage.cancel();
@@ -215,7 +215,7 @@ var Slimbox = (function() {
 
 	return {
 		open: function(_images, startImage, _options) {
-			options = $extend({
+			options = Object.append(_options, {
 				loop: false,				// Allows to navigate between first and last images
 				overlayOpacity: 0.8,			// 1 is opaque, 0 is completely transparent (change the color in the CSS file)
 				overlayFadeDuration: 400,		// Duration of the overlay fade-in and fade-out animations (in milliseconds)
@@ -229,11 +229,11 @@ var Slimbox = (function() {
 				closeKeys: [27, 88, 67],		// Array of keycodes to close Slimbox, default: Esc (27), 'x' (88), 'c' (67)
 				previousKeys: [37, 80],			// Array of keycodes to navigate to the previous image, default: Left arrow (37), 'p' (80)
 				nextKeys: [39, 78]			// Array of keycodes to navigate to the next image, default: Right arrow (39), 'n' (78)
-			}, _options || {});
+			} || {});
 
 			// Setup effects
 			fxOverlay = new Fx.Tween(overlay, {property: "opacity", duration: options.overlayFadeDuration});
-			fxResize = new Fx.Morph(center, $extend({duration: options.resizeDuration, link: "chain"}, options.resizeTransition ? {transition: options.resizeTransition} : {}));
+			fxResize = new Fx.Morph(center, Object.append(options.resizeTransition ? {transition: options.resizeTransition} : {}, {duration: options.resizeDuration, link: "chain"}));
 			fxImage = new Fx.Tween(image, {property: "opacity", duration: options.imageFadeDuration, onComplete: animateCaption});
 			fxBottom = new Fx.Tween(bottom, {property: "margin-top", duration: options.captionAnimationDuration});
 

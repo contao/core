@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -159,20 +159,13 @@ class DataContainer extends \Backend
 		// Toggle line wrap (textarea)
 		if ($arrData['inputType'] == 'textarea' && $arrData['eval']['rte'] == '')
 		{
-			$xlabel .= ' ' . $this->generateImage('wrap.gif', $GLOBALS['TL_LANG']['MSC']['wordWrap'], 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['wordWrap']) . '" class="toggleWrap" onclick="Backend.toggleWrap(\'ctrl_'.$this->strInputName.'\')"');
+			$xlabel .= ' ' . \Image::getHtml('wrap.gif', $GLOBALS['TL_LANG']['MSC']['wordWrap'], 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['wordWrap']) . '" class="toggleWrap" onclick="Backend.toggleWrap(\'ctrl_'.$this->strInputName.'\')"');
 		}
 
 		// Add the help wizard
 		if ($arrData['eval']['helpwizard'])
 		{
-			$xlabel .= ' <a href="contao/help.php?table='.$this->strTable.'&amp;field='.$this->strField.'" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['helpWizard']) . '" onclick="Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\''.specialchars(str_replace("'", "\\'", $arrData['label'][0])).'\',\'url\':this.href});return false">'.$this->generateImage('about.gif', $GLOBALS['TL_LANG']['MSC']['helpWizard'], 'style="vertical-align:text-bottom"').'</a>';
-		}
-
-		// Add the popup file manager
-		if ($arrData['inputType'] == 'fileTree' && $this->strTable .'.'. $this->strField != 'tl_theme.templates')
-		{
-			$path = isset($arrData['eval']['path']) ? '?node=' . $arrData['eval']['path'] : '';
-			$xlabel .= ' <a href="contao/files.php' . $path . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.openModalIframe({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['filetree'])).'\',\'url\':this.href});return false">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom"') . '</a>';
+			$xlabel .= ' <a href="contao/help.php?table='.$this->strTable.'&amp;field='.$this->strField.'" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['helpWizard']) . '" onclick="Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\''.specialchars(str_replace("'", "\\'", $arrData['label'][0])).'\',\'url\':this.href});return false">'.\Image::getHtml('about.gif', $GLOBALS['TL_LANG']['MSC']['helpWizard'], 'style="vertical-align:text-bottom"').'</a>';
 		}
 
 		// Add a custom xlabel
@@ -196,13 +189,16 @@ class DataContainer extends \Backend
 			return $this->$arrData['input_field_callback'][0]->$arrData['input_field_callback'][1]($this, $xlabel);
 		}
 
+		$strClass = $GLOBALS['BE_FFL'][$arrData['inputType']];
+
 		// Return if the widget class does not exists
-		if (!isset($GLOBALS['BE_FFL'][$arrData['inputType']]))
+		if (!class_exists($strClass))
 		{
 			return '';
 		}
 
 		$arrData['eval']['required'] = false;
+		$arrData['activeRecord'] = $this->activeRecord;
 
 		// Use strlen() here (see #3277)
 		if ($arrData['eval']['mandatory'])
@@ -223,9 +219,7 @@ class DataContainer extends \Backend
 			}
 		}
 
-		$arrData['activeRecord'] = $this->activeRecord;
-		$arrWidget = $this->prepareForWidget($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable);
-		$objWidget = new $GLOBALS['BE_FFL'][$arrData['inputType']]($arrWidget);
+		$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable, $this));
 
 		$objWidget->xlabel = $xlabel;
 		$objWidget->currentRecord = $this->intId;
@@ -284,7 +278,11 @@ class DataContainer extends \Backend
 
 				if ($objWidget->hasErrors())
 				{
-					$this->noReload = true;
+					// Skip mandatory fields on auto-submit (see #4077)
+					if (\Input::post('SUBMIT_TYPE') != 'auto' || !$objWidget->mandatory || $objWidget->value != '')
+					{
+						$this->noReload = true;
+					}
 				}
 				elseif ($objWidget->submitInput())
 				{
@@ -338,18 +336,18 @@ class DataContainer extends \Backend
 
 			$wizard .= ' <img src="assets/mootools/datepicker/' . DATEPICKER . '/icon.gif" width="20" height="20" alt="" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['datepicker']).'" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px;cursor:pointer">
   <script>
-  window.addEvent("domready", function() {
-    new Picker.Date($$("#ctrl_' . $objWidget->id . '"), {
-      draggable:false,
-      toggle:$$("#toggle_' . $objWidget->id . '"),
-      format:"' . $format . '",
-      positionOffset:{x:-197,y:-182}' . $time . ',
-      pickerClass:"datepicker_dashboard",
-      useFadeInOut:!Browser.ie,
-      startDay:' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
-      titleFormat:"' . $GLOBALS['TL_LANG']['MSC']['titleFormat'] . '"
+    window.addEvent("domready", function() {
+      new Picker.Date($("ctrl_' . $objWidget->id . '"), {
+        draggable: false,
+        toggle: $("toggle_' . $objWidget->id . '"),
+        format: "' . $format . '",
+        positionOffset: {x:-197,y:-182}' . $time . ',
+        pickerClass: "datepicker_dashboard",
+        useFadeInOut: !Browser.ie,
+        startDay: ' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
+        titleFormat: "' . $GLOBALS['TL_LANG']['MSC']['titleFormat'] . '"
+      });
     });
-  });
   </script>';
 		}
 
@@ -359,18 +357,18 @@ class DataContainer extends \Backend
 			// Support single fields as well (see #5240)
 			$strKey = $arrData['eval']['multiple'] ? $this->strField . '_0' : $this->strField;
 
-			$wizard .= ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['colorpicker']).'" id="moo_' . $this->strField . '"') . '
+			$wizard .= ' ' . \Image::getHtml('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['colorpicker']).'" id="moo_' . $this->strField . '"') . '
   <script>
-  window.addEvent("domready", function() {
-    new MooRainbow("moo_' . $this->strField . '", {
-      id:"ctrl_' . $strKey . '",
-      startColor:((cl = $("ctrl_' . $strKey . '").value.hexToRgb(true)) ? cl : [255, 0, 0]),
-      imgPath:"assets/mootools/colorpicker/'.COLORPICKER.'/images/",
-      onComplete: function(color) {
-        $("ctrl_' . $strKey . '").value = color.hex.replace("#", "");
-      }
+    window.addEvent("domready", function() {
+      new MooRainbow("moo_' . $this->strField . '", {
+        id: "ctrl_' . $strKey . '",
+        startColor: ((cl = $("ctrl_' . $strKey . '").value.hexToRgb(true)) ? cl : [255, 0, 0]),
+        imgPath: "assets/mootools/colorpicker/'.COLORPICKER.'/images/",
+        onComplete: function(color) {
+          $("ctrl_' . $strKey . '").value = color.hex.replace("#", "");
+        }
+      });
     });
-  });
   </script>';
 		}
 
@@ -465,7 +463,7 @@ class DataContainer extends \Backend
 		$return = array('');
 		$names = array_values($names);
 
-		for ($i=0; $i<count($names); $i++)
+		for ($i=0, $c=count($names); $i<$c; $i++)
 		{
 			$buffer = array();
 
@@ -530,23 +528,42 @@ class DataContainer extends \Backend
 		foreach ($GLOBALS['TL_DCA'][$strTable]['list']['operations'] as $k=>$v)
 		{
 			$v = is_array($v) ? $v : array($v);
+			$id = specialchars(rawurldecode($arrRow['id']));
+
 			$label = $v['label'][0] ?: $k;
-			$title = sprintf($v['label'][1] ?: $k, $arrRow['id']);
-			$attributes = ($v['attributes'] != '') ? ' ' . ltrim(sprintf($v['attributes'], $arrRow['id'], $arrRow['id'])) : '';
+			$title = sprintf($v['label'][1] ?: $k, $id);
+			$attributes = ($v['attributes'] != '') ? ' ' . ltrim(sprintf($v['attributes'], $id, $id)) : '';
+
+			// Add the key as CSS class
+			if (strpos($attributes, 'class="') !== false)
+			{
+				$attributes = str_replace('class="', 'class="' . $k . ' ', $attributes);
+			}
+			else
+			{
+				$attributes = ' class="' . $k . '"' . $attributes;
+			}
 
 			// Call a custom function instead of using the default button
 			if (is_array($v['button_callback']))
 			{
 				$this->import($v['button_callback'][0]);
 				$return .= $this->$v['button_callback'][0]->$v['button_callback'][1]($arrRow, $v['href'], $label, $title, $v['icon'], $attributes, $strTable, $arrRootIds, $arrChildRecordIds, $blnCircularReference, $strPrevious, $strNext);
-
 				continue;
 			}
 
 			// Generate all buttons except "move up" and "move down" buttons
 			if ($k != 'move' && $v != 'move')
 			{
-				$return .= '<a href="'.$this->addToUrl($v['href'].'&amp;id='.$arrRow['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($v['icon'], $label).'</a> ';
+				if ($k == 'show')
+				{
+					$return .= '<a href="'.$this->addToUrl($v['href'].'&amp;id='.$arrRow['id'].'&amp;popup=1').'" title="'.specialchars($title).'" onclick="Backend.openModalIframe({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG'][$strTable]['show'][1], $arrRow['id']))).'\',\'url\':this.href});return false"'.$attributes.'>'.\Image::getHtml($v['icon'], $label).'</a> ';
+				}
+				else
+				{
+					$return .= '<a href="'.$this->addToUrl($v['href'].'&amp;id='.$arrRow['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.\Image::getHtml($v['icon'], $label).'</a> ';
+				}
+
 				continue;
 			}
 
@@ -558,16 +575,16 @@ class DataContainer extends \Backend
 				$label = $GLOBALS['TL_LANG'][$strTable][$dir][0] ?: $dir;
 				$title = $GLOBALS['TL_LANG'][$strTable][$dir][1] ?: $dir;
 
-				$label = $this->generateImage($dir.'.gif', $label);
+				$label = \Image::getHtml($dir.'.gif', $label);
 				$href = $v['href'] ?: '&amp;act=move';
 
 				if ($dir == 'up')
 				{
-					$return .= ((is_numeric($strPrevious) && (!in_array($arrRow['id'], $arrRootIds) || empty($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$arrRow['id']).'&amp;sid='.intval($strPrevious).'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : $this->generateImage('up_.gif')).' ';
+					$return .= ((is_numeric($strPrevious) && (!in_array($arrRow['id'], $arrRootIds) || empty($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$arrRow['id']).'&amp;sid='.intval($strPrevious).'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : \Image::getHtml('up_.gif')).' ';
 					continue;
 				}
 
-				$return .= ((is_numeric($strNext) && (!in_array($arrRow['id'], $arrRootIds) || empty($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$arrRow['id']).'&amp;sid='.intval($strNext).'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : $this->generateImage('down_.gif')).' ';
+				$return .= ((is_numeric($strNext) && (!in_array($arrRow['id'], $arrRootIds) || empty($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$arrRow['id']).'&amp;sid='.intval($strNext).'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : \Image::getHtml('down_.gif')).' ';
 			}
 		}
 
@@ -594,6 +611,20 @@ class DataContainer extends \Backend
 			$label = is_array($v['label']) ? $v['label'][0] : $v['label'];
 			$title = is_array($v['label']) ? $v['label'][1] : $v['label'];
 			$attributes = ($v['attributes'] != '') ? ' ' . ltrim($v['attributes']) : '';
+
+			// Custom icon (see #5541)
+			if ($v['icon'])
+			{
+				$v['class'] = trim($v['class'] . ' header_icon');
+
+				// Add the theme path if only the file name is given
+				if (strpos($v['icon'], '/') === false)
+				{
+					$v['icon'] = 'system/themes/' . \Backend::getTheme() . '/images/' . $v['icon'];
+				}
+
+				$attributes = sprintf('style="background-image:url(\'%s%s\')"', TL_ASSETS_URL, $v['icon']) . $attributes;
+			}
 
 			if ($label == '')
 			{

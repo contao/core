@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Newsletter
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -45,7 +45,7 @@ class ModuleNewsletterList extends \Module
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### NEWSLETTER LIST ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['nl_list'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -116,9 +116,9 @@ class ModuleNewsletterList extends \Module
 					'subject' => $objNewsletter->subject,
 					'title' => strip_insert_tags($objNewsletter->subject),
 					'href' => sprintf($strUrl, $strAlias),
-					'date' => $this->parseDate($objPage->dateFormat, $objNewsletter->date),
-					'datim' => $this->parseDate($objPage->datimFormat, $objNewsletter->date),
-					'time' => $this->parseDate($objPage->timeFormat, $objNewsletter->date),
+					'date' => \Date::parse($objPage->dateFormat, $objNewsletter->date),
+					'datim' => \Date::parse($objPage->datimFormat, $objNewsletter->date),
+					'time' => \Date::parse($objPage->timeFormat, $objNewsletter->date),
 					'channel' => $objNewsletter->channel
 				);
 			}

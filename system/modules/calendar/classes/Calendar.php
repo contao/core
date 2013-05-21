@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Calendar
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -136,8 +136,23 @@ class Calendar extends \Frontend
 				// Get the jumpTo URL
 				if (!isset($arrUrls[$jumpTo]))
 				{
-					$objParent = $this->getPageDetails($jumpTo);
-					$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
+					$objParent = \PageModel::findWithDetails($jumpTo);
+
+					// A jumpTo page is set but does no longer exist (see #5781)
+					if ($objParent === null)
+					{
+						$arrUrls[$jumpTo] = false;
+					}
+					else
+					{
+						$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
+					}
+				}
+
+				// Skip the event if it requires a jumpTo URL but there is none
+				if ($arrUrls[$jumpTo] === false && $objArticle->source == 'default')
+				{
+					continue;
 				}
 
 				$strUrl = $arrUrls[$jumpTo];
@@ -193,7 +208,7 @@ class Calendar extends \Frontend
 
 					$objItem->title = $event['title'];
 					$objItem->link = $event['link'];
-					$objItem->published = $event['published'];
+					$objItem->published = $event['tstamp'];
 					$objItem->start = $event['start'];
 					$objItem->end = $event['end'];
 					$objItem->author = $event['authorName'];
@@ -234,9 +249,7 @@ class Calendar extends \Frontend
 		}
 
 		// Create the file
-		$objRss = new \File('share/' . $strFile . '.xml', true);
-		$objRss->write($this->replaceInsertTags($objFeed->$strType()));
-		$objRss->close();
+		\File::putContent('share/' . $strFile . '.xml', $this->replaceInsertTags($objFeed->$strType()));
 	}
 
 
@@ -282,7 +295,7 @@ class Calendar extends \Frontend
 				if (!isset($arrProcessed[$objCalendar->jumpTo]))
 				{
 					$domain = \Environment::get('base');
-					$objParent = $this->getPageDetails($objCalendar->jumpTo);
+					$objParent = \PageModel::findWithDetails($objCalendar->jumpTo);
 
 					// The target page does not exist
 					if ($objParent === null)
@@ -356,11 +369,11 @@ class Calendar extends \Frontend
 		// Add date
 		if ($span > 0)
 		{
-			$title = $this->parseDate($objPage->$format, $intStart) . ' - ' . $this->parseDate($objPage->$format, $intEnd);
+			$title = \Date::parse($objPage->$format, $intStart) . ' - ' . \Date::parse($objPage->$format, $intEnd);
 		}
 		else
 		{
-			$title = $this->parseDate($objPage->dateFormat, $intStart) . ($objEvent->addTime ? ' (' . $this->parseDate($objPage->timeFormat, $intStart) . (($intStart < $intEnd) ? ' - ' . $this->parseDate($objPage->timeFormat, $intEnd) : '') . ')' : '');
+			$title = \Date::parse($objPage->dateFormat, $intStart) . ($objEvent->addTime ? ' (' . \Date::parse($objPage->timeFormat, $intStart) . (($intStart < $intEnd) ? ' - ' . \Date::parse($objPage->timeFormat, $intEnd) : '') . ')' : '');
 		}
 
 		// Add title and link
@@ -410,6 +423,9 @@ class Calendar extends \Frontend
 		// Override link and title
 		$arrEvent['link'] = $link;
 		$arrEvent['title'] = $title;
+
+		// Reset the enclosures (see #5685)
+		$arrEvent['enclosure'] = array();
 
 		// Add the article image as enclosure
 		if ($objEvent->addImage)

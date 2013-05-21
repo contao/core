@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -57,8 +57,8 @@ class InstallTool extends Backend
 
 		$this->setStaticUrls();
 
-		$this->loadLanguageFile('default');
-		$this->loadLanguageFile('tl_install');
+		System::loadLanguageFile('default');
+		System::loadLanguageFile('tl_install');
 	}
 
 
@@ -106,18 +106,10 @@ class InstallTool extends Backend
 			$this->reload();
 		}
 
-		// Store the license acception
-		if (Input::post('FORM_SUBMIT') == 'tl_license')
-		{
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['licenseAccepted']", true);
-			$this->reload();
-		}
-
 		// Show the license text
 		if (!$GLOBALS['TL_CONFIG']['licenseAccepted'])
 		{
-			$this->Template->license = true;
-			$this->outputAndExit();
+			$this->acceptLicense();
 		}
 
 		// Log in the user
@@ -131,12 +123,14 @@ class InstallTool extends Backend
 		{
 			$this->setAuthCookie();
 		}
+
 		// Login required
 		elseif (!Input::cookie('TL_INSTALL_AUTH') || $_SESSION['TL_INSTALL_AUTH'] == '' || Input::cookie('TL_INSTALL_AUTH') != $_SESSION['TL_INSTALL_AUTH'] || $_SESSION['TL_INSTALL_EXPIRE'] < time())
 		{
 			$this->Template->login = true;
 			$this->outputAndExit();
 		}
+
 		// Authenticated, so renew the cookie
 		else
 		{
@@ -184,13 +178,7 @@ class InstallTool extends Backend
 		$this->setUpDatabaseConnection();
 
 		// Run the version-specific database updates
-		foreach (get_class_methods($this) as $method)
-		{
-			if (strncmp($method, 'update', 6) === 0)
-			{
-				$this->$method();
-			}
-		}
+		$this->runDatabaseUpdates();
 
 		// Store the collation
 		$this->storeCollation();
@@ -213,15 +201,6 @@ class InstallTool extends Backend
 
 			$_SESSION['sql_commands'] = array();
 			$this->reload();
-		}
-		// Clear the internal cache
-		else
-		{
-			foreach (array('dca', 'language', 'sql') as $folder)
-			{
-				$objFolder = new Folder('system/cache/' . $folder);
-				$objFolder->delete();
-			}
 		}
 
 		// Wait for the tables to be created (see #5061)
@@ -371,6 +350,22 @@ class InstallTool extends Backend
 
 
 	/**
+	 * Accept the license
+	 */
+	protected function acceptLicense()
+	{
+		if (Input::post('FORM_SUBMIT') == 'tl_license')
+		{
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['licenseAccepted']", true);
+			$this->reload();
+		}
+
+		$this->Template->license = true;
+		$this->outputAndExit();
+	}
+
+
+	/**
 	 * Log in the user
 	 */
 	protected function loginUser()
@@ -471,6 +466,7 @@ class InstallTool extends Backend
 		$this->Template->user = $GLOBALS['TL_CONFIG']['dbUser'];
 		$this->Template->pass = ($GLOBALS['TL_CONFIG']['dbPass'] != '') ? '*****' : '';
 		$this->Template->port = $GLOBALS['TL_CONFIG']['dbPort'];
+		$this->Template->socket = $GLOBALS['TL_CONFIG']['dbSocket'];
 		$this->Template->pconnect = $GLOBALS['TL_CONFIG']['dbPconnect'];
 		$this->Template->dbcharset = $GLOBALS['TL_CONFIG']['dbCharset'];
 		$this->Template->database = $GLOBALS['TL_CONFIG']['dbDatabase'];
@@ -503,6 +499,36 @@ class InstallTool extends Backend
 			$this->Template->dbConnection = false;
 			$this->Template->dbError = $e->getMessage();
 			$this->outputAndExit();
+		}
+	}
+
+
+	/**
+	 * Run the database updates
+	 */
+	protected function runDatabaseUpdates()
+	{
+		// Fresh installation
+		if (!$this->Database->tableExists('tl_module'))
+		{
+			return;
+		}
+
+		$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_page");
+
+		// Still a fresh installation
+		if ($objRow->count < 1)
+		{
+			return;
+		}
+
+		// Run the updates
+		foreach (get_class_methods($this) as $method)
+		{
+			if (strncmp($method, 'update', 6) === 0)
+			{
+				$this->$method();
+			}
 		}
 	}
 
@@ -625,7 +651,7 @@ class InstallTool extends Backend
 			}
 		}
 
-		$this->Template->dateImported = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $GLOBALS['TL_CONFIG']['exampleWebsite']);
+		$this->Template->dateImported = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $GLOBALS['TL_CONFIG']['exampleWebsite']);
 	}
 
 
@@ -642,7 +668,6 @@ class InstallTool extends Backend
 			{
 				$this->Template->adminCreated = true;
 			}
-			// Create an admin account
 			elseif (Input::post('FORM_SUBMIT') == 'tl_admin')
 			{
 				// Do not allow special characters in usernames
@@ -676,8 +701,8 @@ class InstallTool extends Backend
 					$time = time();
 					$strPassword = Encryption::hash(Input::post('pass', true));
 
-					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
-								   ->execute(Input::post('name'), Input::post('email', true), Input::post('username', true), $strPassword);
+					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, language, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
+								   ->execute(Input::post('name'), Input::post('email', true), Input::post('username', true), $strPassword, $GLOBALS['TL_LANGUAGE']);
 
 					$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", Input::post('email', true));
 
@@ -715,9 +740,7 @@ class InstallTool extends Backend
 		{
 			if (!file_exists(TL_ROOT . '/system/config/' . $file . '.php'))
 			{
-				$objFile = new File('system/config/'. $file .'.php', true);
-				$objFile->write('<?php' . "\n\n// Put your custom configuration here\n");
-				$objFile->close();
+				File::putContent('system/config/'. $file .'.php', '<?php' . "\n\n// Put your custom configuration here\n");
 			}
 		}
 	}
@@ -739,7 +762,7 @@ class InstallTool extends Backend
 	 */
 	protected function outputAndExit()
 	{
-		$this->Template->theme = $this->getTheme();
+		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
@@ -850,20 +873,6 @@ class InstallTool extends Backend
 	 */
 	protected function update300()
 	{
-		// Fresh installation
-		if (!$this->Database->tableExists('tl_module'))
-		{
-			return;
-		}
-
-		$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_page");
-
-		// Still a fresh installation
-		if ($objRow->count < 1)
-		{
-			return;
-		}
-
 		// Step 1: database structure
 		if (!$this->Database->tableExists('tl_files'))
 		{
@@ -877,19 +886,17 @@ class InstallTool extends Backend
 			// Disable the tasks extension (see #4907)
 			if (is_dir(TL_ROOT . '/system/modules/tasks'))
 			{
-				$objFile = new File('system/modules/tasks/.skip', true);
-				$objFile->write('Disabled during the version 3 update (see #4907)');
-				$objFile->close();
+				System::disableModule('tasks');
 			}
 
-			// Save the old upload path in the localconfig.php
-			if ($GLOBALS['TL_CONFIG']['uploadPath'] == 'files' && is_dir(TL_ROOT . '/tl_files'))
+			// Reset the upload path if it has been changed already (see #5560)
+			if ($GLOBALS['TL_CONFIG']['uploadPath'] == 'files' && is_dir(TL_ROOT . '/tl_files') && !is_dir(TL_ROOT . '/files'))
 			{
 				$GLOBALS['TL_CONFIG']['uploadPath'] = 'tl_files';
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['uploadPath']", 'tl_files');
 			}
 
-			// Show a warning if the user has renamed the tl_files directory already (see #4626)
+			// Show a warning if the upload folder does not exist (see #4626)
 			if (!is_dir(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath']))
 			{
 				$this->Template->filesWarning = sprintf($GLOBALS['TL_LANG']['tl_install']['filesWarning'], '<a href="https://gist.github.com/3304014" target="_blank">https://gist.github.com/3304014</a>');
@@ -931,6 +938,26 @@ class InstallTool extends Backend
 
 			$this->Template->step = 3;
 			$this->Template->is30Update = true;
+			$this->outputAndExit();
+		}
+	}
+
+
+	/**
+	 * Version 3.1.0 update
+	 */
+	protected function update31()
+	{
+		if ($this->Database->tableExists('tl_content') && $this->Database->fieldExists('mooType', 'tl_content'))
+		{
+			if (Input::post('FORM_SUBMIT') == 'tl_31update')
+			{
+				$this->import('Database\\Updater', 'Updater');
+				$this->Updater->run31Update();
+				$this->reload();
+			}
+
+			$this->Template->is31Update = true;
 			$this->outputAndExit();
 		}
 	}

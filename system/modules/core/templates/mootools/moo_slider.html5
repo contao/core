@@ -1,0 +1,26 @@
+<?php
+
+// Add the swipe style sheet
+$GLOBALS['TL_CSS'][] = 'assets/swipe/'. SWIPE .'/css/swipe.min.css||static';
+
+?>
+
+<script src="<?php echo TL_ASSETS_URL; ?>assets/swipe/<?php echo SWIPE; ?>/js/swipe.min.js"></script>
+<script>
+  (function($) {
+    window.addEvent('domready', function() {
+      $$('.ce_sliderStart').each(function(cte) {
+        var s = cte.getElement('.content-slider'),
+            c = s.getAttribute('data-config').split(',');
+        new Swipe(s, {
+          // Put custom options here
+          'auto': parseInt(c[0]),
+          'speed': parseInt(c[1]),
+          'startSlide': parseInt(c[2]),
+          'continuous': parseInt(c[3]),
+          'menu': cte.getElement('.slider-control')
+        });
+      });
+    });
+  })(document.id);
+</script>

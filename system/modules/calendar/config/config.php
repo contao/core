@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Calendar
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -18,8 +18,10 @@ array_insert($GLOBALS['BE_MOD']['content'], 1, array
 (
 	'calendar' => array
 	(
-		'tables'     => array('tl_calendar', 'tl_calendar_events', 'tl_calendar_feed', 'tl_content'),
-		'icon'       => 'system/modules/calendar/assets/icon.gif'
+		'tables'      => array('tl_calendar', 'tl_calendar_events', 'tl_calendar_feed', 'tl_content'),
+		'icon'        => 'system/modules/calendar/assets/icon.gif',
+		'table'       => array('TableWizard', 'importTable'),
+		'list'        => array('ListWizard', 'importList')
 	)
 ));
 

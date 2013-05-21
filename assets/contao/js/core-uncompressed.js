@@ -1,8 +1,8 @@
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -26,8 +26,9 @@ var AjaxRequest =
 	 */
 	toggleNavigation: function(el, id) {
 		el.blur();
-		var item = $(id);
-		var image = $(el).getFirst('img');
+
+		var item = $(id),
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
@@ -48,7 +49,7 @@ var AjaxRequest =
 			evalScripts: true,
 			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
 			onSuccess: function(txt, json) {
-				item = new Element('li', {
+				var li = new Element('li', {
 					'id': id,
 					'class': 'tl_parent',
 					'html': txt,
@@ -56,6 +57,11 @@ var AjaxRequest =
 						'display': 'inline'
 					}
 				}).inject($(el).getParent('li'), 'after');
+
+				// Update the referer ID
+				li.getElements('a').each(function(el) {
+					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
@@ -79,8 +85,9 @@ var AjaxRequest =
 	 */
 	toggleStructure: function (el, id, level, mode) {
 		el.blur();
-		var item = $(id);
-		var image = $(el).getFirst('img');
+
+		var item = $(id),
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
@@ -118,8 +125,8 @@ var AjaxRequest =
 				if (mode == 5) {
 					li.inject($(el).getParent('li'), 'after');
 				} else {
-					var folder = false;
-					var parent = $(el).getParent('li');
+					var folder = false,
+						parent = $(el).getParent('li');
 
 					while (typeOf(parent) == 'element' && (next = parent.getNext('li'))) {
 						parent = next;
@@ -135,6 +142,11 @@ var AjaxRequest =
 						li.inject(parent, 'after');
 					}
 				}
+
+				// Update the referer ID
+				li.getElements('a').each(function(el) {
+					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
@@ -159,9 +171,10 @@ var AjaxRequest =
 	 */
 	toggleFileManager: function (el, id, folder, level) {
 		el.blur();
-		var item = $(id);
-		var image = $(el).getFirst('img');
-		var icon = $(el).getNext('img');
+
+		var item = $(id),
+			image = $(el).getFirst('img'),
+			icon = $(el).getNext('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
@@ -199,6 +212,12 @@ var AjaxRequest =
 				}).inject(li, 'bottom');
 
 				li.inject($(el).getParent('li'), 'after');
+
+				// Update the referer ID
+				li.getElements('a').each(function(el) {
+					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+				});
+
 				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				icon.src = icon.src.replace('folderC.gif', 'folderO.gif');
@@ -223,8 +242,10 @@ var AjaxRequest =
 	 */
 	togglePagetree: function (el, id, field, name, level) {
 		el.blur();
-		var item = $(id);
-		var image = $(el).getFirst('img');
+		Backend.getScrollOffset();
+
+		var item = $(id),
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
@@ -260,6 +281,12 @@ var AjaxRequest =
 				}).inject(li, 'bottom');
 
 				li.inject($(el).getParent('li'), 'after');
+
+				// Update the referer ID
+				li.getElements('a').each(function(el) {
+					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+				});
+
 				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
@@ -278,13 +305,16 @@ var AjaxRequest =
 	 * @param string
 	 * @param string
 	 * @param string
+	 * @param string
 	 * @param integer
 	 * @return boolean
 	 */
-	toggleFiletree: function (el, id, field, name, level) {
+	toggleFiletree: function (el, id, folder, field, name, level) {
 		el.blur();
-		var item = $(id);
-		var image = $(el).getFirst('img');
+		Backend.getScrollOffset();
+
+		var item = $(id),
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
@@ -320,6 +350,12 @@ var AjaxRequest =
 				}).inject(li, 'bottom');
 
 				li.inject($(el).getParent('li'), 'after');
+
+				// Update the referer ID
+				li.getElements('a').each(function(el) {
+					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+				});
+
 				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
@@ -327,36 +363,9 @@ var AjaxRequest =
 				// HOOK
 				window.fireEvent('ajax_change');
    			}
-		}).post({'action':'loadFiletree', 'id':id, 'level':level, 'field':field, 'name':name, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
+		}).post({'action':'loadFiletree', 'id':id, 'folder':folder, 'level':level, 'field':field, 'name':name, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 
 		return false;
-	},
-
-	/**
-	 * Reload all file trees (input field)
-	 */
-	reloadFiletrees: function () {
-		$$('.filetree').each(function(el) {
-			var name = el.id;
-			var field = name.replace(/_[0-9]+$/, '');
-
-			new Request.Contao({
-				evalScripts: true,
-				onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-				onSuccess: function(txt, json) {
-
-					// Preserve the "reset selection" entry
-					var ul = $(el.id + '_parent').getFirst('ul');
-					var li = ul.getLast('li');
-					ul.set('html', txt);
-					li.inject(ul, 'bottom');
-					AjaxRequest.hideBox();
-
-					// HOOK
-					window.fireEvent('ajax_change');
-				}
-			}).post({'action':'loadFiletree', 'field':field, 'name':name, 'REQUEST_TOKEN':Contao.request_token});
-		});
 	},
 
 	/**
@@ -398,10 +407,15 @@ var AjaxRequest =
 				}).inject($(el).getParent('div').getParent('div'), 'after');
 
 				// Execute scripts after the DOM has been updated
-				if (json.javascript) $exec(json.javascript);
+				if (json.javascript) Browser.exec(json.javascript);
 
 				el.value = 1;
 				el.checked = 'checked';
+
+				// Update the referer ID
+				div.getElements('a').each(function(el) {
+					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+				});
 
 				AjaxRequest.hideBox();
 				Backend.addInteractiveHelp();
@@ -423,10 +437,11 @@ var AjaxRequest =
 	 */
 	toggleVisibility: function(el, id, table) {
 		el.blur();
-		var img = null;
-		var image = $(el).getFirst('img');
-		var publish = (image.src.indexOf('invisible') != -1);
-		var div = el.getParent('div');
+
+		var img = null,
+			image = $(el).getFirst('img'),
+			publish = (image.src.indexOf('invisible') != -1),
+			div = el.getParent('div');
 
 		// Find the icon depending on the view (tree view, list view, parent view)
 		if (div.hasClass('tl_right')) {
@@ -515,8 +530,9 @@ var AjaxRequest =
 	 */
 	toggleFeatured: function(el, id) {
 		el.blur();
-		var image = $(el).getFirst('img');
-		var featured = (image.src.indexOf('featured_') == -1);
+
+		var image = $(el).getFirst('img'),
+			featured = (image.src.indexOf('featured_') == -1);
 
 		// Send the request
 		if (!featured) {
@@ -560,8 +576,9 @@ var AjaxRequest =
 	 */
 	toggleCheckboxGroup: function(el, id) {
 		el.blur();
-		var item = $(id);
-		var image = $(el).getFirst('img');
+
+		var item = $(id),
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') != 'block') {
@@ -580,7 +597,7 @@ var AjaxRequest =
 	},
 
 	/**
-	 * Store the live update ID
+	 * Store the Live Update ID
 	 * @param string
 	 */
 	liveUpdate: function(el, id) {
@@ -604,9 +621,9 @@ var AjaxRequest =
 	 * @param string
 	 */
 	displayBox: function(message) {
-		var box = $('tl_ajaxBox');
-		var overlay = $('tl_ajaxOverlay');
-		var scroll = window.getScroll();
+		var box = $('tl_ajaxBox'),
+			overlay = $('tl_ajaxOverlay'),
+			scroll = window.getScroll();
 
 		if (overlay == null) {
 			overlay = new Element('div', {
@@ -640,8 +657,8 @@ var AjaxRequest =
 	 * Hide the "loading data" message
 	 */
 	hideBox: function() {
-		var box = $('tl_ajaxBox');
-		var overlay = $('tl_ajaxOverlay');
+		var box = $('tl_ajaxBox'),
+			overlay = $('tl_ajaxOverlay');
 
 		if (overlay) {
 			overlay.setStyle('display', 'none');
@@ -681,7 +698,7 @@ var Backend =
 	},
 
 	/**
-	 * Open a new window (used by file trees and the help wizard)
+	 * Open a new window (backwards compatibility)
 	 * @param object
 	 * @param integer
 	 * @param integer
@@ -775,10 +792,9 @@ var Backend =
 			this.hide();
 		});
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
-			var val = [], tls = [];
-            var par = opt.id.replace(/_[0-9]+$/, '') + '_parent'; // Strip the "edit multiple" suffixes
-			var frm = null;
-			var frms = window.frames;
+			var val = [],
+				frm = null,
+				frms = window.frames;
 			for (var i=0; i<frms.length; i++) {
 				if (frms[i].name == 'simple-modal-iframe') {
 					frm = frms[i];
@@ -789,14 +805,14 @@ var Backend =
 				alert('Could not find the SimpleModal frame');
 				return;
 			}
-			var inp = frm.document.getElementById(par).getElementsByTagName('input');
+			if (frm.document.location.href.indexOf('contao/main.php') != -1) {
+				alert(Contao.lang.picker);
+				return; // see #5704
+			}
+			var inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
 			for (var i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
-                if (!inp[i].id.match(/^reset_/)) {
-				    var div = inp[i].getParent('li').getFirst('div');
-				    tls.push('<img src="' + div.getFirst('img').src + '" width="18" height="18" alt=""> ' + div.getFirst('label').get('title'));
-				    val.push(inp[i].get('value'));
-                }
+				if (!inp[i].id.match(/^reset_/)) val.push(inp[i].get('value'));
 			}
 			if (opt.tag) {
 				$(opt.tag).value = val.join(',');
@@ -806,9 +822,17 @@ var Backend =
 				opt.self.set('href', opt.self.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
 			} else {
 				$('ctrl_'+opt.id).value = val.join(',');
-				$('target_'+opt.id).getFirst('ul').removeClass('sgallery').set('html', '<li>' + tls.join('</li><li>') + '</li>');
-				var lnk = $('target_'+opt.id).getElement('a');
-				lnk.set('href', lnk.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
+				var act = (opt.url.indexOf('contao/page.php') != -1) ? 'reloadPagetree' : 'reloadFiletree';
+				new Request.Contao({
+					field: $('ctrl_'+opt.id),
+					evalScripts: false,
+					onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
+					onSuccess: function(txt, json) {
+						$('ctrl_'+opt.id).getParent('div').set('html', json.content);
+						json.javascript && Browser.exec(json.javascript);
+						AjaxRequest.hideBox();
+					}
+				}).post({'action':act, 'name':opt.id, 'value':$('ctrl_'+opt.id).value, 'REQUEST_TOKEN':Contao.request_token});
 			}
 			this.hide();
 		});
@@ -839,7 +863,7 @@ var Backend =
 			'value': 'auto'
 		});
 
-		var form = $(el);
+		var form = $(el) || el;
 		hidden.inject(form, 'bottom');
 		form.submit();
 	},
@@ -855,49 +879,23 @@ var Backend =
 	},
 
 	/**
-	 * Show all pagetree and filetree nodes
-	 * @param object
-	 * @param string
-	 */
-	showTreeBody: function(el, id) {
-		el.blur();
-		$(id).setStyle('display', ($(el).checked ? 'inline' : 'none'));
-	},
-
-	/**
-	 * Hide all pagetree and filetree nodes
-	 */
-	hideTreeBody: function() {
-		var lists = $$('ul');
-		var parent = null;
-
-		for (var i=0; i<lists.length; i++) {
-			if (lists[i].hasClass('mandatory')) {
-				$('ctrl_' + lists[i].id).checked = 'checked';
-			} else if (lists[i].hasClass('tl_listing') && (parent = lists[i].getFirst('li').getNext('li')) && parent.hasClass('parent')) {
-				parent.setStyle('display', 'none');
-			}
-		}
-	},
-
-	/**
 	 * Limit the height of the preview pane
 	 */
 	limitPreviewHeight: function() {
-		var size = null;
-		var toggler = null;
-		var style = '';
-		var hgt = 0;
+		var size = null,
+			toggler = null,
+			style = '',
+			hgt = 0;
 
 		$$('div.limit_height').each(function(div) {
 			size = div.getCoordinates();
 
-			if (hgt == 0) {
+			if (hgt === 0) {
 				hgt = div.className.replace(/[^0-9]*/, '').toInt();
 			}
 
 			// Return if there is no height value
-			if (!$chk(hgt)) return;
+			if (!hgt) return;
 
 			div.setStyle('height', hgt);
 			var path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
@@ -935,8 +933,8 @@ var Backend =
 	 * @param string
 	 */
 	toggleCheckboxes: function(trigger, id) {
-		var items = $$('input');
-		var status = trigger.checked ? 'checked' : '';
+		var items = $$('input'),
+			status = trigger.checked ? 'checked' : '';
 
 		for (var i=0; i<items.length; i++) {
 			if (items[i].type.toLowerCase() != 'checkbox') {
@@ -955,8 +953,8 @@ var Backend =
 	 * @param string
 	 */
 	toggleCheckboxGroup: function(el, id) {
-		var cls = $(el).className;
-		var status = $(el).checked ? 'checked' : '';
+		var cls = $(el).className,
+			status = $(el).checked ? 'checked' : '';
 
 		if (cls == 'tl_checkbox') {
 			var cbx = $(id) ? $$('#' + id + ' .tl_checkbox') : $(el).getParent('fieldset').getElements('.tl_checkbox');
@@ -974,6 +972,7 @@ var Backend =
 
 	/**
 	 * Toggle checkbox elements
+	 * @param string
 	 * @param string
 	 */
 	toggleCheckboxElements: function(el, cls) {
@@ -993,14 +992,23 @@ var Backend =
 	 * @param string
 	 */
 	toggleWrap: function(id) {
-		var textarea = $(id);
-		var status = (textarea.getProperty('wrap') == 'off') ? 'soft' : 'off';
+		var textarea = $(id),
+			status = (textarea.getProperty('wrap') == 'off') ? 'soft' : 'off';
 		textarea.setProperty('wrap', status);
 	},
 
 	/**
+	 * Toggle the synchronization results
+	 */
+	toggleUnchanged: function() {
+		$$('#result-list .tl_confirm').each(function(el) {
+			el.toggleClass('hidden');
+		});
+	},
+
+	/**
 	 * Toggle opacity
-	 * @param string
+	 * @deprecated
 	 */
 	blink: function() {
 		// Keep for backwards compatibility
@@ -1008,6 +1016,7 @@ var Backend =
 
 	/**
 	 * Initialize the mootools color picker (backwards compatibility)
+	 * @deprecated
 	 */
 	addColorPicker: function() {
 		return true;
@@ -1019,8 +1028,8 @@ var Backend =
 	 * @deprecated Use Backend.openModalIframe() instead
 	 */
 	pickPage: function(id) {
-		var width = 320;
-		var height = 112;
+		var width = 320,
+			height = 112;
 
 		Backend.currentId = id;
 		Backend.ppValue = $(id).value;
@@ -1036,8 +1045,8 @@ var Backend =
 	 * @deprecated Use Backend.openModalIframe() instead
 	 */
 	pickFile: function(id, filter) {
-		var width = 320;
-		var height = 112;
+		var width = 320,
+			height = 112;
 
 		Backend.currentId = id;
 		Backend.ppValue = $(id).value;
@@ -1054,7 +1063,7 @@ var Backend =
 		$$('fieldset.hide').each(function(el) {
 			el.addClass('collapsed');
 		});
-		$$('label.error', 'label.mandatory').each(function(el) {
+		$$('label.error, label.mandatory').each(function(el) {
 			if (fs = el.getParent('fieldset')) {
 				fs.removeClass('collapsed');
 			}
@@ -1094,11 +1103,59 @@ var Backend =
 	/**
 	 * Make parent view items sortable
 	 * @param object
+	 * @author Joe Ray Gregory
 	 */
 	makeParentViewSortable: function(ul) {
+		var ds = new Scroller(document.getElement('body'), {
+			onChange: function(x, y) {
+				this.element.scrollTo(this.element.getScroll().x, y);
+			}
+		});
+
 		var list = new Sortables(ul, {
 			contstrain: true,
-			opacity: 0.6
+			opacity: 0.6,
+			onStart: function() {
+				ds.start();
+			},
+			onComplete: function() {
+				ds.stop();
+    		},
+			onSort: function(el) {
+				var div = el.getFirst('div'),
+					prev, next, first;
+
+				if (!div) return;
+
+				if (div.hasClass('wrapper_start')) {
+					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div'))) {
+						first.removeClass('indent');
+					}
+					if ((next = el.getNext('li')) && (first = next.getFirst('div'))) {
+						first.addClass('indent');
+					}
+				} else if (div.hasClass('wrapper_stop')) {
+					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div'))) {
+						first.addClass('indent');
+					}
+					if ((next = el.getNext('li')) && (first = next.getFirst('div'))) {
+						first.removeClass('indent');
+					}
+				} else if (div.hasClass('indent')) {
+					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div')) && first.hasClass('wrapper_stop')) {
+						div.removeClass('indent');
+					} else if ((next = el.getNext('li')) && (first = next.getFirst('div')) && first.hasClass('wrapper_start')) {
+						div.removeClass('indent');
+					}
+				} else {
+					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div')) && first.hasClass('wrapper_start')) {
+						div.addClass('indent');
+					} else if ((next = el.getNext('li')) && (first = next.getFirst('div')) && first.hasClass('wrapper_stop')) {
+						div.addClass('indent');
+					}
+				}
+			},
+			handle: '.drag-handle'
 		});
 
 		list.active = false;
@@ -1111,16 +1168,16 @@ var Backend =
 	    	if (!list.active) return;
 
     		if (el.getPrevious('li')) {
-    			var id = el.get('id').replace(/li_/, '');
-    			var pid = el.getPrevious('li').get('id').replace(/li_/, '');
-    			var req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=1&pid=' + pid;
-    			var href = window.location.href.replace(/\?.*$/, '');
+    			var id = el.get('id').replace(/li_/, ''),
+    				pid = el.getPrevious('li').get('id').replace(/li_/, ''),
+    				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=1&pid=' + pid,
+    				href = window.location.href.replace(/\?.*$/, '');
     			new Request({'url':href+req}).get();
     		} else if (el.getParent('ul')) {
-    			var id = el.get('id').replace(/li_/, '');
-    			var pid = el.getParent('ul').get('id').replace(/ul_/, '');
-    			var req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=2&pid=' + pid;
-    			var href = window.location.href.replace(/\?.*$/, '');
+    			var id = el.get('id').replace(/li_/, ''),
+    				pid = el.getParent('ul').get('id').replace(/ul_/, ''),
+    				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=2&pid=' + pid,
+    				href = window.location.href.replace(/\?.*$/, '');
     			new Request({'url':href+req}).get();
     		}
     	});
@@ -1136,15 +1193,70 @@ var Backend =
             contstrain: true,
             opacity: 0.6
         }).addEvent('complete', function() {
-            var els = [];
-            var lis = $(id).getChildren('li');
+            var els = [],
+            	lis = $(id).getChildren('li');
             for (i=0; i<lis.length; i++) {
                 els.push(lis[i].get('data-id'));
             }
             $(oid).value = els.join(',');
         });
         list.fireEvent("complete"); // Initial sorting
-    },
+	},
+
+	/**
+	 * Make the wizards sortable
+	 * @param string
+	 */
+	makeWizardsSortable: function(id) {
+		$$('.tl_listwizard').each(function(el) {
+			new Sortables(el, {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle'
+			});
+		});
+
+		$$('.tl_tablewizard').each(function(el) {
+			var els = el.getElement('.sortable');
+			new Sortables(els, {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle',
+				onComplete: function() {
+					Backend.tableWizardResort(els);
+				}
+			});
+		});
+
+		$$('.tl_modulewizard').each(function(el) {
+			new Sortables(el.getElement('.sortable'), {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle'
+			});
+		});
+
+		$$('.tl_optionwizard').each(function(el) {
+			new Sortables(el.getElement('.sortable'), {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle'
+			});
+		});
+
+		$$('.tl_checkbox_wizard').each(function(el) {
+			var els = el.getElement('.sortable');
+			if (els.hasClass('sortable-done')) return;
+
+			new Sortables(els, {
+				contstrain: true,
+				opacity: 0.6,
+				handle: '.drag-handle'
+			});
+
+			els.addClass('sortable-done');
+		});
+	},
 
     /**
 	 * List wizard
@@ -1153,9 +1265,12 @@ var Backend =
 	 * @param string
 	 */
 	listWizard: function(el, command, id) {
-		var list = $(id);
-		var parent = $(el).getParent('li');
-		var items = list.getChildren();
+		var list = $(id),
+			parent = $(el).getParent('li'),
+			items = list.getChildren(),
+			tabindex = list.get('data-tabindex'),
+			input, previous, next, rows, i;
+
 		Backend.getScrollOffset();
 
 		switch (command) {
@@ -1182,18 +1297,25 @@ var Backend =
 			case 'delete':
 				if (items.length > 1) {
 					parent.destroy();
+				} else {
+					parent.getFirst('input').set('value', '');
 				}
 				break;
 		}
 
 		rows = list.getChildren();
-		var tabindex = 1;
 
-		for (var i=0; i<rows.length; i++) {
+		for (i=0; i<rows.length; i++) {
 			if (input = rows[i].getFirst('input[type="text"]')) {
 				input.set('tabindex', tabindex++);
 			}
 		}
+
+		new Sortables(list, {
+			contstrain: true,
+			opacity: 0.6,
+			handle: '.drag-handle'
+		});
 	},
 
 	/**
@@ -1203,15 +1325,17 @@ var Backend =
 	 * @param string
 	 */
 	tableWizard: function(el, command, id) {
-		var table = $(id);
-		var tbody = table.getElement('tbody');
-		var rows = tbody.getChildren();
-		var parentTd = $(el).getParent('td');
-		var parentTr = parentTd.getParent('tr');
-		var cols = parentTr.getChildren();
-		var index = 0;
+		var table = $(id),
+			tbody = table.getElement('tbody'),
+			rows = tbody.getChildren(),
+			parentTd = $(el).getParent('td'),
+			parentTr = parentTd.getParent('tr'),
+			headTr = table.getElement('thead').getFirst('tr'),
+			cols = parentTr.getChildren(),
+			index = 0,
+			textarea, previous, next, i;
 
-		for (var i=0; i<cols.length; i++) {
+		for (i=0; i<cols.length; i++) {
 			if (cols[i] == parentTd) {
 				break;
 			}
@@ -1223,7 +1347,7 @@ var Backend =
 		switch (command) {
 			case 'rcopy':
 				var tr = new Element('tr');
-				for (var i=0; i<cols.length; i++) {
+				for (i=0; i<cols.length; i++) {
 					var next = cols[i].clone(true).inject(tr, 'bottom');
 					if (textarea = cols[i].getFirst('textarea')) {
 						next.getFirst('textarea').value = textarea.value;
@@ -1232,8 +1356,7 @@ var Backend =
 				tr.inject(parentTr, 'after');
 				break;
 			case 'rup':
-				var previous = parentTr.getPrevious('tr');
-				if (previous.getPrevious('tr')) {
+				if (previous = parentTr.getPrevious('tr')) {
 					parentTr.inject(previous, 'before');
 				} else {
 					parentTr.inject(tbody, 'bottom')
@@ -1243,31 +1366,34 @@ var Backend =
 				if (next = parentTr.getNext('tr')) {
 					parentTr.inject(next, 'after');
 				} else {
-					parentTr.inject(tbody.getFirst('tr').getNext('tr'), 'before');
+					parentTr.inject(tbody, 'top');
 				}
 				break;
 			case 'rdelete':
-				if (rows.length > 2) {
+				if (rows.length > 1) {
 					parentTr.destroy();
+				} else {
+					parentTr.getElements('textarea').set('text', '');
 				}
 				break;
 			case 'ccopy':
-				for (var i=0; i<rows.length; i++) {
-					var current = rows[i].getChildren()[index];
-					var next = current.clone(true).inject(current, 'after');
+				for (i=0; i<rows.length; i++) {
+					var current = rows[i].getChildren()[index],
+						next = current.clone(true).inject(current, 'after');
 					if (textarea = current.getFirst('textarea')) {
 						next.getFirst('textarea').value = textarea.value;
 					}
 				}
+				headTr.getFirst('td').clone(true).inject(headTr.getLast('td'), 'before');
 				break;
 			case 'cmovel':
 				if (index > 0) {
-					for (var i=0; i<rows.length; i++) {
+					for (i=0; i<rows.length; i++) {
 						var current = rows[i].getChildren()[index];
 						current.inject(current.getPrevious(), 'before');
 					}
 				} else {
-					for (var i=0; i<rows.length; i++) {
+					for (i=0; i<rows.length; i++) {
 						var current = rows[i].getChildren()[index];
 						current.inject(rows[i].getLast(), 'before');
 					}
@@ -1275,12 +1401,12 @@ var Backend =
 				break;
 			case 'cmover':
 				if (index < (cols.length - 2)) {
-					for (var i=0; i<rows.length; i++) {
+					for (i=0; i<rows.length; i++) {
 						var current = rows[i].getChildren()[index];
 						current.inject(current.getNext(), 'after');
 					}
 				} else {
-					for (var i=0; i<rows.length; i++) {
+					for (i=0; i<rows.length; i++) {
 						var current = rows[i].getChildren()[index];
 						current.inject(rows[i].getFirst(), 'before');
 					}
@@ -1288,27 +1414,50 @@ var Backend =
 				break;
 			case 'cdelete':
 				if (cols.length > 2) {
-					for (var i=0; i<rows.length; i++) {
+					for (i=0; i<rows.length; i++) {
 						rows[i].getChildren()[index].destroy();
+					}
+					headTr.getFirst('td').destroy();
+				} else {
+					for (i=0; i<rows.length; i++) {
+						rows[i].getElements('textarea').set('text', '');
 					}
 				}
 				break;
 		}
 
-		rows = tbody.getChildren();
-		var tabindex = 1;
+		Backend.tableWizardResort(tbody);
 
-		for (var i=0; i<rows.length; i++) {
-			var childs = rows[i].getChildren();
-			for (var j=0; j<childs.length; j++) {
+		new Sortables(tbody, {
+			contstrain: true,
+			opacity: 0.6,
+			handle: '.drag-handle',
+			onComplete: function() {
+				Backend.tableWizardResort(tbody);
+			}
+		});
+
+		Backend.tableWizardResize();
+	},
+
+	/**
+	 * Resort the table wizard fields
+	 * @param object
+	 */
+	tableWizardResort: function(tbody) {
+		var rows = tbody.getChildren(),
+			tabindex = tbody.get('data-tabindex'),
+			textarea, childs, i, j;
+
+		for (i=0; i<rows.length; i++) {
+			childs = rows[i].getChildren();
+			for (j=0; j<childs.length; j++) {
 				if (textarea = childs[j].getFirst('textarea')) {
 					textarea.set('tabindex', tabindex++);
-					textarea.name = textarea.name.replace(/\[[0-9]+\][[0-9]+\]/g, '[' + (i-1) + '][' + j + ']')
+					textarea.name = textarea.name.replace(/\[[0-9]+\][[0-9]+\]/g, '[' + i + '][' + j + ']')
 				}
 			}
 		}
-
-		Backend.tableWizardResize();
 	},
 
 	/**
@@ -1320,7 +1469,7 @@ var Backend =
 		if (size == null && factor == null) return;
 
 		if (factor != null) {
-			var size = '';
+			size = '';
 			$$('.tl_tablewizard textarea').each(function(el) {
 				el.setStyle('width', (el.getStyle('width').toInt() * factor).round().limit(142, 284));
 				el.setStyle('height', (el.getStyle('height').toInt() * factor).round().limit(66, 132));
@@ -1345,17 +1494,20 @@ var Backend =
 	 * @param string
 	 */
 	moduleWizard: function(el, command, id) {
-		var table = $(id);
-		var tbody = table.getElement('tbody');
-		var parent = $(el).getParent('tr');
-		var rows = tbody.getChildren();
+		var table = $(id),
+			tbody = table.getElement('tbody'),
+			parent = $(el).getParent('tr'),
+			rows = tbody.getChildren(),
+			tabindex = tbody.get('data-tabindex'),
+			input, select, childs, a, i, j;
+
 		Backend.getScrollOffset();
 
 		switch (command) {
 			case 'copy':
-				var tr = new Element('tr');
-				var childs = parent.getChildren();
-				for (var i=0; i<childs.length; i++) {
+				var tr = new Element('tr'),
+					childs = parent.getChildren();
+				for (i=0; i<childs.length; i++) {
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (select = childs[i].getFirst('select')) {
 						next.getFirst('select').value = select.value;
@@ -1388,17 +1540,28 @@ var Backend =
 		}
 
 		rows = tbody.getChildren();
-		var tabindex = 1;
 
-		for (var i=0; i<rows.length; i++) {
-			var childs = rows[i].getChildren();
-			for (var j=0; j<childs.length; j++) {
+		for (i=0; i<rows.length; i++) {
+			childs = rows[i].getChildren();
+			for (j=0; j<childs.length; j++) {
+				if (a = childs[j].getFirst('a.chzn-single')) {
+					a.set('tabindex', tabindex++);
+				}
 				if (select = childs[j].getFirst('select')) {
-					select.set('tabindex', tabindex++);
 					select.name = select.name.replace(/\[[0-9]+\]/g, '[' + i + ']');
+				}
+				if (input = childs[j].getFirst('input[type="checkbox"]')) {
+					input.set('tabindex', tabindex++);
+					input.name = input.name.replace(/\[[0-9]+\]/g, '[' + i + ']');
 				}
 			}
 		}
+
+		new Sortables(tbody, {
+			contstrain: true,
+			opacity: 0.6,
+			handle: '.drag-handle'
+		});
 	},
 
 	/**
@@ -1408,17 +1571,20 @@ var Backend =
 	 * @param string
 	 */
 	optionsWizard: function(el, command, id) {
-		var table = $(id);
-		var tbody = table.getElement('tbody');
-		var parent = $(el).getParent('tr');
-		var rows = tbody.getChildren();
+		var table = $(id),
+			tbody = table.getElement('tbody'),
+			parent = $(el).getParent('tr'),
+			rows = tbody.getChildren(),
+			tabindex = tbody.get('data-tabindex'),
+			input, childs, i, j;
+
 		Backend.getScrollOffset();
 
 		switch (command) {
 			case 'copy':
-				var tr = new Element('tr');
-				var childs = parent.getChildren();
-				for (var i=0; i<childs.length; i++) {
+				var tr = new Element('tr'),
+					childs = parent.getChildren();
+				for (i=0; i<childs.length; i++) {
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (input = childs[i].getFirst('input')) {
 						next.getFirst('input').value = input.value;
@@ -1451,11 +1617,10 @@ var Backend =
 		}
 
 		rows = tbody.getChildren();
-		var tabindex = 1;
 
-		for (var i=0; i<rows.length; i++) {
-			var childs = rows[i].getChildren();
-			for (var j=0; j<childs.length; j++) {
+		for (i=0; i<rows.length; i++) {
+			childs = rows[i].getChildren();
+			for (j=0; j<childs.length; j++) {
 				if (input = childs[j].getFirst('input')) {
 					input.set('tabindex', tabindex++);
 					input.name = input.name.replace(/\[[0-9]+\]/g, '[' + i + ']');
@@ -1466,6 +1631,12 @@ var Backend =
 				}
 			}
 		}
+
+		new Sortables(tbody, {
+			contstrain: true,
+			opacity: 0.6,
+			handle: '.drag-handle'
+		});
 	},
 
 	/**
@@ -1475,17 +1646,20 @@ var Backend =
 	 * @param string
 	 */
 	keyValueWizard: function(el, command, id) {
-		var table = $(id);
-		var tbody = table.getElement('tbody');
-		var parent = $(el).getParent('tr');
-		var rows = tbody.getChildren();
+		var table = $(id),
+			tbody = table.getElement('tbody'),
+			parent = $(el).getParent('tr'),
+			rows = tbody.getChildren(),
+			tabindex = tbody.get('data-tabindex'),
+			input, childs, i, j;
+
 		Backend.getScrollOffset();
 
 		switch (command) {
 			case 'copy':
-				var tr = new Element('tr');
-				var childs = parent.getChildren();
-				for (var i=0; i<childs.length; i++) {
+				var tr = new Element('tr'),
+					childs = parent.getChildren();
+				for (i=0; i<childs.length; i++) {
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (input = childs[i].getFirst('input')) {
 						next.getFirst().value = input.value;
@@ -1515,17 +1689,22 @@ var Backend =
 		}
 
 		rows = tbody.getChildren();
-		var tabindex = 1;
 
-		for (var i=0; i<rows.length; i++) {
-			var childs = rows[i].getChildren();
-			for (var j=0; j<childs.length; j++) {
+		for (i=0; i<rows.length; i++) {
+			childs = rows[i].getChildren();
+			for (j=0; j<childs.length; j++) {
 				if (input = first = childs[j].getFirst('input')) {
 					input.set('tabindex', tabindex++);
 					input.name = input.name.replace(/\[[0-9]+\]/g, '[' + i + ']')
 				}
 			}
 		}
+
+		new Sortables(tbody, {
+			contstrain: true,
+			opacity: 0.6,
+			handle: '.drag-handle'
+		});
 	},
 
 	/**
@@ -1535,13 +1714,14 @@ var Backend =
 	 * @param string
 	 */
 	checkboxWizard: function(el, command, id) {
-		var container = $(id);
-		var parent = $(el).getParent('span');
+		var container = $(id).getElement('.sortable'),
+			parent = $(el).getParent('span'), span;
+
 		Backend.getScrollOffset();
 
 		switch (command) {
 			case 'up':
-				if ((span = parent.getPrevious('span')) && !span.hasClass('fixed')) {
+				if ((span = parent.getPrevious('span'))) {
 					parent.inject(span, 'before');
 				} else {
 					parent.inject(container, 'bottom');
@@ -1550,8 +1730,8 @@ var Backend =
 			case 'down':
 				if (span = parent.getNext('span')) {
 					parent.inject(span, 'after');
-				} else if (all = container.getFirst('span.fixed')) {
-					parent.inject(all, 'after');
+				} else {
+					parent.inject(container, 'top');
 				}
 				break;
 		}
@@ -1569,9 +1749,9 @@ var Backend =
 			return; // No language given
 		}
 
-		var li = $(ul).getLast('li').clone();
-		var span = li.getElement('span');
-		var img = span.getElement('img');
+		var li = $(ul).getLast('li').clone(),
+			span = li.getElement('span'),
+			img = span.getElement('img');
 
 		// Update the data-language attribute
 		li.setProperty('data-language', opt.value);
@@ -1583,9 +1763,9 @@ var Backend =
 		// Update the name, label and ID attributes
 		li.getElements('input').each(function(inp) {
 			inp.value = '';
-			inp.name = inp.name.replace(/\[[a-z]{2}\]/, '['+opt.value+']');
-			var lbl = inp.getPrevious('label');
-			var i = parseInt(lbl.get('for').replace(/ctrl_[^_]+_/, ''));
+			inp.name = inp.name.replace(/\[[a-z]{2}(_[A-Z]{2})?\]/, '['+opt.value+']');
+			var lbl = inp.getPrevious('label'),
+				i = parseInt(lbl.get('for').replace(/ctrl_[^_]+_/, ''));
 			lbl.set('for', lbl.get('for').replace(i, i+1));
 			inp.id = lbl.get('for');
 		});
@@ -1608,8 +1788,8 @@ var Backend =
 	 * @param object
 	 */
 	metaDelete: function(el) {
-		var li = el.getParent('li')
-		var opt = el.getParent('div').getElement('select');
+		var li = el.getParent('li'),
+			opt = el.getParent('div').getElement('select');
 
 		// Empty the last element instead of removing it (see #4858)
 		if (li.getPrevious() === null && li.getNext() === null) {
@@ -1645,8 +1825,8 @@ var Backend =
 	 * @param object
 	 */
 	updateModuleLink: function(el) {
-		var td = el.getParent('td').getNext('td');
-		var a = td.getElement('a.module_link');
+		var td = el.getParent('tr').getLast('td'),
+			a = td.getElement('a.module_link');
 
 		a.href = a.href.replace(/id=[0-9]+/, 'id=' + el.value);
 
@@ -1657,6 +1837,25 @@ var Backend =
 			td.getElement('a.module_link').setStyle('display', 'none');
 			td.getElement('img.module_image').setStyle('display', 'inline');
 		}
+	},
+
+	/**
+	 * Convert the "enable module" checkboxes
+	 */
+	convertEnableModules: function() {
+		$$('img.mw_enable').each(function(el) {
+			el.addEvent('click', function() {
+				Backend.getScrollOffset();
+				var cbx = el.getNext('input');
+				if (cbx.checked) {
+					cbx.checked = '';
+					el.src = el.src.replace('visible.gif', 'invisible.gif');
+				} else {
+					cbx.checked = 'checked';
+					el.src = el.src.replace('invisible.gif', 'visible.gif');
+				}
+			});
+		});
 	}
 };
 
@@ -1667,6 +1866,19 @@ document.addEvent('mousedown', function(event) {
 
 // Initialize the back end script
 window.addEvent('domready', function() {
+	$(document.body).addClass('js');
+
+	// Mark touch devices (see #5563)
+	if (Browser.Features.Touch) {
+		$(document.body).addClass('touch');
+	}
+
+	Backend.collapsePalettes();
+	Backend.addInteractiveHelp();
+	Backend.addColorPicker();
+	Backend.convertEnableModules();
+	Backend.makeWizardsSortable();
+
 	// Chosen
 	if (Elements.chosen != undefined) {
 		$$('select.tl_chosen').chosen();
@@ -1676,10 +1888,6 @@ window.addEvent('domready', function() {
 	$$('textarea.monospace').each(function(el) {
 		Backend.toggleWrap(el);
 	});
-
-	Backend.collapsePalettes();
-	Backend.addInteractiveHelp();
-	Backend.addColorPicker();
 });
 
 // Limit the height of the preview fields
@@ -1687,15 +1895,30 @@ window.addEvent('load', function() {
 	Backend.limitPreviewHeight();
 });
 
-// Re-apply the interactive help and Chosen upon Ajax changes
+// Re-apply certain changes upon ajax_change
 window.addEvent('ajax_change', function() {
+	Backend.addInteractiveHelp();
+	Backend.makeWizardsSortable();
+
+	// Chosen
 	if (Elements.chosen != undefined) {
 		$$('select.tl_chosen').filter(function(el) {
 			return el.getStyle('display') != 'none';
 		}).chosen();
 	}
-	Backend.addInteractiveHelp();
 });
+
+// Map the touch events to mouse events on mobile devices
+if (Browser.Features.Touch) (function() {
+	delete Element.NativeEvents['mousedown'];
+	Element.defineCustomEvent('mousedown', { base:'touchstart' });
+
+	delete Element.NativeEvents['mousemove'];
+	Element.defineCustomEvent('mousemove', { base:'touchmove' });
+
+	delete Element.NativeEvents['mouseup'];
+	Element.defineCustomEvent('mouseup', { base:'touchend' });
+})();
 
 
 /**
@@ -1715,5 +1938,60 @@ var TinyCallback =
 		tinymce.dom.Event.add((tinymce.isGecko ? ed.getDoc() : ed.getWin()), 'focus', function() {
 			Backend.getScrollOffset();
 	    });
+	},
+
+	fileBrowser: function(field_name, url, type, win) {
+		var M = new SimpleModal({
+			'width': 765,
+			'btn_ok': Contao.lang.close,
+			'draggable': false,
+			'overlayOpacity': .5,
+			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
+			'onHide': function() { document.body.setStyle('overflow', 'auto'); }
+		});
+		M.addButton(Contao.lang.close, 'btn', function() {
+			this.hide();
+		});
+		M.addButton(Contao.lang.apply, 'btn primary', function() {
+			var frms = window.frames, frm, val, prev;
+			for (var i=0; i<frms.length; i++) {
+				if (frms[i].name == 'simple-modal-iframe') {
+					frm = frms[i];
+					break;
+				}
+			}
+			if (frm === null) {
+				alert('Could not find the SimpleModal frame');
+				return;
+			}
+			var inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
+			for (var i=0; i<inp.length; i++) {
+				if (inp[i].checked && !inp[i].id.match(/^reset_/)) {
+					val = inp[i].get('value');
+					break;
+				}
+			}
+			if (type == 'page') {
+				win.document.forms[0].elements[field_name].value = '{{link_url::' + val + '}}';
+				if (win.document.forms[0].elements['linktitle']) {
+					win.document.forms[0].elements['linktitle'].value = '{{link_title::' + val + '}}';
+				}
+			} else {
+				win.document.forms[0].elements[field_name].value = val;
+				if (win.document.forms[0].elements['linktitle']) {
+					win.document.forms[0].elements['linktitle'].value = '';
+				}
+				if (prev = win.document.getElementById('prev')) {
+					var u = new URI(val);
+					prev.innerHTML = '<img id="previewImg" src="' + u.toAbsolute() + '" onload="ImageDialog.updateImageData(this)" border="0">';
+				}
+			}
+			this.hide();
+		});
+		M.show({
+			'title': win.document.title,
+			'contents': '<iframe src="contao/' + ((type == 'page') ? 'page.php' : 'file.php') + '?table=tl_content&amp;field=singleSRC&amp;value=' + ((type == 'page') ? url.replace('{{link_url::', '').replace('}}', '') : url) + '" name="simple-modal-iframe" width="100%" height="' + (window.getSize().y-180).toInt() + '" frameborder="0"></iframe>',
+			'model': 'modal'
+		});
 	}
 };

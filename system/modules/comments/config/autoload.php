@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Comments
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -36,7 +36,7 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'ce_comments'      => 'system/modules/comments/templates',
-	'com_default'      => 'system/modules/comments/templates',
-	'mod_comment_form' => 'system/modules/comments/templates',
+	'com_default'      => 'system/modules/comments/templates/comments',
+	'ce_comments'      => 'system/modules/comments/templates/elements',
+	'mod_comment_form' => 'system/modules/comments/templates/modules',
 ));

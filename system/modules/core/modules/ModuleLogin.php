@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -45,7 +45,7 @@ class ModuleLogin extends \Module
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### FRONT END LOGIN ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['login'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -93,7 +93,7 @@ class ModuleLogin extends \Module
 				{
 					$arrGroups = deserialize($objMember->groups);
 
-					if (is_array($arrGroups) && !empty($arrGroups))
+					if (!empty($arrGroups) && is_array($arrGroups))
 					{
 						$objGroupPage = \MemberGroupModel::findFirstActiveWithJumpToByIds($arrGroups);
 
@@ -170,12 +170,12 @@ class ModuleLogin extends \Module
 
 			$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['logout']);
 			$this->Template->loggedInAs = sprintf($GLOBALS['TL_LANG']['MSC']['loggedInAs'], $this->User->username);
-			$this->Template->action = $this->getIndexFreeRequest();
+			$this->Template->action = \Environment::get('indexFreeRequest');
 
 			if ($this->User->lastLogin > 0)
 			{
 				global $objPage;
-				$this->Template->lastLogin = sprintf($GLOBALS['TL_LANG']['MSC']['lastLogin'][1], $this->parseDate($objPage->datimFormat, $this->User->lastLogin));
+				$this->Template->lastLogin = sprintf($GLOBALS['TL_LANG']['MSC']['lastLogin'][1], \Date::parse($objPage->datimFormat, $this->User->lastLogin));
 			}
 
 			return;
@@ -205,7 +205,7 @@ class ModuleLogin extends \Module
 		$this->Template->hasError = $blnHasError;
 		$this->Template->username = $GLOBALS['TL_LANG']['MSC']['username'];
 		$this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
-		$this->Template->action = $this->getIndexFreeRequest();
+		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['login']);
 		$this->Template->value = specialchars(\Input::post('username'));
 		$this->Template->autologin = ($this->autologin && $GLOBALS['TL_CONFIG']['autologin'] > 0);

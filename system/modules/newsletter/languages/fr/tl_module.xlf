@@ -1,0 +1,86 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_module.php" source-language="en">
+    <body>
+      <trans-unit id="tl_module.newsletters.0">
+        <source>Subscribable newsletters</source>
+        <target>Bulletins d'information disponibles pour inscription</target>
+      </trans-unit>
+      <trans-unit id="tl_module.newsletters.1">
+        <source>Show these channels in the front end form.</source>
+        <target>Afficher ces listes de diffusion dans le formulaire du front office.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.0">
+        <source>Channels</source>
+        <target>Listes de diffusion</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.1">
+        <source>Please select one or more channels.</source>
+        <target>Sélectionner une ou plusieurs listes de diffusion.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.0">
+        <source>Hide channel menu</source>
+        <target>Cacher le menu des listes de diffusion</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.1">
+        <source>Do not show the channel selection menu.</source>
+        <target>Ne pas afficher le menu des listes de diffusion.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.0">
+        <source>Subscription message</source>
+        <target>E-mail d'abonnement</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names), &lt;em&gt;##domain##&lt;/em&gt; (domain name) and &lt;em&gt;##link##&lt;/em&gt; (activation link).</source>
+        <target>Vous pouvez utiliser les jokers &lt;em&gt;##channels##&lt;/em&gt; (nom des listes de diffusion), &lt;em&gt;##domain##&lt;/em&gt; (nom de domaine courant) et &lt;em&gt;##link##&lt;/em&gt; (lien d'activation).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.0">
+        <source>Unsubscription message</source>
+        <target>E-mail de désabonnement</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names) and &lt;em&gt;##domain##&lt;/em&gt; (domain name).</source>
+        <target>Vous pouvez utiliser les jokers &lt;em&gt;##channels##&lt;/em&gt; (nom des listes de diffusion) et &lt;em&gt;##domain##&lt;/em&gt; (nom de domaine courant).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.0">
+        <source>Newsletter template</source>
+        <target>Modèle du bulletin d'information</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.1">
+        <source>Here you can select the newsletter template.</source>
+        <target>Choisir un modèle du bulletin d'information.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Votre abonnement sur %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.1">
+        <source>You have subscribed to the following channels on ##domain##:
+
+##channels##
+
+Please click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.
+</source>
+        <target>Vous avez souscrit aux listes de diffusion suivantes sur ##domain##:
+
+##channels##
+
+Veuillez cliquer sur ##link## pour valider votre abonnement. Si vous ne souhaitez pas souscrire à ces listes de diffusion, veuillez ignorer cet e-mail.
+</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Votre abonnement sur %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.1">
+        <source>You have unsubscribed from the following channels on ##domain##:
+
+##channels##
+</source>
+        <target>Vous avez été désabonné des listes de diffusion suivantes sur ##domain##:
+
+ ##channels##
+</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

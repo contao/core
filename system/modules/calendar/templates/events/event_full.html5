@@ -1,0 +1,31 @@
+
+<div class="event layout_full block<?php echo $this->class; ?>">
+
+  <h1><?php echo $this->title; ?></h1>
+  <p class="info"><?php echo $this->date; ?></p>
+
+  <?php if ($this->recurring): ?>
+    <p class="recurring"><?php echo $this->recurring; if ($this->until): ?> <?php echo $this->until; endif; ?>.</p>
+  <?php endif; ?>
+
+  <?php if ($this->details): ?>
+    <?php echo $this->details; ?>
+  <?php else: ?>
+    <div class="ce_text block">
+      <?php echo $this->teaser; ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($this->location): ?>
+    <p class="location"><?php echo $this->locationLabel; ?>: <?php echo $this->location; ?></p>
+  <?php endif; ?>
+
+  <?php if ($this->enclosure): ?>
+    <div class="enclosure">
+      <?php foreach ($this->enclosure as $enclosure): ?>
+        <p><img src="<?php echo $enclosure['icon']; ?>" width="18" height="18" alt="<?php echo $enclosure['mime']; ?>" class="mime_icon"> <a href="<?php echo $enclosure['href']; ?>" title="<?php echo $enclosure['title']; ?>"><?php echo $enclosure['link']; ?> <span class="size">(<?php echo $enclosure['filesize']; ?>)</span></a></p>
+      <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
+
+</div>

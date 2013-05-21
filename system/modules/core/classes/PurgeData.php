@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -56,7 +56,7 @@ class PurgeData extends \Backend implements \executable
 		}
 
 		// Add potential error messages
-		if (is_array($_SESSION['TL_ERROR']) && !empty($_SESSION['TL_ERROR']))
+		if (!empty($_SESSION['TL_ERROR']) && is_array($_SESSION['TL_ERROR']))
 		{
 			foreach ($_SESSION['TL_ERROR'] as $message)
 			{
@@ -71,7 +71,7 @@ class PurgeData extends \Backend implements \executable
 		{
 			$purge = \Input::post('purge');
 
-			if (is_array($purge) && !empty($purge))
+			if (!empty($purge) && is_array($purge))
 			{
 				foreach ($purge as $group=>$jobs)
 				{
@@ -123,25 +123,26 @@ class PurgeData extends \Backend implements \executable
 			// Get the current folder size
 			foreach ($config['affected'] as $folder)
 			{
-				// Create the folder if it does not yet exist
-				if (!is_dir(TL_ROOT . '/' . $folder))
-				{
-					\Files::getInstance()->mkdir($folder);
-				}
-
 				$total = 0;
 
-				// Recursively scan all subfolders
-				$objFiles = new \RecursiveIteratorIterator(
-					new \RecursiveDirectoryIterator(TL_ROOT . '/' . $folder, \FilesystemIterator::UNIX_PATHS)
-				);
-
-				// Ignore the index.html and .htaccess files
-				foreach ($objFiles as $objFile)
+				// Only check existing folders
+				if (is_dir(TL_ROOT . '/' . $folder))
 				{
-					if ($objFile->isFile() && $objFile->getFilename() != '.htaccess' && $objFile->getFilename() != 'index.html')
+					// Recursively scan all subfolders
+					$objFiles = new \RecursiveIteratorIterator(
+						new \RecursiveDirectoryIterator(
+							TL_ROOT . '/' . $folder,
+							\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
+						)
+					);
+
+					// Ignore the index.html and .htaccess files
+					foreach ($objFiles as $objFile)
 					{
-						++$total;
+						if ($objFile->getFilename() != '.htaccess' && $objFile->getFilename() != 'index.html')
+						{
+							++$total;
+						}
 					}
 				}
 

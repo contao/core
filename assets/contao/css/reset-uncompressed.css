@@ -1,8 +1,8 @@
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -59,7 +59,7 @@ ins {
  * Default font settings
  */
 body {
-	font:12px "Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
+	font:12px/1 "Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
 	color:#000;
 }
 input,button,textarea,select {

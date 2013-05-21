@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,27 +15,27 @@ namespace Contao;
 
 /**
  * Creates items to be appended to RSS or Atom feeds
- * 
+ *
  * The class provides an interface to create RSS or Atom feed items. You can
  * then add the items to a Feed object.
- * 
+ *
  * Usage:
- * 
+ *
  *     $feed = new Feed('news');
  *     $feed->title = 'News feed';
- * 
+ *
  *     $item = new FeedItem();
  *     $item->title = 'Latest news';
  *     $item->author = 'Leo Feyer';
- * 
+ *
  *     $feed->addItem($item);
  *     echo $feed->generateRss();
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
  */
-class FeedItem extends \System
+class FeedItem
 {
 
 	/**
@@ -47,13 +47,11 @@ class FeedItem extends \System
 
 	/**
 	 * Set the data from an array
-	 * 
+	 *
 	 * @param array An optional data array
 	 */
 	public function __construct($arrData=null)
 	{
-		parent::__construct();
-
 		if (is_array($arrData))
 		{
 			$this->arrData = $arrData;
@@ -63,7 +61,7 @@ class FeedItem extends \System
 
 	/**
 	 * Set an object property
-	 * 
+	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
 	 */
@@ -75,10 +73,10 @@ class FeedItem extends \System
 
 	/**
 	 * Return an object property
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
-	 * @return mixed The property value
+	 *
+	 * @return mixed|null The property value
 	 */
 	public function __get($strKey)
 	{
@@ -87,15 +85,15 @@ class FeedItem extends \System
 			return $this->arrData[$strKey];
 		}
 
-		return parent::__get($strKey);
+		return null;
 	}
 
 
 	/**
 	 * Check whether a property is set
-	 * 
+	 *
 	 * @param string $strKey The property name
-	 * 
+	 *
 	 * @return boolean True if the property is set
 	 */
 	public function __isset($strKey)
@@ -106,7 +104,7 @@ class FeedItem extends \System
 
 	/**
 	 * Add an enclosure
-	 * 
+	 *
 	 * @param string $strFile The file path
 	 */
 	public function addEnclosure($strFile)

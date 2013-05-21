@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -56,7 +56,6 @@ $GLOBALS['TL_CONFIG']['folderUrl']      = false;
 $GLOBALS['TL_CONFIG']['disableAlias']   = false;
 $GLOBALS['TL_CONFIG']['minifyMarkup']   = false;
 $GLOBALS['TL_CONFIG']['gzipScripts']    = false;
-$GLOBALS['TL_CONFIG']['websitePath']    = null;
 
 
 /**
@@ -134,12 +133,13 @@ $GLOBALS['TL_CONFIG']['requestTokenWhitelist'] = array();
  * set used on your HTML pages. Note that you might have to use a different
  * spelling (e.g. UTF8 instead of UTF-8 for MySQL).
  */
-$GLOBALS['TL_CONFIG']['dbDriver']    = 'MySQL';
+$GLOBALS['TL_CONFIG']['dbDriver']    = 'MySQLi';
 $GLOBALS['TL_CONFIG']['dbUser']      = '';
 $GLOBALS['TL_CONFIG']['dbPass']      = '';
 $GLOBALS['TL_CONFIG']['dbHost']      = 'localhost';
 $GLOBALS['TL_CONFIG']['dbDatabase']  = '';
 $GLOBALS['TL_CONFIG']['dbPort']      = 3306;
+$GLOBALS['TL_CONFIG']['dbSocket']    = '';
 $GLOBALS['TL_CONFIG']['dbPconnect']  = false;
 $GLOBALS['TL_CONFIG']['dbCharset']   = 'UTF8';
 $GLOBALS['TL_CONFIG']['dbCollation'] = 'utf8_general_ci';
@@ -265,7 +265,7 @@ $GLOBALS['TL_CONFIG']['lockPeriod']     = 300;
  *   thumbnails  = show image thumbnails in the file manager
  *   debugMode   = debug the system and print results to the screen
  *   useRTE      = use the rich text editor (TinyMCE)
- *   useCE       = use the code editor (CodeMirror)
+ *   useCE       = use the code editor (ACE)
  */
 $GLOBALS['TL_CONFIG']['showHelp']   = true;
 $GLOBALS['TL_CONFIG']['thumbnails'] = true;
@@ -334,15 +334,16 @@ $GLOBALS['TL_CONFIG']['minPasswordLength']    = 8;
 $GLOBALS['TL_CONFIG']['cacheMode']            = 'both';
 $GLOBALS['TL_CONFIG']['autologin']            = 7776000;
 $GLOBALS['TL_CONFIG']['staticFiles']          = '';
-$GLOBALS['TL_CONFIG']['staticAssets']         = '';
+$GLOBALS['TL_CONFIG']['staticPlugins']        = '';
 $GLOBALS['TL_CONFIG']['disableCron']          = false;
 $GLOBALS['TL_CONFIG']['coreOnlyMode']         = false;
 $GLOBALS['TL_CONFIG']['addLanguageToUrl']     = false;
 $GLOBALS['TL_CONFIG']['doNotRedirectEmpty']   = false;
-$GLOBALS['TL_CONFIG']['useAutoItem']          = false;
+$GLOBALS['TL_CONFIG']['useAutoItem']          = true;
 $GLOBALS['TL_CONFIG']['privacyAnonymizeIp']   = true;
 $GLOBALS['TL_CONFIG']['privacyAnonymizeGA']   = true;
 $GLOBALS['TL_CONFIG']['bypassCache']          = false;
 $GLOBALS['TL_CONFIG']['loadGoogleFonts']      = false;
 $GLOBALS['TL_CONFIG']['defaultFileChmod']     = 0644;
 $GLOBALS['TL_CONFIG']['defaultFolderChmod']   = 0755;
+$GLOBALS['TL_CONFIG']['maxPaginationLinks']   = 7;

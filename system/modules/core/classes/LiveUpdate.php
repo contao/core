@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -49,7 +49,7 @@ class LiveUpdate extends \Backend implements \executable
 		$objTemplate->updateClass = 'tl_confirm';
 		$objTemplate->updateHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate'];
 		$objTemplate->isActive = $this->isActive();
-		$strMessage = ' <a href="contao/changelog.php" onclick="Backend.openModalIframe({\'width\':860,\'title\':\'CHANGELOG\',\'url\':this.href});return false" title="' . specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']) . '"><img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/changelog.gif" width="14" height="14" alt="" style="vertical-align:text-bottom;padding-left:3px"></a>';
+		$strMessage = ' <a href="contao/changelog.php" onclick="Backend.openModalIframe({\'width\':860,\'title\':\'CHANGELOG\',\'url\':this.href});return false" title="' . specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']) . '"><img src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/changelog.gif" width="14" height="14" alt="" style="vertical-align:text-bottom;padding-left:3px"></a>';
 
 		// Newer version available
 		if (isset($GLOBALS['TL_CONFIG']['latestVersion']) && version_compare(VERSION . '.' . BUILD, $GLOBALS['TL_CONFIG']['latestVersion'], '<'))
@@ -96,7 +96,7 @@ class LiveUpdate extends \Backend implements \executable
 
 
 	/**
-	 * Run the live update
+	 * Run the Live Update
 	 * @param \BackendTemplate
 	 */
 	protected function runLiveUpdate(\BackendTemplate $objTemplate)
@@ -116,9 +116,7 @@ class LiveUpdate extends \Backend implements \executable
 				return;
 			}
 
-			$objFile = new \File($archive, true);
-			$objFile->write($objRequest->response);
-			$objFile->close();
+			\File::putContent($archive, $objRequest->response);
 		}
 
 		$objArchive = new \ZipReader($archive);
@@ -130,9 +128,7 @@ class LiveUpdate extends \Backend implements \executable
 			{
 				try
 				{
-					$objFile = new \File($objArchive->file_name, true);
-					$objFile->write($objArchive->unzip());
-					$objFile->close();
+					\File::putContent($objArchive->file_name, $objArchive->unzip());
 				}
 				catch (\Exception $e)
 				{

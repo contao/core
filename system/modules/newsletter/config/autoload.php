@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Newsletter
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -37,8 +37,8 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mod_newsletter'        => 'system/modules/newsletter/templates',
-	'mod_newsletter_list'   => 'system/modules/newsletter/templates',
-	'mod_newsletter_reader' => 'system/modules/newsletter/templates',
-	'nl_default'            => 'system/modules/newsletter/templates',
+	'mod_newsletter'        => 'system/modules/newsletter/templates/modules',
+	'mod_newsletter_list'   => 'system/modules/newsletter/templates/modules',
+	'mod_newsletter_reader' => 'system/modules/newsletter/templates/modules',
+	'nl_default'            => 'system/modules/newsletter/templates/newsletter',
 ));

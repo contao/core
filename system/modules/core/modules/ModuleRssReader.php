@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -51,7 +51,7 @@ class ModuleRssReader extends \Module
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### RSS READER ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['rss_reader'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -155,14 +155,14 @@ class ModuleRssReader extends \Module
 			$offset = (($page - 1) * $this->perPage);
 			$limit = $this->perPage + $offset;
 
-			$objPagination = new \Pagination(count($arrItems), $this->perPage, 7, $id);
+			$objPagination = new \Pagination(count($arrItems), $this->perPage, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
 		$items = array();
 		$last = min($limit, count($arrItems)) - 1;
 
-		for ($i=$offset; $i<$limit && $i<count($arrItems); $i++)
+		for ($i=$offset, $c=count($arrItems); $i<$limit && $i<$c; $i++)
 		{
 			$items[$i] = array
 			(
@@ -171,7 +171,7 @@ class ModuleRssReader extends \Module
 				'permalink' => $arrItems[$i]->get_permalink(),
 				'description' => str_replace(array('<?', '?>'), array('&lt;?', '?&gt;'), $arrItems[$i]->get_description()),
 				'class' => (($i == 0) ? ' first' : '') . (($i == $last) ? ' last' : '') . ((($i % 2) == 0) ? ' even' : ' odd'),
-				'pubdate' => $this->parseDate($objPage->datimFormat, $arrItems[$i]->get_date('U')),
+				'pubdate' => \Date::parse($objPage->datimFormat, $arrItems[$i]->get_date('U')),
 				'category' => $arrItems[$i]->get_category(0)
 			);
 

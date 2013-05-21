@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -176,21 +176,20 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 		'language' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['language'],
-			'default'                 => $GLOBALS['TL_LANGUAGE'],
+			'default'                 => str_replace('-', '_', $GLOBALS['TL_LANGUAGE']),
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'select',
 			'options'                 => System::getLanguages(true),
-			'eval'                    => array('tl_class'=>'w50'),
-			'sql'                     => "varchar(2) NOT NULL default ''"
+			'eval'                    => array('rgxp'=>'locale', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(5) NOT NULL default ''"
 		),
 		'backendTheme' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['backendTheme'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getBackendThemes(),
-			'eval'                    => array('tl_class'=>'w50'),
+			'options'                 => Backend::getThemes(),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'uploader' => array
@@ -344,7 +343,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'default'                 => array('f1', 'f2', 'f3'),
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'options'                 => array('f1', 'f2', 'f3', 'f4', 'f5'),
+			'options'                 => array('f1', 'f2', 'f3', 'f4', 'f5', 'f6'),
 			'reference'               => &$GLOBALS['TL_LANG']['FOP'],
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "blob NULL"
@@ -532,7 +531,7 @@ class tl_user extends Backend
 			$image .= '_';
 		}
 
-		$args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">&nbsp;</div>', TL_ASSETS_URL, $this->getTheme(), $image);
+		$args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">&nbsp;</div>', TL_ASSETS_URL, Backend::getTheme(), $image);
 		return $args;
 	}
 
@@ -549,7 +548,7 @@ class tl_user extends Backend
 	 */
 	public function editUser($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || !$row['admin']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || !$row['admin']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -571,7 +570,7 @@ class tl_user extends Backend
 			return '';
 		}
 
-		return ($this->User->isAdmin || !$row['admin']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || !$row['admin']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -587,7 +586,7 @@ class tl_user extends Backend
 	 */
 	public function deleteUser($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || !$row['admin']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || !$row['admin']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -615,7 +614,7 @@ class tl_user extends Backend
 			$this->redirect('contao/main.php');
 		}
 
-		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'">'.$this->generateImage($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'">'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 
@@ -771,7 +770,12 @@ class tl_user extends Backend
 	 */
 	public function removeSession(DataContainer $dc)
 	{
-		if ($dc->activeRecord)
+		if (!$dc->activeRecord)
+		{
+			return;
+		}
+
+		if ($dc->activeRecord->disable || Input::get('act') == 'delete' || Input::get('act') == 'deleteAll')
 		{
 			$this->Database->prepare("DELETE FROM tl_session WHERE name='BE_USER_AUTH' AND pid=?")
 						   ->execute($dc->activeRecord->id);
@@ -813,10 +817,10 @@ class tl_user extends Backend
 		// Protect admin accounts
 		if (!$this->User->isAdmin && $row['admin'])
 		{
-			return $this->generateImage($icon) . ' ';
+			return Image::getHtml($icon) . ' ';
 		}
 
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 
@@ -845,7 +849,8 @@ class tl_user extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->createInitialVersion('tl_user', $intId);
+		$objVersions = new Versions('tl_user', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_user']['fields']['disable']['save_callback']))
@@ -861,7 +866,8 @@ class tl_user extends Backend
 		$this->Database->prepare("UPDATE tl_user SET tstamp=". time() .", disable='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_user', $intId);
+		$objVersions->create();
+		$this->log('A new version of record "tl_user.id='.$intId.'" has been created'.$this->getParentEntries('tl_user', $intId), 'tl_user toggleVisibility()', TL_GENERAL);
 
 		// Remove the session if the user is disabled (see #5353)
 		if (!$blnVisible)

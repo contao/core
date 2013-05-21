@@ -1,0 +1,51 @@
+<?php
+
+System::loadLanguageFile('exception');
+$lang = (object) $GLOBALS['TL_LANG']['XPT'];
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <title><?php echo $lang->incomplete; ?></title>
+  <meta name="generator" content="Contao Open Source CMS">
+
+  <style><?php
+    include TL_ROOT . '/system/themes/default/basic.css';
+    include TL_ROOT . '/system/themes/default/error.css';
+  ?></style>
+
+</head>
+<body class="__ua__">
+
+  <div id="header">
+    <h1>Contao Open Source CMS</h1>
+  </div>
+
+  <div id="container">
+
+    <div id="main">
+
+      <h2><?php echo $lang->incomplete; ?></h2>
+
+      <h3><?php echo $lang->matter; ?></h3>
+      <p><?php echo $lang->incompleteInstallation; ?></p>
+
+      <h3><?php echo $lang->howToFix; ?></h3>
+      <p><?php echo $lang->incompleteFixOne; ?></p>
+      <pre>http://www.domain.com/<?php echo $lang->installPath; ?><b>/contao/install.php</b></pre>
+      <p><?php echo $lang->incompleteFixTwo; ?></p>
+
+      <h3><?php echo $lang->more; ?></h3>
+      <p><?php echo $lang->incompleteExplain; ?></p>
+
+    </div>
+
+    <p class="hint"><?php printf($lang->hint, 'templates/be_incomplete.html5'); ?></p>
+
+  </div>
+
+</body>
+</html>

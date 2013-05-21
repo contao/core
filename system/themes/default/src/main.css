@@ -1,7 +1,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (C) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2013 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -14,7 +14,7 @@ body {
 }
 body.popup {
 	background:#fff;
-	padding:6px 12px;
+	padding:6px 0;
 }
 
 /* Header */
@@ -40,17 +40,6 @@ body.popup {
 	text-align:right;
 	color:#666966;
 }
-#safe_mode {
-	margin:0;
-	background-image:none;
-	padding:8px 12px 10px;
-	border-top:1px solid #ccc;
-}
-#safe_mode a {
-	float:right;
-	margin:1px 3px 0 24px;
-	color:#666966;
-}
 
 /* Container */
 #container {
@@ -58,9 +47,8 @@ body.popup {
 	margin:0 auto;
 }
 .popup #container {
-	width:730px;
-	margin:0;
 	padding:0;
+	width:741px;
 }
 
 /* Left */
@@ -231,6 +219,17 @@ h2.sub_headline_index {
 .nobg .tl_error,.nobg .tl_confirm,.nobg .tl_info,.nobg .tl_new {
 	background-color:transparent;
 }
+.tl_permalert {
+	margin:0;
+	background-image:none;
+	padding:8px 12px 10px;
+	border-top:1px solid #ccc;
+}
+.tl_permalert a {
+	float:right;
+	margin:1px 3px 0 24px;
+	color:#666966;
+}
 
 /* Filter */
 .tl_panel,.tl_version_panel {
@@ -246,6 +245,9 @@ h2.sub_headline_index {
 	background:#f3f3f3;
 	border-top:1px solid #bbb;
 	text-align:right;
+}
+.tl_version_panel .tl_select {
+	width:240px;
 }
 .mac .tl_version_panel .tl_select,.mac .tl_panel_bottom .tl_select {
 	font-size:11px;
@@ -330,6 +332,9 @@ h2.sub_headline_index {
 	font-weight:bold;
 	font-size:11px;
 }
+.tl_tbox.theme_import h3,.tl_tbox.theme_import h4,.tl_tbox.theme_import p {
+	line-height:1.5;
+}
 .tl_help,.tl_help a {
 	margin-bottom:0;
 	padding:1px 0;
@@ -362,7 +367,7 @@ h2.sub_headline_index {
 	margin-top:0;
 }
 #search {
-	margin:9px 18px -9px;
+	margin:18px 18px -9px;
 	text-align:right;
 }
 #search .tl_text {
@@ -371,6 +376,15 @@ h2.sub_headline_index {
 }
 .mac #search .tl_text {
 	padding:4px 2px;
+}
+.tl_edit_preview {
+	margin:18px 18px 6px;
+}
+.tl_edit_preview img {
+	padding:2px;
+	border:1px solid #ddd;
+	background:#fff;
+	box-shadow:0 1px 3px #ddd;
 }
 
 /* Rebuild the search index */
@@ -519,16 +533,16 @@ h2.sub_headline_index {
 	overflow:hidden;
 	position:relative;
 }
-.tl_content.mooStart,.tl_content.mooStop {
+.tl_content.wrapper_start,.tl_content.wrapper_separator,.tl_content.wrapper_stop {
 	background:#f3f3f3;
 }
-.tl_content.mooStart {
+.tl_content.wrapper_start,.tl_content.wrapper_separator {
 	border-bottom:0;
 }
-.tl_content.mooStop {
+.tl_content.wrapper_stop,.tl_content.wrapper_separator {
 	border-top:0;
 }
-.tl_content.mooStart h1 {
+.tl_content.wrapper_start h1 {
 	margin:0 0 9px 6px;
 }
 .tl_content.indent {
@@ -601,6 +615,21 @@ h2.sub_headline_index {
 }
 .limit_height input[type="file"] {
 	position:relative;
+}
+.tl_form_field_preview td {
+	padding-right:6px;
+}
+.tl_form_field_preview td.col_0 {
+	min-width:180px;
+}
+.tl_form_field_preview .text,.tl_form_field_preview .password {
+	width:140px;
+}
+.tl_form_field_preview .select {
+	width:144px;
+}
+.tl_form_field_preview textarea {
+	width:280px;
 }
 
 /* Tree view */
@@ -750,7 +779,7 @@ ul.sgallery li {
 	float:left;
 	margin-right:0;
 }
-ul.sgallery .gimage {
+.gimage {
 	margin:2px;
 	border:1px solid #808080;
 }
@@ -845,6 +874,13 @@ ul.sgallery .gimage {
 .tl_modulewizard .tl_select {
 	width:400px;
 }
+.tl_modulewizard img.mw_enable,.js .tl_modulewizard input.mw_enable {
+	display:none;
+}
+.js .tl_modulewizard img.mw_enable {
+	display:inline;
+	cursor:pointer;
+}
 
 /* Options wizard */
 .tl_optionwizard {
@@ -896,25 +932,29 @@ ul.sgallery .gimage {
 }
 
 /* Checkbox wizard */
+.tl_checkbox_wizard {
+	padding-top:2px;
+}
 .tl_checkbox_wizard_img {
 	margin-top:-1px;
 	position:relative;
 	top:3px;
 }
-.tl_checkbox_wizard > span {
+.tl_checkbox_wizard .fixed {
 	display:block;
-	margin:-2px 0 0;
-}
-.tl_checkbox_wizard span.fixed {
 	margin-top:1px;
 }
-.tl_checkbox_wizard {
-	padding-top:2px;
+.tl_checkbox_wizard .sortable span {
+	display:block;
+	margin:-1px 0 0;
 }
 .tl_checkbox_wizard label {
 	display:block;
 	margin:-14px 0;
 	padding-left:48px;
+}
+.js .tl_checkbox_wizard label {
+	padding-left:34px;
 }
 .tl_checkbox_wizard label:last-child {
 	margin-bottom:0;
@@ -964,7 +1004,7 @@ ul.sgallery .gimage {
 	cursor:pointer;
 }
 .tl_metawizard_new .tl_select {
-	width:inherit;
+	width:300px;
 }
 .tl_metawizard_new .tl_submit {
 	margin-top:1px;
@@ -1014,6 +1054,60 @@ ul.sgallery .gimage {
 #theme-store {
 	margin-top:24px;
 	text-align:right;
+}
+.drag-handle {
+	position:relative;
+	top:1px;
+	cursor:move;
+	display:none;
+}
+.js .drag-handle {
+	display:inline;
+}
+.parent_view .drag-handle,.tl_tablewizard .drag-handle {
+	top:0;
+}
+.tl_listwizard .drag-handle {
+	top:3px;
+}
+.tl_checkbox_wizard .drag-handle {
+	vertical-align:bottom;
+}
+.js .button-move {
+	display:none;
+}
+ul.sortable li {
+	cursor:move;
+}
+#manager {
+	margin-top:9px;
+	background:#f3f3f3;
+	border-bottom:1px solid #bbb;
+	padding:3px 3px 4px;
+}
+#manager .open {
+	padding:2px 0 3px 20px;
+	background:url("images/manager.gif") left center no-repeat;
+}
+#manager .close {
+	padding:2px 0 3px 20px;
+	background:url("images/back.gif") left center no-repeat;
+}
+.ace_editor * {
+	font-family:Courier,monospace;
+	font-size:12px;
+}
+.ace_editor.fullsize {
+	position:absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	width:auto;
+	height:auto !important;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
 }
 
 /* Navigation icons */
@@ -1070,7 +1164,7 @@ a.navigation.tpl_editor {
 }
 
 /* Default icon classes */
-a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header_logout,.header_back,.header_new,.header_rss,
+a.navigation,.header_icon,.header_home,.header_user,.header_preview,.header_clipboard,.header_logout,.header_back,.header_new,.header_rss,
 .header_edit_all,.header_delete_all,.header_new_folder,.header_css_import,.header_theme_import,.header_store,.header_toggle,.header_sync {
 	padding:2px 0 3px 20px;
 	background-position:left center;
@@ -1308,4 +1402,23 @@ fieldset.collapsed > legend {
 }
 .pagination .current {
 	color:#999;
+}
+
+/* File synchronization */
+#sync-results {
+	overflow:hidden;
+	margin:6px 18px 0;
+}
+#sync-results p {
+	margin-bottom:0;
+}
+#sync-results .left {
+	float:left;
+	padding-top:2px;
+}
+#sync-results .right {
+	float:right;
+}
+#sync-results .tl_checkbox {
+	top:0;
 }

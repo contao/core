@@ -1,8 +1,8 @@
 ##
 # Contao Open Source CMS
-# 
-# Copyright (C) 2005-2013 Leo Feyer
-# 
+#
+# Copyright (c) 2005-2013 Leo Feyer
+#
 # @package Core
 # @link    https://contao.org
 # @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -205,7 +205,7 @@ FileETag None
   #   RewriteBase /contao-3.0.0
   #   RewriteBase /path/to/contao
   #
-  # Depending on your server, you might have to remove the line entirely. 
+  # Depending on your server, you might have to remove the line entirely.
   ##
   RewriteBase /
 
@@ -271,7 +271,7 @@ FileETag None
   #
   # If you are using mod_cache, it is recommended to use the RewriteRule below,
   # which adds the query string to the internal URL:
-  # 
+  #
   #   RewriteRule (.*\.html)$ index.php/$1 [L]
   #
   # Note that not all environments support mod_rewrite and mod_cache.
@@ -284,7 +284,7 @@ FileETag None
   # URL parameter (added in Contao 2.11). The first rule rewrites an empty URL
   # to the front end controller, the second one adds a missing trailing slash.
   ##
-  RewriteRule ^[a-z]{2}/$ index.php [L]
-  RewriteRule ^([a-z]{2})$ $1/ [R=301,L]
+  RewriteRule ^[a-z]{2}(\-[A-Z]{2})?/$ index.php [L]
+  RewriteRule ^([a-z]{2}(\-[A-Z]{2})?)$ $1/ [R=301,L]
 
 </IfModule>

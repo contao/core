@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -52,7 +52,7 @@ $GLOBALS['TL_DCA']['tl_search_index'] = array
 		),
 		'language' => array
 		(
-			'sql'                     => "varchar(2) NOT NULL default ''"
+			'sql'                     => "varchar(5) NOT NULL default ''"
 		)
 	)
 );

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -103,8 +103,8 @@ class FileTree extends \Widget
 			$this->{$this->strOrderField} = $objRow->{$this->strOrderField};
 		}
 
-		$this->blnIsGallery = ($this->activeRecord->type == 'gallery');
-		$this->blnIsDownloads = ($this->activeRecord->type == 'downloads');
+		$this->blnIsGallery = (isset($GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['gallery_types']) && in_array($this->activeRecord->type, $GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['gallery_types']));
+		$this->blnIsDownloads = (isset($GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['downloads_types']) && in_array($this->activeRecord->type, $GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['downloads_types']));
 	}
 
 
@@ -152,66 +152,100 @@ class FileTree extends \Widget
 	 */
 	public function generate()
 	{
-		$strValues = '';
+		$arrSet = array();
 		$arrValues = array();
 
 		if (!empty($this->varValue)) // Can be an array
 		{
-			$strValues = implode(',', array_map('intval', (array)$this->varValue));
-			$objFiles = $this->Database->execute("SELECT id, path, type FROM tl_files WHERE id IN($strValues) ORDER BY " . $this->Database->findInSet('id', $strValues));
+			$objFiles = \FilesModel::findMultipleByIds((array)$this->varValue);
 			$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
 
-			while ($objFiles->next())
+			if ($objFiles !== null)
 			{
-				// File system and database seem not in sync
-				if (!file_exists(TL_ROOT . '/' . $objFiles->path))
+				while ($objFiles->next())
 				{
-					continue;
-				}
-
-				// Show files and folders
-				if (!$this->blnIsGallery && !$this->blnIsDownloads)
-				{
-					if ($objFiles->type == 'folder')
+					// File system and database seem not in sync
+					if (!file_exists(TL_ROOT . '/' . $objFiles->path))
 					{
-						$arrValues[$objFiles->id] = $this->generateImage('folderC.gif') . ' ' . $objFiles->path;
+						continue;
 					}
+
+					$arrSet[] = $objFiles->id;
+
+					// Show files and folders
+					if (!$this->blnIsGallery && !$this->blnIsDownloads)
+					{
+						if ($objFiles->type == 'folder')
+						{
+							$arrValues[$objFiles->id] = \Image::getHtml('folderC.gif') . ' ' . $objFiles->path;
+						}
+						else
+						{
+							$objFile = new \File($objFiles->path, true);
+							$strInfo = $objFiles->path . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
+
+							if ($objFile->isGdImage)
+							{
+								$arrValues[$objFiles->id] = \Image::getHtml(\Image::get($objFiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
+							}
+							else
+							{
+								$arrValues[$objFiles->id] = \Image::getHtml($objFile->icon) . ' ' . $strInfo;
+							}
+						}
+					}
+
+					// Show a sortable list of files only
 					else
 					{
-						$objFile = new \File($objFiles->path, true);
-						$arrValues[$objFiles->id] = $this->generateImage($objFile->icon) . ' ' . $objFiles->path;
-					}
-				}
-
-				// Show a sortable list of files only
-				else
-				{
-					if ($objFiles->type == 'folder')
-					{
-						$objSubfiles = \FilesModel::findByPid($objFiles->id);
-
-						if ($objSubfiles === null)
+						if ($objFiles->type == 'folder')
 						{
-							continue;
-						}
+							$objSubfiles = \FilesModel::findByPid($objFiles->id);
 
-						while ($objSubfiles->next())
-						{
-							// Skip subfolders
-							if ($objSubfiles->type == 'folder')
+							if ($objSubfiles === null)
 							{
 								continue;
 							}
 
-							$objFile = new \File($objSubfiles->path, true);
-							$strInfo = $objSubfiles->path . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
+							while ($objSubfiles->next())
+							{
+								// Skip subfolders
+								if ($objSubfiles->type == 'folder')
+								{
+									continue;
+								}
+
+								$objFile = new \File($objSubfiles->path, true);
+								$strInfo = $objSubfiles->path . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
+
+								if ($this->blnIsGallery)
+								{
+									// Only show images
+									if ($objFile->isGdImage)
+									{
+										$arrValues[$objSubfiles->id] = \Image::getHtml(\Image::get($objSubfiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
+									}
+								}
+								else
+								{
+									// Only show allowed download types
+									if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
+									{
+										$arrValues[$objSubfiles->id] = \Image::getHtml($objFile->icon) . ' ' . $strInfo;
+									}
+								}
+							}
+						}
+						else
+						{
+							$objFile = new \File($objFiles->path, true);
 
 							if ($this->blnIsGallery)
 							{
 								// Only show images
 								if ($objFile->isGdImage)
 								{
-									$arrValues[$objSubfiles->id] = $this->generateImage(\Image::get($objSubfiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
+									$arrValues[$objFiles->id] = \Image::getHtml(\Image::get($objFiles->path, 80, 60, 'center_center'), '', 'class="gimage"');
 								}
 							}
 							else
@@ -219,29 +253,8 @@ class FileTree extends \Widget
 								// Only show allowed download types
 								if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
 								{
-									$arrValues[$objSubfiles->id] = $this->generateImage($objFile->icon) . ' ' . $strInfo;
+									$arrValues[$objFiles->id] = \Image::getHtml($objFile->icon) . ' ' . $objFiles->path;
 								}
-							}
-						}
-					}
-					else
-					{
-						$objFile = new \File($objFiles->path, true);
-
-						if ($this->blnIsGallery)
-						{
-							// Only show images
-							if ($objFile->isGdImage)
-							{
-								$arrValues[$objFiles->id] = $this->generateImage(\Image::get($objFiles->path, 80, 60, 'center_center'), '', 'class="gimage"');
-							}
-						}
-						else
-						{
-							// Only show allowed download types
-							if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
-							{
-								$arrValues[$objFiles->id] = $this->generateImage($objFile->icon) . ' ' . $objFiles->path;
 							}
 						}
 					}
@@ -279,10 +292,10 @@ class FileTree extends \Widget
 		// Load the fonts for the drag hint (see #4838)
 		$GLOBALS['TL_CONFIG']['loadGoogleFonts'] = true;
 
-		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.$strValues.'">' . (($this->strOrderField != '') ? '
+		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.implode(',', $arrSet).'">' . (($this->strOrderField != '') ? '
   <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->{$this->strOrderField}.'">' : '') . '
-  <div class="selector_container" id="target_'.$this->strId.'">' . (($this->strOrderField != '' && count($arrValues)) ? '
-    <p id="hint_'.$this->strId.'" class="sort_hint">' . $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] . '</p>' : '') . '
+  <div class="selector_container">' . (($this->strOrderField != '' && count($arrValues)) ? '
+    <p class="sort_hint">' . $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] . '</p>' : '') . '
     <ul id="sort_'.$this->strId.'" class="'.trim((($this->strOrderField != '') ? 'sortable ' : '').($this->blnIsGallery ? 'sgallery' : '')).'">';
 
 		foreach ($arrValues as $k=>$v)
@@ -291,9 +304,14 @@ class FileTree extends \Widget
 		}
 
 		$return .= '</ul>
-    <p><a href="contao/file.php?do='.\Input::get('do').'&amp;table='.$this->strTable.'&amp;field='.$this->strField.'&amp;act=show&amp;id='.\Input::get('id').'&amp;value='.$strValues.'&amp;rt='.REQUEST_TOKEN.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MOD']['files'][0])).'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . (($this->strOrderField != '') ? '
-    <script>Backend.makeMultiSrcSortable("sort_'.$this->strId.'", "ctrl_'.$this->strOrderId.'");window.addEvent("sm_hide",function(){$("hint_'.$this->strId.'").destroy();$("sort_'.$this->strId.'").removeClass("sortable")})</script>' : '') . '
+    <p><a href="contao/file.php?do='.\Input::get('do').'&amp;table='.$this->strTable.'&amp;field='.$this->strField.'&amp;act=show&amp;id='.\Input::get('id').'&amp;value='.implode(',', $arrSet).'&amp;rt='.REQUEST_TOKEN.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['filepicker'])).'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . (($this->strOrderField != '') ? '
+    <script>Backend.makeMultiSrcSortable("sort_'.$this->strId.'", "ctrl_'.$this->strOrderId.'")</script>' : '') . '
   </div>';
+
+		if (!\Environment::get('isAjaxRequest'))
+		{
+			$return = '<div>' . $return . '</div>';
+		}
 
 		return $return;
 	}

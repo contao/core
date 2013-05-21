@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -57,6 +57,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 * @var array
 	 */
 	protected $arrMessages = array();
+
+	/**
+	 * Counts
+	 * @var array
+	 */
+	protected $arrCounts = array();
 
 	/**
 	 * True if a new version has to be created
@@ -121,6 +127,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				$this->reload();
 			}
+
+			// Decode the values (see #5764)
+			$ids = array_map('rawurldecode', $ids);
 
 			$session = $this->Session->getData();
 			$session['CURRENT']['IDS'] = $ids;
@@ -271,6 +280,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$GLOBALS['TL_CONFIG']['loadGoogleFonts'] = $blnClipboard;
 
 		$this->import('Files');
+		$this->import('BackendUser', 'User');
 
 		// Call recursive function tree()
 		if (empty($this->arrFilemounts) && !is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root'] !== false)
@@ -279,7 +289,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 		else
 		{
-			for ($i=0; $i<count($this->arrFilemounts); $i++)
+			for ($i=0, $c=count($this->arrFilemounts); $i<$c; $i++)
 			{
 				if ($this->arrFilemounts[$i] != '' && is_dir(TL_ROOT . '/' . $this->arrFilemounts[$i]))
 				{
@@ -302,7 +312,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$hrfNew = $GLOBALS['TL_DCA'][$this->strTable]['list']['new']['href'];
 		}
 
-		$imagePasteInto = $this->generateImage('pasteinto.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0]);
+		$imagePasteInto = \Image::getHtml('pasteinto.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0]);
 
 		// Build the tree
 		$return = '
@@ -327,7 +337,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 </div>' : '').'
 
 <ul class="tl_listing">
-  <li class="tl_folder_top" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left">'.$this->generateImage('filemounts.gif').' '.$GLOBALS['TL_LANG']['MSC']['filetree'].'</div> <div class="tl_right">'.(($blnClipboard && empty($this->arrFilemounts) && !is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root'] !== false) ? '<a href="'.$this->addToUrl('&amp;act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$GLOBALS['TL_CONFIG']['uploadPath'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1]).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a>' : '&nbsp;').'</div><div style="clear:both"></div></li>'.$return.'
+  <li class="tl_folder_top" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left">'.\Image::getHtml('filemounts.gif').' '.$GLOBALS['TL_LANG']['MSC']['filetree'].'</div> <div class="tl_right">'.(($blnClipboard && empty($this->arrFilemounts) && !is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root'] !== false) ? '<a href="'.$this->addToUrl('&amp;act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$GLOBALS['TL_CONFIG']['uploadPath'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1]).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a>' : '&nbsp;').'</div><div style="clear:both"></div></li>'.$return.'
 </ul>
 
 </div>';
@@ -353,7 +363,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 <div class="tl_submit_container">' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'] ? '
   <input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\')" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'"> ' : '') . '
-  <input type="submit" name="cut" id="cut" class="tl_submit" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'"> 
+  <input type="submit" name="cut" id="cut" class="tl_submit" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'">
   <input type="submit" name="copy" id="copy" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'"> ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
   <input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'"> ' : '') . $callbacks . '
 </div>
@@ -403,16 +413,23 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Move an existing file or folder
-	 * @param boolean
+	 * @param string
 	 */
-	public function cut($blnDoNotRedirect=false)
+	public function cut($source=null)
 	{
-		$this->isValid($this->intId);
 		$strFolder = \Input::get('pid', true);
+		$blnDoNotRedirect = ($source !== null);
 
-		if (!file_exists(TL_ROOT . '/' . $this->intId) || !$this->isMounted($this->intId))
+		if ($source === null)
 		{
-			$this->log('File or folder "'.$this->intId.'" was not mounted or could not be found', 'DC_Folder cut()', TL_ERROR);
+			$source = $this->intId;
+		}
+
+		$this->isValid($source);
+
+		if (!file_exists(TL_ROOT . '/' . $source) || !$this->isMounted($source))
+		{
+			$this->log('File or folder "'.$source.'" was not mounted or could not be found', 'DC_Folder cut()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -423,9 +440,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Avoid a circular reference
-		if (preg_match('/^' . preg_quote($this->intId, '/') . '/i', $strFolder))
+		if (preg_match('/^' . preg_quote($source, '/') . '/i', $strFolder))
 		{
-			$this->log('Attempt to move the folder "'.$this->intId.'" to "'.$strFolder.'" (circular reference)', 'DC_Folder cut()', TL_ERROR);
+			$this->log('Attempt to move the folder "'.$source.'" to "'.$strFolder.'" (circular reference)', 'DC_Folder cut()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -437,92 +454,28 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$this->import('Files');
 
 		// Calculate the destination path
-		$destination = str_replace(dirname($this->intId), $strFolder, $this->intId);
+		$destination = str_replace(dirname($source), $strFolder, $source);
 
 		// Do not move if the target exists and would be overriden (not possible for folders anyway)
 		if (file_exists(TL_ROOT . '/' . $destination))
 		{
-			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetarget'], basename($this->intId), dirname($destination)));
+			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetarget'], basename($source), dirname($destination)));
 		}
 		else
 		{
-			// Find the corresponding DB entries
+			$this->Files->rename($source, $destination);
+
+			// Update the database AFTER the file has been moved
 			if ($this->blnIsDbAssisted)
 			{
-				$objFile = \FilesModel::findByPath($this->intId);
-
-				if ($objFile === null)
-				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $this->intId));
-				}
-
-				// Set the parent ID
-				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					$objFile->pid = 0;
-				}
-				else
-				{
-					$objFolder = \FilesModel::findByPath($strFolder);
-
-					if ($objFolder === null)
-					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
-					}
-
-					$objFile->pid = $objFolder->id;
-				}
-
-				// Move the file
-				$this->Files->rename($this->intId, $destination);
-
-				// Update the database
-				$objFile->path = $destination;
-				$objFile->save();
-
-				// Update all child records
-				if ($objFile->type == 'folder')
-				{
-					$objFiles = \FilesModel::findMultipleByBasepath($this->intId.'/');
-
-					if ($objFiles !== null)
-					{
-						while ($objFiles->next())
-						{
-							$objFiles->path = preg_replace('@^'.$this->intId.'/@', $destination.'/', $objFiles->path);
-							$objFiles->save();
-						}
-					}
-				}
-
-				// Update the MD5 hash of the parent folders
-				foreach (array(dirname($this->intId), dirname($destination)) as $strPath)
-				{
-					if ($strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
-					{
-						$objModel = \FilesModel::findByPath($strPath);
-
-						if ($objModel === null)
-						{
-							throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strPath));
-						}
-
-						$objFolder = new \Folder($objModel->path);
-						$objModel->hash = $objFolder->hash;
-						$objModel->save();
-					}
-				}
-			}
-			else
-			{
-				// Not DB-assisted, so just move the file
-				$this->Files->rename($this->intId, $destination);
+				\Dbafs::moveResource($source, $destination);
 			}
 
 			// Add a log entry
-			$this->log('File or folder "'.$this->intId.'" has been moved to "'.$destination.'"', 'DC_Folder cut()', TL_FILES);
+			$this->log('File or folder "'.$source.'" has been moved to "'.$destination.'"', 'DC_Folder cut()', TL_FILES);
 		}
 
+		// Redirect
 		if (!$blnDoNotRedirect)
 		{
 			$this->redirect($this->getReferer());
@@ -547,8 +500,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			foreach ($arrClipboard[$this->strTable]['id'] as $id)
 			{
-				$this->intId = urldecode($id);
-				$this->cut(true);
+				$this->cut(urldecode($id));
 			}
 		}
 
@@ -563,15 +515,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	public function copy($source=null, $destination=null)
 	{
-		$noReload = ($source != '');
 		$strFolder = \Input::get('pid', true);
+		$blnDoNotRedirect = ($source !== null);
 
-		if ($source == '')
+		if ($source === null)
 		{
 			$source = $this->intId;
 		}
 
-		if ($destination == '')
+		if ($destination === null)
 		{
 			$destination = str_replace(dirname($source), $strFolder, $source);
 		}
@@ -608,113 +560,26 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Copy folders
 		if (is_dir(TL_ROOT . '/' . $source))
 		{
-			$new = $destination;
 			$count = 1;
+			$new = $destination;
 
+			// Add a suffix if the folder exists
 			while (is_dir(TL_ROOT . '/' . $new) && $count < 12)
 			{
 				$new = $destination . '_' . $count++;
 			}
 
 			$destination = $new;
-			$strFolder = dirname($destination);
-
-			// Find the corresponding DB entries
-			if ($this->blnIsDbAssisted)
-			{
-				$objFolder = \FilesModel::findByPath($source);
-
-				if ($objFolder === null)
-				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
-				}
-
-				$objNewFolder = clone $objFolder->current();
-
-				// Set the parent ID
-				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					$objNewFolder->pid = 0;
-				}
-				else
-				{
-					$objFolder = \FilesModel::findByPath($strFolder);
-
-					if ($objFolder === null)
-					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
-					}
-
-					$objNewFolder->pid = $objFolder->id;
-				}
-
-				// Create the target folder
-				$this->Files->mkdir($destination);
-
-				// Update the database
-				$objNewFolder->tstamp = time();
-				$objNewFolder->path = $destination;
-				$objNewFolder->name = basename($destination); // see #4628
-				$objNewFolder->save();
-			}
-			else
-			{
-				// Not DB-assisted, so just create the target folder
-				$this->Files->mkdir($destination);
-			}
-
-			// Files
-			$files = scan(TL_ROOT . '/' . $source);
-
-			foreach ($files as $file)
-			{
-				if ($file == '.svn' || $file == '.DS_Store')
-				{
-					continue;
-				}
-
-				if (is_dir(TL_ROOT . '/' . $source .'/'. $file))
-				{
-					$this->copy($source . '/' . $file, $destination . '/' . $file);
-				}
-				else
-				{
-					// Find the corresponding DB entries
-					if ($this->blnIsDbAssisted)
-					{
-						$objFile = \FilesModel::findByPath($source . '/' . $file);
-
-						if ($objFile === null)
-						{
-							throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source . '/' . $file));
-						}
-
-						$objNewFile = clone $objFile->current();
-
-						// Copy the file
-						$this->Files->copy($source . '/' . $file, $destination . '/' . $file);
-
-						// Update the database
-						$objNewFile->pid = $objNewFolder->id;
-						$objNewFile->tstamp = time();
-						$objNewFile->path = $destination . '/' . $file;
-						$objNewFile->save();
-					}
-					else
-					{
-						// Not DB-assisted, so just copy the file
-						$this->Files->copy($source . '/' . $file, $destination . '/' . $file);
-					}
-				}
-			}
+			$this->Files->rcopy($source, $destination);
 		}
 
-		// Copy file
+		// Copy a file
 		else
 		{
-			$new = $destination;
 			$count = 1;
+			$new = $destination;
 
+			// Add a suffix if the file exists
 			while (file_exists(TL_ROOT . '/' . $new) && $count < 12)
 			{
 				$ext = pathinfo($destination, PATHINFO_EXTENSION);
@@ -722,77 +587,21 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			$destination = $new;
-			$strFolder = dirname($destination);
-
-			// Find the corresponding DB entries
-			if ($this->blnIsDbAssisted)
-			{
-				$objFile = \FilesModel::findByPath($source);
-
-				if ($objFile === null)
-				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
-				}
-
-				$objNewFile = clone $objFile->current();
-
-				// Set the parent ID
-				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					$objNewFile->pid = 0;
-				}
-				else
-				{
-					$objFolder = \FilesModel::findByPath($strFolder);
-
-					if ($objFile === null)
-					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
-					}
-
-					$objNewFile->pid = $objFolder->id;
-				}
-
-				// Copy the file
-				$this->Files->copy($source, $destination);
-
-				// Update the database
-				$objNewFile->tstamp = time();
-				$objNewFile->path = $destination;
-				$objNewFile->name = basename($destination); // see #4628
-				$objNewFile->save();
-			}
-			else
-			{
-				// Not DB-assisted, so just copy the file
-				$this->Files->copy($source, $destination);
-			}
+			$this->Files->copy($source, $destination);
 		}
 
-		// Do not update the database or redirect upon a recursive call
-		if (!$noReload)
+		// Update the database AFTER the file has been copied
+		if ($this->blnIsDbAssisted)
 		{
-			// Update the MD5 hash of the parent folder
-			if ($this->blnIsDbAssisted && $strFolder != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				$objModel = \FilesModel::findByPath($strFolder);
+			\Dbafs::copyResource($source, $destination);
+		}
 
-				if ($objModel === null)
-				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
-				}
+		// Add a log entry
+		$this->log('File or folder "'.$source.'" has been duplicated', 'DC_Folder copy()', TL_FILES);
 
-				$objFolder = new \Folder($objModel->path);
-				$objModel->hash = $objFolder->hash;
-				$objModel->save();
-			}
-
-			// Add a log entry
-			if (file_exists(TL_ROOT . '/' . $source) && $this->isMounted($source))
-			{
-				$this->log('File or folder "'.$source.'" has been duplicated', 'DC_Folder copy()', TL_FILES);
-			}
-
+		// Redirect
+		if (!$blnDoNotRedirect)
+		{
 			$this->redirect($this->getReferer());
 		}
 	}
@@ -835,9 +644,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$noReload = ($source != '');
+		$blnDoNotRedirect = ($source !== null);
 
-		if ($source == '')
+		if ($source === null)
 		{
 			$source = $this->intId;
 		}
@@ -865,105 +674,29 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		$this->import('Files');
-		$strPath = dirname($source);
 
-		// Delete folders
+		// Delete the folder or file
 		if (is_dir(TL_ROOT . '/' . $source))
 		{
-			$files = scan(TL_ROOT . '/' . $source);
-
-			foreach ($files as $file)
-			{
-				if (is_dir(TL_ROOT . '/' . $source . '/' . $file))
-				{
-					$this->delete($source . '/' . $file);
-				}
-				else
-				{
-					// Find the corresponding DB entries
-					if ($this->blnIsDbAssisted && $file != '.DS_Store')
-					{
-						$objFile = \FilesModel::findByPath($source . '/' . $file);
-
-						if ($objFile === null)
-						{
-							throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source . '/' . $file));
-						}
-
-						$this->Files->delete($source . '/' . $file);
-						$objFile->delete();
-					}
-					else
-					{
-						// Not DB-assisted, so just delete the file
-						$this->Files->delete($source . '/' . $file);
-					}
-				}
-			}
-
-			// Find the corresponding DB entries
-			if ($this->blnIsDbAssisted && $source != '.svn')
-			{
-				$objFile = \FilesModel::findByPath($source);
-
-				if ($objFile === null)
-				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
-				}
-
-				$this->Files->rmdir($source);
-				$objFile->delete();
-			}
-			else
-			{
-				// Not DB-assisted, so just remove the folder
-				$this->Files->rmdir($source);
-			}
+			$this->Files->rrdir($source);
 		}
-
-		// Delete a file
 		else
 		{
-			// Find the corresponding DB entries
-			if ($this->blnIsDbAssisted)
-			{
-				$objFile = \FilesModel::findByPath($source);
-
-				if ($objFile === null)
-				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $source));
-				}
-
-				$this->Files->delete($source);
-				$objFile->delete();
-			}
-			else
-			{
-				// Not DB-assisted, so just delete the file
-				$this->Files->delete($source);
-			}
+			$this->Files->delete($source);
 		}
 
-		// Do not update the database or redirect upon a recursive call
-		if (!$noReload)
+		// Update the database AFTER the resource has been deleted
+		if ($this->blnIsDbAssisted)
 		{
-			// Update the MD5 hash of the parent folder
-			if ($this->blnIsDbAssisted && $strPath != $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				$objModel = \FilesModel::findByPath($strPath);
+			\Dbafs::deleteResource($source);
+		}
 
-				if ($objModel === null)
-				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strPath));
-				}
+		// Add a log entry
+		$this->log('File or folder "'.str_replace(TL_ROOT.'/', '', $source).'" has been deleted', 'DC_Folder delete()', TL_FILES);
 
-				$objFolder = new \Folder($objModel->path);
-				$objModel->hash = $objFolder->hash;
-				$objModel->save();
-			}
-
-			// Add a log entry
-			$this->log('File or folder "'.str_replace(TL_ROOT.'/', '', $source).'" has been deleted', 'DC_Folder delete()', TL_FILES);
+		// Redirect
+		if (!$blnDoNotRedirect)
+		{
 			$this->redirect($this->getReferer());
 		}
 	}
@@ -1052,25 +785,14 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Generate the DB entries
 			if ($this->blnIsDbAssisted)
 			{
-				// Get the parent ID
-				if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					$pid = 0;
-				}
-				else
-				{
-					$objModel = \FilesModel::findByPath($strFolder);
-
-					if ($objModel === null)
-					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
-					}
-
-					$pid = $objModel->id;
-				}
-
 				// Upload the files
 				$arrUploaded = $objUploader->uploadTo($strFolder);
+
+				if (empty($arrUploaded))
+				{
+					\Message::addError($GLOBALS['TL_LANG']['ERR']['emptyUpload']);
+					$this->reload();
+				}
 
 				foreach ($arrUploaded as $strFile)
 				{
@@ -1086,17 +808,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					}
 					else
 					{
-						$objFile = new \File($strFile, true);
-
-						$objNew = new \FilesModel();
-						$objNew->pid       = $pid;
-						$objNew->tstamp    = time();
-						$objNew->type      = 'file';
-						$objNew->path      = $strFile;
-						$objNew->extension = $objFile->extension;
-						$objNew->hash      = md5_file(TL_ROOT . '/' . $strFile);
-						$objNew->name      = $objFile->basename;
-						$objNew->save();
+						\Dbafs::addResource($strFile);
 					}
 				}
 			}
@@ -1119,16 +831,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Update the hash of the target folder
 			if ($this->blnIsDbAssisted && $strFolder != $GLOBALS['TL_CONFIG']['uploadPath'])
 			{
-				$objModel = \FilesModel::findByPath($strFolder);
-
-				if ($objModel === null)
-				{
-					throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $strFolder));
-				}
-
-				$objFolder = new \Folder($objModel->path);
-				$objModel->hash = $objFolder->hash;
-				$objModel->save();
+				\Dbafs::updateFolderHashes($strFolder);
 			}
 
 			// Redirect or reload
@@ -1169,7 +872,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="upload" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['upload']).'"> 
+<input type="submit" name="upload" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['upload']).'">
 <input type="submit" name="uploadNback" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['uploadNback']).'">
 </div>
 
@@ -1202,54 +905,25 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			if ($objFile === null)
 			{
-				throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $this->intId));
+				$objFile = \Dbafs::addResource($this->intId);
 			}
 
 			$this->objActiveRecord = $objFile;
 		}
 
 		$this->blnCreateNewVersion = false;
+		$objVersions = new \Versions($this->strTable, $objFile->id);
 
-		// Change version
-		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && \Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
+		// Compare versions
+		if (\Input::get('versions'))
 		{
-			$objData = $this->Database->prepare("SELECT * FROM tl_version WHERE fromTable=? AND pid=? AND version=?")
-									  ->limit(1)
-									  ->execute($this->strTable, $objFile->id, \Input::post('version'));
+			$objVersions->compare();
+		}
 
-			if ($objData->numRows)
-			{
-				$data = deserialize($objData->data);
-
-				if (is_array($data))
-				{
-					$this->Database->prepare("UPDATE " . $objData->fromTable . " %s WHERE id=?")
-								   ->set($data)
-								   ->execute($objFile->id);
-
-					$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=?")
-								   ->execute($objFile->id);
-
-					$this->Database->prepare("UPDATE tl_version SET active=1 WHERE pid=? AND version=?")
-								   ->execute($objFile->id, \Input::post('version'));
-
-					$this->log('Version '.\Input::post('version').' of record "'.$this->strTable.'.id='.$objFile->id.'" has been restored', 'DC_Table edit()', TL_GENERAL);
-
-					// Trigger the onrestore_callback
-					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback']))
-					{
-						foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback'] as $callback)
-						{
-							if (is_array($callback))
-							{
-								$this->import($callback[0]);
-								$this->$callback[0]->$callback[1]($objFile->id, $this->strTable, $data, \Input::post('version'));
-							}
-						}
-					}
-				}
-			}
-
+		// Restore a version
+		if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
+		{
+			$objVersions->restore(\Input::post('version'));
 			$this->reload();
 		}
 
@@ -1355,44 +1029,35 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				$class = 'tl_box';
 				$return .= '
   <input type="hidden" name="FORM_FIELDS[]" value="'.specialchars($this->strPalette).'">
+  <div class="clear"></div>
 </div>';
 			}
 		}
 
-		$version = '';
-
-		// Check versions
+		// Versions overview
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
 		{
-			$objVersion = $this->Database->prepare("SELECT tstamp, version, username, active FROM tl_version WHERE fromTable=? AND pid=? ORDER BY version DESC")
-									     ->execute($this->strTable, $objFile->id);
+			$version = $objVersions->renderDropdown();
+		}
+		else
+		{
+			$version = '';
+		}
 
-			if ($objVersion->numRows > 1)
+		$strPreview = '';
+
+		// Show a preview image (see #4948)
+		if ($this->objActiveRecord !== null && $this->objActiveRecord->type == 'file')
+		{
+			$objFile = new \File($this->objActiveRecord->path);
+
+			if ($objFile->isGdImage)
 			{
-				$versions = '';
+				$strPreview = '
 
-				while ($objVersion->next())
-				{
-					$versions .= '
-  <option value="'.$objVersion->version.'"'.($objVersion->active ? ' selected="selected"' : '').'>'.$GLOBALS['TL_LANG']['MSC']['version'].' '.$objVersion->version.' ('.$this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objVersion->tstamp).') '.$objVersion->username.'</option>';
-				}
-
-				$version = '
-<div class="tl_version_panel">
-
-<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_version" class="tl_form" method="post">
-<div class="tl_formbody">
-<input type="hidden" name="FORM_SUBMIT" value="tl_version">
-<input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
-<select name="version" class="tl_select">'.$versions.'
-</select> 
-<input type="submit" name="showVersion" id="showVersion" class="tl_submit" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['restore']).'"> 
-<a href="contao/diff.php?table='.$this->strTable.'&amp;pid='.$objFile->id.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']).'" onclick="Backend.openModalIframe({\'width\':860,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['showDifferences'])).'\',\'url\':this.href});return false">'.$this->generateImage('diff.gif').'</a>
-</div>
-</form>
-
-</div>
-';
+<div class="tl_edit_preview">
+' . \Image::getHtml(\Image::get($objFile->path, 700, 150, 'box')) . '
+</div>';
 			}
 		}
 
@@ -1403,7 +1068,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'"> 
+<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">
 <input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">
 </div>
 
@@ -1411,9 +1076,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 </form>
 
 <script>
-window.addEvent(\'domready\', function() {
-  (inp = $(\''.$this->strTable.'\').getElement(\'input[class^="tl_text"]\')) && inp.focus();
-});
+  window.addEvent(\'domready\', function() {
+    Theme.focusInput("'.$this->strTable.'");
+  });
 </script>';
 
 		// Begin the form (-> DO NOT CHANGE THIS ORDER -> this way the onsubmit attribute of the form can be changed by a field)
@@ -1423,7 +1088,7 @@ window.addEvent(\'domready\', function() {
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_files']['editFF'].'</h2>
-'.\Message::generate().'
+'.\Message::generate().$strPreview.'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'">
@@ -1446,7 +1111,7 @@ window.addEvent(\'domready\', function() {
 			// Save the current version
 			if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
 			{
-				$this->createNewVersion($this->strTable, $objFile->id);
+				$objVersions->create();
 
 				// Call the onversion_callback
 				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
@@ -1493,9 +1158,9 @@ window.addEvent(\'domready\', function() {
 			$return .= '
 
 <script>
-window.addEvent(\'domready\', function() {
-  Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
-});
+  window.addEvent(\'domready\', function() {
+    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
+  });
 </script>';
 		}
 
@@ -1531,7 +1196,7 @@ window.addEvent(\'domready\', function() {
 		$fields = $session['CURRENT'][$this->strTable];
 
 		// Add fields
-		if (is_array($fields) && !empty($fields) && \Input::get('fields'))
+		if (!empty($fields) && is_array($fields) && \Input::get('fields'))
 		{
 			$class = 'tl_tbox';
 
@@ -1549,13 +1214,14 @@ window.addEvent(\'domready\', function() {
 
 					if ($objFile === null)
 					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $id));
+						$objFile = \Dbafs::addResource($id);
 					}
 
 					$this->objActiveRecord = $objFile;
 				}
 
-				$this->createInitialVersion($this->strTable, $objFile->id);
+				$objVersions = new Versions($this->strTable, $objFile->id);
+				$objVersions->initialize();
 
 				$return .= '
 <div class="'.$class.'">';
@@ -1635,7 +1301,7 @@ window.addEvent(\'domready\', function() {
 					// Create a new version
 					if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
 					{
-						$this->createNewVersion($this->strTable, $objFile->id);
+						$objVersions->create();
 
 						// Call the onversion_callback
 						if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
@@ -1676,7 +1342,7 @@ window.addEvent(\'domready\', function() {
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'"> 
+<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">
 <input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">
 </div>
 
@@ -1684,9 +1350,9 @@ window.addEvent(\'domready\', function() {
 </form>
 
 <script>
-window.addEvent(\'domready\', function() {
-  (inp = $(\''.$this->strTable.'\').getElement(\'input[class^="tl_text"]\')) && inp.focus();
-});
+  window.addEvent(\'domready\', function() {
+    Theme.focusInput("'.$this->strTable.'");
+  });
 </script>';
 
 			// Set the focus if there is an error
@@ -1695,9 +1361,9 @@ window.addEvent(\'domready\', function() {
 				$return .= '
 
 <script>
-window.addEvent(\'domready\', function() {
-  Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
-});
+  window.addEvent(\'domready\', function() {
+    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
+  });
 </script>';
 			}
 
@@ -1821,29 +1487,22 @@ window.addEvent(\'domready\', function() {
 			// Save the file
 			if (md5($strContent) != md5(\Input::postRaw('source')))
 			{
-				// Update the md5 hash
+				// Write the file
+				$objFile->write(\Input::postRaw('source'));
+				$objFile->close();
+
+				// Update the database
 				if ($this->blnIsDbAssisted)
 				{
 					$objMeta = \FilesModel::findByPath($objFile->value);
 
 					if ($objMeta === null)
 					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $objFile->value));
+						$objMeta = \Dbafs::addResource($objFile->value);
 					}
 
-					// Write the file
-					$objFile->write(\Input::postRaw('source'));
-					$objFile->close();
-
-					// Update the database
-					$objMeta->hash = md5_file(TL_ROOT . '/' . $objFile->value);
+					$objMeta->hash = $objFile->hash;
 					$objMeta->save();
-				}
-				else
-				{
-					// Not DB-assisted, so just write the file
-					$objFile->write(\Input::postRaw('source'));
-					$objFile->close();
 				}
 			}
 
@@ -1861,63 +1520,17 @@ window.addEvent(\'domready\', function() {
 		// Prepare the code editor
 		if ($GLOBALS['TL_CONFIG']['useCE'])
 		{
-			$type = '';
-
-			// The following types are supported by CodeMirror
-			switch ($objFile->extension)
-			{
-				case 'c': case 'cc': case 'cpp': case 'c++':
-				case 'h': case 'hh': case 'hpp': case 'h++':
-					$type = 'clike';
-					break;
-
-				case 'css':
-					$type = 'css';
-					break;
-
-				case 'patch':
-					$type = 'diff';
-					break;
-
-				case 'htm': case 'html':
-				case 'tpl': case 'html5': case 'xhtml':
-					$type = 'htmlmixed';
-					break;
-
-				case 'js':
-					$type = 'javascript';
-					break;
-
-				case 'php': case 'inc':
-					$type = 'php';
-					break;
-
-				case 'sql':
-					$type = 'sql';
-					break;
-
-				case 'xml':
-					$type = 'xml';
-					break;
-			}
-
-			// Fall back to HTML
-			if ($type == '')
-			{
-				$type = 'htmlmixed';
-			}
-
 			$this->ceFields = array(array
 			(
 				'id' => 'ctrl_source',
-				'type' => $type
+				'type' => $objFile->extension
 			));
 
 			$this->language = $GLOBALS['TL_LANGUAGE'];
 
 			// Load the code editor configuration
 			ob_start();
-			include TL_ROOT . '/system/config/codeMirror.php';
+			include TL_ROOT . '/system/config/ace.php';
 			$codeEditor = ob_get_contents();
 			ob_end_clean();
 		}
@@ -1943,7 +1556,7 @@ window.addEvent(\'domready\', function() {
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'"> 
+<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">
 <input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">
 </div>
 
@@ -2023,107 +1636,23 @@ window.addEvent(\'domready\', function() {
 				throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['fileExists'], $varValue));
 			}
 
+			// Rename the file
+			$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
+
 			// Update the database
 			if ($this->blnIsDbAssisted)
 			{
-				// Get the parent ID
-				if ($this->strPath == $GLOBALS['TL_CONFIG']['uploadPath'])
-				{
-					$pid = 0;
-				}
-				else
-				{
-					$objFolder = \FilesModel::findByPath($this->strPath);
-
-					if ($objFolder === null)
-					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $this->strPath));
-					}
-
-					$pid = $objFolder->id;
-				}
-
 				// New folders
 				if (stristr($this->intId, '__new__') !== false)
 				{
-					// Rename the file
-					$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
-
-					// Create the DB entry
-					$objFile = new \FilesModel();
-					$objFile->pid    = $pid;
-					$objFile->tstamp = time();
-					$objFile->type   = 'folder';
-					$objFile->path   = $this->strPath . '/' . $varValue;
-					$objFile->name   = $varValue;
-					$objFile->hash   = md5('');
-					$objFile->save();
-
-					$this->objActiveRecord = $objFile;
-
-					// Add a log entry
+					$this->objActiveRecord = \Dbafs::addResource($this->strPath . '/' . $varValue . $this->strExtension);
 					$this->log('Folder "'.$this->strPath.'/'.$varValue.$this->strExtension.'" has been created', 'DC_Folder save()', TL_FILES);
 				}
 				else
 				{
-					// Find the corresponding DB entry
-					$objFile = \FilesModel::findByPath($this->strPath . '/' . $this->varValue . $this->strExtension);
-
-					if ($objFile === null)
-					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $this->strPath . '/' . $this->varValue . $this->strExtension));
-					}
-
-					// Rename the file
-					$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
-
-					// Update the data
-					$objFile->pid  = $pid;
-					$objFile->path = $this->strPath . '/' . $varValue . $this->strExtension;
-					$objFile->name = $varValue . $this->strExtension;
-					$objFile->save();
-
-					$this->objActiveRecord = $objFile;
-
-					// Add a log entry
+					$this->objActiveRecord = \Dbafs::moveResource($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
 					$this->log('File or folder "'.$this->strPath.'/'.$this->varValue.$this->strExtension.'" has been renamed to "'.$this->strPath.'/'.$varValue.$this->strExtension.'"', 'DC_Folder save()', TL_FILES);
 				}
-
-				// Also update all child records
-				if ($objFile->type == 'folder')
-				{
-					$strPath = $this->strPath . '/' . $this->varValue . '/';
-					$objFiles = \FilesModel::findMultipleByBasepath($strPath);
-
-					if ($objFiles !== null)
-					{
-						while ($objFiles->next())
-						{
-							$objFiles->path = preg_replace('@^'.$strPath.'@', $this->strPath.'/'.$varValue.'/', $objFiles->path);
-							$objFiles->save();
-						}
-					}
-				}
-
-				// Also update the MD5 hash of the parent folder
-				if ($objFile->pid > 0)
-				{
-					$objModel = \FilesModel::findByPk($objFile->pid);
-
-					if ($objModel === null)
-					{
-						throw new \OutOfSyncException(sprintf($GLOBALS['TL_LANG']['ERR']['fileNotFoundSync'], $objFile->pid));
-					}
-
-					$objFolder = new \Folder($objModel->path);
-					$objModel->hash = $objFolder->hash;
-					$objModel->save();
-				}
-			}
-			else
-			{
-				// Not DB-assisted, so just rename the file
-				$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
 			}
 
 			// Set the new value so the input field can show it
@@ -2244,122 +1773,63 @@ window.addEvent(\'domready\', function() {
 		}
 
 		$this->import('BackendUser', 'User');
+		$this->loadLanguageFile('tl_files');
 
-		// Stop if a regular user manually triggers the file synchronisation
-		if (!$this->User->isAdmin)
+		// Check the permission to synchronize
+		if (!$this->User->isAdmin && !$this->User->hasAccess('f6', 'fop'))
 		{
-			return '<p class="tl_error">You have to be an administrator to run the file synchronisation.</p>';
+			$this->log('Not enough permissions to synchronize the file system', 'DC_Folder sync()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
 		}
 
-		$arrExempt = array();
-		$this->arrMessages = array();
+		// Synchronize
+		$strLog = \Dbafs::syncFiles();
 
-		// Reset the "found" flag
-		$this->Database->query("UPDATE tl_files SET found=''");
+		// Show the results
+		$arrMessages = array();
+		$arrCounts   = array('Added'=>0, 'Changed'=>0, 'Unchanged'=>0, 'Moved'=>0, 'Deleted'=>0);
 
-		// Exempt folders from the synchronisation (see #4522)
-		if ($GLOBALS['TL_CONFIG']['fileSyncExclude'] != '')
+		// Read the log file
+		$fh = fopen(TL_ROOT . '/' . $strLog, 'rb');
+
+		while (($buffer = fgets($fh)) !== false)
 		{
-			$arrExempt = array_map(function($e) {
-				return $GLOBALS['TL_CONFIG']['uploadPath'] . '/' . $e;
-			}, trimsplit(',', $GLOBALS['TL_CONFIG']['fileSyncExclude']));
+			list($type, $file) = explode('] ', trim(substr($buffer, 1)), 2);
+
+			// Add a message depending on the type
+			switch ($type)
+			{
+				case 'Added';
+					$arrMessages[] = '<p class="tl_new">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncAdded'], $file) . '</p>';
+					break;
+
+				case 'Changed';
+					$arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncChanged'], $file) . '</p>';
+					break;
+
+				case 'Unchanged';
+					$arrMessages[] = '<p class="tl_confirm hidden">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncUnchanged'], $file) . '</p>';
+					break;
+
+				case 'Moved';
+					list($source, $target) = explode(' to ', $file, 2);
+					$arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncMoved'], $source, $target) . '</p>';
+					break;
+
+				case 'Deleted';
+					$arrMessages[] = '<p class="tl_error">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncDeleted'], $file) . '</p>';
+					break;
+			}
+
+			++$arrCounts[$type];
 		}
 
-		// Traverse the file system
-		$this->execSync($GLOBALS['TL_CONFIG']['uploadPath'], 0, $arrExempt);
+		// Close the log file
+		unset($buffer);
+		fclose($fh);
 
-		// Check for left-over entries in the DB
-		$objFiles = \FilesModel::findByFound('');
-
-		if ($objFiles !== null)
-		{
-			$arrFiles = array();
-			$arrFolders = array();
-
-			while ($objFiles->next())
-			{
-				if ($objFiles->type == 'file')
-				{
-					$arrFiles[] = $objFiles->current();
-				}
-				else
-				{
-					$arrFolders[] = $objFiles->current();
-				}
-			}
-
-			// Check whether a folder has moved
-			foreach ($arrFolders as $objFolder)
-			{
-				$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFolder->hash);
-
-				if ($objFound !== null)
-				{
-					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFound'], $objFolder->path, $objFound->path) . '</p>';
-
-					// Update the original entry
-					$objFolder->pid    = $objFound->pid;
-					$objFolder->tstamp = $objFound->tstamp;
-					$objFolder->name   = $objFound->name;
-					$objFolder->type   = $objFound->type;
-					$objFolder->path   = $objFound->path;
-
-					// Update the PID of the child records
-					$objChildren = \FilesModel::findByPid($objFound->id);
-
-					if ($objChildren !== null)
-					{
-						while ($objChildren->next())
-						{
-							$objChildren->pid = $objFolder->id;
-							$objChildren->save();
-						}
-					}
-
-					// Delete the newer (duplicate) entry
-					$objFound->delete();
-
-					// Then save the modified original entry (prevents duplicate key errors)
-					$objFolder->save();
-				}
-				else
-				{
-					// Delete the entry if the folder has gone
-					$objFolder->delete();
-					$this->arrMessages[] = '<p class="tl_error">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncRemoved'], $objFolder->path) . '</p>';
-				}
-			}
-
-			// Check whether a file has moved
-			foreach ($arrFiles as $objFile)
-			{
-				$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFile->hash);
-
-				if ($objFound !== null)
-				{
-					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFound'], $objFile->path, $objFound->path) . '</p>';
-
-					// Update the original entry
-					$objFile->pid    = $objFound->pid;
-					$objFile->tstamp = $objFound->tstamp;
-					$objFile->name   = $objFound->name;
-					$objFile->type   = $objFound->type;
-					$objFile->path   = $objFound->path;
-
-					// Delete the newer (duplicate) entry
-					$objFound->delete();
-
-					// Then save the modified original entry (prevents duplicate key errors)
-					$objFile->save();
-				}
-				else
-				{
-					// Delete the entry if the file has gone
-					$objFile->delete();
-					$this->arrMessages[] = '<p class="tl_error">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncRemoved'], $objFile->path) . '</p>';
-				}
-			}
-		}
+		// Confirm
+		\Message::addConfirmation($GLOBALS['TL_LANG']['tl_files']['syncComplete']);
 
 		$return = '
 <div id="tl_buttons">
@@ -2368,10 +1838,15 @@ window.addEvent(\'domready\', function() {
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_files']['sync'][1].'</h2>
 '.\Message::generate().'
-<div class="tl_message nobg" style="margin-bottom:2em">';
+<div id="sync-results">
+  <p class="left">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncResult'], \System::getFormattedNumber($arrCounts['Added'], 0), \System::getFormattedNumber($arrCounts['Changed'], 0), \System::getFormattedNumber($arrCounts['Unchanged'], 0), \System::getFormattedNumber($arrCounts['Moved'], 0), \System::getFormattedNumber($arrCounts['Deleted'], 0)) . '</p>
+  <p class="right"><input type="checkbox" id="show-hidden" class="tl_checkbox" onclick="Backend.toggleUnchanged()"> <label for="show-hidden">' . $GLOBALS['TL_LANG']['tl_files']['syncShowUnchanged'] . '</label></p>
+  <div class="clear"></div>
+</div>
+<div class="tl_message nobg" id="result-list" style="margin-bottom:2em">';
 
 		// Add the messages
-		foreach ($this->arrMessages as $strMessage)
+		foreach ($arrMessages as $strMessage)
 		{
 			$return .= "\n  " . $strMessage;
 		}
@@ -2385,132 +1860,6 @@ window.addEvent(\'domready\', function() {
 ';
 
 		return $return;
-	}
-
-
-	/**
-	 * Recursively synchronize the file system
-	 * @param string
-	 * @param integer
-	 * @param array
-	 */
-	protected function execSync($strPath, $intPid=0, $arrExempt=array())
-	{
-		if (!$this->blnIsDbAssisted)
-		{
-			return;
-		}
-
-		// Exempt folders (see #4522)
-		if (in_array($strPath, $arrExempt))
-		{
-			return;
-		}
-
-		$arrFiles = array();
-		$arrFolders = array();
-		$arrScan = scan(TL_ROOT . '/' . $strPath);
-
-		// Separate files from folders
-		foreach ($arrScan as $strFile)
-		{
-			if ($strFile == '.svn' || $strFile == '.DS_Store')
-			{
-				continue;
-			}
-
-			if (is_dir(TL_ROOT . '/' . $strPath . '/' . $strFile))
-			{
-				$arrFolders[] = $strPath . '/' . $strFile;
-			}
-			else
-			{
-				$arrFiles[] = $strPath . '/' . $strFile;
-			}
-		}
-
-		// Folders
-		foreach ($arrFolders as $strFolder)
-		{
-			// Exempt folders (see #4522)
-			if (in_array($strFolder, $arrExempt))
-			{
-				continue;
-			}
-
-			$objFolder = new \Folder($strFolder);
-			$objModel = \FilesModel::findByPath($strFolder);
-
-			// Create the entry if it does not yet exist
-			if ($objModel === null)
-			{
-				$objModel = new \FilesModel();
-				$objModel->pid    = $intPid;
-				$objModel->tstamp = time();
-				$objModel->name   = basename($strFolder);
-				$objModel->type   = 'folder';
-				$objModel->path   = $strFolder;
-				$objModel->hash   = $objFolder->hash;
-				$objModel->found  = 1;
-				$objModel->save();
-
-				$this->arrMessages[] = '<p class="tl_new">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderC'], $strFolder) . '</p>';
-			}
-			else
-			{
-				// Update the hash if the folder has changed
-				if ($objModel->hash != $objFolder->hash)
-				{
-					$objModel->hash = $objFolder->hash;
-					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderH'], $strFolder) . '</p>';
-				}
-
-				$objModel->found = 1;
-				$objModel->save();
-
-				$this->arrMessages[] = '<p class="tl_confirm">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderF'], $strFolder) . '</p>';
-			}
-
-			$this->execSync($strFolder, $objModel->id, $arrExempt);
-		}
-
-		// Files
-		foreach ($arrFiles as $strFile)
-		{
-			$objFile = new \File($strFile, true);
-			$objModel = \FilesModel::findByPath($strFile);
-
-			// Create the entry if it does not yet exist
-			if ($objModel === null)
-			{
-				$objModel = new \FilesModel();
-				$objModel->pid       = $intPid;
-				$objModel->tstamp    = time();
-				$objModel->name      = basename($strFile);
-				$objModel->type      = 'file';
-				$objModel->path      = $strFile;
-				$objModel->extension = $objFile->extension;
-				$objModel->hash      = $objFile->hash;
-				$objModel->found     = 1;
-				$objModel->save();
-
-				$this->arrMessages[] = '<p class="tl_new">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileC'], $strFile) . '</p>';
-			}
-			else
-			{
-				// Update the hash if the file has changed
-				if ($objModel->hash != $objFile->hash)
-				{
-					$objModel->hash = $objFile->hash;
-					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileH'], $strFile) . '</p>';
-				}
-
-				$objModel->found = 1;
-				$objModel->save();
-
-				$this->arrMessages[] = '<p class="tl_confirm">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileF'], $strFile) . '</p>';
-			}
-		}
 	}
 
 
@@ -2548,6 +1897,8 @@ window.addEvent(\'domready\', function() {
 		}
 
 		$this->import('Files');
+		$this->import('BackendUser', 'User');
+
 		return $this->generateTree(TL_ROOT.'/'.$strFolder, ($level * 20), false, false, ($blnClipboard ? $arrClipboard : false));
 	}
 
@@ -2621,9 +1972,9 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Folders
-		for ($f=0; $f<count($folders); $f++)
+		for ($f=0, $c=count($folders); $f<$c; $f++)
 		{
-			$md5 = md5($folders[$f]);
+			$md5 = substr(md5($folders[$f]), 0, 8);
 			$content = scan($folders[$f]);
 			$currentFolder = str_replace(TL_ROOT.'/', '', $folders[$f]);
 			$session['filetree'][$md5] = is_numeric($session['filetree'][$md5]) ? $session['filetree'][$md5] : 0;
@@ -2652,32 +2003,42 @@ window.addEvent(\'domready\', function() {
 				}
 			}
 
-			$return .= "\n  " . '<li class="tl_folder" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left" style="padding-left:'.($intMargin + (($countFiles < 1) ? 20 : 0)).'px">';
+			$return .= "\n  " . '<li class="tl_folder click2edit" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)" onclick="Theme.toggleSelect(this)"><div class="tl_left" style="padding-left:'.($intMargin + (($countFiles < 1) ? 20 : 0)).'px">';
 
 			// Add a toggle button if there are childs
 			if ($countFiles > 0)
 			{
 				$img = ($session['filetree'][$md5] == 1) ? 'folMinus.gif' : 'folPlus.gif';
 				$alt = ($session['filetree'][$md5] == 1) ? $GLOBALS['TL_LANG']['MSC']['collapseNode'] : $GLOBALS['TL_LANG']['MSC']['expandNode'];
-				$return .= '<a href="'.$this->addToUrl('tg='.$md5).'" title="'.specialchars($alt).'" onclick="Backend.getScrollOffset(); return AjaxRequest.toggleFileManager(this, \'filetree_'.$md5.'\', \''.$currentFolder.'\', '.$level.')">'.$this->generateImage($img, '', 'style="margin-right:2px"').'</a>';
+				$return .= '<a href="'.$this->addToUrl('tg='.$md5).'" title="'.specialchars($alt).'" onclick="Backend.getScrollOffset(); return AjaxRequest.toggleFileManager(this, \'filetree_'.$md5.'\', \''.$currentFolder.'\', '.$level.')">'.\Image::getHtml($img, '', 'style="margin-right:2px"').'</a>';
 			}
 
 			$protected = ($blnProtected === true || array_search('.htaccess', $content) !== false) ? true : false;
 			$folderImg = ($session['filetree'][$md5] == 1 && $countFiles > 0) ? ($protected ? 'folderOP.gif' : 'folderO.gif') : ($protected ? 'folderCP.gif' : 'folderC.gif');
 
 			// Add the current folder
-			$return .= $this->generateImage($folderImg, '').' <a href="' . $this->addToUrl('node='.$currentEncoded) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'"><strong>'.specialchars(basename($currentFolder)).'</strong></a></div> <div class="tl_right">';
+			$return .= \Image::getHtml($folderImg, '').' <a href="' . $this->addToUrl('node='.$currentEncoded) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'"><strong>'.specialchars(basename($currentFolder)).'</strong></a></div> <div class="tl_right">';
 
 			// Paste buttons
 			if ($arrClipboard !== false && \Input::get('act') != 'select')
 			{
-				$imagePasteInto = $this->generateImage('pasteinto.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0]);
-				$return .= (($arrClipboard['mode'] == 'cut' || $arrClipboard['mode'] == 'copy') && preg_match('/^' . preg_quote($arrClipboard['id'], '/') . '/i', $currentFolder)) ? $this->generateImage('pasteinto_.gif') : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$currentEncoded.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1]).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a> ';
+				$imagePasteInto = \Image::getHtml('pasteinto.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0]);
+				$return .= (($arrClipboard['mode'] == 'cut' || $arrClipboard['mode'] == 'copy') && preg_match('/^' . preg_quote($arrClipboard['id'], '/') . '/i', $currentFolder)) ? \Image::getHtml('pasteinto_.gif') : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$currentEncoded.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1]).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a> ';
 			}
-			// Default buttons (do not display buttons for mounted folders)
-			elseif (!$mount)
+			// Default buttons
+			else
 			{
-				$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded), $this->strTable);
+				// Do not display buttons for mounted folders
+				if ($this->User->isAdmin || !in_array($currentFolder, $this->User->filemounts))
+				{
+					$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded), $this->strTable);
+				}
+
+				// Upload button
+				if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && \Input::get('act') != 'select')
+				{
+					$return .= ' <a href="'.$this->addToUrl('&amp;act=move&amp;mode=2&amp;pid='.$currentEncoded).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG']['tl_files']['uploadFF'], $currentEncoded)).'">'.\Image::getHtml('new.gif', $GLOBALS['TL_LANG'][$this->strTable]['move'][0]).'</a>';
+				}
 			}
 
 			$return .= '</div><div style="clear:both"></div></li>';
@@ -2692,7 +2053,7 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Process files
-		for ($h=0; $h<count($files); $h++)
+		for ($h=0, $c=count($files); $h<$c; $h++)
 		{
 			$thumbnail = '';
 			$popupWidth = 600;
@@ -2707,13 +2068,13 @@ window.addEvent(\'domready\', function() {
 			}
 
 			$currentEncoded = $this->urlEncode($currentFile);
-			$return .= "\n  " . '<li class="tl_file" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
+			$return .= "\n  " . '<li class="tl_file click2edit" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)" onclick="Theme.toggleSelect(this)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
 
 			// Generate the thumbnail
 			if ($objFile->isGdImage && $objFile->height > 0)
 			{
 				$popupWidth = ($objFile->width > 600) ? ($objFile->width + 61) : 661;
-				$popupHeight = ($objFile->height + 245);
+				$popupHeight = ($objFile->height + 255);
 				$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize).', '.$objFile->width.'x'.$objFile->height.' px)</span>';
 
 				if ($GLOBALS['TL_CONFIG']['thumbnails'] && $objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
@@ -2734,11 +2095,11 @@ window.addEvent(\'domready\', function() {
 			// No popup links for templates and in the popup file manager
 			if ($this->strTable == 'tl_templates' || basename(\Environment::get('scriptName')) == 'files.php')
 			{
-				$return .= $this->generateImage($objFile->icon).' '.$strFileNameEncoded.$thumbnail.'</div> <div class="tl_right">';
+				$return .= \Image::getHtml($objFile->icon).' '.$strFileNameEncoded.$thumbnail.'</div> <div class="tl_right">';
 			}
 			else
 			{
-				$return .= '<a href="contao/popup.php?src='.base64_encode($currentEncoded).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openModalIframe({\'width\':'.$popupWidth.',\'title\':\''.str_replace("'", "\\'", $strFileNameEncoded).'\',\'url\':this.href,\'height\':'.$popupHeight.'});return false">' . $this->generateImage($objFile->icon, $objFile->mime).'</a> '.$strFileNameEncoded.$thumbnail.'</div> <div class="tl_right">';
+				$return .= '<a href="contao/popup.php?src='.base64_encode($currentEncoded).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openModalIframe({\'width\':'.$popupWidth.',\'title\':\''.str_replace("'", "\\'", $strFileNameEncoded).'\',\'url\':this.href,\'height\':'.$popupHeight.'});return false">' . \Image::getHtml($objFile->icon, $objFile->mime).'</a> '.$strFileNameEncoded.$thumbnail.'</div> <div class="tl_right">';
 			}
 
 			// Buttons
@@ -2841,7 +2202,9 @@ window.addEvent(\'domready\', function() {
 		// Do not allow file operations on root folders
 		if (\Input::get('act') == 'edit' || \Input::get('act') == 'paste' || \Input::get('act') == 'delete')
 		{
-			if (in_array($strFile, $this->arrFilemounts))
+			$this->import('BackendUser', 'User');
+
+			if (!$this->User->isAdmin && in_array($strFile, $this->User->filemounts))
 			{
 				$this->log('Attempt to edit, copy, move or delete the root folder "'.$strFile.'"', 'DC_Folder isValid()', TL_ERROR);
 				$this->redirect('contao/main.php?act=error');
@@ -2868,7 +2231,9 @@ window.addEvent(\'domready\', function() {
 				continue;
 			}
 
-			$arrFiles[md5(TL_ROOT . '/' . $strPath . '/' . $strFile)] = 1;
+			$strHash = md5(TL_ROOT . '/' . $strPath . '/' . $strFile);
+
+			$arrFiles[substr($strHash, 0, 8)] = 1;
 			$arrFiles = array_merge($arrFiles, $this->getMD5Folders($strPath . '/' . $strFile));
 		}
 

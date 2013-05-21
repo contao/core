@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -49,7 +49,7 @@ class ModuleWizard extends \Widget
 	{
 		$this->import('Database');
 
-		$arrButtons = array('copy', 'up', 'down', 'delete');
+		$arrButtons = array('edit', 'copy', 'delete', 'enable', 'drag', 'up', 'down');
 		$strCommand = 'cmd_' . $this->strField;
 
 		// Change the order
@@ -105,7 +105,7 @@ class ModuleWizard extends \Widget
 		$arrSections = deserialize($objRow->sections);
 
 		// Add custom page sections
-		if (is_array($arrSections) && !empty($arrSections))
+		if (!empty($arrSections) && is_array($arrSections))
 		{
 			$cols = array_merge($cols, $arrSections);
 		}
@@ -157,59 +157,84 @@ class ModuleWizard extends \Widget
 			}
 		}
 
+		// Initialize the tab index
+		if (!\Cache::has('tabindex'))
+		{
+			\Cache::set('tabindex', 1);
+		}
+
+		$tabindex = \Cache::get('tabindex');
+
 		// Add the label and the return wizard
 		$return = '<table id="ctrl_'.$this->strId.'" class="tl_modulewizard">
   <thead>
   <tr>
     <th>'.$GLOBALS['TL_LANG']['MSC']['mw_module'].'</th>
-    <th>&nbsp;</th>
     <th>'.$GLOBALS['TL_LANG']['MSC']['mw_column'].'</th>
     <th>&nbsp;</th>
   </tr>
   </thead>
-  <tbody>';
+  <tbody class="sortable" data-tabindex="'.$tabindex.'">';
 
 		// Load the tl_article language file
-		$this->loadLanguageFile('tl_article');
-		$tabindex = 0;
+		\System::loadLanguageFile('tl_article');
 
 		// Add the input fields
-		for ($i=0; $i<count($this->varValue); $i++)
+		for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 		{
 			$options = '';
 
 			// Add modules
 			foreach ($modules as $v)
 			{
-				$options .= '<option value="'.specialchars($v['id']).'"'.$this->optionSelected($v['id'], $this->varValue[$i]['mod']).'>'.$v['name'].' ['. $v['type'] .']</option>';
+				$options .= '<option value="'.specialchars($v['id']).'"'.static::optionSelected($v['id'], $this->varValue[$i]['mod']).'>'.$v['name'].' ['. $v['type'] .']</option>';
 			}
 
 			$return .= '
   <tr>
-    <td><select name="'.$this->strId.'['.$i.'][mod]" class="tl_select tl_chosen" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()" onchange="Backend.updateModuleLink(this)">'.$options.'</select></td>
-    <td><a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->varValue[$i]['mod'] . '&amp;rt=' . REQUEST_TOKEN . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_module']) . '" class="module_link" style="display:' . (($this->varValue[$i]['mod'] > 0) ? 'inline' : 'none') . '">'.$this->generateImage('edit.gif').'</a>'.$this->generateImage('edit_.gif', '', 'class="module_image" style="display:' . (($this->varValue[$i]['mod'] > 0) ? 'none' : 'inline') . '"').'</td>';
+    <td><select name="'.$this->strId.'['.$i.'][mod]" class="tl_select tl_chosen" tabindex="'.$tabindex++.'" onfocus="Backend.getScrollOffset()" onchange="Backend.updateModuleLink(this)">'.$options.'</select></td>';
 
 			$options = '';
 
 			// Add columns
 			foreach ($cols as $v)
 			{
-				$options .= '<option value="'.specialchars($v).'"'.$this->optionSelected($v, $this->varValue[$i]['col']).'>'. ((isset($GLOBALS['TL_LANG']['tl_article'][$v]) && !is_array($GLOBALS['TL_LANG']['tl_article'][$v])) ? $GLOBALS['TL_LANG']['tl_article'][$v] : $v) .'</option>';
+				$options .= '<option value="'.specialchars($v).'"'.static::optionSelected($v, $this->varValue[$i]['col']).'>'. ((isset($GLOBALS['TL_LANG']['tl_article'][$v]) && !is_array($GLOBALS['TL_LANG']['tl_article'][$v])) ? $GLOBALS['TL_LANG']['tl_article'][$v] : $v) .'</option>';
 			}
 
 			$return .= '
-    <td><select name="'.$this->strId.'['.$i.'][col]" class="tl_select_column" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()">'.$options.'</select></td>
+    <td><select name="'.$this->strId.'['.$i.'][col]" class="tl_select_column" tabindex="'.$tabindex++.'" onfocus="Backend.getScrollOffset()">'.$options.'</select></td>
     <td>';
 
 			// Add buttons
 			foreach ($arrButtons as $button)
 			{
-				$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['mw_'.$button]).'" onclick="Backend.moduleWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.$this->generateImage($button.'.gif', $GLOBALS['TL_LANG']['MSC']['mw_'.$button], 'class="tl_listwizard_img"').'</a> ';
+				$class = ($button == 'up' || $button == 'down') ? ' class="button-move"' : '';
+
+				if ($button == 'edit')
+				{
+					$return .= ' <a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->varValue[$i]['mod'] . '&amp;popup=1&amp;rt=' . REQUEST_TOKEN . '&amp;nb=1" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_module']) . '" class="module_link" ' . (($this->varValue[$i]['mod'] > 0) ? '' : ' style="display:none"') . ' onclick="Backend.openModalIframe({\'width\':765,\'title\':\'' . specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['tl_layout']['edit_module'])) . '\',\'url\':this.href});return false">'.\Image::getHtml('edit.gif').'</a>' . \Image::getHtml('edit_.gif', '', 'class="module_image"' . (($this->varValue[$i]['mod'] > 0) ? ' style="display:none"' : ''));
+				}
+				elseif ($button == 'drag')
+				{
+					$return .= ' ' . \Image::getHtml('drag.gif', '', 'class="drag-handle" title="' . sprintf($GLOBALS['TL_LANG']['MSC']['move']) . '"');
+				}
+				elseif ($button == 'enable')
+				{
+					$return .= ' ' . \Image::getHtml((($this->varValue[$i]['enable']) ? 'visible.gif' : 'invisible.gif'), '', 'class="mw_enable" title="' . sprintf($GLOBALS['TL_LANG']['MSC']['mw_enable']) . '"') . '<input name="'.$this->strId.'['.$i.'][enable]" type="checkbox" class="tl_checkbox mw_enable" value="1" tabindex="'.$tabindex++.'" onfocus="Backend.getScrollOffset()"'. (($this->varValue[$i]['enable']) ? ' checked' : '').'>';
+				}
+				else
+				{
+					$return .= ' <a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'"' . $class . ' title="'.specialchars($GLOBALS['TL_LANG']['MSC']['mw_'.$button]).'" onclick="Backend.moduleWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.\Image::getHtml($button.'.gif', $GLOBALS['TL_LANG']['MSC']['mw_'.$button], 'class="tl_listwizard_img"').'</a>';
+				}
 			}
 
 			$return .= '</td>
   </tr>';
 		}
+
+		// Store the tab index
+		\Cache::set('tabindex', $tabindex);
 
 		return $return.'
   </tbody>

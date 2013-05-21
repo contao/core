@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -45,12 +45,6 @@ class FormSelectMenu extends \Widget
 	 * @var string
 	 */
 	protected $strTemplate = 'form_widget';
-
-	/**
-	 * Options
-	 * @var array
-	 */
-	protected $arrOptions = array();
 
 
 	/**

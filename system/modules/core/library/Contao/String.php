@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,13 +15,13 @@ namespace Contao;
 
 /**
  * Provides string manipulation methods
- * 
+ *
  * Usage:
- * 
+ *
  *     $short = String::substr($str, 32);
  *     $html  = String::substrHtml($str, 32);
  *     $xhtml = String::toXhtml($html5);
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -41,11 +41,11 @@ class String
 	 *
 	 * The function preserves words, so the result might be a bit shorter or
 	 * longer than the number of characters given. It stips all tags.
-	 * 
+	 *
 	 * @param string  $strString        The string to shorten
 	 * @param integer $intNumberOfChars The target number of characters
 	 * @param string  $strEllipsis      An optional ellipsis to append to the shortened string
-	 * 
+	 *
 	 * @return string The shortened string
 	 */
 	public static function substr($strString, $intNumberOfChars, $strEllipsis=' …')
@@ -103,10 +103,10 @@ class String
 	 *
 	 * The function preserves words, so the result might be a bit shorter or
 	 * longer than the number of characters given. It preserves allowed tags.
-	 * 
+	 *
 	 * @param string  $strString        The string to shorten
 	 * @param integer $intNumberOfChars The target number of characters
-	 * 
+	 *
 	 * @return string The shortened HTML string
 	 */
 	public static function substrHtml($strString, $intNumberOfChars)
@@ -124,7 +124,7 @@ class String
 		// Seperate tags and text
 		$arrChunks = preg_split('/(<[^>]+>)/', $strString, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
-		for ($i=0; $i<count($arrChunks); $i++)
+		for ($i=0, $c=count($arrChunks); $i<$c; $i++)
 		{
 			// Buffer tags to include them later
 			if (preg_match('/<([^>]+)>/', $arrChunks[$i]))
@@ -145,7 +145,17 @@ class String
 			{
 				foreach ($arrTagBuffer as $strTag)
 				{
-					$strTagName = strtolower(substr(trim($strTag), 1, -1));
+					$strTagName = strtolower(trim($strTag));
+
+					// Extract the tag name (see #5669)
+					if (($pos = strpos($strTagName, ' ')) !== false)
+					{
+						$strTagName = substr($strTagName, 1, $pos - 1);
+					}
+					else
+					{
+						$strTagName = substr($strTagName, 1, -1);
+					}
 
 					// Skip empty tags
 					if (in_array($strTagName, $arrEmptyTags))
@@ -154,26 +164,24 @@ class String
 					}
 
 					// Store opening tags in the open_tags array
-					if (substr($strTag, 0, 2) != '</')
+					if (strncmp($strTagName, '/', 1) !== 0)
 					{
-						if (strlen($arrChunks[$i]) || $i<count($arrChunks))
+						if (!empty($arrChunks[$i]) || $i<$c)
 						{
-							$arrOpenTags[] = $strTag;
+							$arrOpenTags[] = $strTagName;
 						}
 
 						continue;
 					}
 
 					// Closing tags will be removed from the "open tags" array
-					if (strlen($arrChunks[$i]) || $i<count($arrChunks))
+					if (!empty($arrChunks[$i]) || $i<$c)
 					{
 						$arrOpenTags = array_values($arrOpenTags);
 
 						for ($j=count($arrOpenTags)-1; $j>=0; $j--)
 						{
-							$strOpenTag = trim(str_replace('<', '</', $arrOpenTags[$j]));
-
-							if ($strOpenTag == $strTag)
+							if ($strTagName == '/' . $arrOpenTags[$j])
 							{
 								unset($arrOpenTags[$j]);
 								break;
@@ -183,7 +191,7 @@ class String
 				}
 
 				// If the current chunk contains text, add tags and text to the return string
-				if (strlen($arrChunks[$i]) || $i<count($arrChunks))
+				if (strlen($arrChunks[$i]) || $i<$c)
 				{
 					$strReturn .= implode('', $arrTagBuffer) . $arrChunks[$i];
 				}
@@ -200,7 +208,7 @@ class String
 
 		foreach ($arrOpenTags as $strTag)
 		{
-			$strReturn .= str_replace('<', '</', $strTag);
+			$strReturn .= '</' . $strTag . '>';
 		}
 
 		return trim($strReturn);
@@ -209,11 +217,11 @@ class String
 
 	/**
 	 * Decode all entities
-	 * 
+	 *
 	 * @param string  $strString     The string to decode
 	 * @param integer $strQuoteStyle The quote style (defaults to ENT_COMPAT)
 	 * @param string  $strCharset    An optional charset
-	 * 
+	 *
 	 * @return string The decoded string
 	 */
 	public static function decodeEntities($strString, $strQuoteStyle=ENT_COMPAT, $strCharset=null)
@@ -237,9 +245,9 @@ class String
 
 	/**
 	 * Restore basic entities
-	 * 
+	 *
 	 * @param string $strBuffer The string with the tags to be replaced
-	 * 
+	 *
 	 * @return string The string with the original entities
 	 */
 	public static function restoreBasicEntities($strBuffer)
@@ -250,11 +258,11 @@ class String
 
 	/**
 	 * Censor a single word or an array of words within a string
-	 * 
+	 *
 	 * @param string $strString  The string to censor
 	 * @param mixed  $varWords   A string or array or words to replace
 	 * @param string $strReplace An optional replacement string
-	 * 
+	 *
 	 * @return string The cleaned string
 	 */
 	public static function censor($strString, $varWords, $strReplace='')
@@ -270,9 +278,9 @@ class String
 
 	/**
 	 * Encode all e-mail addresses within a string
-	 * 
+	 *
 	 * @param string $strString The string to encode
-	 * 
+	 *
 	 * @return string The encoded string
 	 */
 	public static function encodeEmail($strString)
@@ -306,12 +314,36 @@ class String
 
 
 	/**
+	 * Split a friendly-name e-address and return name and e-mail as array
+	 *
+	 * @param string $strEmail A friendly-name e-mail address
+	 *
+	 * @return array An array with name and e-mail address
+	 */
+	public static function splitFriendlyEmail($strEmail)
+	{
+		if (strpos($strEmail, '<') !== false)
+		{
+			return array_map('trim', explode(' <', str_replace('>', '', $strEmail)));
+		}
+		elseif (strpos($strEmail, '[') !== false)
+		{
+			return array_map('trim', explode(' [', str_replace(']', '', $strEmail)));
+		}
+		else
+		{
+			return array('', $strEmail);
+		}
+	}
+
+
+	/**
 	 * Wrap words after a particular number of characers
-	 * 
+	 *
 	 * @param string  $strString The string to wrap
 	 * @param integer $strLength The number of characters to wrap after
 	 * @param string  $strBreak  An optional break character
-	 * 
+	 *
 	 * @return string The wrapped string
 	 */
 	public static function wordWrap($strString, $strLength=75, $strBreak="\n")
@@ -322,12 +354,12 @@ class String
 
 	/**
 	 * Highlight a phrase within a string
-	 * 
+	 *
 	 * @param string $strString     The string
 	 * @param string $strPhrase     The phrase to highlight
 	 * @param string $strOpeningTag The opening tag (defaults to <strong>)
 	 * @param string $strClosingTag The closing tag (defaults to </strong>)
-	 * 
+	 *
 	 * @return string The highlighted string
 	 */
 	public static function highlight($strString, $strPhrase, $strOpeningTag='<strong>', $strClosingTag='</strong>')
@@ -343,10 +375,10 @@ class String
 
 	/**
 	 * Split a string of comma separated values
-	 * 
+	 *
 	 * @param string $strString    The string to split
 	 * @param string $strDelimiter An optional delimiter
-	 * 
+	 *
 	 * @return array The string chunks
 	 */
 	public static function splitCsv($strString, $strDelimiter=',')
@@ -364,9 +396,9 @@ class String
 
 	/**
 	 * Convert a string to XHTML
-	 * 
+	 *
 	 * @param string $strString The HTML5 string
-	 * 
+	 *
 	 * @return string The XHTML string
 	 */
 	public static function toXhtml($strString)
@@ -399,9 +431,9 @@ class String
 
 	/**
 	 * Convert a string to HTML5
-	 * 
+	 *
 	 * @param string $strString The XHTML string
-	 * 
+	 *
 	 * @return string The HTML5 string
 	 */
 	public static function toHtml5($strString)
@@ -432,12 +464,12 @@ class String
 
 	/**
 	 * Parse simple tokens that can be used to personalize newsletters
-	 * 
+	 *
 	 * @param string $strString The string to be parsed
 	 * @param array  $arrData   The replacement data
-	 * 
+	 *
 	 * @return string The converted string
-	 * 
+	 *
 	 * @throws \Exception If $strString cannot be parsed
 	 */
 	public static function parseSimpleTokens($strString, $arrData)
@@ -496,7 +528,7 @@ class String
 
 	/**
 	 * Prevent direct instantiation (Singleton)
-	 * 
+	 *
 	 * @deprecated String is now a static class
 	 */
 	protected function __construct() {}
@@ -504,7 +536,7 @@ class String
 
 	/**
 	 * Prevent cloning of the object (Singleton)
-	 * 
+	 *
 	 * @deprecated String is now a static class
 	 */
 	final public function __clone() {}
@@ -512,9 +544,9 @@ class String
 
 	/**
 	 * Return the object instance (Singleton)
-	 * 
+	 *
 	 * @return \String The object instance
-	 * 
+	 *
 	 * @deprecated String is now a static class
 	 */
 	public static function getInstance()

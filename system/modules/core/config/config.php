@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -21,13 +21,13 @@ $GLOBALS['BE_MOD'] = array
 	(
 		'article' => array
 		(
-			'tables' => array('tl_article', 'tl_content'),
-			'table' => array('TableWizard', 'importTable'),
-			'list' => array('ListWizard', 'importList')
+			'tables'      => array('tl_article', 'tl_content'),
+			'table'       => array('TableWizard', 'importTable'),
+			'list'        => array('ListWizard', 'importList')
 		),
 		'form' => array
 		(
-			'tables' => array('tl_form', 'tl_form_field')
+			'tables'      => array('tl_form', 'tl_form_field')
 		)
 	),
 
@@ -36,19 +36,19 @@ $GLOBALS['BE_MOD'] = array
 	(
 		'themes' => array
 		(
-			'tables' => array('tl_theme', 'tl_module', 'tl_style_sheet', 'tl_style', 'tl_layout'),
+			'tables'      => array('tl_theme', 'tl_module', 'tl_style_sheet', 'tl_style', 'tl_layout'),
 			'importTheme' => array('Theme', 'importTheme'),
 			'exportTheme' => array('Theme', 'exportTheme'),
-			'import' => array('StyleSheets', 'importStyleSheet')
+			'import'      => array('StyleSheets', 'importStyleSheet')
 		),
 		'page' => array
 		(
-			'tables' => array('tl_page')
+			'tables'      => array('tl_page')
 		),
 		'tpl_editor' => array
 		(
-			'tables' => array('tl_templates'),
-			'new_tpl' => array('tl_templates', 'addNewTemplate')
+			'tables'      => array('tl_templates'),
+			'new_tpl'     => array('tl_templates', 'addNewTemplate')
 		)
 	),
 
@@ -57,19 +57,19 @@ $GLOBALS['BE_MOD'] = array
 	(
 		'member' => array
 		(
-			'tables' => array('tl_member')
+			'tables'      => array('tl_member')
 		),
 		'mgroup' => array
 		(
-			'tables' => array('tl_member_group')
+			'tables'      => array('tl_member_group')
 		),
 		'user' => array
 		(
-			'tables' => array('tl_user')
+			'tables'      => array('tl_user')
 		),
 		'group' => array
 		(
-			'tables' => array('tl_user_group')
+			'tables'      => array('tl_user_group')
 		)
 	),
 
@@ -78,23 +78,23 @@ $GLOBALS['BE_MOD'] = array
 	(
 		'files' => array
 		(
-			'tables' => array('tl_files')
+			'tables'      => array('tl_files')
 		),
 		'log' => array
 		(
-			'tables' => array('tl_log')
+			'tables'      => array('tl_log')
 		),
 		'settings' => array
 		(
-			'tables' => array('tl_settings')
+			'tables'      => array('tl_settings')
 		),
 		'maintenance' => array
 		(
-			'callback' => 'ModuleMaintenance'
+			'callback'    => 'ModuleMaintenance'
 		),
 		'undo' => array
 		(
-			'tables' => array('tl_undo')
+			'tables'      => array('tl_undo')
 		)
 	)
 );
@@ -148,38 +148,48 @@ $GLOBALS['TL_CTE'] = array
 (
 	'texts' => array
 	(
-		'headline'  => 'ContentHeadline',
-		'text'      => 'ContentText',
-		'html'      => 'ContentHtml',
-		'list'      => 'ContentList',
-		'table'     => 'ContentTable',
-		'accordion' => 'ContentAccordion',
-		'code'      => 'ContentCode'
+		'headline'        => 'ContentHeadline',
+		'text'            => 'ContentText',
+		'html'            => 'ContentHtml',
+		'list'            => 'ContentList',
+		'table'           => 'ContentTable',
+		'code'            => 'ContentCode'
+	),
+	'accordion' => array
+	(
+		'accordionSingle' => 'ContentAccordion',
+		'accordionStart'  => 'ContentAccordionStart',
+		'accordionStop'   => 'ContentAccordionStop'
+	),
+	'slider' => array
+	(
+		'sliderStart'     => 'ContentSliderStart',
+		'sliderStop'      => 'ContentSliderStop'
 	),
 	'links' => array
 	(
-		'hyperlink' => 'ContentHyperlink',
-		'toplink'   => 'ContentToplink'
+		'hyperlink'       => 'ContentHyperlink',
+		'toplink'         => 'ContentToplink'
 	),
 	'media' => array
 	(
-		'image'     => 'ContentImage',
-		'gallery'   => 'ContentGallery',
-		'player'    => 'ContentMedia',
-		'youtube'   => 'ContentYouTube'
+		'image'           => 'ContentImage',
+		'gallery'         => 'ContentGallery',
+		'player'          => 'ContentMedia',
+		'youtube'         => 'ContentYouTube'
 	),
 	'files' => array
 	(
-		'download'  => 'ContentDownload',
-		'downloads' => 'ContentDownloads'
+		'download'        => 'ContentDownload',
+		'downloads'       => 'ContentDownloads'
 	),
 	'includes' => array
 	(
-		'article'   => 'ContentArticle',
-		'alias'     => 'ContentAlias',
-		'form'      => 'Form',
-		'module'    => 'ContentModule',
-		'teaser'    => 'ContentTeaser'
+		'article'         => 'ContentArticle',
+		'alias'           => 'ContentAlias',
+		'form'            => 'Form',
+		'module'          => 'ContentModule',
+		'teaser'          => 'ContentTeaser'
 	)
 );
 
@@ -285,6 +295,11 @@ $GLOBALS['TL_PURGE'] = array
 		(
 			'callback' => array('Automator', 'purgeVersionTable'),
 			'affected' => array('tl_version')
+		),
+		'log' => array
+		(
+			'callback' => array('Automator', 'purgeSystemLog'),
+			'affected' => array('tl_log')
 		)
 	),
 	'folders' => array
@@ -307,7 +322,7 @@ $GLOBALS['TL_PURGE'] = array
 		'internal' => array
 		(
 			'callback' => array('Automator', 'purgeInternalCache'),
-			'affected' => array('system/cache/dca', 'system/cache/language', 'system/cache/sql')
+			'affected' => array('system/cache/config', 'system/cache/dca', 'system/cache/language', 'system/cache/sql')
 		),
 		'temp' => array
 		(
@@ -384,9 +399,34 @@ $GLOBALS['TL_HOOKS'] = array
 
 
 /**
- * Ignore the auto_item keywords when rebuilding the search index URLs
+ * Register the auto_item keywords
  */
 $GLOBALS['TL_AUTO_ITEM'] = array('items', 'events');
+
+
+/**
+ * Do not index a page if one of the following parameters is set
+ */
+$GLOBALS['TL_NOINDEX_KEYS'] = array('id', 'file', 'token', 'day', 'month', 'year', 'page', 'PHPSESSID');
+
+
+/**
+ * Wrapper elements
+ */
+$GLOBALS['TL_WRAPPERS'] = array
+(
+	'start' => array
+	(
+		'accordionStart',
+		'sliderStart'
+	),
+	'stop' => array
+	(
+		'accordionStop',
+		'sliderStop'
+	),
+	'separator' => array()
+);
 
 
 /**

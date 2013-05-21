@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Listing
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -51,7 +51,7 @@ class ModuleListing extends \Module
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### LISTING ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['listing'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -90,7 +90,7 @@ class ModuleListing extends \Module
 	 */
 	protected function compile()
 	{
-		$this->loadLanguageFile($this->list_table);
+		\System::loadLanguageFile($this->list_table);
 		$this->loadDataContainer($this->list_table);
 
 		// List a single record
@@ -111,7 +111,7 @@ class ModuleListing extends \Module
 		$this->Template->searchable = false;
 		$arrSearchFields = trimsplit(',', $this->list_search);
 
-		if (is_array($arrSearchFields) && !empty($arrSearchFields))
+		if (!empty($arrSearchFields) && is_array($arrSearchFields))
 		{
 			$this->Template->searchable = true;
 
@@ -234,7 +234,7 @@ class ModuleListing extends \Module
 		$arrFields = trimsplit(',', $this->list_fields);
 
 		// THEAD
-		for ($i=0; $i<count($arrFields); $i++)
+		for ($i=0, $c=count($arrFields); $i<$c; $i++)
 		{
 			// Never show passwords
 			if ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$arrFields[$i]]['inputType'] == 'password')
@@ -266,7 +266,7 @@ class ModuleListing extends \Module
 		$arrRows = $objData->fetchAllAssoc();
 
 		// TBODY
-		for ($i=0; $i<count($arrRows); $i++)
+		for ($i=0, $c=count($arrRows); $i<$c; $i++)
 		{
 			$j = 0;
 			$class = 'row_' . $i . (($i == 0) ? ' row_first' : '') . ((($i + 1) == count($arrRows)) ? ' row_last' : '') . ((($i % 2) == 0) ? ' even' : ' odd');
@@ -306,7 +306,7 @@ class ModuleListing extends \Module
 		/**
 		 * Pagination
 		 */
-		$objPagination = new \Pagination($objTotal->count, $per_page, 7, $id);
+		$objPagination = new \Pagination($objTotal->count, $per_page, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
 		$this->Template->pagination = $objPagination->generate("\n  ");
 		$this->Template->per_page = $per_page;
 
@@ -314,7 +314,7 @@ class ModuleListing extends \Module
 		/**
 		 * Template variables
 		 */
-		$this->Template->action = $this->getIndexFreeRequest();
+		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->details = ($this->list_info != '') ? true : false;
 		$this->Template->search_label = specialchars($GLOBALS['TL_LANG']['MSC']['search']);
 		$this->Template->per_page_label = specialchars($GLOBALS['TL_LANG']['MSC']['list_perPage']);
@@ -413,19 +413,19 @@ class ModuleListing extends \Module
 		// Date
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'date')
 		{
-			$value = $this->parseDate($objPage->dateFormat, $value);
+			$value = \Date::parse($objPage->dateFormat, $value);
 		}
 
 		// Time
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'time')
 		{
-			$value = $this->parseDate($objPage->timeFormat, $value);
+			$value = \Date::parse($objPage->timeFormat, $value);
 		}
 
 		// Date and time
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'datim')
 		{
-			$value = $this->parseDate($objPage->datimFormat, $value);
+			$value = \Date::parse($objPage->datimFormat, $value);
 		}
 
 		// URLs

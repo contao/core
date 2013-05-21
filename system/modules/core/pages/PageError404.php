@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -66,7 +66,7 @@ class PageError404 extends \Frontend
 			}
 
 			// Only redirect if there is no language fragment (see #4669)
-			if ($strRequest != '' && !preg_match('@^[a-z]{2}/@', $strRequest))
+			if ($strRequest != '' && !preg_match('@^[a-z]{2}(\-[A-Z]{2})?/@', $strRequest))
 			{
 				$this->redirect($objRootPage->language . '/' . \Environment::get('request'), 301);
 			}
@@ -87,7 +87,7 @@ class PageError404 extends \Frontend
 		{
 			global $objPage;
 
-			$objPage = $this->getPageDetails($obj404);
+			$objPage = $obj404->loadDetails();
 			$objHandler = new $GLOBALS['TL_PTY']['regular']();
 
 			header('HTTP/1.1 404 Not Found');

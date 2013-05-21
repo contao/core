@@ -1,0 +1,54 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/modules.php" source-language="en">
+    <body>
+      <trans-unit id="MOD.newsletter.0">
+        <source>Newsletters</source>
+        <target>Bulletins d'information</target>
+      </trans-unit>
+      <trans-unit id="MOD.newsletter.1">
+        <source>Manage subscriptions and send newsletters</source>
+        <target>Gérer les abonnements et envoyer des bulletins d'information.</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_newsletter_recipients">
+        <source>Recipients</source>
+        <target>Destinataires</target>
+      </trans-unit>
+      <trans-unit id="FMD.newsletter">
+        <source>Newsletter</source>
+        <target>Bulletin d'information</target>
+      </trans-unit>
+      <trans-unit id="FMD.subscribe.0">
+        <source>Subscribe</source>
+        <target>S'abonner</target>
+      </trans-unit>
+      <trans-unit id="FMD.subscribe.1">
+        <source>Generates a form to subscribe to one or more channels</source>
+        <target>Génère un formulaire pour s'abonner à une ou plusieurs listes de diffusion.</target>
+      </trans-unit>
+      <trans-unit id="FMD.unsubscribe.0">
+        <source>Unsubscribe</source>
+        <target>Se désabonner</target>
+      </trans-unit>
+      <trans-unit id="FMD.unsubscribe.1">
+        <source>Generates a form to unsubscribe from one or more channels</source>
+        <target>Génère un formulaire pour se désabonner à une ou plusieurs listes de diffusion.</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_list.0">
+        <source>Newsletter list</source>
+        <target>Liste de bulletins d'information</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_list.1">
+        <source>Adds a list of newsletters to the page</source>
+        <target>Ajoute une liste de bulletins d'information à une page.</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_reader.0">
+        <source>Newsletter reader</source>
+        <target>Lecteur de bulletins d'information</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_reader.1">
+        <source>Shows the details of a newsletter</source>
+        <target>Affiche les détails d'un bulletin d'information.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

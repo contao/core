@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Library
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -15,7 +15,7 @@ namespace Contao\Database;
 
 /**
  * MySQLi-specific database class
- * 
+ *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
@@ -38,10 +38,18 @@ class Mysqli extends \Database
 
 	/**
 	 * Connect to the database server and select the database
+	 *
+	 * @throws \Exception If the connection cannot be established
 	 */
 	protected function connect()
 	{
-		@$this->resConnection = new \mysqli($this->arrConfig['dbHost'], $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbDatabase'], $this->arrConfig['dbPort']);
+		@$this->resConnection = new \mysqli($this->arrConfig['dbHost'], $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbDatabase'], $this->arrConfig['dbPort'], $this->arrConfig['dbSocket']);
+
+		if ($this->resConnection->connect_error)
+		{
+			throw new \Exception($this->resConnection->connect_error);
+		}
+
 		@$this->resConnection->set_charset($this->arrConfig['dbCharset']);
 	}
 
@@ -57,7 +65,7 @@ class Mysqli extends \Database
 
 	/**
 	 * Return the last error message
-	 * 
+	 *
 	 * @return string The error message
 	 */
 	protected function get_error()
@@ -68,11 +76,11 @@ class Mysqli extends \Database
 
 	/**
 	 * Auto-generate a FIND_IN_SET() statement
-	 * 
+	 *
 	 * @param string  $strKey     The field name
 	 * @param mixed   $varSet     The set to find the key in
 	 * @param boolean $blnIsField If true, the set will not be quoted
-	 * 
+	 *
 	 * @return string The FIND_IN_SET() statement
 	 */
 	protected function find_in_set($strKey, $varSet, $blnIsField=false)
@@ -100,11 +108,11 @@ class Mysqli extends \Database
 	 * * attributes: attributes (e.g. "unsigned")
 	 * * index:      PRIMARY, UNIQUE or INDEX
 	 * * extra:      extra information (e.g. auto_increment)
-	 * 
+	 *
 	 * @param string $strTable The table name
-	 * 
+	 *
 	 * @return array An array with the field information
-	 * 
+	 *
 	 * @todo Support all kind of keys (e.g. FULLTEXT or FOREIGN)
 	 */
 	protected function list_fields($strTable)
@@ -119,25 +127,25 @@ class Mysqli extends \Database
 			$arrReturn[$k]['name'] = $v['Field'];
 			$arrReturn[$k]['type'] = $arrChunks[0];
 
-			if (strlen($arrChunks[1]))
+			if (!empty($arrChunks[1]))
 			{
 				$arrChunks[1] = str_replace(array('(', ')'), array('', ''), $arrChunks[1]);
 				$arrSubChunks = explode(',', $arrChunks[1]);
 
 				$arrReturn[$k]['length'] = trim($arrSubChunks[0]);
 
-				if (strlen($arrSubChunks[1]))
+				if (!empty($arrSubChunks[1]))
 				{
 					$arrReturn[$k]['precision'] = trim($arrSubChunks[1]);
 				}
 			}
 
-			if (strlen($arrChunks[2]))
+			if (!empty($arrChunks[2]))
 			{
 				$arrReturn[$k]['attributes'] = trim($arrChunks[2]);
 			}
 
-			if (strlen($v['Key']))
+			if (!empty($v['Key']))
 			{
 				switch ($v['Key'])
 				{
@@ -180,14 +188,14 @@ class Mysqli extends \Database
 
 	/**
 	 * Change the current database
-	 * 
+	 *
 	 * @param string $strDatabase The name of the target database
-	 * 
+	 *
 	 * @return boolean True if the database was changed successfully
 	 */
 	protected function set_database($strDatabase)
 	{
-		@$this->resConnection = new \mysqli($this->arrConfig['dbHost'], $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $strDatabase, $this->arrConfig['dbPort']);
+		@$this->resConnection = new \mysqli($this->arrConfig['dbHost'], $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $strDatabase, $this->arrConfig['dbPort'], $this->arrConfig['dbSocket']);
 	}
 
 
@@ -223,7 +231,7 @@ class Mysqli extends \Database
 
 	/**
 	 * Lock one or more tables
-	 * 
+	 *
 	 * @param array $arrTables An array of table names
 	 */
 	protected function lock_tables($arrTables)
@@ -250,9 +258,9 @@ class Mysqli extends \Database
 
 	/**
 	 * Return the table size in bytes
-	 * 
+	 *
 	 * @param string $strTable The table name
-	 * 
+	 *
 	 * @return integer The table size in bytes
 	 */
 	protected function get_size_of($strTable)
@@ -266,9 +274,9 @@ class Mysqli extends \Database
 
 	/**
 	 * Return the next autoincrement ID of a table
-	 * 
+	 *
 	 * @param string The table name
-	 * 
+	 *
 	 * @return integer The autoincrement ID
 	 */
 	protected function get_next_id($strTable)
@@ -282,10 +290,10 @@ class Mysqli extends \Database
 
 	/**
 	 * Create a Database\Statement object
-	 * 
+	 *
 	 * @param resource $resConnection        The connection ID
 	 * @param boolean  $blnDisableAutocommit If true, autocommitting will be disabled
-	 * 
+	 *
 	 * @return \Database\Mysqli\Statement The Database\Statement object
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)

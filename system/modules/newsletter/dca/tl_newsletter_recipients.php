@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Newsletter
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -159,6 +159,15 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 		'addedOn' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['addedOn'],
+			'filter'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 8,
+			'eval'                    => array('rgxp'=>'datim'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
+		),
+		'confirmed' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['confirmed'],
 			'filter'                  => true,
 			'sorting'                 => true,
 			'flag'                    => 8,
@@ -330,14 +339,14 @@ class tl_newsletter_recipients extends Backend
 
 		if ($row['addedOn'])
 		{
-			$label .= ' <span style="color:#b3b3b3;padding-left:3px">(' . sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['subscribed'], $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $row['addedOn'])) . ')</span>';
+			$label .= ' <span style="color:#b3b3b3;padding-left:3px">(' . sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['subscribed'], Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $row['addedOn'])) . ')</span>';
 		}
 		else
 		{
 			$label .= ' <span style="color:#b3b3b3;padding-left:3px">(' . $GLOBALS['TL_LANG']['tl_newsletter_recipients']['manually'] . ')</span>';
 		}
 
-		return sprintf('<div class="tl_content_left"><div class="list_icon" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">%s</div></div>', TL_ASSETS_URL, $this->getTheme(), ($row['active'] ? 'member' : 'member_'), $label) . "\n";
+		return sprintf('<div class="tl_content_left"><div class="list_icon" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">%s</div></div>', TL_ASSETS_URL, Backend::getTheme(), ($row['active'] ? 'member' : 'member_'), $label) . "\n";
 	}
 
 
@@ -372,7 +381,7 @@ class tl_newsletter_recipients extends Backend
 			$icon = 'invisible.gif';
 		}
 
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 
@@ -395,7 +404,8 @@ class tl_newsletter_recipients extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->createInitialVersion('tl_newsletter_recipients', $intId);
+		$objVersions = new Versions('tl_newsletter_recipients', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_newsletter_recipients']['fields']['active']['save_callback']))
@@ -411,6 +421,7 @@ class tl_newsletter_recipients extends Backend
 		$this->Database->prepare("UPDATE tl_newsletter_recipients SET tstamp=". time() .", active='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_newsletter_recipients', $intId);
+		$objVersions->create();
+		$this->log('A new version of record "tl_newsletter_recipients.id='.$intId.'" has been created'.$this->getParentEntries('tl_newsletter_recipients', $intId), 'tl_newsletter_recipients toggleVisibility()', TL_GENERAL);
 	}
 }

@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -45,8 +45,8 @@ class Help extends Backend
 
 		$this->User->authenticate();
 
-		$this->loadLanguageFile('default');
-		$this->loadLanguageFile('modules');
+		System::loadLanguageFile('default');
+		System::loadLanguageFile('modules');
 	}
 
 
@@ -58,7 +58,7 @@ class Help extends Backend
 		$table = Input::get('table');
 		$field = Input::get('field');
 
-		$this->loadLanguageFile($table);
+		System::loadLanguageFile($table);
 		$this->loadDataContainer($table);
 
 		$this->Template = new BackendTemplate('be_help');
@@ -157,7 +157,7 @@ class Help extends Backend
 		// Add an explanation
 		if (isset($arrData['explanation']))
 		{
-			$this->loadLanguageFile('explain');
+			System::loadLanguageFile('explain');
 			$key = $arrData['explanation'];
 
 			if (!is_array($GLOBALS['TL_LANG']['XPL'][$key]))
@@ -170,7 +170,7 @@ class Help extends Backend
 			}
 		}
 
-		$this->Template->theme = $this->getTheme();
+		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['helpWizardTitle']);

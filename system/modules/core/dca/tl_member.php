@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -229,7 +229,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'filter'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getCountries(),
+			'options'                 => System::getCountries(),
 			'eval'                    => array('includeBlankOption'=>true, 'chosen'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'address', 'tl_class'=>'w50'),
 			'sql'                     => "varchar(2) NOT NULL default ''"
 		),
@@ -284,9 +284,9 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getLanguages(),
-			'eval'                    => array('includeBlankOption'=>true, 'chosen'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'w50'),
-			'sql'                     => "varchar(2) NOT NULL default ''"
+			'options'                 => System::getLanguages(),
+			'eval'                    => array('includeBlankOption'=>true, 'chosen'=>true, 'rgxp'=>'locale', 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(5) NOT NULL default ''"
 		),
 		'groups' => array
 		(
@@ -403,6 +403,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		),
 		'session' => array
 		(
+			'eval'                    => array('doNotShow'=>true),
 			'sql'                     => "blob NULL"
 		),
 		'autologin' => array
@@ -460,7 +461,7 @@ class tl_member extends Backend
 			$image .= '_';
 		}
 
-		$args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">&nbsp;</div>', TL_ASSETS_URL, $this->getTheme(), $image);
+		$args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">&nbsp;</div>', TL_ASSETS_URL, Backend::getTheme(), $image);
 		return $args;
 	}
 
@@ -594,7 +595,7 @@ class tl_member extends Backend
 			$icon = 'invisible.gif';
 		}
 
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 
@@ -612,7 +613,8 @@ class tl_member extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->createInitialVersion('tl_member', $intId);
+		$objVersions = new Versions('tl_member', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_member']['fields']['disable']['save_callback']))
@@ -630,7 +632,8 @@ class tl_member extends Backend
 		$this->Database->prepare("UPDATE tl_member SET tstamp=$time, disable='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_member', $intId);
+		$objVersions->create();
+		$this->log('A new version of record "tl_member.id='.$intId.'" has been created'.$this->getParentEntries('tl_member', $intId), 'tl_member toggleVisibility()', TL_GENERAL);
 
 		// Remove the session if the user is disabled (see #5353)
 		if (!$blnVisible)

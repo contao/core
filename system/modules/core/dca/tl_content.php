@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -24,7 +24,10 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'enableVersioning'            => true,
 		'ptable'                      => '',
 		'dynamicPtable'               => true,
-		'onload_callback'             => array(),
+		'onload_callback'             => array
+		(
+			array('tl_content', 'showJsLibraryHint')
+		),
 		'sql' => array
 		(
 			'keys' => array
@@ -106,17 +109,18 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('type', 'mooType', 'addImage', 'sortable', 'useImage', 'protected'),
+		'__selector__'                => array('type', 'addImage', 'sortable', 'useImage', 'protected'),
 		'default'                     => '{type_legend},type',
 		'headline'                    => '{type_legend},type,headline;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'text'                        => '{type_legend},type,headline;{text_legend},text;{image_legend},addImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'html'                        => '{type_legend},type;{text_legend},html;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop',
 		'list'                        => '{type_legend},type,headline;{list_legend},listtype,listitems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'table'                       => '{type_legend},type,headline;{table_legend},tableitems;{tconfig_legend},summary,thead,tfoot,tleft;{sortable_legend:hide},sortable;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
-		'accordion'                   => '{type_legend},type,mooType',
-		'accordionmooSingle'          => '{type_legend},type,mooType;{moo_legend},mooHeadline,mooStyle,mooClasses;{text_legend},text;{image_legend},addImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
-		'accordionmooStart'           => '{type_legend},type,mooType;{moo_legend},mooHeadline,mooStyle,mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
-		'accordionmooStop'            => '{type_legend},type,mooType;{moo_legend},mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop',
+		'accordionStart'              => '{type_legend},type;{moo_legend},mooHeadline,mooStyle,mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
+		'accordionStop'               => '{type_legend},type;{moo_legend},mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop',
+		'accordionSingle'             => '{type_legend},type;{moo_legend},mooHeadline,mooStyle,mooClasses;{text_legend},text;{image_legend},addImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
+		'sliderStart'                 => '{type_legend},type,headline;{slider_legend},sliderDelay,sliderSpeed,sliderStartSlide,sliderContinuous;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
+		'sliderStop'                  => '{type_legend},type,headline;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop',
 		'code'                        => '{type_legend},type,headline;{text_legend},highlight,shClass,code;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'hyperlink'                   => '{type_legend},type,headline;{link_legend},url,target,linkTitle,embed,titleText,rel;{imglink_legend:hide},useImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'toplink'                     => '{type_legend},type,linkTitle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
@@ -174,7 +178,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_content', 'getContentElements'),
 			'reference'               => &$GLOBALS['TL_LANG']['CTE'],
-			'eval'                    => array('helpwizard'=>true, 'chosen'=>true, 'submitOnChange'=>true),
+			'eval'                    => array('helpwizard'=>true, 'chosen'=>true, 'submitOnChange'=>true, 'gallery_types'=>array('gallery'), 'downloads_types'=>array('downloads')),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'headline' => array
@@ -210,8 +214,12 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'mandatory'=>true, 'files'=>true, 'tl_class'=>'clr'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio', 'mandatory'=>true, 'tl_class'=>'clr'),
+			'sql'                     => "varchar(255) NOT NULL default ''",
+			'save_callback' => array
+			(
+				array('tl_content', 'storeFileMetaInformation')
+			)
 		),
 		'alt' => array
 		(
@@ -296,7 +304,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'codeMirror|html', 'helpwizard'=>true),
+			'eval'                    => array('mandatory'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html', 'helpwizard'=>true),
 			'explanation'             => 'insertTags',
 			'sql'                     => "mediumtext NULL"
 		),
@@ -393,17 +401,6 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
-		'mooType' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['mooType'],
-			'default'                 => 'mooStart',
-			'exclude'                 => true,
-			'inputType'               => 'radio',
-			'options'                 => array('mooStart', 'mooStop', 'mooSingle'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
-			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true),
-			'sql'                     => "varchar(32) NOT NULL default ''"
-		),
 		'mooHeadline' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['mooHeadline'],
@@ -457,7 +454,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'decodeEntities'=>true, 'class'=>'monospace', 'rte'=>'codeMirror', 'helpwizard'=>true, 'tl_class'=>'clr'),
+			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'decodeEntities'=>true, 'class'=>'monospace', 'rte'=>'ace', 'helpwizard'=>true, 'tl_class'=>'clr'),
 			'explanation'             => 'insertTags',
 			'sql'                     => "text NULL"
 		),
@@ -611,7 +608,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['posterSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'files'=>true),
+			'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'playerSize' => array
@@ -625,6 +622,40 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'autoplay' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['autoplay'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12'),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'sliderDelay' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['sliderDelay'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'sliderSpeed' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['sliderSpeed'],
+			'default'                 => 300,
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "int(10) unsigned NOT NULL default '300'"
+		),
+		'sliderStartSlide' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['sliderStartSlide'],
+			'default'                 => 0,
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
+		),
+		'sliderContinuous' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['sliderContinuous'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50 m12'),
@@ -954,6 +985,78 @@ class tl_content extends Backend
 
 
 	/**
+	 * Return the group of a content element
+	 * @param string
+	 * @return string
+	 */
+	public function getContentElementGroup($element)
+	{
+		foreach ($GLOBALS['TL_CTE'] as $k=>$v)
+		{
+			foreach (array_keys($v) as $kk)
+			{
+				if ($kk == $element)
+				{
+					return $k;
+				}
+			}
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Show a hint if a JavaScript library needs to be included in the page layout
+	 * @param \DataContainer
+	 */
+	public function showJsLibraryHint(DataContainer $dc)
+	{
+		if ($_POST || Input::get('act') != 'edit')
+		{
+			return;
+		}
+
+		$objCte = ContentModel::findByPk($dc->id);
+
+		if ($objCte === null)
+		{
+			return;
+		}
+
+		switch ($objCte->type)
+		{
+			case 'gallery':
+				Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_content']['includeTemplates'], 'moo_mediabox', 'j_colorbox'));
+				break;
+
+			case 'sliderStart':
+			case 'sliderStop':
+				Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_content']['includeTemplates'], 'moo_slider', 'j_slider'));
+				break;
+
+			case 'accordionSingle':
+			case 'accordionStart':
+			case 'accordionStop':
+				Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_content']['includeTemplates'], 'moo_accordion', 'j_accordion'));
+				break;
+
+			case 'player':
+			case 'youtube':
+				Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_content']['includeTemplate'], 'j_mediaelement'));
+				break;
+
+			case 'table':
+				if ($objCte->sortable)
+				{
+					Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_content']['includeTemplates'], 'moo_tablesort', 'j_tablesort'));
+				}
+				break;
+		}
+	}
+
+
+	/**
 	 * Add the type of content element
 	 * @param array
 	 * @return string
@@ -964,11 +1067,15 @@ class tl_content extends Backend
 		$type = $GLOBALS['TL_LANG']['CTE'][$arrRow['type']][0] ?: '&nbsp;';
 		$class = 'limit_height';
 
-		// Add the type of accordion element
-		if ($arrRow['type'] == 'accordion' && $arrRow['mooType'] != 'mooSingle')
+		// Remove the class if it is a wrapper element
+		if (in_array($arrRow['type'], $GLOBALS['TL_WRAPPERS']['start']) || in_array($arrRow['type'], $GLOBALS['TL_WRAPPERS']['separator']) || in_array($arrRow['type'], $GLOBALS['TL_WRAPPERS']['stop']))
 		{
 			$class = '';
-			$type .= ' [' . $GLOBALS['TL_LANG']['tl_content'][$arrRow['mooType']][0] . ']';
+
+			if (($group = $this->getContentElementGroup($arrRow['type'])) !== null)
+			{
+				$type = $GLOBALS['TL_LANG']['CTE'][$group] . ' (' . $type . ')';
+			}
 		}
 
 		// Add the ID of the aliased element
@@ -1008,7 +1115,7 @@ class tl_content extends Backend
 	 */
 	public function editArticleAlias(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=article&amp;table=tl_content&amp;id=' . $dc->value . '&amp;rt=' . REQUEST_TOKEN . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=article&amp;table=tl_content&amp;id=' . $dc->value . '&amp;popup=1&amp;nb=1&amp;rt=' . REQUEST_TOKEN . '" title="' . sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value) . '" style="padding-left:3px" onclick="Backend.openModalIframe({\'width\':765,\'title\':\'' . specialchars(str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG']['tl_content']['editalias'][1], $dc->value))) . '\',\'url\':this.href});return false">' . Image::getHtml('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
 
 
@@ -1046,7 +1153,7 @@ class tl_content extends Backend
 
 		if ($objAlias->numRows)
 		{
-			$this->loadLanguageFile('tl_article');
+			System::loadLanguageFile('tl_article');
 
 			while ($objAlias->next())
 			{
@@ -1066,7 +1173,7 @@ class tl_content extends Backend
 	 */
 	public function editAlias(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="'.preg_replace('/id=[0-9]+/', 'id=' . $dc->value, ampersand(Environment::get('request'))).'" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=article&amp;table=tl_content&amp;act=edit&amp;id=' . $dc->value . '&amp;popup=1&amp;nb=1&amp;rt=' . REQUEST_TOKEN . '" title="' . sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value) . '" style="padding-left:3px" onclick="Backend.openModalIframe({\'width\':765,\'title\':\'' . specialchars(str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG']['tl_content']['editalias'][1], $dc->value))) . '\',\'url\':this.href});return false">' . Image::getHtml('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
 
 
@@ -1141,7 +1248,7 @@ class tl_content extends Backend
 	 */
 	public function editForm(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=form&amp;table=tl_form_field&amp;id=' . $dc->value . '&amp;rt=' . REQUEST_TOKEN . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=form&amp;table=tl_form_field&amp;id=' . $dc->value . '&amp;popup=1&amp;nb=1&amp;rt=' . REQUEST_TOKEN . '" title="' . sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value) . '" style="padding-left:3px" onclick="Backend.openModalIframe({\'width\':765,\'title\':\'' . specialchars(str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG']['tl_content']['editalias'][1], $dc->value))) . '\',\'url\':this.href});return false">' . Image::getHtml('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
 
 
@@ -1178,7 +1285,7 @@ class tl_content extends Backend
 	 */
 	public function editModule(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $dc->value . '&amp;rt=' . REQUEST_TOKEN . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $dc->value . '&amp;popup=1&amp;nb=1&amp;rt=' . REQUEST_TOKEN . '" title="' . sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value) . '" style="padding-left:3px" onclick="Backend.openModalIframe({\'width\':765,\'title\':\'' . specialchars(str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG']['tl_content']['editalias'][1], $dc->value))) . '\',\'url\':this.href});return false">' . Image::getHtml('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
 
 
@@ -1217,7 +1324,7 @@ class tl_content extends Backend
 	 */
 	public function editArticle(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=article&amp;table=tl_article&amp;act=edit&amp;id=' . $dc->value . '&amp;rt=' . REQUEST_TOKEN . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editarticle'][1]), $dc->value).'">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editarticle'][0], 'style="vertical-align:top"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=article&amp;table=tl_article&amp;act=edit&amp;id=' . $dc->value . '&amp;popup=1&amp;nb=1&amp;rt=' . REQUEST_TOKEN . '" title="' . sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editarticle'][1]), $dc->value) . '" onclick="Backend.openModalIframe({\'width\':765,\'title\':\'' . specialchars(str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG']['tl_content']['editarticle'][1], $dc->value))) . '\',\'url\':this.href});return false">' . Image::getHtml('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editarticle'][0], 'style="vertical-align:top"') . '</a>';
 	}
 
 
@@ -1239,16 +1346,18 @@ class tl_content extends Backend
 		}
 
 		// Limit pages to the website root
-		$objPage = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
-								  ->limit(1)
-								  ->execute($intPid);
+		$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
+									 ->limit(1)
+									 ->execute($intPid);
 
-		if ($objPage->numRows)
+		if ($objArticle->numRows)
 		{
-			$objPage = $this->getPageDetails($objPage->pid);
+			$objPage = PageModel::findWithDetails($objArticle->pid);
 			$arrRoot = $this->Database->getChildRecords($objPage->rootId, 'tl_page');
 			array_unshift($arrRoot, $objPage->rootId);
 		}
+
+		unset($objArticle);
 
 		// Limit pages to the user's pagemounts
 		if ($this->User->isAdmin)
@@ -1279,7 +1388,7 @@ class tl_content extends Backend
 		// Edit the result
 		if ($objArticle->numRows)
 		{
-			$this->loadLanguageFile('tl_article');
+			System::loadLanguageFile('tl_article');
 
 			while ($objArticle->next())
 			{
@@ -1293,7 +1402,7 @@ class tl_content extends Backend
 
 
 	/**
-	 * Dynamically set the codeMirror syntax
+	 * Dynamically set the ace syntax
 	 * @param mixed
 	 * @param \DataContainer
 	 * @return string
@@ -1304,43 +1413,41 @@ class tl_content extends Backend
 		{
 			case 'C':
 			case 'CSharp':
-				$syntax = 'clike';
+				$syntax = 'c_cpp';
 				break;
 
 			case 'CSS':
-				$syntax = 'css';
-				break;
-
 			case 'Diff':
-				$syntax = 'diff';
-				break;
-
-			case 'XHTML':
-				$syntax = 'htmlmixed';
-				break;
-
+			case 'Groovy':
+			case 'HTML':
+			case 'Java':
 			case 'JavaScript':
-				$syntax = 'javascript';
-				break;
-
+			case 'Perl':
 			case 'PHP':
-				$syntax = 'php';
+			case 'PowerShell':
+			case 'Python':
+			case 'Ruby':
+			case 'Scala':
+			case 'SQL':
+			case 'Text':
+				$syntax = strtolower($dc->activeRecord->highlight);
 				break;
 
-			case 'SQL':
-				$syntax = 'sql';
+			case 'VB':
+				$syntax = 'vbscript';
 				break;
 
 			case 'XML':
+			case 'XHTML':
 				$syntax = 'xml';
 				break;
 
 			default:
-				$syntax = '';
+				$syntax = 'text';
 				break;
 		}
 
-		$GLOBALS['TL_DCA']['tl_content']['fields']['code']['eval']['rte'] = 'codeMirror|' . $syntax;
+		$GLOBALS['TL_DCA']['tl_content']['fields']['code']['eval']['rte'] = 'ace|' . $syntax;
 		return $varValue;
 	}
 
@@ -1351,7 +1458,7 @@ class tl_content extends Backend
 	 */
 	public function listImportWizard()
 	{
-		return ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['lw_import'][1]) . '" onclick="Backend.getScrollOffset()">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom"') . '</a>';
+		return ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['lw_import'][1]) . '" onclick="Backend.getScrollOffset()">' . Image::getHtml('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom"') . '</a>';
 	}
 
 
@@ -1361,7 +1468,7 @@ class tl_content extends Backend
 	 */
 	public function tableImportWizard()
 	{
-		return ' <a href="' . $this->addToUrl('key=table') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_import'][1]) . '" onclick="Backend.getScrollOffset()">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom"') . '</a> ' . $this->generateImage('demagnify.gif', '', 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_shrink']) . '" style="vertical-align:text-bottom;cursor:pointer" onclick="Backend.tableWizardResize(0.9)"') . $this->generateImage('magnify.gif', '', 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_expand']) . '" style="vertical-align:text-bottom; cursor:pointer" onclick="Backend.tableWizardResize(1.1)"');
+		return ' <a href="' . $this->addToUrl('key=table') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_import'][1]) . '" onclick="Backend.getScrollOffset()">' . Image::getHtml('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom"') . '</a> ' . Image::getHtml('demagnify.gif', '', 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_shrink']) . '" style="vertical-align:text-bottom;cursor:pointer" onclick="Backend.tableWizardResize(0.9)"') . Image::getHtml('magnify.gif', '', 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_expand']) . '" style="vertical-align:text-bottom; cursor:pointer" onclick="Backend.tableWizardResize(1.1)"');
 	}
 
 
@@ -1372,7 +1479,7 @@ class tl_content extends Backend
 	 */
 	public function pagePicker(DataContainer $dc)
 	{
-		return ' <a href="contao/page.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MOD']['page'][0])).'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="contao/page.php?do=' . Input::get('do') . '&amp;table=' . $dc->table . '&amp;field=' . $dc->field . '&amp;value=' . str_replace(array('{{link_url::', '}}'), '', $dc->value) . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']) . '" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\'' . specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MOD']['page'][0])) . '\',\'url\':this.href,\'id\':\'' . $dc->field . '\',\'tag\':\'ctrl_'. $dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '') . '\',\'self\':this});return false">' . Image::getHtml('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
@@ -1392,7 +1499,53 @@ class tl_content extends Backend
 									 ->limit(1)
 									 ->execute($row['id']);
 
-		return $objElement->numRows ? $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)) . ' ' : '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		return $objElement->numRows ? Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)) . ' ' : '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Pre-fill the "alt" and "caption" fields with the file meta data
+	 * @param mixed
+	 * @param \DataContainer
+	 * @return mixed
+	 */
+	public function storeFileMetaInformation($varValue, DataContainer $dc)
+	{
+		if ($dc->activeRecord->singleSRC == $varValue)
+		{
+			return $varValue;
+		}
+
+		$objFile = \FilesModel::findByPk($varValue);
+
+		if ($objFile !== null)
+		{
+			$arrMeta = deserialize($objFile->meta);
+
+			if (!empty($arrMeta))
+			{
+				$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=(SELECT pid FROM " . ($dc->activeRecord->ptable ?: 'tl_article') . " WHERE id=?)")
+										  ->execute($dc->activeRecord->pid);
+
+				if ($objPage->numRows)
+				{
+					$objModel = new PageModel();
+					$objModel->setRow($objPage->row());
+					$objModel->loadDetails();
+
+					// Convert the language to a locale (see #5678)
+					$strLanguage = str_replace('-', '_', $objModel->rootLanguage);
+
+					if (isset($arrMeta[$strLanguage]))
+					{
+						\Input::setPost('alt', $arrMeta[$strLanguage]['title']);
+						\Input::setPost('caption', $arrMeta[$strLanguage]['caption']);
+					}
+				}
+			}
+		}
+
+		return $varValue;
 	}
 
 
@@ -1427,7 +1580,7 @@ class tl_content extends Backend
 			$icon = 'invisible.gif';
 		}
 
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 
@@ -1462,7 +1615,8 @@ class tl_content extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$this->createInitialVersion('tl_content', $intId);
+		$objVersions = new Versions('tl_content', $intId);
+		$objVersions->initialize();
 
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_content']['fields']['invisible']['save_callback']))
@@ -1478,7 +1632,7 @@ class tl_content extends Backend
 		$this->Database->prepare("UPDATE tl_content SET tstamp=". time() .", invisible='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
 
-		$this->createNewVersion('tl_content', $intId);
+		$objVersions->create();
 		$this->log('A new version of record "tl_content.id='.$intId.'" has been created'.$this->getParentEntries('tl_content', $intId), 'tl_content toggleVisibility()', TL_GENERAL);
 	}
 }

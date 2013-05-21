@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Comments
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -84,7 +84,7 @@ class Comments extends \Frontend
 			$offset = ($page - 1) * $objConfig->perPage;
 
 			// Initialize the pagination menu
-			$objPagination = new \Pagination($total, $objConfig->perPage, 7, $id);
+			$objPagination = new \Pagination($total, $objConfig->perPage, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
 			$objTemplate->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -128,8 +128,8 @@ class Comments extends \Frontend
 
 				$objPartial->comment = trim(str_replace(array('{{', '}}'), array('&#123;&#123;', '&#125;&#125;'), $objComments->comment));
 
-				$objPartial->datim = $this->parseDate($objPage->datimFormat, $objComments->date);
-				$objPartial->date = $this->parseDate($objPage->dateFormat, $objComments->date);
+				$objPartial->datim = \Date::parse($objPage->datimFormat, $objComments->date);
+				$objPartial->date = \Date::parse($objPage->dateFormat, $objComments->date);
 				$objPartial->class = (($count < 1) ? ' first' : '') . (($count >= ($total - 1)) ? ' last' : '') . (($count % 2 == 0) ? ' even' : ' odd');
 				$objPartial->by = $GLOBALS['TL_LANG']['MSC']['com_by'];
 				$objPartial->id = 'c' . $objComments->id;
@@ -275,7 +275,7 @@ class Comments extends \Frontend
 			}
 
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
-			$objWidget = new $strClass($this->prepareForWidget($arrField, $arrField['name'], $arrField['value']));
+			$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, $arrField['name'], $arrField['value']));
 
 			// Validate the widget
 			if (\Input::post('FORM_SUBMIT') == $strFormId)

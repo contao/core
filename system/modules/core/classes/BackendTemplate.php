@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -57,13 +57,14 @@ class BackendTemplate extends \Template
 	public function output()
 	{
 		// Rich text editor configuration
-		if (is_array($GLOBALS['TL_RTE']) && !empty($GLOBALS['TL_RTE']))
+		if (!empty($GLOBALS['TL_RTE']) && is_array($GLOBALS['TL_RTE']))
 		{
 			$this->base = \Environment::get('base');
 			$this->uploadPath = $GLOBALS['TL_CONFIG']['uploadPath'];
 
 			// Fallback to English if the user language is not supported
-			$this->language = file_exists(TL_ROOT . '/assets/tinymce/langs/' . $GLOBALS['TL_LANGUAGE'] . '.js') ? $GLOBALS['TL_LANGUAGE'] : 'en';
+			$strRteLanguage = substr($GLOBALS['TL_LANGUAGE'], 0, 2);
+			$this->language = file_exists(TL_ROOT . '/assets/tinymce/langs/' . $strRteLanguage . '.js') ? $strRteLanguage : 'en';
 
 			foreach ($GLOBALS['TL_RTE'] as $file=>$fields)
 			{
@@ -74,8 +75,14 @@ class BackendTemplate extends \Template
 					$arrRteFields[] = $field['id'];
 				}
 
+				$this->ceFields = $fields;
 				$this->rteFields = implode(',', $arrRteFields); // TinyMCE
-				$this->ceFields = $fields; // Other RTEs
+
+				if ($file == 'codeMirror')
+				{
+					$file = 'ace';
+				}
+
 				$strFile = sprintf('%s/system/config/%s.php', TL_ROOT, $file);
 
 				if (!file_exists($strFile))
@@ -91,7 +98,7 @@ class BackendTemplate extends \Template
 		}
 
 		// Style sheets
-		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
+		if (!empty($GLOBALS['TL_CSS']) && is_array($GLOBALS['TL_CSS']))
 		{
 			$strStyleSheets = '';
 
@@ -111,7 +118,7 @@ class BackendTemplate extends \Template
 		}
 
 		// JavaScripts
-		if (is_array($GLOBALS['TL_JAVASCRIPT']) && !empty($GLOBALS['TL_JAVASCRIPT']))
+		if (!empty($GLOBALS['TL_JAVASCRIPT']) && is_array($GLOBALS['TL_JAVASCRIPT']))
 		{
 			$strJavaScripts = '';
 
@@ -124,7 +131,7 @@ class BackendTemplate extends \Template
 		}
 
 		// MooTools scripts (added at the page bottom)
-		if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
+		if (!empty($GLOBALS['TL_MOOTOOLS']) && is_array($GLOBALS['TL_MOOTOOLS']))
 		{
 			$strMootools = '';
 
@@ -165,17 +172,19 @@ class BackendTemplate extends \Template
 	{
 		return
 			'var Contao={'
-				. 'theme:"' . $this->getTheme() . '",'
+				. 'theme:"' . \Backend::getTheme() . '",'
 				. 'lang:{'
 					. 'close:"' . $GLOBALS['TL_LANG']['MSC']['close'] . '",'
 					. 'collapse:"' . $GLOBALS['TL_LANG']['MSC']['collapseNode'] . '",'
 					. 'expand:"' . $GLOBALS['TL_LANG']['MSC']['expandNode'] . '",'
 					. 'loading:"' . $GLOBALS['TL_LANG']['MSC']['loadingData'] . '",'
-					. 'apply:"' . $GLOBALS['TL_LANG']['MSC']['apply'] . '"'
+					. 'apply:"' . $GLOBALS['TL_LANG']['MSC']['apply'] . '",'
+					. 'picker:"' . $GLOBALS['TL_LANG']['MSC']['pickerNoSelection'] . '"'
 				. '},'
 				. 'script_url:"' . TL_ASSETS_URL . '",'
 				. 'path:"' . TL_PATH . '",'
-				. 'request_token:"' . REQUEST_TOKEN . '"'
+				. 'request_token:"' . REQUEST_TOKEN . '",'
+				. 'referer_id:"' . TL_REFERER_ID . '"'
 			. '};';
 	}
 

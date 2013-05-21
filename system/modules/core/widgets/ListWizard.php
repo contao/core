@@ -2,9 +2,9 @@
 
 /**
  * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
- * 
+ *
+ * Copyright (c) 2005-2013 Leo Feyer
+ *
  * @package Core
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
@@ -86,7 +86,7 @@ class ListWizard extends \Widget
 	 */
 	public function generate()
 	{
-		$arrButtons = array('copy', 'up', 'down', 'delete');
+		$arrButtons = array('copy', 'drag', 'up', 'down', 'delete');
 		$strCommand = 'cmd_' . $this->strField;
 
 		// Change the order
@@ -125,23 +125,41 @@ class ListWizard extends \Widget
 			$this->varValue = array('');
 		}
 
-		$tabindex = 0;
-		$return = '<ul id="ctrl_'.$this->strId.'" class="tl_listwizard">';
+		// Initialize the tab index
+		if (!\Cache::has('tabindex'))
+		{
+			\Cache::set('tabindex', 1);
+		}
+
+		$tabindex = \Cache::get('tabindex');
+		$return = '<ul id="ctrl_'.$this->strId.'" class="tl_listwizard" data-tabindex="'.$tabindex.'">';
 
 		// Add input fields
-		for ($i=0; $i<count($this->varValue); $i++)
+		for ($i=0, $c=count($this->varValue); $i<$c; $i++)
 		{
 			$return .= '
-    <li><input type="text" name="'.$this->strId.'[]" class="tl_text" tabindex="'.++$tabindex.'" value="'.specialchars($this->varValue[$i]).'"' . $this->getAttributes() . '> ';
+    <li><input type="text" name="'.$this->strId.'[]" class="tl_text" tabindex="'.$tabindex++.'" value="'.specialchars($this->varValue[$i]).'"' . $this->getAttributes() . '> ';
 
 			// Add buttons
 			foreach ($arrButtons as $button)
 			{
-				$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['lw_'.$button]).'" onclick="Backend.listWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.$this->generateImage($button.'.gif', $GLOBALS['TL_LANG']['MSC']['lw_'.$button], 'class="tl_listwizard_img"').'</a> ';
+				$class = ($button == 'up' || $button == 'down') ? ' class="button-move"' : '';
+
+				if ($button == 'drag')
+				{
+					$return .= \Image::getHtml('drag.gif', '', 'class="drag-handle" title="' . sprintf($GLOBALS['TL_LANG']['MSC']['move']) . '"');
+				}
+				else
+				{
+					$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'"' . $class . ' title="'.specialchars($GLOBALS['TL_LANG']['MSC']['lw_'.$button]).'" onclick="Backend.listWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.\Image::getHtml($button.'.gif', $GLOBALS['TL_LANG']['MSC']['lw_'.$button], 'class="tl_listwizard_img"').'</a> ';
+				}
 			}
 
 			$return .= '</li>';
 		}
+
+		// Store the tab index
+		\Cache::set('tabindex', $tabindex);
 
 		return $return.'
   </ul>';
@@ -223,7 +241,8 @@ class ListWizard extends \Widget
 				}
 			}
 
-			$this->createNewVersion($dc->table, \Input::get('id'));
+			$objVersions = new \Versions($dc->table, \Input::get('id'));
+			$objVersions->create();
 
 			$this->Database->prepare("UPDATE " . $dc->table . " SET listitems=? WHERE id=?")
 						   ->execute(serialize($arrList), \Input::get('id'));
