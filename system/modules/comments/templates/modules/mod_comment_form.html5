@@ -12,25 +12,26 @@
           <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
 
           <div class="widget">
-            <?php echo $this->fields['name']->generateWithError(); ?> <?php echo $this->fields['name']->generateLabel(); ?>
+            <?php echo $this->fields['name']->generateLabel(); ?> <?php echo $this->fields['name']->generateWithError(); ?>
           </div>
 
           <div class="widget">
-            <?php echo $this->fields['email']->generateWithError(); ?> <?php echo $this->fields['email']->generateLabel(); ?>
+            <?php echo $this->fields['email']->generateLabel(); ?> <?php echo $this->fields['email']->generateWithError(); ?>
           </div>
 
           <div class="widget">
-            <?php echo $this->fields['website']->generateWithError(); ?> <?php echo $this->fields['website']->generateLabel(); ?>
+            <?php echo $this->fields['website']->generateLabel(); ?> <?php echo $this->fields['website']->generateWithError(); ?>
           </div>
 
           <?php if (isset($this->fields['captcha'])): ?>
             <div class="widget">
-              <?php echo $this->fields['captcha']->generateWithError(); ?> <label for="ctrl_captcha"><?php echo $this->fields['captcha']->generateQuestion(); ?><span class="mandatory">*</span></label>
+              <label for="ctrl_captcha"><?php echo $this->fields['captcha']->generateQuestion(); ?><span class="mandatory">*</span></label> <?php echo $this->fields['captcha']->generateWithError(); ?>
             </div>
           <?php endif; ?>
 
           <div class="widget">
-            <?php echo $this->fields['comment']->generateWithError(); ?> <label for="ctrl_<?php echo $this->fields['comment']->id; ?>" class="invisible"><?php echo $this->fields['comment']->label; ?></label>
+            <label for="ctrl_<?php echo $this->fields['comment']->id; ?>" class="invisible"><?php echo $this->fields['comment']->label; ?></label>
+            <?php echo $this->fields['comment']->generateWithError(); ?>
           </div>
 
           <div class="widget">
