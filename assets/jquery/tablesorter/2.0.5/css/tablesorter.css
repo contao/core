@@ -1,6 +1,6 @@
 /* Contao Open Source CMS, (c) 2005-2013 Leo Feyer, LGPL license */
-table.sortable th { background-image:url("../images/default.gif"); background-repeat:no-repeat; background-position:center right; }
-table.sortable th a.pointer { display:block; margin-right:9px; cursor:pointer; }
-table.sortable th.unsortable { background-image:none; }
-table.sortable th.headerSortDown { background-image:url("../images/asc.gif"); }
-table.sortable th.headerSortUp { background-image:url("../images/desc.gif"); }
+table.sortable thead > tr > th { background-image:url("../images/default.gif"); background-repeat:no-repeat; background-position:center right; }
+table.sortable thead > tr > th a.pointer { display:block; margin-right:9px; cursor:pointer; }
+table.sortable thead > tr > th.unsortable { background-image:none; }
+table.sortable thead > tr > th.headerSortDown { background-image:url("../images/asc.gif"); }
+table.sortable thead > tr > th.headerSortUp { background-image:url("../images/desc.gif"); }
