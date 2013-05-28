@@ -290,22 +290,8 @@ abstract class User extends \System
 			return false;
 		}
 
-		// The password has been generated with crypt()
-		if (\Encryption::test($this->password))
-		{
-			$blnAuthenticated = (crypt(\Input::post('password', true), $this->password) == $this->password);
-		}
-		else
-		{
-			list($strPassword, $strSalt) = explode(':', $this->password);
-			$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1(\Input::post('password', true))) : ($strPassword == sha1($strSalt . \Input::post('password', true)));
-
-			// Store a SHA-512 encrpyted version of the password
-			if ($blnAuthenticated)
-			{
-				$this->password = \Encryption::hash(\Input::post('password', true));
-			}
-		}
+        // Verify password
+        $blnAuthenticated = $this->verifyPassword();
 
 		// HOOK: pass credentials to callback functions
 		if (!$blnAuthenticated && isset($GLOBALS['TL_HOOKS']['checkCredentials']) && is_array($GLOBALS['TL_HOOKS']['checkCredentials']))
@@ -574,7 +560,68 @@ abstract class User extends \System
 	}
 
 
-	/**
+    /**
+     * Verify password
+     * This also ensures updating the old passwords from previous Contao
+     * installations to the latest algorithm
+     *
+     * @return boolean true if valid, false if not
+     */
+    protected function verifyPassword()
+    {
+        $password   = \Input::post('password', true);
+        $options    = $GLOBALS['TL_PASSWORD']['options'];
+        $algorithm  = $GLOBALS['TL_PASSWORD']['algorithm'];
+
+        // Check if the password was encrypted using the password hashing api
+        $info = password_get_info($this->password);
+        if ($info['algo'] > 0) {
+
+            // Verify password
+            if (password_verify($password, $this->password)) {
+                if (password_needs_rehash($this->password, $algorithm, $options)) {
+                    $this->password = password_hash($password, $algorithm, $options);
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        // Check if the password was encrypted using crypt()
+        if (\Encryption::test($this->password))
+        {
+            // Verify password
+            if (crypt($password, $this->password) == $this->password) {
+                // Now use the password hashing api
+                $this->password = password_hash($password, $algorithm, $options);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        // The password was encrypted using the sha1() algorithm
+        list($strPassword, $strSalt) = explode(':', $this->password);
+
+        // Verify password
+        $blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1($password)) : ($strPassword == sha1($strSalt . $password));
+
+        if ($blnAuthenticated)
+        {
+            // Now use the password hashing api
+            $this->password = password_hash($password, $algorithm, $options);
+
+            return true;
+        }
+
+        return false;
+    }
+
+
+    /**
 	 * Set all user properties from a database record
 	 */
 	abstract protected function setUserFromDb();
