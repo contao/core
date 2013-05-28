@@ -563,7 +563,7 @@ abstract class User extends \System
 	/**
 	 * Verify password
 	 * This also ensures updating the old passwords from previous Contao
-	 * installations to the latest algorithm
+	 * versions to the latest algorithm
 	 *
 	 * @return boolean true if valid, false if not
 	 */
