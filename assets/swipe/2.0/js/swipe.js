@@ -71,45 +71,76 @@ function Swipe(container, options) {
   // PATCH
   function menu() {
 
-    // previous button
-    options.menu.children[0].addEventListener('click', function(e) {
-      e.preventDefault();
-      stop();
-      prev();
-    });
+    var menuElements, x, className;
 
-    // next button
-    options.menu.children[2].addEventListener('click', function(e) {
-      e.preventDefault();
-      stop();
-      next();
-    });
-
-    // dot navigation
-    for (var i=0; i<slides.length; i++) {
-      var b = document.createElement('b');
-      b.innerHTML = '•';
-      b.setAttribute('data-index', i);
-
-      if (i == index) b.className = 'active';
-
-      b.addEventListener('click', function(e) {
-        e.preventDefault();
-        stop();
-        slide(parseInt(this.getAttribute('data-index')));
-      });
-
-      options.menu.children[1].appendChild(b);
+    function onclick(el, f) {
+        if (browser.addEventListener) {
+            el.addEventListener('click', f, false);
+        } else if (window.attachEvent) {
+            el.attachEvent('onclick', f);
+        }
     }
 
+    menuElements = options.menu.childNodes;
+
+    for (x=0; x<menuElements.length; x++) {
+
+      className = (' ' + menuElements[x].className + ' ');
+
+      // previous button
+      if (className.indexOf(' slider-prev ') > -1) {
+        onclick(menuElements[x], function(e) {
+          e.returnValue = false; // For IE<9
+          if(e.preventDefault) e.preventDefault();
+          stop();
+          prev();
+        });
+      }
+
+      // next button
+      else if (className.indexOf(' slider-next ') > -1) {
+        onclick(menuElements[x], function(e) {
+          e.returnValue = false; // For IE<9
+          if(e.preventDefault) e.preventDefault();
+          stop();
+          next();
+        });
+      }
+
+      // dot navigation
+      else if (className.indexOf(' slider-menu ') > -1) {
+
+        // Set the new menu reference, so we have it in updateMenu()
+        options.menu = menuElements[x];
+
+        for (var i=0; i<slides.length; i++) {
+          var b = document.createElement('b');
+          b.innerHTML = '•';
+          b.setAttribute('data-index', i);
+
+          if (i == index) b.className = 'active';
+
+          onclick(b, (function(b) {
+            return (function(e) {
+              e.returnValue = false; // For IE<9
+              if(e.preventDefault) e.preventDefault();
+              stop();
+              slide(parseInt((this.getAttribute ? this.getAttribute('data-index') : b.attributes['data-index'].nodeValue)));
+            });
+          })(b));
+
+          options.menu.appendChild(b);
+        }
+      }
+    }
   }
 
   function updateMenu() {
 
     for (var i=0; i<slides.length; i++) {
 
-      var child = options.menu.children[1].children[i];
-      child.className = (child.getAttribute('data-index') == index) ? 'active' : '';
+      var child = options.menu.children[i];
+      child.className = (parseInt(child.getAttribute ? child.getAttribute('data-index') : child.attributes['data-index'].nodeValue) == index) ? 'active' : '';
 
     }
 
@@ -399,7 +430,7 @@ function Swipe(container, options) {
     },
     transitionEnd: function(event) {
 
-      if (parseInt(event.target.getAttribute('data-index'), 10) == index) {
+      if (parseInt((event.target.getAttribute ? event.target.getAttribute('data-index') : event.target.attributes['data-index'].nodeValue), 10) == index) {
 
         if (delay) begin();
 
