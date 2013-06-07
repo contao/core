@@ -78,7 +78,14 @@ class PageForward extends \Frontend
 					continue;
 				}
 
-				$strGet .= '/' . $key . '/' . \Input::get($key);
+				if ($GLOBALS['TL_CONFIG']['useAutoItem'] && $key != "auto_item")
+				{
+					$strGet .= '/' . $key . '/' . \Input::get($key);
+				}
+				else
+				{
+					$strGet .= '/' . \Input::get($key);
+				}
 			}
 		}
 
