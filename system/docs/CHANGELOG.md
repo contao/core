@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Preserve the CSS3PIE behavior file path when combining style sheets (see #5848).
+
+### Fixed
 Support all known template types in the autoload creator (see #5857).
 
 ### Fixed
