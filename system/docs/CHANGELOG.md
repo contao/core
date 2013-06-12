@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Added support for old IE versions to swipe.js (see #5862).
+
+### Fixed
 Correctly bypass the cache if `bypassCache` is set (see #5872).
 
 ### Fixed
