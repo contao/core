@@ -64,6 +64,18 @@ require TL_ROOT . '/system/helper/interface.php';
 
 
 /**
+ * Load the local configuration
+ *
+ * The class and module loaders depend on the "bypassCache"
+ * and "coreOnlyMode" settings (see #5872).
+ */
+if (file_exists(TL_ROOT . '/system/config/localconfig.php'))
+{
+	include TL_ROOT . '/system/config/localconfig.php';
+}
+
+
+/**
  * Register the class, template and module loaders
  */
 require TL_ROOT . '/system/modules/core/library/Contao/ClassLoader.php';
