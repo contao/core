@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Support all known template types in the autoload creator (see #5857).
+
+### Fixed
 Correctly adjust the accordion elements to the new DB structure (see #5820).
 
 ### Fixed
