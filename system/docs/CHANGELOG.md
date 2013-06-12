@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly adjust the accordion elements to the new DB structure (see #5820).
+
+### Fixed
 Added `E_USER_DEPRECATED` to the list of error constants (see #5839).
 
 
