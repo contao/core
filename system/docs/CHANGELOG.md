@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.1.1 (2013-XX-XX)
+--------------------------
+
+### Fixed
+Added `E_USER_DEPRECATED` to the list of error constants (see #5839).
+
+
 Version 3.1.0 (2013-05-21)
 --------------------------
 
