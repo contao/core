@@ -78,7 +78,15 @@ class PageForward extends \Frontend
 					continue;
 				}
 
-				$strGet .= '/' . $key . '/' . \Input::get($key);
+				// Ignore the auto_item parameter (see #5886)
+				if ($key == 'auto_item')
+				{
+					$strGet .= '/' . \Input::get($key);
+				}
+				else
+				{
+					$strGet .= '/' . $key . '/' . \Input::get($key);
+				}
 			}
 		}
 

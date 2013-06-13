@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.1 (2013-XX-XX)
 --------------------------
 
+### Fixed
+Ignore the `auto_item` parameter when forwarding internally (see #5886).
+
 ### New
 Added the `String::quoteMysqlRegexp()` method (fixes 5896).
 
