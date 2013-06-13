@@ -76,7 +76,7 @@ class ContentTable extends \ContentElement
 				// Add cell
 				$arrHeader[] = array
 				(
-					'class' => 'head_'.$i . (($i == 0) ? ' col_first' : '') . (($i == (count($rows[0]) - 1)) ? ' col_last' : ''),
+					'class' => 'head_'.$i . (($i == 0) ? ' col_first' : '') . (($i == (count($rows[0]) - 1)) ? ' col_last' : '') . (($i == 0 && $this->tleft) ? ' unsortable' : ''),
 					'content' => (($v != '') ? $nl2br($v) : '&nbsp;')
 				);
 			}

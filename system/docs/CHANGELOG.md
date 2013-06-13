@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not add sort buttons to table row headers (see #5845).
+
+### Fixed
 Show the newsletter channels upon registration (see #5874).
 
 ### Updated
