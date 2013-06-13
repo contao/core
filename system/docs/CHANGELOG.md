@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Support using commas in folder names in the file selector (see #5823).
+
+### Fixed
 Ignore the `auto_item` parameter when forwarding internally (see #5886).
 
 ### New
