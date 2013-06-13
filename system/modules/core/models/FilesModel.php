@@ -150,7 +150,7 @@ class FilesModel extends \Model
 	public static function findMultipleFilesByFolder($strPath, array $arrOptions=array())
 	{
 		$t = static::$strTable;
-		return static::findBy(array("$t.type='file' AND $t.path REGEXP ?"), '^' . $strPath . '/[^/]+$', $arrOptions);
+		return static::findBy(array("$t.type='file' AND $t.path REGEXP ?"), '^' . \String::quoteMysqlRexep($strPath) . '/[^/]+$', $arrOptions);
 	}
 
 

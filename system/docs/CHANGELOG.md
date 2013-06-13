@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.1 (2013-XX-XX)
 --------------------------
 
+### New
+Added the `String::quoteMysqlRegexp()` method (fixes 5896).
+
 ### Fixed
 Added support for old IE versions to swipe.js (see #5862).
 
