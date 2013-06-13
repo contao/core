@@ -161,7 +161,7 @@ class FormCheckBox extends \Widget
 		// The "required" attribute only makes sense for single checkboxes
 		if (count($this->arrOptions) == 1 && $this->mandatory)
 		{
-				$this->arrAttributes['required'] = 'required';
+			$this->arrAttributes['required'] = 'required';
 		}
 
 		$strOptions = '';

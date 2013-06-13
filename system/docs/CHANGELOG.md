@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.1 (2013-XX-XX)
 --------------------------
 
+### Fixed
+Show the newsletter channels upon registration (see #5874).
+
 ### Updated
 Updated ACE to version 1.1.01 (fixes #5852).
 

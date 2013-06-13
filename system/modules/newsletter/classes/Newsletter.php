@@ -842,30 +842,29 @@ class Newsletter extends \Backend
 
 		$arrNewsletters = array();
 
-		// Back end
-		if (TL_MODE == 'BE')
+		// Return all channels if $objModule is null (see #5874)
+		if ($objModule === null)
 		{
 			while ($objNewsletter->next())
 			{
 				$arrNewsletters[$objNewsletter->id] = $objNewsletter->title;
 			}
-
-			return $arrNewsletters;
 		}
-
-		// Front end
-		$newsletters = deserialize($objModule->newsletters, true);
-
-		if (!is_array($newsletters) || empty($newsletters))
+		else
 		{
-			return array();
-		}
+			$newsletters = deserialize($objModule->newsletters, true);
 
-		while ($objNewsletter->next())
-		{
-			if (in_array($objNewsletter->id, $newsletters))
+			if (!is_array($newsletters) || empty($newsletters))
 			{
-				$arrNewsletters[$objNewsletter->id] = $objNewsletter->title;
+				return array();
+			}
+
+			while ($objNewsletter->next())
+			{
+				if (in_array($objNewsletter->id, $newsletters))
+				{
+					$arrNewsletters[$objNewsletter->id] = $objNewsletter->title;
+				}
 			}
 		}
 
