@@ -1078,6 +1078,15 @@ class tl_content extends Backend
 			}
 		}
 
+		// Add the group name if it is a single element (see #5814)
+		elseif (in_array($arrRow['type'], $GLOBALS['TL_WRAPPERS']['single']))
+		{
+			if (($group = $this->getContentElementGroup($arrRow['type'])) !== null)
+			{
+				$type = $GLOBALS['TL_LANG']['CTE'][$group] . ' (' . $type . ')';
+			}
+		}
+
 		// Add the ID of the aliased element
 		if ($arrRow['type'] == 'alias')
 		{
