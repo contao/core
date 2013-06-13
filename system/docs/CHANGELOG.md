@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly handle hidden pages in the custom navigation module (see #5832).
+
+### Fixed
 Support FAQs with images on the FAQ page (see #5810).
 
 ### Fixed
