@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Support FAQs with images on the FAQ page (see #5810).
+
+### Fixed
 Support using commas in folder names in the file selector (see #5823).
 
 ### Fixed
