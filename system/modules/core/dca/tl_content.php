@@ -1103,6 +1103,13 @@ class tl_content extends Backend
 			$type .= ' (' . $GLOBALS['TL_LANG']['MSC']['guests'] . ')';
 		}
 
+		// Add the headline level (see #5858)
+		if ($arrRow['type'] == 'headline')
+		{
+			$headline = deserialize($arrRow['headline']);
+			$type .= ' (' . $headline['unit'] . ')';
+		}
+
 		// Limit the element's height
 		if (!$GLOBALS['TL_CONFIG']['doNotCollapse'])
 		{
