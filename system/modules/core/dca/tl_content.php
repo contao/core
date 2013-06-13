@@ -1106,8 +1106,10 @@ class tl_content extends Backend
 		// Add the headline level (see #5858)
 		if ($arrRow['type'] == 'headline')
 		{
-			$headline = deserialize($arrRow['headline']);
-			$type .= ' (' . $headline['unit'] . ')';
+			if (is_array(($headline = deserialize($arrRow['headline']))))
+			{
+				$type .= ' (' . $headline['unit'] . ')';
+			}
 		}
 
 		// Limit the element's height
