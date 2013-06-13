@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.1 (2013-XX-XX)
 --------------------------
 
+### Updated
+Updated ACE to version 1.1.01 (fixes #5852).
+
 ### Fixed
 Correctly handle hidden pages in the custom navigation module (see #5832).
 
