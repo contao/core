@@ -3,194 +3,199 @@
     <body>
       <trans-unit id="tl_files.name.0">
         <source>Name</source>
-        <target>نام</target>
+        <target>Nombre</target>
       </trans-unit>
       <trans-unit id="tl_files.name.1">
         <source>Contao automatically adds the file extension.</source>
-        <target>پسوند پرونده توسط کانتائو به صورت خودکار اضافه می‌شود.</target>
+        <target>Por favor introduce el nombre de la carpeta o archivo (sin extensión).</target>
       </trans-unit>
       <trans-unit id="tl_files.protected.0">
         <source>Protected</source>
-        <target>حفاظت شده</target>
+        <target>Protegido</target>
       </trans-unit>
       <trans-unit id="tl_files.protected.1">
         <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
+        <target>impedir el acceso a la carpeta a través de HTTP. Los archivos todavía pueden estar disponibles, por ejemplo, con el elemento de descargas.</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
-        <target>اطلاعات متا</target>
+        <target>Meta información</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.1">
         <source>Here you can enter the file meta information.</source>
-        <target>می‌توانید اطلاعات متا پرونده را وارد نمایید.</target>
+        <target>Aquí puede introducir la información Meta del archivo.</target>
       </trans-unit>
       <trans-unit id="tl_files.htaccessInfo">
         <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
+        <target>La Protección de carpetas se logra mediante la adición de un archivo. Htaccess que deniega el acceso a la carpeta. Parece que no está utilizando un servidor Apache, por lo tanto, la característica no funciona en absoluto o requieren ajustar la configuración del servidor. Por favor, compruebe antes de cargar recursos no públicos!</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
-        <target>بارگذاری پرونده</target>
+        <target>Subir archivo</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.1">
         <source>Browse your local computer and select the files you want to upload to the server.</source>
-        <target>مرور کامپیوتر محلی و انتخاب پرونده‌هایی که می‌خواهید در سرور بارگذاری کنید.</target>
+        <target>Por favor haz una búsqueda en tu ordenador y selecciona uno o más archivos para subir al servidor.</target>
       </trans-unit>
       <trans-unit id="tl_files.editor.0">
         <source>Source editor</source>
-        <target>ویرایشگر منبع</target>
+        <target>Editor código fuente</target>
       </trans-unit>
       <trans-unit id="tl_files.editor.1">
         <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
+        <target>Utiliza el editor para modificar archivos en el servidor  (F11 para ver en modo pantalla completo).</target>
       </trans-unit>
       <trans-unit id="tl_files.upload">
         <source>Upload files</source>
-        <target>بارگذاری پرونده‌ها</target>
+        <target>Subir archivos</target>
       </trans-unit>
       <trans-unit id="tl_files.uploadNback">
         <source>Upload files and go back</source>
-        <target>بارگذاری پرونده‌ها و بازگشتن به عقب</target>
+        <target>Subir archivos y volver</target>
       </trans-unit>
       <trans-unit id="tl_files.editFF">
         <source>Edit a file or folder</source>
-        <target>ویرایش یک پرونده یا پوشه</target>
+        <target>Editar un archivo o carpeta</target>
       </trans-unit>
       <trans-unit id="tl_files.uploadFF">
         <source>Upload files to folder &quot;%s&quot;</source>
-        <target>بارگذاری یک یا چند پرونده درون پوشه &quot;%s&quot;</target>
+        <target>Subir un archivo a la carpeta &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.editFile">
         <source>Edit file &quot;%s&quot;</source>
-        <target>ویرایش پرونده &quot;%s&quot;</target>
+        <target>Editar archivo &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.browseFiles">
         <source>Browse files</source>
-        <target>مرور پرونده‌ها</target>
+        <target>Explorar archivos</target>
       </trans-unit>
       <trans-unit id="tl_files.clearList">
         <source>Clear list</source>
-        <target>پاک کردن لیست</target>
+        <target>Limpiar lista</target>
       </trans-unit>
       <trans-unit id="tl_files.startUpload">
         <source>Start upload</source>
-        <target>شروع بارگذاری</target>
+        <target>Iniciar carga</target>
       </trans-unit>
       <trans-unit id="tl_files.syncAdded">
         <source>Added the file or folder &quot;%s&quot;</source>
-        <target>پرونده‌ و پوشه اضافه شده &quot;%s&quot;</target>
+        <target>Fichero añadido al directorio &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncChanged">
         <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+        <target>Ha actualizado el hash del archivo o carpeta &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncUnchanged">
         <source>Found the file or folder &quot;%s&quot;</source>
-        <target>جستجوی پرونده یا پوشه &quot;%s&quot;</target>
+        <target>Ha encontrado el fichero o la carpeta &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncMoved">
         <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
-        <target>جستجوی پرونده یا پوشه &quot;%s&quot; در &quot;%s&quot;</target>
+        <target>Ha encontrado el fichero o la carpeta  &quot;%s&quot; en&quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncDeleted">
         <source>Removed the file or folder &quot;%s&quot;</source>
-        <target>پرونده یا پوشه «%s» حذف شد</target>
+        <target>Ha eliminado el archivo o la carpeta &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.syncComplete">
         <source>The synchronization has been completed</source>
-        <target>هماهنگ‌سازی کامل شده است</target>
+        <target>La sincronización ha completado</target>
       </trans-unit>
       <trans-unit id="tl_files.syncResult">
         <source>&lt;strong&gt;Result:&lt;/strong&gt; %s added | %s modified | %s unchanged | %s moved | %s deleted</source>
+        <target>&lt;strong&gt;Resultados:&lt;/strong&gt; %s añadidos| %s modificados | %s inalterados| %s movidos| %s borrados</target>
       </trans-unit>
       <trans-unit id="tl_files.syncShowUnchanged">
         <source>Show unchanged</source>
-        <target>نمایش تغییر نیافته‌</target>
+        <target>Mostrar inalterados</target>
       </trans-unit>
       <trans-unit id="tl_files.new.0">
         <source>New folder</source>
-        <target>پوشه جدید</target>
+        <target>Carpeta nueva</target>
       </trans-unit>
       <trans-unit id="tl_files.new.1">
         <source>Create a new folder</source>
-        <target>ساخت یک پوشه جدید</target>
+        <target>Crear una carpeta nueva</target>
       </trans-unit>
       <trans-unit id="tl_files.cut.0">
         <source>Move file or folder</source>
-        <target>جابجایی پرونده یا پوشه</target>
+        <target>Mover archivo o carpeta</target>
       </trans-unit>
       <trans-unit id="tl_files.cut.1">
         <source>Move file or folder &quot;%s&quot;</source>
-        <target>جابجایی پرونده یا پوشه &quot;%s&quot;</target>
+        <target>Mover este archivo o carpeta &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.copy.0">
         <source>Duplicate file or folder</source>
-        <target>تکثیر پرونده یا پوشه</target>
+        <target>Copiar archivo o carpeta</target>
       </trans-unit>
       <trans-unit id="tl_files.copy.1">
         <source>Duplicate file or folder &quot;%s&quot;</source>
-        <target>تکثیر پرونده یا پوشه &quot;%s&quot;</target>
+        <target>Copiar este archivo o carpeta &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.edit.0">
         <source>Rename file or folder</source>
-        <target>ویرایش پرونده یا پوشه</target>
+        <target>Editar archivo o carpeta</target>
       </trans-unit>
       <trans-unit id="tl_files.edit.1">
         <source>Rename file or folder &quot;%s&quot;</source>
-        <target>ویرایش پرونده یا پوشه &quot;%s&quot;</target>
+        <target>Editar archivo o carpeta &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.delete.0">
         <source>Delete file or folder</source>
-        <target>حذف پرونده یا پوشه</target>
+        <target>Borrar archivo o carpeta</target>
       </trans-unit>
       <trans-unit id="tl_files.delete.1">
         <source>Delete file or folder &quot;%s&quot;</source>
-        <target>حذف پرونده یا پوشه &quot;%s&quot;</target>
+        <target>Borrar archivo o carpeta &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.source.0">
         <source>Edit file</source>
-        <target>ویرایش پرونده</target>
+        <target>Editar código fuente</target>
       </trans-unit>
       <trans-unit id="tl_files.source.1">
         <source>Edit file &quot;%s&quot;</source>
-        <target>ویرایش پرونده &quot;%s&quot;</target>
+        <target>Editar código fuente del archivo &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.protect.0">
         <source>Protect folder</source>
-        <target>محافظت از پوشه</target>
+        <target>Proteger carpeta</target>
       </trans-unit>
       <trans-unit id="tl_files.protect.1">
         <source>Protect folder &quot;%s&quot;</source>
-        <target>محافظت از پوشه &quot;%s&quot;</target>
+        <target>Proteger carpeta &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.unlock.0">
         <source>Remove protection</source>
-        <target>حذف محافظت</target>
+        <target>Eliminar protección</target>
       </trans-unit>
       <trans-unit id="tl_files.unlock.1">
         <source>Unprotect folder &quot;%s&quot;</source>
-        <target>حذف محافظت پوشه &quot;%s&quot;</target>
+        <target>Eliminar la protección a la carpeta &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.move.0">
         <source>File upload</source>
-        <target>بارگذاری پرونده</target>
+        <target>Subir archivo</target>
       </trans-unit>
       <trans-unit id="tl_files.move.1">
         <source>Upload files to the server</source>
-        <target>بارگذاری یک یا چند پرونده</target>
+        <target>Subir uno o más archivos</target>
       </trans-unit>
       <trans-unit id="tl_files.pasteinto.0">
         <source>Paste into</source>
-        <target>افزودن در</target>
+        <target>Pegar dentro</target>
       </trans-unit>
       <trans-unit id="tl_files.pasteinto.1">
         <source>Paste into this folder</source>
-        <target>افزودن در این پوشه</target>
+        <target>Pegar dentro de esta carpeta</target>
       </trans-unit>
       <trans-unit id="tl_files.sync.0">
         <source>Synchronize</source>
-        <target>هماهنگ‌سازی</target>
+        <target>Sincronizar </target>
       </trans-unit>
       <trans-unit id="tl_files.sync.1">
         <source>Synchronize the file system and the database</source>
-        <target>هماهنگ‌سازی سیستم پرونده و پایگاه داده</target>
+        <target>Sincronizar los archivos y la base de datos</target>
       </trans-unit>
     </body>
   </file>
