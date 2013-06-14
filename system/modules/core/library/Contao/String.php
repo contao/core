@@ -527,27 +527,6 @@ class String
 
 
 	/**
-	 * Quote special characters in a MySQL regular expression
-	 *
-	 * @param string $strRegexp The regex string
-	 *
-	 * @return string The quoted regex string
-	 */
-	public static function quoteMysqlRexep($strRegexp)
-	{
-		$arrSearch = array('^', '$', '*', '.', '?', '+', '[', ']', '(', ')', '{', '}', '|', '\\');
-		$arrReplace = array();
-
-		foreach ($arrSearch as $strChar)
-		{
-			$arrReplace[] = '\\' . $strChar;
-		}
-
-		return str_replace($arrSearch, $arrReplace, $strRegexp);
-	}
-
-
-	/**
 	 * Prevent direct instantiation (Singleton)
 	 *
 	 * @deprecated String is now a static class

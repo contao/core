@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Quote wildcard characters in MySQL `LIKE` queries (see #5896).
+
+### Fixed
 Correctly align the version drop-down menu in Safari (see #5854).
 
 ### Fixed
@@ -30,9 +33,6 @@ Support using commas in folder names in the file selector (see #5823).
 
 ### Fixed
 Ignore the `auto_item` parameter when forwarding internally (see #5886).
-
-### New
-Added the `String::quoteMysqlRegexp()` method (fixes 5896).
 
 ### Fixed
 Added support for old IE versions to swipe.js (see #5862).
