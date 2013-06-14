@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Make sure `window.$` is mapped to MooTools (see #5892).
+
+### Fixed
 Do not add sort buttons to table row headers (see #5845).
 
 ### Fixed
