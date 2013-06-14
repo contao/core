@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Explicitly check for `.php` files when scanning DCA files (see #5898).
+
+### Fixed
 Replaced all dummy `.htaccess` files with `.gitignore` files.
 
 ### Fixed
