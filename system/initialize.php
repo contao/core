@@ -64,20 +64,11 @@ require TL_ROOT . '/system/helper/interface.php';
 
 
 /**
- * Load the local configuration
- *
- * The class and module loaders depend on the "bypassCache"
- * and "coreOnlyMode" settings (see #5872).
+ * Include some classes required for further processing
  */
-if (file_exists(TL_ROOT . '/system/config/localconfig.php'))
-{
-	include TL_ROOT . '/system/config/localconfig.php';
-}
+require TL_ROOT . '/system/modules/core/library/Contao/Config.php';
+class_alias('Contao\\Config', 'Config');
 
-
-/**
- * Register the class, template and module loaders
- */
 require TL_ROOT . '/system/modules/core/library/Contao/ClassLoader.php';
 class_alias('Contao\\ClassLoader', 'ClassLoader');
 
@@ -87,6 +78,7 @@ class_alias('Contao\\TemplateLoader', 'TemplateLoader');
 require TL_ROOT . '/system/modules/core/library/Contao/ModuleLoader.php';
 class_alias('Contao\\ModuleLoader', 'ModuleLoader');
 
+Config::preload(); // see #5872
 ClassLoader::scanAndRegister(); // config/autoload.php
 
 

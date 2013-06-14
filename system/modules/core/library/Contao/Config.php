@@ -60,7 +60,7 @@ class Config
 	 * Local file existance
 	 * @var boolean
 	 */
-	protected $blnHasLcf = false;
+	protected static $blnHasLcf;
 
 	/**
 	 * Data
@@ -121,16 +121,9 @@ class Config
 	 */
 	protected function initialize()
 	{
-		$this->blnHasLcf = file_exists(TL_ROOT . '/system/config/localconfig.php');
-
-		// Load the default files
-		include TL_ROOT . '/system/config/default.php';
-		include TL_ROOT . '/system/config/agents.php';
-
-		// Include the local configuration file
-		if ($this->blnHasLcf)
+		if (static::$blnHasLcf === null)
 		{
-			include TL_ROOT . '/system/config/localconfig.php';
+			static::preload();
 		}
 
 		$strCacheFile = 'system/cache/config/config.php';
@@ -155,7 +148,7 @@ class Config
 		}
 
 		// // Include the local configuration file again
-		if ($this->blnHasLcf)
+		if (static::$blnHasLcf)
 		{
 			include TL_ROOT . '/system/config/localconfig.php';
 		}
@@ -179,7 +172,7 @@ class Config
 		$this->Files = \Files::getInstance();
 
 		// Parse the local configuration file
-		if ($this->blnHasLcf)
+		if (static::$blnHasLcf)
 		{
 			$strMode = 'top';
 			$resFile = fopen(TL_ROOT . '/system/config/localconfig.php', 'rb');
@@ -314,7 +307,7 @@ class Config
 	 */
 	public function isComplete()
 	{
-		return $this->blnHasLcf;
+		return static::$blnHasLcf;
 	}
 
 
@@ -369,6 +362,25 @@ class Config
 		}
 
 		return null;
+	}
+
+
+	/**
+	 * Preload the default and local configuration
+	 */
+	public static function preload()
+	{
+		// Load the default files
+		include TL_ROOT . '/system/config/default.php';
+		include TL_ROOT . '/system/config/agents.php';
+
+		// Include the local configuration file
+		if (($blnHasLcf = file_exists(TL_ROOT . '/system/config/localconfig.php')) === true)
+		{
+			include TL_ROOT . '/system/config/localconfig.php';
+		}
+
+		static::$blnHasLcf = $blnHasLcf;
 	}
 
 
