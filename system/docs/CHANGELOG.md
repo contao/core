@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly align the version drop-down menu in Safari (see #5854).
+
+### Fixed
 Make sure `window.$` is mapped to MooTools (see #5892).
 
 ### Fixed
