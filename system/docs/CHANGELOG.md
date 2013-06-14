@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Replaced all dummy `.htaccess` files with `.gitignore` files.
+
+### Fixed
 Quote wildcard characters in MySQL `LIKE` queries (see #5896).
 
 ### Fixed

@@ -218,9 +218,9 @@ class Automator extends \System
 		$objFolder = new \Folder('system/tmp');
 		$objFolder->purge();
 
-		// Restore the .htaccess file
-		$objFile = new \File('system/logs/.htaccess', true);
-		$objFile->copyTo('system/tmp/.htaccess');
+		// Restore the .gitignore file
+		$objFile = new \File('system/logs/.gitignore', true);
+		$objFile->copyTo('system/tmp/.gitignore');
 
 		// Add a log entry
 		$this->log('Purged the temp folder', 'Automator purgeTempFolder()', TL_CRON);
