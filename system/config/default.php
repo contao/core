@@ -188,7 +188,7 @@ $GLOBALS['TL_CONFIG']['encryptionCipher'] = 'rijndael-256';
  * Password hashing
  */
 $GLOBALS['TL_PASSWORD']['algorithm']    = PASSWORD_DEFAULT;
-$GLOBALS['TL_PASSWORD']['options']      = array('cost' => 7);
+$GLOBALS['TL_PASSWORD']['options']      = array('cost' => 10);
 
 
 /**
