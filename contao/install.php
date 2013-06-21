@@ -373,6 +373,7 @@ class InstallTool extends Backend
 		$_SESSION['TL_INSTALL_AUTH'] = '';
 		$_SESSION['TL_INSTALL_EXPIRE'] = 0;
 
+        // @todo: Update to the new password_hash() method
 		// The password has been generated with crypt()
 		if (Encryption::test($GLOBALS['TL_CONFIG']['installPassword']))
 		{
