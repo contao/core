@@ -961,6 +961,26 @@ class InstallTool extends Backend
 			$this->outputAndExit();
 		}
 	}
+
+
+	/**
+	 * Version 3.2.0 update
+	 */
+	protected function update32()
+	{
+		if (!$this->Database->fieldExists('oldPwHashAlgo', 'tl_user'))
+		{
+			if (Input::post('FORM_SUBMIT') == 'tl_32update')
+			{
+				$this->import('Database\\Updater', 'Updater');
+				$this->Updater->run32Update();
+				$this->reload();
+			}
+
+			$this->Template->is32Update = true;
+			$this->outputAndExit();
+		}
+	}
 }
 
 
