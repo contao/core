@@ -67,8 +67,8 @@ class PasswordUtil
 	 */
 	public function __construct($algo=false, $options=false)
 	{
-		$this->algo		= ($algo) ? $algo : $GLOBALS['TL_PASSWORD']['algorithm'];
-		$this->options	= ($options) ? $options : $GLOBALS['TL_PASSWORD']['options'];
+		$this->algo		= ($algo) ? $algo : $GLOBALS['TL_CONFIG']['password_algorithm'];
+		$this->options	= ($options) ? $options : $GLOBALS['TL_CONFIG']['password_options'];
 	}
 
 	/**
