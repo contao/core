@@ -570,57 +570,54 @@ abstract class User extends \System
 	protected function verifyPassword()
 	{
 		$password   = \Input::post('password', true);
-		$options    = $GLOBALS['TL_PASSWORD']['options'];
-		$algorithm  = $GLOBALS['TL_PASSWORD']['algorithm'];
+        $blnOld     = false;
 
-		// Check if the password was encrypted using the password hashing api
-		$info = password_get_info($this->password);
-		if ($info['algo'] > 0)
-		{
-			// Verify password
-			if (password_verify($password, $this->password))
-			{
-				if (password_needs_rehash($this->password, $algorithm, $options))
-				{
-					$this->password = password_hash($password, $algorithm, $options);
-				}
+        // Check password hashing algorithms of previous Contao versions
+        if ($this->oldPwHashAlgo != '')
+        {
+            switch ($this->oldPwHashAlgo)
+            {
+                case 'crypt':
+                    $password = crypt($password, $this->oldPwSalt);
+                    break;
 
-				return true;
-			}
+                case 'sha1':
+                    if ($this->oldPwSalt == '')
+                    {
+                        $password = sha1($password);
+                    }
+                    else
+                    {
+                        $password = sha1($this->oldPwSalt . $password) . ':' . $this->oldPwSalt;
+                    }
+                    break;
+            }
 
-			return false;
-		}
+            // Reset data
+            $this->oldPwHashAlgo = '';
+            $this->oldPwSalt == '';
+            $blnOld = true;
+        }
 
-		// Check if the password was encrypted using crypt()
-		if (\Encryption::test($this->password))
-		{
-			// Verify password
-			if (crypt($password, $this->password) == $this->password)
-			{
-				// Now use the password hashing api
-				$this->password = password_hash($password, $algorithm, $options);
+        // Verify password
+        if (password_verify($password, $this->password))
+        {
+            // Update password to the new format for old algorithms
+            if ($blnOld)
+            {
+                // Use \Input::post('password', true) here, as $password has been modified in this routine
+                $this->password = password_hash(\Input::post('password', true), $GLOBALS['TL_PASSWORD']['algorithm'], $GLOBALS['TL_PASSWORD']['options']);
+            }
 
-				return true;
-			}
+            if (password_needs_rehash($this->password, $GLOBALS['TL_PASSWORD']['algorithm'], $GLOBALS['TL_PASSWORD']['options']))
+            {
+                $this->password = password_hash($this->password, $GLOBALS['TL_PASSWORD']['algorithm'], $GLOBALS['TL_PASSWORD']['options']);
+            }
 
-			return false;
-		}
+            return true;
+        }
 
-		// The password was encrypted using the sha1() algorithm
-		list($strPassword, $strSalt) = explode(':', $this->password);
-
-		// Verify password
-		$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1($password)) : ($strPassword == sha1($strSalt . $password));
-
-		if ($blnAuthenticated)
-		{
-			// Now use the password hashing api
-			$this->password = password_hash($password, $algorithm, $options);
-
-			return true;
-		}
-
-		return false;
+        return false;
 	}
 
 
