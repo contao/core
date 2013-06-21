@@ -78,7 +78,7 @@ class PasswordUtil
      * generated using the latest algorithm
      *
      * @param string Algorithm (either "crypt" or "sha1")
-     * @param $salt
+     * @param string Salt
      */
     public function setOldHashingAlgorithm($algo, $salt)
     {
