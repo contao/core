@@ -126,6 +126,7 @@ namespace  {
 	abstract class Model extends \Contao\Model {}
 	class ModuleLoader extends \Contao\ModuleLoader {}
 	class Pagination extends \Contao\Pagination {}
+	class PasswordUtil extends \Contao\PasswordUtil {}
 	class Request extends \Contao\Request {}
 	class RequestToken extends \Contao\RequestToken {}
 	class Search extends \Contao\Search {}
