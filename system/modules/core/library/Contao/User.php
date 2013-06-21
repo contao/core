@@ -569,50 +569,21 @@ abstract class User extends \System
 	 */
 	protected function verifyPassword()
 	{
-		$password   = \Input::post('password', true);
-        $blnOld     = false;
+        $pwUtil = new PasswordUtil();
 
         // Check password hashing algorithms of previous Contao versions
         if ($this->oldPwHashAlgo != '')
         {
-            switch ($this->oldPwHashAlgo)
-            {
-                case 'crypt':
-                    $password = crypt($password, $this->oldPwSalt);
-                    break;
-
-                case 'sha1':
-                    if ($this->oldPwSalt == '')
-                    {
-                        $password = sha1($password);
-                    }
-                    else
-                    {
-                        $password = sha1($this->oldPwSalt . $password) . ':' . $this->oldPwSalt;
-                    }
-                    break;
-            }
-
-            // Reset data
-            $this->oldPwHashAlgo = '';
-            $this->oldPwSalt == '';
-            $blnOld = true;
+            $pwUtil->setOldHashingAlgorithm($this->oldPwHashAlgo, $this->oldPwSalt);
         }
 
         // Verify password
-        if (password_verify($password, $this->password))
+        if ($pwUtil->password_verify(\Input::post('password', true), $this->password))
         {
-            // Update password to the new format for old algorithms
-            if ($blnOld)
-            {
-                // Use \Input::post('password', true) here, as $password has been modified in this routine
-                $this->password = password_hash(\Input::post('password', true), $GLOBALS['TL_PASSWORD']['algorithm'], $GLOBALS['TL_PASSWORD']['options']);
-            }
-
-            if (password_needs_rehash($this->password, $GLOBALS['TL_PASSWORD']['algorithm'], $GLOBALS['TL_PASSWORD']['options']))
-            {
-                $this->password = password_hash($this->password, $GLOBALS['TL_PASSWORD']['algorithm'], $GLOBALS['TL_PASSWORD']['options']);
-            }
+            // Reset data
+            $this->oldPwHashAlgo = '';
+            $this->oldPwSalt == '';
+            $this->password = $pwUtil->getUpdatedPassword();
 
             return true;
         }
