@@ -11,6 +11,7 @@
  */
 
 namespace Contao\Database;
+use Contao\PasswordUtil;
 
 
 /**
@@ -721,6 +722,9 @@ class Updater extends \Controller
      */
     protected function updatePasswords()
     {
+        $pwUtil = new PasswordUtil();
+
+        // Database
         foreach (array('tl_member', 'tl_user') as $strTable)
         {
             if ($this->Database->fieldExists('oldPwHashAlgo', $strTable) || $this->Database->fieldExists('oldPwSalt', $strTable))
@@ -757,10 +761,36 @@ class Updater extends \Controller
 
                 $arrSet['oldPwSalt']        = $strSalt;
                 $arrSet['oldPwHashAlgo']    = $strOldAlgo;
-                $arrSet['password']         = password_hash($objEntries->password, $GLOBALS['TL_PASSWORD']['algorithm'], $GLOBALS['TL_PASSWORD']['options']);
+                $arrSet['password']         = $pwUtil->password_hash($objEntries->password);
 
                 $this->Database->prepare('UPDATE ' . $strTable . ' %s WHERE id=?')->set($arrSet)->execute($objEntries->id);
             }
+        }
+
+        // Install password
+        if (!isset($GLOBALS['TL_CONFIG']['oldPwHashAlgo']))
+        {
+            // Check if it's not already a correct password
+            $info = password_get_info($GLOBALS['TL_CONFIG']['installPassword']);
+            if ($info['algo'] > 0)
+            {
+                return;
+            }
+
+            $strOldAlgo = (strncmp($GLOBALS['TL_CONFIG']['installPassword'], '$', 1) === 0) ? 'crypt' : 'sha1';
+
+            if ($strOldAlgo == 'sha1')
+            {
+                list(, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword'], 2);
+            }
+            else
+            {
+                $strSalt = implode('$', explode('$', $GLOBALS['TL_CONFIG']['installPassword'], -1));
+            }
+
+            $this->Config->update("\$GLOBALS['TL_CONFIG']['oldPwSalt']", $strSalt);
+            $this->Config->update("\$GLOBALS['TL_CONFIG']['oldPwHashAlgo']", $strOldAlgo);
+            $this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $pwUtil->password_hash($GLOBALS['TL_CONFIG']['installPassword']));
         }
     }
 }
