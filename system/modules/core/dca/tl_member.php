@@ -331,14 +331,14 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
-        'oldPwHashAlgo' => array
-        (
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
-        'oldPwSalt' => array
-        (
-            'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
+		'oldPwHashAlgo' => array
+		(
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'oldPwSalt' => array
+		(
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
 		'assignDir' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_member']['assignDir'],

@@ -475,14 +475,14 @@ class Updater extends \Controller
 	}
 
 
-    /**
-     * Version 3.2.0 update
-     */
-    public function run32Update()
-    {
-        // Run password update
-        $this->updatePasswords();
-    }
+	/**
+	 * Version 3.2.0 update
+	 */
+	public function run32Update()
+	{
+		// Run password update
+		$this->updatePasswords();
+	}
 
 
 	/**
@@ -717,88 +717,88 @@ class Updater extends \Controller
 	}
 
 
-    /**
-     * Updates the passwords
-     */
-    protected function updatePasswords()
-    {
-        $pwUtil = new PasswordUtil();
+	/**
+	 * Updates the passwords
+	 */
+	protected function updatePasswords()
+	{
+		$pwUtil = new PasswordUtil();
 
-        // Database
-        foreach (array('tl_member', 'tl_user') as $strTable)
-        {
-            if ($this->Database->fieldExists('oldPwHashAlgo', $strTable) || $this->Database->fieldExists('oldPwSalt', $strTable))
-            {
-                continue;
-            }
+		// Database
+		foreach (array('tl_member', 'tl_user') as $strTable)
+		{
+			if ($this->Database->fieldExists('oldPwHashAlgo', $strTable) || $this->Database->fieldExists('oldPwSalt', $strTable))
+			{
+				continue;
+			}
 
-            // Add password update fields
-            $this->Database->query("ALTER TABLE `$strTable` ADD `oldPwHashAlgo` varchar(255) NOT NULL default ''");
-            $this->Database->query("ALTER TABLE `$strTable` ADD `oldPwSalt` varchar(255) NOT NULL default ''");
+			// Add password update fields
+			$this->Database->query("ALTER TABLE `$strTable` ADD `oldPwHashAlgo` varchar(255) NOT NULL default ''");
+			$this->Database->query("ALTER TABLE `$strTable` ADD `oldPwSalt` varchar(255) NOT NULL default ''");
 
-            // Hash using the php 5.5 password hashing api
-            $objEntries = $this->Database->query('SELECT id,password FROM ' . $strTable);
-            while ($objEntries->next())
-            {
-                // Check if it's not already a correct password (Admin user created in install tool)
-                $info = password_get_info($objEntries->password);
-                if ($info['algo'] > 0)
-                {
-                    continue;
-                }
+			// Hash using the php 5.5 password hashing api
+			$objEntries = $this->Database->query('SELECT id,password FROM ' . $strTable);
+			while ($objEntries->next())
+			{
+				// Check if it's not already a correct password (Admin user created in install tool)
+				$info = password_get_info($objEntries->password);
+				if ($info['algo'] > 0)
+				{
+					continue;
+				}
 
-                $arrSet = array();
-                $strOldAlgo = (strncmp($objEntries->password, '$', 1) === 0) ? 'crypt' : 'sha1';
+				$arrSet = array();
+				$strOldAlgo = (strncmp($objEntries->password, '$', 1) === 0) ? 'crypt' : 'sha1';
 
-                if ($strOldAlgo == 'sha1')
-                {
-                    $chunks = explode(':', $objEntries->password, 2);
-                    if (count($chunks) == 2)
-                    {
-                        list(, $strSalt) = explode(':', $objEntries->password, 2);
-                    }
-                    else
-                    {
-                        $strSalt = '';
-                    }
-                }
-                else
-                {
-                    $strSalt = implode('$', explode('$', $objEntries->password, -1));
-                }
+				if ($strOldAlgo == 'sha1')
+				{
+					$chunks = explode(':', $objEntries->password, 2);
+					if (count($chunks) == 2)
+					{
+						list(, $strSalt) = explode(':', $objEntries->password, 2);
+					}
+					else
+					{
+						$strSalt = '';
+				}
+				}
+				else
+				{
+					$strSalt = implode('$', explode('$', $objEntries->password, -1));
+				}
 
-                $arrSet['oldPwSalt']        = $strSalt;
-                $arrSet['oldPwHashAlgo']    = $strOldAlgo;
-                $arrSet['password']         = $pwUtil->password_hash($objEntries->password);
+				$arrSet['oldPwSalt']		= $strSalt;
+				$arrSet['oldPwHashAlgo']	= $strOldAlgo;
+				$arrSet['password']			= $pwUtil->password_hash($objEntries->password);
 
-                $this->Database->prepare('UPDATE ' . $strTable . ' %s WHERE id=?')->set($arrSet)->execute($objEntries->id);
-            }
-        }
+				$this->Database->prepare('UPDATE ' . $strTable . ' %s WHERE id=?')->set($arrSet)->execute($objEntries->id);
+			}
+		}
 
-        // Install password
-        if (!isset($GLOBALS['TL_CONFIG']['oldPwHashAlgo']))
-        {
-            // Check if it's not already a correct password
-            $info = password_get_info($GLOBALS['TL_CONFIG']['installPassword']);
-            if ($info['algo'] > 0)
-            {
-                return;
-            }
+		// Install password
+		if (!isset($GLOBALS['TL_CONFIG']['oldPwHashAlgo']))
+		{
+			// Check if it's not already a correct password
+			$info = password_get_info($GLOBALS['TL_CONFIG']['installPassword']);
+			if ($info['algo'] > 0)
+			{
+				return;
+			}
 
-            $strOldAlgo = (strncmp($GLOBALS['TL_CONFIG']['installPassword'], '$', 1) === 0) ? 'crypt' : 'sha1';
+			$strOldAlgo = (strncmp($GLOBALS['TL_CONFIG']['installPassword'], '$', 1) === 0) ? 'crypt' : 'sha1';
 
-            if ($strOldAlgo == 'sha1')
-            {
-                list(, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword'], 2);
-            }
-            else
-            {
-                $strSalt = implode('$', explode('$', $GLOBALS['TL_CONFIG']['installPassword'], -1));
-            }
+			if ($strOldAlgo == 'sha1')
+			{
+				list(, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword'], 2);
+			}
+			else
+			{
+				$strSalt = implode('$', explode('$', $GLOBALS['TL_CONFIG']['installPassword'], -1));
+			}
 
-            $this->Config->update("\$GLOBALS['TL_CONFIG']['oldPwSalt']", $strSalt);
-            $this->Config->update("\$GLOBALS['TL_CONFIG']['oldPwHashAlgo']", $strOldAlgo);
-            $this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $pwUtil->password_hash($GLOBALS['TL_CONFIG']['installPassword']));
-        }
-    }
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['oldPwSalt']", $strSalt);
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['oldPwHashAlgo']", $strOldAlgo);
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $pwUtil->password_hash($GLOBALS['TL_CONFIG']['installPassword']));
+		}
+	}
 }

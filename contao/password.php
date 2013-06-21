@@ -81,7 +81,8 @@ class ChangePassword extends Backend
 			else
 			{
 				// Make sure the password has been changed
-				if (password_verify($pw, $this->$this->User->password))
+				$pwUtil = new PasswordUtil();
+				if ($pwUtil->password_verify($pw, $this->$this->User->password))
 				{
 					Message::addError($GLOBALS['TL_LANG']['MSC']['pw_change']);
 				}

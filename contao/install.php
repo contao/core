@@ -373,26 +373,26 @@ class InstallTool extends Backend
 		$_SESSION['TL_INSTALL_AUTH'] = '';
 		$_SESSION['TL_INSTALL_EXPIRE'] = 0;
 
-        $pwUtil = new PasswordUtil();
+		$pwUtil = new PasswordUtil();
 
-        // Check password hashing algorithms of previous Contao versions
-        if ($GLOBALS['TL_CONFIG']['oldPwHashAlgo'] != '')
-        {
-            $pwUtil->setOldHashingAlgorithm($GLOBALS['TL_CONFIG']['oldPwHashAlgo'], $GLOBALS['TL_CONFIG']['oldPwSalt']);
-        }
+		// Check password hashing algorithms of previous Contao versions
+		if ($GLOBALS['TL_CONFIG']['oldPwHashAlgo'] != '')
+		{
+			$pwUtil->setOldHashingAlgorithm($GLOBALS['TL_CONFIG']['oldPwHashAlgo'], $GLOBALS['TL_CONFIG']['oldPwSalt']);
+		}
 
-        // Verify password
-        if ($pwUtil->password_verify(\Input::post('password', true), $GLOBALS['TL_CONFIG']['installPassword']))
-        {
-            // Reset data
-            $this->Config->delete("\$GLOBALS['TL_CONFIG']['oldPwHashAlgo']");
-            $this->Config->delete("\$GLOBALS['TL_CONFIG']['oldPwSalt']");
-            $this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $pwUtil->getUpdatedPassword());
+		// Verify password
+		if ($pwUtil->password_verify(\Input::post('password', true), $GLOBALS['TL_CONFIG']['installPassword']))
+		{
+			// Reset data
+			$this->Config->delete("\$GLOBALS['TL_CONFIG']['oldPwHashAlgo']");
+			$this->Config->delete("\$GLOBALS['TL_CONFIG']['oldPwSalt']");
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $pwUtil->getUpdatedPassword());
 
-            $this->setAuthCookie();
-            $this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
-            $this->reload();
-        }
+			$this->setAuthCookie();
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
+			$this->reload();
+		}
 
 		// Increase the login count if we get here
 		$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", $GLOBALS['TL_CONFIG']['installCount'] + 1);
@@ -693,8 +693,8 @@ class InstallTool extends Backend
 				elseif (Input::post('name') != '' && Input::post('email', true) != '' && Input::post('username', true) != '')
 				{
 					$time = time();
-                    $pwUtil = new PasswordUtil();
-                    $strPassword = $pwUtil->password_hash(Input::post('pass', true));
+					$pwUtil = new PasswordUtil();
+					$strPassword = $pwUtil->password_hash(Input::post('pass', true));
 
 					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, language, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
 								   ->execute(Input::post('name'), Input::post('email', true), Input::post('username', true), $strPassword, $GLOBALS['TL_LANGUAGE']);
