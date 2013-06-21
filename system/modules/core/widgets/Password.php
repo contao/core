@@ -132,7 +132,7 @@ class Password extends \Widget
 		{
 			$this->blnSubmitInput = true;
 			\Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);
-			return \Encryption::hash($varInput);
+            return password_hash($varInput, $GLOBALS['TL_PASSWORD']['algorithm'], $GLOBALS['TL_PASSWORD']['options']);
 		}
 
 		return '';
