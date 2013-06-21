@@ -721,24 +721,18 @@ class Updater extends \Controller
      */
     protected function updatePasswords()
     {
-        $options    = $GLOBALS['TL_PASSWORD']['options'];
-        $algorithm  = $GLOBALS['TL_PASSWORD']['algorithm'];
-
-        foreach(array('tl_member', 'tl_user') as $strTable)
+        foreach (array('tl_member', 'tl_user') as $strTable)
         {
+            if ($this->Database->fieldExists('oldPwHashAlgo', $strTable) || $this->Database->fieldExists('oldPwSalt', $strTable))
+            {
+                continue;
+            }
+
             // Add password update fields
-            if ($this->Database->fieldExists('oldPwHashAlgo', $strTable))
-            {
-                $this->Database->query("ALTER TABLE `$strTable` ADD `oldPwHashAlgo` varchar(8) NOT NULL default ''");
-            }
+            $this->Database->query("ALTER TABLE `$strTable` ADD `oldPwHashAlgo` varchar(255) NOT NULL default ''");
+            $this->Database->query("ALTER TABLE `$strTable` ADD `oldPwSalt` varchar(255) NOT NULL default ''");
 
-            // This is only needed for the old sha1 passwords where we still need the salt to be available
-            if ($this->Database->fieldExists('oldPwSalt', $strTable))
-            {
-                $this->Database->query("ALTER TABLE `$strTable` ADD `oldPwSalt` varchar(8) NOT NULL default ''");
-            }
-
-            // hash using the php 5.5 password hashing api
+            // Hash using the php 5.5 password hashing api
             $objEntries = $this->Database->query('SELECT id,password FROM ' . $strTable);
             while ($objEntries->next())
             {
@@ -752,7 +746,7 @@ class Updater extends \Controller
                 }
 
                 $arrSet['oldPwHashAlgo']    = $strOldAlgo;
-                $arrSet['password']         = password_hash($objEntries->password, $algorithm, $options);
+                $arrSet['password']         = password_hash($objEntries->password, $GLOBALS['TL_PASSWORD']['algorithm'], $GLOBALS['TL_PASSWORD']['options']);
 
                 $this->Database->prepare('UPDATE ' . $strTable . ' SET %s WHERE id=?')->set($arrSet)->execute($objEntries->id);
             }
