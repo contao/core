@@ -246,6 +246,14 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'minlength'=>$GLOBALS['TL_CONFIG']['minPasswordLength']),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
+        'oldPwHashAlgo' => array
+        (
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'oldPwSalt' => array
+        (
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
 		'pwChange' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['pwChange'],
