@@ -169,64 +169,6 @@ class Encryption
 
 
 	/**
-	 * Generate a password hash
-	 *
-	 * @param string $strPassword The unencrypted password
-	 *
-	 * @return string The encrypted password
-	 *
-	 * @throws \Exception If none of the algorithms is available
-	 */
-	public static function hash($strPassword)
-	{
-		if (CRYPT_SHA512 == 1)
-		{
-			return crypt($strPassword, '$6$' . md5(uniqid(mt_rand(), true)) . '$');
-		}
-		elseif (CRYPT_SHA256 == 1)
-		{
-			return crypt($strPassword, '$5$' . md5(uniqid(mt_rand(), true)) . '$');
-		}
-		elseif (CRYPT_BLOWFISH == 1)
-		{
-			return crypt($strPassword, '$2a$07$' . md5(uniqid(mt_rand(), true)) . '$');
-		}
-		else
-		{
-			throw new \Exception('None of the required crypt() algorithms is available');
-		}
-	}
-
-
-	/**
-	 * Test whether a password hash has been generated with crypt()
-	 *
-	 * @param string $strHash The password hash
-	 *
-	 * @return boolean True if the password hash has been generated with crypt()
-	 */
-	public static function test($strHash)
-	{
-		if (strncmp($strHash, '$6$', 3) === 0)
-		{
-			return true;
-		}
-		elseif (strncmp($strHash, '$5$', 3) === 0)
-		{
-			return true;
-		}
-		elseif (strncmp($strHash, '$2a$07$', 7) === 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-
-	/**
 	 * Initialize the encryption module
 	 *
 	 * @deprecated Encryption is now a static class
