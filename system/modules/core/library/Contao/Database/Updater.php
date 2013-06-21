@@ -736,15 +736,26 @@ class Updater extends \Controller
             $objEntries = $this->Database->query('SELECT id,password FROM ' . $strTable);
             while ($objEntries->next())
             {
+                // Check if it's not already a correct password (Admin user created in install tool)
+                $info = password_get_info($objEntries->password);
+                if ($info['algo'] > 0)
+                {
+                    continue;
+                }
+
                 $arrSet = array();
                 $strOldAlgo = (strncmp($objEntries->password, '$', 1) === 0) ? 'crypt' : 'sha1';
 
                 if ($strOldAlgo == 'sha1')
                 {
-                    list($strPassword, $strSalt) = explode(':', $this->password);
-                    $arrSet['oldPwSalt']    = $strSalt;
+                    list(, $strSalt) = explode(':', $objEntries->password, 2);
+                }
+                else
+                {
+                    $strSalt = implode('$', explode('$', $objEntries->password, -1));
                 }
 
+                $arrSet['oldPwSalt']        = $strSalt;
                 $arrSet['oldPwHashAlgo']    = $strOldAlgo;
                 $arrSet['password']         = password_hash($objEntries->password, $GLOBALS['TL_PASSWORD']['algorithm'], $GLOBALS['TL_PASSWORD']['options']);
 
