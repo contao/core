@@ -752,7 +752,15 @@ class Updater extends \Controller
 
                 if ($strOldAlgo == 'sha1')
                 {
-                    list(, $strSalt) = explode(':', $objEntries->password, 2);
+                    $chunks = explode(':', $objEntries->password, 2);
+                    if (count($chunks) == 2)
+                    {
+                        list(, $strSalt) = explode(':', $objEntries->password, 2);
+                    }
+                    else
+                    {
+                        $strSalt = '';
+                    }
                 }
                 else
                 {
