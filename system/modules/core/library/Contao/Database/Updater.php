@@ -748,7 +748,7 @@ class Updater extends \Controller
                 $arrSet['oldPwHashAlgo']    = $strOldAlgo;
                 $arrSet['password']         = password_hash($objEntries->password, $GLOBALS['TL_PASSWORD']['algorithm'], $GLOBALS['TL_PASSWORD']['options']);
 
-                $this->Database->prepare('UPDATE ' . $strTable . ' SET %s WHERE id=?')->set($arrSet)->execute($objEntries->id);
+                $this->Database->prepare('UPDATE ' . $strTable . ' %s WHERE id=?')->set($arrSet)->execute($objEntries->id);
             }
         }
     }

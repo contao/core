@@ -101,7 +101,7 @@ class ChangePassword extends Backend
 
 					$objUser = UserModel::findByPk($this->User->id);
 					$objUser->pwChange = '';
-					$objUser->password = password_hash($pw, $GLOBALS['TL_PASSWORD']['algorithm'], $GLOBALS['TL_PASSWORD']['options']);;
+					$objUser->password = password_hash($pw, $GLOBALS['TL_PASSWORD']['algorithm'], $GLOBALS['TL_PASSWORD']['options']);
 					$objUser->save();
 
 					Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);

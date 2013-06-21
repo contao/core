@@ -1147,7 +1147,7 @@ Library.
               </fieldset>
 
           <?php elseif ($this->is32Update): ?>
-          <fieldset class="tl_box<?php if (!$this->is31Update): ?> collapsed<?php endif; ?>">
+          <fieldset class="tl_box<?php if (!$this->is32Update): ?> collapsed<?php endif; ?>">
               <legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></legend>
               <div>
                   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></h3>
