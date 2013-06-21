@@ -422,7 +422,8 @@ class InstallTool extends Backend
 		// Save the password
 		else
 		{
-			$strPassword = password_hash($strPassword, $GLOBALS['TL_PASSWORD']['algorithm'], $GLOBALS['TL_PASSWORD']['options']);;
+			$pwUtil = new PasswordUtil();
+			$strPassword = $pwUtil->password_hash($strPassword);
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword);
 			$this->reload();
 		}
