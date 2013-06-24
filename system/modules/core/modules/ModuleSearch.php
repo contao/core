@@ -99,7 +99,7 @@ class ModuleSearch extends \Module
 		$objFormTemplate->matchAll = specialchars($GLOBALS['TL_LANG']['MSC']['matchAll']);
 		$objFormTemplate->matchAny = specialchars($GLOBALS['TL_LANG']['MSC']['matchAny']);
 		$objFormTemplate->id = ($GLOBALS['TL_CONFIG']['disableAlias'] && \Input::get('id')) ? \Input::get('id') : false;
-		$objFormTemplate->action = \Environment::get('indexFreeRequest');
+		$objFormTemplate->action = ampersand(\Environment::get('indexFreeRequest'), true);
 
 		// Redirect page
 		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)

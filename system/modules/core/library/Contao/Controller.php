@@ -1269,7 +1269,7 @@ abstract class Controller extends \System
 						break;
 					}
 
-					$strUrl = \Environment::get('request');
+					$strUrl = ampersand(\Environment::get('request'), true);
 					$strGlue = (strpos($strUrl, '?') === false) ? '?' : '&amp;';
 
 					if ($objPage->isMobile)

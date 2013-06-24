@@ -99,7 +99,7 @@ class ModuleNavigation extends \Module
 			}
 		}
 
-		$this->Template->request = \Environment::get('indexFreeRequest');
+		$this->Template->request = ampersand(\Environment::get('indexFreeRequest'), true);
 		$this->Template->skipId = 'skipNavigation' . $this->id;
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
 		$this->Template->items = $this->renderNavigation($trail[$level], 1, $host, $lang);
