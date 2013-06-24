@@ -62,6 +62,20 @@ class PageForward extends \Frontend
 		}
 
 		$strGet = '';
+		$strQuery = \Environment::get('queryString');
+		$arrQuery = array();
+
+		// Extract the query string keys (see #5867)
+		if ($strQuery != '')
+		{
+			$arrChunks = explode('&', $strQuery);
+
+			foreach ($arrChunks as $strChunk)
+			{
+				list($k,) = explode('=', $strChunk, 2);
+				$arrQuery[] = $k;
+			}
+		}
 
 		// Add $_GET parameters
 		if (!empty($_GET))
@@ -78,6 +92,12 @@ class PageForward extends \Frontend
 					continue;
 				}
 
+				// Ignore the query string parameters (see #5867)
+				if (in_array($key, $arrQuery))
+				{
+					continue;
+				}
+
 				// Ignore the auto_item parameter (see #5886)
 				if ($key == 'auto_item')
 				{
@@ -90,6 +110,12 @@ class PageForward extends \Frontend
 			}
 		}
 
-		$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strGet, $strForceLang), (($objPage->redirect == 'temporary') ? 302 : 301));
+		// Append the query string (see #5867)
+		if ($strQuery != '')
+		{
+			$strQuery = '?' . $strQuery;
+		}
+
+		$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strGet, $strForceLang) . $strQuery, (($objPage->redirect == 'temporary') ? 302 : 301));
 	}
 }

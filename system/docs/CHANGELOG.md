@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Append the query string when forwarding (see #5867).
+
+### Fixed
 Decouple the file/page picker breadcrumb from the file/page manager (see #5899).
 
 ### Fixed
