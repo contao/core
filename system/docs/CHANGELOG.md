@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Only return one IP address in `Environment::get('ip')` (see #5830).
+
+### Fixed
 Explicitly check for `.php` files when scanning DCA files (see #5898).
 
 ### Fixed

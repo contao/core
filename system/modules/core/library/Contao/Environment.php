@@ -323,7 +323,15 @@ class Environment
 	{
 		if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']) && preg_match('/^[A-Fa-f0-9, \.\:]+$/', $_SERVER['HTTP_X_FORWARDED_FOR']))
 		{
-			return $_SERVER['HTTP_X_FORWARDED_FOR'];
+			$strIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
+
+			// Only show the first IP (see #5830)
+			if (strpos($strIp, ',') !== false)
+			{
+				list($strIp,) = trimsplit(',', $strIp);
+			}
+
+			return substr($strIp, 0, 64);
 		}
 
 		return substr($_SERVER['REMOTE_ADDR'], 0, 64);
