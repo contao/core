@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Also show the mandatory star in password confirmation fields (see #5926).
+
+### Fixed
 Only return one IP address in `Environment::get('ip')` (see #5830).
 
 ### Fixed
