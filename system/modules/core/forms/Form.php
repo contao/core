@@ -52,7 +52,6 @@ class Form extends \Hybrid
 	 */
 	protected $arrData = array();
 
-
 	/**
 	 * Remove name attributes in the back end so the form is not validated
 	 * @return string
@@ -260,6 +259,95 @@ class Form extends \Hybrid
 			{
 				$this->import($callback[0]);
 				$this->$callback[0]->$callback[1]($arrSubmitted, $arrLabels, $this);
+			}
+		}
+		// Send form data as XML to URL
+		if ($this->sendXMLToURL)
+		{
+			
+			foreach ($arrSubmitted as $k=>$v)
+			{
+				if ($k == 'cc')
+				{
+					continue;
+				}
+
+				$v = deserialize($v);
+
+				// Skip empty fields
+				if ($this->skipEmpty && !is_array($v) && !strlen($v))
+				{
+					continue;
+				}
+
+				// Add field to message
+				$message .= (isset($arrLabels[$k]) ? $arrLabels[$k] : ucfirst($k)) . ': ' . (is_array($v) ? implode(', ', $v) : $v) . "\n";
+
+		
+				$fields[] = array
+				(
+					'name' => $k,
+					'values' => (is_array($v) ? $v : array($v))
+				);
+			}
+
+			$objTemplate = new \FrontendTemplate('form_xml');
+
+			$fields['form-alias'] = $this->alias;
+			$fields['rawdata'] = serialize($_REQUEST);
+			$objTemplate->fields = $fields;
+			$objTemplate->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+			$xmlstring = $objTemplate->parse();
+		
+		
+			$urlInfo = parse_url($this->xmlUrl);
+			
+			$server = $urlInfo['host'];
+			$port = $urlInfo['port'];
+			$path = $urlInfo['path'];
+			$url = $urlInfo['scheme'] ."://". $server.":".$port.$path;
+			
+			$header  = "POST ".$path." HTTP/1.0 \r\n";
+			$header .= "MIME-Version: 1.0 \r\n";
+			$header .= "Content-type: application/xml \r\n";
+			$header .= "Content-length: ".strlen($xmlstring)." \r\n";
+			$header .= "Content-transfer-encoding: text \r\n";
+			$header .= "Connection: close \r\n\r\n";
+			$header .= $xmlstring;
+
+			// Use curl if it exists
+			if (function_exists('curl_init')) {
+				// Use curl
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL,$url);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+				curl_setopt($ch, CURLOPT_POST, 1);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $xmlstring);
+				$response = curl_exec($ch);
+
+				echo $response; die();
+				curl_close($ch);
+			} else {
+				$socketprefix = "";
+				if(strtolower($urlInfo['scheme']) == "https") {
+					$socketprefix	= "ssl://";
+				}
+				// Use raw sockets
+				$fp = fsockopen($socketprefix . $server, $port, $errno, $errstr, 30);
+				if ($fp) {
+					// Send request
+					fwrite($fp, $header);
+
+					// Read response
+					$xml = "";
+					while (!feof($fp))
+						$xml .= fgets($fp, 128);
+
+					fclose($fp);
+				} else
+					echo "Could not open SSL connection.";
 			}
 		}
 

@@ -26,6 +26,24 @@
       <trans-unit id="tl_form.sendViaEmail.1">
         <source>Send the submitted data to an e-mail address.</source>
       </trans-unit>
+      <trans-unit id="tl_form.sendXMLToURL.0">
+        <source>Send form data as XML to a URL</source>
+      </trans-unit>
+      <trans-unit id="tl_form.sendXMLToURL.1">
+        <source>Send the submitted data to as a XML to a URL.</source>
+      </trans-unit>
+      <trans-unit id="tl_form.xmlUrl.0">
+        <source>URL to send the XML to</source>
+      </trans-unit>
+      <trans-unit id="tl_form.xmlUrl.1">
+        <source>The XML will be sent by HTTP POST to the given URL</source>
+      </trans-unit>
+			<trans-unit id="tl_form.xmlTemplate.0">
+        <source>Template</source>
+      </trans-unit>
+      <trans-unit id="tl_form.xmlTemplate.1">
+        <source>Frontend Template to be used to generate the XML</source>
+      </trans-unit>
       <trans-unit id="tl_form.recipient.0">
         <source>Recipient address</source>
       </trans-unit>
