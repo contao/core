@@ -843,7 +843,7 @@ class Newsletter extends \Backend
 		$arrNewsletters = array();
 
 		// Return all channels if $objModule is null (see #5874)
-		if ($objModule === null)
+		if ($objModule === null || TL_MODE == 'BE')
 		{
 			while ($objNewsletter->next())
 			{
