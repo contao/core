@@ -138,10 +138,21 @@ class PageSelector extends \Widget
 		}
 		else
 		{
+			$strNode = $this->Session->get('tl_page_picker');
+
+			// Unset the node if it is not within the predefined node set (see #5899)
+			if ($strNode > 0 && is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes']))
+			{
+				if (!in_array($strNode, $this->Database->getChildRecords($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes'], 'tl_page')))
+				{
+					$this->Session->remove('tl_page_picker');
+				}
+			}
+
 			// Add the breadcrumb menu
 			if (\Input::get('do') != 'page')
 			{
-				\Backend::addPagesBreadcrumb();
+				\Backend::addPagesBreadcrumb('tl_page_picker');
 			}
 
 			// Root nodes (breadcrumb menu)

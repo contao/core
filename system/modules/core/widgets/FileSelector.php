@@ -56,10 +56,21 @@ class FileSelector extends \Widget
 		$this->import('BackendUser', 'User');
 		$this->convertValuesToPaths();
 
+		$strNode = $this->Session->get('tl_files_picker');
+
+		// Unset the node if it is not within the path (see #5899)
+		if ($strNode != '' && isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']))
+		{
+			if (strncmp($strNode . '/', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path'] . '/', strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']) + 1) !== 0)
+			{
+				$this->Session->remove('tl_files_picker');
+			}
+		}
+
 		// Add the breadcrumb menu
 		if (\Input::get('do') != 'files')
 		{
-			\Backend::addFilesBreadcrumb();
+			\Backend::addFilesBreadcrumb('tl_files_picker');
 		}
 
 		// Root nodes (breadcrumb menu)

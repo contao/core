@@ -5,6 +5,9 @@ Version 3.1.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Decouple the file/page picker breadcrumb from the file/page manager (see #5899).
+
+### Fixed
 Also show the mandatory star in password confirmation fields (see #5926).
 
 ### Fixed
