@@ -2652,7 +2652,11 @@ abstract class Controller extends \System
 			return;
 		}
 
-		global $objPage;
+		// Use the global object (see #5906)
+		if ($objPage === null)
+		{
+			global $objPage;
+		}
 
 		$arrConstants = array
 		(
