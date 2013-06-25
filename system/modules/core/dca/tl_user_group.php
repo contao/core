@@ -310,22 +310,23 @@ class tl_user_group extends Backend
 
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
-			$strDir = sprintf('%s/system/modules/%s/dca/', TL_ROOT, $strModule);
+			$strDir = 'system/modules/' . $strModule . '/dca';
 
-			if (!is_dir($strDir))
+			if (!is_dir(TL_ROOT . '/' . $strDir))
 			{
 				continue;
 			}
 
-			foreach (scan($strDir) as $strFile)
+			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 			{
-				if ($strFile == '.htaccess' || in_array($strFile, $included))
+				// Ignore non PHP files and files which have been included before
+				if (substr($strFile, -4) != '.php' || in_array($strFile, $included))
 				{
 					continue;
 				}
 
 				$included[] = $strFile;
-				$strTable = str_replace('.php', '', $strFile);
+				$strTable = substr($strFile, 0, -4);
 
 				System::loadLanguageFile($strTable);
 				$this->loadDataContainer($strTable);

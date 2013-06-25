@@ -1,6 +1,76 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.1.1 (2013-06-25)
+--------------------------
+
+### Fixed
+Append the query string when forwarding (see #5867).
+
+### Fixed
+Decouple the file/page picker breadcrumb from the file/page manager (see #5899).
+
+### Fixed
+Also show the mandatory star in password confirmation fields (see #5926).
+
+### Fixed
+Only return one IP address in `Environment::get('ip')` (see #5830).
+
+### Fixed
+Explicitly check for `.php` files when scanning DCA files (see #5898).
+
+### Fixed
+Replaced all dummy `.htaccess` files with `.gitignore` files.
+
+### Fixed
+Quote wildcard characters in MySQL `LIKE` queries (see #5896).
+
+### Fixed
+Correctly align the version drop-down menu in Safari (see #5854).
+
+### Fixed
+Make sure `window.$` is mapped to MooTools (see #5892).
+
+### Fixed
+Do not add sort buttons to table row headers (see #5845).
+
+### Fixed
+Show the newsletter channels upon registration (see #5874).
+
+### Updated
+Updated ACE to version 1.1.01 (fixes #5852).
+
+### Fixed
+Correctly handle hidden pages in the custom navigation module (see #5832).
+
+### Fixed
+Support FAQs with images on the FAQ page (see #5810).
+
+### Fixed
+Support using commas in folder names in the file selector (see #5823).
+
+### Fixed
+Ignore the `auto_item` parameter when forwarding internally (see #5886).
+
+### Fixed
+Added support for old IE versions to swipe.js (see #5862).
+
+### Fixed
+Correctly bypass the cache if `bypassCache` is set (see #5872).
+
+### Fixed
+Preserve the CSS3PIE behavior file path when combining style sheets (see #5848).
+
+### Fixed
+Support all known template types in the autoload creator (see #5857).
+
+### Fixed
+Correctly adjust the accordion elements to the new DB structure (see #5820).
+
+### Fixed
+Added `E_USER_DEPRECATED` to the list of error constants (see #5839).
+
+
 Version 3.1.0 (2013-05-21)
 --------------------------
 

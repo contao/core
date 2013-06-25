@@ -74,23 +74,24 @@ class ModuleLabels extends \BackendModule
 		if (\Input::post('FORM_SUBMIT') == 'tl_labels')
 		{
 			$arrLang = array();
+			$lng = \Input::post('language');
 
-			foreach (scandir(TL_ROOT . '/system/modules') as $strDir)
+			foreach (scan(TL_ROOT . '/system/modules') as $strDir)
 			{
 				$strPath = 'system/modules/' . $strDir . '/languages/en';
-				$strLang = 'system/modules/' . $strDir . '/languages/' . \Input::post('language');
+				$strLang = 'system/modules/' . $strDir . '/languages/' . $lng;
 
 				// Continue if language folder does not exists
-				if (in_array($strDir, array('.', '..')) || !is_dir(TL_ROOT . '/' . $strPath))
+				if (!is_dir(TL_ROOT . '/' . $strPath))
 				{
 					continue;
 				}
 
 				// Scan folder
-				foreach (scandir(TL_ROOT . '/' . $strPath) as $strFile)
+				foreach (scan(TL_ROOT . '/' . $strPath) as $strFile)
 				{
 					// Continue if the file is not a language file
-					if (in_array($strFile, array('.', '..', '.htaccess')) || substr($strFile, -4) != '.xlf')
+					if (substr($strFile, -4) != '.xlf')
 					{
 						continue;
 					}
@@ -104,19 +105,22 @@ class ModuleLabels extends \BackendModule
 
 					$arrLang[$strDir][$strFile] = array();
 
-					// Include English file
+					// Buffer the current labels
 					$arrBuffer = $GLOBALS['TL_LANG'];
+
+					// Include English file
 					$GLOBALS['TL_LANG'] = array();
 					eval(\System::convertXlfToPhp($strPath . '/' . $strFile, 'en'));
 					$arrOld = $GLOBALS['TL_LANG'];
-					$GLOBALS['TL_LANG'] = $arrBuffer;
 
 					// Include foreign file
-					$arrBuffer = $GLOBALS['TL_LANG'];
 					$GLOBALS['TL_LANG'] = array();
-					eval(\System::convertXlfToPhp($strLang . '/' . $strFile, 'en'));
+					eval(\System::convertXlfToPhp($strLang . '/' . $strFile, $lng));
 					$arrNew = $GLOBALS['TL_LANG'];
+
+					// Restore the former labels
 					$GLOBALS['TL_LANG'] = $arrBuffer;
+					unset($arrBuffer);
 
 					// Check labels
 					foreach ($arrOld as $k=>$v)

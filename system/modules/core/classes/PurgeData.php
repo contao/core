@@ -136,10 +136,10 @@ class PurgeData extends \Backend implements \executable
 						)
 					);
 
-					// Ignore the index.html and .htaccess files
+					// Ignore .gitignore and index.html files
 					foreach ($objFiles as $objFile)
 					{
-						if ($objFile->getFilename() != '.htaccess' && $objFile->getFilename() != 'index.html')
+						if ($objFile->getFilename() != '.gitignore' && $objFile->getFilename() != 'index.html')
 						{
 							++$total;
 						}

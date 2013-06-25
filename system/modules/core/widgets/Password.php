@@ -162,10 +162,12 @@ class Password extends \Widget
 	 */
 	public function generateConfirmationLabel()
 	{
-		return sprintf('<label for="ctrl_%s_confirm" class="confirm%s">%s</label>',
+		return sprintf('<label for="ctrl_%s_confirm" class="confirm%s">%s%s%s</label>',
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						$GLOBALS['TL_LANG']['MSC']['confirm'][0]);
+						($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
+						$GLOBALS['TL_LANG']['MSC']['confirm'][0],
+						($this->mandatory ? '<span class="mandatory">*</span>' : ''));
 	}
 
 

@@ -3,9 +3,11 @@
     <body>
       <trans-unit id="XPT.error">
         <source>An error occurred</source>
+        <target>خطاء رخ داد!</target>
       </trans-unit>
       <trans-unit id="XPT.matter">
         <source>What's the matter?</source>
+        <target>موضوع چیست؟</target>
       </trans-unit>
       <trans-unit id="XPT.howToFix">
         <source>How can I fix the issue?</source>
@@ -30,6 +32,7 @@
       </trans-unit>
       <trans-unit id="XPT.requestToken">
         <source>Invalid request token</source>
+        <target>توکن درخواست نامعتبر</target>
       </trans-unit>
       <trans-unit id="XPT.invalidToken">
         <source>The request token could not be verified.</source>
@@ -45,6 +48,7 @@
       </trans-unit>
       <trans-unit id="XPT.incomplete">
         <source>Incomplete installation</source>
+        <target>نصب ناقص</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteInstallation">
         <source>The installation has not been completed, therefore Contao cannot work properly.</source>
@@ -54,6 +58,7 @@
       </trans-unit>
       <trans-unit id="XPT.installPath">
         <source>path-to-installation</source>
+        <target>مسیر-نصب</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteFixTwo">
         <source>This will open the Contao install tool, which will guide you through the installation process.</source>

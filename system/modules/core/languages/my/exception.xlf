@@ -35,6 +35,7 @@
       </trans-unit>
       <trans-unit id="XPT.errorExplain">
         <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>တစ်ခုခုသေချာစွာမလုပ်ဆောင်၍လိုလျောက်လုပ်ဆောင်ကုဒ်ရပ်တန့်။ အမှားပြမှာကြားချက်ကိုလံုခြုံရေးအတွက်ယခုအသိပေးချက်ဖြင့်ဖံုးကွယ်ထားပြီး&lt;code&gt;system/logs/error.log&lt;/code&gt;တွင်တွေ့နိုင်။ အမှားပြမှာကြားချက်ကိုနားမလည်ပါက(သို့)ပြသာနာကိုမည်သို့ဖြေရှင်းရမည်မသိပါက&lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;ကွန်တောင်မကြာခဏမေးမေးခွန်းများ&lt;/a&gt; တွင်ရှာဖွေ(သို့)&lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;ကွန်တောင်အထောက်အပံ့စာမျက်နှာ&lt;/a&gt;ကိုလည်ပတ်။</target>
       </trans-unit>
       <trans-unit id="XPT.requestToken">
         <source>Invalid request token</source>
@@ -78,6 +79,7 @@
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
+        <target>နောက်ထပ်အချက်အလက်များကြည့်ရှုရန်&lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;</target>
       </trans-unit>
     </body>
   </file>

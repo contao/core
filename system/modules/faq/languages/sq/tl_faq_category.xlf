@@ -1,0 +1,174 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/faq/languages/en/tl_faq_category.php" source-language="en">
+    <body>
+      <trans-unit id="tl_faq_category.title.0">
+        <source>Title</source>
+        <target>Titulli</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.title.1">
+        <source>Please enter the category title.</source>
+        <target>Epeni titullin e kategorisë.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.headline.0">
+        <source>Headline</source>
+        <target>Titulli kategorisë</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.headline.1">
+        <source>Please enter the category headline.</source>
+        <target>Epeni titull të kategorisë.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Shko në faqe</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.jumpTo.1">
+        <source>Please choose the FAQ reader page to which visitors will be redirected when clicking a FAQ.</source>
+        <target>Epeni faqen në të cilën vizitorët do të përcellen pasi që ta shtypin pyetjen.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.allowComments.0">
+        <source>Enable comments</source>
+        <target>Aktivizo komente</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.allowComments.1">
+        <source>Allow visitors to comment FAQs.</source>
+        <target>Mundëso që vizitorët të komentojnë FAQ-të.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify.0">
+        <source>Notify</source>
+        <target>Njofto</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+        <target>Percaktoni kush të njoftohet kur të shtohen komentet.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.sortOrder.0">
+        <source>Sort order</source>
+        <target>Renditja</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+        <target>Zakonisht, komentet janë të renditura sipas një radhitje kohore, duke filluar me një të vjetër.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.perPage.0">
+        <source>Comments per page</source>
+        <target>Komente në faqe</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>Numri i komente në një faqe. Epeni 0 për ta ç'aktivizuar shfletimin e komenteve.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.moderate.0">
+        <source>Moderate comments</source>
+        <target>Modero komentet</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>Mirato komentet para se të publikohen në ueb-faqe.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.bbcode.0">
+        <source>Allow BBCode</source>
+        <target>Lejo BBCode</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Lejo vizitorët që të karakterizojnë komentet me BBCode.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.requireLogin.0">
+        <source>Require login to comment</source>
+        <target>Kërko kyçje për të komentuar</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>Lejo vetëm përdoruesit e autorizuar për të komentuar.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>ç'aktivizo pyetjen e sigurisë</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+        <target>Përdor këtë zgjedhje vëtëm në rast se keni komente të kufizuara nga përdoruesit e autorizuar.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.tstamp.0">
+        <source>Revision date</source>
+        <target>Data revizionit</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Data dhe koha e revizionit</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.title_legend">
+        <source>Title and redirect</source>
+        <target>Titulli dhe përcjellësi</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.comments_legend">
+        <source>Comments</source>
+        <target>Komentet</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify_admin">
+        <source>System administrator</source>
+        <target>Drejtori sistemit</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify_author">
+        <source>Author of the FAQ</source>
+        <target>Autori FAQ-së</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify_both">
+        <source>Author and system administrator</source>
+        <target>Autor dhe drejtori sistemit</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.deleteConfirm">
+        <source>Deleting category ID %s will also delete all its FAQs! Continue?</source>
+        <target>Me shlyerjen e një kategorie do t'i shlyeni të gjitha FAQ-të e saj! Doni të vazhdoni me shlyerjen e kategorisë ID %s?</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.new.0">
+        <source>New category</source>
+        <target>Kategori të re</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.new.1">
+        <source>Create a new category</source>
+        <target>Krijo kategori të re</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.show.0">
+        <source>Category details</source>
+        <target>Detajet e kategorisë</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.show.1">
+        <source>Show the details of category ID %s</source>
+        <target>Trego detajet e kategorisë ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.edit.0">
+        <source>Edit category</source>
+        <target>Përpuno kategorinë</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.edit.1">
+        <source>Edit category ID %s</source>
+        <target>Përpuno kategorinë ID %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.editheader.0">
+        <source>Edit category settings</source>
+        <target>Përpuno cilësit kategorisë</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.editheader.1">
+        <source>Edit the settings of category ID %s</source>
+        <target>Përpuno cilësit e kategorisë ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.copy.0">
+        <source>Duplicate category</source>
+        <target>Kopjo kategorinë</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.copy.1">
+        <source>Duplicate category ID %s</source>
+        <target>Kopjo kategorinë ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.delete.0">
+        <source>Delete category</source>
+        <target>Shlyej kategorinë</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.delete.1">
+        <source>Delete category ID %s</source>
+        <target>Shlyej kategorinë ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

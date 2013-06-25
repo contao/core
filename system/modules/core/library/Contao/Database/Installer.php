@@ -273,7 +273,8 @@ class Installer extends \Controller
 
 			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 			{
-				if (in_array($strFile, $included) || $strFile == '.htaccess')
+				// Ignore non PHP files and files which have been included before
+				if (substr($strFile, -4) != '.php' || in_array($strFile, $included))
 				{
 					continue;
 				}

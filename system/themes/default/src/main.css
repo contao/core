@@ -252,8 +252,14 @@ h2.sub_headline_index {
 .mac .tl_version_panel .tl_select,.mac .tl_panel_bottom .tl_select {
 	font-size:11px;
 }
+.safari .tl_version_panel {
+	overflow:hidden; /* see #5854 */
+}
 .tl_version_panel .tl_formbody {
 	position:relative;
+}
+.safari .tl_version_panel .tl_formbody {
+	float:right; /* see #5854 */
 }
 .tl_version_panel .tl_submit {
 	margin-top:1px;
@@ -1074,7 +1080,13 @@ ul.sgallery li {
 	vertical-align:bottom;
 }
 .js .button-move {
-	display:none;
+	width:0;
+	height:0;
+	left:-1000px;
+	top:-1000px;
+	position:absolute;
+	overflow:hidden;
+	display:inline;
 }
 ul.sortable li {
 	cursor:move;

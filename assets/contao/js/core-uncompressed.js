@@ -821,7 +821,7 @@ var Backend =
 				}
 				opt.self.set('href', opt.self.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
 			} else {
-				$('ctrl_'+opt.id).value = val.join(',');
+				$('ctrl_'+opt.id).value = val.join("\t");
 				var act = (opt.url.indexOf('contao/page.php') != -1) ? 'reloadPagetree' : 'reloadFiletree';
 				new Request.Contao({
 					field: $('ctrl_'+opt.id),

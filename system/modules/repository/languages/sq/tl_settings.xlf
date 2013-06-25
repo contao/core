@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/repository/languages/en/tl_settings.php" source-language="en">
+    <body>
+      <trans-unit id="tl_settings.repository_wsdl.0">
+        <source>Extension repository URL</source>
+        <target>URL për depo të shtesave</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.repository_wsdl.1">
+        <source>Here you can enter the URL of the extension repository WSDL file.</source>
+        <target>Këtu mund të epeni URL-në e WSDL-së për depo të shtesave</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.repository_languages.0">
+        <source>Fallback languages</source>
+        <target>Rikthim në këtë gjuhë</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.repository_languages.1">
+        <source>Here you can enter a comma separated list of ISO language codes to be used if an extension description is not available in the current back end language.</source>
+        <target>Këtu mund të epeni në një listë të ndarë me presje kodet e gjuhëve ISO që do të përdoren në qoftë se një përshkrim i shtesave nuk është në dispozicion në gjuhën e tanishëm të Back end.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.repository_listsize.0">
+        <source>Extensions per page</source>
+        <target>Shtesat në një faqe</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.repository_listsize.1">
+        <source>Here you can define the number of extensions per page.</source>
+        <target>Këtu mund të epeni numrin e shtesave për një faqe</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.repository_unsafe_catalog.0">
+        <source>Show incompatible extensions</source>
+        <target>Trego shtesat e papërputhura</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.repository_unsafe_catalog.1">
+        <source>Show incompatible extensions in the extension catalog. Note that installing incompatible extensions can break your Contao installation!</source>
+        <target>Trego shtesat e papërputhura në regjistrin e shtesave.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.repository_legend">
+        <source>Extension repository</source>
+        <target>Depo e shtesave</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

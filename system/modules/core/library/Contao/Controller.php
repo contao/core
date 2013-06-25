@@ -277,7 +277,7 @@ abstract class Controller extends \System
 			// Return if the class does not exist
 			if (!class_exists($strClass))
 			{
-				$this->log('Module class "'.$GLOBALS['FE_MOD'][$objRow->type].'" (module "'.$objRow->type.'") does not exist', 'Controller getFrontendModule()', TL_ERROR);
+				$this->log('Module class "'.$strClass.'" (module "'.$objRow->type.'") does not exist', 'Controller getFrontendModule()', TL_ERROR);
 				return '';
 			}
 
@@ -1269,7 +1269,7 @@ abstract class Controller extends \System
 						break;
 					}
 
-					$strUrl = \Environment::get('request');
+					$strUrl = ampersand(\Environment::get('request'));
 					$strGlue = (strpos($strUrl, '?') === false) ? '?' : '&amp;';
 
 					if ($objPage->isMobile)
@@ -2652,7 +2652,11 @@ abstract class Controller extends \System
 			return;
 		}
 
-		global $objPage;
+		// Use the global object (see #5906)
+		if ($objPage === null)
+		{
+			global $objPage;
+		}
 
 		$arrConstants = array
 		(

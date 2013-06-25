@@ -69,18 +69,31 @@ function Swipe(container, options) {
   }
 
   // PATCH
+  function onclick(el, fn) {
+
+    if (browser.addEventListener) el.addEventListener('click', fn, false);
+    else if (window.attachEvent) el.attachEvent('onclick', fn);
+
+  }
+
+  function stopEvent(e) {
+
+    e.preventDefault ? e.preventDefault() : e.returnValue = false;
+
+  }
+
   function menu() {
 
     // previous button
-    options.menu.children[0].addEventListener('click', function(e) {
-      e.preventDefault();
+    onclick(options.menu.children[0], function(e) {
+      stopEvent(e);
       stop();
       prev();
     });
 
     // next button
-    options.menu.children[2].addEventListener('click', function(e) {
-      e.preventDefault();
+    onclick(options.menu.children[2], function(e) {
+      stopEvent(e);
       stop();
       next();
     });
@@ -93,10 +106,10 @@ function Swipe(container, options) {
 
       if (i == index) b.className = 'active';
 
-      b.addEventListener('click', function(e) {
-        e.preventDefault();
+      onclick(b, function(e, f) {
+        stopEvent(e);
         stop();
-        slide(parseInt(this.getAttribute('data-index')));
+        slide(parseInt((e.target || e.srcElement).attributes['data-index'].nodeValue));
       });
 
       options.menu.children[1].appendChild(b);
@@ -107,10 +120,8 @@ function Swipe(container, options) {
   function updateMenu() {
 
     for (var i=0; i<slides.length; i++) {
-
       var child = options.menu.children[1].children[i];
       child.className = (child.getAttribute('data-index') == index) ? 'active' : '';
-
     }
 
   }

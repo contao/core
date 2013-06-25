@@ -64,8 +64,11 @@ require TL_ROOT . '/system/helper/interface.php';
 
 
 /**
- * Register the class, template and module loaders
+ * Include some classes required for further processing
  */
+require TL_ROOT . '/system/modules/core/library/Contao/Config.php';
+class_alias('Contao\\Config', 'Config');
+
 require TL_ROOT . '/system/modules/core/library/Contao/ClassLoader.php';
 class_alias('Contao\\ClassLoader', 'ClassLoader');
 
@@ -75,6 +78,7 @@ class_alias('Contao\\TemplateLoader', 'TemplateLoader');
 require TL_ROOT . '/system/modules/core/library/Contao/ModuleLoader.php';
 class_alias('Contao\\ModuleLoader', 'ModuleLoader');
 
+Config::preload(); // see #5872
 ClassLoader::scanAndRegister(); // config/autoload.php
 
 

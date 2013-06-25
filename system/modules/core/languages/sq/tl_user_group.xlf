@@ -1,0 +1,122 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_user_group.php" source-language="en">
+    <body>
+      <trans-unit id="tl_user_group.name.0">
+        <source>Title</source>
+        <target>Emri i grupit</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.name.1">
+        <source>Please enter the group title.</source>
+        <target>Epeni një emër unik për identifikimin e grupit.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.alexf.0">
+        <source>Allowed fields</source>
+        <target>Fushat e lejuara</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.alexf.1">
+        <source>Here you can choose which fields will be editable.</source>
+        <target>Shumë tabela përmbajnë fusha, të cilat parimisht mund të përpunohen. Të drejtat për t'i përpunuar ato mund të ia aplikoni grupit këtu. Shtypni njëkohësisht [CTRL] në tastierë.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.disable.0">
+        <source>Deactivate</source>
+        <target>Çaktivizo</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.disable.1">
+        <source>Temporarily disable the group.</source>
+        <target>Çaktivizimi shmang mundësin e anëtarëve të grupit për t'i trashëguar drejtat e grupit.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.start.0">
+        <source>Activate on</source>
+        <target>Aktivizo me</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.start.1">
+        <source>Automatically activate the group on this day.</source>
+        <target>Grupi do të aktivizohet me datën e dhëne këtu.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.stop.0">
+        <source>Deactivate on</source>
+        <target>Çaktivizo me</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.stop.1">
+        <source>Automatically deactivate the group on this day.</source>
+        <target>Grupi do të çaktivizohet me datën e dhëne këtu.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.title_legend">
+        <source>Title</source>
+        <target>Titulli</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.modules_legend">
+        <source>Allowed modules</source>
+        <target>Modulet e lejuara</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.pagemounts_legend">
+        <source>Pagemounts</source>
+        <target>Faqe të bashkangjitura</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.filemounts_legend">
+        <source>Filemounts</source>
+        <target>Skedarë të bashkangjitur</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.forms_legend">
+        <source>Form permissions</source>
+        <target>Lejet e formularit</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.account_legend">
+        <source>Account settings</source>
+        <target>Konfigurimi llogarisë</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.alexf_legend">
+        <source>Allowed fields</source>
+        <target>Fushat e përjashtuara</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.new.0">
+        <source>New user group</source>
+        <target>Grup të ri</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.new.1">
+        <source>Create a new user group</source>
+        <target>Krijo grup të ri</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.show.0">
+        <source>Group details</source>
+        <target>Detajet e grupit</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.show.1">
+        <source>Show the details of group ID %s</source>
+        <target>Trego detajet e grupit ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.edit.0">
+        <source>Edit group</source>
+        <target>Përpuno grupin</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.edit.1">
+        <source>Edit group ID %s</source>
+        <target>Përpunon grupin ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.copy.0">
+        <source>Duplicate group</source>
+        <target>Dupliko grupin</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.copy.1">
+        <source>Duplicate group ID %s</source>
+        <target>Dupliko grupin ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.delete.0">
+        <source>Delete group</source>
+        <target>Shlyej grupin</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.delete.1">
+        <source>Delete group ID %s</source>
+        <target>Shlyen grupin ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.toggle.0">
+        <source>Activate/deactivate group</source>
+        <target>Aktivizo/çaktivizo grupin</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.toggle.1">
+        <source>Activate/deactivate group ID %s</source>
+        <target>Aktivizo/çaktivizo grupin ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

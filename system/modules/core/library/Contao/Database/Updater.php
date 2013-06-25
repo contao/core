@@ -455,9 +455,9 @@ class Updater extends \Controller
 		}
 
 		// Adjust the accordion elements
-		$this->Database->query("UPDATE `tl_content` SET `type`='accordionStart' WHERE `type`='accordion' AND `mooType`='mooStart'");
-		$this->Database->query("UPDATE `tl_content` SET `type`='accordionStop' WHERE `type`='accordion' AND `mooType`='mooStop'");
-		$this->Database->query("UPDATE `tl_content` SET `type`='accordionSingle' WHERE `type`='accordion' AND `mooType`='mooSingle'");
+		$this->Database->query("UPDATE `tl_content` SET `type`='accordionStart' WHERE `type`='accordion' AND `mooType`='start'");
+		$this->Database->query("UPDATE `tl_content` SET `type`='accordionStop' WHERE `type`='accordion' AND `mooType`='stop'");
+		$this->Database->query("UPDATE `tl_content` SET `type`='accordionSingle' WHERE `type`='accordion' AND `mooType`='single'");
 
 		// White-space is now in the "alignment" section (see #4519)
 		$this->Database->query("UPDATE `tl_style` SET `alignment`=1 WHERE `whitespace`!=''");
@@ -584,7 +584,8 @@ class Updater extends \Controller
 
 			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 			{
-				if (in_array($strFile, $arrFiles) || $strFile == '.htaccess')
+				// Ignore non PHP files and files which have been included before
+				if (substr($strFile, -4) != '.php' || in_array($strFile, $arrFiles))
 				{
 					continue;
 				}

@@ -94,7 +94,7 @@ class BackendUser extends \User
 					$session[$key][TL_REFERER_ID]['last'] = '';
 				}
 
-				if (count($session[$key]) >= 25)
+				while (count($session[$key]) >= 25)
 				{
 					array_shift($session[$key]);
 				}
