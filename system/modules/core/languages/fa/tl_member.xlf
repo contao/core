@@ -157,6 +157,7 @@
       </trans-unit>
       <trans-unit id="tl_member.assignDir.1">
         <source>Define a home directory for the member.</source>
+        <target>تعریف فهرست خانه برای عضو.</target>
       </trans-unit>
       <trans-unit id="tl_member.homeDir.0">
         <source>Home directory</source>

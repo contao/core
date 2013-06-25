@@ -40,6 +40,8 @@ this.MooTools = {
 	build: 'ab8ea8824dc3b24b6666867a2c4ed58ebb762cf0'
 };
 
+window.$ = null; // PATCH: see #5892
+
 // typeOf, instanceOf
 
 var typeOf = this.typeOf = function(item){

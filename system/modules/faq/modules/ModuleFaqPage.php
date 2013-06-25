@@ -113,7 +113,8 @@ class ModuleFaqPage extends \Module
 					if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 					{
 						$objFaq->singleSRC = $objModel->path;
-						$this->addImageToTemplate($objTemp, $objFaq->row());
+						$strLightboxId = 'lightbox[' . substr(md5('mod_faqpage_' . $objFaq->id), 0, 6) . ']'; // see #5810
+						$this->addImageToTemplate($objTemp, $objFaq->row(), null, $strLightboxId);
 					}
 				}
 			}

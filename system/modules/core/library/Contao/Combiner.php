@@ -236,7 +236,7 @@ class Combiner extends \System
 					$strData = $chunks[$i+1];
 
 					// Skip absolute links and embedded images (see #5082)
-					if (strncmp($strData, 'data:', 5) !== 0 && strncmp($strData, 'http://', 7) !== 0 && strncmp($strData, 'https://', 8) !== 0 && strncmp($strData, '/', 1) !== 0)
+					if (strncmp($strData, 'data:', 5) !== 0 && strncmp($strData, 'http://', 7) !== 0 && strncmp($strData, 'https://', 8) !== 0 && strncmp($strData, '/', 1) !== 0 && strncmp($strData, 'assets/css3pie/', 15) !== 0)
 					{
 						// Make the paths relative to the root (see #4161)
 						if (strncmp($strData, '../', 3) !== 0)

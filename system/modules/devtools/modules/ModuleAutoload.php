@@ -274,9 +274,11 @@ class ModuleAutoload extends \BackendModule
 						continue;
 					}
 
+					$arrTplExts = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
 					$strExtension = pathinfo($objFile->getFilename(), PATHINFO_EXTENSION);
 
-					if ($strExtension == 'html5' || $strExtension == 'xhtml')
+					// Add all known template types (see #5857)
+					if (in_array($strExtension, $arrTplExts))
 					{
 						$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
 						$strKey = basename($strRelpath, strrchr($strRelpath, '.'));

@@ -12,15 +12,20 @@
 
 
 /**
- * Core and plugin versions
+ * Core version
+ */
+define('VERSION', '3.1');
+define('BUILD', '1');
+define('LONG_TERM_SUPPORT', false);
+
+
+/**
+ * Plugin versions
  *
  * Version numbers are added to style sheets and JavaScript files to make
  * the web browser reload those resources after a Contao update.
  */
-define('VERSION', '3.1');
-define('BUILD', '0');
-define('LONG_TERM_SUPPORT', false);
-define('ACE', '1.0.0');
+define('ACE', '1.0.01');
 define('CSS3PIE', '1.0.0');
 define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIV', '3.6.2');

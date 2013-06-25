@@ -218,9 +218,9 @@ class Automator extends \System
 		$objFolder = new \Folder('system/tmp');
 		$objFolder->purge();
 
-		// Restore the .htaccess file
-		$objFile = new \File('system/logs/.htaccess', true);
-		$objFile->copyTo('system/tmp/.htaccess');
+		// Restore the .gitignore file
+		$objFile = new \File('system/logs/.gitignore', true);
+		$objFile->copyTo('system/tmp/.gitignore');
 
 		// Add a log entry
 		$this->log('Purged the temp folder', 'Automator purgeTempFolder()', TL_CRON);
@@ -553,7 +553,8 @@ class Automator extends \System
 
 			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 			{
-				if (in_array($strFile, $arrFiles) || $strFile == '.htaccess')
+				// Ignore non PHP files and files which have been included before
+				if (substr($strFile, -4) != '.php' || in_array($strFile, $arrFiles))
 				{
 					continue;
 				}
@@ -612,7 +613,7 @@ class Automator extends \System
 
 				foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 				{
-					if (in_array($strFile, $arrFiles) || $strFile == '.htaccess')
+					if ((substr($strFile, -4) != '.php' && substr($strFile, -4) != '.xlf') || in_array($strFile, $arrFiles))
 					{
 						continue;
 					}
@@ -691,7 +692,8 @@ class Automator extends \System
 
 			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 			{
-				if (in_array($strFile, $included) || $strFile == '.htaccess')
+				// Ignore non PHP files and files which have been included before
+				if (substr($strFile, -4) != '.php' || in_array($strFile, $included))
 				{
 					continue;
 				}

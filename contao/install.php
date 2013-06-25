@@ -889,8 +889,8 @@ class InstallTool extends Backend
 				System::disableModule('tasks');
 			}
 
-			// Reset the upload path if it has been changed already (see #5560)
-			if ($GLOBALS['TL_CONFIG']['uploadPath'] == 'files' && is_dir(TL_ROOT . '/tl_files') && !is_dir(TL_ROOT . '/files'))
+			// Reset the upload path if it has been changed already (see #5560 and #5870)
+			if ($GLOBALS['TL_CONFIG']['uploadPath'] == 'files' && is_dir(TL_ROOT . '/tl_files'))
 			{
 				$GLOBALS['TL_CONFIG']['uploadPath'] = 'tl_files';
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['uploadPath']", 'tl_files');

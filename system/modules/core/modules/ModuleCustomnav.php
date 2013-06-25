@@ -122,6 +122,12 @@ class ModuleCustomnav extends \Module
 
 		foreach ($arrPages as $arrPage)
 		{
+			// Skip hidden pages (see #5832)
+			if (!is_array($arrPage))
+			{
+				continue;
+			}
+
 			$_groups = deserialize($arrPage['groups']);
 
 			// Do not show protected pages unless a back end or front end user is logged in

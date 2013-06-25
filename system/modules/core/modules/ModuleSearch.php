@@ -99,7 +99,7 @@ class ModuleSearch extends \Module
 		$objFormTemplate->matchAll = specialchars($GLOBALS['TL_LANG']['MSC']['matchAll']);
 		$objFormTemplate->matchAny = specialchars($GLOBALS['TL_LANG']['MSC']['matchAny']);
 		$objFormTemplate->id = ($GLOBALS['TL_CONFIG']['disableAlias'] && \Input::get('id')) ? \Input::get('id') : false;
-		$objFormTemplate->action = \Environment::get('indexFreeRequest');
+		$objFormTemplate->action = ampersand(\Environment::get('indexFreeRequest'));
 
 		// Redirect page
 		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
@@ -267,7 +267,7 @@ class ModuleSearch extends \Module
 				foreach ($arrMatches as $strWord)
 				{
 					$arrChunks = array();
-					preg_match_all('/\b.{0,'.$this->contextLength.'}\PL' . str_replace('+', '\\+', $strWord) . '\PL.{0,'.$this->contextLength.'}\b/ui', $arrResult[$i]['text'], $arrChunks);
+					preg_match_all('/(^|\b.{0,'.$this->contextLength.'}\PL)' . str_replace('+', '\\+', $strWord) . '(\PL.{0,'.$this->contextLength.'}\b|$)/ui', $arrResult[$i]['text'], $arrChunks);
 
 					foreach ($arrChunks[0] as $strContext)
 					{

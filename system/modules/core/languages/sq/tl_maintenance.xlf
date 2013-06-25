@@ -1,0 +1,194 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_maintenance.php" source-language="en">
+    <body>
+      <trans-unit id="tl_maintenance.cacheTables.0">
+        <source>Purge data</source>
+        <target>Tabelat-Cache</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.cacheTables.1">
+        <source>Please select the data you want to purge or rebuild.</source>
+        <target>Zgjedhoni Tabelat-Chachë për t'i zbrazë.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.frontendUser.0">
+        <source>Front end user</source>
+        <target>Përdorues Front end</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.frontendUser.1">
+        <source>Automatically log in a front end user to index protected pages.</source>
+        <target>Automatikisht regjistro në një front end përdorues që të indeksohen faqet.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.job">
+        <source>Job</source>
+        <target>Detyrë</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.description">
+        <source>Description</source>
+        <target>Përshkrim</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.clearCache">
+        <source>Purge data</source>
+        <target>Zbrazë Cache</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.cacheCleared">
+        <source>The data has been purged</source>
+        <target>Cache është zbrazë</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.liveUpdate">
+        <source>Live Update</source>
+        <target>Live-Update (freskim drejtë për drejtë)</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.liveUpdateId">
+        <source>Live Update ID</source>
+        <target>Live Update ID</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.toLiveUpdate">
+        <source>Go to the Live Update</source>
+        <target>Shko në Live Update</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.upToDate">
+        <source>Your Contao version %s is up to date</source>
+        <target>Versioni juaj Version %s i TYPOlight është aktual</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.newVersion">
+        <source>A newer Contao version %s is available</source>
+        <target>Gjindet një version i ri i TYPOlight Version %s</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.emptyLuId">
+        <source>Please enter your Live Update ID</source>
+        <target>Epeni Live Update ID-në</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.notWriteable">
+        <source>The temporary folder (system/tmp) is not writeable</source>
+        <target>Në dosjen e përkohshme nuk mund të shkruhet (system/tmp)</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.changelog">
+        <source>View the change log</source>
+        <target>Thirr Changelog</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.runLiveUpdate">
+        <source>Run the update</source>
+        <target>Fillo freskimin</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.toc">
+        <source>Content of the update archive</source>
+        <target>Përmbajtja e arkivit të freskuar</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.backup">
+        <source>Backuped files</source>
+        <target>Skedar të siguruar</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.update">
+        <source>Updated files</source>
+        <target>Skedarët e freskuar</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.searchIndex">
+        <source>Rebuild the search index</source>
+        <target>Rindërto indeksin kërkues</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexSubmit">
+        <source>Rebuild index</source>
+        <target>Ndërto indeksin kërkues</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.noSearchable">
+        <source>No searchable pages found</source>
+        <target>Asnjë faqe me kërkueshmëri nuk u gjet</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexNote">
+        <source>Please wait for the page to load completely before you proceed!</source>
+        <target>Ju lutemi të prisni për faqen që të shkarkohet plotësisht para se të vazhdoni!</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexLoading">
+        <source>Please wait while the search index is being rebuilt.</source>
+        <target>Ju lutem të prisni, sepse indeksi për kërkim nuk është rindërtuar.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexComplete">
+        <source>The search index has been rebuilt. You can now proceed.</source>
+        <target>Indeksi për kërkim ështe rindërtuar. Ju tani mund të vazhdoni.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.updateHelp">
+        <source>Please enter your %s here.</source>
+        <target>Ju lutem epeni %s e/i juaj këtu.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.index.0">
+        <source>Purge the search index</source>
+        <target>Spastro indeksin e kërkimit</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.index.1">
+        <source>Truncates the tables &lt;em&gt;tl_search&lt;/em&gt; and &lt;em&gt;tl_search_index&lt;/em&gt;. Afterwards, you have to rebuild the search index (see above).</source>
+        <target>Fshij tabelat &lt;em&gt;tl_search&lt;/em&gt; dhe &lt;em&gt;tl_search_index&lt;/em&gt;. Më pas, ju keni për të rindërtuar indeksin e kërkimit (shih më lart).</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.undo.0">
+        <source>Purge the undo table</source>
+        <target>Spastrao tablen e zhbërjeve</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.undo.1">
+        <source>Truncates the &lt;em&gt;tl_undo&lt;/em&gt; table which stores the deleted records. This job permanently deletes these records.</source>
+        <target>Fshij tabelen  &lt;em&gt; tl_undo &lt;/ em&gt;  e cila ruan të dhënat e fshirë. Kjo gjë përgjithmonë fshin këto të dhëna.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.versions.0">
+        <source>Purge the version table</source>
+        <target>Spastro tabelen e verzioneve</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.versions.1">
+        <source>Truncates the &lt;em&gt;tl_version&lt;/em&gt; table which stores the previous versions of a record. This job permanently deletes these records.</source>
+        <target>Fshij tabelen  &lt;em&gt; tl_verion &lt;/ em&gt;  e cila ruan verzionet e më hershëm të të dhënave. Kjo gjë përgjithmonë fshin këto të dhëna.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.log.0">
+        <source>Purge the system log</source>
+        <target>Spastron shkrimet e sistemit</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.log.1">
+        <source>Truncates the &lt;em&gt;tl_log&lt;/em&gt; table which stores all the system log entries. This job permanently deletes these records.</source>
+        <target>Fshij tabelen &lt;em&gt; tl_log &lt;/ em&gt; e cila ruan shkrimet e sistemit. Kjo gjë përgjithmonë fshin këto të dhëna.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.images.0">
+        <source>Purge the image cache</source>
+        <target>Spastro depon e fshehur të fotografive</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.images.1">
+        <source>Removes the automatically generated images and then purges the page cache, so there are no links to deleted resources.</source>
+        <target>Heq fotografitë të krijuara automatikisht dhe pastaj spastron depon e fshehur të faqes, kështu që nuk do të ketë lidhje me burimet e fshirë.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.scripts.0">
+        <source>Purge the script cache</source>
+        <target>Spastra depon e fshehur të script</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.scripts.1">
+        <source>Removes the automatically generated .css and .js files, recreates the internal style sheets and then purges the page cache.</source>
+        <target>Heq skedaret .css dhe .js të krijuara automatikisht, rikrijon style sheets të brendshme dhe spastron depon e fshehur të faqes.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.pages.0">
+        <source>Purge the page cache</source>
+        <target>Spastro depon e fshehur (cache) të faqes</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.pages.1">
+        <source>Removes the cached versions of the front end pages.</source>
+        <target>Heq verzionet në depon e fshehur (cache) të faqeve nga front end.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.internal.0">
+        <source>Purge the internal cache</source>
+        <target>Spastro depon e brendshme të fshehur (internal cache)</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.internal.1">
+        <source>Removes the cached versions of the DCA and language files. You can permanently disable the internal cache in the back end settings.</source>
+        <target>Heq versionet depos së fshehur (cache) të DCA-së dhe skedarët gjuheve. Ju mund të çaktivizoni përgjithmonë cache në parametrat mbrapa në back end.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.temp.0">
+        <source>Purge the temp folder</source>
+        <target>Spastron dojen temp</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.temp.1">
+        <source>Removes the temporary files.</source>
+        <target>Zhvendos skendarët e përkohshëm.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.xml.0">
+        <source>Recreate the XML files</source>
+        <target>Rikrijon skedaret XML</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.xml.1">
+        <source>Recreates the XML files (sitemaps and feeds) and then purges the page cache, so there are no links to deleted resources.</source>
+        <target>Rikrijon skedaret XML (Hartat e faqeve dhe furnizimet) dhe pastaj bënë spastrimet cache-it të faqes, kështu që nuk do të ketë lidhje me burimet e fshirë.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

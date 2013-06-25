@@ -229,7 +229,7 @@ FileETag None
   ##
   #AddEncoding gzip .gz
   #<FilesMatch "\.js\.gz$">
-  #  AddType "text/javascript" .gz
+  #  AddType "application/javascript" .gz
   #</FilesMatch>
   #<FilesMatch "\.css\.gz$">
   #  AddType "text/css" .gz

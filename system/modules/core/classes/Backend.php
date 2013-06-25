@@ -512,19 +512,21 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Add a breadcrumb menu to the page tree
+	 *
+	 * @param string
 	 */
-	public static function addPagesBreadcrumb()
+	public static function addPagesBreadcrumb($strKey='tl_page_node')
 	{
 		$objSession = \Session::getInstance();
 
 		// Set a new node
 		if (isset($_GET['node']))
 		{
-			$objSession->set('tl_page_node', \Input::get('node'));
+			$objSession->set($strKey, \Input::get('node'));
 			\Controller::redirect(preg_replace('/&node=[^&]*/', '', \Environment::get('request')));
 		}
 
-		$intNode = $objSession->get('tl_page_node');
+		$intNode = $objSession->get($strKey);
 
 		if ($intNode < 1)
 		{
@@ -552,7 +554,7 @@ abstract class Backend extends \Controller
 					// Currently selected page does not exits
 					if ($intId == $intNode)
 					{
-						$objSession->set('tl_page_node', 0);
+						$objSession->set($strKey, 0);
 						return;
 					}
 
@@ -585,7 +587,7 @@ abstract class Backend extends \Controller
 		// Check whether the node is mounted
 		if (!$objUser->isAdmin && !$objUser->hasAccess($arrIds, 'pagemounts'))
 		{
-			$objSession->set('tl_page_node', 0);
+			$objSession->set($strKey, 0);
 
 			\System::log('Page ID '.$intNode.' was not mounted', 'tl_page addBreadcrumb', TL_ERROR);
 			\Controller::redirect('contao/main.php?act=error');
@@ -648,19 +650,21 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Add a breadcrumb menu to the file tree
+	 *
+	 * @param string
 	 */
-	public static function addFilesBreadcrumb()
+	public static function addFilesBreadcrumb($strKey='tl_files_node')
 	{
 		$objSession = \Session::getInstance();
 
 		// Set a new node
 		if (isset($_GET['node']))
 		{
-			$objSession->set('tl_files_node', \Input::get('node', true));
+			$objSession->set($strKey, \Input::get('node', true));
 			\Controller::redirect(preg_replace('/(&|\?)node=[^&]*/', '', \Environment::get('request')));
 		}
 
-		$strNode = $objSession->get('tl_files_node');
+		$strNode = $objSession->get($strKey);
 
 		if ($strNode == '')
 		{
@@ -670,7 +674,7 @@ abstract class Backend extends \Controller
 		// Currently selected folder does not exist
 		if (!is_dir(TL_ROOT . '/' . $strNode))
 		{
-			$objSession->set('tl_files_node', '');
+			$objSession->set($strKey, '');
 			return;
 		}
 
@@ -707,7 +711,7 @@ abstract class Backend extends \Controller
 		// Check whether the node is mounted
 		if (!$objUser->isAdmin && !$objUser->hasAccess($strNode, 'filemounts'))
 		{
-			$objSession->set('tl_files_node', '');
+			$objSession->set($strKey, '');
 
 			\System::log('Folder ID '.$strNode.' was not mounted', 'tl_files addBreadcrumb', TL_ERROR);
 			\Controller::redirect('contao/main.php?act=error');

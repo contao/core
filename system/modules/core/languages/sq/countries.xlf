@@ -1,0 +1,994 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/countries.php" source-language="en">
+    <body>
+      <trans-unit id="CNT.ad">
+        <source>Andorra</source>
+        <target>Andorë</target>
+      </trans-unit>
+      <trans-unit id="CNT.ae">
+        <source>United Arab Emirates</source>
+        <target>Emiratet e Bashkuara Arabe</target>
+      </trans-unit>
+      <trans-unit id="CNT.af">
+        <source>Afghanistan</source>
+        <target>Afganistan</target>
+      </trans-unit>
+      <trans-unit id="CNT.ag">
+        <source>Antigua and Barbuda</source>
+        <target>Antiga dhe Barbuda</target>
+      </trans-unit>
+      <trans-unit id="CNT.ai">
+        <source>Anguilla</source>
+        <target>Anguila</target>
+      </trans-unit>
+      <trans-unit id="CNT.al">
+        <source>Albania</source>
+        <target>Shqipëri</target>
+      </trans-unit>
+      <trans-unit id="CNT.am">
+        <source>Armenia</source>
+        <target>Armeni</target>
+      </trans-unit>
+      <trans-unit id="CNT.ao">
+        <source>Angola</source>
+        <target>Angola</target>
+      </trans-unit>
+      <trans-unit id="CNT.aq">
+        <source>Antarctica</source>
+        <target>Antartikë</target>
+      </trans-unit>
+      <trans-unit id="CNT.ar">
+        <source>Argentina</source>
+        <target>Argjentinë</target>
+      </trans-unit>
+      <trans-unit id="CNT.as">
+        <source>American Samoa</source>
+        <target>Ishujt Samoe</target>
+      </trans-unit>
+      <trans-unit id="CNT.at">
+        <source>Austria</source>
+        <target>Austri</target>
+      </trans-unit>
+      <trans-unit id="CNT.au">
+        <source>Australia</source>
+        <target>Australi</target>
+      </trans-unit>
+      <trans-unit id="CNT.aw">
+        <source>Aruba</source>
+        <target>Aruba</target>
+      </trans-unit>
+      <trans-unit id="CNT.ax">
+        <source>Aland Islands</source>
+        <target>Ishujt Aland</target>
+      </trans-unit>
+      <trans-unit id="CNT.az">
+        <source>Azerbaijan</source>
+        <target>Azrbajxhan</target>
+      </trans-unit>
+      <trans-unit id="CNT.ba">
+        <source>Bosnia and Herzegovina</source>
+        <target>Bosnje-Hercegovinë</target>
+      </trans-unit>
+      <trans-unit id="CNT.bb">
+        <source>Barbados</source>
+        <target>Barbados</target>
+      </trans-unit>
+      <trans-unit id="CNT.bd">
+        <source>Bangladesh</source>
+        <target>Bangladesh</target>
+      </trans-unit>
+      <trans-unit id="CNT.be">
+        <source>Belgium</source>
+        <target>Belgjikë</target>
+      </trans-unit>
+      <trans-unit id="CNT.bf">
+        <source>Burkina Faso</source>
+        <target>Burkina Faso</target>
+      </trans-unit>
+      <trans-unit id="CNT.bg">
+        <source>Bulgaria</source>
+        <target>Bullgari</target>
+      </trans-unit>
+      <trans-unit id="CNT.bh">
+        <source>Bahrain</source>
+        <target>Bahrain</target>
+      </trans-unit>
+      <trans-unit id="CNT.bi">
+        <source>Burundi</source>
+        <target>Burundi</target>
+      </trans-unit>
+      <trans-unit id="CNT.bj">
+        <source>Benin</source>
+        <target>Benin</target>
+      </trans-unit>
+      <trans-unit id="CNT.bl">
+        <source>Saint Barthélemy</source>
+        <target>San Barthelemi</target>
+      </trans-unit>
+      <trans-unit id="CNT.bm">
+        <source>Bermuda</source>
+        <target>Bermuda</target>
+      </trans-unit>
+      <trans-unit id="CNT.bn">
+        <source>Brunei Darussalam</source>
+        <target>Brunei</target>
+      </trans-unit>
+      <trans-unit id="CNT.bo">
+        <source>Bolivia</source>
+        <target>Bolivi</target>
+      </trans-unit>
+      <trans-unit id="CNT.br">
+        <source>Brazil</source>
+        <target>Brazil</target>
+      </trans-unit>
+      <trans-unit id="CNT.bs">
+        <source>Bahamas</source>
+        <target>Bahamas</target>
+      </trans-unit>
+      <trans-unit id="CNT.bt">
+        <source>Bhutan</source>
+        <target>Bhutan</target>
+      </trans-unit>
+      <trans-unit id="CNT.bv">
+        <source>Bouvet Island</source>
+        <target>Ishullli Buvet</target>
+      </trans-unit>
+      <trans-unit id="CNT.bw">
+        <source>Botswana</source>
+        <target>Botsvana</target>
+      </trans-unit>
+      <trans-unit id="CNT.by">
+        <source>Belarus</source>
+        <target>Bjellorusi</target>
+      </trans-unit>
+      <trans-unit id="CNT.bz">
+        <source>Belize</source>
+        <target>Belize</target>
+      </trans-unit>
+      <trans-unit id="CNT.ca">
+        <source>Canada</source>
+        <target>Kanada</target>
+      </trans-unit>
+      <trans-unit id="CNT.cc">
+        <source>Cocos (Keeling) Islands</source>
+        <target>Ishujt Kokos</target>
+      </trans-unit>
+      <trans-unit id="CNT.cd">
+        <source>Congo, The Democratic Republic of the</source>
+        <target>Republika Demokratike e Kongos</target>
+      </trans-unit>
+      <trans-unit id="CNT.cf">
+        <source>Central African Republic</source>
+        <target>Afrika Qëndrore</target>
+      </trans-unit>
+      <trans-unit id="CNT.cg">
+        <source>Congo, Republic of</source>
+        <target>Republika e Kongos</target>
+      </trans-unit>
+      <trans-unit id="CNT.ch">
+        <source>Switzerland</source>
+        <target>Zvicër</target>
+      </trans-unit>
+      <trans-unit id="CNT.ci">
+        <source>Cote d'Ivoire</source>
+        <target>Bregu i Fildishtë</target>
+      </trans-unit>
+      <trans-unit id="CNT.ck">
+        <source>Cook Islands</source>
+        <target>Ishujt Kuk</target>
+      </trans-unit>
+      <trans-unit id="CNT.cl">
+        <source>Chile</source>
+        <target>Kili</target>
+      </trans-unit>
+      <trans-unit id="CNT.cm">
+        <source>Cameroon</source>
+        <target>Kamerun</target>
+      </trans-unit>
+      <trans-unit id="CNT.cn">
+        <source>China</source>
+        <target>Kinë</target>
+      </trans-unit>
+      <trans-unit id="CNT.co">
+        <source>Colombia</source>
+        <target>Kolumbi</target>
+      </trans-unit>
+      <trans-unit id="CNT.cr">
+        <source>Costa Rica</source>
+        <target>Kosta Rika</target>
+      </trans-unit>
+      <trans-unit id="CNT.cu">
+        <source>Cuba</source>
+        <target>Kubë</target>
+      </trans-unit>
+      <trans-unit id="CNT.cv">
+        <source>Cape Verde</source>
+        <target>Cape Verde</target>
+      </trans-unit>
+      <trans-unit id="CNT.cw">
+        <source>Curaçao</source>
+        <target>Curçao</target>
+      </trans-unit>
+      <trans-unit id="CNT.cx">
+        <source>Christmas Island</source>
+        <target>Christmas Island</target>
+      </trans-unit>
+      <trans-unit id="CNT.cy">
+        <source>Cyprus</source>
+        <target>Qipro</target>
+      </trans-unit>
+      <trans-unit id="CNT.cz">
+        <source>Czech Republic</source>
+        <target>Republika Çeke</target>
+      </trans-unit>
+      <trans-unit id="CNT.de">
+        <source>Germany</source>
+        <target>Gjermani</target>
+      </trans-unit>
+      <trans-unit id="CNT.dj">
+        <source>Djibouti</source>
+        <target>Xhibuti</target>
+      </trans-unit>
+      <trans-unit id="CNT.dk">
+        <source>Denmark</source>
+        <target>Danimarkë</target>
+      </trans-unit>
+      <trans-unit id="CNT.dm">
+        <source>Dominica</source>
+        <target>Domenika</target>
+      </trans-unit>
+      <trans-unit id="CNT.do">
+        <source>Dominican Republic</source>
+        <target>Republika Domenikane</target>
+      </trans-unit>
+      <trans-unit id="CNT.dz">
+        <source>Algeria</source>
+        <target>Algjeri</target>
+      </trans-unit>
+      <trans-unit id="CNT.ec">
+        <source>Ecuador</source>
+        <target>Ekuador</target>
+      </trans-unit>
+      <trans-unit id="CNT.ee">
+        <source>Estonia</source>
+        <target>Estoni</target>
+      </trans-unit>
+      <trans-unit id="CNT.eg">
+        <source>Egypt</source>
+        <target>Egjypt</target>
+      </trans-unit>
+      <trans-unit id="CNT.eh">
+        <source>Western Sahara</source>
+        <target>Saharaja Perëndimore</target>
+      </trans-unit>
+      <trans-unit id="CNT.er">
+        <source>Eritrea</source>
+        <target>Eritrea</target>
+      </trans-unit>
+      <trans-unit id="CNT.es">
+        <source>Spain</source>
+        <target>Spanjë</target>
+      </trans-unit>
+      <trans-unit id="CNT.et">
+        <source>Ethiopia</source>
+        <target>Etiopi</target>
+      </trans-unit>
+      <trans-unit id="CNT.fi">
+        <source>Finland</source>
+        <target>Finlandë</target>
+      </trans-unit>
+      <trans-unit id="CNT.fj">
+        <source>Fiji</source>
+        <target>Fixhi</target>
+      </trans-unit>
+      <trans-unit id="CNT.fk">
+        <source>Falkland Islands (Malvinas)</source>
+        <target>Ishujt Falkland</target>
+      </trans-unit>
+      <trans-unit id="CNT.fm">
+        <source>Micronesia</source>
+        <target>Mokroneszia</target>
+      </trans-unit>
+      <trans-unit id="CNT.fo">
+        <source>Faroe Islands</source>
+        <target>Ishujt Faroe</target>
+      </trans-unit>
+      <trans-unit id="CNT.fr">
+        <source>France</source>
+        <target>Francë</target>
+      </trans-unit>
+      <trans-unit id="CNT.ga">
+        <source>Gabon</source>
+        <target>Gabon</target>
+      </trans-unit>
+      <trans-unit id="CNT.gb">
+        <source>United Kingdom</source>
+        <target>Angli</target>
+      </trans-unit>
+      <trans-unit id="CNT.gd">
+        <source>Grenada</source>
+        <target>Grenadë</target>
+      </trans-unit>
+      <trans-unit id="CNT.ge">
+        <source>Georgia</source>
+        <target>Gjeorgji</target>
+      </trans-unit>
+      <trans-unit id="CNT.gf">
+        <source>French Guiana</source>
+        <target>Guiana Franceze</target>
+      </trans-unit>
+      <trans-unit id="CNT.gg">
+        <source>Guernsey</source>
+        <target>Guernsey</target>
+      </trans-unit>
+      <trans-unit id="CNT.gh">
+        <source>Ghana</source>
+        <target>Gana</target>
+      </trans-unit>
+      <trans-unit id="CNT.gi">
+        <source>Gibraltar</source>
+        <target>Gjibraltar</target>
+      </trans-unit>
+      <trans-unit id="CNT.gl">
+        <source>Greenland</source>
+        <target>Greenland</target>
+      </trans-unit>
+      <trans-unit id="CNT.gm">
+        <source>Gambia</source>
+        <target>Gambia</target>
+      </trans-unit>
+      <trans-unit id="CNT.gn">
+        <source>Guinea</source>
+        <target>Guine</target>
+      </trans-unit>
+      <trans-unit id="CNT.gp">
+        <source>Guadeloupe</source>
+        <target>Guadelupe</target>
+      </trans-unit>
+      <trans-unit id="CNT.gq">
+        <source>Equatorial Guinea</source>
+        <target>Guineja Ekuatoriale</target>
+      </trans-unit>
+      <trans-unit id="CNT.gr">
+        <source>Greece</source>
+        <target>Greqi</target>
+      </trans-unit>
+      <trans-unit id="CNT.gs">
+        <source>South Georgia and the South Sandwich Islands</source>
+        <target>South Georgia and the South Sandwich Islands</target>
+      </trans-unit>
+      <trans-unit id="CNT.gt">
+        <source>Guatemala</source>
+        <target>Guatemalë</target>
+      </trans-unit>
+      <trans-unit id="CNT.gu">
+        <source>Guam</source>
+        <target>Guam</target>
+      </trans-unit>
+      <trans-unit id="CNT.gw">
+        <source>Guinea-Bissau</source>
+        <target>Guinea-Bissau</target>
+      </trans-unit>
+      <trans-unit id="CNT.gy">
+        <source>Guyana</source>
+        <target>Guajana</target>
+      </trans-unit>
+      <trans-unit id="CNT.hk">
+        <source>Hong Kong</source>
+        <target>Hong Kong</target>
+      </trans-unit>
+      <trans-unit id="CNT.hm">
+        <source>Heard and McDonald Islands</source>
+        <target>Ishujt Heard dhe McDonald</target>
+      </trans-unit>
+      <trans-unit id="CNT.hn">
+        <source>Honduras</source>
+        <target>Honduras</target>
+      </trans-unit>
+      <trans-unit id="CNT.hr">
+        <source>Croatia/Hrvatska</source>
+        <target>Kroaci</target>
+      </trans-unit>
+      <trans-unit id="CNT.ht">
+        <source>Haiti</source>
+        <target>Haiti</target>
+      </trans-unit>
+      <trans-unit id="CNT.hu">
+        <source>Hungary</source>
+        <target>Hungari</target>
+      </trans-unit>
+      <trans-unit id="CNT.id">
+        <source>Indonesia</source>
+        <target>Indonezi</target>
+      </trans-unit>
+      <trans-unit id="CNT.ie">
+        <source>Ireland</source>
+        <target>Irlandë</target>
+      </trans-unit>
+      <trans-unit id="CNT.il">
+        <source>Israel</source>
+        <target>Izrael</target>
+      </trans-unit>
+      <trans-unit id="CNT.im">
+        <source>Isle of Man</source>
+        <target>Ishulli i Robit</target>
+      </trans-unit>
+      <trans-unit id="CNT.in">
+        <source>India</source>
+        <target>Indi</target>
+      </trans-unit>
+      <trans-unit id="CNT.io">
+        <source>British Indian Ocean Territory</source>
+        <target>Territoret Britanike te Oqeanit Indian</target>
+      </trans-unit>
+      <trans-unit id="CNT.iq">
+        <source>Iraq</source>
+        <target>Irak</target>
+      </trans-unit>
+      <trans-unit id="CNT.ir">
+        <source>Iran</source>
+        <target>Iran</target>
+      </trans-unit>
+      <trans-unit id="CNT.is">
+        <source>Iceland</source>
+        <target>Islandë</target>
+      </trans-unit>
+      <trans-unit id="CNT.it">
+        <source>Italy</source>
+        <target>Itali</target>
+      </trans-unit>
+      <trans-unit id="CNT.je">
+        <source>Jersey</source>
+        <target>Xhersi</target>
+      </trans-unit>
+      <trans-unit id="CNT.jm">
+        <source>Jamaica</source>
+        <target>Xhamajkë</target>
+      </trans-unit>
+      <trans-unit id="CNT.jo">
+        <source>Jordan</source>
+        <target>Jordani</target>
+      </trans-unit>
+      <trans-unit id="CNT.jp">
+        <source>Japan</source>
+        <target>Japoni</target>
+      </trans-unit>
+      <trans-unit id="CNT.ke">
+        <source>Kenya</source>
+        <target>Kenia</target>
+      </trans-unit>
+      <trans-unit id="CNT.kg">
+        <source>Kyrgyzstan</source>
+        <target>Kirgiztan</target>
+      </trans-unit>
+      <trans-unit id="CNT.kh">
+        <source>Cambodia</source>
+        <target>Kamboxhia</target>
+      </trans-unit>
+      <trans-unit id="CNT.ki">
+        <source>Kiribati</source>
+        <target>Kiribati</target>
+      </trans-unit>
+      <trans-unit id="CNT.km">
+        <source>Comoros</source>
+        <target>Komoros</target>
+      </trans-unit>
+      <trans-unit id="CNT.kn">
+        <source>Saint Kitts and Nevis</source>
+        <target>Saint Kitts and Nevis</target>
+      </trans-unit>
+      <trans-unit id="CNT.kp">
+        <source>North Korea</source>
+        <target>Koreja e Veriut</target>
+      </trans-unit>
+      <trans-unit id="CNT.kr">
+        <source>South Korea</source>
+        <target>Koreja e Jugut</target>
+      </trans-unit>
+      <trans-unit id="CNT.kv">
+        <source>Kosovo</source>
+        <target>Kosova</target>
+      </trans-unit>
+      <trans-unit id="CNT.kw">
+        <source>Kuwait</source>
+        <target>Kuvajt</target>
+      </trans-unit>
+      <trans-unit id="CNT.ky">
+        <source>Cayman Islands</source>
+        <target>Ishujt Kajman</target>
+      </trans-unit>
+      <trans-unit id="CNT.kz">
+        <source>Kazakhstan</source>
+        <target>Kazakistan</target>
+      </trans-unit>
+      <trans-unit id="CNT.la">
+        <source>Lao</source>
+        <target>Laos</target>
+      </trans-unit>
+      <trans-unit id="CNT.lb">
+        <source>Lebanon</source>
+        <target>Liban</target>
+      </trans-unit>
+      <trans-unit id="CNT.lc">
+        <source>Saint Lucia</source>
+        <target>Santa Luçia</target>
+      </trans-unit>
+      <trans-unit id="CNT.li">
+        <source>Liechtenstein</source>
+        <target>Lihtenshtejn</target>
+      </trans-unit>
+      <trans-unit id="CNT.lk">
+        <source>Sri Lanka</source>
+        <target>Sri Lankë</target>
+      </trans-unit>
+      <trans-unit id="CNT.lr">
+        <source>Liberia</source>
+        <target>Liberi</target>
+      </trans-unit>
+      <trans-unit id="CNT.ls">
+        <source>Lesotho</source>
+        <target>Lesoto</target>
+      </trans-unit>
+      <trans-unit id="CNT.lt">
+        <source>Lithuania</source>
+        <target>Lituani</target>
+      </trans-unit>
+      <trans-unit id="CNT.lu">
+        <source>Luxembourg</source>
+        <target>Luksembourg</target>
+      </trans-unit>
+      <trans-unit id="CNT.lv">
+        <source>Latvia</source>
+        <target>Letoni</target>
+      </trans-unit>
+      <trans-unit id="CNT.ly">
+        <source>Libyan Arab Jamahiriya</source>
+        <target>Libi</target>
+      </trans-unit>
+      <trans-unit id="CNT.ma">
+        <source>Morocco</source>
+        <target>Marok</target>
+      </trans-unit>
+      <trans-unit id="CNT.mc">
+        <source>Monaco</source>
+        <target>Monako</target>
+      </trans-unit>
+      <trans-unit id="CNT.md">
+        <source>Moldova, Republic of</source>
+        <target>Republika e Modavisë</target>
+      </trans-unit>
+      <trans-unit id="CNT.me">
+        <source>Montenegro</source>
+        <target>Mali i Zi</target>
+      </trans-unit>
+      <trans-unit id="CNT.mf">
+        <source>Saint Martin</source>
+        <target>San Martin</target>
+      </trans-unit>
+      <trans-unit id="CNT.mg">
+        <source>Madagascar</source>
+        <target>Madagaskar</target>
+      </trans-unit>
+      <trans-unit id="CNT.mh">
+        <source>Marshall Islands</source>
+        <target>Ishujt Marshall</target>
+      </trans-unit>
+      <trans-unit id="CNT.mk">
+        <source>Macedonia</source>
+        <target>Maqedoni</target>
+      </trans-unit>
+      <trans-unit id="CNT.ml">
+        <source>Mali</source>
+        <target>Mali</target>
+      </trans-unit>
+      <trans-unit id="CNT.mm">
+        <source>Myanmar</source>
+        <target>Myanmar</target>
+      </trans-unit>
+      <trans-unit id="CNT.mn">
+        <source>Mongolia</source>
+        <target>Mongoli</target>
+      </trans-unit>
+      <trans-unit id="CNT.mo">
+        <source>Macau</source>
+        <target>Makau</target>
+      </trans-unit>
+      <trans-unit id="CNT.mp">
+        <source>Northern Mariana Islands</source>
+        <target>Northern Mariana Islands</target>
+      </trans-unit>
+      <trans-unit id="CNT.mq">
+        <source>Martinique</source>
+        <target>Martinikë</target>
+      </trans-unit>
+      <trans-unit id="CNT.mr">
+        <source>Mauritania</source>
+        <target>Mauritani</target>
+      </trans-unit>
+      <trans-unit id="CNT.ms">
+        <source>Montserrat</source>
+        <target>Montserrat</target>
+      </trans-unit>
+      <trans-unit id="CNT.mt">
+        <source>Malta</source>
+        <target>Maltë</target>
+      </trans-unit>
+      <trans-unit id="CNT.mu">
+        <source>Mauritius</source>
+        <target>Mauritani</target>
+      </trans-unit>
+      <trans-unit id="CNT.mv">
+        <source>Maldives</source>
+        <target>Malidivet</target>
+      </trans-unit>
+      <trans-unit id="CNT.mw">
+        <source>Malawi</source>
+        <target>Malavi</target>
+      </trans-unit>
+      <trans-unit id="CNT.mx">
+        <source>Mexico</source>
+        <target>Meksikë</target>
+      </trans-unit>
+      <trans-unit id="CNT.my">
+        <source>Malaysia</source>
+        <target>Malajzi</target>
+      </trans-unit>
+      <trans-unit id="CNT.mz">
+        <source>Mozambique</source>
+        <target>Mozambik</target>
+      </trans-unit>
+      <trans-unit id="CNT.na">
+        <source>Namibia</source>
+        <target>Namibi</target>
+      </trans-unit>
+      <trans-unit id="CNT.nc">
+        <source>New Caledonia</source>
+        <target>Kaledonia e Re</target>
+      </trans-unit>
+      <trans-unit id="CNT.ne">
+        <source>Niger</source>
+        <target>Niger</target>
+      </trans-unit>
+      <trans-unit id="CNT.nf">
+        <source>Norfolk Island</source>
+        <target>Ishujt Norfolk</target>
+      </trans-unit>
+      <trans-unit id="CNT.ng">
+        <source>Nigeria</source>
+        <target>Nigeria</target>
+      </trans-unit>
+      <trans-unit id="CNT.ni">
+        <source>Nicaragua</source>
+        <target>Nikaragua</target>
+      </trans-unit>
+      <trans-unit id="CNT.nl">
+        <source>Netherlands</source>
+        <target>Hollandë</target>
+      </trans-unit>
+      <trans-unit id="CNT.no">
+        <source>Norway</source>
+        <target>Norvegji</target>
+      </trans-unit>
+      <trans-unit id="CNT.np">
+        <source>Nepal</source>
+        <target>Nepal</target>
+      </trans-unit>
+      <trans-unit id="CNT.nr">
+        <source>Nauru</source>
+        <target>Nauru</target>
+      </trans-unit>
+      <trans-unit id="CNT.nu">
+        <source>Niue</source>
+        <target>Niue</target>
+      </trans-unit>
+      <trans-unit id="CNT.nz">
+        <source>New Zealand</source>
+        <target>Zelanda e Re</target>
+      </trans-unit>
+      <trans-unit id="CNT.om">
+        <source>Oman</source>
+        <target>Oman</target>
+      </trans-unit>
+      <trans-unit id="CNT.pa">
+        <source>Panama</source>
+        <target>Panama</target>
+      </trans-unit>
+      <trans-unit id="CNT.pe">
+        <source>Peru</source>
+        <target>Peru</target>
+      </trans-unit>
+      <trans-unit id="CNT.pf">
+        <source>French Polynesia</source>
+        <target>Polinezia Franceze</target>
+      </trans-unit>
+      <trans-unit id="CNT.pg">
+        <source>Papua New Guinea</source>
+        <target>Guineja e Re</target>
+      </trans-unit>
+      <trans-unit id="CNT.ph">
+        <source>Philippines</source>
+        <target>Filipine</target>
+      </trans-unit>
+      <trans-unit id="CNT.pk">
+        <source>Pakistan</source>
+        <target>Pakistan</target>
+      </trans-unit>
+      <trans-unit id="CNT.pl">
+        <source>Poland</source>
+        <target>Poloni</target>
+      </trans-unit>
+      <trans-unit id="CNT.pm">
+        <source>Saint Pierre and Miquelon</source>
+        <target>Saint Pierre and Miquelon</target>
+      </trans-unit>
+      <trans-unit id="CNT.pn">
+        <source>Pitcairn Island</source>
+        <target>Ishujt Pitkairn</target>
+      </trans-unit>
+      <trans-unit id="CNT.pr">
+        <source>Puerto Rico</source>
+        <target>Porto Riko</target>
+      </trans-unit>
+      <trans-unit id="CNT.ps">
+        <source>Palestinian Territories</source>
+        <target>Palestinë</target>
+      </trans-unit>
+      <trans-unit id="CNT.pt">
+        <source>Portugal</source>
+        <target>Portugali</target>
+      </trans-unit>
+      <trans-unit id="CNT.pw">
+        <source>Palau</source>
+        <target>Palau</target>
+      </trans-unit>
+      <trans-unit id="CNT.py">
+        <source>Paraguay</source>
+        <target>Paraguaj</target>
+      </trans-unit>
+      <trans-unit id="CNT.qa">
+        <source>Qatar</source>
+        <target>Katar</target>
+      </trans-unit>
+      <trans-unit id="CNT.re">
+        <source>Reunion Island</source>
+        <target>Ishulli Reunion</target>
+      </trans-unit>
+      <trans-unit id="CNT.ro">
+        <source>Romania</source>
+        <target>Rumani</target>
+      </trans-unit>
+      <trans-unit id="CNT.rs">
+        <source>Serbia</source>
+        <target>Sërbia</target>
+      </trans-unit>
+      <trans-unit id="CNT.ru">
+        <source>Russian Federation</source>
+        <target>Rusi</target>
+      </trans-unit>
+      <trans-unit id="CNT.rw">
+        <source>Rwanda</source>
+        <target>Ruanda</target>
+      </trans-unit>
+      <trans-unit id="CNT.sa">
+        <source>Saudi Arabia</source>
+        <target>Arabia Saudite</target>
+      </trans-unit>
+      <trans-unit id="CNT.sb">
+        <source>Solomon Islands</source>
+        <target>Ishujt Solomon</target>
+      </trans-unit>
+      <trans-unit id="CNT.sc">
+        <source>Seychelles</source>
+        <target>Sejshellet</target>
+      </trans-unit>
+      <trans-unit id="CNT.sd">
+        <source>Sudan</source>
+        <target>Sudan</target>
+      </trans-unit>
+      <trans-unit id="CNT.se">
+        <source>Sweden</source>
+        <target>Suedi</target>
+      </trans-unit>
+      <trans-unit id="CNT.sg">
+        <source>Singapore</source>
+        <target>Singapor</target>
+      </trans-unit>
+      <trans-unit id="CNT.sh">
+        <source>Saint Helena</source>
+        <target>Saint Helena</target>
+      </trans-unit>
+      <trans-unit id="CNT.si">
+        <source>Slovenia</source>
+        <target>Slloveni</target>
+      </trans-unit>
+      <trans-unit id="CNT.sj">
+        <source>Svalbard and Jan Mayen Islands</source>
+        <target>Svalbard and Jan Mayen Islands</target>
+      </trans-unit>
+      <trans-unit id="CNT.sk">
+        <source>Slovak Republic</source>
+        <target>Sllovaki</target>
+      </trans-unit>
+      <trans-unit id="CNT.sl">
+        <source>Sierra Leone</source>
+        <target>Sierra Leone</target>
+      </trans-unit>
+      <trans-unit id="CNT.sm">
+        <source>San Marino</source>
+        <target>San Marino</target>
+      </trans-unit>
+      <trans-unit id="CNT.sn">
+        <source>Senegal</source>
+        <target>Senegal</target>
+      </trans-unit>
+      <trans-unit id="CNT.so">
+        <source>Somalia</source>
+        <target>Somali</target>
+      </trans-unit>
+      <trans-unit id="CNT.sr">
+        <source>Suriname</source>
+        <target>Surinam</target>
+      </trans-unit>
+      <trans-unit id="CNT.st">
+        <source>Sao Tome and Principe</source>
+        <target>Sao Tome dhe Principe</target>
+      </trans-unit>
+      <trans-unit id="CNT.sv">
+        <source>El Salvador</source>
+        <target>Salvador</target>
+      </trans-unit>
+      <trans-unit id="CNT.sy">
+        <source>Syrian Arab Republic</source>
+        <target>Siri</target>
+      </trans-unit>
+      <trans-unit id="CNT.sz">
+        <source>Swaziland</source>
+        <target>Zvaziland</target>
+      </trans-unit>
+      <trans-unit id="CNT.tc">
+        <source>Turks and Caicos Islands</source>
+        <target>Ishujt Turk dhe Kaikos</target>
+      </trans-unit>
+      <trans-unit id="CNT.td">
+        <source>Chad</source>
+        <target>Çad</target>
+      </trans-unit>
+      <trans-unit id="CNT.tf">
+        <source>French Southern Territories</source>
+        <target>Territoret Jugore Franceze</target>
+      </trans-unit>
+      <trans-unit id="CNT.tg">
+        <source>Togo</source>
+        <target>Togo</target>
+      </trans-unit>
+      <trans-unit id="CNT.th">
+        <source>Thailand</source>
+        <target>Tailandë</target>
+      </trans-unit>
+      <trans-unit id="CNT.tj">
+        <source>Tajikistan</source>
+        <target>Taxhikistan</target>
+      </trans-unit>
+      <trans-unit id="CNT.tk">
+        <source>Tokelau</source>
+        <target>Tokelau</target>
+      </trans-unit>
+      <trans-unit id="CNT.tl">
+        <source>Timor-Leste</source>
+        <target>Timor</target>
+      </trans-unit>
+      <trans-unit id="CNT.tm">
+        <source>Turkmenistan</source>
+        <target>Turkmenistan</target>
+      </trans-unit>
+      <trans-unit id="CNT.tn">
+        <source>Tunisia</source>
+        <target>Tunizi</target>
+      </trans-unit>
+      <trans-unit id="CNT.to">
+        <source>Tonga</source>
+        <target>Tonga</target>
+      </trans-unit>
+      <trans-unit id="CNT.tr">
+        <source>Turkey</source>
+        <target>Turqi</target>
+      </trans-unit>
+      <trans-unit id="CNT.tt">
+        <source>Trinidad and Tobago</source>
+        <target>Trinidad dhe Tabago</target>
+      </trans-unit>
+      <trans-unit id="CNT.tv">
+        <source>Tuvalu</source>
+        <target>Tuvalu</target>
+      </trans-unit>
+      <trans-unit id="CNT.tw">
+        <source>Taiwan</source>
+        <target>Tajvan</target>
+      </trans-unit>
+      <trans-unit id="CNT.tz">
+        <source>Tanzania</source>
+        <target>Tanzani</target>
+      </trans-unit>
+      <trans-unit id="CNT.ua">
+        <source>Ukraine</source>
+        <target>Ukrainë</target>
+      </trans-unit>
+      <trans-unit id="CNT.ug">
+        <source>Uganda</source>
+        <target>Uganda</target>
+      </trans-unit>
+      <trans-unit id="CNT.um">
+        <source>United States Minor Outlying Islands</source>
+        <target>United States Minor Outlying Islands</target>
+      </trans-unit>
+      <trans-unit id="CNT.us">
+        <source>United States</source>
+        <target>Amerikë</target>
+      </trans-unit>
+      <trans-unit id="CNT.uy">
+        <source>Uruguay</source>
+        <target>Uruguaj</target>
+      </trans-unit>
+      <trans-unit id="CNT.uz">
+        <source>Uzbekistan</source>
+        <target>Uzbekistan</target>
+      </trans-unit>
+      <trans-unit id="CNT.va">
+        <source>Holy See (Vatican City State)</source>
+        <target>Vatikan</target>
+      </trans-unit>
+      <trans-unit id="CNT.vc">
+        <source>Saint Vincent and the Grenadines</source>
+        <target>Saint Vincent and the Grenadines</target>
+      </trans-unit>
+      <trans-unit id="CNT.ve">
+        <source>Venezuela</source>
+        <target>Venezuela</target>
+      </trans-unit>
+      <trans-unit id="CNT.vg">
+        <source>Virgin Islands, British</source>
+        <target>Ishujt Virxhin, Angleze</target>
+      </trans-unit>
+      <trans-unit id="CNT.vi">
+        <source>Virgin Islands, U.S.</source>
+        <target>Ishujt Virxhin, Amerikane</target>
+      </trans-unit>
+      <trans-unit id="CNT.vn">
+        <source>Vietnam</source>
+        <target>Vietnam</target>
+      </trans-unit>
+      <trans-unit id="CNT.vu">
+        <source>Vanuatu</source>
+        <target>Vanuatu</target>
+      </trans-unit>
+      <trans-unit id="CNT.wf">
+        <source>Wallis and Futuna Islands</source>
+        <target>Ishujt Uallis dhe Futuna</target>
+      </trans-unit>
+      <trans-unit id="CNT.ws">
+        <source>Samoa</source>
+        <target>Samoa</target>
+      </trans-unit>
+      <trans-unit id="CNT.ye">
+        <source>Yemen</source>
+        <target>Jemen</target>
+      </trans-unit>
+      <trans-unit id="CNT.yt">
+        <source>Mayotte</source>
+        <target>Majote</target>
+      </trans-unit>
+      <trans-unit id="CNT.za">
+        <source>South Africa</source>
+        <target>Afrika e Jugut</target>
+      </trans-unit>
+      <trans-unit id="CNT.zm">
+        <source>Zambia</source>
+        <target>Zambia</target>
+      </trans-unit>
+      <trans-unit id="CNT.zw">
+        <source>Zimbabwe</source>
+        <target>Zimbabve</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
