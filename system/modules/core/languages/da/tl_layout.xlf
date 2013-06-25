@@ -243,7 +243,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.modules.0">
         <source>Included modules</source>
-        <target>Inlkuderede moduler</target>
+        <target>Inkluderede moduler</target>
       </trans-unit>
       <trans-unit id="tl_layout.modules.1">
         <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>

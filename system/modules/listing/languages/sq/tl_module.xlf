@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/listing/languages/en/tl_module.php" source-language="en">
+    <body>
+      <trans-unit id="tl_module.list_table.0">
+        <source>Table</source>
+        <target>Tabela</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_table.1">
+        <source>Please choose the source table.</source>
+        <target>Zgjedhoni tabelën që doni ta fusni.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_fields.0">
+        <source>Fields</source>
+        <target>Fushat</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_fields.1">
+        <source>Please enter a comma separated list of the fields you want to list.</source>
+        <target>Epeni fusha, të ndara me presje, që doni t'i fusni.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_where.0">
+        <source>Condition</source>
+        <target>Kusht</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_where.1">
+        <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
+        <target>Në qoftë se doni të përjashtoni rreshta të veçantë, atëherë mund të caktoni kushtin këtu (p.sh. &lt;em&gt;published=1&lt;/em&gt; ose &lt;em&gt;type!='admin'&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_search.0">
+        <source>Searchable fields</source>
+        <target>Fusha kërkuese</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_search.1">
+        <source>Here you can enter a comma seperated list of fields that you want to be searchable.</source>
+        <target>Epeni fusha, të ndara me presje, që doni të janë kërkuese.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_sort.0">
+        <source>Order by</source>
+        <target>Radhitja</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_sort.1">
+        <source>Here you can enter a comma seperated list of fields to sort the results by.</source>
+        <target>Epeni fushat, të ndara me presje, të cilat do të përdoren për radhitjen standarde. Epeni &lt;em&gt;DESC&lt;/em&gt; pas emrit të fushës për ta bërë radhitjen duke ra te poshtë (p.sh. &lt;em&gt;emri, data DESC&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info.0">
+        <source>Details page fields</source>
+        <target>Fusha për faqen e detajeve</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info.1">
+        <source>Enter a comma separated list of the fields you want to show on the details page. Leave blank to disable the feature.</source>
+        <target>Epeni fusha, të ndara me presje, që doni t'i tregoni në faqen e detajeve . Lëreni këtë fushë bosh, në qoftë se doni ta çaktivizoni faqen e detajeve.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_where.0">
+        <source>Details page condition</source>
+        <target>Kushtëzimet për faeqen e detajeve</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_where.1">
+        <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
+        <target>Këtu mund të bëhen kushtëzimet për ta filtruar rezultatin (p.sh. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;)</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_layout.0">
+        <source>List template</source>
+        <target>Struktura listës</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_layout.1">
+        <source>Here you can select the list template.</source>
+        <target>Zgjedhoni strukturën e listës. Mund ta caktoni një strukturë të përshtatur në dosjen &lt;em&gt;templates&lt;/em&gt;. Skedarët e shabllonëve të listave fillojnë me &lt;em&gt;list_&lt;/em&gt; dhe kërkojnë prapashtesën &lt;em&gt;.tpl&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_layout.0">
+        <source>Details page template</source>
+        <target>Struktura e faqes së detajeve</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_layout.1">
+        <source>Here you can select the details page template.</source>
+        <target>Zgjedhoni strukturën për faqen e detajeve. Mund ta caktoni një strukturë të përshtatur në dosjen &lt;em&gt;templates&lt;/em&gt;. Skedarët e shabllonëve të faqes së detajeve fillojnë me &lt;em&gt;info_&lt;/em&gt; dhe kërkojnë prapashtesën &lt;em&gt;.tpl&lt;/em&gt;.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

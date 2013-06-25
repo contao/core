@@ -159,6 +159,7 @@
       </trans-unit>
       <trans-unit id="ERR.emptyUpload">
         <source>Please select at least one file!</source>
+        <target>Wybierz przynajmniej jeden plik!</target>
       </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
@@ -946,6 +947,7 @@
       </trans-unit>
       <trans-unit id="MSC.mw_enable">
         <source>Enable/disable the module</source>
+        <target>Włącz/wyłącz moduł</target>
       </trans-unit>
       <trans-unit id="MSC.aw_title">
         <source>Title</source>
@@ -1145,15 +1147,19 @@
       </trans-unit>
       <trans-unit id="MSC.currentLogin.0">
         <source>Current login</source>
+        <target>Obecne logowanie</target>
       </trans-unit>
       <trans-unit id="MSC.currentLogin.1">
         <source>Current login: %s</source>
+        <target>Obecne logowanie: %s</target>
       </trans-unit>
       <trans-unit id="MSC.loginCount">
         <source>Login attempts</source>
+        <target>Próby logowania</target>
       </trans-unit>
       <trans-unit id="MSC.locked">
         <source>Locked</source>
+        <target>Zablokowane</target>
       </trans-unit>
       <trans-unit id="MSC.move">
         <source>Move the item via drag and drop</source>
@@ -1197,6 +1203,7 @@
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
         <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>Dowiedz się więcej o przyspieszaniu pracy używając &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;skrótów klawiatury&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1638,12 +1645,15 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
       </trans-unit>
       <trans-unit id="MSC.filePickerHome">
         <source>Back to the file picker</source>
+        <target>Powrót do wyboru pliku</target>
       </trans-unit>
       <trans-unit id="MSC.pagePickerHome">
         <source>Back to the page picker</source>
+        <target>Powrót do wyboru strony</target>
       </trans-unit>
       <trans-unit id="MSC.pickerNoSelection">
         <source>Please go back to the page or file picker and make a selection before you close the dialog.</source>
+        <target>Cofnij się do wyboru strony lub pliku i zaznacz rekord przez zamknięciem okna.</target>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
@@ -2051,9 +2061,11 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
       </trans-unit>
       <trans-unit id="MSC.createdOn">
         <source>Created on</source>
+        <target>Utworzono</target>
       </trans-unit>
       <trans-unit id="MSC.activation">
         <source>Activated on</source>
+        <target>Aktywowano</target>
       </trans-unit>
       <trans-unit id="MSC.relevance">
         <source>%s relevance</source>
