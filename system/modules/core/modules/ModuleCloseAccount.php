@@ -91,7 +91,7 @@ class ModuleCloseAccount extends \Module
 			// Validate the password
 			if (!$objWidget->hasErrors())
 			{
-				$pwUtil = new PasswordUtil();
+				$pwUtil = PasswordUtil::getInstance();
 
 				// Check password hashing algorithms of previous Contao versions
 				if ($this->User->oldPwHashAlgo != '')

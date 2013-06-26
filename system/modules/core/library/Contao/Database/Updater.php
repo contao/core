@@ -722,7 +722,7 @@ class Updater extends \Controller
 	 */
 	protected function updatePasswords()
 	{
-		$pwUtil = new PasswordUtil();
+		$pwUtil = PasswordUtil::getInstance();
 
 		// Database
 		foreach (array('tl_member', 'tl_user') as $strTable)

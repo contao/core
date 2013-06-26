@@ -373,7 +373,7 @@ class InstallTool extends Backend
 		$_SESSION['TL_INSTALL_AUTH'] = '';
 		$_SESSION['TL_INSTALL_EXPIRE'] = 0;
 
-		$pwUtil = new PasswordUtil();
+		$pwUtil = PasswordUtil::getInstance();
 
 		// Check password hashing algorithms of previous Contao versions
 		if ($GLOBALS['TL_CONFIG']['oldPwHashAlgo'] != '')
@@ -422,8 +422,7 @@ class InstallTool extends Backend
 		// Save the password
 		else
 		{
-			$pwUtil = new PasswordUtil();
-			$strPassword = $pwUtil->password_hash($strPassword);
+			$strPassword = PasswordUtil::getInstance()->password_hash($strPassword);
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword);
 			$this->reload();
 		}
@@ -694,8 +693,7 @@ class InstallTool extends Backend
 				elseif (Input::post('name') != '' && Input::post('email', true) != '' && Input::post('username', true) != '')
 				{
 					$time = time();
-					$pwUtil = new PasswordUtil();
-					$strPassword = $pwUtil->password_hash(Input::post('pass', true));
+					$strPassword = PasswordUtil::getInstance()->password_hash(Input::post('pass', true));
 
 					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, language, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
 								   ->execute(Input::post('name'), Input::post('email', true), Input::post('username', true), $strPassword, $GLOBALS['TL_LANGUAGE']);
