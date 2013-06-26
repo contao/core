@@ -569,26 +569,26 @@ abstract class User extends \System
 	 */
 	protected function verifyPassword()
 	{
-        $pwUtil = new PasswordUtil();
+		$pwUtil = PasswordUtil::getInstance();
 
-        // Check password hashing algorithms of previous Contao versions
-        if ($this->oldPwHashAlgo != '')
-        {
-            $pwUtil->setOldHashingAlgorithm($this->oldPwHashAlgo, $this->oldPwSalt);
-        }
+		// Check password hashing algorithms of previous Contao versions
+		if ($this->oldPwHashAlgo != '')
+		{
+			$pwUtil->setOldHashingAlgorithm($this->oldPwHashAlgo, $this->oldPwSalt);
+		}
 
-        // Verify password
-        if ($pwUtil->password_verify(\Input::post('password', true), $this->password))
-        {
-            // Reset data
-            $this->oldPwHashAlgo = '';
-            $this->oldPwSalt == '';
-            $this->password = $pwUtil->getUpdatedPassword();
+		// Verify password
+		if ($pwUtil->password_verify(\Input::post('password', true), $this->password))
+		{
+			// Reset data
+			$this->oldPwHashAlgo = '';
+			$this->oldPwSalt = '';
+			$this->password = $pwUtil->getUpdatedPassword();
 
-            return true;
-        }
+			return true;
+		}
 
-        return false;
+		return false;
 	}
 
 
