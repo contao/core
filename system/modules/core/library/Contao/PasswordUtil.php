@@ -29,6 +29,12 @@ namespace Contao;
 class PasswordUtil
 {
 	/**
+	 * Object instances (Singleton)
+	 * @var array
+	 */
+	protected static $arrInstances = array();
+
+	/**
 	 * The algorithm
 	 * @var integer
 	 */
@@ -65,10 +71,10 @@ class PasswordUtil
 	 * @param integer Algorithm
 	 * @param array Options
 	 */
-	public function __construct($algo=false, $options=false)
+	protected function __construct($algo, $options)
 	{
-		$this->algo		= ($algo) ? $algo : $GLOBALS['TL_CONFIG']['password_algorithm'];
-		$this->options	= ($options) ? $options : $GLOBALS['TL_CONFIG']['password_options'];
+		$this->algo    = $algo;
+		$this->options = $options;
 	}
 
 	/**
@@ -187,4 +193,29 @@ class PasswordUtil
 	{
 		return $this->password;
 	}
+
+
+	/**
+	 * Instantiate the Database object (Factory)
+	 *
+	 * @param integer Algorithm
+	 * @param array Options
+	 *
+	 * @return \PasswordUtil
+	 */
+	public static function getInstance($algo=false, $options=false)
+	{
+		$algo    = ($algo) ?: $GLOBALS['TL_CONFIG']['password_algorithm'];
+		$options = (array) (($options) ?: $GLOBALS['TL_CONFIG']['password_options']);
+
+		ksort($options);
+		$strKey = md5($algo . implode('', $options));
+
+		if (!isset(static::$arrInstances[$strKey]))
+		{
+			static::$arrInstances[$strKey] = new static($algo, $options);
+		}
+
+		return static::$arrInstances[$strKey];
+    }
 }
