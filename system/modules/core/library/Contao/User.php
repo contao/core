@@ -338,8 +338,8 @@ abstract class User extends \System
 		$this->setUserFromDb();
 
 		// Update the record
-		$this->lastLogin = $this->currentLogin;
 		$this->currentLogin = $time;
+		$this->lastLogin = $this->currentLogin;
 		$this->loginCount = $GLOBALS['TL_CONFIG']['loginCount'];
 		$this->save();
 
