@@ -10,6 +10,8 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
+// @TODO: refactor the whole Contao directory structure and go for Composer autoloading
+require_once TL_ROOT . '/system/modules/core/vendor/password_compat/lib/password.php';
 
 /**
  * Error handler

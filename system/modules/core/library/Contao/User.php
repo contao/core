@@ -290,22 +290,8 @@ abstract class User extends \System
 			return false;
 		}
 
-		// The password has been generated with crypt()
-		if (\Encryption::test($this->password))
-		{
-			$blnAuthenticated = (crypt(\Input::post('password', true), $this->password) == $this->password);
-		}
-		else
-		{
-			list($strPassword, $strSalt) = explode(':', $this->password);
-			$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1(\Input::post('password', true))) : ($strPassword == sha1($strSalt . \Input::post('password', true)));
-
-			// Store a SHA-512 encrpyted version of the password
-			if ($blnAuthenticated)
-			{
-				$this->password = \Encryption::hash(\Input::post('password', true));
-			}
-		}
+		// Verify password
+		$blnAuthenticated = $this->verifyPassword();
 
 		// HOOK: pass credentials to callback functions
 		if (!$blnAuthenticated && isset($GLOBALS['TL_HOOKS']['checkCredentials']) && is_array($GLOBALS['TL_HOOKS']['checkCredentials']))
@@ -567,6 +553,38 @@ abstract class User extends \System
 		// Group ID found
 		if (in_array($id, $groups))
 		{
+			return true;
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Verify password
+	 * This also ensures updating the old passwords from previous Contao
+	 * versions to the latest algorithm
+	 *
+	 * @return boolean true if valid, false if not
+	 */
+	protected function verifyPassword()
+	{
+		$pwUtil = PasswordUtil::getInstance();
+
+		// Check password hashing algorithms of previous Contao versions
+		if ($this->oldPwHashAlgo != '')
+		{
+			$pwUtil->setOldHashingAlgorithm($this->oldPwHashAlgo, $this->oldPwSalt);
+		}
+
+		// Verify password
+		if ($pwUtil->password_verify(\Input::post('password', true), $this->password))
+		{
+			// Reset data
+			$this->oldPwHashAlgo = '';
+			$this->oldPwSalt = '';
+			$this->password = $pwUtil->getUpdatedPassword();
+
 			return true;
 		}
 

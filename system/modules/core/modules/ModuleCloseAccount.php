@@ -91,18 +91,21 @@ class ModuleCloseAccount extends \Module
 			// Validate the password
 			if (!$objWidget->hasErrors())
 			{
-				// The password has been generated with crypt()
-				if (\Encryption::test($this->User->password))
+				$pwUtil = PasswordUtil::getInstance();
+
+				// Check password hashing algorithms of previous Contao versions
+				if ($this->User->oldPwHashAlgo != '')
 				{
-					$blnAuthenticated = (crypt($objWidget->value, $this->User->password) == $this->User->password);
-				}
-				else
-				{
-					list(, $strSalt) = explode(':', $this->User->password);
-					$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1($objWidget->value)) : ($strPassword == sha1($strSalt . $objWidget->value));
+					$pwUtil->setOldHashingAlgorithm($this->User->oldPwHashAlgo, $this->User->oldPwSalt);
 				}
 
-				if (!$blnAuthenticated)
+				// Verify password
+				if ($pwUtil->password_verify($objWidget->value, $this->User->password))
+				{
+					// Update User password
+					$this->User->password = $pwUtil->getUpdatedPassword();
+				}
+				else
 				{
 					$objWidget->value = '';
 					$objWidget->addError($GLOBALS['TL_LANG']['ERR']['invalidPass']);

@@ -373,31 +373,25 @@ class InstallTool extends Backend
 		$_SESSION['TL_INSTALL_AUTH'] = '';
 		$_SESSION['TL_INSTALL_EXPIRE'] = 0;
 
-		// The password has been generated with crypt()
-		if (Encryption::test($GLOBALS['TL_CONFIG']['installPassword']))
+		$pwUtil = PasswordUtil::getInstance();
+
+		// Check password hashing algorithms of previous Contao versions
+		if ($GLOBALS['TL_CONFIG']['oldPwHashAlgo'] != '')
 		{
-			if (crypt(Input::post('password', true), $GLOBALS['TL_CONFIG']['installPassword']) == $GLOBALS['TL_CONFIG']['installPassword'])
-			{
-				$this->setAuthCookie();
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
-				$this->reload();
-			}
+			$pwUtil->setOldHashingAlgorithm($GLOBALS['TL_CONFIG']['oldPwHashAlgo'], $GLOBALS['TL_CONFIG']['oldPwSalt']);
 		}
-		else
+
+		// Verify password
+		if ($pwUtil->password_verify(\Input::post('password', true), $GLOBALS['TL_CONFIG']['installPassword']))
 		{
-			list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
-			$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1(Input::post('password', true))) : ($strPassword == sha1($strSalt . Input::post('password', true)));
+			// Reset data
+			$this->Config->delete("\$GLOBALS['TL_CONFIG']['oldPwHashAlgo']");
+			$this->Config->delete("\$GLOBALS['TL_CONFIG']['oldPwSalt']");
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $pwUtil->getUpdatedPassword());
 
-			if ($blnAuthenticated)
-			{
-				// Store a crypt() version of the password
-				$strPassword = Encryption::hash(Input::post('password', true));
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword);
-
-				$this->setAuthCookie();
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
-				$this->reload();
-			}
+			$this->setAuthCookie();
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
+			$this->reload();
 		}
 
 		// Increase the login count if we get here
@@ -428,7 +422,7 @@ class InstallTool extends Backend
 		// Save the password
 		else
 		{
-			$strPassword = Encryption::hash($strPassword);
+			$strPassword = PasswordUtil::getInstance()->password_hash($strPassword);
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword);
 			$this->reload();
 		}
@@ -699,7 +693,7 @@ class InstallTool extends Backend
 				elseif (Input::post('name') != '' && Input::post('email', true) != '' && Input::post('username', true) != '')
 				{
 					$time = time();
-					$strPassword = Encryption::hash(Input::post('pass', true));
+					$strPassword = PasswordUtil::getInstance()->password_hash(Input::post('pass', true));
 
 					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, language, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
 								   ->execute(Input::post('name'), Input::post('email', true), Input::post('username', true), $strPassword, $GLOBALS['TL_LANGUAGE']);
@@ -958,6 +952,26 @@ class InstallTool extends Backend
 			}
 
 			$this->Template->is31Update = true;
+			$this->outputAndExit();
+		}
+	}
+
+
+	/**
+	 * Version 3.2.0 update
+	 */
+	protected function update32()
+	{
+		if (!$this->Database->fieldExists('oldPwHashAlgo', 'tl_user'))
+		{
+			if (Input::post('FORM_SUBMIT') == 'tl_32update')
+			{
+				$this->import('Database\\Updater', 'Updater');
+				$this->Updater->run32Update();
+				$this->reload();
+			}
+
+			$this->Template->is32Update = true;
 			$this->outputAndExit();
 		}
 	}

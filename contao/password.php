@@ -81,7 +81,8 @@ class ChangePassword extends Backend
 			else
 			{
 				// Make sure the password has been changed
-				if (crypt($pw, $this->User->password) == $this->User->password)
+				$pwUtil = PasswordUtil::getInstance();
+				if ($pwUtil->password_verify($pw, $this->$this->User->password))
 				{
 					Message::addError($GLOBALS['TL_LANG']['MSC']['pw_change']);
 				}
@@ -101,7 +102,7 @@ class ChangePassword extends Backend
 
 					$objUser = UserModel::findByPk($this->User->id);
 					$objUser->pwChange = '';
-					$objUser->password = Encryption::hash($pw);
+					$objUser->password = $pwUtil->password_hash($pw);
 					$objUser->save();
 
 					Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);

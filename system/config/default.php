@@ -184,6 +184,12 @@ $GLOBALS['TL_CONFIG']['encryptionKey']    = '';
 $GLOBALS['TL_CONFIG']['encryptionMode']   = 'cfb';
 $GLOBALS['TL_CONFIG']['encryptionCipher'] = 'rijndael-256';
 
+/**
+ * Password hashing
+ */
+$GLOBALS['TL_CONFIG']['password_algorithm']    = PASSWORD_DEFAULT;
+$GLOBALS['TL_CONFIG']['password_options']      = array('cost' => 10);
+
 
 /**
  * -------------------------------------------------------------------------

@@ -134,6 +134,7 @@ ClassLoader::addClasses(array
 	'Contao\Model'                     => 'system/modules/core/library/Contao/Model.php',
 	'Contao\ModuleLoader'              => 'system/modules/core/library/Contao/ModuleLoader.php',
 	'Contao\Pagination'                => 'system/modules/core/library/Contao/Pagination.php',
+	'Contao\PasswordUtil'              => 'system/modules/core/library/Contao/PasswordUtil.php',
 	'Contao\Request'                   => 'system/modules/core/library/Contao/Request.php',
 	'Contao\RequestToken'              => 'system/modules/core/library/Contao/RequestToken.php',
 	'Contao\Search'                    => 'system/modules/core/library/Contao/Search.php',
