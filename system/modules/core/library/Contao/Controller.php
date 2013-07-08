@@ -2528,7 +2528,16 @@ abstract class Controller extends \System
 		// Fullsize view
 		elseif ($arrItem['fullsize'] && TL_MODE == 'FE')
 		{
-			$objTemplate->href = TL_FILES_URL . \System::urlEncode($arrItem['singleSRC']);
+			$href = $arrItem['singleSRC'];
+			if ($GLOBALS['TL_CONFIG']['maxImageWidth'] > 0)
+			{
+				$ratio = floor($objTemplate->height / $objTemplate->width);
+				$size[0] = $GLOBALS['TL_CONFIG']['maxImageWidth'];
+				$ratio = $imgSize[1] / $imgSize[0];
+				$size[1] = floor($GLOBALS['TL_CONFIG']['maxImageWidth'] * $ratio);
+				$href = \Image::get($arrItem['singleSRC'], $size[0], $size[1], '');
+			}
+			$objTemplate->href = TL_FILES_URL . \System::urlEncode($href);
 			$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 		}
 
