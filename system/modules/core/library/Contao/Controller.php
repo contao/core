@@ -2533,8 +2533,7 @@ abstract class Controller extends \System
 			{
 				$ratio = floor($objTemplate->height / $objTemplate->width);
 				$size[0] = $GLOBALS['TL_CONFIG']['maxImageWidth'];
-				$ratio = $imgSize[1] / $imgSize[0];
-				$size[1] = floor($GLOBALS['TL_CONFIG']['maxImageWidth'] * $ratio);
+				$size[1] = floor($size[0] * $ratio);
 				$href = \Image::get($arrItem['singleSRC'], $size[0], $size[1], '');
 			}
 			$objTemplate->href = TL_FILES_URL . \System::urlEncode($href);
