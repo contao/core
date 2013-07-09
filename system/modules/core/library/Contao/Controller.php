@@ -1525,7 +1525,16 @@ abstract class Controller extends \System
 								$attribute = ' data-lightbox="' . substr($rel, 8) . '"';
 							}
 
-							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $strFile . '"' . (($alt != '') ? ' title="' . $alt . '"' : '') . $attribute . '><img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (($class != '') ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>') . '</a>';
+							$href = $strFile;
+							if ($GLOBALS['TL_CONFIG']['maxImageWidth'] > 0)
+							{
+								$size = @getimagesize(TL_ROOT .'/'. rawurldecode($href));
+								$size[0] = $GLOBALS['TL_CONFIG']['maxImageWidth'];
+								$ratio = $size[1] / $size[0];
+								$size[1] = floor($size[0] * $ratio);
+								$href = \Image::get($strFile, $size[0], $size[1], '');
+							}
+							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $href . '"' . (($alt != '') ? ' title="' . $alt . '"' : '') . $attribute . '><img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (($class != '') ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>') . '</a>';
 						}
 						else
 						{
