@@ -223,6 +223,7 @@ class InstallTool extends Backend
 		{
 			$this->Template->importException = true;
 			$this->Config->delete("\$GLOBALS['TL_CONFIG']['exampleWebsite']");
+			error_log("\nPHP Fatal error: {$e->getMessage()} in {$e->getFile()} on line {$e->getLine()}\n{$e->getTraceAsString()}\n");
 			$this->outputAndExit();
 		}
 
