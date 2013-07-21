@@ -105,14 +105,15 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('sendViaEmail', 'storeValues'),
-		'default'                     => '{title_legend},title,alias,jumpTo;{config_legend},tableless,allowTags;{email_legend},sendViaEmail;{store_legend:hide},storeValues;{expert_legend:hide},method,novalidate,attributes,formID'
+		'__selector__'                => array('sendViaEmail', 'sendXMLToURL', 'storeValues'),
+		'default'                     => '{title_legend},title,alias,jumpTo;{config_legend},tableless,allowTags;{email_legend},sendViaEmail,sendXMLToURL;{store_legend:hide},storeValues;{expert_legend:hide},method,novalidate,attributes,formID'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
 		'sendViaEmail'                => 'recipient,subject,format,skipEmpty',
+		'sendXMLToURL'                => 'xmlUrl,xmlTemplate',
 		'storeValues'                 => 'targetTable'
 	),
 
@@ -157,6 +158,33 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
+		),
+		'sendXMLToURL' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['sendXMLToURL'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'xmlUrl' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['xmlUrl'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>1024),
+			'sql'                     => "varchar(1024) NOT NULL default ''"
+		),
+		'xmlTemplate' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['xmlTemplate'],
+			'default'                 => 'form_xml',
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options_callback'        => array('tl_form', 'getFormTemplates'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'sendViaEmail' => array
 		(
@@ -302,6 +330,16 @@ class tl_form extends Backend
 		$this->import('BackendUser', 'User');
 	}
 
+	
+	/**
+	 * Return all form templates as array
+	 * @return array
+	 */
+	public function getFormTemplates()
+	{
+		return $this->getTemplateGroup('form_xml');
+	}
+	
 
 	/**
 	 * Check permissions to edit table tl_form

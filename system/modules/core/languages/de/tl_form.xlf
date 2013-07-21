@@ -33,6 +33,30 @@
         <source>Send the submitted data to an e-mail address.</source>
         <target>Die Formulardaten an eine E-Mail-Adresse versenden.</target>
       </trans-unit>
+      <trans-unit id="tl_form.sendXMLToURL.0">
+        <source>Send form data as XML to a URL</source>
+        <target>Als XML an URL versenden</target>
+      </trans-unit>
+      <trans-unit id="tl_form.sendXMLToURL.1">
+        <source>Send the submitted data to as a XML to a URL.</source>
+        <target>Die Formulardaten XML formatiert an einen URL versenden.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.xmlUrl.0">
+        <source>URL to send the XML to</source>
+				<target>URL für Versand</target>
+      </trans-unit>
+      <trans-unit id="tl_form.xmlUrl.1">
+        <source>The XML will be sent by HTTP POST to the given URL</source>
+				<target>An diesen URL wird das XML per HTTP POST gesendet</target>
+      </trans-unit>
+			<trans-unit id="tl_form.xmlTemplate.0">
+        <source>Template</source>
+				<target>Vorlage</target>
+      </trans-unit>
+      <trans-unit id="tl_form.xmlTemplate.1">
+        <source>Frontend Template to be used to generate the XML</source>
+				<target>Frontend Vorlage welche für die XML-Generierung verwendet wird</target>
+      </trans-unit>
       <trans-unit id="tl_form.recipient.0">
         <source>Recipient address</source>
         <target>Empfänger-Adresse</target>
