@@ -137,7 +137,7 @@ class ModuleNewsList extends \ModuleNews
 			$offset += (max($page, 1) - 1) * $this->perPage;
 
 			// Overall limit
-			if ($offset + $limit > $total)
+			if (($offset + $limit) > ($total + $offset))
 			{
 				$limit = $total - $offset;
 			}
