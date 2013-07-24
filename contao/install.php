@@ -680,6 +680,11 @@ class InstallTool extends Backend
 				{
 					$this->Template->usernameError = sprintf($GLOBALS['TL_LANG']['ERR']['noSpace'], $GLOBALS['TL_LANG']['MSC']['username']);
 				}
+				// Check for valid email address (see #5972)
+				elseif (!\Validator::isEmail(Input::post('email', true)))
+				{
+					$this->Template->emailError = $GLOBALS['TL_LANG']['ERR']['email'];
+				}
 				// The passwords do not match
 				elseif (Input::post('pass', true) != Input::post('confirm_pass', true))
 				{

@@ -1249,6 +1249,9 @@ Library.
                         <h4><?php echo $GLOBALS['TL_LANG']['MSC']['name']; ?></h4>
                         <input type="text" name="name" id="name" class="tl_text" value="<?php echo $this->adminName; ?>">
                         <h4><?php echo $GLOBALS['TL_LANG']['MSC']['emailAddress']; ?></h4>
+                        <?php if ($this->emailError): ?>
+                          <p class="tl_error"><?php echo $this->emailError; ?></p>
+                        <?php endif; ?>
                         <input type="text" name="email" id="email" class="tl_text" value="<?php echo $this->adminEmail; ?>">
                         <h4><label for="password"><?php echo $GLOBALS['TL_LANG']['MSC']['password'][0]; ?></label></h4>
                         <?php if ($this->passwordError): ?>
