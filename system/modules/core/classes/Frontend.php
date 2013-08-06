@@ -285,7 +285,7 @@ abstract class Frontend extends \Controller
 	public static function getRootIdFromUrl()
 	{
 		$objRootPage = static::getRootPageFromUrl();
-		return $objRootPage->numRows ? $objRootPage->id : 0;
+		return $objRootPage->id;
 	}
 
 
