@@ -252,6 +252,15 @@ class String
 	 */
 	public static function restoreBasicEntities($strBuffer)
 	{
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['restoreBasicEntities']) && is_array($GLOBALS['TL_HOOKS']['restoreBasicEntities']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['restoreBasicEntities'] as $callback)
+			{
+				$strBuffer = static::importStatic($callback[0])->$callback[1]($strBuffer);
+			}
+		}
+
 		return str_replace(array('[&]', '[&amp;]', '[lt]', '[gt]', '[nbsp]', '[-]'), array('&amp;', '&amp;', '&lt;', '&gt;', '&nbsp;', '&shy;'), $strBuffer);
 	}
 
