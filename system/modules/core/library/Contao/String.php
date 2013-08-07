@@ -252,7 +252,7 @@ class String
 	 */
 	public static function restoreBasicEntities($strBuffer)
 	{
-		return str_replace(array('[&]', '[&amp;]', '[lt]', '[gt]', '[nbsp]', '[-]'), array('&amp;', '&amp;', '&lt;', '&gt;', '&nbsp;', '&shy;'), $strBuffer);
+		return str_replace(array('[&]', '[&amp;]', '[lt]', '[gt]', '[nbsp]', '[-]', '[br]'), array('&amp;', '&amp;', '&lt;', '&gt;', '&nbsp;', '&shy;', '<br>'), $strBuffer);
 	}
 
 
