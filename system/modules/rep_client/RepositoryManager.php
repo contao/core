@@ -1143,6 +1143,9 @@ class RepositoryManager extends RepositoryBackendModule
 				} // switch
 				if (!$compatible) continue;
 
+				// PATCH: ignore older releases
+				if ($ver->version < $elist[0]->version) continue;
+
 				// get record of this version
 				$rec = null;
 				if ($ver->version == $elist[0]->version)
