@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.1.2 (2013-XX-XX)
+--------------------------
+
+### Fixed
+Added .svgz support to the default `.htaccess` file (see #5938).
+
+
 Version 3.1.1 (2013-06-25)
 --------------------------
 
