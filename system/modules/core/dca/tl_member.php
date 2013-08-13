@@ -408,6 +408,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		),
 		'autologin' => array
 		(
+			'eval'                    => array('doNotCopy'=>true),
 			'sql'                     => "varchar(32) NULL"
 		),
 		'createdOn' => array
@@ -417,6 +418,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		),
 		'activation' => array
 		(
+			'eval'                    => array('doNotCopy'=>true),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		)
 	)

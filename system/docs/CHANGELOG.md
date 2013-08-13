@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not copy the autologin hash when duplicating members (see #5945).
+
+### Fixed
 Added .svgz support to the default `.htaccess` file (see #5938).
 
 
