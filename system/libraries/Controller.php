@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -338,7 +338,7 @@ abstract class Controller extends System
 
 				$this->import('FrontendUser', 'User');
 				$groups = deserialize($objRow->groups);
-	
+
 				if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
 				{
 					return '';
@@ -1792,7 +1792,7 @@ abstract class Controller extends System
 					{
 						$strUrl = $this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->aAlias)) ? $objArticle->aAlias : $objArticle->aId));
 					}
-	
+
 					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
@@ -1834,7 +1834,7 @@ abstract class Controller extends System
 					{
 						$strUrl = $this->generateFrontendUrl($objFaq->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->fAlias != '') ? $objFaq->fAlias : $objFaq->aId));
 					}
-	
+
 					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
@@ -1888,7 +1888,7 @@ abstract class Controller extends System
 					{
 						$strUrl = $this->generateFrontendUrl($objNews->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->nAlias != '') ? $objNews->nAlias : $objNews->nId));
 					}
-	
+
 					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
@@ -3616,7 +3616,7 @@ abstract class Controller extends System
 		for ($i=0; $i<count($arrEnclosure); $i++)
 		{
 			if (is_file(TL_ROOT . '/' . $arrEnclosure[$i]))
-			{				
+			{
 				$objFile = new File($arrEnclosure[$i]);
 
 				if (!in_array($objFile->extension, $allowedDownload))
@@ -3624,10 +3624,20 @@ abstract class Controller extends System
 					continue;
 				}
 
+				$strHref = $this->Environment->request;
+
+				// Remove an existing file parameter (see #5683)
+				if (preg_match('/(&(amp;)?|\?)file=/', $strHref))
+				{
+					$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
+				}
+
+				$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
+
 				$arrEnclosures[$i]['link'] = basename($arrEnclosure[$i]);
 				$arrEnclosures[$i]['filesize'] = $this->getReadableSize($objFile->filesize);
 				$arrEnclosures[$i]['title'] = ucfirst(str_replace('_', ' ', $objFile->filename));
-				$arrEnclosures[$i]['href'] = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
+				$arrEnclosures[$i]['href'] = $strHref;
 				$arrEnclosures[$i]['enclosure'] = $arrEnclosure[$i];
 				$arrEnclosures[$i]['icon'] = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
 				$arrEnclosures[$i]['mime'] = $objFile->mime;

@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -59,7 +59,7 @@ class ContentDownloads extends ContentElement
 		if ($this->useHomeDir && FE_USER_LOGGED_IN)
 		{
 			$this->import('FrontendUser', 'User');
-			
+
 			if ($this->User->assignDir && is_dir(TL_ROOT . '/' . $this->User->homeDir))
 			{
 				$this->multiSRC = array($this->User->homeDir);
@@ -117,11 +117,21 @@ class ContentDownloads extends ContentElement
 						$arrMeta[0] = specialchars($objFile->basename);
 					}
 
+					$strHref = $this->Environment->request;
+
+					// Remove an existing file parameter (see #5683)
+					if (preg_match('/(&(amp;)?|\?)file=/', $strHref))
+					{
+						$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
+					}
+
+					$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($file);
+
 					$files[$file] = array
 					(
 						'link' => $arrMeta[0],
 						'title' => $arrMeta[0],
-						'href' => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($file),
+						'href' => $strHref,
 						'caption' => $arrMeta[2],
 						'filesize' => $this->getReadableSize($objFile->filesize, 1),
 						'icon' => TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
@@ -159,11 +169,21 @@ class ContentDownloads extends ContentElement
 						$arrMeta[0] = specialchars($objFile->basename);
 					}
 
+					$strHref = $this->Environment->request;
+
+					// Remove an existing file parameter (see #5683)
+					if (preg_match('/(&(amp;)?|\?)file=/', $strHref))
+					{
+						$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
+					}
+
+					$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($file . '/' . $subfile);
+
 					$files[$file . '/' . $subfile] = array
 					(
 						'link' => $arrMeta[0],
 						'title' => $arrMeta[0],
-						'href' => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($file . '/' . $subfile),
+						'href' => $strHref,
 						'caption' => $arrMeta[2],
 						'filesize' => $this->getReadableSize($objFile->filesize, 1),
 						'icon' => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,

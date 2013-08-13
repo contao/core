@@ -5,6 +5,9 @@ Version 2.11.12 (2013-XX-XX)
 ----------------------------
 
 ### Fixed
+Backported the changes from e44864d2 (see #5683).
+
+### Fixed
 Handle all possible errors when uploading files (see #5934).
 
 ### Improved
