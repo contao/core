@@ -466,7 +466,7 @@ class Updater extends \Controller
 
 		// Update the tl_files table (see #5598)
 		$this->Database->query("ALTER TABLE `tl_files` DROP INDEX `path`");
-		$this->Database->query("ALTER TABLE `tl_files` CHANGE `path` `path` text NULL");
+		$this->Database->query("ALTER TABLE `tl_files` CHANGE `path` `path` blob NULL");
 		$this->Database->query("ALTER TABLE `tl_files` ADD UNIQUE KEY `pid_name` (`pid`, `name`)");
 
 		// Remove the "mooType" field (triggers the version 3.1 update)
