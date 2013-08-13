@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -57,6 +57,7 @@ $GLOBALS['TL_LANG']['ERR']['filetype']          = 'Der Dateityp "%s" darf nicht 
 $GLOBALS['TL_LANG']['ERR']['filepartial']       = 'Die Datei %s wurde nur teilweise hochgeladen!';
 $GLOBALS['TL_LANG']['ERR']['filewidth']         = 'Die Datei %s übersteigt die maximale Bildbreite von %d Pixel!';
 $GLOBALS['TL_LANG']['ERR']['fileheight']        = 'Die Datei %s übersteigt die maximale Bildhöhe von %d Pixel!';
+$GLOBALS['TL_LANG']['ERR']['fileerror']         = 'Fehler %s beim Hochladen der Datei %s!';
 $GLOBALS['TL_LANG']['ERR']['invalidReferer']    = 'Zugriff verweigert! Die aktuelle Hostadresse (%s) stimmt nicht mit der verweisenden Hostadresse (%s) überein!';
 $GLOBALS['TL_LANG']['ERR']['invalidPass']       = 'Ungültiges Passwort!';
 $GLOBALS['TL_LANG']['ERR']['passwordLength']    = 'Ein Passwort muss mindestens %d Zeichen lang sein!';
