@@ -681,7 +681,7 @@ abstract class Model
 			'value'  => $varValue
 		));
 
-		return (int) \Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
+		return (int) \Database::getInstance()->prepare($strQuery)->executeUncached($varValue)->count;
 	}
 
 

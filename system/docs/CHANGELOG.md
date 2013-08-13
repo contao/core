@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not cache the result of `Model::count*()` (see #5973).
+
+### Fixed
 Added some missing office file extensions to the configuration (see #6021).
 
 ### Fixed
