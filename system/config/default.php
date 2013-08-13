@@ -202,10 +202,10 @@ $GLOBALS['TL_CONFIG']['encryptionCipher'] = 'rijndael-256';
  */
 $GLOBALS['TL_CONFIG']['uploadTypes']
 	= 'jpg,jpeg,gif,png,ico,'
-	. 'csv,doc,docx,xls,xlsx,ppt,pptx,odt,ods,odp,pdf,'
+	. 'odt,ods,odp,odg,ott,ots,otp,otg,pdf,csv,'
+	. 'doc,docx,dot,dotx,xls,xlsx,xlt,xltx,ppt,pptx,pot,potx,'
 	. 'mp3,mp4,m4a,m4v,webm,ogg,wma,wmv,ram,rm,mov,fla,flv,swf,'
-	. 'css,js,html,htm,txt,'
-	. 'zip,rar,7z,cto';
+	. 'css,js,html,htm,txt,zip,rar,7z,cto';
 $GLOBALS['TL_CONFIG']['uploadPath']     = 'files';
 $GLOBALS['TL_CONFIG']['maxFileSize']    = 2048000;
 $GLOBALS['TL_CONFIG']['imageWidth']     = 800;
@@ -313,7 +313,8 @@ $GLOBALS['TL_CONFIG']['editableFiles']        = 'htm,html,css,js,txt,log,xml';
 $GLOBALS['TL_CONFIG']['templateFiles']        = 'tpl,html5,xhtml';
 $GLOBALS['TL_CONFIG']['allowedDownload']
 	= 'jpg,jpeg,gif,png,'
-	. 'doc,docx,xls,xlsx,ppt,pptx,odt,ods,odp,pdf,'
+	. 'odt,ods,odp,odg,ott,ots,otp,otg,pdf,'
+	. 'doc,docx,dot,dotx,xls,xlsx,xlt,xltx,ppt,pptx,pot,potx,'
 	. 'mp3,mp4,m4a,m4v,webm,ogg,wma,wmv,ram,rm,mov,'
 	. 'zip,rar,7z';
 $GLOBALS['TL_CONFIG']['installPassword']      = '';

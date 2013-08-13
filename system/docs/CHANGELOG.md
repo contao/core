@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Added some missing office file extensions to the configuration (see #6021).
+
+### Fixed
 Fixed the "indexPage" hook (see #5967).
 
 ### Fixed
