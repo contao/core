@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Fix the alignment of the versions menu in IE (see #5962).
+
+### Fixed
 Do not cache the result of `Model::count*()` (see #5973).
 
 ### Fixed
