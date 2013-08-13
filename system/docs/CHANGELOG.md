@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Fixed the "indexPage" hook (see #5967).
+
+### Fixed
 Do not copy the autologin hash when duplicating members (see #5945).
 
 ### Fixed
