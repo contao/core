@@ -1389,7 +1389,6 @@ abstract class Controller extends System
 		$pdf->setLanguageArray($l);
 
 		// Initialize document and add a page
-		$pdf->AliasNbPages();
 		$pdf->AddPage();
 
 		// Set font

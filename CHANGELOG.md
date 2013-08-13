@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.12 (2013-XX-XX)
 ----------------------------
 
+### Updated
+Updated TCPDF to version 6.0.010 (see #5676).
+
 ### Fixed
 Backported the changes from e44864d2 (see #5683).
 
