@@ -904,6 +904,11 @@ abstract class Widget extends \Controller
 
 					foreach ($arrEmails as $strEmail)
 					{
+						if (strpos($strEmail, '{{') !== false)
+						{
+							continue;
+						}
+
 						$strEmail = \Idna::encodeEmail($strEmail);
 
 						if (!\Validator::isEmail($strEmail))
