@@ -393,7 +393,7 @@ class Newsletter extends \Backend
 		{
 			$objEmail->sendTo($arrRecipient['email']);
 		}
-		catch (Swift_RfcComplianceException $e)
+		catch (\Swift_RfcComplianceException $e)
 		{
 			$_SESSION['REJECTED_RECIPIENTS'][] = $arrRecipient['email'];
 		}
