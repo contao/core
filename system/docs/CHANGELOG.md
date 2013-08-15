@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly validate the options in `Widget::isValidOption()` (see #5951).
+
+### Fixed
 Decode IDNA domains in any system mail (see #5932).
 
 ### Fixed
