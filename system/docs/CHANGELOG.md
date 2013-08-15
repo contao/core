@@ -5,6 +5,10 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Pass the module to `getAttributesFromDca()` in the registration and personal
+data module classes (see #6002).
+
+### Fixed
 Validate the e-mail address when creating an admin user (see #6003).
 
 ### Fixed
