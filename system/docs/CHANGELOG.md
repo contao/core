@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Store integers bigger than `PHP_INT_MAX` as string (see #5939).
+
+### Fixed
 Fix the alignment of the versions menu in IE (see #5962).
 
 ### Fixed

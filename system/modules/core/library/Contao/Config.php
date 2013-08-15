@@ -405,7 +405,7 @@ class Config
 	 */
 	protected function escape($varValue)
 	{
-		if (is_numeric($varValue) && !preg_match('/e|^00+/', $varValue))
+		if (is_numeric($varValue) && !preg_match('/e|^00+/', $varValue) && $varValue < PHP_INT_MAX)
 		{
 			return $varValue;
 		}
