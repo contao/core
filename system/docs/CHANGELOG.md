@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Replace all insert tags when exporting a page as PDF (see #5990).
+
+### Fixed
 Correctly validate the options in `Widget::isValidOption()` (see #5951).
 
 ### Fixed
