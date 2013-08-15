@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Decode entities in the page and file pickers (see #5989).
+
+### Fixed
 Ensure that the default user and group are integer values (see #6017).
 
 ### New

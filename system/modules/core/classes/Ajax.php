@@ -292,7 +292,7 @@ class Ajax extends \Backend
 					}
 				}
 
-				$varValue = \Input::post('value');
+				$varValue = \Input::post('value', true);
 				$strKey = ($this->strAction == 'reloadPagetree') ? 'pageTree' : 'fileTree';
 
 				// Convert the selected values
