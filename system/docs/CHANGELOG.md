@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Validate the e-mail address when creating an admin user (see #6003).
+
+### Fixed
 Fix the newslist pagination count (see #5997).
 
 ### Fixed
