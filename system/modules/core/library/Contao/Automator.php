@@ -189,6 +189,20 @@ class Automator extends \System
 
 
 	/**
+	 * Purge the search cache
+	 */
+	public function purgeSearchCache()
+	{
+		// Purge the folder
+		$objFolder = new \Folder('system/cache/search');
+		$objFolder->purge();
+
+		// Add a log entry
+		$this->log('Purged the search cache', 'Automator purgePageCache()', TL_CRON);
+	}
+
+
+	/**
 	 * Purge the internal cache
 	 */
 	public function purgeInternalCache()

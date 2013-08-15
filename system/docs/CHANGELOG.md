@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Added an option to purge the search cache (see #6041).
+
+### Fixed
 Preserve the repository tables when importing a theme (see #6037).
 
 ### Fixed
