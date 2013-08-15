@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Make the GD image max width and height parameters mandatory (see #5940).
+
+### Fixed
 Replace all insert tags when exporting a page as PDF (see #5990).
 
 ### Fixed
