@@ -365,8 +365,8 @@ class tl_article extends Backend
 		$session = $this->Session->getData();
 
 		// Set the default page user and group
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = $GLOBALS['TL_CONFIG']['defaultUser'] ?: $this->User->id;
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = $GLOBALS['TL_CONFIG']['defaultGroup'] ?: $this->User->groups[0];
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = intval($GLOBALS['TL_CONFIG']['defaultUser'] ?: $this->User->id);
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = intval($GLOBALS['TL_CONFIG']['defaultGroup'] ?: $this->User->groups[0]);
 
 		// Restrict the page tree
 		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = $this->User->pagemounts;

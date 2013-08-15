@@ -281,11 +281,11 @@ class BackendUser extends \User
 			}
 			if (!$row['cuser'])
 			{
-				$row['cuser'] = $GLOBALS['TL_CONFIG']['defaultUser'];
+				$row['cuser'] = intval($GLOBALS['TL_CONFIG']['defaultUser']);
 			}
 			if (!$row['cgroup'])
 			{
-				$row['cgroup'] = $GLOBALS['TL_CONFIG']['defaultGroup'];
+				$row['cgroup'] = intval($GLOBALS['TL_CONFIG']['defaultGroup']);
 			}
 		}
 

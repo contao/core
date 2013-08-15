@@ -506,7 +506,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'cuser' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['cuser'],
-			'default'                 => $GLOBALS['TL_CONFIG']['defaultUser'],
+			'default'                 => intval($GLOBALS['TL_CONFIG']['defaultUser']),
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.username',
@@ -517,7 +517,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'cgroup' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['cgroup'],
-			'default'                 => $GLOBALS['TL_CONFIG']['defaultGroup'],
+			'default'                 => intval($GLOBALS['TL_CONFIG']['defaultGroup']),
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user_group.name',
@@ -661,8 +661,8 @@ class tl_page extends Backend
 		$session = $this->Session->getData();
 
 		// Set the default page user and group
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = $GLOBALS['TL_CONFIG']['defaultUser'] ?: $this->User->id;
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = $GLOBALS['TL_CONFIG']['defaultGroup'] ?: $this->User->groups[0];
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = intval($GLOBALS['TL_CONFIG']['defaultUser'] ?: $this->User->id);
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = intval($GLOBALS['TL_CONFIG']['defaultGroup'] ?: $this->User->groups[0]);
 
 		// Restrict the page tree
 		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = $this->User->pagemounts;

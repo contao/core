@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.2 (2013-XX-XX)
 --------------------------
 
+### Fixed
+Ensure that the default user and group are integer values (see #6017).
+
 ### New
 Added the Czech typolinks translations (thanks to ShiraNai7) (see #6051).
 
