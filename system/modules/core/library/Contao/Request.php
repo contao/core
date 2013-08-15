@@ -86,7 +86,7 @@ class Request
 	protected $arrResponseHeaders = array();
 
 	/**
-	 * Requerst username (defaults to '')
+	 * Request username (defaults to '')
 	 * @var string
 	 */
 	protected $strUsername;
