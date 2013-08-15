@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Fix the newslist pagination count (see #5997).
+
+### Fixed
 Make the GD image max width and height parameters mandatory (see #5940).
 
 ### Fixed

@@ -135,11 +135,12 @@ class ModuleNewsList extends \ModuleNews
 			// Set limit and offset
 			$limit = $this->perPage;
 			$offset += (max($page, 1) - 1) * $this->perPage;
+			$skip = intval($this->skipFirst);
 
 			// Overall limit
-			if ($offset + $limit > $total)
+			if ($offset + $limit > $total + $skip)
 			{
-				$limit = $total - $offset;
+				$limit = $total + $skip - $offset;
 			}
 
 			// Add the pagination menu
