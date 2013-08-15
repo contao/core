@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.2 (2013-XX-XX)
 --------------------------
 
+### New
+Added the Czech typolinks translations (thanks to ShiraNai7) (see #6051).
+
 ### Fixed
 Added an option to purge the search cache (see #6041).
 
