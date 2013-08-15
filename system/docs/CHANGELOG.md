@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Decode IDNA domains in any system mail (see #5932).
+
+### Fixed
 Store integers bigger than `PHP_INT_MAX` as string (see #5939).
 
 ### Fixed

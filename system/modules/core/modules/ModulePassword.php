@@ -287,11 +287,11 @@ class ModulePassword extends \Module
 			switch ($strKey)
 			{
 				case 'domain':
-					$strConfirmation = str_replace($strChunk, \Environment::get('host'), $strConfirmation);
+					$strConfirmation = str_replace($strChunk, \Idna::decode(\Environment::get('host')), $strConfirmation);
 					break;
 
 				case 'link':
-					$strConfirmation = str_replace($strChunk, \Environment::get('base') . \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $confirmationId, $strConfirmation);
+					$strConfirmation = str_replace($strChunk, \Idna::decode(\Environment::get('base')) . \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $confirmationId, $strConfirmation);
 					break;
 
 				default:
@@ -313,7 +313,7 @@ class ModulePassword extends \Module
 
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
-		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['passwordSubject'], \Environment::get('host'));
+		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['passwordSubject'], \Idna::decode(\Environment::get('host')));
 		$objEmail->text = $strConfirmation;
 		$objEmail->sendTo($objMember->email);
 

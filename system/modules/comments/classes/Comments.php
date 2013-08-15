@@ -377,7 +377,7 @@ class Comments extends \Frontend
 			$objEmail = new \Email();
 			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
-			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_subject'], \Environment::get('host'));
+			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_subject'], \Idna::decode(\Environment::get('host')));
 
 			// Convert the comment to plain text
 			$strComment = strip_tags($strComment);
@@ -388,8 +388,8 @@ class Comments extends \Frontend
 			$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_message'],
 									  $arrSet['name'] . ' (' . $arrSet['email'] . ')',
 									  $strComment,
-									  \Environment::get('base') . \Environment::get('request'),
-									  \Environment::get('base') . 'contao/main.php?do=comments&act=edit&id=' . $objComment->id);
+									  \Idna::decode(\Environment::get('base')) . \Environment::get('request'),
+									  \Idna::decode(\Environment::get('base')) . 'contao/main.php?do=comments&act=edit&id=' . $objComment->id);
 
 			// Do not send notifications twice
 			if (is_array($varNotifies))
@@ -546,14 +546,14 @@ class Comments extends \Frontend
 		$objNotify = new \CommentsNotifyModel();
 		$objNotify->setRow($arrSet)->save();
 
-		$strUrl = \Environment::get('base') . \Environment::get('request');
+		$strUrl = \Idna::decode(\Environment::get('base')) . \Environment::get('request');
 		$strConnector = (strpos($strUrl, '?') !== false) ? '&' : '?';
 
 		// Send the activation mail
 		$objEmail = new \Email();
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
-		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_optInSubject'], \Environment::get('host'));
+		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_optInSubject'], \Idna::decode(\Environment::get('host')));
 		$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_optInMessage'], $objComment->name, $strUrl, $strUrl . $strConnector . 'token=' . $objNotify->tokenConfirm, $strUrl . $strConnector . 'token=' . $objNotify->tokenRemove);
 		$objEmail->sendTo($objComment->email);
 	}
@@ -616,12 +616,12 @@ class Comments extends \Frontend
 			}
 
 			// Prepare the URL
-			$strUrl = \Environment::get('base') . $objNotify->url;
+			$strUrl = \Idna::decode(\Environment::get('base')) . $objNotify->url;
 
 			$objEmail = new \Email();
 			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
-			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_notifySubject'], \Environment::get('host'));
+			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_notifySubject'], \Idna::decode(\Environment::get('host')));
 			$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_notifyMessage'], $objNotify->name, $strUrl, $strUrl . '?token=' . $objNotify->tokenRemove);
 			$objEmail->sendTo($objNotify->email);
 		}
