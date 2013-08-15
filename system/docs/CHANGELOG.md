@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Preserve the repository tables when importing a theme (see #6037).
+
+### Fixed
 Pass the module to `getAttributesFromDca()` in the registration and personal
 data module classes (see #6002).
 

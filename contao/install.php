@@ -635,7 +635,11 @@ class InstallTool extends Backend
 				{
 					foreach ($tables as $table)
 					{
-						$this->Database->execute("TRUNCATE TABLE " . $table);
+						// Preserve the repository tables (see #6037)
+						if ($table != 'tl_repository_installs' && $table != 'tl_repository_instfiles')
+						{
+							$this->Database->execute("TRUNCATE TABLE " . $table);
+						}
 					}
 				}
 
