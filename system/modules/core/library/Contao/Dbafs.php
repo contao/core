@@ -51,6 +51,9 @@ class Dbafs
 			$strResource = substr($strResource, 0, -1);
 		}
 
+		// Normalize the path (see #6034)
+		$strResource = str_replace('//', '/', $strResource);
+
 		// The resource does not exist or lies outside the upload directory
 		if ($strResource == '' || strncmp($strResource,  $strUploadPath, strlen($strUploadPath)) !== 0 || !file_exists(TL_ROOT . '/' . $strResource))
 		{
