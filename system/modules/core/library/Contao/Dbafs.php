@@ -45,6 +45,12 @@ class Dbafs
 	{
 		$strUploadPath = $GLOBALS['TL_CONFIG']['uploadPath'] . '/';
 
+		// Remove trailing slashes (see #5707)
+		if (substr($strResource, -1) == '/')
+		{
+			$strResource = substr($strResource, 0, -1);
+		}
+
 		// The resource does not exist or lies outside the upload directory
 		if ($strResource == '' || strncmp($strResource,  $strUploadPath, strlen($strUploadPath)) !== 0 || !file_exists(TL_ROOT . '/' . $strResource))
 		{
