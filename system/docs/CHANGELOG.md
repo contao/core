@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly handle password which are longer than 64 characters (see #6015).
+
+### Fixed
 Added missing Vietnamese characters to the UFT8 mapper (see #6010).
 
 ### Fixed

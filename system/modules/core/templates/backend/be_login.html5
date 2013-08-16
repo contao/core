@@ -56,11 +56,11 @@
           <table class="tl_login_table">
             <tr>
               <td<?php echo $this->uClass; ?>><label for="username"><?php echo $this->username; ?></label></td>
-              <td style="text-align:right"><input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->curUsername; ?>" maxlength="64" required></td>
+              <td style="text-align:right"><input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->curUsername; ?>" required></td>
             </tr>
             <tr>
               <td<?php echo $this->pClass; ?>><label for="password"><?php echo $this->password; ?></label></td>
-              <td style="text-align:right"><input type="password" name="password" id="password" class="tl_text" value="" maxlength="64" required></td>
+              <td style="text-align:right"><input type="password" name="password" id="password" class="tl_text" value="" required></td>
             </tr>
             <tr>
               <td><label for="language"><?php echo $this->userLanguage; ?></label></td>
