@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Show tooltips for selected single images in the file picker (see #6031).
+
+### Fixed
 Correctly synchronize if a sub folder is selected (see #5979).
 
 ### Fixed
