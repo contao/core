@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly synchronize if a sub folder is selected (see #5979).
+
+### Fixed
 Correctly handle password which are longer than 64 characters (see #6015).
 
 ### Fixed

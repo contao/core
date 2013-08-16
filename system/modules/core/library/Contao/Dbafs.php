@@ -123,6 +123,8 @@ class Dbafs
 			}
 		}
 
+		$objReturn = null;
+
 		// Create the new resources
 		foreach ($arrPaths as $strPath)
 		{
@@ -171,6 +173,12 @@ class Dbafs
 
 				$arrPids[$objFolder->path] = $objModel->id;
 			}
+
+			// Store the model to be returned (see #5979)
+			if ($objModel->path == $strResource)
+			{
+				$objReturn = $objModel;
+			}
 		}
 
 		// Update the folder hashes
@@ -179,8 +187,7 @@ class Dbafs
 			static::updateFolderHashes($arrUpdate);
 		}
 
-		// The last model is the resource itself
-		return $objModel;
+		return $objReturn;
 	}
 
 
