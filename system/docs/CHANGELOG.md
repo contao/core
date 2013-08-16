@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Added missing Vietnamese characters to the UFT8 mapper (see #6010).
+
+### Fixed
 Decode entities in the page and file pickers (see #5989).
 
 ### Fixed
