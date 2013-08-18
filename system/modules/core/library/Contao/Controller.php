@@ -2306,7 +2306,11 @@ abstract class Controller extends \System
 			$varArticle = '/articles/' . $varArticle;
 		}
 
-		$strUrl = $strDomain . $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language);
+		// remove domain to force generateFrontendUrl to not add the domain twice
+		$arrRow = $objPage->row();
+		$arrRow['domain'] = '';
+
+		$strUrl = $strDomain . $this->generateFrontendUrl($arrRow, $varArticle, $objPage->language);
 
 		if (!$blnReturn)
 		{
