@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Fix the offset handling in the CSS grid (see #5943).
+
+### Fixed
 Do not use the `date`, `time` and `datetime` input types (see #5918).
 
 ### Fixed
