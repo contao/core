@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not use the `date`, `time` and `datetime` input types (see #5918).
+
+### Fixed
 Show tooltips for selected single images in the file picker (see #6031).
 
 ### Fixed
