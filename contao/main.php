@@ -260,6 +260,16 @@ class Main extends Backend
 				}
 			}
 		}
+		
+		// HOOK: change the front end file preview
+		if (isset($GLOBALS['TL_HOOKS']['frontendPreview']) && is_array($GLOBALS['TL_HOOKS']['frontendPreview']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['frontendPreview'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->Template->frontendFile = $this->$callback[0]->$callback[1]($this->Template->frontendFile, Input::get('do'), CURRENT_ID);
+			}
+		}
 
 		$this->Template->output();
 	}
