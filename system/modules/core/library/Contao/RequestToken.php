@@ -134,7 +134,7 @@ class RequestToken
 	 */
 	protected function __construct()
 	{
-		static::setup();
+		static::initialize();
 	}
 
 
