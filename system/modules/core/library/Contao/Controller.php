@@ -2293,20 +2293,19 @@ abstract class Controller extends \System
 			return '';
 		}
 
-		$strDomain = \Environment::get('base');
 		$objPage = \PageModel::findWithDetails($intPage);
-
-		if ($objPage->domain != '')
-		{
-			$strDomain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objPage->domain . TL_PATH . '/';
-		}
 
 		if ($varArticle !== null)
 		{
 			$varArticle = '/articles/' . $varArticle;
 		}
 
-		$strUrl = $strDomain . $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language);
+		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language);
+
+		if (strncmp($strUrl, 'http://', 7) !== 0 && strncmp($strUrl, 'https://', 8) !== 0)
+		{
+			$strUrl = \Environment::get('base') . $strUrl;
+		}
 
 		if (!$blnReturn)
 		{
