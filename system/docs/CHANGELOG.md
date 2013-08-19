@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Use the `currentLogin` field to sort users by their last login (see #5949).
+
+### Fixed
 Fix the offset handling in the CSS grid (see #5943).
 
 ### Fixed
