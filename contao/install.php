@@ -649,7 +649,11 @@ class InstallTool extends Backend
 
 				foreach ($sql as $query)
 				{
-					$this->Database->execute($query);
+					// Skip the repository tables (see #6037)
+					if (strpos($query, '`tl_repository_installs`') === false && strpos($query, '`tl_repository_instfiles`') === false)
+					{
+						$this->Database->execute($query);
+					}
 				}
 
 				$this->reload();
