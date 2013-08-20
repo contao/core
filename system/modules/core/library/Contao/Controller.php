@@ -143,6 +143,10 @@ abstract class Controller extends \System
 							{
 								$arrTemplates[$strTemplate] = $strTemplate . ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
 							}
+							else
+							{
+								$arrTemplates[$strTemplate] .= ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
+							}
 						}
 					}
 				}

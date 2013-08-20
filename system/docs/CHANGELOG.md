@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Show all themes a template is defined in (see #6071).
+
+### Fixed
 Do not add the domain name twice in `redirectToFrontendPage()` (see #6076).
 
 ### Fixed
