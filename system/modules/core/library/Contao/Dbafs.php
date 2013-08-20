@@ -574,11 +574,12 @@ class Dbafs
 
 		if ($objFiles !== null)
 		{
+			$arrMapped = array();
 			$arrPidUpdate = array();
 
 			while ($objFiles->next())
 			{
-				$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFiles->hash);
+				$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFiles->hash, array('uncached'=>true));
 
 				if ($objFound !== null)
 				{
@@ -594,6 +595,16 @@ class Dbafs
 							}
 						}
 					}
+
+					// If another file has been mapped already, delete the entry (see #6008)
+					if (in_array($objFound->path, $arrMapped))
+					{
+						$objLog->append("[Deleted] {$objFiles->path}");
+						$objFiles->delete();
+						continue;
+					}
+
+					$arrMapped[] = $objFound->path;
 
 					// Store the PID change
 					if ($objFiles->type == 'folder')
