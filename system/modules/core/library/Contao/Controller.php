@@ -896,30 +896,42 @@ abstract class Controller extends \System
 								if ($objNext !== null)
 								{
 									$strForceLang = null;
+									$objNext->loadDetails();
 
 									// Check the target page language (see #4706)
 									if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 									{
-										$objNext->loadDetails(); // see #3983
 										$strForceLang = $objNext->language;
 									}
 
 									$strUrl = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
+
+									// Add the domain if it differs from the current one (see #3765)
+									if ($objNext->domain != '' && $objNext->domain != \Environment::get('host'))
+									{
+										$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $strUrl;
+									}
 									break;
 								}
 								// DO NOT ADD A break; STATEMENT
 
 							default:
 								$strForceLang = null;
+								$objNextPage->loadDetails();
 
 								// Check the target page language (see #4706, #5465)
 								if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 								{
-									$objNextPage->loadDetails(); // see #3983
 									$strForceLang = $objNextPage->language;
 								}
 
 								$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $strForceLang);
+
+								// Add the domain if it differs from the current one (see #3765)
+								if ($objNextPage->domain != '' && $objNextPage->domain != \Environment::get('host'))
+								{
+									$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNextPage->domain . TL_PATH . '/' . $strUrl;
+								}
 								break;
 						}
 
@@ -2111,12 +2123,6 @@ abstract class Controller extends \System
 			$strUrl = 'index.php?id=' . $arrRow['id'] . $strRequest;
 		}
 
-		// Add the domain if it differs from the host name (see #3765)
-		if ($arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
-		{
-			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
-		}
-
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['generateFrontendUrl']) && is_array($GLOBALS['TL_HOOKS']['generateFrontendUrl']))
 		{
@@ -2306,9 +2312,9 @@ abstract class Controller extends \System
 
 		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language);
 
-		if (strncmp($strUrl, 'http://', 7) !== 0 && strncmp($strUrl, 'https://', 8) !== 0)
+		if ($objPage->domain != '' && $objPage->domain != \Environment::get('host'))
 		{
-			$strUrl = \Environment::get('base') . $strUrl;
+			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objPage->domain . TL_PATH . '/' . $strUrl;
 		}
 
 		if (!$blnReturn)

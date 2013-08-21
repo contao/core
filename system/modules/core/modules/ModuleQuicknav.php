@@ -157,11 +157,19 @@ class ModuleQuicknav extends \Module
 					$objSubpages->title = strip_insert_tags($objSubpages->title);
 					$objSubpages->pageTitle = strip_insert_tags($objSubpages->pageTitle);
 
+					$href = $this->generateFrontendUrl($objSubpages->row(), null, $language);
+
+					// Add the domain if it differs from the current one (see #3765)
+					if ($objSubpages->domain != '' && $objSubpages->domain != \Environment::get('host'))
+					{
+						$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objSubpages->domain . TL_PATH . '/' . $href;
+					}
+
 					$arrPages[] = array
 					(
 						'level' => ($level - 2),
 						'title' => specialchars($objSubpages->pageTitle ?: $objSubpages->title),
-						'href' => $this->generateFrontendUrl($objSubpages->row(), null, $language),
+						'href' => $href,
 						'link' => $objSubpages->title
 					);
 
