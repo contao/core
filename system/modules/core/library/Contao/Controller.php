@@ -2461,16 +2461,16 @@ abstract class Controller extends \System
 		$objTemplate->height = $imgSize[1];
 
 		// Adjust the image size
+		$arrMargin = deserialize($arrItem['imagemargin']);
+
+		// Subtract margins
+		if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
+		{
+			$intMaxWidth = $intMaxWidth - $arrMargin['left'] - $arrMargin['right'];
+		}
+
 		if ($intMaxWidth > 0 && ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth)))
 		{
-			$arrMargin = deserialize($arrItem['imagemargin']);
-
-			// Subtract margins
-			if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
-			{
-				$intMaxWidth = $intMaxWidth - $arrMargin['left'] - $arrMargin['right'];
-			}
-
 			// See #2268 (thanks to Thyon)
 			$ratio = ($size[0] && $size[1]) ? $size[1] / $size[0] : $imgSize[1] / $imgSize[0];
 
