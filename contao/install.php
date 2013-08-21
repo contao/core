@@ -923,8 +923,8 @@ class InstallTool extends Backend
 
 		$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_files");
 
-		// Step 2: scan the upload folder
-		if ($objRow->count < 1)
+		// Step 2: scan the upload folder if it is not empty (see #6061)
+		if ($objRow->count < 1 && count(scan(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'])) > 0)
 		{
 			if (Input::post('FORM_SUBMIT') == 'tl_30update')
 			{
