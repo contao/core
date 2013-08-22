@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -119,16 +119,20 @@ class FormFileUpload extends Widget implements uploadable
 		// File was not uploaded
 		if (!is_uploaded_file($file['tmp_name']))
 		{
-			if (in_array($file['error'], array(1, 2)))
+			if ($file['error'] == 1 || $file['error'] == 2)
 			{
 				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb));
 				$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb, 'FormFileUpload validate()', TL_ERROR);
 			}
-
-			if ($file['error'] == 3)
+			elseif ($file['error'] == 3)
 			{
 				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filepartial'], $file['name']));
 				$this->log('File "'.$file['name'].'" was only partially uploaded', 'FormFileUpload validate()', TL_ERROR);
+			}
+			elseif ($file['error'] > 0)
+			{
+				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileerror'], $file['error'], $file['name']));
+				$this->log('File "'.$file['name'].'" could not be uploaded (error '.$file['error'].')' , 'FormFileUpload validate()', TL_ERROR);
 			}
 
 			unset($_FILES[$this->strName]);

@@ -763,7 +763,8 @@ class tl_page extends Backend
 					}
 
 					// Check the type of the first page (not the following parent pages)
-					if ($i == 0 && $this->Input->get('act') != 'create' && !$this->User->hasAccess($objPage->type, 'alpty'))
+					// In "edit multiple" mode, $ids contains only the parent ID, therefore check $id != $_GET['pid'] (see #5620)
+					if ($i == 0 && $id != $this->Input->get('pid') && $this->Input->get('act') != 'create' && !$this->User->hasAccess($objPage->type, 'alpty'))
 					{
 						$this->log('Not enough permissions to  '. $this->Input->get('act') .' '. $objPage->type .' pages', 'tl_page checkPermission()', TL_ERROR);
 
@@ -885,7 +886,7 @@ class tl_page extends Backend
 		if ($this->Input->get('act') != 'create')
 		{
 			return;
-		}	
+		}
 
 		if ($this->Input->get('pid') == 0)
 		{
@@ -1524,7 +1525,7 @@ class tl_page extends Backend
 		if (!$row['published'])
 		{
 			$icon = 'invisible.gif';
-		}		
+		}
 
 		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
 								  ->limit(1)
@@ -1559,7 +1560,7 @@ class tl_page extends Backend
 		}
 
 		$this->createInitialVersion('tl_page', $intId);
-	
+
 		// Trigger the save_callback
 		if (is_array($GLOBALS['TL_DCA']['tl_page']['fields']['published']['save_callback']))
 		{

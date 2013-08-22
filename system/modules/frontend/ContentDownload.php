@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -96,9 +96,19 @@ class ContentDownload extends ContentElement
 			$this->linkTitle = $this->objFile->basename;
 		}
 
+		$strHref = $this->Environment->request;
+
+		// Remove an existing file parameter (see #5683)
+		if (preg_match('/(&(amp;)?|\?)file=/', $strHref))
+		{
+			$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
+		}
+
+		$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($this->singleSRC);
+
 		$this->Template->link = $this->linkTitle;
 		$this->Template->title = specialchars($this->linkTitle);
-		$this->Template->href = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($this->singleSRC);
+		$this->Template->href = $strHref;
 		$this->Template->filesize = $this->getReadableSize($this->objFile->filesize, 1);
 		$this->Template->icon = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $this->objFile->icon;
 		$this->Template->mime = $this->objFile->mime;

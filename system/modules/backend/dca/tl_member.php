@@ -413,8 +413,9 @@ class tl_member extends Backend
 	 */
 	public function setNewPassword($strPassword, $user)
 	{
-		// Return if there is no user (e.g. upon registration)
-		if (!$user)
+		// Do not trigger the setNewPassword hook in the front end, because
+		// there is a separate trigger in the ModulePersonalData class
+		if (TL_MODE == 'FE')
 		{
 			return $strPassword;
 		}

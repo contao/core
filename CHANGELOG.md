@@ -1,6 +1,34 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.12 (2013-08-22)
+----------------------------
+
+### Fixed
+Allow to paste into the root page in "edit multiple" mode (see #5620).
+
+### Updated
+Updated TCPDF to version 6.0.010 (see #5676).
+
+### Fixed
+Backported the changes from e44864d2 (see #5683).
+
+### Fixed
+Handle all possible errors when uploading files (see #5934).
+
+### Improved
+Improved the memory footprint of the search index rebuild (see #5681).
+
+### Fixed
+Do not trigger the "setNewPassword" hook twice (see #5247).
+
+### Updated
+Updated SimplePie to version 1.3.1 (see #5604).
+
+### Fixed
+Delete the `pathconfig.php` file in the install tool (see #5536).
+
+
 Version 2.11.11 (2013-04-03)
 ----------------------------
 
@@ -102,7 +130,7 @@ The Date class should return `00:00` for `Date(0)->time` (see #4249).
 Handle dependencies when updating extensions (see #3804).
 
 ### Fixed
-Fixed the unprefixed CSS gradient output (see #4569). 
+Fixed the unprefixed CSS gradient output (see #4569).
 
 ### Fixed
 Fixed a small formatting issue in the Music Academy theme (see #5160).
@@ -483,7 +511,7 @@ correctly (see #4006).
 Updated MooTools to version 1.4.5 which fixes a critical bug.
 
 ### Fixed
-Relative URLs are now validated correctly (`'rgxp'=>'url'`) (see #3792). 
+Relative URLs are now validated correctly (`'rgxp'=>'url'`) (see #3792).
 
 ### Fixed
 Adjust the submit button height in Opera (see #3940).
@@ -782,7 +810,7 @@ Version 2.11.RC1 (2011-12-30)
 ### New
 The back end file uploader can now be replaced with a custom one (see #3236).
 Also, the uploader now tries to use the HTML5 "multiple" attribute in the file
-input field if the browser supports it. 
+input field if the browser supports it.
 
 ### Improved
 Added edit buttons to the module wizard to directly jump to a front end module
@@ -812,7 +840,7 @@ Updated TinyMCE to version 3.4.7 (see #3601).
 
 ### New
 Added advanced image crop modes to define more precisely which part of an image
-shall be preserved when cropping it (see #2422). 
+shall be preserved when cropping it (see #2422).
 
 ### New
 Support entering the image title in addition to the alternate text (see #3494).
