@@ -605,7 +605,7 @@ class tl_article extends Backend
 	public function getActivePageSections(DataContainer $dc)
 	{
 		$arrCustom = array();
-		$arrSections = array('header', 'left', 'right', 'main', 'footer');
+		$arrDefaultSections = array('header', 'left', 'right', 'main', 'footer');
 
 		// Show only active sections
 		if ($dc->activeRecord->pid)
@@ -623,35 +623,23 @@ class tl_article extends Backend
 			}
 
 			$arrSections = array();
+			$arrCustom = array();
 
-			// Header
-			if ($objLayout->rows == '2rwh' || $objLayout->rows == '3rw')
+			$arrModules = deserialize($objLayout->modules);
+			foreach ($arrModules as $module)
 			{
-				$arrSections[] = 'header';
+				if($module['mod'] == 0)
+				{
+					if(in_array($module['col'], $arrDefaultSections))
+					{
+						$arrSections[] = $module['col'];
+					}
+					else
+					{
+						$arrCustom[] = $module['col'];
+					}
+				}
 			}
-
-			// Left column
-			if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
-			{
-				$arrSections[] = 'left';
-			}
-
-			// Right column
-			if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
-			{
-				$arrSections[] = 'right';
-			}
-
-			// Main column
-			$arrSections[] = 'main';
-
-			// Footer
-			if ($objLayout->rows == '2rwf' || $objLayout->rows == '3rw')
-			{
-				$arrSections[] = 'footer';
-			}
-
-			$arrCustom = deserialize($objLayout->sections);
 		}
 
 		// Always add the custom layout sections in "override all" mode
