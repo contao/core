@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.12 (2013-XX-XX)
 ----------------------------
 
+### Fixed
+Allow to paste into the root page in "edit multiple" mode (see #5620).
+
 ### Updated
 Updated TCPDF to version 6.0.010 (see #5676).
 
