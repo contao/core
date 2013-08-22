@@ -845,7 +845,8 @@ class tl_page extends Backend
 					}
 
 					// Check the type of the first page (not the following parent pages)
-					if ($i == 0 && Input::get('act') != 'create' && !$this->User->hasAccess($objPage->type, 'alpty'))
+					// In "edit multiple" mode, $ids contains only the parent ID, therefore check $id != $_GET['pid'] (see #5620)
+					if ($i == 0 && $id != Input::get('pid') && Input::get('act') != 'create' && !$this->User->hasAccess($objPage->type, 'alpty'))
 					{
 						$this->log('Not enough permissions to  '. Input::get('act') .' '. $objPage->type .' pages', 'tl_page checkPermission()', TL_ERROR);
 
