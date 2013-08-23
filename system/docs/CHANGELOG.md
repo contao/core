@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Decode punycode domains in the listing module (see #5946).
+
+### Fixed
 Show all themes a template is defined in (see #6071).
 
 ### Fixed
