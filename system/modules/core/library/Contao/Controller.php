@@ -2470,21 +2470,24 @@ abstract class Controller extends \System
 		$objTemplate->height = $imgSize[1];
 
 		// Adjust the image size
-		if ($intMaxWidth > 0 && ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth)))
+		if ($intMaxWidth > 0)
 		{
 			$arrMargin = deserialize($arrItem['imagemargin']);
 
-			// Subtract margins
+			// Subtract the margins before deciding whether to resize (see #6018)
 			if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
 			{
 				$intMaxWidth = $intMaxWidth - $arrMargin['left'] - $arrMargin['right'];
 			}
 
-			// See #2268 (thanks to Thyon)
-			$ratio = ($size[0] && $size[1]) ? $size[1] / $size[0] : $imgSize[1] / $imgSize[0];
+			if ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth))
+			{
+				// See #2268 (thanks to Thyon)
+				$ratio = ($size[0] && $size[1]) ? $size[1] / $size[0] : $imgSize[1] / $imgSize[0];
 
-			$size[0] = $intMaxWidth;
-			$size[1] = floor($intMaxWidth * $ratio);
+				$size[0] = $intMaxWidth;
+				$size[1] = floor($intMaxWidth * $ratio);
+			}
 		}
 
 		$src = \Image::get($arrItem['singleSRC'], $size[0], $size[1], $size[2]);
