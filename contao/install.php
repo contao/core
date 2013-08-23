@@ -453,6 +453,12 @@ class InstallTool extends Backend
 			$arrDrivers[] = 'MySQL';
 		}
 
+		// If there is another driver defined, add it here as well
+		if ($GLOBALS['TL_CONFIG']['dbDriver'] != '' && !in_array($GLOBALS['TL_CONFIG']['dbDriver'], $arrDrivers))
+		{
+			$arrDrivers[] = $GLOBALS['TL_CONFIG']['dbDriver'];
+		}
+
 		foreach ($arrDrivers as $strDriver)
 		{
 			$strDrivers .= sprintf('<option value="%s"%s>%s</option>',
