@@ -442,15 +442,15 @@ class InstallTool extends Backend
 	protected function setUpDatabaseConnection()
 	{
 		$strDrivers = '';
-		$arrDrivers = array();
+		$arrDrivers = array('');
 
-		if (function_exists('mysql_connect'))
-		{
-			$arrDrivers[] = 'MySQL';
-		}
 		if (class_exists('mysqli', false))
 		{
 			$arrDrivers[] = 'MySQLi';
+		}
+		if (function_exists('mysql_connect'))
+		{
+			$arrDrivers[] = 'MySQL';
 		}
 
 		foreach ($arrDrivers as $strDriver)
@@ -458,7 +458,7 @@ class InstallTool extends Backend
 			$strDrivers .= sprintf('<option value="%s"%s>%s</option>',
 									$strDriver,
 									(($strDriver == $GLOBALS['TL_CONFIG']['dbDriver']) ? ' selected="selected"' : ''),
-									$strDriver);
+									($strDriver ?: '-'));
 		}
 
 		$this->Template->drivers = $strDrivers;
@@ -486,6 +486,13 @@ class InstallTool extends Backend
 			}
 
 			$this->reload();
+		}
+
+		// No driver selected (see #6088)
+		if ($GLOBALS['TL_CONFIG']['dbDriver'] == '')
+		{
+			$this->Template->dbConnection = false;
+			$this->outputAndExit();
 		}
 
 		// Try to connect

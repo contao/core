@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not set a database driver by default (see #6088).
+
+### Fixed
 Decode punycode domains in the listing module (see #5946).
 
 ### Fixed
