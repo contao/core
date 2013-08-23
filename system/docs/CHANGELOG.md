@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Fixed the content slider in IE < 9 (see #5878).
+
+### Fixed
 Do not set a database driver by default (see #6088).
 
 ### Fixed
