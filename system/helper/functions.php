@@ -37,9 +37,9 @@ function __error($intType, $strMessage, $strFile, $intLine)
 		E_USER_WARNING      => 'Warning',
 		E_USER_NOTICE       => 'Notice',
 		E_STRICT            => 'Runtime notice',
-		4096                => 'Recoverable error',
-		8192                => 'Deprecated notice',
-		16384               => 'Deprecated notice'
+		E_RECOVERABLE_ERROR => 'Recoverable error',
+		E_DEPRECATED        => 'Deprecated notice',
+		E_USER_DEPRECATED   => 'Deprecated notice'
 	);
 
 	// Ignore functions with an error control operator (@function_name)
