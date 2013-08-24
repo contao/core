@@ -134,7 +134,7 @@ function __error($intType, $strMessage, $strFile, $intLine)
 		E_STRICT            => 'Runtime notice',
 		4096                => 'Recoverable error',
 		8192                => 'Deprecated notice',
-		E_USER_DEPRECATED   => 'Deprecated notice'
+		16384               => 'Deprecated notice'
 	);
 
 	// Ignore functions with an error control operator (@function_name)
