@@ -618,6 +618,20 @@ class PageModel extends \Model
 			$this->cache = 0;
 		}
 
+		// Use the global date format if none is set (see #6104)
+		if ($this->dateFormat == '')
+		{
+			$this->dateFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
+		}
+		if ($this->timeFormat == '')
+		{
+			$this->timeFormat = $GLOBALS['TL_CONFIG']['timeFormat'];
+		}
+		if ($this->datimFormat == '')
+		{
+			$this->datimFormat = $GLOBALS['TL_CONFIG']['datimFormat'];
+		}
+
 		$this->blnDetailsLoaded = true;
 		return $this;
 	}

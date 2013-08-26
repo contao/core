@@ -5,6 +5,9 @@ Version 3.1.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Add the global date format in `PageModel::loadDetails()` (see #6104).
+
+### Fixed
 Do not override the referer upon Ajax requests (see #5956).
 
 ### Fixed

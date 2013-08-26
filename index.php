@@ -159,20 +159,6 @@ class Index extends Frontend
 			$objPage->loadDetails();
 		}
 
-		// Use the global date format if none is set
-		if ($objPage->dateFormat == '')
-		{
-			$objPage->dateFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
-		}
-		if ($objPage->timeFormat == '')
-		{
-			$objPage->timeFormat = $GLOBALS['TL_CONFIG']['timeFormat'];
-		}
-		if ($objPage->datimFormat == '')
-		{
-			$objPage->datimFormat = $GLOBALS['TL_CONFIG']['datimFormat'];
-		}
-
 		// Set the admin e-mail address
 		if ($objPage->adminEmail != '')
 		{
