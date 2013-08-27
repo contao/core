@@ -418,7 +418,6 @@ var AjaxRequest =
 				});
 
 				AjaxRequest.hideBox();
-				Backend.addInteractiveHelp();
 				Backend.addColorPicker();
 
 				// HOOK
@@ -831,6 +830,7 @@ var Backend =
 						$('ctrl_'+opt.id).getParent('div').set('html', json.content);
 						json.javascript && Browser.exec(json.javascript);
 						AjaxRequest.hideBox();
+						window.fireEvent('ajax_change');
 					}
 				}).post({'action':act, 'name':opt.id, 'value':$('ctrl_'+opt.id).value, 'REQUEST_TOKEN':Contao.request_token});
 			}

@@ -134,12 +134,10 @@
         <target>Kopiuj ten plik lub katalog</target>
       </trans-unit>
       <trans-unit id="tl_files.edit.0">
-        <source>Rename file or folder</source>
-        <target>Edytuj plik lub katalog</target>
+        <source>Edit file or folder</source>
       </trans-unit>
       <trans-unit id="tl_files.edit.1">
-        <source>Rename file or folder &quot;%s&quot;</source>
-        <target>Edytuj ten plik lub katalog</target>
+        <source>Edit file or folder &quot;%s&quot;</source>
       </trans-unit>
       <trans-unit id="tl_files.delete.0">
         <source>Delete file or folder</source>

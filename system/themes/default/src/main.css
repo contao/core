@@ -252,13 +252,13 @@ h2.sub_headline_index {
 .mac .tl_version_panel .tl_select,.mac .tl_panel_bottom .tl_select {
 	font-size:11px;
 }
-.safari .tl_version_panel {
+.safari .tl_version_panel,.ie .tl_version_panel {
 	overflow:hidden; /* see #5854 */
 }
 .tl_version_panel .tl_formbody {
 	position:relative;
 }
-.safari .tl_version_panel .tl_formbody {
+.safari .tl_version_panel .tl_formbody,.ie .tl_version_panel .tl_formbody {
 	float:right; /* see #5854 */
 }
 .tl_version_panel .tl_submit {

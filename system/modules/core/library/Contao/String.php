@@ -40,7 +40,7 @@ class String
 	 * Shorten a string to a given number of characters
 	 *
 	 * The function preserves words, so the result might be a bit shorter or
-	 * longer than the number of characters given. It stips all tags.
+	 * longer than the number of characters given. It strips all tags.
 	 *
 	 * @param string  $strString        The string to shorten
 	 * @param integer $intNumberOfChars The target number of characters

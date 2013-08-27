@@ -165,6 +165,14 @@
         <source>Removes the cached versions of the front end pages.</source>
         <target>အပြင်ပိုင်းစာမျက်နှာများ၏အသေးစားပံုစံများဖယ်ရှား။</target>
       </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.0">
+        <source>Purge the search cache</source>
+        <target>ရှာဖွေအသေးစားထုတ်ပယ်</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.1">
+        <source>Removes the cached versions of the search results.</source>
+        <target>ရှာဖွေရလဒ်များ၏အသေးစားပံုစံများဖယ်ရှား။</target>
+      </trans-unit>
       <trans-unit id="tl_maintenance_jobs.internal.0">
         <source>Purge the internal cache</source>
         <target>အတွင်းပိုင်းအသေးစားထုတ်ပယ်</target>

@@ -81,9 +81,9 @@ class RadioTable extends \Widget
 	{
 		$varValue = deserialize($this->getPost($this->strName));
 
-		if ($varValue != '' && !$this->isValidOption($varValue))
+		if (!empty($varValue) && !$this->isValidOption($varValue))
 		{
-			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalid'], $varValue));
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalid'], (is_array($varValue) ? implode(', ', $varValue) : $varValue)));
 		}
 
 		parent::validate();

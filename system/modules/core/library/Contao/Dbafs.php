@@ -45,6 +45,15 @@ class Dbafs
 	{
 		$strUploadPath = $GLOBALS['TL_CONFIG']['uploadPath'] . '/';
 
+		// Remove trailing slashes (see #5707)
+		if (substr($strResource, -1) == '/')
+		{
+			$strResource = substr($strResource, 0, -1);
+		}
+
+		// Normalize the path (see #6034)
+		$strResource = str_replace('//', '/', $strResource);
+
 		// The resource does not exist or lies outside the upload directory
 		if ($strResource == '' || strncmp($strResource,  $strUploadPath, strlen($strUploadPath)) !== 0 || !file_exists(TL_ROOT . '/' . $strResource))
 		{
@@ -123,6 +132,8 @@ class Dbafs
 			}
 		}
 
+		$objReturn = null;
+
 		// Create the new resources
 		foreach ($arrPaths as $strPath)
 		{
@@ -171,6 +182,12 @@ class Dbafs
 
 				$arrPids[$objFolder->path] = $objModel->id;
 			}
+
+			// Store the model to be returned (see #5979)
+			if ($objModel->path == $strResource)
+			{
+				$objReturn = $objModel;
+			}
 		}
 
 		// Update the folder hashes
@@ -179,8 +196,7 @@ class Dbafs
 			static::updateFolderHashes($arrUpdate);
 		}
 
-		// The last model is the resource itself
-		return $objModel;
+		return $objReturn;
 	}
 
 
@@ -558,11 +574,12 @@ class Dbafs
 
 		if ($objFiles !== null)
 		{
+			$arrMapped = array();
 			$arrPidUpdate = array();
 
 			while ($objFiles->next())
 			{
-				$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFiles->hash);
+				$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFiles->hash, array('uncached'=>true));
 
 				if ($objFound !== null)
 				{
@@ -578,6 +595,16 @@ class Dbafs
 							}
 						}
 					}
+
+					// If another file has been mapped already, delete the entry (see #6008)
+					if (in_array($objFound->path, $arrMapped))
+					{
+						$objLog->append("[Deleted] {$objFiles->path}");
+						$objFiles->delete();
+						continue;
+					}
+
+					$arrMapped[] = $objFound->path;
 
 					// Store the PID change
 					if ($objFiles->type == 'folder')

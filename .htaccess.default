@@ -26,7 +26,7 @@
 # @see https://github.com/h5bp/html5-boilerplate
 ##
 <IfModule mod_headers.c>
-  <FilesMatch "\.(ttf|ttc|otf|eot|woff|font.css)$">
+  <FilesMatch "\.(ttf|ttc|otf|eot|woff|font\.css)$">
     Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 </IfModule>
@@ -179,7 +179,7 @@ FileETag None
   #
   # For more information see: https://github.com/contao/core/issues/4364
   ##
-  <FilesMatch "\.(js|css|xml|gz)$">
+  <FilesMatch "\.(js|css|xml|gz|svgz)$">
     Header append Vary Accept-Encoding
   </FilesMatch>
 
@@ -250,7 +250,7 @@ FileETag None
   #
   # For more information see: https://github.com/contao/core/issues/4364
   ##
-  <FilesMatch "\.(htm|php|js|css|htc|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|mp4|webm|ogv|mp3|ogg|oga|eot|woff|svg|ttf|pdf|gz)$">
+  <FilesMatch "\.(htm|php|js|css|htc|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|mp4|webm|ogv|mp3|ogg|oga|eot|woff|svg|svgz|ttf|pdf|gz)$">
     RewriteEngine Off
   </FilesMatch>
 

@@ -147,7 +147,7 @@ class ModuleExtension extends \BackendModule
 					$tplTable->table = $strTable;
 					$tplTable->class = $strModel;
 
-					\File::putContent('system/modules/' . $objModule->folder . '/models/' . $strModel . 'Model.php', $tplTable->parse());
+					\File::putContent('system/modules/' . $objModule->folder . '/models/' . $strModel . '.php', $tplTable->parse());
 				}
 
 				$arrTemplates = array_filter(trimsplit(',', $objModule->feTemplates));

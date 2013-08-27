@@ -129,12 +129,10 @@
         <target>تکثیر پرونده یا پوشه &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.edit.0">
-        <source>Rename file or folder</source>
-        <target>ویرایش پرونده یا پوشه</target>
+        <source>Edit file or folder</source>
       </trans-unit>
       <trans-unit id="tl_files.edit.1">
-        <source>Rename file or folder &quot;%s&quot;</source>
-        <target>ویرایش پرونده یا پوشه &quot;%s&quot;</target>
+        <source>Edit file or folder &quot;%s&quot;</source>
       </trans-unit>
       <trans-unit id="tl_files.delete.0">
         <source>Delete file or folder</source>

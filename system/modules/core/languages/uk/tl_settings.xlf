@@ -115,9 +115,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
         <source>Exclude folders from synchronization</source>
+        <target>Виключити каталоги зі синхронізації</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <target>Ви можете ввести розділенний запятими список файлів, котрі будуть виключені зі синхронізації (наприклад, &lt;em&gt;attachments,music_academy&lt;/em&gt;). Майте на увазi те, що виключенi ресурси не можуть бути використанi при виборi зображень або файлiв в елементах контенту!</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
@@ -533,6 +535,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
         <source>Here you can enter the Live Update URL.</source>
+        <target>Тут ви можете вказати Live Update URL.</target>
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>

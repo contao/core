@@ -165,6 +165,14 @@
         <source>Removes the cached versions of the front end pages.</source>
         <target>Удаляет  кэшированные страницы внешнего интерфейса.</target>
       </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.0">
+        <source>Purge the search cache</source>
+        <target>Очистить поисковый кэш</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.1">
+        <source>Removes the cached versions of the search results.</source>
+        <target>Удаляет кэшированные версии результатов поиска.</target>
+      </trans-unit>
       <trans-unit id="tl_maintenance_jobs.internal.0">
         <source>Purge the internal cache</source>
         <target>Очистить внутренний кеш</target>

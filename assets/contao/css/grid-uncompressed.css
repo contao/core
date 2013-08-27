@@ -101,18 +101,18 @@
 /**
  * Default offset widths
  */
-.offset1  { margin-left:90px;  }
-.offset2  { margin-left:170px; }
-.offset3  { margin-left:250px; }
-.offset4  { margin-left:330px; }
-.offset5  { margin-left:410px; }
-.offset6  { margin-left:490px; }
-.offset7  { margin-left:570px; }
-.offset8  { margin-left:650px; }
-.offset9  { margin-left:730px; }
-.offset10 { margin-left:810px; }
-.offset11 { margin-left:890px; }
-.offset12 { margin-left:970px; }
+.offset1  { margin-left:90px  !important; }
+.offset2  { margin-left:170px !important; }
+.offset3  { margin-left:250px !important; }
+.offset4  { margin-left:330px !important; }
+.offset5  { margin-left:410px !important; }
+.offset6  { margin-left:490px !important; }
+.offset7  { margin-left:570px !important; }
+.offset8  { margin-left:650px !important; }
+.offset9  { margin-left:730px !important; }
+.offset10 { margin-left:810px !important; }
+.offset11 { margin-left:890px !important; }
+.offset12 { margin-left:970px !important; }
 
 /**
  * Reduce the overall width and the width of the grid columns if the screen
@@ -162,18 +162,18 @@
 	/**
 	 * Reduce the offset widths
 	 */
-	.offset1  { margin-left:72px;  }
-	.offset2  { margin-left:134px; }
-	.offset3  { margin-left:196px; }
-	.offset4  { margin-left:258px; }
-	.offset5  { margin-left:320px; }
-	.offset6  { margin-left:382px; }
-	.offset7  { margin-left:444px; }
-	.offset8  { margin-left:506px; }
-	.offset9  { margin-left:568px; }
-	.offset10 { margin-left:630px; }
-	.offset11 { margin-left:692px; }
-	.offset12 { margin-left:754px; }
+	.offset1  { margin-left:72px  !important; }
+	.offset2  { margin-left:134px !important; }
+	.offset3  { margin-left:196px !important; }
+	.offset4  { margin-left:258px !important; }
+	.offset5  { margin-left:320px !important; }
+	.offset6  { margin-left:382px !important; }
+	.offset7  { margin-left:444px !important; }
+	.offset8  { margin-left:506px !important; }
+	.offset9  { margin-left:568px !important; }
+	.offset10 { margin-left:630px !important; }
+	.offset11 { margin-left:692px !important; }
+	.offset12 { margin-left:754px !important; }
 }
 
 /**
@@ -196,5 +196,8 @@
 		float:none !important;
 		display:block !important;
 		width:auto !important;
+	}
+	*[class*="offset"] {
+		margin-left:10px !important;
 	}
 }

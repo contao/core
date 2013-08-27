@@ -134,12 +134,12 @@
         <target>Duplitgar la datoteca u l'ordinatur &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.edit.0">
-        <source>Rename file or folder</source>
-        <target>Renumnar la datoteca u l'ordinatur</target>
+        <source>Edit file or folder</source>
+        <target>Modifitgar la datoteca u l'ordinatur</target>
       </trans-unit>
       <trans-unit id="tl_files.edit.1">
-        <source>Rename file or folder &quot;%s&quot;</source>
-        <target>Renumnar la datoteca u l'ordinatur &quot;%s&quot;</target>
+        <source>Edit file or folder &quot;%s&quot;</source>
+        <target>Modifitgar la datoteca u l'ordinatur &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.delete.0">
         <source>Delete file or folder</source>

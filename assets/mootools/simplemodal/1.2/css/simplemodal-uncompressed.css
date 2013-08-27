@@ -67,6 +67,12 @@
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
+.ios .simple-modal {
+  /* see 6028 */
+  overflow: auto;
+  bottom: 40px;
+  -webkit-overflow-scrolling: touch;
+}
 .simple-modal .simple-modal-header {
   padding: 5px 15px;
   margin: 0;

@@ -309,6 +309,7 @@ class ModuleListing extends \Module
 		$objPagination = new \Pagination($objTotal->count, $per_page, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
 		$this->Template->pagination = $objPagination->generate("\n  ");
 		$this->Template->per_page = $per_page;
+		$this->Template->total = $objTotal->count;
 
 
 		/**
@@ -432,13 +433,14 @@ class ModuleListing extends \Module
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'url' && preg_match('@^(https?://|ftp://)@i', $value))
 		{
 			global $objPage;
+			$value = \Idna::decode($value); // see #5946
 			$value = '<a href="' . $value . '"' . (($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"') . '>' . $value . '</a>';
 		}
 
 		// E-mail addresses
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'email')
 		{
-			$value = \String::encodeEmail($value);
+			$value = \String::encodeEmail(\Idna::decode($value)); // see #5946
 			$value = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $value . '">' . $value . '</a>';
 		}
 

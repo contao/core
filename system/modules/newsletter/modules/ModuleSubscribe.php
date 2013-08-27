@@ -275,15 +275,15 @@ class ModuleSubscribe extends \Module
 
 		// Prepare the e-mail text
 		$strText = str_replace('##token##', $strToken, $this->nl_subscribe);
-		$strText = str_replace('##domain##', \Environment::get('host'), $strText);
-		$strText = str_replace('##link##', \Environment::get('base') . \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $strToken, $strText);
+		$strText = str_replace('##domain##', \Idna::decode(\Environment::get('host')), $strText);
+		$strText = str_replace('##link##', \Idna::decode(\Environment::get('base')) . \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $strToken, $strText);
 		$strText = str_replace(array('##channel##', '##channels##'), implode("\n", $objChannel->fetchEach('title')), $strText);
 
 		// Activation e-mail
 		$objEmail = new \Email();
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
-		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], \Environment::get('host'));
+		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], \Idna::decode(\Environment::get('host')));
 		$objEmail->text = $strText;
 		$objEmail->sendTo($varInput);
 

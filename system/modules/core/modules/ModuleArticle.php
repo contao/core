@@ -244,7 +244,7 @@ class ModuleArticle extends \Module
 		$this->printable = false;
 
 		// Generate article
-		$strArticle = $this->replaceInsertTags($this->generate());
+		$strArticle = $this->replaceInsertTags($this->generate(), false);
 		$strArticle = html_entity_decode($strArticle, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
 		$strArticle = $this->convertRelativeUrls($strArticle, '', true);
 

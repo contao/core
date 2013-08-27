@@ -319,6 +319,11 @@ $GLOBALS['TL_PURGE'] = array
 			'callback' => array('Automator', 'purgePageCache'),
 			'affected' => array('system/cache/html')
 		),
+		'search' => array
+		(
+			'callback' => array('Automator', 'purgeSearchCache'),
+			'affected' => array('system/cache/search')
+		),
 		'internal' => array
 		(
 			'callback' => array('Automator', 'purgeInternalCache'),
@@ -370,7 +375,8 @@ $GLOBALS['TL_CRON'] = array
 	'weekly' => array
 	(
 		array('Automator', 'generateSitemap'),
-		array('Automator', 'purgeScriptCache')
+		array('Automator', 'purgeScriptCache'),
+		array('Automator', 'purgeSearchCache')
 	),
 	'daily' => array
 	(

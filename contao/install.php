@@ -223,6 +223,7 @@ class InstallTool extends Backend
 		{
 			$this->Template->importException = true;
 			$this->Config->delete("\$GLOBALS['TL_CONFIG']['exampleWebsite']");
+			error_log("\nPHP Fatal error: {$e->getMessage()} in {$e->getFile()} on line {$e->getLine()}\n{$e->getTraceAsString()}\n");
 			$this->outputAndExit();
 		}
 
@@ -441,15 +442,21 @@ class InstallTool extends Backend
 	protected function setUpDatabaseConnection()
 	{
 		$strDrivers = '';
-		$arrDrivers = array();
+		$arrDrivers = array('');
 
+		if (class_exists('mysqli', false))
+		{
+			$arrDrivers[] = 'MySQLi';
+		}
 		if (function_exists('mysql_connect'))
 		{
 			$arrDrivers[] = 'MySQL';
 		}
-		if (class_exists('mysqli', false))
+
+		// If there is another driver defined, add it here as well
+		if ($GLOBALS['TL_CONFIG']['dbDriver'] != '' && !in_array($GLOBALS['TL_CONFIG']['dbDriver'], $arrDrivers))
 		{
-			$arrDrivers[] = 'MySQLi';
+			$arrDrivers[] = $GLOBALS['TL_CONFIG']['dbDriver'];
 		}
 
 		foreach ($arrDrivers as $strDriver)
@@ -457,7 +464,7 @@ class InstallTool extends Backend
 			$strDrivers .= sprintf('<option value="%s"%s>%s</option>',
 									$strDriver,
 									(($strDriver == $GLOBALS['TL_CONFIG']['dbDriver']) ? ' selected="selected"' : ''),
-									$strDriver);
+									($strDriver ?: '-'));
 		}
 
 		$this->Template->drivers = $strDrivers;
@@ -485,6 +492,13 @@ class InstallTool extends Backend
 			}
 
 			$this->reload();
+		}
+
+		// No driver selected (see #6088)
+		if ($GLOBALS['TL_CONFIG']['dbDriver'] == '')
+		{
+			$this->Template->dbConnection = false;
+			$this->outputAndExit();
 		}
 
 		// Try to connect
@@ -634,7 +648,11 @@ class InstallTool extends Backend
 				{
 					foreach ($tables as $table)
 					{
-						$this->Database->execute("TRUNCATE TABLE " . $table);
+						// Preserve the repository tables (see #6037)
+						if ($table != 'tl_repository_installs' && $table != 'tl_repository_instfiles')
+						{
+							$this->Database->execute("TRUNCATE TABLE " . $table);
+						}
 					}
 				}
 
@@ -644,7 +662,11 @@ class InstallTool extends Backend
 
 				foreach ($sql as $query)
 				{
-					$this->Database->execute($query);
+					// Skip the repository tables (see #6037)
+					if (strpos($query, '`tl_repository_installs`') === false && strpos($query, '`tl_repository_instfiles`') === false)
+					{
+						$this->Database->execute($query);
+					}
 				}
 
 				$this->reload();
@@ -679,6 +701,11 @@ class InstallTool extends Backend
 				elseif (strpos(Input::post('username', true), ' ') !== false)
 				{
 					$this->Template->usernameError = sprintf($GLOBALS['TL_LANG']['ERR']['noSpace'], $GLOBALS['TL_LANG']['MSC']['username']);
+				}
+				// Validate the e-mail address (see #6003)
+				elseif (!\Validator::isEmail(Input::post('email', true)))
+				{
+					$this->Template->emailError = $GLOBALS['TL_LANG']['ERR']['email'];
 				}
 				// The passwords do not match
 				elseif (Input::post('pass', true) != Input::post('confirm_pass', true))
@@ -909,8 +936,8 @@ class InstallTool extends Backend
 
 		$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_files");
 
-		// Step 2: scan the upload folder
-		if ($objRow->count < 1)
+		// Step 2: scan the upload folder if it is not empty (see #6061)
+		if ($objRow->count < 1 && count(scan(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'])) > 0)
 		{
 			if (Input::post('FORM_SUBMIT') == 'tl_30update')
 			{

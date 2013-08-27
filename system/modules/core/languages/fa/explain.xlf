@@ -15,6 +15,7 @@
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.1">
         <source>For more information on insert tags please visit &lt;a href=&quot;https://contao.org/manual/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/manual/managing-content.html#insert-tags&lt;/a&gt;.</source>
+        <target>برای اطلاعات بیشتر در مورد برچسب‌ها &lt;a href=&quot;https://contao.org/manual/managing-content.html#insert-tags&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://contao.org/manual/managing-content.html#insert-tags&lt;/a&gt; را ببینید.</target>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.0">
         <source>Code Editor</source>
@@ -22,10 +23,11 @@
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.1">
         <source>For more information about ACE please visit &lt;a href=&quot;http://ace.ajax.org&quot; title=&quot;ACE (Ajax.org Cloud9 Editor)&quot; target=&quot;_blank&quot;&gt;http://ace.ajax.org&lt;/a&gt;.</source>
+        <target>برای اطلاعات بیشتر درباره ویرایشگر ACE به &lt;a href=&quot;http://ace.ajax.org&quot; title=&quot;ACE (Ajax.org Cloud9 Editor)&quot; target=&quot;_blank&quot;&gt;http://ace.ajax.org&lt;/a&gt; مراجعه نمایید.</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.0.0">
         <source>colspan</source>
-        <target>colspan</target>
+        <target>ادغام ستون</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.0.1">
         <source>Contao supports all date and time formats that can be parsed with the PHP date() function. However, to ensure that any input can be transformed into a UNIX timestamp, you can only use numeric date and time formats (j, d, m, n, y, Y, g, G, h, H, i, s) in the back end.&lt;br&gt;&lt;br&gt;&lt;strong&gt;You can enter variant front end formats in the site structure (website root pages).&lt;/strong&gt;&lt;br&gt;&lt;br&gt;&lt;em&gt;Here are some examples of valid date and time formats&lt;/em&gt;:</source>
@@ -45,6 +47,7 @@
       </trans-unit>
       <trans-unit id="XPL.dateFormat.2.1">
         <source>MM/DD/YYYY, English format, e.g. 01/28/2005</source>
+        <target>MM/DD/YYYY، فرمت انگلیسی، به طور مثال 01/28/2005</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.3.0">
         <source>d.m.Y</source>
@@ -52,6 +55,7 @@
       </trans-unit>
       <trans-unit id="XPL.dateFormat.3.1">
         <source>DD.MM.YYYY, German format, e.g. 28.01.2005</source>
+        <target>DD.MM.YYYY، فرمت آلمانی، به طور مثال، 28.01.2005</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.4.0">
         <source>y-n-j</source>
@@ -91,6 +95,7 @@
       </trans-unit>
       <trans-unit id="XPL.highlighter.0.1">
         <source>For more information about how to configure the syntax highlighter please visit &lt;a href=&quot;http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
+        <target>برای اطلاعات بیشتر درباره چگونگی تنظیم syntax highlighter به &lt;a href=&quot;http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt; مراجعه کنید.</target>
       </trans-unit>
     </body>
   </file>

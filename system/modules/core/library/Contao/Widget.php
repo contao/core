@@ -1145,8 +1145,11 @@ abstract class Widget extends \Controller
 			$varInput = array($varInput);
 		}
 
+		// Check each option
 		foreach ($varInput as $strInput)
 		{
+			$blnFound = false;
+
 			foreach ($this->arrOptions as $v)
 			{
 				// Single dimensional array
@@ -1154,7 +1157,7 @@ abstract class Widget extends \Controller
 				{
 					if ($strInput == $v['value'])
 					{
-						return true;
+						$blnFound = true;
 					}
 				}
 				// Multi-dimensional array
@@ -1164,14 +1167,19 @@ abstract class Widget extends \Controller
 					{
 						if ($strInput == $vv['value'])
 						{
-							return true;
+							$blnFound = true;
 						}
 					}
 				}
 			}
+
+			if (!$blnFound)
+			{
+				return false;
+			}
 		}
 
-		return false;
+		return true;
 	}
 
 

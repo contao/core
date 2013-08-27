@@ -277,7 +277,7 @@ abstract class User extends \System
 			{
 				$objEmail = new \Email();
 				$objEmail->subject = $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0];
-				$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['lockedAccount'][1], $this->username, ((TL_MODE == 'FE') ? $this->firstname . " " . $this->lastname : $this->name), \Environment::get('base'), ceil($GLOBALS['TL_CONFIG']['lockPeriod'] / 60));
+				$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['lockedAccount'][1], $this->username, ((TL_MODE == 'FE') ? $this->firstname . " " . $this->lastname : $this->name), \Idna::decode(\Environment::get('base')), ceil($GLOBALS['TL_CONFIG']['lockPeriod'] / 60));
 				$objEmail->sendTo($GLOBALS['TL_CONFIG']['adminEmail']);
 			}
 
