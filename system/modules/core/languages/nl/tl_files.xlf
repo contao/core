@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_files.editFF">
         <source>Edit a file or folder</source>
-        <target>Wijzig een bestand of map</target>
+        <target>Bewerk een bestand of map</target>
       </trans-unit>
       <trans-unit id="tl_files.uploadFF">
         <source>Upload files to folder &quot;%s&quot;</source>
@@ -134,12 +134,12 @@
         <target>Kopieer bestand of map &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.edit.0">
-        <source>Rename file or folder</source>
-        <target>Geef bestand of map een andere naam</target>
+        <source>Edit file or folder</source>
+        <target>Bewerk bestand of map</target>
       </trans-unit>
       <trans-unit id="tl_files.edit.1">
-        <source>Rename file or folder &quot;%s&quot;</source>
-        <target>Geef bestand of map &quot;%s&quot; een andere naam</target>
+        <source>Edit file or folder &quot;%s&quot;</source>
+        <target>Bewerk bestand of map &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.delete.0">
         <source>Delete file or folder</source>

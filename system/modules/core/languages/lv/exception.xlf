@@ -3,9 +3,11 @@
     <body>
       <trans-unit id="XPT.error">
         <source>An error occurred</source>
+        <target>Notikusi kļūda</target>
       </trans-unit>
       <trans-unit id="XPT.matter">
         <source>What's the matter?</source>
+        <target>Kas ir noticis?</target>
       </trans-unit>
       <trans-unit id="XPT.howToFix">
         <source>How can I fix the issue?</source>

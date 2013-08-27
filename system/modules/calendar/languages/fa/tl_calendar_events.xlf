@@ -67,9 +67,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.location.0">
         <source>Event location</source>
+        <target>محل برگزاری رویداد</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.location.1">
         <source>Here you can enter the event location.</source>
+        <target>اینجا می‌توانید محل برگزاری رویداد را وارد کنید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.teaser.0">
         <source>Event teaser</source>
@@ -121,6 +123,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.repeatEnd">
         <source>End of recurring event</source>
+        <target>انتهای رویداد تکرار شونده</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.addEnclosure.0">
         <source>Add enclosures</source>
