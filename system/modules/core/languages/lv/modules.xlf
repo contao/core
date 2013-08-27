@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="MOD.tpl_editor.1">
         <source>Edit templates in the back end</source>
-        <target>Šis modulis ļauj jums rediģēt veidņu datnes.</target>
+        <target>Rediģēt veidņu datnes aizmugurē</target>
       </trans-unit>
       <trans-unit id="MOD.accounts">
         <source>Account manager</source>
@@ -75,7 +75,7 @@
       </trans-unit>
       <trans-unit id="MOD.user.1">
         <source>Manage user accounts (back end users)</source>
-        <target>Šis modulis ļauj jums izveidot jaunus TYPOlight lietotājus un pārvaldīt esošo lietotāju kontus.</target>
+        <target>Pārvaldīt lietotāju kontus (aizmugures lietotājus)</target>
       </trans-unit>
       <trans-unit id="MOD.group.0">
         <source>User groups</source>
@@ -83,7 +83,7 @@
       </trans-unit>
       <trans-unit id="MOD.group.1">
         <source>Manage user groups (back end user groups)</source>
-        <target>Lietotāji var tik pievienoti dažādam grupu skaitam, lai varētu koplietot noteiktus uzstādījumus. Šis modulis ļauj jums izveidot šīs grupas.</target>
+        <target>Pārvaldīt lietotāju grupas (aizmugures lietotāju grupas)</target>
       </trans-unit>
       <trans-unit id="MOD.system">
         <source>System</source>

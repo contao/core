@@ -1433,15 +1433,15 @@ Denne e-mail er blevet genereret af systemet og kan ikke besvares direkte.
       </trans-unit>
       <trans-unit id="MSC.colorpicker">
         <source>Color picker</source>
-        <target>Farvevælger (kræver JavaScript)</target>
+        <target>Farvevælger</target>
       </trans-unit>
       <trans-unit id="MSC.pagepicker">
         <source>Page picker</source>
-        <target>Sidevælger (kræver JavaScript)</target>
+        <target>Sidevælger</target>
       </trans-unit>
       <trans-unit id="MSC.filepicker">
         <source>File picker</source>
-        <target>Filvælger (kræver JavaScript)</target>
+        <target>Filvælger</target>
       </trans-unit>
       <trans-unit id="MSC.ppHeadline">
         <source>Contao pages</source>

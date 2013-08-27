@@ -121,9 +121,9 @@ class FormSelectMenu extends \Widget
 		$varInput = $this->validator($options);
 
 		// Check for a valid option (see #4383)
-		if ($varInput != '' && !$this->isValidOption($varInput))
+		if (!empty($varInput) && !$this->isValidOption($varInput))
 		{
-			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalid'], $varInput));
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalid'], (is_array($varValue) ? implode(', ', $varValue) : $varValue)));
 		}
 
 		// Add class "error"

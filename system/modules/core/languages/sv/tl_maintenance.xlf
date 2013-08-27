@@ -165,6 +165,12 @@
         <source>Removes the cached versions of the front end pages.</source>
         <target>Rensar cache:ade versioner av frontend-sidor.</target>
       </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.0">
+        <source>Purge the search cache</source>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.1">
+        <source>Removes the cached versions of the search results.</source>
+      </trans-unit>
       <trans-unit id="tl_maintenance_jobs.internal.0">
         <source>Purge the internal cache</source>
         <target>Rensa intern cache</target>

@@ -123,9 +123,11 @@
       </trans-unit>
       <trans-unit id="tl_form.novalidate.0">
         <source>Disable HTML5 validation</source>
+        <target>Atspējot HTML5 validāciju</target>
       </trans-unit>
       <trans-unit id="tl_form.novalidate.1">
         <source>Add the &lt;em&gt;novalidate&lt;/em&gt; attribute to the form tag.</source>
+        <target>Pievienot &lt;em&gt;novalidate&lt;/em&gt; atribūtu formulāra birkai.</target>
       </trans-unit>
       <trans-unit id="tl_form.attributes.0">
         <source>CSS ID/class</source>

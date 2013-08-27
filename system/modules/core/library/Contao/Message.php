@@ -22,9 +22,9 @@ namespace Contao;
  * Usage:
  *
  *     Message::addError('Please enter your name');
- *     Message::addConfirm('The data has been stored');
- *     Message::addInfo('You can upload only two files');
+ *     Message::addConfirmation('The data has been stored');
  *     Message::addNew('There are two new messages');
+ *     Message::addInfo('You can upload only two files');
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>

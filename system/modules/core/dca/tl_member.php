@@ -381,14 +381,14 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		),
 		'lastLogin' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['MSC']['lastLogin'],
-			'sorting'                 => true,
-			'flag'                    => 6,
 			'eval'                    => array('rgxp'=>'datim'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'currentLogin' => array
 		(
+			'label'                   => &$GLOBALS['TL_LANG']['MSC']['lastLogin'],
+			'sorting'                 => true,
+			'flag'                    => 6,
 			'eval'                    => array('rgxp'=>'datim'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
@@ -408,6 +408,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		),
 		'autologin' => array
 		(
+			'eval'                    => array('doNotCopy'=>true),
 			'sql'                     => "varchar(32) NULL"
 		),
 		'createdOn' => array
@@ -417,6 +418,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		),
 		'activation' => array
 		(
+			'eval'                    => array('doNotCopy'=>true),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		)
 	)

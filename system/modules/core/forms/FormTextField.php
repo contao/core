@@ -131,22 +131,11 @@ class FormTextField extends \Widget
 		elseif ($this->strFormat != 'xhtml')
 		{
 			// Use the HTML5 types (see #4138)
+			// but not the date, time and datetime types (see #5918)
 			switch ($this->rgxp)
 			{
 				case 'digit':
 					$strType = 'number';
-					break;
-
-				case 'date':
-					$strType = 'date';
-					break;
-
-				case 'time':
-					$strType = 'time';
-					break;
-
-				case 'datim':
-					$strType = 'datetime';
 					break;
 
 				case 'phone':

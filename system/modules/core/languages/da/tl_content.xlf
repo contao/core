@@ -539,19 +539,19 @@
       </trans-unit>
       <trans-unit id="tl_content.start.0">
         <source>Show from</source>
-        <target>Indpakningsstart</target>
+        <target>Vis fra</target>
       </trans-unit>
       <trans-unit id="tl_content.start.1">
         <source>Do not show the element on the website before this day.</source>
-        <target>Denne operationstilstand tillader visning af flere indholdselementer i én harmonika-rude ved at indsætte dem mellem elementerne element &lt;em&gt;indpakningsstart&lt;/em&gt; og &lt;em&gt;indpakningsstop&lt;/em&gt; .</target>
+        <target>Vis ikke elementet på websitet før denne dag.</target>
       </trans-unit>
       <trans-unit id="tl_content.stop.0">
         <source>Show until</source>
-        <target>Indpakningsstop</target>
+        <target>Vis indtil</target>
       </trans-unit>
       <trans-unit id="tl_content.stop.1">
         <source>Do not show the element on the website on and after this day.</source>
-        <target>Indikerer slutningen af et indpakningselement.</target>
+        <target>Vis ikke elementet på websitet på og efter denne dag.</target>
       </trans-unit>
       <trans-unit id="tl_content.type_legend">
         <source>Element type</source>
@@ -563,7 +563,7 @@
       </trans-unit>
       <trans-unit id="tl_content.image_legend">
         <source>Image settings</source>
-        <target>Indstillinger for billede</target>
+        <target>Billede indstillinger</target>
       </trans-unit>
       <trans-unit id="tl_content.slider_legend">
         <source>Slider settings</source>

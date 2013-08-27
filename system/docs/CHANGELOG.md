@@ -1,6 +1,110 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.1.2 (2013-08-27)
+--------------------------
+
+### Fixed
+Add the global date format in `PageModel::loadDetails()` (see #6104).
+
+### Fixed
+Do not override the referer upon Ajax requests (see #5956).
+
+### Fixed
+Fixed the content slider in IE < 9 (see #5878).
+
+### Fixed
+Do not set a database driver by default (see #6088).
+
+### Fixed
+Decode punycode domains in the listing module (see #5946).
+
+### Fixed
+Show all themes a template is defined in (see #6071).
+
+### Fixed
+Do not add the domain name twice in `redirectToFrontendPage()` (see #6076).
+
+### Fixed
+Use the `currentLogin` field to sort users by their last login (see #5949).
+
+### Fixed
+Fix the offset handling in the CSS grid (see #5943).
+
+### Fixed
+Do not use the `date`, `time` and `datetime` input types (see #5918).
+
+### Fixed
+Show tooltips for selected single images in the file picker (see #6031).
+
+### Fixed
+Correctly synchronize if a sub folder is selected (see #5979).
+
+### Fixed
+Correctly handle password which are longer than 64 characters (see #6015).
+
+### Fixed
+Added missing Vietnamese characters to the UFT8 mapper (see #6010).
+
+### Fixed
+Decode entities in the page and file pickers (see #5989).
+
+### Fixed
+Ensure that the default user and group are integer values (see #6017).
+
+### New
+Added the Czech typolinks translations (thanks to ShiraNai7) (see #6051).
+
+### Fixed
+Added an option to purge the search cache (see #6041).
+
+### Fixed
+Preserve the repository tables when importing a theme (see #6037).
+
+### Fixed
+Pass the module to `getAttributesFromDca()` in the registration and personal
+data module classes (see #6002).
+
+### Fixed
+Validate the e-mail address when creating an admin user (see #6003).
+
+### Fixed
+Fix the newslist pagination count (see #5997).
+
+### Fixed
+Make the GD image max width and height parameters mandatory (see #5940).
+
+### Fixed
+Replace all insert tags when exporting a page as PDF (see #5990).
+
+### Fixed
+Correctly validate the options in `Widget::isValidOption()` (see #5951).
+
+### Fixed
+Decode IDNA domains in any system mail (see #5932).
+
+### Fixed
+Store integers bigger than `PHP_INT_MAX` as string (see #5939).
+
+### Fixed
+Fix the alignment of the versions menu in IE (see #5962).
+
+### Fixed
+Do not cache the result of `Model::count*()` (see #5973).
+
+### Fixed
+Added some missing office file extensions to the configuration (see #6021).
+
+### Fixed
+Fixed the "indexPage" hook (see #5967).
+
+### Fixed
+Do not copy the autologin hash when duplicating members (see #5945).
+
+### Fixed
+Added .svgz support to the default `.htaccess` file (see #5938).
+
+
 Version 3.1.1 (2013-06-25)
 --------------------------
 

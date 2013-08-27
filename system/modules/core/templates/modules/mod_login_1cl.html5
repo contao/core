@@ -14,9 +14,9 @@
       <input type="hidden" name="FORM_SUBMIT" value="tl_login">
       <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
       <label for="username"><?php echo $this->username; ?></label>
-      <input type="text" name="username" id="username" class="text" maxlength="64" value="<?php echo $this->value; ?>"><br>
+      <input type="text" name="username" id="username" class="text" value="<?php echo $this->value; ?>"><br>
       <label for="password"><?php echo $this->password; ?></label>
-      <input type="password" name="password" id="password" class="text password" maxlength="64" value="">
+      <input type="password" name="password" id="password" class="text password" value="">
       <?php if ($this->autologin): ?>
         <div class="checkbox_container">
           <input type="checkbox" name="autologin" id="autologin" value="1" class="checkbox"> <label for="autologin"><?php echo $this->autoLabel; ?></label>

@@ -143,6 +143,10 @@ abstract class Controller extends \System
 							{
 								$arrTemplates[$strTemplate] = $strTemplate . ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
 							}
+							else
+							{
+								$arrTemplates[$strTemplate] .= ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
+							}
 						}
 					}
 				}
@@ -892,30 +896,42 @@ abstract class Controller extends \System
 								if ($objNext !== null)
 								{
 									$strForceLang = null;
+									$objNext->loadDetails();
 
 									// Check the target page language (see #4706)
 									if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 									{
-										$objNext->loadDetails(); // see #3983
 										$strForceLang = $objNext->language;
 									}
 
 									$strUrl = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
+
+									// Add the domain if it differs from the current one (see #3765)
+									if ($objNext->domain != '' && $objNext->domain != \Environment::get('host'))
+									{
+										$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $strUrl;
+									}
 									break;
 								}
 								// DO NOT ADD A break; STATEMENT
 
 							default:
 								$strForceLang = null;
+								$objNextPage->loadDetails();
 
 								// Check the target page language (see #4706, #5465)
 								if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 								{
-									$objNextPage->loadDetails(); // see #3983
 									$strForceLang = $objNextPage->language;
 								}
 
 								$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $strForceLang);
+
+								// Add the domain if it differs from the current one (see #3765)
+								if ($objNextPage->domain != '' && $objNextPage->domain != \Environment::get('host'))
+								{
+									$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNextPage->domain . TL_PATH . '/' . $strUrl;
+								}
 								break;
 						}
 
@@ -2107,12 +2123,6 @@ abstract class Controller extends \System
 			$strUrl = 'index.php?id=' . $arrRow['id'] . $strRequest;
 		}
 
-		// Add the domain if it differs from the host name (see #3765)
-		if ($arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
-		{
-			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
-		}
-
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['generateFrontendUrl']) && is_array($GLOBALS['TL_HOOKS']['generateFrontendUrl']))
 		{
@@ -2293,20 +2303,19 @@ abstract class Controller extends \System
 			return '';
 		}
 
-		$strDomain = \Environment::get('base');
 		$objPage = \PageModel::findWithDetails($intPage);
-
-		if ($objPage->domain != '')
-		{
-			$strDomain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objPage->domain . TL_PATH . '/';
-		}
 
 		if ($varArticle !== null)
 		{
 			$varArticle = '/articles/' . $varArticle;
 		}
 
-		$strUrl = $strDomain . $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language);
+		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language);
+
+		if ($objPage->domain != '' && $objPage->domain != \Environment::get('host'))
+		{
+			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objPage->domain . TL_PATH . '/' . $strUrl;
+		}
 
 		if (!$blnReturn)
 		{
@@ -2461,21 +2470,24 @@ abstract class Controller extends \System
 		$objTemplate->height = $imgSize[1];
 
 		// Adjust the image size
-		if ($intMaxWidth > 0 && ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth)))
+		if ($intMaxWidth > 0)
 		{
 			$arrMargin = deserialize($arrItem['imagemargin']);
 
-			// Subtract margins
+			// Subtract the margins before deciding whether to resize (see #6018)
 			if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
 			{
 				$intMaxWidth = $intMaxWidth - $arrMargin['left'] - $arrMargin['right'];
 			}
 
-			// See #2268 (thanks to Thyon)
-			$ratio = ($size[0] && $size[1]) ? $size[1] / $size[0] : $imgSize[1] / $imgSize[0];
+			if ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth))
+			{
+				// See #2268 (thanks to Thyon)
+				$ratio = ($size[0] && $size[1]) ? $size[1] / $size[0] : $imgSize[1] / $imgSize[0];
 
-			$size[0] = $intMaxWidth;
-			$size[1] = floor($intMaxWidth * $ratio);
+				$size[0] = $intMaxWidth;
+				$size[1] = floor($intMaxWidth * $ratio);
+			}
 		}
 
 		$src = \Image::get($arrItem['singleSRC'], $size[0], $size[1], $size[2]);

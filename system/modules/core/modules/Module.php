@@ -268,21 +268,33 @@ abstract class Module extends \Frontend
 						if ($objNext !== null)
 						{
 							$strForceLang = null;
+							$objNext->loadDetails();
 
 							// Check the target page language (see #4706)
 							if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 							{
-								$objNext->loadDetails(); // see #3983
 								$strForceLang = $objNext->language;
 							}
 
 							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
+
+							// Add the domain if it differs from the current one (see #3765)
+							if ($objNext->domain != '' && $objNext->domain != \Environment::get('host'))
+							{
+								$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $href;
+							}
 							break;
 						}
 						// DO NOT ADD A break; STATEMENT
 
 					default:
 						$href = $this->generateFrontendUrl($objSubpages->row(), null, $language);
+
+						// Add the domain if it differs from the current one (see #3765)
+						if ($objSubpages->domain != '' && $objSubpages->domain != \Environment::get('host'))
+						{
+							$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objSubpages->domain . TL_PATH . '/' . $href;
+						}
 						break;
 				}
 

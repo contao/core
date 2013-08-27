@@ -165,6 +165,14 @@
         <source>Removes the cached versions of the front end pages.</source>
         <target>Verwijderd de gecachte versies van de front-end pagina`s.</target>
       </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.0">
+        <source>Purge the search cache</source>
+        <target>Opschonen van de zoek cache</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.1">
+        <source>Removes the cached versions of the search results.</source>
+        <target>Verwijderd de gecachte versies van de zoekresultaten.</target>
+      </trans-unit>
       <trans-unit id="tl_maintenance_jobs.internal.0">
         <source>Purge the internal cache</source>
         <target>Opschonen interne cache</target>

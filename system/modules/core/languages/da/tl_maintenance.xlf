@@ -165,6 +165,12 @@
         <source>Removes the cached versions of the front end pages.</source>
         <target>Sletter den midlertidige hukommelse af front end siden.</target>
       </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.0">
+        <source>Purge the search cache</source>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.1">
+        <source>Removes the cached versions of the search results.</source>
+      </trans-unit>
       <trans-unit id="tl_maintenance_jobs.internal.0">
         <source>Purge the internal cache</source>
         <target>Tøm den interne midlertidige hukommelse</target>

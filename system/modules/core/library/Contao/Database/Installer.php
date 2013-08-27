@@ -27,6 +27,15 @@ class Installer extends \Controller
 {
 
 	/**
+	 * Make the constructor public
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+
+	/**
 	 * Generate a HTML form with queries and return it as string
 	 *
 	 * @return string The form HTML markup

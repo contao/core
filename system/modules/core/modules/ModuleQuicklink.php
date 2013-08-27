@@ -109,9 +109,50 @@ class ModuleQuicklink extends \Module
 			$arrPage['title'] = strip_insert_tags($arrPage['title']);
 			$arrPage['pageTitle'] = strip_insert_tags($arrPage['pageTitle']);
 
+			// Get href
+			switch ($arrPage['type'])
+			{
+				case 'redirect':
+					$href = $arrPage['url'];
+					break;
+
+				case 'forward':
+					if (($objNext = \PageModel::findPublishedById($arrPage['jumpTo'])) !== null)
+					{
+						$strForceLang = null;
+						$objNext->loadDetails();
+
+						// Check the target page language (see #4706)
+						if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+						{
+							$strForceLang = $objNext->language;
+						}
+
+						$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
+
+						// Add the domain if it differs from the current one (see #3765)
+						if ($objNext->domain != '' && $objNext->domain != \Environment::get('host'))
+						{
+							$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $href;
+						}
+						break;
+					}
+					// DO NOT ADD A break; STATEMENT
+
+				default:
+					$href = $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage']);
+
+					// Add the domain if it differs from the current one (see #3765)
+					if ($arrPage['domain'] != '' && $arrPage['domain'] != \Environment::get('host'))
+					{
+						$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrPage['domain'] . TL_PATH . '/' . $href;
+					}
+					break;
+			}
+
 			$items[] = array
 			(
-				'href' => $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage']),
+				'href' => $href,
 				'title' => specialchars($arrPage['pageTitle'] ?: $arrPage['title']),
 				'link' => $arrPage['title']
 			);

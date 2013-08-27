@@ -16,11 +16,11 @@
       <table>
         <tr class="row_0 row_first">
           <td class="col_0 col_first"><label for="username"><?php echo $this->username; ?></label></td>
-          <td class="col_1 col_last"><input type="text" name="username" id="username" class="text" maxlength="64" value="<?php echo $this->value; ?>"></td>
+          <td class="col_1 col_last"><input type="text" name="username" id="username" class="text" value="<?php echo $this->value; ?>"></td>
         </tr>
         <tr class="row_1">
           <td class="col_0 col_first"><label for="password"><?php echo $this->password; ?></label></td>
-          <td class="col_1 col_last"><input type="password" name="password" id="password" class="text password" maxlength="64" value=""></td>
+          <td class="col_1 col_last"><input type="password" name="password" id="password" class="text password" value=""></td>
         </tr>
         <?php if ($this->autologin): ?>
           <tr class="row_2">

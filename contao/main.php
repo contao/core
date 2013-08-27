@@ -234,11 +234,13 @@ class Main extends Backend
 		$this->Template->coreOnlyMode = $GLOBALS['TL_LANG']['MSC']['coreOnlyMode'];
 		$this->Template->coreOnlyOff = specialchars($GLOBALS['TL_LANG']['MSC']['coreOnlyOff']);
 		$this->Template->coreOnlyHref = $this->addToUrl('smo=1');
-		$this->Template->needsCacheBuild = (!$GLOBALS['TL_CONFIG']['bypassCache'] && !is_dir(TL_ROOT . '/system/cache/dca'));
 		$this->Template->buildCacheHref = $this->addToUrl('bic=1');
 		$this->Template->buildCacheLink = $GLOBALS['TL_LANG']['MSC']['buildCacheLink'];
 		$this->Template->buildCacheText = $GLOBALS['TL_LANG']['MSC']['buildCacheText'];
 		$this->Template->isPopup = Input::get('popup');
+
+		// Hide the cache message in the repository manager (see #5966)
+		$this->Template->needsCacheBuild = (!$GLOBALS['TL_CONFIG']['bypassCache'] && (Input::get('do') != 'repository_manager' || !isset($_GET['install']) && !isset($_GET['uninstall']) && !isset($_GET['update'])) && !is_dir(TL_ROOT . '/system/cache/dca'));
 
 		// Front end preview links
 		if (defined('CURRENT_ID') && CURRENT_ID != '')
