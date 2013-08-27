@@ -126,6 +126,12 @@ class FileUpload extends \Backend
 					$this->log('File "'.$file['name'].'" was only partially uploaded' , 'Uploader uploadTo()', TL_ERROR);
 					$this->blnHasError = true;
 				}
+				elseif ($file['error'] > 0)
+				{
+					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileerror'], $file['error'], $file['name']));
+					$this->log('File "'.$file['name'].'" could not be uploaded (error '.$file['error'].')' , 'Uploader uploadTo()', TL_ERROR);
+					$this->blnHasError = true;
+				}
 			}
 
 			// File is too big

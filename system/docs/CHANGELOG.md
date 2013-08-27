@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.1.3 (2013-XX-XX)
+--------------------------
+
+### Fixed
+Handle all possible errors when uploading files (see #5934).
+
+
 Version 3.1.2 (2013-08-27)
 --------------------------
 

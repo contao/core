@@ -89,6 +89,9 @@
       <trans-unit id="ERR.fileheight">
         <source>File %s exceeds the maximum image height of %d pixels!</source>
       </trans-unit>
+      <trans-unit id="ERR.fileerror">
+        <source>Error %s occurred when uploading file %s!</source>
+      </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
       </trans-unit>
