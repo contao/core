@@ -832,6 +832,7 @@ class File extends \System
 			'qt'    => array('video/quicktime', 'iconVIDEO.gif'),
 			'rv'    => array('video/vnd.rn-realvideo', 'iconVIDEO.gif'),
 			'avi'   => array('video/x-msvideo', 'iconVIDEO.gif'),
+			'ogv'   => array('video/ogg', 'iconVIDEO.gif'),
 			'movie' => array('video/x-sgi-movie', 'iconVIDEO.gif')
 		);
 
