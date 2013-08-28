@@ -5,6 +5,15 @@ Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
 ### New
+Optionally follow redirects in the `Request` class.
+
+```
+$request = new Request();
+$request->redirect = true;
+$request->send("http://domain.tld/script.php");
+```
+
+### New
 Add basic authorization support to the `Request` class (see #6062).
 
 ### Improved

@@ -98,6 +98,27 @@ class Request
 	protected $strPassword;
 
 	/**
+	 * Follow redirects
+	 * @var boolean
+	 */
+	protected $blnFollowRedirects = false;
+
+
+	/**
+	 * Number of redirects
+	 * @var integer
+	 */
+	protected $intRedirects = 0;
+
+
+	/**
+	 * Maximum number of redirects
+	 * @var integer
+	 */
+	protected $intRedirectLimit = 3;
+
+
+	/**
 	 * Set the default values
 	 */
 	public function __construct()
@@ -112,8 +133,12 @@ class Request
 	 *
 	 * Supported keys:
 	 *
-	 * * data:   the request data
-	 * * method: the request method
+	 * * data:     the request data
+	 * * method:   the request method
+	 * * username: the auth username
+	 * * password: the auth password
+	 * * redirect: follow redirects
+	 * * rlimit:   maximum number of redirects
 	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
@@ -140,6 +165,14 @@ class Request
 				$this->strPassword = $varValue;
 				break;
 
+			case 'redirect':
+				$this->blnFollowRedirects = $varValue;
+				break;
+
+			case 'rlimit':
+				$this->intRedirectLimit = $varValue;
+				break;
+
 			default:
 				throw new \Exception(sprintf('Invalid argument "%s"', $strKey));
 				break;
@@ -157,6 +190,9 @@ class Request
 	 * * request:  the request string
 	 * * response: the response string
 	 * * headers:  the response headers array
+	 * * username: the auth username
+	 * * redirect: the follow redirects status
+	 * * rlimit:   the maximum number of redirects
 	 *
 	 * @param string $strKey The property key
 	 *
@@ -188,6 +224,14 @@ class Request
 
 			case 'username':
 				return $this->strUsername;
+				break;
+
+			case 'redirect':
+				return $this->blnFollowRedirects;
+				break;
+
+			case 'rlimit':
+				return $this->intRedirectLimit;
 				break;
 		}
 
@@ -380,11 +424,29 @@ class Request
 			$code = floor($code / 100) * 100;
 		}
 
-		$this->intCode = $code;
+		$this->intCode = intval($code);
 
-		if (!in_array(intval($code), array(200, 304)))
+		switch ($this->intCode)
 		{
-			$this->strError = $text ?: $responses[$code];
+			case 200:
+			case 304:
+				// Ok
+				break;
+
+			case 301:
+			case 302:
+			case 303:
+			case 307:
+				if ($this->blnFollowRedirects && $this->intRedirects < $this->intRedirectLimit && !empty($this->arrResponseHeaders['Location']))
+				{
+					++$this->intRedirects;
+					$this->send($this->arrResponseHeaders['Location']);
+				}
+				break;
+
+			default:
+				$this->strError = $text ?: $responses[$this->intCode];
+				break;
 		}
 	}
 }
