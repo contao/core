@@ -95,8 +95,10 @@ class Installer extends \Controller
 		}
 
 		return '
-  <table id="sql_table" style="margin-top:9px">'.$return.'
-  </table>' . "\n";
+<div id="sql_wrapper">
+  <table id="sql_table">'.$return.'
+  </table>
+</div>';
 	}
 
 
