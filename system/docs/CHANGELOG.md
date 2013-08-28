@@ -5,6 +5,10 @@ Version 3.1.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Update the `Database_Result` object when updating a model (see #6070). This
+will invalidate the query cache and prevent data inconsistencies.
+
+### Fixed
 Handle all possible errors when uploading files (see #5934).
 
 

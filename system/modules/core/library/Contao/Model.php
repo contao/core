@@ -155,6 +155,12 @@ abstract class Model
 	 */
 	public function __set($strKey, $varValue)
 	{
+		// Also update the result object (see #6070)
+		if (is_object($this->objResult) && isset($this->objResult->$strKey))
+		{
+			$this->objResult->$strKey = $varValue;
+		}
+
 		$this->arrData[$strKey] = $varValue;
 	}
 
