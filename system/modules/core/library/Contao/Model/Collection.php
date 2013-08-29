@@ -343,7 +343,7 @@ class Collection implements \Iterator
 	 */
 	public function valid()
 	{
-		return $this->intIndex >= 0 && $this->intIndex < count($this->arrModels);
+		return $this->intIndex >= 0 && $this->intIndex < $this->objResult->numRows;
 	}
 
 
