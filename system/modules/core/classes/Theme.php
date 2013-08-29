@@ -624,7 +624,7 @@ class Theme extends \Backend
 								// Do not use the FilesModel here – tables are locked!
 								$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE path=?")
 														  ->limit(1)
-														  ->executeUncached($value);
+														  ->execute($value);
 
 								$value = $objFile->id;
 							}
@@ -648,7 +648,7 @@ class Theme extends \Backend
 									// Do not use the FilesModel here – tables are locked!
 									$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE path=?")
 															  ->limit(1)
-															  ->executeUncached($vv);
+															  ->execute($vv);
 
 									$tmp[$kk] = $objFile->id;
 								}

@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.1.3 (2013-XX-XX)
 --------------------------
 
+### Changed
+Drop the database query cache (see #6070). This renders `executeUncached()` and
+`executeCached()` deprecated. Use `execute()` instead.
+
 ### Fixed
 Update the `Database_Result` object when updating a model (see #6070). This
 will invalidate the query cache and prevent data inconsistencies.
@@ -695,10 +699,6 @@ Optionally connect to the database via socket (see #5181).
 
 ### Improved
 Allow to scroll the page when moving elements via drag and drop (see #5081).
-
-### New
-Added the `Database\Statement::executeCached()` method, which replaces existing
-cache entries with the new result set (see #5310).
 
 ### Improved
 Use a local version of "Architects Daughter" in the back end (see #5312).

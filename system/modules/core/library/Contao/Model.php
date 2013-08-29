@@ -155,12 +155,6 @@ abstract class Model
 	 */
 	public function __set($strKey, $varValue)
 	{
-		// Also update the result object (see #6070)
-		if (is_object($this->objResult) && isset($this->objResult->$strKey))
-		{
-			$this->objResult->$strKey = $varValue;
-		}
-
 		$this->arrData[$strKey] = $varValue;
 	}
 
@@ -326,7 +320,7 @@ abstract class Model
 		{
 			// Reload the model data (might have been modified by default values or triggers)
 			$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-										   ->executeUncached($this->{static::$strPk});
+										   ->execute($this->{static::$strPk});
 
 			$this->setRow($res->row());
 		}
@@ -606,20 +600,7 @@ abstract class Model
 		}
 
 		$objStatement = static::preFind($objStatement);
-
-		// Optionally execute (un)cached (see #5102)
-		if (isset($arrOptions['cached']) && $arrOptions['cached'])
-		{
-			$objResult = $objStatement->executeCached($arrOptions['value']);
-		}
-		elseif (isset($arrOptions['uncached']) && $arrOptions['uncached'])
-		{
-			$objResult = $objStatement->executeUncached($arrOptions['value']);
-		}
-		else
-		{
-			$objResult = $objStatement->execute($arrOptions['value']);
-		}
+		$objResult = $objStatement->execute($arrOptions['value']);
 
 		if ($objResult->numRows < 1)
 		{
@@ -687,7 +668,7 @@ abstract class Model
 			'value'  => $varValue
 		));
 
-		return (int) \Database::getInstance()->prepare($strQuery)->executeUncached($varValue)->count;
+		return (int) \Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
 	}
 
 

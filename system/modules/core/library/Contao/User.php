@@ -427,7 +427,7 @@ abstract class User extends \System
 	{
 		$objResult = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . $strColumn . "=?")
 									->limit(1)
-									->executeUncached($varValue);
+									->execute($varValue);
 
 		if ($objResult->numRows > 0)
 		{
