@@ -164,6 +164,11 @@ abstract class Model
 	 */
 	public function __set($strKey, $varValue)
 	{
+		if ($this->$strKey === $varValue)
+		{
+			return;
+		}
+
 		$this->arrData[$strKey] = $varValue;
 		$this->arrModified[] = $strKey;
 	}
