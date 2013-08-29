@@ -23,7 +23,7 @@ namespace Contao\Model;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
  */
-class Collection
+class Collection implements \Iterator
 {
 
 	/**
@@ -329,6 +329,23 @@ class Collection
 		return $this;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
+	public function key()
+	{
+		return $this->intIndex;
+	}
+
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function valid()
+	{
+		return $this->intIndex >= 0 && $this->intIndex < count($this->arrModels);
+	}
+
 
 	/**
 	 * Reset the model
@@ -340,6 +357,15 @@ class Collection
 		$this->intIndex = -1;
 		$this->blnDone = false;
 		return $this;
+	}
+
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function rewind()
+	{
+		$this->reset();
 	}
 
 
