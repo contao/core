@@ -54,17 +54,15 @@ class ModuleRandomImage extends \Module
 			return '';
 		}
 
-		// Check for version 3 format
-		if (!is_numeric($this->multiSRC[0]))
-		{
-			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-		}
-
-		// Get the file entries from the database
-		$this->objFiles = \FilesModel::findMultipleByIds($this->multiSRC);
+		$this->objFiles = \FilesModel::findMultipleByUuids($this->multiSRC);
 
 		if ($this->objFiles === null)
 		{
+			if (!\Validator::isUuid($this->multiSRC[0]))
+			{
+				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+
 			return '';
 		}
 

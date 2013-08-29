@@ -46,14 +46,18 @@ class ContentImage extends \ContentElement
 			return '';
 		}
 
-		if (!is_numeric($this->singleSRC))
+		$objFile = \FilesModel::findByUuid($this->singleSRC);
+
+		if ($objFile === null)
 		{
-			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			if (!Validator::isUuid($this->singleSRC))
+			{
+				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+
+			return '';
 		}
-
-		$objFile = \FilesModel::findByPk($this->singleSRC);
-
-		if ($objFile === null || !is_file(TL_ROOT . '/' . $objFile->path))
+		elseif (!is_file(TL_ROOT . '/' . $objFile->path))
 		{
 			return '';
 		}

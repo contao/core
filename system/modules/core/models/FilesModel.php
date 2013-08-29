@@ -64,6 +64,32 @@ class FilesModel extends \Model
 
 
 	/**
+	 * Find multiple files by their UUIDs
+	 *
+	 * @param array $arrUuids   An array of file UUIDs
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model\Collection|null A collection of models or null if there are no files
+	 */
+	public static function findMultipleByUuids($arrUuids, array $arrOptions=array())
+	{
+		if (!is_array($arrUuids) || empty($arrUuids))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.uuid", $arrUuids);
+		}
+
+		return static::findBy(array("$t.uuid IN('" . implode("','", $arrUuids) . "')"), null, $arrOptions);
+	}
+
+
+	/**
 	 * Find multiple files by their paths
 	 *
 	 * @param array $arrPaths   An array of file paths

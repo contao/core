@@ -87,17 +87,18 @@ class FormSubmit extends \Widget
 	 */
 	public function generate()
 	{
-		if ($this->imageSubmit)
+		if ($this->imageSubmit && $this->singleSRC != '')
 		{
-			// Check for version 3 format
-			if ($this->singleSRC != '' && !is_numeric($this->singleSRC))
+			$objModel = \FilesModel::findByUuid($this->singleSRC);
+
+			if ($objModel === null)
 			{
-				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+				if (!\Validator::isUuid($this->singleSRC))
+				{
+					return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+				}
 			}
-
-			$objModel = \FilesModel::findByPk($this->singleSRC);
-
-			if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
 			{
 				return sprintf('<input type="image" src="%s" id="ctrl_%s" class="submit%s" title="%s" alt="%s"%s%s',
 								$objModel->path,

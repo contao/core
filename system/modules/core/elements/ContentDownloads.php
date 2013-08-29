@@ -68,17 +68,16 @@ class ContentDownloads extends \ContentElement
 			return '';
 		}
 
-		// Check for version 3 format
-		if (!is_numeric($this->multiSRC[0]))
-		{
-			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-		}
-
 		// Get the file entries from the database
-		$this->objFiles = \FilesModel::findMultipleByIds($this->multiSRC);
+		$this->objFiles = \FilesModel::findMultipleByUuids($this->multiSRC);
 
 		if ($this->objFiles === null)
 		{
+			if (!\Validator::isUuid($this->multiSRC[0]))
+			{
+				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+
 			return '';
 		}
 
@@ -111,7 +110,6 @@ class ContentDownloads extends \ContentElement
 
 		$files = array();
 		$auxDate = array();
-		$auxId = array();
 
 		$objFiles = $this->objFiles;
 		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
@@ -171,7 +169,6 @@ class ContentDownloads extends \ContentElement
 				);
 
 				$auxDate[] = $objFile->mtime;
-				$auxId[] = $objFiles->id;
 			}
 
 			// Folders
@@ -235,7 +232,6 @@ class ContentDownloads extends \ContentElement
 					);
 
 					$auxDate[] = $objFile->mtime;
-					$auxId[] = $objSubfiles->id;
 				}
 			}
 		}

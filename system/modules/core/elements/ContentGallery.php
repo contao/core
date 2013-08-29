@@ -68,17 +68,16 @@ class ContentGallery extends \ContentElement
 			return '';
 		}
 
-		// Check for version 3 format
-		if (!is_numeric($this->multiSRC[0]))
-		{
-			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-		}
-
 		// Get the file entries from the database
-		$this->objFiles = \FilesModel::findMultipleByIds($this->multiSRC);
+		$this->objFiles = \FilesModel::findMultipleByUuids($this->multiSRC);
 
 		if ($this->objFiles === null)
 		{
+			if (!\Validator::isUuid($this->multiSRC[0]))
+			{
+				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+
 			return '';
 		}
 
@@ -95,7 +94,6 @@ class ContentGallery extends \ContentElement
 
 		$images = array();
 		$auxDate = array();
-		$auxId = array();
 		$objFiles = $this->objFiles;
 
 		// Get all images
@@ -137,13 +135,12 @@ class ContentGallery extends \ContentElement
 				);
 
 				$auxDate[] = $objFile->mtime;
-				$auxId[] = $objFiles->id;
 			}
 
 			// Folders
 			else
 			{
-				$objSubfiles = \FilesModel::findByPid($objFiles->id);
+				$objSubfiles = \FilesModel::findByPid($objFiles->uuid);
 
 				if ($objSubfiles === null)
 				{
@@ -185,7 +182,6 @@ class ContentGallery extends \ContentElement
 					);
 
 					$auxDate[] = $objFile->mtime;
-					$auxId[] = $objSubfiles->id;
 				}
 			}
 		}
