@@ -475,6 +475,47 @@ class Updater extends \Controller
 
 
 	/**
+	 * Version 3.2.0 update
+	 */
+	public function run32Update()
+	{
+		// Adjust the DB structure
+		$this->Database->query("ALTER TABLE `tl_files` ADD `uuid` varchar(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_files` ADD UNIQUE KEY `uuid` (`uuid`)");
+		$this->Database->query("ALTER TABLE `tl_files` CHANGE `pid` `pid` varchar(36) NULL");
+
+		$objFiles = $this->Database->query("SELECT id FROM tl_files");
+
+		// Generate the UUIDs
+		while ($objFiles->next())
+		{
+			$this->Database->prepare("UPDATE tl_files SET uuid=? WHERE id=?")
+						   ->execute($this->Database->getUuid(), $objFiles->id);
+		}
+
+		$objFiles = $this->Database->query("SELECT pid FROM tl_files WHERE pid>0 GROUP BY pid");
+
+		// Adjust the parent IDs
+		while ($objFiles->next())
+		{
+			$objParent = $this->Database->prepare("SELECT uuid FROM tl_files WHERE id=?")
+										->execute($objFiles->pid);
+
+			if ($objParent->numRows < 1)
+			{
+				throw new \Exception('Invalid parent ID ' . $objFiles->pid);
+			}
+
+			$this->Database->prepare("UPDATE tl_files SET pid=? WHERE pid=?")
+						   ->execute($objParent->uuid, $objFiles->pid);
+		}
+
+		// Update the fields
+		$this->updateFileTreeFields();
+	}
+
+
+	/**
 	 * Scan the upload folder and create the database entries
 	 *
 	 * @param string  $strPath The target folder
@@ -514,12 +555,12 @@ class Updater extends \Controller
 		foreach ($arrFolders as $strFolder)
 		{
 			$objFolder = new \Folder($strFolder);
+			$strUuid = $this->Database->getUuid();
 
-			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, hash) VALUES (?, ?, ?, 'folder', ?, ?)")
-								 ->execute($pid, time(), basename($strFolder), $strFolder, $objFolder->hash)
-								 ->insertId;
+			$this->Database->prepare("INSERT INTO tl_files (pid, tstamp, uuid, name, type, path, hash) VALUES (?, ?, ?, ?, 'folder', ?, ?)")
+						   ->execute($pid, time(), $strUuid, basename($strFolder), $strFolder, $objFolder->hash);
 
-			$this->scanUploadFolder($strFolder, $id);
+			$this->scanUploadFolder($strFolder, $strUuid);
 		}
 
 		// Files
@@ -542,12 +583,12 @@ class Updater extends \Controller
 			}
 
 			$objFile = new \File($strFile, true);
+			$strUuid = $this->Database->getUuid();
 
-			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, extension, hash) VALUES (?, ?, ?, 'file', ?, ?, ?)")
-								 ->execute($pid, time(), basename($strFile), $strFile, $objFile->extension, $objFile->hash)
-								 ->insertId;
+			$this->Database->prepare("INSERT INTO tl_files (pid, tstamp, uuid, name, type, path, extension, hash) VALUES (?, ?, ?, ?, 'file', ?, ?, ?)")
+						   ->execute($pid, time(), $strUuid, basename($strFile), $strFile, $objFile->extension, $objFile->hash);
 
-			$arrMapper[basename($strFile)] = $id;
+			$arrMapper[basename($strFile)] = $strUuid;
 		}
 
 		// Insert the meta data AFTER the file entries have been created
@@ -557,7 +598,7 @@ class Updater extends \Controller
 			{
 				if (isset($arrMapper[$file]))
 				{
-					$this->Database->prepare("UPDATE tl_files SET meta=? WHERE id=?")
+					$this->Database->prepare("UPDATE tl_files SET meta=? WHERE uuid=?")
 								   ->execute(serialize($meta), $arrMapper[$file]);
 				}
 			}
@@ -634,12 +675,22 @@ class Updater extends \Controller
 
 			while ($objRow->next())
 			{
-				if (!is_numeric($objRow->$field))
+				// Numeric ID to UUID
+				if (is_numeric($objRow->$field))
+				{
+					$objFile = \FilesModel::findByPk($objRow->$field);
+
+					$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
+								   ->execute($objFile->uuid, $objRow->id);
+				}
+
+				// Path to UUID
+				elseif (!\Validator::isUuid($objRow->$field))
 				{
 					$objFile = \FilesModel::findByPath($objRow->$field);
 
 					$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
-								   ->execute($objFile->id, $objRow->id);
+								   ->execute($objFile->uuid, $objRow->id);
 				}
 			}
 		}
@@ -661,10 +712,18 @@ class Updater extends \Controller
 
 				foreach ($arrPaths as $k=>$v)
 				{
-					if (!is_numeric($v))
+					// Numeric ID to UUID
+					if (is_numeric($v))
+					{
+						$objFile = \FilesModel::findByPk($v);
+						$arrPaths[$k] = $objFile->uuid;
+					}
+
+					// Path to UUID
+					elseif (!\Validator::isUuid($v))
 					{
 						$objFile = \FilesModel::findByPath($v);
-						$arrPaths[$k] = $objFile->id;
+						$arrPaths[$k] = $objFile->uuid;
 					}
 				}
 

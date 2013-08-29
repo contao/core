@@ -34,6 +34,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			(
 				'id' => 'primary',
 				'pid' => 'index',
+				'uuid' => 'unique',
 				'extension' => 'index'
 			)
 		)
@@ -123,11 +124,15 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		),
 		'pid' => array
 		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "varchar(36) NULL"
 		),
 		'tstamp' => array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'uuid' => array
+		(
+			'sql'                     => "varchar(36) NULL"
 		),
 		'type' => array
 		(
