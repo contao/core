@@ -268,7 +268,7 @@ class Ajax extends \Backend
 				}
 
 				// Validate the request data
-				if ($GLOBALS['TL_DCA'][$dc->table]['config']['dataContainer'] != 'File' && $this->Database->tableExists($dc->table))
+				if ($GLOBALS['TL_DCA'][$dc->table]['config']['dataContainer'] != 'File' && $intId > 0 && $this->Database->tableExists($dc->table))
 				{
 					$objRow = $this->Database->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
 											 ->execute($intId);
@@ -308,7 +308,7 @@ class Ajax extends \Backend
 					$GLOBALS['TL_CONFIG'][$strField] = $varValue;
 					$arrAttribs['activeRecord'] = null;
 				}
-				elseif ($this->Database->tableExists($dc->table))
+				elseif ($intId > 0 && $this->Database->tableExists($dc->table))
 				{
 					$objRow->$strField = $varValue;
 					$arrAttribs['activeRecord'] = $objRow;
