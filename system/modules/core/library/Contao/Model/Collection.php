@@ -386,7 +386,18 @@ class Collection
 		}
 
 		$strClass = \Model::getClassFromTable($this->strTable);
-		$this->arrModels[$this->intIndex + 1] = new $strClass($this->objResult);
+		$strPkName = $strClass::getPk();
+		$varPk = $this->objResult->$strPkName;
+		$objModel = $this->objResult->getDatabase()->getModelRegistry()->fetch($this->strTable, $varPk);
+
+		if ($objModel)
+		{
+			$this->arrModels[$this->intIndex + 1] = $objModel;
+		}
+		else
+		{
+			$this->arrModels[$this->intIndex + 1] = new $strClass($this->objResult);
+		}
 
 		return true;
 	}

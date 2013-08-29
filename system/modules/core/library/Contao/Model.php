@@ -134,6 +134,8 @@ abstract class Model
 			}
 
 			$this->setRow($arrData); // see #5439
+			
+			$objResult->getDatabase()->getModelRegistry()->register($this);
 		}
 
 		$this->objResult = $objResult;
@@ -340,7 +342,15 @@ abstract class Model
 											   ->execute($this->{static::$strPk})
 											   ->affectedRows;
 
-		$this->arrData[static::$strPk] = null; // see #6162
+		if ($intAffected)
+		{
+			// unregister this model from the registry
+			$this->objResult->getDatabase()->getModelRegistry()->unregister($this);
+
+			// remove the primary key, it is invalid now
+			$this->arrData[static::$strPk] = null; // see #6162
+		}
+
 		return $intAffected;
 	}
 
@@ -417,6 +427,22 @@ abstract class Model
 	 */
 	public static function findByPk($varValue, array $arrOptions=array())
 	{
+		if (isset($arrOptions['connection']))
+		{
+			$objDatabase = $arrOptions['connection'];
+		}
+		else
+		{
+			$objDatabase = \Database::getInstance();
+		}
+
+		$objModel = $objDatabase->getModelRegistry()->fetch(static::$strTable, $varValue);
+
+		if ($objModel)
+		{
+			return $objModel;
+		}
+
 		$arrOptions = array_merge
 		(
 			array
@@ -667,6 +693,16 @@ abstract class Model
 
 		if ($arrOptions['return'] == 'Model')
 		{
+			$strPkName = static::getPk();
+			$varPk = $objResult->$strPkName;
+
+			$objModel = $objDatabase->getModelRegistry()->fetch(static::$strTable, $varPk);
+
+			if ($objModel)
+			{
+				return $objModel;
+			}
+
 			return new static($objResult);
 		}
 		else
