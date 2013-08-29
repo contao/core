@@ -315,6 +315,20 @@ class Mysql extends \Database
 
 
 	/**
+	 * Return a universal unique identifier
+	 *
+	 * @return string The UUID string
+	 */
+	protected function get_uuid()
+	{
+		$objUuid = @mysql_query("SELECT UUID() AS uuid");
+		$objUuid = @mysql_fetch_object($objUuid);
+
+		return $objUuid->uuid;
+	}
+
+
+	/**
 	 * Create a Database\Statement object
 	 *
 	 * @param resource $resConnection        The connection ID
