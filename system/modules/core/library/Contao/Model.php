@@ -274,17 +274,17 @@ abstract class Model
 
 		if (isset($this->{static::$strPk}) && !$blnForceInsert)
 		{
-			\Database::getInstance()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
-									->set($arrSet)
-									->execute($this->{static::$strPk});
+			$this->objResult->getDatabase()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
+										   ->set($arrSet)
+										   ->execute($this->{static::$strPk});
 
 			$this->postSave(self::UPDATE);
 		}
 		else
 		{
-			$stmt = \Database::getInstance()->prepare("INSERT INTO " . static::$strTable . " %s")
-											->set($arrSet)
-											->execute();
+			$stmt = $this->objResult->getDatabase()->prepare("INSERT INTO " . static::$strTable . " %s")
+												   ->set($arrSet)
+												   ->execute();
 
 			if (static::$strPk == 'id')
 			{
@@ -321,8 +321,8 @@ abstract class Model
 		if ($intType == self::INSERT)
 		{
 			// Reload the model data (might have been modified by default values or triggers)
-			$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-										   ->execute($this->{static::$strPk});
+			$res = $this->objResult->getDatabase()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+												  ->execute($this->{static::$strPk});
 
 			$this->setRow($res->row());
 		}
@@ -393,7 +393,7 @@ abstract class Model
 			(
 				array
 				(
-					'order' => \Database::getInstance()->findInSet($strField, $arrValues)
+					'order' => $this->objResult->getDatabase()->findInSet($strField, $arrValues)
 				),
 
 				$arrOptions
@@ -628,7 +628,16 @@ abstract class Model
 		$arrOptions['table'] = static::$strTable;
 		$strQuery = \Model\QueryBuilder::find($arrOptions);
 
-		$objStatement = \Database::getInstance()->prepare($strQuery);
+		if (isset($arrOptions['connection']))
+		{
+			$objDatabase = $arrOptions['connection'];
+		}
+		else
+		{
+			$objDatabase = \Database::getInstance();
+		}
+
+		$objStatement = $objDatabase->prepare($strQuery);
 
 		// Defaults for limit and offset
 		if (!isset($arrOptions['limit']))
@@ -715,7 +724,16 @@ abstract class Model
 			'value'  => $varValue
 		));
 
-		return (int) \Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
+		if (isset($arrOptions['connection']))
+		{
+			$objDatabase = $arrOptions['connection'];
+		}
+		else
+		{
+			$objDatabase = \Database::getInstance();
+		}
+
+		return (int) $objDatabase->prepare($strQuery)->execute($varValue)->count;
 	}
 
 
