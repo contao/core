@@ -261,6 +261,26 @@ abstract class Model
 
 
 	/**
+	 * Safe merge with the given array, but preserve modified unsaved fields.
+	 *
+	 * @param array $arrData The data record
+	 *
+	 * @return \Model The model object
+	 */
+	public function safeMerge(array $arrData)
+	{
+		foreach ($arrData as $key => $value)
+		{
+			if (!in_array($key, $this->arrModified) && $this->arrData[$key] != $value)
+			{
+				$this->arrData[$key] = $value;
+			}
+		}
+		return $this;
+	}
+
+
+	/**
 	 * Return the object instance
 	 *
 	 * @return \Model The model object
@@ -720,6 +740,7 @@ abstract class Model
 
 			if ($objModel)
 			{
+				$objModel->safeMerge($objResult->row());
 				return $objModel;
 			}
 

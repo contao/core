@@ -392,6 +392,7 @@ class Collection
 
 		if ($objModel)
 		{
+			$objModel->safeMerge($this->objResult->row());
 			$this->arrModels[$this->intIndex + 1] = $objModel;
 		}
 		else
