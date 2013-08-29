@@ -71,6 +71,12 @@ abstract class Model
 	protected $arrData = array();
 
 	/**
+	 * List of modified keys
+	 * @var array
+	 */
+	protected $arrModified = array();
+
+	/**
 	 * Relations
 	 * @var array
 	 */
@@ -90,6 +96,7 @@ abstract class Model
 	 */
 	public function __construct(\Database\Result $objResult=null)
 	{
+		$this->arrModified = array();
 		$objRelations = new \DcaExtractor(static::$strTable);
 		$this->arrRelations = $objRelations->getRelations();
 
@@ -160,6 +167,7 @@ abstract class Model
 	public function __set($strKey, $varValue)
 	{
 		$this->arrData[$strKey] = $varValue;
+		$this->arrModified[] = $strKey;
 	}
 
 
@@ -272,18 +280,28 @@ abstract class Model
 	 */
 	public function save($blnForceInsert=false)
 	{
-		$arrSet = $this->preSave($this->row());
-
 		if (isset($this->{static::$strPk}) && !$blnForceInsert)
 		{
+			$arrRow = $this->row();
+			$arrSet = array();
+			foreach ($this->arrModified as $strField)
+			{
+				$arrSet[$strField] = $arrRow[$strField];
+			}
+			$arrSet = $this->preSave($arrSet);
+
 			$this->objResult->getDatabase()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
 										   ->set($arrSet)
 										   ->execute($this->{static::$strPk});
+
+			$this->arrModified = array();
 
 			$this->postSave(self::UPDATE);
 		}
 		else
 		{
+			$arrSet = $this->preSave($this->row());
+
 			$stmt = $this->objResult->getDatabase()->prepare("INSERT INTO " . static::$strTable . " %s")
 												   ->set($arrSet)
 												   ->execute();
@@ -292,6 +310,8 @@ abstract class Model
 			{
 				$this->id = $stmt->insertId;
 			}
+
+			$this->arrModified = array();
 
 			$this->postSave(self::INSERT);
 		}
