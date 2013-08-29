@@ -155,6 +155,7 @@ class ContentDownloads extends \ContentElement
 				$files[$objFiles->path] = array
 				(
 					'id'        => $objFiles->id,
+					'uuid'      => $objFiles->uuid,
 					'name'      => $objFile->basename,
 					'title'     => $arrMeta['title'],
 					'link'      => $arrMeta['title'],
@@ -218,6 +219,7 @@ class ContentDownloads extends \ContentElement
 					$files[$objSubfiles->path] = array
 					(
 						'id'        => $objSubfiles->id,
+						'uuid'      => $objSubfiles->uuid,
 						'name'      => $objFile->basename,
 						'title'     => $arrMeta['title'],
 						'link'      => $arrMeta['title'],
@@ -261,16 +263,15 @@ class ContentDownloads extends \ContentElement
 				if ($this->orderSRC != '')
 				{
 					// Turn the order string into an array and remove all values
-					$arrOrder = explode(',', $this->orderSRC);
-					$arrOrder = array_flip(array_map('intval', $arrOrder));
+					$arrOrder = array_flip(explode(',', $this->orderSRC));
 					$arrOrder = array_map(function(){}, $arrOrder);
 
 					// Move the matching elements to their position in $arrOrder
 					foreach ($files as $k=>$v)
 					{
-						if (array_key_exists($v['id'], $arrOrder))
+						if (array_key_exists($v['uuid'], $arrOrder))
 						{
-							$arrOrder[$v['id']] = $v;
+							$arrOrder[$v['uuid']] = $v;
 							unset($files[$k]);
 						}
 					}

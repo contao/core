@@ -127,6 +127,7 @@ class ContentGallery extends \ContentElement
 				$images[$objFiles->path] = array
 				(
 					'id'        => $objFiles->id,
+					'uuid'      => $objFiles->uuid,
 					'name'      => $objFile->basename,
 					'singleSRC' => $objFiles->path,
 					'alt'       => $arrMeta['title'],
@@ -174,6 +175,7 @@ class ContentGallery extends \ContentElement
 					$images[$objSubfiles->path] = array
 					(
 						'id'        => $objSubfiles->id,
+						'uuid'      => $objSubfiles->uuid,
 						'name'      => $objFile->basename,
 						'singleSRC' => $objSubfiles->path,
 						'alt'       => $arrMeta['title'],
@@ -211,16 +213,15 @@ class ContentGallery extends \ContentElement
 				if ($this->orderSRC != '')
 				{
 					// Turn the order string into an array and remove all values
-					$arrOrder = explode(',', $this->orderSRC);
-					$arrOrder = array_flip(array_map('intval', $arrOrder));
+					$arrOrder = array_flip(explode(',', $this->orderSRC));
 					$arrOrder = array_map(function(){}, $arrOrder);
 
 					// Move the matching elements to their position in $arrOrder
 					foreach ($images as $k=>$v)
 					{
-						if (array_key_exists($v['id'], $arrOrder))
+						if (array_key_exists($v['uuid'], $arrOrder))
 						{
-							$arrOrder[$v['id']] = $v;
+							$arrOrder[$v['uuid']] = $v;
 							unset($images[$k]);
 						}
 					}

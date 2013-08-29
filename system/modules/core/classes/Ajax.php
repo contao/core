@@ -305,7 +305,7 @@ class Ajax extends \Backend
 					{
 						foreach ($varValue as $k=>$v)
 						{
-							$varValue[$k] = \Dbafs::addResource($v)->id;
+							$varValue[$k] = \Dbafs::addResource($v)->uuid;
 						}
 					}
 
