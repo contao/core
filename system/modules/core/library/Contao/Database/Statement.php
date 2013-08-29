@@ -34,6 +34,12 @@ abstract class Statement
 {
 
 	/**
+	 * The database connection
+	 * @var \Database
+	 */
+	protected $objDatabase;
+
+	/**
 	 * Connection ID
 	 * @var resource
 	 */
@@ -67,18 +73,20 @@ abstract class Statement
 	/**
 	 * Validate the connection resource and store the query string
 	 *
-	 * @param resource $resConnection        The connection resource
-	 * @param boolean  $blnDisableAutocommit Optionally disable autocommitting
+	 * @param \Database $objDatabase          The database connection
+	 * @param resource  $resConnection        The connection resource
+	 * @param boolean   $blnDisableAutocommit Optionally disable autocommitting
 	 *
 	 * @throws \Exception If $resConnection is not a valid resource
 	 */
-	public function __construct($resConnection, $blnDisableAutocommit=false)
+	public function __construct(\Database $objDatabase, $resConnection, $blnDisableAutocommit=false)
 	{
 		if (!is_resource($resConnection) && !is_object($resConnection))
 		{
 			throw new \Exception('Invalid connection resource');
 		}
 
+		$this->objDatabase = $objDatabase;
 		$this->resConnection = $resConnection;
 		$this->blnDisableAutocommit = $blnDisableAutocommit;
 	}
@@ -290,7 +298,7 @@ abstract class Statement
 		}
 
 		// Instantiate a result object
-		$objResult = $this->createResult($this->resResult, $this->strQuery);
+		$objResult = $this->createResult($this->objDatabase, $this->resResult, $this->strQuery);
 		$this->debugQuery($objResult);
 
 		return $objResult;
@@ -481,12 +489,13 @@ abstract class Statement
 	/**
 	 * Create a Database\Result object
 	 *
-	 * @param resource $resResult The database result
-	 * @param string   $strQuery  The query string
+	 * @param \Database $objDatabase The database connection
+	 * @param resource  $resResult   The database result
+	 * @param string    $strQuery    The query string
 	 *
 	 * @return \Database\Result The result object
 	 */
-	abstract protected function createResult($resResult, $strQuery);
+	abstract protected function createResult(\Database $objDatabase, $resResult, $strQuery);
 
 
 	/**
