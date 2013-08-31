@@ -282,7 +282,9 @@ class Request
 			'Connection' => 'Connection: close'
 		);
 
-                if ($this->strUsername != '') {
+                if (isset($uri['user'])) {
+                    $default['Authorization'] = 'Authorization: Basic ' . base64_encode($uri['user'] . ':' . $uri['pass']);
+                } elseif ($this->strUsername != '') {
                     $default['Authorization'] = 'Authorization: Basic ' . base64_encode($this->strUsername . ':' . $this->strPassword);
                 }
                 
