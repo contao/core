@@ -689,6 +689,12 @@ abstract class Controller extends \System
 			// Replace the tag
 			switch (strtolower($elements[0]))
 			{
+				// Line breaks
+				case 'br':
+				case 'break':
+					$arrCache[$strTag] = '<br' . ($objPage->outputFormat == 'xhtml' ? ' />' : '>');
+					break;
+
 				// Date
 				case 'date':
 					$arrCache[$strTag] = \Date::parse($elements[1] ?: $GLOBALS['TL_CONFIG']['dateFormat']);
