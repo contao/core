@@ -691,7 +691,6 @@ abstract class Controller extends \System
 			{
 				// Line breaks
 				case 'br':
-				case 'break':
 					$arrCache[$strTag] = '<br' . ($objPage->outputFormat == 'xhtml' ? ' />' : '>');
 					break;
 
