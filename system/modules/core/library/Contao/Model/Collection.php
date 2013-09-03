@@ -23,7 +23,7 @@ namespace Contao\Model;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
  */
-class Collection implements \Iterator
+class Collection implements \Countable, \Iterator
 {
 
 	/**
