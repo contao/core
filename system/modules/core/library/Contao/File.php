@@ -179,9 +179,12 @@ class File extends \System
 		{
 			case 'size':
 			case 'filesize':
+				if(!(file_exists(TL_ROOT . '/' . $this->strFile)))
+				{
+					return null;
+				}
 				return filesize(TL_ROOT . '/' . $this->strFile);
 				break;
-
 			case 'name':
 			case 'basename':
 				if (!isset($this->arrPathinfo[$strKey]))
