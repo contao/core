@@ -570,7 +570,7 @@ class PageRegular extends \Frontend
 			}
 
 			// Get the file entries from the database
-			$objFiles = \FilesModel::findMultipleByIds($arrExternal);
+			$objFiles = \FilesModel::findMultipleByUuids($arrExternal);
 
 			if ($objFiles !== null)
 			{

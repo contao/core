@@ -131,17 +131,17 @@ class FilesModel extends \Model
 
 
 	/**
-	 * Find multiple files by ID and a list of extensions
+	 * Find multiple files by UUID and a list of extensions
 	 *
-	 * @param array $arrIds        An array of file IDs
+	 * @param array $arrUuids      An array of file UUIDs
 	 * @param array $arrExtensions An array of file extensions
 	 * @param array $arrOptions    An optional options array
 	 *
 	 * @return \Model\Collection|null A collection of models or null of there are no matching files
 	 */
-	public static function findMultipleByIdsAndExtensions($arrIds, $arrExtensions, array $arrOptions=array())
+	public static function findMultipleByUuidsAndExtensions($arrUuids, $arrExtensions, array $arrOptions=array())
 	{
-		if (!is_array($arrIds) || empty($arrIds) || !is_array($arrExtensions) || empty($arrExtensions))
+		if (!is_array($arrUuids) || empty($arrUuids) || !is_array($arrExtensions) || empty($arrExtensions))
 		{
 			return null;
 		}
@@ -158,10 +158,10 @@ class FilesModel extends \Model
 
 		if (!isset($arrOptions['order']))
 		{
-			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.uuid", $arrUuids);
 		}
 
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ") AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, $arrOptions);
+		return static::findBy(array("$t.uuid IN('" . implode("','", $arrUuids) . "') AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, $arrOptions);
 	}
 
 

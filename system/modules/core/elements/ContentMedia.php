@@ -59,7 +59,7 @@ class ContentMedia extends \ContentElement
 			return '';
 		}
 
-		$objFiles = \FilesModel::findMultipleByIdsAndExtensions($source, array('mp4','m4v','mov','wmv','webm','ogv','m4a','mp3','wma','mpeg','wav','ogg'));
+		$objFiles = \FilesModel::findMultipleByUuidsAndExtensions($source, array('mp4','m4v','mov','wmv','webm','ogv','m4a','mp3','wma','mpeg','wav','ogg'));
 
 		if ($objFiles === null)
 		{

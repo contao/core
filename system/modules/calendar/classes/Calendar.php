@@ -445,7 +445,7 @@ class Calendar extends \Frontend
 
 			if (is_array($arrEnclosure))
 			{
-				$objFile = \FilesModel::findMultipleByIds($arrEnclosure);
+				$objFile = \FilesModel::findMultipleByUuids($arrEnclosure);
 
 				if ($objFile !== null)
 				{

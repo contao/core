@@ -754,7 +754,7 @@ class Theme extends \Backend
 
 		if (!empty($arrFolders) && is_array($arrFolders))
 		{
-			$objFolders = \FilesModel::findMultipleByIds($arrFolders);
+			$objFolders = \FilesModel::findMultipleByUuids($arrFolders);
 
 			if ($objFolders !== null)
 			{
@@ -954,7 +954,7 @@ class Theme extends \Backend
 
 				if (!empty($arrFiles) && is_array($arrFiles))
 				{
-					$objFiles = \FilesModel::findMultipleByIds($arrFiles);
+					$objFiles = \FilesModel::findMultipleByUuids($arrFiles);
 
 					if ($objFiles !== null)
 					{
