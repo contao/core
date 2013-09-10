@@ -140,7 +140,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		),
 		'path' => array
 		(
-			'sql'                     => "blob NULL"
+			'sql'                     => "text NULL"
 		),
 		'extension' => array
 		(

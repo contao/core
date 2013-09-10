@@ -234,18 +234,19 @@ class Updater extends \Controller
 		$this->Database->query(
 			"CREATE TABLE `tl_files` (
 			  `id` int(10) unsigned NOT NULL auto_increment,
-			  `pid` int(10) unsigned NOT NULL default '0',
+			  `pid` char(36) NULL,
 			  `tstamp` int(10) unsigned NOT NULL default '0',
+			  `uuid` char(36) NULL,
 			  `type` varchar(16) NOT NULL default '',
-			  `path` varchar(255) NOT NULL default '',
+			  `path` blob NULL,
 			  `extension` varchar(16) NOT NULL default '',
 			  `hash` varchar(32) NOT NULL default '',
 			  `found` char(1) NOT NULL default '1',
-			  `name` varchar(64) NOT NULL default '',
+			  `name` varbinary(255) NOT NULL default '',
 			  `meta` blob NULL,
 			  PRIMARY KEY  (`id`),
 			  KEY `pid` (`pid`),
-			  UNIQUE KEY `path` (`path`),
+			  UNIQUE KEY `uuid` (`uuid`),
 			  KEY `extension` (`extension`)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
 		);
@@ -464,10 +465,11 @@ class Updater extends \Controller
 		$this->Database->query("ALTER TABLE `tl_style` CHANGE `whitespace` `whitespace` varchar(8) NOT NULL default ''");
 		$this->Database->query("UPDATE `tl_style` SET `whitespace`='nowrap' WHERE `whitespace`!=''");
 
-		// Update the tl_files table (see #5598)
-		$this->Database->query("ALTER TABLE `tl_files` DROP INDEX `path`");
-		$this->Database->query("ALTER TABLE `tl_files` CHANGE `path` `path` blob NULL");
-		$this->Database->query("ALTER TABLE `tl_files` ADD UNIQUE KEY `pid_name` (`pid`, `name`)");
+		// Drop the tl_files.path index (see #5598)
+		if ($this->Database->indexExists('path', 'tl_files'))
+		{
+			$this->Database->query("ALTER TABLE `tl_files` DROP INDEX `path`");
+		}
 
 		// Remove the "mooType" field (triggers the version 3.1 update)
 		$this->Database->query("ALTER TABLE `tl_content` DROP `mooType`");
@@ -480,9 +482,9 @@ class Updater extends \Controller
 	public function run32Update()
 	{
 		// Adjust the DB structure
-		$this->Database->query("ALTER TABLE `tl_files` ADD `uuid` varchar(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_files` ADD `uuid` char(36) NULL");
 		$this->Database->query("ALTER TABLE `tl_files` ADD UNIQUE KEY `uuid` (`uuid`)");
-		$this->Database->query("ALTER TABLE `tl_files` CHANGE `pid` `pid` varchar(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_files` CHANGE `pid` `pid` char(36) NULL");
 
 		$objFiles = $this->Database->query("SELECT id FROM tl_files");
 
@@ -512,6 +514,32 @@ class Updater extends \Controller
 
 		// Update the fields
 		$this->updateFileTreeFields();
+
+		// Change the singleSRC fields
+		$this->Database->query("ALTER TABLE `tl_content` CHANGE `singleSRC` `singleSRC` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_content` CHANGE `posterSRC` `posterSRC` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_form_field` CHANGE `uploadFolder` `uploadFolder` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_form_field` CHANGE `singleSRC` `singleSRC` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_member` CHANGE `homeDir` `homeDir` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_module` CHANGE `singleSRC` `singleSRC` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_module` CHANGE `reg_homeDir` `reg_homeDir` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_theme` CHANGE `screenshot` `screenshot` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_calendar_events` CHANGE `singleSRC` `singleSRC` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_faq` CHANGE `singleSRC` `singleSRC` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_news` CHANGE `singleSRC` `singleSRC` char(36) NULL");
+
+		// Replace the empty string with null
+		$this->Database->query("UPDATE `tl_content` SET `singleSRC`=NULL WHERE `singleSRC`=''");
+		$this->Database->query("UPDATE `tl_content` SET `posterSRC`=NULL WHERE `posterSRC`=''");
+		$this->Database->query("UPDATE `tl_form_field` SET `uploadFolder`=NULL WHERE `uploadFolder`=''");
+		$this->Database->query("UPDATE `tl_form_field` SET `singleSRC`=NULL WHERE `singleSRC`=''");
+		$this->Database->query("UPDATE `tl_member` SET `homeDir`=NULL WHERE `homeDir`=''");
+		$this->Database->query("UPDATE `tl_module` SET `singleSRC`=NULL WHERE `singleSRC`=''");
+		$this->Database->query("UPDATE `tl_module` SET `reg_homeDir`=NULL WHERE `reg_homeDir`=''");
+		$this->Database->query("UPDATE `tl_theme` SET `screenshot`=NULL WHERE `screenshot`=''");
+		$this->Database->query("UPDATE `tl_calendar_events` SET `singleSRC`=NULL WHERE `singleSRC`=''");
+		$this->Database->query("UPDATE `tl_faq` SET `singleSRC`=NULL WHERE `singleSRC`=''");
+		$this->Database->query("UPDATE `tl_news` SET `singleSRC`=NULL WHERE `singleSRC`=''");
 	}
 
 
