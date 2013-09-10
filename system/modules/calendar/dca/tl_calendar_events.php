@@ -291,7 +291,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes'], 'fieldType'=>'radio', 'mandatory'=>true),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "char(36) NULL"
 		),
 		'alt' => array
 		(

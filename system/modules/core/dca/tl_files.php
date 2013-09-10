@@ -124,7 +124,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		),
 		'pid' => array
 		(
-			'sql'                     => "varchar(36) NULL"
+			'sql'                     => "char(36) NULL"
 		),
 		'tstamp' => array
 		(
@@ -132,7 +132,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		),
 		'uuid' => array
 		(
-			'sql'                     => "varchar(36) NULL"
+			'sql'                     => "char(36) NULL"
 		),
 		'type' => array
 		(

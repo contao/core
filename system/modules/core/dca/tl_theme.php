@@ -189,7 +189,7 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes'], 'fieldType'=>'radio'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "char(36) NULL"
 		),
 		'templates' => array
 		(
