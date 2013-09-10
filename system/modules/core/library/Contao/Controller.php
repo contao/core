@@ -2619,12 +2619,7 @@ abstract class Controller extends \System
 		{
 			if ($objFiles->type == 'file')
 			{
-				if (!in_array($objFiles->extension, $allowedDownload))
-				{
-					continue;
-				}
-				
-				if (!file_exists(TL_ROOT . '/' . $objFiles->path))
+				if (!in_array($objFiles->extension, $allowedDownload) || !is_file(TL_ROOT . '/' . $objFiles->path))
 				{
 					continue;
 				}
