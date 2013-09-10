@@ -430,7 +430,7 @@ class Calendar extends \Frontend
 		// Add the article image as enclosure
 		if ($objEvent->addImage)
 		{
-			$objFile = \FilesModel::findByPk($objEvent->singleSRC);
+			$objFile = \FilesModel::findByUuid($objEvent->singleSRC);
 
 			if ($objFile !== null)
 			{

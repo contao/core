@@ -1534,7 +1534,7 @@ class tl_content extends Backend
 			return $varValue;
 		}
 
-		$objFile = \FilesModel::findByPk($varValue);
+		$objFile = \FilesModel::findByUuid($varValue);
 
 		if ($objFile !== null)
 		{

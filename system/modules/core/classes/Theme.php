@@ -931,7 +931,7 @@ class Theme extends \Backend
 			// Replace the IDs of singleSRC fields with their path (see #4952)
 			elseif (($t == 'tl_theme' && $k == 'screenshot') || ($t == 'tl_module' && $k == 'singleSRC') || ($t == 'tl_module' && $k == 'reg_homeDir'))
 			{
-				$objFile = \FilesModel::findByPk($v);
+				$objFile = \FilesModel::findByUuid($v);
 
 				if ($objFile !== null)
 				{

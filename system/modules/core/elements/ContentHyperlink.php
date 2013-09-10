@@ -61,7 +61,7 @@ class ContentHyperlink extends \ContentElement
 		// Use an image instead of the title
 		if ($this->useImage && $this->singleSRC != '' && is_numeric($this->singleSRC))
 		{
-			$objModel = \FilesModel::findByPk($this->singleSRC);
+			$objModel = \FilesModel::findByUuid($this->singleSRC);
 
 			if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 			{

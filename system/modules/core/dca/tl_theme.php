@@ -242,7 +242,7 @@ class tl_theme extends Backend
 	{
 		if ($row['screenshot'] != '')
 		{
-			$objFile = FilesModel::findByPk($row['screenshot']);
+			$objFile = FilesModel::findByUuid($row['screenshot']);
 
 			if ($objFile !== null)
 			{
