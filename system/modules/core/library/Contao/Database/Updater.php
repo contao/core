@@ -234,18 +234,19 @@ class Updater extends \Controller
 		$this->Database->query(
 			"CREATE TABLE `tl_files` (
 			  `id` int(10) unsigned NOT NULL auto_increment,
-			  `pid` int(10) unsigned NOT NULL default '0',
+			  `pid` char(36) NULL,
 			  `tstamp` int(10) unsigned NOT NULL default '0',
+			  `uuid` char(36) NULL,
 			  `type` varchar(16) NOT NULL default '',
-			  `path` varchar(255) NOT NULL default '',
+			  `path` blob NULL,
 			  `extension` varchar(16) NOT NULL default '',
 			  `hash` varchar(32) NOT NULL default '',
 			  `found` char(1) NOT NULL default '1',
-			  `name` varchar(64) NOT NULL default '',
+			  `name` varbinary(255) NOT NULL default '',
 			  `meta` blob NULL,
 			  PRIMARY KEY  (`id`),
 			  KEY `pid` (`pid`),
-			  UNIQUE KEY `path` (`path`),
+			  UNIQUE KEY `uuid` (`uuid`),
 			  KEY `extension` (`extension`)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
 		);
@@ -464,13 +465,81 @@ class Updater extends \Controller
 		$this->Database->query("ALTER TABLE `tl_style` CHANGE `whitespace` `whitespace` varchar(8) NOT NULL default ''");
 		$this->Database->query("UPDATE `tl_style` SET `whitespace`='nowrap' WHERE `whitespace`!=''");
 
-		// Update the tl_files table (see #5598)
-		$this->Database->query("ALTER TABLE `tl_files` DROP INDEX `path`");
-		$this->Database->query("ALTER TABLE `tl_files` CHANGE `path` `path` blob NULL");
-		$this->Database->query("ALTER TABLE `tl_files` ADD UNIQUE KEY `pid_name` (`pid`, `name`)");
+		// Drop the tl_files.path index (see #5598)
+		if ($this->Database->indexExists('path', 'tl_files'))
+		{
+			$this->Database->query("ALTER TABLE `tl_files` DROP INDEX `path`");
+		}
 
 		// Remove the "mooType" field (triggers the version 3.1 update)
 		$this->Database->query("ALTER TABLE `tl_content` DROP `mooType`");
+	}
+
+
+	/**
+	 * Version 3.2.0 update
+	 */
+	public function run32Update()
+	{
+		// Adjust the DB structure
+		$this->Database->query("ALTER TABLE `tl_files` ADD `uuid` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_files` ADD UNIQUE KEY `uuid` (`uuid`)");
+		$this->Database->query("ALTER TABLE `tl_files` CHANGE `pid` `pid` char(36) NULL");
+
+		$objFiles = $this->Database->query("SELECT id FROM tl_files");
+
+		// Generate the UUIDs
+		while ($objFiles->next())
+		{
+			$this->Database->prepare("UPDATE tl_files SET uuid=? WHERE id=?")
+						   ->execute($this->Database->getUuid(), $objFiles->id);
+		}
+
+		$objFiles = $this->Database->query("SELECT pid FROM tl_files WHERE pid>0 GROUP BY pid");
+
+		// Adjust the parent IDs
+		while ($objFiles->next())
+		{
+			$objParent = $this->Database->prepare("SELECT uuid FROM tl_files WHERE id=?")
+										->execute($objFiles->pid);
+
+			if ($objParent->numRows < 1)
+			{
+				throw new \Exception('Invalid parent ID ' . $objFiles->pid);
+			}
+
+			$this->Database->prepare("UPDATE tl_files SET pid=? WHERE pid=?")
+						   ->execute($objParent->uuid, $objFiles->pid);
+		}
+
+		// Update the fields
+		$this->updateFileTreeFields();
+
+		// Change the singleSRC fields
+		$this->Database->query("ALTER TABLE `tl_content` CHANGE `singleSRC` `singleSRC` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_content` CHANGE `posterSRC` `posterSRC` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_form_field` CHANGE `uploadFolder` `uploadFolder` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_form_field` CHANGE `singleSRC` `singleSRC` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_member` CHANGE `homeDir` `homeDir` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_module` CHANGE `singleSRC` `singleSRC` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_module` CHANGE `reg_homeDir` `reg_homeDir` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_theme` CHANGE `screenshot` `screenshot` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_calendar_events` CHANGE `singleSRC` `singleSRC` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_faq` CHANGE `singleSRC` `singleSRC` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_news` CHANGE `singleSRC` `singleSRC` char(36) NULL");
+
+		// Replace the empty string with null
+		$this->Database->query("UPDATE `tl_content` SET `singleSRC`=NULL WHERE `singleSRC`=''");
+		$this->Database->query("UPDATE `tl_content` SET `posterSRC`=NULL WHERE `posterSRC`=''");
+		$this->Database->query("UPDATE `tl_form_field` SET `uploadFolder`=NULL WHERE `uploadFolder`=''");
+		$this->Database->query("UPDATE `tl_form_field` SET `singleSRC`=NULL WHERE `singleSRC`=''");
+		$this->Database->query("UPDATE `tl_member` SET `homeDir`=NULL WHERE `homeDir`=''");
+		$this->Database->query("UPDATE `tl_module` SET `singleSRC`=NULL WHERE `singleSRC`=''");
+		$this->Database->query("UPDATE `tl_module` SET `reg_homeDir`=NULL WHERE `reg_homeDir`=''");
+		$this->Database->query("UPDATE `tl_theme` SET `screenshot`=NULL WHERE `screenshot`=''");
+		$this->Database->query("UPDATE `tl_calendar_events` SET `singleSRC`=NULL WHERE `singleSRC`=''");
+		$this->Database->query("UPDATE `tl_faq` SET `singleSRC`=NULL WHERE `singleSRC`=''");
+		$this->Database->query("UPDATE `tl_news` SET `singleSRC`=NULL WHERE `singleSRC`=''");
 	}
 
 
@@ -514,12 +583,12 @@ class Updater extends \Controller
 		foreach ($arrFolders as $strFolder)
 		{
 			$objFolder = new \Folder($strFolder);
+			$strUuid = $this->Database->getUuid();
 
-			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, hash) VALUES (?, ?, ?, 'folder', ?, ?)")
-								 ->execute($pid, time(), basename($strFolder), $strFolder, $objFolder->hash)
-								 ->insertId;
+			$this->Database->prepare("INSERT INTO tl_files (pid, tstamp, uuid, name, type, path, hash) VALUES (?, ?, ?, ?, 'folder', ?, ?)")
+						   ->execute($pid, time(), $strUuid, basename($strFolder), $strFolder, $objFolder->hash);
 
-			$this->scanUploadFolder($strFolder, $id);
+			$this->scanUploadFolder($strFolder, $strUuid);
 		}
 
 		// Files
@@ -542,12 +611,12 @@ class Updater extends \Controller
 			}
 
 			$objFile = new \File($strFile, true);
+			$strUuid = $this->Database->getUuid();
 
-			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, extension, hash) VALUES (?, ?, ?, 'file', ?, ?, ?)")
-								 ->execute($pid, time(), basename($strFile), $strFile, $objFile->extension, $objFile->hash)
-								 ->insertId;
+			$this->Database->prepare("INSERT INTO tl_files (pid, tstamp, uuid, name, type, path, extension, hash) VALUES (?, ?, ?, ?, 'file', ?, ?, ?)")
+						   ->execute($pid, time(), $strUuid, basename($strFile), $strFile, $objFile->extension, $objFile->hash);
 
-			$arrMapper[basename($strFile)] = $id;
+			$arrMapper[basename($strFile)] = $strUuid;
 		}
 
 		// Insert the meta data AFTER the file entries have been created
@@ -557,7 +626,7 @@ class Updater extends \Controller
 			{
 				if (isset($arrMapper[$file]))
 				{
-					$this->Database->prepare("UPDATE tl_files SET meta=? WHERE id=?")
+					$this->Database->prepare("UPDATE tl_files SET meta=? WHERE uuid=?")
 								   ->execute(serialize($meta), $arrMapper[$file]);
 				}
 			}
@@ -634,12 +703,22 @@ class Updater extends \Controller
 
 			while ($objRow->next())
 			{
-				if (!is_numeric($objRow->$field))
+				// Numeric ID to UUID
+				if (is_numeric($objRow->$field))
+				{
+					$objFile = \FilesModel::findByPk($objRow->$field);
+
+					$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
+								   ->execute($objFile->uuid, $objRow->id);
+				}
+
+				// Path to UUID
+				elseif (!\Validator::isUuid($objRow->$field))
 				{
 					$objFile = \FilesModel::findByPath($objRow->$field);
 
 					$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
-								   ->execute($objFile->id, $objRow->id);
+								   ->execute($objFile->uuid, $objRow->id);
 				}
 			}
 		}
@@ -661,10 +740,18 @@ class Updater extends \Controller
 
 				foreach ($arrPaths as $k=>$v)
 				{
-					if (!is_numeric($v))
+					// Numeric ID to UUID
+					if (is_numeric($v))
+					{
+						$objFile = \FilesModel::findByPk($v);
+						$arrPaths[$k] = $objFile->uuid;
+					}
+
+					// Path to UUID
+					elseif (!\Validator::isUuid($v))
 					{
 						$objFile = \FilesModel::findByPath($v);
-						$arrPaths[$k] = $objFile->id;
+						$arrPaths[$k] = $objFile->uuid;
 					}
 				}
 

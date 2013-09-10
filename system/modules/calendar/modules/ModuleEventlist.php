@@ -290,24 +290,24 @@ class ModuleEventlist extends \Events
 			// Add an image
 			if ($event['addImage'] && $event['singleSRC'] != '')
 			{
-				if (!is_numeric($event['singleSRC']))
-				{
-					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-				else
-				{
-					$objModel = \FilesModel::findByPk($event['singleSRC']);
+				$objModel = \FilesModel::findByUuid($event['singleSRC']);
 
-					if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+				if ($objModel === null)
+				{
+					if (!\Validator::isUuid($event['singleSRC']))
 					{
-						if ($imgSize)
-						{
-							$event['size'] = $imgSize;
-						}
-
-						$event['singleSRC'] = $objModel->path;
-						$this->addImageToTemplate($objTemplate, $event);
+						$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 					}
+				}
+				elseif (is_file(TL_ROOT . '/' . $objModel->path))
+				{
+					if ($imgSize)
+					{
+						$event['size'] = $imgSize;
+					}
+
+					$event['singleSRC'] = $objModel->path;
+					$this->addImageToTemplate($objTemplate, $event);
 				}
 			}
 

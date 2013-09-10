@@ -186,7 +186,7 @@ class News extends \Frontend
 				// Add the article image as enclosure
 				if ($objArticle->addImage)
 				{
-					$objFile = \FilesModel::findByPk($objArticle->singleSRC);
+					$objFile = \FilesModel::findByUuid($objArticle->singleSRC);
 
 					if ($objFile !== null)
 					{
@@ -201,7 +201,7 @@ class News extends \Frontend
 
 					if (is_array($arrEnclosure))
 					{
-						$objFile = \FilesModel::findMultipleByIds($arrEnclosure);
+						$objFile = \FilesModel::findMultipleByUuids($arrEnclosure);
 
 						if ($objFile !== null)
 						{

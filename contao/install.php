@@ -184,35 +184,7 @@ class InstallTool extends Backend
 		$this->storeCollation();
 
 		// Update the database tables
-		if (Input::post('FORM_SUBMIT') == 'tl_tables')
-		{
-			$sql = deserialize(Input::post('sql'));
-
-			if (is_array($sql))
-			{
-				foreach ($sql as $key)
-				{
-					if (isset($_SESSION['sql_commands'][$key]))
-					{
-						$this->Database->query(str_replace('DEFAULT CHARSET=utf8;', 'DEFAULT CHARSET=utf8 COLLATE ' . $GLOBALS['TL_CONFIG']['dbCollation'] . ';', $_SESSION['sql_commands'][$key]));
-					}
-				}
-			}
-
-			$_SESSION['sql_commands'] = array();
-			$this->reload();
-		}
-
-		// Wait for the tables to be created (see #5061)
-		if ($this->Database->tableExists('tl_log'))
-		{
-			$this->handleRunOnce();
-		}
-
-		$this->import('Database\\Installer', 'Installer');
-
-		$this->Template->dbUpdate = $this->Installer->generateSqlForm();
-		$this->Template->dbUpToDate = ($this->Template->dbUpdate != '') ? false : true;
+		$this->updateDatabaseTables();
 
 		// Import the example website
 		try
@@ -614,6 +586,43 @@ class InstallTool extends Backend
 
 
 	/**
+	 * Update the database tables
+	 */
+	protected function updateDatabaseTables()
+	{
+		if (Input::post('FORM_SUBMIT') == 'tl_tables')
+		{
+			$sql = deserialize(Input::post('sql'));
+
+			if (is_array($sql))
+			{
+				foreach ($sql as $key)
+				{
+					if (isset($_SESSION['sql_commands'][$key]))
+					{
+						$this->Database->query(str_replace('DEFAULT CHARSET=utf8;', 'DEFAULT CHARSET=utf8 COLLATE ' . $GLOBALS['TL_CONFIG']['dbCollation'] . ';', $_SESSION['sql_commands'][$key]));
+					}
+				}
+			}
+
+			$_SESSION['sql_commands'] = array();
+			$this->reload();
+		}
+
+		// Wait for the tables to be created (see #5061)
+		if ($this->Database->tableExists('tl_log'))
+		{
+			$this->handleRunOnce();
+		}
+
+		$this->import('Database\\Installer', 'Installer');
+
+		$this->Template->dbUpdate = $this->Installer->generateSqlForm();
+		$this->Template->dbUpToDate = ($this->Template->dbUpdate != '') ? false : true;
+	}
+
+
+	/**
 	 * Import the example website
 	 */
 	protected function importExampleWebsite()
@@ -985,6 +994,26 @@ class InstallTool extends Backend
 			}
 
 			$this->Template->is31Update = true;
+			$this->outputAndExit();
+		}
+	}
+
+
+	/**
+	 * Version 3.2.0 update
+	 */
+	protected function update32()
+	{
+		if ($this->Database->tableExists('tl_files') && !$this->Database->fieldExists('uuid', 'tl_files'))
+		{
+			if (Input::post('FORM_SUBMIT') == 'tl_32update')
+			{
+				$this->import('Database\\Updater', 'Updater');
+				$this->Updater->run32Update();
+				$this->reload();
+			}
+
+			$this->Template->is32Update = true;
 			$this->outputAndExit();
 		}
 	}

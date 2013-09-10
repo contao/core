@@ -1491,9 +1491,22 @@ abstract class Controller extends \System
 						$strFile = $arrChunks[0];
 					}
 
-					// Handle numeric IDs (see #4805)
-					if (is_numeric($strFile))
+					if (\Validator::isUuid($strFile))
 					{
+						// Handle UUIDs
+						$objFile = \FilesModel::findByUuid($strFile);
+
+						if ($objFile === null)
+						{
+							$arrCache[$strTag] = '';
+							break;
+						}
+
+						$strFile = $objFile->path;
+					}
+					elseif (is_numeric($strFile))
+					{
+						// Handle numeric IDs (see #4805)
 						$objFile = \FilesModel::findByPk($strFile);
 
 						if ($objFile === null)
@@ -2574,24 +2587,21 @@ abstract class Controller extends \System
 			return;
 		}
 
-		// Check for version 3 format
-		if (!is_numeric($arrEnclosures[0]))
-		{
-			foreach (array('details', 'answer', 'text') as $key)
-			{
-				if (isset($objTemplate->$key))
-				{
-					$objTemplate->$key = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-			}
-
-			return;
-		}
-
-		$objFiles = \FilesModel::findMultipleByIds($arrEnclosures);
+		$objFiles = \FilesModel::findMultipleByUuids($arrEnclosures);
 
 		if ($objFiles === null)
 		{
+			if (!\Validator::isUuid($arrEnclosures[0]))
+			{
+				foreach (array('details', 'answer', 'text') as $key)
+				{
+					if (isset($objTemplate->$key))
+					{
+						$objTemplate->$key = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+					}
+				}
+			}
+
 			return;
 		}
 

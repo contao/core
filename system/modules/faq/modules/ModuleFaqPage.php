@@ -102,20 +102,20 @@ class ModuleFaqPage extends \Module
 			// Add an image
 			if ($objFaq->addImage && $objFaq->singleSRC != '')
 			{
-				if (!is_numeric($objFaq->singleSRC))
-				{
-					$objTemp->answer = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-				else
-				{
-					$objModel = \FilesModel::findByPk($objFaq->singleSRC);
+				$objModel = \FilesModel::findByUuid($objFaq->singleSRC);
 
-					if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+				if ($objModel === null)
+				{
+					if (!\Validator::isUuid($objFaq->singleSRC))
 					{
-						$objFaq->singleSRC = $objModel->path;
-						$strLightboxId = 'lightbox[' . substr(md5('mod_faqpage_' . $objFaq->id), 0, 6) . ']'; // see #5810
-						$this->addImageToTemplate($objTemp, $objFaq->row(), null, $strLightboxId);
+						$objTemp->answer = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 					}
+				}
+				elseif (is_file(TL_ROOT . '/' . $objModel->path))
+				{
+					$objFaq->singleSRC = $objModel->path;
+					$strLightboxId = 'lightbox[' . substr(md5('mod_faqpage_' . $objFaq->id), 0, 6) . ']'; // see #5810
+					$this->addImageToTemplate($objTemp, $objFaq->row(), null, $strLightboxId);
 				}
 			}
 

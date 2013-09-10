@@ -428,7 +428,7 @@ class ModuleRegistration extends \Module
 		// Assign home directory
 		if ($this->reg_assignDir)
 		{
-			$objHomeDir = \FilesModel::findByPk($this->reg_homeDir);
+			$objHomeDir = \FilesModel::findByUuid($this->reg_homeDir);
 
 			if ($objHomeDir !== null)
 			{

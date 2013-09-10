@@ -68,17 +68,16 @@ class ContentDownloads extends \ContentElement
 			return '';
 		}
 
-		// Check for version 3 format
-		if (!is_numeric($this->multiSRC[0]))
-		{
-			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-		}
-
 		// Get the file entries from the database
-		$this->objFiles = \FilesModel::findMultipleByIds($this->multiSRC);
+		$this->objFiles = \FilesModel::findMultipleByUuids($this->multiSRC);
 
 		if ($this->objFiles === null)
 		{
+			if (!\Validator::isUuid($this->multiSRC[0]))
+			{
+				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+
 			return '';
 		}
 
@@ -111,7 +110,6 @@ class ContentDownloads extends \ContentElement
 
 		$files = array();
 		$auxDate = array();
-		$auxId = array();
 
 		$objFiles = $this->objFiles;
 		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
@@ -157,6 +155,7 @@ class ContentDownloads extends \ContentElement
 				$files[$objFiles->path] = array
 				(
 					'id'        => $objFiles->id,
+					'uuid'      => $objFiles->uuid,
 					'name'      => $objFile->basename,
 					'title'     => $arrMeta['title'],
 					'link'      => $arrMeta['title'],
@@ -171,7 +170,6 @@ class ContentDownloads extends \ContentElement
 				);
 
 				$auxDate[] = $objFile->mtime;
-				$auxId[] = $objFiles->id;
 			}
 
 			// Folders
@@ -221,6 +219,7 @@ class ContentDownloads extends \ContentElement
 					$files[$objSubfiles->path] = array
 					(
 						'id'        => $objSubfiles->id,
+						'uuid'      => $objSubfiles->uuid,
 						'name'      => $objFile->basename,
 						'title'     => $arrMeta['title'],
 						'link'      => $arrMeta['title'],
@@ -235,7 +234,6 @@ class ContentDownloads extends \ContentElement
 					);
 
 					$auxDate[] = $objFile->mtime;
-					$auxId[] = $objSubfiles->id;
 				}
 			}
 		}
@@ -266,15 +264,14 @@ class ContentDownloads extends \ContentElement
 				{
 					// Turn the order string into an array and remove all values
 					$arrOrder = explode(',', $this->orderSRC);
-					$arrOrder = array_flip(array_map('intval', $arrOrder));
-					$arrOrder = array_map(function(){}, $arrOrder);
+					$arrOrder = array_map(function(){}, array_flip($arrOrder));
 
 					// Move the matching elements to their position in $arrOrder
 					foreach ($files as $k=>$v)
 					{
-						if (array_key_exists($v['id'], $arrOrder))
+						if (array_key_exists($v['uuid'], $arrOrder))
 						{
-							$arrOrder[$v['id']] = $v;
+							$arrOrder[$v['uuid']] = $v;
 							unset($files[$k]);
 						}
 					}
@@ -286,7 +283,7 @@ class ContentDownloads extends \ContentElement
 					}
 
 					// Remove empty (unreplaced) entries
-					$files = array_filter($arrOrder);
+					$files = array_values(array_filter($arrOrder));
 					unset($arrOrder);
 				}
 				break;

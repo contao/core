@@ -132,19 +132,19 @@ class ModuleFaqReader extends \Module
 		// Add image
 		if ($objFaq->addImage && $objFaq->singleSRC != '')
 		{
-			if (!is_numeric($objFaq->singleSRC))
-			{
-				$this->Template->answer = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-			}
-			else
-			{
-				$objModel = \FilesModel::findByPk($objFaq->singleSRC);
+			$objModel = \FilesModel::findByUuid($objFaq->singleSRC);
 
-				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+			if ($objModel === null)
+			{
+				if (!\Validator::isUuid($objFaq->singleSRC))
 				{
-					$objFaq->singleSRC = $objModel->path;
-					$this->addImageToTemplate($this->Template, $objFaq->row());
+					$this->Template->answer = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 				}
+			}
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
+			{
+				$objFaq->singleSRC = $objModel->path;
+				$this->addImageToTemplate($this->Template, $objFaq->row());
 			}
 		}
 

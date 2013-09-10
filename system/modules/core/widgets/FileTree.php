@@ -136,11 +136,11 @@ class FileTree extends \Widget
 		}
 		elseif (strpos($varInput, ',') === false)
 		{
-			return $this->blnIsMultiple ? array(intval($varInput)) : intval($varInput);
+			return $this->blnIsMultiple ? array($varInput) : $varInput;
 		}
 		else
 		{
-			$arrValue = array_map('intval', array_filter(explode(',', $varInput)));
+			$arrValue = array_filter(explode(',', $varInput));
 			return $this->blnIsMultiple ? $arrValue : $arrValue[0];
 		}
 	}
@@ -157,7 +157,7 @@ class FileTree extends \Widget
 
 		if (!empty($this->varValue)) // Can be an array
 		{
-			$objFiles = \FilesModel::findMultipleByIds((array)$this->varValue);
+			$objFiles = \FilesModel::findMultipleByUuids((array)$this->varValue);
 			$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
 
 			if ($objFiles !== null)
@@ -170,14 +170,14 @@ class FileTree extends \Widget
 						continue;
 					}
 
-					$arrSet[] = $objFiles->id;
+					$arrSet[] = $objFiles->uuid;
 
 					// Show files and folders
 					if (!$this->blnIsGallery && !$this->blnIsDownloads)
 					{
 						if ($objFiles->type == 'folder')
 						{
-							$arrValues[$objFiles->id] = \Image::getHtml('folderC.gif') . ' ' . $objFiles->path;
+							$arrValues[$objFiles->uuid] = \Image::getHtml('folderC.gif') . ' ' . $objFiles->path;
 						}
 						else
 						{
@@ -186,11 +186,11 @@ class FileTree extends \Widget
 
 							if ($objFile->isGdImage)
 							{
-								$arrValues[$objFiles->id] = \Image::getHtml(\Image::get($objFiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
+								$arrValues[$objFiles->uuid] = \Image::getHtml(\Image::get($objFiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
 							}
 							else
 							{
-								$arrValues[$objFiles->id] = \Image::getHtml($objFile->icon) . ' ' . $strInfo;
+								$arrValues[$objFiles->uuid] = \Image::getHtml($objFile->icon) . ' ' . $strInfo;
 							}
 						}
 					}
@@ -200,7 +200,7 @@ class FileTree extends \Widget
 					{
 						if ($objFiles->type == 'folder')
 						{
-							$objSubfiles = \FilesModel::findByPid($objFiles->id);
+							$objSubfiles = \FilesModel::findByPid($objFiles->uuid);
 
 							if ($objSubfiles === null)
 							{
@@ -223,7 +223,7 @@ class FileTree extends \Widget
 									// Only show images
 									if ($objFile->isGdImage)
 									{
-										$arrValues[$objSubfiles->id] = \Image::getHtml(\Image::get($objSubfiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
+										$arrValues[$objSubfiles->uuid] = \Image::getHtml(\Image::get($objSubfiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
 									}
 								}
 								else
@@ -231,7 +231,7 @@ class FileTree extends \Widget
 									// Only show allowed download types
 									if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
 									{
-										$arrValues[$objSubfiles->id] = \Image::getHtml($objFile->icon) . ' ' . $strInfo;
+										$arrValues[$objSubfiles->uuid] = \Image::getHtml($objFile->icon) . ' ' . $strInfo;
 									}
 								}
 							}
@@ -246,7 +246,7 @@ class FileTree extends \Widget
 								// Only show images
 								if ($objFile->isGdImage)
 								{
-									$arrValues[$objFiles->id] = \Image::getHtml(\Image::get($objFiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
+									$arrValues[$objFiles->uuid] = \Image::getHtml(\Image::get($objFiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
 								}
 							}
 							else
@@ -254,7 +254,7 @@ class FileTree extends \Widget
 								// Only show allowed download types
 								if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
 								{
-									$arrValues[$objFiles->id] = \Image::getHtml($objFile->icon) . ' ' . $objFiles->path;
+									$arrValues[$objFiles->uuid] = \Image::getHtml($objFile->icon) . ' ' . $objFiles->path;
 								}
 							}
 						}
@@ -266,7 +266,7 @@ class FileTree extends \Widget
 			if ($this->strOrderField != '' && $this->{$this->strOrderField} != '')
 			{
 				$arrNew = array();
-				$arrOrder = array_map('intval', explode(',', $this->{$this->strOrderField}));
+				$arrOrder = explode(',', $this->{$this->strOrderField});
 
 				foreach ($arrOrder as $i)
 				{

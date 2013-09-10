@@ -205,19 +205,19 @@ class ModuleEventReader extends \Events
 		// Add an image
 		if ($objEvent->addImage && $objEvent->singleSRC != '')
 		{
-			if (!is_numeric($objEvent->singleSRC))
-			{
-				$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-			}
-			else
-			{
-				$objModel = \FilesModel::findByPk($objEvent->singleSRC);
+			$objModel = \FilesModel::findByUuid($objEvent->singleSRC);
 
-				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+			if ($objModel === null)
+			{
+				if (!\Validator::isUuid($objEvent->singleSRC))
 				{
-					$objEvent->singleSRC = $objModel->path;
-					$this->addImageToTemplate($objTemplate, $objEvent->row());
+					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 				}
+			}
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
+			{
+				$objEvent->singleSRC = $objModel->path;
+				$this->addImageToTemplate($objTemplate, $objEvent->row());
 			}
 		}
 

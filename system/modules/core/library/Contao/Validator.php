@@ -251,4 +251,17 @@ class Validator
 	{
 		return preg_match('/^[a-z]{2}(\-[A-Z]{2})?$/', $varValue);
 	}
+
+
+	/**
+	 * Valid an UUID
+	 *
+	 * @param mixed $varValue The value to be validated
+	 *
+	 * @return boolean True if the value is an UUID
+	 */
+	public static function isUuid($varValue)
+	{
+		return preg_match('/^[a-f0-9]{8}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{12}$/', $varValue);
+	}
 }

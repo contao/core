@@ -68,17 +68,16 @@ class ContentGallery extends \ContentElement
 			return '';
 		}
 
-		// Check for version 3 format
-		if (!is_numeric($this->multiSRC[0]))
-		{
-			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-		}
-
 		// Get the file entries from the database
-		$this->objFiles = \FilesModel::findMultipleByIds($this->multiSRC);
+		$this->objFiles = \FilesModel::findMultipleByUuids($this->multiSRC);
 
 		if ($this->objFiles === null)
 		{
+			if (!\Validator::isUuid($this->multiSRC[0]))
+			{
+				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+
 			return '';
 		}
 
@@ -95,7 +94,6 @@ class ContentGallery extends \ContentElement
 
 		$images = array();
 		$auxDate = array();
-		$auxId = array();
 		$objFiles = $this->objFiles;
 
 		// Get all images
@@ -129,6 +127,7 @@ class ContentGallery extends \ContentElement
 				$images[$objFiles->path] = array
 				(
 					'id'        => $objFiles->id,
+					'uuid'      => $objFiles->uuid,
 					'name'      => $objFile->basename,
 					'singleSRC' => $objFiles->path,
 					'alt'       => $arrMeta['title'],
@@ -137,13 +136,12 @@ class ContentGallery extends \ContentElement
 				);
 
 				$auxDate[] = $objFile->mtime;
-				$auxId[] = $objFiles->id;
 			}
 
 			// Folders
 			else
 			{
-				$objSubfiles = \FilesModel::findByPid($objFiles->id);
+				$objSubfiles = \FilesModel::findByPid($objFiles->uuid);
 
 				if ($objSubfiles === null)
 				{
@@ -177,6 +175,7 @@ class ContentGallery extends \ContentElement
 					$images[$objSubfiles->path] = array
 					(
 						'id'        => $objSubfiles->id,
+						'uuid'      => $objSubfiles->uuid,
 						'name'      => $objFile->basename,
 						'singleSRC' => $objSubfiles->path,
 						'alt'       => $arrMeta['title'],
@@ -185,7 +184,6 @@ class ContentGallery extends \ContentElement
 					);
 
 					$auxDate[] = $objFile->mtime;
-					$auxId[] = $objSubfiles->id;
 				}
 			}
 		}
@@ -216,15 +214,14 @@ class ContentGallery extends \ContentElement
 				{
 					// Turn the order string into an array and remove all values
 					$arrOrder = explode(',', $this->orderSRC);
-					$arrOrder = array_flip(array_map('intval', $arrOrder));
-					$arrOrder = array_map(function(){}, $arrOrder);
+					$arrOrder = array_map(function(){}, array_flip($arrOrder));
 
 					// Move the matching elements to their position in $arrOrder
 					foreach ($images as $k=>$v)
 					{
-						if (array_key_exists($v['id'], $arrOrder))
+						if (array_key_exists($v['uuid'], $arrOrder))
 						{
-							$arrOrder[$v['id']] = $v;
+							$arrOrder[$v['uuid']] = $v;
 							unset($images[$k]);
 						}
 					}
@@ -236,7 +233,7 @@ class ContentGallery extends \ContentElement
 					}
 
 					// Remove empty (unreplaced) entries
-					$images = array_filter($arrOrder);
+					$images = array_values(array_filter($arrOrder));
 					unset($arrOrder);
 				}
 				break;

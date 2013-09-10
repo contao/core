@@ -599,6 +599,17 @@ abstract class Database
 
 
 	/**
+	 * Return a universal unique identifier
+	 *
+	 * @return string The UUID string
+	 */
+	public function getUuid()
+	{
+		return $this->get_uuid();
+	}
+
+
+	/**
 	 * Connect to the database server and select the database
 	 */
 	abstract protected function connect();
@@ -712,6 +723,14 @@ abstract class Database
 	 * @return integer The autoincrement ID
 	 */
 	abstract protected function get_next_id($strTable);
+
+
+	/**
+	 * Return a universal unique identifier
+	 *
+	 * @return string The UUID string
+	 */
+	abstract protected function get_uuid();
 
 
 	/**

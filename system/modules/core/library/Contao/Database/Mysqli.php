@@ -289,6 +289,20 @@ class Mysqli extends \Database
 
 
 	/**
+	 * Return a universal unique identifier
+	 *
+	 * @return string The UUID string
+	 */
+	protected function get_uuid()
+	{
+		$objUuid = @$this->resConnection->query("SELECT UUID() AS uuid")
+										->fetch_object();
+
+		return $objUuid->uuid;
+	}
+
+
+	/**
 	 * Create a Database\Statement object
 	 *
 	 * @param resource $resConnection        The connection ID
